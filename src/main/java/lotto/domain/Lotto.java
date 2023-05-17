@@ -1,28 +1,25 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final Money PRICE = new Money(1000);
-
-    private final List<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
     Lotto(String lottoNumbers) {
         this(LottoNumbersParser.parseToSet(lottoNumbers));
     }
 
-    public Lotto(Set<LottoNumber> lottoNumbers) {
-        LottoValidator.validLottoNumbers(lottoNumbers);
-        this.numbers = setToSortedList(lottoNumbers);
+    Lotto(List<LottoNumber> lottoNumbers) {
+        this(new LinkedHashSet<>(lottoNumbers));
     }
 
-    private List<LottoNumber> setToSortedList(Set<LottoNumber> lottoNumbers) {
-        return new ArrayList<>(lottoNumbers).stream()
-                .sorted().collect(Collectors.toUnmodifiableList());
+    public Lotto(Set<LottoNumber> lottoNumbers) {
+        LottoValidator.validLottoNumbers(lottoNumbers);
+        this.numbers = Collections.unmodifiableSet(lottoNumbers);
     }
 
     public boolean hasNumber(LottoNumber number) {
