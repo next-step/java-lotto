@@ -26,12 +26,12 @@ public enum Rank {
                 .orElseThrow(() -> new IllegalArgumentException("해당 매치 카운트와 일치하는 등수가 없습니다."));
     }
 
-    public int reward() {
-        return this.reward;
-    }
-
     public int totalReward(int count) {
         return this.reward * count;
+    }
+
+    public int reward() {
+        return this.reward;
     }
 
     @Override
