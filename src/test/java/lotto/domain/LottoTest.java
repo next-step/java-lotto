@@ -2,7 +2,6 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -10,12 +9,12 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class LottoTest {
 
-    @ParameterizedTest
-    @CsvSource(value = {"1,true", "6,true", "7,false", "10,false"})
-    void hasNumber(int value, boolean expect) {
-        Lotto lotto = new Lotto("1,2,3,4,5,6");
-        boolean actual = lotto.hasNumber(new LottoNumber(value));
-        assertThat(actual).isEqualTo(expect);
+    @Test
+    void matchCount() {
+        Lotto lotto1 = new Lotto("1,2,3,4,5,6");
+        Lotto lotto2 = new Lotto("1,2,3,4,5,6");
+        int matchCount = lotto1.matchCount(lotto2);
+        assertThat(matchCount).isEqualTo(6);
     }
 
     @Test

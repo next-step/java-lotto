@@ -1,9 +1,7 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -12,11 +10,11 @@ public class Lotto {
     private final Set<LottoNumber> numbers;
 
     Lotto(String lottoNumbers) {
-        this(LottoNumbersParser.parseToSet(lottoNumbers));
+        this(parseStringNumbers(lottoNumbers));
     }
 
     Lotto(List<LottoNumber> lottoNumbers) {
-        this(new LinkedHashSet<>(lottoNumbers));
+        this(new HashSet<>(lottoNumbers));
     }
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
@@ -24,7 +22,19 @@ public class Lotto {
         this.numbers = Collections.unmodifiableSet(lottoNumbers);
     }
 
-    public boolean hasNumber(LottoNumber number) {
+    private static Set<LottoNumber> parseStringNumbers(String lottoNumbers) {
+        return Arrays.stream(lottoNumbers.split(","))
+                .map(number -> new LottoNumber(Integer.parseInt(number.trim())))
+                .collect(Collectors.toSet());
+    }
+
+    public int matchCount(Lotto lotto) {
+        return (int) this.numbers.stream()
+                .filter(lotto::hasNumber)
+                .count();
+    }
+
+    private boolean hasNumber(LottoNumber number) {
         return this.numbers.contains(number);
     }
 

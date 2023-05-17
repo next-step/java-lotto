@@ -1,18 +1,16 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class WinnerNumbers {
 
-    private final Set<LottoNumber> numbers;
+    private final Lotto winnerNumbers;
 
-    public WinnerNumbers(String lottoNumbers) {
-        this(LottoNumbersParser.parseToSet(lottoNumbers));
-    }
-
-    public WinnerNumbers(Set<LottoNumber> lottoNumbers) {
-        LottoValidator.validLottoNumbers(lottoNumbers);
-        this.numbers = Collections.unmodifiableSet(lottoNumbers);
+    public WinnerNumbers(String winnerNumbers) {
+        this.winnerNumbers = new Lotto(winnerNumbers);
     }
 
     public LottoResults matchLottos(List<Lotto> lottos) {
@@ -37,9 +35,7 @@ public class WinnerNumbers {
     }
 
     private int matchCount(Lotto lotto) {
-        return (int) numbers.stream()
-                .filter(lotto::hasNumber)
-                .count();
+        return winnerNumbers.matchCount(lotto);
     }
 
     private void markRank(Map<Rank, Integer> winningStats, int matchCount) {
