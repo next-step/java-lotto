@@ -1,3 +1,5 @@
+package calculator;
+
 import java.util.function.BiFunction;
 
 public enum Operator {
