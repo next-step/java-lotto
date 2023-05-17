@@ -29,7 +29,8 @@ public class LottoApplication {
         // 로또 정답 입력
         List<Integer> lastWeekNumbers = InputView.inputLastWeekAnswer();
         Lotto lottoAnswer = Lotto.generate(lastWeekNumbers);
-        Bonus bonus = new Bonus(InputView.inputBonusNumber());
+        Bonus bonus = new Bonus(InputView.inputBonusNumber(), lastWeekNumbers);
+        bonus.validate(lastWeekNumbers);
 
         // 결과 계산
         for (Lotto lotto : lottoBundle.getLottos()) {

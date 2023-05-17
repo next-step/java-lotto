@@ -33,7 +33,7 @@ public class Lotto {
         if (count.equals(5) && isBonusContained) {
             return ScoreType.BONUS;
         }
-        return ScoreType.of(count, false);
+        return ScoreType.of(count);
     }
 
     private Integer getScore(Lotto lottoAnswer) {

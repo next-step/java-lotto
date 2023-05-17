@@ -67,4 +67,10 @@ class ScoreBoardTest {
         assertThat(scoreMap).containsEntry(BONUS, 0);
         assertThat(scoreMap).containsEntry(SIX, 0);
     }
+
+    @Test
+    void _5개맞을때_보너스볼_유무에_따라_결과가_다르다() {
+        ScoreBoard board = new ScoreBoard(1000);
+
+    }
 }

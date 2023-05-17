@@ -3,14 +3,14 @@ package study.lotto.domain;
 import java.util.HashMap;
 import java.util.Map;
 
-import static study.lotto.domain.LottoScoreType.*;
+import static study.lotto.domain.ScoreType.*;
 
 public class LottoScore {
-    private Map<LottoScoreType, Integer> scoreMap = new HashMap<>();
+    private Map<ScoreType, Integer> scoreMap = new HashMap<>();
 
     public static LottoScore generate() {
-        LottoScore lottoScoreSet = new LottoScore();
-        Map<LottoScoreType, Integer> scoreMap = lottoScoreSet.getScoreMap();
+        LottoScore lottoScore = new LottoScore();
+        Map<ScoreType, Integer> scoreMap = lottoScore.getScoreMap();
         scoreMap.put(ZERO, 0);
         scoreMap.put(ONE, 0);
         scoreMap.put(TWO, 0);
@@ -18,27 +18,27 @@ public class LottoScore {
         scoreMap.put(FOUR, 0);
         scoreMap.put(FIVE, 0);
         scoreMap.put(SIX, 0);
-        lottoScoreSet.setScoreMap(scoreMap);
-        return lottoScoreSet;
+        lottoScore.setScoreMap(scoreMap);
+        return lottoScore;
     }
 
-    public void addScore(LottoScoreType score) {
+    public void addScore(ScoreType score) {
         Integer count = scoreMap.get(score);
         scoreMap.put(score, count + 1);
     }
 
-    public Map<LottoScoreType, Integer> getScoreMap() {
+    public Map<ScoreType, Integer> getScoreMap() {
         return scoreMap;
     }
 
-    public void setScoreMap(Map<LottoScoreType, Integer> scoreMap) {
+    public void setScoreMap(Map<ScoreType, Integer> scoreMap) {
         this.scoreMap = scoreMap;
     }
 
     public Integer getTotalReward() {
         Integer totalReward = 0;
-        for (Map.Entry<LottoScoreType, Integer> entry : scoreMap.entrySet()) {
-            LottoScoreType lottoScoreType = entry.getKey();
+        for (Map.Entry<ScoreType, Integer> entry : scoreMap.entrySet()) {
+            ScoreType lottoScoreType = entry.getKey();
             Integer count = entry.getValue();
 
             totalReward += lottoScoreType.getReward() * count;
