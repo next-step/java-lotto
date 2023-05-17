@@ -21,6 +21,7 @@ public class LottoFactory {
 
     public static Lotto createManualLotto(String manualNumbers) {
         List<LottoNo> numbers = split(manualNumbers);
+        validateNumbers(numbers);
         validateManualLotto(numbers);
         return new Lotto(numbers);
     }
@@ -37,6 +38,12 @@ public class LottoFactory {
     private static void validateManualLotto(List<LottoNo> numbers) {
         if (numbers.size() != numbers.stream().distinct().count()) {
             throw new IllegalArgumentException("수동 로또 생성 시 중복 숫자 불가합니다.");
+        }
+    }
+
+    private static void validateNumbers(List<LottoNo> lottoNos) {
+        if (lottoNos.size() != LOTTO_NUMBER) {
+            throw new IllegalArgumentException("개수가 6개가 아닙니다.");
         }
     }
 }

@@ -11,14 +11,7 @@ public class Lotto {
     private List<LottoNo> lottoNos;
 
     Lotto(List<LottoNo> lottoNos) {
-        validate(lottoNos);
         this.lottoNos = lottoNos;
-    }
-
-    public void validate(List<LottoNo> lottoNos) {
-        if (lottoNos.size() != LOTTO_NUMBER) {
-            throw new IllegalArgumentException("개수가 6개가 아닙니다.");
-        }
     }
 
     public int getMatchingNumberCount(Lotto lotto) {
