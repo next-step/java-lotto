@@ -11,13 +11,9 @@ public class LottoDrawer {
     }
 
     public static double calProfit(Money price, List<Integer> hitNumber) {
-        BigDecimal totalPrize = BigDecimal.ZERO;
-        for (Integer i : hitNumber) {
-            totalPrize = totalPrize.add(BigDecimal.valueOf(Prize.calculatePrize(i)));
-        }
-        BigDecimal decimalPrice = BigDecimal.valueOf(price.getMoney());
-        BigDecimal profit = BigDecimal.ONE.add(totalPrize.subtract(decimalPrice).divide(decimalPrice, 2, BigDecimal.ROUND_FLOOR));
-        return profit.doubleValue();
+        return price
+                .profit(totalPrize(hitNumbers))
+                .doubleValue();
     }
 
     public static List<Integer> hitNumber(List<Lotto> lottos, Lotto wonNumber) {
