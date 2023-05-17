@@ -8,6 +8,9 @@ public class LottoApplicationMain {
 
     public static void main(String[] args) {
         int purchaseMoney = InputView.questionOrder();
+        int manualOrderCount = InputView.questionManualOrder();
+        Money change = Store.orderManual(new Money(purchaseMoney), manualOrderCount);
+
         LottoBundle lottoBundle = Store.order(new Money(purchaseMoney));
         OutputView.showLottoBundle(lottoBundle);
 

@@ -19,4 +19,18 @@ public class StoreTest {
         Assertions.assertThat(bundle.unfoldLottoBundle().size()).isEqualTo(count);
     }
 
+    @DisplayName("음수만큼 구매하려고 할 경우 예외를 던진다.")
+    @Test
+    public void orderManual_NegativeNumber_ThrowException() {
+        Assertions.assertThatThrownBy(() -> Store.orderManual(new Money(1000), -1))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("금액보다 더 많이 구매하려고 하는 경우 예외를 던진다.")
+    @Test
+    public void orderManual_OrderMoreThanMoney_ThrowException() {
+        Assertions.assertThatThrownBy(() -> Store.orderManual(new Money(2000), 4))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
