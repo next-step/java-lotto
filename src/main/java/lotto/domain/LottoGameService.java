@@ -25,7 +25,7 @@ public class LottoGameService {
 
     public void buyTickets() {
         int money = InputView.inputMoney();
-        lottoTickets = lottoTickets.buyTickets(money);
+        lottoTickets = LottoTickets.buyTickets(money);
         ResultView.printTickets(lottoTickets);
     }
 
@@ -34,7 +34,7 @@ public class LottoGameService {
     }
 
     public void makeLotteryResult() {
-        ResultView.printWinningStatus(Prize.winningStatus(lottoTickets, winningNumbers));
-        ResultView.printReturnRate(Prize.returnRate(lottoTickets, winningNumbers));
+        ResultView.printWinningStatus(lottoTickets.winningStatus(winningNumbers));
+        ResultView.printReturnRate(lottoTickets.returnRate(winningNumbers));
     }
 }

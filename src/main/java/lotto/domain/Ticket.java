@@ -1,14 +1,11 @@
 package lotto.domain;
 
-import lombok.Getter;
-
 import java.util.List;
 
 import static lotto.domain.LottoConstants.MAX_LOTTO_NUMBER;
 import static lotto.domain.LottoConstants.MIN_LOTTO_NUMBER;
 
 public class Ticket {
-    @Getter
     private final List<Integer> numbers;
 
     private Ticket(List<Integer> numbers) {
@@ -28,5 +25,9 @@ public class Ticket {
                 .filter(w -> numbers.contains(w))
                 .count();
         return PrizeType.create(count);
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }

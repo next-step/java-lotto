@@ -34,7 +34,7 @@ public class LottoGameServiceTest {
         tickets.add(Ticket.from(List.of(3, 8, 27, 30, 35, 44)));
         lottoTickets = LottoTickets.from(tickets);
         lottoGameService = LottoGameService.of(lottoTickets, winningNumber);
-        winningStatus = Prize.winningStatus(lottoTickets, winningNumber);
+        winningStatus = lottoTickets.winningStatus(winningNumber);
     }
 
     @Test
@@ -49,6 +49,6 @@ public class LottoGameServiceTest {
     @Test
     @DisplayName("수익률 계산기능 테스트")
     public void rateOfReturn() {
-        assertThat(Prize.returnRate(lottoTickets, winningNumber)).isEqualTo(0.35);
+        assertThat(lottoTickets.returnRate(winningNumber)).isEqualTo(0.35);
     }
 }

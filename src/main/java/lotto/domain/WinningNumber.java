@@ -1,11 +1,8 @@
 package lotto.domain;
 
-import lombok.Getter;
-
 import java.util.List;
 
 public class WinningNumber {
-    @Getter
     private final List<Integer> winningNumber;
 
     private WinningNumber(List<Integer> winningNumber) {
@@ -14,5 +11,9 @@ public class WinningNumber {
 
     public static WinningNumber from(List<Integer> winningNumber) {
         return new WinningNumber(winningNumber);
+    }
+
+    public List<Integer> getWinningNumber() {
+        return winningNumber;
     }
 }

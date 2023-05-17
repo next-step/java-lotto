@@ -1,16 +1,15 @@
 package lotto.domain;
 
-import lombok.Getter;
+import java.util.Arrays;
 
-@Getter
 public enum PrizeType {
-    FIRST_PRIZE(6, 2000000000),
+    FIRST_PRIZE(6, 2_000_000_000),
 
-    SECOND_PRIZE(5, 1500000),
+    SECOND_PRIZE(5, 1_500_000),
 
-    THIRD_PRIZE(4, 50000),
+    THIRD_PRIZE(4, 50_000),
 
-    FOURTH_PRIZE(3, 5000),
+    FOURTH_PRIZE(3, 5_000),
 
     NOT_MATCHING(0, 0);
 
@@ -22,14 +21,15 @@ public enum PrizeType {
         this.prize = prize;
     }
 
+    public int getNumberOfMatching() {
+        return numberOfMatching;
+    }
+
     public static PrizeType create(int numberOfMatching) {
-        if (numberOfMatching == 3)
-            return FOURTH_PRIZE;
-        if (numberOfMatching == 4)
-            return THIRD_PRIZE;
-        if (numberOfMatching == 6)
-            return FIRST_PRIZE;
-        return NOT_MATCHING;
+        return Arrays.stream(PrizeType.values())
+                .filter(prizeType -> prizeType.numberOfMatching == numberOfMatching)
+                .findFirst()
+                .orElse(NOT_MATCHING);
     }
 
     public long prize() {
