@@ -4,9 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StringCalculator {
-    public static Integer calculate(String s) {
+    public static Integer calculate(String inputString) {
 
-        String[] tokens = s.split(" ");
+        if (inputString == null || inputString.length() == 0) {
+            throw new IllegalArgumentException("null을 입력하였습니다.");
+        }
+
+        String exp = "[\\d+\\-*/ ]+";
+        if (!inputString.matches(exp)) {
+            throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
+        }
+
+        String[] tokens = inputString.split(" ");
 
         String operator = "";
         int result = 0;
