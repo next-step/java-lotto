@@ -15,7 +15,7 @@ public class LottoTest {
     @ParameterizedTest
     @MethodSource(value = "createMatchSource")
     void matchesTest(List<String> lotto, List<String> winnerLotto, int matchCount) {
-        assertThat(Lotto.from(lotto).countMatchNumber(Lotto.from(winnerLotto))).isEqualTo(matchCount);
+        assertThat(Lotto.from(lotto).matchWinLotto(Lotto.from(winnerLotto))).isEqualTo(LottoRank.valueOfMatchCount(matchCount));
     }
 
     static Stream<Arguments> createMatchSource() {

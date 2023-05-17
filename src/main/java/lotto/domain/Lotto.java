@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,6 +9,7 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         checkValidation(lottoNumbers);
+        Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -23,9 +25,11 @@ public class Lotto {
                 .collect(Collectors.toList()));
     }
 
-    public int countMatchNumber(Lotto winLotto) {
-        return (int) this.lottoNumbers.stream()
+    public LottoRank matchWinLotto(Lotto winLotto) {
+        return LottoRank.valueOfMatchCount(
+            (int) this.lottoNumbers.stream()
                 .filter((winLotto.lottoNumbers::contains))
-                .count();
+                .count()
+        );
     }
 }
