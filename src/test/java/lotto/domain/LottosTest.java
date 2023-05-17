@@ -15,7 +15,7 @@ public class LottosTest {
     @Test
     @DisplayName("일치 숫자 비교")
     void match() {
-        Lottos lottos = new Lottos(Arrays.asList("1, 2, 3, 15, 20, 9","1, 2, 3, 10, 11, 12"));
+        Lottos lottos = Lottos.manual(Arrays.asList("1, 2, 3, 15, 20, 9","1, 2, 3, 10, 11, 12"));
 
         Lotto lotto = LottoFactory.createWinningLotto("1, 2, 3, 7, 8, 9");
         LottoNo bonusNo = LottoNo.of(10);
@@ -25,8 +25,8 @@ public class LottosTest {
     @Test
     @DisplayName("combine 테스트")
     void combine() {
-        Lottos lottos = new Lottos(Arrays.asList("1, 2, 3, 15, 20, 9", "1, 2, 3, 10, 11, 12"));
-        lottos.combineLottos(new Lottos(Arrays.asList("1, 2, 3, 7, 8, 9")));
+        Lottos lottos = Lottos.manual(Arrays.asList("1, 2, 3, 15, 20, 9", "1, 2, 3, 10, 11, 12"));
+        lottos.combineLottos(Lottos.manual(Arrays.asList("1, 2, 3, 7, 8, 9")));
 
         assertThat(new Lottos(Arrays.asList("1, 2, 3, 15, 20, 9","1, 2, 3, 10, 11, 12", "1, 2, 3, 7, 8, 9"))).isEqualTo(lottos);
     }

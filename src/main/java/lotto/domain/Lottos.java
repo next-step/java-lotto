@@ -23,6 +23,10 @@ public class Lottos {
         this.lottos = createManualLottos(manualLottosNumbers);
     }
 
+    public static Lottos manual(List<String> manualLottosNumbers) {
+        return new Lottos(manualLottosNumbers);
+    }
+
     private List<Lotto> createAutoLottos(Positive numberOfLotto) {
         return IntStream.range(MIN_NUM_OF_LOTTO, numberOfLotto.getNumber()).boxed().map(lotto -> createAutoLotto()).collect(Collectors.toList());
     }
