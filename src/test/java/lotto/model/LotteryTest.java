@@ -152,4 +152,32 @@ public class LotteryTest {
         assertThat(lotteryTicket).hasToString("[1, 10, 27, 41, 42, 43]");
     }
 
+    @Test
+    void 수동구매_로또수가_돈을_초과하면_에러() {
+        int manualLotteryTicketCount = 3;
+        int money = 1500;
+
+        assertThatThrownBy(() -> LotteryTickets.of(money, manualLotteryTicketCount, new AutoLotteryNumberGenerator()))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("지불한 돈 이상으로 구매할 수 없습니다.");
+    }
+
+    @Test
+    void 자동으로_구매하는_티켓수_계산() {
+        int manualLotteryTicketCount = 3;
+        int money = 14000;
+
+        LotteryTickets autoLotteryTickets = LotteryTickets.of(money, manualLotteryTicketCount, new AutoLotteryNumberGenerator());
+        assertThat(autoLotteryTickets.size()).isEqualTo(11);
+    }
+
+    @Test
+    void 자동으로_구매하는_티켓수_계산_나누어떨어지지_않음() {
+        int manualLotteryTicketCount = 3;
+        int money = 14300;
+
+        LotteryTickets autoLotteryTickets = LotteryTickets.of(money, manualLotteryTicketCount, new AutoLotteryNumberGenerator());
+        assertThat(autoLotteryTickets.size()).isEqualTo(11);
+    }
+
 }
