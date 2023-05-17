@@ -10,7 +10,7 @@ public enum Winning {
     FIVE(5, 1_500_000),
     SIX(6, 2_000_000_000);
 
-    static private final Map<Integer, Winning> winningsMap = new HashMap<>();
+    private static final Map<Integer, Winning> winningsMap = new HashMap<>();
 
     static {
         for (Winning winning : values()) {
