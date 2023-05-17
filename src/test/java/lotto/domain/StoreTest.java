@@ -33,4 +33,10 @@ public class StoreTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("금액만큼 수동로또를 산 후 나머지 금액을 반환한다.")
+    @Test
+    public void orderManual_ReturnChangeAfterManualLotto_ChangeMoneyCorrect() {
+        Assertions.assertThat(Store.orderManual(new Money(5000), 3)).isEqualTo(new Money(2000));
+    }
+
 }
