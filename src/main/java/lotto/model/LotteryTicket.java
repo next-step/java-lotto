@@ -9,7 +9,7 @@ public class LotteryTicket {
 
     private final Set<LotteryNumber> numbers;
 
-    public LotteryTicket(Set<LotteryNumber> numbers) {
+    protected LotteryTicket(Set<LotteryNumber> numbers) {
         this.numbers = numbers;
     }
 
