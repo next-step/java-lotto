@@ -6,7 +6,7 @@ import java.util.List;
 
 public class LottoGenerator {
 
-    private static final List<LottoNumber> LOTTO_NUMBERS_POOL;
+    private static final List<LottoNumber> LOTTO_NUMBERS;
 
     static {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
@@ -14,22 +14,22 @@ public class LottoGenerator {
             LottoNumber lottoNumber = new LottoNumber(i);
             lottoNumbers.add(lottoNumber);
         }
-        LOTTO_NUMBERS_POOL = Collections.unmodifiableList(lottoNumbers);
+        LOTTO_NUMBERS = Collections.unmodifiableList(lottoNumbers);
     }
 
-    public static List<Lotto> generateLottos(int buyCount) {
-        List<LottoNumber> poolCopy = new ArrayList<>(LOTTO_NUMBERS_POOL);
+    public static List<Lotto> generateLottos(int count) {
+        List<LottoNumber> lottoNumbersCopy = new ArrayList<>(LOTTO_NUMBERS);
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < buyCount; i++) {
-            Lotto lotto = generateLotto(poolCopy);
+        for (int i = 0; i < count; i++) {
+            Lotto lotto = generateLotto(lottoNumbersCopy);
             lottos.add(lotto);
         }
         return lottos;
     }
 
-    private static Lotto generateLotto(List<LottoNumber> lottoNumbersPool) {
-        Collections.shuffle(lottoNumbersPool);
-        List<LottoNumber> lotto = lottoNumbersPool.subList(0, 6);
-        return new Lotto(lotto);
+    private static Lotto generateLotto(List<LottoNumber> lottoNumbersCopy) {
+        Collections.shuffle(lottoNumbersCopy);
+        List<LottoNumber> lottoNumbers = lottoNumbersCopy.subList(0, 6);
+        return new Lotto(lottoNumbers);
     }
 }
