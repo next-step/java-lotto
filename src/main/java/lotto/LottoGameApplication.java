@@ -20,7 +20,9 @@ public class LottoGameApplication {
         String winNumber = InputView.getWinNumberFromUser();
         Lotto winningLotto = Lotto.from(winNumber);
 
-        Matches matches = ticket.getMatches(winningLotto);
+        LottoNumber bonusNumber = LottoNumber.of(Integer.parseInt(InputView.getBonusNumberFromUser()));
+
+        Matches matches = ticket.getMatches(winningLotto, bonusNumber);
         LottoResult result = LottoResult.from(price, matches);
 
         ResultView.printLottoResult(result);

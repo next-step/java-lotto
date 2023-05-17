@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.util.LottoNumberParser;
 
+import java.util.Collections;
 import java.util.Set;
 
 public class Lotto {
@@ -31,15 +32,14 @@ public class Lotto {
         }
     }
 
-    public Match getMatch(Lotto other) {
+    public Match getMatch(Lotto other, LottoNumber bonusNumber) {
         int count = (int) lottoNumbers.stream()
                 .filter(other.lottoNumbers::contains)
                 .count();
-        return Match.of(count);
+        return Match.of(count, lottoNumbers.contains(bonusNumber));
     }
 
-    @Override
-    public String toString() {
-        return LottoNumberParser.parseToString(lottoNumbers);
+    public Set<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 }
