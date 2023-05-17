@@ -1,5 +1,6 @@
 package autolotto.machine.lotto;
 
+import autolotto.machine.BonusNumber;
 import autolotto.machine.winning.Winning;
 import autolotto.machine.winning.WinningNumbers;
 
@@ -25,7 +26,7 @@ public class LottoWallet {
         return this.lottoList.size();
     }
 
-    public int totalWinningMoneyOf(WinningNumbers winningNumbers) {
+    public int totalWinningMoneyOf(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
         return this.lottoList.stream()
                 .map(lotto -> lotto.matchCount(winningNumbers))
                 .filter(matchCount -> Winning.minWinningMatchCount() <= matchCount)

@@ -3,6 +3,7 @@ package autolotto;
 import autolotto.dto.LottoDTO;
 import autolotto.dto.Statistics;
 import autolotto.dto.WinningAmount;
+import autolotto.machine.BonusNumber;
 import autolotto.machine.LottoMachine;
 import autolotto.machine.lotto.LottoGenerator;
 import autolotto.machine.lotto.RandomShuffler;
@@ -30,9 +31,10 @@ public class Main {
                         .collect(Collectors.toList()));
 
         WinningNumbers winningNumbers = new WinningNumbers(parser.parse(consoleView.inputWinningNumbers()));
+        BonusNumber bonusNumber = new BonusNumber(consoleView.inputBonusNumber());
 
         consoleView.printStatistic(new Statistics(
-                lottoMachine.profitRate(winningNumbers).toPlainString(),
+                lottoMachine.profitRate(winningNumbers, bonusNumber).toPlainString(),
                 convertToWinningAmount(lottoMachine.winningState(winningNumbers))));
     }
 

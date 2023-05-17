@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoMachineTest {
+    private final BonusNumber bonusAnyLottoNotContaining = new BonusNumber(11);
 
     @Test
     void 금액에_따라_로또를_생성해_갖고_있다() {
@@ -43,7 +44,7 @@ public class LottoMachineTest {
         BigDecimal expectedProfitRate = BigDecimal.valueOf((double) Winning.THREE.winningMoney() * 3 / 3000).setScale(2);
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 21, 22, 23));
 
-        BigDecimal profitRate = lottoMachine.profitRate(winningNumbers);
+        BigDecimal profitRate = lottoMachine.profitRate(winningNumbers, bonusAnyLottoNotContaining);
 
         Assertions.assertThat(profitRate).isEqualTo(expectedProfitRate);
     }
