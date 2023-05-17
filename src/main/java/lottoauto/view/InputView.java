@@ -47,7 +47,7 @@ public class InputView {
             Lotto lotto = Lotto.manual(scanner.nextLine());
 
             manualLottery.add(lotto);
-        }
+        } 
         return manualLottery;
     }
 
