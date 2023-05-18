@@ -1,9 +1,9 @@
 package stringcalculator;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
+import static stringcalculator.StringCalculator.*;
 
 public class StringCalculatorTest {
 
@@ -70,17 +70,17 @@ public class StringCalculatorTest {
     void 입력값이_null() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             stringCalculator.calculate(null);
-        }).withMessage("null을 입력하였습니다.");
+        }).withMessage(ENTERED_NULL_OR_EMPTY_STRING);
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
             stringCalculator.calculate("");
-        }).withMessage("null을 입력하였습니다.");
+        }).withMessage(ENTERED_NULL_OR_EMPTY_STRING);
     }
 
     @Test
     void 사칙연산_기호가_아닌_경우() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             stringCalculator.calculate("2 & 3");
-        }).withMessage("사칙연산 기호가 아닙니다.");
+        }).withMessage(ONLY_NUMBERS_AND_OPERATORS_ALLOWED);
     }
 }

@@ -1,6 +1,9 @@
 package stringcalculator;
 
 public class StringCalculator {
+    public static final String ENTERED_NULL_OR_EMPTY_STRING = "null을 입력하였습니다.";
+    public static final String ONLY_NUMBERS_AND_OPERATORS_ALLOWED = "숫자와 사칙 연산자만 입력할 수 있습니다.";
+
     public int calculate(String inputString) {
         // 유효성 검사
         validationCheck(inputString);
@@ -25,12 +28,12 @@ public class StringCalculator {
 
     private void validationCheck(String inputString) {
         if (inputString == null || inputString.length() == 0) {
-            throw new IllegalArgumentException("null을 입력하였습니다.");
+            throw new IllegalArgumentException(ENTERED_NULL_OR_EMPTY_STRING);
         }
 
         String exp = "[\\d+\\-*/ ]+";
         if (!inputString.matches(exp)) {
-            throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
+            throw new IllegalArgumentException(ONLY_NUMBERS_AND_OPERATORS_ALLOWED);
         }
     }
 
@@ -60,6 +63,6 @@ public class StringCalculator {
             return result / num;
         }
 
-        throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
+        throw new IllegalArgumentException(ONLY_NUMBERS_AND_OPERATORS_ALLOWED);
     }
 }
