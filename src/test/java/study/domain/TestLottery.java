@@ -62,7 +62,16 @@ public class TestLottery {
 
 
     @Test
-    @DisplayName("Lottery 객체 - 당첨번호 전체 매칭 테스트")
+    @DisplayName("Lottery 객체 - 당첨번호 없이 일치여부 테스트")
+    public void test_lottery_win_fail_match_count() {
+        assertThatThrownBy(() -> lotto.getMatchCount())
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("당첨 번호 확인이 안되었습니다");
+    }
+
+    
+    @Test
+    @DisplayName("Lottery 객체 - 당첨번호 전체 일치 테스트")
     public void test_lottery_win_match_count() {
         List<Integer> winNumbers = lotto.getLottery();
         lotto.setWinNumbers(winNumbers);
