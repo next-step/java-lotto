@@ -1,4 +1,4 @@
-package lotto;
+package model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -8,7 +8,7 @@ import java.util.List;
 public class Lottos {
 
   private final List<AutoLotto> autoLottos;
-  private List<ManualLotto> manualLottos;
+  private final List<ManualLotto> manualLottos;
 
   private static final int PURCHASE_MIN_AMOUNT = 1000;
   private static final int LOTTO_PRICE = 1000;

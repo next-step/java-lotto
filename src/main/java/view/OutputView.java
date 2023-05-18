@@ -1,10 +1,10 @@
 package view;
 
-import lotto.AutoLotto;
-import lotto.Lottos;
-import lotto.ManualLotto;
-import lotto.Matches;
-import lotto.MatchesStatus;
+import model.AutoLotto;
+import model.Lottos;
+import model.ManualLotto;
+import model.Matches;
+import model.MatchesStatus;
 
 public class OutputView {
 

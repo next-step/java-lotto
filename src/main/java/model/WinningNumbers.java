@@ -1,4 +1,4 @@
-package lotto;
+package model;
 
 public class WinningNumbers extends ManualLotto {
 

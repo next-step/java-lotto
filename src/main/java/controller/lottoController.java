@@ -1,15 +1,18 @@
-import lotto.BonusBall;
-import lotto.Lottos;
-import lotto.ManualLotto;
-import lotto.WinningNumbers;
+package controller;
+
+import model.BonusBall;
+import model.Lottos;
+import model.ManualLotto;
+import model.WinningNumbers;
 import view.InputView;
 import view.OutputView;
 
-public class main {
+public class lottoController {
 
   public static void main(String[] args) {
-    OutputView.purchasePrice();
     Lottos lottos = new Lottos();
+
+    OutputView.purchasePrice();
     int purchaseAmount = InputView.getIntValue(); InputView.getStringValue(); // Scanner에 enter가 남아있어 enter를 먹어 없애기 위한 코드
 
     OutputView.manualPurchaseCount();

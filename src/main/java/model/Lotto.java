@@ -1,6 +1,6 @@
-package lotto;
+package model;
 
-import static lotto.LottoNumberGenerator.LOTTO_NUMBER_COUNT;
+import static model.LottoNumberGenerator.LOTTO_NUMBER_COUNT;
 
 import java.util.Arrays;
 import java.util.HashSet;
