@@ -14,7 +14,7 @@ public class Lotto {
 
   private final Set<LottoNo> lotto;
 
-  public Lotto(String input) {
+  Lotto(String input) {
     Set<LottoNo> lotto = new HashSet<>(toLottoNos(toIntegers(split(input))));
     if (isLottoSizeEqualTo(lotto.size())) {
       throw new IllegalArgumentException("로또 번호는 중복되지 않은 숫자로 " + LOTTO_NUMBER_COUNT + "개여야합니다.");
@@ -22,7 +22,7 @@ public class Lotto {
     this.lotto = lotto;
   }
 
-  public Lotto(Set<LottoNo> lotto) {
+  Lotto(Set<LottoNo> lotto) {
     this.lotto = lotto;
   }
 

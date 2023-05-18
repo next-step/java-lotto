@@ -69,5 +69,4 @@ public class LottoTest {
       lottos.buyAutoLotto(100, 0);
     });
   }
-
 }

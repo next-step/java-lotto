@@ -92,7 +92,7 @@ public class Lottos {
   }
 
   public BigDecimal findRateOfReturn(BigDecimal totalReturnAmount) {
-    return totalReturnAmount.divide(new BigDecimal(autoLottos.size() * LOTTO_PRICE), 2,
+    return totalReturnAmount.divide(new BigDecimal((autoLottos.size() + manualLottos.size()) * LOTTO_PRICE), 2,
         RoundingMode.FLOOR);
   }
 

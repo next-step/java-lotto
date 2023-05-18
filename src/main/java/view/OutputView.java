@@ -1,8 +1,7 @@
 package view;
 
-import model.lotto.AutoLotto;
+import model.lotto.Lotto;
 import model.lotto.Lottos;
-import model.lotto.ManualLotto;
 import model.winning.Matches;
 import model.winning.MatchesStatus;
 
@@ -27,10 +26,10 @@ public class OutputView {
   public static void lottos(Lottos lottos) {
     System.out.println("\n수동으로 " + lottos.getManualLottos().size() + "장, "
         + "자동으로 " + lottos.getAutoLottos().size()+ "개를 구매했습니다.");
-    for (ManualLotto manualLotto : lottos.getManualLottos()) {
+    for (Lotto manualLotto : lottos.getManualLottos()) {
       System.out.println(manualLotto.toString());
     }
-    for (AutoLotto lotto : lottos.getAutoLottos()) {
+    for (Lotto lotto : lottos.getAutoLottos()) {
       System.out.println(lotto.toString());
     }
   }
