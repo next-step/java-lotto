@@ -1,6 +1,7 @@
 package study.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LotteryContainer {
@@ -8,10 +9,10 @@ public class LotteryContainer {
     private int lotteryCount = 0;
     private boolean isGameDone = false;
     private List<Integer> winNumbers;
-    
+
     private List<Lottery> lotteryList = new ArrayList<>();
     
-    private int[] winner = {0,0,0,0,0,0};
+    private List<Integer> winner = Arrays.asList(0, 0, 0, 0, 0, 0);
 
     public LotteryContainer(int lotteryCount) {
         this.lotteryCount = lotteryCount;
@@ -63,12 +64,13 @@ public class LotteryContainer {
             lotto.setWinNumbers(winNumbers);
 
             int matchCount = lotto.getMatchCount();
-            winner[matchCount]++;
+            winner.set(matchCount, winner.get(matchCount) + 1);
+            // winner[matchCount]++;
         }
     }
 
 
-    public int[] getWinnerList() {
+    public List<Integer> getWinnerList() {
         if (!this.isGameDone) {
             throw new IllegalArgumentException("게임이 진행되지 않았습니다");
         }
