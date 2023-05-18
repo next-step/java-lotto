@@ -14,12 +14,13 @@ public class Lottos {
   private static final int LOTTO_PRICE = 1000;
 
   public Lottos() {
-    autoLottos = new LinkedList<>();
-    manualLottos = new LinkedList<>();
+    this.autoLottos = new LinkedList<>();
+    this.manualLottos = new LinkedList<>();
   }
 
   public Lottos(List<AutoLotto> lottos) {
     this.autoLottos = lottos;
+    this.manualLottos = new LinkedList<>();
   }
 
   public void buyAutoLotto(int purchaseAmount, int manualPurchaseAmount) {

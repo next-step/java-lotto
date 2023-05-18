@@ -6,8 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 public class WinningTest {
@@ -94,7 +95,7 @@ public class WinningTest {
   }
 
   private AutoLotto makeLotto(List<Integer> inputLotto) {
-    List<LottoNo> lotto = new LinkedList<>();
+    Set<LottoNo> lotto = new HashSet<>();
     for (Integer number : inputLotto) {
       lotto.add(LottoNo.of(number));
     }

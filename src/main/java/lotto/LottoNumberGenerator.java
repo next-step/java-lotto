@@ -1,8 +1,10 @@
 package lotto;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class LottoNumberGenerator {
 
@@ -15,9 +17,9 @@ public class LottoNumberGenerator {
     }
   }
 
-  public List<LottoNo> create() {
+  public Set<LottoNo> create() {
     Collections.shuffle(lottoNumber);
-    return new LinkedList<>(lottoNumber.subList(0, LOTTO_NUMBER_COUNT));
+    return new HashSet<>(lottoNumber.subList(0, LOTTO_NUMBER_COUNT));
   }
 
 }
