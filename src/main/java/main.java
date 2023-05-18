@@ -17,7 +17,9 @@ public class main {
 
     lottos.buyAutoLotto(purchaseAmount, manualPurchaseAmount);
 
-    OutputView.manualPurchaseLottoNumbers();
+    if (manualPurchaseAmount > 0) {
+      OutputView.manualPurchaseLottoNumbers();
+    }
     for (int i = 0; i < manualPurchaseAmount; i++) {
       lottos.addManualLotto(new ManualLotto(InputView.getStringValue()));
     }

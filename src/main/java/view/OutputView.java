@@ -25,8 +25,8 @@ public class OutputView {
   }
 
   public static void lottos(Lottos lottos) {
-    System.out.println("\n수동으로 " + lottos.getManualLottos().size() + "장,"
-        + "자동으로" + lottos.getAutoLottos().size()+ "개를 구매했습니다.");
+    System.out.println("\n수동으로 " + lottos.getManualLottos().size() + "장, "
+        + "자동으로 " + lottos.getAutoLottos().size()+ "개를 구매했습니다.");
     for (ManualLotto manualLotto : lottos.getManualLottos()) {
       System.out.println(manualLotto.toString());
     }
