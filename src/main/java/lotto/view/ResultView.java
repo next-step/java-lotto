@@ -1,9 +1,9 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import lotto.domain.lottocreator.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.Rank;
-import lotto.domain.WinningCount;
+import lotto.domain.winning.Rank;
+import lotto.domain.winning.WinningCount;
 
 import java.util.List;
 import java.util.Map;
@@ -13,8 +13,8 @@ public class ResultView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static void printNumbersOfLotto(int numberOfLotto) {
-        System.out.println(numberOfLotto + "개를 구매했습니다.");
+    public static void printNumbersOfLotto(int manualLottos, int autoLottos) {
+        System.out.println("수동으로 " + manualLottos + "개, 자동으로 " + autoLottos + "개를 구매했습니다.");
     }
 
     public static void printWinningNumber() {
@@ -31,14 +31,25 @@ public class ResultView {
     }
 
     public static void printStatistics(Map<WinningCount, Integer> statistics, List<WinningCount> rewardCount) {
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
         rewardCount.stream().forEach(count -> printWinningCountAndReward(statistics, count));
     }
 
-    public static void printWinningCountAndReward(Map<WinningCount, Integer> statistics, WinningCount count) {
-        System.out.println(count + "(" + Rank.of(count) +"원) - " + statistics.getOrDefault(count, 0) + "개");
+    public static void printWinningCountAndReward(Map<WinningCount, Integer> statistics, WinningCount winningCount) {
+        printWinningCount(winningCount);
+        System.out.println(" (" + Rank.of(winningCount) +"원) - " + statistics.getOrDefault(winningCount, 0) + "개");
+    }
+
+    public static void printWinningCount(WinningCount winningCount) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(winningCount.getCount() + "개 일치");
+        if (winningCount.getIsMatchBonusNo()) {
+            stringBuilder.append(", 보너스 볼 일치");
+        }
+        System.out.print(stringBuilder);
     }
 
     public static void printLottoRate(String rate) {
@@ -47,6 +58,14 @@ public class ResultView {
 
     public static void printBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
+    }
+
+    public static void printNumberOfManualLotto() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static void printManualLottosNumber() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 
 }

@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lottocreator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,5 +39,13 @@ public class LottoTest {
         Lotto lotto2 = LottoFactory.createManualLotto("22, 43, 15, 8, 9, 19");
 
         assertThat(lotto1.getMatchingNumberCount(lotto2)).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("중복 숫자")
+    void duplicate_exception() {
+        assertThatThrownBy(() -> {
+            LottoFactory.createManualLotto("1, 1, 2, 3, 4, 5");
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("수동 로또 생성 시 중복 숫자 불가합니다.");
     }
 }

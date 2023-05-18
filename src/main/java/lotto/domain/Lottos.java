@@ -1,47 +1,68 @@
 package lotto.domain;
 
+import lotto.domain.lottocreator.Lotto;
+import lotto.domain.lottocreator.LottoFactory;
+import lotto.domain.winning.WinningCount;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottos {
-    private static final int LOTTO_REWARD_LIMIT = 3;
-    private static final int BONUS_BALL_CHECK = 5;
-
-    private static final int MIN_NUM_OF_LOTTO = 1;
+    private static final int BONUS_NO_CHECK = 5;
+    private static final int MIN_NUM_OF_LOTTO = 0;
 
     private List<Lotto> lottos;
 
-    public Lottos(int numberOfLotto) {
-        this.lottos = createLottos(numberOfLotto);
+    private Lottos(Positive numberOfLotto) {
+        this.lottos = createAutoLottos(numberOfLotto);
     }
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    private Lottos(List<String> manualLottosNumbers) {
+        this.lottos = createManualLottos(manualLottosNumbers);
     }
 
-    private List<Lotto> createLottos(int numberOfLotto) {
-        return IntStream.range(MIN_NUM_OF_LOTTO, numberOfLotto).boxed().map(lotto -> create()).collect(Collectors.toList());
+    public static Lottos auto(Positive numberOfLotto) {
+        return new Lottos(numberOfLotto);
     }
 
-    private Lotto create() {
-        return LottoFactory.create();
+    public static Lottos manual(List<String> manualLottosNumbers) {
+        return new Lottos(manualLottosNumbers);
     }
 
-    public List<WinningCount> matchesLottos(Lotto winningLotto, LottoNumber bonusBall) {
+    private List<Lotto> createAutoLottos(Positive numberOfLotto) {
+        return IntStream.range(MIN_NUM_OF_LOTTO, numberOfLotto.getNumber()).boxed().map(lotto -> createAutoLotto()).collect(Collectors.toList());
+    }
+
+    private List<Lotto> createManualLottos(List<String> manualLottosNumbers) {
+        return manualLottosNumbers.stream().map(numbers -> createManualLotto(numbers)).collect(Collectors.toList());
+    }
+
+    private Lotto createAutoLotto() {
+        return LottoFactory.createAutoLotto();
+    }
+
+    private Lotto createManualLotto(String numbers) {
+        return LottoFactory.createManualLotto(numbers);
+    }
+
+    public List<WinningCount> matchesLottos(Lotto winningLotto, LottoNo bonusNo) {
         return lottos.stream()
-                .filter(lotto -> lotto.getMatchingNumberCount(winningLotto) >= LOTTO_REWARD_LIMIT)
                 .map(lotto -> WinningCount.of(lotto.getMatchingNumberCount(winningLotto)
-                        , checkBonusBall(lotto, bonusBall, lotto.getMatchingNumberCount(winningLotto))))
+                        , checkBonusBall(lotto, bonusNo, lotto.getMatchingNumberCount(winningLotto))))
                 .collect(Collectors.toList());
     }
 
-    private boolean checkBonusBall(Lotto lotto, LottoNumber bonusBall, int count) {
-        if (count != BONUS_BALL_CHECK) {
+    private boolean checkBonusBall(Lotto lotto, LottoNo bonusNo, int count) {
+        if (count != BONUS_NO_CHECK) {
             return false;
         }
-        return lotto.contains(bonusBall);
+        return lotto.contains(bonusNo);
+    }
+
+    public void combine(Lottos otherLottos) {
+        lottos.addAll(otherLottos.lottos);
     }
 
     public List<Lotto> getLottos() {

@@ -2,31 +2,42 @@ package lotto;
 
 import lotto.domain.*;
 
+import lotto.domain.winning.Rank;
+import lotto.domain.winning.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         ResultView.printCostOfLotto();
         int cost = InputView.inputCostOfLotto();
 
-        LottoMachine lottoMachine = new LottoMachine(cost);
-        ResultView.printNumbersOfLotto(lottoMachine.getNumberOfLotto());
+        ResultView.printNumberOfManualLotto();
+        int numberOfManualLottos = InputView.inputNumberOfManualLottos();
 
-        Lottos lottos = lottoMachine.create();
+        ResultView.printManualLottosNumber();
+        List<String> manualLottosNumber = InputView.inputManualLottos(numberOfManualLottos);
+
+        LottoMachine lottoMachine = new LottoMachine(cost, numberOfManualLottos);
+        ResultView.printNumbersOfLotto(lottoMachine.getNumberOfManualLottos(), lottoMachine.getNumberOfAutoLottos());
+
+        Lottos lottos = lottoMachine.generate(manualLottosNumber);
+
         ResultView.printLottos(lottos);
 
         ResultView.printWinningNumber();
         String winningNumbers = InputView.inputWinningNumber();
 
         ResultView.printBonusBall();
-        int bonusBallNumber = InputView.inputBonusBallNumber();
+        int bonusNumber = InputView.inputBonusNumber();
 
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBallNumber);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        LottoStatics statics = new LottoStatics(cost, winningLotto.checkWinningNumbers(lottos));
+        LottoStatistics statistics = new LottoStatistics(cost, winningLotto.checkWinningNumbers(lottos));
 
-        ResultView.printStatistics(statics.getStatistics(), Rank.getWinningCountList());
-        ResultView.printLottoRate(statics.getRate());
+        ResultView.printStatistics(statistics.getStatistics(), Rank.getWinningCounts());
+        ResultView.printLottoRate(statistics.getRate());
     }
 }
