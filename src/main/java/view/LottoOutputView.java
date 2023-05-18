@@ -104,13 +104,13 @@ public class LottoOutputView {
     }
 
     public static void printSecondPrize(WinningPrizes prizes, int count) {
-        printMatchRank(prizes.getRank());
+        printMatchRank(prizes.getMatchCount());
         printSecondPrizes(prizes.getPrizeMoney());
         printWinningCount(count);
     }
 
     public static void printPrize(WinningPrizes prize, int count) {
-        printMatchRank(prize.getRank());
+        printMatchRank(prize.getMatchCount());
         printPrizes(prize.getPrizeMoney());
         printWinningCount(count);
     }

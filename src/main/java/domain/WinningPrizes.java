@@ -19,15 +19,15 @@ public enum WinningPrizes {
 
     static {
         for (WinningPrizes value : values()) {
-            WINNING_PRIZES_MAP.put(value.rank, value);
+            WINNING_PRIZES_MAP.put(value.matchCount, value);
         }
     }
 
-    private int rank;
+    private int matchCount;
     private final int prizeMoney;
 
     WinningPrizes(int rank, int prizeMoney) {
-        this.rank = rank;
+        this.matchCount = rank;
         this.prizeMoney = prizeMoney;
     }
 
@@ -39,8 +39,8 @@ public enum WinningPrizes {
         return prizeMoney;
     }
 
-    public int getRank() {
-        return rank;
+    public int getMatchCount() {
+        return matchCount;
     }
 
     public static WinningPrizes valueOf(int countOfMatch, boolean matchBonus) {
@@ -48,7 +48,7 @@ public enum WinningPrizes {
             return WinningPrizes.MISS;
         }
 
-        if (WinningPrizes.SECOND_PRIZE.rank == countOfMatch) {
+        if (WinningPrizes.SECOND_PRIZE.matchCount == countOfMatch) {
             return decideSecondOrThirdPrizes(countOfMatch, matchBonus);
         }
 
