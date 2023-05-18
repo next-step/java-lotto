@@ -1,4 +1,4 @@
-package model;
+package model.winning;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -9,6 +9,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import model.lotto.AutoLotto;
+import model.lotto.LottoNo;
+import model.lotto.Lottos;
 import org.junit.jupiter.api.Test;
 
 public class WinningTest {

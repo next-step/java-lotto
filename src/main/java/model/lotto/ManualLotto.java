@@ -1,4 +1,4 @@
-package model;
+package model.lotto;
 
 public class ManualLotto extends Lotto {
 

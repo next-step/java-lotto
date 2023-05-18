@@ -1,9 +1,9 @@
 package controller;
 
-import model.BonusBall;
-import model.Lottos;
-import model.ManualLotto;
-import model.WinningNumbers;
+import model.winning.BonusBall;
+import model.lotto.Lottos;
+import model.lotto.ManualLotto;
+import model.winning.WinningNumbers;
 import view.InputView;
 import view.OutputView;
 

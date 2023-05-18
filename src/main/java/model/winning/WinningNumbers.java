@@ -1,4 +1,6 @@
-package model;
+package model.winning;
+
+import model.lotto.ManualLotto;
 
 public class WinningNumbers extends ManualLotto {
 

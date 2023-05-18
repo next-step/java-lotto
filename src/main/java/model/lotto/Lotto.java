@@ -1,12 +1,14 @@
-package model;
+package model.lotto;
 
-import static model.LottoNumberGenerator.LOTTO_NUMBER_COUNT;
+import static model.lotto.generator.LottoNumberGenerator.LOTTO_NUMBER_COUNT;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import model.winning.BonusBall;
+import model.winning.WinningNumbers;
 
 public class Lotto {
 

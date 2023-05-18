@@ -1,6 +1,7 @@
-package model;
+package model.winning;
 
 import java.math.BigDecimal;
+import model.lotto.Lottos;
 
 public class MatchesStatus {
 

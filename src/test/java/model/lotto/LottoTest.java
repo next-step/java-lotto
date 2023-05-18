@@ -1,9 +1,10 @@
-package model;
+package model.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import model.lotto.generator.LottoNumberGenerator;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
@@ -18,7 +19,7 @@ public class LottoTest {
   @Test
   void 수동로또는6개를입력해야한다() {
     assertThatIllegalArgumentException().isThrownBy(() -> {
-      new WinningNumbers("1, 2, 3, 4, 5");
+      new ManualLotto("1, 2, 3, 4, 5");
     });
   }
 

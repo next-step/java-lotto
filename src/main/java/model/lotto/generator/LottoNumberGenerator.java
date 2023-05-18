@@ -1,10 +1,11 @@
-package model;
+package model.lotto.generator;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import model.lotto.LottoNo;
 
 public class LottoNumberGenerator {
 

@@ -1,4 +1,4 @@
-package model;
+package model.winning;
 
 import java.util.Arrays;
 

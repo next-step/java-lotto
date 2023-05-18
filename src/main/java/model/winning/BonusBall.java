@@ -1,4 +1,6 @@
-package model;
+package model.winning;
+
+import model.lotto.LottoNo;
 
 public class BonusBall {
 

@@ -1,9 +1,14 @@
-package model;
+package model.lotto;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.LinkedList;
 import java.util.List;
+import model.winning.BonusBall;
+import model.lotto.generator.LottoNumberGenerator;
+import model.winning.Matches;
+import model.winning.MatchesStatus;
+import model.winning.WinningNumbers;
 
 public class Lottos {
 
