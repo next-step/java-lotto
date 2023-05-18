@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum WinningPrizes {
-    MISS(0, 0),
+    MISS(0, 0) {
+
+    },
     FIFTH_PRIZE(3, 5_000),
     FOURTH_PRIZE(4, 50_000),
     THIRD_PRIZE(5, 1_500_000),
@@ -45,9 +47,12 @@ public enum WinningPrizes {
         if (countOfMatch < OFFSET) {
             return WinningPrizes.MISS;
         }
-        return countOfMatch == WinningPrizes.SECOND_PRIZE.rank
-               ? decideSecondOrThirdPrizes(countOfMatch, matchBonus)
-               : WINNING_PRIZES_MAP.get(countOfMatch);
+
+        if (WinningPrizes.SECOND_PRIZE.rank == countOfMatch) {
+            return decideSecondOrThirdPrizes(countOfMatch, matchBonus);
+        }
+
+        return WINNING_PRIZES_MAP.get(countOfMatch);
     }
 
     private static WinningPrizes decideSecondOrThirdPrizes(int countOfMatch, boolean matchBonus) {

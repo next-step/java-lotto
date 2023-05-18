@@ -103,34 +103,35 @@ public class LottoOutputView {
         System.out.println("총 수익률은 " + roi + "입니다.");
     }
 
-    public static void printSecondPrize(WinningStatistics winningStatistics, WinningPrizes prizes) {
+    public static void printSecondPrize(WinningPrizes prizes, int count) {
         printMatchRank(prizes.getRank());
         printSecondPrizes(prizes.getPrizeMoney());
-        printWinningCount(winningStatistics.getWinningResults().get(prizes));
+        printWinningCount(count);
     }
 
-    public static void printPrize(WinningStatistics winningStatistics, WinningPrizes prize) {
+    public static void printPrize(WinningPrizes prize, int count) {
         printMatchRank(prize.getRank());
         printPrizes(prize.getPrizeMoney());
-        printWinningCount(winningStatistics.getWinningResults().get(prize));
+        printWinningCount(count);
     }
 
-    public static void printEachPrize(WinningStatistics winningStatistics, WinningPrizes prize) {
+    public static void printEachPrize(WinningPrizes prize, int count) {
         if (WinningPrizes.MISS == prize) {
             return;
         }
 
         if (WinningPrizes.SECOND_PRIZE == prize) {
-            printSecondPrize(winningStatistics, prize);
+            printSecondPrize(prize, count);
             return;
         }
-        printPrize(winningStatistics, prize);
+
+        printPrize(prize, count);
     }
 
     public static void printWinnings(WinningStatistics winningStatistics) {
         for (WinningPrizes prize : winningStatistics.getWinningResults().keySet()) {
-            printEachPrize(winningStatistics, prize);
+            int count = winningStatistics.getWinningResults().get(prize);
+            printEachPrize(prize, count);
         }
     }
-
 }
