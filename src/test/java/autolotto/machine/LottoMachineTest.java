@@ -6,6 +6,8 @@ import autolotto.machine.lotto.fixture.FixedNumberShuffler;
 import autolotto.machine.winning.Winning;
 import autolotto.machine.winning.WinningNumbers;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -13,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class LottoMachineTest {
     private final BonusNumber bonusAnyLottoNotContaining = new BonusNumber(11);
 

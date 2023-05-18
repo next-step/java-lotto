@@ -15,6 +15,7 @@ import java.util.Map;
 
 public class LottoMachine {
     private final static int LOTTO_PRICE = 1000;
+    private final static int PROFIT_RATE_SCALE = 2;
 
     private final int inputMoney;
     private final LottoWallet wallet;
@@ -47,7 +48,7 @@ public class LottoMachine {
     public BigDecimal profitRate(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
         int totalWinnings = this.wallet.totalWinningMoneyOf(winningNumbers, bonusNumber);
         return BigDecimal.valueOf(totalWinnings)
-                .divide(BigDecimal.valueOf(this.inputMoney), 2, RoundingMode.HALF_UP);
+                .divide(BigDecimal.valueOf(this.inputMoney), PROFIT_RATE_SCALE, RoundingMode.HALF_UP);
     }
 
     public Map<Winning, Integer> winningState(WinningNumbers winningNumbers) {

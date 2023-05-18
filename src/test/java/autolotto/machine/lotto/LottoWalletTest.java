@@ -5,12 +5,11 @@ import autolotto.machine.lotto.fixture.FixedNumberShuffler;
 import autolotto.machine.winning.Winning;
 import autolotto.machine.winning.WinningNumbers;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.Arrays;
 
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class LottoWalletTest {
     private final LottoGenerator lottoGenerator = new LottoGenerator(new FixedNumberShuffler());
     private final WinningNumbers fixedWinningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 40, 41, 42));
