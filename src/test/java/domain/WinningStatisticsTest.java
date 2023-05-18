@@ -32,11 +32,11 @@ public class WinningStatisticsTest {
         winningStatistics.matchCount(firstPrizes);
 
         //then
-        assertThat(winningStatistics.getWinningResults2().get(WinningPrizes.FIFTH_PRIZE)).isEqualTo(1);
-        assertThat(winningStatistics.getWinningResults2().get(WinningPrizes.FOURTH_PRIZE)).isEqualTo(1);
-        assertThat(winningStatistics.getWinningResults2().get(WinningPrizes.THIRD_PRIZE)).isEqualTo(1);
-        assertThat(winningStatistics.getWinningResults2().get(WinningPrizes.SECOND_PRIZE)).isEqualTo(1);
-        assertThat(winningStatistics.getWinningResults2().get(WinningPrizes.FIRST_PRIZE)).isEqualTo(1);
+        assertThat(winningStatistics.getWinningResults().get(WinningPrizes.FIFTH_PRIZE)).isEqualTo(1);
+        assertThat(winningStatistics.getWinningResults().get(WinningPrizes.FOURTH_PRIZE)).isEqualTo(1);
+        assertThat(winningStatistics.getWinningResults().get(WinningPrizes.THIRD_PRIZE)).isEqualTo(1);
+        assertThat(winningStatistics.getWinningResults().get(WinningPrizes.SECOND_PRIZE)).isEqualTo(1);
+        assertThat(winningStatistics.getWinningResults().get(WinningPrizes.FIRST_PRIZE)).isEqualTo(1);
 
         assertThat(winningStatistics.getTotalWinnings()).isEqualTo(2004555000);
 

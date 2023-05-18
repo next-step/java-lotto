@@ -13,54 +13,26 @@ public class LottoController {
     private WinningAnalyzer winningAnalyzer;
 
     public void playLottoGames(int money) {
-        this.lottoGame = new LottoGame();
+        lottoGame = new LottoGame();
         lottoGame.generateLottoResultsFromMoney(money);
     }
 
     public void getLottoResults() {
-        LottoResults lottoResults = lottoGame.getLottoResults();
-        LottoOutputView.printGameCount(lottoGame.getCount());
-        List<int[]> results = lottoResults.lottoResults();
-        LottoOutputView.printLottoResults(results);
+        List<int[]> results = lottoGame.getLottoResults().lottoResults();
+        int gameCount = lottoGame.getCount();
+        LottoOutputView.printLottoResults(gameCount, results);
     }
 
     public void getWinningStatistics() {
         LottoResults lottoResults = lottoGame.getLottoResults();
-        this.winningAnalyzer = new WinningAnalyzer(lottoResults, LottoInputView.getWinningNumbers(), LottoInputView.getBonusNumber());
+        winningAnalyzer = new WinningAnalyzer(lottoResults, LottoInputView.getWinningNumbers(), LottoInputView.getBonusNumber());
         WinningStatistics winningStatistics = winningAnalyzer.calculateWinningStatistics();
         LottoOutputView.printBeforeWinnings();
-        printWinnings(winningStatistics);
+        LottoOutputView.printWinnings(winningStatistics);
+    }
+
+    public void getReturnOnInvestment() {
         int money = lottoGame.getMoney();
         LottoOutputView.printReturnOnInvestment(winningAnalyzer.getReturnOnInvestment(money));
-    }
-
-    private void printWinnings(WinningStatistics winningStatistics) {
-        for (WinningPrizes prize : winningStatistics.getWinningResults2().keySet()) {
-            printEachPrize(winningStatistics, prize);
-        }
-    }
-
-    private void printEachPrize(WinningStatistics winningStatistics, WinningPrizes prize) {
-        if (WinningPrizes.MISS == prize) {
-            return;
-        }
-
-        if (WinningPrizes.SECOND_PRIZE == prize) {
-            printSecondPrize(winningStatistics, prize);
-            return;
-        }
-        printPrize(winningStatistics, prize);
-    }
-
-    private void printPrize(WinningStatistics winningStatistics, WinningPrizes prize) {
-        LottoOutputView.printMatchRank(prize.getRank());
-        LottoOutputView.printPrizes(prize.getPrizeMoney());
-        LottoOutputView.printWinningCount(winningStatistics.getWinningResults2().get(prize));
-    }
-
-    private void printSecondPrize(WinningStatistics winningStatistics, WinningPrizes prize) {
-        LottoOutputView.printMatchRank(prize.getRank());
-        LottoOutputView.printSecondPrizes(prize.getPrizeMoney());
-        LottoOutputView.printWinningCount(winningStatistics.getWinningResults2().get(prize));
     }
 }

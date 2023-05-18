@@ -8,5 +8,6 @@ public class LottoMain {
         lottoController.playLottoGames(money);
         lottoController.getLottoResults();
         lottoController.getWinningStatistics();
+        lottoController.getReturnOnInvestment();
     }
 }

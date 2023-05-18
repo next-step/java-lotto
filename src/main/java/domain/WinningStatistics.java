@@ -24,7 +24,7 @@ public class WinningStatistics {
         this.bonusNumber = new BonusNumber(bonusNumber);
     }
 
-    public Map<WinningPrizes, Integer> getWinningResults2() {
+    public Map<WinningPrizes, Integer> getWinningResults() {
         return winningStatistics;
     }
 

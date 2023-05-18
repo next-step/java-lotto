@@ -22,7 +22,7 @@ public class WinningAnalyzerTest {
         WinningAnalyzer winningAnalyzer = new WinningAnalyzer(lottoResults, winningNumbers, bonusNumber);
         //when
         WinningStatistics winningStatistics = winningAnalyzer.calculateWinningStatistics();
-        Map<WinningPrizes, Integer> result2 = winningStatistics.getWinningResults2();
+        Map<WinningPrizes, Integer> result2 = winningStatistics.getWinningResults();
         //then
         assertThat(result2.get(WinningPrizes.MISS)).isEqualTo(3);
         assertThat(result2.get(WinningPrizes.FIFTH_PRIZE)).isEqualTo(1);

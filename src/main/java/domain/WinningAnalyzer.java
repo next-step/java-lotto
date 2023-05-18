@@ -16,6 +16,8 @@ public class WinningAnalyzer {
         return winningStatistics;
     }
 
+
+
     public float getReturnOnInvestment(int money) {
         float totalWinning = winningStatistics.getTotalWinnings();
         return totalWinning / money;

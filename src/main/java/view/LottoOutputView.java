@@ -3,7 +3,8 @@ package view;
 import java.util.Arrays;
 import java.util.List;
 
-import domain.LottoNumber;
+import domain.WinningPrizes;
+import domain.WinningStatistics;
 
 public class LottoOutputView {
 
@@ -75,7 +76,8 @@ public class LottoOutputView {
         System.out.print(count + "개");
     }
 
-    public static void printLottoResults(List<int[]> lottoResults) {
+    public static void printLottoResults(int gameCount, List<int[]> lottoResults) {
+        printGameCount(gameCount);
         for (int[] lottoResult : lottoResults) {
             Arrays.stream(lottoResult).sorted();
             System.out.print("[");
@@ -100,4 +102,35 @@ public class LottoOutputView {
     public static void printReturnOnInvestment(float roi) {
         System.out.println("총 수익률은 " + roi + "입니다.");
     }
+
+    public static void printSecondPrize(WinningStatistics winningStatistics, WinningPrizes prizes) {
+        printMatchRank(prizes.getRank());
+        printSecondPrizes(prizes.getPrizeMoney());
+        printWinningCount(winningStatistics.getWinningResults().get(prizes));
+    }
+
+    public static void printPrize(WinningStatistics winningStatistics, WinningPrizes prize) {
+        printMatchRank(prize.getRank());
+        printPrizes(prize.getPrizeMoney());
+        printWinningCount(winningStatistics.getWinningResults().get(prize));
+    }
+
+    public static void printEachPrize(WinningStatistics winningStatistics, WinningPrizes prize) {
+        if (WinningPrizes.MISS == prize) {
+            return;
+        }
+
+        if (WinningPrizes.SECOND_PRIZE == prize) {
+            printSecondPrize(winningStatistics, prize);
+            return;
+        }
+        printPrize(winningStatistics, prize);
+    }
+
+    public static void printWinnings(WinningStatistics winningStatistics) {
+        for (WinningPrizes prize : winningStatistics.getWinningResults().keySet()) {
+            printEachPrize(winningStatistics, prize);
+        }
+    }
+
 }
