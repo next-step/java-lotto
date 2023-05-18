@@ -9,21 +9,24 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import study.domain.generator.NumberGenerator;
+import study.domain.generator.impl.AutoNumberGenerator;
+
 public class TestLottery {
 
+    private NumberGenerator generator;
     private Lottery lotto;
 
     @BeforeEach
     void setUp() {
-        lotto = new Lottery();
+        generator = new AutoNumberGenerator();
+        lotto = new Lottery(generator);
     }
     
 
     @Test
     @DisplayName("Lottery 객체 - 생성 테스트")
     public void test_lottery() {
-        assertDoesNotThrow(() -> new Lottery());
-
         assertThat(lotto.getLottery().size())
             .isEqualTo(6);
     }

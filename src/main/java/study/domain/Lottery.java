@@ -4,22 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import study.domain.generator.NumberGenerator;
+
 public class Lottery {
     
-    private List<Integer> lottery = new ArrayList<>();
+    private List<Integer> lottery;
     private boolean isWinnerCheck = false;
     private int matchCount = 0;
 
-    public Lottery() {
-        List<Integer> mockNumbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            mockNumbers.add(i);
-        }
-
-        Collections.shuffle(mockNumbers);
-
-        this.lottery = mockNumbers.subList(0, 6);
-        Collections.sort(this.lottery);
+    public Lottery(NumberGenerator generator) {
+        this.lottery = generator.fetch();
     }
 
     public List<Integer> getLottery() {

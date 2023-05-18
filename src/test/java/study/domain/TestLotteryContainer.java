@@ -15,20 +15,25 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import study.domain.generator.NumberGenerator;
+import study.domain.generator.impl.AutoNumberGenerator;
+
 public class TestLotteryContainer {
     
+    NumberGenerator generator;
     LotteryContainer mockContainer;
 
     @BeforeEach
     void setUp() {
-        mockContainer = new LotteryContainer(2);
+        generator = new AutoNumberGenerator();
+        mockContainer = new LotteryContainer(2, generator);
     }
 
 
     @ParameterizedTest(name = "LotteryContainer 객체 - 로또 생성 개수 테스트")
     @CsvSource({"0", "1", "5", "10", "7"})
     public void test_container_lottery_count(int count) {
-        LotteryContainer container = new LotteryContainer(count);
+        LotteryContainer container = new LotteryContainer(count, generator);
 
         assertThat(container.getLotteryCount())
             .isEqualTo(count);
@@ -38,7 +43,7 @@ public class TestLotteryContainer {
     @Test
     @DisplayName("LotteryContainer 객체 - 로또 리스트 정상 생성 테스트")
     public void test_container_lottery_list() {
-        LotteryContainer container = new LotteryContainer(1);
+        LotteryContainer container = new LotteryContainer(1, generator);
 
         for (Lottery lotto : container.getTotalLottery()) {
             assertThat(lotto.getLottery().size())

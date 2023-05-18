@@ -4,20 +4,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import study.domain.generator.NumberGenerator;
+import study.domain.generator.impl.AutoNumberGenerator;
+
 public class LotteryContainer {
 
+    // private NumberGenerator generator;
     private int lotteryCount = 0;
     private boolean isGameDone = false;
     private List<Integer> winNumbers;
 
     private List<Lottery> lotteryList = new ArrayList<>();
     
-    private List<Integer> winner = Arrays.asList(0, 0, 0, 0, 0, 0);
+    private List<Integer> winnerList = Arrays.asList(0, 0, 0, 0, 0, 0);
 
-    public LotteryContainer(int lotteryCount) {
+
+    public LotteryContainer(int lotteryCount, NumberGenerator generator) {
         this.lotteryCount = lotteryCount;
+        // this.generator = new AutoNumberGenerator();
         for (int i = 0; i < this.lotteryCount; i++) {
-            lotteryList.add(new Lottery());
+            lotteryList.add(new Lottery(generator));
         }
     }
 
@@ -64,8 +70,7 @@ public class LotteryContainer {
             lotto.setWinNumbers(winNumbers);
 
             int matchCount = lotto.getMatchCount();
-            winner.set(matchCount, winner.get(matchCount) + 1);
-            // winner[matchCount]++;
+            winnerList.set(matchCount, winnerList.get(matchCount) + 1);
         }
     }
 
@@ -75,7 +80,7 @@ public class LotteryContainer {
             throw new IllegalArgumentException("게임이 진행되지 않았습니다");
         }
 
-        return this.winner;
+        return this.winnerList;
     }
 
 }

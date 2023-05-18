@@ -4,6 +4,8 @@ import java.util.List;
 
 import study.domain.Lottery;
 import study.domain.LotteryContainer;
+import study.domain.generator.NumberGenerator;
+import study.domain.generator.impl.AutoNumberGenerator;
 import study.view.LottoInputView;
 import study.view.LottoOutputView;
 
@@ -12,8 +14,9 @@ public class StudyMain {
     public static void main(String[] args) {
         LottoInputView inputView = new LottoInputView();
         inputView.purchase();
-
-        LotteryContainer lottoContainer = new LotteryContainer(inputView.getLottoCount());
+        
+        NumberGenerator generator = new AutoNumberGenerator();
+        LotteryContainer lottoContainer = new LotteryContainer(inputView.getLottoCount(), generator);
         for (Lottery lotto : lottoContainer.getTotalLottery()) {
             System.out.println(lotto.getLottery());
         }
