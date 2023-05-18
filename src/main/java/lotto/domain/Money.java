@@ -10,6 +10,10 @@ public class Money {
         this.amount = amount;
     }
 
+    public Money(String amount) {
+        this(Long.parseLong(amount));
+    }
+
     public Money add(Money money) {
         return money.add(this.amount);
     }
