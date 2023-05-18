@@ -5,21 +5,19 @@ import java.util.Arrays;
 import java.util.Map;
 
 public enum LottoMatcher {
-    FIRST_MATCH(6, 2_000_000_000, "first"),
-    SECOND_MATCH(5, 30_000_000, "second"),
-    THIRD_MATCH(5, 1_500_000, "third"),
-    FOURTH_MATCH(4, 50_000, "fourth"),
-    FIFTH_MATCH(3, 5_000, "fifth"),
-    NONE_MATCH(0, 0, "nothing");
+    FIRST_MATCH(6, 2_000_000_000),
+    SECOND_MATCH(5, 30_000_000),
+    THIRD_MATCH(5, 1_500_000),
+    FOURTH_MATCH(4, 50_000),
+    FIFTH_MATCH(3, 5_000),
+    NONE_MATCH(0, 0);
 
     private final int matchOfCount;
     private final int price;
-    private final String mapKey;
 
-    LottoMatcher(int matchOfCount, int price, String mapKey) {
+    LottoMatcher(int matchOfCount, int price) {
         this.matchOfCount = matchOfCount;
         this.price = price;
-        this.mapKey = mapKey;
     }
 
     private boolean is(int matchOfCount) {
@@ -41,20 +39,16 @@ public enum LottoMatcher {
         return price;
     }
 
-    public void incrementScore(Map<String, Integer> map) {
-        map.putIfAbsent(mapKey, 0);
-        map.computeIfPresent(mapKey, (k, v) -> v + 1);
+    public void incrementScore(Map<LottoMatcher, Integer> map) {
+        map.computeIfPresent(this, (k, v) -> v + 1);
     }
 
     public int amount(int count) {
         return price * count;
     }
 
-    public String key() {
-        return mapKey;
-    }
 
-    public boolean isMatching(){
+    public boolean isMatching() {
         return matchOfCount >= 3;
     }
 }
