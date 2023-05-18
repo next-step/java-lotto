@@ -2,6 +2,7 @@ import java.util.List;
 
 import domain.LottoGame;
 import domain.LottoResults;
+import domain.ManualRequest;
 import domain.WinningAnalyzer;
 import domain.WinningStatistics;
 import view.LottoInputView;

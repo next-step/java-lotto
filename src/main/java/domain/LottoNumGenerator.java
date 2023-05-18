@@ -27,4 +27,9 @@ public class LottoNumGenerator {
 
         return new LottoResult(lottoNumbers);
     }
+
+    public static LottoNumber[] generateManualNumbers(int[] manualNumbers) {
+
+        return new LottoNumber[0];
+    }
 }
