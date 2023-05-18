@@ -17,10 +17,10 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> numbers) {
-        this(map(numbers));
+        this(toSet(numbers));
     }
 
-    private static Set<LottoNumber> map(List<Integer> numbers) {
+    private static Set<LottoNumber> toSet(List<Integer> numbers) {
         Set<LottoNumber> lottoTicket = new HashSet<>();
         for (int number : numbers) {
             lottoTicket.add(new LottoNumber(number));
