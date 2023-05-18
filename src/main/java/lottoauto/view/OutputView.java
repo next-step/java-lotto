@@ -22,7 +22,7 @@ public class OutputView {
 
     private static String winningNumber(Lotto lotto) {
         return lotto.getNumbers().stream()
-                .map(String::valueOf)
+                .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
                 .collect(Collectors.joining(DELIMITER, OPEN_SQUARE_BRACKET, CLOSE_SQUARE_BRACKET));
     }
 

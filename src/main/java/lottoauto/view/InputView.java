@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lottoauto.model.Lotto;
+import lottoauto.model.LottoNumber;
 
 public class InputView {
 
@@ -21,11 +22,11 @@ public class InputView {
         return convertInteger(scanner.nextLine());
     }
 
-    public static List<Integer> winningNumber() {
+    public static List<LottoNumber> winningNumber() {
         System.out.println(LAST_WINNING_NUMBER);
         return Arrays.stream(scanner.nextLine()
                         .split(OutputView.DELIMITER))
-                .map(Integer::parseInt)
+                .map(number -> LottoNumber.from(Integer.parseInt(number)))
                 .sorted()
                 .collect(Collectors.toList());
     }
@@ -47,7 +48,7 @@ public class InputView {
             Lotto lotto = Lotto.manual(scanner.nextLine());
 
             manualLottery.add(lotto);
-        } 
+        }
         return manualLottery;
     }
 
