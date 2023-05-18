@@ -45,31 +45,29 @@ public class Lottos {
   private void findManualLottoMatches(WinningNumbers winningNumbers, BonusBall bonusBall,
       MatchesStatus matchesStatus) {
     for (ManualLotto lotto : manualLottos) {
-      matchesStatus.addMatchesCount(findMatches(lotto, winningNumbers, bonusBall));
+      matchesStatus.addMatchesCount(findMatches(countMatchesNumber(lotto, winningNumbers), lotto.has(bonusBall)));
     }
   }
 
   private void findAutoLottoMatches(WinningNumbers winningNumbers, BonusBall bonusBall,
       MatchesStatus matchesStatus) {
     for (AutoLotto lotto : autoLottos) {
-      matchesStatus.addMatchesCount(findMatches(lotto, winningNumbers, bonusBall));
+      matchesStatus.addMatchesCount(findMatches(countMatchesNumber(lotto, winningNumbers), lotto.has(bonusBall)));
     }
   }
 
-  private Matches findMatches(AutoLotto lotto, WinningNumbers winningNumbers, BonusBall bonusBall) {
-    int matchesNumber = lotto.countMatchesNumber(winningNumbers);
-    if (isFiveMatches(matchesNumber) && lotto.has(bonusBall)) {
+  private Matches findMatches(int matchesNumber, boolean isMatchedWithBonusBall) {
+    if (isFiveMatches(matchesNumber) && isMatchedWithBonusBall) {
       return Matches.MATCH_FIVE_AND_BONUS;
+    }
+    if (isFiveMatches(matchesNumber)) {
+      return Matches.MATCH_FIVE;
     }
     return Matches.getMatches(matchesNumber);
   }
 
-  private Matches findMatches(ManualLotto lotto, WinningNumbers winningNumbers, BonusBall bonusBall) {
-    int matchesNumber = lotto.countMatchesNumber(winningNumbers);
-    if (isFiveMatches(matchesNumber) && lotto.has(bonusBall)) {
-      return Matches.MATCH_FIVE_AND_BONUS;
-    }
-    return Matches.getMatches(matchesNumber);
+  private int countMatchesNumber(Lotto lotto, WinningNumbers winningNumbers) {
+    return lotto.countMatchesNumber(winningNumbers);
   }
 
   private boolean isFiveMatches(int matchesNumber) {

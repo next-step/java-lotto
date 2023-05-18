@@ -14,7 +14,7 @@ public class Lotto {
 
   public Lotto(String input) {
     Set<LottoNo> lotto = new HashSet<>(toLottoNos(toIntegers(split(input))));
-    if (isLottsSizeEqualTo(lotto.size())) {
+    if (isLottoSizeEqualTo(lotto.size())) {
       throw new IllegalArgumentException("로또 번호는 중복되지 않은 숫자로 " + LOTTO_NUMBER_COUNT + "개여야합니다.");
     }
     this.lotto = lotto;
@@ -45,7 +45,7 @@ public class Lotto {
   }
 
   private Integer[] toIntegers(String[] tokens) {
-    if (isLottsSizeEqualTo(tokens.length)) {
+    if (isLottoSizeEqualTo(tokens.length)) {
       throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBER_COUNT + "개여야합니다.");
     }
 
@@ -56,7 +56,7 @@ public class Lotto {
     return integers;
   }
 
-  private boolean isLottsSizeEqualTo(int length) {
+  private boolean isLottoSizeEqualTo(int length) {
     return length != LOTTO_NUMBER_COUNT;
   }
 
