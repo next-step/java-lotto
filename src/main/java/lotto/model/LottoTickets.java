@@ -27,9 +27,9 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public List<Rank> getRankings(LottoTicket winTicket) {
+    public List<Rank> getRankings(WinningTicket winTicket) {
         return lottoTickets.stream()
-                .map(ticket -> ticket.getRanking(winTicket.getLottoNumbers()))
+                .map(ticket -> winTicket.match(ticket.getLottoNumbers()))
                 .collect(Collectors.toList());
     }
 

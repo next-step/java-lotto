@@ -12,11 +12,13 @@ public class LottoMain {
 
     public static void main(String[] args) {
         LottoTickets lottoTickets = createLottoTickets();
+        ResultView.printLottoTicketCount(lottoTickets.size());
         ResultView.printLottoTickets(lottoTickets);
 
         List<LottoNumber> winLottoNumbers = InputView.inputWinNumber();
+        LottoNumber bonusNumber = InputView.inputBonusNumber();
 
-        LottoGame lottoGame = new LottoGame(lottoTickets, new LottoTicket(winLottoNumbers));
+        LottoGame lottoGame = new LottoGame(lottoTickets, new WinningTicket(new LottoTicket(winLottoNumbers), bonusNumber));
         LottoResult lottoResult = lottoGame.playLotto();
 
         ResultView.printWinResult(lottoResult);
@@ -25,9 +27,9 @@ public class LottoMain {
 
     private static LottoTickets createLottoTickets() {
         String strLottoCost = InputView.inputLottoCost();
-        Money amount = new Money(Integer.parseInt(strLottoCost));
+        Cost cost = new Cost(new Money(Integer.parseInt(strLottoCost)));
 
-        int ticketCount = amount.getLottoTicketCount();
+        int ticketCount = cost.getLottoTicketCount();
         return LottoFactory.createAutoLottoTickets(ticketCount);
     }
 }

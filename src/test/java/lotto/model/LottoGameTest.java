@@ -37,7 +37,7 @@ class LottoGameTest {
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
 
-        LottoTicket winTicket = new LottoTicket(winNumber);
+        WinningTicket winTicket = new WinningTicket(new LottoTicket(winNumber), new LottoNumber(7));
 
         LottoGame lottoGame = new LottoGame(lottoTickets, winTicket);
         LottoResult lottoResult = lottoGame.playLotto();

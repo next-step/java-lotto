@@ -20,10 +20,18 @@ public class ResultView {
                 .filter(entry -> entry.getKey().count() > 0)
                 .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
                 .forEach(entry -> {
-                    Rank rank = entry.getKey();
-                    int count = entry.getValue();
-                    System.out.printf("%d개 일치 (%d원) - %d개\n", rank.count(), rank.prize(), count);
+                    printEachWinResult(entry);
                 });
+    }
+
+    private static void printEachWinResult(Map.Entry<Rank, Integer> entry) {
+        Rank rank = entry.getKey();
+        int count = entry.getValue();
+        if (Rank.BONUS_RANK == entry.getKey()) {
+            System.out.printf("%d개 일치, 보너스 볼 일치 (%d원) - %d개\n", rank.count(), rank.prize(), count);
+            return;
+        }
+        System.out.printf("%d개 일치 (%d원) - %d개\n", rank.count(), rank.prize(), count);
     }
 
     public static void printLottoTickets(LottoTickets lottoTickets) {

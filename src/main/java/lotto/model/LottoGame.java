@@ -5,9 +5,9 @@ import java.util.Set;
 
 public class LottoGame {
     private LottoTickets lottoTickets;
-    private LottoTicket winTicket;
+    private WinningTicket winTicket;
 
-    public LottoGame(LottoTickets lottoTickets, LottoTicket winTicket) {
+    public LottoGame(LottoTickets lottoTickets, WinningTicket winTicket) {
         this.lottoTickets = lottoTickets;
         this.winTicket = winTicket;
     }

@@ -3,24 +3,28 @@ package lotto.model;
 import java.util.Objects;
 
 public class Money {
-    private static final int ONE_LOTTO_TICKET_PRICE = 1_000;
-    private final int money;
 
-    public Money(int money) {
-        validate(money);
-        this.money = money;
+    private final int amount;
+
+    public Money(int amount) {
+        validate(amount);
+        this.amount = amount;
     }
 
-    public int getMoney() {
-        return money;
+    public int amount() {
+        return this.amount;
     }
 
-    public int getLottoTicketCount() {
-        return this.money / ONE_LOTTO_TICKET_PRICE;
+    public int plus(Money other) {
+        return this.amount + other.amount;
     }
 
-    private void validate(int money) {
-        if (money < 0) {
+    public double divide(Money other) {
+        return (double) this.amount / other.amount;
+    }
+
+    private void validate(int amount) {
+        if (amount < 0) {
             throw new IllegalArgumentException("금액은 음수일 수 없습니다.");
         }
     }
@@ -30,11 +34,11 @@ public class Money {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money1 = (Money) o;
-        return money == money1.money;
+        return amount == money1.amount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(money);
+        return Objects.hash(amount);
     }
 }
