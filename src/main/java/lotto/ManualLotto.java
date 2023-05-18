@@ -10,18 +10,26 @@ import java.util.Set;
 
 public class ManualLotto {
 
-  private final Set<LottoNo> lottos;
+  private final Set<LottoNo> lotto;
 
   public ManualLotto(String input) {
-    this.lottos = new HashSet<>();
-    this.lottos.addAll(toLottoNos(toIntegers(split(input))));
-    if (isLottoNumberCountEqualTo(lottos.size())) {
+    this.lotto = new HashSet<>();
+    this.lotto.addAll(toLottoNos(toIntegers(split(input))));
+    if (isLottsSizeEqualTo(lotto.size())) {
       throw new IllegalArgumentException("로또 번호는 중복되지 않은 숫자로 " + LOTTO_NUMBER_COUNT + "개여야합니다.");
     }
   }
 
   public boolean has(LottoNo lottoNo) {
-    return lottos.contains(lottoNo);
+    return lotto.contains(lottoNo);
+  }
+
+  public boolean has(BonusBall bonusBall) {
+    return lotto.stream().anyMatch(bonusBall::equals);
+  }
+
+  public int countMatchesNumber(WinningNumbers winningNumbers) {
+    return (int) lotto.stream().filter(winningNumbers::has).count();
   }
 
   private List<LottoNo> toLottoNos(Integer[] integers) {
@@ -33,7 +41,7 @@ public class ManualLotto {
   }
 
   private Integer[] toIntegers(String[] tokens) {
-    if (isLottoNumberCountEqualTo(tokens.length)) {
+    if (isLottsSizeEqualTo(tokens.length)) {
       throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBER_COUNT + "개여야합니다.");
     }
 
@@ -44,7 +52,7 @@ public class ManualLotto {
     return integers;
   }
 
-  private boolean isLottoNumberCountEqualTo(int length) {
+  private boolean isLottsSizeEqualTo(int length) {
     return length != LOTTO_NUMBER_COUNT;
   }
 
@@ -54,6 +62,6 @@ public class ManualLotto {
 
   @Override
   public String toString() {
-    return Arrays.toString(lottos.stream().sorted().toArray());
+    return Arrays.toString(lotto.stream().sorted().toArray());
   }
 }
