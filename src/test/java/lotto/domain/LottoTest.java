@@ -30,21 +30,21 @@ public class LottoTest {
     @Test
     public void lotto_DuplicateNumber_ThrowException() {
         Assertions.assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 5)));
+                .isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 5)));
     }
 
     @DisplayName("정적 메서드를 통해 로또 객체를 만들 수 있다.")
     @Test
     public void lotto_StaticMethod_CreateLotto() {
         Lotto lotto = new Lotto(lottoTicket);
-        Assertions.assertThat(lotto).isEqualTo(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Assertions.assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @DisplayName("당첨번호가 몇 개 있는지 알 수 있다.")
     @Test
     public void match_CountWinNumber_Same() {
         Lotto winLotto = new Lotto(lottoTicket);
-        Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 10, 11));
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 10, 11));
 
         Assertions.assertThat(lotto.match(winLotto)).isEqualTo(4);
     }

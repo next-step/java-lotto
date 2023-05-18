@@ -16,12 +16,16 @@ public class Lotto {
         this.lottoTicket = lottoTicket;
     }
 
-    public static Lotto of(List<Integer> numbers) {
+    public Lotto(List<Integer> numbers) {
+        this(map(numbers));
+    }
+
+    private static Set<LottoNumber> map(List<Integer> numbers) {
         Set<LottoNumber> lottoTicket = new HashSet<>();
         for (int number : numbers) {
             lottoTicket.add(new LottoNumber(number));
         }
-        return new Lotto(lottoTicket);
+        return lottoTicket;
     }
 
     public int match(Lotto winNumber) {

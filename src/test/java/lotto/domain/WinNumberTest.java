@@ -17,13 +17,13 @@ public class WinNumberTest {
 
     @BeforeEach
     public void setUp() {
-        winNumber = new WinNumber(Lotto.of(Arrays.asList(1,2,3,4,5,6)), new LottoNumber(45));
+        winNumber = new WinNumber(new Lotto(Arrays.asList(1,2,3,4,5,6)), new LottoNumber(45));
     }
 
     @DisplayName("로또번호중에 맞은 갯수를 구할 수 있다.")
     @Test
     public void distinguish_CountNumber_Correct() {
-        Lotto lotto = Lotto.of(Arrays.asList(1,2,3,4,5,6));
+        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
         Assertions.assertThat(winNumber.matchRank(lotto)).isEqualTo(Rank.FIRST);
     }
 }

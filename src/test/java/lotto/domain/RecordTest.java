@@ -17,8 +17,8 @@ public class RecordTest {
 
     @BeforeEach
     public void setUp() {
-        lottoList.add(Lotto.of(Arrays.asList(1,2,3,4,5,6)));
-        lottoList.add(Lotto.of(Arrays.asList(1,2,3,4,6,7)));
+        lottoList.add(new Lotto(Arrays.asList(1,2,3,4,5,6)));
+        lottoList.add(new Lotto(Arrays.asList(1,2,3,4,6,7)));
         lottoBundle = new LottoBundle(lottoList);
     }
 

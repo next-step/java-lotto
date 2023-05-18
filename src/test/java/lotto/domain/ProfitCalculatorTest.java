@@ -20,10 +20,10 @@ public class ProfitCalculatorTest {
     public void calculate_ByMultiplyStrategy_CreateProfitRate() {
 
         List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(Lotto.of(Arrays.asList(1,2,3,10,11,12)));
-        lottoList.add(Lotto.of(Arrays.asList(1,2,3,21,22,23)));
+        lottoList.add(new Lotto(Arrays.asList(1,2,3,10,11,12)));
+        lottoList.add(new Lotto(Arrays.asList(1,2,3,21,22,23)));
         LottoBundle lottoBundle = new LottoBundle(lottoList);
-        WinNumber winNumber = new WinNumber(Lotto.of(Arrays.asList(1, 2, 3, 41, 42, 43)), new LottoNumber(30));
+        WinNumber winNumber = new WinNumber(new Lotto(Arrays.asList(1, 2, 3, 41, 42, 43)), new LottoNumber(30));
         Record record = Record.extractRecord(lottoBundle, winNumber);
 
         ProfitCalculator profitCalculator = new ProfitCalculator(new MultiplyStrategy());
