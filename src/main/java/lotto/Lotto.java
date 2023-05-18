@@ -10,13 +10,22 @@ public class Lotto {
     private List<LottoNumber> numbers = new ArrayList<>();
     public static final int LOTTO_PRICE = 1000;
 
+    public static final int LOTTO_NUMBER_COUNT = 6;
+
     public Lotto() {
         this.numbers = LottoNumber.generate();
     }
 
-    public Lotto(int... lottoNumbers) {
+    public Lotto(Set<Integer> lottoNumbers) {
+        validateNumberCount(lottoNumbers);
         for (int lottoNumber : lottoNumbers) {
             this.numbers.add(LottoNumber.of(lottoNumber));
+        }
+    }
+
+    private void validateNumberCount(Set<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException("로또 번호는 6개여야만 합니다.");
         }
     }
 
@@ -26,13 +35,13 @@ public class Lotto {
 
     private int matchCount(List<LottoNumber> winNumbers) {
         Set<LottoNumber> set = new HashSet<>(numbers);
-        return (int) winNumbers.stream()
-                .filter(set::contains)
+        return (int) set.stream()
+                .filter(winNumbers::contains)
                 .count();
     }
 
-    private boolean hasNumber(int bonusNumber) {
-        return numbers.contains(LottoNumber.of(bonusNumber));
+    private boolean hasNumber(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 
     public KLottoRank checkRank(WinNumber winNumbers) {

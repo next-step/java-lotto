@@ -3,25 +3,27 @@ package lotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in).useDelimiter(",\\s*|\r?\n");
-        int money = InputView.inputPay(scanner);
+        int money = InputView.inputPay();
         Customer customer = new Customer(money);
-        customer.buyLotto();
+        int manualCount = InputView.inputCount();
+        List<Set<Integer>> manualNumbers = new ArrayList<>();
+        if (manualCount > 0) {
+            manualNumbers = InputView.inputManualNumbers(manualCount);
+        }
 
-        OutputView.showLottos(customer.getLottos());
-        List<Integer> lastNumbers = InputView.lastWinNumbers(scanner);
-        int bonusNumber = InputView.inputBonusNumber(scanner);
+        customer.buyLotto(manualCount, manualNumbers);
+
+        OutputView.showLottos(customer.getManualLotto(), customer.getAutoLotto());
+        Set<Integer> lastNumbers = InputView.lastWinNumbers();
+        int bonusNumber = InputView.inputBonusNumber();
         WinNumber winNumber = new WinNumber(lastNumbers, bonusNumber);
 
         Map<KLottoRank, Integer> lottoResult = customer.checkLottoWin(winNumber);
         OutputView.LottoResult(lottoResult, customer);
-        scanner.close();
     }
 }

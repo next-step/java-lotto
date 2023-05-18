@@ -13,6 +13,10 @@ public class Money {
         return new Money(this.money - money);
     }
 
+    public boolean isLess(int totalLottoPrice){
+        return this.money < totalLottoPrice;
+    }
+
     private void validateMoney(int money) {
         if (money < 0) {
             throw new IllegalArgumentException("돈 액수는 0원 이상이어야 합니다.");
