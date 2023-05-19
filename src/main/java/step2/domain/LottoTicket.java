@@ -7,25 +7,25 @@ import java.util.Set;
 
 public class LottoTicket {
 
-    private final List<Integer> lottoTicket;
+    private final List<LottoNo> lottoTicket;
 
-    public LottoTicket(List<Integer> lottoTicket) {
-        validInputNumber(lottoTicket);
-        this.lottoTicket = lottoTicket;
+    public LottoTicket(List<LottoNo> lottoNumbers) {
+        validInputNumber(lottoNumbers);
+        this.lottoTicket = new ArrayList<>(lottoNumbers);
     }
 
-    public LottoTicket(Set<Integer> numbers) {
-        validInputNumber(numbers);
-        lottoTicket = new ArrayList<>(numbers);
+    public LottoTicket(Set<LottoNo> lottoNumbers) {
+        validInputNumber(lottoNumbers);
+        lottoTicket = new ArrayList<>(lottoNumbers);
     }
 
-    private static void validInputNumber(Collection<Integer> numbers) {
-        if (numbers.size() != LottoCommonValue.DEFAULT_LOTTO_NUMBER_COUNT.value()) {
-            throw new IllegalArgumentException(numbers + " : 입력한 숫자를 확인해 주세요");
+    private static void validInputNumber(Collection<LottoNo> lottoNos) {
+        if (lottoNos.size() != LottoCommonValue.DEFAULT_LOTTO_NUMBER_COUNT.value()) {
+            throw new IllegalArgumentException(lottoNos + " : 입력한 숫자를 확인해 주세요");
         }
     }
 
-    public boolean isContain(Integer number) {
+    public boolean isContain(LottoNo number) {
         return this.lottoTicket.contains(number);
     }
 
@@ -34,7 +34,7 @@ public class LottoTicket {
                 .filter(i -> winningTicket.isContain(i))
                 .count();
 
-        return Rank.toPrizeMoney(count, isContain(bonusNumber));
+        return Rank.toPrizeMoney(count, isContain(LottoNo.of(bonusNumber)));
     }
 
     public String printTicket() {
