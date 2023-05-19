@@ -53,3 +53,12 @@
    2. WinningLotto 내 findRank 로직 수정
    3. ResultView에서의 멘트 변경
    4. LottoNumber에서의 유효성 검증 로직도 보너스 번호 때 사용되어서 LottoNumberValidationUtilsTest로 뺌
+
+4. 3단계 피드백 반영 사항
+   1. Lotto 객체가 생성한 LottoNumber 객체를 가지도록 변경
+   2. Util 모두 제거, 상태를 가진 객체가 유효성 검사를 진행하도록 변경
+   3. WinningLotto 객체 상태 필드 변경
+   4. findRank 접근 제어자 변경
+   5. Rank 내 findRank 구현
+   6. test 위한 클래스를 test 폴더 하위로 이동
+   7. 로또 클래스 Set 컬렉션 이용
