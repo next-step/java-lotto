@@ -7,6 +7,14 @@ import org.junit.jupiter.api.Test;
 
 public class LottoNumberTest {
 
+    @DisplayName("캐싱처리한 로또번호의 객체는 서로 같은 객체다.")
+    @Test
+    public void cashing_sameObject() {
+        LottoNumber lottoNumber = LottoNumber.of("1");
+        Assertions.assertThat(LottoNumber.of(1)).isEqualTo(lottoNumber);
+        Assertions.assertThat(LottoNumber.of(1) == lottoNumber);
+    }
+
     @DisplayName("로또번호는 1 ~ 45 사이의 숫자여야 한다.")
     @Test
     public void lottoNumber_RangeInBetween1And45_CreateSuccess() {
