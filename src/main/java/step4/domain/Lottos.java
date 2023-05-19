@@ -24,13 +24,14 @@ public class Lottos {
         return lottoList.size();
     }
 
-    public LottosTotalResult getResult(List<Integer> winningNumbers, int bonusNumber) {
+    public LottosTotalResult getResult(WinningLottoNumbers winningLottoNumbers) {
         LottosTotalResult lottosTotalResult = new LottosTotalResult();
         for (Lotto lotto : lottoList) {
-            lottosTotalResult.plusOne(lotto.countMatched(winningNumbers), lotto.bonusMatched(bonusNumber));
+            lottosTotalResult.plusOne(winningLottoNumbers.matchedCount(lotto), winningLottoNumbers.isBonusMatched(lotto));
         }
         return lottosTotalResult;
     }
+
 
     public List<Lotto> getLottoList() {
         return lottoList;

@@ -2,6 +2,7 @@ package step4;
 
 import step4.domain.Lottos;
 import step4.domain.LottosTotalResult;
+import step4.domain.WinningLottoNumbers;
 
 import java.util.List;
 
@@ -13,7 +14,8 @@ public class LottoGame {
     }
 
     public LottosTotalResult getTotalResult(List<Integer> winningNumbers, int bonusNumber) {
-        return lottos.getResult(winningNumbers, bonusNumber);
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningNumbers, bonusNumber);
+        return lottos.getResult(winningLottoNumbers);
     }
 
     public Lottos getLottos() {

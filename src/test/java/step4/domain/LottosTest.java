@@ -24,12 +24,12 @@ public class LottosTest {
     @Test
     public void getResultTest() {
         List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
-        lottoList.add(new Lotto(List.of(2, 3, 4, 5, 6, 7)));
-        lottoList.add(new Lotto(List.of(4, 5, 6, 7, 10, 45)));
+        lottoList.add(Lotto.of(List.of(1, 2, 3, 4, 5, 6)));
+        lottoList.add(Lotto.of(List.of(2, 3, 4, 5, 6, 7)));
+        lottoList.add(Lotto.of(List.of(4, 5, 6, 7, 10, 45)));
         Lottos lottos = new Lottos(lottoList);
 
-        LottosTotalResult lottosResult = lottos.getResult(List.of(4, 5, 6, 7, 8, 9), 45);
+        LottosTotalResult lottosResult = lottos.getResult(new WinningLottoNumbers(List.of(4, 5, 6, 7, 8, 9), 45));
 
         assertThat(lottosResult.get(Rank.MISS)).isEqualTo(0);
         assertThat(lottosResult.get(Rank.FIFTH)).isEqualTo(1);

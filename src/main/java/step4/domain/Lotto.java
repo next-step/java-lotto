@@ -1,29 +1,29 @@
 package step4.domain;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
+    private static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (Integer number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
-        }
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(List<LottoNumber> numbers) {
+        validateLottoNumbers(numbers);
+        this.lottoNumbers = numbers;
     }
 
-    public int countMatched(List<Integer> winningNumbers) {
-        int numberOfMatched = 0;
-        for (Integer winningNumber : winningNumbers) {
-            numberOfMatched += lottoNumbers.contains(new LottoNumber(winningNumber)) ? 1 : 0;
+    private void validateLottoNumbers(List<LottoNumber> numbers) {
+        HashSet<LottoNumber> numberSet = new HashSet<>(numbers);
+        if (numberSet.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(String.format("로또 번호는 %s개여야 합니다.", LOTTO_SIZE));
         }
-        return numberOfMatched;
     }
 
-    public boolean bonusMatched(int bonusNumber) {
-        return lottoNumbers.contains(new LottoNumber(bonusNumber));
+    public static Lotto of(List<Integer> integers) {
+        return new Lotto(integers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
     }
 
     public List<LottoNumber> getLottoNumbers() {

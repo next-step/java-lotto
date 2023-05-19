@@ -7,29 +7,22 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class SimpleNumberGenerator implements NumberGenerator {
-    private static final int DEFAULT_BOUND = 45;
-    private final int bound;
-    private final List<Integer> candidateNumbers = new ArrayList<>();
+    private final List<LottoNumber> candidateNumbers = new ArrayList<>();
 
     public SimpleNumberGenerator() {
-        this(DEFAULT_BOUND);
-    }
-
-    public SimpleNumberGenerator(int bound) {
-        this.bound = bound;
         fillNumbers();
     }
 
     private void fillNumbers() {
-        for (int i = 0; i < bound; i++) {
-            candidateNumbers.add(i + 1);
+        for (int i = 0; i < LottoNumber.MAX_LOTTO_NUMBER; i++) {
+            candidateNumbers.add(new LottoNumber(i + 1));
         }
     }
 
     @Override
-    public List<Integer> generateNumbers() {
+    public List<LottoNumber> generateNumbers() {
         shuffle();
-        List<Integer> generated = getSixNumbers();
+        List<LottoNumber> generated = getSixNumbers();
         sort(generated);
         return generated;
     }
@@ -38,12 +31,12 @@ public class SimpleNumberGenerator implements NumberGenerator {
         Collections.shuffle(candidateNumbers, new Random());
     }
 
-    private List<Integer> getSixNumbers() {
+    private List<LottoNumber> getSixNumbers() {
         // 깊은 복사를 위해 stream 활용
         return candidateNumbers.subList(0, 6).stream().collect(Collectors.toList());
     }
 
-    private void sort(List<Integer> numbers) {
+    private void sort(List<LottoNumber> numbers) {
         Collections.sort(numbers);
     }
 }
