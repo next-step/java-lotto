@@ -23,7 +23,7 @@ public class Record {
     public static Record extractRecord(LottoBundle lottoBundle, WinNumber winNumber) {
         List<Lotto> lottoList = lottoBundle.unfoldLottoBundle();
 
-        EnumMap<Rank, Integer> recordMap = lottoList.stream()
+        Map<Rank, Integer> recordMap = lottoList.stream()
                 .map(winNumber::matchRank)
                 .filter(rank -> rank.getMatchingCount() >= 3)
                 .collect(Collectors.toMap(rank -> rank, rank -> 1, Integer::sum, () -> new EnumMap<>(Rank.class)));
