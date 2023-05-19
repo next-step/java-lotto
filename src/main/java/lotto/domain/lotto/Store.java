@@ -14,7 +14,7 @@ public class Store {
 
     private static void validateCount(int manualOrderCount) {
         if (manualOrderCount < 0) {
-            throw new IllegalArgumentException("수동로또 구매숫자는 음수가 될 수 없습니다.");
+            throw new IllegalArgumentException("수동로또 구매숫자는 음수가 될 수 없습니다. 입력숫자 > " + manualOrderCount);
         }
     }
 
