@@ -1,8 +1,10 @@
 package stringcalculator;
 
 public class StringCalculator {
-    public static final String ENTERED_NULL_OR_EMPTY_STRING = "null을 입력하였습니다.";
-    public static final String ONLY_NUMBERS_AND_OPERATORS_ALLOWED = "숫자와 사칙 연산자만 입력할 수 있습니다.";
+    public static final String ERRMSG_ENTERED_NULL_OR_EMPTY_STRING = "null을 입력하였습니다.";
+    public static final String ERRMSG_ONLY_NUMBERS_AND_OPERATORS_ALLOWED = "숫자와 사칙 연산자만 입력할 수 있습니다.";
+
+    public static final String REGEXP_NUMBERS_AND_OPERATORS = "[\\d+\\-*/ ]+";
 
     public int calculate(String inputString) {
         // 유효성 검사
@@ -28,12 +30,11 @@ public class StringCalculator {
 
     private void validationCheck(String inputString) {
         if (inputString == null || inputString.length() == 0) {
-            throw new IllegalArgumentException(ENTERED_NULL_OR_EMPTY_STRING);
+            throw new IllegalArgumentException(ERRMSG_ENTERED_NULL_OR_EMPTY_STRING);
         }
 
-        String exp = "[\\d+\\-*/ ]+";
-        if (!inputString.matches(exp)) {
-            throw new IllegalArgumentException(ONLY_NUMBERS_AND_OPERATORS_ALLOWED);
+        if (!inputString.matches(REGEXP_NUMBERS_AND_OPERATORS)) {
+            throw new IllegalArgumentException(ERRMSG_ONLY_NUMBERS_AND_OPERATORS_ALLOWED);
         }
     }
 
@@ -63,6 +64,6 @@ public class StringCalculator {
             return result / num;
         }
 
-        throw new IllegalArgumentException(ONLY_NUMBERS_AND_OPERATORS_ALLOWED);
+        throw new IllegalArgumentException(ERRMSG_ONLY_NUMBERS_AND_OPERATORS_ALLOWED);
     }
 }

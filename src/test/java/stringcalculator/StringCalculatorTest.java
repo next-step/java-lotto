@@ -43,9 +43,9 @@ public class StringCalculatorTest {
 
     @Test
     void 곱셈() {
-        Integer result1 = stringCalculator.calculate("2 * 3");
+        Integer result1 = stringCalculator.calculate("2 * -3");
 
-        assertThat(result1).isEqualTo(6);
+        assertThat(result1).isEqualTo(-6);
 
 
         Integer result2 = stringCalculator.calculate("4 * 3 - 2 + 1");
@@ -70,17 +70,17 @@ public class StringCalculatorTest {
     void 입력값이_null() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             stringCalculator.calculate(null);
-        }).withMessage(ENTERED_NULL_OR_EMPTY_STRING);
+        }).withMessage(ERRMSG_ENTERED_NULL_OR_EMPTY_STRING);
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
             stringCalculator.calculate("");
-        }).withMessage(ENTERED_NULL_OR_EMPTY_STRING);
+        }).withMessage(ERRMSG_ENTERED_NULL_OR_EMPTY_STRING);
     }
 
     @Test
     void 사칙연산_기호가_아닌_경우() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             stringCalculator.calculate("2 & 3");
-        }).withMessage(ONLY_NUMBERS_AND_OPERATORS_ALLOWED);
+        }).withMessage(ERRMSG_ONLY_NUMBERS_AND_OPERATORS_ALLOWED);
     }
 }
