@@ -8,28 +8,30 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private static final String LOTTO_NUMBERS_SEPARATOR = ",";
+    private static final int LOTTO_SIZE = 6;
+    private static List<Number> allLottoNumbers = new ArrayList<>();
+
     private final List<Number> lotto;
 
-    Lotto() {
-        this.lotto = generateAutoLotto();
-    }
-
-    Lotto(String lottoNumber) {
-        this.lotto = Arrays.stream(lottoNumber.split(LOTTO_NUMBERS_SEPARATOR))
-                .map(number -> new Number(number.trim())).sorted()
-                .collect(Collectors.toList());
-    }
-
-    private List<Number> generateAutoLotto() {
-        List<Number> allLottoNumbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            allLottoNumbers.add(new Number(i));
+    static {
+        for (int i = Number.LOTTO_NUMBER_LOWER_BOUND; i <= Number.LOTTO_NUMBER_UPPER_BOUND; i++) {
+            allLottoNumbers.add(Number.from(i));
         }
-        Collections.shuffle(allLottoNumbers);
+    }
 
-        List<Number> autoNumbers = allLottoNumbers.subList(0, 6);
-        Collections.sort(autoNumbers);
-        return autoNumbers;
+    private Lotto(List<Number> numbers) {
+        this.lotto = numbers;
+    }
+
+    static Lotto createAutoLotto() {
+        Collections.shuffle(allLottoNumbers);
+        return new Lotto(allLottoNumbers.stream().limit(LOTTO_SIZE).sorted().collect(Collectors.toList()));
+    }
+
+    static Lotto createManualLotto(String lottoNumber) {
+        return new Lotto(Arrays.stream(lottoNumber.split(LOTTO_NUMBERS_SEPARATOR))
+                .map(number -> Number.from(number.trim())).sorted()
+                .collect(Collectors.toList()));
     }
 
     public int getNumberOfMatch(Lotto winnerLotto) {
@@ -39,7 +41,7 @@ public class Lotto {
     }
 
     public boolean isMatchNumber(Number winnerNumber) {
-        return lotto.stream().anyMatch(number -> number.compareTo(winnerNumber) == 0);
+        return lotto.stream().anyMatch(number -> number == winnerNumber);
     }
 
     private List<Number> getLotto() {

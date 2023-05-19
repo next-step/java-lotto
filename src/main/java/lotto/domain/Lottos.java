@@ -24,12 +24,12 @@ public class Lottos {
         List<Lotto> lottos = new ArrayList<>();
 
         for (String manualLottoNumber: manualLottoNumbers) {
-            lottos.add(new Lotto(manualLottoNumber));
+            lottos.add(Lotto.createManualLotto(manualLottoNumber));
         }
         int autoLottosCount = amount / LOTTO_AMOUNT_OF_MONEY - manualLottoNumbers.size();
 
         for (int i = 0; i < autoLottosCount; i++) {
-            lottos.add(new Lotto());
+            lottos.add(Lotto.createAutoLotto());
         }
         return lottos;
     }

@@ -16,9 +16,9 @@ public class Statistics {
 
     public Map<RankType, Integer> generate(Lottos lottos, String winLottoNumber, int bonusNumber) {
         for (Lotto lotto: lottos.getLottos()) {
-            int numberOfMatch = lotto.getNumberOfMatch(new Lotto(winLottoNumber));
+            int numberOfMatch = lotto.getNumberOfMatch(Lotto.createManualLotto(winLottoNumber));
 
-            RankType rankType = RankType.findRankType(numberOfMatch, lotto.isMatchNumber(new Number(bonusNumber)));
+            RankType rankType = RankType.findRankType(numberOfMatch, lotto.isMatchNumber(Number.from(bonusNumber)));
             setStatisticsMap(rankType);
         }
         return statisticsMap;
