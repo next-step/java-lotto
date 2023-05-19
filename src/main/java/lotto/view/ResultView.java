@@ -9,8 +9,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ResultView {
-    public void viewBuyingResult(List<LottoTicket> lottoTickets) {
-        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
+    public void viewBuyingResult(List<LottoTicket> lottoTickets, int manualTicketCount) {
+        System.out.println("수동으로 " + manualTicketCount + "장, 자동으로 "
+                + (lottoTickets.size() - manualTicketCount) + "개를 구매했습니다.");
 
         lottoTickets.stream().forEach(n -> System.out.println(n.toString()));
 
