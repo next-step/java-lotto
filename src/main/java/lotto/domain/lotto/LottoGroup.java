@@ -12,7 +12,7 @@ public class LottoGroup {
     public LottoGroup(ManualLottoBundle manualLottoBundle, LottoBundle autoLottoBundle) {
         this.manualLottoBundle = manualLottoBundle;
         this.autoLottoBundle = autoLottoBundle;
-        this.groupBundle = sumBundles(manualLottoBundle, autoLottoBundle);
+        this.groupBundle = sumBundles();
     }
 
     public LottoBundle getGroupBundle() {
@@ -27,7 +27,7 @@ public class LottoGroup {
         return autoLottoBundle.unfoldLottoBundle();
     }
 
-    private LottoBundle sumBundles(ManualLottoBundle manualLottoBundle, LottoBundle autoLottoBundle) {
+    private LottoBundle sumBundles() {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.addAll(manualLottoBundle.unfoldLottoBundle());
         lottoList.addAll(autoLottoBundle.unfoldLottoBundle());
