@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
 
     FIRST_PLACE("FIRST_PLACE", 6, 2_000_000_000),
@@ -19,8 +21,33 @@ public enum Rank {
         this.winnings = winnings;
     }
 
-    public String getWinningTitle() {
-        return winningTitle;
+    public static Rank findRank(int winningCount, boolean hasBonusNumber) {
+        if (isSecondPlace(winningCount, hasBonusNumber)) {
+            return SECOND_PLACE;
+        }
+        if (isThirdPlace(winningCount, hasBonusNumber)) {
+            return THIRD_PLACE;
+        }
+        return findCertainPlace(winningCount);
+    }
+
+    private static Rank findCertainPlace(int winningCount) {
+        return Arrays.stream(values())
+                .filter(rank -> rank.isWinningCount(winningCount))
+                .findFirst()
+                .orElse(LOST);
+    }
+
+    private boolean isWinningCount(int winningCount) {
+        return this.winningCount == winningCount;
+    }
+
+    private static boolean isThirdPlace(int winningCount, boolean hasBonusNumber) {
+        return winningCount == THIRD_PLACE.winningCount && !hasBonusNumber;
+    }
+
+    private static boolean isSecondPlace(int winningCount, boolean hasBonusNumber) {
+        return winningCount == SECOND_PLACE.winningCount && hasBonusNumber;
     }
 
     public int getWinningCount() {
