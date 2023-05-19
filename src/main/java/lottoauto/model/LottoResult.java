@@ -33,7 +33,7 @@ public class LottoResult {
             summary += reward.getReward() * matchFrequencyMap.getOrDefault(reward, 0);
         }
 
-        return Math.round(summary / price);
+        return Math.round((summary / price) / 100);
     }
 
     public List<WinningReward> getMatchCount() {
