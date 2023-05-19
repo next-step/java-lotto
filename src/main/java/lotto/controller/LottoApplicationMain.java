@@ -1,6 +1,11 @@
-package lotto;
+package lotto.controller;
 
-import lotto.domian.*;
+import lotto.domain.lotto.*;
+import lotto.domain.lotto.ManualLottoBundle;
+import lotto.domain.result.MultiplyStrategy;
+import lotto.domain.result.ProfitCalculator;
+import lotto.domain.result.Record;
+import lotto.domain.result.WinNumber;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
 
@@ -13,12 +18,13 @@ public class LottoApplicationMain {
         int manualOrderCount = InputView.questionManualOrder();
 
         Store store = new Store();
-        Money change = store.orderManual(new Money(purchaseMoney), manualOrderCount);
+        Money changes = store.orderManual(new Money(purchaseMoney), manualOrderCount);
         List<String> manualLottos = InputView.questionLottoNumbers(manualOrderCount);
 
         LottoCompany lottoCompany = LottoCompany.getInstance();
         ManualLottoBundle manualLottoBundle = lottoCompany.makeManualBundle(manualLottos);
-        LottoBundle autoLottoBundle = store.order(change);
+
+        LottoBundle autoLottoBundle = store.order(changes);
         LottoGroup lottoGroup = new LottoGroup(manualLottoBundle, autoLottoBundle);
 
         OutputView.showLottoGroup(lottoGroup);

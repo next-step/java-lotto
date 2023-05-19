@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import lotto.domian.Lotto;
-import lotto.domian.LottoBundle;
-import lotto.domian.Money;
-import lotto.domian.Store;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoBundle;
+import lotto.domain.lotto.Money;
+import lotto.domain.lotto.Store;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

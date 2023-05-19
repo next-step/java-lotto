@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import lotto.domian.Lotto;
-import lotto.domian.LottoNumber;
-import lotto.domian.Rank;
-import lotto.domian.WinNumber;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.result.Rank;
+import lotto.domain.result.WinNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

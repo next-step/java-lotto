@@ -1,4 +1,6 @@
-package lotto.domian;
+package lotto.domain.lotto;
+
+import lotto.domain.result.WinNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;

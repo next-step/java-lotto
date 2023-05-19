@@ -1,4 +1,7 @@
-package lotto.domian;
+package lotto.domain.result;
+
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoBundle;
 
 import java.util.EnumMap;
 import java.util.List;

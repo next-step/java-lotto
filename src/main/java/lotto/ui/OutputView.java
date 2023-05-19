@@ -1,6 +1,10 @@
 package lotto.ui;
 
-import lotto.domian.*;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoGroup;
+import lotto.domain.result.ProfitRate;
+import lotto.domain.result.Rank;
+import lotto.domain.result.Record;
 
 import java.util.Arrays;
 import java.util.Comparator;
