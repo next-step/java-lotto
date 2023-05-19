@@ -20,7 +20,6 @@ public class LottoBundle {
         for (int i = 0; i < count; i++) {
             lottoList.add(makeRandomLotto());
         }
-//        return new LottoBundle(lottoList);
         this.lottoList = lottoList;
     }
 
