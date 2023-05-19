@@ -6,6 +6,7 @@ import step2.domain.LottoResultReport;
 import step2.view.InputView;
 import step2.view.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGameController {
@@ -15,15 +16,18 @@ public class LottoGameController {
     public void playLottoGame() {
 
         int money = InputView.readAmountOfPurchase();
-        int gameCount = lottoGames.calculateBuyingTicketCount(money);
-        ResultView.printMessage(gameCount + "개를 구매했습니다.");
-        if (gameCount == 0) {
+        int manualLottoTicketCount = InputView.readCountOfManualTicket();
+        List<LottoTicket> manualLottoTickets = buyManualTickets(manualLottoTicketCount);
+
+        int automaticTicketCount = lottoGames.calculateBuyingTicketCount(money, manualLottoTicketCount);
+        ResultView.printNumberOfTickets(manualLottoTicketCount, automaticTicketCount);
+        if (automaticTicketCount == 0 && manualLottoTicketCount == 0) {
             return;
         }
 
-        List<LottoTicket> lottoTickets = lottoGames.buyLottoGame(gameCount);
+        List<LottoTicket> lottoTickets = lottoGames.buyLottoGame(automaticTicketCount);
         ResultView.printLottoTicket(lottoTickets);
-        LottoTicket winningTicket = lottoGames.readWinningNumber(InputView.readWinningNumbers());
+        LottoTicket winningTicket = lottoGames.toLottoTicket(InputView.readWinningNumbers());
         int bonusNumber = InputView.readBonusNumber();
 
         ResultView.printBlankLine();
@@ -35,7 +39,16 @@ public class LottoGameController {
         }
 
         ResultView.printResultReport(lottoResultReport);
-        double profit = lottoResultReport.calculateProfit(gameCount);
+        double profit = lottoResultReport.calculateProfit(manualLottoTicketCount + automaticTicketCount);
         ResultView.printMessage("총 수익률은 " + profit + "입니다.");
+    }
+
+    private List<LottoTicket> buyManualTickets(int manualTicketCount) {
+        ResultView.printMessage("수동으로 구매할 번호를 입력해 주세요");
+        List<LottoTicket> manualLottoTickets = new ArrayList<>();
+        for (int i = 0; i < manualTicketCount; i++) {
+            manualLottoTickets.add(lottoGames.toLottoTicket(InputView.readManualTicketNumbers(manualTicketCount)));
+        }
+        return manualLottoTickets;
     }
 }

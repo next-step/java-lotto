@@ -8,6 +8,10 @@ import java.util.List;
 
 public class ResultView {
 
+    public static void printNumberOfTickets(int manualTicketCount, int automaticTicketCount) {
+        System.out.println("수동으로 " + manualTicketCount + "장, 자동으로 " + automaticTicketCount + "개를 구매했습니다.");
+    }
+
     public static void printMessage(String message) {
         System.out.println(message);
     }

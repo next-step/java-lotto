@@ -7,7 +7,8 @@ public class LottoGames {
     public LottoGames() {
     }
 
-    public int calculateBuyingTicketCount(int money) {
+    public int calculateBuyingTicketCount(int money, int manualLottoTicketCount) {
+        money -= manualLottoTicketCount * LottoCommonValue.DEFAULT_LOTTO_PRICE.value();
         return new Integer(money / LottoCommonValue.DEFAULT_LOTTO_PRICE.value());
     }
 
@@ -23,7 +24,7 @@ public class LottoGames {
         return new LottoTicket(RandomIntegersGenerator.createNumberList());
     }
 
-    public LottoTicket readWinningNumber(String stringNumber) {
+    public LottoTicket toLottoTicket(String stringNumber) {
         String[] numbers = splitByDelimiter(stringNumber);
         Set<Integer> integers = toSet(numbers);
         if (integers.size() != LottoCommonValue.DEFAULT_LOTTO_NUMBER_COUNT.value()) {

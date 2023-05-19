@@ -1,5 +1,8 @@
 package step2.view;
 
+import step2.domain.LottoTicket;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -34,5 +37,21 @@ public class InputView {
     private static String readString(String message) {
         System.out.println(message);
         return scanner.nextLine();
+    }
+
+    private static String readString() {
+        return scanner.nextLine();
+    }
+
+    public static int readCountOfManualTicket() {
+        return readInt("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static String readManualTicketNumbers(int manualTicketCount) {
+        return readString();
+    }
+
+    private static String readManualTicketNumber() {
+        return readString();
     }
 }
