@@ -32,11 +32,9 @@ public class InputView {
         return purchaseAmount;
     }
 
-    public String inputFirstLottoNumber() {
+    public Lotto inputWinningLottoNumber() {
         System.out.println(FIRST_LOTTO_NUMBER);
-        String lottoNumber =  scanner.nextLine();
-        validateNullOrEmpty(lottoNumber);
-        return lottoNumber;
+        return createLotto();
     }
 
     public String inputBonusLottoNumber() {

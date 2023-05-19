@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.number.LottoNumber;
-import lotto.domain.number.LottoNumberCache;
+import lotto.util.Util;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,8 +20,8 @@ public class Lotto {
     public Lotto(String[] lottoNumbers) {
         lottoSizeCheck(lottoNumbers);
         Arrays.stream(lottoNumbers).forEach(lottoNumber ->
-            this.lottoNumbers.add(LottoNumberCache.valueOf(lottoNumber))
-        );
+            this.lottoNumbers.add(new LottoNumber(Util.convertInt(lottoNumber))
+        ));
     }
 
     public int findMatchCount(Lotto winningLotto) {
