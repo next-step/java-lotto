@@ -18,12 +18,12 @@ public class LottoTest {
     @BeforeEach
     public void setUp() {
         lottoTicket = new HashSet<>();
-        lottoTicket.add(new LottoNumber(1));
-        lottoTicket.add(new LottoNumber(2));
-        lottoTicket.add(new LottoNumber(3));
-        lottoTicket.add(new LottoNumber(4));
-        lottoTicket.add(new LottoNumber(5));
-        lottoTicket.add(new LottoNumber(6));
+        lottoTicket.add(LottoNumber.of(1));
+        lottoTicket.add(LottoNumber.of(2));
+        lottoTicket.add(LottoNumber.of(3));
+        lottoTicket.add(LottoNumber.of(4));
+        lottoTicket.add(LottoNumber.of(5));
+        lottoTicket.add(LottoNumber.of(6));
     }
 
     @DisplayName("로또 숫자가 중복이 되면 예외를 던진다.")
@@ -54,7 +54,7 @@ public class LottoTest {
     public void haveNumber_isTrue_Correct() {
         Lotto lotto = new Lotto(lottoTicket);
 
-        Assertions.assertThat(lotto.haveNumber(new LottoNumber(1))).isTrue();
+        Assertions.assertThat(lotto.haveNumber(LottoNumber.of(1))).isTrue();
     }
 
 }

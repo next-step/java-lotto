@@ -11,7 +11,7 @@ public class LottoNumberTest {
     @Test
     public void lottoNumber_RangeInBetween1And45_CreateSuccess() {
         int number = 45;
-        LottoNumber lottoNumber = new LottoNumber(number);
+        LottoNumber lottoNumber = LottoNumber.of(number);
 
         Assertions.assertThat(lottoNumber.getNumber()).isEqualTo(45);
     }
@@ -21,15 +21,15 @@ public class LottoNumberTest {
     public void lottoNumber_RangeInBetween1And45_IfNotThrowException() {
         int number = 46;
         Assertions.assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumber(number));
+                .isThrownBy(() -> LottoNumber.of(number));
     }
 
     @DisplayName("숫자형태의 로또번호가 아니라면 예외를 던진다.")
     @Test
-    public void lottoNubmer_NotNumericFormat_ThrowException() {
+    public void lottoNumber_NotNumericFormat_ThrowException() {
         String number = "a";
         Assertions.assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumber(number));
+                .isThrownBy(() -> LottoNumber.of(number));
     }
 
 }

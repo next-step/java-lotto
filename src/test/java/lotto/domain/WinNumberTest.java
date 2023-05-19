@@ -17,7 +17,7 @@ public class WinNumberTest {
 
     @BeforeEach
     public void setUp() {
-        winNumber = new WinNumber(new Lotto(Arrays.asList(1,2,3,4,5,6)), new LottoNumber(45));
+        winNumber = new WinNumber(new Lotto(Arrays.asList(1,2,3,4,5,6)), LottoNumber.of(45));
     }
 
     @DisplayName("로또번호중에 맞은 갯수를 구할 수 있다.")

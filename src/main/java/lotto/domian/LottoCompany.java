@@ -20,7 +20,7 @@ public class LottoCompany {
     }
 
     public WinNumber announce(String stringNumbers, String bonusWinNumber) {
-        return new WinNumber(convertToLotto(stringNumbers), new LottoNumber(bonusWinNumber));
+        return new WinNumber(convertToLotto(stringNumbers), LottoNumber.of(bonusWinNumber));
     }
 
     public ManualLottoBundle makeManualBundle(List<String> answerStrings) {
@@ -61,7 +61,7 @@ public class LottoCompany {
 
     private Set<LottoNumber> makeLottoNumber(List<Integer> numberList) {
         return numberList.stream()
-                .map(number -> new LottoNumber(number))
+                .map(number -> LottoNumber.of(number))
                 .collect(Collectors.toSet());
     }
 
@@ -73,7 +73,7 @@ public class LottoCompany {
         return Stream.of(splitedNumbers)
                 .map(string -> {
                     string = string.trim();
-                    return new LottoNumber(string);
+                    return LottoNumber.of(string);
                 })
                 .collect(Collectors.toSet());
     }

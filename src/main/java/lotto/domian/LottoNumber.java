@@ -6,20 +6,23 @@ public class LottoNumber {
     private static final int LOTTO_MINIMUM_VALUE = 1;
     private final int number;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         checkNumberRange(number);
         this.number = number;
     }
 
-    public LottoNumber(String number) {
-        number = number.trim();
-        this.number = convertToNumber(number);
+    public static LottoNumber of(String number) {
+        return new LottoNumber(convertToNumber(number));
     }
 
-    private int convertToNumber(String number) {
+    public static LottoNumber of(int number) {
+        return new LottoNumber(number);
+    }
+
+    private static int convertToNumber(String number) {
         int result = 0;
         try {
-            result = Integer.parseInt(number);
+            result = Integer.parseInt(number.trim());
         } catch (NumberFormatException e) {
             throw new NumberFormatException("로또 번호는 숫자형태만 가능합니다. " + number + "는 숫자 형태가 아닙니다.");
         }
