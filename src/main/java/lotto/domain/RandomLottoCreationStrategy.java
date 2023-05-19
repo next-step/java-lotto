@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -29,19 +27,20 @@ public class RandomLottoCreationStrategy implements LottoCreationStrategy {
     }
 
     private Lotto createLotto() {
-        shuffleCandidateNumbers();
-        return new Lotto(findSixLengthAndSortedLotto());
+        shuffleLottoNumbers();
+        return new Lotto(new LinkedHashSet<>(findSixLengthLotto()));
     }
 
-    private List<Integer> findSixLengthAndSortedLotto() {
+    private List<LottoNumber> findSixLengthLotto() {
         return LOTTO_NUMBERS.stream()
                 .map(LottoNumber::getNumber)
                 .limit(LOTTO_LENGTH_UPPER_BOUND)
                 .sorted()
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
-    private void shuffleCandidateNumbers() {
+    private void shuffleLottoNumbers() {
         Collections.shuffle(LOTTO_NUMBERS);
     }
 }
