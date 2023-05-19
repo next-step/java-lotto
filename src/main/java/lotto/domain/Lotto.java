@@ -41,11 +41,15 @@ public class Lotto {
         return IntegerList.stream().collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::of));
     }
 
-    public Rank getRank(Lotto winningLotto) {
+    public Rank getRank(Lotto winningLotto, Integer bonusNumber) {
         return Rank.valueOf(winningLotto.lotto.stream()
                 .filter(lotto::contains)
                 .map(e -> 1)
-                .reduce(0, Integer::sum));
+                .reduce(0, Integer::sum), matchBonus(bonusNumber));
+    }
+
+    private boolean matchBonus(Integer bonusNumber) {
+        return lotto.stream().anyMatch(number -> number.equals(bonusNumber));
     }
 
     @Override

@@ -16,7 +16,7 @@ class ExceptionHandlerTest {
     @DisplayName(value = "입력 로또 번호 개수가 안 맞을 경우 검사")
     void test1() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            ExceptionHandler.validLottoSize(Arrays.asList(1,2,3,4));
+            ExceptionHandler.validLottoSize(Arrays.asList(1, 2, 3, 4));
         });
     }
 
@@ -24,7 +24,7 @@ class ExceptionHandlerTest {
     @DisplayName(value = "입력 로또 번호 개수가 안 맞을 경우 검사")
     void test2() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            ExceptionHandler.validLottoSize(Arrays.asList(1,2,3,4,5,6,7));
+            ExceptionHandler.validLottoSize(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
         });
     }
 
@@ -32,7 +32,7 @@ class ExceptionHandlerTest {
     @DisplayName(value = "입력 로또 번호 범위가 안 맞을 경우 검사")
     void test3() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            ExceptionHandler.validLottoNumberRange(Arrays.asList(0,1,2,3,4,5));
+            ExceptionHandler.validLottoNumberRange(Arrays.asList(0, 1, 2, 3, 4, 5));
         });
     }
 
@@ -40,7 +40,7 @@ class ExceptionHandlerTest {
     @DisplayName(value = "입력 로또 번호 범위가 안 맞을 경우 검사")
     void test4() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            ExceptionHandler.validLottoNumberRange(Arrays.asList(1,2,3,4,5,46));
+            ExceptionHandler.validLottoNumberRange(Arrays.asList(1, 2, 3, 4, 5, 46));
         });
     }
 
@@ -49,6 +49,14 @@ class ExceptionHandlerTest {
     void test5() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             ExceptionHandler.validPrice(900);
+        });
+    }
+
+    @Test
+    @DisplayName(value = "입력 금액이 천원 이하일 경우")
+    void test6() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            ExceptionHandler.validDuplicatedBonusNumber(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)), 6);
         });
     }
 }

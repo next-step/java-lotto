@@ -30,11 +30,19 @@ public class ExceptionHandler {
     }
 
     public static void validDuplicatedLottoNumbers(List<Integer> lottoNumbers) {
-        boolean duplicated = lottoNumbers.stream()
+        boolean isDuplicate = lottoNumbers.stream()
                 .distinct()
                 .count() != lottoNumbers.size();
-        if (duplicated) {
+        if (isDuplicate) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+        }
+    }
+
+    public static void validDuplicatedBonusNumber(Lotto winningLotto, Integer bonusNumber) {
+        System.out.println("winningLotto = " + winningLotto);
+        boolean isDuplicate = winningLotto.lotto.stream().anyMatch(number -> number.equals(bonusNumber));
+        if (isDuplicate) {
+            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
         }
     }
 }

@@ -1,6 +1,5 @@
 package lotto.domain.result;
 
-import lotto.domain.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,6 +20,7 @@ class LottoResultTest {
                 , Rank.SECOND, Rank.SECOND.initialRank()
                 , Rank.THIRD, Rank.THIRD.initialRank()
                 , Rank.FOURTH, Rank.FOURTH.initialRank()
+                , Rank.FIFTH, Rank.FIFTH.initialRank()
                 , Rank.NO_RANK, Rank.NO_RANK.initialRank()));
         assertThat(of).isEqualTo(lottoResult);
     }
@@ -29,7 +29,7 @@ class LottoResultTest {
     @CsvSource(value = {"3:1", "2:1", "1:1"}, delimiter = ':')
     void test2(int hit, int expect) {
         LottoResult lottoResult = LottoResult.of();
-        Rank rank = Rank.valueOf(hit);
+        Rank rank = Rank.valueOf(hit, false);
         lottoResult.win(rank);
 
         assertThat(lottoResult.getLottoResult().get(rank)).isEqualTo(expect);

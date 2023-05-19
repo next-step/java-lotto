@@ -21,10 +21,11 @@ public class Lottos {
         return lottos.size();
     }
 
-    public LottoResult getLottoResult(Lotto winningNumber) {
+    public LottoResult getLottoResult(Lotto winningLotto, Integer bonusNumber) {
+        ExceptionHandler.validDuplicatedBonusNumber(winningLotto, bonusNumber);
         LottoResult lottoResult = LottoResult.of();
         for (Lotto lotto : lottos) {
-            lottoResult.win(lotto.getRank(winningNumber));
+            lottoResult.win(lotto.getRank(winningLotto, bonusNumber));
         }
         return lottoResult;
     }

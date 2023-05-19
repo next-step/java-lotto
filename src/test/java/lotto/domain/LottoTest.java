@@ -24,7 +24,7 @@ class LottoTest {
     void test2() {
         Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto winningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 7));
-        assertThat(lotto.getRank(winningLotto)).isEqualTo(Rank.SECOND);
+        assertThat(lotto.getRank(winningLotto, 6)).isEqualTo(Rank.SECOND);
     }
 
     @Test
