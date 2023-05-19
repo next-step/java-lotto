@@ -51,19 +51,8 @@ public class StringCalculator {
         if ("".equals(operator)) {
             return num;
         }
-        if ("+".equals(operator)) {
-            return result + num;
-        }
-        if ("-".equals(operator)) {
-            return result - num;
-        }
-        if ("*".equals(operator)) {
-            return result * num;
-        }
-        if ("/".equals(operator)) {
-            return result / num;
-        }
 
-        throw new IllegalArgumentException(ERRMSG_ONLY_NUMBERS_AND_OPERATORS_ALLOWED);
+        Operator op = Operator.fromSymbol(operator);
+        return op.apply(result, num);
     }
 }
