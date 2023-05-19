@@ -1,8 +1,8 @@
 package step2.controller;
 
-import step2.domain.LottoTicket;
 import step2.domain.LottoGames;
 import step2.domain.LottoResultReport;
+import step2.domain.LottoTicket;
 import step2.view.InputView;
 import step2.view.ResultView;
 
@@ -25,9 +25,9 @@ public class LottoGameController {
             return;
         }
 
-        List<LottoTicket> automaticLottoTickets = lottoGames.buyAutomaticLottoTickets(automaticTicketCount);
+        List<LottoTicket> automaticLottoTickets = getBuyAutomaticTickets(automaticTicketCount);
         ResultView.printLottoTicket(automaticLottoTickets);
-        LottoTicket winningTicket = lottoGames.toLottoTicket(InputView.readWinningNumbers());
+        LottoTicket winningTicket = readWinningTicket();
         int bonusNumber = InputView.readBonusNumber();
 
         ResultView.printBlankLine();
@@ -44,9 +44,18 @@ public class LottoGameController {
         ResultView.printMessage("수동으로 구매할 번호를 입력해 주세요");
         List<LottoTicket> manualLottoTickets = new ArrayList<>();
         for (int i = 0; i < manualTicketCount; i++) {
-            manualLottoTickets.add(lottoGames.toLottoTicket(InputView.readManualTicketNumbers(manualTicketCount)));
+            manualLottoTickets.add(lottoGames.toLottoTicket(InputView.readManualTicketNumbers()));
         }
         return manualLottoTickets;
+    }
+
+    private List<LottoTicket> getBuyAutomaticTickets(int automaticTicketCount) {
+        return lottoGames.buyAutomaticLottoTickets(automaticTicketCount);
+    }
+
+    private LottoTicket readWinningTicket() {
+        ResultView.printMessage("지난 주 당첨 번호를 입력해 주세요");
+        return lottoGames.toLottoTicket(InputView.readWinningNumbers());
     }
 
     private LottoResultReport getLottoResultReport(List<LottoTicket> manualLottoTickets, List<LottoTicket> automaticLottoTickets, LottoTicket winningTicket, int bonusNumber) {
