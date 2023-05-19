@@ -1,8 +1,11 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -15,17 +18,23 @@ public class InputView {
 
     public int requestPurchaseAmount() {
         System.out.println(REQUEST_PURCHASE_AMOUNT_INPUT);
-        return Integer.parseInt(SCANNER.nextLine());
+        return getIntNumber();
     }
 
-    public List<Integer> requestWinningNumbers() {
+    public Set<LottoNumber> requestWinningNumbers() {
         System.out.println(REQUEST_WINNING_NUMBERS_INPUT);
-        return Arrays.stream(SCANNER.nextLine().split(SPLITTER)).map(Integer::parseInt).collect(Collectors.toList());
+        return Arrays.stream(SCANNER.nextLine().split(SPLITTER))
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
     }
 
-    public int requestBonusNumber() {
+    public LottoNumber requestBonusNumber() {
         System.out.println(REQUEST_BONUS_NUMBER_INPUT);
+        return new LottoNumber(getIntNumber());
+    }
+
+    private int getIntNumber() {
         return Integer.parseInt(SCANNER.nextLine());
     }
 }
-
