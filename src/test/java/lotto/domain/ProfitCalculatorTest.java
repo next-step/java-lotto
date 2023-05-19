@@ -29,7 +29,7 @@ public class ProfitCalculatorTest {
         WinNumber winNumber = new WinNumber(new Lotto(Arrays.asList(1, 2, 3, 41, 42, 43)), LottoNumber.of(30));
         Record record = Record.extractRecord(lottoBundle, winNumber);
 
-        ProfitCalculator profitCalculator = new ProfitCalculator(new MultiplyStrategy());
+        ProfitCalculator profitCalculator = new ProfitCalculator(new MultiplyProfitRate());
         ProfitRate profitRate = profitCalculator.calculate(record.getRecord(), 14000);
         double value = profitRate.value();
 

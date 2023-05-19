@@ -15,9 +15,11 @@ public class LottoService {
     }
 
     public LottoGroup makeLottoGroup() {
-        Money changes = Store.orderManual(new Money(lottoRequestDto.getPurchaseMoney())
+        Store store = new Store(new DivideLottoCount());
+
+        Money changes = store.orderManual(new Money(lottoRequestDto.getPurchaseMoney())
                 , lottoRequestDto.getManualOrderCount());
-        LottoBundle autoLottoBundle = Store.order(changes);
+        LottoBundle autoLottoBundle = store.order(changes);
         ManualLottoBundle manualLottoBundle =
                 new ManualLottoBundle(lottoRequestDto.getManualLottos());
 
@@ -30,7 +32,7 @@ public class LottoService {
     }
 
     public ProfitRate calculate(Map<Rank, Integer> rankMap) {
-        ProfitCalculator profitCalculator = new ProfitCalculator(new MultiplyStrategy());
+        ProfitCalculator profitCalculator = new ProfitCalculator(new MultiplyProfitRate());
         return profitCalculator.calculate(rankMap, lottoRequestDto.getPurchaseMoney());
     }
 

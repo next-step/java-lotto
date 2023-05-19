@@ -29,7 +29,7 @@ public class LottoNumber {
     public static LottoNumber of(int number) {
         LottoNumber lottoNumber = lottoNumbers.get(number);
         if (Objects.isNull(lottoNumber)) {
-            throw new IllegalArgumentException("로또숫자는 1 ~ 45 사이의 숫자여야 합니다. 에러 숫자 > " + number);
+            throw new IllegalArgumentException("로또숫자는 1 ~ 45 사이의 숫자여야 합니다. 에러 숫자 : " + number);
         }
         return lottoNumber;
     }

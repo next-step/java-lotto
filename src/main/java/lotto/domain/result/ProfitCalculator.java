@@ -4,13 +4,13 @@ import java.util.Map;
 
 public class ProfitCalculator {
 
-    private final CalculableStrategy calculableStrategy;
+    private final CalculableProfitRate calculableProfitRate;
 
-    public ProfitCalculator(CalculableStrategy calculableStrategy) {
-        this.calculableStrategy = calculableStrategy;
+    public ProfitCalculator(CalculableProfitRate calculableProfitRate) {
+        this.calculableProfitRate = calculableProfitRate;
     }
 
     public ProfitRate calculate(Map<Rank, Integer> rankMap, int purchaseMoney) {
-        return calculableStrategy.calculate(rankMap, purchaseMoney);
+        return calculableProfitRate.calculate(rankMap, purchaseMoney);
     }
 }

@@ -2,7 +2,7 @@ package lotto.domain.result;
 
 import java.util.Map;
 
-public class MultiplyStrategy implements CalculableStrategy {
+public class MultiplyProfitRate implements CalculableProfitRate {
 
     @Override
     public ProfitRate calculate(Map<Rank, Integer> rankMap, int purchaseMoney) {
