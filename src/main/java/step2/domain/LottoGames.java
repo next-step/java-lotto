@@ -12,7 +12,7 @@ public class LottoGames {
         return new Integer(money / LottoCommonValue.DEFAULT_LOTTO_PRICE.value());
     }
 
-    public List<LottoTicket> buyLottoGame(int gameCount) {
+    public List<LottoTicket> buyAutomaticLottoTickets(int gameCount) {
         List<LottoTicket> lottoTickets = new ArrayList<>(gameCount);
         for (int i = 0; i < gameCount; i++) {
             lottoTickets.add(createLottoGame());

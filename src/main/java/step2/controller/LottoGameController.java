@@ -25,18 +25,15 @@ public class LottoGameController {
             return;
         }
 
-        List<LottoTicket> lottoTickets = lottoGames.buyLottoGame(automaticTicketCount);
-        ResultView.printLottoTicket(lottoTickets);
+        List<LottoTicket> automaticLottoTickets = lottoGames.buyAutomaticLottoTickets(automaticTicketCount);
+        ResultView.printLottoTicket(automaticLottoTickets);
         LottoTicket winningTicket = lottoGames.toLottoTicket(InputView.readWinningNumbers());
         int bonusNumber = InputView.readBonusNumber();
 
         ResultView.printBlankLine();
         ResultView.printMessage("당첨 통계");
 
-        LottoResultReport lottoResultReport = new LottoResultReport();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            lottoResultReport.recordRank(lottoTicket.checkLottoTicket(winningTicket, bonusNumber));
-        }
+        LottoResultReport lottoResultReport = getLottoResultReport(manualLottoTickets, automaticLottoTickets, winningTicket, bonusNumber);
 
         ResultView.printResultReport(lottoResultReport);
         double profit = lottoResultReport.calculateProfit(manualLottoTicketCount + automaticTicketCount);
@@ -50,5 +47,17 @@ public class LottoGameController {
             manualLottoTickets.add(lottoGames.toLottoTicket(InputView.readManualTicketNumbers(manualTicketCount)));
         }
         return manualLottoTickets;
+    }
+
+    private LottoResultReport getLottoResultReport(List<LottoTicket> manualLottoTickets, List<LottoTicket> automaticLottoTickets, LottoTicket winningTicket, int bonusNumber) {
+        LottoResultReport lottoResultReport = new LottoResultReport();
+        for (LottoTicket lottoTicket : manualLottoTickets) {
+            lottoResultReport.recordRank(lottoTicket.checkLottoTicket(winningTicket, bonusNumber));
+        }
+
+        for (LottoTicket lottoTicket : automaticLottoTickets) {
+            lottoResultReport.recordRank(lottoTicket.checkLottoTicket(winningTicket, bonusNumber));
+        }
+        return lottoResultReport;
     }
 }

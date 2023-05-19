@@ -22,7 +22,7 @@ class LottoGamesTest {
     @ParameterizedTest
     @ValueSource(ints = {12, 100, 30, 17})
     public void n개의_게임_생성(int gameCount) throws Exception {
-        assertThat(lottoGames.buyLottoGame(gameCount)).size()
+        assertThat(lottoGames.buyAutomaticLottoTickets(gameCount)).size()
                 .isEqualTo(gameCount);
     }
 
