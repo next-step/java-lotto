@@ -1,11 +1,13 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -21,8 +23,15 @@ public class ResultView {
     }
 
     public void showLottos(List<Lotto> createdLottos) {
-        createdLottos.forEach(lotto -> System.out.println(lotto.getLottoNumbers()));
+        createdLottos.forEach(ResultView::showLotto);
         System.out.println();
+    }
+
+    private static void showLotto(Lotto lotto) {
+        List<Integer> numbers = lotto.getLottoNumbers().stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
+        System.out.println(numbers);
     }
 
     public void showResults(LottoResult lottoResult) {
