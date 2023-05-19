@@ -15,7 +15,9 @@ public class Lotto {
     }
 
     public Lotto(String[] lottoNumbers) {
-        this.lottoNumbers.addAll(List.of(LottoNumberCache.valueOf(lottoNumbers[0]), LottoNumberCache.valueOf(lottoNumbers[1]), LottoNumberCache.valueOf(lottoNumbers[2]), LottoNumberCache.valueOf(lottoNumbers[3]), LottoNumberCache.valueOf(lottoNumbers[4]), LottoNumberCache.valueOf(lottoNumbers[5])));
+        Arrays.stream(lottoNumbers).forEach(lottoNumber ->
+            this.lottoNumbers.add(LottoNumberCache.valueOf(lottoNumber))
+        );
     }
 
     public int findMatchCount(WinningLotto winningLotto) {

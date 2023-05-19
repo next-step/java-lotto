@@ -1,12 +1,10 @@
 package lotto.domain;
 
 import lotto.domain.generator.AutoLottoGenerator;
+import lotto.domain.generator.LottoGenerator;
 import lotto.domain.number.LottoNumber;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoGames {
@@ -14,10 +12,11 @@ public class LottoGames {
     private static final String WRONG_RESULT_SIZE = "로또 결과값이 0 입니다.";
     private static final int LOTTO_PRICE = 1000;
     private final List<Lotto> lottoGameList = new ArrayList<>();
-    private final Map<Rank, Integer> lottoResult = new HashMap<>();
+    private final EnumMap<Rank, Integer> lottoResult = new EnumMap<>(Rank.class);
 
     public LottoGames(LottoPurchase lottoPurchase, List<Lotto> manualLotto) {
-        lottoPurchase.autoStream().forEach(i -> lottoGameList.add(new Lotto(new AutoLottoGenerator())));
+        LottoGenerator lottoGenerator = new AutoLottoGenerator();
+        lottoPurchase.autoStream().forEach(i -> lottoGameList.add(new Lotto(lottoGenerator)));
         lottoGameList.addAll(manualLotto);
     }
 
