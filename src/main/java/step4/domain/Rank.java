@@ -32,7 +32,7 @@ public enum Rank {
             numbersMatched = 0;
         }
         Rank result = matchedCountResultMap().get(numbersMatched);
-        if (result.equals(FOURTH) && matchBonus) {
+        if (result.equals(THIRD) && matchBonus) {
             result = SECOND;
         }
         return result;

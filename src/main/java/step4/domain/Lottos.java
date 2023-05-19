@@ -4,20 +4,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    private final List<Lotto> lottoList = new ArrayList<>();
+    private final List<Lotto> lottoList;
+
+    public Lottos(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
+    }
 
     public Lottos(int purchaseAmount) {
-        this(purchaseAmount, new SimpleNumberGenerator());
+        this.lottoList = generateNumbers(purchaseAmount);
     }
 
     public Lottos(int purchaseAmount, NumberGenerator numberGenerator) {
-        for (int i = 0; i < purchaseAmount; i++) {
-            lottoList.add(new Lotto(numberGenerator.generateNumbers()));
-        }
+        this.lottoList = generateNumbers(purchaseAmount, numberGenerator);
     }
 
-    public Lottos(List<Lotto> lottoList) {
-        this.lottoList.addAll(lottoList);
+    public List<Lotto> generateNumbers(int purchaseAmount) {
+        return generateNumbers(purchaseAmount, new SimpleNumberGenerator());
+    }
+
+    public List<Lotto> generateNumbers(int purchaseAmount, NumberGenerator numberGenerator) {
+        List<Lotto> newLottoList = new ArrayList<>();
+        for (int i = 0; i < purchaseAmount; i++) {
+            newLottoList.add(new Lotto(numberGenerator.generateNumbers()));
+        }
+        return newLottoList;
+    }
+
+    public Lottos(List<List<Integer>> manualLottos, int purchaseAmount) {
+        List<Lotto> newLottoList = toLottoList(manualLottos);
+        newLottoList.addAll(generateNumbers(purchaseAmount));
+        this.lottoList = newLottoList;
+    }
+
+    private List<Lotto> toLottoList(List<List<Integer>> manualLottos) {
+        List<Lotto> newLottoList = new ArrayList<>();
+        for (List<Integer> manualLotto : manualLottos) {
+            newLottoList.add(Lotto.of(manualLotto));
+        }
+        return newLottoList;
     }
 
     public int getAmount() {

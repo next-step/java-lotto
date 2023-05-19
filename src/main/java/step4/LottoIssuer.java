@@ -9,11 +9,12 @@ import java.util.List;
 
 public class LottoIssuer {
     public static void main(String[] args) {
-
         int purchasePrice = InputView.getInputOfPurchasePrice();
-        int purchaseAmount = InputView.printPurchaseAmount(purchasePrice);
+        int numberOfManualLotto = InputView.getInputOfNumberOfManualLotto(purchasePrice);
+        List<List<Integer>> manualLottos = InputView.getInputOfManualLottoNumbers(numberOfManualLotto);
+        int numberOfAutoLotto = InputView.printPurchaseAmount(numberOfManualLotto, purchasePrice);
 
-        LottoGame lottoGame = new LottoGame(purchaseAmount);
+        LottoGame lottoGame = new LottoGame(manualLottos, numberOfAutoLotto);
         LottosView.printLottos(lottoGame.getLottos());
 
         List<Integer> winningNumbers = InputView.getInputOfWinningNumbers();

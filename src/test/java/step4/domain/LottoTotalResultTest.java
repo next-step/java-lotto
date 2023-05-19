@@ -14,8 +14,7 @@ public class LottoTotalResultTest {
     public void getReturnTest(Rank rank) {
         int purchasePrice = 10000;
         LottosTotalResult lottosTotalResult = new LottosTotalResult();
-        int numberOfMatched = rank.equals(Rank.SECOND) ? rank.numbersToBeMatched - 1 : rank.numbersToBeMatched;
-        lottosTotalResult.plusOne(numberOfMatched, rank.equals(Rank.SECOND));
+        lottosTotalResult.plusOne(rank.numbersToBeMatched, rank.equals(Rank.SECOND));
         assertThat(lottosTotalResult.getRateOfReturn(purchasePrice)).isEqualTo((double) rank.winningPrice / purchasePrice);
     }
 

@@ -29,7 +29,7 @@ public class LottosTest {
         lottoList.add(Lotto.of(List.of(4, 5, 6, 7, 10, 45)));
         Lottos lottos = new Lottos(lottoList);
 
-        LottosTotalResult lottosResult = lottos.getResult(new WinningLottoNumbers(List.of(4, 5, 6, 7, 8, 9), 45));
+        LottosTotalResult lottosResult = lottos.getResult(new WinningLottoNumbers(List.of(4, 5, 6, 7, 10, 9), 45));
 
         assertThat(lottosResult.get(Rank.MISS)).isEqualTo(0);
         assertThat(lottosResult.get(Rank.FIFTH)).isEqualTo(1);
