@@ -6,26 +6,11 @@ public class StringCalculator {
 
     public static final String REGEXP_NUMBERS_AND_OPERATORS = "[\\d+\\-*/ ]+";
 
-    public int calculate(String inputString) {
+    public int main(String inputString) {
         // 유효성 검사
         validationCheck(inputString);
 
-        String[] tokens = inputString.split(" ");
-
-        String operator = "";
-        int result = 0;
-
-        for (String token : tokens) {
-            // token이 연산자일때 처리
-            if (isOperator(token)) {
-                operator = token;
-                continue;
-            }
-            // token이 숫자일때 연산
-            result = getCalculatedResult(operator, result, token);
-        }
-
-        return result;
+        return calculate(inputString);
     }
 
     private void validationCheck(String inputString) {
@@ -38,6 +23,28 @@ public class StringCalculator {
         }
     }
 
+    private int calculate(String inputString) {
+        return calculate(inputString, "", 0);
+    }
+
+    private int calculate(String inputString, String operator, int result) {
+        String[] tokens = inputString.split(" ");
+
+        for (String token : tokens) {
+            // token이 연산자일때 처리
+            operator = getOperator(operator, token);
+
+            // token이 숫자일때 연산
+            result = getCalculatedResult(operator, token, result);
+        }
+
+        return result;
+    }
+
+    private String getOperator(String operator, String token) {
+        return isOperator(token) ? token : operator;
+    }
+
     private boolean isOperator(String token) {
         return "+".equals(token)
                 || "-".equals(token)
@@ -45,7 +52,11 @@ public class StringCalculator {
                 || "/".equals(token);
     }
 
-    private int getCalculatedResult(String operator, int result, String token) {
+    private int getCalculatedResult(String operator, String token, int result) {
+        if ((isOperator(token))) {
+            return result;
+        }
+
         int num = Integer.parseInt(token);
 
         if ("".equals(operator)) {
