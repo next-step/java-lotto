@@ -8,6 +8,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
+
+    private static final int LOTTO_SIZE = 6;
+    private static final String LOTTO_SIZE_ERROR = "로또 숫자의 입력값은 6개로 이루어져야 합니다.";
     private final Set<LottoNumber> lottoNumbers = new HashSet<>();
 
     public Lotto(LottoGenerator lottoGenerator) {
@@ -15,12 +18,13 @@ public class Lotto {
     }
 
     public Lotto(String[] lottoNumbers) {
+        lottoSizeCheck(lottoNumbers);
         Arrays.stream(lottoNumbers).forEach(lottoNumber ->
             this.lottoNumbers.add(LottoNumberCache.valueOf(lottoNumber))
         );
     }
 
-    public int findMatchCount(WinningLotto winningLotto) {
+    public int findMatchCount(Lotto winningLotto) {
         return (int) lottoNumbers.stream()
                 .filter(winningLotto::contains)
                 .count();
@@ -28,6 +32,16 @@ public class Lotto {
 
     public boolean hasBonusLottoNumber(LottoNumber bonusLottoNumber) {
         return lottoNumbers.contains(bonusLottoNumber);
+    }
+
+    private void lottoSizeCheck(String[] lottoNumbers) {
+        if (lottoNumbers.length != LOTTO_SIZE) {
+            throw new IllegalStateException(LOTTO_SIZE_ERROR);
+        }
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override
@@ -46,4 +60,6 @@ public class Lotto {
     public String toString() {
         return lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.joining(", ", "[", "]"));
     }
+
+
 }

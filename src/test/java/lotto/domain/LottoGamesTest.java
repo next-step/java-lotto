@@ -28,7 +28,7 @@ public class LottoGamesTest {
         Lotto lotto = new Lotto(testLottoGenerator);
         List<Lotto> lottoList = List.of(lotto);
         LottoGames lottoGames = new LottoGames(lottoList);
-        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
+        Lotto winningLotto = new Lotto(new String[]{"1", "2", "3", "4", "5", "6"});
 
         //when
         lottoGames.calculatePrizeCount(winningLotto);
@@ -44,7 +44,7 @@ public class LottoGamesTest {
         Lotto lotto = new Lotto(testLottoGenerator);
         List<Lotto> lottoList = List.of(lotto);
         LottoGames lottoGames = new LottoGames(lottoList);
-        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
+        Lotto winningLotto = new Lotto(new String[]{"1", "2", "3", "4", "5", "6"});
         lottoGames.calculatePrizeCount(winningLotto);
         assertThat(lottoGames.calculateReturn()).isEqualTo(5);
     }
@@ -64,7 +64,7 @@ public class LottoGamesTest {
         Lotto lotto = new Lotto(testLottoGenerator);
         List<Lotto> lottoList = List.of(lotto);
         LottoGames lottoGames = new LottoGames(lottoList);
-        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
+        Lotto winningLotto = new Lotto(new String[]{"1", "2", "3", "4", "5", "6"});
         HashMap<Rank, Integer> result = new HashMap<>(){{
             put(Rank.FIFTH, 1);
         }};
@@ -83,7 +83,7 @@ public class LottoGamesTest {
         Lotto lotto = new Lotto(testLottoGenerator);
         List<Lotto> lottoList = List.of(lotto);
         LottoGames lottoGames = new LottoGames(lottoList);
-        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 41, 42, 6");
+        Lotto winningLotto = new Lotto(new String[]{"1", "2", "3", "41", "42", "6"});
         LottoNumber bonusNumber = new LottoNumber(43);
         HashMap<Rank, Integer> result = new HashMap<>(){{
             put(Rank.SECOND, 1);
