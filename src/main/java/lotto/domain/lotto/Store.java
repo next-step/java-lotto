@@ -3,7 +3,7 @@ package lotto.domain.lotto;
 public class Store {
 
     public static LottoBundle order(Money money) {
-        return LottoCompany.getInstance().makeLottoBundle(decideCount(money));
+        return new LottoBundle(decideCount(money));
     }
 
     public static Money orderManual(Money money, int manualOrderCount) {
