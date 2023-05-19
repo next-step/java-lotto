@@ -19,15 +19,15 @@ class LottoTicketTest {
     @MethodSource("winningNumbersSample")
     public void 로또_숫자_일치_개수_비교(List<Integer> winningNumbers, int matchCount) throws Exception {
         LottoTicket lottoTicket = ticketGenerator(Arrays.asList(1, 12, 22, 23, 34, 44));
-        assertThat(lottoTicket.checkLottoTicket(ticketGenerator(winningNumbers), 0)).isEqualTo(Rank.toPrizeMoney(matchCount, false));
+        assertThat(lottoTicket.checkLottoTicket(ticketGenerator(winningNumbers), 45)).isEqualTo(Rank.toPrizeMoney(matchCount, false));
     }
 
     static Stream<Arguments> winningNumbersSample() throws Throwable {
         return Stream.of(
-                Arguments.of(Arrays.asList(1, 15, 18, 56, 59, 41), 1),
-                Arguments.of(Arrays.asList(1, 12, 18, 56, 59, 41), 2),
-                Arguments.of(Arrays.asList(1, 12, 22, 56, 59, 41), 3),
-                Arguments.of(Arrays.asList(1, 12, 22, 23, 59, 41), 4),
+                Arguments.of(Arrays.asList(1, 15, 18, 19, 24, 41), 1),
+                Arguments.of(Arrays.asList(1, 12, 18, 19, 24, 41), 2),
+                Arguments.of(Arrays.asList(1, 12, 22, 19, 24, 41), 3),
+                Arguments.of(Arrays.asList(1, 12, 22, 23, 24, 41), 4),
                 Arguments.of(Arrays.asList(1, 12, 22, 23, 34, 41), 5),
                 Arguments.of(Arrays.asList(1, 12, 22, 23, 34, 44), 6)
         );

@@ -3,6 +3,7 @@ package step2.domain;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 public class LottoNo {
@@ -12,7 +13,7 @@ public class LottoNo {
     private static Map<Integer, LottoNo> lottoNumberCache = new HashMap<>();
 
     static {
-        IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+        IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1)
                 .forEach(i -> lottoNumberCache.put(i, new LottoNo(i)));
     }
 
@@ -23,7 +24,12 @@ public class LottoNo {
     }
 
     public static LottoNo of(int number) {
-        return lottoNumberCache.get(number);
+        Optional<LottoNo> lottoNo = Optional.ofNullable(lottoNumberCache.get(number));
+        return lottoNo.orElseThrow(() -> new IllegalArgumentException("잘못 입력하셨습니다."));
+    }
+
+    public int number() {
+        return number;
     }
 
     @Override

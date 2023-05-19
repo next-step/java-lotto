@@ -28,13 +28,13 @@ public class LottoGames {
         return new LottoTicket(lottoNumbers);
     }
 
-    public LottoTicket toLottoTicket(String stringNumber) {
-        String[] numbers = splitByDelimiter(stringNumber);
-        Set<LottoNo> integers = toSet(numbers);
-        if (integers.size() != LottoCommonValue.DEFAULT_LOTTO_NUMBER_COUNT.value()) {
-            throw new IllegalArgumentException(stringNumber + " : 입력한 숫자를 확인해 주세요");
+    public Optional<LottoTicket> toLottoTicket(String stringNumber) {
+        String[] splits = splitByDelimiter(stringNumber);
+        Set<LottoNo> numbers = toSet(splits);
+        if (numbers.size() != LottoCommonValue.DEFAULT_LOTTO_NUMBER_COUNT.value()) {
+            return Optional.empty();
         }
-        return new LottoTicket(integers);
+        return Optional.ofNullable(new LottoTicket(numbers));
     }
 
     private String[] splitByDelimiter(String stringNumber) {

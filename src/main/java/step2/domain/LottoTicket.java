@@ -38,7 +38,11 @@ public class LottoTicket {
     }
 
     public String printTicket() {
-        return lottoTicket.toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        lottoTicket.stream()
+                .forEach(lottoNo -> stringBuilder.append(lottoNo.number() + ", "));
+        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        return stringBuilder.toString();
     }
 
 }
