@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoGames;
+import lotto.domain.LottoPurchase;
 import lotto.domain.Rank;
 
 import java.util.Map;
@@ -30,5 +31,9 @@ public class ResultView {
 
     public void printLottoNumbers(LottoGames lottoGames) {
         System.out.println(lottoGames.toString());
+    }
+
+    public void printLottoPurchaseCount(LottoPurchase lottoPurchase) {
+        System.out.println(lottoPurchase.toString());
     }
 }

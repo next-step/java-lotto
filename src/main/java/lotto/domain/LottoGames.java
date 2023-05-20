@@ -1,12 +1,10 @@
 package lotto.domain;
 
 import lotto.domain.generator.AutoLottoGenerator;
+import lotto.domain.generator.LottoGenerator;
 import lotto.domain.number.LottoNumber;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoGames {
@@ -14,13 +12,12 @@ public class LottoGames {
     private static final String WRONG_RESULT_SIZE = "로또 결과값이 0 입니다.";
     private static final int LOTTO_PRICE = 1000;
     private final List<Lotto> lottoGameList = new ArrayList<>();
-    private final Map<Rank, Integer> lottoResult = new HashMap<>();
+    private final EnumMap<Rank, Integer> lottoResult = new EnumMap<>(Rank.class);
 
-    public LottoGames(int gameCount) {
-        gameCount /= LOTTO_PRICE;
-        for (int i = 0; i < gameCount; i++) {
-            lottoGameList.add(new Lotto(new AutoLottoGenerator()));
-        }
+    public LottoGames(LottoPurchase lottoPurchase, List<Lotto> manualLotto) {
+        LottoGenerator lottoGenerator = new AutoLottoGenerator();
+        lottoPurchase.autoStream().forEach(i -> lottoGameList.add(new Lotto(lottoGenerator)));
+        lottoGameList.addAll(manualLotto);
     }
 
     public LottoGames(List<Lotto> lottoGameList) {
@@ -42,15 +39,7 @@ public class LottoGames {
         return calculateTotalPrize() / (double) (LOTTO_PRICE * lottoGameList.size());
     }
 
-    public void calculatePrizeCount(WinningLotto winningLotto) {
-        lottoGameList.forEach(lotto -> {
-            Rank rank = Rank.findRank(lotto.findMatchCount(winningLotto));
-            int winningCount = lottoResult.getOrDefault(rank, 0);
-            lottoResult.put(rank, ++winningCount);
-        });
-    }
-
-    public void calculatePrizeCount(WinningLotto winningLotto, LottoNumber bonusLottoNumber) {
+    public void calculatePrizeCount(Lotto winningLotto, LottoNumber bonusLottoNumber) {
         lottoGameList.forEach(lotto -> {
             Rank rank = Rank.findRank(lotto.findMatchCount(winningLotto), lotto.hasBonusLottoNumber(bonusLottoNumber));
             int winningCount = lottoResult.getOrDefault(rank, 0);

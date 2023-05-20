@@ -1,5 +1,7 @@
 package lotto.domain.number;
 
+import lotto.util.Util;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -15,5 +17,9 @@ public class LottoNumberCache {
     static {
         IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .forEach(number -> LOTTO_NUMBER_CACHE.add(new LottoNumber(number)));
+    }
+
+    public static LottoNumber valueOf(String number) {
+        return LOTTO_NUMBER_CACHE.get(Util.convertInt(number) - 1);
     }
 }

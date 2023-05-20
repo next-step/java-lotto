@@ -13,4 +13,6 @@
    - [x] null혹은 ""인지 검증 -> input 객체 책임
 - [x] ResultView 객체 - 단위테스트 가능
    - [x] 몇개의 당첨이 있는지 출력
-- [ ] 보너스 번호 구현
+- [x] 보너스 번호 구현
+- [x] LottoPurchase 객체 추가 - 구입관련 책임 (자동 몇개, 수동 몇개...)
+- [ ] 수동 입력받기 - LottoNumberCache, ManualLottoGenerator 이용
