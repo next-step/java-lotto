@@ -26,4 +26,13 @@ public class LottoFactory {
                 .collect(Collectors.toList()));
     }
 
+    public static LottoTickets createLottoTickets(int autoTicketCount, List<LottoTicket> manualLottoTickets) {
+        List<LottoTicket> autoLottoTickets = IntStream.range(0, autoTicketCount)
+                .mapToObj(i -> createAutoLottoTicket())
+                .collect(Collectors.toList());
+
+        manualLottoTickets.addAll(autoLottoTickets);
+        return new LottoTickets(manualLottoTickets);
+    }
+
 }
