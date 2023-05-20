@@ -56,7 +56,7 @@ public class LottoGameTest {
     @DisplayName("입력한 금액 대비 얻은 수익률 구하기")
     @Test
     void 수익률() {
-        Map<Integer, Integer> winnerMap = winner.findWinner(tickets, "1, 2, 3, 4, 5, 6");
+        Map<Double, Integer> winnerMap = winner.findWinner(tickets, "1, 2, 3, 4, 5, 6", 7);
         assertThat(lottoGame.resultRate(9000, winnerMap)).isEqualTo(6.66);
     }
 

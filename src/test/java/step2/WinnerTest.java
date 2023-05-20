@@ -32,7 +32,7 @@ public class WinnerTest {
     @DisplayName("로또 한장당 숫자 n개 당첨 개수")
     @Test
     void 당첨_개수() {
-        Map<Integer, Integer> winnerMap = winner.findWinner(tickets, "1, 2, 3, 4, 5, 6");
+        Map<Double, Integer> winnerMap = winner.findWinner(tickets, "1, 2, 3, 4, 5, 6", 7);
         assertThat(winnerMap.get(3)).isEqualTo(2);
         assertThat(winnerMap.get(4)).isEqualTo(1);
         assertThat(winnerMap.get(5)).isEqualTo(0);
