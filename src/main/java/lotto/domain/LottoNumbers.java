@@ -1,17 +1,17 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private static final int LOTTO_NUMBER_LENGTH = 6;
+    private static final String SPLIT_SEPARATOR = ",";
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         validateLottoNumberEmpty(lottoNumbers);
         validateLottoNumberLength(lottoNumbers);
+        validateSameNumber(lottoNumbers);
 
         this.lottoNumbers = lottoNumbers;
     }
@@ -45,22 +45,35 @@ public class LottoNumbers {
         }
     }
 
-    public void validateLottoNumberLength(List<LottoNumber> lottoNumbers) {
+    private void validateSameNumber(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> removeDuplicateLottoNumber = new HashSet<>(lottoNumbers);
 
-        if (lottoNumbers.size() != LOTTO_NUMBER_LENGTH) {
-            throw new IllegalArgumentException("로또번호는 6개 여야합니다 :(");
+        if (removeDuplicateLottoNumber.size() != LOTTO_NUMBER_LENGTH) {
+            throw new IllegalArgumentException("중복된 로또번호가 존재해요 :(");
         }
     }
 
-    public void validateLottoNumberEmpty(List<LottoNumber> lottoNumbers) {
+    public static LottoNumbers of(String requestNumber) {
 
-        if (Objects.isNull(lottoNumbers)) {
-            throw new IllegalArgumentException("로또번호가 입력되지 않았어요 :(");
-        }
+        List<Integer> requestNumbers = toNumeric(requestNumber);
+        List<LottoNumber> lottoNumbers = generateLottoNumber(requestNumbers);
 
-        if (lottoNumbers.isEmpty()) {
-            throw new IllegalArgumentException("로또번호가 입력되지 않았어요 :(");
-        }
+        return new LottoNumbers(lottoNumbers);
+    }
+
+    private static List<LottoNumber> generateLottoNumber(List<Integer> requestNumberList) {
+
+        return requestNumberList.stream()
+                .map(LottoNumber::provideLottoNumber)
+                .sorted(LottoNumber::compareTo)
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    private static List<Integer> toNumeric(String requestNumber) {
+        return Arrays.stream(requestNumber.split(SPLIT_SEPARATOR))
+                .map(String::strip)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     @Override
