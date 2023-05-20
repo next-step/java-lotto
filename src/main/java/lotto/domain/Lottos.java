@@ -22,12 +22,19 @@ public class Lottos {
     }
 
     public LottoResult getLottoResult(Lotto winningLotto, Integer bonusNumber) {
-        ExceptionHandler.validDuplicatedBonusNumber(winningLotto, bonusNumber);
+        validDuplicatedBonusNumber(winningLotto, bonusNumber);
         LottoResult lottoResult = LottoResult.of();
         for (Lotto lotto : lottos) {
             lottoResult.win(lotto.getRank(winningLotto, bonusNumber));
         }
         return lottoResult;
+    }
+
+    private void validDuplicatedBonusNumber(Lotto winningLotto, Integer bonusNumber) {
+        boolean isDuplicate = winningLotto.lotto.stream().anyMatch(number -> number.equals(bonusNumber));
+        if (isDuplicate) {
+            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+        }
     }
 
     @Override

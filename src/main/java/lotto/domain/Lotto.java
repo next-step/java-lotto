@@ -16,8 +16,9 @@ public class Lotto {
     public List<Integer> lotto;
 
     public Lotto(List<Integer> lottoNumber) {
-        ExceptionHandler.validLottoNumberRange(lottoNumber);
-        ExceptionHandler.validLottoSize(lottoNumber);
+        validLottoNumberRange(lottoNumber);
+        validLottoSize(lottoNumber);
+        validDuplicatedLottoNumbers(lottoNumber);
         this.lotto = lottoNumber;
     }
 
@@ -37,7 +38,6 @@ public class Lotto {
         List<Integer> IntegerList = Arrays.stream(winningLotto.split(", "))
                 .map(Integer::parseInt)
                 .collect((Collectors.toList()));
-        ExceptionHandler.validDuplicatedLottoNumbers(IntegerList);
         return IntegerList.stream().collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::of));
     }
 
@@ -50,6 +50,31 @@ public class Lotto {
 
     private boolean matchBonus(Integer bonusNumber) {
         return lotto.stream().anyMatch(number -> number.equals(bonusNumber));
+    }
+
+    private void validLottoSize(List<Integer> lottoNumber) {
+        if (lottoNumber.size() != Lotto.LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 여섯개를 입력해야 합니다.");
+        }
+    }
+
+    private void validLottoNumberRange(List<Integer> lottoNumber) {
+        Optional<Integer> overNumber = lottoNumber.stream()
+                .filter(number -> number > Lotto.MAX_LOTTO_NUMBER || number < Lotto.MIN_LOTTO_NUMBER)
+                .findAny();
+
+        if (overNumber.isPresent()) {
+            throw new IllegalArgumentException("로또 번호는 1이상 45 이하여야 합니다");
+        }
+    }
+
+    private void validDuplicatedLottoNumbers(List<Integer> lottoNumbers) {
+        boolean isDuplicate = lottoNumbers.stream()
+                .distinct()
+                .count() != lottoNumbers.size();
+        if (isDuplicate) {
+            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+        }
     }
 
     @Override

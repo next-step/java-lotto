@@ -34,4 +34,22 @@ class LottoTest {
             Lotto.stringToNumber("1, 2, 3, 4, 5, 5");
         });
     }
+
+    @Test
+    @DisplayName(value = "입력 로또 번호 개수가 안 맞을 경우 검사")
+    void test4() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new Lotto(Arrays.asList(1, 2, 3, 4));
+            new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+        });
+    }
+
+    @Test
+    @DisplayName(value = "입력 로또 번호 범위가 안 맞을 경우 검사")
+    void test5() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new Lotto(Arrays.asList(0, 1, 2, 3, 4, 5));
+            new Lotto(Arrays.asList(1, 2, 3, 4, 5, 46));
+        });
+    }
 }

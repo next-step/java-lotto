@@ -11,10 +11,16 @@ public class LottoShop {
     }
 
     public static Lottos buyLotto(int payment) {
-        ExceptionHandler.validPrice(payment);
+        validPrice(payment);
         return Stream.generate(Lotto::createLottoNumber)
                 .limit(payment / THOUSAND)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::of));
+    }
+
+    private static void validPrice(int payment) {
+        if (payment < THOUSAND) {
+            throw new IllegalArgumentException("로또 최소 구매 금액은 1000원 입니다");
+        }
     }
 }
 
