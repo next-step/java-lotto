@@ -21,10 +21,18 @@ public class Ticket {
     }
 
     public PrizeType checkLotteryWinningStatus(WinningNumber winningNumber) {
-        int count = (int) winningNumber.getWinningNumber().stream()
+        return PrizeType.create(countMatchingNumber(winningNumber), isBonusBallMatched(winningNumber));
+    }
+
+    private int countMatchingNumber(WinningNumber winningNumber) {
+        return (int) winningNumber.getWinningNumber().stream()
                 .filter(w -> numbers.contains(w))
                 .count();
-        return PrizeType.create(count);
+    }
+
+    private boolean isBonusBallMatched(WinningNumber winningNumber) {
+        BonusBall bonusBall = winningNumber.getBonusBall();
+        return numbers.contains(bonusBall.getBonusBallNumber());
     }
 
     public List<Integer> getNumbers() {
