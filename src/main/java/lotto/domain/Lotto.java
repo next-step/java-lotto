@@ -8,38 +8,30 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private static final String LOTTO_NUMBERS_SEPARATOR = ",";
+    private static final int LOTTO_SIZE = 6;
+    private static List<Number> allLottoNumbers = new ArrayList<>();
+
     private final List<Number> lotto;
 
-    Lotto() {
-        this.lotto = generateLotto();
-    }
-
-    Lotto(String lottoNumber) {
-        List<Integer> lottoNumbers = Arrays.stream(lottoNumber.split(LOTTO_NUMBERS_SEPARATOR))
-                .map(number -> Integer.parseInt(number.trim()))
-                .collect(Collectors.toList());
-
-        this.lotto = getNumbers(lottoNumbers);
-    }
-
-    private List<Number> generateLotto() {
-        List<Integer> allLottoNumbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            allLottoNumbers.add(i);
+    static {
+        for (int i = Number.LOTTO_NUMBER_LOWER_BOUND; i <= Number.LOTTO_NUMBER_UPPER_BOUND; i++) {
+            allLottoNumbers.add(Number.from(i));
         }
+    }
+
+    private Lotto(List<Number> numbers) {
+        this.lotto = numbers;
+    }
+
+    static Lotto createAutoLotto() {
         Collections.shuffle(allLottoNumbers);
-
-        return getNumbers(allLottoNumbers.subList(0, 6));
+        return new Lotto(allLottoNumbers.stream().limit(LOTTO_SIZE).sorted().collect(Collectors.toList()));
     }
 
-    private List<Number> getNumbers(List<Integer> allLottoNumbers) {
-        List<Number> resultRottoNumbers = new ArrayList<>();
-
-        for (int resultRottoNumber : allLottoNumbers) {
-            resultRottoNumbers.add(new Number(resultRottoNumber));
-        }
-        Collections.sort(resultRottoNumbers);
-        return resultRottoNumbers;
+    static Lotto createManualLotto(String lottoNumber) {
+        return new Lotto(Arrays.stream(lottoNumber.split(LOTTO_NUMBERS_SEPARATOR))
+                .map(number -> Number.from(number.trim())).sorted()
+                .collect(Collectors.toList()));
     }
 
     public int getNumberOfMatch(Lotto winnerLotto) {
@@ -49,7 +41,7 @@ public class Lotto {
     }
 
     public boolean isMatchNumber(Number winnerNumber) {
-        return lotto.stream().anyMatch(number -> number.compareTo(winnerNumber) == 0);
+        return lotto.stream().anyMatch(number -> number == winnerNumber);
     }
 
     private List<Number> getLotto() {
