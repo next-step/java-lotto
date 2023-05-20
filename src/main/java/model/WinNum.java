@@ -8,8 +8,9 @@ public class WinNum {
     private int bonus;
 
     public WinNum(List<Integer> winnerNums, int bonus) {
-        this.winNum = winnerNums;
-        this.bonus = bonus;
+        LottoNumber lottoNumber = new LottoNumber(winnerNums, bonus);
+        this.winNum = lottoNumber.getLottoNumber();
+        this.bonus = lottoNumber.getBonus();
     }
 
     public List<Integer> getWinNum() {
@@ -17,20 +18,12 @@ public class WinNum {
     }
 
     public boolean matchBonus(Lotto lotto) {
-        if (lotto.getLotto().contains(this.bonus)){
-            return true;
-        }
-
-        return false;
+        return lotto.contains(this.bonus);
     }
 
     public int matchCount(Lotto lotto) {
-        List<Integer> copyList = new ArrayList<>(winNum);
-
-        int equalNum = (int) copyList.stream()
+        return (int) winNum.stream()
                 .filter(lotto.getLotto()::contains)
                 .count();
-
-        return equalNum;
     }
 }
