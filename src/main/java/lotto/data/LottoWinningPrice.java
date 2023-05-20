@@ -1,13 +1,12 @@
 package lotto.data;
 
 import java.util.Arrays;
-import java.util.stream.DoubleStream;
 
 public enum LottoWinningPrice {
     MATCHED_0(0, false, 0),
     MATCHED_1(1, false, 0),
-    MATCHED_2(2, false ,0),
-    MATCHED_3(3, false ,5_000),
+    MATCHED_2(2, false, 0),
+    MATCHED_3(3, false, 5_000),
     MATCHED_4(4, false, 50_000),
     MATCHED_5(5, false, 1_500_000),
     MATCHED_5_BONUS(5, true, 30_000_000),

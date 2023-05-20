@@ -16,12 +16,19 @@ public class ResultView {
         //
     }
 
-    public static void viewAmount(int amount){
-        System.out.println(amount + "개를 구매했습니다.");
+    public static void viewAmount(int manulLottoCounts, int autoLottoCounts){
+        StringBuilder builder = new StringBuilder();
+        builder.append("수동으로 ").append(manulLottoCounts + "장, ").append("자동으로 ").append(autoLottoCounts + "개를 구매했습니다.");
+        System.out.println();
+        System.out.println(builder.toString());
     }
 
-    public static void viewLottoList(List<Lotto> lottoList) {
-        for (Lotto lotto : lottoList) {
+    public static void viewLottoList(List<Lotto> manualLottoList, List<Lotto> autoLottoList) {
+        for (Lotto lotto : manualLottoList) {
+            System.out.println(lotto.getNumbers().toString());
+        }
+
+        for (Lotto lotto : autoLottoList) {
             System.out.println(lotto.getNumbers().toString());
         }
         System.out.println();

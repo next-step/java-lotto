@@ -7,8 +7,11 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.data.LottoUtil.validateBonusNumber;
+import static lotto.data.LottoUtil.validateInputLottoNumber;
 import static lotto.service.LottoGame.*;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoTest {
     @Test
@@ -24,7 +27,7 @@ public class LottoTest {
     @Test
     void 당청번호_유효성체크() {
         List<Integer> winningNumbers = List.of(1, 2, 2, 4, 5, 6);
-        assertThatIllegalArgumentException().isThrownBy(() -> checkWinningNumbers(winningNumbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> validateInputLottoNumber(winningNumbers));
     }
 
     @Test
@@ -58,7 +61,7 @@ public class LottoTest {
 
     @Test
     void 보너스넘버중복() {
-        assertThatIllegalArgumentException().isThrownBy(() -> checkBonusNumber(new Lotto(List.of(1,2,3,4,5,6)), 1));
+        assertThatIllegalArgumentException().isThrownBy(() -> validateBonusNumber(new Lotto(List.of(1, 2, 3, 4, 5, 6)), 1));
     }
 
 }
