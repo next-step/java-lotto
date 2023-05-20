@@ -33,7 +33,7 @@ class MoneyTest {
         Money money = new Money(10_000);
         Money other = new Money(1_000);
 
-        assertThat(money.plus(other)).isEqualTo(11_000);
+        assertThat(money.plus(other)).isEqualTo(new Money(11_000));
     }
 
     @DisplayName("금액 나누기(divide method 사용)")

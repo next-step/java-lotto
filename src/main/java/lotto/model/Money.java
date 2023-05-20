@@ -15,8 +15,8 @@ public class Money {
         return this.amount;
     }
 
-    public int plus(Money other) {
-        return this.amount + other.amount;
+    public Money plus(Money other) {
+        return new Money(this.amount + other.amount);
     }
 
     public double divide(Money other) {
