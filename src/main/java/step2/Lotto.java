@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Lotto {
 
-    public static final int LOTTO_LIMIT = 10;
+    public static final int LOTTO_LIMIT = 45;
 
     public static List<Integer> lottoNumber = new ArrayList<>();
     static{
