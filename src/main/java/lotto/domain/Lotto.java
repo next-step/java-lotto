@@ -32,7 +32,7 @@ public class Lotto {
     @Override
     public String toString() {
 
-        if (toString.isEmpty()) {
+        if (toString == null || toString.isEmpty()) {
             initializeToString();
         }
         return toString;

@@ -13,16 +13,22 @@ public class Money {
         return new Money(amount);
     }
 
-    public Money minus(Money amount) {
+    public Money minus(Money money) {
         validateMinusUnderZero(this.amount);
-        validateMinusUnderZero(amount.amount);
+        validateMinusUnderZero(money.amount);
 
-        return new Money(this.amount - amount.amount);
+        return new Money(this.amount - money.amount);
     }
 
     public boolean isGreaterThan(Money money) {
 
-        return amount >= money.amount;
+        return this.amount >= money.amount;
+    }
+
+    public Money times(int count) {
+
+        long multiplyAmount = Math.multiplyExact(this.amount, count);
+        return new Money(multiplyAmount);
     }
 
     public long getAmount() {
