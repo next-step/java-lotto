@@ -9,10 +9,11 @@ import java.util.List;
 
 public class LottoMachine {
 
-    public static Lotto issueLotto(LottoNumbersGenerator lottoNumbersGenerator, ReqLotto reqLotto) {
+    public static Lotto issueLotto(LottoNumbersGenerator lottoNumbersGenerator, ReqLotto reqLotto, List<LottoNumbers> manualLottoNumberList) {
 
-        List<LottoNumbers> lottoNumbersList = lottoNumbersGenerator.generateLottoNumbers(reqLotto);
-        return new Lotto(lottoNumbersList);
+        List<LottoNumbers> wholeLottoNumberList = lottoNumbersGenerator.generateLottoNumbers(reqLotto);
+        wholeLottoNumberList.addAll(manualLottoNumberList);
+        return new Lotto(wholeLottoNumberList);
     }
 
 }
