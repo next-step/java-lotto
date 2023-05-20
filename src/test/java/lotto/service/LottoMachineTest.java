@@ -1,7 +1,8 @@
-package lotto.domain;
+package lotto.service;
 
+import lotto.domain.Lotto;
+import lotto.domain.Money;
 import lotto.model.request.ReqAutoLotto;
-import lotto.service.LottoMachine;
 import lotto.service.gernerator.AutoLottoNumbersGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
