@@ -61,7 +61,7 @@ public class InputView {
         Money money = Money.wons(manualPurchaseAmount.getAmount());
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
         while (isEnoughBuyMoney(money)) {
-            calculateCurrentMoney(money);
+            money = calculateCurrentMoney(money);
             lottoNumbersList.add(LottoNumbers.of(scanner.next()));
         }
         return lottoNumbersList;
