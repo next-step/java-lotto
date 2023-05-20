@@ -19,4 +19,16 @@ public class TicketTest {
         winningNumber = WinningNumber.from(List.of(1, 2, 3, 44, 55, 66), BonusBall.from("7"));
         assertThat(ticket.checkLotteryWinningStatus(winningNumber).getNumberOfMatching()).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("2등 테스트")
+    public void secondPrize() {
+        Ticket ticket = Ticket.from(List.of(1, 2, 3, 4, 5, 7));
+
+        WinningNumber winningNumber = WinningNumber.from(List.of(1, 2, 3, 4, 5, 6), BonusBall.from("7"));
+        assertThat(ticket.checkLotteryWinningStatus(winningNumber).getNumberOfMatching()).isEqualTo(5);
+        assertThat(ticket.checkLotteryWinningStatus(winningNumber)).isEqualTo(PrizeType.SECOND_PRIZE);
+    }
+
 }
+
