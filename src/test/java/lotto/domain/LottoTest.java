@@ -19,6 +19,21 @@ public class LottoTest {
     public void test2(){
         Lotto lotto = new Lotto();
         assertThat(lotto.lottoQuantity("14000")).isEqualTo(14);
+    }
+
+    @Test
+    @DisplayName("로또 번호 뽑기")
+    public void test3(){
+        Lotto lotto = new Lotto();
+        assertThat(lotto.outputLottoNumber().size()).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("총 구매 로또 수")
+    public void test4(){
+        Lotto lotto = new Lotto();
+        assertThat(lotto.getPurchasedLottery(2).size()).isEqualTo(2);
 
     }
+
 }
