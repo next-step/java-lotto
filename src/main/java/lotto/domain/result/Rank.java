@@ -1,6 +1,7 @@
 package lotto.domain.result;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public enum Rank {
 
@@ -21,25 +22,34 @@ public enum Rank {
     }
 
     public static Rank find(MatchCount matchCount, boolean isBonusBall) {
-        if (SECOND.isMatchCount(matchCount)) {
-            return rankSecondAndThird(isBonusBall);
-        }
-
-        return Arrays.stream(Rank.values())
-                .filter(rank -> rank.isMatchCount(matchCount))
+        return Arrays.stream(values())
+                .filter(rank -> support(rank, matchCount, isBonusBall))
                 .findFirst()
                 .orElse(Rank.MISS);
     }
 
-    private static Rank rankSecondAndThird(boolean isBonusBall) {
-        if (isBonusBall) {
-            return SECOND;
+    private static boolean support(Rank rank, MatchCount matchCount, boolean isBonusBall) {
+        if (rank == Rank.FIRST) {
+            return matchCount.value() == 6;
         }
-        return THIRD;
-    }
 
-    private boolean isMatchCount(MatchCount matchCount) {
-        return this.matchingCount == matchCount.value();
+        if (rank == Rank.SECOND) {
+            return matchCount.value() == 5 && isBonusBall;
+        }
+
+        if (rank == Rank.THIRD) {
+            return matchCount.value() == 5 && !isBonusBall;
+        }
+
+        if (rank == Rank.FOURTH) {
+            return matchCount.value() == 4;
+        }
+
+        if (rank == Rank.FIFTH) {
+            return matchCount.value() == 3;
+        }
+
+        return false;
     }
 
     public int getMatchingCount() {
