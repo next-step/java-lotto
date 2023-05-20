@@ -1,11 +1,8 @@
 package model;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoStoreTest {
     @Test
@@ -16,12 +13,10 @@ public class LottoStoreTest {
 
         // when
         LottoStore lottoStore = new LottoStore();
-        List<Lotto> lottoList = lottoStore.Buy(buyAmount);
+        Lottos lottos = lottoStore.buy(buyAmount);
 
         //then
-        int expected = 14;
-
-        assertEquals(expected, lottoList.size());
+        Assertions.assertThat(lottos.getLottos()).hasSize(14);
 
     }
 }

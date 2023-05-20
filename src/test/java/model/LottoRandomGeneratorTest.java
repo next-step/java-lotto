@@ -1,11 +1,11 @@
 package model;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class LottoRandomGeneratorTest {
     @Test
@@ -13,12 +13,11 @@ public class LottoRandomGeneratorTest {
     void grossTest() {
         //give // when
         LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();
-        lottoRandomGenerator.generatorLotto(1);
-        List<Lotto> lotto = lottoRandomGenerator.getLottos();
+        Lottos lottos = lottoRandomGenerator.generatorLotto(1);
 
         //then
         boolean expected = false;
-        assertEquals(expected, lotto.get(0).getLotto().contains(46));
+        assertEquals(expected, lottos.getLottos().get(0).getLotto().contains(46));
 
     }
 
@@ -27,13 +26,9 @@ public class LottoRandomGeneratorTest {
     void lottoCount() {
         //given //when
         LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();
-        lottoRandomGenerator.generatorLotto(3);
-        List<Lotto> lottos = lottoRandomGenerator.getLottos();
+        Lottos lottos = lottoRandomGenerator.generatorLotto(3);
 
         //then
-        int expected = 3;
-
-        assertEquals(expected, lottos.size() - 1);
-
+        Assertions.assertThat(lottos.getLottos()).hasSize(3);
     }
 }
