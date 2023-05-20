@@ -18,7 +18,6 @@ public class Statistics {
 
     private Map<Prize, Long> statisticsWinnerMap(WinnerLotto winnerLotto, Lotto lotto) {
         List<Prize> winnersList = winnerLotto.getPrizeList(lotto);
-
         return winnersList.stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
