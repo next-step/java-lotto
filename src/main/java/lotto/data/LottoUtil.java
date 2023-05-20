@@ -8,7 +8,7 @@ public class LottoUtil {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
-    private LottoUtil(){
+    private LottoUtil() {
         //
     }
 
@@ -25,10 +25,10 @@ public class LottoUtil {
             throw new IllegalArgumentException("숫자 6개를 입력해주세요.");
         }
 
-        for(int number : lottoNumbers){
+        for (int number : lottoNumbers) {
             validateNumberRange(number);
         }
-        
+
         if (lottoNumbers.stream()
                 .distinct()
                 .collect(Collectors.toList())
@@ -38,10 +38,10 @@ public class LottoUtil {
     }
 
     public static void validateBonusNumber(Lotto winningNumbers, int bonusNumber) {
-        for(int number : winningNumbers.getNumbers()){
+        for (int number : winningNumbers.getNumbers()) {
             validateNumberRange(number);
         }
-        
+
         for (int winningNumber : winningNumbers.getNumbers()) {
             if (winningNumber == bonusNumber) {
                 throw new IllegalArgumentException("중복된 번호가 있습니다.");
@@ -50,7 +50,7 @@ public class LottoUtil {
     }
 
     private static void validateNumberRange(int number) {
-        if(number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER){
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("숫자 1~45 사이로 입력해주세요.");
         }
     }
