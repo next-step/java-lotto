@@ -1,10 +1,9 @@
 package model;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -30,7 +29,6 @@ public class LottoRandomGeneratorTest {
         Lottos lottos = lottoRandomGenerator.generatorLotto(3);
 
         //then
-        assertThat(lottos.getLottos(), hasSize(3));
-
+        Assertions.assertThat(lottos.getLottos()).hasSize(3);
     }
 }

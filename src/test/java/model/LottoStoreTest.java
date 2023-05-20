@@ -1,10 +1,8 @@
 package model;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasSize;
 
 public class LottoStoreTest {
     @Test
@@ -18,7 +16,7 @@ public class LottoStoreTest {
         Lottos lottos = lottoStore.buy(buyAmount);
 
         //then
-        assertThat(lottos.getLottos(), hasSize(14));
+        Assertions.assertThat(lottos.getLottos()).hasSize(14);
 
     }
 }
