@@ -1,7 +1,7 @@
 package model;
 
 public class LottoStore {
-    private static int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
     private LottoRandomGenerator lottoGenerator;
 
     public LottoStore() {

@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinNum {
-    List<Integer> winNum = new ArrayList<>();
+    private List<Integer> winNum = new ArrayList<>();
     private int bonus;
 
     public WinNum(List<Integer> winnerNums, int bonus) {
-        LottoNumber lottoNumber = new LottoNumber(winnerNums, bonus);
-        this.winNum = lottoNumber.getLottoNumber();
-        this.bonus = lottoNumber.getBonus();
+        for (int num : winnerNums) {
+            this.winNum.add(new LottoNumber(num).getLottoNumber());
+        }
+        this.bonus = new LottoNumber(bonus).getLottoNumber();
     }
 
     public List<Integer> getWinNum() {
@@ -23,7 +24,7 @@ public class WinNum {
 
     public int matchCount(Lotto lotto) {
         return (int) winNum.stream()
-                .filter(lotto.getLotto()::contains)
+                .filter(lotto::contains)
                 .count();
     }
 }

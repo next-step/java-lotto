@@ -4,23 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-    private List<Integer> lotto = new ArrayList<>();
+    private final List<Integer> lotto = new ArrayList<>();
 
     public Lotto(List<Integer> lotto) {
-        LottoNumber lottoNumber = new LottoNumber(lotto);
-        this.lotto = lottoNumber.getLottoNumber();
+        for (int num : lotto) {
+            this.lotto.add(new LottoNumber(num).getLottoNumber());
+        }
     }
 
     public List<Integer> getLotto() {
         return this.lotto;
     }
 
-    public Boolean contains(int bonus) {
-        if (lotto.contains(bonus)) {
-            return true;
-        }
-
-        return false;
+    public Boolean contains(int number) {
+        return lotto.contains(number);
     }
 
 }
