@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static lotto.service.LottoGame.checkBonusNumber;
 import static lotto.service.LottoGame.checkWinningNumbers;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String QUESTION_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
     private static final String QUESTION_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String QUESTION_BONUS_NUMBERS = "보너스 볼을 입력해 주세요.";
     private static final String DELIMITER = ",";
 
     private InputView(){
@@ -38,5 +40,14 @@ public class InputView {
         checkWinningNumbers(winningNumbers);
 
         return new Lotto(winningNumbers);
+    }
+
+    public static int getBonusNumber(Lotto winningNumbers) {
+        System.out.println(QUESTION_BONUS_NUMBERS);
+        int bonusNumber = scanner.nextInt();
+
+        checkBonusNumber(winningNumbers, bonusNumber);
+
+        return bonusNumber;
     }
 }
