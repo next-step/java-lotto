@@ -1,11 +1,13 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -13,6 +15,7 @@ public class ResultView {
     private static final String WINNING_STATISTICS = "당첨 통계";
     private static final String NINE_DASH = "---------";
     private static final String RESULT_MENT = "%s개 일치 (%s원) - %s개";
+    private static final String RESULT_MENT_FOR_SECOND_PLACE = "%s개 일치, 보너스 볼 일치(%s원) - %s개";
     private static final String RATE_OF_RETURN_MENT = "총 수익률은 %.2f입니다.";
 
     public void showPurchaseCount(int purchaseCount) {
@@ -20,8 +23,15 @@ public class ResultView {
     }
 
     public void showLottos(List<Lotto> createdLottos) {
-        createdLottos.forEach(lotto -> System.out.println(lotto.getLottoNumbers()));
+        createdLottos.forEach(ResultView::showLotto);
         System.out.println();
+    }
+
+    private static void showLotto(Lotto lotto) {
+        List<Integer> numbers = lotto.getLottoNumbers().stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
+        System.out.println(numbers);
     }
 
     public void showResults(LottoResult lottoResult) {
@@ -56,6 +66,9 @@ public class ResultView {
     }
 
     private String formatResultMent(Rank rank, LottoResult lottoResult) {
+        if (rank.equals(Rank.SECOND_PLACE)) {
+            return String.format(RESULT_MENT_FOR_SECOND_PLACE, rank.getWinningCount(), rank.getWinnings(), lottoResult.findWinningCount(rank));
+        }
         return String.format(RESULT_MENT, rank.getWinningCount(), rank.getWinnings(), lottoResult.findWinningCount(rank));
     }
 }

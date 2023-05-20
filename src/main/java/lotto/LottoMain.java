@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
-import lotto.domain.RandomLottoCreationStrategy;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -22,9 +19,9 @@ public class LottoMain {
         Lottos lottos = new Lottos(purchaseCount, randomLottoCreationStrategy);
         List<Lotto> createdLottos = lottos.getCreatedLottos(); // 로또 리스트 만들기
 
-        resultView.showLottos(createdLottos);
+        resultView.showLottos(createdLottos); // 만들어진 로또 산출
 
-        LottoResult lottoResult = lottos.judge(createdLottos, inputView.requestWinningNumbers()); // 당첨 결과 산출
-        resultView.showResults(lottoResult);
+        WinningLotto winningLotto = new WinningLotto(inputView.requestWinningNumbers(), inputView.requestBonusNumber()); // 당첨 번호, 보너스 번호 입력
+        resultView.showResults(lottos.judge(createdLottos, winningLotto)); // 당첨 결과 산출
     }
 }

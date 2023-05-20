@@ -1,10 +1,16 @@
-package lotto.domain;
+package lotto.domain.test;
 
-import java.util.*;
+import lotto.domain.Lotto;
+import lotto.domain.LottoCreationStrategy;
+import lotto.domain.LottoNumber;
+
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomLottoCreationStrategy implements LottoCreationStrategy {
+public class ForceLottoCreationStrategy implements LottoCreationStrategy {
 
     private static final int LOTTO_LENGTH_UPPER_BOUND = 6;
     private static final int START_NUMBER = 1;
@@ -27,7 +33,6 @@ public class RandomLottoCreationStrategy implements LottoCreationStrategy {
     }
 
     private Lotto createLotto() {
-        shuffleLottoNumbers();
         return new Lotto(new LinkedHashSet<>(findSixLengthLotto()));
     }
 
@@ -38,9 +43,5 @@ public class RandomLottoCreationStrategy implements LottoCreationStrategy {
                 .sorted()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
-    }
-
-    private void shuffleLottoNumbers() {
-        Collections.shuffle(LOTTO_NUMBERS);
     }
 }
