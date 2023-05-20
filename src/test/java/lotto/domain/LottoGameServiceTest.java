@@ -50,6 +50,6 @@ public class LottoGameServiceTest {
     @Test
     @DisplayName("수익률 계산기능 테스트")
     public void rateOfReturn() {
-        assertThat(lottoTickets.returnRate(winningNumber)).isEqualTo(2143.21);
+        assertThat(lottoTickets.returnRate(winningNumber)).isEqualTo(21428.92);
     }
 }

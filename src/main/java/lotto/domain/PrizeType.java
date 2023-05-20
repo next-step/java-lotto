@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 public enum PrizeType {
     FIRST_PRIZE(6, 2_000_000_000),
 
-    SECOND_PRIZE(5, 30_000_000),
+    SECOND_PRIZE(5, 300_000_000),
 
     THIRD_PRIZE(5, 1_500_000),
 
