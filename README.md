@@ -17,6 +17,8 @@
   [x] 로또들을 구매하는 Lottery.buy
     [x] 로또를 구매하는 buyLottery
 [x] 당첨 로또 번호를 입력받는 InputView
+[] 보너스 볼을 입력받는 InputView
 [x] 당첨 통계를 출력하는 OutputView
+  [] 맞춘 개수별로 당첨금액 정보를 저장해 놓는 WinPrizes
   [x] n개 일치하는 로또의 수를 계산해주는 countWinLottery
   [x] 수익률 계산해주는 calculateRateOfReturn
