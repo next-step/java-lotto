@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.function.BinaryOperator;
 
 public enum Operator {
-    PLUS('+', ((num1, num22) -> new Number(num1.value() + num22.value()))),
+    PLUS('+', (num1, num2) -> new Number(num1.value() + num2.value())),
     MINUS('-', (num1, num2) -> new Number(num1.value() - num2.value())),
     MULTIPLY('*', (num1, num2) -> new Number(num1.value() * num2.value())),
     DIVIDE('/', (num1, num2) -> {

@@ -1,4 +1,7 @@
-package lotto.domian;
+package lotto.domain.result;
+
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 
 public class WinNumber {
 
@@ -11,11 +14,17 @@ public class WinNumber {
         validDuplicate();
     }
 
-    public int distinguish(Lotto lotto) {
+    public Rank matchRank(Lotto lotto) {
+        int matchingCount = distinguish(lotto);
+        boolean haveBonus = haveBonus(lotto);
+        return Rank.find(new MatchCount(matchingCount), haveBonus);
+    }
+
+    private int distinguish(Lotto lotto) {
         return lotto.match(winNumber);
     }
 
-    public boolean haveBonus(Lotto lotto) {
+    private boolean haveBonus(Lotto lotto) {
         return lotto.haveNumber(bonusWinNumber);
     }
 

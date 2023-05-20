@@ -1,6 +1,11 @@
 package lotto.domain;
 
-import lotto.domian.*;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoBundle;
+import lotto.domain.lotto.LottoCompany;
+import lotto.domain.result.Rank;
+import lotto.domain.result.Record;
+import lotto.domain.result.WinNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,8 +22,8 @@ public class RecordTest {
 
     @BeforeEach
     public void setUp() {
-        lottoList.add(Lotto.of(Arrays.asList(1,2,3,4,5,6)));
-        lottoList.add(Lotto.of(Arrays.asList(1,2,3,4,6,7)));
+        lottoList.add(new Lotto(Arrays.asList(1,2,3,4,5,6)));
+        lottoList.add(new Lotto(Arrays.asList(1,2,3,4,6,7)));
         lottoBundle = new LottoBundle(lottoList);
     }
 

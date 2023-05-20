@@ -1,9 +1,9 @@
-package lotto.domian;
+package lotto.domain.lotto;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Lotto {
 
@@ -16,33 +16,23 @@ public class Lotto {
         this.lottoTicket = lottoTicket;
     }
 
-    public static Lotto of(List<Integer> numbers) {
+    public Lotto(List<Integer> numbers) {
+        this(toSet(numbers));
+    }
+
+    private static Set<LottoNumber> toSet(List<Integer> numbers) {
         Set<LottoNumber> lottoTicket = new HashSet<>();
         for (int number : numbers) {
-            lottoTicket.add(new LottoNumber(number));
+            lottoTicket.add(LottoNumber.of(number));
         }
-        return new Lotto(lottoTicket);
+        return lottoTicket;
     }
 
     public int match(Lotto winNumber) {
-        AtomicInteger count = new AtomicInteger(0);
-        if (winNumber == null) {
-            return count.intValue();
-        }
-        lottoTicket.stream()
-                .forEach(lottoNumber ->
-                            count.addAndGet(winNumber.countIfHave(lottoNumber)));
-
-        return count.intValue();
+        return (int)lottoTicket.stream()
+                .filter(winNumber::haveNumber)
+                .count();
     }
-
-    private int countIfHave(LottoNumber lottoNumber) {
-        if (haveNumber(lottoNumber)) {
-            return 1;
-        }
-        return 0;
-    }
-
 
     public boolean haveNumber(LottoNumber bonusNumber) {
         return lottoTicket.contains(bonusNumber);
@@ -58,4 +48,22 @@ public class Lotto {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Lotto lotto = (Lotto) o;
+
+        return Objects.equals(lottoTicket, lotto.lottoTicket);
+    }
+
+    @Override
+    public int hashCode() {
+        return lottoTicket != null ? lottoTicket.hashCode() : 0;
+    }
 }

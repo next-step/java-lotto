@@ -1,8 +1,9 @@
-package lotto.domian;
+package lotto.domain.result;
 
 import java.util.Map;
 
-public interface CalculableStrategy {
+@FunctionalInterface
+public interface CalculableProfitRate {
 
     ProfitRate calculate(Map<Rank, Integer> rankMap, int purchaseMoney);
 }

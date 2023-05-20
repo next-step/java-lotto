@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.domian.MatchCount;
-import lotto.domian.Rank;
+import lotto.domain.result.MatchCount;
+import lotto.domain.result.Rank;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

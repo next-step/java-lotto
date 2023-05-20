@@ -1,6 +1,10 @@
 package lotto.ui;
 
-import lotto.domian.*;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoGroup;
+import lotto.domain.result.ProfitRate;
+import lotto.domain.result.Rank;
+import lotto.domain.result.Record;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -12,8 +16,19 @@ public class OutputView {
     private static final String RECORD_RESULT_MESSAGE = "%d개 일치 (%d원) - %d개";
     private static final String RECORD_RESULT_MESSAGE_IF_SECOND = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
 
-    public static void showLottoBundle(LottoBundle bundle) {
-        bundle.unfoldLottoBundle()
+    public static void showLottoGroup(LottoGroup lottoGroup) {
+        List<Lotto> manualList = lottoGroup.unfoldManual();
+        List<Lotto> autoList = lottoGroup.unfoldAuto();
+
+        System.out.println("\n수등으로 " + manualList.size() + "장, 자동으로 " + autoList.size() + "개를 구매했습니다.");
+
+        lottoGroup.unfoldManual()
+                .stream()
+                .forEach(lotto -> {
+                    showLottoNumber(lotto);
+                });
+
+        lottoGroup.unfoldAuto()
                 .stream()
                 .forEach(lotto -> {
                     showLottoNumber(lotto);

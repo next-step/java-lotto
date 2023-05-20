@@ -1,6 +1,9 @@
 package lotto.domain;
 
-import lotto.domian.*;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoBundle;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.result.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,13 +23,13 @@ public class ProfitCalculatorTest {
     public void calculate_ByMultiplyStrategy_CreateProfitRate() {
 
         List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(Lotto.of(Arrays.asList(1,2,3,10,11,12)));
-        lottoList.add(Lotto.of(Arrays.asList(1,2,3,21,22,23)));
+        lottoList.add(new Lotto(Arrays.asList(1,2,3,10,11,12)));
+        lottoList.add(new Lotto(Arrays.asList(1,2,3,21,22,23)));
         LottoBundle lottoBundle = new LottoBundle(lottoList);
-        WinNumber winNumber = new WinNumber(Lotto.of(Arrays.asList(1, 2, 3, 41, 42, 43)), new LottoNumber(30));
+        WinNumber winNumber = new WinNumber(new Lotto(Arrays.asList(1, 2, 3, 41, 42, 43)), LottoNumber.of(30));
         Record record = Record.extractRecord(lottoBundle, winNumber);
 
-        ProfitCalculator profitCalculator = new ProfitCalculator(new MultiplyStrategy());
+        ProfitCalculator profitCalculator = new ProfitCalculator(new MultiplyProfitRate());
         ProfitRate profitRate = profitCalculator.calculate(record.getRecord(), 14000);
         double value = profitRate.value();
 

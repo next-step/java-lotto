@@ -1,4 +1,4 @@
-package lotto.domian;
+package lotto.domain.result;
 
 public class MatchCount {
 
