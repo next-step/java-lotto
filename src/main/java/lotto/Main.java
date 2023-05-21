@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.model.AutoLotteryNumberGenerator;
+import lotto.model.LotteryTicket;
 import lotto.model.LotteryTickets;
 import lotto.model.ManualLotteryNumberGenerator;
 import lotto.model.Win;
@@ -8,6 +9,8 @@ import lotto.model.WinNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,8 +19,8 @@ public class Main {
         int money = InputView.getMoney();
 
         final int manualLotteryTicketCount = InputView.getManualLotteryTicketCount();
-        String ticketNumberString = InputView.enterManualLotteryNumbers();
-        LotteryTickets manualLotteryTickets = LotteryTickets.fromCount(manualLotteryTicketCount, ManualLotteryNumberGenerator.from(ticketNumberString));
+        List<String> ticketNumbers = InputView.enterManualLotteryNumbers(manualLotteryTicketCount);
+        LotteryTickets manualLotteryTickets = LotteryTickets.fromNumberList(ticketNumbers);
 
         LotteryTickets autoLotteryTickets = LotteryTickets.fromMoney(money, manualLotteryTicketCount, new AutoLotteryNumberGenerator());
 

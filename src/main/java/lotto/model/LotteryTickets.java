@@ -27,11 +27,12 @@ public class LotteryTickets {
         return getLotteryTickets(calculateTicketCount(money), lotteryNumberGenerator);
     }
 
-    public static LotteryTickets fromCount(int count, LotteryNumberGenerator lotteryNumberGenerator) {
-        if (count < 0) {
-            throw new IllegalArgumentException("갯수는 음수일 수 없습니다");
+    public static LotteryTickets fromNumberList(List<String> ticketNumbers) {
+        List<LotteryTicket> lotteryTickets = new ArrayList<>();
+        for (String ticketNumber : ticketNumbers) {
+            lotteryTickets.add(LotteryTicket.of(ManualLotteryNumberGenerator.from(ticketNumber)));
         }
-        return getLotteryTickets(count, lotteryNumberGenerator);
+        return new LotteryTickets(lotteryTickets);
     }
 
     private static LotteryTickets getLotteryTickets(int count, LotteryNumberGenerator lotteryNumberGenerator) {
