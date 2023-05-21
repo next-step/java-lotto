@@ -1,16 +1,13 @@
 import java.util.List;
 
 import domain.LottoGame;
-import domain.LottoResults;
 import domain.ManualRequest;
-import domain.WinningAnalyzer;
 import domain.WinningStatistics;
 import view.LottoInputView;
 import view.LottoOutputView;
 
 public class LottoController {
     private LottoGame lottoGame;
-    private WinningAnalyzer winningAnalyzer;
 
     public void playLottoGames(ManualRequest manualRequest, int money) {
         lottoGame = new LottoGame();
@@ -24,15 +21,12 @@ public class LottoController {
     }
 
     public void winningStatistics() {
-        LottoResults lottoResults = lottoGame.getLottoResults();
-        winningAnalyzer = new WinningAnalyzer(lottoResults, LottoInputView.getWinningNumbers(), LottoInputView.getBonusNumber());
-        WinningStatistics winningStatistics = winningAnalyzer.calculateWinningStatistics();
+        WinningStatistics winningStatistics = lottoGame.calculateWinningStatistics(LottoInputView.getWinningNumbers(), LottoInputView.getBonusNumber());
         LottoOutputView.printBeforeWinnings();
         LottoOutputView.printWinnings(winningStatistics);
     }
 
     public void returnOnInvestment() {
-        int money = lottoGame.getMoney();
-        LottoOutputView.printReturnOnInvestment(winningAnalyzer.getReturnOnInvestment(money));
+        LottoOutputView.printReturnOnInvestment(lottoGame.getReturnOnInvestment());
     }
 }

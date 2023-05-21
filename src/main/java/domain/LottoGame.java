@@ -5,9 +5,8 @@ import java.util.Set;
 
 public class LottoGame {
     private LottoResults lottoResults;
-
     private Money money;
-
+    private WinningAnalyzer winningAnalyzer;
 
     public LottoGame() {
         this.lottoResults = new LottoResults();
@@ -56,5 +55,15 @@ public class LottoGame {
     public List<List<Integer>> getLottoResultsToInt() {
         return lottoResults.lottoResultsToInt();
     }
+
+    public WinningStatistics calculateWinningStatistics(Set<Integer> winningNumbers, int bonusNumber) {
+        winningAnalyzer = new WinningAnalyzer(lottoResults, winningNumbers, bonusNumber);
+        return winningAnalyzer.calculateWinningStatistics();
+    }
+
+    public float getReturnOnInvestment() {
+        return winningAnalyzer.getReturnOnInvestment(money.getMoney());
+    }
+
 }
 
