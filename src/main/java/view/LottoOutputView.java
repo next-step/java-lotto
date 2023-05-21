@@ -4,6 +4,7 @@ import static domain.WinningPrizeMatcher.FIVE_BONUS;
 import static domain.WinningPrizeMatcher.THRESHOLD;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import domain.WinningPrizeMatcher;
@@ -74,25 +75,25 @@ public class LottoOutputView {
         System.out.print(count + "개");
     }
 
-    public static void printLottoResults(int gameCount, List<int[]> lottoResults) {
+    public static void printLottoResults(int gameCount, List<List<Integer>> lottoResults) {
         printGameCount(gameCount);
-        for (int[] lottoResult : lottoResults) {
-            Arrays.sort(lottoResult);
+        for (List<Integer> lottoResult : lottoResults) {
+            Collections.sort(lottoResult);
             System.out.print("[");
             printEachLottoResult(lottoResult);
             System.out.println("]");
         }
     }
 
-    private static void printEachLottoResult(int[] lottoResult) {
-        for (int i = 0; i < lottoResult.length; i++) {
-            System.out.print(lottoResult[i]);
+    private static void printEachLottoResult(List<Integer> lottoResult) {
+        for (int i = 0; i < lottoResult.size(); i++) {
+            System.out.print(lottoResult.get(i));
             printComma(lottoResult, i);
         }
     }
 
-    private static void printComma(int[] lottoResult, int i) {
-        if (i < lottoResult.length - 1) {
+    private static void printComma(List<Integer> lottoResult, int i) {
+        if (i < lottoResult.size() - 1) {
             System.out.print(", ");
         }
     }

@@ -14,15 +14,15 @@ public class WinningStatisticsTest {
 
     @MethodSource("provideWinningNumbers")
     @ParameterizedTest
-    public void 로또_결과를_입력받으면_매칭_결과를_반환한다(List<Integer> winningNumbers, List<int[]> prizes, int bonusNumber) {
+    public void 로또_결과를_입력받으면_매칭_결과를_반환한다(List<Integer> winningNumbers, List<List<Integer>> prizes, int bonusNumber) {
         //given
         WinningStatistics winningStatistics = WinningStatistics.of(winningNumbers, bonusNumber);
 
-        LottoNumber[] fifthPrizes = LottoNumber.fromIntegers(prizes.get(0));
-        LottoNumber[] fourthPrizes = LottoNumber.fromIntegers(prizes.get(1));
-        LottoNumber[] thirdPrizes = LottoNumber.fromIntegers(prizes.get(2));
-        LottoNumber[] secondPrizes = LottoNumber.fromIntegers(prizes.get(3));
-        LottoNumber[] firstPrizes = LottoNumber.fromIntegers(prizes.get(4));
+        LottoResult fifthPrizes = LottoResult.fromIntegers(prizes.get(0));
+        LottoResult fourthPrizes = LottoResult.fromIntegers(prizes.get(1));
+        LottoResult thirdPrizes = LottoResult.fromIntegers(prizes.get(2));
+        LottoResult secondPrizes = LottoResult.fromIntegers(prizes.get(3));
+        LottoResult firstPrizes = LottoResult.fromIntegers(prizes.get(4));
 
         //when
         winningStatistics.matchCount(fifthPrizes);

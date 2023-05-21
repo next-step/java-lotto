@@ -36,10 +36,10 @@ public class WinningStatistics {
         return winningPrizeCount;
     }
 
-    public void matchCount(LottoNumber[] lottoNumbers) {
+    public void matchCount(LottoResult lottoResult) {
         int count = 0;
         boolean bonusMatch = false;
-        for (LottoNumber num : lottoNumbers) {
+        for (LottoNumber num : lottoResult.getLottoNumbers()) {
             count = num.addCountIfContain(count, winningNumbers);
             bonusMatch = bonusNumber.isBonusMatch(num);
         }

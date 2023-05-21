@@ -5,24 +5,19 @@ import java.util.List;
 
 public class LottoResults {
 
-    private final List<LottoNumber[]> lottoResults;
+    private final List<LottoResult> lottoResults;
 
-    public LottoResults(List<LottoNumber[]> lottoResults) {
+
+    public LottoResults(List<LottoResult> lottoResults) {
         this.lottoResults = lottoResults;
     }
 
-    private static void mapIntToNumber(int[] lottoResult, LottoNumber[] lottoNumbers) {
-        for (int i = 0; i < lottoResult.length; i++) {
-            lottoNumbers[i] = LottoNumber.from(lottoResult[i]);
-        }
-    }
 
-    public static LottoResults fromIntegers(List<int[]> lottoResultList) {
-        List<LottoNumber[]> lottoResults = new ArrayList<>();
-        for (int[] lottoResult : lottoResultList) {
-            LottoNumber[] lottoNumbers = new LottoNumber[lottoResult.length];
-            mapIntToNumber(lottoResult, lottoNumbers);
-            lottoResults.add(lottoNumbers);
+    public static LottoResults fromIntegers(List<List<Integer>> lottoResultList) {
+        List<LottoResult> lottoResults = new ArrayList<>();
+        for (List<Integer> lotto : lottoResultList) {
+            LottoResult lottoResult = LottoResult.fromIntegers(lotto);
+            lottoResults.add(lottoResult);
         }
         return new LottoResults(lottoResults);
     }
@@ -31,28 +26,24 @@ public class LottoResults {
         this.lottoResults = new ArrayList<>();
     }
 
-    public void add(LottoNumber[] generateNumbers) {
+    public void add(LottoResult generateNumbers) {
         lottoResults.add(generateNumbers);
     }
 
-    public List<int[]> lottoResults() {
-        List<int[]> lottoResultList = new ArrayList<>();
-        for (LottoNumber[] lottoResult : lottoResults) {
+    public List<List<Integer>> lottoResults() {
+        List<List<Integer>> lottoResultList = new ArrayList<>();
+        for (LottoResult lottoResult : lottoResults) {
             lottoResultList.add(inputLottoNumber(lottoResult));
         }
         return lottoResultList;
     }
 
-    private int[] inputLottoNumber(LottoNumber[] lottoResult) {
-        int[] result = new int[lottoResult.length];
-        for (int i = 0; i < lottoResult.length; i++) {
-            result[i] = lottoResult[i].getLottoNumber();
-        }
-        return result;
+    private List<Integer> inputLottoNumber(LottoResult lottoResult) {
+        return lottoResult.getLottoResult();
     }
 
     public void calculateWinningStatistics(WinningStatistics winningStatistics) {
-        for (LottoNumber[] lottoResult : lottoResults) {
+        for (LottoResult lottoResult : lottoResults) {
             winningStatistics.matchCount(lottoResult);
         }
     }

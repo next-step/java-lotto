@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoNumber {
@@ -22,14 +23,6 @@ public class LottoNumber {
 
     public static LottoNumber from(int lottoNumber) {
         return LOTTO_NUMBER_MAP.get(lottoNumber);
-    }
-
-    public static LottoNumber[] fromIntegers(int[] lottoIntegers) {
-        LottoNumber[] lottoNumbers = new LottoNumber[lottoIntegers.length];
-        for (int i = 0; i < lottoIntegers.length; i++) {
-            lottoNumbers[i] = LOTTO_NUMBER_MAP.get(lottoIntegers[i]);
-        }
-        return lottoNumbers;
     }
 
     public int getLottoNumber() {

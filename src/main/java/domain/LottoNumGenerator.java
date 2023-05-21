@@ -18,13 +18,13 @@ public class LottoNumGenerator {
         }
     }
 
-    public static LottoNumber[] generateNumbers() {
-        LottoNumber[] generatedNumbers = new LottoNumber[LOTTO_SIZE];
+    public static LottoResult generateResult() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
         Collections.shuffle(LOTTO_BALLS);
         for (int i = 0; i < LOTTO_SIZE; i++) {
-            generatedNumbers[i] = LOTTO_BALLS.get(i);
+            lottoNumbers.add(LOTTO_BALLS.get(i));
         }
 
-        return generatedNumbers;
+        return new LottoResult(lottoNumbers);
     }
 }

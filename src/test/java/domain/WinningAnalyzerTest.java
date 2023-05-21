@@ -15,7 +15,7 @@ public class WinningAnalyzerTest {
 
     @MethodSource("provideLottoList")
     @ParameterizedTest
-    public void 지난주_당첨번호를_입력하면_당첨통계를_제공한다(List<int[]> lottoList, List<Integer> winningNumbers, int bonusNumber) throws Exception {
+    public void 지난주_당첨번호를_입력하면_당첨통계를_제공한다(List<List<Integer>> lottoList, List<Integer> winningNumbers, int bonusNumber) throws Exception {
         //given
         LottoResults lottoResults = LottoResults.fromIntegers(lottoList);
         WinningAnalyzer winningAnalyzer = new WinningAnalyzer(lottoResults, winningNumbers, bonusNumber);
@@ -35,7 +35,7 @@ public class WinningAnalyzerTest {
 
     @MethodSource("provideLottoList")
     @ParameterizedTest
-    void 수익률을_반환한다(List<int[]> lottoList, List<Integer> winningNumbers, int bonusNumber) {
+    void 수익률을_반환한다(List<List<Integer>> lottoList, List<Integer> winningNumbers, int bonusNumber) {
         //given
         LottoResults lottoResults = LottoResults.fromIntegers(lottoList);
         WinningAnalyzer winningAnalyzer = new WinningAnalyzer(lottoResults, winningNumbers, bonusNumber);
@@ -52,14 +52,14 @@ public class WinningAnalyzerTest {
         return Stream.of(
             Arguments.of(
                 Arrays.asList(
-                    new int[]{ 2, 4, 6, 7, 10, 12 },
-                    new int[]{ 1, 4, 6, 7, 10, 12 },
-                    new int[]{ 1, 2, 3, 4, 5, 6 },
-                    new int[]{ 1, 4, 5, 6, 15, 17 }, // 5등(3개 일치)
-                    new int[]{ 1, 3, 15, 17, 18, 19 }, // 4등(4개 일치)
-                    new int[]{ 1, 3, 15, 17, 29, 35 }, // 3등(5개 일치)
-                    new int[]{ 1, 3, 15, 17, 29, 30 }, // 2등(5개 일치) & 보너스 일치
-                    new int[]{ 1, 3, 15, 17, 29, 31 } // 1등(6개 일치)
+                    Arrays.asList(2, 4, 6, 7, 10, 12),
+                    Arrays.asList(1, 4, 6, 7, 10, 12),
+                    Arrays.asList(1, 2, 3, 4, 5, 6 ),
+                    Arrays.asList(1, 4, 5, 6, 15, 17 ),// 5등(3개 일치)
+                    Arrays.asList(1, 3, 15, 17, 18, 19 ), // 4등(4개 일치)
+                    Arrays.asList(1, 3, 15, 17, 29, 35 ), // 3등(5개 일치)
+                    Arrays.asList(1, 3, 15, 17, 29, 30 ), // 2등(5개 일치) & 보너스 일치
+                    Arrays.asList(1, 3, 15, 17, 29, 31 )// 1등(6개 일치)
                 ),
                 Arrays.asList(1, 3, 15, 17, 29, 31),
                 30
