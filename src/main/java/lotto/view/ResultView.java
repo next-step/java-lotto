@@ -36,6 +36,7 @@ public class ResultView {
 
     public static void printLottoTickets(LottoTickets lottoTickets) {
         lottoTickets.getLottoTickets().forEach(ResultView::printLottoTicket);
+        System.out.println();
     }
 
     private static void printLottoTicket(LottoTicket lottoTicket) {

@@ -41,10 +41,11 @@ public class LottoMain {
 
     private static List<LottoTicket> inputManualLottoTickets(int manualTicketCount) {
         InputView.printManualTicketGuideMessage();
-        List<LottoTicket> lottoTickets = IntStream.range(0, manualTicketCount)
+        List<LottoTicket> lottoTickets = IntStream.rangeClosed(1, manualTicketCount)
                 .mapToObj(i -> new LottoTicket(InputView.inputManualTicketNumbers()))
                 .collect(Collectors.toList());
 
+        System.out.println();
         return lottoTickets;
     }
 }
