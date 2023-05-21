@@ -20,7 +20,7 @@ public class LottoNumbers {
     public LottoNumbers(List<LottoNo> lottoNos) {
         validateCount(lottoNos);
         Collections.sort(lottoNos);
-        this.lottoNos = lottoNos;
+        this.lottoNos = new ArrayList<>(lottoNos);
     }
 
     public static List<LottoNumbers> toList(List<List<Integer>> manualLottos) {
