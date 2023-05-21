@@ -16,8 +16,8 @@ public class Main {
         int money = InputView.getMoney();
 
         final int manualLotteryTicketCount = InputView.getManualLotteryTicketCount();
-        InputView.enterManualLotteryNumbers();
-        LotteryTickets manualLotteryTickets = LotteryTickets.fromCount(manualLotteryTicketCount, new ManualLotteryNumberGenerator());
+        String ticketNumberString = InputView.enterManualLotteryNumbers();
+        LotteryTickets manualLotteryTickets = LotteryTickets.fromCount(manualLotteryTicketCount, ManualLotteryNumberGenerator.from(ticketNumberString));
 
         LotteryTickets autoLotteryTickets = LotteryTickets.fromMoney(money, manualLotteryTicketCount, new AutoLotteryNumberGenerator());
 
