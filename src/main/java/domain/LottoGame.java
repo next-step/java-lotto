@@ -41,7 +41,7 @@ public class LottoGame {
     }
 
     public int getAutomaticCount() {
-        return money.getTotalCount();
+        return money.getAutomaticCount();
     }
 
     public int getMoney() {

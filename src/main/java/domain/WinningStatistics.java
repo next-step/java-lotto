@@ -51,11 +51,7 @@ public class WinningStatistics {
     }
 
     public int getTotalWinnings() {
-        int winnings = 0;
-        for (WinningPrizeMatcher matchers : winningPrizeCount.keySet()) {
-            winnings += matchers.calculateWinningPrize()
-                                .calculatePrizeMoney(winningPrizeCount.get(matchers));
-        }
+
         return winningPrizeCount.entrySet()
                                 .stream()
                                 .mapToInt(entry

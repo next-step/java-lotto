@@ -21,6 +21,10 @@ public class Money {
         return money / MINIMUM_MONEY;
     }
 
+    public int getAutomaticCount() {
+        return gameCount.getAutomaticCount();
+    }
+
     private static void isValidMoney(int money) {
         if (money < MINIMUM_MONEY) {
             throw new IllegalArgumentException("금액이 잘못 들어왔습니다.");

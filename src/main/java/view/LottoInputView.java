@@ -10,13 +10,12 @@ public class LottoInputView {
 
     public static int getMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        int money = scanner.nextInt();
+        int money = Integer.parseInt(scanner.nextLine());
         return money;
     }
 
     public static List<Integer> getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        scanner.nextLine();
         List<Integer> lastWeekWinningNumbers = new ArrayList<>();
         String[] numbers = scanner.nextLine().split(DELIMITER);
         for (String number : numbers) {
@@ -27,18 +26,15 @@ public class LottoInputView {
 
     public static int getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        int bonusNumber = scanner.nextInt();
-        return bonusNumber;
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public static int getManualCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        int manualCount = scanner.nextInt();
-        return manualCount;
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public static List<Integer> getManualLotto() {
-        scanner.nextLine();
         List<Integer> manualLotto = new ArrayList<>();
         String[] numbers = scanner.nextLine().split(DELIMITER);
         for (String number : numbers) {

@@ -8,4 +8,8 @@ public class GameCount {
         this.manualCount = manualCount;
         this.automaticCount = totalCount - manualCount;
     }
+
+    public int getAutomaticCount() {
+        return automaticCount;
+    }
 }
