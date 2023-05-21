@@ -24,10 +24,6 @@ public class Lotto {
         return lottoNumbers.size() != LOTTO_NUMBERS_SIZE;
     }
 
-    public static int findPurchaseCount(int purchaseAmount) {
-        return (int) purchaseAmount / LOTTO_PRICE;
-    }
-
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
