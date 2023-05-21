@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -78,4 +79,16 @@ public class LotteryTickets {
         return List.copyOf(tickets);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LotteryTickets that = (LotteryTickets) o;
+        return Objects.equals(tickets, that.tickets);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tickets);
+    }
 }

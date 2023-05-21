@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class LotteryTicketsTest {
 
@@ -124,6 +123,44 @@ public class LotteryTicketsTest {
 
         LotteryTickets autoLotteryTickets = LotteryTickets.fromMoney(money, manualLotteryTicketCount, new AutoLotteryNumberGenerator());
         assertThat(autoLotteryTickets.size()).isEqualTo(11);
+    }
+
+    @Test
+    void 수동_로또_생성() {
+        List<String> inputs = List.of("1, 2, 3, 4, 5, 6", "7, 8, 1, 2, 4, 33");
+
+        assertThat(LotteryTickets.fromNumberList(inputs).size()).isEqualTo(2);
+    }
+
+    @Test
+    void 수동_로또_생성_잘못된_입력형태() {
+        List<String> inputs = List.of("1, 2, 3, 4,5,6", "7, 8, 1, 2, 4, 33");
+
+        assertThatThrownBy(() -> LotteryTickets.fromNumberList(inputs).size())
+                .isInstanceOf(NumberFormatException.class)
+                .hasMessageContaining("For input string:");
+    }
+
+    @Test
+    void 수동_로또_생성_잘못된_갯수_입력() {
+        List<String> inputs = List.of("1, 2, 3", "7, 8, 1, 2, 4, 33");
+
+        assertThatThrownBy(() -> LotteryTickets.fromNumberList(inputs).size())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("잘못된 로또 번호 목록입니다.");
+    }
+
+    @Test
+    void addAll_테스트() {
+        String stringA = "1, 2, 3, 4, 5, 6";
+        String stringB = "7, 8, 1, 2, 4, 33";
+        String stringC = "3, 4, 5, 6, 7, 8";
+        String stringD = "13, 14, 5, 24, 26, 33";
+        LotteryTickets lotteryTickets = LotteryTickets.fromNumberList(List.of(stringA, stringB));
+
+        assertThat(lotteryTickets.addAll(LotteryTickets.fromNumberList(List.of(stringC, stringD))))
+                .isEqualTo(LotteryTickets.fromNumberList(List.of(stringA, stringB, stringC, stringD)));
+
     }
 
 }

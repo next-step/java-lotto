@@ -16,7 +16,12 @@ public class ManualLotteryNumberGenerator implements LotteryNumberGenerator {
     }
 
     public static ManualLotteryNumberGenerator from(String ticketNumberString) {
-        return new ManualLotteryNumberGenerator(Arrays.stream(ticketNumberString.split(SPLIT_REGEX)).map(Integer::parseInt).map(LotteryNumber::of).collect(Collectors.toSet()));
+        return new ManualLotteryNumberGenerator(
+                Arrays.stream(ticketNumberString.split(SPLIT_REGEX))
+                .map(Integer::parseInt)
+                .map(LotteryNumber::of)
+                .collect(Collectors.toSet())
+        );
     }
 
     @Override
