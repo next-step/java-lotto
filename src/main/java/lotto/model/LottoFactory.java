@@ -27,12 +27,19 @@ public class LottoFactory {
     }
 
     public static LottoTickets createLottoTickets(int autoTicketCount, List<LottoTicket> manualLottoTickets) {
+        validateCount(autoTicketCount);
         List<LottoTicket> autoLottoTickets = IntStream.range(0, autoTicketCount)
                 .mapToObj(i -> createAutoLottoTicket())
                 .collect(Collectors.toList());
 
         manualLottoTickets.addAll(autoLottoTickets);
         return new LottoTickets(manualLottoTickets);
+    }
+
+    private static void validateCount(int autoTicketCount) {
+        if (autoTicketCount < 0) {
+            throw new IllegalArgumentException("구매 가능한 티켓 수를 초과했습니다.");
+        }
     }
 
 }
