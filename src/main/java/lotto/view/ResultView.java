@@ -11,15 +11,15 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    private static final String SHOW_PURCHASE_COUNT_RESULT = "%s개를 구매했습니다.";
+    private static final String SHOW_PURCHASE_COUNT_RESULT = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
     private static final String WINNING_STATISTICS = "당첨 통계";
     private static final String NINE_DASH = "---------";
     private static final String RESULT_MENT = "%s개 일치 (%s원) - %s개";
     private static final String RESULT_MENT_FOR_SECOND_PLACE = "%s개 일치, 보너스 볼 일치(%s원) - %s개";
     private static final String RATE_OF_RETURN_MENT = "총 수익률은 %.2f입니다.";
 
-    public void showPurchaseCount(int purchaseCount) {
-        System.out.println(formatShowPurchaseCountResult(purchaseCount));
+    public void showPurchaseCount(int manuallyPurchaseCount, int automaticallyPurchaseCount) {
+        System.out.println(formatShowPurchaseCountResult(manuallyPurchaseCount, automaticallyPurchaseCount));
     }
 
     public void showLottos(List<Lotto> createdLottos) {
@@ -57,8 +57,8 @@ public class ResultView {
                 .forEach(System.out::println);
     }
 
-    private String formatShowPurchaseCountResult(int purchaseCount) {
-        return String.format(SHOW_PURCHASE_COUNT_RESULT, purchaseCount);
+    private String formatShowPurchaseCountResult(int manuallyPurchaseCount, int automaticallyPurchaseCount) {
+        return String.format(SHOW_PURCHASE_COUNT_RESULT, manuallyPurchaseCount, automaticallyPurchaseCount);
     }
 
     private String formatRateOfReturnMent(LottoResult lottoResult) {
