@@ -62,3 +62,17 @@
    5. Rank 내 findRank 구현
    6. test 위한 클래스를 test 폴더 하위로 이동
    7. 로또 클래스 Set 컬렉션 이용
+
+## [4단계 - 로또(수동)]
+1. 3단계 피드백 반영 사항
+   1. LIMIT_NUMBER 45로 재설정
+   2. WinningLotto를 Lotto 객체와 협력을 맺게 함으로써 6개, 중복X 조건 충족하게 하기
+   3. 보너스 번호 검증 추가
+
+2. 4단계 기능 요구 사항
+   1. 사용자가 수동으로 추첨 번호를 입력하도록 하기
+
+3. 기능 구현 사항
+   1. 수동으로 구매할 로또 수 입력 받기 - LottoPurchaseCount class
+      1. 자동 구매 개수 자동 산출
+   2. 수동으로 구매할 번호 입력 받기 - ManuallyCreatedLottos class
