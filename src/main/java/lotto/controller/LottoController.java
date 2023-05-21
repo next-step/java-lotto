@@ -1,13 +1,15 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoShop;
 import lotto.domain.Lottos;
+import lotto.domain.WinningLotto;
 import lotto.domain.result.LottoResult;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import static lotto.domain.Lotto.stringToNumber;
+import java.util.List;
+
+import static lotto.domain.Lotto.getLottoCount;
 
 public class LottoController {
 
@@ -15,15 +17,16 @@ public class LottoController {
     public static void main(String[] args) {
 
         int payment = InputView.enterAmount();
+        int lottoCount = getLottoCount(payment);
 
-        Lottos lottos = LottoShop.buyLotto(payment);
-        ResultView.printLottoCount(lottos.getLottoCount());
-        ResultView.printLottoNumber(lottos);
+        Lottos lottos = new Lottos(lottoCount);
+        List<Lotto> lottoList = lottos.createLottos();
 
-        Lotto winningLotto = stringToNumber(InputView.enterWinningNumber());
-        Integer bonusNumber = InputView.enterBonusNumber();
+        ResultView.printLottoCount(lottoCount);
+        ResultView.printLottoNumber(lottoList);
 
-        LottoResult lottoResult = lottos.getLottoResult(winningLotto, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(InputView.enterWinningNumber(), InputView.enterBonusNumber());
+        LottoResult lottoResult = winningLotto.getLottoResult(lottoList);
 
         ResultView.printLottoStatistic(lottoResult);
         ResultView.printWinningProfit(lottoResult, payment);

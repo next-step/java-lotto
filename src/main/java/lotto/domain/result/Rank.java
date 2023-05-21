@@ -18,9 +18,9 @@ public enum Rank {
         this.reward = reward;
     }
 
-    public static Rank valueOf(int hit, boolean matchedBonusNumber) {
+    public static Rank valueOf(int hit, boolean hasBonusNumber) {
         if (hit == 5) {
-            return matchedBonusNumber ? Rank.SECOND : Rank.THIRD;
+            return hasBonusNumber ? Rank.SECOND : Rank.THIRD;
         }
         return Arrays.stream(values())
                 .filter(rank -> rank.getHit() == hit)

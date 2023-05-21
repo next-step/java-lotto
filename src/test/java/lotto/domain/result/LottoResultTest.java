@@ -1,9 +1,8 @@
 package lotto.domain.result;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Map;
 
@@ -12,27 +11,36 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoResultTest {
 
+    private LottoResult lottoResult;
+
+    @BeforeEach
+    void setUp() {
+        lottoResult = LottoResult.of();
+    }
+
     @Test
     @DisplayName(value = "로또 결과 초기 생성 검사")
     void test1() {
-        LottoResult of = LottoResult.of();
+        // given
         LottoResult lottoResult = new LottoResult(Map.of(Rank.FIRST, Rank.FIRST.initialRank()
                 , Rank.SECOND, Rank.SECOND.initialRank()
                 , Rank.THIRD, Rank.THIRD.initialRank()
                 , Rank.FOURTH, Rank.FOURTH.initialRank()
                 , Rank.FIFTH, Rank.FIFTH.initialRank()
                 , Rank.NO_RANK, Rank.NO_RANK.initialRank()));
-        assertThat(of).isEqualTo(lottoResult);
+
+        // then
+        assertThat(this.lottoResult).isEqualTo(lottoResult);
     }
 
-    @ParameterizedTest(name = "3개 숫자가 일치할 경우 당첨 횟수 카운트 검사")
-    @CsvSource(value = {"3:1", "2:1", "1:1"}, delimiter = ':')
-    void test2(int hit, int expect) {
-        LottoResult lottoResult = LottoResult.of();
-        Rank rank = Rank.valueOf(hit, false);
-        lottoResult.win(rank);
+    @Test
+    @DisplayName(value = "결과 랭크와 일치하는 랭크 개수 증가 검사")
+    void test2() {
+        // given
+        lottoResult.plusWinOfCount(Rank.FOURTH);
 
-        assertThat(lottoResult.getLottoResult().get(rank)).isEqualTo(expect);
+        // then
+        assertThat(lottoResult.getLottoResult().get(Rank.FOURTH)).isEqualTo(1);
     }
 
 }

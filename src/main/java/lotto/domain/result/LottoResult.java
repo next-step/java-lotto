@@ -18,18 +18,10 @@ public class LottoResult {
         return Collections.unmodifiableMap(result);
     }
 
-    public void win(Rank matchedRank) {
-        for (Rank rank : result.keySet()) {
-            plusWinOfCount(matchedRank, rank);
-        }
-    }
-
-    private void plusWinOfCount(Rank matchedRank, Rank rank) {
-        if (matchedRank.equals(rank)) {
-            Long winOfCount = result.get(rank);
-            winOfCount++;
-            result.put(rank, winOfCount);
-        }
+    public void plusWinOfCount(Rank rank) {
+        Long winOfCount = result.get(rank);
+        winOfCount++;
+        result.put(rank, winOfCount);
     }
 
     public int getTotalPrice() {

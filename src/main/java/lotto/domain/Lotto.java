@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.result.Rank;
-
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -11,6 +9,7 @@ public class Lotto {
     public static final int MAX_LOTTO_NUMBER = 45;
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int LOTTO_SIZE = 6;
+    private static final int THOUSAND = 1000;
     private static final List<Integer> LOTTO_NUMBERS = Stream.iterate(MIN_LOTTO_NUMBER, n -> n + 1).limit(MAX_LOTTO_NUMBER).collect(Collectors.toList());
 
     public List<Integer> lotto;
@@ -27,6 +26,10 @@ public class Lotto {
         return new Lotto(new ArrayList<>(lottoNumbers));
     }
 
+    public boolean containsBonusNumber(Integer bonusNumber) {
+        return this.lotto.contains(bonusNumber);
+    }
+
     public static Lotto createLottoNumber() {
         Collections.shuffle(LOTTO_NUMBERS);
         return LOTTO_NUMBERS.stream()
@@ -34,22 +37,15 @@ public class Lotto {
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::of));
     }
 
-    public static Lotto stringToNumber(String winningLotto) {
-        List<Integer> IntegerList = Arrays.stream(winningLotto.split(", "))
-                .map(Integer::parseInt)
-                .collect((Collectors.toList()));
-        return IntegerList.stream().collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::of));
+    public static int getLottoCount(int payment) {
+        validPrice(payment);
+        return payment / THOUSAND;
     }
 
-    public Rank getRank(Lotto winningLotto, Integer bonusNumber) {
-        return Rank.valueOf(winningLotto.lotto.stream()
-                .filter(lotto::contains)
+    public Integer getHitCount(Lotto winningLotto) {
+        return winningLotto.lotto.stream().filter(lotto::contains)
                 .map(e -> 1)
-                .reduce(0, Integer::sum), matchBonus(bonusNumber));
-    }
-
-    private boolean matchBonus(Integer bonusNumber) {
-        return lotto.stream().anyMatch(number -> number.equals(bonusNumber));
+                .reduce(0, Integer::sum);
     }
 
     private void validLottoSize(List<Integer> lottoNumber) {
@@ -74,6 +70,12 @@ public class Lotto {
                 .count() != lottoNumbers.size();
         if (isDuplicate) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+        }
+    }
+
+    private static void validPrice(int payment) {
+        if (payment < THOUSAND) {
+            throw new IllegalArgumentException("로또 최소 구매 금액은 1000원 입니다");
         }
     }
 

@@ -5,6 +5,7 @@ import lotto.domain.Lotto;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.Rank;
 
+import java.util.List;
 import java.util.Map;
 
 public class ResultView {
@@ -13,9 +14,9 @@ public class ResultView {
     private static final String STATISTICS_STATUS = "%d개 일치 (%d원) - %d개";
     private static final String STATISTICS_INFO = "총 수익률은 %.2f 입니다.";
 
-    public static void printLottoNumber(Lottos lottos) {
-        for (Lotto lottoNumber : lottos.lottos) {
-            System.out.println(lottoNumber);
+    public static void printLottoNumber(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto);
         }
     }
 
