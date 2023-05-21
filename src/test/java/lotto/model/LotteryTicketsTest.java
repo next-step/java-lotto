@@ -9,11 +9,12 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LotteryTest {
+public class LotteryTicketsTest {
 
     @Test
     void 금액을_입력하면_로또티켓목록을_생성() {
         int money = 14000;
+
         LotteryTickets lotteryTickets = LotteryTickets.fromMoney(money, new AutoLotteryNumberGenerator());
         assertThat(lotteryTickets.size()).isEqualTo(14);
     }
@@ -21,51 +22,9 @@ public class LotteryTest {
     @Test
     void 금액이_나누어떨어지지_않으면_버림() {
         int money = 14500;
+
         LotteryTickets lotteryTickets = LotteryTickets.fromMoney(money, new AutoLotteryNumberGenerator());
         assertThat(lotteryTickets.size()).isEqualTo(14);
-    }
-
-    @Test
-    void 로또_티켓은_여섯개의_랜덤숫자를_포함() {
-        LotteryTicket lotteryTicket = LotteryTicket.of(new AutoLotteryNumberGenerator());
-        assertThat(lotteryTicket.size()).isEqualTo(6);
-    }
-
-    @Test
-    void 로또_숫자_범위를_벗어나면_에러() {
-        assertThatThrownBy(() -> LotteryNumber.of(0))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("잘못된 로또 번호입니다.");
-        assertThatThrownBy(() -> LotteryNumber.of(46))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("잘못된 로또 번호입니다.");
-    }
-
-    @Test
-    void 로또_티켓은_중복번호를_가지지않음() {
-        assertThatThrownBy(() -> new LotteryTicket(Set.of(
-                LotteryNumber.of(8),
-                LotteryNumber.of(21),
-                LotteryNumber.of(21),
-                LotteryNumber.of(41),
-                LotteryNumber.of(42),
-                LotteryNumber.of(43))))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("duplicate element: 21");
-    }
-
-    @Test
-    void 로또티켓_맞는갯수_계산() {
-        LotteryTicket lotteryTicket = new LotteryTicket(Set.of(
-                LotteryNumber.of(8),
-                LotteryNumber.of(21),
-                LotteryNumber.of(23),
-                LotteryNumber.of(41),
-                LotteryNumber.of(42),
-                LotteryNumber.of(43)));
-        Set<Integer> winNumbers = Set.of(41, 1, 13, 27, 42, 43);
-        double count = lotteryTicket.matchCount(new WinNumbers(winNumbers));
-        assertThat(count).isEqualTo(3);
     }
 
     @Test
@@ -114,25 +73,13 @@ public class LotteryTest {
                 LotteryNumber.of(5)));
         LotteryTickets lotteryTickets = new LotteryTickets(List.of(win3, win4, win5, win6, win6_2, miss));
         WinNumbers winNumbers = new WinNumbers(Set.of(41, 1, 13, 27, 42, 43));
+
         Map<Win, Integer> totalWin = lotteryTickets.getTotalWin(winNumbers);
         assertThat(totalWin).containsEntry(Win.WIN_3, 1)
                 .containsEntry(Win.WIN_4, 1)
                 .containsEntry(Win.WIN_5, 1)
                 .containsEntry(Win.WIN_6, 2)
                 .containsEntry(Win.DEFAULT, 1);
-    }
-
-    @Test
-    void 다섯개와_보너스볼_일치는_이등() {
-        LotteryTicket lotteryTicket = new LotteryTicket(Set.of(
-                LotteryNumber.of(27),
-                LotteryNumber.of(1),
-                LotteryNumber.of(10),
-                LotteryNumber.of(41),
-                LotteryNumber.of(42),
-                LotteryNumber.of(43)));
-        WinNumbers winNumbers = new WinNumbers(Set.of(41, 1, 13, 27, 42, 43), 10);
-        assertThat(lotteryTicket.matchCount(winNumbers)).isEqualTo(5.5);
     }
 
     @Test
@@ -146,20 +93,9 @@ public class LotteryTest {
                 LotteryNumber.of(43)));
         LotteryTickets lotteryTickets = new LotteryTickets(List.of(lotteryTicket));
         WinNumbers winNumbers = new WinNumbers(Set.of(41, 1, 13, 27, 42, 43), 10);
+
         Map<Win, Integer> totalWin = lotteryTickets.getTotalWin(winNumbers);
         assertThat(totalWin).containsEntry(Win.WIN_5_BONUS, 1);
-    }
-
-    @Test
-    void toString_정렬() {
-        LotteryTicket lotteryTicket = new LotteryTicket(Set.of(
-                LotteryNumber.of(27),
-                LotteryNumber.of(1),
-                LotteryNumber.of(10),
-                LotteryNumber.of(41),
-                LotteryNumber.of(42),
-                LotteryNumber.of(43)));
-        assertThat(lotteryTicket).hasToString("[1, 10, 27, 41, 42, 43]");
     }
 
     @Test
@@ -188,15 +124,6 @@ public class LotteryTest {
 
         LotteryTickets autoLotteryTickets = LotteryTickets.fromMoney(money, manualLotteryTicketCount, new AutoLotteryNumberGenerator());
         assertThat(autoLotteryTickets.size()).isEqualTo(11);
-    }
-
-    @Test
-    void 보너스번호는_당첨번호와_겹칠수_없음() {
-        Set<Integer> winNumbers = Set.of(1, 2, 3, 4, 5, 6);
-        int bonusNumber = 1;
-        assertThatThrownBy(() -> new WinNumbers(winNumbers, bonusNumber))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("보너스 번호는 당첨 번호와 겹칠 수 없습니다.");
     }
 
 }
