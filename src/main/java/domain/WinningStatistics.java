@@ -6,9 +6,9 @@ import java.util.Map;
 
 public class WinningStatistics {
 
-    private WinningNumbers winningNumbers;
+    private final WinningNumbers winningNumbers;
 
-    private BonusNumber bonusNumber;
+    private final BonusNumber bonusNumber;
 
     private Map<WinningPrizeMatcher, Integer> winningPrizeCount;
 
@@ -19,8 +19,7 @@ public class WinningStatistics {
         this.winningPrizeCount = new EnumMap<WinningPrizeMatcher, Integer>(WinningPrizeMatcher.class);
     }
 
-    public static WinningStatistics of(List<Integer> winningNumbers,
-                                int bonusNumber) {
+    public static WinningStatistics of(List<Integer> winningNumbers, int bonusNumber) {
         WinningStatistics winningStatistics = new WinningStatistics(winningNumbers, bonusNumber);
         winningStatistics.setUpCount();
         return winningStatistics;

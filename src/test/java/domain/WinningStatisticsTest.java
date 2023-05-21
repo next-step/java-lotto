@@ -47,11 +47,11 @@ public class WinningStatisticsTest {
             Arguments.of(
                 Arrays.asList(1, 3, 15, 17, 21, 35),
                 Arrays.asList(
-                    new int[]{ 1, 3, 15, 7, 9, 11 }, // 3개 일치
-                    new int[]{ 1, 3, 15, 17, 9, 11 }, // 4개 일치
-                    new int[]{ 1, 3, 15, 17, 9, 21 }, // 5개 일치
-                    new int[]{1, 3, 15, 17, 21, 22}, // 5개 일치 & 보너스 일치
-                    new int[]{ 1, 3, 15, 17, 21, 35 } // 6개 일치
+                    Arrays.asList(1, 3, 15, 7, 9, 11), // 3개 일치
+                    Arrays.asList( 1, 3, 15, 17, 9, 11 ), // 4개 일치
+                    Arrays.asList( 1, 3, 15, 17, 9, 21 ), // 5개 일치
+                    Arrays.asList(1, 3, 15, 17, 21, 22), // 5개 일치 & 보너스 일치
+                    Arrays.asList( 1, 3, 15, 17, 21, 35 ) // 6개 일치
                 ),
                 22 // 보너스
             )

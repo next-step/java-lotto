@@ -3,7 +3,6 @@ package view;
 import static domain.WinningPrizeMatcher.FIVE_BONUS;
 import static domain.WinningPrizeMatcher.THRESHOLD;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 

@@ -16,10 +16,10 @@ public class LottoGameTest {
         //when
         lottoGenerator.generateLottoResultsFromMoney(money);
         LottoResults lottoResults = lottoGenerator.getLottoResults();
-        List<int[]> lottoResultList = lottoResults.lottoResults();
+        List<List<Integer>> lottoResultList = lottoResults.lottoNumbersToInt();
         //then
         assertThat(lottoResultList).hasSize(14);
-        for (int[] lottoNum : lottoResultList) {
+        for (List<Integer> lottoNum : lottoResultList) {
             assertThat(lottoNum).hasSize(6);
         }
     }

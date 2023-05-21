@@ -30,7 +30,7 @@ public class LottoResults {
         lottoResults.add(generateNumbers);
     }
 
-    public List<List<Integer>> lottoResults() {
+    public List<List<Integer>> lottoNumbersToInt() {
         List<List<Integer>> lottoResultList = new ArrayList<>();
         for (LottoResult lottoResult : lottoResults) {
             lottoResultList.add(inputLottoNumber(lottoResult));

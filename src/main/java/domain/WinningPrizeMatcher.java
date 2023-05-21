@@ -80,7 +80,15 @@ public enum WinningPrizeMatcher {
     }
 
     public static WinningPrizeMatcher valueOf(int numberOfCount, boolean isBonusMatch) {
+        isBonusMatch = checkBonus(numberOfCount, isBonusMatch);
         return WINNING_PRIZE_MATCHERS_MAP.get(getHashCode(numberOfCount, isBonusMatch));
+    }
+
+    private static boolean checkBonus(int numberOfCount, boolean isBonusMatch) {
+        if (FIVE_BONUS.getNumberOfCount() != numberOfCount && isBonusMatch) {
+            isBonusMatch = false;
+        }
+        return isBonusMatch;
     }
 
     public int getNumberOfCount() {

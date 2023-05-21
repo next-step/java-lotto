@@ -3,7 +3,6 @@ import java.util.List;
 import domain.LottoGame;
 import domain.LottoResults;
 import domain.WinningAnalyzer;
-import domain.WinningPrizes;
 import domain.WinningStatistics;
 import view.LottoInputView;
 import view.LottoOutputView;
@@ -18,7 +17,7 @@ public class LottoController {
     }
 
     public void getLottoResults() {
-        List<List<Integer>> results = lottoGame.getLottoResults().lottoResults();
+        List<List<Integer>> results = lottoGame.getLottoResults().lottoNumbersToInt();
         int gameCount = lottoGame.getCount();
         LottoOutputView.printLottoResults(gameCount, results);
     }

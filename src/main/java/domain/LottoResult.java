@@ -7,6 +7,7 @@ public class LottoResult {
     private List<LottoNumber> lottoResult;
 
     public LottoResult() {
+        this.lottoResult = new ArrayList<>();
     }
 
     public LottoResult(List<LottoNumber> lottoNumbers) {
