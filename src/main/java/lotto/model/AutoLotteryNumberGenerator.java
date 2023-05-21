@@ -8,17 +8,17 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.constant.LotteryConstant.*;
+import static lotto.model.LotteryEnum.*;
 
 public class AutoLotteryNumberGenerator implements LotteryNumberGenerator {
 
-    private static final List<LotteryNumber> numbers = IntStream.rangeClosed(LOTTERY_MIN, LOTTERY_MAX)
+    private static final List<LotteryNumber> numbers = IntStream.rangeClosed(LOTTERY_MIN.value(), LOTTERY_MAX.value())
             .boxed().map(LotteryNumber::of).collect(Collectors.toList());
 
     @Override
     public Set<LotteryNumber> generate() {
         List<LotteryNumber> newNumbers = initializeRandomNumberList();
-        Set<LotteryNumber> result = new HashSet<>(newNumbers.subList(0, NUMBER_PER_TICKET));
+        Set<LotteryNumber> result = new HashSet<>(newNumbers.subList(0, NUMBER_PER_TICKET.value()));
         validate(result);
         return result;
     }
@@ -30,7 +30,7 @@ public class AutoLotteryNumberGenerator implements LotteryNumberGenerator {
     }
 
     private void validate(Set<LotteryNumber> numbers) {
-        if (numbers.size() != NUMBER_PER_TICKET || numbers.stream().distinct().count() != NUMBER_PER_TICKET) {
+        if (numbers.size() != NUMBER_PER_TICKET.value() || numbers.stream().distinct().count() != NUMBER_PER_TICKET.value()) {
             throw new IllegalArgumentException("잘못된 로또 번호 목록입니다. : " + numbers);
         }
     }

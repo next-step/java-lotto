@@ -7,12 +7,14 @@ import java.util.Map;
 
 public class OutputView {
 
-    public static void showLotteryCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    public static void showLotteryCount(int manualCount, int autoCount) {
+        System.out.println();
+        System.out.println("수동으로 " + manualCount + "개, 자동으로 " + autoCount + "개를 구매했습니다.");
     }
 
-    public static void showLotteryTickets(LotteryTickets lotteryTickets) {
-        lotteryTickets.getTickets().forEach(System.out::println);
+    public static void showLotteryTickets(LotteryTickets manual, LotteryTickets auto) {
+        manual.getTickets().forEach(System.out::println);
+        auto.getTickets().forEach(System.out::println);
         System.out.println();
     }
 
@@ -37,10 +39,11 @@ public class OutputView {
     }
 
     private static String getMatchString(Win win) {
+        int points = (int) win.getPoints();
         if (Win.WIN_5_BONUS.equals(win)) {
-            return (int) win.getPoints() + "개 일치, 보너스 볼 일치";
+            return points + "개 일치, 보너스 볼 일치";
         }
-        return (int) win.getPoints() + "개 일치";
+        return points + "개 일치";
     }
 
 }

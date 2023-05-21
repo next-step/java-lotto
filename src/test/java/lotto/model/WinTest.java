@@ -26,4 +26,11 @@ public class WinTest {
         assertThat(Win.calculateProfitRate(income, outcome)).isEqualTo("0.35");
     }
 
+    @Test
+    void Win_from_테스트() {
+        assertThat(Win.from(5.5)).isEqualTo(Win.WIN_5_BONUS);
+        assertThat(Win.from(2)).isEqualTo(Win.DEFAULT);
+        assertThat(Win.from(6)).isEqualTo(Win.WIN_6);
+    }
+
 }

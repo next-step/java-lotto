@@ -1,10 +1,13 @@
 package lotto.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static lotto.constant.LotteryConstant.LOTTERY_PRICE;
+import static lotto.model.LotteryEnum.LOTTERY_PRICE;
 
 public class LotteryTickets {
 
@@ -14,15 +17,49 @@ public class LotteryTickets {
         this.tickets = tickets;
     }
 
-    public static LotteryTickets of(int money, LotteryNumberGenerator lotteryNumberGenerator) {
+    public static LotteryTickets fromMoney(int money, int manualLotteryTicketCount, LotteryNumberGenerator lotteryNumberGenerator) {
+        return LotteryTickets.fromMoney(calculateChange(money, manualLotteryTicketCount), lotteryNumberGenerator);
+    }
+
+    public static LotteryTickets fromMoney(int money, LotteryNumberGenerator lotteryNumberGenerator) {
         if (money < 0) {
             throw new IllegalArgumentException("지불한 돈은 음수일 수 없습니다");
         }
+        return getLotteryTickets(calculateTicketCount(money), lotteryNumberGenerator);
+    }
+
+    public static LotteryTickets fromNumberList(List<String> ticketNumbers) {
+        List<LotteryTicket> lotteryTickets = new ArrayList<>();
+        for (String ticketNumber : ticketNumbers) {
+            lotteryTickets.add(LotteryTicket.of(ManualLotteryNumberGenerator.from(ticketNumber)));
+        }
+        return new LotteryTickets(lotteryTickets);
+    }
+
+    private static LotteryTickets getLotteryTickets(int count, LotteryNumberGenerator lotteryNumberGenerator) {
         List<LotteryTicket> tickets = new ArrayList<>();
-        for (int i = 0; i < money / LOTTERY_PRICE; i++) {
+        for (int i = 0; i < count; i++) {
             tickets.add(LotteryTicket.of(lotteryNumberGenerator));
         }
         return new LotteryTickets(tickets);
+    }
+
+    private static int calculateChange(int money, int manualLotteryTicketCount) {
+        int result = money - manualLotteryTicketCount * LotteryEnum.LOTTERY_PRICE.value();
+        if (result < 0) {
+            throw new IllegalArgumentException("지불한 돈 이상으로 구매할 수 없습니다.");
+        }
+        return result;
+    }
+
+    private static int calculateTicketCount(int money) {
+        return money / LOTTERY_PRICE.value();
+    }
+
+    public LotteryTickets addAll(LotteryTickets tickets) {
+        List<LotteryTicket> result = new ArrayList<>(this.tickets);
+        result.addAll(tickets.getTickets());
+        return new LotteryTickets(result);
     }
 
     public Map<Win, Integer> getTotalWin(WinNumbers winNumbers) {
@@ -42,4 +79,16 @@ public class LotteryTickets {
         return List.copyOf(tickets);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LotteryTickets that = (LotteryTickets) o;
+        return Objects.equals(tickets, that.tickets);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tickets);
+    }
 }
