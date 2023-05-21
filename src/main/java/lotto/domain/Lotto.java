@@ -9,7 +9,6 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         checkValidation(lottoNumbers);
-        Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -31,6 +30,10 @@ public class Lotto {
                 .filter((winLotto.lottoNumbers::contains))
                 .count()
         );
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override

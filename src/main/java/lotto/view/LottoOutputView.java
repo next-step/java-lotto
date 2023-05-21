@@ -5,6 +5,8 @@ import lotto.domain.LottoRank;
 import lotto.domain.LottoResults;
 import lotto.domain.Lottos;
 
+import java.util.Collections;
+
 public class LottoOutputView {
 
     public static void printPurchaseNumber(int purchaseNumber){
@@ -19,6 +21,7 @@ public class LottoOutputView {
     }
 
     private static void printLotto(Lotto lotto) {
+        Collections.sort(lotto.getLottoNumbers());
         System.out.println(lotto);
     }
 
@@ -34,7 +37,7 @@ public class LottoOutputView {
     }
 
     private static void printProfit(LottoResults results) {
-        double profitRate = (double) results.totalPrizeMoney() / ((double) results.countTotalLotto()* 1000)src/main/java/lotto/LottoApplication.java;
+        double profitRate = (double) results.totalPrizeMoney() / ((double) results.countTotalLotto()* 1000);
         System.out.println("총 수익률은 "+String.format("%.2f", profitRate)+"입니다.");
     }
 

@@ -19,7 +19,9 @@ public class LottoInputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winLotto = scanner.nextLine();
         System.out.println();
-        return Arrays.stream(winLotto.split(",")).map(String::trim).collect(Collectors.toList());
+        return Arrays.stream(winLotto.split(","))
+                .map(String::trim)
+                .collect(Collectors.toList());
 
     }
 }
