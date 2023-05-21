@@ -68,6 +68,12 @@ public class LottoNumbers {
         return lottoNos;
     }
 
+    public void validateBonusNumber(LottoNo bonusNumber) {
+        if(lottoNos.contains(bonusNumber)){
+            throw new IllegalArgumentException("보너스 번호가 기존 번호에 있는 번호입니다.");
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

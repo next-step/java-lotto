@@ -48,9 +48,16 @@ public class InputView {
         String[] strNumbers = input.split(SPLIT_DELIMITER);
         for (String strNumber : strNumbers) {
             Integer number = validateNumber(strNumber);
+            validateNotContain(numbers, number);
             numbers.add(number);
         }
         return numbers;
+    }
+
+    private static void validateNotContain(List<Integer> numbers, Integer number) {
+        if(numbers.contains(number)){
+            throw new IllegalArgumentException("중복된 번호를 입력하였습니다.");
+        }
     }
 
     private static Integer validateNumber(String strNumber) {

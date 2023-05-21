@@ -15,10 +15,10 @@ public class WinLotto {
     }
 
     public WinLotto(LottoNumbers lottoNumbers, LottoNo bonusNumber) {
+        lottoNumbers.validateBonusNumber(bonusNumber);
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }
-
 
     public LottoNumbers numbers() {
         return lottoNumbers;
