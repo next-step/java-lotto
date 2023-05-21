@@ -21,14 +21,19 @@ public class LottoCreationStrategyTest {
     @Test
     @DisplayName("[요구사항 1] shuffle하지 않고 PURCHASE_COUNT만큼 복권을 만들면 winningLotto가 PURCHASE_COUNT만큼 생성되어야 한다.")
     void 요구사항_1() {
-        // given: shuffle하지 않고 PURCHASE_COUNT만큼 복권 만드는 전략 생성
+        // given: 수동 로또 생성 및 자동 로또 생성 전략 확정
+        // given_1: 수동 로또 생성 (1, 2, 3, 4, 5, 6)
+        Lotto manuallyCreatedLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new).collect(Collectors.toSet()));
+        ManuallyCreatedLottos manuallyCreatedLottos = new ManuallyCreatedLottos(List.of(manuallyCreatedLotto));
+
+        // given_2: shuffle하지 않고 PURCHASE_COUNT만큼 복권 만드는 전략 생성
         ForceLottoCreationStrategy forceLottoCreationStrategy = new ForceLottoCreationStrategy();
 
         // when: 로또 생성
-        Lottos lottos = new Lottos(PURCHASE_COUNT, forceLottoCreationStrategy);
+        Lottos lottos = new Lottos(PURCHASE_COUNT, forceLottoCreationStrategy, manuallyCreatedLottos);
         List<Lotto> createdLottos = lottos.getCreatedLottos();
 
-        // then: [1, 2, 3, 4, 5, 6]짜리 복권이 3개 만들어져야 함. 즉, 각 로또가 winningLotto와 숫자 6개가 모두 일치해야 한다.
+        // then: [1, 2, 3, 4, 5, 6]짜리 복권이 4개(수동 1, 자동 3) 만들어져야 함. 즉, 각 로또가 winningLotto와 숫자 6개가 모두 일치해야 한다.
         createdLottos.forEach(createdLotto -> assertThat(winningLotto.getMatchNumbers(createdLotto)).isEqualTo(EXPECTED_WINNING_COUNT));
     }
 }
