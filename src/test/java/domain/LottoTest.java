@@ -54,4 +54,17 @@ class LottoTest {
 
         Assertions.assertThat(lotto.matchCount(other)).isEqualTo(5);
     }
+
+    @Test
+    @DisplayName("로또 번호는 중복될 수 없다")
+    void duplicate() {
+        assertThatThrownBy(() -> new Lotto(Arrays.asList(
+            new LottoNumber("1"),
+            new LottoNumber("1"),
+            new LottoNumber("2"),
+            new LottoNumber("3"),
+            new LottoNumber("4"),
+            new LottoNumber("5")
+        ))).isInstanceOf(IllegalArgumentException.class);
+    }
 }
