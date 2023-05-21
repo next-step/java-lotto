@@ -1,6 +1,6 @@
 package domain;
 
-import java.util.LinkedHashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,13 +10,13 @@ public class WinningStatistics {
 
     private BonusNumber bonusNumber;
 
-    private Map<WinningPrizeMatchers, Integer> winningPrizeCount;
+    private Map<WinningPrizeMatcher, Integer> winningPrizeCount;
 
     public WinningStatistics(List<Integer> winningNumbers,
                              int bonusNumber) {
         this.winningNumbers = new WinningNumbers(winningNumbers);
         this.bonusNumber = new BonusNumber(bonusNumber);
-        this.winningPrizeCount = new LinkedHashMap<>();
+        this.winningPrizeCount = new EnumMap<WinningPrizeMatcher, Integer>(WinningPrizeMatcher.class);
     }
 
     public static WinningStatistics of(List<Integer> winningNumbers,
@@ -27,12 +27,12 @@ public class WinningStatistics {
     }
 
     private void setUpCount() {
-        for (WinningPrizeMatchers value : WinningPrizeMatchers.values()) {
+        for (WinningPrizeMatcher value : WinningPrizeMatcher.values()) {
             winningPrizeCount.put(value, 0);
         }
     }
 
-    public Map<WinningPrizeMatchers, Integer> getWinningResults() {
+    public Map<WinningPrizeMatcher, Integer> getWinningResults() {
         return winningPrizeCount;
     }
 
@@ -47,13 +47,13 @@ public class WinningStatistics {
     }
 
     private void decideRank(int count, boolean bonusMatch) {
-        WinningPrizeMatchers matchers = WinningPrizeMatchers.valueOf(count, bonusMatch);
+        WinningPrizeMatcher matchers = WinningPrizeMatcher.valueOf(count, bonusMatch);
         winningPrizeCount.put(matchers, winningPrizeCount.get(matchers) + 1);
     }
 
     public int getTotalWinnings() {
         int winnings = 0;
-        for (WinningPrizeMatchers matchers : winningPrizeCount.keySet()) {
+        for (WinningPrizeMatcher matchers : winningPrizeCount.keySet()) {
             winnings += matchers.calculateWinningPrize()
                                 .calculatePrizeMoney(winningPrizeCount.get(matchers));
         }

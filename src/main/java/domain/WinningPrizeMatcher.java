@@ -3,7 +3,7 @@ package domain;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum WinningPrizeMatchers {
+public enum WinningPrizeMatcher {
     ZERO(0, false) {
         @Override
         public WinningPrizes calculateWinningPrize() {
@@ -55,18 +55,18 @@ public enum WinningPrizeMatchers {
 
     private static final int HASH_GENERATION_NUMBER = 31;
     public static final int THRESHOLD = -1;
-    private static final Map<Integer, WinningPrizeMatchers> WINNING_PRIZE_MATCHERS_MAP = new HashMap<>();
+    private static final Map<Integer, WinningPrizeMatcher> WINNING_PRIZE_MATCHERS_MAP = new HashMap<>();
 
     private int numberOfCount;
     private boolean isBonusMatch;
 
-    WinningPrizeMatchers(int numberOfCount, boolean isBonusMatch) {
+    WinningPrizeMatcher(int numberOfCount, boolean isBonusMatch) {
         this.numberOfCount = numberOfCount;
         this.isBonusMatch = isBonusMatch;
     }
 
     static {
-        for (WinningPrizeMatchers value : WinningPrizeMatchers.values()) {
+        for (WinningPrizeMatcher value : WinningPrizeMatcher.values()) {
             WINNING_PRIZE_MATCHERS_MAP.put(getHashCode(value.numberOfCount, value.isBonusMatch), value);
         }
     }
@@ -79,7 +79,7 @@ public enum WinningPrizeMatchers {
         return numberOfCount * HASH_GENERATION_NUMBER + bonusNum;
     }
 
-    public static WinningPrizeMatchers valueOf(int numberOfCount, boolean isBonusMatch) {
+    public static WinningPrizeMatcher valueOf(int numberOfCount, boolean isBonusMatch) {
         return WINNING_PRIZE_MATCHERS_MAP.get(getHashCode(numberOfCount, isBonusMatch));
     }
 
