@@ -4,8 +4,8 @@ import java.util.List;
 
 public class ResultView {
 
-    public void lottoSizeResultView(int lottoNums) {
-        System.out.println( lottoNums + "개를 구매했습니다.");
+    public void lottoSizeResultView(int manualLottos, int lottoNums) {
+        System.out.println("수동으로 " + manualLottos + "장, " + "자동으로" + lottoNums + "개를 구매했습니다.");
     }
 
     public void lottoNumbersView(List<Lotto> lottos) {
