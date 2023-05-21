@@ -22,9 +22,9 @@ class MyLottoGameTest {
 
     @Test
     void 당첨번호확인() {
-        LottoNumbers winLottoNumbers = lottoNumbersFixture("1, 2, 3, 31, 32, 33");
-        LottoNumbers matched3LottoNumbers = lottoNumbersFixture("1, 2, 3, 41, 42, 43");
-        LottoNumbers matched4LottoNumbers = lottoNumbersFixture("1, 2, 3, 31, 44, 45");
+        LottoNumbers winLottoNumbers = lottoNumbersFixture(List.of(1, 2, 3, 31, 32, 33));
+        LottoNumbers matched3LottoNumbers = lottoNumbersFixture(List.of(1, 2, 3, 41, 42, 43));
+        LottoNumbers matched4LottoNumbers = lottoNumbersFixture(List.of(1, 2, 3, 31, 44, 45));
 
         List<Lotto> lottos = new ArrayList<>();
         //번호가 3개 일치하는 로또 개수 : 2개

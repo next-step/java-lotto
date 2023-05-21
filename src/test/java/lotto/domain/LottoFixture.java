@@ -4,24 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoFixture {
-    public static Lotto lottoFixture(String manualInput) {
-        return new Lotto(lottoNumbersFixture(manualInput));
+    public static Lotto lottoFixture(List<Integer> numbers) {
+        return new Lotto(lottoNumbersFixture(numbers));
     }
 
-    public static WinLotto winLottoFixture(String input) {
-        return new WinLotto(lottoNumbersFixture(input));
+    public static WinLotto winLottoFixture(List<Integer> numbers) {
+        return new WinLotto(lottoNumbersFixture(numbers));
     }
 
-    public static WinLotto winLottoWithBonusFixture(String input, LottoNo bonusNumber) {
-        return new WinLotto(lottoNumbersFixture(input), bonusNumber);
+    public static WinLotto winLottoWithBonusFixture(List<Integer> numbers, LottoNo bonusNumber) {
+        return new WinLotto(lottoNumbersFixture(numbers), bonusNumber);
     }
 
-    public static LottoNumbers lottoNumbersFixture(String manualInput) {
-        List<LottoNo> numbers = new ArrayList<>();
-        String[] strNumbers = manualInput.split(", ");
-        for (String strNumber : strNumbers) {
-            numbers.add(LottoNo.of(Integer.parseInt(strNumber)));
+    public static LottoNumbers lottoNumbersFixture(List<Integer> numbers) {
+        List<LottoNo> LottoNos = new ArrayList<>();
+        for (int number : numbers) {
+            LottoNos.add(LottoNo.of(number));
         }
-        return new LottoNumbers(numbers);
+        return new LottoNumbers(LottoNos);
     }
 }

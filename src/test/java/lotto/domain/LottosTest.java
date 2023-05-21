@@ -26,13 +26,13 @@ class LottosTest {
         MyPurchase myPurchase = new MyPurchase(3000,3);
         List<LottoNumbers> manualNumbers = new ArrayList<>();
 
-        manualNumbers.add(lottoNumbersFixture("1, 2, 3, 4, 5, 6"));
-        manualNumbers.add(lottoNumbersFixture("11, 12, 13, 14, 15, 16"));
-        manualNumbers.add(lottoNumbersFixture("21, 22, 23, 24, 25, 26"));
+        manualNumbers.add(lottoNumbersFixture(List.of(1, 2, 3, 4, 5, 6)));
+        manualNumbers.add(lottoNumbersFixture(List.of(11, 12, 13, 14, 15, 16)));
+        manualNumbers.add(lottoNumbersFixture(List.of(21, 22, 23, 24, 25, 26)));
 
         Lottos lottos = Lottos.create(myPurchase, manualNumbers);
         assertAll(
-                () -> assertThat(lottos.getLottos().get(0)).isEqualTo(lottoFixture("1, 2, 3, 4, 5, 6")),
+                () -> assertThat(lottos.getLottos().get(0)).isEqualTo(lottoFixture(List.of(1, 2, 3, 4, 5, 6))),
                 () -> assertThat(lottos.getLottos().size()).isEqualTo(3),
                 () -> assertThat(lottos.getLottos().size()).isEqualTo(myPurchase.manualCount())
         );
@@ -43,17 +43,15 @@ class LottosTest {
         MyPurchase myPurchase = new MyPurchase(5000,3);
         List<LottoNumbers> manualNumbers = new ArrayList<>();
 
-        manualNumbers.add(lottoNumbersFixture("1, 2, 3, 4, 5, 6"));
-        manualNumbers.add(lottoNumbersFixture("11, 12, 13, 14, 15, 16"));
-        manualNumbers.add(lottoNumbersFixture("21, 22, 23, 24, 25, 26"));
+        manualNumbers.add(lottoNumbersFixture(List.of(1, 2, 3, 4, 5, 6)));
+        manualNumbers.add(lottoNumbersFixture(List.of(11, 12, 13, 14, 15, 16)));
+        manualNumbers.add(lottoNumbersFixture(List.of(21, 22, 23, 24, 25, 26)));
 
         Lottos lottos = Lottos.create(myPurchase, manualNumbers);
 
         assertAll(
                 () -> assertThat(lottos.getLottos().size()).isEqualTo(5),
-                () -> assertThat(lottos.getLottos().get(0)).isEqualTo(lottoFixture("1, 2, 3, 4, 5, 6"))
+                () -> assertThat(lottos.getLottos().get(0)).isEqualTo(lottoFixture(List.of(1, 2, 3, 4, 5, 6)))
         );
     }
-
-
 }

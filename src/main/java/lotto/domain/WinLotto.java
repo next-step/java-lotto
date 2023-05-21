@@ -30,7 +30,7 @@ public class WinLotto {
 
     public Rank checkRank(Lotto lotto) {
         int matchCount = this.lottoNumbers.countContains(lotto);
-        boolean matchBounus = lotto.hasNumber(this.bonusNumber);
-        return Rank.of(matchCount, matchBounus);
+        boolean matchBonus = lotto.hasNumber(this.bonusNumber);
+        return Rank.of(matchCount, matchBonus);
     }
 }
