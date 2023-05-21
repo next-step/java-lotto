@@ -1,36 +1,31 @@
 package lotto.auto.domain;
 
+import lotto.auto.vo.WinNumber;
+
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-    List<Integer> lottoEntireNumber = new ArrayList<>();
+    private static List<Integer> lottoEntireNumber = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
     private List<Integer> lottoNumber = new ArrayList<>(6);
 
     public Lotto() {
-        List<Integer> result = createLottoNumber();
-        Collections.shuffle(result);
-        this.lottoNumber = result.subList(0, 6);
+        Collections.shuffle(lottoEntireNumber);
+        this.lottoNumber = lottoEntireNumber.subList(0, 6);
     }
 
     public List<Integer> getLottoNumbers() {
         return this.lottoNumber;
     }
 
-    public Win checkWin(List<Integer> winNumbers) {
+    public Win checkWin(WinNumber winNumbers) {
         int matchNumber = 0;
-        for (Integer winNumber : winNumbers) {
+        for (Integer winNumber : winNumbers.getWinNumbers()) {
             matchNumber += isMatch(winNumber);
         }
         return Win.getWin(matchNumber);
     };
-
-    private List<Integer> createLottoNumber() {
-        for(int i : IntStream.rangeClosed(1, 45).toArray()) {
-            lottoEntireNumber.add(i);
-        }
-        return lottoEntireNumber;
-    }
 
     private int isMatch(Integer win) {
         if(lottoNumber.contains(win)) {

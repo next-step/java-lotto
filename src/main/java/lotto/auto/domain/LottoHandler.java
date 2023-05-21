@@ -1,5 +1,8 @@
 package lotto.auto.domain;
 
+import lotto.auto.vo.Money;
+import lotto.auto.vo.WinNumber;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,11 +10,10 @@ import java.util.stream.Collectors;
 
 public class LottoHandler {
 
-    private final String SPLIT_STRING = ", ";
     private final int LOTTO_PRICE = 1000;
 
-    public int buyLotto(String money) {
-        return Integer.parseInt(money) / LOTTO_PRICE;
+    public int buyLotto(Money money) {
+        return money.getMoney() / LOTTO_PRICE;
     }
     public List<Lotto> createLotto(int count) {
         List<Lotto> lottos = new ArrayList<>(count);
@@ -21,11 +23,7 @@ public class LottoHandler {
         return lottos;
     }
 
-    public List<Integer> compareWinNumbers(String winNumbers) {
-        return split(winNumbers);
-    }
-
-    public List<Win> confirmWinner(List<Lotto> lottos, List<Integer> winNumbers) {
+    public List<Win> confirmWinner(List<Lotto> lottos, WinNumber winNumbers) {
         List<Win> wins = new ArrayList<>();
         for (Lotto lotto : lottos) {
             wins.add(lotto.checkWin(winNumbers));
@@ -33,16 +31,12 @@ public class LottoHandler {
         return wins;
     }
 
-    public Double getReturn(String money, List<Win> wins) {
+    public Double getReturn(Money money, List<Win> wins) {
         int winMoney = 0;
         for (Win win : wins) {
             winMoney += (win.getReward());
         }
-        return (double) (winMoney / Double.parseDouble(money));
+        return (double) ((double) winMoney / (double) money.getMoney());
     }
 
-    private List<Integer> split(String value) {
-        String[] result = value.split(SPLIT_STRING);
-        return Arrays.stream(result).map(Integer::parseInt).collect(Collectors.toList());
-    }
 }
