@@ -12,9 +12,9 @@ public class LottoController {
     private LottoGame lottoGame;
     private WinningAnalyzer winningAnalyzer;
 
-    public void playLottoGames(int money) {
+    public void playLottoGames(ManualRequest manualRequest, int money) {
         lottoGame = new LottoGame();
-        lottoGame.generateLottoResultsFromMoney(money);
+        lottoGame.generateLottoResultsFromMoney(manualRequest, money);
     }
 
     public void getLottoResults() {

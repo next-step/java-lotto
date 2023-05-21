@@ -18,7 +18,7 @@ public class LottoNumGenerator {
         }
     }
 
-    public static LottoResult generateResult() {
+    public static LottoResult generateAutomaticResults() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         Collections.shuffle(LOTTO_BALLS);
         for (int i = 0; i < LOTTO_SIZE; i++) {
@@ -28,8 +28,8 @@ public class LottoNumGenerator {
         return new LottoResult(lottoNumbers);
     }
 
-    public static LottoNumber[] generateManualNumbers(int[] manualNumbers) {
-
-        return new LottoNumber[0];
+    public static LottoResult generateManualResults(List<Integer> manualNumbers) {
+        LottoResult lottoResult = LottoResult.fromIntegers(manualNumbers);
+        return lottoResult;
     }
 }

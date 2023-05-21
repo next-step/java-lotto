@@ -6,9 +6,9 @@ import javax.annotation.processing.Generated;
 
 public class ManualRequest {
     private int manualCount;
-    private List<int[]> manualNumbers;
+    private List<List<Integer>> manualNumbers;
 
-    public ManualRequest(int manualCount, List<int[]> manualNumbers) {
+    public ManualRequest(int manualCount, List<List<Integer>> manualNumbers) {
         this.manualCount = manualCount;
         this.manualNumbers = manualNumbers;
     }
@@ -17,7 +17,7 @@ public class ManualRequest {
         return manualCount;
     }
 
-    public List<int[]> getManualNumbers() {
+    public List<List<Integer>> getManualNumbers() {
         return manualNumbers;
     }
 }

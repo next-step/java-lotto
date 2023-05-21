@@ -7,37 +7,41 @@ public class LottoGame {
 
     private Money money;
 
+
     public LottoGame() {
         this.lottoResults = new LottoResults();
     }
 
     public void generateLottoResultsFromMoney(ManualRequest manualRequest, int money) {
         int manualCount = manualRequest.getManualCount();
-        List<int[]> manualNumbers = manualRequest.getManualNumbers();
-        this.money = new Money(money);
+        List<List<Integer>> manualNumbers = manualRequest.getManualNumbers();
+        this.money = new Money(money, manualCount);
         if (manualCount != manualNumbers.size()) {
             throw new IllegalArgumentException("수동 구매가 잘못되었습니다.");
         }
         // 수동 구매
+        generateManualResults(manualCount, manualNumbers);
+        generateAutomaticResults();
+    }
+
+    private void generateAutomaticResults() {
+        for (int i = 0; i < getAutomaticCount(); i++) {
+            lottoResults.add(LottoNumGenerator.generateAutomaticResults());
+        }
+    }
+
+    private void generateManualResults(int manualCount, List<List<Integer>> manualNumbers) {
         for (int i = 0; i < manualCount; i++) {
-            lottoResults.add(LottoNumGenerator.generateManualNumbers(manualNumbers.get(i)));
-        }
-        for (int i = 0; i < getCount(); i++) {
-            lottoResults.add(LottoNumGenerator.generateNumbers());
+            lottoResults.add(LottoNumGenerator.generateManualResults(manualNumbers.get(i)));
         }
     }
-
-    public void writeManualLottoResults(int money) {
-        this.money = new Money(money);
-        for (int i = 0; i < getCount(); i++) {
-            lottoResults.add(LottoNumGenerator.generateResult());
-        }
-    }
-
-
 
     public int getCount() {
-        return money.getCount();
+        return money.getTotalCount();
+    }
+
+    public int getAutomaticCount() {
+        return money.getTotalCount();
     }
 
     public int getMoney() {

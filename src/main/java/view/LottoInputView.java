@@ -37,10 +37,22 @@ public class LottoInputView {
         return manualCount;
     }
 
-    public static List<int[]> getManualNumbers(int manualCount) {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        for (int i = 0; i < manualCount; i++) {
-
+    public static List<Integer> getManualLotto() {
+        scanner.nextLine();
+        List<Integer> manualLotto = new ArrayList<>();
+        String[] numbers = scanner.nextLine().split(DELIMITER);
+        for (String number : numbers) {
+            manualLotto.add(Integer.parseInt(number));
         }
+        return manualLotto;
+    }
+
+    public static List<List<Integer>> getManualLottos(int manualCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<List<Integer>> manualLottos = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            manualLottos.add(getManualLotto());
+        }
+        return manualLottos;
     }
 }

@@ -9,10 +9,10 @@ public class MoneyTest {
     public void 금액이_1000원_미만으로_들어오면_예외를_던진다() {
         //given
         int input = 999;
-
+        int manualCount = 1;
         //when
         assertThatThrownBy(() -> {
-            Money money = new Money(input);
+            Money money = new Money(input, 1);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
