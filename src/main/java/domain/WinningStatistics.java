@@ -56,6 +56,13 @@ public class WinningStatistics {
             winnings += matchers.calculateWinningPrize()
                                 .calculatePrizeMoney(winningPrizeCount.get(matchers));
         }
-        return winnings;
+        return winningPrizeCount.entrySet()
+                                .stream()
+                                .mapToInt(entry
+                                              -> entry.getKey()
+                                                      .calculateWinningPrize()
+                                                      .calculatePrizeMoney(entry.
+                                                                               getValue()))
+                                .sum();
     }
 }
