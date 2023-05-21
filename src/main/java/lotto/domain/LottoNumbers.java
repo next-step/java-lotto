@@ -23,6 +23,17 @@ public class LottoNumbers {
         this.lottoNos = lottoNos;
     }
 
+    public static List<LottoNumbers> toList(List<List<Integer>> manualLottos) {
+        if(manualLottos == null){
+            return null;
+        }
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        for (List<Integer> manualLotto : manualLottos){
+            lottoNumbers.add(new LottoNumbers(LottoNo.toList(manualLotto)));
+        }
+        return lottoNumbers;
+    }
+
     private void validateCount(List<LottoNo> lottoNos) {
         if (lottoNos.size() != CHOICE_COUNT) {
             throw new IllegalArgumentException("입력된 숫자 개수가 올바르지 않습니다.");

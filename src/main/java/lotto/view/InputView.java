@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.LottoNo;
 import lotto.domain.LottoNumbers;
 
 import java.util.ArrayList;
@@ -15,15 +14,43 @@ public class InputView {
         return new Scanner(System.in).nextInt();
     }
 
-    public static List<LottoNo> winLottoNumbers() {
+    public static List<Integer> winLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = new Scanner(System.in).nextLine();
         return makeNumbers(input);
     }
 
-    public static LottoNo winLottoBonusNumber() {
+    public static Integer winLottoBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return LottoNo.of(new Scanner(System.in).nextInt());
+        return new Scanner(System.in).nextInt();
+    }
+
+    public static int manualCount() {
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요");
+        return new Scanner(System.in).nextInt();
+    }
+
+    public static List<List<Integer>> manualNumbers(int manualCount) {
+        if (manualCount == 0) {
+            return null;
+        }
+        List<List<Integer>> manualNumbers = new ArrayList<>();
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+        for (int i = 0; i < manualCount; i++) {
+            String input = new Scanner(System.in).nextLine();
+            manualNumbers.add(makeNumbers(input));
+        }
+        return manualNumbers;
+    }
+
+    private static List<Integer> makeNumbers(String input) {
+        List<Integer> numbers = new ArrayList<>();
+        String[] strNumbers = input.split(SPLIT_DELIMITER);
+        for (String strNumber : strNumbers) {
+            Integer number = validateNumber(strNumber);
+            numbers.add(number);
+        }
+        return numbers;
     }
 
     private static Integer validateNumber(String strNumber) {
@@ -39,34 +66,5 @@ public class InputView {
         }
 
         return number;
-    }
-
-    public static int manualCount() {
-        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요");
-        return new Scanner(System.in).nextInt();
-    }
-
-    public static List<LottoNumbers> manualNumbers(int manualCount) {
-        if (manualCount == 0) {
-            return null;
-        }
-        List<LottoNumbers> manualNumbers = new ArrayList<>();
-        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-        for (int i = 0; i < manualCount; i++) {
-            String input = new Scanner(System.in).nextLine();
-            LottoNumbers lottoNumbers = new LottoNumbers(makeNumbers(input));
-            manualNumbers.add(lottoNumbers);
-        }
-        return manualNumbers;
-    }
-
-    private static List<LottoNo> makeNumbers(String input) {
-        List<LottoNo> numbers = new ArrayList<>();
-        String[] strNumbers = input.split(SPLIT_DELIMITER);
-        for (String strNumber : strNumbers) {
-            Integer number = validateNumber(strNumber);
-            numbers.add(LottoNo.of(number));
-        }
-        return numbers;
     }
 }

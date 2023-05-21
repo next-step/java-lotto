@@ -12,17 +12,17 @@ public class LottoApplication {
         int money = InputView.money();
         int manualCount = InputView.manualCount();
         MyPurchase myPurchase = new MyPurchase(money, manualCount);
-        List<LottoNumbers> manualLottos = InputView.manualNumbers(manualCount);
+        List<List<Integer>> manualLottos = InputView.manualNumbers(manualCount);
         ResultView.showLottoCount(myPurchase);
 
         //로또 생성
-        MyLottoGame myLottoGame = MyLottoGame.generate(myPurchase, manualLottos);
+        MyLottoGame myLottoGame = MyLottoGame.generate(myPurchase, LottoNumbers.toList(manualLottos));
         ResultView.showMyLottos(myLottoGame.getLottos());
 
         //지난주 당첨 번호
-        List<LottoNo> winNumbers = InputView.winLottoNumbers();
-        LottoNo winBonusNumber = InputView.winLottoBonusNumber();
-        WinLotto winLotto = new WinLotto(winNumbers, winBonusNumber);
+        List<Integer> winNumbers = InputView.winLottoNumbers();
+        Integer winBonusNumber = InputView.winLottoBonusNumber();
+        WinLotto winLotto = new WinLotto(LottoNo.toList(winNumbers), LottoNo.of(winBonusNumber));
         ResultView.showWinLotto(winLotto);
 
         //당첨번호 조회 및 통계, 수익률

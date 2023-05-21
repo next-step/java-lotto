@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoNo implements Comparable<LottoNo> {
@@ -22,6 +24,14 @@ public class LottoNo implements Comparable<LottoNo> {
             lottoNumbers.put(number, new LottoNo(number));
         }
         return lottoNumbers.get(number);
+    }
+
+    public static List<LottoNo> toList(List<Integer> numbers) {
+        List<LottoNo> LottoNos = new ArrayList<>();
+        for (Integer number : numbers) {
+            LottoNos.add(LottoNo.of(number));
+        }
+        return LottoNos;
     }
 
     public int getValue() {
