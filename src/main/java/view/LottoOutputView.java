@@ -1,12 +1,12 @@
 package view;
 
-import static domain.WinningPrizeMatcher.FIVE_BONUS;
-import static domain.WinningPrizeMatcher.THRESHOLD;
+import static domain.WinningPrizes.FIVE_BONUS;
+import static domain.WinningStatistics.THRESHOLD;
 
 import java.util.Collections;
 import java.util.List;
 
-import domain.WinningPrizeMatcher;
+import domain.WinningPrizes;
 import domain.WinningStatistics;
 
 public class LottoOutputView {
@@ -16,7 +16,7 @@ public class LottoOutputView {
         System.out.println();
     }
 
-    public static void printMatchCount(WinningPrizeMatcher match) {
+    public static void printMatchCount(WinningPrizes match) {
         System.out.print(match.getNumberOfCount() + "개 일치");
         if (FIVE_BONUS == match) {
             printBonus();
@@ -27,7 +27,7 @@ public class LottoOutputView {
         System.out.print(", 보너스 볼 일치");
     }
 
-    public static void printMatch(WinningPrizeMatcher matchers) {
+    public static void printMatch(WinningPrizes matchers) {
         LottoOutputView.printMatchCount(matchers);
         LottoOutputView.printSpace();
     }
@@ -102,17 +102,17 @@ public class LottoOutputView {
     }
 
 
-    public static void printEachPrize(WinningPrizeMatcher matchers, int count) {
-        if (matchers.getNumberOfCount() == THRESHOLD) {
+    public static void printEachPrize(WinningPrizes matchers, int count) {
+        if (THRESHOLD == matchers.getNumberOfCount()) {
             return;
         }
         printMatch(matchers);
-        printPrizes(matchers.calculateWinningPrize().getPrizeMoney());
+        printPrizes(matchers.getPrizeMoney());
         printWinningCount(count);
     }
 
     public static void printWinnings(WinningStatistics winningStatistics) {
-        for (WinningPrizeMatcher matchers : winningStatistics.getWinningResults().keySet()) {
+        for (WinningPrizes matchers : winningStatistics.getWinningResults().keySet()) {
             int count = winningStatistics.getWinningResults().get(matchers);
             printEachPrize(matchers, count);
         }

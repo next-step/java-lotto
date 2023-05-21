@@ -24,16 +24,16 @@ public class WinningAnalyzerTest {
         WinningAnalyzer winningAnalyzer = new WinningAnalyzer(lottoResults, winningNumbers, bonusNumber);
         //when
         WinningStatistics winningStatistics = winningAnalyzer.calculateWinningStatistics();
-        Map<WinningPrizeMatcher, Integer> result = winningStatistics.getWinningResults();
+        Map<WinningPrizes, Integer> result = winningStatistics.getWinningResults();
         //then
-        assertThat(result.get(WinningPrizeMatcher.ZERO)).isEqualTo(1);
-        assertThat(result.get(WinningPrizeMatcher.ONE)).isEqualTo(1);
-        assertThat(result.get(WinningPrizeMatcher.TWO)).isEqualTo(1);
-        assertThat(result.get(WinningPrizeMatcher.THREE)).isEqualTo(1);
-        assertThat(result.get(WinningPrizeMatcher.FOUR)).isEqualTo(1);
-        assertThat(result.get(WinningPrizeMatcher.FIVE)).isEqualTo(1);
-        assertThat(result.get(WinningPrizeMatcher.FIVE_BONUS)).isEqualTo(1);
-        assertThat(result.get(WinningPrizeMatcher.SIX)).isEqualTo(1);
+        assertThat(result.get(WinningPrizes.ZERO)).isEqualTo(1);
+        assertThat(result.get(WinningPrizes.ONE)).isEqualTo(1);
+        assertThat(result.get(WinningPrizes.TWO)).isEqualTo(1);
+        assertThat(result.get(WinningPrizes.THREE)).isEqualTo(1);
+        assertThat(result.get(WinningPrizes.FOUR)).isEqualTo(1);
+        assertThat(result.get(WinningPrizes.FIVE)).isEqualTo(1);
+        assertThat(result.get(WinningPrizes.FIVE_BONUS)).isEqualTo(1);
+        assertThat(result.get(WinningPrizes.SIX)).isEqualTo(1);
     }
 
     @MethodSource("provideLottoList")
