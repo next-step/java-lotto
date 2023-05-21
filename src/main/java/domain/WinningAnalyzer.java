@@ -8,7 +8,7 @@ public class WinningAnalyzer {
 
     public WinningAnalyzer(LottoResults lottoResults, List<Integer> winningNumbers, int bonusNumber) {
         this.lottoResults = lottoResults;
-        this.winningStatistics = new WinningStatistics(winningNumbers, bonusNumber);
+        this.winningStatistics = WinningStatistics.of(winningNumbers, bonusNumber);
     }
 
     public WinningStatistics calculateWinningStatistics() {

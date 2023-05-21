@@ -13,7 +13,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class WinningAnalyzerTest {
 
-
     @MethodSource("provideLottoList")
     @ParameterizedTest
     public void 지난주_당첨번호를_입력하면_당첨통계를_제공한다(List<int[]> lottoList, List<Integer> winningNumbers, int bonusNumber) throws Exception {
@@ -22,14 +21,16 @@ public class WinningAnalyzerTest {
         WinningAnalyzer winningAnalyzer = new WinningAnalyzer(lottoResults, winningNumbers, bonusNumber);
         //when
         WinningStatistics winningStatistics = winningAnalyzer.calculateWinningStatistics();
-        Map<WinningPrizes, Integer> result2 = winningStatistics.getWinningResults();
+        Map<WinningPrizeMatchers, Integer> result2 = winningStatistics.getWinningResults();
         //then
-        assertThat(result2.get(WinningPrizes.MISS)).isEqualTo(3);
-        assertThat(result2.get(WinningPrizes.FIFTH_PRIZE)).isEqualTo(1);
-        assertThat(result2.get(WinningPrizes.FOURTH_PRIZE)).isEqualTo(1);
-        assertThat(result2.get(WinningPrizes.THIRD_PRIZE)).isEqualTo(1);
-        assertThat(result2.get(WinningPrizes.SECOND_PRIZE)).isEqualTo(1);
-        assertThat(result2.get(WinningPrizes.FIRST_PRIZE)).isEqualTo(1);
+        assertThat(result2.get(WinningPrizeMatchers.ZERO)).isEqualTo(1);
+        assertThat(result2.get(WinningPrizeMatchers.ONE)).isEqualTo(1);
+        assertThat(result2.get(WinningPrizeMatchers.TWO)).isEqualTo(1);
+        assertThat(result2.get(WinningPrizeMatchers.THREE)).isEqualTo(1);
+        assertThat(result2.get(WinningPrizeMatchers.FOUR)).isEqualTo(1);
+        assertThat(result2.get(WinningPrizeMatchers.FIVE)).isEqualTo(1);
+        assertThat(result2.get(WinningPrizeMatchers.FIVE_BONUS)).isEqualTo(1);
+        assertThat(result2.get(WinningPrizeMatchers.SIX)).isEqualTo(1);
     }
 
     @MethodSource("provideLottoList")
@@ -70,6 +71,4 @@ public class WinningAnalyzerTest {
         float epsilon = 1f;
         return Math.abs(a - b) <= epsilon;
     }
-
-
 }

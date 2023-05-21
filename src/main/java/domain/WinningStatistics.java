@@ -6,26 +6,34 @@ import java.util.Map;
 
 public class WinningStatistics {
 
-    private static final Map<WinningPrizes, Integer> winningStatistics = new LinkedHashMap<>();
-
-    static {
-        for (WinningPrizes value : WinningPrizes.values()) {
-            winningStatistics.put(value, 0);
-        }
-    }
-
     private WinningNumbers winningNumbers;
 
     private BonusNumber bonusNumber;
+
+    private Map<WinningPrizeMatchers, Integer> winningPrizeCount;
 
     public WinningStatistics(List<Integer> winningNumbers,
                              int bonusNumber) {
         this.winningNumbers = new WinningNumbers(winningNumbers);
         this.bonusNumber = new BonusNumber(bonusNumber);
+        this.winningPrizeCount = new LinkedHashMap<>();
     }
 
-    public Map<WinningPrizes, Integer> getWinningResults() {
+    public static WinningStatistics of(List<Integer> winningNumbers,
+                                int bonusNumber) {
+        WinningStatistics winningStatistics = new WinningStatistics(winningNumbers, bonusNumber);
+        winningStatistics.setUpCount();
         return winningStatistics;
+    }
+
+    private void setUpCount() {
+        for (WinningPrizeMatchers value : WinningPrizeMatchers.values()) {
+            winningPrizeCount.put(value, 0);
+        }
+    }
+
+    public Map<WinningPrizeMatchers, Integer> getWinningResults() {
+        return winningPrizeCount;
     }
 
     public void matchCount(LottoNumber[] lottoNumbers) {
@@ -39,14 +47,15 @@ public class WinningStatistics {
     }
 
     private void decideRank(int count, boolean bonusMatch) {
-        WinningPrizes prize = WinningPrizes.valueOf(count, bonusMatch);
-        winningStatistics.put(prize, winningStatistics.get(prize) + 1);
+        WinningPrizeMatchers matchers = WinningPrizeMatchers.valueOf(count, bonusMatch);
+        winningPrizeCount.put(matchers, winningPrizeCount.get(matchers) + 1);
     }
 
     public int getTotalWinnings() {
         int winnings = 0;
-        for (WinningPrizes prize : winningStatistics.keySet()) {
-            winnings += prize.calculatePrizeMoney(winningStatistics.get(prize));
+        for (WinningPrizeMatchers matchers : winningPrizeCount.keySet()) {
+            winnings += matchers.calculateWinningPrize()
+                                .calculatePrizeMoney(winningPrizeCount.get(matchers));
         }
         return winnings;
     }

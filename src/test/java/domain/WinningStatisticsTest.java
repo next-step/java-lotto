@@ -16,7 +16,7 @@ public class WinningStatisticsTest {
     @ParameterizedTest
     public void 로또_결과를_입력받으면_매칭_결과를_반환한다(List<Integer> winningNumbers, List<int[]> prizes, int bonusNumber) {
         //given
-        WinningStatistics winningStatistics = new WinningStatistics(winningNumbers, bonusNumber);
+        WinningStatistics winningStatistics = WinningStatistics.of(winningNumbers, bonusNumber);
 
         LottoNumber[] fifthPrizes = LottoNumber.fromIntegers(prizes.get(0));
         LottoNumber[] fourthPrizes = LottoNumber.fromIntegers(prizes.get(1));
@@ -32,11 +32,11 @@ public class WinningStatisticsTest {
         winningStatistics.matchCount(firstPrizes);
 
         //then
-        assertThat(winningStatistics.getWinningResults().get(WinningPrizes.FIFTH_PRIZE)).isEqualTo(1);
-        assertThat(winningStatistics.getWinningResults().get(WinningPrizes.FOURTH_PRIZE)).isEqualTo(1);
-        assertThat(winningStatistics.getWinningResults().get(WinningPrizes.THIRD_PRIZE)).isEqualTo(1);
-        assertThat(winningStatistics.getWinningResults().get(WinningPrizes.SECOND_PRIZE)).isEqualTo(1);
-        assertThat(winningStatistics.getWinningResults().get(WinningPrizes.FIRST_PRIZE)).isEqualTo(1);
+        assertThat(winningStatistics.getWinningResults().get(WinningPrizeMatchers.THREE)).isEqualTo(1);
+        assertThat(winningStatistics.getWinningResults().get(WinningPrizeMatchers.FOUR)).isEqualTo(1);
+        assertThat(winningStatistics.getWinningResults().get(WinningPrizeMatchers.FIVE)).isEqualTo(1);
+        assertThat(winningStatistics.getWinningResults().get(WinningPrizeMatchers.FIVE_BONUS)).isEqualTo(1);
+        assertThat(winningStatistics.getWinningResults().get(WinningPrizeMatchers.SIX)).isEqualTo(1);
 
         assertThat(winningStatistics.getTotalWinnings()).isEqualTo(2004555000);
 
