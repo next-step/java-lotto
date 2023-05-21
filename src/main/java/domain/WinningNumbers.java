@@ -1,12 +1,13 @@
 package domain;
 
 import java.util.List;
+import java.util.Set;
 
 public class WinningNumbers {
 
-    private List<Integer> winningNumbers;
+    private Set<Integer> winningNumbers;
 
-    public WinningNumbers(List<Integer> winningNumbers) {
+    public WinningNumbers(Set<Integer> winningNumbers) {
         this.winningNumbers = winningNumbers;
     }
 

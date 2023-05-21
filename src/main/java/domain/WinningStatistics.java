@@ -3,6 +3,7 @@ package domain;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class WinningStatistics {
 
@@ -12,14 +13,14 @@ public class WinningStatistics {
 
     private Map<WinningPrizeMatcher, Integer> winningPrizeCount;
 
-    public WinningStatistics(List<Integer> winningNumbers,
+    public WinningStatistics(Set<Integer> winningNumbers,
                              int bonusNumber) {
         this.winningNumbers = new WinningNumbers(winningNumbers);
         this.bonusNumber = new BonusNumber(bonusNumber);
         this.winningPrizeCount = new EnumMap<WinningPrizeMatcher, Integer>(WinningPrizeMatcher.class);
     }
 
-    public static WinningStatistics of(List<Integer> winningNumbers, int bonusNumber) {
+    public static WinningStatistics of(Set<Integer> winningNumbers, int bonusNumber) {
         WinningStatistics winningStatistics = new WinningStatistics(winningNumbers, bonusNumber);
         winningStatistics.setUpCount();
         return winningStatistics;
@@ -36,12 +37,8 @@ public class WinningStatistics {
     }
 
     public void matchCount(LottoResult lottoResult) {
-        int count = 0;
-        boolean bonusMatch = false;
-        for (LottoNumber num : lottoResult.getLottoNumbers()) {
-            count = num.addCountIfContain(count, winningNumbers);
-            bonusMatch = bonusNumber.isBonusMatch(num);
-        }
+        int count = lottoResult.calculateCount(winningNumbers);
+        boolean bonusMatch = lottoResult.isBonusMatch(bonusNumber);
         decideRank(count, bonusMatch);
     }
 

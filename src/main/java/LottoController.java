@@ -17,13 +17,13 @@ public class LottoController {
         lottoGame.generateLottoResultsFromMoney(manualRequest, money);
     }
 
-    public void getLottoResults() {
+    public void lottoResults() {
         List<List<Integer>> results = lottoGame.getLottoResults().lottoNumbersToInt();
         int gameCount = lottoGame.getCount();
         LottoOutputView.printLottoResults(gameCount, results);
     }
 
-    public void getWinningStatistics() {
+    public void winningStatistics() {
         LottoResults lottoResults = lottoGame.getLottoResults();
         winningAnalyzer = new WinningAnalyzer(lottoResults, LottoInputView.getWinningNumbers(), LottoInputView.getBonusNumber());
         WinningStatistics winningStatistics = winningAnalyzer.calculateWinningStatistics();
@@ -31,7 +31,7 @@ public class LottoController {
         LottoOutputView.printWinnings(winningStatistics);
     }
 
-    public void getReturnOnInvestment() {
+    public void returnOnInvestment() {
         int money = lottoGame.getMoney();
         LottoOutputView.printReturnOnInvestment(winningAnalyzer.getReturnOnInvestment(money));
     }

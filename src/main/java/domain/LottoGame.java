@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.List;
+import java.util.Set;
 
 public class LottoGame {
     private LottoResults lottoResults;
@@ -14,7 +15,7 @@ public class LottoGame {
 
     public void generateLottoResultsFromMoney(ManualRequest manualRequest, int money) {
         int manualCount = manualRequest.getManualCount();
-        List<List<Integer>> manualNumbers = manualRequest.getManualNumbers();
+        List<Set<Integer>> manualNumbers = manualRequest.getManualNumbers();
         this.money = new Money(money, manualCount);
         if (manualCount != manualNumbers.size()) {
             throw new IllegalArgumentException("수동 구매가 잘못되었습니다.");
@@ -30,7 +31,7 @@ public class LottoGame {
         }
     }
 
-    private void generateManualResults(int manualCount, List<List<Integer>> manualNumbers) {
+    private void generateManualResults(int manualCount, List<Set<Integer>> manualNumbers) {
         for (int i = 0; i < manualCount; i++) {
             lottoResults.add(LottoNumGenerator.generateManualResults(manualNumbers.get(i)));
         }

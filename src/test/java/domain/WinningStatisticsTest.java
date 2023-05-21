@@ -3,7 +3,10 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,7 +17,7 @@ public class WinningStatisticsTest {
 
     @MethodSource("provideWinningNumbers")
     @ParameterizedTest
-    public void 로또_결과를_입력받으면_매칭_결과를_반환한다(List<Integer> winningNumbers, List<List<Integer>> prizes, int bonusNumber) {
+    public void 로또_결과를_입력받으면_매칭_결과를_반환한다(Set<Integer> winningNumbers, List<Set<Integer>> prizes, int bonusNumber) {
         //given
         WinningStatistics winningStatistics = WinningStatistics.of(winningNumbers, bonusNumber);
 
@@ -45,14 +48,14 @@ public class WinningStatisticsTest {
     private static Stream<Arguments> provideWinningNumbers() {
         return Stream.of(
             Arguments.of(
-                Arrays.asList(1, 3, 15, 17, 21, 35),
+                new HashSet<>(Arrays.asList(1, 3, 15, 17, 21, 35)),
                 Arrays.asList(
                     Arrays.asList(1, 3, 15, 7, 9, 11), // 3개 일치
                     Arrays.asList( 1, 3, 15, 17, 9, 11 ), // 4개 일치
                     Arrays.asList( 1, 3, 15, 17, 9, 21 ), // 5개 일치
                     Arrays.asList(1, 3, 15, 17, 21, 22), // 5개 일치 & 보너스 일치
                     Arrays.asList( 1, 3, 15, 17, 21, 35 ) // 6개 일치
-                ),
+                ).stream().map(HashSet::new).collect(Collectors.toList()),
                 22 // 보너스
             )
         );

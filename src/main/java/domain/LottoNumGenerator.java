@@ -5,6 +5,7 @@ import static domain.LottoNumber.LOTTO_NUM_LIMIT;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class LottoNumGenerator {
 
@@ -28,7 +29,10 @@ public class LottoNumGenerator {
         return new LottoResult(lottoNumbers);
     }
 
-    public static LottoResult generateManualResults(List<Integer> manualNumbers) {
+    public static LottoResult generateManualResults(Set<Integer> manualNumbers) {
+        if (LOTTO_SIZE != manualNumbers.size()) {
+            throw new IllegalArgumentException("입력한 숫자에 중복이 있습니다.");
+        }
         LottoResult lottoResult = LottoResult.fromIntegers(manualNumbers);
         return lottoResult;
     }

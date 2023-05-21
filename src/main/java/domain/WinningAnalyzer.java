@@ -1,12 +1,13 @@
 package domain;
 
 import java.util.List;
+import java.util.Set;
 
 public class WinningAnalyzer {
     private LottoResults lottoResults;
     private WinningStatistics winningStatistics;
 
-    public WinningAnalyzer(LottoResults lottoResults, List<Integer> winningNumbers, int bonusNumber) {
+    public WinningAnalyzer(LottoResults lottoResults, Set<Integer> winningNumbers, int bonusNumber) {
         this.lottoResults = lottoResults;
         this.winningStatistics = WinningStatistics.of(winningNumbers, bonusNumber);
     }
