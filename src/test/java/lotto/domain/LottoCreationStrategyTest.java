@@ -14,7 +14,9 @@ public class LottoCreationStrategyTest {
 
     private static final int PURCHASE_COUNT = 3;
     private static final int EXPECTED_WINNING_COUNT = 6;
-    private static final WinningLotto winningLotto = new WinningLotto(Set.of(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new).collect(Collectors.toSet()), new LottoNumber(9));
+    private static final WinningLotto winningLotto = new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 5, 6).stream()
+                                                                                                        .map(LottoNumber::new)
+                                                                                                        .collect(Collectors.toSet())), new LottoNumber(9));
 
     @Test
     @DisplayName("[요구사항 1] shuffle하지 않고 PURCHASE_COUNT만큼 복권을 만들면 winningLotto가 PURCHASE_COUNT만큼 생성되어야 한다.")

@@ -1,15 +1,25 @@
 package lotto.domain;
 
-import java.util.Set;
-
 public class WinningLotto {
 
-    private final Set<LottoNumber> winningNumbers;
+    private final Lotto winningLotto;
     private final LottoNumber bonusLottoNumber;
+    private static final String WINNING_LOTTO_NUMBERS_AND_THE_BOUNS_NUMBER_CANNOT_BE_DUPLICATED = "당첨 로또 번호와 보너스 번호는 중복될 수 없습니다.";
 
-    public WinningLotto(Set<LottoNumber> winningNumbers, LottoNumber bonusLottoNumber) {
-        this.winningNumbers = winningNumbers;
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+        this.winningLotto = winningLotto;
         this.bonusLottoNumber = bonusLottoNumber;
+        validateBonusLottoNumber();
+    }
+
+    private void validateBonusLottoNumber() {
+        if (doesWinningLottoContainBonusNumber()) {
+            throw new IllegalArgumentException(WINNING_LOTTO_NUMBERS_AND_THE_BOUNS_NUMBER_CANNOT_BE_DUPLICATED);
+        }
+    }
+
+    private boolean doesWinningLottoContainBonusNumber() {
+        return winningLotto.getLottoNumbers().contains(bonusLottoNumber);
     }
 
     public Rank calculateRank(Lotto lotto) {
@@ -18,7 +28,7 @@ public class WinningLotto {
 
     public int getMatchNumbers(Lotto lotto) {
         return (int) lotto.getLottoNumbers().stream()
-                .filter(winningNumbers::contains)
+                .filter(winningLotto.getLottoNumbers()::contains)
                 .count();
     }
 

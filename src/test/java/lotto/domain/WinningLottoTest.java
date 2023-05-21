@@ -15,7 +15,7 @@ public class WinningLottoTest {
 
     @BeforeEach
     void setUp() {
-        winningLotto = new WinningLotto(Set.of(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new).collect(Collectors.toSet()), new LottoNumber(9));
+        winningLotto = new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new).collect(Collectors.toSet())), new LottoNumber(9));
     }
 
     @Test
