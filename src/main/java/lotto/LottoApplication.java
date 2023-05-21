@@ -17,7 +17,7 @@ public class LottoApplication {
 
         //로또 생성
         MyLottoGame myLottoGame = MyLottoGame.generate(myPurchase, LottoNumbers.toList(manualLottos));
-        ResultView.showMyLottos(myLottoGame.getLottos());
+        ResultView.showMyLottos(myLottoGame.getManualLottos(), myLottoGame.getAutoLottos());
 
         //지난주 당첨 번호
         List<Integer> winNumbers = InputView.winLottoNumbers();

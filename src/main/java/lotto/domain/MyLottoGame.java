@@ -29,7 +29,11 @@ public class MyLottoGame {
         return result().countRank(rank);
     }
 
-    public List<Lotto> getLottos() {
-        return lottos.getLottos();
+    public List<Lotto> getManualLottos() {
+        return lottos.getManualLottos();
+    }
+
+    public List<Lotto> getAutoLottos() {
+        return lottos.getAutoLottos();
     }
 }

@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    public static void showMyLottos(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
+    public static void showMyLottos(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+        for (Lotto lotto : manualLottos) {
+            printNumbers(lotto.numbers());
+        }
+        for (Lotto lotto : autoLottos) {
             printNumbers(lotto.numbers());
         }
         System.out.println();

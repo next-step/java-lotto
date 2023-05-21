@@ -16,8 +16,8 @@ class LottosTest {
         MyPurchase myPurchase = new MyPurchase(11000);
         Lottos lottos = Lottos.create(myPurchase, null);
         assertAll(
-                () -> assertThat(lottos.getLottos().size()).isEqualTo(11),
-                () -> assertThat(lottos.getLottos().size()).isEqualTo(myPurchase.autoCount())
+                () -> assertThat(lottos.size()).isEqualTo(11),
+                () -> assertThat(lottos.getAutoLottos().size()).isEqualTo(myPurchase.autoCount())
         );
     }
 
@@ -32,9 +32,9 @@ class LottosTest {
 
         Lottos lottos = Lottos.create(myPurchase, manualNumbers);
         assertAll(
-                () -> assertThat(lottos.getLottos().get(0)).isEqualTo(lottoFixture(List.of(1, 2, 3, 4, 5, 6))),
-                () -> assertThat(lottos.getLottos().size()).isEqualTo(3),
-                () -> assertThat(lottos.getLottos().size()).isEqualTo(myPurchase.manualCount())
+                () -> assertThat(lottos.getManualLottos().get(0)).isEqualTo(lottoFixture(List.of(1, 2, 3, 4, 5, 6))),
+                () -> assertThat(lottos.getManualLottos().size()).isEqualTo(3),
+                () -> assertThat(lottos.getManualLottos().size()).isEqualTo(myPurchase.manualCount())
         );
     }
 
@@ -50,8 +50,8 @@ class LottosTest {
         Lottos lottos = Lottos.create(myPurchase, manualNumbers);
 
         assertAll(
-                () -> assertThat(lottos.getLottos().size()).isEqualTo(5),
-                () -> assertThat(lottos.getLottos().get(0)).isEqualTo(lottoFixture(List.of(1, 2, 3, 4, 5, 6)))
+                () -> assertThat(lottos.size()).isEqualTo(5),
+                () -> assertThat(lottos.getManualLottos().get(0)).isEqualTo(lottoFixture(List.of(1, 2, 3, 4, 5, 6)))
         );
     }
 }
