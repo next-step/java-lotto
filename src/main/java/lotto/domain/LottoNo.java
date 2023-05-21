@@ -28,7 +28,7 @@ public class LottoNo implements Comparable<LottoNo> {
 
     public static LottoNo of(int number) {
         if (!lottoNumbers.containsKey(number)) {
-            lottoNumbers.put(number, new LottoNo(number));
+            throw new IllegalArgumentException("입력된 숫자 범위가 올바르지 않습니다.");
         }
         return lottoNumbers.get(number);
     }
