@@ -24,4 +24,10 @@ public class LottoInputView {
         }
         return lastWeekWinningNumbers;
     }
+
+    public static int getBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = scanner.nextInt();
+        return bonusNumber;
+    }
 }

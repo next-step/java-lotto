@@ -6,15 +6,17 @@ public class WinningAnalyzer {
     private LottoResults lottoResults;
     private WinningStatistics winningStatistics;
 
-    public WinningAnalyzer(LottoResults lottoResults, List<Integer> winningNumbers) {
+    public WinningAnalyzer(LottoResults lottoResults, List<Integer> winningNumbers, int bonusNumber) {
         this.lottoResults = lottoResults;
-        this.winningStatistics = new WinningStatistics(winningNumbers);
+        this.winningStatistics = WinningStatistics.of(winningNumbers, bonusNumber);
     }
 
     public WinningStatistics calculateWinningStatistics() {
         lottoResults.calculateWinningStatistics(winningStatistics);
         return winningStatistics;
     }
+
+
 
     public float getReturnOnInvestment(int money) {
         float totalWinning = winningStatistics.getTotalWinnings();

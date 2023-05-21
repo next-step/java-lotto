@@ -21,16 +21,8 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber of(int lottoNumber) {
+    public static LottoNumber from(int lottoNumber) {
         return LOTTO_NUMBER_MAP.get(lottoNumber);
-    }
-
-    public static LottoNumber[] fromIntegers(int[] lottoIntegers) {
-        LottoNumber[] lottoNumbers = new LottoNumber[lottoIntegers.length];
-        for (int i=0; i < lottoIntegers.length; i++) {
-            lottoNumbers[i] = LOTTO_NUMBER_MAP.get(lottoIntegers[i]);
-        }
-        return lottoNumbers;
     }
 
     public int getLottoNumber() {
@@ -42,5 +34,9 @@ public class LottoNumber {
             count++;
         }
         return count;
+    }
+
+    public boolean isSameNumber(int number) {
+        return lottoNumber == number;
     }
 }

@@ -1,39 +1,68 @@
 package domain;
 
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class WinningStatistics {
 
-    public static final List<WinningPrizes> WINNING_PRIZES = List.of(WinningPrizes.FOURTH_PRIZE, WinningPrizes.THIRD_PRIZE, WinningPrizes.SECOND_PRIZE, WinningPrizes.FIRST_PRIZE);
+    private final WinningNumbers winningNumbers;
 
-    public static final int OFFSET = 3;
-    private int[] winningStatistics = new int[4];
+    private final BonusNumber bonusNumber;
 
-    private WinningNumbers winningNumbers;
+    private Map<WinningPrizeMatcher, Integer> winningPrizeCount;
 
-    public WinningStatistics(List<Integer> winningNumbers) {
+    public WinningStatistics(List<Integer> winningNumbers,
+                             int bonusNumber) {
         this.winningNumbers = new WinningNumbers(winningNumbers);
+        this.bonusNumber = new BonusNumber(bonusNumber);
+        this.winningPrizeCount = new EnumMap<WinningPrizeMatcher, Integer>(WinningPrizeMatcher.class);
     }
 
-    public int[] getWinningResults() {
+    public static WinningStatistics of(List<Integer> winningNumbers, int bonusNumber) {
+        WinningStatistics winningStatistics = new WinningStatistics(winningNumbers, bonusNumber);
+        winningStatistics.setUpCount();
         return winningStatistics;
     }
 
-    public void matchCount(LottoNumber[] lottoNumbers) {
+    private void setUpCount() {
+        for (WinningPrizeMatcher value : WinningPrizeMatcher.values()) {
+            winningPrizeCount.put(value, 0);
+        }
+    }
+
+    public Map<WinningPrizeMatcher, Integer> getWinningResults() {
+        return winningPrizeCount;
+    }
+
+    public void matchCount(LottoResult lottoResult) {
         int count = 0;
-        for (LottoNumber num : lottoNumbers) {
+        boolean bonusMatch = false;
+        for (LottoNumber num : lottoResult.getLottoNumbers()) {
             count = num.addCountIfContain(count, winningNumbers);
+            bonusMatch = bonusNumber.isBonusMatch(num);
         }
-        if (count >= OFFSET) {
-            winningStatistics[count - OFFSET]++;
-        }
+        decideRank(count, bonusMatch);
+    }
+
+    private void decideRank(int count, boolean bonusMatch) {
+        WinningPrizeMatcher matchers = WinningPrizeMatcher.valueOf(count, bonusMatch);
+        winningPrizeCount.put(matchers, winningPrizeCount.get(matchers) + 1);
     }
 
     public int getTotalWinnings() {
         int winnings = 0;
-        for (int i = 0; i < winningStatistics.length; i++) {
-            winnings += WINNING_PRIZES.get(i).calculatePrizeMoney(winningStatistics[i]);
+        for (WinningPrizeMatcher matchers : winningPrizeCount.keySet()) {
+            winnings += matchers.calculateWinningPrize()
+                                .calculatePrizeMoney(winningPrizeCount.get(matchers));
         }
-        return winnings;
+        return winningPrizeCount.entrySet()
+                                .stream()
+                                .mapToInt(entry
+                                              -> entry.getKey()
+                                                      .calculateWinningPrize()
+                                                      .calculatePrizeMoney(entry.
+                                                                               getValue()))
+                                .sum();
     }
 }

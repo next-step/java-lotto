@@ -8,32 +8,30 @@ import view.LottoInputView;
 import view.LottoOutputView;
 
 public class LottoController {
-    private LottoGame lottoGenerator;
+    private LottoGame lottoGame;
     private WinningAnalyzer winningAnalyzer;
 
     public void playLottoGames(int money) {
-        this.lottoGenerator = new LottoGame();
-        lottoGenerator.generateLottoResultsFromMoney(money);
+        lottoGame = new LottoGame();
+        lottoGame.generateLottoResultsFromMoney(money);
     }
 
     public void getLottoResults() {
-        LottoResults lottoResults = lottoGenerator.getLottoResults();
-        LottoOutputView.printGameCount(lottoGenerator.getCount());
-        List<int[]> results = lottoResults.lottoResults();
-        LottoOutputView.printLottoResults(results);
+        List<List<Integer>> results = lottoGame.getLottoResults().lottoNumbersToInt();
+        int gameCount = lottoGame.getCount();
+        LottoOutputView.printLottoResults(gameCount, results);
     }
 
     public void getWinningStatistics() {
-        LottoResults lottoResults = lottoGenerator.getLottoResults();
-        this.winningAnalyzer = new WinningAnalyzer(lottoResults, LottoInputView.getWinningNumbers());
+        LottoResults lottoResults = lottoGame.getLottoResults();
+        winningAnalyzer = new WinningAnalyzer(lottoResults, LottoInputView.getWinningNumbers(), LottoInputView.getBonusNumber());
         WinningStatistics winningStatistics = winningAnalyzer.calculateWinningStatistics();
         LottoOutputView.printBeforeWinnings();
-        for (int i = 0; i < winningStatistics.getWinningResults().length; i++) {
-            LottoOutputView.printMatchCounts(i, WinningStatistics.OFFSET);
-            LottoOutputView.printPrizes(WinningStatistics.WINNING_PRIZES.get(i).getPrizeMoney());
-            LottoOutputView.printWinningCount(winningStatistics.getWinningResults()[i]);
-        }
-        int money = lottoGenerator.getMoney();
+        LottoOutputView.printWinnings(winningStatistics);
+    }
+
+    public void getReturnOnInvestment() {
+        int money = lottoGame.getMoney();
         LottoOutputView.printReturnOnInvestment(winningAnalyzer.getReturnOnInvestment(money));
     }
 }

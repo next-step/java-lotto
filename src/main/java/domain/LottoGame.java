@@ -12,7 +12,7 @@ public class LottoGame {
     public void generateLottoResultsFromMoney(int money) {
         this.money = new Money(money);
         for (int i = 0; i < getCount(); i++) {
-            lottoResults.add(LottoNumGenerator.generateNumbers());
+            lottoResults.add(LottoNumGenerator.generateResult());
         }
     }
 

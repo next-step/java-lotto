@@ -2,7 +2,9 @@ package domain;
 
 import static domain.LottoNumber.LOTTO_NUM_LIMIT;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoNumGenerator {
 
@@ -12,17 +14,17 @@ public class LottoNumGenerator {
 
     static {
         for (int i = 1; i <= LOTTO_NUM_LIMIT; i++) {
-            LOTTO_BALLS.add(LottoNumber.of(i));
+            LOTTO_BALLS.add(LottoNumber.from(i));
         }
     }
 
-    public static LottoNumber[] generateNumbers() {
-        LottoNumber[] generatedNumbers = new LottoNumber[LOTTO_SIZE];
+    public static LottoResult generateResult() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
         Collections.shuffle(LOTTO_BALLS);
         for (int i = 0; i < LOTTO_SIZE; i++) {
-            generatedNumbers[i] = LOTTO_BALLS.get(i);
+            lottoNumbers.add(LOTTO_BALLS.get(i));
         }
 
-        return generatedNumbers;
+        return new LottoResult(lottoNumbers);
     }
 }
