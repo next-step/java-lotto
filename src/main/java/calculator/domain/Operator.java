@@ -1,14 +1,13 @@
 package calculator.domain;
 
-import java.util.List;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Operator {
-    private final static List<String> OPERATOR = List.of("+", "-", "*", "/");
     private final String operator;
 
     public Operator(String operator) {
-        if (!isOperator(operator))
+        if (isOperator(operator).equals(OperatorType.EMPTY))
             throw new IllegalArgumentException("올바른 사칙연산이 아닙니다.");
         this.operator = operator;
     }
@@ -30,8 +29,11 @@ public class Operator {
         return Objects.hash(operator);
     }
 
-    private boolean isOperator(String operator) {
-        return OPERATOR.contains(operator);
+    private OperatorType isOperator(String operator) {
+        return Arrays.stream(OperatorType.values())
+                .filter(operatorType -> operatorType.hasSymbol(operator))
+                .findAny()
+                .orElse(OperatorType.EMPTY);
     }
 
 }

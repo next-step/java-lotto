@@ -1,12 +1,9 @@
 package calculator.view;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
@@ -21,6 +18,7 @@ public class InputViewTest {
     void create_nullOrEmptyStringCheck(String input) {
         assertThatThrownBy(() -> {
             InputView inputView = new InputView(input);
+            inputView.getOperators();
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("null 또는 빈 공백 문자를 전달할 수 없습니다.");
     }
@@ -31,6 +29,7 @@ public class InputViewTest {
     void create_improperOperator(String input) {
         assertThatThrownBy(() -> {
             InputView inputView = new InputView(input);
+            inputView.getOperators();
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("올바른 사칙연산이 아닙니다.");
     }
