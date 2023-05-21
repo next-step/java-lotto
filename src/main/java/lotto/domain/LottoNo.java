@@ -16,7 +16,14 @@ public class LottoNo implements Comparable<LottoNo> {
     }
 
     private LottoNo(int number) {
+        validate(number);
         this.number = number;
+    }
+
+    private void validate(int number) {
+        if (number < 1 || number > 45) {
+            throw new IllegalArgumentException("입력된 숫자 범위가 올바르지 않습니다.");
+        }
     }
 
     public static LottoNo of(int number) {
