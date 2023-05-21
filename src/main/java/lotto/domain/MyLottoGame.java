@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MyLottoGame {
@@ -12,8 +11,8 @@ public class MyLottoGame {
         this.result = new MyResult(myPurchase);
     }
 
-    public static MyLottoGame autoGenerate(MyPurchase myPurchase) {
-        Lottos lottos = Lottos.create(myPurchase);
+    public static MyLottoGame generate(MyPurchase myPurchase, List<LottoNumbers> manualLottos) {
+        Lottos lottos = Lottos.create(myPurchase, manualLottos);
         return new MyLottoGame(lottos, myPurchase);
     }
 
@@ -30,7 +29,11 @@ public class MyLottoGame {
         return result().countRank(rank);
     }
 
-    public List<Lotto> getLottos() {
-        return lottos.getLottos();
+    public List<Lotto> getManualLottos() {
+        return lottos.getManualLottos();
+    }
+
+    public List<Lotto> getAutoLottos() {
+        return lottos.getAutoLottos();
     }
 }

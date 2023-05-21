@@ -3,31 +3,34 @@ package lotto.domain;
 import java.util.List;
 
 public class WinLotto {
-    private final Numbers numbers;
-    private final Integer bonusNumber;
+    private final LottoNumbers lottoNumbers;
+    private final LottoNo bonusNumber;
 
-    public WinLotto(Numbers numbers) {
-        this(numbers, null);
+    public WinLotto(LottoNumbers lottoNumbers) {
+        this(lottoNumbers, null);
     }
 
-    public WinLotto(Numbers numbers, Integer bonusNumber) {
-        this.numbers = numbers;
+    public WinLotto(List<LottoNo> numbers, LottoNo bonusNumber) {
+        this(new LottoNumbers(numbers), bonusNumber);
+    }
+
+    public WinLotto(LottoNumbers lottoNumbers, LottoNo bonusNumber) {
+        lottoNumbers.validateBonusNumber(bonusNumber);
+        this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    public WinLotto(List<Integer> numbers, Integer bonusNumber) {
-        this(new Numbers(numbers), bonusNumber);
+    public LottoNumbers numbers() {
+        return lottoNumbers;
     }
 
-    public Numbers numbers() {
-        return numbers;
-    }
-
-    public Integer findNumber(int i) {
-        return numbers.find(i);
-    }
-
-    public Integer bonusNumber() {
+    public LottoNo bonusNumber() {
         return bonusNumber;
+    }
+
+    public Rank checkRank(Lotto lotto) {
+        int matchCount = this.lottoNumbers.countContains(lotto);
+        boolean matchBonus = lotto.hasNumber(this.bonusNumber);
+        return Rank.of(matchCount, matchBonus);
     }
 }
