@@ -1,5 +1,6 @@
 package domain;
 
+import dto.WinningLottoResult;
 import util.LottoSeller;
 
 import java.util.Collection;
@@ -11,8 +12,8 @@ import java.util.stream.Collectors;
 public class LottoStatistics {
   private final List<LottoResult> lottoResults;
 
-  public LottoStatistics(final List<LottoResult> lottoResults) {
-    this.lottoResults = lottoResults;
+  public LottoStatistics(final WinningLottoResult result) {
+    this.lottoResults = result.getLottoResults();
   }
 
   public float getProfitRate() {

@@ -37,4 +37,7 @@ public enum LottoResult {
             .collect(Collectors.toList());
     }
 
+    public boolean isNotWinning() {
+        return this == NONE;
+    }
 }

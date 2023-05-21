@@ -3,16 +3,17 @@ package view;
 import domain.Lotto;
 import domain.LottoStatistics;
 import domain.LottoResult;
+import dto.LottoBuyResult;
 
 import java.util.*;
 
 public class LottoOutputView {
-    public static void printLottoCount(int autoLottoCount, int manualLottoCount) {
-        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.%n", manualLottoCount, autoLottoCount);
+    public static void printLottoCount(LottoBuyResult autoLottoResult, List<Lotto> manualLottoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.%n", manualLottoCount.size(), autoLottoResult.getLottos().size());
     }
 
-    public static void printLottoList(List<Lotto> lottoList) {
-        lottoList.forEach(System.out::println);
+    public static void printLottoList(LottoBuyResult result) {
+        result.getLottos().forEach(System.out::println);
     }
 
     public static void printLottoResult(LottoStatistics statistics) {

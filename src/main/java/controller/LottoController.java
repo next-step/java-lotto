@@ -3,6 +3,7 @@ package controller;
 import domain.*;
 import domain.Number;
 import dto.LottoBuyResult;
+import dto.WinningLottoResult;
 import util.LottoSeller;
 import view.LottoInputView;
 import view.LottoOutputView;
@@ -15,32 +16,29 @@ import java.util.stream.Stream;
 public class LottoController {
 
     public void run() {
-        final Money money = new Money(LottoInputView.inputPurchaseAmount());
+        final Wallet wallet = new Wallet(new Money(LottoInputView.inputPurchaseAmount()));
 
         final Number manualLottoCount = new Number(LottoInputView.inputManualLottoCount());
-        final Money change = LottoSeller.payManualLottoPrice(money, manualLottoCount);
-
         LottoOutputView.printInputManualLottoCount();
-        final List<Lotto> manualLottos = IntStream.range(0, manualLottoCount.value())
-                .mapToObj(i -> new Lotto(mapToLottoNumbers(LottoInputView.inputManualLottoNumbers())))
-                .collect(Collectors.toList());
 
-        final LottoBuyResult buyResult = LottoSeller.buyLotto(change);
-        LottoOutputView.printLottoCount(buyResult.getLottos().size(), manualLottos.size());
-        LottoOutputView.printLottoList(buyResult.getLottos());
+        final List<Lotto> manualLottos = inputAndBuyManualLottos(manualLottoCount, wallet);
+        final LottoBuyResult buyResult = LottoSeller.buyLotto(wallet.payAll());
+
+        LottoOutputView.printLottoCount(buyResult, manualLottos);
+        LottoOutputView.printLottoList(buyResult);
 
         final WinningLotto winningLotto = inputWinningLotto();
 
-        final List<LottoResult> results = Stream.concat(buyResult.getLottos().stream(), manualLottos.stream())
+        final WinningLottoResult result = new WinningLottoResult(Stream.concat(buyResult.getLottos().stream(), manualLottos.stream())
                 .map(winningLotto::getResult)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
 
-        LottoOutputView.printLottoResult(new LottoStatistics(results));
+        LottoOutputView.printLottoResult(new LottoStatistics(result));
     }
 
     private WinningLotto inputWinningLotto() {
         final List<LottoNumber> winningNumbers = LottoInputView.inputWinningLotto().stream()
-            .map(String::trim)
+            .map(String::strip)
             .map(LottoNumber::new)
             .distinct()
             .collect(Collectors.toList());
@@ -58,5 +56,16 @@ public class LottoController {
         return numbers.stream()
             .map(this::mapToLottoNumber)
             .collect(Collectors.toList());
+    }
+
+    private List<Lotto> inputAndBuyManualLottos(Number manualLottoCount, Wallet wallet) {
+        return IntStream.range(0, manualLottoCount.value())
+                .mapToObj(i ->mapToLottoNumbers(LottoInputView.inputManualLottoNumbers()))
+                .map(lottoNumbers -> {
+                    LottoBuyResult lottoBuyResult = LottoSeller.buyManualLotto(lottoNumbers, wallet.payAll());
+                    wallet.charge(lottoBuyResult.getChange());
+                    return lottoBuyResult.getLottos();
+                }).flatMap(List::stream)
+                .collect(Collectors.toList());
     }
 }

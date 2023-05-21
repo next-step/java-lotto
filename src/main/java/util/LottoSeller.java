@@ -1,6 +1,7 @@
 package util;
 
 import domain.Lotto;
+import domain.LottoNumber;
 import domain.Money;
 import domain.Number;
 import dto.LottoBuyResult;
@@ -34,7 +35,7 @@ public class LottoSeller {
         return new Money(LOTTO_PRICE * lottoCount);
     }
 
-    public static Money payManualLottoPrice(Money money, Number manualLottoCount) {
-        return money.subtract(getLottoPrice(manualLottoCount.value()));
+    public static LottoBuyResult buyManualLotto(List<LottoNumber> lottoNumbers, Money money) {
+        return new LottoBuyResult(Collections.singletonList(new Lotto(lottoNumbers)), money.subtract(new Money(LOTTO_PRICE)));
     }
 }

@@ -26,4 +26,22 @@ public class Money extends Number{
     private boolean isValidMoney(int value) {
         return 0 <= value && value <= 100000;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Money) {
+            return value() == ((Money) obj).value();
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return value();
+    }
 }
