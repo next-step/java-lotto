@@ -3,7 +3,6 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,7 +32,7 @@ public class LottoGameTest {
         //when
         lottoGenerator.generateLottoResultsFromMoney(manualRequest, money);
         LottoResults lottoResults = lottoGenerator.getLottoResults();
-        List<List<Integer>> lottoResultList = lottoResults.lottoNumbersToInt();
+        List<List<Integer>> lottoResultList = lottoResults.lottoResultsToInt();
         //then
         assertThat(lottoResultList).hasSize(14);
         for (List<Integer> lottoNum : lottoResultList) {

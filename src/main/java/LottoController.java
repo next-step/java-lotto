@@ -18,7 +18,7 @@ public class LottoController {
     }
 
     public void lottoResults() {
-        List<List<Integer>> results = lottoGame.getLottoResults().lottoNumbersToInt();
+        List<List<Integer>> results = lottoGame.getLottoResultsToInt();
         int gameCount = lottoGame.getCount();
         LottoOutputView.printLottoResults(gameCount, results);
     }

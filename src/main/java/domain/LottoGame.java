@@ -52,5 +52,9 @@ public class LottoGame {
     public LottoResults getLottoResults() {
         return lottoResults;
     }
+
+    public List<List<Integer>> getLottoResultsToInt() {
+        return lottoResults.lottoResultsToInt();
+    }
 }
 

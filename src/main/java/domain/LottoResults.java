@@ -31,7 +31,7 @@ public class LottoResults {
         lottoResults.add(generateNumbers);
     }
 
-    public List<List<Integer>> lottoNumbersToInt() {
+    public List<List<Integer>> lottoResultsToInt() {
         List<List<Integer>> lottoResultList = new ArrayList<>();
         for (LottoResult lottoResult : lottoResults) {
             lottoResultList.add(inputLottoNumber(lottoResult));
