@@ -41,6 +41,9 @@ public class Lottos {
         for (Lotto lotto : manualLottos) {
             ranks.add(winLotto.checkRank(lotto));
         }
+        for (Lotto lotto : autoLottos) {
+            ranks.add(winLotto.checkRank(lotto));
+        }
         myResult.update(ranks);
     }
 
