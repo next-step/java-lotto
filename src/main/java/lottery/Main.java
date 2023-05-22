@@ -9,6 +9,7 @@ public class Main {
     private static final PriceInputView priceInputView = new PriceInputView();
     private static final NumberOfLotteryOutputView numberOfLotteryOutputView = new NumberOfLotteryOutputView();
     private static final WinLotteryInputView winLotteryInputView = new WinLotteryInputView();
+    private static final InputView<BonusBall> bonusBallInputView = new BonusBallInputView();
     private static final LotteryResultOutputView lotteryResultOutputView = new LotteryResultOutputView();
 
     public static void main(String[] args) {
@@ -16,7 +17,7 @@ public class Main {
         LotteryStrategy lotteryStrategy = new RandomLotteryStrategy();
         List<Lottery> lotteries = Lotteries.buy(price, lotteryStrategy);
         numberOfLotteryOutputView.print(lotteries);
-        Lottery winLottery = winLotteryInputView.receive();
+        WinLottery winLottery = new WinLottery(winLotteryInputView.receive(), bonusBallInputView.receive());
         LotteryResult lotteryResult = Lotteries.calculateResult(lotteries, winLottery);
         lotteryResultOutputView.print(lotteryResult);
     }
