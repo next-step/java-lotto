@@ -1,6 +1,5 @@
 package autolotto.machine.lotto;
 
-import autolotto.machine.BonusNumber;
 import autolotto.machine.LottoUtil;
 import autolotto.machine.lotto.fixture.FixedNumberShuffler;
 import autolotto.machine.winning.Winning;
@@ -13,8 +12,10 @@ import java.util.Arrays;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class LottoWalletTest {
     private final LottoGenerator lottoGenerator = new LottoGenerator(new FixedNumberShuffler());
-    private final WinningNumbers fixedWinningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 40, 41, 42));
-    private final BonusNumber bonusAnyLottoNotContaining = new BonusNumber(11);
+    private final WinningNumbers fixedWinningNumbers =
+            new WinningNumbers(
+                    LottoUtil.createLottoNumbers(Arrays.asList(1, 2, 3, 40, 41, 42)),
+                    new LottoNumber(11));
 
     @Test
     void 지갑에_로또를_하나_추가할_수_있다() {
@@ -39,7 +40,7 @@ class LottoWalletTest {
         LottoWallet wallet = new LottoWallet(lottoGenerator.generateMultipleLotto(3));
         int expectedTotalWinnings = Winning.THREE.winningMoney() * 3;
 
-        int totalWinnings = wallet.totalWinningMoneyOf(fixedWinningNumbers, bonusAnyLottoNotContaining);
+        int totalWinnings = wallet.totalWinningMoneyOf(fixedWinningNumbers);
 
         Assertions.assertThat(totalWinnings).isEqualTo(expectedTotalWinnings);
     }
@@ -52,7 +53,7 @@ class LottoWalletTest {
                 new Lotto(LottoUtil.createLottoNumbers(Arrays.asList(1, 2, 3, 24, 25, 28)))));
         int expectedTotalWinnings = Winning.THREE.winningMoney();
 
-        int totalWinnings = wallet.totalWinningMoneyOf(fixedWinningNumbers, bonusAnyLottoNotContaining);
+        int totalWinnings = wallet.totalWinningMoneyOf(fixedWinningNumbers);
 
         Assertions.assertThat(totalWinnings).isEqualTo(expectedTotalWinnings);
     }

@@ -8,14 +8,22 @@ import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class LottoTest {
 
     @Test
     void 당첨번호와_비교해_일치하는_숫자의_개수를_알려준다() {
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(LottoUtil.createLottoNumbers(Arrays.asList(1, 2, 23, 24, 25, 21)));
+        int anyBonusNumber = 7;
+        List<Integer> winningNumberIntegers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> lottoNumberIntegers = Arrays.asList(1, 2, 23, 24, 25, 21);
+
+        WinningNumbers winningNumbers =
+                new WinningNumbers(
+                        LottoUtil.createLottoNumbers(winningNumberIntegers),
+                        new LottoNumber(anyBonusNumber));
+        Lotto lotto = new Lotto(LottoUtil.createLottoNumbers(lottoNumberIntegers));
 
         int matchCount = lotto.matchCount(winningNumbers);
 
