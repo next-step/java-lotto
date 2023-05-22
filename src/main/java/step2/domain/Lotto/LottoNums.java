@@ -1,14 +1,31 @@
-package step2.domain;
+package step2.domain.Lotto;
+
+import step2.domain.Constant;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LottoNums {
 
-    private final List<LottoNum> lottoNums;
+    private final List<LottoNum> lottoNums = new ArrayList<>(6);
 
     public LottoNums(Builder builder) {
-        this.lottoNums = builder.lottoNums;
+        this.lottoNums.addAll(builder.lottoNums);
+    }
+
+    public String getNums() {
+        return Arrays.toString(lottoNums
+                .stream()
+                .mapToInt(LottoNum::getValue)
+                .sorted()
+                .toArray());
+    }
+
+    public int compareTo(List<LottoNum> lottoNumList) {
+        return (int) lottoNumList.stream()
+                .filter(this.lottoNums::contains)
+                .count();
     }
 
     @Override
@@ -27,7 +44,6 @@ public class LottoNums {
     }
 
     public static class Builder {
-        private static final int LOTTO_NUM_SIZE = 6;
 
         private final List<LottoNum> lottoNums = new ArrayList<>();
 
@@ -37,7 +53,7 @@ public class LottoNums {
         }
 
         private void validateLottoNums() {
-            if (lottoNums.size() == LOTTO_NUM_SIZE) {
+            if (lottoNums.size() == Constant.LOTTO_NUM_SIZE) {
                 return;
             }
             throw new IllegalArgumentException("로또 번호를 6자까지 입력해주세요.");

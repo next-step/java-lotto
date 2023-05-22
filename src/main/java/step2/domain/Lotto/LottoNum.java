@@ -1,14 +1,21 @@
-package step2.domain;
+package step2.domain.Lotto;
+
+import step2.domain.Constant;
 
 public class LottoNum {
-    private static final int MIN_NUM = 1;
-    private static final int MAX_NUM = 45;
-
     private final int num;
+
+    public LottoNum(String num) {
+        this(Integer.parseInt(num));
+    }
 
     public LottoNum(int num) {
         this.num = num;
         validateLottoNum();
+    }
+
+    public int getValue() {
+        return num;
     }
 
     private void validateLottoNum() {
@@ -18,11 +25,11 @@ public class LottoNum {
     }
 
     private boolean checkUnderNum() {
-        return this.num < MIN_NUM;
+        return this.num < Constant.MIN_NUM;
     }
 
     private boolean checkOverNum() {
-        return this.num > MAX_NUM;
+        return this.num > Constant.MAX_NUM;
     }
 
     @Override

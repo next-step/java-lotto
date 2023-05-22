@@ -2,34 +2,16 @@ package step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.domain.Lotto.LottoNum;
+import step2.domain.Lotto.LottoNums;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoNumTest {
-
-
-    @Test
-    @DisplayName("로또 번호 리스트 생성")
-    void lottoNums() {
-        LottoNums lottoNums = new LottoNums.Builder()
-                .lottoNum(new LottoNum(1))
-                .lottoNum(new LottoNum(2))
-                .lottoNum(new LottoNum(3))
-                .lottoNum(new LottoNum(4))
-                .lottoNum(new LottoNum(5))
-                .lottoNum(new LottoNum(6))
-                .build();
-
-        assertThat(lottoNums).isEqualTo(new LottoNums.Builder()
-                .lottoNum(new LottoNum(1))
-                .lottoNum(new LottoNum(2))
-                .lottoNum(new LottoNum(3))
-                .lottoNum(new LottoNum(4))
-                .lottoNum(new LottoNum(5))
-                .lottoNum(new LottoNum(6))
-                .build());
-    }
 
     @Test
     @DisplayName("로또 넘버 객체 생성")
@@ -48,4 +30,27 @@ public class LottoNumTest {
                 .isThrownBy(() -> new LottoNum(46))
                 .withMessageMatching("로또 번호는 1 ~ 45까지의 숫자만 가능합니다.");
     }
+
+    @Test
+    @DisplayName("로또 번호 비교")
+    void lottoNums_lottoNumsCompareToLottoList() {
+        LottoNums lottoNums = new LottoNums(new LottoNums.Builder()
+                .lottoNum(new LottoNum(1))
+                .lottoNum(new LottoNum(2))
+                .lottoNum(new LottoNum(16))
+                .lottoNum(new LottoNum(19))
+                .lottoNum(new LottoNum(30))
+                .lottoNum(new LottoNum(32)));
+
+        List<LottoNum> lottoNumList = new ArrayList<>();
+        lottoNumList.add(new LottoNum(1));
+        lottoNumList.add(new LottoNum(2));
+        lottoNumList.add(new LottoNum(16));
+        lottoNumList.add(new LottoNum(19));
+        lottoNumList.add(new LottoNum(30));
+        lottoNumList.add(new LottoNum(32));
+
+        assertThat(lottoNums.compareTo(lottoNumList)).isEqualTo(6);
+    }
+
 }
