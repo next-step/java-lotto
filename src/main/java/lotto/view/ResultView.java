@@ -9,6 +9,7 @@ import static lotto.domain.PrizeType.*;
 
 public class ResultView {
     public static void printTickets(LottoTickets lottoTickets) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", lottoTickets.getNumberOfManualTickets(), lottoTickets.getNumberOfAutoTickets());
         List<Ticket> tickets = lottoTickets.getTickets();
         tickets.forEach(t -> System.out.println(numbersToString(t.getNumbers())));
     }
@@ -27,9 +28,9 @@ public class ResultView {
         System.out.println("총 수익률은 " + returnRate + "입니다.");
     }
 
-    private static String numbersToString(List<Integer> numbers) {
+    private static String numbersToString(List<LottoNo> numbers) {
         return "[" + numbers.stream()
-                .map(Object::toString)
+                .map(lottoNo -> Integer.toString(lottoNo.number()))
                 .collect(Collectors.joining(", "))
                 + "]";
     }

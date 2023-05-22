@@ -1,7 +1,11 @@
 package lotto.domain;
 
+import lotto.exception.TicketNumberOutOfBoundException;
+import lotto.exception.TicketPriceOutOfBoundException;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
 
 public class LottoGameService {
     private LottoTickets lottoTickets;
@@ -23,13 +27,14 @@ public class LottoGameService {
         return new LottoGameService();
     }
 
-    public void buyTickets() {
-        int money = InputView.inputMoney();
-        lottoTickets = LottoTickets.buyTickets(money);
+    public void buyTickets() throws TicketNumberOutOfBoundException, TicketPriceOutOfBoundException {
+        long money = InputView.inputMoney();
+        List<Ticket> manualTickets = InputView.inputManualTickets();
+        lottoTickets = LottoTickets.buyTickets(money, manualTickets);
         ResultView.printTickets(lottoTickets);
     }
 
-    public void inputWinningNumber() {
+    public void inputWinningNumber() throws TicketNumberOutOfBoundException {
         winningNumbers = InputView.inputWinningNumber();
     }
 

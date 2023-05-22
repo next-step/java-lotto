@@ -1,17 +1,33 @@
 package lotto.domain;
 
+import lotto.exception.TicketNumberOutOfBoundException;
+import lotto.exception.TicketPriceOutOfBoundException;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static lotto.domain.Ticket.LOTTO_PRICE;
+
 public class LottoTickets {
     private final List<Ticket> tickets;
+    private final Integer numberOfManualTickets;
+    private final Integer numberOfAutoTickets;
 
-    private LottoTickets(List<Ticket> tickets) {
+    private LottoTickets(List<Ticket> tickets, int numberOfManualTickets, int numberOfAutoTickets) {
         this.tickets = tickets;
+        this.numberOfManualTickets = numberOfManualTickets;
+        this.numberOfAutoTickets = numberOfAutoTickets;
     }
 
     public static LottoTickets from(List<Ticket> tickets) {
-        return new LottoTickets(tickets);
+        return new LottoTickets(tickets, 0, 0);
+    }
+
+    public static LottoTickets of(LottoTickets manualTickets, LottoTickets autoTickets) {
+        List<Ticket> tickets = new ArrayList<>();
+        tickets.addAll(manualTickets.getTickets());
+        tickets.addAll(autoTickets.getTickets());
+        return new LottoTickets(tickets, manualTickets.numberOfTickets(), autoTickets.numberOfTickets());
     }
 
     public int numberOfTickets() {
@@ -22,12 +38,24 @@ public class LottoTickets {
         return tickets.size() * 1000;
     }
 
-    public boolean checkValidTickets() {
-        return tickets.stream().allMatch(Ticket::checkValidTickets);
+    public static LottoTickets buyTickets(long money, List<Ticket> manualTickets) throws TicketNumberOutOfBoundException, TicketPriceOutOfBoundException {
+        if (money < 0) {
+            throw new TicketPriceOutOfBoundException("가격은 음수가 불가능합니다.");
+        }
+        int numberOfManualTicket = manualTickets.size();
+        int numberOfAutoTicket = (int) (money / LOTTO_PRICE) - numberOfManualTicket;
+        return LottoTickets.of(buyManualTickets(manualTickets), buyAutoTickets(numberOfAutoTicket));
     }
 
-    public static LottoTickets buyTickets(long money) {
-        return LottoGenerator.generateTickets(money);
+    public static LottoTickets buyManualTickets(List<Ticket> tickets) {
+        return LottoGenerator.generateManualTickets(tickets);
+    }
+
+    public static LottoTickets buyAutoTickets(long numberOfTicket) throws TicketNumberOutOfBoundException {
+        if (numberOfTicket < 0) {
+            throw new TicketNumberOutOfBoundException("티켓 개수는 음수가 불가능합니다.");
+        }
+        return LottoGenerator.generateAutoTickets(numberOfTicket);
     }
 
     public List<Ticket> getTickets() {
@@ -70,5 +98,13 @@ public class LottoTickets {
             sum += type.prize();
         }
         return sum;
+    }
+
+    public int getNumberOfManualTickets() {
+        return numberOfManualTickets;
+    }
+
+    public int getNumberOfAutoTickets() {
+        return numberOfAutoTickets;
     }
 }

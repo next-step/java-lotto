@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.TicketNumberOutOfBoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,14 +10,14 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class LottoGameServiceTest {
+public class WinningStatusTest {
     LottoGameService lottoGameService;
-    WinningNumber winningNumber = WinningNumber.from(List.of(1, 2, 3, 4, 5, 6), BonusBall.from("7"));
+    WinningNumber winningNumber;
     LottoTickets lottoTickets;
     WinningStatus winningStatus;
 
     @BeforeEach
-    void init() {
+    void init() throws TicketNumberOutOfBoundException {
         List<Ticket> tickets = new ArrayList<>();
         tickets.add(Ticket.from(List.of(8, 21, 23, 41, 42, 43)));
         tickets.add(Ticket.from(List.of(3, 5, 11, 16, 32, 38)));
@@ -32,6 +33,7 @@ public class LottoGameServiceTest {
         tickets.add(Ticket.from(List.of(13, 14, 18, 21, 23, 35)));
         tickets.add(Ticket.from(List.of(17, 21, 29, 37, 42, 45)));
         tickets.add(Ticket.from(List.of(1, 2, 3, 4, 5, 11)));
+        winningNumber = WinningNumber.of(Ticket.from(List.of(1, 2, 3, 4, 5, 6)), BonusBall.from("7"));
         lottoTickets = LottoTickets.from(tickets);
         lottoGameService = LottoGameService.of(lottoTickets, winningNumber);
         winningStatus = lottoTickets.winningStatus(winningNumber);
@@ -55,11 +57,5 @@ public class LottoGameServiceTest {
         tickets.add(Ticket.from(List.of(1, 2, 3, 4, 5, 11)));
         winningStatus = lottoTickets.winningStatus(winningNumber);
         assertThat(winningStatus.countOfPrize(PrizeType.THIRD_PRIZE)).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("수익률 계산기능 테스트")
-    public void rateOfReturn() {
-        assertThat(lottoTickets.returnRate(winningNumber)).isEqualTo(107.5);
     }
 }

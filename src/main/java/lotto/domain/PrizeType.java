@@ -15,9 +15,9 @@ public enum PrizeType {
 
     NOT_MATCHING(0, false, 0);
 
-    private final int numberOfMatching;
-    private final boolean bonusMatching;
-    private final long prize;
+    private final Integer numberOfMatching;
+    private final Boolean bonusMatching;
+    private final Long prize;
 
     PrizeType(int numberOfMatching, boolean bonusMatching, long prize) {
         this.numberOfMatching = numberOfMatching;
