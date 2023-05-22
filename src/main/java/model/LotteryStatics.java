@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LotteryStatics {
-    private Map<Rank, Integer> lotteryStatics = new HashMap<>();
+    private final Map<Rank, Integer> lotteryStatics = new HashMap<>();
     private double gross;
 
     public LotteryStatics(int buyAmount, Lottos lottos, WinNum winNum) {

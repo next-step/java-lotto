@@ -4,22 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinNum {
-    private List<Integer> winNum = new ArrayList<>();
-    private int bonus;
+    private List<LottoNumber> winNum = new ArrayList<>();
+    private LottoNumber bonus;
 
     public WinNum(List<Integer> winnerNums, int bonus) {
         for (int num : winnerNums) {
-            this.winNum.add(new LottoNumber(num).getLottoNumber());
+            this.winNum.add(new LottoNumber(num));
         }
-        this.bonus = new LottoNumber(bonus).getLottoNumber();
+        this.bonus = new LottoNumber(bonus);
     }
 
-    public List<Integer> getWinNum() {
+    public List<LottoNumber> getWinNum() {
         return this.winNum;
     }
 
     public boolean matchBonus(Lotto lotto) {
         return lotto.contains(this.bonus);
+//        for (LottoNumber num : lotto.getLotto()) {
+//            if (num.getLottoNumber() == this.bonus.getLottoNumber())
+//                return true;
+//        }
+//
+//        return false;
     }
 
     public int matchCount(Lotto lotto) {

@@ -2,6 +2,7 @@ package view.result;
 
 import model.LotteryStatics;
 import model.Lotto;
+import model.LottoNumber;
 import model.Rank;
 
 import java.text.DecimalFormat;
@@ -23,7 +24,10 @@ public class ResultView {
 
     private static void getLotto(List<Lotto> Input) {
         for (Lotto lotto : Input) {
-            System.out.println(lotto.getLotto());
+//            for(LottoNumber lottoNumber : lotto.getLotto()){
+//                lottoNumber.getLottoNumber();
+//            }
+            System.out.println(lotto.getWinNumIntegerType());
         }
     }
 
