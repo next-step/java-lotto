@@ -31,7 +31,7 @@ public class LottoGameServiceTest {
         tickets.add(Ticket.from(List.of(2, 8, 9, 18, 19, 21)));
         tickets.add(Ticket.from(List.of(13, 14, 18, 21, 23, 35)));
         tickets.add(Ticket.from(List.of(17, 21, 29, 37, 42, 45)));
-        tickets.add(Ticket.from(List.of(1, 2, 3, 4, 5, 7)));
+        tickets.add(Ticket.from(List.of(1, 2, 3, 4, 5, 11)));
         lottoTickets = LottoTickets.from(tickets);
         lottoGameService = LottoGameService.of(lottoTickets, winningNumber);
         winningStatus = lottoTickets.winningStatus(winningNumber);
@@ -40,16 +40,26 @@ public class LottoGameServiceTest {
     @Test
     @DisplayName("1, 2, 3, 4, 5등 테스트")
     public void countOfMatchingNumber() {
-        assertThat(winningStatus.getCountOfPrize(PrizeType.FIFTH_PRIZE)).isEqualTo(1);
-        assertThat(winningStatus.getCountOfPrize(PrizeType.FOURTH_PRIZE)).isEqualTo(0);
-        assertThat(winningStatus.getCountOfPrize(PrizeType.THIRD_PRIZE)).isEqualTo(0);
-        assertThat(winningStatus.getCountOfPrize(PrizeType.SECOND_PRIZE)).isEqualTo(1);
-        assertThat(winningStatus.getCountOfPrize(PrizeType.FIRST_PRIZE)).isEqualTo(0);
+        assertThat(winningStatus.countOfPrize(PrizeType.FIFTH_PRIZE)).isEqualTo(1);
+        assertThat(winningStatus.countOfPrize(PrizeType.FOURTH_PRIZE)).isEqualTo(0);
+        assertThat(winningStatus.countOfPrize(PrizeType.THIRD_PRIZE)).isEqualTo(1);
+        assertThat(winningStatus.countOfPrize(PrizeType.SECOND_PRIZE)).isEqualTo(0);
+        assertThat(winningStatus.countOfPrize(PrizeType.FIRST_PRIZE)).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("3등 테스트")
+    public void thirdPrizeTest() {
+        List<Ticket> tickets = new ArrayList<>();
+        lottoTickets = LottoTickets.from(tickets);
+        tickets.add(Ticket.from(List.of(1, 2, 3, 4, 5, 11)));
+        winningStatus = lottoTickets.winningStatus(winningNumber);
+        assertThat(winningStatus.countOfPrize(PrizeType.THIRD_PRIZE)).isEqualTo(1);
     }
 
     @Test
     @DisplayName("수익률 계산기능 테스트")
     public void rateOfReturn() {
-        assertThat(lottoTickets.returnRate(winningNumber)).isEqualTo(21428.92);
+        assertThat(lottoTickets.returnRate(winningNumber)).isEqualTo(107.5);
     }
 }

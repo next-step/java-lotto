@@ -4,7 +4,7 @@ import java.util.List;
 
 public class WinningNumber {
     private final List<Integer> winningNumber;
-    BonusBall bonusBall;
+    private final BonusBall bonusBall;
 
     private WinningNumber(List<Integer> winningNumber, BonusBall bonusBall) {
         this.winningNumber = winningNumber;
@@ -15,11 +15,13 @@ public class WinningNumber {
         return new WinningNumber(winningNumber, bonusBall);
     }
 
-    public List<Integer> getWinningNumber() {
-        return winningNumber;
+    public int countMatchingNumber(List<Integer> numbers) {
+        return (int) winningNumber.stream()
+                .filter(w -> numbers.contains(w))
+                .count();
     }
 
-    public BonusBall getBonusBall() {
-        return bonusBall;
+    public boolean isBonusBallMatched(List<Integer> numbers) {
+        return numbers.contains(bonusBall.getBonusBall());
     }
 }

@@ -1,48 +1,39 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 public enum PrizeType {
-    FIRST_PRIZE(6, 2_000_000_000),
+    FIRST_PRIZE(6, false, 2_000_000_000),
 
-    SECOND_PRIZE(5, 300_000_000),
+    SECOND_PRIZE(5, true, 300_000_000),
 
-    THIRD_PRIZE(5, 1_500_000),
+    THIRD_PRIZE(5, false, 1_500_000),
 
-    FOURTH_PRIZE(4, 50_000),
+    FOURTH_PRIZE(4, false, 50_000),
 
-    FIFTH_PRIZE(3, 5_000),
+    FIFTH_PRIZE(3, false, 5_000),
 
-    NOT_MATCHING(0, 0);
+    NOT_MATCHING(0, false, 0);
 
     private final int numberOfMatching;
+    private final boolean bonusMatching;
     private final long prize;
 
-    PrizeType(int numberOfMatching, long prize) {
+    PrizeType(int numberOfMatching, boolean bonusMatching, long prize) {
         this.numberOfMatching = numberOfMatching;
+        this.bonusMatching = bonusMatching;
         this.prize = prize;
     }
 
-    public int getNumberOfMatching() {
+    public int numberOfMatching() {
         return numberOfMatching;
     }
 
     public static PrizeType create(int numberOfMatching, boolean bonusMatching) {
-        if (checkSecondPrize(numberOfMatching, bonusMatching))
-            return PrizeType.SECOND_PRIZE;
-        return Stream.of(PrizeType.values())
-                .filter(prizeType -> checkNumberOfMatching(numberOfMatching, prizeType))
+        return Arrays.stream(PrizeType.values())
+                .filter(p -> p.numberOfMatching == numberOfMatching && p.bonusMatching == bonusMatching)
                 .findFirst()
                 .orElse(NOT_MATCHING);
-    }
-
-    private static boolean checkNumberOfMatching(int numberOfMatching, PrizeType prizeType) {
-        return prizeType.numberOfMatching == numberOfMatching;
-    }
-
-    private static boolean checkSecondPrize(int numberOfMatching, boolean bonusMatching) {
-        return bonusMatching && numberOfMatching == SECOND_PRIZE.numberOfMatching;
     }
 
     public long prize() {

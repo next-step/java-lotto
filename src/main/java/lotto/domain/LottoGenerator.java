@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.domain.LottoConstants.*;
+import static lotto.domain.Ticket.*;
 
 public class LottoGenerator {
+
     public static LottoTickets generateTickets(long money) {
         List<Ticket> tickets = new ArrayList<>();
         long numberOfTickets = money / LOTTO_PRICE;

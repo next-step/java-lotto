@@ -11,7 +11,7 @@ public class BonusBall {
         return new BonusBall(Integer.valueOf(bonusBall));
     }
 
-    public Integer getBonusBallNumber() {
+    public Integer getBonusBall() {
         return bonusBall;
     }
 }

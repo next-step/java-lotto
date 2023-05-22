@@ -13,7 +13,7 @@ public class WinningStatus {
         return new WinningStatus(winningStatus);
     }
 
-    public int getCountOfPrize(PrizeType prizeType) {
+    public int countOfPrize(PrizeType prizeType) {
         return winningStatus.get(prizeType);
     }
 }

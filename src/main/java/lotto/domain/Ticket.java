@@ -2,11 +2,12 @@ package lotto.domain;
 
 import java.util.List;
 
-import static lotto.domain.LottoConstants.MAX_LOTTO_NUMBER;
-import static lotto.domain.LottoConstants.MIN_LOTTO_NUMBER;
-
 public class Ticket {
     private final List<Integer> numbers;
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
+    public static final int SIZE_LOTTO_NUMBER = 6;
+    public static final int LOTTO_PRICE = 1000;
 
     private Ticket(List<Integer> numbers) {
         this.numbers = numbers;
@@ -24,15 +25,12 @@ public class Ticket {
         return PrizeType.create(countMatchingNumber(winningNumber), isBonusBallMatched(winningNumber));
     }
 
-    private int countMatchingNumber(WinningNumber winningNumber) {
-        return (int) winningNumber.getWinningNumber().stream()
-                .filter(w -> numbers.contains(w))
-                .count();
+    public int countMatchingNumber(WinningNumber winningNumber) {
+        return winningNumber.countMatchingNumber(numbers);
     }
 
-    private boolean isBonusBallMatched(WinningNumber winningNumber) {
-        BonusBall bonusBall = winningNumber.getBonusBall();
-        return numbers.contains(bonusBall.getBonusBallNumber());
+    public boolean isBonusBallMatched(WinningNumber winningNumber) {
+        return winningNumber.isBonusBallMatched(numbers);
     }
 
     public List<Integer> getNumbers() {

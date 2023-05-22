@@ -14,10 +14,10 @@ public class TicketTest {
         Ticket ticket = Ticket.from(List.of(1, 2, 3, 44, 55, 66));
 
         WinningNumber winningNumber = WinningNumber.from(List.of(1, 2, 3, 4, 5, 6), BonusBall.from("7"));
-        assertThat(ticket.checkLotteryWinningStatus(winningNumber).getNumberOfMatching()).isEqualTo(3);
+        assertThat(ticket.checkLotteryWinningStatus(winningNumber).numberOfMatching()).isEqualTo(3);
 
         winningNumber = WinningNumber.from(List.of(1, 2, 3, 44, 55, 66), BonusBall.from("7"));
-        assertThat(ticket.checkLotteryWinningStatus(winningNumber).getNumberOfMatching()).isEqualTo(6);
+        assertThat(ticket.checkLotteryWinningStatus(winningNumber).numberOfMatching()).isEqualTo(6);
     }
 
     @Test
@@ -26,7 +26,10 @@ public class TicketTest {
         Ticket ticket = Ticket.from(List.of(1, 2, 3, 4, 5, 7));
 
         WinningNumber winningNumber = WinningNumber.from(List.of(1, 2, 3, 4, 5, 6), BonusBall.from("7"));
-        assertThat(ticket.checkLotteryWinningStatus(winningNumber).getNumberOfMatching()).isEqualTo(5);
+        assertThat(ticket.countMatchingNumber(winningNumber)).isEqualTo(5);
+        assertThat(ticket.isBonusBallMatched(winningNumber)).isTrue();
+        assertThat(ticket.checkLotteryWinningStatus(winningNumber).numberOfMatching()).isEqualTo(5);
+
         assertThat(ticket.checkLotteryWinningStatus(winningNumber)).isEqualTo(PrizeType.SECOND_PRIZE);
     }
 
