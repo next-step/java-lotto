@@ -69,8 +69,6 @@ public enum WinningPrizes {
         return prizeMoney;
     }
 
-
-
     public int getNumberOfCount() {
         return countSupplier.apply(numberOfCount);
     }

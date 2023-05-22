@@ -5,7 +5,6 @@ import static domain.WinningStatistics.THRESHOLD;
 
 import java.util.Collections;
 import java.util.List;
-
 import domain.WinningPrizes;
 import domain.WinningStatistics;
 
