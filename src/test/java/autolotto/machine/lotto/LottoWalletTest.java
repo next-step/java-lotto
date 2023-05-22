@@ -1,6 +1,7 @@
 package autolotto.machine.lotto;
 
 import autolotto.machine.BonusNumber;
+import autolotto.machine.LottoUtil;
 import autolotto.machine.lotto.fixture.FixedNumberShuffler;
 import autolotto.machine.winning.Winning;
 import autolotto.machine.winning.WinningNumbers;
@@ -45,9 +46,10 @@ class LottoWalletTest {
 
     @Test
     void 지갑_내_당첨로또와_당첨이아닌_로또가_섞여있는_경우_총_당첨금액을_알려준다() {
-        LottoWallet wallet = new LottoWallet(Arrays.asList(new Lotto(Arrays.asList(1, 22, 32, 24, 25, 26)),
-                new Lotto(Arrays.asList(1, 2, 23, 24, 25, 27)),
-                new Lotto(Arrays.asList(1, 2, 3, 24, 25, 28))));
+        LottoWallet wallet = new LottoWallet(Arrays.asList(
+                new Lotto(LottoUtil.createLottoNumbers(Arrays.asList(1, 22, 32, 24, 25, 26))),
+                new Lotto(LottoUtil.createLottoNumbers(Arrays.asList(1, 2, 23, 24, 25, 27))),
+                new Lotto(LottoUtil.createLottoNumbers(Arrays.asList(1, 2, 3, 24, 25, 28)))));
         int expectedTotalWinnings = Winning.THREE.winningMoney();
 
         int totalWinnings = wallet.totalWinningMoneyOf(fixedWinningNumbers, bonusAnyLottoNotContaining);

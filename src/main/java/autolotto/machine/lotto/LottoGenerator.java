@@ -20,12 +20,13 @@ public class LottoGenerator {
         return new Lotto(generateLottoRangeNumbers());
     }
 
-    private List<Integer> generateLottoRangeNumbers() {
+    private List<LottoNumber> generateLottoRangeNumbers() {
         List<Integer> shuffled = shuffler.shuffle(lottoRangeNumbers());
 
         return shuffled.stream()
                 .limit(LOTTO_NUMBERS_SIZE)
                 .sorted()
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
