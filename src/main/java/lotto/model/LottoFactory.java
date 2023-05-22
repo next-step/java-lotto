@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoFactory {
     public static final int LOTTO_NUMBER_COUNT_LIMIT = 6;
@@ -28,8 +29,8 @@ public class LottoFactory {
 
     public static LottoTickets createLottoTickets(int autoTicketCount, List<LottoTicket> manualLottoTickets) {
         validateCount(autoTicketCount);
-        List<LottoTicket> autoLottoTickets = IntStream.range(0, autoTicketCount)
-                .mapToObj(i -> createAutoLottoTicket())
+        List<LottoTicket> autoLottoTickets = Stream.generate(() -> createAutoLottoTicket())
+                .limit(autoTicketCount)
                 .collect(Collectors.toList());
 
         manualLottoTickets.addAll(autoLottoTickets);
