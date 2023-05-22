@@ -14,6 +14,14 @@ public class Lotto {
         lottoNumbers = LottoFactory.createManual(numbers);
     }
 
+    public static Lotto createRandom(){
+        return new Lotto();
+    }
+
+    public static Lotto createManual(String numbers){
+        return new Lotto(numbers);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

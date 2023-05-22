@@ -8,9 +8,18 @@ public class LottoStore {
 
     public static final int LOTTO_PRICE = 1000;
 
-    public List<Lotto> buyLotto(int price) {
+    public List<Lotto> buyRandomLotto(int money) {
         return Stream.generate(Lotto::new)
-                .limit(price / LOTTO_PRICE)
+                .limit(money / LOTTO_PRICE)
+                .collect(Collectors.toList());
+    }
+
+    public List<Lotto> buyManualAndRandomLotto(int money, List<String> lottos) {
+        if (money < lottos.size() * LOTTO_PRICE){
+            throw new IllegalArgumentException("돈이 부족 합니다");
+        }
+        return lottos.stream()
+                .map(Lotto::createManual)
                 .collect(Collectors.toList());
     }
 }
