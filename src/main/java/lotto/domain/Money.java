@@ -31,6 +31,11 @@ public class Money {
         return new Money(multiplyAmount);
     }
 
+    public Money plus(Money money) {
+        long plusAmount = Math.addExact(this.amount, money.amount);
+        return new Money(plusAmount);
+    }
+
     public long getAmount() {
         return amount;
     }

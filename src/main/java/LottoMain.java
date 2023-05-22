@@ -10,9 +10,9 @@ import java.util.List;
 public class LottoMain {
 
     public static void main(String[] args) {
-        Money inputMoney = InputView.inputPrice();
+        Money inputMoney = InputView.inputPrice(null);
 
-        Money manualPurchaseAmount = InputView.inputManualNumberOfPurchases(inputMoney);
+        Money manualPurchaseAmount = InputView.inputManualNumberOfPurchases(inputMoney, null);
         Money autoPurchaseAmount = inputMoney.minus(manualPurchaseAmount);
 
         List<LottoNumbers> manualLottoNumbers = InputView.inputManualLottoNumber(manualPurchaseAmount);
@@ -20,8 +20,8 @@ public class LottoMain {
         OutputView.printLottoQuantity(manualPurchaseAmount, autoPurchaseAmount);
         OutputView.printLottoList(lotto);
 
-        LottoNumbers winnerLottoNumber = InputView.inputWinningNumbers();
-        LottoNumber bonusNumber = InputView.inputBonusNumber(winnerLottoNumber);
+        LottoNumbers winnerLottoNumber = InputView.inputWinningNumbers(null);
+        LottoNumber bonusNumber = InputView.inputBonusNumber(winnerLottoNumber, null);
         WinnerLotto winnerLotto = new WinnerLotto(winnerLottoNumber, bonusNumber);
 
         Statistics statistics = new Statistics(winnerLotto, lotto, inputMoney);
