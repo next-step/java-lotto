@@ -4,6 +4,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class WinningTest {
@@ -44,9 +46,10 @@ class WinningTest {
         Assertions.assertThat(winnings).isEqualTo(Winning.FIVE_BONUS);
     }
 
-    @Test
-    void 보너스볼이_일치하더라도_당첨번호와_4개_이하로_일치할_경우_보너스볼이_일치하지_않는_것과_당첨금액이_같다() {
-        int matchCount = 4;
+    @ParameterizedTest
+    @EnumSource(value = Winning.class, names = {"THREE", "FOUR", "SIX"})
+    void 보너스볼이_일치하더라도_당첨번호와_4개_이하로_일치할_경우_보너스볼이_일치하지_않는_것과_당첨금액이_같다(Winning winning) {
+        int matchCount = winning.matchNumber();
         boolean isBonusBallMatched = true;
 
         int winnings = Winning.winningOf(matchCount, isBonusBallMatched).winningMoney();
