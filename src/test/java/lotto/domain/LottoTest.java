@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.result.Rank;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,26 +13,51 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
 
-    @Test
-    @DisplayName(value = "입력한 로또 번호를 Lotto 변환 검사")
-    void test1() {
-        Lotto lotto = Lotto.stringToNumber("1, 2, 3, 4, 5, 6");
-        assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    private Lotto lotto;
+
+    @BeforeEach
+    void setUp() {
+        lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @Test
-    @DisplayName(value = "로또 번호와 당첨 로또 번호 간 맞은 개수에 따라 RANK 리턴 검사")
+    @DisplayName(value = "로또 최소 구매 금액 검사")
+    void test1() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            Lotto.getLottoCount(900);
+        });
+    }
+
+    @Test
+    @DisplayName(value = "입력 로또번호와 보너스 번호가 중복되는지 검사")
     void test2() {
-        Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto winningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 7));
-        assertThat(lotto.getRank(winningLotto)).isEqualTo(Rank.SECOND);
+        assertThat(lotto.containsBonusNumber(3)).isTrue();
+        assertThat(lotto.containsBonusNumber(7)).isFalse();
     }
 
     @Test
     @DisplayName(value = "입력 로또번호중 중복된 번호가 있을경우 예외 검사")
     void test3() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            Lotto.stringToNumber("1, 2, 3, 4, 5, 5");
+            Lotto.of(Arrays.asList(1, 1, 2, 3, 4, 5));
+        });
+    }
+
+    @Test
+    @DisplayName(value = "입력 로또 번호 개수가 안 맞을 경우 검사")
+    void test4() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            Lotto.of(Arrays.asList(1, 2, 3, 4));
+            Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+        });
+    }
+
+    @Test
+    @DisplayName(value = "입력 로또 번호 범위가 안 맞을 경우 검사")
+    void test5() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            Lotto.of(Arrays.asList(0, 1, 2, 3, 4, 5));
+            Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 46));
         });
     }
 }

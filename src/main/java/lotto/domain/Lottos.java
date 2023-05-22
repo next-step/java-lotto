@@ -1,44 +1,44 @@
 package lotto.domain;
 
-import lotto.domain.result.LottoResults;
+import lotto.domain.result.LottoResult;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Lottos {
 
-    public final List<Lotto> lottos;
+    private final int purchaseCount;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public Lottos(int purchaseCount) {
+        this.purchaseCount = purchaseCount;
     }
 
-    public static Lottos of(List<Lotto> lottos) {
-        return new Lottos(lottos);
-    }
-
-    public int getLottoCount() {
-        return lottos.size();
-    }
-
-    public LottoResults getLottoResult(Lotto winningNumber) {
-        LottoResults lottoResults = LottoResults.of();
-        for (Lotto lotto : lottos) {
-            lottoResults.win(lotto.getRank(winningNumber));
+    public List<Lotto> createLottos() {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < purchaseCount; i++) {
+            lottoList.add(Lotto.createLottoNumber());
         }
-        return lottoResults;
+        return lottoList;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Lottos lottos1 = (Lottos) o;
-        return Objects.equals(lottos, lottos1.lottos);
+        Lottos lottos = (Lottos) o;
+        return purchaseCount == lottos.purchaseCount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottos);
+        return Objects.hash(purchaseCount);
+    }
+
+    @Override
+    public String toString() {
+        return "Lottos{" +
+                "purchaseCount=" + purchaseCount +
+                '}';
     }
 }

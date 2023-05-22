@@ -1,8 +1,7 @@
 package lotto.domain.result;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoResult {
     private Map<Rank, Long> result;
@@ -11,30 +10,26 @@ public class LottoResult {
         this.result = result;
     }
 
-    public static LottoResult of(Rank rank) {
-        Map<Rank, Long> map = new HashMap<>();
-        map.put(rank, 0L);
-        return new LottoResult(map);
+    public static LottoResult of() {
+        return new LottoResult(Arrays.stream(Rank.values()).collect(Collectors.toMap(rank -> rank, rank -> rank.initialRank())));
     }
 
-    public void win(Rank rank) {
-        for (Rank rank1 : result.keySet()) {
-            if (rank != rank1) {
-                return;
-            }
-        }
+    public Map<Rank, Long> getLottoResult() {
+        return Collections.unmodifiableMap(result);
+    }
 
+    public void plusWinOfCount(Rank rank) {
         Long winOfCount = result.get(rank);
         winOfCount++;
         result.put(rank, winOfCount);
     }
 
-    public Rank getKey() {
-        return result.entrySet().stream().findFirst().get().getKey();
-    }
-
-    public Long getValue() {
-        return result.entrySet().stream().findFirst().get().getValue();
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        for (Rank rank : result.keySet()) {
+            totalPrice = (int) (rank.getReward() * result.get(rank) + totalPrice);
+        }
+        return totalPrice;
     }
 
     @Override
