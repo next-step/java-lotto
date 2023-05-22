@@ -15,7 +15,7 @@ public class Cost {
     public int getLottoTicketCount() {
         long count = this.money.amount() / this.ONE_LOTTO_TICKET_PRICE;
         if (count <= 0) {
-            System.out.println("해당 금액으로 티켓을 살 수 없습니다.");
+            throw new IllegalArgumentException("해당 금액으로 티켓을 살 수 없습니다.");
         }
 
         return (int) count;
