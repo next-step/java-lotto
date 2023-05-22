@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.Lottos;
 import lotto.domain.Numbers;
@@ -18,20 +17,25 @@ public class Application {
         InputView inputView = new InputView();
         LottoGame lottoGame = new LottoGame(inputView.getLottoPrice());
 
-        Lottos lottos = autoLottoGameResult(lottoGame);
+        Lottos manualLottos = pickManualLotto(inputView, lottoGame);
+        Lottos autoLottos = createAutoLotto(lottoGame, manualLottos);
 
-        ResultView.autoLottoPrint(lottos.getLottoList());
+        ResultView.autoLottoPrint(manualLottos.getLottoList(), autoLottos.getLottoList());
+
         Numbers lastWeekLottoNumbers = inputView.getLastWeekLottoNumbers();
         WinnerLotto winnerLotto = new WinnerLotto(lastWeekLottoNumbers.getLottoNumbers(), inputView.getBonusNumber());
 
-        ResultView.printLottoStatistics(winnerLotto, lottos);
-
+        ResultView.printLottoStatistics(winnerLotto, autoLottos);
     }
 
-    private static Lottos autoLottoGameResult(final LottoGame lottoGame) {
-        LottoStrategy strategy = new AutoLotto();
+    private static Lottos pickManualLotto(final InputView inputView, final LottoGame lottoGame) throws IOException {
+        int manualLottoCount = inputView.getManualLottoCount();
+        return lottoGame.manualLottoDraw(manualLottoCount, inputView.getManualLottoNumbers(manualLottoCount));
+    }
 
-        return lottoGame.automaticLottoDraw(strategy);
+    private static Lottos createAutoLotto(final LottoGame lottoGame, final Lottos manualLottos) {
+        LottoStrategy strategy = new AutoLotto();
+        return lottoGame.automaticLottoDraw(strategy, manualLottos.getLottoList());
     }
 
 }
