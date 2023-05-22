@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -61,11 +62,11 @@ class LottoFactoryTest {
         int totalCount = 9;
         int manualCount = 10;
 
-        List<LottoNumber> numberList = new ArrayList<>(Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(45)));
-
-        List<LottoTicket> manualLottoTickets = IntStream.range(0, manualCount)
-                .mapToObj(i -> new LottoTicket(new ArrayList<>(numberList)))
+        int[] numbersArr = {1, 2, 3, 4, 5, 45};
+        LottoNumberGenerator lottoNumberGenerator = LottoNumberGenerator.generate(numbersArr);
+        List<LottoTicket> manualLottoTickets = Stream.generate(() -> lottoNumberGenerator.lottoNumbers())
+                .limit(manualCount)
+                .map(LottoTicket::new)
                 .collect(Collectors.toList());
 
         int manualLottoTicketsCount = manualLottoTickets.size();
