@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Number {
-    private int number;
+    private Integer number;
 
     public Number(String number) {
         this.number = Integer.parseInt(number);

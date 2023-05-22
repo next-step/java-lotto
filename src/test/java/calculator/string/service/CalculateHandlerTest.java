@@ -1,6 +1,7 @@
 package calculator.string.service;
 
-import calculator.string.domain.CalculatorSign;
+import calculator.string.CalculateHandler;
+import calculator.string.domain.CalculatorSymbol;
 import calculator.string.domain.Number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,9 +12,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-class CalculateServiceTest {
+class CalculateHandlerTest {
 
-    CalculateService calculateService = new CalculateService();
+    CalculateHandler calculateService = new CalculateHandler();
 
     @DisplayName("split 기능 테스트")
     @ParameterizedTest
@@ -37,8 +38,8 @@ class CalculateServiceTest {
     public void 계산_테스트() {
         String[] testStrings = {"4", "+", "2", "*", "2", "/", "4"};
         List<Number> numbers = calculateService.sectionNumber(testStrings);
-        List<CalculatorSign> calculatorSigns = calculateService.sectionCalculate(testStrings);
-        int result = calculateService.iterNumbersAndCalculatorSigns(numbers, calculatorSigns);
+        List<CalculatorSymbol> calculatorSigns = calculateService.sectionCalculate(testStrings);
+        int result = calculateService.calculate(numbers, calculatorSigns);
         assertThat(result).isEqualTo(3);
     }
 
@@ -47,9 +48,9 @@ class CalculateServiceTest {
     public void 나눗셈의결과가_정수가_아닐때_테스트() {
         String[] testStrings = {"5", "/", "2"};
         List<Number> numbers = calculateService.sectionNumber(testStrings);
-        List<CalculatorSign> calculatorSigns = calculateService.sectionCalculate(testStrings);
+        List<CalculatorSymbol> calculatorSigns = calculateService.sectionCalculate(testStrings);
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            calculateService.iterNumbersAndCalculatorSigns(numbers, calculatorSigns);
+            calculateService.calculate(numbers, calculatorSigns);
         });
     }
 }
