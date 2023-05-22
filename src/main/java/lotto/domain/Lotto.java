@@ -1,13 +1,12 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
     private final List<LottoNumbers> lottoNumbers;
-    private String toString;
 
     public Lotto(List<LottoNumbers> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
@@ -29,19 +28,8 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
-    @Override
-    public String toString() {
-
-        if (toString == null || toString.isEmpty()) {
-            initializeToString();
-        }
-        return toString;
-    }
-
-    private void initializeToString() {
-        StringJoiner stringJoiner = new StringJoiner("\n");
-        lottoNumbers.forEach(component -> stringJoiner.add(component.toString()));
-        toString = stringJoiner.toString();
+    public List<LottoNumbers> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
 }

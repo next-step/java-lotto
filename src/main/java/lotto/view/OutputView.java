@@ -7,6 +7,7 @@ import lotto.domain.Statistics;
 import lotto.model.LottoInformation;
 
 import java.util.List;
+import java.util.StringJoiner;
 
 public class OutputView {
 
@@ -19,7 +20,9 @@ public class OutputView {
     }
 
     public static void printLottoList(Lotto lotto) {
-        System.out.println(lotto);
+        StringJoiner stringJoiner = new StringJoiner("\n");
+        lotto.getLottoNumbers().forEach(component -> stringJoiner.add(component.toString()));
+        System.out.println(stringJoiner);
     }
 
     public static void printStatisticsResult(Statistics statistics) {
