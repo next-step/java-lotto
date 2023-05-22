@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.enums.LottoPrize;
 import lotto.strategy.LottoStrategy;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -15,10 +16,19 @@ import static lotto.constants.Constants.ZERO;
 
 public class Lottos {
 
-    private final List<Lotto> lottoList;
+    private List<Lotto> lottoList;
 
-    public Lottos(LottoStrategy lottoStrategy, int count) {
-        lottoList = createLotto(lottoStrategy, count);
+    public Lottos(LottoStrategy lottoStrategy, int count, List<Lotto> manualLottoNumbers) {
+        List<Lotto> lottos = new ArrayList<>(manualLottoNumbers);
+
+        List<Lotto> autoLottos = createLotto(lottoStrategy, count);
+        lottos.addAll(autoLottos);
+
+        this.lottoList = lottos;
+    }
+
+    public Lottos(final List<Lotto> manualLottos) {
+        lottoList = manualLottos;
     }
 
     public List<Lotto> createLotto(LottoStrategy lottoStrategy, int count) {

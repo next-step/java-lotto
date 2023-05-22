@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-import static lotto.domain.fixture.LottosFixture.로또_티켓;
+import static lotto.domain.fixture.LottosFixture.자동_로또_티켓;
 import static lotto.domain.fixture.WinningLottoFixture.지난주_로또_당첨;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,7 +19,7 @@ class LottoStatisticsTest {
 
     @BeforeEach
     void setup() {
-        lottoStatistics = new LottoStatistics(지난주_로또_당첨, 로또_티켓);
+        lottoStatistics = new LottoStatistics(지난주_로또_당첨, 자동_로또_티켓);
     }
 
     @Test
@@ -28,7 +28,7 @@ class LottoStatisticsTest {
         // when
         final double v = lottoStatistics.calculateYield();
         // then
-        assertEquals(499, Math.floor(v));
+        assertEquals(299, Math.floor(v));
     }
 
     @Test

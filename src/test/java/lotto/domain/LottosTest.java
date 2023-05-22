@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static lotto.domain.fixture.LottosFixture.로또_티켓별_번호;
+import static lotto.domain.fixture.LottosFixture.수동_로또_티켓별_번호;
+import static lotto.domain.fixture.LottosFixture.자동_로또_티켓별_번호;
 import static lotto.domain.fixture.LottosFixture.자동_로또;
 import static lotto.domain.fixture.WinningLottoFixture.지난주_로또_당첨;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -16,14 +17,14 @@ class LottosTest {
 
     private Lottos lottos;
 
-    private static final int COUNT = 3;
+    private static final int COUNT = 5;
 
     @BeforeEach
     void setup () {
-        lottos = new Lottos(자동_로또, COUNT) {
+        lottos = new Lottos(자동_로또, COUNT, 수동_로또_티켓별_번호) {
             @Override
             public List<Lotto> createLotto(LottoStrategy lottoStrategy, int count) {
-                return 로또_티켓별_번호;
+                return 자동_로또_티켓별_번호;
             }
         };
 

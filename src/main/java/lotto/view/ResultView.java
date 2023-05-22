@@ -15,12 +15,24 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public static void autoLottoPrint(List<Lotto> lottoList) {
+    public static void autoLottoPrint(List<Lotto> manualLottoList, final List<Lotto> autoLottolist) {
         System.out.println();
 
-        lottoList.stream()
+        printLottos(manualLottoList, autoLottolist);
+
+        autoLottolist.stream()
                 .map(Lotto::getLottoNumbers)
                 .forEach(System.out::println);
+    }
+
+    private static void printLottos(List<Lotto> manualLottoList, List<Lotto> autoLottoList) {
+        int manualLottoCount = manualLottoList.size();
+        int autoLottoCount = autoLottoList.size();
+
+        int diff = Math.abs(manualLottoCount - autoLottoCount);
+
+        System.out.printf("수동으로 %d 장, 자동으로 %d 개를 구매했습니다.", manualLottoCount, diff);
+        System.out.println();
     }
 
     public static void printLottoStatistics(WinnerLotto winnerLotto, Lottos lottos) {
