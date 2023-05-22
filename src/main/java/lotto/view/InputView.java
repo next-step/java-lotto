@@ -16,11 +16,14 @@ public class InputView {
 
     public static final Scanner scanner = new Scanner(System.in);
 
-    public static Money inputPrice() {
-        System.out.println("구입금액을 입력해 주세요 :)");
+    public static Money inputPrice(String exceptionMessage) {
+        System.out.println(prompt("구입금액을 입력해 주세요 :)", exceptionMessage));
         int price = scanner.nextInt();
-        validateNegativeNumberOrZero(price);
-
+        try {
+            validateNegativeNumberOrZero(price);
+        } catch (IllegalArgumentException e) {
+            return inputPrice(e.getMessage());
+        }
         return Money.wons(price);
     }
 
@@ -30,29 +33,42 @@ public class InputView {
         }
     }
 
-    public static LottoNumbers inputWinningNumbers() {
+    public static LottoNumbers inputWinningNumbers(String exceptionMessage) {
         scanner.nextLine();
-        System.out.println("지난 주 당첨 번호를 압력해주세요 :)");
+        System.out.println(prompt("지난 주 당첨 번호를 압력해주세요 :)", exceptionMessage));
         String inputWinnerLottoNumber = scanner.nextLine();
-        validateEmptyString(inputWinnerLottoNumber);
-        validateNonNumeric(inputWinnerLottoNumber);
+        try {
+            validateEmptyString(inputWinnerLottoNumber);
+            validateNonNumeric(inputWinnerLottoNumber);
+        } catch (IllegalArgumentException e) {
+            return inputWinningNumbers(e.getMessage());
+        }
 
         return LottoNumbers.of(inputWinnerLottoNumber);
     }
 
-    public static LottoNumber inputBonusNumber(LottoNumbers winnerLottoNumbers) {
-        System.out.println("보너스 볼을 입력해주세요 :)");
+    public static LottoNumber inputBonusNumber(LottoNumbers winnerLottoNumbers, String exceptionMessage) {
+        System.out.println(prompt("보너스 볼을 입력해주세요 :)", exceptionMessage));
         LottoNumber bonusNumber = LottoNumber.provideLottoNumber(scanner.nextInt());
-        validateExistSameNumber(winnerLottoNumbers, bonusNumber);
+        try {
+            validateExistSameNumber(winnerLottoNumbers, bonusNumber);
+        } catch (IllegalArgumentException e) {
+            return inputBonusNumber(winnerLottoNumbers, e.getMessage());
+        }
 
         return bonusNumber;
     }
 
-    public static Money inputManualNumberOfPurchases(Money inputMoney) {
-        System.out.println("수동으로 구매할 로또 수를 입력해주세요");
-        int numberOfPurchases = scanner.nextInt();
-        validateEnoughMoney(numberOfPurchases, inputMoney);
 
+    public static Money inputManualNumberOfPurchases(Money inputMoney, String exceptionMessage) {
+        System.out.println(prompt("수동으로 구매할 로또 수를 입력해주세요", exceptionMessage));
+        int numberOfPurchases = scanner.nextInt();
+
+        try {
+            validateEnoughMoney(numberOfPurchases, inputMoney);
+        } catch (IllegalArgumentException e) {
+            return inputManualNumberOfPurchases(inputMoney, e.getMessage());
+        }
         return Money.wons(LottoInformation.LOTTO_UNIT_PRICE).times(numberOfPurchases);
     }
 
@@ -61,10 +77,36 @@ public class InputView {
         Money money = Money.wons(manualPurchaseAmount.getAmount());
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
         while (isEnoughBuyMoney(money)) {
-            money = calculateCurrentMoney(money);
-            lottoNumbersList.add(LottoNumbers.of(scanner.next()));
+            try {
+                money = calculateCurrentMoney(money);
+                lottoNumbersList.add(LottoNumbers.of(scanner.next()));
+            } catch (IllegalArgumentException e) {
+
+                String errorMessage = e.getMessage();
+
+                if (e instanceof NumberFormatException) {
+                    errorMessage = "숫자만 입력 가능해요 :(";
+                }
+
+                System.out.println(prompt("수동으로 구매할 번호를 입력해 주세요", errorMessage));
+                money = money.plus(LottoInformation.LOTTO_FEE);
+            }
+
         }
         return lottoNumbersList;
+    }
+
+    private static String prompt(String message, String exceptionMessage) {
+
+        if (exceptionMessage == null) {
+            return message;
+        }
+
+        if (exceptionMessage.isEmpty()) {
+            return message;
+        }
+
+        return "입력도중 예외가 발생했어요 사유 [" + exceptionMessage + "] \n" + "다시 한번 " + message + " :)";
     }
 
     private static void validateEmptyString(String inputWinnerLottoNumber) {
@@ -92,7 +134,7 @@ public class InputView {
         Money lottoPrice = Money.wons(LottoInformation.LOTTO_UNIT_PRICE).times(numberOfPurchases);
 
         if (lottoPrice.isGreaterThan(inputMoney)) {
-            throw new IllegalArgumentException("잔액이 부족해요 :( \n 현재 잔액 [" + inputMoney.getAmount() + "원]");
+            throw new IllegalArgumentException("잔액이 부족해요 :(  현재 잔액 [" + inputMoney.getAmount() + "원]");
         }
     }
 
