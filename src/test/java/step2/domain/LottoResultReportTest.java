@@ -7,9 +7,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,11 +21,11 @@ class LottoResultReportTest {
 
         List<Integer> matchCountList = Arrays.asList(3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6);
         for (Integer count : matchCountList) {
-            lottoResultReport.recordRank(Rank.toPrizeMoney(count, false));
+            lottoResultReport.recordRank(Rank.rank(count, false));
         }
 
         for (int i = 3; i < 7; i++) {
-            assertThat(lottoResultReport.findReportByMatchCount(Rank.toPrizeMoney(i, false))).isEqualTo(i);
+            assertThat(lottoResultReport.findReportByMatchCount(Rank.rank(i, false))).isEqualTo(i);
         }
     }
 
@@ -38,7 +36,7 @@ class LottoResultReportTest {
         LottoResultReport lottoResultReport = new LottoResultReport();
         for (int i = 1; i <= 6; i++) {
             if (matchCounts[i] == 0) continue;
-            lottoResultReport.recordRank(Rank.toPrizeMoney(i, false));
+            lottoResultReport.recordRank(Rank.rank(i, false));
         }
         assertThat(lottoResultReport.sum()).isEqualTo(expected);
     }
