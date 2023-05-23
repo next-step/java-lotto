@@ -41,9 +41,4 @@ public enum Rank {
     public int reward() {
         return this.reward;
     }
-
-    @Override
-    public String toString() {
-        return String.format("%d개 일치 (%d원)", matchCount, reward);
-    }
 }
