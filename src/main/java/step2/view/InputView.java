@@ -4,9 +4,11 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private static Scanner scanner = new Scanner(System.in);
 
-    public static int readAmountOfPurchase() {
+    private static final String DELIMITER = ",";
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static int readMoney() {
         return readInt("구매 금액을 입력해 주세요");
     }
 
@@ -27,12 +29,16 @@ public class InputView {
         }
     }
 
-    public static String readManualTicketNumbers() {
-        return readString();
+    public static String[] readManualTicketNumbers() {
+        return splitByDelimiter(readString());
     }
 
-    public static String readWinningNumbers() {
-        return readString();
+    public static String[] readWinningNumbers() {
+        return splitByDelimiter(readString());
+    }
+
+    private static String[] splitByDelimiter(String expression) {
+        return expression.trim().split(DELIMITER);
     }
 
     private static String readString() {

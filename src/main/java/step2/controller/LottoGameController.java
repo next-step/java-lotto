@@ -17,45 +17,43 @@ public class LottoGameController {
 
     public void playLottoGame() {
 
-        int money = InputView.readAmountOfPurchase();
-        int manualLottoTicketCount = InputView.readCountOfManualTicket();
-        List<LottoTicket> manualLottoTickets = buyManualTickets(money, manualLottoTicketCount);
+        int money = InputView.readMoney();
 
-        int automaticTicketCount = lottoGames.calculateBuyingTicketCount(money, manualLottoTicketCount);
-        ResultView.printNumberOfTickets(manualLottoTicketCount, automaticTicketCount);
-        if (automaticTicketCount == 0 && manualLottoTicketCount == 0) {
+        List<LottoTicket> manualLottoTickets = buyManualTickets(money);
+        List<LottoTicket> automaticLottoTickets = getBuyAutomaticTickets(money, manualLottoTickets.size());
+
+        ResultView.printNumberOfTickets(manualLottoTickets.size(), automaticLottoTickets.size());
+        if (manualLottoTickets.size() == 0 && automaticLottoTickets.size() == 0) {
             return;
         }
-
-        List<LottoTicket> automaticLottoTickets = getBuyAutomaticTickets(automaticTicketCount);
         ResultView.printLottoTicket(automaticLottoTickets);
         LottoTicket winningTicket = readWinningTicket();
         int bonusNumber = InputView.readBonusNumber();
 
-        ResultView.printBlankLine();
-        ResultView.printMessage("당첨 통계");
-
-        LottoResultReport lottoResultReport = getLottoResultReport(manualLottoTickets, automaticLottoTickets, winningTicket, bonusNumber);
-
-        ResultView.printResultReport(lottoResultReport);
-        double profit = lottoResultReport.calculateProfit(manualLottoTicketCount + automaticTicketCount);
-        ResultView.printMessage("총 수익률은 " + profit + "입니다.");
+        printResultStatistic(manualLottoTickets, automaticLottoTickets, winningTicket, bonusNumber);
     }
 
-    private List<LottoTicket> buyManualTickets(int totalMoney, int manualTicketCount) {
-        if(manualTicketCount * LottoCommonValue.DEFAULT_LOTTO_PRICE.value() > totalMoney) {
-            throw new IllegalArgumentException("수동으로 구매할 수 있는 티켓 개수를 초과하셨습니다.");
-        }
+    private List<LottoTicket> buyManualTickets(int totalMoney) {
+        int manualTicketCount = getManualTicketCount(totalMoney);
         ResultView.printMessage("수동으로 구매할 번호를 입력해 주세요");
-        List<LottoTicket> manualLottoTickets = new ArrayList<>();
-        for(int i=0; i<manualTicketCount; i++) {
+        List<LottoTicket> manualLottoTickets = new ArrayList<>(manualTicketCount);
+        for (int i = 0; i < manualTicketCount; i++) {
             Optional<LottoTicket> lottoTicket = lottoGames.toLottoTicket(InputView.readManualTicketNumbers());
             manualLottoTickets.add(lottoTicket.orElseThrow(IllegalArgumentException::new));
         }
         return manualLottoTickets;
     }
 
-    private List<LottoTicket> getBuyAutomaticTickets(int automaticTicketCount) {
+    private int getManualTicketCount(int totalMoney) {
+        int manualTicketCount = InputView.readCountOfManualTicket();
+        if (manualTicketCount * LottoCommonValue.DEFAULT_LOTTO_PRICE.value() > totalMoney) {
+            throw new IllegalArgumentException("수동으로 구매할 수 있는 티켓 개수를 초과하셨습니다.");
+        }
+        return manualTicketCount;
+    }
+
+    private List<LottoTicket> getBuyAutomaticTickets(int money, int manualLottoTicketCount) {
+        int automaticTicketCount = lottoGames.calculateBuyingTicketCount(money, manualLottoTicketCount);
         return lottoGames.buyAutomaticLottoTickets(automaticTicketCount);
     }
 
@@ -63,6 +61,18 @@ public class LottoGameController {
         ResultView.printMessage("지난 주 당첨 번호를 입력해 주세요");
         return lottoGames.toLottoTicket(InputView.readWinningNumbers())
                 .orElseThrow(() -> new IllegalArgumentException("잘못 입력하셨습니다."));
+    }
+
+    private void printResultStatistic(List<LottoTicket> manualLottoTickets, List<LottoTicket> automaticLottoTickets, LottoTicket winningTicket, int bonusNumber) {
+        ResultView.printBlankLine();
+        ResultView.printMessage("당첨 통계");
+
+        LottoResultReport lottoResultReport
+                = getLottoResultReport(manualLottoTickets, automaticLottoTickets, winningTicket, bonusNumber);
+
+        ResultView.printResultReport(lottoResultReport);
+
+        ResultView.printMessage("총 수익률은 " + lottoResultReport.calculateProfit() + "입니다.");
     }
 
     private LottoResultReport getLottoResultReport(List<LottoTicket> manualLottoTickets,

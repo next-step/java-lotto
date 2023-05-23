@@ -28,8 +28,7 @@ public class LottoGames {
         return new LottoTicket(lottoNumbers);
     }
 
-    public Optional<LottoTicket> toLottoTicket(String stringNumber) {
-        String[] splits = splitByDelimiter(stringNumber);
+    public Optional<LottoTicket> toLottoTicket(String[] splits) {
         Set<LottoNo> numbers = toSet(splits);
         if (numbers.size() != LottoCommonValue.DEFAULT_LOTTO_NUMBER_COUNT.value()) {
             return Optional.empty();

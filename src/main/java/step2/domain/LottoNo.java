@@ -3,14 +3,13 @@ package step2.domain;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.IntStream;
 
 public class LottoNo {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
-    private static Map<Integer, LottoNo> lottoNumberCache = new HashMap<>();
+    private static final Map<Integer, LottoNo> lottoNumberCache = new HashMap<>();
 
     static {
         IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1)
@@ -24,8 +23,14 @@ public class LottoNo {
     }
 
     public static LottoNo of(int number) {
-        Optional<LottoNo> lottoNo = Optional.ofNullable(lottoNumberCache.get(number));
-        return lottoNo.orElseThrow(() -> new IllegalArgumentException("잘못 입력하셨습니다."));
+        if (isInvalidNumber(number)) {
+            new IllegalArgumentException("잘못 입력하셨습니다.");
+        }
+        return lottoNumberCache.get(number);
+    }
+
+    private static boolean isInvalidNumber(int number) {
+        return number >= MIN_LOTTO_NUMBER && number <= MAX_LOTTO_NUMBER;
     }
 
     public int number() {

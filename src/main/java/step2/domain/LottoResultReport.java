@@ -7,22 +7,32 @@ import java.util.Set;
 public class LottoResultReport {
 
     private Map<Rank, Integer> lottoResultReport;
+    private int ticketCount;
 
     public LottoResultReport() {
         lottoResultReport = new HashMap<>();
+        ticketCount = 0;
     }
 
     public int recordRank(Rank rank) {
-        return lottoResultReport.compute(rank, (key, value) -> value == null ? 1 : value + 1);
+        ticketCount += 1;
+        return lottoResultReport.compute(rank, (key, value) -> getNextValue(value));
+    }
+
+    private int getNextValue(Integer value) {
+        if(value == null) {
+            return 1;
+        }
+        return value + 1;
     }
 
     public int findReportByMatchCount(Rank rank) {
         return lottoResultReport.getOrDefault(rank, 0);
     }
 
-    public double calculateProfit(int gameCount) {
+    public double calculateProfit() {
         long profit = sum();
-        long cost = gameCount * LottoCommonValue.DEFAULT_LOTTO_PRICE.value();
+        long cost = ticketCount * LottoCommonValue.DEFAULT_LOTTO_PRICE.value();
         return calculateProfitRate(profit, cost);
     }
 
