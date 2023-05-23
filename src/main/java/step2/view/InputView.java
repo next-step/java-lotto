@@ -4,9 +4,11 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private static Scanner scanner = new Scanner(System.in);
 
-    public static int readAmountOfPurchase() {
+    private static final String DELIMITER = ",";
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static int readMoney() {
         return readInt("구매 금액을 입력해 주세요");
     }
 
@@ -27,12 +29,23 @@ public class InputView {
         }
     }
 
-    public static String readWinningNumbers() {
-        return readString("지난 주 당첨 번호를 입력해 주세요");
+    public static String[] readManualTicketNumbers() {
+        return splitByDelimiter(readString());
     }
 
-    private static String readString(String message) {
-        System.out.println(message);
+    public static String[] readWinningNumbers() {
+        return splitByDelimiter(readString());
+    }
+
+    private static String[] splitByDelimiter(String expression) {
+        return expression.trim().split(DELIMITER);
+    }
+
+    private static String readString() {
         return scanner.nextLine();
+    }
+
+    public static int readCountOfManualTicket() {
+        return readInt("수동으로 구매할 로또 수를 입력해 주세요.");
     }
 }

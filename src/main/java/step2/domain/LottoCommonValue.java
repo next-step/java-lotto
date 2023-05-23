@@ -16,9 +16,4 @@ public enum LottoCommonValue {
     public int value() {
         return value;
     }
-
-
-
-
-
 }
