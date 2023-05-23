@@ -56,7 +56,7 @@ public enum Rank {
         return this.count;
     }
 
-    public int prize() {
+    public long prize() {
         return this.prize.amount();
     }
 }

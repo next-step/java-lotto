@@ -18,16 +18,17 @@ public class LottoResult {
     }
 
     public double getRateResult(int ticketCount) {
-        int totalReward = getTotalReward();
+        long totalReward = getTotalReward();
         Money totalMoney = new Money(totalReward);
+
         return totalMoney.divide(new Money(ticketCount * Cost.ONE_LOTTO_TICKET_PRICE));
     }
 
-    public int getTotalReward() {
+    public long getTotalReward() {
         return lottoResult.entrySet()
                 .stream()
                 .filter(o -> o.getValue() > 0)
-                .mapToInt(o -> o.getKey().prize() * o.getValue())
+                .mapToLong(o -> o.getKey().prize() * o.getValue())
                 .sum();
     }
 

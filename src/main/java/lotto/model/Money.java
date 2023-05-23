@@ -4,26 +4,26 @@ import java.util.Objects;
 
 public class Money {
 
-    private final int amount;
+    private final long amount;
 
-    public Money(int amount) {
+    public Money(long amount) {
         validate(amount);
         this.amount = amount;
     }
 
-    public int amount() {
+    public long amount() {
         return this.amount;
     }
 
-    public int plus(Money other) {
-        return this.amount + other.amount;
+    public Money plus(Money other) {
+        return new Money(this.amount + other.amount);
     }
 
     public double divide(Money other) {
         return (double) this.amount / other.amount;
     }
 
-    private void validate(int amount) {
+    private void validate(long amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("금액은 음수일 수 없습니다.");
         }

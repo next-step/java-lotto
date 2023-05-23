@@ -1,18 +1,23 @@
 package lotto.model;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoFactoryTest {
+
+    public static final int AUTO_TICKET_COUNT = 10;
 
     @DisplayName("로또번호_자동발급_테스트")
     @Test
@@ -35,5 +40,39 @@ class LottoFactoryTest {
                 .anyMatch(i -> lottoTicketsList.get(i).equals(lottoTicketsList.get(i + 1)));
 
         assertThat(hasDuplicates).isFalse();
+    }
+
+    @DisplayName("로또번호_발급_테스트")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4})
+    void 로또번호_수동_자동_동시발급_테스트(int n) {
+        List<LottoNumber> numberList = new ArrayList<>(Arrays.asList(
+                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(45)));
+
+        List<LottoTicket> manualLottoTickets = IntStream.range(0, n)
+                .mapToObj(i -> new LottoTicket(new ArrayList<>(numberList)))
+                .collect(Collectors.toList());
+        LottoTickets lottoTickets = LottoFactory.createLottoTickets(AUTO_TICKET_COUNT, manualLottoTickets);
+        assertThat(lottoTickets.size() - AUTO_TICKET_COUNT).isEqualTo(n);
+    }
+
+    @DisplayName("로또번호_발급_테스트 : 구매가능한 티켓을 넘은 경우")
+    @Test
+    void 수동_자동_동시발급_테스트() {
+        int totalCount = 9;
+        int manualCount = 10;
+
+        int[] numbersArr = {1, 2, 3, 4, 5, 45};
+        LottoNumberGenerator lottoNumberGenerator = LottoNumberGenerator.generate(numbersArr);
+        List<LottoTicket> manualLottoTickets = Stream.generate(() -> lottoNumberGenerator.lottoNumbers())
+                .limit(manualCount)
+                .map(LottoTicket::new)
+                .collect(Collectors.toList());
+
+        int manualLottoTicketsCount = manualLottoTickets.size();
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoFactory.createLottoTickets(totalCount - manualLottoTicketsCount, manualLottoTickets))
+                .withMessageMatching("구매 가능한 티켓 수를 초과했습니다.");
     }
 }

@@ -29,9 +29,16 @@ public class CostTest {
 
     @DisplayName("구입 금액에 따른 로또 티켓 개수")
     @ParameterizedTest
-    @ValueSource(ints = {1000,1001})
+    @ValueSource(ints = {1000, 1001})
     void 구입_금액에_따른_로또_티켓_개수(int input) {
         assertThat(new Cost(new Money(input)).getLottoTicketCount()).isEqualTo(1);
     }
 
+    @DisplayName("주어진 금액으로 티켓을 살 수 없는 경우")
+    @Test
+    void 티켓_구매_비용_부족() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Cost(new Money(999)).getLottoTicketCount())
+                .withMessageMatching("해당 금액으로 티켓을 살 수 없습니다.");
+    }
 }

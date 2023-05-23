@@ -5,7 +5,8 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 public class LottoMain {
@@ -30,6 +31,21 @@ public class LottoMain {
         Cost cost = new Cost(new Money(Integer.parseInt(strLottoCost)));
 
         int ticketCount = cost.getLottoTicketCount();
-        return LottoFactory.createAutoLottoTickets(ticketCount);
+        int manualTicketCount = InputView.inputManualTicketCount();
+        int autoTicketCount = ticketCount - manualTicketCount;
+        LottoTickets lottoTickets = LottoFactory.createLottoTickets(autoTicketCount, inputManualLottoTickets(manualTicketCount));
+
+        ResultView.printLottoTicketCountOfEachType(manualTicketCount, autoTicketCount);
+        return lottoTickets;
+    }
+
+    private static List<LottoTicket> inputManualLottoTickets(int manualTicketCount) {
+        InputView.printManualTicketGuideMessage();
+        List<LottoTicket> lottoTickets = IntStream.rangeClosed(1, manualTicketCount)
+                .mapToObj(i -> new LottoTicket(InputView.inputManualTicketNumbers()))
+                .collect(Collectors.toList());
+
+        System.out.println();
+        return lottoTickets;
     }
 }
