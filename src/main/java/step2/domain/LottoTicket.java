@@ -29,12 +29,12 @@ public class LottoTicket {
         return this.lottoTicket.contains(number);
     }
 
-    public Rank checkLottoTicket(LottoTicket winningTicket, int bonusNumber) {
+    public Rank checkLottoTicket(LottoTicket winningTicket, LottoNo bonusNumber) {
         int count = (int) lottoTicket.stream()
                 .filter(i -> winningTicket.isContain(i))
                 .count();
 
-        return Rank.rank(count, isContain(LottoNo.of(bonusNumber)));
+        return Rank.rank(count, isContain(bonusNumber));
     }
 
     public String printTicket() {

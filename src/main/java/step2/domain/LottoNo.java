@@ -24,13 +24,13 @@ public class LottoNo {
 
     public static LottoNo of(int number) {
         if (isInvalidNumber(number)) {
-            new IllegalArgumentException("잘못 입력하셨습니다.");
+            throw new IllegalArgumentException("잘못 입력하셨습니다.");
         }
         return lottoNumberCache.get(number);
     }
 
     private static boolean isInvalidNumber(int number) {
-        return number >= MIN_LOTTO_NUMBER && number <= MAX_LOTTO_NUMBER;
+        return number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER;
     }
 
     public int number() {

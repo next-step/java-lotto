@@ -1,15 +1,11 @@
 package step2.controller;
 
-import step2.domain.LottoCommonValue;
-import step2.domain.LottoGames;
-import step2.domain.LottoResultReport;
-import step2.domain.LottoTicket;
+import step2.domain.*;
 import step2.view.InputView;
 import step2.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class LottoGameController {
 
@@ -28,7 +24,7 @@ public class LottoGameController {
         }
         ResultView.printLottoTicket(automaticLottoTickets);
         LottoTicket winningTicket = readWinningTicket();
-        int bonusNumber = InputView.readBonusNumber();
+        LottoNo bonusNumber = LottoNo.of(InputView.readBonusNumber());
 
         printResultStatistic(manualLottoTickets, automaticLottoTickets, winningTicket, bonusNumber);
     }
@@ -38,8 +34,8 @@ public class LottoGameController {
         ResultView.printMessage("수동으로 구매할 번호를 입력해 주세요");
         List<LottoTicket> manualLottoTickets = new ArrayList<>(manualTicketCount);
         for (int i = 0; i < manualTicketCount; i++) {
-            Optional<LottoTicket> lottoTicket = lottoGames.toLottoTicket(InputView.readManualTicketNumbers());
-            manualLottoTickets.add(lottoTicket.orElseThrow(IllegalArgumentException::new));
+            LottoTicket lottoTicket = lottoGames.toLottoTicket(InputView.readManualTicketNumbers());
+            manualLottoTickets.add(lottoTicket);
         }
         return manualLottoTickets;
     }
@@ -59,11 +55,10 @@ public class LottoGameController {
 
     private LottoTicket readWinningTicket() {
         ResultView.printMessage("지난 주 당첨 번호를 입력해 주세요");
-        return lottoGames.toLottoTicket(InputView.readWinningNumbers())
-                .orElseThrow(() -> new IllegalArgumentException("잘못 입력하셨습니다."));
+        return lottoGames.toLottoTicket(InputView.readWinningNumbers());
     }
 
-    private void printResultStatistic(List<LottoTicket> manualLottoTickets, List<LottoTicket> automaticLottoTickets, LottoTicket winningTicket, int bonusNumber) {
+    private void printResultStatistic(List<LottoTicket> manualLottoTickets, List<LottoTicket> automaticLottoTickets, LottoTicket winningTicket, LottoNo bonusNumber) {
         ResultView.printBlankLine();
         ResultView.printMessage("당첨 통계");
 
@@ -77,7 +72,7 @@ public class LottoGameController {
 
     private LottoResultReport getLottoResultReport(List<LottoTicket> manualLottoTickets,
                                                    List<LottoTicket> automaticLottoTickets,
-                                                   LottoTicket winningTicket, int bonusNumber) {
+                                                   LottoTicket winningTicket, LottoNo bonusNumber) {
 
         LottoResultReport lottoResultReport = new LottoResultReport();
         for (LottoTicket lottoTicket : manualLottoTickets) {

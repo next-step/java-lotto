@@ -30,7 +30,8 @@ class LottoGamesTest {
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3, 4, 5, 6", "1, 2, 12, 23, 35, 36", "7, 8, 22,23, 35,43"})
     public void 지난주_당첨_번호_파싱(String winningNumbers) throws Exception {
-        assertThat(lottoGames.toLottoTicket(winningNumbers.split(",")));
+        String[] split = winningNumbers.split(",");
+        assertThat(lottoGames.toLottoTicket(split));
     }
 
     @DisplayName("지난주 당첨 번호를 읽는 과정에서 예외가 발생한다.")

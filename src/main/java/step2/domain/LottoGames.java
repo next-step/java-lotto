@@ -28,17 +28,8 @@ public class LottoGames {
         return new LottoTicket(lottoNumbers);
     }
 
-    public Optional<LottoTicket> toLottoTicket(String[] splits) {
-        Set<LottoNo> numbers = toSet(splits);
-        if (numbers.size() != LottoCommonValue.DEFAULT_LOTTO_NUMBER_COUNT.value()) {
-            return Optional.empty();
-        }
-        return Optional.ofNullable(new LottoTicket(numbers));
-    }
-
-    private String[] splitByDelimiter(String stringNumber) {
-        stringNumber = stringNumber.replaceAll(" ", "");
-        return stringNumber.split(",");
+    public LottoTicket toLottoTicket(String[] splits) {
+        return new LottoTicket(toSet(splits));
     }
 
     private Set<LottoNo> toSet(String[] numbers) {
@@ -50,6 +41,7 @@ public class LottoGames {
     }
 
     private Integer toInt(String element) {
+        element = element.trim();
         try {
             return Integer.parseInt(element);
         } catch (NumberFormatException e) {
