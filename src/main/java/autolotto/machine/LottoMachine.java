@@ -46,7 +46,7 @@ public class LottoMachine {
     }
 
     public BigDecimal profitRate(WinningNumbers winningNumbers) {
-        int totalWinnings = this.wallet.totalWinningMoneyOf(winningNumbers);
+        int totalWinnings = Winning.totalAmountOf(wallet.allLotteries(), winningNumbers);
         return BigDecimal.valueOf(totalWinnings)
                 .divide(BigDecimal.valueOf(this.inputMoney), PROFIT_RATE_SCALE, RoundingMode.HALF_UP);
     }

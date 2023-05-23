@@ -2,7 +2,6 @@ package autolotto.machine.lotto;
 
 import autolotto.machine.LottoUtil;
 import autolotto.machine.lotto.fixture.FixedNumberShuffler;
-import autolotto.machine.winning.Winning;
 import autolotto.machine.winning.WinningNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
@@ -12,10 +11,9 @@ import java.util.Arrays;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class LottoWalletTest {
     private final LottoGenerator lottoGenerator = new LottoGenerator(new FixedNumberShuffler());
-    private final WinningNumbers fixedWinningNumbers =
-            new WinningNumbers(
-                    LottoUtil.createLottoNumbers(Arrays.asList(1, 2, 3, 40, 41, 42)),
-                    new LottoNumber(11));
+    private final WinningNumbers fixedWinningNumbers = new WinningNumbers(
+            LottoUtil.createLottoNumbers(Arrays.asList(1, 2, 3, 40, 41, 42)),
+            new LottoNumber(11));
 
     @Test
     void 지갑에_로또를_하나_추가할_수_있다() {
@@ -33,29 +31,6 @@ class LottoWalletTest {
         LottoWallet wallet = new LottoWallet(lottoGenerator.generateMultipleLotto(three));
 
         Assertions.assertThat(wallet.lottoSize()).isEqualTo(3);
-    }
-
-    @Test
-    void 지갑_내_로또들이_모두_당첨_로또인_경우에_대한_총_당첨금액을_알려준다() {
-        LottoWallet wallet = new LottoWallet(lottoGenerator.generateMultipleLotto(3));
-        int expectedTotalWinnings = Winning.THREE.winningMoney() * 3;
-
-        int totalWinnings = wallet.totalWinningMoneyOf(fixedWinningNumbers);
-
-        Assertions.assertThat(totalWinnings).isEqualTo(expectedTotalWinnings);
-    }
-
-    @Test
-    void 지갑_내_당첨로또와_당첨이아닌_로또가_섞여있는_경우_총_당첨금액을_알려준다() {
-        LottoWallet wallet = new LottoWallet(Arrays.asList(
-                new Lotto(LottoUtil.createLottoNumbers(Arrays.asList(1, 22, 32, 24, 25, 26))),
-                new Lotto(LottoUtil.createLottoNumbers(Arrays.asList(1, 2, 23, 24, 25, 27))),
-                new Lotto(LottoUtil.createLottoNumbers(Arrays.asList(1, 2, 3, 24, 25, 28)))));
-        int expectedTotalWinnings = Winning.THREE.winningMoney();
-
-        int totalWinnings = wallet.totalWinningMoneyOf(fixedWinningNumbers);
-
-        Assertions.assertThat(totalWinnings).isEqualTo(expectedTotalWinnings);
     }
 
     @Nested
