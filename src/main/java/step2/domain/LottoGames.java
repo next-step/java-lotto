@@ -8,11 +8,6 @@ public class LottoGames {
     public LottoGames() {
     }
 
-    public int calculateBuyingTicketCount(int money, int manualLottoTicketCount) {
-        money -= manualLottoTicketCount * LottoCommonValue.DEFAULT_LOTTO_PRICE.value();
-        return new Integer(money / LottoCommonValue.DEFAULT_LOTTO_PRICE.value());
-    }
-
     public List<LottoTicket> buyAutomaticLottoTickets(int gameCount) {
         List<LottoTicket> lottoTickets = new ArrayList<>(gameCount);
         for (int i = 0; i < gameCount; i++) {

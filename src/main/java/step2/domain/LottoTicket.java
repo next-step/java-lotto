@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -38,11 +39,8 @@ public class LottoTicket {
     }
 
     public String printTicket() {
-        StringBuilder stringBuilder = new StringBuilder();
-        lottoTicket.stream()
-                .forEach(lottoNo -> stringBuilder.append(lottoNo.number() + ", "));
-        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-        return stringBuilder.toString();
+        return lottoTicket.stream()
+                .map(i -> String.valueOf(i.number()))
+                .collect(Collectors.joining(","));
     }
-
 }

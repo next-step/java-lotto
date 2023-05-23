@@ -32,8 +32,6 @@ public class ResultView {
         for (Rank rank : values) {
             printEachLottoRank(lottoResultReport, rank);
         }
-
-
     }
 
     private static void printEachLottoRank(LottoResultReport lottoResultReport, Rank rank) {

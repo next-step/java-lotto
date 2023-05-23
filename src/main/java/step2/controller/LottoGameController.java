@@ -9,14 +9,14 @@ import java.util.List;
 
 public class LottoGameController {
 
+    private static final int LOTTO_TICKET_PRICE = 1000;
     private LottoGames lottoGames = new LottoGames();
 
     public void playLottoGame() {
+        Money balance = new Money(InputView.readMoney());
 
-        int money = InputView.readMoney();
-
-        List<LottoTicket> manualLottoTickets = buyManualTickets(money);
-        List<LottoTicket> automaticLottoTickets = getBuyAutomaticTickets(money, manualLottoTickets.size());
+        List<LottoTicket> manualLottoTickets = buyManualTickets(balance);
+        List<LottoTicket> automaticLottoTickets = getBuyAutomaticTickets(balance);
 
         ResultView.printNumberOfTickets(manualLottoTickets.size(), automaticLottoTickets.size());
         if (manualLottoTickets.size() == 0 && automaticLottoTickets.size() == 0) {
@@ -26,11 +26,13 @@ public class LottoGameController {
         LottoTicket winningTicket = readWinningTicket();
         LottoNo bonusNumber = LottoNo.of(InputView.readBonusNumber());
 
-        printResultStatistic(manualLottoTickets, automaticLottoTickets, winningTicket, bonusNumber);
+        printResultStatistic(getLottoResultReport(manualLottoTickets, automaticLottoTickets, winningTicket, bonusNumber));
     }
 
-    private List<LottoTicket> buyManualTickets(int totalMoney) {
-        int manualTicketCount = getManualTicketCount(totalMoney);
+    private List<LottoTicket> buyManualTickets(Money money) {
+        int manualTicketCount = getManualTicketCount(money);
+        money.pay(manualTicketCount * LOTTO_TICKET_PRICE);
+
         ResultView.printMessage("수동으로 구매할 번호를 입력해 주세요");
         List<LottoTicket> manualLottoTickets = new ArrayList<>(manualTicketCount);
         for (int i = 0; i < manualTicketCount; i++) {
@@ -40,16 +42,16 @@ public class LottoGameController {
         return manualLottoTickets;
     }
 
-    private int getManualTicketCount(int totalMoney) {
+    private int getManualTicketCount(Money money) {
         int manualTicketCount = InputView.readCountOfManualTicket();
-        if (manualTicketCount * LottoCommonValue.DEFAULT_LOTTO_PRICE.value() > totalMoney) {
-            throw new IllegalArgumentException("수동으로 구매할 수 있는 티켓 개수를 초과하셨습니다.");
-        }
+        int cost = manualTicketCount * LottoCommonValue.DEFAULT_LOTTO_NUMBER_COUNT.value();
+        money.pay(cost);
         return manualTicketCount;
     }
 
-    private List<LottoTicket> getBuyAutomaticTickets(int money, int manualLottoTicketCount) {
-        int automaticTicketCount = lottoGames.calculateBuyingTicketCount(money, manualLottoTicketCount);
+    private List<LottoTicket> getBuyAutomaticTickets(Money money) {
+        int automaticTicketCount = money.balance() / LOTTO_TICKET_PRICE;
+        money.pay(automaticTicketCount * LOTTO_TICKET_PRICE);
         return lottoGames.buyAutomaticLottoTickets(automaticTicketCount);
     }
 
@@ -58,15 +60,10 @@ public class LottoGameController {
         return lottoGames.toLottoTicket(InputView.readWinningNumbers());
     }
 
-    private void printResultStatistic(List<LottoTicket> manualLottoTickets, List<LottoTicket> automaticLottoTickets, LottoTicket winningTicket, LottoNo bonusNumber) {
+    private void printResultStatistic(LottoResultReport lottoResultReport) {
         ResultView.printBlankLine();
         ResultView.printMessage("당첨 통계");
-
-        LottoResultReport lottoResultReport
-                = getLottoResultReport(manualLottoTickets, automaticLottoTickets, winningTicket, bonusNumber);
-
         ResultView.printResultReport(lottoResultReport);
-
         ResultView.printMessage("총 수익률은 " + lottoResultReport.calculateProfit() + "입니다.");
     }
 
