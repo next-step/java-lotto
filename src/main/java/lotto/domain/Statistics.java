@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Statistics {
@@ -16,15 +17,13 @@ public class Statistics {
     }
 
     private Map<Prize, Long> statisticsWinnerMap(WinnerLotto winnerLotto, Lotto lotto) {
-        List<Winners> winnersList = winnerLotto.findWinnerList(lotto);
-
+        List<Prize> winnersList = winnerLotto.getPrizeList(lotto);
         return winnersList.stream()
-                .collect(Collectors.groupingBy(Winners::providePrize, Collectors.counting()));
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
     public double provideProfit() {
         return profit;
-
     }
 
     public long getWinnersMatchingCount(Prize prize) {

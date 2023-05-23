@@ -17,7 +17,7 @@ public class AutoLottoNumbersGenerator implements LottoNumbersGenerator<ReqAutoL
     private static final int LOTTO_NUMBER_GROUP_LENGTH = 6;
 
     @Override
-    public List<LottoNumbers> bulkGenerateLottoNumbers(ReqAutoLotto reqAutoLotto) {
+    public List<LottoNumbers> generateLottoNumbers(ReqAutoLotto reqAutoLotto) {
 
         Money requestMoney = reqAutoLotto.getMoney();
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
@@ -28,16 +28,6 @@ public class AutoLottoNumbersGenerator implements LottoNumbersGenerator<ReqAutoL
         }
 
         return lottoNumbersList;
-    }
-
-    @Override
-    public LottoNumbers generateLottoNumbers(ReqAutoLotto reqAutoLotto) {
-        Money requestMoney = reqAutoLotto.getMoney();
-        if (!isEnoughBuyMoney(requestMoney)) {
-            throw new IllegalArgumentException("금액을 확인해주세요 :(");
-        }
-
-        return generateLottoNumbers();
     }
 
     private LottoNumbers generateLottoNumbers() {

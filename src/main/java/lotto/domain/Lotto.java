@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,10 +10,6 @@ public class Lotto {
 
     public Lotto(List<LottoNumbers> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
-    }
-
-    public void showLottoNumbers() {
-        this.lottoNumbers.forEach(System.out::println);
     }
 
     public List<Integer> countMatchingBall(LottoNumbers lottoNumbers) {
@@ -31,9 +28,8 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
-    @Override
-    public String toString() {
-        return lottoNumbers.toString();
+    public List<LottoNumbers> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
 }
