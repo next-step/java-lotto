@@ -4,22 +4,11 @@ import java.util.*;
 
 public class LottoGenerator {
 
-    private static final Set<LottoNumber> LOTTO_NUMBERS;
-
-    static {
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (int i = 1; i <= 45; i++) {
-            LottoNumber lottoNumber = new LottoNumber(i);
-            lottoNumbers.add(lottoNumber);
-        }
-        LOTTO_NUMBERS = Collections.unmodifiableSet(lottoNumbers);
-    }
-
     public static List<Lotto> generateLottos(int count) {
-        List<LottoNumber> lottoNumbersCopy = new ArrayList<>(LOTTO_NUMBERS);
+        List<LottoNumber> lottoNumbers = LottoNumber.lottoNumbers();
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            Lotto lotto = generateLotto(lottoNumbersCopy);
+            Lotto lotto = generateLotto(lottoNumbers);
             lottos.add(lotto);
         }
         return lottos;

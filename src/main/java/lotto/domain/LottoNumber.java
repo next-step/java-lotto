@@ -1,8 +1,20 @@
 package lotto.domain;
 
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+
+
+    private static final Set<LottoNumber> LOTTO_NUMBERS;
+
+    static {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        for (int i = 1; i <= 45; i++) {
+            LottoNumber lottoNumber = new LottoNumber(i);
+            lottoNumbers.add(lottoNumber);
+        }
+        LOTTO_NUMBERS = Collections.unmodifiableSet(lottoNumbers);
+    }
 
     private final int number;
 
@@ -11,6 +23,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
             throw new IllegalArgumentException("1부터 45의 숫자만 생성 가능합니다.");
         }
         this.number = number;
+    }
+
+    public static List<LottoNumber> lottoNumbers() {
+        return new ArrayList<>(LOTTO_NUMBERS);
     }
 
     @Override
