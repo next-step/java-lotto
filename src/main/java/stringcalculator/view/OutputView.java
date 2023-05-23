@@ -1,6 +1,6 @@
-package step1.view;
+package stringcalculator.view;
 
-import step1.domain.Number;
+import stringcalculator.domain.Number;
 
 public class OutputView {
     public static void printAnswer(Number answer) {

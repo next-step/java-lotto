@@ -1,8 +1,8 @@
-package step1;
+package stringcalculator;
 
-import step1.domain.StringCalculator;
-import step1.view.InputView;
-import step1.view.OutputView;
+import stringcalculator.domain.StringCalculator;
+import stringcalculator.view.InputView;
+import stringcalculator.view.OutputView;
 
 import java.util.Scanner;
 
