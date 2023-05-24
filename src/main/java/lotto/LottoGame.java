@@ -27,12 +27,17 @@ public class LottoGame {
         var winningNumberString = InputView.stringInput();
         var winningNumberList = toNumberList(winningNumberString.split(","));
 
+        // 보너스 로또 번호 입력
+        InputView.printLottoWinningBonusNumberInput();
+        var bonusNumber = InputView.intInput();
+        addBonusNumber(bonusNumber, winningNumberList);
+
         // 통계
         LottoStatics lottoStatics = new LottoStatics();
-        lottoStatics.calculateProfitStatistics(Lotto.createLotto(winningNumberList, LOTTO_PRICE), lottos);
+        lottoStatics.calculateProfitStatistics(WinnigLotto.createLotto(winningNumberList), lottos);
         ResultView.printStatics(lottoStatics);
 
-        var ratio = lottoStatics.getProfitRatio(Lotto.createLotto(winningNumberList, LOTTO_PRICE), lottos);
+        var ratio = lottoStatics.getProfitRatio(WinnigLotto.createLotto(winningNumberList), lottos);
         ResultView.printLottosProfit(ratio);
     }
 
@@ -42,6 +47,10 @@ public class LottoGame {
             list.add(Number.createNumber(string.trim()));
         }
         return list;
+    }
+
+    public static void addBonusNumber(int bonusNumber, List<Number> numberList) {
+        numberList.add(new Number(bonusNumber));
     }
 
     public static int calculateLottoSize(int inputPrice) {
