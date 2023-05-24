@@ -17,7 +17,8 @@ public class Main {
         LottoOutputView.printLottos(lottos);
 
         String stringNumbers = LottoInputView.askLastWinnerNumbers();
-        WinnerNumbers winnerNumbers = new WinnerNumbers(stringNumbers);
+        int bonusNumber = LottoInputView.askLastBonusNumber();
+        WinnerNumbers winnerNumbers = new WinnerNumbers(stringNumbers, bonusNumber);
 
         LottoResults lottoResults = winnerNumbers.matchLottos(lottos);
         LottoOutputView.printLottoResults(lottoResults);

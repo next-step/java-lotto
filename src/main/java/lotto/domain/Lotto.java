@@ -34,7 +34,7 @@ public class Lotto {
                 .count();
     }
 
-    private boolean hasNumber(LottoNumber number) {
+    boolean hasNumber(LottoNumber number) {
         return this.numbers.contains(number);
     }
 
