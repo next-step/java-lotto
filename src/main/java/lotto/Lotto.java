@@ -31,6 +31,11 @@ public class Lotto {
                 .count();
     }
 
+    public boolean isEqualsBonusNumber(Number bonusNumber){
+        return lottoNumbers.stream()
+                .anyMatch(t -> t.equals(bonusNumber));
+    }
+
     public void sortLotto() {
         Collections.sort(lottoNumbers);
     }

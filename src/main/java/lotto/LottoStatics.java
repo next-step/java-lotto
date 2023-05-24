@@ -5,35 +5,54 @@ import java.util.List;
 
 public class LottoStatics {
 
-    private HashMap<Number, Integer> statistics;
+    private HashMap<Number, Integer> basicStatistics;
+    private HashMap<Number, Integer> bonusStatistics;
 
     public LottoStatics() {
     }
 
-    public String getProfitRatio(Lotto winningLotto, Lottos lottos) {
+    public String getProfitRatio(WinnigLotto winningLotto, Lottos lottos) {
         double sum = calculateProfitSum(winningLotto, lottos.getLottoList());
         return String.valueOf(sum / lottos.getLottoTotalPrice());
     }
 
-    public void calculateProfitStatistics(Lotto winningLotto, Lottos lottos) {
-        statistics = new HashMap<>();
-        List<Integer> matchedCount = lottos.matchedLottoCount(winningLotto);
+    public void calculateProfitStatistics(WinnigLotto winningLotto, Lottos lottos) {
+        basicStatistics = new HashMap<>();
+        bonusStatistics = new HashMap<>();
 
-        for (Integer count : matchedCount) {
-            statistics.put(Number.createNumber(count), statistics.getOrDefault(Number.createNumber(count), 0) + 1);
+        List<StatisticsNumber> matchedCount = lottos.matchedLottoCount(winningLotto);
+
+        for (StatisticsNumber staticNumber : matchedCount) {
+            putStatistics(staticNumber);
+        }
+
+        winningLotto.getLottoBonusNumber();
+    }
+
+    private void putStatistics(StatisticsNumber staticNumber) {
+        if(staticNumber.isBonusNumber()) {
+            bonusStatistics.put(Number.createNumber(staticNumber.getMatchedCount()), basicStatistics.getOrDefault(Number.createNumber(staticNumber.getMatchedCount()), 0) + 1);
+        }
+        if(!staticNumber.isBonusNumber()){
+            basicStatistics.put(Number.createNumber(staticNumber.getMatchedCount()), basicStatistics.getOrDefault(Number.createNumber(staticNumber.getMatchedCount()), 0) + 1);
         }
     }
 
-    private double calculateProfitSum(Lotto winningLotto, List<Lotto> lottoList) {
+    private double calculateProfitSum(WinnigLotto winningLotto, List<Lotto> lottoList) {
         double sum = 0;
         for (Lotto lotto : lottoList) {
-            int matchedCount = lotto.equalsCount(winningLotto.getLottoNumbers());
-            sum += LottoPricePolicy.getLottoPriceByMatchCount(matchedCount);
+            int matchedCount = lotto.equalsCount(winningLotto.getWinnigLottoNumbers());
+            boolean isBonusMatched = lotto.isEqualsBonusNumber(winningLotto.getLottoBonusNumber());
+            sum += LottoPricePolicy.getLottoPriceByMatchCount(matchedCount, isBonusMatched);
         }
         return sum;
     }
 
     public int getNumberCount(Number number) {
-        return statistics.getOrDefault(number, 0);
+        return basicStatistics.getOrDefault(number, 0);
+    }
+
+    public int getBonusNumberCount(Number number) {
+        return bonusStatistics.getOrDefault(number, 0);
     }
 }

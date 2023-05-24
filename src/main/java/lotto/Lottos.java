@@ -21,11 +21,14 @@ public class Lottos {
         return Lotto.createLotto(lottoBallPolicy.getLottoNumber(Lotto.getMaxSize()), price);
     }
 
-    public List<Integer> matchedLottoCount(Lotto winningLotto){
-        List<Integer> matchedCountList = new ArrayList<>();
+    public List<StatisticsNumber> matchedLottoCount(WinnigLotto winningLotto){
+        List<StatisticsNumber> matchedCountList = new ArrayList<>();
         for (Lotto lotto : lottoList) {
-            matchedCountList.add(lotto.equalsCount(winningLotto.getLottoNumbers()));
+            int count = lotto.equalsCount(winningLotto.getWinnigLottoNumbers());
+            boolean isBonusNumberMatched = lotto.isEqualsBonusNumber(winningLotto.getLottoBonusNumber());
+            matchedCountList.add(new StatisticsNumber(count, isBonusNumberMatched));
         }
+
         return matchedCountList;
     }
 
