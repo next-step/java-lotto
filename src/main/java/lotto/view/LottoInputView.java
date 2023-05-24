@@ -29,4 +29,16 @@ public class LottoInputView {
         }
         return lottoNumbers;
     }
+
+    public static int askLastBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+
+        Scanner scanner = new Scanner(System.in);
+        int number = scanner.nextInt();
+        while (number < 1 || 45 < number) {
+            System.out.println("1부터 45까지 입력할 수 있습니다.");
+            number = scanner.nextInt();
+        }
+        return number;
+    }
 }
