@@ -18,7 +18,7 @@ public class LottoStaticsTest {
 
     @BeforeEach
     public void init() {
-        lottoStatics = new LottoStatics(LOTTO_PRICE * LOTTO_COUNT, LOTTO_PRICE);
+        lottoStatics = new LottoStatics(LOTTO_PRICE * LOTTO_COUNT);
     }
 
     @Test
@@ -26,9 +26,9 @@ public class LottoStaticsTest {
         List<Number> winningList = Number.createNumberList(List.of(1,2,3,4,5,6));
         List<Number> balls = Number.createNumberList(List.of(1,2,3,4,11,10));
 
-        lottos = new Lottos(LOTTO_COUNT, new LottoBallPolicy(balls));
+        lottos = new Lottos(LOTTO_COUNT, new LottoBallPolicy(balls), LOTTO_PRICE);
 
-        var actual = lottoStatics.getProfitRatio(Lotto.createLotto(winningList), lottos.getLottoList());
+        var actual = lottoStatics.getProfitRatio(Lotto.createLotto(winningList, LOTTO_PRICE), lottos);
         var expect = "50.0" ;
 
         assertThat(actual).isEqualTo(expect);
@@ -40,8 +40,8 @@ public class LottoStaticsTest {
         List<Number> balls = Number.createNumberList(List.of(1,2,3,4,11,10));
 
         LottoBallPolicy lottoBallPolicy = new LottoBallPolicy(balls);
-        lottos = new Lottos(LOTTO_COUNT, lottoBallPolicy);
-        lottoStatics.calculateProfitStatistics(Lotto.createLotto(winningList), lottos.getLottoList());
+        lottos = new Lottos(LOTTO_COUNT, lottoBallPolicy, LOTTO_PRICE);
+        lottoStatics.calculateProfitStatistics(Lotto.createLotto(winningList, LOTTO_PRICE), lottos);
 
         var actual = lottoStatics.getNumberCount(Number.createNumber(4));
         var expect = 10;

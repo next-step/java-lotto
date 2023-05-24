@@ -11,6 +11,8 @@ public class LottoTest {
 
     Lotto lotto;
 
+    private static final int LOTTO_PRICE = 1000;
+
     @BeforeEach
     public void init() {
         lotto = new Lotto();
@@ -19,7 +21,7 @@ public class LottoTest {
     @Test
     public void getLottoNumbersTest() {
         var expected = 6;
-        var actualList = Lotto.createLotto(Number.createNumberList(List.of(1,2,3,4,5,6)));
+        var actualList = Lotto.createLotto(Number.createNumberList(List.of(1,2,3,4,5,6)), LOTTO_PRICE);
 
         assertThat(expected).isEqualTo(actualList.getSize());
     }
@@ -27,7 +29,7 @@ public class LottoTest {
     @Test
     public void equalsCountTest() {
         List<Number> list = Number.createNumberList(List.of(1,2,3,4,5,6));
-        lotto = Lotto.createLotto(list);
+        lotto = Lotto.createLotto(list, LOTTO_PRICE);
 
         List<Number> winningNumber = Number.createNumberList(List.of(4,2,3,8,5,12));;
 
@@ -41,7 +43,7 @@ public class LottoTest {
     public void lottoSortTest() {
         List<Number> list = new java.util.ArrayList<>(List.of(Number.createNumber(33), Number.createNumber(22), Number.createNumber(3), Number.createNumber(41), Number.createNumber(5), Number.createNumber(10)));
 
-        Lotto actualLotto = Lotto.createLotto(list);
+        Lotto actualLotto = Lotto.createLotto(list, LOTTO_PRICE);
         actualLotto.sortLotto();
         var actualList = actualLotto.getLottoNumbers();
 

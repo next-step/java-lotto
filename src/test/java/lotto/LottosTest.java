@@ -8,10 +8,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottosTest {
 
     Lottos lottos;
+    private static final int LOTTO_PRICE = 1000;
 
     @BeforeEach
     public void init() {
-        lottos = new Lottos(10, new LottoBallPolicy());
+        lottos = new Lottos(10, new LottoBallPolicy(), LOTTO_PRICE);
     }
 
     @Test

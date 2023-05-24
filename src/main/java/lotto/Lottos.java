@@ -8,17 +8,25 @@ public class Lottos {
 
     private List<Lotto> lottoList;
 
-    public Lottos(int count, LottoBallPolicy lottoBallPolicy) {
+    public Lottos(int count, LottoBallPolicy lottoBallPolicy, int price) {
         lottoList = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            lottoBallPolicy.shuffleLottoNumber();
-            lottoList.add(createLottoByPolicy(lottoBallPolicy));
+            lottoBallPolicy.getLottoNumber(Lotto.getMaxSize());
+            lottoList.add(createLottoByPolicy(lottoBallPolicy, price));
         }
     }
 
-    public Lotto createLottoByPolicy(LottoBallPolicy lottoBallPolicy) {
-        return Lotto.createLotto(lottoBallPolicy.getLottoNumber(Lotto.getMaxSize()));
+    public Lotto createLottoByPolicy(LottoBallPolicy lottoBallPolicy, int price) {
+        return Lotto.createLotto(lottoBallPolicy.getLottoNumber(Lotto.getMaxSize()), price);
+    }
+
+    public List<Integer> matchedLottoCount(Lotto winningLotto){
+        List<Integer> matchedCountList = new ArrayList<>();
+        for (Lotto lotto : lottoList) {
+            matchedCountList.add(lotto.equalsCount(winningLotto.getLottoNumbers()));
+        }
+        return matchedCountList;
     }
 
     public List<Lotto> getLottoList() {
@@ -27,5 +35,12 @@ public class Lottos {
 
     public int getLottoListSize(){
         return lottoList.size();
+    }
+
+    public int getLottoTotalPrice(){
+        return lottoList.stream()
+                .map(Lotto::getPrice)
+                .reduce(Integer::sum)
+                .orElse(0);
     }
 }

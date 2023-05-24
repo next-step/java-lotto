@@ -3,14 +3,14 @@ package lotto;
 import java.util.Arrays;
 
 public enum LottoPricePolicy {
-    THREE_MATCH(3, 5000),
-    FOUR_MATCH(4, 50000),
-    FIVE_MATCH(5, 1500000),
-    SIX_MATCH(6, 2000000000),
+    THREE_MATCH(3, 5_000),
+    FOUR_MATCH(4, 50_000),
+    FIVE_MATCH(5, 1_500_000),
+    SIX_MATCH(6, 2_000_000_000),
     ETC(0, 0);
 
-    private long matchCount;
-    private long winningAmount;
+    private final long matchCount;
+    private final long winningAmount;
 
     public static long getLottoPriceByMatchCount(int input) {
         return Arrays.stream(LottoPricePolicy.values())
