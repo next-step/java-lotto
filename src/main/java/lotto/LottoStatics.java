@@ -6,10 +6,8 @@ import java.util.List;
 public class LottoStatics {
 
     private HashMap<Number, Integer> statistics;
-    private final int totalPrice;
 
-    public LottoStatics(int totalPrice) {
-        this.totalPrice = totalPrice;
+    public LottoStatics() {
     }
 
     public String getProfitRatio(Lotto winningLotto, Lottos lottos) {

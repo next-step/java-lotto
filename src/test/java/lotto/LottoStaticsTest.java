@@ -18,7 +18,7 @@ public class LottoStaticsTest {
 
     @BeforeEach
     public void init() {
-        lottoStatics = new LottoStatics(LOTTO_PRICE * LOTTO_COUNT);
+        lottoStatics = new LottoStatics();
     }
 
     @Test

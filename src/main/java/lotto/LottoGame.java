@@ -28,7 +28,7 @@ public class LottoGame {
         var winningNumberList = toNumberList(winningNumberString.split(","));
 
         // 통계
-        LottoStatics lottoStatics = new LottoStatics(priceInput);
+        LottoStatics lottoStatics = new LottoStatics();
         lottoStatics.calculateProfitStatistics(Lotto.createLotto(winningNumberList, LOTTO_PRICE), lottos);
         ResultView.printStatics(lottoStatics);
 
