@@ -17,7 +17,7 @@ public class LottoGameApplication {
         List<String> manuallyWrittenNumbers =
                 InputView.getManualPurchaseLottoNumberFromUser(purchaseAmount.getManuallyPurchaseAmount());
 
-        LottoGenerator lottoGenerator = new LottoGenerator(Collections::shuffle);
+        LottoGenerator lottoGenerator = new LottoGeneratorImpl(Collections::shuffle);
         LottoMachine lottoMachine = new LottoMachine(lottoGenerator);
         Clerk clerk = new Clerk(lottoMachine);
 
