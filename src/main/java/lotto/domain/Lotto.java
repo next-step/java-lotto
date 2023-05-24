@@ -32,11 +32,14 @@ public class Lotto {
         }
     }
 
-    public Match getMatch(Lotto other, LottoNumber bonusNumber) {
-        int count = (int) lottoNumbers.stream()
-                .filter(other.lottoNumbers::contains)
+    public int getMatchCount(Lotto other) {
+        return (int) lottoNumbers.stream()
+                .filter(other::hasNumber)
                 .count();
-        return Match.of(count, lottoNumbers.contains(bonusNumber));
+    }
+
+    public boolean hasNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     public Set<LottoNumber> getLottoNumbers() {

@@ -21,10 +21,15 @@ public class LottoTicket {
         return Collections.unmodifiableList(lottos);
     }
 
-    public Matches getMatches(Lotto winningLotto, LottoNumber bonusNumber) {
+    public Matches getMatches(WinningLotto winningLotto) {
         return Matches.of(lottos.stream()
-                .map(lotto -> lotto.getMatch(winningLotto, bonusNumber))
+                .map(winningLotto::getMatch)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList()));
+    }
+
+    public LottoTicket plus(LottoTicket other) {
+        this.lottos.addAll(other.lottos);
+        return this;
     }
 }
