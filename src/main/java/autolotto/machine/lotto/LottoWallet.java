@@ -1,6 +1,5 @@
 package autolotto.machine.lotto;
 
-import autolotto.machine.winning.Winning;
 import autolotto.machine.winning.WinningNumbers;
 
 import java.util.ArrayList;
@@ -23,14 +22,6 @@ public class LottoWallet {
 
     public int lottoSize() {
         return this.lottoList.size();
-    }
-
-    public int totalWinningMoneyOf(WinningNumbers winningNumbers) {
-        return this.lottoList.stream()
-                .map(lotto -> lotto.matchCount(winningNumbers))
-                .filter(matchCount -> Winning.minWinningMatchCount() <= matchCount)
-                .mapToInt(matchCount -> Winning.winningOf(matchCount).winningMoney())
-                .sum();
     }
 
     public int countOfLottoMatchingWith(WinningNumbers winningNumber, int matchCount) {

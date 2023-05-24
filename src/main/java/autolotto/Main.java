@@ -5,12 +5,14 @@ import autolotto.dto.Statistics;
 import autolotto.dto.WinningAmount;
 import autolotto.machine.LottoMachine;
 import autolotto.machine.lotto.LottoGenerator;
+import autolotto.machine.lotto.LottoNumber;
 import autolotto.machine.lotto.RandomShuffler;
 import autolotto.machine.winning.Winning;
 import autolotto.machine.winning.WinningNumbers;
 import autolotto.view.ConsoleView;
 import calculator.parser.converter.IntegerStringConverter;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -29,11 +31,19 @@ public class Main {
                         .map(LottoDTO::from)
                         .collect(Collectors.toList()));
 
-        WinningNumbers winningNumbers = new WinningNumbers(parser.parse(consoleView.inputWinningNumbers()));
+        WinningNumbers winningNumbers = new WinningNumbers(
+                inputWinningNumbers(parser.parse(consoleView.inputWinningNumbers())),
+                new LottoNumber(consoleView.inputBonusNumber()));
 
         consoleView.printStatistic(new Statistics(
                 lottoMachine.profitRate(winningNumbers).toPlainString(),
                 convertToWinningAmount(lottoMachine.winningState(winningNumbers))));
+    }
+
+    private static List<LottoNumber> inputWinningNumbers(List<Integer> inputNumbers) {
+        return inputNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private static Map<WinningAmount, Integer> convertToWinningAmount(Map<Winning, Integer> lottoCountPerMatchingNumber) {
