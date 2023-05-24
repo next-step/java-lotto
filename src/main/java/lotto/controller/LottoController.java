@@ -18,10 +18,14 @@ public class LottoController {
     }
 
     public void buy() {
-        int price = inputView.price();
+        LottoPrice lottoPrice = new LottoPrice(inputView.price());
         int manualLottoCount = inputView.manualPurchaseCount();
-        List<List<Integer>> lists = inputView.manualNumbers(manualLottoCount);
-        LottoPrice lottoPrice = lottoGame.buyManualLotto(price, lists);
+        if(!lottoPrice.buyPossible(manualLottoCount)) {
+            new IllegalArgumentException("돈이 부족합니다");
+        }
+
+        List<String> lists = inputView.manualNumbers(manualLottoCount);
+        lottoGame.buyManualLotto(lists);
         lottoGame.buyAutoLotto(lottoPrice);
 
         inputView.buy(lists.size(), lottoGame.quantity()-lists.size());

@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGame {
 
@@ -27,18 +29,11 @@ public class LottoGame {
         lottos.buyLotto(lottoPrice);
     }
 
-    public LottoPrice buyManualLotto(int price, List<List<Integer>> listOfNumbers) {
-        LottoPrice lottoPrice = new LottoPrice(price);
-
-        if (lottoPrice.greaterThanPrice(listOfNumbers)) {
-            throw new RuntimeException("금액이 부족합니다.");
-        }
-
-        for (List<Integer> numbers : listOfNumbers) {
-            lottos.buyLotto(numbers);
-            lottoPrice = lottoPrice.pay();
-        }
-
-        return lottoPrice;
+    public void buyManualLotto(List<String> lottos) {
+        lottos.stream()
+                .map(lotto -> Arrays.stream(lotto.split(",\\s*"))
+                        .map(Integer::parseInt)
+                        .collect(Collectors.toList()))
+                .forEach(numbers -> this.lottos.buyLotto(new Lotto(numbers)));
     }
 }

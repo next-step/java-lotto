@@ -18,8 +18,9 @@ public class Lottos {
         }
     }
 
-    public void buyLotto(List<Integer> numbers) {
-        lottos.add(new Lotto(numbers));
+    public void buyLotto(Lotto lotto) {
+        //이쪽으로 로직을 옮겨보자.
+        lottos.add(lotto);
     }
 
     public List<LottoMatcher> matchResult(WinningNumbers winningNumbers) {

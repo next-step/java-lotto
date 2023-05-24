@@ -17,19 +17,15 @@ public class LottoPrice {
         }
     }
 
-    public int price(){
-        return price;
-    }
-
     public int lottoCount(){
         return price / LOTTO_PRICE;
     }
 
-    public boolean greaterThanPrice(List<List<Integer>> lists) {
-        return lottoCount() < lists.size();
-    }
-
     public LottoPrice pay() {
         return new LottoPrice(price - LOTTO_PRICE);
+    }
+
+    public boolean buyPossible(int manualLottoCount) {
+        return lottoCount() > manualLottoCount;
     }
 }

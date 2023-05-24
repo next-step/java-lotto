@@ -18,13 +18,13 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public List<List<Integer>> manualNumbers(int count) {
+    public List<String> manualNumbers(int count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<List<Integer>> manualList = new ArrayList<>();
+        List<String> manualLottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            manualList.add(numbers());
+            manualLottos.add(scanner.nextLine());
         }
-        return manualList;
+        return manualLottos;
     }
 
     public int manualPurchaseCount() {
