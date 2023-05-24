@@ -2,7 +2,6 @@ package view.result;
 
 import model.LotteryStatics;
 import model.Lotto;
-import model.LottoNumber;
 import model.Rank;
 
 import java.text.DecimalFormat;
@@ -13,20 +12,19 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printLottoInfo(List<Lotto> Input) {
-        resultBuyInputCount(Input.size());
-        getLotto(Input);
+    public static void printLottoInfo(List<Lotto> passiveLottos, List<Lotto> auttoLottos) {
+        resultBuyInputCount(passiveLottos.size(), auttoLottos.size());
+        getLotto(passiveLottos);
+        getLotto(auttoLottos);
     }
 
-    private static void resultBuyInputCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    private static void resultBuyInputCount(int passiveCount, int autoCount) {
+
+        System.out.println("수동으로 " + passiveCount + "장, 자동으로" + autoCount + "개를 구매했습니다.");
     }
 
     private static void getLotto(List<Lotto> Input) {
         for (Lotto lotto : Input) {
-//            for(LottoNumber lottoNumber : lotto.getLotto()){
-//                lottoNumber.getLottoNumber();
-//            }
             System.out.println(lotto.getWinNumIntegerType());
         }
     }
