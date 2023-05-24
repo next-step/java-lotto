@@ -40,7 +40,7 @@ class LottoTicketTest {
     public void 로또티켓_당첨_개수_상금_체크_태스트() {
         officialWinningNumbers = new ArrayList<>();
         for (int i = 2; i < 8; i++) {
-            officialWinningNumbers.add(i); 
+            officialWinningNumbers.add(i);
         }
         bonusNumber= 10;
         lottoTicket.checkWinningTicket(officialWinningNumbers, bonusNumber);
