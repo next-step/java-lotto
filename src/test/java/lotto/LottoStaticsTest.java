@@ -23,25 +23,38 @@ public class LottoStaticsTest {
 
     @Test
     void getProfitRatio() {
-        List<Number> winningList = Number.createNumberList(List.of(1,2,3,4,5,6));
+        List<Number> winningList = Number.createNumberList(List.of(1,2,3,4,5,6,7));
         List<Number> balls = Number.createNumberList(List.of(1,2,3,4,11,10));
 
         lottos = new Lottos(LOTTO_COUNT, new LottoBallPolicy(balls), LOTTO_PRICE);
 
-        var actual = lottoStatics.getProfitRatio(Lotto.createLotto(winningList, LOTTO_PRICE), lottos);
+        var actual = lottoStatics.getProfitRatio(WinnigLotto.createLotto(winningList), lottos);
         var expect = "50.0" ;
 
         assertThat(actual).isEqualTo(expect);
     }
 
     @Test
+    void getProfitRatio_보너스번호() {
+        List<Number> winningList = Number.createNumberList(List.of(1,2,3,4,5,6,10));
+        List<Number> balls = Number.createNumberList(List.of(1,2,3,4,11,10));
+
+        lottos = new Lottos(LOTTO_COUNT, new LottoBallPolicy(balls), LOTTO_PRICE);
+
+        var actual = lottoStatics.getProfitRatio(WinnigLotto.createLotto(winningList), lottos);
+        var expect = "30500.0" ;
+
+        assertThat(actual).isEqualTo(expect);
+    }
+
+    @Test
     void getNumberCount() {
-        List<Number> winningList = Number.createNumberList(List.of(1,2,3,4,5,6));
+        List<Number> winningList = Number.createNumberList(List.of(1,2,3,4,5,6,7));
         List<Number> balls = Number.createNumberList(List.of(1,2,3,4,11,10));
 
         LottoBallPolicy lottoBallPolicy = new LottoBallPolicy(balls);
         lottos = new Lottos(LOTTO_COUNT, lottoBallPolicy, LOTTO_PRICE);
-        lottoStatics.calculateProfitStatistics(Lotto.createLotto(winningList, LOTTO_PRICE), lottos);
+        lottoStatics.calculateProfitStatistics(WinnigLotto.createLotto(winningList), lottos);
 
         var actual = lottoStatics.getNumberCount(Number.createNumber(4));
         var expect = 10;
