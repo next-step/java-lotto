@@ -3,6 +3,7 @@ package step2.lotto;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoRandomNumberGenerator implements LottoNumberGenerator {
 	public static final int LOTTO_NUMBER_MIN = 1;
@@ -20,8 +21,8 @@ public class LottoRandomNumberGenerator implements LottoNumberGenerator {
 
 	@Override
 	public List<Integer> generate() {
-		return IntStream.range(0, LOTTO_NUMBER_LENGTH)
-			.mapToObj(i -> generateRandomNumber())
+		return Stream.generate(this::generateRandomNumber)
+			.limit(LOTTO_NUMBER_LENGTH)
 			.collect(Collectors.toList());
 	}
 }
