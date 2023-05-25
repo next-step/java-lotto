@@ -54,4 +54,11 @@ public class LottoTickets {
 			.filter(ticket -> ticket.countMatch(lottoTicket) == targetCount)
 			.count();
 	}
+
+	public LottoWinningStatisticDto calculateStatistic(List<Integer> winningNumbers) {
+		LottoWinningStatistic lottoWinningStatistic = LottoWinningStatistic.from(this);
+		LottoTicket winningLottoTicket = LottoTicket.from(winningNumbers);
+
+		return lottoWinningStatistic.calculateStatistic(winningLottoTicket);
+	}
 }

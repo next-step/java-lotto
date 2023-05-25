@@ -28,10 +28,9 @@ public class Application {
 
 		LottoUI.printLottoTickets(lottoTickets);
 
-		List<Integer> numbers = LottoUI.uiForWinningNumbers();
+		List<Integer> winningNumbers = LottoUI.uiForWinningNumbers();
 
-		LottoWinningStatistic lottoWinningStatistic = LottoWinningStatistic.from(lottoTickets);
-		LottoWinningStatisticDto lottoWinningStatisticDto = lottoWinningStatistic.calculateStatistic(LottoTicket.from(numbers));
+		LottoWinningStatisticDto lottoWinningStatisticDto = lottoTickets.calculateStatistic(winningNumbers);
 
 		return lottoWinningStatisticDto;
 	}
