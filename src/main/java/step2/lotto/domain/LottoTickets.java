@@ -37,8 +37,7 @@ public class LottoTickets {
 	}
 
 	public void add(LottoTicket ...lottoTickets) {
-		Arrays.stream(lottoTickets)
-			.forEach(lottoTicket -> this.lottoTickets.add(lottoTicket));
+		this.lottoTickets.addAll(Arrays.asList(lottoTickets));
 	}
 
 	public int getSize() {
