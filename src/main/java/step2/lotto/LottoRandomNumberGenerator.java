@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import step2.lotto.domain.LottoNumber;
+
 public class LottoRandomNumberGenerator implements LottoNumberGenerator {
 	public static final int LOTTO_NUMBER_MIN = 1;
 	public static final int LOTTO_NUMBER_MAX = 45;
@@ -15,12 +17,14 @@ public class LottoRandomNumberGenerator implements LottoNumberGenerator {
 		return new LottoRandomNumberGenerator();
 	}
 
-	private int generateRandomNumber() {
-		return (int) (Math.random() * LOTTO_NUMBER_MAX) + LOTTO_NUMBER_MIN;
+	private LottoNumber generateRandomNumber() {
+		int randomNumber = (int) (Math.random() * LOTTO_NUMBER_MAX) + LOTTO_NUMBER_MIN;
+
+		return LottoNumber.from(randomNumber);
 	}
 
 	@Override
-	public List<Integer> generate() {
+	public List<LottoNumber> generate() {
 		return Stream.generate(this::generateRandomNumber)
 			.limit(LOTTO_NUMBER_LENGTH)
 			.collect(Collectors.toList());

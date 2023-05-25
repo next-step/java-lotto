@@ -57,7 +57,7 @@ public class LottoTickets {
 
 	public LottoWinningStatisticDto calculateStatistic(List<Integer> winningNumbers) {
 		LottoWinningStatistic lottoWinningStatistic = LottoWinningStatistic.from(this);
-		LottoTicket winningLottoTicket = LottoTicket.from(winningNumbers);
+		LottoTicket winningLottoTicket = LottoTicket.fromNumbers(winningNumbers);
 
 		return lottoWinningStatistic.calculateStatistic(winningLottoTicket);
 	}

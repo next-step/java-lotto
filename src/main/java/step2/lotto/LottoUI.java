@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import step2.lotto.domain.LottoNumber;
 import step2.lotto.domain.LottoTicket;
 import step2.lotto.domain.LottoTickets;
 import step2.lotto.domain.LottoWinningStatisticDto;
