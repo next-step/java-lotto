@@ -3,6 +3,7 @@ package step2.lotto.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import step2.lotto.LottoRandomNumberGenerator;
 
@@ -24,6 +25,11 @@ public class LottoTickets {
 
 	public static LottoTickets of(LottoTicket ...lottoTickets) {
 		return new LottoTickets(Arrays.asList(lottoTickets));
+	}
+
+	public void createManualTickets(int lottoCount) {
+		IntStream.range(0, lottoCount)
+			.forEach((i) -> add());
 	}
 
 	public void add() {

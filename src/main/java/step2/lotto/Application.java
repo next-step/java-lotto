@@ -24,10 +24,7 @@ public class Application {
 	private static LottoWinningStatisticDto run(int lottoCount) {
 
 		LottoTickets lottoTickets = LottoTickets.create();
-
-		for (int i = 0; i < lottoCount; i++) {
-			lottoTickets.add();
-		}
+		lottoTickets.createManualTickets(lottoCount);
 
 		LottoUI.printLottoTickets(lottoTickets);
 
