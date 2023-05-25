@@ -34,7 +34,7 @@ public class LottoTickets {
 	}
 
 	public void add() {
-		lottoTickets.add(LottoTicket.from(LottoRandomNumberGenerator.create()));
+		lottoTickets.add(LottoTicket.fromLottoNumberGenerator(LottoRandomNumberGenerator.create()));
 	}
 
 	public void add(LottoTicket ...lottoTickets) {

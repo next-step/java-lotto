@@ -15,7 +15,7 @@ import step2.lotto.LottoFixedNumberGenerator;
 public class LottoStatisticTest {
 
 	private LottoFixedNumberGenerator answerLottoGenerator = LottoFixedNumberGenerator.createSequential(0);
-	private LottoFixedNumberGenerator wrongLottoGenerator = LottoFixedNumberGenerator.createSequential(100);
+	private LottoFixedNumberGenerator wrongLottoGenerator = LottoFixedNumberGenerator.createSequential(7);
 
 
 	@Test
@@ -28,7 +28,7 @@ public class LottoStatisticTest {
 
 	@Test
 	void 로또_번호_일치하는_개수() {
-		LottoTicket answerLottoTicket = LottoTicket.from(answerLottoGenerator);
+		LottoTicket answerLottoTicket = LottoTicket.fromLottoNumberGenerator(answerLottoGenerator);
 
 		Map<Integer, Integer> matchToCount = new HashMap<>(){
 			{
@@ -56,7 +56,7 @@ public class LottoStatisticTest {
 	@Test
 	void 수익률() {
 		LottoFixedNumberGenerator answerLottoGenerator = LottoFixedNumberGenerator.createSequential(0);
-		LottoTicket answerLottoTicket = LottoTicket.from(answerLottoGenerator);
+		LottoTicket answerLottoTicket = LottoTicket.fromLottoNumberGenerator(answerLottoGenerator);
 
 		Map<Integer, Integer> matchToCount = new HashMap<>(){
 			{
@@ -84,17 +84,17 @@ public class LottoStatisticTest {
 			int count = (int)entry.getValue();
 			int match = (int)entry.getKey();
 
-			int startIndex = LottoFixedNumberGenerator.LOTTO_NUMBER_LENGTH - match;
+			int startIndex = LottoTicket.LOTTO_NUMBER_LENGTH - match;
 
-			extracted(ticketList, count, match, startIndex);
+			addTicket(ticketList, count, match, startIndex);
 		}
 
 		LottoTickets lottoTickets = LottoTickets.from(ticketList);
 		return lottoTickets;
 	}
 
-	private void extracted(List<LottoTicket> ticketList, int count, int match, int startIndex) {
-		LottoTicket wrongLottoTicket = LottoTicket.from(wrongLottoGenerator);
+	private void addTicket(List<LottoTicket> ticketList, int count, int match, int startIndex) {
+		LottoTicket wrongLottoTicket = LottoTicket.fromLottoNumberGenerator(wrongLottoGenerator);
 
 		for (int i = 0; i < count; i++) {
 			if (match == 0) {
@@ -102,7 +102,9 @@ public class LottoStatisticTest {
 				continue;
 			}
 
-			LottoTicket lottoTicket = LottoTicket.from(LottoFixedNumberGenerator.createSequential(startIndex).shuffle());
+			LottoTicket lottoTicket = LottoTicket.fromLottoNumberGenerator(
+				LottoFixedNumberGenerator.createSequential(startIndex).shuffle()
+			);
 			ticketList.add(lottoTicket);
 		}
 	}

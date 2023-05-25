@@ -17,4 +17,12 @@ public class LottoNumberTest {
 		assertThatThrownBy(() -> LottoNumber.from(-1))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
+
+	@Test
+	void 번호는_범위를_넘를_수_없다() {
+		int maxNumber = LottoNumber.LOTTO_NUMBER_MAX;
+
+		assertThatThrownBy(() -> LottoNumber.from(maxNumber + 1))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
 }

@@ -1,5 +1,6 @@
 package step2.lotto;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,16 +18,21 @@ public class LottoRandomNumberGenerator implements LottoNumberGenerator {
 		return new LottoRandomNumberGenerator();
 	}
 
-	private LottoNumber generateRandomNumber() {
-		int randomNumber = (int) (Math.random() * LOTTO_NUMBER_MAX) + LOTTO_NUMBER_MIN;
-
-		return LottoNumber.from(randomNumber);
-	}
-
 	@Override
 	public List<LottoNumber> generate() {
-		return Stream.generate(this::generateRandomNumber)
-			.limit(LOTTO_NUMBER_LENGTH)
+		List<Integer> numbers = IntStream.rangeClosed(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX)
+			.boxed()
+			.collect(Collectors.toList());
+
+		Collections.shuffle(numbers);
+
+		return convertLottoNumbers(numbers);
+	}
+
+	private static List<LottoNumber> convertLottoNumbers(List<Integer> numbers) {
+		return numbers.subList(0, LOTTO_NUMBER_LENGTH)
+			.stream()
+			.map(LottoNumber::from)
 			.collect(Collectors.toList());
 	}
 }

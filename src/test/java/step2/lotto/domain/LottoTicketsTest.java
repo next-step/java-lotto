@@ -29,7 +29,7 @@ public class LottoTicketsTest {
 		LottoTickets lottoTickets = LottoTickets.create();
 
 		IntStream.range(0, LOTTO_COUNT).forEach(i ->
-			lottoTickets.add(LottoTicket.from(LottoRandomNumberGenerator.create()))
+			lottoTickets.add(LottoTicket.fromLottoNumberGenerator(LottoRandomNumberGenerator.create()))
 		);
 
 		assertThat(lottoTickets.getSize())
@@ -40,16 +40,16 @@ public class LottoTicketsTest {
 	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6 })
 	void 당첨_번호_일치_테스트(int count) {
 		// 6~11, 5~10, ... , 0~5
-		int startIndex = LottoFixedNumberGenerator.LOTTO_NUMBER_LENGTH - count;
+		int startIndex = LottoTicket.LOTTO_NUMBER_LENGTH - count;
 
 		LottoTickets lottoTickets = LottoTickets.from(
 			IntStream.range(0, LOTTO_COUNT)
-				.mapToObj(i -> LottoTicket.from(LottoFixedNumberGenerator.createSequential(startIndex)))
+				.mapToObj(i -> LottoTicket.fromLottoNumberGenerator(LottoFixedNumberGenerator.createSequential(startIndex)))
 				.collect(Collectors.toList())
 		);
 
 		// 0~5
-		LottoTicket lottoTicket = LottoTicket.from(LottoFixedNumberGenerator.createSequential(0));
+		LottoTicket lottoTicket = LottoTicket.fromLottoNumberGenerator(LottoFixedNumberGenerator.createSequential(0));
 
 		assertThat(lottoTickets.countMatchedTicket(lottoTicket, count))
 			.isEqualTo(LOTTO_COUNT);

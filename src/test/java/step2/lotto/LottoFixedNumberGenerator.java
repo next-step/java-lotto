@@ -1,5 +1,7 @@
 package step2.lotto;
 
+import static step2.lotto.domain.LottoTicket.*;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,7 +10,6 @@ import java.util.stream.IntStream;
 import step2.lotto.domain.LottoNumber;
 
 public class LottoFixedNumberGenerator implements LottoNumberGenerator {
-	public static final int LOTTO_NUMBER_LENGTH = 6;
 
 	private final List<LottoNumber> fixedNumbers;
 
@@ -16,12 +17,12 @@ public class LottoFixedNumberGenerator implements LottoNumberGenerator {
 		this.fixedNumbers = fixedNumbers;
 	}
 
-	public static LottoFixedNumberGenerator from(List<LottoNumber> fixedNumbers) {
-		if (fixedNumbers.size() != LOTTO_NUMBER_LENGTH) {
-			throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
-		}
+	public static LottoFixedNumberGenerator from(List<Integer> fixedNumbers) {
+		List<LottoNumber> lottoNumbers = fixedNumbers.stream()
+			.map(LottoNumber::from)
+			.collect(Collectors.toList());
 
-		return new LottoFixedNumberGenerator(fixedNumbers);
+		return new LottoFixedNumberGenerator(lottoNumbers);
 	}
 
 	public static LottoFixedNumberGenerator createSequential(int startIndex) {
