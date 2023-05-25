@@ -6,9 +6,9 @@ import java.math.RoundingMode;
 public class DecimalRounder {
 
 	public static double roundToSecondsDecimal(double value) {
-		BigDecimal bd = new BigDecimal(value);
-		bd = bd.setScale(2, RoundingMode.HALF_UP);
+		BigDecimal decimal = new BigDecimal(value);
+		decimal = decimal.setScale(2, RoundingMode.HALF_UP);
 
-		return bd.doubleValue();
+		return decimal.doubleValue();
 	}
 }
