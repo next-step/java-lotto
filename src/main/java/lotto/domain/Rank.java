@@ -1,37 +1,34 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
 
 public enum Rank {
-    SEVENTH(0, 0),
-    SIXTH(1, 0),
-    FIFTH(2, 0),
-    FOURTH(3, 5000),
-    THIRD(4, 50000),
-    SECOND(5, 1500000),
-    FIRST(6, 2000000000);
+    FIRST(6, 2000000000, (matchCount, matchBonus) -> (matchCount == 6)),
+    SECOND(5, 30000000, (matchCount, matchBonus) -> (matchCount == 5 && matchBonus)),
+    THIRD(5, 1500000, (matchCount, matchBonus) -> (matchCount == 5 && !matchBonus)),
+    FOURTH(4, 50000, (matchCount, matchBonus) -> (matchCount == 4)),
+    FIFTH(3, 5000, (matchCount, matchBonus) -> (matchCount == 3));
 
     private final int matchCount;
     private final int reward;
+    private final BiFunction<Integer, Boolean, Boolean> condition;
 
-    Rank(int matchCount, int reward) {
+    Rank(int matchCount, int reward, BiFunction<Integer, Boolean, Boolean> condition) {
         this.matchCount = matchCount;
         this.reward = reward;
+        this.condition = condition;
     }
 
-    static Rank findByMatchCount(int matchCount) {
+    static Rank find(int matchCount, boolean matchBonus) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.matchCount == matchCount)
+                .filter(rank -> rank.condition.apply(matchCount, matchBonus))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("해당 매치 카운트와 일치하는 등수가 없습니다."));
+                .orElse(null);
     }
 
     int totalReward(int count) {
         return this.reward * count;
-    }
-
-    public boolean isWin() {
-        return this.reward != 0;
     }
 
     public int matchCount() {
@@ -40,10 +37,5 @@ public enum Rank {
 
     public int reward() {
         return this.reward;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%d개 일치 (%d원)", matchCount, reward);
     }
 }

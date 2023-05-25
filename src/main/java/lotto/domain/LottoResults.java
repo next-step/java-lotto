@@ -6,14 +6,14 @@ import java.util.Map;
 
 public class LottoResults {
 
-    private final Map<Rank, Integer> matchingStats;
+    private final Map<Rank, Integer> winningStats;
 
-    LottoResults(Map<Rank, Integer> matchingStats) {
-        this.matchingStats = Collections.unmodifiableMap(matchingStats);
+    LottoResults(Map<Rank, Integer> winningStats) {
+        this.winningStats = Collections.unmodifiableMap(winningStats);
     }
 
     public Money totalReward() {
-        int totalReward = matchingStats.keySet().stream()
+        int totalReward = winningStats.keySet().stream()
                 .mapToInt(this::rankTotalReward)
                 .sum();
         return new Money(totalReward);
@@ -25,10 +25,10 @@ public class LottoResults {
     }
 
     private int rankTotalCount(Rank rank) {
-        return matchingStats.get(rank);
+        return winningStats.get(rank);
     }
 
     public Map<Rank, Integer> matchingStats() {
-        return new HashMap<>(matchingStats);
+        return new HashMap<>(winningStats);
     }
 }

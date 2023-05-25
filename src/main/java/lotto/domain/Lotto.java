@@ -24,7 +24,7 @@ public class Lotto {
 
     private static Set<LottoNumber> parseStringNumbers(String lottoNumbers) {
         return Arrays.stream(lottoNumbers.split(","))
-                .map(number -> new LottoNumber(Integer.parseInt(number.trim())))
+                .map(number -> LottoNumber.valueOf(Integer.parseInt(number.trim())))
                 .collect(Collectors.toSet());
     }
 
@@ -34,7 +34,7 @@ public class Lotto {
                 .count();
     }
 
-    private boolean hasNumber(LottoNumber number) {
+    boolean hasNumber(LottoNumber number) {
         return this.numbers.contains(number);
     }
 

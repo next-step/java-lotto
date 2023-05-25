@@ -11,6 +11,9 @@ import java.util.stream.Collectors;
 
 public class LottoOutputView {
 
+    public static final String SECOND_RANK_PRINT_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
+    public static final String DEFAULT_PRINT_FORMAT = "%d개 일치 (%d원)- %d개";
+
     public static void printLottos(List<Lotto> lottos) {
         System.out.printf("%d개를 구매했습니다.%n", lottos.size());
         lottos.forEach(LottoOutputView::printSortedLottoNumbers);
@@ -34,13 +37,18 @@ public class LottoOutputView {
     }
 
     private static void printWinningStats(Map<Rank, Integer> matchingStats) {
-        Arrays.stream(Rank.values())
-                .filter(Rank::isWin)
-                .forEach(rank -> printRankStats(matchingStats, rank));
+        Arrays.stream(Rank.values()).forEach(rank -> {
+            int matchCount = matchingStats.get(rank);
+            printRankResult(rank, matchCount);
+        });
     }
 
-    private static void printRankStats(Map<Rank, Integer> matchingStats, Rank rank) {
-        System.out.printf("%d개 일치 (%d원)- %d개\n", rank.matchCount(), rank.reward(), matchingStats.get(rank));
+    private static void printRankResult(Rank rank, int matchCount) {
+        if (rank == Rank.SECOND) {
+            System.out.printf(SECOND_RANK_PRINT_FORMAT, rank.matchCount(), rank.reward(), matchCount);
+            return;
+        }
+        System.out.printf(DEFAULT_PRINT_FORMAT, rank.matchCount(), rank.reward(), matchCount);
     }
 
     public static void printWinningRatio(double winningRatio) {
