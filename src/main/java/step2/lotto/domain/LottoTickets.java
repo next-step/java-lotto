@@ -3,6 +3,7 @@ package step2.lotto.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import step2.lotto.LottoRandomNumberGenerator;
@@ -59,5 +60,11 @@ public class LottoTickets {
 		LottoTicket winningLottoTicket = LottoTicket.fromNumbers(winningNumbers);
 
 		return lottoWinningStatistic.calculateStatistic(winningLottoTicket);
+	}
+
+	public List<WinningCondition> match(LottoTicket winningLottoTicket) {
+		return lottoTickets.stream()
+			.map(ticket -> ticket.match(winningLottoTicket))
+			.collect(Collectors.toList());
 	}
 }

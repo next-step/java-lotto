@@ -38,9 +38,15 @@ public class LottoTicket {
 		return new LottoTicket(lottoNumberGenerator.generate());
 	}
 
-	public long countMatch(LottoTicket lottoTicket) {
-		return numbers.stream()
+	public int countMatch(LottoTicket lottoTicket) {
+		return (int)numbers.stream()
 			.filter(number -> lottoTicket.numbers.contains(number))
 			.count();
+	}
+
+	public WinningCondition match(LottoTicket winningLottoTicket) {
+		int count = countMatch(winningLottoTicket);
+
+		return WinningCondition.from(count);
 	}
 }
