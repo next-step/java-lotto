@@ -67,4 +67,8 @@ public class LottoTickets {
 			.map(ticket -> ticket.match(winningLottoTicket))
 			.collect(Collectors.toList());
 	}
+
+	public int getTotalPrice() {
+		return lottoTickets.size() * LottoTicket.PRICE;
+	}
 }

@@ -33,7 +33,7 @@ public class LottoWinningStatistic {
 
 	private double calculateProfitRate(LottoTicket answerLottoTicket) {
 		int totalPrize = calculateTotalPrize(answerLottoTicket);
-		int totalPrice = lottoTickets.getSize() * LottoTicket.PRICE;
+		int totalPrice = lottoTickets.getTotalPrice();
 
 		double ratio = (double) totalPrize / totalPrice;
 

@@ -73,7 +73,7 @@ public class LottoStatisticTest {
 		LottoWinningStatistic lottoWinningStatistic = LottoWinningStatistic.from(lottoTickets);
 		LottoWinningStatisticDto lottoWinningStatisticDto = lottoWinningStatistic.calculateStatistic(answerLottoTicket);
 
-		assertThat(lottoWinningStatisticDto.getProfitRate()).isEqualTo(1300.76);
+		assertThat(lottoWinningStatisticDto.getProfitRate()).isEqualTo(18210.64);
 	}
 
 	private LottoTickets getLottoTickets(Map<Integer, Integer> matchToCount) {
