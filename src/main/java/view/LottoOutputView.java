@@ -5,6 +5,11 @@ import static domain.WinningStatistics.THRESHOLD;
 
 import java.util.Collections;
 import java.util.List;
+<<<<<<< Updated upstream
+=======
+
+import domain.LottoResults;
+>>>>>>> Stashed changes
 import domain.WinningPrizes;
 import domain.WinningStatistics;
 
@@ -73,9 +78,10 @@ public class LottoOutputView {
         System.out.print(count + "개");
     }
 
-    public static void printLottoResults(int gameCount, List<List<Integer>> lottoResults) {
+    public static void printLottoResults(int gameCount, LottoResults lottoResults) {
+        List<List<Integer>> lottoResultList = lottoResults.lottoResultsToInt();
         printGameCount(gameCount);
-        for (List<Integer> lottoResult : lottoResults) {
+        for (List<Integer> lottoResult : lottoResultList) {
             Collections.sort(lottoResult);
             System.out.print("[");
             printEachLottoResult(lottoResult);

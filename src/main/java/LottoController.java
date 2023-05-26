@@ -1,6 +1,7 @@
 import java.util.List;
 
 import domain.LottoGame;
+import domain.LottoResults;
 import domain.ManualRequest;
 import domain.WinningStatistics;
 import view.LottoInputView;
@@ -15,9 +16,9 @@ public class LottoController {
     }
 
     public void lottoResults() {
-        List<List<Integer>> results = lottoGame.getLottoResultsToInt();
+        LottoResults lottoResults = lottoGame.getLottoResults();
         int gameCount = lottoGame.getCount();
-        LottoOutputView.printLottoResults(gameCount, results);
+        LottoOutputView.printLottoResults(gameCount, lottoResults);
     }
 
     public void winningStatistics() {
