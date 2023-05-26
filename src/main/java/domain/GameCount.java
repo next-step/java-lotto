@@ -1,8 +1,8 @@
 package domain;
 
 public class GameCount {
-    private int manualCount;
-    private int automaticCount;
+    private final int manualCount;
+    private final int automaticCount;
 
     public GameCount(int totalCount, int manualCount) {
         this.manualCount = manualCount;
