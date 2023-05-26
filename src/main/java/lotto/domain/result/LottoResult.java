@@ -19,9 +19,11 @@ public class LottoResult {
     }
 
     public void plusWinOfCount(Rank rank) {
-        Long winOfCount = result.get(rank);
-        winOfCount++;
-        result.put(rank, winOfCount);
+        result = result.entrySet().stream()
+                .collect(Collectors.groupingBy(
+                        Map.Entry::getKey,
+                        Collectors.summingLong(entry -> entry.getKey().equals(rank) ? entry.getValue() + 1L : entry.getValue())
+                ));
     }
 
     public int getTotalPrice() {
@@ -30,6 +32,13 @@ public class LottoResult {
             totalPrice = (int) (rank.getReward() * result.get(rank) + totalPrice);
         }
         return totalPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "LottoResult{" +
+                "result=" + result +
+                '}';
     }
 
     @Override
@@ -43,12 +52,5 @@ public class LottoResult {
     @Override
     public int hashCode() {
         return Objects.hash(result);
-    }
-
-    @Override
-    public String toString() {
-        return "LottoResult{" +
-                "result=" + result +
-                '}';
     }
 }
