@@ -7,7 +7,7 @@ import java.util.Map;
 public class LottoNumber {
     static final int LOTTO_NUM_LIMIT = 45;
 
-    private static final Map<Integer, LottoNumber> LOTTO_NUMBER_MAP = new HashMap<>();
+    static final Map<Integer, LottoNumber> LOTTO_NUMBER_MAP = new HashMap<>();
 
     static {
         for (int i = 1; i <= LOTTO_NUM_LIMIT; i++) {

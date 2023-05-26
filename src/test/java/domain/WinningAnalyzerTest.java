@@ -3,8 +3,11 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,27 +18,27 @@ public class WinningAnalyzerTest {
 
     @MethodSource("provideLottoList")
     @ParameterizedTest
-    public void 지난주_당첨번호를_입력하면_당첨통계를_제공한다(List<List<Integer>> lottoList, List<Integer> winningNumbers, int bonusNumber) throws Exception {
+    public void 지난주_당첨번호를_입력하면_당첨통계를_제공한다(List<Set<Integer>> lottosList, Set<Integer> winningNumbers, int bonusNumber) throws Exception {
         //given
-        LottoResults lottoResults = LottoResults.fromIntegers(lottoList);
+        LottoResults lottoResults = LottoResults.fromIntegers(lottosList);
         WinningAnalyzer winningAnalyzer = new WinningAnalyzer(lottoResults, winningNumbers, bonusNumber);
         //when
         WinningStatistics winningStatistics = winningAnalyzer.calculateWinningStatistics();
-        Map<WinningPrizeMatcher, Integer> result = winningStatistics.getWinningResults();
+        Map<WinningPrizes, Integer> result = winningStatistics.getWinningResults();
         //then
-        assertThat(result.get(WinningPrizeMatcher.ZERO)).isEqualTo(1);
-        assertThat(result.get(WinningPrizeMatcher.ONE)).isEqualTo(1);
-        assertThat(result.get(WinningPrizeMatcher.TWO)).isEqualTo(1);
-        assertThat(result.get(WinningPrizeMatcher.THREE)).isEqualTo(1);
-        assertThat(result.get(WinningPrizeMatcher.FOUR)).isEqualTo(1);
-        assertThat(result.get(WinningPrizeMatcher.FIVE)).isEqualTo(1);
-        assertThat(result.get(WinningPrizeMatcher.FIVE_BONUS)).isEqualTo(1);
-        assertThat(result.get(WinningPrizeMatcher.SIX)).isEqualTo(1);
+        assertThat(result.get(WinningPrizes.ZERO)).isEqualTo(1);
+        assertThat(result.get(WinningPrizes.ONE)).isEqualTo(1);
+        assertThat(result.get(WinningPrizes.TWO)).isEqualTo(1);
+        assertThat(result.get(WinningPrizes.THREE)).isEqualTo(1);
+        assertThat(result.get(WinningPrizes.FOUR)).isEqualTo(1);
+        assertThat(result.get(WinningPrizes.FIVE)).isEqualTo(1);
+        assertThat(result.get(WinningPrizes.FIVE_BONUS)).isEqualTo(1);
+        assertThat(result.get(WinningPrizes.SIX)).isEqualTo(1);
     }
 
     @MethodSource("provideLottoList")
     @ParameterizedTest
-    void 수익률을_반환한다(List<List<Integer>> lottoList, List<Integer> winningNumbers, int bonusNumber) {
+    void 수익률을_반환한다(List<Set<Integer>> lottoList, Set<Integer> winningNumbers, int bonusNumber) {
         //given
         LottoResults lottoResults = LottoResults.fromIntegers(lottoList);
         WinningAnalyzer winningAnalyzer = new WinningAnalyzer(lottoResults, winningNumbers, bonusNumber);
@@ -60,8 +63,8 @@ public class WinningAnalyzerTest {
                     Arrays.asList(1, 3, 15, 17, 29, 35 ), // 3등(5개 일치)
                     Arrays.asList(1, 3, 15, 17, 29, 30 ), // 2등(5개 일치) & 보너스 일치
                     Arrays.asList(1, 3, 15, 17, 29, 31 )// 1등(6개 일치)
-                ),
-                Arrays.asList(1, 3, 15, 17, 29, 31),
+                ).stream().map(HashSet::new).collect(Collectors.toList()),
+                new HashSet<>(Arrays.asList(1, 3, 15, 17, 29, 31)),
                 30
             )
         );

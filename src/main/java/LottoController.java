@@ -1,37 +1,20 @@
 import java.util.List;
+import java.util.Set;
 
-import domain.LottoGame;
-import domain.LottoResults;
-import domain.WinningAnalyzer;
-import domain.WinningStatistics;
+import domain.ManualRequest;
 import view.LottoInputView;
-import view.LottoOutputView;
 
 public class LottoController {
-    private LottoGame lottoGame;
-    private WinningAnalyzer winningAnalyzer;
 
-    public void playLottoGames(int money) {
-        lottoGame = new LottoGame();
-        lottoGame.generateLottoResultsFromMoney(money);
-    }
-
-    public void getLottoResults() {
-        List<List<Integer>> results = lottoGame.getLottoResults().lottoNumbersToInt();
-        int gameCount = lottoGame.getCount();
-        LottoOutputView.printLottoResults(gameCount, results);
-    }
-
-    public void getWinningStatistics() {
-        LottoResults lottoResults = lottoGame.getLottoResults();
-        winningAnalyzer = new WinningAnalyzer(lottoResults, LottoInputView.getWinningNumbers(), LottoInputView.getBonusNumber());
-        WinningStatistics winningStatistics = winningAnalyzer.calculateWinningStatistics();
-        LottoOutputView.printBeforeWinnings();
-        LottoOutputView.printWinnings(winningStatistics);
-    }
-
-    public void getReturnOnInvestment() {
-        int money = lottoGame.getMoney();
-        LottoOutputView.printReturnOnInvestment(winningAnalyzer.getReturnOnInvestment(money));
+    public static void main(String[] args) {
+        int money = LottoInputView.getMoney();
+        int manualCount = LottoInputView.getManualCount();
+        List<Set<Integer>> manualNumbers = LottoInputView.getManualLottos(manualCount);
+        LottoService lottoService = new LottoService();
+        ManualRequest manualRequest = new ManualRequest(manualCount, manualNumbers);
+        lottoService.playLottoGames(manualRequest, money);
+        lottoService.lottoResults();
+        lottoService.winningStatistics();
+        lottoService.returnOnInvestment();
     }
 }

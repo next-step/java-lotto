@@ -1,7 +1,9 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class LottoResult {
     private List<LottoNumber> lottoResult;
@@ -14,10 +16,11 @@ public class LottoResult {
         this.lottoResult = lottoNumbers;
     }
 
-    public static LottoResult fromIntegers(List<Integer> lottoIntegers) {
+    public static LottoResult fromIntegers(Set<Integer> lottoIntegers) {
         LottoResult lottoResult = new LottoResult();
-        for (int i = 0; i < lottoIntegers.size(); i++) {
-            lottoResult.lottoResult.add(LottoNumber.from(lottoIntegers.get(i)));
+        Iterator<Integer> iterator = lottoIntegers.iterator();
+        while (iterator.hasNext()) {
+            lottoResult.lottoResult.add(LottoNumber.from(iterator.next()));
         }
         return lottoResult;
     }
@@ -37,5 +40,15 @@ public class LottoResult {
             lottoNumbers.add(num);
         }
         return lottoNumbers;
+    }
+
+    public int calculateCount(WinningNumbers winningNumbers) {
+        int count = 0;
+        return lottoResult.stream().mapToInt(num -> num.addCountIfContain(count, winningNumbers)).sum();
+    }
+
+    public boolean isBonusMatch(BonusNumber bonusNumber) {
+        return lottoResult.stream()
+                   .anyMatch(lottoNumber -> bonusNumber.isBonusMatch(lottoNumber));
     }
 }
