@@ -9,6 +9,6 @@ public class LottoBuyTest {
     void 로또_구매() {
         LottoBuy lottoBuy = new LottoBuy(14000);
 
-        Assertions.assertThat(lottoBuy.lottoCountIsEqualTo(14)).isTrue();
+        Assertions.assertThat(lottoBuy.lottoBuyCountIsEqualTo(14)).isTrue();
     }
 }
