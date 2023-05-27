@@ -20,8 +20,8 @@ public class ResultView {
         }
     }
 
-    public static void printLottoCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    public static void printLottoCount(int menualCount, int automaticCount) {
+        System.out.println("수동으로 " + menualCount + "장, 자동으로 " + automaticCount + "개를 구매했습니다.");
     }
 
     public static void printLottoStatistic(LottoResult lottoResult) {

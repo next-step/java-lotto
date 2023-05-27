@@ -34,10 +34,10 @@ class LottoResultTest {
     }
 
     @Test
-    @DisplayName(value = "결과 랭크와 일치하는 랭크 개수 증가 검사")
+    @DisplayName(value = "결과 랭크와 일치하는 랭크 개수 증가한 후 result 재설정 검사")
     void test2() {
         // given
-        lottoResult.plusWinOfCount(Rank.FOURTH);
+        lottoResult.resetResult(Rank.FOURTH);
 
         // then
         assertThat(lottoResult.getLottoResult().get(Rank.FOURTH)).isEqualTo(1);

@@ -10,7 +10,7 @@ public class WinningLotto {
     private Lotto winningLotto;
     private int bonusNumber;
 
-    public WinningLotto(List<Integer> lotto, int bonusNumber) {
+    public WinningLotto(List<LottoNumber> lotto, int bonusNumber) {
         this.winningLotto = new Lotto(lotto);
         this.bonusNumber = bonusNumber;
     }
@@ -22,7 +22,7 @@ public class WinningLotto {
     public LottoResult getLottoResult(List<Lotto> lottoList) {
         LottoResult lottoResult = LottoResult.of();
         for (Lotto lotto : lottoList) {
-            lottoResult.plusWinOfCount(getRank(lotto));
+            lottoResult.resetResult(getRank(lotto));
         }
         return lottoResult;
     }

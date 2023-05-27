@@ -52,12 +52,4 @@ class LottoTest {
         });
     }
 
-    @Test
-    @DisplayName(value = "입력 로또 번호 범위가 안 맞을 경우 검사")
-    void test5() {
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            Lotto.of(Arrays.asList(0, 1, 2, 3, 4, 5));
-            Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 46));
-        });
-    }
 }

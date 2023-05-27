@@ -1,6 +1,8 @@
 package lotto.domain.result;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.ToLongFunction;
 import java.util.stream.Collectors;
 
 public class LottoResult {
@@ -18,10 +20,13 @@ public class LottoResult {
         return Collections.unmodifiableMap(result);
     }
 
-    public void plusWinOfCount(Rank rank) {
-        Long winOfCount = result.get(rank);
-        winOfCount++;
-        result.put(rank, winOfCount);
+    public void resetResult(Rank rank) {
+        result = rank.convertToList().stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.summingLong(getRankToLongFunction(rank))));
+    }
+
+    private ToLongFunction<Rank> getRankToLongFunction(Rank rank) {
+        return value -> value.equals(rank) ? result.get(value) + 1L : result.get(value);
     }
 
     public int getTotalPrice() {
@@ -30,6 +35,13 @@ public class LottoResult {
             totalPrice = (int) (rank.getReward() * result.get(rank) + totalPrice);
         }
         return totalPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "LottoResult{" +
+                "result=" + result +
+                '}';
     }
 
     @Override
@@ -43,12 +55,5 @@ public class LottoResult {
     @Override
     public int hashCode() {
         return Objects.hash(result);
-    }
-
-    @Override
-    public String toString() {
-        return "LottoResult{" +
-                "result=" + result +
-                '}';
     }
 }

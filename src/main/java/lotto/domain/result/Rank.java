@@ -1,6 +1,8 @@
 package lotto.domain.result;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
@@ -26,6 +28,10 @@ public enum Rank {
                 .filter(rank -> rank.getHit() == hit)
                 .findFirst()
                 .orElse(NO_RANK);
+    }
+
+    public List<Rank> convertToList() {
+        return Arrays.stream(Rank.values()).collect(Collectors.toList());
     }
 
     public int getHit() {
