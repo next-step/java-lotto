@@ -33,4 +33,8 @@ public class Ticket {
     public List<Integer> getNumbers() {
         return numbers;
     }
+
+    public boolean isContainNumber(int num){
+        return numbers.contains(num);
+    }
 }

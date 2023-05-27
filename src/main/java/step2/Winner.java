@@ -44,11 +44,10 @@ public class Winner {
         return new Ticket(winnerNumbers);
     }
 
-    private void oneTicketCheck(Ticket ticket, Ticket winnerTicket, int bonus) {
+    private void oneTicketCheck(Ticket oneTicket, Ticket winnerTicket, int bonus) {
         int matchCount = 0;
         boolean isBonusMatch = false;
 
-        List<Integer> oneTicket = ticket.getNumbers();
         for (Integer num : winnerTicket.getNumbers()) {
             matchCount += isTicketContainsNumber(oneTicket, num);
         }
@@ -60,15 +59,15 @@ public class Winner {
         plusWinnerMapCount(matchCount, isBonusMatch);
     }
 
-    private int isTicketContainsNumber(List<Integer> oneTicket, Integer num) {
-        if(oneTicket.contains(num)){
+    private int isTicketContainsNumber(Ticket oneTicket, Integer num) {
+        if(oneTicket.isContainNumber(num)){
             return 1;
         }
         return 0;
     }
 
-    private boolean isTicketContainsNumber_bonus(List<Integer> oneTicket, Integer num) {
-        if(oneTicket.contains(num)){
+    private boolean isTicketContainsNumber_bonus(Ticket oneTicket, Integer num) {
+        if(oneTicket.isContainNumber(num)){
             return true;
         }
         return false;
