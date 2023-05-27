@@ -24,7 +24,6 @@ public class Ticket {
     }
 
     private static void numbersCheck(List<Integer> numbers) {
-        System.out.println("numbers.size() = " + numbers.size());
         if(numbers.size() != NUMBER_LIMIT){
             throw new IllegalArgumentException("로또는 6개의 숫자여야합니다.");
         }

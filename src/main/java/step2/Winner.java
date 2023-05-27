@@ -11,26 +11,20 @@ public class Winner {
 
     public static final int WINNER_COUNT_MINIMUM = 3;
 
-    private static Map<String, Integer> winnerMap = new HashMap<>();
+    Ticket winnerTicket;
+    int bonus;
 
-    public Map<String, Integer> findWinner(List<Ticket> tickets, String winnerString, int bonus) {
-        winnerMapInit();
+    public Map<String, Integer> findWinner(List<Ticket> tickets, String winnerString, int bonusNum) {
+        WinnerMap.winnerMapInit();
 
-        Ticket winnerTicket = makeWinnerTicket(winnerString);
+        this.winnerTicket = makeWinnerTicket(winnerString);
+        this.bonus = bonusNum;
 
         for (Ticket ticket : tickets) {
-            oneTicketCheck(ticket, winnerTicket, bonus);
+            oneTicketCheck(ticket);
         }
 
-        return winnerMap;
-    }
-
-    private static void winnerMapInit() {
-        winnerMap.put(FIFTH.name(), 0);
-        winnerMap.put(FOURTH.name(), 0);
-        winnerMap.put(THIRD.name(), 0);
-        winnerMap.put(SECOND.name(), 0);
-        winnerMap.put(FIRST.name(), 0);
+        return WinnerMap.getWinnerMap();
     }
 
     private Ticket makeWinnerTicket(String winnerString) {
@@ -44,7 +38,7 @@ public class Winner {
         return new Ticket(winnerNumbers);
     }
 
-    private void oneTicketCheck(Ticket oneTicket, Ticket winnerTicket, int bonus) {
+    private void oneTicketCheck(Ticket oneTicket) {
         int matchCount = 0;
         boolean isBonusMatch = false;
 
@@ -56,7 +50,10 @@ public class Winner {
             isBonusMatch = isTicketContainsNumber_bonus(oneTicket, bonus);
         }
 
-        plusWinnerMapCount(matchCount, isBonusMatch);
+        if(matchCount >= WINNER_COUNT_MINIMUM){
+            LottoMatch lottoMatch = LottoMatch.valueOf(matchCount, isBonusMatch);
+            WinnerMap.plusWinnerMapCount(lottoMatch, matchCount);
+        }
     }
 
     private int isTicketContainsNumber(Ticket oneTicket, Integer num) {
@@ -73,10 +70,4 @@ public class Winner {
         return false;
     }
 
-    private void plusWinnerMapCount(int matchCount, boolean isBonusMatch) {
-        if(matchCount >= WINNER_COUNT_MINIMUM){
-            LottoMatch lottoMatch = LottoMatch.valueOf(matchCount, isBonusMatch);
-            winnerMap.put(lottoMatch.name(), winnerMap.get(lottoMatch.name())+1);
-        }
-    }
 }

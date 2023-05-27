@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
+import static step2.LottoMatch.*;
 
 public class WinnerTest {
 
@@ -33,10 +34,11 @@ public class WinnerTest {
     @Test
     void 당첨_개수() {
         Map<String, Integer> winnerMap = winner.findWinner(tickets, "1, 2, 3, 4, 5, 6", 7);
-        assertThat(winnerMap.get(3)).isEqualTo(2);
-        assertThat(winnerMap.get(4)).isEqualTo(1);
-        assertThat(winnerMap.get(5)).isEqualTo(0);
-        assertThat(winnerMap.get(6)).isEqualTo(0);
+        System.out.println("winnerMap = " + winnerMap);
+        assertThat(winnerMap.get(FIFTH.name())).isEqualTo(2);
+        assertThat(winnerMap.get(FOURTH.name())).isEqualTo(1);
+        assertThat(winnerMap.get(THIRD.name())).isEqualTo(0);
+        assertThat(winnerMap.get(FIRST.name())).isEqualTo(0);
     }
 
 }
