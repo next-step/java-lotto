@@ -16,7 +16,7 @@ public class LottoGame {
         InputView.printLottoInput();
         var priceInput = InputView.intInput();
 
-        Lottos lottos = new Lottos(calculateLottoSize(priceInput), new LottoBallPolicy(), LOTTO_PRICE);
+        Lottos lottos = new Lottos(priceInput, LOTTO_PRICE, new LottoBallPolicy());
 
         // 로또 출력
         ResultView.printLottosCount(lottos.getLottoListSize());
@@ -47,13 +47,5 @@ public class LottoGame {
             list.add(Number.createNumber(string.trim()));
         }
         return list;
-    }
-
-    public static void addBonusNumber(int bonusNumber, List<Number> numberList) {
-        numberList.add(new Number(bonusNumber));
-    }
-
-    public static int calculateLottoSize(int inputPrice) {
-        return inputPrice / LOTTO_PRICE;
     }
 }

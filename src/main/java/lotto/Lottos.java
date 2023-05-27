@@ -8,13 +8,17 @@ public class Lottos {
 
     private List<Lotto> lottoList;
 
-    public Lottos(int count, LottoBallPolicy lottoBallPolicy, int price) {
+    public Lottos(int totalPrice, int price, LottoBallPolicy lottoBallPolicy) {
         lottoList = new ArrayList<>();
 
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < calculateLottoSize(totalPrice, price); i++) {
             lottoBallPolicy.getLottoNumber(Lotto.getMaxSize());
             lottoList.add(createLottoByPolicy(lottoBallPolicy, price));
         }
+    }
+
+    private int calculateLottoSize(int totalPrice, int price){
+        return totalPrice / price;
     }
 
     public Lotto createLottoByPolicy(LottoBallPolicy lottoBallPolicy, int price) {
