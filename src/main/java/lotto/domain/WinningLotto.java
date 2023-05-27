@@ -22,7 +22,7 @@ public class WinningLotto {
     public LottoResult getLottoResult(List<Lotto> lottoList) {
         LottoResult lottoResult = LottoResult.of();
         for (Lotto lotto : lottoList) {
-            lottoResult.plusWinOfCount(getRank(lotto));
+            lottoResult.resetResult(getRank(lotto));
         }
         return lottoResult;
     }

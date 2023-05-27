@@ -1,6 +1,7 @@
 package lotto.domain.result;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoResult {
@@ -18,12 +19,9 @@ public class LottoResult {
         return Collections.unmodifiableMap(result);
     }
 
-    public void plusWinOfCount(Rank rank) {
-        result = result.entrySet().stream()
-                .collect(Collectors.groupingBy(
-                        Map.Entry::getKey,
-                        Collectors.summingLong(entry -> entry.getKey().equals(rank) ? entry.getValue() + 1L : entry.getValue())
-                ));
+    public void resetResult(Rank rank) {
+        result = Rank.convertToList().stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.summingLong(value -> value.equals(rank) ? result.get(value) + 1L : result.get(value))));
     }
 
     public int getTotalPrice() {
