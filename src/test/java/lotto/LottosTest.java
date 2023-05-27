@@ -9,10 +9,11 @@ public class LottosTest {
 
     Lottos lottos;
     private static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_COUNT = 10;
 
     @BeforeEach
     public void init() {
-        lottos = new Lottos(10, new LottoBallPolicy(), LOTTO_PRICE);
+        lottos = new Lottos(LOTTO_COUNT * LOTTO_PRICE, LOTTO_PRICE, new LottoBallPolicy());
     }
 
     @Test

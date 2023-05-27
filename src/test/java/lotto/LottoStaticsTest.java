@@ -1,6 +1,5 @@
 package lotto;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -9,26 +8,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoStaticsTest {
 
-    LottoStatics lottoStatics;
-
     Lottos lottos;
 
     private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_COUNT = 10;
 
-    @BeforeEach
-    public void init() {
-        lottoStatics = new LottoStatics();
-    }
-
     @Test
     void getProfitRatio() {
-        List<Number> winningList = Number.createNumberList(List.of(1,2,3,4,5,6,7));
+        List<Number> winningList = Number.createNumberList(List.of(1,2,3,4,5,6));
         List<Number> balls = Number.createNumberList(List.of(1,2,3,4,11,10));
 
-        lottos = new Lottos(LOTTO_COUNT, new LottoBallPolicy(balls), LOTTO_PRICE);
+        Number lottoBonusNumber = new Number(7);
 
-        var actual = lottoStatics.getProfitRatio(WinnigLotto.createLotto(winningList), lottos);
+        lottos = new Lottos(LOTTO_COUNT * LOTTO_PRICE, LOTTO_PRICE, new LottoBallPolicy(balls));
+        LottoStatics lottoStatics = new LottoStatics(WinnigLotto.createLotto(winningList, lottoBonusNumber), lottos);
+
+        var actual = lottoStatics.getProfitRatio();
         var expect = "50.0" ;
 
         assertThat(actual).isEqualTo(expect);
@@ -36,12 +31,15 @@ public class LottoStaticsTest {
 
     @Test
     void getProfitRatio_보너스번호() {
-        List<Number> winningList = Number.createNumberList(List.of(1,2,3,4,5,6,10));
+        List<Number> winningList = Number.createNumberList(List.of(1,2,3,4,5,6));
         List<Number> balls = Number.createNumberList(List.of(1,2,3,4,11,10));
 
-        lottos = new Lottos(LOTTO_COUNT, new LottoBallPolicy(balls), LOTTO_PRICE);
+        Number lottoBonusNumber = new Number(10);
 
-        var actual = lottoStatics.getProfitRatio(WinnigLotto.createLotto(winningList), lottos);
+        lottos = new Lottos(LOTTO_COUNT * LOTTO_PRICE, LOTTO_PRICE, new LottoBallPolicy(balls));
+        LottoStatics lottoStatics = new LottoStatics(WinnigLotto.createLotto(winningList, lottoBonusNumber), lottos);
+
+        var actual = lottoStatics.getProfitRatio();
         var expect = "30500.0" ;
 
         assertThat(actual).isEqualTo(expect);
@@ -49,12 +47,15 @@ public class LottoStaticsTest {
 
     @Test
     void getNumberCount() {
-        List<Number> winningList = Number.createNumberList(List.of(1,2,3,4,5,6,7));
+        List<Number> winningList = Number.createNumberList(List.of(1,2,3,4,5,6));
         List<Number> balls = Number.createNumberList(List.of(1,2,3,4,11,10));
 
         LottoBallPolicy lottoBallPolicy = new LottoBallPolicy(balls);
-        lottos = new Lottos(LOTTO_COUNT, lottoBallPolicy, LOTTO_PRICE);
-        lottoStatics.calculateProfitStatistics(WinnigLotto.createLotto(winningList), lottos);
+        lottos = new Lottos(LOTTO_COUNT * LOTTO_PRICE, LOTTO_PRICE, lottoBallPolicy);
+
+        Number lottoBonusNumber = new Number(7);
+
+        LottoStatics lottoStatics = new LottoStatics(WinnigLotto.createLotto(winningList, lottoBonusNumber), lottos);
 
         var actual = lottoStatics.getNumberCount(Number.createNumber(4));
         var expect = 10;
