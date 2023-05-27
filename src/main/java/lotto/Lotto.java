@@ -31,7 +31,7 @@ public class Lotto {
                 .count();
     }
 
-    public boolean isEqualsBonusNumber(Number bonusNumber){
+    public boolean matchBonusNumber(Number bonusNumber){
         return lottoNumbers.stream()
                 .anyMatch(t -> t.equals(bonusNumber));
     }
