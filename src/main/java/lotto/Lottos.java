@@ -45,10 +45,10 @@ public class Lottos {
         return lottoList.size();
     }
 
-    public int getLottoTotalPrice(){
+    public int getLottoPrice() {
         return lottoList.stream()
                 .map(Lotto::getPrice)
-                .reduce(Integer::sum)
+                .findFirst()
                 .orElse(0);
     }
 }

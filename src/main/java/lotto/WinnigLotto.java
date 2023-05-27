@@ -6,19 +6,20 @@ import java.util.List;
 public class WinnigLotto {
 
     private List<Number> lottoNumbers;
+    private Number lottoBonusNumber;
 
-    private static final int SIZE = 7;
-    private static final int BASIC_NUMBER_SIZE = 6;
+    private static final int SIZE = 6;
 
-    private WinnigLotto(List<Number> lottoNumbers) {
+    private WinnigLotto(List<Number> lottoNumbers, Number lottoBonusNumber) {
         this.lottoNumbers = lottoNumbers;
+        this.lottoBonusNumber  = lottoBonusNumber;
     }
 
-    public static WinnigLotto createLotto(List<Number> list) {
+    public static WinnigLotto createLotto(List<Number> list, Number lottoBonusNumber) {
         if (list.size() > SIZE) {
-            throw new IllegalArgumentException("로또 번호는 7개 까지 입니다.");
+            throw new IllegalArgumentException("로또 번호는 6개 까지 입니다.");
         }
-        return new WinnigLotto(list);
+        return new WinnigLotto(list, lottoBonusNumber);
     }
 
     public List<Number> getWinnigLottoNumbers() {
@@ -26,6 +27,6 @@ public class WinnigLotto {
     }
 
     public Number getLottoBonusNumber() {
-        return lottoNumbers.get(SIZE-1);
+        return lottoBonusNumber;
     }
 }

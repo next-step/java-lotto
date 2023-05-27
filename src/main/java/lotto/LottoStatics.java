@@ -7,19 +7,26 @@ public class LottoStatics {
 
     private HashMap<Number, Integer> basicStatistics;
     private HashMap<Number, Integer> bonusStatistics;
+    private final int lottoPrice;
 
-    public LottoStatics() {
+    public String getProfitRatio() {
+        double sum = calculateProfitSum();
+        return calculateProfitRatio(sum);
     }
 
-    public String getProfitRatio(WinnigLotto winningLotto, Lottos lottos) {
-        double sum = calculateProfitSum(winningLotto, lottos.getLottoList());
-        return String.valueOf(sum / lottos.getLottoTotalPrice());
+    private String calculateProfitRatio(double sum) {
+        int matchedCount = basicStatistics.size() + bonusStatistics.size();
+        if(matchedCount == 0) {
+            return "0";
+        }
+        return String.valueOf(sum / lottoPrice / matchedCount);
     }
 
-    public void calculateProfitStatistics(WinnigLotto winningLotto, Lottos lottos) {
+    public LottoStatics(WinnigLotto winningLotto, Lottos lottos) {
         basicStatistics = new HashMap<>();
         bonusStatistics = new HashMap<>();
 
+        lottoPrice = lottos.getLottoPrice();
         List<StatisticsNumber> matchedCount = lottos.matchedLottoCount(winningLotto);
 
         for (StatisticsNumber staticNumber : matchedCount) {
@@ -38,13 +45,17 @@ public class LottoStatics {
         }
     }
 
-    private double calculateProfitSum(WinnigLotto winningLotto, List<Lotto> lottoList) {
+    private double calculateProfitSum() {
         double sum = 0;
-        for (Lotto lotto : lottoList) {
-            int matchedCount = lotto.equalsCount(winningLotto.getWinnigLottoNumbers());
-            boolean isBonusMatched = lotto.isEqualsBonusNumber(winningLotto.getLottoBonusNumber());
-            sum += LottoPricePolicy.getLottoPriceByMatchCount(matchedCount, isBonusMatched);
+
+        for (Number number : basicStatistics.keySet()){
+            sum += LottoPricePolicy.getLottoPriceByMatchCount(number.getNumberToInt(), false);
         }
+
+        for (Number number : bonusStatistics.keySet()){
+            sum += LottoPricePolicy.getLottoPriceByMatchCount(number.getNumberToInt(), true);
+        }
+
         return sum;
     }
 

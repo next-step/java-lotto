@@ -29,15 +29,13 @@ public class LottoGame {
 
         // 보너스 로또 번호 입력
         InputView.printLottoWinningBonusNumberInput();
-        var bonusNumber = InputView.intInput();
-        addBonusNumber(bonusNumber, winningNumberList);
+        var bonusNumber = new Number(InputView.intInput());
 
         // 통계
-        LottoStatics lottoStatics = new LottoStatics();
-        lottoStatics.calculateProfitStatistics(WinnigLotto.createLotto(winningNumberList), lottos);
+        LottoStatics lottoStatics = new LottoStatics(WinnigLotto.createLotto(winningNumberList, bonusNumber), lottos);
         ResultView.printStatics(lottoStatics);
 
-        var ratio = lottoStatics.getProfitRatio(WinnigLotto.createLotto(winningNumberList), lottos);
+        var ratio = lottoStatics.getProfitRatio();
         ResultView.printLottosProfit(ratio);
     }
 

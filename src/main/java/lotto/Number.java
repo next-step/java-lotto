@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class Number implements Comparable<Number> {
     private int number;
 
-가    public Number(int number) {
+    public Number(int number) {
         if (number < 0) {
             throw new IllegalArgumentException("로또 번호는 음수가 될 수 없습니다.");
         }
@@ -31,6 +31,10 @@ public class Number implements Comparable<Number> {
 
     public String getNumberToString() {
         return String.valueOf(number);
+    }
+
+    public int getNumberToInt() {
+        return number;
     }
 
     @Override
