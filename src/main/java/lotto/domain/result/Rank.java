@@ -30,7 +30,7 @@ public enum Rank {
                 .orElse(NO_RANK);
     }
 
-    public static List<Rank> convertToList() {
+    public List<Rank> convertToList() {
         return Arrays.stream(Rank.values()).collect(Collectors.toList());
     }
 

@@ -2,6 +2,7 @@ package lotto.domain.result;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.ToLongFunction;
 import java.util.stream.Collectors;
 
 public class LottoResult {
@@ -20,8 +21,12 @@ public class LottoResult {
     }
 
     public void resetResult(Rank rank) {
-        result = Rank.convertToList().stream()
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.summingLong(value -> value.equals(rank) ? result.get(value) + 1L : result.get(value))));
+        result = rank.convertToList().stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.summingLong(getRankToLongFunction(rank))));
+    }
+
+    private ToLongFunction<Rank> getRankToLongFunction(Rank rank) {
+        return value -> value.equals(rank) ? result.get(value) + 1L : result.get(value);
     }
 
     public int getTotalPrice() {
