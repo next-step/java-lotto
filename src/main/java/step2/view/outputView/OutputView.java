@@ -9,14 +9,14 @@ import java.util.Map;
 
 public class OutputView {
 
-    public static void printResult(Map<Double, Integer> winnerMap, double rate){
+    public static void printResult(Map<String, Integer> winnerMap, double rate){
         System.out.println("당첨 통계");
         System.out.println("---------");
 
         for (LottoMatch lottoMatch : LottoMatch.values()){
             String resultText = (int)lottoMatch.getMatchCount() + "개 일치";
             resultText += addBonusText(lottoMatch.getMatchCount());
-            resultText += " (" + lottoMatch.getReward() + ")- " + winnerMap.get(lottoMatch.getMatchCount()) + "개";
+            resultText += " (" + lottoMatch.getReward() + ")- " + winnerMap.get(lottoMatch.name()) + "개";
             System.out.println(resultText);
         }
         System.out.println("총 수익률은 " + rate + "입니다.");

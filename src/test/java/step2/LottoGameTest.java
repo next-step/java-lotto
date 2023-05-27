@@ -43,7 +43,7 @@ public class LottoGameTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(()-> {
                     lottoGame.makeTickets(100);
-                }).withMessageMatching("1000원 이하로 입력.");
+                }).withMessageMatching("1000원 이하로 입력했습니다.");
     }
 
     @DisplayName("입력한 가격만큼 로또 n개 생성")
@@ -56,7 +56,7 @@ public class LottoGameTest {
     @DisplayName("입력한 금액 대비 얻은 수익률 구하기")
     @Test
     void 수익률() {
-        Map<Double, Integer> winnerMap = winner.findWinner(tickets, "1, 2, 3, 4, 5, 6", 7);
+        Map<String, Integer> winnerMap = winner.findWinner(tickets, "1, 2, 3, 4, 5, 6", 7);
         assertThat(lottoGame.resultRate(9000, winnerMap)).isEqualTo(6.66);
     }
 

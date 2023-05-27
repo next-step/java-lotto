@@ -18,7 +18,7 @@ public class LottoMain {
 
         String winningNumber = InputView.inputString("지난 주 당첨 번호를 입력해 주세요.");
         int bonus = InputView.inputNumber("보너스 볼을 입력해 주세요.");
-        Map<Double, Integer> winnerMap = winner.findWinner(tickets, winningNumber, bonus);
+        Map<String, Integer> winnerMap = winner.findWinner(tickets, winningNumber, bonus);
 
         OutputView.printResult(winnerMap, lottoGame.resultRate(money, winnerMap));
     }

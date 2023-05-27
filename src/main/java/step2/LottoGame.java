@@ -26,11 +26,10 @@ public class LottoGame {
         }
     }
 
-    public double resultRate(int money, Map<Double, Integer> winnerMap){
+    public double resultRate(int money, Map<String, Integer> winnerMap){
         int winningAmounts = 0;
-
         for(LottoMatch lottoMatch : LottoMatch.values()){
-            winningAmounts += winnerMap.get(lottoMatch.getMatchCount()) * lottoMatch.getReward();
+            winningAmounts += winnerMap.get(lottoMatch.name()) * lottoMatch.getReward();
         }
 
         double rate = (double)winningAmounts / (double)money;

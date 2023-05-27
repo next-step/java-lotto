@@ -12,8 +12,10 @@ public class Ticket {
 
     private List<Integer> numbers;
 
-    public Ticket() {
-        createTicket();
+    public Ticket(List<Integer> numbers){
+        numbersCheck(numbers);
+        Collections.sort(numbers);
+        this.numbers = numbers;
     }
 
     public static Ticket createTicket() {
@@ -21,13 +23,8 @@ public class Ticket {
         return new Ticket(new ArrayList<>(lottoNumber.subList(0, NUMBER_LIMIT)));
     }
 
-    public Ticket(List<Integer> numbers){
-        numbersCheck(numbers);
-        Collections.sort(numbers);
-        this.numbers = numbers;
-    }
-
     private static void numbersCheck(List<Integer> numbers) {
+        System.out.println("numbers.size() = " + numbers.size());
         if(numbers.size() != NUMBER_LIMIT){
             throw new IllegalArgumentException("로또는 6개의 숫자여야합니다.");
         }
