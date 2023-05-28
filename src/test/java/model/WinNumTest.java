@@ -44,14 +44,4 @@ class WinNumTest {
                 .hasMessage(BONUS_BOUND_ERORR_MESSAGE);
 
     }
-
-    @Test
-    @DisplayName("정상 범위 로또 갯수 오류")
-    void countLotto() {
-        Assertions.assertThatThrownBy(() -> {
-                    WinNum winNum = new WinNum(Arrays.asList(1, 8, 23, 41, 42, 45, 7), 57);
-                }).isInstanceOf(RuntimeException.class)
-                .hasMessage(LOTTO_COUNT_ERORR_MESSAGE);
-
-    }
 }

@@ -2,28 +2,33 @@ package view.result;
 
 import model.LotteryStatics;
 import model.Lotto;
+import model.Lottos;
 import model.Rank;
 
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 public class ResultView {
 
     private ResultView() {
     }
 
-    public static void printLottoInfo(List<Lotto> Input) {
-        resultBuyInputCount(Input.size());
-        getLotto(Input);
+    public static void printLottoInfo(Lottos passiveLottos, Lottos autoLottos) {
+        resultBuyInputCount(passiveLottos.getLottos().size(), autoLottos.getLottos().size());
+        getLotto(passiveLottos.getLottos());
+        getLotto(autoLottos.getLottos());
     }
 
-    private static void resultBuyInputCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    private static void resultBuyInputCount(int passiveCount, int autoCount) {
+        System.out.println("수동으로 " + passiveCount + "장, 자동으로" + autoCount + " 장을 구매했습니다.");
     }
 
     private static void getLotto(List<Lotto> Input) {
         for (Lotto lotto : Input) {
-            System.out.println(lotto.getLotto());
+            System.out.println(lotto.getWinNumIntegerType());
         }
     }
 
@@ -42,7 +47,7 @@ public class ResultView {
         Arrays.sort(ranks, Collections.reverseOrder()); // 역순으로 정렬
 
         for (Rank rank : ranks) {
-            int count = Optional.ofNullable(winCount.get(rank)).orElse(0);
+            int count = winCount.getOrDefault(rank, 0);
             if (rank != rank.MISS) {
                 System.out.println(printLottoResult(rank, count));
             }

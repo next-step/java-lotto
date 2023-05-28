@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LotteryStatics {
-    private Map<Rank, Integer> lotteryStatics = new HashMap<>();
+    private final Map<Rank, Integer> lotteryStatics = new HashMap<>();
     private double gross;
 
     public LotteryStatics(int buyAmount, Lottos lottos, WinNum winNum) {
@@ -23,7 +23,7 @@ public class LotteryStatics {
 
     public int getTotalPrice() {
         int sum = 0;
-        for (Map.Entry<Rank, Integer> entry : this.lotteryStatics.entrySet()) {
+        for (var entry : this.lotteryStatics.entrySet()) {
             Rank rank = entry.getKey();
             int count = entry.getValue();
             sum += rank.getWinningMoney() * count;
