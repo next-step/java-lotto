@@ -57,7 +57,7 @@ public class LottoStaticsTest {
 
         LottoStatics lottoStatics = new LottoStatics(WinnigLotto.createLotto(winningList, lottoBonusNumber), lottos);
 
-        var actual = lottoStatics.getNumberCount(Number.createNumber(4));
+        var actual = lottoStatics.getNumberCount(LottoPricePolicy.FIFTH);
         var expect = 10;
 
         assertThat(actual).isEqualTo(expect);
