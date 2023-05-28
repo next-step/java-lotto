@@ -1,6 +1,6 @@
 package lotto.main;
 
-import lotto.domain.LottoGameService;
+import lotto.service.LottoGameService;
 import lotto.exception.TicketNumberOutOfBoundException;
 import lotto.exception.TicketPriceOutOfBoundException;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,19 +1,22 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Map;
 
 public class WinningStatus {
-    private final Map<PrizeType, Integer> winningStatus;
+    private final Map<Prize, Integer> winningStatus;
 
-    private WinningStatus(Map<PrizeType, Integer> winningStatus) {
+    private WinningStatus(Map<Prize, Integer> winningStatus) {
         this.winningStatus = winningStatus;
     }
 
-    public static WinningStatus from(Map<PrizeType, Integer> winningStatus) {
-        return new WinningStatus(winningStatus);
+    public static WinningStatus from(List<Prize> prizeTypesOfTickets) {
+        Map<Prize, Integer> map = Prize.winningStatus(prizeTypesOfTickets);
+        return new WinningStatus(map);
     }
 
-    public int countOfPrize(PrizeType prizeType) {
-        return winningStatus.get(prizeType);
+
+    public int countOfPrize(Prize prize) {
+        return winningStatus.get(prize);
     }
 }

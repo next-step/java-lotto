@@ -5,7 +5,7 @@ import lotto.domain.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.PrizeType.*;
+import static lotto.domain.Prize.*;
 
 public class ResultView {
     public static void printTickets(LottoTickets lottoTickets) {

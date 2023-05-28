@@ -1,8 +1,11 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public enum PrizeType {
+public enum Prize {
     FIRST_PRIZE(6, false, 2_000_000_000),
 
     SECOND_PRIZE(5, true, 300_000_000),
@@ -19,7 +22,7 @@ public enum PrizeType {
     private final Boolean bonusMatching;
     private final Long prize;
 
-    PrizeType(int numberOfMatching, boolean bonusMatching, long prize) {
+    Prize(int numberOfMatching, boolean bonusMatching, long prize) {
         this.numberOfMatching = numberOfMatching;
         this.bonusMatching = bonusMatching;
         this.prize = prize;
@@ -29,11 +32,24 @@ public enum PrizeType {
         return numberOfMatching;
     }
 
-    public static PrizeType create(int numberOfMatching, boolean bonusMatching) {
-        return Arrays.stream(PrizeType.values())
+    public static Prize create(int numberOfMatching, boolean bonusMatching) {
+        return Arrays.stream(Prize.values())
                 .filter(p -> p.numberOfMatching == numberOfMatching && p.bonusMatching == bonusMatching)
                 .findFirst()
                 .orElse(NOT_MATCHING);
+    }
+
+    public static Map<Prize, Integer> winningStatus(List<Prize> prizeTypesOfTickets) {
+        Map<Prize, Integer> map = new HashMap<>();
+        Arrays.stream(Prize.values())
+                .forEach(prizeType -> map.put(prizeType, countPrizeType(prizeTypesOfTickets, prizeType)));
+        return map;
+    }
+
+    private static int countPrizeType(List<Prize> prizeTypesOfTickets, Prize prize) {
+        return (int) prizeTypesOfTickets.stream()
+                .filter(t -> t == prize)
+                .count();
     }
 
     public long prize() {

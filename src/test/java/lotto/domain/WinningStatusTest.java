@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.TicketNumberOutOfBoundException;
+import lotto.service.LottoGameService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,11 +43,11 @@ public class WinningStatusTest {
     @Test
     @DisplayName("1, 2, 3, 4, 5등 테스트")
     public void countOfMatchingNumber() {
-        assertThat(winningStatus.countOfPrize(PrizeType.FIFTH_PRIZE)).isEqualTo(1);
-        assertThat(winningStatus.countOfPrize(PrizeType.FOURTH_PRIZE)).isEqualTo(0);
-        assertThat(winningStatus.countOfPrize(PrizeType.THIRD_PRIZE)).isEqualTo(1);
-        assertThat(winningStatus.countOfPrize(PrizeType.SECOND_PRIZE)).isEqualTo(0);
-        assertThat(winningStatus.countOfPrize(PrizeType.FIRST_PRIZE)).isEqualTo(0);
+        assertThat(winningStatus.countOfPrize(Prize.FIFTH_PRIZE)).isEqualTo(1);
+        assertThat(winningStatus.countOfPrize(Prize.FOURTH_PRIZE)).isEqualTo(0);
+        assertThat(winningStatus.countOfPrize(Prize.THIRD_PRIZE)).isEqualTo(1);
+        assertThat(winningStatus.countOfPrize(Prize.SECOND_PRIZE)).isEqualTo(0);
+        assertThat(winningStatus.countOfPrize(Prize.FIRST_PRIZE)).isEqualTo(0);
     }
 
     @Test
@@ -56,6 +57,6 @@ public class WinningStatusTest {
         lottoTickets = LottoTickets.from(tickets);
         tickets.add(Ticket.from(List.of(1, 2, 3, 4, 5, 11)));
         winningStatus = lottoTickets.winningStatus(winningNumber);
-        assertThat(winningStatus.countOfPrize(PrizeType.THIRD_PRIZE)).isEqualTo(1);
+        assertThat(winningStatus.countOfPrize(Prize.THIRD_PRIZE)).isEqualTo(1);
     }
 }

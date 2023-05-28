@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.exception.TicketNumberOutOfBoundException;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,12 +23,16 @@ public class Ticket {
                 .collect(Collectors.toList()));
     }
 
+    public static Ticket fromString(String input) {
+        return fromLottoNoList(splitAndMakeList(input));
+    }
+
     public static Ticket fromLottoNoList(List<LottoNo> numbers) {
         return new Ticket(numbers);
     }
 
-    public PrizeType checkLotteryWinningStatus(WinningNumber winningNumber) {
-        return PrizeType.create(countMatchingNumber(winningNumber), isBonusBallMatched(winningNumber));
+    public Prize checkLotteryWinningStatus(WinningNumber winningNumber) {
+        return Prize.create(countMatchingNumber(winningNumber), isBonusBallMatched(winningNumber));
     }
 
     public int countMatchingNumber(WinningNumber winningNumber) {
@@ -43,5 +50,20 @@ public class Ticket {
     public boolean contains(LottoNo target) {
         return numbers.stream()
                 .anyMatch(lottoNo -> lottoNo.equals(target));
+    }
+
+    private static List<LottoNo> splitAndMakeList(String input) {
+        String[] split = input.split(",");
+        return Arrays.stream(split)
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(num -> {
+                    try {
+                        return LottoNo.from(num);
+                    } catch (TicketNumberOutOfBoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .collect(Collectors.toList());
     }
 }

@@ -1,5 +1,8 @@
-package lotto.domain;
+package lotto.service;
 
+import lotto.domain.LottoTickets;
+import lotto.domain.Ticket;
+import lotto.domain.WinningNumber;
 import lotto.exception.TicketNumberOutOfBoundException;
 import lotto.exception.TicketPriceOutOfBoundException;
 import lotto.view.InputView;

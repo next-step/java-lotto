@@ -32,7 +32,7 @@ public class TicketTest {
         assertThat(ticket.isBonusBallMatched(winningNumber)).isTrue();
         assertThat(ticket.checkLotteryWinningStatus(winningNumber).numberOfMatching()).isEqualTo(5);
 
-        assertThat(ticket.checkLotteryWinningStatus(winningNumber)).isEqualTo(PrizeType.SECOND_PRIZE);
+        assertThat(ticket.checkLotteryWinningStatus(winningNumber)).isEqualTo(Prize.SECOND_PRIZE);
     }
 
     @Test

@@ -24,10 +24,14 @@ public class LottoTickets {
     }
 
     public static LottoTickets of(LottoTickets manualTickets, LottoTickets autoTickets) {
-        List<Ticket> tickets = new ArrayList<>();
-        tickets.addAll(manualTickets.getTickets());
-        tickets.addAll(autoTickets.getTickets());
-        return new LottoTickets(tickets, manualTickets.numberOfTickets(), autoTickets.numberOfTickets());
+        return new LottoTickets(manualTickets.merge(autoTickets), manualTickets.numberOfTickets(), autoTickets.numberOfTickets());
+    }
+
+    private List<Ticket> merge(LottoTickets tickets) {
+        List<Ticket> mergedTickets = new ArrayList<>();
+        mergedTickets.addAll(this.tickets);
+        mergedTickets.addAll(tickets.getTickets());
+        return mergedTickets;
     }
 
     public int numberOfTickets() {
@@ -35,7 +39,7 @@ public class LottoTickets {
     }
 
     public int totalPrice() {
-        return tickets.size() * 1000;
+        return tickets.size() * LOTTO_PRICE;
     }
 
     public static LottoTickets buyTickets(long money, List<Ticket> manualTickets) throws TicketNumberOutOfBoundException, TicketPriceOutOfBoundException {
@@ -63,27 +67,18 @@ public class LottoTickets {
     }
 
     public WinningStatus winningStatus(WinningNumber winningNumber) {
-        List<PrizeType> prizeTypes = listOfPrize(winningNumber);
-        return makeWinningStatus(prizeTypes);
+        List<Prize> prizeTypesOfTickets = listOfPrize(winningNumber);
+        return makeWinningStatus(prizeTypesOfTickets);
     }
 
-    public List<PrizeType> listOfPrize(WinningNumber winningNumber) {
+    public List<Prize> listOfPrize(WinningNumber winningNumber) {
         return tickets.stream()
                 .map(ticket -> ticket.checkLotteryWinningStatus(winningNumber))
                 .collect(Collectors.toList());
     }
 
-    private WinningStatus makeWinningStatus(List<PrizeType> prizeTypes) {
-        Map<PrizeType, Integer> winningStatus = new HashMap<>();
-        Arrays.stream(PrizeType.values())
-                .forEach(prizeType -> winningStatus.put(prizeType, countPrizeType(prizeTypes, prizeType)));
-        return WinningStatus.from(winningStatus);
-    }
-
-    public int countPrizeType(List<PrizeType> prizeTypes, PrizeType prizeType) {
-        return (int) prizeTypes.stream()
-                .filter(t -> t == prizeType)
-                .count();
+    private WinningStatus makeWinningStatus(List<Prize> prizeTypesOfTickets) {
+        return WinningStatus.from(prizeTypesOfTickets);
     }
 
     public double returnRate(WinningNumber winningNumber) {
@@ -93,8 +88,8 @@ public class LottoTickets {
 
     private long sumOfPrize(WinningNumber winningNumber) {
         long sum = 0;
-        List<PrizeType> types = listOfPrize(winningNumber);
-        for (PrizeType type : types) {
+        List<Prize> types = listOfPrize(winningNumber);
+        for (Prize type : types) {
             sum += type.prize();
         }
         return sum;
