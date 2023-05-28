@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
@@ -16,6 +17,14 @@ public class LottoTest {
     @BeforeEach
     public void init() {
         lotto = new Lotto();
+    }
+
+    @Test
+    public void createTest_ValidationCheck(){
+        List<Number> winningList = Number.createNumberList(List.of(1,2,3,4,5,6,7));
+
+        assertThatThrownBy(() -> Lotto.createLotto(winningList, LOTTO_PRICE))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
