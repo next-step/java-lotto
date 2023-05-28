@@ -15,20 +15,12 @@ public class LottoHandler {
     public int buyLotto(Money money) {
         return money.getMoney() / LOTTO_PRICE;
     }
-    public List<Lotto> createLotto(int count) {
-        List<Lotto> lottos = new ArrayList<>(count);
-        for(int i = 0; i < count; i ++) {
-            lottos.add(new Lotto());
-        }
-        return lottos;
+    public Lottos createLotto(int count) {
+        return new Lottos(count);
     }
 
-    public List<Win> confirmWinner(List<Lotto> lottos, WinNumber winNumbers) {
-        List<Win> wins = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            wins.add(lotto.checkWin(winNumbers));
-        }
-        return wins;
+    public List<Win> confirmWinner(Lottos lottos, WinNumber winNumbers) {
+        return lottos.checkWins(winNumbers);
     }
 
     public Double getReturn(Money money, List<Win> wins) {

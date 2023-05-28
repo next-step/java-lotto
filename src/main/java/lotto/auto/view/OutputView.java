@@ -1,6 +1,7 @@
 package lotto.auto.view;
 
 import lotto.auto.domain.LottoHandler;
+import lotto.auto.domain.Lottos;
 import lotto.auto.domain.Win;
 import lotto.auto.vo.Money;
 
@@ -15,7 +16,9 @@ public class OutputView {
     public void print(String endValue) {
         System.out.println(endValue);
     }
-
+    public void printLottos(Lottos lottos) {
+        lottos.getLottos().forEach(System.out::println);
+    }
     public void printPurchase(int count) {
         System.out.println(count + RESPONSE_PURCHASE_MESSAGE);
     }

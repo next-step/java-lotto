@@ -2,6 +2,7 @@ package lotto.auto;
 
 import lotto.auto.domain.Lotto;
 import lotto.auto.domain.LottoHandler;
+import lotto.auto.domain.Lottos;
 import lotto.auto.domain.Win;
 import lotto.auto.view.InputView;
 import lotto.auto.view.OutputView;
@@ -20,13 +21,10 @@ public class Main {
         Money money = new Money(inputView.requestMoney());
         int lottoCount = lottoHandler.buyLotto(money);
         outputView.printPurchase(lottoCount);
-        List<Lotto> lottos = lottoHandler.createLotto(lottoCount);
-        for (Lotto lotto : lottos) {
-            outputView.print(lotto.toString());
-        }
+        Lottos lottos = lottoHandler.createLotto(lottoCount);
+        outputView.printLottos(lottos);
         WinNumber winNumber = inputView.requestWinNumber();
         List<Win> wins = lottoHandler.confirmWinner(lottos, winNumber);
-
         outputView.printWinResult(money, wins);
     }
 
