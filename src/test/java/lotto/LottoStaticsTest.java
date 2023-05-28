@@ -24,7 +24,7 @@ public class LottoStaticsTest {
         LottoStatics lottoStatics = new LottoStatics(WinnigLotto.createLotto(winningList, lottoBonusNumber), lottos);
 
         var actual = lottoStatics.getProfitRatio();
-        var expect = "50.0" ;
+        var expect = 50.0 ;
 
         assertThat(actual).isEqualTo(expect);
     }
@@ -40,7 +40,7 @@ public class LottoStaticsTest {
         LottoStatics lottoStatics = new LottoStatics(WinnigLotto.createLotto(winningList, lottoBonusNumber), lottos);
 
         var actual = lottoStatics.getProfitRatio();
-        var expect = "30500.0" ;
+        var expect = 30500.0 ;
 
         assertThat(actual).isEqualTo(expect);
     }

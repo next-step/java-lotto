@@ -9,17 +9,17 @@ public class LottoStatics {
     private HashMap<Number, Integer> bonusStatistics;
     private final int lottoPrice;
 
-    public String getProfitRatio() {
+    public double getProfitRatio() {
         double sum = calculateProfitSum();
         return calculateProfitRatio(sum);
     }
 
-    private String calculateProfitRatio(double sum) {
+    private double calculateProfitRatio(double sum) {
         int matchedCount = basicStatistics.size() + bonusStatistics.size();
         if(matchedCount == 0) {
-            return "0";
+            return 0;
         }
-        return String.valueOf(sum / lottoPrice / matchedCount);
+        return sum / lottoPrice / matchedCount;
     }
 
     public LottoStatics(WinnigLotto winningLotto, Lottos lottos) {

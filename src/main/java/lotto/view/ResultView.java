@@ -22,7 +22,7 @@ public class ResultView {
         System.out.println(lottoSize + "개를 구매했습니다.");
     }
 
-    public static void printLottosProfit(String ratio) {
+    public static void printLottosProfit(double ratio) {
         System.out.println("총 수익률은" + ratio + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임");
     }
 
