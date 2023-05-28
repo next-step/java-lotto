@@ -9,58 +9,65 @@ import static step2.LottoMatch.*;
 
 public class Winner {
 
-    private static Map<Integer, Integer> winnerMap = new HashMap<>();
+    public static final int WINNER_COUNT_MINIMUM = 3;
 
-    public Map<Integer, Integer> findWinner(List<Ticket> tickets, String winnerString) {
-        winnerMapInit();
+    Ticket winnerTicket;
+    int bonus;
 
-        List<Integer> winnerTicket = winnerTicket(winnerString);
+    public Map<String, Integer> findWinner(List<Ticket> tickets, String winnerString, int bonusNum) {
+        WinnerMap.winnerMapInit();
+
+        this.winnerTicket = makeWinnerTicket(winnerString);
+        this.bonus = bonusNum;
 
         for (Ticket ticket : tickets) {
-            oneTicketCheck(ticket, winnerTicket);
+            oneTicketCheck(ticket);
         }
 
-        return winnerMap;
+        return WinnerMap.getWinnerMap();
     }
 
-    private static void winnerMapInit() {
-        winnerMap.put(FOURTH.getMatchCount(), 0);
-        winnerMap.put(THIRD.getMatchCount(), 0);
-        winnerMap.put(SECOND.getMatchCount(), 0);
-        winnerMap.put(FIRST.getMatchCount(), 0);
+    private Ticket makeWinnerTicket(String winnerString) {
+        List<Integer> winnerNumbers = new ArrayList<>();
+
+        String[] split = winnerString.split(",");
+        for (String s : split) {
+            winnerNumbers.add(Integer.parseInt(s.trim()));
+        }
+
+        return new Ticket(winnerNumbers);
     }
 
-    private void oneTicketCheck(Ticket ticket, List<Integer> winnerTicket) {
+    private void oneTicketCheck(Ticket oneTicket) {
         int matchCount = 0;
+        boolean isBonusMatch = false;
 
-        List<Integer> oneTicket = ticket.getNumbers();
-        for (Integer num : winnerTicket) {
+        for (Integer num : winnerTicket.getNumbers()) {
             matchCount += isTicketContainsNumber(oneTicket, num);
         }
-        plusWinnerMapCount(matchCount);
-    }
+        //bonusCheck
+        if(matchCount == SECOND.getMatchCount()){
+            isBonusMatch = isTicketContainsNumber_bonus(oneTicket, bonus);
+        }
 
-    private void plusWinnerMapCount(int matchCount) {
-        if(matchCount >= 3){
-            winnerMap.put(matchCount, winnerMap.get(matchCount)+1);
+        if(matchCount >= WINNER_COUNT_MINIMUM){
+            LottoMatch lottoMatch = LottoMatch.valueOf(matchCount, isBonusMatch);
+            WinnerMap.plusWinnerMapCount(lottoMatch, matchCount);
         }
     }
 
-    private int isTicketContainsNumber(List<Integer> oneTicket, Integer num) {
-        if(oneTicket.contains(num)){
+    private int isTicketContainsNumber(Ticket oneTicket, Integer num) {
+        if(oneTicket.isContainNumber(num)){
             return 1;
         }
         return 0;
     }
 
-    private List<Integer> winnerTicket(String winnerString) {
-        List<Integer> winnerTicket = new ArrayList<>();
-
-        String[] split = winnerString.split(",");
-        for (String s : split) {
-            winnerTicket.add(Integer.parseInt(s.trim()));
+    private boolean isTicketContainsNumber_bonus(Ticket oneTicket, Integer num) {
+        if(oneTicket.isContainNumber(num)){
+            return true;
         }
-
-        return winnerTicket;
+        return false;
     }
+
 }

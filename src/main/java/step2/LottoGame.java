@@ -14,7 +14,7 @@ public class LottoGame {
 
         int ticketCount = money / TICKET_PRICE;
         for(int i=0; i<ticketCount; i++){
-            tickets.add(new Ticket());
+            tickets.add(Ticket.createTicket());
         }
 
         return tickets;
@@ -22,15 +22,14 @@ public class LottoGame {
 
     private static void moneyCheck(int money) {
         if(money < TICKET_PRICE){
-            throw new IllegalArgumentException("1000원 이하로 입력.");
+            throw new IllegalArgumentException(TICKET_PRICE + "원 이하로 입력했습니다.");
         }
     }
 
-    public double resultRate(int money, Map<Integer, Integer> winnerMap){
+    public double resultRate(int money, Map<String, Integer> winnerMap){
         int winningAmounts = 0;
-
         for(LottoMatch lottoMatch : LottoMatch.values()){
-            winningAmounts += winnerMap.get(lottoMatch.getMatchCount()) * lottoMatch.getReward();
+            winningAmounts += winnerMap.get(lottoMatch.name()) * lottoMatch.getReward();
         }
 
         double rate = (double)winningAmounts / (double)money;

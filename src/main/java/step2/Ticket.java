@@ -9,24 +9,18 @@ import static step2.Lotto.*;
 public class Ticket {
 
     public static final int NUMBER_LIMIT = 6;
+
     private List<Integer> numbers;
-
-    public Ticket() {
-        createTicket();
-    }
-
-    private List<Integer> createTicket() {
-
-        Collections.shuffle(lottoNumber);
-        numbers = new ArrayList<>(lottoNumber.subList(0,NUMBER_LIMIT));
-        Collections.sort(numbers);
-
-        return numbers;
-    }
 
     public Ticket(List<Integer> numbers){
         numbersCheck(numbers);
+        Collections.sort(numbers);
         this.numbers = numbers;
+    }
+
+    public static Ticket createTicket() {
+        Collections.shuffle(lottoNumber);
+        return new Ticket(new ArrayList<>(lottoNumber.subList(0, NUMBER_LIMIT)));
     }
 
     private static void numbersCheck(List<Integer> numbers) {
@@ -37,5 +31,9 @@ public class Ticket {
 
     public List<Integer> getNumbers() {
         return numbers;
+    }
+
+    public boolean isContainNumber(int num){
+        return numbers.contains(num);
     }
 }
