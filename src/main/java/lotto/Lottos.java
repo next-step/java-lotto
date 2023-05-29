@@ -28,7 +28,7 @@ public class Lottos {
     public List<StatisticsNumber> matchedLottoCount(WinnigLotto winningLotto){
         List<StatisticsNumber> matchedCountList = new ArrayList<>();
         for (Lotto lotto : lottoList) {
-            int count = lotto.equalsCount(winningLotto.getWinnigLottoNumbers());
+            int count = lotto.equalsCount(winningLotto.getWinningLottoNumbers());
             boolean isBonusNumberMatched = lotto.matchBonusNumber(winningLotto.getLottoBonusNumber());
             count += isBonusNumberMatched ? 1 : 0;
             matchedCountList.add(new StatisticsNumber(count, isBonusNumberMatched));
