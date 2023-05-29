@@ -8,17 +8,33 @@ public class Lottos {
 
     private List<Lotto> lottoList;
 
-    public Lottos(int count, LottoBallPolicy lottoBallPolicy) {
+    public Lottos(int totalPrice, int price, LottoBallPolicy lottoBallPolicy) {
         lottoList = new ArrayList<>();
 
-        for (int i = 0; i < count; i++) {
-            lottoBallPolicy.shuffleLottoNumber();
-            lottoList.add(createLottoByPolicy(lottoBallPolicy));
+        for (int i = 0; i < calculateLottoSize(totalPrice, price); i++) {
+            lottoBallPolicy.getLottoNumber(Lotto.getMaxSize());
+            lottoList.add(createLottoByPolicy(lottoBallPolicy, price));
         }
     }
 
-    public Lotto createLottoByPolicy(LottoBallPolicy lottoBallPolicy) {
-        return Lotto.createLotto(lottoBallPolicy.getLottoNumber(Lotto.getMaxSize()));
+    private int calculateLottoSize(int totalPrice, int price){
+        return totalPrice / price;
+    }
+
+    public Lotto createLottoByPolicy(LottoBallPolicy lottoBallPolicy, int price) {
+        return Lotto.createLotto(lottoBallPolicy.getLottoNumber(Lotto.getMaxSize()), price);
+    }
+
+    public List<StatisticsNumber> matchedLottoCount(WinnigLotto winningLotto){
+        List<StatisticsNumber> matchedCountList = new ArrayList<>();
+        for (Lotto lotto : lottoList) {
+            int count = lotto.equalsCount(winningLotto.getWinnigLottoNumbers());
+            boolean isBonusNumberMatched = lotto.matchBonusNumber(winningLotto.getLottoBonusNumber());
+            count += isBonusNumberMatched ? 1 : 0;
+            matchedCountList.add(new StatisticsNumber(count, isBonusNumberMatched));
+        }
+
+        return matchedCountList;
     }
 
     public List<Lotto> getLottoList() {
@@ -27,5 +43,12 @@ public class Lottos {
 
     public int getLottoListSize(){
         return lottoList.size();
+    }
+
+    public int getLottoPrice() {
+        return lottoList.stream()
+                .map(Lotto::getPrice)
+                .findFirst()
+                .orElse(0);
     }
 }
