@@ -10,7 +10,7 @@ public class InputView {
 
     private static final String REQUEST_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String REQUEST_WIN_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-
+    private static final String REQUEST_BONUS_BALL = "보너스 볼을 입력해 주세요.";
     private static final String SPLIT_STRING = ", ";
     Scanner scanner = new Scanner(System.in);
 
@@ -27,5 +27,9 @@ public class InputView {
         return new WinNumber(Arrays.stream(splitResults).map(Integer::parseInt).collect(Collectors.toList()));
     }
 
-
+    public int requestBonusBall() {
+        System.out.println(REQUEST_BONUS_BALL);
+        String bonusBall = scanner.nextLine();
+        return Integer.parseInt(bonusBall);
+    }
 }

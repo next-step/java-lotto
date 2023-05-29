@@ -16,12 +16,13 @@ public class Lotto {
         return this.lottoNumber;
     }
 
-    public Win checkWin(WinNumber winNumbers) {
+    public Win checkWin(WinNumber winNumber) {
         int matchNumber = 0;
-        for (Integer winNumber : winNumbers.getWinNumbers()) {
-            matchNumber += isMatch(winNumber);
+        for (Integer number : winNumber.getWinNumbers()) {
+            matchNumber += isMatch(number);
         }
-        return Win.getWin(matchNumber);
+        boolean isMatchBonusNumber = isMatchBonusBall(winNumber.getBonusNumber());
+        return Win.getWin(matchNumber, isMatchBonusNumber);
     };
 
     private int isMatch(Integer win) {
@@ -29,6 +30,10 @@ public class Lotto {
             return 1;
         };
         return 0;
+    }
+
+    private boolean isMatchBonusBall(int bonusNumber) {
+        return lottoNumber.contains(bonusNumber);
     }
 
     @Override

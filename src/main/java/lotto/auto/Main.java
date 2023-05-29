@@ -24,6 +24,7 @@ public class Main {
         Lottos lottos = lottoHandler.createLotto(lottoCount);
         outputView.printLottos(lottos);
         WinNumber winNumber = inputView.requestWinNumber();
+        winNumber.addBonusNumber(inputView.requestBonusBall());
         List<Win> wins = lottoHandler.confirmWinner(lottos, winNumber);
         outputView.printWinResult(money, wins);
     }

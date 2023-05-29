@@ -1,6 +1,5 @@
 package lotto.auto;
 
-import lotto.auto.domain.Lotto;
 import lotto.auto.domain.LottoHandler;
 import lotto.auto.domain.Lottos;
 import lotto.auto.domain.Win;
@@ -9,7 +8,6 @@ import lotto.auto.vo.WinNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,13 +35,13 @@ public class LottoHandlerTest {
         Lottos lottos = new Lottos(2);
         WinNumber winNumber = new WinNumber(lottos.getLottos().get(0).getLottoNumbers());
         List<Win> wins = lottoHandler.confirmWinner(lottos, winNumber);
-        assertThat(wins).contains(Win.FIRST_PLACE);
+        assertThat(wins).contains(Win.FIRST);
     }
 
     @Test
     @DisplayName("수익률 계산기")
     public void 수익률계산기() {
-        Double returnValue = lottoHandler.getReturn(new Money(10000), List.of(Win.LAST_PLACE));
+        Double returnValue = lottoHandler.getReturn(new Money(10000), List.of(Win.FIFTH));
         assertThat(returnValue).isEqualTo(0.5);
     }
 
