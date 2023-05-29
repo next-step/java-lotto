@@ -24,7 +24,17 @@ public class LottoTest {
         List<Number> winningList = Number.createNumberList(List.of(1,2,3,4,5,6,7));
 
         assertThatThrownBy(() -> Lotto.createLotto(winningList, LOTTO_PRICE))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호는 6개입니다.");
+    }
+
+    @Test
+    public void createTest_동일번호체크(){
+        List<Number> winningList = Number.createNumberList(List.of(1,2,3,4,5,1));
+
+        assertThatThrownBy(() -> Lotto.createLotto(winningList, LOTTO_PRICE))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 중복은 불가능합니다.");
     }
 
     @Test
