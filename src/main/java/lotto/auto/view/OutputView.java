@@ -38,7 +38,7 @@ public class OutputView {
         return List.of(Win.FIFTH.getMatchNumber() + "개 일치 (" + Win.FIFTH.getReward() + "원)-" + Collections.frequency(wins, Win.FIFTH) + "개",
                 Win.FOURTH.getMatchNumber() + "개 일치 (" + Win.FOURTH.getReward() + "원)-" + Collections.frequency(wins, Win.FOURTH) + "개",
                 Win.THIRD.getMatchNumber() + "개 일치 (" + Win.THIRD.getReward() + "원)-" + Collections.frequency(wins, Win.THIRD) + "개",
-                Win.THIRD.getMatchNumber() + "개 일치, 보너스 볼 일치 (" + Win.SECOND.getReward() + "원)-" + Collections.frequency(wins, Win.THIRD) + "개",
+                Win.SECOND.getMatchNumber() + "개 일치, 보너스 볼 일치 (" + Win.SECOND.getReward() + "원)-" + Collections.frequency(wins, Win.SECOND) + "개",
                 Win.FIRST.getMatchNumber() + "개 일치 (" + Win.FIRST.getReward() + "원)-" + Collections.frequency(wins, Win.FIRST) + "개");
     }
 
