@@ -10,9 +10,9 @@ import static lotto.domain.Ticket.*;
 
 public class LottoGenerator {
 
-    public static LottoTickets generateTickets(long money) {
+    public static LottoTickets generateAutoTickets(long numberOfTicket) {
         List<Ticket> tickets = new ArrayList<>();
-        long numberOfTickets = money / LOTTO_PRICE;
+        long numberOfTickets = numberOfTicket;
 
         for (int i = 0; i < numberOfTickets; i++) {
             List<Integer> candidateNumbers = makeCandidateNumbers();
@@ -24,10 +24,13 @@ public class LottoGenerator {
         return LottoTickets.from(tickets);
     }
 
+    public static LottoTickets generateManualTickets(List<Ticket> tickets) {
+        return LottoTickets.from(tickets);
+    }
+
     private static List<Integer> makeCandidateNumbers() {
-        List<Integer> candidateNumbers = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+        return IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
-        return candidateNumbers;
     }
 }

@@ -1,27 +1,25 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class WinningNumber {
-    private final List<Integer> winningNumber;
+    private final Ticket winningNumber;
     private final BonusBall bonusBall;
 
-    private WinningNumber(List<Integer> winningNumber, BonusBall bonusBall) {
+    private WinningNumber(Ticket winningNumber, BonusBall bonusBall) {
         this.winningNumber = winningNumber;
         this.bonusBall = bonusBall;
     }
 
-    public static WinningNumber from(List<Integer> winningNumber, BonusBall bonusBall) {
+    public static WinningNumber of(Ticket winningNumber, BonusBall bonusBall) {
         return new WinningNumber(winningNumber, bonusBall);
     }
 
-    public int countMatchingNumber(List<Integer> numbers) {
-        return (int) winningNumber.stream()
+    public int countMatchingNumber(Ticket numbers) {
+        return (int) winningNumber.getNumbers().stream()
                 .filter(w -> numbers.contains(w))
                 .count();
     }
 
-    public boolean isBonusBallMatched(List<Integer> numbers) {
+    public boolean isBonusBallMatched(Ticket numbers) {
         return numbers.contains(bonusBall.getBonusBall());
     }
 }

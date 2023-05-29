@@ -1,17 +1,19 @@
 package lotto.domain;
 
-public class BonusBall {
-    private final Integer bonusBall;
+import lotto.exception.TicketNumberOutOfBoundException;
 
-    private BonusBall(Integer bonusBall) {
+public class BonusBall {
+    private final LottoNo bonusBall;
+
+    private BonusBall(LottoNo bonusBall) {
         this.bonusBall = bonusBall;
     }
 
-    public static BonusBall from(String bonusBall) {
-        return new BonusBall(Integer.valueOf(bonusBall));
+    public static BonusBall from(String bonusBall) throws TicketNumberOutOfBoundException {
+        return new BonusBall(LottoNo.from(Integer.valueOf(bonusBall)));
     }
 
-    public Integer getBonusBall() {
+    public LottoNo getBonusBall() {
         return bonusBall;
     }
 }
