@@ -3,10 +3,10 @@ package lotto.auto.domain;
 import java.util.Arrays;
 
 public enum Win {
-    FIRST_PLACE(6, 2000000000),
-    SECOND_PLACE(5, 1500000),
-    THIRD_PLACE(4, 50000),
-    LAST_PLACE(3, 5000),
+    FIRST_PLACE(6, 2_000_000_000),
+    SECOND_PLACE(5, 1_500_000),
+    THIRD_PLACE(4, 50_000),
+    LAST_PLACE(3, 5_000),
     NOT_PLACE(0, 0);
 
     private int matchNumber;

@@ -1,18 +1,15 @@
 package lotto.auto.domain;
 
+import lotto.auto.vo.EntireNumber;
 import lotto.auto.vo.WinNumber;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.List;
 
 public class Lotto {
-    private static List<Integer> lottoEntireNumber = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
-    private List<Integer> lottoNumber = new ArrayList<>(6);
+    private final List<Integer> lottoNumber;
 
     public Lotto() {
-        Collections.shuffle(lottoEntireNumber);
-        this.lottoNumber = lottoEntireNumber.subList(0, 6);
+        this.lottoNumber = new EntireNumber().shuffleAndPickNumber();
     }
 
     public List<Integer> getLottoNumbers() {
