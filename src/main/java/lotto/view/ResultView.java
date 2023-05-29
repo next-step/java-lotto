@@ -18,8 +18,8 @@ public class ResultView {
         }
     }
 
-    public static void printLottosCount(int lottoSize) {
-        System.out.println(lottoSize + "개를 구매했습니다.");
+    public static void printLottosCount(int autoLottoSize, int manualLottoSize) {
+        System.out.println("수동으로 " + manualLottoSize +"장, 자동으로 " + autoLottoSize + "개를 구매했습니다." );
     }
 
     public static void printLottosProfit(double ratio) {
