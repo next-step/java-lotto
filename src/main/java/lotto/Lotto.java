@@ -19,10 +19,20 @@ public class Lotto {
     }
 
     public static Lotto createLotto(List<Number> list, int price) {
-        if (list.size() > SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6개 까지 입니다.");
+        if (list.size() != SIZE) {
+            throw new IllegalArgumentException("로또 번호는 6개입니다.");
+        }
+
+        if(list.size() != distinctNumberCount(list)){
+            throw new IllegalArgumentException("로또 중복은 불가능합니다.");
         }
         return new Lotto(list, price);
+    }
+
+    private static long distinctNumberCount(List<Number> list) {
+        return list.stream()
+                .distinct()
+                .count();
     }
 
     public int equalsCount(List<Number> list) {

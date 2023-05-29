@@ -5,13 +5,25 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Number implements Comparable<Number> {
+
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
     private int number;
 
     public Number(int number) {
         if (number < 0) {
             throw new IllegalArgumentException("로또 번호는 음수가 될 수 없습니다.");
         }
+
+        if (!numberRangeCheck(number)) {
+            throw new IllegalArgumentException("로또 번호는 1~45사이만 입력 가능합니다.");
+        }
+
         this.number = number;
+    }
+
+    private boolean numberRangeCheck(int number) {
+        return MIN_NUMBER <= number && number <= MAX_NUMBER;
     }
 
     public static Number createNumber(int number) {
