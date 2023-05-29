@@ -87,12 +87,10 @@ public class LottoTickets {
     }
 
     private long sumOfPrize(WinningNumber winningNumber) {
-        long sum = 0;
         List<Prize> types = listOfPrize(winningNumber);
-        for (Prize type : types) {
-            sum += type.prize();
-        }
-        return sum;
+        return types.stream()
+                .mapToLong(Prize::prize)
+                .sum();
     }
 
     public int getNumberOfManualTickets() {

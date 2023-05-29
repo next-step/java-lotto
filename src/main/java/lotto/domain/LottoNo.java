@@ -15,6 +15,10 @@ public class LottoNo {
         return new LottoNo(number);
     }
 
+    public static LottoNo from(String string) throws TicketNumberOutOfBoundException {
+        return new LottoNo(Integer.parseInt(string.trim()));
+    }
+
     private boolean checkValid(int number) throws TicketNumberOutOfBoundException {
         if (number < 0 || number > 45) {
             throw new TicketNumberOutOfBoundException("1 ~ 45 범위만 입력 가능합니다.");

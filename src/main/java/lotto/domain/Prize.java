@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public enum Prize {
     FIRST_PRIZE(6, false, 2_000_000_000),
@@ -39,11 +41,9 @@ public enum Prize {
                 .orElse(NOT_MATCHING);
     }
 
-    public static Map<Prize, Integer> winningStatus(List<Prize> prizeTypesOfTickets) {
-        Map<Prize, Integer> map = new HashMap<>();
-        Arrays.stream(Prize.values())
-                .forEach(prizeType -> map.put(prizeType, countPrizeType(prizeTypesOfTickets, prizeType)));
-        return map;
+    public static Map<Prize, Long> winningStatus(List<Prize> prizeTypesOfTickets) {
+        return prizeTypesOfTickets.stream()
+                        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
     private static int countPrizeType(List<Prize> prizeTypesOfTickets, Prize prize) {

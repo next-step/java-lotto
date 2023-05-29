@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 public class TicketTest {
     @Test
@@ -38,8 +37,8 @@ public class TicketTest {
     @Test
     @DisplayName("티켓 범위 validation 테스트")
     public void ticketValidationTest()  {
-        assertThatThrownBy(() -> Ticket.from(List.of(1, 2, 3, 4, 5, 46))).isInstanceOf(TicketNumberOutOfBoundException.class);
-        assertThatThrownBy(() -> Ticket.from(List.of(-1, 2, 3, 4, 5, 6))).isInstanceOf(TicketNumberOutOfBoundException.class);
+        assertThatThrownBy(() -> Ticket.from(List.of(1, 2, 3, 4, 5, 46))).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> Ticket.from(List.of(-1, 2, 3, 4, 5, 6))).isInstanceOf(RuntimeException.class);
         assertThat(Ticket.from(List.of(1, 2, 3, 4, 5, 6))).isInstanceOf(Ticket.class);
     }
 
@@ -50,6 +49,15 @@ public class TicketTest {
         assertThat(ticket.contains(LottoNo.from(1))).isTrue();
         assertThat(ticket.contains(LottoNo.from(6))).isTrue();
         assertThat(ticket.contains(LottoNo.from(10))).isFalse();
+    }
+
+    @Test
+    @DisplayName("String을 받아 Ticket의 List 만들기 테스트")
+    public void splitAndMakeListTest() {
+        String input = "8, 21, 23, 41, 42, 43";
+        Ticket ticket = Ticket.fromString(input);
+        assertThat(ticket.hasSameLottoNo(Ticket.from(List.of(8, 21, 23, 41, 42, 43)))).isTrue();
+        assertThat(ticket.hasSameLottoNo(Ticket.from(List.of(21, 8, 23, 42, 41, 43)))).isTrue();
     }
 }
 

@@ -2,7 +2,9 @@ package lotto.domain;
 
 import lotto.exception.TicketNumberOutOfBoundException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,9 +19,9 @@ public class Ticket {
         this.numbers = numbers;
     }
 
-    public static Ticket from(List<Integer> numbers) {
-        return new Ticket(numbers.stream()
-                .map(LottoNo::from)
+    public static Ticket from(List<Integer> numbers)  {
+        return new Ticket((List<LottoNo>) numbers.stream()
+                .map(ThrowableFunctionWrapper.wrapper(n -> LottoNo.from((Integer)n)))
                 .collect(Collectors.toList()));
     }
 
@@ -52,18 +54,24 @@ public class Ticket {
                 .anyMatch(lottoNo -> lottoNo.equals(target));
     }
 
+    public boolean hasSameLottoNo(Ticket target) {
+        List<LottoNo> sortedNumbers = new ArrayList<>(numbers);
+        List<LottoNo> sortedTargetNumbers = new ArrayList<>(target.numbers);
+
+        sortedNumbers.sort(Comparator.comparingInt(LottoNo::number));
+        sortedTargetNumbers.sort(Comparator.comparingInt(LottoNo::number));
+
+        for (int i = 0; i < numbers.size(); i++) {
+            if (!sortedNumbers.get(i).equals(sortedTargetNumbers.get(i)))
+                return false;
+        }
+        return true;
+    }
+
     private static List<LottoNo> splitAndMakeList(String input) {
         String[] split = input.split(",");
-        return Arrays.stream(split)
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .map(num -> {
-                    try {
-                        return LottoNo.from(num);
-                    } catch (TicketNumberOutOfBoundException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
+        return (List<LottoNo>) Arrays.stream(split)
+                .map(ThrowableFunctionWrapper.wrapper(s -> LottoNo.from((String)s)))
                 .collect(Collectors.toList());
     }
 }
