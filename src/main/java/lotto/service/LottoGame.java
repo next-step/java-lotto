@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.data.Lotto;
+import lotto.data.LottoCount;
 import lotto.data.LottoWinningPrice;
 
 import java.util.*;
@@ -9,16 +10,11 @@ import java.util.stream.Collectors;
 import static lotto.data.LottoWinningPrice.getLottoNumberByNumber;
 
 public class LottoGame {
-    private static final int LOTTO_PRICE = 1_000;
     private static final int MATCHED_ZERO = 0;
     private static final int MATCHED = 1;
 
     private LottoGame() {
         //
-    }
-
-    public static int getAmountOfLotto(int price) {
-        return price / LOTTO_PRICE;
     }
 
     public static int matchWinningNumbers(Lotto winningNumbers, Lotto lotto) {

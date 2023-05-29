@@ -1,7 +1,9 @@
 package lotto.view;
 
 import lotto.data.Lotto;
+import lotto.data.LottoCount;
 import lotto.data.LottoWinningPrice;
+import lotto.data.Lottos;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,15 +18,15 @@ public class ResultView {
         //
     }
 
-    public static void viewAmount(int manulLottoCounts, int autoLottoCounts){
+    public static void viewAmount(LottoCount manulLottoCounts, LottoCount autoLottoCounts){
         StringBuilder builder = new StringBuilder();
-        builder.append("수동으로 ").append(manulLottoCounts + "장, ").append("자동으로 ").append(autoLottoCounts + "개를 구매했습니다.");
+        builder.append("수동으로 ").append(manulLottoCounts.getCount() + "장, ").append("자동으로 ").append(autoLottoCounts.getCount() + "개를 구매했습니다.");
         System.out.println();
         System.out.println(builder.toString());
     }
 
-    public static void viewLottoList(List<Lotto> manualLottoList, List<Lotto> autoLottoList) {
-        for (Lotto lotto : manualLottoList) {
+    public static void viewLottoList(Lottos manualLottoList, List<Lotto> autoLottoList) {
+        for (Lotto lotto : manualLottoList.getLottos()) {
             System.out.println(lotto.getNumbers().toString());
         }
 

@@ -1,14 +1,15 @@
 package lotto;
 
 import lotto.data.Lotto;
+import lotto.data.LottoCount;
 import lotto.data.LottoWinningPrice;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.data.LottoUtil.validateBonusNumber;
-import static lotto.data.LottoUtil.validateInputLottoNumber;
+import static lotto.data.Lotto.validateBonusNumber;
+import static lotto.data.Lotto.validateInputLottoNumber;
 import static lotto.service.LottoGame.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -16,7 +17,8 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottoTest {
     @Test
     void 금액에맞춰_로또개수_발급() {
-        assertThat(getAmountOfLotto(14000)).isEqualTo(14);
+        LottoCount lottoCount = LottoCount.of(14000);
+        assertThat(lottoCount.getCount()).isEqualTo(14);
     }
 
     @Test

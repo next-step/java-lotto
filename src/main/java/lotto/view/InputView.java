@@ -1,13 +1,15 @@
 package lotto.view;
 
 import lotto.data.Lotto;
+import lotto.data.LottoCount;
+import lotto.data.Lottos;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static lotto.data.LottoUtil.validateBonusNumber;
-import static lotto.data.LottoUtil.validateInputLottoNumber;
+import static lotto.data.Lotto.validateBonusNumber;
+import static lotto.data.Lotto.validateInputLottoNumber;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
@@ -29,17 +31,17 @@ public class InputView {
         return price;
     }
 
-    public static int getManualLottoCounts() {
+    public static LottoCount getManualLottoCounts() {
         System.out.println(QUESTION_MANUAL_LOTTO_COUNTS);
-        int price = scanner.nextInt();
+        int manualLottoCountInput = scanner.nextInt();
         System.out.println();
-        return price;
+        return new LottoCount(manualLottoCountInput);
     }
 
     public static Lotto getWinningNumbers() {
         System.out.println(QUESTION_WINNING_NUMBERS);
-        String price = scanner.next();
-        List<String> stringNumbers = List.of(price.split(DELIMITER));
+        String winningNumberInput = scanner.next();
+        List<String> stringNumbers = List.of(winningNumberInput.split(DELIMITER));
 
         List<Integer> winningNumbers = new ArrayList<>();
         for (String number : stringNumbers) {
@@ -51,11 +53,11 @@ public class InputView {
         return new Lotto(winningNumbers);
     }
 
-    public static List<Lotto> getManualLottoNumbers(int manualLottoCounts) {
+    public static Lottos getManualLottoNumbers(LottoCount manualLottoCount) {
         System.out.println(QUESTION_MANUAL_LOTTO_NUMBERS);
-        List<Lotto> manulLottoList = new ArrayList<>();
+        List<Lotto> manualLottos = new ArrayList<>();
 
-        for (int count = 0; count < manualLottoCounts; count++) {
+        for (int count = 0; count < manualLottoCount.getCount(); count++) {
             String price = scanner.next();
             List<String> stringNumbers = List.of(price.split(DELIMITER));
 
@@ -63,12 +65,10 @@ public class InputView {
             for (String number : stringNumbers) {
                 numbers.add(Integer.valueOf(number.trim()));
             }
-
-            validateInputLottoNumber(numbers);
-            manulLottoList.add(new Lotto(numbers));
+            manualLottos.add(new Lotto(numbers));
         }
 
-        return manulLottoList;
+        return new Lottos(manualLottos);
     }
 
     public static int getBonusNumber(Lotto winningNumbers) {
