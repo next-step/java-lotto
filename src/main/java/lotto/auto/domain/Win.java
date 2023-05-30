@@ -3,31 +3,37 @@ package lotto.auto.domain;
 import java.util.Arrays;
 
 public enum Win {
-    FIRST_PLACE(6, 2000000000),
-    SECOND_PLACE(5, 1500000),
-    THIRD_PLACE(4, 50000),
-    LAST_PLACE(3, 5000),
-    NOT_PLACE(0, 0);
+    FIRST(6, false,2_000_000_000),
+    SECOND(5, true, 30_000_000),
+    THIRD(5, false,1_500_000),
+    FOURTH(4, false,50_000),
+    FIFTH(3, false,5_000),
+    MISS(0, false,0);
 
     private int matchNumber;
+    private boolean isMatchBonusBall;
     private int reward;
 
     public int getMatchNumber() {
         return matchNumber;
     }
+    public boolean getMatchBonusNBall() {
+        return isMatchBonusBall;
+    }
     public int getReward() {
         return reward;
     }
 
-    public static Win getWin(int matchNumber) {
+    public static Win getWin(int matchNumber, boolean isMatchBonusBall) {
         return Arrays.stream(Win.values())
                 .filter(win -> win.getMatchNumber() == matchNumber)
+                .filter(win -> win.getMatchBonusNBall() == isMatchBonusBall)
                 .findFirst()
-                .orElse(Win.NOT_PLACE);
+                .orElse(Win.MISS);
     }
-
-    Win(int matchNumber, int reward) {
+    Win(int matchNumber, boolean isMatchBonusBall, int reward) {
         this.matchNumber = matchNumber;
+        this.isMatchBonusBall = isMatchBonusBall;
         this.reward = reward;
     }
 }
