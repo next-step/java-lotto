@@ -1,43 +1,17 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class LottoWin {
+    public static final String HEADER = "당첨통계\n---------\n";
+    private final LottoWinNumber lottoWinNumber;
+    private final LottoWinStatics lottoWinStatics;
 
-    private final Integer[] winNumber;
-    private final Map<Integer, Integer> winCountMap;
-
-    public LottoWin(Integer[] winNumber) {
-        this.winNumber = winNumber;
-        this.winCountMap = new HashMap<>();
+    public LottoWin(LottoBuy lottoBuy, String winNumberString) {
+        this.lottoWinNumber = new LottoWinNumber(winNumberString);
+        this.lottoWinStatics = new LottoWinStatics(lottoBuy, lottoWinNumber);
     }
 
-    public void countMatchingNumber(LottoTicket lottoTicket) {
-        List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
-
-        int matchingCount = countMatches(lottoNumbers);
-
-        updateWinCountMap(matchingCount);
-    }
-
-    private int countMatches(List<Integer> lottoNumbers) {
-        int matchingCount = 0;
-
-        for(Integer number : winNumber) {
-            if(lottoNumbers.contains(number)) {
-                matchingCount++;
-            }
-        }
-        return matchingCount;
-    }
-
-    private void updateWinCountMap(int matchingCount) {
-        winCountMap.put(matchingCount, winCountMap.getOrDefault(matchingCount, 0) + 1);
-    }
-
-    public boolean isMatchingCount(int count) {
-        return winCountMap.getOrDefault(count, 0) > 0;
+    @Override
+    public String toString() {
+        return HEADER + lottoWinStatics;
     }
 }

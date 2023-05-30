@@ -1,12 +1,11 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
-    private List<Integer> lottoNumbers = new ArrayList<>();
+    private final List<Integer> lottoNumbers = new ArrayList<>();
 
     LottoTicket() {
         List<Integer> numbers = new LottoNumberGenerator().generateLottoNumbers();
@@ -19,9 +18,12 @@ public class LottoTicket {
         Collections.sort(lottoNumbers);
     }
 
-    LottoTicket(Integer[] lottoArray) {
-        lottoNumbers = new ArrayList<>(Arrays.asList(lottoArray));
-        Collections.sort(lottoNumbers);
+    public LottoTicket(String lottoTicketString) {
+        String[] split = lottoTicketString.replaceAll("\\[|]", "").split(",");
+
+        for (String s : split) {
+            lottoNumbers.add(Integer.valueOf(s.trim()));
+        }
     }
 
     @Override
@@ -31,5 +33,9 @@ public class LottoTicket {
 
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public int getMatchCount(LottoWinNumber lottoWinNumber) {
+        return lottoWinNumber.countMatchingNumbers(lottoNumbers);
     }
 }

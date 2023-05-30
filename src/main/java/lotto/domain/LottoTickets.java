@@ -1,13 +1,40 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoTickets {
 
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<LottoTicket> buyLotto) {
-        lottoTickets = buyLotto;
+    public LottoTickets(String lottoTicketsString) {
+        String[] split = lottoTicketsString.split("\n");
+
+        lottoTickets = new ArrayList<>();
+        for (String s : split) {
+            lottoTickets.add(new LottoTicket(s));
+        }
+
+    }
+
+    public LottoTickets(LottoBuyCount lottoBuyCount) {
+        lottoTickets = new ArrayList<>();
+        for(int i=0; i < lottoBuyCount.getLottoBuyCount(); i++) {
+            lottoTickets.add(new LottoTicket());
+        }
+    }
+
+    public Map<Integer, Integer> calculateLottoWinStatistics(LottoWinNumber lottoWinNumber) {
+        Map<Integer, Integer> resultMap = new HashMap<>();
+
+        for (LottoTicket lottoTicket : lottoTickets) {
+            int idx = lottoTicket.getMatchCount(lottoWinNumber);
+            resultMap.put(idx, resultMap.getOrDefault(idx, 0) + 1);
+        }
+
+        return resultMap;
     }
 
     @Override
