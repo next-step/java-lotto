@@ -25,13 +25,13 @@ public class Lotto {
         return this.numbers;
     }
 
-    public static List<Lotto> getNewLottoList(LottoCount amount) {
+    public static Lottos getNewLottoList(LottoCount amount) {
         List<Lotto> newLottoList = new ArrayList<>();
         for (int i = 0; i < amount.getCount(); i++) {
             newLottoList.add(new Lotto());
         }
 
-        return newLottoList;
+        return new Lottos(newLottoList);
     }
 
     public List<Integer> makeNumbers() {
@@ -75,11 +75,13 @@ public class Lotto {
             validateNumberRange(number);
         }
 
-        for (int winningNumber : winningNumbers.getNumbers()) {
-            if (winningNumber == bonusNumber) {
-                throw new IllegalArgumentException("중복된 번호가 있습니다.");
-            }
+        if(winningNumbers.isContain(bonusNumber)){
+            throw new IllegalArgumentException("중복된 번호가 있습니다.");
         }
+    }
+
+    private boolean isContain(int bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 
     private static void validateNumberRange(int number) {

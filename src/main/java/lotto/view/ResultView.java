@@ -25,12 +25,12 @@ public class ResultView {
         System.out.println(builder.toString());
     }
 
-    public static void viewLottoList(Lottos manualLottoList, List<Lotto> autoLottoList) {
+    public static void viewLottoList(Lottos manualLottoList, Lottos autoLottoList) {
         for (Lotto lotto : manualLottoList.getLottos()) {
             System.out.println(lotto.getNumbers().toString());
         }
 
-        for (Lotto lotto : autoLottoList) {
+        for (Lotto lotto : autoLottoList.getLottos()) {
             System.out.println(lotto.getNumbers().toString());
         }
         System.out.println();

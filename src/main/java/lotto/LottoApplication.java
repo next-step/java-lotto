@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.data.Lotto;
-import lotto.data.LottoCount;
-import lotto.data.LottoWinningPrice;
-import lotto.data.Lottos;
+import lotto.data.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,18 +17,21 @@ public class LottoApplication {
         int purchaseAmount = getPurchaseAmount();
         LottoCount autoLottoCount = LottoCount.of(purchaseAmount);
         LottoCount manualLottoCount = getManualLottoCounts();
-        Lottos manualLottoList = getManualLottoNumbers(manualLottoCount);
+        Lottos manualLottos = getManualLottoNumbers(manualLottoCount);
+
+        LottoBundle lottoBundle = LottoBundle.manualOf(manualLottos);
+
         viewAmount(autoLottoCount, manualLottoCount);
 
-        List<Lotto> autoLottoList = getNewLottoList(autoLottoCount);
-        viewLottoList(manualLottoList, autoLottoList);
+        lottoBundle.addAuto(getNewLottoList(autoLottoCount));
+        viewLottoList(lottoBundle.manual(), lottoBundle.auto());
 
         Lotto winningNumbers = getWinningNumbers();
         int bonusNumber = getBonusNumber(winningNumbers);
 
         List<Lotto> lottoList = new ArrayList<>();
-        lottoList.addAll(autoLottoList);
-        lottoList.addAll(manualLottoList.getLottos());
+        lottoList.addAll(lottoBundle.auto().getLottos());
+        lottoList.addAll(lottoBundle.manual().getLottos());
 
         Map<LottoWinningPrice, Integer> winningNumberList = getWinningNumberList(winningNumbers, bonusNumber, lottoList);
         viewWinningNumberList(winningNumberList);
