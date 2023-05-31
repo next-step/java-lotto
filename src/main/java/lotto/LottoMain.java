@@ -25,7 +25,7 @@ public class LottoMain {
 
         resultView.showLottos(createdLottos); // 만들어진 로또 산출
 
-        WinningLotto winningLotto = new WinningLotto(inputView.requestWinningNumbers(), inputView.requestBonusNumber()); // 당첨 번호, 보너스 번호 입력
+        WinningLotto winningLotto = new WinningLotto(Lotto.createFromWinningNumbers(inputView.requestWinningNumbers()), new LottoNumber(inputView.requestBonusNumber())); // 당첨 번호, 보너스 번호 입력
         resultView.showResults(lottos.judge(createdLottos, winningLotto)); // 당첨 결과 산출
     }
 }
