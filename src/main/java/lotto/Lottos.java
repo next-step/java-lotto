@@ -8,20 +8,28 @@ public class Lottos {
 
     private List<Lotto> lottoList;
 
-    public Lottos(int count, int price, LottoBallPolicy lottoBallPolicy) {
+    public Lottos(int inputPrice, int price, LottoBallPolicy lottoBallPolicy) {
         lottoList = new ArrayList<>();
 
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < LottoCount(inputPrice, price); i++) {
             lottoBallPolicy.getLottoNumber(Lotto.getMaxSize());
             lottoList.add(createLottoByPolicy(lottoBallPolicy, price));
         }
     }
 
-    public Lottos(int price, List<Lotto> lottoListInput) {
+    private static int LottoCount(int inputPrice, int price) {
+        return inputPrice / price;
+    }
+
+    public Lottos(int inputPrice, int price, List<Numbers> numbersList) {
         lottoList = new ArrayList<>();
 
-        for(Lotto lotto : lottoListInput){
-            lottoList.add(Lotto.createLotto(lotto.getLottoNumbers(), price));
+        if(LottoCount(inputPrice, price) - numbersList.size() < 0){
+            throw new IllegalArgumentException("수동 갯수는 구입금액을 넘을 수 없습니다.");
+        }
+
+        for(Numbers numbers : numbersList){
+            lottoList.add(Lotto.createLotto(numbers.getNumbers(), price));
         }
     }
 
@@ -53,6 +61,13 @@ public class Lottos {
         return lottoList.stream()
                 .map(Lotto::getPrice)
                 .findFirst()
+                .orElse(0);
+    }
+
+    public int getLottoAllPrice() {
+        return lottoList.stream()
+                .map(Lotto::getPrice)
+                .reduce(Integer::sum)
                 .orElse(0);
     }
 
