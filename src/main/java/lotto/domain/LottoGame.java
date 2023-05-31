@@ -34,6 +34,6 @@ public class LottoGame {
                 .map(lotto -> Arrays.stream(lotto.split(",\\s*"))
                         .map(Integer::parseInt)
                         .collect(Collectors.toList()))
-                .forEach(numbers -> this.lottos.buyLotto(new Lotto(numbers)));
+                .forEach(numbers -> this.lottos.buyLotto(lottos));
     }
 }

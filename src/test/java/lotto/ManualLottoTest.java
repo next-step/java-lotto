@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoNumberGenerator;
 import lotto.domain.Lottos;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,11 +24,15 @@ public class ManualLottoTest {
 
     @Test
     void 수동로또구매() {
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        int quantity = 3;
 
-        lottos.buyLotto(lotto);
+        List<String> manualLottos = new ArrayList<>();
+        for (int i = 0; i < quantity; i++) {
+            manualLottos.add("1,2,3,4,5,6");
+        }
 
-        assertThat(lottos.quantity()).isEqualTo(1);
+        lottos.buyLotto(manualLottos);
 
+        assertThat(manualLottos.size()).isEqualTo(quantity);
     }
 }

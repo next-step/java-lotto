@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,15 @@ public class Lottos {
         for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto(lottoNumberGenerator.lotto()));
         }
+    }
+
+
+    public void buyLotto(List<String> lottos) {
+        lottos.stream()
+                .map(lotto -> Arrays.stream(lotto.split(",\\s*"))
+                        .map(Integer::parseInt)
+                        .collect(Collectors.toList()))
+                .forEach(numbers -> this.lottos.add(new Lotto(numbers)));
     }
 
     public void buyLotto(Lotto lotto) {
