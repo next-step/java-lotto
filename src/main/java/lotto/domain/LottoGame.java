@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoGame {
 
@@ -25,15 +23,7 @@ public class LottoGame {
         return lottos.quantity();
     }
 
-    public void buyAutoLotto(int lottoCount) {
-        lottos.buyLotto(lottoCount);
-    }
-
-    public void buyManualLotto(List<String> lottos) {
-        lottos.stream()
-                .map(lotto -> Arrays.stream(lotto.split(",\\s*"))
-                        .map(Integer::parseInt)
-                        .collect(Collectors.toList()))
-                .forEach(numbers -> this.lottos.buyLotto(lottos));
+    public void buyLottos(List<Lotto> lottos) {
+        this.lottos.buyLotto(lottos);
     }
 }

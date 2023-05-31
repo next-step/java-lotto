@@ -10,11 +10,13 @@ public class LottoController {
     private final InputView inputView;
     private final ResultView resultView;
     private final LottoGame lottoGame;
+    private final LottoGenerator lottoGenerator;
 
-    public LottoController(InputView inputView, ResultView resultView, LottoGame lottoGame) {
+    public LottoController(InputView inputView, ResultView resultView, LottoGame lottoGame, LottoGenerator lottoGenerator) {
         this.inputView = inputView;
         this.resultView = resultView;
         this.lottoGame = lottoGame;
+        this.lottoGenerator = lottoGenerator;
     }
 
     public void buy() {
@@ -24,8 +26,8 @@ public class LottoController {
         validatePurchase(lottoPrice, manualLottoCount);
         List<String> lists = inputView.manualNumbers(manualLottoCount);
 
-        lottoGame.buyManualLotto(lists);
-        lottoGame.buyAutoLotto(lottoPrice.lottoCount() - manualLottoCount);
+        lottoGame.buyLottos(lottoGenerator.manual(lists));
+        lottoGame.buyLottos(lottoGenerator.auto(lottoPrice.lottoCount() - manualLottoCount));
         inputView.buy(manualLottoCount, lottoPrice.lottoCount() - manualLottoCount);
     }
 

@@ -1,36 +1,17 @@
 package lotto.domain;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lottos {
-    private final List<Lotto> lottos;
-    private final LottoNumberGenerator lottoNumberGenerator;
+    private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(List<Lotto> lottos, LottoNumberGenerator lottoNumberGenerator) {
-        this.lottos = lottos;
-        this.lottoNumberGenerator = lottoNumberGenerator;
+    public Lottos() {
     }
 
-    public void buyLotto(int lottoCount) {
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto(lottoNumberGenerator.lotto()));
-        }
-    }
-
-
-    public void buyLotto(List<String> lottos) {
-        lottos.stream()
-                .map(lotto -> Arrays.stream(lotto.split(",\\s*"))
-                        .map(Integer::parseInt)
-                        .collect(Collectors.toList()))
-                .forEach(numbers -> this.lottos.add(new Lotto(numbers)));
-    }
-
-    public void buyLotto(Lotto lotto) {
-        //이쪽으로 로직을 옮겨보자.
-        lottos.add(lotto);
+    public void buyLotto(List<Lotto> lottos) {
+        this.lottos.addAll(lottos);
     }
 
     public List<LottoMatcher> matchResult(WinningNumbers winningNumbers) {
