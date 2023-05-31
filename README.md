@@ -7,3 +7,10 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+
+## step2 요구사항
+* [x] 로또 구매
+* [x] 자동생성
+* [x] 당첨번호 확인, 
+* [x] 수익률 계산 기능
