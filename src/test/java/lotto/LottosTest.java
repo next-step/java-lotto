@@ -13,7 +13,7 @@ public class LottosTest {
 
     @BeforeEach
     public void init() {
-        lottos = new Lottos(LOTTO_COUNT, LOTTO_PRICE, new LottoBallPolicy());
+        lottos = new Lottos(LOTTO_COUNT * LOTTO_PRICE, LOTTO_PRICE, new LottoBallPolicy());
     }
 
     @Test

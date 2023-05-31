@@ -51,7 +51,7 @@ public class LottoStaticsTest {
         List<Number> balls = Number.createNumberList(List.of(1,2,3,4,11,10));
 
         LottoBallPolicy lottoBallPolicy = new LottoBallPolicy(balls);
-        lottos = new Lottos(LOTTO_COUNT, LOTTO_PRICE, lottoBallPolicy);
+        lottos = new Lottos(LOTTO_COUNT * LOTTO_PRICE, LOTTO_PRICE, lottoBallPolicy);
 
         Number lottoBonusNumber = new Number(7);
 
