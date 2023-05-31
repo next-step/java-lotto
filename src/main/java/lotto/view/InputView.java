@@ -1,11 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class InputView {
 
@@ -28,30 +24,31 @@ public class InputView {
         return getIntNumber();
     }
 
-    public List<Lotto> requestManuallyPurchaseNumbers(int requestManuallyPurchaseCount) {
+    public List<TreeSet<Integer>> requestManuallyPurchaseNumbers(int requestManuallyPurchaseCount) {
         System.out.println();
         System.out.println(REQUEST_MANUALLY_PURCHASE_NUMBERS_INPUT);
-        return IntStream.range(0, requestManuallyPurchaseCount)
-                        .mapToObj(i -> createLotto())
-                        .collect(Collectors.toList());
+
+        List<TreeSet<Integer>> manuallyPurchasedNumbers = new ArrayList<>();
+        for (int i = 0; i < requestManuallyPurchaseCount; i++) {
+            manuallyPurchasedNumbers.add(getLottoNumbersFromInput());
+        }
+        return manuallyPurchasedNumbers;
     }
 
-    public Lotto requestWinningNumbers() {
+    public TreeSet<Integer> requestWinningNumbers() {
         System.out.println(REQUEST_WINNING_NUMBERS_INPUT);
-        return createLotto();
+        return getLottoNumbersFromInput();
     }
 
-    private Lotto createLotto() {
-        Set<LottoNumber> requestedNumbers = Arrays.stream(SCANNER.nextLine().split(SPLITTER))
+    private TreeSet<Integer> getLottoNumbersFromInput() {
+        return Arrays.stream(SCANNER.nextLine().split(SPLITTER))
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
-        return new Lotto(requestedNumbers);
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
-    public LottoNumber requestBonusNumber() {
+    public int requestBonusNumber() {
         System.out.println(REQUEST_BONUS_NUMBER_INPUT);
-        return new LottoNumber(getIntNumber());
+        return getIntNumber();
     }
 
     private int getIntNumber() {
