@@ -1,26 +1,40 @@
 package lotto;
 
-import lotto.data.Lotto;
+import lotto.data.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import static lotto.view.InputView.getPurchaseAmount;
-import static lotto.view.InputView.getWinningNumbers;
+import static lotto.data.Lotto.getNewLottoList;
 import static lotto.service.LottoGame.*;
+import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
 
 public class LottoApplication {
 
     public static void main(String[] args) {
         int purchaseAmount = getPurchaseAmount();
-        int amount = getAmountOfLotto(purchaseAmount);
-        viewAmount(amount);
+        LottoCount autoLottoCount = LottoCount.of(purchaseAmount);
+        LottoCount manualLottoCount = getManualLottoCounts();
+        Lottos manualLottos = getManualLottoNumbers(manualLottoCount);
 
-        List<Lotto> lottoList = getLottoList(amount);
-        viewLottoList(lottoList);
+        LottoBundle lottoBundle = LottoBundle.manualOf(manualLottos);
+
+        viewAmount(autoLottoCount, manualLottoCount);
+
+        lottoBundle.addAuto(getNewLottoList(autoLottoCount));
+        viewLottoList(lottoBundle.manual(), lottoBundle.auto());
 
         Lotto winningNumbers = getWinningNumbers();
-        viewWinningNumberList(getWinningNumberList(winningNumbers, lottoList));
-        viewRateOfReturn(getRateOfReturn(getAllReturnAmount(winningNumbers, lottoList), purchaseAmount));
+        int bonusNumber = getBonusNumber(winningNumbers);
+
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.addAll(lottoBundle.auto().getLottos());
+        lottoList.addAll(lottoBundle.manual().getLottos());
+
+        Map<LottoWinningPrice, Integer> winningNumberList = getWinningNumberList(winningNumbers, bonusNumber, lottoList);
+        viewWinningNumberList(winningNumberList);
+        viewRateOfReturn(getRateOfReturn(getAllReturnAmount(winningNumberList), purchaseAmount));
     }
 }
