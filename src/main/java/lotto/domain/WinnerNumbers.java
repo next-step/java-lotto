@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class WinnerNumbers {
@@ -18,7 +17,7 @@ public class WinnerNumbers {
         }
     }
 
-    public LottoResults matchLottos(List<Lotto> lottos) {
+    public LottoResults matchLottos(Lottos lottos) {
         Map<Rank, Integer> winningStats = new HashMap<>();
         initializeWinningStats(winningStats);
         markResults(winningStats, lottos);
@@ -30,8 +29,8 @@ public class WinnerNumbers {
                 .forEach(rank -> winningStats.put(rank, 0));
     }
 
-    private void markResults(Map<Rank, Integer> winningStats, List<Lotto> lottos) {
-        lottos.forEach(lotto -> this.markResult(winningStats, lotto));
+    private void markResults(Map<Rank, Integer> winningStats, Lottos lottos) {
+        lottos.allLottos().forEach(lotto -> this.markResult(winningStats, lotto));
     }
 
     private void markResult(Map<Rank, Integer> winningStats, Lotto lotto) {

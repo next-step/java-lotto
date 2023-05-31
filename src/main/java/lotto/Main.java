@@ -11,9 +11,14 @@ public class Main {
     public static void main(String[] args) {
         int amount = LottoInputView.askBuyAmount();
         Money money = new Money(amount);
+        int maxBuyCount = money.buyCount(Lotto.PRICE);
+        int manualLottoCount = LottoInputView.askManualLottoCount(maxBuyCount);
+        int autoLottoCount = maxBuyCount - manualLottoCount;
 
-        int buyCount = money.buyCount(Lotto.PRICE);
-        List<Lotto> lottos = LottoGenerator.autoGenerateLottos(buyCount);
+        List<String> manualLottoNumbers = LottoInputView.askManualLottoNumbers(manualLottoCount);
+        List<Lotto> manualLottos = LottoGenerator.manualGenerateLottos(manualLottoNumbers);
+        List<Lotto> autoLottos = LottoGenerator.autoGenerateLottos(autoLottoCount);
+        Lottos lottos = new Lottos(manualLottos, autoLottos);
         LottoOutputView.printLottos(lottos);
 
         String stringNumbers = LottoInputView.askLastWinnerNumbers();
