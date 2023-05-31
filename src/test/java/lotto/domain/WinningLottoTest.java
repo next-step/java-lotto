@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
@@ -15,7 +16,9 @@ public class WinningLottoTest {
 
     @BeforeEach
     void setUp() {
-        winningLotto = new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new).collect(Collectors.toSet())), new LottoNumber(9));
+        winningLotto = new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 5, 6).stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(TreeSet::new))), new LottoNumber(9));
     }
 
     @Test
@@ -25,7 +28,9 @@ public class WinningLottoTest {
         Rank expectedRank = Rank.FIRST_PLACE;
 
         // when: 로또 구입
-        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new).collect(Collectors.toSet()));
+        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6).stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(TreeSet::new)));
 
         // then
         assertThat(winningLotto.calculateRank(lotto)).isEqualTo(expectedRank);
@@ -38,7 +43,9 @@ public class WinningLottoTest {
         int expectedMatchCount = 6;
 
         // when: 복권 당첨 번호와 같은 번호들을 가진 로또 구입
-        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new).collect(Collectors.toSet()));
+        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6).stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(TreeSet::new)));
 
         // then
         assertThat(winningLotto.getMatchNumbers(lotto)).isEqualTo(expectedMatchCount);

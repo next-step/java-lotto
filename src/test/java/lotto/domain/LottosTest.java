@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,8 +20,8 @@ public class LottosTest {
 
     @BeforeEach
     void setUp() {
-        Lotto manuallyCreatedLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6).stream().map(LottoNumber::new).collect(Collectors.toSet()));
-        manuallyCreatedLottos = new ManuallyCreatedLottos(List.of(manuallyCreatedLotto));
+        TreeSet<Integer> manuallyCreatedLotto = new TreeSet<>(Set.of(1, 2, 3, 4, 5, 6));
+        this.manuallyCreatedLottos = new ManuallyCreatedLottos(List.of(manuallyCreatedLotto));
     }
 
     @Test
@@ -28,8 +29,8 @@ public class LottosTest {
     void 요구사항_1() {
         // given: 당첨 번호 생성 / shuffle하지 않고 PURCHASE_COUNT만큼 복권 만드는 전략 생성
         WinningLotto winningLotto = new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 5, 7).stream()
-                                                                                       .map(LottoNumber::new)
-                                                                                       .collect(Collectors.toSet())), new LottoNumber(6));
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(TreeSet::new))), new LottoNumber(6));
         ForceLottoCreationStrategy forceLottoCreationStrategy = new ForceLottoCreationStrategy();
 
         // when: 로또 생성
@@ -49,8 +50,8 @@ public class LottosTest {
     void 요구사항_2() {
         // given: 당첨 번호 생성 / shuffle하지 않고 PURCHASE_COUNT만큼 복권 만드는 전략 생성
         WinningLotto winningLotto = new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 5, 7).stream()
-                                                                                       .map(LottoNumber::new)
-                                                                                       .collect(Collectors.toSet())), new LottoNumber(9));
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(TreeSet::new))), new LottoNumber(9));
         ForceLottoCreationStrategy forceLottoCreationStrategy = new ForceLottoCreationStrategy();
 
         // when: 로또 생성
