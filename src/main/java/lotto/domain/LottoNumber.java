@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> { // TreeSet이 원소 정렬을 위해 Comparable interface 사용
 
     private static final int START_NUMBER = 1;
     private static final int LIMIT_NUMBER = 45;
@@ -43,5 +43,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return Integer.compare(number, other.getNumber());
     }
 }
