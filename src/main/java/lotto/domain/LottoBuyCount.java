@@ -13,6 +13,7 @@ public class LottoBuyCount {
         this.lottoBuyCount = buyPrice / LOTTO_PRICE;
     }
 
+    // 테스트용 생성자
     public LottoBuyCount(String lottoTicketString) {
         this.lottoBuyCount = lottoTicketString.split("\n").length;
     }

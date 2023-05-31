@@ -7,6 +7,7 @@ public class LottoWinNumber {
 
     private final List<Integer> lottoWinNumber;
 
+    // 문자열을 당첨문자열로 변경
     LottoWinNumber(String winNumberString) {
         String[] split = winNumberString.split(",");
         lottoWinNumber = new ArrayList<>();
@@ -16,6 +17,7 @@ public class LottoWinNumber {
         }
     }
 
+    // 당첨번호와 일치하는 개수 카운트
     public int countMatchingNumbers(List<Integer> lottoNumbers) {
         int result = 0;
 

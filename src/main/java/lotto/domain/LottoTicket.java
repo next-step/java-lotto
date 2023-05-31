@@ -18,6 +18,7 @@ public class LottoTicket {
         Collections.sort(lottoNumbers);
     }
 
+    // 테스트용 생성자
     public LottoTicket(String lottoTicketString) {
         String[] split = lottoTicketString.replaceAll("\\[|]", "").split(",");
 
