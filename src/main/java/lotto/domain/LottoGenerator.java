@@ -30,7 +30,7 @@ public class LottoGenerator {
                 .map(lotto -> Arrays.stream(lotto.split(",\\s*"))
                         .map(Integer::parseInt)
                         .collect(Collectors.toList()))
-                .map(numbers -> new Lotto(numbers))
+                .map(Lotto::new)
                 .collect(Collectors.toList());
     }
 
