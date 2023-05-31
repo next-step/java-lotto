@@ -1,25 +1,41 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(List<Integer> numbers) {
+        checkNumbers(numbers);
+        this.lottoNumbers = numbers
+                .stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
-    public LottoMatcher match(List<LottoNumber> targetNumbers, LottoNumber bonusNumber) {
-        int matchedSize = lottoNumbers.stream()
-                .filter(targetNumbers::contains)
-                .collect(Collectors.toList())
-                .size();
-        boolean matchBonus = lottoNumbers.contains(bonusNumber);
-        return LottoMatcher.of(matchedSize, matchBonus);
+    private void checkNumbers(List<Integer> numbers) {
+        if (isDuplicateNumber(numbers)) {
+            throw new IllegalArgumentException("중복된 번호가 입력되었습니다.");
+        }
+        if (checkNumberOfCount(numbers)) {
+            throw new IllegalArgumentException("로또 번호는 6개 입니다.");
+        }
     }
 
+    private static boolean isDuplicateNumber(List<Integer> winNumbers) {
+        return winNumbers.size() != new HashSet<>(winNumbers).size();
+    }
+
+    private static boolean checkNumberOfCount(List<Integer> winNumbers) {
+        return winNumbers.size() != 6;
+    }
     public List<LottoNumber> lottoNumbers() {
         return lottoNumbers;
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 }

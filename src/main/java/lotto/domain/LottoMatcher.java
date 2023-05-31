@@ -2,24 +2,22 @@ package lotto.domain;
 
 
 import java.util.Arrays;
-import java.util.function.Consumer;
+import java.util.Map;
 
 public enum LottoMatcher {
-    FIRST_MATCH(6, 2_000_000_000, LottoScore::addFirst),
-    SECOND_MATCH(5, 30_000_000, LottoScore::addSecond),
-    THIRD_MATCH(5, 1_500_000, LottoScore::addThird),
-    FOURTH_MATCH(4, 50_000, LottoScore::addFourth),
-    FIFTH_MATCH(3, 5_000, LottoScore::addFifth) ,
-    NONE_MATCH(0, 0, lottoScore -> {});
+    FIRST_MATCH(6, 2_000_000_000),
+    SECOND_MATCH(5, 30_000_000),
+    THIRD_MATCH(5, 1_500_000),
+    FOURTH_MATCH(4, 50_000),
+    FIFTH_MATCH(3, 5_000),
+    NONE_MATCH(0, 0);
 
     private final int matchOfCount;
     private final int price;
-    private final Consumer<LottoScore> lottoScoreConsumer;
 
-    LottoMatcher(int matchOfCount, int price, Consumer<LottoScore> lottoScoreConsumer) {
+    LottoMatcher(int matchOfCount, int price) {
         this.matchOfCount = matchOfCount;
         this.price = price;
-        this.lottoScoreConsumer = lottoScoreConsumer;
     }
 
     private boolean is(int matchOfCount) {
@@ -27,7 +25,7 @@ public enum LottoMatcher {
     }
 
     public static LottoMatcher of(int matchOfCount, boolean matchBonus) {
-        if(matchOfCount == 5) {
+        if (matchOfCount == 5) {
             return matchBonus ? LottoMatcher.SECOND_MATCH : LottoMatcher.THIRD_MATCH;
         }
 
@@ -41,11 +39,16 @@ public enum LottoMatcher {
         return price;
     }
 
-    public void incrementScore(LottoScore lottoScore){
-        lottoScoreConsumer.accept(lottoScore);
+    public void incrementScore(Map<LottoMatcher, Integer> map) {
+        map.computeIfPresent(this, (k, v) -> v + 1);
     }
 
     public int amount(int count) {
         return price * count;
+    }
+
+
+    public boolean isMatching() {
+        return matchOfCount >= 3;
     }
 }

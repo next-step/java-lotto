@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumberGenerator;
+import lotto.domain.LottoGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -38,8 +38,8 @@ public class LottoNumberTest {
 
     @Test
     void 로또번호_6개_생성한다() {
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-        List<LottoNumber> lottoNumbers = lottoNumberGenerator.lotto();
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        List<Integer> lottoNumbers = lottoGenerator.lotto();
         assertThat(lottoNumbers).hasSize(6);
     }
 
