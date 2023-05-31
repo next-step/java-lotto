@@ -9,15 +9,16 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        int amount = LottoInputView.askBuyAmount();
-        Money money = new Money(amount);
+        Money money = LottoInputView.askBuyAmount();
         int maxBuyCount = money.buyCount(Lotto.PRICE);
-        int manualLottoCount = LottoInputView.askManualLottoCount(maxBuyCount);
-        int autoLottoCount = maxBuyCount - manualLottoCount;
 
+        int manualLottoCount = LottoInputView.askManualLottoCount(maxBuyCount);
         List<String> manualLottoNumbers = LottoInputView.askManualLottoNumbers(manualLottoCount);
         List<Lotto> manualLottos = LottoGenerator.manualGenerateLottos(manualLottoNumbers);
+
+        int autoLottoCount = maxBuyCount - manualLottoCount;
         List<Lotto> autoLottos = LottoGenerator.autoGenerateLottos(autoLottoCount);
+
         Lottos lottos = new Lottos(manualLottos, autoLottos);
         LottoOutputView.printLottos(lottos);
 

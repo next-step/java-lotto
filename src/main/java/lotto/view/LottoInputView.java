@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.Money;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 
 public class LottoInputView {
 
-    public static int askBuyAmount() {
+    public static Money askBuyAmount() {
         System.out.println("구입금액을 입력해 주세요.");
 
         Scanner scanner = new Scanner(System.in);
@@ -17,7 +18,7 @@ public class LottoInputView {
             System.out.printf("%d원 단위로 입력해주세요.%n", Lotto.PRICE.amount());
             amount = scanner.nextInt();
         }
-        return amount;
+        return new Money(amount);
     }
 
     public static String askLastWinnerNumbers() {
