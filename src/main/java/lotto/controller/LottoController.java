@@ -20,16 +20,13 @@ public class LottoController {
     public void buy() {
         LottoPrice lottoPrice = new LottoPrice(inputView.price());
         int manualLottoCount = inputView.manualPurchaseCount();
-        if(!lottoPrice.buyPossible(manualLottoCount)) {
-            new IllegalArgumentException("돈이 부족합니다");
-        }
 
+        validatePurchase(lottoPrice, manualLottoCount);
         List<String> lists = inputView.manualNumbers(manualLottoCount);
-        lottoGame.buyManualLotto(lists);
-        lottoGame.buyAutoLotto(lottoPrice);
 
-        inputView.buy(lists.size(), lottoGame.quantity()-lists.size());
-        resultView.view(lottoGame.lottos());
+        lottoGame.buyManualLotto(lists);
+        lottoGame.buyAutoLotto(lottoPrice.lottoCount() - manualLottoCount);
+        inputView.buy(manualLottoCount, lottoPrice.lottoCount() - manualLottoCount);
     }
 
     public void result() {
@@ -38,10 +35,17 @@ public class LottoController {
                         inputView.result(),
                         inputView.bonus()
                 ));
+        resultView.view(lottoGame.lottos());
         resultView.result(lottoScore);
         resultView.rate(LottoCalculator.rate(
                 lottoScore.amount(),
                 lottoGame.quantity()
         ));
+    }
+
+    private void validatePurchase(LottoPrice lottoPrice, int manualLottoCount) {
+        if (!lottoPrice.buyPossible(manualLottoCount)) {
+            throw new IllegalArgumentException("돈이 부족합니다");
+        }
     }
 }

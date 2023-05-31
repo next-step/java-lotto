@@ -12,8 +12,8 @@ public class Lottos {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    public void buyLotto(LottoPrice lottoPrice) {
-        for (int i = 0; i < lottoPrice.lottoCount(); i++) {
+    public void buyLotto(int lottoCount) {
+        for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto(lottoNumberGenerator.lotto()));
         }
     }

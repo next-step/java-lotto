@@ -25,15 +25,11 @@ public class ManualLottoTest {
 
     @Test
     void 수동로또구매() {
-        int quantity = 3;
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
-        List<Lotto> manualLottos = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
-            manualLottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
-        }
+        lottos.buyLotto(lotto);
 
-        lottos.buyLotto(manualLottos);
+        assertThat(lottos.quantity()).isEqualTo(1);
 
-        assertThat(manualLottos).isEqualTo(quantity);
     }
 }

@@ -25,8 +25,8 @@ public class LottoGame {
         return lottos.quantity();
     }
 
-    public void buyAutoLotto(LottoPrice lottoPrice) {
-        lottos.buyLotto(lottoPrice);
+    public void buyAutoLotto(int lottoCount) {
+        lottos.buyLotto(lottoCount);
     }
 
     public void buyManualLotto(List<String> lottos) {
