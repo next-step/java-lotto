@@ -8,8 +8,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoGeneratorTest {
 
     @Test
-    void 로또_구매() {
-        List<Lotto> lottos = LottoGenerator.generateLottos(10);
+    void 자동_로또_구매() {
+        List<Lotto> lottos = LottoGenerator.autoGenerateLottos(10);
         assertThat(lottos).hasSize(10);
     }
 }

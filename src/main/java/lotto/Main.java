@@ -13,7 +13,7 @@ public class Main {
         Money money = new Money(amount);
 
         int buyCount = money.buyCount(Lotto.PRICE);
-        List<Lotto> lottos = LottoGenerator.generateLottos(buyCount);
+        List<Lotto> lottos = LottoGenerator.autoGenerateLottos(buyCount);
         LottoOutputView.printLottos(lottos);
 
         String stringNumbers = LottoInputView.askLastWinnerNumbers();
