@@ -30,9 +30,7 @@ public class LottoNumberTest {
     @Test
     void 로또_번호_숫자가_같으면_같은_인스턴스_재사용() {
         LottoNumber lottoNumber1 = LottoNumber.valueOf(1);
-        int actual = System.identityHashCode(lottoNumber1);
         LottoNumber lottoNumber2 = LottoNumber.valueOf(1);
-        int expected = System.identityHashCode(lottoNumber2);
-        assertThat(actual).isEqualTo(expected);
+        assertThat(lottoNumber1).isSameAs(lottoNumber2);
     }
 }
