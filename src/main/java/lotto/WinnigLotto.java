@@ -22,7 +22,7 @@ public class WinnigLotto {
         return new WinnigLotto(list, lottoBonusNumber);
     }
 
-    public List<Number> getWinnigLottoNumbers() {
+    public List<Number> getWinningLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
