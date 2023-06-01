@@ -1,12 +1,15 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.Money;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class LottoInputView {
 
-    public static int askBuyAmount() {
+    public static Money askBuyAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         
         Scanner scanner = new Scanner(System.in);
@@ -15,19 +18,14 @@ public class LottoInputView {
             System.out.printf("%d원 단위로 입력해주세요.%n", Lotto.PRICE.amount());
             amount = scanner.nextInt();
         }
-        return amount;
+        return new Money(amount);
     }
 
     public static String askLastWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         Scanner scanner = new Scanner(System.in);
-        String lottoNumbers = scanner.nextLine();
-        while (lottoNumbers.isBlank()) {
-            System.out.println("빈 값은 허용하지 않습니다.");
-            lottoNumbers = scanner.nextLine();
-        }
-        return lottoNumbers;
+        return inputLottoNumbers(scanner);
     }
 
     public static int askLastBonusNumber() {
@@ -40,5 +38,38 @@ public class LottoInputView {
             number = scanner.nextInt();
         }
         return number;
+    }
+
+    public static int askManualLottoCount(int maxBuyCount) {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+
+        Scanner scanner = new Scanner(System.in);
+        int count = scanner.nextInt();
+        while (maxBuyCount < count) {
+            System.out.printf("최대 구매 개수는 %d개 입니다.", maxBuyCount);
+            count = scanner.nextInt();
+        }
+        return count;
+    }
+
+    public static List<String> askManualLottoNumbers(int manualLottoCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        Scanner scanner = new Scanner(System.in);
+        List<String> manualLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            String lottoNumbers = inputLottoNumbers(scanner);
+            manualLottoNumbers.add(lottoNumbers);
+        }
+        return manualLottoNumbers;
+    }
+
+    private static String inputLottoNumbers(Scanner scanner) {
+        String lottoNumbers = scanner.nextLine();
+        while (lottoNumbers.isBlank()) {
+            System.out.println("빈 값은 허용하지 않습니다.");
+            lottoNumbers = scanner.nextLine();
+        }
+        return lottoNumbers;
     }
 }

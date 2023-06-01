@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ public class WinnerNumbersTest {
         Lotto matchOne = new Lotto("1,41,42,43,44,45");
         Lotto matchThree = new Lotto("1,2,3,43,44,45");
         Lotto matchFive = new Lotto("1,2,3,4,5,45");
-        List<Lotto> lottos = List.of(matchOne, matchThree, matchFive);
+        Lottos lottos = new Lottos(List.of(matchOne, matchThree, matchFive), new ArrayList<>());
 
         LottoResults lottoResults = winnerNumbers.matchLottos(lottos);
         Map<Rank, Integer> matchingStats = lottoResults.matchingStats();
