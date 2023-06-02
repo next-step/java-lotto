@@ -28,16 +28,15 @@ public class RandomLottoCreationStrategy implements LottoCreationStrategy {
 
     private Lotto createLotto() {
         shuffleLottoNumbers();
-        return new Lotto(new LinkedHashSet<>(findSixLengthLotto()));
+        return new Lotto(findSixLengthLotto());
     }
 
-    private List<LottoNumber> findSixLengthLotto() {
+    private TreeSet<LottoNumber> findSixLengthLotto() {
         return LOTTO_NUMBERS.stream()
                 .map(LottoNumber::getNumber)
                 .limit(LOTTO_LENGTH_UPPER_BOUND)
-                .sorted()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
     private void shuffleLottoNumbers() {

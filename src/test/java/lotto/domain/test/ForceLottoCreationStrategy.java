@@ -5,8 +5,8 @@ import lotto.domain.LottoCreationStrategy;
 import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -33,15 +33,14 @@ public class ForceLottoCreationStrategy implements LottoCreationStrategy {
     }
 
     private Lotto createLotto() {
-        return new Lotto(new LinkedHashSet<>(findSixLengthLotto()));
+        return new Lotto(findSixLengthLotto());
     }
 
-    private List<LottoNumber> findSixLengthLotto() {
+    private TreeSet<LottoNumber> findSixLengthLotto() {
         return LOTTO_NUMBERS.stream()
                 .map(LottoNumber::getNumber)
                 .limit(LOTTO_LENGTH_UPPER_BOUND)
-                .sorted()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 }
