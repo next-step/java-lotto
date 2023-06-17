@@ -1,6 +1,5 @@
 package lotto.auto;
 
-import lotto.auto.domain.Lotto;
 import lotto.auto.domain.LottoHandler;
 import lotto.auto.domain.Lottos;
 import lotto.auto.domain.Win;
@@ -19,7 +18,7 @@ public class Main {
         LottoHandler lottoHandler = new LottoHandler();
 
         Money money = new Money(inputView.requestMoney());
-        int lottoCount = lottoHandler.buyLotto(money);
+        int lottoCount = lottoHandler.countLotto(money);
         outputView.printPurchase(lottoCount);
         Lottos lottos = lottoHandler.createLotto(lottoCount);
         outputView.printLottos(lottos);
