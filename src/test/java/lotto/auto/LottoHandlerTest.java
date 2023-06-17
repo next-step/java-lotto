@@ -2,7 +2,7 @@ package lotto.auto;
 
 import lotto.auto.domain.Lotto;
 import lotto.auto.domain.LottoHandler;
-import lotto.auto.domain.Lottos;
+import lotto.auto.domain.LottoPaper;
 import lotto.auto.domain.Win;
 import lotto.auto.vo.Money;
 import lotto.auto.vo.WinNumber;
@@ -28,17 +28,19 @@ public class LottoHandlerTest {
     @Test
     @DisplayName("입력받은 수만큼 로또를 생성하는 테스트")
     public void 로또생성_테스트() {
-        Lottos lottos = lottoHandler.createLotto(5);
-        assertThat(lottos.getLottos().size()).isEqualTo(5);
-        assertThat(lottos).isInstanceOf(Lottos.class);
+        LottoPaper lottoPaper = new LottoPaper(5);
+        lottoPaper.addAutoLottos(5);
+        assertThat(lottoPaper.getLottos().size()).isEqualTo(5);
+        assertThat(lottoPaper).isInstanceOf(LottoPaper.class);
     }
 
     @Test
     @DisplayName("로또와 당첨번호를 입력받아 몇등을 했는지 확인하는 테스트")
     public void 당첨확인() {
-        Lottos lottos = new Lottos(2);
-        WinNumber winNumber = new WinNumber(lottos.getLottos().get(0).getLottoNumbers());
-        List<Win> wins = lottoHandler.confirmWinner(lottos, winNumber);
+        LottoPaper lottoPaper = new LottoPaper(2);
+        lottoPaper.addAutoLottos(2);
+        WinNumber winNumber = new WinNumber(lottoPaper.getLottos().get(0).getLottoNumbers());
+        List<Win> wins = lottoHandler.confirmWinner(lottoPaper, winNumber);
         assertThat(wins).contains(Win.FIRST);
     }
 
@@ -54,19 +56,20 @@ public class LottoHandlerTest {
     public void 등수테스트() {
         int count = 6;
         AtomicInteger counter = new AtomicInteger(count);
-        Lottos lottos = new Lottos(count);
-        List<WinNumber> winNumbers = lottos.getLottos()
+        LottoPaper lottoPaper = new LottoPaper(count);
+        lottoPaper.addAutoLottos(count);
+        List<WinNumber> winNumbers = lottoPaper.getLottos()
                 .stream()
                 .map(lotto -> convertLottoToWin(lotto, counter.getAndDecrement()))
                 .collect(Collectors.toList());
 
-        WinNumber bonusWinNumber = convertBonusWin(lottos.getLottos().get(0));
-        assertThat(lottoHandler.confirmWinner(lottos, winNumbers.get(0))).contains(Win.FIRST);
-        assertThat(lottoHandler.confirmWinner(lottos, winNumbers.get(1))).contains(Win.THIRD);
-        assertThat(lottoHandler.confirmWinner(lottos, winNumbers.get(2))).contains(Win.FOURTH);
-        assertThat(lottoHandler.confirmWinner(lottos, winNumbers.get(3))).contains(Win.FIFTH);
-        assertThat(lottoHandler.confirmWinner(lottos, winNumbers.get(4))).contains(Win.MISS);
-        assertThat(lottoHandler.confirmWinner(lottos, bonusWinNumber)).contains(Win.SECOND);
+        WinNumber bonusWinNumber = convertBonusWin(lottoPaper.getLottos().get(0));
+        assertThat(lottoHandler.confirmWinner(lottoPaper, winNumbers.get(0))).contains(Win.FIRST);
+        assertThat(lottoHandler.confirmWinner(lottoPaper, winNumbers.get(1))).contains(Win.THIRD);
+        assertThat(lottoHandler.confirmWinner(lottoPaper, winNumbers.get(2))).contains(Win.FOURTH);
+        assertThat(lottoHandler.confirmWinner(lottoPaper, winNumbers.get(3))).contains(Win.FIFTH);
+        assertThat(lottoHandler.confirmWinner(lottoPaper, winNumbers.get(4))).contains(Win.MISS);
+        assertThat(lottoHandler.confirmWinner(lottoPaper, bonusWinNumber)).contains(Win.SECOND);
 
     }
 

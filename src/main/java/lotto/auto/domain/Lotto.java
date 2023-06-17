@@ -11,6 +11,10 @@ public class Lotto {
         this.lottoNumber = new FullNumber().getFullNumber().subList(0, 6);
     }
 
+    public Lotto(List<Integer> manualNumber) {
+        this.lottoNumber = manualNumber;
+    }
+
     public List<Integer> getLottoNumbers() {
         return this.lottoNumber;
     }

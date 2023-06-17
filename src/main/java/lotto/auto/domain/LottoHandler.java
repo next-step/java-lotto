@@ -13,12 +13,12 @@ public class LottoHandler {
         return money.getMoney() / LOTTO_PRICE;
     }
 
-    public Lottos createLotto(int count) {
-        return new Lottos(count);
+    public void addAutoLottoByCount(LottoPaper lottoPaper, int count) {
+        lottoPaper.addAutoLottos(count);
     }
 
-    public List<Win> confirmWinner(Lottos lottos, WinNumber winNumbers) {
-        return lottos.checkWins(winNumbers);
+    public List<Win> confirmWinner(LottoPaper lottoPaper, WinNumber winNumbers) {
+        return lottoPaper.checkWins(winNumbers);
     }
 
     public Double getReturn(Money money, List<Win> wins) {
