@@ -10,7 +10,7 @@ public class IntNumber {
 
     private int number;
 
-    private Map<String, CalculateSymbol> symbolsMap;
+    private final Map<String, CalculateSymbol> symbolsMap;
 
     public IntNumber() {
         this("0");
@@ -23,7 +23,7 @@ public class IntNumber {
     public IntNumber(String number, List<CalculateSymbol> symbols) {
         this.number = toInt(number);
         symbolsMap = symbols.stream()
-                .collect(Collectors.toMap(symbol -> symbol.getSymbol(), symbol -> symbol));
+                .collect(Collectors.toMap(CalculateSymbol::getSymbol, symbol -> symbol));
     }
 
     public int calculateBaseSymbol(String symbol, String calculateNumber) {
