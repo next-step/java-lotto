@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoNumbersRandomSelector;
+import lotto.domain.LottoNumbersManualSelector;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.ManualPurchaseNumber;
@@ -37,12 +37,11 @@ public class InputView {
   public LottoTickets manualLottoTickets(ManualPurchaseNumber manualPurchaseNumber) {
     Printer.print("수동으로 구매할 번호를 입력해 주세요.\n");
 
-    LottoTickets lottoTickets = LottoTickets.issue(0, LottoNumbersRandomSelector.getInstance());
-
-    for (int i = 0; i < manualPurchaseNumber.value(); i++) {
-      List<LottoNumber> lottoNumbers = readLottoNumbers();
-      lottoTickets.append(
-          LottoTicket.bySize(LottoNumbers.LOTTO_NUMBER_COUNT_OUTBOUND, (numbers) -> lottoNumbers));
+    LottoTickets lottoTickets = LottoTickets.issue(1,
+        new LottoNumbersManualSelector(readLottoNumbers()));
+    for (int i = 0; i < manualPurchaseNumber.value() - 1; i++) {
+      lottoTickets.append(LottoTicket.bySize(LottoNumbers.LOTTO_NUMBER_COUNT_OUTBOUND,
+          new LottoNumbersManualSelector(readLottoNumbers())));
     }
 
     return lottoTickets;
