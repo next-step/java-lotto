@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -10,7 +11,7 @@ public class LottoTickets {
   private final List<LottoTicket> tickets;
 
   private LottoTickets(List<LottoTicket> tickets) {
-    this.tickets = new ArrayList<>(tickets);
+    this.tickets = List.copyOf(tickets);
   }
 
   public static LottoTickets issue(int number, LottoNumbersSelector selector) {
@@ -25,13 +26,15 @@ public class LottoTickets {
   }
 
   public LottoTickets append(LottoTickets lottoTickets) {
-    this.tickets.addAll(lottoTickets.tickets());
-    return new LottoTickets(this.tickets());
+    List<LottoTicket> newTickets = new ArrayList<>(this.tickets);
+    newTickets.addAll(lottoTickets.tickets());
+    return new LottoTickets(newTickets);
   }
 
   public LottoTickets append(LottoTicket lottoTicket) {
-    this.tickets.add(lottoTicket);
-    return new LottoTickets(this.tickets());
+    List<LottoTicket> newTickets = new ArrayList<>(this.tickets);
+    newTickets.add(lottoTicket);
+    return new LottoTickets(newTickets);
   }
 
   public List<LottoTicket> tickets() {
