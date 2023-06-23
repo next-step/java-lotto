@@ -1,9 +1,12 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbersManualSelector;
 import lotto.domain.LottoNumbersRandomSelector;
+import lotto.domain.LottoNumbersSelector;
 import lotto.domain.LottoTickets;
 import lotto.domain.ManualPurchaseNumber;
 import lotto.domain.Money;
@@ -22,12 +25,12 @@ public class LottoGame {
 
     int ticketPurchasableNumber = lottoPurchasablePrice.ticketPurchasableNumber();
     ManualPurchaseNumber manualPurchaseNumber = inputView.manualPurchaseNumber(ticketPurchasableNumber);
-    LottoTickets manualLottoTickets = inputView.manualLottoTickets(manualPurchaseNumber);
+    LottoTickets manualLottoTickets = issueManualTickets(inputView.manualLottoTickets(manualPurchaseNumber));
 
     int autoPurchasableNumber = ticketPurchasableNumber - manualPurchaseNumber.value();
     resultView.printPurchaseAmount(manualPurchaseNumber.value(), autoPurchasableNumber);
 
-    LottoTickets autoTickets = LottoTickets.issue(autoPurchasableNumber, LottoNumbersRandomSelector.getInstance());
+    LottoTickets autoTickets = LottoTickets.issueBySameSelector(autoPurchasableNumber, LottoNumbersRandomSelector.getInstance());
     LottoTickets tickets = autoTickets.append(manualLottoTickets);
     resultView.showTicketsInfo(tickets);
 
@@ -44,5 +47,14 @@ public class LottoGame {
     if (lastWeekNumbers.contains(bonusNumber)) {
       throw new IllegalArgumentException("보너스 숫자는 이전 주 당첨 번호와 중복될 수 없습니다.");
     }
+  }
+
+  private LottoTickets issueManualTickets(List<List<LottoNumber>> numbersGroups) {
+    List<LottoNumbersSelector> selectors = new ArrayList<>();
+    for (List<LottoNumber> lottoNumbers : numbersGroups) {
+      selectors.add(new LottoNumbersManualSelector(lottoNumbers));
+    }
+
+    return LottoTickets.issueByVariousSelectors(selectors);
   }
 }

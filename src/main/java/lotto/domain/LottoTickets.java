@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,12 +13,22 @@ public class LottoTickets {
     this.tickets = List.copyOf(tickets);
   }
 
-  public static LottoTickets issue(int number, LottoNumbersSelector selector) {
+  public static LottoTickets issueBySameSelector(int number, LottoNumbersSelector selector) {
     List<LottoTicket> tickets = new ArrayList<>();
     for (int i = 0; i < number; i++) {
       tickets.add(LottoTicket.bySize(
           LottoNumbers.LOTTO_NUMBER_COUNT_OUTBOUND,
           selector));
+    }
+
+    return new LottoTickets(tickets);
+  }
+
+  public static LottoTickets issueByVariousSelectors(List<LottoNumbersSelector> selectors) {
+    List<LottoTicket> tickets = new ArrayList<>();
+
+    for (LottoNumbersSelector selector : selectors) {
+      tickets.add(LottoTicket.bySize(LottoNumbers.LOTTO_NUMBER_COUNT_OUTBOUND, selector));
     }
 
     return new LottoTickets(tickets);
