@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.ManualPurchaseNumber;
 import lotto.domain.Money;
 import lotto.domain.Winning;
 
@@ -28,8 +29,8 @@ public class ResultView {
     }
   }
 
-  public void printPurchaseAmount(int ticketPurchasableNumber) {
-    Printer.print(ticketPurchasableNumber + "개를 구매했습니다.");
+  public void printPurchaseAmount(int manualPurchaseNumber, int autoPurchasableNumber) {
+    Printer.print(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", autoPurchasableNumber, manualPurchaseNumber));
   }
 
   public void printResult(Map<Winning, Integer> winnings, double profit) {
@@ -37,7 +38,7 @@ public class ResultView {
 
     for (Winning winning : Winning.values()) {
       Printer.print(String.format("%d개 일치%s (%d원)- %d개",
-          winning.sameCount(), bonusNumberMessageOrEmpty(winning), winning.reward(), winnings.get(winning)));
+          winning.sameCount(), bonusNumberMessageOrEmpty(winning), winning.reward(), zeroIfNull(winnings.get(winning))));
     }
 
     String suffix = EMPTY;
@@ -55,5 +56,9 @@ public class ResultView {
     }
 
     return EMPTY;
+  }
+
+  private Integer zeroIfNull(Integer input) {
+    return input == null ? 0 : input;
   }
 }
