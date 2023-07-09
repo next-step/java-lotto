@@ -8,10 +8,13 @@ public class Lotto {
     private final List<Integer> lottoNumber;
 
     public Lotto() {
-        this.lottoNumber = new FullNumber().getFullNumber().subList(0, 6);
+        this(new FullNumber().getFullNumber().subList(0, 6));
     }
 
     public Lotto(List<Integer> manualNumber) {
+        if (manualNumber.size() != 6) {
+            throw new RuntimeException("로또 번호는 6자리여야 합니다.");
+        }
         this.lottoNumber = manualNumber;
     }
 

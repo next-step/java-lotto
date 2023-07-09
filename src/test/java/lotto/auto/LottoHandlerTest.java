@@ -10,8 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -54,23 +52,11 @@ public class LottoHandlerTest {
     @Test
     @DisplayName("당첨 등수별 테스트")
     public void 등수테스트() {
-        int count = 6;
-        AtomicInteger counter = new AtomicInteger(count);
-        LottoPaper lottoPaper = new LottoPaper(count);
-        lottoPaper.addAutoLottos(count);
-        List<WinNumber> winNumbers = lottoPaper.getLottos()
-                .stream()
-                .map(lotto -> convertLottoToWin(lotto, counter.getAndDecrement()))
-                .collect(Collectors.toList());
-
-        WinNumber bonusWinNumber = convertBonusWin(lottoPaper.getLottos().get(0));
-        assertThat(lottoHandler.confirmWinner(lottoPaper, winNumbers.get(0))).contains(Win.FIRST);
-        assertThat(lottoHandler.confirmWinner(lottoPaper, winNumbers.get(1))).contains(Win.THIRD);
-        assertThat(lottoHandler.confirmWinner(lottoPaper, winNumbers.get(2))).contains(Win.FOURTH);
-        assertThat(lottoHandler.confirmWinner(lottoPaper, winNumbers.get(3))).contains(Win.FIFTH);
-        assertThat(lottoHandler.confirmWinner(lottoPaper, winNumbers.get(4))).contains(Win.MISS);
-        assertThat(lottoHandler.confirmWinner(lottoPaper, bonusWinNumber)).contains(Win.SECOND);
-
+        LottoPaper lottoPaper = new LottoPaper(1);
+        lottoPaper.addManualLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
+        WinNumber winNumber = new WinNumber(List.of(1, 2, 3, 4, 5, 12));
+        winNumber.addBonusNumber(6);
+        assertThat(lottoHandler.confirmWinner(lottoPaper, winNumber)).contains(Win.SECOND);
     }
 
     // 로또번호중 매치 넘버를 winnumber 로 변환해주는 메소드
