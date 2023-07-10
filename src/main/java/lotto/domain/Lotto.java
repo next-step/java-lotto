@@ -29,6 +29,14 @@ public class Lotto {
 
     public static Lotto createSpecificLotto(final List<Integer> numbers) {
 
+        if (numbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("lotto size must be 6");
+        }
+
+        if (numbers.stream().distinct().count() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("lotto can't contain same numbers");
+        }
+
         return new Lotto(
             numbers.stream()
                 .map(LottoNumber::new)
