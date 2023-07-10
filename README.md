@@ -30,7 +30,7 @@
 ## 기능 구현
 
 - 로또를 생성
-    - [ ] LottoNumber ->  범위는 1~45
+    - [x] LottoNumber ->  범위는 1~45
     - [ ] Lotto -> 6개의 LottoNumber , 서로 다른 6개 LottoNumber
     - [ ] AutoLottoGenerator 는 Lotto 만든다.
     - [ ] LottoPurchaser 가 AutoLottoGenerator 로 금액만큼 구매한다.
