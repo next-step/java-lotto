@@ -1,5 +1,6 @@
 package lottogame.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -45,7 +46,27 @@ class LottoNumbersTest {
                     IllegalArgumentException.class);
             }
         }
-
     }
 
+    @Nested
+    @DisplayName("equals는")
+    class Describe_Equals {
+
+        @Nested
+        @DisplayName("같은 LottoNumbers 를 가지고 있으면,")
+        class Context_Same_Lotto_Numbers {
+
+            private final List<Integer> lottoValues = List.of(1, 2, 3, 4, 5, 45);
+            private final LottoNumbers lottoNumbers = new LottoNumbers(lottoValues);
+            private final LottoNumbers sameLottoNumbers = new LottoNumbers(lottoValues);
+
+            @Test
+            @DisplayName("논리적으로 동일하다")
+            void It_Same_Objects() {
+                assertThat(lottoNumbers).isEqualTo(sameLottoNumbers);
+            }
+
+        }
+
+    }
 }
