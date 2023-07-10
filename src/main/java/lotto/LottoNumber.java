@@ -7,7 +7,14 @@ public final class LottoNumber {
     private final int value;
 
     private LottoNumber(final int value) {
+        validate(value);
         this.value = value;
+    }
+
+    private void validate(final int value) {
+        if (value < 1 || value > 45) {
+            throw new IllegalArgumentException("잘못된 로또 번호입니다. 로또번호는 1이상 45이하의 정수를 입력하셔야 합니다.");
+        }
     }
 
     public static LottoNumber of(final int value) {
