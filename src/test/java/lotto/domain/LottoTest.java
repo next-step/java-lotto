@@ -34,6 +34,7 @@ class LottoTest {
     }
 
     @Test
+    @DisplayName("숫자를 지정하는 로또 생성 테스트")
     void createSpecificLottoTest() {
         //given
         Lotto lotto = Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6));
@@ -41,6 +42,7 @@ class LottoTest {
         //then
         assertThat(lotto.getLottoNumbers()).isEqualTo(Stream.of(1, 2, 3, 4, 5, 6)
             .map(LottoNumber::new).collect(Collectors.toList()));
-
     }
+
+    
 }
