@@ -18,10 +18,10 @@
   - [ ] filed : Number
 * Lottos -> 일급 컬렉션, type : List<Lotto>
   - [ ] action : 당첨 통계 계산
+  - [ ] action : 로또 번호 6자리 생성
 * Lotto -> 일급 컬렉션, type : List<Number>
-  - [ ] validation : 중복이 있는 지
-  - [ ] validation : 6개의 숫자인지
-  - [ ] constructor : 로또 번호 6자리 생성
+  - [x] validation : 중복이 있는 지
+  - [x] validation : 6개의 숫자인지
 * LottoNumber -> type : int
   - [x] validation : 1~45의 숫자
 

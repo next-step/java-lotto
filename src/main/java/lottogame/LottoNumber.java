@@ -16,6 +16,11 @@ public final class LottoNumber {
         this.lottoNumber = number;
     }
 
+    public LottoNumber(final int value) {
+        validateRange(value);
+        this.lottoNumber = value;
+    }
+
     private void validateBlank(String value) {
         if (value == null || value.isBlank()) {
             throw new IllegalArgumentException("숫자를 입력해야 합니다");
