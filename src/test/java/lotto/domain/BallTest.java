@@ -1,9 +1,12 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class BallTest {
 
@@ -12,6 +15,14 @@ class BallTest {
     void ball_inputValidateNumber() {
         /* given & when & then */
         assertDoesNotThrow(() -> new Ball("10"));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"46", "0"})
+    @DisplayName("숫자 범위 초과 입력 테스트")
+    void ball_outOfRangeNumber (final String value){
+        /* given & when & then */
+        assertThatThrownBy(() -> new Ball(value)).isExactlyInstanceOf(IllegalArgumentException.class);
     }
 
 }
