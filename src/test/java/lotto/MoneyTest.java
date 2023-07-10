@@ -14,4 +14,13 @@ class MoneyTest {
         Assertions.assertThatNoException()
                 .isThrownBy(() -> new Money(money));
     }
+
+    @Test
+    @DisplayName("음수 입력시 예외 처리")
+    void validateNegative() {
+        int negativeMoney = 14000;
+
+        Assertions.assertThatThrownBy(() -> new Money(negativeMoney))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
