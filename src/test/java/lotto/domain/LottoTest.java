@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -19,5 +20,17 @@ public class LottoTest {
 
         //when, then
         assertThat(lotto.getNumbers()).hasSize(6);
+    }
+
+    @Test
+    void distinctNumbersTest() {
+        //given
+        Lotto lotto = Lotto.createLotto();
+
+        //when
+        List<Integer> numbers = lotto.getNumbers();
+
+        //then
+        assertThat(numbers.stream().distinct().count()).isEqualTo(numbers.size());
     }
 }
