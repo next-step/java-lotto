@@ -18,11 +18,18 @@ class BallTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"46", "0"})
+    @ValueSource(strings = {"46", "0", "-1"})
     @DisplayName("숫자 범위 초과 입력 테스트")
-    void ball_outOfRangeNumber (final String value){
+    void ball_outOfRangeNumber(final String value) {
         /* given & when & then */
         assertThatThrownBy(() -> new Ball(value)).isExactlyInstanceOf(IllegalArgumentException.class);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"hello", "1,2", "", " "})
+    @DisplayName("숫자가 아닌 문자열 입력 테스트")
+    void ball_notNumericInput(final String value) {
+        /* given & when & then */
+        assertThatThrownBy(() -> new Ball(value)).isExactlyInstanceOf(IllegalArgumentException.class);
+    }
 }
