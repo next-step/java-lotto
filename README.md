@@ -7,3 +7,12 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 페어 프로그래밍 규칙
+* 5분마다 driver와 navigator를 교체한다.
+* commit message는 angular convention을 따른다.
+* 요구사항 별로 commit하며 누락된 경우가 있는 경우 추가적으로 commit한다.
+* 서로의 의견을 내고 너무 길어질 시 작성된 코드를 따르고 추후에 의논한다.
+* PR 기한
+  * 1단계 PR: 7월 11일 (화) 18시까지
+  * 2단계 PR: 7월 13일 (목) 18시까지
