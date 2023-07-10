@@ -1,10 +1,13 @@
 package lotto.input;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class LottoInput {
 
+    public static final String WINNING_DELIMITER = ", ";
     private final Scanner scanner;
 
     public LottoInput() {
@@ -16,6 +19,8 @@ public class LottoInput {
     }
 
     public List<Integer> inputWinningNumbers() {
-        return List.of(1, 2, 3, 4, 5, 6);
+        return Arrays.stream(scanner.nextLine().split(WINNING_DELIMITER))
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
     }
 }
