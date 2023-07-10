@@ -21,12 +21,20 @@ public class Lotto {
         this.numbers = Collections.unmodifiableList(numbers);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return this.numbers;
-    }
-
-    public static Lotto createLotto() {
+    public static Lotto createRandomLotto() {
         Collections.shuffle(values);
         return new Lotto(values.subList(0, LOTTO_SIZE));
+    }
+
+    public static Lotto createSpecificLotto(List<Integer> numbers) {
+        return new Lotto(
+            numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList())
+        );
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return this.numbers;
     }
 }

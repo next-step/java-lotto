@@ -1,18 +1,16 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class WinningLotto {
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Lotto lottoNumbers;
     private final LottoNumber bonus;
 
-    public WinningLotto(List<LottoNumber> lottoNumbers, LottoNumber bonus) {
+    public WinningLotto(final Lotto lottoNumbers, final LottoNumber bonus) {
         this.lottoNumbers = lottoNumbers;
         this.bonus = bonus;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public Lotto getLottoNumbers() {
         return this.lottoNumbers;
     }
 
