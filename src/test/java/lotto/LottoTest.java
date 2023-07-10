@@ -26,7 +26,7 @@ public class LottoTest {
         // when & then
         assertThat(lotto.getNumbers())
                 .isEqualTo(Stream.of(1, 2, 3, 4, 5, 6)
-                        .map(Number::of)
+                        .map(LottoNumber::of)
                         .collect(Collectors.toUnmodifiableList()));
     }
 }

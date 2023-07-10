@@ -6,16 +6,16 @@ import java.util.stream.Collectors;
 
 public final class Lotto {
 
-    private final List<Number> numbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(final List<Integer> numbers) {
-        this.numbers = numbers.stream()
-                .map(Number::of)
+        this.lottoNumbers = numbers.stream()
+                .map(LottoNumber::of)
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public List<Number> getNumbers() {
-        return numbers;
+    public List<LottoNumber> getNumbers() {
+        return lottoNumbers;
     }
 
     @Override
@@ -23,11 +23,11 @@ public final class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
+        return Objects.hash(lottoNumbers);
     }
 }
