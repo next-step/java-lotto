@@ -51,6 +51,10 @@ public class Lotto {
         }
     }
 
+    public Long countMatches(Lotto other) {
+        return null;
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return this.numbers;
     }
