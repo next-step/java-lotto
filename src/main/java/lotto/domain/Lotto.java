@@ -7,10 +7,11 @@ import java.util.stream.IntStream;
 
 public class Lotto {
 
-    public static final int LOTTO_SIZE = 6;
-    public static final int LOTTO_START = 1;
-    public static final int LOTTO_END = 45;
-    private static final List<LottoNumber> values = IntStream.rangeClosed(LOTTO_START, LOTTO_END)
+    private static final int LOTTO_SIZE = 6;
+    private static final List<LottoNumber> values = IntStream.rangeClosed(
+            LottoNumber.LOTTO_START,
+            LottoNumber.LOTTO_END
+        )
         .boxed()
         .map(LottoNumber::new)
         .collect(Collectors.toList());
@@ -26,7 +27,7 @@ public class Lotto {
         return new Lotto(values.subList(0, LOTTO_SIZE));
     }
 
-    public static Lotto createSpecificLotto(List<Integer> numbers) {
+    public static Lotto createSpecificLotto(final List<Integer> numbers) {
         return new Lotto(
             numbers.stream()
                 .map(LottoNumber::new)

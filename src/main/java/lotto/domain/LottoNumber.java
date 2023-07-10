@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    public static final int LOTTO_START = 1;
-    public static final int LOTTO_END = 45;
+    static final int LOTTO_START = 1;
+    static final int LOTTO_END = 45;
 
     private final Integer number;
 
@@ -14,7 +14,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    private void verify(Integer number) {
+    private void verify(final Integer number) {
         if (number < LOTTO_START || number > LOTTO_END) {
             throw new IllegalArgumentException(
                 "lotto number should in range " + LOTTO_START + "~" + LOTTO_END);
@@ -22,7 +22,7 @@ public class LottoNumber {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
