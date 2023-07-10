@@ -4,6 +4,9 @@ import java.util.Objects;
 
 public final class LottoNumber {
 
+    private static final int MINIMUM_NUMBER = 1;
+    private static final int MAXIMUM_NUMBER = 45;
+
     private final int value;
 
     private LottoNumber(final int value) {
@@ -12,7 +15,7 @@ public final class LottoNumber {
     }
 
     private void validate(final int value) {
-        if (value < 1 || value > 45) {
+        if (value < MINIMUM_NUMBER || value > MAXIMUM_NUMBER) {
             throw new IllegalArgumentException("잘못된 로또 번호입니다. 로또번호는 1이상 45이하의 정수를 입력하셔야 합니다.");
         }
     }
