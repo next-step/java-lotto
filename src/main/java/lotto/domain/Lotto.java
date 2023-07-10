@@ -29,19 +29,26 @@ public class Lotto {
 
     public static Lotto createSpecificLotto(final List<Integer> numbers) {
 
-        if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("lotto size must be 6");
-        }
-
-        if (numbers.stream().distinct().count() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("lotto can't contain same numbers");
-        }
+        verifySize(numbers);
+        verifyDuplicate(numbers);
 
         return new Lotto(
             numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList())
         );
+    }
+
+    private static void verifyDuplicate(final List<Integer> numbers) {
+        if (numbers.stream().distinct().count() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("lotto can't contain same numbers");
+        }
+    }
+
+    private static void verifySize(final List<Integer> numbers) {
+        if (numbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("lotto size must be 6");
+        }
     }
 
     public List<LottoNumber> getLottoNumbers() {
