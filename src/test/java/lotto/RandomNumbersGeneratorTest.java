@@ -2,6 +2,7 @@ package lotto;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,5 +46,17 @@ class RandomNumbersGeneratorTest {
 
         // then
         assertThat(numbers).hasSize(6);
+    }
+
+    @Test
+    void 생성된_숫자들이_중복되지_않으면_성공() {
+        // given
+        RandomNumbersGenerator randomNumbersGenerator = RandomNumbersGenerator.getInstance();
+
+        // when
+        List<Integer> numbers = randomNumbersGenerator.generate();
+
+        // then
+        assertThat(numbers).hasSameSizeAs(new HashSet<>(numbers));
     }
 }
