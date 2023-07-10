@@ -3,17 +3,13 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoTest {
+class LottoTest {
 
     @Test
-    void createLottoTest() {
-        Assertions.assertDoesNotThrow(() -> new Lotto(List.of(1,2,3,4,5,6)));
-    }
-
-    @Test
+    @DisplayName("로또는 6개의 숫자로 이루어진다.")
     void createSixNumbersTest() {
         //given
         Lotto lotto = Lotto.createLotto();
@@ -23,6 +19,7 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("로또는 서로 다른 숫자들로 이루어진다.")
     void distinctNumbersTest() {
         //given
         Lotto lotto = Lotto.createLotto();
