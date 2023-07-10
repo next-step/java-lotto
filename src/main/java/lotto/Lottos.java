@@ -1,7 +1,6 @@
 package lotto;
 
-public class Lottos {
+public final class Lottos {
     public Lottos() {
-        throw new UnsupportedOperationException();
     }
 }
