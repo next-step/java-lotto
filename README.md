@@ -1,4 +1,50 @@
 # 로또
+## 요구 사항 분석
+
+### Domain
+* LottoService (* 추가 생각)
+  - [ ] field : Payment
+  - [ ] field : WinnerNumber
+  - [ ] field : Lottos
+  - [ ] action : 당첨 통계 계산
+  - [ ] action : 수익률 계산
+  - [ ] 로또 구입 갯수 계산 (개당 1,000원)
+* Payment -> type : int
+  - [ ] validation : 딱 나눠 떨어 지는지?
+  - [ ] validation : 내가 투입한 금액이 1,000원 미만 인지?
+  - [ ] action : 몇 장만 산다?
+* WinnerNumber
+  - [ ] field : Lotto
+  - [ ] filed : Number
+* Lottos -> 일급 컬렉션, type : List<Lotto>
+  - [ ] action : 당첨 통계 계산
+* Lotto -> 일급 컬렉션, type : List<Number>
+  - [ ] validation : 중복이 있는 지
+  - [ ] validation : 6개의 숫자인지
+  - [ ] constructor : 로또 번호 6자리 생성
+* Number -> type : int
+  - [ ] validation : 1~45의 숫자
+
+### View
+* [ ] 구입금액 - 입력
+* [ ] 당첨번호 - 입력
+* [ ] 보너스볼 - 입력
+* [ ] 로또 구매 개수 - 출력
+* [ ] 자동 로또 번호 출력 - 출력
+* [ ] 당첨통계 출력 - 출력
+* [ ] 수익률 출력 - 출력
+
+### View - 담첨 통계
+* 3개 일치 (5000원)- ~ 개 
+* 4개 일치 (50000원)- ~ 개
+* 5개 일치 (1500000원)- ~ 개 
+* 5개 일치, 보너스 볼 일치(30000000원) - ~ 개 
+* 6개 일치 (2000000000원)- ~ 개
+* 총 수익률 = (당첨 금액) / 투입 금액
+  * 3째 자리에서 round up
+
+
+----
 ## 진행 방법
 * 로또 요구사항을 파악한다.
 * 요구사항에 대한 구현을 완료한 후 자신의 github 아이디에 해당하는 브랜치에 Pull Request(이하 PR)를 통해 코드 리뷰 요청을 한다.
