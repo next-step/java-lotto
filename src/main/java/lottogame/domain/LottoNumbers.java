@@ -15,10 +15,7 @@ public class LottoNumbers {
     }
 
     private void assertLottoNumbers(List<Integer> lottoNumbers) {
-
-        if (lottoNumbers == null) {
-            throw new IllegalArgumentException("lottoNumbers는 Null이 되면 안됩니다.");
-        }
+        Objects.requireNonNull(lottoNumbers, "lottoNumbers는 Null이 되면 안됩니다.");
 
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(
