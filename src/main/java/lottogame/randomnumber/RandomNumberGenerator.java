@@ -1,22 +1,26 @@
 package lottogame.randomnumber;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 import lottogame.domain.LottoNumber;
 import lottogame.domain.spi.NumberGenerator;
 
 public class RandomNumberGenerator implements NumberGenerator {
 
-    private final Random random = new Random();
-
     @Override
-    public List<Integer> generate(int count) {
-        List<Integer> answer = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            answer.add(random.nextInt(LottoNumber.MAX_LOTTO_NUMBER - LottoNumber.MIN_LOTTO_NUMBER)
-                + LottoNumber.MIN_LOTTO_NUMBER);
+    public Set<Integer> generate(int count) {
+        List<Integer> nonShuffledValues = new ArrayList<>();
+        for (int lottoNumber = LottoNumber.MIN_LOTTO_NUMBER; lottoNumber <= LottoNumber.MAX_LOTTO_NUMBER;
+            lottoNumber++) {
+
+            nonShuffledValues.add(lottoNumber);
         }
-        return answer;
+        Collections.shuffle(nonShuffledValues);
+        return nonShuffledValues.stream()
+            .limit(count)
+            .collect(Collectors.toSet());
     }
 }

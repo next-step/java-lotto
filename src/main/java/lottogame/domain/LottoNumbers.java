@@ -1,7 +1,7 @@
 package lottogame.domain;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lottogame.domain.spi.NumberGenerator;
 
@@ -9,25 +9,25 @@ public class LottoNumbers {
 
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
-    private final List<LottoNumber> values;
+    private final Set<LottoNumber> values;
 
     LottoNumbers(NumberGenerator numberGenerator) {
         Objects.requireNonNull(numberGenerator, "numberGeneartor는 Null이 되면 안됩니다.");
         this.values = initLottoNumbers(numberGenerator.generate(LOTTO_NUMBERS_SIZE));
     }
 
-    LottoNumbers(List<Integer> lottoNumbers) {
+    LottoNumbers(Set<Integer> lottoNumbers) {
         this.values = initLottoNumbers(lottoNumbers);
     }
 
-    private List<LottoNumber> initLottoNumbers(List<Integer> lottoNumbers) {
+    private Set<LottoNumber> initLottoNumbers(Set<Integer> lottoNumbers) {
         assertLottoNumbers(lottoNumbers);
         return lottoNumbers.stream()
             .map(LottoNumber::valueOf)
-            .collect(Collectors.toList());
+            .collect(Collectors.toSet());
     }
 
-    private void assertLottoNumbers(List<Integer> lottoNumbers) {
+    private void assertLottoNumbers(Set<Integer> lottoNumbers) {
         Objects.requireNonNull(lottoNumbers, "lottoNumbers는 Null이 되면 안됩니다.");
 
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {

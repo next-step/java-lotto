@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.List;
+import java.util.Set;
 import lottogame.domain.spi.NumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -24,7 +24,7 @@ class LottoNumbersTest {
         @DisplayName("6개의 int값으로")
         class Context_Input_Six_Integer {
 
-            private final List<Integer> lottoValues = List.of(1, 2, 3, 4, 5, 45);
+            private final Set<Integer> lottoValues = Set.of(1, 2, 3, 4, 5, 45);
 
             @Test
             @DisplayName("생성할 수 있다.")
@@ -37,8 +37,8 @@ class LottoNumbersTest {
         @DisplayName("6개의 int값이 아니면")
         class Context_Input_Non_Six_Integer {
 
-            private final List<Integer> lessLottoValues = List.of(1, 2, 3, 4, 5);
-            private final List<Integer> moreLottoValues = List.of(1, 2, 3, 4, 5, 6, 7);
+            private final Set<Integer> lessLottoValues = Set.of(1, 2, 3, 4, 5);
+            private final Set<Integer> moreLottoValues = Set.of(1, 2, 3, 4, 5, 6, 7);
 
             @Test
             @DisplayName("IllegalArgumentException을 던진다.")
@@ -57,7 +57,7 @@ class LottoNumbersTest {
             @ParameterizedTest
             @NullSource
             @DisplayName("NullPointerException을 던진다.")
-            void It_Throw_IllegalArgumentException(List<Integer> nullValue) {
+            void It_Throw_IllegalArgumentException(Set<Integer> nullValue) {
                 assertThatThrownBy(() -> new LottoNumbers(nullValue)).isInstanceOf(NullPointerException.class);
             }
         }
@@ -66,7 +66,7 @@ class LottoNumbersTest {
         @DisplayName("numberGenerator가 들어오면")
         class Context_Input_NumberGenerator {
 
-            private final NumberGenerator numberGenerator = (count) -> List.of(1, 2, 3, 4, 5, 45);
+            private final NumberGenerator numberGenerator = (count) -> Set.of(1, 2, 3, 4, 5, 45);
 
             @Test
             @DisplayName("생성할 수 있다.")
@@ -100,7 +100,7 @@ class LottoNumbersTest {
         @DisplayName("같은 LottoNumbers 를 가지고 있으면,")
         class Context_Same_Lotto_Numbers {
 
-            private final List<Integer> lottoValues = List.of(1, 2, 3, 4, 5, 45);
+            private final Set<Integer> lottoValues = Set.of(1, 2, 3, 4, 5, 45);
             private final LottoNumbers lottoNumbers = new LottoNumbers(lottoValues);
             private final LottoNumbers sameLottoNumbers = new LottoNumbers(lottoValues);
 

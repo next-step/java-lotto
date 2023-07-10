@@ -1,6 +1,6 @@
 package lottogame.randomnumber;
 
-import java.util.List;
+import java.util.Set;
 import lottogame.domain.spi.NumberGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -25,7 +25,7 @@ class RandomNumberGeneratorTest {
             @Test
             @DisplayName("size가 n인 Integer 리스트를 반환한다")
             void It_Return_N_Size_List() {
-                List<Integer> result = numberGenerator.generate(count);
+                Set<Integer> result = numberGenerator.generate(count);
 
                 Assertions.assertThat(result).hasSize(count);
             }
