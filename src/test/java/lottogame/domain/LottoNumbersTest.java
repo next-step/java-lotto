@@ -8,6 +8,8 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 
 @SuppressWarnings("FieldCanBeLocal")
 @DisplayName("LottoNumbers 클래스")
@@ -43,6 +45,19 @@ class LottoNumbersTest {
                 assertThatThrownBy(() -> new LottoNumbers(lessLottoValues)).isInstanceOf(
                     IllegalArgumentException.class);
                 assertThatThrownBy(() -> new LottoNumbers(moreLottoValues)).isInstanceOf(
+                    IllegalArgumentException.class);
+            }
+        }
+
+        @Nested
+        @DisplayName("null 파라미터가 입력되면")
+        class Context_Input_Null_Parameter {
+
+            @ParameterizedTest
+            @NullSource
+            @DisplayName("IllegalArgumentException을 던진다.")
+            void It_Throw_IllegalArgumentException(List<Integer> nullValue) {
+                assertThatThrownBy(() -> new LottoNumbers(nullValue)).isInstanceOf(
                     IllegalArgumentException.class);
             }
         }

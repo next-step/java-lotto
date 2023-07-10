@@ -15,6 +15,11 @@ public class LottoNumbers {
     }
 
     private void assertLottoNumbers(List<Integer> lottoNumbers) {
+
+        if (lottoNumbers == null) {
+            throw new IllegalArgumentException("lottoNumbers는 Null이 되면 안됩니다.");
+        }
+
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(
                 String.format("lottoNumbers의 size는 %d 이여야 합니다. lottoNumbers.size() \"%d\"", LOTTO_NUMBERS_SIZE,
