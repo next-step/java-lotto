@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -34,6 +35,18 @@ class WinningLottoTest {
         //when, then
         assertThat(winningLotto.getLottoNumbers().getLottoNumbers()).hasSize(6);
         assertThat(winningLotto.getBonus()).isInstanceOf(LottoNumber.class);
+    }
+
+    @Test
+    @DisplayName("보너스 번호가 당첨 번호 안에 있을 수 없다.")
+    void bonusInLottoThrowExceptionTest() {
+        //given
+        Lotto lotto = Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6));
+
+        //when, then
+        assertThrows(IllegalArgumentException.class, () -> {
+            new WinningLotto(lotto, new LottoNumber(6));
+        });
     }
 
     @ParameterizedTest
