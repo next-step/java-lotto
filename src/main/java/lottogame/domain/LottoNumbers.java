@@ -13,7 +13,7 @@ public class LottoNumbers {
 
     LottoNumbers(NumberGenerator numberGenerator) {
         Objects.requireNonNull(numberGenerator, "numberGeneartor는 Null이 되면 안됩니다.");
-        this.values = initLottoNumbers(numberGenerator.generate(LOTTO_NUMBERS_SIZE));
+        this.values = initLottoNumbers(numberGenerator.generateDistinctNumbers(LOTTO_NUMBERS_SIZE));
     }
 
     LottoNumbers(Set<Integer> lottoNumbers) {
