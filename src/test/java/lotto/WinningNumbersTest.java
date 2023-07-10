@@ -18,4 +18,14 @@ class WinningNumbersTest {
         Assertions.assertThatNoException()
                 .isThrownBy(() -> new WinningNumbers(lottoNumbers, bonusNumber));
     }
+
+    @Test
+    @DisplayName("당첨 번호와 보너스 번호 중복 테스트")
+    void validateDuplicatedBonus() {
+        List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 6;
+
+        Assertions.assertThatThrownBy(() -> new WinningNumbers(lottoNumbers, bonusNumber))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
