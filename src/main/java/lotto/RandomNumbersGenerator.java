@@ -4,8 +4,13 @@ import java.util.List;
 
 public final class RandomNumbersGenerator implements NumbersGenerator {
 
+    private static final RandomNumbersGenerator INSTANCE = new RandomNumbersGenerator();
+
+    private RandomNumbersGenerator() {
+    }
+
     public static RandomNumbersGenerator getInstance() {
-        throw new UnsupportedOperationException();
+        return INSTANCE;
     }
 
     @Override
