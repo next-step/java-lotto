@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,7 +12,7 @@ import org.junit.jupiter.api.Test;
 class LottoTest {
 
     @Test
-    @DisplayName("로또는 6개의 숫자로 이루어진다.")
+    @DisplayName("랜덤 생성된 로또는 6개의 숫자로 이루어진다.")
     void createSixNumbersTest() {
         //given
         Lotto lotto = Lotto.createRandomLotto();
@@ -21,7 +22,7 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("로또는 서로 다른 숫자들로 이루어진다.")
+    @DisplayName("랜덤 생성된 로또는 서로 다른 숫자들로 이루어진다.")
     void distinctNumbersTest() {
         //given
         Lotto lotto = Lotto.createRandomLotto();
@@ -44,5 +45,20 @@ class LottoTest {
             .map(LottoNumber::new).collect(Collectors.toList()));
     }
 
-    
+    @Test
+    @DisplayName("중복된 숫자는 생성 불가.")
+    void duplicatedNumberUnavailableTest() {
+
+        assertThrows(IllegalArgumentException.class,
+            () -> Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 5)));
+    }
+
+    @Test
+    @DisplayName("수동 생성된 로또는 길이가 6이어야 한다.")
+    void createSpecificSixNumbersTest() {
+
+        assertThrows(IllegalArgumentException.class,
+            () -> Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5))
+        );
+    }
 }

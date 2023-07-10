@@ -28,6 +28,7 @@ public class Lotto {
     }
 
     public static Lotto createSpecificLotto(final List<Integer> numbers) {
+
         return new Lotto(
             numbers.stream()
                 .map(LottoNumber::new)
