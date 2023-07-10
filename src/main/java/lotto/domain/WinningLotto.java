@@ -17,4 +17,8 @@ public class WinningLotto {
     public LottoNumber getBonus() {
         return this.bonus;
     }
+
+    public LottoRank calculateRank(Lotto lotto) {
+        return LottoRank.FIRST;
+    }
 }
