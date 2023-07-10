@@ -34,4 +34,16 @@ class RandomNumbersGeneratorTest {
                         .isLessThanOrEqualTo(45)
         );
     }
+
+    @Test
+    void 생성된_숫자의_갯수가_6개면_성공() {
+        // given
+        RandomNumbersGenerator randomNumbersGenerator = RandomNumbersGenerator.getInstance();
+
+        // when
+        List<Integer> numbers = randomNumbersGenerator.generate();
+
+        // then
+        assertThat(numbers).hasSize(6);
+    }
 }
