@@ -3,6 +3,7 @@ package lottogame.domain;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import lottogame.domain.spi.NumberGenerator;
 
 public class LottoNumbers {
 
@@ -10,9 +11,18 @@ public class LottoNumbers {
 
     private final List<LottoNumber> values;
 
-    public LottoNumbers(List<Integer> lottoNumbers) {
+    LottoNumbers(NumberGenerator numberGenerator) {
+        Objects.requireNonNull(numberGenerator, "numberGeneartor는 Null이 되면 안됩니다.");
+        this.values = initLottoNumbers(numberGenerator.generate(LOTTO_NUMBERS_SIZE));
+    }
+
+    LottoNumbers(List<Integer> lottoNumbers) {
+        this.values = initLottoNumbers(lottoNumbers);
+    }
+
+    private List<LottoNumber> initLottoNumbers(List<Integer> lottoNumbers) {
         assertLottoNumbers(lottoNumbers);
-        this.values = lottoNumbers.stream()
+        return lottoNumbers.stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
     }
