@@ -23,6 +23,6 @@ public final class RandomNumbersGenerator implements NumbersGenerator {
 
     @Override
     public List<Integer> generate() {
-        return baseNumbers;
+        return baseNumbers.subList(0, 6);
     }
 }
