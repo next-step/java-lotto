@@ -10,7 +10,7 @@ public class LottoTest {
 
     @Test
     void createLottoTest() {
-        Assertions.assertDoesNotThrow(() -> new Lotto());
+        Assertions.assertDoesNotThrow(() -> new Lotto(List.of(1,2,3,4,5,6)));
     }
 
     @Test
