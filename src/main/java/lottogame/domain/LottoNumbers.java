@@ -23,7 +23,7 @@ public class LottoNumbers {
     private List<LottoNumber> initLottoNumbers(List<Integer> lottoNumbers) {
         assertLottoNumbers(lottoNumbers);
         return lottoNumbers.stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::valueOf)
             .collect(Collectors.toList());
     }
 

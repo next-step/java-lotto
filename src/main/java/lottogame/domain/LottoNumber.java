@@ -6,15 +6,31 @@ public class LottoNumber {
 
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
+    private static final LottoNumber[] cache;
+
+    static {
+        cache = new LottoNumber[MAX_LOTTO_NUMBER + 1];
+        for (int lottoNumber = MIN_LOTTO_NUMBER; lottoNumber <= MAX_LOTTO_NUMBER; lottoNumber++) {
+            cache[lottoNumber] = new LottoNumber(lottoNumber);
+        }
+    }
 
     private final int value;
 
-    LottoNumber(int lottoNumber) {
-        assertLottoNumber(lottoNumber);
-        this.value = lottoNumber;
+    private LottoNumber() {
+        throw new UnsupportedOperationException("생성자를 호출할 수 없습니다. \"LottoNumber()\"");
     }
 
-    private void assertLottoNumber(final int lottoNumber) {
+    private LottoNumber(int value) {
+        this.value = value;
+    }
+
+    static LottoNumber valueOf(int lottoNumber) {
+        assertLottoNumber(lottoNumber);
+        return cache[lottoNumber];
+    }
+
+    private static void assertLottoNumber(final int lottoNumber) {
         if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(
                 String.format("로또 번호는 %d에서 %d 사이 값이어야 합니다 \"%d\"", MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, lottoNumber));
