@@ -15,7 +15,7 @@ class LottoTest {
         Lotto lotto = Lotto.createLotto();
 
         //when, then
-        assertThat(lotto.getNumbers()).hasSize(6);
+        assertThat(lotto.getLottoNumbers()).hasSize(6);
     }
 
     @Test
@@ -25,7 +25,7 @@ class LottoTest {
         Lotto lotto = Lotto.createLotto();
 
         //when
-        List<Integer> numbers = lotto.getNumbers();
+        List<LottoNumber> numbers = lotto.getLottoNumbers();
 
         //then
         assertThat(numbers.stream().distinct().count()).isEqualTo(numbers.size());

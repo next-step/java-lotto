@@ -10,17 +10,18 @@ public class Lotto {
     public static final int LOTTO_SIZE = 6;
     public static final int LOTTO_START = 1;
     public static final int LOTTO_END = 45;
-    private static final List<Integer> values = IntStream.rangeClosed(LOTTO_START, LOTTO_END)
+    private static final List<LottoNumber> values = IntStream.rangeClosed(LOTTO_START, LOTTO_END)
         .boxed()
+        .map(LottoNumber::new)
         .collect(Collectors.toList());
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    private Lotto(final List<Integer> numbers) {
+    private Lotto(final List<LottoNumber> numbers) {
         this.numbers = Collections.unmodifiableList(numbers);
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return this.numbers;
     }
 
