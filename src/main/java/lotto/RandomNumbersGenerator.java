@@ -1,8 +1,8 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -23,6 +23,18 @@ public final class RandomNumbersGenerator implements NumbersGenerator {
 
     @Override
     public List<Integer> generate() {
-        return baseNumbers.subList(0, 6);
+        return sort(shuffleBaseNumbers().subList(0, 6));
+    }
+
+    private static List<Integer> sort(final List<Integer> numbers) {
+        return numbers.stream()
+                .sorted()
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    private static List<Integer> shuffleBaseNumbers() {
+        final List<Integer> copiedNumbers = new ArrayList<>(baseNumbers);
+        Collections.shuffle(copiedNumbers);
+        return copiedNumbers;
     }
 }
