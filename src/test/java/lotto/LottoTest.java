@@ -3,6 +3,8 @@ package lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -15,5 +17,23 @@ class LottoTest {
 
         Assertions.assertThatNoException()
                 .isThrownBy(() -> new Lotto(lottoNumbers));
+    }
+
+    @Test
+    @DisplayName("로또 번호가 6개 초과인 경우 예외를 던진다")
+    void validateListSizeOverSix() {
+        List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6, 7);
+
+        Assertions.assertThatThrownBy(() -> new Lotto(lottoNumbers))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("로또 번호가 6개 미만인 경우 예외를 던진다")
+    void validateListSizeUnderSix() {
+        List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5);
+
+        Assertions.assertThatThrownBy(() -> new Lotto(lottoNumbers))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
