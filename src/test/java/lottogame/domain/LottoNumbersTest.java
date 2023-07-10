@@ -55,10 +55,9 @@ class LottoNumbersTest {
 
             @ParameterizedTest
             @NullSource
-            @DisplayName("IllegalArgumentException을 던진다.")
+            @DisplayName("NullPointerException을 던진다.")
             void It_Throw_IllegalArgumentException(List<Integer> nullValue) {
-                assertThatThrownBy(() -> new LottoNumbers(nullValue)).isInstanceOf(
-                    IllegalArgumentException.class);
+                assertThatThrownBy(() -> new LottoNumbers(nullValue)).isInstanceOf(NullPointerException.class);
             }
         }
     }
