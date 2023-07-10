@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
+import lottogame.domain.spi.NumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -60,6 +61,35 @@ class LottoNumbersTest {
                 assertThatThrownBy(() -> new LottoNumbers(nullValue)).isInstanceOf(NullPointerException.class);
             }
         }
+
+        @Nested
+        @DisplayName("numberGenerator가 들어오면")
+        class Context_Input_NumberGenerator {
+
+            private final NumberGenerator numberGenerator = (count) -> List.of(1, 2, 3, 4, 5, 45);
+
+            @Test
+            @DisplayName("생성할 수 있다.")
+            void It_Create_Success() {
+                assertThatCode(() -> new LottoNumbers(numberGenerator)).doesNotThrowAnyException();
+            }
+        }
+
+        @Nested
+        @DisplayName("numberGenerator로 null이 들어오면")
+        class Context_Input_Null_NumberGenerator {
+
+            private final NumberGenerator nullNumberGenerator = null;
+
+            @Test
+            @DisplayName("NullPointerException을 던진다.")
+            void It_Throw_NullPointerException() {
+                assertThatThrownBy(() -> new LottoNumbers(nullNumberGenerator)).isInstanceOf(
+                    NullPointerException.class);
+            }
+
+        }
+
     }
 
     @Nested
