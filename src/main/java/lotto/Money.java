@@ -2,7 +2,9 @@ package lotto;
 
 public class Money {
 
+    private final int money;
+
     public Money(int money) {
-        throw new IllegalArgumentException();
+        this.money = money;
     }
 }
