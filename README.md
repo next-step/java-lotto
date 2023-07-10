@@ -22,8 +22,8 @@
   - [ ] validation : 중복이 있는 지
   - [ ] validation : 6개의 숫자인지
   - [ ] constructor : 로또 번호 6자리 생성
-* Number -> type : int
-  - [ ] validation : 1~45의 숫자
+* LottoNumber -> type : int
+  - [x] validation : 1~45의 숫자
 
 ### View
 * [ ] 구입금액 - 입력
