@@ -16,7 +16,7 @@ public class LottoTest {
     }
     
     @Test
-    void 로또_객체_생성시_번호_생성() {
+    void 로또_객체_생성시_번호_주입() {
         // given
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(numbers);
