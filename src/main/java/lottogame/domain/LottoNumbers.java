@@ -2,16 +2,19 @@ package lottogame.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
-    private final List<Integer> values;
+    private final List<LottoNumber> values;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
         assertLottoNumbers(lottoNumbers);
-        this.values = lottoNumbers;
+        this.values = lottoNumbers.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
     }
 
     private void assertLottoNumbers(List<Integer> lottoNumbers) {
