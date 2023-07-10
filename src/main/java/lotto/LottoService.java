@@ -2,9 +2,9 @@ package lotto;
 
 public class LottoService {
 
-    private final int money;
+    private final Money money;
 
     public LottoService(int money) {
-        this.money = money;
+        this.money = new Money(money);
     }
 }
