@@ -52,7 +52,9 @@ public class Lotto {
     }
 
     public Long countMatches(Lotto other) {
-        return null;
+        return this.numbers.stream()
+            .filter(other.numbers::contains)
+            .count();
     }
 
     public List<LottoNumber> getLottoNumbers() {

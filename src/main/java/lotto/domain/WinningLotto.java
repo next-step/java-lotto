@@ -19,6 +19,8 @@ public class WinningLotto {
     }
 
     public LottoRank calculateRank(Lotto lotto) {
-        return LottoRank.FIRST;
+        Long match = this.lottoNumbers.countMatches(lotto);
+        boolean isContainBonus = lotto.getLottoNumbers().contains(bonus);
+        return LottoRank.from(match, isContainBonus);
     }
 }

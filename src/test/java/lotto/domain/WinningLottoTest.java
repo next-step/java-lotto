@@ -38,8 +38,8 @@ class WinningLottoTest {
 
     @ParameterizedTest
     @MethodSource("generateData")
-    @DisplayName("1등일 때 확인하는 테스트")
-    void FirstRankLottoTest(Lotto test, LottoRank rank) {
+    @DisplayName("1등부터 미당첨까지 등수 확인하는 테스트")
+    void getRankTest(Lotto test, LottoRank rank) {
         //given
         Lotto lotto = Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6));
         WinningLotto winningLotto = new WinningLotto(lotto, new LottoNumber(7));
