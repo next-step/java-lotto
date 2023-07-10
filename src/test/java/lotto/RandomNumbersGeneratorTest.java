@@ -16,10 +16,6 @@ class RandomNumbersGeneratorTest {
         assertDoesNotThrow(RandomNumbersGenerator::getInstance);
     }
 
-    // 1. 랜덤(1~45)
-    // 2, 숫자 6개
-    // 3. 중복 안 됨
-    // 4. 정렬
     @Test
     void 숫자들의_범위가_1이상_45이하_성공() {
         // given
@@ -57,6 +53,18 @@ class RandomNumbersGeneratorTest {
         List<Integer> numbers = randomNumbersGenerator.generate();
 
         // then
-        assertThat(numbers).hasSameSizeAs(new HashSet<>(numbers));
+        assertThat(numbers).doesNotHaveDuplicates();
+    }
+
+    @Test
+    void 생성된_숫자들이_오름차순으로_정렬되면_성공() {
+        // given
+        RandomNumbersGenerator randomNumbersGenerator = RandomNumbersGenerator.getInstance();
+
+        // when
+        List<Integer> numbers = randomNumbersGenerator.generate();
+
+        // then
+        assertThat(numbers).isSorted();
     }
 }
