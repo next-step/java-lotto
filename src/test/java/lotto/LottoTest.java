@@ -22,6 +22,6 @@ public class LottoTest {
         Lotto lotto = new Lotto(numbers);
         
         // when & then
-        assertThat(lotto.getNumbers()).isEqualTo(numbers);
+        assertThat(lotto.getNumbers()).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
     }
 }
