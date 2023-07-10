@@ -4,5 +4,5 @@ import java.util.Set;
 
 public interface NumberGenerator {
 
-    Set<Integer> generate(int count);
+    Set<Integer> generateDistinctNumbers(int count);
 }

@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("FieldCanBeLocal")
 @DisplayName("RandomNumberGenerator 클래스")
-class RandomNumberGeneratorTest {
+class RandomLottoNumberGeneratorTest {
 
     @Nested
-    @DisplayName("generate 메소드는")
+    @DisplayName("generateDistinctNumbers 메소드는")
     class Describe_Generate {
 
         @Nested
@@ -20,12 +20,12 @@ class RandomNumberGeneratorTest {
         class Context_Count_Six {
 
             private final int count = 6;
-            private final NumberGenerator numberGenerator = new RandomNumberGenerator();
+            private final NumberGenerator numberGenerator = new RandomLottoNumberGenerator();
 
             @Test
             @DisplayName("size가 n인 Integer 리스트를 반환한다")
             void It_Return_N_Size_List() {
-                Set<Integer> result = numberGenerator.generate(count);
+                Set<Integer> result = numberGenerator.generateDistinctNumbers(count);
 
                 Assertions.assertThat(result).hasSize(count);
             }
