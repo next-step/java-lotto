@@ -20,5 +20,11 @@ class LottoNumberTest {
         assertThrows(IllegalArgumentException.class, () -> LottoNumber.of(0));
     }
 
+    @Test
+    void 넘버의_값을_45초과로_생성하려고_할시_예외발생() {
+        // given, when, then
+        assertThrows(IllegalArgumentException.class, () -> LottoNumber.of(46));
+    }
+
 
 }
