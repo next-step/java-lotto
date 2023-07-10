@@ -1,8 +1,8 @@
 package lottogame.domain.spi;
 
-import java.util.List;
+import java.util.Set;
 
 public interface NumberGenerator {
 
-    List<Integer> generate(int count);
+    Set<Integer> generate(int count);
 }
