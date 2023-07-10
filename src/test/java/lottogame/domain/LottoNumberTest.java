@@ -27,8 +27,8 @@ class LottoNumberTest {
             @Test
             @DisplayName("생성을 성공한다.")
             void It_Create_Success() {
-                assertThatNoException().isThrownBy(() -> new LottoNumber(minimumLottoNumber));
-                assertThatNoException().isThrownBy(() -> new LottoNumber(maximumLottoNumber));
+                assertThatNoException().isThrownBy(() -> LottoNumber.valueOf(minimumLottoNumber));
+                assertThatNoException().isThrownBy(() -> LottoNumber.valueOf(maximumLottoNumber));
             }
         }
 
@@ -42,9 +42,9 @@ class LottoNumberTest {
             @Test
             @DisplayName("IllegalArgumentException을 던진다.")
             void It_Create_Success() {
-                assertThatThrownBy(() -> new LottoNumber(minimumLottoNumber)).isInstanceOf(
+                assertThatThrownBy(() -> LottoNumber.valueOf(minimumLottoNumber)).isInstanceOf(
                     IllegalArgumentException.class);
-                assertThatThrownBy(() -> new LottoNumber(maximumLottoNumber)).isInstanceOf(
+                assertThatThrownBy(() -> LottoNumber.valueOf(maximumLottoNumber)).isInstanceOf(
                     IllegalArgumentException.class);
             }
         }
@@ -58,8 +58,8 @@ class LottoNumberTest {
         @DisplayName("같은 값이면")
         class Context_Same_Lotto_Number {
 
-            private final LottoNumber lottoNumber = new LottoNumber(1);
-            private final LottoNumber sameLottoNumber = new LottoNumber(1);
+            private final LottoNumber lottoNumber = LottoNumber.valueOf(1);
+            private final LottoNumber sameLottoNumber = LottoNumber.valueOf(1);
 
             @Test
             @DisplayName("true를 반환한다")
