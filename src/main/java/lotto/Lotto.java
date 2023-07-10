@@ -1,7 +1,7 @@
 package lotto;
 
-public class Lotto {
+public final class Lotto {
+
     public Lotto() {
-        throw new UnsupportedOperationException();
     }
 }
