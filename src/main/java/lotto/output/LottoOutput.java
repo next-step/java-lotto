@@ -1,12 +1,12 @@
 package lotto.output;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
+import lotto.domain.LottoManager;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
+import lotto.domain.LottoResult;
 
 public class LottoOutput {
 
@@ -26,24 +26,29 @@ public class LottoOutput {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    public void printLottos(final List<Lotto> lottos) {
-        lottos.forEach(this::printLotto);
+    public void printLottos(final LottoManager manager) {
+        manager.getLottos()
+            .forEach(this::printLotto);
     }
 
-    public void printStatistics(final Map<LottoRank, Long> statistics) {
+    public void printStatistics(final LottoResult statistics) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         Arrays.stream(LottoRank.values())
             .filter(rank -> !rank.equals(LottoRank.NONE))
-            .forEach(
-                key -> System.out.println(getResultString(key, statistics.getOrDefault(key, 0L))));
+            .forEach(key -> System.out.println(
+                getResultString(key, statistics.getResult().getOrDefault(key, 0L))));
     }
 
     private String getResultString(final LottoRank key, Long count) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(key.getMatch()).append("개 일치");
         if (key == LottoRank.SECOND) {
-            return key.getMatch() + "개 일치, 보너스 볼 일치(" + key.getPrize() + "원)- " + count + "개";
+            builder.append(", 보너스 볼 일치");
         }
-        return key.getMatch() + "개 일치 (" + key.getPrize() + "원)- " + count + "개";
+        builder.append("(").append(key.getPrize()).append("원)- ")
+            .append(count).append("개");
+        return builder.toString();
     }
 
     public void printYield(final Double yield) {

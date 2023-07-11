@@ -29,7 +29,6 @@ public class Lotto {
     }
 
     public static Lotto createSpecificLotto(final List<Integer> numbers) {
-
         verifySize(numbers);
         verifyDuplicate(numbers);
 

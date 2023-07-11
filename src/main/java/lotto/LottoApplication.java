@@ -20,7 +20,7 @@ public class LottoApplication {
         int purchaseAmount = inputPurchaseAmount();
         LottoManager manager = LottoManager.createLottoManagerByMoney(purchaseAmount);
 
-        output.printLottos(manager.getLottos());
+        output.printLottos(manager);
         System.out.println();
 
         WinningLotto winningLotto = inputWinningLotto();
@@ -46,7 +46,7 @@ public class LottoApplication {
     }
 
     private void result(LottoManager manager, WinningLotto winningLotto) {
-        output.printStatistics(manager.getResult(winningLotto).getResult());
+        output.printStatistics(manager.getResult(winningLotto));
         output.printYield(manager.calculateYield(winningLotto));
     }
 }

@@ -28,8 +28,11 @@ public class LottoManager {
     }
 
     public double calculateYield(final WinningLotto winningLotto) {
-        LottoResult result = getResult(winningLotto);
-        return result.calculateTotalPrize() / ((long) lottos.size() * LOTTO_PRICE);
+        return (double) getResult(winningLotto).calculateTotalPrize() / calculatePurchaseAmount();
+    }
+
+    private int calculatePurchaseAmount() {
+        return lottos.size() * LOTTO_PRICE;
     }
 
     public List<Lotto> getLottos() {
