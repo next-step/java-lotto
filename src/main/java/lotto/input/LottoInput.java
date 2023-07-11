@@ -14,7 +14,7 @@ public class LottoInput {
         this.scanner = new Scanner(System.in);
     }
 
-    public int inputAmount() {
+    private int inputAmount() {
         return scanner.nextInt();
     }
 
@@ -22,5 +22,13 @@ public class LottoInput {
         return Arrays.stream(scanner.nextLine().split(WINNING_DELIMITER))
             .map(Integer::parseInt)
             .collect(Collectors.toList());
+    }
+
+    public int inputPurchaseAmount() {
+        return inputAmount();
+    }
+
+    public int inputBonusNumber() {
+        return inputAmount();
     }
 }
