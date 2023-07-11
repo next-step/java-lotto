@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -64,6 +65,22 @@ public class LottoTest {
                 .doesNotThrowAnyException();
     }
 
+    @Test
+    @DisplayName("임의의 로또 번호가 로또에 포함되어 있는지 테스트")
+    void 로또_포함() {
+        Lotto lotto = new Lotto(createLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
+
+        assertThat(lotto.isContain(new LottoNumber(3))).isTrue();
+    }
+
+
+    @Test
+    @DisplayName("임의의 로또 번호가 로또에 포함되어 있는 않는 테스트")
+    void 로또_포함_X() {
+        Lotto lotto = new Lotto(createLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
+
+        assertThat(lotto.isContain(new LottoNumber(11))).isFalse();
+    }
 
     private List<LottoNumber> createLottoNumbers(List<Integer> container) {
         return container.stream()

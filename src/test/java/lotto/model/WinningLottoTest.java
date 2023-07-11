@@ -4,19 +4,10 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
+import java.util.stream.Collectors;
 
 public class WinningLottoTest {
-
-    private List<LottoNumber> createLottoNumbers(int... ints) {
-        return Arrays.stream(ints)
-                .boxed()
-                .map(LottoNumber::new)
-                .collect(toList());
-    }
 
     @Test
     @DisplayName("당첨 번호와 보너스 볼이 중복되면 예외를 던진다.")
@@ -30,5 +21,23 @@ public class WinningLottoTest {
     void 당첨_번호_보너스볼_생성() {
         Assertions.assertThatCode(() -> new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7))
                 .doesNotThrowAnyException();
+    }
+
+    @Test
+    @DisplayName("당첨 번호와 로또 번호 비교")
+    void 당첨_번호로_비교() {
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
+
+        Lotto lotto = new Lotto(createLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
+
+        Rank rank = winningLotto.compare(lotto);
+
+        Assertions.assertThat(rank).isEqualTo(Rank.SIX);
+    }
+
+    private List<LottoNumber> createLottoNumbers(List<Integer> container) {
+        return container.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 }
