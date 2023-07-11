@@ -33,6 +33,7 @@ LottoTicket 1 -> 1 LottoNumbers 1 -> * LottoNumber
 
 - [x] 1~45사이의 중복되지않는 번호들을 생성한다
 - [x] 당첨티켓과 로또티켓을 비교한다.
+- [x] LottoNumber가 포함되는지 확인할 수 있다.
 
 ### LottoTicket
 

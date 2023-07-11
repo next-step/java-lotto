@@ -6,8 +6,16 @@ public class LottoBonus {
 
     private final LottoNumber lottoNumber;
 
-    public LottoBonus(int lottoNumber) {
-        this.lottoNumber = LottoNumber.valueOf(lottoNumber);
+    LottoBonus(int bonusNumber, LottoNumbers lottoNumbers) {
+        assertLottoNumber(bonusNumber, lottoNumbers);
+        this.lottoNumber = LottoNumber.valueOf(bonusNumber);
+    }
+
+    private void assertLottoNumber(Integer bonusNumber, LottoNumbers lottoNumbers) {
+        if (lottoNumbers.contains(LottoNumber.valueOf(bonusNumber))) {
+            throw new IllegalArgumentException(
+                String.format("bonusNumber \"%d\"는 lottoNumbers\"%s\"와 중복될 수 없습니다.", bonusNumber, lottoNumbers));
+        }
     }
 
     @Override
