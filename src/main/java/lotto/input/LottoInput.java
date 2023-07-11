@@ -15,7 +15,7 @@ public class LottoInput {
     }
 
     private int inputAmount() {
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public List<Integer> inputWinningNumbers() {
