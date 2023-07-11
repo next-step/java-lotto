@@ -2,6 +2,8 @@ package lottogame.service;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.Set;
+import lottogame.domain.spi.NumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -18,11 +20,12 @@ class LottoServiceTest {
         @DisplayName("1000원으로 나누어 떨어지지 않으면,")
         class Context_Not_Divided_By_1000 {
 
-            @Test
-            @DisplayName("IllegalArgumentException을 던진다")
-            void It_Throw_IllegalArgumentException() {
-                LottoService lottoService = new LottoService();
+            private final NumberGenerator stubNumberGenerator = (count) -> Set.of(1, 2, 3, 4, 5, 6);
+            private final LottoService lottoService = new LottoService(stubNumberGenerator);
 
+            @Test
+            @DisplayName("IllegalArgumentException 을 던진다")
+            void It_Throw_IllegalArgumentException() {
                 assertThatThrownBy(() -> lottoService.buy(1001)).isInstanceOf(IllegalArgumentException.class);
             }
 

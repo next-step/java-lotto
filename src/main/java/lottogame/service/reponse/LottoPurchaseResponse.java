@@ -6,14 +6,14 @@ import java.util.Set;
 
 public class LottoPurchaseResponse {
 
-    private final List<LottoNumbers> lottoNumbers;
+    private final List<LottoNumbersResponse> lottoNumberResponses;
 
-    public LottoPurchaseResponse(List<LottoNumbers> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public LottoPurchaseResponse(List<LottoNumbersResponse> lottoNumberResponses) {
+        this.lottoNumberResponses = lottoNumberResponses;
     }
 
-    public List<LottoNumbers> getLottoNumbers() {
-        return lottoNumbers;
+    public List<LottoNumbersResponse> getLottoNumbers() {
+        return lottoNumberResponses;
     }
 
     @Override
@@ -25,26 +25,26 @@ public class LottoPurchaseResponse {
             return false;
         }
         LottoPurchaseResponse that = (LottoPurchaseResponse) o;
-        return Objects.equals(lottoNumbers, that.lottoNumbers);
+        return Objects.equals(lottoNumberResponses, that.lottoNumberResponses);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumbers);
+        return Objects.hash(lottoNumberResponses);
     }
 
     @Override
     public String toString() {
         return "LottoPurchaseResponse{" +
-            "lottoNumbers=" + lottoNumbers +
+            "lottoNumberResponses=" + lottoNumberResponses +
             '}';
     }
 
-    public static class LottoNumbers {
+    public static class LottoNumbersResponse {
 
         private final Set<Integer> values;
 
-        public LottoNumbers(Set<Integer> values) {
+        public LottoNumbersResponse(Set<Integer> values) {
             this.values = values;
         }
 
@@ -57,10 +57,10 @@ public class LottoPurchaseResponse {
             if (this == o) {
                 return true;
             }
-            if (!(o instanceof LottoNumbers)) {
+            if (!(o instanceof LottoNumbersResponse)) {
                 return false;
             }
-            LottoNumbers that = (LottoNumbers) o;
+            LottoNumbersResponse that = (LottoNumbersResponse) o;
             return Objects.equals(values, that.values);
         }
 
@@ -71,7 +71,7 @@ public class LottoPurchaseResponse {
 
         @Override
         public String toString() {
-            return "LottoNumbers{" +
+            return "LottoNumbersResponse{" +
                 "values=" + values +
                 '}';
         }

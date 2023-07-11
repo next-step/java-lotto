@@ -128,3 +128,4 @@ method 내 티켓 비교하기
 ### 해야할 것
 
 - lottoCache 상수 이름바꾸기
+- LottoNumber static블록 위치 변경
