@@ -130,9 +130,26 @@ class LottoNumbersTest {
             void It_Return_True() {
                 assertThat(lottoNumbers.contains(lottoNumber)).isTrue();
             }
-
         }
-
     }
 
+    @Nested
+    @DisplayName("getMatchedCount 메소드는")
+    class Describe_Get_Matched_Count {
+
+        @Nested
+        @DisplayName("lottoNumbers를 받으면,")
+        class Context_Input_Lotto_Numbers {
+
+            private final Set<Integer> lottoNumberValues = Set.of(1, 2, 3, 4, 5, 6);
+            private final LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberValues);
+            private final LottoNumbers sameLottoNumbers = new LottoNumbers(lottoNumberValues);
+
+            @Test
+            @DisplayName("일치한 갯수를 반환한다.")
+            void It_Return_Matched_Count() {
+                assertThat(lottoNumbers.getMatchedCount(sameLottoNumbers)).isEqualTo(lottoNumberValues.size());
+            }
+        }
+    }
 }
