@@ -3,16 +3,15 @@
 
 ### Domain
 * LottoService (* 추가 생각)
-  - [ ] field : Payment
-  - [ ] field : WinningNumber
-  - [ ] field : Lottos
-  - [ ] action : 당첨 통계 계산
-  - [ ] action : 수익률 계산
-  - [ ] 로또 구입 갯수 계산 (개당 1,000원)
-  - [ ] action : 로또 번호 6자리 생성
+  - [x] field : Payment
+  - [x] field : Lottos
+  - [x] action : 당첨 통계 계산
+  - [x] action : 수익률 계산
+  - [x] action : 로또 번호 6자리 생성
 * Payment -> type : int
   - [x] validation : 내가 투입한 금액이 1,000원 미만 인지?
   - [x] action : 몇 장만 산다?
+  - [x] 로또 구입 갯수 계산 (개당 1,000원)
 * Lottos -> 일급 컬렉션, type : List<Lotto>
   - [x] action : 당첨 통계 계산
 * WinningNumber
@@ -47,10 +46,6 @@
 * 6개 일치 (2000000000원)- ~ 개
 * 총 수익률 = (당첨 금액) / 투입 금액
   * 3째 자리에서 round up
-10,3,4
-3,4,10
-10,20,30,4
-  * 4, 10, 20, 30
 
 ----
 ## 진행 방법
