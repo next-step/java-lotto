@@ -26,6 +26,6 @@ public class LottoMoney {
     }
 
     public int getCount() {
-        return -1;
+        return value / LOTTO_PRICE;
     }
 }
