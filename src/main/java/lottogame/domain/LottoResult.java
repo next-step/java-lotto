@@ -6,17 +6,17 @@ import lottogame.domain.response.LottoCheckResponse;
 
 public class LottoResult {
 
-    private final LottoNumbers lottoNumbers;
+    private final LottoTicket lottoTicket;
     private final LottoBonus lottoBonus;
 
     public LottoResult(Set<Integer> lottoNumbers, int bonusNumber) {
-        this.lottoNumbers = new LottoNumbers(lottoNumbers);
-        this.lottoBonus = new LottoBonus(bonusNumber, this.lottoNumbers);
+        this.lottoTicket = new LottoTicket(lottoNumbers);
+        this.lottoBonus = new LottoBonus(bonusNumber, this.lottoTicket);
     }
 
-    public LottoCheckResponse checkLottoTicket(LottoNumbers lottoNumbers) {
-        return new LottoCheckResponse(this.lottoNumbers.getMatchedCount(lottoNumbers),
-            lottoBonus.isContained(lottoNumbers));
+    public LottoCheckResponse checkLottoTicket(LottoTicket lottoTicket) {
+        return new LottoCheckResponse(this.lottoTicket.getMatchedCount(lottoTicket),
+            lottoBonus.isContained(lottoTicket));
     }
 
     @Override
@@ -28,19 +28,19 @@ public class LottoResult {
             return false;
         }
         LottoResult that = (LottoResult) o;
-        return Objects.equals(lottoNumbers, that.lottoNumbers) && Objects.equals(lottoBonus,
+        return Objects.equals(lottoTicket, that.lottoTicket) && Objects.equals(lottoBonus,
             that.lottoBonus);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumbers, lottoBonus);
+        return Objects.hash(lottoTicket, lottoBonus);
     }
 
     @Override
     public String toString() {
         return "LottoResult{" +
-            "lottoNumbers=" + lottoNumbers +
+            "lottoNumbers=" + lottoTicket +
             ", lottoBonus=" + lottoBonus +
             '}';
     }

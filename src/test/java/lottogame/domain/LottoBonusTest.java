@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 class LottoBonusTest {
 
     private final Set<Integer> defaultLottoNumberValues = Set.of(1, 2, 3, 4, 5, 6);
-    private final LottoNumbers defaultLottoNumbers = new LottoNumbers(defaultLottoNumberValues);
+    private final LottoTicket defaultLottoTicket = new LottoTicket(defaultLottoNumberValues);
 
     @Nested
     @DisplayName("equals 메서드는")
@@ -24,8 +24,8 @@ class LottoBonusTest {
         class Context_Same_Lotto_Number {
 
             private final int lottoNumber = 7;
-            private final LottoBonus lottoBonus = new LottoBonus(lottoNumber, defaultLottoNumbers);
-            private final LottoBonus sameLottoBonus = new LottoBonus(lottoNumber, defaultLottoNumbers);
+            private final LottoBonus lottoBonus = new LottoBonus(lottoNumber, defaultLottoTicket);
+            private final LottoBonus sameLottoBonus = new LottoBonus(lottoNumber, defaultLottoTicket);
 
             @Test
             @DisplayName("논리적으로 동일하다.")
@@ -48,7 +48,7 @@ class LottoBonusTest {
             @Test
             @DisplayName("IllegalArgumentException을 던진다.")
             void It_Throw_IllegalArgumentException() {
-                assertThatThrownBy(() -> new LottoBonus(bonusNumber, defaultLottoNumbers)).isInstanceOf(
+                assertThatThrownBy(() -> new LottoBonus(bonusNumber, defaultLottoTicket)).isInstanceOf(
                     IllegalArgumentException.class);
             }
         }
@@ -58,19 +58,19 @@ class LottoBonusTest {
     @DisplayName("isContained 는")
     class Describe_Is_Contained {
 
-        private final LottoNumbers lottoNumbersForResult = new LottoNumbers(Set.of(10, 11, 12, 13, 14, 15));
+        private final LottoTicket lottoTicketForResult = new LottoTicket(Set.of(10, 11, 12, 13, 14, 15));
 
         @Nested
         @DisplayName("lottoNumbers에 보너스가 포함되면")
         class Context_Bonus_Is_Contained_Lotto_Numbers {
 
             private final int containedBonusNumber = 1;
-            private final LottoBonus lottoBonus = new LottoBonus(containedBonusNumber, lottoNumbersForResult);
+            private final LottoBonus lottoBonus = new LottoBonus(containedBonusNumber, lottoTicketForResult);
 
             @Test
             @DisplayName("true를 반환한다")
             void It_Return_True() {
-                assertThat(lottoBonus.isContained(defaultLottoNumbers)).isTrue();
+                assertThat(lottoBonus.isContained(defaultLottoTicket)).isTrue();
             }
         }
 
@@ -79,12 +79,12 @@ class LottoBonusTest {
         class Context_Bonus_Is_Not_Contained_Lotto_Numbers {
 
             private final int notContainedBonusNumber = 7;
-            private final LottoBonus lottoBonus = new LottoBonus(notContainedBonusNumber, lottoNumbersForResult);
+            private final LottoBonus lottoBonus = new LottoBonus(notContainedBonusNumber, lottoTicketForResult);
 
             @Test
             @DisplayName("false를 반환한다")
             void It_Return_False() {
-                assertThat(lottoBonus.isContained(defaultLottoNumbers)).isFalse();
+                assertThat(lottoBonus.isContained(defaultLottoTicket)).isFalse();
             }
         }
     }
