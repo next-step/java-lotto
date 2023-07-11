@@ -37,6 +37,16 @@ public class LottoNumbers {
         }
     }
 
+    int getMatchedCount(LottoNumbers lottoNumbers) {
+        return (int) values.stream()
+            .filter(lottoNumbers::contains)
+            .count();
+    }
+
+    boolean contains(LottoNumber lottoNumber) {
+        return values.contains(lottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -59,15 +69,5 @@ public class LottoNumbers {
         return "LottoNumbers{" +
             "lottoNumbers=" + values +
             '}';
-    }
-
-    int getMatchedCount(LottoNumbers lottoNumbers) {
-        return (int) values.stream()
-            .filter(lottoNumbers::contains)
-            .count();
-    }
-
-    public boolean contains(LottoNumber lottoNumber) {
-        return values.contains(lottoNumber);
     }
 }
