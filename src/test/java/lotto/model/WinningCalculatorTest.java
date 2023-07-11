@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
@@ -44,13 +43,13 @@ public class WinningCalculatorTest {
         WinningLotto winningLotto = new WinningLotto(
                 createLottoNumbers(1, 2, 3, 4, 5, 6), 7);
 
-        Map<Rank, Integer> result = winningCalculator.calculate(winningLotto, purChasedLotto);
+        WinningResult winningResult = winningCalculator.calculate(winningLotto, purChasedLotto);
 
-        Assertions.assertThat(result.get(Rank.THREE)).isEqualTo(1);
-        Assertions.assertThat(result.get(Rank.FOUR)).isEqualTo(0);
-        Assertions.assertThat(result.get(Rank.FIVE)).isEqualTo(0);
-        Assertions.assertThat(result.get(Rank.FIVE_WITH_BONUS)).isEqualTo(0);
-        Assertions.assertThat(result.get(Rank.SIX)).isEqualTo(2);
+        Assertions.assertThat(winningResult.getRankCount(Rank.THREE)).isEqualTo(1);
+        Assertions.assertThat(winningResult.getRankCount(Rank.FOUR)).isEqualTo(0);
+        Assertions.assertThat(winningResult.getRankCount(Rank.FIVE)).isEqualTo(0);
+        Assertions.assertThat(winningResult.getRankCount(Rank.FIVE_WITH_BONUS)).isEqualTo(0);
+        Assertions.assertThat(winningResult.getRankCount(Rank.SIX)).isEqualTo(2);
     }
 
 
