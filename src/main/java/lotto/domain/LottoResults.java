@@ -9,4 +9,8 @@ public class LottoResults {
     public LottoResults(final List<LottoResult> lottoResults) {
         this.lottoResults = lottoResults;
     }
+
+    public WinningStatistics getWinningStatistics() {
+        return new WinningStatistics(lottoResults);
+    }
 }

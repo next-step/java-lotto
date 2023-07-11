@@ -6,18 +6,20 @@ public class LottoResult {
 
     private final int matchCount;
     private final boolean isMatchBonus;
+    private final WinningCriteria winningCriteria;
 
-    public LottoResult(int matchCount, boolean isMatchBonus) {
+    public LottoResult(int matchCount, boolean isMatchBonus, WinningCriteria winningCriteria) {
         this.matchCount = matchCount;
         this.isMatchBonus = isMatchBonus;
+        this.winningCriteria = winningCriteria;
     }
 
-    public int getMatchCount() {
-        return this.matchCount;
+    public LottoResult(int matchCount, boolean isMatchBonus) {
+        this(matchCount, isMatchBonus, WinningCriteria.winningResult(matchCount, isMatchBonus));
     }
 
-    public boolean isMatchBonus() {
-        return this.isMatchBonus;
+    public WinningCriteria getWinningCriteria() {
+        return this.winningCriteria;
     }
 
     @Override
