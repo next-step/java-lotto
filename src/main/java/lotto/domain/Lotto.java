@@ -14,7 +14,7 @@ public class Lotto {
             LottoNumber.LOTTO_END
         )
         .boxed()
-        .map(LottoNumber::new)
+        .map(LottoNumber::of)
         .collect(Collectors.toList());
 
     private final List<LottoNumber> numbers;
@@ -34,7 +34,7 @@ public class Lotto {
 
         return new Lotto(
             numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList())
         );
     }

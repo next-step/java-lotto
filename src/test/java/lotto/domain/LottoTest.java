@@ -57,7 +57,7 @@ class LottoTest {
 
         //then
         assertThat(lotto.getLottoNumbers()).isEqualTo(Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::new).collect(Collectors.toList()));
+            .map(LottoNumber::of).collect(Collectors.toList()));
     }
 
     @Test

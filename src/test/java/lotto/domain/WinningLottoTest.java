@@ -30,7 +30,7 @@ class WinningLottoTest {
     void containsSixNumbersAndOneBonusNumberTest() {
         //given
         Lotto lotto = Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = new WinningLotto(lotto, new LottoNumber(7));
+        WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.of(7));
 
         //when, then
         assertThat(winningLotto.getLotto()).isNotNull();
@@ -45,7 +45,7 @@ class WinningLottoTest {
 
         //when, then
         assertThrows(IllegalArgumentException.class,
-            () -> new WinningLotto(lotto, new LottoNumber(6)));
+            () -> new WinningLotto(lotto, LottoNumber.of(6)));
     }
 
     @ParameterizedTest
@@ -54,7 +54,7 @@ class WinningLottoTest {
     void getRankTest(Lotto test, LottoRank rank) {
         //given
         Lotto lotto = Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = new WinningLotto(lotto, new LottoNumber(7));
+        WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.of(7));
 
         //then
         assertThat(winningLotto.calculateRank(test)).isEqualTo(rank);
