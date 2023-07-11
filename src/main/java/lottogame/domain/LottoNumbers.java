@@ -61,8 +61,13 @@ public class LottoNumbers {
             '}';
     }
 
+    int getMatchedCount(LottoNumbers lottoNumbers) {
+        return (int) values.stream()
+            .filter(lottoNumbers::contains)
+            .count();
+    }
+
     public boolean contains(LottoNumber lottoNumber) {
         return values.contains(lottoNumber);
     }
-
 }
