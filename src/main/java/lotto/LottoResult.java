@@ -21,6 +21,11 @@ public final class LottoResult {
     }
 
     public double calculateProfitRate(final LottoMoney lottoMoney) {
-        return -1;
+        // TODO refactor
+        long totalPrize = 0;
+        for (Rank rank : lottoResult.keySet()) {
+            totalPrize += Rank.getTotalPrize(rank, lottoResult.get(rank));
+        }
+        return totalPrize / (double) (lottoMoney.getValue() - lottoMoney.getChange());
     }
 }
