@@ -24,6 +24,12 @@ public class Lotto {
                 .collect(Collectors.toSet());
     }
 
+    public long countMatchLottoNumber(final Lotto target) {
+        return this.lottoNumbers.stream()
+                .filter(target::containsLottoNumber)
+                .count();
+    }
+
     public boolean containsLottoNumber(final LottoNumber bonus) {
         return lottoNumbers.contains(bonus);
     }

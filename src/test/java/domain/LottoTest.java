@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Collections;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -43,6 +44,20 @@ public class LottoTest {
 
         /* when & then */
         assertThatThrownBy(() -> new Lotto(duplicatedNumbers)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("로또 간의 일치 번호 개수를 출력한다.")
+    void countMatchLottoNumber() {
+        /* given */
+        final Lotto origin = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        final Lotto target = new Lotto(List.of(4, 5, 1, 2, 6, 3));
+
+        /* when */
+        final long count = origin.countMatchLottoNumber(target);
+
+        /* then */
+        assertThat(count).isEqualTo(6);
     }
 
 }

@@ -14,6 +14,13 @@ public class WinningLotto {
         this.bonus = bonus;
     }
 
+    public Rank checkLottoResult(final Lotto target) {
+        long matchLottoNumber = this.lotto.countMatchLottoNumber(target);
+        boolean containsBonus = target.containsLottoNumber(bonus);
+
+        return Rank.resolveRank(matchLottoNumber, containsBonus);
+    }
+
     public Lotto getLotto() {
         return this.lotto;
     }
