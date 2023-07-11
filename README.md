@@ -35,20 +35,16 @@ LottoTicket 1 -> 1 LottoNumbers 1 -> * LottoNumber
 - [x] 당첨티켓과 로또티켓을 비교한다.
 - [x] LottoNumber가 포함되는지 확인할 수 있다.
 - [x] LottoNumbers 입력과 일치되는 개수 반환
-
-### LottoTicket
-
 - [x] 6개의 로또 번호를 가진다.
-- 당첨티켓 그리고 보너스볼과 유저의 로또티켓을 비교해서, 몇등인지 알려준다.
 
 ### LottoReward
 
-- 등수에 맞는 상금이 있다.
+- [x] 등수에 맞는 상금이 있다.
 
 ### LottoResult
 
-- 내 로또티켓과 당첨결과를 비교해서 몇개의 로또가 맞았는지, 보너스도 맞았는지 알려준다.
-  checkLottoTicket
+- [x] 내 로또티켓과 당첨결과를 비교해서 몇개의 로또가 맞았는지, 보너스도 맞았는지 알려준다.
+
 ### LottoBonus
 
 - [x] 같은 로또 번호를 가지면 같다.
@@ -61,7 +57,11 @@ LottoTicket 1 -> 1 LottoNumbers 1 -> * LottoNumber
 
 - 유저가 여러개의 로또를 구매할 수 있다.
 - 본인이 가진 티켓들의 결과를 얻을 수 있다.
--
+
+## LottoController -> LottoService -> 로도를 체크한다. domain
+
+- checkLotto ->
+- buyRandom ->
 
 ## 외부
 
@@ -124,3 +124,7 @@ method 내 티켓 비교하기
 5개 일치, 보너스 볼 일치(30000000원) - 0개
 6개 일치 (2000000000원)- 0개
 총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)
+
+### 해야할 것
+
+- lottoCache 상수 이름바꾸기
