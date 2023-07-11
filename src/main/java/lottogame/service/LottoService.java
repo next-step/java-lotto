@@ -3,7 +3,7 @@ package lottogame.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import lottogame.domain.LottoNumbers;
+import lottogame.domain.LottoTicket;
 import lottogame.domain.spi.NumberGenerator;
 import lottogame.service.reponse.LottoPurchaseResponse;
 import lottogame.service.reponse.LottoPurchaseResponse.LottoNumbersResponse;
@@ -22,12 +22,12 @@ public class LottoService {
         return toLottoPurchaseResponse(createLottoNumbers(money));
     }
 
-    private List<LottoNumbers> createLottoNumbers(int money) {
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+    private List<LottoTicket> createLottoNumbers(int money) {
+        List<LottoTicket> lottoTicketList = new ArrayList<>();
         for (int count = 0; count < money % PURCHASABLE_UNIT; count++) {
-            lottoNumbersList.add(new LottoNumbers(numberGenerator));
+            lottoTicketList.add(new LottoTicket(numberGenerator));
         }
-        return lottoNumbersList;
+        return lottoTicketList;
     }
 
     private void assertMoney(int money) {
@@ -37,10 +37,10 @@ public class LottoService {
         }
     }
 
-    private LottoPurchaseResponse toLottoPurchaseResponse(List<LottoNumbers> lottoNumbersList) {
+    private LottoPurchaseResponse toLottoPurchaseResponse(List<LottoTicket> lottoTicketList) {
         return new LottoPurchaseResponse(
-            lottoNumbersList.stream()
-                .map(lottoNumbers -> new LottoNumbersResponse(lottoNumbers.getValues()))
+            lottoTicketList.stream()
+                .map(lottoNumbers -> new LottoNumbersResponse(lottoNumbers.getLottoNumbers()))
                 .collect(Collectors.toList())
         );
     }

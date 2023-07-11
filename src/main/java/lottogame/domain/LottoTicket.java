@@ -5,19 +5,19 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import lottogame.domain.spi.NumberGenerator;
 
-public class LottoNumbers {
+public class LottoTicket {
 
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
-    private final Set<LottoNumber> values;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(NumberGenerator numberGenerator) {
+    public LottoTicket(NumberGenerator numberGenerator) {
         Objects.requireNonNull(numberGenerator, "numberGeneartor는 Null이 되면 안됩니다.");
-        this.values = initLottoNumbers(numberGenerator.generateDistinctNumbers(LOTTO_NUMBERS_SIZE));
+        this.lottoNumbers = initLottoNumbers(numberGenerator.generateDistinctNumbers(LOTTO_NUMBERS_SIZE));
     }
 
-    LottoNumbers(Set<Integer> lottoNumbers) {
-        this.values = initLottoNumbers(lottoNumbers);
+    LottoTicket(Set<Integer> lottoNumbers) {
+        this.lottoNumbers = initLottoNumbers(lottoNumbers);
     }
 
     private Set<LottoNumber> initLottoNumbers(Set<Integer> lottoNumbers) {
@@ -37,18 +37,18 @@ public class LottoNumbers {
         }
     }
 
-    int getMatchedCount(LottoNumbers lottoNumbers) {
-        return (int) values.stream()
-            .filter(lottoNumbers::contains)
+    int getMatchedCount(LottoTicket lottoTicket) {
+        return (int) lottoNumbers.stream()
+            .filter(lottoTicket::contains)
             .count();
     }
 
     boolean contains(LottoNumber lottoNumber) {
-        return values.contains(lottoNumber);
+        return lottoNumbers.contains(lottoNumber);
     }
 
-    public Set<Integer> getValues() {
-        return values.stream()
+    public Set<Integer> getLottoNumbers() {
+        return lottoNumbers.stream()
             .map(LottoNumber::getValue)
             .collect(Collectors.toSet());
     }
@@ -58,22 +58,22 @@ public class LottoNumbers {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof LottoNumbers)) {
+        if (!(o instanceof LottoTicket)) {
             return false;
         }
-        LottoNumbers that = (LottoNumbers) o;
-        return Objects.equals(values, that.values);
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(values);
+        return Objects.hash(lottoNumbers);
     }
 
     @Override
     public String toString() {
-        return "LottoNumbers{" +
-            "lottoNumbers=" + values +
+        return "LottoTicket{" +
+            "lottoNumbers=" + lottoNumbers +
             '}';
     }
 }

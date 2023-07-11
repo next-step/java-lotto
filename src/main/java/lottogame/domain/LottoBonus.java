@@ -6,21 +6,21 @@ public class LottoBonus {
 
     private final LottoNumber lottoNumber;
 
-    LottoBonus(int bonusNumber, LottoNumbers lottoNumbers) {
-        assertLottoNumber(bonusNumber, lottoNumbers);
+    LottoBonus(int bonusNumber, LottoTicket lottoTicket) {
+        assertLottoNumber(bonusNumber, lottoTicket);
         this.lottoNumber = LottoNumber.valueOf(bonusNumber);
     }
 
-    private void assertLottoNumber(Integer bonusNumber, LottoNumbers lottoNumbers) {
-        if (lottoNumbers.contains(LottoNumber.valueOf(bonusNumber))) {
+    private void assertLottoNumber(Integer bonusNumber, LottoTicket lottoTicket) {
+        if (lottoTicket.contains(LottoNumber.valueOf(bonusNumber))) {
             throw new IllegalArgumentException(
-                String.format("bonusNumber \"%d\"는 lottoNumbers\"%s\"와 중복될 수 없습니다.", bonusNumber, lottoNumbers));
+                String.format("bonusNumber \"%d\"는 lottoNumbers\"%s\"와 중복될 수 없습니다.", bonusNumber, lottoTicket));
         }
     }
 
-    boolean isContained(LottoNumbers lottoNumbers) {
-        Objects.requireNonNull(lottoNumbers, "lottoNumbers는 Null일 수 없습니다.");
-        return lottoNumbers.contains(lottoNumber);
+    boolean isContained(LottoTicket lottoTicket) {
+        Objects.requireNonNull(lottoTicket, "lottoNumbers는 Null일 수 없습니다.");
+        return lottoTicket.contains(lottoNumber);
     }
 
     @Override
