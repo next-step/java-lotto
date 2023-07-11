@@ -13,6 +13,10 @@ public class LottoResults {
         lottoResults = new EnumMap<>(LottoRank.class);
     }
 
+    public Map<LottoRank, Long> getLottoResults() {
+        return lottoResults;
+    }
+
     public void add(LottoRank lottoRank, long count) {
         lottoResults.put(lottoRank, lottoResults.getOrDefault(lottoRank, DEFAULT_VALUE) + count);
     }

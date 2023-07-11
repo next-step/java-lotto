@@ -17,6 +17,10 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     private void validateLotto(List<Integer> lottoNumbers) {
         validateLottoSize(lottoNumbers);
         validateDuplicatedLottoNumbers(lottoNumbers);
