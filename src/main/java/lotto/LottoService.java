@@ -3,11 +3,11 @@ package lotto;
 public final class LottoService {
 
     private final Lottos lottos;
-    private final int change;
+    private final LottoMoney lottoMoney;
 
     public LottoService(final int money, final NumbersGenerator numbersGenerator) {
-        this.lottos = new Lottos(money, numbersGenerator);
-        this.change = money % 1_000;
+        this.lottoMoney = new LottoMoney(money);
+        this.lottos = new Lottos(lottoMoney.getCount(), numbersGenerator);
     }
 
     public Lottos getLottos() {
@@ -15,6 +15,6 @@ public final class LottoService {
     }
 
     public int getChange() {
-        return this.change;
+        return this.lottoMoney.getChange();
     }
 }

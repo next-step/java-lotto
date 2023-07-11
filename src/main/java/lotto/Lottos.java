@@ -2,18 +2,17 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public final class Lottos {
 
-    public static final int LOTTO_PRICE = 1_000;
-
     private final List<Lotto> lottos;
 
-    public Lottos(final int price, final NumbersGenerator numberGenerator) {
-        this.lottos = new ArrayList<>();
-        for (int count = 0; count < price / LOTTO_PRICE; count++) {
-            this.lottos.add(new Lotto(numberGenerator.generate()));
-        }
+    public Lottos(final int size, final NumbersGenerator numberGenerator) {
+        this.lottos = IntStream.range(0, size)
+                .mapToObj(count -> new Lotto(numberGenerator.generate()))
+                .collect(Collectors.toUnmodifiableList());
     }
 
     public List<Lotto> getLottos() {
