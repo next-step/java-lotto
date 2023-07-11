@@ -8,7 +8,6 @@ public class LottoGenerator {
     private final List<Ball> balls;
     private final LottoGenerateStrategy lottoGenerateStrategy;
 
-
     public LottoGenerator() {
         this(new RandomLottoGenerateStrategy());
     }
