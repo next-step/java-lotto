@@ -13,4 +13,8 @@ public class LottoResults {
     public WinningStatistics getWinningStatistics() {
         return new WinningStatistics(lottoResults);
     }
+
+    public List<LottoResult> getLottoResults() {
+        return this.lottoResults;
+    }
 }
