@@ -11,7 +11,7 @@ public class LottoNumbers {
 
     private final Set<LottoNumber> values;
 
-    LottoNumbers(NumberGenerator numberGenerator) {
+    public LottoNumbers(NumberGenerator numberGenerator) {
         Objects.requireNonNull(numberGenerator, "numberGeneartor는 Null이 되면 안됩니다.");
         this.values = initLottoNumbers(numberGenerator.generateDistinctNumbers(LOTTO_NUMBERS_SIZE));
     }
@@ -45,6 +45,12 @@ public class LottoNumbers {
 
     boolean contains(LottoNumber lottoNumber) {
         return values.contains(lottoNumber);
+    }
+
+    public Set<Integer> getValues() {
+        return values.stream()
+            .map(LottoNumber::getValue)
+            .collect(Collectors.toSet());
     }
 
     @Override
