@@ -21,7 +21,7 @@ public class InputView {
     public WinningNumbersRequestDto inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String numbers = scanner.nextLine();
-        List<Integer> lottoNumbers = Arrays.stream(numbers.split(", "))
+        List<Integer> lottoNumbers = Arrays.stream(numbers.split("[, ]"))
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
