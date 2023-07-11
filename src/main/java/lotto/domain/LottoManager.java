@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoManager {
 
@@ -11,7 +12,8 @@ public class LottoManager {
         this.lottos = lottos;
     }
 
-    public Map<LottoRank, Integer> getResult(WinningLotto winningLotto) {
-        return null;
+    public Map<LottoRank, Long> getResult(WinningLotto winningLotto) {
+        return lottos.stream()
+            .collect(Collectors.groupingBy(winningLotto::calculateRank, Collectors.counting()));
     }
 }

@@ -15,13 +15,12 @@ class LottoManagerTest {
     void getResultTest() {
         //given
         List<Lotto> lottos = new ArrayList<>();
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6)));
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 7)));
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 8, 9)));
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 8, 9, 10)));
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 8, 9, 10, 11)));
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 8, 9, 10, 11, 12)));
-        lottos.add(Lotto.createSpecificLotto(List.of(21, 22, 23, 24, 25, 26)));
+        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6))); // 1등
+        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 7))); // 2등
+        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 8))); // 3등
+        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 8, 9))); // 4등
+        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 8, 9, 10))); // 5등
+        lottos.add(Lotto.createSpecificLotto(List.of(21, 22, 23, 24, 25, 26))); // 등수없음
 
         WinningLotto winningLotto = new WinningLotto(
             Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6)),
@@ -29,13 +28,13 @@ class LottoManagerTest {
         LottoManager lottoManager = new LottoManager(lottos);
 
         //when
-        Map<LottoRank, Integer> result = lottoManager.getResult(winningLotto);
+        Map<LottoRank, Long> result = lottoManager.getResult(winningLotto);
 
         //then
-        assertThat(result).containsEntry(LottoRank.FIFTH, 1);
-        assertThat(result).containsEntry(LottoRank.FOURTH, 1);
-        assertThat(result).containsEntry(LottoRank.THIRD, 1);
-        assertThat(result).containsEntry(LottoRank.SECOND, 1);
-        assertThat(result).containsEntry(LottoRank.FIRST, 1);
+        assertThat(result).containsEntry(LottoRank.FIFTH, 1L);
+        assertThat(result).containsEntry(LottoRank.FOURTH, 1L);
+        assertThat(result).containsEntry(LottoRank.THIRD, 1L);
+        assertThat(result).containsEntry(LottoRank.SECOND, 1L);
+        assertThat(result).containsEntry(LottoRank.FIRST, 1L);
     }
 }
