@@ -14,7 +14,7 @@ public enum Rank {
 
     private final int matchCount;
     private final boolean hasBonusBall;
-    private final int prize;
+    private final long prize;
 
     Rank(final int matchCount, final boolean hasBonusBall, final int prize) {
         this.matchCount = matchCount;
@@ -35,5 +35,9 @@ public enum Rank {
                 .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
                 .orElse(NONE);
+    }
+
+    public static long getTotalPrize(Rank rank, int count) {
+        return rank.prize * count;
     }
 }

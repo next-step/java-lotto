@@ -1,6 +1,7 @@
 package lotto;
 
 
+import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -25,5 +26,19 @@ class LottoResultTest {
         assertThat(lottoResult.getCount(Rank.SECOND)).isEqualTo(2);
         assertThat(lottoResult.getCount(Rank.FOURTH)).isEqualTo(1);
         assertThat(lottoResult.getCount(Rank.FIRST)).isZero();
+    }
+
+    @Test
+    void 로또_결과로_수익률_계산_성공() {
+        // given
+        LottoMoney lottoMoney = new LottoMoney(3000);
+        LottoResult lottoResult = new LottoResult(List.of(Rank.SECOND, Rank.FOURTH, Rank.SECOND));
+
+        // when
+        double profitRate = lottoResult.calculateProfitRate(lottoMoney);
+
+        // then
+        final long totalPrize = Rank.getTotalPrize(Rank.SECOND, 2) + Rank.getTotalPrize(Rank.FOURTH, 1);
+        assertThat(profitRate).isCloseTo(totalPrize / (double) lottoMoney.getValue(), Percentage.withPercentage(99));
     }
 }

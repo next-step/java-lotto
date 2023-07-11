@@ -19,4 +19,8 @@ public final class LottoResult {
     public int getCount(final Rank rank) {
         return lottoResult.getOrDefault(rank, DEFAULT_VALUE);
     }
+
+    public double calculateProfitRate(final LottoMoney lottoMoney) {
+        return -1;
+    }
 }
