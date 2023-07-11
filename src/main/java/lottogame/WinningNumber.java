@@ -22,4 +22,11 @@ public class WinningNumber {
         }
     }
 
+    public Lotto getWinningLotto() {
+        return winningLotto;
+    }
+
+    public LottoNumber getBonusBall(){
+        return bonusBall;
+    }
 }

@@ -23,6 +23,7 @@
 * Lotto -> 일급 컬렉션, type : List<Number>
   - [x] validation : 중복이 있는 지
   - [x] validation : 6개의 숫자인지
+  - [x] action : 일치하는 숫자 카운트
 * LottoNumber -> type : int
   - [x] validation : 1~45의 숫자
 * LottoText -> type : List<Integer>
@@ -47,7 +48,10 @@
 * 6개 일치 (2000000000원)- ~ 개
 * 총 수익률 = (당첨 금액) / 투입 금액
   * 3째 자리에서 round up
-
+10,3,4
+3,4,10
+10,20,30,4
+  * 4, 10, 20, 30
 
 ----
 ## 진행 방법
