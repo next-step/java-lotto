@@ -19,4 +19,8 @@ public class Money {
     public long countLotto() {
         return this.money / LOTTO_PRICE;
     }
+
+    public double profitRate(long profit) {
+        return (double) profit / this.money;
+    }
 }

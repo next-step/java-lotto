@@ -33,4 +33,11 @@ class MoneyTest {
         Money money = new Money(amount);
         Assertions.assertThat(money.countLotto()).isEqualTo(count);
     }
+
+    @Test
+    @DisplayName("수익률 계산 테스트")
+    void profitRate() {
+        Money money = new Money(14000);
+        Assertions.assertThat(money.profitRate(5000)).isEqualTo((double) 5000 / 14000);
+    }
 }
