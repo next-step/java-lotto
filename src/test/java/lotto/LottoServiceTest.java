@@ -13,14 +13,14 @@ class LottoServiceTest {
     @Test
     void 로또_서비스_객체_생성_성공() {
         // given, when, then
-        assertDoesNotThrow(() -> new LottoService(0));
+        assertDoesNotThrow(() -> new LottoService(0, RandomNumbersGenerator.getInstance()));
     }
 
     @ParameterizedTest
     @CsvSource(value = {"14000,14", "14001,14", "1000,1"})
     void 로또_서비스_구입금액에_해당하는_로또_생성_성공(int money, int expectedSize) {
         // when
-        LottoService lottoService = new LottoService(money);
+        LottoService lottoService = new LottoService(money, RandomNumbersGenerator.getInstance());
 
         // then
         assertThat(lottoService.getLottos().getLottos()).hasSize(expectedSize);

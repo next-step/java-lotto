@@ -6,6 +6,7 @@ import java.util.List;
 public final class Lottos {
 
     public static final int LOTTO_PRICE = 1_000;
+
     private final List<Lotto> lottos;
 
     public Lottos(final int price, final NumbersGenerator numberGenerator) {
