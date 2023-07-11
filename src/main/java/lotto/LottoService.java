@@ -11,4 +11,8 @@ public final class LottoService {
     public Lottos getLottos() {
         return this.lottos;
     }
+
+    public int getChange() {
+        return -1;
+    }
 }

@@ -25,4 +25,14 @@ class LottoServiceTest {
         // then
         assertThat(lottoService.getLottos().getLottos()).hasSize(expectedSize);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"14000,0", "14001,1", "1000,0", "1500,500"})
+    void 로또_서비스_구입금액에_해당하는_거스름돈_생성_성공(int money, int expectedChange) {
+        // when
+        LottoService lottoService = new LottoService(money, RandomNumbersGenerator.getInstance());
+
+        // then
+        assertThat(lottoService.getChange()).isEqualTo(expectedChange);
+    }
 }
