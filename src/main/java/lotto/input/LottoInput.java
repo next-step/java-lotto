@@ -7,15 +7,15 @@ import java.util.stream.Collectors;
 
 public class LottoInput {
 
-    public static final String WINNING_DELIMITER = ", ";
+    private static final String WINNING_DELIMITER = ", ";
     private final Scanner scanner;
 
     public LottoInput() {
         this.scanner = new Scanner(System.in);
     }
 
-    private int inputAmount() {
-        return Integer.parseInt(scanner.nextLine());
+    private Long inputAmount() {
+        return Long.parseLong(scanner.nextLine());
     }
 
     public List<Integer> inputWinningNumbers() {
@@ -24,11 +24,11 @@ public class LottoInput {
             .collect(Collectors.toList());
     }
 
-    public int inputPurchaseAmount() {
+    public Long inputPurchaseAmount() {
         return inputAmount();
     }
 
     public int inputBonusNumber() {
-        return inputAmount();
+        return inputAmount().intValue();
     }
 }

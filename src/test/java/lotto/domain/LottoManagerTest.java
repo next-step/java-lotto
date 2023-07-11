@@ -57,7 +57,7 @@ class LottoManagerTest {
 
     @Test
     void createLottoManagerTest() {
-        LottoManager manager = LottoManager.createLottoManagerByMoney(14000);
+        LottoManager manager = LottoManager.createLottoManagerByMoney(new Money(14000L));
         assertThat(manager.getLottos()).hasSize(14);
     }
 }

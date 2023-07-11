@@ -24,9 +24,9 @@ class LottoResultTest {
         LottoResult result = new LottoResult(rankResult);
 
         //when
-        Long totalPrize = result.calculateTotalPrize();
+        Money totalPrize = result.calculateTotalPrize();
 
         //then
-        assertThat(totalPrize).isEqualTo(6_061_760_000L);
+        assertThat(totalPrize).isEqualTo(new Money(6_061_760_000L));
     }
 }

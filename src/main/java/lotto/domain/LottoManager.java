@@ -7,16 +7,16 @@ import java.util.stream.Collectors;
 
 public class LottoManager {
 
-    private static final int LOTTO_PRICE = 1000;
+    private static final Long LOTTO_PRICE = 1000L;
     private final List<Lotto> lottos;
 
     public LottoManager(final List<Lotto> lottos) {
         this.lottos = Collections.unmodifiableList(lottos);
     }
 
-    public static LottoManager createLottoManagerByMoney(int money) {
+    public static LottoManager createLottoManagerByMoney(Money money) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < money / LOTTO_PRICE; i++) {
+        for (int i = 0; i < money.calculateQuantity(new Money(LOTTO_PRICE)); i++) {
             lottos.add(Lotto.createRandomLotto());
         }
         return new LottoManager(lottos);
@@ -28,11 +28,13 @@ public class LottoManager {
     }
 
     public double calculateYield(final WinningLotto winningLotto) {
-        return (double) getResult(winningLotto).calculateTotalPrize() / calculatePurchaseAmount();
+        return getResult(winningLotto)
+            .calculateTotalPrize()
+            .calculateYield(calculatePurchaseAmount());
     }
 
-    private int calculatePurchaseAmount() {
-        return lottos.size() * LOTTO_PRICE;
+    private Money calculatePurchaseAmount() {
+        return new Money(lottos.size() * LOTTO_PRICE);
     }
 
     public List<Lotto> getLottos() {

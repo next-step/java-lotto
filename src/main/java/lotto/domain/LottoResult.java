@@ -10,11 +10,12 @@ public class LottoResult {
         this.result = result;
     }
 
-    public Long calculateTotalPrize() {
-        return result.keySet()
+    public Money calculateTotalPrize() {
+        Long totalPrize = result.keySet()
             .stream()
             .mapToLong(key -> key.getPrize() * result.get(key))
             .sum();
+        return new Money(totalPrize);
     }
 
     public Map<LottoRank, Long> getResult() {

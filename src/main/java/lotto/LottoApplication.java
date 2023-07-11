@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.List;
 import lotto.domain.LottoManager;
+import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 import lotto.input.LottoInput;
 import lotto.output.LottoOutput;
@@ -17,7 +18,8 @@ public class LottoApplication {
     }
 
     public void run() {
-        int purchaseAmount = inputPurchaseAmount();
+        Money purchaseAmount = new Money(inputPurchaseAmount());
+        output.printAmount(purchaseAmount.calculateQuantity(new Money(1000L)));
         LottoManager manager = LottoManager.createLottoManagerByMoney(purchaseAmount);
 
         output.printLottos(manager);
@@ -27,11 +29,9 @@ public class LottoApplication {
         result(manager, winningLotto);
     }
 
-    private int inputPurchaseAmount() {
+    private Long inputPurchaseAmount() {
         output.printAskPurchaseAmount();
-        int purchaseAmount = input.inputPurchaseAmount();
-        output.printAmount(purchaseAmount / 1000);
-        return purchaseAmount;
+        return input.inputPurchaseAmount();
     }
 
     private WinningLotto inputWinningLotto() {
