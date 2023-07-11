@@ -8,7 +8,8 @@ import java.util.Set;
 
 public class Lotto {
 
-    private static final int SIZE = 6;
+    static final int SIZE = 6;
+    static final int PRICE = 1000;
     private static final String LOTTO_SIZE_EXCEPTION_MESSAGE = "로또 번호는 6개여야 합니다.";
     private static final String DUPLICATE_BALLS_EXCEPTION_MESSAGE = "로또 번호가 중복되었습니다.";
 

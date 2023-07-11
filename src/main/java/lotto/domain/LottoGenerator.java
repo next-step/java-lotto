@@ -10,17 +10,17 @@ public class LottoGenerator {
 
     public LottoGenerator() {
         balls = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            balls.add(new Ball(String.valueOf(i)));
+        for (int i = Ball.MIN_NUMBER; i <= Ball.MAX_NUMBER; i++) {
+            balls.add(new Ball(i));
         }
     }
 
     public List<Lotto> generate(final Money money) {
-        int count = money.getValue() / 1000;
-        List<Lotto> boughtLottos = new ArrayList<>();
+        final int count = money.getValue() / Lotto.PRICE;
+        final List<Lotto> boughtLottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             Collections.shuffle(balls);
-            boughtLottos.add(new Lotto(balls.subList(0, 6)));
+            boughtLottos.add(new Lotto(balls.subList(0, Lotto.SIZE)));
         }
         return boughtLottos;
     }
