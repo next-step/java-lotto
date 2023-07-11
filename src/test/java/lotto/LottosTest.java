@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class LottosTest {
+class LottosTest {
 
     @Test
     @DisplayName("로또 일급 콜렉션 생성 테스트")
