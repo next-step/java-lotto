@@ -17,4 +17,12 @@ public class WinningLotto {
             throw new IllegalStateException("당첨 번호와 보너스 볼은 중복되면 안됩니다.");
         }
     }
+
+    public Rank compare(Lotto lotto) {
+        int count = (int) lotto.getLottoNumbers().stream()
+                .filter(winningLotto::isContain)
+                .count();
+        boolean isBonus = lotto.isContain(bonusBall);
+        return Rank.match(count, isBonus);
+    }
 }
