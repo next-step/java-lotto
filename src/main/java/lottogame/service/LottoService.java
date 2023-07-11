@@ -2,11 +2,8 @@ package lottogame.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import lottogame.domain.LottoTicket;
 import lottogame.domain.spi.NumberGenerator;
-import lottogame.service.reponse.LottoPurchaseResponse;
-import lottogame.service.reponse.LottoPurchaseResponse.LottoNumbersResponse;
 
 public class LottoService {
 
@@ -17,9 +14,9 @@ public class LottoService {
         this.numberGenerator = numberGenerator;
     }
 
-    public LottoPurchaseResponse purchase(int money) {
+    public List<LottoTicket> purchase(int money) {
         assertMoney(money);
-        return toLottoPurchaseResponse(createLottoNumbers(money));
+        return createLottoNumbers(money);
     }
 
     private List<LottoTicket> createLottoNumbers(int money) {
@@ -35,13 +32,5 @@ public class LottoService {
             throw new IllegalArgumentException(
                 String.format("money는 \"%d\"원으로 나누어 떨어져야 합니다 money: \"%d\"", PURCHASABLE_UNIT, money));
         }
-    }
-
-    private LottoPurchaseResponse toLottoPurchaseResponse(List<LottoTicket> lottoTicketList) {
-        return new LottoPurchaseResponse(
-            lottoTicketList.stream()
-                .map(lottoNumbers -> new LottoNumbersResponse(lottoNumbers.getLottoNumbers()))
-                .collect(Collectors.toList())
-        );
     }
 }
