@@ -52,4 +52,12 @@ class LottoTest {
 
         Assertions.assertThat(lotto.countMatchNumber(winningNumbers)).isEqualTo(6L);
     }
+
+    @Test
+    @DisplayName("보너스 번호가 로또 번호 안에 있는지 확인한다")
+    void matchBonusNumber() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = new LottoNumber(5);
+        Assertions.assertThat(lotto.matchBonusNumber(bonusNumber)).isTrue();
+    }
 }
