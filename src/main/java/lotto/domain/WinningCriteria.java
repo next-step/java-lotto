@@ -34,4 +34,8 @@ public enum WinningCriteria {
                      .filter(value -> value.matchCount == matchCount && value.bonusResults.contains(isMatchBonus))
                      .findAny().orElse(NONE);
     }
+
+    public int getPrize() {
+        return this.prize;
+    }
 }
