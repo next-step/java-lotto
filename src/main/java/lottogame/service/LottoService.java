@@ -19,18 +19,18 @@ public class LottoService {
         return createLottoNumbers(money);
     }
 
+    private void assertMoney(int money) {
+        if (money % PURCHASABLE_UNIT != 0) {
+            throw new IllegalArgumentException(
+                String.format("money는 \"%d\"원으로 나누어 떨어져야 합니다 money: \"%d\"", PURCHASABLE_UNIT, money));
+        }
+    }
+
     private List<LottoTicket> createLottoNumbers(int money) {
         List<LottoTicket> lottoTicketList = new ArrayList<>();
         for (int count = 0; count < money % PURCHASABLE_UNIT; count++) {
             lottoTicketList.add(new LottoTicket(numberGenerator));
         }
         return lottoTicketList;
-    }
-
-    private void assertMoney(int money) {
-        if (money % PURCHASABLE_UNIT != 0) {
-            throw new IllegalArgumentException(
-                String.format("money는 \"%d\"원으로 나누어 떨어져야 합니다 money: \"%d\"", PURCHASABLE_UNIT, money));
-        }
     }
 }
