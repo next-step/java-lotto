@@ -35,6 +35,6 @@ class WinningNumbersTest {
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 8, 9));
 
-        Assertions.assertThat(winningNumbers.match(lotto)).isEqualTo(LottoRank.FORTH);
+        Assertions.assertThat(winningNumbers.match(lotto)).isEqualTo(LottoRank.FOURTH);
     }
 }

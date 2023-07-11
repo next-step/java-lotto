@@ -23,6 +23,10 @@ public class WinningNumbers {
         long matchCount = lotto.countMatchNumber(winningNumbers);
         boolean bonusCount = lotto.matchBonusNumber(bonusNumber);
 
+        return findLottoRank(matchCount, bonusCount);
+    }
+
+    private LottoRank findLottoRank(long matchCount, boolean bonusCount) {
         if (matchCount == 6) {
             return LottoRank.FIRST;
         }
@@ -36,13 +40,17 @@ public class WinningNumbers {
         }
 
         if (matchCount == 4) {
-            return LottoRank.FORTH;
+            return LottoRank.FOURTH;
         }
 
         if (matchCount == 3) {
             return LottoRank.FIFTH;
         }
 
-        return LottoRank.FIRST;
+        if (matchCount < 3) {
+            return LottoRank.NONE;
+        }
+
+        throw new IllegalStateException("로또 당첨 비교가 불가능합니다.");
     }
 }
