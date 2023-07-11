@@ -6,6 +6,7 @@ import lotto.LottoResults;
 import java.util.Map;
 
 public class LottoResultResponseDto {
+
     private final Map<LottoRank, Long> lottoResults;
     private final double profitRate;
 
