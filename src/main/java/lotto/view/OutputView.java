@@ -4,6 +4,7 @@ import lotto.LottoRank;
 import lotto.dto.LottoResultResponseDto;
 import lotto.dto.LottoStatusResponseDto;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ public class OutputView {
     public void printBuyStatus(LottoStatusResponseDto lottoStatusResponseDto) {
         System.out.println(lottoStatusResponseDto.getLottoStatus().size() + "개를 구매했습니다.");
         for (List<Integer> lottoStatus : lottoStatusResponseDto.getLottoStatus()) {
+            Collections.sort(lottoStatus);
             System.out.println(lottoStatus);
         }
         System.out.println();

@@ -14,13 +14,14 @@ public class InputView {
 
     public MoneyRequestDto inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        long money = scanner.nextLong();
+        long money = Long.parseLong(scanner.nextLine());
         return new MoneyRequestDto(money);
     }
 
     public WinningNumbersRequestDto inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        List<Integer> lottoNumbers = Arrays.stream(scanner.nextLine().split(","))
+        String numbers = scanner.nextLine();
+        List<Integer> lottoNumbers = Arrays.stream(numbers.split(", "))
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
