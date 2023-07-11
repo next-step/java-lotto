@@ -41,4 +41,8 @@ public class LottoBonus {
             "lottoNumber=" + lottoNumber +
             '}';
     }
+
+    public boolean isContained(LottoNumbers lottoNumbers) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }
