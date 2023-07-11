@@ -19,11 +19,15 @@ public enum Rank {
         this.needBonus = needBonus;
     }
 
-    static Rank match(int count, boolean isBonus) {
+    static Rank match(final int count, final boolean isBonus) {
         return Arrays.stream(values())
                 .filter(rank -> rank.match == count)
                 .filter(rank -> rank.needBonus == isBonus)
                 .findAny()
                 .orElseThrow();
+    }
+
+    public int getReward() {
+        return this.reward;
     }
 }
