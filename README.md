@@ -51,6 +51,11 @@ LottoTicket 1 -> 1 LottoNumbers 1 -> * LottoNumber
 - [x] 로또번호들과 보너스 번호가 중복되는지 체크할 수 있다.
 - [x] 보너스가 LottoNumbers에 포함되는지 확인한다
 
+### LottoPrize
+
+- [x] 당첨갯수와, 보너스번호당첨 유무를 받아, 몇번째 등수인지 반환한다
+- [x] 
+
 ## 서비스
 
 ### LottoService
@@ -132,3 +137,8 @@ method 내 티켓 비교하기
 - LottoNumber static블록 위치 변경
 
 내 티켓과 로또 결과를 받아서, 비교한다음, 결과를 반환한다.
+
+돈을 받아서,
+
+리스트 로또 티켓이 들어와서
+수익율,prize마다의 갯수를 반환한다
