@@ -8,6 +8,23 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
+    @DisplayName("보너스볼이 로또안에 있으면 true를 반환한다")
+    @Test
+    void 로또_보너스볼_중복_O() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber lottoNumber = new LottoNumber(1);
+
+        Assertions.assertThat(lotto.hasLottoNumber(lottoNumber)).isTrue();
+    }
+
+    @DisplayName("보너스볼이 로또안에 있으면 false를 반환한다")
+    @Test
+    void 로또_보너스볼_중복_X() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber lottoNumber = new LottoNumber(10);
+
+        Assertions.assertThat(lotto.hasLottoNumber(lottoNumber)).isFalse();
+    }
 
     @DisplayName("로또 번호가 6개가 아니면 예외가 발생한다")
     @Test
