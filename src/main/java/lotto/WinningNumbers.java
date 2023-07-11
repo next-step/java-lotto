@@ -40,4 +40,12 @@ public final class WinningNumbers {
             throw new IllegalArgumentException("당첨 번호와 보너스 볼은 중복될 수 없습니다.");
         }
     }
+
+    public LottoNumber getBonusBall() {
+        return this.bonusBall;
+    }
+
+    public boolean hasWinningNumber(final LottoNumber lottoNumber) {
+        return winningNumbers.contains(lottoNumber);
+    }
 }
