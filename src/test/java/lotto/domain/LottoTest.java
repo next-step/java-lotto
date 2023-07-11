@@ -47,7 +47,7 @@ public class LottoTest {
         assertThat(lotto).isEqualTo(new Lotto(getBalls("1", "2", "3", "4", "5", "6")));
     }
 
-    private List<Ball> getBalls(final String... args) {
+    static List<Ball> getBalls(final String... args) {
         final List<Ball> balls = new ArrayList<>();
         for (String arg : args) {
             balls.add(new Ball(arg));
