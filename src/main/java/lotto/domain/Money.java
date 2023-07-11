@@ -14,6 +14,10 @@ public class Money {
     }
 
     private void validate(final String value) {
+        if (!value.matches("\\d+")) {
+            throw new IllegalArgumentException();
+        }
+        
         int money = Integer.parseInt(value);
 
         if (money < MIN_PURCHASE_MONEY || MAX_PURCHASE_MONEY < money) {
