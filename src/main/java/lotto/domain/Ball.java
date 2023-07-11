@@ -39,6 +39,10 @@ public class Ball implements Comparable<Ball> {
         }
     }
 
+    public int getValue() {
+        return this.value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
