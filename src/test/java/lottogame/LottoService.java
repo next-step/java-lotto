@@ -45,10 +45,10 @@ public class LottoService {
     }
 
     public String getProfitRate() {
-        int profit = 0;
+        float profit = 0;
         for (LottoMatch lottoMatch : resultMap.keySet()) {
             profit = resultMap.get(lottoMatch) * lottoMatch.getPrize();
         }
-        return String.format("%.2f",profit / payment.getMoney());
+        return String.format("%.2f", profit / payment.getMoney());
     }
 }
