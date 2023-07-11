@@ -13,7 +13,7 @@ public class LottoGenerator {
         this(new RandomLottoGenerateStrategy());
     }
 
-    public LottoGenerator(LottoGenerateStrategy lottoGenerateStrategy) {
+    public LottoGenerator(final LottoGenerateStrategy lottoGenerateStrategy) {
         this.lottoGenerateStrategy = lottoGenerateStrategy;
         this.balls = new ArrayList<>();
         for (int i = Ball.MIN_NUMBER; i <= Ball.MAX_NUMBER; i++) {

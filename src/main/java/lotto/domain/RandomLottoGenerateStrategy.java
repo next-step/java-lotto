@@ -6,7 +6,7 @@ import java.util.List;
 public class RandomLottoGenerateStrategy implements LottoGenerateStrategy {
 
     @Override
-    public Lotto generate(List<Ball> balls) {
+    public Lotto generate(final List<Ball> balls) {
         Collections.shuffle(balls);
         return new Lotto(balls.subList(0, Lotto.SIZE));
     }
