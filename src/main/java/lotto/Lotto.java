@@ -5,15 +5,22 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class Lotto {
-    
+
     public static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(final List<Integer> numbers) {
+        validate(numbers);
         this.lottoNumbers = numbers.stream()
                 .map(LottoNumber::of)
                 .collect(Collectors.toUnmodifiableList());
+    }
+
+    private void validate(final List<Integer> numbers) {
+        if (numbers.size() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException("로또는 6개의 번호를 가져야합니다.");
+        }
     }
 
     public List<LottoNumber> getNumbers() {
