@@ -13,7 +13,7 @@ public class WinningLotto {
         this.bonus = bonus;
     }
 
-    private void verify(Lotto lottoNumbers, LottoNumber bonus) {
+    private void verify(final Lotto lottoNumbers, final LottoNumber bonus) {
         if (lottoNumbers.getLottoNumbers().contains(bonus)) {
             throw new IllegalArgumentException("winning lotto can't contain bonus number");
         }
@@ -27,7 +27,7 @@ public class WinningLotto {
         return this.bonus;
     }
 
-    public LottoRank calculateRank(Lotto lotto) {
+    public LottoRank calculateRank(final Lotto lotto) {
         Long match = this.lottoNumbers.countMatches(lotto);
         boolean isContainBonus = lotto.getLottoNumbers().contains(bonus);
         return LottoRank.from(match, isContainBonus);

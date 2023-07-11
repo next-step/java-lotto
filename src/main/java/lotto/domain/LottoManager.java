@@ -8,16 +8,16 @@ public class LottoManager {
 
     private final List<Lotto> lottos;
 
-    public LottoManager(List<Lotto> lottos) {
+    public LottoManager(final List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    public Map<LottoRank, Long> getResult(WinningLotto winningLotto) {
+    public Map<LottoRank, Long> getResult(final WinningLotto winningLotto) {
         return lottos.stream()
             .collect(Collectors.groupingBy(winningLotto::calculateRank, Collectors.counting()));
     }
 
-    public double calculateYield(WinningLotto winningLotto) {
+    public double calculateYield(final WinningLotto winningLotto) {
         Map<LottoRank, Long> result = getResult(winningLotto);
         return result.keySet()
             .stream()
