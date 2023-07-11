@@ -60,4 +60,9 @@ public class LottoNumbers {
             "lottoNumbers=" + values +
             '}';
     }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return values.contains(lottoNumber);
+    }
+
 }
