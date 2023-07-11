@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class MoneyTest {
 
@@ -18,21 +19,19 @@ class MoneyTest {
                 .isThrownBy(() -> new Money(money));
     }
 
-    @Test
-    @DisplayName("음수 입력시 생성자가 예외를 던진다.")
-    void validateNegative() {
-        int negativeMoney = -14000;
-
-        Assertions.assertThatThrownBy(() -> new Money(negativeMoney))
+    @ParameterizedTest
+    @ValueSource(ints={-14000, 999})
+    @DisplayName("로또 구매 불가 금액 입력시 생성자가 예외를 던진다.")
+    void validateNegative(int notValidMoney) {
+        Assertions.assertThatThrownBy(() -> new Money(notValidMoney))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @ParameterizedTest
-    @CsvSource({"1234, 1", "999, 0"})
+    @Test
     @DisplayName("금액에 맞는 로또 개수를 반환한다.")
-    void countLotto(long amount, long count) {
-        Money money = new Money(amount);
-        Assertions.assertThat(money.countLotto()).isEqualTo(count);
+    void countLotto() {
+        Money money = new Money(1234);
+        Assertions.assertThat(money.countLotto()).isEqualTo(1);
     }
 
     @Test

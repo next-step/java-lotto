@@ -11,8 +11,8 @@ public class Money {
     }
 
     private void validateMoney(long money) {
-        if (money < 0) {
-            throw new IllegalArgumentException("돈이 음수일 수 없습니다.");
+        if (money < LOTTO_PRICE) {
+            throw new IllegalArgumentException("로또를 구매할 수 없습니다.");
         }
     }
 
@@ -21,6 +21,6 @@ public class Money {
     }
 
     public double profitRate(long profit) {
-        return (double) profit / this.money;
+        return (double) profit / (this.countLotto() * LOTTO_PRICE);
     }
 }
