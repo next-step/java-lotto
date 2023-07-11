@@ -16,4 +16,12 @@ public class LottoService {
                 .collect(Collectors.toList());
         return new Lottos(lottos);
     }
+
+    public LottoResults matchWinningLotto(Lottos lottos, WinningNumbers winningNumbers) {
+        return lottos.matchWinningNumbers(winningNumbers);
+    }
+
+    public double profitRate(LottoResults lottoResults, Money money) {
+        return money.profitRate(lottoResults.sumPrice());
+    }
 }
