@@ -111,6 +111,28 @@ class LottoNumbersTest {
             }
 
         }
+    }
+
+    @Nested
+    @DisplayName("contain 메소드는")
+    class Describe_Conatins {
+
+        @Nested
+        @DisplayName("중복된 LottoNumber가 들어오면,")
+        class Context_Input_Same_LottoNumber {
+
+            private final int sameLottoNumber = 1;
+            private final LottoNumbers lottoNumbers = new LottoNumbers(Set.of(sameLottoNumber, 2, 3, 4, 5, 6));
+            private final LottoNumber lottoNumber = LottoNumber.valueOf(sameLottoNumber);
+
+            @Test
+            @DisplayName("true를 반환한다.")
+            void It_Return_True() {
+                assertThat(lottoNumbers.contains(lottoNumber)).isTrue();
+            }
+
+        }
 
     }
+
 }

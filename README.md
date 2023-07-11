@@ -50,7 +50,7 @@ LottoTicket 1 -> 1 LottoNumbers 1 -> * LottoNumber
 
 ### LottoBonus
 
-- 같은 로또 번호를 가지면 같다.
+- [x] 같은 로또 번호를 가지면 같다.
 - 로또번호들과 보너스 번호가 중복되는지 체크할 수 있다.
 
 ## 서비스
