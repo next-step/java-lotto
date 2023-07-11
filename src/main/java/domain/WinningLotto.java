@@ -1,11 +1,11 @@
 package domain;
 
-public class LottoResult {
+public class WinningLotto {
 
     private final Lotto lotto;
     private final LottoNumber bonus;
 
-    public LottoResult(final Lotto lotto, final LottoNumber bonus) {
+    public WinningLotto(final Lotto lotto, final LottoNumber bonus) {
         if (lotto.containsLottoNumber(bonus)) {
             throw new IllegalArgumentException("보너스 번호는 로또와 중복될 수 없습니다.");
         }
