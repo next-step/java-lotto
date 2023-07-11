@@ -24,4 +24,8 @@ public class LottoMoney {
     public int getChange() {
         return value % LOTTO_PRICE;
     }
+
+    public int getCount() {
+        return -1;
+    }
 }

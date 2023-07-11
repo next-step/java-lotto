@@ -36,4 +36,10 @@ class LottoMoneyTest {
         assertThat(new LottoMoney(money).getChange()).isEqualTo(expectedChange);
     }
 
+    @ParameterizedTest
+    @CsvSource({"1999,1", "14001,14", "1000,1"})
+    void 로또_구입시_로또_개수_반환(int money, int expectedCount) {
+        // given, when, then
+        assertThat(new LottoMoney(money).getCount()).isEqualTo(expectedCount);
+    }
 }
