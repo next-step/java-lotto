@@ -28,4 +28,13 @@ class WinningNumbersTest {
         Assertions.assertThatThrownBy(() -> new WinningNumbers(lottoNumbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("로또와 당첨 번호를 비교하여 등수를 반환 테스트")
+    void match() {
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 8, 9));
+
+        Assertions.assertThat(winningNumbers.match(lotto)).isEqualTo(LottoRank.FORTH);
+    }
 }
