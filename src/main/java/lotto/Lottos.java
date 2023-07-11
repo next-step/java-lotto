@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,5 +16,9 @@ public final class Lottos {
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public LottoResult calculateLottoResult(final WinningNumbers winningNumbers) {
+        return null;
     }
 }
