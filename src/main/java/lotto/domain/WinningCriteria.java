@@ -35,6 +35,10 @@ public enum WinningCriteria {
                      .findAny().orElse(NONE);
     }
 
+    public int getMatchCount() {
+        return this.matchCount;
+    }
+
     public int getPrize() {
         return this.prize;
     }

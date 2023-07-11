@@ -36,6 +36,10 @@ public class Lotto {
         return new LottoResult(lottoBalls.size(), this.balls.contains(bonusBall));
     }
 
+    public List<Ball> getBalls() {
+        return this.balls;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
