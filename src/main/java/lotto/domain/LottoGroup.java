@@ -14,11 +14,20 @@ public class LottoGroup {
     }
 
     public static LottoGroup from(final Money money) {
+        verify(money);
+
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < money.calculateQuantity(new Money(LOTTO_PRICE)); i++) {
             lottos.add(Lotto.createRandomLotto());
         }
         return new LottoGroup(lottos);
+    }
+
+    private static void verify(Money money) {
+        if (money.calculateQuantity(new Money(LOTTO_PRICE)) == 0) {
+            throw new IllegalArgumentException(
+                "purchase money amount should greater than lotto price.");
+        }
     }
 
     public List<Lotto> getLottos() {

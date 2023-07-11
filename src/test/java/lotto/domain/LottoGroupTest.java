@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,5 +28,11 @@ class LottoGroupTest {
     void createLottoGroupTest() {
         LottoGroup lottoGroup = LottoGroup.from(new Money(14000L));
         assertThat(lottoGroup.getLottos()).hasSize(14);
+    }
+
+    @Test
+    @DisplayName("로또 구매 수량이 0인 경우 예외 던진다.")
+    void zeroQuantityThrowsExceptionTest() {
+        assertThrows(IllegalArgumentException.class, () -> LottoGroup.from(new Money(0L)));
     }
 }
