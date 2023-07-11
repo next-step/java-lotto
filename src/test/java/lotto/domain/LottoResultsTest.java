@@ -35,4 +35,20 @@ public class LottoResultsTest {
         /* then */
         assertThat(winningStatistics.getRank(WinningCriteria.FIRST)).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("로또 총 수익 테스트")
+    void lottoResults_getTotalPrize() {
+        /* given */
+        LottoResults lottoResults = new LottoResults(List.of(
+                new LottoResult(1, false),
+                new LottoResult(6, true))
+        );
+
+        /* when */
+        WinningStatistics winningStatistics = lottoResults.getWinningStatistics();
+
+        /* then */
+        assertThat(winningStatistics.getTotalPrize()).isEqualTo(WinningCriteria.FIRST.getPrize());
+    }
 }
