@@ -1,9 +1,14 @@
-package lotto;
+package lotto.controller;
 
+import lotto.domain.LottoResults;
+import lotto.domain.Lottos;
+import lotto.domain.Money;
+import lotto.domain.WinningNumbers;
 import lotto.dto.LottoResultResponseDto;
 import lotto.dto.LottoStatusResponseDto;
 import lotto.dto.MoneyRequestDto;
 import lotto.dto.WinningNumbersRequestDto;
+import lotto.service.LottoService;
 
 import java.util.Objects;
 

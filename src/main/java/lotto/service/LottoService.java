@@ -1,4 +1,7 @@
-package lotto;
+package lotto.service;
+
+import lotto.domain.*;
+import lotto.util.RandomGenerator;
 
 import java.util.List;
 import java.util.stream.Collectors;

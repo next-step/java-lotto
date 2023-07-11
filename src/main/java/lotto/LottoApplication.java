@@ -1,9 +1,11 @@
 package lotto;
 
+import lotto.controller.LottoController;
 import lotto.dto.LottoResultResponseDto;
 import lotto.dto.LottoStatusResponseDto;
 import lotto.dto.MoneyRequestDto;
 import lotto.dto.WinningNumbersRequestDto;
+import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.LottoRank;
+import lotto.domain.LottoRank;
 import lotto.dto.LottoResultResponseDto;
 import lotto.dto.LottoStatusResponseDto;
 
