@@ -1,10 +1,10 @@
 package lotto;
 
-public class Money {
+public class LottoMoney {
 
     private final int value;
 
-    public Money(final int value) {
+    public LottoMoney(final int value) {
         this.value = value;
     }
 
