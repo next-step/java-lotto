@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
 
@@ -11,6 +13,7 @@ public class Lotto {
 
     public Lotto(final List<Ball> balls) {
         validate(balls);
+        balls.sort(Comparator.naturalOrder());
         this.balls = balls;
     }
 
@@ -21,5 +24,27 @@ public class Lotto {
         if (balls.size() != SIZE) {
             throw new IllegalArgumentException(LOTTO_SIZE_EXCEPTION_MESSAGE);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto lotto = (Lotto) o;
+        for (int i = 0; i < SIZE; i++) {
+            if (!lotto.balls.get(i).equals(this.balls.get(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(balls);
     }
 }
