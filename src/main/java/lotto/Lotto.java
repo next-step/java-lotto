@@ -44,4 +44,8 @@ public class Lotto {
     private boolean contains(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
     }
+
+    public boolean matchBonusNumber(LottoNumber bonusNumber) {
+        return this.contains(bonusNumber);
+    }
 }
