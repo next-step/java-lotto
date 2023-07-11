@@ -10,6 +10,7 @@ public enum LottoPrize {
     THIRD(5, MagicNumberSupporter.BONUS_NOT_RELATED, 1_500_000),
     FORTH(4, MagicNumberSupporter.BONUS_NOT_RELATED, 50_000),
     FIFTH(3, MagicNumberSupporter.BONUS_NOT_RELATED, 5_000),
+    NONE(0, MagicNumberSupporter.BONUS_NOT_RELATED, 0),
     ;
 
     private final int matchedCount;
@@ -25,12 +26,12 @@ public enum LottoPrize {
         this.money = money;
     }
 
-    public static LottoPrize from(int matchedCount, boolean isBonusMatched) {
+    public static LottoPrize of(int matchedCount, boolean isBonusMatched) {
         if (matchedCount == MagicNumberSupporter.SECOND_PRIZE_MATCHED_COUNT && isBonusMatched) {
             return SECOND;
         }
 
-        return ConstructorSupporter.LOTTO_PRIZE_CONVERTOR.get(matchedCount);
+        return ConstructorSupporter.LOTTO_PRIZE_CONVERTOR.getOrDefault(matchedCount, NONE);
     }
 
     public int getMoney() {
