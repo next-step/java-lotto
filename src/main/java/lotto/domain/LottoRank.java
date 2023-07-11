@@ -43,4 +43,8 @@ public enum LottoRank {
     public Long getPrize() {
         return prize;
     }
+
+    public Long getMatch() {
+        return match;
+    }
 }
