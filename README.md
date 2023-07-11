@@ -33,7 +33,7 @@
     - [x] LottoNumber ->  범위는 1~45
     - [x] Lotto -> 6개의 LottoNumber , 서로 다른 6개 LottoNumber
     - [X] AutoLottoGenerator 는 Lotto 만든다.
-    - [ ] LottoPurchaser 가 AutoLottoGenerator 로 금액만큼 구매한다.
+    - [x] LottoPurchaser 가 AutoLottoGenerator 로 금액만큼 구매한다.
 
 - 당첨 번호와 구매한 로또 결과 비교
     - [ ] 당첨 번호와 로또 번호 일치 개수를 구한다.
