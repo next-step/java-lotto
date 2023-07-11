@@ -4,7 +4,7 @@
 ### Domain
 * LottoService (* 추가 생각)
   - [ ] field : Payment
-  - [ ] field : WinnerNumber
+  - [ ] field : WinningNumber
   - [ ] field : Lottos
   - [ ] action : 당첨 통계 계산
   - [ ] action : 수익률 계산
@@ -13,17 +13,21 @@
   - [ ] validation : 딱 나눠 떨어 지는지?
   - [ ] validation : 내가 투입한 금액이 1,000원 미만 인지?
   - [ ] action : 몇 장만 산다?
-* WinnerNumber
-  - [ ] field : Lotto
-  - [ ] filed : Number
 * Lottos -> 일급 컬렉션, type : List<Lotto>
   - [ ] action : 당첨 통계 계산
   - [ ] action : 로또 번호 6자리 생성
+* WinningNumber
+  - [ ] field : Lotto
+  - [ ] filed : Number
 * Lotto -> 일급 컬렉션, type : List<Number>
   - [x] validation : 중복이 있는 지
   - [x] validation : 6개의 숫자인지
 * LottoNumber -> type : int
   - [x] validation : 1~45의 숫자
+* LottoText -> type : List<Integer>
+  - [x] validation : 빈 값인지 확인
+  - [x] validation : 숫자인지
+  - [x] action : 파싱된 숫자 리스트 반환
 
 ### View
 * [ ] 구입금액 - 입력
