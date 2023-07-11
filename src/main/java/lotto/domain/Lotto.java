@@ -14,6 +14,9 @@ public class Lotto {
     }
 
     private void validate(final List<Ball> balls) {
+        if (balls.stream().distinct().count() != balls.size()) {
+            throw new IllegalArgumentException();
+        }
         if (balls.size() != SIZE) {
             throw new IllegalArgumentException(LOTTO_SIZE_EXCEPTION_MESSAGE);
         }
