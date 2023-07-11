@@ -11,4 +11,8 @@ public class BoughtLottos {
         this.count = lottos.size();
         this.lottos = lottos;
     }
+
+    public int getCount() {
+        return this.count;
+    }
 }
