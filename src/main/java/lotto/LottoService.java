@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoService {
@@ -8,6 +9,12 @@ public class LottoService {
     }
 
     public Lottos buyLotto(Money money) {
-        return new Lottos(List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6))));
+        long countLotto = money.countLotto();
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < countLotto; i++) {
+            Lotto lotto = RandomGenerator.generateLotto();
+            lottos.add(lotto);
+        }
+        return new Lottos(lottos);
     }
 }
