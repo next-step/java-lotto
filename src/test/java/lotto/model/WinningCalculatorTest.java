@@ -41,7 +41,7 @@ public class WinningCalculatorTest {
                         createLotto(1, 2, 3, 4, 5, 6),
                         createLotto(1, 4, 6, 8, 10, 12)));
         WinningLotto winningLotto = new WinningLotto(
-                createLottoNumbers(1, 2, 3, 4, 5, 6), 7);
+                List.of(1, 2, 3, 4, 5, 6), 7);
 
         WinningResult winningResult = winningCalculator.calculate(winningLotto, purChasedLotto);
 

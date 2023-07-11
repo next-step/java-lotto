@@ -2,14 +2,22 @@ package lotto.model;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 public class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonusBall;
 
-    public WinningLotto(final List<LottoNumber> lottoNumbers, final int bonus) {
-        this.winningLotto = new Lotto(lottoNumbers);
+    public WinningLotto(final List<Integer> lottoNumbers, final int bonus) {
+        this.winningLotto = new Lotto(convert(lottoNumbers));
         this.bonusBall = new LottoNumber(bonus);
         validateDuplicate(this.winningLotto, this.bonusBall);
+    }
+
+    private List<LottoNumber> convert(List<Integer> integers) {
+        return integers.stream()
+                .map(LottoNumber::new)
+                .collect(toList());
     }
 
     private void validateDuplicate(final Lotto lottoNumbers, final LottoNumber bonus) {
