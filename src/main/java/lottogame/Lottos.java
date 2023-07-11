@@ -31,22 +31,24 @@ public class Lottos {
 
     private void record(int matchCount, Lotto lotto, WinningNumber winningNumber) {
         if (matchCount == 5) {
-            recordFiveMatch(lotto, winningNumber);
+            recordFiveMatch(matchCount, lotto, winningNumber);
             return;
         }
-        recordEach(matchCount);
+        recordEach(matchCount, false);
     }
 
-    private void recordFiveMatch(Lotto lotto, WinningNumber winningNumber) {
+    private void recordFiveMatch(int matchCount, Lotto lotto, WinningNumber winningNumber) {
         if (lotto.hasLottoNumber(winningNumber.getBonusBall())) {
-            recordEach(7);
+            recordEach(matchCount, true);
+            return;
         }
+        recordEach(matchCount, false);
     }
 
-    private void recordEach(int matchCount) {
-        resultMap.put(
-            LottoMatch.find(matchCount),
-            resultMap.getOrDefault(LottoMatch.find(7), 0) + 1
+    private void recordEach(int matchCount, boolean isBonus) {
+        LottoMatchKey lottoMatchKey = new LottoMatchKey(isBonus, matchCount);
+        resultMap.put(LottoMatch.find(lottoMatchKey),
+            resultMap.getOrDefault(LottoMatch.find(lottoMatchKey), 0) + 1
         );
     }
 

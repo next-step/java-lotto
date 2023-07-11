@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Scanner;
 import lottogame.Lotto;
 import lottogame.LottoMatch;
+import lottogame.LottoMatchKey;
 import lottogame.Lottos;
-import lottogame.Payment;
 
 public class LottoView {
 
@@ -23,19 +23,19 @@ public class LottoView {
     }
 
     public String readBonusBall() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println("보너스 볼을 입력해 주세요.");
         String bonusBall = scanner.nextLine();
         scanner.close();
         return bonusBall;
     }
 
-    public void printLottoCount(Payment payment) {
-        System.out.println(payment.getMoney() + "개를 구매했습니다.");
+    public void printLottoCount(int count) {
+        System.out.println(count + "개를 구매했습니다.");
     }
 
     public void printLottos(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
-            System.out.println("[" + lotto + "]\n");
+            System.out.println("[" + lotto + "]");
         }
     }
 
@@ -43,11 +43,18 @@ public class LottoView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (LottoMatch lottoMatch : resultMap.keySet()) {
+        for (LottoMatch lottoMatch : LottoMatch.values()) {
+            LottoMatchKey lottoMatchKey = lottoMatch.getLottoMatchKey();
+            if (lottoMatchKey.getIsBonus()) {
+                String result = MessageFormat.format("{0}개 일치, 보너스 볼 일치({1}원) - {2}개",
+                    lottoMatchKey.getMatchCount(), lottoMatch.getPrize(), resultMap.get(lottoMatch));
+                System.out.println(result);
+                continue;
+            }
             String result = MessageFormat.format("{0}개 일치 ({1}원) - {2}개",
-                lottoMatch.getMatchCount(), lottoMatch.getPrize(), resultMap.get(lottoMatch));
+                lottoMatchKey.getMatchCount(), lottoMatch.getPrize(), resultMap.get(lottoMatch));
             System.out.println(result);
-        }
+        };
     }
 
     public void printProfitRate(String profitRate) {

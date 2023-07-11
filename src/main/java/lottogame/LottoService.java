@@ -24,8 +24,8 @@ public class LottoService {
         List<Integer> list = IntStream.range(1, 45 + 1)
             .boxed()
             .collect(Collectors.toList());
-        Collections.shuffle(list);
         for (int i = 0; i < count; i++) {
+            Collections.shuffle(list);
             lottos.add(new Lotto(list.subList(0, 6)));
         }
         return new Lottos(lottos);
@@ -47,7 +47,7 @@ public class LottoService {
     public String getProfitRate() {
         float profit = 0;
         for (LottoMatch lottoMatch : resultMap.keySet()) {
-            profit = resultMap.get(lottoMatch) * lottoMatch.getPrize();
+            profit += resultMap.get(lottoMatch) * lottoMatch.getPrize();
         }
         return String.format("%.2f", profit / payment.getMoney());
     }
