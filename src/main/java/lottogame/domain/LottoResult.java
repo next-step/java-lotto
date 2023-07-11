@@ -2,7 +2,6 @@ package lottogame.domain;
 
 import java.util.Objects;
 import java.util.Set;
-import lottogame.domain.response.LottoCheckResponse;
 
 public class LottoResult {
 
@@ -14,9 +13,8 @@ public class LottoResult {
         this.lottoBonus = new LottoBonus(bonusNumber, this.lottoTicket);
     }
 
-    public LottoCheckResponse checkLottoTicket(LottoTicket lottoTicket) {
-        return new LottoCheckResponse(this.lottoTicket.getMatchedCount(lottoTicket),
-            lottoBonus.isContained(lottoTicket));
+    public LottoPrize checkLottoTicket(LottoTicket lottoTicket) {
+        return LottoPrize.from(this.lottoTicket.getMatchedCount(lottoTicket), lottoBonus.isContained(lottoTicket));
     }
 
     @Override

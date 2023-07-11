@@ -55,8 +55,8 @@ LottoTicket 1 -> 1 LottoNumbers 1 -> * LottoNumber
 
 ### LottoService
 
-- 유저가 여러개의 로또를 구매할 수 있다.
-- 본인이 가진 티켓들의 결과를 얻을 수 있다.
+- [x] 유저가 여러개의 로또를 구매할 수 있다.
+- [x] 본인이 가진 티켓들의 결과를 얻을 수 있다.
 
 ## LottoController -> LottoService -> 로도를 체크한다. domain
 
@@ -129,3 +129,5 @@ method 내 티켓 비교하기
 
 - lottoCache 상수 이름바꾸기
 - LottoNumber static블록 위치 변경
+
+내 티켓과 로또 결과를 받아서, 비교한다음, 결과를 반환한다.
