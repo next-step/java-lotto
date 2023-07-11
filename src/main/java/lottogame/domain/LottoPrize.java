@@ -1,8 +1,7 @@
-package lottogame.service;
+package lottogame.domain;
 
 import java.util.HashMap;
 import java.util.Map;
-import lottogame.domain.response.LottoCheckResponse;
 
 public enum LottoPrize {
 
@@ -13,22 +12,25 @@ public enum LottoPrize {
     FIFTH(3, MagicNumberSupporter.BONUS_NOT_RELATED, 5_000),
     ;
 
+    private final int matchedCount;
+    private final boolean isBonusMatched;
     private final int money;
 
     LottoPrize(int matchedCount, boolean isBonusMatched, int money) {
         if (!isBonusMatched) {
             ConstructorSupporter.LOTTO_PRIZE_CONVERTOR.put(matchedCount, this);
         }
+        this.matchedCount = matchedCount;
+        this.isBonusMatched = isBonusMatched;
         this.money = money;
     }
 
-    public static LottoPrize from(LottoCheckResponse lottoCheckResponse) {
-        if (lottoCheckResponse.getMatchedCount() == MagicNumberSupporter.SECOND_PRIZE_MATCHED_COUNT
-            && lottoCheckResponse.isBonusMatched()) {
+    public static LottoPrize from(int matchedCount, boolean isBonusMatched) {
+        if (matchedCount == MagicNumberSupporter.SECOND_PRIZE_MATCHED_COUNT && isBonusMatched) {
             return SECOND;
         }
 
-        return ConstructorSupporter.LOTTO_PRIZE_CONVERTOR.get(lottoCheckResponse.getMatchedCount());
+        return ConstructorSupporter.LOTTO_PRIZE_CONVERTOR.get(matchedCount);
     }
 
     public int getMoney() {
