@@ -24,4 +24,12 @@ public class MoneyTest {
         /* given & when & then */
         assertThatThrownBy(() -> new Money(value)).isExactlyInstanceOf(IllegalArgumentException.class);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"abc", "100,000"})
+    @DisplayName("숫자가 아닌 문자열 입력 테스트")
+    void money_notNumericInput(final String value) {
+        /* given & when & then */
+        assertThatThrownBy(() -> new Money(value)).isExactlyInstanceOf(IllegalArgumentException.class);
+    }
 }
