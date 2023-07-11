@@ -42,4 +42,18 @@ public class LottoTest {
                 new Ball("7")
         ))).isExactlyInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("로또 번호 중복 테스트")
+    void lotto_duplicateBalls() {
+        /* given & when & then */
+        assertThatThrownBy(() -> new Lotto(List.of(
+                new Ball("1"),
+                new Ball("2"),
+                new Ball("3"),
+                new Ball("4"),
+                new Ball("4"),
+                new Ball("6")
+        ))).isExactlyInstanceOf(IllegalArgumentException.class);
+    }
 }
