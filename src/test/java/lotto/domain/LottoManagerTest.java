@@ -56,6 +56,6 @@ class LottoManagerTest {
         LottoManager lottoManager = new LottoManager(lottos);
 
         //when, then
-        assertThat(lottoManager.calculateYield(winningLotto)).isEqualTo(38592.5);
+        assertThat(lottoManager.calculateYield(winningLotto)).isEqualTo(338592.5);
     }
 }

@@ -18,6 +18,10 @@ public class LottoManager {
     }
 
     public double calculateYield(WinningLotto winningLotto) {
-        return 38592.5;
+        Map<LottoRank, Long> result = getResult(winningLotto);
+        return result.keySet()
+            .stream()
+            .mapToDouble(key -> key.getPrize() * result.get(key))
+            .sum() / (lottos.size() * 1000);
     }
 }
