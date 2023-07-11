@@ -30,4 +30,8 @@ public class Lotto {
             throw new IllegalStateException("로또 넘버는 중복되면 안됩니다.");
         }
     }
+
+    public boolean isContain(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }
