@@ -23,7 +23,25 @@ public class WinningNumbers {
         long matchCount = lotto.countMatchNumber(winningNumbers);
         boolean bonusCount = lotto.matchBonusNumber(bonusNumber);
 
+        if (matchCount == 6) {
+            return LottoRank.FIRST;
+        }
 
+        if (matchCount == 5 && bonusCount) {
+            return LottoRank.SECOND;
+        }
+
+        if (matchCount == 5) {
+            return LottoRank.THIRD;
+        }
+
+        if (matchCount == 4) {
+            return LottoRank.FORTH;
+        }
+
+        if (matchCount == 3) {
+            return LottoRank.FIFTH;
+        }
 
         return LottoRank.FIRST;
     }
