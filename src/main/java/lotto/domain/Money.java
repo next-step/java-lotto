@@ -21,7 +21,7 @@ public class Money {
         return (int) (value / price.value);
     }
 
-    public double calculateYield(final Money previous) {
+    public double calculateProfit(final Money previous) {
         return (double) value / previous.value;
     }
 

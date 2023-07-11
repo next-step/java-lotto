@@ -48,6 +48,6 @@ public class LottoApplication {
 
     private void printResult(final LottoResult lottoResult) {
         output.printStatistics(lottoResult);
-        output.printYield(lottoResult.calculateYield());
+        output.printProfit(lottoResult.calculateProfit());
     }
 }

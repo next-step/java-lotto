@@ -10,6 +10,8 @@ import lotto.domain.LottoResult;
 
 public class LottoOutput {
 
+    public static final String LOTTO_JOIN_DELIMITER = ", ";
+
     public void printAskPurchaseMoney() {
         System.out.println("구입금액을 입력해 주세요.");
     }
@@ -51,8 +53,8 @@ public class LottoOutput {
         return builder.toString();
     }
 
-    public void printYield(final Double yield) {
-        System.out.println("총 수익률은 " + String.format("%.2f", yield) + "입니다.");
+    public void printProfit(final Double profit) {
+        System.out.println("총 수익률은 " + String.format("%.2f", profit) + "입니다.");
     }
 
     private void printLotto(final Lotto lotto) {
@@ -60,7 +62,7 @@ public class LottoOutput {
             .stream()
             .map(LottoNumber::getNumber)
             .map(String::valueOf)
-            .collect(Collectors.joining(", "));
+            .collect(Collectors.joining(LOTTO_JOIN_DELIMITER));
 
         System.out.println("[" + formattedLotto + "]");
     }

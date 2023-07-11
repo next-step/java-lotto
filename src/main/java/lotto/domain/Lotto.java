@@ -32,11 +32,10 @@ public class Lotto {
         verifySize(numbers);
         verifyDuplicate(numbers);
 
-        return new Lotto(
-            numbers.stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toList())
-        );
+        List<LottoNumber> lottoNumbers = numbers.stream()
+            .map(LottoNumber::of)
+            .collect(Collectors.toList());
+        return new Lotto(lottoNumbers);
     }
 
     private static void verifyDuplicate(final List<Integer> numbers) {
@@ -47,7 +46,7 @@ public class Lotto {
 
     private static void verifySize(final List<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("lotto size must be 6");
+            throw new IllegalArgumentException("lotto size must be " + LOTTO_SIZE);
         }
     }
 

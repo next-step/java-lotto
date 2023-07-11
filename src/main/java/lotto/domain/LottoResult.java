@@ -28,11 +28,9 @@ public class LottoResult {
         return result;
     }
 
-    public Double calculateYield() {
+    public Double calculateProfit() {
         return this.calculateTotalPrize()
-            .calculateYield(
-                calculateTotalMoney()
-            );
+            .calculateProfit(calculateTotalMoney());
     }
 
     private Money calculateTotalMoney() {

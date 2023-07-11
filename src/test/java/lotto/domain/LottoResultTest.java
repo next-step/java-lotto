@@ -51,9 +51,9 @@ class LottoResultTest {
 
     @Test
     @DisplayName("수익률 계산 기능 테스트")
-    void calculateYield() {
+    void calculateProfit() {
         //when, then
-        assertThat(result.calculateYield()).isEqualTo(163831.35135135136);
+        assertThat(result.calculateProfit()).isEqualTo(163831.35135135136);
     }
 
     @Test
