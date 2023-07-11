@@ -26,4 +26,8 @@ public class Money {
             throw new IllegalArgumentException(MONEY_RANGE_EXCEPTION_MESSAGE);
         }
     }
+
+    public int getValue() {
+        return this.value;
+    }
 }
