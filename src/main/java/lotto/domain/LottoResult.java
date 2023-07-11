@@ -6,7 +6,7 @@ public class LottoResult {
 
     private final Map<LottoRank, Long> result;
 
-    public LottoResult(Map<LottoRank, Long> result) {
+    public LottoResult(final Map<LottoRank, Long> result) {
         this.result = result;
     }
 
@@ -21,4 +21,20 @@ public class LottoResult {
     public Map<LottoRank, Long> getResult() {
         return result;
     }
+
+    public Double calculateYield() {
+        return this.calculateTotalPrize()
+            .calculateYield(
+                calculateTotalMoney()
+            );
+    }
+
+    private Money calculateTotalMoney() {
+        long totalQuantity = result.values()
+            .stream()
+            .mapToLong(Long::longValue)
+            .sum();
+        return new Money(totalQuantity * LottoManager.LOTTO_PRICE);
+    }
+
 }

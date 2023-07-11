@@ -6,23 +6,23 @@ public class Money {
 
     private final Long value;
 
-    public Money(Long value) {
+    public Money(final Long value) {
         if (value < 0) {
             throw new IllegalArgumentException("money amount should greater than 0");
         }
         this.value = value;
     }
 
-    public int calculateQuantity(Money price) {
+    public int calculateQuantity(final Money price) {
         return (int) (value / price.value);
     }
 
-    public double calculateYield(Money previous) {
+    public double calculateYield(final Money previous) {
         return (double) value / previous.value;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }

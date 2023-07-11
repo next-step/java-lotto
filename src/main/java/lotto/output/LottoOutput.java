@@ -10,11 +10,11 @@ import lotto.domain.LottoResult;
 
 public class LottoOutput {
 
-    public void printAskPurchaseAmount() {
+    public void printAskPurchaseMoney() {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public void printAmount(final int amount) {
+    public void printQuantity(final int amount) {
         System.out.println(amount + "개를 구매했습니다.");
     }
 

@@ -24,7 +24,7 @@ public class LottoInput {
             .collect(Collectors.toList());
     }
 
-    public Long inputPurchaseAmount() {
+    public Long inputPurchaseMoney() {
         return inputAmount();
     }
 

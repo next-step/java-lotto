@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.List;
 import lotto.domain.LottoManager;
+import lotto.domain.LottoResult;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 import lotto.input.LottoInput;
@@ -18,20 +19,20 @@ public class LottoApplication {
     }
 
     public void run() {
-        Money purchaseAmount = new Money(inputPurchaseAmount());
-        output.printAmount(purchaseAmount.calculateQuantity(new Money(1000L)));
-        LottoManager manager = LottoManager.createLottoManagerByMoney(purchaseAmount);
+        Money purchaseMoney = inputPurchaseMoney();
+        output.printQuantity(purchaseMoney.calculateQuantity(new Money(LottoManager.LOTTO_PRICE)));
+        LottoManager manager = LottoManager.from(purchaseMoney);
 
         output.printLottos(manager);
         System.out.println();
 
         WinningLotto winningLotto = inputWinningLotto();
-        result(manager, winningLotto);
+        printResult(manager.getResult(winningLotto));
     }
 
-    private Long inputPurchaseAmount() {
-        output.printAskPurchaseAmount();
-        return input.inputPurchaseAmount();
+    private Money inputPurchaseMoney() {
+        output.printAskPurchaseMoney();
+        return new Money(input.inputPurchaseMoney());
     }
 
     private WinningLotto inputWinningLotto() {
@@ -45,8 +46,8 @@ public class LottoApplication {
         return winningLotto;
     }
 
-    private void result(LottoManager manager, WinningLotto winningLotto) {
-        output.printStatistics(manager.getResult(winningLotto));
-        output.printYield(manager.calculateYield(winningLotto));
+    private void printResult(final LottoResult lottoResult) {
+        output.printStatistics(lottoResult);
+        output.printYield(lottoResult.calculateYield());
     }
 }

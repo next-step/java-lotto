@@ -46,18 +46,9 @@ class LottoManagerTest {
     }
 
     @Test
-    @DisplayName("수익률 계산 기능 테스트")
-    void calculateYield() {
-        //given
-        LottoManager lottoManager = new LottoManager(lottos);
-
-        //when, then
-        assertThat(lottoManager.calculateYield(winningLotto)).isEqualTo(338592.5);
-    }
-
-    @Test
+    @DisplayName("구입 금액에 따라 로또 구매 수량 테스트.")
     void createLottoManagerTest() {
-        LottoManager manager = LottoManager.createLottoManagerByMoney(new Money(14000L));
+        LottoManager manager = LottoManager.from(new Money(14000L));
         assertThat(manager.getLottos()).hasSize(14);
     }
 }
