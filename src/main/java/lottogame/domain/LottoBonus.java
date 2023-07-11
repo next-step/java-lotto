@@ -18,6 +18,11 @@ public class LottoBonus {
         }
     }
 
+    boolean isContained(LottoNumbers lottoNumbers) {
+        Objects.requireNonNull(lottoNumbers, "lottoNumbers는 Null일 수 없습니다.");
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -40,9 +45,5 @@ public class LottoBonus {
         return "LottoBonus{" +
             "lottoNumber=" + lottoNumber +
             '}';
-    }
-
-    public boolean isContained(LottoNumbers lottoNumbers) {
-        return lottoNumbers.contains(lottoNumber);
     }
 }
