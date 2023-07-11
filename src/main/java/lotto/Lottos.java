@@ -19,6 +19,9 @@ public final class Lottos {
     }
 
     public LottoResult calculateLottoResult(final WinningNumbers winningNumbers) {
-        return null;
+        List<Rank> ranks = lottos.stream()
+                .map(lotto -> lotto.checkRank(winningNumbers))
+                .collect(Collectors.toUnmodifiableList());
+        return new LottoResult(ranks);
     }
 }

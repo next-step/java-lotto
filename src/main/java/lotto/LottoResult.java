@@ -1,7 +1,22 @@
 package lotto;
 
+import java.util.EnumMap;
+import java.util.List;
+
 public final class LottoResult {
-    public int getCount(final Rank expectedRank) {
-        return -1;
+
+    public static final int DEFAULT_VALUE = 0;
+    private final EnumMap<Rank, Integer> lottoResult;
+
+    public LottoResult(final List<Rank> ranks) {
+        this.lottoResult = new EnumMap<>(Rank.class);
+        ranks.forEach(rank -> this.lottoResult.put(
+                rank,
+                this.lottoResult.getOrDefault(rank, DEFAULT_VALUE) + 1
+        ));
+    }
+
+    public int getCount(final Rank rank) {
+        return lottoResult.getOrDefault(rank, DEFAULT_VALUE);
     }
 }

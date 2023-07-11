@@ -50,13 +50,13 @@ public class LottosTest {
     void 당첨_번호와_보너스_볼로_로또들의_당첨_결과_계산_성공(List<Integer> generatedNumbers, Rank expectedRank) {
         // given
         final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
-        final Lottos lottos = new Lottos(1, new FixedNumbersGenerator(generatedNumbers));
+        final Lottos lottos = new Lottos(2, new FixedNumbersGenerator(generatedNumbers));
 
         // when
         LottoResult lottoResult = lottos.calculateLottoResult(winningNumbers);
 
         // then
-        assertThat(lottoResult.getCount(expectedRank)).isEqualTo(1);
+        assertThat(lottoResult.getCount(expectedRank)).isEqualTo(2);
     }
 
     static Stream<Arguments> provider() {

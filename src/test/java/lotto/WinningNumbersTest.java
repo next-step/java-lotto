@@ -1,7 +1,6 @@
 package lotto;
 
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -36,6 +35,7 @@ class WinningNumbersTest {
     void 당첨번호와_보너스볼이_중복되면_생성_실패() {
         // given
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+
         // when, then
         assertThrows(IllegalArgumentException.class, () -> new WinningNumbers(winningNumbers, 6));
     }
