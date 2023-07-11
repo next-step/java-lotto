@@ -45,4 +45,9 @@ public final class LottoNumber {
     public int hashCode() {
         return Objects.hash(lottoNumber);
     }
+
+    @Override
+    public String toString() {
+        return "" + lottoNumber;
+    }
 }
