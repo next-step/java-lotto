@@ -4,14 +4,14 @@ import java.util.List;
 
 public class WinningLotto {
 
-    private final Lotto lottoNumbers;
+    private final Lotto lotto;
     private final LottoNumber bonus;
 
-    public WinningLotto(final Lotto lottoNumbers, final LottoNumber bonus) {
+    public WinningLotto(final Lotto lotto, final LottoNumber bonus) {
 
-        verify(lottoNumbers, bonus);
+        verify(lotto, bonus);
 
-        this.lottoNumbers = lottoNumbers;
+        this.lotto = lotto;
         this.bonus = bonus;
     }
 
@@ -19,14 +19,14 @@ public class WinningLotto {
         this(Lotto.createSpecificLotto(lottoNumbers), new LottoNumber(bonus));
     }
 
-    private void verify(final Lotto lottoNumbers, final LottoNumber bonus) {
-        if (lottoNumbers.getLottoNumbers().contains(bonus)) {
+    private void verify(final Lotto lotto, final LottoNumber bonus) {
+        if (lotto.getLottoNumbers().contains(bonus)) {
             throw new IllegalArgumentException("winning lotto can't contain bonus number");
         }
     }
 
-    public Lotto getLottoNumbers() {
-        return this.lottoNumbers;
+    public Lotto getLotto() {
+        return this.lotto;
     }
 
     public LottoNumber getBonus() {
@@ -34,7 +34,7 @@ public class WinningLotto {
     }
 
     public LottoRank calculateRank(final Lotto lotto) {
-        Long match = this.lottoNumbers.countMatches(lotto);
+        Long match = this.lotto.countMatches(lotto);
         boolean isContainBonus = lotto.getLottoNumbers().contains(bonus);
         return LottoRank.from(match, isContainBonus);
     }

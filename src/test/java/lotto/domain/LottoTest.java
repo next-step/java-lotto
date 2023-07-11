@@ -15,7 +15,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 class LottoTest {
 
     private static Stream<Arguments> generateData() {
-
         return Stream.of(
             Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6)), 6L),
             Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 7)), 5L),
@@ -64,7 +63,6 @@ class LottoTest {
     @Test
     @DisplayName("중복된 숫자는 생성 불가.")
     void duplicatedNumberUnavailableTest() {
-
         assertThrows(IllegalArgumentException.class,
             () -> Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 5)));
     }
@@ -72,7 +70,6 @@ class LottoTest {
     @Test
     @DisplayName("수동 생성된 로또는 길이가 6이어야 한다.")
     void createSpecificSixNumbersTest() {
-
         assertThrows(IllegalArgumentException.class,
             () -> Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5))
         );

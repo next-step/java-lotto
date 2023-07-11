@@ -26,14 +26,14 @@ class WinningLottoTest {
     }
 
     @Test
-    @DisplayName("6개의 일반 번호와 1개의 보너스 번호로 이루어진다.")
+    @DisplayName("1개의 일반 로또와 1개의 보너스 번호로 이루어진다.")
     void containsSixNumbersAndOneBonusNumberTest() {
         //given
         Lotto lotto = Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6));
         WinningLotto winningLotto = new WinningLotto(lotto, new LottoNumber(7));
 
         //when, then
-        assertThat(winningLotto.getLottoNumbers().getLottoNumbers()).hasSize(6);
+        assertThat(winningLotto.getLotto()).isNotNull();
         assertThat(winningLotto.getBonus()).isInstanceOf(LottoNumber.class);
     }
 
@@ -44,9 +44,8 @@ class WinningLottoTest {
         Lotto lotto = Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6));
 
         //when, then
-        assertThrows(IllegalArgumentException.class, () -> {
-            new WinningLotto(lotto, new LottoNumber(6));
-        });
+        assertThrows(IllegalArgumentException.class,
+            () -> new WinningLotto(lotto, new LottoNumber(6)));
     }
 
     @ParameterizedTest
