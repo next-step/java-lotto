@@ -14,18 +14,10 @@ public class WinningLotto {
         this.bonus = bonus;
     }
 
-    public Rank checkLottoResult(final Lotto target) {
-        long matchLottoNumber = this.lotto.countMatchLottoNumber(target);
+    public Rank resolveRank(final Lotto target) {
+        long matchLottoNumber = target.countMatchLottoNumber(lotto);
         boolean containsBonus = target.containsLottoNumber(bonus);
 
-        return Rank.resolveRank(matchLottoNumber, containsBonus);
-    }
-
-    public Lotto getLotto() {
-        return this.lotto;
-    }
-
-    public LottoNumber getBonus() {
-        return this.bonus;
+        return Rank.from(matchLottoNumber, containsBonus);
     }
 }

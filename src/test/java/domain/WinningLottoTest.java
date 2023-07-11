@@ -8,6 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class WinningLottoTest {
 
@@ -21,16 +22,12 @@ public class WinningLottoTest {
     }
 
     @Test
-    @DisplayName("당첨 로또는 로또와 보너스 로또 번호로 구성된다.")
+    @DisplayName("로또와 보너스 로또 번호로 당첨 로또를 생성한다.")
     void createSuccess() {
         /* given */
 
-        /* when */
-        WinningLotto winningLotto = new WinningLotto(lotto, bonus);
-
-        /* then */
-        assertThat(winningLotto.getLotto()).isEqualTo(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
-        assertThat(winningLotto.getBonus()).isEqualTo(new LottoNumber(7));
+        /* when & then */
+        assertDoesNotThrow(() -> new WinningLotto(lotto, bonus));
     }
 
     @Test
@@ -52,7 +49,7 @@ public class WinningLottoTest {
         Lotto target = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
         /* when */
-        Rank lottoResult = winningLotto.checkLottoResult(target);
+        Rank lottoResult = winningLotto.resolveRank(target);
 
         /* then */
         assertThat(lottoResult).isEqualTo(Rank.FIRST);
@@ -66,7 +63,7 @@ public class WinningLottoTest {
         Lotto target = new Lotto(List.of(1, 2, 3, 4, 5, 7));
 
         /* when */
-        Rank lottoResult = winningLotto.checkLottoResult(target);
+        Rank lottoResult = winningLotto.resolveRank(target);
 
         /* then */
         assertThat(lottoResult).isEqualTo(Rank.SECOND);
@@ -80,7 +77,7 @@ public class WinningLottoTest {
         Lotto target = new Lotto(List.of(1, 2, 3, 4, 5, 45));
 
         /* when */
-        Rank lottoResult = winningLotto.checkLottoResult(target);
+        Rank lottoResult = winningLotto.resolveRank(target);
 
         /* then */
         assertThat(lottoResult).isEqualTo(Rank.THIRD);
@@ -95,8 +92,8 @@ public class WinningLottoTest {
         Lotto targetWithBonus = new Lotto(List.of(1, 2, 3, 4, 7, 45));
 
         /* when */
-        Rank lottoResult = winningLotto.checkLottoResult(target);
-        Rank lottoResultWithBonus = winningLotto.checkLottoResult(targetWithBonus);
+        Rank lottoResult = winningLotto.resolveRank(target);
+        Rank lottoResultWithBonus = winningLotto.resolveRank(targetWithBonus);
 
         /* then */
         assertThat(lottoResult).isEqualTo(Rank.FOURTH);
@@ -112,8 +109,8 @@ public class WinningLottoTest {
         Lotto targetWithBonus = new Lotto(List.of(1, 2, 3, 7, 44, 45));
 
         /* when */
-        Rank lottoResult = winningLotto.checkLottoResult(target);
-        Rank lottoResultWithBonus = winningLotto.checkLottoResult(targetWithBonus);
+        Rank lottoResult = winningLotto.resolveRank(target);
+        Rank lottoResultWithBonus = winningLotto.resolveRank(targetWithBonus);
 
         /* then */
         assertThat(lottoResult).isEqualTo(Rank.FIFTH);
@@ -129,8 +126,8 @@ public class WinningLottoTest {
         Lotto targetWithBonus = new Lotto(List.of(1, 2, 7, 43, 44, 45));
 
         /* when */
-        Rank lottoResult = winningLotto.checkLottoResult(target);
-        Rank lottoResultWithBonus = winningLotto.checkLottoResult(targetWithBonus);
+        Rank lottoResult = winningLotto.resolveRank(target);
+        Rank lottoResultWithBonus = winningLotto.resolveRank(targetWithBonus);
 
         /* then */
         assertThat(lottoResult).isEqualTo(Rank.NONE);
