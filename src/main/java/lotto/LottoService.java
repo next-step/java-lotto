@@ -1,7 +1,11 @@
 package lotto;
 
-public class LottoService {
-    public LottoService() {
-        
+public final class LottoService {
+    public LottoService(final int money) {
+
+    }
+
+    public Lottos getLottos() {
+        return null;
     }
 }

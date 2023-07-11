@@ -15,7 +15,7 @@ public final class Lottos {
         }
     }
 
-    public List<Lotto> getList() {
+    public List<Lotto> getLottos() {
         return lottos;
     }
 }

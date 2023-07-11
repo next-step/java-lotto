@@ -26,7 +26,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(price, numberGenerator);
 
         // then
-        assertThat(lottos.getList()).hasSize(price / 1_000);
+        assertThat(lottos.getLottos()).hasSize(price / 1_000);
     }
 
     @Test
@@ -39,6 +39,6 @@ public class LottosTest {
         Lottos lottos = new Lottos(price, numberGenerator);
 
         // then
-        assertThat(lottos.getList().get(0)).isEqualTo(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
+        assertThat(lottos.getLottos().get(0)).isEqualTo(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
     }
 }
