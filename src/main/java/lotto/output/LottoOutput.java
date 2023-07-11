@@ -1,5 +1,10 @@
 package lotto.output;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+
 public class LottoOutput {
 
     public void printAskPurchaseAmount() {
@@ -18,4 +23,17 @@ public class LottoOutput {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
+    public void printLottos(final List<Lotto> lottos) {
+        lottos.forEach(this::printLotto);
+    }
+
+    private void printLotto(final Lotto lotto) {
+        String formattedLotto = lotto.getLottoNumbers()
+            .stream()
+            .map(LottoNumber::getNumber)
+            .map(String::valueOf)
+            .collect(Collectors.joining(", "));
+
+        System.out.println("[" + formattedLotto + "]");
+    }
 }
