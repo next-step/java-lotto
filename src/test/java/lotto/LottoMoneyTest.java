@@ -2,6 +2,8 @@ package lotto;
 
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -25,6 +27,13 @@ class LottoMoneyTest {
     void 로또_가격_이하의_돈_객체_생성시_예외_발생() {
         // given, when, then
         assertThrows(IllegalArgumentException.class, () -> new LottoMoney(999));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"1999,999", "1001,1", "1000,0"})
+    void 로또_구입시_거스름돈_반환(int money, int expectedChange) {
+        // given, when, then
+        assertThat(new LottoMoney(money).getChange()).isEqualTo(expectedChange);
     }
 
 }

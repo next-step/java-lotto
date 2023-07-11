@@ -20,4 +20,8 @@ public class LottoMoney {
     public int getValue() {
         return value;
     }
+
+    public int getChange() {
+        return -1;
+    }
 }
