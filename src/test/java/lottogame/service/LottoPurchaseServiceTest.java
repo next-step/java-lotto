@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("FieldCanBeLocal")
 @DisplayName("RandomNumberGenerator 클래스")
-class LottoServiceTest {
+class LottoPurchaseServiceTest {
 
     @Nested
     @DisplayName("purchase 메소드는")
@@ -23,12 +23,12 @@ class LottoServiceTest {
             private static final int NOT_DIVIDED_MONEY = 1001;
 
             private final NumberGenerator stubNumberGenerator = (count) -> Set.of(1, 2, 3, 4, 5, 6);
-            private final LottoService lottoService = new LottoService(stubNumberGenerator);
+            private final LottoPurchaseService lottoPurchaseService = new LottoPurchaseService(stubNumberGenerator);
 
             @Test
             @DisplayName("IllegalArgumentException 을 던진다")
             void It_Throw_IllegalArgumentException() {
-                assertThatThrownBy(() -> lottoService.purchase(NOT_DIVIDED_MONEY)).isInstanceOf(
+                assertThatThrownBy(() -> lottoPurchaseService.purchase(NOT_DIVIDED_MONEY)).isInstanceOf(
                     IllegalArgumentException.class);
             }
         }

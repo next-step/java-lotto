@@ -5,12 +5,12 @@ import java.util.List;
 import lottogame.domain.LottoTicket;
 import lottogame.domain.spi.NumberGenerator;
 
-public class LottoService {
+public class LottoPurchaseService {
 
     private static final int PURCHASABLE_UNIT = 1000;
     private final NumberGenerator numberGenerator;
 
-    public LottoService(NumberGenerator numberGenerator) {
+    public LottoPurchaseService(NumberGenerator numberGenerator) {
         this.numberGenerator = numberGenerator;
     }
 
