@@ -1,8 +1,6 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.Lotto;
 import lotto.domain.LottoManager;
 import lotto.domain.WinningLotto;
 import lotto.input.LottoInput;
@@ -19,18 +17,24 @@ public class LottoApplication {
     }
 
     public void run() {
+        int purchaseAmount = inputPurchaseAmount();
+        LottoManager manager = LottoManager.createLottoManagerByMoney(purchaseAmount);
+
+        output.printLottos(manager.getLottos());
+        System.out.println();
+
+        WinningLotto winningLotto = inputWinningLotto();
+        result(manager, winningLotto);
+    }
+
+    private int inputPurchaseAmount() {
         output.printAskPurchaseAmount();
         int purchaseAmount = input.inputPurchaseAmount();
         output.printAmount(purchaseAmount / 1000);
+        return purchaseAmount;
+    }
 
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < purchaseAmount / 1000; i++) {
-            lottos.add(Lotto.createRandomLotto());
-        }
-        LottoManager manager = new LottoManager(lottos);
-
-        output.printLottos(lottos);
-        System.out.println();
+    private WinningLotto inputWinningLotto() {
         output.printAskWinningNumbers();
         List<Integer> winningNumbers = input.inputWinningNumbers();
         output.printAskBonus();
@@ -38,7 +42,10 @@ public class LottoApplication {
 
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
         System.out.println();
+        return winningLotto;
+    }
 
+    private void result(LottoManager manager, WinningLotto winningLotto) {
         output.printStatistics(manager.getResult(winningLotto));
         output.printYield(manager.calculateYield(winningLotto));
     }
