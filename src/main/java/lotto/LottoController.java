@@ -5,6 +5,8 @@ import lotto.dto.LottoStatusResponseDto;
 import lotto.dto.MoneyRequestDto;
 import lotto.dto.WinningNumbersRequestDto;
 
+import java.util.Objects;
+
 public class LottoController {
 
     private final LottoService lottoService;
@@ -22,6 +24,7 @@ public class LottoController {
     }
 
     public LottoResultResponseDto drawWinningLotto(WinningNumbersRequestDto winningNumbersRequestDto) {
+        validateNullSafe();
         WinningNumbers winningNumbers = new WinningNumbers(
                 winningNumbersRequestDto.getWinningNumbers(),
                 winningNumbersRequestDto.getBonusNumber()
@@ -30,5 +33,11 @@ public class LottoController {
         double profit = lottoService.profitRate(lottoResults, money);
 
         return new LottoResultResponseDto(lottoResults, profit);
+    }
+
+    private void validateNullSafe() {
+        if (Objects.isNull(money) || Objects.isNull(lottos)) {
+            throw new IllegalStateException("로또를 먼저 구매해야 합니다.");
+        }
     }
 }
