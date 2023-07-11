@@ -1,7 +1,7 @@
 package lotto;
 
 import java.util.List;
-import lotto.domain.LottoManager;
+import lotto.domain.LottoGroup;
 import lotto.domain.LottoResult;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
@@ -20,14 +20,14 @@ public class LottoApplication {
 
     public void run() {
         Money purchaseMoney = inputPurchaseMoney();
-        output.printQuantity(purchaseMoney.calculateQuantity(new Money(LottoManager.LOTTO_PRICE)));
-        LottoManager manager = LottoManager.from(purchaseMoney);
+        output.printQuantity(purchaseMoney.calculateQuantity(new Money(LottoGroup.LOTTO_PRICE)));
+        LottoGroup lottoGroup = LottoGroup.from(purchaseMoney);
 
-        output.printLottos(manager);
+        output.printLottos(lottoGroup);
         System.out.println();
 
         WinningLotto winningLotto = inputWinningLotto();
-        printResult(manager.getResult(winningLotto));
+        printResult(LottoResult.of(lottoGroup, winningLotto));
     }
 
     private Money inputPurchaseMoney() {

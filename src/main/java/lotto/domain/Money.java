@@ -7,10 +7,14 @@ public class Money {
     private final Long value;
 
     public Money(final Long value) {
+        validate(value);
+        this.value = value;
+    }
+
+    private void validate(final Long value) {
         if (value < 0) {
             throw new IllegalArgumentException("money amount should greater than 0");
         }
-        this.value = value;
     }
 
     public int calculateQuantity(final Money price) {

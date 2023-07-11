@@ -3,7 +3,7 @@ package lotto.output;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
-import lotto.domain.LottoManager;
+import lotto.domain.LottoGroup;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
@@ -26,8 +26,8 @@ public class LottoOutput {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    public void printLottos(final LottoManager manager) {
-        manager.getLottos()
+    public void printLottos(final LottoGroup lottoGroup) {
+        lottoGroup.getLottos()
             .forEach(this::printLotto);
     }
 

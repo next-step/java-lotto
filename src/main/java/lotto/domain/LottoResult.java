@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoResult {
 
@@ -8,6 +9,11 @@ public class LottoResult {
 
     public LottoResult(final Map<LottoRank, Long> result) {
         this.result = result;
+    }
+
+    public static LottoResult of(final LottoGroup lottoGroup, final WinningLotto winningLotto) {
+        return new LottoResult(lottoGroup.getLottos().stream()
+            .collect(Collectors.groupingBy(winningLotto::calculateRank, Collectors.counting())));
     }
 
     public Money calculateTotalPrize() {
@@ -34,7 +40,7 @@ public class LottoResult {
             .stream()
             .mapToLong(Long::longValue)
             .sum();
-        return new Money(totalQuantity * LottoManager.LOTTO_PRICE);
+        return new Money(totalQuantity * LottoGroup.LOTTO_PRICE);
     }
 
 }
