@@ -9,22 +9,16 @@ public final class LottoNumber {
     public static final int UPPER_BOUND = 45;
     private final int lottoNumber;
 
-    public LottoNumber(final String value) {
-        validateBlank(value);
-        int number = Integer.parseInt(value.trim());
-        validateRange(number);
-        this.lottoNumber = number;
-    }
-
-    public LottoNumber(final int value) {
+    public LottoNumber(final Integer value) {
         validateRange(value);
         this.lottoNumber = value;
     }
 
-    private void validateBlank(String value) {
-        if (value == null || value.isBlank()) {
-            throw new IllegalArgumentException("숫자를 입력해야 합니다");
-        }
+    // TODO : try - catch & constructor 2개에 대한 더  나은 고민 필요
+    public LottoNumber(final String text) {
+        int value = Integer.parseInt(text.trim());
+        validateRange(value);
+        this.lottoNumber = value;
     }
 
     private void validateRange(int number) {
