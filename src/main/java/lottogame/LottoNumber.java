@@ -29,10 +29,6 @@ public final class LottoNumber {
         }
     }
 
-    public boolean isSame(LottoNumber number) {
-        return this.equals(number);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
