@@ -23,14 +23,10 @@ public class LottoResults {
 
     public long sumPrice() {
         long sum = DEFAULT_VALUE;
-        for(LottoRank lottoRank : lottoResults.keySet()) {
+        for (LottoRank lottoRank : lottoResults.keySet()) {
             sum += lottoResults.getOrDefault(lottoRank, DEFAULT_VALUE) * lottoRank.getPrice();
         }
         return sum;
-    }
-
-    public long get(LottoRank lottoRank) {
-        return lottoResults.getOrDefault(lottoRank, DEFAULT_VALUE);
     }
 
     @Override

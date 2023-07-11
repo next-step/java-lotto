@@ -6,9 +6,6 @@ import java.util.stream.LongStream;
 
 public class LottoService {
 
-    public LottoService() {
-    }
-
     public Lottos buyLotto(Money money) {
         long countLotto = money.countLotto();
         List<Lotto> lottos = LongStream.range(0, countLotto)
