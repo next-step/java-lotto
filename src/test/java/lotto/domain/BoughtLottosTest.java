@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,12 +49,12 @@ public class BoughtLottosTest {
 
         /* when */
         BoughtLottos boughtLottos = new BoughtLottos(lottos);
-        List<LottoResult> lottoResults =
+        LottoResults lottoResults =
                 boughtLottos.winningResults(winningLotto, bonusBall);
 
         /* then */
-        assertThat(lottoResults).hasSize(lottos.size());
-        assertThat(lottoResults).containsExactlyInAnyOrder(
+        assertThat(lottoResults.getLottoResults()).hasSize(lottos.size());
+        assertThat(lottoResults.getLottoResults()).containsExactlyInAnyOrder(
                 new LottoResult(6, false),
                 new LottoResult(5, true),
                 new LottoResult(0, false)

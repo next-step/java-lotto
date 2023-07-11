@@ -20,12 +20,13 @@ public class LottoGenerator {
         }
     }
 
-    public List<Lotto> generate(final Money money) {
+    public BoughtLottos generate(final Money money) {
         final int count = money.getValue() / Lotto.PRICE;
         final List<Lotto> boughtLottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             boughtLottos.add(lottoGenerateStrategy.generate(balls));
         }
-        return boughtLottos;
+
+        return new BoughtLottos(boughtLottos);
     }
 }
