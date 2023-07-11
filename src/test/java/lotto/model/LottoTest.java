@@ -66,6 +66,8 @@ public class LottoTest {
 
 
     private List<LottoNumber> createLottoNumbers(List<Integer> container) {
-        return container.stream().map(LottoNumber::new).collect(Collectors.toList());
+        return container.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 }

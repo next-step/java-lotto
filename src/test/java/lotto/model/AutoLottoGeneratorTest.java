@@ -1,8 +1,9 @@
 package lotto.model;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 public class AutoLottoGeneratorTest {
 
@@ -12,7 +13,7 @@ public class AutoLottoGeneratorTest {
 
         AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator();
 
-        Assertions.assertThatCode(autoLottoGenerator::generate)
+        assertThatCode(autoLottoGenerator::generate)
                 .doesNotThrowAnyException();
     }
 

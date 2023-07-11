@@ -10,7 +10,7 @@ public class LottoMoney {
         this.money = money;
     }
 
-    private void validateMoney(int money) {
+    private void validateMoney(final int money) {
         if (money < ZERO) {
             throw new IllegalStateException("로또 머니가 양수여야 합니다.");
         }

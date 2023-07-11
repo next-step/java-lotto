@@ -7,13 +7,13 @@ public class LottoPurchaser {
 
     private final AutoLottoGenerator autoLottoGenerator;
 
-    public LottoPurchaser(AutoLottoGenerator autoLottoGenerator) {
+    public LottoPurchaser(final AutoLottoGenerator autoLottoGenerator) {
         this.autoLottoGenerator = autoLottoGenerator;
     }
 
-    public PurChasedLotto purchaseLotto(LottoMoney lottoMoney) {
-        int lottoCount = lottoMoney.getLottoCount();
-        List<Lotto> lottos = new ArrayList<>();
+    public PurChasedLotto purchaseLotto(final LottoMoney lottoMoney) {
+        final int lottoCount = lottoMoney.getLottoCount();
+        final List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             lottos.add(autoLottoGenerator.generate());
         }
