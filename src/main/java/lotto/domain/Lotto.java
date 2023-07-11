@@ -30,6 +30,12 @@ public class Lotto {
         }
     }
 
+    public LottoResult compareWinningLotto(final Lotto winningLotto, final Ball bonusBall) {
+        Set<Ball> lottoBalls = new HashSet<>(this.balls);
+        lottoBalls.retainAll(winningLotto.balls);
+        return new LottoResult(lottoBalls.size(), this.balls.contains(bonusBall));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
