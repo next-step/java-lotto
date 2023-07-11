@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoResultTest {
 
     @Test
-    @DisplayName("당첨 로또는 6개의 일반 번호와 1개의 보너스 번호로 구성된다.")
+    @DisplayName("당첨 로또는 로또와 보너스 로또 번호로 구성된다.")
     void createSuccess() {
         /* given */
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
@@ -26,7 +26,7 @@ public class LottoResultTest {
     }
 
     @Test
-    @DisplayName("일반 번호와 보너스 번호가 중복될 경우 IllegalArgumentException을 던진다.")
+    @DisplayName("로또의 로또 번호와 보너스 로또 번호가 중복될 경우 IllegalArgumentException을 던진다.")
     void createFailWithDuplicatedNumber() {
         /* given */
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
