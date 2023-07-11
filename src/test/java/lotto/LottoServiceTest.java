@@ -9,11 +9,10 @@ class LottoServiceTest {
     private final LottoService lottoService = new LottoService();
 
     @Test
-    @DisplayName("정상적인 로또 구입 금액 입력시 로또 서비스 생성 정상적으로 처리")
-    void create() {
-        int money = 14000;
-
-        Assertions.assertThatNoException()
-                .isThrownBy(() -> new LottoService(money));
+    @DisplayName("Money 객체 전달받으면 로또 발급 테스트")
+    void generateLotto() {
+        Money money = new Money(5000);
+        Lottos lottos = lottoService.buyLotto(money);
+        Assertions.assertThat(lottos.size()).isEqualTo(5);
     }
 }

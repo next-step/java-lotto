@@ -4,9 +4,13 @@ import java.util.List;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public long size() {
+        return lottos.size();
     }
 }
