@@ -7,6 +7,6 @@ public class Lottos {
     private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        throw new IllegalArgumentException();
+        this.lottos = lottos;
     }
 }
