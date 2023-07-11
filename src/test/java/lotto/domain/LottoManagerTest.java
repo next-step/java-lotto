@@ -37,4 +37,25 @@ class LottoManagerTest {
         assertThat(result).containsEntry(LottoRank.SECOND, 1L);
         assertThat(result).containsEntry(LottoRank.FIRST, 1L);
     }
+
+    @Test
+    @DisplayName("수익률 계산 기능 테스트")
+    void calculateYield() {
+        //given
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6))); // 1등
+        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 7))); // 2등
+        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 8))); // 3등
+        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 8, 9))); // 4등
+        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 8, 9, 10))); // 5등
+        lottos.add(Lotto.createSpecificLotto(List.of(21, 22, 23, 24, 25, 26))); // 등수없음
+
+        WinningLotto winningLotto = new WinningLotto(
+            Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6)),
+            new LottoNumber(7));
+        LottoManager lottoManager = new LottoManager(lottos);
+
+        //when, then
+        assertThat(lottoManager.calculateYield(winningLotto)).isEqualTo(38592.5);
+    }
 }

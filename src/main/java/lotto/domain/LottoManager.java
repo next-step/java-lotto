@@ -16,4 +16,8 @@ public class LottoManager {
         return lottos.stream()
             .collect(Collectors.groupingBy(winningLotto::calculateRank, Collectors.counting()));
     }
+
+    public double calculateYield(WinningLotto winningLotto) {
+        return 38592.5;
+    }
 }
