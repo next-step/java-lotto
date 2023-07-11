@@ -46,7 +46,7 @@ public class LottoApplication {
     }
 
     private void result(LottoManager manager, WinningLotto winningLotto) {
-        output.printStatistics(manager.getResult(winningLotto));
+        output.printStatistics(manager.getResult(winningLotto).getResult());
         output.printYield(manager.calculateYield(winningLotto));
     }
 }

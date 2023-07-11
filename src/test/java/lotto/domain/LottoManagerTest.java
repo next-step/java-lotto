@@ -35,7 +35,7 @@ class LottoManagerTest {
         LottoManager lottoManager = new LottoManager(lottos);
 
         //when
-        Map<LottoRank, Long> result = lottoManager.getResult(winningLotto);
+        Map<LottoRank, Long> result = lottoManager.getResult(winningLotto).getResult();
 
         //then
         assertThat(result).containsEntry(LottoRank.FIFTH, 1L);
