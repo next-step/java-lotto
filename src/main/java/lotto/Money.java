@@ -2,7 +2,13 @@ package lotto;
 
 public class Money {
 
-    public Money() {
-        
+    private final int value;
+
+    public Money(final int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
     }
 }
