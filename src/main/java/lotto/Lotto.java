@@ -34,4 +34,14 @@ public class Lotto {
             throw new IllegalArgumentException("로또 번호는 중복되면 안 됩니다.");
         }
     }
+
+    public long countMatchNumber(Lotto winningNumbers) {
+        return lottoNumbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
 }
