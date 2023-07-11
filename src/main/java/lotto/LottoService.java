@@ -2,6 +2,8 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 public class LottoService {
 
@@ -10,11 +12,9 @@ public class LottoService {
 
     public Lottos buyLotto(Money money) {
         long countLotto = money.countLotto();
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < countLotto; i++) {
-            Lotto lotto = RandomGenerator.generateLotto();
-            lottos.add(lotto);
-        }
+        List<Lotto> lottos = LongStream.range(0, countLotto)
+                .mapToObj(l -> RandomGenerator.generateLotto())
+                .collect(Collectors.toList());
         return new Lottos(lottos);
     }
 }
