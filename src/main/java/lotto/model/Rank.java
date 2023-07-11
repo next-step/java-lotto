@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.Arrays;
 
 public enum Rank {
+    DEFAULT(0, 0, false),
     THREE(3, 5000, false),
     FOUR(4, 50000, false),
     FIVE(5, 1500000, false),
@@ -24,7 +25,11 @@ public enum Rank {
                 .filter(rank -> rank.match == count)
                 .filter(rank -> rank.needBonus == isBonus)
                 .findAny()
-                .orElseThrow();
+                .orElse(DEFAULT);
+    }
+
+    public int getMatch() {
+        return match;
     }
 
     public int getReward() {
