@@ -3,24 +3,23 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
-    FIRST(6L, 2_000_000_000L),
-    SECOND(5L, 30_000_000L) {
-        @Override
-        protected boolean verify(Long match, boolean isContainBonus) {
-            return super.verify(match, isContainBonus) && isContainBonus;
-        }
-    },
+    FIFTH(3L, 5_000L),
+    FOURTH(4L, 50_000L),
     THIRD(5L, 1_500_000L) {
         @Override
         protected boolean verify(Long match, boolean isContainBonus) {
             return super.verify(match, isContainBonus) && !isContainBonus;
         }
     },
-    FOURTH(4L, 50_000L),
-    FIFTH(3L, 5_000L),
+    SECOND(5L, 30_000_000L) {
+        @Override
+        protected boolean verify(Long match, boolean isContainBonus) {
+            return super.verify(match, isContainBonus) && isContainBonus;
+        }
+    },
+    FIRST(6L, 2_000_000_000L),
     NONE(0L, 0L);
-
-
+    
     private final Long match;
     private final Long prize;
 

@@ -1,5 +1,6 @@
 package lotto.output;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -32,8 +33,10 @@ public class LottoOutput {
     public void printStatistics(final Map<LottoRank, Long> statistics) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        statistics.keySet()
-            .forEach(key -> System.out.println(getResultString(key, statistics.get(key))));
+        Arrays.stream(LottoRank.values())
+            .filter(rank -> !rank.equals(LottoRank.NONE))
+            .forEach(
+                key -> System.out.println(getResultString(key, statistics.getOrDefault(key, 0L))));
     }
 
     private String getResultString(final LottoRank key, Long count) {
@@ -44,7 +47,7 @@ public class LottoOutput {
     }
 
     public void printYield(final Double yield) {
-        System.out.println("총 수익률은 " + yield + "입니다.");
+        System.out.println("총 수익률은 " + String.format("%.2f", yield) + "입니다.");
     }
 
     private void printLotto(final Lotto lotto) {
