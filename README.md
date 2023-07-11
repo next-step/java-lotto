@@ -9,13 +9,15 @@
   - [ ] action : 당첨 통계 계산
   - [ ] action : 수익률 계산
   - [ ] 로또 구입 갯수 계산 (개당 1,000원)
+  - [ ] action : 로또 번호 6자리 생성
 * Payment -> type : int
   - [ ] validation : 딱 나눠 떨어 지는지?
   - [ ] validation : 내가 투입한 금액이 1,000원 미만 인지?
   - [ ] action : 몇 장만 산다?
+* LottoStatistics -> 일급 컬렉션, type : HashMap<Integer, Integer>
+  - [ ] ENUM:
 * Lottos -> 일급 컬렉션, type : List<Lotto>
-  - [ ] action : 당첨 통계 계산
-  - [ ] action : 로또 번호 6자리 생성
+  - [x] action : 당첨 통계 계산
 * WinningNumber
   - [x] field : Lotto
   - [x] filed : LottoNumber
