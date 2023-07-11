@@ -46,4 +46,11 @@ public class Lotto {
             .filter(this::hasLottoNumber)
             .count();
     }
+
+    @Override
+    public String toString() {
+        return lotto.stream()
+            .map(LottoNumber::toString)
+            .collect(Collectors.joining(", "));
+    }
 }

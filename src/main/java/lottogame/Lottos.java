@@ -56,4 +56,8 @@ public class Lottos {
             .forEach(lottoMatch -> resultMap.put(lottoMatch, 0));
         return resultMap;
     }
+
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
 }

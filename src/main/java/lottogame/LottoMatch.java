@@ -30,7 +30,7 @@ public enum LottoMatch {
             .collect(Collectors.toMap(LottoMatch::getMatchCount, Function.identity())));
 
 
-    private int getMatchCount() {
+    public int getMatchCount() {
         return matchCount;
     }
 
