@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -34,5 +33,31 @@ public class BoughtLottosTest {
 
         /* then */
         assertThat(boughtLottos.getCount()).isEqualTo(lottos.size());
+    }
+
+    @Test
+    @DisplayName("당첨 확인 테스트")
+    void boughtLottos_winning() {
+        /* given */
+        Lotto winningLotto = new Lotto(LottoTest.getBalls("1", "2", "3", "4", "5", "6"));
+        Ball bonusBall = new Ball("7");
+
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(new Lotto(LottoTest.getBalls("1", "2", "3", "4", "5", "6")));
+        lottos.add(new Lotto(LottoTest.getBalls("1", "2", "3", "4", "5", "7")));
+        lottos.add(new Lotto(LottoTest.getBalls("8", "9", "10", "11", "12", "13")));
+
+        /* when */
+        BoughtLottos boughtLottos = new BoughtLottos(lottos);
+        List<LottoResult> lottoResults =
+                boughtLottos.winningResults(winningLotto, bonusBall);
+
+        /* then */
+        assertThat(lottoResults).hasSize(lottos.size());
+        assertThat(lottoResults).containsExactlyInAnyOrder(
+                new LottoResult(6, false),
+                new LottoResult(5, true),
+                new LottoResult(0, false)
+        );
     }
 }
