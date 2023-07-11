@@ -43,4 +43,13 @@ class LottoTest {
         Assertions.assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("두 로또에서 겹치는 번호 개수를 계산한다")
+    void countMatchNumber() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+
+        Assertions.assertThat(lotto.countMatchNumber(winningNumbers)).isEqualTo(6L);
+    }
 }
