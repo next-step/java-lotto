@@ -9,7 +9,7 @@ import java.util.List;
 class LottosTest {
 
     @Test
-    @DisplayName("로또 일급 콜렉션 생성 테스트")
+    @DisplayName("정상적인 입력이 들어오면 Lottos 객체가 생성된다.")
     void create() {
         List<Lotto> lottos = List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
 
@@ -18,7 +18,7 @@ class LottosTest {
     }
 
     @Test
-    @DisplayName("로또 당첨 통계 계산 테스트")
+    @DisplayName("로또 당첨 통계를 계산한다.")
     void matchWinningNumbers() {
         Lottos lottos = new Lottos(List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6))));
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);

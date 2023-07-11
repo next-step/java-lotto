@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class RandomGeneratorTest {
 
     @Test
-    @DisplayName("로또 생성 테스트")
+    @DisplayName("랜덤하게 로또를 자동 생성한다.")
     void generate() {
         Assertions.assertThatNoException()
                 .isThrownBy(RandomGenerator::generateLotto);

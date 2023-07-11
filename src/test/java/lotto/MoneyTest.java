@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 class MoneyTest {
 
     @Test
-    @DisplayName("정상적인 입력시 머니 객체 정상 생성")
+    @DisplayName("정상적인 입력시 머니 객체가 정상적으로 생성된다.")
     void create() {
         int money = 14000;
 
@@ -18,7 +18,7 @@ class MoneyTest {
     }
 
     @Test
-    @DisplayName("음수 입력시 예외 처리")
+    @DisplayName("음수 입력시 생성자가 예외를 던진다.")
     void validateNegative() {
         int negativeMoney = -14000;
 
@@ -28,14 +28,14 @@ class MoneyTest {
 
     @ParameterizedTest
     @CsvSource({"1234, 1", "999, 0"})
-    @DisplayName("금액에 맞는 로또 개수 테스트")
+    @DisplayName("금액에 맞는 로또 개수를 반환한다.")
     void countLotto(long amount, long count) {
         Money money = new Money(amount);
         Assertions.assertThat(money.countLotto()).isEqualTo(count);
     }
 
     @Test
-    @DisplayName("수익률 계산 테스트")
+    @DisplayName("수익률을 계산하여 리턴한다.")
     void profitRate() {
         Money money = new Money(14000);
         Assertions.assertThat(money.profitRate(5000)).isEqualTo((double) 5000 / 14000);

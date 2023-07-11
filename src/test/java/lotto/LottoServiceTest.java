@@ -9,7 +9,7 @@ class LottoServiceTest {
     private final LottoService lottoService = new LottoService();
 
     @Test
-    @DisplayName("Money 객체 전달받으면 로또 발급 테스트")
+    @DisplayName("Money 객체 전달받으면 로또를 발급한다.")
     void generateLotto() {
         Money money = new Money(5000);
         Lottos lottos = lottoService.buyLotto(money);

@@ -9,7 +9,7 @@ import java.util.List;
 class WinningNumbersTest {
 
     @Test
-    @DisplayName("당첨 번호 생성 테스트")
+    @DisplayName("당첨 번호가 주어지면 객체를 생성한다.")
     void create() {
 
         List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
@@ -20,7 +20,7 @@ class WinningNumbersTest {
     }
 
     @Test
-    @DisplayName("당첨 번호와 보너스 번호 중복 테스트")
+    @DisplayName("당첨 번호와 보너스 번호가 중복이 있다면 예외를 던진다.")
     void validateDuplicatedBonus() {
         List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
         int bonusNumber = 6;
@@ -30,7 +30,7 @@ class WinningNumbersTest {
     }
 
     @Test
-    @DisplayName("로또와 당첨 번호를 비교하여 등수를 반환 테스트")
+    @DisplayName("로또와 당첨 번호를 비교하여 등수를 반환한다.")
     void match() {
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 8, 9));
