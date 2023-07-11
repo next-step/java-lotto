@@ -1,6 +1,9 @@
-package lotto;
+package lotto.model.domain;
 
 
+import lotto.model.domain.LottoMoney;
+import lotto.model.domain.LottoResult;
+import lotto.model.domain.Rank;
 import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.Test;
 

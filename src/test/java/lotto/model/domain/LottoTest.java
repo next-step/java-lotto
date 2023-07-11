@@ -1,5 +1,9 @@
-package lotto;
+package lotto.model.domain;
 
+import lotto.model.domain.Lotto;
+import lotto.model.domain.LottoNumber;
+import lotto.model.domain.Rank;
+import lotto.model.domain.WinningNumbers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

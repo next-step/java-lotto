@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model.domain;
 
 public class LottoMoney {
 

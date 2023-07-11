@@ -1,6 +1,7 @@
-package lotto;
+package lotto.model.domain;
 
 
+import lotto.model.domain.WinningNumbers;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

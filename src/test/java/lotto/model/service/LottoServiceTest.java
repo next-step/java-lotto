@@ -1,5 +1,7 @@
-package lotto;
+package lotto.model.service;
 
+import lotto.model.domain.RandomNumbersGenerator;
+import lotto.model.service.LottoService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

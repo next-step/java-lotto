@@ -1,4 +1,8 @@
-package lotto;
+package lotto.model.service;
+
+import lotto.model.domain.LottoMoney;
+import lotto.model.domain.Lottos;
+import lotto.model.domain.NumbersGenerator;
 
 public final class LottoService {
 
