@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,13 +17,13 @@ class LottoTest {
 
     private static Stream<Arguments> generateData() {
         return Stream.of(
-            Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6)), 6L),
-            Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 7)), 5L),
-            Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 8, 9)), 4L),
-            Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 8, 9, 10)), 3L),
-            Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 8, 9, 10, 11)), 2L),
-            Arguments.of(Lotto.createSpecificLotto(List.of(1, 8, 9, 10, 11, 12)), 1L),
-            Arguments.of(Lotto.createSpecificLotto(List.of(21, 22, 23, 24, 25, 26)), 0L)
+                Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6)), 6L),
+                Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 7)), 5L),
+                Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 8, 9)), 4L),
+                Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 8, 9, 10)), 3L),
+                Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 8, 9, 10, 11)), 2L),
+                Arguments.of(Lotto.createSpecificLotto(List.of(1, 8, 9, 10, 11, 12)), 1L),
+                Arguments.of(Lotto.createSpecificLotto(List.of(21, 22, 23, 24, 25, 26)), 0L)
         );
     }
 
@@ -57,21 +58,21 @@ class LottoTest {
 
         //then
         assertThat(lotto.getLottoNumbers()).isEqualTo(Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::of).collect(Collectors.toList()));
+                .map(LottoNumber::of).collect(Collectors.toList()));
     }
 
     @Test
     @DisplayName("중복된 숫자는 생성 불가.")
     void duplicatedNumberUnavailableTest() {
         assertThrows(IllegalArgumentException.class,
-            () -> Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 5)));
+                () -> Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 5)));
     }
 
     @Test
     @DisplayName("수동 생성된 로또는 길이가 6이어야 한다.")
     void createSpecificSixNumbersTest() {
         assertThrows(IllegalArgumentException.class,
-            () -> Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5))
+                () -> Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5))
         );
     }
 

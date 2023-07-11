@@ -19,7 +19,7 @@ public enum LottoRank {
     },
     FIRST(6L, 2_000_000_000L),
     NONE(0L, 0L);
-    
+
     private final Long match;
     private final Long prize;
 
@@ -30,9 +30,9 @@ public enum LottoRank {
 
     public static LottoRank from(Long match, boolean isContainBonus) {
         return Arrays.stream(values())
-            .filter(rank -> rank.verify(match, isContainBonus))
-            .findAny()
-            .orElse(NONE);
+                .filter(rank -> rank.verify(match, isContainBonus))
+                .findAny()
+                .orElse(NONE);
     }
 
     protected boolean verify(Long match, boolean isContainBonus) {

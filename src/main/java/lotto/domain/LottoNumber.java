@@ -8,13 +8,10 @@ public class LottoNumber {
 
     static final int LOTTO_START = 1;
     static final int LOTTO_END = 45;
-    private static final List<LottoNumber> lottoNumberCache = IntStream.rangeClosed(
-            0,
-            LottoNumber.LOTTO_END
-        )
-        .boxed()
-        .map(LottoNumber::new)
-        .collect(Collectors.toList());
+    private static final List<LottoNumber> lottoNumberCache = IntStream.rangeClosed(0, LottoNumber.LOTTO_END)
+            .boxed()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
     private final Integer number;
 
     private LottoNumber(final Integer number) {
@@ -28,8 +25,7 @@ public class LottoNumber {
 
     private static void verify(final Integer number) {
         if (number < LOTTO_START || number > LOTTO_END) {
-            throw new IllegalArgumentException(
-                "lotto number should in range " + LOTTO_START + "~" + LOTTO_END);
+            throw new IllegalArgumentException("lotto number should in range " + LOTTO_START + "~" + LOTTO_END);
         }
     }
 

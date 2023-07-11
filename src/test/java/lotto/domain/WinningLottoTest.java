@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import java.util.stream.Stream;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,12 +17,12 @@ class WinningLottoTest {
     private static Stream<Arguments> generateData() {
 
         return Stream.of(
-            Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6)), LottoRank.FIRST),
-            Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 7)), LottoRank.SECOND),
-            Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 8)), LottoRank.THIRD),
-            Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 8, 9)), LottoRank.FOURTH),
-            Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 8, 9, 10)), LottoRank.FIFTH),
-            Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 8, 9, 10, 11)), LottoRank.NONE)
+                Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6)), LottoRank.FIRST),
+                Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 7)), LottoRank.SECOND),
+                Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 8)), LottoRank.THIRD),
+                Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 8, 9)), LottoRank.FOURTH),
+                Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 8, 9, 10)), LottoRank.FIFTH),
+                Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 8, 9, 10, 11)), LottoRank.NONE)
         );
     }
 
@@ -45,7 +46,7 @@ class WinningLottoTest {
 
         //when, then
         assertThrows(IllegalArgumentException.class,
-            () -> new WinningLotto(lotto, LottoNumber.of(6)));
+                () -> new WinningLotto(lotto, LottoNumber.of(6)));
     }
 
     @ParameterizedTest

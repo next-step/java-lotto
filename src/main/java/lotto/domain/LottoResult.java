@@ -12,15 +12,18 @@ public class LottoResult {
     }
 
     public static LottoResult of(final LottoGroup lottoGroup, final WinningLotto winningLotto) {
-        return new LottoResult(lottoGroup.getLottos().stream()
-            .collect(Collectors.groupingBy(winningLotto::calculateRank, Collectors.counting())));
+        return new LottoResult(
+                lottoGroup.getLottos()
+                        .stream()
+                        .collect(Collectors.groupingBy(winningLotto::calculateRank, Collectors.counting()))
+        );
     }
 
     public Money calculateTotalPrize() {
         Long totalPrize = result.keySet()
-            .stream()
-            .mapToLong(key -> key.getPrize() * result.get(key))
-            .sum();
+                .stream()
+                .mapToLong(key -> key.getPrize() * result.get(key))
+                .sum();
         return new Money(totalPrize);
     }
 
@@ -30,16 +33,14 @@ public class LottoResult {
 
     public Double calculateYield() {
         return this.calculateTotalPrize()
-            .calculateYield(
-                calculateTotalMoney()
-            );
+                .calculateYield(calculateTotalMoney());
     }
 
     private Money calculateTotalMoney() {
         long totalQuantity = result.values()
-            .stream()
-            .mapToLong(Long::longValue)
-            .sum();
+                .stream()
+                .mapToLong(Long::longValue)
+                .sum();
         return new Money(totalQuantity * LottoGroup.LOTTO_PRICE);
     }
 

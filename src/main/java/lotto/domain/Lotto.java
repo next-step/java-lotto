@@ -9,13 +9,10 @@ import java.util.stream.IntStream;
 public class Lotto {
 
     private static final int LOTTO_SIZE = 6;
-    private static final List<LottoNumber> values = IntStream.rangeClosed(
-            LottoNumber.LOTTO_START,
-            LottoNumber.LOTTO_END
-        )
-        .boxed()
-        .map(LottoNumber::of)
-        .collect(Collectors.toList());
+    private static final List<LottoNumber> values = IntStream.rangeClosed(LottoNumber.LOTTO_START, LottoNumber.LOTTO_END)
+            .boxed()
+            .map(LottoNumber::of)
+            .collect(Collectors.toList());
 
     private final List<LottoNumber> numbers;
 
@@ -33,9 +30,9 @@ public class Lotto {
         verifyDuplicate(numbers);
 
         return new Lotto(
-            numbers.stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toList())
+                numbers.stream()
+                        .map(LottoNumber::of)
+                        .collect(Collectors.toList())
         );
     }
 
@@ -53,8 +50,8 @@ public class Lotto {
 
     public Long countMatches(final Lotto other) {
         return this.numbers.stream()
-            .filter(other.numbers::contains)
-            .count();
+                .filter(other.numbers::contains)
+                .count();
     }
 
     public List<LottoNumber> getLottoNumbers() {
