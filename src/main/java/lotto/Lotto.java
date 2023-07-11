@@ -31,6 +31,10 @@ public final class Lotto {
         }
     }
 
+    public Rank checkRank(final WinningNumbers winningNumbers) {
+        return null;
+    }
+
     public List<LottoNumber> getNumbers() {
         return lottoNumbers;
     }

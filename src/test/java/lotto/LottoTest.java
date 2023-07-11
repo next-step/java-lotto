@@ -1,6 +1,9 @@
 package lotto;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,5 +50,30 @@ public class LottoTest {
 
         // when & then
         assertThrows(IllegalArgumentException.class, () -> new Lotto(numbers));
+    }
+
+
+    @ParameterizedTest
+    @MethodSource("lottoProvider")
+    void 로또와_당첨번호_및_보너스볼을_비교해_Rank_반환_성공(Lotto lotto, Rank expectedRank) {
+        // given
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
+
+        // when
+        Rank rank = lotto.checkRank(winningNumbers);
+
+        // then
+        assertThat(rank).isEqualTo(expectedRank);
+    }
+
+    static Stream<Arguments> lottoProvider() {
+        return Stream.of(
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), Rank.FIRST),
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 7)), Rank.SECOND),
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 8)), Rank.THIRD),
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 8, 9)), Rank.FOURTH),
+                Arguments.of(new Lotto(List.of(1, 2, 3, 8, 9, 10)), Rank.FIFTH),
+                Arguments.of(new Lotto(List.of(8, 9, 10, 11, 12, 13)), Rank.NONE)
+        );
     }
 }
