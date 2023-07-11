@@ -2,6 +2,7 @@ package lottogame.domain;
 
 import java.util.Objects;
 import java.util.Set;
+import lottogame.domain.response.LottoCheckResponse;
 
 public class LottoResult {
 
@@ -18,48 +19,29 @@ public class LottoResult {
             lottoBonus.isContained(lottoNumbers));
     }
 
-    public static final class LottoCheckResponse {
-
-        private final int matchedCount;
-        private final boolean isBonusMatched;
-
-        public LottoCheckResponse(int matchedCount, boolean isBonusMatched) {
-            this.matchedCount = matchedCount;
-            this.isBonusMatched = isBonusMatched;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
         }
-
-        public int getMatchedCount() {
-            return matchedCount;
+        if (!(o instanceof LottoResult)) {
+            return false;
         }
-
-        public boolean isBonusMatched() {
-            return isBonusMatched;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) {
-                return true;
-            }
-            if (!(o instanceof LottoCheckResponse)) {
-                return false;
-            }
-            LottoCheckResponse that = (LottoCheckResponse) o;
-            return matchedCount == that.matchedCount && isBonusMatched == that.isBonusMatched;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(matchedCount, isBonusMatched);
-        }
-
-        @Override
-        public String toString() {
-            return "LottoCheckResponse{" +
-                "matchedCount=" + matchedCount +
-                ", isBonusMatched=" + isBonusMatched +
-                '}';
-        }
+        LottoResult that = (LottoResult) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers) && Objects.equals(lottoBonus,
+            that.lottoBonus);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers, lottoBonus);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoResult{" +
+            "lottoNumbers=" + lottoNumbers +
+            ", lottoBonus=" + lottoBonus +
+            '}';
+    }
 }
