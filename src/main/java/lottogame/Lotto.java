@@ -1,6 +1,5 @@
 package lottogame;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,5 +35,9 @@ public class Lotto {
         return values.stream()
             .map(LottoNumber::new)
             .collect(Collectors.toUnmodifiableList());
+    }
+
+    public boolean hasLottoNumber(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
     }
 }
