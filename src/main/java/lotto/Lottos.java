@@ -13,4 +13,12 @@ public class Lottos {
     public long size() {
         return lottos.size();
     }
+
+    public LottoResults matchWinningNumbers(WinningNumbers winningNumbers) {
+        LottoResults lottoResults = new LottoResults();
+        for (Lotto lotto : lottos) {
+            lottoResults.add(winningNumbers.match(lotto), 1);
+        }
+        return lottoResults;
+    }
 }

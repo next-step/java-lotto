@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class LottoResults {
 
@@ -22,5 +23,22 @@ public class LottoResults {
             sum += lottoResults.getOrDefault(lottoRank, DEFAULT_VALUE) * lottoRank.getPrice();
         }
         return sum;
+    }
+
+    public long get(LottoRank lottoRank) {
+        return lottoResults.getOrDefault(lottoRank, DEFAULT_VALUE);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoResults that = (LottoResults) o;
+        return Objects.equals(lottoResults, that.lottoResults);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoResults);
     }
 }
