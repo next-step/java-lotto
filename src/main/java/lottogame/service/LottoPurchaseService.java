@@ -28,7 +28,7 @@ public class LottoPurchaseService {
 
     private List<LottoTicket> createLottoNumbers(int money) {
         List<LottoTicket> lottoTicketList = new ArrayList<>();
-        for (int count = 0; count < money % PURCHASABLE_UNIT; count++) {
+        for (int count = 0; count < money / PURCHASABLE_UNIT; count++) {
             lottoTicketList.add(new LottoTicket(numberGenerator));
         }
         return lottoTicketList;
