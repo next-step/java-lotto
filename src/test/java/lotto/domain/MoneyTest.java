@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -12,7 +14,14 @@ public class MoneyTest {
     @DisplayName("구입 금액 정상 생성 입력 테스트")
     void money_inputValidMoney(final String value) {
         /* given & when & then */
-        Assertions.assertDoesNotThrow(() -> new Money(value));
+        assertDoesNotThrow(() -> new Money(value));
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"999", "100001"})
+    @DisplayName("범위 초과 구입 금액 생성 테스트")
+    void money_inputOutOfRangeMoney(final String value) {
+        /* given & when & then */
+        assertThatThrownBy(() -> new Money(value)).isExactlyInstanceOf(IllegalArgumentException.class);
+    }
 }
