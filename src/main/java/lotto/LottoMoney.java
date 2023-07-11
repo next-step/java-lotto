@@ -22,6 +22,6 @@ public class LottoMoney {
     }
 
     public int getChange() {
-        return -1;
+        return value % LOTTO_PRICE;
     }
 }
