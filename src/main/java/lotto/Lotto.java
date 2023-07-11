@@ -11,15 +11,23 @@ public final class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(final List<Integer> numbers) {
-        validate(numbers);
+        validateSize(numbers);
+        validateDistinction(numbers);
+
         this.lottoNumbers = numbers.stream()
                 .map(LottoNumber::of)
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private void validate(final List<Integer> numbers) {
+    private void validateSize(final List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또는 6개의 번호를 가져야합니다.");
+        }
+    }
+
+    private void validateDistinction(final List<Integer> numbers) {
+        if (numbers.stream().distinct().count() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
     }
 
