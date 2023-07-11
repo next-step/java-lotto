@@ -17,8 +17,9 @@
   - [ ] action : 당첨 통계 계산
   - [ ] action : 로또 번호 6자리 생성
 * WinningNumber
-  - [ ] field : Lotto
-  - [ ] filed : Number
+  - [x] field : Lotto
+  - [x] filed : LottoNumber
+  - [x] validation : 로또넘버 안에 보너스 볼과 일치하는 숫자가 있는지 검증
 * Lotto -> 일급 컬렉션, type : List<Number>
   - [x] validation : 중복이 있는 지
   - [x] validation : 6개의 숫자인지
