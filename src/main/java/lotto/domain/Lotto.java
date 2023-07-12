@@ -28,14 +28,21 @@ public class Lotto {
 
     private void validateLottoSize(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
+            throw new IllegalArgumentException(
+                    String.format("로또 번호의 개수는 6개여야 합니다. 현재 %d개의 로또를 입력했습니다.", lottoNumbers.size())
+            );
         }
     }
 
     private void validateDuplicatedLottoNumbers(List<Integer> lottoNumbers) {
         Set<Integer> numbers = new HashSet<>(lottoNumbers);
         if (numbers.size() != lottoNumbers.size()) {
-            throw new IllegalArgumentException("로또 번호는 중복되면 안 됩니다.");
+            throw new IllegalArgumentException(
+                    String.format(
+                            "로또 번호는 중복되면 안 됩니다. 현재 %d개의 로또 번호가 중복됩니다.",
+                            lottoNumbers.size() - numbers.size()
+                    )
+            );
         }
     }
 
