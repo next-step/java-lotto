@@ -14,12 +14,12 @@ public class LottoBonus {
     private void assertLottoNumber(Integer bonusNumber, LottoTicket lottoTicket) {
         if (lottoTicket.contains(LottoNumber.valueOf(bonusNumber))) {
             throw new IllegalArgumentException(
-                String.format("bonusNumber \"%d\"는 lottoNumbers\"%s\"와 중복될 수 없습니다.", bonusNumber, lottoTicket));
+                String.format("bonusNumber \"%d\"는 lottoTickets\"%s\"와 중복될 수 없습니다.", bonusNumber, lottoTicket));
         }
     }
 
     boolean isContained(LottoTicket lottoTicket) {
-        Objects.requireNonNull(lottoTicket, "lottoNumbers는 Null일 수 없습니다.");
+        Objects.requireNonNull(lottoTicket, "lottoTickets는 Null일 수 없습니다.");
         return lottoTicket.contains(lottoNumber);
     }
 
