@@ -46,20 +46,20 @@ public class LottosTest {
     }
 
     @ParameterizedTest
-    @MethodSource("provider")
+    @MethodSource("당첨_번호와_보너스_볼로_로또들의_당첨_결과_계산_테스트케이스")
     void 당첨_번호와_보너스_볼로_로또들의_당첨_결과_계산_성공(List<Integer> generatedNumbers, Rank expectedRank) {
         // given
         final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
         final Lottos lottos = new Lottos(2, new FixedNumbersGenerator(generatedNumbers));
 
         // when
-        LottoResult lottoResult = lottos.calculateLottoResult(winningNumbers);
+        List<Rank> lottoResult = lottos.calculateLottoResult(winningNumbers);
 
         // then
-        assertThat(lottoResult.getCount(expectedRank)).isEqualTo(2);
+        assertThat(lottoResult.stream().filter(rank -> rank.equals(expectedRank)).count()).isEqualTo(2);
     }
 
-    static Stream<Arguments> provider() {
+    static Stream<Arguments> 당첨_번호와_보너스_볼로_로또들의_당첨_결과_계산_테스트케이스() {
         return Stream.of(
                 Arguments.of(List.of(1, 2, 3, 4, 5, 6), Rank.FIRST),
                 Arguments.of(List.of(1, 2, 3, 4, 5, 7), Rank.SECOND),

@@ -13,13 +13,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 class RankTest {
 
     @ParameterizedTest
-    @MethodSource("matchCountAndBounsBallProvider")
+    @MethodSource("당첨번호_개수와_보너스볼_보유여부로_랭크계산_테스트케이스")
     void 당첨번호_개수와_보너스볼_보유여부로_랭크계산_성공(int matchCount, boolean hasBonusBall, Rank result) {
         // given, when, then
         assertThat(Rank.valueOf(matchCount, hasBonusBall)).isEqualTo(result);
     }
 
-    static Stream<Arguments> matchCountAndBounsBallProvider() {
+    static Stream<Arguments> 당첨번호_개수와_보너스볼_보유여부로_랭크계산_테스트케이스() {
         return Stream.of(
                 Arguments.of(6, false, Rank.FIRST),
                 Arguments.of(5, true, Rank.SECOND),

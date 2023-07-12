@@ -1,9 +1,6 @@
 package lotto.model.domain;
 
 
-import lotto.model.domain.LottoMoney;
-import lotto.model.domain.LottoResult;
-import lotto.model.domain.Rank;
 import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.Test;
 
@@ -17,13 +14,13 @@ class LottoResultTest {
     @Test
     void 로또_당첨결과_객체_생성_성공() {
         // given, when, then
-        assertDoesNotThrow(() -> new LottoResult(List.of()));
+        assertDoesNotThrow(() -> new LottoResult(List.of(), new LottoMoney(1000)));
     }
 
     @Test
     void 로또_당첨결과가_올바르게_저장_성공() {
         // given
-        LottoResult lottoResult = new LottoResult(List.of(Rank.SECOND, Rank.FOURTH, Rank.SECOND));
+        LottoResult lottoResult = new LottoResult(List.of(Rank.SECOND, Rank.FOURTH, Rank.SECOND), new LottoMoney(3000));
 
         // when & then
         assertThat(lottoResult.getCount(Rank.SECOND)).isEqualTo(2);
@@ -35,10 +32,10 @@ class LottoResultTest {
     void 로또_결과로_수익률_계산_성공() {
         // given
         LottoMoney lottoMoney = new LottoMoney(3000);
-        LottoResult lottoResult = new LottoResult(List.of(Rank.SECOND, Rank.FOURTH, Rank.SECOND));
+        LottoResult lottoResult = new LottoResult(List.of(Rank.SECOND, Rank.FOURTH, Rank.SECOND), lottoMoney);
 
         // when
-        double profitRate = lottoResult.calculateProfitRate(lottoMoney);
+        double profitRate = lottoResult.getProfitRate();
 
         // then
         final long totalPrize = Rank.getTotalPrize(Rank.SECOND, 2) + Rank.getTotalPrize(Rank.FOURTH, 1);
