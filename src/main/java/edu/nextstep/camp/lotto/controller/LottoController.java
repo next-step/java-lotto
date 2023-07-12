@@ -18,7 +18,7 @@ public class LottoController {
     }
 
     public Lottos buyLottos(String amount) {
-        return this.buyLottos(Integer.valueOf(amount));
+        return this.buyLottos(Integer.parseInt(amount));
     }
 
     public Lottos buyLottos(int amount) {
@@ -38,7 +38,7 @@ public class LottoController {
 
     public void analysisLotto(Lottos lottos, Integer... lottoNumbers) {
         if (lottos == null) {
-            new IllegalArgumentException("로또가 null 입니다.");
+            throw new IllegalArgumentException("로또가 null 입니다.");
         }
 
         lottoOutputView.lottoAnalysisView(lottos.analysis(lottoNumbers));
