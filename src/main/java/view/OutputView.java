@@ -45,7 +45,7 @@ public class OutputView {
         final String result = String.format(
                 "%d개 일치%s(%d원)- %d개",
                 rank.getMatchLottoNumber(),
-                rank.containsBonus() ? ", 보너스 볼 일치" : " ",
+                rank.hasToCheckBonus() ? ", 보너스 볼 일치" : " ",
                 rank.getPrize(),
                 count
         );

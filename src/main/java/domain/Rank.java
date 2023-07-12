@@ -10,12 +10,12 @@ public enum Rank {
     NONE(0, false, 0L);
 
     private final long matchLottoNumber;
-    private final boolean containsBonus;
+    private final boolean hasToCheckBonus;
     private final long prize;
 
-    Rank(final long matchLottoNumber, final boolean containsBonus, final long prize) {
+    Rank(final long matchLottoNumber, final boolean hasToCheckBonus, final long prize) {
         this.matchLottoNumber = matchLottoNumber;
-        this.containsBonus = containsBonus;
+        this.hasToCheckBonus = hasToCheckBonus;
         this.prize = prize;
     }
 
@@ -42,8 +42,8 @@ public enum Rank {
         return matchLottoNumber;
     }
 
-    public boolean containsBonus() {
-        return containsBonus;
+    public boolean hasToCheckBonus() {
+        return hasToCheckBonus;
     }
 
     public long getPrize() {
