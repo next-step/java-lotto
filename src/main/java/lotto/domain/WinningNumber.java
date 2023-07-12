@@ -1,12 +1,12 @@
-package lottogame;
+package lotto.domain;
 
-public class WinningNumber {
+public final class WinningNumber {
 
     private final Lotto winningLotto;
     private final LottoNumber bonusBall;
 
-    public WinningNumber(String lottoValue, String bonusValue) {
-        LottoText lottoText = new LottoText(lottoValue);
+    public WinningNumber(final String lottoValue, final String bonusValue) {
+        TextParser lottoText = new TextParser(lottoValue);
         Lotto lotto = new Lotto(lottoText.getParsed());
         LottoNumber lottoNumber = new LottoNumber(bonusValue);
 
@@ -16,7 +16,7 @@ public class WinningNumber {
         bonusBall = lottoNumber;
     }
 
-    private void validate(Lotto lotto, LottoNumber lottoNumber) {
+    private void validate(final Lotto lotto, final LottoNumber lottoNumber) {
         if (lotto.hasLottoNumber(lottoNumber)) {
             throw new IllegalArgumentException("보너스볼이 당첨번호에 존재합니다");
         }

@@ -1,23 +1,27 @@
-import lottogame.LottoService;
-import lottogame.Payment;
-import lottogame.WinningNumber;
-import view.LottoView;
+package lotto.controller;
+
+import lotto.domain.LottoService;
+import lotto.view.LottoView;
 
 public class LottoController {
 
-    public void run() {
-        LottoView lottoView = new LottoView();
+    private final LottoView lottoView;
 
-        Payment payment = new Payment(lottoView.readPayment());
+    public LottoController(final LottoView lottoView) {
+        this.lottoView = lottoView;
+    }
+
+    public void run() {
+        String payment = lottoView.readPayment();
         LottoService lottoService = new LottoService(payment);
+
         lottoView.printLottoCount(lottoService.getCount());
         lottoView.printLottos(lottoService.getLottos());
 
         String winningLotto = lottoView.readWinningLotto();
         String bonusBall = lottoView.readBonusBall();
-        WinningNumber winningNumber = new WinningNumber(winningLotto, bonusBall);
 
-        lottoView.printResult(lottoService.getResult(winningNumber));
+        lottoView.printResults(lottoService.getResult(winningLotto, bonusBall));
         lottoView.printProfitRate(lottoService.getProfitRate());
     }
 }

@@ -1,4 +1,4 @@
-package lottogame;
+package lotto.domain;
 
 import java.util.Collections;
 import java.util.Map;
@@ -16,13 +16,17 @@ public enum LottoMatch {
     private final LottoMatchKey lottoMatchKey;
     private final int prize;
 
-    LottoMatch(LottoMatchKey lottoMatchKey, int prize) {
+    LottoMatch(final LottoMatchKey lottoMatchKey, final int prize) {
         this.lottoMatchKey = lottoMatchKey;
         this.prize = prize;
     }
 
-    public static LottoMatch find(LottoMatchKey lottoMatchKey) {
+    public static LottoMatch find(final LottoMatchKey lottoMatchKey) {
         return MAP.get(lottoMatchKey);
+    }
+
+    public static boolean containsKey(final LottoMatchKey lottoMatchKey) {
+        return MAP.containsKey(lottoMatchKey);
     }
 
     private static final Map<LottoMatchKey, LottoMatch> MAP =
@@ -37,5 +41,4 @@ public enum LottoMatch {
     public int getPrize() {
         return prize;
     }
-
 }

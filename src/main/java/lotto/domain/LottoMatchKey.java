@@ -1,14 +1,22 @@
-package lottogame;
+package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoMatchKey {
+public final class LottoMatchKey {
     private final boolean isBonus;
     private final int matchCount;
 
-    public LottoMatchKey(boolean isBonus, int matchCount) {
+    public LottoMatchKey(final boolean isBonus, final int matchCount) {
         this.isBonus = isBonus;
         this.matchCount = matchCount;
+    }
+
+    public boolean getIsBonus() {
+        return isBonus;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 
     @Override
@@ -28,11 +36,5 @@ public class LottoMatchKey {
         return Objects.hash(isBonus, matchCount);
     }
 
-    public boolean getIsBonus() {
-        return isBonus;
-    }
 
-    public int getMatchCount() {
-        return matchCount;
-    }
 }
