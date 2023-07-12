@@ -19,13 +19,21 @@ public class LottoCheckService {
     }
 
     private LottoCheckResponse getLottoPrizes(List<LottoTicket> lottoTickets, LottoResult lottoResult) {
-        List<LottoPrize> list = lottoTickets.stream()
+        List<LottoPrize> lottoPrizes = lottoTickets.stream()
             .map(lottoResult::checkLottoTicket)
             .collect(Collectors.toList());
 
-        double earningRate = 0;
-        Map<LottoPrize, Integer> lottoPrizes = new EnumMap<>(LottoPrize.class);
+        int earnMoney = 0;
+        int totalMoney = lottoPrizes.size() * LottoTicket.PURCHASABLE_UNIT;
+        Map<LottoPrize, Integer> lottoPrizeCounts = new EnumMap<>(LottoPrize.class);
+        for (LottoPrize lottoPrize : lottoPrizes) {
+            earnMoney += lottoPrize.getMoney();
+            lottoPrizeCounts.put(lottoPrize, lottoPrizeCounts.getOrDefault(lottoPrize, 0) + 1);
+        }
 
-        return new LottoCheckResponse(earningRate, lottoPrizes);
+        double earningRate = (double) earnMoney / (double) totalMoney;
+        // 수익률 계산
+
+        return new LottoCheckResponse(earningRate, lottoPrizeCounts);
     }
 }
