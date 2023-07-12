@@ -14,27 +14,27 @@ public class LottoTicket {
 
     public LottoTicket(NumberGenerator numberGenerator) {
         Objects.requireNonNull(numberGenerator, "numberGeneartor는 Null이 되면 안됩니다.");
-        this.values = initLottoNumbers(numberGenerator.generateDistinctNumbers(LOTTO_NUMBERS_SIZE));
+        this.values = initValues(numberGenerator.generateDistinctNumbers(LOTTO_NUMBERS_SIZE));
     }
 
     LottoTicket(Set<Integer> values) {
-        this.values = initLottoNumbers(values);
+        this.values = initValues(values);
     }
 
-    private Set<LottoNumber> initLottoNumbers(Set<Integer> lottoNumbers) {
-        assertLottoNumbers(lottoNumbers);
-        return lottoNumbers.stream()
+    private Set<LottoNumber> initValues(Set<Integer> values) {
+        assertValues(values);
+        return values.stream()
             .map(LottoNumber::valueOf)
             .collect(Collectors.toSet());
     }
 
-    private void assertLottoNumbers(Set<Integer> lottoNumbers) {
-        Objects.requireNonNull(lottoNumbers, "lottoNumbers는 Null이 되면 안됩니다.");
+    private void assertValues(Set<Integer> values) {
+        Objects.requireNonNull(values, "values는 Null이 되면 안됩니다.");
 
-        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
+        if (values.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(
-                String.format("lottoNumbers의 size는 %d 이여야 합니다. lottoNumbers.size() \"%d\"", LOTTO_NUMBERS_SIZE,
-                    lottoNumbers.size()));
+                String.format("values의 size는 %d 이여야 합니다. values.size() \"%d\"", LOTTO_NUMBERS_SIZE,
+                    values.size()));
         }
     }
 
