@@ -17,10 +17,6 @@ public class LottoNumber {
 
     private final int value;
 
-    private LottoNumber() {
-        throw new UnsupportedOperationException("생성자를 호출할 수 없습니다. \"LottoNumber()\"");
-    }
-
     private LottoNumber(int value) {
         this.value = value;
     }
