@@ -21,12 +21,12 @@ public class LottoResults {
         lottoResults.put(lottoRank, lottoResults.getOrDefault(lottoRank, DEFAULT_VALUE) + count);
     }
 
-    public long sumPrice() {
+    public Money sumPrice() {
         long sum = DEFAULT_VALUE;
         for (LottoRank lottoRank : lottoResults.keySet()) {
             sum += lottoResults.getOrDefault(lottoRank, DEFAULT_VALUE) * lottoRank.getPrice();
         }
-        return sum;
+        return new Money(sum);
     }
 
     @Override
