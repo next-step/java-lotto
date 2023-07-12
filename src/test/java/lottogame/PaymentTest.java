@@ -16,7 +16,8 @@ public class PaymentTest {
         String value = "aaa";
 
         assertThatExceptionOfType(NumberFormatException.class)
-            .isThrownBy(() -> new Payment(value));
+            .isThrownBy(() -> new Payment(value))
+            .withMessage("숫자를 입력해야 합니다");
     }
 
     @DisplayName("null이면 에러가 발생한다")
@@ -26,7 +27,7 @@ public class PaymentTest {
 
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new Payment(value))
-            .withMessage("숫자를 입력해야 합니다");
+            .withMessage("값을 입력해 주세요");
     }
 
     @DisplayName("비어있거나 공백인 경우 에러가 발생한다")
@@ -35,7 +36,7 @@ public class PaymentTest {
     void 투입_금액_검증_실패_공백(String value) {
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new Payment(value))
-            .withMessage("숫자를 입력해야 합니다");
+            .withMessage("값을 입력해 주세요");
     }
 
     @DisplayName("투입한 금액이 1,000원 미만이면 예외 발생한다")
