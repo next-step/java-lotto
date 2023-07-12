@@ -21,7 +21,7 @@ public class OutputView {
     }
 
     private static void printLotto(final Lotto lotto) {
-        String content = lotto.getLottoNumbers().stream()
+        final String content = lotto.getLottoNumbers().stream()
                 .map(LottoNumber::getValue)
                 .sorted()
                 .map(String::valueOf)
@@ -42,7 +42,7 @@ public class OutputView {
     }
 
     private static void printEachResult(final Rank rank, final Long count) {
-        String result = String.format(
+        final String result = String.format(
                 "%d개 일치%s(%d원)- %d개",
                 rank.getMatchLottoNumber(),
                 rank.containsBonus() ? ", 보너스 볼 일치" : " ",
@@ -53,9 +53,9 @@ public class OutputView {
     }
 
     private static void printRateOfReturn(final LottoResult lottoResult, final long money) {
-        double rateOfReturn = lottoResult.calculateRateOfReturn(money);
+        final double rateOfReturn = lottoResult.calculateRateOfReturn(money);
 
-        String result = String.format("총 수익률은 %.2f입니다.", Math.floor(rateOfReturn * 100) / 100);
+        final String result = String.format("총 수익률은 %.2f입니다.", Math.floor(rateOfReturn * 100) / 100);
         System.out.println(result);
     }
 }

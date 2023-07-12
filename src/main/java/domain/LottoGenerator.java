@@ -21,7 +21,7 @@ public class LottoGenerator {
 
     public static List<Lotto> generateAutomatically(final long money) {
         validate(money);
-        List<Lotto> lottos = new ArrayList<>();
+        final List<Lotto> lottos = new ArrayList<>();
         for (long count = 0, maxCount = money / MONEY_UNIT; count < maxCount; count++) {
             lottos.add(auto());
         }

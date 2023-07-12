@@ -40,7 +40,7 @@ public class LottoTest {
     @DisplayName("로또 번호가 중복일 경우 IllegalArgumentException을 던진다.")
     void createFailWithDuplicatedLottoNumber() {
         /* given */
-        List<Integer> duplicatedNumbers = List.of(1, 2, 3, 4, 5, 5);
+        final List<Integer> duplicatedNumbers = List.of(1, 2, 3, 4, 5, 5);
 
         /* when & then */
         assertThatThrownBy(() -> new Lotto(duplicatedNumbers)).isInstanceOf(IllegalArgumentException.class);

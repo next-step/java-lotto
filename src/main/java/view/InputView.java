@@ -13,7 +13,7 @@ public class InputView {
     public static long readMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         try {
-            long money = Long.parseLong(scanner.nextLine());
+            final long money = Long.parseLong(scanner.nextLine());
             validate(money);
 
             return money;
@@ -32,7 +32,7 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         try {
-            String[] numbers = scanner.nextLine().split(NUMBER_SPLIT_DELIMITER);
+            final String[] numbers = scanner.nextLine().split(NUMBER_SPLIT_DELIMITER);
 
             return Arrays.stream(numbers)
                     .map(Integer::valueOf)
@@ -46,7 +46,7 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요.");
 
         try {
-            int number = Integer.parseInt(scanner.nextLine());
+            final int number = Integer.parseInt(scanner.nextLine());
             System.out.println();
 
             return number;

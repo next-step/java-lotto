@@ -18,10 +18,10 @@ public class LottoApplication {
 
     private static void run() {
         // 가격 입력
-        long money = InputView.readMoney();
+        final long money = InputView.readMoney();
 
         // 로또 만들고
-        List<Lotto> lottos = LottoGenerator.generateAutomatically(money);
+        final List<Lotto> lottos = LottoGenerator.generateAutomatically(money);
 
         // 구매 결과 출력
         OutputView.printLottosSize(lottos);
@@ -30,19 +30,19 @@ public class LottoApplication {
         OutputView.printLottos(lottos);
 
         // 당첨 번호 입력
-        List<Integer> lottoNumbers = InputView.readLottoNumbers();
-        Integer lottoNumber = InputView.readLottoNumber();
+        final List<Integer> lottoNumbers = InputView.readLottoNumbers();
+        final Integer lottoNumber = InputView.readLottoNumber();
 
         // 게임 진행해서
-        LottoResult lottoResult = play(lottos, lottoNumbers, lottoNumber);
+        final LottoResult lottoResult = play(lottos, lottoNumbers, lottoNumber);
 
         // 결과 출력
         OutputView.printStatistic(lottoResult, money);
     }
 
     private static LottoResult play(final List<Lotto> target, final List<Integer> lottoNumbers, final Integer lottoNumber) {
-        Lottos lottos = new Lottos(target);
-        WinningLotto winningLotto = new WinningLotto(new Lotto(lottoNumbers), new LottoNumber(lottoNumber));
+        final Lottos lottos = new Lottos(target);
+        final WinningLotto winningLotto = new WinningLotto(new Lotto(lottoNumbers), new LottoNumber(lottoNumber));
 
         return new LottoResult(lottos.checkAllLottoResult(winningLotto));
     }

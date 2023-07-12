@@ -15,8 +15,8 @@ public class WinningLotto {
     }
 
     public Rank resolveRank(final Lotto target) {
-        long matchLottoNumber = target.countMatchLottoNumber(lotto);
-        boolean containsBonus = target.containsLottoNumber(bonus);
+        final long matchLottoNumber = target.countMatchLottoNumber(lotto);
+        final boolean containsBonus = target.containsLottoNumber(bonus);
 
         return Rank.from(matchLottoNumber, containsBonus);
     }
