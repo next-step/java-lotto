@@ -1,7 +1,9 @@
 package lottogame.domain;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoResult {
 
@@ -13,8 +15,14 @@ public class LottoResult {
         this.lottoBonus = new LottoBonus(bonusNumber, this.lottoTicket);
     }
 
-    public LottoPrize checkLottoTicket(LottoTicket lottoTicket) {
-        return LottoPrize.from(this.lottoTicket.getMatchedCount(lottoTicket), lottoBonus.isContained(lottoTicket));
+    public List<LottoPrize> toLottoPrizes(List<LottoTicket> lottoTickets) {
+        return lottoTickets.stream()
+            .map(this::toLottoPrize)
+            .collect(Collectors.toList());
+    }
+
+    private LottoPrize toLottoPrize(LottoTicket lottoTicket) {
+        return LottoPrize.of(this.lottoTicket.getMatchedCount(lottoTicket), lottoBonus.isContained(lottoTicket));
     }
 
     @Override

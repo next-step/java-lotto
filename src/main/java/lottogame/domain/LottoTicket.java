@@ -7,6 +7,7 @@ import lottogame.domain.spi.NumberGenerator;
 
 public class LottoTicket {
 
+    public static final int PURCHASABLE_UNIT = 1000;
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final Set<LottoNumber> lottoNumbers;
