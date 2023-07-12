@@ -21,12 +21,13 @@ public class LottoService {
     private Lottos generateLottos() {
         int count = payment.getLottoCount();
         List<Lotto> lottos = new ArrayList<>();
-        List<Integer> list = IntStream.range(1, 45 + 1)
+        List<Integer> lottoPossibleNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER,
+                LOTTO_MAX_NUMBER)
             .boxed()
             .collect(Collectors.toList());
         for (int i = 0; i < count; i++) {
-            Collections.shuffle(list);
-            lottos.add(new Lotto(list.subList(0, 6)));
+            Collections.shuffle(lottoPossibleNumbers);
+            lottos.add(new Lotto(lottoPossibleNumbers.subList(0, LOTTO_PICK_COUNT)));
         }
         return new Lottos(lottos);
     }
