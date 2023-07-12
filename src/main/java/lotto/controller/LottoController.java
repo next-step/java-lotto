@@ -10,8 +10,6 @@ import lotto.dto.MoneyRequestDto;
 import lotto.dto.WinningNumbersRequestDto;
 import lotto.service.LottoService;
 
-import java.util.Objects;
-
 public class LottoController {
 
     private final LottoService lottoService;
@@ -41,7 +39,7 @@ public class LottoController {
     }
 
     private void validateNullSafe() {
-        if (Objects.isNull(money) || Objects.isNull(lottos)) {
+        if (money == null || lottos == null) {
             throw new IllegalStateException("로또를 먼저 구매해야 합니다.");
         }
     }
