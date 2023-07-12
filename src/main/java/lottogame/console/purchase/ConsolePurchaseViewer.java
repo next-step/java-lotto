@@ -2,6 +2,7 @@ package lottogame.console.purchase;
 
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import lottogame.controller.purchase.spi.PurchaseViewer;
 import lottogame.domain.LottoTicket;
@@ -22,10 +23,10 @@ public class ConsolePurchaseViewer implements PurchaseViewer {
         return stringBuilder.toString();
     }
 
-    private void parseLottoTicket(Set<Integer> lottoTickets, StringBuilder stringBuilder) {
+    private void parseLottoTicket(Set<Integer> lottoTicket, StringBuilder stringBuilder) {
         stringBuilder.append("[");
-        stringBuilder.append(lottoTickets.stream()
-            .map(lottoTicket -> Integer.toString(lottoTicket))
+        stringBuilder.append(new TreeSet<>(lottoTicket).stream()
+            .map(lottoNumber -> Integer.toString(lottoNumber))
             .collect(Collectors.joining(", ")));
         stringBuilder.append("]\n");
     }
