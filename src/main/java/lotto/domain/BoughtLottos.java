@@ -15,8 +15,8 @@ public class BoughtLottos {
 
     public LottoResults winningResults(final Lotto winningLotto, final Ball bonusBall) {
         return new LottoResults(lottos.stream()
-                     .map(lotto -> lotto.compareWinningLotto(winningLotto, bonusBall))
-                     .collect(Collectors.toList()));
+                .map(lotto -> lotto.compareWinningLotto(winningLotto, bonusBall))
+                .collect(Collectors.toList()));
     }
 
     public int getCount() {

@@ -11,8 +11,11 @@ public class SequenceLottoGenerateStrategy implements LottoGenerateStrategy {
         if (sequenceStartIndex + Lotto.SIZE > Ball.MAX_NUMBER) {
             sequenceStartIndex = 0;
         }
+
         Lotto lotto = new Lotto(balls.subList(sequenceStartIndex, sequenceStartIndex + Lotto.SIZE));
+
         sequenceStartIndex += Lotto.SIZE;
+
         return lotto;
     }
 }

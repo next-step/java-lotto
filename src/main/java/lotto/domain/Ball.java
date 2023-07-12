@@ -51,7 +51,9 @@ public class Ball implements Comparable<Ball> {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
+
         Ball ball = (Ball) o;
+
         return value == ball.value;
     }
 

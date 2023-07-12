@@ -49,9 +49,11 @@ public class LottoTest {
 
     static List<Ball> getBalls(final String... args) {
         final List<Ball> balls = new ArrayList<>();
+
         for (String arg : args) {
             balls.add(new Ball(arg));
         }
+
         return balls;
     }
 }

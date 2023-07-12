@@ -15,6 +15,7 @@ public class LottoGenerator {
     public LottoGenerator(final LottoGenerateStrategy lottoGenerateStrategy) {
         this.lottoGenerateStrategy = lottoGenerateStrategy;
         this.balls = new ArrayList<>();
+
         for (int i = Ball.MIN_NUMBER; i <= Ball.MAX_NUMBER; i++) {
             this.balls.add(new Ball(i));
         }
@@ -23,6 +24,7 @@ public class LottoGenerator {
     public BoughtLottos generate(final Money money) {
         final int count = money.getValue() / Lotto.PRICE;
         final List<Lotto> boughtLottos = new ArrayList<>();
+
         for (int i = 0; i < count; i++) {
             boughtLottos.add(lottoGenerateStrategy.generate(balls));
         }

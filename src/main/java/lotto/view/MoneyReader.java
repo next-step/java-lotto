@@ -9,7 +9,9 @@ public class MoneyReader {
 
     public Money readMoney() {
         System.out.println(INPUT_MONEY_GUIDE_MESSAGE);
+
         Scanner scanner = new Scanner(System.in);
+
         return new Money(scanner.nextLine());
     }
 }

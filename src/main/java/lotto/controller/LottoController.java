@@ -32,11 +32,13 @@ public class LottoController {
 
     public void startLotto() {
         Money money = moneyReader.readMoney();
+
         LottoGenerator lottoGenerator = new LottoGenerator();
         BoughtLottos boughtLottos = lottoGenerator.generate(money);
         boughtLottosWriter.printBoughtLottos(boughtLottos);
 
         Lotto winningLotto = lottoReader.readWinningLotto();
+
         Ball bonusBall = lottoReader.readBonusBall();
 
         LottoResults lottoResults = boughtLottos.winningResults(winningLotto, bonusBall);

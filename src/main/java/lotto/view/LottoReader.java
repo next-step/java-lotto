@@ -16,18 +16,24 @@ public class LottoReader {
 
     public Lotto readWinningLotto() {
         System.out.println(INPUT_WINNING_LOTTO_NUMBERS_MESSAGE);
+
         Scanner scanner = new Scanner(System.in);
         List<Ball> winningLottoBalls = new ArrayList<>();
+
         String winningLottoNumbers = scanner.nextLine().replace(SPACE, EMPTY_STRING);
+
         for (String winningLottoNumber : winningLottoNumbers.split(DELIMITER)) {
             winningLottoBalls.add(new Ball(winningLottoNumber));
         }
+
         return new Lotto(winningLottoBalls);
     }
 
     public Ball readBonusBall() {
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
+
         Scanner scanner = new Scanner(System.in);
+
         return new Ball(scanner.nextLine());
     }
 }

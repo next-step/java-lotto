@@ -28,10 +28,9 @@ public class BoughtLottosTest {
         lottos.add(new Lotto(LottoTest.getBalls("1", "2", "3", "4", "5", "6")));
         lottos.add(new Lotto(LottoTest.getBalls("1", "2", "3", "4", "5", "6")));
 
-        /* when */
         BoughtLottos boughtLottos = new BoughtLottos(lottos);
 
-        /* then */
+        /* when & then */
         assertThat(boughtLottos.getCount()).isEqualTo(lottos.size());
     }
 
@@ -47,8 +46,9 @@ public class BoughtLottosTest {
         lottos.add(new Lotto(LottoTest.getBalls("1", "2", "3", "4", "5", "7")));
         lottos.add(new Lotto(LottoTest.getBalls("8", "9", "10", "11", "12", "13")));
 
-        /* when */
         BoughtLottos boughtLottos = new BoughtLottos(lottos);
+
+        /* when */
         LottoResults lottoResults =
                 boughtLottos.winningResults(winningLotto, bonusBall);
 

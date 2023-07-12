@@ -15,9 +15,9 @@ public class LottoGeneratorTest {
     void lottoGenerator_amountToLotto(final String value) {
         /* given */
         final Money money = new Money(value);
+        LottoGenerator lottoGenerator = new LottoGenerator();
 
         /* when */
-        LottoGenerator lottoGenerator = new LottoGenerator();
         BoughtLottos boughtLottos = lottoGenerator.generate(money);
 
         /* then */

@@ -31,8 +31,8 @@ public enum WinningCriteria {
 
     public static WinningCriteria winningResult(final int matchCount, final boolean isMatchBonus) {
         return Arrays.stream(WinningCriteria.values())
-                     .filter(value -> value.matchCount == matchCount && value.bonusResults.contains(isMatchBonus))
-                     .findAny().orElse(NONE);
+                .filter(value -> value.matchCount == matchCount && value.bonusResults.contains(isMatchBonus))
+                .findAny().orElse(NONE);
     }
 
     public int getMatchCount() {

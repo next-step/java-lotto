@@ -8,13 +8,13 @@ public class LottoResult {
     private final boolean isMatchBonus;
     private final WinningCriteria winningCriteria;
 
-    public LottoResult(int matchCount, boolean isMatchBonus, WinningCriteria winningCriteria) {
+    public LottoResult(final int matchCount, final boolean isMatchBonus, final WinningCriteria winningCriteria) {
         this.matchCount = matchCount;
         this.isMatchBonus = isMatchBonus;
         this.winningCriteria = winningCriteria;
     }
 
-    public LottoResult(int matchCount, boolean isMatchBonus) {
+    public LottoResult(final int matchCount, final boolean isMatchBonus) {
         this(matchCount, isMatchBonus, WinningCriteria.winningResult(matchCount, isMatchBonus));
     }
 

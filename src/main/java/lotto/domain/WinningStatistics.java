@@ -44,7 +44,7 @@ public class WinningStatistics {
         return sum;
     }
 
-    public int getRank(WinningCriteria criteria) {
+    public int getRank(final WinningCriteria criteria) {
         return ranks.get(criteria);
     }
 

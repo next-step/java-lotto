@@ -21,14 +21,15 @@ public class Money {
         validateRangeOfMoney(value);
     }
 
-    private void validateNumeric(String value) {
+    private void validateNumeric(final String value) {
         if (!value.matches(NUMBER_PATTERN)) {
             throw new IllegalArgumentException(NOT_NUMERIC_EXCEPTION_MESSAGE);
         }
     }
 
-    private void validateRangeOfMoney(String value) {
+    private void validateRangeOfMoney(final String value) {
         int money = Integer.parseInt(value);
+
         if (money < MIN_PURCHASE_MONEY || MAX_PURCHASE_MONEY < money) {
             throw new IllegalArgumentException(MONEY_RANGE_EXCEPTION_MESSAGE);
         }
