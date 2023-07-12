@@ -12,7 +12,7 @@ public class WinningStatisticsWriter {
         System.out.println("당첨 통계");
         System.out.println("-----------");
 
-        final List<LottoRule> lottoRules = Arrays.asList(LottoRule.values());정
+        final List<LottoRule> lottoRules = Arrays.asList(LottoRule.values());
         Collections.reverse(lottoRules);
 
         for (LottoRule lottoRule : lottoRules) {
