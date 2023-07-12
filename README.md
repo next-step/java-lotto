@@ -142,3 +142,4 @@ method 내 티켓 비교하기
 
 리스트 로또 티켓이 들어와서
 수익율,prize마다의 갯수를 반환한다
+LottoPrize.RELATED 리팩토링 해야할지?
