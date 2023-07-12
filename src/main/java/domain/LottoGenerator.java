@@ -10,7 +10,7 @@ public class LottoGenerator {
 
     public static final int MONEY_UNIT = 1000;
     private static final List<Integer> candidates =
-            IntStream.range(LottoNumber.START_INCLUSIVE, LottoNumber.END_EXCLUSIVE)
+            IntStream.rangeClosed(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE)
                     .boxed()
                     .collect(Collectors.toList());
 

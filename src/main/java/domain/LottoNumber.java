@@ -1,16 +1,20 @@
 package domain;
 
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class LottoNumber {
 
-    static final int START_INCLUSIVE = 1;
-    static final int END_EXCLUSIVE = 46;
+    static final int MIN_VALUE = 1;
+    static final int MAX_VALUE = 45;
+
     private final int value;
 
     public LottoNumber(final int value) {
-        if (value < START_INCLUSIVE || value >= END_EXCLUSIVE) {
-            throw new IllegalArgumentException("로또 번호는 1 이상 46 미만의 자연수여야 합니다.");
+        if (value < MIN_VALUE || value > MAX_VALUE) {
+            throw new IllegalArgumentException(
+                    String.format("로또 번호는 %d 이상 %d 미만의 자연수여야 합니다.", MIN_VALUE, MAX_VALUE)
+            );
         }
 
         this.value = value;
@@ -31,5 +35,12 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", LottoNumber.class.getSimpleName() + "[", "]")
+                .add("value=" + value)
+                .toString();
     }
 }

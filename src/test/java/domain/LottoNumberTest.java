@@ -22,7 +22,7 @@ public class LottoNumberTest {
 
     @ValueSource(ints = {-5, 0, 46})
     @ParameterizedTest
-    @DisplayName("로또 번호의 값이 정상 범위 밖에 있는 경우 IllegalArgumentException을 던진다.")
+    @DisplayName("허용 범위 밖의 값으로 로또 번호를 생성하면 IllegalArgumentException을 던진다.")
     void createFailWithIllegalArgumentException(final int value) {
         /* given */
 
