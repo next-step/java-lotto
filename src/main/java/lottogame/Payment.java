@@ -4,7 +4,7 @@ import java.text.MessageFormat;
 
 public class Payment {
 
-    private static final int MINIMUM_MONEY = 1_000;
+    private static final int LOTTO_PRICE = 1_000;
     private final int money;
 
     public Payment(String text) {
@@ -15,9 +15,9 @@ public class Payment {
     }
 
     private void validateRange(int value) {
-        if (value < MINIMUM_MONEY) {
+        if (value < LOTTO_PRICE) {
             throw new IllegalArgumentException(
-                MessageFormat.format("{0}원 이상 투입해 주세요", MINIMUM_MONEY));
+                MessageFormat.format("{0}원 이상 투입해 주세요", LOTTO_PRICE));
         }
     }
 
@@ -36,7 +36,7 @@ public class Payment {
     }
 
     public int getLottoCount() {
-        return (money / MINIMUM_MONEY);
+        return (money / LOTTO_PRICE);
     }
 
     public int getMoney() {
