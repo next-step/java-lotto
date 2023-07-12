@@ -20,9 +20,8 @@ public final class LottoController {
     }
 
     public void run() {
-        final LottoService lottoService;
         int inputMoney = lottoInputView.inputMoney();
-        lottoService = new LottoService(inputMoney, RandomNumbersGenerator.getInstance());
+        final LottoService lottoService = new LottoService(inputMoney, RandomNumbersGenerator.getInstance());
 
         lottoOutputView.printBuyingCount(lottoService.getLottoMoney());
         lottoOutputView.printBuyingLotto(lottoService.getLottos());

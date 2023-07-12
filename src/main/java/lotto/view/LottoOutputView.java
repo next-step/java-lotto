@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.model.domain.LottoMoney;
-import lotto.model.domain.LottoResult;
-import lotto.model.domain.Lottos;
-import lotto.model.domain.Rank;
+import lotto.model.domain.*;
 
 import java.util.stream.Collectors;
 
@@ -25,8 +22,7 @@ public final class LottoOutputView {
 
     public void printBuyingLotto(final Lottos lottos) {
         lottos.getLottos().forEach(
-                lotto -> System.out.println("[" + lotto.getNumbers().stream()
-                        .map(number -> String.valueOf(number.getValue())).collect(Collectors.joining(", ")) + "]")
+                lotto -> System.out.println("[" + toLottoOutput(lotto) + "]")
         );
         System.out.println();
     }
@@ -43,12 +39,20 @@ public final class LottoOutputView {
 
         final double profitRate = lottoResult.getProfitRate();
         System.out.printf("총 수익률은 %.2f 입니다. ", profitRate);
+        System.out.println(profitRateResult(profitRate));
+    }
 
+    private String toLottoOutput(final Lotto lotto) {
+        return lotto.getNumbers()
+                .stream()
+                .map(number -> String.valueOf(number.getValue()))
+                .collect(Collectors.joining(", "));
+    }
+
+    private String profitRateResult(final double profitRate) {
         if (profitRate < 1) {
-            System.out.println("(1 미만이므로 손해보셨습니다. 축하드립니다 ^^)");
+            return "(1 미만이므로 손해보셨습니다. 축하드립니다 ^^)";
         }
-        if (profitRate > 1) {
-            System.out.println("(1 초과이므로 이득이네요. 좋겠네요.)");
-        }
+        return "(1 이상이므로 이득이네요. 좋겠네요.)";
     }
 }

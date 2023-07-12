@@ -6,21 +6,23 @@ import java.util.stream.IntStream;
 
 public final class Lottos {
 
+    public static final int START_INCLUSIVE = 0;
+
     private final List<Lotto> lottos;
 
     public Lottos(final int size, final NumbersGenerator numberGenerator) {
-        this.lottos = IntStream.range(0, size)
+        this.lottos = IntStream.range(START_INCLUSIVE, size)
                 .mapToObj(count -> new Lotto(numberGenerator.generate()))
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    public List<Rank> matchWinningNumbers(final WinningNumbers winningNumbers) {
+        return lottos.stream()
+                .map(lotto -> lotto.checkRank(winningNumbers))
                 .collect(Collectors.toUnmodifiableList());
     }
 
     public List<Lotto> getLottos() {
         return lottos;
-    }
-
-    public List<Rank> calculateLottoResult(final WinningNumbers winningNumbers) {
-        return lottos.stream()
-                .map(lotto -> lotto.checkRank(winningNumbers))
-                .collect(Collectors.toUnmodifiableList());
     }
 }

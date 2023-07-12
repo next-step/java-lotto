@@ -53,7 +53,7 @@ public class LottosTest {
         final Lottos lottos = new Lottos(2, new FixedNumbersGenerator(generatedNumbers));
 
         // when
-        List<Rank> lottoResult = lottos.calculateLottoResult(winningNumbers);
+        List<Rank> lottoResult = lottos.matchWinningNumbers(winningNumbers);
 
         // then
         assertThat(lottoResult.stream().filter(rank -> rank.equals(expectedRank)).count()).isEqualTo(2);

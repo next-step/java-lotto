@@ -24,11 +24,7 @@ public final class LottoService {
         return this.lottoMoney.getChange();
     }
 
-    public int getCount() {
-        return this.lottoMoney.getCount();
-    }
-
     public LottoResult calculateLottoResult(final WinningNumbers winningNumbers) {
-        return new LottoResult(lottos.calculateLottoResult(winningNumbers), lottoMoney);
+        return new LottoResult(lottos.matchWinningNumbers(winningNumbers), lottoMoney);
     }
 }

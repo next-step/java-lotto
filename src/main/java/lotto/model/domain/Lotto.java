@@ -38,7 +38,9 @@ public final class Lotto {
     }
 
     private int checkMatchCount(final WinningNumbers winningNumbers) {
-        return (int) lottoNumbers.stream().filter(winningNumbers::hasWinningNumber).count();
+        return (int) lottoNumbers.stream()
+                .filter(winningNumbers::hasWinningNumber)
+                .count();
     }
 
     private boolean checkBonusBall(final WinningNumbers winningNumbers) {
