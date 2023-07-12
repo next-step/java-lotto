@@ -14,38 +14,52 @@ public class WinningStatisticsWriter {
 
         List<WinningCriteria> criterias = Arrays.asList(WinningCriteria.values());
         Collections.reverse(criterias);
-
-        for (WinningCriteria criteria : criterias) {
-            printEachStatistics(winningStatistics, criteria);
-        }
+        printStatistics(winningStatistics, criterias);
 
         final double earningRate = Math.floor(winningStatistics.getEarningRate() / 100) * 100;
+        printEarningRate(earningRate);
+    }
+
+    private void printEarningRate(final double earningRate) {
         System.out.printf("총 수익률은 %.2f 입니다.", earningRate);
-        if (earningRate >= 1) {
+
+        if (earningRate > 1) {
             System.out.println("(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
             return;
         }
-        System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        if (earningRate < 1) {
+            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+            return;
+        }
+        System.out.println("(기준이 1이기 때문에 결과적으로 본전이라는 의미임)");
+    }
+
+    private void printStatistics(WinningStatistics winningStatistics, List<WinningCriteria> criterias) {
+        for (WinningCriteria criteria : criterias) {
+            printEachStatistics(winningStatistics, criteria);
+        }
     }
 
     private void printEachStatistics(final WinningStatistics winningStatistics, final WinningCriteria criteria) {
-        if (criteria.equals(WinningCriteria.NONE)) {
-            return;
-        } else if (criteria.equals(WinningCriteria.SECOND)) {
-            System.out.println(
-                    formatToStatisticsForBonus(
-                            criteria.getMatchCount(), criteria.getPrize(), winningStatistics.getRank(criteria)));
-            return;
+        switch (criteria) {
+            case SECOND:
+                printStatisticsForBonus(
+                                criteria.getMatchCount(), criteria.getPrize(), winningStatistics.getRank(criteria));
+                return;
+
+            case FIRST:
+            case THIRD:
+            case FOURTH:
+            case FIFTH:
+                printStatistics(criteria.getMatchCount(), criteria.getPrize(), winningStatistics.getRank(criteria));
         }
-        System.out.println(
-                formatToStatistics(criteria.getMatchCount(), criteria.getPrize(), winningStatistics.getRank(criteria)));
     }
 
-    private String formatToStatisticsForBonus(final int matchCount, final int prize, final int boughtCount) {
-        return matchCount + "개 일치 , 보너스 볼 일치(" + prize + "원)- " + boughtCount + "개";
+    private void printStatisticsForBonus(final int matchCount, final int prize, final int boughtCount) {
+        System.out.println(matchCount + "개 일치 , 보너스 볼 일치(" + prize + "원)- " + boughtCount + "개");
     }
 
-    private String formatToStatistics(final int matchCount, final int prize, final int boughtCount) {
-        return matchCount + "개 일치 (" + prize + "원)- " + boughtCount + "개";
+    private void printStatistics(final int matchCount, final int prize, final int boughtCount) {
+        System.out.println(matchCount + "개 일치 (" + prize + "원)- " + boughtCount + "개");
     }
 }
