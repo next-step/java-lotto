@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomGenerator {
+public class RandomLottoGenerator {
 
     private static final int START_NUMBER = 1;
     private static final int END_NUMBER = 46;
@@ -17,7 +17,7 @@ public class RandomGenerator {
             .boxed()
             .collect(Collectors.toList());
 
-    private RandomGenerator() {
+    private RandomLottoGenerator() {
     }
 
     public static Lotto generateLotto() {

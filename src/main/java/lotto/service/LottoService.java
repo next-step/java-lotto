@@ -1,7 +1,7 @@
 package lotto.service;
 
 import lotto.domain.*;
-import lotto.util.RandomGenerator;
+import lotto.util.RandomLottoGenerator;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +12,7 @@ public class LottoService {
     public Lottos buyLotto(Money money) {
         long countLotto = money.countLotto();
         List<Lotto> lottos = LongStream.range(0, countLotto)
-                .mapToObj(l -> RandomGenerator.generateLotto())
+                .mapToObj(l -> RandomLottoGenerator.generateLotto())
                 .collect(Collectors.toList());
         return new Lottos(lottos);
     }
