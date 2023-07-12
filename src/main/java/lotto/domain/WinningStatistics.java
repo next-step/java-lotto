@@ -8,17 +8,23 @@ import java.util.Map.Entry;
 public class WinningStatistics {
 
     private static final int DEFAULT_COUNT = 0;
+    private static final String EMPTY_LOTTO_RESULTS_EXCEPTION_MESSAGE = "당첨 결과가 비어있어 통계를 낼 수 없습니다.";
 
     private final Map<WinningCriteria, Integer> ranks;
     private final long totalPrize;
-    private final int boughtLottoCount;
     private final double earningRate;
 
     public WinningStatistics(final List<LottoResult> lottoResults) {
+        validate(lottoResults);
         this.ranks = initRanks(lottoResults);
         this.totalPrize = initTotalPrize();
-        this.boughtLottoCount = lottoResults.size();
-        this.earningRate = totalPrize / (double) (boughtLottoCount * Lotto.PRICE);
+        this.earningRate = totalPrize / (double) (lottoResults.size() * Lotto.PRICE);
+    }
+
+    private void validate(final List<LottoResult> lottoResults) {
+        if (lottoResults == null || lottoResults.isEmpty()) {
+            throw new IllegalArgumentException(EMPTY_LOTTO_RESULTS_EXCEPTION_MESSAGE);
+        }
     }
 
     private Map<WinningCriteria, Integer> initRanks(final List<LottoResult> lottoResults) {
