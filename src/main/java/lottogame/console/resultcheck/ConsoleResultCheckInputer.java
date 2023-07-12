@@ -14,8 +14,8 @@ public class ConsoleResultCheckInputer implements ResultCheckInputer {
     public Set<Integer> inputWinningLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
-        return Arrays.stream(scanner.next().split(", "))
-            .map(Integer::valueOf)
+        return Arrays.stream(scanner.nextLine().split(","))
+            .map(string -> Integer.valueOf(string.strip()))
             .collect(Collectors.toSet());
     }
 

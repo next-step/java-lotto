@@ -27,6 +27,9 @@ public class LottoCheckService {
         int totalMoney = lottoPrizes.size() * LottoTicket.PURCHASABLE_UNIT;
         Map<LottoPrize, Integer> lottoPrizeCounts = new EnumMap<>(LottoPrize.class);
         for (LottoPrize lottoPrize : lottoPrizes) {
+            if (lottoPrize == LottoPrize.NONE) {
+                continue;
+            }
             earnMoney += lottoPrize.getMoney();
             lottoPrizeCounts.put(lottoPrize, lottoPrizeCounts.getOrDefault(lottoPrize, 0) + 1);
         }
