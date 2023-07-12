@@ -10,20 +10,29 @@ public final class LottoResult {
     private final EnumMap<Rank, Integer> lottoResult;
     private final double profitRate;
 
-    public LottoResult(final List<Rank> ranks, final LottoMoney lottoMoney) {
+    private LottoResult(final List<Rank> ranks, final Money purchase) {
         this.lottoResult = new EnumMap<>(Rank.class);
         ranks.forEach(rank -> this.lottoResult.put(
                 rank,
                 this.lottoResult.getOrDefault(rank, DEFAULT_VALUE) + 1
         ));
-        this.profitRate = calculateProfitRate(lottoMoney);
+        this.profitRate = calculateProfitRate(purchase);
     }
 
-    private double calculateProfitRate(final LottoMoney lottoMoney) {
-        long totalPrize = lottoResult.entrySet().stream()
+    public static LottoResult of(final List<Rank> ranks, final Money purchase) {
+        return new LottoResult(ranks, purchase);
+    }
+
+    private double calculateProfitRate(final Money purchase) {
+        final Money totalPrize = Money.valueOf(calculateTotalPrize());
+        return totalPrize.divide(purchase);
+    }
+
+    private long calculateTotalPrize() {
+        return lottoResult.entrySet()
+                .stream()
                 .mapToLong(entry -> Rank.getTotalPrize(entry.getKey(), entry.getValue()))
                 .sum();
-        return totalPrize / lottoMoney.getSpentMoney();
     }
 
     public int getCount(final Rank rank) {

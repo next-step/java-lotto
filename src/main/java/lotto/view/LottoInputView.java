@@ -17,9 +17,9 @@ public final class LottoInputView {
         return INSTANCE;
     }
 
-    public int inputMoney() {
+    public long inputPurchase() {
         System.out.println("구입금액을 입력해 주세요.");
-        return Integer.parseInt(SCANNER.nextLine());
+        return Long.parseLong(SCANNER.nextLine());
     }
 
     public List<Integer> inputWinningNumbers() {

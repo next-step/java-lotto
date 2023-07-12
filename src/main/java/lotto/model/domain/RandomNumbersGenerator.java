@@ -25,7 +25,7 @@ public final class RandomNumbersGenerator implements NumbersGenerator {
 
     @Override
     public List<Integer> generate() {
-        return sort(shuffleBaseNumbers().subList(MINIMUM_INDEX, Lotto.LOTTO_NUMBERS_SIZE));
+        return sort(shuffleBaseNumbers().subList(MINIMUM_INDEX, Lotto.SIZE));
     }
 
     private static List<Integer> sort(final List<Integer> numbers) {

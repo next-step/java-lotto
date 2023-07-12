@@ -15,11 +15,6 @@ public final class LottoOutputView {
         return INSTANCE;
     }
 
-    public void printBuyingCount(final LottoMoney lottoMoney) {
-        System.out.println(lottoMoney.getCount() + "개를 구매했습니다.");
-        System.out.println("거스름돈은 " + lottoMoney.getChange() + "원 입니다.");
-    }
-
     public void printBuyingLotto(final Lottos lottos) {
         lottos.getLottos().forEach(
                 lotto -> System.out.println("[" + toLottoOutput(lotto) + "]")
@@ -28,6 +23,7 @@ public final class LottoOutputView {
     }
 
     public void printLottoResult(final LottoResult lottoResult) {
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("----------------");
 
@@ -54,5 +50,14 @@ public final class LottoOutputView {
             return "(1 미만이므로 손해보셨습니다. 축하드립니다 ^^)";
         }
         return "(1 이상이므로 이득이네요. 좋겠네요.)";
+    }
+
+    public void printSizeOfLottos(final Lottos lottos) {
+        final int lottoSize = lottos.getLottos().size();
+        System.out.println(lottoSize + "개를 구매했습니다.");
+    }
+
+    public void printChangeOfPurchase(final Money change) {
+        System.out.printf("거스름돈은 %d원 입니다.", change.getValue()).println();
     }
 }

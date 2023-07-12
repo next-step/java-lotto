@@ -1,16 +1,18 @@
 package lotto.model.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class Lotto {
 
-    public static final int LOTTO_NUMBERS_SIZE = 6;
+    public static final int SIZE = 6;
+    public static final int COST = 1_000;
 
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(final List<Integer> numbers) {
+    private Lotto(final List<Integer> numbers) {
         validateSize(numbers);
         validateDistinction(numbers);
 
@@ -19,32 +21,36 @@ public final class Lotto {
                 .collect(Collectors.toUnmodifiableList());
     }
 
+    public static Lotto create(final List<Integer> numbers) {
+        return new Lotto(numbers);
+    }
+
     private void validateSize(final List<Integer> numbers) {
-        if (numbers.size() != LOTTO_NUMBERS_SIZE) {
+        if (numbers.size() != SIZE) {
             throw new IllegalArgumentException("로또는 6개의 번호를 가져야합니다.");
         }
     }
 
     private void validateDistinction(final List<Integer> numbers) {
-        if (numbers.stream().distinct().count() != LOTTO_NUMBERS_SIZE) {
+        if (distinctSize(numbers) != SIZE) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
     }
 
-    public Rank checkRank(final WinningNumbers winningNumbers) {
-        final int matchCount = checkMatchCount(winningNumbers);
-        final boolean hasBonusBall = checkBonusBall(winningNumbers);
-        return Rank.valueOf(matchCount, hasBonusBall);
+    public int checkMatchCount(final Lotto other) {
+        final List<LottoNumber> copyLottoNumbers = new ArrayList<>(lottoNumbers);
+        copyLottoNumbers.retainAll(other.lottoNumbers);
+        return copyLottoNumbers.size();
     }
 
-    private int checkMatchCount(final WinningNumbers winningNumbers) {
-        return (int) lottoNumbers.stream()
-                .filter(winningNumbers::hasWinningNumber)
+    public boolean contains(final LottoNumber bonusBall) {
+        return lottoNumbers.contains(bonusBall);
+    }
+
+    private static long distinctSize(final List<Integer> numbers) {
+        return numbers.stream()
+                .distinct()
                 .count();
-    }
-
-    private boolean checkBonusBall(final WinningNumbers winningNumbers) {
-        return lottoNumbers.contains(winningNumbers.getBonusBall());
     }
 
     public List<LottoNumber> getNumbers() {
