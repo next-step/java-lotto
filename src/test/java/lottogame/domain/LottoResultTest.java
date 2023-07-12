@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 @DisplayName("LottoResult 클래스")
 class LottoResultTest {
 
+    private static final int BONUS_NUMBER = 7;
     private final Set<Integer> lottoNumbers = Set.of(1, 2, 3, 4, 5, 6);
-    private final int bonusNumber = 7;
 
     @Nested
     @DisplayName("new 생성자는")
@@ -25,9 +25,8 @@ class LottoResultTest {
             @Test
             @DisplayName("생성한다.")
             void It_Create() {
-                assertThatCode(() -> new LottoResult(lottoNumbers, bonusNumber)).doesNotThrowAnyException();
+                assertThatCode(() -> new LottoResult(lottoNumbers, BONUS_NUMBER)).doesNotThrowAnyException();
             }
         }
     }
-
 }

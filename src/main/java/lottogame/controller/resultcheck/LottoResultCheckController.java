@@ -29,5 +29,4 @@ public class LottoResultCheckController {
 
         resultCheckViewer.draw(lottoPrizes);
     }
-
 }
