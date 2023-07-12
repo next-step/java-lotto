@@ -69,10 +69,6 @@ public enum LottoPrize {
         return matchedCount;
     }
 
-    public boolean isBonusMatched() {
-        return isBonusMatched;
-    }
-
     private static final class MagicNumberSupporter {
 
         private static final boolean BONUS_NOT_RELATED = false;
