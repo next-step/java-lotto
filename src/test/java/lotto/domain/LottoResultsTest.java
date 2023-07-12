@@ -11,7 +11,7 @@ class LottoResultsTest {
     void sumPrice() {
         LottoResults lottoResults = new LottoResults();
         lottoResults.add(LottoRank.FIRST, 1);
-        Money price = lottoResults.sumPrize();
+        Money price = lottoResults.sumTotalPrize();
         Assertions.assertThat(price).isEqualTo(new Money(2_000_000_000L));
     }
 }

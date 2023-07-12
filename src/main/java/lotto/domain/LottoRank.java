@@ -57,8 +57,8 @@ public enum LottoRank {
                 .orElseThrow(() -> new IllegalArgumentException("로또 당첨 정보가 부정확합니다."));
     }
 
-    public long getPrice() {
-        return price;
+    public long sumPrize(long count) {
+        return this.price * count;
     }
 
     public abstract boolean checkLottoMatch(long matchCount, boolean bonusCount);
