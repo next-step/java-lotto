@@ -1,8 +1,5 @@
 package domain;
 
-import java.util.Arrays;
-import java.util.Map;
-
 public enum Rank {
 
     FIRST(6, false, 2_000_000_000L),
@@ -39,5 +36,17 @@ public enum Rank {
             return FIFTH;
         }
         return NONE;
+    }
+
+    public long getMatchLottoNumber() {
+        return matchLottoNumber;
+    }
+
+    public boolean containsBonus() {
+        return containsBonus;
+    }
+
+    public long getPrize() {
+        return prize;
     }
 }

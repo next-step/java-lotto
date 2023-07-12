@@ -7,11 +7,12 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final int REQUIRED_LOTTO_NUMBER_COUNT = 6;
+    static final int REQUIRED_LOTTO_NUMBER_COUNT = 6;
 
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(final List<Integer> numbers) {
+        // TODO: 중복 검사 리팩토링
         if (numbers.size() != REQUIRED_LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
@@ -32,6 +33,10 @@ public class Lotto {
 
     public boolean containsLottoNumber(final LottoNumber bonus) {
         return lottoNumbers.contains(bonus);
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override
