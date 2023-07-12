@@ -46,7 +46,7 @@ public class LottoResult {
     @Override
     public String toString() {
         return "LottoResult{" +
-            "lottoNumbers=" + lottoTicket +
+            "lottoTicket=" + lottoTicket +
             ", lottoBonus=" + lottoBonus +
             '}';
     }

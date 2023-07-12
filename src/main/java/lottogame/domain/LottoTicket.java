@@ -10,15 +10,15 @@ public class LottoTicket {
     public static final int PURCHASABLE_UNIT = 1000;
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
-    private final Set<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> values;
 
     public LottoTicket(NumberGenerator numberGenerator) {
         Objects.requireNonNull(numberGenerator, "numberGeneartor는 Null이 되면 안됩니다.");
-        this.lottoNumbers = initLottoNumbers(numberGenerator.generateDistinctNumbers(LOTTO_NUMBERS_SIZE));
+        this.values = initLottoNumbers(numberGenerator.generateDistinctNumbers(LOTTO_NUMBERS_SIZE));
     }
 
-    LottoTicket(Set<Integer> lottoNumbers) {
-        this.lottoNumbers = initLottoNumbers(lottoNumbers);
+    LottoTicket(Set<Integer> values) {
+        this.values = initLottoNumbers(values);
     }
 
     private Set<LottoNumber> initLottoNumbers(Set<Integer> lottoNumbers) {
@@ -39,17 +39,17 @@ public class LottoTicket {
     }
 
     int getMatchedCount(LottoTicket lottoTicket) {
-        return (int) lottoNumbers.stream()
+        return (int) values.stream()
             .filter(lottoTicket::contains)
             .count();
     }
 
     boolean contains(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
+        return values.contains(lottoNumber);
     }
 
-    public Set<Integer> getLottoNumbers() {
-        return lottoNumbers.stream()
+    public Set<Integer> getValues() {
+        return values.stream()
             .map(LottoNumber::getValue)
             .collect(Collectors.toSet());
     }
@@ -63,18 +63,18 @@ public class LottoTicket {
             return false;
         }
         LottoTicket that = (LottoTicket) o;
-        return Objects.equals(lottoNumbers, that.lottoNumbers);
+        return Objects.equals(values, that.values);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumbers);
+        return Objects.hash(values);
     }
 
     @Override
     public String toString() {
         return "LottoTicket{" +
-            "lottoNumbers=" + lottoNumbers +
+            "values=" + values +
             '}';
     }
 }
