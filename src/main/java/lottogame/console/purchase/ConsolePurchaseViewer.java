@@ -17,7 +17,7 @@ public class ConsolePurchaseViewer implements PurchaseViewer {
     private String parsePrintString(List<LottoTicket> lottoTickets) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        lottoTickets.forEach(lottoTicket -> parseLottoTicket(lottoTicket.getLottoNumbers(), stringBuilder));
+        lottoTickets.forEach(lottoTicket -> parseLottoTicket(lottoTicket.getValues(), stringBuilder));
 
         return stringBuilder.toString();
     }
