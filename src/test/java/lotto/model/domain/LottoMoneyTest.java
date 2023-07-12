@@ -43,4 +43,11 @@ class LottoMoneyTest {
         // given, when, then
         assertThat(new LottoMoney(money).getCount()).isEqualTo(expectedCount);
     }
+
+    @ParameterizedTest
+    @CsvSource({"1000,1000", "1001,1000", "3999,3000"})
+    void 로또_구입시_사용한_금액_반환(int money, int expectedSpentMoney) {
+        // given, when, then
+        assertThat(new LottoMoney(money).getSpentMoney()).isEqualTo(expectedSpentMoney);
+    }
 }
