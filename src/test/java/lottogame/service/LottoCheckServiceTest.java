@@ -1,6 +1,5 @@
 package lottogame.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -24,40 +23,38 @@ public class LottoCheckServiceTest {
         @DisplayName("Lotto tickets가 들어오면")
         class Context_Input_Lotto_Tickets {
 
+            private static final int PURCHASE_COUNT = 3;
+            private static final int BONUS_NUMBER = 7;
+
             private final Set<Integer> selectedLottoNumbers = Set.of(1, 2, 3, 4, 5, 6);
-            private final Integer bonusNumber = 7;
-            private final List<LottoTicket> lottoTicketRequest = getLottoTicketRequest();
             private final LottoCheckService lottoCheckService = new LottoCheckService();
-            private final LottoCheckResponse expectedLottoCheckResponse = getExpectedLottoCheckResponse(3,
-                List.of(LottoPrize.FIRST, LottoPrize.SECOND));
+            private final List<LottoTicket> lottoTicketRequest = getLottoTicketRequest();
+            private final LottoCheckResponse expectedLottoCheckResponse = getExpectedLottoCheckResponse();
 
             @Test
             @DisplayName("수익률와, 상별 갯수를 반환한다")
             void It_Return_Earning_Rate_And_Number_Of_Prize() {
                 Assertions.assertThat(
-                        lottoCheckService.checkResult(lottoTicketRequest, selectedLottoNumbers, bonusNumber))
+                        lottoCheckService.checkResult(lottoTicketRequest, selectedLottoNumbers, BONUS_NUMBER))
                     .isEqualTo(expectedLottoCheckResponse);
             }
 
             private List<LottoTicket> getLottoTicketRequest() {
                 LottoTicket firstPrizeLottoTicket = new LottoTicket((count) -> selectedLottoNumbers);
                 LottoTicket secondPrizeLottoTicket = new LottoTicket(
-                    (count) -> Set.of(1, 2, 3, 4, 5, bonusNumber));
+                    (count) -> Set.of(1, 2, 3, 4, 5, BONUS_NUMBER));
                 LottoTicket nonePrizeLottoTicket = new LottoTicket(
                     (count) -> Set.of(8, 9, 10, 11, 12, 13));
 
                 return List.of(firstPrizeLottoTicket, secondPrizeLottoTicket, nonePrizeLottoTicket);
             }
 
-            private LottoCheckResponse getExpectedLottoCheckResponse(int purchaseCount, List<LottoPrize> lottoPrizes) {
-                int totalMoney = purchaseCount * LottoTicket.PURCHASABLE_UNIT;
-                int earnMoney = 0;
-                Map<LottoPrize, Integer> lottoPrizeMap = new HashMap<>();
-                for (LottoPrize lottoPrize : lottoPrizes) {
-                    earnMoney += lottoPrize.getMoney();
-                    lottoPrizeMap.put(lottoPrize, lottoPrizeMap.getOrDefault(lottoPrize, 0) + 1);
-                }
-                return new LottoCheckResponse((double) earnMoney / (double) totalMoney, lottoPrizeMap);
+            private LottoCheckResponse getExpectedLottoCheckResponse() {
+                int totalMoney = PURCHASE_COUNT * LottoTicket.PURCHASABLE_UNIT;
+                int earnMoney = LottoPrize.FIRST.getMoney() + LottoPrize.SECOND.getMoney();
+
+                return new LottoCheckResponse((double) earnMoney / (double) totalMoney,
+                    Map.of(LottoPrize.FIRST, 1, LottoPrize.SECOND, 1));
             }
         }
     }
