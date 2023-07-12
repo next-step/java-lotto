@@ -4,8 +4,6 @@ import java.util.Objects;
 
 public final class Money implements Comparable<Money> {
 
-    private static final long LOTTO_PRICE = 1_000L;
-
     private final long value;
 
     private Money(final long value) {

@@ -1,7 +1,5 @@
 package lotto.model.domain;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 public final class WinningLotto {
 
