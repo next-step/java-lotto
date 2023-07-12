@@ -26,8 +26,17 @@ class MoneyTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    @DisplayName("천 단위가 아닌 값을 입력시 생성자가 예외를 던진다.")
+    void validateThousand() {
+        int notThousandMoney = 14500;
+
+        Assertions.assertThatThrownBy(() -> new Money(notThousandMoney))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @ParameterizedTest
-    @CsvSource({"1234, 1", "999, 0"})
+    @CsvSource({"2000, 2", "1000, 1"})
     @DisplayName("금액에 맞는 로또 개수를 반환한다.")
     void countLotto(long amount, long count) {
         Money money = new Money(amount);

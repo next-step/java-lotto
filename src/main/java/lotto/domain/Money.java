@@ -11,8 +11,19 @@ public class Money {
     }
 
     private void validateMoney(long money) {
+        validateMinusMoney(money);
+        validateThousandMoney(money);
+    }
+
+    private void validateMinusMoney(long money) {
         if (money < 0) {
             throw new IllegalArgumentException("돈이 음수일 수 없습니다.");
+        }
+    }
+
+    private void validateThousandMoney(long money) {
+        if (money % LOTTO_PRICE != 0L) {
+            throw new IllegalArgumentException("천 단위의 돈을 입력해야 합니다.");
         }
     }
 
