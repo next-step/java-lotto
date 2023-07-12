@@ -15,28 +15,36 @@ public class LottoCheckService {
     public LottoCheckResponse checkResult(List<LottoTicket> lottoTickets, Set<Integer> selectedLottoNumbers,
         int bonusLottoNumbers) {
         LottoResult lottoResult = new LottoResult(selectedLottoNumbers, bonusLottoNumbers);
-        return getLottoPrizes(lottoTickets, lottoResult);
+
+        List<LottoPrize> lottoPrizes = lottoTicketsToLottoPrizes(lottoTickets, lottoResult);
+        Map<LottoPrize, Integer> lottoPrizeCounts = getLottoPrizeCounts(lottoPrizes);
+
+        return new LottoCheckResponse(calculateEarningRate(lottoPrizes), lottoPrizeCounts);
     }
 
-    private LottoCheckResponse getLottoPrizes(List<LottoTicket> lottoTickets, LottoResult lottoResult) {
-        List<LottoPrize> lottoPrizes = lottoTickets.stream()
+    private List<LottoPrize> lottoTicketsToLottoPrizes(List<LottoTicket> lottoTickets, LottoResult lottoResult) {
+        return lottoTickets.stream()
             .map(lottoResult::checkLottoTicket)
             .collect(Collectors.toList());
+    }
 
+    private double calculateEarningRate(List<LottoPrize> lottoPrizes) {
         int earnMoney = 0;
         int totalMoney = lottoPrizes.size() * LottoTicket.PURCHASABLE_UNIT;
+        for (LottoPrize lottoPrize : lottoPrizes) {
+            earnMoney += lottoPrize.getMoney();
+        }
+        return (double) earnMoney / (double) totalMoney;
+    }
+
+    private Map<LottoPrize, Integer> getLottoPrizeCounts(List<LottoPrize> lottoPrizes) {
         Map<LottoPrize, Integer> lottoPrizeCounts = new EnumMap<>(LottoPrize.class);
         for (LottoPrize lottoPrize : lottoPrizes) {
             if (lottoPrize == LottoPrize.NONE) {
                 continue;
             }
-            earnMoney += lottoPrize.getMoney();
             lottoPrizeCounts.put(lottoPrize, lottoPrizeCounts.getOrDefault(lottoPrize, 0) + 1);
         }
-
-        double earningRate = (double) earnMoney / (double) totalMoney;
-        // 수익률 계산
-
-        return new LottoCheckResponse(earningRate, lottoPrizeCounts);
+        return lottoPrizeCounts;
     }
 }

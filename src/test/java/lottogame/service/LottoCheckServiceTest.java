@@ -28,8 +28,8 @@ public class LottoCheckServiceTest {
             private final Integer bonusNumber = 7;
             private final List<LottoTicket> lottoTicketRequest = getLottoTicketRequest();
             private final LottoCheckService lottoCheckService = new LottoCheckService();
-            private final LottoCheckResponse expectedLottoCheckResponse = getExpectedLottoCheckResponse(
-                List.of(LottoPrize.FIRST, LottoPrize.SECOND, LottoPrize.NONE));
+            private final LottoCheckResponse expectedLottoCheckResponse = getExpectedLottoCheckResponse(3,
+                List.of(LottoPrize.FIRST, LottoPrize.SECOND));
 
             @Test
             @DisplayName("수익률와, 상별 갯수를 반환한다")
@@ -49,8 +49,8 @@ public class LottoCheckServiceTest {
                 return List.of(firstPrizeLottoTicket, secondPrizeLottoTicket, nonePrizeLottoTicket);
             }
 
-            private LottoCheckResponse getExpectedLottoCheckResponse(List<LottoPrize> lottoPrizes) {
-                int totalMoney = lottoPrizes.size() * LottoTicket.PURCHASABLE_UNIT;
+            private LottoCheckResponse getExpectedLottoCheckResponse(int purchaseCount, List<LottoPrize> lottoPrizes) {
+                int totalMoney = purchaseCount * LottoTicket.PURCHASABLE_UNIT;
                 int earnMoney = 0;
                 Map<LottoPrize, Integer> lottoPrizeMap = new HashMap<>();
                 for (LottoPrize lottoPrize : lottoPrizes) {
