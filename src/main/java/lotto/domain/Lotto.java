@@ -52,6 +52,10 @@ public class Lotto {
         return this.balls;
     }
 
+    public boolean isContains(final Ball ball) {
+        return this.balls.contains(ball);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
