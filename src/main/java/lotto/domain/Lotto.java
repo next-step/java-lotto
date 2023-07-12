@@ -38,8 +38,11 @@ public class Lotto {
         }
     }
 
-    public LottoResult compareLottoRule(final Lotto winningLotto, final Ball bonusBall) {
-        return LottoRule.winningResult(getDuplicateBallCount(winningLotto), this.balls.contains(bonusBall));
+    public LottoResult compareLottoRule(final WinningLotto winningLotto) {
+        return LottoRule.winningResult(
+                getDuplicateBallCount(winningLotto.getLotto()),
+                this.balls.contains(winningLotto.getBonus())
+        );
     }
 
     private int getDuplicateBallCount(final Lotto lotto) {
