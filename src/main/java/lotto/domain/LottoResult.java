@@ -4,22 +4,24 @@ import java.util.Objects;
 
 public class LottoResult {
 
-    private final int matchCount;
-    private final boolean isMatchBonus;
-    private final WinningCriteria winningCriteria;
+    private final int rank;
+    private final int prize;
 
-    public LottoResult(int matchCount, boolean isMatchBonus, WinningCriteria winningCriteria) {
-        this.matchCount = matchCount;
-        this.isMatchBonus = isMatchBonus;
-        this.winningCriteria = winningCriteria;
+    public LottoResult(final LottoRule lottoRule) {
+        this(lottoRule.getRank(), lottoRule.getPrize());
     }
 
-    public LottoResult(int matchCount, boolean isMatchBonus) {
-        this(matchCount, isMatchBonus, WinningCriteria.winningResult(matchCount, isMatchBonus));
+    public LottoResult(final int rank, final int prize) {
+        this.rank = rank;
+        this.prize = prize;
     }
 
-    public WinningCriteria getWinningCriteria() {
-        return this.winningCriteria;
+    public int getRank() {
+        return this.rank;
+    }
+
+    public int getPrize() {
+        return this.prize;
     }
 
     @Override
@@ -31,11 +33,11 @@ public class LottoResult {
             return false;
         }
         LottoResult that = (LottoResult) o;
-        return matchCount == that.matchCount && isMatchBonus == that.isMatchBonus;
+        return rank == that.rank && prize == that.prize;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(matchCount, isMatchBonus);
+        return Objects.hash(rank, prize);
     }
 }
