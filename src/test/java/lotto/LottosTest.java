@@ -1,10 +1,12 @@
-package lottogame;
+package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.List;
 import java.util.Map;
+
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 public class LottosTest {
@@ -39,12 +41,15 @@ public class LottosTest {
 
         WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 16", "7");
 
-        Map<LottoMatch, Integer> resultMap = lottos.getResult(winningNumber);
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.recordResult(lottos, winningNumber);
+
+        Map<LottoMatch, Integer> resultMap = lottoResult.getResult();
 
         assertThat(resultMap)
             .containsEntry(LottoMatch.THREE_MATCH, 1)
             .containsEntry(LottoMatch.FOUR_MATCH, 0)
-            .containsEntry(LottoMatch.FIVE_BONUS_MATCH, 0)
+            .containsEntry(LottoMatch.FIVE_MATCH, 0)
             .containsEntry(LottoMatch.FIVE_BONUS_MATCH, 0)
             .containsEntry(LottoMatch.SIX_MATCH, 0);
     }
