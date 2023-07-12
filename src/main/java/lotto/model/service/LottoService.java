@@ -1,8 +1,6 @@
 package lotto.model.service;
 
-import lotto.model.domain.LottoMoney;
-import lotto.model.domain.Lottos;
-import lotto.model.domain.NumbersGenerator;
+import lotto.model.domain.*;
 
 public final class LottoService {
 
@@ -18,7 +16,19 @@ public final class LottoService {
         return this.lottos;
     }
 
+    public LottoMoney getLottoMoney() {
+        return this.lottoMoney;
+    }
+
     public int getChange() {
         return this.lottoMoney.getChange();
+    }
+
+    public int getCount() {
+        return this.lottoMoney.getCount();
+    }
+
+    public LottoResult calculateLottoResult(final WinningNumbers winningNumbers) {
+        return lottos.calculateLottoResult(winningNumbers);
     }
 }
