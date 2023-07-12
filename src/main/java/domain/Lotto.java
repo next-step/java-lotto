@@ -20,10 +20,7 @@ public class Lotto {
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
 
-        if (numbers.size() != lottoNumbers.size()) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
-        }
-
+        validateUniqueNumbers(numbers, lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -39,6 +36,12 @@ public class Lotto {
 
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    private void validateUniqueNumbers(List<Integer> numbers, Set<LottoNumber> lottoNumbers) {
+        if (numbers.size() != lottoNumbers.size()) {
+            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+        }
     }
 
     @Override

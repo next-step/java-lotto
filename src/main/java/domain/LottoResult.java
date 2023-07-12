@@ -13,6 +13,18 @@ public class LottoResult {
         ranks.forEach(this::increaseRankCount);
     }
 
+    public Long countRank(final Rank rank) {
+        return rankCount.getOrDefault(rank, 0L);
+    }
+
+    public double calculateRateOfReturn(final long money) {
+        return calculateTotalPrize() / (double) money;
+    }
+
+    private void increaseRankCount(final Rank rank) {
+        rankCount.put(rank, countRank(rank) + 1);
+    }
+
     private long calculateTotalPrize() {
         return Arrays.stream(Rank.values())
                 .mapToLong(this::calculatePrize)
@@ -20,18 +32,6 @@ public class LottoResult {
     }
 
     private long calculatePrize(final Rank rank) {
-        return rank.getPrize() * getCount(rank);
-    }
-
-    private void increaseRankCount(final Rank rank) {
-        rankCount.put(rank, getCount(rank) + 1);
-    }
-
-    public Long getCount(final Rank rank) {
-        return rankCount.getOrDefault(rank, 0L);
-    }
-
-    public double calculateRateOfReturn(final long money) {
-        return calculateTotalPrize() / (double) money;
+        return rank.getPrize() * countRank(rank);
     }
 }

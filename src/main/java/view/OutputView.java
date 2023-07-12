@@ -36,7 +36,7 @@ public class OutputView {
         Arrays.stream(Rank.values())
                 .sorted(Comparator.reverseOrder())
                 .filter(rank -> rank != Rank.NONE)
-                .forEach(rank -> printEachResult(rank, lottoResult.getCount(rank)));
+                .forEach(rank -> printEachResult(rank, lottoResult.countRank(rank)));
 
         printRateOfReturn(lottoResult, money);
     }

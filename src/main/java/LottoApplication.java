@@ -21,7 +21,7 @@ public class LottoApplication {
         final long money = InputView.readMoney();
 
         // 로또 만들고
-        final List<Lotto> lottos = LottoGenerator.generateAutomatically(money);
+        final List<Lotto> lottos = LottoGenerator.generateLottosAutomatically(money);
 
         // 구매 결과 출력
         OutputView.printLottosSize(lottos);

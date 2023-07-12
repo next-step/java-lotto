@@ -8,23 +8,26 @@ import java.util.stream.IntStream;
 
 public class LottoGenerator {
 
-    public static final int MONEY_UNIT = 1000;
+    private static final int MONEY_UNIT = 1_000;
     private static final List<Integer> candidates =
             IntStream.range(LottoNumber.START_INCLUSIVE, LottoNumber.END_EXCLUSIVE)
                     .boxed()
                     .collect(Collectors.toList());
 
-    private static Lotto auto() {
+    private static Lotto generateSingleLottoAutomatically() {
         Collections.shuffle(candidates);
         return new Lotto(candidates.subList(0, Lotto.REQUIRED_LOTTO_NUMBER_COUNT));
     }
 
-    public static List<Lotto> generateAutomatically(final long money) {
+    public static List<Lotto> generateLottosAutomatically(final long money) {
         validate(money);
+        final long lottoCount = calculateLottoCount(money);
         final List<Lotto> lottos = new ArrayList<>();
-        for (long count = 0, maxCount = money / MONEY_UNIT; count < maxCount; count++) {
-            lottos.add(auto());
+
+        for (long count = 0; count < lottoCount; count++) {
+            lottos.add(generateSingleLottoAutomatically());
         }
+
         return lottos;
     }
 
@@ -32,5 +35,9 @@ public class LottoGenerator {
         if (money % MONEY_UNIT != 0) {
             throw new IllegalArgumentException("구입금액은 " + MONEY_UNIT + "원 단위여야 합니다.");
         }
+    }
+
+    private static long calculateLottoCount(long money) {
+        return money / MONEY_UNIT;
     }
 }
