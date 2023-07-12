@@ -6,12 +6,12 @@ public class LottoNumber {
 
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
-    private static final LottoNumber[] cache;
+    private static final LottoNumber[] CACHE;
 
     static {
-        cache = new LottoNumber[MAX_LOTTO_NUMBER + 1];
+        CACHE = new LottoNumber[MAX_LOTTO_NUMBER + 1];
         for (int lottoNumber = MIN_LOTTO_NUMBER; lottoNumber <= MAX_LOTTO_NUMBER; lottoNumber++) {
-            cache[lottoNumber] = new LottoNumber(lottoNumber);
+            CACHE[lottoNumber] = new LottoNumber(lottoNumber);
         }
     }
 
@@ -27,7 +27,7 @@ public class LottoNumber {
 
     static LottoNumber valueOf(int lottoNumber) {
         assertLottoNumber(lottoNumber);
-        return cache[lottoNumber];
+        return CACHE[lottoNumber];
     }
 
     private static void assertLottoNumber(final int lottoNumber) {
