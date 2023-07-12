@@ -9,54 +9,61 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.assertj.core.api.Assertions.*;
 
-public class LottosTest {
+class LottosTest {
+
     @Test
     void 로또_컬렉션_객체_생성() {
-        // given, when, then
-        assertDoesNotThrow(() -> new Lottos(0, null));
+        assertThatNoException()
+                .isThrownBy(() -> Lottos.create(1, RandomNumbersGenerator.getInstance()));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1, 5})
     void 로또_컬렉션_개수_입력시_해당_개수의_로또_객체들_생성(int size) {
         // given
-        NumbersGenerator numberGenerator = new FixedNumbersGenerator(List.of(1, 2, 3, 4, 5, 6));
+        final NumbersGenerator numberGenerator = new FixedNumbersGenerator(List.of(1, 2, 3, 4, 5, 6));
 
         // when
-        Lottos lottos = new Lottos(size, numberGenerator);
+        final Lottos lottos = Lottos.create(size, numberGenerator);
 
         // then
         assertThat(lottos.getLottos()).hasSize(size);
     }
 
     @Test
+    void 한개_미만의_로또_컬렉션_개수_입력시_로또_객체들_생성_실패() {
+        assertThatIllegalArgumentException().isThrownBy(() -> Lottos.create(0, null));
+    }
+
+    @Test
     void 로또_컬렉션_숫자_생성기_주입시_해당_숫자들로_로또생성_성공() {
         // given
-        int size = 10;
-        NumbersGenerator numberGenerator = new FixedNumbersGenerator(List.of(1, 2, 3, 4, 5, 6));
+        final int size = 10;
+        final NumbersGenerator numberGenerator = new FixedNumbersGenerator(List.of(1, 2, 3, 4, 5, 6));
 
         // when
-        Lottos lottos = new Lottos(size, numberGenerator);
+        final Lottos lottos = Lottos.create(size, numberGenerator);
 
         // then
-        assertThat(lottos.getLottos().get(0)).isEqualTo(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
+        assertThat(lottos.getLottos().get(0)).isEqualTo(Lotto.create(List.of(1, 2, 3, 4, 5, 6)));
     }
 
     @ParameterizedTest
     @MethodSource("당첨_번호와_보너스_볼로_로또들의_당첨_결과_계산_테스트케이스")
     void 당첨_번호와_보너스_볼로_로또들의_당첨_결과_계산_성공(List<Integer> generatedNumbers, Rank expectedRank) {
         // given
-        final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
-        final Lottos lottos = new Lottos(2, new FixedNumbersGenerator(generatedNumbers));
+        final Lotto lotto = Lotto.create(List.of(1, 2, 3, 4, 5, 6));
+        final WinningLotto winningLotto = WinningLotto.of(lotto, LottoNumber.of(7));
+        final Lottos lottos = Lottos.create(2, new FixedNumbersGenerator(generatedNumbers));
 
         // when
-        List<Rank> lottoResult = lottos.matchWinningNumbers(winningNumbers);
+        final List<Rank> lottoResult = lottos.matchWinningNumbers(winningLotto);
 
         // then
-        assertThat(lottoResult.stream().filter(rank -> rank.equals(expectedRank)).count()).isEqualTo(2);
+        assertThat(lottoResult.stream().filter(rank -> rank.equals(expectedRank)).count())
+                .isEqualTo(2);
     }
 
     static Stream<Arguments> 당첨_번호와_보너스_볼로_로또들의_당첨_결과_계산_테스트케이스() {

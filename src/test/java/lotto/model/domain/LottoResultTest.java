@@ -13,14 +13,15 @@ class LottoResultTest {
 
     @Test
     void 로또_당첨결과_객체_생성_성공() {
-        // given, when, then
-        assertDoesNotThrow(() -> new LottoResult(List.of(), new LottoMoney(1000)));
+        assertDoesNotThrow(() -> LottoResult.of(List.of(), Money.valueOf(1000)));
     }
 
     @Test
     void 로또_당첨결과가_올바르게_저장_성공() {
         // given
-        LottoResult lottoResult = new LottoResult(List.of(Rank.SECOND, Rank.FOURTH, Rank.SECOND), new LottoMoney(3000));
+        final List<Rank> ranks = List.of(Rank.SECOND, Rank.FOURTH, Rank.SECOND);
+        final Money purchase = Money.valueOf(3000);
+        final LottoResult lottoResult = LottoResult.of(ranks, purchase);
 
         // when & then
         assertThat(lottoResult.getCount(Rank.SECOND)).isEqualTo(2);
@@ -31,14 +32,15 @@ class LottoResultTest {
     @Test
     void 로또_결과로_수익률_계산_성공() {
         // given
-        LottoMoney lottoMoney = new LottoMoney(3000);
-        LottoResult lottoResult = new LottoResult(List.of(Rank.SECOND, Rank.FOURTH, Rank.SECOND), lottoMoney);
+        final List<Rank> ranks = List.of(Rank.SECOND, Rank.FOURTH, Rank.SECOND);
+        final Money money = Money.valueOf(3000);
+        final LottoResult lottoResult = LottoResult.of(ranks, money);
 
         // when
-        double profitRate = lottoResult.getProfitRate();
+        final double profitRate = lottoResult.getProfitRate();
 
         // then
         final long totalPrize = Rank.getTotalPrize(Rank.SECOND, 2) + Rank.getTotalPrize(Rank.FOURTH, 1);
-        assertThat(profitRate).isCloseTo(totalPrize / (double) lottoMoney.getValue(), Percentage.withPercentage(99));
+        assertThat(profitRate).isCloseTo(totalPrize / (double) money.getValue(), Percentage.withPercentage(99));
     }
 }
