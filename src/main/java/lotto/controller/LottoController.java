@@ -9,40 +9,34 @@ import lotto.dto.LottoStatusResponseDto;
 import lotto.dto.MoneyRequestDto;
 import lotto.dto.WinningNumbersRequestDto;
 import lotto.service.LottoService;
-
-import java.util.Objects;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoController {
 
     private final LottoService lottoService;
-    private Money money;
-    private Lottos lottos;
+    private final InputView inputView;
+    private final OutputView outputView;
 
-    public LottoController(LottoService lottoService) {
-        this.lottoService = lottoService;
+    public LottoController() {
+        this.lottoService = new LottoService();
+        this.inputView = new InputView();
+        this.outputView = new OutputView();
     }
 
-    public LottoStatusResponseDto buyLotto(MoneyRequestDto moneyRequestDto) {
-        money = new Money(moneyRequestDto.getMoney());
-        lottos = lottoService.buyLotto(money);
-        return new LottoStatusResponseDto(lottos);
-    }
+    public void run() {
+        MoneyRequestDto moneyRequestDto = inputView.inputMoney();
+        Money money = new Money(moneyRequestDto.getMoney());
+        Lottos lottos = lottoService.buyLotto(money);
+        outputView.printBuyStatus(new LottoStatusResponseDto(lottos));
 
-    public LottoResultResponseDto drawWinningLotto(WinningNumbersRequestDto winningNumbersRequestDto) {
-        validateNullSafe();
+        WinningNumbersRequestDto winningNumbersRequestDto = inputView.inputWinningNumbers();
         WinningNumbers winningNumbers = new WinningNumbers(
                 winningNumbersRequestDto.getWinningNumbers(),
                 winningNumbersRequestDto.getBonusNumber()
         );
         LottoResults lottoResults = lottoService.matchWinningLotto(lottos, winningNumbers);
         double profit = lottoService.profitRate(lottoResults, money);
-
-        return new LottoResultResponseDto(lottoResults, profit);
-    }
-
-    private void validateNullSafe() {
-        if (Objects.isNull(money) || Objects.isNull(lottos)) {
-            throw new IllegalStateException("로또를 먼저 구매해야 합니다.");
-        }
+        outputView.printLottoResult(new LottoResultResponseDto(lottoResults, profit));
     }
 }
