@@ -22,9 +22,17 @@ public class Lotto {
     }
 
     private void validate(final List<Ball> balls) {
+        validateDuplicate(balls);
+        validateLottoSize(balls);
+    }
+
+    private void validateDuplicate(final List<Ball> balls) {
         if (balls.stream().distinct().count() != SIZE) {
             throw new IllegalArgumentException(DUPLICATE_BALLS_EXCEPTION_MESSAGE);
         }
+    }
+
+    private void validateLottoSize(final List<Ball> balls) {
         if (balls.size() != SIZE) {
             throw new IllegalArgumentException(LOTTO_SIZE_EXCEPTION_MESSAGE);
         }
