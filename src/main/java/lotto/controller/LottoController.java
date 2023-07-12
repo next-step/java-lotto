@@ -29,6 +29,14 @@ public class LottoController {
     }
 
     public void startLotto() {
+        try {
+            run();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void run() {
         Money money = moneyReader.readMoney();
         LottoGenerator lottoGenerator = new LottoGenerator();
         BoughtLottos boughtLottos = lottoGenerator.generate(money);
