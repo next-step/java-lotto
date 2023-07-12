@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RankTest {
 
 
-    static Stream<Arguments> match() {
+    static Stream<Arguments> matchRank() {
         return Stream.of(
                 Arguments.of(3, true, Rank.THREE),
                 Arguments.of(3, false, Rank.THREE),
@@ -25,7 +25,7 @@ public class RankTest {
     }
 
     @ParameterizedTest
-    @MethodSource("match")
+    @MethodSource("matchRank")
     @DisplayName("일치하는 로또 넘버 개수에 따른 Rank 가 매치")
     void 로또_넘버_개수_랭크_매치(int count, boolean isBonus, Rank rank) {
 

@@ -14,6 +14,9 @@ public class LottoMoney {
         if (money < ZERO) {
             throw new IllegalStateException("로또 머니가 양수여야 합니다.");
         }
+        if (money % LOTTO_UNIT != 0) {
+            throw new IllegalStateException("로또는 천원 단위입니다.");
+        }
     }
 
     public int getLottoCount() {

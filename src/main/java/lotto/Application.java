@@ -33,6 +33,6 @@ public class Application {
         WinningCalculator winningCalculator = new WinningCalculator();
 
         WinningResult winningResult = winningCalculator.calculate(winningLotto, purChasedLotto);
-        OutputView.printWinningResult(winningResult, lottoMoney);
+        OutputView.printWinningResult(WinningResponse.of(winningResult, lottoMoney));
     }
 }

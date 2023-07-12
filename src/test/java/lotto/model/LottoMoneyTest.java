@@ -15,6 +15,14 @@ class LottoMoneyTest {
     }
 
     @Test
+    @DisplayName("로또 머니는 천원 단위")
+    void 로또_머니_천원_단위() {
+        assertThatCode(() -> new LottoMoney(14111))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("로또는 천원 단위입니다.");
+    }
+
+    @Test
     @DisplayName("로또 머니가 음수일 경우, 예외를 던진다.")
     void 로또_머니_음수_예외() {
         assertThatCode(() -> new LottoMoney(-1))
@@ -31,6 +39,5 @@ class LottoMoneyTest {
 
         assertThat(lottoCount).isEqualTo(14);
     }
-
 
 }

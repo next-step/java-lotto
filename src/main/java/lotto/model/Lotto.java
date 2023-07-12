@@ -32,7 +32,7 @@ public class Lotto {
         }
     }
 
-    public boolean isContain(LottoNumber lottoNumber) {
+    public boolean isContain(final LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 

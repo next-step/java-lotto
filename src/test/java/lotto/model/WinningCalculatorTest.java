@@ -1,6 +1,5 @@
 package lotto.model;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningCalculatorTest {
 
@@ -20,13 +20,6 @@ public class WinningCalculatorTest {
 
     private List<Lotto> createLottos(Lotto... lottos) {
         return Arrays.stream(lottos)
-                .collect(toList());
-    }
-
-    private List<LottoNumber> createLottoNumbers(int... ints) {
-        return Arrays.stream(ints)
-                .boxed()
-                .map(LottoNumber::new)
                 .collect(toList());
     }
 
@@ -45,11 +38,11 @@ public class WinningCalculatorTest {
 
         WinningResult winningResult = winningCalculator.calculate(winningLotto, purChasedLotto);
 
-        Assertions.assertThat(winningResult.getRankCount(Rank.THREE)).isEqualTo(1);
-        Assertions.assertThat(winningResult.getRankCount(Rank.FOUR)).isEqualTo(0);
-        Assertions.assertThat(winningResult.getRankCount(Rank.FIVE)).isEqualTo(0);
-        Assertions.assertThat(winningResult.getRankCount(Rank.FIVE_WITH_BONUS)).isEqualTo(0);
-        Assertions.assertThat(winningResult.getRankCount(Rank.SIX)).isEqualTo(2);
+        assertThat(winningResult.getRankCount(Rank.THREE)).isEqualTo(1);
+        assertThat(winningResult.getRankCount(Rank.FOUR)).isEqualTo(0);
+        assertThat(winningResult.getRankCount(Rank.FIVE)).isEqualTo(0);
+        assertThat(winningResult.getRankCount(Rank.FIVE_WITH_BONUS)).isEqualTo(0);
+        assertThat(winningResult.getRankCount(Rank.SIX)).isEqualTo(2);
     }
 
 

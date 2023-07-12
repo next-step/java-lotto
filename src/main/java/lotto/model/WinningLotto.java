@@ -9,12 +9,12 @@ public class WinningLotto {
     private final LottoNumber bonusBall;
 
     public WinningLotto(final List<Integer> lottoNumbers, final int bonus) {
-        this.winningLotto = new Lotto(convert(lottoNumbers));
+        this.winningLotto = new Lotto(convertLottoNumbers(lottoNumbers));
         this.bonusBall = new LottoNumber(bonus);
         validateDuplicate(this.winningLotto, this.bonusBall);
     }
 
-    private List<LottoNumber> convert(List<Integer> integers) {
+    private List<LottoNumber> convertLottoNumbers(final List<Integer> integers) {
         return integers.stream()
                 .map(LottoNumber::new)
                 .collect(toList());
@@ -26,7 +26,7 @@ public class WinningLotto {
         }
     }
 
-    public Rank compare(Lotto lotto) {
+    public Rank compare(final Lotto lotto) {
         int count = (int) lotto.getLottoNumbers().stream()
                 .filter(winningLotto::isContain)
                 .count();

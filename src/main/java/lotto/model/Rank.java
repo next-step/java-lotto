@@ -13,24 +13,28 @@ public enum Rank {
 
     private final int match;
     private final int reward;
-    private final boolean needBonus;
+    private final boolean isBonus;
 
-    Rank(final int match, final int reward, final boolean needBonus) {
+    Rank(final int match, final int reward, final boolean isBonus) {
         this.match = match;
         this.reward = reward;
-        this.needBonus = needBonus;
+        this.isBonus = isBonus;
     }
 
     static Rank match(final int count, final boolean isBonus) {
         return Arrays.stream(values())
-                .filter(rank -> rank.match == count)
-                .filter(isBonusMatch(count, isBonus))
+                .filter(matchCount(count))
+                .filter(matchBonus(count, isBonus))
                 .findAny()
                 .orElse(DEFAULT);
     }
 
-    private static Predicate<Rank> isBonusMatch(int count, boolean isBonus) {
-        if (count == Rank.FIVE_WITH_BONUS.match) return rank -> rank.needBonus == isBonus;
+    private static Predicate<Rank> matchCount(final int count) {
+        return rank -> rank.match == count;
+    }
+
+    private static Predicate<Rank> matchBonus(final int count, final boolean isBonus) {
+        if (count == Rank.FIVE_WITH_BONUS.match) return rank -> rank.isBonus == isBonus;
         return rank -> true;
     }
 

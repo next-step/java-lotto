@@ -20,18 +20,18 @@ public class AutoLottoGenerator {
         }
     }
 
-    private List<LottoNumber> selectLottoNumbers(final List<LottoNumber> copyLottoNumbers) {
-        return copyLottoNumbers.subList(FROM_INDEX, TO_INDEX);
+    public Lotto generate() {
+        List<LottoNumber> copyLottoNumbers = copyLottoNumbers();
+        Collections.shuffle(copyLottoNumbers);
+        return new Lotto(selectLottoNumbers(copyLottoNumbers));
     }
 
     private List<LottoNumber> copyLottoNumbers() {
         return new ArrayList<>(lottoNumbers);
     }
 
-    public Lotto generate() {
-        List<LottoNumber> copyLottoNumbers = copyLottoNumbers();
-        Collections.shuffle(copyLottoNumbers);
-        return new Lotto(selectLottoNumbers(copyLottoNumbers));
+    private List<LottoNumber> selectLottoNumbers(final List<LottoNumber> copyLottoNumbers) {
+        return copyLottoNumbers.subList(FROM_INDEX, TO_INDEX);
     }
 
 

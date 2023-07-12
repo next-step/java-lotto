@@ -9,8 +9,7 @@ public class WinningCalculator {
     public static final int DEFAULT_VALUE = 0;
 
     public WinningResult calculate(final WinningLotto winningLotto, final PurChasedLotto purChasedLotto) {
-        Map<Rank, Integer> result = new HashMap<>();
-        initializeRankMap(result);
+        Map<Rank, Integer> result = initializeRankMap();
         List<Lotto> lottos = purChasedLotto.getLottos();
         for (Lotto lotto : lottos) {
             Rank rank = winningLotto.compare(lotto);
@@ -19,9 +18,11 @@ public class WinningCalculator {
         return new WinningResult(result);
     }
 
-    private void initializeRankMap(final Map<Rank, Integer> result) {
+    private Map<Rank, Integer> initializeRankMap() {
+        Map<Rank, Integer> result = new HashMap<>();
         for (Rank rank : Rank.values()) {
             result.put(rank, DEFAULT_VALUE);
         }
+        return result;
     }
 }
