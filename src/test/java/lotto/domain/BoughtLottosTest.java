@@ -38,8 +38,9 @@ public class BoughtLottosTest {
     @DisplayName("당첨 확인 테스트")
     void boughtLottos_winning() {
         /* given */
-        Lotto winningLotto = new Lotto(LottoTest.getBalls("1", "2", "3", "4", "5", "6"));
+        Lotto winningBalls = new Lotto(LottoTest.getBalls("1", "2", "3", "4", "5", "6"));
         Ball bonusBall = new Ball("7");
+        WinningLotto winningLotto = new WinningLotto(winningBalls, bonusBall);
 
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(LottoTest.getBalls("1", "2", "3", "4", "5", "6")));
@@ -50,7 +51,7 @@ public class BoughtLottosTest {
 
         /* when */
         LottoResults lottoResults =
-                boughtLottos.winningResults(winningLotto, bonusBall);
+                boughtLottos.winningResults(winningLotto);
 
         /* then */
         assertThat(lottoResults.getLottoResults()).hasSize(lottos.size());
