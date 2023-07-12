@@ -20,37 +20,8 @@ public class WinningNumbers {
     }
 
     public LottoRank match(Lotto lotto) {
-        long matchCount = lotto.countMatchNumber(winningNumbers);
-        boolean bonusCount = lotto.matchBonusNumber(bonusNumber);
-
-        return findLottoRank(matchCount, bonusCount);
-    }
-
-    private LottoRank findLottoRank(long matchCount, boolean bonusCount) {
-        if (matchCount == 6) {
-            return LottoRank.FIRST;
-        }
-
-        if (matchCount == 5 && bonusCount) {
-            return LottoRank.SECOND;
-        }
-
-        if (matchCount == 5) {
-            return LottoRank.THIRD;
-        }
-
-        if (matchCount == 4) {
-            return LottoRank.FOURTH;
-        }
-
-        if (matchCount == 3) {
-            return LottoRank.FIFTH;
-        }
-
-        if (matchCount < 3) {
-            return LottoRank.NONE;
-        }
-
-        throw new IllegalStateException("로또 당첨 비교가 불가능합니다.");
+        int matchCount = lotto.countMatchNumber(winningNumbers);
+        boolean bonusMatch = lotto.matchBonusNumber(bonusNumber);
+        return LottoRank.rank(matchCount, bonusMatch);
     }
 }
