@@ -31,7 +31,7 @@ public class LottoApplication {
 
         // 당첨 번호 입력
         final List<Integer> lottoNumbers = InputView.readLottoNumbers();
-        final Integer lottoNumber = InputView.readLottoNumber();
+        final int lottoNumber = InputView.readLottoNumber();
 
         // 게임 진행해서
         final LottoResult lottoResult = play(lottos, lottoNumbers, lottoNumber);
@@ -40,7 +40,7 @@ public class LottoApplication {
         OutputView.printStatistic(lottoResult, money);
     }
 
-    private static LottoResult play(final List<Lotto> target, final List<Integer> lottoNumbers, final Integer lottoNumber) {
+    private static LottoResult play(final List<Lotto> target, final List<Integer> lottoNumbers, final int lottoNumber) {
         final Lottos lottos = new Lottos(target);
         final WinningLotto winningLotto = new WinningLotto(new Lotto(lottoNumbers), new LottoNumber(lottoNumber));
 

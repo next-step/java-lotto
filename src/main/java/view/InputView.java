@@ -42,7 +42,7 @@ public class InputView {
         }
     }
 
-    public static Integer readLottoNumber() {
+    public static int readLottoNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
 
         try {
