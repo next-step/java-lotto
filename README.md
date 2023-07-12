@@ -21,6 +21,12 @@
 
 ---
 
+## 설계도
+
+<img width="1044" alt="스크린샷 2023-07-12 오후 4 58 25" src="https://github.com/devxb/java-lotto/assets/62425964/2af924aa-2bab-42fd-90b8-fa41d13fcf4d">
+
+---
+
 ## 도메인
 
 ### LottoNumber
