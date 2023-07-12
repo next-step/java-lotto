@@ -7,11 +7,14 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoService {
+public final class LottoService {
 
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_MAX_NUMBER = 45;
+    private static final int LOTTO_PICK_COUNT = 6;
     private final Payment payment;
     private final Lottos lottos;
-    private Map<LottoMatch, Integer> resultMap;
+    private LottoStatistics lottoStatistics;
 
     public LottoService(Payment payment) {
         this.payment = payment;
@@ -32,24 +35,20 @@ public class LottoService {
         return new Lottos(lottos);
     }
 
+    public Map<LottoMatch, Integer> getResult(WinningNumber winningNumber) {
+        lottoStatistics = new LottoStatistics(lottos, winningNumber);
+        return lottoStatistics.getStatistics();
+    }
+
+    public String getProfitRate(Payment payment) {
+        return lottoStatistics.getProfitRate(payment);
+    }
+
     public int getCount() {
         return payment.getLottoCount();
     }
 
     public Lottos getLottos() {
         return lottos;
-    }
-
-    public Map<LottoMatch, Integer> getResult(WinningNumber winningNumber) {
-        resultMap = lottos.getResult(winningNumber);
-        return resultMap;
-    }
-
-    public String getProfitRate() {
-        float profit = 0;
-        for (LottoMatch lottoMatch : resultMap.keySet()) {
-            profit += resultMap.get(lottoMatch) * lottoMatch.getPrize();
-        }
-        return String.format("%.2f", profit / payment.getMoney());
     }
 }
