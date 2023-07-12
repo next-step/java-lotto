@@ -34,7 +34,8 @@ public class WinningStatisticsWriter {
     ) {
         if (lottoRule.equals(LottoRule.NONE)) {
             return;
-        } else if (lottoRule.equals(LottoRule.SECOND)) {
+        }
+        if (lottoRule.equals(LottoRule.SECOND)) {
             System.out.println(formatToStatisticsForSecondRank(
                     lottoRule.getMatchCount(),
                     lottoRule.getPrize(),
