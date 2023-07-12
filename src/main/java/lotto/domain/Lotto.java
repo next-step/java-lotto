@@ -38,10 +38,14 @@ public class Lotto {
         }
     }
 
-    public LottoResult compareWinningLotto(final Lotto winningLotto, final Ball bonusBall) {
+    public LottoResult compareLottoRule(final Lotto winningLotto, final Ball bonusBall) {
+        return LottoRule.winningResult(getDuplicateBallCount(winningLotto), this.balls.contains(bonusBall));
+    }
+
+    private int getDuplicateBallCount(final Lotto lotto) {
         Set<Ball> lottoBalls = new HashSet<>(this.balls);
-        lottoBalls.retainAll(winningLotto.balls);
-        return new LottoResult(lottoBalls.size(), this.balls.contains(bonusBall));
+        lottoBalls.retainAll(lotto.balls);
+        return lottoBalls.size();
     }
 
     public List<Ball> getBalls() {
@@ -56,13 +60,9 @@ public class Lotto {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
         Lotto lotto = (Lotto) o;
-        Set<Ball> lottoBalls = new HashSet<>(lotto.balls);
 
-        lottoBalls.retainAll(this.balls);
-
-        return lottoBalls.size() == SIZE;
+        return getDuplicateBallCount(lotto) == SIZE;
     }
 
     @Override
