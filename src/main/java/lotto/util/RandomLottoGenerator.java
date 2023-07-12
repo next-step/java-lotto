@@ -20,7 +20,7 @@ public class RandomLottoGenerator {
     private RandomLottoGenerator() {
     }
 
-    public static Lotto generateLotto() {
+    public static synchronized Lotto generateLotto() {
         Collections.shuffle(lottoNumbers);
         return new Lotto(lottoNumbers.subList(START_INDEX, LOTTO_SIZE));
     }
