@@ -53,8 +53,8 @@ public final class LottoOutputView {
 
     private String profitRateResult(final double profitRate) {
         if (profitRate < 1) {
-            return "(1 미만이므로 손해보셨습니다. 축하드립니다 ^^)";
+            return "(1 미만이므로 손해보셨습니다. 다음을 노려보세요.)";
         }
-        return "(1 이상이므로 이득이네요. 좋겠네요.)";
+        return "(1 이상이므로 이득보셨습니다. 축하합니다.)";
     }
 }
