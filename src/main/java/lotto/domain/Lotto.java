@@ -38,12 +38,15 @@ public class Lotto {
         }
     }
 
-    public LottoResult compareWinningLotto(final Lotto winningLotto, final Ball bonusBall) {
-        Set<Ball> lottoBalls = new HashSet<>(this.balls);
+    public LottoResult compareWinningLotto(final WinningLotto winningLotto) {
+        final int matchCount = winningLotto.matchCount(this.balls);
+        final boolean isMatchedBonusBall = winningLotto.isMatchBonusBall(this.balls);
 
-        lottoBalls.retainAll(winningLotto.balls);
+        return new LottoResult(matchCount, isMatchedBonusBall);
+    }
 
-        return new LottoResult(lottoBalls.size(), this.balls.contains(bonusBall));
+    public boolean containsBall(final Ball ball) {
+        return this.balls.contains(ball);
     }
 
     public List<Ball> getBalls() {

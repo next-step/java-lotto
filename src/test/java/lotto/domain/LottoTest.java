@@ -38,6 +38,18 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("보너스 번호가 지난 주 당첨 번호에 포함될 경우 예외처리 테스트")
+    void lotto_duplicateBonus() {
+        /* given */
+        final Lotto winningBalls = new Lotto(getBalls("1", "2", "3", "4", "5", "6"));
+        final Ball bonusBall = new Ball("6");
+
+        /* when & then */
+        assertThatThrownBy(() -> new WinningLotto(winningBalls, bonusBall))
+                .isExactlyInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     @DisplayName("로또 번호 오름차순 정렬 테스트")
     void lotto_sortBallsByAscending() {
         /* given */

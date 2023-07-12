@@ -13,9 +13,9 @@ public class BoughtLottos {
         this.lottos = lottos;
     }
 
-    public LottoResults winningResults(final Lotto winningLotto, final Ball bonusBall) {
+    public LottoResults winningResults(final WinningLotto winningLotto) {
         return new LottoResults(lottos.stream()
-                .map(lotto -> lotto.compareWinningLotto(winningLotto, bonusBall))
+                .map(lotto -> lotto.compareWinningLotto(winningLotto))
                 .collect(Collectors.toList()));
     }
 
