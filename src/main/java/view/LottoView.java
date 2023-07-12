@@ -1,6 +1,7 @@
 package view;
 
 import java.text.MessageFormat;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Scanner;
 import lottogame.Lotto;
@@ -8,7 +9,7 @@ import lottogame.LottoMatch;
 import lottogame.LottoMatchKey;
 import lottogame.Lottos;
 
-public class LottoView {
+public final class LottoView {
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -29,35 +30,36 @@ public class LottoView {
         return bonusBall;
     }
 
-    public void printLottoCount(int count) {
+    public void printLottoCount(final int count) {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public void printLottos(Lottos lottos) {
-        for (Lotto lotto : lottos.getLottos()) {
-            System.out.println("[" + lotto + "]");
-        }
+    public void printLottos(final Lottos lottos) {
+        lottos.getLottos().stream()
+            .map(Lotto::getLottoNumbers)
+            .forEach((number) -> System.out.println("[" + number + "]"));
     }
 
-    public void printResult(Map<LottoMatch, Integer> resultMap) {
+    public void printLottoStatistics(final Map<LottoMatch, Integer> resultMap) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (LottoMatch lottoMatch : LottoMatch.values()) {
-            LottoMatchKey lottoMatchKey = lottoMatch.getLottoMatchKey();
-            if (lottoMatchKey.getIsBonus()) {
-                String result = MessageFormat.format("{0}개 일치, 보너스 볼 일치({1}원) - {2}개",
-                    lottoMatchKey.getMatchCount(), lottoMatch.getPrize(), resultMap.get(lottoMatch));
-                System.out.println(result);
-                continue;
-            }
-            String result = MessageFormat.format("{0}개 일치 ({1}원) - {2}개",
-                lottoMatchKey.getMatchCount(), lottoMatch.getPrize(), resultMap.get(lottoMatch));
-            System.out.println(result);
-        };
+        Arrays.stream(LottoMatch.values())
+            .map((lottoMatch -> resultMessage(lottoMatch, resultMap)))
+            .forEach(System.out::println);
     }
 
-    public void printProfitRate(String profitRate) {
+    private String resultMessage(LottoMatch lottoMatch, final Map<LottoMatch, Integer> resultMap) {
+        String bonusMessage = "";
+        LottoMatchKey lottoMatchKey = lottoMatch.getLottoMatchKey();
+        if (lottoMatchKey.getIsBonus()) {
+            bonusMessage = ", 보너스 볼 일치";
+        }
+        return MessageFormat.format("{0}개 일치{1} ({2}원) - {3}개",
+            lottoMatchKey.getMatchCount(), bonusMessage, lottoMatch.getPrize(), resultMap.get(lottoMatch));
+    }
+
+    public void printProfitRate(final String profitRate) {
         System.out.println("총 수익률은" + profitRate + "입니다.");
     }
 }
