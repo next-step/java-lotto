@@ -29,5 +29,4 @@ public class ConsolePurchaseViewer implements PurchaseViewer {
             .collect(Collectors.joining(", ")));
         stringBuilder.append("]\n");
     }
-
 }

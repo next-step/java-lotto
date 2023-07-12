@@ -21,14 +21,14 @@ class LottoNumberTest {
         @DisplayName("1~45사이의 값이 들어오면,")
         class Context_Input_1_Between_45 {
 
-            private final int minimumLottoNumber = 1;
-            private final int maximumLottoNumber = 45;
+            private static final int MINIMUM_LOTTO_NUMBER = 1;
+            private static final int MAXIMUM_LOTTO_NUMBER = 45;
 
             @Test
             @DisplayName("생성을 성공한다.")
             void It_Create_Success() {
-                assertThatNoException().isThrownBy(() -> LottoNumber.valueOf(minimumLottoNumber));
-                assertThatNoException().isThrownBy(() -> LottoNumber.valueOf(maximumLottoNumber));
+                assertThatNoException().isThrownBy(() -> LottoNumber.valueOf(MINIMUM_LOTTO_NUMBER));
+                assertThatNoException().isThrownBy(() -> LottoNumber.valueOf(MAXIMUM_LOTTO_NUMBER));
             }
         }
 
@@ -36,15 +36,15 @@ class LottoNumberTest {
         @DisplayName("1~45 밖의 값이 들어오면,")
         class Context_Input_Not_1_Between_45 {
 
-            private final int minimumLottoNumber = 0;
-            private final int maximumLottoNumber = 46;
+            private static final int MINIMUM_LOTTO_NUMBER = 0;
+            private static final int MAXIMUM_LOTTO_NUMBER = 46;
 
             @Test
             @DisplayName("IllegalArgumentException을 던진다.")
             void It_Create_Success() {
-                assertThatThrownBy(() -> LottoNumber.valueOf(minimumLottoNumber)).isInstanceOf(
+                assertThatThrownBy(() -> LottoNumber.valueOf(MINIMUM_LOTTO_NUMBER)).isInstanceOf(
                     IllegalArgumentException.class);
-                assertThatThrownBy(() -> LottoNumber.valueOf(maximumLottoNumber)).isInstanceOf(
+                assertThatThrownBy(() -> LottoNumber.valueOf(MAXIMUM_LOTTO_NUMBER)).isInstanceOf(
                     IllegalArgumentException.class);
             }
         }
@@ -66,8 +66,6 @@ class LottoNumberTest {
             void It_Return_True() {
                 assertThat(lottoNumber).isEqualTo(sameLottoNumber);
             }
-
         }
     }
-
 }

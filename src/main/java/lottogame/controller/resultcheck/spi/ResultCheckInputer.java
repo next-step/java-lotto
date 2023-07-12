@@ -7,4 +7,5 @@ public interface ResultCheckInputer {
     Set<Integer> inputWinningLottoNumbers();
 
     Integer inputBonusLottoNumber();
+    
 }

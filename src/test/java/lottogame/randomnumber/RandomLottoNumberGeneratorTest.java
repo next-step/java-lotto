@@ -19,18 +19,16 @@ class RandomLottoNumberGeneratorTest {
         @DisplayName("count가 n으로 들어오면,")
         class Context_Count_Six {
 
-            private final int count = 6;
+            private static final int COUNT = 6;
             private final NumberGenerator numberGenerator = new RandomLottoNumberGenerator();
 
             @Test
             @DisplayName("size가 n인 Integer 리스트를 반환한다")
             void It_Return_N_Size_List() {
-                Set<Integer> result = numberGenerator.generateDistinctNumbers(count);
+                Set<Integer> result = numberGenerator.generateDistinctNumbers(COUNT);
 
-                Assertions.assertThat(result).hasSize(count);
+                Assertions.assertThat(result).hasSize(COUNT);
             }
-
         }
-
     }
 }

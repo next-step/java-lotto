@@ -77,7 +77,5 @@ public enum LottoPrize {
 
         private static final boolean BONUS_NOT_RELATED = false;
         private static final boolean BONUS_RELATED = true;
-
     }
-
 }

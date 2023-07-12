@@ -121,9 +121,9 @@ class LottoTicketTest {
         @DisplayName("중복된 LottoNumber가 들어오면,")
         class Context_Input_Same_LottoNumber {
 
-            private final int sameLottoNumber = 1;
-            private final LottoTicket lottoTicket = new LottoTicket(Set.of(sameLottoNumber, 2, 3, 4, 5, 6));
-            private final LottoNumber lottoNumber = LottoNumber.valueOf(sameLottoNumber);
+            private static final int SAME_LOTTO_NUMBER = 1;
+            private final LottoTicket lottoTicket = new LottoTicket(Set.of(SAME_LOTTO_NUMBER, 2, 3, 4, 5, 6));
+            private final LottoNumber lottoNumber = LottoNumber.valueOf(SAME_LOTTO_NUMBER);
 
             @Test
             @DisplayName("true를 반환한다.")
