@@ -1,13 +1,12 @@
 package lottogame.console.resultcheck;
 
-import java.util.List;
 import lottogame.controller.resultcheck.spi.ResultCheckViewer;
-import lottogame.domain.LottoPrize;
+import lottogame.service.response.LottoCheckResponse;
 
 public class ConsoleResultCheckViewer implements ResultCheckViewer {
 
     @Override
-    public void draw(List<LottoPrize> lottoPrizes) {
-        
+    public void draw(LottoCheckResponse lottoCheckResponse) {
+
     }
 }

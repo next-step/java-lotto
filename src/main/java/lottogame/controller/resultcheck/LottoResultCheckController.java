@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Set;
 import lottogame.controller.resultcheck.spi.ResultCheckInputer;
 import lottogame.controller.resultcheck.spi.ResultCheckViewer;
-import lottogame.domain.LottoPrize;
 import lottogame.domain.LottoTicket;
 import lottogame.service.LottoCheckService;
+import lottogame.service.response.LottoCheckResponse;
 
 public class LottoResultCheckController {
 
@@ -25,7 +25,7 @@ public class LottoResultCheckController {
         Set<Integer> winningLottoNumbers = resultCheckInputer.inputWinningLottoNumbers();
         Integer bonusNumber = resultCheckInputer.inputBonusLottoNumber();
 
-        List<LottoPrize> lottoPrizes = lottoCheckService.checkResult(lottoTickets, winningLottoNumbers, bonusNumber);
+        LottoCheckResponse lottoPrizes = lottoCheckService.checkResult(lottoTickets, winningLottoNumbers, bonusNumber);
 
         resultCheckViewer.draw(lottoPrizes);
     }
