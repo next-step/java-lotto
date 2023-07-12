@@ -32,6 +32,23 @@ public class LottoResultTest {
     }
 
     @Test
+    @DisplayName("로또 결과로 특정 등수가 나온 횟수를 반환한다.")
+    void countRank() {
+        /* given */
+        final LottoResult lottoResult = new LottoResult(target);
+
+        /* when */
+        final Long firstRankCount = lottoResult.countRank(Rank.FIRST);
+        final Long fifthRankCount = lottoResult.countRank(Rank.FIFTH);
+        final Long noneRankCount = lottoResult.countRank(Rank.NONE);
+
+        /* then */
+        assertThat(firstRankCount).isEqualTo(0);
+        assertThat(fifthRankCount).isEqualTo(2);
+        assertThat(noneRankCount).isEqualTo(10);
+    }
+
+    @Test
     @DisplayName("수익률을 구한다.")
     void calculateTotalPrize() {
         /* given */

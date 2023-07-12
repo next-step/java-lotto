@@ -11,9 +11,9 @@ class LottoGeneratorTest {
     @DisplayName("로또를 자동으로 생성한다.")
     void generateAutomatically() {
         /* given */
-        long money = 10_000L;
+        final long money = 10_000L;
 
         /* when & then */
-        assertDoesNotThrow(() -> LottoGenerator.generateAutomatically(money));
+        assertDoesNotThrow(() -> LottoGenerator.generateLottosAutomatically(money));
     }
 }

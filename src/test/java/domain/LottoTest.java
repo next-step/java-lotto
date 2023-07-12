@@ -47,6 +47,34 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("로또 번호 포함 여부를 반환한다. (포함하는 경우)")
+    void containsLottoNumber() {
+        /* given */
+        final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        final LottoNumber lottoNumber = new LottoNumber(1);
+
+        /* when */
+        final boolean containsLottoNumber = lotto.containsLottoNumber(lottoNumber);
+
+        /* then */
+        assertThat(containsLottoNumber).isTrue();
+    }
+
+    @Test
+    @DisplayName("로또 번호 포함 여부를 반환한다. (포함하지 않는 경우)")
+    void notContainsLottoNumber() {
+        /* given */
+        final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        final LottoNumber lottoNumber = new LottoNumber(7);
+
+        /* when */
+        final boolean containsLottoNumber = lotto.containsLottoNumber(lottoNumber);
+
+        /* then */
+        assertThat(containsLottoNumber).isFalse();
+    }
+
+    @Test
     @DisplayName("로또 간의 일치 번호 개수를 출력한다.")
     void countMatchLottoNumber() {
         /* given */
@@ -59,5 +87,4 @@ public class LottoTest {
         /* then */
         assertThat(count).isEqualTo(6);
     }
-
 }
