@@ -6,21 +6,21 @@ public class LottoNumber {
 
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
-    private final int lottoNumber;
+    private final int number;
 
-    public LottoNumber(int lottoNumber) {
-        validateNumber(lottoNumber);
-        this.lottoNumber = lottoNumber;
+    public LottoNumber(int number) {
+        validateNumber(number);
+        this.number = number;
     }
 
-    private void validateNumber(int lottoNumber) {
-        if (lottoNumber < MIN_NUMBER || lottoNumber > MAX_NUMBER) {
+    private void validateNumber(int number) {
+        if (number < MIN_NUMBER || MAX_NUMBER < number) {
             throw new IllegalArgumentException("로또 번호는 1부터 45 이내의 숫자로 구성되어야 합니다.");
         }
     }
 
-    public int getLottoNumber() {
-        return lottoNumber;
+    public int getNumber() {
+        return number;
     }
 
     @Override
@@ -28,11 +28,18 @@ public class LottoNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return lottoNumber == that.lottoNumber;
+        return number == that.number;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumber);
+        return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoNumber{" +
+                "lottoNumber=" + number +
+                '}';
     }
 }

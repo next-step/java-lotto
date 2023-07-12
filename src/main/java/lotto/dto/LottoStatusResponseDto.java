@@ -20,7 +20,7 @@ public class LottoStatusResponseDto {
     private List<Integer> parseLotto(Lotto lotto) {
         return lotto.getLottoNumbers()
                 .stream()
-                .map(LottoNumber::getLottoNumber)
+                .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
     }
 
