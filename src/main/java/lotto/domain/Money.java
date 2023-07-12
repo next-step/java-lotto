@@ -17,10 +17,17 @@ public class Money {
     }
 
     private void validate(final String value) {
+        validateNumeric(value);
+        validateRangeOfMoney(value);
+    }
+
+    private void validateNumeric(String value) {
         if (!value.matches(NUMBER_PATTERN)) {
             throw new IllegalArgumentException(NOT_NUMERIC_EXCEPTION_MESSAGE);
         }
+    }
 
+    private void validateRangeOfMoney(String value) {
         int money = Integer.parseInt(value);
         if (money < MIN_PURCHASE_MONEY || MAX_PURCHASE_MONEY < money) {
             throw new IllegalArgumentException(MONEY_RANGE_EXCEPTION_MESSAGE);

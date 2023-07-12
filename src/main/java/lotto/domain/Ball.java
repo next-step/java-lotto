@@ -23,11 +23,11 @@ public class Ball implements Comparable<Ball> {
     }
 
     private void validate(final String value) {
-        validateStringInput(value);
+        validateNumeric(value);
         validateRangeOfNumber(Integer.parseInt(value));
     }
 
-    private void validateStringInput(final String value) {
+    private void validateNumeric(final String value) {
         if (!value.matches(NUMBER_PATTERN)) {
             throw new IllegalArgumentException(NOT_NUMERIC_EXCEPTION_MESSAGE);
         }
