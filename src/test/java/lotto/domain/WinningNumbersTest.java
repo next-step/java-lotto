@@ -3,8 +3,12 @@ package lotto.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 class WinningNumbersTest {
 
@@ -29,12 +33,23 @@ class WinningNumbersTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("provideLottoResults")
     @DisplayName("로또와 당첨 번호를 비교하여 등수를 반환한다.")
-    void match() {
+    void match(Lotto lotto, LottoRank lottoRank) {
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 8, 9));
 
-        Assertions.assertThat(winningNumbers.match(lotto)).isEqualTo(LottoRank.FOURTH);
+        Assertions.assertThat(winningNumbers.match(lotto)).isEqualTo(lottoRank);
+    }
+
+    private static Stream<Arguments> provideLottoResults() {
+        return Stream.of(
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), LottoRank.FIRST),
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 7)), LottoRank.SECOND),
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 9)), LottoRank.THIRD),
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 8, 9)), LottoRank.FOURTH),
+                Arguments.of(new Lotto(List.of(1, 2, 3, 10, 8, 9)), LottoRank.FIFTH),
+                Arguments.of(new Lotto(List.of(1, 2, 14, 10, 8, 9)), LottoRank.NONE)
+        );
     }
 }
