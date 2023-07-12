@@ -20,13 +20,13 @@ public class InputView {
 
     public WinningNumbersRequestDto inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String numbers = scanner.nextLine();
-        List<Integer> lottoNumbers = Arrays.stream(numbers.split("[, ]"))
+        String[] numbers = scanner.nextLine().split(", ");
+        List<Integer> lottoNumbers = Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
         System.out.println("보너스 볼을 입력해 주세요.");
-        int bonusNumber = scanner.nextInt();
+        int bonusNumber = Integer.parseInt(scanner.nextLine());
         return new WinningNumbersRequestDto(lottoNumbers, bonusNumber);
     }
 }
