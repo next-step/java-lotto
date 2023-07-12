@@ -23,11 +23,6 @@ public final class RandomNumbersGenerator implements NumbersGenerator {
         return INSTANCE;
     }
 
-    @Override
-    public List<Integer> generate() {
-        return sort(shuffleBaseNumbers().subList(MINIMUM_INDEX, Lotto.LOTTO_NUMBERS_SIZE));
-    }
-
     private static List<Integer> sort(final List<Integer> numbers) {
         return numbers.stream()
                 .sorted()
@@ -38,5 +33,10 @@ public final class RandomNumbersGenerator implements NumbersGenerator {
         final List<Integer> copiedNumbers = new ArrayList<>(baseNumbers);
         Collections.shuffle(copiedNumbers);
         return copiedNumbers;
+    }
+
+    @Override
+    public List<Integer> generate() {
+        return sort(shuffleBaseNumbers().subList(MINIMUM_INDEX, Lotto.LOTTO_NUMBERS_SIZE));
     }
 }

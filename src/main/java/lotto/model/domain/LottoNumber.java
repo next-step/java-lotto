@@ -14,14 +14,14 @@ public final class LottoNumber {
         this.value = value;
     }
 
+    public static LottoNumber of(final int value) {
+        return new LottoNumber(value);
+    }
+
     private void validate(final int value) {
         if (value < MINIMUM_NUMBER || value > MAXIMUM_NUMBER) {
             throw new IllegalArgumentException("잘못된 로또 번호입니다. 로또번호는 1이상 45이하의 정수를 입력하셔야 합니다.");
         }
-    }
-
-    public static LottoNumber of(final int value) {
-        return new LottoNumber(value);
     }
 
     public int getValue() {
@@ -30,8 +30,12 @@ public final class LottoNumber {
 
     @Override
     public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         final LottoNumber lottoNumber = (LottoNumber) o;
         return value == lottoNumber.value;
     }

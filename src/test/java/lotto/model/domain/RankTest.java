@@ -1,25 +1,22 @@
 package lotto.model.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 
-import lotto.model.domain.Rank;
+import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 class RankTest {
 
     @ParameterizedTest
-    @MethodSource("당첨번호_개수와_보너스볼_보유여부로_랭크계산_테스트케이스")
+    @MethodSource("당첨번호_개수와_보너스볼_보유여부로_랭크계산_성공_테스트케이스")
     void 당첨번호_개수와_보너스볼_보유여부로_랭크계산_성공(int matchCount, boolean hasBonusBall, Rank result) {
         // given, when, then
         assertThat(Rank.valueOf(matchCount, hasBonusBall)).isEqualTo(result);
     }
 
-    static Stream<Arguments> 당첨번호_개수와_보너스볼_보유여부로_랭크계산_테스트케이스() {
+    static Stream<Arguments> 당첨번호_개수와_보너스볼_보유여부로_랭크계산_성공_테스트케이스() {
         return Stream.of(
                 Arguments.of(6, false, Rank.FIRST),
                 Arguments.of(5, true, Rank.SECOND),

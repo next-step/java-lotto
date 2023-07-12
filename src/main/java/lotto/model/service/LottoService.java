@@ -1,6 +1,10 @@
 package lotto.model.service;
 
-import lotto.model.domain.*;
+import lotto.model.domain.LottoMoney;
+import lotto.model.domain.LottoResult;
+import lotto.model.domain.Lottos;
+import lotto.model.domain.NumbersGenerator;
+import lotto.model.domain.WinningNumbers;
 
 public final class LottoService {
 

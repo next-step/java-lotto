@@ -38,11 +38,11 @@ public enum Rank {
                 .orElse(NONE);
     }
 
-    boolean match(final int matchCount, final boolean hasBonusBall) {
-        return this.matchCount == matchCount;
-    }
-
     public static long getTotalPrize(Rank rank, int count) {
         return rank.prize * count;
+    }
+
+    boolean match(final int matchCount, final boolean hasBonusBall) {
+        return this.matchCount == matchCount;
     }
 }

@@ -53,8 +53,12 @@ public final class Lotto {
 
     @Override
     public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         final Lotto lotto = (Lotto) o;
         return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }

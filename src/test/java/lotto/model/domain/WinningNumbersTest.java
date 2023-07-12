@@ -1,15 +1,13 @@
 package lotto.model.domain;
 
-
-import lotto.model.domain.WinningNumbers;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
 class WinningNumbersTest {
+
     @Test
     void 당첨번호_객체_생성_성공() {
         // given, when, then

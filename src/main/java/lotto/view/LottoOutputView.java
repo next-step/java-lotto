@@ -1,8 +1,11 @@
 package lotto.view;
 
-import lotto.model.domain.*;
-
 import java.util.stream.Collectors;
+import lotto.model.domain.Lotto;
+import lotto.model.domain.LottoMoney;
+import lotto.model.domain.LottoResult;
+import lotto.model.domain.Lottos;
+import lotto.model.domain.Rank;
 
 public final class LottoOutputView {
 
@@ -22,8 +25,7 @@ public final class LottoOutputView {
 
     public void printBuyingLotto(final Lottos lottos) {
         lottos.getLottos().forEach(
-                lotto -> System.out.println("[" + toLottoOutput(lotto) + "]")
-        );
+                lotto -> System.out.println("[" + toLottoOutput(lotto) + "]"));
         System.out.println();
     }
 

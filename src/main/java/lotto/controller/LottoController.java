@@ -1,13 +1,12 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.model.domain.LottoResult;
 import lotto.model.domain.RandomNumbersGenerator;
 import lotto.model.domain.WinningNumbers;
 import lotto.model.service.LottoService;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
-
-import java.util.List;
 
 public final class LottoController {
 
@@ -21,7 +20,8 @@ public final class LottoController {
 
     public void run() {
         int inputMoney = lottoInputView.inputMoney();
-        final LottoService lottoService = new LottoService(inputMoney, RandomNumbersGenerator.getInstance());
+        final LottoService lottoService = new LottoService(inputMoney,
+                RandomNumbersGenerator.getInstance());
 
         lottoOutputView.printBuyingCount(lottoService.getLottoMoney());
         lottoOutputView.printBuyingLotto(lottoService.getLottos());
@@ -29,7 +29,8 @@ public final class LottoController {
         List<Integer> winningNumbers = lottoInputView.inputWinningNumbers();
         int bonusBall = lottoInputView.inputBonusBall();
 
-        LottoResult lottoResult = lottoService.calculateLottoResult(new WinningNumbers(winningNumbers, bonusBall));
+        LottoResult lottoResult = lottoService.calculateLottoResult(
+                new WinningNumbers(winningNumbers, bonusBall));
         lottoOutputView.printLottoResult(lottoResult);
     }
 }

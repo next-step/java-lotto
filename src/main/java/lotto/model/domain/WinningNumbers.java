@@ -35,7 +35,8 @@ public final class WinningNumbers {
         }
     }
 
-    private void validateDistinctionWithBonusBall(final List<Integer> numbers, final int bonusBall) {
+    private void validateDistinctionWithBonusBall(final List<Integer> numbers,
+            final int bonusBall) {
         if (numbers.contains(bonusBall)) {
             throw new IllegalArgumentException("당첨 번호와 보너스 볼은 중복될 수 없습니다.");
         }
