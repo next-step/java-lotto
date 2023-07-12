@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
-    private LottoFactory lottoFactory;
+    private final LottoFactory lottoFactory;
     public static final int LOTTO_BUY_AMOUNT_UNIT = 1000;
 
     public LottoGame(LottoFactory lottoFactory) {
