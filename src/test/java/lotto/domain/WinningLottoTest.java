@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +14,7 @@ public class WinningLottoTest {
         Lotto lotto = new Lotto(LottoTest.getBalls("1", "2", "3", "4", "5", "6"));
         Ball bonusBall = new Ball("7");
 
-        Assertions.assertDoesNotThrow(() -> new WinningLotto(lotto, bonusBall));
+        assertDoesNotThrow(() -> new WinningLotto(lotto, bonusBall));
     }
 
 
