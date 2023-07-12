@@ -18,4 +18,12 @@ public class WinningLotto {
             throw new IllegalArgumentException(DUPLICATE_BONUS_WITH_LOTTO_BALLS_EXCEPTION_MESSAGE);
         }
     }
+
+    public Lotto getLotto() {
+        return this.lotto;
+    }
+
+    public Ball getBonus() {
+        return this.bonus;
+    }
 }

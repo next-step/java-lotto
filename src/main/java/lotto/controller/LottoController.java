@@ -1,10 +1,9 @@
 package lotto.controller;
 
-import lotto.domain.Ball;
 import lotto.domain.BoughtLottos;
-import lotto.domain.Lotto;
 import lotto.domain.LottoGenerator;
 import lotto.domain.Money;
+import lotto.domain.WinningLotto;
 import lotto.view.BoughtLottosWriter;
 import lotto.view.LottoReader;
 import lotto.view.MoneyReader;
@@ -35,11 +34,12 @@ public class LottoController {
         BoughtLottos boughtLottos = lottoGenerator.generate(money);
         boughtLottosWriter.printBoughtLottos(boughtLottos);
 
-        Lotto winningLotto = lottoReader.readWinningLotto();
-        Ball bonusBall = lottoReader.readBonusBall();
-
+        WinningLotto winningLotto = new WinningLotto(
+                lottoReader.readWinningLotto(),
+                lottoReader.readBonusBall()
+        );
         winningStatisticsWriter.printLottoStatistics(
-                boughtLottos.winningResults(winningLotto, bonusBall)
+                boughtLottos.winningResults(winningLotto)
         );
     }
 }

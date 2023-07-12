@@ -50,7 +50,7 @@ public class BoughtLottosTest {
         /* when */
         BoughtLottos boughtLottos = new BoughtLottos(lottos);
         WinningStatistics winningStatistics =
-                boughtLottos.winningResults(winningLotto, bonusBall);
+                boughtLottos.winningResults(new WinningLotto(winningLotto, bonusBall));
 
         /* then */
         assertThat(winningStatistics.getWinningCount(LottoRule.FIRST)).isEqualTo(1);
