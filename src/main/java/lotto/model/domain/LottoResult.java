@@ -2,7 +2,6 @@ package lotto.model.domain;
 
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 
 public final class LottoResult {
 
@@ -24,7 +23,7 @@ public final class LottoResult {
         long totalPrize = lottoResult.entrySet().stream()
                 .mapToLong(entry -> Rank.getTotalPrize(entry.getKey(), entry.getValue()))
                 .sum();
-        return totalPrize / lottoMoney.getPurchasedMoney();
+        return totalPrize / lottoMoney.getSpentMoney();
     }
 
     public int getCount(final Rank rank) {

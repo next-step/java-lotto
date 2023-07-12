@@ -29,7 +29,7 @@ public class LottoMoney {
         return value / LOTTO_PRICE;
     }
 
-    public double getPurchasedMoney() {
+    public double getSpentMoney() {
         return (double) getValue() - getChange();
     }
 }
