@@ -21,12 +21,20 @@ public class InputView {
     public WinningNumbersRequestDto inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String[] numbers = scanner.nextLine().split(", ");
-        List<Integer> lottoNumbers = Arrays.stream(numbers)
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toList());
+        List<Integer> lottoNumbers = parseLottoNumbers(numbers);
         System.out.println("보너스 볼을 입력해 주세요.");
         int bonusNumber = Integer.parseInt(scanner.nextLine());
         return new WinningNumbersRequestDto(lottoNumbers, bonusNumber);
+    }
+
+    private List<Integer> parseLottoNumbers(String[] numbers) {
+        try {
+            return Arrays.stream(numbers)
+                    .mapToInt(Integer::parseInt)
+                    .boxed()
+                    .collect(Collectors.toList());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("입력 중 숫자가 아닌 값이 있습니다. 입력 값:" + Arrays.toString(numbers));
+        }
     }
 }
