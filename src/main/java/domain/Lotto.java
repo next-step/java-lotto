@@ -12,17 +12,19 @@ public class Lotto {
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(final List<Integer> numbers) {
-        // TODO: 중복 검사 리팩토링
         if (numbers.size() != REQUIRED_LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
-        if (numbers.size() != numbers.stream().distinct().count()) {
+
+        Set<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
+
+        if (numbers.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
 
-        lottoNumbers = numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+        this.lottoNumbers = lottoNumbers;
     }
 
     public long countMatchLottoNumber(final Lotto target) {
