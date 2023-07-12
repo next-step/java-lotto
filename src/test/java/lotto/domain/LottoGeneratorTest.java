@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
@@ -22,6 +23,24 @@ public class LottoGeneratorTest {
 
         /* then */
         assertThat(boughtLottos.getLottos()).hasSize(Integer.parseInt(value) / Lotto.PRICE);
+    }
+
+    @Test
+    @DisplayName("받은 금액이 로또의 가격보다 적은 경우 테스트")
+    void lottoGenerator_lowerThanLottoPrice() {
+        assertThatThrownBy(() -> {
+            LottoGenerator lottoGenerator = new LottoGenerator();
+            lottoGenerator.generate(new Money("999"));
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("받은 금액이 하루 구입 가능한 총 로또 가격보다 많은 경우 테스트")
+    void lottoGenerator_greaterThanLottoTotalPrice() {
+        assertThatThrownBy(() -> {
+            LottoGenerator lottoGenerator = new LottoGenerator();
+            lottoGenerator.generate(new Money("100001"));
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
