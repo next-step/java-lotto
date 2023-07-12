@@ -49,15 +49,12 @@ public class BoughtLottosTest {
 
         /* when */
         BoughtLottos boughtLottos = new BoughtLottos(lottos);
-        LottoResults lottoResults =
+        WinningStatistics winningStatistics =
                 boughtLottos.winningResults(winningLotto, bonusBall);
 
         /* then */
-        assertThat(lottoResults.getLottoResults()).hasSize(lottos.size());
-        assertThat(lottoResults.getLottoResults()).containsExactlyInAnyOrder(
-                new LottoResult(6, false),
-                new LottoResult(5, true),
-                new LottoResult(0, false)
-        );
+        assertThat(winningStatistics.getWinningCount(LottoRule.FIRST)).isEqualTo(1);
+        assertThat(winningStatistics.getWinningCount(LottoRule.SECOND)).isEqualTo(1);
+        assertThat(winningStatistics.getWinningCount(LottoRule.NONE)).isEqualTo(1);
     }
 }

@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import lotto.domain.WinningCriteria;
+import lotto.domain.LottoRule;
 import lotto.domain.WinningStatistics;
 
 public class WinningStatisticsWriter {
@@ -12,11 +12,11 @@ public class WinningStatisticsWriter {
         System.out.println("당첨 통계");
         System.out.println("-----------");
 
-        List<WinningCriteria> criterias = Arrays.asList(WinningCriteria.values());
-        Collections.reverse(criterias);
+        final List<LottoRule> lottoRules = Arrays.asList(LottoRule.values());정
+        Collections.reverse(lottoRules);
 
-        for (WinningCriteria criteria : criterias) {
-            printEachStatistics(winningStatistics, criteria);
+        for (LottoRule lottoRule : lottoRules) {
+            printEachStatistics(winningStatistics, lottoRule);
         }
 
         final double earningRate = Math.floor(winningStatistics.getEarningRate() / 100) * 100;
@@ -28,24 +28,38 @@ public class WinningStatisticsWriter {
         System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 
-    private void printEachStatistics(final WinningStatistics winningStatistics, final WinningCriteria criteria) {
-        if (criteria.equals(WinningCriteria.NONE)) {
+    private void printEachStatistics(
+            final WinningStatistics winningStatistics,
+            final LottoRule lottoRule
+    ) {
+        if (lottoRule.equals(LottoRule.NONE)) {
             return;
-        } else if (criteria.equals(WinningCriteria.SECOND)) {
-            System.out.println(
-                    formatToStatisticsForBonus(
-                            criteria.getMatchCount(), criteria.getPrize(), winningStatistics.getRank(criteria)));
+        } else if (lottoRule.equals(LottoRule.SECOND)) {
+            System.out.println(formatToStatisticsForSecondRank(
+                    lottoRule.getMatchCount(),
+                    lottoRule.getPrize(),
+                    winningStatistics.getWinningCount(lottoRule)));
             return;
         }
-        System.out.println(
-                formatToStatistics(criteria.getMatchCount(), criteria.getPrize(), winningStatistics.getRank(criteria)));
+        System.out.println(formatToStatistics(
+                lottoRule.getMatchCount(),
+                lottoRule.getPrize(),
+                winningStatistics.getWinningCount(lottoRule)));
     }
 
-    private String formatToStatisticsForBonus(final int matchCount, final int prize, final int boughtCount) {
+    private String formatToStatisticsForSecondRank(
+            final int matchCount,
+            final int prize,
+            final int boughtCount
+    ) {
         return matchCount + "개 일치 , 보너스 볼 일치(" + prize + "원)- " + boughtCount + "개";
     }
 
-    private String formatToStatistics(final int matchCount, final int prize, final int boughtCount) {
+    private String formatToStatistics(
+            final int matchCount,
+            final int prize,
+            final int boughtCount
+    ) {
         return matchCount + "개 일치 (" + prize + "원)- " + boughtCount + "개";
     }
 }
