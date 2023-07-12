@@ -7,26 +7,30 @@ public final class LottoNumber {
 
     public static final int LOWER_BOUND = 1;
     public static final int UPPER_BOUND = 45;
-    private final int lottoNumber;
+    private final int number;
 
     public LottoNumber(final Integer value) {
         validateRange(value);
-        this.lottoNumber = value;
+        this.number = value;
     }
 
     // TODO : try - catch & constructor 2개에 대한 더  나은 고민 필요
     public LottoNumber(final String text) {
         int value = Integer.parseInt(text.trim());
         validateRange(value);
-        this.lottoNumber = value;
+        this.number = value;
     }
 
-    private void validateRange(int number) {
+    private void validateRange(final int number) {
         if (number < LOWER_BOUND || number > UPPER_BOUND) {
             throw new IllegalArgumentException(
                 MessageFormat.format("{0}이상 {1}이하의 숫자여야합니다", LOWER_BOUND, UPPER_BOUND)
             );
         }
+    }
+
+    public String getNumber () {
+        return String.valueOf(number);
     }
 
     @Override
@@ -38,16 +42,12 @@ public final class LottoNumber {
             return false;
         }
         LottoNumber that = (LottoNumber) o;
-        return lottoNumber == that.lottoNumber;
+        return number == that.number;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumber);
+        return Objects.hash(number);
     }
 
-    @Override
-    public String toString() {
-        return "" + lottoNumber;
-    }
 }

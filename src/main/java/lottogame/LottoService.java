@@ -16,7 +16,7 @@ public final class LottoService {
     private final Lottos lottos;
     private LottoStatistics lottoStatistics;
 
-    public LottoService(Payment payment) {
+    public LottoService(final Payment payment) {
         this.payment = payment;
         this.lottos = generateLottos();
     }
@@ -35,12 +35,12 @@ public final class LottoService {
         return new Lottos(lottos);
     }
 
-    public Map<LottoMatch, Integer> getResult(WinningNumber winningNumber) {
+    public Map<LottoMatch, Integer> getResult(final WinningNumber winningNumber) {
         lottoStatistics = new LottoStatistics(lottos, winningNumber);
         return lottoStatistics.getStatistics();
     }
 
-    public String getProfitRate(Payment payment) {
+    public String getProfitRate(final Payment payment) {
         return lottoStatistics.getProfitRate(payment);
     }
 

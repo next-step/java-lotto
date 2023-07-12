@@ -4,28 +4,28 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LottoStatistics {
+public final class LottoStatistics {
 
     private final Map<LottoMatch, Integer> statistics = initMap();
 
-    public LottoStatistics(Lottos lottos, WinningNumber winningNumber) {
+    public LottoStatistics(final Lottos lottos, final WinningNumber winningNumber) {
         calculateStatistics(lottos, winningNumber);
     }
 
-    private void calculateStatistics(Lottos lottos, WinningNumber winningNumber) {
+    private void calculateStatistics(final Lottos lottos, final WinningNumber winningNumber) {
         for (Lotto lotto : lottos.getLottos()) {
             filter(lotto, winningNumber);
         }
     }
 
-    private void filter(Lotto lotto, WinningNumber winningNumber) {
+    private void filter(final Lotto lotto, final WinningNumber winningNumber) {
         int matchCount = lotto.countMatch(winningNumber.getWinningLotto());
         if (matchCount >= 3) {
             record(matchCount, lotto, winningNumber);
         }
     }
 
-    private void record(int matchCount, Lotto lotto, WinningNumber winningNumber) {
+    private void record(final int matchCount, final Lotto lotto, final WinningNumber winningNumber) {
         if (matchCount == 5) {
             recordFiveMatch(matchCount, lotto, winningNumber);
             return;
@@ -33,7 +33,7 @@ public class LottoStatistics {
         recordEach(matchCount, false);
     }
 
-    private void recordFiveMatch(int matchCount, Lotto lotto, WinningNumber winningNumber) {
+    private void recordFiveMatch(final int matchCount, final Lotto lotto, final WinningNumber winningNumber) {
         if (lotto.hasLottoNumber(winningNumber.getBonusBall())) {
             recordEach(matchCount, true);
             return;
@@ -41,7 +41,7 @@ public class LottoStatistics {
         recordEach(matchCount, false);
     }
 
-    private void recordEach(int matchCount, boolean isBonus) {
+    private void recordEach(final int matchCount, final boolean isBonus) {
         LottoMatchKey lottoMatchKey = new LottoMatchKey(isBonus, matchCount);
         statistics.put(LottoMatch.find(lottoMatchKey),
             statistics.getOrDefault(LottoMatch.find(lottoMatchKey), 0) + 1
@@ -59,7 +59,7 @@ public class LottoStatistics {
         return statistics;
     }
 
-    public String getProfitRate(Payment payment) {
+    public String getProfitRate(final Payment payment) {
         float profit = 0;
         for (LottoMatch lottoMatch : statistics.keySet()) {
             profit += statistics.get(lottoMatch) * lottoMatch.getPrize();

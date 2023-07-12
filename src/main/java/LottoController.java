@@ -21,7 +21,7 @@ public final class LottoController {
         WinningNumber winningNumber = new WinningNumber(winningLotto, bonusBall);
 
         // 3. 당첨 통계 출력
-        lottoView.printResult(lottoService.getResult(winningNumber));
+        lottoView.printLottoStatistics(lottoService.getResult(winningNumber));
         lottoView.printProfitRate(lottoService.getProfitRate(payment));
     }
 }

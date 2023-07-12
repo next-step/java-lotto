@@ -1,4 +1,4 @@
-public class ApplicationMain {
+public final class ApplicationMain {
 
     public static void main(String[] args) {
         LottoController lottoController = new LottoController();
