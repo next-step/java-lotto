@@ -28,4 +28,8 @@ public class LottoMoney {
     public int getCount() {
         return value / LOTTO_PRICE;
     }
+
+    public double getPurchasedMoney() {
+        return (double) getValue() - getChange();
+    }
 }

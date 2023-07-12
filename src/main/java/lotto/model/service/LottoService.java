@@ -29,6 +29,6 @@ public final class LottoService {
     }
 
     public LottoResult calculateLottoResult(final WinningNumbers winningNumbers) {
-        return lottos.calculateLottoResult(winningNumbers);
+        return new LottoResult(lottos.calculateLottoResult(winningNumbers), lottoMoney);
     }
 }

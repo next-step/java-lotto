@@ -18,10 +18,9 @@ public final class Lottos {
         return lottos;
     }
 
-    public LottoResult calculateLottoResult(final WinningNumbers winningNumbers) {
-        List<Rank> ranks = lottos.stream()
+    public List<Rank> calculateLottoResult(final WinningNumbers winningNumbers) {
+        return lottos.stream()
                 .map(lotto -> lotto.checkRank(winningNumbers))
                 .collect(Collectors.toUnmodifiableList());
-        return new LottoResult(ranks);
     }
 }

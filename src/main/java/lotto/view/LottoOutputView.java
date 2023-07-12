@@ -31,7 +31,7 @@ public final class LottoOutputView {
         System.out.println();
     }
 
-    public void printLottoResult(final LottoResult lottoResult, final LottoMoney lottoMoney) {
+    public void printLottoResult(final LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("----------------");
 
@@ -41,7 +41,7 @@ public final class LottoOutputView {
         System.out.println("5개 일치, 보너스 볼 일치 (30000000원) - " + lottoResult.getCount(Rank.SECOND));
         System.out.println("6개 일치 (2000000000원) - " + lottoResult.getCount(Rank.FIRST));
 
-        final double profitRate = lottoResult.calculateProfitRate(lottoMoney);
+        final double profitRate = lottoResult.getProfitRate();
         System.out.printf("총 수익률은 %.2f 입니다. ", profitRate);
 
         if (profitRate < 1) {
