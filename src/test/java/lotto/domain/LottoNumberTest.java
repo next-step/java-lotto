@@ -30,6 +30,6 @@ class LottoNumberTest {
     @Test
     @DisplayName("로또 생성 시 캐시 데이터 반환 테스트.")
     void cacheTest() {
-        assertThat(LottoNumber.of(33)).isEqualTo(LottoNumber.of(33));
+        assertThat(LottoNumber.of(33) == LottoNumber.of(33)).isTrue();
     }
 }
