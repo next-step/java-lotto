@@ -2,14 +2,12 @@ package lotto.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import lotto.domain.game.Lotto;
-import lotto.domain.statistics.LottoMatch;
-import lotto.domain.statistics.LottoStatistics;
 import lotto.domain.game.Lottos;
 import lotto.domain.game.NumberGenerator;
 import lotto.domain.game.Payment;
 import lotto.domain.game.WinningNumber;
+import lotto.domain.statistics.LottoStatistics;
 
 public final class LottoService {
 

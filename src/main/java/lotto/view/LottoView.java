@@ -6,11 +6,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.Lotto;
-import lotto.domain.LottoMatch;
-import lotto.domain.LottoMatchKey;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
+import lotto.domain.game.Lotto;
+import lotto.domain.statistics.LottoMatch;
+import lotto.domain.statistics.LottoMatchKey;
+import lotto.domain.game.LottoNumber;
+import lotto.domain.statistics.LottoStatistics;
+import lotto.domain.game.Lottos;
 
 public final class LottoView {
 
@@ -61,6 +62,10 @@ public final class LottoView {
 
     private String resultMessage(LottoMatch lottoMatch, final Map<LottoMatch, Integer> resultMap) {
         String bonusMessage = "";
+        int matchCount = 0;
+        if (resultMap.containsKey(lottoMatch)) {
+            matchCount = resultMap.get(lottoMatch);
+        }
         LottoMatchKey lottoMatchKey = lottoMatch.getLottoMatchKey();
         if (lottoMatchKey.getIsBonus()) {
             bonusMessage = ", 보너스 볼 일치";
@@ -69,7 +74,7 @@ public final class LottoView {
             lottoMatchKey.getMatchCount(), bonusMessage, lottoMatch.getPrize(), resultMap.get(lottoMatch));
     }
 
-    public void printProfitRate(final String profitRate) {
-        System.out.println("총 수익률은" + profitRate + "입니다.");
+    public void printProfitRate(final LottoStatistics lottoStatistics) {
+        System.out.println("총 수익률은" + lottoStatistics.getProfitRate() + "입니다.");
     }
 }

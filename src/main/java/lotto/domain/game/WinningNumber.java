@@ -1,4 +1,4 @@
-package lottogame;
+package lotto.domain.game;
 
 public final class WinningNumber {
 
@@ -7,7 +7,7 @@ public final class WinningNumber {
 
     public WinningNumber(final String lottoValue, final String bonusValue) {
         LottoText lottoText = new LottoText(lottoValue);
-        Lotto lotto = new Lotto(lottoText.getParsed());
+        Lotto lotto = new Lotto(lottoText.getIntegers(), false);
         LottoNumber lottoNumber = new LottoNumber(bonusValue);
 
         validate(lotto, lottoNumber);

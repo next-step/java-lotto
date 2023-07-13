@@ -21,11 +21,6 @@ public final class LottoStatistics {
         lottos.getLottos().stream()
             .map(lotto -> getLottoMatchKey(lotto, winningNumber))
             .forEach(this::putLotto);
-        System.out.println("출력");
-        for (LottoMatch lottoMatch: statistics.keySet()) {
-            System.out.println(lottoMatch.toString());
-        }
-        System.out.println(statistics.containsKey(LottoMatch.NONE_MATCH));
         statistics.remove(LottoMatch.NONE_MATCH);
     }
 
