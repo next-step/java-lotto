@@ -39,6 +39,7 @@ public class LottoCheckManager {
         List<LottoPrize> lottoPrizes = toLottoPrizes(lottoTickets);
 
         double earningRate = calculateEarningRate(lottoPrizes);
+        
         return new LottoCheckedResponse(earningRate, getLottoTicketCheckResponsesWithOutNone(lottoPrizes));
     }
 
@@ -54,6 +55,11 @@ public class LottoCheckManager {
             .collect(Collectors.toList());
     }
 
+    private LottoPrize toLottoPrize(LottoTicket lottoTicket) {
+        return LottoPrize.of(lottoResultNumbers.getMatchedCount(lottoTicket),
+            lottoTicket.contains(lottoBonus));
+    }
+
     private double calculateEarningRate(List<LottoPrize> lottoPrizes) {
         int totalMoney = lottoPrizes.size() * LottoTicket.PURCHASABLE_UNIT;
         int earnMoney = ZERO_MONEY;
@@ -61,11 +67,6 @@ public class LottoCheckManager {
             earnMoney += lottoPrize.getMoney();
         }
         return (double) earnMoney / (double) totalMoney;
-    }
-
-    private LottoPrize toLottoPrize(LottoTicket lottoTicket) {
-        return LottoPrize.of(lottoResultNumbers.getMatchedCount(lottoTicket),
-            lottoTicket.contains(lottoBonus));
     }
 
     private Map<LottoTicketCheckedResponse, Integer> getLottoTicketCheckResponsesWithOutNone(
