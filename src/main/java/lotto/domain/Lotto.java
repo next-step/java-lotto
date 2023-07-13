@@ -13,8 +13,7 @@ public class Lotto {
             LottoNumber.LOTTO_START,
             LottoNumber.LOTTO_END
         )
-        .boxed()
-        .map(LottoNumber::of)
+        .mapToObj(LottoNumber::of)
         .collect(Collectors.toList());
 
     private final List<LottoNumber> numbers;
