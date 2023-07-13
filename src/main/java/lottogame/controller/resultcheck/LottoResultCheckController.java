@@ -21,11 +21,11 @@ public class LottoResultCheckController {
         this.lottoCheckManager = lottoCheckManager;
     }
 
-    public void checkResult(List<LottoTicket> lottoTickets) {
+    public void checkResult(List<LottoTicket> lottoTicketRespons) {
         Set<Integer> winningLottoNumbers = resultCheckInputer.inputWinningLottoNumbers();
         Integer bonusNumber = resultCheckInputer.inputBonusLottoNumber();
 
-        LottoCheckedResponse lottoPrizes = lottoCheckManager.checkResult(lottoTickets);
+        LottoCheckedResponse lottoPrizes = lottoCheckManager.checkResult(lottoTicketRespons);
 
         resultCheckViewer.draw(lottoPrizes);
     }

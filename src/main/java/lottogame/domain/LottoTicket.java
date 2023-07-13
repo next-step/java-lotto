@@ -48,7 +48,7 @@ public class LottoTicket {
         return values.contains(lottoNumber);
     }
 
-    public Set<Integer> getValues() {
+    Set<Integer> getValues() {
         return values.stream()
             .map(LottoNumber::getValue)
             .collect(Collectors.toSet());

@@ -33,8 +33,8 @@ public class LottoCheckManager {
         }
     }
 
-    public LottoCheckedResponse checkResult(List<LottoTicket> lottoTickets) {
-        List<LottoPrize> lottoPrizes = toLottoPrizes(lottoTickets);
+    public LottoCheckedResponse checkResult(List<LottoTicket> lottoTicketRespons) {
+        List<LottoPrize> lottoPrizes = toLottoPrizes(lottoTicketRespons);
 
         double earningRate = calculateEarningRate(lottoPrizes);
         return new LottoCheckedResponse(earningRate, getLottoTicketCheckResponsesWithOutNone(lottoPrizes));
@@ -49,14 +49,15 @@ public class LottoCheckManager {
         return (double) earnMoney / (double) totalMoney;
     }
 
-    private List<LottoPrize> toLottoPrizes(List<LottoTicket> lottoTickets) {
-        return lottoTickets.stream()
+    private List<LottoPrize> toLottoPrizes(List<LottoTicket> lottoTicketRespons) {
+        return lottoTicketRespons.stream()
             .map(this::toLottoPrize)
             .collect(Collectors.toList());
     }
 
     private LottoPrize toLottoPrize(LottoTicket lottoTicket) {
-        return LottoPrize.of(lottoResultNumbers.getMatchedCount(lottoTicket), lottoTicket.contains(lottoBonus));
+        return LottoPrize.of(lottoResultNumbers.getMatchedCount(lottoTicket),
+            lottoTicket.contains(lottoBonus));
     }
 
     private Map<LottoTicketCheckedResponse, Integer> getLottoTicketCheckResponsesWithOutNone(

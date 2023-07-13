@@ -1,10 +1,10 @@
 package lottogame.controller.purchase.spi;
 
 import java.util.List;
-import lottogame.domain.LottoTicket;
+import lottogame.domain.response.LottoTicketResponse;
 
 public interface PurchaseViewer {
 
-    void draw(List<LottoTicket> lottoTickets);
+    void draw(List<LottoTicketResponse> lottoTickets);
 
 }

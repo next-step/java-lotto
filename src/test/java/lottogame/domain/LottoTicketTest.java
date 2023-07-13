@@ -122,7 +122,8 @@ class LottoTicketTest {
         class Context_Input_Same_LottoNumber {
 
             private static final int SAME_LOTTO_NUMBER = 1;
-            private final LottoTicket lottoTicket = new LottoTicket(Set.of(SAME_LOTTO_NUMBER, 2, 3, 4, 5, 6));
+            private final LottoTicket lottoTicket = new LottoTicket(
+                Set.of(SAME_LOTTO_NUMBER, 2, 3, 4, 5, 6));
             private final LottoNumber lottoNumber = LottoNumber.valueOf(SAME_LOTTO_NUMBER);
 
             @Test
@@ -148,7 +149,8 @@ class LottoTicketTest {
             @Test
             @DisplayName("일치한 갯수를 반환한다.")
             void It_Return_Matched_Count() {
-                assertThat(lottoTicket.getMatchedCount(sameLottoTicket)).isEqualTo(lottoNumberNumbers.size());
+                assertThat(lottoTicket.getMatchedCount(sameLottoTicket)).isEqualTo(
+                    lottoNumberNumbers.size());
             }
         }
     }

@@ -4,7 +4,7 @@ import java.util.List;
 import lottogame.controller.purchase.spi.PurchaseInputer;
 import lottogame.controller.purchase.spi.PurchaseViewer;
 import lottogame.domain.LottoPurchaseManager;
-import lottogame.domain.LottoTicket;
+import lottogame.domain.response.LottoTicketResponse;
 
 public class LottoPurchaseController {
 
@@ -19,10 +19,10 @@ public class LottoPurchaseController {
         this.lottoPurchaseManager = lottoPurchaseManager;
     }
 
-    public List<LottoTicket> purchaseLottoTickets() {
+    public List<LottoTicketResponse> purchaseLottoTickets() {
         int money = purchaseInputer.inputMoney();
-        List<LottoTicket> lottoTickets = lottoPurchaseManager.purchase(money);
-        purchaseViewer.draw(lottoTickets);
-        return lottoTickets;
+        List<LottoTicketResponse> lottoTicketRespons = lottoPurchaseManager.purchase(money);
+        purchaseViewer.draw(lottoTicketRespons);
+        return lottoTicketRespons;
     }
 }

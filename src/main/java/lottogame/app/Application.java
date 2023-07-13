@@ -13,7 +13,7 @@ import lottogame.controller.resultcheck.spi.ResultCheckInputer;
 import lottogame.controller.resultcheck.spi.ResultCheckViewer;
 import lottogame.domain.LottoCheckManager;
 import lottogame.domain.LottoPurchaseManager;
-import lottogame.domain.LottoTicket;
+import lottogame.domain.response.LottoTicketResponse;
 import lottogame.randomnumber.RandomLottoNumberGenerator;
 
 public class Application {
@@ -46,7 +46,7 @@ public class Application {
     }
 
     private void run() {
-        List<LottoTicket> lottoTickets = lottoPurchaseController.purchaseLottoTickets();
-        lottoResultCheckController.checkResult(lottoTickets);
+        List<LottoTicketResponse> lottoTicketRespones = lottoPurchaseController.purchaseLottoTickets();
+        lottoResultCheckController.checkResult(null);
     }
 }

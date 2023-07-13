@@ -39,13 +39,15 @@ public class LottoCheckManagerTest {
             }
 
             private List<LottoTicket> getLottoTicketRequest() {
-                LottoTicket firstPrizeLottoTicket = new LottoTicket((count) -> selectedLottoNumbers);
+                LottoTicket firstPrizeLottoTicket = new LottoTicket(
+                    (count) -> selectedLottoNumbers);
                 LottoTicket secondPrizeLottoTicket = new LottoTicket(
                     (count) -> Set.of(1, 2, 3, 4, 5, BONUS_NUMBER));
                 LottoTicket nonePrizeLottoTicket = new LottoTicket(
                     (count) -> Set.of(8, 9, 10, 11, 12, 13));
 
-                return List.of(firstPrizeLottoTicket, secondPrizeLottoTicket, nonePrizeLottoTicket);
+                return List.of(firstPrizeLottoTicket, secondPrizeLottoTicket,
+                    nonePrizeLottoTicket);
             }
 
             private LottoCheckedResponse getExpectedLottoCheckResponse() {
