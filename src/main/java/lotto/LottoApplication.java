@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGroup;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.WinningLotto;
 import lotto.domain.vo.Money;
@@ -62,9 +63,9 @@ public class LottoApplication {
     }
 
     private WinningLotto inputWinningLotto() {
-        List<Integer> winningNumbers = input.inputWinningNumbers();
+        Lotto winningLottos = Lotto.createSpecificLotto(input.inputWinningNumbers());
         int bonus = input.inputBonusNumber();
-        return new WinningLotto(winningNumbers, bonus);
+        return new WinningLotto(winningLottos, LottoNumber.of(bonus));
     }
 
     private void printResult(final LottoResult lottoResult) {
