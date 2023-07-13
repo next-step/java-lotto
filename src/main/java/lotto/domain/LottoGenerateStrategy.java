@@ -8,7 +8,7 @@ public abstract class LottoGenerateStrategy {
 
     protected final List<Ball> balls;
 
-    public LottoGenerateStrategy(final int minNumber, final int maxNumber) {
+    protected LottoGenerateStrategy(final int minNumber, final int maxNumber) {
         this.balls = IntStream.rangeClosed(minNumber, maxNumber)
                 .mapToObj(Ball::new)
                 .collect(Collectors.toList());
