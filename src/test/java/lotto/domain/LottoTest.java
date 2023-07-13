@@ -62,18 +62,28 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("중복된 숫자는 생성 불가.")
-    void duplicatedNumberUnavailableTest() {
-        assertThrows(IllegalArgumentException.class,
-                () -> Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 5)));
+    @DisplayName("수동 생성된 로또는 길이가 6이어야 한다.")
+    void createSpecificSixNumbersTest() {
+        //given
+        Lotto lotto = Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6));
+
+        //when, then
+        assertThat(lotto.getLottoNumbers()).hasSize(6);
     }
 
     @Test
-    @DisplayName("수동 생성된 로또는 길이가 6이어야 한다.")
-    void createSpecificSixNumbersTest() {
+    @DisplayName("수동 생성된 로또의 길이가 6이 아닌 경우 예외를 반환한다.")
+    void sizeLessThanSixUnavailableTest() {
         assertThrows(IllegalArgumentException.class,
                 () -> Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5))
         );
+    }
+
+    @Test
+    @DisplayName("수동 생성된 로또에서 중복된 숫자가 있다면 예외를 반환한다.")
+    void duplicatedNumberUnavailableTest() {
+        assertThrows(IllegalArgumentException.class,
+                () -> Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 5)));
     }
 
     @ParameterizedTest
