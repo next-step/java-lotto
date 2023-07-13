@@ -16,7 +16,7 @@ public final class LottoNumber {
 
     private void validate(final int value) {
         if (value < MINIMUM_NUMBER || value > MAXIMUM_NUMBER) {
-            throw new IllegalArgumentException("잘못된 로또 번호입니다. 로또번호는 1이상 45이하의 정수를 입력하셔야 합니다.");
+            throw new IllegalArgumentException("잘못된 로또 번호입니다. 로또번호는 1이상 45이하의 정수를 입력하셔야 합니다. 현재 번호: " + value);
         }
     }
 

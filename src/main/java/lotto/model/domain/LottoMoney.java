@@ -17,7 +17,7 @@ public final class LottoMoney implements Comparable<LottoMoney> {
 
     private static void validate(final long value) {
         if (value < 0L) {
-            throw new IllegalArgumentException("돈은 음수가 될 수 없습니다.");
+            throw new IllegalArgumentException("돈은 음수가 될 수 없습니다. 현재 액수: " + value);
         }
     }
 
