@@ -4,11 +4,11 @@ import lotto.dto.ManualLottosRequestDto;
 import lotto.dto.MoneyRequestDto;
 import lotto.dto.WinningNumbersRequestDto;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 public class InputView {
 
@@ -24,11 +24,9 @@ public class InputView {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         long manualCount = Long.parseLong(scanner.nextLine());
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<List<Integer>> lottos = new ArrayList<>();
-        for (int i = 0; i < manualCount; i++) {
-            String[] numbers = scanner.nextLine().split(", ");
-            lottos.add(parseLottoNumbers(numbers));
-        }
+        List<List<Integer>> lottos = LongStream.range(0, manualCount)
+                .mapToObj(l -> parseLottoNumbers(scanner.nextLine().split(", ")))
+                .collect(Collectors.toList());
         return new ManualLottosRequestDto(manualCount, lottos);
     }
 
