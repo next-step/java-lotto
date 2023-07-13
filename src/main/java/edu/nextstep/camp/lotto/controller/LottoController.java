@@ -27,6 +27,24 @@ public class LottoController {
         return lottos;
     }
 
+    /**
+     * @Deprecated 보너스 번호 추가로 미사용
+     */
+    @Deprecated
+    public void analysisLotto(Lottos lottos, String... lottoNumbers) {
+        this.analysisLotto(lottos, Arrays.stream(lottoNumbers)
+                .map(Integer::parseInt)
+                .toArray(Integer[]::new)
+        );
+    }
+
+    /**
+     * @Deprecated 보너스 번호 추가로 미사용
+     */
+    public void analysisLotto(Lottos lottos, Integer... lottoNumbers) {
+        this.analysisLotto(lottos, lottos.analysis(lottoNumbers));
+    }
+
     public void analysisLotto(Lottos lottos, LastWinLotto lastWinLotto) {
         this.analysisLotto(lottos, lottos.analysis(lastWinLotto));
     }
