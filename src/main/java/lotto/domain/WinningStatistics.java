@@ -12,7 +12,7 @@ public class WinningStatistics {
         this.earningRate = initEarningRate(lottoRankResults);
     }
 
-    private double initEarningRate(List<LottoRank> lottoRankResults) {
+    private double initEarningRate(final List<LottoRank> lottoRankResults) {
         return sumLottoResultPrize(lottoRankResults) /
                 (double) (lottoRankResults.size() * Lotto.PRICE);
     }

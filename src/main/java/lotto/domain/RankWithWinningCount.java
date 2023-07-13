@@ -13,7 +13,7 @@ public class RankWithWinningCount {
     public RankWithWinningCount(final List<LottoRank> lottoResultRanks) {
         this.rankWithCount = new HashMap<>();
 
-        for (LottoRank lottoRank : lottoResultRanks) {
+        for (final LottoRank lottoRank : lottoResultRanks) {
             this.rankWithCount.put(lottoRank,
                     this.rankWithCount.getOrDefault(lottoRank, DEFAULT_COUNT) + 1);
         }
