@@ -34,7 +34,9 @@ public enum Rank {
     }
 
     private static Predicate<Rank> matchBonus(final int count, final boolean isBonus) {
-        if (count == Rank.FIVE_WITH_BONUS.match) return rank -> rank.isBonus == isBonus;
+        if (count == Rank.FIVE_WITH_BONUS.match) {
+            return rank -> rank.isBonus == isBonus;
+        }
         return rank -> true;
     }
 

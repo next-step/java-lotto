@@ -25,27 +25,28 @@ class LottoMoneyTest {
         LottoMoney secondLottoMoney = new LottoMoney(15000);
         assertThat(firstLottoMoney).isNotEqualTo(secondLottoMoney);
     }
+
     @Test
     @DisplayName("로또 머니는 양수여야 한다.")
     void 로또_머니_양수_정상_동작() {
         assertThatCode(() -> new LottoMoney(14000))
-                .doesNotThrowAnyException();
+            .doesNotThrowAnyException();
     }
 
     @Test
     @DisplayName("로또 머니는 천원 단위")
     void 로또_머니_천원_단위() {
         assertThatCode(() -> new LottoMoney(14111))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또는 천원 단위입니다.");
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("로또는 천원 단위입니다.");
     }
 
     @Test
     @DisplayName("로또 머니가 음수일 경우, 예외를 던진다.")
     void 로또_머니_음수_예외() {
         assertThatCode(() -> new LottoMoney(-1))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 머니가 양수여야 합니다.");
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("로또 머니가 양수여야 합니다.");
     }
 
     @Test

@@ -13,22 +13,22 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void validateLotto(final List<LottoNumber> numbers) {
-        validateLottoLength(numbers);
-        validateDuplicateLottoNumber(numbers);
+    private void validateLotto(final List<LottoNumber> lottoNumbers) {
+        validateLottoLength(lottoNumbers);
+        validateDuplicateLottoNumber(lottoNumbers);
     }
 
-    private void validateLottoLength(final List<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_LENGTH) {
+    private void validateLottoLength(final List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_LENGTH) {
             throw new IllegalArgumentException("로또 번호는 " + LOTTO_LENGTH + "개이여야 합니다");
         }
     }
 
-    private void validateDuplicateLottoNumber(final List<LottoNumber> numbers) {
-        long distinctLength = numbers.stream()
+    private void validateDuplicateLottoNumber(final List<LottoNumber> lottoNumbers) {
+        long distinctLength = lottoNumbers.stream()
             .distinct()
             .count();
-        if (numbers.size() != distinctLength) {
+        if (lottoNumbers.size() != distinctLength) {
             throw new IllegalArgumentException("로또 넘버는 중복되면 안됩니다.");
         }
     }

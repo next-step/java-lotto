@@ -25,7 +25,7 @@ public class LottoNumberTest {
     @MethodSource("createLotto")
     void 로또_숫자_1_45(int number) {
         assertThatCode(() -> new LottoNumber(number))
-                .doesNotThrowAnyException();
+            .doesNotThrowAnyException();
     }
 
 
@@ -34,16 +34,18 @@ public class LottoNumberTest {
     @MethodSource("createLottoFail")
     void 로또_숫자_범위_벗어난_경우(int number) {
         assertThatCode(() -> new LottoNumber(number))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 1부터 45까지 이어야합니다.");
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("로또 번호는 1부터 45까지 이어야합니다.");
     }
 
 
     @Test
     @DisplayName("로또 번호가 같으면 같은 객체이다")
     void 로또_번호_같으면_같은_객체() {
+        // given
         LottoNumber firstLottoNumber = new LottoNumber(1);
         LottoNumber secondLottoNumber = new LottoNumber(1);
+        // when & then
         assertThat(firstLottoNumber).isEqualTo(secondLottoNumber);
     }
 
@@ -51,8 +53,10 @@ public class LottoNumberTest {
     @Test
     @DisplayName("로또 번호가 다르면 다른 객체이다")
     void 로또_번호_같으면_다른_객체() {
+        // given
         LottoNumber firstLottoNumber = new LottoNumber(1);
         LottoNumber secondLottoNumber = new LottoNumber(2);
+        // when & then
         assertThat(firstLottoNumber).isNotEqualTo(secondLottoNumber);
     }
 }
