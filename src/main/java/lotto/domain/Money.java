@@ -19,6 +19,7 @@ public class Money {
     }
 
     public long countLotto() {
+        validateNotZeroDominator(LOTTO_PRICE);
         return this.value / LOTTO_PRICE;
     }
 
@@ -27,7 +28,14 @@ public class Money {
     }
 
     private double divide(long denominator) {
+        validateNotZeroDominator(denominator);
         return (double) value / denominator;
+    }
+
+    private void validateNotZeroDominator(long denominator) {
+        if (denominator == 0) {
+            throw new IllegalStateException("0으로 나눌 수 없습니다.");
+        }
     }
 
     @Override

@@ -39,7 +39,7 @@ public class LottoService {
         return lottos.matchWinningLotto(winningNumbers);
     }
 
-    public double profitRate(LottoResults lottoResults) {
-        return money.profitRate(lottoResults.sumPrice());
+    public Profit profitRate(LottoResults lottoResults) {
+        return new Profit(money, lottoResults.sumPrice());
     }
 }
