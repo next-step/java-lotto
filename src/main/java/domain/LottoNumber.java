@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    static final int START_INCLUSIVE = 1;
-    static final int END_EXCLUSIVE = 46;
+    static final int LOWER_BOUND = 1;
+    static final int UPPER_BOUND = 45;
     private final int value;
 
     public LottoNumber(final int value) {
-        if (value < START_INCLUSIVE || value >= END_EXCLUSIVE) {
-            throw new IllegalArgumentException("로또 번호는 1 이상 46 미만의 자연수여야 합니다.");
+        if (value < LOWER_BOUND || value > UPPER_BOUND) {
+            throw new IllegalArgumentException("로또 번호는 1 이상 45 이하의 자연수여야 합니다.");
         }
 
         this.value = value;
@@ -22,8 +22,12 @@ public class LottoNumber {
 
     @Override
     public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         final LottoNumber that = (LottoNumber) o;
         return value == that.value;
     }
