@@ -32,6 +32,6 @@ public class LottoAnalysisResultTest {
     void 수익률(){
         String earningRate = analysisResult.earningRate();
 
-        assertThat(earningRate).isEqualTo("251.67");
+        assertThat(earningRate).isEqualTo("5016.67");
     }
 }
