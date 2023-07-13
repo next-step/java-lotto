@@ -15,7 +15,7 @@ public class BoughtLottos {
 
     public WinningStatistics winningResults(final WinningLotto winningLotto) {
         return new WinningStatistics(lottos.stream()
-                .map(lotto -> lotto.compareLottoRule(winningLotto.getLotto(), winningLotto.getBonus()))
+                .map(winningLotto::isMatch)
                 .collect(Collectors.toList()));
     }
 
