@@ -1,7 +1,5 @@
 package lotto.model.domain;
 
-import lotto.model.domain.NumbersGenerator;
-
 import java.util.List;
 
 public final class FixedNumbersGenerator implements NumbersGenerator {
