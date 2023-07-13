@@ -4,6 +4,7 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static lotto.model.domain.Rank.*;
 import static org.assertj.core.api.Assertions.*;
@@ -20,14 +21,17 @@ class RanksTest {
         // given
         final Ranks ranks = Ranks.of(List.of(FIFTH, FOURTH, FIFTH, FIRST, NONE));
 
-        // when & then
+        // when
+        final Map<Rank, Integer> ranksCount = ranks.allCounts();
+
+        // then
         SoftAssertions.assertSoftly(softAssertions -> {
-                    softAssertions.assertThat(ranks.count(FIRST)).isEqualTo(1);
-                    softAssertions.assertThat(ranks.count(SECOND)).isEqualTo(0);
-                    softAssertions.assertThat(ranks.count(THIRD)).isEqualTo(0);
-                    softAssertions.assertThat(ranks.count(FOURTH)).isEqualTo(1);
-                    softAssertions.assertThat(ranks.count(FIFTH)).isEqualTo(2);
-                    softAssertions.assertThat(ranks.count(NONE)).isEqualTo(1);
+                    softAssertions.assertThat(ranksCount.get(FIRST)).isEqualTo(1);
+                    softAssertions.assertThat(ranksCount.get(SECOND)).isNull();
+                    softAssertions.assertThat(ranksCount.get(THIRD)).isNull();
+                    softAssertions.assertThat(ranksCount.get(FOURTH)).isEqualTo(1);
+                    softAssertions.assertThat(ranksCount.get(FIFTH)).isEqualTo(2);
+                    softAssertions.assertThat(ranksCount.get(NONE)).isEqualTo(1);
                 }
         );
     }
