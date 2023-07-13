@@ -13,4 +13,8 @@ public final class Ranks {
     public static Ranks of(final List<Rank> ranks) {
         return new Ranks(ranks);
     }
+
+    public int count(final Rank rank) {
+        return -1;
+    }
 }
