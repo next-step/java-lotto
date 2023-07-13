@@ -23,7 +23,7 @@ public class LottoApplication {
 
     public void run() {
         Money purchaseMoney = inputPurchaseMoney();
-        Quantity manualLottoQuantity = inputManualLottoCount();
+        Quantity manualLottoQuantity = inputManualLottoCount(purchaseMoney);
         Quantity randomLottoQuantity = LottoGroup.getQuantity(purchaseMoney)
             .subtract(manualLottoQuantity);
 
@@ -37,11 +37,17 @@ public class LottoApplication {
     }
 
     private Money inputPurchaseMoney() {
-        return new Money(input.inputPurchaseMoney());
+        Money purchaseMoney = new Money(input.inputPurchaseMoney());
+        LottoGroup.verify(purchaseMoney);
+        return purchaseMoney;
     }
 
-    private Quantity inputManualLottoCount() {
-        return new Quantity(input.inputManualLottoQuantity());
+    private Quantity inputManualLottoCount(Money available) {
+        Quantity quantity = new Quantity(input.inputManualLottoQuantity());
+        if (!LottoGroup.canBuyable(available, quantity)) {
+            throw new IllegalArgumentException("not enough money");
+        }
+        return quantity;
     }
 
     private List<Lotto> inputManualLotto(Quantity quantity) {

@@ -4,25 +4,23 @@ import java.util.Objects;
 
 public class Quantity {
 
-    private final int value;
+    private final long value;
 
-    public Quantity(int quantity) {
+    public Quantity(long quantity) {
         verify(quantity);
         this.value = quantity;
     }
 
     public Quantity subtract(Quantity other) {
-        if (this.value < other.value) {
-            throw new IllegalArgumentException("quantity can't be less than 0");
-        }
+        verify(this.value - other.value);
         return new Quantity(this.value - other.value);
     }
 
-    public int getValue() {
+    public long getValue() {
         return value;
     }
 
-    private void verify(int value) {
+    private void verify(long value) {
         if (value < 0) {
             throw new IllegalArgumentException("quantity should be greater than 0");
         }

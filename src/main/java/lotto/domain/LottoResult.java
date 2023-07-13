@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.vo.Money;
 import lotto.domain.vo.Profit;
+import lotto.domain.vo.Quantity;
 
 public class LottoResult {
 
@@ -41,6 +42,6 @@ public class LottoResult {
             .stream()
             .mapToLong(Long::longValue)
             .sum();
-        return LottoGroup.getSpentMoney(totalQuantity);
+        return LottoGroup.getSpentMoney(new Quantity(totalQuantity));
     }
 }

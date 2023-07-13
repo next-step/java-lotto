@@ -40,15 +40,20 @@ public class LottoGroup {
         return new Quantity(divided.intValue());
     }
 
-    public static Money getSpentMoney(final Long quantity) {
-        return LOTTO_PRICE.multiply(quantity);
+    public static Money getSpentMoney(final Quantity quantity) {
+        return LOTTO_PRICE.multiply(quantity.getValue());
     }
 
-    private static void verify(Money money) {
+    public static void verify(Money money) {
         if (money.isUnderThan(LOTTO_PRICE)) {
             throw new IllegalArgumentException(
-                "purchase money amount should greater than lotto price.");
+                "purchase money amount should be greater than lotto price.");
         }
+    }
+
+    public static boolean canBuyable(Money available, Quantity quantity) {
+        Money required = getSpentMoney(quantity);
+        return required.isUnderThan(available) || required.equals(available);
     }
 
     public List<Lotto> getLottos() {
