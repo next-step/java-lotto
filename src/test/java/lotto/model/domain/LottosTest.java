@@ -72,7 +72,9 @@ class LottosTest {
     @MethodSource("당첨_번호와_보너스_볼로_로또들의_당첨_결과_계산_성공_테스트케이스")
     void 당첨_번호와_보너스_볼로_로또들의_당첨_결과_계산_성공(List<Integer> generatedNumbers, Rank expectedRank) {
         // given
-        final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
+        final WinningNumbers winningNumbers = new WinningNumbers(
+                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+                LottoNumber.of(7));
         final Lottos lottos = new Lottos(2, new FixedNumbersGenerator(generatedNumbers));
 
         // when

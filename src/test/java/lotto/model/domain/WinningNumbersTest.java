@@ -11,23 +11,9 @@ class WinningNumbersTest {
     @Test
     void 당첨번호_객체_생성_성공() {
         // given, when, then
-        assertDoesNotThrow(() -> new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7));
-    }
-
-    @Test
-    void 당첨번호에_중복된_번호가_있을때_생성_실패() {
-        // given
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 5);
-        // when, then
-        assertThrows(IllegalArgumentException.class, () -> new WinningNumbers(winningNumbers, 7));
-    }
-
-    @Test
-    void 당첨번호에_번호가_6개가_아닐때_생성_실패() {
-        // given
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6, 7);
-        // when, then
-        assertThrows(IllegalArgumentException.class, () -> new WinningNumbers(winningNumbers, 8));
+        assertDoesNotThrow(() -> new WinningNumbers(
+                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+                LottoNumber.of(7)));
     }
 
     @Test
@@ -36,6 +22,7 @@ class WinningNumbersTest {
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
 
         // when, then
-        assertThrows(IllegalArgumentException.class, () -> new WinningNumbers(winningNumbers, 6));
+        assertThrows(IllegalArgumentException.class,
+                () -> new WinningNumbers(new Lotto(winningNumbers), LottoNumber.of(6)));
     }
 }

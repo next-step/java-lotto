@@ -55,7 +55,9 @@ class LottoTest {
     @MethodSource("로또와_당첨번호_및_보너스볼을_비교해_Rank_반환_성공_테스트케이스")
     void 로또와_당첨번호_및_보너스볼을_비교해_Rank_반환_성공(Lotto lotto, Rank expectedRank) {
         // given
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
+        WinningNumbers winningNumbers = new WinningNumbers(
+                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+                LottoNumber.of(7));
 
         // when
         Rank rank = lotto.checkRank(winningNumbers);
