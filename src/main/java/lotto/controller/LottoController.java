@@ -25,7 +25,7 @@ public class LottoController {
     }
 
     public void drawWinningLotto() {
-        WinningLottoRequestDto winningLottoRequestDto = inputView.inputWinningNumbers();
+        WinningLottoRequestDto winningLottoRequestDto = inputView.inputWinningLotto();
         WinningLotto winningLotto = new WinningLotto(
                 winningLottoRequestDto.getWinningNumbers(),
                 winningLottoRequestDto.getBonusNumber()
