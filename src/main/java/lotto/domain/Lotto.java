@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-
     private static final int LOTTO_SIZE = 6;
     private static final List<LottoNumber> values = IntStream.rangeClosed(LottoNumber.LOTTO_START, LottoNumber.LOTTO_END)
             .boxed()
