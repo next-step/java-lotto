@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Arrays;
+
 public enum Rank {
 
     FIRST(6, false, 2_000_000_000L),
@@ -20,22 +22,10 @@ public enum Rank {
     }
 
     public static Rank from(final long matchLottoNumber, final boolean containsBonus) {
-        if (matchLottoNumber == FIRST.matchLottoNumber) {
-            return FIRST;
-        }
-        if (matchLottoNumber == SECOND.matchLottoNumber && containsBonus) {
-            return SECOND;
-        }
-        if (matchLottoNumber == THIRD.matchLottoNumber) {
-            return THIRD;
-        }
-        if (matchLottoNumber == FOURTH.matchLottoNumber) {
-            return FOURTH;
-        }
-        if (matchLottoNumber == FIFTH.matchLottoNumber) {
-            return FIFTH;
-        }
-        return NONE;
+        return Arrays.stream(Rank.values())
+            .filter(rank -> rank.match(matchLottoNumber, containsBonus))
+            .findFirst()
+            .orElse(Rank.NONE);
     }
 
     public long getMatchLottoNumber() {
@@ -48,5 +38,15 @@ public enum Rank {
 
     public long getPrize() {
         return prize;
+    }
+
+    private boolean match(final long matchLottoNumber, final boolean containsBonus) {
+        if (this.matchLottoNumber > matchLottoNumber) {
+            return false;
+        }
+        if (this.hasToCheckBonus) {
+            return containsBonus;
+        }
+        return true;
     }
 }

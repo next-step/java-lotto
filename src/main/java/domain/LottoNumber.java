@@ -9,15 +9,23 @@ public class LottoNumber {
     private final int value;
 
     public LottoNumber(final int value) {
-        if (value < LOWER_BOUND || value > UPPER_BOUND) {
-            throw new IllegalArgumentException("로또 번호는 1 이상 45 이하의 자연수여야 합니다.");
-        }
+        validate(value);
 
         this.value = value;
     }
 
     public int getValue() {
         return value;
+    }
+
+    private static void validate(final int value) {
+        if (isOutOfBound(value)) {
+            throw new IllegalArgumentException("로또 번호는 1 이상 45 이하의 자연수여야 합니다.");
+        }
+    }
+
+    private static boolean isOutOfBound(final int value) {
+        return value < LOWER_BOUND || value > UPPER_BOUND;
     }
 
     @Override
