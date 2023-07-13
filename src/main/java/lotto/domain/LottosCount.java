@@ -22,6 +22,10 @@ public class LottosCount {
         }
     }
 
+    public long getLottosCount() {
+        return lottosCount;
+    }
+
     public LottosCount findAnotherCount(Money money) {
         return new LottosCount(money.countLotto() - this.lottosCount);
     }
