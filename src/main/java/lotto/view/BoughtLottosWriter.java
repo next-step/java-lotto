@@ -7,13 +7,14 @@ import lotto.domain.Lotto;
 public class BoughtLottosWriter {
 
     private static final String DELIMITER = ", ";
+    private static final String NEW_LINE = "\n";
 
     public void printBoughtLottos(final BoughtLottos boughtLottos) {
         System.out.println(boughtLottos.getCount() + "개를 구매했습니다.");
         String collect = boughtLottos.getLottos()
                 .stream()
                 .map(BoughtLottosWriter::formatLottos)
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining(NEW_LINE));
         System.out.println(collect);
     }
 
