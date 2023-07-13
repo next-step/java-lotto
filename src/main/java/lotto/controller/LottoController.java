@@ -5,10 +5,8 @@ import lotto.domain.Money;
 import lotto.domain.Profit;
 import lotto.domain.WinningLotto;
 import lotto.dto.LottoResultResponseDto;
-import lotto.dto.LottoStatusResponseDto;
 import lotto.dto.WinningLottoRequestDto;
 import lotto.service.LottoService;
-import lotto.util.RandomGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

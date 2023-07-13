@@ -15,10 +15,6 @@ public class Lottos {
         return lottos;
     }
 
-    public long size() {
-        return lottos.size();
-    }
-
     public LottoResults matchWinningLotto(WinningLotto winningLotto) {
         return new LottoResults(
                 lottos.stream()
