@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 public final class RandomNumbersGenerator implements NumbersGenerator {
 
     private static final int MINIMUM_INDEX = 0;
+
     private static final RandomNumbersGenerator INSTANCE = new RandomNumbersGenerator();
 
     private static final List<Integer> baseNumbers = IntStream
@@ -23,6 +24,11 @@ public final class RandomNumbersGenerator implements NumbersGenerator {
         return INSTANCE;
     }
 
+    @Override
+    public List<Integer> generate() {
+        return sort(shuffleBaseNumbers().subList(MINIMUM_INDEX, Lotto.LOTTO_NUMBERS_SIZE));
+    }
+
     private static List<Integer> sort(final List<Integer> numbers) {
         return numbers.stream()
                 .sorted()
@@ -33,10 +39,5 @@ public final class RandomNumbersGenerator implements NumbersGenerator {
         final List<Integer> copiedNumbers = new ArrayList<>(baseNumbers);
         Collections.shuffle(copiedNumbers);
         return copiedNumbers;
-    }
-
-    @Override
-    public List<Integer> generate() {
-        return sort(shuffleBaseNumbers().subList(MINIMUM_INDEX, Lotto.LOTTO_NUMBERS_SIZE));
     }
 }
