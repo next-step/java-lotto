@@ -4,6 +4,8 @@ import lotto.model.*;
 
 import java.util.Comparator;
 import java.util.List;
+import lotto.model.dto.LottosDto;
+import lotto.model.dto.WinningResultDto;
 
 import static java.lang.String.valueOf;
 import static java.util.stream.Collectors.joining;
@@ -12,7 +14,7 @@ public class OutputView {
 
     private static final String DELIMITER = ", ";
 
-    public static void printPurchasedResult(PurChasedLotto purChasedLotto) {
+    public static void printPurchasedResult(LottosDto purChasedLotto) {
         System.out.println(purChasedLotto.getLottoCount() + "개를 구매했습니다");
         for (Lotto lotto : purChasedLotto.getLottos()) {
             printLotto(lotto);
