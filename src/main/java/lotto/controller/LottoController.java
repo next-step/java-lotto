@@ -29,7 +29,7 @@ public class LottoController {
         List<Lotto> manualLottos = manualLottosRequestDto.getManualLottos()
                 .stream().map(lotto -> new Lotto(lotto.getManualLotto()))
                 .collect(Collectors.toList());
-        Lottos lottos = lottoService.buyLotto(money, new Lottos(manualLottos), manualLottosRequestDto.getManualCount());
+        Lottos lottos = lottoService.buyLotto(money, new Lottos(manualLottos), new LottosCount(manualLottosRequestDto.getManualCount()));
         outputView.printBuyStatus(new LottoStatusesResponseDto(lottos));
 
         WinningNumbersRequestDto winningNumbersRequestDto = inputView.inputWinningNumbers();
