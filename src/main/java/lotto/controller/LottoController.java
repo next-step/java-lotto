@@ -1,13 +1,13 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.dto.LottoResultResponseDto;
-import lotto.dto.LottoStatusesResponseDto;
-import lotto.dto.MoneyRequestDto;
-import lotto.dto.WinningNumbersRequestDto;
+import lotto.dto.*;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoController {
 
@@ -24,7 +24,12 @@ public class LottoController {
     public void run() {
         MoneyRequestDto moneyRequestDto = inputView.inputMoney();
         Money money = new Money(moneyRequestDto.getMoney());
-        Lottos lottos = lottoService.buyLotto(money);
+
+        ManualLottosRequestDto manualLottosRequestDto = inputView.inputManualLottos();
+        List<Lotto> manualLottos = manualLottosRequestDto.getManualLottos()
+                .stream().map(lotto -> new Lotto(lotto.getManualLotto()))
+                .collect(Collectors.toList());
+        Lottos lottos = lottoService.buyLotto(money, new Lottos(manualLottos), manualLottosRequestDto.getManualCount());
         outputView.printBuyStatus(new LottoStatusesResponseDto(lottos));
 
         WinningNumbersRequestDto winningNumbersRequestDto = inputView.inputWinningNumbers();
