@@ -1,4 +1,4 @@
-package lottogame;
+package lotto.domain;
 
 import java.util.HashSet;
 import java.util.List;
@@ -6,15 +6,16 @@ import java.util.stream.Collectors;
 
 public final class Lotto {
 
+    private final static int LOTTO_SIZE = 6;
     private final List<LottoNumber> lotto;
 
-    public Lotto(final List<Integer> values) {
-        validate(values);
-        this.lotto = convertToLottoNumbers(values);
+    public Lotto(final List<Integer> values, boolean isAuto) {
+        validate(values, isAuto);
+        this.lotto = toLottoNumbers(values);
     }
 
-    private void validate(final List<Integer> values) {
-        validateSize(values);
+    private void validate(final List<Integer> values, boolean isAuto) {
+        validateSize(values, isAuto);
         validateDuplicate(values);
     }
 
@@ -25,14 +26,15 @@ public final class Lotto {
         }
     }
 
-    private void validateSize(final List<Integer> values) {
-        if (values.size() != 6) {
+    private void validateSize(final List<Integer> values, boolean isAuto) {
+        if (values.size() < LOTTO_SIZE || (LOTTO_SIZE < values.size() && !isAuto)) {
             throw new IllegalArgumentException("로또 번호는 6개여야합니다");
         }
     }
 
-    private List<LottoNumber> convertToLottoNumbers(final List<Integer> values) {
+    private List<LottoNumber> toLottoNumbers(final List<Integer> values) {
         return values.stream()
+            .limit(LOTTO_SIZE)
             .map(LottoNumber::new)
             .collect(Collectors.toUnmodifiableList());
     }
@@ -47,10 +49,9 @@ public final class Lotto {
             .count();
     }
 
-    public String getLottoNumbers() {
+    public List<LottoNumber> getLotto() {
         return lotto.stream()
-            .map(LottoNumber::getNumber)
-            .collect(Collectors.joining(", "));
+            .collect(Collectors.toList());
     }
 
 }
