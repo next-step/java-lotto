@@ -1,25 +1,20 @@
 package lotto.model.domain;
 
-import java.util.EnumMap;
-import java.util.List;
+import java.util.Map;
 
 public final class LottoResult {
 
     public static final int DEFAULT_VALUE = 0;
 
-    private final EnumMap<Rank, Integer> lottoResult;
+    private final Map<Rank, Integer> lottoResult;
     private final double profitRate;
 
-    private LottoResult(final List<Rank> ranks, final LottoMoney purchase) {
-        this.lottoResult = new EnumMap<>(Rank.class);
-        ranks.forEach(rank -> this.lottoResult.put(
-                rank,
-                this.lottoResult.getOrDefault(rank, DEFAULT_VALUE) + 1
-        ));
+    private LottoResult(final Ranks ranks, final LottoMoney purchase) {
+        this.lottoResult = ranks.allCounts();
         this.profitRate = calculateProfitRate(purchase);
     }
 
-    public static LottoResult of(final List<Rank> ranks, final LottoMoney purchase) {
+    public static LottoResult of(final Ranks ranks, final LottoMoney purchase) {
         return new LottoResult(ranks, purchase);
     }
 
@@ -31,7 +26,7 @@ public final class LottoResult {
     private long calculateTotalPrize() {
         return lottoResult.entrySet()
                 .stream()
-                .mapToLong(entry -> Rank.getTotalPrize(entry.getKey(), entry.getValue()))
+                .mapToLong(entry -> entry.getKey().getTotalPrize(entry.getValue()))
                 .sum();
     }
 

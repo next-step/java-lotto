@@ -42,7 +42,7 @@ public enum Rank {
         return this.matchCount == matchCount;
     }
 
-    public static long getTotalPrize(Rank rank, int count) {
-        return rank.prize * count;
+    public long getTotalPrize(int count) {
+        return this.prize * count;
     }
 }

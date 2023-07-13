@@ -4,6 +4,8 @@ import lotto.model.domain.*;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
+import java.util.List;
+
 public final class LottoController {
 
     private final LottoInputView lottoInputView;
@@ -21,18 +23,14 @@ public final class LottoController {
                 lottosSize,
                 RandomNumbersGenerator.getInstance()
         );
-
         printPurchaseInformation(purchase, lottos);
 
         final Lotto winningNumbers = Lotto.create(lottoInputView.inputWinningNumbers());
         final LottoNumber bonusBall = LottoNumber.of(lottoInputView.inputBonusBall());
         final WinningLotto winningLotto = WinningLotto.of(winningNumbers, bonusBall);
 
-        printLottoResult(purchase, lottos, winningLotto);
-    }
-
-    private void printLottoResult(final LottoMoney purchase, final Lottos lottos, final WinningLotto winningLotto) {
-        final LottoResult lottoResult = LottoResult.of(lottos.matchWinningNumbers(winningLotto), purchase);
+        final List<Rank> ranks = lottos.matchWinningNumbers(winningLotto);
+        final LottoResult lottoResult = LottoResult.of(Ranks.of(ranks), purchase);
         lottoOutputView.printLottoResult(lottoResult);
     }
 

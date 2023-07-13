@@ -1,6 +1,6 @@
 package lotto.model.domain;
 
-import java.util.List;
+import java.util.*;
 
 public final class Ranks {
 
@@ -14,7 +14,13 @@ public final class Ranks {
         return new Ranks(ranks);
     }
 
-    public int count(final Rank rank) {
+    public Map<Rank, Integer> allCounts() {
+        final Map<Rank, Integer> ranksCount = new EnumMap<>(Rank.class);
+        ranks.forEach(rank -> ranksCount.putIfAbsent(rank, count(rank)));
+        return Collections.unmodifiableMap(ranksCount);
+    }
+
+    private int count(final Rank rank) {
         return (int) ranks.stream()
                 .filter(value -> value.equals(rank))
                 .count();
