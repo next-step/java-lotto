@@ -22,9 +22,11 @@ public class LottoApplication {
 
     public void run() {
         Money purchaseMoney = inputPurchaseMoney();
-        LottoGroup lottoGroup = LottoGroup.of(purchaseMoney, inputManualLotto());
+        int manualLottoCount = input.inputManualLottoCount();
+        LottoGroup lottoGroup = LottoGroup.of(purchaseMoney, inputManualLotto(manualLottoCount));
+        int randomLottoCount = LottoGroup.getQuantity(purchaseMoney) - manualLottoCount;
 
-        output.printQuantity(LottoGroup.getQuantity(purchaseMoney));
+        output.printQuantity(manualLottoCount, randomLottoCount);
         output.printLottos(lottoGroup);
 
         WinningLotto winningLotto = inputWinningLotto();
@@ -36,11 +38,10 @@ public class LottoApplication {
         return new Money(input.inputPurchaseMoney());
     }
 
-    private List<Lotto> inputManualLotto() {
-        int manualLottoCount = input.inputManualLottoCount();
+    private List<Lotto> inputManualLotto(int count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<Lotto> manualLottos = new ArrayList<>();
-        for (int i = 0; i < manualLottoCount; i++) {
+        for (int i = 0; i < count; i++) {
             Lotto manualLotto = Lotto.createSpecificLotto(input.inputManualLottoNumbers());
             manualLottos.add(manualLotto);
         }

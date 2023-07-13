@@ -13,8 +13,8 @@ public class LottoOutput {
 
     public static final String LOTTO_JOIN_DELIMITER = ", ";
 
-    public void printQuantity(final int amount) {
-        System.out.println(amount + "개를 구매했습니다.");
+    public void printQuantity(final int manualAmount, final int randomAmount) {
+        System.out.println("수동으로 " + manualAmount + "장, 자동으로 " + randomAmount + "개를 구매했습니다.");
     }
 
     public void printLottos(final LottoGroup lottoGroup) {
