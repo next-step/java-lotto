@@ -32,23 +32,15 @@ public class Money {
         }
     }
 
-    public double profitRate(Money profit) {
-        return profit.divide(this.countLotto() * LOTTO_PRICE);
-    }
-
-    private double divide(long denominator) {
-        validateNotZeroDominator(denominator);
-        return (double) value / denominator;
+    public double profitRate(long count) {
+        validateNotZeroDominator(count);
+        return (double) value / (count * LOTTO_PRICE);
     }
 
     private void validateNotZeroDominator(long denominator) {
         if (denominator == ZERO_DIVISION) {
             throw new IllegalStateException("0으로 나눌 수 없습니다.");
         }
-    }
-
-    public boolean isZero() {
-        return value == ZERO_DIVISION;
     }
 
     @Override

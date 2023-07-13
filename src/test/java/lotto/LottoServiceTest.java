@@ -42,8 +42,8 @@ class LottoServiceTest {
     @Test
     @DisplayName("수익률을 계산한다.")
     void profitRate() {
-        LottoService lottoService = LottoService.buyLotto(new Money(1000));
-        LottoResults lottoResults = new LottoResults(List.of(LottoRank.FIFTH, LottoRank.NONE, LottoRank.FOURTH));
-        Assertions.assertThat(lottoService.profitRate(lottoResults).getProfitRate()).isEqualTo(55.0);
+        LottoService lottoService = LottoService.buyLotto(new Money(5000));
+        LottoResults lottoResults = new LottoResults(List.of(LottoRank.FIFTH, LottoRank.NONE, LottoRank.FOURTH, LottoRank.NONE, LottoRank.NONE));
+        Assertions.assertThat(lottoService.profitRate(lottoResults).getProfitRate()).isEqualTo(11.0);
     }
 }

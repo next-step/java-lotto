@@ -11,11 +11,9 @@ import java.util.stream.LongStream;
 
 public class LottoService {
 
-    private final Money money;
     private final Lottos lottos;
 
-    public LottoService(Money money, Lottos lottos) {
-        this.money = money;
+    public LottoService(Lottos lottos) {
         this.lottos = lottos;
     }
 
@@ -28,7 +26,7 @@ public class LottoService {
         List<Lotto> lottos = LongStream.range(0, countLotto)
                 .mapToObj(l -> lottoGenerator.generateLotto())
                 .collect(Collectors.toList());
-        return new LottoService(money, new Lottos(lottos));
+        return new LottoService(new Lottos(lottos));
     }
 
     public LottoStatusResponseDto buyStatus() {
@@ -40,6 +38,6 @@ public class LottoService {
     }
 
     public Profit profitRate(LottoResults lottoResults) {
-        return new Profit(money, lottoResults.sumPrice());
+        return lottoResults.profitRate();
     }
 }

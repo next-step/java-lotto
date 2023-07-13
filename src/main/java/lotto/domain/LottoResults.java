@@ -20,12 +20,23 @@ public class LottoResults {
         return lottoResults;
     }
 
-    public Money sumPrice() {
+    private Money sumPrice() {
         return new Money(
                 lottoResults.entrySet()
                         .stream()
                         .mapToLong(entry -> entry.getKey().getPrice() * entry.getValue())
                         .sum()
         );
+    }
+
+    private long countLottos() {
+        return lottoResults.values()
+                .stream()
+                .mapToLong(l -> l)
+                .sum();
+    }
+
+    public Profit profitRate() {
+        return new Profit(sumPrice(), countLottos());
     }
 }
