@@ -38,6 +38,10 @@ public class Lotto {
         return lottoNumberCopy.size();
     }
 
+    public boolean isMatchBonus(LottoNumber lottoNumber){
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     private void validationCheck(List<LottoNumber> lottoNumbers) {
         emptyCheck(lottoNumbers);
 
