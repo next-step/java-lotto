@@ -1,12 +1,19 @@
-package lottogame.console.resultcheck;
+package lottogame.console;
 
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lottogame.console.util.LocalScanner;
-import lottogame.controller.resultcheck.spi.ResultCheckInputer;
+import lottogame.controller.spi.Inputer;
 
-public class ConsoleResultCheckInputer implements ResultCheckInputer {
+public class ConsoleInputer implements Inputer {
+
+    @Override
+    public int inputMoney() {
+        LocalScanner localScanner = LocalScanner.getInstance();
+        System.out.println("구입금액을 입력해 주세요.");
+        return localScanner.nextInt();
+    }
 
     @Override
     public Set<Integer> inputWinningLottoNumbers() {

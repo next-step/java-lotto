@@ -1,11 +1,13 @@
-package lottogame.controller.resultcheck.spi;
+package lottogame.controller.spi;
 
 import java.util.Set;
 
-public interface ResultCheckInputer {
+public interface Inputer {
+
+    int inputMoney();
 
     Set<Integer> inputWinningLottoNumbers();
 
     Integer inputBonusLottoNumber();
-    
+
 }
