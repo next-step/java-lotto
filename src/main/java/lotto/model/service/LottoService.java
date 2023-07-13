@@ -11,8 +11,8 @@ public final class LottoService {
     private final Lottos lottos;
     private final LottoMoney lottoMoney;
 
-    public LottoService(final int money, final NumbersGenerator numbersGenerator) {
-        this.lottoMoney = new LottoMoney(money);
+    public LottoService(final LottoMoney lottoMoney, final NumbersGenerator numbersGenerator) {
+        this.lottoMoney = lottoMoney;
         this.lottos = new Lottos(lottoMoney.getCount(), numbersGenerator);
     }
 
