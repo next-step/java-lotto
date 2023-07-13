@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class LottosTest {
@@ -29,5 +30,21 @@ class LottosTest {
         expectedResults.add(LottoRank.FIRST, 1);
 
         Assertions.assertThat(lottoResults).isEqualTo(expectedResults);
+    }
+
+    @Test
+    @DisplayName("로또를 합칠 수 있다.")
+    void combine() {
+        Lottos autoLottos = new Lottos(
+                new ArrayList<>(new ArrayList<>(List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)))))
+        );
+        Lottos manualLottos = new Lottos(
+                new ArrayList<>(new ArrayList<>(List.of(new Lotto(List.of(7, 8, 9, 10, 11, 12)))))
+        );
+
+        Lottos totalLottos = autoLottos.combineLottos(manualLottos);
+
+        Assertions.assertThat(totalLottos)
+                .isEqualTo(new Lottos(List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Lotto(List.of(7, 8, 9, 10, 11, 12)))));
     }
 }

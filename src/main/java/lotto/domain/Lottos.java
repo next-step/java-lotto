@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -28,6 +29,11 @@ public class Lottos {
             lottoResults.add(winningNumbers.match(lotto), 1);
         }
         return lottoResults;
+    }
+
+    public Lottos combineLottos(Lottos lottos) {
+        this.lottos.addAll(lottos.lottos);
+        return new Lottos(Collections.unmodifiableList(this.lottos));
     }
 
     @Override
