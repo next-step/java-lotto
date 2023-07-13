@@ -49,14 +49,14 @@ public final class LottoView {
             .forEach(System.out::println);
     }
 
-    private String lottoMessage(Lotto lotto) {
+    private String lottoMessage(final Lotto lotto) {
         return "[ " + lotto.getLotto().stream()
             .map(LottoNumber::getNumber)
             .map(String::valueOf)
             .collect(Collectors.joining(", ")) + " ]";
     }
 
-    public void printLottoResult(LottoResults lottoResults) {
+    public void printLottoResult(final LottoResults lottoResults) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
@@ -65,7 +65,7 @@ public final class LottoView {
             .forEach(System.out::println);
     }
 
-    private String resultMessage(LottoResult lottoResult) {
+    private String resultMessage(final LottoResult lottoResult) {
         return MessageFormat.format("{0}개 일치{1} ({2}원) - {3}개",
             lottoResult.getMatchCount(),
             lottoResult.getMessage(),

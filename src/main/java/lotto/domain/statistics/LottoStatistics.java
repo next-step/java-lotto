@@ -12,30 +12,26 @@ public final class LottoStatistics {
     private final Map<LottoMatch, Integer> statistics = new EnumMap<>(LottoMatch.class);
     private final double profitRate;
 
-    public LottoStatistics(final Lottos lottos, final WinningNumber winningNumber, Payment payment) {
+    public LottoStatistics(final Lottos lottos, final WinningNumber winningNumber,
+        final Payment payment) {
         calculateStatistics(lottos, winningNumber);
         profitRate = calculateProfitRate(payment);
     }
 
     private void calculateStatistics(final Lottos lottos, final WinningNumber winningNumber) {
-        lottos.getLottos().stream()
-            .map(lotto -> getLottoMatchKey(lotto, winningNumber))
+        lottos.getLottos().stream().map(lotto -> getLottoMatchKey(lotto, winningNumber))
             .forEach(this::putLotto);
         statistics.remove(LottoMatch.NONE_MATCH);
     }
 
-    private LottoMatchKey getLottoMatchKey(Lotto lotto, WinningNumber winningNumber) {
-        return new LottoMatchKey(
-            lotto.hasLottoNumber(winningNumber.getBonusBall()),
-            lotto.countMatch(winningNumber.getWinningLotto())
-        );
+    private LottoMatchKey getLottoMatchKey(final Lotto lotto, final WinningNumber winningNumber) {
+        return new LottoMatchKey(lotto.hasLottoNumber(winningNumber.getBonusBall()),
+            lotto.countMatch(winningNumber.getWinningLotto()));
     }
 
-    private void putLotto(LottoMatchKey lottoMatchKey) {
-        statistics.put(
-            LottoMatch.find(lottoMatchKey),
-            statistics.getOrDefault(LottoMatch.find(lottoMatchKey), 0) + 1
-        );
+    private void putLotto(final LottoMatchKey lottoMatchKey) {
+        statistics.put(LottoMatch.find(lottoMatchKey),
+            statistics.getOrDefault(LottoMatch.find(lottoMatchKey), 0) + 1);
     }
 
     private double calculateProfitRate(final Payment payment) {

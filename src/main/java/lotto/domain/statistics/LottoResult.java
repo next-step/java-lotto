@@ -9,7 +9,7 @@ public class LottoResult {
     private final int prize;
     private final int prizeCount;
 
-    public LottoResult(LottoMatch lottoMatch, LottoStatistics lottoStatistics) {
+    public LottoResult(final LottoMatch lottoMatch, final LottoStatistics lottoStatistics) {
         LottoMatchKey lottoMatchKey = lottoMatch.getLottoMatchKey();
         matchCount = lottoMatchKey.getMatchCount();
         message = getMessage(lottoMatchKey);
@@ -17,7 +17,7 @@ public class LottoResult {
         prizeCount = getPrizeCount(lottoMatch, lottoStatistics);
     }
 
-    private String getMessage(LottoMatchKey lottoMatchKey) {
+    private String getMessage(final LottoMatchKey lottoMatchKey) {
         String bonusMessage = "";
         if (lottoMatchKey.getMatchCount() == 5 && lottoMatchKey.getIsBonus()) {
             bonusMessage = ", 보너스 볼 일치";
@@ -25,7 +25,7 @@ public class LottoResult {
         return bonusMessage;
     }
 
-    private int getPrizeCount(LottoMatch lottoMatch, LottoStatistics lottoStatistics) {
+    private int getPrizeCount(final LottoMatch lottoMatch, final LottoStatistics lottoStatistics) {
         Map<LottoMatch, Integer> resultMap = lottoStatistics.getStatistics();
         int count = 0;
         if (resultMap.containsKey(lottoMatch)) {

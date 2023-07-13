@@ -9,12 +9,12 @@ public final class Lotto {
     private static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> lotto;
 
-    public Lotto(final List<Integer> values, boolean isAuto) {
+    public Lotto(final List<Integer> values, final boolean isAuto) {
         validate(values, isAuto);
         this.lotto = toLottoNumbers(values);
     }
 
-    private void validate(final List<Integer> values, boolean isAuto) {
+    private void validate(final List<Integer> values, final boolean isAuto) {
         validateSize(values, isAuto);
         validateDuplicate(values);
     }
@@ -26,7 +26,7 @@ public final class Lotto {
         }
     }
 
-    private void validateSize(final List<Integer> values, boolean isAuto) {
+    private void validateSize(final List<Integer> values, final boolean isAuto) {
         if (values.size() < LOTTO_SIZE || (LOTTO_SIZE < values.size() && !isAuto)) {
             throw new IllegalArgumentException("로또 번호는 6개여야합니다");
         }
@@ -50,8 +50,7 @@ public final class Lotto {
     }
 
     public List<LottoNumber> getLotto() {
-        return lotto.stream()
-            .collect(Collectors.toList());
+        return lotto;
     }
 
 }

@@ -30,7 +30,8 @@ public final class Lottos {
         }
     }
 
-    private void record(final int matchCount, final Lotto lotto, final WinningNumber winningNumber) {
+    private void record(final int matchCount, final Lotto lotto,
+        final WinningNumber winningNumber) {
         if (matchCount == 5) {
             recordFiveMatch(matchCount, lotto, winningNumber);
             return;
@@ -38,7 +39,8 @@ public final class Lottos {
         recordEach(matchCount, false);
     }
 
-    private void recordFiveMatch(final int matchCount, final Lotto lotto, final WinningNumber winningNumber) {
+    private void recordFiveMatch(final int matchCount, final Lotto lotto,
+        final WinningNumber winningNumber) {
         if (lotto.hasLottoNumber(winningNumber.getBonusBall())) {
             recordEach(matchCount, true);
             return;
