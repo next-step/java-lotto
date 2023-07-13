@@ -53,8 +53,8 @@ public class BoughtLottosTest {
                 boughtLottos.winningResults(new WinningLotto(winningLotto, bonusBall));
 
         /* then */
-        assertThat(winningStatistics.getWinningCount(LottoRule.FIRST)).isEqualTo(1);
-        assertThat(winningStatistics.getWinningCount(LottoRule.SECOND)).isEqualTo(1);
-        assertThat(winningStatistics.getWinningCount(LottoRule.NONE)).isEqualTo(1);
+        assertThat(winningStatistics.getWinningCount(LottoRank.FIRST)).isEqualTo(1);
+        assertThat(winningStatistics.getWinningCount(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(winningStatistics.getWinningCount(LottoRank.NONE)).isEqualTo(1);
     }
 }

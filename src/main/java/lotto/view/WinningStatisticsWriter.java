@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import lotto.domain.LottoRule;
+import lotto.domain.LottoRank;
 import lotto.domain.WinningStatistics;
 
 public class WinningStatisticsWriter {
@@ -12,11 +12,11 @@ public class WinningStatisticsWriter {
         System.out.println("당첨 통계");
         System.out.println("-----------");
 
-        final List<LottoRule> lottoRules = Arrays.asList(LottoRule.values());
-        Collections.reverse(lottoRules);
+        final List<LottoRank> lottoRanks = Arrays.asList(LottoRank.values());
+        Collections.reverse(lottoRanks);
 
-        for (LottoRule lottoRule : lottoRules) {
-            printEachStatistics(winningStatistics, lottoRule);
+        for (LottoRank lottoRank : lottoRanks) {
+            printEachStatistics(winningStatistics, lottoRank);
         }
 
         final double earningRate = Math.floor(winningStatistics.getEarningRate() / 100) * 100;
@@ -30,22 +30,22 @@ public class WinningStatisticsWriter {
 
     private void printEachStatistics(
             final WinningStatistics winningStatistics,
-            final LottoRule lottoRule
+            final LottoRank lottoRank
     ) {
-        if (lottoRule.equals(LottoRule.NONE)) {
+        if (lottoRank.equals(LottoRank.NONE)) {
             return;
         }
-        if (lottoRule.equals(LottoRule.SECOND)) {
+        if (lottoRank.equals(LottoRank.SECOND)) {
             System.out.println(formatToStatisticsForSecondRank(
-                    lottoRule.getMatchCount(),
-                    lottoRule.getPrize(),
-                    winningStatistics.getWinningCount(lottoRule)));
+                    lottoRank.getMatchCount(),
+                    lottoRank.getPrize(),
+                    winningStatistics.getWinningCount(lottoRank)));
             return;
         }
         System.out.println(formatToStatistics(
-                lottoRule.getMatchCount(),
-                lottoRule.getPrize(),
-                winningStatistics.getWinningCount(lottoRule)));
+                lottoRank.getMatchCount(),
+                lottoRank.getPrize(),
+                winningStatistics.getWinningCount(lottoRank)));
     }
 
     private String formatToStatisticsForSecondRank(

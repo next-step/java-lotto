@@ -11,15 +11,15 @@ class RankWithWinningCountTest {
     @Test
     @DisplayName("해당 랭킹에 맞는 당첨횟수를 가지는지 테스트")
     void rankWithWinningCount_getWinningCount() {
-        List<LottoRule> lottoRules = List.of(LottoRule.FIFTH, LottoRule.NONE, LottoRule.SECOND);
+        List<LottoRank> lottoRanks = List.of(LottoRank.FIFTH, LottoRank.NONE, LottoRank.SECOND);
 
-        RankWithWinningCount rankWithWinningCount = new RankWithWinningCount(lottoRules);
+        RankWithWinningCount rankWithWinningCount = new RankWithWinningCount(lottoRanks);
 
-        assertThat(rankWithWinningCount.getWinningCount(LottoRule.FIRST)).isEqualTo(0);
-        assertThat(rankWithWinningCount.getWinningCount(LottoRule.SECOND)).isEqualTo(1);
-        assertThat(rankWithWinningCount.getWinningCount(LottoRule.THIRD)).isEqualTo(0);
-        assertThat(rankWithWinningCount.getWinningCount(LottoRule.FOURTH)).isEqualTo(0);
-        assertThat(rankWithWinningCount.getWinningCount(LottoRule.FIFTH)).isEqualTo(1);
-        assertThat(rankWithWinningCount.getWinningCount(LottoRule.NONE)).isEqualTo(1);
+        assertThat(rankWithWinningCount.getWinningCount(LottoRank.FIRST)).isEqualTo(0);
+        assertThat(rankWithWinningCount.getWinningCount(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(rankWithWinningCount.getWinningCount(LottoRank.THIRD)).isEqualTo(0);
+        assertThat(rankWithWinningCount.getWinningCount(LottoRank.FOURTH)).isEqualTo(0);
+        assertThat(rankWithWinningCount.getWinningCount(LottoRank.FIFTH)).isEqualTo(1);
+        assertThat(rankWithWinningCount.getWinningCount(LottoRank.NONE)).isEqualTo(1);
     }
 }

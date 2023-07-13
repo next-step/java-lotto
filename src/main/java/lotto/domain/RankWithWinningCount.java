@@ -8,18 +8,18 @@ public class RankWithWinningCount {
 
     private static final int DEFAULT_COUNT = 0;
 
-    private final Map<LottoRule, Integer> rankWithCount;
+    private final Map<LottoRank, Integer> rankWithCount;
 
-    public RankWithWinningCount(final List<LottoRule> lottoResults) {
+    public RankWithWinningCount(final List<LottoRank> lottoResultRanks) {
         this.rankWithCount = new HashMap<>();
 
-        for (LottoRule lottoResult : lottoResults) {
-            this.rankWithCount.put(lottoResult,
-                    this.rankWithCount.getOrDefault(lottoResult, DEFAULT_COUNT) + 1);
+        for (LottoRank lottoRank : lottoResultRanks) {
+            this.rankWithCount.put(lottoRank,
+                    this.rankWithCount.getOrDefault(lottoRank, DEFAULT_COUNT) + 1);
         }
     }
 
-    public int getWinningCount(final LottoRule lottoRule) {
-        return this.rankWithCount.getOrDefault(lottoRule, DEFAULT_COUNT);
+    public int getWinningCount(final LottoRank lottoRank) {
+        return this.rankWithCount.getOrDefault(lottoRank, DEFAULT_COUNT);
     }
 }

@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.Set;
 
-public enum LottoRule {
+public enum LottoRank {
     FIRST(6, 2_000_000_000),
     SECOND(5, true, 30_000_000),
     THIRD(5, false, 1_500_000),
@@ -15,15 +15,15 @@ public enum LottoRule {
     private final Set<Boolean> bonusBallMatchRule;
     private final int prize;
 
-    LottoRule(final int matchCount, final int prize) {
+    LottoRank(final int matchCount, final int prize) {
         this(matchCount, Set.of(false, true), prize);
     }
 
-    LottoRule(final int matchCount, final boolean isMatchBonus, final int prize) {
+    LottoRank(final int matchCount, final boolean isMatchBonus, final int prize) {
         this(matchCount, Set.of(isMatchBonus), prize);
     }
 
-    LottoRule(
+    LottoRank(
             final int matchCount,
             final Set<Boolean> bonusBallMatchRule,
             final int prize
@@ -33,8 +33,8 @@ public enum LottoRule {
         this.prize = prize;
     }
 
-    public static LottoRule winningResult(final int matchCount, final boolean isMatchBonus) {
-        return Arrays.stream(LottoRule.values())
+    public static LottoRank winningResult(final int matchCount, final boolean isMatchBonus) {
+        return Arrays.stream(LottoRank.values())
                 .filter(r -> r.isMatch(matchCount, isMatchBonus))
                 .findAny()
                 .orElse(NONE);

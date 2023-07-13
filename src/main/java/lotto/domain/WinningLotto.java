@@ -19,9 +19,9 @@ public class WinningLotto {
         }
     }
 
-    public LottoRule isMatch(Lotto lotto) {
+    public LottoRank isMatch(final Lotto lotto) {
         int matchCount = this.winningLotto.getDuplicateBallCount(lotto);
         boolean isMatchBonus = lotto.isContains(this.bonus);
-        return LottoRule.winningResult(matchCount, isMatchBonus);
+        return LottoRank.winningResult(matchCount, isMatchBonus);
     }
 }

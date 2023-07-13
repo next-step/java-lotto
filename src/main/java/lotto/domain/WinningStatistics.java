@@ -7,20 +7,24 @@ public class WinningStatistics {
     private final RankWithWinningCount rankWithWinningCount;
     private final double earningRate;
 
-    public WinningStatistics(final List<LottoRule> lottoResults) {
-        this.rankWithWinningCount = new RankWithWinningCount(lottoResults);
-        this.earningRate =
-                sumLottoResultPrize(lottoResults) / (double) (lottoResults.size() * Lotto.PRICE);
+    public WinningStatistics(final List<LottoRank> lottoRankResults) {
+        this.rankWithWinningCount = new RankWithWinningCount(lottoRankResults);
+        this.earningRate = initEarningRate(lottoRankResults);
     }
 
-    private long sumLottoResultPrize(final List<LottoRule> lottoResults) {
-        return lottoResults.stream()
-                .mapToLong(LottoRule::getPrize)
+    private double initEarningRate(List<LottoRank> lottoRankResults) {
+        return sumLottoResultPrize(lottoRankResults) /
+                (double) (lottoRankResults.size() * Lotto.PRICE);
+    }
+
+    private long sumLottoResultPrize(final List<LottoRank> lottoResultRanks) {
+        return lottoResultRanks.stream()
+                .mapToLong(LottoRank::getPrize)
                 .sum();
     }
 
-    public int getWinningCount(final LottoRule lottoRule) {
-        return this.rankWithWinningCount.getWinningCount(lottoRule);
+    public int getWinningCount(final LottoRank lottoRank) {
+        return this.rankWithWinningCount.getWinningCount(lottoRank);
     }
 
     public double getEarningRate() {
