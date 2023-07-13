@@ -41,6 +41,10 @@ public enum LottoRank {
         return price;
     }
 
+    public long getMatchCount() {
+        return matchCount;
+    }
+
     public static LottoRank rank(int matchCount, boolean bonusMatch) {
         return Arrays.stream(LottoRank.values())
                 .filter(it -> it.match(matchCount, bonusMatch))
