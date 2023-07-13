@@ -18,10 +18,10 @@ class ProfitTest {
     @DisplayName("사용 금액과 얻은 금액을 이용하여 이익률을 생성한다.")
     void createProfitWithMoneyTest() {
         //given
-        Money consume = new Money(1000L);
-        Money prize = new Money(20000L);
+        Money dividend = new Money(1000L);
+        Money divisor = new Money(20000L);
 
         //when, then
-        assertThat(new Profit(consume, prize)).isEqualTo(new Profit(20.0));
+        assertThat(new Profit(dividend, divisor)).isEqualTo(new Profit(0.05));
     }
 }
