@@ -27,14 +27,12 @@ public class LottoApplication {
         Quantity manualLottoQuantity = inputManualLottoCount(purchaseMoney);
         Quantity randomLottoQuantity = LottoGroup.getQuantity(purchaseMoney)
             .subtract(manualLottoQuantity);
-
         LottoGroup lottoGroup = LottoGroup.createRandomAndManualLottos(randomLottoQuantity,
             inputManualLotto(manualLottoQuantity));
+
         output.printQuantity(manualLottoQuantity, randomLottoQuantity);
         output.printLottos(lottoGroup);
-
-        WinningLotto winningLotto = inputWinningLotto();
-        printResult(LottoResult.of(lottoGroup, winningLotto));
+        printResult(LottoResult.of(lottoGroup, inputWinningLotto()));
     }
 
     private Money inputPurchaseMoney() {
