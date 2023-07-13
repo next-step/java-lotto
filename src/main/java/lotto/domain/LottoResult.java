@@ -1,26 +1,45 @@
 package lotto.domain;
 
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public final class LottoResult {
     public static final int MIN_MATCH_COUNT = 3;
-    private final Map<LottoMatch, Integer> resultMap = new HashMap<>();
+    private final Map<LottoMatch, Integer> resultMap = new EnumMap<>(LottoMatch.class);
 
-    public LottoResult() {
-        init();
+    public LottoResult(Lottos lottos, WinningNumber winningNumber) {
+        recordResult(winningNumber, lottos);
     }
 
-    private void init() {
+    private void recordResult(final WinningNumber winningNumber, final Lottos lottos) {
+        setResultMap();
+        for (Lotto lotto : lottos.getLottos()) {
+            filter(lotto, winningNumber);
+        }
+    }
+
+    private void setResultMap() {
         for (LottoMatch lottoMatch : LottoMatch.values()) {
             resultMap.put(lottoMatch, 0);
         }
     }
 
-    public void recordResult(final Lottos lottos, final WinningNumber winningNumber) {
-        for (Lotto lotto : lottos.getLottos()) {
-            filter(lotto, winningNumber);
+    private void filter(final Lotto lotto, final WinningNumber winningNumber) {
+        int matchCount = lotto.countMatch(winningNumber.getWinningLotto());
+        if (matchCount >= MIN_MATCH_COUNT) {
+            boolean isBonus = lotto.hasLottoNumber(winningNumber.getBonusBall());
+            recordEach(matchCount, isBonus);
+        }
+    }
+
+    private void recordEach(final int matchCount, final boolean isBonus) {
+        if (LottoMatch.contains(matchCount, isBonus)) {
+            LottoMatch lottoMatch = LottoMatch.find(matchCount, isBonus);
+            resultMap.put(
+                    lottoMatch,
+                    resultMap.getOrDefault(lottoMatch, 0) + 1
+            );
         }
     }
 
@@ -30,24 +49,6 @@ public final class LottoResult {
             profit += resultMap.get(lottoMatch) * lottoMatch.getPrize();
         }
         return profit;
-    }
-
-    private void filter(final Lotto lotto, final WinningNumber winningNumber) {
-        int matchCount = lotto.countMatch(winningNumber.getWinningLotto());
-        if (matchCount >= MIN_MATCH_COUNT) {
-            boolean b = lotto.hasLottoNumber(winningNumber.getBonusBall());
-            recordEach(matchCount, b);
-        }
-    }
-
-    private void recordEach(final int matchCount, final boolean isBonus) {
-        LottoMatchKey lottoMatchKey = new LottoMatchKey(isBonus, matchCount);
-        if (LottoMatch.containsKey(lottoMatchKey)) {
-            resultMap.put(
-                    LottoMatch.find(lottoMatchKey),
-                    resultMap.getOrDefault(LottoMatch.find(lottoMatchKey), 0) + 1
-            );
-        }
     }
 
     public Map<LottoMatch, Integer> getResult() {

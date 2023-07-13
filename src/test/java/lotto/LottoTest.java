@@ -37,7 +37,7 @@ public class LottoTest {
         List<Integer> values = List.of(1, 2, 3, 5);
         Assertions.assertThatExceptionOfType(RuntimeException.class)
             .isThrownBy(() -> new Lotto(values))
-            .withMessage("로또 번호는 6개여야합니다");
+            .withMessage("로또 번호는 6개여야합니다. 현재 개수 : 4");
     }
 
     @DisplayName("로또 번호가 중복되면 예외가 발생한다")
@@ -61,9 +61,9 @@ public class LottoTest {
     @Test
     void 로또_일치_카운트() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        String winingValue = "5,1,10,45,2,29";
+        List<Integer> winingValue = List.of(5, 1, 10, 45, 2, 29);
 
-        WinningNumber winningNumber = new WinningNumber(winingValue, "30");
+        WinningNumber winningNumber = new WinningNumber(winingValue, 30);
 
         assertThat(lotto.countMatch(winningNumber.getWinningLotto()))
             .isEqualTo(3);

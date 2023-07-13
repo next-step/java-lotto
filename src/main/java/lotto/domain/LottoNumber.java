@@ -14,20 +14,8 @@ public final class LottoNumber {
         this.lottoNumber = value;
     }
 
-    public LottoNumber(final String text) {
-        validateBlank(text);
-        lottoNumber = Integer.parseInt(text.trim());
-        validateRange(lottoNumber);
-    }
-
-    private void validateBlank(final String value) {
-        if (value == null || value.isBlank()) {
-            throw new IllegalArgumentException("숫자를 입력해야 합니다");
-        }
-    }
-
     private void validateRange(final int number) {
-        if (number < LOWER_BOUND || number > UPPER_BOUND) {
+        if (number < LOWER_BOUND || UPPER_BOUND < number) {
             throw new IllegalArgumentException(
                 MessageFormat.format("{0}이상 {1}이하의 숫자여야합니다", LOWER_BOUND, UPPER_BOUND)
             );

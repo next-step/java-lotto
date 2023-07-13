@@ -1,44 +1,45 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Arrays;
 
 public enum LottoMatch {
-    THREE_MATCH(new LottoMatchKey(false, 3), 5_000),
-    FOUR_MATCH(new LottoMatchKey(false, 4), 50_000),
-    FIVE_MATCH(new LottoMatchKey(false, 5), 1_500_000),
-    FIVE_BONUS_MATCH(new LottoMatchKey(true, 5), 30_000_000),
-    SIX_MATCH(new LottoMatchKey(false, 6), 2_000_000_000);
+    THREE_MATCH(3, 5_000, false),
+    FOUR_MATCH(4, 50_000, false),
+    FIVE_MATCH(5, 1_500_000, false),
+    FIVE_BONUS_MATCH(5, 30_000_000, true),
+    SIX_MATCH(6, 2_000_000_000, false);
 
-    private final LottoMatchKey lottoMatchKey;
+    private final int matchCount;
     private final int prize;
+    private final boolean isBonus;
 
-    LottoMatch(final LottoMatchKey lottoMatchKey, final int prize) {
-        this.lottoMatchKey = lottoMatchKey;
+    LottoMatch(int matchCount, int prize, boolean isBonus) {
+        this.matchCount = matchCount;
         this.prize = prize;
+        this.isBonus = isBonus;
     }
 
-    public static LottoMatch find(final LottoMatchKey lottoMatchKey) {
-        return MAP.get(lottoMatchKey);
+    public static LottoMatch find(final int matchCount, final boolean isBonus) {
+        return Arrays.stream(values())
+                .filter(lottoMatch -> lottoMatch.matchCount == matchCount && lottoMatch.isBonus == isBonus)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상금 타입입니다"));
     }
 
-    public static boolean containsKey(final LottoMatchKey lottoMatchKey) {
-        return MAP.containsKey(lottoMatchKey);
+    public static boolean contains(final int matchCount, final boolean isBonus) {
+        return Arrays.stream(values())
+                .anyMatch(lottoMatch -> lottoMatch.matchCount == matchCount && lottoMatch.isBonus == isBonus);
     }
 
-    private static final Map<LottoMatchKey, LottoMatch> MAP =
-        Collections.unmodifiableMap(Stream.of(values())
-            .collect(Collectors.toMap(LottoMatch::getLottoMatchKey, Function.identity())));
-
-
-    public LottoMatchKey getLottoMatchKey() {
-        return lottoMatchKey;
+    public int getMatchCount() {
+        return matchCount;
     }
 
     public int getPrize() {
         return prize;
+    }
+
+    public boolean isBonus() {
+        return isBonus;
     }
 }

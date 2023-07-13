@@ -28,14 +28,16 @@ public final class Lotto {
 
     private void validateSize(final List<Integer> values) {
         if (values.size() != MAX_LOTTO_COUNT) {
-            throw new IllegalArgumentException(MessageFormat.format("로또 번호는 {0}개여야합니다", MAX_LOTTO_COUNT));
+            throw new IllegalArgumentException(
+                    MessageFormat.format("로또 번호는 {0}개여야합니다. 현재 개수 : {1}", MAX_LOTTO_COUNT, values.size())
+            );
         }
     }
 
     private List<LottoNumber> toLottoNumbers(final List<Integer> values) {
         return values.stream()
             .map(LottoNumber::new)
-            .collect(Collectors.toUnmodifiableList());
+            .collect(Collectors.toList());
     }
 
     public boolean hasLottoNumber(final LottoNumber lottoNumber) {

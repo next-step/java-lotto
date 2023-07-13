@@ -39,10 +39,9 @@ public class LottosTest {
 
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3));
 
-        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 16", "7");
+        WinningNumber winningNumber = new WinningNumber(List.of(2, 3, 4, 5, 16, 7), 10);
 
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.recordResult(lottos, winningNumber);
+        LottoResult lottoResult = new LottoResult(lottos, winningNumber);
 
         Map<LottoMatch, Integer> resultMap = lottoResult.getResult();
 
