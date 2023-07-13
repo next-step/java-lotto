@@ -23,7 +23,7 @@ public final class LottoResult {
         long totalPrize = lottoResultStatistics.entrySet().stream()
                 .mapToLong(entry -> Rank.getTotalPrize(entry.getKey(), entry.getValue()))
                 .sum();
-        return totalPrize / lottoMoney.getSpentMoney();
+        return totalPrize / lottoMoney.getTotalSpentMoney();
     }
 
     public int getCount(final Rank rank) {

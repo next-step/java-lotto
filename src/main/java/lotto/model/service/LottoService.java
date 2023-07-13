@@ -13,7 +13,7 @@ public final class LottoService {
 
     public LottoService(final LottoMoney lottoMoney, final NumbersGenerator numbersGenerator) {
         this.lottoMoney = lottoMoney;
-        this.lottos = new Lottos(lottoMoney.getCount(), numbersGenerator);
+        this.lottos = new Lottos(lottoMoney.getTotalCount(), numbersGenerator);
     }
 
     public Lottos getLottos() {

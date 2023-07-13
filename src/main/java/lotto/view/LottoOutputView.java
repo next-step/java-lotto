@@ -23,7 +23,7 @@ public final class LottoOutputView {
     }
 
     public void printBuyingCount(final LottoMoney lottoMoney) {
-        System.out.println(lottoMoney.getCount() + "개를 구매했습니다.");
+        System.out.println(lottoMoney.getTotalCount() + "개를 구매했습니다.");
         System.out.println("거스름돈은 " + lottoMoney.getChange() + "원 입니다.");
     }
 
