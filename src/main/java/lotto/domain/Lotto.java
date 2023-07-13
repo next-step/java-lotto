@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -45,7 +46,7 @@ public class Lotto {
     }
 
     public List<Ball> getBalls() {
-        return this.balls;
+        return Collections.unmodifiableList(this.balls);
     }
 
     public boolean isContains(final Ball ball) {
