@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import lotto.domain.vo.Money;
+import lotto.domain.vo.Quantity;
 
 public class LottoGroup {
 
@@ -19,23 +20,24 @@ public class LottoGroup {
         verify(money);
 
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < getQuantity(money); i++) {
+        for (int i = 0; i < getQuantity(money).getValue(); i++) {
             lottos.add(Lotto.createRandomLotto());
         }
         return new LottoGroup(lottos);
     }
 
-    public static LottoGroup createRandomAndManualLottos(final int randomQuantity,
+    public static LottoGroup createRandomAndManualLottos(final Quantity randomQuantity,
         final List<Lotto> manualLottos) {
         List<Lotto> lottos = new ArrayList<>(manualLottos);
-        for (int i = 0; i < randomQuantity; i++) {
+        for (int i = 0; i < randomQuantity.getValue(); i++) {
             lottos.add(Lotto.createRandomLotto());
         }
         return new LottoGroup(lottos);
     }
 
-    public static int getQuantity(final Money money) {
-        return money.divide(LOTTO_PRICE).intValue();
+    public static Quantity getQuantity(final Money money) {
+        Double divided = money.divide(LOTTO_PRICE);
+        return new Quantity(divided.intValue());
     }
 
     public static Money getSpentMoney(final Long quantity) {

@@ -8,13 +8,15 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
 import lotto.domain.vo.Profit;
+import lotto.domain.vo.Quantity;
 
 public class LottoOutput {
 
     public static final String LOTTO_JOIN_DELIMITER = ", ";
 
-    public void printQuantity(final int manualAmount, final int randomAmount) {
-        System.out.println("수동으로 " + manualAmount + "장, 자동으로 " + randomAmount + "개를 구매했습니다.");
+    public void printQuantity(final Quantity manualAmount, final Quantity randomAmount) {
+        System.out.println("수동으로 " + manualAmount.getValue() + "장, " +
+            "자동으로 " + randomAmount.getValue() + "개를 구매했습니다.");
     }
 
     public void printLottos(final LottoGroup lottoGroup) {

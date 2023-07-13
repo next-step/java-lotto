@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.vo.Money;
+import lotto.domain.vo.Quantity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,7 +43,7 @@ class LottoGroupTest {
     @DisplayName("자동 로또의 구매 개수와 수동으로 구매할 로또 번호를 입력하면 적절한 로또를 생성한다. ")
     void createManualAndRandomLotto() {
         // when
-        LottoGroup lottoGroup = LottoGroup.createRandomAndManualLottos(8, lottos);
+        LottoGroup lottoGroup = LottoGroup.createRandomAndManualLottos(new Quantity(8), lottos);
 
         // then
         assertThat(lottoGroup.getLottos()).hasSize(14);

@@ -11,6 +11,17 @@ public class Quantity {
         this.value = quantity;
     }
 
+    public Quantity subtract(Quantity other) {
+        if (this.value < other.value) {
+            throw new IllegalArgumentException("quantity can't be less than 0");
+        }
+        return new Quantity(this.value - other.value);
+    }
+
+    public int getValue() {
+        return value;
+    }
+
     private void verify(int value) {
         if (value < 0) {
             throw new IllegalArgumentException("quantity should be greater than 0");

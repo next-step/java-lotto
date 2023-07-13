@@ -20,12 +20,13 @@ public class LottoInput {
     }
 
     public Long inputPurchaseMoney() {
-        return inputAmount();
+        System.out.println("구입금액을 입력해 주세요.");
+        return inputQuantity();
     }
 
-    public int inputManualLottoCount() {
+    public int inputManualLottoQuantity() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return inputAmount().intValue();
+        return inputQuantity().intValue();
     }
 
     public List<Integer> inputManualLottoNumbers() {
@@ -34,10 +35,10 @@ public class LottoInput {
 
     public int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return inputAmount().intValue();
+        return inputQuantity().intValue();
     }
 
-    private Long inputAmount() {
+    private Long inputQuantity() {
         return Long.parseLong(scanner.nextLine());
     }
 

@@ -18,7 +18,8 @@ class MoneyTest {
     @Test
     @DisplayName("구입금액으로 상품을 몇 개 살 수 있는지 테스트")
     void calculateQuantityTest() {
-        Assertions.assertThat(LottoGroup.getQuantity(new Money(14000L))).isEqualTo(14);
+        Assertions.assertThat(LottoGroup.getQuantity(new Money(14000L)))
+            .isEqualTo(new Quantity(14));
     }
 
     @Test
