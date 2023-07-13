@@ -56,6 +56,10 @@ public class Lotto {
             .count();
     }
 
+    public boolean contains(final LottoNumber other) {
+        return this.numbers.contains(other);
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return this.numbers;
     }
