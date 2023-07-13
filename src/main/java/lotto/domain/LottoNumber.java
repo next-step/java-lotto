@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -9,10 +10,9 @@ public class LottoNumber {
 
     static final int LOTTO_START = 1;
     static final int LOTTO_END = 45;
-    private static final List<LottoNumber> lottoNumberCache = IntStream.rangeClosed(0, LottoNumber.LOTTO_END)
+    private static final Map<Integer, LottoNumber> lottoNumberCache = IntStream.rangeClosed(LOTTO_START, LOTTO_END)
             .boxed()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList());
+            .collect(Collectors.toMap(number -> number, LottoNumber::new));
     private final int number;
 
     private LottoNumber(final Integer number) {
