@@ -21,29 +21,23 @@ public class LottoApplication {
     public void run() {
         Money purchaseMoney = inputPurchaseMoney();
         output.printQuantity(purchaseMoney.calculateQuantity(new Money(LottoGroup.LOTTO_PRICE)));
-        LottoGroup lottoGroup = LottoGroup.from(purchaseMoney);
 
+        LottoGroup lottoGroup = LottoGroup.from(purchaseMoney);
         output.printLottos(lottoGroup);
-        System.out.println();
 
         WinningLotto winningLotto = inputWinningLotto();
         printResult(LottoResult.of(lottoGroup, winningLotto));
     }
 
     private Money inputPurchaseMoney() {
-        output.printAskPurchaseMoney();
+        System.out.println("구입금액을 입력해 주세요.");
         return new Money(input.inputPurchaseMoney());
     }
 
     private WinningLotto inputWinningLotto() {
-        output.printAskWinningNumbers();
         List<Integer> winningNumbers = input.inputWinningNumbers();
-        output.printAskBonus();
         int bonus = input.inputBonusNumber();
-
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
-        System.out.println();
-        return winningLotto;
+        return new WinningLotto(winningNumbers, bonus);
     }
 
     private void printResult(final LottoResult lottoResult) {
