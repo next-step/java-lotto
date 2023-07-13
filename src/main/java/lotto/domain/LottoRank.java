@@ -36,7 +36,7 @@ public enum LottoRank {
     NONE(0L, 2, false) {
         @Override
         public boolean checkLottoMatch(long matchCount, boolean bonusCount) {
-            return matchCount >= this.matchCount;
+            return matchCount <= this.matchCount;
         }
     };
 
