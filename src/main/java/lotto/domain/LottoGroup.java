@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.domain.vo.Money;
 
 public class LottoGroup {
 

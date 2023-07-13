@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Map;
 import java.util.stream.Collectors;
+import lotto.domain.vo.Money;
+import lotto.domain.vo.Profit;
 
 public class LottoResult {
 

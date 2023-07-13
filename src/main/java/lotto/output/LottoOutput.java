@@ -7,7 +7,7 @@ import lotto.domain.LottoGroup;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
-import lotto.domain.Profit;
+import lotto.domain.vo.Profit;
 
 public class LottoOutput {
 

@@ -3,8 +3,8 @@ package lotto;
 import java.util.List;
 import lotto.domain.LottoGroup;
 import lotto.domain.LottoResult;
-import lotto.domain.Money;
 import lotto.domain.WinningLotto;
+import lotto.domain.vo.Money;
 import lotto.input.LottoInput;
 import lotto.output.LottoOutput;
 
