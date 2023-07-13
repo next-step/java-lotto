@@ -64,4 +64,8 @@ public class LottoOutput {
 
         System.out.println("[" + formattedLotto + "]");
     }
+
+    public void printSectionDivider() {
+        System.out.println();
+    }
 }

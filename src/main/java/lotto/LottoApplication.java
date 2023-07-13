@@ -24,9 +24,11 @@ public class LottoApplication {
         LottoGroup lottoGroup = LottoGroup.from(purchaseMoney);
 
         output.printLottos(lottoGroup);
-        System.out.println();
+        output.printSectionDivider();
 
         WinningLotto winningLotto = inputWinningLotto();
+        output.printSectionDivider();
+
         printResult(LottoResult.of(lottoGroup, winningLotto));
     }
 
@@ -41,9 +43,7 @@ public class LottoApplication {
         output.printAskBonus();
         int bonus = input.inputBonusNumber();
 
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
-        System.out.println();
-        return winningLotto;
+        return new WinningLotto(winningNumbers, bonus);
     }
 
     private void printResult(final LottoResult lottoResult) {
