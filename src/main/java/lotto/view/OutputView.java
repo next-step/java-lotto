@@ -31,16 +31,16 @@ public class OutputView {
                 .collect(joining(DELIMITER));
     }
 
-    public static void printWinningResult(WinningResponse winningResponse) {
+    public static void printWinningResult(WinningResultDto winningResultDto) {
         System.out.println("당첨 통계\n---------");
-        for (var rank : winningResponse.getRanks()) {
-            printRank(rank, winningResponse.getCount(rank));
+        for (var rank : winningResultDto.getRanks()) {
+            printRank(rank, winningResultDto.getCount(rank));
         }
-        printProfit(winningResponse);
+        printProfit(winningResultDto);
     }
 
-    private static void printProfit(WinningResponse winningResponse) {
-        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", winningResponse.calculateProfit());
+    private static void printProfit(WinningResultDto winningResultDto) {
+        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", winningResultDto.floorProfit());
     }
 
     private static void printRank(Rank rank, int rankCount) {

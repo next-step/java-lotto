@@ -17,7 +17,7 @@ public class LottoController {
             InputView.readBonusBall());
         WinningResult winningResult = new WinningCalculator().calculate(winningLotto,
             purChasedLotto);
-        OutputView.printWinningResult(WinningResponse.of(winningResult, lottoMoney));
+        OutputView.printWinningResult(WinningResultDto.of(winningResult, lottoMoney));
     }
 
 }
