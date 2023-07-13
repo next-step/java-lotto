@@ -41,7 +41,7 @@ public class LottoApplication {
             manualPurchaseCount, numberBundles);
 
         // 구매 결과 출력
-        OutputView.printLottosSize(lottos, manualPurchaseCount);
+        OutputView.printPurchaseCount(lottos, manualPurchaseCount);
 
         // 로또 출력한다.
         OutputView.printLottos(lottos);

@@ -14,7 +14,7 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLottosSize(final List<Lotto> lottos, final long manualPurchaseCount) {
+    public static void printPurchaseCount(final List<Lotto> lottos, final long manualPurchaseCount) {
         final long autoPurchaseCount = lottos.size() - manualPurchaseCount;
         System.out.println(
             "\n수동으로 " + manualPurchaseCount + "장, 자동으로 " + autoPurchaseCount + "장을 구매했습니다.");
