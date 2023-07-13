@@ -4,11 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.List;
-import java.util.Map;
 import lotto.domain.game.Lotto;
-import lotto.domain.statistics.LottoMatch;
 import lotto.domain.game.Lottos;
-import lotto.domain.game.WinningNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 public class LottosTest {
@@ -28,9 +25,9 @@ public class LottosTest {
         assertDoesNotThrow(() -> new Lottos(lottos));
     }
 
-    @DisplayName("올바른 로또 결과를 반환한다")
+    @DisplayName("로또스에 로또 리스트를 저장한다")
     @Test
-    void 로또_결과_반환() {
+    void 로또_저장_성공() {
         List<Integer> list1 = List.of(8, 21, 23, 41, 42, 43);
         List<Integer> list2 = List.of(3, 5, 11, 16, 32, 38);
         List<Integer> list3 = List.of(7, 11, 16, 35, 36, 44);
@@ -41,16 +38,8 @@ public class LottosTest {
 
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3));
 
-        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 16", "7");
-
-        Map<LottoMatch, Integer> resultMap = lottos.getResult(winningNumber);
-
-        assertThat(resultMap)
-            .containsEntry(LottoMatch.THREE_MATCH, 1)
-            .containsEntry(LottoMatch.FOUR_MATCH, 0)
-            .containsEntry(LottoMatch.FIVE_BONUS_MATCH, 0)
-            .containsEntry(LottoMatch.FIVE_BONUS_MATCH, 0)
-            .containsEntry(LottoMatch.SIX_MATCH, 0);
+        assertThat(lottos.getLottos()).contains(lotto1);
+        assertThat(lottos.getLottos()).contains(lotto2);
+        assertThat(lottos.getLottos()).contains(lotto3);
     }
-
 }
