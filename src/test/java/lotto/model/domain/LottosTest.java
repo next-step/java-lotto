@@ -19,6 +19,29 @@ public class LottosTest {
         assertDoesNotThrow(() -> new Lottos(0, null));
     }
 
+    @Test
+    void 로또_컬렉션_리스트받아서_객체_생성() {
+        // given, when, then
+        assertDoesNotThrow(() -> new Lottos(null));
+
+    }
+
+    @Test
+    void 로또_컬렉션_리스트받아서_객체_생성시_정상적으로_데이터_담기_성공() {
+        // given, when
+        Lottos lottos = new Lottos(List.of(
+                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+                new Lotto(List.of(7, 8, 9, 10, 11, 12))
+        ));
+
+        // then
+        assertThat(lottos.getLottos()).isEqualTo(List.of(
+                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+                new Lotto(List.of(7, 8, 9, 10, 11, 12))
+        ));
+
+    }
+
     @ParameterizedTest
     @ValueSource(ints = {1, 5})
     void 로또_컬렉션_개수_입력시_해당_개수의_로또_객체들_생성(int size) {
