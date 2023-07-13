@@ -1,7 +1,11 @@
-package lottogame;
+package lotto;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatNoException;
 
+import lotto.service.LottoService;
+import lotto.domain.LottoStatistics;
+import lotto.domain.Payment;
+import lotto.domain.WinningNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +18,9 @@ public class LottoStatisticsTest {
         String lottoValue = "1,2,3,4,5,6";
         String bonusValue = "7";
         WinningNumber winningNumber = new WinningNumber(lottoValue, bonusValue);
+        Payment payment = new Payment("3000");
 
-        assertThatNoException().isThrownBy(() -> new LottoStatistics(lottoService.getLottos(), winningNumber));
+        assertThatNoException().isThrownBy(() -> new LottoStatistics(lottoService.getLottos(), winningNumber, payment));
     }
 
 }

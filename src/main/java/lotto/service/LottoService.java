@@ -36,12 +36,12 @@ public final class LottoService {
     }
 
     public Map<LottoMatch, Integer> getResult(final WinningNumber winningNumber) {
-        lottoStatistics = new LottoStatistics(lottos, winningNumber);
+        lottoStatistics = new LottoStatistics(lottos, winningNumber, payment);
         return lottoStatistics.getStatistics();
     }
 
-    public String getProfitRate(final Payment payment) {
-        return lottoStatistics.getProfitRate(payment);
+    public LottoStatistics getProfitRate() {
+        return lottoStatistics;
     }
 
     public int getCount() {

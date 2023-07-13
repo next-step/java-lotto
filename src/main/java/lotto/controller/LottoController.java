@@ -1,7 +1,9 @@
-import lottogame.LottoService;
-import lottogame.Payment;
-import lottogame.WinningNumber;
-import view.LottoView;
+package lotto.controller;
+
+import lotto.service.LottoService;
+import lotto.domain.Payment;
+import lotto.domain.WinningNumber;
+import lotto.view.LottoView;
 
 public final class LottoController {
 
@@ -22,6 +24,6 @@ public final class LottoController {
 
         // 3. 당첨 통계 출력
         lottoView.printLottoStatistics(lottoService.getResult(winningNumber));
-        lottoView.printProfitRate(lottoService.getProfitRate(payment));
+        lottoView.printProfitRate(lottoService.getProfitRate());
     }
 }
