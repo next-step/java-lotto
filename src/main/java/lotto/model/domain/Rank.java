@@ -45,4 +45,16 @@ public enum Rank {
     public long getTotalPrize(int count) {
         return this.prize * count;
     }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public boolean isHasBonusBall() {
+        return hasBonusBall;
+    }
+
+    public long getPrize() {
+        return prize;
+    }
 }

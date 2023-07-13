@@ -27,15 +27,36 @@ public final class LottoOutputView {
         System.out.println("당첨 통계");
         System.out.println("----------------");
 
-        System.out.println("3개 일치 (5000원) - " + lottoResult.getCount(Rank.FIFTH));
-        System.out.println("4개 일치 (50000원) - " + lottoResult.getCount(Rank.FOURTH));
-        System.out.println("5개 일치 (1500000원) - " + lottoResult.getCount(Rank.THIRD));
-        System.out.println("5개 일치, 보너스 볼 일치 (30000000원) - " + lottoResult.getCount(Rank.SECOND));
-        System.out.println("6개 일치 (2000000000원) - " + lottoResult.getCount(Rank.FIRST));
+        for (final Rank rank : Rank.values()) {
+            printRankResult(lottoResult, rank);
+        }
 
         final double profitRate = lottoResult.getProfitRate();
         System.out.printf("총 수익률은 %.2f 입니다. ", profitRate);
         System.out.println(profitRateResult(profitRate));
+    }
+
+    public void printSizeOfLottos(final Lottos lottos) {
+        final int lottoSize = lottos.getLottos().size();
+        System.out.println(lottoSize + "개를 구매했습니다.");
+    }
+
+    public void printChangeOfPurchase(final LottoMoney change) {
+        System.out.printf("거스름돈은 %d원 입니다.", change.getValue()).println();
+    }
+
+    private void printRankResult(final LottoResult lottoResult, final Rank rank) {
+        System.out.printf("%d개 일치", rank.getMatchCount());
+        System.out.printf("%s ", printBonusBall(rank));
+        System.out.printf("(%d원)", rank.getPrize());
+        System.out.printf(" - %d", lottoResult.getCount(rank)).println();
+    }
+
+    private String printBonusBall(final Rank rank) {
+        if (rank.isHasBonusBall()) {
+            return ", (보너스 볼 일치)";
+        }
+        return "";
     }
 
     private String toLottoOutput(final Lotto lotto) {
@@ -50,14 +71,5 @@ public final class LottoOutputView {
             return "(1 미만이므로 손해보셨습니다. 축하드립니다 ^^)";
         }
         return "(1 이상이므로 이득이네요. 좋겠네요.)";
-    }
-
-    public void printSizeOfLottos(final Lottos lottos) {
-        final int lottoSize = lottos.getLottos().size();
-        System.out.println(lottoSize + "개를 구매했습니다.");
-    }
-
-    public void printChangeOfPurchase(final LottoMoney change) {
-        System.out.printf("거스름돈은 %d원 입니다.", change.getValue()).println();
     }
 }
