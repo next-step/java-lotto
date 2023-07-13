@@ -1,9 +1,9 @@
-package lotto.domain;
+package lotto.domain.vo;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import lotto.domain.vo.Money;
+import lotto.domain.LottoGroup;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ class MoneyTest {
     @Test
     @DisplayName("구입금액으로 상품을 몇 개 살 수 있는지 테스트")
     void calculateQuantityTest() {
-        assertThat(LottoGroup.getQuantity(new Money(14000L))).isEqualTo(14);
+        Assertions.assertThat(LottoGroup.getQuantity(new Money(14000L))).isEqualTo(14);
     }
 
     @Test
