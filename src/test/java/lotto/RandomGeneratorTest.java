@@ -10,7 +10,8 @@ class RandomGeneratorTest {
     @Test
     @DisplayName("랜덤하게 로또를 자동 생성한다.")
     void generate() {
+        RandomGenerator randomGenerator = new RandomGenerator();
         Assertions.assertThatNoException()
-                .isThrownBy(RandomGenerator::generateLotto);
+                .isThrownBy(randomGenerator::generateLotto);
     }
 }
