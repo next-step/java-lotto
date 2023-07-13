@@ -16,13 +16,12 @@ public class LottoGenerator {
     public static List<Lotto> generateLottosManuallyAndThenAutomatically(final int money,
         final int manualPurchaseCount, final List<List<Integer>> numberBundles) {
         validateMoneyUnit(money);
-
         final int totalPurchaseCount = calculateLottoPurchaseCount(money);
-        final int autoPurchaseCount = totalPurchaseCount - manualPurchaseCount;
 
         validateManualPurchaseCount(manualPurchaseCount, totalPurchaseCount);
-        validateNumberBundlesCount(numberBundles, manualPurchaseCount);
+        final int autoPurchaseCount = totalPurchaseCount - manualPurchaseCount;
 
+        validateNumberBundlesCount(numberBundles, manualPurchaseCount);
         return combine(generateLottosManually(manualPurchaseCount, numberBundles), generateLottosAutomatically(autoPurchaseCount));
     }
 
