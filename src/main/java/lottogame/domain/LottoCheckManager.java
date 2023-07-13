@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lottogame.domain.dto.LottoTicketDto;
 import lottogame.domain.response.LottoCheckedResponse;
 import lottogame.domain.response.LottoTicketCheckedResponse;
 
@@ -33,11 +34,24 @@ public class LottoCheckManager {
         }
     }
 
-    public LottoCheckedResponse checkResult(List<LottoTicket> lottoTicketRespons) {
-        List<LottoPrize> lottoPrizes = toLottoPrizes(lottoTicketRespons);
+    public LottoCheckedResponse checkResult(List<LottoTicketDto> lottoTicketDtos) {
+        List<LottoTicket> lottoTickets = toLottoTickets(lottoTicketDtos);
+        List<LottoPrize> lottoPrizes = toLottoPrizes(lottoTickets);
 
         double earningRate = calculateEarningRate(lottoPrizes);
         return new LottoCheckedResponse(earningRate, getLottoTicketCheckResponsesWithOutNone(lottoPrizes));
+    }
+
+    private List<LottoTicket> toLottoTickets(List<LottoTicketDto> lottoTicketDtos) {
+        return lottoTicketDtos.stream()
+            .map(lottoTicketDto -> new LottoTicket(lottoTicketDto.getNumbers()))
+            .collect(Collectors.toList());
+    }
+
+    private List<LottoPrize> toLottoPrizes(List<LottoTicket> lottoTicketRespons) {
+        return lottoTicketRespons.stream()
+            .map(this::toLottoPrize)
+            .collect(Collectors.toList());
     }
 
     private double calculateEarningRate(List<LottoPrize> lottoPrizes) {
@@ -47,12 +61,6 @@ public class LottoCheckManager {
             earnMoney += lottoPrize.getMoney();
         }
         return (double) earnMoney / (double) totalMoney;
-    }
-
-    private List<LottoPrize> toLottoPrizes(List<LottoTicket> lottoTicketRespons) {
-        return lottoTicketRespons.stream()
-            .map(this::toLottoPrize)
-            .collect(Collectors.toList());
     }
 
     private LottoPrize toLottoPrize(LottoTicket lottoTicket) {

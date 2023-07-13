@@ -6,8 +6,8 @@ import lottogame.controller.spi.Inputer;
 import lottogame.controller.spi.Viewer;
 import lottogame.domain.LottoCheckManager;
 import lottogame.domain.LottoPurchaseManager;
+import lottogame.domain.dto.LottoTicketDto;
 import lottogame.domain.response.LottoCheckedResponse;
-import lottogame.domain.response.LottoTicketResponse;
 import lottogame.domain.spi.NumberGenerator;
 
 public class LottoController {
@@ -23,22 +23,24 @@ public class LottoController {
     }
 
     public void run() {
-        List<LottoTicketResponse> lottoTicketResponses = purchaseLottoTickets();
-        checkResult(lottoTicketResponses);
+        List<LottoTicketDto> lottoTicketDtos = purchaseLottoTickets();
+        checkResult(lottoTicketDtos);
     }
 
-    private List<LottoTicketResponse> purchaseLottoTickets() {
+    private List<LottoTicketDto> purchaseLottoTickets() {
         int money = inputer.inputMoney();
-        List<LottoTicketResponse> lottoTicketRespons = lottoPurchaseManager.purchase(money);
-        viewer.drawLottoTicketResponses(lottoTicketRespons);
-        return lottoTicketRespons;
+        List<LottoTicketDto> lottoTicketDtos = lottoPurchaseManager.purchase(money);
+
+        viewer.drawLottoTicketResponses(lottoTicketDtos);
+
+        return lottoTicketDtos;
     }
 
-    private void checkResult(List<LottoTicketResponse> lottoTicketResponses) {
+    private void checkResult(List<LottoTicketDto> lottoTicketDtos) {
         Set<Integer> lottoResultNumbers = inputer.inputWinningLottoNumbers();
         Integer bonusNumber = inputer.inputBonusLottoNumber();
         LottoCheckManager lottoCheckManager = new LottoCheckManager(lottoResultNumbers, bonusNumber);
-        LottoCheckedResponse lottoPrizes = lottoCheckManager.checkResult(null);
+        LottoCheckedResponse lottoPrizes = lottoCheckManager.checkResult(lottoTicketDtos);
 
         viewer.drawLottoCheckedResponse(lottoPrizes);
     }

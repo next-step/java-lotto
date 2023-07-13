@@ -3,7 +3,7 @@ package lottogame.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import lottogame.domain.response.LottoTicketResponse;
+import lottogame.domain.dto.LottoTicketDto;
 import lottogame.domain.spi.NumberGenerator;
 
 public class LottoPurchaseManager {
@@ -14,7 +14,7 @@ public class LottoPurchaseManager {
         this.numberGenerator = numberGenerator;
     }
 
-    public List<LottoTicketResponse> purchase(int money) {
+    public List<LottoTicketDto> purchase(int money) {
         assertMoney(money);
         List<LottoTicket> lottoTicketRespons = createLottoNumbers(money);
         return toLottoTicketResponses(lottoTicketRespons);
@@ -36,10 +36,10 @@ public class LottoPurchaseManager {
         return lottoTicketList;
     }
 
-    private List<LottoTicketResponse> toLottoTicketResponses(
+    private List<LottoTicketDto> toLottoTicketResponses(
         List<LottoTicket> lottoTicketRespons) {
         return lottoTicketRespons.stream()
-            .map(lottoTicket -> new lottogame.domain.response.LottoTicketResponse(lottoTicket.getValues()))
+            .map(lottoTicket -> new LottoTicketDto(lottoTicket.getValues()))
             .collect(Collectors.toList());
     }
 }

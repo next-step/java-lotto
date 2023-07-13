@@ -3,6 +3,7 @@ package lottogame.domain;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import lottogame.domain.dto.LottoTicketDto;
 import lottogame.domain.response.LottoCheckedResponse;
 import lottogame.domain.response.LottoTicketCheckedResponse;
 import org.assertj.core.api.Assertions;
@@ -28,26 +29,22 @@ public class LottoCheckManagerTest {
             private final Set<Integer> selectedLottoNumbers = Set.of(1, 2, 3, 4, 5, 6);
             private final LottoCheckManager lottoCheckManager = new LottoCheckManager(selectedLottoNumbers,
                 BONUS_NUMBER);
-            private final List<LottoTicket> lottoTicketRequest = getLottoTicketRequest();
+            private final List<LottoTicketDto> lottoTicketDtoRequests = getLottoTicketDtoRequests();
             private final LottoCheckedResponse expectedLottoCheckedResponse = getExpectedLottoCheckResponse();
 
             @Test
             @DisplayName("수익률와, 상별 갯수를 반환한다")
             void It_Return_Earning_Rate_And_Number_Of_Prize() {
-                Assertions.assertThat(
-                    lottoCheckManager.checkResult(lottoTicketRequest)).isEqualTo(expectedLottoCheckedResponse);
+                Assertions.assertThat(lottoCheckManager.checkResult(lottoTicketDtoRequests))
+                    .isEqualTo(expectedLottoCheckedResponse);
             }
 
-            private List<LottoTicket> getLottoTicketRequest() {
-                LottoTicket firstPrizeLottoTicket = new LottoTicket(
-                    (count) -> selectedLottoNumbers);
-                LottoTicket secondPrizeLottoTicket = new LottoTicket(
-                    (count) -> Set.of(1, 2, 3, 4, 5, BONUS_NUMBER));
-                LottoTicket nonePrizeLottoTicket = new LottoTicket(
-                    (count) -> Set.of(8, 9, 10, 11, 12, 13));
+            private List<LottoTicketDto> getLottoTicketDtoRequests() {
+                LottoTicketDto firstPrizeLottoTicket = new LottoTicketDto(selectedLottoNumbers);
+                LottoTicketDto secondPrizeLottoTicket = new LottoTicketDto(Set.of(1, 2, 3, 4, 5, BONUS_NUMBER));
+                LottoTicketDto nonePrizeLottoTicket = new LottoTicketDto(Set.of(8, 9, 10, 11, 12, 13));
 
-                return List.of(firstPrizeLottoTicket, secondPrizeLottoTicket,
-                    nonePrizeLottoTicket);
+                return List.of(firstPrizeLottoTicket, secondPrizeLottoTicket, nonePrizeLottoTicket);
             }
 
             private LottoCheckedResponse getExpectedLottoCheckResponse() {

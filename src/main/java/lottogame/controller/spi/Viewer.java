@@ -1,12 +1,12 @@
 package lottogame.controller.spi;
 
 import java.util.List;
+import lottogame.domain.dto.LottoTicketDto;
 import lottogame.domain.response.LottoCheckedResponse;
-import lottogame.domain.response.LottoTicketResponse;
 
 public interface Viewer {
 
-    void drawLottoTicketResponses(List<LottoTicketResponse> lottoTicketResponses);
+    void drawLottoTicketResponses(List<LottoTicketDto> lottoTicketRespons);
 
     void drawLottoCheckedResponse(LottoCheckedResponse lottoCheckedResponse);
 

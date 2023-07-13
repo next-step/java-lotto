@@ -1,13 +1,13 @@
-package lottogame.domain.response;
+package lottogame.domain.dto;
 
 import java.util.Objects;
 import java.util.Set;
 
-public class LottoTicketResponse {
+public class LottoTicketDto {
 
     private final Set<Integer> numbers;
 
-    public LottoTicketResponse(Set<Integer> numbers) {
+    public LottoTicketDto(Set<Integer> numbers) {
         this.numbers = numbers;
     }
 
@@ -20,10 +20,10 @@ public class LottoTicketResponse {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof LottoTicketResponse)) {
+        if (!(o instanceof LottoTicketDto)) {
             return false;
         }
-        LottoTicketResponse that = (LottoTicketResponse) o;
+        LottoTicketDto that = (LottoTicketDto) o;
         return Objects.equals(numbers, that.numbers);
     }
 

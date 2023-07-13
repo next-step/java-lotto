@@ -6,22 +6,22 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 import lottogame.controller.spi.Viewer;
+import lottogame.domain.dto.LottoTicketDto;
 import lottogame.domain.response.LottoCheckedResponse;
 import lottogame.domain.response.LottoTicketCheckedResponse;
-import lottogame.domain.response.LottoTicketResponse;
 
 public class ConsoleViewer implements Viewer {
 
     @Override
-    public void drawLottoTicketResponses(List<LottoTicketResponse> lottoTicketResponses) {
-        System.out.printf("%d개를 구매했습니다.%n", lottoTicketResponses.size());
-        System.out.println(parsePrintString(lottoTicketResponses));
+    public void drawLottoTicketResponses(List<LottoTicketDto> lottoTicketRespons) {
+        System.out.printf("%d개를 구매했습니다.%n", lottoTicketRespons.size());
+        System.out.println(parsePrintString(lottoTicketRespons));
     }
 
-    private String parsePrintString(List<LottoTicketResponse> lottoTicketResponses) {
+    private String parsePrintString(List<LottoTicketDto> lottoTicketRespons) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        lottoTicketResponses.forEach(
+        lottoTicketRespons.forEach(
             lottoTicketResponse -> parseLottoTicket(lottoTicketResponse.getNumbers(), stringBuilder));
 
         return stringBuilder.toString();
