@@ -44,8 +44,6 @@ public final class LottoService {
         return numbers;
     }
 
-
-
     public int getCount() {
         return payment.getLottoCount();
     }

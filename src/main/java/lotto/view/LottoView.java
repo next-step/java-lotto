@@ -11,7 +11,7 @@ import lotto.domain.*;
 
 public class LottoView {
 
-    public static final String NUMBER_DELIMITER = ", ";
+    public static final String NUMBER_DELIMITER = ",";
     public static final int FIVE_MATCH_COUNT = 5;
     private final Scanner scanner = new Scanner(System.in);
 
@@ -24,7 +24,7 @@ public class LottoView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String[] elements = scanner.nextLine().split(NUMBER_DELIMITER);
         return Arrays.stream(elements)
-                .map(Integer::parseInt)
+                .map(element -> Integer.parseInt(element.trim()))
                 .collect(Collectors.toList());
     }
 
