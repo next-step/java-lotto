@@ -44,6 +44,6 @@ class LottoServiceTest {
     void profitRate() {
         LottoService lottoService = LottoService.buyLotto(new Money(1000));
         LottoResults lottoResults = new LottoResults(List.of(LottoRank.FIFTH, LottoRank.NONE, LottoRank.FOURTH));
-        Assertions.assertThat(lottoService.profitRate(lottoResults)).isEqualTo(55.0);
+        Assertions.assertThat(lottoService.profitRate(lottoResults).getProfitRate()).isEqualTo(55.0);
     }
 }
