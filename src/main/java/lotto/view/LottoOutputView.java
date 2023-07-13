@@ -23,20 +23,21 @@ public final class LottoOutputView {
     }
 
     public void printBuyingCount(final LottoMoney lottoMoney) {
-        System.out.println(lottoMoney.getTotalCount() + "개를 구매했습니다.");
+        System.out.println();
+        System.out.println("수동으로 " + lottoMoney.getManualLottoCount() + "장, 자동으로 "
+                + lottoMoney.getAutoCount() + "개를 구매했습니다.");
         System.out.println("거스름돈은 " + lottoMoney.getChange() + "원 입니다.");
     }
 
     public void printBuyingLotto(final Lottos lottos) {
         lottos.getLottos().forEach(
                 lotto -> System.out.println("[" + toLottoOutput(lotto) + "]"));
-        System.out.println();
     }
 
     public void printLottoResult(final LottoResult lottoResult) {
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("----------------");
-
         System.out.println("3개 일치 (5000원) - " + lottoResult.getCount(Rank.FIFTH));
         System.out.println("4개 일치 (50000원) - " + lottoResult.getCount(Rank.FOURTH));
         System.out.println("5개 일치 (1500000원) - " + lottoResult.getCount(Rank.THIRD));
