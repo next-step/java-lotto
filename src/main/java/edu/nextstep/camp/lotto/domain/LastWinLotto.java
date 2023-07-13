@@ -20,14 +20,14 @@ public class LastWinLotto {
         );
     }
 
-    public LottoRank checkRank(Lotto lotto) {
-        return LottoRank.valueOf(lotto.matchNumberCount(lastWinLotto), lotto.isMatchBonus(bonusNumber));
-    }
-
     public static LastWinLotto of(Integer bonusNumber, Integer[] lottoNumbers) {
         duplicateBonusNumberCheck(bonusNumber, lottoNumbers);
 
         return new LastWinLotto(new Lotto(lottoNumbers), new LottoNumber(bonusNumber));
+    }
+
+    public LottoRank checkRank(Lotto lotto) {
+        return LottoRank.valueOf(lotto.matchNumberCount(lastWinLotto), lotto.isMatchBonus(bonusNumber));
     }
 
     private static void duplicateBonusNumberCheck(Integer bonusNumber, Integer[] beforeLottoNums) {
