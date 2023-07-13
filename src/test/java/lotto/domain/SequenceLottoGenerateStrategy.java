@@ -1,17 +1,25 @@
 package lotto.domain;
 
-import java.util.List;
-
-public class SequenceLottoGenerateStrategy implements LottoGenerateStrategy {
+public class SequenceLottoGenerateStrategy extends LottoGenerateStrategy {
 
     private int sequenceStartIndex = 0;
 
+    public SequenceLottoGenerateStrategy() {
+        this(Ball.MIN_NUMBER, Ball.MAX_NUMBER);
+    }
+
+    public SequenceLottoGenerateStrategy(int minNumber, int maxNumber) {
+        super(minNumber, maxNumber);
+    }
+
     @Override
-    public Lotto generate(final List<Ball> balls) {
+    public Lotto generate() {
         if (sequenceStartIndex + Lotto.SIZE > Ball.MAX_NUMBER) {
             sequenceStartIndex = 0;
         }
-        Lotto lotto = new Lotto(balls.subList(sequenceStartIndex, sequenceStartIndex + Lotto.SIZE));
+        Lotto lotto = new Lotto(
+                this.balls.subList(sequenceStartIndex, sequenceStartIndex + Lotto.SIZE)
+        );
         sequenceStartIndex += Lotto.SIZE;
         return lotto;
     }
