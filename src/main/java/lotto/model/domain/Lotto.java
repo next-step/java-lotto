@@ -1,5 +1,6 @@
 package lotto.model.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -44,11 +45,15 @@ public final class Lotto {
     }
 
     private boolean checkBonusBall(final WinningNumbers winningNumbers) {
-        return lottoNumbers.contains(winningNumbers.getBonusBall());
+        return hasNumber(winningNumbers.getBonusBall());
+    }
+
+    public boolean hasNumber(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
     public List<LottoNumber> getNumbers() {
-        return lottoNumbers;
+        return new ArrayList<>(this.lottoNumbers);
     }
 
     @Override

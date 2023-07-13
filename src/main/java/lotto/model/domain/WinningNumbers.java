@@ -1,19 +1,16 @@
 package lotto.model.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public final class WinningNumbers {
 
-    private final List<LottoNumber> winningNumbers;
+    private final Lotto winningNumbers;
     private final LottoNumber bonusBall;
 
     public WinningNumbers(final List<Integer> winningNumbers, final int bonusBall) {
         validate(winningNumbers, bonusBall);
 
-        this.winningNumbers = winningNumbers.stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toUnmodifiableList());
+        this.winningNumbers = new Lotto(winningNumbers);
         this.bonusBall = LottoNumber.of(bonusBall);
     }
 
@@ -47,6 +44,6 @@ public final class WinningNumbers {
     }
 
     public boolean hasNumber(final LottoNumber lottoNumber) {
-        return winningNumbers.contains(lottoNumber);
+        return winningNumbers.hasNumber(lottoNumber);
     }
 }
