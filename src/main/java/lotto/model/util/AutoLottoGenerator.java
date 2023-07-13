@@ -1,10 +1,11 @@
-package lotto.model;
+package lotto.model.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.model.LottoNumber;
 
-public class AutoLottoGenerator {
+public class AutoLottoGenerator implements LottoGenerator {
 
     private static final int LOTTO_RANGE_START = 1;
     private static final int LOTTO_RANGE_END = 45;
@@ -20,10 +21,15 @@ public class AutoLottoGenerator {
         }
     }
 
-    public Lotto generate() {
+    @Override
+    public List<LottoNumber> generate() {
+        return selectLottoNumbers(shuffleLottoNumber());
+    }
+
+    private List<LottoNumber> shuffleLottoNumber() {
         List<LottoNumber> copyLottoNumbers = copyLottoNumbers();
         Collections.shuffle(copyLottoNumbers);
-        return new Lotto(selectLottoNumbers(copyLottoNumbers));
+        return copyLottoNumbers;
     }
 
     private List<LottoNumber> copyLottoNumbers() {
