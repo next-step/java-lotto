@@ -18,7 +18,8 @@ public class LottoNumber {
 
     public static LottoNumber of(final int number) {
         verify(number);
-        return lottoNumberCache.putIfAbsent(number, new LottoNumber(number));
+        lottoNumberCache.putIfAbsent(number, new LottoNumber(number));
+        return lottoNumberCache.get(number);
     }
 
     private static void verify(final Integer number) {
