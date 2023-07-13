@@ -40,8 +40,19 @@ public class LottoGroup {
         }
     }
 
-    public static LottoGroup of(Money money, List<Lotto> manualLottos) {
-        return null;
+    public static LottoGroup of(final Money money, final List<Lotto> manualLottos) {
+        // 구매 가능한 로또 개수
+        int quantity = LottoGroup.getQuantity(money);
+        if (quantity < manualLottos.size()) {
+            throw new IllegalArgumentException(
+                "purchase money amount should greater than manual lotto counts");
+        }
+        // 자동 로또 생성
+        List<Lotto> lottos = new ArrayList<>(manualLottos);
+        for (int i = 0; i < quantity - manualLottos.size(); i++) {
+            lottos.add(Lotto.createRandomLotto());
+        }
+        return new LottoGroup(lottos);
     }
 
     public List<Lotto> getLottos() {
