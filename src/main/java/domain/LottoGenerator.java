@@ -10,25 +10,43 @@ public class LottoGenerator {
 
     private static final int MONEY_UNIT = 1_000;
     private static final List<Integer> candidates =
-            IntStream.range(LottoNumber.START_INCLUSIVE, LottoNumber.END_EXCLUSIVE)
-                    .boxed()
-                    .collect(Collectors.toList());
+        IntStream.rangeClosed(LottoNumber.LOWER_BOUND, LottoNumber.UPPER_BOUND)
+            .boxed()
+            .collect(Collectors.toList());
 
-    private static Lotto generateSingleLottoAutomatically() {
-        Collections.shuffle(candidates);
-        return new Lotto(candidates.subList(0, Lotto.REQUIRED_LOTTO_NUMBER_COUNT));
+    private LottoGenerator() {
     }
 
-    public static List<Lotto> generateLottosAutomatically(final long money) {
+    public static List<Lotto> generateLottosManuallyAndThenAutomatically(final long money,
+        final long manualPurchaseCount, final List<List<Integer>> numberBundles) {
         validate(money);
-        final long lottoCount = calculateLottoCount(money);
+        final long totalPurchaseCount = calculateLottoCount(money);
+
+        if (totalPurchaseCount < manualPurchaseCount) {
+            throw new IllegalArgumentException("수동으로 구매할 로또 수가 구입금액으로 구매 가능한 총 로또 수보다 많습니다.");
+        }
+
+        if (manualPurchaseCount != numberBundles.size()) {
+            throw new IllegalArgumentException("수동으로 구매할 로또 수가 번호 묶음 수와 일치하지 않습니다.");
+        }
+
         final List<Lotto> lottos = new ArrayList<>();
 
-        for (long count = 0; count < lottoCount; count++) {
+        for (int count = 0; count < manualPurchaseCount; count++) {
+            lottos.add(new Lotto(numberBundles.get(count)));
+        }
+
+        final long autoPurchaseCount = totalPurchaseCount - manualPurchaseCount;
+        for (int count = 0; count < autoPurchaseCount; count++) {
             lottos.add(generateSingleLottoAutomatically());
         }
 
         return lottos;
+    }
+
+    private static Lotto generateSingleLottoAutomatically() {
+        Collections.shuffle(candidates);
+        return new Lotto(candidates.subList(0, Lotto.REQUIRED_LOTTO_NUMBER_COUNT));
     }
 
     private static void validate(final long money) {
