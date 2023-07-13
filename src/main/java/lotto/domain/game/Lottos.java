@@ -1,9 +1,11 @@
-package lottogame;
+package lotto.domain.game;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lotto.domain.statistics.LottoMatch;
+import lotto.domain.statistics.LottoMatchKey;
 
 public final class Lottos {
 

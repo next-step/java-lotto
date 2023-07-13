@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.game;
 
 import java.util.HashSet;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public final class Lotto {
 
-    private final static int LOTTO_SIZE = 6;
+    private static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> lotto;
 
     public Lotto(final List<Integer> values, boolean isAuto) {

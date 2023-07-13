@@ -1,7 +1,9 @@
-package lottogame;
+package lotto;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+import lotto.service.LottoService;
+import lotto.domain.game.Payment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

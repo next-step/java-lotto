@@ -1,7 +1,11 @@
-package lotto.domain;
+package lotto.domain.statistics;
 
 import java.util.EnumMap;
 import java.util.Map;
+import lotto.domain.game.Lotto;
+import lotto.domain.game.Lottos;
+import lotto.domain.game.Payment;
+import lotto.domain.game.WinningNumber;
 
 public final class LottoStatistics {
 

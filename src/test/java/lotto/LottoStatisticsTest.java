@@ -3,9 +3,9 @@ package lotto;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatNoException;
 
 import lotto.service.LottoService;
-import lotto.domain.LottoStatistics;
-import lotto.domain.Payment;
-import lotto.domain.WinningNumber;
+import lotto.domain.statistics.LottoStatistics;
+import lotto.domain.game.Payment;
+import lotto.domain.game.WinningNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

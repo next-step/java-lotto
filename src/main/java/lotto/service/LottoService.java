@@ -1,17 +1,18 @@
-package lottogame;
+package lotto.service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import lotto.domain.game.Lotto;
+import lotto.domain.statistics.LottoMatch;
+import lotto.domain.statistics.LottoStatistics;
+import lotto.domain.game.Lottos;
+import lotto.domain.game.NumberGenerator;
+import lotto.domain.game.Payment;
+import lotto.domain.game.WinningNumber;
 
 public final class LottoService {
 
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
-    private static final int LOTTO_PICK_COUNT = 6;
     private final Payment payment;
     private final Lottos lottos;
     private LottoStatistics lottoStatistics;
