@@ -9,10 +9,6 @@ import java.util.stream.IntStream;
 public class LottoGenerator {
 
     private static final int MONEY_UNIT = 1_000;
-    private static final List<Integer> candidates =
-        IntStream.rangeClosed(LottoNumber.LOWER_BOUND, LottoNumber.UPPER_BOUND)
-            .boxed()
-            .collect(Collectors.toList());
 
     private LottoGenerator() {
     }
@@ -20,7 +16,7 @@ public class LottoGenerator {
     public static List<Lotto> generateLottosManuallyAndThenAutomatically(final int money,
         final int manualPurchaseCount, final List<List<Integer>> numberBundles) {
         validate(money);
-        final int totalPurchaseCount = calculateLottoCount(money);
+        final int totalPurchaseCount = calculateLottoPurchaseCount(money);
 
         validateManualPurchaseCount(manualPurchaseCount, totalPurchaseCount);
         validateNumberBundlesCount(numberBundles, manualPurchaseCount);
@@ -54,8 +50,15 @@ public class LottoGenerator {
     }
 
     private static Lotto generateSingleLottoAutomatically() {
+        final List<Integer> candidates = generateLottoNumberValueCandidates();
         Collections.shuffle(candidates);
         return new Lotto(candidates.subList(0, Lotto.REQUIRED_LOTTO_NUMBER_COUNT));
+    }
+
+    private static List<Integer> generateLottoNumberValueCandidates() {
+        return IntStream.rangeClosed(LottoNumber.LOWER_BOUND, LottoNumber.UPPER_BOUND)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     private static void validate(final int money) {
@@ -64,7 +67,7 @@ public class LottoGenerator {
         }
     }
 
-    private static int calculateLottoCount(int money) {
+    private static int calculateLottoPurchaseCount(int money) {
         return money / MONEY_UNIT;
     }
 }
