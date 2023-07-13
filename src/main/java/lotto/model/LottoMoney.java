@@ -1,8 +1,10 @@
 package lotto.model;
 
+import java.util.Objects;
+
 public class LottoMoney {
-    public static final int LOTTO_UNIT = 1000;
-    public static final int ZERO = 0;
+    private static final int LOTTO_UNIT = 1000;
+    private static final int ZERO = 0;
     private final int money;
 
     public LottoMoney(final int money) {
@@ -12,10 +14,10 @@ public class LottoMoney {
 
     private void validateMoney(final int money) {
         if (money < ZERO) {
-            throw new IllegalStateException("로또 머니가 양수여야 합니다.");
+            throw new IllegalArgumentException("로또 머니가 양수여야 합니다.");
         }
         if (money % LOTTO_UNIT != 0) {
-            throw new IllegalStateException("로또는 천원 단위입니다.");
+            throw new IllegalArgumentException("로또는 천원 단위입니다.");
         }
     }
 
@@ -25,5 +27,29 @@ public class LottoMoney {
 
     public int getLottoMoney() {
         return money;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoMoney that = (LottoMoney) o;
+        return money == that.money;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(money);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoMoney{" +
+            "money=" + money +
+            '}';
     }
 }
