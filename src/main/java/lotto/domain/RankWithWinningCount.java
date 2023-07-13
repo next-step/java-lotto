@@ -14,8 +14,8 @@ public class RankWithWinningCount {
         this.rankWithCount = new HashMap<>();
 
         for (final LottoRank lottoRank : lottoResultRanks) {
-            this.rankWithCount.put(lottoRank,
-                    this.rankWithCount.getOrDefault(lottoRank, DEFAULT_COUNT) + 1);
+            this.rankWithCount.putIfAbsent(lottoRank, 0);
+            this.rankWithCount.computeIfPresent(lottoRank, (rank, count) -> count + 1);
         }
     }
 
