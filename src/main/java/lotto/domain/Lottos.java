@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -18,11 +19,11 @@ public class Lottos {
         return lottos.size();
     }
 
-    public LottoResults matchWinningNumbers(WinningNumbers winningNumbers) {
-        LottoResults lottoResults = new LottoResults();
-        for (Lotto lotto : lottos) {
-            lottoResults.add(winningNumbers.match(lotto), 1);
-        }
-        return lottoResults;
+    public LottoResults matchWinningLotto(WinningLotto winningLotto) {
+        return new LottoResults(
+                lottos.stream()
+                        .map(winningLotto::match)
+                        .collect(Collectors.toList())
+        );
     }
 }

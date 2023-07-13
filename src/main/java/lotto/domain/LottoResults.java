@@ -1,51 +1,30 @@
 package lotto.domain;
 
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class LottoResults {
 
-    private static final long DEFAULT_VALUE = 0L;
     private final Map<LottoRank, Long> lottoResults;
 
-    public LottoResults() {
+    public LottoResults(List<LottoRank> lottoRanks) {
         lottoResults = new EnumMap<>(LottoRank.class);
+        for (LottoRank rank : lottoRanks) {
+            lottoResults.put(rank, 1L);
+        }
     }
 
     public Map<LottoRank, Long> getLottoResults() {
         return lottoResults;
     }
 
-    public void add(LottoRank lottoRank, long count) {
-        lottoResults.put(lottoRank, lottoResults.getOrDefault(lottoRank, DEFAULT_VALUE) + count);
-    }
-
     public Money sumPrice() {
-        long sum = DEFAULT_VALUE;
-        for (LottoRank lottoRank : lottoResults.keySet()) {
-            sum += lottoResults.getOrDefault(lottoRank, DEFAULT_VALUE) * lottoRank.getPrice();
-        }
-        return new Money(sum);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoResults that = (LottoResults) o;
-        return Objects.equals(lottoResults, that.lottoResults);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoResults);
-    }
-
-    @Override
-    public String toString() {
-        return "LottoResults{" +
-                "lottoResults=" + lottoResults +
-                '}';
+        return new Money(
+                lottoResults.entrySet()
+                        .stream()
+                        .mapToLong(entry -> entry.getKey().getPrice() * entry.getValue())
+                        .sum()
+        );
     }
 }
