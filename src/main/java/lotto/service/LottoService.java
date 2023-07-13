@@ -21,7 +21,7 @@ public class LottoService {
         return lottos.matchWinningNumbers(winningNumbers);
     }
 
-    public double profitRate(LottoResults lottoResults, Money money) {
-        return money.profitRate(lottoResults.sumTotalPrize());
+    public ProfitRate profitRate(LottoResults lottoResults, Money money) {
+        return money.findProfitRate(lottoResults.sumTotalPrize());
     }
 }

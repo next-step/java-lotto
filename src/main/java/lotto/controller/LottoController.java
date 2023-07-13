@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoResults;
-import lotto.domain.Lottos;
-import lotto.domain.Money;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 import lotto.dto.LottoResultResponseDto;
 import lotto.dto.LottoStatusesResponseDto;
 import lotto.dto.MoneyRequestDto;
@@ -36,7 +33,7 @@ public class LottoController {
                 winningNumbersRequestDto.getBonusNumber()
         );
         LottoResults lottoResults = lottoService.matchWinningLotto(lottos, winningNumbers);
-        double profit = lottoService.profitRate(lottoResults, money);
-        outputView.printLottoResult(new LottoResultResponseDto(lottoResults, profit));
+        ProfitRate profitRate = lottoService.profitRate(lottoResults, money);
+        outputView.printLottoResult(new LottoResultResponseDto(lottoResults, profitRate));
     }
 }

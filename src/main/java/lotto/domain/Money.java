@@ -33,8 +33,8 @@ public class Money {
         return this.money / LOTTO_PRICE;
     }
 
-    public double profitRate(Money profit) {
-        return (double) profit.money / this.money;
+    public ProfitRate findProfitRate(Money profit) {
+        return new ProfitRate((double) profit.money / this.money);
     }
 
     @Override
