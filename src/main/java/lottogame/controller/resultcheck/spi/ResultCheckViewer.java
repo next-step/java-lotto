@@ -1,9 +1,9 @@
 package lottogame.controller.resultcheck.spi;
 
-import lottogame.service.response.LottoCheckResponse;
+import lottogame.domain.response.LottoCheckedResponse;
 
 public interface ResultCheckViewer {
 
-    void draw(LottoCheckResponse lottoCheckResponse);
+    void draw(LottoCheckedResponse lottoCheckedResponse);
 
 }

@@ -4,28 +4,28 @@ import java.util.List;
 import java.util.Set;
 import lottogame.controller.resultcheck.spi.ResultCheckInputer;
 import lottogame.controller.resultcheck.spi.ResultCheckViewer;
+import lottogame.domain.LottoCheckManager;
 import lottogame.domain.LottoTicket;
-import lottogame.service.LottoCheckService;
-import lottogame.service.response.LottoCheckResponse;
+import lottogame.domain.response.LottoCheckedResponse;
 
 public class LottoResultCheckController {
 
     private final ResultCheckInputer resultCheckInputer;
     private final ResultCheckViewer resultCheckViewer;
-    private final LottoCheckService lottoCheckService;
+    private final LottoCheckManager lottoCheckManager;
 
     public LottoResultCheckController(ResultCheckInputer resultCheckInputer, ResultCheckViewer resultCheckViewer,
-        LottoCheckService lottoCheckService) {
+        LottoCheckManager lottoCheckManager) {
         this.resultCheckInputer = resultCheckInputer;
         this.resultCheckViewer = resultCheckViewer;
-        this.lottoCheckService = lottoCheckService;
+        this.lottoCheckManager = lottoCheckManager;
     }
 
     public void checkResult(List<LottoTicket> lottoTickets) {
         Set<Integer> winningLottoNumbers = resultCheckInputer.inputWinningLottoNumbers();
         Integer bonusNumber = resultCheckInputer.inputBonusLottoNumber();
 
-        LottoCheckResponse lottoPrizes = lottoCheckService.checkResult(lottoTickets, winningLottoNumbers, bonusNumber);
+        LottoCheckedResponse lottoPrizes = lottoCheckManager.checkResult(lottoTickets);
 
         resultCheckViewer.draw(lottoPrizes);
     }

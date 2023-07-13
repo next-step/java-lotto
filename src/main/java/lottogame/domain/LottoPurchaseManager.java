@@ -1,15 +1,14 @@
-package lottogame.service;
+package lottogame.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import lottogame.domain.LottoTicket;
 import lottogame.domain.spi.NumberGenerator;
 
-public class LottoPurchaseService {
+public class LottoPurchaseManager {
 
     private final NumberGenerator numberGenerator;
 
-    public LottoPurchaseService(NumberGenerator numberGenerator) {
+    public LottoPurchaseManager(NumberGenerator numberGenerator) {
         this.numberGenerator = numberGenerator;
     }
 

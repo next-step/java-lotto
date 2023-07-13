@@ -1,11 +1,10 @@
-package lottogame.service;
+package lottogame.domain;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import lottogame.domain.LottoPrize;
-import lottogame.domain.LottoTicket;
-import lottogame.service.response.LottoCheckResponse;
+import lottogame.domain.response.LottoCheckedResponse;
+import lottogame.domain.response.LottoTicketCheckedResponse;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -13,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("FieldCanBeLocal")
 @DisplayName("LottoCheckService 클래스")
-public class LottoCheckServiceTest {
+public class LottoCheckManagerTest {
 
     @Nested
     @DisplayName("checkResult 메서드는")
@@ -27,16 +26,16 @@ public class LottoCheckServiceTest {
             private static final int BONUS_NUMBER = 7;
 
             private final Set<Integer> selectedLottoNumbers = Set.of(1, 2, 3, 4, 5, 6);
-            private final LottoCheckService lottoCheckService = new LottoCheckService();
+            private final LottoCheckManager lottoCheckManager = new LottoCheckManager(selectedLottoNumbers,
+                BONUS_NUMBER);
             private final List<LottoTicket> lottoTicketRequest = getLottoTicketRequest();
-            private final LottoCheckResponse expectedLottoCheckResponse = getExpectedLottoCheckResponse();
+            private final LottoCheckedResponse expectedLottoCheckedResponse = getExpectedLottoCheckResponse();
 
             @Test
             @DisplayName("수익률와, 상별 갯수를 반환한다")
             void It_Return_Earning_Rate_And_Number_Of_Prize() {
                 Assertions.assertThat(
-                        lottoCheckService.checkResult(lottoTicketRequest, selectedLottoNumbers, BONUS_NUMBER))
-                    .isEqualTo(expectedLottoCheckResponse);
+                    lottoCheckManager.checkResult(lottoTicketRequest)).isEqualTo(expectedLottoCheckedResponse);
             }
 
             private List<LottoTicket> getLottoTicketRequest() {
@@ -49,12 +48,13 @@ public class LottoCheckServiceTest {
                 return List.of(firstPrizeLottoTicket, secondPrizeLottoTicket, nonePrizeLottoTicket);
             }
 
-            private LottoCheckResponse getExpectedLottoCheckResponse() {
+            private LottoCheckedResponse getExpectedLottoCheckResponse() {
                 int totalMoney = PURCHASE_COUNT * LottoTicket.PURCHASABLE_UNIT;
                 int earnMoney = LottoPrize.FIRST.getMoney() + LottoPrize.SECOND.getMoney();
 
-                return new LottoCheckResponse((double) earnMoney / (double) totalMoney,
-                    Map.of(LottoPrize.FIRST, 1, LottoPrize.SECOND, 1));
+                return new LottoCheckedResponse((double) earnMoney / (double) totalMoney,
+                    Map.of(new LottoTicketCheckedResponse(6, LottoPrize.FIRST.getMoney()), 1,
+                        new LottoTicketCheckedResponse(5, LottoPrize.SECOND.getMoney()), 1));
             }
         }
     }

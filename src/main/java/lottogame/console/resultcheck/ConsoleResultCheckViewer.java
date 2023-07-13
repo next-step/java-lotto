@@ -2,21 +2,21 @@ package lottogame.console.resultcheck;
 
 import java.util.Map;
 import lottogame.controller.resultcheck.spi.ResultCheckViewer;
-import lottogame.domain.LottoPrize;
-import lottogame.service.response.LottoCheckResponse;
+import lottogame.domain.response.LottoCheckedResponse;
+import lottogame.domain.response.LottoTicketCheckedResponse;
 
 public class ConsoleResultCheckViewer implements ResultCheckViewer {
 
     @Override
-    public void draw(LottoCheckResponse lottoCheckResponse) {
+    public void draw(LottoCheckedResponse lottoCheckedResponse) {
         System.out.println("당첨 통계\n---------");
-        lottoCheckResponse.getLottoPrizes().entrySet().forEach(this::printLottoPrize);
-        printEarningRate(lottoCheckResponse.getEarningRate());
+        lottoCheckedResponse.getLottoTicketCheckResponses().entrySet().forEach(this::printLottoPrize);
+        printEarningRate(lottoCheckedResponse.getEarningRate());
     }
 
-    private void printLottoPrize(Map.Entry<LottoPrize, Integer> lottoPrizeCount) {
-        System.out.printf("%d개 일치 (%d원)- %d개%n", lottoPrizeCount.getKey().getMatchedCount(),
-            lottoPrizeCount.getKey().getMoney(), lottoPrizeCount.getValue());
+    private void printLottoPrize(Map.Entry<LottoTicketCheckedResponse, Integer> lottoTicketCheckResponses) {
+        System.out.printf("%d개 일치 (%d원)- %d개%n", lottoTicketCheckResponses.getKey().getMatchedCount(),
+            lottoTicketCheckResponses.getKey().getMoney(), lottoTicketCheckResponses.getValue());
     }
 
     private void printEarningRate(double earningRate) {
