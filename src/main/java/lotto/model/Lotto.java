@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
+
     private static final int LOTTO_LENGTH = 6;
     private final List<LottoNumber> lottoNumbers;
 
@@ -25,8 +26,8 @@ public class Lotto {
 
     private void validateDuplicateLottoNumber(final List<LottoNumber> numbers) {
         long distinctLength = numbers.stream()
-                .distinct()
-                .count();
+            .distinct()
+            .count();
         if (numbers.size() != distinctLength) {
             throw new IllegalArgumentException("로또 넘버는 중복되면 안됩니다.");
         }
