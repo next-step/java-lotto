@@ -23,9 +23,10 @@ public class LottoApplication {
     public void run() {
         Money purchaseMoney = inputPurchaseMoney();
         int manualLottoCount = input.inputManualLottoCount();
-        LottoGroup lottoGroup = LottoGroup.of(purchaseMoney, inputManualLotto(manualLottoCount));
         int randomLottoCount = LottoGroup.getQuantity(purchaseMoney) - manualLottoCount;
 
+        LottoGroup lottoGroup = LottoGroup.createRandomAndManualLottos(randomLottoCount,
+            inputManualLotto(manualLottoCount));
         output.printQuantity(manualLottoCount, randomLottoCount);
         output.printLottos(lottoGroup);
 

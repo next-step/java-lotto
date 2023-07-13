@@ -15,11 +15,20 @@ public class LottoGroup {
         this.lottos = Collections.unmodifiableList(lottos);
     }
 
-    public static LottoGroup from(final Money money) {
+    public static LottoGroup createRandomLottos(final Money money) {
         verify(money);
 
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < getQuantity(money); i++) {
+            lottos.add(Lotto.createRandomLotto());
+        }
+        return new LottoGroup(lottos);
+    }
+
+    public static LottoGroup createRandomAndManualLottos(final int randomQuantity,
+        final List<Lotto> manualLottos) {
+        List<Lotto> lottos = new ArrayList<>(manualLottos);
+        for (int i = 0; i < randomQuantity; i++) {
             lottos.add(Lotto.createRandomLotto());
         }
         return new LottoGroup(lottos);
@@ -38,21 +47,6 @@ public class LottoGroup {
             throw new IllegalArgumentException(
                 "purchase money amount should greater than lotto price.");
         }
-    }
-
-    public static LottoGroup of(final Money money, final List<Lotto> manualLottos) {
-        // 구매 가능한 로또 개수
-        int quantity = LottoGroup.getQuantity(money);
-        if (quantity < manualLottos.size()) {
-            throw new IllegalArgumentException(
-                "purchase money amount should greater than manual lotto counts");
-        }
-        // 자동 로또 생성
-        List<Lotto> lottos = new ArrayList<>(manualLottos);
-        for (int i = 0; i < quantity - manualLottos.size(); i++) {
-            lottos.add(Lotto.createRandomLotto());
-        }
-        return new LottoGroup(lottos);
     }
 
     public List<Lotto> getLottos() {
