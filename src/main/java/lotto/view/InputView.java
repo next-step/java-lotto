@@ -28,6 +28,7 @@ public class InputView {
                 .collect(Collectors.toList());
         System.out.println("보너스 볼을 입력해 주세요.");
         int bonusNumber = scanner.nextInt();
+        System.out.println();
         return new WinningLottoRequestDto(lottoNumbers, bonusNumber);
     }
 }
