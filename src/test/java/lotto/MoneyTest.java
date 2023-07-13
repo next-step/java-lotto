@@ -19,12 +19,19 @@ class MoneyTest {
                 .isThrownBy(() -> new Money(money));
     }
 
-    @ParameterizedTest
-    @ValueSource(ints={-14000, 999})
-    @DisplayName("로또 구매 불가 금액 입력시 생성자가 예외를 던진다.")
-    void validateNegative(int notValidMoney) {
-        Assertions.assertThatThrownBy(() -> new Money(notValidMoney))
+    @Test
+    @DisplayName("음수 금액 입력시 생성자가 예외를 던진다.")
+    void validateNegative() {
+        Assertions.assertThatThrownBy(() -> new Money(-14000))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("로또 구매 불가 금액 입력시 로또 구매에서 예외를 던진다.")
+    void validateNoLotto() {
+        Money zeroMoney = new Money(0);
+        Assertions.assertThatThrownBy(zeroMoney::countLotto)
+                .isInstanceOf(IllegalStateException.class);
     }
 
     @Test

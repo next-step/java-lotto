@@ -21,8 +21,15 @@ public class Money {
     }
 
     public long countLotto() {
+        validateLeastOneLotto();
         validateNotZeroDominator(LOTTO_PRICE);
         return this.value / LOTTO_PRICE;
+    }
+
+    private void validateLeastOneLotto() {
+        if (value < LOTTO_PRICE) {
+            throw new IllegalStateException("로또를 구매할 수 없습니다.");
+        }
     }
 
     public double profitRate(Money profit) {
@@ -38,6 +45,10 @@ public class Money {
         if (denominator == ZERO_DIVISION) {
             throw new IllegalStateException("0으로 나눌 수 없습니다.");
         }
+    }
+
+    public boolean isZero() {
+        return value == ZERO_DIVISION;
     }
 
     @Override
