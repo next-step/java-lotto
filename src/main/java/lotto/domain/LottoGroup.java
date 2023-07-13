@@ -40,6 +40,10 @@ public class LottoGroup {
         }
     }
 
+    public static LottoGroup of(Money money, List<Lotto> manualLottos) {
+        return null;
+    }
+
     public List<Lotto> getLottos() {
         return lottos;
     }

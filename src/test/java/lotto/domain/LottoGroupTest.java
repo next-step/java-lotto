@@ -36,4 +36,15 @@ class LottoGroupTest {
     void zeroQuantityThrowsExceptionTest() {
         assertThrows(IllegalArgumentException.class, () -> LottoGroup.from(new Money(0L)));
     }
+
+    @Test
+    @DisplayName("수동으로 구매할 로또와 가용 금액을 입력하면 적절한 로또를 생성한다. ")
+    void createManualAndRandomLotto() {
+        // when
+        LottoGroup lottoGroup = LottoGroup.of(new Money(14000L), lottos);
+
+        // then
+        assertThat(lottoGroup.getLottos()).hasSize(14);
+        assertThat(lottoGroup.getLottos()).containsAll(lottos);
+    }
 }
