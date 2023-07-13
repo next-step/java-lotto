@@ -1,46 +1,38 @@
 package lotto.controller;
 
 import lotto.domain.LottoResults;
-import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 import lotto.dto.LottoResultResponseDto;
 import lotto.dto.LottoStatusResponseDto;
-import lotto.dto.MoneyRequestDto;
 import lotto.dto.WinningLottoRequestDto;
 import lotto.service.LottoService;
+import lotto.util.RandomGenerator;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoController {
 
     private final LottoService lottoService;
-    private Money money;
-    private Lottos lottos;
+    private final InputView inputView;
+    private final OutputView outputView;
 
-    public LottoController(LottoService lottoService) {
-        this.lottoService = lottoService;
+    public LottoController(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+        Money money = new Money(inputView.inputMoney().getMoney());
+        this.lottoService = LottoService.buyLotto(money);
+        outputView.printBuyStatus(lottoService.buyStatus());
     }
 
-    public LottoStatusResponseDto buyLotto(MoneyRequestDto moneyRequestDto) {
-        money = new Money(moneyRequestDto.getMoney());
-        lottos = lottoService.buyLotto(money);
-        return new LottoStatusResponseDto(lottos);
-    }
-
-    public LottoResultResponseDto drawWinningLotto(WinningLottoRequestDto winningLottoRequestDto) {
-        validateNullSafe();
+    public void drawWinningLotto() {
+        WinningLottoRequestDto winningLottoRequestDto = inputView.inputWinningNumbers();
         WinningLotto winningLotto = new WinningLotto(
                 winningLottoRequestDto.getWinningNumbers(),
                 winningLottoRequestDto.getBonusNumber()
         );
-        LottoResults lottoResults = lottoService.matchWinningLotto(lottos, winningLotto);
-        double profit = lottoService.profitRate(lottoResults, money);
-
-        return new LottoResultResponseDto(lottoResults, profit);
-    }
-
-    private void validateNullSafe() {
-        if (money == null || lottos == null) {
-            throw new IllegalStateException("로또를 먼저 구매해야 합니다.");
-        }
+        LottoResults lottoResults = lottoService.matchWinningLotto(winningLotto);
+        double profit = lottoService.profitRate(lottoResults);
+        outputView.printLottoResult(new LottoResultResponseDto(lottoResults, profit));
     }
 }
