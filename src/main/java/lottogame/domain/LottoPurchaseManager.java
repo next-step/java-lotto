@@ -16,8 +16,8 @@ public class LottoPurchaseManager {
 
     public List<LottoTicketDto> purchase(int money) {
         assertMoney(money);
-        List<LottoTicket> lottoTicketRespons = createLottoNumbers(money);
-        return toLottoTicketResponses(lottoTicketRespons);
+        List<LottoTicket> lottoTickets = createLottoTickets(money);
+        return toLottoTicketDtos(lottoTickets);
     }
 
     private void assertMoney(int money) {
@@ -28,7 +28,7 @@ public class LottoPurchaseManager {
         }
     }
 
-    private List<LottoTicket> createLottoNumbers(int money) {
+    private List<LottoTicket> createLottoTickets(int money) {
         List<LottoTicket> lottoTicketList = new ArrayList<>();
         for (int count = 0; count < money / LottoTicket.PURCHASABLE_UNIT; count++) {
             lottoTicketList.add(new LottoTicket(numberGenerator));
@@ -36,9 +36,9 @@ public class LottoPurchaseManager {
         return lottoTicketList;
     }
 
-    private List<LottoTicketDto> toLottoTicketResponses(
-        List<LottoTicket> lottoTicketRespons) {
-        return lottoTicketRespons.stream()
+    private List<LottoTicketDto> toLottoTicketDtos(
+        List<LottoTicket> lottoTickets) {
+        return lottoTickets.stream()
             .map(lottoTicket -> new LottoTicketDto(lottoTicket.getValues()))
             .collect(Collectors.toList());
     }

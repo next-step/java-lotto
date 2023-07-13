@@ -13,16 +13,16 @@ import lottogame.domain.response.LottoTicketCheckedResponse;
 public class ConsoleViewer implements Viewer {
 
     @Override
-    public void drawLottoTicketResponses(List<LottoTicketDto> lottoTicketRespons) {
-        System.out.printf("%d개를 구매했습니다.%n", lottoTicketRespons.size());
-        System.out.println(parsePrintString(lottoTicketRespons));
+    public void drawLottoTicketResponses(List<LottoTicketDto> lottoTicketDtos) {
+        System.out.printf("%d개를 구매했습니다.%n", lottoTicketDtos.size());
+        System.out.println(parsePrintString(lottoTicketDtos));
     }
 
-    private String parsePrintString(List<LottoTicketDto> lottoTicketRespons) {
+    private String parsePrintString(List<LottoTicketDto> lottoTicketDtos) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        lottoTicketRespons.forEach(
-            lottoTicketResponse -> parseLottoTicket(lottoTicketResponse.getNumbers(), stringBuilder));
+        lottoTicketDtos.forEach(
+            lottoTicketDto -> parseLottoTicket(lottoTicketDto.getNumbers(), stringBuilder));
 
         return stringBuilder.toString();
     }

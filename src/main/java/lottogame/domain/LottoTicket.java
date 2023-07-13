@@ -12,7 +12,7 @@ public class LottoTicket {
 
     private final Set<LottoNumber> values;
 
-    public LottoTicket(NumberGenerator numberGenerator) {
+    LottoTicket(NumberGenerator numberGenerator) {
         Objects.requireNonNull(numberGenerator, "numberGeneartor는 Null이 되면 안됩니다.");
         this.values = initValues(numberGenerator.generateDistinctNumbers(LOTTO_NUMBERS_SIZE));
     }

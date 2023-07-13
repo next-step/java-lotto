@@ -34,7 +34,7 @@ public class LottoTicketDto {
 
     @Override
     public String toString() {
-        return "LottoTicketResponse{" +
+        return "LottoTicketDto{" +
             "numbers=" + numbers +
             '}';
     }
