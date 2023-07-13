@@ -14,23 +14,36 @@ public class LottoInput {
         this.scanner = new Scanner(System.in);
     }
 
-    private Long inputAmount() {
-        return Long.parseLong(scanner.nextLine());
-    }
-
     public List<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return Arrays.stream(scanner.nextLine().split(WINNING_DELIMITER))
-            .map(Integer::parseInt)
-            .collect(Collectors.toList());
+        return inputLottoNumbers();
     }
 
     public Long inputPurchaseMoney() {
         return inputAmount();
     }
 
+    public int inputManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return inputAmount().intValue();
+    }
+
+    public List<Integer> inputManualLottoNumbers() {
+        return inputLottoNumbers();
+    }
+
     public int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return inputAmount().intValue();
+    }
+
+    private Long inputAmount() {
+        return Long.parseLong(scanner.nextLine());
+    }
+
+    private List<Integer> inputLottoNumbers() {
+        return Arrays.stream(scanner.nextLine().split(WINNING_DELIMITER))
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
     }
 }

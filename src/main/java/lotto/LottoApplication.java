@@ -1,6 +1,8 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.Lotto;
 import lotto.domain.LottoGroup;
 import lotto.domain.LottoResult;
 import lotto.domain.WinningLotto;
@@ -20,7 +22,8 @@ public class LottoApplication {
 
     public void run() {
         Money purchaseMoney = inputPurchaseMoney();
-        LottoGroup lottoGroup = LottoGroup.from(purchaseMoney);
+        LottoGroup lottoGroup = LottoGroup.of(purchaseMoney, inputManualLotto());
+
         output.printQuantity(LottoGroup.getQuantity(purchaseMoney));
         output.printLottos(lottoGroup);
 
@@ -31,6 +34,18 @@ public class LottoApplication {
     private Money inputPurchaseMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         return new Money(input.inputPurchaseMoney());
+    }
+
+    private List<Lotto> inputManualLotto() {
+        int manualLottoCount = input.inputManualLottoCount();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            Lotto manualLotto = Lotto.createSpecificLotto(input.inputManualLottoNumbers());
+            manualLottos.add(manualLotto);
+        }
+        System.out.println();
+        return manualLottos;
     }
 
     private WinningLotto inputWinningLotto() {
