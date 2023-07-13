@@ -9,13 +9,17 @@ import lotto.model.domain.Rank;
 
 public final class LottoOutputView {
 
-    private static final LottoOutputView INSTANCE = new LottoOutputView();
-
     private LottoOutputView() {
     }
 
+    private static class LottoOutputViewHolder {
+
+        private static final LottoOutputView INSTANCE = new LottoOutputView();
+
+    }
+
     public static LottoOutputView getInstance() {
-        return INSTANCE;
+        return LottoOutputViewHolder.INSTANCE;
     }
 
     public void printBuyingCount(final LottoMoney lottoMoney) {

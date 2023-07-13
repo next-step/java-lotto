@@ -10,8 +10,6 @@ public final class RandomNumbersGenerator implements NumbersGenerator {
 
     private static final int MINIMUM_INDEX = 0;
 
-    private static final RandomNumbersGenerator INSTANCE = new RandomNumbersGenerator();
-
     private static final List<Integer> baseNumbers = IntStream
             .rangeClosed(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER)
             .boxed()
@@ -20,8 +18,13 @@ public final class RandomNumbersGenerator implements NumbersGenerator {
     private RandomNumbersGenerator() {
     }
 
+    private static class RandomNumberGeneratorHolder {
+
+        private static final RandomNumbersGenerator INSTANCE = new RandomNumbersGenerator();
+    }
+
     public static RandomNumbersGenerator getInstance() {
-        return INSTANCE;
+        return RandomNumberGeneratorHolder.INSTANCE;
     }
 
     @Override

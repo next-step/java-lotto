@@ -7,14 +7,19 @@ import java.util.stream.Collectors;
 
 public final class LottoInputView {
 
-    private static final LottoInputView INSTANCE = new LottoInputView();
     private static final Scanner SCANNER = new Scanner(System.in);
 
     private LottoInputView() {
     }
 
+    private static class LottoInputViewHolder {
+
+        private static final LottoInputView INSTANCE = new LottoInputView();
+
+    }
+
     public static LottoInputView getInstance() {
-        return INSTANCE;
+        return LottoInputViewHolder.INSTANCE;
     }
 
     public int inputMoney() {
