@@ -14,10 +14,8 @@ public class WinningResultTest {
     void 수익률_계산_일치_확인() {
         Map<Rank, Integer> result = Map.of(Rank.THREE, 1);
 
-        WinningResult winningResult = new WinningResult(result);
+        WinningResult winningResult = new WinningResult(result,new LottoMoney(14000));
 
-        double profit = winningResult.calculateProfit(new LottoMoney(14000));
-
-        assertThat(profit).isCloseTo(0.35, within(0.01));
+        assertThat(winningResult.getProfit()).isCloseTo(0.35, within(0.01));
     }
 }

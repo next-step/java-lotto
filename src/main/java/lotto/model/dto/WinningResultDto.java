@@ -1,8 +1,10 @@
-package lotto.model;
+package lotto.model.dto;
 
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Set;
+import lotto.model.Rank;
+import lotto.model.WinningResult;
 
 public class WinningResultDto {
 
@@ -14,7 +16,7 @@ public class WinningResultDto {
         this.profit = profit;
     }
 
-    public static WinningResultDto of(final WinningResult winningResult, final LottoMoney gain) {
+    public static WinningResultDto from(final WinningResult winningResult) {
         Map<Rank, Integer> ranks = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
             if (rank == Rank.DEFAULT) {
@@ -22,7 +24,7 @@ public class WinningResultDto {
             }
             ranks.put(rank, winningResult.getRankCount(rank));
         }
-        return new WinningResultDto(ranks, winningResult.calculateProfit(gain));
+        return new WinningResultDto(ranks, winningResult.getProfit());
     }
 
     public double floorProfit() {
