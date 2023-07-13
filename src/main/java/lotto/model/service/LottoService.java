@@ -16,7 +16,7 @@ public final class LottoService {
     public LottoService(final LottoMoney lottoMoney, Lottos manualLottos,
             final NumbersGenerator numbersGenerator) {
         this.lottoMoney = lottoMoney;
-        this.autoLottos = new Lottos(lottoMoney.getTotalCount(), numbersGenerator);
+        this.autoLottos = new Lottos(lottoMoney.getAutoCount(), numbersGenerator);
         this.manualLottos = manualLottos;
     }
 
