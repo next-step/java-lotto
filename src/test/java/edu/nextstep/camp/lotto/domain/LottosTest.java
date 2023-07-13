@@ -1,6 +1,8 @@
 package edu.nextstep.camp.lotto.domain;
 
+import edu.nextstep.camp.lotto.view.InputView;
 import edu.nextstep.camp.testUtils.TestUtils;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import static edu.nextstep.camp.lotto.domain.LottoRank.*;
@@ -8,6 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottosTest {
+
+    @AfterEach
+    void after(){
+        InputView.close();
+    }
 
     @Test
     void 로또_발급_및_toString_테스트(){
