@@ -20,4 +20,11 @@ class MoneyTest {
         assertThat(new Money(14000L).calculateQuantity(new Money(1000L)))
             .isEqualTo(14);
     }
+
+    @Test
+    @DisplayName("0으로 나누면 예외를 던진다.")
+    void moneyDivisorShouldBePositiveNumberTest() {
+        assertThrows(IllegalArgumentException.class,
+            () -> new Money(10L).divide(new Money(0L)));
+    }
 }

@@ -7,6 +7,7 @@ import lotto.domain.LottoGroup;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
+import lotto.domain.Profit;
 
 public class LottoOutput {
 
@@ -43,8 +44,8 @@ public class LottoOutput {
         return builder.toString();
     }
 
-    public void printProfit(final Double profit) {
-        System.out.println("총 수익률은 " + String.format("%.2f", profit) + "입니다.");
+    public void printProfit(final Profit profit) {
+        System.out.println("총 수익률은 " + String.format("%.2f", profit.getValue()) + "입니다.");
     }
 
     private void printLotto(final Lotto lotto) {

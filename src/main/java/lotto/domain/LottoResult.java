@@ -28,9 +28,9 @@ public class LottoResult {
         return result;
     }
 
-    public Double calculateProfit() {
-        return this.calculateTotalPrize()
-            .calculateProfit(calculateTotalMoney());
+    public Profit calculateProfit() {
+        Money totalPrize = calculateTotalPrize();
+        return new Profit(totalPrize, calculateTotalMoney());
     }
 
     private Money calculateTotalMoney() {

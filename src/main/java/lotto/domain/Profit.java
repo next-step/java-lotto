@@ -7,11 +7,18 @@ public class Profit {
     private final Double value;
 
     public Profit(Double value) {
+        verify(value);
         this.value = value;
     }
 
-    public Profit(Money consume, Money prize) {
-        this.value = 20.0;
+    public Profit(Money dividend, Money divisor) {
+        this(dividend.divide(divisor));
+    }
+
+    private void verify(Double value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("profit should be greater than 0");
+        }
     }
 
     @Override
@@ -22,12 +29,16 @@ public class Profit {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Profit profit1 = (Profit) o;
-        return Objects.equals(value, profit1.value);
+        Profit profit = (Profit) o;
+        return Objects.equals(value, profit.value);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    public Double getValue() {
+        return this.value;
     }
 }

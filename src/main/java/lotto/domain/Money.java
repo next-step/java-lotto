@@ -17,12 +17,15 @@ public class Money {
         }
     }
 
-    public int calculateQuantity(final Money price) {
-        return (int) (value / price.value);
+    public Double divide(Money divisor) {
+        if (divisor.value.equals(0L)) {
+            throw new IllegalArgumentException("divisor should be positive number");
+        }
+        return (double) this.value / divisor.value;
     }
 
-    public double calculateProfit(final Money previous) {
-        return (double) value / previous.value;
+    public int calculateQuantity(final Money price) {
+        return (int) (value / price.value);
     }
 
     @Override
