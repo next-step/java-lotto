@@ -1,17 +1,15 @@
 package lotto.view;
 
 import java.text.MessageFormat;
-import java.util.Arrays;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.game.Lotto;
-import lotto.domain.statistics.LottoMatch;
-import lotto.domain.statistics.LottoMatchKey;
 import lotto.domain.game.LottoNumber;
-import lotto.domain.statistics.LottoStatistics;
 import lotto.domain.game.Lottos;
+import lotto.domain.statistics.LottoResult;
+import lotto.domain.statistics.LottoResults;
+import lotto.domain.statistics.LottoStatistics;
 
 public final class LottoView {
 
@@ -47,34 +45,37 @@ public final class LottoView {
 
     public void printLottos(final Lottos lottos) {
         lottos.getLottos().stream()
-            .map(Lotto::getLottoNumbers)
-            .forEach((number) -> System.out.println("[" + number + "]"));
-    }
-
-    public void printLottoStatistics(final Map<LottoMatch, Integer> resultMap) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
-
-        Arrays.stream(LottoMatch.values())
-            .map((lottoMatch -> resultMessage(lottoMatch, resultMap)))
+            .map(this::lottoMessage)
             .forEach(System.out::println);
     }
 
-    private String resultMessage(LottoMatch lottoMatch, final Map<LottoMatch, Integer> resultMap) {
-        String bonusMessage = "";
-        int matchCount = 0;
-        if (resultMap.containsKey(lottoMatch)) {
-            matchCount = resultMap.get(lottoMatch);
-        }
-        LottoMatchKey lottoMatchKey = lottoMatch.getLottoMatchKey();
-        if (lottoMatchKey.getIsBonus()) {
-            bonusMessage = ", 보너스 볼 일치";
-        }
+    private String lottoMessage(Lotto lotto) {
+        return "[ " + lotto.getLotto().stream()
+            .map(LottoNumber::getNumber)
+            .map(String::valueOf)
+            .collect(Collectors.joining(", ")) + " ]";
+    }
+
+    public void printLottoResult(LottoResults lottoResults) {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+
+        lottoResults.getLottoResults().stream()
+            .map(this::resultMessage)
+            .forEach(System.out::println);
+    }
+
+    private String resultMessage(LottoResult lottoResult) {
         return MessageFormat.format("{0}개 일치{1} ({2}원) - {3}개",
-            lottoMatchKey.getMatchCount(), bonusMessage, lottoMatch.getPrize(), resultMap.get(lottoMatch));
+            lottoResult.getMatchCount(),
+            lottoResult.getMessage(),
+            lottoResult.getPrize(),
+            lottoResult.getPrizeCount()
+        );
     }
 
     public void printProfitRate(final LottoStatistics lottoStatistics) {
         System.out.println("총 수익률은" + lottoStatistics.getProfitRate() + "입니다.");
     }
+
 }

@@ -7,6 +7,7 @@ import lotto.domain.game.Lottos;
 import lotto.domain.game.NumberGenerator;
 import lotto.domain.game.Payment;
 import lotto.domain.game.WinningNumber;
+import lotto.domain.statistics.LottoResults;
 import lotto.domain.statistics.LottoStatistics;
 
 public final class LottoService {
@@ -31,9 +32,9 @@ public final class LottoService {
         return new Lottos(autoLottos);
     }
 
-    public Map<LottoMatch, Integer> getResult(final WinningNumber winningNumber) {
+    public LottoResults getResult(final WinningNumber winningNumber) {
         lottoStatistics = new LottoStatistics(lottos, winningNumber, payment);
-        return lottoStatistics.getStatistics();
+        return new LottoResults(lottoStatistics);
     }
 
     public LottoStatistics getProfitRate() {

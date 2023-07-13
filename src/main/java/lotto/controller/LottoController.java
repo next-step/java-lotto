@@ -1,8 +1,8 @@
 package lotto.controller;
 
-import lotto.service.LottoService;
 import lotto.domain.game.Payment;
 import lotto.domain.game.WinningNumber;
+import lotto.service.LottoService;
 import lotto.view.LottoView;
 
 public final class LottoController {
@@ -23,7 +23,8 @@ public final class LottoController {
         WinningNumber winningNumber = new WinningNumber(winningLotto, bonusBall);
 
         // 3. 당첨 통계 출력
-        lottoView.printLottoStatistics(lottoService.getResult(winningNumber));
+        lottoView.printLottoResult(lottoService.getResult(winningNumber));
         lottoView.printProfitRate(lottoService.getProfitRate());
+
     }
 }
