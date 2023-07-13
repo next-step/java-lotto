@@ -15,25 +15,22 @@ public final class LottoService {
 
     private final Payment payment;
     private final Lottos lottos;
+    private final NumberGenerator numberGenerator;
     private LottoStatistics lottoStatistics;
 
     public LottoService(final Payment payment) {
         this.payment = payment;
+        this.numberGenerator = new NumberGenerator();
         this.lottos = generateLottos();
     }
 
     private Lottos generateLottos() {
         int count = payment.getLottoCount();
-        List<Lotto> lottos = new ArrayList<>();
-        List<Integer> lottoPossibleNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER,
-                LOTTO_MAX_NUMBER)
-            .boxed()
-            .collect(Collectors.toList());
+        List<Lotto> autoLottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            Collections.shuffle(lottoPossibleNumbers);
-            lottos.add(new Lotto(lottoPossibleNumbers.subList(0, LOTTO_PICK_COUNT)));
+            autoLottos.add(new Lotto(numberGenerator.shuffleNumbers(), true));
         }
-        return new Lottos(lottos);
+        return new Lottos(autoLottos);
     }
 
     public Map<LottoMatch, Integer> getResult(final WinningNumber winningNumber) {
