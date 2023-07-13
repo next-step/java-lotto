@@ -10,7 +10,7 @@ import static java.util.stream.Collectors.joining;
 
 public class OutputView {
 
-    public static final String DELIMITER = ", ";
+    private static final String DELIMITER = ", ";
 
     public static void printPurchasedResult(PurChasedLotto purChasedLotto) {
         System.out.println(purChasedLotto.getLottoCount() + "개를 구매했습니다");
@@ -40,7 +40,7 @@ public class OutputView {
     }
 
     private static void printProfit(WinningResponse winningResponse) {
-        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", winningResponse.getProfit());
+        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", winningResponse.calculateProfit());
     }
 
     private static void printRank(Rank rank, int rankCount) {

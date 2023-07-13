@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-    public static final int LOTTO_LENGTH = 6;
+    private static final int LOTTO_LENGTH = 6;
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(final List<LottoNumber> lottoNumbers) {
@@ -19,7 +19,7 @@ public class Lotto {
 
     private void validateLottoLength(final List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_LENGTH) {
-            throw new IllegalStateException("로또 번호는 " + LOTTO_LENGTH + "개이여야 합니다");
+            throw new IllegalArgumentException("로또 번호는 " + LOTTO_LENGTH + "개이여야 합니다");
         }
     }
 
@@ -28,7 +28,7 @@ public class Lotto {
                 .distinct()
                 .count();
         if (numbers.size() != distinctLength) {
-            throw new IllegalStateException("로또 넘버는 중복되면 안됩니다.");
+            throw new IllegalArgumentException("로또 넘버는 중복되면 안됩니다.");
         }
     }
 

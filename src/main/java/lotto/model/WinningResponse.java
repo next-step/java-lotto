@@ -22,7 +22,7 @@ public class WinningResponse {
         return new WinningResponse(ranks, winningResult.calculateProfit(gain));
     }
 
-    public double getProfit() {
+    public double calculateProfit() {
         return Math.floor(100 * this.profit) / 100.0;
     }
 

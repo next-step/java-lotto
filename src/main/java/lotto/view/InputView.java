@@ -18,10 +18,10 @@ public class InputView {
     public static List<Integer> readWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return Arrays.stream(scanner.nextLine()
-                        .split(","))
-                .map(String::trim)
-                .map(Integer::valueOf)
-                .collect(toList());
+                .split(","))
+            .map(String::trim)
+            .map(Integer::valueOf)
+            .collect(toList());
     }
 
     public static int readBonusBall() {

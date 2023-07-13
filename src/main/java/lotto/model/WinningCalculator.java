@@ -6,9 +6,10 @@ import java.util.Map;
 
 public class WinningCalculator {
 
-    public static final int DEFAULT_VALUE = 0;
+    private static final int DEFAULT_VALUE = 0;
 
-    public WinningResult calculate(final WinningLotto winningLotto, final PurChasedLotto purChasedLotto) {
+    public WinningResult calculate(final WinningLotto winningLotto,
+        final PurChasedLotto purChasedLotto) {
         Map<Rank, Integer> result = initializeRankMap();
         List<Lotto> lottos = purChasedLotto.getLottos();
         for (Lotto lotto : lottos) {

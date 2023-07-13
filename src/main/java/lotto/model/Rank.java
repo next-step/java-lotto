@@ -5,11 +5,11 @@ import java.util.function.Predicate;
 
 public enum Rank {
     DEFAULT(0, 0, false),
-    THREE(3, 5000, false),
-    FOUR(4, 50000, false),
-    FIVE(5, 1500000, false),
-    FIVE_WITH_BONUS(5, 30000000, true),
-    SIX(6, 2000000000, false);
+    THREE(3, 5_000, false),
+    FOUR(4, 50_000, false),
+    FIVE(5, 1_500_000, false),
+    FIVE_WITH_BONUS(5, 30_000_000, true),
+    SIX(6, 2_000_000_000, false);
 
     private final int match;
     private final int reward;
