@@ -46,7 +46,7 @@ public final class WinningNumbers {
         return this.bonusBall;
     }
 
-    public boolean hasWinningNumber(final LottoNumber lottoNumber) {
+    public boolean hasNumber(final LottoNumber lottoNumber) {
         return winningNumbers.contains(lottoNumber);
     }
 }
