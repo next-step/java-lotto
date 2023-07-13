@@ -1,17 +1,20 @@
 package lottogame.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber {
 
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
-    private static final LottoNumber[] CACHE;
+    private static final List<LottoNumber> CACHE;
 
     static {
-        CACHE = new LottoNumber[MAX_LOTTO_NUMBER + 1];
+        CACHE = new ArrayList<>();
+        CACHE.add(new LottoNumber(0));
         for (int lottoNumber = MIN_LOTTO_NUMBER; lottoNumber <= MAX_LOTTO_NUMBER; lottoNumber++) {
-            CACHE[lottoNumber] = new LottoNumber(lottoNumber);
+            CACHE.add(new LottoNumber(lottoNumber));
         }
     }
 
@@ -23,7 +26,7 @@ public class LottoNumber {
 
     static LottoNumber valueOf(int lottoNumber) {
         assertLottoNumber(lottoNumber);
-        return CACHE[lottoNumber];
+        return CACHE.get(lottoNumber);
     }
 
     private static void assertLottoNumber(final int lottoNumber) {
