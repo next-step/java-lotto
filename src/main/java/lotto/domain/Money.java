@@ -24,6 +24,10 @@ public class Money {
         return (double) this.value / divisor.value;
     }
 
+    public boolean isUnderThan(Long other) {
+        return this.value < other;
+    }
+
     public int calculateQuantity(final Money price) {
         return (int) (value / price.value);
     }

@@ -26,7 +26,7 @@ public class LottoGroup {
     }
 
     private static void verify(Money money) {
-        if (money.calculateQuantity(new Money(LOTTO_PRICE)) == 0) {
+        if (money.isUnderThan(LOTTO_PRICE)) {
             throw new IllegalArgumentException(
                 "purchase money amount should greater than lotto price.");
         }
