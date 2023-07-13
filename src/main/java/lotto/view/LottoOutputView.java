@@ -57,7 +57,7 @@ public final class LottoOutputView {
         System.out.println(lottoSize + "개를 구매했습니다.");
     }
 
-    public void printChangeOfPurchase(final Money change) {
+    public void printChangeOfPurchase(final LottoMoney change) {
         System.out.printf("거스름돈은 %d원 입니다.", change.getValue()).println();
     }
 }

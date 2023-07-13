@@ -15,8 +15,8 @@ public final class LottoController {
     }
 
     public void run() {
-        final Money purchase = Money.valueOf(lottoInputView.inputPurchase());
-        final long lottosSize = purchase.quotient(Lotto.COST);
+        final LottoMoney purchase = LottoMoney.valueOf(lottoInputView.inputPurchase());
+        final long lottosSize = purchase.size(Lotto.COST);
         final Lottos lottos = Lottos.create(
                 lottosSize,
                 RandomNumbersGenerator.getInstance()
@@ -31,14 +31,14 @@ public final class LottoController {
         printLottoResult(purchase, lottos, winningLotto);
     }
 
-    private void printLottoResult(final Money purchase, final Lottos lottos, final WinningLotto winningLotto) {
+    private void printLottoResult(final LottoMoney purchase, final Lottos lottos, final WinningLotto winningLotto) {
         final LottoResult lottoResult = LottoResult.of(lottos.matchWinningNumbers(winningLotto), purchase);
         lottoOutputView.printLottoResult(lottoResult);
     }
 
-    private void printPurchaseInformation(final Money purchase, final Lottos lottos) {
+    private void printPurchaseInformation(final LottoMoney purchase, final Lottos lottos) {
         lottoOutputView.printSizeOfLottos(lottos);
-        lottoOutputView.printChangeOfPurchase(purchase.remainder(Lotto.COST));
+        lottoOutputView.printChangeOfPurchase(purchase.change(Lotto.COST));
         lottoOutputView.printBuyingLotto(lottos);
     }
 }
