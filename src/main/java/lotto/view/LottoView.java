@@ -1,13 +1,16 @@
-package view;
+package lotto.view;
 
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
-import lottogame.Lotto;
-import lottogame.LottoMatch;
-import lottogame.LottoMatchKey;
-import lottogame.Lottos;
+import java.util.stream.Collectors;
+import lotto.domain.Lotto;
+import lotto.domain.LottoMatch;
+import lotto.domain.LottoMatchKey;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 
 public final class LottoView {
 
@@ -15,12 +18,19 @@ public final class LottoView {
 
     public String readPayment() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextLine();
+        return validateBlank(scanner.nextLine().trim());
     }
 
     public String readWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.nextLine();
+        return validateBlank(scanner.nextLine().trim());
+    }
+
+    private String validateBlank(final String text) {
+        if (Objects.isNull(text) || text.isBlank()) {
+            throw new IllegalArgumentException("값을 입력해 주세요");
+        }
+        return text;
     }
 
     public String readBonusBall() {

@@ -1,7 +1,8 @@
-package lottogame;
+package lotto.domain;
 
 import java.text.MessageFormat;
 import java.util.Objects;
+import java.util.OptionalInt;
 
 public final class LottoNumber {
 
@@ -14,9 +15,9 @@ public final class LottoNumber {
         this.number = value;
     }
 
-    // TODO : try - catch & constructor 2개에 대한 더  나은 고민 필요
     public LottoNumber(final String text) {
-        int value = Integer.parseInt(text.trim());
+        int value = OptionalInt.of(Integer.parseInt(text.trim()))
+            .orElseThrow(() -> new NumberFormatException("숫자를 입력해 주세요"));
         validateRange(value);
         this.number = value;
     }
@@ -29,8 +30,8 @@ public final class LottoNumber {
         }
     }
 
-    public String getNumber () {
-        return String.valueOf(number);
+    public int getNumber() {
+        return number;
     }
 
     @Override

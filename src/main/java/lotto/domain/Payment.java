@@ -1,6 +1,7 @@
-package lottogame;
+package lotto.domain;
 
 import java.text.MessageFormat;
+import java.util.OptionalInt;
 
 public final class Payment {
 
@@ -8,8 +9,8 @@ public final class Payment {
     private final int money;
 
     public Payment(final String text) {
-        validateBlank(text);
-        int value = toValue(text);
+        int value = OptionalInt.of(Integer.parseInt(text.trim()))
+            .orElseThrow(() -> new NumberFormatException("숫자를 입력해야 합니다"));
         validateRange(value);
         money = value;
     }
@@ -18,20 +19,6 @@ public final class Payment {
         if (value < LOTTO_PRICE) {
             throw new IllegalArgumentException(
                 MessageFormat.format("{0}원 이상 투입해 주세요", LOTTO_PRICE));
-        }
-    }
-
-    private int toValue(final String text) {
-        try {
-            return Integer.parseInt(text);
-        } catch (NumberFormatException numberFormatException) {
-            throw new NumberFormatException("숫자를 입력해야 합니다");
-        }
-    }
-
-    private void validateBlank(final String text) {
-        if (text == null || text.isBlank()) {
-            throw new IllegalArgumentException("값을 입력해 주세요");
         }
     }
 
