@@ -23,10 +23,10 @@ public class LottoApplication {
 
     private static void run() {
         // 가격 입력
-        final long money = InputView.readMoney();
+        final int money = InputView.readMoney();
 
         //수동으로 구매할 로또 수 입력
-        final long manualPurchaseCount = InputView.readManualPurchaseCount();
+        final int manualPurchaseCount = InputView.readManualPurchaseCount();
 
         //수동으로 구매할 번호 입력
         List<List<Integer>> numberBundles = new ArrayList<>();

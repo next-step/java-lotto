@@ -14,8 +14,8 @@ class LottoGeneratorTest {
     @DisplayName("로또를 일정 수만큼 수동으로 생성하고, 나머지는 자동으로 생성한다.")
     void generateLottosManuallyAndThenAutomatically() {
         /* given */
-        final long money = 5_000L;
-        final long manualPurchaseCount = 2;
+        final int money = 5_000;
+        final int manualPurchaseCount = 2;
         final List<List<Integer>> inputNumberBundles = List.of(List.of(1, 2, 3, 4, 5, 6),
             List.of(7, 8, 9, 10, 11, 12));
 
@@ -40,8 +40,8 @@ class LottoGeneratorTest {
     @DisplayName("수동으로 구매할 로또 수가 구입금액으로 구매 가능한 총 로또 수보다 많으면 IllegalArgumentException을 던진다.")
     void moneyNotSufficient() {
         /* given */
-        final long money = 1_000L;
-        final long manualPurchaseCount = 2;
+        final int money = 1_000;
+        final int manualPurchaseCount = 2;
         final List<List<Integer>> inputNumberBundles = List.of(List.of(1, 2, 3, 4, 5, 6),
             List.of(7, 8, 9, 10, 11, 12));
 
@@ -52,11 +52,11 @@ class LottoGeneratorTest {
     }
 
     @Test
-    @DisplayName("수동으로 구매할 로또 수가 번호 묶음 수와 일치하지 않으면 IllegalArgumentException을 던진다.")
+    @DisplayName("숫자 묶음 수가 수동으로 구매할 로또 수와 일치하지 않으면 IllegalArgumentException을 던진다.")
     void manualGenerationCountAndnumberBundlesCountNotEqual() {
         /* given */
-        final long money = 5_000L;
-        final long manualPurchaseCount = 3;
+        final int money = 5_000;
+        final int manualPurchaseCount = 3;
         final List<List<Integer>> inputNumberBundles = List.of(List.of(1, 2, 3, 4, 5, 6),
             List.of(7, 8, 9, 10, 11, 12));
 

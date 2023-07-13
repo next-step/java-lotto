@@ -13,10 +13,10 @@ public class InputView {
     private InputView() {
     }
 
-    public static long readMoney() {
+    public static int readMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         try {
-            final long money = Long.parseLong(scanner.nextLine());
+            final int money = Integer.parseInt(scanner.nextLine());
             validatePositive(money);
             System.out.println();
 
@@ -26,11 +26,11 @@ public class InputView {
         }
     }
 
-    public static long readManualPurchaseCount() {
+    public static int readManualPurchaseCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
 
         try {
-            final long count = Long.parseLong(scanner.nextLine());
+            final int count = Integer.parseInt(scanner.nextLine());
             validateNonNegative(count);
             System.out.println();
 
@@ -74,13 +74,13 @@ public class InputView {
         }
     }
 
-    private static void validatePositive(final long money) {
+    private static void validatePositive(final int money) {
         if (money <= 0) {
             throw new IllegalArgumentException("구입금액은 양의 정수여야 합니다.");
         }
     }
 
-    private static void validateNonNegative(final long count) {
+    private static void validateNonNegative(final int count) {
         if (count < 0) {
             throw new IllegalArgumentException("수동으로 구매할 로또 수는 음수일 수 없습니다.");
         }

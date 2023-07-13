@@ -16,9 +16,9 @@ public class Lotto {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
 
-        Set<LottoNumber> lottoNumbers = numbers.stream()
+        final Set<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toUnmodifiableSet());
 
         validateUniqueNumbers(numbers, lottoNumbers);
         this.lottoNumbers = lottoNumbers;

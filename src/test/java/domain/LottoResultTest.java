@@ -9,7 +9,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-public class LottoResultTest {
+class LottoResultTest {
 
     private List<Rank> target;
 
@@ -53,7 +53,7 @@ public class LottoResultTest {
     void calculateTotalPrize() {
         /* given */
         LottoResult lottoResult = new LottoResult(target);
-        long money = target.size() * 1000L;
+        int money = target.size() * 1_000;
 
         /* when */
         double rateOfReturn = lottoResult.calculateRateOfReturn(money);

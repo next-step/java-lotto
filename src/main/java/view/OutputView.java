@@ -14,8 +14,8 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printPurchaseCount(final List<Lotto> lottos, final long manualPurchaseCount) {
-        final long autoPurchaseCount = lottos.size() - manualPurchaseCount;
+    public static void printPurchaseCount(final List<Lotto> lottos, final int manualPurchaseCount) {
+        final int autoPurchaseCount = lottos.size() - manualPurchaseCount;
         System.out.println(
             "\n수동으로 " + manualPurchaseCount + "장, 자동으로 " + autoPurchaseCount + "장을 구매했습니다.");
     }
@@ -25,7 +25,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printStatistic(final LottoResult lottoResult, final long money) {
+    public static void printStatistic(final LottoResult lottoResult, final int money) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
@@ -57,7 +57,7 @@ public class OutputView {
         System.out.println(result);
     }
 
-    private static void printRateOfReturn(final LottoResult lottoResult, final long money) {
+    private static void printRateOfReturn(final LottoResult lottoResult, final int money) {
         final double rateOfReturn = lottoResult.calculateRateOfReturn(money);
 
         final String result = String.format("총 수익률은 %.2f입니다.",
