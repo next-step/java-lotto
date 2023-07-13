@@ -6,7 +6,7 @@ import java.util.List;
 
 public class LottoGroup {
 
-    public static final Money LOTTO_PRICE = new Money(1000L);
+    private static final Money LOTTO_PRICE = new Money(1000L);
 
     private final List<Lotto> lottos;
 
@@ -26,6 +26,10 @@ public class LottoGroup {
 
     public static int getQuantity(final Money money) {
         return money.divide(LOTTO_PRICE).intValue();
+    }
+
+    public static Money getSpentMoney(final Long quantity) {
+        return LOTTO_PRICE.multiply(quantity);
     }
 
     private static void verify(Money money) {

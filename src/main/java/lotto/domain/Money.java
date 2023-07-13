@@ -28,6 +28,10 @@ public class Money {
         return new Money(this.value * multiplier.value);
     }
 
+    public Money multiply(Long multiplier) {
+        return this.multiply(new Money(multiplier));
+    }
+
     public boolean isUnderThan(Money other) {
         return this.value < other.value;
     }
