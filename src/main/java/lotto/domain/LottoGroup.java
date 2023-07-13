@@ -6,7 +6,7 @@ import java.util.List;
 
 public class LottoGroup {
 
-    public static final Long LOTTO_PRICE = 1000L;
+    public static final Money LOTTO_PRICE = new Money(1000L);
 
     private final List<Lotto> lottos;
 
@@ -17,12 +17,15 @@ public class LottoGroup {
     public static LottoGroup from(final Money money) {
         verify(money);
 
-        int totalQuantity = money.calculateQuantity(new Money(LOTTO_PRICE));
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < totalQuantity; i++) {
+        for (int i = 0; i < getQuantity(money); i++) {
             lottos.add(Lotto.createRandomLotto());
         }
         return new LottoGroup(lottos);
+    }
+
+    public static int getQuantity(final Money money) {
+        return money.divide(LOTTO_PRICE).intValue();
     }
 
     private static void verify(Money money) {

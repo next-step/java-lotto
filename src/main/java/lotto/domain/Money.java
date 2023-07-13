@@ -24,12 +24,12 @@ public class Money {
         return (double) this.value / divisor.value;
     }
 
-    public boolean isUnderThan(Long other) {
-        return this.value < other;
+    public Money multiply(Money multiplier) {
+        return new Money(this.value * multiplier.value);
     }
 
-    public int calculateQuantity(final Money price) {
-        return (int) (value / price.value);
+    public boolean isUnderThan(Money other) {
+        return this.value < other.value;
     }
 
     @Override

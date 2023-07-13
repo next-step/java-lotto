@@ -38,7 +38,6 @@ public class LottoResult {
             .stream()
             .mapToLong(Long::longValue)
             .sum();
-        return new Money(totalQuantity * LottoGroup.LOTTO_PRICE);
+        return LottoGroup.LOTTO_PRICE.multiply(new Money(totalQuantity));
     }
-
 }

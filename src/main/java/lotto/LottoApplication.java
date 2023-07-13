@@ -20,9 +20,8 @@ public class LottoApplication {
 
     public void run() {
         Money purchaseMoney = inputPurchaseMoney();
-        output.printQuantity(purchaseMoney.calculateQuantity(new Money(LottoGroup.LOTTO_PRICE)));
-
         LottoGroup lottoGroup = LottoGroup.from(purchaseMoney);
+        output.printQuantity(LottoGroup.getQuantity(purchaseMoney));
         output.printLottos(lottoGroup);
 
         WinningLotto winningLotto = inputWinningLotto();
