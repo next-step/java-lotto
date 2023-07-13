@@ -2,12 +2,12 @@ package lotto.dto;
 
 import java.util.List;
 
-public class WinningNumbersRequestDto {
+public class WinningLottoRequestDto {
 
     private final List<Integer> winningNumbers;
     private final int bonusNumber;
 
-    public WinningNumbersRequestDto(List<Integer> winningNumbers, int bonusNumber) {
+    public WinningLottoRequestDto(List<Integer> winningNumbers, int bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }

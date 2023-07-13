@@ -39,9 +39,9 @@ public class Lotto {
         }
     }
 
-    public int countMatchNumber(Lotto winningNumbers) {
+    public int countMatchNumber(Lotto winningLotto) {
         return (int) lottoNumbers.stream()
-                .filter(winningNumbers::contains)
+                .filter(winningLotto::contains)
                 .count();
     }
 

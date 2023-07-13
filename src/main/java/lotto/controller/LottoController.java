@@ -3,11 +3,11 @@ package lotto.controller;
 import lotto.domain.LottoResults;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.domain.WinningNumbers;
+import lotto.domain.WinningLotto;
 import lotto.dto.LottoResultResponseDto;
 import lotto.dto.LottoStatusResponseDto;
 import lotto.dto.MoneyRequestDto;
-import lotto.dto.WinningNumbersRequestDto;
+import lotto.dto.WinningLottoRequestDto;
 import lotto.service.LottoService;
 
 public class LottoController {
@@ -26,13 +26,13 @@ public class LottoController {
         return new LottoStatusResponseDto(lottos);
     }
 
-    public LottoResultResponseDto drawWinningLotto(WinningNumbersRequestDto winningNumbersRequestDto) {
+    public LottoResultResponseDto drawWinningLotto(WinningLottoRequestDto winningLottoRequestDto) {
         validateNullSafe();
-        WinningNumbers winningNumbers = new WinningNumbers(
-                winningNumbersRequestDto.getWinningNumbers(),
-                winningNumbersRequestDto.getBonusNumber()
+        WinningLotto winningLotto = new WinningLotto(
+                winningLottoRequestDto.getWinningNumbers(),
+                winningLottoRequestDto.getBonusNumber()
         );
-        LottoResults lottoResults = lottoService.matchWinningLotto(lottos, winningNumbers);
+        LottoResults lottoResults = lottoService.matchWinningLotto(lottos, winningLotto);
         double profit = lottoService.profitRate(lottoResults, money);
 
         return new LottoResultResponseDto(lottoResults, profit);

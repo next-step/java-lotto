@@ -4,7 +4,7 @@ import lotto.controller.LottoController;
 import lotto.dto.LottoResultResponseDto;
 import lotto.dto.LottoStatusResponseDto;
 import lotto.dto.MoneyRequestDto;
-import lotto.dto.WinningNumbersRequestDto;
+import lotto.dto.WinningLottoRequestDto;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -19,7 +19,7 @@ public class LottoApplication {
         LottoStatusResponseDto lottoStatusResponseDto = lottoController.buyLotto(moneyRequestDto);
         outputView.printBuyStatus(lottoStatusResponseDto);
 
-        WinningNumbersRequestDto winningNumbersRequestDto = inputView.inputWinningNumbers();
+        WinningLottoRequestDto winningNumbersRequestDto = inputView.inputWinningNumbers();
         LottoResultResponseDto lottoResultResponseDto = lottoController.drawWinningLotto(winningNumbersRequestDto);
         outputView.printLottoResult(lottoResultResponseDto);
     }

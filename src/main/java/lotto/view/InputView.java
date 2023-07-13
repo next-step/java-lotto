@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.dto.MoneyRequestDto;
-import lotto.dto.WinningNumbersRequestDto;
+import lotto.dto.WinningLottoRequestDto;
 
 import java.util.List;
 import java.util.Scanner;
@@ -18,7 +18,7 @@ public class InputView {
         return new MoneyRequestDto(money);
     }
 
-    public WinningNumbersRequestDto inputWinningNumbers() {
+    public WinningLottoRequestDto inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String numbers = scanner.nextLine();
         List<Integer> lottoNumbers = Stream.of(numbers.split(","))
@@ -28,6 +28,6 @@ public class InputView {
                 .collect(Collectors.toList());
         System.out.println("보너스 볼을 입력해 주세요.");
         int bonusNumber = scanner.nextInt();
-        return new WinningNumbersRequestDto(lottoNumbers, bonusNumber);
+        return new WinningLottoRequestDto(lottoNumbers, bonusNumber);
     }
 }

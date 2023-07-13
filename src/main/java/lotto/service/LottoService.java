@@ -17,8 +17,8 @@ public class LottoService {
         return new Lottos(lottos);
     }
 
-    public LottoResults matchWinningLotto(Lottos lottos, WinningNumbers winningNumbers) {
-        return lottos.matchWinningNumbers(winningNumbers);
+    public LottoResults matchWinningLotto(Lottos lottos, WinningLotto winningNumbers) {
+        return lottos.matchWinningLotto(winningNumbers);
     }
 
     public double profitRate(LottoResults lottoResults, Money money) {
