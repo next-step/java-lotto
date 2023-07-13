@@ -19,9 +19,23 @@ public class LottoService {
         return manualLotto.combineLottos(autoLottos);
     }
 
+    private void validateBuyLotto(Lottos manualLotto, long autoLottoCount, long manualLottoCount) {
+        validateLottoCount(autoLottoCount);
+        validateManualLottosSize(manualLotto, manualLottoCount);
+    }
+
     private void validateLottoCount(long autoLottoCount) {
         if (autoLottoCount < 0) {
-            throw new IllegalArgumentException("수동으로 구매하는 로또의 수가 구매금액을 벗어났습니다.");
+            throw new IllegalArgumentException("수동으로 구매하고자 하는 로또 금액이 총 금액을 초과했습니다. 초과한 로또 개수: " + Math.abs(autoLottoCount));
+        }
+    }
+
+    private void validateManualLottosSize(Lottos manualLotto, long manualCount) {
+        if (manualLotto.size() != manualCount) {
+            throw new IllegalArgumentException(
+                    "수동 로또 구매를 원하는 수와 실제 수동 로또로 입력한 값의 크기가 다릅니다. 수동 로또로 입력한 로또의 개수: "
+                            + manualLotto.size() + "수동 로또 구매를 원하는 수: " + manualCount
+            );
         }
     }
 
