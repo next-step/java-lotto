@@ -4,20 +4,24 @@ import lotto.model.domain.LottoMoney;
 import lotto.model.domain.LottoResult;
 import lotto.model.domain.Lottos;
 import lotto.model.domain.NumbersGenerator;
+import lotto.model.domain.RankResults;
 import lotto.model.domain.WinningNumbers;
 
 public final class LottoService {
 
-    private final Lottos lottos;
+    private final Lottos manualLottos;
+    private final Lottos autoLottos;
     private final LottoMoney lottoMoney;
 
-    public LottoService(final LottoMoney lottoMoney, final NumbersGenerator numbersGenerator) {
+    public LottoService(final LottoMoney lottoMoney, Lottos manualLottos,
+            final NumbersGenerator numbersGenerator) {
         this.lottoMoney = lottoMoney;
-        this.lottos = new Lottos(lottoMoney.getTotalCount(), numbersGenerator);
+        this.autoLottos = new Lottos(lottoMoney.getTotalCount(), numbersGenerator);
+        this.manualLottos = manualLottos;
     }
 
-    public Lottos getLottos() {
-        return this.lottos;
+    public Lottos getAutoLottos() {
+        return this.autoLottos;
     }
 
     public LottoMoney getLottoMoney() {
@@ -29,6 +33,9 @@ public final class LottoService {
     }
 
     public LottoResult calculateLottoResult(final WinningNumbers winningNumbers) {
-        return new LottoResult(lottos.matchWinningNumbers(winningNumbers), lottoMoney);
+        RankResults totalRankResults = new RankResults(
+                manualLottos.matchWinningNumbers(winningNumbers),
+                autoLottos.matchWinningNumbers(winningNumbers));
+        return new LottoResult(totalRankResults, lottoMoney);
     }
 }

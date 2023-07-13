@@ -3,7 +3,9 @@ package lotto.model.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+import java.util.List;
 import lotto.model.domain.LottoMoney;
+import lotto.model.domain.Lottos;
 import lotto.model.domain.RandomNumbersGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,7 +18,7 @@ class LottoServiceTest {
         // given, when, then
         assertDoesNotThrow(
                 () -> new LottoService(new LottoMoney(1000, 0),
-                        RandomNumbersGenerator.getInstance()));
+                        new Lottos(List.of()), RandomNumbersGenerator.getInstance()));
     }
 
     @ParameterizedTest
@@ -24,10 +26,10 @@ class LottoServiceTest {
     void 로또_서비스_구입금액에_해당하는_로또_생성_성공(int money, int expectedSize) {
         // when
         LottoService lottoService = new LottoService(new LottoMoney(money, 0),
-                RandomNumbersGenerator.getInstance());
+                new Lottos(List.of()), RandomNumbersGenerator.getInstance());
 
         // then
-        assertThat(lottoService.getLottos().getLottos()).hasSize(expectedSize);
+        assertThat(lottoService.getAutoLottos().getLottos()).hasSize(expectedSize);
     }
 
     @ParameterizedTest
@@ -35,7 +37,7 @@ class LottoServiceTest {
     void 로또_서비스_구입금액에_해당하는_거스름돈_생성_성공(int money, int expectedChange) {
         // when
         LottoService lottoService = new LottoService(new LottoMoney(money, 0),
-                RandomNumbersGenerator.getInstance());
+                new Lottos(List.of()), RandomNumbersGenerator.getInstance());
 
         // then
         assertThat(lottoService.getChange()).isEqualTo(expectedChange);

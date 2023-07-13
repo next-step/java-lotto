@@ -1,21 +1,16 @@
 package lotto.model.domain;
 
-import java.util.EnumMap;
-import java.util.List;
+import java.util.Map;
 
 public final class LottoResult {
 
     public static final int DEFAULT_VALUE = 0;
 
-    private final EnumMap<Rank, Integer> lottoResultStatistics;
+    private final Map<Rank, Integer> lottoResultStatistics;
     private final double profitRate;
 
-    public LottoResult(final List<Rank> ranks, final LottoMoney lottoMoney) {
-        this.lottoResultStatistics = new EnumMap<>(Rank.class);
-        ranks.forEach(rank -> this.lottoResultStatistics.put(
-                rank,
-                this.lottoResultStatistics.getOrDefault(rank, DEFAULT_VALUE) + 1
-        ));
+    public LottoResult(final RankResults ranks, final LottoMoney lottoMoney) {
+        this.lottoResultStatistics = ranks.getRanksCounts();
         this.profitRate = calculateProfitRate(lottoMoney);
     }
 

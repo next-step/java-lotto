@@ -21,10 +21,10 @@ public final class Lottos {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public List<Rank> matchWinningNumbers(final WinningNumbers winningNumbers) {
-        return lottos.stream()
+    public RankResults matchWinningNumbers(final WinningNumbers winningNumbers) {
+        return new RankResults(lottos.stream()
                 .map(lotto -> lotto.checkRank(winningNumbers))
-                .collect(Collectors.toUnmodifiableList());
+                .collect(Collectors.toUnmodifiableList()));
     }
 
     public List<Lotto> getLottos() {
