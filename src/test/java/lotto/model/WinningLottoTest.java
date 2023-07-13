@@ -15,7 +15,7 @@ public class WinningLottoTest {
     @DisplayName("당첨 번호와 보너스 볼이 중복되면 예외를 던진다.")
     void 당첨_번호_보너스볼_중복_예외() {
         assertThatCode(() -> new WinningLotto(List.of(1, 2, 3, 4, 5, 7), 7))
-                .isInstanceOf(IllegalStateException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

@@ -34,7 +34,7 @@ public class LottoNumberTest {
     @MethodSource("createLottoFail")
     void 로또_숫자_범위_벗어난_경우(int number) {
         assertThatCode(() -> new LottoNumber(number))
-                .isInstanceOf(IllegalStateException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 1부터 45까지 이어야합니다.");
     }
 
@@ -49,7 +49,7 @@ public class LottoNumberTest {
 
 
     @Test
-    @DisplayName("로또 번호가 같으면 다른 객체이다")
+    @DisplayName("로또 번호가 다르면 다른 객체이다")
     void 로또_번호_같으면_다른_객체() {
         LottoNumber firstLottoNumber = new LottoNumber(1);
         LottoNumber secondLottoNumber = new LottoNumber(2);
