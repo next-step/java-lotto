@@ -6,7 +6,7 @@ import lottogame.domain.response.LottoCheckedResponse;
 
 public interface Viewer {
 
-    void drawLottoTicketResponses(List<LottoTicketDto> lottoTicketRespons);
+    void drawLottoPurchasedResponses(List<LottoTicketDto> lottoTicketRespons);
 
     void drawLottoCheckedResponse(LottoCheckedResponse lottoCheckedResponse);
 

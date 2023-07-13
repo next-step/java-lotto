@@ -13,7 +13,7 @@ import lottogame.domain.response.LottoTicketCheckedResponse;
 public class ConsoleViewer implements Viewer {
 
     @Override
-    public void drawLottoTicketResponses(List<LottoTicketDto> lottoTicketDtos) {
+    public void drawLottoPurchasedResponses(List<LottoTicketDto> lottoTicketDtos) {
         System.out.printf("%d개를 구매했습니다.%n", lottoTicketDtos.size());
         System.out.println(parsePrintString(lottoTicketDtos));
     }

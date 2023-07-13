@@ -31,7 +31,7 @@ public class LottoController {
         int money = inputer.inputMoney();
         List<LottoTicketDto> lottoTicketDtos = lottoPurchaseManager.purchase(money);
 
-        viewer.drawLottoTicketResponses(lottoTicketDtos);
+        viewer.drawLottoPurchasedResponses(lottoTicketDtos);
 
         return lottoTicketDtos;
     }
