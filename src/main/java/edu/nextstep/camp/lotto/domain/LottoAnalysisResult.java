@@ -2,6 +2,8 @@ package edu.nextstep.camp.lotto.domain;
 
 import java.util.List;
 
+import static edu.nextstep.camp.lotto.domain.LottoGame.LOTTO_BUY_AMOUNT_UNIT;
+
 public class LottoAnalysisResult {
 
     private final List<LottoRank> lottoRankList;
@@ -32,7 +34,7 @@ public class LottoAnalysisResult {
     }
 
     private long amountPaid(){
-        return lottoRankList.size() * 1000;
+        return lottoRankList.size() * LOTTO_BUY_AMOUNT_UNIT;
     }
 
     private int lottoRankEqual(LottoRank lottoRank, LottoRank other) {
