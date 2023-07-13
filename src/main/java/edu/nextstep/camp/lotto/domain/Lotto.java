@@ -7,7 +7,7 @@ public class Lotto {
 
     public static final int LOTTO_NUMBERS_LENGTH = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(LottoNumber... lottoNumbers) {
         this(Arrays.asList(lottoNumbers));
@@ -23,23 +23,19 @@ public class Lotto {
     public Lotto(List<LottoNumber> lottoNumberList) {
         validationCheck(lottoNumberList);
 
-        this.lottoNumbers = new ArrayList<>(lottoNumberList);
+        List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNumberList);
 
-        this.lottoNumbers.sort(LottoNumber::compareTo);
+        lottoNumbers.sort(LottoNumber::compareTo);
+
+        this.lottoNumbers = new LinkedHashSet<>(lottoNumbers);
     }
 
     public int matchNumberCount(Lotto compareNumbers) {
-        int count = 0;
+        Set<LottoNumber> lottoNumberCopy = new HashSet<>(lottoNumbers);
 
-        for (LottoNumber compareNumber : compareNumbers.lottoNumbers) {
-            count += frequencyOfCompareNumber(compareNumber);
-        }
+        lottoNumberCopy.retainAll(compareNumbers.lottoNumbers);
 
-        return count;
-    }
-
-    private int frequencyOfCompareNumber(LottoNumber compareNumber) {
-        return Collections.frequency(lottoNumbers, compareNumber);
+        return lottoNumberCopy.size();
     }
 
     private void validationCheck(List<LottoNumber> lottoNumbers) {
