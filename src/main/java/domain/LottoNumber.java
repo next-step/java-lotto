@@ -9,7 +9,7 @@ public class LottoNumber {
     private final int value;
 
     public LottoNumber(final int value) {
-        validate(value);
+        validateBound(value);
 
         this.value = value;
     }
@@ -18,13 +18,13 @@ public class LottoNumber {
         return value;
     }
 
-    private static void validate(final int value) {
+    private void validateBound(final int value) {
         if (isOutOfBound(value)) {
             throw new IllegalArgumentException("로또 번호는 1 이상 45 이하의 자연수여야 합니다.");
         }
     }
 
-    private static boolean isOutOfBound(final int value) {
+    private boolean isOutOfBound(final int value) {
         return value < LOWER_BOUND || value > UPPER_BOUND;
     }
 

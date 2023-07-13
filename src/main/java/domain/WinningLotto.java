@@ -6,9 +6,7 @@ public class WinningLotto {
     private final LottoNumber bonus;
 
     public WinningLotto(final Lotto lotto, final LottoNumber bonus) {
-        if (lotto.containsLottoNumber(bonus)) {
-            throw new IllegalArgumentException("보너스 번호는 로또와 중복될 수 없습니다.");
-        }
+        validateUniqueBonus(lotto, bonus);
 
         this.lotto = lotto;
         this.bonus = bonus;
@@ -19,5 +17,11 @@ public class WinningLotto {
         final boolean containsBonus = target.containsLottoNumber(bonus);
 
         return Rank.from(matchLottoNumber, containsBonus);
+    }
+
+    private void validateUniqueBonus(final Lotto lotto, final LottoNumber bonus) {
+        if (lotto.containsLottoNumber(bonus)) {
+            throw new IllegalArgumentException("보너스 번호는 로또와 중복될 수 없습니다.");
+        }
     }
 }

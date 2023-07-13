@@ -15,24 +15,36 @@ public class LottoGenerator {
 
     public static List<Lotto> generateLottosManuallyAndThenAutomatically(final int money,
         final int manualPurchaseCount, final List<List<Integer>> numberBundles) {
-        validate(money);
+        validateMoneyUnit(money);
+
         final int totalPurchaseCount = calculateLottoPurchaseCount(money);
+        final int autoPurchaseCount = totalPurchaseCount - manualPurchaseCount;
 
         validateManualPurchaseCount(manualPurchaseCount, totalPurchaseCount);
         validateNumberBundlesCount(numberBundles, manualPurchaseCount);
 
-        final List<Lotto> lottos = new ArrayList<>();
+        return combine(generateLottosManually(manualPurchaseCount, numberBundles), generateLottosAutomatically(autoPurchaseCount));
+    }
 
-        for (int count = 0; count < manualPurchaseCount; count++) {
-            lottos.add(new Lotto(numberBundles.get(count)));
-        }
+    private static List<Lotto> generateLottosManually(final int manualPurchaseCount,
+        final List<List<Integer>> numberBundles) {
+        return IntStream.range(0, manualPurchaseCount)
+            .mapToObj(numberBundles::get)
+            .map(Lotto::new)
+            .collect(Collectors.toUnmodifiableList());
+    }
 
-        final int autoPurchaseCount = totalPurchaseCount - manualPurchaseCount;
-        for (int count = 0; count < autoPurchaseCount; count++) {
-            lottos.add(generateSingleLottoAutomatically());
-        }
+    private static List<Lotto> generateLottosAutomatically(final int autoPurchaseCount) {
+        return IntStream.range(0, autoPurchaseCount)
+            .mapToObj(count -> generateSingleLottoAutomatically())
+            .collect(Collectors.toUnmodifiableList());
+    }
 
-        return lottos;
+    private static List<Lotto> combine(final List<Lotto> lottos, final List<Lotto> otherLottos) {
+        final List<Lotto> result = new ArrayList<>();
+        result.addAll(lottos);
+        result.addAll(otherLottos);
+        return result;
     }
 
     private static void validateManualPurchaseCount(final int manualPurchaseCount,
@@ -57,11 +69,11 @@ public class LottoGenerator {
 
     private static List<Integer> generateLottoNumberValueCandidates() {
         return IntStream.rangeClosed(LottoNumber.LOWER_BOUND, LottoNumber.UPPER_BOUND)
-                .boxed()
-                .collect(Collectors.toList());
+            .boxed()
+            .collect(Collectors.toList());
     }
 
-    private static void validate(final int money) {
+    private static void validateMoneyUnit(final int money) {
         if (money % MONEY_UNIT != 0) {
             throw new IllegalArgumentException("구입금액은 " + MONEY_UNIT + "원 단위여야 합니다.");
         }

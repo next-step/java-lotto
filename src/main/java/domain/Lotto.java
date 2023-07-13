@@ -12,15 +12,10 @@ public class Lotto {
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(final List<Integer> numbers) {
-        if (numbers.size() != REQUIRED_LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
-        }
-
-        final Set<LottoNumber> lottoNumbers = numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toUnmodifiableSet());
-
+        validateSize(numbers);
+        final Set<LottoNumber> lottoNumbers = toLottoNumbers(numbers);
         validateUniqueNumbers(numbers, lottoNumbers);
+
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -36,6 +31,18 @@ public class Lotto {
 
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    private void validateSize(final List<Integer> numbers) {
+        if (numbers.size() != REQUIRED_LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+        }
+    }
+
+    private Set<LottoNumber> toLottoNumbers(final List<Integer> numbers) {
+        return numbers.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toUnmodifiableSet());
     }
 
     private void validateUniqueNumbers(List<Integer> numbers, Set<LottoNumber> lottoNumbers) {
