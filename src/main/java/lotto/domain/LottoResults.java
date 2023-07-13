@@ -6,12 +6,13 @@ import java.util.Map;
 
 public class LottoResults {
 
+    public static final long DEFAULT_VALUE = 0L;
     private final Map<LottoRank, Long> lottoResults;
 
     public LottoResults(List<LottoRank> lottoRanks) {
         lottoResults = new EnumMap<>(LottoRank.class);
         for (LottoRank rank : lottoRanks) {
-            lottoResults.put(rank, 1L);
+            lottoResults.put(rank, lottoResults.getOrDefault(rank, DEFAULT_VALUE) + 1L);
         }
     }
 
