@@ -40,9 +40,9 @@ public class LottoController {
         Set<Integer> lottoResultNumbers = inputer.inputWinningLottoNumbers();
         Integer bonusNumber = inputer.inputBonusLottoNumber();
         LottoCheckManager lottoCheckManager = new LottoCheckManager(lottoResultNumbers, bonusNumber);
-        LottoCheckedResponse lottoPrizes = lottoCheckManager.checkResult(lottoTicketDtos);
+        LottoCheckedResponse lottoCheckedResponse = lottoCheckManager.checkResult(lottoTicketDtos);
 
-        viewer.drawLottoCheckedResponse(lottoPrizes);
+        viewer.drawLottoCheckedResponse(lottoCheckedResponse);
     }
 
 }
