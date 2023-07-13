@@ -12,12 +12,12 @@ public class LottoPurchaser {
         this.lottoGenerator = autoLottoGenerator;
     }
 
-    public PurChasedLotto purchaseLotto(final LottoMoney lottoMoney) {
+    public Lottos purchaseLotto(final LottoMoney lottoMoney) {
         final int lottoCount = lottoMoney.getLottoCount();
         final List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto(lottoGenerator.generate()));
         }
-        return new PurChasedLotto(lottos);
+        return new Lottos(lottos);
     }
 }
