@@ -2,32 +2,31 @@
 ## 요구 사항 분석
 
 ### Domain
-* LottoService (* 추가 생각)
+* LottoService
   - [x] field : Payment
   - [x] field : Lottos
   - [x] action : 당첨 통계 계산
   - [x] action : 수익률 계산
   - [x] action : 로또 번호 6자리 생성
-* Payment -> type : int
+* Payment
   - [x] validation : 내가 투입한 금액이 1,000원 미만 인지?
   - [x] action : 몇 장만 산다?
   - [x] 로또 구입 갯수 계산 (개당 1,000원)
-* Lottos -> 일급 컬렉션, type : List<Lotto>
+* Lottos
   - [x] action : 당첨 통계 계산
 * WinningNumber
   - [x] field : Lotto
   - [x] filed : LottoNumber
   - [x] validation : 로또넘버 안에 보너스 볼과 일치하는 숫자가 있는지 검증
-* Lotto -> 일급 컬렉션, type : List<Number>
+* Lotto
   - [x] validation : 중복이 있는 지
   - [x] validation : 6개의 숫자인지
   - [x] action : 일치하는 숫자 카운트
-* LottoNumber -> type : int
+* LottoNumber
   - [x] validation : 1~45의 숫자
-* LottoText -> type : List<Integer>
-  - [x] validation : 빈 값인지 확인
-  - [x] validation : 숫자인지
-  - [x] action : 파싱된 숫자 리스트 반환
+* LottoResult
+  - field : resultMap
+  - [x] : 결과 통계
 
 ### View
 * [x] 구입금액 - 입력
