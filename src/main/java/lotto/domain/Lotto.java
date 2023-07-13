@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -16,6 +17,7 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     private Lotto(final List<LottoNumber> numbers) {
+        numbers.sort(Comparator.comparing(LottoNumber::getNumber));
         this.numbers = Collections.unmodifiableList(numbers);
     }
 

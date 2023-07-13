@@ -3,6 +3,8 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -95,5 +97,20 @@ class LottoTest {
 
         //when
         assertThat(lotto.countMatches(testLotto)).isEqualTo(match);
+    }
+
+    @Test
+    @DisplayName("로또는 정렬되어 있어야 한다.")
+    void lottoSortedTest() {
+        //given
+        Lotto lotto = Lotto.createSpecificLotto(List.of(6,2,3,4,1,5));
+
+        //when
+        List<LottoNumber> numbers = lotto.getLottoNumbers();
+        List<LottoNumber> sorted = new ArrayList<>(numbers);
+        sorted.sort(Comparator.comparing(LottoNumber::getNumber));
+
+        //then
+        assertThat(numbers).isEqualTo(sorted);
     }
 }
