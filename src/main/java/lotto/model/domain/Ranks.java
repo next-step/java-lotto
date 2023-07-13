@@ -15,6 +15,8 @@ public final class Ranks {
     }
 
     public int count(final Rank rank) {
-        return -1;
+        return (int) ranks.stream()
+                .filter(value -> value.equals(rank))
+                .count();
     }
 }
