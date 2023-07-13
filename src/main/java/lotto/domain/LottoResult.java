@@ -12,16 +12,9 @@ public class LottoResult {
     }
 
     public static LottoResult of(final LottoGroup lottoGroup, final WinningLotto winningLotto) {
-        return new LottoResult(lottoGroup.getLottos().stream()
-            .collect(Collectors.groupingBy(winningLotto::calculateRank, Collectors.counting())));
-    }
-
-    public Money calculateTotalPrize() {
-        Long totalPrize = result.keySet()
-            .stream()
-            .mapToLong(key -> key.getPrize() * result.get(key))
-            .sum();
-        return new Money(totalPrize);
+        Map<LottoRank, Long> rankMap = lottoGroup.getLottos().stream()
+            .collect(Collectors.groupingBy(winningLotto::calculateRank, Collectors.counting()));
+        return new LottoResult(rankMap);
     }
 
     public Map<LottoRank, Long> getResult() {
@@ -30,10 +23,18 @@ public class LottoResult {
 
     public Profit calculateProfit() {
         Money totalPrize = calculateTotalPrize();
-        return new Profit(totalPrize, calculateTotalMoney());
+        return new Profit(totalPrize, calculateSpentMoney());
     }
 
-    private Money calculateTotalMoney() {
+    private Money calculateTotalPrize() {
+        Long totalPrize = result.keySet()
+            .stream()
+            .mapToLong(key -> key.getPrize() * result.get(key))
+            .sum();
+        return new Money(totalPrize);
+    }
+
+    private Money calculateSpentMoney() {
         long totalQuantity = result.values()
             .stream()
             .mapToLong(Long::longValue)

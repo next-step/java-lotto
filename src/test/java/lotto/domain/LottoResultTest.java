@@ -40,16 +40,6 @@ class LottoResultTest {
     }
 
     @Test
-    @DisplayName("총 상금 계산")
-    void calculateTotalPrizeTest() {
-        //when
-        Money totalPrize = result.calculateTotalPrize();
-
-        //then
-        assertThat(totalPrize).isEqualTo(new Money(6_061_760_000L));
-    }
-
-    @Test
     @DisplayName("수익률 계산 기능 테스트")
     void calculateProfit() {
         //when, then
