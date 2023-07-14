@@ -33,19 +33,15 @@ public final class Lotto {
     }
 
     public Rank checkRank(final WinningNumbers winningNumbers) {
-        final int matchCount = checkMatchCount(winningNumbers);
-        final boolean hasBonusBall = checkBonusBall(winningNumbers);
+        final int matchCount = this.checkMatchCount(winningNumbers);
+        final boolean hasBonusBall = this.hasNumber(winningNumbers.getBonusBall());
         return Rank.valueOf(matchCount, hasBonusBall);
     }
 
     private int checkMatchCount(final WinningNumbers winningNumbers) {
-        return (int) lottoNumbers.stream()
+        return Math.toIntExact(lottoNumbers.stream()
                 .filter(winningNumbers::hasNumber)
-                .count();
-    }
-
-    private boolean checkBonusBall(final WinningNumbers winningNumbers) {
-        return hasNumber(winningNumbers.getBonusBall());
+                .count());
     }
 
     public boolean hasNumber(LottoNumber lottoNumber) {
