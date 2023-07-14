@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.controller.LottoController;
+import lotto.domain.LottoGenerator;
 import lotto.view.BoughtLottosWriter;
 import lotto.view.LottoReader;
 import lotto.view.MoneyReader;
@@ -9,13 +10,14 @@ import lotto.view.WinningStatisticsWriter;
 public class LottoMain {
 
     public static void main(String[] args) {
-        MoneyReader moneyReader = new MoneyReader();
-        LottoReader lottoReader = new LottoReader();
-        BoughtLottosWriter boughtLottosWriter = new BoughtLottosWriter();
-        WinningStatisticsWriter winningStatisticsWriter = new WinningStatisticsWriter();
-
         LottoController lottoController = new LottoController(
-                moneyReader, lottoReader, boughtLottosWriter, winningStatisticsWriter);
+                new MoneyReader(),
+                new LottoReader(),
+                new BoughtLottosWriter(),
+                new WinningStatisticsWriter(),
+                new LottoGenerator()
+        );
+
         lottoController.startLotto();
     }
 }

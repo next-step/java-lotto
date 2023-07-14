@@ -18,23 +18,25 @@ public class LottoController {
     private final LottoReader lottoReader;
     private final BoughtLottosWriter boughtLottosWriter;
     private final WinningStatisticsWriter winningStatisticsWriter;
+    private final LottoGenerator lottoGenerator;
 
     public LottoController(
             final MoneyReader moneyReader,
             final LottoReader lottoReader,
             final BoughtLottosWriter boughtLottosWriter,
-            final WinningStatisticsWriter winningStatisticsWriter
+            final WinningStatisticsWriter winningStatisticsWriter,
+            final LottoGenerator lottoGenerator
     ) {
         this.moneyReader = moneyReader;
         this.lottoReader = lottoReader;
         this.boughtLottosWriter = boughtLottosWriter;
         this.winningStatisticsWriter = winningStatisticsWriter;
+        this.lottoGenerator = lottoGenerator;
     }
 
     public void startLotto() {
         Money money = moneyReader.readMoney();
 
-        LottoGenerator lottoGenerator = new LottoGenerator();
         BoughtLottos boughtLottos = lottoGenerator.generate(money);
         boughtLottosWriter.printBoughtLottos(boughtLottos);
 
