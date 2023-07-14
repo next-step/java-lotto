@@ -32,7 +32,7 @@ public class WinningLottoTest {
 
         Lotto lotto = new Lotto(createLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
 
-        Rank rank = winningLotto.computeOfRank(lotto);
+        Rank rank = winningLotto.matchOfRank(lotto);
 
         assertThat(rank).isEqualTo(Rank.SIX);
     }

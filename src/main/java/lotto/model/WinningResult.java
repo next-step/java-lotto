@@ -14,7 +14,7 @@ public class WinningResult {
     public static WinningResult of(final WinningLotto winningLotto, final PurChasedLottos purChasedLottos) {
         RankResult rankResult = new RankResult();
         for (var purchasedLotto : purChasedLottos.getLottos()) {
-            Rank rank = winningLotto.computeOfRank(purchasedLotto);
+            Rank rank = winningLotto.matchOfRank(purchasedLotto);
             rankResult.plusCountOfRank(rank);
         }
         return new WinningResult(

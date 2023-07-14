@@ -1,8 +1,8 @@
 package lotto.model;
 
 public class LottoMoney {
-    public static final int LOTTO_UNIT = 1000;
-    public static final int ZERO = 0;
+    private static final int LOTTO_UNIT = 1000;
+    private static final int ZERO = 0;
     private final int money;
 
     public LottoMoney(final int money) {

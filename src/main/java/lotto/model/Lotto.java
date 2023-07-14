@@ -4,30 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-    public static final int LOTTO_LENGTH = 6;
+    private static final int LOTTO_LENGTH = 6;
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(final List<LottoNumber> lottoNumbers) {
-        validateLotto(lottoNumbers);
+        validateLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void validateLotto(final List<LottoNumber> numbers) {
-        validateLottoLength(numbers);
-        validateDuplicateLottoNumber(numbers);
+    private void validateLottoNumbers(final List<LottoNumber> lottoNumbers) {
+        validateLottoNumberLength(lottoNumbers);
+        validateDuplicateLottoNumber(lottoNumbers);
     }
 
-    private void validateLottoLength(final List<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_LENGTH) {
+    private void validateLottoNumberLength(final List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_LENGTH) {
             throw new IllegalStateException("로또 번호는 " + LOTTO_LENGTH + "개이여야 합니다");
         }
     }
 
-    private void validateDuplicateLottoNumber(final List<LottoNumber> numbers) {
-        long distinctLength = numbers.stream()
+    private void validateDuplicateLottoNumber(final List<LottoNumber> lottoNumbers) {
+        long distinctLength = lottoNumbers.stream()
                 .distinct()
                 .count();
-        if (numbers.size() != distinctLength) {
+        if (lottoNumbers.size() != distinctLength) {
             throw new IllegalStateException("로또 넘버는 중복되면 안됩니다.");
         }
     }
