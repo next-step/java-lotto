@@ -5,25 +5,25 @@ import java.util.stream.Collectors;
 
 public class BoughtLottos {
 
-    private final int autoCount;
-    private final List<Lotto> autoLottos;
+    private final int count;
+    private final List<Lotto> lottos;
 
     public BoughtLottos(final List<Lotto> lottos) {
-        this.autoCount = lottos.size();
-        this.autoLottos = lottos;
+        this.count = lottos.size();
+        this.lottos = lottos;
     }
 
     public WinningStatistics winningResults(final WinningLotto winningLotto) {
-        return new WinningStatistics(autoLottos.stream()
-                .map(winningLotto::isMatch)
+        return new WinningStatistics(lottos.stream()
+                .map(winningLotto::match)
                 .collect(Collectors.toList()));
     }
 
-    public int getAutoCount() {
-        return this.autoCount;
+    public int getCount() {
+        return this.count;
     }
 
-    public List<Lotto> getAutoLottos() {
-        return this.autoLottos;
+    public List<Lotto> getLottos() {
+        return this.lottos;
     }
 }

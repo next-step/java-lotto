@@ -32,7 +32,7 @@ public class BoughtLottosTest {
         BoughtLottos boughtLottos = new BoughtLottos(lottos);
 
         /* then */
-        assertThat(boughtLottos.getAutoCount()).isEqualTo(lottos.size());
+        assertThat(boughtLottos.getCount()).isEqualTo(lottos.size());
     }
 
     @Test
