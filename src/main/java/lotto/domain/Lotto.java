@@ -38,11 +38,12 @@ public class Lotto {
         }
     }
 
-    public LottoResult compareWinningLotto(final WinningLotto winningLotto) {
-        final int matchCount = winningLotto.matchCount(this.balls);
-        final boolean isMatchedBonusBall = winningLotto.isMatchBonusBall(this.balls);
+    public int matchCount(final Lotto other) {
+        final Set<Ball> userBalls = new HashSet<>(other.balls);
 
-        return new LottoResult(matchCount, isMatchedBonusBall);
+        userBalls.retainAll(this.balls);
+
+        return userBalls.size();
     }
 
     public boolean containsBall(final Ball ball) {

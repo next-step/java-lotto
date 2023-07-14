@@ -15,7 +15,7 @@ public class BoughtLottos {
 
     public LottoResults winningResults(final WinningLotto winningLotto) {
         return new LottoResults(lottos.stream()
-                .map(lotto -> lotto.compareWinningLotto(winningLotto))
+                .map(winningLotto::match)
                 .collect(Collectors.toList()));
     }
 
