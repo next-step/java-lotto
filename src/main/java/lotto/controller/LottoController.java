@@ -42,10 +42,7 @@ public class LottoController {
         BoughtLottos boughtLottos = lottoGenerator.generate(money);
         boughtLottosWriter.printBoughtLottos(boughtLottos);
 
-        WinningLotto winningLotto = new WinningLotto(
-                lottoReader.readWinningLotto(),
-                lottoReader.readBonusBall()
-        );
+        final WinningLotto winningLotto = lottoReader.readWinningLotto();
         winningStatisticsWriter.printLottoStatistics(
                 boughtLottos.winningResults(winningLotto)
         );
