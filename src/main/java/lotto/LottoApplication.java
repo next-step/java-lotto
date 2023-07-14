@@ -39,7 +39,7 @@ public class LottoApplication {
 
     private WinningLotto inputWinningLotto() {
         output.printAskWinningNumbers();
-        List<Integer> winningNumbers = input.inputWinningNumbers();
+        List<Integer> winningNumbers = input.inputLottoNumbers();
         output.printAskBonus();
         int bonus = input.inputBonusNumber();
 

@@ -13,21 +13,21 @@ public class LottoInput {
         this.scanner = new Scanner(System.in);
     }
 
-    private Long inputAmount() {
+    private long inputAmount() {
         return Long.parseLong(scanner.nextLine());
     }
 
-    public List<Integer> inputWinningNumbers() {
+    public List<Integer> inputLottoNumbers() {
         return Arrays.stream(scanner.nextLine().split(WINNING_DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
-    public Long inputPurchaseMoney() {
+    public long inputPurchaseMoney() {
         return inputAmount();
     }
 
     public int inputBonusNumber() {
-        return inputAmount().intValue();
+        return Math.toIntExact(inputAmount());
     }
 }

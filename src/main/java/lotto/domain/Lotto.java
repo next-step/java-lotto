@@ -49,7 +49,7 @@ public class Lotto {
         }
     }
 
-    public Long countMatches(final Lotto other) {
+    public long countMatches(final Lotto other) {
         return this.numbers.stream()
                 .filter(other.numbers::contains)
                 .count();
