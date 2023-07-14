@@ -15,7 +15,7 @@ public class LottoMain {
                 new LottoReader(),
                 new BoughtLottosWriter(),
                 new WinningStatisticsWriter(),
-                new LottoGenerator()
+                LottoGenerator.getInstance()
         );
 
         lottoController.startLotto();

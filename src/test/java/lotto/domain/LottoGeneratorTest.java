@@ -15,7 +15,7 @@ public class LottoGeneratorTest {
     void lottoGenerator_amountToLotto(final String value) {
         /* given */
         final Money money = new Money(value);
-        LottoGenerator lottoGenerator = new LottoGenerator();
+        LottoGenerator lottoGenerator = LottoGenerator.getInstance();
 
         /* when */
         BoughtLottos boughtLottos = lottoGenerator.generate(money);
@@ -31,8 +31,8 @@ public class LottoGeneratorTest {
         final Money money = new Money("2000");
 
         /* when */
-        final LottoGenerator lottoGenerator = new LottoGenerator(new SequenceLottoGenerateStrategy());
-        BoughtLottos boughtLottos = lottoGenerator.generate(money);
+        final LottoGenerator lottoGenerator = LottoGenerator.getInstance();
+        BoughtLottos boughtLottos = lottoGenerator.generate(money, new SequenceLottoGenerateStrategy());
 
         /* then */
         assertThat(boughtLottos.getLottos()).containsExactlyInAnyOrder(
