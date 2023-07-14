@@ -6,6 +6,8 @@ import java.util.Map;
 
 public final class LottoResult {
     public static final int MIN_MATCH_COUNT = 3;
+    public static final int DEFAULT_VALUE = 0;
+    public static final int ADD_COUNT_VALUE = 1;
     private final Map<LottoMatch, Integer> resultMap = new EnumMap<>(LottoMatch.class);
 
     public LottoResult(Lottos lottos, WinningNumber winningNumber) {
@@ -38,7 +40,7 @@ public final class LottoResult {
             LottoMatch lottoMatch = LottoMatch.find(matchCount, isBonus);
             resultMap.put(
                     lottoMatch,
-                    resultMap.getOrDefault(lottoMatch, 0) + 1
+                    resultMap.getOrDefault(lottoMatch, DEFAULT_VALUE) + ADD_COUNT_VALUE
             );
         }
     }

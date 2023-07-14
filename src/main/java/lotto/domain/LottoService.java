@@ -11,6 +11,7 @@ public final class LottoService {
     public static final int UPPER_LOTTO_NUMBER = 45;
     public static final int LOWER_LOTTO_NUMBER = 1;
     public static final int LOTTO_COUNT = 6;
+    public static final int FROM_INDEX = 0;
 
     private final Payment payment;
     private final Lottos lottos;
@@ -33,11 +34,11 @@ public final class LottoService {
         List<Integer> numbers = generateNumbers();
         Collections.shuffle(numbers);
 
-        return numbers.subList(0, LOTTO_COUNT);
+        return numbers.subList(FROM_INDEX, LOTTO_COUNT);
     }
 
     private static List<Integer> generateNumbers() {
-        List<Integer> numbers = IntStream.range(LOWER_LOTTO_NUMBER, UPPER_LOTTO_NUMBER + 1)
+        List<Integer> numbers = IntStream.rangeClosed(LOWER_LOTTO_NUMBER, UPPER_LOTTO_NUMBER)
             .boxed()
             .collect(Collectors.toList());
 

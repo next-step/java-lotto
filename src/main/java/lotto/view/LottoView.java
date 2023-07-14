@@ -64,7 +64,7 @@ public class LottoView {
     private void printResult(LottoMatch lottoMatch, int count) {
         int matchCount = lottoMatch.getMatchCount();
         int prize = lottoMatch.getPrize();
-        if (matchCount == FIVE_MATCH_COUNT && lottoMatch.isBonus()) {
+        if (lottoMatch.isBonus()) {
             String result = MessageFormat.format("{0}개 일치, 보너스 볼 일치({1}원) - {2}개", matchCount, prize, count);
             System.out.println(result);
             return;
