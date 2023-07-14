@@ -1,12 +1,15 @@
-package lotto.domain;
+package lotto.view;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import lotto.domain.LottoResults;
+import lotto.domain.WinningCriteria;
 
 public class WinningStatistics {
 
     private static final int DEFAULT_COUNT = 0;
+    private static final int PRICE = 1000;
 
     private final Map<WinningCriteria, Integer> ranks;
     private final long totalPrize;
@@ -15,7 +18,7 @@ public class WinningStatistics {
     public WinningStatistics(final LottoResults lottoResults) {
         this.ranks = initRanks(lottoResults);
         this.totalPrize = initTotalPrize();
-        this.earningRate = totalPrize / (double) (lottoResults.getLottoResults().size() * Lotto.PRICE);
+        this.earningRate = totalPrize / (double) (lottoResults.getLottoResults().size() * PRICE);
     }
 
     private Map<WinningCriteria, Integer> initRanks(final LottoResults lottoResults) {

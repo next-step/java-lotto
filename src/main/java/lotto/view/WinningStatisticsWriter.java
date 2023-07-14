@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import lotto.domain.WinningCriteria;
-import lotto.domain.WinningStatistics;
 
 public class WinningStatisticsWriter {
 
@@ -44,7 +43,7 @@ public class WinningStatisticsWriter {
         switch (criteria) {
             case SECOND:
                 printStatisticsForBonus(
-                                criteria.getMatchCount(), criteria.getPrize(), winningStatistics.getRank(criteria));
+                        criteria.getMatchCount(), criteria.getPrize(), winningStatistics.getRank(criteria));
                 return;
 
             case FIRST:
