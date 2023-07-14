@@ -20,7 +20,7 @@ public class OutputView {
     public static void printPurchaseCount(final List<Lotto> lottos, final Count manualPurchaseCount) {
         final Count autoPurchaseCount = new Count(lottos.size()).decreaseBy(manualPurchaseCount);
         System.out.println(
-            "\n수동으로 " + manualPurchaseCount + "장, 자동으로 " + autoPurchaseCount.getValue() + "장을 구매했습니다.");
+            "\n수동으로 " + manualPurchaseCount.getValue() + "장, 자동으로 " + autoPurchaseCount.getValue() + "장을 구매했습니다.");
     }
 
     public static void printLottos(final List<Lotto> lottos) {
