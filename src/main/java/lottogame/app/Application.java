@@ -12,8 +12,9 @@ import lottogame.controller.resultcheck.LottoResultCheckController;
 import lottogame.controller.resultcheck.spi.ResultCheckInputer;
 import lottogame.controller.resultcheck.spi.ResultCheckViewer;
 import lottogame.domain.LottoTicket;
+import lottogame.domain.spi.NumberGenerator;
 import lottogame.randomnumber.RandomLottoNumberGenerator;
-import lottogame.service.LottoCheckService;
+import lottogame.service.LottoService;
 import lottogame.service.LottoPurchaseService;
 
 public class Application {
@@ -34,19 +35,20 @@ public class Application {
     private LottoResultCheckController getLottoResultCheckController() {
         ResultCheckInputer resultCheckInputer = new ConsoleResultCheckInputer();
         ResultCheckViewer resultCheckViewer = new ConsoleResultCheckViewer();
-        LottoCheckService lottoCheckService = new LottoCheckService();
+        LottoService lottoCheckService = new LottoService();
         return new LottoResultCheckController(resultCheckInputer, resultCheckViewer, lottoCheckService);
     }
 
     private LottoPurchaseController getLottoPurchaseController() {
         PurchaseInputer purchaseInputer = new ConsolePurchaseInputer();
         PurchaseViewer purchaseViewer = new ConsolePurchaseViewer();
-        LottoPurchaseService lottoPurchaseService = new LottoPurchaseService(new RandomLottoNumberGenerator());
-        return new LottoPurchaseController(purchaseInputer, purchaseViewer, lottoPurchaseService);
+        LottoService lottoService = new LottoService();
+        return new LottoPurchaseController(purchaseInputer, purchaseViewer, lottoService);
     }
 
     private void run() {
-        List<LottoTicket> lottoTickets = lottoPurchaseController.purchaseLottoTickets();
+        NumberGenerator numberGenerator = new RandomLottoNumberGenerator();
+        List<LottoTicket> lottoTickets = lottoPurchaseController.purchaseLottoTickets(numberGenerator);
         lottoResultCheckController.checkResult(lottoTickets);
     }
 }

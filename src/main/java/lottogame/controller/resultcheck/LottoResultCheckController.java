@@ -5,17 +5,17 @@ import java.util.Set;
 import lottogame.controller.resultcheck.spi.ResultCheckInputer;
 import lottogame.controller.resultcheck.spi.ResultCheckViewer;
 import lottogame.domain.LottoTicket;
-import lottogame.service.LottoCheckService;
+import lottogame.service.LottoService;
 import lottogame.service.response.LottoCheckResponse;
 
 public class LottoResultCheckController {
 
     private final ResultCheckInputer resultCheckInputer;
     private final ResultCheckViewer resultCheckViewer;
-    private final LottoCheckService lottoCheckService;
+    private final LottoService lottoCheckService;
 
     public LottoResultCheckController(ResultCheckInputer resultCheckInputer, ResultCheckViewer resultCheckViewer,
-        LottoCheckService lottoCheckService) {
+        LottoService lottoCheckService) {
         this.resultCheckInputer = resultCheckInputer;
         this.resultCheckViewer = resultCheckViewer;
         this.lottoCheckService = lottoCheckService;

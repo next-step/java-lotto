@@ -4,24 +4,25 @@ import java.util.List;
 import lottogame.controller.purchase.spi.PurchaseInputer;
 import lottogame.controller.purchase.spi.PurchaseViewer;
 import lottogame.domain.LottoTicket;
-import lottogame.service.LottoPurchaseService;
+import lottogame.domain.spi.NumberGenerator;
+import lottogame.service.LottoService;
 
 public class LottoPurchaseController {
 
     private final PurchaseInputer purchaseInputer;
     private final PurchaseViewer purchaseViewer;
-    private final LottoPurchaseService lottoPurchaseService;
+    private final LottoService lottoService;
 
     public LottoPurchaseController(PurchaseInputer purchaseInputer, PurchaseViewer purchaseViewer,
-        LottoPurchaseService lottoPurchaseService) {
+        LottoService lottoService) {
         this.purchaseInputer = purchaseInputer;
         this.purchaseViewer = purchaseViewer;
-        this.lottoPurchaseService = lottoPurchaseService;
+        this.lottoService = lottoService;
     }
 
-    public List<LottoTicket> purchaseLottoTickets() {
+    public List<LottoTicket> purchaseLottoTickets(NumberGenerator numberGenerator) {
         int money = purchaseInputer.inputMoney();
-        List<LottoTicket> lottoTickets = lottoPurchaseService.purchase(money);
+        List<LottoTicket> lottoTickets = lottoService.purchase(money, numberGenerator);
         purchaseViewer.draw(lottoTickets);
         return lottoTickets;
     }

@@ -23,12 +23,12 @@ class LottoPurchaseServiceTest {
             private static final int NOT_DIVIDED_MONEY = 1001;
 
             private final NumberGenerator stubNumberGenerator = (count) -> Set.of(1, 2, 3, 4, 5, 6);
-            private final LottoPurchaseService lottoPurchaseService = new LottoPurchaseService(stubNumberGenerator);
+            private final LottoService lottoService = new LottoService();
 
             @Test
             @DisplayName("IllegalArgumentException 을 던진다")
             void It_Throw_IllegalArgumentException() {
-                assertThatThrownBy(() -> lottoPurchaseService.purchase(NOT_DIVIDED_MONEY)).isInstanceOf(
+                assertThatThrownBy(() -> lottoService.purchase(NOT_DIVIDED_MONEY, stubNumberGenerator)).isInstanceOf(
                     IllegalArgumentException.class);
             }
         }

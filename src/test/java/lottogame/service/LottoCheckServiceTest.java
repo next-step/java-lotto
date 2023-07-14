@@ -27,7 +27,7 @@ class LottoCheckServiceTest {
             private static final int BONUS_NUMBER = 7;
 
             private final Set<Integer> selectedLottoNumbers = Set.of(1, 2, 3, 4, 5, 6);
-            private final LottoCheckService lottoCheckService = new LottoCheckService();
+            private final LottoService lottoCheckService = new LottoService();
             private final List<LottoTicket> lottoTicketRequest = getLottoTicketRequest();
             private final LottoCheckResponse expectedLottoCheckResponse = getExpectedLottoCheckResponse();
 
