@@ -8,17 +8,35 @@ public class BoughtLottosWriter {
 
     private static final String DELIMITER = ", ";
     private static final String NEW_LINE = "\n";
+    private static final String EMPTY = "";
 
-    public void printBoughtLottos(final BoughtLottos boughtLottos) {
-        System.out.println(boughtLottos.getAutoCount() + "개를 구매했습니다.");
-        String collect = boughtLottos.getAutoLottos()
-                .stream()
-                .map(BoughtLottosWriter::formatLottos)
-                .collect(Collectors.joining(NEW_LINE));
-        System.out.println(collect);
+    public void printBoughtLottos(
+            final BoughtLottos manualBoughtLottos,
+            final BoughtLottos autoBoughtLottos
+    ) {
+        final String result = "수동으로 "
+                + manualBoughtLottos.getCount()
+                + "장, 자동으로 "
+                + autoBoughtLottos.getCount()
+                + "개를 구매했습니다."
+                + NEW_LINE
+                + formatLottos(manualBoughtLottos)
+                + NEW_LINE
+                + formatLottos(autoBoughtLottos);
+        System.out.println(result);
     }
 
-    private static String formatLottos(final Lotto lotto) {
+    private static String formatLottos(final BoughtLottos boughtLottos) {
+        if (boughtLottos.isEmpty()) {
+            return EMPTY;
+        }
+        return boughtLottos.getLottos()
+                .stream()
+                .map(BoughtLottosWriter::formatBalls)
+                .collect(Collectors.joining(NEW_LINE));
+    }
+
+    private static String formatBalls(final Lotto lotto) {
         String result = "[";
         result += lotto.getBalls()
                 .stream()
