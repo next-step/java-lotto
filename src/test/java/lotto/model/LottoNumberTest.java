@@ -38,7 +38,7 @@ public class LottoNumberTest {
     void 로또_숫자_범위_벗어난_경우(int number) {
         // when , then
         assertThatCode(() -> new LottoNumber(number))
-                .isInstanceOf(IllegalStateException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 1부터 45까지 이어야합니다.");
     }
 

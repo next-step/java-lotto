@@ -19,7 +19,7 @@ public class Lotto {
 
     private void validateLottoNumberLength(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_LENGTH) {
-            throw new IllegalStateException("로또 번호는 " + LOTTO_LENGTH + "개이여야 합니다");
+            throw new IllegalArgumentException("로또 번호는 " + LOTTO_LENGTH + "개이여야 합니다");
         }
     }
 
@@ -28,7 +28,7 @@ public class Lotto {
                 .distinct()
                 .count();
         if (lottoNumbers.size() != distinctLength) {
-            throw new IllegalStateException("로또 넘버는 중복되면 안됩니다.");
+            throw new IllegalArgumentException("로또 넘버는 중복되면 안됩니다.");
         }
     }
 

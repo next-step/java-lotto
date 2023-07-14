@@ -20,7 +20,7 @@ public class WinningLottoTest {
 
         // when then
         assertThatCode(() -> new WinningLotto(numbers, bonusBall))
-                .isInstanceOf(IllegalStateException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

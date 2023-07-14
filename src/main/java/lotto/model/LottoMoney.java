@@ -12,10 +12,10 @@ public class LottoMoney {
 
     private void validateMoney(final int money) {
         if (money < ZERO) {
-            throw new IllegalStateException("로또 머니가 양수여야 합니다.");
+            throw new IllegalArgumentException("로또 머니가 양수여야 합니다.");
         }
         if (money % LOTTO_UNIT != 0) {
-            throw new IllegalStateException("로또는 천원 단위입니다.");
+            throw new IllegalArgumentException("로또는 천원 단위입니다.");
         }
     }
 

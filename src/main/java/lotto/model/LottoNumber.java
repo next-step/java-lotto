@@ -16,7 +16,7 @@ public class LottoNumber {
 
     private void validateLottoNumber(final int number) {
         if (number < LOTTO_START_RANGE || number > LOTTO_END_RANGE) {
-            throw new IllegalStateException("로또 번호는 1부터 45까지 이어야합니다.");
+            throw new IllegalArgumentException("로또 번호는 1부터 45까지 이어야합니다.");
         }
     }
 

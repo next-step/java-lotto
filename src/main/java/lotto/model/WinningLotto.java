@@ -22,7 +22,7 @@ public class WinningLotto {
 
     private void validateLottoContainBonusBall(final Lotto lotto, final LottoNumber bonusBall) {
         if (lotto.isContain(bonusBall)) {
-            throw new IllegalStateException("당첨 번호와 보너스 볼은 중복되면 안됩니다.");
+            throw new IllegalArgumentException("당첨 번호와 보너스 볼은 중복되면 안됩니다.");
         }
     }
 

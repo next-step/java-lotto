@@ -61,7 +61,7 @@ public class LottoTest {
     void 로또_중복_예외(List<Integer> numbers) {
         // when , then
         assertThatCode(() -> new Lotto(createLottoNumbers(numbers)))
-                .isInstanceOf(IllegalStateException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 넘버는 중복되면 안됩니다.");
     }
 
@@ -71,7 +71,7 @@ public class LottoTest {
     void 로또_번호_6개가_아니면_예외_던진다(List<Integer> numbers) {
         // when , then
         assertThatCode(() -> new Lotto(createLottoNumbers(numbers)))
-                .isInstanceOf(IllegalStateException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 6개이여야 합니다");
     }
 

@@ -22,7 +22,7 @@ class LottoMoneyTest {
     void 로또_머니_천원_단위() {
         // when , then
         assertThatCode(() -> new LottoMoney(14111))
-                .isInstanceOf(IllegalStateException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또는 천원 단위입니다.");
     }
 
@@ -31,7 +31,7 @@ class LottoMoneyTest {
     void 로또_머니_음수_예외() {
         // when , then
         assertThatCode(() -> new LottoMoney(-1))
-                .isInstanceOf(IllegalStateException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 머니가 양수여야 합니다.");
     }
 
