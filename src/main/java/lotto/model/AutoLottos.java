@@ -1,8 +1,8 @@
-package lotto.model.domain;
+package lotto.model;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.model.domain.generator.NumbersGenerator;
+import lotto.model.generator.NumbersGenerator;
 
 public final class AutoLottos extends Lottos {
 

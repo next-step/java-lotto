@@ -1,9 +1,9 @@
-package lotto.model.domain;
+package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import lotto.model.domain.generator.FixedNumbersGenerator;
+import lotto.model.generator.FixedNumbersGenerator;
 import org.junit.jupiter.api.Test;
 
 class AutoLottosTest {

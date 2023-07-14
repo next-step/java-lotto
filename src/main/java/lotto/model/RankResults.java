@@ -1,4 +1,4 @@
-package lotto.model.domain;
+package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public final class RankResults {
-    
+
     private final List<Rank> ranks;
 
     public RankResults(final List<Rank> ranks) {

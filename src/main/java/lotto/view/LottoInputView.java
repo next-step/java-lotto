@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.model.domain.Lotto;
-import lotto.model.domain.LottoNumber;
-import lotto.model.domain.ManualLottos;
+import lotto.model.Lotto;
+import lotto.model.LottoNumber;
+import lotto.model.ManualLottos;
 
 public final class LottoInputView {
 

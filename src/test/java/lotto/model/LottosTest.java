@@ -1,11 +1,11 @@
-package lotto.model.domain;
+package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.model.domain.generator.FixedNumbersGenerator;
-import lotto.model.domain.generator.NumbersGenerator;
+import lotto.model.generator.FixedNumbersGenerator;
+import lotto.model.generator.NumbersGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
