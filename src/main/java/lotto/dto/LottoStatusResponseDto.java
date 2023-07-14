@@ -10,11 +10,13 @@ import java.util.stream.Collectors;
 public class LottoStatusResponseDto {
 
     private final List<List<Integer>> lottoStatus;
+    private final int manualCount;
 
-    public LottoStatusResponseDto(Lottos lottos) {
+    public LottoStatusResponseDto(Lottos lottos, int manualCount) {
         this.lottoStatus = lottos.getLottos().stream()
                 .map(this::parseLotto)
                 .collect(Collectors.toList());
+        this.manualCount = manualCount;
     }
 
     private List<Integer> parseLotto(Lotto lotto) {
@@ -26,5 +28,9 @@ public class LottoStatusResponseDto {
 
     public List<List<Integer>> getLottoStatus() {
         return lottoStatus;
+    }
+
+    public int getManualCount() {
+        return manualCount;
     }
 }

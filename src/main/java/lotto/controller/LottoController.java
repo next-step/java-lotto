@@ -1,9 +1,11 @@
 package lotto.controller;
 
 import lotto.domain.LottoResults;
+import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 import lotto.dto.LottoResultResponseDto;
+import lotto.dto.ManualRequestDto;
 import lotto.dto.WinningLottoRequestDto;
 import lotto.service.LottoService;
 import lotto.util.RandomGenerator;
@@ -21,7 +23,9 @@ public class LottoController {
         this.outputView = outputView;
 
         Money money = new Money(inputView.inputMoney().getMoney());
-        this.lottoService = LottoService.buyLotto(money, new RandomGenerator());
+        ManualRequestDto manualRequestDto = inputView.inputManualLottoNumber();
+        Lottos manualLotto = Lottos.from(manualRequestDto.getManualLottos());
+        this.lottoService = LottoService.buyLotto(money, manualLotto, new RandomGenerator());
 
         outputView.printBuyStatus(lottoService.buyStatus());
     }
