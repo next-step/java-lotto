@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.BoughtLottos;
+import lotto.domain.LottoBuyCount;
 import lotto.domain.LottoGenerator;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
@@ -37,10 +38,14 @@ public class LottoController {
     }
 
     private void run() {
-        Money money = moneyReader.readMoney();
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        BoughtLottos boughtLottos = lottoGenerator.generate(money);
-        boughtLottosWriter.printBoughtLottos(boughtLottos);
+        final Money money = moneyReader.readMoney();
+        final LottoBuyCount lottoBuyCount = lottoReader.readManualLottoBuyCount();
+        money.validateCanPurchaseLottoWantedCount(lottoBuyCount);
+
+        final BoughtLottos manualBoughtLottos = lottoReader.readManualLottos(lottoBuyCount);
+        final BoughtLottos autoBoughtLottos = new LottoGenerator()
+                .generate(money.receiveAfterPurchaseLotto(lottoBuyCount));
+        boughtLottosWriter.printBoughtLottos(manualBoughtLottos, autoBoughtLottos);
 
         final WinningLotto winningLotto = lottoReader.readWinningLotto();
         winningStatisticsWriter.printLottoStatistics(
