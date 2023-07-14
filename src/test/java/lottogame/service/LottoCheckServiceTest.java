@@ -50,11 +50,11 @@ class LottoCheckServiceTest {
             }
 
             private LottoCheckResponse getExpectedLottoCheckResponse() {
-                int totalMoney = PURCHASE_COUNT * LottoTicket.PURCHASABLE_UNIT;
-                int earnMoney = LottoPrize.FIRST.getMoney() + LottoPrize.SECOND.getMoney();
+                double totalMoney = PURCHASE_COUNT * LottoTicket.PURCHASABLE_UNIT;
+                double earnMoney = LottoPrize.FIRST.getMoney() + LottoPrize.SECOND.getMoney();
 
-                return new LottoCheckResponse((double) earnMoney / (double) totalMoney,
-                    Map.of(LottoPrize.FIRST, 1, LottoPrize.SECOND, 1));
+                return new LottoCheckResponse( earnMoney / totalMoney,
+                    Map.of(LottoPrize.FIRST, 1L, LottoPrize.SECOND, 1L, LottoPrize.NONE, 1L));
             }
         }
     }

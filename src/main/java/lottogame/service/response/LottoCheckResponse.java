@@ -7,19 +7,19 @@ import lottogame.domain.LottoPrize;
 public class LottoCheckResponse {
 
     private final double earningRate;
-    private final Map<LottoPrize, Integer> lottoPrizes;
+    private final Map<LottoPrize, Long> lottoPrizeCounts;
 
-    public LottoCheckResponse(double earningRate, Map<LottoPrize, Integer> lottoPrizes) {
+    public LottoCheckResponse(double earningRate, Map<LottoPrize, Long> lottoPrizes) {
         this.earningRate = earningRate;
-        this.lottoPrizes = lottoPrizes;
+        this.lottoPrizeCounts = lottoPrizes;
     }
 
     public double getEarningRate() {
         return earningRate;
     }
 
-    public Map<LottoPrize, Integer> getLottoPrizes() {
-        return lottoPrizes;
+    public Map<LottoPrize, Long> getLottoPrizeCounts() {
+        return lottoPrizeCounts;
     }
 
     @Override
@@ -31,20 +31,20 @@ public class LottoCheckResponse {
             return false;
         }
         LottoCheckResponse that = (LottoCheckResponse) o;
-        return Double.compare(that.earningRate, earningRate) == 0 && Objects.equals(lottoPrizes,
-            that.lottoPrizes);
+        return Double.compare(that.earningRate, earningRate) == 0 && Objects.equals(lottoPrizeCounts,
+            that.lottoPrizeCounts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(earningRate, lottoPrizes);
+        return Objects.hash(earningRate, lottoPrizeCounts);
     }
 
     @Override
     public String toString() {
         return "LottoCheckResponse{" +
-            "earningRate=" + earningRate +
-            ", lottoPrizes=" + lottoPrizes +
-            '}';
+                "earningRate=" + earningRate +
+                ", lottoPrizeCounts=" + lottoPrizeCounts +
+                '}';
     }
 }
