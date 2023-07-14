@@ -3,7 +3,6 @@ package lotto.service;
 import lotto.domain.*;
 import lotto.dto.LottoStatusResponseDto;
 import lotto.util.LottoGenerator;
-import lotto.util.RandomGenerator;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,9 +30,5 @@ public class LottoService {
 
     public LottoResults matchWinningLotto(WinningLotto winningNumbers) {
         return lottos.matchWinningLotto(winningNumbers);
-    }
-
-    public Profit profitRate(LottoResults lottoResults) {
-        return lottoResults.profitRate();
     }
 }

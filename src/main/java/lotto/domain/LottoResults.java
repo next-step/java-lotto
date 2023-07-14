@@ -6,18 +6,28 @@ import java.util.Map;
 
 public class LottoResults {
 
-    public static final long DEFAULT_VALUE = 0L;
+    private static final long DEFAULT_VALUE = 0L;
+    private static final Money LOTTO_PRICE = new Money(1000);
+
     private final Map<LottoRank, Long> lottoResults;
+    private final Profit profitRate;
 
     public LottoResults(List<LottoRank> lottoRanks) {
         lottoResults = new EnumMap<>(LottoRank.class);
         for (LottoRank rank : lottoRanks) {
             lottoResults.put(rank, lottoResults.getOrDefault(rank, DEFAULT_VALUE) + 1L);
         }
+
+        Money principal = LOTTO_PRICE.multiply(countLottos());
+        this.profitRate =  Money.calculateProfitRate(sumPrice(), principal);
     }
 
     public Map<LottoRank, Long> getLottoResults() {
         return lottoResults;
+    }
+
+    public Profit getProfitRate() {
+        return profitRate;
     }
 
     private Money sumPrice() {
@@ -34,9 +44,5 @@ public class LottoResults {
                 .stream()
                 .mapToLong(l -> l)
                 .sum();
-    }
-
-    public Profit profitRate() {
-        return new Profit(sumPrice(), countLottos());
     }
 }

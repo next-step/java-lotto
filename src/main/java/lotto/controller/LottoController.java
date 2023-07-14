@@ -34,7 +34,6 @@ public class LottoController {
         );
 
         LottoResults lottoResults = lottoService.matchWinningLotto(winningLotto);
-        Profit profit = lottoService.profitRate(lottoResults);
-        outputView.printLottoResult(new LottoResultResponseDto(lottoResults, profit));
+        outputView.printLottoResult(new LottoResultResponseDto(lottoResults));
     }
 }

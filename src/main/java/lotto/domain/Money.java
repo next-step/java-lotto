@@ -7,6 +7,7 @@ public class Money {
     public static final long LOTTO_PRICE = 1000L;
     private static final long MIN_PRICE = 0L;
     private static final long ZERO_DIVISION = 0L;
+
     private final long value;
 
     public Money(long money) {
@@ -32,15 +33,18 @@ public class Money {
         }
     }
 
-    public double profitRate(long count) {
-        validateNotZeroDominator(count);
-        return (double) value / (count * LOTTO_PRICE);
-    }
-
-    private void validateNotZeroDominator(long denominator) {
+    private static void validateNotZeroDominator(long denominator) {
         if (denominator == ZERO_DIVISION) {
             throw new IllegalStateException("0으로 나눌 수 없습니다.");
         }
+    }
+
+    public static Profit calculateProfitRate(Money profit, Money principal) {
+        return new Profit(profit.value, principal.value);
+    }
+
+    public Money multiply(long count) {
+        return new Money(value * count);
     }
 
     @Override
