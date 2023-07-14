@@ -7,7 +7,6 @@ public class WinningLotto {
     private final LottoNumber bonus;
 
     public WinningLotto(final Lotto lotto, final LottoNumber bonus) {
-
         verify(lotto, bonus);
 
         this.lotto = lotto;

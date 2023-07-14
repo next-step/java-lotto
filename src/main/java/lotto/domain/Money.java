@@ -15,7 +15,7 @@ public class Money {
             throw new IllegalArgumentException("money amount should greater than 0");
         }
     }
-    
+
     public double calculateYield(final Money previous) {
         return (double) value / previous.value;
     }
