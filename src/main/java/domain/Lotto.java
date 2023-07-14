@@ -12,19 +12,27 @@ public class Lotto {
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(final List<Integer> numbers) {
+        validateLottoNumberCount(numbers);
+
+        this.lottoNumbers = toLottoNumbers(numbers);
+    }
+
+    private static void validateLottoNumberCount(final List<Integer> numbers) {
         if (numbers.size() != REQUIRED_LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
+    }
 
-        Set<LottoNumber> lottoNumbers = numbers.stream()
+    private static Set<LottoNumber> toLottoNumbers(final List<Integer> origin) {
+        Set<LottoNumber> lottoNumbers = origin.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
 
-        if (numbers.size() != lottoNumbers.size()) {
+        if (origin.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
 
-        this.lottoNumbers = lottoNumbers;
+        return lottoNumbers;
     }
 
     public long countMatchLottoNumber(final Lotto target) {
