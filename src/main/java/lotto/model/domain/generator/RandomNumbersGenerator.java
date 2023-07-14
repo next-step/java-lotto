@@ -1,4 +1,4 @@
-package lotto.model.domain;
+package lotto.model.domain.generator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,9 +9,12 @@ import java.util.stream.IntStream;
 public final class RandomNumbersGenerator implements NumbersGenerator {
 
     private static final int MINIMUM_INDEX = 0;
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
+    private static final int LOTTO_SIZE = 6;
 
     private static final List<Integer> baseNumbers = IntStream
-            .rangeClosed(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER)
+            .rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
             .boxed()
             .collect(Collectors.toUnmodifiableList());
 
@@ -41,6 +44,6 @@ public final class RandomNumbersGenerator implements NumbersGenerator {
     private static List<Integer> shuffleBaseNumbers() {
         final List<Integer> copiedNumbers = new ArrayList<>(baseNumbers);
         Collections.shuffle(copiedNumbers);
-        return new ArrayList<>(copiedNumbers.subList(MINIMUM_INDEX, Lotto.LOTTO_NUMBERS_SIZE));
+        return new ArrayList<>(copiedNumbers.subList(MINIMUM_INDEX, LOTTO_SIZE));
     }
 }

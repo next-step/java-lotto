@@ -4,7 +4,7 @@ import java.util.Map;
 
 public final class LottoResult {
 
-    public static final long DEFAULT_VALUE = 0L;
+    private static final long DEFAULT_VALUE = 0L;
 
     private final Map<Rank, Long> lottoResultStatistics;
     private final double profitRate;

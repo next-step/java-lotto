@@ -1,4 +1,4 @@
-package lotto.model.domain;
+package lotto.model.domain.generator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;

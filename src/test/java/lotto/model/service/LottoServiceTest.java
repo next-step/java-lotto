@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import java.util.List;
 import lotto.model.domain.LottoMoney;
 import lotto.model.domain.ManualLottos;
-import lotto.model.domain.RandomNumbersGenerator;
+import lotto.model.domain.generator.RandomNumbersGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
