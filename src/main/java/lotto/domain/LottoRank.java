@@ -7,13 +7,13 @@ public enum LottoRank {
     FOURTH(4L, 50_000L),
     THIRD(5L, 1_500_000L) {
         @Override
-        protected boolean verify(Long match, boolean isContainBonus) {
+        protected boolean verify(final Long match, final boolean isContainBonus) {
             return super.verify(match, isContainBonus) && !isContainBonus;
         }
     },
     SECOND(5L, 30_000_000L) {
         @Override
-        protected boolean verify(Long match, boolean isContainBonus) {
+        protected boolean verify(final Long match, final boolean isContainBonus) {
             return super.verify(match, isContainBonus) && isContainBonus;
         }
     },
@@ -23,12 +23,12 @@ public enum LottoRank {
     private final Long match;
     private final Long prize;
 
-    LottoRank(Long match, Long prize) {
+    LottoRank(final Long match, final Long prize) {
         this.match = match;
         this.prize = prize;
     }
 
-    public static LottoRank from(Long match, boolean isContainBonus) {
+    public static LottoRank from(final Long match, final boolean isContainBonus) {
         return Arrays.stream(values())
                 .filter(rank -> rank.verify(match, isContainBonus))
                 .findAny()

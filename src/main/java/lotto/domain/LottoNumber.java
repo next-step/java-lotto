@@ -13,12 +13,12 @@ public class LottoNumber {
             .collect(Collectors.toMap(number -> number, LottoNumber::new));
     private final int number;
 
-    private LottoNumber(final Integer number) {
+    private LottoNumber(final int number) {
+        verify(number);
         this.number = number;
     }
 
-    public static LottoNumber of(int number) {
-        verify(number);
+    public static LottoNumber of(final int number) {
         return lottoNumberCache.get(number);
     }
 
@@ -33,7 +33,7 @@ public class LottoNumber {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;

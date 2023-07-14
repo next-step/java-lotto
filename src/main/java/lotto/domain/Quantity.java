@@ -5,19 +5,19 @@ import java.util.Objects;
 public class Quantity {
     private final int quantity;
 
-    public Quantity(int quantity) {
+    public Quantity(final int quantity) {
         if (quantity < 0) {
             throw new IllegalArgumentException("quantity shouldn't be negative.");
         }
         this.quantity = quantity;
     }
 
-    public static Quantity of(Money money, long price) {
+    public static Quantity of(final Money money, final long price) {
         return new Quantity((int) (money.getValue() / price));
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Quantity that = (Quantity) o;
@@ -33,7 +33,7 @@ public class Quantity {
         return quantity;
     }
 
-    public Quantity subtract(Quantity other) {
+    public Quantity subtract(final Quantity other) {
         return new Quantity(this.quantity - other.quantity);
     }
 }

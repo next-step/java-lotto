@@ -26,7 +26,7 @@ public class LottoGroup {
         return lottos;
     }
 
-    public LottoGroup merge(LottoGroup other) {
+    public LottoGroup merge(final LottoGroup other) {
         return new LottoGroup(Stream.concat(this.lottos.stream(), other.lottos.stream())
                 .collect(Collectors.toList()));
     }
