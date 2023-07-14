@@ -11,7 +11,6 @@ import lottogame.service.response.LottoCheckResponse;
 
 public class LottoCheckService {
 
-    private static final int ZERO_MONEY = 0;
     private static final int DEFAULT_COUNT = 0;
     private static final int INCREMENT_AMOUNT = 1;
 
@@ -26,10 +25,8 @@ public class LottoCheckService {
 
     private double calculateEarningRate(List<LottoPrize> lottoPrizes) {
         int totalMoney = lottoPrizes.size() * LottoTicket.PURCHASABLE_UNIT;
-        int earnMoney = ZERO_MONEY;
-        for (LottoPrize lottoPrize : lottoPrizes) {
-            earnMoney += lottoPrize.getMoney();
-        }
+        int earnMoney = lottoPrizes.stream().mapToInt(LottoPrize::getMoney).sum();
+
         return (double) earnMoney / (double) totalMoney;
     }
 
