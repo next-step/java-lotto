@@ -81,12 +81,12 @@ public final class LottoInputView {
     }
 
     private static int inputInt() throws NumberFormatException {
-        return Integer.parseInt(SCANNER.nextLine());
+        return Integer.parseInt(SCANNER.nextLine().strip());
     }
 
     private static Lotto inputLotto() throws NumberFormatException {
         return new Lotto(Arrays.stream(SCANNER.nextLine().split(","))
-                .map(number -> Integer.parseInt(number.trim()))
+                .map(number -> Integer.parseInt(number.strip()))
                 .collect(Collectors.toUnmodifiableList()));
     }
 }
