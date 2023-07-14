@@ -5,12 +5,12 @@ import java.util.Objects;
 public class Money {
     private final long value;
 
-    public Money(final Long value) {
+    public Money(final long value) {
         validate(value);
         this.value = value;
     }
 
-    private void validate(final Long value) {
+    private void validate(final long value) {
         if (value < 0) {
             throw new IllegalArgumentException("money amount should greater than 0");
         }

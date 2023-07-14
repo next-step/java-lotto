@@ -35,4 +35,18 @@ class LottoGroupTest {
     void zeroQuantityThrowsExceptionTest() {
         assertThrows(IllegalArgumentException.class, () -> LottoGroup.from(new Money(0L)));
     }
+
+    @Test
+    @DisplayName("로또 그룹 병합 테스트.")
+    void mergeGroupsTest() {
+        //given
+        LottoGroup group1 = LottoGroup.from(new Money(1000));
+        LottoGroup group2 = LottoGroup.from(new Money(2000));
+
+        //when
+        LottoGroup mergedGroup = group1.merge(group2);
+
+        //then
+        assertThat(mergedGroup.getLottos()).hasSize(3);
+    }
 }

@@ -29,11 +29,12 @@ public class LottoApplication {
 
         output.printLottos(autoLottoGroup);
         output.printSectionDivider();
-        
+
+        LottoGroup totalLottoGroup = manualLottoGroup.merge(autoLottoGroup);
         WinningLotto winningLotto = inputWinningLotto();
         output.printSectionDivider();
 
-        printResult(LottoResult.of(autoLottoGroup, winningLotto));
+        printResult(LottoResult.of(totalLottoGroup, winningLotto));
     }
 
     private int inputManualQuantity() {

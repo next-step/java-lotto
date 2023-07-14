@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoGroup {
     public static final Long LOTTO_PRICE = 1000L;
@@ -30,5 +32,10 @@ public class LottoGroup {
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public LottoGroup merge(LottoGroup other) {
+        return new LottoGroup(Stream.concat(this.lottos.stream(), other.lottos.stream())
+                .collect(Collectors.toList()));
     }
 }
