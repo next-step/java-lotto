@@ -32,7 +32,7 @@ public class LottoResult {
     private Money calculateTotalPrize() {
         Long totalPrize = result.keySet()
             .stream()
-            .mapToLong(key -> key.getPrize() * result.get(key))
+            .mapToLong(key -> key.calculatePrize(result.get(key)))
             .sum();
         return new Money(totalPrize);
     }
