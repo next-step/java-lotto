@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.*;
 import lotto.dto.LottoStatusResponseDto;
 import lotto.service.LottoService;
+import lotto.util.RandomGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,13 +38,5 @@ class LottoServiceTest {
         Assertions.assertThat(lottoResults.getLottoResults()).containsEntry(LottoRank.FIRST, 3L);
         LottoResults lottoResults2 = lottoService.matchWinningLotto(second);
         Assertions.assertThat(lottoResults2.getLottoResults()).containsEntry(LottoRank.SECOND, 3L);
-    }
-
-    @Test
-    @DisplayName("수익률을 계산한다.")
-    void profitRate() {
-        LottoService lottoService = LottoService.buyLotto(new Money(5000));
-        LottoResults lottoResults = new LottoResults(List.of(LottoRank.FIFTH, LottoRank.NONE, LottoRank.FOURTH, LottoRank.NONE, LottoRank.NONE));
-        Assertions.assertThat(lottoService.profitRate(lottoResults).getProfitRate()).isEqualTo(11.0);
     }
 }

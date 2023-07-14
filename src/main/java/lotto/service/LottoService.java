@@ -13,12 +13,8 @@ public class LottoService {
 
     private final Lottos lottos;
 
-    public LottoService(Lottos lottos) {
+    private LottoService(Lottos lottos) {
         this.lottos = lottos;
-    }
-
-    public static LottoService buyLotto(Money money) {
-        return buyLotto(money, new RandomGenerator());
     }
 
     public static LottoService buyLotto(Money money, LottoGenerator lottoGenerator) {
