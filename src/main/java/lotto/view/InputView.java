@@ -35,7 +35,7 @@ public class InputView {
     public ManualRequestDto inputManualLottoNumber() {
         int count = processInput(this::readManualCount, COUNT_NOT_NUMBER_MESSAGE);
         System.out.println();
-        ManualRequestDto manualRequestDto = new ManualRequestDto(count, readManualLottoNumbers(count));
+        ManualRequestDto manualRequestDto = new ManualRequestDto(readManualLottoNumbers(count));
         System.out.println();
         return manualRequestDto;
     }
