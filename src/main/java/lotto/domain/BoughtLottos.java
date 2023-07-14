@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class BoughtLottos {
 
+    public static final BoughtLottos EMPTY = new BoughtLottos(List.of());
     private final int count;
     private final List<Lotto> lottos;
 
@@ -17,6 +18,10 @@ public class BoughtLottos {
         return new WinningStatistics(lottos.stream()
                 .map(winningLotto::match)
                 .collect(Collectors.toList()));
+    }
+
+    public boolean isEmpty() {
+        return this.count == 0;
     }
 
     public int getCount() {
