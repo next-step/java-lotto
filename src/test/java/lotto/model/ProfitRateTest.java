@@ -22,7 +22,7 @@ class ProfitRateTest {
     }
 
     @Test
-    void 로또_수익률_지불한돈_음수일시_예외발생() {
+    void 로또_수익률_지불한돈_1000이하_일시_예외발생() {
         // given, when, then
         assertThrows(IllegalArgumentException.class, () -> new ProfitRate(0, -1));
     }
