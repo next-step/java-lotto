@@ -3,7 +3,7 @@ package lotto.controller;
 import lotto.model.*;
 import lotto.model.dto.LottosDto;
 import lotto.model.dto.WinningResultDto;
-import lotto.model.util.AutoLottoGenerator;
+import lotto.model.AutoLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

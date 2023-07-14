@@ -2,7 +2,6 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.model.util.LottoGenerator;
 
 public class LottoPurchaser {
 
