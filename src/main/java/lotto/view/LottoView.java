@@ -12,7 +12,6 @@ import lotto.domain.*;
 public class LottoView {
 
     public static final String NUMBER_DELIMITER = ",";
-    public static final int FIVE_MATCH_COUNT = 5;
     private final Scanner scanner = new Scanner(System.in);
 
     public int readPayment() {
