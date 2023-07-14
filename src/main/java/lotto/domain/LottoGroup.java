@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoGroup {
-
     public static final Long LOTTO_PRICE = 1000L;
     private final List<Lotto> lottos;
 

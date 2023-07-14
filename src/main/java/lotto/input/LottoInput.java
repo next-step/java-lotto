@@ -6,7 +6,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class LottoInput {
-
     private static final String WINNING_DELIMITER = ", ";
     private final Scanner scanner;
 
@@ -20,8 +19,8 @@ public class LottoInput {
 
     public List<Integer> inputWinningNumbers() {
         return Arrays.stream(scanner.nextLine().split(WINNING_DELIMITER))
-            .map(Integer::parseInt)
-            .collect(Collectors.toList());
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     public Long inputPurchaseMoney() {

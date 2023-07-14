@@ -1,16 +1,11 @@
 package lotto.output;
 
+import lotto.domain.*;
+
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoGroup;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoResult;
-
 public class LottoOutput {
-
     public void printAskPurchaseMoney() {
         System.out.println("구입금액을 입력해 주세요.");
     }

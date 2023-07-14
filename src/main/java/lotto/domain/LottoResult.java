@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoResult {
-
     private final Map<LottoRank, Long> result;
 
     public LottoResult(final Map<LottoRank, Long> result) {

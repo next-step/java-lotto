@@ -1,7 +1,10 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -9,14 +12,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoTest {
-
     private static Stream<Arguments> generateData() {
         return Stream.of(
                 Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6)), 6L),
@@ -103,7 +102,7 @@ class LottoTest {
     @DisplayName("로또는 정렬되어 있어야 한다.")
     void lottoSortedTest() {
         //given
-        Lotto lotto = Lotto.createSpecificLotto(List.of(6,2,3,4,1,5));
+        Lotto lotto = Lotto.createSpecificLotto(List.of(6, 2, 3, 4, 1, 5));
 
         //when
         List<LottoNumber> numbers = lotto.getLottoNumbers();

@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.List;
 import lotto.domain.LottoGroup;
 import lotto.domain.LottoResult;
 import lotto.domain.Money;
@@ -8,8 +7,9 @@ import lotto.domain.WinningLotto;
 import lotto.input.LottoInput;
 import lotto.output.LottoOutput;
 
-public class LottoApplication {
+import java.util.List;
 
+public class LottoApplication {
     private final LottoInput input;
     private final LottoOutput output;
 

@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
-
     private final Long value;
 
     public Money(final Long value) {
