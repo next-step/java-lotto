@@ -31,6 +31,14 @@ public class Count {
         return price.multiply(value);
     }
 
+    public Count decreaseBy(Count other) {
+        return new Count(this.value - other.value);
+    }
+
+    public static Count sum(Count count1, Count count2) {
+        return new Count(count1.value + count2.value);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

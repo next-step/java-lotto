@@ -14,6 +14,10 @@ public class Money {
         this.value = money;
     }
 
+    public long getValue() {
+        return value;
+    }
+
     private void validateMoney(long value) {
         if (value < MIN_PRICE) {
             throw new IllegalArgumentException("돈은 음수일 수 없습니다.");
@@ -44,6 +48,10 @@ public class Money {
 
     public Money multiply(long count) {
         return new Money(value * count);
+    }
+
+    public static Money sum(Money money1, Money money2) {
+        return new Money(money1.value + money2.value);
     }
 
     @Override

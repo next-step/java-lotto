@@ -39,4 +39,21 @@ class CountTest {
 
         Assertions.assertThat(count.multiply(price)).isEqualTo(new Money(5000));
     }
+
+    @Test
+    @DisplayName("Count끼리 더할 수 있다.")
+    void sum() {
+        Count count1 = new Count(5);
+        Count count2 = new Count(3);
+
+        Assertions.assertThat(Count.sum(count1, count2)).isEqualTo(new Count(8));
+    }
+
+    @Test
+    @DisplayName("Count에서 Count를 뺄 수 있다")
+    void decreaseBy() {
+        Count count = new Count(8);
+
+        Assertions.assertThat(count.decreaseBy(new Count(3))).isEqualTo(new Count(5));
+    }
 }

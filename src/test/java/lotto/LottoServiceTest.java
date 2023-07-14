@@ -3,7 +3,6 @@ package lotto;
 import lotto.domain.*;
 import lotto.dto.LottoStatusResponseDto;
 import lotto.service.LottoService;
-import lotto.util.RandomGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,8 +34,8 @@ class LottoServiceTest {
         WinningLotto second = new WinningLotto(List.of(1, 2, 3, 4, 5, 7), 6);
 
         LottoResults lottoResults = lottoService.matchWinningLotto(first);
-        Assertions.assertThat(lottoResults.getLottoResults()).containsEntry(LottoRank.FIRST, 3L);
+        Assertions.assertThat(lottoResults.getLottoResults()).containsEntry(LottoRank.FIRST, new Count(3));
         LottoResults lottoResults2 = lottoService.matchWinningLotto(second);
-        Assertions.assertThat(lottoResults2.getLottoResults()).containsEntry(LottoRank.SECOND, 3L);
+        Assertions.assertThat(lottoResults2.getLottoResults()).containsEntry(LottoRank.SECOND, new Count(3));
     }
 }

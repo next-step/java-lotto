@@ -18,7 +18,8 @@ public class LottoResultResponseDto {
                 .filter(rank -> rank != LottoRank.NONE)
                 .map(rank -> new LottoRankDto(
                         rank,
-                        lottoResults.getLottoResults().getOrDefault(rank, 0L)))
+                        lottoResults.getLottoResults()
+                                .getOrDefault(rank, LottoResults.DEFAULT_COUNT)))
                 .collect(Collectors.toList());
         Collections.reverse(this.lottoRankDtos);
         this.profitRate = lottoResults.getProfitRate().getProfitRate();

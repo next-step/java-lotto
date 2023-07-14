@@ -1,5 +1,6 @@
 package lotto.dto;
 
+import lotto.domain.Count;
 import lotto.domain.LottoRank;
 
 public class LottoRankDto {
@@ -9,11 +10,11 @@ public class LottoRankDto {
     private final long price;
     private final long lottoCount;
 
-    public LottoRankDto(LottoRank lottoRank, long lottoCount) {
+    public LottoRankDto(LottoRank lottoRank, Count lottoCount) {
         this.matchCount = lottoRank.getMatchCount();
         this.bonusMatch = lottoRank == LottoRank.SECOND;
-        this.price = lottoRank.getPrice();
-        this.lottoCount = lottoCount;
+        this.price = lottoRank.getPrice().getValue();
+        this.lottoCount = lottoCount.getValue();
     }
 
     public long getMatchCount() {

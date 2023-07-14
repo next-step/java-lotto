@@ -25,11 +25,12 @@ public class LottoService {
     }
 
     public static LottoService buyLotto(Money money, Lottos manualLottos, LottoGenerator lottoGenerator) {
-        Count autoCount = money.count(LOTTO_PRICE);
+        Count manualCount = new Count(manualLottos.size());
+        Count autoCount = money.count(LOTTO_PRICE).decreaseBy(manualCount);
         List<Lotto> lottos = autoCount.stream()
                 .mapToObj(l -> lottoGenerator.generateLotto())
                 .collect(Collectors.toList());
-        return new LottoService(manualLottos.combine(new Lottos(lottos)), new Count(manualLottos.size()));
+        return new LottoService(manualLottos.combine(new Lottos(lottos)), manualCount);
     }
 
     public LottoStatusResponseDto buyStatus() {
