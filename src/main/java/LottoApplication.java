@@ -1,14 +1,28 @@
-import domain.*;
-import view.InputView;
-import view.OutputView;
+import config.AppConfig;
+import controller.LottoController;
+import domain.LottoResult;
+import domain.Lottos;
+import domain.WinningLotto;
+import view.InputReader;
+import view.OutputWriter;
 
 import java.util.List;
 
 public class LottoApplication {
 
+    private final LottoController lottoController;
+    private final InputReader inputReader;
+    private final OutputWriter outputWriter;
+
+    public LottoApplication() {
+        this.lottoController = AppConfig.lottoController();
+        this.inputReader = AppConfig.inputReader();
+        this.outputWriter = AppConfig.outputWriter();
+    }
+
     public static void main(String[] args) {
         try {
-            run();
+            new LottoApplication().run();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
@@ -16,34 +30,16 @@ public class LottoApplication {
         }
     }
 
-    private static void run() {
-        // 가격 입력
-        final long money = InputView.readMoney();
+    public void run() {
+        final long inputMoney = inputReader.readMoneyValue();
+        final Lottos autoLottos = lottoController.generateAutoLottos(inputMoney);
+        outputWriter.printLottosInfo(autoLottos);
 
-        // 로또 만들고
-        final List<Lotto> lottos = LottoGenerator.generateAutomatically(money);
+        final List<Integer> lotto = inputReader.readLottoValue();
+        final int bonus = inputReader.readLottoNumberValue();
+        final WinningLotto winningLotto = lottoController.generateWinningLotto(lotto, bonus);
 
-        // 구매 결과 출력
-        OutputView.printLottosSize(lottos);
-
-        // 로또 출력한다.
-        OutputView.printLottos(lottos);
-
-        // 당첨 번호 입력
-        final List<Integer> lottoNumbers = InputView.readLottoNumbers();
-        final int lottoNumber = InputView.readLottoNumber();
-
-        // 게임 진행해서
-        final LottoResult lottoResult = play(lottos, lottoNumbers, lottoNumber);
-
-        // 결과 출력
-        OutputView.printStatistic(lottoResult, money);
-    }
-
-    private static LottoResult play(final List<Lotto> target, final List<Integer> lottoNumbers, final int lottoNumber) {
-        final Lottos lottos = new Lottos(target);
-        final WinningLotto winningLotto = new WinningLotto(new Lotto(lottoNumbers), new LottoNumber(lottoNumber));
-
-        return new LottoResult(lottos.checkAllLottoResult(winningLotto));
+        final LottoResult lottoResult = lottoController.result(autoLottos, winningLotto);
+        outputWriter.printLottoResultStatistic(lottoResult, inputMoney);
     }
 }

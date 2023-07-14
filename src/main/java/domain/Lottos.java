@@ -16,4 +16,8 @@ public class Lottos {
                 .map(winningLotto::resolveRank)
                 .collect(Collectors.toList());
     }
+
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
 }

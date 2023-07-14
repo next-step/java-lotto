@@ -5,44 +5,42 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class InputView {
+public class ConsoleInputReader implements InputReader {
 
-    private static final Scanner scanner = new Scanner(System.in);
-    public static final String NUMBER_SPLIT_DELIMITER = ", ";
+    private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
-    public static long readMoney() {
+    private final Scanner scanner = new Scanner(System.in);
+
+    @Override
+    public long readMoneyValue() {
         System.out.println("구입금액을 입력해 주세요.");
         try {
             final long money = Long.parseLong(scanner.nextLine());
-            validate(money);
+            validateRange(money);
 
             return money;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("구입금액은 정수여야 합니다.");
+            throw new IllegalArgumentException("구입 금액은 정수여야 합니다.");
         }
     }
 
-    private static void validate(final long money) {
-        if (money <= 0) {
-            throw new IllegalArgumentException("구입금액은 양의 정수여야 합니다.");
-        }
-    }
-
-    public static List<Integer> readLottoNumbers() {
+    @Override
+    public List<Integer> readLottoValue() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         try {
-            final String[] numbers = scanner.nextLine().split(NUMBER_SPLIT_DELIMITER);
+            final String[] numbers = scanner.nextLine().split(LOTTO_NUMBER_DELIMITER);
 
             return Arrays.stream(numbers)
                     .map(Integer::valueOf)
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("로또번호는 `" + NUMBER_SPLIT_DELIMITER + "`로 구분하여 정수로 입력해야 합니다.");
+            throw new IllegalArgumentException("로또번호는 `" + LOTTO_NUMBER_DELIMITER + "`로 구분하여 정수로 입력해야 합니다.");
         }
     }
 
-    public static int readLottoNumber() {
+    @Override
+    public int readLottoNumberValue() {
         System.out.println("보너스 볼을 입력해 주세요.");
 
         try {
@@ -52,6 +50,12 @@ public class InputView {
             return number;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("로또번호는 정수여야 합니다.");
+        }
+    }
+
+    private void validateRange(final long money) {
+        if (money <= 0) {
+            throw new IllegalArgumentException("구입 금액은 양의 정수여야 합니다.");
         }
     }
 }
