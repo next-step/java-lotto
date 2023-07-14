@@ -18,14 +18,14 @@ public class LottoApplication {
 
     public void run() {
         Money purchaseMoney = inputPurchaseMoney();
+        LottoGroup autoLottoGroup = LottoGroup.from(purchaseMoney);
+
         int manualQuantity = inputManualQuantity();
         int autoQuantity = purchaseMoney.calculateQuantity(new Money(LottoGroup.LOTTO_PRICE)) - manualQuantity;
 
         LottoGroup manualLottoGroup = inputManualLottos(manualQuantity);
 
         output.printQuantity(manualQuantity, autoQuantity);
-
-        LottoGroup autoLottoGroup = LottoGroup.from(purchaseMoney);
 
         output.printLottos(autoLottoGroup);
         output.printSectionDivider();
