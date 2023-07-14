@@ -5,12 +5,12 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoResult {
+public class WinningLotto {
 
     private final LottoTicket lottoTicket;
     private final LottoBonus lottoBonus;
 
-    public LottoResult(Set<Integer> lottoNumbers, int bonusNumber) {
+    public WinningLotto(Set<Integer> lottoNumbers, int bonusNumber) {
         this.lottoTicket = new LottoTicket(lottoNumbers);
         this.lottoBonus = new LottoBonus(bonusNumber, this.lottoTicket);
     }
@@ -30,10 +30,10 @@ public class LottoResult {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof LottoResult)) {
+        if (!(o instanceof WinningLotto)) {
             return false;
         }
-        LottoResult that = (LottoResult) o;
+        WinningLotto that = (WinningLotto) o;
         return Objects.equals(lottoTicket, that.lottoTicket) && Objects.equals(lottoBonus,
             that.lottoBonus);
     }
@@ -45,9 +45,9 @@ public class LottoResult {
 
     @Override
     public String toString() {
-        return "LottoResult{" +
-            "lottoTicket=" + lottoTicket +
-            ", lottoBonus=" + lottoBonus +
-            '}';
+        return "WinningLotto{" +
+                "lottoTicket=" + lottoTicket +
+                ", lottoBonus=" + lottoBonus +
+                '}';
     }
 }

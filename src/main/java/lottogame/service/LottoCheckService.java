@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import lottogame.domain.LottoPrize;
-import lottogame.domain.LottoResult;
+import lottogame.domain.WinningLotto;
 import lottogame.domain.LottoTicket;
 import lottogame.service.response.LottoCheckResponse;
 
@@ -16,8 +16,8 @@ public class LottoCheckService {
 
     public LottoCheckResponse checkResult(List<LottoTicket> lottoTickets, Set<Integer> selectedLottoNumbers,
         int bonusLottoNumbers) {
-        LottoResult lottoResult = new LottoResult(selectedLottoNumbers, bonusLottoNumbers);
-        List<LottoPrize> lottoPrizes = lottoResult.toLottoPrizes(lottoTickets);
+        WinningLotto winningLotto = new WinningLotto(selectedLottoNumbers, bonusLottoNumbers);
+        List<LottoPrize> lottoPrizes = winningLotto.toLottoPrizes(lottoTickets);
 
         double earningRate = calculateEarningRate(lottoPrizes);
         return new LottoCheckResponse(earningRate, getLottoPrizeCountsExceptNone(lottoPrizes));

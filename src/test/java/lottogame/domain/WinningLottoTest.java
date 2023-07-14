@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("FieldCanBeLocal")
-@DisplayName("LottoResult 클래스")
-class LottoResultTest {
+@DisplayName("WinningLotto 클래스")
+class WinningLottoTest {
 
     private static final int BONUS_NUMBER = 7;
     private final Set<Integer> lottoNumbers = Set.of(1, 2, 3, 4, 5, 6);
@@ -25,7 +25,7 @@ class LottoResultTest {
             @Test
             @DisplayName("생성한다.")
             void It_Create() {
-                assertThatCode(() -> new LottoResult(lottoNumbers, BONUS_NUMBER)).doesNotThrowAnyException();
+                assertThatCode(() -> new WinningLotto(lottoNumbers, BONUS_NUMBER)).doesNotThrowAnyException();
             }
         }
     }
