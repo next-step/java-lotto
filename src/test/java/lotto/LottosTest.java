@@ -41,7 +41,7 @@ public class LottosTest {
 
         WinningNumber winningNumber = new WinningNumber(List.of(2, 3, 4, 5, 16, 7), 10);
 
-        LottoResult lottoResult = new LottoResult(lottos, winningNumber);
+        ResultRecord lottoResult = new ResultRecord(lottos, winningNumber);
 
         Map<LottoMatch, Integer> resultMap = lottoResult.getResult();
 

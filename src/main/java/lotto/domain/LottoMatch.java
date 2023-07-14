@@ -26,7 +26,7 @@ public enum LottoMatch {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상금 타입입니다"));
     }
 
-    public static boolean contains(final int matchCount, final boolean isBonus) {
+    public static boolean exists(final int matchCount, final boolean isBonus) {
         return Arrays.stream(values())
                 .anyMatch(lottoMatch -> lottoMatch.matchCount == matchCount && lottoMatch.isBonus == isBonus);
     }

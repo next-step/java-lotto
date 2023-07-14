@@ -53,8 +53,12 @@ public final class LottoService {
         return lottos;
     }
 
-    public LottoResult getResult(final List<Integer> winningLotto, final int bonusBall) {
+    public ResultRecord getResult(final List<Integer> winningLotto, final int bonusBall) {
         WinningNumber winningNumber = new WinningNumber(winningLotto, bonusBall);
-        return new LottoResult(lottos, winningNumber);
+        return new ResultRecord(lottos, winningNumber);
+    }
+
+    public ProfitRate getProfitRage(final int profit) {
+        return new ProfitRate(profit, payment.getMoney());
     }
 }

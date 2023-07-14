@@ -4,20 +4,21 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
-public final class LottoResult {
-    public static final int MIN_MATCH_COUNT = 3;
+public final class ResultRecord {
     public static final int DEFAULT_VALUE = 0;
     public static final int ADD_COUNT_VALUE = 1;
     private final Map<LottoMatch, Integer> resultMap = new EnumMap<>(LottoMatch.class);
 
-    public LottoResult(Lottos lottos, WinningNumber winningNumber) {
+    public ResultRecord(Lottos lottos, WinningNumber winningNumber) {
         recordResult(winningNumber, lottos);
     }
 
     private void recordResult(final WinningNumber winningNumber, final Lottos lottos) {
         setResultMap();
         for (Lotto lotto : lottos.getLottos()) {
-            filter(lotto, winningNumber);
+            int matchCount = lotto.countMatch(winningNumber.getWinningLotto());
+            boolean isBonus = lotto.hasLottoNumber(winningNumber.getBonusBall());
+            recordEach(matchCount, isBonus);
         }
     }
 
@@ -27,16 +28,8 @@ public final class LottoResult {
         }
     }
 
-    private void filter(final Lotto lotto, final WinningNumber winningNumber) {
-        int matchCount = lotto.countMatch(winningNumber.getWinningLotto());
-        if (matchCount >= MIN_MATCH_COUNT) {
-            boolean isBonus = lotto.hasLottoNumber(winningNumber.getBonusBall());
-            recordEach(matchCount, isBonus);
-        }
-    }
-
     private void recordEach(final int matchCount, final boolean isBonus) {
-        if (LottoMatch.contains(matchCount, isBonus)) {
+        if (LottoMatch.exists(matchCount, isBonus)) {
             LottoMatch lottoMatch = LottoMatch.find(matchCount, isBonus);
             resultMap.put(
                     lottoMatch,
@@ -45,8 +38,8 @@ public final class LottoResult {
         }
     }
 
-    public float getProfit() {
-        float profit = 0;
+    public int getProfit() {
+        int profit = 0;
         for (LottoMatch lottoMatch : resultMap.keySet()) {
             profit += resultMap.get(lottoMatch) * lottoMatch.getPrize();
         }

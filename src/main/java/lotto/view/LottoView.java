@@ -11,7 +11,8 @@ import lotto.domain.*;
 
 public class LottoView {
 
-    public static final String NUMBER_DELIMITER = ",";
+    public static final String INPUT_LOTTO_DELIMITER = ",";
+    public static final String OUTPUT_LOTTO_DELIMITER = ", ";
     private final Scanner scanner = new Scanner(System.in);
 
     public int readPayment() {
@@ -21,7 +22,7 @@ public class LottoView {
 
     public List<Integer> readWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String[] elements = scanner.nextLine().split(NUMBER_DELIMITER);
+        String[] elements = scanner.nextLine().split(INPUT_LOTTO_DELIMITER);
         return Arrays.stream(elements)
                 .map(element -> Integer.parseInt(element.trim()))
                 .collect(Collectors.toList());
@@ -46,7 +47,7 @@ public class LottoView {
         String output = lotto.getLotto().stream()
                         .map(LottoNumber::getLottoNumber)
                         .map(String::valueOf)
-                        .collect(Collectors.joining(NUMBER_DELIMITER));
+                        .collect(Collectors.joining(OUTPUT_LOTTO_DELIMITER));
 
         System.out.println("[" + output + "]");
     }

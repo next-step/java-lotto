@@ -1,6 +1,7 @@
 package lotto.controller;
 
-import lotto.domain.LottoResult;
+import lotto.domain.ProfitRate;
+import lotto.domain.ResultRecord;
 import lotto.domain.LottoService;
 import lotto.view.LottoView;
 
@@ -25,9 +26,10 @@ public class LottoController {
         List<Integer> winningLotto = lottoView.readWinningLotto();
         int bonusBall = lottoView.readBonusBall();
 
-        LottoResult result = lottoService.getResult(winningLotto, bonusBall);
-
+        ResultRecord result = lottoService.getResult(winningLotto, bonusBall);
         lottoView.printResults(result.getResult());
-        lottoView.printProfitRate(result.getProfit());
+
+        ProfitRate profitRate = lottoService.getProfitRage(result.getProfit());
+        lottoView.printProfitRate(profitRate.calculateRate());
     }
 }

@@ -21,4 +21,8 @@ public final class Payment {
     public int getLottoCount() {
         return (money / MIN_MONEY);
     }
+
+    public int getMoney() {
+        return money;
+    }
 }
