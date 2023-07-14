@@ -20,7 +20,8 @@ public class LottoNumber {
 
     private void validateBound(final int value) {
         if (isOutOfBound(value)) {
-            throw new IllegalArgumentException("로또 번호는 1 이상 45 이하의 자연수여야 합니다.");
+            throw new IllegalArgumentException(
+                "로또 번호는 " + LOWER_BOUND + " 이상 " + UPPER_BOUND + " 이하의 자연수여야 합니다.");
         }
     }
 

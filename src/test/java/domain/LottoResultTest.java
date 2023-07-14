@@ -1,13 +1,12 @@
 package domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class LottoResultTest {
 
@@ -16,9 +15,9 @@ class LottoResultTest {
     @BeforeEach
     void setUp() {
         target = List.of(
-                Rank.FIFTH, Rank.FIFTH,
-                Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE,
-                Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE
+            Rank.FIFTH, Rank.FIFTH,
+            Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE,
+            Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE
         );
     }
 
@@ -38,28 +37,29 @@ class LottoResultTest {
         final LottoResult lottoResult = new LottoResult(target);
 
         /* when */
-        final Long firstRankCount = lottoResult.countRank(Rank.FIRST);
-        final Long fifthRankCount = lottoResult.countRank(Rank.FIFTH);
-        final Long noneRankCount = lottoResult.countRank(Rank.NONE);
+        final Count firstRankCount = lottoResult.countRank(Rank.FIRST);
+        final Count fifthRankCount = lottoResult.countRank(Rank.FIFTH);
+        final Count noneRankCount = lottoResult.countRank(Rank.NONE);
 
         /* then */
-        assertThat(firstRankCount).isEqualTo(0);
-        assertThat(fifthRankCount).isEqualTo(2);
-        assertThat(noneRankCount).isEqualTo(10);
+        assertThat(firstRankCount).isEqualTo(new Count(0));
+        assertThat(fifthRankCount).isEqualTo(new Count(2));
+        assertThat(noneRankCount).isEqualTo(new Count(10));
     }
 
     @Test
     @DisplayName("수익률을 구한다.")
     void calculateTotalPrize() {
         /* given */
-        LottoResult lottoResult = new LottoResult(target);
-        int money = target.size() * 1_000;
+        final LottoResult lottoResult = new LottoResult(target);
+        final Money money = new Money(1_000L * 12L);
 
         /* when */
-        double rateOfReturn = lottoResult.calculateRateOfReturn(money);
+        RateOfReturn rateOfReturn = lottoResult.calculateRateOfReturn(money);
 
         /* then */
-        double expectedRateOfReturn = Rank.FIFTH.getPrize() * 2L / (double) money;
+        RateOfReturn expectedRateOfReturn = new RateOfReturn(
+            (double) (5_000L * 2L) / (1_000L * 12L));
         assertThat(rateOfReturn).isEqualTo(expectedRateOfReturn);
     }
 }

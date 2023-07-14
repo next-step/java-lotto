@@ -13,7 +13,7 @@ public class Lottos {
 
     public List<Rank> checkAllLottoResult(final WinningLotto winningLotto) {
         return lottos.stream()
-                .map(winningLotto::resolveRank)
-                .collect(Collectors.toList());
+            .map(winningLotto::resolveRank)
+            .collect(Collectors.toList());
     }
 }

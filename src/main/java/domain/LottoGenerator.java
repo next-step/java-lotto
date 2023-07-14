@@ -8,34 +8,38 @@ import java.util.stream.IntStream;
 
 public class LottoGenerator {
 
-    private static final int MONEY_UNIT = 1_000;
+    private static final Money MONEY_UNIT = new Money(1_000L);
 
     private LottoGenerator() {
     }
 
-    public static List<Lotto> generateLottosManuallyAndThenAutomatically(final int money,
-        final int manualPurchaseCount, final List<List<Integer>> numberBundles) {
-        validateMoneyUnit(money);
-        final int totalPurchaseCount = calculateLottoPurchaseCount(money);
+    public static List<Lotto> generateLottos(final Money money,
+        final Count manualPurchaseCount, final List<List<Integer>> numberBundles) {
+        validateMoney(money);
+        final Count totalPurchaseCount = calculateLottoPurchaseCount(money);
 
         validateManualPurchaseCount(manualPurchaseCount, totalPurchaseCount);
-        final int autoPurchaseCount = totalPurchaseCount - manualPurchaseCount;
+        final Count autoPurchaseCount = totalPurchaseCount.decreaseBy(manualPurchaseCount);
 
-        validateNumberBundlesCount(numberBundles, manualPurchaseCount);
-        return combine(generateLottosManually(manualPurchaseCount, numberBundles), generateLottosAutomatically(autoPurchaseCount));
+        return combine(generateLottosManually(manualPurchaseCount, numberBundles),
+            generateLottosAutomatically(autoPurchaseCount));
     }
 
-    private static List<Lotto> generateLottosManually(final int manualPurchaseCount,
+    private static List<Lotto> generateLottosManually(final Count manualPurchaseCount,
         final List<List<Integer>> numberBundles) {
-        return IntStream.range(0, manualPurchaseCount)
-            .mapToObj(numberBundles::get)
+        validateNumberBundlesCount(numberBundles, manualPurchaseCount);
+        return numberBundles.stream()
             .map(Lotto::new)
             .collect(Collectors.toUnmodifiableList());
     }
 
-    private static List<Lotto> generateLottosAutomatically(final int autoPurchaseCount) {
-        return IntStream.range(0, autoPurchaseCount)
-            .mapToObj(count -> generateSingleLottoAutomatically())
+    private static List<Lotto> generateLottosAutomatically(Count autoPurchaseCount) {
+        final List<Lotto> lottos = new ArrayList<>();
+        while (autoPurchaseCount.isPositive()) {
+            lottos.add(generateSingleLottoAutomatically());
+            autoPurchaseCount = autoPurchaseCount.decreaseByOne();
+        }
+        return lottos.stream()
             .collect(Collectors.toUnmodifiableList());
     }
 
@@ -46,16 +50,16 @@ public class LottoGenerator {
         return result;
     }
 
-    private static void validateManualPurchaseCount(final int manualPurchaseCount,
-        final int totalPurchaseCount) {
-        if (totalPurchaseCount < manualPurchaseCount) {
+    private static void validateManualPurchaseCount(final Count manualPurchaseCount,
+        final Count totalPurchaseCount) {
+        if (totalPurchaseCount.isLessThan(manualPurchaseCount)) {
             throw new IllegalArgumentException("수동으로 구매할 로또 수가 구입금액으로 구매 가능한 총 로또 수보다 많습니다.");
         }
     }
 
     private static void validateNumberBundlesCount(
-        final List<List<Integer>> numberBundles, final int manualPurchaseCount) {
-        if (numberBundles.size() != manualPurchaseCount) {
+        final List<List<Integer>> numberBundles, final Count manualPurchaseCount) {
+        if (new Count(numberBundles.size()).isNotEqualTo(manualPurchaseCount)) {
             throw new IllegalArgumentException("숫자 묶음 수가 수동으로 구매할 로또 수와 일치하지 않습니다.");
         }
     }
@@ -72,13 +76,24 @@ public class LottoGenerator {
             .collect(Collectors.toList());
     }
 
-    private static void validateMoneyUnit(final int money) {
-        if (money % MONEY_UNIT != 0) {
+    private static void validateMoney(final Money money) {
+        validateMinimum(money);
+        validateUnit(money);
+    }
+
+    private static void validateMinimum(final Money money) {
+        if (money.isLessThan(MONEY_UNIT)) {
+            throw new IllegalArgumentException("구입금액은 적어도 " + MONEY_UNIT + "원 이상이어야 합니다.");
+        }
+    }
+
+    private static void validateUnit(final Money money) {
+        if (!money.isMultipleOf(MONEY_UNIT)) {
             throw new IllegalArgumentException("구입금액은 " + MONEY_UNIT + "원 단위여야 합니다.");
         }
     }
 
-    private static int calculateLottoPurchaseCount(int money) {
-        return money / MONEY_UNIT;
+    private static Count calculateLottoPurchaseCount(Money money) {
+        return money.calculateMaximumCount(MONEY_UNIT);
     }
 }

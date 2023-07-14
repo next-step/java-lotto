@@ -13,17 +13,18 @@ public enum Rank {
 
     private final long matchLottoNumber;
     private final boolean hasToCheckBonus;
-    private final long prize;
+    private final Money prize;
 
     Rank(final long matchLottoNumber, final boolean hasToCheckBonus, final long prize) {
         this.matchLottoNumber = matchLottoNumber;
         this.hasToCheckBonus = hasToCheckBonus;
-        this.prize = prize;
+        this.prize = new Money(prize);
     }
 
     public static Rank from(final long matchLottoNumber, final boolean containsBonus) {
         return Arrays.stream(Rank.values())
-            .filter(rank -> rank.matchLottoNumber == matchLottoNumber && (rank.hasToCheckBonus ? containsBonus : true))
+            .filter(rank -> rank.matchLottoNumber == matchLottoNumber
+                && (rank.hasToCheckBonus ? containsBonus : true))
             .findFirst()
             .orElse(Rank.NONE);
     }
@@ -36,7 +37,7 @@ public enum Rank {
         return hasToCheckBonus;
     }
 
-    public long getPrize() {
+    public Money getPrize() {
         return prize;
     }
 }

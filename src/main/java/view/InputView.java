@@ -1,5 +1,7 @@
 package view;
 
+import domain.Count;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -8,7 +10,7 @@ import java.util.stream.Collectors;
 public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
-    public static final String NUMBER_SPLIT_DELIMITER = ", ";
+    private static final String NUMBER_SPLIT_DELIMITER = ", ";
 
     private InputView() {
     }
@@ -17,7 +19,6 @@ public class InputView {
         System.out.println("구입금액을 입력해 주세요.");
         try {
             final int money = Integer.parseInt(scanner.nextLine());
-            validatePositive(money);
             System.out.println();
 
             return money;
@@ -31,7 +32,6 @@ public class InputView {
 
         try {
             final int count = Integer.parseInt(scanner.nextLine());
-            validateNonNegative(count);
             System.out.println();
 
             return count;
@@ -40,15 +40,25 @@ public class InputView {
         }
     }
 
-    public static void printPromptMessageForManualPurchaseLottoNumbers() {
+    public static List<List<Integer>> readManualLottoNumbers(Count manualPurchaseCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<List<Integer>> numberBundles = new ArrayList<>();
+
+        while (manualPurchaseCount.isPositive()) {
+            numberBundles.add(readLottoNumbers());
+            manualPurchaseCount = manualPurchaseCount.decreaseByOne();
+        }
+
+        return numberBundles;
     }
 
-    public static void printPromptMessageForWinningLottoNumbers() {
+    public static List<Integer> readWinningLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+
+        return readLottoNumbers();
     }
 
-    public static List<Integer> readLottoNumbers() {
+    private static List<Integer> readLottoNumbers() {
         try {
             final String[] numbers = scanner.nextLine().split(NUMBER_SPLIT_DELIMITER);
 
@@ -71,18 +81,6 @@ public class InputView {
             return number;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("로또번호는 정수여야 합니다.");
-        }
-    }
-
-    private static void validatePositive(final int money) {
-        if (money <= 0) {
-            throw new IllegalArgumentException("구입금액은 양의 정수여야 합니다.");
-        }
-    }
-
-    private static void validateNonNegative(final int count) {
-        if (count < 0) {
-            throw new IllegalArgumentException("수동으로 구매할 로또 수는 음수일 수 없습니다.");
         }
     }
 }
