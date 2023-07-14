@@ -3,9 +3,36 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import lotto.domain.BoughtLottos;
+import lotto.domain.Lotto;
 import lotto.domain.WinningCriteria;
 
-public class WinningStatisticsWriter {
+public class LottoWriter {
+
+    private static final String DELIMITER = ", ";
+
+    public void printBoughtLottos(final BoughtLottos boughtLottos) {
+        System.out.println(boughtLottos.getCount() + "개를 구매했습니다.");
+
+        String collect = boughtLottos.getLottos()
+                .stream()
+                .map(this::formatLottos)
+                .collect(Collectors.joining("\n"));
+
+        System.out.println(collect);
+    }
+
+    private String formatLottos(final Lotto lotto) {
+        String result = "[";
+
+        result += lotto.getBalls()
+                .stream()
+                .map(b -> String.valueOf(b.getValue()))
+                .collect(Collectors.joining(DELIMITER));
+
+        return result + "]";
+    }
 
     public void printLottoStatistics(final WinningStatistics winningStatistics) {
         System.out.println("당첨 통계");

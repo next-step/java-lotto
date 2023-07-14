@@ -7,39 +7,31 @@ import lotto.domain.LottoGenerator;
 import lotto.domain.LottoResults;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
-import lotto.view.WinningStatistics;
-import lotto.view.BoughtLottosWriter;
 import lotto.view.LottoReader;
-import lotto.view.MoneyReader;
-import lotto.view.WinningStatisticsWriter;
+import lotto.view.LottoWriter;
+import lotto.view.WinningStatistics;
 
 public class LottoController {
 
-    private final MoneyReader moneyReader;
     private final LottoReader lottoReader;
-    private final BoughtLottosWriter boughtLottosWriter;
-    private final WinningStatisticsWriter winningStatisticsWriter;
+    private final LottoWriter lottoWriter;
     private final LottoGenerator lottoGenerator;
 
     public LottoController(
-            final MoneyReader moneyReader,
             final LottoReader lottoReader,
-            final BoughtLottosWriter boughtLottosWriter,
-            final WinningStatisticsWriter winningStatisticsWriter,
+            final LottoWriter lottoWriter,
             final LottoGenerator lottoGenerator
     ) {
-        this.moneyReader = moneyReader;
         this.lottoReader = lottoReader;
-        this.boughtLottosWriter = boughtLottosWriter;
-        this.winningStatisticsWriter = winningStatisticsWriter;
+        this.lottoWriter = lottoWriter;
         this.lottoGenerator = lottoGenerator;
     }
 
     public void startLotto() {
-        Money money = moneyReader.readMoney();
+        Money money = lottoReader.readMoney();
 
         BoughtLottos boughtLottos = lottoGenerator.generate(money);
-        boughtLottosWriter.printBoughtLottos(boughtLottos);
+        lottoWriter.printBoughtLottos(boughtLottos);
 
         Lotto winningBalls = lottoReader.readWinningLotto();
         Ball bonusBall = lottoReader.readBonusBall();
@@ -47,6 +39,6 @@ public class LottoController {
 
         LottoResults lottoResults = boughtLottos.winningResults(winningLotto);
         WinningStatistics winningStatistics = new WinningStatistics(lottoResults);
-        winningStatisticsWriter.printLottoStatistics(winningStatistics);
+        lottoWriter.printLottoStatistics(winningStatistics);
     }
 }
