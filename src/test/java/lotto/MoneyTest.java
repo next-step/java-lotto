@@ -45,4 +45,11 @@ class MoneyTest {
         Money principal = new Money(14000);
         Assertions.assertThat(Money.calculateProfitRate(profit, principal).getProfitRate()).isEqualTo((double) 5 / 14);
     }
+
+    @Test
+    @DisplayName("물건 개수를 곱하여 총 가격을 알아낸다.")
+    void multiply() {
+        Money box = new Money(5000);
+        Assertions.assertThat(box.multiply(5)).isEqualTo(new Money(25000));
+    }
 }
