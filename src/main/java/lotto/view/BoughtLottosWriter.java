@@ -10,7 +10,7 @@ public class BoughtLottosWriter {
     private static final String NEW_LINE = "\n";
 
     public void printBoughtLottos(final BoughtLottos boughtLottos) {
-        System.out.println(boughtLottos.getCount() + "개를 구매했습니다.");
+        System.out.println(boughtLottos.getAutoCount() + "개를 구매했습니다.");
         String collect = boughtLottos.getAutoLottos()
                 .stream()
                 .map(BoughtLottosWriter::formatLottos)

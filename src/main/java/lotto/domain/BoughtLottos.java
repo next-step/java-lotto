@@ -5,11 +5,11 @@ import java.util.stream.Collectors;
 
 public class BoughtLottos {
 
-    private final int count;
+    private final int autoCount;
     private final List<Lotto> autoLottos;
 
     public BoughtLottos(final List<Lotto> lottos) {
-        this.count = lottos.size();
+        this.autoCount = lottos.size();
         this.autoLottos = lottos;
     }
 
@@ -19,8 +19,8 @@ public class BoughtLottos {
                 .collect(Collectors.toList()));
     }
 
-    public int getCount() {
-        return this.count;
+    public int getAutoCount() {
+        return this.autoCount;
     }
 
     public List<Lotto> getAutoLottos() {
