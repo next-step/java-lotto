@@ -53,6 +53,10 @@ public class Lotto {
         return this.balls.contains(ball);
     }
 
+    public static Money calculatePurchaseMoney(LottoBuyCount lottoBuyCount) {
+        return new Money(PRICE * lottoBuyCount.getValue());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
