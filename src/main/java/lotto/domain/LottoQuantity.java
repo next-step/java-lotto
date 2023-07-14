@@ -6,6 +6,9 @@ public class LottoQuantity {
     private final int quantity;
 
     public LottoQuantity(int quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("quantity shouldn't be negative.");
+        }
         this.quantity = quantity;
     }
 
