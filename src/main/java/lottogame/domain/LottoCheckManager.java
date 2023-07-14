@@ -3,6 +3,7 @@ package lottogame.domain;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lottogame.domain.dto.LottoTicketDto;
@@ -39,7 +40,7 @@ public class LottoCheckManager {
         List<LottoPrize> lottoPrizes = toLottoPrizes(lottoTickets);
 
         double earningRate = calculateEarningRate(lottoPrizes);
-        
+
         return new LottoCheckedResponse(earningRate, getLottoTicketCheckResponsesWithOutNone(lottoPrizes));
     }
 
@@ -84,5 +85,31 @@ public class LottoCheckManager {
                 new LottoTicketCheckedResponse(lottoPrize.getMatchedCount(), lottoPrize.getMoney()), DEFAULT_COUNT)
                 + INCREMENT_AMOUNT));
         return lottoPrizeCounts;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof LottoCheckManager)) {
+            return false;
+        }
+        LottoCheckManager that = (LottoCheckManager) o;
+        return Objects.equals(lottoResultNumbers, that.lottoResultNumbers) && Objects.equals(lottoBonus,
+            that.lottoBonus);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoResultNumbers, lottoBonus);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoCheckManager{" +
+            "lottoResultNumbers=" + lottoResultNumbers +
+            ", lottoBonus=" + lottoBonus +
+            '}';
     }
 }

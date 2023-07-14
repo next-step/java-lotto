@@ -2,6 +2,7 @@ package lottogame.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import lottogame.domain.dto.LottoTicketDto;
 import lottogame.domain.spi.NumberGenerator;
@@ -41,5 +42,29 @@ public class LottoPurchaseManager {
         return lottoTickets.stream()
             .map(lottoTicket -> new LottoTicketDto(lottoTicket.getValues()))
             .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof LottoPurchaseManager)) {
+            return false;
+        }
+        LottoPurchaseManager that = (LottoPurchaseManager) o;
+        return Objects.equals(numberGenerator, that.numberGenerator);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numberGenerator);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoPurchaseManager{" +
+            "numberGenerator=" + numberGenerator +
+            '}';
     }
 }
