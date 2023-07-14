@@ -18,10 +18,12 @@ public class LottoApplication {
 
     public void run() {
         Money purchaseMoney = inputPurchaseMoney();
+
+        LottoQuantity totalQuantity = LottoQuantity.of(purchaseMoney, LottoGroup.LOTTO_PRICE);
         LottoGroup autoLottoGroup = LottoGroup.from(purchaseMoney);
 
-        int manualQuantity = inputManualQuantity();
-        int autoQuantity = purchaseMoney.calculateQuantity(new Money(LottoGroup.LOTTO_PRICE)) - manualQuantity;
+        LottoQuantity manualQuantity = inputManualQuantity();
+        LottoQuantity autoQuantity = new LottoQuantity(totalQuantity.getQuantity() - manualQuantity.getQuantity());
 
         LottoGroup manualLottoGroup = inputManualLottos(manualQuantity);
 
@@ -37,19 +39,19 @@ public class LottoApplication {
         printResult(LottoResult.of(totalLottoGroup, winningLotto));
     }
 
-    private int inputManualQuantity() {
+    private LottoQuantity inputManualQuantity() {
         output.printAskManualQuantity();
         int manualQuantity = input.inputManualQuantity();
         output.printSectionDivider();
 
-        return manualQuantity;
+        return new LottoQuantity(manualQuantity);
     }
 
-    private LottoGroup inputManualLottos(int manualQuantity) {
+    private LottoGroup inputManualLottos(final LottoQuantity manualQuantity) {
         output.printAskManualLottonumbers();
         List<Lotto> manualLottos = new ArrayList<>();
 
-        for (int i = 0; i < manualQuantity; i++) {
+        for (int i = 0; i < manualQuantity.getQuantity(); i++) {
             manualLottos.add(Lotto.createSpecificLotto(input.inputLottoNumbers()));
         }
 

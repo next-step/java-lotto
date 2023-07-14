@@ -9,7 +9,7 @@ public class LottoQuantity {
         this.quantity = quantity;
     }
 
-    public static LottoQuantity of(Money money, int price) {
+    public static LottoQuantity of(Money money, long price) {
         return new LottoQuantity((int) (money.getValue() / price));
     }
 
@@ -24,5 +24,9 @@ public class LottoQuantity {
     @Override
     public int hashCode() {
         return Objects.hash(quantity);
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 }

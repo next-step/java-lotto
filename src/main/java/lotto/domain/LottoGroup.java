@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoGroup {
-    public static final Long LOTTO_PRICE = 1000L;
+    public static final long LOTTO_PRICE = 1000;
     private final List<Lotto> lottos;
 
     public LottoGroup(final List<Lotto> lottos) {
