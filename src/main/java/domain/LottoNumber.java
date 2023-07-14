@@ -3,7 +3,7 @@ package domain;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public class LottoNumber {
+public final class LottoNumber {
 
     static final int MIN_VALUE = 1;
     static final int MAX_VALUE = 45;

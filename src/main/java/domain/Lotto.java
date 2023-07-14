@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Lotto {
+public final class Lotto {
 
     static final int REQUIRED_LOTTO_NUMBER_COUNT = 6;
 
@@ -26,7 +26,7 @@ public class Lotto {
     private static Set<LottoNumber> toLottoNumbers(final List<Integer> origin) {
         Set<LottoNumber> lottoNumbers = origin.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toUnmodifiableSet());
 
         if (origin.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
