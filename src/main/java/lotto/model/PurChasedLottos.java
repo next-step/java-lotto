@@ -3,11 +3,13 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurChasedLotto {
+public class PurChasedLottos {
     private final List<Lotto> lottos;
+    private final LottoMoney lottoMoney;
 
-    public PurChasedLotto(final List<Lotto> lottos) {
+    public PurChasedLottos(final List<Lotto> lottos, final LottoMoney lottoMoney) {
         this.lottos = lottos;
+        this.lottoMoney = lottoMoney;
     }
 
     public int getLottoCount() {
@@ -16,5 +18,9 @@ public class PurChasedLotto {
 
     public List<Lotto> getLottos() {
         return new ArrayList<>(lottos);
+    }
+
+    public int getMoney() {
+        return lottoMoney.getLottoMoney();
     }
 }

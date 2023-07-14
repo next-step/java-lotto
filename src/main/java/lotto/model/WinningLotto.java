@@ -26,7 +26,7 @@ public class WinningLotto {
         }
     }
 
-    public Rank compare(final Lotto lotto) {
+    public Rank computeOfRank(final Lotto lotto) {
         int count = (int) lotto.getLottoNumbers().stream()
                 .filter(winningLotto::isContain)
                 .count();

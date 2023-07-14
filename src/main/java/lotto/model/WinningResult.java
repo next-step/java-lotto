@@ -1,28 +1,41 @@
 package lotto.model;
 
-import java.util.Map;
-import java.util.function.ToDoubleFunction;
-
 public class WinningResult {
-    private final Map<Rank, Integer> winningResult;
 
-    WinningResult(final Map<Rank, Integer> winningResult) {
-        this.winningResult = winningResult;
+    private static final double SECOND_DECIMAL = 100.0;
+    private final RankResult rankResult;
+    private final double profit;
+
+    private WinningResult(final RankResult rankResult, final double profit) {
+        this.rankResult = rankResult;
+        this.profit = profit;
     }
 
-    public int getRankCount(final Rank rank) {
-        return winningResult.get(rank);
+    public static WinningResult of(final WinningLotto winningLotto, final PurChasedLottos purChasedLottos) {
+        RankResult rankResult = new RankResult();
+        for (var purchasedLotto : purChasedLottos.getLottos()) {
+            Rank rank = winningLotto.computeOfRank(purchasedLotto);
+            rankResult.plusCountOfRank(rank);
+        }
+        return new WinningResult(
+                rankResult,
+                calculateProfit(rankResult.getTotalRankReward(), purChasedLottos.getMoney()));
     }
 
-    public double calculateProfit(final LottoMoney gain) {
-        double sum = winningResult.keySet().stream()
-                .mapToDouble(getRankRewards())
-                .sum();
-        int lottoMoney = gain.getLottoMoney();
-        return sum / lottoMoney;
+    private static double calculateProfit(final int totalRankReward, final int money) {
+        return floorSecondDecimal((double) totalRankReward / money);
     }
 
-    private ToDoubleFunction<Rank> getRankRewards() {
-        return rank -> rank.getReward() * winningResult.get(rank);
+    private static double floorSecondDecimal(final double profit) {
+        return Math.floor(profit * SECOND_DECIMAL) / SECOND_DECIMAL;
     }
+
+    public int getCountOfRank(final Rank rank) {
+        return rankResult.getCountOfRank(rank);
+    }
+
+    public double getProfit() {
+        return profit;
+    }
+
 }

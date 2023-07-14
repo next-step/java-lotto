@@ -12,7 +12,7 @@ public class LottoPurchaserTest {
     void 금액만큼_로또_구매() {
         LottoPurchaser purchaser = new LottoPurchaser(new AutoLottoGenerator());
 
-        PurChasedLotto purchaseLotto = purchaser.purchaseLotto(new LottoMoney(14000));
+        PurChasedLottos purchaseLotto = purchaser.purchaseLotto(new LottoMoney(14000));
 
         assertThat(purchaseLotto.getLottoCount()).isEqualTo(14);
     }
