@@ -32,13 +32,7 @@ public final class Lotto {
         }
     }
 
-    public Rank checkRank(final WinningNumbers winningNumbers) {
-        final int matchCount = this.checkMatchCount(winningNumbers);
-        final boolean hasBonusBall = this.hasNumber(winningNumbers.getBonusBall());
-        return Rank.valueOf(matchCount, hasBonusBall);
-    }
-
-    private int checkMatchCount(final WinningNumbers winningNumbers) {
+    public int checkMatchCount(final Lotto winningNumbers) {
         return Math.toIntExact(lottoNumbers.stream()
                 .filter(winningNumbers::hasNumber)
                 .count());

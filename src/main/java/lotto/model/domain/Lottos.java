@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class Lottos {
-    
+
     private final List<Lotto> lottos;
 
     protected Lottos(final List<Lotto> lottos) {
@@ -14,7 +14,7 @@ public abstract class Lottos {
 
     public RankResults matchWinningNumbers(final WinningNumbers winningNumbers) {
         return new RankResults(lottos.stream()
-                .map(lotto -> lotto.checkRank(winningNumbers))
+                .map(winningNumbers::checkRank)
                 .collect(Collectors.toUnmodifiableList()));
     }
 
