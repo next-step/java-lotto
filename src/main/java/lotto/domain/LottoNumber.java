@@ -14,11 +14,11 @@ public class LottoNumber {
     private final int number;
 
     private LottoNumber(final int number) {
-        verify(number);
         this.number = number;
     }
 
     public static LottoNumber of(final int number) {
+        verify(number);
         return lottoNumberCache.get(number);
     }
 
