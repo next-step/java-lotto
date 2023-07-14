@@ -14,6 +14,10 @@ public class LottoGenerator {
                     .boxed()
                     .collect(Collectors.toList());
 
+    private LottoGenerator() {
+        /* no-op */
+    }
+
     private static Lotto auto() {
         Collections.shuffle(candidates);
         return new Lotto(candidates.subList(0, Lotto.REQUIRED_LOTTO_NUMBER_COUNT));
@@ -21,10 +25,12 @@ public class LottoGenerator {
 
     public static List<Lotto> generateAutomatically(final long money) {
         validateMoneyUnit(money);
+
         final List<Lotto> lottos = new ArrayList<>();
         for (long count = 0, maxCount = money / MONEY_UNIT; count < maxCount; count++) {
             lottos.add(auto());
         }
+
         return lottos;
     }
 
