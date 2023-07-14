@@ -10,7 +10,7 @@ public class LottoOutput {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public void printQuantity(final LottoQuantity manualQuantity, final LottoQuantity autoQuantity) {
+    public void printQuantity(final Quantity manualQuantity, final Quantity autoQuantity) {
         System.out.println("수동으로 "
                 + manualQuantity.getQuantity()
                 + "장, 자동으로 "

@@ -17,18 +17,14 @@ public class LottoApplication {
     }
 
     public void run() {
-        Money purchaseMoney = inputPurchaseMoney();
+        Quantity totalLottoQuantity = Quantity.of(inputPurchaseMoney(), LottoGroup.LOTTO_PRICE);
+        Quantity manualLottoQuantity = inputManualQuantity();
+        Quantity autoLottoQuantity = totalLottoQuantity.subtract(manualLottoQuantity);
 
-        LottoQuantity totalQuantity = LottoQuantity.of(purchaseMoney, LottoGroup.LOTTO_PRICE);
-        LottoGroup autoLottoGroup = LottoGroup.from(purchaseMoney);
+        LottoGroup autoLottoGroup = LottoGroup.from(autoLottoQuantity);
+        LottoGroup manualLottoGroup = inputManualLottos(manualLottoQuantity);
 
-        LottoQuantity manualQuantity = inputManualQuantity();
-        LottoQuantity autoQuantity = new LottoQuantity(totalQuantity.getQuantity() - manualQuantity.getQuantity());
-
-        LottoGroup manualLottoGroup = inputManualLottos(manualQuantity);
-
-        output.printQuantity(manualQuantity, autoQuantity);
-
+        output.printQuantity(manualLottoQuantity, autoLottoQuantity);
         output.printLottos(autoLottoGroup);
         output.printSectionDivider();
 
@@ -39,20 +35,20 @@ public class LottoApplication {
         printResult(LottoResult.of(totalLottoGroup, winningLotto));
     }
 
-    private LottoQuantity inputManualQuantity() {
+    private Quantity inputManualQuantity() {
         output.printAskManualQuantity();
         int manualQuantity = input.inputManualQuantity();
         output.printSectionDivider();
 
-        return new LottoQuantity(manualQuantity);
+        return new Quantity(manualQuantity);
     }
 
-    private LottoGroup inputManualLottos(final LottoQuantity manualQuantity) {
+    private LottoGroup inputManualLottos(final Quantity manualQuantity) {
         output.printAskManualLottonumbers();
         List<Lotto> manualLottos = new ArrayList<>();
 
         for (int i = 0; i < manualQuantity.getQuantity(); i++) {
-            manualLottos.add(Lotto.createSpecificLotto(input.inputLottoNumbers()));
+            manualLottos.add(Lotto.createManualLotto(input.inputLottoNumbers()));
         }
 
         output.printSectionDivider();

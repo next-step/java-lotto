@@ -28,12 +28,12 @@ class LottoResultTest {
         result = new LottoResult(rankResult);
 
         List<Lotto> lottos = new ArrayList<>();
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6))); // 1등
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 7))); // 2등
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 8))); // 3등
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 8, 9))); // 4등
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 8, 9, 10))); // 5등
-        lottos.add(Lotto.createSpecificLotto(List.of(21, 22, 23, 24, 25, 26))); // 등수없음
+        lottos.add(Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 6))); // 1등
+        lottos.add(Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 7))); // 2등
+        lottos.add(Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 8))); // 3등
+        lottos.add(Lotto.createManualLotto(List.of(1, 2, 3, 4, 8, 9))); // 4등
+        lottos.add(Lotto.createManualLotto(List.of(1, 2, 3, 8, 9, 10))); // 5등
+        lottos.add(Lotto.createManualLotto(List.of(21, 22, 23, 24, 25, 26))); // 등수없음
         lottoGroup = new LottoGroup(lottos);
 
         winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);

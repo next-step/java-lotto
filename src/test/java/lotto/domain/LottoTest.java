@@ -18,13 +18,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class LottoTest {
     private static Stream<Arguments> generateData() {
         return Stream.of(
-                Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6)), 6L),
-                Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 7)), 5L),
-                Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 8, 9)), 4L),
-                Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 3, 8, 9, 10)), 3L),
-                Arguments.of(Lotto.createSpecificLotto(List.of(1, 2, 8, 9, 10, 11)), 2L),
-                Arguments.of(Lotto.createSpecificLotto(List.of(1, 8, 9, 10, 11, 12)), 1L),
-                Arguments.of(Lotto.createSpecificLotto(List.of(21, 22, 23, 24, 25, 26)), 0L)
+                Arguments.of(Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 6)), 6L),
+                Arguments.of(Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 7)), 5L),
+                Arguments.of(Lotto.createManualLotto(List.of(1, 2, 3, 4, 8, 9)), 4L),
+                Arguments.of(Lotto.createManualLotto(List.of(1, 2, 3, 8, 9, 10)), 3L),
+                Arguments.of(Lotto.createManualLotto(List.of(1, 2, 8, 9, 10, 11)), 2L),
+                Arguments.of(Lotto.createManualLotto(List.of(1, 8, 9, 10, 11, 12)), 1L),
+                Arguments.of(Lotto.createManualLotto(List.of(21, 22, 23, 24, 25, 26)), 0L)
         );
     }
 
@@ -32,7 +32,7 @@ class LottoTest {
     @DisplayName("랜덤 생성된 로또는 6개의 숫자로 이루어진다.")
     void createSixNumbersTest() {
         //given
-        Lotto lotto = Lotto.createRandomLotto();
+        Lotto lotto = Lotto.createAutomaticLotto();
 
         //when, then
         assertThat(lotto.getLottoNumbers()).hasSize(6);
@@ -42,7 +42,7 @@ class LottoTest {
     @DisplayName("랜덤 생성된 로또는 서로 다른 숫자들로 이루어진다.")
     void distinctNumbersTest() {
         //given
-        Lotto lotto = Lotto.createRandomLotto();
+        Lotto lotto = Lotto.createAutomaticLotto();
 
         //when
         List<LottoNumber> numbers = lotto.getLottoNumbers();
@@ -55,7 +55,7 @@ class LottoTest {
     @DisplayName("숫자를 지정하는 로또 생성 테스트")
     void createSpecificLottoTest() {
         //given
-        Lotto lotto = Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 6));
 
         //then
         assertThat(lotto.getLottoNumbers()).isEqualTo(Stream.of(1, 2, 3, 4, 5, 6)
@@ -66,7 +66,7 @@ class LottoTest {
     @DisplayName("수동 생성된 로또는 길이가 6이어야 한다.")
     void createSpecificSixNumbersTest() {
         //given
-        Lotto lotto = Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 6));
 
         //when, then
         assertThat(lotto.getLottoNumbers()).hasSize(6);
@@ -76,7 +76,7 @@ class LottoTest {
     @DisplayName("수동 생성된 로또의 길이가 6이 아닌 경우 예외를 반환한다.")
     void sizeLessThanSixUnavailableTest() {
         assertThrows(IllegalArgumentException.class,
-                () -> Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5))
+                () -> Lotto.createManualLotto(List.of(1, 2, 3, 4, 5))
         );
     }
 
@@ -84,7 +84,7 @@ class LottoTest {
     @DisplayName("수동 생성된 로또에서 중복된 숫자가 있다면 예외를 반환한다.")
     void duplicatedNumberUnavailableTest() {
         assertThrows(IllegalArgumentException.class,
-                () -> Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 5)));
+                () -> Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 5)));
     }
 
     @ParameterizedTest
@@ -92,7 +92,7 @@ class LottoTest {
     @DisplayName("일치하는 개수 테스트")
     void countMatchTest(Lotto testLotto, Long match) {
         //given
-        Lotto lotto = Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 6));
 
         //when
         assertThat(lotto.countMatches(testLotto)).isEqualTo(match);
@@ -102,7 +102,7 @@ class LottoTest {
     @DisplayName("로또는 정렬되어 있어야 한다.")
     void lottoSortedTest() {
         //given
-        Lotto lotto = Lotto.createSpecificLotto(List.of(6, 2, 3, 4, 1, 5));
+        Lotto lotto = Lotto.createManualLotto(List.of(6, 2, 3, 4, 1, 5));
 
         //when
         List<LottoNumber> numbers = lotto.getLottoNumbers();

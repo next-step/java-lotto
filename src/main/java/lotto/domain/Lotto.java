@@ -21,12 +21,12 @@ public class Lotto {
         this.numbers = Collections.unmodifiableList(numbers);
     }
 
-    public static Lotto createRandomLotto() {
+    public static Lotto createAutomaticLotto() {
         Collections.shuffle(values);
         return new Lotto(new ArrayList<>(values.subList(0, LOTTO_SIZE)));
     }
 
-    public static Lotto createSpecificLotto(final List<Integer> numbers) {
+    public static Lotto createManualLotto(final List<Integer> numbers) {
         verifySize(numbers);
         verifyDuplicate(numbers);
 

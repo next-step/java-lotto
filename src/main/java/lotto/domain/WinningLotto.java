@@ -15,7 +15,7 @@ public class WinningLotto {
     }
 
     public WinningLotto(final List<Integer> lottoNumbers, final int bonus) {
-        this(Lotto.createSpecificLotto(lottoNumbers), LottoNumber.of(bonus));
+        this(Lotto.createManualLotto(lottoNumbers), LottoNumber.of(bonus));
     }
 
     private void verify(final Lotto lotto, final LottoNumber bonus) {
