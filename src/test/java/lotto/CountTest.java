@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Count;
+import lotto.domain.Money;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,5 +29,14 @@ class CountTest {
         Count count = new Count(5);
 
         Assertions.assertThat(count.stream().count()).isEqualTo(value);
+    }
+
+    @Test
+    @DisplayName("물건 값(Money)을 곱하면 총 얼마인지 Money를 반환한다.")
+    void multiply() {
+        Count count = new Count(5);
+        Money price = new Money(1000);
+
+        Assertions.assertThat(count.multiply(price)).isEqualTo(new Money(5000));
     }
 }

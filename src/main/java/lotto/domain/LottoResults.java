@@ -18,7 +18,7 @@ public class LottoResults {
             lottoResults.put(rank, lottoResults.getOrDefault(rank, DEFAULT_VALUE) + 1L);
         }
 
-        Money principal = LOTTO_PRICE.multiply(countLottos());
+        Money principal = countLottos().multiply(LOTTO_PRICE);
         this.profitRate =  Money.calculateProfitRate(sumPrice(), principal);
     }
 
@@ -39,10 +39,12 @@ public class LottoResults {
         );
     }
 
-    private long countLottos() {
-        return lottoResults.values()
+    private Count countLottos() {
+        return new Count(
+                lottoResults.values()
                 .stream()
                 .mapToLong(l -> l)
-                .sum();
+                .sum()
+        );
     }
 }

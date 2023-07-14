@@ -13,6 +13,10 @@ public class Count {
         this.value = value;
     }
 
+    public long getValue() {
+        return value;
+    }
+
     private void validatePositive(long value) {
         if (value < MIN_VALUE) {
             throw new IllegalArgumentException("개수가 음수일 수 없습니다.");
@@ -23,8 +27,8 @@ public class Count {
         return LongStream.range(0, value);
     }
 
-    public long getValue() {
-        return value;
+    public Money multiply(Money price) {
+        return price.multiply(value);
     }
 
     @Override
