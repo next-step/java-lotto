@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.stream.Collectors;
 import lotto.model.Lotto;
+import lotto.model.LottoCounts;
 import lotto.model.LottoMoney;
 import lotto.model.LottoResult;
 import lotto.model.Lottos;
@@ -22,10 +23,13 @@ public final class LottoOutputView {
         return LottoOutputViewHolder.INSTANCE;
     }
 
-    public void printBuyingCount(final LottoMoney lottoMoney) {
+    public void printBuyingCount(final LottoCounts lottoCounts) {
         System.out.println();
-        System.out.println("수동으로 " + lottoMoney.getManualLottoCount() + "장, 자동으로 "
-                + lottoMoney.getAutoCount() + "개를 구매했습니다.");
+        System.out.println("수동으로 " + lottoCounts.getManualLottoCount() + "장, 자동으로 "
+                + lottoCounts.getAutoLottoCount() + "개를 구매했습니다.");
+    }
+
+    public void printChange(final LottoMoney lottoMoney) {
         System.out.println("거스름돈은 " + lottoMoney.getChange() + "원 입니다.");
     }
 

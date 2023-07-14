@@ -37,7 +37,6 @@ public final class LottoInputView {
     }
 
     public int inputManualLottoNumber() {
-        // TODO 수동 개수
         try {
             System.out.println();
             System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
@@ -49,7 +48,6 @@ public final class LottoInputView {
     }
 
     public ManualLottos inputManualLottoNumbers(int manualLottoCount) {
-        // TODO 수동 입력
         try {
             System.out.println();
             System.out.println("수동으로 구매할 번호를 입력해 주세요.");
@@ -80,11 +78,11 @@ public final class LottoInputView {
         }
     }
 
-    private static int inputInt() throws NumberFormatException {
+    private int inputInt() {
         return Integer.parseInt(SCANNER.nextLine().strip());
     }
 
-    private static Lotto inputLotto() throws NumberFormatException {
+    private Lotto inputLotto() throws NumberFormatException {
         return new Lotto(Arrays.stream(SCANNER.nextLine().split(","))
                 .map(number -> Integer.parseInt(number.strip()))
                 .collect(Collectors.toUnmodifiableList()));

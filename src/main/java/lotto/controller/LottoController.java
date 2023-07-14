@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.model.AutoLottos;
 import lotto.model.Lotto;
+import lotto.model.LottoCounts;
 import lotto.model.LottoMoney;
 import lotto.model.LottoNumber;
 import lotto.model.LottoResult;
@@ -23,26 +24,46 @@ public final class LottoController {
     }
 
     public void run() {
-        int inputMoney = lottoInputView.inputMoney();
-        int manualLottoNumber = lottoInputView.inputManualLottoNumber();
-        LottoMoney lottoMoney = new LottoMoney(inputMoney, manualLottoNumber);
+        LottoMoney lottoMoney = inputLottoMoney();
+        LottoCounts lottoCounts = inputLottoCounts(lottoMoney);
+
         ManualLottos manualLottos = lottoInputView.inputManualLottoNumbers(
-                lottoMoney.getManualLottoCount());
-        AutoLottos autoLottos = new AutoLottos(lottoMoney.getAutoCount(),
+                lottoCounts.getManualLottoCount());
+        AutoLottos autoLottos = new AutoLottos(lottoCounts.getAutoLottoCount(),
                 RandomNumbersGenerator.getInstance());
 
-        lottoOutputView.printBuyingCount(lottoMoney);
-        lottoOutputView.printBuyingLotto(autoLottos);
+        printAutoLottos(lottoMoney, lottoCounts, autoLottos);
 
-        Lotto winningNumbers = lottoInputView.inputWinningNumbers();
-        LottoNumber bonusBall = lottoInputView.inputBonusBall();
-
-        WinningNumbers totalWinningNumbers = new WinningNumbers(winningNumbers, bonusBall);
+        WinningNumbers totalWinningNumbers = getWinningNumbers();
         RankResults totalRankResults = new RankResults(
                 manualLottos.matchWinningNumbers(totalWinningNumbers),
                 autoLottos.matchWinningNumbers(totalWinningNumbers)
         );
         LottoResult lottoResult = new LottoResult(totalRankResults, lottoMoney);
         lottoOutputView.printLottoResult(lottoResult);
+    }
+
+    private LottoMoney inputLottoMoney() {
+        int inputMoney = lottoInputView.inputMoney();
+        return new LottoMoney(inputMoney);
+    }
+
+    private LottoCounts inputLottoCounts(LottoMoney lottoMoney) {
+        int manualLottoNumber = lottoInputView.inputManualLottoNumber();
+        return new LottoCounts(lottoMoney.getTotalCount(), manualLottoNumber);
+    }
+
+    private void printAutoLottos(LottoMoney lottoMoney, LottoCounts lottoCounts,
+            AutoLottos autoLottos) {
+        lottoOutputView.printBuyingCount(lottoCounts);
+        lottoOutputView.printChange(lottoMoney);
+        lottoOutputView.printBuyingLotto(autoLottos);
+    }
+
+    private WinningNumbers getWinningNumbers() {
+        Lotto winningNumbers = lottoInputView.inputWinningNumbers();
+        LottoNumber bonusBall = lottoInputView.inputBonusBall();
+
+        return new WinningNumbers(winningNumbers, bonusBall);
     }
 }
