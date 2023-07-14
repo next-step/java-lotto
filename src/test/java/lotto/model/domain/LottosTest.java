@@ -1,7 +1,6 @@
 package lotto.model.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -14,22 +13,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 class LottosTest {
 
     @Test
-    void 로또_컬렉션_객체_생성() {
-        // given, when, then
-        assertDoesNotThrow(() -> new Lottos(0, null));
-    }
-
-    @Test
-    void 로또_컬렉션_리스트받아서_객체_생성() {
-        // given, when, then
-        assertDoesNotThrow(() -> new Lottos(null));
-
-    }
-
-    @Test
     void 로또_컬렉션_리스트받아서_객체_생성시_정상적으로_데이터_담기_성공() {
         // given, when
-        Lottos lottos = new Lottos(List.of(
+        Lottos lottos = new ManualLottos(List.of(
                 new Lotto(List.of(1, 2, 3, 4, 5, 6)),
                 new Lotto(List.of(7, 8, 9, 10, 11, 12))
         ));
@@ -49,7 +35,7 @@ class LottosTest {
         NumbersGenerator numberGenerator = new FixedNumbersGenerator(List.of(1, 2, 3, 4, 5, 6));
 
         // when
-        Lottos lottos = new Lottos(size, numberGenerator);
+        Lottos lottos = new AutoLottos(size, numberGenerator);
 
         // then
         assertThat(lottos.getLottos()).hasSize(size);
@@ -62,7 +48,7 @@ class LottosTest {
         NumbersGenerator numberGenerator = new FixedNumbersGenerator(List.of(1, 2, 3, 4, 5, 6));
 
         // when
-        Lottos lottos = new Lottos(size, numberGenerator);
+        Lottos lottos = new AutoLottos(size, numberGenerator);
 
         // then
         assertThat(lottos.getLottos().get(0)).isEqualTo(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
@@ -75,7 +61,7 @@ class LottosTest {
         final WinningNumbers winningNumbers = new WinningNumbers(
                 new Lotto(List.of(1, 2, 3, 4, 5, 6)),
                 LottoNumber.of(7));
-        final Lottos lottos = new Lottos(2, new FixedNumbersGenerator(generatedNumbers));
+        final Lottos lottos = new AutoLottos(2, new FixedNumbersGenerator(generatedNumbers));
 
         // when
         RankResults lottoResult = lottos.matchWinningNumbers(winningNumbers);

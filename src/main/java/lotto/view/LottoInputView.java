@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 import lotto.model.domain.Lotto;
 import lotto.model.domain.LottoNumber;
 import lotto.model.domain.Lottos;
+import lotto.model.domain.ManualLottos;
 
 public final class LottoInputView {
 
@@ -55,7 +56,7 @@ public final class LottoInputView {
             System.out.println("수동으로 구매할 번호를 입력해 주세요.");
             List<Lotto> manualLottoNumbers = IntStream.range(0, manualLottoCount)
                     .mapToObj(index -> inputLotto()).collect(Collectors.toList());
-            return new Lottos(manualLottoNumbers);
+            return new ManualLottos(manualLottoNumbers);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("올바르지 않은 입력입니다. ','로 구분하여 6개의 로또 번호를 입력해주세요.");
         }

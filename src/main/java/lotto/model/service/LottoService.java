@@ -1,5 +1,6 @@
 package lotto.model.service;
 
+import lotto.model.domain.AutoLottos;
 import lotto.model.domain.LottoMoney;
 import lotto.model.domain.LottoResult;
 import lotto.model.domain.Lottos;
@@ -16,7 +17,7 @@ public final class LottoService {
     public LottoService(final LottoMoney lottoMoney, Lottos manualLottos,
             final NumbersGenerator numbersGenerator) {
         this.lottoMoney = lottoMoney;
-        this.autoLottos = new Lottos(lottoMoney.getAutoCount(), numbersGenerator);
+        this.autoLottos = new AutoLottos(lottoMoney.getAutoCount(), numbersGenerator);
         this.manualLottos = manualLottos;
     }
 
