@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
-import lottogame.controller.purchase.spi.PurchaseViewer;
+import lottogame.controller.spi.PurchaseViewer;
 import lottogame.domain.LottoTicket;
 
 public class ConsolePurchaseViewer implements PurchaseViewer {

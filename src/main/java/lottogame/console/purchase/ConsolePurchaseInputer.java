@@ -1,7 +1,7 @@
 package lottogame.console.purchase;
 
 import java.util.Scanner;
-import lottogame.controller.purchase.spi.PurchaseInputer;
+import lottogame.controller.spi.PurchaseInputer;
 
 public class ConsolePurchaseInputer implements PurchaseInputer {
 

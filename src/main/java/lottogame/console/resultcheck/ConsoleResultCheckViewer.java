@@ -1,7 +1,7 @@
 package lottogame.console.resultcheck;
 
 import java.util.Map;
-import lottogame.controller.resultcheck.spi.ResultCheckViewer;
+import lottogame.controller.spi.ResultCheckViewer;
 import lottogame.domain.LottoPrize;
 import lottogame.service.response.LottoCheckResponse;
 
