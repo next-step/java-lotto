@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class Money {
 
-    public static final long LOTTO_PRICE = 1000L;
     private static final long MIN_PRICE = 0L;
     private static final long ZERO_DIVISION = 0L;
 
@@ -21,15 +20,15 @@ public class Money {
         }
     }
 
-    public long countLotto() {
-        validateLeastOneLotto();
-        validateNotZeroDominator(LOTTO_PRICE);
-        return this.value / LOTTO_PRICE;
+    public Count count(Money denominator) {
+        validateAtLeastOne(this.value, denominator.value);
+        validateNotZeroDominator(denominator.value);
+        return new Count(this.value / denominator.value);
     }
 
-    private void validateLeastOneLotto() {
-        if (value < LOTTO_PRICE) {
-            throw new IllegalStateException("로또를 구매할 수 없습니다.");
+    private void validateAtLeastOne(long value, long price) {
+        if (value < price) {
+            throw new IllegalStateException("현재 잔액으로는 구매할 수 없습니다.");
         }
     }
 

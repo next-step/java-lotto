@@ -1,5 +1,6 @@
 package lotto.dto;
 
+import lotto.domain.Count;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
@@ -10,13 +11,13 @@ import java.util.stream.Collectors;
 public class LottoStatusResponseDto {
 
     private final List<List<Integer>> lottoStatus;
-    private final int manualCount;
+    private final long manualCount;
 
-    public LottoStatusResponseDto(Lottos lottos, int manualCount) {
+    public LottoStatusResponseDto(Lottos lottos, Count manualCount) {
         this.lottoStatus = lottos.getLottos().stream()
                 .map(this::parseLotto)
                 .collect(Collectors.toList());
-        this.manualCount = manualCount;
+        this.manualCount = manualCount.getValue();
     }
 
     private List<Integer> parseLotto(Lotto lotto) {
@@ -30,7 +31,7 @@ public class LottoStatusResponseDto {
         return lottoStatus;
     }
 
-    public int getManualCount() {
+    public long getManualCount() {
         return manualCount;
     }
 }

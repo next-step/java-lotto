@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Count;
 import lotto.domain.Money;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -27,7 +28,8 @@ class MoneyTest {
     @DisplayName("로또 구매 불가 금액 입력시 로또 구매에서 예외를 던진다.")
     void validateNoLotto() {
         Money zeroMoney = new Money(0);
-        Assertions.assertThatThrownBy(zeroMoney::countLotto)
+        Money price = new Money(1000);
+        Assertions.assertThatThrownBy(() -> zeroMoney.count(price))
                 .isInstanceOf(IllegalStateException.class);
     }
 
@@ -35,7 +37,7 @@ class MoneyTest {
     @DisplayName("금액에 맞는 로또 개수를 반환한다.")
     void countLotto() {
         Money money = new Money(1234);
-        Assertions.assertThat(money.countLotto()).isEqualTo(1);
+        Assertions.assertThat(money.count(new Money(1000))).isEqualTo(new Count(1));
     }
 
     @Test

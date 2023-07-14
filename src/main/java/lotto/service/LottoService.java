@@ -7,14 +7,15 @@ import lotto.util.LottoGenerator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.LongStream;
 
 public class LottoService {
 
-    private final Lottos lottos;
-    private final int manualCount;
+    private static final Money LOTTO_PRICE = new Money(1000);
 
-    private LottoService(Lottos lottos, int manualCount) {
+    private final Lottos lottos;
+    private final Count manualCount;
+
+    private LottoService(Lottos lottos, Count manualCount) {
         this.lottos = lottos;
         this.manualCount = manualCount;
     }
@@ -24,11 +25,11 @@ public class LottoService {
     }
 
     public static LottoService buyLotto(Money money, Lottos manualLottos, LottoGenerator lottoGenerator) {
-        long countLotto = money.countLotto() - manualLottos.size();
-        List<Lotto> lottos = LongStream.range(0, countLotto)
+        Count autoCount = money.count(LOTTO_PRICE);
+        List<Lotto> lottos = autoCount.stream()
                 .mapToObj(l -> lottoGenerator.generateLotto())
                 .collect(Collectors.toList());
-        return new LottoService(manualLottos.combine(new Lottos(lottos)), manualLottos.size());
+        return new LottoService(manualLottos.combine(new Lottos(lottos)), new Count(manualLottos.size()));
     }
 
     public LottoStatusResponseDto buyStatus() {
