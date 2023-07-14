@@ -20,7 +20,7 @@ public class LottoGenerator {
     }
 
     public static List<Lotto> generateAutomatically(final long money) {
-        validate(money);
+        validateMoneyUnit(money);
         final List<Lotto> lottos = new ArrayList<>();
         for (long count = 0, maxCount = money / MONEY_UNIT; count < maxCount; count++) {
             lottos.add(auto());
@@ -28,7 +28,7 @@ public class LottoGenerator {
         return lottos;
     }
 
-    private static void validate(final long money) {
+    private static void validateMoneyUnit(final long money) {
         if (money % MONEY_UNIT != 0) {
             throw new IllegalArgumentException("구입금액은 " + MONEY_UNIT + "원 단위여야 합니다.");
         }
