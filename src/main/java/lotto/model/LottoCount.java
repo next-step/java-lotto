@@ -2,6 +2,8 @@ package lotto.model;
 
 public final class LottoCount {
 
+    public static final int MIN_LOTTO_COUNT = 0;
+
     private final int count;
 
     public LottoCount(final int count) {
@@ -10,8 +12,8 @@ public final class LottoCount {
     }
 
     private void validate(int count) {
-        if (count < 0) {
-            throw new IllegalArgumentException("로또의 개수는 0 이상입니다.");
+        if (count < MIN_LOTTO_COUNT) {
+            throw new IllegalArgumentException("로또의 개수는 " + MIN_LOTTO_COUNT + " 이상입니다.");
         }
     }
 
