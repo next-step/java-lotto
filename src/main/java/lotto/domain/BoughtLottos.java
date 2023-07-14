@@ -6,15 +6,15 @@ import java.util.stream.Collectors;
 public class BoughtLottos {
 
     private final int count;
-    private final List<Lotto> lottos;
+    private final List<Lotto> autoLottos;
 
     public BoughtLottos(final List<Lotto> lottos) {
         this.count = lottos.size();
-        this.lottos = lottos;
+        this.autoLottos = lottos;
     }
 
     public WinningStatistics winningResults(final WinningLotto winningLotto) {
-        return new WinningStatistics(lottos.stream()
+        return new WinningStatistics(autoLottos.stream()
                 .map(winningLotto::isMatch)
                 .collect(Collectors.toList()));
     }
@@ -23,7 +23,7 @@ public class BoughtLottos {
         return this.count;
     }
 
-    public List<Lotto> getLottos() {
-        return this.lottos;
+    public List<Lotto> getAutoLottos() {
+        return this.autoLottos;
     }
 }

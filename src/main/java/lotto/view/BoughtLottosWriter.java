@@ -11,7 +11,7 @@ public class BoughtLottosWriter {
 
     public void printBoughtLottos(final BoughtLottos boughtLottos) {
         System.out.println(boughtLottos.getCount() + "개를 구매했습니다.");
-        String collect = boughtLottos.getLottos()
+        String collect = boughtLottos.getAutoLottos()
                 .stream()
                 .map(BoughtLottosWriter::formatLottos)
                 .collect(Collectors.joining(NEW_LINE));

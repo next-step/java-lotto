@@ -22,7 +22,7 @@ public class LottoGeneratorTest {
         BoughtLottos boughtLottos = lottoGenerator.generate(money);
 
         /* then */
-        assertThat(boughtLottos.getLottos()).hasSize(Integer.parseInt(value) / Lotto.PRICE);
+        assertThat(boughtLottos.getAutoLottos()).hasSize(Integer.parseInt(value) / Lotto.PRICE);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class LottoGeneratorTest {
         BoughtLottos boughtLottos = lottoGenerator.generate(money);
 
         /* then */
-        assertThat(boughtLottos.getLottos()).containsExactlyInAnyOrder(
+        assertThat(boughtLottos.getAutoLottos()).containsExactlyInAnyOrder(
                 new Lotto(LottoTest.getBalls("1", "2", "3", "4", "5", "6")),
                 new Lotto(LottoTest.getBalls("7", "8", "9", "10", "11", "12"))
         );
