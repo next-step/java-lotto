@@ -26,10 +26,12 @@ public class RankTest {
 
     @ParameterizedTest
     @MethodSource("matchRank")
-    @DisplayName("일치하는 로또 넘버 개수에 따른 Rank 가 매치")
+    @DisplayName("일치하는 로또 넘버 개수에 따른 Rank 를 매치")
     void 로또_넘버_개수_랭크_매치(int count, boolean isBonus, Rank rank) {
-
+        // when
         Rank match = Rank.match(count, isBonus);
+
+        // then
         assertThat(match).isEqualTo(rank);
     }
 }

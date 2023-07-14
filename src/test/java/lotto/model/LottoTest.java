@@ -43,16 +43,23 @@ public class LottoTest {
 
     @ParameterizedTest
     @MethodSource("createLottoSuccess")
-    @DisplayName("여러 로또 넘버가 중복되지 않으면 정상")
+    @DisplayName("여러 로또 넘버가 중복되지 않아야한다.")
     void 로또_중복(List<Integer> numbers) {
-        assertThatCode(() -> new Lotto(createLottoNumbers(numbers)))
-                .doesNotThrowAnyException();
+        // when
+        Lotto lotto = new Lotto(createLottoNumbers(numbers));
+
+        // then
+        assertThat(lotto.getLottoNumbers()
+                .stream()
+                .distinct()
+                .count()).isEqualTo(6);
     }
 
     @ParameterizedTest
     @MethodSource("createLottoDuplicateFail")
     @DisplayName("여러 로또 넘버가 중복되면 예외를 던진다.")
     void 로또_중복_예외(List<Integer> numbers) {
+        // when , then
         assertThatCode(() -> new Lotto(createLottoNumbers(numbers)))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("로또 넘버는 중복되면 안됩니다.");
@@ -62,6 +69,7 @@ public class LottoTest {
     @MethodSource("createLottoLengthFail")
     @DisplayName("로또 번호는 6개가 아니면 예외를 던진다")
     void 로또_번호_6개가_아니면_예외_던진다(List<Integer> numbers) {
+        // when , then
         assertThatCode(() -> new Lotto(createLottoNumbers(numbers)))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("로또 번호는 6개이여야 합니다");
@@ -69,26 +77,33 @@ public class LottoTest {
 
     @ParameterizedTest
     @MethodSource("createLottoSuccess")
-    @DisplayName("로또 번호는 6개가 아니면 정상 동작")
+    @DisplayName("로또 번호는 6개여야한다.")
     void 로또_번호_6개이면_정상(List<Integer> numbers) {
-        assertThatCode(() -> new Lotto(createLottoNumbers(numbers)))
-                .doesNotThrowAnyException();
+        // when
+        Lotto lotto = new Lotto(createLottoNumbers(numbers));
+
+        // then
+        assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
     }
 
     @Test
-    @DisplayName("임의의 로또 번호가 로또에 포함되어 있는지 테스트")
+    @DisplayName("로또에 특정 로또번호가 포함되어있다면 참을 반환")
     void 로또_포함() {
+        // given
         Lotto lotto = new Lotto(createLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
 
+        // when , then
         assertThat(lotto.isContain(new LottoNumber(3))).isTrue();
     }
 
 
     @Test
-    @DisplayName("임의의 로또 번호가 로또에 포함되어 있는 않는 테스트")
+    @DisplayName("로또에 특정 로또번호가 포함되어있다면 거짓을 반환")
     void 로또_포함_X() {
+        // given
         Lotto lotto = new Lotto(createLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
 
+        // when , then
         assertThat(lotto.isContain(new LottoNumber(11))).isFalse();
     }
 
