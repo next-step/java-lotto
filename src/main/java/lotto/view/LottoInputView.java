@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.model.domain.Lotto;
 import lotto.model.domain.LottoNumber;
-import lotto.model.domain.Lottos;
 import lotto.model.domain.ManualLottos;
 
 public final class LottoInputView {
@@ -49,7 +48,7 @@ public final class LottoInputView {
         }
     }
 
-    public Lottos inputManualLottoNumbers(int manualLottoCount) {
+    public ManualLottos inputManualLottoNumbers(int manualLottoCount) {
         // TODO 수동 입력
         try {
             System.out.println();

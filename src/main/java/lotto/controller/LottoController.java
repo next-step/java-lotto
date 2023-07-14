@@ -1,13 +1,14 @@
 package lotto.controller;
 
+import lotto.model.domain.AutoLottos;
 import lotto.model.domain.Lotto;
 import lotto.model.domain.LottoMoney;
 import lotto.model.domain.LottoNumber;
 import lotto.model.domain.LottoResult;
-import lotto.model.domain.Lottos;
+import lotto.model.domain.ManualLottos;
+import lotto.model.domain.RankResults;
 import lotto.model.domain.WinningNumbers;
 import lotto.model.domain.generator.RandomNumbersGenerator;
-import lotto.model.service.LottoService;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
@@ -25,22 +26,23 @@ public final class LottoController {
         int inputMoney = lottoInputView.inputMoney();
         int manualLottoNumber = lottoInputView.inputManualLottoNumber();
         LottoMoney lottoMoney = new LottoMoney(inputMoney, manualLottoNumber);
-        Lottos manualLottos = lottoInputView.inputManualLottoNumbers(
+        ManualLottos manualLottos = lottoInputView.inputManualLottoNumbers(
                 lottoMoney.getManualLottoCount());
-
-        final LottoService lottoService = new LottoService(
-                lottoMoney,
-                manualLottos,
+        AutoLottos autoLottos = new AutoLottos(lottoMoney.getAutoCount(),
                 RandomNumbersGenerator.getInstance());
 
-        lottoOutputView.printBuyingCount(lottoService.getLottoMoney());
-        lottoOutputView.printBuyingLotto(lottoService.getAutoLottos());
+        lottoOutputView.printBuyingCount(lottoMoney);
+        lottoOutputView.printBuyingLotto(autoLottos);
 
         Lotto winningNumbers = lottoInputView.inputWinningNumbers();
         LottoNumber bonusBall = lottoInputView.inputBonusBall();
 
-        LottoResult lottoResult = lottoService.calculateLottoResult(
-                new WinningNumbers(winningNumbers, bonusBall));
+        WinningNumbers totalWinningNumbers = new WinningNumbers(winningNumbers, bonusBall);
+        RankResults totalRankResults = new RankResults(
+                manualLottos.matchWinningNumbers(totalWinningNumbers),
+                autoLottos.matchWinningNumbers(totalWinningNumbers)
+        );
+        LottoResult lottoResult = new LottoResult(totalRankResults, lottoMoney);
         lottoOutputView.printLottoResult(lottoResult);
     }
 }
