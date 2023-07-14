@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.Map;
+import java.util.Objects;
 
 public final class LottoResult {
 
@@ -27,5 +28,23 @@ public final class LottoResult {
 
     public double getProfitRate() {
         return profitRate.getProfitRate();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoResult that = (LottoResult) o;
+        return Objects.equals(lottoResultStatistics, that.lottoResultStatistics)
+                && Objects.equals(profitRate, that.profitRate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoResultStatistics, profitRate);
     }
 }

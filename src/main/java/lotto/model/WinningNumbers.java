@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.Objects;
+
 public final class WinningNumbers {
 
     private final Lotto winningNumbers;
@@ -22,5 +24,23 @@ public final class WinningNumbers {
         final int matchCount = lotto.checkMatchCount(winningNumbers);
         final boolean hasBonusBall = lotto.hasNumber(bonusBall);
         return Rank.valueOf(matchCount, hasBonusBall);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        WinningNumbers that = (WinningNumbers) o;
+        return Objects.equals(winningNumbers, that.winningNumbers)
+                && Objects.equals(bonusBall, that.bonusBall);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winningNumbers, bonusBall);
     }
 }

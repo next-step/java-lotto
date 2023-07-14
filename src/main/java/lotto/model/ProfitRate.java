@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.Objects;
+
 public final class ProfitRate {
 
     public static final double MIN_SPENT_MONEY = 1000.0;
@@ -31,5 +33,22 @@ public final class ProfitRate {
 
     public double getProfitRate() {
         return profitRate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        ProfitRate that = (ProfitRate) o;
+        return Double.compare(that.profitRate, profitRate) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(profitRate);
     }
 }

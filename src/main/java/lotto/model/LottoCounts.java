@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.Objects;
+
 public class LottoCounts {
 
     private final LottoCount autoLottoCount;
@@ -26,5 +28,23 @@ public class LottoCounts {
 
     public int getManualLottoCount() {
         return manualLottoCount.getCount();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoCounts that = (LottoCounts) o;
+        return Objects.equals(autoLottoCount, that.autoLottoCount)
+                && Objects.equals(manualLottoCount, that.manualLottoCount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(autoLottoCount, manualLottoCount);
     }
 }

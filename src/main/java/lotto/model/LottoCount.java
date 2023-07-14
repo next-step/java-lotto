@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.Objects;
+
 public final class LottoCount {
 
     public static final int MIN_LOTTO_COUNT = 0;
@@ -19,5 +21,22 @@ public final class LottoCount {
 
     public int getCount() {
         return count;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoCount that = (LottoCount) o;
+        return count == that.count;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(count);
     }
 }
