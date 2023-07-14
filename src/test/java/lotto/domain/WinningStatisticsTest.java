@@ -12,7 +12,7 @@ public class WinningStatisticsTest {
     @DisplayName("당첨 결과가 비어있을 경우 테스트")
     void winningStatistics_emptyLottoResult() {
         /* given & when & then */
-        assertThatThrownBy(() -> new WinningStatistics(Collections.emptyList()))
+        assertThatThrownBy(() -> new WinningStatistics(new LottoResults(Collections.emptyList())))
                 .isExactlyInstanceOf(IllegalArgumentException.class);
     }
 }

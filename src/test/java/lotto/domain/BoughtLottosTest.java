@@ -54,11 +54,10 @@ public class BoughtLottosTest {
                 boughtLottos.winningResults(winningLotto);
 
         /* then */
-        assertThat(lottoResults.getLottoResults()).hasSize(lottos.size());
         assertThat(lottoResults.getLottoResults()).containsExactlyInAnyOrder(
-                new LottoResult(6, false),
-                new LottoResult(5, true),
-                new LottoResult(0, false)
+                WinningCriteria.FIRST,
+                WinningCriteria.SECOND,
+                WinningCriteria.NONE
         );
     }
 }

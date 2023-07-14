@@ -4,17 +4,22 @@ import java.util.List;
 
 public class LottoResults {
 
-    private final List<LottoResult> lottoResults;
+    private static final String EMPTY_LOTTO_RESULTS_EXCEPTION_MESSAGE = "당첨 결과가 비어있어 통계를 낼 수 없습니다.";
 
-    public LottoResults(final List<LottoResult> lottoResults) {
+    private final List<WinningCriteria> lottoResults;
+
+    public LottoResults(final List<WinningCriteria> lottoResults) {
+        validate(lottoResults);
         this.lottoResults = lottoResults;
     }
 
-    public WinningStatistics getWinningStatistics() {
-        return new WinningStatistics(lottoResults);
+    private void validate(final List<WinningCriteria> lottoResults) {
+        if (lottoResults == null || lottoResults.isEmpty()) {
+            throw new IllegalArgumentException(EMPTY_LOTTO_RESULTS_EXCEPTION_MESSAGE);
+        }
     }
 
-    public List<LottoResult> getLottoResults() {
-        return this.lottoResults;
+    public List<WinningCriteria> getLottoResults() {
+        return lottoResults;
     }
 }

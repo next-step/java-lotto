@@ -14,8 +14,8 @@ public class LottoResultsTest {
     void lottoResults_create() {
         /* given & when & then */
         assertDoesNotThrow(() -> new LottoResults(List.of(
-                new LottoResult(1, false),
-                new LottoResult(6, true)))
+                WinningCriteria.winningResult(1, false),
+                WinningCriteria.winningResult(6, true)))
         );
     }
 
@@ -24,12 +24,12 @@ public class LottoResultsTest {
     void lottoResults_getWinningStatistics() {
         /* given */
         LottoResults lottoResults = new LottoResults(List.of(
-                new LottoResult(1, false),
-                new LottoResult(6, true))
+                WinningCriteria.winningResult(1, false),
+                WinningCriteria.winningResult(6, true))
         );
 
         /* when */
-        WinningStatistics winningStatistics = lottoResults.getWinningStatistics();
+        WinningStatistics winningStatistics = new WinningStatistics(lottoResults);
 
         /* then */
         assertThat(winningStatistics.getRank(WinningCriteria.FIRST)).isEqualTo(1);
@@ -40,12 +40,12 @@ public class LottoResultsTest {
     void lottoResults_getTotalPrize() {
         /* given */
         LottoResults lottoResults = new LottoResults(List.of(
-                new LottoResult(1, false),
-                new LottoResult(6, true))
+                WinningCriteria.winningResult(1, false),
+                WinningCriteria.winningResult(6, true))
         );
 
         /* when */
-        WinningStatistics winningStatistics = lottoResults.getWinningStatistics();
+        WinningStatistics winningStatistics = new WinningStatistics(lottoResults);
 
         /* then */
         assertThat(winningStatistics.getTotalPrize()).isEqualTo(WinningCriteria.FIRST.getPrize());

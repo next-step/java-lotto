@@ -17,10 +17,10 @@ public class WinningLotto {
         }
     }
 
-    public LottoResult match(final Lotto lotto) {
+    public WinningCriteria match(final Lotto lotto) {
         final int matchCount = lotto.matchCount(this.winningLotto);
         final boolean isMatchedBonusBall = lotto.containsBall(this.bonusBall);
 
-        return new LottoResult(matchCount, isMatchedBonusBall);
+        return WinningCriteria.winningResult(matchCount, isMatchedBonusBall);
     }
 }
