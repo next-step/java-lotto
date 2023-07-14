@@ -30,4 +30,8 @@ public class LottoInput {
     public int inputBonusNumber() {
         return Math.toIntExact(inputAmount());
     }
+
+    public int inputManualQuantity() {
+        return Math.toIntExact(inputAmount());
+    }
 }

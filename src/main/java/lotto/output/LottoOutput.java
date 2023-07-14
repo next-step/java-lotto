@@ -10,8 +10,8 @@ public class LottoOutput {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public void printQuantity(final int amount) {
-        System.out.println(amount + "개를 구매했습니다.");
+    public void printQuantity(final int manualQuantity, final int autoQuantity) {
+        System.out.println("수동으로 " + manualQuantity + "장, 자동으로 " + autoQuantity + "개를 구매했습니다.");
     }
 
     public void printAskWinningNumbers() {
@@ -62,5 +62,13 @@ public class LottoOutput {
 
     public void printSectionDivider() {
         System.out.println();
+    }
+
+    public void printAskManualQuantity() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public void printAskManualLottonumbers() {
+        System.out.println("수동으로 구매할 로또 번호를 입력해 주세요.");
     }
 }

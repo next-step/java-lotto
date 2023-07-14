@@ -1,12 +1,10 @@
 package lotto;
 
-import lotto.domain.LottoGroup;
-import lotto.domain.LottoResult;
-import lotto.domain.Money;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.input.LottoInput;
 import lotto.output.LottoOutput;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoApplication {
@@ -20,21 +18,50 @@ public class LottoApplication {
 
     public void run() {
         Money purchaseMoney = inputPurchaseMoney();
-        output.printQuantity(purchaseMoney.calculateQuantity(new Money(LottoGroup.LOTTO_PRICE)));
-        LottoGroup lottoGroup = LottoGroup.from(purchaseMoney);
+        int manualQuantity = inputManualQuantity();
+        int autoQuantity = purchaseMoney.calculateQuantity(new Money(LottoGroup.LOTTO_PRICE)) - manualQuantity;
 
-        output.printLottos(lottoGroup);
+        LottoGroup manualLottoGroup = inputManualLottos(manualQuantity);
+
+        output.printQuantity(manualQuantity, autoQuantity);
+
+        LottoGroup autoLottoGroup = LottoGroup.from(purchaseMoney);
+
+        output.printLottos(autoLottoGroup);
         output.printSectionDivider();
-
+        
         WinningLotto winningLotto = inputWinningLotto();
         output.printSectionDivider();
 
-        printResult(LottoResult.of(lottoGroup, winningLotto));
+        printResult(LottoResult.of(autoLottoGroup, winningLotto));
+    }
+
+    private int inputManualQuantity() {
+        output.printAskManualQuantity();
+        int manualQuantity = input.inputManualQuantity();
+        output.printSectionDivider();
+
+        return manualQuantity;
+    }
+
+    private LottoGroup inputManualLottos(int manualQuantity) {
+        output.printAskManualLottonumbers();
+        List<Lotto> manualLottos = new ArrayList<>();
+
+        for (int i = 0; i < manualQuantity; i++) {
+            manualLottos.add(Lotto.createSpecificLotto(input.inputLottoNumbers()));
+        }
+
+        output.printSectionDivider();
+
+        return new LottoGroup(manualLottos);
     }
 
     private Money inputPurchaseMoney() {
         output.printAskPurchaseMoney();
-        return new Money(input.inputPurchaseMoney());
+        Money purchaseMoney = new Money(input.inputPurchaseMoney());
+        output.printSectionDivider();
+        return purchaseMoney;
     }
 
     private WinningLotto inputWinningLotto() {
