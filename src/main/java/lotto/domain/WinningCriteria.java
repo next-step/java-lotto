@@ -13,7 +13,7 @@ public enum WinningCriteria {
 
     private final int matchCount;
     private final Set<Boolean> bonusResults;
-    private final int prize;
+    private final long prize;
 
     WinningCriteria(final int matchCount, final int prize) {
         this(matchCount, Set.of(false, true), prize);
@@ -39,7 +39,7 @@ public enum WinningCriteria {
         return this.matchCount;
     }
 
-    public int getPrize() {
+    public long getPrize() {
         return this.prize;
     }
 }

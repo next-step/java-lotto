@@ -55,11 +55,11 @@ public class WinningStatisticsWriter {
         }
     }
 
-    private void printStatisticsForBonus(final int matchCount, final int prize, final int boughtCount) {
+    private void printStatisticsForBonus(final int matchCount, final long prize, final int boughtCount) {
         System.out.println(matchCount + "개 일치 , 보너스 볼 일치(" + prize + "원)- " + boughtCount + "개");
     }
 
-    private void printStatistics(final int matchCount, final int prize, final int boughtCount) {
+    private void printStatistics(final int matchCount, final long prize, final int boughtCount) {
         System.out.println(matchCount + "개 일치 (" + prize + "원)- " + boughtCount + "개");
     }
 }

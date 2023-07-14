@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,11 +44,9 @@ public class WinningStatistics {
     }
 
     private long initTotalPrize() {
-        long sum = 0L;
-        for (Entry<WinningCriteria, Integer> entry : ranks.entrySet()) {
-            sum += (entry.getKey().getPrize() * (long) entry.getValue());
-        }
-        return sum;
+        return Arrays.stream(WinningCriteria.values())
+                .mapToLong(criteria -> criteria.getPrize() * ranks.get(criteria))
+                .sum();
     }
 
     public int getRank(final WinningCriteria criteria) {
