@@ -4,9 +4,9 @@ import java.util.Map;
 
 public final class LottoResult {
 
-    public static final int DEFAULT_VALUE = 0;
+    public static final long DEFAULT_VALUE = 0L;
 
-    private final Map<Rank, Integer> lottoResultStatistics;
+    private final Map<Rank, Long> lottoResultStatistics;
     private final double profitRate;
 
     public LottoResult(final RankResults ranks, final LottoMoney lottoMoney) {
@@ -21,7 +21,7 @@ public final class LottoResult {
         return totalPrize / lottoMoney.getTotalSpentMoney();
     }
 
-    public int getCount(final Rank rank) {
+    public long getCount(final Rank rank) {
         return lottoResultStatistics.getOrDefault(rank, DEFAULT_VALUE);
     }
 

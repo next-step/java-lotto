@@ -1,14 +1,13 @@
 package lotto.model.domain;
 
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public final class RankResults {
-
-    private static final int DEFAULT_VALUE = 0;
-
+    
     private final List<Rank> ranks;
 
     public RankResults(final List<Rank> ranks) {
@@ -20,14 +19,9 @@ public final class RankResults {
         this.ranks.addAll(rankResults2.ranks);
     }
 
-    public Map<Rank, Integer> getRanksCounts() {
-
-        EnumMap<Rank, Integer> ranksCounts = new EnumMap<>(Rank.class);
-        ranks.forEach(rank -> ranksCounts.put(
-                rank,
-                ranksCounts.getOrDefault(rank, DEFAULT_VALUE) + 1
-        ));
-        return ranksCounts;
+    public Map<Rank, Long> getRanksCounts() {
+        return ranks.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
     public List<Rank> getRanks() {

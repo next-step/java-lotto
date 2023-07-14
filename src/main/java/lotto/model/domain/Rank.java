@@ -38,7 +38,7 @@ public enum Rank {
                 .orElse(NONE);
     }
 
-    public static long getTotalPrize(Rank rank, int count) {
+    public static long getTotalPrize(Rank rank, long count) {
         return rank.prize * count;
     }
 

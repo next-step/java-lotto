@@ -35,13 +35,13 @@ class RankResultsTest {
         RankResults rankResults = new RankResults(List.of(Rank.FIRST, Rank.SECOND, Rank.NONE));
 
         // when
-        Map<Rank, Integer> counts = rankResults.getRanksCounts();
+        Map<Rank, Long> counts = rankResults.getRanksCounts();
 
         // then
         assertThat(counts).contains(
-                entry(Rank.FIRST, 1),
-                entry(Rank.SECOND, 1),
-                entry(Rank.NONE, 1)
+                entry(Rank.FIRST, 1L),
+                entry(Rank.SECOND, 1L),
+                entry(Rank.NONE, 1L)
         );
 
     }
