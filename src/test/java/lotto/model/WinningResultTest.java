@@ -24,7 +24,7 @@ public class WinningResultTest {
                         createLotto(1, 2, 3, 4, 5, 6),
                         createLotto(1, 3, 11, 12, 5, 6),
                         createLotto(1, 2, 3, 4, 5, 6)),
-                new LottoMoney(14000)
+                14, 0
         );
 
         // when
@@ -52,7 +52,7 @@ public class WinningResultTest {
                         createLotto(11, 22, 33, 44, 15, 16),
                         createLotto(1, 3, 11, 12, 5, 7),
                         createLotto(12, 23, 31, 42, 15, 16)),
-                new LottoMoney(14000)
+                14, 0
         );
 
         // when
