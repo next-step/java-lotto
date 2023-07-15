@@ -27,6 +27,8 @@
 * LottoResult
   - field : resultMap
   - [x] : 결과 통계
+* LottoPurchase
+  - [x] validation : 구입 금액이 수동 로또 수 * 1000 이상 인지?
 
 ### View
 * [x] 구입금액 - 입력
