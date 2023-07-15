@@ -17,6 +17,20 @@ public final class Lotto {
         this.lottoNumbers = toLottoNumbers(numbers);
     }
 
+    public long countMatchLottoNumber(final Lotto target) {
+        return this.lottoNumbers.stream()
+                .filter(target::containsLottoNumber)
+                .count();
+    }
+
+    public boolean containsLottoNumber(final LottoNumber bonus) {
+        return lottoNumbers.contains(bonus);
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     private static void validateLottoNumberCount(final List<Integer> numbers) {
         if (numbers.size() != REQUIRED_LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
@@ -32,20 +46,6 @@ public final class Lotto {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
 
-        return lottoNumbers;
-    }
-
-    public long countMatchLottoNumber(final Lotto target) {
-        return this.lottoNumbers.stream()
-                .filter(target::containsLottoNumber)
-                .count();
-    }
-
-    public boolean containsLottoNumber(final LottoNumber bonus) {
-        return lottoNumbers.contains(bonus);
-    }
-
-    public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 

@@ -13,17 +13,6 @@ public class LottoResult {
         ranks.forEach(this::increaseRankCount);
     }
 
-    private long calculateTotalPrize() {
-        return Arrays.stream(Rank.values())
-                .mapToLong(rank -> rank.calculatePrize(getCount(rank)))
-                .sum();
-    }
-
-
-    private void increaseRankCount(final Rank rank) {
-        rankCount.put(rank, getCount(rank) + 1);
-    }
-
     public Long getCount(final Rank rank) {
         return rankCount.getOrDefault(rank, 0L);
     }
@@ -32,5 +21,15 @@ public class LottoResult {
     // TODO: 수익률 계산 방법 변경?
     public double calculateRateOfReturn(final long money) {
         return calculateTotalPrize() / (double) money;
+    }
+
+    private long calculateTotalPrize() {
+        return Arrays.stream(Rank.values())
+                .mapToLong(rank -> rank.calculatePrize(getCount(rank)))
+                .sum();
+    }
+
+    private void increaseRankCount(final Rank rank) {
+        rankCount.put(rank, getCount(rank) + 1);
     }
 }

@@ -72,10 +72,6 @@ public enum Rank {
         return this.prize * count;
     }
 
-    private boolean match(final long matchLottoNumber, final boolean containsBonus) {
-        return criteria.test(matchLottoNumber, containsBonus);
-    }
-
     public long getMatchLottoNumber() {
         return matchLottoNumber;
     }
@@ -86,5 +82,9 @@ public enum Rank {
 
     public long getPrize() {
         return prize;
+    }
+
+    private boolean match(final long matchLottoNumber, final boolean containsBonus) {
+        return criteria.test(matchLottoNumber, containsBonus);
     }
 }

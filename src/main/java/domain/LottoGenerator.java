@@ -18,11 +18,6 @@ public class LottoGenerator {
         /* no-op */
     }
 
-    private static Lotto auto() {
-        Collections.shuffle(candidates);
-        return new Lotto(candidates.subList(0, Lotto.REQUIRED_LOTTO_NUMBER_COUNT));
-    }
-
     public static List<Lotto> generateAutomatically(final long money) {
         validateMoneyUnit(money);
 
@@ -32,6 +27,11 @@ public class LottoGenerator {
         }
 
         return lottos;
+    }
+
+    private static Lotto auto() {
+        Collections.shuffle(candidates);
+        return new Lotto(candidates.subList(0, Lotto.REQUIRED_LOTTO_NUMBER_COUNT));
     }
 
     private static void validateMoneyUnit(final long money) {
