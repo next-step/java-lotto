@@ -27,7 +27,7 @@ public class LottoPurchaserTest {
         // given
         LottoPurchaser purchaser = new LottoPurchaser(new LottoMoney(14000));
         // when
-        purchaser = purchaser.buyAutoTicket();
+        purchaser = purchaser.buyAutoTicket(new AutoLottoGenerator());
         // then
         assertThat(purchaser.getPurchasedLottos().size()).isEqualTo(14);
     }

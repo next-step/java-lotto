@@ -20,11 +20,11 @@ public class LottoPurchaser {
         this.purchasedLottos = lottos;
     }
 
-    public LottoPurchaser buyAutoTicket() {
+    public LottoPurchaser buyAutoTicket(LottoGenerator lottoGenerator) {
         LottoMoney afterMoney = this.currentMoney;
         List<Lotto> newLotto = new ArrayList<>(this.purchasedLottos);
         while (afterMoney.isPositive()) {
-            newLotto.add(new Lotto(new AutoLottoGenerator().generate()));
+            newLotto.add(new Lotto(lottoGenerator.generate()));
             afterMoney = afterMoney.subtractByLottoCount(new Count(ONE));
         }
         return new LottoPurchaser(afterMoney, newLotto);
@@ -42,7 +42,7 @@ public class LottoPurchaser {
 
     public LottoPurchaser purchaseLotto(final Count manualCount,
         final List<List<Integer>> manualLotto) {
-        return buyFixTicket(manualCount, manualLotto).buyAutoTicket();
+        return buyFixTicket(manualCount, manualLotto).buyAutoTicket(new AutoLottoGenerator());
     }
 
     private List<LottoNumber> convertLottoNumber(final List<Integer> lottos) {
