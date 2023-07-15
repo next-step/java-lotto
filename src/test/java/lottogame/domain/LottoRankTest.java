@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("FieldCanBeLocal")
-@DisplayName("LottoNumber 클래스")
-class LottoPrizeTest {
+@DisplayName("LottoRank 클래스")
+class LottoRankTest {
 
     @Nested
     @DisplayName("of 메소드는")
