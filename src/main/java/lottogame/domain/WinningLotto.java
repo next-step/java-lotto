@@ -11,7 +11,7 @@ public class WinningLotto {
     private final LottoBonus lottoBonus;
 
     public WinningLotto(Set<Integer> lottoNumbers, int bonusNumber) {
-        this.lottoTicket = new LottoTicket(lottoNumbers);
+        this.lottoTicket = new ManualLottoTicket(lottoNumbers);
         this.lottoBonus = new LottoBonus(bonusNumber, this.lottoTicket);
     }
 

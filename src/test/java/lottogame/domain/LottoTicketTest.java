@@ -1,16 +1,16 @@
 package lottogame.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
-import java.util.Set;
+import lottogame.domain.mock.MockLottoTicket;
 import lottogame.domain.spi.NumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
+
+import java.util.Set;
+
+import static org.assertj.core.api.Assertions.*;
 
 @SuppressWarnings("FieldCanBeLocal")
 @DisplayName("LottoTicket 클래스")
@@ -29,7 +29,7 @@ class LottoTicketTest {
             @Test
             @DisplayName("생성할 수 있다.")
             void It_Create_Success() {
-                assertThatCode(() -> new LottoTicket(lottoValues)).doesNotThrowAnyException();
+                assertThatCode(() -> new MockLottoTicket(lottoValues)).doesNotThrowAnyException();
             }
         }
 
@@ -43,9 +43,9 @@ class LottoTicketTest {
             @Test
             @DisplayName("IllegalArgumentException을 던진다.")
             void It_Throw_IllegalArgumentException() {
-                assertThatThrownBy(() -> new LottoTicket(lessLottoValues)).isInstanceOf(
+                assertThatThrownBy(() -> new MockLottoTicket(lessLottoValues)).isInstanceOf(
                     IllegalArgumentException.class);
-                assertThatThrownBy(() -> new LottoTicket(moreLottoValues)).isInstanceOf(
+                assertThatThrownBy(() -> new MockLottoTicket(moreLottoValues)).isInstanceOf(
                     IllegalArgumentException.class);
             }
         }
@@ -58,7 +58,7 @@ class LottoTicketTest {
             @NullSource
             @DisplayName("NullPointerException을 던진다.")
             void It_Throw_IllegalArgumentException(Set<Integer> nullValue) {
-                assertThatThrownBy(() -> new LottoTicket(nullValue)).isInstanceOf(NullPointerException.class);
+                assertThatThrownBy(() -> new MockLottoTicket(nullValue)).isInstanceOf(NullPointerException.class);
             }
         }
 
@@ -71,7 +71,7 @@ class LottoTicketTest {
             @Test
             @DisplayName("생성할 수 있다.")
             void It_Create_Success() {
-                assertThatCode(() -> new LottoTicket(numberGenerator)).doesNotThrowAnyException();
+                assertThatCode(() -> new MockLottoTicket(numberGenerator)).doesNotThrowAnyException();
             }
         }
 
@@ -84,7 +84,7 @@ class LottoTicketTest {
             @Test
             @DisplayName("NullPointerException을 던진다.")
             void It_Throw_NullPointerException() {
-                assertThatThrownBy(() -> new LottoTicket(nullNumberGenerator)).isInstanceOf(
+                assertThatThrownBy(() -> new MockLottoTicket(nullNumberGenerator)).isInstanceOf(
                     NullPointerException.class);
             }
 
@@ -101,8 +101,8 @@ class LottoTicketTest {
         class Context_Same_Lotto_Numbers {
 
             private final Set<Integer> lottoNumbers = Set.of(1, 2, 3, 4, 5, 45);
-            private final LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-            private final LottoTicket sameLottoTicket = new LottoTicket(lottoNumbers);
+            private final LottoTicket lottoTicket = new MockLottoTicket(lottoNumbers);
+            private final LottoTicket sameLottoTicket = new MockLottoTicket(lottoNumbers);
 
             @Test
             @DisplayName("논리적으로 동일하다")
@@ -122,7 +122,7 @@ class LottoTicketTest {
         class Context_Input_Same_LottoNumber {
 
             private static final int SAME_LOTTO_NUMBER = 1;
-            private final LottoTicket lottoTicket = new LottoTicket(Set.of(SAME_LOTTO_NUMBER, 2, 3, 4, 5, 6));
+            private final LottoTicket lottoTicket = new MockLottoTicket(Set.of(SAME_LOTTO_NUMBER, 2, 3, 4, 5, 6));
             private final LottoNumber lottoNumber = LottoNumber.valueOf(SAME_LOTTO_NUMBER);
 
             @Test
@@ -142,8 +142,8 @@ class LottoTicketTest {
         class Context_Input_Lotto_Numbers {
 
             private final Set<Integer> lottoNumberNumbers = Set.of(1, 2, 3, 4, 5, 6);
-            private final LottoTicket lottoTicket = new LottoTicket(lottoNumberNumbers);
-            private final LottoTicket sameLottoTicket = new LottoTicket(lottoNumberNumbers);
+            private final LottoTicket lottoTicket = new MockLottoTicket(lottoNumberNumbers);
+            private final LottoTicket sameLottoTicket = new MockLottoTicket(lottoNumberNumbers);
 
             @Test
             @DisplayName("일치한 갯수를 반환한다.")

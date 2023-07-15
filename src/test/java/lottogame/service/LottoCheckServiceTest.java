@@ -1,15 +1,17 @@
 package lottogame.service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import lottogame.domain.LottoRank;
 import lottogame.domain.LottoTicket;
+import lottogame.domain.mock.MockLottoTicket;
 import lottogame.service.response.LottoCheckResponse;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @SuppressWarnings("FieldCanBeLocal")
 @DisplayName("LottoCheckService 클래스")
@@ -40,10 +42,10 @@ class LottoCheckServiceTest {
             }
 
             private List<LottoTicket> getLottoTicketRequest() {
-                LottoTicket firstPrizeLottoTicket = new LottoTicket((count) -> selectedLottoNumbers);
-                LottoTicket secondPrizeLottoTicket = new LottoTicket(
+                LottoTicket firstPrizeLottoTicket = new MockLottoTicket((count) -> selectedLottoNumbers);
+                LottoTicket secondPrizeLottoTicket = new MockLottoTicket(
                     (count) -> Set.of(1, 2, 3, 4, 5, BONUS_NUMBER));
-                LottoTicket nonePrizeLottoTicket = new LottoTicket(
+                LottoTicket nonePrizeLottoTicket = new MockLottoTicket(
                     (count) -> Set.of(8, 9, 10, 11, 12, 13));
 
                 return List.of(firstPrizeLottoTicket, secondPrizeLottoTicket, nonePrizeLottoTicket);

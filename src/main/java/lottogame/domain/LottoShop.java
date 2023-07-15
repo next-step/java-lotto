@@ -22,7 +22,7 @@ public class LottoShop {
     private List<LottoTicket> createLottoTickets(int money, NumberGenerator numberGenerator) {
         List<LottoTicket> lottoTicketList = new ArrayList<>();
         for (int count = 0; count < money / LottoTicket.PURCHASABLE_UNIT; count++) {
-            lottoTicketList.add(new LottoTicket(numberGenerator));
+            lottoTicketList.add(new AutoLottoTicket(numberGenerator));
         }
         return lottoTicketList;
     }
