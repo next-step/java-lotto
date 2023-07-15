@@ -1,11 +1,14 @@
 package lotto.view;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.game.Lotto;
+import lotto.domain.game.LottoCount;
 import lotto.domain.game.LottoNumber;
 import lotto.domain.game.Lottos;
 import lotto.domain.statistics.LottoResult;
@@ -28,19 +31,37 @@ public final class LottoView {
         return money;
     }
 
+    public int readLottoManualCount() {
+        System.out.println();
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int count;
+        try {
+            count = scanner.nextInt();
+            scanner.nextLine();
+        } catch (NoSuchElementException ignore) {
+            throw new IllegalArgumentException("숫자를 입력해 주세요");
+        }
+        return count;
+    }
+
+    public List<String> readLottoManualNumbers(LottoCount lottoCount) {
+        System.out.println();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<String> lottoManuals = new ArrayList<>();
+        for (int i = 0; i < lottoCount.getManualCount(); i++) {
+            lottoManuals.add(validateBlank(scanner.nextLine()));
+        }
+        return lottoManuals;
+    }
+
     public String readWinningLotto() {
+        System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return validateBlank(scanner.nextLine().trim());
     }
 
-    private String validateBlank(final String text) {
-        if (Objects.isNull(text) || text.isBlank()) {
-            throw new IllegalArgumentException("값을 입력해 주세요");
-        }
-        return text;
-    }
-
     public int readBonusBall() {
+        System.out.println();
         System.out.println("보너스 볼을 입력해 주세요.");
         int bonusBall;
         try {
@@ -53,8 +74,19 @@ public final class LottoView {
         return bonusBall;
     }
 
-    public void printLottoCount(final int count) {
-        System.out.println(count + "개를 구매했습니다.");
+
+    private String validateBlank(final String text) {
+        if (Objects.isNull(text) || text.isBlank()) {
+            throw new IllegalArgumentException("값을 입력해 주세요");
+        }
+        return text;
+    }
+
+    public void printLottoCount(final LottoCount lottoCount) {
+        System.out.println();
+        System.out.println(MessageFormat.format("수동으로 {0}장, 자동으로 {1}개를 구매했습니다.",
+            lottoCount.getManualCount(),
+            lottoCount.getAutoCount()));
     }
 
     public void printLottos(final Lottos lottos) {
@@ -71,6 +103,7 @@ public final class LottoView {
     }
 
     public void printLottoResult(final LottoResults lottoResults) {
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
