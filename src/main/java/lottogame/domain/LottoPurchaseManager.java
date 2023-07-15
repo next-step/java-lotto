@@ -44,7 +44,8 @@ public class LottoPurchaseManager {
 
     private List<LottoTicket> createLottoTickets(long money) {
         List<LottoTicket> lottoTicketList = new ArrayList<>();
-        for (int count = 0; count < money / LottoTicket.PURCHASABLE_UNIT; count++) {
+        int purchaseCount = (int) (money / LottoTicket.PURCHASABLE_UNIT);
+        for (int count = 0; count < purchaseCount; count++) {
             lottoTicketList.add(new LottoTicket(numberGenerator));
         }
         return lottoTicketList;
@@ -80,4 +81,5 @@ public class LottoPurchaseManager {
             "numberGenerator=" + numberGenerator +
             '}';
     }
+
 }
