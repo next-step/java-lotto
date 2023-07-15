@@ -30,8 +30,8 @@ public class LottoMoney {
         return money;
     }
 
-    public LottoMoney subtractByLottoCount(final Count manualCount) {
-        return new LottoMoney(money - manualCount.getCount() * LOTTO_UNIT);
+    public LottoMoney subtractByLottoCount(final Count count) {
+        return new LottoMoney(money - count.getCount() * LOTTO_UNIT);
     }
 
     public boolean isPositive() {

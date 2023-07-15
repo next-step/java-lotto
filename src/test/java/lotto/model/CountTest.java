@@ -17,14 +17,16 @@ public class CountTest {
     @Test
     @DisplayName("수동으로 입력한 수가 음수이면 오류를 반환한다")
     void 수동_입력_음수_오류_반환() {
-        assertThatCode(() -> new Count("-1")).isInstanceOf(IllegalArgumentException.class)
+        assertThatCode(() -> new Count("-1"))
+            .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("입력된 수는 양수여야 합니다.");
     }
 
     @Test
     @DisplayName("수동으로 입력한 수가 숫자가 아니면 오류를 반환한다")
     void 수동_입력_숫자_아니면_오류_반환() {
-        assertThatCode(() -> new Count("a")).isInstanceOf(IllegalArgumentException.class)
+        assertThatCode(() -> new Count("a"))
+            .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("입력된 수는 숫자여야 합니다.");
     }
 

@@ -1,24 +1,30 @@
 package lotto.controller;
 
+import static lotto.view.InputView.readBonusBall;
+import static lotto.view.InputView.readCount;
+import static lotto.view.InputView.readLottoMoney;
+import static lotto.view.InputView.readLottos;
+import static lotto.view.InputView.readWinningLotto;
+import static lotto.view.OutputView.*;
+import static lotto.view.OutputView.printPurchasedResult;
+
 import java.util.List;
 import lotto.model.*;
 import lotto.model.dto.LottosDto;
 import lotto.model.dto.WinningResultDto;
-import lotto.view.InputView;
-import lotto.view.OutputView;
 
 public class LottoController {
 
     public void run() {
-        LottoMoney lottoMoney = new LottoMoney(InputView.readLottoMoney());
-        Count manualCount = new Count(InputView.readCount());
-        List<List<Integer>> manualLotto = InputView.readLottos(manualCount.getCount());
+        LottoMoney lottoMoney = new LottoMoney(readLottoMoney());
+        Count manualCount = new Count(readCount());
+        List<List<Integer>> manualLotto = readLottos(manualCount.getCount());
 
         Lottos lottoTicket = buyTicket(lottoMoney, manualCount, manualLotto);
-        OutputView.printPurchasedResult(LottosDto.from(lottoTicket));
+        printPurchasedResult(LottosDto.from(lottoTicket));
 
         WinningResult winningResult = createWinningLotto(lottoMoney, lottoTicket);
-        OutputView.printWinningResult(WinningResultDto.from(winningResult));
+        printWinningResult(WinningResultDto.from(winningResult));
     }
 
     private static Lottos buyTicket(final LottoMoney lottoMoney, final Count manualCount,
@@ -30,8 +36,7 @@ public class LottoController {
 
     private static WinningResult createWinningLotto(final LottoMoney lottoMoney,
         final Lottos ticket) {
-        WinningLotto winningLotto = new WinningLotto(InputView.readWinningLotto(),
-            InputView.readBonusBall());
+        WinningLotto winningLotto = new WinningLotto(readWinningLotto(), readBonusBall());
         return new WinningResult(ticket.calculateMatchLotto(winningLotto), lottoMoney);
     }
 
