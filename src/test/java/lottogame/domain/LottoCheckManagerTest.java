@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("FieldCanBeLocal")
 @DisplayName("LottoCheckService 클래스")
-public class LottoCheckManagerTest {
+class LottoCheckManagerTest {
 
     @Nested
     @DisplayName("checkResult 메서드는")
