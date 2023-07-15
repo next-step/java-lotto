@@ -11,8 +11,7 @@ public class NumberGenerator {
     private static final int MAX_NUMBER = 45;
 
     private List<Integer> generateNumbers() {
-        return IntStream.rangeClosed(MIN_NUMBER,
-                MAX_NUMBER)
+        return IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
             .boxed()
             .collect(Collectors.toList());
     }

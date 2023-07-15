@@ -2,7 +2,7 @@ package lotto.domain.statistics;
 
 import java.util.Map;
 
-public class LottoResult {
+public final class LottoResult {
 
     private final int matchCount;
     private final String message;

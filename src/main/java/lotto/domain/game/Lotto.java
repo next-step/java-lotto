@@ -38,7 +38,7 @@ public final class Lotto {
     }
 
     private void validateSize(final List<Integer> values, final boolean isAuto) {
-        if (values.size() < LOTTO_SIZE || (LOTTO_SIZE < values.size() && !isAuto)) {
+        if (!isAuto && (values.size() < LOTTO_SIZE || (LOTTO_SIZE < values.size()))) {
             throw new IllegalArgumentException("로또 번호는 6개여야합니다");
         }
     }

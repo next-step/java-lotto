@@ -17,11 +17,11 @@ public final class Payment {
         }
     }
 
-    public int calculateBuyCount(int count) {
+    public int calculateBuyCount(final int count) {
         return (money - (count * Lotto.PRICE)) / Lotto.PRICE;
     }
 
-    public double calculateProfitRate(double profit) {
+    public double calculateProfitRate(final double profit) {
         return Math.round(profit / money * 100) / 100.0;
     }
 

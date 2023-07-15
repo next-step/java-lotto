@@ -12,8 +12,11 @@ public final class LottoStatistics {
     private final Map<LottoMatch, Integer> statistics = new EnumMap<>(LottoMatch.class);
     private final double profitRate;
 
-    public LottoStatistics(final Lottos lottos, final WinningNumber winningNumber,
-        final Payment payment) {
+    public LottoStatistics(
+        final Lottos lottos,
+        final WinningNumber winningNumber,
+        final Payment payment
+    ) {
         calculateStatistics(lottos, winningNumber);
         profitRate = calculateProfitRate(payment);
     }

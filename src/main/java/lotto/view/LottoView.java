@@ -44,7 +44,7 @@ public final class LottoView {
         return count;
     }
 
-    public List<String> readLottoManualNumbers(LottoCount lottoCount) {
+    public List<String> readLottoManualNumbers(final LottoCount lottoCount) {
         System.out.println();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<String> lottoManuals = new ArrayList<>();
@@ -86,7 +86,8 @@ public final class LottoView {
         System.out.println();
         System.out.println(MessageFormat.format("수동으로 {0}장, 자동으로 {1}개를 구매했습니다.",
             lottoCount.getManualCount(),
-            lottoCount.getAutoCount()));
+            lottoCount.getAutoCount())
+        );
     }
 
     public void printLottos(final Lottos lottos) {

@@ -9,24 +9,33 @@ public final class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(final LottoCount lottoCount, final List<String> lottosManual, final NumberGenerator numberGenerator) {
+    public Lottos(
+        final LottoCount lottoCount,
+        final List<String> lottosManual,
+        final NumberGenerator numberGenerator
+    ) {
         this.lottos = generateLottos(lottoCount, lottosManual, numberGenerator);
     }
 
-    private List<Lotto> generateLottos(LottoCount lottoCount, List<String> lottosManual, NumberGenerator numberGenerator) {
+    private List<Lotto> generateLottos(
+        final LottoCount lottoCount,
+        final List<String> lottosManual,
+        final NumberGenerator numberGenerator
+    ) {
         return Stream.concat(
-            generateLottosManual(lottosManual, lottoCount).stream(),
-            generateLottosAuto(lottoCount, numberGenerator).stream())
+                generateLottosManual(lottosManual).stream(),
+                generateLottosAuto(lottoCount, numberGenerator).stream())
             .collect(Collectors.toList());
     }
 
-    private List<Lotto> generateLottosManual(List<String> lottosManual, LottoCount lottoCount) {
+    private List<Lotto> generateLottosManual(final List<String> lottosManual) {
         return lottosManual.stream()
             .map(lottoManual -> new Lotto(lottoManual, false))
             .collect(Collectors.toList());
     }
 
-    private List<Lotto> generateLottosAuto(LottoCount lottoCount, NumberGenerator numberGenerator) {
+    private List<Lotto> generateLottosAuto(final LottoCount lottoCount,
+        final NumberGenerator numberGenerator) {
         List<Lotto> lottosAuto = new ArrayList<>();
         for (int i = 0; i < lottoCount.getAutoCount(); i++) {
             lottosAuto.add(new Lotto(numberGenerator.shuffleNumbers(), true));
