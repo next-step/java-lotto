@@ -12,11 +12,7 @@ public class WinningResult {
     }
 
     public static WinningResult of(final WinningLotto winningLotto, final PurChasedLottos purChasedLottos) {
-        RankResult rankResult = new RankResult();
-        for (var purchasedLotto : purChasedLottos.getLottos()) {
-            Rank rank = winningLotto.matchOfRank(purchasedLotto);
-            rankResult.plusCountOfRank(rank);
-        }
+        RankResult rankResult = new RankResult(winningLotto, purChasedLottos);
         return new WinningResult(
                 rankResult,
                 calculateProfit(rankResult.getTotalRankReward(), purChasedLottos.getMoney()));

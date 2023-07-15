@@ -8,19 +8,16 @@ public class RankResult {
     private static final Integer DEFAULT_VALUE = 0;
     private final Map<Rank, Integer> rankResult;
 
-    public RankResult() {
-        this.rankResult = new HashMap<>();
+    public RankResult(final WinningLotto winningLotto, final PurChasedLottos purChasedLottos) {
+        rankResult = new HashMap<>();
+        for (var purchasedLotto : purChasedLottos.getLottos()) {
+            Rank rank = winningLotto.matchOfRank(purchasedLotto);
+            rankResult.put(rank, getCountOfRank(rank) + 1);
+        }
     }
 
     public Integer getCountOfRank(final Rank rank) {
-        if (rankResult.containsKey(rank)) {
-            return rankResult.get(rank);
-        }
-        return DEFAULT_VALUE;
-    }
-
-    public void plusCountOfRank(final Rank rank) {
-        rankResult.put(rank, getCountOfRank(rank) + 1);
+        return rankResult.getOrDefault(rank, DEFAULT_VALUE);
     }
 
     public int getTotalRankReward() {
