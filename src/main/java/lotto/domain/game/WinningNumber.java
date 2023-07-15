@@ -6,8 +6,7 @@ public final class WinningNumber {
     private final LottoNumber bonusBall;
 
     public WinningNumber(final String lottoValue, final int bonusValue) {
-        LottoText lottoText = new LottoText(lottoValue);
-        Lotto lotto = new Lotto(lottoText.getIntegers(), false);
+        Lotto lotto = new Lotto(lottoValue, false);
         LottoNumber lottoNumber = new LottoNumber(bonusValue);
 
         validate(lotto, lottoNumber);
