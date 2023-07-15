@@ -19,7 +19,6 @@ public class InputView {
         System.out.println("구입금액을 입력해 주세요.");
         try {
             final int money = Integer.parseInt(scanner.nextLine());
-            System.out.println();
 
             return money;
         } catch (NumberFormatException e) {
@@ -28,11 +27,10 @@ public class InputView {
     }
 
     public static int readManualPurchaseCount() {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
 
         try {
             final int count = Integer.parseInt(scanner.nextLine());
-            System.out.println();
 
             return count;
         } catch (NumberFormatException e) {
@@ -41,8 +39,13 @@ public class InputView {
     }
 
     public static List<List<Integer>> readManualLottoNumbers(Count manualPurchaseCount) {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<List<Integer>> numberBundles = new ArrayList<>();
+
+        if (!manualPurchaseCount.isPositive()) {
+            return numberBundles;
+        }
+
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
 
         while (manualPurchaseCount.isPositive()) {
             numberBundles.add(readLottoNumbers());
@@ -53,7 +56,7 @@ public class InputView {
     }
 
     public static List<Integer> readWinningLottoNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
 
         return readLottoNumbers();
     }
@@ -76,7 +79,6 @@ public class InputView {
 
         try {
             final int number = Integer.parseInt(scanner.nextLine());
-            System.out.println();
 
             return number;
         } catch (NumberFormatException e) {

@@ -30,11 +30,10 @@ public class OutputView {
         lottos.stream()
             .map(lotto -> lotto.format(lottoFormatter))
             .forEach(System.out::println);
-        System.out.println();
     }
 
     public static void printStatistic(final LottoResult lottoResult, final Money money) {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
 
         Arrays.stream(Rank.values())
