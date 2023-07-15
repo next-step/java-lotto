@@ -1,35 +1,38 @@
 package edu.nextstep.camp.lotto.controller;
 
-import edu.nextstep.camp.lotto.domain.*;
-import edu.nextstep.camp.lotto.view.LottoOutputView;
+import edu.nextstep.camp.lotto.domain.LastWinLotto;
+import edu.nextstep.camp.lotto.domain.LottoFactory;
+import edu.nextstep.camp.lotto.domain.LottoGame;
+import edu.nextstep.camp.lotto.domain.Lottos;
+import edu.nextstep.camp.lotto.view.LottoView;
 
 public class LottoController {
 
     private final LottoGame lottoGame;
-    private final LottoOutputView lottoOutputView;
+    private final LottoView lottoView;
 
-    public LottoController(LottoFactory lottoFactory, LottoOutputView lottoOutputView) {
+    public LottoController(LottoFactory lottoFactory, LottoView lottoView) {
         this.lottoGame = new LottoGame(lottoFactory);
-        this.lottoOutputView = lottoOutputView;
+        this.lottoView = lottoView;
     }
 
-    public Lottos buyLottos(String amount) {
-        return this.buyLottos(Integer.parseInt(amount));
-    }
+    public Lottos buyLottos() {
+        int amount = lottoView.amountInput();
 
-    public Lottos buyLottos(int amount) {
         Lottos lottos = lottoGame.buyLotto(amount);
 
-        lottoOutputView.buyLottoView(amount, lottos);
+        lottoView.buyLottoOutputView(amount, lottos);
 
         return lottos;
     }
 
-    public void analysisLotto(Lottos lottos, LastWinLotto lastWinLotto) {
+    public void analysisLotto(Lottos lottos) {
         if (lottos == null) {
             throw new IllegalArgumentException("로또가 null 입니다.");
         }
 
-        lottoOutputView.lottoAnalysisView(lottos.analysis(lastWinLotto));
+        LastWinLotto lastWinLotto = lottoView.lastWinLottoInput();
+
+        lottoView.lottoAnalysisOutputView(lottos.analysis(lastWinLotto));
     }
 }
