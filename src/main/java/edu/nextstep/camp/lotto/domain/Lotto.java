@@ -13,9 +13,16 @@ public class Lotto {
         this(Arrays.asList(lottoNumbers));
     }
 
-    public Lotto(Integer... lottoNumbers){
+    public Lotto(String... lottoNumbers) {
         this(Arrays.stream(lottoNumbers)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList())
+        );
+    }
+
+    public Lotto(Integer... lottoNumbers) {
+        this(Arrays.stream(lottoNumbers)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList())
         );
     }
@@ -23,11 +30,7 @@ public class Lotto {
     public Lotto(List<LottoNumber> lottoNumberList) {
         validationCheck(lottoNumberList);
 
-        List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNumberList);
-
-        lottoNumbers.sort(LottoNumber::compareTo);
-
-        this.lottoNumbers = new LinkedHashSet<>(lottoNumbers);
+        this.lottoNumbers = new HashSet<>(lottoNumberList);
     }
 
     public int matchNumberCount(Lotto compareNumbers) {
@@ -38,7 +41,7 @@ public class Lotto {
         return lottoNumberCopy.size();
     }
 
-    public boolean isMatchBonus(LottoNumber lottoNumber){
+    public boolean isMatchBonus(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
@@ -70,6 +73,12 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lottoNumbers.toString();
+        return lottoNumbers.stream()
+                .sorted()
+                .toString();
+    }
+
+    public boolean contains(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 }
