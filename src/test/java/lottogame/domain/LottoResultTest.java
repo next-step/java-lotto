@@ -3,6 +3,7 @@ package lottogame.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
@@ -29,7 +30,7 @@ class LottoResultTest {
                 new LottoTicket(Set.of(2, 3, 4, 5, 6, 7)),
                 new LottoTicket(Set.of(3, 4, 5, 6, 7, 8))
             );
-            private final double expectedEarningRate = 676683.3333333334;
+            private final BigDecimal expectedEarningRate = BigDecimal.valueOf(676683.33);
 
             @Test
             @DisplayName("수익률을 계산한다")

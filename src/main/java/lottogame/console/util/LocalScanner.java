@@ -18,6 +18,12 @@ public class LocalScanner {
         return scanner.nextLine();
     }
 
+    public long nextLong() {
+        long answer = scanner.nextLong();
+        clearBuffer();
+        return answer;
+    }
+
     public int nextInt() {
         int answer = scanner.nextInt();
         clearBuffer();
@@ -31,5 +37,7 @@ public class LocalScanner {
     private static final class SingletonHelper {
 
         private static final LocalScanner INSTANCE = new LocalScanner();
+
     }
+
 }

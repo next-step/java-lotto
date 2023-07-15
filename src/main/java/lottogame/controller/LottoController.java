@@ -29,7 +29,7 @@ public class LottoController {
     }
 
     private List<LottoTicketDto> purchaseLottoTickets() {
-        int money = inputer.inputMoney();
+        long money = inputer.inputMoney();
         int passiveLottoTicketCount = inputer.inputPassiveLottoTicketCount();
         List<LottoTicketDto> selectedLottoTickets = toLottoTicketDtos(
             inputer.inputPassiveLottoTickets(passiveLottoTicketCount));

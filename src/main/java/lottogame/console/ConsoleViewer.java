@@ -48,7 +48,7 @@ public class ConsoleViewer implements Viewer {
             lottoTicketCheckResponses.getKey().getMoney(), lottoTicketCheckResponses.getValue());
     }
 
-    private void printEarningRate(double earningRate) {
-        System.out.printf("총 수익률은 %.2f입니다.%n", earningRate);
+    private void printEarningRate(String earningRate) {
+        System.out.printf("총 수익률은 %s입니다.%n", earningRate);
     }
 }

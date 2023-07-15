@@ -1,5 +1,6 @@
 package lottogame.domain;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,9 +26,9 @@ public class LottoCheckManager {
     public LottoCheckedResponse checkResult(List<LottoTicketDto> lottoTicketDtos) {
         List<LottoTicket> lottoTickets = toLottoTickets(lottoTicketDtos);
 
-        double earningRate = lottoResult.calculateEarningRate(lottoTickets);
+        BigDecimal earningRate = lottoResult.calculateEarningRate(lottoTickets);
 
-        return new LottoCheckedResponse(earningRate,
+        return new LottoCheckedResponse(earningRate.toString(),
             toLottoTicketCheckResponsesWithOutNone(lottoResult.toLottoPrizes(lottoTickets)));
     }
 

@@ -5,7 +5,7 @@ import java.util.Set;
 
 public interface Inputer {
 
-    int inputMoney();
+    long inputMoney();
 
     int inputPassiveLottoTicketCount();
 
