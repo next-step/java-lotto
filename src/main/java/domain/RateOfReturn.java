@@ -17,7 +17,7 @@ public class RateOfReturn {
     }
 
     private void validateNonNegative(final long profit) {
-        if (profit <= 0) {
+        if (profit < 0) {
             throw new IllegalArgumentException("수익률 계산 시 수익은 음수일 수 없습니다.");
         }
     }
