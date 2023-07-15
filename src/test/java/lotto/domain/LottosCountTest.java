@@ -56,4 +56,21 @@ class LottosCountTest {
 
         Assertions.assertThat(lottosCount.generateRandomLottos().size()).isEqualTo(2);
     }
+
+    @Test
+    @DisplayName("LottosCount에서 lottosCount를 뺄 수 있다.")
+    void subtractLottosCount() {
+        LottosCount lottosCount = new LottosCount(10);
+        LottosCount anotherLottosCount = new LottosCount(5);
+
+        Assertions.assertThat(lottosCount.subtract(anotherLottosCount)).isEqualTo(new LottosCount(5));
+    }
+
+    @Test
+    @DisplayName("로또의 개수를 바탕으로 stream을 만들어준다.")
+    void makeStream() {
+        LottosCount lottosCount = new LottosCount(10);
+
+        Assertions.assertThat(lottosCount.makeLottosCountToLongStream().count()).isEqualTo(10L);
+    }
 }

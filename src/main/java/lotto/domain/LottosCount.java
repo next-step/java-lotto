@@ -40,6 +40,14 @@ public class LottosCount {
                 .collect(Collectors.toList());
     }
 
+    public LottosCount subtract(LottosCount anotherLottosCount) {
+        return new LottosCount(this.lottosCount - anotherLottosCount.lottosCount);
+    }
+
+    public LongStream makeLottosCountToLongStream() {
+        return LongStream.range(0, this.lottosCount);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
