@@ -1,7 +1,11 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.dto.*;
+import lotto.dto.request.ManualLottosRequestDto;
+import lotto.dto.request.MoneyRequestDto;
+import lotto.dto.request.WinningNumbersRequestDto;
+import lotto.dto.response.LottoResultResponseDto;
+import lotto.dto.response.LottoStatusesResponseDto;
 import lotto.service.LottoMachine;
 import lotto.view.InputView;
 import lotto.view.OutputView;

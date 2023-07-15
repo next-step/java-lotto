@@ -1,8 +1,8 @@
 package lotto.view;
 
 import lotto.domain.LottoRank;
-import lotto.dto.LottoResultResponseDto;
-import lotto.dto.LottoStatusesResponseDto;
+import lotto.dto.response.LottoResultResponseDto;
+import lotto.dto.response.LottoStatusesResponseDto;
 
 import java.util.Collections;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package lotto.dto;
+package lotto.dto.response;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;

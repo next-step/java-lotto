@@ -1,4 +1,4 @@
-package lotto.dto;
+package lotto.dto.request;
 
 public class MoneyRequestDto {
 

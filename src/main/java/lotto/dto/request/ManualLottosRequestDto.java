@@ -1,4 +1,4 @@
-package lotto.dto;
+package lotto.dto.request;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +12,7 @@ public class ManualLottosRequestDto {
                 .map(ManualLottoRequestDto::new)
                 .collect(Collectors.toList());
     }
-    
+
     public List<ManualLottoRequestDto> getManualLottos() {
         return manualLottos;
     }

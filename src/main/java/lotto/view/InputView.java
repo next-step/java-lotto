@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.dto.ManualLottosRequestDto;
-import lotto.dto.MoneyRequestDto;
-import lotto.dto.WinningNumbersRequestDto;
+import lotto.dto.request.ManualLottosRequestDto;
+import lotto.dto.request.MoneyRequestDto;
+import lotto.dto.request.WinningNumbersRequestDto;
 
 import java.util.Arrays;
 import java.util.List;
