@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-class LottoServiceTest {
+class LottoMachineTest {
 
-    private final LottoService lottoService = new LottoService();
+    private final LottoMachine lottoMachine = new LottoMachine();
 
     @Test
     @DisplayName("Money 객체 전달받으면 로또를 발급한다.")
@@ -21,7 +21,7 @@ class LottoServiceTest {
         Lottos manualLottos = new Lottos(
                 new ArrayList<>(List.of(new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)))))
         );
-        Lottos lottos = lottoService.buyLotto(money, manualLottos);
+        Lottos lottos = lottoMachine.buyLotto(money, manualLottos);
         Assertions.assertThat(lottos.size()).isEqualTo(5);
     }
 }

@@ -6,7 +6,7 @@ import lotto.util.RandomLottoGenerator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoService {
+public class LottoMachine {
 
     public Lottos buyLotto(Money money, Lottos manualLottos) {
         LottosCount totalLottosCount = new LottosCount(money.countLotto());

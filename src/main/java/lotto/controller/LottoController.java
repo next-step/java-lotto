@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.domain.*;
 import lotto.dto.*;
-import lotto.service.LottoService;
+import lotto.service.LottoMachine;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -11,12 +11,12 @@ import java.util.stream.Collectors;
 
 public class LottoController {
 
-    private final LottoService lottoService;
+    private final LottoMachine lottoMachine;
     private final InputView inputView;
     private final OutputView outputView;
 
     public LottoController() {
-        this.lottoService = new LottoService();
+        this.lottoMachine = new LottoMachine();
         this.inputView = new InputView();
         this.outputView = new OutputView();
     }
@@ -37,7 +37,7 @@ public class LottoController {
         List<Lotto> manualLottos = manualLottosRequestDto.getManualLottos()
                 .stream().map(lotto -> new Lotto(lotto.getManualLotto()))
                 .collect(Collectors.toList());
-        Lottos lottos = lottoService.buyLotto(money, new Lottos(manualLottos));
+        Lottos lottos = lottoMachine.buyLotto(money, new Lottos(manualLottos));
         outputView.printBuyStatus(new LottoStatusesResponseDto(lottos, new LottosCount(manualLottos.size())));
         return lottos;
     }
@@ -48,8 +48,8 @@ public class LottoController {
                 winningNumbersRequestDto.getWinningNumbers(),
                 winningNumbersRequestDto.getBonusNumber()
         );
-        LottoResults lottoResults = lottoService.matchWinningLotto(lottos, winningNumbers);
-        ProfitRate profitRate = lottoService.profitRate(lottoResults, money);
+        LottoResults lottoResults = lottoMachine.matchWinningLotto(lottos, winningNumbers);
+        ProfitRate profitRate = lottoMachine.profitRate(lottoResults, money);
         outputView.printLottoResult(new LottoResultResponseDto(lottoResults, profitRate));
     }
 
