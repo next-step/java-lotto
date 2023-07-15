@@ -16,7 +16,7 @@ public class LottoPurchase {
     private void validate(int paymentValue, int manualCountValue) {
         if (paymentValue < manualCountValue * LOTTO_PRICE) {
             throw new IllegalArgumentException(
-                    MessageFormat.format("금액이 부족합니다. 현재 금액 : {0}원", paymentValue)
+                    MessageFormat.format("금액이 부족합니다. 현재 금액 : {0}", paymentValue)
             );
         }
     }
@@ -30,6 +30,6 @@ public class LottoPurchase {
     }
 
     public int getAutomaticCount() {
-        return payment.subtractFrom(manualCount);
+        return payment.dividedWith(LOTTO_PRICE) - manualCount;
     }
 }

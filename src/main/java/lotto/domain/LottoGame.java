@@ -6,28 +6,29 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public final class LottoService {
+public final class LottoGame {
 
     public static final int UPPER_LOTTO_NUMBER = 45;
     public static final int LOWER_LOTTO_NUMBER = 1;
+    private static final int LOTTO_PRICE = 1_000;
     public static final int LOTTO_COUNT = 6;
     public static final int FROM_INDEX = 0;
-
-    private final Payment payment;
+    private final LottoPurchase lottoPurchase;
     private final Lottos lottos;
 
-    public LottoService(int value) {
-        this.payment = new Payment(value);
-        this.lottos = generateLottos();
+    public LottoGame(int paymentValue, int manualCountValue, List<Lotto> lottos) {
+        this.lottoPurchase = new LottoPurchase(paymentValue, manualCountValue);
+        lottos.addAll(generateLottos());
+        this.lottos = new Lottos(lottos);
     }
 
-    private Lottos generateLottos() {
+    private List<Lotto> generateLottos() {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < payment.getLottoCount(); i++) {
+        for (int i = 0; i < lottoPurchase.getAutomaticCount(); i++) {
             lottos.add(new Lotto(generateLotto()));
         }
 
-        return new Lottos(lottos);
+        return lottos;
     }
 
     private List<Integer> generateLotto() {
@@ -45,8 +46,12 @@ public final class LottoService {
         return numbers;
     }
 
-    public int getCount() {
-        return payment.getLottoCount();
+    public int getManualCount() {
+        return lottoPurchase.getManualCount();
+    }
+
+    public int getAutomaticCount() {
+        return lottoPurchase.getAutomaticCount();
     }
 
     public Lottos getLottos() {
@@ -58,7 +63,7 @@ public final class LottoService {
         return new ResultRecord(lottos, winningNumber);
     }
 
-    public ProfitRate getProfitRage(final int profit) {
-        return new ProfitRate(profit, payment.getMoney());
+    public ProfitRate getProfitRate(final ResultRecord resultRecord) {
+        return new ProfitRate(resultRecord, lottoPurchase.getPayment());
     }
 }

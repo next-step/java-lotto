@@ -3,26 +3,26 @@ package lotto.domain;
 import java.text.MessageFormat;
 
 public final class Payment {
-
-    private static final int MIN_MONEY = 1_000;
-    private final int money;
+    private static final int LOTTO_PRICE = 1_000;
+    private final int payment;
 
     public Payment(final int value) {
         validateRange(value);
-        money = value;
+        payment = value;
     }
 
     private void validateRange(final int value) {
-        if (value < MIN_MONEY) {
-            throw new IllegalArgumentException(MessageFormat.format("{0}원 이상 투입해 주세요", MIN_MONEY));
+        if (value < LOTTO_PRICE) {
+            throw new IllegalArgumentException(MessageFormat.format("{0}원 이상 투입해 주세요", LOTTO_PRICE));
         }
     }
 
-    public int getLottoCount() {
-        return (money / MIN_MONEY);
+    public float divide(float number) {
+        return number / payment;
     }
 
-    public int getMoney() {
-        return money;
+    public int dividedWith(int number) {
+        return payment / number;
     }
+
 }

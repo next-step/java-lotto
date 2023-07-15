@@ -38,7 +38,7 @@ public final class ResultRecord {
         }
     }
 
-    public int getProfit() {
+    public int calculateProfit() {
         int profit = 0;
         for (LottoMatch lottoMatch : resultMap.keySet()) {
             profit += resultMap.get(lottoMatch) * lottoMatch.getPrize();

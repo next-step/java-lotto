@@ -1,11 +1,13 @@
 package lotto.controller;
 
+import lotto.domain.Lotto;
 import lotto.domain.ProfitRate;
 import lotto.domain.ResultRecord;
-import lotto.domain.LottoService;
+import lotto.domain.LottoGame;
 import lotto.view.LottoView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoController {
 
@@ -17,19 +19,24 @@ public class LottoController {
 
     public void run() {
         int payment = lottoView.readPayment();
+        int manualLottoCount = lottoView.readManualLottoCount();
 
-        LottoService lottoService = new LottoService(payment);
+        List<Lotto> lottos = lottoView.readManualLottos(manualLottoCount).stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList());
 
-        lottoView.printLottoCount(lottoService.getCount());
-        lottoView.printLottos(lottoService.getLottos());
+        LottoGame lottoGame = new LottoGame(payment, manualLottoCount, lottos);
+
+        lottoView.printLottoCount(lottoGame.getManualCount(), lottoGame.getAutomaticCount());
+        lottoView.printLottos(lottoGame.getLottos());
 
         List<Integer> winningLotto = lottoView.readWinningLotto();
         int bonusBall = lottoView.readBonusBall();
 
-        ResultRecord result = lottoService.getResult(winningLotto, bonusBall);
+        ResultRecord result = lottoGame.getResult(winningLotto, bonusBall);
         lottoView.printResults(result.getResult());
 
-        ProfitRate profitRate = lottoService.getProfitRage(result.getProfit());
-        lottoView.printProfitRate(profitRate.calculateRate());
+        ProfitRate profitRate = lottoGame.getProfitRate(result);
+        lottoView.printProfitRate(profitRate.getProfitRate());
     }
 }

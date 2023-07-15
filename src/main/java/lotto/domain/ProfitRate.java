@@ -1,15 +1,14 @@
 package lotto.domain;
 
 public class ProfitRate {
-    private final int profit;
-    private final int payment;
+    private final float profitRate;
 
-    public ProfitRate(int profit, int payment) {
-        this.profit = profit;
-        this.payment = payment;
+    public ProfitRate(ResultRecord resultRecord, Payment payment) {
+        int profit = resultRecord.calculateProfit();
+        this.profitRate = payment.divide(profit);
     }
 
-    public float calculateRate() {
-        return profit / payment;
+    public float getProfitRate() {
+        return profitRate;
     }
 }
