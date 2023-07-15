@@ -26,12 +26,13 @@ class LottoPurchaseManagerTest {
         @DisplayName("1000원으로 나누어 떨어지지 않으면,")
         class Context_Not_Divided_By_1000 {
 
-            private final int NOT_DIVIDED_MONEY = 1001;
+            private final List<LottoTicketDto> emptyList = List.of();
+            private final int notDividedMoney = 1001;
 
             @Test
             @DisplayName("IllegalArgumentException 을 던진다")
             void It_Throw_IllegalArgumentException() {
-                assertThatThrownBy(() -> lottoPurchaseManager.purchase(NOT_DIVIDED_MONEY)).isInstanceOf(
+                assertThatThrownBy(() -> lottoPurchaseManager.purchase(notDividedMoney, emptyList)).isInstanceOf(
                     IllegalArgumentException.class);
             }
 
@@ -69,6 +70,9 @@ class LottoPurchaseManagerTest {
                 assertThatThrownBy(() -> lottoPurchaseManager.purchase(totalMoney, passiveLottoTicketRequest))
                     .isInstanceOf(IllegalArgumentException.class);
             }
+
         }
+
     }
+
 }

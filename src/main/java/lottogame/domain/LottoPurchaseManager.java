@@ -26,25 +26,19 @@ public class LottoPurchaseManager {
         return toLottoTicketDtos(lottoTickets);
     }
 
-    private void assertPassiveLottoTickets(int money, List<LottoTicketDto> lottoTicketDtos) {
-        int lottoBuyableCount = money / LottoTicket.PURCHASABLE_UNIT;
-        if (lottoBuyableCount < lottoTicketDtos.size()) {
-            throw new IllegalArgumentException(String.format("구매가능한 로또 숫자 \"%d\" 보다 선택한 로또의 숫자가 더 많습니다.",
-                lottoBuyableCount));
-        }
-    }
-
-    public List<LottoTicketDto> purchase(int money) {
-        assertMoney(money);
-        List<LottoTicket> lottoTickets = createLottoTickets(money);
-        return toLottoTicketDtos(lottoTickets);
-    }
-
     private void assertMoney(int money) {
         if (money % LottoTicket.PURCHASABLE_UNIT != 0) {
             throw new IllegalArgumentException(
                 String.format("money는 \"%d\"원으로 나누어 떨어져야 합니다 money: \"%d\"", LottoTicket.PURCHASABLE_UNIT,
                     money));
+        }
+    }
+
+    private void assertPassiveLottoTickets(int money, List<LottoTicketDto> lottoTicketDtos) {
+        int lottoBuyableCount = money / LottoTicket.PURCHASABLE_UNIT;
+        if (lottoBuyableCount < lottoTicketDtos.size()) {
+            throw new IllegalArgumentException(String.format("구매가능한 로또 숫자 \"%d\" 보다 선택한 로또의 숫자가 더 많습니다.",
+                lottoBuyableCount));
         }
     }
 
