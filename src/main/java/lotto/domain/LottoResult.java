@@ -19,7 +19,7 @@ public class LottoResult {
     }
 
     public Money calculateTotalPrize() {
-        Long totalPrize = result.entrySet()
+        long totalPrize = result.entrySet()
                 .stream()
                 .mapToLong(entry -> entry.getKey().getPrize() * entry.getValue())
                 .sum();

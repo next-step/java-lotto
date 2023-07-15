@@ -12,7 +12,7 @@ public class Quantity {
         this.quantity = quantity;
     }
 
-    public static Quantity of(final Money budget, final long productPrice) {
+    public static Quantity of(final Money budget, final int productPrice) {
         return new Quantity((int) (budget.getValue() / productPrice));
     }
 
