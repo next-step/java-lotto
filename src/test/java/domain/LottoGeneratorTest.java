@@ -3,6 +3,7 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -58,6 +59,34 @@ class LottoGeneratorTest {
         final Count manualPurchaseCount = new Count(3);
         final List<List<Integer>> inputNumberBundles = List.of(List.of(1, 2, 3, 4, 5, 6),
             List.of(7, 8, 9, 10, 11, 12));
+
+        /* when & then */
+        assertThatThrownBy(() -> LottoGenerator.generateLottos(money,
+            manualPurchaseCount, inputNumberBundles))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("투입금액이 로또 1장의 가격보다 작으면 IllegalArgumentException을 반환한다.")
+    void validateMinimum() {
+        /* given */
+        final Money money = new Money(500);
+        final Count manualPurchaseCount = new Count(0);
+        final List<List<Integer>> inputNumberBundles = Collections.emptyList();
+
+        /* when & then */
+        assertThatThrownBy(() -> LottoGenerator.generateLottos(money,
+            manualPurchaseCount, inputNumberBundles))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("투입금액이 로또 가격의 배수가 아니면 IllegalArgumentException을 반환한다.")
+    void validateUnit() {
+        /* given */
+        final Money money = new Money(1_500);
+        final Count manualPurchaseCount = new Count(0);
+        final List<List<Integer>> inputNumberBundles = Collections.emptyList();
 
         /* when & then */
         assertThatThrownBy(() -> LottoGenerator.generateLottos(money,
