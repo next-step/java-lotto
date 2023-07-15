@@ -13,8 +13,9 @@ import lottogame.domain.response.LottoTicketCheckedResponse;
 public class ConsoleViewer implements Viewer {
 
     @Override
-    public void drawLottoPurchasedResponses(List<LottoTicketDto> lottoTicketDtos) {
-        System.out.printf("%d개를 구매했습니다.%n", lottoTicketDtos.size());
+    public void drawLottoPurchasedResponses(int passiveLottoTicketCounts, List<LottoTicketDto> lottoTicketDtos) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", passiveLottoTicketCounts,
+            lottoTicketDtos.size() - passiveLottoTicketCounts);
         System.out.println(parsePrintString(lottoTicketDtos));
     }
 

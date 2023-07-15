@@ -2,6 +2,7 @@ package lottogame.controller;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import lottogame.controller.spi.Inputer;
 import lottogame.controller.spi.Viewer;
 import lottogame.domain.LottoCheckManager;
@@ -29,11 +30,20 @@ public class LottoController {
 
     private List<LottoTicketDto> purchaseLottoTickets() {
         int money = inputer.inputMoney();
-        List<LottoTicketDto> lottoTicketDtos = lottoPurchaseManager.purchase(money);
+        int passiveLottoTicketCount = inputer.inputPassiveLottoTicketCount();
+        List<LottoTicketDto> selectedLottoTickets = toLottoTicketDtos(
+            inputer.inputPassiveLottoTickets(passiveLottoTicketCount));
+        List<LottoTicketDto> lottoTicketDtos = lottoPurchaseManager.purchase(money, selectedLottoTickets);
 
-        viewer.drawLottoPurchasedResponses(lottoTicketDtos);
+        viewer.drawLottoPurchasedResponses(passiveLottoTicketCount, lottoTicketDtos);
 
         return lottoTicketDtos;
+    }
+
+    private List<LottoTicketDto> toLottoTicketDtos(List<Set<Integer>> passiveLottoTicketNumbers) {
+        return passiveLottoTicketNumbers.stream()
+            .map(LottoTicketDto::new)
+            .collect(Collectors.toList());
     }
 
     private void checkResult(List<LottoTicketDto> lottoTicketDtos) {
