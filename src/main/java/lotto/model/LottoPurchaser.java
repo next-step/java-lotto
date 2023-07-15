@@ -37,8 +37,7 @@ public class LottoPurchaser {
         for (List<Integer> lotto : manualLotto) {
             newLotto.add(new Lotto(new FixLottoGenerator(convertLottoNumber(lotto)).generate()));
         }
-        LottoMoney afterMoney = currentMoney.subtractByLottoCount(manualCount);
-        return new LottoPurchaser(afterMoney, newLotto);
+        return new LottoPurchaser(currentMoney.subtractByLottoCount(manualCount), newLotto);
     }
 
     public LottoPurchaser purchaseLotto(final Count manualCount,
