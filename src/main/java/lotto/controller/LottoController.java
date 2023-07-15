@@ -21,14 +21,15 @@ public class LottoController {
         OutputView.printWinningResult(WinningResultDto.from(winningResult));
     }
 
-    private static Lottos buyTicket(LottoMoney lottoMoney, Count manualCount,
-        List<List<Integer>> manualLotto) {
+    private static Lottos buyTicket(final LottoMoney lottoMoney, final Count manualCount,
+        final List<List<Integer>> manualLotto) {
         LottoPurchaser lottoPurchaser = new LottoPurchaser(lottoMoney).purchaseLotto(manualCount,
             manualLotto);
         return new Lottos(lottoPurchaser.getPurchasedLottos());
     }
 
-    private static WinningResult createWinningLotto(LottoMoney lottoMoney, Lottos ticket) {
+    private static WinningResult createWinningLotto(final LottoMoney lottoMoney,
+        final Lottos ticket) {
         WinningLotto winningLotto = new WinningLotto(InputView.readWinningLotto(),
             InputView.readBonusBall());
         return new WinningResult(ticket.calculateMatchLotto(winningLotto), lottoMoney);

@@ -51,7 +51,6 @@ public class LottoPurchaser {
             .collect(Collectors.toList());
     }
 
-
     private void validateLottoCount(final Count manualCount,
         final List<List<Integer>> manualLotto) {
         if (manualCount.getCount() != manualLotto.size()) {

@@ -32,7 +32,7 @@ public class InputView {
         return lottos;
     }
 
-    private static void readLottosbyCount(int count, List<List<Integer>> lottos) {
+    private static void readLottosbyCount(final int count, final List<List<Integer>> lottos) {
         for (int number = 0; number < count; number++) {
             lottos.add(readLotto());
         }

@@ -29,8 +29,8 @@ public class OutputView {
 
     private static String lottoNumberToString(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.stream()
-                .map(lottoNumber -> valueOf(lottoNumber.getNumber()))
-                .collect(joining(DELIMITER));
+            .map(lottoNumber -> valueOf(lottoNumber.getNumber()))
+            .collect(joining(DELIMITER));
     }
 
     public static void printWinningResult(WinningResultDto winningResultDto) {
@@ -42,18 +42,21 @@ public class OutputView {
     }
 
     private static void printProfit(WinningResultDto winningResultDto) {
-        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", winningResultDto.floorProfit());
+        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)",
+            winningResultDto.floorProfit());
     }
 
     private static void printRank(Rank rank, int rankCount) {
         System.out.println(
-                rank.getMatch() + "개 일치" + needBonus(rank) +
-                        " (" + rank.getReward() + "원)"
-                        + "- " + rankCount + "개");
+            rank.getMatch() + "개 일치" + needBonus(rank) +
+                " (" + rank.getReward() + "원)"
+                + "- " + rankCount + "개");
     }
 
     private static String needBonus(Rank rank) {
-        if (rank != Rank.FIVE_WITH_BONUS) return " ";
+        if (rank != Rank.FIVE_WITH_BONUS) {
+            return " ";
+        }
         return ", 보너스 볼 일치";
     }
 }

@@ -15,7 +15,7 @@ public class LottosDto {
         this.lottoCount = lottoCount;
     }
 
-    public static LottosDto from(Lottos lottos) {
+    public static LottosDto from(final Lottos lottos) {
         return new LottosDto(lottos.getLottos(), lottos.getLottoCount());
     }
 
