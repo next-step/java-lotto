@@ -29,8 +29,8 @@ public class Lotto {
         return lottoNumbers.contains(bonus);
     }
 
-    public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public String format(final LottoFormatter formatter) {
+        return formatter.format(lottoNumbers);
     }
 
     private void validateSize(final List<Integer> numbers) {

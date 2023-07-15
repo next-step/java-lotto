@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -30,9 +31,12 @@ public class LottoTest {
         final List<Integer> emptyNumbers = Collections.emptyList();
 
         /* when & then */
-        assertThatThrownBy(() -> new Lotto(sevenNumbers)).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new Lotto(fiveNumbers)).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new Lotto(emptyNumbers)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lotto(sevenNumbers)).isInstanceOf(
+            IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lotto(fiveNumbers)).isInstanceOf(
+            IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lotto(emptyNumbers)).isInstanceOf(
+            IllegalArgumentException.class);
     }
 
     @Test
@@ -42,7 +46,8 @@ public class LottoTest {
         final List<Integer> duplicatedNumbers = List.of(1, 2, 3, 4, 5, 5);
 
         /* when & then */
-        assertThatThrownBy(() -> new Lotto(duplicatedNumbers)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lotto(duplicatedNumbers)).isInstanceOf(
+            IllegalArgumentException.class);
     }
 
     @Test
@@ -85,5 +90,23 @@ public class LottoTest {
 
         /* then */
         assertThat(count).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("포매터를 받아 문자열을 반환한다.")
+    void format() {
+        /* given */
+        final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        final LottoFormatter formatter = lottoNumbers -> lottoNumbers.stream()
+            .map(LottoNumber::getValue)
+            .sorted()
+            .map(String::valueOf)
+            .collect(Collectors.joining("-", "<", ">"));
+
+        /* when */
+        final String result = lotto.format(formatter);
+
+        /* then */
+        assertThat(result).isEqualTo("<1-2-3-4-5-6>");
     }
 }
