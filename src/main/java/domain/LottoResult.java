@@ -15,13 +15,10 @@ public class LottoResult {
 
     private long calculateTotalPrize() {
         return Arrays.stream(Rank.values())
-                .mapToLong(this::calculatePrize)
+                .mapToLong(rank -> rank.calculatePrize(getCount(rank)))
                 .sum();
     }
 
-    private long calculatePrize(final Rank rank) {
-        return rank.getPrize() * getCount(rank);
-    }
 
     private void increaseRankCount(final Rank rank) {
         rankCount.put(rank, getCount(rank) + 1);
