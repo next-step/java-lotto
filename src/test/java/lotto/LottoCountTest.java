@@ -37,7 +37,7 @@ public class LottoCountTest {
         int inputLottoManualCount = 5;
         LottoCount lottoCount = new LottoCount(payment, inputLottoManualCount);
 
-        Assertions.assertThat(lottoCount.getLottoManualCount()).isEqualTo(5);
+        Assertions.assertThat(lottoCount.getManualCount()).isEqualTo(5);
     }
 
     @DisplayName("구입한 자동 로또 갯수를 정상 반환")
@@ -47,7 +47,7 @@ public class LottoCountTest {
         int inputLottoManualCount = 5;
         LottoCount lottoCount = new LottoCount(payment, inputLottoManualCount);
 
-        Assertions.assertThat(lottoCount.getLottoAutoCount()).isEqualTo(1);
+        Assertions.assertThat(lottoCount.getAutoCount()).isEqualTo(1);
     }
 
 }
