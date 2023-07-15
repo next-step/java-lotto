@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -32,8 +33,9 @@ public class Lottos {
     }
 
     public Lottos combineLottos(Lottos lottos) {
-        this.lottos.addAll(lottos.lottos);
-        return new Lottos(Collections.unmodifiableList(this.lottos));
+        ArrayList<Lotto> combineLottos = new ArrayList<>(this.lottos);
+        combineLottos.addAll(lottos.lottos);
+        return new Lottos(Collections.unmodifiableList(combineLottos));
     }
 
     @Override
