@@ -55,11 +55,9 @@ class LottoResultTest {
         final Money money = Money.valueOf(1_000L * 12L);
 
         /* when */
-        RateOfReturn rateOfReturn = lottoResult.calculateRateOfReturn(money);
+        RateOfReturn result = lottoResult.calculateRateOfReturn(money);
 
         /* then */
-        RateOfReturn expectedRateOfReturn = new RateOfReturn(
-            (double) (5_000L * 2L) / (1_000L * 12L));
-        assertThat(rateOfReturn).isEqualTo(expectedRateOfReturn);
+        assertThat(result).isEqualTo(new RateOfReturn(5_000L * 2L, 1_000L * 12L));
     }
 }

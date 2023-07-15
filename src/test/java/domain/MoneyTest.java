@@ -49,7 +49,7 @@ class MoneyTest {
         final RateOfReturn rateOfReturn = Money.calculateRateOfReturn(earned, spent);
 
         /* then */
-        assertThat(rateOfReturn).isEqualTo(new RateOfReturn((double) 10_000L / 20_000L));
+        assertThat(rateOfReturn).isEqualTo(new RateOfReturn(10_000L, 20_000L));
     }
 
     @Test

@@ -84,13 +84,13 @@ public class LottoGenerator {
 
     private static void validateMinimum(final Money money) {
         if (money.isLessThan(MONEY_UNIT)) {
-            throw new IllegalArgumentException("구입금액은 적어도 " + MONEY_UNIT + "원 이상이어야 합니다.");
+            throw new IllegalArgumentException("구입금액은 적어도 " + MONEY_UNIT.getValue() + "원 이상이어야 합니다.");
         }
     }
 
     private static void validateUnit(final Money money) {
         if (!money.isMultipleOf(MONEY_UNIT)) {
-            throw new IllegalArgumentException("구입금액은 " + MONEY_UNIT + "원 단위여야 합니다.");
+            throw new IllegalArgumentException("구입금액은 " + MONEY_UNIT.getValue() + "원 단위여야 합니다.");
         }
     }
 

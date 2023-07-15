@@ -27,6 +27,12 @@ public class LottoCount {
         return value;
     }
 
+    private void validateNonNegative(long value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("개수는 음수일 수 없습니다.");
+        }
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
@@ -42,11 +48,5 @@ public class LottoCount {
     @Override
     public int hashCode() {
         return Objects.hash(value);
-    }
-
-    private void validateNonNegative(long value) {
-        if (value < 0) {
-            throw new IllegalArgumentException("개수는 음수일 수 없습니다.");
-        }
     }
 }

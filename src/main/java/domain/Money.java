@@ -58,6 +58,16 @@ public class Money {
         return value;
     }
 
+    private boolean isZero() {
+        return value == 0;
+    }
+
+    private void validateNonNegative(final long value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("금액은 음수일 수 없습니다.");
+        }
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
@@ -73,15 +83,5 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(value);
-    }
-
-    private boolean isZero() {
-        return value == 0;
-    }
-
-    private void validateNonNegative(final long value) {
-        if (value < 0) {
-            throw new IllegalArgumentException("금액은 음수일 수 없습니다.");
-        }
     }
 }
