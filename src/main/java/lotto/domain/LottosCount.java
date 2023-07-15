@@ -1,10 +1,6 @@
 package lotto.domain;
 
-import lotto.util.RandomLottoGenerator;
-
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 public class LottosCount {
@@ -24,20 +20,6 @@ public class LottosCount {
 
     public long getLottosCount() {
         return lottosCount;
-    }
-
-    public LottosCount findAnotherCount(Money money) {
-        return new LottosCount(money.countLotto() - this.lottosCount);
-    }
-
-    public boolean isSameLottosCount(long lottosCount) {
-        return this.lottosCount == lottosCount;
-    }
-
-    public List<Lotto> generateRandomLottos() {
-        return LongStream.range(0, this.lottosCount)
-                .mapToObj(l -> RandomLottoGenerator.generateLotto())
-                .collect(Collectors.toList());
     }
 
     public LottosCount subtract(LottosCount anotherLottosCount) {
