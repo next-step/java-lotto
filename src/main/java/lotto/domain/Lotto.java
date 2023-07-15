@@ -49,10 +49,10 @@ public class Lotto {
         }
     }
 
-    public long countMatches(final Lotto other) {
-        return this.numbers.stream()
+    public int countMatches(final Lotto other) {
+        return Math.toIntExact(this.numbers.stream()
                 .filter(other.numbers::contains)
-                .count();
+                .count());
     }
 
     public List<LottoNumber> getLottoNumbers() {

@@ -3,47 +3,47 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
-    FIFTH(3L, 5_000L),
-    FOURTH(4L, 50_000L),
-    THIRD(5L, 1_500_000L) {
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000) {
         @Override
-        protected boolean verify(final Long match, final boolean isContainBonus) {
-            return super.verify(match, isContainBonus) && !isContainBonus;
+        protected boolean check(final int match, final boolean isContainBonus) {
+            return super.check(match, isContainBonus) && !isContainBonus;
         }
     },
-    SECOND(5L, 30_000_000L) {
+    SECOND(5, 30_000_000) {
         @Override
-        protected boolean verify(final Long match, final boolean isContainBonus) {
-            return super.verify(match, isContainBonus) && isContainBonus;
+        protected boolean check(final int match, final boolean isContainBonus) {
+            return super.check(match, isContainBonus) && isContainBonus;
         }
     },
-    FIRST(6L, 2_000_000_000L),
-    NONE(0L, 0L);
+    FIRST(6, 2_000_000_000),
+    NONE(0, 0);
 
-    private final Long match;
-    private final Long prize;
+    private final int match;
+    private final long prize;
 
-    LottoRank(final Long match, final Long prize) {
+    LottoRank(final int match, final long prize) {
         this.match = match;
         this.prize = prize;
     }
 
-    public static LottoRank from(final Long match, final boolean isContainBonus) {
+    public static LottoRank from(final int match, final boolean isContainBonus) {
         return Arrays.stream(values())
-                .filter(rank -> rank.verify(match, isContainBonus))
+                .filter(rank -> rank.check(match, isContainBonus))
                 .findAny()
                 .orElse(NONE);
     }
 
-    protected boolean verify(Long match, boolean isContainBonus) {
-        return this.match.equals(match);
+    protected boolean check(int match, boolean isContainBonus) {
+        return this.match == match;
     }
 
-    public Long getPrize() {
+    public long getPrize() {
         return prize;
     }
 
-    public Long getMatch() {
+    public int getMatch() {
         return match;
     }
 }

@@ -18,13 +18,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class LottoTest {
     private static Stream<Arguments> generateData() {
         return Stream.of(
-                Arguments.of(Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 6)), 6L),
-                Arguments.of(Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 7)), 5L),
-                Arguments.of(Lotto.createManualLotto(List.of(1, 2, 3, 4, 8, 9)), 4L),
-                Arguments.of(Lotto.createManualLotto(List.of(1, 2, 3, 8, 9, 10)), 3L),
-                Arguments.of(Lotto.createManualLotto(List.of(1, 2, 8, 9, 10, 11)), 2L),
-                Arguments.of(Lotto.createManualLotto(List.of(1, 8, 9, 10, 11, 12)), 1L),
-                Arguments.of(Lotto.createManualLotto(List.of(21, 22, 23, 24, 25, 26)), 0L)
+                Arguments.of(Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 6)), 6),
+                Arguments.of(Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 7)), 5),
+                Arguments.of(Lotto.createManualLotto(List.of(1, 2, 3, 4, 8, 9)), 4),
+                Arguments.of(Lotto.createManualLotto(List.of(1, 2, 3, 8, 9, 10)), 3),
+                Arguments.of(Lotto.createManualLotto(List.of(1, 2, 8, 9, 10, 11)), 2),
+                Arguments.of(Lotto.createManualLotto(List.of(1, 8, 9, 10, 11, 12)), 1),
+                Arguments.of(Lotto.createManualLotto(List.of(21, 22, 23, 24, 25, 26)), 0)
         );
     }
 
@@ -90,7 +90,7 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("generateData")
     @DisplayName("일치하는 개수 테스트")
-    void countMatchTest(Lotto testLotto, Long match) {
+    void countMatchTest(Lotto testLotto, int match) {
         //given
         Lotto lotto = Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 6));
 

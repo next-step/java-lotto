@@ -32,7 +32,7 @@ public class WinningLotto {
     }
 
     public LottoRank calculateRank(final Lotto lotto) {
-        Long match = this.lotto.countMatches(lotto);
+        int match = this.lotto.countMatches(lotto);
         boolean isContainBonus = lotto.contains(bonus);
         return LottoRank.from(match, isContainBonus);
     }
