@@ -1,21 +1,16 @@
 package lottogame.app;
 
-import java.util.List;
-
 import lottogame.console.ConsoleLottoInputer;
 import lottogame.console.ConsoleLottoViewer;
-import lottogame.console.purchase.ConsolePurchaseInputer;
-import lottogame.console.purchase.ConsolePurchaseViewer;
-import lottogame.console.resultcheck.ConsoleResultCheckInputer;
-import lottogame.console.resultcheck.ConsoleResultCheckViewer;
 import lottogame.controller.LottoController;
-import lottogame.controller.LottoPurchaseController;
-import lottogame.controller.spi.*;
-import lottogame.controller.LottoResultCheckController;
+import lottogame.controller.spi.LottoInputer;
+import lottogame.controller.spi.LottoViewer;
 import lottogame.domain.LottoTicket;
 import lottogame.domain.spi.NumberGenerator;
 import lottogame.randomnumber.RandomLottoNumberGenerator;
 import lottogame.service.LottoService;
+
+import java.util.List;
 
 public class Application {
 
