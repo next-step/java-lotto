@@ -37,7 +37,7 @@ public final class Lotto {
     private List<LottoNumber> toLottoNumbers(final List<Integer> values) {
         return values.stream()
             .map(LottoNumber::new)
-            .collect(Collectors.toList());
+            .collect(Collectors.toUnmodifiableList());
     }
 
     public boolean hasLottoNumber(final LottoNumber lottoNumber) {
@@ -45,13 +45,13 @@ public final class Lotto {
     }
 
     public int countMatch(final Lotto winningLotto) {
-        return (int) winningLotto.lotto.stream()
+        return Math.toIntExact(winningLotto.lotto.stream()
             .filter(this::hasLottoNumber)
-            .count();
+            .count());
     }
 
     public List<LottoNumber> getLotto() {
-        return List.copyOf(lotto);
+        return lotto;
     }
 
     @Override

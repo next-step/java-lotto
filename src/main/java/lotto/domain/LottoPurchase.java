@@ -7,16 +7,16 @@ public class LottoPurchase {
     private final Payment payment;
     private final int manualCount;
 
-    public LottoPurchase(int paymentValue, int manualCountValue) {
+    public LottoPurchase(final int paymentValue, final int manualCountValue) {
         validate(paymentValue, manualCountValue);
-        this.payment = new Payment(paymentValue);
+        this.payment = new Payment(paymentValue, LOTTO_PRICE);
         this.manualCount = manualCountValue;
     }
 
-    private void validate(int paymentValue, int manualCountValue) {
+    private void validate(final int paymentValue, final int manualCountValue) {
         if (paymentValue < manualCountValue * LOTTO_PRICE) {
             throw new IllegalArgumentException(
-                    MessageFormat.format("금액이 부족합니다. 현재 금액 : {0}", paymentValue)
+                    MessageFormat.format("금액이 부족합니다. 현재 금액 : {0}원", paymentValue)
             );
         }
     }

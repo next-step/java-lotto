@@ -13,7 +13,7 @@ public enum LottoMatch {
     private final int prize;
     private final boolean isBonus;
 
-    LottoMatch(int matchCount, boolean isBonus, int prize) {
+    LottoMatch(final int matchCount, final boolean isBonus, final int prize) {
         this.matchCount = matchCount;
         this.prize = prize;
         this.isBonus = isBonus;

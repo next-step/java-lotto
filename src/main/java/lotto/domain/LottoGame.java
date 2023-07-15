@@ -10,13 +10,12 @@ public final class LottoGame {
 
     public static final int UPPER_LOTTO_NUMBER = 45;
     public static final int LOWER_LOTTO_NUMBER = 1;
-    private static final int LOTTO_PRICE = 1_000;
     public static final int LOTTO_COUNT = 6;
     public static final int FROM_INDEX = 0;
     private final LottoPurchase lottoPurchase;
     private final Lottos lottos;
 
-    public LottoGame(int paymentValue, int manualCountValue, List<Lotto> lottos) {
+    public LottoGame(final int paymentValue, final int manualCountValue, final List<Lotto> lottos) {
         this.lottoPurchase = new LottoPurchase(paymentValue, manualCountValue);
         lottos.addAll(generateLottos());
         this.lottos = new Lottos(lottos);
