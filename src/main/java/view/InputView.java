@@ -19,9 +19,7 @@ public class InputView {
     public static int readMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         try {
-            final int money = Integer.parseInt(scanner.nextLine());
-
-            return money;
+            return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("구입금액은 정수여야 합니다.");
         }
@@ -31,9 +29,7 @@ public class InputView {
         System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
 
         try {
-            final int count = Integer.parseInt(scanner.nextLine());
-
-            return count;
+            return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("수동으로 구매할 로또 수는 정수여야 합니다.");
         }
@@ -73,9 +69,7 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요.");
 
         try {
-            final int number = Integer.parseInt(scanner.nextLine());
-
-            return number;
+            return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("로또번호는 정수여야 합니다.");
         }

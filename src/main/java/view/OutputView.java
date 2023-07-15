@@ -13,7 +13,7 @@ import java.util.List;
 
 public class OutputView {
 
-    private static LottoFormatter lottoFormatter = new DefaultLottoFormatter();
+    private static final LottoFormatter lottoFormatter = new DefaultLottoFormatter();
 
     private OutputView() {
     }

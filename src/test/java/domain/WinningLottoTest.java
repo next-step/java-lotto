@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class WinningLottoTest {
+class WinningLottoTest {
 
     Lotto lotto;
     LottoNumber bonus;

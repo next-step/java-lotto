@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoTest {
+class LottoTest {
 
     @Test
     @DisplayName("로또 번호 6개로 생성할 수 있다.")

@@ -115,6 +115,7 @@ class MoneyTest {
         final Money threeThousands = Money.valueOf(3_000L);
 
         /* when & then */
-        assertThat(oneThousand.isLessThan(threeThousands));
+        assertThat(oneThousand.isLessThan(threeThousands)).isTrue();
+        assertThat(threeThousands.isLessThan(oneThousand)).isFalse();
     }
 }
