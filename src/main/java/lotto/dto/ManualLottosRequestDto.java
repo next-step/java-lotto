@@ -5,20 +5,14 @@ import java.util.stream.Collectors;
 
 public class ManualLottosRequestDto {
 
-    private final long manualCount;
     private final List<ManualLottoRequestDto> manualLottos;
 
-    public ManualLottosRequestDto(long manualCount, List<List<Integer>> manualLottos) {
-        this.manualCount = manualCount;
+    public ManualLottosRequestDto(List<List<Integer>> manualLottos) {
         this.manualLottos = manualLottos.stream()
                 .map(ManualLottoRequestDto::new)
                 .collect(Collectors.toList());
     }
-
-    public long getManualCount() {
-        return manualCount;
-    }
-
+    
     public List<ManualLottoRequestDto> getManualLottos() {
         return manualLottos;
     }

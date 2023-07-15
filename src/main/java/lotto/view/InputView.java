@@ -22,12 +22,24 @@ public class InputView {
 
     public ManualLottosRequestDto inputManualLottos() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        long manualCount = parseLong(scanner.nextLine());
+        long manualLottosCount = parseLong(scanner.nextLine());
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<List<Integer>> lottos = LongStream.range(0, manualCount)
+        List<List<Integer>> manualLottos = LongStream.range(0, manualLottosCount)
                 .mapToObj(l -> parseLottoNumbers(scanner.nextLine().split(", ")))
                 .collect(Collectors.toList());
-        return new ManualLottosRequestDto(manualCount, lottos);
+        validManualLottos(manualLottosCount, manualLottos);
+        return new ManualLottosRequestDto(manualLottos);
+    }
+
+    private void validManualLottos(long manualLottosCount, List<List<Integer>> manualLottos) {
+        if (manualLottosCount != manualLottos.size()) {
+            throw new IllegalArgumentException
+                    ("구매를 원하는 로또의 수와 수동으로 입력한 로또의 수가 다릅니다. 구매를 원하는 로또의 수: " +
+                            manualLottosCount +
+                            ", 수동으로 입력한 로또의 수: " +
+                            manualLottos.size()
+                    );
+        }
     }
 
     public WinningNumbersRequestDto inputWinningNumbers() {
