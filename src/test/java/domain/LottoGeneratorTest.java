@@ -15,7 +15,7 @@ class LottoGeneratorTest {
     @DisplayName("로또를 일정 수만큼 수동으로 생성하고, 나머지는 자동으로 생성한다.")
     void generateLottosManuallyAndThenAutomatically() {
         /* given */
-        final Money money = new Money(5_000);
+        final Money money = Money.valueOf(5_000);
         final Count manualPurchaseCount = new Count(2);
         final List<List<Integer>> numberBundles = List.of(List.of(1, 2, 3, 4, 5, 6),
             List.of(7, 8, 9, 10, 11, 12));
@@ -40,7 +40,7 @@ class LottoGeneratorTest {
     @DisplayName("수동으로 구매할 로또 수가 구입금액으로 구매 가능한 총 로또 수보다 많으면 IllegalArgumentException을 던진다.")
     void moneyNotSufficient() {
         /* given */
-        final Money money = new Money(1_000);
+        final Money money = Money.valueOf(1_000);
         final Count manualPurchaseCount = new Count(2);
         final List<List<Integer>> inputNumberBundles = List.of(List.of(1, 2, 3, 4, 5, 6),
             List.of(7, 8, 9, 10, 11, 12));
@@ -55,7 +55,7 @@ class LottoGeneratorTest {
     @DisplayName("숫자 묶음 수가 수동으로 구매할 로또 수와 일치하지 않으면 IllegalArgumentException을 던진다.")
     void manualGenerationCountAndnumberBundlesCountNotEqual() {
         /* given */
-        final Money money = new Money(5_000);
+        final Money money = Money.valueOf(5_000);
         final Count manualPurchaseCount = new Count(3);
         final List<List<Integer>> inputNumberBundles = List.of(List.of(1, 2, 3, 4, 5, 6),
             List.of(7, 8, 9, 10, 11, 12));
@@ -70,7 +70,7 @@ class LottoGeneratorTest {
     @DisplayName("투입금액이 로또 1장의 가격보다 작으면 IllegalArgumentException을 반환한다.")
     void validateMinimum() {
         /* given */
-        final Money money = new Money(500);
+        final Money money = Money.valueOf(500);
         final Count manualPurchaseCount = new Count(0);
         final List<List<Integer>> inputNumberBundles = Collections.emptyList();
 
@@ -84,7 +84,7 @@ class LottoGeneratorTest {
     @DisplayName("투입금액이 로또 가격의 배수가 아니면 IllegalArgumentException을 반환한다.")
     void validateUnit() {
         /* given */
-        final Money money = new Money(1_500);
+        final Money money = Money.valueOf(1_500);
         final Count manualPurchaseCount = new Count(0);
         final List<List<Integer>> inputNumberBundles = Collections.emptyList();
 

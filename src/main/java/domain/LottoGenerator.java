@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class LottoGenerator {
 
-    private static final Money MONEY_UNIT = new Money(1_000L);
+    private static final Money MONEY_UNIT = Money.valueOf(1_000L);
 
     private LottoGenerator() {
     }

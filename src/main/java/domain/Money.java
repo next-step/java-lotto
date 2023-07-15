@@ -8,9 +8,16 @@ public class Money {
 
     private final long value;
 
-    public Money(final long value) {
+    private Money(final long value) {
         validateNonNegative(value);
         this.value = value;
+    }
+
+    public static Money valueOf(final long value) {
+        if (value == 0) {
+            return ZERO;
+        }
+        return new Money(value);
     }
 
     public static Money createZero() {
@@ -36,11 +43,11 @@ public class Money {
     }
 
     public Money sum(final Money other) {
-        return new Money(value + other.value);
+        return Money.valueOf(value + other.value);
     }
 
     public Money multiplyByCount(Count count) {
-        return new Money(value * count.getValue());
+        return Money.valueOf(value * count.getValue());
     }
 
     public boolean isLessThan(final Money other) {

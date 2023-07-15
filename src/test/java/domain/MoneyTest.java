@@ -16,7 +16,7 @@ class MoneyTest {
         final long value = 1_000L;
 
         /* when & then */
-        assertDoesNotThrow(() -> new Money(value));
+        assertDoesNotThrow(() -> Money.valueOf(value));
     }
 
     @Test
@@ -26,7 +26,7 @@ class MoneyTest {
         final long value = -1_000L;
 
         /* when & then */
-        assertThrows(IllegalArgumentException.class, () -> new Money(value));
+        assertThrows(IllegalArgumentException.class, () -> Money.valueOf(value));
     }
 
     @Test
@@ -35,15 +35,15 @@ class MoneyTest {
         /* given */
 
         /* when & then */
-        assertThat(Money.createZero()).isEqualTo(new Money(0L));
+        assertThat(Money.createZero()).isSameAs(Money.valueOf(0L));
     }
 
     @Test
     @DisplayName("수익률을 계산한다.")
     void calculateRateOfReturn() {
         /* given */
-        final Money earned = new Money(10_000L);
-        final Money spent = new Money(20_000L);
+        final Money earned = Money.valueOf(10_000L);
+        final Money spent = Money.valueOf(20_000L);
 
         /* when */
         final RateOfReturn rateOfReturn = Money.calculateRateOfReturn(earned, spent);
@@ -56,9 +56,9 @@ class MoneyTest {
     @DisplayName("금액의 배수 여부를 반환한다.")
     void isMultipleOf() {
         /* given */
-        final Money threeThousands = new Money(3_000L);
-        final Money twoThousands = new Money(2_000L);
-        final Money oneThousand = new Money(1_000L);
+        final Money threeThousands = Money.valueOf(3_000L);
+        final Money twoThousands = Money.valueOf(2_000L);
+        final Money oneThousand = Money.valueOf(1_000L);
 
         /* when & then */
         assertThat(threeThousands.isMultipleOf(oneThousand)).isTrue();
@@ -69,8 +69,8 @@ class MoneyTest {
     @DisplayName("최대 구매 개수를 반환한다.")
     void calculateMaximumCount() {
         /* given */
-        final Money threeThousands = new Money(3_000L);
-        final Money oneThousand = new Money(1_000L);
+        final Money threeThousands = Money.valueOf(3_000L);
+        final Money oneThousand = Money.valueOf(1_000L);
 
         /* when & then */
         assertThat(threeThousands.calculateMaximumCount(oneThousand)).isEqualTo(
@@ -81,9 +81,9 @@ class MoneyTest {
     @DisplayName("가격의 합을 반환한다.")
     void sum() {
         /* given */
-        final Money threeThousands = new Money(3_000L);
-        final Money twoThousands = new Money(2_000L);
-        final Money oneThousand = new Money(1_000L);
+        final Money threeThousands = Money.valueOf(3_000L);
+        final Money twoThousands = Money.valueOf(2_000L);
+        final Money oneThousand = Money.valueOf(1_000L);
 
         /* when */
         final Money result = twoThousands.sum(oneThousand);
@@ -96,8 +96,8 @@ class MoneyTest {
     @DisplayName("가격을 개수만큼 곱해서 반환한다.")
     void multiplyByCount() {
         /* given */
-        final Money threeThousands = new Money(3_000L);
-        final Money oneThousand = new Money(1_000L);
+        final Money threeThousands = Money.valueOf(3_000L);
+        final Money oneThousand = Money.valueOf(1_000L);
         final Count three = new Count(3);
 
         /* when */
@@ -111,8 +111,8 @@ class MoneyTest {
     @DisplayName("금액이 더 작은지 반환한다.")
     void isLessThan() {
         /* given */
-        final Money oneThousand = new Money(1_000L);
-        final Money threeThousands = new Money(3_000L);
+        final Money oneThousand = Money.valueOf(1_000L);
+        final Money threeThousands = Money.valueOf(3_000L);
 
         /* when & then */
         assertThat(oneThousand.isLessThan(threeThousands));

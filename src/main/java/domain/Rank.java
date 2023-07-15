@@ -18,7 +18,7 @@ public enum Rank {
     Rank(final long matchLottoNumber, final boolean hasToCheckBonus, final long prize) {
         this.matchLottoNumber = matchLottoNumber;
         this.hasToCheckBonus = hasToCheckBonus;
-        this.prize = new Money(prize);
+        this.prize = Money.valueOf(prize);
     }
 
     public static Rank from(final long matchLottoNumber, final boolean containsBonus) {

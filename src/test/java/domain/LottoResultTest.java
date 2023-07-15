@@ -52,7 +52,7 @@ class LottoResultTest {
     void calculateTotalPrize() {
         /* given */
         final LottoResult lottoResult = new LottoResult(target);
-        final Money money = new Money(1_000L * 12L);
+        final Money money = Money.valueOf(1_000L * 12L);
 
         /* when */
         RateOfReturn rateOfReturn = lottoResult.calculateRateOfReturn(money);

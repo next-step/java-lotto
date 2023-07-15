@@ -24,7 +24,7 @@ public class LottoApplication {
 
     private static void run() {
         // 가격 입력
-        final Money money = new Money(InputView.readMoney());
+        final Money money = Money.valueOf(InputView.readMoney());
 
         //수동으로 구매할 로또 수 입력
         final Count manualPurchaseCount = new Count(InputView.readManualPurchaseCount());
