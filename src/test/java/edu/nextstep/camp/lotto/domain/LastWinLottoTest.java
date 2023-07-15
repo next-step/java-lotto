@@ -10,13 +10,13 @@ public class LastWinLottoTest {
     @Test
     void 보너스_번호_로또_번호_중복_체크() {
         assertThatIllegalArgumentException().isThrownBy(
-                () -> LastWinLotto.of(2, new Integer[]{2, 3, 4, 5, 6, 7})
+                () -> new LastWinLotto(new Lotto(2, 3, 4, 5, 6, 7), LottoNumber.of(2))
         ).withMessageContaining("보너스 번호는 지난주 로또 번호와 겹칠 수 없습니다.");
     }
 
     @Test
     void 로또_번호_기반_등수_확인() {
-        LastWinLotto lastWinLotto = LastWinLotto.of(9, new Integer[]{2, 3, 4, 5, 6, 7});
+        LastWinLotto lastWinLotto = new LastWinLotto(new Lotto(2, 3, 4, 5, 6, 7), LottoNumber.of(9));
 
         LottoRank lottoRank = lastWinLotto.checkRank(new Lotto(2, 3, 4, 5, 6, 9));
 
