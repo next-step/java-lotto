@@ -19,7 +19,7 @@ class RateOfReturnTest {
     }
 
     @Test
-    @DisplayName("분모가 0 이하이면 IllegalArgumentException을 던진다.")
+    @DisplayName("투입금액이 0 이하이면 IllegalArgumentException을 던진다.")
     void createFailure() {
         /* given */
 

@@ -6,9 +6,9 @@ public class RateOfReturn {
 
     private final double value;
 
-    public RateOfReturn(final long nominator, final long denominator) {
-        validatePositive(denominator);
-        value = (double) nominator / denominator;
+    public RateOfReturn(final long profit, final long investment) {
+        validatePositive(investment);
+        value = (double) profit / investment;
     }
 
     public RateOfReturn(final double value) {
@@ -36,9 +36,9 @@ public class RateOfReturn {
         return Objects.hash(value);
     }
 
-    private void validatePositive(final long denominator) {
-        if (denominator <= 0) {
-            throw new IllegalArgumentException("분모는 양수여야 합니다.");
+    private void validatePositive(final long investment) {
+        if (investment <= 0) {
+            throw new IllegalArgumentException("수익률 계산 시 투입금액은 양수여야 합니다.");
         }
     }
 }
