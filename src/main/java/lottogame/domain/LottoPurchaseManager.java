@@ -15,6 +15,25 @@ public class LottoPurchaseManager {
         this.numberGenerator = numberGenerator;
     }
 
+    public List<LottoTicketDto> purchase(int money, List<LottoTicketDto> lottoTicketDtos) {
+        assertMoney(money);
+        assertPassiveLottoTickets(money, lottoTicketDtos);
+        money -= lottoTicketDtos.size() * LottoTicket.PURCHASABLE_UNIT;
+        List<LottoTicket> lottoTickets = lottoTicketDtos.stream()
+            .map(lottoTicketDto -> new LottoTicket(lottoTicketDto.getNumbers()))
+            .collect(Collectors.toList());
+        lottoTickets.addAll(createLottoTickets(money));
+        return toLottoTicketDtos(lottoTickets);
+    }
+
+    private void assertPassiveLottoTickets(int money, List<LottoTicketDto> lottoTicketDtos) {
+        int lottoBuyableCount = money / LottoTicket.PURCHASABLE_UNIT;
+        if (lottoBuyableCount < lottoTicketDtos.size()) {
+            throw new IllegalArgumentException(String.format("구매가능한 로또 숫자 \"%d\" 보다 선택한 로또의 숫자가 더 많습니다.",
+                lottoBuyableCount));
+        }
+    }
+
     public List<LottoTicketDto> purchase(int money) {
         assertMoney(money);
         List<LottoTicket> lottoTickets = createLottoTickets(money);
