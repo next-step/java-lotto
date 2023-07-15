@@ -133,5 +133,4 @@ public class WinningLottoTest {
         assertThat(lottoResult).isEqualTo(Rank.NONE);
         assertThat(lottoResultWithBonus).isEqualTo(Rank.NONE);
     }
-
 }
