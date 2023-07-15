@@ -1,20 +1,28 @@
 package lotto.service;
 
 import lotto.domain.*;
+import lotto.util.RandomLottoGenerator;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoService {
 
-    public Lottos buyLotto(Money money, Lottos manualLotto, LottosCount manualLottosCount) {
-        validateManualLottosSize(manualLotto, manualLottosCount);
-        LottosCount autoLottoCount = manualLottosCount.findAnotherCount(money);
-        Lottos autoLottos = new Lottos(autoLottoCount.generateRandomLottos());
+    public Lottos buyLotto(Money money, Lottos manualLotto) {
+        LottosCount totalLottosCount = new LottosCount(money.countLotto());
+        LottosCount manualLottosCount = new LottosCount(manualLotto.size());
+        LottosCount autoLottoCount = totalLottosCount.subtract(manualLottosCount);
+
+        Lottos autoLottos = generateAutoLotto(autoLottoCount);
+
         return manualLotto.combineLottos(autoLottos);
     }
 
-    private void validateManualLottosSize(Lottos manualLotto, LottosCount manualLottosCount) {
-        if (!manualLottosCount.isSameLottosCount(manualLotto.size())) {
-            throw new IllegalArgumentException("수동 로또 구매를 원하는 수와 실제 수동 로또로 입력한 값의 크기가 다릅니다.");
-        }
+    private Lottos generateAutoLotto(LottosCount autoLottosCount) {
+        List<Lotto> autoLottos = autoLottosCount.makeLottosCountToLongStream()
+                .mapToObj(l -> RandomLottoGenerator.generateLotto())
+                .collect(Collectors.toList());
+        return new Lottos(autoLottos);
     }
 
     public LottoResults matchWinningLotto(Lottos lottos, WinningNumbers winningNumbers) {

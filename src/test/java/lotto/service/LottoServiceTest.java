@@ -2,7 +2,6 @@ package lotto.service;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.LottosCount;
 import lotto.domain.Money;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -22,7 +21,7 @@ class LottoServiceTest {
         Lottos manualLottos = new Lottos(
                 new ArrayList<>(List.of(new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)))))
         );
-        Lottos lottos = lottoService.buyLotto(money, manualLottos, new LottosCount(1));
+        Lottos lottos = lottoService.buyLotto(money, manualLottos);
         Assertions.assertThat(lottos.size()).isEqualTo(5);
     }
 }
