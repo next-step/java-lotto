@@ -1,7 +1,5 @@
 package edu.nextstep.camp.lotto.domain;
 
-import java.util.Arrays;
-
 public class LastWinLotto {
 
     private final Lotto lastWinLotto;
