@@ -4,8 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+import static lotto.fixture.LottoFixture.createLotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
@@ -40,7 +40,7 @@ public class WinningLottoTest {
     void 당첨_번호로_비교() {
         // given
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
-        Lotto purchasedLotto = new Lotto(createLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
+        Lotto purchasedLotto = createLotto(1, 2, 3, 4, 5, 6);
 
         // when
         Rank rank = winningLotto.matchOfRank(purchasedLotto);
@@ -49,9 +49,4 @@ public class WinningLottoTest {
         assertThat(rank).isEqualTo(Rank.SIX);
     }
 
-    private List<LottoNumber> createLottoNumbers(List<Integer> container) {
-        return container.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
 }

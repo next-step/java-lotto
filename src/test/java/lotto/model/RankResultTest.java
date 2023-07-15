@@ -3,10 +3,9 @@ package lotto.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
+import static lotto.fixture.LottoFixture.createLotto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RankResultTest {
@@ -61,15 +60,5 @@ class RankResultTest {
         assertThat(rankResult.getTotalRankReward())
                 .isEqualTo(2_000_010_000);
 
-    }
-
-    private Lotto createLotto(int... numbers) {
-        return new Lotto(createLottoNumbers(numbers));
-    }
-
-    private List<LottoNumber> createLottoNumbers(int... numbers) {
-        return Arrays.stream(numbers)
-                .mapToObj(LottoNumber::new)
-                .collect(toList());
     }
 }
