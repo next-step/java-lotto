@@ -1,24 +1,23 @@
 package domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-
-public class LottoResultTest {
+class LottoResultTest {
 
     private List<Rank> target;
 
     @BeforeEach
     void setUp() {
         target = List.of(
-                Rank.FIFTH, Rank.FIFTH,
-                Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE,
-                Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE
+            Rank.FIFTH, Rank.FIFTH,
+            Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE,
+            Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE, Rank.NONE
         );
     }
 
@@ -52,14 +51,13 @@ public class LottoResultTest {
     @DisplayName("수익률을 구한다.")
     void calculateTotalPrize() {
         /* given */
-        LottoResult lottoResult = new LottoResult(target);
-        long money = target.size() * 1000L;
+        final LottoResult lottoResult = new LottoResult(target);
+        final Money money = Money.valueOf(1_000L * 12L);
 
         /* when */
-        double rateOfReturn = lottoResult.calculateRateOfReturn(money);
+        RateOfReturn result = lottoResult.calculateRateOfReturn(money);
 
         /* then */
-        double expectedRateOfReturn = Rank.FIFTH.getPrize() * 2L / (double) money;
-        assertThat(rateOfReturn).isEqualTo(expectedRateOfReturn);
+        assertThat(result).isEqualTo(new RateOfReturn(5_000L * 2L, 1_000L * 12L));
     }
 }

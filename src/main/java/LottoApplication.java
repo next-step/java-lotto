@@ -1,8 +1,14 @@
-import domain.*;
+import domain.LottoCount;
+import domain.Lotto;
+import domain.LottoGenerator;
+import domain.LottoNumber;
+import domain.LottoResult;
+import domain.Lottos;
+import domain.Money;
+import domain.WinningLotto;
+import java.util.List;
 import view.InputView;
 import view.OutputView;
-
-import java.util.List;
 
 public class LottoApplication {
 
@@ -18,19 +24,26 @@ public class LottoApplication {
 
     private static void run() {
         // 가격 입력
-        final long money = InputView.readMoney();
+        final Money money = Money.valueOf(InputView.readMoney());
+
+        //수동으로 구매할 로또 수 입력
+        final LottoCount manualPurchaseCount = new LottoCount(InputView.readManualPurchaseCount());
+
+        //수동으로 구매할 번호 입력
+        List<List<Integer>> numberBundles = InputView.readManualLottoNumbers(manualPurchaseCount);
 
         // 로또 만들고
-        final List<Lotto> lottos = LottoGenerator.generateLottosAutomatically(money);
+        final List<Lotto> lottos = LottoGenerator.generateLottos(money, manualPurchaseCount,
+            numberBundles);
 
         // 구매 결과 출력
-        OutputView.printLottosSize(lottos);
+        OutputView.printPurchaseCount(lottos, manualPurchaseCount);
 
         // 로또 출력한다.
         OutputView.printLottos(lottos);
 
         // 당첨 번호 입력
-        final List<Integer> lottoNumbers = InputView.readLottoNumbers();
+        final List<Integer> lottoNumbers = InputView.readWinningLottoNumbers();
         final int lottoNumber = InputView.readLottoNumber();
 
         // 게임 진행해서
@@ -40,9 +53,11 @@ public class LottoApplication {
         OutputView.printStatistic(lottoResult, money);
     }
 
-    private static LottoResult play(final List<Lotto> target, final List<Integer> lottoNumbers, final int lottoNumber) {
+    private static LottoResult play(final List<Lotto> target, final List<Integer> lottoNumbers,
+        final int lottoNumber) {
         final Lottos lottos = new Lottos(target);
-        final WinningLotto winningLotto = new WinningLotto(new Lotto(lottoNumbers), new LottoNumber(lottoNumber));
+        final WinningLotto winningLotto = new WinningLotto(new Lotto(lottoNumbers),
+            new LottoNumber(lottoNumber));
 
         return new LottoResult(lottos.checkAllLottoResult(winningLotto));
     }

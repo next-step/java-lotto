@@ -1,16 +1,15 @@
 package domain;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-public class WinningLottoTest {
+import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+class WinningLottoTest {
 
     Lotto lotto;
     LottoNumber bonus;
@@ -38,7 +37,8 @@ public class WinningLottoTest {
         LottoNumber bonus = new LottoNumber(3);
 
         /* when & then */
-        assertThatThrownBy(() -> new WinningLotto(lotto, bonus)).isExactlyInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new WinningLotto(lotto, bonus)).isExactlyInstanceOf(
+            IllegalArgumentException.class);
     }
 
     @Test
@@ -133,5 +133,4 @@ public class WinningLottoTest {
         assertThat(lottoResult).isEqualTo(Rank.NONE);
         assertThat(lottoResultWithBonus).isEqualTo(Rank.NONE);
     }
-
 }
