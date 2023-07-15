@@ -13,7 +13,7 @@ public class OutputView {
     private static final String DELIMITER = ", ";
 
     public static void printPurchasedLottos(final PurChasedLottos purChasedLottos) {
-        System.out.println(purChasedLottos.getLottoCount() + "개를 구매했습니다");
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", purChasedLottos.getManualCount(), purChasedLottos.getAutoCount());
         for (var purchaseLotto : purChasedLottos.getLottos()) {
             printLotto(purchaseLotto);
         }
