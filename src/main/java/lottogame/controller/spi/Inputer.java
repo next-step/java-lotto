@@ -1,11 +1,12 @@
 package lottogame.controller.spi;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Set;
 
 public interface Inputer {
 
-    long inputMoney();
+    BigInteger inputMoney();
 
     int inputPassiveLottoTicketCount();
 

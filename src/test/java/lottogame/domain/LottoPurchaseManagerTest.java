@@ -3,6 +3,7 @@ package lottogame.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Set;
 import lottogame.domain.dto.LottoTicketDto;
@@ -27,7 +28,7 @@ class LottoPurchaseManagerTest {
         class Context_Not_Divided_By_1000 {
 
             private final List<LottoTicketDto> emptyList = List.of();
-            private final int notDividedMoney = 1001;
+            private final BigInteger notDividedMoney = BigInteger.valueOf(1001);
 
             @Test
             @DisplayName("IllegalArgumentException 을 던진다")
@@ -42,7 +43,7 @@ class LottoPurchaseManagerTest {
         @DisplayName("돈, 수동으로 구매할 로또 티켓 들, 각 로또 티켓의 숫자들을 입력받으면,")
         class Context_Input_Money_Ticket_Numbers {
 
-            private final int totalMoney = 3000;
+            private final BigInteger totalMoney = BigInteger.valueOf(3000);
             private final List<LottoTicketDto> passiveLottoTicketRequest = List.of(
                 new LottoTicketDto(Set.of(1, 2, 3, 4, 5, 6)), new LottoTicketDto(Set.of(7, 8, 9, 10, 11, 12)));
 
@@ -60,7 +61,7 @@ class LottoPurchaseManagerTest {
         @DisplayName("입력한 금액보다, 수동으로 구매할 로또가 많으면,")
         class Context_Input_Overflow_Passive_Lottos {
 
-            private final int totalMoney = 1000;
+            private final BigInteger totalMoney = BigInteger.valueOf(1000);
             private final List<LottoTicketDto> passiveLottoTicketRequest = List.of(
                 new LottoTicketDto(Set.of(1, 2, 3, 4, 5, 6)), new LottoTicketDto(Set.of(7, 8, 9, 10, 11, 12)));
 

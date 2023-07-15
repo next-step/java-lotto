@@ -18,10 +18,8 @@ public class LocalScanner {
         return scanner.nextLine();
     }
 
-    public long nextLong() {
-        long answer = scanner.nextLong();
-        clearBuffer();
-        return answer;
+    public String next() {
+        return scanner.next();
     }
 
     public int nextInt() {

@@ -1,5 +1,6 @@
 package lottogame.controller;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -29,7 +30,7 @@ public class LottoController {
     }
 
     private List<LottoTicketDto> purchaseLottoTickets() {
-        long money = inputer.inputMoney();
+        BigInteger money = inputer.inputMoney();
         int passiveLottoTicketCount = inputer.inputPassiveLottoTicketCount();
         List<LottoTicketDto> selectedLottoTickets = toLottoTicketDtos(
             inputer.inputPassiveLottoTickets(passiveLottoTicketCount));

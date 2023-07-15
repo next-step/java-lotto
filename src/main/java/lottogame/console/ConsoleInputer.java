@@ -1,5 +1,6 @@
 package lottogame.console;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,10 +12,10 @@ import lottogame.controller.spi.Inputer;
 public class ConsoleInputer implements Inputer {
 
     @Override
-    public long inputMoney() {
+    public BigInteger inputMoney() {
         LocalScanner localScanner = LocalScanner.getInstance();
         System.out.println("구입금액을 입력해 주세요.");
-        return localScanner.nextLong();
+        return new BigInteger(localScanner.next());
     }
 
     @Override
