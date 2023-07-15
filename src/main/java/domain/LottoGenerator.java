@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 public class LottoGenerator {
 
@@ -35,12 +36,12 @@ public class LottoGenerator {
 
     private static List<Lotto> generateLottosAutomatically(Count autoPurchaseCount) {
         final List<Lotto> lottos = new ArrayList<>();
-        while (autoPurchaseCount.isPositive()) {
-            lottos.add(generateSingleLottoAutomatically());
-            autoPurchaseCount = autoPurchaseCount.decreaseByOne();
-        }
-        return lottos.stream()
-            .collect(Collectors.toUnmodifiableList());
+
+        LongStream.range(0, autoPurchaseCount.getValue())
+            .mapToObj(count -> generateSingleLottoAutomatically())
+            .forEach(lottos::add);
+
+        return lottos;
     }
 
     private static List<Lotto> combine(final List<Lotto> lottos, final List<Lotto> otherLottos) {

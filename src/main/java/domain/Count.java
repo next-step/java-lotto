@@ -11,8 +11,8 @@ public class Count {
         this.value = value;
     }
 
-    public boolean isPositive() {
-        return value > 0;
+    public boolean isZero() {
+        return value == 0;
     }
 
     public boolean isLessThan(final Count other) {

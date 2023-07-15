@@ -1,11 +1,12 @@
 package view;
 
 import domain.Count;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 public class InputView {
 
@@ -39,20 +40,14 @@ public class InputView {
     }
 
     public static List<List<Integer>> readManualLottoNumbers(Count manualPurchaseCount) {
-        List<List<Integer>> numberBundles = new ArrayList<>();
-
-        if (!manualPurchaseCount.isPositive()) {
-            return numberBundles;
+        if (manualPurchaseCount.isZero()) {
+            return Collections.emptyList();
         }
 
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-
-        while (manualPurchaseCount.isPositive()) {
-            numberBundles.add(readLottoNumbers());
-            manualPurchaseCount = manualPurchaseCount.decreaseByOne();
-        }
-
-        return numberBundles;
+        return LongStream.range(0, manualPurchaseCount.getValue())
+            .mapToObj(count -> readLottoNumbers())
+            .collect(Collectors.toUnmodifiableList());
     }
 
     public static List<Integer> readWinningLottoNumbers() {

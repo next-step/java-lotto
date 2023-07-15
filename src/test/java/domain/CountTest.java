@@ -30,15 +30,15 @@ class CountTest {
     }
 
     @Test
-    @DisplayName("개수가 양수인지 boolean으로 반환한다.")
-    void isPositive() {
+    @DisplayName("개수가 0인지 boolean으로 반환한다.")
+    void isZero() {
         /* given */
-        final Count notZeroCount = new Count(1);
-        final Count zeroCount = new Count(0);
+        final Count one = new Count(1);
+        final Count zero = new Count(0);
 
         /* when & then */
-        assertThat(notZeroCount.isPositive()).isTrue();
-        assertThat(zeroCount.isPositive()).isFalse();
+        assertThat(zero.isZero()).isTrue();
+        assertThat(one.isZero()).isFalse();
     }
 
     @Test

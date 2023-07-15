@@ -25,14 +25,12 @@ class LottoGeneratorTest {
             manualPurchaseCount, numberBundles);
 
         /* then */
-        final Iterator<Lotto> lottosIterator = lottos.iterator();
-
-        for (final List<Integer> numberBundle : numberBundles) {
-            final Lotto inputLotto = new Lotto(numberBundle);
-            final Lotto outputLotto = lottosIterator.next();
-
-            assertThat(inputLotto.countMatchLottoNumber(outputLotto)).isEqualTo(6);
+        for (int count = 0; count < manualPurchaseCount.getValue(); count++) {
+            final Lotto inputLotto = new Lotto(numberBundles.get(count));
+            final Lotto outputLotto = lottos.get(count);
+            assertThat(inputLotto).isEqualTo(outputLotto);
         }
+
         assertThat(lottos).hasSize(5);
     }
 
