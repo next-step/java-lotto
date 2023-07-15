@@ -9,7 +9,9 @@ public class LottoService {
     public Lottos generateAutoLottos(final long inputMoney) {
         // TODO: Money money = new Money(inputMoney)
 
-        return new Lottos(LottoGenerator.generateAutomatically(inputMoney));
+        CandidateStrategy randomCandidateStrategy = new RandomCandidateStrategy();
+        List<Lotto> lottos = LottoGenerator.generateLottos(inputMoney, randomCandidateStrategy);
+        return new Lottos(lottos);
     }
 
     public LottoResult computeLottoResult(final Lottos lottos, final WinningLotto winningLotto) {
