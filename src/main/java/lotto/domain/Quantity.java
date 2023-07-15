@@ -12,8 +12,8 @@ public class Quantity {
         this.quantity = quantity;
     }
 
-    public static Quantity of(final Money money, final long price) {
-        return new Quantity((int) (money.getValue() / price));
+    public static Quantity of(final Money budget, final long productPrice) {
+        return new Quantity((int) (budget.getValue() / productPrice));
     }
 
     @Override

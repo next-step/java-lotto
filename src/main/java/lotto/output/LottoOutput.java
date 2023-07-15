@@ -1,6 +1,11 @@
 package lotto.output;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.LottoGroup;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoRank;
+import lotto.domain.LottoResult;
+import lotto.domain.Quantity;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
