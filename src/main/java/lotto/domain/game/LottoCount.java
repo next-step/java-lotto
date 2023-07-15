@@ -2,13 +2,13 @@ package lotto.domain.game;
 
 public final class LottoCount {
 
-    private final int lottoManualCount;
-    private final int lottoAutoCount;
+    private final int manualCount;
+    private final int autoCount;
 
-    public LottoCount(final Payment payment, final int lottoManualCount) {
-        validateLottoManualCount(payment, lottoManualCount);
-        this.lottoManualCount = lottoManualCount;
-        this.lottoAutoCount = calculateLottoAutoCount(payment, lottoManualCount);
+    public LottoCount(final Payment payment, final int manualCount) {
+        validateLottoManualCount(payment, manualCount);
+        this.manualCount = manualCount;
+        this.autoCount = calculateLottoAutoCount(payment, manualCount);
     }
 
     private void validateLottoManualCount(Payment payment, int lottoManualCount) {
@@ -21,11 +21,11 @@ public final class LottoCount {
         return ((payment.getMoney() - (lottoManualCount * Lotto.PRICE)) / Lotto.PRICE );
     }
 
-    public int getLottoManualCount() {
-        return lottoManualCount;
+    public int getManualCount() {
+        return manualCount;
     }
 
-    public int getLottoAutoCount() {
-        return lottoAutoCount;
+    public int getAutoCount() {
+        return autoCount;
     }
 }
