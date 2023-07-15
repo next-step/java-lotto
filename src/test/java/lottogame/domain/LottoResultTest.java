@@ -1,7 +1,5 @@
 package lottogame.domain;
 
-import lottogame.service.LottoService;
-import lottogame.service.response.LottoCheckResponse;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -9,9 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("FieldCanBeLocal")
 @DisplayName("LottoResult 클래스")
@@ -30,6 +25,7 @@ class LottoResultTest {
 
             private final LottoResult lottoResult = new LottoResult(lottoRanks);
             private final Double expectedEarningRate = getExpectedEarningRate();
+
             private final Map<LottoRank, Long> expectedLottoRankCounts = Map.of(LottoRank.FIRST, 1L, LottoRank.SECOND, 1L, LottoRank.NONE, 1L);
 
             @Test

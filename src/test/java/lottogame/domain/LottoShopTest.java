@@ -1,16 +1,17 @@
-package lottogame.service;
+package lottogame.domain;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
-import java.util.Set;
 import lottogame.domain.spi.NumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 @SuppressWarnings("FieldCanBeLocal")
-@DisplayName("RandomNumberGenerator 클래스")
-class LottoPurchaseServiceTest {
+@DisplayName("LottoShop 클래스")
+class LottoShopTest {
 
     @Nested
     @DisplayName("purchase 메소드는")
@@ -23,12 +24,12 @@ class LottoPurchaseServiceTest {
             private static final int NOT_DIVIDED_MONEY = 1001;
 
             private final NumberGenerator stubNumberGenerator = (count) -> Set.of(1, 2, 3, 4, 5, 6);
-            private final LottoService lottoService = new LottoService();
+            private final LottoShop lottoShop = new LottoShop();
 
             @Test
             @DisplayName("IllegalArgumentException 을 던진다")
             void It_Throw_IllegalArgumentException() {
-                assertThatThrownBy(() -> lottoService.purchase(NOT_DIVIDED_MONEY, stubNumberGenerator)).isInstanceOf(
+                assertThatThrownBy(() -> lottoShop.purchase(NOT_DIVIDED_MONEY, stubNumberGenerator)).isInstanceOf(
                     IllegalArgumentException.class);
             }
         }
