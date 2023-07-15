@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.text.MessageFormat;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -15,9 +16,16 @@ public final class LottoView {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public String readPayment() {
+    public int readPayment() {
         System.out.println("구입금액을 입력해 주세요.");
-        return validateBlank(scanner.nextLine().trim());
+        int money;
+        try {
+            money = scanner.nextInt();
+            scanner.nextLine();
+        } catch (NoSuchElementException ignore) {
+            throw new IllegalArgumentException("숫자를 입력해 주세요");
+        }
+        return money;
     }
 
     public String readWinningLotto() {

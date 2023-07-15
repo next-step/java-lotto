@@ -14,11 +14,11 @@ public class LottoStatisticsTest {
     @DisplayName("로또 결과 통계 객체 생성 성공")
     @Test
     void create() {
-        LottoService lottoService = new LottoService(new Payment("2000"));
+        LottoService lottoService = new LottoService(new Payment(2000));
         String lottoValue = "1,2,3,4,5,6";
         String bonusValue = "7";
         WinningNumber winningNumber = new WinningNumber(lottoValue, bonusValue);
-        Payment payment = new Payment("3000");
+        Payment payment = new Payment(3000);
 
         assertThatNoException().isThrownBy(() -> new LottoStatistics(lottoService.getLottos(), winningNumber, payment));
     }
