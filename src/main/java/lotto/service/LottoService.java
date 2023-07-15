@@ -8,14 +8,14 @@ import java.util.stream.Collectors;
 
 public class LottoService {
 
-    public Lottos buyLotto(Money money, Lottos manualLotto) {
+    public Lottos buyLotto(Money money, Lottos manualLottos) {
         LottosCount totalLottosCount = new LottosCount(money.countLotto());
-        LottosCount manualLottosCount = new LottosCount(manualLotto.size());
-        LottosCount autoLottoCount = totalLottosCount.subtract(manualLottosCount);
+        LottosCount manualLottosCount = new LottosCount(manualLottos.size());
+        LottosCount autoLottosCount = totalLottosCount.subtract(manualLottosCount);
 
-        Lottos autoLottos = generateAutoLotto(autoLottoCount);
+        Lottos autoLottos = generateAutoLotto(autoLottosCount);
 
-        return manualLotto.combineLottos(autoLottos);
+        return manualLottos.combineLottos(autoLottos);
     }
 
     private Lottos generateAutoLotto(LottosCount autoLottosCount) {
