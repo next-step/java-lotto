@@ -23,8 +23,8 @@ public class Lotto {
     }
 
     private void validate(final List<Ball> balls) {
-        validateDuplicate(balls);
         validateLottoSize(balls);
+        validateDuplicate(balls);
     }
 
     private void validateDuplicate(final List<Ball> balls) {
