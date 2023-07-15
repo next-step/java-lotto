@@ -62,7 +62,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), false);
         String winingValue = "5,1,10,45,2,29";
 
-        WinningNumber winningNumber = new WinningNumber(winingValue, "30");
+        WinningNumber winningNumber = new WinningNumber(winingValue, 30);
 
         assertThat(lotto.countMatch(winningNumber.getWinningLotto()))
             .isEqualTo(3);
@@ -74,7 +74,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(List.of(12,23,45,1,7,8,9,19), true);
         String winingValue = "12,23,45,1,7,8";
 
-        WinningNumber winningNumber = new WinningNumber(winingValue, "30");
+        WinningNumber winningNumber = new WinningNumber(winingValue, 30);
 
         assertThat(lotto.countMatch(winningNumber.getWinningLotto()))
             .isEqualTo(6);

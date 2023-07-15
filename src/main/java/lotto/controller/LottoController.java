@@ -19,7 +19,7 @@ public final class LottoController {
 
         // 2. 당첨 번호 & 보너스 볼 입력
         String winningLotto = lottoView.readWinningLotto();
-        String bonusBall = lottoView.readBonusBall();
+        int bonusBall = lottoView.readBonusBall();
         WinningNumber winningNumber = new WinningNumber(winningLotto, bonusBall);
 
         // 3. 당첨 통계 출력

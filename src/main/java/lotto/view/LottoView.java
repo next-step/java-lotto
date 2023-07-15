@@ -40,9 +40,15 @@ public final class LottoView {
         return text;
     }
 
-    public String readBonusBall() {
+    public int readBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        String bonusBall = scanner.nextLine();
+        int bonusBall;
+        try {
+            bonusBall = scanner.nextInt();
+            scanner.nextLine();
+        } catch (NoSuchElementException ignore) {
+            throw new IllegalArgumentException("숫자를 입력해 주세요");
+        }
         scanner.close();
         return bonusBall;
     }

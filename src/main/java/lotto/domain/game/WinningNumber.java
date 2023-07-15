@@ -5,7 +5,7 @@ public final class WinningNumber {
     private final Lotto winningLotto;
     private final LottoNumber bonusBall;
 
-    public WinningNumber(final String lottoValue, final String bonusValue) {
+    public WinningNumber(final String lottoValue, final int bonusValue) {
         LottoText lottoText = new LottoText(lottoValue);
         Lotto lotto = new Lotto(lottoText.getIntegers(), false);
         LottoNumber lottoNumber = new LottoNumber(bonusValue);

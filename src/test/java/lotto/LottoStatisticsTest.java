@@ -16,7 +16,7 @@ public class LottoStatisticsTest {
     void create() {
         LottoService lottoService = new LottoService(new Payment(2000));
         String lottoValue = "1,2,3,4,5,6";
-        String bonusValue = "7";
+        int bonusValue = 7;
         WinningNumber winningNumber = new WinningNumber(lottoValue, bonusValue);
         Payment payment = new Payment(3000);
 
