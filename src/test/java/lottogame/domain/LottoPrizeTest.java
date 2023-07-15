@@ -20,12 +20,12 @@ class LottoPrizeTest {
             @Test
             @DisplayName("등수를 반환한다")
             void It_Return_Lotto_Prize() {
-                Assertions.assertThat(LottoPrize.of(6, false)).isEqualTo(LottoPrize.FIRST);
-                Assertions.assertThat(LottoPrize.of(5, true)).isEqualTo(LottoPrize.SECOND);
-                Assertions.assertThat(LottoPrize.of(5, false)).isEqualTo(LottoPrize.THIRD);
-                Assertions.assertThat(LottoPrize.of(4, false)).isEqualTo(LottoPrize.FORTH);
-                Assertions.assertThat(LottoPrize.of(3, false)).isEqualTo(LottoPrize.FIFTH);
-                Assertions.assertThat(LottoPrize.of(0, false)).isEqualTo(LottoPrize.NONE);
+                Assertions.assertThat(LottoRank.of(6, false)).isEqualTo(LottoRank.FIRST);
+                Assertions.assertThat(LottoRank.of(5, true)).isEqualTo(LottoRank.SECOND);
+                Assertions.assertThat(LottoRank.of(5, false)).isEqualTo(LottoRank.THIRD);
+                Assertions.assertThat(LottoRank.of(4, false)).isEqualTo(LottoRank.FORTH);
+                Assertions.assertThat(LottoRank.of(3, false)).isEqualTo(LottoRank.FIFTH);
+                Assertions.assertThat(LottoRank.of(0, false)).isEqualTo(LottoRank.NONE);
             }
         }
     }

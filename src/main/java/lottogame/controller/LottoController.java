@@ -35,8 +35,8 @@ public class LottoController {
         Set<Integer> winningLottoNumbers = lottoInputer.inputWinningLottoNumbers();
         Integer bonusNumber = lottoInputer.inputBonusLottoNumber();
 
-        LottoCheckResponse lottoPrizes = lottoService.checkResult(lottoTickets, winningLottoNumbers, bonusNumber);
+        LottoCheckResponse lottoCheckResponse = lottoService.checkResult(lottoTickets, winningLottoNumbers, bonusNumber);
 
-        lottoViewer.draw(lottoPrizes);
+        lottoViewer.draw(lottoCheckResponse);
     }
 }

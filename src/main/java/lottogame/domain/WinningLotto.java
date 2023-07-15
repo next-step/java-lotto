@@ -15,14 +15,14 @@ public class WinningLotto {
         this.lottoBonus = new LottoBonus(bonusNumber, this.lottoTicket);
     }
 
-    public List<LottoPrize> toLottoPrizes(List<LottoTicket> lottoTickets) {
+    public List<LottoRank> toLottoRanks(List<LottoTicket> lottoTickets) {
         return lottoTickets.stream()
-            .map(this::toLottoPrize)
+            .map(this::toLottoRank)
             .collect(Collectors.toList());
     }
 
-    private LottoPrize toLottoPrize(LottoTicket lottoTicket) {
-        return LottoPrize.of(this.lottoTicket.getMatchedCount(lottoTicket), lottoBonus.isContained(lottoTicket));
+    private LottoRank toLottoRank(LottoTicket lottoTicket) {
+        return LottoRank.of(this.lottoTicket.getMatchedCount(lottoTicket), lottoBonus.isContained(lottoTicket));
     }
 
     @Override

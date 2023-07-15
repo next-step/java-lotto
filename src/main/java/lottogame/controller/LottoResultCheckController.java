@@ -25,8 +25,8 @@ public class LottoResultCheckController {
         Set<Integer> winningLottoNumbers = resultCheckInputer.inputWinningLottoNumbers();
         Integer bonusNumber = resultCheckInputer.inputBonusLottoNumber();
 
-        LottoCheckResponse lottoPrizes = lottoCheckService.checkResult(lottoTickets, winningLottoNumbers, bonusNumber);
+        LottoCheckResponse lottoCheckResponse = lottoCheckService.checkResult(lottoTickets, winningLottoNumbers, bonusNumber);
 
-        resultCheckViewer.draw(lottoPrizes);
+        resultCheckViewer.draw(lottoCheckResponse);
     }
 }

@@ -2,24 +2,24 @@ package lottogame.service.response;
 
 import java.util.Map;
 import java.util.Objects;
-import lottogame.domain.LottoPrize;
+import lottogame.domain.LottoRank;
 
 public class LottoCheckResponse {
 
     private final double earningRate;
-    private final Map<LottoPrize, Long> lottoPrizeCounts;
+    private final Map<LottoRank, Long> lottoRankCounts;
 
-    public LottoCheckResponse(double earningRate, Map<LottoPrize, Long> lottoPrizes) {
+    public LottoCheckResponse(double earningRate, Map<LottoRank, Long> lottoPrizes) {
         this.earningRate = earningRate;
-        this.lottoPrizeCounts = lottoPrizes;
+        this.lottoRankCounts = lottoPrizes;
     }
 
     public double getEarningRate() {
         return earningRate;
     }
 
-    public Map<LottoPrize, Long> getLottoPrizeCounts() {
-        return lottoPrizeCounts;
+    public Map<LottoRank, Long> getLottoRankCounts() {
+        return lottoRankCounts;
     }
 
     @Override
@@ -31,20 +31,20 @@ public class LottoCheckResponse {
             return false;
         }
         LottoCheckResponse that = (LottoCheckResponse) o;
-        return Double.compare(that.earningRate, earningRate) == 0 && Objects.equals(lottoPrizeCounts,
-            that.lottoPrizeCounts);
+        return Double.compare(that.earningRate, earningRate) == 0 && Objects.equals(lottoRankCounts,
+            that.lottoRankCounts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(earningRate, lottoPrizeCounts);
+        return Objects.hash(earningRate, lottoRankCounts);
     }
 
     @Override
     public String toString() {
         return "LottoCheckResponse{" +
                 "earningRate=" + earningRate +
-                ", lottoPrizeCounts=" + lottoPrizeCounts +
+                ", lottoRankCounts=" + lottoRankCounts +
                 '}';
     }
 }

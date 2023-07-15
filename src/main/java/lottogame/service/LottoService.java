@@ -35,7 +35,7 @@ public class LottoService {
     public LottoCheckResponse checkResult(List<LottoTicket> lottoTickets, Set<Integer> selectedLottoNumbers,
         int bonusLottoNumbers) {
         WinningLotto winningLotto = new WinningLotto(selectedLottoNumbers, bonusLottoNumbers);
-        LottoResult lottoResult = new LottoResult(winningLotto.toLottoPrizes(lottoTickets));
-        return new LottoCheckResponse(lottoResult.getEarningRate(), lottoResult.getLottoPrizeCounts());
+        LottoResult lottoResult = new LottoResult(winningLotto.toLottoRanks(lottoTickets));
+        return new LottoCheckResponse(lottoResult.getEarningRate(), lottoResult.getLottoRankCounts());
     }
 }

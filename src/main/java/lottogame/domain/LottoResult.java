@@ -6,27 +6,27 @@ import java.util.stream.Collectors;
 
 public class LottoResult {
 
-    private final Map<LottoPrize, Long> lottoPrizeCounts;
+    private final Map<LottoRank, Long> lottoRankCounts;
     private final Double earningRate;
 
-    public LottoResult(List<LottoPrize> lottoPrizes) {
-        this.lottoPrizeCounts = lottoPrizes.stream()
+    public LottoResult(List<LottoRank> lottoRanks) {
+        this.lottoRankCounts = lottoRanks.stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        this.earningRate = calculateEarningRate(lottoPrizes);
+        this.earningRate = calculateEarningRate(lottoRanks);
     }
 
-    private Double calculateEarningRate(List<LottoPrize> lottoPrizes) {
-        double totalMoney = lottoPrizes.size() * LottoTicket.PURCHASABLE_UNIT;
-        double earnMoney = lottoPrizes.stream()
-                .mapToInt(LottoPrize::getMoney)
+    private Double calculateEarningRate(List<LottoRank> lottoRanks) {
+        double totalMoney = lottoRanks.size() * LottoTicket.PURCHASABLE_UNIT;
+        double earnMoney = lottoRanks.stream()
+                .mapToInt(LottoRank::getMoney)
                 .sum();
 
         return earnMoney / totalMoney;
     }
 
-    public Map<LottoPrize, Long> getLottoPrizeCounts() {
-        return Collections.unmodifiableMap(lottoPrizeCounts);
+    public Map<LottoRank, Long> getLottoRankCounts() {
+        return Collections.unmodifiableMap(lottoRankCounts);
     }
 
     public Double getEarningRate() {
@@ -38,18 +38,18 @@ public class LottoResult {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoResult that = (LottoResult) o;
-        return Objects.equals(lottoPrizeCounts, that.lottoPrizeCounts) && Objects.equals(earningRate, that.earningRate);
+        return Objects.equals(lottoRankCounts, that.lottoRankCounts) && Objects.equals(earningRate, that.earningRate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoPrizeCounts, earningRate);
+        return Objects.hash(lottoRankCounts, earningRate);
     }
 
     @Override
     public String toString() {
         return "LottoResult{" +
-                "lottoPrizeCounts=" + lottoPrizeCounts +
+                "lottoRankCounts=" + lottoRankCounts +
                 ", earningRate=" + earningRate +
                 '}';
     }

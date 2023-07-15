@@ -1,7 +1,7 @@
 package lottogame.console;
 
 import lottogame.controller.spi.LottoViewer;
-import lottogame.domain.LottoPrize;
+import lottogame.domain.LottoRank;
 import lottogame.domain.LottoTicket;
 import lottogame.service.response.LottoCheckResponse;
 
@@ -36,13 +36,13 @@ public class ConsoleLottoViewer implements LottoViewer {
 
     public void draw(LottoCheckResponse lottoCheckResponse) {
         System.out.println("당첨 통계\n---------");
-        lottoCheckResponse.getLottoPrizeCounts().entrySet().stream()
-                .filter(lottoPrizeLongEntry -> lottoPrizeLongEntry.getKey() != LottoPrize.NONE)
+        lottoCheckResponse.getLottoRankCounts().entrySet().stream()
+                .filter(lottoRankLongEntry -> lottoRankLongEntry.getKey() != LottoRank.NONE)
                 .forEach(this::printLottoPrize);
         printEarningRate(lottoCheckResponse.getEarningRate());
     }
 
-    private void printLottoPrize(Map.Entry<LottoPrize, Long> lottoPrizeCount) {
+    private void printLottoPrize(Map.Entry<LottoRank, Long> lottoPrizeCount) {
         System.out.printf("%d개 일치 (%d원)- %d개%n", lottoPrizeCount.getKey().getMatchedCount(),
                 lottoPrizeCount.getKey().getMoney(), lottoPrizeCount.getValue());
     }

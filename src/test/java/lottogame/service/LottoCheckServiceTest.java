@@ -3,7 +3,7 @@ package lottogame.service;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import lottogame.domain.LottoPrize;
+import lottogame.domain.LottoRank;
 import lottogame.domain.LottoTicket;
 import lottogame.service.response.LottoCheckResponse;
 import org.assertj.core.api.Assertions;
@@ -51,10 +51,10 @@ class LottoCheckServiceTest {
 
             private LottoCheckResponse getExpectedLottoCheckResponse() {
                 double totalMoney = PURCHASE_COUNT * LottoTicket.PURCHASABLE_UNIT;
-                double earnMoney = LottoPrize.FIRST.getMoney() + LottoPrize.SECOND.getMoney();
+                double earnMoney = LottoRank.FIRST.getMoney() + LottoRank.SECOND.getMoney();
 
                 return new LottoCheckResponse( earnMoney / totalMoney,
-                    Map.of(LottoPrize.FIRST, 1L, LottoPrize.SECOND, 1L, LottoPrize.NONE, 1L));
+                    Map.of(LottoRank.FIRST, 1L, LottoRank.SECOND, 1L, LottoRank.NONE, 1L));
             }
         }
     }
