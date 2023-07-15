@@ -31,7 +31,9 @@ public class LottosTest {
 
     @Test
     void 로또_분석_테스트() {
-        LottoAnalysisResult result = lottos.analysis(LastWinLotto.of(2, new Integer[]{3, 4, 5, 6, 7, 9}));
+        LottoAnalysisResult result = lottos.analysis(
+                new LastWinLotto(
+                        new Lotto(3, 4, 5, 6, 7, 9), LottoNumber.of(2)));
 
         assertAll(
                 () -> assertThat(result.countByLottoRank(FIFTH)).isEqualTo(0),
