@@ -1,10 +1,12 @@
 package lottogame.domain;
 
 import lottogame.domain.spi.NumberGenerator;
+import lottogame.service.request.LottoPurchaseRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -23,13 +25,14 @@ class LottoShopTest {
 
             private static final int NOT_DIVIDED_MONEY = 1001;
 
+            private final LottoPurchaseRequest lottoPurchaseRequest = new LottoPurchaseRequest(NOT_DIVIDED_MONEY, 0, List.of());
             private final NumberGenerator stubNumberGenerator = (count) -> Set.of(1, 2, 3, 4, 5, 6);
             private final LottoShop lottoShop = new LottoShop();
 
             @Test
             @DisplayName("IllegalArgumentException 을 던진다")
             void It_Throw_IllegalArgumentException() {
-                assertThatThrownBy(() -> lottoShop.purchase(NOT_DIVIDED_MONEY, stubNumberGenerator)).isInstanceOf(
+                assertThatThrownBy(() -> lottoShop.purchase(lottoPurchaseRequest, stubNumberGenerator)).isInstanceOf(
                     IllegalArgumentException.class);
             }
         }

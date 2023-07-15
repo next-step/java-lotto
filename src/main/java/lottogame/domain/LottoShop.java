@@ -1,15 +1,16 @@
 package lottogame.domain;
 
 import lottogame.domain.spi.NumberGenerator;
+import lottogame.service.request.LottoPurchaseRequest;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoShop {
 
-    public List<LottoTicket> purchase(int money, NumberGenerator numberGenerator) {
-        assertMoney(money);
-        return createLottoTickets(money, numberGenerator);
+    public List<LottoTicket> purchase(LottoPurchaseRequest lottoPurchaseRequest, NumberGenerator numberGenerator) {
+        assertMoney(lottoPurchaseRequest.getMoney());
+        return createLottoTickets(lottoPurchaseRequest.getMoney(), numberGenerator);
     }
 
     private void assertMoney(int money) {
