@@ -112,4 +112,18 @@ class LottoTest {
         //then
         assertThat(numbers).isEqualTo(sorted);
     }
+
+    @Test
+    @DisplayName("LottoNumber가 Lotto에 포함되어 있으면 True 반환")
+    void containsReturnsTrueTest() {
+        assertThat(Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 6)).contains(LottoNumber.of(5))).isTrue();
+    }
+
+    @Test
+    @DisplayName("LottoNumber가 Lotto에 포함되어 있으면 True 반환")
+    void containsReturnsFalseTest() {
+        assertThat(Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 6)).contains(LottoNumber.of(7))).isFalse();
+    }
+
+
 }
