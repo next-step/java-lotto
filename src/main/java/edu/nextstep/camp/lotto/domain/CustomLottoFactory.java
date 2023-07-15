@@ -13,7 +13,7 @@ public class CustomLottoFactory implements LottoFactory {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
         for (String lottoNumStr : lotto) {
-            lottoNumbers.add(new LottoNumber(lottoNumStr));
+            lottoNumbers.add(LottoNumber.of(lottoNumStr));
         }
 
         return new Lotto(lottoNumbers);
