@@ -42,7 +42,7 @@
     - [x] Lotto -> 6개의 LottoNumber , 서로 다른 6개 LottoNumber
     - [x] lottoFactory 는 주어진 count 만큼 Lotto를 만든다.
     - [x] lottoFactory 는 List<Integer> 입력으로 오는 수들로 Lotto를 만든다.
-    - [ ] LottoPurchaser 는 자동 , 수동 로또를 구매한다.
+    - [x] LottoPurchaser 는 자동 , 수동 로또를 구매한다.
 
 - 당첨 번호와 구매한 로또 결과 비교
     - [X] 당첨 번호와 보너스 볼은 중복되지 않는다.
