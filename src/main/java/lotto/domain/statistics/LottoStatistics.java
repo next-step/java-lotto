@@ -39,8 +39,7 @@ public final class LottoStatistics {
         for (LottoMatch lottoMatch : statistics.keySet()) {
             profit += (double) statistics.get(lottoMatch) * lottoMatch.getPrize();
         }
-        profit /= payment.getMoney();
-        return Math.round(profit * 100) / 100.0;
+        return payment.calculateProfitRate(profit);
     }
 
     public Map<LottoMatch, Integer> getStatistics() {

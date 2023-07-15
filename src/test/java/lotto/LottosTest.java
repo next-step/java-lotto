@@ -17,13 +17,13 @@ public class LottosTest {
     @DisplayName("로또 리스트 객체가 정상적으로 생성된다")
     @Test
     void 로또_리스트_객체_생성() {
-        int LottoManualCount = 2;
+        int lottoManualCount = 2;
         List<String> lottosManual = List.of(
             "1,2,3,4,5,6",
             "7,8,9,10,11,12"
         );
         Payment payment = new Payment(5000);
-        LottoCount lottoCount = new LottoCount(payment, LottoManualCount);
+        LottoCount lottoCount = new LottoCount(payment, lottoManualCount);
         NumberGenerator numberGenerator = new NumberGenerator(){
             @Override
             public List<Integer> shuffleNumbers() {
@@ -37,13 +37,13 @@ public class LottosTest {
     @DisplayName("로또스에 로또 리스트를 저장한다")
     @Test
     void 로또_저장_성공() {
-        int LottoManualCount = 2;
+        int lottoManualCount = 2;
         List<String> lottosManual = List.of(
             "1,2,3,4,5,6",
             "7,8,9,10,11,12"
         );
         Payment payment = new Payment(5000);
-        LottoCount lottoCount = new LottoCount(payment, LottoManualCount);
+        LottoCount lottoCount = new LottoCount(payment, lottoManualCount);
         NumberGenerator numberGenerator = new NumberGenerator(){
             @Override
             public List<Integer> shuffleNumbers() {

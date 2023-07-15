@@ -12,13 +12,13 @@ public final class LottoCount {
     }
 
     private void validateLottoManualCount(Payment payment, int lottoManualCount) {
-        if ((lottoManualCount * Lotto.PRICE) > payment.getMoney()) {
+        if (!payment.isBuy(lottoManualCount)) {
             throw new IllegalArgumentException("투입 금액이 부족합니다");
         }
     }
 
     private int calculateLottoAutoCount(Payment payment, int lottoManualCount) {
-        return ((payment.getMoney() - (lottoManualCount * Lotto.PRICE)) / Lotto.PRICE );
+        return payment.calculateBuyCount(lottoManualCount);
     }
 
     public int getManualCount() {
