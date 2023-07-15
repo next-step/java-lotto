@@ -1,6 +1,6 @@
 package view;
 
-import domain.Count;
+import domain.LottoCount;
 import domain.Lotto;
 import domain.LottoFormatter;
 import domain.LottoResult;
@@ -19,8 +19,8 @@ public class OutputView {
     }
 
     public static void printPurchaseCount(final List<Lotto> lottos,
-        final Count manualPurchaseCount) {
-        final Count autoPurchaseCount = new Count(lottos.size()).decreaseBy(manualPurchaseCount);
+        final LottoCount manualPurchaseCount) {
+        final LottoCount autoPurchaseCount = new LottoCount(lottos.size()).decreaseBy(manualPurchaseCount);
         System.out.println(
             "\n수동으로 " + manualPurchaseCount.getValue() + "장, 자동으로 " + autoPurchaseCount.getValue()
                 + "장을 구매했습니다.");
@@ -44,14 +44,14 @@ public class OutputView {
         printRateOfReturn(lottoResult, money);
     }
 
-    private static void printEachResult(final Rank rank, final Count count) {
+    private static void printEachResult(final Rank rank, final Long count) {
         final String result = String.format(
             "%d개 일치%s(%d원)- %d개",
             rank.getMatchLottoNumber(),
             rank.hasToCheckBonus() ? ", 보너스 볼 일치" : " ",
             rank.getPrize()
                 .getValue(),
-            count.getValue()
+            count
         );
         System.out.println(result);
     }

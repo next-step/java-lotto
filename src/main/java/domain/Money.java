@@ -35,19 +35,19 @@ public class Money {
         return value % other.value == 0;
     }
 
-    public Count calculateMaximumCount(final Money price) {
+    public LottoCount calculateMaximumCount(final Money price) {
         if (price.isZero()) {
             throw new IllegalArgumentException("가격은 0일 수 없습니다.");
         }
-        return new Count(value / price.value);
+        return new LottoCount(value / price.value);
     }
 
     public Money sum(final Money other) {
         return Money.valueOf(value + other.value);
     }
 
-    public Money multiplyByCount(Count count) {
-        return Money.valueOf(value * count.getValue());
+    public Money multiplyBy(Long count) {
+        return Money.valueOf(value * count);
     }
 
     public boolean isLessThan(final Money other) {

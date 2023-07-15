@@ -15,18 +15,18 @@ public class LottoGenerator {
     }
 
     public static List<Lotto> generateLottos(final Money money,
-        final Count manualPurchaseCount, final List<List<Integer>> numberBundles) {
+        final LottoCount manualPurchaseCount, final List<List<Integer>> numberBundles) {
         validateMoney(money);
-        final Count totalPurchaseCount = calculateLottoPurchaseCount(money);
+        final LottoCount totalPurchaseCount = calculateLottoPurchaseCount(money);
 
         validateManualPurchaseCount(manualPurchaseCount, totalPurchaseCount);
-        final Count autoPurchaseCount = totalPurchaseCount.decreaseBy(manualPurchaseCount);
+        final LottoCount autoPurchaseCount = totalPurchaseCount.decreaseBy(manualPurchaseCount);
 
         return combine(generateLottosManually(manualPurchaseCount, numberBundles),
             generateLottosAutomatically(autoPurchaseCount));
     }
 
-    private static List<Lotto> generateLottosManually(final Count manualPurchaseCount,
+    private static List<Lotto> generateLottosManually(final LottoCount manualPurchaseCount,
         final List<List<Integer>> numberBundles) {
         validateNumberBundlesCount(numberBundles, manualPurchaseCount);
         return numberBundles.stream()
@@ -34,7 +34,7 @@ public class LottoGenerator {
             .collect(Collectors.toUnmodifiableList());
     }
 
-    private static List<Lotto> generateLottosAutomatically(Count autoPurchaseCount) {
+    private static List<Lotto> generateLottosAutomatically(LottoCount autoPurchaseCount) {
         final List<Lotto> lottos = new ArrayList<>();
 
         LongStream.range(0, autoPurchaseCount.getValue())
@@ -51,16 +51,16 @@ public class LottoGenerator {
         return result;
     }
 
-    private static void validateManualPurchaseCount(final Count manualPurchaseCount,
-        final Count totalPurchaseCount) {
+    private static void validateManualPurchaseCount(final LottoCount manualPurchaseCount,
+        final LottoCount totalPurchaseCount) {
         if (totalPurchaseCount.isLessThan(manualPurchaseCount)) {
             throw new IllegalArgumentException("수동으로 구매할 로또 수가 구입금액으로 구매 가능한 총 로또 수보다 많습니다.");
         }
     }
 
     private static void validateNumberBundlesCount(
-        final List<List<Integer>> numberBundles, final Count manualPurchaseCount) {
-        if (new Count(numberBundles.size()).isNotEqualTo(manualPurchaseCount)) {
+        final List<List<Integer>> numberBundles, final LottoCount manualPurchaseCount) {
+        if (numberBundles.size() != manualPurchaseCount.getValue()) {
             throw new IllegalArgumentException("숫자 묶음 수가 수동으로 구매할 로또 수와 일치하지 않습니다.");
         }
     }
@@ -94,7 +94,7 @@ public class LottoGenerator {
         }
     }
 
-    private static Count calculateLottoPurchaseCount(Money money) {
+    private static LottoCount calculateLottoPurchaseCount(Money money) {
         return money.calculateMaximumCount(MONEY_UNIT);
     }
 }

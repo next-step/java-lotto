@@ -74,7 +74,7 @@ class MoneyTest {
 
         /* when & then */
         assertThat(threeThousands.calculateMaximumCount(oneThousand)).isEqualTo(
-            new Count(3));
+            new LottoCount(3));
     }
 
     @Test
@@ -98,10 +98,10 @@ class MoneyTest {
         /* given */
         final Money threeThousands = Money.valueOf(3_000L);
         final Money oneThousand = Money.valueOf(1_000L);
-        final Count three = new Count(3);
+        final long three = 3L;
 
         /* when */
-        final Money result = oneThousand.multiplyByCount(three);
+        final Money result = oneThousand.multiplyBy(three);
 
         /* then */
         assertThat(result).isEqualTo(threeThousands);

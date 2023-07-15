@@ -6,14 +6,14 @@ import java.util.Map;
 
 public class LottoResult {
 
-    private final Map<Rank, Count> rankCount = new EnumMap<>(Rank.class);
+    private final Map<Rank, Long> rankCount = new EnumMap<>(Rank.class);
 
     public LottoResult(final List<Rank> ranks) {
         ranks.forEach(this::increaseRankCount);
     }
 
-    public Count countRank(final Rank rank) {
-        return rankCount.getOrDefault(rank, new Count(0L));
+    public Long countRank(final Rank rank) {
+        return rankCount.getOrDefault(rank, 0L);
     }
 
     public RateOfReturn calculateRateOfReturn(final Money spentMoney) {
@@ -21,7 +21,7 @@ public class LottoResult {
     }
 
     private void increaseRankCount(final Rank rank) {
-        rankCount.put(rank, countRank(rank).increaseByOne());
+        rankCount.put(rank, countRank(rank) + 1L);
     }
 
     private Money calculateTotalPrize() {
@@ -36,6 +36,6 @@ public class LottoResult {
 
     private Money calculatePrizePerRank(final Rank rank) {
         return rank.getPrize()
-            .multiplyByCount(countRank(rank));
+            .multiplyBy(countRank(rank));
     }
 }

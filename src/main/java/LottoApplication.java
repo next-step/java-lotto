@@ -1,4 +1,4 @@
-import domain.Count;
+import domain.LottoCount;
 import domain.Lotto;
 import domain.LottoGenerator;
 import domain.LottoNumber;
@@ -27,7 +27,7 @@ public class LottoApplication {
         final Money money = Money.valueOf(InputView.readMoney());
 
         //수동으로 구매할 로또 수 입력
-        final Count manualPurchaseCount = new Count(InputView.readManualPurchaseCount());
+        final LottoCount manualPurchaseCount = new LottoCount(InputView.readManualPurchaseCount());
 
         //수동으로 구매할 번호 입력
         List<List<Integer>> numberBundles = InputView.readManualLottoNumbers(manualPurchaseCount);

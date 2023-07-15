@@ -2,11 +2,11 @@ package domain;
 
 import java.util.Objects;
 
-public class Count {
+public class LottoCount {
 
     private final long value;
 
-    public Count(final long value) {
+    public LottoCount(final long value) {
         validateNonNegative(value);
         this.value = value;
     }
@@ -15,24 +15,12 @@ public class Count {
         return value == 0;
     }
 
-    public boolean isLessThan(final Count other) {
+    public boolean isLessThan(final LottoCount other) {
         return value < other.value;
     }
 
-    public boolean isNotEqualTo(final Count other) {
-        return value != other.value;
-    }
-
-    public Count decreaseBy(final Count other) {
-        return new Count(value - other.value);
-    }
-
-    public Count increaseByOne() {
-        return new Count(value + 1);
-    }
-
-    public Count decreaseByOne() {
-        return new Count(value - 1);
+    public LottoCount decreaseBy(final LottoCount other) {
+        return new LottoCount(value - other.value);
     }
 
     public long getValue() {
@@ -47,8 +35,8 @@ public class Count {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        final Count count = (Count) o;
-        return value == count.value;
+        final LottoCount lottoCount = (LottoCount) o;
+        return value == lottoCount.value;
     }
 
     @Override

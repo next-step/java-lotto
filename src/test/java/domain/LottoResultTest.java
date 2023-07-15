@@ -37,14 +37,14 @@ class LottoResultTest {
         final LottoResult lottoResult = new LottoResult(target);
 
         /* when */
-        final Count firstRankCount = lottoResult.countRank(Rank.FIRST);
-        final Count fifthRankCount = lottoResult.countRank(Rank.FIFTH);
-        final Count noneRankCount = lottoResult.countRank(Rank.NONE);
+        final Long firstRankCount = lottoResult.countRank(Rank.FIRST);
+        final Long fifthRankCount = lottoResult.countRank(Rank.FIFTH);
+        final Long noneRankCount = lottoResult.countRank(Rank.NONE);
 
         /* then */
-        assertThat(firstRankCount).isEqualTo(new Count(0));
-        assertThat(fifthRankCount).isEqualTo(new Count(2));
-        assertThat(noneRankCount).isEqualTo(new Count(10));
+        assertThat(firstRankCount).isEqualTo(0);
+        assertThat(fifthRankCount).isEqualTo(2);
+        assertThat(noneRankCount).isEqualTo(10);
     }
 
     @Test

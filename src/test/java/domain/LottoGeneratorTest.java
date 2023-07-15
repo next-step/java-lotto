@@ -15,7 +15,7 @@ class LottoGeneratorTest {
     void generateLottosManuallyAndThenAutomatically() {
         /* given */
         final Money money = Money.valueOf(5_000);
-        final Count manualPurchaseCount = new Count(2);
+        final LottoCount manualPurchaseCount = new LottoCount(2);
         final List<List<Integer>> numberBundles = List.of(List.of(1, 2, 3, 4, 5, 6),
             List.of(7, 8, 9, 10, 11, 12));
 
@@ -38,7 +38,7 @@ class LottoGeneratorTest {
     void moneyNotSufficient() {
         /* given */
         final Money money = Money.valueOf(1_000);
-        final Count manualPurchaseCount = new Count(2);
+        final LottoCount manualPurchaseCount = new LottoCount(2);
         final List<List<Integer>> inputNumberBundles = List.of(List.of(1, 2, 3, 4, 5, 6),
             List.of(7, 8, 9, 10, 11, 12));
 
@@ -53,7 +53,7 @@ class LottoGeneratorTest {
     void manualGenerationCountAndnumberBundlesCountNotEqual() {
         /* given */
         final Money money = Money.valueOf(5_000);
-        final Count manualPurchaseCount = new Count(3);
+        final LottoCount manualPurchaseCount = new LottoCount(3);
         final List<List<Integer>> inputNumberBundles = List.of(List.of(1, 2, 3, 4, 5, 6),
             List.of(7, 8, 9, 10, 11, 12));
 
@@ -68,7 +68,7 @@ class LottoGeneratorTest {
     void validateMinimum() {
         /* given */
         final Money money = Money.valueOf(500);
-        final Count manualPurchaseCount = new Count(0);
+        final LottoCount manualPurchaseCount = new LottoCount(0);
         final List<List<Integer>> inputNumberBundles = Collections.emptyList();
 
         /* when & then */
@@ -82,7 +82,7 @@ class LottoGeneratorTest {
     void validateUnit() {
         /* given */
         final Money money = Money.valueOf(1_500);
-        final Count manualPurchaseCount = new Count(0);
+        final LottoCount manualPurchaseCount = new LottoCount(0);
         final List<List<Integer>> inputNumberBundles = Collections.emptyList();
 
         /* when & then */

@@ -1,6 +1,6 @@
 package view;
 
-import domain.Count;
+import domain.LottoCount;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -35,7 +35,7 @@ public class InputView {
         }
     }
 
-    public static List<List<Integer>> readManualLottoNumbers(Count manualPurchaseCount) {
+    public static List<List<Integer>> readManualLottoNumbers(LottoCount manualPurchaseCount) {
         if (manualPurchaseCount.isZero()) {
             return Collections.emptyList();
         }
