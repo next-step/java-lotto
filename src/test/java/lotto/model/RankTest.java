@@ -1,6 +1,7 @@
 package lotto.model;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -31,5 +32,12 @@ public class RankTest {
 
         Rank match = Rank.match(count, isBonus);
         assertThat(match).isEqualTo(rank);
+    }
+
+    @Test
+    @DisplayName("getMatch 함수 일치하는지 확인")
+    void getMatch (){
+        Rank three= Rank.THREE;
+        assertThat(three.getMatch()).isEqualTo(3);
     }
 }
