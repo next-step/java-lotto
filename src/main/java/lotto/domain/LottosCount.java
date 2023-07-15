@@ -12,9 +12,9 @@ public class LottosCount {
         this.lottosCount = lottosCount;
     }
 
-    private void validateLottoCount(long lottoCount) {
-        if (lottoCount < 0) {
-            throw new IllegalArgumentException("구매한 로또의 개수가 음수일 수 없습니다. 현재 개수: " + lottoCount);
+    private void validateLottoCount(long lottosCount) {
+        if (lottosCount < 0) {
+            throw new IllegalArgumentException("구매한 로또의 개수가 음수일 수 없습니다. 현재 개수: " + lottosCount);
         }
     }
 
