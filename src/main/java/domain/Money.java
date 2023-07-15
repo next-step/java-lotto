@@ -40,12 +40,7 @@ public class Money {
     }
 
     public Money multiplyByCount(Count count) {
-        long tempValue = 0L;
-        while (count.isPositive()) {
-            tempValue += value;
-            count = count.decreaseByOne();
-        }
-        return new Money(tempValue);
+        return new Money(value * count.getValue());
     }
 
     public boolean isLessThan(final Money other) {
