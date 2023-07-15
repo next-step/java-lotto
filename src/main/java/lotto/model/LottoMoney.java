@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.Objects;
 
 public class LottoMoney {
+
     private static final int LOTTO_UNIT = 1000;
     private static final int ZERO = 0;
     private final int money;
@@ -29,6 +30,14 @@ public class LottoMoney {
         return money;
     }
 
+    public LottoMoney subtractByLottoCount(final Count manualCount) {
+        return new LottoMoney(money - manualCount.getCount() * LOTTO_UNIT);
+    }
+
+    public boolean isPositive() {
+        return this.money > ZERO;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -52,4 +61,5 @@ public class LottoMoney {
             "money=" + money +
             '}';
     }
+
 }
