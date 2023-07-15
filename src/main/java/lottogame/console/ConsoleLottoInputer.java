@@ -1,7 +1,7 @@
 package lottogame.console;
 
 import lottogame.controller.spi.LottoInputer;
-import lottogame.service.request.LottoPurchaseRequest;
+import lottogame.controller.request.LottoPurchaseRequest;
 
 import java.util.Arrays;
 import java.util.List;

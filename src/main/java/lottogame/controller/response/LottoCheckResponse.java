@@ -1,8 +1,9 @@
-package lottogame.service.response;
+package lottogame.controller.response;
+
+import lottogame.domain.LottoRank;
 
 import java.util.Map;
 import java.util.Objects;
-import lottogame.domain.LottoRank;
 
 public class LottoCheckResponse {
 

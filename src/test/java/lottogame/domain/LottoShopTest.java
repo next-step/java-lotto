@@ -1,7 +1,7 @@
 package lottogame.domain;
 
 import lottogame.domain.spi.NumberGenerator;
-import lottogame.service.request.LottoPurchaseRequest;
+import lottogame.controller.request.LottoPurchaseRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

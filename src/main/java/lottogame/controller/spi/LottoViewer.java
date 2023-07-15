@@ -1,7 +1,7 @@
 package lottogame.controller.spi;
 
 import lottogame.domain.LottoTicket;
-import lottogame.service.response.LottoCheckResponse;
+import lottogame.controller.response.LottoCheckResponse;
 
 import java.util.List;
 

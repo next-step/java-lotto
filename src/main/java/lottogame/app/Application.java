@@ -8,7 +8,6 @@ import lottogame.controller.spi.LottoViewer;
 import lottogame.domain.LottoTicket;
 import lottogame.domain.spi.NumberGenerator;
 import lottogame.randomnumber.RandomLottoNumberGenerator;
-import lottogame.service.LottoService;
 
 import java.util.List;
 
@@ -19,9 +18,8 @@ public class Application {
     private Application() {
         LottoInputer lottoInputer = new ConsoleLottoInputer();
         LottoViewer lottoViewer = new ConsoleLottoViewer();
-        LottoService lottoService = new LottoService();
 
-        lottoController = new LottoController(lottoInputer, lottoViewer, lottoService);
+        lottoController = new LottoController(lottoInputer, lottoViewer);
     }
 
     public static void main(String[] args) {

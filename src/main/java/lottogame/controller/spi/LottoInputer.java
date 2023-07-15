@@ -1,6 +1,6 @@
 package lottogame.controller.spi;
 
-import lottogame.service.request.LottoPurchaseRequest;
+import lottogame.controller.request.LottoPurchaseRequest;
 
 import java.util.Set;
 

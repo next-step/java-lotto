@@ -1,7 +1,7 @@
 package lottogame.domain;
 
 import lottogame.domain.spi.NumberGenerator;
-import lottogame.service.request.LottoPurchaseRequest;
+import lottogame.controller.request.LottoPurchaseRequest;
 
 import java.util.ArrayList;
 import java.util.List;

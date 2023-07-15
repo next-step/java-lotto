@@ -2,12 +2,13 @@ package lottogame.controller;
 
 import lottogame.controller.spi.LottoInputer;
 import lottogame.controller.spi.LottoViewer;
+import lottogame.domain.LottoResult;
 import lottogame.domain.LottoShop;
 import lottogame.domain.LottoTicket;
+import lottogame.domain.WinningLotto;
 import lottogame.domain.spi.NumberGenerator;
-import lottogame.service.LottoService;
-import lottogame.service.request.LottoPurchaseRequest;
-import lottogame.service.response.LottoCheckResponse;
+import lottogame.controller.request.LottoPurchaseRequest;
+import lottogame.controller.response.LottoCheckResponse;
 
 import java.util.List;
 import java.util.Set;
@@ -16,12 +17,10 @@ public class LottoController {
 
     private final LottoInputer lottoInputer;
     private final LottoViewer lottoViewer;
-    private final LottoService lottoService;
 
-    public LottoController(LottoInputer lottoInputer, LottoViewer lottoViewer, LottoService lottoService) {
+    public LottoController(LottoInputer lottoInputer, LottoViewer lottoViewer) {
         this.lottoInputer = lottoInputer;
         this.lottoViewer = lottoViewer;
-        this.lottoService = lottoService;
     }
 
     public List<LottoTicket> purchaseLottoTickets(NumberGenerator numberGenerator) {
@@ -38,7 +37,9 @@ public class LottoController {
         Set<Integer> winningLottoNumbers = lottoInputer.inputWinningLottoNumbers();
         Integer bonusNumber = lottoInputer.inputBonusLottoNumber();
 
-        LottoCheckResponse lottoCheckResponse = lottoService.checkResult(lottoTickets, winningLottoNumbers, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
+        LottoResult lottoResult = new LottoResult(winningLotto.toLottoRanks(lottoTickets));
+        LottoCheckResponse lottoCheckResponse = new LottoCheckResponse(lottoResult.getEarningRate(), lottoResult.getLottoRankCounts());
 
         lottoViewer.draw(lottoCheckResponse);
     }

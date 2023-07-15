@@ -3,7 +3,7 @@ package lottogame.console;
 import lottogame.controller.spi.LottoViewer;
 import lottogame.domain.LottoRank;
 import lottogame.domain.LottoTicket;
-import lottogame.service.response.LottoCheckResponse;
+import lottogame.controller.response.LottoCheckResponse;
 
 import java.util.List;
 import java.util.Map;

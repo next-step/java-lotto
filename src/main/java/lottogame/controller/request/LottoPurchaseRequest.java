@@ -1,4 +1,4 @@
-package lottogame.service.request;
+package lottogame.controller.request;
 
 import java.util.List;
 import java.util.Objects;
