@@ -1,22 +1,26 @@
 package lotto.output;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 import lotto.domain.Lotto;
 import lotto.domain.LottoGroup;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
+import lotto.domain.Quantity;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class LottoOutput {
-
     public void printAskPurchaseMoney() {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public void printQuantity(final int amount) {
-        System.out.println(amount + "개를 구매했습니다.");
+    public void printQuantity(final Quantity manualQuantity, final Quantity autoQuantity) {
+        System.out.println("수동으로 "
+                + manualQuantity.getQuantity()
+                + "장, 자동으로 "
+                + autoQuantity.getQuantity()
+                + "개를 구매했습니다.");
     }
 
     public void printAskWinningNumbers() {
@@ -67,5 +71,13 @@ public class LottoOutput {
 
     public void printSectionDivider() {
         System.out.println();
+    }
+
+    public void printAskManualQuantity() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public void printAskManualLottonumbers() {
+        System.out.println("수동으로 구매할 로또 번호를 입력해 주세요.");
     }
 }

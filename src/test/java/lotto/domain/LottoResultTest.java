@@ -1,18 +1,17 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoResultTest {
-
     private LottoResult result;
     private LottoGroup lottoGroup;
     private WinningLotto winningLotto;
@@ -29,12 +28,12 @@ class LottoResultTest {
         result = new LottoResult(rankResult);
 
         List<Lotto> lottos = new ArrayList<>();
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6))); // 1등
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 7))); // 2등
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 8))); // 3등
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 8, 9))); // 4등
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 8, 9, 10))); // 5등
-        lottos.add(Lotto.createSpecificLotto(List.of(21, 22, 23, 24, 25, 26))); // 등수없음
+        lottos.add(Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 6))); // 1등
+        lottos.add(Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 7))); // 2등
+        lottos.add(Lotto.createManualLotto(List.of(1, 2, 3, 4, 5, 8))); // 3등
+        lottos.add(Lotto.createManualLotto(List.of(1, 2, 3, 4, 8, 9))); // 4등
+        lottos.add(Lotto.createManualLotto(List.of(1, 2, 3, 8, 9, 10))); // 5등
+        lottos.add(Lotto.createManualLotto(List.of(21, 22, 23, 24, 25, 26))); // 등수없음
         lottoGroup = new LottoGroup(lottos);
 
         winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);

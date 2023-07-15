@@ -21,12 +21,12 @@ public class Lotto {
         this.numbers = Collections.unmodifiableList(numbers);
     }
 
-    public static Lotto createRandomLotto() {
+    public static Lotto createAutomaticLotto() {
         Collections.shuffle(values);
         return new Lotto(new ArrayList<>(values.subList(0, LOTTO_SIZE)));
     }
 
-    public static Lotto createSpecificLotto(final List<Integer> numbers) {
+    public static Lotto createManualLotto(final List<Integer> numbers) {
         verifySize(numbers);
         verifyDuplicate(numbers);
 
@@ -49,13 +49,17 @@ public class Lotto {
         }
     }
 
-    public Long countMatches(final Lotto other) {
-        return this.numbers.stream()
+    public int countMatches(final Lotto other) {
+        return Math.toIntExact(this.numbers.stream()
                 .filter(other.numbers::contains)
-                .count();
+                .count());
     }
 
     public List<LottoNumber> getLottoNumbers() {
         return this.numbers;
+    }
+
+    public boolean contains(LottoNumber number) {
+        return this.numbers.contains(number);
     }
 }

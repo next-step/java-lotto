@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoResult {
-
     private final Map<LottoRank, Long> result;
 
     public LottoResult(final Map<LottoRank, Long> result) {
@@ -20,7 +19,7 @@ public class LottoResult {
     }
 
     public Money calculateTotalPrize() {
-        Long totalPrize = result.entrySet()
+        long totalPrize = result.entrySet()
                 .stream()
                 .mapToLong(entry -> entry.getKey().getPrize() * entry.getValue())
                 .sum();
