@@ -38,9 +38,9 @@ public class BoughtLottosWriter {
 
     private static String formatBalls(final Lotto lotto) {
         String result = "[";
-        result += lotto.getBalls()
+        result += lotto.getBallValues()
                 .stream()
-                .map(b -> String.valueOf(b.getValue()))
+                .map(String::valueOf)
                 .collect(Collectors.joining(DELIMITER));
         return result + "]";
     }
