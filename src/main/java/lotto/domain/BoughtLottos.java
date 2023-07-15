@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +28,9 @@ public class BoughtLottos {
         return this.count;
     }
 
-    public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(this.lottos);
+    public List<LottoNumbers> getLottosNumbers() {
+        return this.lottos.stream()
+                .map(l -> new LottoNumbers(l.getBallValues()))
+                .collect(Collectors.toList());
     }
 }

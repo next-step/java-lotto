@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +23,7 @@ public class LottoGeneratorTest {
         BoughtLottos boughtLottos = lottoGenerator.generate(money);
 
         /* then */
-        assertThat(boughtLottos.getLottos()).hasSize(Integer.parseInt(value) / Lotto.PRICE);
+        assertThat(boughtLottos.getLottosNumbers()).hasSize(Integer.parseInt(value) / Lotto.PRICE);
     }
 
     @Test
@@ -50,13 +51,14 @@ public class LottoGeneratorTest {
         final Money money = new Money("2000");
 
         /* when */
-        final LottoGenerator lottoGenerator = new LottoGenerator(new SequenceLottoGenerateStrategy());
+        final LottoGenerator lottoGenerator = new LottoGenerator(
+                new SequenceLottoGenerateStrategy());
         BoughtLottos boughtLottos = lottoGenerator.generate(money);
 
         /* then */
-        assertThat(boughtLottos.getLottos()).containsExactlyInAnyOrder(
-                new Lotto(LottoTest.getBalls("1", "2", "3", "4", "5", "6")),
-                new Lotto(LottoTest.getBalls("7", "8", "9", "10", "11", "12"))
+        assertThat(boughtLottos.getLottosNumbers()).containsExactlyInAnyOrder(
+                new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)),
+                new LottoNumbers(List.of(7, 8, 9, 10, 11, 12))
         );
     }
 }

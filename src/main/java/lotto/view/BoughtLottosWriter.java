@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.stream.Collectors;
 import lotto.domain.BoughtLottos;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
 
 public class BoughtLottosWriter {
 
@@ -30,15 +31,15 @@ public class BoughtLottosWriter {
         if (boughtLottos.isEmpty()) {
             return EMPTY;
         }
-        return boughtLottos.getLottos()
+        return boughtLottos.getLottosNumbers()
                 .stream()
                 .map(BoughtLottosWriter::formatBalls)
                 .collect(Collectors.joining(NEW_LINE));
     }
 
-    private static String formatBalls(final Lotto lotto) {
+    private static String formatBalls(final LottoNumbers lottoNumbers) {
         String result = "[";
-        result += lotto.getBallValues()
+        result += lottoNumbers.getNumbers()
                 .stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(DELIMITER));
