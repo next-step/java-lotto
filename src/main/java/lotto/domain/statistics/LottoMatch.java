@@ -13,17 +13,18 @@ public enum LottoMatch {
     FIVE_MATCH(new LottoMatchKey(false, 5), 1_500_000),
     FIVE_BONUS_MATCH(new LottoMatchKey(true, 5), 30_000_000),
     SIX_MATCH(new LottoMatchKey(false, 6), 2_000_000_000),
-    NONE_MATCH(new LottoMatchKey(true, 0), 0);
+    NONE_MATCH(new LottoMatchKey(true, 0), 0),
+    ;
 
     private final LottoMatchKey lottoMatchKey;
     private final int prize;
 
-    LottoMatch(LottoMatchKey lottoMatchKey, int prize) {
+    LottoMatch(final LottoMatchKey lottoMatchKey, final int prize) {
         this.lottoMatchKey = lottoMatchKey;
         this.prize = prize;
     }
 
-    public static LottoMatch find(LottoMatchKey lottoMatchKey) {
+    public static LottoMatch find(final LottoMatchKey lottoMatchKey) {
         return Optional.ofNullable(MAP.get(lottoMatchKey)).orElse(NONE_MATCH);
     }
 

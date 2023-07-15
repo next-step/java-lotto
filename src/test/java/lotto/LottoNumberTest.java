@@ -2,7 +2,6 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import lotto.domain.game.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
@@ -26,15 +25,6 @@ public class LottoNumberTest {
     void 로또_번호_검증_성공(int value) {
         assertThatNoException()
             .isThrownBy(() -> new LottoNumber(value));
-    }
-
-    @DisplayName("숫자가 아니면 예외처리 발생")
-    @ValueSource(strings = {"가", "나", "다"})
-    @ParameterizedTest()
-    void 로또_번호_문자_예외(String text) {
-        assertThatThrownBy(() -> new LottoNumber(text))
-            .isInstanceOf(NumberFormatException.class)
-            .withFailMessage("숫자를 입력해 주세요");
     }
 
 }

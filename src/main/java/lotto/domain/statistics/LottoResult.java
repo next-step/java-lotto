@@ -2,7 +2,7 @@ package lotto.domain.statistics;
 
 import java.util.Map;
 
-public class LottoResult {
+public final class LottoResult {
 
     private final int matchCount;
     private final String message;
@@ -14,7 +14,7 @@ public class LottoResult {
         matchCount = lottoMatchKey.getMatchCount();
         message = getMessage(lottoMatchKey);
         prize = lottoMatch.getPrize();
-        prizeCount = getPrizeCount(lottoMatch, lottoStatistics);
+        prizeCount = calculatePrizeCount(lottoMatch, lottoStatistics);
     }
 
     private String getMessage(final LottoMatchKey lottoMatchKey) {
@@ -25,7 +25,7 @@ public class LottoResult {
         return bonusMessage;
     }
 
-    private int getPrizeCount(final LottoMatch lottoMatch, final LottoStatistics lottoStatistics) {
+    private int calculatePrizeCount(final LottoMatch lottoMatch, final LottoStatistics lottoStatistics) {
         Map<LottoMatch, Integer> resultMap = lottoStatistics.getStatistics();
         int count = 0;
         if (resultMap.containsKey(lottoMatch)) {

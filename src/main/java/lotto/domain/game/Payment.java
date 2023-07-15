@@ -1,32 +1,48 @@
 package lotto.domain.game;
 
-import java.text.MessageFormat;
-import java.util.OptionalInt;
+import java.util.Objects;
 
 public final class Payment {
 
-    private static final int LOTTO_PRICE = 1_000;
     private final int money;
 
-    public Payment(final String text) {
-        int value = OptionalInt.of(Integer.parseInt(text.trim()))
-            .orElseThrow(() -> new NumberFormatException("숫자를 입력해야 합니다"));
+    public Payment(final int value) {
         validateRange(value);
         money = value;
     }
 
     private void validateRange(final int value) {
-        if (value < LOTTO_PRICE) {
-            throw new IllegalArgumentException(
-                MessageFormat.format("{0}원 이상 투입해 주세요", LOTTO_PRICE));
+        if (value < Lotto.PRICE) {
+            throw new IllegalArgumentException("구입 금액이 부족합니다");
         }
     }
 
-    public int getLottoCount() {
-        return (money / LOTTO_PRICE);
+    public int calculateBuyCount(final int count) {
+        return (money - (count * Lotto.PRICE)) / Lotto.PRICE;
     }
 
-    public int getMoney() {
-        return money;
+    public double calculateProfitRate(final double profit) {
+        return Math.round(profit / money * 100) / 100.0;
+    }
+
+    public boolean isBuy(int count) {
+        return ((money - (count * Lotto.PRICE)) >= 0);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Payment payment = (Payment) o;
+        return money == payment.money;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(money);
     }
 }
