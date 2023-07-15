@@ -22,16 +22,27 @@ public class LottoController {
     }
 
     public void run() {
-        MoneyRequestDto moneyRequestDto = inputView.inputMoney();
-        Money money = new Money(moneyRequestDto.getMoney());
+        Money money = inputMoney();
+        Lottos lottos = buyLottos(money);
+        findWinningLottos(money, lottos);
+    }
 
+    private Money inputMoney() {
+        MoneyRequestDto moneyRequestDto = inputView.inputMoney();
+        return new Money(moneyRequestDto.getMoney());
+    }
+
+    private Lottos buyLottos(Money money) {
         ManualLottosRequestDto manualLottosRequestDto = inputView.inputManualLottos();
         List<Lotto> manualLottos = manualLottosRequestDto.getManualLottos()
                 .stream().map(lotto -> new Lotto(lotto.getManualLotto()))
                 .collect(Collectors.toList());
         Lottos lottos = lottoService.buyLotto(money, new Lottos(manualLottos));
         outputView.printBuyStatus(new LottoStatusesResponseDto(lottos, new LottosCount(manualLottos.size())));
+        return lottos;
+    }
 
+    private void findWinningLottos(Money money, Lottos lottos) {
         WinningNumbersRequestDto winningNumbersRequestDto = inputView.inputWinningNumbers();
         WinningNumbers winningNumbers = new WinningNumbers(
                 winningNumbersRequestDto.getWinningNumbers(),
@@ -41,4 +52,6 @@ public class LottoController {
         ProfitRate profitRate = lottoService.profitRate(lottoResults, money);
         outputView.printLottoResult(new LottoResultResponseDto(lottoResults, profitRate));
     }
+
+
 }
