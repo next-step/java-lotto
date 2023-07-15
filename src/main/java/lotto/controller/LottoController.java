@@ -5,6 +5,7 @@ import lotto.domain.LottoBuyCount;
 import lotto.domain.LottoGenerator;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
+import lotto.domain.WinningStatistics;
 import lotto.view.BoughtLottosWriter;
 import lotto.view.LottoReader;
 import lotto.view.MoneyReader;
@@ -48,8 +49,8 @@ public class LottoController {
         boughtLottosWriter.printBoughtLottos(manualBoughtLottos, autoBoughtLottos);
 
         final WinningLotto winningLotto = lottoReader.readWinningLotto();
-        winningStatisticsWriter.printLottoStatistics(
-                boughtLottos.winningResults(winningLotto)
-        );
+        final WinningStatistics totalLottoWinningStatistics = manualBoughtLottos.winningResults(winningLotto)
+                .sum(autoBoughtLottos.winningResults(winningLotto));
+        winningStatisticsWriter.printLottoStatistics(totalLottoWinningStatistics);
     }
 }
