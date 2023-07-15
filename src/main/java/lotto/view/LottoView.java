@@ -1,10 +1,7 @@
 package lotto.view;
 
 import java.text.MessageFormat;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import lotto.domain.*;
@@ -17,24 +14,43 @@ public class LottoView {
 
     public int readPayment() {
         System.out.println("구입금액을 입력해 주세요.");
-        return Integer.parseInt(scanner.nextLine().trim());
+        return Integer.parseInt(scanner.nextLine().strip());
     }
 
     public List<Integer> readWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return readLotto();
+    }
+
+    private List<Integer> readLotto() {
         String[] elements = scanner.nextLine().split(INPUT_LOTTO_DELIMITER);
         return Arrays.stream(elements)
-                .map(element -> Integer.parseInt(element.trim()))
+                .map(element -> Integer.parseInt(element.strip()))
                 .collect(Collectors.toList());
     }
 
     public int readBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return Integer.parseInt(scanner.nextLine().trim());
+        return Integer.parseInt(scanner.nextLine().strip());
     }
 
-    public void printLottoCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    public int readManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return Integer.parseInt(scanner.nextLine().strip());
+    }
+
+    public List<List<Integer>> readManualLottos(int count) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<List<Integer>> lottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottos.add(readLotto());
+        }
+        return lottos;
+    }
+
+    public void printLottoCount(int manualCount, int AutomaticCount) {
+        String output = MessageFormat.format("수동으로 {0}장, 자동으로 {1}개를 구매했습니다.", manualCount, AutomaticCount);
+        System.out.println(output);
     }
 
     public void printLottos(Lottos lottos) {
@@ -45,9 +61,9 @@ public class LottoView {
 
     private void printLotto(Lotto lotto) {
         String output = lotto.getLotto().stream()
-                        .map(LottoNumber::getLottoNumber)
-                        .map(String::valueOf)
-                        .collect(Collectors.joining(OUTPUT_LOTTO_DELIMITER));
+                .map(LottoNumber::getLottoNumber)
+                .map(String::valueOf)
+                .collect(Collectors.joining(OUTPUT_LOTTO_DELIMITER));
 
         System.out.println("[" + output + "]");
     }
