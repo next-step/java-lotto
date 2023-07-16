@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.model.Lotto;
-import lotto.model.LottoNumber;
-import lotto.model.ManualLottos;
 
 public final class LottoInputView {
 
@@ -47,19 +44,18 @@ public final class LottoInputView {
         }
     }
 
-    public ManualLottos inputManualLottoNumbers(int manualLottoCount) {
+    public List<List<Integer>> inputManualLottoNumbers(int manualLottoCount) {
         try {
             System.out.println();
             System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-            List<Lotto> manualLottoNumbers = IntStream.range(0, manualLottoCount)
+            return IntStream.range(0, manualLottoCount)
                     .mapToObj(index -> inputLotto()).collect(Collectors.toList());
-            return new ManualLottos(manualLottoNumbers);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("올바르지 않은 입력입니다. ','로 구분하여 6개의 로또 번호를 입력해주세요.");
         }
     }
 
-    public Lotto inputWinningNumbers() {
+    public List<Integer> inputWinningNumbers() {
         try {
             System.out.println();
             System.out.println("지난 주 당첨 번호를 입력해 주세요. ','로 구분하여 6개를 입력해주세요.");
@@ -69,10 +65,10 @@ public final class LottoInputView {
         }
     }
 
-    public LottoNumber inputBonusBall() {
+    public int inputBonusBall() {
         try {
             System.out.println("보너스 볼을 입력해 주세요.");
-            return LottoNumber.of(inputInt());
+            return inputInt();
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("올바르지 않은 입력입니다. 1과 45사이의 정수를 입력하세요.");
         }
@@ -82,9 +78,9 @@ public final class LottoInputView {
         return Integer.parseInt(SCANNER.nextLine().strip());
     }
 
-    private Lotto inputLotto() throws NumberFormatException {
-        return new Lotto(Arrays.stream(SCANNER.nextLine().split(","))
+    private List<Integer> inputLotto() throws NumberFormatException {
+        return Arrays.stream(SCANNER.nextLine().split(","))
                 .map(number -> Integer.parseInt(number.strip()))
-                .collect(Collectors.toUnmodifiableList()));
+                .collect(Collectors.toUnmodifiableList());
     }
 }

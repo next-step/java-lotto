@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import lotto.model.AutoLottos;
 import lotto.model.Lotto;
 import lotto.model.LottoCounts;
@@ -27,8 +29,8 @@ public final class LottoController {
         LottoMoney lottoMoney = inputLottoMoney();
         LottoCounts lottoCounts = inputLottoCounts(lottoMoney);
 
-        ManualLottos manualLottos = lottoInputView.inputManualLottoNumbers(
-                lottoCounts.getManualLottoCount());
+        ManualLottos manualLottos = inputManualLottos(lottoCounts);
+
         AutoLottos autoLottos = new AutoLottos(lottoCounts.getAutoLottoCount(),
                 RandomNumbersGenerator.getInstance());
 
@@ -41,6 +43,15 @@ public final class LottoController {
         );
         LottoResult lottoResult = new LottoResult(totalRankResultsDto, lottoMoney);
         lottoOutputView.printLottoResult(lottoResult);
+    }
+
+    private ManualLottos inputManualLottos(LottoCounts lottoCounts) {
+        List<Lotto> lists = lottoInputView
+                .inputManualLottoNumbers(lottoCounts.getManualLottoCount())
+                .stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList());
+        return new ManualLottos(lists);
     }
 
     private LottoMoney inputLottoMoney() {
@@ -61,8 +72,8 @@ public final class LottoController {
     }
 
     private WinningNumbers getWinningNumbers() {
-        Lotto winningNumbers = lottoInputView.inputWinningNumbers();
-        LottoNumber bonusBall = lottoInputView.inputBonusBall();
+        Lotto winningNumbers = new Lotto(lottoInputView.inputWinningNumbers());
+        LottoNumber bonusBall = LottoNumber.of(lottoInputView.inputBonusBall());
 
         return new WinningNumbers(winningNumbers, bonusBall);
     }
