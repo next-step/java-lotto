@@ -2,6 +2,8 @@ package lotto.model;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public final class LottoResult {
 
@@ -11,7 +13,11 @@ public final class LottoResult {
     private final ProfitRate profitRate;
 
     public LottoResult(final RankResultsDto ranks, final LottoMoney lottoMoney) {
-        this.lottoResultStatistics = ranks.getRanksCounts();
+        this.lottoResultStatistics = ranks.getRanks()
+                .stream()
+                .collect(Collectors.groupingBy(
+                        Function.identity(),
+                        Collectors.counting()));
         this.profitRate = calculateProfitRate(lottoMoney);
     }
 

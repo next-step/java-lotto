@@ -2,10 +2,7 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public final class RankResultsDto {
 
@@ -21,11 +18,6 @@ public final class RankResultsDto {
         List<Rank> ranks = new ArrayList<>(manualRankResultsDto.ranks);
         ranks.addAll(autoRankResultsDto.ranks);
         return new RankResultsDto(ranks);
-    }
-
-    public Map<Rank, Long> getRanksCounts() {
-        return ranks.stream()
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
     public List<Rank> getRanks() {
