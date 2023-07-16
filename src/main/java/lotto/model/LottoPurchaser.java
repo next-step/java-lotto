@@ -2,11 +2,9 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoPurchaser {
 
-    private static final int ONE = 1;
     private final LottoMoney currentMoney;
     private final List<Lotto> purchasedLottos;
 
@@ -25,34 +23,28 @@ public class LottoPurchaser {
         List<Lotto> newLotto = new ArrayList<>(this.purchasedLottos);
         while (afterMoney.isPositive()) {
             newLotto.add(new Lotto(lottoGenerator.generate()));
-            afterMoney = afterMoney.subtractByLottoCount(new Count(ONE));
+            afterMoney = afterMoney.subtractByLottoCount(new Count(1));
         }
         return new LottoPurchaser(afterMoney, newLotto);
     }
 
     public LottoPurchaser buyFixTicket(final Count manualCount,
-        final List<List<Integer>> manualLotto) {
+        final List<Lotto> manualLotto) {
         validateLottoCount(manualCount, manualLotto);
         List<Lotto> newLotto = new ArrayList<>(this.purchasedLottos);
-        for (List<Integer> lotto : manualLotto) {
-            newLotto.add(new Lotto(new FixLottoGenerator(convertLottoNumber(lotto)).generate()));
+        for (Lotto lotto : manualLotto) {
+            newLotto.add(new Lotto(new FixLottoGenerator(lotto.getLottoNumbers()).generate()));
         }
         return new LottoPurchaser(currentMoney.subtractByLottoCount(manualCount), newLotto);
     }
 
     public LottoPurchaser purchaseLotto(final Count manualCount,
-        final List<List<Integer>> manualLotto) {
+        final List<Lotto> manualLotto) {
         return buyFixTicket(manualCount, manualLotto).buyAutoTicket(new AutoLottoGenerator());
     }
 
-    private List<LottoNumber> convertLottoNumber(final List<Integer> lottos) {
-        return lottos.stream()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList());
-    }
-
     private void validateLottoCount(final Count manualCount,
-        final List<List<Integer>> manualLotto) {
+        final List<Lotto> manualLotto) {
         if (manualCount.getCount() != manualLotto.size()) {
             throw new IllegalArgumentException("로또 구입 수와 로또 번호 입력 수가 일치하지 않습니다");
         }

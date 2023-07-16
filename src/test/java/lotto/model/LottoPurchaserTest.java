@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
 public class LottoPurchaserTest {
+
     private Lotto createLotto(int... ints) {
         return new Lotto(Arrays.stream(ints)
             .boxed()
@@ -21,6 +22,7 @@ public class LottoPurchaserTest {
         return Arrays.stream(lottos)
             .collect(toList());
     }
+
     @Test
     @DisplayName("로또 금액을 자동으로 사면 이에 해당하는 로또의 개수를 반환한다")
     void 금액만큼_로또_구매() {
@@ -36,10 +38,10 @@ public class LottoPurchaserTest {
     @DisplayName("로또 수동 수와 수동 번호를 입력하면 수동으로 산다")
     void 수동_수_수동_번호_만큼_수동으로_산다() {
         // given
-        List<List<Integer>> lottos = List.of(
-            List.of(8, 21, 23, 41, 42, 43),
-            List.of(3, 5, 11, 16, 32, 38),
-            List.of(7, 11, 16, 35, 36, 44)
+        List<Lotto> lottos = createLottos(
+            createLotto(8, 21, 23, 41, 42, 43),
+            createLotto(3, 5, 11, 16, 32, 38),
+            createLotto(7, 11, 16, 35, 36, 44)
         );
         LottoPurchaser purchaser = new LottoPurchaser(new LottoMoney(14000));
         // when
@@ -56,12 +58,12 @@ public class LottoPurchaserTest {
 
     @Test
     @DisplayName("로또 수동 수와 수동 번호를 입력하면, 남은 돈은 자동 티켓으로 산다")
-    void 수동_수_수동_번호_남은돈은_자동(){
+    void 수동_수_수동_번호_남은돈은_자동() {
         // given
-        List<List<Integer>> lottos = List.of(
-            List.of(8, 21, 23, 41, 42, 43),
-            List.of(3, 5, 11, 16, 32, 38),
-            List.of(7, 11, 16, 35, 36, 44)
+        List<Lotto> lottos = createLottos(
+            createLotto(8, 21, 23, 41, 42, 43),
+            createLotto(3, 5, 11, 16, 32, 38),
+            createLotto(7, 11, 16, 35, 36, 44)
         );
         LottoPurchaser purchaser = new LottoPurchaser(new LottoMoney(14000));
         // when
@@ -73,27 +75,28 @@ public class LottoPurchaserTest {
 
     @Test
     @DisplayName("로또 수동 수와 로또 번호 수가 일치하면, 정상 동작한다.")
-    void 수동_수_수동_번호_일치하면_정상_동작(){
+    void 수동_수_수동_번호_일치하면_정상_동작() {
         // given
-        List<List<Integer>> lottos = List.of(
-            List.of(8, 21, 23, 41, 42, 43),
-            List.of(3, 5, 11, 16, 32, 38),
-            List.of(7, 11, 16, 35, 36, 44)
+        List<Lotto> lottos = createLottos(
+            createLotto(8, 21, 23, 41, 42, 43),
+            createLotto(3, 5, 11, 16, 32, 38),
+            createLotto(7, 11, 16, 35, 36, 44)
         );
         Count manualCount = new Count(3);
         LottoPurchaser purchaser = new LottoPurchaser(new LottoMoney(14000));
         // when
-        assertThatCode(() -> purchaser.buyFixTicket(manualCount, lottos)).doesNotThrowAnyException();
+        assertThatCode(
+            () -> purchaser.buyFixTicket(manualCount, lottos)).doesNotThrowAnyException();
     }
 
     @Test
     @DisplayName("로또 수동 수와 로또 번호 수가 일치하지 않으면, 오류를 반환한다")
-    void 수동_수_수동_번호_일치하지_않으면_오류(){
+    void 수동_수_수동_번호_일치하지_않으면_오류() {
         // given
-        List<List<Integer>> lottos = List.of(
-            List.of(8, 21, 23, 41, 42, 43),
-            List.of(3, 5, 11, 16, 32, 38),
-            List.of(7, 11, 16, 35, 36, 44)
+        List<Lotto> lottos = createLottos(
+            createLotto(8, 21, 23, 41, 42, 43),
+            createLotto(3, 5, 11, 16, 32, 38),
+            createLotto(7, 11, 16, 35, 36, 44)
         );
         Count manualCount = new Count(2);
         LottoPurchaser purchaser = new LottoPurchaser(new LottoMoney(14000));
@@ -105,12 +108,12 @@ public class LottoPurchaserTest {
 
     @Test
     @DisplayName("로또 수동 수가 현재 금액보다 크면 오류를 반환한다")
-    void 수동_수가_현재_금액보다_크면_오류(){
+    void 수동_수가_현재_금액보다_크면_오류() {
         // given
-        List<List<Integer>> lottos = List.of(
-            List.of(8, 21, 23, 41, 42, 43),
-            List.of(3, 5, 11, 16, 32, 38),
-            List.of(7, 11, 16, 35, 36, 44)
+        List<Lotto> lottos = createLottos(
+            createLotto(8, 21, 23, 41, 42, 43),
+            createLotto(3, 5, 11, 16, 32, 38),
+            createLotto(7, 11, 16, 35, 36, 44)
         );
         Count manualCount = new Count(3);
         LottoPurchaser purchaser = new LottoPurchaser(new LottoMoney(1000));
