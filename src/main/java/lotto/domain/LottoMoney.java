@@ -49,13 +49,12 @@ public final class LottoMoney {
         return new LottoMoney(value * operand);
     }
 
-    // TODO: Profit으로 감싸기
-    public double ratio(final LottoMoney money) {
+    public LottoRatio ratio(final LottoMoney money) {
         if (money.value == 0) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }
 
-        return this.value / (double) money.value;
+        return new LottoRatio(this.value / (double) money.value);
     }
 
     public long getValue() {

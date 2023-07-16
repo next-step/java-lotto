@@ -127,10 +127,10 @@ class LottoMoneyTest {
         final LottoMoney target = new LottoMoney(10_000L);
 
         /* when */
-        double ratio = origin.ratio(target);
+        LottoRatio ratio = origin.ratio(target);
 
         /* then */
-        assertThat(ratio).isEqualTo(3_000L / (double) 10_000L);
+        assertThat(ratio).isEqualTo(new LottoRatio(3_000L / (double) 10_000L));
     }
 
     @Test

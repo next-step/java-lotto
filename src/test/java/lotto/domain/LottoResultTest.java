@@ -39,10 +39,10 @@ class LottoResultTest {
         LottoMoney money = new LottoMoney(target.size() * 1_000L);
 
         /* when */
-        double ratio = lottoResult.calculateRatio(money);
+        LottoRatio lottoRatio = lottoResult.calculateRatio(money);
 
         /* then */
-        double expectedRatio = Rank.FIFTH.getPrize().getValue() * 2L / (double) money.getValue();
-        assertThat(ratio).isEqualTo(expectedRatio);
+        LottoRatio expectedRatio = new LottoRatio(Rank.FIFTH.getPrize().getValue() * 2L / (double) money.getValue());
+        assertThat(lottoRatio).isEqualTo(expectedRatio);
     }
 }

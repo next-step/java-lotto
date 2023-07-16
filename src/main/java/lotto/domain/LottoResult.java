@@ -18,7 +18,7 @@ public class LottoResult {
         return rankCount.getOrDefault(rank, 0L);
     }
 
-    public double calculateRatio(final LottoMoney lottoMoney) {
+    public LottoRatio calculateRatio(final LottoMoney lottoMoney) {
         return calculateTotalPrize().ratio(lottoMoney);
     }
 

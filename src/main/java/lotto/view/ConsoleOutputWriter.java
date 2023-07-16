@@ -58,7 +58,7 @@ public class ConsoleOutputWriter {
     private static String buildRatioString(final LottoResult lottoResult, final LottoMoney lottoMoney) {
         return String.format(
                 "총 수익률은 %.2f입니다.",
-                lottoResult.calculateRatio(lottoMoney)
+                lottoResult.calculateRatio(lottoMoney).getValue()
         );
     }
 
