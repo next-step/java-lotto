@@ -8,15 +8,16 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
-class RankResultsTest {
+class RankResultsDtoTest {
 
     @Test
     void 로또_당첨결과_객체_생성_및_값_확인_성공() {
         // given
-        RankResults rankResults = new RankResults(List.of(Rank.FIRST, Rank.SECOND, Rank.NONE));
+        RankResultsDto rankResultsDto = new RankResultsDto(
+                List.of(Rank.FIRST, Rank.SECOND, Rank.NONE));
 
         // when
-        List<Rank> ranks = rankResults.getRanks();
+        List<Rank> ranks = rankResultsDto.getRanks();
 
         // then
         assertThat(ranks)
@@ -26,22 +27,23 @@ class RankResultsTest {
     @Test
     void 로또_당첨결과_객체_합쳐서_생성_및_값_확인_성공() {
         // given
-        RankResults rankResults = RankResults.add(
-                new RankResults(List.of(Rank.FIRST, Rank.SECOND, Rank.NONE)),
-                new RankResults(List.of(Rank.FIRST, Rank.THIRD, Rank.NONE)));
+        RankResultsDto rankResultsDto = RankResultsDto.add(
+                new RankResultsDto(List.of(Rank.FIRST, Rank.SECOND, Rank.NONE)),
+                new RankResultsDto(List.of(Rank.FIRST, Rank.THIRD, Rank.NONE)));
 
         // when, then
-        assertThat(rankResults.getRanks()).isEqualTo(
+        assertThat(rankResultsDto.getRanks()).isEqualTo(
                 List.of(Rank.FIRST, Rank.SECOND, Rank.NONE, Rank.FIRST, Rank.THIRD, Rank.NONE));
     }
 
     @Test
     void 로또_당첨결과_객체_통계_반환_성공() {
         // given
-        RankResults rankResults = new RankResults(List.of(Rank.FIRST, Rank.SECOND, Rank.NONE));
+        RankResultsDto rankResultsDto = new RankResultsDto(
+                List.of(Rank.FIRST, Rank.SECOND, Rank.NONE));
 
         // when
-        Map<Rank, Long> counts = rankResults.getRanksCounts();
+        Map<Rank, Long> counts = rankResultsDto.getRanksCounts();
 
         // then
         assertThat(counts).contains(

@@ -7,20 +7,20 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public final class RankResults {
+public final class RankResultsDto {
 
     private final List<Rank> ranks;
 
-    public RankResults(final List<Rank> ranks) {
+    public RankResultsDto(final List<Rank> ranks) {
         this.ranks = ranks;
     }
 
-    public static RankResults add(
-            final RankResults manualRankResults,
-            final RankResults autoRankResults) {
-        List<Rank> ranks = new ArrayList<>(manualRankResults.ranks);
-        ranks.addAll(autoRankResults.ranks);
-        return new RankResults(ranks);
+    public static RankResultsDto add(
+            final RankResultsDto manualRankResultsDto,
+            final RankResultsDto autoRankResultsDto) {
+        List<Rank> ranks = new ArrayList<>(manualRankResultsDto.ranks);
+        ranks.addAll(autoRankResultsDto.ranks);
+        return new RankResultsDto(ranks);
     }
 
     public Map<Rank, Long> getRanksCounts() {
@@ -40,7 +40,7 @@ public final class RankResults {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        RankResults that = (RankResults) o;
+        RankResultsDto that = (RankResultsDto) o;
         return Objects.equals(ranks, that.ranks);
     }
 

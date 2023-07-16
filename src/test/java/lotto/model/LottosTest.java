@@ -66,7 +66,7 @@ class LottosTest {
         final Lottos lottos = new AutoLottos(2, new FixedNumbersGenerator(generatedNumbers));
 
         // when
-        RankResults lottoResult = lottos.matchWinningNumbers(winningNumbers);
+        RankResultsDto lottoResult = lottos.matchWinningNumbers(winningNumbers);
 
         // then
         assertThat(

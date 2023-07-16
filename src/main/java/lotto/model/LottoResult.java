@@ -10,7 +10,7 @@ public final class LottoResult {
     private final Map<Rank, Long> lottoResultStatistics;
     private final ProfitRate profitRate;
 
-    public LottoResult(final RankResults ranks, final LottoMoney lottoMoney) {
+    public LottoResult(final RankResultsDto ranks, final LottoMoney lottoMoney) {
         this.lottoResultStatistics = ranks.getRanksCounts();
         this.profitRate = calculateProfitRate(lottoMoney);
     }

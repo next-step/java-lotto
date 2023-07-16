@@ -13,8 +13,8 @@ public abstract class Lottos {
         this.lottos = lottos;
     }
 
-    public RankResults matchWinningNumbers(final WinningNumbers winningNumbers) {
-        return new RankResults(lottos.stream()
+    public RankResultsDto matchWinningNumbers(final WinningNumbers winningNumbers) {
+        return new RankResultsDto(lottos.stream()
                 .map(winningNumbers::checkRank)
                 .collect(Collectors.toUnmodifiableList()));
     }

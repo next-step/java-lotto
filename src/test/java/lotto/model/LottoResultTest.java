@@ -13,14 +13,14 @@ class LottoResultTest {
     void 로또_당첨결과_객체_생성_성공() {
         // given, when, then
         assertDoesNotThrow(
-                () -> new LottoResult(new RankResults(List.of()), new LottoMoney(1000)));
+                () -> new LottoResult(new RankResultsDto(List.of()), new LottoMoney(1000)));
     }
 
     @Test
     void 로또_당첨결과가_올바르게_저장_성공() {
         // given
         LottoResult lottoResult = new LottoResult(
-                new RankResults(List.of(Rank.SECOND, Rank.FOURTH, Rank.SECOND)),
+                new RankResultsDto(List.of(Rank.SECOND, Rank.FOURTH, Rank.SECOND)),
                 new LottoMoney(3000));
 
         // when & then
@@ -34,7 +34,7 @@ class LottoResultTest {
         // given
         LottoMoney lottoMoney = new LottoMoney(3000);
         LottoResult lottoResult = new LottoResult(
-                new RankResults(List.of(Rank.SECOND, Rank.FOURTH, Rank.SECOND)),
+                new RankResultsDto(List.of(Rank.SECOND, Rank.FOURTH, Rank.SECOND)),
                 lottoMoney);
 
         // when

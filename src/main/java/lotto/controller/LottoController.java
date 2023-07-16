@@ -7,7 +7,7 @@ import lotto.model.LottoMoney;
 import lotto.model.LottoNumber;
 import lotto.model.LottoResult;
 import lotto.model.ManualLottos;
-import lotto.model.RankResults;
+import lotto.model.RankResultsDto;
 import lotto.model.WinningNumbers;
 import lotto.model.generator.RandomNumbersGenerator;
 import lotto.view.LottoInputView;
@@ -35,11 +35,11 @@ public final class LottoController {
         printAutoLottos(lottoMoney, lottoCounts, autoLottos);
 
         WinningNumbers totalWinningNumbers = getWinningNumbers();
-        RankResults totalRankResults = RankResults.add(
+        RankResultsDto totalRankResultsDto = RankResultsDto.add(
                 manualLottos.matchWinningNumbers(totalWinningNumbers),
                 autoLottos.matchWinningNumbers(totalWinningNumbers)
         );
-        LottoResult lottoResult = new LottoResult(totalRankResults, lottoMoney);
+        LottoResult lottoResult = new LottoResult(totalRankResultsDto, lottoMoney);
         lottoOutputView.printLottoResult(lottoResult);
     }
 
