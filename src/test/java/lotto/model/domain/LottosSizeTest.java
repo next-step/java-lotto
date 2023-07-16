@@ -1,5 +1,6 @@
 package lotto.model.domain;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -15,5 +16,14 @@ class LottosSizeTest {
 
         // when & then
         assertThatNoException().isThrownBy(() -> LottosSize.of(totalLottoMoney, manualSize));
+    }
+
+    @Test
+    void 총_로또_개수가_0이하면_실패() {
+        // given
+        final LottoMoney lottoMoney = LottoMoney.valueOf(Lotto.COST - 1);
+
+        // when & then
+        assertThatIllegalArgumentException().isThrownBy(() -> LottosSize.of(lottoMoney, 1));
     }
 }
