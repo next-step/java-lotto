@@ -12,8 +12,14 @@ class RankResultsTest {
 
     @Test
     void 로또_당첨결과_객체_생성_및_값_확인_성공() {
-        // given, when, then
-        assertThat(new RankResults(List.of(Rank.FIRST, Rank.SECOND, Rank.NONE)).getRanks())
+        // given
+        RankResults rankResults = new RankResults(List.of(Rank.FIRST, Rank.SECOND, Rank.NONE));
+
+        // when
+        List<Rank> ranks = rankResults.getRanks();
+        
+        // then
+        assertThat(ranks)
                 .isEqualTo(List.of(Rank.FIRST, Rank.SECOND, Rank.NONE));
     }
 

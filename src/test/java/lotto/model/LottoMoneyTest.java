@@ -18,8 +18,14 @@ class LottoMoneyTest {
 
     @Test
     void 돈_객체_값_반환_성공() {
-        // given, when, then
-        assertThat(new LottoMoney(1000).getValue()).isEqualTo(1000);
+        // given
+        LottoMoney lottoMoney = new LottoMoney(1000);
+
+        // when
+        int value = lottoMoney.getValue();
+
+        // then
+        assertThat(value).isEqualTo(1000);
     }
 
     @Test
@@ -34,23 +40,39 @@ class LottoMoneyTest {
     @ParameterizedTest
     @CsvSource({"1999,999", "1001,1", "1000,0"})
     void 로또_구입시_거스름돈_반환(int money, int expectedChange) {
-        // given, when, then
-        assertThat(new LottoMoney(money).getChange()).isEqualTo(expectedChange);
+        // given
+        LottoMoney lottoMoney = new LottoMoney(money);
+
+        // when
+        int change = lottoMoney.getChange();
+
+        // then
+        assertThat(change).isEqualTo(expectedChange);
     }
 
     @ParameterizedTest
     @CsvSource({"1999,1", "14001,14", "1000,1"})
     void 로또_구입시_로또_개수_반환(int money, int expectedCount) {
-        // given, when, then
-        assertThat(new LottoMoney(money).getTotalCount()).isEqualTo(
-                expectedCount);
+        // given
+        LottoMoney lottoMoney = new LottoMoney(money);
+
+        // when
+        int totalCount = lottoMoney.getTotalCount();
+
+        // then
+        assertThat(totalCount).isEqualTo(expectedCount);
     }
 
     @ParameterizedTest
     @CsvSource({"1000,1000", "1001,1000", "3999,3000"})
     void 로또_구입시_사용한_금액_반환(int money, int expectedSpentMoney) {
-        // given, when, then
-        assertThat(new LottoMoney(money).getTotalSpentMoney()).isEqualTo(
-                expectedSpentMoney);
+        // given
+        LottoMoney lottoMoney = new LottoMoney(money);
+
+        // when
+        double totalSpentMoney = lottoMoney.getTotalSpentMoney();
+
+        // then
+        assertThat(totalSpentMoney).isEqualTo(expectedSpentMoney);
     }
 }

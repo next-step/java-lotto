@@ -12,8 +12,11 @@ class RankTest {
     @ParameterizedTest
     @MethodSource("당첨번호_개수와_보너스볼_보유여부로_랭크계산_성공_테스트케이스")
     void 당첨번호_개수와_보너스볼_보유여부로_랭크계산_성공(int matchCount, boolean hasBonusBall, Rank result) {
-        // given, when, then
-        assertThat(Rank.valueOf(matchCount, hasBonusBall)).isEqualTo(result);
+        // given, when
+        Rank actual = Rank.valueOf(matchCount, hasBonusBall);
+
+        // then
+        assertThat(actual).isEqualTo(result);
     }
 
     static Stream<Arguments> 당첨번호_개수와_보너스볼_보유여부로_랭크계산_성공_테스트케이스() {

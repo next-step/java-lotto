@@ -9,8 +9,14 @@ class LottoCountTest {
 
     @Test
     void 로또_개수_값_정상() {
-        // given, when, then
-        assertThat(new LottoCount(1).getCount()).isEqualTo(1);
+        // given
+        LottoCount lottoCount = new LottoCount(1);
+
+        // when
+        int count = lottoCount.getCount();
+
+        // then
+        assertThat(count).isEqualTo(1);
     }
 
     @Test
