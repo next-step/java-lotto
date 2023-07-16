@@ -9,7 +9,7 @@ import static java.util.stream.Collectors.toList;
 
 public class InputView {
 
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static String readLottoMoney() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -24,19 +24,12 @@ public class InputView {
     public static List<List<Integer>> readLottos(final int count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<List<Integer>> lottos = new ArrayList<>();
-        try {
-            readLottosbyCount(count, lottos);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("번호가 잘못 입력되었습니다.");
+        for (int number = 0; number < count; number++) {
+            lottos.add(readLotto());
         }
         return lottos;
     }
 
-    private static void readLottosbyCount(final int count, final List<List<Integer>> lottos) {
-        for (int number = 0; number < count; number++) {
-            lottos.add(readLotto());
-        }
-    }
 
     public static List<Integer> readLotto() {
         return Arrays.stream(scanner.nextLine()
