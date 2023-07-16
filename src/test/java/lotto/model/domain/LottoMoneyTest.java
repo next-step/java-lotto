@@ -29,7 +29,7 @@ class LottoMoneyTest {
     @CsvSource({"1999,1", "14001,14", "1000,1"})
     void 로또_구입시_로또_개수_반환(int money, int expectedCount) {
         // when
-        final long lottosSize = LottoMoney.valueOf(money).size(Lotto.COST);
+        final long lottosSize = LottoMoney.valueOf(money).sizeOfLottos(Lotto.COST);
 
         // then
         assertThat(lottosSize).isEqualTo(expectedCount);

@@ -2,26 +2,28 @@ package lotto.model.domain;
 
 public final class LottosSize {
 
-    private final long totalSize;
     private final long manualSize;
     private final long automaticSize;
 
     private LottosSize(final long totalSize, final long manualSize) {
-        validateTotalSize(totalSize);
-        validateManualSize(manualSize, totalSize);
+        validate(totalSize, manualSize);
 
-        this.totalSize = totalSize;
         this.manualSize = manualSize;
         this.automaticSize = totalSize - manualSize;
     }
 
     public static LottosSize of(final LottoMoney totalMoney, final long manualSize) {
-        return new LottosSize(totalMoney.size(Lotto.COST), manualSize);
+        return new LottosSize(totalMoney.sizeOfLottos(Lotto.COST), manualSize);
+    }
+
+    private void validate(final long totalSize, final long manualSize) {
+        validateTotalSize(totalSize);
+        validateManualSize(manualSize, totalSize);
     }
 
     private void validateTotalSize(final long totalSize) {
         if (totalSize <= 0) {
-            throw new IllegalArgumentException("로또를 구입할 수 없습니다. 로또는 한 장에 " + Lotto.COST + "원 입니다.");
+            throw new IllegalArgumentException("로또를 구입할 수 없습니다. 구입금액이 부족합니다. 로또는 한 장에 " + Lotto.COST + "원 입니다.");
         }
     }
 
@@ -33,5 +35,13 @@ public final class LottosSize {
         if (manualSize > totalSize) {
             throw new IllegalArgumentException("전체 로또 개수(" + totalSize + "개)보다 수동 로또 개수(" + manualSize + "개)가 더 많습니다.");
         }
+    }
+
+    public long getManualSize() {
+        return manualSize;
+    }
+
+    public long getAutomaticSize() {
+        return automaticSize;
     }
 }

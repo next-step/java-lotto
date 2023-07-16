@@ -12,31 +12,25 @@ public final class Lottos {
 
     private final List<Lotto> lottos;
 
-    private Lottos(final long size, final NumbersGenerator numberGenerator) {
-        validate(size);
-        this.lottos = LongStream.range(START_INCLUSIVE, size)
-                .mapToObj(count -> Lotto.create(numberGenerator.generate()))
+    public Lottos(final List<List<Integer>> manualLottos, final long automaticSize) {
+        this.lottos = Stream.concat(
+                        manualLottosStream(manualLottos),
+                        automaticLottosStream(automaticSize))
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public Lottos(final List<List<Integer>> manualLottos, final long size) {
-        this.lottos = Stream.concat(manualLottos.stream().map(Lotto::create),
-                        LongStream.range(START_INCLUSIVE, size).mapToObj(count -> Lotto.create(NUMBERS_GENERATOR.generate())))
-                .collect(Collectors.toUnmodifiableList());
+    public static Lottos create(final List<List<Integer>> manualLottos, final LottosSize lottosSize) {
+        return new Lottos(manualLottos, lottosSize.getAutomaticSize());
     }
 
-    public static Lottos create(final long size, final NumbersGenerator numbersGenerator) {
-        return new Lottos(size, numbersGenerator);
+    private static Stream<Lotto> manualLottosStream(final List<List<Integer>> manualLottos) {
+        return manualLottos.stream()
+                .map(Lotto::create);
     }
 
-    public static Lottos create(final List<List<Integer>> manualLottos, final long size) {
-        return new Lottos(manualLottos, size);
-    }
-
-    private void validate(final long size) {
-        if (size < 1) {
-            throw new IllegalArgumentException("로또를 구입할 수 없습니다. 로또는 한 장에 " + Lotto.COST + "원 입니다.");
-        }
+    private static Stream<Lotto> automaticLottosStream(final long size) {
+        return LongStream.range(START_INCLUSIVE, size)
+                .mapToObj(count -> Lotto.create(NUMBERS_GENERATOR.generate()));
     }
 
     public List<Rank> matchWinningNumbers(final WinningLotto winningLotto) {

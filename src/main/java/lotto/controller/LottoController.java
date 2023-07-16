@@ -18,24 +18,26 @@ public final class LottoController {
 
     public void run() {
         final LottoMoney purchase = LottoMoney.valueOf(lottoInputView.inputPurchase());
-        final long lottosSize = purchase.size(Lotto.COST);
-
         final long manualLottosSize = lottoInputView.inputManualLottosSize();
-        final Lottos lottos = Lottos.create(lottoInputView.inputManualLottosNumbers(manualLottosSize), lottosSize - manualLottosSize);
+        final LottosSize lottosSize = LottosSize.of(purchase, manualLottosSize);
+        final Lottos lottos = Lottos.create(lottoInputView.inputManualLottosNumbers(manualLottosSize), lottosSize);
 
-        printPurchaseInformation(purchase, lottos);
+        printLottosInformation(purchase, lottosSize, lottos);
 
+        final LottoResult lottoResult = LottoResult.of(Ranks.of(resultRanksWithWinningLotto(lottos)), purchase);
+        lottoOutputView.printLottoResult(lottoResult);
+    }
+
+    private List<Rank> resultRanksWithWinningLotto(final Lottos lottos) {
         final Lotto winningNumbers = Lotto.create(lottoInputView.inputWinningNumbers());
         final LottoNumber bonusBall = LottoNumber.of(lottoInputView.inputBonusBall());
         final WinningLotto winningLotto = WinningLotto.of(winningNumbers, bonusBall);
 
-        final List<Rank> ranks = lottos.matchWinningNumbers(winningLotto);
-        final LottoResult lottoResult = LottoResult.of(Ranks.of(ranks), purchase);
-        lottoOutputView.printLottoResult(lottoResult);
+        return lottos.matchWinningNumbers(winningLotto);
     }
 
-    private void printPurchaseInformation(final LottoMoney purchase, final Lottos lottos) {
-        lottoOutputView.printSizeOfLottos(lottos);
+    private void printLottosInformation(final LottoMoney purchase, final LottosSize lottosSize, final Lottos lottos) {
+        lottoOutputView.printSizeOfLottos(lottosSize);
         lottoOutputView.printChangeOfPurchase(purchase.change(Lotto.COST));
         lottoOutputView.printBuyingLotto(lottos);
     }
