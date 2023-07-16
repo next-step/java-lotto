@@ -64,4 +64,22 @@ class CountTest {
 
         Assertions.assertThat(count.increaseOne()).isEqualTo(new Count(2));
     }
+
+    @Test
+    @DisplayName("수동 로또 개수가 입력 금액으로 살 수 있는 개수보다 크면 예외를 던진다.")
+    void manualCountExceed() {
+        Count totalCount = new Count(10);
+
+        Assertions.assertThatThrownBy(() -> totalCount.validateManualCount(11))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("수동 로또 개수는 입력 금액으로 살 수 있는 개수보다 작아야한다.")
+    void manualCountNotExceed() {
+        Count totalCount = new Count(10);
+
+        Assertions.assertThatNoException()
+                .isThrownBy(() -> totalCount.validateManualCount(10));
+    }
 }

@@ -36,7 +36,7 @@ public class LottoService {
     }
 
     public static void validateManualCount(Money money, int manualCount) {
-        money.count(LOTTO_PRICE).decreaseBy(new Count(manualCount));
+        money.count(LOTTO_PRICE).validateManualCount(manualCount);
     }
 
     public LottoStatusResponse buyStatus() {

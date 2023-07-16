@@ -43,6 +43,12 @@ public class Count {
         return new Count(value+1);
     }
 
+    public void validateManualCount(int manualCount) {
+        if (value < manualCount) {
+            throw new IllegalArgumentException("입력 금액보다 많은 로또를 구매할 수 없습니다.");
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
