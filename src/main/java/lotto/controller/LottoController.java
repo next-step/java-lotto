@@ -8,9 +8,6 @@ import static lotto.view.InputView.readWinningLotto;
 import static lotto.view.OutputView.*;
 import static lotto.view.OutputView.printPurchasedResult;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 import lotto.model.*;
 import lotto.model.dto.LottosDto;
 import lotto.model.dto.WinningResultDto;
@@ -20,34 +17,19 @@ public class LottoController {
     public void run() {
         LottoMoney lottoMoney = new LottoMoney(readLottoMoney());
         Count manualCount = new Count(readCount());
-        List<Lotto> manualLotto = convertLottoList(readLottos(manualCount.getCount()));
+        Lottos manualLottos = Lottos.createManualLottos(readLottos(manualCount.getCount()));
 
-        Lottos lottoTicket = buyTicket(lottoMoney, manualCount, manualLotto);
+        Lottos lottoTicket = buyTicket(lottoMoney, manualCount, manualLottos);
         printPurchasedResult(LottosDto.from(lottoTicket));
 
         WinningResult winningResult = createWinningLotto(lottoMoney, lottoTicket);
         printWinningResult(WinningResultDto.from(winningResult));
     }
 
-    private List<Lotto> convertLottoList(List<List<Integer>> manualLotto) {
-        List<Lotto> number = new ArrayList<>();
-        for (List<Integer> lotto : manualLotto) {
-            number.add(convertLotto(lotto));
-        }
-        return number;
-    }
-
-    private Lotto convertLotto(final List<Integer> lottos) {
-        return new Lotto(lottos.stream()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList()));
-    }
-
-
     private static Lottos buyTicket(final LottoMoney lottoMoney, final Count manualCount,
-        final List<Lotto> manualLotto) {
-        LottoPurchaser lottoPurchaser = new LottoPurchaser(lottoMoney).purchaseLotto(manualCount,
-            manualLotto);
+        final Lottos manualLotto) {
+        LottoPurchaser lottoPurchaser = new LottoPurchaser(lottoMoney)
+            .purchaseLotto(manualCount, manualLotto.getLottos());
         return new Lottos(lottoPurchaser.getPurchasedLottos());
     }
 

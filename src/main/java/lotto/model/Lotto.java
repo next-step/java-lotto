@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -12,6 +13,13 @@ public class Lotto {
     public Lotto(final List<LottoNumber> lottoNumbers) {
         validateLotto(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static Lotto createManualLotto(final List<Integer> lottoNumbers) {
+        List<LottoNumber> createLottoNumber = lottoNumbers.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+        return new Lotto(createLottoNumber);
     }
 
     private void validateLotto(final List<LottoNumber> lottoNumbers) {
