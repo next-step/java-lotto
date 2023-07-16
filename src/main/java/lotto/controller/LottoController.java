@@ -19,10 +19,10 @@ public final class LottoController {
     public void run() {
         final LottoMoney purchase = LottoMoney.valueOf(lottoInputView.inputPurchase());
         final long lottosSize = purchase.size(Lotto.COST);
-        final Lottos lottos = Lottos.create(
-                lottosSize,
-                RandomNumbersGenerator.getInstance()
-        );
+
+        final long manualLottosSize = lottoInputView.inputManualLottosSize();
+        final Lottos lottos = Lottos.create(lottoInputView.inputManualLottosNumbers(manualLottosSize), lottosSize - manualLottosSize);
+
         printPurchaseInformation(purchase, lottos);
 
         final Lotto winningNumbers = Lotto.create(lottoInputView.inputWinningNumbers());
