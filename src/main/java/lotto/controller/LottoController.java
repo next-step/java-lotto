@@ -20,7 +20,10 @@ public final class LottoController {
         final LottoMoney purchase = LottoMoney.valueOf(lottoInputView.inputPurchase());
         final long manualLottosSize = lottoInputView.inputManualLottosSize();
         final LottosSize lottosSize = LottosSize.of(purchase, manualLottosSize);
-        final Lottos lottos = Lottos.create(lottoInputView.inputManualLottosNumbers(manualLottosSize), lottosSize);
+        final Lottos lottos = Lottos.create(
+                lottoInputView.inputManualLottosNumbers(manualLottosSize),
+                lottosSize.getAutomaticSize()
+        );
 
         printLottosInformation(purchase, lottosSize, lottos);
 

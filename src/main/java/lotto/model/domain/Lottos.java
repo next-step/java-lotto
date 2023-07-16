@@ -19,8 +19,8 @@ public final class Lottos {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public static Lottos create(final List<List<Integer>> manualLottos, final LottosSize lottosSize) {
-        return new Lottos(manualLottos, lottosSize.getAutomaticSize());
+    public static Lottos create(final List<List<Integer>> manualLottos, final long automaticSize) {
+        return new Lottos(manualLottos, automaticSize);
     }
 
     private static Stream<Lotto> manualLottosStream(final List<List<Integer>> manualLottos) {
