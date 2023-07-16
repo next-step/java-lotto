@@ -23,7 +23,8 @@
 
 ## 설계도
 
-<img width="1044" alt="스크린샷 2023-07-12 오후 4 58 25" src="https://github.com/devxb/java-lotto/assets/62425964/2af924aa-2bab-42fd-90b8-fa41d13fcf4d">
+<img width="1263" alt="스크린샷 2023-07-16 오후 1 40 39" src="https://github.com/chanwooDev/java-lotto/assets/39613774/1614b592-560e-4e6a-b1ca-c9111713ac5f">
+
 
 ---
 
