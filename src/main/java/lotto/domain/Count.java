@@ -39,6 +39,10 @@ public class Count {
         return new Count(count1.value + count2.value);
     }
 
+    public Count increaseOne() {
+        return new Count(value+1);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -18,9 +18,8 @@ public class LottoResults {
         for (LottoRank rank : lottoRanks) {
             lottoResults.put(
                     rank,
-                    Count.sum(
-                            lottoResults.getOrDefault(rank, DEFAULT_COUNT),
-                            new Count(1))
+                    lottoResults.getOrDefault(rank, DEFAULT_COUNT)
+                            .increaseOne()
             );
         }
 

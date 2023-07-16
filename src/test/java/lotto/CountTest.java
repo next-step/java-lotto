@@ -56,4 +56,12 @@ class CountTest {
 
         Assertions.assertThat(count.decreaseBy(new Count(3))).isEqualTo(new Count(5));
     }
+
+    @Test
+    @DisplayName("Count를 1씩 더할 수 있다")
+    void increaseOne() {
+        Count count = new Count(1);
+
+        Assertions.assertThat(count.increaseOne()).isEqualTo(new Count(2));
+    }
 }
