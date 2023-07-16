@@ -1,7 +1,5 @@
-package domain;
+package lotto.domain;
 
-import lotto.domain.CandidateStrategy;
-import lotto.domain.LottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
