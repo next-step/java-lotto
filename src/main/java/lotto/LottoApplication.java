@@ -21,12 +21,20 @@ public class LottoApplication {
     public static void run() {
         final LottoMoney lottoMoney = ConsoleInputReader.readLottoMoney();
 
-        final List<List<Integer>> autoLottoContents = LottoGenerator.generateLottoContents(lottoMoney, new RandomCandidateStrategy());
-        autoLottoContents.forEach(ConsoleOutputWriter::printLottoContent);
+        final LottoCount lottoCount = ConsoleInputReader.readLottoCount();
+        LottoGenerator.checkProperLottoCount(lottoMoney, lottoCount);
 
-        final List<Integer> lotto = ConsoleInputReader.readLottoValue();
+        final List<List<Integer>> manualLottoContents =
+                ConsoleInputReader.readManualLottoContents(lottoCount.getValue());
+
+        final LottoMoney remainLottoMoney = lottoMoney.pay(lottoCount.toTotalLottoPrice());
+        final List<List<Integer>> autoLottoContents =
+                LottoGenerator.generateLottoContents(remainLottoMoney, new RandomCandidateStrategy());
+        ConsoleOutputWriter.printManualAndAutoLottoContent(manualLottoContents, autoLottoContents);
+
+        final List<Integer> lotto = ConsoleInputReader.readWinningLottoValue();
         final int bonus = ConsoleInputReader.readLottoNumberValue();
-        final LottoGame lottoGame = new LottoGame(autoLottoContents, lotto, bonus);
+        final LottoGame lottoGame = new LottoGame(manualLottoContents, autoLottoContents, lotto, bonus);
 
         final LottoResult lottoResult = lottoGame.result();
         ConsoleOutputWriter.printLottoResultStatistic(lottoResult, lottoMoney);

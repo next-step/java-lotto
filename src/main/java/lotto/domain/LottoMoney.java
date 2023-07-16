@@ -8,6 +8,8 @@ import static lotto.domain.Lotto.LOTTO_PRICE;
 
 public final class LottoMoney {
 
+    private static final LottoMoney ONE_LOTTO_PRICE = new LottoMoney(LOTTO_PRICE);
+
     private final long value;
 
     public LottoMoney(final long value) {
@@ -23,16 +25,24 @@ public final class LottoMoney {
         return new LottoMoney(sumValue);
     }
 
-    public boolean isPayable() {
-        return value >= LOTTO_PRICE;
+    public boolean isPayableOneLotto() {
+        return isPayable(ONE_LOTTO_PRICE);
     }
 
-    public LottoMoney payLotto() {
-        if (!isPayable()) {
-            throw new IllegalStateException("로또 구매에 필요한 금액이 부족합니다.");
+    public boolean isPayable(final LottoMoney other) {
+        return this.value >= other.value;
+    }
+
+    public LottoMoney payOneLotto() {
+        return pay(ONE_LOTTO_PRICE);
+    }
+
+    public LottoMoney pay(final LottoMoney price) {
+        if (!isPayable(price)) {
+            throw new IllegalArgumentException("로또 구매에 필요한 금액이 부족합니다.");
         }
 
-        return new LottoMoney(value - LOTTO_PRICE);
+        return new LottoMoney(this.value - price.value);
     }
 
     public LottoMoney multiply(final long operand) {

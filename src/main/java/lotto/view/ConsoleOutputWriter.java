@@ -15,7 +15,7 @@ public class ConsoleOutputWriter {
         throw new UnsupportedOperationException("Util 클래스의 인스턴스는 생성할 수 없습니다.");
     }
 
-    public static void printLottoContent(final List<Integer> lottoContent) {
+    private static void printLottoContent(final List<Integer> lottoContent) {
         System.out.println(buildLottoContentString(lottoContent));
     }
 
@@ -60,5 +60,12 @@ public class ConsoleOutputWriter {
                 "총 수익률은 %.2f입니다.",
                 lottoResult.calculateRatio(lottoMoney)
         );
+    }
+
+    public static void printManualAndAutoLottoContent(final List<List<Integer>> manualLottoContents, final List<List<Integer>> autoLottoContents) {
+        System.out.println("수동으로 " + manualLottoContents.size() + "장, 자동으로 " + autoLottoContents.size() + "개를 구매했습니다.");
+
+        manualLottoContents.forEach(ConsoleOutputWriter::printLottoContent);
+        autoLottoContents.forEach(ConsoleOutputWriter::printLottoContent);
     }
 }

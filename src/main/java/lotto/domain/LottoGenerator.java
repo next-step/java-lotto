@@ -11,8 +11,8 @@ public class LottoGenerator {
 
     public static List<List<Integer>> generateLottoContents(LottoMoney lottoMoney, final CandidateStrategy candidateStrategy) {
         final List<List<Integer>> lottoContents = new ArrayList<>();
-        while (lottoMoney.isPayable()) {
-            lottoMoney = lottoMoney.payLotto();
+        while (lottoMoney.isPayableOneLotto()) {
+            lottoMoney = lottoMoney.payOneLotto();
             lottoContents.add(generateOne(candidateStrategy));
         }
 
@@ -26,4 +26,9 @@ public class LottoGenerator {
     }
 
 
+    public static void checkProperLottoCount(final LottoMoney lottoMoney, final LottoCount lottoCount) {
+        if (!lottoMoney.isPayable(lottoCount.toTotalLottoPrice())) {
+            throw new IllegalArgumentException("구매 가능한 로또 개수를 초과했습니다. 잔액: " + lottoMoney.getValue());
+        }
+    }
 }

@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -32,23 +34,37 @@ class LottoMoneyTest {
     }
 
     @Test
-    @DisplayName("로또를 살 수 있는지 확인할 수 있다.")
-    void payable() {
+    @DisplayName("로또 금액들의 합을 구할 수 있다.")
+    void sum() {
+        /* given */
+        final List<LottoMoney> lottomonies = List.of(new LottoMoney(100L), new LottoMoney(200L));
+
+        /* when */
+        final LottoMoney sum = LottoMoney.sum(lottomonies);
+
+        /* then */
+        assertThat(sum).isEqualTo(new LottoMoney(300L));
+    }
+
+    @Test
+    @DisplayName("로또 한 장을 살 수 있는지 확인할 수 있다.")
+    void payableOneLotto() {
         /* given */
         final LottoMoney lottoMoney = new LottoMoney(1_234L);
 
         /* when & then */
-        assertThat(lottoMoney.isPayable()).isTrue();
+        assertThat(lottoMoney.isPayableOneLotto()).isTrue();
     }
 
     @Test
-    @DisplayName("로또 금액이 로또 가격보다 작을 경우 로또를 구매할 수 없다.")
-    void payableFail() {
+    @DisplayName("금액만큼 사용할 수 있는지 확인할 수 있다.")
+    void payable() {
         /* given */
-        final LottoMoney lottoMoney = new LottoMoney(100L);
+        final LottoMoney origin = new LottoMoney(3_000L);
+        final LottoMoney target = new LottoMoney(2_000L);
 
         /* when & then */
-        assertThat(lottoMoney.isPayable()).isFalse();
+        assertThat(origin.isPayable(target)).isTrue();
     }
 
     @Test
@@ -58,20 +74,35 @@ class LottoMoneyTest {
         final LottoMoney lottoMoney = new LottoMoney(1_234L);
 
         /* when */
-        final LottoMoney remain = lottoMoney.payLotto();
+        final LottoMoney remain = lottoMoney.payOneLotto();
 
         /* then */
         assertThat(remain).isEqualTo(new LottoMoney(234L));
     }
 
     @Test
-    @DisplayName("로또 금액이 로또 가격보다 작을 경우 IllegalStateException을 던진다.")
-    void payLottoFailWithIllegalStateException() {
+    @DisplayName("가격만큼 로또 금액을 사용한다.")
+    void pay() {
         /* given */
-        final LottoMoney lottoMoney = new LottoMoney(100L);
+        final LottoMoney origin = new LottoMoney(3_000L);
+        final LottoMoney target = new LottoMoney(2_000L);
+
+        /* when */
+        LottoMoney remain = origin.pay(target);
+
+        /* then */
+        assertThat(remain).isEqualTo(new LottoMoney(1_000L));
+    }
+
+    @Test
+    @DisplayName("가격이 로또 금액보다 클 경우 IllegalArgumentException을 던진다.")
+    void payFailWithOverValue() {
+        /* given */
+        final LottoMoney origin = new LottoMoney(3_000L);
+        final LottoMoney target = new LottoMoney(4_000L);
 
         /* when & then */
-        assertThatThrownBy(lottoMoney::payLotto).isInstanceOf(IllegalStateException.class);
+        assertThatThrownBy(() -> origin.pay(target)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
