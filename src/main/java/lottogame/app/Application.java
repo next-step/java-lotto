@@ -5,12 +5,9 @@ import lottogame.console.ConsoleLottoViewer;
 import lottogame.controller.LottoController;
 import lottogame.controller.spi.LottoInputer;
 import lottogame.controller.spi.LottoViewer;
-import lottogame.domain.LottoTicket;
 import lottogame.domain.LottoTickets;
 import lottogame.domain.spi.NumberGenerator;
 import lottogame.randomnumber.RandomLottoNumberGenerator;
-
-import java.util.List;
 
 public class Application {
 

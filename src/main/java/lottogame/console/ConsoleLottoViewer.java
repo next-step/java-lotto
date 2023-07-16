@@ -15,7 +15,8 @@ import java.util.stream.Collectors;
 public class ConsoleLottoViewer implements LottoViewer {
     @Override
     public void draw(LottoTickets lottoTickets) {
-        System.out.printf("%d개를 구매했습니다.%n", lottoTickets.getLottoTickets().size());
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n",
+                lottoTickets.getSizeOfManualLottoTickets(), lottoTickets.getSizeOfAutoLottoTickets());
         System.out.println(parsePrintString(lottoTickets.getLottoTickets()));
     }
 

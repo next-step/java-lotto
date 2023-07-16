@@ -47,6 +47,14 @@ public class LottoTickets {
         return Collections.unmodifiableList(autoLottoTickets);
     }
 
+    public Integer getSizeOfManualLottoTickets() {
+        return this.manualLottoTickets.size();
+    }
+
+    public Integer getSizeOfAutoLottoTickets() {
+        return this.autoLottoTickets.size();
+    }
+
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(combineLists(manualLottoTickets, autoLottoTickets));
     }
