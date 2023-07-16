@@ -18,9 +18,7 @@ public class LottoResult {
         return rankCount.getOrDefault(rank, 0L);
     }
 
-    // TODO: 이름 ratio로 변경
-    // TODO: 수익률 계산 방법 변경?
-    public double calculateRateOfReturn(final LottoMoney lottoMoney) {
+    public double calculateRatio(final LottoMoney lottoMoney) {
         return calculateTotalPrize().ratio(lottoMoney);
     }
 
