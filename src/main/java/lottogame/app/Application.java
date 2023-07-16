@@ -6,6 +6,7 @@ import lottogame.controller.LottoController;
 import lottogame.controller.spi.LottoInputer;
 import lottogame.controller.spi.LottoViewer;
 import lottogame.domain.LottoTicket;
+import lottogame.domain.LottoTickets;
 import lottogame.domain.spi.NumberGenerator;
 import lottogame.randomnumber.RandomLottoNumberGenerator;
 
@@ -29,7 +30,7 @@ public class Application {
 
     private void run() {
         NumberGenerator numberGenerator = new RandomLottoNumberGenerator();
-        List<LottoTicket> lottoTickets = lottoController.purchaseLottoTickets(numberGenerator);
+        LottoTickets lottoTickets = lottoController.purchaseLottoTickets(numberGenerator);
         lottoController.checkResult(lottoTickets);
     }
 }

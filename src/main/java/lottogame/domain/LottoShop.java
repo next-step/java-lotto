@@ -1,16 +1,17 @@
 package lottogame.domain;
 
-import lottogame.domain.spi.NumberGenerator;
 import lottogame.controller.request.LottoPurchaseRequest;
-
-import java.util.ArrayList;
-import java.util.List;
+import lottogame.domain.spi.NumberGenerator;
 
 public class LottoShop {
 
-    public List<LottoTicket> purchase(LottoPurchaseRequest lottoPurchaseRequest, NumberGenerator numberGenerator) {
+    public LottoTickets purchase(LottoPurchaseRequest lottoPurchaseRequest, NumberGenerator numberGenerator) {
         assertMoney(lottoPurchaseRequest.getMoney());
-        return createLottoTickets(lottoPurchaseRequest.getMoney(), numberGenerator);
+        assertManualLottoCount(lottoPurchaseRequest);
+
+        int totalLottoCount = lottoPurchaseRequest.getMoney() /LottoTicket.PURCHASABLE_UNIT;
+        LottoTickets lottoTickets = new LottoTickets(totalLottoCount, lottoPurchaseRequest.getManualLottos(), numberGenerator);
+        return lottoTickets;
     }
 
     private void assertMoney(int money) {
@@ -20,11 +21,10 @@ public class LottoShop {
         }
     }
 
-    private List<LottoTicket> createLottoTickets(int money, NumberGenerator numberGenerator) {
-        List<LottoTicket> lottoTicketList = new ArrayList<>();
-        for (int count = 0; count < money / LottoTicket.PURCHASABLE_UNIT; count++) {
-            lottoTicketList.add(new AutoLottoTicket(numberGenerator));
+    private void assertManualLottoCount(LottoPurchaseRequest lottoPurchaseRequest) {
+        if (lottoPurchaseRequest.getMoney() / LottoTicket.PURCHASABLE_UNIT < lottoPurchaseRequest.getManualLottoCount()) {
+            throw new IllegalArgumentException(String.format("수동 갯수는 살 수 있는 양 \"%d\" 이상 구매할 수 없습니다. manualLottoCount: \"%d\"",
+                    lottoPurchaseRequest.getMoney() / LottoTicket.PURCHASABLE_UNIT, lottoPurchaseRequest.getManualLottoCount()));
         }
-        return lottoTicketList;
     }
 }

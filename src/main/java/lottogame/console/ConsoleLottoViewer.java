@@ -4,6 +4,7 @@ import lottogame.controller.spi.LottoViewer;
 import lottogame.domain.LottoRank;
 import lottogame.domain.LottoTicket;
 import lottogame.controller.response.LottoCheckResponse;
+import lottogame.domain.LottoTickets;
 
 import java.util.List;
 import java.util.Map;
@@ -13,9 +14,9 @@ import java.util.stream.Collectors;
 
 public class ConsoleLottoViewer implements LottoViewer {
     @Override
-    public void draw(List<LottoTicket> lottoTickets) {
-        System.out.printf("%d개를 구매했습니다.%n", lottoTickets.size());
-        System.out.println(parsePrintString(lottoTickets));
+    public void draw(LottoTickets lottoTickets) {
+        System.out.printf("%d개를 구매했습니다.%n", lottoTickets.getLottoTickets().size());
+        System.out.println(parsePrintString(lottoTickets.getLottoTickets()));
     }
 
     private String parsePrintString(List<LottoTicket> lottoTickets) {

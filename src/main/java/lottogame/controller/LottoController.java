@@ -1,16 +1,15 @@
 package lottogame.controller;
 
+import lottogame.controller.request.LottoPurchaseRequest;
+import lottogame.controller.response.LottoCheckResponse;
 import lottogame.controller.spi.LottoInputer;
 import lottogame.controller.spi.LottoViewer;
 import lottogame.domain.LottoResult;
 import lottogame.domain.LottoShop;
-import lottogame.domain.LottoTicket;
+import lottogame.domain.LottoTickets;
 import lottogame.domain.WinningLotto;
 import lottogame.domain.spi.NumberGenerator;
-import lottogame.controller.request.LottoPurchaseRequest;
-import lottogame.controller.response.LottoCheckResponse;
 
-import java.util.List;
 import java.util.Set;
 
 public class LottoController {
@@ -23,22 +22,22 @@ public class LottoController {
         this.lottoViewer = lottoViewer;
     }
 
-    public List<LottoTicket> purchaseLottoTickets(NumberGenerator numberGenerator) {
+    public LottoTickets purchaseLottoTickets(NumberGenerator numberGenerator) {
         LottoPurchaseRequest lottoPurchaseRequest = lottoInputer.inputLottoPurchaseRequest();
 
         LottoShop lottoShop = new LottoShop();
-        List<LottoTicket> lottoTickets = lottoShop.purchase(lottoPurchaseRequest, numberGenerator);
+        LottoTickets lottoTickets = lottoShop.purchase(lottoPurchaseRequest, numberGenerator);
 
         lottoViewer.draw(lottoTickets);
         return lottoTickets;
     }
 
-    public void checkResult(List<LottoTicket> lottoTickets) {
+    public void checkResult(LottoTickets lottoTickets) {
         Set<Integer> winningLottoNumbers = lottoInputer.inputWinningLottoNumbers();
         Integer bonusNumber = lottoInputer.inputBonusLottoNumber();
 
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
-        LottoResult lottoResult = new LottoResult(winningLotto.toLottoRanks(lottoTickets));
+        LottoResult lottoResult = new LottoResult(winningLotto.toLottoRanks(lottoTickets.getLottoTickets()));
 
         lottoViewer.draw(new LottoCheckResponse(lottoResult.getEarningRate(), lottoResult.getLottoRankCounts()));
     }
