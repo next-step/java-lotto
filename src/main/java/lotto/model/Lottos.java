@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class Lottos {
 
@@ -16,7 +15,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos createManualLottos(List<List<Integer>> manualLotto) {
+    public static Lottos createManualLottos(final List<List<Integer>> manualLotto) {
         List<Lotto> number = new ArrayList<>();
         for (List<Integer> lotto : manualLotto) {
             number.add(Lotto.createManualLotto(lotto));
@@ -49,28 +48,4 @@ public class Lottos {
         return result;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Lottos lottos1 = (Lottos) o;
-        return Objects.equals(lottos, lottos1.lottos);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottos);
-    }
-
-    @Override
-    public String toString() {
-        return "Lottos{" +
-            "lottos=" + lottos +
-            '}';
-    }
 }
