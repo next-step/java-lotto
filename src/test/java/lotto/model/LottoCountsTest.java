@@ -16,6 +16,9 @@ class LottoCountsTest {
     @Test
     void 로또_전체개수보다_수동개수가_많을시_예외발생() {
         // given, when, then
-        assertThrows(IllegalArgumentException.class, () -> new LottoCounts(1, 2));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> new LottoCounts(1, 2));
+        assertThat(exception).hasMessage("수동 로또의 개수는 전체 로또의 개수를 넘을 수 없습니다. 현재 입력값: 전체 로또 = " + 1
+                + ", 수동 로또 = " + 2 + " 입니다.");
     }
 }

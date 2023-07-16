@@ -16,6 +16,8 @@ class LottoCountTest {
     @Test
     void 로또_개수_음수_일시_예외발생() {
         // given, when, then
-        assertThrows(IllegalArgumentException.class, () -> new LottoCount(-1));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> new LottoCount(-1));
+        assertThat(exception).hasMessage("로또의 개수는 " + 0 + " 이상입니다.");
     }
 }

@@ -25,7 +25,10 @@ class LottoMoneyTest {
     @Test
     void 로또_가격_이하의_돈_객체_생성시_예외_발생() {
         // given, when, then
-        assertThrows(IllegalArgumentException.class, () -> new LottoMoney(999));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> new LottoMoney(999));
+        assertThat(exception).hasMessage("로또를 구입하기에 돈이 부족합니다. 로또는 한 장에 " + 1000 + "원이고, 현재 구입 금액은 "
+                + 999 + "원 입니다.");
     }
 
     @ParameterizedTest

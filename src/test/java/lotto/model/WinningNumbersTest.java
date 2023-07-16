@@ -27,8 +27,9 @@ class WinningNumbersTest {
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
 
         // when, then
-        assertThrows(IllegalArgumentException.class,
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> new WinningNumbers(new Lotto(winningNumbers), LottoNumber.of(6)));
+        assertThat(exception).hasMessage("당첨 번호와 보너스 볼은 중복될 수 없습니다.");
     }
 
 

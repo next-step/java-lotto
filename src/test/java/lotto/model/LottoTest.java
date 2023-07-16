@@ -36,7 +36,9 @@ class LottoTest {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5);
 
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> new Lotto(numbers));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> new Lotto(numbers));
+        assertThat(exception).hasMessage("로또는 6개의 번호를 가져야합니다.");
     }
 
     @Test
@@ -45,6 +47,19 @@ class LottoTest {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7);
 
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> new Lotto(numbers));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> new Lotto(numbers));
+        assertThat(exception).hasMessage("로또는 6개의 번호를 가져야합니다.");
+    }
+
+    @Test
+    void 로또_객체_생성시_번호_개수_중복시_실패() {
+        // given
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 5);
+
+        // when & then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> new Lotto(numbers));
+        assertThat(exception).hasMessage("로또 번호는 중복될 수 없습니다.");
     }
 }
