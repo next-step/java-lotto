@@ -8,12 +8,12 @@ public class LottoPurchaseRequest {
 
     private final int money;
     private final int manualLottoCount;
-    private final List<Set<Integer>> manualLottos;
+    private final List<Set<Integer>> manualLottoNumbersList;
 
-    public LottoPurchaseRequest(int money, int manualLottoCount, List<Set<Integer>> manualLottos) {
+    public LottoPurchaseRequest(int money, int manualLottoCount, List<Set<Integer>> manualLottoNumbersList) {
         this.money = money;
         this.manualLottoCount = manualLottoCount;
-        this.manualLottos = manualLottos;
+        this.manualLottoNumbersList = manualLottoNumbersList;
     }
 
     public int getMoney() {
@@ -24,8 +24,8 @@ public class LottoPurchaseRequest {
         return manualLottoCount;
     }
 
-    public List<Set<Integer>> getManualLottos() {
-        return manualLottos;
+    public List<Set<Integer>> getManualLottoNumbersList() {
+        return manualLottoNumbersList;
     }
 
     @Override
@@ -33,12 +33,12 @@ public class LottoPurchaseRequest {
         if (this == o) return true;
         if (!(o instanceof LottoPurchaseRequest)) return false;
         LottoPurchaseRequest that = (LottoPurchaseRequest) o;
-        return money == that.money && manualLottoCount == that.manualLottoCount && Objects.equals(manualLottos, that.manualLottos);
+        return money == that.money && manualLottoCount == that.manualLottoCount && Objects.equals(manualLottoNumbersList, that.manualLottoNumbersList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(money, manualLottoCount, manualLottos);
+        return Objects.hash(money, manualLottoCount, manualLottoNumbersList);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class LottoPurchaseRequest {
         return "LottoPurchaseRequest{" +
                 "money=" + money +
                 ", manualLottoCount=" + manualLottoCount +
-                ", manualLottos=" + manualLottos +
+                ", manualLottoNumbersList=" + manualLottoNumbersList +
                 '}';
     }
 }

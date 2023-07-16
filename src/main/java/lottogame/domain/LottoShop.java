@@ -10,7 +10,7 @@ public class LottoShop {
         assertManualLottoCount(lottoPurchaseRequest);
 
         int totalLottoCount = lottoPurchaseRequest.getMoney() / LottoTicket.PURCHASABLE_UNIT;
-        return new LottoTickets(totalLottoCount, lottoPurchaseRequest.getManualLottos(), numberGenerator);
+        return new LottoTickets(totalLottoCount, lottoPurchaseRequest.getManualLottoNumbersList(), numberGenerator);
     }
 
     private void assertMoney(int money) {
