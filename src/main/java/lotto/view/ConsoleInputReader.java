@@ -1,18 +1,21 @@
-package view;
+package lotto.view;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class ConsoleInputReader implements InputReader {
+public class ConsoleInputReader {
 
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
-    private final Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
-    @Override
-    public long readMoneyValue() {
+    private ConsoleInputReader() {
+        throw new UnsupportedOperationException("Util 클래스의 인스턴스는 생성할 수 없습니다.");
+    }
+
+    public static long readMoneyValue() {
         System.out.println("구입금액을 입력해 주세요.");
         try {
             final long money = Long.parseLong(scanner.nextLine());
@@ -24,8 +27,7 @@ public class ConsoleInputReader implements InputReader {
         }
     }
 
-    @Override
-    public List<Integer> readLottoValue() {
+    public static List<Integer> readLottoValue() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         try {
@@ -39,8 +41,7 @@ public class ConsoleInputReader implements InputReader {
         }
     }
 
-    @Override
-    public int readLottoNumberValue() {
+    public static int readLottoNumberValue() {
         System.out.println("보너스 볼을 입력해 주세요.");
 
         try {
@@ -53,7 +54,7 @@ public class ConsoleInputReader implements InputReader {
         }
     }
 
-    private void validateRange(final long money) {
+    private static void validateRange(final long money) {
         if (money <= 0) {
             throw new IllegalArgumentException("구입 금액은 양의 정수여야 합니다.");
         }

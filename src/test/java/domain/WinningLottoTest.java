@@ -1,5 +1,9 @@
 package domain;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.Rank;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-public class WinningLottoTest {
+class WinningLottoTest {
 
     Lotto lotto;
     LottoNumber bonus;

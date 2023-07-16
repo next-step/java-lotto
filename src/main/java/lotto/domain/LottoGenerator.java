@@ -1,4 +1,4 @@
-package domain;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,21 +11,21 @@ public class LottoGenerator {
         /* no-op */
     }
 
-    public static List<Lotto> generateLottos(final long money, final CandidateStrategy candidateStrategy) {
+    public static List<List<Integer>> generateLottoContents(final long money, final CandidateStrategy candidateStrategy) {
         validateMoneyUnit(money);
 
-        final List<Lotto> lottos = new ArrayList<>();
+        final List<List<Integer>> lottoContents = new ArrayList<>();
         for (long count = 0, maxCount = money / MONEY_UNIT; count < maxCount; count++) {
-            lottos.add(generateOne(candidateStrategy));
+            lottoContents.add(generateOne(candidateStrategy));
         }
 
-        return lottos;
+        return lottoContents;
     }
 
-    public static Lotto generateOne(CandidateStrategy candidateStrategy) {
+    public static List<Integer> generateOne(CandidateStrategy candidateStrategy) {
         final List<Integer> candidates = candidateStrategy.generateCandidates();
 
-        return new Lotto(candidates.subList(0, Lotto.REQUIRED_LOTTO_NUMBER_COUNT));
+        return candidates.subList(0, Lotto.REQUIRED_LOTTO_NUMBER_COUNT);
     }
 
     private static void validateMoneyUnit(final long money) {

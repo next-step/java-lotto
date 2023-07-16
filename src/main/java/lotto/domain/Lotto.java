@@ -1,4 +1,4 @@
-package domain;
+package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
@@ -25,10 +25,6 @@ public final class Lotto {
 
     public boolean containsLottoNumber(final LottoNumber bonus) {
         return lottoNumbers.contains(bonus);
-    }
-
-    public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
     }
 
     private static void validateLottoNumberCount(final List<Integer> numbers) {

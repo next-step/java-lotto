@@ -1,4 +1,4 @@
-package domain;
+package lotto.domain;
 
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -18,10 +18,6 @@ public final class LottoNumber {
         }
 
         this.value = value;
-    }
-
-    public int getValue() {
-        return value;
     }
 
     @Override

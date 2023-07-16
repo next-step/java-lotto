@@ -1,4 +1,4 @@
-package domain;
+package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,9 +16,5 @@ public class Lottos {
         return lottos.stream()
                 .map(winningLotto::resolveRank)
                 .collect(Collectors.toList());
-    }
-
-    public List<Lotto> getLottos() {
-        return lottos;
     }
 }
