@@ -54,7 +54,7 @@ class LottoMoneyTest {
         // given
         LottoMoney lottoMoney = new LottoMoney(14000);
         // when
-        int lottoCount = lottoMoney.getLottoCount();
+        long lottoCount = lottoMoney.getLottoCount();
         // then
         assertThat(lottoCount).isEqualTo(14);
     }

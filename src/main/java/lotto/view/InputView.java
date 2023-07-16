@@ -11,9 +11,9 @@ public class InputView {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public static int readLottoMoney() {
+    public static String readLottoMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return Integer.parseInt(scanner.nextLine());
+        return scanner.nextLine();
     }
 
     public static String readCount() {
