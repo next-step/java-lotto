@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoGenerator;
-import lotto.domain.LottoResult;
-import lotto.domain.RandomCandidateStrategy;
+import lotto.domain.*;
 import lotto.view.ConsoleInputReader;
 import lotto.view.ConsoleOutputWriter;
 
@@ -14,7 +11,7 @@ public class LottoApplication {
     public static void main(String[] args) {
         try {
             run();
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | IllegalStateException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println("예상하지 못한 예외가 발생했습니다.");
@@ -22,8 +19,9 @@ public class LottoApplication {
     }
 
     public static void run() {
-        final long inputMoney = ConsoleInputReader.readMoneyValue();
-        final List<List<Integer>> autoLottoContents = LottoGenerator.generateLottoContents(inputMoney, new RandomCandidateStrategy());
+        final LottoMoney lottoMoney = ConsoleInputReader.readLottoMoney();
+
+        final List<List<Integer>> autoLottoContents = LottoGenerator.generateLottoContents(lottoMoney, new RandomCandidateStrategy());
         autoLottoContents.forEach(ConsoleOutputWriter::printLottoContent);
 
         final List<Integer> lotto = ConsoleInputReader.readLottoValue();
@@ -31,6 +29,6 @@ public class LottoApplication {
         final LottoGame lottoGame = new LottoGame(autoLottoContents, lotto, bonus);
 
         final LottoResult lottoResult = lottoGame.result();
-        ConsoleOutputWriter.printLottoResultStatistic(lottoResult, inputMoney);
+        ConsoleOutputWriter.printLottoResultStatistic(lottoResult, lottoMoney);
     }
 }

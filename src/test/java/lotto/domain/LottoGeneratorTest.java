@@ -29,10 +29,10 @@ class LottoGeneratorTest {
     @DisplayName("로또 번호 데이터를 돈 액수만큼 생성한다.")
     void generate() {
         /* given */
-        long money = 3_000L;
+        LottoMoney lottoMoney = new LottoMoney(3_000L);
 
         /* when */
-        List<List<Integer>> lottoContents = LottoGenerator.generateLottoContents(money, testStrategy);
+        List<List<Integer>> lottoContents = LottoGenerator.generateLottoContents(lottoMoney, testStrategy);
 
         /* then */
         assertThat(lottoContents).containsExactly(testCandidate, testCandidate, testCandidate);

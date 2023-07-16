@@ -45,7 +45,7 @@ public enum Rank {
     private final long matchLottoNumber;
     private final boolean containsBonus;
     private final BiPredicate<Long, Boolean> criteria;
-    private final long prize;
+    private final LottoMoney prize;
 
     Rank(
             final long matchLottoNumber,
@@ -56,7 +56,7 @@ public enum Rank {
         this.matchLottoNumber = matchLottoNumber;
         this.containsBonus = containsBonus;
         this.criteria = criteria;
-        this.prize = prize;
+        this.prize = new LottoMoney(prize);
     }
 
     public static Rank from(final long matchCount, final boolean bonus) {
@@ -68,8 +68,8 @@ public enum Rank {
                 );
     }
 
-    public long calculatePrize(final long count) {
-        return this.prize * count;
+    public LottoMoney calculatePrize(final long count) {
+        return this.prize.multiply(count);
     }
 
     public long getMatchLottoNumber() {
@@ -80,7 +80,7 @@ public enum Rank {
         return containsBonus;
     }
 
-    public long getPrize() {
+    public LottoMoney getPrize() {
         return prize;
     }
 

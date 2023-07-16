@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.LottoMoney;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -15,15 +17,14 @@ public class ConsoleInputReader {
         throw new UnsupportedOperationException("Util 클래스의 인스턴스는 생성할 수 없습니다.");
     }
 
-    public static long readMoneyValue() {
+    public static LottoMoney readLottoMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         try {
-            final long money = Long.parseLong(scanner.nextLine());
-            validateRange(money);
+            final long value = Long.parseLong(scanner.nextLine());
 
-            return money;
+            return new LottoMoney(value);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("구입 금액은 정수여야 합니다.");
+            throw new IllegalArgumentException("구입 금액은 정수여야 합니다.", e);
         }
     }
 
@@ -37,7 +38,7 @@ public class ConsoleInputReader {
                     .map(Integer::valueOf)
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("로또번호는 `" + LOTTO_NUMBER_DELIMITER + "`로 구분하여 정수로 입력해야 합니다.");
+            throw new IllegalArgumentException("로또번호는 `" + LOTTO_NUMBER_DELIMITER + "`로 구분하여 정수로 입력해야 합니다.", e);
         }
     }
 
@@ -50,13 +51,7 @@ public class ConsoleInputReader {
 
             return number;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("로또번호는 정수여야 합니다.");
-        }
-    }
-
-    private static void validateRange(final long money) {
-        if (money <= 0) {
-            throw new IllegalArgumentException("구입 금액은 양의 정수여야 합니다.");
+            throw new IllegalArgumentException("로또번호는 정수여야 합니다.", e);
         }
     }
 }

@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoMoney;
 import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
@@ -18,14 +19,14 @@ public class ConsoleOutputWriter {
         System.out.println(buildLottoContentString(lottoContent));
     }
 
-    public static void printLottoResultStatistic(final LottoResult lottoResult, final long money) {
+    public static void printLottoResultStatistic(final LottoResult lottoResult, final LottoMoney lottoMoney) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
         String rankCountResult = buildRankCountString(lottoResult);
         System.out.println(rankCountResult);
 
-        String ratioResult = buildRatioString(lottoResult, money);
+        String ratioResult = buildRatioString(lottoResult, lottoMoney);
         System.out.println(ratioResult);
     }
 
@@ -49,15 +50,15 @@ public class ConsoleOutputWriter {
                 "%d개 일치%s(%d원)- %d개",
                 rank.getMatchLottoNumber(),
                 rank.containsBonus() ? ", 보너스 볼 일치" : " ",
-                rank.getPrize(),
+                rank.getPrize().getValue(),
                 count
         );
     }
 
-    private static String buildRatioString(final LottoResult lottoResult, final long money) {
+    private static String buildRatioString(final LottoResult lottoResult, final LottoMoney lottoMoney) {
         return String.format(
                 "총 수익률은 %.2f입니다.",
-                lottoResult.calculateRateOfReturn(money)
+                lottoResult.calculateRateOfReturn(lottoMoney)
         );
     }
 }

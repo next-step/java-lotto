@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public final class Lotto {
 
     static final int REQUIRED_LOTTO_NUMBER_COUNT = 6;
+    static final int LOTTO_PRICE = 1_000;
 
     private final Set<LottoNumber> lottoNumbers;
 

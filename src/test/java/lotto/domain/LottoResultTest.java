@@ -36,13 +36,13 @@ class LottoResultTest {
     void calculateTotalPrize() {
         /* given */
         LottoResult lottoResult = new LottoResult(target);
-        long money = target.size() * 1000L;
+        LottoMoney money = new LottoMoney(target.size() * 1_000L);
 
         /* when */
         double rateOfReturn = lottoResult.calculateRateOfReturn(money);
 
         /* then */
-        double expectedRateOfReturn = Rank.FIFTH.getPrize() * 2L / (double) money;
+        double expectedRateOfReturn = Rank.FIFTH.getPrize().getValue() * 2L / (double) money.getValue();
         assertThat(rateOfReturn).isEqualTo(expectedRateOfReturn);
     }
 }

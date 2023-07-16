@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoResult {
 
@@ -19,14 +20,16 @@ public class LottoResult {
 
     // TODO: 이름 ratio로 변경
     // TODO: 수익률 계산 방법 변경?
-    public double calculateRateOfReturn(final long money) {
-        return calculateTotalPrize() / (double) money;
+    public double calculateRateOfReturn(final LottoMoney lottoMoney) {
+        return calculateTotalPrize().ratio(lottoMoney);
     }
 
-    private long calculateTotalPrize() {
-        return Arrays.stream(Rank.values())
-                .mapToLong(rank -> rank.calculatePrize(getCount(rank)))
-                .sum();
+    private LottoMoney calculateTotalPrize() {
+        List<LottoMoney> prizes = Arrays.stream(Rank.values())
+                .map(rank -> rank.calculatePrize(getCount(rank)))
+                .collect(Collectors.toList());
+
+        return LottoMoney.sum(prizes);
     }
 
     private void increaseRankCount(final Rank rank) {
