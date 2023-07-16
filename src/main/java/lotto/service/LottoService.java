@@ -33,6 +33,10 @@ public class LottoService {
         return new LottoService(manualLottos.combine(new Lottos(lottos)), manualCount);
     }
 
+    public static void validateManualCount(Money money, int manualCount) {
+        money.count(LOTTO_PRICE).decreaseBy(new Count(manualCount));
+    }
+
     public LottoStatusResponse buyStatus() {
         return new LottoStatusResponse(lottos, manualCount);
     }

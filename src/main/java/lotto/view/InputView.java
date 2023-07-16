@@ -32,9 +32,13 @@ public class InputView {
         return new MoneyRequest(money);
     }
 
-    public ManualRequest inputManualLottoNumber() {
+    public int inputManualCount() {
         int count = processInput(this::readManualCount, COUNT_NOT_NUMBER_MESSAGE);
         System.out.println();
+        return count;
+    }
+
+    public ManualRequest inputManualLottoNumber(int count) {
         ManualRequest manualRequest = new ManualRequest(readManualLottoNumbers(count));
         System.out.println();
         return manualRequest;
