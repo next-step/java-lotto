@@ -1,5 +1,6 @@
 package lottogame.domain;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -9,29 +10,48 @@ import lottogame.domain.spi.NumberGenerator;
 
 public class LottoPurchaseManager {
 
+    private static final BigInteger BIG_INTEGER_PURCHASE_UNIT = BigInteger.valueOf(LottoTicket.PURCHASABLE_UNIT);
+
     private final NumberGenerator numberGenerator;
 
     public LottoPurchaseManager(NumberGenerator numberGenerator) {
         this.numberGenerator = numberGenerator;
     }
 
-    public List<LottoTicketDto> purchase(int money) {
+    public List<LottoTicketDto> purchase(BigInteger money, List<LottoTicketDto> lottoTicketDtos) {
         assertMoney(money);
-        List<LottoTicket> lottoTickets = createLottoTickets(money);
+        assertPassiveLottoTickets(money, lottoTicketDtos);
+
+        money = money.subtract(BIG_INTEGER_PURCHASE_UNIT.multiply(BigInteger.valueOf(lottoTicketDtos.size())));
+
+        List<LottoTicket> lottoTickets = lottoTicketDtos.stream()
+            .map(lottoTicketDto -> new LottoTicket(lottoTicketDto.getNumbers()))
+            .collect(Collectors.toList());
+        lottoTickets.addAll(createLottoTickets(money));
         return toLottoTicketDtos(lottoTickets);
     }
 
-    private void assertMoney(int money) {
-        if (money % LottoTicket.PURCHASABLE_UNIT != 0) {
+    private void assertMoney(BigInteger money) {
+        boolean isDivided = money.mod(BIG_INTEGER_PURCHASE_UNIT).equals(BigInteger.ZERO);
+        if (!isDivided) {
             throw new IllegalArgumentException(
                 String.format("money는 \"%d\"원으로 나누어 떨어져야 합니다 money: \"%d\"", LottoTicket.PURCHASABLE_UNIT,
                     money));
         }
     }
 
-    private List<LottoTicket> createLottoTickets(int money) {
+    private void assertPassiveLottoTickets(BigInteger money, List<LottoTicketDto> lottoTicketDtos) {
+        long lottoBuyableCount = money.divide(BIG_INTEGER_PURCHASE_UNIT).longValue();
+        if (lottoBuyableCount < lottoTicketDtos.size()) {
+            throw new IllegalArgumentException(String.format("구매가능한 로또 숫자 \"%d\" 보다 선택한 로또의 숫자가 더 많습니다.",
+                lottoBuyableCount));
+        }
+    }
+
+    private List<LottoTicket> createLottoTickets(BigInteger money) {
         List<LottoTicket> lottoTicketList = new ArrayList<>();
-        for (int count = 0; count < money / LottoTicket.PURCHASABLE_UNIT; count++) {
+        long purchaseCount = money.divide(BIG_INTEGER_PURCHASE_UNIT).longValue();
+        for (int count = 0; count < purchaseCount; count++) {
             lottoTicketList.add(new LottoTicket(numberGenerator));
         }
         return lottoTicketList;
@@ -67,4 +87,5 @@ public class LottoPurchaseManager {
             "numberGenerator=" + numberGenerator +
             '}';
     }
+
 }

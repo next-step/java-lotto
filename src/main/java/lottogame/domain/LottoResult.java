@@ -1,5 +1,7 @@
 package lottogame.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,15 +26,16 @@ class LottoResult {
         }
     }
 
-    double calculateEarningRate(List<LottoTicket> lottoTickets) {
+    BigDecimal calculateEarningRate(List<LottoTicket> lottoTickets) {
         assertLottoTickets(lottoTickets);
         List<LottoPrize> lottoPrizes = toLottoPrizes(lottoTickets);
-        int totalMoney = lottoPrizes.size() * LottoTicket.PURCHASABLE_UNIT;
-        int earnMoney = ZERO_MONEY;
+        BigDecimal totalMoney = BigDecimal.valueOf(LottoTicket.PURCHASABLE_UNIT)
+            .multiply(BigDecimal.valueOf(lottoPrizes.size()));
+        BigDecimal earnMoney = BigDecimal.valueOf(ZERO_MONEY);
         for (LottoPrize lottoPrize : lottoPrizes) {
-            earnMoney += lottoPrize.getMoney();
+            earnMoney = earnMoney.add(BigDecimal.valueOf(lottoPrize.getMoney()));
         }
-        return (double) earnMoney / (double) totalMoney;
+        return earnMoney.divide(totalMoney, 2, RoundingMode.HALF_EVEN);
     }
 
     private void assertLottoTickets(List<LottoTicket> lottoTickets) {
@@ -51,4 +54,5 @@ class LottoResult {
         return LottoPrize.of(lottoResultNumbers.getMatchedCount(lottoTicket),
             lottoTicket.contains(lottoBonus));
     }
+
 }

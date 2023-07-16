@@ -1,5 +1,7 @@
 package lottogame.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -13,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("FieldCanBeLocal")
 @DisplayName("LottoCheckService 클래스")
-public class LottoCheckManagerTest {
+class LottoCheckManagerTest {
 
     @Nested
     @DisplayName("checkResult 메서드는")
@@ -51,10 +53,14 @@ public class LottoCheckManagerTest {
                 int totalMoney = PURCHASE_COUNT * LottoTicket.PURCHASABLE_UNIT;
                 int earnMoney = LottoPrize.FIRST.getMoney() + LottoPrize.SECOND.getMoney();
 
-                return new LottoCheckedResponse((double) earnMoney / (double) totalMoney,
+                return new LottoCheckedResponse(BigDecimal.valueOf(earnMoney / (double) totalMoney)
+                    .setScale(2, RoundingMode.HALF_EVEN).toString(),
                     Map.of(new LottoTicketCheckedResponse(6, LottoPrize.FIRST.getMoney()), 1,
                         new LottoTicketCheckedResponse(5, LottoPrize.SECOND.getMoney()), 1));
             }
+
         }
+
     }
+
 }

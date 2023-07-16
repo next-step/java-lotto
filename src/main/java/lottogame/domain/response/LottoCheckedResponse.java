@@ -5,16 +5,16 @@ import java.util.Objects;
 
 public class LottoCheckedResponse {
 
-    private final double earningRate;
+    private final String earningRate;
     private final Map<LottoTicketCheckedResponse, Integer> lottoTicketCheckResponses;
 
-    public LottoCheckedResponse(double earningRate,
+    public LottoCheckedResponse(String earningRate,
         Map<LottoTicketCheckedResponse, Integer> lottoTicketCheckResponses) {
         this.earningRate = earningRate;
         this.lottoTicketCheckResponses = lottoTicketCheckResponses;
     }
 
-    public double getEarningRate() {
+    public String getEarningRate() {
         return earningRate;
     }
 
@@ -24,14 +24,10 @@ public class LottoCheckedResponse {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof LottoCheckedResponse)) {
-            return false;
-        }
+        if (this == o) {return true;}
+        if (!(o instanceof LottoCheckedResponse)) {return false;}
         LottoCheckedResponse that = (LottoCheckedResponse) o;
-        return Double.compare(that.earningRate, earningRate) == 0 && Objects.equals(
+        return Objects.equals(earningRate, that.earningRate) && Objects.equals(
             lottoTicketCheckResponses, that.lottoTicketCheckResponses);
     }
 
@@ -47,4 +43,5 @@ public class LottoCheckedResponse {
             ", lottoTicketCheckResponses=" + lottoTicketCheckResponses +
             '}';
     }
+
 }
