@@ -1,4 +1,4 @@
-package lotto.dto;
+package lotto.dto.request;
 
 import java.util.List;
 

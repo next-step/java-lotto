@@ -1,8 +1,8 @@
 package lotto.view;
 
 import lotto.domain.LottoRank;
-import lotto.dto.LottoResultResponseDto;
-import lotto.dto.LottoStatusesResponseDto;
+import lotto.dto.response.LottoResultResponseDto;
+import lotto.dto.response.LottoStatusesResponseDto;
 
 import java.util.Collections;
 import java.util.Map;
@@ -10,7 +10,12 @@ import java.util.Map;
 public class OutputView {
 
     public void printBuyStatus(LottoStatusesResponseDto lottoStatusesResponseDto) {
-        System.out.println(lottoStatusesResponseDto.getLottoStatuses().size() + "개를 구매했습니다.");
+        System.out.println(
+                "수동으로 " +
+                        lottoStatusesResponseDto.getManualLottosCount() +
+                        "장, 자동으로 " + lottoStatusesResponseDto.getAutoLottosCount() +
+                        "개를 구매했습니다.")
+        ;
         for (LottoStatusesResponseDto.LottoStatusResponseDto lottoStatusResponseDto : lottoStatusesResponseDto.getLottoStatuses()) {
             Collections.sort(lottoStatusResponseDto.getLottoStatus());
             System.out.println(lottoStatusResponseDto.getLottoStatus());

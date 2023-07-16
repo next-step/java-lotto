@@ -47,6 +47,6 @@ class MoneyTest {
     @DisplayName("수익률을 계산하여 리턴한다.")
     void profitRate() {
         Money money = new Money(14000);
-        Assertions.assertThat(money.profitRate(new Money(5000))).isEqualTo((double) 5000 / 14000);
+        Assertions.assertThat(money.findProfitRate(new Money(5000))).isEqualTo(new ProfitRate((double) 5000 / 14000));
     }
 }
