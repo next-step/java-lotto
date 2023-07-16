@@ -1,5 +1,6 @@
 package lotto.model.domain;
 
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -25,5 +26,20 @@ class LottosSizeTest {
 
         // when & then
         assertThatIllegalArgumentException().isThrownBy(() -> LottosSize.of(lottoMoney, 1));
+    }
+
+    @Test
+    void 수동_로또_개수가_0미만이거나_총_로또_개수_초과면_실패() {
+        // given
+        final LottoMoney lottoMoney = LottoMoney.valueOf(2000);
+        final long manualSize1 = -1;
+        final long manualSize2 = 3;
+
+        // when & then
+        SoftAssertions.assertSoftly(softAssertions -> {
+                    assertThatIllegalArgumentException().isThrownBy(() -> LottosSize.of(lottoMoney, manualSize1));
+                    assertThatIllegalArgumentException().isThrownBy(() -> LottosSize.of(lottoMoney, manualSize2));
+                }
+        );
     }
 }
