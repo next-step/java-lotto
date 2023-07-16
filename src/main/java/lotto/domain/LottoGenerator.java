@@ -36,7 +36,7 @@ public class LottoGenerator {
         final List<Lotto> boughtLottos = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            boughtLottos.add(generateStrategy.generate(balls));
+            boughtLottos.add(generateStrategy.generate());
         }
 
         return new BoughtLottos(boughtLottos);
