@@ -49,8 +49,8 @@ public final class LottoController {
     }
 
     private LottoCounts inputLottoCounts(LottoMoney lottoMoney) {
-        int manualLottoNumber = lottoInputView.inputManualLottoNumber();
-        return new LottoCounts(lottoMoney.getTotalCount(), manualLottoNumber);
+        int manualLottoCount = lottoInputView.inputManualLottoCount();
+        return new LottoCounts(lottoMoney.getTotalCount(), manualLottoCount);
     }
 
     private void printAutoLottos(LottoMoney lottoMoney, LottoCounts lottoCounts,
