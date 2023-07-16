@@ -3,11 +3,15 @@ package lotto.model;
 public class LottoMoney {
     private static final int LOTTO_UNIT = 1000;
     private static final int ZERO = 0;
-    private final int money;
+    private int money;
 
     public LottoMoney(final int money) {
         validateMoney(money);
         this.money = money;
+    }
+
+    public LottoMoney(final ManualLottoCount manualLottoCount) {
+        this.money = manualLottoCount.getManualCount() * LOTTO_UNIT;
     }
 
     private void validateMoney(final int money) {
@@ -19,11 +23,23 @@ public class LottoMoney {
         }
     }
 
-    public int getLottoCount() {
-        return money / LOTTO_UNIT;
+    public LottoMoney consume(final ManualLottoCount manualLottoCount) {
+        int spentMoney = this.money - manualLottoCount.getManualCount() * LOTTO_UNIT;
+        validateSpentMoney(spentMoney);
+        return new LottoMoney(spentMoney);
     }
 
-    public int getLottoMoney() {
+    private void validateSpentMoney(final int spentMoney) {
+        if (spentMoney < ZERO) {
+            throw new IllegalStateException("가지고 있는 금액보다 더 많은 로또를 구매할 수 없습니다.");
+        }
+    }
+
+    public int getMoney() {
         return money;
+    }
+
+    public int getLottoCount() {
+        return money / LOTTO_UNIT;
     }
 }

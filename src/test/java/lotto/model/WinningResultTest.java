@@ -3,10 +3,9 @@ package lotto.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
+import static lotto.fixture.LottoFixture.createLotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
 
@@ -25,7 +24,7 @@ public class WinningResultTest {
                         createLotto(1, 2, 3, 4, 5, 6),
                         createLotto(1, 3, 11, 12, 5, 6),
                         createLotto(1, 2, 3, 4, 5, 6)),
-                new LottoMoney(14000)
+                14, 0
         );
 
         // when
@@ -53,7 +52,7 @@ public class WinningResultTest {
                         createLotto(11, 22, 33, 44, 15, 16),
                         createLotto(1, 3, 11, 12, 5, 7),
                         createLotto(12, 23, 31, 42, 15, 16)),
-                new LottoMoney(14000)
+                14, 0
         );
 
         // when
@@ -61,15 +60,5 @@ public class WinningResultTest {
 
         // then
         assertThat(winningResult.getProfit()).isCloseTo(0.35, within(100.0));
-    }
-
-    private Lotto createLotto(int... numbers) {
-        return new Lotto(createLottoNumbers(numbers));
-    }
-
-    private List<LottoNumber> createLottoNumbers(int... numbers) {
-        return Arrays.stream(numbers)
-                .mapToObj(LottoNumber::new)
-                .collect(toList());
     }
 }

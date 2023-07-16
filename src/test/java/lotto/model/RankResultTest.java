@@ -3,6 +3,9 @@ package lotto.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
+import static lotto.fixture.LottoFixture.createLotto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RankResultTest {
@@ -11,10 +14,18 @@ class RankResultTest {
     @DisplayName("Rank 에 대해 결과 테스트")
     void Rank_에_대해_결과_테스트() {
         // given
-        RankResult rankResult = new RankResult();
-        rankResult.plusCountOfRank(Rank.THREE);
-        rankResult.plusCountOfRank(Rank.THREE);
-        rankResult.plusCountOfRank(Rank.SIX);
+        WinningLotto winningLotto = new WinningLotto(
+                List.of(1, 2, 3, 4, 5, 6), 7
+        );
+        PurChasedLottos purChasedLottos = new PurChasedLottos(
+                List.of(
+                        createLotto(1, 2, 3, 41, 15, 16),
+                        createLotto(4, 5, 6, 12, 15, 16),
+                        createLotto(1, 2, 3, 4, 5, 6)),
+                14, 0
+        );
+
+        RankResult rankResult = new RankResult(winningLotto, purChasedLottos);
 
         // when , then
         assertThat(rankResult.getCountOfRank(Rank.THREE))
@@ -33,10 +44,17 @@ class RankResultTest {
     @DisplayName("Rank 에 대해 총 상금 테스트")
     void 총_상금_테스트() {
         // given
-        RankResult rankResult = new RankResult();
-        rankResult.plusCountOfRank(Rank.THREE);
-        rankResult.plusCountOfRank(Rank.THREE);
-        rankResult.plusCountOfRank(Rank.SIX);
+        WinningLotto winningLotto = new WinningLotto(
+                List.of(1, 2, 3, 4, 5, 6), 7
+        );
+        PurChasedLottos purChasedLottos = new PurChasedLottos(
+                List.of(
+                        createLotto(1, 2, 3, 41, 15, 16),
+                        createLotto(4, 5, 6, 12, 15, 16),
+                        createLotto(1, 2, 3, 4, 5, 6)),
+                14, 0
+        );
+        RankResult rankResult = new RankResult(winningLotto, purChasedLottos);
 
         // when , then
         assertThat(rankResult.getTotalRankReward())

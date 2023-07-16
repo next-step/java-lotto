@@ -5,18 +5,26 @@ import java.util.List;
 
 public class LottoPurchaser {
 
-    private final AutoLottoGenerator autoLottoGenerator;
+    private final LottoFactory lottoFactory;
 
-    public LottoPurchaser(final AutoLottoGenerator autoLottoGenerator) {
-        this.autoLottoGenerator = autoLottoGenerator;
+    public LottoPurchaser(final LottoFactory lottoFactory) {
+        this.lottoFactory = lottoFactory;
     }
 
-    public PurChasedLottos purchaseLotto(final LottoMoney lottoMoney) {
-        final int lottoCount = lottoMoney.getLottoCount();
-        final List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(autoLottoGenerator.generate());
+    public PurChasedLottos purchaseLotto(final Automatic automatic, final Manuals manuals) {
+        List<Lotto> lottos = new ArrayList<>();
+        purchaseLottosByManual(manuals, lottos);
+        purchaseLottoByAuto(automatic, lottos);
+        return new PurChasedLottos(lottos, automatic.getAutoCount(), manuals.getManualCount());
+    }
+
+    private void purchaseLottosByManual(final Manuals manuals, final List<Lotto> lottos) {
+        for (var manualNumber : manuals.getManualNumbers()) {
+            lottos.add(lottoFactory.generate(manualNumber));
         }
-        return new PurChasedLottos(lottos, lottoMoney);
+    }
+
+    private void purchaseLottoByAuto(final Automatic automatic, final List<Lotto> lottos) {
+        lottos.addAll(lottoFactory.generate(automatic.getAutoCount()));
     }
 }

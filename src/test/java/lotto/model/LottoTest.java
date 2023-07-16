@@ -7,9 +7,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static lotto.fixture.LottoNumberFixture.createLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
@@ -107,9 +107,4 @@ public class LottoTest {
         assertThat(lotto.isContain(new LottoNumber(11))).isFalse();
     }
 
-    private List<LottoNumber> createLottoNumbers(List<Integer> container) {
-        return container.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
 }
