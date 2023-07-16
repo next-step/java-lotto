@@ -39,8 +39,7 @@ public class LottoController {
 
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
         LottoResult lottoResult = new LottoResult(winningLotto.toLottoRanks(lottoTickets));
-        LottoCheckResponse lottoCheckResponse = new LottoCheckResponse(lottoResult.getEarningRate(), lottoResult.getLottoRankCounts());
 
-        lottoViewer.draw(lottoCheckResponse);
+        lottoViewer.draw(new LottoCheckResponse(lottoResult.getEarningRate(), lottoResult.getLottoRankCounts()));
     }
 }
