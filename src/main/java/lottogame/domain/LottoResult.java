@@ -10,6 +10,7 @@ public class LottoResult {
     private final Double earningRate;
 
     public LottoResult(List<LottoRank> lottoRanks) {
+
         this.lottoRankCounts = lottoRanks.stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
@@ -36,7 +37,7 @@ public class LottoResult {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof LottoResult)) return false;
         LottoResult that = (LottoResult) o;
         return Objects.equals(lottoRankCounts, that.lottoRankCounts) && Objects.equals(earningRate, that.earningRate);
     }
