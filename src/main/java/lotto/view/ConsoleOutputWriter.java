@@ -5,7 +5,6 @@ import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,8 +38,8 @@ public class ConsoleOutputWriter {
 
     private static String buildRankCountString(final LottoResult lottoResult) {
         return Arrays.stream(Rank.values())
-                .sorted(Comparator.reverseOrder()) // TODO: 좀 더 구체적으로 변경
-                .filter(rank -> rank != Rank.NONE) // TODO: Rank 객체에 메시지 전달?
+                .sorted(ConsoleOutputWriter::descendingRankValue)
+                .filter(rank -> rank != Rank.NONE)
                 .map(rank -> buildRankResultString(rank, lottoResult.getCount(rank)))
                 .collect(Collectors.joining("\n"));
     }
@@ -67,5 +66,9 @@ public class ConsoleOutputWriter {
 
         manualLottoContents.forEach(ConsoleOutputWriter::printLottoContent);
         autoLottoContents.forEach(ConsoleOutputWriter::printLottoContent);
+    }
+
+    private static int descendingRankValue(Rank from, Rank to) {
+        return to.getValue() - from.getValue();
     }
 }
