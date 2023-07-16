@@ -52,7 +52,7 @@ public enum LottoRank {
         this.money = money;
     }
 
-    public static LottoRank of(int matchedCount, boolean isBonusMatched) {
+    static LottoRank of(int matchedCount, boolean isBonusMatched) {
         return Arrays.stream(LottoRank.values()).sequential()
             .filter(lottoPrize -> lottoPrize.match(matchedCount, isBonusMatched))
             .findFirst()
