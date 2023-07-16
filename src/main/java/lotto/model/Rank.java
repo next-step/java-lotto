@@ -38,8 +38,8 @@ public enum Rank {
                 .orElse(NONE);
     }
 
-    public static long getTotalPrize(Rank rank, long count) {
-        return rank.prize * count;
+    public long getTotalPrize(long count) {
+        return this.prize * count;
     }
 
     boolean match(final int matchCount, final boolean hasBonusBall) {

@@ -17,7 +17,7 @@ public final class LottoResult {
 
     private ProfitRate calculateProfitRate(final LottoMoney lottoMoney) {
         long totalPrize = lottoResultStatistics.entrySet().stream()
-                .mapToLong(entry -> Rank.getTotalPrize(entry.getKey(), entry.getValue()))
+                .mapToLong(entry -> entry.getKey().getTotalPrize(entry.getValue()))
                 .sum();
         return new ProfitRate(totalPrize, lottoMoney.getTotalSpentMoney());
     }

@@ -42,7 +42,7 @@ class LottoResultTest {
 
         // then
         final long totalPrize =
-                Rank.getTotalPrize(Rank.SECOND, 2) + Rank.getTotalPrize(Rank.FOURTH, 1);
+                Rank.SECOND.getTotalPrize(2) + Rank.FOURTH.getTotalPrize(1);
         assertThat(profitRate).isCloseTo(totalPrize / (double) lottoMoney.getValue(),
                 Percentage.withPercentage(99));
     }
