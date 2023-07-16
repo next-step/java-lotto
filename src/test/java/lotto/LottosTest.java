@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.request.ManualRequest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ class LottosTest {
     @Test
     @DisplayName("정상적인 입력이 들어오면 정적 팩토리 메소드로 Lottos 객체가 생성된다.")
     void from() {
-        List<List<Integer>> lottos = List.of(List.of(1, 2, 3, 4, 5, 6));
+        ManualRequest lottos = new ManualRequest(List.of(List.of(1, 2, 3, 4, 5, 6)));
 
         Assertions.assertThatNoException()
                 .isThrownBy(() -> Lottos.from(lottos));

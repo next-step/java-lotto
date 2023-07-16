@@ -1,6 +1,8 @@
 package lotto.util;
 
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.request.ManualRequest;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,8 +19,12 @@ public class RandomGenerator implements LottoGenerator{
             .boxed()
             .collect(Collectors.toList());
 
-    public Lotto generateLotto() {
+    public Lotto generateAutoLotto() {
         Collections.shuffle(lottoNumbers);
         return new Lotto(lottoNumbers.subList(START_INDEX, LOTTO_SIZE));
+    }
+
+    public Lottos generateManualLotto(ManualRequest manualRequest) {
+        return Lottos.from(manualRequest);
     }
 }

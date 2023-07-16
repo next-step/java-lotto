@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.request.ManualRequest;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,10 +15,13 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos from(List<List<Integer>> lottos) {
-        return new Lottos(lottos.stream()
-                .map(Lotto::new)
-                .collect(Collectors.toList()));
+    public static Lottos from(ManualRequest manualRequest) {
+        return new Lottos(
+                manualRequest.getManualLottos()
+                .stream()
+                .map(Lotto::from)
+                .collect(Collectors.toList())
+        );
     }
 
     public List<Lotto> getLottos() {

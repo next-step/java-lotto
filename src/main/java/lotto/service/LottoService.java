@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.domain.*;
+import lotto.request.ManualRequest;
 import lotto.response.LottoStatusResponse;
 import lotto.util.LottoGenerator;
 
@@ -21,14 +22,15 @@ public class LottoService {
     }
 
     public static LottoService buyLotto(Money money, LottoGenerator lottoGenerator) {
-        return buyLotto(money, new Lottos(new ArrayList<>()), lottoGenerator);
+        return buyLotto(money, new ManualRequest(new ArrayList<>()), lottoGenerator);
     }
 
-    public static LottoService buyLotto(Money money, Lottos manualLottos, LottoGenerator lottoGenerator) {
-        Count manualCount = new Count(manualLottos.size());
+    public static LottoService buyLotto(Money money, ManualRequest manualRequest, LottoGenerator lottoGenerator) {
+        Count manualCount = new Count(manualRequest.size());
         Count autoCount = money.count(LOTTO_PRICE).decreaseBy(manualCount);
+        Lottos manualLottos = lottoGenerator.generateManualLotto(manualRequest);
         List<Lotto> lottos = autoCount.stream()
-                .mapToObj(l -> lottoGenerator.generateLotto())
+                .mapToObj(l -> lottoGenerator.generateAutoLotto())
                 .collect(Collectors.toList());
         return new LottoService(manualLottos.combine(new Lottos(lottos)), manualCount);
     }
