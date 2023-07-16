@@ -16,9 +16,9 @@ public class BoughtLottosWriter {
             final BoughtLottos autoBoughtLottos
     ) {
         final String result = "수동으로 "
-                + manualBoughtLottos.getCount()
+                + manualBoughtLottos.getCount().getValue()
                 + "장, 자동으로 "
-                + autoBoughtLottos.getCount()
+                + autoBoughtLottos.getCount().getValue()
                 + "개를 구매했습니다."
                 + NEW_LINE
                 + formatLottos(manualBoughtLottos)

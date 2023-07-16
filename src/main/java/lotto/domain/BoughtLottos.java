@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 public class BoughtLottos {
 
     public static final BoughtLottos EMPTY = new BoughtLottos(List.of());
-    private final int count;
+    private final LottoBuyCount count;
     private final List<Lotto> lottos;
 
     public BoughtLottos(final List<Lotto> lottos) {
-        this.count = lottos.size();
+        this.count = new LottoBuyCount(lottos.size());
         this.lottos = lottos;
     }
 
@@ -21,11 +21,15 @@ public class BoughtLottos {
     }
 
     public boolean isEmpty() {
-        return this.count == 0;
+        return this.count.isZero();
     }
 
-    public int getCount() {
+    public LottoBuyCount getCount() {
         return this.count;
+    }
+
+    public Money getBoughtLottosMoney() {
+        return new Money(this.count.getValue() * Lotto.PRICE);
     }
 
     public List<LottoNumbers> getLottosNumbers() {
