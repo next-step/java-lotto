@@ -15,8 +15,8 @@ public class WinningLotto {
         this.lottoBonus = new LottoBonus(bonusNumber, this.lottoTicket);
     }
 
-    public List<LottoRank> toLottoRanks(List<LottoTicket> lottoTickets) {
-        return lottoTickets.stream()
+    public List<LottoRank> toLottoRanks(LottoTickets lottoTickets) {
+        return lottoTickets.getLottoTickets().stream()
             .map(this::toLottoRank)
             .collect(Collectors.toList());
     }

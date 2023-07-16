@@ -37,7 +37,7 @@ public class LottoController {
         Integer bonusNumber = lottoInputer.inputBonusLottoNumber();
 
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
-        LottoResult lottoResult = new LottoResult(winningLotto.toLottoRanks(lottoTickets.getLottoTickets()));
+        LottoResult lottoResult = new LottoResult(winningLotto.toLottoRanks(lottoTickets));
 
         lottoViewer.draw(new LottoCheckResponse(lottoResult.getEarningRate(), lottoResult.getLottoRankCounts()));
     }
