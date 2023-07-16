@@ -15,9 +15,12 @@ public final class RankResults {
         this.ranks = ranks;
     }
 
-    public RankResults(final RankResults rankResults1, final RankResults rankResults2) {
-        this.ranks = new ArrayList<>(rankResults1.ranks);
-        this.ranks.addAll(rankResults2.ranks);
+    public static RankResults add(
+            final RankResults manualRankResults,
+            final RankResults autoRankResults) {
+        List<Rank> ranks = new ArrayList<>(manualRankResults.ranks);
+        ranks.addAll(autoRankResults.ranks);
+        return new RankResults(ranks);
     }
 
     public Map<Rank, Long> getRanksCounts() {

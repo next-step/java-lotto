@@ -35,7 +35,7 @@ public final class LottoController {
         printAutoLottos(lottoMoney, lottoCounts, autoLottos);
 
         WinningNumbers totalWinningNumbers = getWinningNumbers();
-        RankResults totalRankResults = new RankResults(
+        RankResults totalRankResults = RankResults.add(
                 manualLottos.matchWinningNumbers(totalWinningNumbers),
                 autoLottos.matchWinningNumbers(totalWinningNumbers)
         );
