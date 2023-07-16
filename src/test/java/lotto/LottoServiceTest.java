@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.dto.LottoStatusResponseDto;
+import lotto.response.LottoStatusResponse;
 import lotto.service.LottoService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -15,8 +15,8 @@ class LottoServiceTest {
     @DisplayName("Money 객체 전달받으면 로또를 발급한다.")
     void buyLotto() {
         LottoService lottoService = LottoService.buyLotto(new Money(3000), () -> new Lotto(List.of(1, 2, 3, 4, 5, 6)));
-        LottoStatusResponseDto lottoStatusResponseDto = lottoService.buyStatus();
-        Assertions.assertThat(lottoStatusResponseDto.getLottoStatus())
+        LottoStatusResponse lottoStatusResponse = lottoService.buyStatus();
+        Assertions.assertThat(lottoStatusResponse.getLottoStatus())
                 .isEqualTo(
                         List.of(
                                 List.of(1, 2, 3, 4, 5, 6),

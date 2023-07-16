@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.dto.ManualRequestDto;
-import lotto.dto.MoneyRequestDto;
-import lotto.dto.WinningLottoRequestDto;
+import lotto.request.ManualRequest;
+import lotto.request.MoneyRequest;
+import lotto.request.WinningLottoRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,23 +21,23 @@ public class InputView {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public MoneyRequestDto inputMoney() {
+    public MoneyRequest inputMoney() {
         return processInput(this::readMoney, MONEY_NOT_NUMBER_MESSAGE);
     }
 
-    private MoneyRequestDto readMoney() {
+    private MoneyRequest readMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         long money = Long.parseLong(scanner.nextLine());
         System.out.println();
-        return new MoneyRequestDto(money);
+        return new MoneyRequest(money);
     }
 
-    public ManualRequestDto inputManualLottoNumber() {
+    public ManualRequest inputManualLottoNumber() {
         int count = processInput(this::readManualCount, COUNT_NOT_NUMBER_MESSAGE);
         System.out.println();
-        ManualRequestDto manualRequestDto = new ManualRequestDto(readManualLottoNumbers(count));
+        ManualRequest manualRequest = new ManualRequest(readManualLottoNumbers(count));
         System.out.println();
-        return manualRequestDto;
+        return manualRequest;
     }
 
     private int readManualCount() {
@@ -55,11 +55,11 @@ public class InputView {
         return manualLottos;
     }
 
-    public WinningLottoRequestDto inputWinningLotto() {
+    public WinningLottoRequest inputWinningLotto() {
         List<Integer> lottoNumbers = processInput(this::readWinningNumbers, WINNING_NOT_NUMBER_MESSAGE);
         int bonusNumber = processInput(this::readBonusNumber, BONUS_NOT_NUMBER_MESSAGE);
         System.out.println();
-        return new WinningLottoRequestDto(lottoNumbers, bonusNumber);
+        return new WinningLottoRequest(lottoNumbers, bonusNumber);
     }
 
     private int readBonusNumber() {

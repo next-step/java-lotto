@@ -1,12 +1,12 @@
-package lotto.dto;
+package lotto.request;
 
 import java.util.List;
 
-public class ManualRequestDto {
+public class ManualRequest {
 
     private final List<List<Integer>> manualLottos;
 
-    public ManualRequestDto(List<List<Integer>> manualLottos) {
+    public ManualRequest(List<List<Integer>> manualLottos) {
         this.manualLottos = manualLottos;
     }
 

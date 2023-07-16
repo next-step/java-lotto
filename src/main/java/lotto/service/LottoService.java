@@ -1,7 +1,7 @@
 package lotto.service;
 
 import lotto.domain.*;
-import lotto.dto.LottoStatusResponseDto;
+import lotto.response.LottoStatusResponse;
 import lotto.util.LottoGenerator;
 
 import java.util.ArrayList;
@@ -33,8 +33,8 @@ public class LottoService {
         return new LottoService(manualLottos.combine(new Lottos(lottos)), manualCount);
     }
 
-    public LottoStatusResponseDto buyStatus() {
-        return new LottoStatusResponseDto(lottos, manualCount);
+    public LottoStatusResponse buyStatus() {
+        return new LottoStatusResponse(lottos, manualCount);
     }
 
     public LottoResults matchWinningLotto(WinningLotto winningNumbers) {

@@ -1,10 +1,10 @@
-package lotto.dto;
+package lotto.request;
 
-public class MoneyRequestDto {
+public class MoneyRequest {
 
     private final long money;
 
-    public MoneyRequestDto(long money) {
+    public MoneyRequest(long money) {
         this.money = money;
     }
 
