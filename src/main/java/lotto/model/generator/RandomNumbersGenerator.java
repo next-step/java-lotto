@@ -36,9 +36,8 @@ public final class RandomNumbersGenerator implements NumbersGenerator {
     }
 
     private static List<Integer> sort(final List<Integer> numbers) {
-        return numbers.stream()
-                .sorted()
-                .collect(Collectors.toUnmodifiableList());
+        Collections.sort(numbers);
+        return numbers;
     }
 
     private static List<Integer> shuffleBaseNumbers() {
