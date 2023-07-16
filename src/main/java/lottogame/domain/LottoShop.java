@@ -9,9 +9,8 @@ public class LottoShop {
         assertMoney(lottoPurchaseRequest.getMoney());
         assertManualLottoCount(lottoPurchaseRequest);
 
-        int totalLottoCount = lottoPurchaseRequest.getMoney() /LottoTicket.PURCHASABLE_UNIT;
-        LottoTickets lottoTickets = new LottoTickets(totalLottoCount, lottoPurchaseRequest.getManualLottos(), numberGenerator);
-        return lottoTickets;
+        int totalLottoCount = lottoPurchaseRequest.getMoney() / LottoTicket.PURCHASABLE_UNIT;
+        return new LottoTickets(totalLottoCount, lottoPurchaseRequest.getManualLottos(), numberGenerator);
     }
 
     private void assertMoney(int money) {
