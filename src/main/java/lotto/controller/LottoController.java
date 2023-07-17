@@ -40,8 +40,7 @@ public class LottoController {
 
     private void run() {
         final Money money = moneyReader.readMoney();
-        final LottoBuyCount lottoBuyCount = lottoReader.readManualLottoBuyCount();
-        money.validateCanPurchaseLottoWantedCount(lottoBuyCount);
+        final LottoBuyCount lottoBuyCount = lottoReader.readManualLottoBuyCount(money);
 
         final BoughtLottos manualBoughtLottos = lottoReader.readManualLottos(lottoBuyCount);
         final BoughtLottos autoBoughtLottos = new LottoGenerator()
