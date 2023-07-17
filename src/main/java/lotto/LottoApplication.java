@@ -24,7 +24,7 @@ public class LottoApplication {
 
     public void run() {
         Money purchaseMoney = inputPurchaseMoney();
-        Quantity manualLottoQuantity = inputManualLottoCount(purchaseMoney);
+        Quantity manualLottoQuantity = inputManualLottoCount();
         Quantity randomLottoQuantity = LottoGroup.calculateRandomLottoQuantity(purchaseMoney,
             manualLottoQuantity);
         LottoGroup lottoGroup = LottoGroup.createRandomAndManualLottos(randomLottoQuantity,
@@ -36,17 +36,11 @@ public class LottoApplication {
     }
 
     private Money inputPurchaseMoney() {
-        Money purchaseMoney = new Money(input.inputPurchaseMoney());
-        LottoGroup.verify(purchaseMoney);
-        return purchaseMoney;
+        return new Money(input.inputPurchaseMoney());
     }
 
-    private Quantity inputManualLottoCount(Money available) {
-        Quantity quantity = new Quantity(input.inputManualLottoQuantity());
-        if (!LottoGroup.canBuy(available, quantity)) {
-            throw new IllegalArgumentException("not enough money");
-        }
-        return quantity;
+    private Quantity inputManualLottoCount() {
+        return new Quantity(input.inputManualLottoQuantity());
     }
 
     private List<List<Integer>> inputManualLotto(Quantity quantity) {

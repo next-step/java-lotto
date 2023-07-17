@@ -38,6 +38,13 @@ public class LottoGroup {
         return new LottoGroup(manualLottos);
     }
 
+    public static Quantity calculateRandomLottoQuantity(Money money, Quantity manualLottoQuantity) {
+        if (!canBuy(money, manualLottoQuantity)) {
+            throw new IllegalArgumentException("not enough money");
+        }
+        return getQuantity(money).subtract(manualLottoQuantity);
+    }
+
     public static Quantity getQuantity(final Money money) {
         Double divided = money.divide(LOTTO_PRICE);
         return new Quantity(divided.intValue());
@@ -47,20 +54,16 @@ public class LottoGroup {
         return LOTTO_PRICE.multiply(quantity.getValue());
     }
 
-    public static void verify(Money money) {
+    private static void verify(Money money) {
         if (money.isUnderThan(LOTTO_PRICE)) {
             throw new IllegalArgumentException(
                 "purchase money amount should be greater than lotto price.");
         }
     }
 
-    public static boolean canBuy(Money available, Quantity quantity) {
+    private static boolean canBuy(Money available, Quantity quantity) {
         Money required = getSpentMoney(quantity);
         return required.isUnderThan(available) || required.equals(available);
-    }
-
-    public static Quantity calculateRandomLottoQuantity(Money money, Quantity manualLottoQuantity) {
-        return getQuantity(money).subtract(manualLottoQuantity);
     }
 
     public List<Lotto> getLottos() {

@@ -43,13 +43,6 @@ class LottoGroupTest {
             .isTrue();
     }
 
-    @Test
-    @DisplayName("보유 금액으로 수량만큼 로또를 구매할 수 없으면 예외를 false 를 반환한다.")
-    void canBuyableTest() {
-        assertThat(LottoGroup.canBuy(new Money(1000L), new Quantity(2))).isFalse();
-        assertThat(LottoGroup.canBuy(new Money(1000L), new Quantity(1))).isTrue();
-    }
-
     private boolean isContain(LottoGroup lottoGroup, Lotto compare) {
         long matchCount = lottoGroup.getLottos().stream()
             .filter(lotto -> lotto.countMatches(compare) == 6)
