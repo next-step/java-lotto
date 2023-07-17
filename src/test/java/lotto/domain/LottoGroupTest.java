@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.vo.Quantity;
+import lotto.domain.vo.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ class LottoGroupTest {
     @DisplayName("로또 구매 수량이 0인 경우 예외 던진다.")
     void zeroQuantityThrowsExceptionTest() {
         assertThrows(IllegalArgumentException.class,
-            () -> LottoGroup.createRandomAndManualLottos(new Quantity(0L), new ArrayList<>()));
+            () -> LottoGroup.createRandomAndManualLottos(new Money(0L), new ArrayList<>()));
     }
 
     @Test
@@ -26,7 +26,7 @@ class LottoGroupTest {
         lottoNumbers.add(List.of(1, 2, 3, 4, 5, 6));
 
         // when
-        LottoGroup lottoGroup = LottoGroup.createRandomAndManualLottos(new Quantity(1),
+        LottoGroup lottoGroup = LottoGroup.createRandomAndManualLottos(new Money(2000L),
             lottoNumbers);
 
         // then

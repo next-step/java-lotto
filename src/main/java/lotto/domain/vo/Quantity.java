@@ -16,6 +16,15 @@ public class Quantity {
         return new Quantity(this.value - other.value);
     }
 
+    public Quantity subtract(Integer other) {
+        verify(this.value - other);
+        return new Quantity(this.value - other);
+    }
+
+    public boolean isUnderThan(Integer other) {
+        return value < other;
+    }
+
     public long getValue() {
         return value;
     }

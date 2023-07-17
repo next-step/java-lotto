@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,28 +12,28 @@ public class LottoGroup {
     private static final Money LOTTO_PRICE = new Money(1000L);
 
     private final List<Lotto> lottos;
+    private final Quantity randomLottoQuantity;
 
-    public LottoGroup(final List<Lotto> lottos) {
+    public LottoGroup(final List<Lotto> manualLottos, final Quantity randomLottoQuantity) {
+        List<Lotto> lottos = new ArrayList<>(manualLottos);
+        for (int i = 0; i < randomLottoQuantity.getValue(); i++) {
+            lottos.add(Lotto.createRandomLotto());
+        }
         verify(lottos);
         this.lottos = Collections.unmodifiableList(lottos);
+        this.randomLottoQuantity = randomLottoQuantity;
     }
 
-    public static LottoGroup createRandomAndManualLottos(final Quantity randomQuantity,
+    public static LottoGroup createRandomAndManualLottos(final Money money,
         final List<List<Integer>> manualLottoNumbers) {
+        Quantity available = getQuantity(money);
+        if (available.isUnderThan(manualLottoNumbers.size())) {
+            throw new IllegalArgumentException("not enough money");
+        }
         List<Lotto> manualLottos = manualLottoNumbers.stream()
             .map(Lotto::createSpecificLotto)
             .collect(Collectors.toList());
-        for (int i = 0; i < randomQuantity.getValue(); i++) {
-            manualLottos.add(Lotto.createRandomLotto());
-        }
-        return new LottoGroup(manualLottos);
-    }
-
-    public static Quantity calculateRandomLottoQuantity(Money money, Quantity manualLottoQuantity) {
-        if (!canBuy(money, manualLottoQuantity)) {
-            throw new IllegalArgumentException("not enough money");
-        }
-        return getQuantity(money).subtract(manualLottoQuantity);
+        return new LottoGroup(manualLottos, available.subtract(manualLottoNumbers.size()));
     }
 
     public static Money getSpentMoney(final Quantity quantity) {
@@ -44,9 +45,8 @@ public class LottoGroup {
         return new Quantity(divided.intValue());
     }
 
-    private static boolean canBuy(Money available, Quantity quantity) {
-        Money required = getSpentMoney(quantity);
-        return required.isUnderThan(available) || required.equals(available);
+    public Quantity getRandomLottoQuantity() {
+        return randomLottoQuantity;
     }
 
     public List<Lotto> getLottos() {
