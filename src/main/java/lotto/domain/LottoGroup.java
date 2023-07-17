@@ -13,14 +13,12 @@ public class LottoGroup {
     private final List<Lotto> lottos;
 
     public LottoGroup(final List<Lotto> lottos) {
+        verify(lottos);
         this.lottos = Collections.unmodifiableList(lottos);
     }
 
     public static LottoGroup createRandomAndManualLottos(final Quantity randomQuantity,
         final List<List<Integer>> manualLottoNumbers) {
-        if (randomQuantity.equals(new Quantity(0)) && manualLottoNumbers.isEmpty()) {
-            throw new IllegalArgumentException("lotto size can't be zero");
-        }
         List<Lotto> manualLottos = manualLottoNumbers.stream()
             .map(Lotto::createSpecificLotto)
             .collect(Collectors.toList());
@@ -37,20 +35,13 @@ public class LottoGroup {
         return getQuantity(money).subtract(manualLottoQuantity);
     }
 
-    public static Quantity getQuantity(final Money money) {
-        Double divided = money.divide(LOTTO_PRICE);
-        return new Quantity(divided.intValue());
-    }
-
     public static Money getSpentMoney(final Quantity quantity) {
         return LOTTO_PRICE.multiply(quantity.getValue());
     }
 
-    private static void verify(Money money) {
-        if (money.isUnderThan(LOTTO_PRICE)) {
-            throw new IllegalArgumentException(
-                "purchase money amount should be greater than lotto price.");
-        }
+    private static Quantity getQuantity(final Money money) {
+        Double divided = money.divide(LOTTO_PRICE);
+        return new Quantity(divided.intValue());
     }
 
     private static boolean canBuy(Money available, Quantity quantity) {
@@ -60,5 +51,11 @@ public class LottoGroup {
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    private void verify(List<Lotto> lottos) {
+        if (lottos.isEmpty()) {
+            throw new IllegalArgumentException("lotto size can't be zero");
+        }
     }
 }
