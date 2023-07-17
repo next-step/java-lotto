@@ -11,8 +11,8 @@ public class Profit {
         this.value = value;
     }
 
-    public Profit(Money dividend, Money divisor) {
-        this(dividend.divide(divisor));
+    public Profit(Money revenue, Money expense) {
+        this(revenue.divide(expense));
     }
 
     private void verify(Double value) {
