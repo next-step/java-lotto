@@ -1,19 +1,21 @@
 package lottogame.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
-import java.util.Set;
+import lottogame.domain.mock.MockLottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
+import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SuppressWarnings("FieldCanBeLocal")
 @DisplayName("LottoBonus 클래스")
 class LottoBonusTest {
 
     private final Set<Integer> defaultLottoNumberValues = Set.of(1, 2, 3, 4, 5, 6);
-    private final LottoTicket defaultLottoTicket = new LottoTicket(defaultLottoNumberValues);
+    private final LottoTicket defaultLottoTicket = new MockLottoTicket(defaultLottoNumberValues);
 
     @Nested
     @DisplayName("equals 메서드는")
@@ -58,7 +60,7 @@ class LottoBonusTest {
     @DisplayName("isContained 는")
     class Describe_Is_Contained {
 
-        private final LottoTicket lottoTicketForResult = new LottoTicket(Set.of(10, 11, 12, 13, 14, 15));
+        private final LottoTicket lottoTicketForResult = new MockLottoTicket(Set.of(10, 11, 12, 13, 14, 15));
 
         @Nested
         @DisplayName("lottoNumbers에 보너스가 포함되면")

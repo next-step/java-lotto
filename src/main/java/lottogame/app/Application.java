@@ -1,29 +1,23 @@
 package lottogame.app;
 
-import java.util.List;
-import lottogame.console.purchase.ConsolePurchaseInputer;
-import lottogame.console.purchase.ConsolePurchaseViewer;
-import lottogame.console.resultcheck.ConsoleResultCheckInputer;
-import lottogame.console.resultcheck.ConsoleResultCheckViewer;
-import lottogame.controller.purchase.LottoPurchaseController;
-import lottogame.controller.purchase.spi.PurchaseInputer;
-import lottogame.controller.purchase.spi.PurchaseViewer;
-import lottogame.controller.resultcheck.LottoResultCheckController;
-import lottogame.controller.resultcheck.spi.ResultCheckInputer;
-import lottogame.controller.resultcheck.spi.ResultCheckViewer;
-import lottogame.domain.LottoTicket;
+import lottogame.console.ConsoleLottoInputer;
+import lottogame.console.ConsoleLottoViewer;
+import lottogame.controller.LottoController;
+import lottogame.controller.spi.LottoInputer;
+import lottogame.controller.spi.LottoViewer;
+import lottogame.domain.LottoTickets;
+import lottogame.domain.spi.NumberGenerator;
 import lottogame.randomnumber.RandomLottoNumberGenerator;
-import lottogame.service.LottoCheckService;
-import lottogame.service.LottoPurchaseService;
 
 public class Application {
 
-    private final LottoPurchaseController lottoPurchaseController;
-    private final LottoResultCheckController lottoResultCheckController;
+    private final LottoController lottoController;
 
     private Application() {
-        lottoPurchaseController = getLottoPurchaseController();
-        lottoResultCheckController = getLottoResultCheckController();
+        LottoInputer lottoInputer = new ConsoleLottoInputer();
+        LottoViewer lottoViewer = new ConsoleLottoViewer();
+
+        lottoController = new LottoController(lottoInputer, lottoViewer);
     }
 
     public static void main(String[] args) {
@@ -31,22 +25,9 @@ public class Application {
         application.run();
     }
 
-    private LottoResultCheckController getLottoResultCheckController() {
-        ResultCheckInputer resultCheckInputer = new ConsoleResultCheckInputer();
-        ResultCheckViewer resultCheckViewer = new ConsoleResultCheckViewer();
-        LottoCheckService lottoCheckService = new LottoCheckService();
-        return new LottoResultCheckController(resultCheckInputer, resultCheckViewer, lottoCheckService);
-    }
-
-    private LottoPurchaseController getLottoPurchaseController() {
-        PurchaseInputer purchaseInputer = new ConsolePurchaseInputer();
-        PurchaseViewer purchaseViewer = new ConsolePurchaseViewer();
-        LottoPurchaseService lottoPurchaseService = new LottoPurchaseService(new RandomLottoNumberGenerator());
-        return new LottoPurchaseController(purchaseInputer, purchaseViewer, lottoPurchaseService);
-    }
-
     private void run() {
-        List<LottoTicket> lottoTickets = lottoPurchaseController.purchaseLottoTickets();
-        lottoResultCheckController.checkResult(lottoTickets);
+        NumberGenerator numberGenerator = new RandomLottoNumberGenerator();
+        LottoTickets lottoTickets = lottoController.purchaseLottoTickets(numberGenerator);
+        lottoController.checkResult(lottoTickets);
     }
 }

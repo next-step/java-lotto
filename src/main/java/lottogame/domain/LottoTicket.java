@@ -1,23 +1,24 @@
 package lottogame.domain;
 
+import lottogame.domain.spi.NumberGenerator;
+
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lottogame.domain.spi.NumberGenerator;
 
-public class LottoTicket {
+public abstract class LottoTicket {
 
     public static final int PURCHASABLE_UNIT = 1000;
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final Set<LottoNumber> values;
 
-    public LottoTicket(NumberGenerator numberGenerator) {
+    protected LottoTicket(NumberGenerator numberGenerator) {
         Objects.requireNonNull(numberGenerator, "numberGeneartor는 Null이 되면 안됩니다.");
         this.values = initValues(numberGenerator.generateDistinctNumbers(LOTTO_NUMBERS_SIZE));
     }
 
-    LottoTicket(Set<Integer> values) {
+    protected LottoTicket(Set<Integer> values) {
         this.values = initValues(values);
     }
 
