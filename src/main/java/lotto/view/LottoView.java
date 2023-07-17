@@ -13,7 +13,7 @@ import lotto.domain.game.LottoNumber;
 import lotto.domain.game.Lottos;
 import lotto.domain.statistics.LottoResult;
 import lotto.domain.statistics.LottoResults;
-import lotto.domain.statistics.LottoStatistics;
+import lotto.domain.statistics.ProfitRate;
 
 public final class LottoView {
 
@@ -122,8 +122,8 @@ public final class LottoView {
         );
     }
 
-    public void printProfitRate(final LottoStatistics lottoStatistics) {
-        System.out.println("총 수익률은" + lottoStatistics.getProfitRate() + "입니다.");
+    public void printProfitRate(final ProfitRate profitRate) {
+        System.out.println("총 수익률은" + profitRate.getProfitRate() + "입니다.");
     }
 
 }

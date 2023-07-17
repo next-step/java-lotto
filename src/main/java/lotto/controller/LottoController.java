@@ -1,13 +1,15 @@
 package lotto.controller;
 
 import java.util.List;
+import java.util.Map;
 import lotto.domain.game.LottoCount;
 import lotto.domain.game.Lottos;
 import lotto.domain.game.NumberGeneratorImpl;
 import lotto.domain.game.Payment;
 import lotto.domain.game.WinningNumber;
+import lotto.domain.statistics.LottoMatch;
 import lotto.domain.statistics.LottoResults;
-import lotto.domain.statistics.LottoStatistics;
+import lotto.domain.statistics.ProfitRate;
 import lotto.view.LottoView;
 
 public final class LottoController {
@@ -29,11 +31,9 @@ public final class LottoController {
         int bonusBall = lottoView.readBonusBall();
         WinningNumber winningNumber = new WinningNumber(winningLotto, bonusBall);
 
-        LottoStatistics lottoStatistics = new LottoStatistics(lottos, winningNumber, payment);
-//        LottoResults lottoResults = new LottoResults(lottoStatistics);
-        LottoResults lottoResults = lottos.calculateStatistics(winningNumber);
-        lottoView.printLottoResult(lottoResults);
-        lottoView.printProfitRate(lottoStatistics);
+        Map<LottoMatch, Integer> resultMap = lottos.calculateResult(winningNumber);
+        lottoView.printLottoResult(new LottoResults(resultMap));
+        lottoView.printProfitRate(new ProfitRate(payment, resultMap));
 
     }
 }

@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.domain.statistics.LottoMatch;
 import lotto.domain.statistics.LottoMatchKey;
-import lotto.domain.statistics.LottoResults;
 
 public final class Lottos {
 
@@ -49,13 +48,12 @@ public final class Lottos {
     }
 
     // 통계 로직
-    public LottoResults calculateStatistics(final WinningNumber winningNumber) {
+    public Map<LottoMatch, Integer> calculateResult(final WinningNumber winningNumber) {
         Map<LottoMatch, Integer> resultMap = new EnumMap<>(LottoMatch.class);
         lottos.stream()
             .map(lotto -> getLottoMatchKey(lotto, winningNumber))
             .forEach((lottoMatchKey) -> putLotto(lottoMatchKey, resultMap));
-        resultMap.remove(LottoMatch.NONE_MATCH);
-        return new LottoResults(resultMap);
+        return resultMap;
     }
 
     private LottoMatchKey getLottoMatchKey(final Lotto lotto, final WinningNumber winningNumber) {
