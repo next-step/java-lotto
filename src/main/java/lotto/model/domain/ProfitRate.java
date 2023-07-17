@@ -7,7 +7,7 @@ public final class ProfitRate implements Comparable<ProfitRate> {
     private final double value;
 
     private ProfitRate(final double value) {
-        throw new UnsupportedOperationException();
+        this.value = value;
     }
 
     public static ProfitRate valueOf(final double value) {
