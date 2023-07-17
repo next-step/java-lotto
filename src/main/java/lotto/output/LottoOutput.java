@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGroup;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
+import lotto.domain.vo.LottoNumber;
 import lotto.domain.vo.Profit;
 import lotto.domain.vo.Quantity;
 

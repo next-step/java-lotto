@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.vo;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    static final int LOTTO_START = 1;
-    static final int LOTTO_END = 45;
+    public static final int LOTTO_START = 1;
+    public static final int LOTTO_END = 45;
     private static final Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
 
     private final Integer number;
