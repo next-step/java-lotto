@@ -1,10 +1,17 @@
 package lotto.view;
 
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.LottoMatch;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 
 public class LottoView {
 

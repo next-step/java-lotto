@@ -1,7 +1,7 @@
-package lotto.domain.lotto;
+package lotto.domain;
 
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 import java.text.MessageFormat;
 import java.util.List;

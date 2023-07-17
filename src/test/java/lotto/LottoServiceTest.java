@@ -16,12 +16,11 @@ public class LottoServiceTest {
     @Test
     void 로또_서비스_객체_생성() {
         int payment = 14000;
-        int manualCount = 1;
-        List<Lotto> lottos = new ArrayList<>();
+        List<Lotto> manualLottos = new ArrayList<>();
 
-        lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
+        manualLottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
 
-        assertDoesNotThrow(() -> new LottoGame(payment, manualCount, lottos));
+        assertDoesNotThrow(() -> new LottoGame(payment, manualLottos));
     }
 
 }

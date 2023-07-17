@@ -4,12 +4,12 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
-public final class ResultRecord {
+public final class LottoResult {
     public static final int DEFAULT_VALUE = 0;
     public static final int ADD_COUNT_VALUE = 1;
     private final Map<LottoMatch, Integer> resultMap = new EnumMap<>(LottoMatch.class);
 
-    public ResultRecord(final Lottos lottos, final WinningNumber winningNumber) {
+    public LottoResult(final Lottos lottos, final WinningNumber winningNumber) {
         recordResult(winningNumber, lottos);
     }
 
