@@ -45,7 +45,7 @@ public class LottoController {
 
         final BoughtLottos manualBoughtLottos = lottoReader.readManualLottos(lottoBuyCount);
         final BoughtLottos autoBoughtLottos = new LottoGenerator()
-                .generate(money.receiveAfterPurchaseLotto(lottoBuyCount));
+                .generate(money.minus(manualBoughtLottos.getBoughtLottosMoney()));
         boughtLottosWriter.printBoughtLottos(manualBoughtLottos, autoBoughtLottos);
 
         final WinningLotto winningLotto = lottoReader.readWinningLotto();
