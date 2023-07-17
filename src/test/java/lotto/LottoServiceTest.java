@@ -1,8 +1,10 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.dto.LottoStatusResponseDto;
+import lotto.request.ManualRequest;
+import lotto.response.LottoStatusResponse;
 import lotto.service.LottoService;
+import lotto.util.LottoGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,12 +13,25 @@ import java.util.List;
 
 class LottoServiceTest {
 
+    static class TestLottoGenerator implements LottoGenerator {
+
+        @Override
+        public Lotto generateAutoLotto() {
+            return new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        }
+
+        @Override
+        public Lottos generateManualLotto(ManualRequest manualRequest) {
+            return Lottos.from(manualRequest);
+        }
+    }
+
     @Test
     @DisplayName("Money 객체 전달받으면 로또를 발급한다.")
     void buyLotto() {
-        LottoService lottoService = LottoService.buyLotto(new Money(3000), () -> new Lotto(List.of(1, 2, 3, 4, 5, 6)));
-        LottoStatusResponseDto lottoStatusResponseDto = lottoService.buyStatus();
-        Assertions.assertThat(lottoStatusResponseDto.getLottoStatus())
+        LottoService lottoService = LottoService.buyLotto(new Money(3000), new TestLottoGenerator());
+        LottoStatusResponse lottoStatusResponse = lottoService.buyStatus();
+        Assertions.assertThat(lottoStatusResponse.getLottoStatus())
                 .isEqualTo(
                         List.of(
                                 List.of(1, 2, 3, 4, 5, 6),
@@ -29,21 +44,13 @@ class LottoServiceTest {
     @Test
     @DisplayName("로또 당첨 여부를 판단한다.")
     void matchWinningLotto() {
-        LottoService lottoService = LottoService.buyLotto(new Money(3000), () -> new Lotto(List.of(1, 2, 3, 4, 5, 6)));
+        LottoService lottoService = LottoService.buyLotto(new Money(3000), new TestLottoGenerator());
         WinningLotto first = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
         WinningLotto second = new WinningLotto(List.of(1, 2, 3, 4, 5, 7), 6);
 
         LottoResults lottoResults = lottoService.matchWinningLotto(first);
-        Assertions.assertThat(lottoResults.getLottoResults()).containsEntry(LottoRank.FIRST, 3L);
+        Assertions.assertThat(lottoResults.getLottoResults()).containsEntry(LottoRank.FIRST, new Count(3));
         LottoResults lottoResults2 = lottoService.matchWinningLotto(second);
-        Assertions.assertThat(lottoResults2.getLottoResults()).containsEntry(LottoRank.SECOND, 3L);
-    }
-
-    @Test
-    @DisplayName("수익률을 계산한다.")
-    void profitRate() {
-        LottoService lottoService = LottoService.buyLotto(new Money(5000));
-        LottoResults lottoResults = new LottoResults(List.of(LottoRank.FIFTH, LottoRank.NONE, LottoRank.FOURTH, LottoRank.NONE, LottoRank.NONE));
-        Assertions.assertThat(lottoService.profitRate(lottoResults).getProfitRate()).isEqualTo(11.0);
+        Assertions.assertThat(lottoResults2.getLottoResults()).containsEntry(LottoRank.SECOND, new Count(3));
     }
 }

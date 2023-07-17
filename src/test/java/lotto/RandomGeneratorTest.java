@@ -12,6 +12,6 @@ class RandomGeneratorTest {
     void generate() {
         RandomGenerator randomGenerator = new RandomGenerator();
         Assertions.assertThatNoException()
-                .isThrownBy(randomGenerator::generateLotto);
+                .isThrownBy(randomGenerator::generateAutoLotto);
     }
 }

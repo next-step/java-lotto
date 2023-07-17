@@ -25,7 +25,7 @@ public enum LottoRank {
         }
     };
 
-    private final long price;
+    private final Money price;
     protected final int matchCount;
 
     LottoRank(long price) {
@@ -33,11 +33,11 @@ public enum LottoRank {
     }
 
     LottoRank(long price, int matchCount) {
-        this.price = price;
+        this.price = new Money(price);
         this.matchCount = matchCount;
     }
 
-    public long getPrice() {
+    public Money getPrice() {
         return price;
     }
 

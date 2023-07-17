@@ -1,43 +1,49 @@
 package lotto.service;
 
 import lotto.domain.*;
-import lotto.dto.LottoStatusResponseDto;
+import lotto.request.ManualRequest;
+import lotto.response.LottoStatusResponse;
 import lotto.util.LottoGenerator;
-import lotto.util.RandomGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.LongStream;
 
 public class LottoService {
 
+    private static final Money LOTTO_PRICE = new Money(1000);
+
     private final Lottos lottos;
+    private final Count manualCount;
 
-    public LottoService(Lottos lottos) {
+    private LottoService(Lottos lottos, Count manualCount) {
         this.lottos = lottos;
-    }
-
-    public static LottoService buyLotto(Money money) {
-        return buyLotto(money, new RandomGenerator());
+        this.manualCount = manualCount;
     }
 
     public static LottoService buyLotto(Money money, LottoGenerator lottoGenerator) {
-        long countLotto = money.countLotto();
-        List<Lotto> lottos = LongStream.range(0, countLotto)
-                .mapToObj(l -> lottoGenerator.generateLotto())
-                .collect(Collectors.toList());
-        return new LottoService(new Lottos(lottos));
+        return buyLotto(money, new ManualRequest(new ArrayList<>()), lottoGenerator);
     }
 
-    public LottoStatusResponseDto buyStatus() {
-        return new LottoStatusResponseDto(lottos);
+    public static LottoService buyLotto(Money money, ManualRequest manualRequest, LottoGenerator lottoGenerator) {
+        Count manualCount = new Count(manualRequest.size());
+        Count autoCount = money.count(LOTTO_PRICE).decreaseBy(manualCount);
+        Lottos manualLottos = lottoGenerator.generateManualLotto(manualRequest);
+        List<Lotto> lottos = autoCount.stream()
+                .mapToObj(l -> lottoGenerator.generateAutoLotto())
+                .collect(Collectors.toList());
+        return new LottoService(manualLottos.combine(new Lottos(lottos)), manualCount);
+    }
+
+    public static void validateManualCount(Money money, int manualCount) {
+        money.count(LOTTO_PRICE).validateManualCount(manualCount);
+    }
+
+    public LottoStatusResponse buyStatus() {
+        return new LottoStatusResponse(lottos, manualCount);
     }
 
     public LottoResults matchWinningLotto(WinningLotto winningNumbers) {
         return lottos.matchWinningLotto(winningNumbers);
-    }
-
-    public Profit profitRate(LottoResults lottoResults) {
-        return lottoResults.profitRate();
     }
 }

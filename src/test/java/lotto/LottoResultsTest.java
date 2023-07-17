@@ -15,6 +15,6 @@ class LottoResultsTest {
     @DisplayName("당첨 결과를 바탕으로 수익률을 계산한다.")
     void profitRate() {
         LottoResults lottoResults = new LottoResults(List.of(LottoRank.FIRST, LottoRank.FIRST));
-        Assertions.assertThat(lottoResults.profitRate().getProfitRate()).isEqualTo(2_000_000.0);
+        Assertions.assertThat(lottoResults.getProfitRate().getProfitRate()).isEqualTo(2_000_000.0);
     }
 }

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.request.ManualLottoRequest;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -51,5 +53,9 @@ public class Lotto {
 
     private boolean contains(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    public static Lotto from(ManualLottoRequest manualLottoRequest) {
+        return new Lotto(manualLottoRequest.getManualLottoRequest());
     }
 }

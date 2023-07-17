@@ -12,14 +12,13 @@ class ProfitTest {
     @DisplayName("Money 객체 두개를 입력받아 수익률 객체를 생성한다.")
     void create() {
         Assertions.assertThatNoException()
-                .isThrownBy(() -> new Profit(new Money(5000), 1));
+                .isThrownBy(() -> new Profit(5000, 1000));
     }
 
     @Test
     @DisplayName("원금이 0일 경우 예외를 던진다.")
     void validateNotZeroDominator() {
-        Money profit = new Money(5000);
-        Assertions.assertThatThrownBy(() -> new Profit(profit, 0))
-                .isInstanceOf(IllegalStateException.class);
+        Assertions.assertThatThrownBy(() -> new Profit(5000, 0))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
