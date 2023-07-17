@@ -37,7 +37,7 @@ class LottoResultTest {
         final LottoResult lottoResult = LottoResult.of(ranks, lottoMoney);
 
         // when
-        final double profitRate = lottoResult.getProfitRate();
+        final double profitRate = lottoResult.getProfitRate().getValue();
 
         // then
         final long totalPrize = Rank.SECOND.getTotalPrize(2) + Rank.FOURTH.getTotalPrize(1);

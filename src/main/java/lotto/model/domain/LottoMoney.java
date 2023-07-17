@@ -25,7 +25,7 @@ public final class LottoMoney implements Comparable<LottoMoney> {
         return value;
     }
 
-    public long size(final long cost) {
+    public long sizeOfLottos(final long cost) {
         return value / cost;
     }
 

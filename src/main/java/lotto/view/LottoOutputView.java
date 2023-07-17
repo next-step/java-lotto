@@ -2,9 +2,14 @@ package lotto.view;
 
 import lotto.model.domain.*;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public final class LottoOutputView {
+
+    private static final String LOTTO_RESULT_MESSAGE_FORMAT = "%d개 일치%s(%d원) - %d";
 
     private static final LottoOutputView INSTANCE = new LottoOutputView();
 
@@ -27,18 +32,17 @@ public final class LottoOutputView {
         System.out.println("당첨 통계");
         System.out.println("----------------");
 
-        for (final Rank rank : Rank.values()) {
+        for (final Rank rank : totalRanks()) {
             printRankResult(lottoResult, rank);
         }
 
-        final double profitRate = lottoResult.getProfitRate();
+        final double profitRate = lottoResult.getProfitRate().getValue();
         System.out.printf("총 수익률은 %.2f 입니다. ", profitRate);
         System.out.println(profitRateResult(profitRate));
     }
 
-    public void printSizeOfLottos(final Lottos lottos) {
-        final int lottoSize = lottos.getLottos().size();
-        System.out.println(lottoSize + "개를 구매했습니다.");
+    public void printSizeOfLottos(final LottosSize lottos) {
+        System.out.printf("수동으로 %d개, 자동으로 %d개를 구입했습니다.", lottos.getManualSize(), lottos.getAutomaticSize()).println();
     }
 
     public void printChangeOfPurchase(final LottoMoney change) {
@@ -46,13 +50,21 @@ public final class LottoOutputView {
     }
 
     private void printRankResult(final LottoResult lottoResult, final Rank rank) {
-        System.out.printf("%d개 일치", rank.getMatchCount());
-        System.out.printf("%s ", printBonusBall(rank));
-        System.out.printf("(%d원)", rank.getPrize());
-        System.out.printf(" - %d", lottoResult.getCount(rank)).println();
+        final int matchCount = rank.getMatchCount();
+        final String bonusBallMessage = bonusBallMessage(rank);
+        final long prize = rank.getPrize();
+        final int count = lottoResult.getCount(rank);
+
+        System.out.printf(LOTTO_RESULT_MESSAGE_FORMAT, matchCount, bonusBallMessage, prize, count).println();
     }
 
-    private String printBonusBall(final Rank rank) {
+    private static List<Rank> totalRanks() {
+        final List<Rank> ranks = Arrays.asList(Rank.values());
+        Collections.reverse(ranks);
+        return ranks.subList(1, ranks.size());
+    }
+
+    private String bonusBallMessage(final Rank rank) {
         if (rank.isHasBonusBall()) {
             return ", (보너스 볼 일치)";
         }

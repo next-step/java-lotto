@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.model.domain.*;
+import lotto.model.service.LottoGame;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
@@ -17,25 +18,26 @@ public final class LottoController {
     }
 
     public void run() {
+        final LottoGame lottoGame = new LottoGame();
+
         final LottoMoney purchase = LottoMoney.valueOf(lottoInputView.inputPurchase());
-        final long lottosSize = purchase.size(Lotto.COST);
-        final Lottos lottos = Lottos.create(
-                lottosSize,
-                RandomNumbersGenerator.getInstance()
+        final long manualLottosSize = lottoInputView.inputManualLottosSize();
+        final LottosSize lottosSize = LottosSize.of(purchase, manualLottosSize);
+        final List<List<Integer>> manualLottos = lottoInputView.inputManualLottosNumbers(manualLottosSize);
+
+        lottoGame.buyLottos(manualLottos, lottosSize);
+        printLottosInformation(purchase, lottosSize, lottoGame.getLottos());
+
+        lottoGame.winningLotto(lottoInputView.inputWinningNumbers(),
+                lottoInputView.inputBonusBall()
         );
-        printPurchaseInformation(purchase, lottos);
 
-        final Lotto winningNumbers = Lotto.create(lottoInputView.inputWinningNumbers());
-        final LottoNumber bonusBall = LottoNumber.of(lottoInputView.inputBonusBall());
-        final WinningLotto winningLotto = WinningLotto.of(winningNumbers, bonusBall);
-
-        final List<Rank> ranks = lottos.matchWinningNumbers(winningLotto);
-        final LottoResult lottoResult = LottoResult.of(Ranks.of(ranks), purchase);
+        final LottoResult lottoResult = lottoGame.result(purchase);
         lottoOutputView.printLottoResult(lottoResult);
     }
 
-    private void printPurchaseInformation(final LottoMoney purchase, final Lottos lottos) {
-        lottoOutputView.printSizeOfLottos(lottos);
+    private void printLottosInformation(final LottoMoney purchase, final LottosSize lottosSize, final Lottos lottos) {
+        lottoOutputView.printSizeOfLottos(lottosSize);
         lottoOutputView.printChangeOfPurchase(purchase.change(Lotto.COST));
         lottoOutputView.printBuyingLotto(lottos);
     }

@@ -7,7 +7,7 @@ public final class LottoResult {
     public static final int DEFAULT_VALUE = 0;
 
     private final Map<Rank, Integer> lottoResult;
-    private final double profitRate;
+    private final ProfitRate profitRate;
 
     private LottoResult(final Ranks ranks, final LottoMoney purchase) {
         this.lottoResult = ranks.allCounts();
@@ -18,9 +18,9 @@ public final class LottoResult {
         return new LottoResult(ranks, purchase);
     }
 
-    private double calculateProfitRate(final LottoMoney purchase) {
+    private ProfitRate calculateProfitRate(final LottoMoney purchase) {
         final LottoMoney totalPrize = LottoMoney.valueOf(calculateTotalPrize());
-        return totalPrize.rate(purchase);
+        return ProfitRate.valueOf(totalPrize.rate(purchase));
     }
 
     private long calculateTotalPrize() {
@@ -34,7 +34,7 @@ public final class LottoResult {
         return lottoResult.getOrDefault(rank, DEFAULT_VALUE);
     }
 
-    public double getProfitRate() {
+    public ProfitRate getProfitRate() {
         return profitRate;
     }
 }

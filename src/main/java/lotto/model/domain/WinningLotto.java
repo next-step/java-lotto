@@ -28,12 +28,4 @@ public final class WinningLotto {
         final boolean hasBonusBall = lotto.contains(bonusBall);
         return Rank.valueOf(matchCount, hasBonusBall);
     }
-
-    public Lotto getWinningNumbers() {
-        return winningNumbers;
-    }
-
-    public LottoNumber getBonusBall() {
-        return bonusBall;
-    }
 }
