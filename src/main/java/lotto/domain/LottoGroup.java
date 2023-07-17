@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,18 +16,11 @@ public class LottoGroup {
         this.lottos = Collections.unmodifiableList(lottos);
     }
 
-    public static LottoGroup createRandomLottos(final Money money) {
-        verify(money);
-
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < getQuantity(money).getValue(); i++) {
-            lottos.add(Lotto.createRandomLotto());
-        }
-        return new LottoGroup(lottos);
-    }
-
     public static LottoGroup createRandomAndManualLottos(final Quantity randomQuantity,
         final List<List<Integer>> manualLottoNumbers) {
+        if (randomQuantity.equals(new Quantity(0)) && manualLottoNumbers.isEmpty()) {
+            throw new IllegalArgumentException("lotto size can't be zero");
+        }
         List<Lotto> manualLottos = manualLottoNumbers.stream()
             .map(Lotto::createSpecificLotto)
             .collect(Collectors.toList());
