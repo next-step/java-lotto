@@ -24,12 +24,7 @@ public class LottosTest {
         );
         Payment payment = new Payment(5000);
         LottoCount lottoCount = new LottoCount(payment, lottoManualCount);
-        NumberGenerator numberGenerator = new NumberGenerator(){
-            @Override
-            public List<Integer> shuffleNumbers() {
-                return List.of(1,2,3,4,5,6);
-            }
-        };
+        NumberGenerator numberGenerator = () -> List.of(1,2,3,4,5,6);
 
         assertDoesNotThrow(() -> new Lottos(lottoCount, lottosManual, numberGenerator));
     }
@@ -44,12 +39,7 @@ public class LottosTest {
         );
         Payment payment = new Payment(5000);
         LottoCount lottoCount = new LottoCount(payment, lottoManualCount);
-        NumberGenerator numberGenerator = new NumberGenerator(){
-            @Override
-            public List<Integer> shuffleNumbers() {
-                return List.of(40,41,42,43,44,45);
-            }
-        };
+        NumberGenerator numberGenerator = () -> List.of(40,41,42,43,44,45);
 
         Lottos lottos = new Lottos(lottoCount, lottosManual, numberGenerator);
 

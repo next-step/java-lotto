@@ -3,7 +3,7 @@ package lotto.controller;
 import java.util.List;
 import lotto.domain.game.LottoCount;
 import lotto.domain.game.Lottos;
-import lotto.domain.game.NumberGenerator;
+import lotto.domain.game.NumberGeneratorImpl;
 import lotto.domain.game.Payment;
 import lotto.domain.game.WinningNumber;
 import lotto.domain.statistics.LottoResults;
@@ -23,8 +23,7 @@ public final class LottoController {
         List<String> lottoManuals = lottoView.readLottoManualNumbers(lottoCount);
 
         // 1-2. 구입 갯수 & 구입 로또 번호 출력
-        NumberGenerator numberGenerator = new NumberGenerator();
-        Lottos lottos = new Lottos(lottoCount, lottoManuals, numberGenerator);
+        Lottos lottos = new Lottos(lottoCount, lottoManuals, new NumberGeneratorImpl());
         lottoView.printLottoCount(lottoCount);
         lottoView.printLottos(lottos);
 
