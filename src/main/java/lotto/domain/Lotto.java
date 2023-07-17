@@ -1,4 +1,4 @@
-package lotto.domain.lotto;
+package lotto.domain;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -29,7 +29,7 @@ public final class Lotto {
     private void validateSize(final List<Integer> values) {
         if (values.size() != MAX_LOTTO_COUNT) {
             throw new IllegalArgumentException(
-                    MessageFormat.format("로또 번호는 {0}개여야합니다. 현재 개수 : {1}", MAX_LOTTO_COUNT, values.size())
+                    MessageFormat.format("로또 번호는 {0}개여야합니다. 현재 개수 : {1}개", MAX_LOTTO_COUNT, values.size())
             );
         }
     }

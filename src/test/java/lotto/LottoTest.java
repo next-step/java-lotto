@@ -37,7 +37,7 @@ public class LottoTest {
         List<Integer> values = List.of(1, 2, 3, 5);
         Assertions.assertThatExceptionOfType(RuntimeException.class)
             .isThrownBy(() -> new Lotto(values))
-            .withMessage("로또 번호는 6개여야합니다. 현재 개수 : 4");
+            .withMessage("로또 번호는 6개여야합니다. 현재 개수 : 4개");
     }
 
     @DisplayName("로또 번호가 중복되면 예외가 발생한다")
