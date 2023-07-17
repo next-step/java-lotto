@@ -2,6 +2,8 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -11,6 +13,13 @@ public class Lotto {
     public Lotto(final List<LottoNumber> lottoNumbers) {
         validateLotto(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static Lotto createManualLotto(final List<Integer> lottoNumbers) {
+        List<LottoNumber> createLottoNumber = lottoNumbers.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+        return new Lotto(createLottoNumber);
     }
 
     private void validateLotto(final List<LottoNumber> lottoNumbers) {
@@ -40,4 +49,22 @@ public class Lotto {
     public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(this.lottoNumbers);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
+    }
+
 }

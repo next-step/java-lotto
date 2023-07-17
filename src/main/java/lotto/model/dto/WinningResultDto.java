@@ -38,6 +38,4 @@ public class WinningResultDto {
     public int getCount(Rank rank) {
         return ranks.get(rank);
     }
-
-
 }

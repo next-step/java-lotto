@@ -1,9 +1,8 @@
-package lotto.model.util;
+package lotto.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lotto.model.LottoNumber;
 
 public class AutoLottoGenerator implements LottoGenerator {
 

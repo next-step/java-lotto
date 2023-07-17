@@ -18,6 +18,13 @@
 - 로또 구입 금액
     - [X] 양수
     - [X] 구입 금액은 천단위로 한다 (로또 1장 가격은 1000원)
+- 수동 로또 구매 수
+    - [x] 양수
+    - [x] 로또 구입 금액 보다 로또 구매 수 * 단위가 크면 안된다.
+- 수동 로또 구매 번호
+   - [x] 쉼표로 구분한다. 
+   - [x] 숫자는 6개여야 한다. 
+   - [x] 로또 구매 수와 로또 구매번호묶음 개수가 같아야 한다. 
 - 당첨 번호
     - [X] 쉼표로 구분한다
     - [X] 숫자는 6개여야 한다
@@ -32,8 +39,9 @@
 - 로또를 생성
     - [x] LottoNumber ->  범위는 1~45
     - [x] Lotto -> 6개의 LottoNumber , 서로 다른 6개 LottoNumber
-    - [X] AutoLottoGenerator 는 Lotto 만든다.
-    - [x] LottoPurchaser 가 AutoLottoGenerator 로 금액만큼 구매한다.
+    - [X] AutoLottoGenerator 는 Lotto 자동으로 만든다.
+    - [x] FixLottoGenerator 는 사용자가 입력한 Lotto 를 반환한다.
+    - [x] LottoPurchaser는 수동 구매수, 수동 번호를 기준으로 로또를 사고 나머지는 자동으로 산다. 
 
 - 당첨 번호와 구매한 로또 결과 비교
     - [X] 당첨 번호와 보너스 볼은 중복되지 않는다.
@@ -48,7 +56,7 @@
 
 - 생성한 로또 번호를 출력한다.
     - [X] 정렬해서 출력
-    - [X] PurchasedLotto 도메인을 넘겨 받아 출력한다.
+    - [X] LottosDto를 넘겨 받아 출력한다.
 
 - 당첨 통계를 출력한다.
     - [X] (Map<Rank,Integer> , 수익률) 을 넘겨 받고 출력한다.

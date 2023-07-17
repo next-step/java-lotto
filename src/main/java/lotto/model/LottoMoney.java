@@ -3,16 +3,27 @@ package lotto.model;
 import java.util.Objects;
 
 public class LottoMoney {
+
     private static final int LOTTO_UNIT = 1000;
     private static final int ZERO = 0;
-    private final int money;
+    private final long money;
 
-    public LottoMoney(final int money) {
+    public LottoMoney(final long money) {
         validateMoney(money);
         this.money = money;
     }
 
-    private void validateMoney(final int money) {
+    public LottoMoney(final String money) {
+        try {
+            long num = Long.parseLong(money);
+            validateMoney(num);
+            this.money = num;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("입력된 금액 범위가 Long 범위를 초과하였습니다");
+        }
+    }
+
+    private void validateMoney(final long money) {
         if (money < ZERO) {
             throw new IllegalArgumentException("로또 머니가 양수여야 합니다.");
         }
@@ -21,12 +32,20 @@ public class LottoMoney {
         }
     }
 
-    public int getLottoCount() {
+    public long getLottoCount() {
         return money / LOTTO_UNIT;
     }
 
-    public int getLottoMoney() {
+    public long getLottoMoney() {
         return money;
+    }
+
+    public LottoMoney subtractByLottoCount(final Count count) {
+        return new LottoMoney(money - count.getCount() * LOTTO_UNIT);
+    }
+
+    public boolean isPositive() {
+        return this.money > ZERO;
     }
 
     @Override
@@ -52,4 +71,5 @@ public class LottoMoney {
             "money=" + money +
             '}';
     }
+
 }

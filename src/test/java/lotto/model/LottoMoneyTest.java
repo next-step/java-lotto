@@ -8,7 +8,6 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 
 class LottoMoneyTest {
 
-
     @Test
     @DisplayName("로또 머니가 같으면 같은 객체이다")
     void 로또_번호_같으면_같은_객체() {
@@ -52,11 +51,29 @@ class LottoMoneyTest {
     @Test
     @DisplayName("금액에 따라 구매해야할 로또 개수를 반환")
     void 로또_개수() {
+        // given
         LottoMoney lottoMoney = new LottoMoney(14000);
-
-        int lottoCount = lottoMoney.getLottoCount();
-
+        // when
+        long lottoCount = lottoMoney.getLottoCount();
+        // then
         assertThat(lottoCount).isEqualTo(14);
     }
 
+    @Test
+    @DisplayName("로또 금액이 양수일때 isPositive 는 true이다")
+    void 로또_금액_양수_isPositive_true() {
+        LottoMoney lottoMoney = new LottoMoney(14000);
+        assertThat(lottoMoney.isPositive()).isTrue();
+    }
+
+    @Test
+    @DisplayName("로또를 원하는 만큼 사면 그에 해당하는 로또 금액이 준다")
+    void 로또_사면_금액_차감() {
+        // given
+        LottoMoney lottoMoney = new LottoMoney(14000);
+        // when
+        lottoMoney = lottoMoney.subtractByLottoCount(new Count(3));
+        // then
+        assertThat(lottoMoney).isEqualTo(new LottoMoney(11000));
+    }
 }

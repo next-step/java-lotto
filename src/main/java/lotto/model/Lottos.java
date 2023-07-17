@@ -7,11 +7,20 @@ import java.util.List;
 import java.util.Map;
 
 public class Lottos {
+
     private static final int DEFAULT_VALUE = 0;
     private final List<Lotto> lottos;
 
     public Lottos(final List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public static Lottos createManualLottos(final List<List<Integer>> manualLotto) {
+        List<Lotto> number = new ArrayList<>();
+        for (List<Integer> lotto : manualLotto) {
+            number.add(Lotto.createManualLotto(lotto));
+        }
+        return new Lottos(number);
     }
 
     public int getLottoCount() {
@@ -38,4 +47,5 @@ public class Lottos {
         }
         return result;
     }
+
 }

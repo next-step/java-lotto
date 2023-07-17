@@ -33,8 +33,7 @@ public class LottosTest {
                 createLotto(1, 2, 3, 4, 5, 6),
                 createLotto(1, 2, 3, 4, 5, 6),
                 createLotto(1, 4, 6, 8, 10, 12)));
-        WinningLotto winningLotto = new WinningLotto(
-            List.of(1, 2, 3, 4, 5, 6), 7);
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
 
         // when
         Map<Rank, Integer> matchResult = purChasedLotto.calculateMatchLotto(winningLotto);
@@ -46,6 +45,4 @@ public class LottosTest {
         assertThat(matchResult.get(Rank.FIVE_WITH_BONUS)).isEqualTo(0);
         assertThat(matchResult.get(Rank.SIX)).isEqualTo(2);
     }
-
-
 }
