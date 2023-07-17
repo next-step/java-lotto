@@ -56,6 +56,10 @@ public class LottoGroup {
         return required.isUnderThan(available) || required.equals(available);
     }
 
+    public static Quantity calculateRandomLottoQuantity(Money money, Quantity manualLottoQuantity) {
+        return getQuantity(money).subtract(manualLottoQuantity);
+    }
+
     public List<Lotto> getLottos() {
         return lottos;
     }

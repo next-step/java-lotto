@@ -25,8 +25,8 @@ public class LottoApplication {
     public void run() {
         Money purchaseMoney = inputPurchaseMoney();
         Quantity manualLottoQuantity = inputManualLottoCount(purchaseMoney);
-        Quantity randomLottoQuantity = LottoGroup.getQuantity(purchaseMoney)
-            .subtract(manualLottoQuantity);
+        Quantity randomLottoQuantity = LottoGroup.calculateRandomLottoQuantity(purchaseMoney,
+            manualLottoQuantity);
         LottoGroup lottoGroup = LottoGroup.createRandomAndManualLottos(randomLottoQuantity,
             inputManualLotto(manualLottoQuantity));
 
