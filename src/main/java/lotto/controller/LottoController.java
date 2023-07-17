@@ -47,6 +47,13 @@ public class LottoController {
                 .generate(money.minus(manualBoughtLottos.getBoughtLottosMoney()));
         boughtLottosWriter.printBoughtLottos(manualBoughtLottos, autoBoughtLottos);
 
+        createLottoWinningStatistics(manualBoughtLottos, autoBoughtLottos);
+    }
+
+    private void createLottoWinningStatistics(
+            final BoughtLottos manualBoughtLottos,
+            final BoughtLottos autoBoughtLottos
+    ) {
         final WinningLotto winningLotto = lottoReader.readWinningLotto();
         final WinningStatistics totalLottoWinningStatistics = manualBoughtLottos.winningResults(winningLotto)
                 .sum(autoBoughtLottos.winningResults(winningLotto));
