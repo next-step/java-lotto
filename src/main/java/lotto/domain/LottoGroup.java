@@ -51,7 +51,7 @@ public class LottoGroup {
         }
     }
 
-    public static boolean canBuyable(Money available, Quantity quantity) {
+    public static boolean canBuy(Money available, Quantity quantity) {
         Money required = getSpentMoney(quantity);
         return required.isUnderThan(available) || required.equals(available);
     }

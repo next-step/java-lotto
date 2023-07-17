@@ -43,7 +43,7 @@ public class LottoApplication {
 
     private Quantity inputManualLottoCount(Money available) {
         Quantity quantity = new Quantity(input.inputManualLottoQuantity());
-        if (!LottoGroup.canBuyable(available, quantity)) {
+        if (!LottoGroup.canBuy(available, quantity)) {
             throw new IllegalArgumentException("not enough money");
         }
         return quantity;
