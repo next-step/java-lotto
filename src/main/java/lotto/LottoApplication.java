@@ -4,8 +4,6 @@ import lotto.domain.*;
 import lotto.view.ConsoleInputReader;
 import lotto.view.ConsoleOutputWriter;
 
-import java.util.List;
-
 public class LottoApplication {
 
     public static void main(String[] args) {
@@ -15,6 +13,7 @@ public class LottoApplication {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println("예상하지 못한 예외가 발생했습니다.");
+            e.printStackTrace();
         }
     }
 
@@ -24,17 +23,17 @@ public class LottoApplication {
         final LottoCount lottoCount = ConsoleInputReader.readLottoCount();
         LottoGenerator.checkProperLottoCount(lottoMoney, lottoCount);
 
-        final List<List<Integer>> manualLottoContents =
-                ConsoleInputReader.readManualLottoContents(lottoCount.getValue());
+        final Lottos manualLottos =
+                ConsoleInputReader.readManualLottos(lottoCount.getValue());
 
         final LottoMoney remainLottoMoney = lottoMoney.pay(lottoCount.toTotalLottoPrice());
-        final List<List<Integer>> autoLottoContents =
-                LottoGenerator.generateLottoContents(remainLottoMoney, new RandomCandidateStrategy());
-        ConsoleOutputWriter.printManualAndAutoLottoContent(manualLottoContents, autoLottoContents);
+        final Lottos autoLottoContents =
+                LottoGenerator.generateLottos(remainLottoMoney, new RandomCandidateStrategy());
+        ConsoleOutputWriter.printManualAndAutoLottos(manualLottos, autoLottoContents);
 
-        final List<Integer> lotto = ConsoleInputReader.readWinningLottoValue();
-        final int bonus = ConsoleInputReader.readLottoNumberValue();
-        final LottoGame lottoGame = new LottoGame(manualLottoContents, autoLottoContents, lotto, bonus);
+        final Lotto lotto = ConsoleInputReader.readWinningLottoValue();
+        final LottoNumber bonus = ConsoleInputReader.readLottoNumberValue();
+        final LottoGame lottoGame = new LottoGame(manualLottos, autoLottoContents, lotto, bonus);
 
         final LottoResult lottoResult = lottoGame.result();
         ConsoleOutputWriter.printLottoResultStatistic(lottoResult, lottoMoney);

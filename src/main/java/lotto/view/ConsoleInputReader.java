@@ -1,7 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoCount;
-import lotto.domain.LottoMoney;
+import lotto.domain.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,20 +29,20 @@ public class ConsoleInputReader {
         }
     }
 
-    public static List<Integer> readWinningLottoValue() {
+    public static Lotto readWinningLottoValue() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
-        return readLottoValue();
+        return readLotto();
     }
 
-    public static int readLottoNumberValue() {
+    public static LottoNumber readLottoNumberValue() {
         System.out.println("보너스 볼을 입력해 주세요.");
 
         try {
             final int number = Integer.parseInt(scanner.nextLine());
             System.out.println();
 
-            return number;
+            return new LottoNumber(number);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("로또번호는 정수여야 합니다.", e);
         }
@@ -61,24 +60,24 @@ public class ConsoleInputReader {
         }
     }
 
-    public static List<List<Integer>> readManualLottoContents(final long maxCount) {
+    public static Lottos readManualLottos(final long maxCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        List<List<Integer>> manualLottoContents = new ArrayList<>();
+        List<Lotto> manualLottosContent = new ArrayList<>();
         for (int count = 0; count < maxCount; count++) {
-            manualLottoContents.add(readLottoValue());
+            manualLottosContent.add(readLotto());
         }
 
-        return manualLottoContents;
+        return new Lottos(manualLottosContent);
     }
 
-    private static List<Integer> readLottoValue() {
+    private static Lotto readLotto() {
         try {
             final String[] numbers = scanner.nextLine().split(LOTTO_NUMBER_DELIMITER);
 
-            return Arrays.stream(numbers)
+            return new Lotto(Arrays.stream(numbers)
                     .map(Integer::valueOf)
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toList()));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("로또번호는 `" + LOTTO_NUMBER_DELIMITER + "`로 구분하여 정수로 입력해야 합니다.", e);
         }

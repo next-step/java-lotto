@@ -19,10 +19,10 @@ class LottoGeneratorTest {
 
 
         /* when */
-        List<Integer> lottoContent = LottoGenerator.generateOne(testStrategy);
+        Lotto lottoContent = LottoGenerator.generateOne(testStrategy);
 
         /* then */
-        assertThat(lottoContent).isEqualTo(testCandidate);
+        assertThat(lottoContent).isEqualTo(new Lotto(testCandidate));
     }
 
     @Test
@@ -32,9 +32,13 @@ class LottoGeneratorTest {
         LottoMoney lottoMoney = new LottoMoney(3_000L);
 
         /* when */
-        List<List<Integer>> lottoContents = LottoGenerator.generateLottoContents(lottoMoney, testStrategy);
+        Lottos lottoContents = LottoGenerator.generateLottos(lottoMoney, testStrategy);
 
         /* then */
-        assertThat(lottoContents).containsExactly(testCandidate, testCandidate, testCandidate);
+        assertThat(lottoContents.getLottos()).containsExactly(
+                new Lotto(testCandidate),
+                new Lotto(testCandidate),
+                new Lotto(testCandidate)
+        );
     }
 }

@@ -1,11 +1,8 @@
 package lotto.view;
 
-import lotto.domain.LottoMoney;
-import lotto.domain.LottoResult;
-import lotto.domain.Rank;
+import lotto.domain.*;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class ConsoleOutputWriter {
@@ -14,8 +11,8 @@ public class ConsoleOutputWriter {
         throw new UnsupportedOperationException("Util 클래스의 인스턴스는 생성할 수 없습니다.");
     }
 
-    private static void printLottoContent(final List<Integer> lottoContent) {
-        System.out.println(buildLottoContentString(lottoContent));
+    private static void printLottos(final Lottos lottos) {
+        System.out.println(buildLottosString(lottos));
     }
 
     public static void printLottoResultStatistic(final LottoResult lottoResult, final LottoMoney lottoMoney) {
@@ -29,8 +26,15 @@ public class ConsoleOutputWriter {
         System.out.println(ratioResult);
     }
 
-    private static String buildLottoContentString(final List<Integer> lottoContent) {
-        return lottoContent.stream()
+    private static String buildLottosString(final Lottos lottos) {
+        return lottos.getLottos().stream()
+                .map(ConsoleOutputWriter::buildLottoContentString)
+                .collect(Collectors.joining("\n"));
+    }
+
+    private static String buildLottoContentString(final Lotto lotto) {
+        return lotto.getLottoNumbers().stream()
+                .map(LottoNumber::getValue)
                 .sorted()
                 .map(String::valueOf)
                 .collect(Collectors.joining(", ", "[", "]"));
@@ -61,11 +65,15 @@ public class ConsoleOutputWriter {
         );
     }
 
-    public static void printManualAndAutoLottoContent(final List<List<Integer>> manualLottoContents, final List<List<Integer>> autoLottoContents) {
-        System.out.println("수동으로 " + manualLottoContents.size() + "장, 자동으로 " + autoLottoContents.size() + "개를 구매했습니다.");
+    public static void printManualAndAutoLottos(final Lottos manualLottos, final Lottos autoLottos) {
+        System.out.printf(
+                "수동으로 %d장, 자동으로 %d개를 구매했습니다.%n",
+                manualLottos.getLottos().size(),
+                autoLottos.getLottos().size()
+        );
 
-        manualLottoContents.forEach(ConsoleOutputWriter::printLottoContent);
-        autoLottoContents.forEach(ConsoleOutputWriter::printLottoContent);
+        printLottos(manualLottos);
+        printLottos(autoLottos);
     }
 
     private static int descendingRankValue(Rank from, Rank to) {

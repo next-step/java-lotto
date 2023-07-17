@@ -28,6 +28,10 @@ public final class Lotto {
         return lottoNumbers.contains(bonus);
     }
 
+    public Set<LottoNumber> getLottoNumbers() {
+        return this.lottoNumbers;
+    }
+
     private static void validateLottoNumberCount(final List<Integer> numbers) {
         if (numbers.size() != REQUIRED_LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
