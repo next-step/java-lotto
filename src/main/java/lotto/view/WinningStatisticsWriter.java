@@ -19,7 +19,7 @@ public class WinningStatisticsWriter {
             printEachStatistics(lottoRank, winningStatistics.getWinningCount(lottoRank));
         }
 
-        final double earningRate = Math.floor(winningStatistics.getEarningRate() / 100) * 100;
+        final double earningRate = Math.floor(winningStatistics.getEarningRate() * 100) / 100;
         System.out.printf("총 수익률은 %.2f 입니다.", earningRate);
         if (earningRate >= 1) {
             System.out.println("(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
