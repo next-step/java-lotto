@@ -1,27 +1,27 @@
-package lotto.domain;
+package lotto.domain.sale;
 
 import java.text.MessageFormat;
 
 public final class Payment {
     private final int payment;
 
-    public Payment(final int value, final int minPrice) {
-        validateRange(value, minPrice);
+    public Payment(final int value) {
+        validateRange(value);
         payment = value;
     }
 
-    private void validateRange(final int value, final int minPrice) {
-        if (value < minPrice) {
-            throw new IllegalArgumentException(MessageFormat.format("{0}원 이상 투입해 주세요", minPrice));
+    private void validateRange(final int value) {
+        if (value < LottoPurchase.LOTTO_PRICE) {
+            throw new IllegalArgumentException(MessageFormat.format("{0}원 이상 투입해 주세요", LottoPurchase.LOTTO_PRICE));
         }
     }
 
-    public float divide(float number) {
-        return number / payment;
+    public float calculateProfitRate(float profit) {
+        return profit / payment;
     }
 
-    public int dividedWith(int number) {
-        return payment / number;
+    public int calculateLottoCount() {
+        return payment / LottoPurchase.LOTTO_PRICE;
     }
 
 }
