@@ -2,7 +2,6 @@ package lotto.view;
 
 import java.util.stream.Collectors;
 import lotto.domain.BoughtLottos;
-import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
 
 public class BoughtLottosWriter {
