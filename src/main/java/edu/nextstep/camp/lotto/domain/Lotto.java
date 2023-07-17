@@ -7,15 +7,22 @@ public class Lotto {
 
     public static final int LOTTO_NUMBERS_LENGTH = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(LottoNumber... lottoNumbers) {
         this(Arrays.asList(lottoNumbers));
     }
 
-    public Lotto(Integer... lottoNumbers){
+    public Lotto(String... lottoNumbers) {
         this(Arrays.stream(lottoNumbers)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList())
+        );
+    }
+
+    public Lotto(Integer... lottoNumbers) {
+        this(Arrays.stream(lottoNumbers)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList())
         );
     }
@@ -23,23 +30,19 @@ public class Lotto {
     public Lotto(List<LottoNumber> lottoNumberList) {
         validationCheck(lottoNumberList);
 
-        this.lottoNumbers = new ArrayList<>(lottoNumberList);
-
-        this.lottoNumbers.sort(LottoNumber::compareTo);
+        this.lottoNumbers = new HashSet<>(lottoNumberList);
     }
 
     public int matchNumberCount(Lotto compareNumbers) {
-        int count = 0;
+        Set<LottoNumber> lottoNumberCopy = new HashSet<>(lottoNumbers);
 
-        for (LottoNumber compareNumber : compareNumbers.lottoNumbers) {
-            count += frequencyOfCompareNumber(compareNumber);
-        }
+        lottoNumberCopy.retainAll(compareNumbers.lottoNumbers);
 
-        return count;
+        return lottoNumberCopy.size();
     }
 
-    private int frequencyOfCompareNumber(LottoNumber compareNumber) {
-        return Collections.frequency(lottoNumbers, compareNumber);
+    public boolean isMatchBonus(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     private void validationCheck(List<LottoNumber> lottoNumbers) {
@@ -70,6 +73,12 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lottoNumbers.toString();
+        return lottoNumbers.stream()
+                .sorted()
+                .toString();
+    }
+
+    public boolean contains(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 }

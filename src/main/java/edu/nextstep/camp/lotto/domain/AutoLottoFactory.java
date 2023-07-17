@@ -24,7 +24,7 @@ public class AutoLottoFactory implements LottoFactory {
 
     private void lottoNumbersInit() {
         for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(LottoNumber.of(i));
         }
     }
 }

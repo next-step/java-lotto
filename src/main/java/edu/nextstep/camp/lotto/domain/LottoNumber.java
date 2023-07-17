@@ -1,17 +1,38 @@
 package edu.nextstep.camp.lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LottoNumber {
 
     public static final int LOTTO_MIN_NUMBER = 1;
     public static final int LOTTO_MAX_NUMBER = 45;
 
+    private static final Map<Integer, LottoNumber> lottoNumbers;
+
     private final Integer lottoNumber;
 
-    public LottoNumber(String lottoNumberStr){
-        this(Integer.parseInt(lottoNumberStr));
+    static {
+        lottoNumbers = new HashMap<>();
+
+        for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
     }
 
-    public LottoNumber(int lottoNumber) {
+    public static LottoNumber of(String lottoNumberStr){
+        return of(Integer.parseInt(lottoNumberStr));
+    }
+
+    public static LottoNumber of(int lottoNumber){
+        if (LOTTO_MIN_NUMBER > lottoNumber || lottoNumber > LOTTO_MAX_NUMBER){
+            throw new IllegalArgumentException("lotto numbers are between 1 and 45.");
+        }
+
+        return lottoNumbers.get(lottoNumber);
+    }
+
+    private LottoNumber(int lottoNumber) {
         if (LOTTO_MIN_NUMBER > lottoNumber || lottoNumber > LOTTO_MAX_NUMBER){
             throw new IllegalArgumentException("lotto numbers are between 1 and 45.");
         }

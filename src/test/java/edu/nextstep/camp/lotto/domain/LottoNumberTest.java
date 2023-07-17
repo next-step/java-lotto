@@ -11,7 +11,7 @@ public class LottoNumberTest {
     @ValueSource(ints = {0, -1, 67, 46})
     void 로또_번호_범위_체크(int lottoNumberInt) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumber(lottoNumberInt))
+                .isThrownBy(() -> LottoNumber.of(lottoNumberInt))
                 .withMessageContaining("lotto numbers are between 1 and 45.");
     }
 }

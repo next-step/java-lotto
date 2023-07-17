@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LottoGame {
     private final LottoFactory lottoFactory;
-    public static final int LOTTO_BUY_AMOUNT_UNIT = 1000;
+    public static final int LOTTO_BUY_AMOUNT_UNIT = 1_000;
 
     public LottoGame(LottoFactory lottoFactory) {
         this.lottoFactory = lottoFactory;
