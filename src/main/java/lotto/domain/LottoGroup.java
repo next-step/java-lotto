@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.vo.Money;
 import lotto.domain.vo.Quantity;
 
@@ -27,12 +28,14 @@ public class LottoGroup {
     }
 
     public static LottoGroup createRandomAndManualLottos(final Quantity randomQuantity,
-        final List<Lotto> manualLottos) {
-        List<Lotto> lottos = new ArrayList<>(manualLottos);
+        final List<List<Integer>> manualLottoNumbers) {
+        List<Lotto> manualLottos = manualLottoNumbers.stream()
+            .map(Lotto::createSpecificLotto)
+            .collect(Collectors.toList());
         for (int i = 0; i < randomQuantity.getValue(); i++) {
-            lottos.add(Lotto.createRandomLotto());
+            manualLottos.add(Lotto.createRandomLotto());
         }
-        return new LottoGroup(lottos);
+        return new LottoGroup(manualLottos);
     }
 
     public static Quantity getQuantity(final Money money) {

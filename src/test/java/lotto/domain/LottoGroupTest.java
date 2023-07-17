@@ -7,23 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.vo.Money;
 import lotto.domain.vo.Quantity;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoGroupTest {
-
-    private final List<Lotto> lottos = new ArrayList<>();
-
-    @BeforeEach
-    void setUp() {
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 6))); // 1등
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 7))); // 2등
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 5, 8))); // 3등
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 4, 8, 9))); // 4등
-        lottos.add(Lotto.createSpecificLotto(List.of(1, 2, 3, 8, 9, 10))); // 5등
-        lottos.add(Lotto.createSpecificLotto(List.of(21, 22, 23, 24, 25, 26))); // 등수없음
-    }
 
     @Test
     @DisplayName("구입 금액에 따라 로또 구매 수량 테스트.")
@@ -42,12 +29,18 @@ class LottoGroupTest {
     @Test
     @DisplayName("자동 로또의 구매 개수와 수동으로 구매할 로또 번호를 입력하면 적절한 로또를 생성한다. ")
     void createManualAndRandomLotto() {
+        // given
+        List<List<Integer>> lottoNumbers = new ArrayList<>();
+        lottoNumbers.add(List.of(1, 2, 3, 4, 5, 6));
+
         // when
-        LottoGroup lottoGroup = LottoGroup.createRandomAndManualLottos(new Quantity(8), lottos);
+        LottoGroup lottoGroup = LottoGroup.createRandomAndManualLottos(new Quantity(1),
+            lottoNumbers);
 
         // then
-        assertThat(lottoGroup.getLottos()).hasSize(14);
-        assertThat(lottoGroup.getLottos()).containsAll(lottos);
+        assertThat(lottoGroup.getLottos()).hasSize(2);
+        assertThat(isContain(lottoGroup, Lotto.createSpecificLotto(lottoNumbers.get(0))))
+            .isTrue();
     }
 
     @Test
@@ -55,5 +48,12 @@ class LottoGroupTest {
     void canBuyableTest() {
         assertThat(LottoGroup.canBuy(new Money(1000L), new Quantity(2))).isFalse();
         assertThat(LottoGroup.canBuy(new Money(1000L), new Quantity(1))).isTrue();
+    }
+
+    private boolean isContain(LottoGroup lottoGroup, Lotto compare) {
+        long matchCount = lottoGroup.getLottos().stream()
+            .filter(lotto -> lotto.countMatches(compare) == 6)
+            .count();
+        return matchCount == 1L;
     }
 }

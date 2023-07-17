@@ -49,12 +49,11 @@ public class LottoApplication {
         return quantity;
     }
 
-    private List<Lotto> inputManualLotto(Quantity quantity) {
+    private List<List<Integer>> inputManualLotto(Quantity quantity) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<Lotto> manualLottos = new ArrayList<>();
+        List<List<Integer>> manualLottos = new ArrayList<>();
         for (int i = 0; i < quantity.getValue(); i++) {
-            Lotto manualLotto = Lotto.createSpecificLotto(input.inputManualLottoNumbers());
-            manualLottos.add(manualLotto);
+            manualLottos.add(input.inputManualLottoNumbers());
         }
         System.out.println();
         return manualLottos;
