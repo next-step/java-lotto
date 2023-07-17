@@ -25,6 +25,8 @@ public final class LottoStatistics {
         lottos.getLottos().stream().map(lotto -> getLottoMatchKey(lotto, winningNumber))
             .forEach(this::putLotto);
         statistics.remove(LottoMatch.NONE_MATCH);
+        LottoResults lottoResults = new LottoResults(statistics);
+
     }
 
     private LottoMatchKey getLottoMatchKey(final Lotto lotto, final WinningNumber winningNumber) {

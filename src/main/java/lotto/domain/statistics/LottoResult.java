@@ -9,12 +9,12 @@ public final class LottoResult {
     private final int prize;
     private final int prizeCount;
 
-    public LottoResult(final LottoMatch lottoMatch, final LottoStatistics lottoStatistics) {
+    public LottoResult(final LottoMatch lottoMatch, final Map<LottoMatch, Integer> resultMap) {
         LottoMatchKey lottoMatchKey = lottoMatch.getLottoMatchKey();
         matchCount = lottoMatchKey.getMatchCount();
         message = getMessage(lottoMatchKey);
         prize = lottoMatch.getPrize();
-        prizeCount = calculatePrizeCount(lottoMatch, lottoStatistics);
+        prizeCount = calculatePrizeCount(lottoMatch, resultMap);
     }
 
     private String getMessage(final LottoMatchKey lottoMatchKey) {
@@ -25,8 +25,7 @@ public final class LottoResult {
         return bonusMessage;
     }
 
-    private int calculatePrizeCount(final LottoMatch lottoMatch, final LottoStatistics lottoStatistics) {
-        Map<LottoMatch, Integer> resultMap = lottoStatistics.getStatistics();
+    private int calculatePrizeCount(final LottoMatch lottoMatch, final Map<LottoMatch, Integer> resultMap) {
         int count = 0;
         if (resultMap.containsKey(lottoMatch)) {
             count = resultMap.get(lottoMatch);

@@ -1,9 +1,14 @@
 package lotto.domain.game;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lotto.domain.statistics.LottoMatch;
+import lotto.domain.statistics.LottoMatchKey;
+import lotto.domain.statistics.LottoResults;
 
 public final class Lottos {
 
@@ -41,6 +46,27 @@ public final class Lottos {
             lottosAuto.add(new Lotto(numberGenerator.shuffleNumbers(), true));
         }
         return lottosAuto;
+    }
+
+    // 통계 로직
+    public LottoResults calculateStatistics(final WinningNumber winningNumber) {
+        Map<LottoMatch, Integer> resultMap = new EnumMap<>(LottoMatch.class);
+        lottos.stream()
+            .map(lotto -> getLottoMatchKey(lotto, winningNumber))
+            .forEach((lottoMatchKey) -> putLotto(lottoMatchKey, resultMap));
+        resultMap.remove(LottoMatch.NONE_MATCH);
+        return new LottoResults(resultMap);
+    }
+
+    private LottoMatchKey getLottoMatchKey(final Lotto lotto, final WinningNumber winningNumber) {
+        return new LottoMatchKey(lotto.hasLottoNumber(winningNumber.getBonusBall()),
+            lotto.countMatch(winningNumber.getWinningLotto()));
+    }
+
+    private void putLotto(final LottoMatchKey lottoMatchKey,
+        final Map<LottoMatch, Integer> resultMap) {
+        resultMap.put(LottoMatch.find(lottoMatchKey),
+            resultMap.getOrDefault(LottoMatch.find(lottoMatchKey), 0) + 1);
     }
 
     public List<Lotto> getLottos() {
