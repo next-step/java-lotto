@@ -28,8 +28,8 @@ public class PaymentTest {
         Payment payment1 = new Payment(value1);
         Payment payment2 = new Payment(value2);
 
-        assertThat(payment1.getLottoCount()).isEqualTo(12);
-        assertThat(payment2.getLottoCount()).isEqualTo(1);
+        assertThat(payment1.calculateLottoCount()).isEqualTo(12);
+        assertThat(payment2.calculateLottoCount()).isEqualTo(1);
     }
 
 }

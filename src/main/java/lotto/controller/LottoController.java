@@ -1,12 +1,14 @@
 package lotto.controller;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
-import lotto.domain.LottoService;
+import lotto.domain.LottoGame;
 import lotto.view.LottoView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class LottoController {
+public final class LottoController {
 
     private final LottoView lottoView;
 
@@ -16,18 +18,32 @@ public class LottoController {
 
     public void run() {
         int payment = lottoView.readPayment();
+        int manualLottoCount = lottoView.readManualLottoCount();
 
-        LottoService lottoService = new LottoService(payment);
+        List<Lotto> manualLottos = readLottos(manualLottoCount);
+        LottoGame lottoGame = new LottoGame(payment, manualLottos);
 
-        lottoView.printLottoCount(lottoService.getCount());
-        lottoView.printLottos(lottoService.getLottos());
+        lottoView.printLottoCount(lottoGame.getManualCount(), lottoGame.getRandomCount());
+        lottoView.printLottos(lottoGame.getLottos());
 
         List<Integer> winningLotto = lottoView.readWinningLotto();
         int bonusBall = lottoView.readBonusBall();
 
-        LottoResult result = lottoService.getResult(winningLotto, bonusBall);
+        printResult(lottoGame, winningLotto, bonusBall);
+    }
+
+    private List<Lotto> readLottos(int manualLottoCount) {
+        List<Lotto> lottos = lottoView.readManualLottos(manualLottoCount).stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList());
+
+        return lottos;
+    }
+
+    private void printResult(LottoGame lottoGame, List<Integer> winningLotto, int bonusBall) {
+        LottoResult result = lottoGame.getResult(winningLotto, bonusBall);
 
         lottoView.printResults(result.getResult());
-        lottoView.printProfitRate(result.getProfit());
+        lottoView.printProfitRate(lottoGame.getProfitRate(result));
     }
 }
