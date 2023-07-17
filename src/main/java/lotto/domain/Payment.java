@@ -1,4 +1,4 @@
-package lotto.domain.sale;
+package lotto.domain;
 
 import java.text.MessageFormat;
 
@@ -11,8 +11,8 @@ public final class Payment {
     }
 
     private void validateRange(final int value) {
-        if (value < LottoPurchase.LOTTO_PRICE) {
-            throw new IllegalArgumentException(MessageFormat.format("{0}원 이상 투입해 주세요", LottoPurchase.LOTTO_PRICE));
+        if (value < LottoGame.LOTTO_PRICE) {
+            throw new IllegalArgumentException(MessageFormat.format("{0}원 이상 투입해 주세요", LottoGame.LOTTO_PRICE));
         }
     }
 
@@ -21,7 +21,7 @@ public final class Payment {
     }
 
     public int calculateLottoCount() {
-        return payment / LottoPurchase.LOTTO_PRICE;
+        return payment / LottoGame.LOTTO_PRICE;
     }
 
 }
