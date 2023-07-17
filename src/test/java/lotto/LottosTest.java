@@ -3,9 +3,11 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.game.Lotto;
 import lotto.domain.game.LottoCount;
+import lotto.domain.game.LottoManual;
 import lotto.domain.game.Lottos;
 import lotto.domain.game.NumberGenerator;
 import lotto.domain.game.Payment;
@@ -18,30 +20,30 @@ public class LottosTest {
     @Test
     void 로또_리스트_객체_생성() {
         int lottoManualCount = 2;
-        List<String> lottosManual = List.of(
-            "1,2,3,4,5,6",
-            "7,8,9,10,11,12"
-        );
+        List<LottoManual> lottoManuals = new ArrayList<>();
+        lottoManuals.add(new LottoManual("1,2,3,4,5,6"));
+        lottoManuals.add(new LottoManual("7,8,9,10,11,12"));
+
         Payment payment = new Payment(5000);
         LottoCount lottoCount = new LottoCount(payment, lottoManualCount);
         NumberGenerator numberGenerator = () -> List.of(1,2,3,4,5,6);
 
-        assertDoesNotThrow(() -> new Lottos(lottoCount, lottosManual, numberGenerator));
+        assertDoesNotThrow(() -> new Lottos(lottoCount, lottoManuals, numberGenerator));
     }
 
     @DisplayName("로또스에 로또 리스트를 저장한다")
     @Test
     void 로또_저장_성공() {
         int lottoManualCount = 2;
-        List<String> lottosManual = List.of(
-            "1,2,3,4,5,6",
-            "7,8,9,10,11,12"
-        );
+        List<LottoManual> lottoManuals = new ArrayList<>();
+        lottoManuals.add(new LottoManual("1,2,3,4,5,6"));
+        lottoManuals.add(new LottoManual("7,8,9,10,11,12"));
+
         Payment payment = new Payment(5000);
         LottoCount lottoCount = new LottoCount(payment, lottoManualCount);
         NumberGenerator numberGenerator = () -> List.of(40,41,42,43,44,45);
 
-        Lottos lottos = new Lottos(lottoCount, lottosManual, numberGenerator);
+        Lottos lottos = new Lottos(lottoCount, lottoManuals, numberGenerator);
 
         Lotto lotto1 = new Lotto(List.of(1,2,3,4,5,6), false);
         Lotto lotto2 = new Lotto(List.of(7,8,9,10,11,12), false);

@@ -1,18 +1,16 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.List;
 import lotto.domain.game.Lotto;
+import lotto.domain.game.LottoManual;
 import lotto.domain.game.LottoNumber;
 import lotto.domain.game.WinningNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoTest {
 
@@ -64,7 +62,7 @@ public class LottoTest {
     @Test
     void 로또_일치_카운트() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), false);
-        String winingValue = "5,1,10,45,2,29";
+        LottoManual winingValue = new LottoManual("5,1,10,45,2,29");
 
         WinningNumber winningNumber = new WinningNumber(winingValue, 30);
 
@@ -76,20 +74,12 @@ public class LottoTest {
     @Test
     void 로또_자동_생성() {
         Lotto lotto = new Lotto(List.of(12, 23, 45, 1, 7, 8, 9, 19), true);
-        String winingValue = "12,23,45,1,7,8";
+        LottoManual winingValue = new LottoManual("12,23,45,1,7,8");
 
         WinningNumber winningNumber = new WinningNumber(winingValue, 30);
 
         assertThat(lotto.countMatch(winningNumber.getWinningLotto()))
             .isEqualTo(6);
-    }
-
-    @DisplayName("숫자가 아니면 에러가 발생한다")
-    @ValueSource(strings = {"a", "가나다"})
-    @ParameterizedTest()
-    void 로또_번호_검증_실패_문자(String value) {
-        assertThatExceptionOfType(NumberFormatException.class)
-            .isThrownBy(() -> new Lotto(value, false));
     }
 
     @DisplayName("로또 안에 입력한 로또 번호가 있다")

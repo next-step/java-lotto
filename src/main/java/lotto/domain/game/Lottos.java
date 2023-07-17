@@ -15,7 +15,7 @@ public final class Lottos {
 
     public Lottos(
         final LottoCount lottoCount,
-        final List<String> lottosManual,
+        final List<LottoManual> lottosManual,
         final NumberGenerator numberGenerator
     ) {
         this.lottos = generateLottos(lottoCount, lottosManual, numberGenerator);
@@ -23,7 +23,7 @@ public final class Lottos {
 
     private List<Lotto> generateLottos(
         final LottoCount lottoCount,
-        final List<String> lottosManual,
+        final List<LottoManual> lottosManual,
         final NumberGenerator numberGenerator
     ) {
         return Stream.concat(
@@ -32,8 +32,9 @@ public final class Lottos {
             .collect(Collectors.toList());
     }
 
-    private List<Lotto> generateLottosManual(final List<String> lottosManual) {
+    private List<Lotto> generateLottosManual(final List<LottoManual> lottosManual) {
         return lottosManual.stream()
+            .map(LottoManual::getLottoManual)
             .map(lottoManual -> new Lotto(lottoManual, false))
             .collect(Collectors.toList());
     }

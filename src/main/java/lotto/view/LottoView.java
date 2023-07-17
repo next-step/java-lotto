@@ -9,6 +9,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.game.Lotto;
 import lotto.domain.game.LottoCount;
+import lotto.domain.game.LottoManual;
 import lotto.domain.game.LottoNumber;
 import lotto.domain.game.Lottos;
 import lotto.domain.statistics.LottoResult;
@@ -44,20 +45,20 @@ public final class LottoView {
         return count;
     }
 
-    public List<String> readLottoManualNumbers(final LottoCount lottoCount) {
+    public List<LottoManual> readLottoManualNumbers(final LottoCount lottoCount) {
         System.out.println();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<String> lottoManuals = new ArrayList<>();
+        List<LottoManual> lottoManuals = new ArrayList<>();
         for (int i = 0; i < lottoCount.getManualCount(); i++) {
-            lottoManuals.add(validateBlank(scanner.nextLine()));
+            lottoManuals.add(new LottoManual(validateBlank(scanner.nextLine())));
         }
         return lottoManuals;
     }
 
-    public String readWinningLotto() {
+    public LottoManual readWinningLotto() {
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return validateBlank(scanner.nextLine().trim());
+        return new LottoManual(validateBlank(scanner.nextLine().trim()));
     }
 
     public int readBonusBall() {

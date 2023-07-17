@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.game.LottoCount;
+import lotto.domain.game.LottoManual;
 import lotto.domain.game.Lottos;
 import lotto.domain.game.NumberGeneratorImpl;
 import lotto.domain.game.Payment;
@@ -21,13 +22,13 @@ public final class LottoController {
 
         Payment payment = new Payment(money);
         LottoCount lottoCount = new LottoCount(payment, countLottoManual);
-        List<String> lottoManuals = lottoView.readLottoManualNumbers(lottoCount);
+        List<LottoManual> lottoManuals = lottoView.readLottoManualNumbers(lottoCount);
 
         Lottos lottos = new Lottos(lottoCount, lottoManuals, new NumberGeneratorImpl());
         lottoView.printLottoCount(lottoCount);
         lottoView.printLottos(lottos);
 
-        String winningLotto = lottoView.readWinningLotto();
+        LottoManual winningLotto = lottoView.readWinningLotto();
         int bonusBall = lottoView.readBonusBall();
         WinningNumber winningNumber = new WinningNumber(winningLotto, bonusBall);
 
