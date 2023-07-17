@@ -45,7 +45,9 @@ public class ConsoleLottoViewer implements LottoViewer {
     }
 
     private void printLottoPrize(Map.Entry<LottoRank, Long> lottoPrizeCount) {
-        System.out.printf("%d개 일치 (%d원)- %d개%n", lottoPrizeCount.getKey().getMatchedCount(),
+
+        String bonusMatedString = lottoPrizeCount.getKey().isBonusMatched() ? ", 보너스 볼 일치" : "";
+        System.out.printf("%d개 일치%s (%d원)- %d개%n", lottoPrizeCount.getKey().getMatchedCount(), bonusMatedString,
                 lottoPrizeCount.getKey().getMoney(), lottoPrizeCount.getValue());
     }
 

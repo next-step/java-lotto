@@ -4,37 +4,37 @@ import java.util.Arrays;
 
 public enum LottoRank {
 
-    FIRST(6, MagicNumberSupporter.BONUS_NOT_RELATED, 2_000_000_000) {
+    FIRST(6, MagicNumberSupporter.BONUS_NOT_MATCHED, 2_000_000_000) {
         @Override
         boolean match(int matchedCount, boolean isBonusMatched) {
             return matchedCount == 6;
         }
     },
-    SECOND(5, MagicNumberSupporter.BONUS_RELATED, 30_000_000) {
+    SECOND(5, MagicNumberSupporter.BONUS_MATCHED, 30_000_000) {
         @Override
         boolean match(int matchedCount, boolean isBonusMatched) {
             return matchedCount == 5 && isBonusMatched;
         }
     },
-    THIRD(5, MagicNumberSupporter.BONUS_NOT_RELATED, 1_500_000) {
+    THIRD(5, MagicNumberSupporter.BONUS_NOT_MATCHED, 1_500_000) {
         @Override
         boolean match(int matchedCount, boolean isBonusMatched) {
             return matchedCount == 5 && !isBonusMatched;
         }
     },
-    FORTH(4, MagicNumberSupporter.BONUS_NOT_RELATED, 50_000) {
+    FORTH(4, MagicNumberSupporter.BONUS_NOT_MATCHED, 50_000) {
         @Override
         boolean match(int matchedCount, boolean isBonusMatched) {
             return matchedCount == 4;
         }
     },
-    FIFTH(3, MagicNumberSupporter.BONUS_NOT_RELATED, 5_000) {
+    FIFTH(3, MagicNumberSupporter.BONUS_NOT_MATCHED, 5_000) {
         @Override
         boolean match(int matchedCount, boolean isBonusMatched) {
             return matchedCount == 3;
         }
     },
-    NONE(0, MagicNumberSupporter.BONUS_NOT_RELATED, 0) {
+    NONE(0, MagicNumberSupporter.BONUS_NOT_MATCHED, 0) {
         @Override
         boolean match(int matchedCount, boolean isBonusMatched) {
             return matchedCount < 3;
@@ -43,12 +43,12 @@ public enum LottoRank {
     ;
 
     private final int matchedCount;
-    private final boolean isBonusMatched;
+    private final boolean BonusMatched;
     private final int money;
 
-    LottoRank(int matchedCount, boolean isBonusMatched, int money) {
+    LottoRank(int matchedCount, boolean BonusMatched, int money) {
         this.matchedCount = matchedCount;
-        this.isBonusMatched = isBonusMatched;
+        this.BonusMatched = BonusMatched;
         this.money = money;
     }
 
@@ -69,9 +69,13 @@ public enum LottoRank {
         return matchedCount;
     }
 
+    public boolean isBonusMatched() {
+        return BonusMatched;
+    }
+
     private static final class MagicNumberSupporter {
 
-        private static final boolean BONUS_NOT_RELATED = false;
-        private static final boolean BONUS_RELATED = true;
+        private static final boolean BONUS_NOT_MATCHED = false;
+        private static final boolean BONUS_MATCHED = true;
     }
 }
