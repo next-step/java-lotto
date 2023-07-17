@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.vo.Money;
 import lotto.domain.vo.Quantity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,17 +12,10 @@ import org.junit.jupiter.api.Test;
 class LottoGroupTest {
 
     @Test
-    @DisplayName("구입 금액에 따라 로또 구매 수량 테스트.")
-    void createLottoGroupTest() {
-        LottoGroup lottoGroup = LottoGroup.createRandomLottos(new Money(14000L));
-        assertThat(lottoGroup.getLottos()).hasSize(14);
-    }
-
-    @Test
     @DisplayName("로또 구매 수량이 0인 경우 예외 던진다.")
     void zeroQuantityThrowsExceptionTest() {
         assertThrows(IllegalArgumentException.class,
-            () -> LottoGroup.createRandomLottos(new Money(0L)));
+            () -> LottoGroup.createRandomAndManualLottos(new Quantity(0L), new ArrayList<>()));
     }
 
     @Test
