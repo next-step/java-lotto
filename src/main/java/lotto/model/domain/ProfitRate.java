@@ -7,7 +7,14 @@ public final class ProfitRate implements Comparable<ProfitRate> {
     private final double value;
 
     private ProfitRate(final double value) {
+        validate(value);
         this.value = value;
+    }
+
+    private void validate(final double value) {
+        if (value < 0.0) {
+            throw new IllegalArgumentException("수익률은 음수가 될 수 없습니다. 현재 수익률: " + value);
+        }
     }
 
     public static ProfitRate valueOf(final double value) {

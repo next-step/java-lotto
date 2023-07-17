@@ -36,7 +36,7 @@ public final class LottoOutputView {
             printRankResult(lottoResult, rank);
         }
 
-        final double profitRate = lottoResult.getProfitRate();
+        final double profitRate = lottoResult.getProfitRate().getValue();
         System.out.printf("총 수익률은 %.2f 입니다. ", profitRate);
         System.out.println(profitRateResult(profitRate));
     }
