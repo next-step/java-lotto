@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.model.domain.*;
+import lotto.model.service.LottoGame;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
@@ -17,26 +18,22 @@ public final class LottoController {
     }
 
     public void run() {
+        final LottoGame lottoGame = new LottoGame();
+
         final LottoMoney purchase = LottoMoney.valueOf(lottoInputView.inputPurchase());
         final long manualLottosSize = lottoInputView.inputManualLottosSize();
         final LottosSize lottosSize = LottosSize.of(purchase, manualLottosSize);
-        final Lottos lottos = Lottos.create(
-                lottoInputView.inputManualLottosNumbers(manualLottosSize),
-                lottosSize.getAutomaticSize()
+        final List<List<Integer>> manualLottos = lottoInputView.inputManualLottosNumbers(manualLottosSize);
+
+        lottoGame.buyLottos(manualLottos, lottosSize);
+        printLottosInformation(purchase, lottosSize, lottoGame.getLottos());
+
+        lottoGame.winningLotto(lottoInputView.inputWinningNumbers(),
+                lottoInputView.inputBonusBall()
         );
 
-        printLottosInformation(purchase, lottosSize, lottos);
-
-        final LottoResult lottoResult = LottoResult.of(Ranks.of(resultRanksWithWinningLotto(lottos)), purchase);
+        final LottoResult lottoResult = lottoGame.result(purchase);
         lottoOutputView.printLottoResult(lottoResult);
-    }
-
-    private List<Rank> resultRanksWithWinningLotto(final Lottos lottos) {
-        final Lotto winningNumbers = Lotto.create(lottoInputView.inputWinningNumbers());
-        final LottoNumber bonusBall = LottoNumber.of(lottoInputView.inputBonusBall());
-        final WinningLotto winningLotto = WinningLotto.of(winningNumbers, bonusBall);
-
-        return lottos.matchWinningNumbers(winningLotto);
     }
 
     private void printLottosInformation(final LottoMoney purchase, final LottosSize lottosSize, final Lottos lottos) {
