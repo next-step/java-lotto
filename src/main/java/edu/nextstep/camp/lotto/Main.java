@@ -12,7 +12,7 @@ public class Main {
         LottoController controller = new LottoController(new AutoLottoFactory(), new LottoView(new ConsoleLottoInputView(), new ConsoleLottoOutputView()));
 
         try {
-            Lottos lottos = controller.buyLottos();
+            Lottos lottos = controller.buyLottos(controller.numberOfLottoPurchases());
             controller.analysisLotto(lottos);
         } catch (Exception e) {
             System.out.println(e.getMessage());

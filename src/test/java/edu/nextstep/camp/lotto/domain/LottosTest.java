@@ -6,6 +6,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static edu.nextstep.camp.lotto.domain.LottoRank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -16,11 +19,15 @@ public class LottosTest {
 
     @BeforeEach
     void init(){
-        TestUtils.systemSetIn("1,2,3,4,5,6\n2,3,4,5,6,7");
+        TestUtils.systemSetIn("2,3,4,5,6,7");
         LottoFactory lottoFactory = new CustomLottoFactory();
         LottoGame lottoGame = new LottoGame(lottoFactory);
 
-        lottos = lottoGame.buyLotto(2000);
+        List<Lotto> lottoList = new ArrayList<>();
+
+        lottoList.add(new Lotto(1,2,3,4,5,6));
+
+        lottos = lottoGame.buyLotto(1, lottoList);
     }
 
     @Test

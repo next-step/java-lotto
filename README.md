@@ -73,7 +73,7 @@
    - Lotto를 활용해 로또 번호 유효성 확인.
    - List<Lotto> 로 리턴
 
-3. LottoGame에서 로또 구매시 수동 로또 List<Lotto> 인자 추가
+3. LottoGame에서 로또 구매시 수동 로또 List<Lotto> 인자 추가 [x]
    - 수동 로또 null 체크 필요
    - 수동 + 자동 로또가 더해진 로또 발급
 

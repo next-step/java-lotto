@@ -21,6 +21,10 @@ public class Lottos {
         return new LottoAnalysisResult(lottoRankList);
     }
 
+    public int lottoCount(){
+        return lottos.size();
+    }
+
     /**
      * @Deprecated 보너스 번호 추가로 미사용
      */
