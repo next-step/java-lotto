@@ -5,7 +5,7 @@ import edu.nextstep.camp.lotto.domain.Lottos;
 
 public interface LottoOutputView {
 
-    void buyLottoView(int lottoCount, Lottos lottos);
+    void buyLottoView(int manualCount, Lottos lottos);
 
     void lottoAnalysisView(LottoAnalysisResult analysisResult);
 }

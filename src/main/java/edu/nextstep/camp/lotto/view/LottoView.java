@@ -1,8 +1,11 @@
 package edu.nextstep.camp.lotto.view;
 
 import edu.nextstep.camp.lotto.domain.LastWinLotto;
+import edu.nextstep.camp.lotto.domain.Lotto;
 import edu.nextstep.camp.lotto.domain.LottoAnalysisResult;
 import edu.nextstep.camp.lotto.domain.Lottos;
+
+import java.util.List;
 
 public class LottoView {
 
@@ -29,6 +32,14 @@ public class LottoView {
 
     public LastWinLotto lastWinLottoInput(){
         return lottoInputView.lastWinLottoInput();
+    }
+
+    public int manualLottoCountInput(){
+        return lottoInputView.manualLottoCountInput();
+    }
+
+    public List<Lotto> manualLottoInput(int manualLottoCount){
+        return lottoInputView.manualLottoInput(manualLottoCount);
     }
 
 

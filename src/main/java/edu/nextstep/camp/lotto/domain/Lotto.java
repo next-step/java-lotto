@@ -15,6 +15,7 @@ public class Lotto {
 
     public Lotto(String... lottoNumbers) {
         this(Arrays.stream(lottoNumbers)
+                .map(String::trim)
                 .map(LottoNumber::of)
                 .collect(Collectors.toList())
         );
@@ -74,7 +75,8 @@ public class Lotto {
     @Override
     public String toString() {
         return lottoNumbers.stream()
-                .sorted()
+                .sorted((number, otherNumber) -> number.compareTo(otherNumber))
+                .collect(Collectors.toList())
                 .toString();
     }
 
