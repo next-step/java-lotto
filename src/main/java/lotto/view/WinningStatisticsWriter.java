@@ -16,10 +16,10 @@ public class WinningStatisticsWriter {
         Collections.reverse(lottoRanks);
 
         for (LottoRank lottoRank : lottoRanks) {
-            printEachStatistics(winningStatistics, lottoRank);
+            printEachStatistics(lottoRank, winningStatistics.getWinningCount(lottoRank));
         }
 
-        final double earningRate = Math.floor(winningStatistics.getEarningRate() / 100) * 100;
+        final double earningRate = Math.floor(winningStatistics.getEarningRate() * 100) / 100;
         System.out.printf("총 수익률은 %.2f 입니다.", earningRate);
         if (earningRate >= 1) {
             System.out.println("(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
@@ -29,38 +29,26 @@ public class WinningStatisticsWriter {
     }
 
     private void printEachStatistics(
-            final WinningStatistics winningStatistics,
-            final LottoRank lottoRank
+            final LottoRank lottoRank,
+            final int winningCount
     ) {
         if (lottoRank.equals(LottoRank.NONE)) {
             return;
         }
-        if (lottoRank.equals(LottoRank.SECOND)) {
-            System.out.println(formatToStatisticsForSecondRank(
-                    lottoRank.getMatchCount(),
-                    lottoRank.getPrize(),
-                    winningStatistics.getWinningCount(lottoRank)));
-            return;
-        }
-        System.out.println(formatToStatistics(
-                lottoRank.getMatchCount(),
-                lottoRank.getPrize(),
-                winningStatistics.getWinningCount(lottoRank)));
-    }
-
-    private String formatToStatisticsForSecondRank(
-            final int matchCount,
-            final int prize,
-            final int boughtCount
-    ) {
-        return matchCount + "개 일치 , 보너스 볼 일치(" + prize + "원)- " + boughtCount + "개";
+        System.out.println(formatToStatistics(lottoRank, winningCount));
     }
 
     private String formatToStatistics(
-            final int matchCount,
-            final int prize,
-            final int boughtCount
+            final LottoRank lottoRank,
+            final int winningCount
     ) {
-        return matchCount + "개 일치 (" + prize + "원)- " + boughtCount + "개";
+        StringBuilder result = new StringBuilder();
+        result.append(lottoRank.getMatchCount()).append("개 일치");
+        if (lottoRank.equals(LottoRank.SECOND)) {
+            result.append(", 보너스 볼 일치");
+        }
+        result.append("(").append(lottoRank.getPrize()).append("원)- ");
+        result.append(winningCount).append("개");
+        return result.toString();
     }
 }

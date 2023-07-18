@@ -1,11 +1,11 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -23,8 +23,8 @@ public class Lotto {
     }
 
     private void validate(final List<Ball> balls) {
-        validateDuplicate(balls);
         validateLottoSize(balls);
+        validateDuplicate(balls);
     }
 
     private void validateDuplicate(final List<Ball> balls) {
@@ -45,12 +45,18 @@ public class Lotto {
         return lottoBalls.size();
     }
 
-    public List<Ball> getBalls() {
-        return Collections.unmodifiableList(this.balls);
+    public List<Integer> getBallValues() {
+        return this.balls.stream()
+                .map(Ball::getValue)
+                .collect(Collectors.toUnmodifiableList());
     }
 
     public boolean isContains(final Ball ball) {
         return this.balls.contains(ball);
+    }
+
+    public static Money calculatePurchaseMoney(LottoBuyCount lottoBuyCount) {
+        return new Money(PRICE * lottoBuyCount.getValue());
     }
 
     @Override

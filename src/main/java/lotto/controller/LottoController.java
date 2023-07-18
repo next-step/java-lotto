@@ -1,9 +1,11 @@
 package lotto.controller;
 
 import lotto.domain.BoughtLottos;
+import lotto.domain.LottoBuyCount;
 import lotto.domain.LottoGenerator;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
+import lotto.domain.WinningStatistics;
 import lotto.view.BoughtLottosWriter;
 import lotto.view.LottoReader;
 import lotto.view.MoneyReader;
@@ -37,17 +39,24 @@ public class LottoController {
     }
 
     private void run() {
-        Money money = moneyReader.readMoney();
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        BoughtLottos boughtLottos = lottoGenerator.generate(money);
-        boughtLottosWriter.printBoughtLottos(boughtLottos);
+        final Money money = moneyReader.readMoney();
+        final LottoBuyCount lottoBuyCount = lottoReader.readManualLottoBuyCount(money);
 
-        WinningLotto winningLotto = new WinningLotto(
-                lottoReader.readWinningLotto(),
-                lottoReader.readBonusBall()
-        );
-        winningStatisticsWriter.printLottoStatistics(
-                boughtLottos.winningResults(winningLotto)
-        );
+        final BoughtLottos manualBoughtLottos = lottoReader.readManualLottos(lottoBuyCount);
+        final BoughtLottos autoBoughtLottos = new LottoGenerator()
+                .generate(money.minus(manualBoughtLottos.getBoughtLottosMoney()));
+        boughtLottosWriter.printBoughtLottos(manualBoughtLottos, autoBoughtLottos);
+
+        createLottoWinningStatistics(manualBoughtLottos, autoBoughtLottos);
+    }
+
+    private void createLottoWinningStatistics(
+            final BoughtLottos manualBoughtLottos,
+            final BoughtLottos autoBoughtLottos
+    ) {
+        final WinningLotto winningLotto = lottoReader.readWinningLotto();
+        final WinningStatistics totalLottoWinningStatistics = manualBoughtLottos.winningResults(winningLotto)
+                .sum(autoBoughtLottos.winningResults(winningLotto));
+        winningStatisticsWriter.printLottoStatistics(totalLottoWinningStatistics);
     }
 }

@@ -10,16 +10,31 @@ public class RankWithWinningCount {
 
     private final Map<LottoRank, Integer> rankWithCount;
 
+    private RankWithWinningCount(final Map<LottoRank, Integer> rankWithCount) {
+        this.rankWithCount = rankWithCount;
+    }
+
     public RankWithWinningCount(final List<LottoRank> lottoResultRanks) {
         this.rankWithCount = new HashMap<>();
 
         for (final LottoRank lottoRank : lottoResultRanks) {
-            this.rankWithCount.put(lottoRank,
-                    this.rankWithCount.getOrDefault(lottoRank, DEFAULT_COUNT) + 1);
+            this.rankWithCount.putIfAbsent(lottoRank, 0);
+            this.rankWithCount.computeIfPresent(lottoRank, (rank, count) -> count + 1);
         }
     }
 
     public int getWinningCount(final LottoRank lottoRank) {
         return this.rankWithCount.getOrDefault(lottoRank, DEFAULT_COUNT);
+    }
+
+    public RankWithWinningCount sum(RankWithWinningCount other) {
+        final Map<LottoRank, Integer> sumResult = new HashMap<>();
+        for (final LottoRank lottoRank : LottoRank.values()) {
+            sumResult.putIfAbsent(lottoRank, 0);
+            sumResult.computeIfPresent(lottoRank,
+                    (rank, count) -> count + this.getWinningCount(rank) + other.getWinningCount(rank)
+            );
+        }
+        return new RankWithWinningCount(sumResult);
     }
 }
