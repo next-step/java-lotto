@@ -16,12 +16,14 @@ public class LottoController {
         this.lottoView = lottoView;
     }
 
-    public Lottos buyLottos() {
-        int amount = lottoView.amountInput();
+    public int numberOfLottoPurchases(){
+        return lottoGame.numberOfLottoPurchases(lottoView.amountInput());
+    }
 
-        Lottos lottos = lottoGame.buyLotto(amount);
+    public Lottos buyLottos(int count) {
+        Lottos lottos = lottoGame.buyLotto(count);
 
-        lottoView.buyLottoOutputView(amount, lottos);
+        lottoView.buyLottoOutputView(count, lottos);
 
         return lottos;
     }
