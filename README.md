@@ -64,7 +64,7 @@
 
 ---
 ## 기능 정의 추가 사항 (로또 수동)
-1. Controller, LottoGame에서 로또 구매 가능 갯수 로직 분리
+1. Controller, LottoGame에서 로또 구매 가능 갯수 로직 분리 [x]
    - 기존 amount validation을 이 로직으로 이동
    - 1000원 이하 에러처리, 구매 가능 갯수 리턴
 

@@ -11,9 +11,13 @@ public class LottoGame {
         this.lottoFactory = lottoFactory;
     }
 
-    public Lottos buyLotto(int amount) {
+    public int numberOfLottoPurchases(int amount) {
         validationMoney(amount);
 
+        return amount/LOTTO_BUY_AMOUNT_UNIT;
+    }
+
+    public Lottos buyLotto(int amount) {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < amount/LOTTO_BUY_AMOUNT_UNIT; i++) {
@@ -24,8 +28,10 @@ public class LottoGame {
     }
 
     private void validationMoney(int amount) {
-        if (amount < LOTTO_BUY_AMOUNT_UNIT || amount % LOTTO_BUY_AMOUNT_UNIT > 0){
-            throw new IllegalArgumentException("구매 금액은 1,000 단위로 입력 하세요.");
+        if (amount < LOTTO_BUY_AMOUNT_UNIT){
+            throw new IllegalArgumentException("로또 개당 가격은 1,000원 입니다.");
         }
     }
+
+
 }
