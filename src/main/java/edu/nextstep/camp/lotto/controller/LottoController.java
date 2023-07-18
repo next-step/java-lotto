@@ -16,14 +16,18 @@ public class LottoController {
         this.lottoView = lottoView;
     }
 
-    public int numberOfLottoPurchases(){
+    public int numberOfLottoPurchases() {
         return lottoGame.numberOfLottoPurchases(lottoView.amountInput());
     }
 
-    public Lottos buyLottos(int count) {
-        Lottos lottos = lottoGame.buyLotto(count);
+    public Lottos buyLottos(int lottoCount) {
+        int manualCount = lottoView.manualLottoCountInput();
 
-        lottoView.buyLottoOutputView(count, lottos);
+        validationManualCount(lottoCount, manualCount);
+
+        Lottos lottos = lottoGame.buyLotto(lottoCount - manualCount, lottoView.manualLottoInput(manualCount));
+
+        lottoView.buyLottoOutputView(manualCount, lottos);
 
         return lottos;
     }
@@ -36,5 +40,11 @@ public class LottoController {
         LastWinLotto lastWinLotto = lottoView.lastWinLottoInput();
 
         lottoView.lottoAnalysisOutputView(lottos.analysis(lastWinLotto));
+    }
+
+    private void validationManualCount(int lottoCount, int manualCount) {
+        if (manualCount < 0 || manualCount > lottoCount) {
+            throw new IllegalArgumentException("수동 로또는 0~" + lottoCount + "개 구입 가능 합니다.");
+        }
     }
 }
