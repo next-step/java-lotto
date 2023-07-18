@@ -15,16 +15,16 @@ class LottoCountTest {
     @DisplayName("로또 개수를 정상적으로 생성한다.")
     void create() {
         /* given */
-        final long value = 5L;
+        final int value = 5;
 
         /* when & then */
         assertDoesNotThrow(() -> new LottoCount(value));
     }
 
     @ParameterizedTest
-    @ValueSource(longs = {-7L, 0L})
+    @ValueSource(ints = {-7, 0})
     @DisplayName("로또 개수가 0보다 작을 경우 IllegalException을 던진다.")
-    void createFailWithLessThanZero(final long value) {
+    void createFailWithLessThanZero(final int value) {
         /* given */
 
         /* when */
@@ -35,7 +35,7 @@ class LottoCountTest {
     @DisplayName("로또 개수로 총 로또 금액을 구할 수 있다.")
     void toTotalLottoPrice() {
         /* given */
-        final LottoCount lottoCount = new LottoCount(3L);
+        final LottoCount lottoCount = new LottoCount(3);
 
         /* when */
         LottoMoney totalPrice = lottoCount.toTotalLottoPrice();

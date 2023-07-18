@@ -7,9 +7,9 @@ import static lotto.domain.Lotto.LOTTO_PRICE;
 
 public class LottoCount {
 
-    private final long value;
+    private final int value;
 
-    public LottoCount(final long value) {
+    public LottoCount(final int value) {
         validateValueRange(value);
         this.value = value;
     }
@@ -21,7 +21,7 @@ public class LottoCount {
     }
 
     public LottoMoney toTotalLottoPrice() {
-        return new LottoMoney(value * LOTTO_PRICE);
+        return new LottoMoney((long) value * LOTTO_PRICE);
     }
 
     public long getValue() {
