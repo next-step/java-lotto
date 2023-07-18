@@ -1,10 +1,14 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.Lotto;
 import lotto.domain.LottoGroup;
 import lotto.domain.LottoResult;
-import lotto.domain.Money;
 import lotto.domain.WinningLotto;
+import lotto.domain.vo.LottoNumber;
+import lotto.domain.vo.Money;
+import lotto.domain.vo.Quantity;
 import lotto.input.LottoInput;
 import lotto.output.LottoOutput;
 
@@ -20,30 +24,37 @@ public class LottoApplication {
 
     public void run() {
         Money purchaseMoney = inputPurchaseMoney();
-        output.printQuantity(purchaseMoney.calculateQuantity(new Money(LottoGroup.LOTTO_PRICE)));
-        LottoGroup lottoGroup = LottoGroup.from(purchaseMoney);
+        Quantity manualLottoQuantity = inputManualLottoCount();
+        LottoGroup lottoGroup = LottoGroup.createRandomAndManualLottos(purchaseMoney,
+            inputManualLotto(manualLottoQuantity));
 
+        output.printQuantity(manualLottoQuantity, lottoGroup.getRandomLottoQuantity());
         output.printLottos(lottoGroup);
-        System.out.println();
-
-        WinningLotto winningLotto = inputWinningLotto();
-        printResult(LottoResult.of(lottoGroup, winningLotto));
+        printResult(LottoResult.of(lottoGroup, inputWinningLotto()));
     }
 
     private Money inputPurchaseMoney() {
-        output.printAskPurchaseMoney();
         return new Money(input.inputPurchaseMoney());
     }
 
-    private WinningLotto inputWinningLotto() {
-        output.printAskWinningNumbers();
-        List<Integer> winningNumbers = input.inputWinningNumbers();
-        output.printAskBonus();
-        int bonus = input.inputBonusNumber();
+    private Quantity inputManualLottoCount() {
+        return new Quantity(input.inputManualLottoQuantity());
+    }
 
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
+    private List<List<Integer>> inputManualLotto(Quantity quantity) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<List<Integer>> manualLottos = new ArrayList<>();
+        for (int i = 0; i < quantity.getValue(); i++) {
+            manualLottos.add(input.inputManualLottoNumbers());
+        }
         System.out.println();
-        return winningLotto;
+        return manualLottos;
+    }
+
+    private WinningLotto inputWinningLotto() {
+        Lotto winningLottos = Lotto.createSpecificLotto(input.inputWinningNumbers());
+        int bonus = input.inputBonusNumber();
+        return new WinningLotto(winningLottos, LottoNumber.of(bonus));
     }
 
     private void printResult(final LottoResult lottoResult) {

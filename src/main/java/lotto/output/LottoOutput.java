@@ -4,36 +4,29 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGroup;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
+import lotto.domain.vo.LottoNumber;
+import lotto.domain.vo.Profit;
+import lotto.domain.vo.Quantity;
 
 public class LottoOutput {
 
     public static final String LOTTO_JOIN_DELIMITER = ", ";
 
-    public void printAskPurchaseMoney() {
-        System.out.println("구입금액을 입력해 주세요.");
-    }
-
-    public void printQuantity(final int amount) {
-        System.out.println(amount + "개를 구매했습니다.");
-    }
-
-    public void printAskWinningNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-    }
-
-    public void printAskBonus() {
-        System.out.println("보너스 볼을 입력해 주세요.");
+    public void printQuantity(final Quantity manualAmount, final Quantity randomAmount) {
+        System.out.println("수동으로 " + manualAmount.getValue() + "장, " +
+            "자동으로 " + randomAmount.getValue() + "개를 구매했습니다.");
     }
 
     public void printLottos(final LottoGroup lottoGroup) {
         lottoGroup.getLottos()
             .forEach(this::printLotto);
+        System.out.println();
     }
 
     public void printStatistics(final LottoResult statistics) {
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
         Arrays.stream(LottoRank.values())
@@ -53,8 +46,8 @@ public class LottoOutput {
         return builder.toString();
     }
 
-    public void printProfit(final Double profit) {
-        System.out.println("총 수익률은 " + String.format("%.2f", profit) + "입니다.");
+    public void printProfit(final Profit profit) {
+        System.out.println("총 수익률은 " + String.format("%.2f", profit.getValue()) + "입니다.");
     }
 
     private void printLotto(final Lotto lotto) {

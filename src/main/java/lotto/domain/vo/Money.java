@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.vo;
 
 import java.util.Objects;
 
@@ -17,12 +17,23 @@ public class Money {
         }
     }
 
-    public int calculateQuantity(final Money price) {
-        return (int) (value / price.value);
+    public Double divide(Money divisor) {
+        if (divisor.value.equals(0L)) {
+            throw new IllegalArgumentException("divisor should be positive number");
+        }
+        return (double) this.value / divisor.value;
     }
 
-    public double calculateProfit(final Money previous) {
-        return (double) value / previous.value;
+    public Money multiply(Money multiplier) {
+        return new Money(this.value * multiplier.value);
+    }
+
+    public Money multiply(Long multiplier) {
+        return this.multiply(new Money(multiplier));
+    }
+
+    public boolean isUnderThan(Money other) {
+        return this.value < other.value;
     }
 
     @Override
