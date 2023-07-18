@@ -1,12 +1,13 @@
-package lotto.model.domain;
+package lotto.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class Lotto {
 
-    public static final int LOTTO_NUMBERS_SIZE = 6;
+    private static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -31,24 +32,18 @@ public final class Lotto {
         }
     }
 
-    public Rank checkRank(final WinningNumbers winningNumbers) {
-        final int matchCount = checkMatchCount(winningNumbers);
-        final boolean hasBonusBall = checkBonusBall(winningNumbers);
-        return Rank.valueOf(matchCount, hasBonusBall);
+    public int checkMatchCount(final Lotto winningNumbers) {
+        return Math.toIntExact(lottoNumbers.stream()
+                .filter(winningNumbers::hasNumber)
+                .count());
     }
 
-    private int checkMatchCount(final WinningNumbers winningNumbers) {
-        return (int) lottoNumbers.stream()
-                .filter(winningNumbers::hasWinningNumber)
-                .count();
-    }
-
-    private boolean checkBonusBall(final WinningNumbers winningNumbers) {
-        return lottoNumbers.contains(winningNumbers.getBonusBall());
+    public boolean hasNumber(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
     public List<LottoNumber> getNumbers() {
-        return lottoNumbers;
+        return new ArrayList<>(this.lottoNumbers);
     }
 
     @Override

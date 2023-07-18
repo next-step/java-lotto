@@ -1,64 +1,48 @@
-package lotto.model.domain;
+package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class LottoTest {
+class WinningNumbersTest {
 
     @Test
-    void 로또_객체_생성() {
+    void 당첨번호_객체_생성_성공() {
         // given, when, then
-        assertDoesNotThrow(() -> new Lotto(List.of(1, 2, 3, 4, 5, 6)));
+        assertDoesNotThrow(() -> new WinningNumbers(
+                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+                LottoNumber.of(7)));
     }
 
     @Test
-    void 로또_객체_생성시_번호_주입() {
+    void 당첨번호와_보너스볼이_중복되면_생성_실패() {
         // given
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
-        Lotto lotto = new Lotto(numbers);
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
 
-        // when & then
-        assertThat(lotto.getNumbers())
-                .isEqualTo(Stream.of(1, 2, 3, 4, 5, 6)
-                        .map(LottoNumber::of)
-                        .collect(Collectors.toUnmodifiableList()));
+        // when, then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> new WinningNumbers(new Lotto(winningNumbers), LottoNumber.of(6)));
+        assertThat(exception).hasMessage("당첨 번호와 보너스 볼은 중복될 수 없습니다.");
     }
 
-    @Test
-    void 로또_객체_생성시_번호_개수_6개_미만이면_실패() {
-        // given
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5);
-
-        // when & then
-        assertThrows(IllegalArgumentException.class, () -> new Lotto(numbers));
-    }
-
-    @Test
-    void 로또_객체_생성시_번호_개수_6개_초과면_실패() {
-        // given
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7);
-
-        // when & then
-        assertThrows(IllegalArgumentException.class, () -> new Lotto(numbers));
-    }
 
     @ParameterizedTest
     @MethodSource("로또와_당첨번호_및_보너스볼을_비교해_Rank_반환_성공_테스트케이스")
     void 로또와_당첨번호_및_보너스볼을_비교해_Rank_반환_성공(Lotto lotto, Rank expectedRank) {
         // given
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
+        WinningNumbers winningNumbers = new WinningNumbers(
+                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+                LottoNumber.of(7));
 
         // when
-        Rank rank = lotto.checkRank(winningNumbers);
+        Rank rank = winningNumbers.checkRank(lotto);
 
         // then
         assertThat(rank).isEqualTo(expectedRank);
