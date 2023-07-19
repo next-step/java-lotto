@@ -35,6 +35,10 @@ public class Money {
         }
     }
 
+    public Money subtract(final Money other) {
+        return new Money(String.valueOf(value - other.getValue()));
+    }
+
     public int getValue() {
         return this.value;
     }
