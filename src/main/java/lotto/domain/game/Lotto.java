@@ -2,11 +2,14 @@ package lotto.domain.game;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class Lotto {
 
+    public static final int PRICE = 1_000;
     private static final int LOTTO_SIZE = 6;
+
     private final List<LottoNumber> lotto;
 
     public Lotto(final List<Integer> values, final boolean isAuto) {
@@ -27,7 +30,7 @@ public final class Lotto {
     }
 
     private void validateSize(final List<Integer> values, final boolean isAuto) {
-        if (values.size() < LOTTO_SIZE || (LOTTO_SIZE < values.size() && !isAuto)) {
+        if (!isAuto && (values.size() < LOTTO_SIZE || (LOTTO_SIZE < values.size()))) {
             throw new IllegalArgumentException("로또 번호는 6개여야합니다");
         }
     }
@@ -53,4 +56,20 @@ public final class Lotto {
         return lotto;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto lotto1 = (Lotto) o;
+        return Objects.equals(lotto, lotto1.lotto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto);
+    }
 }

@@ -1,30 +1,40 @@
 package lotto.controller;
 
+import java.util.List;
+import java.util.Map;
+import lotto.domain.game.LottoCount;
+import lotto.domain.game.LottoManual;
+import lotto.domain.game.Lottos;
+import lotto.domain.game.NumberGeneratorImpl;
 import lotto.domain.game.Payment;
 import lotto.domain.game.WinningNumber;
-import lotto.service.LottoService;
+import lotto.domain.statistics.LottoMatch;
+import lotto.domain.statistics.LottoResults;
+import lotto.domain.statistics.ProfitRate;
 import lotto.view.LottoView;
 
 public final class LottoController {
 
     public void run() {
-        // 1-1. 구입 금액 입력
         LottoView lottoView = new LottoView();
-        Payment payment = new Payment(lottoView.readPayment());
+        int money = lottoView.readPayment();
+        int countLottoManual = lottoView.readLottoManualCount();
 
-        // 1-2. 구입 갯수 & 구입 로또 번호 출력
-        LottoService lottoService = new LottoService(payment);
-        lottoView.printLottoCount(lottoService.getCount());
-        lottoView.printLottos(lottoService.getLottos());
+        Payment payment = new Payment(money);
+        LottoCount lottoCount = new LottoCount(payment, countLottoManual);
+        List<LottoManual> lottoManuals = lottoView.readLottoManualNumbers(lottoCount);
 
-        // 2. 당첨 번호 & 보너스 볼 입력
-        String winningLotto = lottoView.readWinningLotto();
-        String bonusBall = lottoView.readBonusBall();
+        Lottos lottos = new Lottos(lottoCount, lottoManuals, new NumberGeneratorImpl());
+        lottoView.printLottoCount(lottoCount);
+        lottoView.printLottos(lottos);
+
+        LottoManual winningLotto = lottoView.readWinningLotto();
+        int bonusBall = lottoView.readBonusBall();
         WinningNumber winningNumber = new WinningNumber(winningLotto, bonusBall);
 
-        // 3. 당첨 통계 출력
-        lottoView.printLottoResult(lottoService.getResult(winningNumber));
-        lottoView.printProfitRate(lottoService.getProfitRate());
+        Map<LottoMatch, Integer> resultMap = lottos.calculateResult(winningNumber);
+        lottoView.printLottoResult(new LottoResults(resultMap));
+        lottoView.printProfitRate(new ProfitRate(payment, resultMap));
 
     }
 }

@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.List;
 import lotto.domain.game.Lotto;
+import lotto.domain.game.LottoManual;
 import lotto.domain.game.LottoNumber;
 import lotto.domain.game.WinningNumber;
 import org.assertj.core.api.Assertions;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
+
     @DisplayName("보너스볼이 로또안에 있으면 true를 반환한다")
     @Test
     void 로또_보너스볼_중복_O() {
@@ -60,9 +62,9 @@ public class LottoTest {
     @Test
     void 로또_일치_카운트() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), false);
-        String winingValue = "5,1,10,45,2,29";
+        LottoManual winingValue = new LottoManual("5,1,10,45,2,29");
 
-        WinningNumber winningNumber = new WinningNumber(winingValue, "30");
+        WinningNumber winningNumber = new WinningNumber(winingValue, 30);
 
         assertThat(lotto.countMatch(winningNumber.getWinningLotto()))
             .isEqualTo(3);
@@ -71,12 +73,34 @@ public class LottoTest {
     @DisplayName("자동 로또 생성 테스트")
     @Test
     void 로또_자동_생성() {
-        Lotto lotto = new Lotto(List.of(12,23,45,1,7,8,9,19), true);
-        String winingValue = "12,23,45,1,7,8";
+        Lotto lotto = new Lotto(List.of(12, 23, 45, 1, 7, 8, 9, 19), true);
+        LottoManual winingValue = new LottoManual("12,23,45,1,7,8");
 
-        WinningNumber winningNumber = new WinningNumber(winingValue, "30");
+        WinningNumber winningNumber = new WinningNumber(winingValue, 30);
 
         assertThat(lotto.countMatch(winningNumber.getWinningLotto()))
             .isEqualTo(6);
     }
+
+    @DisplayName("로또 안에 입력한 로또 번호가 있다")
+    @Test
+    void lottoNumbersinLotto() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6), false);
+        LottoNumber lottoNumber1 = new LottoNumber(1);
+        LottoNumber lottoNumber2 = new LottoNumber(2);
+        LottoNumber lottoNumber3 = new LottoNumber(3);
+        LottoNumber lottoNumber4 = new LottoNumber(4);
+        LottoNumber lottoNumber5 = new LottoNumber(5);
+        LottoNumber lottoNumber6 = new LottoNumber(6);
+
+        assertThat(lotto.getLotto()).containsExactlyElementsOf(List.of(
+            lottoNumber1,
+            lottoNumber2,
+            lottoNumber3,
+            lottoNumber4,
+            lottoNumber5,
+            lottoNumber6
+        ));
+    }
+
 }
