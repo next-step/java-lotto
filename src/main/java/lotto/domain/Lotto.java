@@ -1,4 +1,4 @@
-package domain;
+package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public final class Lotto {
 
     static final int REQUIRED_LOTTO_NUMBER_COUNT = 6;
+    static final int LOTTO_PRICE = 1_000;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -28,7 +29,7 @@ public final class Lotto {
     }
 
     public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return this.lottoNumbers;
     }
 
     private static void validateLottoNumberCount(final List<Integer> numbers) {

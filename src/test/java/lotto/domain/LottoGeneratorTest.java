@@ -1,4 +1,4 @@
-package domain;
+package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,29 +13,29 @@ class LottoGeneratorTest {
     static CandidateStrategy testStrategy = () -> testCandidate;
 
     @Test
-    @DisplayName("로또를 하나 생성한다.")
+    @DisplayName("로또 번호 데이터를 하나 생성한다.")
     void generateOne() {
         /* given */
 
 
         /* when */
-        Lotto lotto = LottoGenerator.generateOne(testStrategy);
+        Lotto lottoContent = LottoGenerator.generateOne(testStrategy);
 
         /* then */
-        assertThat(lotto).isEqualTo(new Lotto(testCandidate));
+        assertThat(lottoContent).isEqualTo(new Lotto(testCandidate));
     }
 
     @Test
-    @DisplayName("로또를 돈 액수만큼 생성한다.")
+    @DisplayName("로또 번호 데이터를 돈 액수만큼 생성한다.")
     void generate() {
         /* given */
-        long money = 3_000L;
+        LottoMoney lottoMoney = new LottoMoney(3_000L);
 
         /* when */
-        List<Lotto> lottos = LottoGenerator.generateLottos(money, testStrategy);
+        Lottos lottoContents = LottoGenerator.generateLottos(lottoMoney, testStrategy);
 
         /* then */
-        assertThat(lottos).containsExactly(
+        assertThat(lottoContents.getLottos()).containsExactly(
                 new Lotto(testCandidate),
                 new Lotto(testCandidate),
                 new Lotto(testCandidate)

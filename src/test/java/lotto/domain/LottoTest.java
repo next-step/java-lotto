@@ -1,4 +1,4 @@
-package domain;
+package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-public class LottoTest {
+class LottoTest {
 
     @Test
     @DisplayName("로또 번호 6개로 생성할 수 있다.")

@@ -1,5 +1,6 @@
-package domain;
+package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +19,15 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
+    public Lottos merge(final Lottos autoLottos) {
+        List<Lotto> merged = new ArrayList<>();
+        merged.addAll(this.lottos);
+        merged.addAll(autoLottos.lottos);
+
+        return new Lottos(merged);
+    }
+
     public List<Lotto> getLottos() {
-        return lottos;
+        return this.lottos;
     }
 }

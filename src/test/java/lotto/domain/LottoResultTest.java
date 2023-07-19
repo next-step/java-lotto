@@ -1,4 +1,4 @@
-package domain;
+package lotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -9,7 +9,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-public class LottoResultTest {
+class LottoResultTest {
 
     private List<Rank> target;
 
@@ -36,13 +36,13 @@ public class LottoResultTest {
     void calculateTotalPrize() {
         /* given */
         LottoResult lottoResult = new LottoResult(target);
-        long money = target.size() * 1000L;
+        LottoMoney money = new LottoMoney(target.size() * 1_000L);
 
         /* when */
-        double rateOfReturn = lottoResult.calculateRateOfReturn(money);
+        LottoRatio lottoRatio = lottoResult.calculateRatio(money);
 
         /* then */
-        double expectedRateOfReturn = Rank.FIFTH.getPrize() * 2L / (double) money;
-        assertThat(rateOfReturn).isEqualTo(expectedRateOfReturn);
+        LottoRatio expectedRatio = new LottoRatio(Rank.FIFTH.getPrize().getValue() * 2L / (double) money.getValue());
+        assertThat(lottoRatio).isEqualTo(expectedRatio);
     }
 }
