@@ -32,7 +32,7 @@ public class LottoController {
 
     public void startLotto() {
         Money money = lottoReader.readMoney();
-        Count count = lottoReader.readCount();
+        Count count = lottoReader.readCount(money);
         List<Lotto> manualLottos = lottoReader.readManualLottos(count);
         BoughtResult manualBoughtResult = lottoGenerator.generateManually(money, manualLottos);
 

@@ -43,12 +43,12 @@ public class LottoReader {
         return new Ball(scanner.nextLine());
     }
 
-    public Count readCount() {
+    public Count readCount(final Money money) {
         System.out.println(INPUT_COUNT_MESSAGE);
 
         Scanner scanner = new Scanner(System.in);
 
-        return new Count(scanner.nextLine().replace(SPACE, EMPTY_STRING));
+        return new Count(scanner.nextLine().replace(SPACE, EMPTY_STRING), money);
     }
 
     public List<Lotto> readManualLottos(final Count count) {
