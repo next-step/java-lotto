@@ -4,7 +4,7 @@ public class Count {
 
     private static final String NUMBER_PATTERN = "\\d+";
     private static final String NOT_NUMERIC_EXCEPTION_MESSAGE = "숫자만 입력할 수 있습니다.";
-    private static final String NOT_POSITIVE_EXCEPTION_MESSAGE = "1 이상의 수만 입력하실 수 있습니다.";
+    private static final String NOT_POSITIVE_EXCEPTION_MESSAGE = "0 이상의 수만 입력하실 수 있습니다.";
 
     private final int value;
 
@@ -26,7 +26,7 @@ public class Count {
     }
 
     private void validatePositive(final int value) {
-        if (value <= 0) {
+        if (value < 0) {
             throw new IllegalArgumentException(NOT_POSITIVE_EXCEPTION_MESSAGE);
         }
     }

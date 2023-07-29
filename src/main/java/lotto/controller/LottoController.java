@@ -1,8 +1,10 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.domain.Ball;
 import lotto.domain.BoughtLottos;
 import lotto.domain.BoughtResult;
+import lotto.domain.Count;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoResults;
@@ -30,9 +32,14 @@ public class LottoController {
 
     public void startLotto() {
         Money money = lottoReader.readMoney();
+        Count count = lottoReader.readCount();
+        List<Lotto> manualLottos = lottoReader.readManualLottos(count);
+        BoughtResult manualBoughtResult = lottoGenerator.generateManually(money, manualLottos);
 
-        BoughtResult boughtResult = lottoGenerator.generate(money);
-        BoughtLottos boughtLottos = boughtResult.getBoughtLottos();
+        BoughtResult boughtResult = lottoGenerator.generate(manualBoughtResult.getChange());
+
+        BoughtLottos boughtLottos = BoughtLottos.merge(
+                manualBoughtResult.getBoughtLottos(), boughtResult.getBoughtLottos());
         lottoWriter.printBoughtLottos(boughtLottos);
 
         Lotto winningBalls = lottoReader.readWinningLotto();
