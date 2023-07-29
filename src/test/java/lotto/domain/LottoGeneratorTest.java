@@ -34,7 +34,7 @@ class LottoGeneratorTest {
         LottoGenerator lottoGenerator = LottoGenerator.getInstance();
 
         /* when */
-        BoughtResult boughtResult = lottoGenerator.generate(money, count);
+        BoughtResult boughtResult = lottoGenerator.generate(money, new Count(count));
         BoughtLottos boughtLottos = boughtResult.getBoughtLottos();
 
         /* then */
@@ -51,7 +51,7 @@ class LottoGeneratorTest {
         LottoGenerator lottoGenerator = LottoGenerator.getInstance();
 
         /* when */
-        BoughtResult boughtResult = lottoGenerator.generate(money, count);
+        BoughtResult boughtResult = lottoGenerator.generate(money, new Count(count));
         Money change = boughtResult.getChange();
 
         /* then */

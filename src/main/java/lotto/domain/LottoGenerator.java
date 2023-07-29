@@ -31,21 +31,21 @@ public class LottoGenerator {
         return generate(money, RANDOM_GENERATE_STRATEGY);
     }
 
-    public BoughtResult generate(final Money money, final int count) {
+    public BoughtResult generate(final Money money, final Count count) {
         return generate(money, count, RANDOM_GENERATE_STRATEGY);
     }
 
     public BoughtResult generate(final Money money, final LottoGenerateStrategy generateStrategy) {
         final int count = money.getValue() / Lotto.PRICE;
 
-        return generate(money, count, generateStrategy);
+        return generate(money, new Count(count), generateStrategy);
     }
 
-    public BoughtResult generate(final Money money, final int count, final LottoGenerateStrategy generateStrategy) {
+    public BoughtResult generate(final Money money, final Count count, final LottoGenerateStrategy generateStrategy) {
         final List<Lotto> boughtLottos = new ArrayList<>();
-        final Money spent = new Money(Lotto.PRICE * count);
+        final Money spent = new Money(Lotto.PRICE * count.getValue());
 
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count.getValue(); i++) {
             boughtLottos.add(generateStrategy.generate());
         }
 

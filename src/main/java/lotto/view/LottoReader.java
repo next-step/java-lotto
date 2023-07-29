@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.Ball;
+import lotto.domain.Count;
 import lotto.domain.Lotto;
 import lotto.domain.Money;
 
@@ -45,5 +46,13 @@ public class LottoReader {
         Scanner scanner = new Scanner(System.in);
 
         return new Ball(scanner.nextLine());
+    }
+
+    public Count readCount() {
+        System.out.println(INPUT_BONUS_BALL_MESSAGE);
+
+        Scanner scanner = new Scanner(System.in);
+
+        return new Count(scanner.nextLine().replace(SPACE, EMPTY_STRING));
     }
 }
