@@ -51,4 +51,11 @@ public class LottoGenerator {
 
         return new BoughtResult(money.subtract(spent), new BoughtLottos(boughtLottos));
     }
+
+    public BoughtResult generateManually(final Money money, final List<Lotto> lottos) {
+        final BoughtLottos boughtLottos = new BoughtLottos(lottos);
+        final Money spent = new Money(Lotto.PRICE * lottos.size());
+
+        return new BoughtResult(money.subtract(spent), boughtLottos);
+    }
 }

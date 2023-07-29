@@ -2,6 +2,8 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -74,5 +76,25 @@ class LottoGeneratorTest {
                 new Lotto(LottoTest.getBalls("1", "2", "3", "4", "5", "6")),
                 new Lotto(LottoTest.getBalls("7", "8", "9", "10", "11", "12"))
         );
+    }
+
+    @Test
+    @DisplayName("로또를 받은 대로 생성하는지 테스트")
+    void lottoGenerator_generateManually() {
+        /* given */
+        Money money = new Money(3000);
+        List<Lotto> lottos = new ArrayList<>(List.of(
+                new Lotto(LottoTest.getBalls("1", "2", "3", "4", "5", "6")),
+                new Lotto(LottoTest.getBalls("1", "3", "5", "7", "9", "11")),
+                new Lotto(LottoTest.getBalls("2", "4", "6", "8", "10", "12"))));
+        LottoGenerator lottoGenerator = LottoGenerator.getInstance();
+
+        /* when */
+        BoughtResult boughtResult = lottoGenerator.generateManually(money, lottos);
+        BoughtLottos boughtLottos = boughtResult.getBoughtLottos();
+
+        /* then */
+        assertThat(boughtLottos.getLottos()).hasSize(3);
+        assertThat(boughtLottos.getLottos()).isEqualTo(lottos);
     }
 }
