@@ -20,8 +20,8 @@ class MoneyTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"999", "100001"})
-    @DisplayName("범위 초과 구입 금액 생성 테스트")
+    @ValueSource(strings = {"-1000", "-1"})
+    @DisplayName("범위 초과 금액 생성 테스트")
     void money_inputOutOfRangeMoney(final String value) {
         /* given & when & then */
         assertThatThrownBy(() -> new Money(value)).isExactlyInstanceOf(IllegalArgumentException.class);

@@ -10,16 +10,16 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class CountTest {
 
-    @DisplayName("1 이상의 수를 입력하는 테스트")
+    @DisplayName("0 이상의 수를 입력하는 테스트")
     @ParameterizedTest
-    @ValueSource(strings = {"1", "5", "10", "15"})
+    @ValueSource(strings = {"0", "1", "5", "10", "15"})
     void count_create(final String count) {
         assertDoesNotThrow(() -> new Count(count));
     }
 
-    @DisplayName("0 이하의 수를 입력하는 테스트")
+    @DisplayName("0 미만의 수를 입력하는 테스트")
     @ParameterizedTest
-    @ValueSource(strings = {"-100", "-5", "-1", "0"})
+    @ValueSource(strings = {"-100", "-5", "-1"})
     void count_notPositiveCount(final String count) {
         assertThrows(IllegalArgumentException.class, () -> new Count(count));
     }
