@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Ball;
 import lotto.domain.BoughtLottos;
+import lotto.domain.BoughtResult;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoResults;
@@ -30,7 +31,8 @@ public class LottoController {
     public void startLotto() {
         Money money = lottoReader.readMoney();
 
-        BoughtLottos boughtLottos = lottoGenerator.generate(money);
+        BoughtResult boughtResult = lottoGenerator.generate(money);
+        BoughtLottos boughtLottos = boughtResult.getBoughtLottos();
         lottoWriter.printBoughtLottos(boughtLottos);
 
         Lotto winningBalls = lottoReader.readWinningLotto();

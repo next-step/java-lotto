@@ -11,6 +11,10 @@ public class Money {
 
     private final int value;
 
+    public Money(final int value) {
+        this(String.valueOf(value));
+    }
+
     public Money(final String value) {
         validate(value);
         this.value = Integer.parseInt(value);
@@ -41,5 +45,24 @@ public class Money {
 
     public int getValue() {
         return this.value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Money money = (Money) o;
+
+        return value == money.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return value;
     }
 }
