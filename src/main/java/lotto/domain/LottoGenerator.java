@@ -6,6 +6,7 @@ import java.util.List;
 public class LottoGenerator {
 
     private static final LottoGenerateStrategy RANDOM_GENERATE_STRATEGY = new RandomLottoGenerateStrategy();
+    private static final String NOT_ENOUGHT_MONEY_EXCEPTION_MONEY = "금액이 부족해 구매할 수 없습니다.";
 
     private final List<Ball> balls;
 
@@ -32,6 +33,8 @@ public class LottoGenerator {
     }
 
     public BoughtResult generate(final Money money, final Count count) {
+        validate(money, count);
+
         return generate(money, count, RANDOM_GENERATE_STRATEGY);
     }
 
@@ -53,9 +56,17 @@ public class LottoGenerator {
     }
 
     public BoughtResult generateManually(final Money money, final List<Lotto> lottos) {
+        validate(money, new Count(lottos.size()));
+
         final BoughtLottos boughtLottos = new BoughtLottos(lottos);
         final Money spent = new Money(Lotto.PRICE * lottos.size());
 
         return new BoughtResult(money.subtract(spent), boughtLottos);
+    }
+
+    private void validate(final Money money, final Count count) {
+        if (money.getValue() < Lotto.PRICE * count.getValue()) {
+            throw new IllegalArgumentException(NOT_ENOUGHT_MONEY_EXCEPTION_MONEY);
+        }
     }
 }
