@@ -2,10 +2,9 @@ package lotto.domain;
 
 public class Money {
 
-    private static final int MIN_PURCHASE_MONEY = 1_000;
-    private static final int MAX_PURCHASE_MONEY = 100_000;
+    private static final int MIN_MONEY = 0;
     private static final String MONEY_RANGE_EXCEPTION_MESSAGE =
-            "로또는 " + MIN_PURCHASE_MONEY + "원 이상 " + MAX_PURCHASE_MONEY + "원 이하만 구매할 수 있습니다";
+            "금액은 " + MIN_MONEY + "원 이상만 입력할 수 있습니다";
     private static final String NUMBER_PATTERN = "\\d+";
     private static final String NOT_NUMERIC_EXCEPTION_MESSAGE = "숫자만 입력할 수 있습니다.";
 
@@ -34,7 +33,7 @@ public class Money {
     private void validateRangeOfMoney(final String value) {
         int money = Integer.parseInt(value);
 
-        if (money < MIN_PURCHASE_MONEY || MAX_PURCHASE_MONEY < money) {
+        if (money < MIN_MONEY) {
             throw new IllegalArgumentException(MONEY_RANGE_EXCEPTION_MESSAGE);
         }
     }
