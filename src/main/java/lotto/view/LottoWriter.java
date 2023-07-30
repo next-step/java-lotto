@@ -42,7 +42,7 @@ public class LottoWriter {
         Collections.reverse(criterias);
         printStatistics(winningStatistics, criterias);
 
-        final double earningRate = Math.floor(winningStatistics.getEarningRate() / 100) * 100;
+        final double earningRate = Math.floor(winningStatistics.getEarningRate() * 100) / 100;
         printEarningRate(earningRate);
     }
 
