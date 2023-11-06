@@ -17,7 +17,9 @@ public enum Operation {
         boolean isOperation = false;
         for(Operation operation : Operation.values()) {
             String actual = operation.symbol;
-            isOperation = actual.equals(input);
+            if(actual.equals(input)) {
+                return true;
+            }
         }
         return isOperation;
     }
