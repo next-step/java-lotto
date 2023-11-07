@@ -8,16 +8,16 @@ import java.util.function.Supplier;
 
 public class AccountFactory {
 
-    private static final Map<String, Supplier<Account>> accountMap = new HashMap<>();
+    private static final Map<String, Supplier<Account>> ACCOUNT_MAP = new HashMap<>();
 
     static {
-        accountMap.put("+", AddtionAccount::new);
-        accountMap.put("-", SubtractAccount::new);
-        accountMap.put("*", MultiplyAccount::new);
-        accountMap.put("/", DivideAccount::new);
+        ACCOUNT_MAP.put("+", AddtionAccount::new);
+        ACCOUNT_MAP.put("-", SubtractAccount::new);
+        ACCOUNT_MAP.put("*", MultiplyAccount::new);
+        ACCOUNT_MAP.put("/", DivideAccount::new);
     }
 
     public static Account getAccountInstance(String accountName) {
-        return accountMap.get(accountName).get();
+        return ACCOUNT_MAP.get(accountName).get();
     }
 }
