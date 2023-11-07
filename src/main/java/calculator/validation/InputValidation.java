@@ -29,6 +29,9 @@ public class InputValidation {
     }
 
     private void checkNumberValidate(String input) {
+        if (input.isEmpty()) {
+            throw new IllegalArgumentException("빈값이 존재합니다.");
+        }
         if (input.matches(".*[^0-9].*")) {
             throw new IllegalArgumentException("숫자가 아닌 값이 입력되었습니다.");
         }
@@ -36,7 +39,7 @@ public class InputValidation {
 
     private void checkOperatorValidate(String input) {
         if (input.length() != 1) {
-            throw new IllegalArgumentException("연산자는 한글자만 입력해주세요.");
+            throw new IllegalArgumentException("연산자가 빠졌거나 한글자만 입력해주세요.");
         }
         if (input.matches(".*[^+\\-*/].*")) {
             throw new IllegalArgumentException("연산자가 아닌 값이 입력되었습니다.");

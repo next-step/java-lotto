@@ -38,4 +38,12 @@ public class Constituent {
     public List<String> getAccounts() {
         return accounts;
     }
+
+    public int StartCounter() {
+        int result = numbers.get(0);
+        for (int cal = 0; cal < accounts.size(); cal++) {
+            result = AccountFactory.getAccountInstance(accounts.get(cal)).calculate(result, numbers.get(cal + 1));
+        }
+        return result;
+    }
 }
