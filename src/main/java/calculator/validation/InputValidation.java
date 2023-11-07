@@ -5,14 +5,15 @@ import java.util.List;
 public class InputValidation {
 
     public boolean validation(List<String> input) {
+        nullOrEmptyCheck(input);
         for(int step = 0; step < input.size(); step++) {
             checkSetValidation(input.get(step), step);
         }
         return true;
     }
 
-    public void nullOrEmptyCheck(String input) {
-        if(input == null || input.isEmpty()) {
+    public void nullOrEmptyCheck(List<String> input) {
+        if(input == null || input.size() <= 2) {
             throw new IllegalArgumentException("입력값이 없습니다.");
         }
     }
