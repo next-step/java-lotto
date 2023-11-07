@@ -72,12 +72,11 @@ public class InputValidationTest {
         @DisplayName("null, 빈값이 입력되었을 때 예외처리 테스트")
         @ParameterizedTest
         @NullAndEmptySource
-        public void null_빈값이_입력된_경우(String value) {
+        public void null_빈값이_입력된_경우(String input) {
             //given
-            List<String> input = List.of(value);
             //when
             //then
-            assertThatThrownBy(() -> inputValidation.validation(input)).isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> inputValidation.nullOrEmptyCheck(input)).isInstanceOf(IllegalArgumentException.class);
         }
     }
 }
