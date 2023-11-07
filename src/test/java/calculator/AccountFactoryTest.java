@@ -10,7 +10,7 @@ public class AccountFactoryTest {
 
     @DisplayName("더하기 계산기 테스트")
     @Test
-    void 더하기_테스트(){
+    void 더하기_테스트() {
         // given
         int firstNumber = 1;
         int secondNumber = 2;
@@ -23,7 +23,7 @@ public class AccountFactoryTest {
 
     @DisplayName("빼기 계산기 테스트")
     @Test
-    void 빼기_테스트(){
+    void 빼기_테스트() {
         // given
         int firstNumber = 3;
         int secondNumber = 2;
@@ -36,7 +36,7 @@ public class AccountFactoryTest {
 
     @DisplayName("곱하기 계산기 테스트")
     @Test
-    void 곱하기_테스트(){
+    void 곱하기_테스트() {
         // given
         int firstNumber = 3;
         int secondNumber = 2;
@@ -49,7 +49,7 @@ public class AccountFactoryTest {
 
     @DisplayName("나누기 계산기 테스트")
     @Test
-    void 나누기_테스트(){
+    void 나누기_테스트() {
         // given
         int firstNumber = 7;
         int secondNumber = 3;
