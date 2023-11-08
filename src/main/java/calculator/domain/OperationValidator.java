@@ -10,7 +10,7 @@ public class OperationValidator {
     private static final String DETERMINER = " ";
     private static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
 
-    public static void valid(String input) {
+    public static void validate(String input) {
         if (isBlank(input)) {
             throw new IllegalArgumentException();
         }

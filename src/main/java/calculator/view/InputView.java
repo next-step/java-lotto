@@ -12,7 +12,7 @@ public class InputView {
         System.out.println("계산 할 문자를 입력해 주세요");
         System.out.println("(예 : 2 + 3 * 4 / 2)");
         String input = scanner.nextLine();
-        OperationValidator.valid(input);
+        OperationValidator.validate(input);
         return input;
     }
 }
