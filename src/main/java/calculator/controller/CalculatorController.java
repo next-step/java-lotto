@@ -1,7 +1,6 @@
 package calculator.controller;
 
 import calculator.domain.Operation;
-import calculator.domain.OperationValidator;
 import calculator.domain.StringSplitter;
 import calculator.view.InputView;
 import calculator.view.ResultView;
@@ -14,7 +13,6 @@ public class CalculatorController {
         Scanner scanner = new Scanner(System.in);
         String input = InputView.input(scanner);
 
-        OperationValidator.valid(input);
         List<String> operations = StringSplitter.splitOperation(input);
         List<Integer> numbers = StringSplitter.splitNumbers(input);
 
