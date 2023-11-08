@@ -19,3 +19,12 @@
 * 규칙 3: 모든 원시값과 문자열을 포장한다.
 * 규칙 5: 줄여쓰지 않는다(축약 금지).
 * 규칙 8: 일급 콜렉션을 쓴다.
+
+1. merge를 완료했다는 통보를 받으면 브랜치 변경 및 작업 브랜치 삭제(option)한다.
+  : git checkout 본인_아이디
+2. 통합(merge)한 next-step 저장소와 동기화하기 위해 next-step 저장소 추가(최초 한번만)
+  : git remote add upstream https://github.com/next-step/java-lotto.git
+3. next-step 저장소에서 자기 브랜치 가져오기(또는 갱신하기)
+  :git fetch upstream taegoon 
+4. NextStep 원격 저장소 로컬 동기화
+  :git rebase upstream/taegoon
