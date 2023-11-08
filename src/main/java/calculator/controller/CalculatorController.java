@@ -23,7 +23,7 @@ public class CalculatorController {
             Operation operation = Operation.searchBy(operations.get(i));
             basicNumber = operation.calculate(basicNumber, numbers.get(i + 1));
         }
-        // todo. 결과 수정
+
         ResultView.report(basicNumber);
     }
 
