@@ -15,21 +15,39 @@ class OperationValidatorTest {
         assertThrows(IllegalArgumentException.class, () -> OperationValidator.validate(actual));
     }
 
-    @ParameterizedTest(name = "입력값이 숫자 혹은 사칙연산이 아니면 IllegalArgumentException이 발생한다")
-    @ValueSource(strings = {"!", "@", "#", "$", "a"})
+    @ParameterizedTest(name = "입력값이 짝수({0})면 IllegalArgumentException이 발생한다")
+    @ValueSource(strings = {"1 +", "", "1 + 2 +"})
     void 입력값_검증_테스트2(String actual) {
         assertThrows(IllegalArgumentException.class, () -> OperationValidator.validate(actual));
     }
 
-    @ParameterizedTest(name = "입력값이 사칙연산 {0} 이면 통과한다")
-    @ValueSource(strings = {"+", "-", "*", "/"})
+    @ParameterizedTest(name = "입력값 갯수가 홀수({0})면 통과한다")
+    @ValueSource(strings = {"1 + 2", "1 + 2 + 3"})
     void 입력값_검증_테스트3(String actual) {
         assertDoesNotThrow(() -> OperationValidator.validate(actual));
     }
 
-    @ParameterizedTest(name = "입력값이 숫자면 통과한다")
-    @ValueSource(strings = {"1", "2", "3", "4"})
+    @ParameterizedTest(name = "입력값 시작과 끝이 숫자({0})가 아니면 IllegalArgumentException이 발생한다")
+    @ValueSource(strings = {"1 +", "", "1 + 2 +"})
     void 입력값_검증_테스트4(String actual) {
+        assertThrows(IllegalArgumentException.class, () -> OperationValidator.validate(actual));
+    }
+
+    @ParameterizedTest(name = "입력값이 (숫자)(연산자 숫자) ({0})와 같은 패턴이 아니면 IllegalArgumentException이 발생한다")
+    @ValueSource(strings = {"1 + + 1", "1 1 + 1"})
+    void 입력값_검증_테스트5(String actual) {
+        assertThrows(IllegalArgumentException.class, () -> OperationValidator.validate(actual));
+    }
+
+    @ParameterizedTest(name ="입력값이 (숫자)(연산자 숫자) ({0})와 같은 패턴이 아니면 IllegalArgumentException이 발생한다")
+    @ValueSource(strings = {"1 + 1", "1 + 1 + 2"})
+    void 입력값_검증_테스트6(String actual) {
+        assertDoesNotThrow(() -> OperationValidator.validate(actual));
+    }
+
+    @ParameterizedTest(name = "입력값이 (숫자)(연산자 숫자) ({0})와 같은 패턴이면 통과한다")
+    @ValueSource(strings = {"1 + 1", "1 + 1 + 2"})
+    void 입력값_검증_테스트7(String actual) {
         assertDoesNotThrow(() -> OperationValidator.validate(actual));
     }
 

@@ -15,24 +15,57 @@ public class OperationValidator {
             throw new IllegalArgumentException();
         }
 
-        String[] strings = input.split(DETERMINER);
-        for(String target : strings) {
-            validOperation(target);
-        }
+        validateInput(input);
     }
 
     private static boolean isBlank(String input) {
         return input == null || input.isBlank();
     }
 
-    private static void validOperation(String input) {
-        if (!Operation.isOperation(input) && isNotNumber(input)) {
+    private static void validateInput(String input) {
+        String[] strings = input.split(DETERMINER);
+
+        validateStartWithNumber(strings);
+        validatEndWithNumber(strings);
+        validateOddStrings(strings);
+        validateNumberNextOperation(strings);
+    }
+
+    private static void validateStartWithNumber(String[] strings) {
+        String startString = strings[0];
+        if (!isNumber(startString)) {
             throw new IllegalArgumentException();
         }
     }
 
-    private static boolean isNotNumber(String input) {
-        return !NUMBER_PATTERN.matcher(input).matches();
+    private static void validatEndWithNumber(String[] strings) {
+        String endString = strings[strings.length - 1];
+        if (!isNumber(endString)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static void validateOddStrings(String[] strings) {
+        if (strings.length % 2 == 0) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static void validateNumberNextOperation(String[] strings) {
+        for (int i = 0; i < strings.length - 1; i += 2) {
+            if (!isNumberNextOperation(strings[i], strings[i + 1])) {
+                throw new IllegalArgumentException();
+            }
+        }
+    }
+
+    private static boolean isNumberNextOperation(String stringNumber, String stringOperation) {
+        return isNumber(stringNumber) && Operation.isOperation(stringOperation);
+    }
+
+
+    private static boolean isNumber(String input) {
+        return NUMBER_PATTERN.matcher(input).matches();
     }
 
 }
