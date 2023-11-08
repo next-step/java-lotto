@@ -1,15 +1,17 @@
 package calculator;
 
-import static calculator.InputView.*;
+import calculator.domain.StringCalculator;
+
+import static calculator.view.InputView.*;
+import static calculator.view.ResultVIew.*;
 
 public class CalculatorApplication {
     public static void main(String[] args) {
-        String text = inputText();
+        String[] textArray = inputText();
 
-        StringCalculator stringCalculator = new StringCalculator(text);
-        int result = stringCalculator.startOperation(stringCalculator.splitText());
-        System.out.println(result);
-
+        StringCalculator stringCalculator = new StringCalculator(textArray);
+        int result = stringCalculator.startOperation();
+        printResult(result);
 
 
     }
