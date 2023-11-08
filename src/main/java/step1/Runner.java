@@ -3,11 +3,16 @@ package step1;
 import step1.domain.Seperator;
 import step1.view.InputView;
 
+import java.util.List;
+
 public class Runner {
 
     public static void main(String[] args) {
-        String text = InputView.inputText();
-        Seperator.validate(text);
+        Seperator seperator = new Seperator(InputView.inputText());
+
+        List<Integer> numbers = seperator.numbers();
+        List<String> operators = seperator.operators();
+
     }
 
 }
