@@ -26,7 +26,7 @@ public class OperationValidator {
         String[] strings = input.split(DETERMINER);
 
         validateStartWithNumber(strings);
-        validatEndWithNumber(strings);
+        validateEndWithNumber(strings);
         validateOddStrings(strings);
         validateNumberNextOperation(strings);
     }
@@ -38,7 +38,7 @@ public class OperationValidator {
         }
     }
 
-    private static void validatEndWithNumber(String[] strings) {
+    private static void validateEndWithNumber(String[] strings) {
         String endString = strings[strings.length - 1];
         if (!isNumber(endString)) {
             throw new IllegalArgumentException();
@@ -46,9 +46,13 @@ public class OperationValidator {
     }
 
     private static void validateOddStrings(String[] strings) {
-        if (strings.length % 2 == 0) {
+        if (isOddNumber(strings.length)) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private static boolean isOddNumber(int number) {
+        return number % 2 == 0;
     }
 
     private static void validateNumberNextOperation(String[] strings) {
