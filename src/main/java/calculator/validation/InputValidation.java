@@ -2,7 +2,12 @@ package calculator.validation;
 
 import java.util.List;
 
+import static calculator.message.ErrorMessage.*;
+
 public class InputValidation {
+
+    private static final String NUMBER_REGEX = ".*[^0-9].*";
+    private static final String OPERATOR_REGEX = ".*[^+\\-*/].*";
 
     public boolean validation(List<String> input) {
         nullOrEmptyCheck(input);
@@ -14,7 +19,7 @@ public class InputValidation {
 
     public void nullOrEmptyCheck(List<String> input) {
         if (input == null || input.size() <= 2) {
-            throw new IllegalArgumentException("입력값이 없습니다.");
+            throw new IllegalArgumentException(INPUT_NULL_OR_EMPTY.getMessage());
         }
     }
 
@@ -30,19 +35,19 @@ public class InputValidation {
 
     private void checkNumberValidate(String input) {
         if (input.isEmpty()) {
-            throw new IllegalArgumentException("빈값이 존재합니다.");
+            throw new IllegalArgumentException(INPUT_NUMBER_LENGTH.getMessage());
         }
-        if (input.matches(".*[^0-9].*")) {
-            throw new IllegalArgumentException("숫자가 아닌 값이 입력되었습니다.");
+        if (input.matches(NUMBER_REGEX)) {
+            throw new IllegalArgumentException(INPUT_NOT_NUMBER.getMessage());
         }
     }
 
     private void checkOperatorValidate(String input) {
         if (input.length() != 1) {
-            throw new IllegalArgumentException("연산자가 빠졌거나 한글자만 입력해주세요.");
+            throw new IllegalArgumentException(INPUT_NOT_OPERATOR_LENGTH.getMessage());
         }
-        if (input.matches(".*[^+\\-*/].*")) {
-            throw new IllegalArgumentException("연산자가 아닌 값이 입력되었습니다.");
+        if (input.matches(OPERATOR_REGEX)) {
+            throw new IllegalArgumentException(INPUT_NOT_OPERATOR.getMessage());
         }
     }
 }
