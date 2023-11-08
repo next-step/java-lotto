@@ -1,15 +1,16 @@
 package calculator.domain;
 
+import calculator.validation.OperationValidator;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringCalculator {
+import static calculator.validation.OperationValidator.*;
 
-    private static final String OPERATION_REGULAR = "[+\\-*/]";
-    private static final Pattern OPERATION_PATTERN = Pattern.compile(OPERATION_REGULAR);
+public class StringCalculator {
 
     private List<Integer> numberList;
     private List<String> operationList;
@@ -30,6 +31,7 @@ public class StringCalculator {
     }
 
     private void separateNumberAndSign(String text, int i) {
+
         if (isEven(i)) {
             numberList.add(checkNumber(text));
         }
@@ -39,22 +41,12 @@ public class StringCalculator {
         }
     }
 
-    private int checkNumber(String text) {
-        try {
-            return Integer.parseInt(text);
-        } catch (InputMismatchException err) {
-            throw new InputMismatchException("숫자만 사칙연산이 가능합니다");
-        }
+    private static boolean isOdd(int i) {
+        return i % 2 == 1;
     }
 
-
-    private String checkFourBasicOperation(String sign) {
-        Matcher m = OPERATION_PATTERN.matcher(sign);
-
-        if (m.find()) {
-            return sign;
-        }
-        throw new InputMismatchException("사칙연산 기호만 사용하여 주세요");
+    private static boolean isEven(int i) {
+        return i % 2 == 0;
     }
 
 
@@ -68,14 +60,6 @@ public class StringCalculator {
 
     }
 
-
-    private static boolean isOdd(int i) {
-        return i % 2 == 1;
-    }
-
-    private static boolean isEven(int i) {
-        return i % 2 == 0;
-    }
 
 
 }
