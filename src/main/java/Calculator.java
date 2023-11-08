@@ -5,29 +5,40 @@ public class Calculator {
 	private final static Character DIVISION = '/';
 
 	private final Character[] operators = {PLUS, MINUS, MULTIPLICATION, DIVISION};
+	private int result;
 
-	public int calculation(int left, char operator, int right) {
+	public Calculator() {
+		this(0);
+	}
+
+	public Calculator(int result) {
+		this.result = result;
+	}
+
+	public void calculate(int left, char operator, int right) {
 		if(!matches(operator)) {
 			throw new IllegalArgumentException("사칙연산 기호를 입력하세요.");
 		}
 
 		if(operator == PLUS) {
-			return left + right;
+			result = left + right;
 		}
 
 		if(operator == MINUS) {
-			return left - right;
+			result = left - right;
 		}
 
 		if(operator == MULTIPLICATION) {
-			return left * right;
+			result = left * right;
 		}
 
 		if(operator == DIVISION) {
-			return left / right;
+			result = left / right;
 		}
+	}
 
-		return -1;
+	public int result() {
+		return this.result;
 	}
 
 	private boolean matches(char inputOperator) {
