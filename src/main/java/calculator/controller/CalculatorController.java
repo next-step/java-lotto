@@ -11,7 +11,7 @@ public class CalculatorController {
         Scanner scanner = new Scanner(System.in);
         String input = InputView.input(scanner);
 
-        int result = OperationManager.opertaion(input);
+        int result = OperationManager.operate(input);
 
         ResultView.report(result);
     }

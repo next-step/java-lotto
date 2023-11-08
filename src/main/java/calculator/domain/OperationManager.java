@@ -7,7 +7,7 @@ public class OperationManager {
     private OperationManager() {
     }
 
-    public static int opertaion(String input) {
+    public static int operate(String input) {
         List<String> operations = StringSplitter.splitOperation(input);
         List<Integer> numbers = StringSplitter.splitNumbers(input);
 

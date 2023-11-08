@@ -10,7 +10,7 @@ class OperationManagerTest {
     @ParameterizedTest
     @CsvSource({"2 + 3 * 4 / 2, 10", "3 / 1 + 5, 8"})
     void 주어진_값을_가지고_연산하면_결과가_나온다(String input, int expected) {
-        int actual = OperationManager.opertaion(input);
+        int actual = OperationManager.operate(input);
 
         assertThat(actual).isEqualTo(expected);
     }
