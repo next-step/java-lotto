@@ -39,9 +39,10 @@ public class Seperator {
         return text.chars().allMatch(Character::isDigit);
     }
 
-    public List<String> operators() {
+    public List<Operator> operators() {
         return Arrays.stream(splited)
             .filter(Predicate.not(Seperator::isNumber))
+            .map(Operator::of)
             .collect(Collectors.toList());
     }
 

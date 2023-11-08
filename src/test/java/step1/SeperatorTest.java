@@ -2,6 +2,7 @@ package step1;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step1.domain.Operator;
 import step1.domain.Seperator;
 
 import java.util.Arrays;
@@ -42,7 +43,12 @@ public class SeperatorTest {
     @DisplayName("문자열에서 연산자를 뽑아낼 수 있다")
     public void extract_operators() {
         String text = "2 + 3 * 4 / 2 + 1 * 1";
-        assertThat(new Seperator(text).operators()).isEqualTo(Arrays.asList("+", "*", "/", "+", "*"));
+        assertThat(new Seperator(text).operators())
+            .isEqualTo(Arrays.asList(Operator.of("+")
+            , Operator.of("*")
+            , Operator.of("/")
+            , Operator.of("+")
+            , Operator.of("*")));
     }
 
 }

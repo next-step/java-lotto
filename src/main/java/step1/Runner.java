@@ -1,5 +1,6 @@
 package step1;
 
+import step1.domain.Operator;
 import step1.domain.Seperator;
 import step1.view.InputView;
 
@@ -11,7 +12,7 @@ public class Runner {
         Seperator seperator = new Seperator(InputView.inputText());
 
         List<Integer> numbers = seperator.numbers();
-        List<String> operators = seperator.operators();
+        List<Operator> operators = seperator.operators();
 
     }
 
