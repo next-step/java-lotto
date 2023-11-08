@@ -5,10 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorTest {
-	private final static Character PLUS = '+';
-	private final static Character MINUS = '-';
-	private final static Character MULTIPLICATION = '*';
-	private final static Character DIVISION = '/';
 	private final static Character LEFT_BRACKET = '(';
 
 	private Calculator calculator;
@@ -20,7 +16,7 @@ public class CalculatorTest {
 
 	@Test
 	void add_oneAndTwo_three() {
-		calculator.calculate(1, PLUS,2);
+		calculator.calculate(1, Operator.PLUS.symbol(),2);
 		int result = calculator.result();
 
 		assertThat(result).isEqualTo(3);
@@ -28,7 +24,7 @@ public class CalculatorTest {
 
 	@Test
 	void subtract_towAndOne_one() {
-		calculator.calculate(2, MINUS, 1);
+		calculator.calculate(2, Operator.MINUS.symbol(), 1);
 		int result = calculator.result();
 
 		assertThat(result).isEqualTo(1);
@@ -36,7 +32,7 @@ public class CalculatorTest {
 
 	@Test
 	void multiply_towAndThree_six() {
-		calculator.calculate(2, MULTIPLICATION, 3);
+		calculator.calculate(2, Operator.MULTIPLICATION.symbol(), 3);
 		int result = calculator.result();
 
 		assertThat(result).isEqualTo(6);
@@ -44,7 +40,7 @@ public class CalculatorTest {
 
 	@Test
 	void divide_sixAndTwo_Three() {
-		calculator.calculate(6, DIVISION, 2);
+		calculator.calculate(6, Operator.DIVISION.symbol(), 2);
 		int result = calculator.result();
 
 		assertThat(result).isEqualTo(3);

@@ -12,8 +12,10 @@ public class Main {
 		String[] inputs = inputExpression.split(" ");
 		int result = Integer.parseInt(inputs[0]);
 		Calculator calculator = new Calculator();
-		for (int i = 0; i < inputs.length - 1; i += 2) {
-			calculator.calculate(result, inputs[i+1].charAt(0), Integer.parseInt(inputs[i+2]));
+		for (int i = 1; i < inputs.length; i += 2) {
+			char operator = inputs[i].charAt(0);
+			int number = Integer.parseInt(inputs[i+1]);
+			calculator.calculate(result, operator, number);
 			result = calculator.result();
 		}
 
