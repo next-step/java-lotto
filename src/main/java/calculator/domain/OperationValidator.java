@@ -8,7 +8,7 @@ public class OperationValidator {
     }
 
     private static final String DETERMINER = " ";
-    public static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
 
     public static void valid(String input) {
         if (isBlank(input)) {
