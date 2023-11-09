@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.validate.NumberValidation.checkLottoSize;
+
 public class Lotto {
 
     private List<LottoNumber> lottoNumbers;
@@ -13,6 +15,7 @@ public class Lotto {
     }
 
     public Lotto(List<LottoNumber> lottoNumbers) {
+        checkLottoSize(lottoNumbers);
         this.lottoNumbers = sortLotto(lottoNumbers);
     }
 
