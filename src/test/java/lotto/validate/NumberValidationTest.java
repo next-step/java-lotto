@@ -21,9 +21,8 @@ public class NumberValidationTest {
     void 로또_번호_유효성_검사_성공(int number) {
         // given
         // when
-        boolean check = numberValidation.checkNumberRange(number);
+        numberValidation.checkNumberRange(number);
         // then
-        assertThat(check).isTrue();
     }
 
     @ParameterizedTest

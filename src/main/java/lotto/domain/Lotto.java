@@ -18,7 +18,7 @@ public class Lotto {
 
     private List<LottoNumber> sortLotto(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.stream()
-                .sorted((o1, o2) -> o1.number() - o2.number()).collect(Collectors.toList());
+                .sorted().collect(Collectors.toList());
     }
 
     public List<LottoNumber> lottoNumbers() {
