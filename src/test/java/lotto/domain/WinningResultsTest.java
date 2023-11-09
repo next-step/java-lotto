@@ -12,19 +12,7 @@ class WinningResultsTest {
 
     @Test
     void 등수를_기반으로_기본_데이터를_만들_수_있다() {
-        WinningResults winningResults = new WinningResults();
-
-        int actual = winningResults.size();
-        int expected = LottoRank.values().length;
-
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @Test
-    void 등수를_기반으로_기본_데이터를_만들_수_있다2() {
-        WinningResults actual = new WinningResults();
-
-        actual.report(new WinningLottoNumber(List.of(1, 2, 3, 4, 5, 6)),
+        WinningResults actual = new WinningResults(new WinningLottoNumber(List.of(1, 2, 3, 4, 5, 6)),
                 List.of(new LottoNumber(List.of(1, 2, 3, 4, 5, 6)),
                         new LottoNumber(List.of(1, 2, 3, 4, 5, 9))));
         Map<LottoRank, Integer> values = new TreeMap<>();

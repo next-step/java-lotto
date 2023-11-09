@@ -10,12 +10,18 @@ public class WinningResults {
     public static final int DEFAULT_VALUE = 0;
     private final Map<LottoRank, Integer> values;
 
-    public WinningResults() {
+    public WinningResults(WinningLottoNumber winningLottoNumber,
+                          List<LottoNumber> lottoNumbers) {
         Map<LottoRank, Integer> treeMap = new TreeMap<>();
         for(LottoRank lottoRank : LottoRank.values()) {
             treeMap.put(lottoRank, DEFAULT_VALUE);
         }
         this.values = treeMap;
+
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            LottoRank lottoRank = winningLottoNumber.winningRank(lottoNumber);
+            values.put(lottoRank, createValue(lottoRank));
+        }
     }
 
     public WinningResults(Map<LottoRank, Integer> lottoRankIntegerMap) {
@@ -24,14 +30,6 @@ public class WinningResults {
 
     public int size() {
         return values.size();
-    }
-
-    public void report(WinningLottoNumber winningLottoNumber,
-                       List<LottoNumber> lottoNumbers) {
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            LottoRank lottoRank = winningLottoNumber.winningRank(lottoNumber);
-            values.put(lottoRank, createValue(lottoRank));
-        }
     }
 
     private int createValue(LottoRank lottoRank) {
