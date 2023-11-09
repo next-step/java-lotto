@@ -15,33 +15,37 @@ public class CalculatorTest {
 	@Test
 	void add_oneAndTwo_three() {
 		calculator.calculate(1, Operator.PLUS.symbol(),2);
-		int result = calculator.result();
+		int actual = calculator.result();
+		int expected = 1 + 2;
 
-		assertThat(result).isEqualTo(3);
+		assertThat(actual).isEqualTo(expected);
 	}
 
 	@Test
 	void subtract_towAndOne_one() {
 		calculator.calculate(2, Operator.MINUS.symbol(), 1);
-		int result = calculator.result();
+		int actual = calculator.result();
+		int expected = 2 - 1;
 
-		assertThat(result).isEqualTo(1);
+		assertThat(actual).isEqualTo(expected);
 	}
 
 	@Test
 	void multiply_towAndThree_six() {
 		calculator.calculate(2, Operator.MULTIPLICATION.symbol(), 3);
-		int result = calculator.result();
+		int actual = calculator.result();
+		int expected = 2 * 3;
 
-		assertThat(result).isEqualTo(6);
+		assertThat(actual).isEqualTo(expected);
 	}
 
 	@Test
-	void divide_sixAndTwo_Three() {
+	void divide_sixAndTwo_three() {
 		calculator.calculate(6, Operator.DIVISION.symbol(), 2);
-		int result = calculator.result();
+		int actual = calculator.result();
+		int expected = 6 / 2;
 
-		assertThat(result).isEqualTo(3);
+		assertThat(actual).isEqualTo(expected);
 	}
 
 	@Test
@@ -50,6 +54,25 @@ public class CalculatorTest {
 
 		assertThatThrownBy(
 				() -> calculator.calculate(6, leftBracket, 2)
+		).isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	void calculate_validInputExpression_validResult() {
+		String[] inputs = InputView.inputExpression("2 + 3 * 4 / 2");
+		calculator.calculate(inputs);
+		int actual = calculator.result();
+		int expected = (((2 + 3) * 4) / 2);
+
+		assertThat(actual).isEqualTo(expected);
+	}
+
+	@Test
+	void calculate_inputExpressionWithLeftBracket_throwsException() {
+		String[] inputs = InputView.inputExpression("2 + 3 * 4 ( 2");
+		
+		assertThatThrownBy(
+				() -> calculator.calculate(inputs)
 		).isInstanceOf(IllegalArgumentException.class);
 	}
 }
