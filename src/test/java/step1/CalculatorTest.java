@@ -44,4 +44,12 @@ public class CalculatorTest {
         assertThat(Calculator.calculation(numbers, operators)).isEqualTo(0);
     }
 
+    @Test
+    @DisplayName("수식에 맞게 계산을 할 수 있다")
+    public void calculate() {
+        LinkedList<Integer> numbers = new LinkedList<>(Arrays.asList(2, 3, 4, 2));
+        LinkedList<Operator> operators = new LinkedList<>(Arrays.asList(Operator.PLUS, Operator.MULTIPLY, Operator.DIVIDE));
+        assertThat(Calculator.calculation(numbers, operators)).isEqualTo(10);
+    }
+
 }

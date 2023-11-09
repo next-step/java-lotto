@@ -19,7 +19,7 @@ public class Seperator {
     }
 
     private void validate(String text) {
-        if (text == null || text.isEmpty()) {
+        if (text.isBlank()) {
             throw new EmptyStringException();
         }
     }
