@@ -1,6 +1,10 @@
 package lotto.strategy;
 
+import lotto.domain.Lotto;
+
+import java.util.List;
+
 public interface NumberStrategy {
 
-    int create();
+    List<Lotto> create(int count);
 }

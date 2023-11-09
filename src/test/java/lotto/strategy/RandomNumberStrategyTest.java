@@ -1,8 +1,11 @@
 package lotto.strategy;
 
+import lotto.domain.Lotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,9 +23,8 @@ public class RandomNumberStrategyTest {
     void 랜덤_숫자_발급() {
         // given
         // when
-        int number = numberStrategy.create();
+        List<Lotto> number = numberStrategy.create(1);
         // then
-        assertThat(number).isGreaterThanOrEqualTo(1);
-        assertThat(number).isLessThanOrEqualTo(45);
+        assertThat(number.get(0).lottoNumbers()).hasSize(6);
     }
 }

@@ -1,13 +1,13 @@
 package lotto.domain;
 
-public class Number {
+public class LottoNumber {
     public final int number;
 
-    public Number(int number) {
+    public LottoNumber(int number) {
         this.number = number;
     }
 
-    public int Number() {
+    public int number() {
         return number;
     }
 
