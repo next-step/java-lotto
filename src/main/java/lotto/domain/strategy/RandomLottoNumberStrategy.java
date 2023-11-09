@@ -22,7 +22,10 @@ public class RandomLottoNumberStrategy implements LottoNumberStrategy {
 
     @Override
     public List<Integer> create() {
-        return new ArrayList<>(createRandomNumbers());
+        List<Integer> list = new ArrayList<>(createRandomNumbers());
+        Collections.sort(list);
+        return list;
+
     }
 
     protected List<Integer> createRandomNumbers() {
