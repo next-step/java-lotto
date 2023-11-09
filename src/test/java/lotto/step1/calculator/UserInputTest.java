@@ -19,7 +19,7 @@ class UserInputTest {
         UserInput userInput = new UserInput(input);
 
         //then
-        assertThat(userInput.split()).isEqualTo(expectedStrings);
+        assertThat(userInput.getInputs()).isEqualTo(expectedStrings);
     }
 
     public static Stream<Arguments> userInputStringWithSpace() {
