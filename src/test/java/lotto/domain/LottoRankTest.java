@@ -1,6 +1,5 @@
-package lotto.domain.strategy;
+package lotto.domain;
 
-import lotto.domain.LottoRank;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -26,8 +25,7 @@ class LottoRankTest {
 
     @ParameterizedTest(name = "{0}개가 일치하면 {1} 이다.")
     @MethodSource("로또_등수_매개변수")
-    void 당첨_갯수로_로또_등수를_알_수_있다(int matchedCount,
-                              LottoRank actual) {
+    void 당첨_갯수로_로또_등수를_알_수_있다(int matchedCount, LottoRank actual) {
         LottoRank expected = LottoRank.searchBy(matchedCount);
 
         assertThat(actual).isEqualTo(expected);
