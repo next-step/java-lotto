@@ -44,11 +44,7 @@ public class SeperatorTest {
     public void extract_operators() {
         String text = "2 + 3 * 4 / 2 + 1 * 1";
         assertThat(new Seperator(text).operators())
-            .isEqualTo(Arrays.asList(Operator.of("+")
-            , Operator.of("*")
-            , Operator.of("/")
-            , Operator.of("+")
-            , Operator.of("*")));
+            .isEqualTo(Arrays.asList(Operator.PLUS, Operator.MULTIPLY, Operator.DIVIDE, Operator.PLUS, Operator.MULTIPLY));
     }
 
 }

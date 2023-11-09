@@ -3,7 +3,7 @@ package step1.domain;
 import step1.exception.EmptyStringException;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -28,22 +28,22 @@ public class Seperator {
         return text.split(DELIMITER);
     }
 
-    public List<Integer> numbers() {
+    public LinkedList<Integer> numbers() {
         return Arrays.stream(this.splited)
             .filter(Seperator::isNumber)
             .map(Integer::parseInt)
-            .collect(Collectors.toList());
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public LinkedList<Operator> operators() {
+        return Arrays.stream(this.splited)
+            .filter(Predicate.not(Seperator::isNumber))
+            .map(Operator::of)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     private static boolean isNumber(String text) {
         return text.chars().allMatch(Character::isDigit);
-    }
-
-    public List<Operator> operators() {
-        return Arrays.stream(splited)
-            .filter(Predicate.not(Seperator::isNumber))
-            .map(Operator::of)
-            .collect(Collectors.toList());
     }
 
 }
