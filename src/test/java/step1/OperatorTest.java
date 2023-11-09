@@ -2,7 +2,7 @@ package step1;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step1.domain.Seperator;
+import step1.domain.Operator;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
@@ -13,10 +13,9 @@ public class OperatorTest {
     @Test
     @DisplayName("사칙연산 기호가 아닌 경우 에러를 발생한다")
     public void not_operator_error() {
-        Seperator seperator = new Seperator("&");
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> {
-                seperator.operators();
+                Operator.of("&");
             }).withMessageMatching(NOT_OPERATOR_ERROR_MESSAGE);
     }
 

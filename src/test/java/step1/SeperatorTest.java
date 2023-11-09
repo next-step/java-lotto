@@ -13,6 +13,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOf
 public class SeperatorTest {
 
     private static final String EMPTY_STRING_ERROR_MESSAGE = "입력값이 공백입니다";
+    private static final String INVALID_STRING_ERROR_MESSAGE = "잘못된 입력 값입니다";
 
     @Test
     @DisplayName("입력 값이 null인 경우 에러 발생한다")
@@ -30,6 +31,15 @@ public class SeperatorTest {
             .isThrownBy(() -> {
                 new Seperator("");
             }).withMessageMatching(EMPTY_STRING_ERROR_MESSAGE);
+    }
+
+    @Test
+    @DisplayName("입력 값이 정규표현식을 만족하지 못하는 경우 에러 발생한다")
+    public void text_invalid_expression() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> {
+                new Seperator(". 2 * 5");
+            }).withMessageMatching(INVALID_STRING_ERROR_MESSAGE);
     }
 
     @Test
