@@ -4,12 +4,12 @@ import java.util.InputMismatchException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class OperationValidator {
+public class Validation {
 
     private static final String OPERATION_REGULAR = "[+\\-*/]";
     private static final Pattern OPERATION_PATTERN = Pattern.compile(OPERATION_REGULAR);
 
-    private OperationValidator(){
+    private Validation(){
         throw new IllegalStateException("Utility Class");
     }
 
@@ -17,8 +17,8 @@ public class OperationValidator {
     public static int checkNumber(String text) {
         try {
             return Integer.parseInt(text);
-        } catch (InputMismatchException err) {
-            throw new InputMismatchException("숫자만 사칙연산이 가능합니다");
+        } catch (NumberFormatException err) {
+            throw new NumberFormatException("숫자만 사칙연산이 가능합니다");
         }
     }
 

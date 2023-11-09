@@ -25,7 +25,7 @@ public enum Operation {
         }
     };
 
-    private String sign;
+    private final String sign;
 
     Operation(String sign) {
         this.sign = sign;
