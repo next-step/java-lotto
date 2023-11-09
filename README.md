@@ -39,7 +39,7 @@
     - [ ] 뺄셈
     - [ ] 곱셈
     - [ ] 나눗셈
-    - [ ] 입력 값이 `null`이거나 `빈 공백` 문자일 경우, `IllegalArgumentException` 예외 발생
+    - [X] ~~입력 값이 `null`이거나 `빈 공백` 문자일 경우, `IllegalArgumentException` 예외 발생~~
     - [ ] `사칙연산 기호`가 아닌 경우, `IllegalArgumentException` 예외 발생
     - [ ] `사칙 연산을 모두 포함`하는 기능 구현
 - [X] ~~입력 문자열의 숫자와 사칙 연산 사이에는 `반드시 빈 공백 문자열이 있다고 가정`한다.~~

@@ -4,10 +4,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class UserInputTest {
     @ParameterizedTest
@@ -20,6 +22,16 @@ class UserInputTest {
 
         //then
         assertThat(userInput.split()).isEqualTo(expectedStrings);
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("입력 값이 null이거나 빈 공백 문자일 경우, IllegalArgumentException 예외가 발생한다.")
+    void splitUserInputStringWithNullAndEmptyString(String userInputString) {
+        //given, when, then
+        assertThatThrownBy(() -> new UserInput(userInputString))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("입력은 null 혹은 빈 공백일 수 없습니다.");
     }
 
     public static Stream<Arguments> userInputStringWithSpace() {
