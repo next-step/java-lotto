@@ -19,14 +19,11 @@ class OperatorsTest {
     })
     void throw_exception_when_no_operators(String given) {
         //given
-        String input = trimmedInput(given);
+        String input = StringTrimmer.trimmedInput(given);
 
         //when, then
         assertThatThrownBy(() -> Operators.from(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    private String trimmedInput(String input) {
-        return input.replaceAll(" ", "");
-    }
 }
