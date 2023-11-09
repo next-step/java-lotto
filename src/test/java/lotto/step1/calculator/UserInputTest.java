@@ -22,6 +22,16 @@ class UserInputTest {
         assertThat(userInput.split()).isEqualTo(expectedStrings);
     }
 
+    public static Stream<Arguments> userInputStringWithSpace() {
+        return Stream.of(
+                Arguments.of("1 + 2", new String[]{"1", "+", "2"}),
+                Arguments.of("2 - 4", new String[]{"2", "-", "4"}),
+                Arguments.of("3 * 5", new String[]{"3", "*", "5"}),
+                Arguments.of("4 / 2", new String[]{"4", "/", "2"}),
+                Arguments.of("5 + 2 * 2 - 3 / 4", new String[]{"5", "+", "2", "*", "2", "-", "3", "/", "4"})
+        );
+    }
+
     @ParameterizedTest
     @NullSource
     @DisplayName("입력 값이 null일 경우, IllegalArgumentException 예외가 발생한다.")
@@ -42,13 +52,13 @@ class UserInputTest {
                 .hasMessage("입력은 빈 공백이 될 수 없습니다.");
     }
 
-    public static Stream<Arguments> userInputStringWithSpace() {
-        return Stream.of(
-                Arguments.of("1 + 2", new String[]{"1", "+", "2"}),
-                Arguments.of("2 - 4", new String[]{"2", "-", "4"}),
-                Arguments.of("3 * 5", new String[]{"3", "*", "5"}),
-                Arguments.of("4 / 2", new String[]{"4", "/", "2"}),
-                Arguments.of("5 + 2 * 2 - 3 / 4", new String[]{"5", "+", "2", "*", "2", "-", "3", "/", "4"})
-        );
+    @ParameterizedTest
+    @ValueSource(strings = {"1 ! 2", "2 @ 4", "3 # 5", "3 $ 4", "4 % 2", "5 ^ 2", "6 & 2", "7 ~ 1", "1 < 2", "1 > 2"})
+    @DisplayName("입력으로 사칙연산 기호가 아닌 기호가 들어온 경우, IllegalArgumentException 예외가 발생한다.")
+    void splitUserInputStringWithNotOperator(String input) {
+        //given, when, then
+        assertThatThrownBy(() -> new UserInput(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("숫자와 사칙연산 기호만 입력이 가능합니다.");
     }
 }
