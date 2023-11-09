@@ -45,16 +45,34 @@ class InputTest {
     }
 
     @Test
-    @DisplayName("성공 - 문자열을 빈 공백 문자열을 기준으로 분리한다.")
-    void success_split_text() {
+    @DisplayName("성공 - 문자열에서 숫자만 추출한다.")
+    void success_split_number() {
+        // given
+        String text = "2 + 3 * 4 / 2";
+
+        // when
+        Input input = new Input(text);
+        List<Integer> numbers = input.extractNumber();
+
+        // then
+        assertThat(numbers).hasSize(4)
+                .containsExactlyInAnyOrder(2, 3, 4, 2);
+    }
+
+    @Test
+    @DisplayName("성공 - 문자열에서 연산자만 추출한다.")
+    void success_split_operator() {
         // given
         String text = "2 + 3 * 4 / 2";
 
         Input input = new Input(text);
-        List<String> splitedText = input.splitText();
+        List<String> operators = input.extractOperator();
 
         // when & then
-        assertThat(splitedText).hasSize(7);
+
+        // then
+        assertThat(operators).hasSize(3)
+                .containsExactlyInAnyOrder("+", "*", "/");
     }
 
 }

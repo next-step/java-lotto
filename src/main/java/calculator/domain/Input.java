@@ -9,8 +9,10 @@ import java.util.stream.Collectors;
 public class Input {
 
     private static final String REGEX_NUMBER = "[0-9]";
+    private static final String REGEX_NOT_NUMBER = "[^0-9]";
     private static final String ARITHMETIC = "[+\\-*/]";
     private static final String BLANK = " ";
+    private static final String EMPTY = "";
     private static final Pattern ARITHMETIC_PATTERN = Pattern.compile(ARITHMETIC);
 
     private final String text;
@@ -28,15 +30,10 @@ public class Input {
     }
 
     public void validateArithmetic(String text) {
-        String operators = extractedOperator(text);
+        String operators = extractOperator(text);
         for (char operator : operators.toCharArray()) {
             validateOperator(Character.toString(operator));
         }
-    }
-
-    private static String extractedOperator(String text) {
-        return text.replaceAll(REGEX_NUMBER, "")
-                .replaceAll(BLANK, "");
     }
 
     private void validateOperator(String operator) {
@@ -46,9 +43,21 @@ public class Input {
         }
     }
 
-    public List<String> splitText(){
-        return Arrays.stream(text.split(BLANK))
+    public List<Integer> extractNumber(){
+        String number = text.replaceAll(REGEX_NOT_NUMBER, "");
+        return Arrays.stream(number.split(EMPTY))
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    public List<String> extractOperator(){
+        return Arrays.stream(extractOperator(text).split(EMPTY))
+                .collect(Collectors.toList());
+    }
+
+    private String extractOperator(String text) {
+        return text.replaceAll(REGEX_NUMBER, "")
+                .replaceAll(BLANK, "");
     }
 
 }
