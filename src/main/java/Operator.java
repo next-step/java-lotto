@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.BiFunction;
 
 public enum Operator {
@@ -19,6 +21,17 @@ public enum Operator {
         return Arrays.stream(values()).filter(value -> value.operation.equals(operation))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
+    }
+
+    static List<Operator> byString(String value) {
+        String[] split = value.split(" ");
+        List<Operator> operators = new ArrayList<>();
+
+        for (int idx = 1; idx < split.length; idx += 2) {
+            operators.add(Operator.valueByOperation(split[idx]));
+        }
+
+        return operators;
     }
 
     public int operate(int num1, int num2) {
