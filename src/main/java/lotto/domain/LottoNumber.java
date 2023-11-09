@@ -13,4 +13,10 @@ public class LottoNumber {
     public boolean contains(int number) {
         return this.numbers.contains(number);
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
+
 }

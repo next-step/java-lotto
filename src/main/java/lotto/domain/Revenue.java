@@ -32,4 +32,9 @@ public class Revenue {
     public int hashCode() {
         return Objects.hash(revenue);
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(revenue);
+    }
 }

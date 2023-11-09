@@ -10,4 +10,7 @@ public enum Currency {
         this.description = description;
     }
 
+    public String description() {
+        return this.description;
+    }
 }

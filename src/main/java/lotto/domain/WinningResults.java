@@ -63,4 +63,7 @@ public class WinningResults {
         return Objects.hash(values);
     }
 
+    public Map<LottoRank, Integer> getAll() {
+        return this.values;
+    }
 }

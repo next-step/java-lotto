@@ -15,4 +15,8 @@ public class LottoPrize {
         return this.amount * value;
     }
 
+    @Override
+    public String toString() {
+        return amount + currency.description();
+    }
 }

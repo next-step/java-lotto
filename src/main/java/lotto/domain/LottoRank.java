@@ -20,6 +20,10 @@ public enum LottoRank {
         this.prize = prize;
     }
 
+    public String description() {
+        return this.description;
+    }
+
     public static LottoRank searchBy(int matchedCount) {
         for (LottoRank lottoRank : LottoRank.values()) {
             if (isMatchedCount(matchedCount, lottoRank)) {
@@ -36,5 +40,13 @@ public enum LottoRank {
 
     public int calculatePrize(Integer value) {
         return prize.calculateAmount(value);
+    }
+
+    public boolean isNotMatched() {
+        return this != LottoRank.NOT_MATCHED;
+    }
+
+    public String prizeToString() {
+        return this.prize.toString();
     }
 }
