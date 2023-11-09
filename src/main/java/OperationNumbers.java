@@ -9,12 +9,12 @@ public class OperationNumbers {
 
     public int operateByOperations(List<Operator> operators) {
         checkOperators(operators);
-        int result = 0;
+        int result = value.get(0);
         for (int idx = 0; idx < operators.size(); idx++) {
-            result += operators.get(idx).operate(result, value.get(idx));
+            result = operators.get(idx).operate(result, value.get(idx + 1));
         }
 
-        return  result;
+        return result;
     }
 
     private void checkOperators(List<Operator> operators) {

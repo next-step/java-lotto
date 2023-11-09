@@ -17,13 +17,13 @@ public enum Operator {
         this.expression = expression;
     }
 
-    static Operator valueByOperation(String operation) {
+    public static Operator valueByOperation(String operation) {
         return Arrays.stream(values()).filter(value -> value.operation.equals(operation))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    static List<Operator> byStringOperators(List<String> stringOperators) {
+    public static List<Operator> byStringOperators(List<String> stringOperators) {
         List<Operator> operators = new ArrayList<>();
 
         for (String stringOperator: stringOperators) {
