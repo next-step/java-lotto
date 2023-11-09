@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 public enum Operator {
     PLUS("+", Integer::sum),
@@ -10,9 +10,9 @@ public enum Operator {
     MULTIPLE("*", (num1, num2) -> num1 * num2);
 
     private final String operation;
-    private final BiFunction<Integer, Integer, Integer> expression;
+    private final BinaryOperator<Integer> expression;
 
-    Operator(String operation, BiFunction<Integer, Integer, Integer> expression) {
+    Operator(String operation, BinaryOperator<Integer> expression) {
         this.operation = operation;
         this.expression = expression;
     }
