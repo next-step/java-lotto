@@ -5,8 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorTest {
-	private final static Character LEFT_BRACKET = '(';
-
 	private Calculator calculator;
 
 	@BeforeEach
@@ -48,8 +46,10 @@ public class CalculatorTest {
 
 	@Test
 	void given_leftBracket_throwsException() {
+		char leftBracket = '(';
+
 		assertThatThrownBy(
-				() -> calculator.calculate(6, LEFT_BRACKET, 2)
+				() -> calculator.calculate(6, leftBracket, 2)
 		).isInstanceOf(IllegalArgumentException.class);
 	}
 }

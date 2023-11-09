@@ -33,10 +33,10 @@ public enum Operator {
 	}
 
 	public static int calculate(int left, char operator, int right) {
-		return Operator.fromChar(operator).apply(left, right);
+		return Operator.from(operator).apply(left, right);
 	}
 
-	public static Operator fromChar(char inputOperator) {
+	public static Operator from(char inputOperator) {
 		return Arrays.stream(Operator.values())
 				.filter(operator -> operator.symbol() == inputOperator)
 				.findAny()
