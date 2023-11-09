@@ -26,4 +26,16 @@ class WinningResultsTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    @Test
+    void 결과를_기반으로_수익률을_알_수_있다() {
+        WinningResults winningResults = new WinningResults(new WinningLottoNumber(List.of(1, 2, 3, 4, 5, 6)),
+                List.of(new LottoNumber(List.of(1, 2, 3, 7, 8, 9)),
+                        new LottoNumber(List.of(7, 8, 9, 10, 11, 12))));
+
+        Revenue actual = winningResults.revenue(14000);
+        Revenue expected = new Revenue(0.35);
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
 }

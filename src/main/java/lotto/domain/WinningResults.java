@@ -36,6 +36,20 @@ public class WinningResults {
         return values.getOrDefault(lottoRank, DEFAULT_VALUE) + 1;
     }
 
+    public Revenue revenue(int amount) {
+        return new Revenue(prize(), amount);
+    }
+
+    private int prize() {
+        int prizeTotal = 0;
+        for (Map.Entry<LottoRank, Integer> winningResult : values.entrySet()) {
+            LottoRank lottoRank = winningResult.getKey();
+            prizeTotal += lottoRank.calculatePrize(winningResult.getValue());
+        }
+
+        return prizeTotal;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,4 +62,5 @@ public class WinningResults {
     public int hashCode() {
         return Objects.hash(values);
     }
+
 }

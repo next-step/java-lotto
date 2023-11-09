@@ -11,4 +11,8 @@ public class LottoPrize {
         this.currency = currency;
     }
 
+    public int calculateAmount(Integer value) {
+        return this.amount * value;
+    }
+
 }
