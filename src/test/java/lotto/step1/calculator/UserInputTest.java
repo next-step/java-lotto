@@ -2,9 +2,7 @@ package lotto.step1.calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.*;
 
 import java.util.stream.Stream;
 
@@ -15,23 +13,33 @@ class UserInputTest {
     @ParameterizedTest
     @MethodSource("userInputStringWithSpace")
     @DisplayName("숫자와 사칙 연산 사이를 빈 공백으로 구분한 문자열이 입력되면, 해당 문자열을 숫자와 사칙 연산으로 분리한다.")
-    void splitUserInputStringWithSpace(String userInputString, String[] expectedStrings) {
+    void splitUserInputStringWithSpace(String input, String[] expectedStrings) {
         //given
         //when
-        UserInput userInput = new UserInput(userInputString);
+        UserInput userInput = new UserInput(input);
 
         //then
         assertThat(userInput.split()).isEqualTo(expectedStrings);
     }
 
     @ParameterizedTest
-    @NullAndEmptySource
-    @DisplayName("입력 값이 null이거나 빈 공백 문자일 경우, IllegalArgumentException 예외가 발생한다.")
-    void splitUserInputStringWithNullAndEmptyString(String userInputString) {
+    @NullSource
+    @DisplayName("입력 값이 null일 경우, IllegalArgumentException 예외가 발생한다.")
+    void splitUserInputStringWithNull(String input) {
         //given, when, then
-        assertThatThrownBy(() -> new UserInput(userInputString))
+        assertThatThrownBy(() -> new UserInput(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("입력은 null 혹은 빈 공백일 수 없습니다.");
+                .hasMessage("입력은 null이 될 수 없습니다.");
+    }
+
+    @ParameterizedTest
+    @EmptySource
+    @DisplayName("입력 값이 빈 공백 문자일 경우, IllegalArgumentException 예외가 발생한다.")
+    void splitUserInputStringWithEmptyString(String input) {
+        //given, when, then
+        assertThatThrownBy(() -> new UserInput(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("입력은 빈 공백이 될 수 없습니다.");
     }
 
     public static Stream<Arguments> userInputStringWithSpace() {
