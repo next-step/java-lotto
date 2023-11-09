@@ -23,12 +23,11 @@ public enum Operator {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    static List<Operator> byString(String value) {
-        String[] split = value.split(" ");
+    static List<Operator> byStringOperators(List<String> stringOperators) {
         List<Operator> operators = new ArrayList<>();
 
-        for (int idx = 1; idx < split.length; idx += 2) {
-            operators.add(Operator.valueByOperation(split[idx]));
+        for (String stringOperator: stringOperators) {
+            operators.add(Operator.valueByOperation(stringOperator));
         }
 
         return operators;

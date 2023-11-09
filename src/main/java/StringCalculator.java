@@ -2,9 +2,15 @@ import java.util.List;
 
 public class StringCalculator {
 
-    public static int calculate(String value) {
-        OperationNumbers operationNumbers = OperationNumbers.byString(value);
-        List<Operator> operators = Operator.byString(value);
+    private final Splitter splitter;
+
+    public StringCalculator(Splitter splitter) {
+        this.splitter = splitter;
+    }
+
+    public int calculate(String value) {
+        OperationNumbers operationNumbers = splitter.splitOperationNumbers(value);
+        List<Operator> operators = splitter.splitOperators(value);
 
         return operationNumbers.operateByOperations(operators);
     }
