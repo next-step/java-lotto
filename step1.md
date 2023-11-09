@@ -13,8 +13,7 @@
 - else를 사용하지 마라.
 
 ## 비즈니스 요구사항
-- [ ] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+- [X] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
 - [X] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
-- [ ] 공백 문자열을 분리할 수 있다.
 - [X] 사칙 연산을 모두 포함하는 기능을 수행할 수 있다.
 - [X] 사칙연산의 우선순위는 입력 순서이다
