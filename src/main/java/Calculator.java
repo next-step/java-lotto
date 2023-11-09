@@ -9,6 +9,17 @@ public class Calculator {
 		this.result = result;
 	}
 
+	public void calculate(String[] inputs) {
+		int left = Integer.parseInt(inputs[0]);
+		for (int i = 1; i < inputs.length; i += 2) {
+			char operator = inputs[i].charAt(0);
+			int right = Integer.parseInt(inputs[i+1]);
+
+			this.calculate(left, operator, right);
+			left = this.result;
+		}
+	}
+
 	public void calculate(int left, char operator, int right) {
 		this.result = Operator.calculate(left, operator, right);
 	}
