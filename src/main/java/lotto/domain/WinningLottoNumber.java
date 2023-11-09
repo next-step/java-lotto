@@ -7,6 +7,7 @@ public class WinningLottoNumber {
     private final List<Integer> numbers;
 
     public WinningLottoNumber(List<Integer> numbers) {
+        LottoNumberValidator.validate(numbers);
         this.numbers = numbers;
     }
 
