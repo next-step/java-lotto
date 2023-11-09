@@ -16,12 +16,11 @@ public class Calculation {
         int result = numberList.getNumberList().get(0);
         for (int i = 0; i < operationList.getOperationList().size(); i++) {
             Operation operation = Operation.findOperationBySign(operationList.getOperationList().get(i));
-            result = operation.calculate(result, numberList.getNumberList().get(i+1));
+            result = operation.calculate(result, numberList.getNumberList().get(i + 1));
         }
         return result;
 
     }
-
 
 
 }

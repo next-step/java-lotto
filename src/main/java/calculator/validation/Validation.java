@@ -9,7 +9,7 @@ public class Validation {
     private static final String OPERATION_REGULAR = "[+\\-*/]";
     private static final Pattern OPERATION_PATTERN = Pattern.compile(OPERATION_REGULAR);
 
-    private Validation(){
+    private Validation() {
         throw new IllegalStateException("Utility Class");
     }
 

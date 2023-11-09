@@ -28,7 +28,7 @@ public class NumberList {
         return i % 2 == 0;
     }
 
-    public List<Integer> getNumberList(){
+    public List<Integer> getNumberList() {
         return Collections.unmodifiableList(list);
     }
 
