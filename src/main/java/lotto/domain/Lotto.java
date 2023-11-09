@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.strategy.NumberStrategy;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,19 +17,21 @@ public class Lotto {
     }
 
     public void generateLottoNumber(NumberStrategy numberStrategy) {
-        Set<Integer> numbers = new HashSet<>();
-        while (numbers.size() < LOTTO_NUMBER_SIZE) {
-            lottoNumbers.add(numberStrategy.create());
+        while (lottoNumbers.size() < LOTTO_NUMBER_SIZE) {
+            int lottoNumber = numberStrategy.create();
+            duplicateNumberCheck(lottoNumber);
         }
-        sortLotto(numbers);
+        sortLotto();
     }
 
-    private boolean isDuplicateNumber(List<Integer> numbers, int number) {
-        return numbers.contains(number);
+    private void duplicateNumberCheck(int lottoNumber) {
+        if (!lottoNumbers.contains(lottoNumber)) {
+            lottoNumbers.add(lottoNumber);
+        }
     }
 
-    private void sortLotto(Set<Integer> numbers) {
-        lottoNumbers = numbers.stream().sorted().collect(Collectors.toList());
+    private void sortLotto() {
+        lottoNumbers = lottoNumbers.stream().sorted().collect(Collectors.toList());
     }
 
     public List<Integer> getLottoNumbers() {
