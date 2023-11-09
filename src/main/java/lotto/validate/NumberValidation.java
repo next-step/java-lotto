@@ -1,5 +1,9 @@
 package lotto.validate;
 
+import lotto.domain.LottoNumber;
+
+import java.util.List;
+
 public class NumberValidation {
 
     public static void checkNumberRange(int number) {
@@ -8,8 +12,8 @@ public class NumberValidation {
         }
     }
 
-    public static void checkLottoSize(int size) {
-        if (size != 6) {
+    public static void checkLottoSize(List<LottoNumber> numbers) {
+        if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호는 6개만 가능합니다.");
         }
     }

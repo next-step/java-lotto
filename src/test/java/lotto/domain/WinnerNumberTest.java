@@ -4,9 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinnerNumberTest {
 
@@ -36,32 +35,32 @@ public class WinnerNumberTest {
             // given
             String lottoNumbers = "1,2,3,46,5,6";
             // when
-            setup(lottoNumbers);
-            Lotto result = winnerNumber.resultLotto();
             // then
-            assertThat(result.lottoNumbers()).hasSize(6);
+            assertThatThrownBy(() -> {
+                setup(lottoNumbers);
+            }).isInstanceOf(IllegalArgumentException.class);
         }
 
         @Test
-        void 당첨_번호_갯수_오류_생성_실패() {
+        void 당첨_번호_7개_입력_생성_실패() {
             // given
             String lottoNumbers = "1,2,3,7,5,6,7";
             // when
-            setup(lottoNumbers);
-            Lotto result = winnerNumber.resultLotto();
             // then
-            assertThat(result.lottoNumbers()).hasSize(6);
+            assertThatThrownBy(() -> {
+                setup(lottoNumbers);
+            }).isInstanceOf(IllegalArgumentException.class);
         }
 
         @Test
-        void 당첨_번호_갯수_오류_생성_실패() {
+        void 당첨_번호_4개_입력_생성_실패() {
             // given
             String lottoNumbers = "1,2,3,4,5";
             // when
-            setup(lottoNumbers);
-            Lotto result = winnerNumber.resultLotto();
             // then
-            assertThat(result.lottoNumbers()).hasSize(6);
+            assertThatThrownBy(() -> {
+                setup(lottoNumbers);
+            }).isInstanceOf(IllegalArgumentException.class);
         }
 
         @Test
@@ -69,10 +68,10 @@ public class WinnerNumberTest {
             // given
             String lottoNumbers = "1,2,q,4,5";
             // when
-            setup(lottoNumbers);
-            Lotto result = winnerNumber.resultLotto();
             // then
-            assertThat(result.lottoNumbers()).hasSize(6);
+            assertThatThrownBy(() -> {
+                setup(lottoNumbers);
+            }).isInstanceOf(IllegalArgumentException.class);
         }
     }
 }
