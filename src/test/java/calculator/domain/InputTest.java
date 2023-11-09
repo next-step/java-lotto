@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class InputTest {
@@ -40,6 +42,19 @@ class InputTest {
         Assertions.assertThatThrownBy(() -> new Input(text))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("사칙연산 기호만 사용 가능합니다.");
+    }
+
+    @Test
+    @DisplayName("성공 - 문자열을 빈 공백 문자열을 기준으로 분리한다.")
+    void success_split_text() {
+        // given
+        String text = "2 + 3 * 4 / 2";
+
+        Input input = new Input(text);
+        List<String> splitedText = input.splitText();
+
+        // when & then
+        assertThat(splitedText).hasSize(7);
     }
 
 }

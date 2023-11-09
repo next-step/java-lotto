@@ -1,7 +1,10 @@
 package calculator.domain;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Input {
 
@@ -41,6 +44,11 @@ public class Input {
         if (!matcher.find()) {
             throw new IllegalArgumentException("사칙연산 기호만 사용 가능합니다.");
         }
+    }
+
+    public List<String> splitText(){
+        return Arrays.stream(text.split(BLANK))
+                .collect(Collectors.toList());
     }
 
 }
