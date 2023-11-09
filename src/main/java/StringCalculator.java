@@ -10,27 +10,8 @@ public class StringCalculator {
                 continue;
             }
 
-            switch (op) {
-                case "+": {
-                    result += Integer.parseInt(split[idx]);
-                    break;
-                }
-                case "-": {
-                    result -= Integer.parseInt(split[idx]);
-                    break;
-                }
-                case "*": {
-                    result *= Integer.parseInt(split[idx]);
-                    break;
-                }
-                case "/": {
-                    result /= Integer.parseInt(split[idx]);
-                    break;
-                }
-                default: {
-                    throw new RuntimeException();
-                }
-            }
+            Operator operator = Operator.valueByOperation(op);
+            result = operator.opp(result, Integer.parseInt(split[idx]));
         }
 
         return result;
