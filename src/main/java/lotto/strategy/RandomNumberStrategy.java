@@ -29,7 +29,7 @@ public class RandomNumberStrategy implements NumberStrategy {
         return lottos;
     }
 
-    private Lotto generateLotto(List<LottoNumber> lottoNumber){
+    private Lotto generateLotto(List<LottoNumber> lottoNumber) {
         Collections.shuffle(lottoNumber);
         List<LottoNumber> lotto = sliceNumber(lottoNumber);
         return new Lotto(lotto);

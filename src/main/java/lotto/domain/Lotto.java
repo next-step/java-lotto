@@ -1,12 +1,8 @@
 package lotto.domain;
 
-import lotto.strategy.NumberStrategy;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static lotto.validate.NumberValidation.checkNumberRange;
 
 public class Lotto {
 
