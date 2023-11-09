@@ -11,7 +11,7 @@ public class StringCalculator {
             }
 
             Operator operator = Operator.valueByOperation(op);
-            result = operator.opp(result, Integer.parseInt(split[idx]));
+            result = operator.operate(result, Integer.parseInt(split[idx]));
         }
 
         return result;

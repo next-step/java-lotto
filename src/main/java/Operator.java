@@ -21,7 +21,7 @@ public enum Operator {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public int opp(int num1, int num2) {
+    public int operate(int num1, int num2) {
         return expression.apply(num1, num2);
     }
 }
