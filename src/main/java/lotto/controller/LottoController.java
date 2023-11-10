@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.BuyingAmount;
 import lotto.domain.LottoMachine;
 import lotto.domain.WinningLottoNumber;
 import lotto.domain.WinningResults;
@@ -13,14 +14,14 @@ public class LottoController {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int amount = InputView.input(scanner);
+        BuyingAmount buyingAmount = new BuyingAmount(InputView.input(scanner));
 
-        LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberStrategy(), amount);
+        LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberStrategy(), buyingAmount);
         ResultView.reportBuying(lottoMachine.lottoCount(), lottoMachine.getLottoNumbers());
 
         WinningLottoNumber winningLottoNumber = new WinningLottoNumber(InputView.winnerNumber(scanner));
         WinningResults winningResults = lottoMachine.report(winningLottoNumber);
-        ResultView.reportStats(winningResults, amount);
+        ResultView.reportStats(winningResults, buyingAmount);
 
     }
 

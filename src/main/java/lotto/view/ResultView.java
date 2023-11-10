@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoRank;
-import lotto.domain.Revenue;
-import lotto.domain.WinningResults;
+import lotto.domain.*;
 
 import java.util.List;
 import java.util.Map;
@@ -33,7 +30,7 @@ public class ResultView {
     }
 
     public static void reportStats(WinningResults winningResults,
-                                   int amount) {
+                                   BuyingAmount buyingAmount) {
         br();
         System.out.println(WINNING_STATS);
         System.out.println(LINE);
@@ -47,7 +44,7 @@ public class ResultView {
             }
         }
 
-        Revenue revenue = winningResults.revenue(amount);
+        Revenue revenue = winningResults.revenue(buyingAmount);
         System.out.print(REVENUE_TOTAL + revenue.toString() + THAT);
         if (!revenue.isBenefit()) {
             System.out.println(LOSS);

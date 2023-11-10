@@ -36,8 +36,8 @@ public class WinningResults {
         return values.getOrDefault(lottoRank, DEFAULT_VALUE) + 1;
     }
 
-    public Revenue revenue(int amount) {
-        return new Revenue(prize(), amount);
+    public Revenue revenue(BuyingAmount buyingAmount) {
+        return new Revenue(prize(), buyingAmount);
     }
 
     private int prize() {

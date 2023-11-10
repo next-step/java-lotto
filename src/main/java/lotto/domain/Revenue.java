@@ -7,8 +7,8 @@ public class Revenue {
     private final double revenue;
 
     public Revenue(int basic,
-                   int amount) {
-        double rate = (double) basic / amount;
+                   BuyingAmount buyingAmount) {
+        double rate = buyingAmount.divide(basic);
         this.revenue = Math.floor(rate * 100) / 100;
     }
 

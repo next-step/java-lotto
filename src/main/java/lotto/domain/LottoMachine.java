@@ -6,29 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
-
-    private static final int LOTTO_AMOUNT = 1000;
     private List<LottoNumber> lottoNumbers;
 
 
     public LottoMachine(LottoNumberStrategy lottoNumberStrategy,
-                        int amount) {
-        validateLottoAmountUnits(amount);
+                        BuyingAmount buyingAmount) {
         lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < amount / LOTTO_AMOUNT; i++) {
+        for (int i = 0; i < buyingAmount.units(); i++) {
             List<Integer> numbers = lottoNumberStrategy.create();
             lottoNumbers.add(new LottoNumber(numbers));
         }
-    }
-
-    private void validateLottoAmountUnits(int amount) {
-        if(isLottoAmountUnits(amount)) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private static boolean isLottoAmountUnits(int amount) {
-        return amount % LOTTO_AMOUNT != 0;
     }
 
     public int lottoCount() {
