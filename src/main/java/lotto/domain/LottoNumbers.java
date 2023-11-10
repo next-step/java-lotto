@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -10,7 +10,7 @@ public class LottoNumbers {
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<Integer> numbers) {
-        this.lottoNumbers = new HashSet<>();
+        this.lottoNumbers = new LinkedHashSet<>();
         for(int number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
