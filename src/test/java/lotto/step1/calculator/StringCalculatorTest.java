@@ -20,4 +20,18 @@ class StringCalculatorTest {
         //then
         assertThat(result).isEqualTo(expectedResult);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"10 - 2,8", "2 - 4,-2", "15 - 30,-15", "100 - 99,1", "1000 - 4,996"}, delimiter = ',')
+    @DisplayName("입력 중 사칙연산 기호가 '-'인 경우, 두 숫자의 뺄셈을 구한다.")
+    void calculateSub(String input, String expectedResult) {
+        //given
+        UserInput userInput = new UserInput(input);
+
+        //when
+        String result = StringCalculator.calculate(userInput.getInputs());
+
+        //then
+        assertThat(result).isEqualTo(expectedResult);
+    }
 }
