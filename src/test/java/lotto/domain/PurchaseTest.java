@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.strategy.FixtureNumberStrategy;
+import lotto.strategy.NumberStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -28,9 +30,10 @@ public class PurchaseTest {
     @Test
     void 로또_구매_갯수() {
         // given
-        setUp(1000);
+        NumberStrategy numberStrategy = new FixtureNumberStrategy();
+        purchase = new Purchase(1000, numberStrategy);
         // when
-        int lottoCount = purchase.lottoCount();
+        int lottoCount = purchase.lottos().size();
         // then
         assertThat(lottoCount).isEqualTo(1);
     }
