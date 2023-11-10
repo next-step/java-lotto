@@ -38,4 +38,11 @@ public class StringCalculatorTest {
         int result = StringCalculator.calculate("1 * 2");
         assertThat(result).isEqualTo(2);
     }
+
+    @Test
+    @DisplayName("하나의 나눗셈 식을 계산한다")
+    void oneDivide() {
+        int result = StringCalculator.calculate("6 / 3");
+        assertThat(result).isEqualTo(2);
+    }
 }
