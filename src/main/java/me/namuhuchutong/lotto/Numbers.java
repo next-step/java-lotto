@@ -10,8 +10,8 @@ public class Numbers {
 
     public static Numbers createNumbers(NumberGenerator numberGenerator) {
         List<Integer> collect = Stream.generate(numberGenerator::createNumbers)
-                                              .limit(6)
-                                              .collect(Collectors.toUnmodifiableList());
+                                      .limit(6)
+                                      .collect(Collectors.toUnmodifiableList());
         return new Numbers(collect);
     }
 
