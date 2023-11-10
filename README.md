@@ -2,7 +2,7 @@
 
 ## 기능 요구사항
 
-- [ ] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException
+- [X] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException
 - [ ] 하나의 덧셈 식을 계산한다
 - [ ] 하나의 뺄셈 식을 계산한다
 - [ ] 하나의 곱셈 식을 계산한다
