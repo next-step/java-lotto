@@ -10,7 +10,7 @@ import step2.exception.NotNumericException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static step2.util.BigDecimalUtil.stringToBigDecimal;
 
-public class BigDecimalUtil {
+public class BigDecimalUtilTest {
 
     @ParameterizedTest
     @NullAndEmptySource

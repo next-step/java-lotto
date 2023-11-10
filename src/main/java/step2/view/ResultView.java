@@ -16,6 +16,7 @@ public class ResultView {
 
     public static void printLottos(Lottos lottos) {
         lottos.lottos().stream().forEach(ResultView::printLotto);
+        System.out.println();
     }
 
     private static void printLotto(Lotto lotto) {
