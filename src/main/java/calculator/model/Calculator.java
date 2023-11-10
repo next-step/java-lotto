@@ -1,7 +1,5 @@
 package calculator.model;
 
-import java.util.List;
-
 public class Calculator {
     InputNumber number;
     Operator operator;
@@ -12,22 +10,23 @@ public class Calculator {
     }
 
     public int calculate() {
-        return 0;
-    }
+        int result = number.numbers.get(0);
+        for (int i = 0; i < operator.operators.size(); i++) {
+            result = calculate(operator.operators.get(i), result, number.numbers.get(i + 1));
 
-    private int plus(int a, int b) {
-        return a + b;
+        }
+        return result;
     }
-
-    private int minus(int a, int b) {
-        return a - b;
-    }
-
-    private int multiplication(int a, int b) {
-        return a * b;
-    }
-
-    private int division(int a, int b) {
-        return a / b;
+    private int calculate(String operator, int leftInteger, int rightInteger){
+        if ("+".equals(operator)) {
+            return leftInteger + rightInteger;
+        }
+        if ("-".equals(operator)) {
+            return leftInteger - rightInteger;
+        }
+        if ("*".equals(operator)) {
+            return leftInteger * rightInteger;
+        }
+        return leftInteger / rightInteger;
     }
 }

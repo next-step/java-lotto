@@ -8,6 +8,7 @@ public class Classifier {
         isNullOrBlank(inputs);
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < inputs.length; i += 2) {
+            InputNumber.isInteger(inputs[i]);
             list.add(Integer.valueOf(inputs[i]));
         }
         return list;
