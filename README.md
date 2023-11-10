@@ -15,3 +15,7 @@
 
 ## step1
 * readme.md 파일에 요구사항 정리
+* 도메인 별 테스트 코드 및 구현체 작성
+  * BlankSeparator : StringCalculator 도메인을 만들어줍니다.
+  * StringCalculator : 내부에 연산자 리스트와 숫자 리스트를 갖고 해당 클래스에게 연산을 맡깁니다.
+  * Operator : 실제 연산을 진행하는 Enum 클래스 입니다.
