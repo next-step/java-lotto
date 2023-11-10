@@ -27,4 +27,10 @@ public class Lotto {
     public List<LottoNumber> lottoNumbers() {
         return lottoNumbers;
     }
+
+    @Override
+    public String toString() {
+        return String.format("[%s]", lottoNumbers.stream().map(LottoNumber::toString)
+                .collect(Collectors.joining(", ")));
+    }
 }

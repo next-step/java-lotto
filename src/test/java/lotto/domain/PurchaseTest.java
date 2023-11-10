@@ -35,6 +35,16 @@ public class PurchaseTest {
         assertThat(lottoCount).isEqualTo(1);
     }
 
+    @Test
+    void 로또_구매_수량_출력문구(){
+        // given
+        setUp(1000);
+        // when
+        String result = purchase.toString();
+        // then
+        assertThat(result).isEqualTo("1개를 구매했습니다.");
+    }
+
     @DisplayName("로또 구입 실패 금액 오류")
     @Nested
     class 구입_실패 {

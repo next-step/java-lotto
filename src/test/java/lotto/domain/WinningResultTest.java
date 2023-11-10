@@ -37,4 +37,17 @@ public class WinningResultTest {
         //then
         assertThat(result).isEqualTo(RankLotto.FOURTH.winningMoney() * 3);
     }
+
+    @DisplayName("당첨 결과 출력 문구")
+    @Test
+    void 당첨_결과_출력문구(){
+        //given
+        setUp(Map.of(RankLotto.FOURTH, 3));
+        //when
+        String result = winningResult.toString();
+        //then
+        assertThat(result).isEqualTo("당첨 통계\n" +
+                "---------\n" +
+                "3개 일치 (5000원) - 3개");
+    }
 }

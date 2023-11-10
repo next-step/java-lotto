@@ -19,4 +19,9 @@ public class Purchase {
     public int lottoCount() {
         return amount / LOTTO_AMOUNT;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%d개를 구매했습니다.", lottoCount());
+    }
 }
