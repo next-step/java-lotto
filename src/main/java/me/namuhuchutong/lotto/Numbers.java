@@ -8,8 +8,8 @@ public class Numbers {
 
     private final List<Integer> values;
 
-    public static Numbers createNumbers(NumberGenerator numberGenerator) {
-        List<Integer> collect = Stream.generate(numberGenerator::createNumbers)
+    public static Numbers create(NumberGenerator numberGenerator) {
+        List<Integer> collect = Stream.generate(numberGenerator::createNumber)
                                       .limit(6)
                                       .collect(Collectors.toUnmodifiableList());
         return new Numbers(collect);

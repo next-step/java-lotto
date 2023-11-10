@@ -30,7 +30,7 @@ class NumbersTest {
     @Test
     void number_is_should_be_in_range_of_1_to_45() {
         //when, then
-        assertThatThrownBy(() -> Numbers.createNumbers(() -> 100))
+        assertThatThrownBy(() -> Numbers.create(() -> 100))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
