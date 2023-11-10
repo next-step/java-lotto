@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    public static final int DEFAULT_QUANTITY = 6;
     private final LottoNumbers lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
