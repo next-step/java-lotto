@@ -4,6 +4,7 @@ import lotto.strategy.NumberStrategy;
 import lotto.strategy.RandomNumberStrategy;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static lotto.validate.InputValidation.inputValidate;
 
@@ -37,6 +38,17 @@ public class Purchase {
 
     @Override
     public String toString() {
-        return String.format("%d개를 구매했습니다.", lottoCount());
+        StringBuilder sb = new StringBuilder();
+        sb.append(lottoCount());
+        sb.append("개를 구매했습니다.");
+        sb.append(toStringLottos());
+
+        return sb.toString();
+    }
+
+    private String toStringLottos() {
+        return lottos.stream()
+                .map(Lotto::toString)
+                .collect(Collectors.joining("\n"));
     }
 }

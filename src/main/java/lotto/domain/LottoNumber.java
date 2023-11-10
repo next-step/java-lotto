@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.validate.NumberValidation;
-
 import static lotto.validate.NumberValidation.checkNumberRange;
 
 public class LottoNumber implements Comparable<LottoNumber> {
