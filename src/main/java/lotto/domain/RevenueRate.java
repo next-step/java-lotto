@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class RevenueRate {
-    private static final int DEFAULT_PERCENT = 1;
+    private static final int DEFAULT_REVENUE_RATE = 1;
     private final double revenue;
 
     public RevenueRate(int revenue,
@@ -17,7 +17,7 @@ public class RevenueRate {
     }
 
     public boolean isBenefit() {
-        return DEFAULT_PERCENT < this.revenue;
+        return DEFAULT_REVENUE_RATE < this.revenue;
     }
 
     @Override
