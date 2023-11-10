@@ -28,4 +28,19 @@ public class Operands {
             throw new IllegalArgumentException("올바르지 않는 피연산자입니다.");
         }
     }
+
+    public int getOperand() {
+        return this.values.poll();
+    }
+
+    public void push(int value) {
+        this.values.push(value);
+    }
+
+    public int getResult() {
+        if (this.values.size() != 1) {
+            throw new ArithmeticException("연산이 안 된 피연산자가 존재합니다.");
+        }
+        return this.values.poll();
+    }
 }

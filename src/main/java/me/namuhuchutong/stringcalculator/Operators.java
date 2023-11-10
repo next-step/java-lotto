@@ -34,4 +34,16 @@ public class Operators {
             throw new IllegalArgumentException("사칙연산자만 입력할 수 있습니다.");
         }
     }
+
+    public int calculate(Operands operands) {
+        while(!this.values.isEmpty()) {
+            Expression expression = new Expression(
+                    this.values.poll(),
+                    operands.getOperand(),
+                    operands.getOperand());
+            int result = Calculator.calculate(expression);
+            operands.push(result);
+        }
+        return operands.getResult();
+    }
 }
