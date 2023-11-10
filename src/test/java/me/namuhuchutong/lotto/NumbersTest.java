@@ -11,8 +11,18 @@ class NumbersTest {
     @DisplayName("로또 숫자는 6개이다")
     @Test
     void lotto_numbers_should_be_six() {
-        //given, when
-        Numbers numbers = new Numbers(List.of(1, 1, 1, 1, 1, 1));
+        //given
+        List<Number> given = List.of(
+                new Number(1),
+                new Number(1),
+                new Number(1),
+                new Number(1),
+                new Number(1),
+                new Number(1)
+        );
+
+        //when
+        Numbers numbers = new Numbers(given);
 
         //then
         assertThat(numbers.size()).isEqualTo(6);
@@ -21,16 +31,11 @@ class NumbersTest {
     @DisplayName("로또 숫자가 6개가 아닐 경우 예외가 발생한다.")
     @Test
     void throw_exception_when_numbers_is_not_six() {
-        //when, then
-        assertThatThrownBy(() -> new Numbers(List.of(1)))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
+        //given
+        List<Number> numbers = List.of(new Number(1));
 
-    @DisplayName("로또 숫자는 1~45 사이의 값을 가진다.")
-    @Test
-    void number_is_should_be_in_range_of_1_to_45() {
         //when, then
-        assertThatThrownBy(() -> Numbers.create(() -> 100))
+        assertThatThrownBy(() -> new Numbers(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -7,7 +7,7 @@ public class RandomNumberGenerator implements NumberGenerator {
     private static final Random RANDOM = new Random();
 
     @Override
-    public int createNumber() {
-        return (RANDOM.nextInt(45)) + 1;
+    public Number createNumber() {
+        return new Number(RANDOM.nextInt(45) + 1);
     }
 }
