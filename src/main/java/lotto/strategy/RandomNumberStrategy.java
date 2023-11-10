@@ -17,6 +17,7 @@ public class RandomNumberStrategy implements NumberStrategy {
         for (int i = 1; i <= MAX_NUMBER; i++) {
             LOTTO_NUMBER.add(new LottoNumber(i));
         }
+        Collections.unmodifiableList(LOTTO_NUMBER);
     }
 
     @Override
