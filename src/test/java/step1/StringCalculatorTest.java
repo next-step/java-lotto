@@ -29,4 +29,11 @@ public class StringCalculatorTest {
         assertThat(stringCalculator.add(1,2)).isEqualTo(3);
     }
 
+    @Test
+    @DisplayName("뺄셈")
+    void subtract() {
+        StringCalculator stringCalculator = new StringCalculator("1,2");
+        assertThat(stringCalculator.subtract(1,2)).isEqualTo(-1);
+    }
+
 }
