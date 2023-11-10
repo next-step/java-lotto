@@ -31,4 +31,11 @@ public class StringCalculatorTest {
         int result = StringCalculator.calculate("1 - 2");
         assertThat(result).isEqualTo(-1);
     }
+
+    @Test
+    @DisplayName("하나의 곱셈 식을 계산한다")
+    void oneMultiply() {
+        int result = StringCalculator.calculate("1 * 2");
+        assertThat(result).isEqualTo(2);
+    }
 }
