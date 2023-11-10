@@ -45,4 +45,11 @@ public class StringCalculatorTest {
         int result = StringCalculator.calculate("6 / 3");
         assertThat(result).isEqualTo(2);
     }
+
+    @Test
+    @DisplayName("여러 식을 순서대로 계산한다")
+    void multiOperatorExpression() {
+        int result = StringCalculator.calculate("1 + 2 * 3 / 2");
+        assertThat(result).isEqualTo(4);
+    }
 }
