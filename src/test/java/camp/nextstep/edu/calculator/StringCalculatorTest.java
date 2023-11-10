@@ -24,4 +24,11 @@ public class StringCalculatorTest {
         int result = StringCalculator.calculate("1 + 2");
         assertThat(result).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("하나의 뺄셈 식을 계산한다")
+    void oneMinus() {
+        int result = StringCalculator.calculate("1 - 2");
+        assertThat(result).isEqualTo(-1);
+    }
 }
