@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class LottoNumbers {
@@ -31,11 +32,6 @@ public class LottoNumbers {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
-    @Override
-    public String toString() {
-        return lottoNumbers.toString();
-    }
-
     public int matchedCount(Lotto lotto) {
         int count = 0;
         for(LottoNumber lottoNumber : lottoNumbers) {
@@ -43,5 +39,23 @@ public class LottoNumbers {
         }
 
         return count;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }

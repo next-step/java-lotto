@@ -24,7 +24,7 @@ public class RandomLottoNumberStrategy implements LottoNumberStrategy {
     public List<Integer> create() {
         List<Integer> list = new ArrayList<>(createRandomNumbers());
         Collections.sort(list);
-        return list;
+        return List.copyOf(list);
 
     }
 
