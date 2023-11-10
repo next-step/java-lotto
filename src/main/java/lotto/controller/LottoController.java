@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.domain.BuyingAmount;
 import lotto.domain.LottoMachine;
-import lotto.domain.WinningLottoNumber;
+import lotto.domain.WinningLotto;
 import lotto.domain.WinningResults;
 import lotto.domain.strategy.RandomLottoNumberStrategy;
 import lotto.view.InputView;
@@ -19,8 +19,8 @@ public class LottoController {
         LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberStrategy(), buyingAmount);
         ResultView.reportBuying(lottoMachine.lottoCount(), lottoMachine.getLottoNumbers());
 
-        WinningLottoNumber winningLottoNumber = new WinningLottoNumber(InputView.winnerNumber(scanner));
-        WinningResults winningResults = lottoMachine.report(winningLottoNumber);
+        WinningLotto winningLotto = new WinningLotto(InputView.winnerNumber(scanner));
+        WinningResults winningResults = lottoMachine.report(winningLotto);
         ResultView.reportStats(winningResults, buyingAmount);
 
     }

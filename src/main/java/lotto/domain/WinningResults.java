@@ -10,16 +10,16 @@ public class WinningResults {
     public static final int DEFAULT_VALUE = 0;
     private final Map<LottoRank, Integer> values;
 
-    public WinningResults(WinningLottoNumber winningLottoNumber,
-                          List<LottoNumber> lottoNumbers) {
+    public WinningResults(WinningLotto winningLotto,
+                          List<Lotto> lottos) {
         Map<LottoRank, Integer> treeMap = new TreeMap<>();
         for(LottoRank lottoRank : LottoRank.values()) {
             treeMap.put(lottoRank, DEFAULT_VALUE);
         }
         this.values = treeMap;
 
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            LottoRank lottoRank = winningLottoNumber.winningRank(lottoNumber);
+        for (Lotto lotto : lottos) {
+            LottoRank lottoRank = winningLotto.winningRank(lotto);
             values.put(lottoRank, createValue(lottoRank));
         }
     }

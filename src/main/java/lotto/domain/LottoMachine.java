@@ -6,27 +6,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
-    private List<LottoNumber> lottoNumbers;
-
+    private List<Lotto> lottos;
 
     public LottoMachine(LottoNumberStrategy lottoNumberStrategy,
                         BuyingAmount buyingAmount) {
-        lottoNumbers = new ArrayList<>();
+        lottos = new ArrayList<>();
         for (int i = 0; i < buyingAmount.units(); i++) {
             List<Integer> numbers = lottoNumberStrategy.create();
-            lottoNumbers.add(new LottoNumber(numbers));
+            lottos.add(new Lotto(numbers));
         }
     }
 
     public int lottoCount() {
-        return this.lottoNumbers.size();
+        return this.lottos.size();
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return this.lottoNumbers;
+    public List<Lotto> getLottoNumbers() {
+        return this.lottos;
     }
 
-    public WinningResults report(WinningLottoNumber winningLottoNumber) {
-        return new WinningResults(winningLottoNumber, lottoNumbers);
+    public WinningResults report(WinningLotto winningLotto) {
+        return new WinningResults(winningLotto, lottos);
     }
 }

@@ -21,10 +21,10 @@ public class ResultView {
     }
 
     public static void reportBuying(int lottoCount,
-                                    List<LottoNumber> lottoNumbers) {
+                                    List<Lotto> lottos) {
         System.out.println(lottoCount + BUYING_QUANTITY);
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            System.out.println(lottoNumber.toString());
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto.toString());
         }
         br();
     }

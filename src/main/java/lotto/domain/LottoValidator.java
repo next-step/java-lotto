@@ -4,12 +4,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class LottoNumberValidator {
+public class LottoValidator {
 
     private static final int MIN_NUMBER_RANGE = 1;
     private static final int MAX_NUMBER_RANGE = 45;
 
-    private LottoNumberValidator() {
+    private LottoValidator() {
     }
 
     public static void validate(List<Integer> numbers) {

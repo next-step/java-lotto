@@ -6,7 +6,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class RandomLottoNumberStrategyTest {
+class RandomLottoStrategyTest {
 
     @Test
     void 숫자_6개가_생성된다() {
