@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import step1.domain.StringCalculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -40,28 +41,28 @@ public class StringCalculatorTest {
     @DisplayName("덧셈")
     void add2() {
         StringCalculator stringCalculator = new StringCalculator(COMMON_INPUT);
-        assertThat(stringCalculator.add(1, 2)).isEqualTo(3);
+        assertThat(stringCalculator.calculate("+",1, 2)).isEqualTo(3);
     }
 
     @Test
     @DisplayName("뺄셈")
     void subtract() {
         StringCalculator stringCalculator = new StringCalculator(COMMON_INPUT);
-        assertThat(stringCalculator.subtract(1, 2)).isEqualTo(-1);
+        assertThat(stringCalculator.calculate("-",1, 2)).isEqualTo(-1);
     }
 
     @Test
     @DisplayName("곱셈")
     void multiply() {
         StringCalculator stringCalculator = new StringCalculator(COMMON_INPUT);
-        assertThat(stringCalculator.multiply(1, 2)).isEqualTo(2);
+        assertThat(stringCalculator.calculate("*",1,2)).isEqualTo(2);
     }
 
     @Test
     @DisplayName("나눗셈")
     void divide() {
         StringCalculator stringCalculator = new StringCalculator(COMMON_INPUT);
-        assertThat(stringCalculator.divide(1, 2)).isEqualTo(0);
+        assertThat(stringCalculator.calculate("/",1, 2)).isEqualTo(0);
     }
 
     @Test

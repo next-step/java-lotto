@@ -1,51 +1,34 @@
-package step1;
+package step1.domain;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringCalculator {
+public class StringCalculator extends Calculator{
 
-    private final String input;
-
-    private Stack<Integer> numbers;
-    private List<String> operators;
+    private final Stack<Integer> numbers;
+    private final List<String> operators;
 
     private static final String NUMBER_REGEX = "\\d+";
     private static final String OPERATOR_REGEX = "[+-/*]";
     private static final String EXCEPT_NUMBER_OPERATOR_WHITESPACE_REGEX = "[^\\d-+*/\\s]";
 
     public StringCalculator(String input) {
-        this.input = input;
         inputCheck(input);
         this.numbers = numbers(input);
         this.operators = operators(input);
     }
 
     public int result() {
-        for(String operator: operators){
-            int first = numbers.pop();
-            int second = numbers.pop();
-            numbers.push(calculate(operator, first, second));
-        }
+        calculating();
         return numbers.pop();
     }
 
-    private int calculate(String operator, int first, int second) {
-        switch(operator){
-            case "+":
-                return this.add(first, second);
-            case "-":
-                return this.subtract(first, second);
-            case "*":
-                return this.multiply(first, second);
-            case "/":
-                return this.divide(first, second);
-            default:
-                throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
+    private void calculating() {
+        for(String operator: operators){
+            numbers.push(calculate(operator, numbers.pop(), numbers.pop()));
         }
     }
 
@@ -77,7 +60,14 @@ public class StringCalculator {
         if(nullOrWhiteSpaceInput(input)){
             throw new IllegalArgumentException("입력 문자열은 null 또는 빈 문자열이어서는 안됩니다.");
         }
+        invalidCharCheck(input);
+    }
 
+    private static boolean nullOrWhiteSpaceInput(String input) {
+        return input == null || input.trim().isEmpty();
+    }
+
+    private static void invalidCharCheck(String input) {
         Pattern pattern = Pattern.compile(EXCEPT_NUMBER_OPERATOR_WHITESPACE_REGEX);
         Matcher matcher = pattern.matcher(input);
         if(matcher.find()) {
@@ -85,23 +75,4 @@ public class StringCalculator {
         }
     }
 
-    private static boolean nullOrWhiteSpaceInput(String input) {
-        return input == null || input.trim().isEmpty();
-    }
-
-    public int add(int first, int second) {
-        return first + second;
-    }
-
-    public int subtract(int first, int second) {
-        return first - second;
-    }
-
-    public int multiply(int first, int second) {
-        return first * second;
-    }
-
-    public int divide(int first, int second) {
-        return first / second;
-    }
 }
