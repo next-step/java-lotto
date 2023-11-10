@@ -1,11 +1,6 @@
 package step1;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class InputValidation {
-
-    private static final List<String> OPERATION_SYMBOLS = Arrays.asList("+", "-", "*" , "/");
 
     public void validate(String[] numAndSymbols) {
         for (int idx = 0; idx < numAndSymbols.length; idx++) {
@@ -46,7 +41,7 @@ public class InputValidation {
     }
 
     private void validateOperationSymbols(String symbol) {
-        if (OPERATION_SYMBOLS.contains(symbol)) {
+        if (OperationSymbol.isOperationSymbol(symbol)) {
             return;
         }
 

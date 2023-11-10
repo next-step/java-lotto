@@ -10,7 +10,7 @@ class InputValidationTest {
 
     private static final String DELIMITER = " ";
 
-    @DisplayName("공백으로 분리된 문자열 배열의 요소가 공백이면 예외를 던진다.")
+    @DisplayName("인자로 받은 문자열 배열의 요소가 공백이면 예외를 던진다.")
     @Test
     void splitByBlankWhenElementIsBlank() {
         // given
@@ -23,7 +23,7 @@ class InputValidationTest {
             .hasMessage("숫자, 연산 기호 자리에는 공백이 입력될 수 없습니다.");
     }
 
-    @DisplayName("입력된 문자열을 공백으로 분리 후 숫자의 값이 실수가 아니면 예외를 던진다.")
+    @DisplayName("인자로 받은 문자열 배열의 숫자 자리의 값이 실수가 아니면 예외를 던진다.")
     @Test
     void splitByBlankWhenStringIsNotRealNumber() {
         // given
@@ -36,7 +36,7 @@ class InputValidationTest {
             .hasMessage("숫자 자리에는 실수만 입력 가능합니다.");
     }
 
-    @DisplayName("입력된 문자열을 공백으로 분리 후 연산기호의 값이 (+,-,*,/)이 아니면 예외를 던진다.")
+    @DisplayName("인자로 받은 문자열 배열의 연산기호 자리의 값이 (+,-,*,/)이 아니면 예외를 던진다.")
     @Test
     void splitByBlankWhenStringIsNotSymbols() {
         // given
