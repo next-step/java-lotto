@@ -28,15 +28,15 @@ public class WinnerResultTest {
         assertThat(result.get(RankLotto.FOURTH)).isEqualTo(3);
     }
 
-    @DisplayName("당첨 총액")
+    @DisplayName("당첨 총액 수익률")
     @Test
-    void 당첨_상금총액() {
+    void 당첨_수익률() {
         //given
-        setUp(Map.of(RankLotto.FIRST, 0, RankLotto.SECOND, 0, RankLotto.THIRD, 0, RankLotto.FOURTH, 3, RankLotto.MISS, 0));
+        setUp(Map.of(RankLotto.FIRST, 0, RankLotto.SECOND, 0, RankLotto.THIRD, 0, RankLotto.FOURTH, 1, RankLotto.MISS, 0));
         //when
-        int result = winnerResult.totalPrize();
+        double result = winnerResult.rateOfReturn(10000);
         //then
-        assertThat(result).isEqualTo(RankLotto.FOURTH.winningMoney() * 3);
+        assertThat(result).isEqualTo(0.5);
     }
 
     @DisplayName("당첨 결과 출력 문구")

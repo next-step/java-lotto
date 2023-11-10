@@ -21,10 +21,14 @@ public class WinnerResult {
         return result;
     }
 
-    public int totalPrize() {
+    private int totalPrize() {
         return result.entrySet().stream()
                 .mapToInt(entry -> entry.getKey().winningMoney() * entry.getValue())
                 .sum();
+    }
+
+    public double rateOfReturn(int money) {
+        return (double) totalPrize() / money;
     }
 
     private Map<RankLotto, Integer> resultCount(Lotto winLotto, List<Lotto> lottos) {

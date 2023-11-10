@@ -11,7 +11,7 @@ public class RankLottoTest {
 
     @DisplayName("당첨번호와 일치하는 숫자가 6개인 경우 1등")
     @Test
-    void 당첨_1등(){
+    void 당첨_1등() {
         // given
         int matchCount = 6;
         // when
@@ -24,7 +24,7 @@ public class RankLottoTest {
     @DisplayName("당첨번호와 일치하는 숫자가 2개인 경우 당첨실패")
     @ParameterizedTest
     @ValueSource(ints = {2, 1, 0})
-    void 당첨_없음(){
+    void 당첨_없음() {
         // given
         int matchCount = 2;
         // when

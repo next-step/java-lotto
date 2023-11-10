@@ -39,7 +39,7 @@ public class PurchaseTest {
     }
 
     @Test
-    void 로또_구매_수량_출력문구(){
+    void 로또_구매_수량_출력문구() {
         // given
         setUp(1000);
         // when
