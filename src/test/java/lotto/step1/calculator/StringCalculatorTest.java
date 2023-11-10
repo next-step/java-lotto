@@ -16,7 +16,7 @@ class StringCalculatorTest {
         UserInput userInput = new UserInput(input);
 
         //when
-        String result = StringCalculator.calculate(userInput.getInputs());
+        String result = StringCalculator.calculate(userInput);
 
         //then
         assertThat(result).isEqualTo(expectedResult);
@@ -30,7 +30,7 @@ class StringCalculatorTest {
         UserInput userInput = new UserInput(input);
 
         //when
-        String result = StringCalculator.calculate(userInput.getInputs());
+        String result = StringCalculator.calculate(userInput);
 
         //then
         assertThat(result).isEqualTo(expectedResult);
@@ -44,7 +44,7 @@ class StringCalculatorTest {
         UserInput userInput = new UserInput(input);
 
         //when
-        String result = StringCalculator.calculate(userInput.getInputs());
+        String result = StringCalculator.calculate(userInput);
 
         //then
         assertThat(result).isEqualTo(expectedResult);
@@ -58,7 +58,7 @@ class StringCalculatorTest {
         UserInput userInput = new UserInput(input);
 
         //when
-        String result = StringCalculator.calculate(userInput.getInputs());
+        String result = StringCalculator.calculate(userInput);
 
         //then
         assertThat(result).isEqualTo(expectedResult);
@@ -72,7 +72,7 @@ class StringCalculatorTest {
         UserInput userInput = new UserInput(input);
 
         //when
-        String result = StringCalculator.calculate(userInput.getInputs());
+        String result = StringCalculator.calculate(userInput);
 
         //then
         assertThat(result).isEqualTo(expectedResult);

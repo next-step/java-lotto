@@ -1,46 +1,21 @@
 package lotto.step1.calculator;
 
+import lotto.step1.input.UserInput;
+
+import java.util.List;
+
 public class StringCalculator {
-    public static String calculate(final String[] split) {
-        String answer = "";
+    public static String calculate(final UserInput userInput) {
+        int calculateNumberIndex = 0;
+        final List<String> nums = userInput.getNums();
+        String answer = nums.get(calculateNumberIndex);
 
-        for (int i = 0; i < split.length; i++) {
-            final String curString = split[i];
-            final String nextString = split[i + 1];
-
-            if ("+".equals(curString)) {
-                answer = sum(answer, nextString);
-                i++;
-            } else if ("-".equals(curString)) {
-                answer = sub(answer, nextString);
-                i++;
-            } else if ("*".equals(curString)) {
-                answer = multi(answer, nextString);
-                i++;
-            } else if ("/".equals(curString)) {
-                answer = div(answer, nextString);
-                i++;
-            } else {
-                answer = curString;
-            }
+        for (String operatorSymbol : userInput.getOperators()) {
+            String nextNumber = nums.get(++calculateNumberIndex);
+            
+            answer = Operator.findBySymbol(operatorSymbol).calculate(answer, nextNumber);
         }
 
         return answer;
-    }
-
-    private static String div(final String num1, final String num2) {
-        return String.valueOf(Integer.parseInt(num1) / Integer.parseInt(num2));
-    }
-
-    private static String multi(final String num1, final String num2) {
-        return String.valueOf(Integer.parseInt(num1) * Integer.parseInt(num2));
-    }
-
-    private static String sub(final String num1, final String num2) {
-        return String.valueOf(Integer.parseInt(num1) - Integer.parseInt(num2));
-    }
-
-    private static String sum(final String num1, final String num2) {
-        return String.valueOf(Integer.parseInt(num1) + Integer.parseInt(num2));
     }
 }
