@@ -62,4 +62,18 @@ class StringCalculatorTest {
         //then
         assertThat(result).isEqualTo(expectedResult);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"2 + 3 * 4 / 2,10", "2 - 4 * 2 / 2 + 2,0", "15 / 15 * 2 + 1 - 3,0", "10 + 3 * 2 / 13 - 4,-2"}, delimiter = ',')
+    @DisplayName("사칙연산 기호가 2개 이상 포함된 값이 입력된 경우, 먼저 입력된 순서에 따라 계산 순서를 우선해서 결과 값을 구한다.")
+    void calculateContainAllOperators(String input, String expectedResult) {
+        //given
+        UserInput userInput = new UserInput(input);
+
+        //when
+        String result = StringCalculator.calculate(userInput.getInputs());
+
+        //then
+        assertThat(result).isEqualTo(expectedResult);
+    }
 }
