@@ -41,11 +41,12 @@ public class PurchaseTest {
     @Test
     void 로또_구매_수량_출력문구() {
         // given
-        setUp(1000);
+        NumberStrategy numberStrategy = new FixtureNumberStrategy();
+        purchase = new Purchase(1000, numberStrategy);
         // when
         String result = purchase.toString();
         // then
-        assertThat(result).isEqualTo("1개를 구매했습니다.");
+        assertThat(result).isEqualTo("1개를 구매했습니다.\n[2, 3, 5, 6, 10, 40]");
     }
 
     @DisplayName("로또 구입 실패 금액 오류")
