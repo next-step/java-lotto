@@ -32,7 +32,8 @@ public class LottoMachine {
     }
 
     public WinningResults report(WinningLotto winningLotto) {
-        return new WinningResults(winningLotto, lottos);
+        List<LottoRank> lottoRanks = winningLotto.winningRank(lottos);
+        return new WinningResults(lottoRanks);
     }
 
     @Override
