@@ -28,6 +28,12 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    public int match(Lotto lotto) {
+        return lotto.lottoNumbers().stream()
+                .filter(this.lottoNumbers::contains)
+                .collect(Collectors.toList()).size();
+    }
+
     @Override
     public String toString() {
         return String.format("[%s]", lottoNumbers.stream().map(LottoNumber::toString)
