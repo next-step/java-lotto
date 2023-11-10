@@ -1,13 +1,25 @@
 package me.namuhuchutong.lotto;
 
-import java.util.Random;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class RandomNumberGenerator implements NumberGenerator {
 
-    private static final Random RANDOM = new Random();
+    private static final List<Number> RANDOM_NUMBERS;
+
+    static {
+        RANDOM_NUMBERS = new ArrayList<>();
+        for (int i = 1; i <= 45; i++) {
+            RANDOM_NUMBERS.add(new Number(i));
+        }
+    }
 
     @Override
-    public Number createNumber() {
-        return new Number(RANDOM.nextInt(45) + 1);
+    public List<Number> createNumbers() {
+        List<Number> numbers = List.copyOf(RANDOM_NUMBERS);
+        Collections.shuffle(numbers);
+        return numbers.subList(0, 6);
     }
 }

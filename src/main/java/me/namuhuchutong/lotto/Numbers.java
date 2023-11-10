@@ -1,18 +1,13 @@
 package me.namuhuchutong.lotto;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Numbers {
 
     private final List<Number> values;
 
     public static Numbers create(NumberGenerator numberGenerator) {
-        List<Number> collect = Stream.generate(numberGenerator::createNumber)
-                                      .limit(6)
-                                      .collect(Collectors.toUnmodifiableList());
-        return new Numbers(collect);
+        return new Numbers(numberGenerator.createNumbers());
     }
 
     public Numbers(List<Number> values) {
