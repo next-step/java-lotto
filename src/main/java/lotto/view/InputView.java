@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class InputView {
 
-    public static final String REGEX = ", ";
+    private static final String COMMA_BLANK = ", ";
 
     public static int input(Scanner scanner) {
         System.out.println("구입금액을 입력해 주세요.");
@@ -21,7 +21,7 @@ public class InputView {
         String input = scanner.nextLine();
 
         List<Integer> numbers = new ArrayList<>();
-        for(String number : input.split(REGEX)) {
+        for (String number : input.split(COMMA_BLANK)) {
             numbers.add(Integer.valueOf(number));
         }
 
