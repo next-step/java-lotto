@@ -11,7 +11,7 @@ class NumbersTest {
     @DisplayName("로또 숫자는 6개이다")
     @Test
     void lotto_numbers_should_be_six() {
-        //when
+        //given, when
         Numbers numbers = new Numbers(List.of(1, 1, 1, 1, 1, 1));
 
         //then
@@ -22,7 +22,7 @@ class NumbersTest {
     @Test
     void throw_exception_when_numbers_is_not_six() {
         //when, then
-        assertThatThrownBy(() -> new Numbers(List.of(1, 1, 1, 1, 1)))
+        assertThatThrownBy(() -> new Numbers(List.of(1)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -30,7 +30,7 @@ class NumbersTest {
     @Test
     void number_is_should_be_in_range_of_1_to_45() {
         //when, then
-        assertThatThrownBy(() -> new Numbers(List.of(1, 1, 1, 100, 1)))
+        assertThatThrownBy(() -> Numbers.createNumbers(() -> 100))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

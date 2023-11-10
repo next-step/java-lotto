@@ -1,10 +1,19 @@
 package me.namuhuchutong.lotto;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Numbers {
 
     private final List<Integer> values;
+
+    public static Numbers createNumbers(NumberGenerator numberGenerator) {
+        List<Integer> collect = Stream.generate(numberGenerator::createNumbers)
+                                              .limit(6)
+                                              .collect(Collectors.toUnmodifiableList());
+        return new Numbers(collect);
+    }
 
     public Numbers(List<Integer> values) {
         validateSixNumbers(values);
