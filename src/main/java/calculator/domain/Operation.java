@@ -1,6 +1,6 @@
-package calculator;
+package calculator.domain;
 
-public enum Operation implements Calculate{
+public enum Operation implements Calculate {
     PLUS('+') {
         @Override
         public int calculate(int i, int j) {
@@ -31,6 +31,5 @@ public enum Operation implements Calculate{
     Operation(Character operation) {
         this.operation = operation;
     }
-
 
 }
