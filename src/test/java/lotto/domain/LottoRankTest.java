@@ -37,8 +37,8 @@ class LottoRankTest {
     void 입력된_수량으로_등수_금액_계산을_할_수_있다() {
         LottoRank lottoRank = LottoRank.FOURTH;
 
-        int actual = lottoRank.calculatePrize(2);
-        int expected = 10000;
+        long actual = lottoRank.calculatePrize(2);
+        long expected = 10000;
 
         assertThat(actual).isEqualTo(expected);
     }

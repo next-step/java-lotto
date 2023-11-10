@@ -2,16 +2,16 @@ package lotto.domain;
 
 public class LottoPrize {
 
-    private final int amount;
+    private final long amount;
     private final Currency currency;
 
-    public LottoPrize(int amount,
+    public LottoPrize(long amount,
                       Currency currency) {
         this.amount = amount;
         this.currency = currency;
     }
 
-    public int calculateAmount(Integer value) {
+    public long calculateAmount(long value) {
         return this.amount * value;
     }
 

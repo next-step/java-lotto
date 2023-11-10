@@ -38,7 +38,7 @@ public enum LottoRank {
         return lottoRank.matchedCount == matchedCount;
     }
 
-    public int calculatePrize(Integer value) {
+    public long calculatePrize(Integer value) {
         return prize.calculateAmount(value);
     }
 
