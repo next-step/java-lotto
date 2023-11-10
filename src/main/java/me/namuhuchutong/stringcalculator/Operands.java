@@ -43,4 +43,8 @@ public class Operands {
         }
         return this.values.poll();
     }
+
+    public int getOperandsSize() {
+        return this.values.size();
+    }
 }

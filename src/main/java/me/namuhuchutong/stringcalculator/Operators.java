@@ -36,6 +36,7 @@ public class Operators {
     }
 
     public int calculate(Operands operands) {
+        validateExpression(operands);
         while(!this.values.isEmpty()) {
             Expression expression = new Expression(
                     this.values.poll(),
@@ -45,5 +46,15 @@ public class Operators {
             operands.push(result);
         }
         return operands.getResult();
+    }
+
+    private void validateExpression(Operands operands) {
+        if (isValidExpression(operands)) {
+            throw new IllegalArgumentException("식이 올바르지 않습니다.");
+        }
+    }
+
+    private boolean isValidExpression(Operands operands) {
+        return Math.abs(this.values.size() - operands.getOperandsSize()) != 1;
     }
 }

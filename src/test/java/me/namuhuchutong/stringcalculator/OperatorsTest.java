@@ -29,6 +29,25 @@ class OperatorsTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("(피연산자의 수 - 연산자의 수)는 절대값 1이 아닐 경우 예외가 발생한다.")
+    @ParameterizedTest
+    @ValueSource(strings ={
+            "2 + 3 * 4 / 2 / ",
+            "4 - 2 * 4 / 2 *",
+            "4 - 2 * 4 / 2 +",
+            "4 - 2 * 4 / 2 -"
+    })
+    void operands_is_one_less_than_operators(String given) {
+        //given
+        String input = StringTrimmer.trimmedInput(given);
+        Operators operators = Operators.from(input);
+        Operands operands = Operands.from(input);
+
+        //when, then
+        assertThatThrownBy(() -> operators.calculate(operands))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @DisplayName("입력된 계산식은 우선순위 없이 입력 순서대로 계산된다.")
     @ParameterizedTest
     @MethodSource("givenInputAndExpected")
