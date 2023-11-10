@@ -32,8 +32,8 @@ class WinningResultsTest {
                 List.of(new Lotto(List.of(1, 2, 3, 7, 8, 9)),
                         new Lotto(List.of(7, 8, 9, 10, 11, 12))));
 
-        Revenue actual = winningResults.revenue(new BuyingAmount(14000));
-        Revenue expected = new Revenue(0.35);
+        RevenueRate actual = winningResults.revenue(new BuyingAmount(14000));
+        RevenueRate expected = new RevenueRate(0.35);
 
         assertThat(actual).isEqualTo(expected);
     }

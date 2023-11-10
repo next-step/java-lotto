@@ -2,17 +2,17 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class Revenue {
-    public static final int DEFAULT_PERCENT = 1;
+public class RevenueRate {
+    private static final int DEFAULT_PERCENT = 1;
     private final double revenue;
 
-    public Revenue(int basic,
-                   BuyingAmount buyingAmount) {
-        double rate = buyingAmount.divide(basic);
+    public RevenueRate(int revenue,
+                       BuyingAmount buyingAmount) {
+        double rate = buyingAmount.divide(revenue);
         this.revenue = Math.floor(rate * 100) / 100;
     }
 
-    public Revenue(double revenue) {
+    public RevenueRate(double revenue) {
         this.revenue = revenue;
     }
 
@@ -24,8 +24,8 @@ public class Revenue {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Revenue revenue1 = (Revenue) o;
-        return Double.compare(revenue1.revenue, revenue) == 0;
+        RevenueRate revenueRate1 = (RevenueRate) o;
+        return Double.compare(revenueRate1.revenue, revenue) == 0;
     }
 
     @Override

@@ -43,9 +43,9 @@ public class ResultView {
             }
         }
 
-        Revenue revenue = winningResults.revenue(buyingAmount);
-        System.out.print(REVENUE_TOTAL + revenue.toString() + THAT);
-        if (!revenue.isBenefit()) {
+        RevenueRate revenueRate = winningResults.revenue(buyingAmount);
+        System.out.print(REVENUE_TOTAL + revenueRate.toString() + THAT);
+        if (!revenueRate.isBenefit()) {
             System.out.println(LOSS);
         }
 
