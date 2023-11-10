@@ -17,12 +17,19 @@ public class StringCalculator {
             } else if ("*".equals(curString)) {
                 answer = multi(answer, nextString);
                 i++;
+            } else if ("/".equals(curString)) {
+                answer = div(answer, nextString);
+                i++;
             } else {
                 answer = curString;
             }
         }
 
         return answer;
+    }
+
+    private static String div(final String num1, final String num2) {
+        return String.valueOf(Integer.parseInt(num1) / Integer.parseInt(num2));
     }
 
     private static String multi(final String num1, final String num2) {
