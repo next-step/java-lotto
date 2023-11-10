@@ -45,18 +45,28 @@ public class StringCalculator {
             return Math.round(sum / nextNum);
         }
 
+        calculateWithPlus(symbol, nextNum);
+        calculateWithMinus(symbol, nextNum);
+        calculateWithMultiplication(symbol, nextNum);
+
+        return Math.round(sum * 100) / 100.0;
+    }
+
+    private void calculateWithPlus(String symbol, double nextNum) {
         if (OperationSymbol.isPlus(symbol)) {
             sum += nextNum;
         }
+    }
 
+    private void calculateWithMinus(String symbol, double nextNum) {
         if (OperationSymbol.isMinus(symbol)) {
             sum -= nextNum;
         }
+    }
 
+    private void calculateWithMultiplication(String symbol, double nextNum) {
         if (OperationSymbol.isMultiplication(symbol)) {
             sum *= nextNum;
         }
-
-        return Math.round(sum * 100) / 100.0;
     }
 }
