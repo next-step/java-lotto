@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,12 +7,12 @@ import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class WinningResultTest {
+public class WinnerResultTest {
 
-    private WinningResult winningResult;
+    private WinnerResult winnerResult;
 
     public void setUp(Map<RankLotto, Integer> result) {
-        winningResult = new WinningResult(result);
+        winnerResult = new WinnerResult(result);
     }
 
     @DisplayName("당첨3개 5000원, 3개")
@@ -22,7 +21,7 @@ public class WinningResultTest {
         //given
         setUp(Map.of(RankLotto.FOURTH, 3));
         //when
-        Map<RankLotto, Integer> result = winningResult.result();
+        Map<RankLotto, Integer> result = winnerResult.result();
         //then
         assertThat(result.get(RankLotto.FOURTH)).isEqualTo(3);
     }
@@ -33,7 +32,7 @@ public class WinningResultTest {
         //given
         setUp(Map.of(RankLotto.FIRST, 0, RankLotto.SECOND, 0, RankLotto.THIRD, 0, RankLotto.FOURTH, 3, RankLotto.MISS, 0));
         //when
-        int result = winningResult.totalPrize();
+        int result = winnerResult.totalPrize();
         //then
         assertThat(result).isEqualTo(RankLotto.FOURTH.winningMoney() * 3);
     }
@@ -44,7 +43,7 @@ public class WinningResultTest {
         //given
         setUp(Map.of(RankLotto.FOURTH, 3));
         //when
-        String result = winningResult.toString();
+        String result = winnerResult.toString();
         //then
         assertThat(result).isEqualTo("당첨 통계\n" +
                 "---------\n" +

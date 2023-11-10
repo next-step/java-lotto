@@ -4,11 +4,11 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class WinningResult {
+public class WinnerResult {
 
     private final Map<RankLotto, Integer> result;
 
-    public WinningResult(Map<RankLotto, Integer> result) {
+    public WinnerResult(Map<RankLotto, Integer> result) {
         this.result = Collections.unmodifiableMap(result);
     }
 
