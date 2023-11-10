@@ -1,4 +1,4 @@
-package lotto.step1.calculator;
+package lotto.step1.input;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,4 +1,4 @@
-package lotto.step1.calculator;
+package lotto.step1.input;
 
 import lotto.step1.validator.Validator;
 
