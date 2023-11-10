@@ -15,12 +15,12 @@ class LottoTest {
 
         assertAll(
                 () -> {
-                    boolean actual = lotto.contains(1);
+                    boolean actual = lotto.contains(new LottoNumber(1));
 
                     assertThat(actual).isTrue();
                 },
                 () -> {
-                    boolean actual = lotto.contains(7);
+                    boolean actual = lotto.contains(new LottoNumber(7));
 
                     assertThat(actual).isFalse();
                 }

@@ -1,22 +1,25 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-    private final List<Integer> numbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
-        LottoValidator.validate(numbers);
-        this.numbers = numbers;
+        this.lottoNumbers = new ArrayList<>();
+        for(int number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
     }
 
-    public boolean contains(int number) {
-        return this.numbers.contains(number);
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
     @Override
     public String toString() {
-        return numbers.toString();
+        return lottoNumbers.toString();
     }
 
 }
