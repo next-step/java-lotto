@@ -1,7 +1,9 @@
 package step1;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,7 +11,7 @@ public class StringCalculator {
 
     private final String input;
 
-    private List<Integer> numbers;
+    private Stack<Integer> numbers;
     private List<String> operators;
 
     private static final String NUMBER_REGEX = "\\d+";
@@ -23,22 +25,50 @@ public class StringCalculator {
         this.operators = operators(input);
     }
 
+    public int result() {
+        for(String operator: operators){
+            int first = numbers.pop();
+            int second = numbers.pop();
+            numbers.push(calculate(operator, first, second));
+        }
+        return numbers.pop();
+    }
+
+    private int calculate(String operator, int first, int second) {
+        switch(operator){
+            case "+":
+                return this.add(first, second);
+            case "-":
+                return this.subtract(first, second);
+            case "*":
+                return this.multiply(first, second);
+            case "/":
+                return this.divide(first, second);
+            default:
+                throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
+        }
+    }
+
     private List<String> operators(String input) {
         Pattern pattern = Pattern.compile(OPERATOR_REGEX);
         Matcher matcher = pattern.matcher(input);
-        List<String> operators = new ArrayList<>();
+        List<String> operators = new LinkedList<>();
         while(matcher.find()) {
             operators.add(matcher.group());
         }
         return operators;
     }
 
-    private List<Integer> numbers(String input) {
+    private Stack<Integer> numbers(String input) {
         Pattern pattern = Pattern.compile(NUMBER_REGEX);
         Matcher matcher = pattern.matcher(input);
-        List<Integer> result = new ArrayList<>();
+        Stack<Integer> inputNumbers = new Stack<>();
         while(matcher.find()) {
-            result.add(Integer.parseInt(matcher.group()));
+            inputNumbers.push(Integer.parseInt(matcher.group()));
+        }
+        Stack<Integer> result = new Stack<>();
+        while(!inputNumbers.isEmpty()){
+            result.push(inputNumbers.pop());
         }
         return result;
     }

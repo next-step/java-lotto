@@ -64,4 +64,10 @@ public class StringCalculatorTest {
         assertThat(stringCalculator.divide(1, 2)).isEqualTo(0);
     }
 
+    @Test
+    @DisplayName("문자열 계산기 결과 출력")
+    void result() {
+        StringCalculator stringCalculator = new StringCalculator(COMMON_INPUT);
+        assertThat(stringCalculator.result()).isEqualTo(10);
+    }
 }
