@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator;
 
 import java.util.Arrays;
 
@@ -29,20 +29,17 @@ public enum Operation implements Calculate {
     };
 
     private static final String INVALID_OPERATION_MSE = "올바른 기호가 아닙니다.";
-    private String operation;
+    private String name;
 
 
-    Operation(String operation) {
-        this.operation = operation;
+    Operation(String name) {
+        this.name = name;
     }
-
 
     public static Operation fromString(String token) {
         return Arrays.stream(values())
-                .filter(v -> v.name().equals(token))
+                .filter(v -> v.name.equals(token))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_OPERATION_MSE));
     }
-
-
 }

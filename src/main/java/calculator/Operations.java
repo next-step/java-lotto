@@ -1,11 +1,11 @@
-package calculator.domain;
+package calculator;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.regex.Pattern;
+
+import static calculator.REGEX.NUMBER_PATTERN;
 
 public class Operations {
-    private static final Pattern NUMBER_PATTERN = Pattern.compile("[^0-9]+");
     private final Queue<Operation> operationQueue;
 
     public Operations(String[] tokens) {
@@ -31,10 +31,18 @@ public class Operations {
         return !NUMBER_PATTERN.matcher(token).find();
     }
 
-    @Override
-    public String toString() {
-        return "Operations{" +
-                "operationQueue=" + operationQueue.toString() +
-                '}';
+    public int calculate(final Operands operands) {
+        int result = operands.remove();
+
+        while (isQueueNotEmpty()) {
+            final Operation operation = operationQueue.remove();
+            result = operation.calculate(result, operands.remove());
+        }
+
+        return result;
+    }
+
+    private boolean isQueueNotEmpty() {
+        return !this.operationQueue.isEmpty();
     }
 }

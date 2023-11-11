@@ -1,11 +1,13 @@
-package calculator.domain;
+package calculator;
 
+import calculator.StringCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class StringCalculatorTest {
@@ -24,5 +26,12 @@ class StringCalculatorTest {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             new StringCalculator("3 & 3");
         });
+    }
+    @DisplayName("일반적인 산술연산과는 다르게 입력한 순서대로 계산된다.")
+    @Test
+    void 계산() {
+        final StringCalculator stringCalculator = new StringCalculator("5 + 3 * 4");
+        final int result = stringCalculator.calculate();
+        assertThat(result).isEqualTo(32);
     }
 }

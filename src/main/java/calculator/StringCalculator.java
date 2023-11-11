@@ -1,16 +1,14 @@
-package calculator.domain;
+package calculator;
 
-import java.util.*;
-import java.util.regex.Pattern;
+import static calculator.REGEX.NUMBER_PATTERN;
+import static calculator.REGEX.OPERATION_PATTERN;
 
 public class StringCalculator {
     public static final String INVALID_TOKEN_MSG = "올바른 입력이 아닙니다.";
     private static final String NULL_EMPTY_MSG= "입력 값이 null 이거나 빈 공백 문자일 수 없습니다.";
-    private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
-    private static final Pattern OPERATION_PATTERN = Pattern.compile("[+\\-*/]");
     public static final String SPACE = " ";
 
-    private Queue<Integer> operands;
+    private Operands operands;
     private Operations operations;
 
     public StringCalculator(final String inputText) {
@@ -18,13 +16,8 @@ public class StringCalculator {
 
         final String[] tokens = splitToken(inputText);
 
-        final Queue<Integer> operandQueue = new LinkedList<>();
-
-//        final Operations operations1 = new Operations(tokens);
-//        System.out.println(operations1);
-
-//        this.operations = operations1;
-        this.operands = operandQueue;
+        this.operations = new Operations(tokens);
+        this.operands = new Operands(tokens);
     }
 
     private String[] splitToken(final String inputText) {
@@ -52,20 +45,11 @@ public class StringCalculator {
         }
     }
 
-
     private static boolean isNullOrEmpty(final String inputText) {
         return inputText == null || inputText.isBlank();
     }
 
     public int calculate() {
-        Integer result = operands.remove();
-
-//        for (int i = 0 ; i < operations.size(); i ++) {
-//            final Operation op = operations.remove();
-//            final Integer operand = operands.remove();
-//            result = op.calculate(result, operand);
-//        }
-
-        return result;
+        return this.operations.calculate(this.operands);
     }
 }
