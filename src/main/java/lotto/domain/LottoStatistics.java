@@ -30,4 +30,11 @@ public class LottoStatistics {
     public int getMatchCount(int matchCount) {
         return statistics.get(matchCount);
     }
+
+    public int getReceiveMoney() {
+        return statistics.get(3) * ReceiveMoney.MATCH_3_RECEIVE_MONEY.getMoney()
+                + statistics.get(4) * ReceiveMoney.MATCH_4_RECEIVE_MONEY.getMoney()
+                + statistics.get(5) * ReceiveMoney.MATCH_5_RECEIVE_MONEY.getMoney()
+                + statistics.get(6) * ReceiveMoney.MATCH_6_RECEIVE_MONEY.getMoney();
+    }
 }
