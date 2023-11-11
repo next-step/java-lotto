@@ -10,8 +10,6 @@ public class Calculator {
     private static final String MULTIPLICATION = "*";
     private static final String DIVISION = "/";
 
-    private static final String[] OPERATION_SYMBOLS = {"+", "-", "*", "/"};
-
     private double number;
 
     public Calculator() {
