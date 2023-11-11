@@ -1,6 +1,6 @@
 package step1.controller;
 
-import step1.controller.view.InputView;
+import step1.view.InputView;
 
 public class StringCalculatorController {
 
