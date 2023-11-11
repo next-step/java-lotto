@@ -27,14 +27,18 @@ public class LottoStat {
         statistics.put(matchCount, statistics.get(matchCount) + 1);
     }
 
-    public int getMatchCount(int matchCount) {
+    public int getMatchCountResult(int matchCount) {
         return statistics.get(matchCount);
     }
 
-    public int getReceiveMoney() {
+    private int getReceiveMoney() {
         return statistics.get(3) * ReceiveMoney.MATCH_3_RECEIVE_MONEY.getMoney()
                 + statistics.get(4) * ReceiveMoney.MATCH_4_RECEIVE_MONEY.getMoney()
                 + statistics.get(5) * ReceiveMoney.MATCH_5_RECEIVE_MONEY.getMoney()
                 + statistics.get(6) * ReceiveMoney.MATCH_6_RECEIVE_MONEY.getMoney();
+    }
+
+    public float getProfitRate(Money buyMoney) {
+        return (float) getReceiveMoney() / buyMoney.getMoney();
     }
 }

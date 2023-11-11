@@ -23,15 +23,16 @@ class LottoStatTest {
         lottoStat.check(myLottos, winningLotto);
 
         // then
-        assertThat(lottoStat.getMatchCount(6)).isEqualTo(1);
-        assertThat(lottoStat.getMatchCount(5)).isEqualTo(0);
-        assertThat(lottoStat.getMatchCount(4)).isEqualTo(1);
+        assertThat(lottoStat.getMatchCountResult(6)).isEqualTo(1);
+        assertThat(lottoStat.getMatchCountResult(5)).isEqualTo(0);
+        assertThat(lottoStat.getMatchCountResult(4)).isEqualTo(1);
     }
 
     @Test
-    @DisplayName("수령금확인/당첨개수확인되어있음/총 수령금")
-    void getReceiveMoney() {
+    @DisplayName("수익률확인/당첨개수결과와 구매금액/수익률")
+    void getProfitRate() {
         // given
+        Money money = new Money(2000);
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8));
@@ -42,7 +43,8 @@ class LottoStatTest {
         lottoStat.check(myLottos, winningLotto);
 
         // then
-        assertThat(lottoStat.getReceiveMoney())
-                .isEqualTo(ReceiveMoney.MATCH_4_RECEIVE_MONEY.getMoney() + ReceiveMoney.MATCH_6_RECEIVE_MONEY.getMoney());
+        System.out.println("lottoStat.getProfitRate(money) = " + lottoStat.getProfitRate(money));
+        assertThat(lottoStat.getProfitRate(money))
+                .isEqualTo((float) (ReceiveMoney.MATCH_4_RECEIVE_MONEY.getMoney() + ReceiveMoney.MATCH_6_RECEIVE_MONEY.getMoney()) / money.getMoney());
     }
 }
