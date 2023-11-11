@@ -44,7 +44,7 @@ public enum LottoRank {
         return prize.calculateAmount(value);
     }
 
-    public boolean isNotMatched() {
+    public boolean isWin() {
         return this != LottoRank.NOT_MATCHED;
     }
 

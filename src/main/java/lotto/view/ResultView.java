@@ -37,7 +37,7 @@ public class ResultView {
         Map<LottoRank, Integer> winningResult = winningResults.getAll();
         for (Map.Entry<LottoRank, Integer> result : winningResult.entrySet()) {
             LottoRank lottoRank = result.getKey();
-            if (lottoRank.isNotMatched()) {
+            if (lottoRank.isWin()) {
                 System.out.println(lottoRank.description() + OPENING_PARENTHESIS + lottoRank.prizeToString() + CLOSING_PARENTHESIS + result.getValue() +
                         QUANTITY);
             }
