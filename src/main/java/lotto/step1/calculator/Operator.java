@@ -1,38 +1,36 @@
 package lotto.step1.calculator;
 
+import java.util.function.BinaryOperator;
+
 public enum Operator {
-    PLUS("+") {
-        @Override
-        String calculate(final String num1, final String num2) {
-            return String.valueOf(Integer.parseInt(num1) + Integer.parseInt(num2));
-        }
-    },
-    MINUS("-") {
-        @Override
-        String calculate(final String num1, final String num2) {
-            return String.valueOf(Integer.parseInt(num1) - Integer.parseInt(num2));
-        }
-    },
-    MULTIPLY("*") {
-        @Override
-        String calculate(final String num1, final String num2) {
-            return String.valueOf(Integer.parseInt(num1) * Integer.parseInt(num2));
-        }
-    },
-    DIVIDE("/") {
-        @Override
-        String calculate(final String num1, final String num2) {
-            return String.valueOf(Integer.parseInt(num1) / Integer.parseInt(num2));
-        }
-    };
+    PLUS(
+            "+",
+            (num1, num2) -> String.valueOf(Integer.parseInt(num1) + Integer.parseInt(num2))
+    ),
+    MINUS(
+            "-",
+            (num1, num2) -> String.valueOf(Integer.parseInt(num1) - Integer.parseInt(num2))
+    ),
+    MULTIPLY(
+            "*",
+            (num1, num2) -> String.valueOf(Integer.parseInt(num1) * Integer.parseInt(num2))
+    ),
+    DIVIDE(
+            "/",
+            (num1, num2) -> String.valueOf(Integer.parseInt(num1) / Integer.parseInt(num2))
+    );
 
     private final String symbol;
+    private final BinaryOperator<String> calculator;
 
-    Operator(final String symbol) {
+    Operator(final String symbol, final BinaryOperator<String> calculator) {
         this.symbol = symbol;
+        this.calculator = calculator;
     }
 
-    abstract String calculate(final String num1, final String num2);
+    public String calculate(final String num1, final String num2) {
+        return calculator.apply(num1, num2);
+    }
 
     public static Operator findBySymbol(final String symbol) {
         Operator findedOperator = findOperatorWithMatchingSymbol(symbol);
@@ -56,7 +54,7 @@ public enum Operator {
         if (result != null) {
             return result;
         }
-        
+
         if (operator.isSameOperator(symbol)) {
             return operator;
         }
