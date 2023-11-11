@@ -37,8 +37,6 @@ public class StringCalculator {
     }
 
     private void validationToken(final String token) {
-        System.out.println("token");
-        System.out.println(token);
         if (isNotNumberAndInvalidOperation(token)) {
             throw new IllegalArgumentException(INVALID_TOKEN_MSG);
         }
@@ -59,7 +57,7 @@ public class StringCalculator {
         return inputText == null || inputText.isBlank();
     }
 
-    public int cal() {
+    public int calculate() {
         Integer result = operands.remove();
 
 //        for (int i = 0 ; i < operations.size(); i ++) {
