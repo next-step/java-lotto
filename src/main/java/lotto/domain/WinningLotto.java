@@ -11,12 +11,6 @@ public class WinningLotto {
         this.lottoNumbers = new LottoNumbers(numbers);
     }
 
-    public LottoRank winningRank(Lotto lotto) {
-        int count = lottoNumbers.matchedCount(lotto);
-
-        return LottoRank.searchBy(count);
-    }
-
     public List<LottoRank> winningRank(List<Lotto> lottos) {
         List<LottoRank> list = new ArrayList<>();
         for (Lotto lotto : lottos) {
@@ -24,5 +18,11 @@ public class WinningLotto {
             list.add(lottoRank);
         }
         return list;
+    }
+
+    private LottoRank winningRank(Lotto lotto) {
+        int count = lottoNumbers.matchedCount(lotto);
+
+        return LottoRank.searchBy(count);
     }
 }

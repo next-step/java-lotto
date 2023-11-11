@@ -13,8 +13,8 @@ class WinningLottoTest {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
 
-        LottoRank actual = winningLotto.winningRank(lotto);
-        LottoRank expected = LottoRank.FIRST;
+        List<LottoRank> actual = winningLotto.winningRank(List.of(lotto));
+        List<LottoRank> expected = List.of(LottoRank.FIRST);
 
         assertThat(actual).isEqualTo(expected);
     }
