@@ -8,10 +8,14 @@ import java.util.Objects;
 public class Splitter {
 
     public Deque<String> split(String value) {
+        validate(value);
+
+        return new LinkedList<>(Arrays.asList(value.split(" ")));
+    }
+
+    private void validate(String value) {
         if (Objects.isNull(value) || value.isBlank()) {
             throw new IllegalArgumentException();
         }
-
-        return new LinkedList<>(Arrays.asList(value.split(" ")));
     }
 }
