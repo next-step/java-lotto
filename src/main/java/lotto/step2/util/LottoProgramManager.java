@@ -12,9 +12,9 @@ public class LottoProgramManager {
 
     public static List<Lotto> generateLottos(final int numberOfLottos) {
         List<Lotto> lottos = new ArrayList<>();
-        
+
         for (int i = 0; i < numberOfLottos; i++) {
-            lottos.add(new Lotto());
+            lottos.add(new Lotto(LottoNumberGenerator.generateLottoNumbers()));
         }
 
         return lottos;
