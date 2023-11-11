@@ -1,30 +1,56 @@
 package step2.domain;
 
+import step2.domain.type.Prize;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.Map;
 
 public class WinningStatistics {
 
-    private final Map<Integer, Lottos> winningStatistics;
+    private static final int SCALE = 2;
 
-    public WinningStatistics(Map<Integer, Lottos> winningStatistics) {
+    private final Map<Prize, Lottos> winningStatistics;
+
+    public WinningStatistics(Map<Prize, Lottos> winningStatistics) {
         this.winningStatistics = winningStatistics;
     }
 
-    public int winningLottosCount(int matchCount) {
-        return winningLottos(matchCount).size();
+    public int winningLottosCount(Prize prize) {
+        return winningLottos(prize).size();
     }
 
-    private Lottos winningLottos(int matchCount) {
-        if (exist(matchCount)) {
-            return winningStatistics.get(matchCount);
+    private Lottos winningLottos(Prize prize) {
+        if (exist(prize)) {
+            return this.winningStatistics.get(prize);
         }
 
         return new Lottos(Collections.emptyList());
     }
 
-    private boolean exist(int matchCount) {
-        return winningStatistics.containsKey(matchCount);
+    private boolean exist(Prize prize) {
+        return this.winningStatistics.containsKey(prize);
+    }
+
+    public BigDecimal rateOfReturn(BigDecimal paidPrice) {
+        return sumOfPrizeMoney().divide(paidPrice, SCALE, RoundingMode.HALF_UP);
+    }
+
+    private BigDecimal sumOfPrizeMoney() {
+        BigDecimal result = BigDecimal.ZERO;
+        for (Prize prize : this.winningStatistics.keySet()) {
+            result = result.add(moneyPerPrize(prize));
+        }
+
+        return result;
+    }
+
+    private BigDecimal moneyPerPrize(Prize prize) {
+        BigDecimal prizeMoney = prize.prizeMoney();
+        BigDecimal winningLottoCount = BigDecimal.valueOf(winningLottosCount(prize));
+
+        return prizeMoney.multiply(winningLottoCount);
     }
 
 }

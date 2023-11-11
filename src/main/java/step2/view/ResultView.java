@@ -6,6 +6,7 @@ import step2.domain.Lottos;
 import step2.domain.WinningStatistics;
 import step2.domain.type.Prize;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 public class ResultView {
@@ -15,6 +16,7 @@ public class ResultView {
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
     private static final String DIVIDING_LINE = "---------";
     private static final String MATCH_MESSAGE = "%d개 일치 (%.0f원)- %d개";
+    private static final String RATE_OF_RETURN_MESSAGE = "총 수익률은 %.2f입니다.";
     private static final String COMMA = ", ";
 
     public static void printPurchaseMessage(int count) {
@@ -44,14 +46,24 @@ public class ResultView {
 
     private static void printWinningStatisticsPerPrize(WinningStatistics winningStatistics) {
         Arrays.stream(Prize.values())
-            .forEach(prize -> System.out.println(winningStatisticsText(prize, winningStatistics)));
+            .filter(Prize::isWinningPrize)
+            .map(prize -> winningStatisticsText(prize, winningStatistics))
+            .forEach(System.out::println);
     }
 
     private static String winningStatisticsText(Prize prize, WinningStatistics winningStatistics) {
         return String.format(MATCH_MESSAGE,
             prize.matchCount(),
             prize.prizeMoney(),
-            winningStatistics.winningLottosCount(prize.matchCount()));
+            winningStatistics.winningLottosCount(prize));
+    }
+
+    public static void printRateOfReturn(BigDecimal price, WinningStatistics winningStatistics) {
+        System.out.println(rateOfReturnText(price, winningStatistics));
+    }
+
+    private static String rateOfReturnText(BigDecimal price, WinningStatistics winningStatistics) {
+        return String.format(RATE_OF_RETURN_MESSAGE, winningStatistics.rateOfReturn(price));
     }
 
 }

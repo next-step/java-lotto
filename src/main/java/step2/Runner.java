@@ -27,6 +27,7 @@ public class Runner {
         Lotto prizeLotto = new Lotto(numbers(InputView.prizeLottoNumber()));
         WinningStatistics winningStatistics = lottos.winningStatistics(prizeLotto);
         ResultView.printWinningStatistics(winningStatistics);
+        ResultView.printRateOfReturn(price, winningStatistics);
     }
 
 }
