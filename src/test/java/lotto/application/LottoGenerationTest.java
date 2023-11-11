@@ -1,6 +1,9 @@
-package lotto.domain;
+package lotto.application;
 
 import lotto.application.LottoGeneration;
+import lotto.domain.Lottos;
+import lotto.domain.NumberGeneration;
+import lotto.domain.RandomNumberGeneration;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

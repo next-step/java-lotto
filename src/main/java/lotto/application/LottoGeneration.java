@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGeneration {
-
-    public Lottos generateLottoNumbers(int count,NumberGeneration numberGeneration){
+    public Lottos generateLottoNumbers(int count, NumberGeneration numberGeneration) {
         List<Lotto> list = new ArrayList<>();
-        for(int i = 0; i< count; i++){
+        for (int i = 0; i < count; i++) {
             list.add(new Lotto(numberGeneration));
         }
         return new Lottos(list);

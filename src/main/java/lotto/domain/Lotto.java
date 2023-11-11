@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-
     public static final int COUNT = 6;
     private final List<Integer> numbers;
 
@@ -19,11 +18,20 @@ public class Lotto {
     public int countMatchNumber(List<Integer> winningList) {
         int count = 0;
         for (int i = 0; i < COUNT; i++) {
-            if (winningList.get(i).equals(numbers.get(i))) {
-                count++;
-            }
+            count += checkMatch(winningList, numbers.get(i));
         }
         return count;
+    }
+
+    private int checkMatch(List<Integer> winningList, int matchNumber) {
+        if (contains(winningList, matchNumber)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    private boolean contains(List<Integer> winningList, int matchNumber) {
+        return winningList.contains(matchNumber);
     }
 
     public String findNumbersForPrint() {
