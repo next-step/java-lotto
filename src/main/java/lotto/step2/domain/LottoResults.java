@@ -35,12 +35,9 @@ public class LottoResults {
         for (Map.Entry<LottoRank, Integer> entry : rankResultEntriesExceptOther) {
             final LottoRank lottoRank = entry.getKey();
 
-            String numberMatchCountText = String.format("%d개 일치", lottoRank.getMatchingCount());
-            String priceText = String.format("(%d원)", lottoRank.getPrizeMoney());
             String rankCountText = String.format("%d개", entry.getValue());
 
-            sb.append(numberMatchCountText).append(" ")
-                    .append(priceText).append("- ").append(rankCountText).append("\n");
+            sb.append(lottoRank).append(rankCountText).append("\n");
         }
 
         return sb.toString();

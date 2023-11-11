@@ -11,10 +11,16 @@ public enum LottoRank {
 
     private final int matchingCount;
     private final int prizeMoney;
+    private final String toString;
 
     LottoRank(int matchingCount, int prizeMoney) {
         this.matchingCount = matchingCount;
         this.prizeMoney = prizeMoney;
+
+        String numberMatchCountText = String.format("%d개 일치 ", matchingCount);
+        String priceText = String.format("(%d원)- ", prizeMoney);
+
+        this.toString = numberMatchCountText + priceText;
     }
 
     public int getMatchingCount() {
@@ -30,5 +36,10 @@ public enum LottoRank {
                 .filter(lottoRank -> lottoRank.getMatchingCount() == count)
                 .findFirst()
                 .orElse(OTHER);
+    }
+
+    @Override
+    public String toString() {
+        return this.toString;
     }
 }
