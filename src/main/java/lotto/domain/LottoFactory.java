@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -21,6 +22,6 @@ public class LottoFactory {
 
     private static Lotto generateRandomLotto() {
         Collections.shuffle(LOTTO_NUMBER_LIST, new Random());
-        return new Lotto(LOTTO_NUMBER_LIST.subList(0, 6));
+        return new Lotto(new ArrayList<>(LOTTO_NUMBER_LIST.subList(0, 6)));
     }
 }
