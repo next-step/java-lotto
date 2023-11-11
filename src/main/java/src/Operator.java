@@ -1,8 +1,6 @@
 package src;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.BinaryOperator;
 
 public enum Operator {
@@ -11,16 +9,16 @@ public enum Operator {
     DIVIDE("/", (num1, num2) -> num1 / num2),
     MULTIPLE("*", (num1, num2) -> num1 * num2);
 
-    private final String operation;
+    private final String name;
     private final BinaryOperator<Integer> expression;
 
-    Operator(String operation, BinaryOperator<Integer> expression) {
-        this.operation = operation;
+    Operator(String name, BinaryOperator<Integer> expression) {
+        this.name = name;
         this.expression = expression;
     }
 
-    public static Operator valueByOperation(String operation) {
-        return Arrays.stream(values()).filter(value -> value.operation.equals(operation))
+    public static Operator byString(String name) {
+        return Arrays.stream(values()).filter(value -> value.name.equals(name))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }

@@ -10,7 +10,7 @@ public class StringCalculator {
         int result = Integer.parseInt(chars.pop());
 
         while(!chars.isEmpty()) {
-            Operator operator = Operator.valueByOperation(chars.pop());
+            Operator operator = Operator.byString(chars.pop());
 
             result = operator.operate(result, Integer.parseInt(chars.pop()));
         }
