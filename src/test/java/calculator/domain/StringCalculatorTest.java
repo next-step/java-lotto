@@ -3,7 +3,6 @@ package calculator.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -17,6 +16,13 @@ class StringCalculatorTest {
     void 빈문자열_입력(String input) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             new StringCalculator(input);
+        });
+    }
+    @DisplayName("사칙연산 기호가 아닌 경우 예외가 발생한다.")
+    @Test
+    void 사칙연산_입력() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new StringCalculator("3 + 3");
         });
     }
 }
