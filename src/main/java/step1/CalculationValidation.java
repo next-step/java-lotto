@@ -1,6 +1,6 @@
 package step1;
 
-public class InputValidation {
+public class CalculationValidation {
 
     public void validate(String[] numAndSymbols) {
         for (int idx = 0; idx < numAndSymbols.length; idx++) {
@@ -20,7 +20,7 @@ public class InputValidation {
     }
 
     private void validateNumAndSymbol(String numAndSymbol, int idx) {
-        if (isNumber(idx)) {
+        if (isNumberPosition(idx)) {
             validateParseToDouble(numAndSymbol);
             return;
         }
@@ -28,7 +28,7 @@ public class InputValidation {
         validateOperationSymbols(numAndSymbol);
     }
 
-    private boolean isNumber(int idx) {
+    private boolean isNumberPosition(int idx) {
         return idx % 2 == 0;
     }
 
