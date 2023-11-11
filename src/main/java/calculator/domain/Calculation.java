@@ -2,21 +2,21 @@ package calculator.domain;
 
 public class Calculation {
 
-    private final NumberList numberList;
-    private final OperationList operationList;
+    private final Numbers numberList;
+    private final Operations operationList;
 
 
     public Calculation(String[] textArray) {
-        this.numberList = new NumberList(textArray);
-        this.operationList = new OperationList(textArray);
+        this.numberList = new Numbers(textArray);
+        this.operationList = new Operations(textArray);
 
     }
 
     public int startOperation() {
-        int result = numberList.getNumberList().get(0);
-        for (int i = 0; i < operationList.getOperationList().size(); i++) {
-            Operation operation = Operation.findOperationBySign(operationList.getOperationList().get(i));
-            result = operation.calculate(result, numberList.getNumberList().get(i + 1));
+        int result = numberList.findNumber(0);
+        for (int i = 0; i < operationList.size(); i++) {
+            Operation operation = Operation.findOperationBySign(operationList.findSign(i));
+            result = operation.calculate(result, numberList.findNumber(i + 1));
         }
         return result;
 

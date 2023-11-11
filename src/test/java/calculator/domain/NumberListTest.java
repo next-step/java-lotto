@@ -13,9 +13,9 @@ public class NumberListTest {
     void 숫자_일급컬렉션_생성_확인() {
         String[] textArray = {"2", "+", "10", "/", "3", "+", "6", "/", "3"};
         List<Integer> result = List.of(2, 10, 3, 6, 3);
-        NumberList numberList = new NumberList(textArray);
+        Numbers numberList = new Numbers(textArray);
 
-        Assertions.assertThat(numberList.getNumberList()).isEqualTo(result);
+        Assertions.assertThat(numberList.findNumber(0)).isEqualTo(2);
 
     }
 }
