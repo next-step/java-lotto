@@ -53,6 +53,6 @@
 
 - 23.11.11
     - [X] ~~Operator에서 abstract 메서드를 상속받아 사용하는 것 대신에 람다식으로 표현을 해보자.~~
-    - [ ] Operator::findBySymbol 의 테스트를 추가하자.
+    - [X] ~~Operator::findBySymbol 의 테스트를 추가하자.~~
 
 ---
