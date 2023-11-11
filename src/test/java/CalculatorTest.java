@@ -59,7 +59,8 @@ public class CalculatorTest {
 
 	@Test
 	void calculate_validInputExpression_validResult() {
-		String[] inputs = InputView.inputExpression("2 + 3 * 4 / 2");
+		String inputExpression = InputView.inputExpression("2 + 3 * 4 / 2");
+		String[] inputs = inputExpression.split(" ");
 		calculator.calculate(inputs);
 		int actual = calculator.result();
 		int expected = (((2 + 3) * 4) / 2);
@@ -69,7 +70,8 @@ public class CalculatorTest {
 
 	@Test
 	void calculate_inputExpressionWithLeftBracket_throwsException() {
-		String[] inputs = InputView.inputExpression("2 + 3 * 4 ( 2");
+		String inputExpression = InputView.inputExpression("2 + 3 * 4 ( 2");
+		String[] inputs = inputExpression.split(" ");
 		
 		assertThatThrownBy(
 				() -> calculator.calculate(inputs)
