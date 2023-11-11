@@ -55,10 +55,10 @@ class LottoResultsTest {
     void testToString() {
         assertThat(lottoResults.toString())
                 .isEqualTo(
-                        LottoRank.FIRST.getMatchingCount() + "개 일치 (" + LottoRank.FIRST.getPrizeMoney() + "원)- " + FIRST_RANK_COUNT + "개\n" +
-                                LottoRank.SECOND.getMatchingCount() + "개 일치 (" + LottoRank.SECOND.getPrizeMoney() + "원)- " + SECOND_RANK_COUNT + "개\n" +
+                        LottoRank.FOURTH.getMatchingCount() + "개 일치 (" + LottoRank.FOURTH.getPrizeMoney() + "원)- " + FOURTH_RANK_COUNT + "개\n" +
                                 LottoRank.THIRD.getMatchingCount() + "개 일치 (" + LottoRank.THIRD.getPrizeMoney() + "원)- " + THIRD_RANK_COUNT + "개\n" +
-                                LottoRank.FOURTH.getMatchingCount() + "개 일치 (" + LottoRank.FOURTH.getPrizeMoney() + "원)- " + FOURTH_RANK_COUNT + "개\n"
+                                LottoRank.SECOND.getMatchingCount() + "개 일치 (" + LottoRank.SECOND.getPrizeMoney() + "원)- " + SECOND_RANK_COUNT + "개\n" +
+                                LottoRank.FIRST.getMatchingCount() + "개 일치 (" + LottoRank.FIRST.getPrizeMoney() + "원)- " + FIRST_RANK_COUNT + "개\n"
                 );
     }
 

@@ -1,7 +1,9 @@
 package lotto.step2.domain;
 
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoResults {
     private final Map<LottoRank, Integer> rankResult;
@@ -20,21 +22,30 @@ public class LottoResults {
 
     @Override
     public String toString() {
+        return generateStringUsingEntries(getRankResultEntriesExceptOther());
+    }
+
+    private String generateStringUsingEntries(final List<Map.Entry<LottoRank, Integer>> rankResultEntriesExceptOther) {
         StringBuilder sb = new StringBuilder();
 
-        for (Map.Entry<LottoRank, Integer> entry : rankResult.entrySet()) {
+        for (Map.Entry<LottoRank, Integer> entry : rankResultEntriesExceptOther) {
             final LottoRank lottoRank = entry.getKey();
 
-            String numberMatchCountText = lottoRank.getMatchingCount() + "개 일치";
-            String priceText = lottoRank.getPrizeMoney() + "원";
-            String rankCountText = entry.getValue() + "개";
+            String numberMatchCountText = String.format("%d개 일치", lottoRank.getMatchingCount());
+            String priceText = String.format("(%d원)", lottoRank.getPrizeMoney());
+            String rankCountText = String.format("%d개", entry.getValue());
 
             sb.append(numberMatchCountText).append(" ")
-                    .append("(").append(priceText).append(")")
-                    .append("- ").append(rankCountText).append("\n");
+                    .append(priceText).append("- ").append(rankCountText).append("\n");
         }
 
         return sb.toString();
+    }
+
+    private List<Map.Entry<LottoRank, Integer>> getRankResultEntriesExceptOther() {
+        return rankResult.entrySet().stream()
+                .filter(entry -> entry.getKey().getMatchingCount() != 0)
+                .collect(Collectors.toList());
     }
 
     public long getTotalPrizeMoney() {
