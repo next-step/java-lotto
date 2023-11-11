@@ -1,5 +1,6 @@
 package lotto.ui;
 
+import lotto.ui.dto.LottoStatsResponse;
 import lotto.ui.dto.MyLottosResponse;
 
 public class OutputView {
@@ -10,5 +11,20 @@ public class OutputView {
     public static void outputMyLottos(MyLottosResponse myLottosResponse) {
         myLottosResponse.getLottos()
                 .forEach((lottoResponse) -> System.out.println(lottoResponse.getNums()));
+    }
+
+    public static void outputLottoStats(LottoStatsResponse lottoStatsResponse) {
+        System.out.println("\n");
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        lottoStatsResponse.getLottoStats().forEach(
+                lottoStatResponse -> {
+                    System.out.printf("%d개 일치 (%d원)- %d개\n"
+                            , lottoStatResponse.getMatchCount()
+                            , lottoStatResponse.getReceiveMoney()
+                            , lottoStatResponse.getMatchCountResult());
+                }
+        );
+        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", lottoStatsResponse.getProfitRate());
     }
 }
