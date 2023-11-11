@@ -11,7 +11,7 @@ public class LottoProgram {
     public static final int LOTTO_PRICE = 1000;
 
     public static void start() {
-        final UserInput input = InputView.input();
+        final UserInput input = InputView.inputPurchaseAmount();
         final int numberOfLottos = LottoProgramManager.calculateNumberOfLottos(input.getPurchaseAmount(), LOTTO_PRICE);
 
         List<Lotto> lottos = LottoProgramManager.generateLottos(numberOfLottos);
