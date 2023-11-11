@@ -20,4 +20,8 @@ public class ResultView {
 
         System.out.println(lottoResults.toString());
     }
+
+    public static void printRateOfReturn(final double rateOfReturn) {
+        System.out.println("총 수익률은 " + rateOfReturn + "입니다. (본전 기준은 1입니다.)");
+    }
 }
