@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import java.util.Arrays;
+
 public enum Operation implements Calculate {
     PLUS("+") {
         @Override
@@ -26,30 +28,20 @@ public enum Operation implements Calculate {
         }
     };
 
+    private static final String INVALID_OPERATION_MSE = "올바른 기호가 아닙니다.";
     private String operation;
+
 
     Operation(String operation) {
         this.operation = operation;
     }
 
-    public static boolean isOperation(String token) {
-        for (Operation operation : Operation.values()) {
-            if (operation.operation.equals(token)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 
     public static Operation fromString(String token) {
-        for (Operation operation : Operation.values()) {
-            if (operation.operation.equals(token)) {
-                return operation;
-            }
-        }
-
-        return null;
+        return Arrays.stream(values())
+                .filter(v -> v.name().equals(token))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_OPERATION_MSE));
     }
 
 

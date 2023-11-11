@@ -13,7 +13,7 @@
 ## step1
 ### 기능 요구사항
 - [x] 입력 값이 null이거나 빈 공백 문자일 경우 예외가 발생한다.(null || "" => throw IllegalArgumentException)
-- [ ] 사칙연산 기호가 아닌 경우 예외가 발생한다.(null || "" => throw IllegalArgumentException)
+- [x] 사칙연산 기호가 아닌 경우 예외가 발생한다.(null || "" => throw IllegalArgumentException)
 - [x] 사칙 연산 기호가 '+'면 숫자를 더한다. ("5 + 3" => 8)
 - [x] 사칙 연산 기호가 '-'면 숫자를 뺀다. ("5 - 3" => 2)
 - [x] 사칙 연산 기호가 '*'면 숫자를 곱한다. ("5 * 3" => 15)

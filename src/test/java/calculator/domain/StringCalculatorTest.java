@@ -22,7 +22,7 @@ class StringCalculatorTest {
     @Test
     void 사칙연산_입력() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new StringCalculator("3 + 3");
+            new StringCalculator("3 & 3");
         });
     }
 }
