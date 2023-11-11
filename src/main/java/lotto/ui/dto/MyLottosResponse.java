@@ -2,14 +2,15 @@ package lotto.ui.dto;
 
 import lotto.domain.MyLottos;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class MyLottosResponse {
-    private List<LottoResponse> lottos;
+    private final List<LottoResponse> lottos = new ArrayList<>();
 
     public MyLottosResponse(List<LottoResponse> lottos) {
-        this.lottos = lottos;
+        this.lottos.addAll(lottos);
     }
 
     public static MyLottosResponse from(MyLottos myLottos) {
