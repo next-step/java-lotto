@@ -1,6 +1,7 @@
 package lotto.step2.util;
 
 import lotto.step2.domain.Lotto;
+import lotto.step2.domain.WinnerNumbers;
 import lotto.step2.input.InputView;
 import lotto.step2.input.UserInput;
 import lotto.step2.result.ResultView;
@@ -16,5 +17,7 @@ public class LottoProgram {
 
         List<Lotto> lottos = LottoProgramManager.generateLottos(numberOfLottos);
         ResultView.printLottos(lottos);
+
+        final WinnerNumbers winnerNumbers = InputView.inputWinnersNumbers();
     }
 }
