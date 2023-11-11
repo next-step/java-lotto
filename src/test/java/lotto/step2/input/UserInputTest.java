@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class UserInputTest {
     @ParameterizedTest
@@ -19,5 +20,15 @@ class UserInputTest {
 
         //then
         assertThat(purchaseAmount).isEqualTo(userInput);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1000, -3000})
+    @DisplayName("구입금액이 0원 이하면, IllegalArgumentException이 발생한다.")
+    void throwIllegalArgumentExceptionWhenPurchaseAmountIsLessThanZeroAndEqualToZero(final int userInput) {
+        //given, when, then
+        assertThatThrownBy(() -> new UserInput(userInput))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("purchaseAmount must be greater than 0");
     }
 }
