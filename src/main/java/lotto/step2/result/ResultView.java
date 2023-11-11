@@ -12,9 +12,13 @@ public class ResultView {
         for (Lotto lotto : lottos) {
             System.out.println(lotto);
         }
+
+        System.out.println();
     }
 
     public static void printLottoResults(final LottoResults lottoResults) {
+        System.out.println();
+
         System.out.println("당첨 통계");
         System.out.println("---------");
 
