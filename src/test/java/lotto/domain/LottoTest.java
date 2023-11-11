@@ -33,13 +33,13 @@ public class LottoTest {
         assertThat(lotto.toString()).isEqualTo("[2, 3, 5, 6, 10, 40]");
     }
 
-    @DisplayName("로또 번호 비교")
+    @DisplayName("로또번호_비교_테스트_FixtureNumberStrategy_생성(10,2,3,40,5,6)")
     @Test
-    void 로또_번호_비교() {
+    void NumberStrategy_생성번호_구매번호_비교_테스트() {
         // given
         NumberStrategy numberStrategy = new FixtureNumberStrategy();
-        Lotto lotto = new Lotto(numberStrategy.create(1).get(0).lottoNumbers());
-        Lotto lottoNumber = new Lotto(List.of(
+        Lotto buyLotto = new Lotto(numberStrategy.create(1).get(0).lottoNumbers());
+        Lotto resultLotto = new Lotto(List.of(
                 new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
@@ -48,7 +48,7 @@ public class LottoTest {
                 new LottoNumber(6)
         ));
         // when
-        int result = lotto.match(lottoNumber);
+        int result = buyLotto.match(resultLotto);
         // then
         assertThat(result).isEqualTo(4);
     }
