@@ -6,9 +6,12 @@ import java.util.List;
 public class WinningLotto {
 
     private final LottoNumbers lottoNumbers;
+    private final Bonus bonus;
 
-    public WinningLotto(List<Integer> numbers) {
+    public WinningLotto(List<Integer> numbers,
+                        int bonusNumber) {
         this.lottoNumbers = new LottoNumbers(numbers);
+        this.bonus = new Bonus(bonusNumber);
     }
 
     public List<LottoRank> winningRank(List<Lotto> lottos) {

@@ -14,12 +14,12 @@ public class LottoController {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        BuyingAmount buyingAmount = new BuyingAmount(InputView.input(scanner));
+        BuyingAmount buyingAmount = new BuyingAmount(InputView.inputAmount(scanner));
 
         LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberStrategy(), buyingAmount);
         ResultView.reportBuying(lottoMachine.lottoCount(), lottoMachine.getLottoNumbers());
 
-        WinningLotto winningLotto = new WinningLotto(InputView.winnerNumber(scanner));
+        WinningLotto winningLotto = new WinningLotto(InputView.winnerNumber(scanner), InputView.inputBonusNumber(scanner));
         WinningResults winningResults = lottoMachine.report(winningLotto);
         ResultView.reportStats(winningResults, buyingAmount);
 

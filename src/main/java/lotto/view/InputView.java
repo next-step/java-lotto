@@ -7,8 +7,12 @@ import java.util.Scanner;
 public class InputView {
 
     private static final String COMMA_BLANK = ", ";
+    public static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
-    public static int input(Scanner scanner) {
+    private InputView() {
+    }
+
+    public static int inputAmount(Scanner scanner) {
         System.out.println("구입금액을 입력해 주세요.");
         int input = scanner.nextInt();
         scanner.nextLine();
@@ -26,5 +30,10 @@ public class InputView {
         }
 
         return numbers;
+    }
+
+    public static int inputBonusNumber(Scanner scanner) {
+        System.out.printf(INPUT_BONUS_NUMBER);
+        return scanner.nextInt();
     }
 }
