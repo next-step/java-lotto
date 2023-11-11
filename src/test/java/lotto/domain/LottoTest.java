@@ -38,7 +38,7 @@ public class LottoTest {
     void NumberStrategy_생성번호_구매번호_비교_테스트() {
         // given
         NumberStrategy numberStrategy = new FixtureNumberStrategy();
-        Lotto buyLotto = new Lotto(numberStrategy.create(1).get(0).lottoNumbers());
+        Lotto buyLotto = numberStrategy.create(1).get(0);
         Lotto resultLotto = new Lotto(List.of(
                 new LottoNumber(1),
                 new LottoNumber(2),
