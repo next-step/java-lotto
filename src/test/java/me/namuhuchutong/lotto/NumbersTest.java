@@ -14,11 +14,11 @@ class NumbersTest {
         //given
         List<Number> given = List.of(
                 new Number(1),
-                new Number(1),
-                new Number(1),
-                new Number(1),
-                new Number(1),
-                new Number(1)
+                new Number(2),
+                new Number(3),
+                new Number(4),
+                new Number(5),
+                new Number(6)
         );
 
         //when
@@ -36,6 +36,24 @@ class NumbersTest {
 
         //when, then
         assertThatThrownBy(() -> new Numbers(numbers))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("숫자들 중에 중복이 존재할 경우 예외가 발생한다.")
+    @Test
+    void throw_exception_when_duplicated_values_exist() {
+        //given
+        List<Number> given = List.of(
+                new Number(1),
+                new Number(1),
+                new Number(1),
+                new Number(1),
+                new Number(1),
+                new Number(1)
+        );
+
+        //when, then
+        assertThatThrownBy(() -> new Numbers(given))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
