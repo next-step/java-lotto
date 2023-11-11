@@ -11,7 +11,7 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         this.lottoNumbers = new LinkedHashSet<>();
-        for(int number : numbers) {
+        for (int number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
         validateSize(lottoNumbers);
@@ -33,7 +33,7 @@ public class Lotto {
 
     public int matchedCount(Lotto lotto) {
         int count = 0;
-        for(LottoNumber lottoNumber : lottoNumbers) {
+        for (LottoNumber lottoNumber : lottoNumbers) {
             count = addCount(lotto, count, lottoNumber);
         }
 
@@ -43,7 +43,9 @@ public class Lotto {
     private static int addCount(Lotto lotto,
                                 int count,
                                 LottoNumber lottoNumber) {
-        if(lotto.contains(lottoNumber)) count++;
+        if (lotto.contains(lottoNumber)) {
+            count++;
+        }
         return count;
     }
 

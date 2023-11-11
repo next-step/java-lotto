@@ -12,7 +12,7 @@ public class WinningResults {
 
     public WinningResults(List<LottoRank> lottoRanks) {
         Map<LottoRank, Integer> treeMap = new TreeMap<>();
-        for(LottoRank lottoRank : LottoRank.values()) {
+        for (LottoRank lottoRank : LottoRank.values()) {
             treeMap.put(lottoRank, DEFAULT_VALUE);
         }
         this.values = treeMap;
