@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.application.LottoGeneration;
+import lotto.domain.Lottos;
 import lotto.domain.NumberGeneration;
 import lotto.domain.RandomNumberGeneration;
 
@@ -12,10 +13,13 @@ public class LottoApplication {
         int purchaseAmount = inputPurchaseAmount();
         NumberGeneration numberGeneration = new RandomNumberGeneration();
 
-        LottoGeneration lottoGeneration =  new LottoGeneration(purchaseAmount, numberGeneration);
+        LottoGeneration lottoGeneration = new LottoGeneration();
+        Lottos lottos = lottoGeneration.generateLottoNumbers(purchaseAmount, numberGeneration);
 
-        printLottoCount(lottoGeneration.countLottoBundle());
-        printLottoBundle(lottoGeneration.findLottoBundleForPrint());
+        printLottoCount(lottos.size());
+        printLottoBundle(lottos.find());
+
+
 
 
     }

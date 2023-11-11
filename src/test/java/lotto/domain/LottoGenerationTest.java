@@ -10,8 +10,10 @@ public class LottoGenerationTest {
     @DisplayName("로또 1개의 금액을 기준으로 구매 금액에 따라 생성된 로또 갯수 확인")
     void 로또_번호_생성갯수_확인() {
         NumberGeneration randomNumberGeneration = new RandomNumberGeneration();
-        LottoGeneration lottoGeneration = new LottoGeneration(14, randomNumberGeneration);
-        int count = lottoGeneration.countLottoBundle();
-        Assertions.assertThat(count).isEqualTo(14);
+        LottoGeneration lottoGeneration = new LottoGeneration();
+
+        Lottos lottos = lottoGeneration.generateLottoNumbers(14, randomNumberGeneration);
+
+        Assertions.assertThat(lottos.size()).isEqualTo(14);
     }
 }

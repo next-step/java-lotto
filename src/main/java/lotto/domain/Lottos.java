@@ -6,16 +6,8 @@ public class Lottos {
 
     private final List<Lotto> lottoList;
 
-    public Lottos(int count, NumberGeneration numberGeneration) {
-        this.lottoList = generate(count, numberGeneration);
-    }
-
-    private List<Lotto> generate(int count, NumberGeneration numberGeneration) {
-        List<Lotto> list = new ArrayList<>();
-        for(int i = 0; i< count; i++){
-            list.add(new Lotto(numberGeneration));
-        }
-        return list;
+    public Lottos(List<Lotto> lottos) {
+        this.lottoList = lottos;
     }
 
     public int size(){
