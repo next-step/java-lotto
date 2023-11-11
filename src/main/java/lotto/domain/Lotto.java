@@ -1,17 +1,50 @@
 package lotto.domain;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Lotto {
-    private final LottoNumbers lottoNumbers;
+    public static final int DEFAULT_QUANTITY = 6;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
-        this.lottoNumbers =  new LottoNumbers(numbers);
+        this.lottoNumbers = new LinkedHashSet<>();
+        for(int number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
+        validateSize(lottoNumbers);
+    }
+
+    private static void validateSize(Set<LottoNumber> numbers) {
+        if (isSizeNotEqualsSix(numbers)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static boolean isSizeNotEqualsSix(Set<LottoNumber> numbers) {
+        return numbers == null || numbers.size() != DEFAULT_QUANTITY;
     }
 
     public boolean contains(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    public int matchedCount(Lotto lotto) {
+        int count = 0;
+        for(LottoNumber lottoNumber : lottoNumbers) {
+            count = addCount(lotto, count, lottoNumber);
+        }
+
+        return count;
+    }
+
+    private static int addCount(Lotto lotto,
+                                int count,
+                                LottoNumber lottoNumber) {
+        if(lotto.contains(lottoNumber)) count++;
+        return count;
     }
 
     @Override
