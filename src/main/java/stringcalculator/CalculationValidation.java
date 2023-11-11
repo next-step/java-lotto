@@ -1,4 +1,4 @@
-package step1;
+package stringcalculator;
 
 public class CalculationValidation {
 
@@ -41,7 +41,7 @@ public class CalculationValidation {
     }
 
     private void validateOperationSymbols(String symbol) {
-        if (OperationSymbol.isOperationSymbol(symbol)) {
+        if (Calculator.isOperationSymbol(symbol)) {
             return;
         }
 
