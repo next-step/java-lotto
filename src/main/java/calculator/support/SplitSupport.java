@@ -6,7 +6,7 @@ public class SplitSupport {
 
     public static final String DELIMITER = " ";
 
-    public List<String> split(String input) {
+    public static List<String> split(String input) {
         return List.of(input.split(DELIMITER));
     }
 }
