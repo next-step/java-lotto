@@ -7,3 +7,15 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 요구사항 정리
+* 입력 받은 문자를 공백 기준으로 나누어야 한다.
+* 나눗셈의 결과는 무조건 int 형입니다. 만약 음수 -2.6 이 나온다고 하면 -2를 반환합니다.
+* 사칙연산이 아닌 앞에서부터 차례로 계산합니다.
+
+## step1
+* readme.md 파일에 요구사항 정리
+* 도메인 별 테스트 코드 및 구현체 작성
+  * BlankSeparator : StringCalculator 도메인을 만들어줍니다.
+  * StringCalculator : 내부에 연산자 리스트와 숫자 리스트를 갖고 해당 클래스에게 연산을 맡깁니다.
+  * Operator : 실제 연산을 진행하는 Enum 클래스 입니다.
