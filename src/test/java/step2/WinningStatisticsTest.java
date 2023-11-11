@@ -2,9 +2,7 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.domain.Lotto;
-import step2.domain.Lottos;
-import step2.domain.WinningStatistics;
+import step2.domain.*;
 import step2.domain.type.Prize;
 
 import java.math.BigDecimal;
@@ -32,9 +30,9 @@ public class WinningStatisticsTest {
     }
 
     private WinningStatistics winningStatistics() {
-        Lotto threeMatchLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto fourMatchLotto = new Lotto(Arrays.asList(3, 9, 10, 11, 42, 43));
-        Lotto prizeLotto = new Lotto(Arrays.asList(1, 2, 3, 9, 10, 11));
+        Lotto threeMatchLotto = new Lotto(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Lotto fourMatchLotto = new Lotto(new LottoNumber(Arrays.asList(3, 9, 10, 11, 42, 43)));
+        PrizeLotto prizeLotto = new PrizeLotto(new LottoNumber(Arrays.asList(1, 2, 3, 9, 10, 11)));
         Lottos lottos = new Lottos(Arrays.asList(threeMatchLotto, fourMatchLotto));
 
         return WinningStatistics.of(lottos, prizeLotto);

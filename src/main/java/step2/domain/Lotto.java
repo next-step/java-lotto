@@ -1,38 +1,28 @@
 package step2.domain;
 
 import step2.domain.type.Prize;
-import step2.exception.InvalidLottoNumberCountException;
 
 import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
 
-    private static final int LOTTO_MAX_SIZE = 6;
+    private final LottoNumber lottoNumber;
 
-    private final List<Integer> numbers;
-
-    public Lotto(List<Integer> numbers) {
-        validate(numbers);
-        this.numbers = numbers;
+    public Lotto(LottoNumber lottoNumber) {
+        this.lottoNumber = lottoNumber;
     }
 
-    private void validate(List<Integer> numbers) {
-        if (numbers.size() > LOTTO_MAX_SIZE) {
-            throw new InvalidLottoNumberCountException();
-        }
-    }
-
-    public Prize prize(Lotto prizeLotto) {
+    public Prize prize(PrizeLotto prizeLotto) {
         return Prize.of(countOfWinningNumber(prizeLotto));
     }
 
-    private int countOfWinningNumber(Lotto prizeLotto) {
-        return StatisticsCalculator.numberOfMatches(this.numbers, prizeLotto.numbers());
+    private int countOfWinningNumber(PrizeLotto prizeLotto) {
+        return StatisticsCalculator.numberOfMatches(numbers(), prizeLotto.numbers());
     }
 
     public List<Integer> numbers() {
-        return this.numbers;
+        return this.lottoNumber.numbers();
     }
 
     @Override
@@ -40,12 +30,12 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
+        return Objects.equals(lottoNumber, lotto.lottoNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
+        return Objects.hash(lottoNumber);
     }
 
 }

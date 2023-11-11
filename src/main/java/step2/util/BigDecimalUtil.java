@@ -27,12 +27,12 @@ public class BigDecimalUtil {
     }
 
     private static void validateNumeric(String text) {
-        if (!isMatch(text)) {
+        if (!isNumeric(text)) {
             throw new NotNumericException();
         }
     }
 
-    private static boolean isMatch(String text) {
+    private static boolean isNumeric(String text) {
         return NUMERIC_PATTERN.matcher(text).matches();
     }
 

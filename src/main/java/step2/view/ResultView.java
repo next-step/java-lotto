@@ -8,6 +8,8 @@ import step2.domain.type.Prize;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class ResultView {
 
@@ -33,7 +35,12 @@ public class ResultView {
     }
 
     private static String lottoText(Lotto lotto) {
-        return StringUtils.join(lotto.numbers(), COMMA);
+        return StringUtils.join(sortedLottoNumbers(lotto.numbers()), COMMA);
+    }
+
+    private static List<Integer> sortedLottoNumbers(List<Integer> lottoNumbers) {
+        Collections.sort(lottoNumbers);
+        return lottoNumbers;
     }
 
     public static void printWinningStatistics(WinningStatistics winningStatistics) {

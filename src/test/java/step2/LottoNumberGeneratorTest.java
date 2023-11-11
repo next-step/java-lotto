@@ -3,10 +3,6 @@ package step2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static step2.domain.LottoNumberGenerator.lottoNumbers;
 
@@ -21,16 +17,9 @@ public class LottoNumberGeneratorTest {
     @Test
     @DisplayName("생성된 로또 번호들의 개수를 확인한다")
     public void lotto_number_size() {
-        assertThat(lottoNumbers(1).get(0)).hasSize(6);
+        assertThat(lottoNumbers(1).get(0).numbers()).hasSize(6);
     }
 
-    @Test
-    @DisplayName("생성된 로또 번호들의 중복을 확인한다")
-    public void lotto_number_duplicate() {
-        List<Integer> lottoNumbers = lottoNumbers(1).get(0);
-        Set<Integer> lottoNumbersSet = new HashSet<>(lottoNumbers);
 
-        assertThat(lottoNumbersSet).hasSize(lottoNumbers.size());
-    }
 
 }
