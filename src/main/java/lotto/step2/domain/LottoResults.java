@@ -36,4 +36,11 @@ public class LottoResults {
 
         return sb.toString();
     }
+
+    public long getTotalPrizeMoney() {
+        return (long) LottoRank.FIRST.getPrizeMoney() * getCount(LottoRank.FIRST)
+                + (long) LottoRank.SECOND.getPrizeMoney() * getCount(LottoRank.SECOND)
+                + (long) LottoRank.THIRD.getPrizeMoney() * getCount(LottoRank.THIRD)
+                + (long) LottoRank.FOURTH.getPrizeMoney() * getCount(LottoRank.FOURTH);
+    }
 }

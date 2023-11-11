@@ -70,4 +70,24 @@ class LottoResultsTest {
                 Arguments.of(LottoRank.FOURTH, FOURTH_RANK_COUNT)
         );
     }
+
+    @Test
+    @DisplayName("getTotalPrizeMoney 메서드를 사용하면, 총 상금을 반환한다.")
+    void testGetTotalPrizeMoney() {
+        //given
+        long expectedTotalPrizeMoney = getExpectedTotalPrizeMoney();
+
+        //when
+        long totalPrizeMoney = lottoResults.getTotalPrizeMoney();
+
+        //then
+        assertThat(totalPrizeMoney).isEqualTo(expectedTotalPrizeMoney);
+    }
+
+    private long getExpectedTotalPrizeMoney() {
+        return (long) LottoRank.FIRST.getPrizeMoney() * FIRST_RANK_COUNT
+                + (long) LottoRank.SECOND.getPrizeMoney() * SECOND_RANK_COUNT
+                + (long) LottoRank.THIRD.getPrizeMoney() * THIRD_RANK_COUNT
+                + (long) LottoRank.FOURTH.getPrizeMoney() * FOURTH_RANK_COUNT;
+    }
 }
