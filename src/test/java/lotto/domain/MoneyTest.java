@@ -21,4 +21,14 @@ public class MoneyTest {
         // when then
         assertThatThrownBy(() -> new Money(1001)).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("복권구매개수//돈을 천원으로 나눈만큼 개수를 반환")
+    void 복권구매개수_구하기() {
+        // given
+        Money money = new Money(2000);
+
+        // when then
+        assertThat(money.purchaseCount()).isEqualTo(2);
+    }
 }
