@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 public enum LottoRank {
 
@@ -27,12 +28,10 @@ public enum LottoRank {
     }
 
     public static LottoRank searchBy(int matchedCount) {
-        for (LottoRank lottoRank : LottoRank.values()) {
-            if (isMatchedCount(matchedCount, lottoRank)) {
-                return lottoRank;
-            }
-        }
-        return NOT_MATCHED;
+        return Arrays.stream(LottoRank.values())
+                .filter(lottoRank -> isMatchedCount(matchedCount, lottoRank))
+                .findFirst()
+                .orElse(LottoRank.NOT_MATCHED);
     }
 
     private static boolean isMatchedCount(int matchedCount,
