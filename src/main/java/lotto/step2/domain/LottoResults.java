@@ -43,4 +43,8 @@ public class LottoResults {
                 + (long) LottoRank.THIRD.getPrizeMoney() * getCount(LottoRank.THIRD)
                 + (long) LottoRank.FOURTH.getPrizeMoney() * getCount(LottoRank.FOURTH);
     }
+
+    public double calculateRateOfReturn(final int paymentAmount) {
+        return ((double) getTotalPrizeMoney()) / paymentAmount;
+    }
 }

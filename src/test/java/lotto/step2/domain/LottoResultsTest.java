@@ -90,4 +90,18 @@ class LottoResultsTest {
                 + (long) LottoRank.THIRD.getPrizeMoney() * THIRD_RANK_COUNT
                 + (long) LottoRank.FOURTH.getPrizeMoney() * FOURTH_RANK_COUNT;
     }
+
+    @Test
+    @DisplayName("calculateRateOfReturn 메서드의 입력으로 구매 금액을 넣으면, 수익률을 반환한다.")
+    void testCalculateRateOfReturn() {
+        //given
+        final int paymentAmount = 1000;
+        final double expectedRateOfReturn = ((double) getExpectedTotalPrizeMoney()) / paymentAmount;
+
+        //when
+        final double rateOfReturn = lottoResults.calculateRateOfReturn(paymentAmount);
+
+        //then
+        assertThat(rateOfReturn).isEqualTo(expectedRateOfReturn);
+    }
 }
