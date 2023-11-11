@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class InputView {
 
     private static final String COMMA_BLANK = ", ";
-    public static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+    private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private final Scanner scanner;
 
     public InputView(Scanner scanner) {
