@@ -10,6 +10,10 @@ public class LottoResults {
 
     public LottoResults() {
         rankResult = new EnumMap<>(LottoRank.class);
+
+        for (LottoRank lottoRank : LottoRank.values()) {
+            rankResult.put(lottoRank, 0);
+        }
     }
 
     public int getCount(final LottoRank lottoRank) {
