@@ -9,7 +9,7 @@ public enum LottoRank {
     FIFTH("3개 일치", false, 3, new LottoPrize(BigDecimal.valueOf(5000), Currency.KRW)),
     FOURTH("4개 일치", false, 4, new LottoPrize(BigDecimal.valueOf(50000), Currency.KRW)),
     THIRD("5개 일치", false, 5, new LottoPrize(BigDecimal.valueOf(1500000), Currency.KRW)),
-    SECOND("5개 일치", true, 5, new LottoPrize(BigDecimal.valueOf(30000000), Currency.KRW)),
+    SECOND("5개 일치, 보너스 볼 일치", true, 5, new LottoPrize(BigDecimal.valueOf(30000000), Currency.KRW)),
     FIRST("6개 일치", false, 6, new LottoPrize(BigDecimal.valueOf(2000000000), Currency.KRW));
 
     private final String description;

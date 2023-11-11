@@ -7,7 +7,7 @@ public class Bonus {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public boolean compareWith(LottoNumbers lottoNumbers) {
-        return lottoNumbers.contains(this.bonusNumber);
+    public boolean compareWith(Lotto lotto) {
+        return lotto.contains(this.bonusNumber);
     }
 }

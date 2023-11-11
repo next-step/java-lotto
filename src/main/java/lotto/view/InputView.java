@@ -33,7 +33,7 @@ public class InputView {
     }
 
     public static int inputBonusNumber(Scanner scanner) {
-        System.out.printf(INPUT_BONUS_NUMBER);
+        System.out.println(INPUT_BONUS_NUMBER);
         return scanner.nextInt();
     }
 }
