@@ -16,10 +16,7 @@ public class ResultView {
     private static final String THAT = "입니다.";
     private static final String LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    private ResultView() {
-    }
-
-    public static void reportBuying(int lottoCount,
+    public void reportBuying(int lottoCount,
                                     List<Lotto> lottos) {
         System.out.println(lottoCount + BUYING_QUANTITY);
         for (Lotto lotto : lottos) {
@@ -28,7 +25,7 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void reportStats(WinningResults winningResults,
+    public void reportStats(WinningResults winningResults,
                                    BuyingAmount buyingAmount) {
         System.out.println();
         System.out.println(WINNING_STATS);

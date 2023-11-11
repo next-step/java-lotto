@@ -8,11 +8,13 @@ public class InputView {
 
     private static final String COMMA_BLANK = ", ";
     public static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+    private final Scanner scanner;
 
-    private InputView() {
+    public InputView(Scanner scanner) {
+        this.scanner = scanner;
     }
 
-    public static int inputAmount(Scanner scanner) {
+    public int inputAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         int input = scanner.nextInt();
         scanner.nextLine();
@@ -20,7 +22,7 @@ public class InputView {
         return input;
     }
 
-    public static List<Integer> winnerNumber(Scanner scanner) {
+    public List<Integer> winnerNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.nextLine();
 
@@ -32,7 +34,7 @@ public class InputView {
         return numbers;
     }
 
-    public static int inputBonusNumber(Scanner scanner) {
+    public int inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER);
         return scanner.nextInt();
     }
