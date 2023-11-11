@@ -12,16 +12,23 @@ class WinningResultsTest {
 
     @Test
     void 등수를_기반으로_기본_데이터를_만들_수_있다() {
-        WinningResults actual = new WinningResults(List.of(LottoRank.SECOND, LottoRank.FIRST));
-        Map<LottoRank, Integer> values = new TreeMap<>();
-        values.put(LottoRank.NOT_MATCHED, 0);
-        values.put(LottoRank.FOURTH, 0);
-        values.put(LottoRank.THIRD, 0);
-        values.put(LottoRank.SECOND, 1);
-        values.put(LottoRank.FIRST, 1);
-        WinningResults expected = new WinningResults(values);
+
+        WinningResults winningResults = new WinningResults(List.of(LottoRank.SECOND, LottoRank.FIRST));
+
+        Map<LottoRank, Integer> actual = winningResults.getAll();
+        Map<LottoRank, Integer> expected = createExpected();
 
         assertThat(actual).isEqualTo(expected);
+    }
+
+    private static Map<LottoRank, Integer> createExpected() {
+        Map<LottoRank, Integer> expected = new TreeMap<>();
+        expected.put(LottoRank.NOT_MATCHED, 0);
+        expected.put(LottoRank.FOURTH, 0);
+        expected.put(LottoRank.THIRD, 0);
+        expected.put(LottoRank.SECOND, 1);
+        expected.put(LottoRank.FIRST, 1);
+        return expected;
     }
 
     @Test

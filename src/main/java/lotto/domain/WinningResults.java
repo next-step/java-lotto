@@ -22,8 +22,8 @@ public class WinningResults {
         }
     }
 
-    public WinningResults(Map<LottoRank, Integer> lottoRankIntegerMap) {
-        this.values = lottoRankIntegerMap;
+    public Map<LottoRank, Integer> getAll() {
+        return this.values;
     }
 
     public int size() {
@@ -61,7 +61,4 @@ public class WinningResults {
         return Objects.hash(values);
     }
 
-    public Map<LottoRank, Integer> getAll() {
-        return this.values;
-    }
 }
