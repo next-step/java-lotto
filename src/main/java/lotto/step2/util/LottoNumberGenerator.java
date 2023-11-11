@@ -1,21 +1,19 @@
 package lotto.step2.util;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class LottoNumberGenerator {
-    private static final Random RANDOM = new Random();
+    private static final List<Integer> LOTTO_NUMBERS = new ArrayList<>();
+
+    static {
+        for (int i = 1; i <= 45; i++) {
+            LOTTO_NUMBERS.add(i);
+        }
+    }
 
     public static Set<Integer> generateLottoNumbers() {
-        Set<Integer> lottoNumbers = new HashSet<>();
+        Collections.shuffle(LOTTO_NUMBERS);
 
-        while (lottoNumbers.size() < 6) {
-            int number = RANDOM.nextInt(45) + 1;
-
-            lottoNumbers.add(number);
-        }
-
-        return lottoNumbers;
+        return new HashSet<>(LOTTO_NUMBERS.subList(0, 6));
     }
 }
