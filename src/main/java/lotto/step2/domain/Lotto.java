@@ -3,11 +3,11 @@ package lotto.step2.domain;
 import java.util.Set;
 
 public class Lotto {
-    private Set<Integer> nums;
+    private final Set<Integer> nums;
 
     public Lotto(Set<Integer> nums) {
         validateNums(nums);
-        
+
         this.nums = nums;
     }
 
@@ -37,5 +37,10 @@ public class Lotto {
 
     public Set<Integer> nums() {
         return this.nums;
+    }
+
+    @Override
+    public String toString() {
+        return this.nums.toString();
     }
 }
