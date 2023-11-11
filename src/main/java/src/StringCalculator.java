@@ -4,15 +4,19 @@ import java.util.*;
 
 public class StringCalculator {
 
-    public int calculate(String value) {
-        Deque<String> chars = new LinkedList<>(Arrays.asList(value.split(" ")));
+    private final Splitter splitter;
 
+    public StringCalculator(Splitter splitter) {
+        this.splitter = splitter;
+    }
+
+    public int calculate(String value) {
+        Deque<String> chars = splitter.split(value);
         int result = Integer.parseInt(chars.pop());
 
         while(!chars.isEmpty()) {
-            Operator operator = Operator.byString(chars.pop());
-
-            result = operator.operate(result, Integer.parseInt(chars.pop()));
+            result = Operator.byString(chars.pop())
+                    .operate(result, Integer.parseInt(chars.pop()));
         }
 
         return result;

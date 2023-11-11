@@ -14,7 +14,7 @@ class StringCalculatorTest {
     }, delimiter = ',')
     void 문자열_사칙연산을_수행할_수_있다(String value, int expectedValue) {
         // given
-        StringCalculator stringCalculator = new StringCalculator();
+        StringCalculator stringCalculator = new StringCalculator(new Splitter());
 
         // when
         int result = stringCalculator.calculate(value);
