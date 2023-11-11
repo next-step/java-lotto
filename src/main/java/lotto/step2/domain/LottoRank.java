@@ -3,11 +3,11 @@ package lotto.step2.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
+    OTHER(0, 0),
     FOURTH(3, 5_000),
-    OTHER(0, 0);
+    THIRD(4, 50_000),
+    SECOND(5, 1_500_000),
+    FIRST(6, 2_000_000_000);
 
     private final int matchingCount;
     private final int prizeMoney;
