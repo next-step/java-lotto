@@ -1,8 +1,10 @@
 package calculator;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class OperationTest {
 
@@ -32,5 +34,12 @@ public class OperationTest {
         int result = Operation.DIVISION.calculate(10, 3);
 
         assertThat(result).isEqualTo(3);
+    }
+    @DisplayName("0으로 나눗셈 연산을 시도하면 예외가 발생합니다.")
+    @Test
+    void zero_division() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            Operation.DIVISION.calculate(10, 0);
+        });
     }
 }
