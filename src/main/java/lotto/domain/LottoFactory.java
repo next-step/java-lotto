@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -19,7 +20,7 @@ public class LottoFactory {
     }
 
     private static Lotto generateRandomLotto() {
-        Collections.shuffle(LOTTO_NUMBER_LIST);
+        Collections.shuffle(LOTTO_NUMBER_LIST, new Random());
         return new Lotto(LOTTO_NUMBER_LIST.subList(0, 6));
     }
 }
