@@ -23,6 +23,6 @@ public class WinningLotto {
     private LottoRank winningRank(Lotto lotto) {
         int count = lottoNumbers.matchedCount(lotto);
 
-        return LottoRank.searchBy(count);
+        return LottoRank.searchBy(count, false);
     }
 }
