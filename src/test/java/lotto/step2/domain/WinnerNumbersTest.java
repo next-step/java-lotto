@@ -17,16 +17,19 @@ class WinnerNumbersTest {
     void testCreateWinnerNumbersWithCommaSeparatedInput() {
         // given
         String input = "10, 12, 30, 34, 40, 45";
-        final int inputArrayLength = input.split(", ").length;
         WinnerNumbers winnerNumbers = new WinnerNumbers(input);
+        final String[] inputs = input.split(", ");
+        Set<Integer> expected = Arrays.stream(inputs)
+                .map(Integer::parseInt)
+                .collect(Collectors.toSet());
 
         // when
         Set<Integer> nums = winnerNumbers.nums();
 
         // then
         assertThat(nums)
-                .hasSize(inputArrayLength)
-                .containsOnly(10, 12, 30, 34, 40, 45);
+                .hasSize(inputs.length)
+                .containsExactlyInAnyOrderElementsOf(expected);
     }
 
     @ParameterizedTest
