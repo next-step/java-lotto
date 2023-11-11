@@ -1,11 +1,7 @@
 package step2.domain;
 
-import step2.domain.type.Prize;
-
 import java.util.List;
 import java.util.Objects;
-
-import static java.util.stream.Collectors.*;
 
 public class Lottos {
 
@@ -13,15 +9,6 @@ public class Lottos {
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
-    }
-
-    public WinningStatistics winningStatistics(Lotto prizeLotto) {
-        return new WinningStatistics(this.lottos.stream().collect(
-                groupingBy(
-                    lotto -> Prize.of(lotto.countOfWinningNumber(prizeLotto)),
-                    collectingAndThen(toList(), Lottos::new)
-                )
-            ));
     }
 
     public List<Lotto> lottos() {

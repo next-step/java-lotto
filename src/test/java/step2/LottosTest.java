@@ -19,7 +19,7 @@ public class LottosTest {
         Lotto prizeLotto = new Lotto(Arrays.asList(1, 2, 3, 9, 10, 11));
         Lottos lottos = new Lottos(Arrays.asList(lotto));
 
-        assertThat(lottos.winningStatistics(prizeLotto)).isInstanceOf(WinningStatistics.class);
+        assertThat(WinningStatistics.of(lottos, prizeLotto)).isInstanceOf(WinningStatistics.class);
     }
 
 }

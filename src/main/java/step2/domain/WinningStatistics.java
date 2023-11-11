@@ -4,11 +4,13 @@ import step2.domain.type.Prize;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Collections;
 import java.util.Map;
+
+import static java.util.stream.Collectors.*;
 
 public class WinningStatistics {
 
+    private static final int ZERO = 0;
     private static final int SCALE = 2;
 
     private final Map<Prize, Lottos> winningStatistics;
@@ -17,16 +19,22 @@ public class WinningStatistics {
         this.winningStatistics = winningStatistics;
     }
 
-    public int winningLottosCount(Prize prize) {
-        return winningLottos(prize).size();
+    public static WinningStatistics of(Lottos lottos, Lotto prizeLotto) {
+        return new WinningStatistics(lottos.lottos().stream().collect(
+            groupingBy(
+                lotto -> lotto.prize(prizeLotto),
+                collectingAndThen(toList(), Lottos::new)
+            )
+        ));
     }
 
-    private Lottos winningLottos(Prize prize) {
+    public int winningLottoCountByPrize(Prize prize) {
         if (exist(prize)) {
-            return this.winningStatistics.get(prize);
+            Lottos lottos = this.winningStatistics.get(prize);
+            return lottos.size();
         }
 
-        return new Lottos(Collections.emptyList());
+        return ZERO;
     }
 
     private boolean exist(Prize prize) {
@@ -38,17 +46,14 @@ public class WinningStatistics {
     }
 
     private BigDecimal sumOfPrizeMoney() {
-        BigDecimal result = BigDecimal.ZERO;
-        for (Prize prize : this.winningStatistics.keySet()) {
-            result = result.add(moneyPerPrize(prize));
-        }
-
-        return result;
+        return this.winningStatistics.keySet().stream()
+            .map(prize -> sumOfMoneyPerPrize(prize))
+            .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    private BigDecimal moneyPerPrize(Prize prize) {
+    private BigDecimal sumOfMoneyPerPrize(Prize prize) {
         BigDecimal prizeMoney = prize.prizeMoney();
-        BigDecimal winningLottoCount = BigDecimal.valueOf(winningLottosCount(prize));
+        BigDecimal winningLottoCount = BigDecimal.valueOf(winningLottoCountByPrize(prize));
 
         return prizeMoney.multiply(winningLottoCount);
     }

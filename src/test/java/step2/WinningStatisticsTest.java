@@ -19,8 +19,8 @@ public class WinningStatisticsTest {
     public void winning_statistics() {
         WinningStatistics winningStatistics = winningStatistics();
 
-        assertThat(winningStatistics.winningLottosCount(Prize.of(3))).isEqualTo(1);
-        assertThat(winningStatistics.winningLottosCount(Prize.of(4))).isEqualTo(1);
+        assertThat(winningStatistics.winningLottoCountByPrize(Prize.of(3))).isEqualTo(1);
+        assertThat(winningStatistics.winningLottoCountByPrize(Prize.of(4))).isEqualTo(1);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class WinningStatisticsTest {
         Lotto prizeLotto = new Lotto(Arrays.asList(1, 2, 3, 9, 10, 11));
         Lottos lottos = new Lottos(Arrays.asList(threeMatchLotto, fourMatchLotto));
 
-        return lottos.winningStatistics(prizeLotto);
+        return WinningStatistics.of(lottos, prizeLotto);
     }
 
 }

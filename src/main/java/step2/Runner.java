@@ -25,7 +25,7 @@ public class Runner {
         ResultView.printLottos(lottos);
 
         Lotto prizeLotto = new Lotto(numbers(InputView.prizeLottoNumber()));
-        WinningStatistics winningStatistics = lottos.winningStatistics(prizeLotto);
+        WinningStatistics winningStatistics = WinningStatistics.of(lottos, prizeLotto);
         ResultView.printWinningStatistics(winningStatistics);
         ResultView.printRateOfReturn(price, winningStatistics);
     }

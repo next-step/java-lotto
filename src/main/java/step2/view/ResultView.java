@@ -55,7 +55,7 @@ public class ResultView {
         return String.format(MATCH_MESSAGE,
             prize.matchCount(),
             prize.prizeMoney(),
-            winningStatistics.winningLottosCount(prize));
+            winningStatistics.winningLottoCountByPrize(prize));
     }
 
     public static void printRateOfReturn(BigDecimal price, WinningStatistics winningStatistics) {
