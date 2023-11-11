@@ -1,8 +1,8 @@
 package step1.util;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,7 +14,7 @@ public class PatternExtractor {
     }
 
 
-    public static List<String> extractAll(String input, String regex) {
+    public static List<String> extractAllToList(String input, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
         List<String> result = new ArrayList<>();
@@ -31,12 +31,12 @@ public class PatternExtractor {
     }
 
 
-    public static Stack<Integer> stack(String input, String regex) {
+    public static LinkedList<Integer> extractAllToLinkedList(String input, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
-        Stack<Integer> result = new Stack<>();
+        LinkedList<Integer> result = new LinkedList<>();
         while(matcher.find()) {
-            result.push(Integer.parseInt(matcher.group()));
+            result.add(Integer.parseInt(matcher.group()));
         }
         return result;
     }

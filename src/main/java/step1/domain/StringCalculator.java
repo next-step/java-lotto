@@ -1,44 +1,29 @@
 package step1.domain;
 
+import step1.domain.operator.Operator;
 import step1.util.PatternExtractor;
 
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 
-public class StringCalculator extends Calculator{
-
-    private final Stack<Integer> numbers;
-    private final List<String> operators;
+public class StringCalculator{
 
     private static final String NUMBER_REGEX = "\\d+";
     private static final String OPERATOR_REGEX = "[+-/*]";
     private static final String EXCEPT_NUMBER_OPERATOR_WHITESPACE_REGEX = "[^\\d-+*/\\s]";
 
-    public StringCalculator(String input) {
+    private final List<Operator> operators;
+
+    public StringCalculator(List<Operator> operators) {
+        this.operators = operators;
+    }
+
+    public int calculate(String input) {
         inputCheck(input);
-        this.numbers = reverseStack(PatternExtractor.stack(input, NUMBER_REGEX));
-        this.operators = PatternExtractor.extractAll(input, OPERATOR_REGEX);
+        LinkedList<Integer> numbers = PatternExtractor.extractAllToLinkedList(input, NUMBER_REGEX);
+        List<String> operators = PatternExtractor.extractAllToList(input, OPERATOR_REGEX);
+        return calculating(numbers, operators);
     }
-
-    public int result() {
-        calculating();
-        return numbers.pop();
-    }
-
-    private void calculating() {
-        for(String operator: operators){
-            numbers.push(calculate(operator, numbers.pop(), numbers.pop()));
-        }
-    }
-
-    private Stack<Integer> reverseStack(Stack<Integer> stack) {
-        Stack<Integer> result = new Stack<>();
-        while(!stack.isEmpty()){
-            result.push(stack.pop());
-        }
-        return result;
-    }
-
 
     private void inputCheck(String input) {
         if(nullOrWhiteSpaceInput(input)){
@@ -50,7 +35,22 @@ public class StringCalculator extends Calculator{
     }
 
     private static boolean nullOrWhiteSpaceInput(String input) {
-        return input == null || input.trim().isEmpty();
+        return input == null || input.isBlank();
+    }
+
+    private int calculating(LinkedList<Integer> numbers, List<String> inputOperators) {
+        for (String inputOperator : inputOperators) {
+            numbers.push(matchedOperator(inputOperator).operate(numbers.pop(), numbers.pop()));
+        }
+        return numbers.pop();
+    }
+
+    private Operator matchedOperator(String inputOperator) {
+        Operator operator = operators.stream()
+                .filter(op -> op.supports(inputOperator))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("사칙연산 기호가 아닙니다."));
+        return operator;
     }
 
 }
