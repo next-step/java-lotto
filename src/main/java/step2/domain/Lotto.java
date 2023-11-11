@@ -11,6 +11,10 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public int countOfWinningNumber(Lotto prizeLotto) {
+        return StatisticsCalculator.numberOfMatches(this.numbers, prizeLotto.numbers());
+    }
+
     public List<Integer> numbers() {
         return this.numbers;
     }

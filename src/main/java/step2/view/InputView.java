@@ -13,7 +13,7 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String lastPrizeNumber() {
+    public static String prizeLottoNumber() {
         System.out.println(ASK_LAST_PRIZE_NUMBER_MESSAGE);
         return scanner.nextLine();
     }

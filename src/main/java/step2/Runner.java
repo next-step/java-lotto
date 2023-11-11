@@ -1,11 +1,12 @@
 package step2;
 
+import step2.domain.Lotto;
 import step2.domain.Lottos;
+import step2.domain.WinningStatistics;
 import step2.view.InputView;
 import step2.view.ResultView;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import static step2.domain.LottoNumberGenerator.lottoNumbers;
 import static step2.domain.LottoStore.lottos;
@@ -23,7 +24,9 @@ public class Runner {
         Lottos lottos = lottos(lottoNumbers(numberOfLotto));
         ResultView.printLottos(lottos);
 
-        List<Integer> lastPrizeNumber = numbers(InputView.lastPrizeNumber());
+        Lotto prizeLotto = new Lotto(numbers(InputView.prizeLottoNumber()));
+        WinningStatistics winningStatistics = lottos.winningStatistics(prizeLotto);
+        ResultView.printWinningStatistics(winningStatistics);
     }
 
 }

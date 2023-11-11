@@ -10,7 +10,7 @@ import java.util.Set;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static step2.domain.LottoNumberGenerator.lottoNumbers;
 
-public class LottoGeneratorTest {
+public class LottoNumberGeneratorTest {
 
     @Test
     @DisplayName("주어진 로또 장수 만큼 로또가 생성된다")
