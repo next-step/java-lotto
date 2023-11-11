@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoStatisticsTest {
+class LottoStatTest {
 
     @Test
     @DisplayName("일치개수확인/MyLotto와WinningLotto를 넣는다/일치개수별 로또의 개수가 나온다.")
@@ -19,13 +19,13 @@ class LottoStatisticsTest {
         MyLottos myLottos = new MyLottos(Arrays.asList(lotto1, lotto2));
 
         // when
-        LottoStatistics lottoStatistics = new LottoStatistics();
-        lottoStatistics.check(myLottos, winningLotto);
+        LottoStat lottoStat = new LottoStat();
+        lottoStat.check(myLottos, winningLotto);
 
         // then
-        assertThat(lottoStatistics.getMatchCount(6)).isEqualTo(1);
-        assertThat(lottoStatistics.getMatchCount(5)).isEqualTo(0);
-        assertThat(lottoStatistics.getMatchCount(4)).isEqualTo(1);
+        assertThat(lottoStat.getMatchCount(6)).isEqualTo(1);
+        assertThat(lottoStat.getMatchCount(5)).isEqualTo(0);
+        assertThat(lottoStat.getMatchCount(4)).isEqualTo(1);
     }
 
     @Test
@@ -38,11 +38,11 @@ class LottoStatisticsTest {
         MyLottos myLottos = new MyLottos(Arrays.asList(lotto1, lotto2));
 
         // when
-        LottoStatistics lottoStatistics = new LottoStatistics();
-        lottoStatistics.check(myLottos, winningLotto);
+        LottoStat lottoStat = new LottoStat();
+        lottoStat.check(myLottos, winningLotto);
 
         // then
-        assertThat(lottoStatistics.getReceiveMoney())
+        assertThat(lottoStat.getReceiveMoney())
                 .isEqualTo(ReceiveMoney.MATCH_4_RECEIVE_MONEY.getMoney() + ReceiveMoney.MATCH_6_RECEIVE_MONEY.getMoney());
     }
 }
