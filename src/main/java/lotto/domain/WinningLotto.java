@@ -6,22 +6,22 @@ import java.util.List;
 public class WinningLotto {
 
     private final Lotto lotto;
-    private final Bonus bonus;
+    private final LottoNumber bonusNumber;
 
     public WinningLotto(List<Integer> numbers,
                         int bonusNumber) {
-        this(new Lotto(numbers), new Bonus(bonusNumber));
+        this(new Lotto(numbers), new LottoNumber(bonusNumber));
     }
 
     public WinningLotto(Lotto numbers,
-                        Bonus bonusNumber) {
+                        LottoNumber bonusNumber) {
         this.lotto = numbers;
         validateDuplicationNumber(bonusNumber);
-        this.bonus = bonusNumber;
+        this.bonusNumber = bonusNumber;
     }
 
-    private void validateDuplicationNumber(Bonus bonusNumber) {
-        if(bonusNumber.compareWith(lotto)){
+    private void validateDuplicationNumber(LottoNumber bonusNumber) {
+        if(lotto.contains(bonusNumber)){
             throw new IllegalArgumentException();
         }
     }
@@ -36,6 +36,6 @@ public class WinningLotto {
     }
 
     private LottoRank winningRank(Lotto lotto) {
-        return LottoRank.searchBy(this.lotto.matchedCount(lotto), bonus.compareWith(lotto));
+        return LottoRank.searchBy(this.lotto.matchedCount(lotto), lotto.contains(bonusNumber));
     }
 }
