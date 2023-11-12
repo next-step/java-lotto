@@ -14,11 +14,21 @@ public enum LottoWinningInfo {
         this.winningMoney = winningMoney;
     }
 
-    public int getMatchCount() {
-        return matchCount;
+    public static int winningMoney(int matchCount){
+        for(LottoWinningInfo lottoWinningInfo: LottoWinningInfo.values()){
+            if(lottoWinningInfo.matchCount == matchCount){
+                return lottoWinningInfo.winningMoney;
+            }
+        }
+        throw new IllegalArgumentException("당첨금을 찾을 수 없습니다. 입력 matchCount : " + matchCount);
     }
 
-    public int getWinningMoney() {
-        return winningMoney;
+    public static Integer matchCount(int matchCount) {
+        for(LottoWinningInfo lottoWinningInfo: LottoWinningInfo.values()){
+            if(lottoWinningInfo.matchCount == matchCount){
+                return lottoWinningInfo.matchCount;
+            }
+        }
+        throw new IllegalArgumentException("당첨 매칭 갯수를 찾을 수 없습니다. 입력 matchCount : " + matchCount);
     }
 }
