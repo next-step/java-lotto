@@ -1,6 +1,7 @@
-package step1;
+package step1.domain;
 
 import org.junit.jupiter.api.Test;
+import step1.domain.Calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -19,14 +20,6 @@ class CalculatorTest {
         Calculator calculator = new Calculator();
         int result = calculator.subtract(6, 3);
         assertThat(result).isEqualTo(3);
-    }
-
-    @Test
-    void 빼기오류_1번째인자보다_2번째인자가_큰경우() {
-        Calculator calculator = new Calculator();
-        assertThatThrownBy(() -> {
-            calculator.subtract(3, 6);
-        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

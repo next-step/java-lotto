@@ -2,10 +2,10 @@
 
 ---
 ### 구현할 기능 목록
-- [ ] 덧셈 구현
-- [ ] 뺄셈 구현
-- [ ] 곱셈 구현
-- [ ] 나눗셈 구현
+- [X] 덧셈 구현
+- [X] 뺄셈 구현
+- [X] 곱셈 구현
+- [X] 나눗셈 구현
 - [ ] 입력값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
 - [ ] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw 
 - [ ] 사칙 연산을 모두 포함하는 기능 구현
