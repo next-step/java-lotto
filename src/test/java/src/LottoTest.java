@@ -55,7 +55,7 @@ class LottoTest {
                 GameNumber.of(45), GameNumber.of(44), GameNumber.of(43),
                 GameNumber.of(42), GameNumber.of(41), GameNumber.of(40)
         ));
-        Lotto lotto = Lotto.byGames(List.of(fourthPlaceGame, otherGame));
+        Lotto lotto = Lotto.byGames(new Games(List.of(fourthPlaceGame, otherGame)));
 
         Game winningGame = Game.byGameNumbers(Set.of(
                 GameNumber.of(1), GameNumber.of(2), GameNumber.of(3),
