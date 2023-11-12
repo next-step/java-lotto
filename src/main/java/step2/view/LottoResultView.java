@@ -9,7 +9,6 @@ public class LottoResultView {
     private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.";
     private static final String LOTTO_RESULT_MESSAGE = "%d개 일치, (%d원)- %d개";
     private static final String LOTTO_EARNED_RATE_MESSAGE = "총 수익률은 %s입니다.";
-    private static final int PRICE_PER_LOTTO = 1_000;
 
     public static void printPurchaseComplete(Lottos list){
         System.out.println(String.format(LOTTO_COUNT_MESSAGE, list.getLottoCount()));
@@ -29,7 +28,7 @@ public class LottoResultView {
             printEachWinning(info);
         }
 
-        printEarningRate(winningInfos, lottos);
+        printEarningRate(winningInfos.earningRate());
     }
 
     private static void printEachWinning(WinningInfo info) {
@@ -41,12 +40,9 @@ public class LottoResultView {
         System.out.println("---------");
     }
 
-    private static void printEarningRate(WinningInfos winningInfos, Lottos lottos) {
-        int totalEarningMoney = winningInfos.earningMoney();
-        int totalPurchaseMoney = PRICE_PER_LOTTO * lottos.getLottoCount();
-        double totalEarningRate = (double) totalEarningMoney / totalPurchaseMoney;
+    private static void printEarningRate(double earningRate) {
         DecimalFormat df = new DecimalFormat("#.##");
-        String format = df.format(totalEarningRate);
+        String format = df.format(earningRate);
         System.out.println(String.format(LOTTO_EARNED_RATE_MESSAGE, format));
     }
 }
