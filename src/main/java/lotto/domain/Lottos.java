@@ -36,6 +36,15 @@ public class Lottos {
         return lottos.size();
     }
 
+    public WinnerCount draw(final List<Integer> winningNumbers) {
+        final WinnerCount winner = new WinnerCount();
+        for (Lotto lotto : lottos) {
+            winner.addWinner(lotto.getRightNumber(winningNumbers));
+        }
+
+        return winner;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -43,14 +52,5 @@ public class Lottos {
             stringBuilder.append(lotto.toString() + LINE_BREAK);
         }
         return stringBuilder.toString();
-    }
-
-    public Winner draw(final List<Integer> winningNumbers) {
-        final Winner winner = new Winner();
-        for (Lotto lotto : lottos) {
-            winner.addWinner(lotto.getRightNumber(winningNumbers));
-        }
-
-        return winner;
     }
 }

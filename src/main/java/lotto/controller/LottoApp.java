@@ -1,9 +1,11 @@
 package lotto.controller;
 
 import lotto.domain.LottoGame;
-import lotto.domain.Winner;
+import lotto.domain.WinnerCount;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.math.BigDecimal;
 
 public class LottoApp {
     public static void main(String[] args) {
@@ -16,8 +18,10 @@ public class LottoApp {
         ResultView.print(lottoGame.toString());
 
         String winningNumberText = InputView.inputWinningNumber();
-        final Winner winner = lottoGame.draw(winningNumberText);
+        final WinnerCount winner = lottoGame.draw(winningNumberText);
         ResultView.winnerPrint(winner);
 
+        final BigDecimal returnRate = winner.getReturnRate(purchaseAmount);
+        ResultView.returnRatePrint(returnRate);
     }
 }

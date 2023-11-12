@@ -15,7 +15,7 @@ public class LottoGame {
         return lottos.purchaseCount();
     }
 
-    public Winner draw(final String winningNumberText) {
+    public WinnerCount draw(final String winningNumberText) {
         validationCheck(winningNumberText);
 
         List<Integer> winningNumbers = parsingText(winningNumberText);
@@ -23,7 +23,7 @@ public class LottoGame {
         return lottos.draw(winningNumbers);
     }
 
-    private static List<Integer> parsingText(final String winningNumberText) {
+    private List<Integer> parsingText(final String winningNumberText) {
         final String[] winningNumberTokens = winningNumberText.split(SPLIT_TEXT);
 
         List<Integer> winningNumbers = new ArrayList<>();
@@ -34,13 +34,13 @@ public class LottoGame {
         return winningNumbers;
     }
 
-    private static void validationCheck(final String winningNumberText) {
+    private void validationCheck(final String winningNumberText) {
         if (isNullOrEmpty(winningNumberText)) {
             throw new IllegalArgumentException(WINNING_NUMBER_EMPTY_MSG);
         }
     }
 
-    private static boolean isNullOrEmpty(final String winningNumberText) {
+    private boolean isNullOrEmpty(final String winningNumberText) {
         return winningNumberText == null || winningNumberText.isBlank();
     }
 
