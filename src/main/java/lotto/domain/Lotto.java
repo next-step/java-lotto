@@ -43,13 +43,13 @@ public class Lotto {
                 .collect(Collectors.toList()).size();
     }
 
+    public boolean matchBonus(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s]", lottoNumbers.stream().map(LottoNumber::toString)
                 .collect(Collectors.joining(", ")));
-    }
-
-    public boolean matchBonus(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
     }
 }

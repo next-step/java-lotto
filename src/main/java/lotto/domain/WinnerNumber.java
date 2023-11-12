@@ -5,14 +5,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static lotto.validate.NumberValidation.checkBonusNumber;
+
 public class WinnerNumber {
 
     private static final String DELIMITER = ",";
-    private Lotto lotto;
+    private Lotto winLotto;
     private LottoNumber bonusNumber;
 
     public WinnerNumber(String lottoNumbers) {
-        this.lotto = new Lotto(createLottoNumbers(lottoNumbers));
+        this.winLotto = new Lotto(createLottoNumbers(lottoNumbers));
+    }
+
+    public WinnerNumber(String lottoNumbers, int bonusNumber) {
+        this.winLotto = new Lotto(createLottoNumbers(lottoNumbers));
+        this.bonusNumber = new LottoNumber(bonusNumber);
+        checkBonusNumber(this.winLotto, this.bonusNumber);
     }
 
     private List<LottoNumber> createLottoNumbers(String lottoNumbers) {
@@ -24,12 +32,12 @@ public class WinnerNumber {
 
     public Map<RankLotto, Integer> statisticsResult(List<Lotto> lottos) {
         return lottos.stream()
-                .map(lotto -> RankLotto.findRank(lotto.match(this.lotto), lotto.matchBonus(this.bonusNumber)))
+                .map(lotto -> RankLotto.findRank(lotto.match(this.winLotto), lotto.matchBonus(this.bonusNumber)))
                 .collect(Collectors.toMap(rank -> rank, rank -> 1, Integer::sum));
     }
 
     public Lotto resultLotto() {
-        return lotto;
+        return winLotto;
     }
 
     public LottoNumber bonusNumber() {
