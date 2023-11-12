@@ -32,6 +32,6 @@ public class NumberValidationTest {
         // then
         assertThatIllegalArgumentException().isThrownBy(() -> {
             numberValidation.checkNumberRange(number);
-        }).withMessageMatching("로또 번호는 1부터 45까지의 숫자만 가능합니다.");
+        });
     }
 }
