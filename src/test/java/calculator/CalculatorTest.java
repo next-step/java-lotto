@@ -41,4 +41,11 @@ public class CalculatorTest {
         assertThat(StringCalculator.cal("1 + 4 * 3"))
                 .isEqualTo(15);
     }
+
+    @Test
+    @DisplayName("[StringCalculator.cal] 사칙 연산 총 동원 복합 계산식 -> 합계 반환")
+    public void allOperatorTest() {
+        assertThat(StringCalculator.cal("1 - 6 + 20 * 30 / 5"))
+                .isEqualTo(90);
+    }
 }
