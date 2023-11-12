@@ -1,6 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.InputValidator;
 import lotto.exception.InsufficientPriceException;
 import lotto.exception.MisMatchPriceUnitException;
 import org.assertj.core.api.Assertions;
