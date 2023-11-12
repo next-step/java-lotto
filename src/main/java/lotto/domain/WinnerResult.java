@@ -13,8 +13,8 @@ public class WinnerResult {
         this.result = Collections.unmodifiableMap(result);
     }
 
-    public WinnerResult(Lotto winLotto, List<Lotto> lottos) {
-        this.result = Collections.unmodifiableMap(resultCount(winLotto, lottos));
+    public WinnerResult(Lotto winLotto, List<Lotto> lottos, LottoNumber bonusNumber) {
+        this.result = Collections.unmodifiableMap(resultCount(winLotto, lottos, bonusNumber));
     }
 
     public Map<RankLotto, Integer> result() {
@@ -31,9 +31,9 @@ public class WinnerResult {
         return (double) totalPrize() / money;
     }
 
-    private Map<RankLotto, Integer> resultCount(Lotto winLotto, List<Lotto> lottos) {
+    private Map<RankLotto, Integer> resultCount(Lotto winLotto, List<Lotto> lottos, LottoNumber bonusNumber) {
         return lottos.stream()
-                .map(lotto -> RankLotto.findRank(lotto.match(winLotto)))
+                .map(lotto -> RankLotto.findRank(lotto.match(winLotto), lotto.matchBonus(bonusNumber)))
                 .collect(Collectors.toMap(rank -> rank, rank -> 1, Integer::sum));
     }
 

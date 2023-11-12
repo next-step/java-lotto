@@ -18,7 +18,7 @@ public class LottoMain {
         Purchase purchase = new Purchase(inputMoney(), NUMBER_STRATEGY);
         print(purchase.toString());
         WinnerNumber winnerNumber = new WinnerNumber(inputWinNumber());
-        WinnerResult winnerResult = new WinnerResult(winnerNumber.resultLotto(), purchase.lottos());
+        WinnerResult winnerResult = new WinnerResult(winnerNumber.resultLotto(), purchase.lottos(), winnerNumber.bonusNumber());
         print(winnerResult.toString());
         resultPrint(winnerResult.rateOfReturn(purchase.amount()));
     }

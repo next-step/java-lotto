@@ -8,6 +8,7 @@ public class WinnerNumber {
 
     private static final String DELIMITER = ",";
     private Lotto lotto;
+    private LottoNumber bonusNumber;
 
     public WinnerNumber(String lottoNumbers) {
         this.lotto = new Lotto(createLottoNumbers(lottoNumbers));
@@ -22,5 +23,9 @@ public class WinnerNumber {
 
     public Lotto resultLotto() {
         return lotto;
+    }
+
+    public LottoNumber bonusNumber() {
+        return bonusNumber;
     }
 }
