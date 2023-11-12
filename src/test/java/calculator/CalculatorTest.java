@@ -57,4 +57,12 @@ public class CalculatorTest {
             StringCalculator.cal(null);
         });
     }
+
+    @Test
+    @DisplayName("[StringCalculator.cal] 정의되지 않은 연산 기호 입력 시 -> IllegalArgumentException")
+    public void unknownOperatorTest() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            StringCalculator.cal("15 % 5");
+        });
+    }
 }
