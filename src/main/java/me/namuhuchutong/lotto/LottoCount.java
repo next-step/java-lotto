@@ -19,4 +19,9 @@ public class LottoCount {
     public Long getCount() {
         return count;
     }
+
+    @Override
+    public String toString() {
+        return count + "번 일치";
+    }
 }

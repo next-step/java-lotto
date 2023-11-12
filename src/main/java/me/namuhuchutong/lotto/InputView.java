@@ -47,6 +47,7 @@ public class InputView {
     }
 
     private String[] inputAndTrim() {
+        scanner.nextLine();
         String input = scanner.nextLine();
         validateNotNumber(input);
         return input.split(", ");

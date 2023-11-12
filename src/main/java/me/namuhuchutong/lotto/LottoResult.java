@@ -1,7 +1,10 @@
 package me.namuhuchutong.lotto;
 
 
+import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class LottoResult {
 
@@ -17,6 +20,18 @@ public class LottoResult {
             totalPrice += LottoWinnings.valueOfCount(count);
         }
         return totalPrice;
+    }
+
+    public List<String> getLottoCountResult() {
+        return lottoResult.keySet().stream()
+                          .map(buildMatchNumberAndCount())
+                          .collect(Collectors.toList());
+    }
+
+    private Function<LottoCount, String> buildMatchNumberAndCount() {
+        return lottoCount -> lottoCount.toString() + ": "
+                + lottoResult.get(lottoCount).getSize() + "\n"
+                + lottoResult.get(lottoCount);
     }
 
     @Override
