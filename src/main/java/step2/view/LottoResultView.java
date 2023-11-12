@@ -1,6 +1,7 @@
 package step2.view;
 
 import step2.domain.Lotto;
+import step2.domain.LottoWinningInfo;
 import step2.domain.Lottos;
 
 import java.text.DecimalFormat;
@@ -20,10 +21,10 @@ public class LottoResultView {
     private static final LinkedHashMap<Integer,Integer> LOTTO_WINNING_INFO = new LinkedHashMap<>();
 
     static {
-        LOTTO_WINNING_INFO.put(3, 5_000);
-        LOTTO_WINNING_INFO.put(4, 50_000);
-        LOTTO_WINNING_INFO.put(5, 1_500_000);
-        LOTTO_WINNING_INFO.put(6, 2_000_000_000);
+        LOTTO_WINNING_INFO.put(LottoWinningInfo.MATCH_THREE.getMatchCount(), LottoWinningInfo.MATCH_THREE.getWinningMoney());
+        LOTTO_WINNING_INFO.put(LottoWinningInfo.MATCH_FOUR.getMatchCount(), LottoWinningInfo.MATCH_FOUR.getWinningMoney());
+        LOTTO_WINNING_INFO.put(LottoWinningInfo.MATCH_FIVE.getMatchCount(), LottoWinningInfo.MATCH_FIVE.getWinningMoney());
+        LOTTO_WINNING_INFO.put(LottoWinningInfo.MATCH_SIX.getMatchCount(), LottoWinningInfo.MATCH_SIX.getWinningMoney());
     }
 
     public static void printPurchaseComplete(Lottos list){
