@@ -12,4 +12,7 @@ public class ManualCount {
         return this.count;
     }
 
+    public int minus(int countTotal) {
+        return countTotal - this.count;
+    }
 }

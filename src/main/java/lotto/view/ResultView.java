@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.*;
 
-import java.util.List;
 import java.util.Map;
 
 public class ResultView {
@@ -18,13 +17,9 @@ public class ResultView {
 
     public void reportBuying(int lottoCount,
                              int manualLottoCount,
-                             List<Lotto> manualLottos,
-                             List<Lotto> lottos) {
+                             Lottos lottos) {
         System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + lottoCount + BUYING_QUANTITY);
-        for (Lotto manualLotto : manualLottos) {
-            System.out.println(manualLotto.toString());
-        }
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottos.getAll()) {
             System.out.println(lotto.toString());
         }
         System.out.println();

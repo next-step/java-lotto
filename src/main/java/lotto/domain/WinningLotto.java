@@ -26,9 +26,9 @@ public class WinningLotto {
         }
     }
 
-    public List<LottoRank> winningRank(List<Lotto> lottos) {
+    public List<LottoRank> winningRank(Lottos lottos) {
         List<LottoRank> list = new ArrayList<>();
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottos.getAll()) {
             LottoRank lottoRank = winningRank(lotto);
             list.add(lottoRank);
         }
