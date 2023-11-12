@@ -6,15 +6,15 @@
 ---------------------------------------------
 
 ### 기능 분리
-- [ ] 연산자
+- [x] 연산자
   - 더하기
   - 빼기
   - 나누기
   - 곱하기
+- [x] 연산 검증
+  - 사칙연산 값이 아닌 경우 IllegalArgumentException 예외 발생
 - [ ] 입력값 검증
   - null or empty 이면 IllegalArgumentException 예외 발생
-- [ ] 연산 검증
-  - 사칙연산 값이 아닌 경우 IllegalArgumentException 예외 발생
 - [ ] 숫자 체크
   - 숫자 값이 아닌 경우 IllegalArgumentException 예외 발생
 - [ ] 문자 분리
