@@ -18,11 +18,11 @@ public class CalculatorControllerTest {
 
 	@Test
 	void calculate_validInput_result() {
-		String inputExpression = InputView.inputExpression("2 + 3 - 4");
-		int actual = ((2 + 3) - 4);
+		final String inputExpression = InputView.inputExpression("2 + 3 - 4");
+		final int actual = ((2 + 3) - 4);
 
 		controller.calculate(inputExpression);
-		int expected = calculator.result();
+		final int expected = calculator.result();
 
 		assertThat(expected).isEqualTo(actual);
 	}
@@ -32,6 +32,15 @@ public class CalculatorControllerTest {
 	void calculate_nullAndEmpty_throwsException(String emptyString) {
 		assertThatThrownBy(
 				() -> controller.calculate(emptyString)
+		).isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	void calculate_divideByZero_throwsException() {
+		final String inputExpression = "3 + 2 / 0";
+
+		assertThatThrownBy(
+				() -> controller.calculate(inputExpression)
 		).isInstanceOf(IllegalArgumentException.class);
 	}
 }
