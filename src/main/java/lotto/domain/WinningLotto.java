@@ -8,7 +8,7 @@ public class WinningLotto {
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(List<Integer> numbers,
+    public WinningLotto(List<LottoNumber> numbers,
                         int bonusNumber) {
         this(new Lotto(numbers), new LottoNumber(bonusNumber));
     }

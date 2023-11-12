@@ -19,7 +19,12 @@ class LottoMachineTest {
         };
 
         LottoMachine actual = new LottoMachine(randomLottoNumberStrategy, new BuyingAmount(1000));
-        LottoMachine expected = new LottoMachine(List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6))));
+        LottoMachine expected = new LottoMachine(List.of(new Lotto(List.of(new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)))));
 
         assertThat(actual).isEqualTo(expected);
     }

@@ -13,7 +13,7 @@ public class LottoMachine {
                         BuyingAmount buyingAmount) {
         List<Lotto> list = new ArrayList<>();
         for (int i = 0; i < buyingAmount.units(); i++) {
-            List<Integer> numbers = lottoNumberStrategy.create();
+            List<LottoNumber> numbers = lottoNumberStrategy.create();
             list.add(new Lotto(numbers));
         }
         this.lottos = List.copyOf(list);

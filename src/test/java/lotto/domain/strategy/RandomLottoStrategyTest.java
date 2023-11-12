@@ -1,5 +1,6 @@
 package lotto.domain.strategy;
 
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -17,8 +18,13 @@ class RandomLottoStrategyTest {
             }
         };
 
-        List<Integer> actual = randomLottoNumberStrategy.create();
-        List<Integer> expected = List.of(1, 2, 3, 4, 5, 6);
+        List<LottoNumber> actual = randomLottoNumberStrategy.create();
+        List<LottoNumber> expected = List.of(new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6));
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -32,8 +38,13 @@ class RandomLottoStrategyTest {
             }
         };
 
-        List<Integer> actual = randomLottoNumberStrategy.create();
-        List<Integer> expected = List.of(1, 2, 3, 4, 5, 6);
+        List<LottoNumber> actual = randomLottoNumberStrategy.create();
+        List<LottoNumber> expected = List.of(new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6));
 
         assertThat(actual).isEqualTo(expected);
     }

@@ -1,8 +1,11 @@
 package lotto.domain.strategy;
 
+import lotto.domain.LottoNumber;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RandomLottoNumberStrategy implements LottoNumberStrategy {
 
@@ -21,10 +24,13 @@ public class RandomLottoNumberStrategy implements LottoNumberStrategy {
     }
 
     @Override
-    public List<Integer> create() {
+    public List<LottoNumber> create() {
         List<Integer> list = new ArrayList<>(createRandomNumbers());
         Collections.sort(list);
-        return List.copyOf(list);
+
+        return list.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
 
     }
 
