@@ -20,4 +20,18 @@ public class CalculatorTest {
         assertEquals(0, result);
     }
 
+    @Test
+    void 곱하기_기능() {
+        Calculator calculator = new Calculator();
+        int result = calculator.multiply(3,4);
+        assertEquals(12, result);
+    }
+
+    @Test
+    void 나누기_기능() {
+        Calculator calculator = new Calculator();
+        int result = calculator.divide(4, 2);
+        assertEquals(2, result);
+    }
+
 }

@@ -8,4 +8,12 @@ public class Calculator {
     public int minus(int result, int value) {
         return result - value;
     }
+
+    public int multiply(int result, int value) {
+        return result * value;
+    }
+
+    public int divide(int result, int value) {
+        return result/value;
+    }
 }
