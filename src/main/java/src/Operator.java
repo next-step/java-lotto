@@ -9,16 +9,16 @@ public enum Operator {
     DIVIDE("/", (num1, num2) -> num1 / num2),
     MULTIPLE("*", (num1, num2) -> num1 * num2);
 
-    private final String name;
+    private final String symbol;
     private final BinaryOperator<Integer> expression;
 
-    Operator(String name, BinaryOperator<Integer> expression) {
-        this.name = name;
+    Operator(String symbol, BinaryOperator<Integer> expression) {
+        this.symbol = symbol;
         this.expression = expression;
     }
 
     public static Operator byString(String name) {
-        return Arrays.stream(values()).filter(value -> value.name.equals(name))
+        return Arrays.stream(values()).filter(value -> value.symbol.equals(name))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }
