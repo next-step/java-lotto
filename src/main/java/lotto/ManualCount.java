@@ -11,4 +11,5 @@ public class ManualCount {
     public int count() {
         return this.count;
     }
+
 }

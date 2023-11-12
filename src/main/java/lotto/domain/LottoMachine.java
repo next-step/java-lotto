@@ -8,19 +8,24 @@ import java.util.Objects;
 
 public class LottoMachine {
     private final List<Lotto> lottos;
+    private final List<Lotto> manaulLottos;
 
     public LottoMachine(LottoNumberStrategy lottoNumberStrategy,
-                        BuyingAmount buyingAmount) {
+                        BuyingAmount buyingAmount,
+                        List<Lotto> manaulLottos) {
         List<Lotto> list = new ArrayList<>();
-        for (int i = 0; i < buyingAmount.units(); i++) {
+        for (int i = 0; i < buyingAmount.units() - manaulLottos.size(); i++) {
             List<LottoNumber> numbers = lottoNumberStrategy.create();
             list.add(new Lotto(numbers));
         }
         this.lottos = List.copyOf(list);
+        this.manaulLottos = List.copyOf(manaulLottos);
     }
 
-    public LottoMachine(List<Lotto> lottos) {
+    public LottoMachine(List<Lotto> lottos,
+                        List<Lotto> manaulLottos) {
         this.lottos = lottos;
+        this.manaulLottos = manaulLottos;
     }
 
     public int lottoCount() {
