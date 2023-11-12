@@ -5,12 +5,12 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
     private static final String SPLIT_SEPARATOR = "\\s";
 
     public String[] input() {
         System.out.println("수행할 수식을 입력해주세요.");
-        String inputValue = scanner.nextLine();
+        String inputValue = SCANNER.nextLine();
         return getExpression(inputValue);
     }
 
