@@ -2,7 +2,6 @@ package src;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Lotto {
 
@@ -36,11 +35,11 @@ public class Lotto {
         return games.profitRate(LOTTO_PRICE);
     }
 
-    public Map<WinningAmount, Integer> matchStatus() {
-        return games.matchStatus();
-    }
-
     public void match(Game winningGame) {
         games.matchGames(winningGame);
+    }
+
+    public MatchStatus matchStatus() {
+        return games.matchStatus();
     }
 }

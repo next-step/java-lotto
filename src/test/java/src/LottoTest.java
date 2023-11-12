@@ -34,7 +34,7 @@ class LottoTest {
         lotto.match(winningGame);
 
         // when
-        Map<WinningAmount, Integer> matchStatus = lotto.matchStatus();
+        MatchStatus matchStatus = lotto.matchStatus();
 
         // then
         assertThat(matchStatus).isNotNull();
