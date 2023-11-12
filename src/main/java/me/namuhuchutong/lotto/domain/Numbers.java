@@ -8,6 +8,8 @@ import java.util.Objects;
 
 public class Numbers {
 
+    private static final int FREQUENCY_NUMBER = 1;
+
     private final List<Number> values;
 
     public static Numbers create(NumberGenerator numberGenerator) {
@@ -28,7 +30,7 @@ public class Numbers {
 
     private void validateDuplicatedNumbers(List<Number> values) {
         values.stream()
-              .filter(number -> Collections.frequency(values, number) > 1)
+              .filter(number -> Collections.frequency(values, number) > FREQUENCY_NUMBER)
               .findAny()
               .ifPresent(value -> {
                   throw new IllegalArgumentException("중복된 값이 존재합니다. - " + value);
@@ -41,8 +43,9 @@ public class Numbers {
 
     public long howManyMatch(Numbers numbers) {
         return this.values.stream()
-                          .filter(number1 -> numbers.values.stream()
-                                                            .anyMatch(number1::equals))
+                          .filter(number1 -> numbers.values
+                                                    .stream()
+                                                    .anyMatch(number1::equals))
                           .count();
     }
 

@@ -12,6 +12,9 @@ import java.util.stream.Stream;
 
 public class InputView {
 
+    private static final String NOT_NUMBER_REGEX = "^[,\\s\\d]+$";
+    private static final String INPUT_NUMBER_REGEX = ", ";
+
     private final Scanner scanner = new Scanner(System.in);
 
     public int showBuyPrompt() {
@@ -57,11 +60,11 @@ public class InputView {
     private String[] inputAndTrim() {
         String input = scanner.nextLine();
         validateNotNumber(input);
-        return input.split(", ");
+        return input.split(INPUT_NUMBER_REGEX);
     }
 
     private void validateNotNumber(String input) {
-        String[] split = input.split("^[,\\s\\d]+$");
+        String[] split = input.split(NOT_NUMBER_REGEX);
         if (split.length != 0) {
             throw new IllegalArgumentException("로또 번호만 입력할 수 있습니다.");
         }
