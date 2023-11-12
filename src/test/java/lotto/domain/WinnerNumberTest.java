@@ -30,13 +30,13 @@ public class WinnerNumberTest {
     }
 
     @Test
-    void 구매로또와_당첨결과에_대한_통계 () {
+    void 구매로또와_당첨결과에_대한_통계() {
         // given
         String winNumber = "1,2,3,4,5,6";
         int bonusNumber = 7;
         winnerNumber = new WinnerNumber(winNumber, bonusNumber);
         Lotto buyLotto = new Lotto();
-        buyLotto.create(List.of(1,2,3,4,5,6));
+        buyLotto.create(List.of(1, 2, 3, 4, 5, 6));
         List<Lotto> buyLottos = List.of(buyLotto);
         // when
         Map<RankLotto, Integer> result = winnerNumber.statisticsResult(buyLottos);

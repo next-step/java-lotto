@@ -43,7 +43,7 @@ public class LottoTest {
         List<Lotto> buyLottos = numberStrategy.create(1);
         Lotto buyLotto = buyLottos.get(0);
         Lotto resultLotto = new Lotto();
-        resultLotto.create(List.of(1,2,3,4,5,6));
+        resultLotto.create(List.of(1, 2, 3, 4, 5, 6));
         // when
         int result = buyLotto.match(resultLotto);
         // then
@@ -56,7 +56,7 @@ public class LottoTest {
         // given
         LottoNumber bonusNumber = new LottoNumber(7);
         Lotto lotto = new Lotto();
-        lotto.create(List.of(1,2,7,4,5,6));
+        lotto.create(List.of(1, 2, 7, 4, 5, 6));
         // when
         boolean result = lotto.matchBonus(bonusNumber);
         // then

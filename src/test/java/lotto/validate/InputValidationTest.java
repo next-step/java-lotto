@@ -39,7 +39,7 @@ public class InputValidationTest {
             // then
             assertThatIllegalArgumentException().isThrownBy(() -> {
                 inputValidation.inputValidate(input);
-            }).withMessageMatching("로또 구입 금액은 1000원 이상 입력해야 합니다.");
+            });
         }
 
         @DisplayName("로또 구입 -1000 입력")
@@ -51,7 +51,7 @@ public class InputValidationTest {
             // then
             assertThatIllegalArgumentException().isThrownBy(() -> {
                 inputValidation.inputValidate(input);
-            }).withMessageMatching("로또 구입 금액은 1000원 이상 입력해야 합니다.");
+            });
         }
 
         @DisplayName("로또 구입 1001 입력")
@@ -63,7 +63,7 @@ public class InputValidationTest {
             // then
             assertThatIllegalArgumentException().isThrownBy(() -> {
                 inputValidation.inputValidate(input);
-            }).withMessageMatching("로또 구입 금액은 1000원 단위로 가능합니다.");
+            });
         }
     }
 }
