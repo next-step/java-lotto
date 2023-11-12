@@ -10,6 +10,10 @@ public class InputView {
 
     private static final String COMMA_BLANK = ", ";
     private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+    private static final String BUYING_AMOUNT = "구입금액을 입력해 주세요.";
+    private static final String WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String MANUAL_BUYING_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
 
     private final Scanner scanner;
 
@@ -18,7 +22,7 @@ public class InputView {
     }
 
     public int inputAmount() {
-        System.out.println("구입금액을 입력해 주세요.");
+        System.out.println(BUYING_AMOUNT);
         int input = scanner.nextInt();
         scanner.nextLine();
         System.out.println();
@@ -27,7 +31,7 @@ public class InputView {
     }
 
     public List<Integer> winnerNumber() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println(WINNING_NUMBER);
         String input = scanner.nextLine();
 
         List<Integer> numbers = new ArrayList<>();
@@ -45,7 +49,7 @@ public class InputView {
     }
 
     public int inputManualCount() {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        System.out.println(MANUAL_BUYING_COUNT);
         int input = scanner.nextInt();
         scanner.nextLine();
         System.out.println();
@@ -55,7 +59,7 @@ public class InputView {
 
     public List<String> inputManualNumbers(ManualCount manualCount) {
         List<String> list = new ArrayList<>();
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        System.out.println(MANUAL_NUMBER);
         for (int i = 0; i < manualCount.count(); i++) {
             list.add(scanner.nextLine());
         }
