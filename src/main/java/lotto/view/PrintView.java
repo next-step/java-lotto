@@ -1,10 +1,11 @@
 package lotto.view;
 
 import lotto.domain.Lottos;
-import lotto.domain.Money;
 import lotto.domain.Rank;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class PrintView {
@@ -15,11 +16,14 @@ public class PrintView {
         lottos.getLottos().forEach(System.out::println);
     }
 
-    public static void printStatistics(List<Rank> ranks) {
+    public static void printStatistics(List<Rank> userRanks) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (Rank rank : Rank.values()) {
-            System.out.println(rank.getMatchCount() + "개 일치 (" + rank.getWinningPrice() + "원) - " + Rank.countRankType(ranks, rank));
+        List<Rank> ranks = Arrays.asList(Rank.values());
+        Collections.reverse(ranks);
+
+        for (Rank rank : ranks) {
+            System.out.println(rank.getMatchCount() + "개 일치 (" + rank.getWinningPrice() + "원) - " + Rank.countRankType(userRanks, rank));
         }
     }
 
