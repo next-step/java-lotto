@@ -1,23 +1,34 @@
 package step2.domain;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class WinningLotto {
 
-    private final int[] winningNumbers;
-    private final LinkedHashMap<Integer,Integer> LOTTO_WINNING_INFO = new LinkedHashMap<>();
-    public WinningLotto(int[] winningNumbers) {
-        this.winningNumbers = winningNumbers;
+    private final Lotto winningNumbersLotto;
+    private final LinkedHashMap<Integer,Integer> LOTTO_WINNING_INFO_MAP = new LinkedHashMap<>();
+    private static final List<Integer> winningCountList = List.of(3,4,5,6);
 
-        LOTTO_WINNING_INFO.put(LottoWinningInfo.MATCH_THREE.getMatchCount(), LottoWinningInfo.MATCH_THREE.getWinningMoney());
-        LOTTO_WINNING_INFO.put(LottoWinningInfo.MATCH_FOUR.getMatchCount(), LottoWinningInfo.MATCH_FOUR.getWinningMoney());
-        LOTTO_WINNING_INFO.put(LottoWinningInfo.MATCH_FIVE.getMatchCount(), LottoWinningInfo.MATCH_FIVE.getWinningMoney());
-        LOTTO_WINNING_INFO.put(LottoWinningInfo.MATCH_SIX.getMatchCount(), LottoWinningInfo.MATCH_SIX.getWinningMoney());
+
+    public WinningLotto(Lotto winningNumbersLotto) {
+        this.winningNumbersLotto = winningNumbersLotto;
+        for(int winningCount: winningCountList){
+            LOTTO_WINNING_INFO_MAP.put(LottoWinningInfo.matchCount(winningCount), LottoWinningInfo.winningMoney(winningCount));
+        }
     }
 
-    public WinningInfos winningInfo(Lottos lottos){
-        return winningInfos(extractWinningCountMap(lottos));
+    public WinningInfos winningInfos(Lottos lottos){
+        WinningInfos result = new WinningInfos(lottos);
+        process(lottos, result);
+        return result;
+    }
+
+    private void process(Lottos lottos, WinningInfos result) {
+        for(Map.Entry<Integer, Integer> matchCountInfo: extractWinningCountMap(lottos).entrySet()){
+            int matchCount = matchCountInfo.getKey();
+            result.addWinningInfo(new WinningInfo(matchCount, LOTTO_WINNING_INFO_MAP.get(matchCount), matchCountInfo.getValue()));
+        }
     }
 
     private LinkedHashMap<Integer, Integer> extractWinningCountMap(Lottos lottos) {
@@ -29,38 +40,13 @@ public class WinningLotto {
     }
 
     private void extractFromEachLotto(LinkedHashMap<Integer, Integer> winningCountMap, Lotto lotto) {
-        for(Map.Entry<Integer, Integer> entry: LOTTO_WINNING_INFO.entrySet()){
+        for(Map.Entry<Integer, Integer> entry: LOTTO_WINNING_INFO_MAP.entrySet()){
             int key = entry.getKey();
-            if(getMatchCount(lotto) == key){
+            if(lotto.matchCount(winningNumbersLotto) == key){
                 winningCountMap.put(key, winningCountMap.getOrDefault(key, 0) + 1);
             }
         }
     }
 
-    private WinningInfos winningInfos(LinkedHashMap<Integer, Integer> winningCountMap) {
-        WinningInfos result = new WinningInfos();
-        for(Map.Entry<Integer, Integer> entry: winningCountMap.entrySet()){
-            result.addWinningInfo(new WinningInfo(entry.getKey(), LOTTO_WINNING_INFO.get(entry.getKey()), entry.getValue()));
-        }
-        return result;
-    }
-
-    private int getMatchCount(Lotto lotto) {
-        int matchCount = 0;
-        for(LottoNumber lottonumber :lotto.lottoNumbers()){
-            matchCount = matchEachLottoNumber(lottonumber);
-        }
-        return matchCount;
-    }
-
-    private int matchEachLottoNumber(LottoNumber lottonumber) {
-        int matchCount = 0;
-        for(int winningNumber : winningNumbers){
-            if(lottonumber.number() == winningNumber){
-                matchCount++;
-            };
-        }
-        return matchCount;
-    }
 
 }
