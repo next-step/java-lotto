@@ -3,8 +3,12 @@ package calculator.model;
 import java.util.List;
 
 public class Operator {
-    public static final List<String> OPERATOR = List.of("+", "-", "*", "-");
-    List<String> operators;
+    public static final List<String> OPERATOR = List.of("+", "-", "*", "/");
+    private final List<String> operators;
+
+    public List<String> operators() {
+        return this.operators;
+    }
 
     public Operator(List<String> operators) {
         this.operators = getOperator(operators);
@@ -16,8 +20,12 @@ public class Operator {
     }
 
     public static void isOperator(List<String> operators) {
-        if (!OPERATOR.contains(operators)) {
+        if (hasInvalidOperator(operators)) {
             throw new IllegalArgumentException("사칙연산 기호가 아닙니다");
         }
+    }
+
+    private static boolean hasInvalidOperator(List<String> operators) {
+        return operators.stream().anyMatch(operator -> !OPERATOR.contains(operator));
     }
 }
