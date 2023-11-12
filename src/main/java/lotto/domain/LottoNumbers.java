@@ -29,6 +29,14 @@ public class LottoNumbers {
         return new LinkedHashSet<>(tempNumber);
     }
 
+    public boolean isRight(int winningNumber) {
+        if (numbers.contains(winningNumber)) {
+            return true;
+        }
+
+        return false;
+    }
+
     @Override
     public String toString() {
         return numbers.toString();

@@ -17,4 +17,5 @@ class LottosTest {
 
         assertThat(result).isEqualTo(14);
     }
+
 }

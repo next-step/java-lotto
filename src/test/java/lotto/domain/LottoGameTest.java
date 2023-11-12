@@ -15,6 +15,7 @@ class LottoGameTest {
         //when
         final int result = lottoGame.purchaseCount();
 
+        //then
         assertThat(result).isEqualTo(14);
     }
 }

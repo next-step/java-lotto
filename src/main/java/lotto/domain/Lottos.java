@@ -6,6 +6,7 @@ import java.util.List;
 public class Lottos {
     private static final String INVALID_AMOUNT = "로또 금액보다 높은 금액을 입력해야 합니다.";
     private static final int LOTTO_AMOUNT = 1000;
+    public static final String LINE_BREAK = "\n";
     private List<Lotto> lottos;
 
     public Lottos(final int purchaseAmount) {
@@ -16,9 +17,9 @@ public class Lottos {
 
     private List<Lotto> initLottos(final int purchaseAmount) {
         final List<Lotto> lottos = new ArrayList<>();
-        final int lottoCount = purchaseAmount / LOTTO_AMOUNT;
+        final int purchaseCount = purchaseAmount / LOTTO_AMOUNT;
 
-        for (int i = 0; i < lottoCount; i++) {
+        for (int i = 0; i < purchaseCount; i++) {
             lottos.add(new Lotto());
         }
 
@@ -39,8 +40,17 @@ public class Lottos {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Lotto lotto : lottos) {
-            stringBuilder.append(lotto.toString() + "\n");
+            stringBuilder.append(lotto.toString() + LINE_BREAK);
         }
         return stringBuilder.toString();
+    }
+
+    public Winner draw(final List<Integer> winningNumbers) {
+        final Winner winner = new Winner();
+        for (Lotto lotto : lottos) {
+            winner.addWinner(lotto.getRightNumber(winningNumbers));
+        }
+
+        return winner;
     }
 }
