@@ -1,10 +1,12 @@
 package lotto.controller;
 
+import lotto.ManualCount;
 import lotto.domain.*;
 import lotto.domain.strategy.RandomLottoNumberStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class LottoController {
@@ -14,6 +16,8 @@ public class LottoController {
         ResultView resultView = new ResultView();
 
         BuyingAmount buyingAmount = new BuyingAmount(inputView.inputAmount());
+        ManualCount manualCount = new ManualCount(inputView.inputManualCount());
+        List<String> lottoNumbers = inputView.inputManualNumbers(manualCount);
 
         LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberStrategy(), buyingAmount);
         resultView.reportBuying(lottoMachine.lottoCount(), lottoMachine.getLottoNumbers());
