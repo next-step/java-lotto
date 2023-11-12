@@ -8,7 +8,7 @@ import java.util.List;
 public class LottoMachine {
     private static final int LOTTO_LAST_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
-    private static final int PRICE_PER_LOTTO = 1_000;
+    public static final int PRICE_PER_LOTTO = 1_000;
 
     public Lottos createLottos(int inputMoney) {
         inputCheck(inputMoney);
