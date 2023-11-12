@@ -3,7 +3,8 @@ package step1;
 public enum Operator {
     PLUS('+'),
     MINUS('-'),
-    MULTIPLICATION('*');
+    MULTIPLICATION('*'),
+    DIVISION('/');
 
     private char symbol;
 

@@ -25,4 +25,11 @@ public class OperatorTest {
 
         assertThat(operator).isEqualTo(Operator.MULTIPLICATION);
     }
+
+    @Test
+    public void 나눗셈_타입_반환_테스트() {
+        Operator operator = Operator.findOperatorByUserInput('/');
+
+        assertThat(operator).isEqualTo(Operator.DIVISION);
+    }
 }
