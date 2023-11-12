@@ -37,7 +37,7 @@ public class LottoNumber {
     }
 
     public int number() {
-        return number;
+        return this.number;
     }
 
 }

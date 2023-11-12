@@ -1,36 +1,37 @@
 package step2;
 
-import step2.domain.LottoNumbers;
-import step2.domain.Lottos;
-import step2.domain.PrizeLotto;
-import step2.domain.WinningStatistics;
+import step2.domain.*;
 import step2.view.InputView;
 import step2.view.ResultView;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-import static step2.domain.LottoNumberGenerator.lottoNumbers;
-import static step2.domain.LottoStore.lottos;
-import static step2.domain.LottoStore.numberOfLotto;
 import static step2.util.BigDecimalUtil.stringToBigDecimal;
 import static step2.util.StringUtil.numbers;
 
 public class Runner {
 
     public static void main(String[] args) {
-        BigDecimal price = stringToBigDecimal(InputView.price());
-        int numberOfLotto = numberOfLotto(price);
-        ResultView.printPurchaseMessage(numberOfLotto);
+        InputView inputView = new InputView();
+        ResultView resultView = new ResultView();
+        LottoStore lottoStore = new LottoStore();
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
 
-        Lottos lottos = lottos(lottoNumbers(numberOfLotto));
-        ResultView.printLottos(lottos);
+        BigDecimal price = stringToBigDecimal(inputView.price());
+        int numberOfLotto = lottoStore.numberOfLotto(price);
+        resultView.printPurchaseMessage(numberOfLotto);
 
-        LottoNumbers prizeLottoNumbers = new LottoNumbers(numbers(InputView.prizeLottoNumber()));
-        int bonusNumber = InputView.bonusNumber();
+        List<LottoNumbers> lottoNumbers = lottoNumberGenerator.lottoNumbers(numberOfLotto);
+        Lottos lottos = lottoStore.lottos(lottoNumbers);
+        resultView.printLottos(lottos);
+
+        LottoNumbers prizeLottoNumbers = new LottoNumbers(numbers(inputView.prizeLottoNumber()));
+        int bonusNumber = inputView.bonusNumber();
         PrizeLotto prizeLotto = new PrizeLotto(prizeLottoNumbers, bonusNumber);
         WinningStatistics winningStatistics = WinningStatistics.of(lottos, prizeLotto);
-        ResultView.printWinningStatistics(winningStatistics);
-        ResultView.printRateOfReturn(price, winningStatistics);
+        resultView.printWinningStatistics(winningStatistics);
+        resultView.printRateOfReturn(price, winningStatistics);
     }
 
 }

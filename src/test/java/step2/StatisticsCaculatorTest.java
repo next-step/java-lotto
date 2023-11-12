@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static step2.domain.StatisticsCalculator.numberOfMatches;
+import static step2.util.ListUtil.numberOfMatches;
 
 public class StatisticsCaculatorTest {
 

@@ -3,22 +3,12 @@ package step2.domain;
 import java.util.List;
 import java.util.Objects;
 
-import static step2.domain.StatisticsCalculator.isContain;
-
 public class Lotto {
 
     private final LottoNumbers lottoNumbers;
 
     public Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
-    }
-
-    public int countOfWinningNumber(PrizeLotto prizeLotto) {
-        return StatisticsCalculator.numberOfMatches(numbers(), prizeLotto.numbers());
-    }
-
-    public boolean isBonusMatched(PrizeLotto prizeLotto) {
-        return isContain(numbers(), prizeLotto.bonusNumber());
     }
 
     public List<Integer> numbers() {

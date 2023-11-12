@@ -12,29 +12,25 @@ public class LottoStore {
 
     private static final BigDecimal PRICE_PER_SHEET = BigDecimal.valueOf(1000);
 
-    public static int numberOfLotto(BigDecimal price) {
+    public int numberOfLotto(BigDecimal price) {
         validate(price);
         return price.divide(PRICE_PER_SHEET).intValue();
     }
 
-    private static void validate(BigDecimal price) {
+    private void validate(BigDecimal price) {
         if (!isValidUnit(price)) {
             throw new InvalidPriceUnitException();
         }
     }
 
-    private static boolean isValidUnit(BigDecimal price) {
+    private boolean isValidUnit(BigDecimal price) {
         return price.remainder(PRICE_PER_SHEET).equals(BigDecimal.ZERO);
     }
 
-    public static Lottos lottos(List<LottoNumbers> lottoNumbers) {
+    public Lottos lottos(List<LottoNumbers> lottoNumbers) {
         return lottoNumbers.stream()
-            .map(LottoStore::lotto)
+            .map(Lotto::new)
             .collect(collectingAndThen(toList(), Lottos::new));
-    }
-
-    private static Lotto lotto(LottoNumbers lottoNumbers) {
-        return new Lotto(lottoNumbers);
     }
 
 }

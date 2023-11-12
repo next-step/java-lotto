@@ -32,8 +32,8 @@ public enum Prize {
     }
 
     public static Prize of(Lotto lotto, PrizeLotto prizeLotto) {
-        int countOfWinningNumber = lotto.countOfWinningNumber(prizeLotto);
-        boolean isBonusMatched = lotto.isBonusMatched(prizeLotto);
+        int countOfWinningNumber = prizeLotto.countOfWinningNumber(lotto);
+        boolean isBonusMatched = prizeLotto.isBonusMatched(lotto);
 
         return Arrays.stream(Prize.values())
             .filter(prize -> prize.equal(countOfWinningNumber, isBonusMatched))
@@ -53,8 +53,8 @@ public enum Prize {
         return this.bonus.equalBonus(isBonusMatched);
     }
 
-    public static boolean isWinningPrize(Prize prize) {
-        return WINNING.contains(prize);
+    public boolean isWinningPrize() {
+        return WINNING.contains(this);
     }
 
     public int matchCount() {
