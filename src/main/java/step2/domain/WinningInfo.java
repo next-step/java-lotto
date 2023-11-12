@@ -11,15 +11,6 @@ public class WinningInfo {
         this.winningCount = winningCount;
     }
 
-    @Override
-    public String toString() {
-        return "WinningInfo{" +
-                "matchCount=" + matchCount +
-                ", winningMoney=" + winningMoney +
-                ", winningCount=" + winningCount +
-                '}';
-    }
-
     public int matchCount() {
         return matchCount;
     }
@@ -34,5 +25,14 @@ public class WinningInfo {
 
     public int earningMoney(){
         return winningMoney * winningCount;
+    }
+
+    @Override
+    public String toString() {
+        return "WinningInfo{" +
+                "matchCount=" + matchCount +
+                ", winningMoney=" + winningMoney +
+                ", winningCount=" + winningCount +
+                '}';
     }
 }

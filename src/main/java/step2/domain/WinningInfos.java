@@ -6,7 +6,13 @@ import java.util.List;
 public class WinningInfos {
 
     private List<WinningInfo> winningInfoList = new ArrayList<>();
+    private static final int PRICE_PER_LOTTO = LottoMachine.PRICE_PER_LOTTO;
 
+    private final int   totalPurchaseCount;
+
+    public WinningInfos(Lottos lottos) {
+        this.totalPurchaseCount = lottos.getLottoCount() * PRICE_PER_LOTTO;
+    }
 
     public List<WinningInfo> winningInfoList() {
         return winningInfoList;
@@ -24,5 +30,9 @@ public class WinningInfos {
         return this.winningInfoList.stream()
                 .mapToInt(WinningInfo::earningMoney)
                 .sum();
+    }
+
+    public double earningRate() {
+        return (double) earningMoney() / totalPurchaseCount;
     }
 }
