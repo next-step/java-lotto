@@ -1,0 +1,44 @@
+package lotto.domain;
+
+import java.util.*;
+
+public class LottoNumbers {
+    public static final int MAX_LOTTO_NUMBER = 45;
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int LOTTO_NUMBER_COUNT = 6;
+    private Set<Integer> numbers;
+
+    public LottoNumbers() {
+        this.numbers = initLottoNumbers();
+    }
+
+    private Set<Integer> initLottoNumbers() {
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+            numbers.add(i);
+        }
+        Collections.shuffle(numbers);
+
+        List<Integer> tempNumber = new ArrayList<>();
+        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
+            tempNumber.add(numbers.get(i));
+        }
+
+        Collections.sort(tempNumber);
+
+        return new LinkedHashSet<>(tempNumber);
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(numbers, that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
+    }
+}
