@@ -3,6 +3,7 @@ package me.namuhuchutong.lotto;
 public class LottoSeller {
 
     private final NumberGenerator generator;
+    private Lotto lotto;
 
     public LottoSeller(NumberGenerator generator) {
         this.generator = generator;
@@ -11,7 +12,7 @@ public class LottoSeller {
     public LottoResult sellLotto(int amount, Numbers userInput) {
         validateAmount(amount);
         int times = amount / 1000;
-        Lotto lotto = Lotto.create(times, generator);
+        lotto = Lotto.create(times, generator);
         return lotto.getMatchNumbers(userInput);
     }
 

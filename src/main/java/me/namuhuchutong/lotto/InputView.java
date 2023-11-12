@@ -20,11 +20,16 @@ public class InputView {
         int amount = 0;
         try {
             amount = scanner.nextInt();
+            cleanBuffer();
         } catch (InputMismatchException exception) {
             throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
         }
         validateAmount(amount);
         return amount;
+    }
+
+    private void cleanBuffer() {
+        scanner.nextLine();
     }
 
     private void validateAmount(int amount) {
@@ -47,7 +52,6 @@ public class InputView {
     }
 
     private String[] inputAndTrim() {
-        scanner.nextLine();
         String input = scanner.nextLine();
         validateNotNumber(input);
         return input.split(", ");

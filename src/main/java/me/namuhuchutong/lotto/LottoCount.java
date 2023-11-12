@@ -11,8 +11,8 @@ public class LottoCount {
     }
 
     private void validateCount(long count) {
-        if (3 > count || 6 < count) {
-            throw new IllegalArgumentException("일치하는 로또는 3,4,5,6만 존재합니다.");
+        if (count < 0) {
+            throw new IllegalArgumentException("로또 당첨 번호 수는 음수일 수 없습니다.");
         }
     }
 

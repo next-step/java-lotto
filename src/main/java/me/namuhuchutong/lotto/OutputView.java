@@ -4,6 +4,8 @@ public class OutputView {
 
     private static final String NEW_LINE = "\n";
 
+    private static final long MINIMUM_COUNT = 3;
+
     public void showLottoResult(int amount, LottoResult lottoResult) {
         System.out.printf(buildResultBanner(amount, lottoResult));
     }
@@ -12,7 +14,7 @@ public class OutputView {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("------------ Lotto Result -----------");
         stringBuilder.append(NEW_LINE);
-        stringBuilder.append(lottoResult.getLottoCountResult());
+        stringBuilder.append(lottoResult.getLottoCountResult(MINIMUM_COUNT));
         stringBuilder.append("\n");
         stringBuilder.append("총 수익률: ");
         stringBuilder.append(addWinnings(amount, lottoResult));
@@ -20,6 +22,6 @@ public class OutputView {
     }
 
     private String addWinnings(int amount, LottoResult lottoResult) {
-        return (lottoResult.getWinnings() / amount) + "\n";
+        return (lottoResult.getWinnings(MINIMUM_COUNT) / amount) + "\n";
     }
 }

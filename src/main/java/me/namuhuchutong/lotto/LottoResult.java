@@ -4,6 +4,7 @@ package me.namuhuchutong.lotto;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class LottoResult {
@@ -14,18 +15,24 @@ public class LottoResult {
         this.lottoResult = lottoResult;
     }
 
-    public long getWinnings() {
-        long totalPrice = 0;
-        for (LottoCount count : lottoResult.keySet()) {
-            totalPrice += LottoWinnings.valueOfCount(count);
-        }
-        return totalPrice;
+    public long getWinnings(long minimumCount) {
+        return lottoResult.keySet()
+                          .stream()
+                          .filter(filterMinimumCount(minimumCount))
+                          .mapToLong(LottoWinnings::valueOfCount)
+                          .sum();
     }
 
-    public List<String> getLottoCountResult() {
-        return lottoResult.keySet().stream()
+    public List<String> getLottoCountResult(long minimumCount) {
+        return lottoResult.keySet()
+                          .stream()
+                          .filter(filterMinimumCount(minimumCount))
                           .map(buildMatchNumberAndCount())
                           .collect(Collectors.toList());
+    }
+
+    private Predicate<LottoCount> filterMinimumCount(long minimumCount) {
+        return count -> count.getCount() >= minimumCount;
     }
 
     private Function<LottoCount, String> buildMatchNumberAndCount() {

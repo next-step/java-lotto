@@ -15,6 +15,7 @@ class LottoTest {
         //given
         TestGenerator alwaysSixMatch = new TestGenerator();
         Lotto lotto = Lotto.create(1, alwaysSixMatch);
+        long minimumCount = 3;
         List<Number> given1 = List.of(
                 new Number(1),
                 new Number(2),
@@ -29,7 +30,7 @@ class LottoTest {
         LottoResult matchNumbers = lotto.getMatchNumbers(numbers1);
         
         //then
-        assertThat(matchNumbers.getWinnings()).isEqualTo(LottoWinnings.SIX.getWinnings());
+        assertThat(matchNumbers.getWinnings(minimumCount)).isEqualTo(LottoWinnings.SIX.getWinnings());
     }
     
     static class TestGenerator implements NumberGenerator {
