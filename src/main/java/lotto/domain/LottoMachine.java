@@ -32,12 +32,21 @@ public class LottoMachine {
         return this.lottos.size();
     }
 
+    public int manualLottoCount() {
+        return this.manaulLottos.size();
+    }
+
     public List<Lotto> getLottoNumbers() {
         return this.lottos;
     }
 
+    public List<Lotto> getManualLottoNumbers() {
+        return this.manaulLottos;
+    }
+
     public WinningResults report(WinningLotto winningLotto) {
         List<LottoRank> lottoRanks = winningLotto.winningRank(lottos);
+        lottoRanks.addAll(winningLotto.winningRank(manaulLottos));
         return new WinningResults(lottoRanks);
     }
 
@@ -53,4 +62,5 @@ public class LottoMachine {
     public int hashCode() {
         return Objects.hash(lottos);
     }
+
 }

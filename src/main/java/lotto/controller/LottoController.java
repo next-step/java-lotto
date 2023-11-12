@@ -28,7 +28,10 @@ public class LottoController {
                 .collect(Collectors.toList());
 
         LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberStrategy(), buyingAmount, collect);
-        resultView.reportBuying(lottoMachine.lottoCount(), lottoMachine.getLottoNumbers());
+        resultView.reportBuying(lottoMachine.lottoCount(),
+                lottoMachine.manualLottoCount(),
+                lottoMachine.getManualLottoNumbers(),
+                lottoMachine.getLottoNumbers());
 
         WinningLotto winningLotto = new WinningLotto(Lotto.from(inputView.winnerNumber()),
                 new LottoNumber(inputView.inputBonusNumber()));

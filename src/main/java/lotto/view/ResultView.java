@@ -17,8 +17,13 @@ public class ResultView {
     private static final String LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     public void reportBuying(int lottoCount,
+                             int manualLottoCount,
+                             List<Lotto> manualLottos,
                              List<Lotto> lottos) {
-        System.out.println(lottoCount + BUYING_QUANTITY);
+        System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + lottoCount + BUYING_QUANTITY);
+        for (Lotto manualLotto : manualLottos) {
+            System.out.println(manualLotto.toString());
+        }
         for (Lotto lotto : lottos) {
             System.out.println(lotto.toString());
         }
