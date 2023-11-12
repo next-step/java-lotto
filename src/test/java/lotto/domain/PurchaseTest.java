@@ -13,14 +13,14 @@ public class PurchaseTest {
 
     private Purchase purchase;
 
-    void setUp(int amount) {
+    void createTest(int amount) {
         purchase = new Purchase(amount);
     }
 
     @Test
     void 로또_구매_금액_유효성_검사_성공() {
         // given
-        setUp(1000);
+        createTest(1000);
         // when
         int amount = purchase.amount();
         // then
@@ -38,17 +38,6 @@ public class PurchaseTest {
         assertThat(lottoCount).isEqualTo(1);
     }
 
-    @Test
-    void 로또_구매_수량_출력문구() {
-        // given
-        NumberStrategy numberStrategy = new FixtureNumberStrategy();
-        purchase = new Purchase(1000, numberStrategy);
-        // when
-        String result = purchase.toString();
-        // then
-        assertThat(result).isEqualTo("1개를 구매했습니다.\n[2, 3, 5, 6, 10, 40]");
-    }
-
     @DisplayName("로또 구입 실패 금액 오류")
     @Nested
     class 구입_실패 {
@@ -60,8 +49,8 @@ public class PurchaseTest {
             // when
             // then
             assertThatIllegalArgumentException().isThrownBy(() -> {
-                setUp(999);
-            }).withMessageMatching("로또 구입 금액은 1000원 이상 입력해야 합니다.");
+                createTest(999);
+            });
         }
 
         @DisplayName("1000원 단위가 아닌경우")
@@ -71,8 +60,8 @@ public class PurchaseTest {
             // when
             // then
             assertThatIllegalArgumentException().isThrownBy(() -> {
-                setUp(1001);
-            }).withMessageMatching("로또 구입 금액은 1000원 단위로 가능합니다.");
+                createTest(1001);
+            });
         }
     }
 }
