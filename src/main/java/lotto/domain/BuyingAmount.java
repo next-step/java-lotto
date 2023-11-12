@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.ManualCount;
-
 public class BuyingAmount {
     private static final int LOTTO_AMOUNT = 1000;
     private final int amount;
@@ -19,10 +17,6 @@ public class BuyingAmount {
 
     private static boolean isLottoAmountUnits(int amount) {
         return amount % LOTTO_AMOUNT != 0;
-    }
-
-    public int units() {
-        return amount / LOTTO_AMOUNT;
     }
 
     public int units(ManualCount manualCount) {

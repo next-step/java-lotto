@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.ManualCount;
+import lotto.domain.ManualCount;
 
 import java.util.ArrayList;
 import java.util.List;

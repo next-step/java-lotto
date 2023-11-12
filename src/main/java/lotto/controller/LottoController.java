@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.ManualCount;
 import lotto.domain.*;
 import lotto.domain.strategy.RandomLottoNumberStrategy;
 import lotto.view.InputView;
