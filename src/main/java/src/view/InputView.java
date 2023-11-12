@@ -18,9 +18,8 @@ public final class InputView {
     public static List<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-
         List<Integer> numbers = new ArrayList<>();
-        for (String stringNumber: scanner.next().trim().split(",")) {
+        for (String stringNumber: scanner.nextLine().replace(" ", "").split(",")) {
             numbers.add(Integer.parseInt(stringNumber));
         }
         return numbers;
