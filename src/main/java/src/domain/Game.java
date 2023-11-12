@@ -52,4 +52,9 @@ public class Game {
             matchCount++;
         }
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }

@@ -33,4 +33,8 @@ public class Games {
             game.match(winningGame);
         }
     }
+
+    public List<Game> values() {
+        return values;
+    }
 }

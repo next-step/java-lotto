@@ -42,4 +42,8 @@ public class Lotto {
     public MatchStatus matchStatus() {
         return games.matchStatus();
     }
+
+    public Games games() {
+        return games;
+    }
 }
