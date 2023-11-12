@@ -1,11 +1,16 @@
-package src;
+package src.domain;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import src.domain.Game;
+import src.domain.GameNumber;
+import src.domain.Games;
+import src.domain.Lotto;
+import src.domain.MatchStatus;
+import src.domain.Money;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;

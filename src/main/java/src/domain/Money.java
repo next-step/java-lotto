@@ -1,4 +1,4 @@
-package src;
+package src.domain;
 
 public class Money {
 

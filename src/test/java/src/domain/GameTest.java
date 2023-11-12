@@ -1,6 +1,8 @@
-package src;
+package src.domain;
 
 import org.junit.jupiter.api.Test;
+import src.domain.Game;
+import src.domain.GameNumber;
 
 import java.util.Set;
 

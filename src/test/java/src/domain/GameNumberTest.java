@@ -1,7 +1,8 @@
-package src;
+package src.domain;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import src.domain.GameNumber;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

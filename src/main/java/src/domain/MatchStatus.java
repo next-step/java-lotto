@@ -1,4 +1,4 @@
-package src;
+package src.domain;
 
 import java.util.EnumMap;
 import java.util.List;

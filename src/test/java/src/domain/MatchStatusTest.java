@@ -1,6 +1,7 @@
-package src;
+package src.domain;
 
 import org.junit.jupiter.api.Test;
+import src.domain.MatchStatus;
 
 import java.util.List;
 
