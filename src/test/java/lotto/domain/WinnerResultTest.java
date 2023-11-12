@@ -21,18 +21,18 @@ public class WinnerResultTest {
     @Test
     void 당첨_5000원() {
         //given
-        setUp(Map.of(RankLotto.FOURTH, 3));
+        setUp(Map.of(RankLotto.FIFTH, 3));
         //when
         Map<RankLotto, Integer> result = winnerResult.result();
         //then
-        assertThat(result.get(RankLotto.FOURTH)).isEqualTo(3);
+        assertThat(result.get(RankLotto.FIFTH)).isEqualTo(3);
     }
 
     @DisplayName("당첨 총액 수익률")
     @Test
     void 당첨_수익률() {
         //given
-        setUp(Map.of(RankLotto.FIRST, 0, RankLotto.SECOND, 0, RankLotto.THIRD, 0, RankLotto.FOURTH, 1, RankLotto.MISS, 0));
+        setUp(Map.of(RankLotto.FIRST, 0, RankLotto.SECOND, 0, RankLotto.THIRD, 0, RankLotto.FOURTH, 0, RankLotto.FIFTH, 1));
         //when
         double result = winnerResult.rateOfReturn(10000);
         //then
@@ -43,7 +43,7 @@ public class WinnerResultTest {
     @Test
     void 당첨_결과_출력문구() {
         //given
-        setUp(Map.of(RankLotto.FOURTH, 3));
+        setUp(Map.of(RankLotto.FIFTH, 3));
         //when
         String result = winnerResult.toString();
         //then
@@ -59,9 +59,9 @@ public class WinnerResultTest {
         Lotto winLotto = createLotto(List.of(1, 2, 3, 4, 5, 6));
         List<Lotto> lottos = List.of(createLotto(List.of(10, 20, 30, 4, 5, 6)), createLotto(List.of(1, 20, 30, 40, 5, 6)));
         //when
-        winnerResult = new WinnerResult(winLotto, lottos);
+        winnerResult = new WinnerResult(winLotto, lottos, new LottoNumber(7));
         //then
-        assertThat(winnerResult.result().get(RankLotto.FOURTH)).isEqualTo(2);
+        assertThat(winnerResult.result().get(RankLotto.FIFTH)).isEqualTo(2);
     }
 
     private Lotto createLotto(List<Integer> numbers) {
