@@ -26,4 +26,11 @@ public class CalculatorTest {
                 int valueY = 10;
                 assertThat(Multiplication.multiple(valueX, valueY)).isEqualTo(10);
         }
+
+        @Test
+        public void 나누기() {
+                int valueX = 1;
+                int valueY = 10;
+                assertThat(Division.divide(valueX, valueY)).isEqualTo(0);
+        }
 }
