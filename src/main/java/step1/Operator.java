@@ -38,7 +38,7 @@ public enum Operator {
                 return op;
             }
         }
-        throw new IllegalArgumentException("사칙연사의 기호가 아닙니다");
+        throw new IllegalArgumentException("사칙연산의 기호가 아닙니다");
     }
 
     public abstract int apply(int leftNumber, int rightNumber);
