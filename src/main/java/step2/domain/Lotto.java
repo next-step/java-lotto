@@ -7,10 +7,10 @@ import static step2.domain.StatisticsCalculator.isContain;
 
 public class Lotto {
 
-    private final LottoNumber lottoNumber;
+    private final LottoNumbers lottoNumbers;
 
-    public Lotto(LottoNumber lottoNumber) {
-        this.lottoNumber = lottoNumber;
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public int countOfWinningNumber(PrizeLotto prizeLotto) {
@@ -22,7 +22,7 @@ public class Lotto {
     }
 
     public List<Integer> numbers() {
-        return this.lottoNumber.numbers();
+        return this.lottoNumbers.numbers();
     }
 
     @Override
@@ -30,12 +30,12 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoNumber, lotto.lottoNumber);
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumber);
+        return Objects.hash(lottoNumbers);
     }
 
 }

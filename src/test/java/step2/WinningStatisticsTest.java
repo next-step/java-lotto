@@ -38,15 +38,15 @@ public class WinningStatisticsTest {
     }
 
     private static Lotto threeMatchLotto() {
-        return new Lotto(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        return new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     private static Lotto fourMatchLotto() {
-        return new Lotto(new LottoNumber(Arrays.asList(3, 9, 10, 11, 42, 43)));
+        return new Lotto(new LottoNumbers(Arrays.asList(3, 9, 10, 11, 42, 43)));
     }
 
     private static PrizeLotto prizeLotto() {
-        return new PrizeLotto(new LottoNumber(Arrays.asList(1, 2, 3, 9, 10, 11)), 7);
+        return new PrizeLotto(new LottoNumbers(Arrays.asList(1, 2, 3, 9, 10, 11)), 7);
     }
 
 }

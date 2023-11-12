@@ -27,14 +27,14 @@ public class LottoStore {
         return price.remainder(PRICE_PER_SHEET).equals(BigDecimal.ZERO);
     }
 
-    public static Lottos lottos(List<LottoNumber> lottoNumbers) {
+    public static Lottos lottos(List<LottoNumbers> lottoNumbers) {
         return lottoNumbers.stream()
             .map(LottoStore::lotto)
             .collect(collectingAndThen(toList(), Lottos::new));
     }
 
-    private static Lotto lotto(LottoNumber lottoNumber) {
-        return new Lotto(lottoNumber);
+    private static Lotto lotto(LottoNumbers lottoNumbers) {
+        return new Lotto(lottoNumbers);
     }
 
 }

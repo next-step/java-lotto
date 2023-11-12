@@ -1,6 +1,6 @@
 package step2;
 
-import step2.domain.LottoNumber;
+import step2.domain.LottoNumbers;
 import step2.domain.Lottos;
 import step2.domain.PrizeLotto;
 import step2.domain.WinningStatistics;
@@ -25,9 +25,9 @@ public class Runner {
         Lottos lottos = lottos(lottoNumbers(numberOfLotto));
         ResultView.printLottos(lottos);
 
-        LottoNumber prizeLottoNumber = new LottoNumber(numbers(InputView.prizeLottoNumber()));
+        LottoNumbers prizeLottoNumbers = new LottoNumbers(numbers(InputView.prizeLottoNumber()));
         int bonusNumber = InputView.bonusNumber();
-        PrizeLotto prizeLotto = new PrizeLotto(prizeLottoNumber);
+        PrizeLotto prizeLotto = new PrizeLotto(prizeLottoNumbers, bonusNumber);
         WinningStatistics winningStatistics = WinningStatistics.of(lottos, prizeLotto);
         ResultView.printWinningStatistics(winningStatistics);
         ResultView.printRateOfReturn(price, winningStatistics);

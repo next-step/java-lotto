@@ -3,7 +3,7 @@ package step2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.Lotto;
-import step2.domain.LottoNumber;
+import step2.domain.LottoNumbers;
 import step2.domain.Lottos;
 import step2.exception.InvalidPriceUnitException;
 
@@ -36,13 +36,13 @@ public class LottoStoreTest {
     @Test
     @DisplayName("주어진 로또 넘버대로 로또를 발급할 수 있다")
     public void lottos_issuance() {
-        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(8, 21, 23, 41, 42, 43));
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(8, 21, 23, 41, 42, 43));
 
-        assertThat(lottos(Arrays.asList(lottoNumber)))
+        assertThat(lottos(Arrays.asList(lottoNumbers)))
             .extracting(Lottos::lottos)
             .asList()
             .first()
-            .isEqualTo(new Lotto(lottoNumber));
+            .isEqualTo(new Lotto(lottoNumbers));
     }
 
 }

@@ -2,12 +2,15 @@ package step2.domain;
 
 public class PrizeLotto extends Lotto {
 
-    public PrizeLotto(LottoNumber lottoNumber) {
-        super(lottoNumber);
+    private LottoNumber bonusNumber;
+
+    public PrizeLotto(LottoNumbers lottoNumbers, int bonusNumber) {
+        super(lottoNumbers);
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     public int bonusNumber() {
-        return this.bonusNumber;
+        return this.bonusNumber.number();
     }
 
 }
