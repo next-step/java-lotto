@@ -22,7 +22,7 @@ public class WinningStatistics {
     public static WinningStatistics of(Lottos lottos, PrizeLotto prizeLotto) {
         return new WinningStatistics(lottos.lottos().stream().collect(
             groupingBy(
-                lotto -> lotto.prize(prizeLotto),
+                lotto -> Prize.of(lotto, prizeLotto),
                 collectingAndThen(toList(), Lottos::new)
             )
         ));

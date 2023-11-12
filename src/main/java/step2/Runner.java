@@ -1,6 +1,9 @@
 package step2;
 
-import step2.domain.*;
+import step2.domain.LottoNumber;
+import step2.domain.Lottos;
+import step2.domain.PrizeLotto;
+import step2.domain.WinningStatistics;
 import step2.view.InputView;
 import step2.view.ResultView;
 

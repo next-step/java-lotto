@@ -6,4 +6,8 @@ public class PrizeLotto extends Lotto {
         super(lottoNumber);
     }
 
+    public int bonusNumber() {
+        return this.bonusNumber;
+    }
+
 }

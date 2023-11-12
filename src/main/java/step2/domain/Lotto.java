@@ -1,9 +1,9 @@
 package step2.domain;
 
-import step2.domain.type.Prize;
-
 import java.util.List;
 import java.util.Objects;
+
+import static step2.domain.StatisticsCalculator.isContain;
 
 public class Lotto {
 
@@ -13,12 +13,12 @@ public class Lotto {
         this.lottoNumber = lottoNumber;
     }
 
-    public Prize prize(PrizeLotto prizeLotto) {
-        return Prize.of(countOfWinningNumber(prizeLotto));
+    public int countOfWinningNumber(PrizeLotto prizeLotto) {
+        return StatisticsCalculator.numberOfMatches(numbers(), prizeLotto.numbers());
     }
 
-    private int countOfWinningNumber(PrizeLotto prizeLotto) {
-        return StatisticsCalculator.numberOfMatches(numbers(), prizeLotto.numbers());
+    public boolean isBonusMatched(PrizeLotto prizeLotto) {
+        return isContain(numbers(), prizeLotto.bonusNumber());
     }
 
     public List<Integer> numbers() {

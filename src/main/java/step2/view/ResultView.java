@@ -17,7 +17,8 @@ public class ResultView {
     private static final String LOTTO_NUMBER_MESSAGE = "[%s]";
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
     private static final String DIVIDING_LINE = "---------";
-    private static final String MATCH_MESSAGE = "%d개 일치 (%.0f원)- %d개";
+    private static final String MATCH_MESSAGE = "%d개 일치%s (%.0f원)- %d개";
+    private static final String BONUS_MATCH_ADDITIONAL_MESSAGE = ", 보너스 볼 일치";
     private static final String RATE_OF_RETURN_MESSAGE = "총 수익률은 %.2f입니다.";
     private static final String COMMA = ", ";
 
@@ -59,8 +60,16 @@ public class ResultView {
     }
 
     private static String winningStatisticsText(Prize prize, WinningStatistics winningStatistics) {
+        if (prize.useBonusAndMatched()) {
+            return winningStatisticsText(BONUS_MATCH_ADDITIONAL_MESSAGE, prize, winningStatistics);
+        }
+        return winningStatisticsText(StringUtils.EMPTY, prize, winningStatistics);
+    }
+
+    private static String winningStatisticsText(String additionalMessage, Prize prize, WinningStatistics winningStatistics) {
         return String.format(MATCH_MESSAGE,
             prize.matchCount(),
+            additionalMessage,
             prize.prizeMoney(),
             winningStatistics.winningLottoCountByPrize(prize));
     }

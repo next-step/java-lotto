@@ -12,4 +12,8 @@ public class StatisticsCalculator {
             .size();
     }
 
+    public static boolean isContain(List<Integer> numbers, int target) {
+        return numbers.contains(target);
+    }
+
 }
