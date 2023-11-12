@@ -9,7 +9,7 @@ class GameTest {
     private static final int SIZE_OF_LOTTO_GAME_NUMBER = 6;
 
     @Test
-    void 게임당_6개의_번호를_가질_수_있다() {
+    void 게임당_중복없이_6개의_번호를_가질_수_있다() {
         // when
         Game game = Game.newGame();
 

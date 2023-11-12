@@ -17,7 +17,7 @@ public class Lotto {
         Lotto lotto = new Lotto(gameCount);
 
         for (int idx = 0; idx < gameCount; idx++) {
-            lotto.games.add(new Game());
+            lotto.games.add(Game.newGame());
         }
 
         return lotto;
