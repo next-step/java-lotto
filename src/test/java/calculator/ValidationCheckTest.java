@@ -11,15 +11,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ValidationCheckTest {
-    @ParameterizedTest
+    @ParameterizedTest(name="{displayName}")
     @NullAndEmptySource
     @DisplayName("null이나 빈 값이 들어오면 오류를 내보낸다.")
     void null_공백(String input) {
-        assertThatThrownBy(() -> {
-            ValidationCheck.checkInputString(input);
-        })
-                .isInstanceOf(NullPointerException.class)
-                .hasMessage(null);
+        assertThatThrownBy(() -> ValidationCheck.checkInputString(input))
+                .isInstanceOf(NullPointerException.class);
     }
 
     @Test
@@ -44,11 +41,10 @@ public class ValidationCheckTest {
                 .hasMessage("홀수번째에는 숫자가 와야합니다.");
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "input : {arguments}")
     @DisplayName("입력된 문자열의 짝수번째에 사칙연산자가 아닌 다른 기호가 들어오면 오류를 내보내는지 확인한다.")
     @CsvSource(value = {"2 3 3 * 4", "2 & 3 * 4"})
-    void 입력문자열_짝수번째_사칙연산자입력_오류() {
-        String input = "2 & 3 * 4";
+    void 입력문자열_짝수번째_사칙연산자입력_오류(String input) {
         assertThatThrownBy(() -> {
             ValidationCheck.checkInputString(input);
         })

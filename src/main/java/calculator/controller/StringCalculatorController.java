@@ -6,11 +6,11 @@ import calculator.view.InputView;
 import calculator.view.ResultView;
 
 public class StringCalculatorController {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         String inputString = InputView.inputString();
         ValidationCheck.checkInputString(inputString);
 
-        int result = Calculator.getResult(inputString.split(" "));
+        int result = Calculator.calculate(inputString.split(" "));
         ResultView.printResult(result);
     }
 }

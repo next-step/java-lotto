@@ -7,11 +7,11 @@ public class ValidationCheck {
     private static final String OPERATOR_REG_EXP = ".*[^+\\-*/].*";
 
     public static void checkInputString(String input) {
-        String[] tokens = input.split(" ");
-
         if (isEmpty(input)) {
             throw new NullPointerException();
         }
+
+        String[] tokens = input.split(" ");
 
         checkStringLength(tokens);
 
