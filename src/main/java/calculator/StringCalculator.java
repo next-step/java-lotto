@@ -20,6 +20,10 @@ public class StringCalculator {
      * @return 평가 결과
      */
     public static int cal(String expression) {
+        if (expression == null) {
+            throw new IllegalArgumentException("입력 수식이 null입니다.");
+        }
+
         List<String> operationItemList = extractExpressionItem(expression);
 
         int result = Integer.parseInt(operationItemList.get(0));

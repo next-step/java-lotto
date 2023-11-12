@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class CalculatorTest {
     @Test
@@ -47,5 +48,13 @@ public class CalculatorTest {
     public void allOperatorTest() {
         assertThat(StringCalculator.cal("1 - 6 + 20 * 30 / 5"))
                 .isEqualTo(90);
+    }
+
+    @Test
+    @DisplayName("[StringCalculator.cal] null 입력 시 -> IllegalArgumentException")
+    public void nullTest() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            StringCalculator.cal(null);
+        });
     }
 }
