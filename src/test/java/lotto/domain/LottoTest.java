@@ -39,17 +39,24 @@ public class LottoTest {
         // given
         NumberStrategy numberStrategy = new FixtureNumberStrategy();
         Lotto buyLotto = numberStrategy.create(1).get(0);
-        Lotto resultLotto = new Lotto(List.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
-        ));
+        Lotto resultLotto = new Lotto();
+        resultLotto.create(List.of(1,2,3,4,5,6));
         // when
         int result = buyLotto.match(resultLotto);
         // then
         assertThat(result).isEqualTo(4);
+    }
+
+    @DisplayName("보너스 번호 일치 테스트")
+    @Test
+    void 보너스_번호가_일치하는지_확인한다() {
+        // given
+        LottoNumber bonusNumber = new LottoNumber(7);
+        Lotto lotto = new Lotto();
+        lotto.create(List.of(1,2,7,4,5,6));
+        // when
+        boolean result = lotto.matchBonus(bonusNumber);
+        // then
+        assertThat(result).isTrue();
     }
 }
