@@ -20,6 +20,14 @@ public class Lotto {
         this.lottoNumbers = sortLotto(lottoNumbers);
     }
 
+    public void create(List<Integer> numbers) {
+        List<LottoNumber> lotto = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        checkLottoSize(lotto);
+        this.lottoNumbers = sortLotto(lotto);
+    }
+
     private List<LottoNumber> sortLotto(List<LottoNumber> lottoNumbers) {
         return Collections.unmodifiableList(lottoNumbers.stream()
                 .sorted().collect(Collectors.toList()));
@@ -39,5 +47,9 @@ public class Lotto {
     public String toString() {
         return String.format("[%s]", lottoNumbers.stream().map(LottoNumber::toString)
                 .collect(Collectors.joining(", ")));
+    }
+
+    public boolean matchBonus(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 }
