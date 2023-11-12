@@ -9,6 +9,10 @@ public class Lotto {
         this.lottoNumbers = new LottoNumbers();
     }
 
+    public Lotto(final LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
     int getRightNumber(List<Integer> winningNumbers) {
         int rightNumber = 0;
 

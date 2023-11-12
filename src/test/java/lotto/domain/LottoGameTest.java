@@ -18,9 +18,4 @@ class LottoGameTest {
         //then
         assertThat(result).isEqualTo(14);
     }
-
-    @Test
-    void drawTest() {
-
-    }
 }
