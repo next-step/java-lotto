@@ -8,5 +8,8 @@ public class CalculateApplication {
 
     public static void main(String[] args) {
         List<String> userInputTokens = inputParser.splitUserInput(InputView.inputMathExpression());
+        Calculator calculator = new Calculator(inputParser.parseFromTokenToNumber(userInputTokens),
+                inputParser.parseFromTokenToOperator(userInputTokens));
+        ResultView.outputCalculateResult(calculator.calculate());
     }
 }
