@@ -24,7 +24,6 @@ public class LottoController {
 
         List<Rank> winningRanks = lottoResult.findWinningRanks();
         PrintView.printStatistics(winningRanks);
-
         Money totalWinningMoney = lottoResult.calcTotalWinningPrice(winningRanks);
         PrintView.printReturnRate(totalWinningMoney.calcReturnRate(userMoney));
     }
