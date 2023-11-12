@@ -22,9 +22,9 @@ public enum RankLotto {
         this.condition = condition;
     }
 
-    public static RankLotto findRank(int matchCount, boolean bonusCount) {
+    public static RankLotto findRank(int matchCount, boolean matchBonus) {
         return Arrays.stream(RankLotto.values())
-                .filter(rank -> rank.condition.apply(matchCount, bonusCount))
+                .filter(rank -> rank.condition.apply(matchCount, matchBonus))
                 .findFirst()
                 .orElse(MISS);
     }
