@@ -69,11 +69,3 @@ public class StringCalculator {
         throw new IllegalArgumentException("알 수 없는 연산자 " + operationSymbol);
     }
 }
-
-/**
- * Operation의 연산 종류를 지정합니다.
- * 이름 뜻 그대로 덧셈인지, 뺄셈인지, 곱셈인지, 나눗셈인지를 지정합니다.
- */
-enum OperationType {
-    ADDITION, SUBTRACTION, MULTIPLICATION, DIVISION,
-}
