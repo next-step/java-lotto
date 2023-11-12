@@ -7,6 +7,70 @@
 
 ---
 
+## Class Diagram
+
+```mermaid
+---
+title: lotto
+---
+classDiagram
+%%    Animal <|-- Fish
+%%    Animal <|-- Zebra
+%%    Animal : +int age
+%%    Animal : +String gender
+%%    Animal: +isMammal()
+%%    Animal: +mate()
+    InputView <.. LottoMain : Dependency
+    OutputView <.. LottoMain : Dependency
+    LottoFactory <.. LottoMain : Dependency
+    InputValidator <.. LottoMain : Dependency
+    LottoStatistics <.. LottoMain : Dependency
+    Lottos <.. LottoMain : Dependency
+    Lottos o-- Lotto : Aggregation
+    Lotto o-- Number : Aggregation
+
+    class Lotto{
+    }
+        
+    class Lottos{
+    }
+
+    class Number{
+    }
+
+    class LottoFactory{
+    }
+
+    class LottoMain {
+        +main() void
+    }
+
+    class InputValidator {
+
+    }
+
+    class LottoStatistics {
+        
+    }
+
+    class InputView {
+
+    }
+
+    class OutputView {
+
+    }
+
+    class OutputView {
+%%        -String Name
+%%        -int PosX
+%%        -int PosY
+%%        +Despawn() void
+    }
+```
+
+---
+
 ## ToDo
 
 * [ ] 숫자 형식의 로또 구입 금액을 입력 받는다.
