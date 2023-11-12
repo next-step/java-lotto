@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class WinnerResult {
+public class StatisticsWinnerResult {
 
     private final Map<RankLotto, Integer> result;
 
-    public WinnerResult(Map<RankLotto, Integer> result) {
+    public StatisticsWinnerResult(Map<RankLotto, Integer> result) {
         this.result = Collections.unmodifiableMap(result);
     }
 
-    public WinnerResult(Lotto winLotto, List<Lotto> lottos, LottoNumber bonusNumber) {
+    public StatisticsWinnerResult(Lotto winLotto, List<Lotto> lottos, LottoNumber bonusNumber) {
         this.result = Collections.unmodifiableMap(resultCount(winLotto, lottos, bonusNumber));
     }
 

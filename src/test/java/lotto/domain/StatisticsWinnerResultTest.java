@@ -9,21 +9,21 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class WinnerResultTest {
+public class StatisticsWinnerResultTest {
 
-    private WinnerResult winnerResult;
+    private StatisticsWinnerResult statisticsWinnerResult;
 
-    public void setUp(Map<RankLotto, Integer> result) {
-        winnerResult = new WinnerResult(result);
+    public void create(Map<RankLotto, Integer> result) {
+        statisticsWinnerResult = new StatisticsWinnerResult(result);
     }
 
     @DisplayName("당첨3개 5000원, 3개")
     @Test
     void 당첨_5000원() {
         //given
-        setUp(Map.of(RankLotto.FIFTH, 3));
+        create(Map.of(RankLotto.FIFTH, 3));
         //when
-        Map<RankLotto, Integer> result = winnerResult.result();
+        Map<RankLotto, Integer> result = statisticsWinnerResult.result();
         //then
         assertThat(result.get(RankLotto.FIFTH)).isEqualTo(3);
     }
@@ -32,9 +32,9 @@ public class WinnerResultTest {
     @Test
     void 당첨_수익률() {
         //given
-        setUp(Map.of(RankLotto.FIRST, 0, RankLotto.SECOND, 0, RankLotto.THIRD, 0, RankLotto.FOURTH, 0, RankLotto.FIFTH, 1));
+        create(Map.of(RankLotto.FIRST, 0, RankLotto.SECOND, 0, RankLotto.THIRD, 0, RankLotto.FOURTH, 0, RankLotto.FIFTH, 1));
         //when
-        double result = winnerResult.rateOfReturn(10000);
+        double result = statisticsWinnerResult.rateOfReturn(10000);
         //then
         assertThat(result).isEqualTo(0.5);
     }
@@ -43,9 +43,9 @@ public class WinnerResultTest {
     @Test
     void 당첨_결과_출력문구() {
         //given
-        setUp(Map.of(RankLotto.FIFTH, 3));
+        create(Map.of(RankLotto.FIFTH, 3));
         //when
-        String result = winnerResult.toString();
+        String result = statisticsWinnerResult.toString();
         //then
         assertThat(result).isEqualTo("당첨 통계\n" +
                 "---------\n" +
@@ -59,9 +59,9 @@ public class WinnerResultTest {
         Lotto winLotto = createLotto(List.of(1, 2, 3, 4, 5, 6));
         List<Lotto> lottos = List.of(createLotto(List.of(10, 20, 30, 4, 5, 6)), createLotto(List.of(1, 20, 30, 40, 5, 6)));
         //when
-        winnerResult = new WinnerResult(winLotto, lottos, new LottoNumber(7));
+        statisticsWinnerResult = new StatisticsWinnerResult(winLotto, lottos, new LottoNumber(7));
         //then
-        assertThat(winnerResult.result().get(RankLotto.FIFTH)).isEqualTo(2);
+        assertThat(statisticsWinnerResult.result().get(RankLotto.FIFTH)).isEqualTo(2);
     }
 
     private Lotto createLotto(List<Integer> numbers) {
