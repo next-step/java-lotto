@@ -24,10 +24,14 @@ classDiagram
     OutputView <.. LottoMain : Dependency
     LottoFactory <.. LottoMain : Dependency
     InputValidator <.. LottoMain : Dependency
+    Lotto <.. LottoFactory : Dependency
     LottoStatistics <.. LottoMain : Dependency
+    LottoGenerator <.. RandomLottoGenerator : Inheritance
+    LottoGenerator <.. TestLottoGenerator : Inheritance
     Lottos <.. LottoMain : Dependency
-    Lottos o-- Lotto : Aggregation
-    Lotto o-- Number : Aggregation
+    Lotto o-- Lottos : Aggregation
+    Number o-- Lotto : Aggregation
+    LottoGenerator o-- Number : Dependency
 
     class Lotto{
     }
@@ -46,6 +50,18 @@ classDiagram
     }
 
     class InputValidator {
+
+    }
+
+    class LottoGenerator {
+            
+    }
+
+    class RandomLottoGenerator {
+
+    }
+        
+    class TestLottoGenerator {
 
     }
 
