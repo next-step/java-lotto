@@ -43,4 +43,48 @@ public class OperatorTest {
         assertThatThrownBy(() -> Operator.findOperatorByUserInput(inputOperator))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    public void 덧셈_테스트() {
+        int leftNumber = 4;
+        int rightNumber = 2;
+        Operator operator = Operator.PLUS;
+
+        int result = operator.apply(leftNumber, rightNumber);
+
+        assertThat(result).isEqualTo(leftNumber + rightNumber);
+    }
+
+    @Test
+    public void 뺄셈_테스트() {
+        int leftNumber = 4;
+        int rightNumber = 2;
+        Operator operator = Operator.MINUS;
+
+        int result = operator.apply(leftNumber, rightNumber);
+
+        assertThat(result).isEqualTo(leftNumber - rightNumber);
+    }
+
+    @Test
+    public void 곱셈_테스트() {
+        int leftNumber = 4;
+        int rightNumber = 2;
+        Operator operator = Operator.MULTIPLICATION;
+
+        int result = operator.apply(leftNumber, rightNumber);
+
+        assertThat(result).isEqualTo(leftNumber * rightNumber);
+    }
+
+    @Test
+    public void 나눗셈_테스트() {
+        int leftNumber = 4;
+        int rightNumber = 2;
+        Operator operator = Operator.DIVISION;
+
+        int result = operator.apply(leftNumber, rightNumber);
+
+        assertThat(result).isEqualTo(leftNumber / rightNumber);
+    }
 }

@@ -1,12 +1,32 @@
 package step1;
 
 public enum Operator {
-    PLUS('+'),
-    MINUS('-'),
-    MULTIPLICATION('*'),
-    DIVISION('/');
+    PLUS('+') {
+        @Override
+        public int apply(int leftNumber, int rightNumber) {
+            return leftNumber + rightNumber;
+        }
+    },
+    MINUS('-') {
+        @Override
+        public int apply(int leftNumber, int rightNumber) {
+            return leftNumber - rightNumber;
+        }
+    },
+    MULTIPLICATION('*') {
+        @Override
+        public int apply(int leftNumber, int rightNumber) {
+            return leftNumber * rightNumber;
+        }
+    },
+    DIVISION('/') {
+        @Override
+        public int apply(int leftNumber, int rightNumber) {
+            return leftNumber / rightNumber;
+        }
+    };
 
-    private char symbol;
+    private final char symbol;
 
     Operator(char symbol) {
         this.symbol = symbol;
@@ -20,4 +40,6 @@ public enum Operator {
         }
         throw new IllegalArgumentException("사칙연사의 기호가 아닙니다");
     }
+
+    public abstract int apply(int leftNumber, int rightNumber);
 }
