@@ -34,4 +34,11 @@ public class CalculatorTest {
         assertThat(StringCalculator.cal("12 / 6"))
                 .isEqualTo(2);
     }
+
+    @Test
+    @DisplayName("[StringCalculator.cal] 피연산자 3개의 복합 계산식 -> 합계 반환")
+    public void threeOperandTest() {
+        assertThat(StringCalculator.cal("1 + 4 * 3"))
+                .isEqualTo(15);
+    }
 }

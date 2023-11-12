@@ -23,7 +23,7 @@ public class StringCalculator {
         List<String> operationItemList = extractExpressionItem(expression);
 
         int result = Integer.parseInt(operationItemList.get(0));
-        for (int i = 1; i < operationItemList.size() - 1; i++) {
+        for (int i = 1; i < operationItemList.size() - 1; i += 2) {
             result = calOperation(result, operationItemList.get(i), Integer.parseInt(operationItemList.get(i+1)));
         }
 
