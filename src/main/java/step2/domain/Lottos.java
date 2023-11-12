@@ -27,7 +27,4 @@ public class Lottos{
         return list.size();
     }
 
-    public void clear() {
-        list.clear();
-    }
 }
