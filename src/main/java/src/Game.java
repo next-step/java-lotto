@@ -1,44 +1,36 @@
 package src;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 public class Game {
 
-    private static final int LOTTO_NUMBER_SIZE = 45;
-
     private static final int GAME_NUMBER_SIZE = 6;
 
-    private static final Set<Integer> lottoNumbers = new HashSet<>(LOTTO_NUMBER_SIZE);
-
-    static {
-        for (int idx = 1; idx <= LOTTO_NUMBER_SIZE; idx++) {
-            lottoNumbers.add(idx);
-        }
-    }
-
-    private final Set<Integer> numbers;
+    private final Set<GameNumber> numbers;
 
     private int matchCount;
 
-    public Game(Set<Integer> numbers) {
+    private Game(Set<GameNumber> numbers) {
         this.numbers = numbers;
         this.matchCount = 0;
     }
 
     public static Game newGame() {
-        Collections.shuffle(new ArrayList<>(lottoNumbers));
-        Iterator<Integer> lottoGameNumberIterator = lottoNumbers.iterator();
-
-        Set<Integer> values = new HashSet<>(GAME_NUMBER_SIZE);
+        Set<GameNumber> values = new HashSet<>(GAME_NUMBER_SIZE);
         while (values.size() < GAME_NUMBER_SIZE) {
-            values.add(lottoGameNumberIterator.next());
+            values.add(GameNumber.random());
         }
 
         return new Game(values);
+    }
+
+    public static Game byGameNumbers(Set<GameNumber> gameNumbers) {
+        if (gameNumbers.size() < GAME_NUMBER_SIZE) {
+            throw new IllegalArgumentException("6개의 게임 넘버가 필요합니다.");
+        }
+
+        return new Game(gameNumbers);
     }
 
     public int numberSize() {
@@ -50,12 +42,12 @@ public class Game {
     }
 
     public void match(Game winningGame) {
-        for (Integer winningNumber: winningGame.numbers) {
+        for (GameNumber winningNumber: winningGame.numbers) {
             matchNumber(winningNumber);
         }
     }
 
-    private void matchNumber(int winningNumber) {
+    private void matchNumber(GameNumber winningNumber) {
         if (numbers.contains(winningNumber)) {
             matchCount++;
         }

@@ -22,12 +22,20 @@ class GameTest {
 
     @Test
     void 몇개의_게임_번호가_당첨_번호와_매치되었는지_알_수_있다() {
-        Game game = new Game(Set.of(1, 2, 3, 4, 5, 6));
-        Game winningGame = new Game(Set.of(4, 5, 6, 7, 8, 9));
+        // given
+        Game game = Game.byGameNumbers(Set.of(
+                GameNumber.of(1), GameNumber.of(2), GameNumber.of(3),
+                GameNumber.of(4), GameNumber.of(5), GameNumber.of(6)
+        ));
+        Game winningGame = Game.byGameNumbers(Set.of(
+                GameNumber.of(4), GameNumber.of(5), GameNumber.of(6),
+                GameNumber.of(7), GameNumber.of(8), GameNumber.of(9)
+        ));
 
+        // when
         game.match(winningGame);
 
-
+        // then
         assertThat(game.matchCount()).isEqualTo(3);
     }
 }
