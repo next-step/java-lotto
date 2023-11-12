@@ -17,7 +17,7 @@
   - null or empty 이면 IllegalArgumentException 예외 발생
 - [ ] 숫자 체크
   - 숫자 값이 아닌 경우 IllegalArgumentException 예외 발생
-- [ ] 문자 분리
+- [x] 문자 분리
   - 문자를 공백에 따라 분리 한다. 
 - [ ] 계산기
   - 사칙연산의 우선순위가 아니라 입력 값에 따라 사칙 연산을 한다,
