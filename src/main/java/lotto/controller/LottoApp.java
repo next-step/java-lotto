@@ -12,6 +12,9 @@ public class LottoApp {
 
         final int purchaseCount = lottoGame.purchaseCount();
         ResultView.purchaseCountPrint(purchaseCount);
+        ResultView.print(lottoGame.toString());
+
+        String winningNumberText = InputView.inputWinningNumber();
 
     }
 }

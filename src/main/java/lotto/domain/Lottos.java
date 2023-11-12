@@ -34,4 +34,13 @@ public class Lottos {
     public int purchaseCount() {
         return lottos.size();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Lotto lotto : lottos) {
+            stringBuilder.append(lotto.toString() + "\n");
+        }
+        return stringBuilder.toString();
+    }
 }

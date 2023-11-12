@@ -9,4 +9,9 @@ public class LottoGame {
     public int purchaseCount() {
         return lottos.purchaseCount();
     }
+
+    @Override
+    public String toString() {
+        return lottos.toString();
+    }
 }

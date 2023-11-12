@@ -7,4 +7,9 @@ public class Lotto {
         this.lottoNumbers = new LottoNumbers();
 
     }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }
