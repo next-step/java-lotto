@@ -25,17 +25,17 @@ public class LottoResultView {
         LOTTO_WINNING_INFO.put(6, 2_000_000_000);
     }
 
-    public void printPurchaseComplete(int count){
+    public static void printPurchaseComplete(int count){
         System.out.println(String.format(LOTTO_COUNT_MESSAGE, count));
     }
-    public void printList(List<Lotto> list){
+    public static void printList(List<Lotto> list){
         for(Lotto t: list){
             Collections.sort(t.numbers());
             System.out.println(t.numbers());
         }
     }
 
-    public void printResult(int[] winningNumbers, List<Lotto> list){
+    public static void printResult(int[] winningNumbers, List<Lotto> list){
         printResultTitle();
         double totalEarnedAmount = processResult(winningNumbers, list);
         printEarnedRate(list, totalEarnedAmount);

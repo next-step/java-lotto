@@ -9,13 +9,13 @@ public class InputView {
     private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 
-    public int inputMoney() {
+    public static int inputMoney() {
         Scanner scanner = new Scanner(System.in);
         System.out.println(INPUT_MONEY_MESSAGE);
         return scanner.nextInt();
     }
 
-    public int[] inputWinningNumber() {
+    public static int[] inputWinningNumber() {
         Scanner scanner = new Scanner(System.in);
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         String input = scanner.nextLine();

@@ -7,16 +7,13 @@ import java.util.List;
 
 public class Application {
 
-    private static final InputView inputView = new InputView();
-    private static final LottoResultView lottoResultView = new LottoResultView();
-
     public static void main(String[] args) {
-        List<Lotto> totalLotto = new LottoMachine().createLottos(inputView.inputMoney());
+        List<Lotto> totalLotto = new LottoMachine().createLottos(InputView.inputMoney());
 
-        lottoResultView.printPurchaseComplete(totalLotto.size());
-        lottoResultView.printList(totalLotto);
+        LottoResultView.printPurchaseComplete(totalLotto.size());
+        LottoResultView.printList(totalLotto);
 
-        int[] winningNumbers = inputView.inputWinningNumber();
-        lottoResultView.printResult(winningNumbers, totalLotto);
+        int[] winningNumbers = InputView.inputWinningNumber();
+        LottoResultView.printResult(winningNumbers, totalLotto);
     }
 }
