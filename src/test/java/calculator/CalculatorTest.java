@@ -13,4 +13,11 @@ public class CalculatorTest {
         assertEquals(2, result);
     }
 
+    @Test
+    void 빼기_기능() {
+        Calculator calculator = new Calculator();
+        int result = calculator.minus(1, 1);
+        assertEquals(0, result);
+    }
+
 }
