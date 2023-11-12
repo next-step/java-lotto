@@ -30,4 +30,9 @@ public class Number {
     public int hashCode() {
         return Objects.hash(values);
     }
+
+    @Override
+    public String toString() {
+        return values.toString();
+    }
 }

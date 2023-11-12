@@ -2,6 +2,7 @@ package me.namuhuchutong.lotto;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Numbers {
 
@@ -34,5 +35,30 @@ public class Numbers {
 
     public int size() {
         return this.values.size();
+    }
+
+    public long howManyMatch(Numbers numbers) {
+        return this.values.stream()
+                          .filter(number1 -> numbers.values.stream()
+                                                            .anyMatch(number1::equals))
+                          .count();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Numbers numbers = (Numbers) o;
+        return values.equals(numbers.values);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(values);
+    }
+
+    @Override
+    public String toString() {
+        return values.toString();
     }
 }

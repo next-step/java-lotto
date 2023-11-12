@@ -18,7 +18,7 @@ public class RandomNumberGenerator implements NumberGenerator {
 
     @Override
     public List<Number> createNumbers() {
-        List<Number> numbers = List.copyOf(RANDOM_NUMBERS);
+        List<Number> numbers = new ArrayList<>(RANDOM_NUMBERS);
         Collections.shuffle(numbers);
         return numbers.subList(0, 6);
     }

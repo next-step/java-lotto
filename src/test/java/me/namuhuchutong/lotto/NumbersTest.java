@@ -56,4 +56,35 @@ class NumbersTest {
         assertThatThrownBy(() -> new Numbers(given))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("일치하는 번호들이 있다면 개수를 세어 반환한다.")
+    @Test
+    void return_lotto_match_count() {
+        //given
+        List<Number> given1 = List.of(
+                new Number(1),
+                new Number(2),
+                new Number(3),
+                new Number(4),
+                new Number(5),
+                new Number(6)
+        );
+        List<Number> given2 = List.of(
+                new Number(1),
+                new Number(2),
+                new Number(3),
+                new Number(32),
+                new Number(5),
+                new Number(13)
+        );
+        int expected = 4;
+        Numbers numbers1 = new Numbers(given1);
+        Numbers numbers2 = new Numbers(given2);
+
+        //when
+        long result = numbers1.howManyMatch(numbers2);
+
+        //then
+        assertThat(result).isEqualTo(expected);
+    }
 }
