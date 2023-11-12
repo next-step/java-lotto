@@ -19,4 +19,11 @@ public class CalculatorTest {
                 int valueY = 10;
                 assertThat(Subtraction.subtract(valueX, valueY)).isEqualTo(-9);
         }
+
+        @Test
+        public void 곱하기() {
+                int valueX = 1;
+                int valueY = 10;
+                assertThat(Multiplication.multiple(valueX, valueY)).isEqualTo(10);
+        }
 }
