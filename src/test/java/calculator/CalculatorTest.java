@@ -12,4 +12,11 @@ public class CalculatorTest {
                 int valueY = 10;
                 assertThat(Addition.add(valueX, valueY)).isEqualTo(11);
         }
+
+        @Test
+        public void 빼기() {
+                int valueX = 1;
+                int valueY = 10;
+                assertThat(Subtraction.subtract(valueX, valueY)).isEqualTo(-9);
+        }
 }
