@@ -6,9 +6,9 @@
 - [X] 뺄셈 구현
 - [X] 곱셈 구현
 - [X] 나눗셈 구현
-- [ ] 입력값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+- [X] 입력값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
 - [X] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw 
-- [ ] 사칙 연산을 모두 포함하는 기능 구현
+- [X] 사칙 연산을 모두 포함하는 기능 구현
 
 ### 기능 요구사항
 - 사용자가 입력한 문자열 값에 따라 사칙연산을 수행할 수 있는 계산기를 구현해야 한다. 
