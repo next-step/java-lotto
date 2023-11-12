@@ -33,7 +33,7 @@ public class PurchaseTest {
         NumberStrategy numberStrategy = new FixtureNumberStrategy();
         purchase = new Purchase(1000, numberStrategy);
         // when
-        int lottoCount = purchase.lottos().size();
+        int lottoCount = purchase.lottosSize();
         // then
         assertThat(lottoCount).isEqualTo(1);
     }
