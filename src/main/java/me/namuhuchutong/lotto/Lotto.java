@@ -23,11 +23,10 @@ public class Lotto {
 
     public LottoResult getMatchNumbers(Numbers given) {
         Map<LottoCount, Lotto> collect = this.values.stream()
-                                              .filter(numbers -> numbers.howManyMatch(given) >= 3)
-                                              .collect(
-                                                      groupingBy(
-                                                              numbers -> new LottoCount(numbers.howManyMatch(given)),
-                                                              collectingAndThen(toUnmodifiableList(), Lotto::new)));
+                                                    .filter(numbers -> numbers.howManyMatch(given) >= 3)
+                                                    .collect(groupingBy(
+                                                            numbers -> new LottoCount(numbers.howManyMatch(given)),
+                                                            collectingAndThen(toUnmodifiableList(), Lotto::new)));
         return new LottoResult(collect);
     }
 

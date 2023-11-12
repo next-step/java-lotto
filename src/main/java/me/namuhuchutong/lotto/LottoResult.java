@@ -11,16 +11,16 @@ public class LottoResult {
         this.lottoResult = lottoResult;
     }
 
-    @Override
-    public String toString() {
-        return lottoResult.toString();
-    }
-
     public long getWinnings() {
         long totalPrice = 0;
         for (LottoCount count : lottoResult.keySet()) {
             totalPrice += LottoWinnings.valueOfCount(count);
         }
         return totalPrice;
+    }
+
+    @Override
+    public String toString() {
+        return lottoResult.toString();
     }
 }
