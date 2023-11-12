@@ -1,18 +1,20 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+
 public class LottoPrize {
 
-    private final long amount;
+    private final BigDecimal amount;
     private final Currency currency;
 
-    public LottoPrize(long amount,
+    public LottoPrize(BigDecimal amount,
                       Currency currency) {
         this.amount = amount;
         this.currency = currency;
     }
 
     public long calculateAmount(long value) {
-        return this.amount * value;
+        return this.amount.multiply(BigDecimal.valueOf(value)).longValue();
     }
 
     @Override

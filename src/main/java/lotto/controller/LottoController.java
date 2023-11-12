@@ -13,16 +13,17 @@ import java.util.Scanner;
 public class LottoController {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        BuyingAmount buyingAmount = new BuyingAmount(InputView.input(scanner));
+        InputView inputView = new InputView(new Scanner(System.in));
+        ResultView resultView = new ResultView();
+
+        BuyingAmount buyingAmount = new BuyingAmount(inputView.inputAmount());
 
         LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberStrategy(), buyingAmount);
-        ResultView.reportBuying(lottoMachine.lottoCount(), lottoMachine.getLottoNumbers());
+        resultView.reportBuying(lottoMachine.lottoCount(), lottoMachine.getLottoNumbers());
 
-        WinningLotto winningLotto = new WinningLotto(InputView.winnerNumber(scanner));
+        WinningLotto winningLotto = new WinningLotto(inputView.winnerNumber(), inputView.inputBonusNumber());
         WinningResults winningResults = lottoMachine.report(winningLotto);
-        ResultView.reportStats(winningResults, buyingAmount);
-
+        resultView.reportStats(winningResults, buyingAmount);
     }
 
 }

@@ -16,11 +16,8 @@ public class ResultView {
     private static final String THAT = "입니다.";
     private static final String LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    private ResultView() {
-    }
-
-    public static void reportBuying(int lottoCount,
-                                    List<Lotto> lottos) {
+    public void reportBuying(int lottoCount,
+                             List<Lotto> lottos) {
         System.out.println(lottoCount + BUYING_QUANTITY);
         for (Lotto lotto : lottos) {
             System.out.println(lotto.toString());
@@ -28,8 +25,8 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void reportStats(WinningResults winningResults,
-                                   BuyingAmount buyingAmount) {
+    public void reportStats(WinningResults winningResults,
+                            BuyingAmount buyingAmount) {
         System.out.println();
         System.out.println(WINNING_STATS);
         System.out.println(LINE);
@@ -37,7 +34,7 @@ public class ResultView {
         Map<LottoRank, Integer> winningResult = winningResults.getAll();
         for (Map.Entry<LottoRank, Integer> result : winningResult.entrySet()) {
             LottoRank lottoRank = result.getKey();
-            if (lottoRank.isNotMatched()) {
+            if (lottoRank.isWin()) {
                 System.out.println(lottoRank.description() + OPENING_PARENTHESIS + lottoRank.prizeToString() + CLOSING_PARENTHESIS + result.getValue() +
                         QUANTITY);
             }

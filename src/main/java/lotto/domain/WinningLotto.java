@@ -5,16 +5,25 @@ import java.util.List;
 
 public class WinningLotto {
 
-    private final LottoNumbers lottoNumbers;
+    private final Lotto lotto;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(List<Integer> numbers) {
-        this.lottoNumbers = new LottoNumbers(numbers);
+    public WinningLotto(List<Integer> numbers,
+                        int bonusNumber) {
+        this(new Lotto(numbers), new LottoNumber(bonusNumber));
     }
 
-    public LottoRank winningRank(Lotto lotto) {
-        int count = lottoNumbers.matchedCount(lotto);
+    public WinningLotto(Lotto numbers,
+                        LottoNumber bonusNumber) {
+        this.lotto = numbers;
+        validateDuplicationNumber(bonusNumber);
+        this.bonusNumber = bonusNumber;
+    }
 
-        return LottoRank.searchBy(count);
+    private void validateDuplicationNumber(LottoNumber bonusNumber) {
+        if (lotto.contains(bonusNumber)) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public List<LottoRank> winningRank(List<Lotto> lottos) {
@@ -24,5 +33,9 @@ public class WinningLotto {
             list.add(lottoRank);
         }
         return list;
+    }
+
+    private LottoRank winningRank(Lotto lotto) {
+        return LottoRank.searchBy(this.lotto.matchedCount(lotto), lotto.contains(bonusNumber));
     }
 }
