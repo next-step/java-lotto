@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import step2.LottoMachine;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -21,7 +21,7 @@ public class LottoMachineTest {
     @Test
     @DisplayName("로또 머신은 로또를 1개 이상 생성할 수 있다.")
     void createLottoes() {
-        assertThat(lottoMachine.createLottos(MONEY_3000_WON))
+        assertThat(lottoMachine.createLottos(MONEY_3000_WON).getLottos())
                 .hasSize(3);
     }
 

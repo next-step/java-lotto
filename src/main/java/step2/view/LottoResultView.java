@@ -1,6 +1,7 @@
 package step2.view;
 
-import step2.Lotto;
+import step2.domain.Lotto;
+import step2.domain.Lottos;
 
 import java.text.DecimalFormat;
 import java.util.Collections;
@@ -25,13 +26,13 @@ public class LottoResultView {
         LOTTO_WINNING_INFO.put(6, 2_000_000_000);
     }
 
-    public static void printPurchaseComplete(int count){
-        System.out.println(String.format(LOTTO_COUNT_MESSAGE, count));
+    public static void printPurchaseComplete(Lottos list){
+        System.out.println(String.format(LOTTO_COUNT_MESSAGE, list.getLottoCount()));
+        printList(list);
     }
-    public static void printList(List<Lotto> list){
-        for(Lotto t: list){
-            Collections.sort(t.numbers());
-            System.out.println(t.numbers());
+    public static void printList(Lottos lottos){
+        for(Lotto t: lottos.getLottos()){
+            System.out.println(t.lottoNumbers());
         }
     }
 
@@ -49,7 +50,7 @@ public class LottoResultView {
             for(Lotto t: list){
                 int matchCount = 0;
                 for(int winningNumber : winningNumbers){
-                    if(t.numbers().contains(winningNumber)){
+                    if(t.lottoNumbers().contains(winningNumber)){
                         matchCount++;
                     }
                 }

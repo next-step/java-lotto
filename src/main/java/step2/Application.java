@@ -1,19 +1,18 @@
 package step2;
 
+import step2.domain.LottoMachine;
+import step2.domain.Lottos;
 import step2.view.InputView;
 import step2.view.LottoResultView;
 
-import java.util.List;
 
 public class Application {
 
     public static void main(String[] args) {
-        List<Lotto> totalLotto = new LottoMachine().createLottos(InputView.inputMoney());
-
-        LottoResultView.printPurchaseComplete(totalLotto.size());
-        LottoResultView.printList(totalLotto);
+        Lottos lottos = new LottoMachine().createLottos(InputView.inputMoney());
+        LottoResultView.printPurchaseComplete(lottos);
 
         int[] winningNumbers = InputView.inputWinningNumber();
-        LottoResultView.printResult(winningNumbers, totalLotto);
+        LottoResultView.printResult(winningNumbers, lottos.getLottos());
     }
 }
