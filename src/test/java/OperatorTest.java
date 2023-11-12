@@ -42,17 +42,17 @@ public class OperatorTest {
 	@Test
 	void from_plus_plusOperator() {
 		Operator actual = Operator.PLUS;
-		Operator expected = Operator.from(Operator.PLUS.symbol());
+		Operator expected = Operator.fromString(Operator.PLUS.symbol());
 
 		assertThat(actual).isEqualTo(expected);
 	}
 
 	@Test
 	void from_leftBracket_throwsException() {
-		char leftBracket = '(';
+		String leftBracket = "(";
 
 		assertThatThrownBy(
-				() -> Operator.from(leftBracket)
+				() -> Operator.fromString(leftBracket)
 		).isInstanceOf(IllegalArgumentException.class);
 	}
 }

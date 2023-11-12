@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class CalculatorController {
 	private final static int ZERO = 0;
 	private final Calculator calculator;
@@ -29,7 +31,7 @@ public class CalculatorController {
 	private void checkDivisionByZero(String inputExpression) {
 		String[] inputs = inputExpression.split(" ");
 		for (int i = 1; i < inputs.length; i += 2) {
-			char operator = inputs[i].charAt(0);
+			String operator = inputs[i];
 			int right = Integer.parseInt(inputs[i + 1]);
 			if(isDividedByZero(operator, right)) {
 				throw new IllegalArgumentException("0으로 나눗셈을 할 수 없습니다.");
@@ -37,7 +39,7 @@ public class CalculatorController {
 		}
 	}
 
-	private boolean isDividedByZero(char operator, int right) {
-		return operator == Operator.DIVISION.symbol() && right == ZERO;
+	private boolean isDividedByZero(String operator, int right) {
+		return Objects.equals(operator, Operator.DIVISION.symbol()) && right == ZERO;
 	}
 }

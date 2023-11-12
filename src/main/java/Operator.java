@@ -1,47 +1,56 @@
-import java.util.Arrays;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum Operator {
-	PLUS('+') {
+	PLUS("+") {
 		public int apply(int left, int right) {
 			return left + right;
 		}
 	},
-	MINUS('-') {
+	MINUS("-") {
 		public int apply(int left, int right) {
 			return left - right;
 		}
 	},
-	MULTIPLICATION('*') {
+	MULTIPLICATION("*") {
 		public int apply(int left, int right) {
 			return left * right;
 		}
 	},
-	DIVISION('/') {
+	DIVISION("/") {
 		public int apply(int left, int right) {
 			return left / right;
 		}
 	};
 
-	private final char symbol;
+	private final String symbol;
 
-	Operator(char symbol) {
+	private static final Map<String, Operator> stringToEnum =
+			Stream.of(values()).collect(Collectors.toMap(Object::toString, e -> e));
+
+	Operator(String symbol) {
 		this.symbol = symbol;
 	}
 
-	public char symbol() {
+	public String symbol() {
 		return this.symbol;
 	}
 
-	public static int calculate(int left, char operator, int right) {
-		return Operator.from(operator).apply(left, right);
+	public static int calculate(int left, String operator, int right) {
+		return Operator.fromString(operator).apply(left, right);
 	}
 
-	public static Operator from(char inputOperator) {
-		return Arrays.stream(Operator.values())
-				.filter(operator -> operator.symbol() == inputOperator)
-				.findAny()
-				.orElseThrow(() -> new IllegalArgumentException("사칙연산 기호를 입력하세요."));
+	public static Operator fromString(String symbol) {
+		return Optional.ofNullable(stringToEnum.get(symbol))
+				.orElseThrow(() -> new IllegalArgumentException("사칙연산 기호를 입력하세요"));
 	}
 
 	abstract int apply(int left, int right);
+
+	@Override
+	public String toString() {
+		return this.symbol;
+	}
 }

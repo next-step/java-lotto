@@ -50,7 +50,7 @@ public class CalculatorTest {
 
 	@Test
 	void given_leftBracket_throwsException() {
-		char leftBracket = '(';
+		String leftBracket = "(";
 
 		assertThatThrownBy(
 				() -> calculator.calculate(6, leftBracket, 2)
