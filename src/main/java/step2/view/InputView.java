@@ -1,28 +1,30 @@
 package step2.view;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+
+import static java.util.stream.Collectors.toList;
 
 public class InputView {
 
-    private Scanner scanner = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
     private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 
     public static int inputMoney() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println(INPUT_MONEY_MESSAGE);
-        return scanner.nextInt();
+        return SCANNER.nextInt();
     }
 
-    public static int[] inputWinningNumber() {
-        Scanner scanner = new Scanner(System.in);
+    public static List<Integer> inputWinningNumber() {
+        SCANNER.nextLine();
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
-        String input = scanner.nextLine();
+        String input = SCANNER.nextLine();
         return Arrays.stream(input.split(","))
                 .map(String::trim)
-                .mapToInt(Integer::parseInt)
-                .toArray();
+                .map(Integer::parseInt)
+                .collect(toList());
     }
 
 }
