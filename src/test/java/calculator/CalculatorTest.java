@@ -59,6 +59,14 @@ public class CalculatorTest {
     }
 
     @Test
+    @DisplayName("[StringCalculator.cal] 빈 문자열 입력 시 -> IllegalArgumentException")
+    public void emptyStringTest() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            StringCalculator.cal("");
+        });
+    }
+
+    @Test
     @DisplayName("[StringCalculator.cal] 정의되지 않은 연산 기호 입력 시 -> IllegalArgumentException")
     public void unknownOperatorTest() {
         assertThatIllegalArgumentException().isThrownBy(() -> {

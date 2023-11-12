@@ -2,7 +2,6 @@ package calculator;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 문자열로 된 사칙연산 평가식을 평가하는 계산기입니다.
@@ -20,9 +19,7 @@ public class StringCalculator {
      * @return 평가 결과
      */
     public static int cal(String expression) {
-        if (expression == null) {
-            throw new IllegalArgumentException("입력 수식이 null입니다.");
-        }
+        validateExpression(expression);
 
         List<String> operationItemList = extractExpressionItem(expression);
 
@@ -32,6 +29,21 @@ public class StringCalculator {
         }
 
         return result;
+    }
+
+    /**
+     * 입력된 문자열이 정상 문자열인지 확인합니다.
+     * 비정상일 경우 예외가 던져지며, 정상일 경우 통과됩니다.
+     * @param expression
+     */
+    private static void validateExpression(String expression) {
+        if (expression == null) {
+            throw new IllegalArgumentException("입력 수식이 null입니다.");
+        }
+
+        if (expression.equals("")) {
+            throw new IllegalArgumentException("입력 수식이 빈 문자열입니다.");
+        }
     }
 
     /**
