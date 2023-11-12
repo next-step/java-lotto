@@ -22,8 +22,11 @@ public class Game {
 
     private final Set<Integer> numbers;
 
+    private int matchCount;
+
     public Game(Set<Integer> numbers) {
         this.numbers = numbers;
+        this.matchCount = 0;
     }
 
     public static Game newGame() {
@@ -40,5 +43,21 @@ public class Game {
 
     public int numberSize() {
         return numbers.size();
+    }
+
+    public int matchCount() {
+        return matchCount;
+    }
+
+    public void match(Game winningGame) {
+        for (Integer winningNumber: winningGame.numbers) {
+            matchNumber(winningNumber);
+        }
+    }
+
+    private void matchNumber(int winningNumber) {
+        if (numbers.contains(winningNumber)) {
+            matchCount++;
+        }
     }
 }
