@@ -1,5 +1,9 @@
-package me.namuhuchutong.lotto;
+package me.namuhuchutong.lotto.dto;
 
+
+import me.namuhuchutong.lotto.domain.Lotto;
+import me.namuhuchutong.lotto.domain.LottoCount;
+import me.namuhuchutong.lotto.domain.LottoWinnings;
 
 import java.util.List;
 import java.util.Map;

@@ -1,5 +1,6 @@
 package me.namuhuchutong.lotto;
 
+import me.namuhuchutong.lotto.domain.Number;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

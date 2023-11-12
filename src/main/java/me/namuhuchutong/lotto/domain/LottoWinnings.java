@@ -1,4 +1,4 @@
-package me.namuhuchutong.lotto;
+package me.namuhuchutong.lotto.domain;
 
 import static java.util.stream.Collectors.*;
 

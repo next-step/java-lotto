@@ -1,4 +1,6 @@
-package me.namuhuchutong.lotto;
+package me.namuhuchutong.lotto.domain.generator;
+
+import me.namuhuchutong.lotto.domain.Number;
 
 import java.util.List;
 

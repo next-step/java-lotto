@@ -2,6 +2,7 @@ package me.namuhuchutong.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
+import me.namuhuchutong.lotto.domain.LottoSeller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

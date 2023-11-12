@@ -1,9 +1,10 @@
-package me.namuhuchutong.lotto;
+package me.namuhuchutong.lotto.domain.generator;
 
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import me.namuhuchutong.lotto.domain.Number;
 
 public class RandomNumberGenerator implements NumberGenerator {
 

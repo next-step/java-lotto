@@ -3,6 +3,9 @@ package me.namuhuchutong.lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
+
+import me.namuhuchutong.lotto.domain.Number;
+import me.namuhuchutong.lotto.domain.Numbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

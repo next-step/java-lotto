@@ -1,4 +1,4 @@
-package me.namuhuchutong.lotto;
+package me.namuhuchutong.lotto.domain;
 
 
 public class LottoCount {

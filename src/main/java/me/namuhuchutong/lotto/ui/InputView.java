@@ -1,5 +1,8 @@
-package me.namuhuchutong.lotto;
+package me.namuhuchutong.lotto.ui;
 
+
+import me.namuhuchutong.lotto.domain.Number;
+import me.namuhuchutong.lotto.domain.Numbers;
 
 import java.util.InputMismatchException;
 import java.util.List;

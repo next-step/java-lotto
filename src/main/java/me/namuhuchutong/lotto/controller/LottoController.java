@@ -1,4 +1,11 @@
-package me.namuhuchutong.lotto;
+package me.namuhuchutong.lotto.controller;
+
+import me.namuhuchutong.lotto.dto.LottoResult;
+import me.namuhuchutong.lotto.domain.LottoSeller;
+import me.namuhuchutong.lotto.domain.generator.NumberGenerator;
+import me.namuhuchutong.lotto.domain.Numbers;
+import me.namuhuchutong.lotto.ui.InputView;
+import me.namuhuchutong.lotto.ui.OutputView;
 
 public class LottoController {
 

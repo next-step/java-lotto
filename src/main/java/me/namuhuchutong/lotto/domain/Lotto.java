@@ -1,10 +1,12 @@
-package me.namuhuchutong.lotto;
+package me.namuhuchutong.lotto.domain;
 
 import static java.util.stream.Collectors.*;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
+import me.namuhuchutong.lotto.domain.generator.NumberGenerator;
+import me.namuhuchutong.lotto.dto.LottoResult;
 
 public class Lotto {
 
@@ -29,9 +31,6 @@ public class Lotto {
         return new LottoResult(collect);
     }
 
-    public int getSize() {
-        return this.values.size();
-    }
 
     @Override
     public String toString() {

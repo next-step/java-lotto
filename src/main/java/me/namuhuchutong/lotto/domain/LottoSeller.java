@@ -1,9 +1,11 @@
-package me.namuhuchutong.lotto;
+package me.namuhuchutong.lotto.domain;
+
+import me.namuhuchutong.lotto.dto.LottoResult;
+import me.namuhuchutong.lotto.domain.generator.NumberGenerator;
 
 public class LottoSeller {
 
     private final NumberGenerator generator;
-    private Lotto lotto;
 
     public LottoSeller(NumberGenerator generator) {
         this.generator = generator;
@@ -12,7 +14,7 @@ public class LottoSeller {
     public LottoResult sellLotto(int amount, Numbers userInput) {
         validateAmount(amount);
         int times = amount / 1000;
-        lotto = Lotto.create(times, generator);
+        Lotto lotto = Lotto.create(times, generator);
         return lotto.getMatchNumbers(userInput);
     }
 

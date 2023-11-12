@@ -3,6 +3,13 @@ package me.namuhuchutong.lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
+
+import me.namuhuchutong.lotto.domain.Lotto;
+import me.namuhuchutong.lotto.domain.LottoWinnings;
+import me.namuhuchutong.lotto.domain.Number;
+import me.namuhuchutong.lotto.domain.Numbers;
+import me.namuhuchutong.lotto.domain.generator.NumberGenerator;
+import me.namuhuchutong.lotto.dto.LottoResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -27,9 +34,10 @@ class LottoTest {
         
         // when
         LottoResult matchNumbers = lotto.getMatchNumbers(numbers1);
-        
+        long result = matchNumbers.getWinnings(minimumCount);
+
         //then
-        assertThat(matchNumbers.getWinnings(minimumCount)).isEqualTo(LottoWinnings.SIX.getWinnings());
+        assertThat(result).isEqualTo(LottoWinnings.SIX.getWinnings());
     }
     
     static class TestGenerator implements NumberGenerator {

@@ -1,4 +1,6 @@
-package me.namuhuchutong.lotto;
+package me.namuhuchutong.lotto.ui;
+
+import me.namuhuchutong.lotto.dto.LottoResult;
 
 public class OutputView {
 
