@@ -8,9 +8,11 @@ public class LottoSeller {
         this.generator = generator;
     }
 
-    public void sellLotto(int amount) {
+    public void sellLotto(int amount, Numbers userInput) {
         validateAmount(amount);
         int times = amount / 1000;
+        Lotto lotto = Lotto.create(times, generator);
+        LottoResult matchNumbers = lotto.getMatchNumbers(userInput);
     }
 
     private void validateAmount(int amount) {
