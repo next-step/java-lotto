@@ -91,5 +91,29 @@ public class WinnerNumberTest {
                 createTest(lottoNumbers);
             }).isInstanceOf(IllegalArgumentException.class);
         }
+
+        @Test
+        void 당첨번호와_동일한_보너스_번호_입력_오류() {
+            // given
+            String lottoNumbers = "1,2,3,4,5,6";
+            int bonusNumber = 6;
+            // when
+            // then
+            assertThatThrownBy(() -> {
+                winnerNumber = new WinnerNumber(lottoNumbers, bonusNumber);
+            }).isInstanceOf(IllegalArgumentException.class);
+        }
+
+        @Test
+        void 보너스_번호_입력_범위_이탈_오류() {
+            // given
+            String lottoNumbers = "1,2,3,4,5,6";
+            int bonusNumber = 46;
+            // when
+            // then
+            assertThatThrownBy(() -> {
+                winnerNumber = new WinnerNumber(lottoNumbers, bonusNumber);
+            }).isInstanceOf(IllegalArgumentException.class);
+        }
     }
 }
