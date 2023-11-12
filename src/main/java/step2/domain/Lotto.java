@@ -14,5 +14,10 @@ public class Lotto {
         return this.numbers;
     }
 
-
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "numbers=" + numbers +
+                '}';
+    }
 }
