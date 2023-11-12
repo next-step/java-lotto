@@ -17,15 +17,15 @@ public enum Operator {
         this.message = message;
     }
 
-    public String getCode() {
-        return code;
-    }
-
     public static Operator valueOfCode(String code) {
         return Arrays.stream(values())
             .filter(operator -> code.equals(operator.getCode()))
             .findAny()
             .orElse(null);
+    }
+
+    public String getCode() {
+        return code;
     }
 
     public boolean isPlus() {

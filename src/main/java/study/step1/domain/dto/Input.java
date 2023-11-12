@@ -43,7 +43,7 @@ public class Input {
         }
     }
 
-    private static boolean isIndexOdd(int i) {
+    private boolean isIndexOdd(int i) {
         return i % 2 == 0;
     }
 
@@ -61,7 +61,7 @@ public class Input {
         }
     }
 
-    private static boolean isIndexEven(int i) {
+    private boolean isIndexEven(int i) {
         return i % 2 == 1;
     }
 
