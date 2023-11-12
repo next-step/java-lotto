@@ -29,11 +29,11 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    public Lottos(Lottos lottos,
+    public Lottos(Lottos autoLottos,
                   Lottos manaulLottos) {
         List<Lotto> list = new ArrayList<>();
         list.addAll(manaulLottos.getAll());
-        list.addAll(lottos.getAll());
+        list.addAll(autoLottos.getAll());
         this.lottos = list;
     }
 
