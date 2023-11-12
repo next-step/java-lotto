@@ -1,5 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -12,44 +15,19 @@ public class CalculatorTest {
 		this.calculator = new Calculator();
 	}
 
-	@Test
-	void add_oneAndTwo_three() {
-		calculator.calculate(1, Operator.PLUS.symbol(),2);
+	@ParameterizedTest
+	@CsvSource(value = {"1:+:2:3", "2:-:1:1", "2:*:3:6", "8:/:4:2"}, delimiter = ':')
+	@DisplayName("calculate 는 유효한 숫자와 연산자가 주어지면 계산된 결과를 반환한다")
+	void calculate_validTwoNumbers_calculatedResult(int left, String operator, int right, int expected) {
+		calculator.calculate(left, operator, right);
 		int actual = calculator.result();
-		int expected = 1 + 2;
 
 		assertThat(actual).isEqualTo(expected);
 	}
 
 	@Test
-	void subtract_towAndOne_one() {
-		calculator.calculate(2, Operator.MINUS.symbol(), 1);
-		int actual = calculator.result();
-		int expected = 2 - 1;
-
-		assertThat(actual).isEqualTo(expected);
-	}
-
-	@Test
-	void multiply_towAndThree_six() {
-		calculator.calculate(2, Operator.MULTIPLICATION.symbol(), 3);
-		int actual = calculator.result();
-		int expected = 2 * 3;
-
-		assertThat(actual).isEqualTo(expected);
-	}
-
-	@Test
-	void divide_sixAndTwo_three() {
-		calculator.calculate(6, Operator.DIVISION.symbol(), 2);
-		int actual = calculator.result();
-		int expected = 6 / 2;
-
-		assertThat(actual).isEqualTo(expected);
-	}
-
-	@Test
-	void given_leftBracket_throwsException() {
+	@DisplayName("calculate 는 사칙연산자 이외 연산자가 주어지면 유효한 연산자를 입력하라는 예외를 던진다")
+	void calculate_leftBracket_throwsException() {
 		String leftBracket = "(";
 
 		assertThatThrownBy(
@@ -58,6 +36,7 @@ public class CalculatorTest {
 	}
 
 	@Test
+	@DisplayName("calculate 는 유효한 연산자 문자열이 입력되면 계산된 결과를 반환한다")
 	void calculate_validInputExpression_validResult() {
 		String inputExpression = InputView.inputExpression("2 + 3 * 4 / 2");
 		String[] inputs = inputExpression.split(" ");
@@ -69,6 +48,7 @@ public class CalculatorTest {
 	}
 
 	@Test
+	@DisplayName("calculate 는 사칙연산자 이외 연산자가 포함된 문자열이 주어지면 유효한 연산자를 입력하라는 예외를 던진다")
 	void calculate_inputExpressionWithLeftBracket_throwsException() {
 		String inputExpression = InputView.inputExpression("2 + 3 * 4 ( 2");
 		String[] inputs = inputExpression.split(" ");
