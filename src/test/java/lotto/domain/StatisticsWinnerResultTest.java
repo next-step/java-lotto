@@ -3,9 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -13,7 +11,7 @@ public class StatisticsWinnerResultTest {
 
     private StatisticsWinnerResult statisticsWinnerResult;
 
-    public void create(Map<RankLotto, Integer> result) {
+    public void createTest(Map<RankLotto, Integer> result) {
         statisticsWinnerResult = new StatisticsWinnerResult(result);
     }
 
@@ -21,7 +19,7 @@ public class StatisticsWinnerResultTest {
     @Test
     void 당첨_5000원() {
         //given
-        create(Map.of(RankLotto.FIFTH, 3));
+        createTest(Map.of(RankLotto.FIFTH, 3));
         //when
         Map<RankLotto, Integer> result = statisticsWinnerResult.result();
         //then
@@ -32,7 +30,7 @@ public class StatisticsWinnerResultTest {
     @Test
     void 당첨_수익률() {
         //given
-        create(Map.of(RankLotto.FIRST, 0, RankLotto.SECOND, 0, RankLotto.THIRD, 0, RankLotto.FOURTH, 0, RankLotto.FIFTH, 1));
+        createTest(Map.of(RankLotto.FIRST, 0, RankLotto.SECOND, 0, RankLotto.THIRD, 0, RankLotto.FOURTH, 0, RankLotto.FIFTH, 1));
         //when
         double result = statisticsWinnerResult.rateOfReturn(10000);
         //then
@@ -43,7 +41,7 @@ public class StatisticsWinnerResultTest {
     @Test
     void 당첨_결과_출력문구() {
         //given
-        create(Map.of(RankLotto.FIFTH, 3));
+        createTest(Map.of(RankLotto.FIFTH, 3));
         //when
         String result = statisticsWinnerResult.toString();
         //then
@@ -56,7 +54,7 @@ public class StatisticsWinnerResultTest {
     @Test
     void 당첨_갯수_체크() {
         //given
-        create(Map.of(RankLotto.FIRST, 0, RankLotto.SECOND, 0, RankLotto.THIRD, 0, RankLotto.FOURTH, 0, RankLotto.FIFTH, 2));
+        createTest(Map.of(RankLotto.FIRST, 0, RankLotto.SECOND, 0, RankLotto.THIRD, 0, RankLotto.FOURTH, 0, RankLotto.FIFTH, 2));
         //when
         //then
         assertThat(statisticsWinnerResult.result().get(RankLotto.FIFTH)).isEqualTo(2);

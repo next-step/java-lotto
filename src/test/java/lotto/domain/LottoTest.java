@@ -16,8 +16,9 @@ public class LottoTest {
     void 로또_번호_발급() {
         // given
         NumberStrategy numberStrategy = new FixtureNumberStrategy();
+        List<Lotto> buyLottos = numberStrategy.create(1);
+        Lotto lotto = buyLottos.get(0);
         // when
-        Lotto lotto = new Lotto(numberStrategy.create(1).get(0).lottoNumbers());
         // then
         assertThat(lotto.lottoNumbers()).hasSize(6);
     }
@@ -27,8 +28,9 @@ public class LottoTest {
     void 로또_번호_출력문구_생성() {
         // given
         NumberStrategy numberStrategy = new FixtureNumberStrategy();
+        List<Lotto> buyLottos = numberStrategy.create(1);
+        Lotto lotto = buyLottos.get(0);
         // when
-        Lotto lotto = new Lotto(numberStrategy.create(1).get(0).lottoNumbers());
         // then
         assertThat(lotto.toString()).isEqualTo("[2, 3, 5, 6, 10, 40]");
     }
@@ -38,7 +40,8 @@ public class LottoTest {
     void NumberStrategy_생성번호_구매번호_비교_테스트() {
         // given
         NumberStrategy numberStrategy = new FixtureNumberStrategy();
-        Lotto buyLotto = numberStrategy.create(1).get(0);
+        List<Lotto> buyLottos = numberStrategy.create(1);
+        Lotto buyLotto = buyLottos.get(0);
         Lotto resultLotto = new Lotto();
         resultLotto.create(List.of(1,2,3,4,5,6));
         // when
