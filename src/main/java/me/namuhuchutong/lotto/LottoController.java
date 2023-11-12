@@ -17,6 +17,7 @@ public class LottoController {
         Numbers userNumbers = inputView.showNumbersPrompt();
         LottoSeller lottoSeller = new LottoSeller(numberGenerator);
         LottoResult lottoResult = lottoSeller.sellLotto(amount, userNumbers);
+        outputView.showGeneratedLotto(lottoResult);
         outputView.showLottoResult(amount, lottoResult);
     }
 }

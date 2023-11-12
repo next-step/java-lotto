@@ -36,9 +36,7 @@ public class LottoResult {
     }
 
     private Function<LottoCount, String> buildMatchNumberAndCount() {
-        return lottoCount -> lottoCount.toString() + ": "
-                + lottoResult.get(lottoCount).getSize() + "\n"
-                + lottoResult.get(lottoCount);
+        return lottoCount -> lottoCount.toString() + ": " + lottoResult.get(lottoCount) + "\n";
     }
 
     @Override

@@ -22,6 +22,10 @@ public class OutputView {
     }
 
     private String addWinnings(int amount, LottoResult lottoResult) {
-        return (lottoResult.getWinnings(MINIMUM_COUNT) / amount) + "\n";
+        return (double) (lottoResult.getWinnings(MINIMUM_COUNT) / amount) + "\n";
+    }
+
+    public void showGeneratedLotto(LottoResult lottoResult) {
+        System.out.println(lottoResult.getLottoCountResult(0));
     }
 }
