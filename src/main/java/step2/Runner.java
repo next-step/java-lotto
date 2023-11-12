@@ -23,6 +23,7 @@ public class Runner {
         ResultView.printLottos(lottos);
 
         LottoNumber prizeLottoNumber = new LottoNumber(numbers(InputView.prizeLottoNumber()));
+        int bonusNumber = InputView.bonusNumber();
         PrizeLotto prizeLotto = new PrizeLotto(prizeLottoNumber);
         WinningStatistics winningStatistics = WinningStatistics.of(lottos, prizeLotto);
         ResultView.printWinningStatistics(winningStatistics);
