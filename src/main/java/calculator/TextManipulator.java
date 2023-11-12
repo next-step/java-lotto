@@ -1,11 +1,14 @@
 package calculator;
 
-public class Splitter {
+class TextManipulator {
 
-        private static final String COMMA_DELIMITER = ",";
-        private static final String EMPTY_TEXT_REGAX = "\\s";
+        private static final String EMPTY_TEXT_DELIMITER = " ";
 
-        public static String[] splitTextByComma(String text) {
-                return text.replaceAll(EMPTY_TEXT_REGAX, "").split(COMMA_DELIMITER);
+        static String[] splitByEmptyText(String text) {
+                return text.split(EMPTY_TEXT_DELIMITER);
+        }
+
+        static boolean isNumericText(String text) {
+                return text.chars().allMatch(Character::isDigit);
         }
 }
