@@ -53,17 +53,15 @@ public class StringCalculator {
      * @return 계산 결과
      */
     private static int calOperation(int leftOperand, String operationSymbol, int rightOperand) {
-        if (operationSymbol.equals("+")) {
-            return leftOperand + rightOperand;
-        }
-        else if (operationSymbol.equals("-")) {
-            return leftOperand - rightOperand;
-        }
-        else if (operationSymbol.equals("*")) {
-            return leftOperand * rightOperand;
-        }
-        else if (operationSymbol.equals("/")) {
-            return leftOperand / rightOperand;
+        switch (operationSymbol) {
+            case "+":
+                return leftOperand + rightOperand;
+            case "-":
+                return leftOperand - rightOperand;
+            case "*":
+                return leftOperand * rightOperand;
+            case "/":
+                return leftOperand / rightOperand;
         }
 
         throw new IllegalArgumentException("알 수 없는 연산자 " + operationSymbol);
