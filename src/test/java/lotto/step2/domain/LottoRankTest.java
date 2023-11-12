@@ -14,4 +14,15 @@ class LottoRankTest {
         assertThat(LottoRank.findByCount(5)).isEqualTo(LottoRank.SECOND);
         assertThat(LottoRank.findByCount(6)).isEqualTo(LottoRank.FIRST);
     }
+
+    @Test
+    @DisplayName("hasMatchingCount를 사용하면, 각 LottoRank의 matchingCount가 0 초과인지 확인한다.")
+    void testHasMatchingCount() {
+        assertThat(LottoRank.OTHER.hasMatchingCount()).isFalse();
+        
+        assertThat(LottoRank.FOURTH.hasMatchingCount()).isTrue();
+        assertThat(LottoRank.THIRD.hasMatchingCount()).isTrue();
+        assertThat(LottoRank.SECOND.hasMatchingCount()).isTrue();
+        assertThat(LottoRank.FIRST.hasMatchingCount()).isTrue();
+    }
 }

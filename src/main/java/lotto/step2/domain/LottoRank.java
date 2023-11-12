@@ -33,9 +33,17 @@ public enum LottoRank {
 
     public static LottoRank findByCount(final int count) {
         return Arrays.stream(values())
-                .filter(lottoRank -> lottoRank.getMatchingCount() == count)
+                .filter(lottoRank -> lottoRank.isSameMatchingCount(count))
                 .findFirst()
                 .orElse(OTHER);
+    }
+
+    private boolean isSameMatchingCount(final int count) {
+        return matchingCount == count;
+    }
+
+    public boolean hasMatchingCount() {
+        return matchingCount > 0;
     }
 
     @Override
