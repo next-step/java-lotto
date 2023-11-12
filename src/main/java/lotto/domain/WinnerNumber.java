@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class WinnerNumber {
@@ -19,6 +20,12 @@ public class WinnerNumber {
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
+    }
+
+    public Map<RankLotto, Integer> statisticsResult(List<Lotto> lottos) {
+        return lottos.stream()
+                .map(lotto -> RankLotto.findRank(lotto.match(this.lotto), lotto.matchBonus(this.bonusNumber)))
+                .collect(Collectors.toMap(rank -> rank, rank -> 1, Integer::sum));
     }
 
     public Lotto resultLotto() {

@@ -56,15 +56,9 @@ public class StatisticsWinnerResultTest {
     @Test
     void 당첨_갯수_체크() {
         //given
-        Lotto winLotto = createLotto(List.of(1, 2, 3, 4, 5, 6));
-        List<Lotto> lottos = List.of(createLotto(List.of(10, 20, 30, 4, 5, 6)), createLotto(List.of(1, 20, 30, 40, 5, 6)));
+        create(Map.of(RankLotto.FIRST, 0, RankLotto.SECOND, 0, RankLotto.THIRD, 0, RankLotto.FOURTH, 0, RankLotto.FIFTH, 2));
         //when
-        statisticsWinnerResult = new StatisticsWinnerResult(winLotto, lottos, new LottoNumber(7));
         //then
         assertThat(statisticsWinnerResult.result().get(RankLotto.FIFTH)).isEqualTo(2);
-    }
-
-    private Lotto createLotto(List<Integer> numbers) {
-        return numbers.stream().map(LottoNumber::new).collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
     }
 }

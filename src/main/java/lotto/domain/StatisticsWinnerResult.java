@@ -13,10 +13,6 @@ public class StatisticsWinnerResult {
         this.result = Collections.unmodifiableMap(result);
     }
 
-    public StatisticsWinnerResult(Lotto winLotto, List<Lotto> lottos, LottoNumber bonusNumber) {
-        this.result = Collections.unmodifiableMap(resultCount(winLotto, lottos, bonusNumber));
-    }
-
     public Map<RankLotto, Integer> result() {
         return result;
     }
@@ -29,12 +25,6 @@ public class StatisticsWinnerResult {
 
     public double rateOfReturn(int money) {
         return (double) totalPrize() / money;
-    }
-
-    private Map<RankLotto, Integer> resultCount(Lotto winLotto, List<Lotto> lottos, LottoNumber bonusNumber) {
-        return lottos.stream()
-                .map(lotto -> RankLotto.findRank(lotto.match(winLotto), lotto.matchBonus(bonusNumber)))
-                .collect(Collectors.toMap(rank -> rank, rank -> 1, Integer::sum));
     }
 
     @Override
