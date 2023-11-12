@@ -33,7 +33,6 @@ public class LottoMachine {
         return result;
     }
 
-
     private Lotto generateLotto() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for(int number : GeneratorUtil.randomNumbers(LOTTO_LAST_NUMBER, LOTTO_SIZE)){
