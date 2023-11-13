@@ -129,7 +129,7 @@
 ### 추가 피드백 사항
 
 - 23.11.13
-  - [ ] throwExceptionIfValueIsNotValid의 parameter 확인
+  - [X] ~~throwExceptionIfValueIsNotValid의 parameter 확인~~
   - [ ] LottoRank가 가지는 인스턴스 변수가 많아졌다. 축소가 가능한지 확인
   - [X] ~~LottoRank 생성자에서 final을 붙이는 parameter 확인~~
   - [ ] matchLottos() 메서드의 역할을 로또 객체에게 시키는 것이 가능한지 확인

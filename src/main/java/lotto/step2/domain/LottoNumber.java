@@ -19,7 +19,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         throwExceptionIfValueIsNotValid(num);
     }
 
-    private void throwExceptionIfValueIsNotValid(final Integer num) {
+    private void throwExceptionIfValueIsNotValid(final int num) {
         if (num < 1 || num > 45) {
             throw new IllegalArgumentException("lotto num value must be 1 ~ 45");
         }
