@@ -18,8 +18,8 @@ public class LottoResult {
         return this.lottos.getLottos()
                 .stream()
                 .map(this.winningLotto::match)
-                .filter(result -> result >= Rank.getMinMatchCount())
                 .map(Rank::findRank)
+                .filter(Rank::isWinningRank)
                 .collect(Collectors.toUnmodifiableList());
     }
 

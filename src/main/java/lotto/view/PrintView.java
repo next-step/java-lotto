@@ -6,6 +6,7 @@ import lotto.domain.Rank;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class PrintView {
@@ -19,12 +20,11 @@ public class PrintView {
     public static void printStatistics(List<Rank> userRanks) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        List<Rank> ranks = Arrays.asList(Rank.values());
-        Collections.reverse(ranks);
+        Arrays.stream(Rank.values())
+                .filter(rank -> rank != Rank.NONE)
+                .sorted(Comparator.reverseOrder())
+                .forEach(rank -> System.out.println(rank.getMatchCount() + "개 일치 (" + rank.getWinningPrice() + "원) - " + Rank.countRankType(userRanks, rank)));
 
-        for (Rank rank : ranks) {
-            System.out.println(rank.getMatchCount() + "개 일치 (" + rank.getWinningPrice() + "원) - " + Rank.countRankType(userRanks, rank));
-        }
     }
 
     public static void printReturnRate(BigDecimal returnRate) {
