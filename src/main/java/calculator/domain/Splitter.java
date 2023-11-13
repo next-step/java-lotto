@@ -15,9 +15,10 @@ public class Splitter {
                 .collect(Collectors.toList());
     }
 
-    public static List<String> splitOperators(String expression) {
+    public static List<Operator> splitOperators(String expression) {
         return Arrays.stream(split(expression))
                 .filter(Splitter::isOperator)
+                .map(Operator::findByOperator)
                 .collect(Collectors.toList());
     }
 
