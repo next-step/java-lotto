@@ -13,15 +13,15 @@ public class OutputView {
     public static final String SUMMARY_WINNING_MESSAGE = "%s - %s개";
 
     public static final String SUMMARY_HEAD = "당첨 통계";
-    public static final String SEPARATOR_LINE= "------------------------";
+    public static final String SEPARATOR_LINE = "------------------------";
     public static final String PROFIT_RATE_MESSAGE = "총 수익률은 %f입니다.";
 
 
     public void printLottoCount(int count) {
-        System.out.println(String.format(PURCHASE_COUNT_MESSAGE, count));
+        System.out.printf((PURCHASE_COUNT_MESSAGE) + "%n", count);
     }
 
-    public void printLottos(List<Lotto> lottos){
+    public void printLottos(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             printNumbers(lotto.numbers());
         }
@@ -40,7 +40,7 @@ public class OutputView {
         System.out.println(summaryMessage(Winning.THIRD, summary.thirdCount()));
         System.out.println(summaryMessage(Winning.SECOND, summary.secondCount()));
         System.out.println(summaryMessage(Winning.FIRST, summary.firstCount()));
-        System.out.println(String.format(PROFIT_RATE_MESSAGE, summary.profitRate()));
+        System.out.printf((PROFIT_RATE_MESSAGE) + "%n", summary.profitRate());
     }
 
     private String summaryMessage(Winning winning, long count) {

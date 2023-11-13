@@ -76,6 +76,7 @@ public class Lottos {
                 .filter(winning::equals)
                 .count();
     }
+
     private long prizeTotal(List<Winning> winnings) {
         return winnings.stream()
                 .mapToInt(Winning::prize)

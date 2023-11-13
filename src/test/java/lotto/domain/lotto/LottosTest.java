@@ -26,13 +26,13 @@ class LottosTest {
 
     @Test
     @DisplayName("당첨 통계를 조회한다. 각 등수별 당첨수와 수익률을 반환한다")
-    public void match(){
+    public void match() {
         Lottos lottos = Lottos.of(10000, () -> Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto jackpot = Lotto.of(() -> Arrays.asList(1, 2, 3, 20, 30, 40));
         Summary match = lottos.match(jackpot);
 
         match.toString();
 
-        Assertions.assertThat(match).isEqualTo(new Summary(0,0,0, 10, 50f));
+        Assertions.assertThat(match).isEqualTo(new Summary(0, 0, 0, 10, 50f));
     }
 }

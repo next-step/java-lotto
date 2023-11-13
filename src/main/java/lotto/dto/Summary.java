@@ -1,7 +1,5 @@
 package lotto.dto;
 
-import lotto.constants.Winning;
-
 import java.util.Objects;
 
 public class Summary {

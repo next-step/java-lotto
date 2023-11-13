@@ -10,7 +10,7 @@ public class LottoNumbers {
     private final List<Integer> numbers;
 
     private LottoNumbers(List<Integer> numbers) {
-        this.numbers = new ArrayList<>(validate(numbers)) ;
+        this.numbers = new ArrayList<>(validate(numbers));
     }
 
     public static LottoNumbers of(List<Integer> numbers) {
