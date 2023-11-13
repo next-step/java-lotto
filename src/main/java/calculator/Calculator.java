@@ -17,12 +17,20 @@ public class Calculator {
 	}
 
 	public int next() {
-		String a = inputs.pop();
-		String operator = inputs.pop();
-		String b = inputs.pop();
+		String a = nextElement();
+		String operator = nextElement();
+		String b = nextElement();
 
-		int result = map.operator(operator).calculate(Integer.parseInt(a), Integer.parseInt(b));
+		int result = map.operator(operator).calculate(toInt(a), toInt(b));
 		inputs.push(Integer.toString(result));
 		return result;
+	}
+
+	private String nextElement() {
+		return inputs.pop();
+	}
+
+	private int toInt(String number) {
+		return Integer.parseInt(number);
 	}
 }
