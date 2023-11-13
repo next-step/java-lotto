@@ -1,4 +1,4 @@
-package lotto.step2.util;
+package lotto.step2.service;
 
 import lotto.step2.domain.Lotto;
 import lotto.step2.domain.LottoResults;

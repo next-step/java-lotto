@@ -1,7 +1,7 @@
 package lotto.step2.input;
 
 import lotto.step2.domain.WinnerNumbers;
-import lotto.step2.util.LottoProgram;
+import lotto.step2.service.LottoProgram;
 
 import java.util.Scanner;
 
