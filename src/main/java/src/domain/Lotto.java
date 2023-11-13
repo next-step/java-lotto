@@ -1,5 +1,7 @@
 package src.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class Lotto {
@@ -10,5 +12,16 @@ public class Lotto {
 
     public Lotto(Set<GameNumber> numbers) {
         this.numbers = numbers;
+    }
+
+    public Place match(Lotto lotto) {
+        Map<Boolean, Integer> matchStatus = new HashMap<>(2);
+
+        for (GameNumber gameNumber: lotto.numbers) {
+            Integer value = matchStatus.getOrDefault(numbers.contains(gameNumber), 0);
+            matchStatus.put(numbers.contains(gameNumber), value + 1);
+        }
+
+        return Place.byMatchedCount(matchStatus.get(Boolean.TRUE));
     }
 }
