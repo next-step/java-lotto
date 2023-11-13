@@ -23,7 +23,7 @@ public class Input {
 
     private void addValidNumber(String[] input, int i) {
         if (isIndexOdd(i)) {
-            numbers.add(isNumeric(input[i]));
+            numbers.add(parseNumber(input[i]));
         }
     }
 
@@ -31,7 +31,7 @@ public class Input {
         return i % 2 == 0;
     }
 
-    private int isNumeric(String input) {
+    private int parseNumber(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -41,7 +41,7 @@ public class Input {
 
     private void addValidOperator(String[] input, int i) {
         if (isIndexEven(i)) {
-            operators.add(isOperator(input[i]));
+            operators.add(parseOperator(input[i]));
         }
     }
 
@@ -49,7 +49,7 @@ public class Input {
         return i % 2 == 1;
     }
 
-    private Operator isOperator(String s) {
+    private Operator parseOperator(String s) {
         Operator operator = Operator.valueOfCode(s);
         if (operator == null) {
             throw new IllegalArgumentException("InputError: 입력값 오류(사칙연산 기호가 아닌 값)");
