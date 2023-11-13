@@ -4,6 +4,7 @@ import lotto.exception.NotNumberRangeException;
 import lotto.strategy.LottoGenerator;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -27,10 +28,29 @@ public class LottoNumbers {
         }
     }
 
+    public long matchCount(List<Integer> winLottoNumbers) {
+        return numbers.stream()
+                .filter(winLottoNumbers::contains)
+                .count();
+    }
+
     @Override
     public String toString() {
         return String.join(", ", numbers.stream()
                 .map(String::valueOf)
                 .collect(Collectors.toList()));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(numbers, that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }

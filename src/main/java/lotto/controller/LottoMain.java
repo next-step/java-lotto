@@ -1,8 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.InputValidator;
-import lotto.domain.LottoFactory;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
 import lotto.util.StringParser;
@@ -29,5 +27,9 @@ public class LottoMain {
 
         StringParser stringParser = new StringParser();
         List<Integer> winningLottoNumbers = stringParser.parseToInts(inputView.inputWinningNumber());
+
+        List<LottoWinResult> lottoWinResults = new LottoStatistics().statistics(lottos.winCounts(winningLottoNumbers));
+        outputView.printLottoResultInfo();
+        outputView.printLottoResult(lottoWinResults);
     }
 }

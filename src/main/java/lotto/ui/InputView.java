@@ -18,8 +18,9 @@ public class InputView {
     }
 
     public String inputWinningNumber() {
+        scanner.nextLine();
         System.out.println(INPUT_WINNING_NUMBER);
-        return scanner.next();
+        return scanner.nextLine();
     }
 
     private int inputNumber() {
