@@ -19,7 +19,7 @@ public class Lottos {
 
     public MatchStatus match(Lotto winningLotto) {
         Map<Place, Integer> matchStatus = new EnumMap<>(Place.class);
-        for (Lotto lotto: values) {
+        for (Lotto lotto : values) {
             Place place = winningLotto.match(lotto);
             matchStatus.put(place, matchStatus.getOrDefault(place, 0) + 1);
         }

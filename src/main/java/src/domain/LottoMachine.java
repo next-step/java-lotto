@@ -28,7 +28,6 @@ public class LottoMachine {
         }
     }
 
-
     private Lotto buyLotto() {
         return Lotto.of(gameNumberGenerator.gameNumbers());
     }

@@ -39,7 +39,7 @@ public class LottoGameController {
     private static Lotto inputWinningLotto() {
         Set<GameNumber> winningNumbers = new HashSet<>(6);
 
-        for (Integer number: InputView.inputWinningNumbers()) {
+        for (Integer number : InputView.inputWinningNumbers()) {
             winningNumbers.add(GameNumber.of(number));
         }
 

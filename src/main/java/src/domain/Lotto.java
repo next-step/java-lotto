@@ -21,7 +21,7 @@ public class Lotto {
     public Place match(Lotto lotto) {
         Map<Boolean, Integer> matchStatus = new HashMap<>(2);
 
-        for (GameNumber gameNumber: lotto.numbers) {
+        for (GameNumber gameNumber : lotto.numbers) {
             Integer value = matchStatus.getOrDefault(numbers.contains(gameNumber), 0);
             matchStatus.put(numbers.contains(gameNumber), value + 1);
         }
