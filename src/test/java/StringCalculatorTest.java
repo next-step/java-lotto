@@ -4,11 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
-import utils.StringUtils;
 import validator.ArithmeticInputValidator;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.in;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StringCalculatorTest {
@@ -41,45 +39,49 @@ public class StringCalculatorTest {
     }
 
     @Test
+    @DisplayName("숫자와 사칙연산 사이에 공백이 없는 경우 Exception을 발생시킨다.")
+    void noBlankBetweenNumberAndOperatorTest() {
+        String input = "1+2";
+
+        assertThrows(IllegalArgumentException.class, () -> ArithmeticInputValidator.validateArithmeticInput(input));
+    }
+
+    @Test
     void addTest() {
-        Calculator calculator = new Calculator();
         String input = "2 + 3";
         String[] operandAndOperator = ArithmeticInputValidator.validateArithmeticInput(input);
 
-        int result = calculator.calculateArithmetic(operandAndOperator);
+        int result = Calculator.calculateArithmetic(operandAndOperator);
 
         assertThat(result).isEqualTo(5);
     }
 
     @Test
     void subtractTest() {
-        Calculator calculator = new Calculator();
         String input = "2 - 3";
         String[] operandAndOperator = ArithmeticInputValidator.validateArithmeticInput(input);
 
-        int result = calculator.calculateArithmetic(operandAndOperator);
+        int result = Calculator.calculateArithmetic(operandAndOperator);
 
         assertThat(result).isEqualTo(-1);
     }
 
     @Test
     void multiplyTest() {
-        Calculator calculator = new Calculator();
         String input = "2 * 3";
         String[] operandAndOperator = ArithmeticInputValidator.validateArithmeticInput(input);
 
-        int result = calculator.calculateArithmetic(operandAndOperator);
+        int result = Calculator.calculateArithmetic(operandAndOperator);
 
         assertThat(result).isEqualTo(6);
     }
 
     @Test
     void divideTest() {
-        Calculator calculator = new Calculator();
         String input = "2 / 3";
         String[] operandAndOperator = ArithmeticInputValidator.validateArithmeticInput(input);
 
-        int result = calculator.calculateArithmetic(operandAndOperator);
+        int result = Calculator.calculateArithmetic(operandAndOperator);
 
         assertThat(result).isEqualTo(0);
     }
@@ -87,21 +89,19 @@ public class StringCalculatorTest {
     @Test
     @DisplayName("나눈셈 분모에 0을 넣는 경우 오류가 발생한다.")
     void wrongDivideTest() {
-        Calculator calculator = new Calculator();
         String input = "2 / 0";
         String[] operandAndOperator = ArithmeticInputValidator.validateArithmeticInput(input);
 
-        assertThrows(ArithmeticException.class, () -> calculator.calculateArithmetic(operandAndOperator));
+        assertThrows(ArithmeticException.class, () -> Calculator.calculateArithmetic(operandAndOperator));
     }
 
     @Test
     @DisplayName("사칙연산 계산 테스트")
     void arithmeticCalculateTest() {
-        Calculator calculator = new Calculator();
         String input = "2 + 3 / 2 * 5";
         String[] operandAndOperator = ArithmeticInputValidator.validateArithmeticInput(input);
 
-        int result = calculator.calculateArithmetic(operandAndOperator);
+        int result = Calculator.calculateArithmetic(operandAndOperator);
 
         assertThat(result).isEqualTo(10);
     }

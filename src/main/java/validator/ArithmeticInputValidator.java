@@ -63,7 +63,7 @@ public class ArithmeticInputValidator {
             parseInt(operand);
             return true;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("사칙연산 기호자리에 숫자가 입력되었습니다. input : " + operand);
+            throw new IllegalArgumentException("사칙연산 기호자리에 숫자 또는 숫자자리에 문자가 입력되었습니다. input : " + operand);
         }
     }
 }

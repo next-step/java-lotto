@@ -6,7 +6,10 @@ import static java.lang.Integer.parseInt;
 
 public class Calculator {
 
-    public int calculateArithmetic(String[] operandsAndOperators) {
+    private Calculator() {
+    }
+
+    public static int calculateArithmetic(String[] operandsAndOperators) {
 
         int sum = parseInt(operandsAndOperators[0]);
         for (int i = 1; i < operandsAndOperators.length - 1; i += 2) {
