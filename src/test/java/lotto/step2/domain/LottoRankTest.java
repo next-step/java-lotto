@@ -32,4 +32,18 @@ class LottoRankTest {
                 }
         );
     }
+
+    @Test
+    @DisplayName("findByCount의 입력으로 일치하는 개수를 넣으면, 해당하는 LottoRank 객체를 반환한다.")
+    void testGetDescription() {
+        SoftAssertions.assertSoftly(softly -> {
+                    softly.assertThat(LottoRank.OTHER.getDescription()).isEqualTo("탈락");
+                    softly.assertThat(LottoRank.FIFTH.getDescription()).isEqualTo("5등");
+                    softly.assertThat(LottoRank.FOURTH.getDescription()).isEqualTo("4등");
+                    softly.assertThat(LottoRank.THIRD.getDescription()).isEqualTo("3등");
+                    softly.assertThat(LottoRank.SECOND.getDescription()).isEqualTo("2등");
+                    softly.assertThat(LottoRank.FIRST.getDescription()).isEqualTo("1등");
+                }
+        );
+    }
 }
