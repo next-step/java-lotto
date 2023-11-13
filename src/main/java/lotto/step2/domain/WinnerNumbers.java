@@ -1,7 +1,5 @@
 package lotto.step2.domain;
 
-import lotto.step2.validator.NumberValidator;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -9,22 +7,23 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinnerNumbers {
-    private final Set<Integer> nums;
+    private final Set<LottoNumber> nums;
 
     public WinnerNumbers(final String winnerNumbersText) {
-        final Set<Integer> integers = conventStringToIntegerSet(winnerNumbersText);
-        NumberValidator.validateNums(integers);
+        final Set<LottoNumber> integers = conventStringToLottoNumberSet(winnerNumbersText);
+        validateSize(integers);
 
         this.nums = Collections.unmodifiableSet(integers);
     }
 
-    private static Set<Integer> conventStringToIntegerSet(final String winnerNumbersText) {
+    private static Set<LottoNumber> conventStringToLottoNumberSet(final String winnerNumbersText) {
         return Arrays.stream(winnerNumbersText.split(", "))
                 .map(Integer::parseInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet());
     }
 
-    public Set<Integer> nums() {
+    public Set<LottoNumber> nums() {
         return nums;
     }
 
@@ -38,10 +37,16 @@ public class WinnerNumbers {
         return lottoResults;
     }
 
-    private LottoRank calculateLottoRank(final Set<Integer> lottoNums) {
+    private LottoRank calculateLottoRank(final Set<LottoNumber> lottoNums) {
         return LottoRank.findByCount(
                 (int) lottoNums.stream()
                         .filter(nums::contains)
                         .count());
+    }
+
+    private void validateSize(final Set<LottoNumber> nums) {
+        if (nums.size() != 6) {
+            throw new IllegalArgumentException("winner nums size must be 6");
+        }
     }
 }

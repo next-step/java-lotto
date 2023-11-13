@@ -1,24 +1,32 @@
 package lotto.step2.domain;
 
-import lotto.step2.validator.NumberValidator;
-
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private final Set<Integer> nums;
+    private final Set<LottoNumber> nums;
 
     public Lotto(Set<Integer> nums) {
-        NumberValidator.validateNums(nums);
+        validateSize(nums);
 
-        this.nums = nums;
+        this.nums = nums.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(TreeSet::new));
     }
-    
-    public Set<Integer> nums() {
+
+    public Set<LottoNumber> nums() {
         return this.nums;
     }
 
     @Override
     public String toString() {
         return this.nums.toString();
+    }
+
+    private void validateSize(final Set<Integer> nums) {
+        if (nums.size() != 6) {
+            throw new IllegalArgumentException("lotto nums size must be 6");
+        }
     }
 }

@@ -19,12 +19,13 @@ class WinnerNumbersTest {
         String input = "10, 12, 30, 34, 40, 45";
         WinnerNumbers winnerNumbers = new WinnerNumbers(input);
         final String[] inputs = input.split(", ");
-        Set<Integer> expected = Arrays.stream(inputs)
+        Set<LottoNumber> expected = Arrays.stream(inputs)
                 .map(Integer::parseInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet());
 
         // when
-        Set<Integer> nums = winnerNumbers.nums();
+        Set<LottoNumber> nums = winnerNumbers.nums();
 
         // then
         assertThat(nums)
@@ -37,7 +38,7 @@ class WinnerNumbersTest {
     void throwUnsupportedOperationExceptionWhenModifyNumbers() {
         // given
         WinnerNumbers winnerNumbers = new WinnerNumbers("10, 12, 30, 34, 40, 45");
-        Set<Integer> nums = winnerNumbers.nums();
+        Set<LottoNumber> nums = winnerNumbers.nums();
 
         // when
         // then

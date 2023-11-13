@@ -18,6 +18,6 @@ public class LottoNumberGenerator {
     public static Set<Integer> generateLottoNumbers() {
         Collections.shuffle(LOTTO_NUMBERS);
 
-        return new TreeSet<>(LOTTO_NUMBERS.subList(0, 6));
+        return new HashSet<>(LOTTO_NUMBERS.subList(0, 6));
     }
 }
