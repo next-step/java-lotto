@@ -1,18 +1,17 @@
 package calculator;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+
+import static org.assertj.core.api.Assertions.*;
 
 class CalculatorTest {
 
-//    @Test
-//    @DisplayName("사칙연산 값을 받아서 계산한 결과값을 리턴한다")
-//    public void 계산하다(){
-//        String text = "4 + 3 - 1 * 2 / 4";
-//        Calculator calculator = new Calculator();
-//        Assertions.assertThat(calculator.calculate(text)).isEqualTo(3);
-//    }
+    @Test
+    @DisplayName("식을 계산한 결과값을 리턴한다")
+    public void 계산(){
+        String text = "-1 + -3 - 1 * -2 / 2";
+        Calculator calculator = new Calculator(text);
+        assertThat(calculator.calculate()).isEqualTo(5);
+    }
 }

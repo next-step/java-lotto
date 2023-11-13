@@ -11,7 +11,7 @@ public class Parser {
         return Arrays.asList(splitText);
     }
 
-    public static Stack<Integer> numberParsing(List<String> texts) {
+    public static Stack<Integer> numberReverseParsing(List<String> texts) {
         Stack<Integer> numbers = new Stack<>();
 
         for (int index = texts.size() - 1; index >= 0; index--) {
