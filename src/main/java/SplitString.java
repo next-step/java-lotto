@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SplitString {
-    private static final String SPLIT_DELIMITER = "";
+    private static final String SPLIT_DELIMITER = " ";
 
     public static List<Integer> splitNumber(String input) {
         List<Integer> numbers = new ArrayList<>();
@@ -19,7 +19,7 @@ public class SplitString {
         List<String> operators = new ArrayList<>();
 
         for(String string : splitWithDelimiter(input)){
-            if(isOperator(string)){
+            if(!isNumeric(string) && isOperator(string)){
                 operators.add(string);
             }
         }
@@ -38,7 +38,11 @@ public class SplitString {
     }
 
     private static boolean isOperator(String string){
-        return (string.equals("+") || string.equals("-") || string.equals("*") || string.equals("/"));
+        if(!(string.equals("+") || string.equals("-") || string.equals("*") || string.equals("/"))) {
+            throw new IllegalArgumentException();
+        }
+
+        return true;
     }
 
 }

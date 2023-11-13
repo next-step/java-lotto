@@ -3,8 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringCalculatorTest {
 
@@ -31,6 +30,16 @@ public class StringCalculatorTest {
 
         assertThatThrownBy( () -> {
             assertThat(SplitString.splitNumber(inputBlank));
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("사칙연산 기호가 아닌 경우 예외를 반환한다.")
+    void 사칙연산_기호_예외처리(){
+        String nonOperator = "1 x 4";
+
+        assertThatThrownBy( () -> {
+            assertThat(SplitString.splitOperator(nonOperator).get(0));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
