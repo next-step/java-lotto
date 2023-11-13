@@ -8,6 +8,6 @@ import lotto.view.OutputView;
 public class LottoMain {
 
     public static void main(String[] args) {
-        LottoController lottoController = new LottoController(new InputView(), new OutputView(), new RandomStrategy());
+        new LottoController(new InputView(), new OutputView(), new RandomStrategy());
     }
 }

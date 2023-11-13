@@ -31,8 +31,6 @@ class LottosTest {
         Lotto jackpot = Lotto.of(() -> Arrays.asList(1, 2, 3, 20, 30, 40));
         Summary match = lottos.match(jackpot);
 
-        match.toString();
-
         Assertions.assertThat(match).isEqualTo(new Summary(0, 0, 0, 10, 50f));
     }
 }

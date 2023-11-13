@@ -34,10 +34,6 @@ public enum Winning {
         return message;
     }
 
-    public int matchCount() {
-        return matchCount;
-    }
-
     public int prize() {
         return prize;
     }
