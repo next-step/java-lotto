@@ -1,4 +1,4 @@
-package step2.domain;
+package step3.domain;
 
 public class WinningInfo {
     private final int matchCount;

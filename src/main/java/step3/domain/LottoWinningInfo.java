@@ -1,4 +1,4 @@
-package step2.domain;
+package step3.domain;
 
 public enum LottoWinningInfo {
     MATCH_THREE(3,5_000),

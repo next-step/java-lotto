@@ -1,10 +1,12 @@
-package step2.domain;
+package step3.domain;
 
 import java.util.Objects;
 
 public class LottoNumber {
+
     private static final int MIN = 1;
     private static final int MAX = 45;
+
     private final int number;
 
     private LottoNumber(int number) {

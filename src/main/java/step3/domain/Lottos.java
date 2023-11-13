@@ -1,4 +1,4 @@
-package step2.domain;
+package step3.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +13,6 @@ public class Lottos{
 
     public void addLotto(Lotto lotto) {
         list.add(lotto);
-    }
-
-    public void removeLotto(Lotto lotto) {
-        list.remove(lotto);
     }
 
     public List<Lotto> getLottos() {

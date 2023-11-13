@@ -1,8 +1,8 @@
-package step2;
+package step3;
 
-import step2.domain.*;
-import step2.view.InputView;
-import step2.view.LottoResultView;
+import step3.domain.*;
+import step3.view.InputView;
+import step3.view.LottoResultView;
 
 import java.util.List;
 
@@ -23,6 +23,6 @@ public class Application {
                 .collect(toList());
         Lotto winningNumbersLotto = new Lotto(winningNumbers);
 
-        LottoResultView.printResultTest(new WinningLotto(winningNumbersLotto).winningInfos(lottos), lottos);
+        LottoResultView.printResult(new WinningLotto(winningNumbersLotto).winningInfos(lottos));
     }
 }

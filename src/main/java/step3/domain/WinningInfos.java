@@ -1,14 +1,14 @@
-package step2.domain;
+package step3.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class WinningInfos {
 
-    private List<WinningInfo> winningInfoList = new ArrayList<>();
     private static final int PRICE_PER_LOTTO = LottoMachine.PRICE_PER_LOTTO;
 
-    private final int   totalPurchaseCount;
+    private List<WinningInfo> winningInfoList = new ArrayList<>();
+    private final int totalPurchaseCount;
 
     public WinningInfos(Lottos lottos) {
         this.totalPurchaseCount = lottos.getLottoCount() * PRICE_PER_LOTTO;
@@ -20,10 +20,6 @@ public class WinningInfos {
 
     public void addWinningInfo(WinningInfo winningInfo) {
         this.winningInfoList.add(winningInfo);
-    }
-
-    public void removeWinningInfo(WinningInfo winningInfo) {
-        this.winningInfoList.remove(winningInfo);
     }
 
     public int earningMoney() {
