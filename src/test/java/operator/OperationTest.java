@@ -11,7 +11,7 @@ class OperationTest {
     @ParameterizedTest(name = "2개의 값을 더한다.")
     @CsvSource(value = {"4:2:6", "3:1:4", "7:2:9"}, delimiter = ':')
     void add(int firstInput, int secondInput, int excepted) {
-        Operation operation = new AddOperation().instance();
+        Operation operation = AddOperation.instance();
         assertThat(operation.calculate(firstInput, secondInput)).isEqualTo(excepted);
     }
 
@@ -45,7 +45,7 @@ class OperationTest {
     @ParameterizedTest(name = "연산자가 아닌 경우 예외를 발생시킨다.")
     @ValueSource(strings = {"1", "text"})
     void validaion_operator(String input) {
-        assertThatThrownBy(() ->Operation.from(input))
+        assertThatThrownBy(() -> Operation.from(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

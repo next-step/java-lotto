@@ -3,7 +3,6 @@ package parse;
 import token.Tokens;
 
 import java.util.List;
-import java.util.Stack;
 
 public class Parser {
     public static final Tokens parse(String text) {

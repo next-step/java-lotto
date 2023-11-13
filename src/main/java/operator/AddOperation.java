@@ -1,7 +1,10 @@
 package operator;
 
 public class AddOperation implements Operation {
-    private static AddOperation instance = new AddOperation();
+    private static final AddOperation instance = new AddOperation();
+
+    private AddOperation() {
+    }
 
     public static AddOperation instance() {
         return instance;

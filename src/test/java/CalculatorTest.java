@@ -11,7 +11,7 @@ class CalculatorTest {
             "1 * 2 * 3:6",
             "6 / 2 / 3:1",
             "50 + 40 - 30 * 2 / 12:10"}, delimiter = ':')
-    public void calculate(String input, int excepted){
+    public void calculate(String input, int excepted) {
         int result = Calculator.calculate(input);
         Assertions.assertThat(result).isEqualTo(excepted);
     }

@@ -4,7 +4,8 @@ public class DivideOperation implements Operation {
 
     private static final DivideOperation instance = new DivideOperation();
 
-    private DivideOperation() {}
+    private DivideOperation() {
+    }
 
     public static DivideOperation instance() {
         return instance;

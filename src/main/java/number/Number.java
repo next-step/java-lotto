@@ -17,9 +17,6 @@ public class Number {
         return new Number(Integer.parseInt(text));
     }
 
-
-
-
     private static boolean isNumber(String text) {
         try {
             Integer.parseInt(text);
