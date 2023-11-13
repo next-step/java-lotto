@@ -31,7 +31,7 @@ class LottoNumbersTest {
 
     @ParameterizedTest(name = "번호를 비교하여 중복되는 번호의 수를 리턴한다")
     @MethodSource("generateData")
-    void test(int excepted, List<Integer> list){
+    void match(int excepted, List<Integer> list){
         LottoNumbers jackpot = LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumbers lottoNumbers = LottoNumbers.of(list);
         Assertions.assertThat(jackpot.match(lottoNumbers)).isEqualTo(excepted);
