@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoGame;
-import lotto.domain.WinnerCount;
+import lotto.domain.Winning;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -18,7 +18,7 @@ public class LottoApp {
         ResultView.print(lottoGame.toString());
 
         String winningNumberText = InputView.inputWinningNumber();
-        final WinnerCount winner = lottoGame.draw(winningNumberText);
+        final Winning winner = lottoGame.draw(winningNumberText);
         ResultView.winnerPrint(winner);
 
         final BigDecimal returnRate = winner.getReturnRate(purchaseAmount);

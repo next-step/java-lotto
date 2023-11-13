@@ -15,7 +15,7 @@ public class LottoGame {
         return lottos.purchaseCount();
     }
 
-    public WinnerCount draw(final String winningNumberText) {
+    public Winning draw(final String winningNumberText) {
         validationCheck(winningNumberText);
 
         List<Integer> winningNumbers = parsingText(winningNumberText);

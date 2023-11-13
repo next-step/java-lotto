@@ -4,20 +4,20 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WinnerCount {
+public class Winning {
     public static final int FORWARD_WINNER = 2;
     private Map<Integer, Integer> winnerCountMap;
 
-    public WinnerCount() {
+    public Winning() {
         this.winnerCountMap = new HashMap<>();
     }
-    public void addWinner(int rightNumber) {
-        if (isWinner(rightNumber)) {
+    public void addWinning(int rightNumber) {
+        if (isWinning(rightNumber)) {
             winnerCountMap.put(rightNumber, winnerCountMap.getOrDefault(rightNumber, 0) + 1);
         }
     }
 
-    private boolean isWinner(final int rightNumber) {
+    private boolean isWinning(final int rightNumber) {
         return rightNumber > FORWARD_WINNER;
     }
 

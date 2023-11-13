@@ -28,10 +28,10 @@ public class Lottos {
         return lottos.size();
     }
 
-    public WinnerCount draw(final List<Integer> winningNumbers) {
-        final WinnerCount winner = new WinnerCount();
+    public Winning draw(final List<Integer> winningNumbers) {
+        final Winning winner = new Winning();
         for (Lotto lotto : lottos) {
-            winner.addWinner(lotto.getRightNumber(winningNumbers));
+            winner.addWinning(lotto.getRightNumber(winningNumbers));
         }
 
         return winner;
