@@ -9,6 +9,10 @@ public class Digit {
         this.num = num;
     }
 
+    public static Digit of(String digit) {
+        return new Digit(digit);
+    }
+
     public int getNum() {
         return num;
     }

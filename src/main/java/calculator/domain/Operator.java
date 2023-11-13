@@ -15,6 +15,10 @@ public class Operator {
         this.operator = operator;
     }
 
+    public static Operator of(String operator) {
+        return new Operator(operator);
+    }
+
     private void validate(String operator) {
         if (operator.equals(ADDITION) || operator.equals(SUBTRACTION) || operator.equals(MULTIPLICATION) || operator.equals(DIVISION)) {
             return;
