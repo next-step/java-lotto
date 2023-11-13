@@ -15,6 +15,32 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class AggregatorTest {
 
     @Test
+    @DisplayName("당첨 로또 번호 입력 값에는 6개의 숫자가 있어야 합니다.")
+    void sizeSix() {
+        // given
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Aggregator aggregator = new Aggregator(List.of(lotto));
+        // when
+        // then
+        assertThatThrownBy(() -> aggregator.checkWinnerLotto("4, 5, 6, 7, 8, 9, 10"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("당첨번호는 6개의 숫자여야 합니다.");
+    }
+
+    @Test
+    @DisplayName("당첨 로또 번호 입력 값에는 중복된 숫자가 있으면 안됩니다.")
+    void duplicate() {
+        // given
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Aggregator aggregator = new Aggregator(List.of(lotto));
+        // when
+        // then
+        assertThatThrownBy(() -> aggregator.checkWinnerLotto("4, 5, 6, 7, 8, 6"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("중복된 당첨번호를 작성할 수 없습니다.");
+    }
+
+    @Test
     @DisplayName("일치하는 당첨 로또들을 일치 수에 맞도록 winnerBoard 에 추가합니다.")
     void checkLotto() {
         // given

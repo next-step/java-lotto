@@ -35,12 +35,23 @@ public class Aggregator {
                 })
                 .collect(Collectors.toList());
 
-        System.out.println("winNumbers " + winNumbers);
+        if (winNumbers.size() != 6) {
+            throw new IllegalArgumentException("당첨번호는 6개의 숫자여야 합니다.");
+        }
+
+        if (hasDuplicatedNumber(winNumbers)) {
+            throw new IllegalArgumentException("중복된 당첨번호를 작성할 수 없습니다.");
+        }
 
         for (Lotto lotto : lottoList) {
             int winNumber = lotto.getLottoScore(winNumbers);
             winnerBoard.put(winNumber);
         }
+    }
+
+    private boolean hasDuplicatedNumber(List<Integer> winNumbers) {
+        List<Integer> checkedWinNumbers = new ArrayList<>(new HashSet<>(winNumbers));
+        return checkedWinNumbers.size() != winNumbers.size();
     }
 
     public double calculateEarningRate() {
