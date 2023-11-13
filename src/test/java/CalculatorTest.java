@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 @DisplayName("계산기 테스트")
-public class CalculatorTest {
+class CalculatorTest {
 
     @DisplayName("입력 값이 NULL이거나 공백일 경우 IllegalArgumentException이 발생한다.")
     @ParameterizedTest
