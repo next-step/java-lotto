@@ -4,8 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RankTest {
@@ -16,15 +14,6 @@ class RankTest {
         Rank findRank = Rank.findRank(matchCount);
 
         assertThat(findRank).isEqualTo(expected);
-    }
-
-    @ParameterizedTest
-    @CsvSource({"FIRST, 1", "SECOND, 1", "THIRD, 1", "FOURTH, 1"})
-    @DisplayName("각 등수의 배열에 해당하는 등수가 얼마나 포함되어 있는지 결과로 반환한다.")
-    void countRankType(Rank rank, int expected) {
-        List<Rank> ranks = List.of(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH);
-
-        assertThat(Rank.countRankType(ranks, rank)).isEqualTo(expected);
     }
 
     @ParameterizedTest

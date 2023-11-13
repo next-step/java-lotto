@@ -5,14 +5,15 @@ import lotto.domain.Money;
 import lotto.domain.LottoMachine;
 import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
+import lotto.domain.WinningRank;
 import lotto.view.InputView;
 import lotto.view.PrintView;
 
-import java.util.List;
+import java.util.Map;
 
 public class LottoController {
     public static void main(String[] args) {
-        int inputAmount = InputView.requestPurchaseAmount();
+        long inputAmount = InputView.requestPurchaseAmount();
         Money userMoney = new Money(inputAmount);
 
         LottoMachine lottoMachine = new LottoMachine(userMoney);
@@ -22,9 +23,10 @@ public class LottoController {
         WinningLotto winningLotto = WinningLotto.createWinningNumbers(winningNumbers);
         LottoResult lottoResult = new LottoResult(winningLotto, lottoMachine.getLottoTickets());
 
-        List<Rank> winningRanks = lottoResult.findWinningRanks();
+        Map<Rank, Long> winningRanks = lottoResult.findWinningRanks();
         PrintView.printStatistics(winningRanks);
-        Money totalWinningMoney = lottoResult.calcTotalWinningPrice(winningRanks);
+
+        Money totalWinningMoney = new WinningRank(winningRanks).calcTotalWinningPrice();
         PrintView.printReturnRate(totalWinningMoney.calcReturnRate(userMoney));
     }
 }

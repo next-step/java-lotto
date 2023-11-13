@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class PrintView {
 
@@ -17,13 +19,17 @@ public class PrintView {
         lottos.getLottos().forEach(System.out::println);
     }
 
-    public static void printStatistics(List<Rank> userRanks) {
+    public static void printStatistics(Map<Rank, Long> winningRanks) {
         System.out.println("당첨 통계");
         System.out.println("---------");
+
         Arrays.stream(Rank.values())
-                .filter(rank -> rank != Rank.NONE)
+                .filter(Rank::isWinningRank)
                 .sorted(Comparator.reverseOrder())
-                .forEach(rank -> System.out.println(rank.getMatchCount() + "개 일치 (" + rank.getWinningPrice() + "원) - " + Rank.countRankType(userRanks, rank)));
+                .forEach(rank -> {
+                    long count = winningRanks.getOrDefault(rank, 0L);
+                    System.out.println(rank.getMatchCount() + "개 일치 (" + rank.getWinningPrice() + "원) - " + count);
+                });
 
     }
 

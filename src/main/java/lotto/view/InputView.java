@@ -9,11 +9,11 @@ public class InputView {
     private InputView() {
     }
 
-    public static int requestPurchaseAmount() {
+    public static long requestPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
 
         try {
-            return scanner.nextInt();
+            return scanner.nextLong();
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자만 입력이 가능합니다.");
         }

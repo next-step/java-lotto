@@ -11,7 +11,7 @@ public class LottoMachine {
     }
 
     private int calcPossibleLottoCount(Money money) {
-        return money.getMoney() / LOTTO_PRICE;
+        return (int) money.getMoney() / LOTTO_PRICE;
     }
 
     public Lottos getLottoTickets() {

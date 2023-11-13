@@ -7,14 +7,14 @@ import java.util.Objects;
 public class Money {
 
     private static final int DEFAULT_DECIMAL_POINT = 2;
-    private final int money;
+    private final long money;
 
-    public Money(int inputAmount) {
+    public Money(long inputAmount) {
         validate(inputAmount);
         this.money = inputAmount;
     }
 
-    public int getMoney() {
+    public long getMoney() {
         return this.money;
     }
 
@@ -22,7 +22,7 @@ public class Money {
         return returnBigDecimalType()
                 .divide(otherMoney.returnBigDecimalType(), DEFAULT_DECIMAL_POINT, RoundingMode.HALF_UP);
     }
-    private void validate(int inputAmount) {
+    private void validate(long inputAmount) {
         if (inputAmount < 0) {
             throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
         }
