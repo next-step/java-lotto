@@ -5,6 +5,9 @@ import lotto.domain.LottoFactory;
 import lotto.domain.Lottos;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
+import lotto.util.StringParser;
+
+import java.util.List;
 
 import static lotto.constant.Constant.PRICE_UNIT;
 
@@ -23,5 +26,8 @@ public class LottoMain {
 
         OutputView outputView = new OutputView();
         outputView.printLottos(lottoCount, lottos);
+
+        StringParser stringParser = new StringParser();
+        List<Integer> winningLottoNumbers = stringParser.parseToInts(inputView.inputWinningNumber());
     }
 }

@@ -20,6 +20,7 @@ classDiagram
 %%    Animal : +String gender
 %%    Animal: +isMammal()
 %%    Animal: +mate()
+    StringParser <.. LottoMain : Dependency
     InputView <.. LottoMain : Dependency
     OutputView <.. LottoMain : Dependency
     LottoFactory <.. LottoMain : Dependency
@@ -32,6 +33,10 @@ classDiagram
     Lotto o-- Lottos : Aggregation
     LottNumbers o-- Lotto : Aggregation
     LottoGenerator o-- LottNumbers : Dependency
+    Lottos <.. LottoStatistics : Dependency
+        
+    class StringParser{
+    }
 
     class Lotto{
     }
@@ -94,7 +99,7 @@ classDiagram
 * [X] 로또 구입 금액 단위가 1000원이 아닐 경우 예외가 발생한다.
 * [X] 구입한 로또 개수 만큼 로또를 생성하며, 로또의 숫자는 1부터 45까지이다.
 * [X] 6개의 숫자를 가진 하나의 로또가 구입한 로또 개수 만큼 화면에 출력된다.
-* [ ] 지난 주 당첨 번호인 숫자 6자리를 쉼표로 구분하여 입력한다.
+* [X] 지난 주 당첨 번호인 숫자 6자리를 쉼표로 구분하여 입력한다.
 * [ ] 구입한 로또와 당첨 번호를 비교하여 당첨 통계를 화면에 출력한다.
 * [ ] 구입한 금액과 당첨 해서 받은 로또 금액을 비교하여 총 수익률을 소수점 두자리까지에 한정하여 출력한다.
 
