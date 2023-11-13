@@ -1,9 +1,6 @@
 package lotto.domain.lotto;
 
-import lotto.constants.LottoConstants;
 import lotto.domain.lotto.strategy.GenerateStrategy;
-
-import java.util.List;
 
 public class Lotto {
 
@@ -15,7 +12,7 @@ public class Lotto {
 
 
 
-    public static Lotto from(GenerateStrategy strategy) {
+    public static Lotto of(GenerateStrategy strategy) {
         return new Lotto(strategy);
     }
 }

@@ -14,12 +14,12 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public static Lottos from(int purchasePrice, GenerateStrategy strategy) {
+    public static Lottos of(int purchasePrice, GenerateStrategy strategy) {
         int lottoCount = lottoCount(purchasePrice);
 
         List<Lotto> lottoList = new ArrayList<>();
         for (int index = 0; index < lottoCount; index++) {
-            lottoList.add(Lotto.from(strategy));
+            lottoList.add(Lotto.of(strategy));
         }
 
         return new Lottos(lottoList);
