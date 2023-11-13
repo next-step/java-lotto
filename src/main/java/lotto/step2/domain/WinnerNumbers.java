@@ -1,20 +1,18 @@
 package lotto.step2.domain;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinnerNumbers {
-    private final Set<LottoNumber> nums;
+    private final Lotto winnerLotto;
     private final LottoNumber bonusNumber;
 
     public WinnerNumbers(final String winnerNumbersText, final int bonusWinnerNumber) {
-        final Set<LottoNumber> integers = conventStringToLottoNumberSet(winnerNumbersText);
-        validateSize(integers);
+        final Set<Integer> integers = conventStringToLottoNumberSet(winnerNumbersText);
 
-        this.nums = Collections.unmodifiableSet(integers);
+        this.winnerLotto = new Lotto(integers);
 
         final LottoNumber bonusLottoNumber = new LottoNumber(bonusWinnerNumber);
         validateBonusWinnerNumber(bonusLottoNumber);
@@ -23,15 +21,14 @@ public class WinnerNumbers {
     }
 
     private void validateBonusWinnerNumber(final LottoNumber bonusLottoNumber) {
-        if (this.nums.contains(bonusLottoNumber)) {
+        if (this.winnerLotto.contains(bonusLottoNumber)) {
             throw new IllegalArgumentException("bonus winner number must not be in winner nums");
         }
     }
 
-    private static Set<LottoNumber> conventStringToLottoNumberSet(final String winnerNumbersText) {
+    private static Set<Integer> conventStringToLottoNumberSet(final String winnerNumbersText) {
         return Arrays.stream(winnerNumbersText.split(", "))
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
                 .collect(Collectors.toSet());
     }
 
@@ -40,7 +37,7 @@ public class WinnerNumbers {
     }
 
     public Set<LottoNumber> nums() {
-        return nums;
+        return this.winnerLotto.nums();
     }
 
     public LottoResults matchLottos(final List<Lotto> lottos) {
@@ -51,11 +48,5 @@ public class WinnerNumbers {
         }
 
         return lottoResults;
-    }
-
-    private void validateSize(final Set<LottoNumber> nums) {
-        if (nums.size() != 6) {
-            throw new IllegalArgumentException("winner nums size must be 6");
-        }
     }
 }

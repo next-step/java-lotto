@@ -1,5 +1,6 @@
 package lotto.step2.domain;
 
+import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -10,9 +11,11 @@ public class Lotto {
     public Lotto(Set<Integer> nums) {
         validateSize(nums);
 
-        this.nums = nums.stream()
+        final TreeSet<LottoNumber> lottoNumbers = nums.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toCollection(TreeSet::new));
+
+        this.nums = Collections.unmodifiableSet(lottoNumbers);
     }
 
     public Set<LottoNumber> nums() {
@@ -40,5 +43,9 @@ public class Lotto {
         return (int) this.nums.stream()
                 .filter(winnerNums::contains)
                 .count();
+    }
+
+    public boolean contains(final LottoNumber bonusLottoNumber) {
+        return this.nums.contains(bonusLottoNumber);
     }
 }
