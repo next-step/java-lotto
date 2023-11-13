@@ -15,7 +15,6 @@ public class LottoShuffler implements CustomShuffle {
     @Override
     public List<Integer> makeShuffle() {
         Collections.shuffle(defaultLottoNumbers, new Random(System.currentTimeMillis()));
-        System.out.println(defaultLottoNumbers);
         return defaultLottoNumbers.stream().limit(6).collect(Collectors.toList());
     }
 }

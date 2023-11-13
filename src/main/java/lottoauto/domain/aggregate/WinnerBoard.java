@@ -27,14 +27,26 @@ public class WinnerBoard {
         this.winnerBoard = winnerBoard;
     }
 
-    public void put(int winNumber) {
+    public void updateWinningLottoCount(int winNumber) {
         if (winnerBoard.containsKey(winNumber)) {
             winnerBoard.put(winNumber, winnerBoard.get(winNumber) + 1);
         }
     }
 
-    public int get(Integer key) {
+    public int calculateTotalPrice() {
+        int totalPrice = 0;
+        for (Integer key : priceBoard.keySet()) {
+            totalPrice += priceBoard.get(key) * winnerBoard.get(key);
+        }
+        return totalPrice;
+    }
+
+    public int getWinningLottoCount(int key) {
         return winnerBoard.get(key);
+    }
+
+    public int getWinningLottoPrice(int key) {
+        return priceBoard.get(key);
     }
 
     public Map<Integer, Integer> getWinnerBoard() {

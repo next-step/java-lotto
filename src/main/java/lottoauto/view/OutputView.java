@@ -17,16 +17,13 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        Map<Integer, Integer> priceBoard = winnerBoard.getPriceBoard();
-
         StringBuilder stringBuilder = new StringBuilder();
         for (int matchCount=3; matchCount<=6; matchCount++) {
-            stringBuilder.append(matchCount + "개 일치 " + "(" + priceBoard.get(matchCount) + "원)- ")
-                    .append(winnerBoard.get(matchCount) + "개\n");
+            stringBuilder.append(matchCount + "개 일치 " + "(" + winnerBoard.getWinningLottoPrice(matchCount) + "원)- ")
+                    .append(winnerBoard.getWinningLottoCount(matchCount) + "개\n");
         }
         String winnerStatic = stringBuilder.toString();
         System.out.println(winnerStatic);
-
     }
 
     public void printEarningRate(double earningRate) {
