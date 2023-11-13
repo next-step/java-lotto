@@ -11,20 +11,14 @@ public class Number {
     }
 
     public static Number from(String text) {
-        System.out.println("text = " + text);
-        if (!positiveNumber(text)) {
-            throw new IllegalArgumentException("양수가 아닙니다. : " + text);
+        if (!isNumber(text)) {
+            throw new IllegalArgumentException("숫자가 아닙니다. : " + text);
         }
         return new Number(Integer.parseInt(text));
     }
 
-    private static boolean positiveNumber(String text) {
-        return isNumber(text) && positive(Integer.parseInt(text));
-    }
 
-    private static boolean positive(int num) {
-        return num > 0;
-    }
+
 
     private static boolean isNumber(String text) {
         try {
