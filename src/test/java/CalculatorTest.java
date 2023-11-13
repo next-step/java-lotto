@@ -10,6 +10,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CalculatorTest {
 
+
+    @Test
+    @DisplayName("계산식 테스트")
+    void calculator_테스트() {
+        String text = "2 + 3 * 4 / 2";
+        Calculator calcu = new Calculator();
+        assertThat(calcu.doCalculate(text)).isEqualTo(10);
+
+    }
+
+
     @Test
     @DisplayName("공백으로 문자열 나누기")
     void splite_공백() {

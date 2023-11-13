@@ -14,7 +14,7 @@ public class Calculator {
         ArrayList<Integer> valueList = filterValue(strList);
         ArrayList<String> opsList = filterOps(strList);
 
-        if(valueList.size()<=0){
+        if(valueList.size()==0){
             throw new IllegalArgumentException("연산 할 값이 없습니다.");
         }
 
@@ -28,14 +28,45 @@ public class Calculator {
         /**
          * 계산 공식 돌리기
          */
+        for(int i = 0 ; i < opsList.size() ; i++){
+            resultValue = getResultValue(valueList.get(i +1), opsList.get(i), resultValue);
+        }
 
+        return resultValue;
+    }
 
+    private static int getResultValue(int value, String ops, int resultValue) {
+//        switch(ops) {
+//            case "+":
+//                resultValue = add(resultValue, value);
+//                break;
+//            case "-":
+//                resultValue = subtract(resultValue, value);
+//                break;
+//            case "*":
+//                resultValue = multiply(resultValue, value);
+//                break;
+//            case "/":
+//                resultValue = divide(resultValue, value);
+//                break;
+//        }
+        /**
+         * indent(들여쓰기) depth를 2단계에서 1단계로
+         */
+        if("+".equals(ops)){
+            resultValue = add(resultValue, value);
+        }
+        if("-".equals(ops)){
+            resultValue = subtract(resultValue, value);
+        }
+        if("*".equals(ops)){
+            resultValue = multiply(resultValue, value);
+        }
+        if("/".equals(ops)){
+            resultValue = divide(resultValue, value);
+        }
 
-
-
-
-
-        return ZERO;
+        return resultValue;
     }
 
     public static ArrayList<String> filterOps(String[] inputList){
@@ -76,7 +107,8 @@ public class Calculator {
         try {
             return Integer.parseInt(text);
         }catch (NumberFormatException e){
-            throw new IllegalArgumentException("숫자가 아닙니다.");
+            throw new IllegalArgumentException("숫자 변환시 오류 발생 하였습니다. 숫자 List에 숫자가 아닌 값이 존재 합니다.");
+
         }
     }
 
@@ -97,6 +129,10 @@ public class Calculator {
     }
 
     public static int divide(int number1, int number2){
+
+        if(!checkDivideValue(number1,number2)){
+            throw new IllegalArgumentException("나눗셈 결과 값이 정수로 떨어지지 않습니다.");
+        }
         return number1 / number2;
     }
 
