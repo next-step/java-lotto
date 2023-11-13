@@ -3,7 +3,7 @@ package calculator.util;
 import java.util.regex.Pattern;
 
 public class Validator {
-    private static final Pattern PATTERN = Pattern.compile("\"(?:[0-9]+\\s[-+/*]\\s)*[0-9]+\"");
+    private static final Pattern PATTERN = Pattern.compile("(?:[0-9]+\\s[-+/*]\\s)*[0-9]+");
     private static final String EXAMPLE_PATTERN = "2 + 3 * 4 / 2";
 
     public static void validateExpression(String expression) {
