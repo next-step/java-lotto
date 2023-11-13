@@ -14,7 +14,7 @@ public class LottoController {
         ResultView resultView = new ResultView();
 
         BuyingAmount buyingAmount = new BuyingAmount(inputView.inputAmount());
-        ManualCount manualCount = new ManualCount(inputView.inputManualCount());
+        ManualCount manualCount = new ManualCount(inputView.inputManualCount(), buyingAmount);
         Lottos manaulLottos = new Lottos(inputView.inputManualNumbers(manualCount));
         Lottos autoLottos = new Lottos(new RandomLottoNumberStrategy(), buyingAmount.units(manualCount));
         Lottos lottos = new Lottos(autoLottos, manaulLottos);

@@ -26,4 +26,12 @@ public class BuyingAmount {
     public double divide(int basic) {
         return (double) basic / this.amount;
     }
+
+    public boolean isMoreThenAmount(int count) {
+        return units() < count;
+    }
+
+    private int units() {
+        return amount / LOTTO_AMOUNT;
+    }
 }
