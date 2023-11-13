@@ -1,5 +1,7 @@
 package operator;
 
+import java.util.Arrays;
+
 public enum Operator {
     ADD("+"),
     SUBTRACT("-"),
@@ -20,4 +22,10 @@ public enum Operator {
         }
         throw new IllegalArgumentException("유효하지 않은 연산자입니다: " + symbol);
     }
+
+    public static boolean isOperator(String symbol) {
+        return Arrays.stream(Operator.values())
+                .anyMatch(op -> op.operator.equals(symbol));
+    }
+
 }

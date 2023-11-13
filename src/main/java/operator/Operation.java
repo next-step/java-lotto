@@ -1,25 +1,27 @@
 package operator;
 
 public interface Operation {
+
+
     int calculate(int first, int second);
 
     static Operation add() {
-        return new AddOperation();
+        return AddOperation.instance();
     }
 
     static Operation subtract() {
-        return new SubtractOperation();
+        return SubtractOperation.instance();
     }
 
     static Operation multiply() {
-        return new MultiplyOperation();
+        return MultiplyOperation.instance();
     }
 
     static Operation divide() {
-        return new DivideOperation();
+        return DivideOperation.instance();
     }
 
-    static Operation fromSymbol(String symbol) {
+    static Operation from(String symbol) {
 
         Operator operator = Operator.fromSymbol(symbol);
 
