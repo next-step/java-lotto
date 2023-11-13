@@ -8,12 +8,19 @@ public class Calculator {
 	private final Stack<String> inputs;
 	private final OperatorMap map;
 
-	public Calculator(List<String> inputs) {
+	public Calculator(List<String> inputs) throws IllegalArgumentException{
+		if (isEmpty(inputs)) {
+			throw new IllegalArgumentException();
+		}
 		map = new OperatorMap();
 		this.inputs = new Stack<>();
 		for (int i = inputs.size() - 1; i >= 0; i--) {
 			this.inputs.push(inputs.get(i));
 		}
+	}
+
+	private boolean isEmpty(List<String> inputs) {
+		return inputs == null || inputs.size() == 0 || inputs.contains(" ");
 	}
 
 	public int next() {
