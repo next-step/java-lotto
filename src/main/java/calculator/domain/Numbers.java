@@ -34,5 +34,9 @@ public class Numbers {
         return list.get(index);
     }
 
+    public int first(){
+        return list.get(0);
+    }
+
 
 }
