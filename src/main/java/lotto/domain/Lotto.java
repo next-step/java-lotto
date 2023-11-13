@@ -1,12 +1,12 @@
 package lotto.domain;
 
-import lotto.strategy.RandomLottoGenerator;
+import lotto.strategy.LottoGenerator;
 
 public class Lotto {
     private LottoNumbers lottoNumbers;
 
-    public Lotto(RandomLottoGenerator randomLottoGenerator) {
-        this.lottoNumbers = new LottoNumbers(randomLottoGenerator);
+    public Lotto(LottoGenerator lottoGenerator) {
+        this.lottoNumbers = new LottoNumbers(lottoGenerator);
     }
 
     @Override
