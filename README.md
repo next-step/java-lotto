@@ -130,7 +130,7 @@
 
 - 23.11.13
   - [X] ~~throwExceptionIfValueIsNotValid의 parameter 확인~~
-  - [ ] LottoRank가 가지는 인스턴스 변수가 많아졌다. 축소가 가능한지 확인
+  - [X] ~~LottoRank가 가지는 인스턴스 변수가 많아졌다. 축소가 가능한지 확인~~
   - [X] ~~LottoRank 생성자에서 final을 붙이는 parameter 확인~~
   - [ ] matchLottos() 메서드의 역할을 로또 객체에게 시키는 것이 가능한지 확인
   - [ ] validateSize가 중복해서 수행된다. 어떻게 처리하면 좋을지 고민
