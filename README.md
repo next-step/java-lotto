@@ -9,8 +9,9 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## 1단계 - 문자열 계산기 기능 요구사항
-* [] 사용자 값 입력받기 
-* [] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+* [O] 사용자 값 입력받기 
+* [] 빈 공백 문자열로 나누기
+* [O] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
 * [] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
 * [O] 덧셈
 * [O] 뺄셈
