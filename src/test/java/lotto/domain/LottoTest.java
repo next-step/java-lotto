@@ -16,8 +16,9 @@ public class LottoTest {
     void 로또_번호_발급() {
         // given
         NumberStrategy numberStrategy = new FixtureNumberStrategy();
+        List<Lotto> buyLottos = numberStrategy.create(1);
+        Lotto lotto = buyLottos.get(0);
         // when
-        Lotto lotto = new Lotto(numberStrategy.create(1).get(0).lottoNumbers());
         // then
         assertThat(lotto.lottoNumbers()).hasSize(6);
     }
@@ -27,8 +28,9 @@ public class LottoTest {
     void 로또_번호_출력문구_생성() {
         // given
         NumberStrategy numberStrategy = new FixtureNumberStrategy();
+        List<Lotto> buyLottos = numberStrategy.create(1);
+        Lotto lotto = buyLottos.get(0);
         // when
-        Lotto lotto = new Lotto(numberStrategy.create(1).get(0).lottoNumbers());
         // then
         assertThat(lotto.toString()).isEqualTo("[2, 3, 5, 6, 10, 40]");
     }
@@ -38,18 +40,26 @@ public class LottoTest {
     void NumberStrategy_생성번호_구매번호_비교_테스트() {
         // given
         NumberStrategy numberStrategy = new FixtureNumberStrategy();
-        Lotto buyLotto = numberStrategy.create(1).get(0);
-        Lotto resultLotto = new Lotto(List.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
-        ));
+        List<Lotto> buyLottos = numberStrategy.create(1);
+        Lotto buyLotto = buyLottos.get(0);
+        Lotto resultLotto = new Lotto();
+        resultLotto.create(List.of(1, 2, 3, 4, 5, 6));
         // when
         int result = buyLotto.match(resultLotto);
         // then
         assertThat(result).isEqualTo(4);
+    }
+
+    @DisplayName("보너스 번호 일치 테스트")
+    @Test
+    void 보너스_번호가_일치하는지_확인한다() {
+        // given
+        LottoNumber bonusNumber = new LottoNumber(7);
+        Lotto lotto = new Lotto();
+        lotto.create(List.of(1, 2, 7, 4, 5, 6));
+        // when
+        boolean result = lotto.matchBonus(bonusNumber);
+        // then
+        assertThat(result).isTrue();
     }
 }

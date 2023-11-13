@@ -32,6 +32,10 @@ public class Purchase {
         return lottos;
     }
 
+    public int lottosSize() {
+        return lottos.size();
+    }
+
     private int lottoCount() {
         return amount / LOTTO_AMOUNT;
     }
