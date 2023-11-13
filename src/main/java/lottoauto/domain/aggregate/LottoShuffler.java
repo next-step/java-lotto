@@ -2,6 +2,7 @@ package lottoauto.domain.aggregate;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -13,7 +14,8 @@ public class LottoShuffler implements CustomShuffle {
 
     @Override
     public List<Integer> makeShuffle() {
-        Collections.shuffle(defaultLottoNumbers);
-        return defaultLottoNumbers.subList(0, 6);
+        Collections.shuffle(defaultLottoNumbers, new Random(System.currentTimeMillis()));
+        System.out.println(defaultLottoNumbers);
+        return defaultLottoNumbers.stream().limit(6).collect(Collectors.toList());
     }
 }

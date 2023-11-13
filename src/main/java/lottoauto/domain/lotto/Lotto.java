@@ -11,7 +11,6 @@ public class Lotto {
         this.numbers = new Numbers(numbers);
     }
 
-
     public int getLottoScore(List<Integer> winnerNumbers) {
         int result = 0;
 

@@ -6,7 +6,8 @@ import java.util.Objects;
 
 public class WinnerBoard {
 
-    private final Map<Integer, Integer> winnerBoard;
+    private Map<Integer, Integer> winnerBoard;
+    private Map<Integer, Integer> priceBoard;
 
     public WinnerBoard() {
         winnerBoard = new HashMap<>();
@@ -14,6 +15,12 @@ public class WinnerBoard {
         winnerBoard.put(4, 0);
         winnerBoard.put(5, 0);
         winnerBoard.put(6, 0);
+
+        priceBoard = new HashMap<>();
+        priceBoard.put(3, 5000);
+        priceBoard.put(4, 50000);
+        priceBoard.put(5, 1500000);
+        priceBoard.put(6, 2000000000);
     }
 
     public WinnerBoard(Map<Integer, Integer> winnerBoard) {
@@ -28,6 +35,14 @@ public class WinnerBoard {
 
     public int get(Integer key) {
         return winnerBoard.get(key);
+    }
+
+    public Map<Integer, Integer> getWinnerBoard() {
+        return winnerBoard;
+    }
+
+    public Map<Integer, Integer> getPriceBoard() {
+        return priceBoard;
     }
 
     @Override

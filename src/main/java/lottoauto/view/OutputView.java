@@ -1,6 +1,9 @@
 package lottoauto.view;
 
 import lottoauto.domain.aggregate.Aggregator;
+import lottoauto.domain.aggregate.WinnerBoard;
+
+import java.util.Map;
 
 public class OutputView {
 
@@ -9,11 +12,21 @@ public class OutputView {
         lottoList(aggregator.lottoListInfo());
     }
 
-    public void printWinnerStatistics(Aggregator aggregator) {
+    public void printWinnerStatistics(WinnerBoard winnerBoard) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println(aggregator);
+
+        Map<Integer, Integer> priceBoard = winnerBoard.getPriceBoard();
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int matchCount=3; matchCount<=6; matchCount++) {
+            stringBuilder.append(matchCount + "개 일치 " + "(" + priceBoard.get(matchCount) + "원)- ")
+                    .append(winnerBoard.get(matchCount) + "개\n");
+        }
+        String winnerStatic = stringBuilder.toString();
+        System.out.println(winnerStatic);
+
     }
 
     public void printEarningRate(double earningRate) {

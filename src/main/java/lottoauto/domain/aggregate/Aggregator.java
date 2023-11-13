@@ -24,34 +24,12 @@ public class Aggregator {
         this.lottoList = lottoList;
     }
 
-    public void checkWinnerLotto(String winNumbersString) {
-        List<Integer> winNumbers = Arrays.stream(winNumbersString.split(","))
-                .map(strNumber -> {
-                    int number = Integer.parseInt(strNumber.strip());
-                    if (number > 45 || number < 1) {
-                        throw new IllegalArgumentException("적절하지 않은 당첨 번호 입니다.");
-                    }
-                    return number;
-                })
-                .collect(Collectors.toList());
-
-        if (winNumbers.size() != 6) {
-            throw new IllegalArgumentException("당첨번호는 6개의 숫자여야 합니다.");
-        }
-
-        if (hasDuplicatedNumber(winNumbers)) {
-            throw new IllegalArgumentException("중복된 당첨번호를 작성할 수 없습니다.");
-        }
-
+    public WinnerBoard checkWinnerLotto(List<Integer> winNumbers) {
         for (Lotto lotto : lottoList) {
             int winNumber = lotto.getLottoScore(winNumbers);
             winnerBoard.put(winNumber);
         }
-    }
-
-    private boolean hasDuplicatedNumber(List<Integer> winNumbers) {
-        List<Integer> checkedWinNumbers = new ArrayList<>(new HashSet<>(winNumbers));
-        return checkedWinNumbers.size() != winNumbers.size();
+        return winnerBoard;
     }
 
     public double calculateEarningRate() {
