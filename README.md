@@ -126,4 +126,16 @@
 - [X] ~~2등을 위해 추가 번호를 하나 더 추첨한다.~~
 - [X] ~~당첨 통계에도 2등을 추가한다.~~
 
+### 추가 피드백 사항
+
+- 23.11.13
+  - [ ] throwExceptionIfValueIsNotValid의 parameter 확인
+  - [ ] LottoRank가 가지는 인스턴스 변수가 많아졌다. 축소가 가능한지 확인
+  - [ ] LottoRank 생성자에서 final을 붙이는 parameter 확인
+  - [ ] matchLottos() 메서드의 역할을 로또 객체에게 시키는 것이 가능한지 확인
+  - [ ] validateSize가 중복해서 수행된다. 어떻게 처리하면 좋을지 고민
+  - [ ] Set<LottoNumber>는 결국 Lotto 객체인 것 같다. Lotto 객체를 관리하도록 변경
+  - [ ] 사용하지 않는 NumberValidatorTest 삭제
+  - [X] ~~여러 검증을 사용하는 경우, assertAll을 사용해보자 [`SoftAssertions.assertSoftly`]~~
+
 ---
