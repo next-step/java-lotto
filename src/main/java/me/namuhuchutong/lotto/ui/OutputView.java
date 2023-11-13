@@ -21,7 +21,11 @@ public class OutputView {
     }
 
     private String addWinnings(int amount, LottoResult lottoResult) {
-        return (double) (lottoResult.getWinnings(MINIMUM_COUNT) / amount) + NEW_LINE;
+        return String.format("%.2f", getRevenue(amount, lottoResult)) + NEW_LINE;
+    }
+
+    private double getRevenue(int amount, LottoResult lottoResult) {
+        return ((double) amount) / lottoResult.getWinnings(MINIMUM_COUNT);
     }
 
     public void showGeneratedLotto(LottoResult lottoResult) {
