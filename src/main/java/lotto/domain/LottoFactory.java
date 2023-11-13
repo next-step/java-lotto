@@ -8,12 +8,13 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoFactory {
-    public Map<Integer, List<Lotto>> generateLottos(int lottoCount) {
-        return IntStream.range(0, lottoCount)
+    public Lottos generateLottos(int lottoCount) {
+        Map<Integer, List<Lotto>> lottos = IntStream.range(0, lottoCount)
                 .boxed()
                 .collect(Collectors.toMap(
                         index -> index,
                         index -> List.of(new Lotto(new RandomLottoGenerator()))
                 ));
+        return new Lottos(lottos);
     }
 }

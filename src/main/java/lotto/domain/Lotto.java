@@ -8,4 +8,9 @@ public class Lotto {
     public Lotto(RandomLottoGenerator randomLottoGenerator) {
         this.lottoNumbers = new LottoNumbers(randomLottoGenerator);
     }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }

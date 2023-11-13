@@ -13,6 +13,6 @@ public class LottoFactoryTest {
         int lottoCount = 14;
         LottoFactory lottoFactory = new LottoFactory();
 
-        assertThat(lottoFactory.generateLottos(lottoCount)).hasSize(14);
+        assertThat(lottoFactory.generateLottos(lottoCount).getLottos()).hasSize(14);
     }
 }
