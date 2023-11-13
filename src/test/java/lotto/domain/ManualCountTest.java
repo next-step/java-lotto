@@ -16,7 +16,7 @@ class ManualCountTest {
     void 뺄샘이_가능하다() {
         ManualCount manualCount = new ManualCount(5, new BuyingAmount(10000));
 
-        int actual = manualCount.minus(10);
+        int actual = manualCount.difference(10);
         int expected = 5;
 
         assertThat(actual).isEqualTo(expected);

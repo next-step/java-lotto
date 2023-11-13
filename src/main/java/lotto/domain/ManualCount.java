@@ -21,7 +21,7 @@ public class ManualCount {
         return this.count;
     }
 
-    public int minus(int countTotal) {
-        return countTotal - this.count;
+    public int difference(int countTotal) {
+        return Math.abs(countTotal - this.count);
     }
 }

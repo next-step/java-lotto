@@ -20,7 +20,7 @@ public class BuyingAmount {
     }
 
     public int units(ManualCount manualCount) {
-        return manualCount.minus(amount / LOTTO_AMOUNT);
+        return manualCount.difference(amount / LOTTO_AMOUNT);
     }
 
     public double divide(int basic) {
