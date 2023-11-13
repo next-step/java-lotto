@@ -10,7 +10,8 @@ public class StringCalculatorController {
         String inputString = InputView.inputString();
         ValidationCheck.checkInputString(inputString);
 
-        int result = Calculator.calculate(inputString.split(" "));
+        Calculator calculator = new Calculator();
+        int result = calculator.calculate(inputString.split(" "));
         ResultView.printResult(result);
     }
 }

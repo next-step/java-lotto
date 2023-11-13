@@ -14,11 +14,11 @@ public enum Operator {
         this.operator = operator;
     }
 
-    public String getOperator() {
+    private String getOperator() {
         return operator;
     }
 
-    public static Operator getEnum(String value) {
+    public static Operator getOperator(String value) {
         return Arrays.stream(Operator.values())
                 .filter(e -> e.getOperator().equals(value))
                 .findFirst()
