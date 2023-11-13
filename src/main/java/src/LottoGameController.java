@@ -1,13 +1,17 @@
 package src;
 
-import src.domain.Game;
 import src.domain.GameNumber;
-import src.domain.LottoV1;
+import src.domain.Lotto;
+import src.domain.LottoGameNumberGenerator;
+import src.domain.LottoMachine;
+import src.domain.Lottos;
 import src.domain.Money;
+import src.domain.Place;
 import src.view.InputView;
 import src.view.ResultView;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class LottoGameController {
@@ -15,27 +19,28 @@ public class LottoGameController {
     public static void main(String[] args) {
         Money money = new Money(InputView.inputPurchasePrice());
 
-        LottoV1 lottoV1 = money.buyLotto();
-        printLottoGames(lottoV1);
+        LottoMachine lottoMachine = new LottoMachine(new LottoGameNumberGenerator());
+        Lottos lottos = lottoMachine.buyLottos(money);
+        printLottos(lottos);
 
-        Game winningGame = inputWinningGame();
-        lottoV1.match(winningGame);
+        Lotto winningLotto = inputWinningLotto();
 
-        ResultView.printMatchResult(lottoV1);
+        List<Place> match = lottos.match(winningLotto);
+
     }
 
-    private static void printLottoGames(LottoV1 lottoV1) {
-        ResultView.printPurchaseLottoGameCount(lottoV1.gameCount());
-        ResultView.printLottoGames(lottoV1.games());
+    private static void printLottos(Lottos lottos) {
+        ResultView.printPurchaseLottoGameCount(lottos.size());
+        ResultView.printLottos(lottos);
     }
 
-    private static Game inputWinningGame() {
+    private static Lotto inputWinningLotto() {
         Set<GameNumber> winningNumbers = new HashSet<>(6);
 
         for (Integer number: InputView.inputWinningNumbers()) {
             winningNumbers.add(GameNumber.of(number));
         }
 
-        return Game.byGameNumbers(winningNumbers);
+        return new Lotto(winningNumbers);
     }
 }

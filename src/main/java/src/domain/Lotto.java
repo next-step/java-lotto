@@ -24,4 +24,9 @@ public class Lotto {
 
         return Place.byMatchedCount(matchStatus.get(Boolean.TRUE));
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }

@@ -2,7 +2,9 @@ package src.view;
 
 import src.domain.Game;
 import src.domain.Games;
+import src.domain.Lotto;
 import src.domain.LottoV1;
+import src.domain.Lottos;
 import src.domain.MatchStatus;
 import src.domain.Place;
 
@@ -18,9 +20,10 @@ public final class ResultView {
         System.out.println(lottoGameCount + "개를 구매했습니다.");
     }
 
-    public static void printLottoGames(Games games) {
-        for (Game game: games.values()) {
-            System.out.println(game.toString());
+    public static void printLottos(Lottos lottos) {
+        List<Lotto> values = lottos.values();
+        for (Lotto lotto: values) {
+            System.out.println(lotto.toString());
         }
     }
 

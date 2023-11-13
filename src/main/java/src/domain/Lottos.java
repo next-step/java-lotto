@@ -23,4 +23,8 @@ public class Lottos {
     public int size() {
         return values.size();
     }
+
+    public List<Lotto> values() {
+        return new ArrayList<>(values);
+    }
 }
