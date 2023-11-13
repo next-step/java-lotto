@@ -50,10 +50,13 @@ public class WinnerNumbers {
     }
 
     private LottoRank calculateLottoRank(final Set<LottoNumber> lottoNums) {
-        return LottoRank.findByCount(
-                (int) lottoNums.stream()
-                        .filter(nums::contains)
-                        .count());
+        return LottoRank.findByCountAndBonusMatching(calculateLottoNumsMatchingCount(lottoNums), lottoNums.contains(bonusNumber));
+    }
+
+    private int calculateLottoNumsMatchingCount(final Set<LottoNumber> lottoNums) {
+        return (int) lottoNums.stream()
+                .filter(nums::contains)
+                .count();
     }
 
     private void validateSize(final Set<LottoNumber> nums) {

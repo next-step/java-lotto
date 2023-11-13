@@ -16,6 +16,7 @@ class LottoResultsTest {
     private final static int SECOND_RANK_COUNT = 2;
     private final static int THIRD_RANK_COUNT = 3;
     private final static int FOURTH_RANK_COUNT = 4;
+    private final static int FIFTH_RANK_COUNT = 5;
     LottoResults lottoResults;
 
     @BeforeEach
@@ -26,6 +27,7 @@ class LottoResultsTest {
         putLottoResults(LottoRank.SECOND, SECOND_RANK_COUNT);
         putLottoResults(LottoRank.THIRD, THIRD_RANK_COUNT);
         putLottoResults(LottoRank.FOURTH, FOURTH_RANK_COUNT);
+        putLottoResults(LottoRank.FIFTH, FIFTH_RANK_COUNT);
     }
 
     private void putLottoResults(final LottoRank lottoRank, final int firstRankCount) {
@@ -55,9 +57,10 @@ class LottoResultsTest {
     void testToString() {
         assertThat(lottoResults.toString())
                 .isEqualTo(
-                        LottoRank.FOURTH.getMatchingCount() + "개 일치 (" + LottoRank.FOURTH.getPrizeMoney() + "원)- " + FOURTH_RANK_COUNT + "개\n" +
+                        LottoRank.FIFTH.getMatchingCount() + "개 일치 (" + LottoRank.FIFTH.getPrizeMoney() + "원)- " + FIFTH_RANK_COUNT + "개\n" +
+                                LottoRank.FOURTH.getMatchingCount() + "개 일치 (" + LottoRank.FOURTH.getPrizeMoney() + "원)- " + FOURTH_RANK_COUNT + "개\n" +
                                 LottoRank.THIRD.getMatchingCount() + "개 일치 (" + LottoRank.THIRD.getPrizeMoney() + "원)- " + THIRD_RANK_COUNT + "개\n" +
-                                LottoRank.SECOND.getMatchingCount() + "개 일치 (" + LottoRank.SECOND.getPrizeMoney() + "원)- " + SECOND_RANK_COUNT + "개\n" +
+                                LottoRank.SECOND.getMatchingCount() + "개 일치,보너스 볼 일치 (" + LottoRank.SECOND.getPrizeMoney() + "원)- " + SECOND_RANK_COUNT + "개\n" +
                                 LottoRank.FIRST.getMatchingCount() + "개 일치 (" + LottoRank.FIRST.getPrizeMoney() + "원)- " + FIRST_RANK_COUNT + "개\n"
                 );
     }
