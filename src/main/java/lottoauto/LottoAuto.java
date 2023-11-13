@@ -2,9 +2,10 @@ package lottoauto;
 
 import lottoauto.controller.LottoController;
 import lottoauto.domain.aggregate.Aggregator;
-import lottoauto.domain.aggregate.AggregatorMaker;
 import lottoauto.domain.aggregate.LottoShuffler;
 import lottoauto.domain.aggregate.WinnerBoard;
+import lottoauto.domain.lotto.Lottos;
+import lottoauto.domain.lotto.LottosMaker;
 import lottoauto.view.InputView;
 import lottoauto.view.OutputView;
 
@@ -14,14 +15,15 @@ public class LottoAuto {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
-        AggregatorMaker aggregatorMaker = new AggregatorMaker(new LottoShuffler());
-        Aggregator aggregator = aggregatorMaker.makeAggregator(inputView.inputLottoBuyMoney());
+        Lottos lottos = LottosMaker.makeLottoList(new LottoShuffler(), inputView.inputLottoBuyMoney());
+        WinnerBoard winnerBoard = new WinnerBoard();
+        Aggregator aggregator = new Aggregator();
 
-        LottoController lottoController = new LottoController(aggregator);
+        LottoController lottoController = new LottoController(aggregator, lottos, winnerBoard);
 
-        outputView.printLottoListInfo(aggregator);
+        outputView.printLottoListInfo(lottos);
 
-        WinnerBoard winnerBoard = lottoController.checkWinnerLotto(inputView.inputWinningNumbers());
+        lottoController.checkWinnerLotto(inputView.inputWinningNumbers());
         outputView.printWinnerStatistics(winnerBoard);
 
         double earningRate = lottoController.calculateEarningRate();

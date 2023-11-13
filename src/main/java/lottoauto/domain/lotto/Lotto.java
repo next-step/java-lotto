@@ -1,7 +1,6 @@
 package lottoauto.domain.lotto;
 
 import java.util.List;
-import java.util.Objects;
 
 public class Lotto {
 
@@ -15,23 +14,10 @@ public class Lotto {
         int result = 0;
 
         for (Integer winnerNumber : winnerNumbers) {
-            result = numbers.match(result, winnerNumber);
+            result = numbers.checkMatchCount(result, winnerNumber);
         }
 
         return result;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numbers);
     }
 
     @Override

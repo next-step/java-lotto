@@ -18,7 +18,7 @@ class NumbersTest {
 
         Numbers numbers = new Numbers(List.of(1, 2));
         // when
-        result = numbers.match(result, winnerNumber);
+        result = numbers.checkMatchCount(result, winnerNumber);
         // then
         assertThat(result).isEqualTo(1);
     }
@@ -32,7 +32,7 @@ class NumbersTest {
 
         Numbers numbers = new Numbers(List.of(3, 2));
         // when
-        result = numbers.match(result, winnerNumber);
+        result = numbers.checkMatchCount(result, winnerNumber);
         // then
         assertThat(result).isEqualTo(0);
 

@@ -1,15 +1,20 @@
 package lottoauto.view;
 
-import lottoauto.domain.aggregate.Aggregator;
 import lottoauto.domain.aggregate.WinnerBoard;
-
-import java.util.Map;
+import lottoauto.domain.lotto.Lotto;
+import lottoauto.domain.lotto.Lottos;
 
 public class OutputView {
 
-    public void printLottoListInfo(Aggregator aggregator) {
-        totalLottoCount(aggregator.totalLottoCount());
-        lottoList(aggregator.lottoListInfo());
+    public void printLottoListInfo(Lottos lottos) {
+        totalLottoCount(lottos.getLottoCount());
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Lotto lotto : lottos.getLottoList()) {
+            stringBuilder.append(lotto)
+                    .append("\n");
+        }
+        lottoList(stringBuilder.toString());
     }
 
     public void printWinnerStatistics(WinnerBoard winnerBoard) {

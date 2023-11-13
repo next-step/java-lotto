@@ -1,7 +1,10 @@
 package lottoauto.controller;
 
 import lottoauto.domain.aggregate.Aggregator;
+import lottoauto.domain.aggregate.WinnerBoard;
 import lottoauto.domain.lotto.Lotto;
+import lottoauto.domain.lotto.Lottos;
+import lottoauto.domain.lotto.LottosMaker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,8 +21,11 @@ class LottoControllerTest {
 
     @BeforeEach
     void setUp() {
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        lottoController = new LottoController(new Aggregator(List.of(lotto)));
+        Lottos lottos = LottosMaker.makeLottoList(() -> List.of(1, 2, 3, 4, 5, 6), 1000);
+        WinnerBoard winnerBoard = new WinnerBoard();
+        Aggregator aggregator = new Aggregator();
+
+        lottoController = new LottoController(aggregator, lottos, winnerBoard);
     }
 
     @Test

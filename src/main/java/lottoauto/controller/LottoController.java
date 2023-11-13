@@ -2,6 +2,7 @@ package lottoauto.controller;
 
 import lottoauto.domain.aggregate.Aggregator;
 import lottoauto.domain.aggregate.WinnerBoard;
+import lottoauto.domain.lotto.Lottos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,21 +12,24 @@ import java.util.stream.Collectors;
 
 public class LottoController {
 
-    private Aggregator aggregator;
+    private final Aggregator aggregator;
+    private final Lottos lottos;
+    private final WinnerBoard winnerBoard;
 
-    public LottoController(Aggregator aggregator) {
+    public LottoController(Aggregator aggregator, Lottos lottos, WinnerBoard winnerBoard) {
         this.aggregator = aggregator;
+        this.lottos = lottos;
+        this.winnerBoard = winnerBoard;
     }
 
-    public WinnerBoard checkWinnerLotto(String winNumbersString) {
+    public void checkWinnerLotto(String winNumbersString) {
         List<Integer> winNumbers = extractWinningNumbers(winNumbersString);
         checkIsValidWinNumbers(winNumbers);
-
-        return aggregator.checkWinnerLotto(winNumbers);
+        lottos.checkWinnerLotto(winnerBoard, winNumbers);
     }
 
     public double calculateEarningRate() {
-        return aggregator.calculateEarningRate();
+        return aggregator.calculateEarningRate(winnerBoard, lottos);
     }
 
     private List<Integer> extractWinningNumbers(String winNumbersString) {
