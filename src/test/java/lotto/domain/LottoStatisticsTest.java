@@ -13,7 +13,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.tuple;
 class LottoStatisticsTest {
 
     @Test
-    @DisplayName("로또 결과를 기준으로 당첨 통계를 낸다.,")
+    @DisplayName("로또 결과를 기준으로 당첨 통계를 구한다.")
     void success_generate_lotto_statistics() {
         Map<Long, Long> lottoResults = Map.ofEntries(
                 entry(3L, 1L),
@@ -33,6 +33,23 @@ class LottoStatisticsTest {
                         tuple(5L, 1500000L, 0L),
                         tuple(6L, 2000000000L, 1L)
                 );
+    }
+
+    @Test
+    @DisplayName("로또 통계를 기준으로 총 수익률을 구한다.")
+    void success_generate_lotto_rate() {
+        List<LottoWinResult> lottoWinResults = List.of(
+                new LottoWinResult(3L, 1L),
+                new LottoWinResult(4L, 0L),
+                new LottoWinResult(5L, 0L),
+                new LottoWinResult(6L, 0L)
+        );
+
+        LottoStatistics lottoStatistics = new LottoStatistics();
+        LottoRate lottoRate = lottoStatistics.rate(14000, lottoWinResults);
+
+        LottoRate expecteLottoRate = new LottoRate(0.35d, true);
+        assertThat(lottoRate).isEqualTo(expecteLottoRate);
     }
 
 }

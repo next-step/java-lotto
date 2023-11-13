@@ -1,5 +1,6 @@
 package lotto.ui;
 
+import lotto.domain.LottoRate;
 import lotto.domain.LottoWinResult;
 import lotto.domain.Lottos;
 
@@ -22,6 +23,13 @@ public class OutputView {
     public void printLottoResult(List<LottoWinResult> lottoWinResults) {
         for (LottoWinResult lottoWinResult : lottoWinResults) {
             System.out.println(lottoWinResult.getMachCount() + "개 일치 (" + lottoWinResult.getPrizeAmount() + "원)- " + lottoWinResult.getWinCount() + "개");
+        }
+    }
+
+    public void printLottoRate(LottoRate lottoRate) {
+        System.out.print("총 수익률은 " + lottoRate.getRate() + "입니다.");
+        if (lottoRate.isLowerStandard()) {
+            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
     }
 

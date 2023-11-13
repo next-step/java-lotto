@@ -1,5 +1,7 @@
 # 로또
+
 ## 진행 방법
+
 * 로또 요구사항을 파악한다.
 * 요구사항에 대한 구현을 완료한 후 자신의 github 아이디에 해당하는 브랜치에 Pull Request(이하 PR)를 통해 코드 리뷰 요청을 한다.
 * 코드 리뷰 피드백에 대한 개선 작업을 하고 다시 PUSH한다.
@@ -14,43 +16,38 @@
 title: lotto
 ---
 classDiagram
-%%    Animal <|-- Fish
-%%    Animal <|-- Zebra
-%%    Animal : +int age
-%%    Animal : +String gender
-%%    Animal: +isMammal()
-%%    Animal: +mate()
-    StringParser <.. LottoMain : Dependency
-    InputView <.. LottoMain : Dependency
-    OutputView <.. LottoMain : Dependency
-    LottoFactory <.. LottoMain : Dependency
-    InputValidator <.. LottoMain : Dependency
-    Lotto <.. LottoFactory : Dependency
-    LottoStatistics <.. LottoMain : Dependency
-    LottoGenerator <.. RandomLottoGenerator : Inheritance
-    LottoGenerator <.. TestLottoGenerator : Inheritance
-    Lottos <.. LottoMain : Dependency
-    Lotto o-- Lottos : Aggregation
-    LottNumbers o-- Lotto : Aggregation
-    LottoGenerator o-- LottNumbers : Dependency
-    LottoWinResult <.. LottoStatistics : Dependency
-        
-    class StringParser{
+    StringParser <.. LottoMain: Dependency
+    InputView <.. LottoMain: Dependency
+    OutputView <.. LottoMain: Dependency
+    LottoFactory <.. LottoMain: Dependency
+    InputValidator <.. LottoMain: Dependency
+    Lotto <.. LottoFactory: Dependency
+    LottoStatistics <.. LottoMain: Dependency
+    LottoGenerator <.. RandomLottoGenerator: Inheritance
+    LottoGenerator <.. TestLottoGenerator: Inheritance
+    Lottos <.. LottoMain: Dependency
+    Lotto o-- Lottos: Aggregation
+    LottNumbers o-- Lotto: Aggregation
+    LottoGenerator o-- LottNumbers: Aggregation
+    LottoWinResult <.. LottoStatistics: Dependency
+    LottoPrice <.. LottoWinResult: Dependency
+
+    class StringParser {
     }
 
-    class LottoWinResult{
+    class LottoWinResult {
     }
 
-    class Lotto{
-    }
-        
-    class Lottos{
+    class Lotto {
     }
 
-    class LottNumbers{
+    class Lottos {
     }
 
-    class LottoFactory{
+    class LottNumbers {
+    }
+
+    class LottoFactory {
     }
 
     class LottoMain {
@@ -58,38 +55,39 @@ classDiagram
     }
 
     class InputValidator {
-
     }
 
     class LottoGenerator {
-            
+        <<interface>>
     }
 
     class RandomLottoGenerator {
-
     }
-        
-    class TestLottoGenerator {
 
+    class TestLottoGenerator {
     }
 
     class LottoStatistics {
-        
     }
 
     class InputView {
-
     }
 
     class OutputView {
+    }
 
+    class LottoRate {
+    }
+
+    class LottoPrice {
+        <<enumeration>>
     }
 
     class OutputView {
-%%        -String Name
-%%        -int PosX
-%%        -int PosY
-%%        +Despawn() void
+    %%        -String Name
+    %%        -int PosX
+    %%        -int PosY
+    %%        +Despawn() void
     }
 ```
 
@@ -104,9 +102,10 @@ classDiagram
 * [X] 6개의 숫자를 가진 하나의 로또가 구입한 로또 개수 만큼 화면에 출력된다.
 * [X] 지난 주 당첨 번호인 숫자 6자리를 쉼표로 구분하여 입력한다.
 * [X] 구입한 로또와 당첨 번호를 비교하여 당첨 통계를 화면에 출력한다.
-* [ ] 구입한 금액과 당첨 해서 받은 로또 금액을 비교하여 총 수익률을 소수점 두자리까지에 한정하여 출력한다.
+* [X] 구입한 금액과 당첨 해서 받은 로또 금액을 비교하여 총 수익률을 소수점 두자리까지에 한정하여 출력한다.
 
 ---
 
 ## 온라인 코드 리뷰 과정
+
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)

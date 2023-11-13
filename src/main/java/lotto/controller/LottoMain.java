@@ -28,8 +28,12 @@ public class LottoMain {
         StringParser stringParser = new StringParser();
         List<Integer> winningLottoNumbers = stringParser.parseToInts(inputView.inputWinningNumber());
 
-        List<LottoWinResult> lottoWinResults = new LottoStatistics().statistics(lottos.winCounts(winningLottoNumbers));
+        LottoStatistics lottoStatistics = new LottoStatistics();
+        List<LottoWinResult> lottoWinResults = lottoStatistics.statistics(lottos.winCounts(winningLottoNumbers));
         outputView.printLottoResultInfo();
         outputView.printLottoResult(lottoWinResults);
+
+        LottoRate lottoRate = lottoStatistics.rate(price, lottoWinResults);
+        outputView.printLottoRate(lottoRate);
     }
 }
