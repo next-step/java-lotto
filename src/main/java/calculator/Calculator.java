@@ -1,4 +1,4 @@
-
+package calculator;
 
 public class Calculator {
     private Numbers numbers = new Numbers();
