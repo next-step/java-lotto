@@ -2,7 +2,7 @@ package src;
 
 import src.domain.Game;
 import src.domain.GameNumber;
-import src.domain.Lotto;
+import src.domain.LottoV1;
 import src.domain.Money;
 import src.view.InputView;
 import src.view.ResultView;
@@ -15,18 +15,18 @@ public class LottoGameController {
     public static void main(String[] args) {
         Money money = new Money(InputView.inputPurchasePrice());
 
-        Lotto lotto = money.buyLotto();
-        printLottoGames(lotto);
+        LottoV1 lottoV1 = money.buyLotto();
+        printLottoGames(lottoV1);
 
         Game winningGame = inputWinningGame();
-        lotto.match(winningGame);
+        lottoV1.match(winningGame);
 
-        ResultView.printMatchResult(lotto);
+        ResultView.printMatchResult(lottoV1);
     }
 
-    private static void printLottoGames(Lotto lotto) {
-        ResultView.printPurchaseLottoGameCount(lotto.gameCount());
-        ResultView.printLottoGames(lotto.games());
+    private static void printLottoGames(LottoV1 lottoV1) {
+        ResultView.printPurchaseLottoGameCount(lottoV1.gameCount());
+        ResultView.printLottoGames(lottoV1.games());
     }
 
     private static Game inputWinningGame() {

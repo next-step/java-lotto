@@ -3,28 +3,28 @@ package src.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lotto {
+public class LottoV1 {
 
     public static final int LOTTO_PRICE = 1000;
 
     private final Games games;
 
-    private Lotto(Games games) {
+    private LottoV1(Games games) {
         this.games = games;
     }
 
-    public static Lotto lotto(int gameCount) {
+    public static LottoV1 lotto(int gameCount) {
         List<Game> games = new ArrayList<>(gameCount);
 
         for (int idx = 0; idx < gameCount; idx++) {
             games.add(Game.newGame());
         }
 
-        return new Lotto(new Games(games));
+        return new LottoV1(new Games(games));
     }
 
-    public static Lotto byGames(Games games) {
-        return new Lotto(games);
+    public static LottoV1 byGames(Games games) {
+        return new LottoV1(games);
     }
 
     public int gameCount() {

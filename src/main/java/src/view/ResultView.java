@@ -2,7 +2,7 @@ package src.view;
 
 import src.domain.Game;
 import src.domain.Games;
-import src.domain.Lotto;
+import src.domain.LottoV1;
 import src.domain.MatchStatus;
 import src.domain.Place;
 
@@ -24,9 +24,9 @@ public final class ResultView {
         }
     }
 
-    public static void printMatchResult(Lotto lotto) {
-        printMatchStatus(lotto.matchStatus());
-        printProfitRate(lotto.profitRate());
+    public static void printMatchResult(LottoV1 lottoV1) {
+        printMatchStatus(lottoV1.matchStatus());
+        printProfitRate(lottoV1.profitRate());
     }
 
     private static void printMatchStatus(MatchStatus matchStatus) {

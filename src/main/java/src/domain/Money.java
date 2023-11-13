@@ -8,9 +8,9 @@ public class Money {
         this.value = value;
     }
 
-    public Lotto buyLotto() {
-        int gameCount = value / Lotto.LOTTO_PRICE;
+    public LottoV1 buyLotto() {
+        int gameCount = value / LottoV1.LOTTO_PRICE;
 
-        return Lotto.lotto(gameCount);
+        return LottoV1.lotto(gameCount);
     }
 }
