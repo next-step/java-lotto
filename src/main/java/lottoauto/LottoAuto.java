@@ -24,6 +24,7 @@ public class LottoAuto {
         WinnerBoard winnerBoard = lottoController.checkWinnerLotto(inputView.inputWinningNumbers());
         outputView.printWinnerStatistics(winnerBoard);
 
-        outputView.printEarningRate(aggregator.calculateEarningRate());
+        double earningRate = lottoController.calculateEarningRate();
+        outputView.printEarningRate(earningRate);
     }
 }

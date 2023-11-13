@@ -24,6 +24,10 @@ public class LottoController {
         return aggregator.checkWinnerLotto(winNumbers);
     }
 
+    public double calculateEarningRate() {
+        return aggregator.calculateEarningRate();
+    }
+
     private List<Integer> extractWinningNumbers(String winNumbersString) {
         return Arrays.stream(winNumbersString.split(","))
                 .map(strNumber -> {
