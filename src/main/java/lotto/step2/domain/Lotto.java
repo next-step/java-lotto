@@ -29,4 +29,16 @@ public class Lotto {
             throw new IllegalArgumentException("lotto nums size must be 6");
         }
     }
+
+    public LottoRank calculateLottoRank(final WinnerNumbers winnerNumbers) {
+        return LottoRank.findByCountAndBonusMatching(
+                calculateLottoNumsMatchingCount(winnerNumbers.nums()),
+                this.nums.contains(winnerNumbers.getBonusNumber()));
+    }
+
+    private int calculateLottoNumsMatchingCount(final Set<LottoNumber> winnerNums) {
+        return (int) this.nums.stream()
+                .filter(winnerNums::contains)
+                .count();
+    }
 }

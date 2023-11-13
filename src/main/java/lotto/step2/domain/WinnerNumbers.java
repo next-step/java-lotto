@@ -35,6 +35,10 @@ public class WinnerNumbers {
                 .collect(Collectors.toSet());
     }
 
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
+
     public Set<LottoNumber> nums() {
         return nums;
     }
@@ -43,20 +47,10 @@ public class WinnerNumbers {
         final LottoResults lottoResults = new LottoResults();
 
         for (final Lotto lotto : lottos) {
-            lottoResults.incrementRankCount(calculateLottoRank(lotto.nums()));
+            lottoResults.incrementRankCount(lotto.calculateLottoRank(this));
         }
 
         return lottoResults;
-    }
-
-    private LottoRank calculateLottoRank(final Set<LottoNumber> lottoNums) {
-        return LottoRank.findByCountAndBonusMatching(calculateLottoNumsMatchingCount(lottoNums), lottoNums.contains(bonusNumber));
-    }
-
-    private int calculateLottoNumsMatchingCount(final Set<LottoNumber> lottoNums) {
-        return (int) lottoNums.stream()
-                .filter(nums::contains)
-                .count();
     }
 
     private void validateSize(final Set<LottoNumber> nums) {
