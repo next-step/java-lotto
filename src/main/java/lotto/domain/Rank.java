@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
@@ -25,12 +24,6 @@ public enum Rank {
                 .orElse(NONE);
     }
 
-    public static int countRankType(List<Rank> ranks, Rank targetRank) {
-        return (int) ranks.stream()
-                .filter(rank -> rank == targetRank)
-                .count();
-    }
-
     public boolean isWinningRank() {
         return this != NONE;
     }
@@ -41,6 +34,10 @@ public enum Rank {
 
     public long getWinningPrice() {
         return this.winningPrice;
+    }
+
+    public long sumWinningPrice(long winningCount) {
+        return this.winningPrice * winningCount;
     }
 
     private boolean isEqualMatchCount(int userMatchCount) {
