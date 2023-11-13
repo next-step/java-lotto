@@ -1,7 +1,6 @@
 package src.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,10 +35,8 @@ public class GameNumber {
         }
     }
 
-    public static GameNumber random() {
-        Collections.shuffle(allGameNumbers);
-
-        return allGameNumbers.get(0);
+    public static List<GameNumber> gameNumbers() {
+        return new ArrayList<>(allGameNumbers);
     }
 
     @Override
