@@ -24,12 +24,12 @@ public class Number {
         return number < MIN || number > MAX;
     }
 
-    public int number() {
-        return this.number;
-    }
-
     public boolean compareWith(Number target) {
         return this.equals(target);
+    }
+
+    public int number() {
+        return this.number;
     }
 
     @Override
