@@ -14,14 +14,13 @@ public class LottoNumberFactory {
     public static final int MAX_LOTTO_BOUND = 45;
     private static final int START_POSITION = 0;
     private static final int END_POSITION = 6;
+    private static final List<Integer> LOTTO_NUMBERS = IntStream.rangeClosed(MIN_LOTTO_BOUND, MAX_LOTTO_BOUND)
+            .boxed()
+            .collect(Collectors.toList());
 
     public static List<Integer> generateNumbers() {
-        List<Integer> numbers = IntStream.rangeClosed(MIN_LOTTO_BOUND, MAX_LOTTO_BOUND)
-                .boxed()
-                .collect(Collectors.toList());
-
-        Collections.shuffle(numbers);
-        List<Integer> subNumbers = numbers.subList(START_POSITION, END_POSITION);
+        Collections.shuffle(LOTTO_NUMBERS);
+        List<Integer> subNumbers = LOTTO_NUMBERS.subList(START_POSITION, END_POSITION);
         Collections.sort(subNumbers);
 
         return Collections.unmodifiableList(subNumbers);
