@@ -2,18 +2,19 @@ package src.domain;
 
 import java.util.List;
 
-public class WinningNumbers {
+public class WinningLotto {
 
-    private final List<GameNumber> values;
+    private final List<GameNumber> gameNumbers;
 
-    public WinningNumbers(List<GameNumber> values) {
-        this.values = values;
+    public WinningLotto(List<GameNumber> gameNumbers) {
+        this.gameNumbers = gameNumbers;
     }
 
     public Place match(List<GameNumber> gameNumbers) {
         int matchCount = 0;
+
         for (GameNumber gameNumber: gameNumbers) {
-            if (values.contains(gameNumber)) {
+            if (gameNumbers.contains(gameNumber)) {
                 matchCount += 1;
             }
         }
