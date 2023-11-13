@@ -6,37 +6,44 @@ import calculator.domain.operator.OperatorFactory;
 import java.util.List;
 
 public class Calculator {
-    List<String> inputString;
+    private final int START_POINT = 1;
+    private final List<String> elements;
+    private int point;
 
-    public Calculator(List<String> inputString) {
-        this.inputString = inputString;
+
+    public Calculator(List<String> elements) {
+        this.elements = elements;
     }
 
     public int calculate() {
-        int result = Digit.of(inputString.get(0)).getNum();
-        int point = 1;
-        while (point < inputString.size()) {
-            validateCalculate(point);
-            result = partialCalculate(result, getNextOperator(point), getNextDigit(point));
-            point += 2;
+        int result = Digit.of(elements.get(point)).getNum();
+        point = START_POINT;
+        while (point < elements.size()) {
+            validateCalculate();
+            result = partialCalculate(result, getNextOperator(), getNextDigit());
+            moveNextPoint();
         }
         return result;
-    }
-
-    private Operator getNextOperator(int i) {
-        return OperatorFactory.of(inputString.get(i));
-    }
-
-    private Digit getNextDigit(int i) {
-        return Digit.of(inputString.get(i + 1));
     }
 
     private int partialCalculate(int num1, Operator operator, Digit num2) {
         return operator.operate(num1, num2.getNum());
     }
 
-    private void validateCalculate(int i) {
-        if ((i + 1) == inputString.size()) {
+    private Operator getNextOperator() {
+        return OperatorFactory.of(elements.get(point));
+    }
+
+    private Digit getNextDigit() {
+        return Digit.of(elements.get(point + 1));
+    }
+
+    private void moveNextPoint() {
+        point += 2;
+    }
+
+    private void validateCalculate() {
+        if ((point + 1) == elements.size()) {
             throw new IllegalArgumentException("비정상적인 연산입니다.");
         }
     }
