@@ -15,7 +15,7 @@ public class ManualLottoNumberStrategy implements LottoNumberStrategy {
     public ManualLottoNumberStrategy(String input) {
         List<LottoNumber> numbers = new ArrayList<>();
         for (String number : input.split(COMMA_BLANK)) {
-            numbers.add(LottoNumber.valueOf(number));
+            numbers.add(LottoNumber.of(number));
         }
         Collections.sort(numbers);
         this.numbers = numbers;

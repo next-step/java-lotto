@@ -17,7 +17,7 @@ public class RandomLottoNumberStrategy implements LottoNumberStrategy {
     static {
         List<LottoNumber> list = new ArrayList<>();
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            list.add(LottoNumber.valueOf(i));
+            list.add(LottoNumber.of(i));
         }
         numbers = list;
     }

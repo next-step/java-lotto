@@ -16,61 +16,61 @@ class WinningLottoTest {
     static Stream<Arguments> 로또_매개변수() {
         return Stream.of(
                 Arguments.of(List.of(new Lotto(List.of(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(6)))), LottoRank.FIRST),
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)))), LottoRank.FIRST),
                 Arguments.of(List.of(new Lotto(List.of(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(45)))), LottoRank.SECOND),
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(45)))), LottoRank.SECOND),
                 Arguments.of(List.of(new Lotto(List.of(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(12)))), LottoRank.THIRD),
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(12)))), LottoRank.THIRD),
                 Arguments.of(List.of(new Lotto(List.of(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(11),
-                        new LottoNumber(12)))), LottoRank.FOURTH),
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(11),
+                        LottoNumber.of(12)))), LottoRank.FOURTH),
                 Arguments.of(List.of(new Lotto(List.of(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(10),
-                        new LottoNumber(11),
-                        new LottoNumber(12)))), LottoRank.FIFTH),
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(10),
+                        LottoNumber.of(11),
+                        LottoNumber.of(12)))), LottoRank.FIFTH),
                 Arguments.of(List.of(new Lotto(List.of(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(9),
-                        new LottoNumber(10),
-                        new LottoNumber(11),
-                        new LottoNumber(12)))), LottoRank.NOT_MATCHED),
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(9),
+                        LottoNumber.of(10),
+                        LottoNumber.of(11),
+                        LottoNumber.of(12)))), LottoRank.NOT_MATCHED),
                 Arguments.of(List.of(new Lotto(List.of(
-                        new LottoNumber(1),
-                        new LottoNumber(8),
-                        new LottoNumber(9),
-                        new LottoNumber(10),
-                        new LottoNumber(11),
-                        new LottoNumber(12)))), LottoRank.NOT_MATCHED),
+                        LottoNumber.of(1),
+                        LottoNumber.of(8),
+                        LottoNumber.of(9),
+                        LottoNumber.of(10),
+                        LottoNumber.of(11),
+                        LottoNumber.of(12)))), LottoRank.NOT_MATCHED),
                 Arguments.of(List.of(new Lotto(List.of(
-                        new LottoNumber(7),
-                        new LottoNumber(8),
-                        new LottoNumber(9),
-                        new LottoNumber(10),
-                        new LottoNumber(11),
-                        new LottoNumber(12)))), LottoRank.NOT_MATCHED)
+                        LottoNumber.of(7),
+                        LottoNumber.of(8),
+                        LottoNumber.of(9),
+                        LottoNumber.of(10),
+                        LottoNumber.of(11),
+                        LottoNumber.of(12)))), LottoRank.NOT_MATCHED)
         );
     }
 
@@ -78,12 +78,12 @@ class WinningLottoTest {
     @MethodSource("로또_매개변수")
     void 당첨로또번호로_구입로또_등수를_알_수_있다(List<Lotto> lottos,
                                  LottoRank lottoRank) {
-        WinningLotto winningLotto = new WinningLotto(List.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)), 45);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6))), LottoNumber.of(45));
 
         List<LottoRank> actual = winningLotto.winningRank(new Lottos(lottos));
         List<LottoRank> expected = List.of(lottoRank);
@@ -93,11 +93,11 @@ class WinningLottoTest {
 
     @Test
     void 당첨로또번호와_보너스가_중복일_경우_예외가_발생한다() {
-        assertThrows(IllegalArgumentException.class, () -> new WinningLotto(List.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)), 1));
+        assertThrows(IllegalArgumentException.class, () -> new WinningLotto(new Lotto(List.of(LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6))), LottoNumber.of(6)));
     }
 }

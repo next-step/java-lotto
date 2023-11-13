@@ -24,7 +24,7 @@ public class LottoController {
                 lottos);
 
         WinningLotto winningLotto = new WinningLotto(Lotto.from(inputView.winnerNumber()),
-                LottoNumber.valueOf(inputView.inputBonusNumber()));
+                LottoNumber.of(inputView.inputBonusNumber()));
 
         WinningResults winningResults = new WinningResults(winningLotto.winningRank(lottos));
 

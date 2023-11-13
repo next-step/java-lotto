@@ -12,15 +12,15 @@ class LottoNumberTest {
         assertAll(
                 () -> {
                     int actual = 0;
-                    assertThrows(IllegalArgumentException.class, () -> new LottoNumber(actual));
+                    assertThrows(IllegalArgumentException.class, () -> LottoNumber.of(actual));
                 },
                 () -> {
                     int actual = -1;
-                    assertThrows(IllegalArgumentException.class, () -> new LottoNumber(actual));
+                    assertThrows(IllegalArgumentException.class, () -> LottoNumber.of(actual));
                 },
                 () -> {
                     int actual = 46;
-                    assertThrows(IllegalArgumentException.class, () -> new LottoNumber(actual));
+                    assertThrows(IllegalArgumentException.class, () -> LottoNumber.of(actual));
                 }
         );
     }

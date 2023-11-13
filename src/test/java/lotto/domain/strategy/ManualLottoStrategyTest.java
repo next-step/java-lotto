@@ -14,12 +14,12 @@ class ManualLottoStrategyTest {
         ManualLottoNumberStrategy manualLottoNumberStrategy = new ManualLottoNumberStrategy("1, 2, 3, 4, 5, 6");
 
         List<LottoNumber> actual = manualLottoNumberStrategy.create();
-        List<LottoNumber> expected = List.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6));
+        List<LottoNumber> expected = List.of(LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6));
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -29,12 +29,12 @@ class ManualLottoStrategyTest {
         ManualLottoNumberStrategy manualLottoNumberStrategy = new ManualLottoNumberStrategy("6, 2, 3, 4, 5, 1");
 
         List<LottoNumber> actual = manualLottoNumberStrategy.create();
-        List<LottoNumber> expected = List.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6));
+        List<LottoNumber> expected = List.of(LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6));
 
         assertThat(actual).isEqualTo(expected);
     }

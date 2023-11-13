@@ -14,13 +14,13 @@ class LottoSellerTest {
         Lottos actual = LottoSeller.salesAutoLottos(new RandomLottoNumberStrategy() {
             @Override
             protected List<LottoNumber> createRandomNumbers() {
-                return List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                        new LottoNumber(5), new LottoNumber(6));
+                return List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4),
+                        LottoNumber.of(5), LottoNumber.of(6));
             }
         }, 1);
-        Lottos expected = new Lottos(List.of(new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)))));
+        Lottos expected = new Lottos(List.of(new Lotto(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5), LottoNumber.of(6)))));
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -28,9 +28,9 @@ class LottoSellerTest {
     @Test
     void 수동_로또들을_생성_할_수_있다() {
         Lottos actual = LottoSeller.salesManualLottos(List.of("1, 2, 3, 4, 5, 6"));
-        Lottos expected = new Lottos(List.of(new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)))));
+        Lottos expected = new Lottos(List.of(new Lotto(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5), LottoNumber.of(6)))));
 
         assertThat(actual).isEqualTo(expected);
     }
