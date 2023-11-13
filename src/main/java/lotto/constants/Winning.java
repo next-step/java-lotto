@@ -11,7 +11,7 @@ public enum Winning {
     SIXTH( 1, 0),
     BLANK(0, 0);
 
-    private static final String MESSAGE = "%s 개 일치";
+    private static final String MESSAGE = "%s개 일치 (%s원)";
 
     private final String message;
     private final int matchCount;
@@ -20,7 +20,7 @@ public enum Winning {
     Winning(int matchCount, int prize) {
         this.matchCount = matchCount;
         this.prize = prize;
-        this.message = String.format(MESSAGE, matchCount);
+        this.message = String.format(MESSAGE, matchCount, prize);
     }
 
     public static Winning of(long matchCount) {

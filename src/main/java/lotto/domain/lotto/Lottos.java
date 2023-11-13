@@ -6,6 +6,7 @@ import lotto.domain.lotto.strategy.GenerateStrategy;
 import lotto.dto.Summary;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
@@ -83,5 +84,9 @@ public class Lottos {
 
     public int size() {
         return lottos.size();
+    }
+
+    public List<Lotto> lottos() {
+        return Collections.unmodifiableList(lottos);
     }
 }
