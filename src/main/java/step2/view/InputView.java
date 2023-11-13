@@ -1,7 +1,10 @@
 package step2.view;
 
+import java.util.List;
 import java.util.Scanner;
 
+import step2.model.Lotteries;
+import step2.model.Lottery;
 import step2.model.Winning;
 
 public class InputView {
@@ -21,7 +24,13 @@ public class InputView {
     }
 
     public static int getTrialCount(int money) {
-        return money / 1000;
+        int ticketCount = money / 1000;
+        System.out.println(ticketCount + PURCHASE);
+        return ticketCount;
+    }
+
+    public static void showActorLotteries(List<Lottery> tickets) {
+        tickets.forEach(t -> System.out.println(t.getNumbers()));
     }
 
     public static Winning getWinning() {

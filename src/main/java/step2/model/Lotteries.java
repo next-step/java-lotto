@@ -15,12 +15,8 @@ public class Lotteries {
         lotteries = new ArrayList<>();
     }
 
-    public int getLotteryCount() {
-        return lotteryCount;
-    }
-
-    public void setLotteryCount(int lotteryCount) {
-        this.lotteryCount = lotteryCount;
+    public List<Lottery> getLotteries() {
+        return lotteries;
     }
 
     public void keep(Lottery lottery) {

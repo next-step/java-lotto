@@ -9,7 +9,7 @@ public class Actor {
     public List<Integer> choose() {
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            result.add(ThreadLocalRandom.current().nextInt(1, 46));
+            result.add(ThreadLocalRandom.current().nextInt(0, 45));
         }
 
         return result;
