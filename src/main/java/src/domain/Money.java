@@ -13,4 +13,8 @@ public class Money {
 
         return LottoV1.lotto(gameCount);
     }
+
+    public int lottoCount(int lottoPrice) {
+        return value / lottoPrice;
+    }
 }

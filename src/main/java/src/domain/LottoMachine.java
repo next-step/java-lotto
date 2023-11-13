@@ -1,11 +1,35 @@
 package src.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
 
-    public List<LottoV1> buyLotto(Money money) {
+    private final LottoGameNumberGenerator gameNumberGenerator;
 
-        return null;
+    public LottoMachine(LottoGameNumberGenerator gameNumberGenerator) {
+        this.gameNumberGenerator = gameNumberGenerator;
+    }
+
+    public List<Lotto> buyLottos(Money money) {
+        int lottoCount = money.lottoCount(Lotto.PRICE_OF_LOTTO);
+        checkAvailableForPurchase(lottoCount);
+        List<Lotto> lottos = new ArrayList<>(lottoCount);
+        for (int idx = 0; idx < lottoCount; idx++) {
+            lottos.add(buyLotto());
+        }
+
+        return lottos;
+    }
+
+    private void checkAvailableForPurchase(int lottoCount) {
+        if (lottoCount <= 0) {
+            throw new IllegalArgumentException("로또의 가격은 " + Lotto.PRICE_OF_LOTTO + "원 입니다.");
+        }
+    }
+
+
+    private Lotto buyLotto() {
+        return new Lotto(gameNumberGenerator.gameNumbers());
     }
 }
