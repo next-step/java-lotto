@@ -22,7 +22,7 @@ public class InputValidator {
     }
 
     private void validatePriceUnitCondition(int price) {
-        if (price / PRICE_UNIT != ZERO) {
+        if (price % PRICE_UNIT != ZERO) {
             throw new MisMatchPriceUnitException();
         }
     }
