@@ -1,9 +1,9 @@
 package me.namuhuchutong.lotto.controller;
 
-import me.namuhuchutong.lotto.dto.LottoResult;
 import me.namuhuchutong.lotto.domain.LottoSeller;
 import me.namuhuchutong.lotto.domain.generator.NumberGenerator;
-import me.namuhuchutong.lotto.domain.Numbers;
+import me.namuhuchutong.lotto.dto.LottoResult;
+import me.namuhuchutong.lotto.dto.UserInputInformation;
 import me.namuhuchutong.lotto.ui.InputView;
 import me.namuhuchutong.lotto.ui.OutputView;
 
@@ -20,11 +20,10 @@ public class LottoController {
     }
 
     public void start() {
-        int amount = inputView.showBuyPrompt();
-        Numbers userNumbers = inputView.showNumbersPrompt();
+        UserInputInformation inputInformation = new UserInputInformation(inputView.inputAmount(), inputView.InputNumbers());
         LottoSeller lottoSeller = new LottoSeller(numberGenerator);
-        LottoResult lottoResult = lottoSeller.sellLotto(amount, userNumbers);
+        LottoResult lottoResult = lottoSeller.sellLotto(inputInformation.getAmount(), inputInformation.getNumbers());
         outputView.showGeneratedLotto(lottoResult);
-        outputView.showLottoResult(amount, lottoResult);
+        outputView.showLottoResult(inputInformation.getAmount(), lottoResult);
     }
 }

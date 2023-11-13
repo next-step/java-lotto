@@ -1,11 +1,11 @@
 package me.namuhuchutong.lotto;
 
+import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import me.namuhuchutong.lotto.domain.Number;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class NumberTest {
 
@@ -19,23 +19,23 @@ class NumberTest {
 
     @DisplayName("동일한 숫자는 참을 반환한다.")
     @Test
-    void test() {
+    void the_same_numbers_return_true() {
         //given
         Number number1 = new Number(1);
         Number number2 = new Number(1);
 
         //then
-        Assertions.assertThat(number1.equals(number2)).isTrue();
+        assertThat(number1.equals(number2)).isTrue();
     }
 
     @DisplayName("다른 숫자는 거짓을 반환한다.")
     @Test
-    void test2() {
+    void the_different_numbers_return_false() {
         //given
         Number number1 = new Number(1);
         Number number2 = new Number(2);
 
         //then
-        Assertions.assertThat(number1.equals(number2)).isFalse();
+        assertThat(number1.equals(number2)).isFalse();
     }
 }
