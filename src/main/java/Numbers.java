@@ -8,13 +8,15 @@ public class Numbers {
 
     private List<Integer> numberList = new ArrayList<>();
 
-    public boolean isNumber(String element) {
-        return NUMBER_PATTER.matcher(element).matches();
+    public void addIfNumber(String element) {
+        if (isNumber(element)) {
+            int number = Integer.parseInt(element);
+            numberList.add(number);
+        }
     }
 
-    public void addNumber(String element) {
-        int number = Integer.parseInt(element);
-        numberList.add(number);
+    public boolean isNumber(String element) {
+        return NUMBER_PATTER.matcher(element).matches();
     }
 
     public final Integer getNumberByIndex(int index) {

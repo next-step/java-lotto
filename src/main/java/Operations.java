@@ -10,16 +10,18 @@ public class Operations {
 
     private List<Operation> operationList = new ArrayList<>();
 
+    public void addIfOperation(String element) {
+        if (isOperation(element)) {
+            operationList.add(Operation.getOperationByElement(element));
+        }
+    }
+
     public boolean isOperation(String element) {
         Matcher operationMatcher = OPERATION_PATTERN.matcher(element);
         if (operationMatcher.find()) {
             return true;
         }
         return false;
-    }
-
-    public void addOperation(String element) {
-        operationList.add(Operation.getOperationByElement(element));
     }
 
     public final List<Operation> findAllOperation() {
