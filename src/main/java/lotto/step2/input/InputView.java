@@ -26,11 +26,21 @@ public class InputView {
     }
 
     public static WinnerNumbers inputWinnersNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-
         Scanner scanner = new Scanner(System.in);
-        final String winnerNumbersText = scanner.nextLine();
 
-        return new WinnerNumbers(winnerNumbersText);
+        final String winnerNumbersText = getWinnerNumbersText(scanner);
+        final int bonusWinnerNumber = getBonusWinnerNumber(scanner);
+
+        return new WinnerNumbers(winnerNumbersText, bonusWinnerNumber);
+    }
+
+    private static String getWinnerNumbersText(final Scanner scanner) {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return scanner.nextLine();
+    }
+
+    private static int getBonusWinnerNumber(final Scanner scanner) {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
     }
 }

@@ -8,12 +8,24 @@ import java.util.stream.Collectors;
 
 public class WinnerNumbers {
     private final Set<LottoNumber> nums;
+    private final LottoNumber bonusNumber;
 
-    public WinnerNumbers(final String winnerNumbersText) {
+    public WinnerNumbers(final String winnerNumbersText, final int bonusWinnerNumber) {
         final Set<LottoNumber> integers = conventStringToLottoNumberSet(winnerNumbersText);
         validateSize(integers);
 
         this.nums = Collections.unmodifiableSet(integers);
+
+        final LottoNumber bonusLottoNumber = new LottoNumber(bonusWinnerNumber);
+        validateBonusWinnerNumber(bonusLottoNumber);
+
+        this.bonusNumber = bonusLottoNumber;
+    }
+
+    private void validateBonusWinnerNumber(final LottoNumber bonusLottoNumber) {
+        if (this.nums.contains(bonusLottoNumber)) {
+            throw new IllegalArgumentException("bonus winner number must not be in winner nums");
+        }
     }
 
     private static Set<LottoNumber> conventStringToLottoNumberSet(final String winnerNumbersText) {
