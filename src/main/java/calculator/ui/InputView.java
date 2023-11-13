@@ -9,6 +9,15 @@ public class InputView {
 
     public static List<String> input() {
         System.out.println("계산식을 입력해주세요.");
-        return List.of(SCANNER.nextLine().split(CALCULATOR_SEPARATOR));
+
+        String inputString = SCANNER.nextLine();
+        validateInputString(inputString);
+        return List.of(inputString.split(CALCULATOR_SEPARATOR));
+    }
+
+    private static void validateInputString(String inputString) {
+        if (inputString.isBlank()) {
+            throw new IllegalArgumentException("빈값을 넣을 수 없습니다.");
+        }
     }
 }
