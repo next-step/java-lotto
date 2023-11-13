@@ -19,9 +19,10 @@ class UserInputInformationTest {
         //given
         String given = "a, 1, 2, 3, 4";
         int amount = 1;
+        int bonusNumber = 7;
 
         //when, then
-        assertThatThrownBy(() -> new UserInputInformation(amount, given))
+        assertThatThrownBy(() -> new UserInputInformation(amount, given, bonusNumber))
                   .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -31,9 +32,10 @@ class UserInputInformationTest {
     void throw_exception_when_receives_zero_or_negative(int amount) {
         //given
         String given = "1, 2, 3, 4, 5, 6";
+        int bonusNumber = 7;
 
         //when, then
-        assertThatThrownBy(() -> new UserInputInformation(amount, given))
+        assertThatThrownBy(() -> new UserInputInformation(amount, given, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -43,6 +45,7 @@ class UserInputInformationTest {
         //given
         String given = "1, 2, 3, 4, 5, 6";
         int amount = 1;
+        int bonusNumber = 7;
         Numbers expected = new Numbers(
                 List.of(
                         new Number(1),
@@ -53,7 +56,7 @@ class UserInputInformationTest {
                         new Number(6)));
 
         //when
-        UserInputInformation information = new UserInputInformation(amount, given);
+        UserInputInformation information = new UserInputInformation(amount, given, bonusNumber);
 
         //then
         assertThat(information.getNumbers()).isEqualTo(expected);

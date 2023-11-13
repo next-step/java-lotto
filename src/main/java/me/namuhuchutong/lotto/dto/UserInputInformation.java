@@ -20,14 +20,6 @@ public class UserInputInformation {
 
     private final int bonusNumber;
 
-    public UserInputInformation(int amount, String numbers) {
-        validateZeroOrNegative(amount);
-        validateNonNumeric(numbers);
-        this.amount = amount;
-        this.numbers = numbers;
-        this.bonusNumber = 0;
-    }
-
     public UserInputInformation(int amount, String numbers, int bonusNumber) {
         validateZeroOrNegative(amount);
         validateNonNumeric(numbers);
@@ -81,7 +73,7 @@ public class UserInputInformation {
         return new Numbers(collect);
     }
 
-    public int getBonusNumber() {
-        return this.bonusNumber;
+    public Number getBonusNumber() {
+        return new Number(this.bonusNumber);
     }
 }
