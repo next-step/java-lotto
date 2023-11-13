@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import lotto.constants.LottoConstants;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbers {
@@ -36,5 +37,15 @@ public class LottoNumbers {
         if (number < LottoConstants.NUMBER_MIN || number > LottoConstants.NUMBER_MAX) {
             throw new IllegalArgumentException(LottoConstants.NUMBER_ERROR_MESSAGE);
         }
+    }
+
+    public long match(LottoNumbers match) {
+        return match.numbers.stream()
+                .filter(numbers::contains)
+                .count();
+    }
+
+    public List<Integer> numbers() {
+        return Collections.unmodifiableList(numbers);
     }
 }
