@@ -24,4 +24,11 @@ public class OperationTest {
         int result = Operation.multiply(4, 5);
         Assertions.assertThat(result).isEqualTo(20);
     }
+
+    @Test
+    @DisplayName("두 수를 나눌 수 있다.")
+    public void division() {
+        int result = Operation.division(4, 5);
+        Assertions.assertThat(result).isEqualTo(1);
+    }
 }
