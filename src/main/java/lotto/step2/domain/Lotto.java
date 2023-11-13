@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class Lotto {
     private final Set<LottoNumber> nums;
 
-    public Lotto(Set<Integer> nums) {
+    public Lotto(final Set<Integer> nums) {
         validateSize(nums);
 
         final TreeSet<LottoNumber> lottoNumbers = nums.stream()
