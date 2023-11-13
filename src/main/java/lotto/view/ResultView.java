@@ -18,10 +18,10 @@ public class ResultView {
     private static final String PAPER_QUANTITY = "장, ";
     private static final String AUTO = "자동으로 ";
 
-    public void reportBuying(int lottoCount,
+    public void reportBuying(int autoLottoCount,
                              int manualLottoCount,
                              Lottos lottos) {
-        System.out.println(MANUAL + manualLottoCount + PAPER_QUANTITY + AUTO + lottoCount + BUYING_QUANTITY);
+        System.out.println(MANUAL + manualLottoCount + PAPER_QUANTITY + AUTO + autoLottoCount + BUYING_QUANTITY);
         for (Lotto lotto : lottos.getAll()) {
             System.out.println(lotto.toString());
         }
