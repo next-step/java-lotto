@@ -15,26 +15,10 @@ public class Input {
     }
 
     private void validate(String[] input) {
-        int length = input.length;
-        if (!hasDelimiter(length)) {
-            throw new IllegalArgumentException("InputError: 입력값 오류(공백 구분 없음)");
-        }
-
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < input.length; i++) {
             addValidNumber(input, i);
             addValidOperator(input, i);
         }
-
-        if (!isValidNumbers()) {
-            throw new IllegalArgumentException();
-        }
-        if (!isValidOperators()) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private boolean hasDelimiter(int length) {
-        return length > 1;
     }
 
     private void addValidNumber(String[] input, int i) {
@@ -71,14 +55,6 @@ public class Input {
             throw new IllegalArgumentException("InputError: 입력값 오류(사칙연산 기호가 아닌 값)");
         }
         return operator;
-    }
-
-    private boolean isValidNumbers() {
-        return !numbers.isEmpty();
-    }
-
-    private boolean isValidOperators() {
-        return !operators.isEmpty();
     }
 
     public Queue<Integer> getNumbers() {
