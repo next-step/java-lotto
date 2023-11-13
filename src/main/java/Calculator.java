@@ -20,13 +20,11 @@ public class Calculator {
     }
 
     private void addOperationAndNumber(String element) {
-        if (operations.isOperation(element)) {
-            operations.addOperation(element);
-        } else if(numbers.isNumber(element)) {
-            numbers.addNumber(element);
-        } else if(!operations.isOperation(element) && !numbers.isNumber(element)) {
+        if(!operations.isOperation(element) && !numbers.isNumber(element)) {
             throw new IllegalArgumentException("Check input operation");
         }
+        operations.addIfOperation(element);
+        numbers.addIfNumber(element);
     }
 
     private int sum() {
