@@ -1,14 +1,16 @@
 package calculator.domain;
 
 
-import org.assertj.core.api.Assertions;
+import calculator.exception.DivisionResultFloatException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class OperatorTest {
 
@@ -26,5 +28,38 @@ public class OperatorTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new Operator("0"));
     }
 
+    @ParameterizedTest(name = "연산 / {0}{1}{2} / 결과:  {3}")
+    @CsvSource({
+            "6, +, 2, 8",
+            "6, -, 2, 4",
+            "6, *, 2, 12",
+            "6, /, 2, 3",
+    })
+    void operate(int num1, String inputOperator, int num2, int result) {
+        // given
+        Operator operator = new Operator(inputOperator);
 
+        // when then
+        assertThat(operator.operate(num1, num2)).isEqualTo(result);
+    }
+
+    @Test
+    @DisplayName("나눗셈/0으로 나누기/ArithmeticException")
+    void divisionFail0() {
+        // given
+        Operator operator = new Operator("/");
+
+        // when then
+        assertThatThrownBy(() -> operator.operate(4, 0)).isInstanceOf(ArithmeticException.class);
+    }
+
+    @Test
+    @DisplayName("나눗셈/결과가 소수점/DivisionResultFloatException")
+    void divisionFailFloat() {
+        // given
+        Operator operator = new Operator("/");
+
+        // when then
+        assertThatThrownBy(() -> operator.operate(4, 3)).isInstanceOf(DivisionResultFloatException.class);
+    }
 }
