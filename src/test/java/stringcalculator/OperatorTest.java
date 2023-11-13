@@ -17,4 +17,10 @@ public class OperatorTest {
         int actual = Operator.minus(5, 3);
         assertThat(actual).isEqualTo(2);
     }
+
+    @Test
+    void 곱셈() {
+        int actual = Operator.multiply(3, 5);
+        assertThat(actual).isEqualTo(15);
+    }
 }
