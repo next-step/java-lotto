@@ -20,7 +20,7 @@ public class Lottos {
     public List<String> find(){
         List<String> list = new ArrayList<>();
         for(Lotto lotto : lottoList){
-            list.add(lotto.findNumbersForPrint());
+            list.add(lotto.findNumbersExtract());
         }
         return list;
     }

@@ -11,6 +11,8 @@ public class InputView {
     public static final int STANDARD = 1000;
     private static final String PATTERN = ", ";
 
+    private InputView(){}
+
     public static int inputPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         String text = SCANNER.nextLine();

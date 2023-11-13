@@ -28,7 +28,7 @@ public class LottoApplication {
 
         LottoPlay lottoPlay = new LottoPlay(lottos, winNumbers);
 
-        printMatchStats(lottoPlay.findMatchForPrint());
+        printMatchStats(lottoPlay.findMatchResult());
         printMatchResult(purchaseAmount, lottoPlay.sumMatch());
 
 

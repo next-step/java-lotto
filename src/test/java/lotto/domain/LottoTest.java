@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +26,6 @@ public class LottoTest {
     void 로또_번호_리턴() {
         Lotto lotto = new Lotto(new TestNumberGeneration());
         String text = "[1, 2, 3, 4, 5, 6]";
-        Assertions.assertThat(lotto.findNumbersForPrint()).isEqualTo(text);
+        assertThat(lotto.findNumbersExtract()).isEqualTo(text);
     }
 }

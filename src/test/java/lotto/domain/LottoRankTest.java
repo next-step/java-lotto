@@ -4,6 +4,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.*;
+
 public class LottoRankTest {
 
     @Test
@@ -11,6 +13,6 @@ public class LottoRankTest {
     void 로또매칭_확인() {
         LottoRank lottoRank = LottoRank.findMatchNumber(3);
 
-        Assertions.assertThat(lottoRank.sumPrize(1)).isEqualTo(5000);
+        assertThat(lottoRank.sumPrize(1)).isEqualTo(5000);
     }
 }

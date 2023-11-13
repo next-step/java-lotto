@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ResultView {
+
+    private ResultView(){}
     public static void printLottoCount(int count) {
         System.out.println(count + "개를 구매했습니다.");
     }

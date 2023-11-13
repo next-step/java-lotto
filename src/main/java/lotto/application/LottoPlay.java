@@ -22,7 +22,7 @@ public class LottoPlay {
         return result;
     }
 
-    public Map<LottoRank, Integer> findMatchForPrint() {
+    public Map<LottoRank, Integer> findMatchResult() {
         Map<LottoRank, Integer> resultMap = new EnumMap<>(LottoRank.class);
         for (LottoRank lottoRank : LottoRank.values()) {
             addMap(lottoRank, resultMap);
