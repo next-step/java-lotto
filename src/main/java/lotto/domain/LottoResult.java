@@ -24,11 +24,11 @@ public class LottoResult {
     }
 
     public Money calcTotalWinningPrice(List<Rank> ranks) {
-        long totalWinningPrice = ranks.stream()
+        int totalWinningPrice = (int) ranks.stream()
                 .mapToLong(Rank::getWinningPrice)
                 .sum();
 
-        return new Money(BigDecimal.valueOf(totalWinningPrice));
+        return new Money(totalWinningPrice);
     }
 
     @Override

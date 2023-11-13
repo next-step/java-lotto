@@ -7,29 +7,29 @@ import java.util.Objects;
 public class Money {
 
     private static final int DEFAULT_DECIMAL_POINT = 2;
-    private final BigDecimal money;
-
-    public Money(BigDecimal money) {
-        this.money = money;
-    }
+    private final int money;
 
     public Money(int inputAmount) {
         validate(inputAmount);
-        this.money = BigDecimal.valueOf(inputAmount);
+        this.money = inputAmount;
     }
 
-    public BigDecimal getMoney() {
+    public int getMoney() {
         return this.money;
     }
 
     public BigDecimal calcReturnRate(Money otherMoney) {
-        return this.money.divide(otherMoney.getMoney(), DEFAULT_DECIMAL_POINT, RoundingMode.HALF_UP);
+        return returnBigDecimalType()
+                .divide(otherMoney.returnBigDecimalType(), DEFAULT_DECIMAL_POINT, RoundingMode.HALF_UP);
     }
-
     private void validate(int inputAmount) {
         if (inputAmount < 0) {
             throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
         }
+    }
+
+    private BigDecimal returnBigDecimalType() {
+        return BigDecimal.valueOf(this.money);
     }
 
     @Override

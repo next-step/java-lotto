@@ -30,7 +30,7 @@ class LottoResultTest {
     @DisplayName("1개의 4등 당첨 로또가 있기때문에 총 당첨금액은 5,000원이다. ")
     void calcTotalWinningPrice() {
         Money returnRate = lottoResult.calcTotalWinningPrice(lottoResult.findWinningRanks());
-        assertThat(returnRate.getMoney()).isEqualTo(new BigDecimal(5000));
+        assertThat(returnRate.getMoney()).isEqualTo(5000);
     }
 
     @Test
