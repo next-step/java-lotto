@@ -10,7 +10,7 @@ class LottosTest {
     @Test
     void lottosInit() {
         //given
-        final Lottos lottos = new Lottos(14500);
+        final Lottos lottos = new Lottos(new Amount(14500));
 
         //when
         final int result = lottos.purchaseCount();

@@ -8,7 +8,7 @@ public class LottoGame {
     public static final String SPLIT_TEXT = ",";
     private Lottos lottos;
     public LottoGame(final int purchaseAmount) {
-        this.lottos = new Lottos(purchaseAmount);
+        this.lottos = new Lottos(new Amount(purchaseAmount));
     }
 
     public int purchaseCount() {
