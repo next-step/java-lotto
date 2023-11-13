@@ -32,6 +32,19 @@ class WinnerNumbersTest {
                 .containsExactlyInAnyOrderElementsOf(expected);
     }
 
+    @Test
+    @DisplayName("WinnerNumbers 숫자를 수정하려고 하면, UnsupportedOperationException 예외가 발생한다.")
+    void throwUnsupportedOperationExceptionWhenModifyNumbers() {
+        // given
+        WinnerNumbers winnerNumbers = new WinnerNumbers("10, 12, 30, 34, 40, 45");
+        Set<Integer> nums = winnerNumbers.nums();
+
+        // when
+        // then
+        assertThatThrownBy(() -> nums.remove(10))
+                .isInstanceOf(UnsupportedOperationException.class);
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {
             "10, 12, 30, 34",

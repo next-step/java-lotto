@@ -3,6 +3,7 @@ package lotto.step2.domain;
 import lotto.step2.validator.NumberValidator;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,7 +15,7 @@ public class WinnerNumbers {
         final Set<Integer> integers = conventStringToIntegerSet(winnerNumbersText);
         NumberValidator.validateNums(integers);
 
-        this.nums = integers;
+        this.nums = Collections.unmodifiableSet(integers);
     }
 
     private static Set<Integer> conventStringToIntegerSet(final String winnerNumbersText) {
