@@ -1,25 +1,25 @@
 package stringcalculator;
 
-public class CalculationValidation {
+public class CalculationValidator {
 
-    public void validate(String[] numAndSymbols) {
+    public static void validate(String[] numAndSymbols) {
         for (int idx = 0; idx < numAndSymbols.length; idx++) {
             validateNone(numAndSymbols[idx]);
             validateNumAndSymbol(numAndSymbols[idx], idx);
         }
     }
 
-    private void validateNone(String numAndSymbol) {
+    private static void validateNone(String numAndSymbol) {
         if (isNone(numAndSymbol)) {
             throw new IllegalArgumentException("숫자, 연산 기호 자리에는 공백이 입력될 수 없습니다.");
         }
     }
 
-    private boolean isNone(String input) {
+    private static boolean isNone(String input) {
         return input == null || input.isEmpty() || input.isBlank();
     }
 
-    private void validateNumAndSymbol(String numAndSymbol, int idx) {
+    private static void validateNumAndSymbol(String numAndSymbol, int idx) {
         if (isNumberPosition(idx)) {
             validateParseToDouble(numAndSymbol);
             return;
@@ -28,11 +28,11 @@ public class CalculationValidation {
         validateOperationSymbols(numAndSymbol);
     }
 
-    private boolean isNumberPosition(int idx) {
+    private static boolean isNumberPosition(int idx) {
         return idx % 2 == 0;
     }
 
-    private void validateParseToDouble(String number) {
+    private static void validateParseToDouble(String number) {
         try {
             Double.parseDouble(number);
         } catch (NumberFormatException e) {
@@ -40,8 +40,8 @@ public class CalculationValidation {
         }
     }
 
-    private void validateOperationSymbols(String symbol) {
-        if (Calculator.isOperationSymbol(symbol)) {
+    private static void validateOperationSymbols(String symbol) {
+        if (OperationSymbols.isOperationSymbol(symbol)) {
             return;
         }
 
