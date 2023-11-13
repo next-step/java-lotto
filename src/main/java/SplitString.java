@@ -30,7 +30,10 @@ public class SplitString {
         return Character.isDigit(string.charAt(0));
     }
 
-    public static String[] splitWithDelimiter(String input){
+    private static String[] splitWithDelimiter(String input){
+        if(input == null || input == " "){
+            throw new IllegalArgumentException();
+        }
         return input.split(SPLIT_DELIMITER);
     }
 
