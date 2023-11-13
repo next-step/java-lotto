@@ -6,8 +6,7 @@ import java.util.regex.Pattern;
 import java.util.List;
 
 public class Operations {
-    private static final String OPERATION_REGULAR_EXPRESSION = "[+\\-*/]";
-    private static final Pattern OPERATION_PATTERN = Pattern.compile(OPERATION_REGULAR_EXPRESSION);
+    private static final Pattern OPERATION_PATTERN = Pattern.compile("[+\\-*/]");
 
     private List<Operation> operationList = new ArrayList<>();
 
