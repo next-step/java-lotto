@@ -45,18 +45,38 @@ class LottoSellerTest {
         //then
         assertThat(lottoResult.getWinnings(3)).isEqualTo(BONUS.getWinnings());
     }
+
+    @DisplayName("5개 일치와 5+보너스 일치는 구별되어야 한다.")
+    @Test
+    void five_matches_is_not_same_as_five_and_bonus_matches() {
+        //given
+        int amount = 2000;
+        String givenNumber = "1, 2, 3, 4, 5, 6";
+        int bonusNumber = 7;
+        UserInputInformation information = new UserInputInformation(amount, givenNumber, bonusNumber);
+        LottoSeller lottoSeller = new LottoSeller(new TestGenerator());
+        long expected = FIVE.getWinnings() + BONUS.getWinnings();
+
+        //when
+        LottoResult lottoResult = lottoSeller.sellLotto(information);
+
+        //then
+        assertThat(lottoResult.getWinnings(THREE.getCount())).isEqualTo(expected);
+    }
     
     static class TestGenerator implements NumberGenerator {
+
+        private int count = 0;
 
         @Override
         public List<Number> createNumbers() {
             return List.of(
-                    new Number(1),
-                    new Number(2),
-                    new Number(3),
-                    new Number(4),
-                    new Number(5),
-                    new Number(7)
+                    new Number(1 + count),
+                    new Number(2 + count),
+                    new Number(3 + count),
+                    new Number(4 + count),
+                    new Number(5 + count),
+                    new Number(7 + count++)
             );
         }
     }
