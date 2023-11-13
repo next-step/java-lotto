@@ -1,6 +1,6 @@
 package study.step1.domain;
 
-public interface Calculation {
+public interface Operation {
 
     int plus(int x, int y);
 

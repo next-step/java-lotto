@@ -2,7 +2,7 @@ package study.step1.domain;
 
 import study.step1.domain.exception.CalculatorException;
 
-public class DefaultCalculation implements Calculation {
+public class DefaultOperation implements Operation {
 
     @Override
     public int plus(int x, int y) {
