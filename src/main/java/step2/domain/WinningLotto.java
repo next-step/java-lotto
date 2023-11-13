@@ -1,4 +1,4 @@
-package step3.domain;
+package step2.domain;
 
 import java.util.LinkedHashMap;
 import java.util.List;

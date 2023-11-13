@@ -1,4 +1,4 @@
-package step3.domain;
+package step2.domain;
 
 import java.util.ArrayList;
 import java.util.List;

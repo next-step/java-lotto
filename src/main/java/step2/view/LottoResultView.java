@@ -1,6 +1,6 @@
-package step3.view;
+package step2.view;
 
-import step3.domain.*;
+import step2.domain.*;
 
 import java.text.DecimalFormat;
 

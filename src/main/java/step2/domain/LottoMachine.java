@@ -1,6 +1,6 @@
-package step3.domain;
+package step2.domain;
 
-import step3.util.GeneratorUtil;
+import step2.util.GeneratorUtil;
 
 import java.util.ArrayList;
 import java.util.List;

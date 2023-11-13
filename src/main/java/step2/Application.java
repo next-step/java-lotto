@@ -1,8 +1,8 @@
-package step3;
+package step2;
 
-import step3.domain.*;
-import step3.view.InputView;
-import step3.view.LottoResultView;
+import step2.domain.*;
+import step2.view.InputView;
+import step2.view.LottoResultView;
 
 import java.util.List;
 

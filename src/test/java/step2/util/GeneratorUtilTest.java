@@ -1,4 +1,4 @@
-package step3.util;
+package step2.util;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
