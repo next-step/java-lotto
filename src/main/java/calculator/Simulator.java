@@ -5,6 +5,8 @@ import calculator.model.Calculator;
 import calculator.model.Classifier;
 import calculator.model.InputNumber;
 import calculator.model.Operator;
+import calculator.model.constants.Operators;
+import calculator.view.OutputView;
 
 public class Simulator {
     public static void main(String[] args) {
@@ -12,6 +14,6 @@ public class Simulator {
         Operator operator = new Operator(Classifier.classifyOperator(input));
         InputNumber inputNumber = new InputNumber(Classifier.classifyInteger(input));
         Calculator calculator = new Calculator(inputNumber, operator);
-        System.out.println(calculator.calculate());
+        OutputView.viewResult(calculator.calculate());
     }
 }
