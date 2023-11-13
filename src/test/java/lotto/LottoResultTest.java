@@ -12,11 +12,12 @@ public class LottoResultTest {
 	void matched() {
 		Lotto lottoOne = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 		Lotto lottoTwo = new Lotto(List.of(7, 8, 6, 11, 12, 13));
-		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(List.of(4, 5, 6, 11, 12, 13));
+		Lotto winningLotto = new Lotto(List.of(4, 5, 6, 11, 12, 13));
+		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningLotto);
 		LottoList lottoList = new LottoList(List.of(lottoOne, lottoTwo));
 
-		LottoResult lottoResult = new LottoResult(lottoList);
-		lottoResult.matchesWinningNumbers(lottoWinningNumbers);
+		LottoResult lottoResult = new LottoResult();
+		lottoResult.matchesWinningNumbers(lottoList, lottoWinningNumbers);
 
 		Map<LottoMatch, Integer> matchResult = lottoResult.result();
 

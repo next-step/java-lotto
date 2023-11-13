@@ -3,6 +3,7 @@ package lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class Lotto {
 	private final static int NUMBER_COUNT = 6;
@@ -45,5 +46,12 @@ public class Lotto {
 
 	public List<Integer> lottoNumbers() {
 		return this.lottoNumbers;
+	}
+
+	public void matches(LottoWinningNumbers lottoWinningNumbers,
+						Map<LottoMatch, Integer> lottoMatchResult)
+	{
+		int matchedCount = lottoWinningNumbers.matchedCount(this);
+		lottoMatchResult.merge(LottoMatch.fromInt(matchedCount), 1, Integer::sum);
 	}
 }

@@ -2,19 +2,23 @@ package lotto;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
-	private final LottoList lottoList;
-	private final Map<LottoMatch, Integer> lottoMatchResult = new HashMap<>();
+	private final Map<LottoMatch, Integer> lottoMatchResult;
 
-	public LottoResult(LottoList lottoList) {
-		this.lottoList = lottoList;
+	public LottoResult() {
+		lottoMatchResult = new HashMap<>();
 	}
 
-	public void matchesWinningNumbers(LottoWinningNumbers lottoWinningNumbers) {
-		lottoMatchResult.put(LottoMatch.valueOf("THREE"), 1);
-		lottoMatchResult.put(LottoMatch.valueOf("FOUR"), 1);
+	public void matchesWinningNumbers(LottoList lottoList, LottoWinningNumbers lottoWinningNumbers) {
+		lottoMatchResult.clear();
+		List<Lotto> lottos = lottoList.lottoList();
+
+		for (Lotto lotto : lottos) {
+			lotto.matches(lottoWinningNumbers, lottoMatchResult);
+		}
 	}
 
 	public Map<LottoMatch, Integer> result() {
