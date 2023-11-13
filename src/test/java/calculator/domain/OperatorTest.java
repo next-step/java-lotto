@@ -1,6 +1,8 @@
 package calculator.domain;
 
 
+import calculator.domain.operator.Operator;
+import calculator.domain.operator.OperatorFactory;
 import calculator.exception.DivisionResultFloatException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,14 +20,14 @@ public class OperatorTest {
     @ValueSource(strings = {"+", "-", "*", "/"})
     void createOperator(String operator) {
         // when then
-        assertThat(new Operator(operator)).isInstanceOf(Operator.class);
+        assertThat(OperatorFactory.of(operator)).isInstanceOf(Operator.class);
     }
 
     @Test
     @DisplayName("연산자생성/연산기호가아닌것/IllegalArgumentException")
     void createOperatorFail() {
         // when then
-        assertThatIllegalArgumentException().isThrownBy(() -> new Operator("0"));
+        assertThatIllegalArgumentException().isThrownBy(() -> OperatorFactory.of("0"));
     }
 
     @ParameterizedTest(name = "연산 / {0}{1}{2} / 결과:  {3}")
@@ -37,7 +39,7 @@ public class OperatorTest {
     })
     void operate(int num1, String inputOperator, int num2, int result) {
         // given
-        Operator operator = new Operator(inputOperator);
+        Operator operator = OperatorFactory.of(inputOperator);
 
         // when then
         assertThat(operator.operate(num1, num2)).isEqualTo(result);
@@ -47,7 +49,7 @@ public class OperatorTest {
     @DisplayName("나눗셈/0으로 나누기/ArithmeticException")
     void divisionFail0() {
         // given
-        Operator operator = new Operator("/");
+        Operator operator = OperatorFactory.of("/");
 
         // when then
         assertThatThrownBy(() -> operator.operate(4, 0)).isInstanceOf(ArithmeticException.class);
@@ -57,7 +59,7 @@ public class OperatorTest {
     @DisplayName("나눗셈/결과가 소수점/DivisionResultFloatException")
     void divisionFailFloat() {
         // given
-        Operator operator = new Operator("/");
+        Operator operator = OperatorFactory.of("/");
 
         // when then
         assertThatThrownBy(() -> operator.operate(4, 3)).isInstanceOf(DivisionResultFloatException.class);

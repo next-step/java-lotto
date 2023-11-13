@@ -1,5 +1,8 @@
 package calculator.domain;
 
+import calculator.domain.operator.Operator;
+import calculator.domain.operator.OperatorFactory;
+
 import java.util.List;
 
 public class Calculator {
@@ -21,7 +24,7 @@ public class Calculator {
     }
 
     private Operator getNextOperator(int i) {
-        return Operator.of(inputString.get(i));
+        return OperatorFactory.of(inputString.get(i));
     }
 
     private Digit getNextDigit(int i) {
