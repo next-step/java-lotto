@@ -43,6 +43,10 @@ public class Numbers {
                           .count();
     }
 
+    public boolean contains(Number number) {
+        return this.values.contains(number);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

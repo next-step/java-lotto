@@ -3,7 +3,6 @@ package me.namuhuchutong.lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
-
 import me.namuhuchutong.lotto.domain.Lotto;
 import me.namuhuchutong.lotto.domain.LottoWinnings;
 import me.namuhuchutong.lotto.domain.Number;
@@ -31,9 +30,10 @@ class LottoTest {
                 new Number(6)
         );
         Numbers numbers1 = new Numbers(given1);
-        
+        Number bonus = new Number(7);
+
         // when
-        LottoResult matchNumbers = lotto.getMatchNumbers(numbers1);
+        LottoResult matchNumbers = lotto.getMatchNumbers(numbers1, bonus);
         long result = matchNumbers.getWinnings(minimumCount);
 
         //then

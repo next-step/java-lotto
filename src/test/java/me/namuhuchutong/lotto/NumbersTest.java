@@ -3,11 +3,12 @@ package me.namuhuchutong.lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
-
 import me.namuhuchutong.lotto.domain.Number;
 import me.namuhuchutong.lotto.domain.Numbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class NumbersTest {
 
@@ -89,5 +90,50 @@ class NumbersTest {
 
         //then
         assertThat(result).isEqualTo(expected);
+    }
+    
+    @DisplayName("기존에 가지고 있던 Number와 동일한 Number가 있다면 true를 반환한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {1,2,3,4,5,6})
+    void return_true_when_numbers_already_had_one(int given) {
+        //given
+        List<Number> givenNumbers = List.of(
+                new Number(1),
+                new Number(2),
+                new Number(3),
+                new Number(4),
+                new Number(5),
+                new Number(6)
+        );
+        Number newNumber = new Number(given);
+        Numbers numbers = new Numbers(givenNumbers);
+
+        //when
+        boolean result = numbers.contains(newNumber);
+
+        //then
+        assertThat(result).isEqualTo(true);
+    }
+
+    @DisplayName("기존에 가지고 있던 Number와 동일한 Number가 없다면 false를 반환한다.")
+    @Test
+    void return_false_when_numbers_do_not_have_one() {
+        //given
+        List<Number> givenNumbers = List.of(
+                new Number(1),
+                new Number(2),
+                new Number(3),
+                new Number(4),
+                new Number(5),
+                new Number(6)
+        );
+        Number newNumber = new Number(7);
+        Numbers numbers = new Numbers(givenNumbers);
+
+        //when
+        boolean result = numbers.contains(newNumber);
+
+        //then
+        assertThat(result).isEqualTo(false);
     }
 }

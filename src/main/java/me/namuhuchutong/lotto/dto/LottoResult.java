@@ -23,6 +23,7 @@ public class LottoResult {
         return lottoResult.keySet()
                           .stream()
                           .filter(filterMinimumCount(minimumCount))
+                          .filter(count -> this.lottoResult.get(count).size() > 0)
                           .mapToLong(LottoWinnings::valueOfCount)
                           .sum();
     }
@@ -31,6 +32,7 @@ public class LottoResult {
         return lottoResult.keySet()
                           .stream()
                           .filter(filterMinimumCount(minimumCount))
+                          .filter(count -> this.lottoResult.get(count).size() > 0)
                           .map(buildMatchNumberAndCount())
                           .collect(Collectors.toList());
     }

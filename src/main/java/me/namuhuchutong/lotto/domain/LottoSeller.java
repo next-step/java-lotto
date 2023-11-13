@@ -17,7 +17,7 @@ public class LottoSeller {
         validateAmount(amount);
         int times = amount / 1000;
         Lotto lotto = Lotto.create(times, generator);
-        return lotto.getMatchNumbers(information.getNumbers());
+        return lotto.getMatchNumbers(information.getNumbers(), information.getBonusNumber());
     }
 
     private void validateAmount(int amount) {
