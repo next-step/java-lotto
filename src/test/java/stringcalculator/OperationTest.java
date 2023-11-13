@@ -8,20 +8,20 @@ public class OperationTest {
     @Test
     @DisplayName("두 수를 더 할 수 있다.")
     public void addition() {
-        Number result = Operation.addition(4, 5);
+        int result = Operation.addition(4, 5);
         Assertions.assertThat(result).isEqualTo(9);
     }
 
     @Test
     @DisplayName("두 수를 뺄 수 있다.")
     public void subtraction() {
-        Number result = Operation.subtraction(4, 5);
+        int result = Operation.subtraction(4, 5);
         Assertions.assertThat(result).isEqualTo(-1);
     }
     @Test
     @DisplayName("두 수를 곱 할 수 있다.")
     public void multiply() {
-        Number result = Operation.multiply(4, 5);
+        int result = Operation.multiply(4, 5);
         Assertions.assertThat(result).isEqualTo(20);
     }
 }
