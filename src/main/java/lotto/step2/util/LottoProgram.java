@@ -12,6 +12,10 @@ import java.util.List;
 public class LottoProgram {
     public static final int LOTTO_PRICE = 1000;
 
+    private LottoProgram() {
+        throw new IllegalStateException("Service class");
+    }
+
     public static void start() {
         final UserInput input = InputView.inputPurchaseAmount();
         final int purchaseAmount = input.getPurchaseAmount();

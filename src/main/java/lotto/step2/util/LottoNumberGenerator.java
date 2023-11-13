@@ -11,6 +11,10 @@ public class LottoNumberGenerator {
         }
     }
 
+    private LottoNumberGenerator() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static Set<Integer> generateLottoNumbers() {
         Collections.shuffle(LOTTO_NUMBERS);
 

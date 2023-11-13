@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoProgramManager {
+    private LottoProgramManager() {
+        throw new IllegalStateException("Service class");
+    }
+
     public static int calculateNumberOfLottos(final int purchaseAmount, final int lottoPrice) {
         return purchaseAmount / lottoPrice;
     }

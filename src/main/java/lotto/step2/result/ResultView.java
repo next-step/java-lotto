@@ -6,6 +6,10 @@ import lotto.step2.domain.LottoResults;
 import java.util.List;
 
 public class ResultView {
+    private ResultView() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static void printLottos(List<Lotto> lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
 
