@@ -11,8 +11,7 @@ public class Lotto {
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> numbers) {
-        this.lottoNumbers = new LinkedHashSet<>();
-        lottoNumbers.addAll(numbers);
+        this.lottoNumbers = new LinkedHashSet<>(numbers);
         validateSize(lottoNumbers);
     }
 
