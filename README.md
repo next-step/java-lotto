@@ -17,10 +17,10 @@
 - 예를 들어 2 = 3 * 4 / 2와 같은 문자열을 입력할 경우 실행결과인 10을 출력해야 한다.
 
 ## Operation
-* [ ] 두 수를 더 할 수 있다. - addition
-* [ ] 두 수를 뺄 수 있다. - subtraction
-* [ ] 두 수를 나눌 수 있다. - division
-* [ ] 두 수를 곱 할 수 있다. - multiply
+* [X] 두 수를 더 할 수 있다. - addition
+* [X] 두 수를 뺄 수 있다. - subtraction
+* [X] 두 수를 나눌 수 있다. - division
+* [X] 두 수를 곱 할 수 있다. - multiply
 
 ## StringCalculator
 * [ ] 입력 값을 받아 사칙연산을 할 수 있다.
