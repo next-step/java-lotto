@@ -1,7 +1,6 @@
 
 
 public class Calculator {
-    int result = 0;
     private Numbers numbers = new Numbers();
     private Operations operations = new Operations();
 
@@ -11,8 +10,7 @@ public class Calculator {
         }
         String[] splitInput = input.split(" ");
         checkSplitInput(splitInput);
-        result = sum();
-        return result;
+        return sum();
     }
 
     private void checkSplitInput(String[] splitInput) {
