@@ -5,7 +5,6 @@ import lotto.domain.LottoNumber;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class RandomLottoNumberStrategy implements LottoNumberStrategy {
 
@@ -13,28 +12,26 @@ public class RandomLottoNumberStrategy implements LottoNumberStrategy {
     private static final int MAX_NUMBER = 45;
     private static final int MIN_NUMBER_COUNT = 0;
     private static final int MAX_NUMBER_COUNT = 6;
-    private final List<Integer> numbers;
+    private static final List<LottoNumber> numbers;
 
-    public RandomLottoNumberStrategy() {
-        List<Integer> list = new ArrayList<>();
+    static {
+        List<LottoNumber> list = new ArrayList<>();
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            list.add(i);
+            list.add(LottoNumber.valueOf(i));
         }
-        this.numbers = list;
+        numbers = list;
     }
 
     @Override
     public List<LottoNumber> create() {
-        List<Integer> list = new ArrayList<>(createRandomNumbers());
+        List<LottoNumber> list = new ArrayList<>(createRandomNumbers());
         Collections.sort(list);
 
-        return list.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+        return List.copyOf(list);
 
     }
 
-    protected List<Integer> createRandomNumbers() {
+    protected List<LottoNumber> createRandomNumbers() {
         Collections.shuffle(numbers);
         return numbers.subList(MIN_NUMBER_COUNT, MAX_NUMBER_COUNT);
     }
