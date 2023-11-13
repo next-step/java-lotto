@@ -23,4 +23,14 @@ public class InputTest {
 		}).isInstanceOf(IllegalArgumentException.class);
 	}
 
+	@Test
+	@DisplayName("사칙연산 기호가 아닌 경우 IllegalArgumentException throw")
+	void not_operator() {
+		assertThatThrownBy(() -> {
+			new Calculator(Arrays.asList("1", "@", "3"));
+		}).isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> {
+			new Calculator(Arrays.asList("1", "$", "3"));
+		}).isInstanceOf(IllegalArgumentException.class);
+	}
 }

@@ -8,8 +8,8 @@ public class Calculator {
 	private final Stack<String> inputs;
 	private final OperatorMap map;
 
-	public Calculator(List<String> inputs) throws IllegalArgumentException{
-		if (isEmpty(inputs)) {
+	public Calculator(List<String> inputs) throws IllegalArgumentException {
+		if (validation(inputs)) {
 			throw new IllegalArgumentException();
 		}
 		map = new OperatorMap();
@@ -19,8 +19,16 @@ public class Calculator {
 		}
 	}
 
+	private boolean validation(List<String> inputs) {
+		return isEmpty(inputs) || isOperator(inputs);
+	}
+
 	private boolean isEmpty(List<String> inputs) {
 		return inputs == null || inputs.size() == 0 || inputs.contains(" ");
+	}
+
+	private boolean isOperator(List<String> inputs) {
+		return !(inputs.contains("+") || inputs.contains("-") || inputs.contains("*") || inputs.contains("/"));
 	}
 
 	public int next() {
