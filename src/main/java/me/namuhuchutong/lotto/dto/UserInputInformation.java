@@ -1,11 +1,13 @@
 package me.namuhuchutong.lotto.dto;
 
-import me.namuhuchutong.lotto.domain.Number;
-import me.namuhuchutong.lotto.domain.Numbers;
-
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import me.namuhuchutong.lotto.domain.Number;
+import me.namuhuchutong.lotto.domain.Numbers;
 
 public class UserInputInformation {
 
@@ -16,11 +18,42 @@ public class UserInputInformation {
 
     private final String numbers;
 
+    private final int bonusNumber;
+
     public UserInputInformation(int amount, String numbers) {
         validateZeroOrNegative(amount);
         validateNonNumeric(numbers);
         this.amount = amount;
         this.numbers = numbers;
+        this.bonusNumber = 0;
+    }
+
+    public UserInputInformation(int amount, String numbers, int bonusNumber) {
+        validateZeroOrNegative(amount);
+        validateNonNumeric(numbers);
+        this.amount = amount;
+        this.numbers = numbers;
+        validateBonusNumber(bonusNumber);
+        this.bonusNumber = bonusNumber;
+    }
+
+    private void validateBonusNumber(int bonusNumber) {
+        validateExceedNumber(bonusNumber);
+        validateDuplicatedNumbers(bonusNumber);
+    }
+
+    private void validateDuplicatedNumbers(int bonusNumber) {
+        String[] split = this.numbers.split(INPUT_NUMBER_REGEX);
+        Set<String> numberSet = new HashSet<>(Arrays.asList(split));
+        if (numberSet.contains(String.valueOf(bonusNumber))) {
+            throw new IllegalArgumentException("보너스 넘버는 기존 입력된 넘버와 중복될 수 없습니다.");
+        }
+    }
+
+    private void validateExceedNumber(int bonusNumber) {
+        if (bonusNumber < 1 || bonusNumber > 45) {
+            throw new IllegalArgumentException("보너스 넘버는 1~45를 넘을 수 없습니다.");
+        }
     }
 
     private void validateNonNumeric(String numbers) {
@@ -46,5 +79,9 @@ public class UserInputInformation {
                                      .map(character -> new Number(Integer.parseInt(character)))
                                      .collect(Collectors.toUnmodifiableList());
         return new Numbers(collect);
+    }
+
+    public int getBonusNumber() {
+        return this.bonusNumber;
     }
 }

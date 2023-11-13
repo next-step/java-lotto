@@ -58,4 +58,30 @@ class UserInputInformationTest {
         //then
         assertThat(information.getNumbers()).isEqualTo(expected);
     }
+
+    @DisplayName("보너스 번호는 입력된 번호들과 중복되면 안 된다.")
+    @ParameterizedTest
+    @ValueSource(ints = {1,2,3,4,5,6})
+    void bonus_number_should_not_be_duplicated_with_existing_numbers(int bonus) {
+        //given
+        String given = "1, 2, 3, 4, 5, 6";
+        int amount = 1;
+
+        //when, then
+        assertThatThrownBy(() -> new UserInputInformation(amount,given, bonus))
+                .isInstanceOf(IllegalArgumentException.class);
+
+    }
+
+    @DisplayName("보너스 넘버는 1~45 범위를 넘을 수 없다.")
+    @ParameterizedTest
+    @ValueSource(ints = {0, 46})
+    void bonus_number_should_not_exceed_1_to_45(int bonus) {
+        String given = "1, 2, 3, 4, 5, 6";
+        int amount = 1;
+
+        //when, then
+        assertThatThrownBy(() -> new UserInputInformation(amount,given, bonus))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

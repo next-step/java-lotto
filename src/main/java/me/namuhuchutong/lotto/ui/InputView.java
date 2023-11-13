@@ -7,21 +7,30 @@ public class InputView {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public String InputNumbers() {
+    public int inputBonusNumber() {
+        printMessage("보너스 번호를 입력하세요.");
+        return inputNumber();
+    }
+
+    public String inputNumbers() {
         printMessage("당첨 번호를 입력하세요.");
         return scanner.nextLine();
     }
 
     public int inputAmount() {
         printMessage("금액을 입력하세요.");
-        int amount = 0;
+        return inputNumber();
+    }
+
+    private int inputNumber() {
+        int number;
         try {
-            amount = scanner.nextInt();
+            number = scanner.nextInt();
             cleanBuffer();
         } catch (InputMismatchException exception) {
             throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
         }
-        return amount;
+        return number;
     }
 
     private void cleanBuffer() {
