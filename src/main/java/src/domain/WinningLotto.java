@@ -1,24 +1,25 @@
 package src.domain;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class WinningLotto {
 
-    private final List<GameNumber> gameNumbers;
+    private final List<GameNumber> winningNumbers;
 
-    public WinningLotto(List<GameNumber> gameNumbers) {
-        this.gameNumbers = gameNumbers;
+    public WinningLotto(List<GameNumber> winningNumbers) {
+        this.winningNumbers = winningNumbers;
     }
 
     public Place match(List<GameNumber> gameNumbers) {
-        int matchCount = 0;
+        Map<Boolean, Integer> matchStatus = new HashMap<>(2);
 
         for (GameNumber gameNumber: gameNumbers) {
-            if (gameNumbers.contains(gameNumber)) {
-                matchCount += 1;
-            }
+            Integer value = matchStatus.getOrDefault(winningNumbers.contains(gameNumber), 0);
+            matchStatus.put(winningNumbers.contains(gameNumber), value + 1);
         }
 
-        return Place.byMatchedCount(matchCount);
+        return Place.byMatchedCount(matchStatus.get(Boolean.TRUE));
     }
 }
