@@ -23,4 +23,10 @@ public class OperatorTest {
         int actual = Operator.multiply(3, 5);
         assertThat(actual).isEqualTo(15);
     }
+
+    @Test
+    void 나눗셈() {
+        int actual = Operator.division(10, 5);
+        assertThat(actual).isEqualTo(2);
+    }
 }

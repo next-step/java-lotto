@@ -12,4 +12,8 @@ public class Operator {
     public static int multiply(int i, int j) {
         return i * j;
     }
+
+    public static int division(int i, int j) {
+        return i / j;
+    }
 }
