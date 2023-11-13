@@ -12,7 +12,7 @@ public class InputView {
 
     public static String inputString() {
         System.out.println("사칙연산 문자열을 입력해 주세요. 예) 2 + 3 * 4 / 2 ");
-        String inputString = String.valueOf(scanner.nextInt());
+        String inputString = String.valueOf(scanner.nextLine());
         validateInput(inputString);
         return inputString;
     }
