@@ -2,8 +2,6 @@ package src.domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -14,9 +12,9 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine(new LottoGameNumberGenerator());
         Money money = new Money(1000);
 
-        List<Lotto> lottos = lottoMachine.buyLottos(money);
+        Lottos lottos = lottoMachine.buyLottos(money);
 
-        assertThat(lottos).hasSize(1);
+        assertThat(lottos.size()).isEqualTo(1);
     }
 
     @Test

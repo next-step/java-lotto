@@ -9,7 +9,7 @@ public class LottoGameNumberGenerator {
 
     public Set<GameNumber> gameNumbers() {
         Set<GameNumber> gameNumbers = new HashSet<>(LOTTO_NUMBER_COUNT);
-        for (int idx = 0; idx < LOTTO_NUMBER_COUNT; idx++) {
+        while (gameNumbers.size() < LOTTO_NUMBER_COUNT) {
             gameNumbers.add(GameNumber.random());
         }
 

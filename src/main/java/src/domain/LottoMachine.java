@@ -11,7 +11,7 @@ public class LottoMachine {
         this.gameNumberGenerator = gameNumberGenerator;
     }
 
-    public List<Lotto> buyLottos(Money money) {
+    public Lottos buyLottos(Money money) {
         int lottoCount = money.lottoCount(Lotto.PRICE_OF_LOTTO);
         checkAvailableForPurchase(lottoCount);
         List<Lotto> lottos = new ArrayList<>(lottoCount);
@@ -19,7 +19,7 @@ public class LottoMachine {
             lottos.add(buyLotto());
         }
 
-        return lottos;
+        return new Lottos(lottos);
     }
 
     private void checkAvailableForPurchase(int lottoCount) {
