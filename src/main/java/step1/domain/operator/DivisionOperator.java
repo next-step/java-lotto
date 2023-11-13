@@ -1,6 +1,6 @@
 package step1.domain.operator;
 
-public class DivideOperator implements Operator {
+public class DivisionOperator implements Operator {
 
     @Override
     public int operate(int fistNumber, int secondNumber) {
