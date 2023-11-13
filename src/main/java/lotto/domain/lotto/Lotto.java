@@ -10,19 +10,30 @@ public class Lotto {
     private final List<Integer> numbers;
 
     private Lotto(GenerateStrategy strategy) {
-        this.numbers = strategy.generate();
-        validation();
+        this.numbers = validate(strategy.generate());
+        ;
     }
 
-    private void validation() {
+    private List<Integer> validate(List<Integer> numbers) {
+        validateCount(numbers);
 
         for (Integer number : numbers) {
-            System.out.println("number = " + number);
-            if (number < LottoConstants.NUMBER_MIN || number > LottoConstants.NUMBER_MAX) {
-                throw new IllegalArgumentException(LottoConstants.NUMBER_ERROR_MESSAGE);
-            }
+            validateRange(number);
         }
 
+        return numbers;
+    }
+
+    private void validateCount(List<Integer> numbers) {
+        if (numbers.size() != LottoConstants.NUMBER_COUNT) {
+            throw new IllegalArgumentException(LottoConstants.NUMBER_COUNT_ERROR_MESSAGE);
+        }
+    }
+
+    private void validateRange(Integer number) {
+        if (number < LottoConstants.NUMBER_MIN || number > LottoConstants.NUMBER_MAX) {
+            throw new IllegalArgumentException(LottoConstants.NUMBER_ERROR_MESSAGE);
+        }
     }
 
     public static Lotto from(GenerateStrategy strategy) {

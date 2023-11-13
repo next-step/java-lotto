@@ -1,7 +1,6 @@
 package lotto.domain.lotto.strategy;
 
 import lotto.constants.LottoConstants;
-import lotto.domain.lotto.strategy.GenerateStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,7 @@ public class RandomStrategy implements GenerateStrategy {
     public List<Integer> generate() {
         List<Integer> numbers = new ArrayList<>();
 
-        for (int i = 0; i < LottoConstants.NUMBER_COUNT_MAX; i++) {
+        for (int i = 0; i < LottoConstants.NUMBER_COUNT; i++) {
             numbers.add(randomNumber());
         }
 

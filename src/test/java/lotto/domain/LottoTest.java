@@ -10,14 +10,18 @@ import java.util.Arrays;
 class LottoTest {
 
     @Test
-    @DisplayName("로또를 생성한다. 로또 번호는 1 ~ 45사이의 숫자이어여 한다. 아니면 예외가 발생한다")
+    @DisplayName("로또를 생성한다. 로또 번호는 1 ~ 45사이의 숫자이어여 하고 총 6자리 이어야 한다. 아니면 예외가 발생한다.")
     public void create(){
         Assertions.assertThatThrownBy(()-> {
             Lotto.from(() -> Arrays.asList(1, 2, 3, 4, 5, 46));
         }).isInstanceOf(IllegalArgumentException.class);
 
         Assertions.assertThatThrownBy(()-> {
-            Lotto.from(() -> Arrays.asList(-1, 2, 3, 4, 5, 45));
+            Lotto.from(() -> Arrays.asList(0, 2, 3, 4, 5, 45));
+        }).isInstanceOf(IllegalArgumentException.class);
+
+        Assertions.assertThatThrownBy(()-> {
+            Lotto.from(() -> Arrays.asList(1, 2, 3, 4, 5));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
