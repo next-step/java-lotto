@@ -15,8 +15,8 @@ public class Lotto {
         return new Lotto(strategy);
     }
 
-    public Winning match(Lotto target) {
-        long match = target.lottoNumbers.match(lottoNumbers);
+    public Winning match(Lotto jackpot) {
+        long match = jackpot.lottoNumbers.match(lottoNumbers);
         return Winning.of(match);
     }
 }
