@@ -1,7 +1,7 @@
-package token;
+package calculator.token;
 
-import number.Number;
-import operator.Operation;
+import calculator.number.Number;
+import calculator.operator.Operation;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

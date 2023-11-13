@@ -1,6 +1,6 @@
-package parse;
+package calculator.parse;
 
-import token.Tokens;
+import calculator.token.Tokens;
 
 import java.util.List;
 

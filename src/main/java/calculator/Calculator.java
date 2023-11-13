@@ -1,7 +1,9 @@
-import number.Number;
-import operator.Operation;
-import parse.Parser;
-import token.Tokens;
+package calculator;
+
+import calculator.number.Number;
+import calculator.operator.Operation;
+import calculator.parse.Parser;
+import calculator.token.Tokens;
 
 public class Calculator {
     public static final int calculate(String text) {

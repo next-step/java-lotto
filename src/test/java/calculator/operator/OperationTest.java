@@ -1,4 +1,4 @@
-package operator;
+package calculator.operator;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

@@ -1,4 +1,4 @@
-package number;
+package calculator.number;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

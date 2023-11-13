@@ -1,7 +1,7 @@
-package token;
+package calculator.token;
 
-import number.Number;
-import operator.Operation;
+import calculator.number.Number;
+import calculator.operator.Operation;
 
 import java.util.List;
 import java.util.Stack;

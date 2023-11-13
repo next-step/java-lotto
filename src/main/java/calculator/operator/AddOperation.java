@@ -1,4 +1,4 @@
-package operator;
+package calculator.operator;
 
 public class AddOperation implements Operation {
     private static final AddOperation instance = new AddOperation();

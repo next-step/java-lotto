@@ -1,4 +1,4 @@
-package operator;
+package calculator.operator;
 
 public class MultiplyOperation implements Operation {
     private static final MultiplyOperation instance = new MultiplyOperation();
