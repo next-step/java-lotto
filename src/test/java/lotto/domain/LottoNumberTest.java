@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 class LottoNumberTest {
 
     @Test
-    @DisplayName("정상적인 숫자로 LottoNumber를 생성시 정상 생성된다.")
+    @DisplayName("정상적인 숫자(1~45)로 LottoNumber를 생성시 정상 생성된다.")
     void createLottoNumber() {
         assertThat(new LottoNumber(1)).isEqualTo(new LottoNumber(1));
     }
