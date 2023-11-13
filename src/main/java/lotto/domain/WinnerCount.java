@@ -28,7 +28,7 @@ public class WinnerCount {
     public BigDecimal getReturnRate(final int purchaseAmount) {
         BigDecimal sum = BigDecimal.ZERO;
         for (Integer key : winnerCountMap.keySet()) {
-            final BigDecimal countPrice = CountPrice.priceOfCount(key);
+            final BigDecimal countPrice = Rank.priceOf(key);
 
             final BigDecimal count = new BigDecimal(winnerCountMap.get(key));
             sum = countPrice.multiply(count);
