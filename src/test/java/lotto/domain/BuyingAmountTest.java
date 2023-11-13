@@ -33,7 +33,7 @@ class BuyingAmountTest {
         BuyingAmount buyingAmount = new BuyingAmount(14000);
         ManualCount manualCount = new ManualCount(3, buyingAmount);
 
-        int actual = buyingAmount.units(manualCount);
+        int actual = buyingAmount.autoBuyingCount(manualCount);
         int expected = 11;
 
         assertThat(actual).isEqualTo(expected);

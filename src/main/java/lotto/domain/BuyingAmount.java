@@ -19,7 +19,7 @@ public class BuyingAmount {
         return amount % LOTTO_AMOUNT != 0;
     }
 
-    public int units(ManualCount manualCount) {
+    public int autoBuyingCount(ManualCount manualCount) {
         return manualCount.difference(amount / LOTTO_AMOUNT);
     }
 
