@@ -18,4 +18,10 @@ public class OperationTest {
         Number result = Operation.subtraction(4, 5);
         Assertions.assertThat(result).isEqualTo(-1);
     }
+    @Test
+    @DisplayName("두 수를 곱 할 수 있다.")
+    public void multiply() {
+        Number result = Operation.multiply(4, 5);
+        Assertions.assertThat(result).isEqualTo(20);
+    }
 }
