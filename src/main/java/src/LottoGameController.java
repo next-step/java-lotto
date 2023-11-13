@@ -5,13 +5,12 @@ import src.domain.Lotto;
 import src.domain.LottoGameNumberGenerator;
 import src.domain.LottoMachine;
 import src.domain.Lottos;
+import src.domain.MatchStatus;
 import src.domain.Money;
-import src.domain.Place;
 import src.view.InputView;
 import src.view.ResultView;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class LottoGameController {
@@ -25,7 +24,10 @@ public class LottoGameController {
 
         Lotto winningLotto = inputWinningLotto();
 
-        List<Place> match = lottos.match(winningLotto);
+        MatchStatus matchStatus = lottos.match(winningLotto);
+        double profitRate = matchStatus.profitRate(Lotto.PRICE_OF_LOTTO);
+        ResultView.printMatchResult(matchStatus, profitRate);
+
 
     }
 

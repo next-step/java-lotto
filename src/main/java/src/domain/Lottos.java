@@ -1,7 +1,9 @@
 package src.domain;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lottos {
 
@@ -11,13 +13,14 @@ public class Lottos {
         this.values = values;
     }
 
-    public List<Place> match(Lotto winningLotto) {
-        List<Place> places = new ArrayList<>();
+    public MatchStatus match(Lotto winningLotto) {
+        Map<Place, Integer> matchStatus = new EnumMap<>(Place.class);
         for (Lotto lotto: values) {
-            places.add(winningLotto.match(lotto));
+            Place place = winningLotto.match(lotto);
+            matchStatus.put(place, matchStatus.getOrDefault(place, 0) + 1);
         }
 
-        return places;
+        return MatchStatus.of(matchStatus);
     }
 
     public int size() {

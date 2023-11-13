@@ -1,9 +1,6 @@
 package src.view;
 
-import src.domain.Game;
-import src.domain.Games;
 import src.domain.Lotto;
-import src.domain.LottoV1;
 import src.domain.Lottos;
 import src.domain.MatchStatus;
 import src.domain.Place;
@@ -27,9 +24,9 @@ public final class ResultView {
         }
     }
 
-    public static void printMatchResult(LottoV1 lottoV1) {
-        printMatchStatus(lottoV1.matchStatus());
-        printProfitRate(lottoV1.profitRate());
+    public static void printMatchResult(MatchStatus matchStatus, double profitRate) {
+        printMatchStatus(matchStatus);
+        printProfitRate(profitRate);
     }
 
     private static void printMatchStatus(MatchStatus matchStatus) {
@@ -49,6 +46,6 @@ public final class ResultView {
     }
 
     private static void printProfitRate(double profitRate) {
-        System.out.println("총 수익률은 " + profitRate + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        System.out.println("총 수익률은 " + profitRate + "입니다.");
     }
 }

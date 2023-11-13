@@ -22,7 +22,7 @@ public class Lotto {
             matchStatus.put(numbers.contains(gameNumber), value + 1);
         }
 
-        return Place.byMatchedCount(matchStatus.get(Boolean.TRUE));
+        return Place.byMatchedCount(matchStatus.getOrDefault(Boolean.TRUE, 0));
     }
 
     @Override

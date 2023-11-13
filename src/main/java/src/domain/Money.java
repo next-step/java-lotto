@@ -8,12 +8,6 @@ public class Money {
         this.value = value;
     }
 
-    public LottoV1 buyLotto() {
-        int gameCount = value / LottoV1.LOTTO_PRICE;
-
-        return LottoV1.lotto(gameCount);
-    }
-
     public int lottoCount(int lottoPrice) {
         return value / lottoPrice;
     }
