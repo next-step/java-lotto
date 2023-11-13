@@ -4,8 +4,12 @@ public class Money {
 
     private final int value;
 
-    public Money(int value) {
+    private Money(int value) {
         this.value = value;
+    }
+
+    public static Money of(int value) {
+        return new Money(value);
     }
 
     public int lottoCount(int lottoPrice) {

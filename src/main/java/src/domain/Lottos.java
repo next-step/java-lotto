@@ -9,8 +9,12 @@ public class Lottos {
 
     private final List<Lotto> values;
 
-    public Lottos(List<Lotto> values) {
+    private Lottos(List<Lotto> values) {
         this.values = values;
+    }
+
+    public static Lottos of(List<Lotto> values) {
+        return new Lottos(values);
     }
 
     public MatchStatus match(Lotto winningLotto) {

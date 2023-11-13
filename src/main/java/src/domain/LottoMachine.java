@@ -19,7 +19,7 @@ public class LottoMachine {
             lottos.add(buyLotto());
         }
 
-        return new Lottos(lottos);
+        return Lottos.of(lottos);
     }
 
     private void checkAvailableForPurchase(int lottoCount) {
@@ -30,6 +30,6 @@ public class LottoMachine {
 
 
     private Lotto buyLotto() {
-        return new Lotto(gameNumberGenerator.gameNumbers());
+        return Lotto.of(gameNumberGenerator.gameNumbers());
     }
 }

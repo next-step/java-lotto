@@ -11,9 +11,9 @@ public enum Place {
     FOURTH_PLACE(3, 5_000),
     OTHER(2, 0);
 
-    final int matchedCount;
+    private final int matchedCount;
 
-    final double amount;
+    private final double amount;
 
     Place(int matchedCount, double amount) {
         this.matchedCount = matchedCount;

@@ -18,7 +18,7 @@ public class MatchStatus {
     public double profit() {
         double profit = 0.0;
         for (Map.Entry<Place, Integer> entry: status.entrySet()) {
-            profit += entry.getKey().amount * entry.getValue();
+            profit += entry.getKey().amount() * entry.getValue();
         }
 
         return profit;

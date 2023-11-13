@@ -10,8 +10,12 @@ public class Lotto {
 
     private final Set<GameNumber> numbers;
 
-    public Lotto(Set<GameNumber> numbers) {
+    private Lotto(Set<GameNumber> numbers) {
         this.numbers = numbers;
+    }
+
+    public static Lotto of(Set<GameNumber> numbers) {
+        return new Lotto(numbers);
     }
 
     public Place match(Lotto lotto) {

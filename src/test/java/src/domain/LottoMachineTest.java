@@ -10,7 +10,7 @@ class LottoMachineTest {
     @Test
     void 로또의_최소가격으로_로또를_구매할_수_있다() {
         LottoMachine lottoMachine = new LottoMachine(new LottoGameNumberGenerator());
-        Money money = new Money(1000);
+        Money money = Money.of(1000);
 
         Lottos lottos = lottoMachine.buyLottos(money);
 
@@ -20,7 +20,7 @@ class LottoMachineTest {
     @Test
     void 로또의_최소_가격보다_적은_돈으로는_구매할_수_없다() {
         LottoMachine lottoMachine = new LottoMachine(new LottoGameNumberGenerator());
-        Money money = new Money(0);
+        Money money = Money.of(0);
         int priceOfLotto = 1000;
 
         assertThatThrownBy(() -> lottoMachine.buyLottos(money))

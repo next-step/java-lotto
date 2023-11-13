@@ -16,7 +16,7 @@ import java.util.Set;
 public class LottoGameController {
 
     public static void main(String[] args) {
-        Money money = new Money(InputView.inputPurchasePrice());
+        Money money = Money.of(InputView.inputPurchasePrice());
 
         LottoMachine lottoMachine = new LottoMachine(new LottoGameNumberGenerator());
         Lottos lottos = lottoMachine.buyLottos(money);
@@ -43,6 +43,6 @@ public class LottoGameController {
             winningNumbers.add(GameNumber.of(number));
         }
 
-        return new Lotto(winningNumbers);
+        return Lotto.of(winningNumbers);
     }
 }
