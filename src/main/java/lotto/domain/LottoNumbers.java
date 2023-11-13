@@ -34,11 +34,7 @@ public class LottoNumbers {
     }
 
     public boolean isRight(int winningNumber) {
-        if (numbers.contains(winningNumber)) {
-            return true;
-        }
-
-        return false;
+        return numbers.contains(winningNumber);
     }
 
     @Override
