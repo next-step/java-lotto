@@ -11,4 +11,10 @@ public class OperatorTest {
         int actual = Operator.add(1, 3);
         assertThat(actual).isEqualTo(4);
     }
+
+    @Test
+    void 뺄셈() {
+        int actual = Operator.minus(5, 3);
+        assertThat(actual).isEqualTo(2);
+    }
 }

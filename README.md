@@ -12,8 +12,8 @@
 * [] 사용자 값 입력받기 
 * [] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
 * [] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
-* [] 덧셈
-* [] 뺄셈
+* [O] 덧셈
+* [O] 뺄셈
 * [] 곱셈
 * [] 나눗셈
 * [] 사칙연산의 계산 우선순위 X 입력 값에 따라 계산 순서 결정
