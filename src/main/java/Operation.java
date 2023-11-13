@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Map;
 
 public enum Operation {
     ADD("+") {
@@ -24,21 +26,21 @@ public enum Operation {
         }
     };
 
+    private static Map<String, Operation> OPERATION_MAP = new HashMap<>();
     private String operation;
 
     Operation(String operation) {
         this.operation = operation;
     }
 
-    public static Operation getOperationByElement(String element) {
-        if ("+".equals(element)) {
-            return Operation.ADD;
-        } else if ("-".equals(element)) {
-            return Operation.SUBTRACT;
-        } else if ("*".equals(element)) {
-            return Operation.MULTIPLY;
+    static {
+        for (Operation operation : values()) {
+            OPERATION_MAP.put(operation.operation, operation);
         }
-        return Operation.DIVIDE;
+    }
+
+    public static Operation getOperationByElement(String element) {
+        return OPERATION_MAP.get(element);
     }
 
     public abstract int apply(int number1, int number2);
