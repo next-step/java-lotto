@@ -7,3 +7,27 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+------
+# STEP 1
+## 기능 요구 사항
+### TODO
+* [ ] 사용자 입력 받기
+  * [ ] 입력값이 비어있을 경우 IllegalArgumentException throw
+  * [ ] 사칙연산 기호가 아닌 기호가 있는 경우 IllegalArgumentException throw
+  * [ ] 사칙연산 기호가 연속해서 있는 경우 IllegalArgumentException throw
+  * [ ] 사칙연산 기호가 식의 맨 앞이나 뒤에 위치하는 경우 IllegalArgumentException throw
+* [ ] 기호와 숫자 분리
+* [ ] 사칙연산 계산
+  * [ ] 덧셈
+  * [ ] 뺄셈
+  * [ ] 곱셈
+  * [ ] 나눗셈
+---
+### DONE
+
+
+### 프로그래밍 요구사항
+- indent 1단계로 사용
+- 메소드 길이 최대 10라인으로 제한
+- else 사용 금지
