@@ -14,8 +14,9 @@ public class Calculator {
     }
 
     public Number divide(Number left, Number right) {
-        if (right.value() == 0)
+        if (right.value() == 0) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        }
         return new Number(left.value() / right.value());
     }
 }

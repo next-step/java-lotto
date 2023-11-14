@@ -29,17 +29,26 @@ public class StringCalculator {
 
     private static Number doOperation(Number left, Operator op, Number right) {
         Calculator calculator = new Calculator();
-        if (op.isAdd()) return calculator.add(left, right);
-        if (op.isSubtract()) return calculator.subtract(left, right);
-        if (op.isMultiply()) return calculator.multiply(left, right);
-        if (op.isDivide()) return calculator.divide(left, right);
+        if (op.isAdd()) {
+            return calculator.add(left, right);
+        }
+        if (op.isSubtract()) {
+            return calculator.subtract(left, right);
+        }
+        if (op.isMultiply()) {
+            return calculator.multiply(left, right);
+        }
+        if (op.isDivide()) {
+            return calculator.divide(left, right);
+        }
 
         throw new IllegalArgumentException();
     }
 
     private static void validateStringOperation(String strOperation) {
-        if (isNullOrEmptyString(strOperation))
+        if (isNullOrEmptyString(strOperation)) {
             throw new IllegalArgumentException("사칙연산을 입력해주세요.");
+        }
     }
 
     private static boolean isNullOrEmptyString(String strOperation) {

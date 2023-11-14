@@ -11,8 +11,9 @@ public class Operator {
     }
 
     private void validate(String op) {
-        if (!fourOperators.contains(op))
+        if (!fourOperators.contains(op)) {
             throw new IllegalArgumentException();
+        }
     }
 
     public boolean isAdd() {
