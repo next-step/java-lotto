@@ -17,9 +17,17 @@ public class WinningNumbersTest {
     }
 
     @Test
-    @DisplayName("당첨번호를 만들때 로또넘버가 7개가 아닌 경우 예외")
-    void createException() {
+    @DisplayName("당첨번호를 만들때 로또넘버가 7개가 아닌 경우 예외 처리")
+    void createNumberCountCheck() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> WinningNumbers.of(lottoFixture(1,2,3,4,5,6,7), LottoNumber.of(8, true)));
+                .isThrownBy(() -> WinningNumbers.of(lottoFixture(1,2,3,4,5,6,7), LottoNumber.of(7, true)));
+    }
+
+
+    @Test
+    @DisplayName("당첨번호를 만들때 중복되는 번호가 있는 경우 예외 처리")
+    void createSameNumberCheck() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> WinningNumbers.of(lottoFixture(1,2,3,4,5,6), LottoNumber.of(6, true)));
     }
 }
