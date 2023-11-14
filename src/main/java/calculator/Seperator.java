@@ -1,12 +1,12 @@
 package calculator;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Seperator {
 
     private static final String DELIMITER = " ";
     private static final String OPERATOR = "[+\\-*/]";
+    private static final Pattern BASIC = Pattern.compile(OPERATOR);
 
     public String[] split(String text) {
         if (text.isBlank()) {
@@ -16,11 +16,10 @@ public class Seperator {
     }
 
     public boolean isOperator(String text) {
-        Matcher m = Pattern.compile(OPERATOR).matcher(text);
-        if (m.find()) {
+        if (BASIC.matcher(text).find()) {
             return true;
         }
-        if (!m.find()) {
+        if (!BASIC.matcher(text).find()) {
             throw new IllegalArgumentException("Not a right operator");
         }
         return false;

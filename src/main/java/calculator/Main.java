@@ -1,19 +1,22 @@
 package calculator;
 
-import java.util.Scanner;
-
 public class Main {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("계산식을 입력하시오(숫자와 사칙 연산 사이에는 반드시 빈 공백이 있어야 함)");
-        String input = scanner.nextLine();
+        View view = new View();
 
-        calculation(new Seperator().split(input));
+        //계산식 입력
+        String input = view.getString();
+
+        //입력 문자열 분리 & 계산
+        Integer result = calculation(new Seperator().split(input));
+
+        //결과 출력
+        view.getResult(result);
     }
 
-    private static void calculation(String[] text) {
+    private static Integer calculation(String[] text) {
         Operator operator = new Operator();
         Seperator seperator = new Seperator();
         Integer result = Integer.parseInt(text[0]);
@@ -23,6 +26,6 @@ public class Main {
             result = operator.operation(text[2 * i - 1], String.valueOf(result), text[2 * i]);
         }
 
-        System.out.println("= " + result);
+        return result;
     }
 }

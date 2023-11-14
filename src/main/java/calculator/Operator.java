@@ -1,23 +1,20 @@
 package calculator;
 
-import java.util.Objects;
+import java.util.Arrays;
 
 public class Operator {
 
     public Integer operation(String operator, String number1, String number2) {
-        if (Objects.equals(operator, "+")) {
-            return add(number1, number2);
-        }
-        if (Objects.equals(operator, "-")) {
-            return sub(number1, number2);
-        }
-        if (Objects.equals(operator, "*")) {
-            return mul(number1, number2);
-        }
-        if (Objects.equals(operator, "/")) {
-            return div(number1, number2);
-        }
-        return null;
+        return getResult(operator, number1, number2);
+    }
+
+    private Integer getResult(String operator, String number1, String number2) {
+        Basic basic = Arrays.stream(Basic.values())
+                .filter(o -> o.getOperator().equals(operator))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
+
+        return basic.function.apply(number1, number2);
     }
 
     public int add(String number1, String number2) {
