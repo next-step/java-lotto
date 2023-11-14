@@ -23,9 +23,9 @@ class LottosTest {
                 entry(1, List.of(new Lotto(new LottoNumbers(new TestLottoGenerator(lottoNumbers)))))
         ));
 
-        Map<Long, Long> lottoStat = lottos.winCounts(winLottoNumbers);
+        LottoResult lottoResult = lottos.winCounts(winLottoNumbers);
 
-        assertThat(lottoStat).hasSize(4)
+        assertThat(lottoResult.getLottoResult()).hasSize(4)
                 .contains(
                         entry(matchCount, winCount)
                 );

@@ -25,8 +25,9 @@ public class LottoMain {
 
         List<Integer> winningLottoNumbers = StringParser.parseToInts(inputView.inputWinningNumber());
 
-        LottoStatistics lottoStatistics = new LottoStatistics();
-        List<LottoWinResult> lottoWinResults = lottoStatistics.statistics(lottos.winCounts(winningLottoNumbers));
+        LottoResult lottoResult = lottos.winCounts(winningLottoNumbers);
+
+        List<LottoWinResult> lottoWinResults = lottoResult.lottoStatistics();
         outputView.printLottoResultInfo();
         outputView.printLottoResult(lottoWinResults);
 

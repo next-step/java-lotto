@@ -10,7 +10,7 @@ import static java.util.Map.entry;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.tuple;
 
-class LottoStatisticsTest {
+class LottoResultTest {
 
     @Test
     @DisplayName("로또 결과를 기준으로 당첨 통계를 구한다.")
@@ -22,8 +22,8 @@ class LottoStatisticsTest {
                 entry(6L, 1L)
         );
 
-        LottoStatistics lottoStatistics = new LottoStatistics();
-        List<LottoWinResult> lottoWinResults = lottoStatistics.statistics(lottoResults);
+        LottoResult lottoResult = new LottoResult(lottoResults);
+        List<LottoWinResult> lottoWinResults = lottoResult.lottoStatistics();
 
         assertThat(lottoWinResults).hasSize(4)
                 .extracting("machCount", "prizeAmount", "winCount")

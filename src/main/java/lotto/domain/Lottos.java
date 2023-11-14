@@ -11,7 +11,7 @@ public class Lottos {
         this.lottos = new HashMap<>(lottos);
     }
 
-    public Map<Long, Long> winCounts(List<Integer> winLottoNumbers) {
+    public LottoResult winCounts(List<Integer> winLottoNumbers) {
         Map<Long, Long> initLottoResults = Stream.of(3L, 4L, 5L, 6L)
                 .collect(Collectors.toMap(matchCount -> matchCount, matchCount -> 0L));
 
@@ -24,7 +24,7 @@ public class Lottos {
 
         finalLottoResult.forEach((matchCount, winCount) -> initLottoResults.merge(matchCount, winCount, Long::sum));
 
-        return initLottoResults;
+        return new LottoResult(initLottoResults);
     }
 
     public Map<Integer, List<Lotto>> getLottos() {
