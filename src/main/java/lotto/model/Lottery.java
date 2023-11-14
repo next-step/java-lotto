@@ -11,5 +11,12 @@ public class Lottery {
         this.lottos = lottos;
     }
 
+    public int checkForWin(int correctCount) {
+        return (int) lottos.stream()
+                .filter(lotto -> winnerNumbers.stream()
+                        .filter(number -> lotto.lottoNumbers().contains(number))
+                        .count() >= correctCount)
+                .count();
+    }
 
 }

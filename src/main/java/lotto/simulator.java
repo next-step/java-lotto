@@ -19,5 +19,8 @@ public class simulator {
         LottoOutput.viewLottoDetail(lottos);
         List<Integer> winnerNumbers = LottoInput.getWinningNumber();
         Lottery lottery = new Lottery(winnerNumbers, lottos);
+        for (int i = 3; i <= 6; i++) {
+            LottoOutput.viewLottoTotal(i, lottery.checkForWin(i));
+        }
     }
 }

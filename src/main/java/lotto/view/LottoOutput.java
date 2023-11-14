@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.model.Lotto;
+import lotto.model.constants.Dividend;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class LottoOutput {
         System.out.println();
     }
 
-    public static void viewLottoTotal() {
-
+    public static void viewLottoTotal(int correctCount, long count) {
+        System.out.println(count);
     }
 }
