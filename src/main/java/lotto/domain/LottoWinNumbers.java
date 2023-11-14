@@ -13,8 +13,8 @@ public class LottoWinNumbers {
         this.winningLottoNumbers = new ArrayList<>(winningLottoNumbers);
     }
 
-    public long matchCount(LottoGenerator lottoGenerator) {
-        return lottoGenerator.lotto().stream()
+    public long matchCount(List<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
                 .filter(winningLottoNumbers::contains)
                 .count();
     }

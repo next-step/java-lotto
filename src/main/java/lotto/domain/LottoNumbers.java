@@ -30,10 +30,8 @@ public class LottoNumbers {
                 .allMatch(number -> number >= MIN_NUMBER && number <= MAX_NUMBER);
     }
 
-    public long matchCount(List<Integer> winLottoNumbers) {
-        return numbers.stream()
-                .filter(winLottoNumbers::contains)
-                .count();
+    public long matchCount(LottoWinNumbers lottoWinNumbers) {
+        return lottoWinNumbers.matchCount(numbers);
     }
 
     @Override

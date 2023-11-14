@@ -34,7 +34,7 @@ class LottoNumbersTest {
     void success_lotto_match_count(List<Integer> inputLottoNumbers, List<Integer> winLottoNumbers, long expectCount) {
         LottoNumbers lottoNumbers = new LottoNumbers(new TestLottoGenerator(inputLottoNumbers));
 
-        long matchCount = lottoNumbers.matchCount(winLottoNumbers);
+        long matchCount = lottoNumbers.matchCount(new LottoWinNumbers(winLottoNumbers));
 
         assertThat(matchCount).isEqualTo(expectCount);
     }

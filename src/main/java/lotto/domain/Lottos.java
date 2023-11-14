@@ -15,14 +15,14 @@ public class Lottos {
         this.lottos = new HashMap<>(lottos);
     }
 
-    public LottoResult winCounts(List<Integer> winLottoNumbers) {
+    public LottoResult winCounts(LottoWinNumbers lottoWinNumbers) {
         Map<Long, Long> initLottoResults = LOTTO_MATCH_COUNTS.stream()
                 .collect(Collectors.toMap(matchCount -> matchCount, matchCount -> 0L));
 
         Map<Long, Long> finalLottoResult = lottos.values().stream()
                 .flatMap(List::stream)
                 .collect(Collectors.groupingBy(
-                        lotto -> lotto.matchCount(winLottoNumbers),
+                        lotto -> lotto.matchCount(lottoWinNumbers),
                         Collectors.counting()
                 ));
 

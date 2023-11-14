@@ -23,7 +23,7 @@ class LottosTest {
                 entry(1, List.of(new Lotto(new LottoNumbers(new TestLottoGenerator(lottoNumbers)))))
         ));
 
-        LottoResult lottoResult = lottos.winCounts(winLottoNumbers);
+        LottoResult lottoResult = lottos.winCounts(new LottoWinNumbers(winLottoNumbers));
 
         assertThat(lottoResult.getLottoResult()).hasSize(4)
                 .contains(
