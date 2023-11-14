@@ -59,5 +59,17 @@ public class StringCalculatorTest {
         assertThat(result).isEqualTo(10);
     }
 
+    @DisplayName("사칙연산 계산기")
+    @ParameterizedTest
+    @ValueSource(strings = {"2 - 2 * 5"})
+    public void test2_calculator(String text){
+
+        List<String> list = List.of(text.split(" "));
+
+        int result = Operator.calc(list);
+
+        assertThat(result).isEqualTo(0);
+    }
+
 
 }

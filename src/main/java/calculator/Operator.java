@@ -42,40 +42,30 @@ public enum Operator implements Operation{
 
     public abstract int calculator(int x, int y);
 
-    private static Operator getLabel(String value){
-
-        if ("+".equals(value)) {
-            return Operator.ADD;
-        } else if ("-".equals(value)) {
-            return Operator.SUBTRACT;
-        } else if ("*".equals(value)) {
-            return Operator.MULTIPLY;
-        } else if("/".equals(value)){
-            return Operator.DIVIDE;
-        }
-        return null;
-    }
 
     public static Operator valueOfLabel(String label) {
-        return getLabel(label);
+        return Arrays.stream(Operator.values())
+                .filter(oper -> oper.operator.equals(label))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public static int calc(List<String> list){
         number = 0;
         for(int i=0; i< list.size(); i++){
-            operatorCheck(list, i);
+            checkOperator(list, i);
         }
         return number;
     }
 
-    private static void operatorCheck(List<String> list, int i) {
+    private static void checkOperator(List<String> list, int i) {
         if(i%2 != 0){
             number = getNumber(list, number, i);
         }
     }
 
     private static int getNumber(List<String> list, int number, int i) {
-        if(number == 0) {
+        if(number == 0 && i == 1) {
             return Operator.valueOfLabel(list.get(i)).calculator(Integer.parseInt(list.get(i - 1)), Integer.parseInt(list.get(i + 1)));
         }
         return Operator.valueOfLabel(list.get(i)).calculator(number, Integer.parseInt(list.get(i + 1)));
