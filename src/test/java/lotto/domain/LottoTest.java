@@ -2,6 +2,8 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -57,5 +59,15 @@ class LottoTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(numbers))
                 .withMessage("로또의 번호 범위를 벗어났습니다.");
+    }
+
+    @ParameterizedTest(name = "(1, 2, 3, 4, 5, 6)의 로또에 보너스 숫자 {0}의 포함여부를 확인한다. 결과 : {1}")
+    @CsvSource({"1, true", "7, false"})
+    @DisplayName("6자리의 로또에 보너스 숫자가 포함되어 있는지 확인한다.")
+    void isContain(int bonusNumber, boolean expected) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(numbers);
+
+        assertThat(lotto.isContain(new LottoNumber(bonusNumber))).isEqualTo(expected);
     }
 }
