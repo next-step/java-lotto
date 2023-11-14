@@ -1,4 +1,5 @@
 import view.ResultView;
+import view.InputView;
 
 public class CalculatorMain {
 
@@ -8,7 +9,7 @@ public class CalculatorMain {
 
         int result = Calculator.doCalculate(inputValues);
 
-        ResultView.Result(result);
+        ResultView.result(result);
 
     }
 }
