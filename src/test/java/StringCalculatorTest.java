@@ -1,4 +1,5 @@
 import domain.Calculator;
+import domain.Operation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -104,5 +105,12 @@ public class StringCalculatorTest {
         int result = Calculator.calculateArithmetic(operandAndOperator);
 
         assertThat(result).isEqualTo(10);
+    }
+
+    @Test
+    void operationValueTest() {
+        for (Operation op : Operation.values()) {
+            System.out.println("op = " + op);
+        }
     }
 }

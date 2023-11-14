@@ -7,6 +7,7 @@ import static java.lang.Integer.parseInt;
 public class Calculator {
 
     private static int FIRST_OPERAND = 0;
+
     private Calculator() {
     }
 
@@ -14,24 +15,8 @@ public class Calculator {
 
         int sum = parseInt(operandsAndOperators[FIRST_OPERAND]);
         for (int i = 1; i < operandsAndOperators.length - 1; i += 2) {
-            sum = getSum(operandsAndOperators, sum, i);
-        }
-        return sum;
-    }
-
-    private static int getSum(String[] operandsAndOperators, int sum, int i) {
-        if (operandsAndOperators[i].equals("+")) {
-            Operation.ADD.calculate(sum, parseInt(operandsAndOperators[i + 1]));
-            return MathUtils.add(sum, parseInt(operandsAndOperators[i + 1]));
-        }
-        if (operandsAndOperators[i].equals("-")) {
-            return MathUtils.subtract(sum, parseInt(operandsAndOperators[i + 1]));
-        }
-        if (operandsAndOperators[i].equals("*")) {
-            return MathUtils.multiply(sum, parseInt(operandsAndOperators[i + 1]));
-        }
-        if (operandsAndOperators[i].equals("/")) {
-            return MathUtils.divide(sum, parseInt(operandsAndOperators[i + 1]));
+            Operation operation = Operation.fromSymbol(operandsAndOperators[i]);
+            sum = operation.calculate(sum, parseInt(operandsAndOperators[i + 1]));
         }
         return sum;
     }
