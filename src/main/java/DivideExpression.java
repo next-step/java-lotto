@@ -1,14 +1,14 @@
 public class DivideExpression implements CalculatorExpression{
 
-    private final int divisor;
-    private final int dividend;
+    private final CalculatorExpression divisor;
+    private final CalculatorExpression dividend;
 
-    public DivideExpression(int divisor, int dividend) {
+    public DivideExpression(CalculatorExpression divisor, CalculatorExpression dividend) {
         this.divisor = divisor;
         this.dividend = dividend;
     }
 
     public int calculate() {
-        return Math.round((float) dividend / divisor);
+        return Math.round((float) dividend.calculate() / divisor.calculate());
     }
 }

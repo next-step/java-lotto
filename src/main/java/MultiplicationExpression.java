@@ -1,14 +1,14 @@
 public class MultiplicationExpression implements CalculatorExpression {
 
-    private final int left;
-    private final int right;
+    private final CalculatorExpression left;
+    private final CalculatorExpression right;
 
-    public MultiplicationExpression(int left, int right) {
+    public MultiplicationExpression(CalculatorExpression left, CalculatorExpression right) {
         this.left = left;
         this.right = right;
     }
 
     public int calculate() {
-        return this.left * this.right;
+        return this.left.calculate() * this.right.calculate();
     }
 }

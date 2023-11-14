@@ -7,7 +7,7 @@ public class MinusExpressionTest {
     @DisplayName("뺄셈을 합니다.")
     @Test
     void minusCalculate(){
-        MinusExpression minusExpression = new MinusExpression(5, 2);
+        MinusExpression minusExpression = new MinusExpression(new VariableExpression('5'), new VariableExpression('2'));
         int result = minusExpression.calculate();
         Assertions.assertThat(result).isEqualTo(3);
     }
