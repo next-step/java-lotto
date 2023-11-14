@@ -10,8 +10,8 @@ public class Calculator {
 
     public static int calculate(String inputValue){
         String[] strList = splitText(inputValue);
-        ArrayList<Integer> valueList = filterValue(strList);
-        ArrayList<String> opsList = filterOps(strList);
+        List<Integer> valueList = filterValue(strList);
+        List<String> opsList = filterOps(strList);
 
         if (valueList.size() == 0){
             throw new IllegalArgumentException("연산 할 값이 없습니다.");
