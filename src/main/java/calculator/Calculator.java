@@ -41,32 +41,8 @@ public class Calculator {
         try {
             String operator = formulas[currentIdx++];
             int nextValue = Integer.parseInt(formulas[currentIdx++]);
-
-            if ("+".equals(operator)) {
-                currentResult += nextValue;
-                return;
-            }
-
-            if ("-".equals(operator)) {
-                currentResult -= nextValue;
-                return;
-            }
-
-            if ("*".equals(operator)) {
-                currentResult *= nextValue;
-                return;
-            }
-
-            if ("/".equals(operator)) {
-                currentResult /= nextValue;
-                return;
-            }
-
-            // 사칙연산 기호가 아닌 경우
-            throw new IllegalArgumentException(NOT_FOUR_BASIC_OPERATIONS.getMessage());
-
+            currentResult = Operator.calculate(currentResult, nextValue, operator);
         } catch (ArrayIndexOutOfBoundsException e) {
-
             // 미완성 수식 - 피연산자 부재
             throw new IllegalArgumentException(INCOMPLETED_FORMULA.getMessage());
         } catch (Exception e) {
