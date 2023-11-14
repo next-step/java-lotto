@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -13,13 +13,19 @@ public class LottoResult {
         this.lottos = lottos;
     }
 
-    public Map<Rank, Long> findWinningRanks() {
-        return Collections.unmodifiableMap(
-                this.lottos.getLottos()
-                        .stream()
-                        .map(this.winningLotto::match)
-                        .map(Rank::findRank)
-                        .filter(Rank::isWinningRank)
-                        .collect(Collectors.groupingBy(rank -> rank, Collectors.counting())));
+    public Map<Rank, Long> findWinningRankCont() {
+        return findWinningRanks().stream()
+                .filter(Rank::isWinningRank)
+                .collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
+    }
+
+    private List<Rank> findWinningRanks() {
+        return this.lottos.getLottos().stream()
+                .map(userLotto -> {
+                    int matchCount = this.winningLotto.match(userLotto);
+                    boolean isBonusWinning = this.winningLotto.isBonusWinning(userLotto);
+                    return Rank.findRank(matchCount, isBonusWinning);
+                })
+                .collect(Collectors.toList());
     }
 }

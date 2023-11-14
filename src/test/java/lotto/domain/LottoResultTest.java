@@ -14,14 +14,16 @@ class LottoResultTest {
     private LottoResult lottoResult;
 
     @Test
-    @DisplayName("1개의 4등 당첨 로또가 있기때문에 findWinningRanks를 할 경우 4등짜리 1개가 나온다.")
-    void findWinningRanks() {
+    @DisplayName("1개의 5등 당첨 로또가 있기때문에 findWinningRanks를 할 경우 5등짜리 1개가 나온다.")
+    void findWinningRankCont() {
         List<Lotto> lottos = Arrays.asList(new Lotto((Arrays.asList(1, 2, 3, 4, 5, 6))));
         Lotto winnigLotto = new Lotto((Arrays.asList(1, 2, 3, 10, 11, 12)));
-        this.lottoResult = new LottoResult(new WinningLotto(winnigLotto), new Lottos(lottos));
+        LottoNumber lottoNumber = new LottoNumber(7);
 
-        Map<Rank, Long> winningRanks = this.lottoResult.findWinningRanks();
+        this.lottoResult = new LottoResult(new WinningLotto(winnigLotto, lottoNumber), new Lottos(lottos));
 
-        assertThat(winningRanks).containsEntry(Rank.FOURTH, 1L);
+        Map<Rank, Long> winningRanks = this.lottoResult.findWinningRankCont();
+
+        assertThat(winningRanks).containsEntry(Rank.FIFTH, 1L);
     }
 }
