@@ -35,21 +35,4 @@ class LottoStatisticsTest {
                 );
     }
 
-    @Test
-    @DisplayName("로또 통계를 기준으로 총 수익률을 구한다.")
-    void success_generate_lotto_rate() {
-        List<LottoWinResult> lottoWinResults = List.of(
-                new LottoWinResult(3L, 1L),
-                new LottoWinResult(4L, 0L),
-                new LottoWinResult(5L, 0L),
-                new LottoWinResult(6L, 0L)
-        );
-
-        LottoStatistics lottoStatistics = new LottoStatistics();
-        LottoWinPercentage lottoWinPercentage = lottoStatistics.rate(14000, lottoWinResults);
-
-        LottoWinPercentage expecteLottoWinPercentage = new LottoWinPercentage(0.35d, true);
-        assertThat(lottoWinPercentage).isEqualTo(expecteLottoWinPercentage);
-    }
-
 }

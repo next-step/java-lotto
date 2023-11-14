@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LottoWinPercentage {
@@ -8,9 +9,26 @@ public class LottoWinPercentage {
     private double rate;
     private boolean isLowerStandard;
 
-    public LottoWinPercentage(double rate, boolean isLowerStandard) {
-        this.rate = rate;
-        this.isLowerStandard = isLowerStandard;
+    public LottoWinPercentage(int price, List<LottoWinResult> lottoWinResults) {
+        this.rate = calculateRate(price, lottoWinResults);
+        this.isLowerStandard = isLowerStandard(rate);
+    }
+
+    private double calculateRate(int price, List<LottoWinResult> lottoWinResults) {
+        int lottoSum = lottoSum(lottoWinResults);
+        return Math.floor((double) lottoSum / price * 100) / 100.0;
+    }
+
+    private int lottoSum(List<LottoWinResult> lottoWinResults) {
+        int sum = 0;
+        for (LottoWinResult lottoWinResult : lottoWinResults) {
+            sum += lottoWinResult.income();
+        }
+        return sum;
+    }
+
+    private boolean isLowerStandard(double rate) {
+        return rate < 1.0;
     }
 
     public double getRate() {

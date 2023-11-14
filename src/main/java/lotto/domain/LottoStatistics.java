@@ -16,22 +16,4 @@ public class LottoStatistics {
         return lottoResults;
     }
 
-    public LottoWinPercentage rate(int price, List<LottoWinResult> lottoWinResults) {
-        int lottoSum = lottoSum(lottoWinResults);
-        double rate = Math.floor((double) lottoSum / price * 100) / 100.0;
-        return new LottoWinPercentage(rate, isLowerStandard(rate));
-    }
-
-    private int lottoSum(List<LottoWinResult> lottoWinResults) {
-        int sum = 0;
-        for (LottoWinResult lottoWinResult : lottoWinResults) {
-            sum += lottoWinResult.income();
-        }
-        return sum;
-    }
-
-    private boolean isLowerStandard(double rate) {
-        return rate < 1.0;
-    }
-
 }

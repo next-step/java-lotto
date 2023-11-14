@@ -30,7 +30,7 @@ public class LottoMain {
         outputView.printLottoResultInfo();
         outputView.printLottoResult(lottoWinResults);
 
-        LottoWinPercentage lottoWinPercentage = lottoStatistics.rate(price, lottoWinResults);
+        LottoWinPercentage lottoWinPercentage = new LottoWinPercentage(price, lottoWinResults);
         outputView.printLottoRate(lottoWinPercentage);
     }
 }
