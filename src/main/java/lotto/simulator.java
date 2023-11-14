@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.controller.LottoInput;
+import lotto.model.Lottery;
 import lotto.model.Lotto;
 import lotto.view.LottoOutput;
 
@@ -16,5 +17,7 @@ public class simulator {
         LottoOutput.viewLottoCount(lottoCnt);
         List<Lotto> lottos = generateLotto(lottoCnt);
         LottoOutput.viewLottoDetail(lottos);
+        List<Integer> winnerNumbers = LottoInput.getWinningNumber();
+        Lottery lottery = new Lottery(winnerNumbers, lottos);
     }
 }
