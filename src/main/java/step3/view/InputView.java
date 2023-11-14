@@ -1,5 +1,6 @@
 package step3.view;
 
+import step3.cache.LottoNumberCache;
 import step3.domain.LottoNumber;
 import step3.domain.Lotto;
 
@@ -26,7 +27,7 @@ public class InputView {
         List<LottoNumber> lottoNumberList = Arrays.stream(scanner.nextLine().split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
-                .map(LottoNumber::of)
+                .map(LottoNumberCache::getLottoNumber)
                 .collect(Collectors.toList());
         return new Lotto(lottoNumberList);
 
