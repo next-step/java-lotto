@@ -22,6 +22,10 @@ public class Lottos {
         numberses.forEach(numbers -> lottos.add(new Lotto(numbers)));
     }
 
+    public int getNumOfLotto() {
+        return this.lottos.size();
+    }
+
     public RankCountGroup groupByRankCount(Numbers winningNumbers) {
         LotteryRank[] ranks = values();
 
