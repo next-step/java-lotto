@@ -17,6 +17,8 @@ public class LottoApp {
         ResultView.print(lottoGame.toString());
 
         String winningNumberText = InputView.inputWinningNumber();
+        int bonusNumber = InputView.inputBonusNumber();
+
         final Winning winner = lottoGame.draw(winningNumberText);
         ResultView.print(winner.toString());
 
