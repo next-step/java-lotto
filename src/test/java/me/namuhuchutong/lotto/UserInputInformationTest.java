@@ -17,12 +17,13 @@ class UserInputInformationTest {
     @Test
     void throw_exception_when_receives_non_numeric() {
         //given
+        String[] manual = {"a, 1, 2, 3, 4"};
         String given = "a, 1, 2, 3, 4";
         int amount = 1;
         int bonusNumber = 7;
 
         //when, then
-        assertThatThrownBy(() -> new UserInputInformation(amount, given, bonusNumber))
+        assertThatThrownBy(() -> new UserInputInformation(amount, manual, given, bonusNumber))
                   .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -31,11 +32,12 @@ class UserInputInformationTest {
     @ValueSource(ints = {-1, 0})
     void throw_exception_when_receives_zero_or_negative(int amount) {
         //given
+        String[] manual = {"a, 1, 2, 3, 4"};
         String given = "1, 2, 3, 4, 5, 6";
         int bonusNumber = 7;
 
         //when, then
-        assertThatThrownBy(() -> new UserInputInformation(amount, given, bonusNumber))
+        assertThatThrownBy(() -> new UserInputInformation(amount, manual, given, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -43,6 +45,7 @@ class UserInputInformationTest {
     @Test
     void return_numbers_objects_when_receives_six_numbers_from_user() {
         //given
+        String[] manual = {"a, 1, 2, 3, 4"};
         String given = "1, 2, 3, 4, 5, 6";
         int amount = 1;
         int bonusNumber = 7;
@@ -56,7 +59,7 @@ class UserInputInformationTest {
                         new Number(6)));
 
         //when
-        UserInputInformation information = new UserInputInformation(amount, given, bonusNumber);
+        UserInputInformation information = new UserInputInformation(amount, manual, given, bonusNumber);
 
         //then
         assertThat(information.getNumbers()).isEqualTo(expected);
@@ -67,12 +70,27 @@ class UserInputInformationTest {
     @ValueSource(ints = {1,2,3,4,5,6})
     void bonus_number_should_not_be_duplicated_with_existing_numbers(int bonus) {
         //given
+        String[] manual = {"a, 1, 2, 3, 4"};
         String given = "1, 2, 3, 4, 5, 6";
         int amount = 1;
 
         //when, then
-        assertThatThrownBy(() -> new UserInputInformation(amount,given, bonus))
+        assertThatThrownBy(() -> new UserInputInformation(amount, manual, given, bonus))
                 .isInstanceOf(IllegalArgumentException.class);
 
+    }
+
+    @DisplayName("수동 로또는 숫자만 허용한다.")
+    @Test
+    void test() {
+        //given
+        String[] manual = {"a, 1, 2, 3, 4"};
+        String lastWinning = "1, 1, 2, 3, 4";
+        int amount = 2;
+        int bonusNumber = 7;
+
+        //when, then
+        assertThatThrownBy(() -> new UserInputInformation(amount, manual, lastWinning, bonusNumber))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

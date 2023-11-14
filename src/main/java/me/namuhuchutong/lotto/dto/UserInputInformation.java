@@ -16,15 +16,19 @@ public class UserInputInformation {
 
     private final int amount;
 
+    private final String[] manualNumbers;
+
     private final String numbers;
 
     private final int bonusNumber;
 
-    public UserInputInformation(int amount, String numbers, int bonusNumber) {
+    public UserInputInformation(int amount, String[] manualNumbers, String numbers, int bonusNumber) {
         validateZeroOrNegative(amount);
         validateNonNumeric(numbers);
+        validateNonNumeric(Arrays.toString(manualNumbers));
         this.amount = amount;
         this.numbers = numbers;
+        this.manualNumbers = manualNumbers;
         validateDuplicatedNumbers(bonusNumber);
         this.bonusNumber = bonusNumber;
     }

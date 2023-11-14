@@ -21,7 +21,7 @@ public class LottoController {
 
     public void start() {
         UserInputInformation inputInformation = new UserInputInformation(
-                inputView.inputAmount(), inputView.inputNumbers(), inputView.inputBonusNumber());
+                inputView.inputAmount(), inputView.inputManualLotto(), inputView.inputNumbers(), inputView.inputBonusNumber());
         LottoSeller lottoSeller = new LottoSeller(numberGenerator);
         LottoResult lottoResult = lottoSeller.sellLotto(inputInformation);
         outputView.showGeneratedLotto(lottoResult);

@@ -19,10 +19,11 @@ class LottoSellerTest {
     void throw_exception_when_can_not_buy_lotto() {
         //given
         int givenAmount = 999;
+        String[] manual = {"a, 1, 2, 3, 4"};
         String givenNumbers = "1, 2, 3, 4, 5, 6";
         int bonusNumber = 7;
         LottoSeller lottoSeller = new LottoSeller(() -> null);
-        UserInputInformation information = new UserInputInformation(givenAmount, givenNumbers, bonusNumber);
+        UserInputInformation information = new UserInputInformation(givenAmount, manual, givenNumbers, bonusNumber);
 
         //when, then
         assertThatThrownBy(() -> lottoSeller.sellLotto(information))
@@ -34,9 +35,10 @@ class LottoSellerTest {
     void if_5_numbers_and_bonus_number_matched_get_winnings() {
         //given
         int amount = 1000;
+        String[] manual = {"a, 1, 2, 3, 4"};
         String givenNumber = "1, 2, 3, 4, 5, 6";
         int bonusNumber = 7;
-        UserInputInformation information = new UserInputInformation(amount, givenNumber, bonusNumber);
+        UserInputInformation information = new UserInputInformation(amount, manual, givenNumber, bonusNumber);
         LottoSeller lottoSeller = new LottoSeller(new TestGenerator());
 
         //when
@@ -51,9 +53,10 @@ class LottoSellerTest {
     void five_matches_is_not_same_as_five_and_bonus_matches() {
         //given
         int amount = 2000;
+        String[] manual = {"a, 1, 2, 3, 4"};
         String givenNumber = "1, 2, 3, 4, 5, 6";
         int bonusNumber = 7;
-        UserInputInformation information = new UserInputInformation(amount, givenNumber, bonusNumber);
+        UserInputInformation information = new UserInputInformation(amount, manual, givenNumber, bonusNumber);
         LottoSeller lottoSeller = new LottoSeller(new TestGenerator());
         long expected = FIVE.getWinnings() + BONUS.getWinnings();
 
