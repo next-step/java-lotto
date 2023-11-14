@@ -1,6 +1,6 @@
-## 🚀 1단계 - 문자열 계산기
+# 🚀 1단계 - 문자열 계산기
 
-# 요구사항
+## 요구사항
 * 사용자 입력 view
   * [x] 사용자에게 값을 입력받는다.
   * [x] 입력값이 없는 경우 에러를 던진다.
@@ -20,10 +20,15 @@
   * [x] 사칙연산 기호가 아닐경우 에러를 던진다.
 
 
-# 프로그래밍 요구사항
+## 프로그래밍 요구사항
 * indent(들여쓰기) depth를 2단계에서 1단계로 줄여라.
 * depth의 경우 if문을 사용하는 경우 1단계의 depth가 증가한다. if문 안에 while문을 사용한다면 depth가 2단계가 된다.
 * 메소드의 크기가 최대 10라인을 넘지 않도록 구현한다.
 * method가 한 가지 일만 하도록 최대한 작게 만들어라.
 * else를 사용하지 마라.
+
+## 참고
+* 엘레강트 오브젝트 : -er 로 끝나는 이름을 사용하지 마세요
+* OOP : 디미터의 법칙(https://mangkyu.tistory.com/147)
+* 새로운 관점에 Operation Enum (https://www.javacodex.com/ENUMs/Calculator-using-enums-for-operations)
 

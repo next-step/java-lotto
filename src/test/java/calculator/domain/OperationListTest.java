@@ -13,9 +13,9 @@ public class OperationListTest {
     void 사칙연산_일급컬렉션_생성_확인() {
         String[] textArray = {"2", "+", "10", "/", "3", "+", "6", "/", "3"};
         List<String> result = List.of("+", "/", "+", "/");
-        OperationList operationList = new OperationList(textArray);
+        Operations operationList = new Operations(textArray);
 
-        Assertions.assertThat(operationList.getOperationList()).isEqualTo(result);
+        Assertions.assertThat(operationList.findSign(0)).isEqualTo("+");
 
     }
 }

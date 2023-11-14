@@ -6,9 +6,10 @@ import java.util.List;
 
 import static calculator.validation.Validation.checkNumber;
 
-public class NumberList {
+public class Numbers {
     private final List<Integer> list;
-    public NumberList(String[] textArray) {
+
+    public Numbers(String[] textArray) {
         this.list = separateNumber(textArray);
     }
 
@@ -21,15 +22,20 @@ public class NumberList {
     }
 
     private static void addNumber(String text, int i, List<Integer> result) {
-        if(isEven(i)) result.add(checkNumber(text));
+        if (isEven(i)) result.add(checkNumber(text));
     }
 
     private static boolean isEven(int i) {
         return i % 2 == 0;
     }
 
-    public List<Integer> getNumberList() {
-        return Collections.unmodifiableList(list);
+
+    public int findNumber(int index) {
+        return list.get(index);
+    }
+
+    public int first(){
+        return list.get(0);
     }
 
 

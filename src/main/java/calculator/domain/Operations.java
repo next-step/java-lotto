@@ -6,10 +6,10 @@ import java.util.List;
 
 import static calculator.validation.Validation.checkFourBasicOperation;
 
-public class OperationList {
+public class Operations {
     private final List<String> list;
 
-    public OperationList(String[] textArray) {
+    public Operations(String[] textArray) {
         this.list = separateOperations(textArray);
     }
 
@@ -29,8 +29,12 @@ public class OperationList {
         return i % 2 == 1;
     }
 
-    public List<String> getOperationList() {
-        return Collections.unmodifiableList(list);
+    public String findSign(int index) {
+        return list.get(index);
+    }
+
+    public int size() {
+        return list.size();
     }
 
 }

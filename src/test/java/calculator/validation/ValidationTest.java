@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.*;
 public class ValidationTest {
 
     @Test
-    @DisplayName("문자열이 숫자인지 확인")
+    @DisplayName("문자열이 아니면 에러 발생")
     void 숫자확인() {
         String text = "A";
         assertThatThrownBy(() -> Validation.checkNumber(text))
@@ -20,7 +20,7 @@ public class ValidationTest {
     }
 
     @Test
-    @DisplayName("문자열이 사칙연산인지 확인")
+    @DisplayName("문자열이 사칙연산이 아니면 에러 발생")
     void 사칙연산_확인() {
         String text = "&";
         assertThatThrownBy(() -> Validation.checkFourBasicOperation(text))
