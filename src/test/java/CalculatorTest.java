@@ -1,43 +1,49 @@
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import stringCalculator.domain.Calculator;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
-    @DisplayName("사용자가 입력한 문자열에 따라 사칙연산을 수행할 수 있는 계산기를 구현")
+
+    @DisplayName("계산기에 +를 사용하먄 전달받은 두 수를 더한다.")
     @Test
-    void 사용자입력문자_사칙연산() {
-        Calculator calculator = new Calculator(Integer.parseInt("1"));
-        calculator.plus(Integer.parseInt("2"));
-        assertThat(calculator.getResult()).isEqualTo(3);
-        calculator.minus(Integer.parseInt("1"));
-        assertThat(calculator.getResult()).isEqualTo(2);
-        calculator.multiply(Integer.parseInt("4"));
-        assertThat(calculator.getResult()).isEqualTo(8);
-        calculator.divide(Integer.parseInt("4"));
-        assertThat(calculator.getResult()).isEqualTo(2);
-        calculator.clear();
-        assertThat(calculator.getResult()).isEqualTo(0);
+    void calculatorPlusTest() {
+        Calculator calculator = new Calculator();
+        assertThat(calculator.calculate("+", 1, 2)).isEqualTo(3);
+        assertThat(calculator.calculate("+", 3, 2)).isEqualTo(5);
     }
 
-    @DisplayName("입력 문자열의 숫자와 사칙 연산 사이에는 반드시 빈 공백 문자열이 있다고 가정")
+    @DisplayName("계산기에 -를 사용하면 전달받은 두 수를 뺀다.")
     @Test
-    void 사용자입력문자열_연산() {
-        String data = "1 + 2 - 1 * 3 / 3";
-        String[] dataArr = data.split(" ");
-        Calculator calculator = new Calculator(Integer.parseInt(dataArr[0]));
-        for (int i=1; i<dataArr.length; i+=2) {
-            if (dataArr[i].equals("+")) {
-                calculator.plus(Integer.parseInt(dataArr[i+1]));
-            } else if (dataArr[i].equals("-")) {
-                calculator.minus(Integer.parseInt(dataArr[i+1]));
-            } else if (dataArr[i].equals("*")) {
-                calculator.multiply(Integer.parseInt(dataArr[i+1]));
-            } else {
-                calculator.divide(Integer.parseInt(dataArr[i+1]));
-            }
-        }
-        assertThat(calculator.getResult()).isEqualTo(2);
+    void calculatorMinusTest() {
+        Calculator calculator = new Calculator();
+        assertThat(calculator.calculate("-", 2, 1)).isEqualTo(1);
+        assertThat(calculator.calculate("-", 5, 2)).isEqualTo(3);
+    }
+
+    @DisplayName("계산기에 *를 사용하면 전달받은 두 수를 곱한다.")
+    @Test
+    void calculatorMultiplyTest() {
+        Calculator calculator = new Calculator();
+        assertThat(calculator.calculate("*", 2, 1)).isEqualTo(2);
+        assertThat(calculator.calculate("*", 3, 2)).isEqualTo(6);
+    }
+
+    @DisplayName("계산기에 /를 사용하면 전달받은 두 수를 나눈다. 단, 결과값은 정수로 반환한다.")
+    @Test
+    void calculatorDivideTest(){
+        Calculator calculator = new Calculator();
+        assertThat(calculator.calculate("/", 2, 1)).isEqualTo(2);
+        assertThat(calculator.calculate("/", 5, 2)).isNotEqualTo(2.5);
+    }
+
+    @DisplayName("계산기에 사칙연산 외 특수문자를 전달하면 에러를 발생시킨다.")
+    @Test
+    void calculatorOperatorTest() {
+        Calculator calculator = new Calculator();
+        assertThatThrownBy(() -> calculator.calculate("?", 1, 2))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("사칙연산을 제외한 문자는 계산할 수 없습니다.");
     }
 }
