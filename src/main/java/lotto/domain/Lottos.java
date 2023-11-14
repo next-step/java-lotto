@@ -1,10 +1,14 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lottos {
+    private final List<Long> LOTTO_MATCH_COUNTS = List.of(3L, 4L, 5L, 6L);
+
     private final Map<Integer, List<Lotto>> lottos;
 
     public Lottos(Map<Integer, List<Lotto>> lottos) {
@@ -12,7 +16,7 @@ public class Lottos {
     }
 
     public LottoResult winCounts(List<Integer> winLottoNumbers) {
-        Map<Long, Long> initLottoResults = Stream.of(3L, 4L, 5L, 6L)
+        Map<Long, Long> initLottoResults = LOTTO_MATCH_COUNTS.stream()
                 .collect(Collectors.toMap(matchCount -> matchCount, matchCount -> 0L));
 
         Map<Long, Long> finalLottoResult = lottos.values().stream()
