@@ -11,7 +11,7 @@ public class Lotto {
     /** 로또 한 장이 몇 개의 번호로 구성되는지를 나타냅니다. */
     private static final int LOTTO_NUMBER_COUNT = 6;
 
-    private SixNumberComposition numberList;
+    private SixNumberComposition numbers;
 
     private Lotto() {
     }
@@ -25,7 +25,7 @@ public class Lotto {
      */
     public static Lotto of(List<Integer> numberList) {
         Lotto lotto = new Lotto();
-        lotto.numberList = SixNumberComposition.of(numberList);
+        lotto.numbers = SixNumberComposition.of(numberList);
 
         return lotto;
     }
@@ -37,7 +37,7 @@ public class Lotto {
      * @return 가지고 있다면 true
      */
     boolean contains(int num) {
-        return numberList.contains(num);
+        return numbers.contains(num);
     }
 
     /**
@@ -66,18 +66,18 @@ public class Lotto {
 
         Lotto lotto = (Lotto) o;
 
-        return Objects.equals(numberList, lotto.numberList);
+        return Objects.equals(numbers, lotto.numbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numberList);
+        return Objects.hash(numbers);
     }
 
     @Override
     public String toString() {
         return "Lotto{" +
-                "numbers=" + numberList +
+                "numbers=" + numbers +
                 '}';
     }
 
@@ -87,6 +87,6 @@ public class Lotto {
      * @return 로또 번호 리스트
      */
     public List<Integer> toList() {
-        return this.numberList.toList();
+        return this.numbers.toList();
     }
 }

@@ -13,23 +13,23 @@ public class LottoGenerator {
     }
 
     public static List<Lotto> generateRandomLotto(int count) {
-        List<Lotto> generatedLottoList = new ArrayList<>(count);
+        List<Lotto> generatedLottos = new ArrayList<>(count);
 
         for (int i = 0; i < count; i++) {
-            generatedLottoList.add(generateARandomLotto());
+            generatedLottos.add(generateARandomLotto());
         }
 
-        return generatedLottoList;
+        return generatedLottos;
     }
 
     private static List<Integer> pick6Randomly() {
-        List<Integer> allLottoNumberList = new ArrayList<>(45);
+        List<Integer> allLottoNumbers = new ArrayList<>(45);
         for (int i = 1; i <= 45; i++) {
-            allLottoNumberList.add(i);
+            allLottoNumbers.add(i);
         }
 
-        Collections.shuffle(allLottoNumberList);
+        Collections.shuffle(allLottoNumbers);
 
-        return allLottoNumberList.subList(0, 6);
+        return allLottoNumbers.subList(0, 6);
     }
 }

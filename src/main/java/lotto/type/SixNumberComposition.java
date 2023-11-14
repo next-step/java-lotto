@@ -1,7 +1,5 @@
 package lotto.type;
 
-import lotto.Lotto;
-
 import java.util.*;
 
 /**
@@ -14,18 +12,18 @@ public class SixNumberComposition {
     private static final int MIN_NUM = 1;
     private static final int MAX_NUM = 45;
 
-    private final List<Integer> numberList;
+    private final List<Integer> numbers;
 
     private SixNumberComposition() {
-        this.numberList = new ArrayList<>(NUMBER_LENGTH);
+        this.numbers = new ArrayList<>(NUMBER_LENGTH);
     }
 
     public static SixNumberComposition of(List<Integer> numberList) {
         validateLottoNumbers(numberList);
 
         SixNumberComposition numberComposition = new SixNumberComposition();
-        numberComposition.numberList.addAll(numberList);
-        numberComposition.numberList.sort(Comparator.naturalOrder());
+        numberComposition.numbers.addAll(numberList);
+        numberComposition.numbers.sort(Comparator.naturalOrder());
 
         return numberComposition;
     }
@@ -73,7 +71,7 @@ public class SixNumberComposition {
     @Override
     public String toString() {
         return "SixNumberComposition{" +
-                "numberList=" + numberList +
+                "numberList=" + numbers +
                 '}';
     }
 
@@ -89,12 +87,12 @@ public class SixNumberComposition {
 
         SixNumberComposition that = (SixNumberComposition) o;
 
-        return Objects.equals(numberList, that.numberList);
+        return Objects.equals(numbers, that.numbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numberList);
+        return Objects.hash(numbers);
     }
 
     /**
@@ -104,7 +102,7 @@ public class SixNumberComposition {
      * @return 가지고 있다면 true
      */
     public boolean contains(int num) {
-        return this.numberList.contains(num);
+        return this.numbers.contains(num);
     }
 
     /**
@@ -113,6 +111,6 @@ public class SixNumberComposition {
      * @return 숫자 리스트
      */
     public List<Integer> toList() {
-        return List.copyOf(this.numberList);
+        return List.copyOf(this.numbers);
     }
 }

@@ -22,11 +22,11 @@ public class Question {
 
         List<String> spllitedString = List.of(multiNumberString.split(","));
 
-        List<Integer> integerList = new ArrayList<>();
+        List<Integer> integers = new ArrayList<>();
         for (String stringToken : spllitedString) {
-            integerList.add(Integer.parseInt(stringToken));
+            integers.add(Integer.parseInt(stringToken));
         }
 
-        return integerList;
+        return integers;
     }
 }

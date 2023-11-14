@@ -11,7 +11,7 @@ import java.util.*;
  *
  */
 public class WinningNumber {
-    private SixNumberComposition numberList;
+    private SixNumberComposition numbers;
 
     private WinningNumber() {
     }
@@ -25,7 +25,7 @@ public class WinningNumber {
      */
     public static WinningNumber of(List<Integer> numberList) {
         WinningNumber winningNumber = new WinningNumber();
-        winningNumber.numberList = SixNumberComposition.of(numberList);
+        winningNumber.numbers = SixNumberComposition.of(numberList);
 
         return winningNumber;
     }
@@ -38,7 +38,7 @@ public class WinningNumber {
      * @return 이 로또의 당첨 등수
      */
     public WinningLevel whatRank(Lotto lotto) {
-        final int matchCount = lotto.howManyContain(this.numberList.toList());
+        final int matchCount = lotto.howManyContain(this.numbers.toList());
 
         if (matchCount < 3) {
             return WinningLevel.NONE;
@@ -75,18 +75,18 @@ public class WinningNumber {
 
         WinningNumber that = (WinningNumber) o;
 
-        return Objects.equals(numberList, that.numberList);
+        return Objects.equals(numbers, that.numbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numberList);
+        return Objects.hash(numbers);
     }
 
     @Override
     public String toString() {
         return "WinningNumber{" +
-                "numbers=" + numberList +
+                "numbers=" + numbers +
                 '}';
     }
 }

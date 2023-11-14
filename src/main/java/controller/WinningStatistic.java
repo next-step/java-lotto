@@ -14,11 +14,11 @@ public class WinningStatistic {
     /**
      * 각 당첨 등수 별로 몇 번 당첨되었는지를 기록하는 테이블(맵)
      */
-    private final Map<WinningLevel, Integer> winCountMap = new HashMap<>();
+    private final Map<WinningLevel, Integer> winCountTable = new HashMap<>();
 
     public WinningStatistic() {
         for (WinningLevel rank : WinningLevel.values()) {
-            winCountMap.put(rank, 0);
+            winCountTable.put(rank, 0);
         }
     }
 
@@ -28,8 +28,8 @@ public class WinningStatistic {
      * @param rank 당첨 등수
      */
     public void occurs(WinningLevel rank) {
-        int beforeCount = winCountMap.get(rank);
-        winCountMap.put(rank, beforeCount + 1);
+        int beforeCount = winCountTable.get(rank);
+        winCountTable.put(rank, beforeCount + 1);
     }
 
     /**
@@ -40,7 +40,7 @@ public class WinningStatistic {
      * @return 발생 횟수
      */
     public int getOccurs(WinningLevel rank) {
-        return winCountMap.get(rank);
+        return winCountTable.get(rank);
     }
 
     /**
@@ -52,7 +52,7 @@ public class WinningStatistic {
         WinningAmount totalSum = WinningAmount.zero();
 
         for (WinningLevel rank : WinningLevel.values()) {
-            int count = winCountMap.get(rank);
+            int count = winCountTable.get(rank);
             totalSum = WinningAmount.of(rank).multiply(count).add(totalSum);
         }
 

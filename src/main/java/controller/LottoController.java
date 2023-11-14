@@ -17,9 +17,9 @@ public class LottoController {
         int lottoAmount = purchaseAmount / 1000;
 
         Renderer.simplePrint(lottoAmount + "개를 구매했습니다.");
-        List<Lotto> lottoList = LottoGenerator.generateRandomLotto(lottoAmount);
+        List<Lotto> lottos = LottoGenerator.generateRandomLotto(lottoAmount);
 
-        for (Lotto myLotto : lottoList) {
+        for (Lotto myLotto : lottos) {
             Renderer.printLotto(myLotto);
         }
 
@@ -28,7 +28,7 @@ public class LottoController {
         WinningNumber winningNumber = WinningNumber.of(userInputWinningNumber);
 
         WinningStatistic result = new WinningStatistic();
-        for (Lotto myLotto : lottoList) {
+        for (Lotto myLotto : lottos) {
             WinningLevel rank = winningNumber.whatRank(myLotto);
             result.occurs(rank);
         }
