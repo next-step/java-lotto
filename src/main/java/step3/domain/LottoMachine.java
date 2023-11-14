@@ -12,13 +12,10 @@ public class LottoMachine {
     private static final int PRICE_PER_LOTTO = 1_000;
     private static final int LOTTO_SIZE = Lotto.LOTTO_SIZE;
 
-    private List<Integer> numberBox;
+    private final List<Integer> numberBox;
 
-    public LottoMachine(int paidMoney, List<Integer> winningNumbers) {
-        validatePaidMoney(paidMoney);
-        this.numberBox = IntStream.rangeClosed(NUMBER_BOX_START_NUMBER, NUMBER_BOX_END_NUMBER)
-                        .boxed()
-                        .collect(Collectors.toList());
+    public LottoMachine() {
+        this.numberBox = rangeClosedNumberBox();
     }
 
     private void validatePaidMoney(int paidMoney) {
@@ -27,13 +24,24 @@ public class LottoMachine {
         }
     }
 
-    public Lotto createLotto() {
+    private static List<Integer> rangeClosedNumberBox() {
+        return IntStream.rangeClosed(NUMBER_BOX_START_NUMBER, NUMBER_BOX_END_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+    public WinningInfo play(int paidMoney, List<Integer> winningNumbers){
+        validatePaidMoney(paidMoney);
+        return new WinningInfo();
+    }
+
+    private Lotto createLotto() {
         return new Lotto(lottoNumbers());
     }
 
     private List<LottoNumber> lottoNumbers() {
         Collections.shuffle(numberBox);
-        return numberBox.subList(0, Lotto.LOTTO_SIZE)
+        return numberBox.subList(0, LOTTO_SIZE)
                 .stream()
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());

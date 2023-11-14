@@ -8,7 +8,7 @@ public class WinningNumbers {
     private static final int WINNING_NUMBER_SIZE = 7;
     private final List<LottoNumber> lottoNumbers;
 
-    public WinningNumbers(List<LottoNumber> lottoNumbers) {
+    private WinningNumbers(List<LottoNumber> lottoNumbers) {
         inputValidation(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
