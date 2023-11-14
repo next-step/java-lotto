@@ -9,8 +9,9 @@ public enum Operator {
     MULTIPLY("*", (x, y) -> x * y),
     DIVIDE("/", (x, y) -> x / y);
 
-    private final IntBinaryOperator op;
+    private static final Operator[] VALUES = values();
 
+    private final IntBinaryOperator op;
     private final String symbol;
 
     Operator(String symbol, IntBinaryOperator op) {
@@ -18,12 +19,12 @@ public enum Operator {
         this.op = op;
     }
 
-    public int apply(int x, int y) {
+    public int calculate(int x, int y) {
         return op.applyAsInt(x, y);
     }
 
     public static Operator findByOperator(String inputSymbol) {
-        return Arrays.stream(values())
+        return Arrays.stream(VALUES)
                 .filter(operator -> operator.symbol.equals(inputSymbol))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 기호 입니다." + inputSymbol));
