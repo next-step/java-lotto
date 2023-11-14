@@ -5,19 +5,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Question {
+
+    private static final Scanner SCANNER = new Scanner(System.in);
+
     private Question() {
     }
 
     public static int intAsk(String question) {
         System.out.print(question + ": ");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        return SCANNER.nextInt();
     }
 
     public static List<Integer> intListAsk(String question) {
         System.out.print(question + ": ");
-        Scanner scanner = new Scanner(System.in);
-        String multiNumberString =  scanner.nextLine();
+        String multiNumberString =  SCANNER.nextLine();
 
         List<String> spllitedString = List.of(multiNumberString.split(","));
 
