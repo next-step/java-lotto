@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoResult {
 
@@ -20,21 +21,23 @@ public class LottoResult {
     }
 
     public long getWinnings(long minimumCount) {
-        return lottoResult.keySet()
-                          .stream()
-                          .filter(filterMinimumCount(minimumCount))
-                          .filter(count -> this.lottoResult.get(count).size() > 0)
+        return getResultStreamAndFilterMinimumCount(minimumCount)
                           .mapToLong(LottoWinnings::valueOfCount)
                           .sum();
     }
 
     public List<String> getLottoCountResult(long minimumCount) {
+        return getResultStreamAndFilterMinimumCount(minimumCount)
+                          .map(buildMatchNumberAndCount())
+                          .collect(Collectors.toList());
+    }
+
+    private Stream<LottoCount> getResultStreamAndFilterMinimumCount(long minimumCount) {
         return lottoResult.keySet()
                           .stream()
                           .filter(filterMinimumCount(minimumCount))
-                          .filter(count -> this.lottoResult.get(count).size() > 0)
-                          .map(buildMatchNumberAndCount())
-                          .collect(Collectors.toList());
+                          .filter(count -> this.lottoResult.get(count)
+                                                           .size() > 0);
     }
 
     private Predicate<LottoCount> filterMinimumCount(long minimumCount) {

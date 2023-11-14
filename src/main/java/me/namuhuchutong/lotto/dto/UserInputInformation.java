@@ -18,20 +18,15 @@ public class UserInputInformation {
 
     private final String numbers;
 
-    private final int bonusNumber;
+    private final Number bonusNumber;
 
     public UserInputInformation(int amount, String numbers, int bonusNumber) {
         validateZeroOrNegative(amount);
         validateNonNumeric(numbers);
         this.amount = amount;
         this.numbers = numbers;
-        validateBonusNumber(bonusNumber);
-        this.bonusNumber = bonusNumber;
-    }
-
-    private void validateBonusNumber(int bonusNumber) {
-        validateExceedNumber(bonusNumber);
         validateDuplicatedNumbers(bonusNumber);
+        this.bonusNumber = new Number(bonusNumber);
     }
 
     private void validateDuplicatedNumbers(int bonusNumber) {
@@ -39,12 +34,6 @@ public class UserInputInformation {
         Set<String> numberSet = new HashSet<>(Arrays.asList(split));
         if (numberSet.contains(String.valueOf(bonusNumber))) {
             throw new IllegalArgumentException("보너스 넘버는 기존 입력된 넘버와 중복될 수 없습니다.");
-        }
-    }
-
-    private void validateExceedNumber(int bonusNumber) {
-        if (bonusNumber < 1 || bonusNumber > 45) {
-            throw new IllegalArgumentException("보너스 넘버는 1~45를 넘을 수 없습니다.");
         }
     }
 
@@ -74,6 +63,6 @@ public class UserInputInformation {
     }
 
     public Number getBonusNumber() {
-        return new Number(this.bonusNumber);
+        return this.bonusNumber;
     }
 }
