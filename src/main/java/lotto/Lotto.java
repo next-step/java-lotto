@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.type.SingleNumber;
 import lotto.type.SixNumberComposition;
 
 import java.util.*;
@@ -8,10 +9,7 @@ import java.util.*;
  * 로또 한 장입니다.
  */
 public class Lotto {
-    /** 로또 한 장이 몇 개의 번호로 구성되는지를 나타냅니다. */
-    private static final int LOTTO_NUMBER_COUNT = 6;
-
-    private SixNumberComposition numbers;
+    private SixNumberComposition lottoNumbers;
 
     private Lotto() {
     }
@@ -25,7 +23,7 @@ public class Lotto {
      */
     public static Lotto of(List<Integer> numberList) {
         Lotto lotto = new Lotto();
-        lotto.numbers = SixNumberComposition.of(numberList);
+        lotto.lottoNumbers = SixNumberComposition.ofByInt(numberList);
 
         return lotto;
     }
@@ -36,8 +34,8 @@ public class Lotto {
      * @param num 확인할 번호
      * @return 가지고 있다면 true
      */
-    boolean contains(int num) {
-        return numbers.contains(num);
+    boolean contains(SingleNumber num) {
+        return lottoNumbers.contains(num);
     }
 
     /**
@@ -46,9 +44,9 @@ public class Lotto {
      * @param nums 확인할 번호 목록
      * @return 로또 용지가 가지고 있는 번호 개수
      */
-    int howManyContain(List<Integer> nums) {
+    int howManyContain(List<SingleNumber> nums) {
         int containCount = 0;
-        for (int num : nums) {
+        for (SingleNumber num : nums) {
             containCount += this.contains(num) ? 1 : 0;
         }
         return containCount;
@@ -66,18 +64,18 @@ public class Lotto {
 
         Lotto lotto = (Lotto) o;
 
-        return Objects.equals(numbers, lotto.numbers);
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
+        return Objects.hash(lottoNumbers);
     }
 
     @Override
     public String toString() {
         return "Lotto{" +
-                "numbers=" + numbers +
+                "numbers=" + lottoNumbers +
                 '}';
     }
 
@@ -87,6 +85,13 @@ public class Lotto {
      * @return 로또 번호 리스트
      */
     public List<Integer> toList() {
-        return this.numbers.toList();
+        List<SingleNumber> numbers = this.lottoNumbers.toList();
+
+        List<Integer> primitiveInts = new ArrayList<>();
+        for (SingleNumber number : numbers) {
+            primitiveInts.add(number.toInt());
+        }
+
+        return primitiveInts;
     }
 }

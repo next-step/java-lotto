@@ -19,13 +19,13 @@ public class WinningNumber {
     /**
      * 주어진 번호로 당첨번호를 세팅합니다.
      *
-     * @param numberList 당첨 번호
+     * @param numbers 당첨 번호
      *
      * @return 생성된 당첨 번호
      */
-    public static WinningNumber of(List<Integer> numberList) {
+    public static WinningNumber of(List<Integer> numbers) {
         WinningNumber winningNumber = new WinningNumber();
-        winningNumber.numbers = SixNumberComposition.of(numberList);
+        winningNumber.numbers = SixNumberComposition.ofByInt(numbers);
 
         return winningNumber;
     }

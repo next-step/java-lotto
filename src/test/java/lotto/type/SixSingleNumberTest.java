@@ -1,6 +1,5 @@
 package lotto.type;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,14 +11,14 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class SixNumberCompositionTest {
+public class SixSingleNumberTest {
     @Test
     @DisplayName("[SixNumberComposition] 정상 생성")
     void testValidNumberListCreatesObject() {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
 
         assertDoesNotThrow(() -> {
-            SixNumberComposition.of(numbers);
+            SixNumberComposition.ofByInt(numbers);
         });
     }
 
@@ -30,7 +29,7 @@ public class SixNumberCompositionTest {
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> {
-                    SixNumberComposition.of(numbers);
+                    SixNumberComposition.ofByInt(numbers);
                 });
     }
 
@@ -41,7 +40,7 @@ public class SixNumberCompositionTest {
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> {
-                    SixNumberComposition.of(numbers);
+                    SixNumberComposition.ofByInt(numbers);
                 });
     }
 
@@ -52,7 +51,7 @@ public class SixNumberCompositionTest {
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> {
-                    SixNumberComposition.of(numbers);
+                    SixNumberComposition.ofByInt(numbers);
                 });
     }
 
@@ -61,8 +60,8 @@ public class SixNumberCompositionTest {
     void testEqualsAndHashCode() {
         List<Integer> numbers1 = List.of(1, 2, 3, 4, 5, 6);
         List<Integer> numbers2 = List.of(6, 5, 4, 3, 2, 1);
-        SixNumberComposition composition1 = SixNumberComposition.of(numbers1);
-        SixNumberComposition composition2 = SixNumberComposition.of(numbers2);
+        SixNumberComposition composition1 = SixNumberComposition.ofByInt(numbers1);
+        SixNumberComposition composition2 = SixNumberComposition.ofByInt(numbers2);
 
         assertThat(composition1).isEqualTo(composition2);
         assertThat(composition1.hashCode()).isEqualTo(composition2.hashCode());
@@ -72,9 +71,9 @@ public class SixNumberCompositionTest {
     @DisplayName("[SixNumberComposition.contains] 숫자 찾기")
     void testContainsMethod() {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
-        SixNumberComposition composition = SixNumberComposition.of(numbers);
+        SixNumberComposition composition = SixNumberComposition.ofByInt(numbers);
 
-        assertThat(composition.contains(1)).isTrue();
-        assertThat(composition.contains(7)).isFalse();
+        assertThat(composition.contains(SingleNumber.of(1))).isTrue();
+        assertThat(composition.contains(SingleNumber.of(7))).isFalse();
     }
 }
