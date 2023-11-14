@@ -1,7 +1,5 @@
-package lottoauto.domain.aggregate;
+package lottoauto.domain;
 
-import lottoauto.domain.EarningRateCalculator;
-import lottoauto.domain.WinnerBoard;
 import lottoauto.domain.lotto.Lotto;
 import lottoauto.domain.lotto.Lottos;
 import org.junit.jupiter.api.DisplayName;
