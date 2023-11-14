@@ -1,7 +1,5 @@
 package calculator.domain;
 
-import calculator.operatorenum.*;
-
 import java.util.Deque;
 import java.util.List;
 

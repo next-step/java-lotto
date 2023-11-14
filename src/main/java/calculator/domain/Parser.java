@@ -1,7 +1,5 @@
 package calculator.domain;
 
-import calculator.operatorenum.OperatorEnum;
-
 import java.util.*;
 
 public class Parser {
