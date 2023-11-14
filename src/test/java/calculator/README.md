@@ -9,9 +9,8 @@
 
 ## 요구사항 목록
 - [] 문자 분리하기
-  - [] 연산 사이에 빈공간은 있어야함
   - [x] 입력 값이 null 공백이면 IllegalArgumentException
-  - [] 사칙 연 기호가 아닌 경우 IllegalArgumentException
+  - [x] 사칙 연 기호가 아닌 경우 IllegalArgumentException
 - [] 계산 순서는 입력 값에 따라 계산
   - [] 계산 결과값은 저장된다
 - [] 계산기 기능
