@@ -3,32 +3,41 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Amount {
-    private static final String INVALID_AMOUNT = "로또 금액보다 높은 금액을 입력해야 합니다.";
-    private static final int LOTTO_AMOUNT = 1000;
+    public static final String NEGATIVE_AMOUNT = "금액은 음수일 수 없습니다.";
+    public static final Amount ZERO = new Amount(0);
 
     private int value;
+
     public Amount(final int amount) {
         validationCheck(amount);
-        
+
         this.value = amount;
     }
 
     private void validationCheck(final int amount) {
-        if (isSmallThan(amount)) {
-            throw new IllegalArgumentException(INVALID_AMOUNT);
+        if (amount < 0) {
+            throw new IllegalArgumentException(NEGATIVE_AMOUNT);
         }
     }
 
-    public static Amount ofLottoAmount() {
-        return new Amount(LOTTO_AMOUNT);
+    public boolean isSmallThan(final Amount amount) {
+        return this.value < amount.get();
     }
 
-    private boolean isSmallThan(final int amount) {
-        return amount < LOTTO_AMOUNT;
+    private int get() {
+        return value;
     }
 
-    public int divide(final Amount amount) {
-        return value / amount.value;
+    public double divideWithDecimal(final Amount amount) {
+        return (double) this.value / amount.value;
+    }
+
+    public int divideWithoutDecimal(final Amount amount) {
+        return this.value / amount.value;
+    }
+
+    public Amount multiply(final int count) {
+        return new Amount(value * count);
     }
 
     @Override
@@ -42,5 +51,10 @@ public class Amount {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }

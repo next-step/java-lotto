@@ -5,17 +5,18 @@ import java.util.List;
 
 public class Lottos {
     public static final String LINE_BREAK = "\n";
+    private static final int LOTTO_AMOUNT = 1000;
+
     private List<Lotto> lottos;
 
     public Lottos(final Amount purchaseAmount) {
-
         this.lottos = initLottos(purchaseAmount);
     }
 
     private List<Lotto> initLottos(final Amount purchaseAmount) {
         final List<Lotto> lottos = new ArrayList<>();
 
-        final int purchaseCount = purchaseAmount.divide(Amount.ofLottoAmount());
+        final int purchaseCount = purchaseAmount.divideWithoutDecimal(new Amount(LOTTO_AMOUNT));
 
         for (int i = 0; i < purchaseCount; i++) {
             lottos.add(new Lotto());
@@ -29,12 +30,12 @@ public class Lottos {
     }
 
     public Winning draw(final List<Integer> winningNumbers) {
-        final Winning winner = new Winning();
+        final Winning winning = new Winning();
         for (Lotto lotto : lottos) {
-            winner.addWinning(lotto.getRightNumber(winningNumbers));
+            winning.addWinning(lotto.getRightNumber(winningNumbers));
         }
 
-        return winner;
+        return winning;
     }
 
     @Override

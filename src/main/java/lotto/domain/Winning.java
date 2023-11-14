@@ -25,15 +25,15 @@ public class Winning {
         return winnerCountMap.getOrDefault(winnerNumber, 0);
     }
 
-    public BigDecimal getReturnRate(final int purchaseAmount) {
-        BigDecimal sum = BigDecimal.ZERO;
+    public double getReturnRate(final Amount purchaseAmount) {
+        Amount sum = Amount.ZERO;
         for (Integer key : winnerCountMap.keySet()) {
-            final BigDecimal countPrice = Rank.priceOf(key);
+            final Amount countPrice = Rank.priceOf(key);
 
-            final BigDecimal count = new BigDecimal(winnerCountMap.get(key));
+            final int count = winnerCountMap.get(key);
             sum = countPrice.multiply(count);
         }
 
-        return sum.divide(new BigDecimal(purchaseAmount));
+        return sum.divideWithDecimal(purchaseAmount);
     }
 }

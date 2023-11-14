@@ -35,8 +35,8 @@ class WinningTest {
         final Winning winner = new Winning();
         winner.addWinning(6);
 
-        final BigDecimal returnRate = winner.getReturnRate(10000);
+        final double returnRate = winner.getReturnRate(new Amount(10000));
 
-        assertThat(returnRate).isEqualTo(new BigDecimal("200000"));
+        assertThat(returnRate).isEqualTo(200000);
     }
 }

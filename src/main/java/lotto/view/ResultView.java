@@ -1,6 +1,7 @@
 package lotto.view;
 
 
+import lotto.domain.Amount;
 import lotto.domain.Winning;
 
 import java.math.BigDecimal;
@@ -31,7 +32,7 @@ public class ResultView {
         System.out.println(stringBuilder.toString());
     }
 
-    public static void returnRatePrint(final BigDecimal returnRate) {
+    public static void returnRatePrint(final double returnRate) {
         System.out.println(String.format(RETURN_RATE_DESCRIPTION, returnRate));
     }
 }
