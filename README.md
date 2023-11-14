@@ -24,5 +24,5 @@
 
 ## StringCalculator
 * [ ] 입력 값을 받아 사칙연산을 할 수 있다.
-* [ ] 입력 값이 null 이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+* [X] 입력 값이 null 이거나 빈 공백 문자일 경우 IllegalArgumentException throw
 * [ ] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
