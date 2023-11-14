@@ -1,4 +1,4 @@
-public class MinusExpression {
+public class MinusExpression implements CalculatorExpression{
 
     private final int left;
     private final int right;

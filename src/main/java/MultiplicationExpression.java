@@ -1,5 +1,4 @@
-public class MultiplicationExpression {
-
+public class MultiplicationExpression implements CalculatorExpression {
 
     private final int left;
     private final int right;

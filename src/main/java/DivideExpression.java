@@ -1,4 +1,4 @@
-public class DivideExpression {
+public class DivideExpression implements CalculatorExpression{
 
     private final int divisor;
     private final int dividend;

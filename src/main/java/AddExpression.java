@@ -1,4 +1,4 @@
-public class AddExpression {
+public class AddExpression implements CalculatorExpression{
 
     private final int left;
     private final int right;

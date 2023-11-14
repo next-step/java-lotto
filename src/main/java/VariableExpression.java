@@ -1,4 +1,4 @@
-public class VariableExpression {
+public class VariableExpression implements CalculatorExpression{
 
     private final char character;
 
