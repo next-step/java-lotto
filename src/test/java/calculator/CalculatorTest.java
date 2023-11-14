@@ -65,11 +65,23 @@ public class CalculatorTest {
     @Test
     void substractionTest() {
         // given
-        String input = "1 - 2";
+        String input = "2 - 1";
         Calculator calculator = new Calculator(input);
 
         // when, then
         assertThat(calculator.subtraction(2,1)).isEqualTo(1);
+    }
+
+
+    @DisplayName("곱셈 기능을 구현한다.")
+    @Test
+    void multiplicationTest() {
+        // given
+        String input = "2 * 5";
+        Calculator calculator = new Calculator(input);
+
+        // when, then
+        assertThat(calculator.multiplication(2,5)).isEqualTo(10);
     }
 }
 
