@@ -3,10 +3,16 @@ package step3.domain;
 public class LottoNumber {
 
     private final int number;
+    private boolean isBonus = false;
 
     private LottoNumber(int number) {
         inputValidation(number);
         this.number = number;
+    }
+
+    private LottoNumber(int number, boolean isBonus) {
+        this(number);
+        this.isBonus = isBonus;
     }
 
     private void inputValidation(int number) {
@@ -15,8 +21,16 @@ public class LottoNumber {
         }
     }
 
+    public boolean isBonus() {
+        return isBonus;
+    }
+
     public static LottoNumber of(int number) {
         return new LottoNumber(number);
+    }
+
+    public static LottoNumber of(int number, boolean isBonus) {
+        return new LottoNumber(number, isBonus);
     }
 
     public int number() {

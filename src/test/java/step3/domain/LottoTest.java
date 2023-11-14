@@ -11,16 +11,10 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static step3.domain.TestUtil.lottoFixture;
 
 public class LottoTest {
 
-    Lotto lottoFixture(Integer... numbers) {
-        return new Lotto(
-                Arrays.stream(numbers)
-                        .map(LottoNumber::of)
-                        .collect(Collectors.toList())
-        );
-    }
 
     @Test
     @DisplayName("로또는 중복되지 않는 6개의 숫자로 만들수 있다.")
