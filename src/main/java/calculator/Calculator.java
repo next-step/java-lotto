@@ -9,6 +9,8 @@ public class Calculator {
 
     private final List<String> operators;
 
+    private int result = 0;
+
     public Calculator(String input) {
         validateInput(input);
         String[] inputs = splitInput(input);
@@ -80,6 +82,12 @@ public class Calculator {
     }
 
     public int sum(int operand1, int operand2) {
-        return operand1 + operand2;
+        result = operand1 + operand2;
+        return result;
+    }
+
+    public int subtraction(int operand1, int operand2) {
+        result = operand1 - operand2;
+        return result;
     }
 }

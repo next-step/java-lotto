@@ -59,6 +59,18 @@ public class CalculatorTest {
         // when, then
         assertThat(calculator.sum(1,2)).isEqualTo(3);
     }
+
+
+    @DisplayName("뺄셈 기능을 구현한다.")
+    @Test
+    void substractionTest() {
+        // given
+        String input = "1 - 2";
+        Calculator calculator = new Calculator(input);
+
+        // when, then
+        assertThat(calculator.subtraction(2,1)).isEqualTo(1);
+    }
 }
 
 
