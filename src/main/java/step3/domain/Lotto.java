@@ -27,4 +27,9 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.stream()
+                .mapToInt(LottoNumber::number)
+                .anyMatch(number -> number == lottoNumber.number());
+    }
 }

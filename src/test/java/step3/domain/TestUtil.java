@@ -13,4 +13,11 @@ public class TestUtil {
         );
     }
 
+    static Lottos lottosFixture(Lotto... lottos) {
+        Lottos result = new Lottos();
+        Arrays.stream(lottos)
+                .forEach(result::addLotto);
+        return result;
+    }
+
 }

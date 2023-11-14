@@ -1,5 +1,7 @@
 package step3.domain;
 
+import java.util.Objects;
+
 public class LottoNumber {
 
     private final int number;
@@ -36,4 +38,5 @@ public class LottoNumber {
     public int number() {
         return number;
     }
+
 }

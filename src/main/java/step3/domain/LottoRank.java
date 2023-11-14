@@ -12,9 +12,17 @@ public enum LottoRank {
     private int matchCount;
     private int winningMoney;
 
-    private LottoRank(int matchCount, int winningMoney) {
+    LottoRank(int matchCount, int winningMoney) {
         this.matchCount = matchCount;
         this.winningMoney = winningMoney;
+    }
+
+    public int matchCount() {
+        return matchCount;
+    }
+
+    public int winningMoney() {
+        return winningMoney;
     }
 
     public static LottoRank valueOf(int matchCount, boolean matchBonus) {
