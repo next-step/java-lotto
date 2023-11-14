@@ -28,7 +28,12 @@ public class PrintView {
                 .sorted(Comparator.reverseOrder())
                 .forEach(rank -> {
                     long count = winningRanks.getOrDefault(rank, 0L);
-                    System.out.println(rank.getMatchCount() + "개 일치 (" + rank.getWinningPrice() + "원) - " + count);
+                    String printString = rank.getMatchCount() + "개 일치 (" + rank.getWinningPrice() + "원) - " + count;
+
+                    if (rank.isBonus()) {
+                        printString = rank.getMatchCount() + "개 일치, 보너스 볼 일치(" + rank.getWinningPrice() + "원) - " + count;
+                    }
+                    System.out.println(printString);
                 });
 
     }
