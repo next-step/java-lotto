@@ -18,7 +18,7 @@ public class UserInputInformation {
 
     private final String numbers;
 
-    private final Number bonusNumber;
+    private final int bonusNumber;
 
     public UserInputInformation(int amount, String numbers, int bonusNumber) {
         validateZeroOrNegative(amount);
@@ -26,7 +26,7 @@ public class UserInputInformation {
         this.amount = amount;
         this.numbers = numbers;
         validateDuplicatedNumbers(bonusNumber);
-        this.bonusNumber = new Number(bonusNumber);
+        this.bonusNumber = bonusNumber;
     }
 
     private void validateDuplicatedNumbers(int bonusNumber) {
@@ -62,7 +62,7 @@ public class UserInputInformation {
         return new Numbers(collect);
     }
 
-    public Number getBonusNumber() {
+    public int getBonusNumber() {
         return this.bonusNumber;
     }
 }

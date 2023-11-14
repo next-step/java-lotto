@@ -14,10 +14,10 @@ public class LottoSeller {
 
     public LottoResult sellLotto(UserInputInformation information) {
         int amount = information.getAmount();
+        Number bonusNumber = new Number(information.getBonusNumber());
         validateAmount(amount);
-        int times = amount / 1000;
-        Lotto lotto = Lotto.create(times, generator);
-        return lotto.getMatchNumbers(information.getNumbers(), information.getBonusNumber());
+        Lotto lotto = Lotto.create(amount / 1000, generator);
+        return lotto.getMatchNumbers(information.getNumbers(), bonusNumber);
     }
 
     private void validateAmount(int amount) {

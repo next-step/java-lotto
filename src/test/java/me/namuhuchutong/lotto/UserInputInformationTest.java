@@ -75,16 +75,4 @@ class UserInputInformationTest {
                 .isInstanceOf(IllegalArgumentException.class);
 
     }
-
-    @DisplayName("보너스 넘버는 1~45 범위를 넘을 수 없다.")
-    @ParameterizedTest
-    @ValueSource(ints = {0, 46})
-    void bonus_number_should_not_exceed_1_to_45(int bonus) {
-        String given = "1, 2, 3, 4, 5, 6";
-        int amount = 1;
-
-        //when, then
-        assertThatThrownBy(() -> new UserInputInformation(amount,given, bonus))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
 }
