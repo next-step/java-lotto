@@ -20,6 +20,6 @@ class WinningRankTest {
 
         WinningRank winningRank = new WinningRank(this.winningRanks);
 
-        assertThat(winningRank.calcTotalWinningPrice()).isEqualTo(new Money(65000));
+        assertThat(winningRank.calcTotalWinningPrice()).isEqualTo(new Money(65_000));
     }
 }
