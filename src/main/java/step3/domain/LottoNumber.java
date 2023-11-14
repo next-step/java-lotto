@@ -5,6 +5,14 @@ public class LottoNumber {
     private final int number;
     private boolean isBonus = false;
 
+    public static LottoNumber of(int number) {
+        return new LottoNumber(number);
+    }
+
+    public static LottoNumber of(int number, boolean isBonus) {
+        return new LottoNumber(number, isBonus);
+    }
+
     private LottoNumber(int number) {
         inputValidation(number);
         this.number = number;
@@ -23,14 +31,6 @@ public class LottoNumber {
 
     public boolean isBonus() {
         return isBonus;
-    }
-
-    public static LottoNumber of(int number) {
-        return new LottoNumber(number);
-    }
-
-    public static LottoNumber of(int number, boolean isBonus) {
-        return new LottoNumber(number, isBonus);
     }
 
     public int number() {

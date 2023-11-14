@@ -8,6 +8,12 @@ public class WinningNumbers {
     private static final int WINNING_NUMBER_SIZE = 7;
     private final List<LottoNumber> lottoNumbers;
 
+    public static WinningNumbers of(Lotto lotto, LottoNumber bonusNumber) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>(lotto.lottoNumbers());
+        lottoNumbers.add(bonusNumber);
+        return new WinningNumbers(lottoNumbers);
+    }
+
     private WinningNumbers(List<LottoNumber> lottoNumbers) {
         inputValidation(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
@@ -23,9 +29,4 @@ public class WinningNumbers {
         }
     }
 
-    public static WinningNumbers of(Lotto lotto, LottoNumber bonusNumber) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>(lotto.lottoNumbers());
-        lottoNumbers.add(bonusNumber);
-        return new WinningNumbers(lottoNumbers);
-    }
 }
