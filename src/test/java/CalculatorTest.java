@@ -1,4 +1,3 @@
-import org.assertj.core.util.Strings;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,7 +15,7 @@ public class CalculatorTest {
     void calculator_테스트() {
         String text = "2 + 3 * 4 / 2";
         Calculator calcu = new Calculator();
-        assertThat(calcu.doCalculate(text)).isEqualTo(10);
+        assertThat(calcu.calculate(text)).isEqualTo(10);
     }
 
 

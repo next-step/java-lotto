@@ -8,7 +8,7 @@ public class Calculator {
     public static final int ZERO = 0;
     public static final List<String> OPSLIST = Arrays.asList("+", "*", "/", "-");
 
-    public static int doCalculate(String inputValue){
+    public static int calculate(String inputValue){
         String[] strList = splitText(inputValue);
         ArrayList<Integer> valueList = filterValue(strList);
         ArrayList<String> opsList = filterOps(strList);
