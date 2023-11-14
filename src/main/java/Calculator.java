@@ -33,23 +33,6 @@ public class Calculator {
     }
 
     private static int getResultValue(int value, String ops, int resultValue) {
-//        switch(ops) {
-//            case "+":
-//                resultValue = add(resultValue, value);
-//                break;
-//            case "-":
-//                resultValue = subtract(resultValue, value);
-//                break;
-//            case "*":
-//                resultValue = multiply(resultValue, value);
-//                break;
-//            case "/":
-//                resultValue = divide(resultValue, value);
-//                break;
-//        }
-        /**
-         * indent(들여쓰기) depth를 2단계에서 1단계로
-         */
         if ("+".equals(ops)){
             resultValue = add(resultValue, value);
         }
