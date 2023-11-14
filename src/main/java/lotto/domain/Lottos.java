@@ -8,7 +8,7 @@ public class Lottos {
     private final Map<Integer, List<Lotto>> lottos;
 
     public Lottos(Map<Integer, List<Lotto>> lottos) {
-        this.lottos = lottos;
+        this.lottos = new HashMap<>(lottos);
     }
 
     public Map<Long, Long> winCounts(List<Integer> winLottoNumbers) {
