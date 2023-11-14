@@ -21,18 +21,23 @@ classDiagram
     OutputView <.. LottoMain: Dependency
     LottoFactory <.. LottoMain: Dependency
     InputValidator <.. LottoMain: Dependency
-    Lotto <.. LottoFactory: Dependency
     LottoStatistics <.. LottoMain: Dependency
+    Lottos <.. LottoMain: Dependency
+    Lotto <.. LottoFactory: Dependency
     LottoGenerator <.. RandomLottoGenerator: Inheritance
     LottoGenerator <.. TestLottoGenerator: Inheritance
-    Lottos <.. LottoMain: Dependency
+    LottoWinNumbers <.. Lottos: Dependency
     Lotto o-- Lottos: Aggregation
     LottNumbers o-- Lotto: Aggregation
     LottoGenerator o-- LottNumbers: Aggregation
-    LottoWinResult <.. LottoStatistics: Dependency
-    LottoPrice <.. LottoWinResult: Dependency
+    LottoWinNumbers o-- LottNumbers: Aggregation
+    LottoWinNumbers o-- Lotto: Aggregation
+    LottoWinResult o-- LottoWinPercentage: Aggregation
 
     class StringParser {
+    }
+
+    class LottoWinNumbers {
     }
 
     class LottoWinResult {
@@ -45,6 +50,9 @@ classDiagram
     }
 
     class LottNumbers {
+    }
+
+    class LottWinNumbers {
     }
 
     class LottoFactory {
@@ -67,16 +75,13 @@ classDiagram
     class TestLottoGenerator {
     }
 
-    class LottoStatistics {
-    }
-
     class InputView {
     }
 
     class OutputView {
     }
 
-    class LottoRate {
+    class LottoWinPercentage {
     }
 
     class LottoPrice {
@@ -84,10 +89,6 @@ classDiagram
     }
 
     class OutputView {
-    %%        -String Name
-    %%        -int PosX
-    %%        -int PosY
-    %%        +Despawn() void
     }
 ```
 
