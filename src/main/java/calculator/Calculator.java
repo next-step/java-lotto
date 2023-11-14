@@ -9,23 +9,23 @@ public class Calculator {
     private Calculator() {
     }
 
-    public static int cal(String input) {
+    public static int calculation(String input) {
         isNullOrBlank(input);
-        return calculate(input.split(SPLITER));
+        return formulasCalculate(input.split(SPLITER));
     }
 
-    private static int calculate(String[] formulas) {
+    private static int formulasCalculate(String[] formulas) {
         int currentIdx = 0;
         int currentResult = Integer.parseInt(formulas[currentIdx++]);
         try {
-            currentResult = repetitiveCalculation(formulas, currentIdx, currentResult);
+            currentResult = repetitiveCalculate(formulas, currentIdx, currentResult);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new IllegalArgumentException(INCOMPLETED_FORMULA.getMessage());
         }
         return currentResult;
     }
 
-    private static int repetitiveCalculation(String[] formulas, int currentIdx, int currentResult) {
+    private static int repetitiveCalculate(String[] formulas, int currentIdx, int currentResult) {
         while (currentIdx < formulas.length) {
             String operator = formulas[currentIdx++];
             int nextValue = Integer.parseInt(formulas[currentIdx++]);

@@ -1,65 +1,59 @@
 package calculator;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import static calculator.Calculator.cal;
+import static calculator.Calculator.calculation;
 import static calculator.exception.CustomExceptionCode.*;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CalculatorTest {
 
-    @Test
-    void divide() {
-        assertEquals(2, cal("4 / 2"));
-        assertEquals(1, cal("4 / 3"));
+    @ParameterizedTest
+    @CsvSource(value = {"2 + 3:5", "2 - 3:-1", "2 * 3:6", "4 / 2:2"}, delimiter = ':')
+    void calculation_정상수식입력_정상출력(String input, int expected) {
+        assertEquals(expected, calculation(input));
     }
 
     @Test
-    void multiple() {
-        assertEquals(6, cal("2 * 3"));
-    }
-
-    @Test
-    void plus() {
-        assertEquals(5, cal("2 + 3"));
-    }
-
-    @Test
-    void minus() {
-        assertEquals(1, cal("3 - 2"));
-    }
-
-    @Test
-    void nullInput() {
+    void calculation_null입력_오류출력() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> cal(null))
+                .isThrownBy(() -> calculation(null))
                 .withMessage(NULL_OR_BLANK_INPUT.getMessage());
     }
 
     @Test
-    void notFourBasicOperations() {
+    void calculation_빈값입력_오류출력() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> cal("2 & 3 + 2 * 4"))
+                .isThrownBy(() -> calculation(" "))
+                .withMessage(NULL_OR_BLANK_INPUT.getMessage());
+    }
+
+    @Test
+    void calculation_잘못된연산자입력_오류출력() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> calculation("2 & 3 + 2 * 4"))
                 .withMessage(NOT_FOUR_BASIC_OPERATIONS.getMessage());
     }
 
     @Test
-    void complexCalculations() {
-        assertEquals(10, cal("2 + 3 * 4 / 2"));
+    void calculation_정상복합수식입력_정상출력() {
+        assertEquals(10, calculation("2 + 3 * 4 / 2"));
     }
 
     @Test
-    void incompleteFormula() {
+    void calculation_미완성수식입력_오류출력() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> cal("2 - 3 + 2 * 4 +"))
+                .isThrownBy(() -> calculation("2 - 3 + 2 * 4 +"))
                 .withMessage(INCOMPLETED_FORMULA.getMessage());
     }
 
     @Test
-    void inputOnlyNumbers() {
+    void calculation_연속숫자입력_오류출력() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> cal("2 - 3 3 2 * 4 +"))
+                .isThrownBy(() -> calculation("2 - 3 3 2 * 4 +"))
                 .withMessage(NOT_FOUR_BASIC_OPERATIONS.getMessage());
     }
 
