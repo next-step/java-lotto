@@ -44,4 +44,10 @@ public class Number {
     public int hashCode() {
         return Objects.hash(number);
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
 }
+

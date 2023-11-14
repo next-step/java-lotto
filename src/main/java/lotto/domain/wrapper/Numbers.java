@@ -30,4 +30,16 @@ public class Numbers {
     private boolean contains(Number target) {
         return this.numbers.contains(target);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        numbers.stream()
+            .limit(5)
+            .forEach(number -> sb.append(number.toString()).append(", "));
+        sb.append(numbers.get(numbers.size() - 1).toString());
+
+        return sb.toString();
+    }
 }
