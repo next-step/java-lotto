@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import step2.constant.Prize;
+import step2.domain.Actor;
+import step2.domain.LotteryMachine;
+import step2.domain.StatisticsMachine;
 import step2.model.Lotteries;
 import step2.model.Lottery;
 import step2.view.InputView;

@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import static step2.constant.Prize.ALL;
 import static step2.constant.Prize.FIVE;
@@ -14,7 +14,6 @@ import step2.constant.Prize;
 
 public class StatisticsMachine {
 
-    // organize prize - return money
     private final Map<String, Integer> map;
 
     public StatisticsMachine() {

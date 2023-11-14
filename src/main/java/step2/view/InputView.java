@@ -3,7 +3,6 @@ package step2.view;
 import java.util.List;
 import java.util.Scanner;
 
-import step2.model.Lotteries;
 import step2.model.Lottery;
 import step2.model.Winning;
 

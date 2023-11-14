@@ -1,18 +1,14 @@
-package step2;
+package step2.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import step2.constant.Prize;
-
 public class LotteryMachine {
 
-    private final List<Prize> prizes;
     private final List<Integer> balls;
 
     public LotteryMachine() {
-        this.prizes = new ArrayList<>();
         this.balls = new ArrayList<>();
     }
 
