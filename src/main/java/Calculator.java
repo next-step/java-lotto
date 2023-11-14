@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 public class Calculator {
 
     public static final int ZERO = 0;
-    public static final List<String> OPSLIST = Arrays.asList("+", "*", "/", "-");
+    public static final List<String> OPERATOR_LIST = Arrays.asList("+", "*", "/", "-");
 
     public static int calculate(String inputValue){
         String[] strList = splitText(inputValue);
@@ -78,7 +78,7 @@ public class Calculator {
 
     private static boolean checkOps(String text) {
         try {
-            return OPSLIST.stream().anyMatch(p -> p.equals(text));
+            return OPERATOR_LIST.stream().anyMatch(p -> p.equals(text));
         }catch (NumberFormatException e){
             throw new IllegalArgumentException("연산자가 아닙니다.");
         }
