@@ -8,6 +8,8 @@ import java.util.List;
 
 public class LottoGame {
 
+    public static final int LOTTO_PRICE = 1000;
+
     private Lottos lottos;
     private ProfitCalculator profitCalculator;
 
@@ -16,9 +18,11 @@ public class LottoGame {
         this.profitCalculator = new ProfitCalculator();
     }
 
-    public double calculateProfitRate(long purchase, Numbers winningNumbers) {
-        RankCountGroup rankCountGroup = lottos.groupByRankCount(winningNumbers);
+    public RankCountGroup groupByRankCount(Numbers winningNumbers) {
+        return lottos.groupByRankCount(winningNumbers);
+    }
 
-        return profitCalculator.calculateProfitRate(purchase, rankCountGroup);
+    public double calculateProfitRate(RankCountGroup rankCountGroup) {
+        return profitCalculator.calculateProfitRate((long) lottos.getNumOfLotto() * LOTTO_PRICE, rankCountGroup);
     }
 }
