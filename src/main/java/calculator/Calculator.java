@@ -1,21 +1,22 @@
 package calculator;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
 
 public class Calculator {
 
-	private final Stack<String> inputs;
+	private final Deque<String> inputs;
 	private final OperatorMap map;
 
-	public Calculator(List<String> inputs) throws IllegalArgumentException {
+	public Calculator(List<String> inputs) {
 		if (validation(inputs)) {
 			throw new IllegalArgumentException();
 		}
 		map = new OperatorMap();
-		this.inputs = new Stack<>();
-		for (int i = inputs.size() - 1; i >= 0; i--) {
-			this.inputs.push(inputs.get(i));
+		this.inputs = new ArrayDeque<>();
+		for (String input : inputs) {
+			this.inputs.offer(input);
 		}
 	}
 
@@ -24,25 +25,26 @@ public class Calculator {
 	}
 
 	private boolean isEmpty(List<String> inputs) {
-		return inputs == null || inputs.size() == 0 || inputs.contains(" ");
+		return inputs == null || inputs.isEmpty() || inputs.contains(" ");
 	}
 
 	private boolean isOperator(List<String> inputs) {
 		return !(inputs.contains("+") || inputs.contains("-") || inputs.contains("*") || inputs.contains("/"));
 	}
 
-	public int next() {
-		String a = nextElement();
-		String operator = nextElement();
-		String b = nextElement();
-
-		int result = map.operator(operator).calculate(toInt(a), toInt(b));
-		inputs.push(Integer.toString(result));
-		return result;
+	public int result() {
+		while (inputs.size() != 1) {
+			next();
+		}
+		return toInt(inputs.pop());
 	}
 
-	private String nextElement() {
-		return inputs.pop();
+	private void next() {
+		String a = inputs.pop();
+		String operator = inputs.pop();
+		String b = inputs.pop();
+
+		inputs.offerFirst(Integer.toString(map.operator(operator).calculate(toInt(a), toInt(b))));
 	}
 
 	private int toInt(String number) {
