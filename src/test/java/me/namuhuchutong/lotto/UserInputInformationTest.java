@@ -17,7 +17,7 @@ class UserInputInformationTest {
     @Test
     void throw_exception_when_receives_non_numeric() {
         //given
-        String[] manual = {"a, 1, 2, 3, 4"};
+        String[] manual = {"9, 1, 2, 3, 4"};
         String given = "a, 1, 2, 3, 4";
         int amount = 1;
         int bonusNumber = 7;
@@ -32,7 +32,7 @@ class UserInputInformationTest {
     @ValueSource(ints = {-1, 0})
     void throw_exception_when_receives_zero_or_negative(int amount) {
         //given
-        String[] manual = {"a, 1, 2, 3, 4"};
+        String[] manual = {"9, 1, 2, 3, 4"};
         String given = "1, 2, 3, 4, 5, 6";
         int bonusNumber = 7;
 
@@ -45,9 +45,9 @@ class UserInputInformationTest {
     @Test
     void return_numbers_objects_when_receives_six_numbers_from_user() {
         //given
-        String[] manual = {"a, 1, 2, 3, 4"};
+        String[] manual = {"9, 1, 2, 3, 4"};
         String given = "1, 2, 3, 4, 5, 6";
-        int amount = 1;
+        int amount = 2000;
         int bonusNumber = 7;
         Numbers expected = new Numbers(
                 List.of(
@@ -70,7 +70,7 @@ class UserInputInformationTest {
     @ValueSource(ints = {1,2,3,4,5,6})
     void bonus_number_should_not_be_duplicated_with_existing_numbers(int bonus) {
         //given
-        String[] manual = {"a, 1, 2, 3, 4"};
+        String[] manual = {"9, 1, 2, 3, 4"};
         String given = "1, 2, 3, 4, 5, 6";
         int amount = 1;
 
@@ -82,11 +82,25 @@ class UserInputInformationTest {
 
     @DisplayName("수동 로또는 숫자만 허용한다.")
     @Test
-    void test() {
+    void throw_exception_when_receives_non_numeric_in_manual_number() {
         //given
         String[] manual = {"a, 1, 2, 3, 4"};
         String lastWinning = "1, 1, 2, 3, 4";
-        int amount = 2;
+        int amount = 2000;
+        int bonusNumber = 7;
+
+        //when, then
+        assertThatThrownBy(() -> new UserInputInformation(amount, manual, lastWinning, bonusNumber))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("수동 로또 수는 전체 금액을 초과할 수 없다.")
+    @Test
+    void throw_exception_when_manual_lotto_exceed_total_amount() {
+        //given
+        int amount = 1000;
+        String[] manual = {"1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 6"};
+        String lastWinning = "1, 2, 6, 3, 4";
         int bonusNumber = 7;
 
         //when, then

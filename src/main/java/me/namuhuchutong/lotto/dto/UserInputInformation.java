@@ -25,12 +25,19 @@ public class UserInputInformation {
     public UserInputInformation(int amount, String[] manualNumbers, String numbers, int bonusNumber) {
         validateZeroOrNegative(amount);
         validateNonNumeric(numbers);
-        validateNonNumeric(Arrays.toString(manualNumbers));
+        validateNonNumeric(String.join("", manualNumbers));
         this.amount = amount;
+        validateManualNumbers(manualNumbers);
         this.numbers = numbers;
         this.manualNumbers = manualNumbers;
         validateDuplicatedNumbers(bonusNumber);
         this.bonusNumber = bonusNumber;
+    }
+
+    private void validateManualNumbers(String[] manualNumbers) {
+        if (manualNumbers.length > amount/1000) {
+            throw new IllegalArgumentException("수동 로또 수는 전체 금액을 초과할 수 없습니다.");
+        }
     }
 
     private void validateDuplicatedNumbers(int bonusNumber) {
