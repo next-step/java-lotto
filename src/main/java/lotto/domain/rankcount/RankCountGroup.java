@@ -1,7 +1,6 @@
-package lotto.domain.wrapper;
+package lotto.domain.rankcount;
 
-import lotto.domain.LotteryRank;
-import lotto.domain.RankCount;
+import lotto.domain.lotto.LotteryRank;
 
 import java.util.ArrayList;
 import java.util.List;

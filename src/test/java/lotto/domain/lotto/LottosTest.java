@@ -1,14 +1,14 @@
-package lotto.domain.wrapper;
+package lotto.domain.lotto;
 
-import lotto.domain.LotteryRank;
-import lotto.domain.RankCount;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.rankcount.RankCountGroup;
+import lotto.domain.wrapper.Numbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static lotto.domain.LotteryRank.*;
+import static lotto.domain.lotto.LotteryRank.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottosTest {
@@ -28,7 +28,7 @@ public class LottosTest {
         Numbers winningNumbers = new Numbers(List.of(1, 5, 12, 21, 32, 43));
 
         // when
-        RankCountGroup rankCountGroup = lottos.groupByRank(winningNumbers);
+        RankCountGroup rankCountGroup = lottos.groupByRankCount(winningNumbers);
 
         // then
         assertThat(rankCountGroup.findWinningCountBy(FIRST)).isEqualTo(1);

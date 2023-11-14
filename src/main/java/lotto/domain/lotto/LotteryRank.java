@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 public enum LotteryRank {
 
@@ -21,5 +21,9 @@ public enum LotteryRank {
 
     public static long calculatePrize(LotteryRank rank, long count) {
         return rank.prize * count;
+    }
+
+    public long prize() {
+        return this.prize;
     }
 }

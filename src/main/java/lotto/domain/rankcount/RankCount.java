@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.rankcount;
+
+import lotto.domain.lotto.LotteryRank;
 
 public class RankCount {
 

@@ -1,7 +1,8 @@
-package lotto.domain.wrapper;
+package lotto.domain.rankcount;
 
-import lotto.domain.LotteryRank;
-import lotto.domain.RankCount;
+import lotto.domain.lotto.LotteryRank;
+import lotto.domain.rankcount.RankCount;
+import lotto.domain.rankcount.RankCountGroup;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
