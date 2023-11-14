@@ -29,6 +29,8 @@ public class Winning {
     }
 
     public Prize getPrizes() {
-        return Prize.getPrize(winCount);
+        int count = winCount;
+        winCount = 0; // refresh win count
+        return Prize.getPrize(count);
     }
 }

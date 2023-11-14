@@ -18,17 +18,16 @@ public class LotteryAutoNumberGenerator {
     public static void main(String[] args) {
         Actor actor = new Actor();
         Lotteries lotteries = new Lotteries();
-        LotteryMachine lotteryMachine = new LotteryMachine();
         StatisticsMachine statisticsMachine = new StatisticsMachine();
 
         int money = InputView.start();
-        int ticketCount = lotteryMachine.getTicketCount(money);
+        int ticketCount = LotteryMachine.getTicketCount(money);
         InputView.showTicketCount(ticketCount);
 
         for (int i = 0; i < ticketCount; i++) {
-            lotteryMachine.run();
-            lotteryMachine.shuffle();
-            Lottery lottery = Lottery.of(lotteryMachine.getBall(actor.choose()));
+            LotteryMachine.run();
+            LotteryMachine.shuffle();
+            Lottery lottery = Lottery.of(LotteryMachine.getBall(actor.choose()));
             lotteries.keep(lottery);
         }
         InputView.showActorLotteries(lotteries.getLotteries());
