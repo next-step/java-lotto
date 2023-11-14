@@ -12,10 +12,10 @@ class WinningTest {
     @DisplayName("당첨갯수가 3개 이상이면 winner에 추가된다.")
     @Test
     void addWinnerSuccessTest() {
-        final Winning winner = new Winning();
-        winner.addWinning(3);
+        final Winning winning = new Winning();
+        winning.addWinning(3);
 
-        final int winnerCount = winner.getWinnerCount(3);
+        final int winnerCount = winning.getWinnerCount(Rank.FIFTH);
         assertThat(winnerCount).isEqualTo(1);
     }
 
@@ -25,7 +25,7 @@ class WinningTest {
         final Winning winner = new Winning();
         winner.addWinning(2);
 
-        final int winnerCount = winner.getWinnerCount(3);
+        final int winnerCount = winner.getWinnerCount(Rank.FIFTH);
         assertThat(winnerCount).isEqualTo(0);
     }
 

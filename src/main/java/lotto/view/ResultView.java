@@ -2,6 +2,7 @@ package lotto.view;
 
 
 import lotto.domain.Amount;
+import lotto.domain.Rank;
 import lotto.domain.Winning;
 
 import java.math.BigDecimal;
@@ -19,17 +20,6 @@ public class ResultView {
 
     public static void print(final String text) {
         System.out.println(text);
-    }
-
-    public static void winnerPrint(final Winning winner) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("당첨 통계\n---------\n");
-        stringBuilder.append(String.format("3개 일치 (5000원)- %d개\n", winner.getWinnerCount(3)));
-        stringBuilder.append(String.format("4개 일치 (50000원)- %d개\n", winner.getWinnerCount(4)));
-        stringBuilder.append(String.format("5개 일치 (1500000원)- %d개\n", winner.getWinnerCount(5)));
-        stringBuilder.append(String.format("6개 일치 (2000000000원)- %d개\n", winner.getWinnerCount(6)));
-
-        System.out.println(stringBuilder.toString());
     }
 
     public static void returnRatePrint(final double returnRate) {

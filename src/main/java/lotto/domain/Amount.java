@@ -24,7 +24,7 @@ public class Amount {
         return this.value < amount.get();
     }
 
-    private int get() {
+    public int get() {
         return value;
     }
 

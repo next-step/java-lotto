@@ -1,39 +1,47 @@
 package lotto.domain;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Winning {
-    public static final int FORWARD_WINNER = 2;
-    private Map<Integer, Integer> winnerCountMap;
+    private Map<Rank, Integer> winnerCountMap;
 
     public Winning() {
         this.winnerCountMap = new HashMap<>();
     }
     public void addWinning(int rightNumber) {
-        if (isWinning(rightNumber)) {
-            winnerCountMap.put(rightNumber, winnerCountMap.getOrDefault(rightNumber, 0) + 1);
+        if (Rank.isWinning(rightNumber)) {
+            final Rank rank = Rank.ofRightNumber(rightNumber);
+            winnerCountMap.put(rank, winnerCountMap.getOrDefault(rank, 0) + 1);
         }
     }
 
-    private boolean isWinning(final int rightNumber) {
-        return rightNumber > FORWARD_WINNER;
-    }
-
-    public int getWinnerCount(int winnerNumber) {
-        return winnerCountMap.getOrDefault(winnerNumber, 0);
+    public int getWinnerCount(Rank rank) {
+        return winnerCountMap.getOrDefault(rank, 0);
     }
 
     public double getReturnRate(final Amount purchaseAmount) {
         Amount sum = Amount.ZERO;
-        for (Integer key : winnerCountMap.keySet()) {
-            final Amount countPrice = Rank.priceOf(key);
+        for (Rank rank : winnerCountMap.keySet()) {
+            final Amount rankPrice = rank.getAmount();
 
-            final int count = winnerCountMap.get(key);
-            sum = countPrice.multiply(count);
+            final int count = winnerCountMap.get(rank);
+            sum = rankPrice.multiply(count);
         }
 
         return sum.divideWithDecimal(purchaseAmount);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("당첨 통계\n---------\n");
+        stringBuilder.append(String.format("3개 일치 (%d원)- %d개\n", Rank.FIFTH.getAmount().get(), getWinnerCount(Rank.FIFTH)));
+        stringBuilder.append(String.format("4개 일치 (%d원)- %d개\n", Rank.FOURTH.getAmount().get(), getWinnerCount(Rank.FOURTH)));
+        stringBuilder.append(String.format("5개 일치 (%d원)- %d개\n", Rank.THIRD.getAmount().get(), getWinnerCount(Rank.THIRD)));
+        stringBuilder.append(String.format("5개 일치, 보너스 볼 일치(%d원) %d개\n", Rank.SECOND.getAmount().get(), getWinnerCount(Rank.SECOND)));
+        stringBuilder.append(String.format("6개 일치 (%d원)- %d개\n", Rank.FIRST.getAmount().get(), getWinnerCount(Rank.FIRST)));
+
+        return stringBuilder.toString();
     }
 }

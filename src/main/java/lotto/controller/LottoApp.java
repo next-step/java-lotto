@@ -6,8 +6,6 @@ import lotto.domain.Winning;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.math.BigDecimal;
-
 public class LottoApp {
     public static void main(String[] args) {
         Amount purchaseAmount = new Amount(InputView.inputPurchaseAmount());
@@ -20,7 +18,7 @@ public class LottoApp {
 
         String winningNumberText = InputView.inputWinningNumber();
         final Winning winner = lottoGame.draw(winningNumberText);
-        ResultView.winnerPrint(winner);
+        ResultView.print(winner.toString());
 
         final double returnRate = winner.getReturnRate(purchaseAmount);
         ResultView.returnRatePrint(returnRate);
