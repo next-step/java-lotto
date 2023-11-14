@@ -11,7 +11,7 @@ public class Lotto {
     /** 로또 한 장이 몇 개의 번호로 구성되는지를 나타냅니다. */
     private static final int LOTTO_NUMBER_COUNT = 6;
 
-    SixNumberComposition numberList;
+    private SixNumberComposition numberList;
 
     private Lotto() {
     }

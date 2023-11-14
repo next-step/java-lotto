@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.type.SixNumberComposition;
 import lotto.type.WinningLevel;
 
 import java.util.*;
@@ -10,10 +11,7 @@ import java.util.*;
  *
  */
 public class WinningNumber {
-    /** 당첨 번호가 몇 개의 번호로 구성되는지를 나타냅니다. */
-    private static final int WINNING_NUMBER_COUNT = 6;
-
-    List<Integer> numberList = new ArrayList<>(WINNING_NUMBER_COUNT);
+    private SixNumberComposition numberList;
 
     private WinningNumber() {
     }
@@ -26,33 +24,10 @@ public class WinningNumber {
      * @return 생성된 당첨 번호
      */
     public static WinningNumber of(List<Integer> numberList) {
-        if (numberList.size() != WINNING_NUMBER_COUNT) {
-            throw new IllegalArgumentException("주어진 숫자가 "+WINNING_NUMBER_COUNT+"개가 아니라 " + numberList.size() + "개입니다.");
-        }
-
         WinningNumber winningNumber = new WinningNumber();
-        winningNumber.numberList.addAll(numberList);
-        winningNumber.numberList.sort(Comparator.naturalOrder());
-
-        winningNumber.validateLottoNumbers();
+        winningNumber.numberList = SixNumberComposition.of(numberList);
 
         return winningNumber;
-    }
-
-    /**
-     * 로또 번호 유효성 체크.
-     * 문제가 없다면 통과되고, 문제가 있다면 예외가 던져집니다.
-     */
-    private void validateLottoNumbers() {
-        for (int i = 0; i < WINNING_NUMBER_COUNT; i++) {
-            if (numberList.get(i) < 1) {
-                throw new IllegalArgumentException("주어진 당첨 번호는 " + numberList.get(i) + "로 1 미만입니다.");
-            }
-
-            if (numberList.get(i) > 45) {
-                throw new IllegalArgumentException("주어진 당첨 번호는 " + numberList.get(i) + "로 45 초과입니다.");
-            }
-        }
     }
 
     /**
@@ -63,7 +38,7 @@ public class WinningNumber {
      * @return 이 로또의 당첨 등수
      */
     public WinningLevel whatRank(Lotto lotto) {
-        final int matchCount = lotto.howManyContain(this.numberList);
+        final int matchCount = lotto.howManyContain(this.numberList.toList());
 
         if (matchCount < 3) {
             return WinningLevel.NONE;
