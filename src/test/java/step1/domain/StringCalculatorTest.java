@@ -24,8 +24,8 @@ class StringCalculatorTest {
             "2 + 3 - 3 * 4, 8",
             "2 + 3 - 3 * 4 / 2, 4"})
     void 사칙연산_정상(String strOperation, int expected) {
-        int result = StringCalculator.calc(strOperation);
-        assertThat(result).isEqualTo(expected);
+        Number result = StringCalculator.calc(strOperation);
+        assertThat(result.value()).isEqualTo(expected);
     }
 
 }
