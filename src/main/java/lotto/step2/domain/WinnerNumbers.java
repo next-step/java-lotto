@@ -1,7 +1,6 @@
 package lotto.step2.domain;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -38,15 +37,5 @@ public class WinnerNumbers {
 
     public Set<LottoNumber> nums() {
         return this.winnerLotto.nums();
-    }
-
-    public LottoResults matchLottos(final List<Lotto> lottos) {
-        final LottoResults lottoResults = new LottoResults();
-
-        for (final Lotto lotto : lottos) {
-            lottoResults.incrementRankCount(lotto.calculateLottoRank(this));
-        }
-
-        return lottoResults;
     }
 }

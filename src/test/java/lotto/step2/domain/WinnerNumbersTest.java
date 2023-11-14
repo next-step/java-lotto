@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -77,102 +76,5 @@ class WinnerNumbersTest {
         //when, then
         assertThatThrownBy(() -> new WinnerNumbers(winnerNumbers, bonusWinnerNumber))
                 .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    @DisplayName("matchLottos 메서드의 입력으로 Lotto List를 넣으면, 입력한 Lotto List의 당첨 통계를 구한다. - 1등 [당첨 번호 6개]")
-    void testCheckLottoWinningNumbers_LottoRank_FIRST() {
-        //given
-        int bonusWinnerNumber = 7;
-
-        final WinnerNumbers winnerNumbers = new WinnerNumbers("1, 2, 3, 4, 5, 6", bonusWinnerNumber);
-        final List<Lotto> lottos = List.of(new Lotto(Set.of(1, 2, 3, 4, 5, 6)));
-
-        //when
-        LottoResults lottoResults = winnerNumbers.matchLottos(lottos);
-
-        //then
-        assertThat(lottoResults.getCount(LottoRank.FIRST)).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("matchLottos 메서드의 입력으로 Lotto List를 넣으면, 입력한 Lotto List의 당첨 통계를 구한다. - 2등 [당첨 번호 5개, 보너스 번호 일치]")
-    void testCheckLottoWinningNumbers_LottoRank_SECOND() {
-        //given
-        int bonusWinnerNumber = 7;
-
-        final WinnerNumbers winnerNumbers = new WinnerNumbers("1, 2, 3, 4, 5, 6", bonusWinnerNumber);
-        final List<Lotto> lottos = List.of(
-                new Lotto(Set.of(1, 2, 3, 4, 5, 7)),
-                new Lotto(Set.of(1, 2, 3, 4, 6, 7)));
-
-        //when
-        LottoResults lottoResults = winnerNumbers.matchLottos(lottos);
-
-        //then
-        assertThat(lottoResults.getCount(LottoRank.SECOND)).isEqualTo(2);
-    }
-
-    @Test
-    @DisplayName("matchLottos 메서드의 입력으로 Lotto List를 넣으면, 입력한 Lotto List의 당첨 통계를 구한다. - 3등 [당첨 번호 5개, 보너스 번호 불일치]")
-    void testCheckLottoWinningNumbers_LottoRank_THIRD() {
-        //given
-        int bonusWinnerNumber = 7;
-
-        final WinnerNumbers winnerNumbers = new WinnerNumbers("1, 2, 3, 4, 5, 6", bonusWinnerNumber);
-        final List<Lotto> lottos = List.of(
-                new Lotto(Set.of(1, 2, 3, 4, 5, 8)),
-                new Lotto(Set.of(1, 2, 3, 4, 6, 8)),
-                new Lotto(Set.of(2, 3, 4, 5, 6, 8))
-        );
-
-        //when
-        LottoResults lottoResults = winnerNumbers.matchLottos(lottos);
-
-        //then
-        assertThat(lottoResults.getCount(LottoRank.THIRD)).isEqualTo(3);
-    }
-
-    @Test
-    @DisplayName("matchLottos 메서드의 입력으로 Lotto List를 넣으면, 입력한 Lotto List의 당첨 통계를 구한다. - 4등 [당첨 번호 4개]")
-    void testCheckLottoWinningNumbers_LottoRank_FOURTH() {
-        //given
-        int bonusWinnerNumber = 7;
-
-        final WinnerNumbers winnerNumbers = new WinnerNumbers("1, 2, 3, 4, 5, 6", bonusWinnerNumber);
-        final List<Lotto> lottos = List.of(
-                new Lotto(Set.of(1, 2, 3, 4, 7, 8)),
-                new Lotto(Set.of(2, 3, 4, 6, 7, 8)),
-                new Lotto(Set.of(1, 2, 3, 4, 10, 11)),
-                new Lotto(Set.of(3, 4, 5, 6, 8, 10))
-        );
-
-        //when
-        LottoResults lottoResults = winnerNumbers.matchLottos(lottos);
-
-        //then
-        assertThat(lottoResults.getCount(LottoRank.FOURTH)).isEqualTo(4);
-    }
-
-    @Test
-    @DisplayName("matchLottos 메서드의 입력으로 Lotto List를 넣으면, 입력한 Lotto List의 당첨 통계를 구한다. - 5등 [당첨 번호 3개]")
-    void testCheckLottoWinningNumbers_LottoRank_FIFTH() {
-        //given
-        int bonusWinnerNumber = 7;
-
-        final WinnerNumbers winnerNumbers = new WinnerNumbers("1, 2, 3, 4, 5, 6", bonusWinnerNumber);
-        final List<Lotto> lottos = List.of(
-                new Lotto(Set.of(1, 2, 3, 7, 8, 10)),
-                new Lotto(Set.of(2, 3, 4, 7, 8, 11)),
-                new Lotto(Set.of(1, 2, 6, 7, 10, 11)),
-                new Lotto(Set.of(3, 4, 6, 8, 10, 15)),
-                new Lotto(Set.of(1, 3, 6, 10, 15, 33))
-        );
-
-        //when
-        LottoResults lottoResults = winnerNumbers.matchLottos(lottos);
-
-        //then
-        assertThat(lottoResults.getCount(LottoRank.FIFTH)).isEqualTo(5);
     }
 }

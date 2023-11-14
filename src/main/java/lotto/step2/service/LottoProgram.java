@@ -25,7 +25,7 @@ public class LottoProgram {
         ResultView.printLottos(lottos);
 
         final WinnerNumbers winnerNumbers = InputView.inputWinnersNumbers();
-        final LottoResults lottoResults = winnerNumbers.matchLottos(lottos);
+        final LottoResults lottoResults = LottoResults.calculateResults(lottos, winnerNumbers);
         ResultView.printLottoResults(lottoResults);
 
         final double rateOfReturn = lottoResults.calculateRateOfReturn(purchaseAmount);
