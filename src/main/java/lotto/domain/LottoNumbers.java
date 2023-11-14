@@ -20,12 +20,14 @@ public class LottoNumbers {
     }
 
     private void validateNumberRange(List<Integer> numbers) {
-        boolean isNumberRange = numbers.stream()
-                .allMatch(number -> number >= MIN_NUMBER && number <= MAX_NUMBER);
-
-        if (!isNumberRange) {
+        if (!isNumberRange(numbers)) {
             throw new NotNumberRangeException();
         }
+    }
+
+    private boolean isNumberRange(List<Integer> numbers) {
+        return numbers.stream()
+                .allMatch(number -> number >= MIN_NUMBER && number <= MAX_NUMBER);
     }
 
     public long matchCount(List<Integer> winLottoNumbers) {
