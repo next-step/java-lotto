@@ -48,6 +48,17 @@ public class CalculatorTest {
         assertThatThrownBy(() -> new Calculator(input))
             .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("덧셈 기능을 구현한다.")
+    @Test
+    void sumTest() {
+        // given
+        String input = "1 + 2";
+        Calculator calculator = new Calculator(input);
+
+        // when, then
+        assertThat(calculator.sum(1,2)).isEqualTo(3);
+    }
 }
 
 

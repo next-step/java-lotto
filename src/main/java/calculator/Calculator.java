@@ -60,7 +60,6 @@ public class Calculator {
         int i = 0;
         List<String> operators = new ArrayList<>();
         for (String o : inputs) {
-            validateOperator(o);
             addOperator(i, operators, o);
             ++i;
         }
@@ -68,15 +67,19 @@ public class Calculator {
     }
 
     private void validateOperator(String o) {
-        if (!o.equals("+")  && !o.equals("-") && !o.equals("*") && !o.equals("/")) {
+        if (!o.equals("+") && !o.equals("-") && !o.equals("*") && !o.equals("/")) {
             throw new IllegalArgumentException();
         }
     }
 
-    private static void addOperator(int i, List<String> operators, String o) {
+    private void addOperator(int i, List<String> operators, String o) {
         if (i % 2 != 0) {
+            validateOperator(o);
             operators.add(o);
         }
     }
 
+    public int sum(int operand1, int operand2) {
+        return operand1 + operand2;
+    }
 }
