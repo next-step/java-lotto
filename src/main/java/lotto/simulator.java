@@ -25,6 +25,6 @@ public class simulator {
             lottery.depositMoney(Dividend.getMoney(correctCount, winCount));
             LottoOutput.viewLottoTotal(correctCount, winCount);
         }
-        System.out.println(lottery.money());
+        LottoOutput.viewTotalIncomeRatio(lottery.money(), purchaseAmount);
     }
 }

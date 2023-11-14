@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.model.Lotto;
 import lotto.model.constants.Dividend;
+import lotto.util.LottoUtil;
 
 import java.util.List;
 
@@ -19,6 +20,10 @@ public class LottoOutput {
             System.out.println(lotto);
         }
         System.out.println();
+    }
+
+    public static void viewTotalIncomeRatio(long total, int purchaseAmount) {
+        System.out.println("총 수익률은 " + String.format("%.2f", LottoUtil.getInvestment(total, purchaseAmount)) + "입니다.");
     }
 
     public static void viewLottoTotal(int correctCount, int count) {

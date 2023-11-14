@@ -12,7 +12,7 @@ public class LottoUtil {
         return purchaseAmount / LOTTO_PRICE;
     }
 
-    public static double getInvestment(double total, int purchaseAmount) {
-        return total / purchaseAmount;
+    public static double getInvestment(long total, int purchaseAmount) {
+        return (double) total / purchaseAmount;
     }
 }
