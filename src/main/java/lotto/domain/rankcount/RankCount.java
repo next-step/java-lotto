@@ -16,7 +16,7 @@ public class RankCount {
         return this.winningCount;
     }
 
-    public boolean isEqualWithRank(LotteryRank rank) {
+    public boolean isSameRank(LotteryRank rank) {
         return this.rank.equals(rank);
     }
 }

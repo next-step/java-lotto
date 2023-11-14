@@ -1,7 +1,6 @@
 package lotto.domain.rankcount;
 
 import lotto.domain.lotto.LotteryRank;
-import lotto.domain.rankcount.RankCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +15,7 @@ class RankCountTest {
         RankCount rankCount = new RankCount(LotteryRank.FIRST, 3);
 
         // when
-        boolean result = rankCount.isEqualWithRank(LotteryRank.SECOND);
+        boolean result = rankCount.isSameRank(LotteryRank.SECOND);
 
         // then
         assertThat(result).isFalse();
