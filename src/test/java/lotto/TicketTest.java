@@ -14,7 +14,9 @@ public class TicketTest {
                 RandomNumbers numbers = new RandomNumbers(List.of(1, 2, 3, 7, 8, 9));
                 List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
                 Ticket ticket = new Ticket(numbers);
+
                 ticket.matchInOneTicket(winningNumbers);
+                
                 assertThat(ticket.matchCount()).isEqualTo(3);
         }
 }
