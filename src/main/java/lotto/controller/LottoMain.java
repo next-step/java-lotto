@@ -15,18 +15,15 @@ public class LottoMain {
         InputView inputView = new InputView();
 
         int price = inputView.inputPrice();
-        InputValidator inputValidator = new InputValidator();
-        inputValidator.validatePurchasePrice(price);
+        InputValidator.validatePurchasePrice(price);
 
         int lottoCount = price / PRICE_UNIT;
-        LottoFactory lottoFactory = new LottoFactory();
-        Lottos lottos = lottoFactory.generateLottos(lottoCount);
+        Lottos lottos = LottoFactory.generateLottos(lottoCount);
 
         OutputView outputView = new OutputView();
         outputView.printLottos(lottoCount, lottos);
 
-        StringParser stringParser = new StringParser();
-        List<Integer> winningLottoNumbers = stringParser.parseToInts(inputView.inputWinningNumber());
+        List<Integer> winningLottoNumbers = StringParser.parseToInts(inputView.inputWinningNumber());
 
         LottoStatistics lottoStatistics = new LottoStatistics();
         List<LottoWinResult> lottoWinResults = lottoStatistics.statistics(lottos.winCounts(winningLottoNumbers));

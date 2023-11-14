@@ -15,9 +15,7 @@ class StringParserTest {
         String text = "1, 2, 3, 4, 5, 6";
         int size = 6;
 
-        StringParser stringParser = new StringParser();
-
-        List<Integer> parseText = stringParser.parseToInts(text);
+        List<Integer> parseText = StringParser.parseToInts(text);
 
         assertThat(parseText).hasSize(size)
                 .containsExactly(1, 2, 3, 4, 5, 6);
