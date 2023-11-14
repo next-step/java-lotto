@@ -1,5 +1,9 @@
 package step1;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public enum Operator {
     PLUS("+") {
         @Override
@@ -26,6 +30,8 @@ public enum Operator {
         }
     };
 
+    private static final Map<String, Operator> operators =
+            Stream.of(values()).collect(Collectors.toMap(op -> op.symbol, op -> op));
     private final String symbol;
 
     Operator(String symbol) {
@@ -33,10 +39,8 @@ public enum Operator {
     }
 
     public static Operator findOperatorByUserInput(String symbol) {
-        for (Operator op : values()) {
-            if (op.symbol.equals(symbol)) {
-                return op;
-            }
+        if (operators.containsKey(symbol)) {
+            return operators.get(symbol);
         }
         throw new IllegalArgumentException("사칙연산의 기호가 아닙니다");
     }
