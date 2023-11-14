@@ -6,54 +6,36 @@ public class Calculator {
 
     private static String SPLITER = " ";
 
-    private int currentResult; // 현재 계산 결과 값
-    private int currentIdx; // 현재 읽고 있는 값의 인덱스
-    private String[] formulas; // 계산식
-
-    public Calculator() {
-        reset();
+    private Calculator() {
     }
 
-    private void reset() {
-        currentResult = 0;
-        currentIdx = 0;
-        formulas = null;
+    public static int cal(String input) {
+        isNullOrBlank(input);
+        return calculate(input.split(SPLITER));
     }
 
-    public int cal(String input) {
-        reset(); // 초기화
+    private static int calculate(String[] formulas) {
+        int currentIdx = 0;
+        int currentResult = Integer.parseInt(formulas[currentIdx++]);
 
-        isNullOrBlank(input); // null과 빈 값 체크
-        formulas = input.split(SPLITER);
-
-        // 첫 값 읽기
-        currentResult = Integer.parseInt(formulas[currentIdx++]);
-
-
-        while (currentIdx < formulas.length) {
-            calculate();
+        try {
+            currentResult = repetitiveCalculation(formulas, currentIdx, currentResult);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException(INCOMPLETED_FORMULA.getMessage());
         }
-
         return currentResult;
     }
 
-    private void calculate() {
-        try {
+    private static int repetitiveCalculation(String[] formulas, int currentIdx, int currentResult) {
+        while (currentIdx < formulas.length) {
             String operator = formulas[currentIdx++];
             int nextValue = Integer.parseInt(formulas[currentIdx++]);
             currentResult = Operator.calculate(currentResult, nextValue, operator);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            // 미완성 수식 - 피연산자 부재
-            throw new IllegalArgumentException(INCOMPLETED_FORMULA.getMessage());
-        } catch (Exception e) {
-            
-            // 기타 오류
-            throw e;
         }
-
+        return currentResult;
     }
 
-    private void isNullOrBlank(String s) {
+    private static void isNullOrBlank(String s) {
         if (s == null || s.isBlank()) {
             throw new IllegalArgumentException(NULL_OR_BLANK_INPUT.getMessage());
         }
