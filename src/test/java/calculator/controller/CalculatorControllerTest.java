@@ -3,10 +3,10 @@ package calculator.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class CalculatorControllerTest {
 
@@ -41,5 +41,16 @@ class CalculatorControllerTest {
     void validate_valid_pattern(String expression) {
         assertThatCode(() -> new CalculatorController(expression))
                 .doesNotThrowAnyException();
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"'2 * 3 / 2':3", "'5 + 3 - 3':5", "'5 * 3 - 2 / 2':6"}, delimiter = ':')
+    @DisplayName("입력값의 순서에 따라 계산이 제대로 되는지 확인한다.")
+    void calculate(String expression, int expected) {
+        CalculatorController controller = new CalculatorController(expression);
+
+        int actual = controller.calculate(expression);
+
+        assertThat(actual).isEqualTo(expected);
     }
 }
