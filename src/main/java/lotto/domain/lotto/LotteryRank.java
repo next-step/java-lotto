@@ -10,6 +10,9 @@ public enum LotteryRank {
     private int matchingCount;
     private long prize;
 
+    LotteryRank() {
+    }
+
     LotteryRank(int matchingCount, long prize) {
         this.matchingCount = matchingCount;
         this.prize = prize;
@@ -17,10 +20,6 @@ public enum LotteryRank {
 
     public int matchingCount() {
         return this.matchingCount;
-    }
-
-    public static long calculatePrize(LotteryRank rank, long count) {
-        return rank.prize * count;
     }
 
     public long prize() {
