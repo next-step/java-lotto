@@ -23,7 +23,7 @@ public enum Operator {
         Operator operator = Arrays.stream(values())
                 .filter(v -> v.sign.equals(sign))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUR_BASIC_OPERATIONS.getMessage()));
+                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUR_BASIC_OPERATIONS.getMessage() + sign + " : "));
 
         return operator.expression.apply(a, b);
     }

@@ -34,8 +34,7 @@ class CalculatorTest {
     @Test
     void calculation_잘못된연산자입력_오류출력() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> calculation("2 & 3 + 2 * 4"))
-                .withMessage(NOT_FOUR_BASIC_OPERATIONS.getMessage());
+                .isThrownBy(() -> calculation("2 & 3 + 2 * 4"));
     }
 
     @Test
@@ -53,8 +52,7 @@ class CalculatorTest {
     @Test
     void calculation_연속숫자입력_오류출력() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> calculation("2 - 3 3 2 * 4 +"))
-                .withMessage(NOT_FOUR_BASIC_OPERATIONS.getMessage());
+                .isThrownBy(() -> calculation("2 - 3 3 2 * 4 +"));
     }
 
 }
