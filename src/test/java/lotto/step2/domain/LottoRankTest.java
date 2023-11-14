@@ -1,17 +1,49 @@
 package lotto.step2.domain;
 
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoRankTest {
     @Test
     @DisplayName("findByCount의 입력으로 일치하는 개수를 넣으면, 해당하는 LottoRank 객체를 반환한다.")
     void testFindByCount() {
-        assertThat(LottoRank.findByCount(3)).isEqualTo(LottoRank.FOURTH);
-        assertThat(LottoRank.findByCount(4)).isEqualTo(LottoRank.THIRD);
-        assertThat(LottoRank.findByCount(5)).isEqualTo(LottoRank.SECOND);
-        assertThat(LottoRank.findByCount(6)).isEqualTo(LottoRank.FIRST);
+        SoftAssertions.assertSoftly(softly -> {
+                    softly.assertThat(LottoRank.findByCountAndBonusMatching(3, false)).isEqualTo(LottoRank.FIFTH);
+                    softly.assertThat(LottoRank.findByCountAndBonusMatching(4, false)).isEqualTo(LottoRank.FOURTH);
+                    softly.assertThat(LottoRank.findByCountAndBonusMatching(5, false)).isEqualTo(LottoRank.THIRD);
+                    softly.assertThat(LottoRank.findByCountAndBonusMatching(5, true)).isEqualTo(LottoRank.SECOND);
+                    softly.assertThat(LottoRank.findByCountAndBonusMatching(6, false)).isEqualTo(LottoRank.FIRST);
+                }
+        );
+    }
+
+    @Test
+    @DisplayName("hasMatchingCount를 사용하면, 각 LottoRank의 matchingCount가 0 초과인지 확인한다.")
+    void testHasMatchingCount() {
+        SoftAssertions.assertSoftly(softly -> {
+                    softly.assertThat(LottoRank.OTHER.hasMatchingCount()).isFalse();
+
+                    softly.assertThat(LottoRank.FIFTH.hasMatchingCount()).isTrue();
+                    softly.assertThat(LottoRank.FOURTH.hasMatchingCount()).isTrue();
+                    softly.assertThat(LottoRank.THIRD.hasMatchingCount()).isTrue();
+                    softly.assertThat(LottoRank.SECOND.hasMatchingCount()).isTrue();
+                    softly.assertThat(LottoRank.FIRST.hasMatchingCount()).isTrue();
+                }
+        );
+    }
+
+    @Test
+    @DisplayName("findByCount의 입력으로 일치하는 개수를 넣으면, 해당하는 LottoRank 객체를 반환한다.")
+    void testGetDescription() {
+        SoftAssertions.assertSoftly(softly -> {
+                    softly.assertThat(LottoRank.OTHER.getDescription()).isEqualTo("탈락");
+                    softly.assertThat(LottoRank.FIFTH.getDescription()).isEqualTo("5등");
+                    softly.assertThat(LottoRank.FOURTH.getDescription()).isEqualTo("4등");
+                    softly.assertThat(LottoRank.THIRD.getDescription()).isEqualTo("3등");
+                    softly.assertThat(LottoRank.SECOND.getDescription()).isEqualTo("2등");
+                    softly.assertThat(LottoRank.FIRST.getDescription()).isEqualTo("1등");
+                }
+        );
     }
 }

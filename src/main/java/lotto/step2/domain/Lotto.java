@@ -1,24 +1,51 @@
 package lotto.step2.domain;
 
-import lotto.step2.validator.NumberValidator;
-
+import java.util.Collections;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private final Set<Integer> nums;
+    private final Set<LottoNumber> nums;
 
-    public Lotto(Set<Integer> nums) {
-        NumberValidator.validateNums(nums);
+    public Lotto(final Set<Integer> nums) {
+        validateSize(nums);
 
-        this.nums = nums;
+        final TreeSet<LottoNumber> lottoNumbers = nums.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(TreeSet::new));
+
+        this.nums = Collections.unmodifiableSet(lottoNumbers);
     }
-    
-    public Set<Integer> nums() {
+
+    public Set<LottoNumber> nums() {
         return this.nums;
     }
 
     @Override
     public String toString() {
         return this.nums.toString();
+    }
+
+    private void validateSize(final Set<Integer> nums) {
+        if (nums.size() != 6) {
+            throw new IllegalArgumentException("lotto nums size must be 6");
+        }
+    }
+
+    public LottoRank calculateLottoRank(final WinnerNumbers winnerNumbers) {
+        return LottoRank.findByCountAndBonusMatching(
+                calculateLottoNumsMatchingCount(winnerNumbers.nums()),
+                this.nums.contains(winnerNumbers.getBonusNumber()));
+    }
+
+    private int calculateLottoNumsMatchingCount(final Set<LottoNumber> winnerNums) {
+        return (int) this.nums.stream()
+                .filter(winnerNums::contains)
+                .count();
+    }
+
+    public boolean contains(final LottoNumber bonusLottoNumber) {
+        return this.nums.contains(bonusLottoNumber);
     }
 }

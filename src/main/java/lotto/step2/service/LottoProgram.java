@@ -1,4 +1,4 @@
-package lotto.step2.util;
+package lotto.step2.service;
 
 import lotto.step2.domain.Lotto;
 import lotto.step2.domain.LottoResults;
@@ -11,6 +11,10 @@ import java.util.List;
 
 public class LottoProgram {
     public static final int LOTTO_PRICE = 1000;
+
+    private LottoProgram() {
+        throw new IllegalStateException("Service class");
+    }
 
     public static void start() {
         final UserInput input = InputView.inputPurchaseAmount();

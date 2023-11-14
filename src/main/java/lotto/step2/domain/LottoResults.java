@@ -3,6 +3,7 @@ package lotto.step2.domain;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class LottoResults {
@@ -45,8 +46,12 @@ public class LottoResults {
 
     private List<Map.Entry<LottoRank, Integer>> getRankResultEntriesExceptOther() {
         return rankResult.entrySet().stream()
-                .filter(entry -> entry.getKey().getMatchingCount() != 0)
+                .filter(hasMatchingCount())
                 .collect(Collectors.toList());
+    }
+
+    private Predicate<Map.Entry<LottoRank, Integer>> hasMatchingCount() {
+        return entry -> entry.getKey().hasMatchingCount();
     }
 
     public long getTotalPrizeMoney() {
