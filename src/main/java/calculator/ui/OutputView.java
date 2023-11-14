@@ -1,6 +1,8 @@
 package calculator.ui;
 
-public interface OutputView {
+public class OutputView{
 
-    void outputResult(int result);
+    public static void outputResult(int result) {
+        System.out.println(result);
+    }
 }
