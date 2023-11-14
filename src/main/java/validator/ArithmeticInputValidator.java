@@ -1,7 +1,7 @@
 package validator;
 
 import utils.MathUtils;
-import utils.StringUtils;
+import utils.Split;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +22,7 @@ public class ArithmeticInputValidator {
     }
 
     private static String[] splitInputAndCheckSize(String input) {
-        String[] operandsAndOperators = StringUtils.splitByPattern(input);
+        String[] operandsAndOperators = Split.splitByPattern(input);
         if (MathUtils.isEvenValue(operandsAndOperators.length)) {
             throw new IllegalArgumentException("사칙연산 입력 패턴을 다시 확인해주세요. length : " + operandsAndOperators.length);
         }

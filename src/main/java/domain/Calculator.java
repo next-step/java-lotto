@@ -6,12 +6,13 @@ import static java.lang.Integer.parseInt;
 
 public class Calculator {
 
+    private static int FIRST_OPERAND = 0;
     private Calculator() {
     }
 
     public static int calculateArithmetic(String[] operandsAndOperators) {
 
-        int sum = parseInt(operandsAndOperators[0]);
+        int sum = parseInt(operandsAndOperators[FIRST_OPERAND]);
         for (int i = 1; i < operandsAndOperators.length - 1; i += 2) {
             sum = getSum(operandsAndOperators, sum, i);
         }
@@ -20,6 +21,7 @@ public class Calculator {
 
     private static int getSum(String[] operandsAndOperators, int sum, int i) {
         if (operandsAndOperators[i].equals("+")) {
+            Operation.ADD.calculate(sum, parseInt(operandsAndOperators[i + 1]));
             return MathUtils.add(sum, parseInt(operandsAndOperators[i + 1]));
         }
         if (operandsAndOperators[i].equals("-")) {
