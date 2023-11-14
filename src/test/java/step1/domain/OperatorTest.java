@@ -16,26 +16,26 @@ class OperatorTest {
 
     @Test
     void 더하기인_경우() {
-        Operator op = new Operator("+");
-        assertThat(op.isAdd()).isTrue();
+        Operator operator = new Operator("+");
+        assertThat(operator.isAdd()).isTrue();
     }
 
     @Test
     void 빼기인_경우() {
-        Operator op = new Operator("-");
-        assertThat(op.isSubtract()).isTrue();
+        Operator operator = new Operator("-");
+        assertThat(operator.isSubtract()).isTrue();
     }
 
     @Test
     void 곱하기인_경우() {
-        Operator op = new Operator("*");
-        assertThat(op.isMultiply()).isTrue();
+        Operator operator = new Operator("*");
+        assertThat(operator.isMultiply()).isTrue();
     }
 
     @Test
     void 나누기인_경우() {
-        Operator op = new Operator("/");
-        assertThat(op.isDivide()).isTrue();
+        Operator operator = new Operator("/");
+        assertThat(operator.isDivide()).isTrue();
     }
 
 }

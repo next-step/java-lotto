@@ -15,9 +15,9 @@ public class StringCalculator {
         Number firstValue = new Number(operatorSequence.poll());
         Number cumulativeValue = firstValue;
         while (!operatorSequence.isEmpty()) {
-            Operator op = new Operator(operatorSequence.poll());
+            Operator operator = new Operator(operatorSequence.poll());
             Number number = new Number(operatorSequence.poll());
-            cumulativeValue = doOperation(cumulativeValue, op, number);
+            cumulativeValue = doOperation(cumulativeValue, operator, number);
         }
 
         return cumulativeValue;
