@@ -46,10 +46,10 @@ class LottoStatisticsTest {
         );
 
         LottoStatistics lottoStatistics = new LottoStatistics();
-        LottoRate lottoRate = lottoStatistics.rate(14000, lottoWinResults);
+        LottoWinPercentage lottoWinPercentage = lottoStatistics.rate(14000, lottoWinResults);
 
-        LottoRate expecteLottoRate = new LottoRate(0.35d, true);
-        assertThat(lottoRate).isEqualTo(expecteLottoRate);
+        LottoWinPercentage expecteLottoWinPercentage = new LottoWinPercentage(0.35d, true);
+        assertThat(lottoWinPercentage).isEqualTo(expecteLottoWinPercentage);
     }
 
 }

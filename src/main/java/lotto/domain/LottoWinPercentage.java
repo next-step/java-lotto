@@ -2,13 +2,13 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoRate {
+public class LottoWinPercentage {
     private static final double EPSILON = 0.0001;
 
     private double rate;
     private boolean isLowerStandard;
 
-    public LottoRate(double rate, boolean isLowerStandard) {
+    public LottoWinPercentage(double rate, boolean isLowerStandard) {
         this.rate = rate;
         this.isLowerStandard = isLowerStandard;
     }
@@ -25,8 +25,8 @@ public class LottoRate {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoRate lottoRate = (LottoRate) o;
-        return Math.abs(rate - lottoRate.rate) < EPSILON && isLowerStandard == lottoRate.isLowerStandard;
+        LottoWinPercentage lottoWinPercentage = (LottoWinPercentage) o;
+        return Math.abs(rate - lottoWinPercentage.rate) < EPSILON && isLowerStandard == lottoWinPercentage.isLowerStandard;
     }
 
     @Override

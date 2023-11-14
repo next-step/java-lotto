@@ -1,6 +1,6 @@
 package lotto.ui;
 
-import lotto.domain.LottoRate;
+import lotto.domain.LottoWinPercentage;
 import lotto.domain.LottoWinResult;
 import lotto.domain.Lottos;
 
@@ -26,9 +26,9 @@ public class OutputView {
         }
     }
 
-    public void printLottoRate(LottoRate lottoRate) {
-        System.out.print("총 수익률은 " + lottoRate.getRate() + "입니다.");
-        if (lottoRate.isLowerStandard()) {
+    public void printLottoRate(LottoWinPercentage lottoWinPercentage) {
+        System.out.print("총 수익률은 " + lottoWinPercentage.getRate() + "입니다.");
+        if (lottoWinPercentage.isLowerStandard()) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
     }
