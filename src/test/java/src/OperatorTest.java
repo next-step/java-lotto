@@ -20,7 +20,7 @@ class OperatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1,2,+,3", "1,2,-,-1", "1,2,*,2","1,2,/,0"}, delimiter = ',')
+    @CsvSource(value = {"1,2,+,3", "1,2,-,-1", "1,2,*,2", "1,2,/,0"}, delimiter = ',')
     void 사칙_연산자에_따라_연산을_할_수_있다(int num1, int num2, String stringOperation, int expectedResult) {
         // given
         Operator operator = Operator.byString(stringOperation);
