@@ -9,13 +9,13 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ### TODO
-- [ ] 메소드 분리
-- [ ] 상수 부분 final로 변경
 - [ ] 단위 테스트 네이밍 규칙 적용
 - [ ] 여러 assert문이 있는 테스트 개선
-- [ ] parameter명 축약표현 개선
 - [ ] 사칙연산 기호가 아닌 경우 발생하는 IllegalArgumentException에 잘못된 기호 표기
 
 ### DONE
 - [X] reset() 제거 및 동시성 이슈를 감안한 static으로 구현
 - [X] 주석 제거
+- [X] parameter명 축약표현 개선
+- [X] 상수 부분 final로 변경
+- [X] 메소드 분리 (최대 10라인)

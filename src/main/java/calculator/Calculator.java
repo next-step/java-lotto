@@ -4,7 +4,7 @@ import static calculator.exception.CustomExceptionCode.*;
 
 public class Calculator {
 
-    private static String SPLITER = " ";
+    private static final String SPLITER = " ";
 
     private Calculator() {
     }
@@ -17,7 +17,6 @@ public class Calculator {
     private static int calculate(String[] formulas) {
         int currentIdx = 0;
         int currentResult = Integer.parseInt(formulas[currentIdx++]);
-
         try {
             currentResult = repetitiveCalculation(formulas, currentIdx, currentResult);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -35,8 +34,8 @@ public class Calculator {
         return currentResult;
     }
 
-    private static void isNullOrBlank(String s) {
-        if (s == null || s.isBlank()) {
+    private static void isNullOrBlank(String input) {
+        if (input == null || input.isBlank()) {
             throw new IllegalArgumentException(NULL_OR_BLANK_INPUT.getMessage());
         }
     }
