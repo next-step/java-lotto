@@ -1,5 +1,9 @@
 package calculator;
 
+import calculator.domain.Operator;
+import calculator.domain.Seperator;
+import calculator.view.View;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -13,7 +17,7 @@ public class Main {
         Integer result = calculation(new Seperator().split(input));
 
         //결과 출력
-        view.getResult(result);
+        view.printResult(result);
     }
 
     private static Integer calculation(String[] text) {

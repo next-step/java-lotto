@@ -1,4 +1,4 @@
-package calculator;
+package calculator.view;
 
 import java.util.Scanner;
 
@@ -13,7 +13,7 @@ public class View {
         return input;
     }
 
-    public void getResult(Integer result) {
+    public void printResult(Integer result) {
         System.out.println("= " + result);
     }
 }
