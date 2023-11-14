@@ -9,7 +9,7 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## TODO
-* [ ] 입력값이 null 혹은 빈공백 문자열이 아닌지 확인한다.
+* [x] 입력값이 null 혹은 빈공백 문자열이 아닌지 확인한다.
 * [ ] 입력값을 공백문자열로 분리한다.
 * [ ] 사칙연산 기호가 아닌값이 있는지 확인한다.
 * [ ] 덧셈 기능을 구현한다.
