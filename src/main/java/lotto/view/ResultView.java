@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.*;
 
-import java.util.List;
 import java.util.Map;
 
 public class ResultView {
@@ -15,11 +14,15 @@ public class ResultView {
     private static final String REVENUE_TOTAL = "총 수익률은 ";
     private static final String THAT = "입니다.";
     private static final String LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String MANUAL = "수동으로 ";
+    private static final String PAPER_QUANTITY = "장, ";
+    private static final String AUTO = "자동으로 ";
 
-    public void reportBuying(int lottoCount,
-                             List<Lotto> lottos) {
-        System.out.println(lottoCount + BUYING_QUANTITY);
-        for (Lotto lotto : lottos) {
+    public void reportBuying(int autoLottoCount,
+                             int manualLottoCount,
+                             Lottos lottos) {
+        System.out.println(MANUAL + manualLottoCount + PAPER_QUANTITY + AUTO + autoLottoCount + BUYING_QUANTITY);
+        for (Lotto lotto : lottos.getAll()) {
             System.out.println(lotto.toString());
         }
         System.out.println();
@@ -34,10 +37,7 @@ public class ResultView {
         Map<LottoRank, Integer> winningResult = winningResults.getAll();
         for (Map.Entry<LottoRank, Integer> result : winningResult.entrySet()) {
             LottoRank lottoRank = result.getKey();
-            if (lottoRank.isWin()) {
-                System.out.println(lottoRank.description() + OPENING_PARENTHESIS + lottoRank.prizeToString() + CLOSING_PARENTHESIS + result.getValue() +
-                        QUANTITY);
-            }
+            printReport(result, lottoRank);
         }
 
         RevenueRate revenueRate = winningResults.revenue(buyingAmount);
@@ -46,6 +46,14 @@ public class ResultView {
             System.out.println(LOSS);
         }
 
+    }
+
+    private static void printReport(Map.Entry<LottoRank, Integer> result,
+                                    LottoRank lottoRank) {
+        if (lottoRank.isWin()) {
+            System.out.println(lottoRank.description() + OPENING_PARENTHESIS + lottoRank.prizeToString() + CLOSING_PARENTHESIS + result.getValue() +
+                    QUANTITY);
+        }
     }
 
 }

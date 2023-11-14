@@ -15,25 +15,77 @@ class WinningLottoTest {
 
     static Stream<Arguments> 로또_매개변수() {
         return Stream.of(
-                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), LottoRank.FIRST),
-                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 45)), LottoRank.SECOND),
-                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 12)), LottoRank.THIRD),
-                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 11, 12)), LottoRank.FOURTH),
-                Arguments.of(new Lotto(List.of(1, 2, 3, 9, 11, 12)), LottoRank.FIFTH),
-                Arguments.of(new Lotto(List.of(1, 2, 9, 10, 11, 12)), LottoRank.NOT_MATCHED),
-                Arguments.of(new Lotto(List.of(1, 8, 9, 10, 11, 12)), LottoRank.NOT_MATCHED),
-                Arguments.of(new Lotto(List.of(7, 8, 9, 10, 11, 12)), LottoRank.NOT_MATCHED)
-                // 다른 테스트 케이스도 추가할 수 있습니다.
+                Arguments.of(List.of(new Lotto(List.of(
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)))), LottoRank.FIRST),
+                Arguments.of(List.of(new Lotto(List.of(
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(45)))), LottoRank.SECOND),
+                Arguments.of(List.of(new Lotto(List.of(
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(12)))), LottoRank.THIRD),
+                Arguments.of(List.of(new Lotto(List.of(
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(11),
+                        LottoNumber.of(12)))), LottoRank.FOURTH),
+                Arguments.of(List.of(new Lotto(List.of(
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(10),
+                        LottoNumber.of(11),
+                        LottoNumber.of(12)))), LottoRank.FIFTH),
+                Arguments.of(List.of(new Lotto(List.of(
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(9),
+                        LottoNumber.of(10),
+                        LottoNumber.of(11),
+                        LottoNumber.of(12)))), LottoRank.NOT_MATCHED),
+                Arguments.of(List.of(new Lotto(List.of(
+                        LottoNumber.of(1),
+                        LottoNumber.of(8),
+                        LottoNumber.of(9),
+                        LottoNumber.of(10),
+                        LottoNumber.of(11),
+                        LottoNumber.of(12)))), LottoRank.NOT_MATCHED),
+                Arguments.of(List.of(new Lotto(List.of(
+                        LottoNumber.of(7),
+                        LottoNumber.of(8),
+                        LottoNumber.of(9),
+                        LottoNumber.of(10),
+                        LottoNumber.of(11),
+                        LottoNumber.of(12)))), LottoRank.NOT_MATCHED)
         );
     }
 
     @ParameterizedTest
     @MethodSource("로또_매개변수")
-    void 당첨로또번호로_구입로또_등수를_알_수_있다(Lotto lotto,
+    void 당첨로또번호로_구입로또_등수를_알_수_있다(List<Lotto> lottos,
                                  LottoRank lottoRank) {
-        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 45);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6))), LottoNumber.of(45));
 
-        List<LottoRank> actual = winningLotto.winningRank(List.of(lotto));
+        List<LottoRank> actual = winningLotto.winningRank(new Lottos(lottos));
         List<LottoRank> expected = List.of(lottoRank);
 
         assertThat(actual).isEqualTo(expected);
@@ -41,6 +93,11 @@ class WinningLottoTest {
 
     @Test
     void 당첨로또번호와_보너스가_중복일_경우_예외가_발생한다() {
-        assertThrows(IllegalArgumentException.class, () -> new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 1));
+        assertThrows(IllegalArgumentException.class, () -> new WinningLotto(new Lotto(List.of(LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6))), LottoNumber.of(6)));
     }
 }

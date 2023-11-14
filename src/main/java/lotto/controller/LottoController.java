@@ -1,10 +1,8 @@
 package lotto.controller;
 
-import lotto.domain.BuyingAmount;
-import lotto.domain.LottoMachine;
-import lotto.domain.WinningLotto;
-import lotto.domain.WinningResults;
+import lotto.domain.*;
 import lotto.domain.strategy.RandomLottoNumberStrategy;
+import lotto.factory.LottoSeller;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -17,12 +15,20 @@ public class LottoController {
         ResultView resultView = new ResultView();
 
         BuyingAmount buyingAmount = new BuyingAmount(inputView.inputAmount());
+        ManualCount manualCount = new ManualCount(inputView.inputManualCount(), buyingAmount);
+        Lottos manaulLottos = LottoSeller.salesManualLottos(inputView.inputManualNumbers(manualCount));
+        Lottos autoLottos = LottoSeller.salesAutoLottos(new RandomLottoNumberStrategy(), buyingAmount.autoBuyingCount(manualCount));
+        Lottos lottos = new Lottos(autoLottos, manaulLottos);
 
-        LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberStrategy(), buyingAmount);
-        resultView.reportBuying(lottoMachine.lottoCount(), lottoMachine.getLottoNumbers());
+        resultView.reportBuying(buyingAmount.autoBuyingCount(manualCount),
+                manualCount.count(),
+                lottos);
 
-        WinningLotto winningLotto = new WinningLotto(inputView.winnerNumber(), inputView.inputBonusNumber());
-        WinningResults winningResults = lottoMachine.report(winningLotto);
+        WinningLotto winningLotto = new WinningLotto(Lotto.from(inputView.winnerNumber()),
+                LottoNumber.of(inputView.inputBonusNumber()));
+
+        WinningResults winningResults = new WinningResults(winningLotto.winningRank(lottos));
+
         resultView.reportStats(winningResults, buyingAmount);
     }
 

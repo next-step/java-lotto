@@ -19,11 +19,19 @@ public class BuyingAmount {
         return amount % LOTTO_AMOUNT != 0;
     }
 
-    public int units() {
-        return amount / LOTTO_AMOUNT;
+    public int autoBuyingCount(ManualCount manualCount) {
+        return manualCount.difference(amount / LOTTO_AMOUNT);
     }
 
     public double divide(int basic) {
         return (double) basic / this.amount;
+    }
+
+    public boolean isMoreThenAmount(int count) {
+        return units() < count;
+    }
+
+    private int units() {
+        return amount / LOTTO_AMOUNT;
     }
 }

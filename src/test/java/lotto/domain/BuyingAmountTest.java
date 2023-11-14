@@ -31,9 +31,10 @@ class BuyingAmountTest {
     @Test
     void 구매_가능한_로또_수를_알_수_있다() {
         BuyingAmount buyingAmount = new BuyingAmount(14000);
+        ManualCount manualCount = new ManualCount(3, buyingAmount);
 
-        int actual = buyingAmount.units();
-        int expected = 14;
+        int actual = buyingAmount.autoBuyingCount(manualCount);
+        int expected = 11;
 
         assertThat(actual).isEqualTo(expected);
     }

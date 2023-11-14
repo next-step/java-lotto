@@ -8,14 +8,9 @@ public class WinningLotto {
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(List<Integer> numbers,
-                        int bonusNumber) {
-        this(new Lotto(numbers), new LottoNumber(bonusNumber));
-    }
-
-    public WinningLotto(Lotto numbers,
+    public WinningLotto(Lotto lotto,
                         LottoNumber bonusNumber) {
-        this.lotto = numbers;
+        this.lotto = lotto;
         validateDuplicationNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
@@ -26,9 +21,9 @@ public class WinningLotto {
         }
     }
 
-    public List<LottoRank> winningRank(List<Lotto> lottos) {
+    public List<LottoRank> winningRank(Lottos lottos) {
         List<LottoRank> list = new ArrayList<>();
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottos.getAll()) {
             LottoRank lottoRank = winningRank(lotto);
             list.add(lottoRank);
         }

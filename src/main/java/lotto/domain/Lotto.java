@@ -4,17 +4,24 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int DEFAULT_QUANTITY = 6;
     private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> numbers) {
-        this.lottoNumbers = new LinkedHashSet<>();
-        for (int number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
-        }
+    public Lotto(List<LottoNumber> numbers) {
+        this.lottoNumbers = new LinkedHashSet<>(numbers);
         validateSize(lottoNumbers);
+    }
+
+    public static Lotto from(List<Integer> numbers) {
+        List<LottoNumber> list = numbers
+                .stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
+
+        return new Lotto(list);
     }
 
     private static void validateSize(Set<LottoNumber> numbers) {

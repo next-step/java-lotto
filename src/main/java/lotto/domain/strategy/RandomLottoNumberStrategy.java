@@ -1,5 +1,7 @@
 package lotto.domain.strategy;
 
+import lotto.domain.LottoNumber;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,25 +12,26 @@ public class RandomLottoNumberStrategy implements LottoNumberStrategy {
     private static final int MAX_NUMBER = 45;
     private static final int MIN_NUMBER_COUNT = 0;
     private static final int MAX_NUMBER_COUNT = 6;
-    private final List<Integer> numbers;
+    private static final List<LottoNumber> numbers;
 
-    public RandomLottoNumberStrategy() {
-        List<Integer> list = new ArrayList<>();
+    static {
+        List<LottoNumber> list = new ArrayList<>();
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            list.add(i);
+            list.add(LottoNumber.of(i));
         }
-        this.numbers = list;
+        numbers = list;
     }
 
     @Override
-    public List<Integer> create() {
-        List<Integer> list = new ArrayList<>(createRandomNumbers());
+    public List<LottoNumber> create() {
+        List<LottoNumber> list = new ArrayList<>(createRandomNumbers());
         Collections.sort(list);
+
         return List.copyOf(list);
 
     }
 
-    protected List<Integer> createRandomNumbers() {
+    protected List<LottoNumber> createRandomNumbers() {
         Collections.shuffle(numbers);
         return numbers.subList(MIN_NUMBER_COUNT, MAX_NUMBER_COUNT);
     }
