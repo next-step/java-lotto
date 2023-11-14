@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.type.WinningLevel;
+
 import java.util.*;
 
 /**

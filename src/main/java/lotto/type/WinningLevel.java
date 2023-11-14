@@ -1,4 +1,4 @@
-package lotto;
+package lotto.type;
 
 /**
  * 당첨 등수

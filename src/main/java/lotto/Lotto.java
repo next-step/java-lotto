@@ -51,6 +51,15 @@ public class Lotto {
         }
     }
 
+    /**
+     * 로또 번호를 정수 리스트로 바꾸어 반환합니다.
+     *
+     * @return 로또 번호 리스트
+     */
+    public List<Integer> toList() {
+        return List.copyOf(this.numberList);
+    }
+
 
     /**
      * 이 로또 용지가 주어진 번호를 가지고 있는지 확인합니다.

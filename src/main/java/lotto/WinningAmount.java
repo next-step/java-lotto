@@ -1,40 +1,39 @@
 package lotto;
 
+import lotto.type.WinningLevel;
+
 import java.util.Objects;
 
-/** 로또 당첨금액을 의미합니다. */
+/**
+ * 로또 당첨금액을 의미합니다.
+ * 불변 객체입니다.
+ */
 public class WinningAmount {
-    private int winningAmount = 0;
+    private final int winningAmount;
 
-    private WinningAmount() {
+    private WinningAmount(int winningAmount) {
+        this.winningAmount = winningAmount;
     }
 
     public static WinningAmount of(WinningLevel winningLevel) {
-        WinningAmount amount = new WinningAmount();
-
         if (winningLevel == WinningLevel.NONE) {
-            amount.winningAmount = 0;
-            return amount;
+            return new WinningAmount(0);
         }
 
         if (winningLevel == WinningLevel.FIVE) {
-            amount.winningAmount = 5000;
-            return amount;
+            return new WinningAmount(5000);
         }
 
         if (winningLevel == WinningLevel.FOUR) {
-            amount.winningAmount = 50000;
-            return amount;
+            return new WinningAmount(50000);
         }
 
         if (winningLevel == WinningLevel.THREE) {
-            amount.winningAmount = 1500000;
-            return amount;
+            return new WinningAmount(1500000);
         }
 
         // 1등
-        amount.winningAmount = 2000000000;
-        return amount;
+        return new WinningAmount(2000000000);
     }
 
     public static WinningAmount of(int winningAmount) {
@@ -42,10 +41,35 @@ public class WinningAmount {
             throw new IllegalArgumentException("당첨 금액은 0보다 작을 수 없으나 " + winningAmount + "이 주어졌습니다.");
         }
 
-        WinningAmount amount = new WinningAmount();
-        amount.winningAmount = winningAmount;
+        return new WinningAmount(winningAmount);
+    }
 
-        return amount;
+    public static WinningAmount zero() {
+        return WinningAmount.of(0);
+    }
+
+    /**
+     * 두 당첨금을 더해 새 당첨금을 생성합니다.
+     * 기존 객체를 수정하지 않고 새 객체를 반환합니다.
+     *
+     * @param operand 더할 당첨금
+     *
+     * @return 새 당첨금.
+     */
+    public WinningAmount add(WinningAmount operand) {
+        return WinningAmount.of(this.winningAmount + operand.winningAmount);
+    }
+
+    /**
+     * 당첨금을 주어진 크기만큼 정수배 합니다.
+     * 기존 객체를 수정하지 않고 새 객체를 반환합니다.
+     *
+     * @param coefficient 얼만큼 정수배 시킬 것인지
+     *
+     * @return 새 당첨금.
+     */
+    public WinningAmount multiply(int coefficient) {
+        return WinningAmount.of(this.winningAmount * coefficient);
     }
 
     @Override
@@ -70,5 +94,15 @@ public class WinningAmount {
     @Override
     public int hashCode() {
         return Objects.hash(winningAmount);
+    }
+
+    /**
+     * 이 객체와 호환되지 않는 곳에서 값을 사용하기 위하여 int로 변환합니다.
+     * 가능하면 호출하지 마십시오.
+     *
+     * @return 정수값
+     */
+    public int toInt() {
+        return this.winningAmount;
     }
 }
