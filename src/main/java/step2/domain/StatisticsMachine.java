@@ -1,15 +1,12 @@
 package step2.domain;
 
 import static java.math.RoundingMode.DOWN;
-import static java.math.RoundingMode.HALF_UP;
-import static java.math.RoundingMode.UNNECESSARY;
 import static step2.constant.Prize.ALL;
 import static step2.constant.Prize.FIVE;
 import static step2.constant.Prize.FOUR;
 import static step2.constant.Prize.THREE;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
