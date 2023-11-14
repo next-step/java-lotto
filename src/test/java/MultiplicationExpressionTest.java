@@ -1,14 +1,16 @@
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class MultiplicateExpressionTest {
+public class MultiplicationExpressionTest {
 
-    @DisplayName("뺄셈을 합니다.")
+    @DisplayName("곱셈을 합니다.")
     @Test
-    void plusCalculate(){
-        MinusExpression minusExpression = new MinusExpression(5, 2);
-        int result = minusExpression.calculate();
-        Assertions.assertThat(result).isEqualTo(3);
+    void multiplicationCalculate(){
+        MultiplicationExpression multiplicationExpression = new MultiplicationExpression(2,3);
+        int result = multiplicationExpression.calculate();
+        assertThat(result).isEqualTo(6);
     }
 }
