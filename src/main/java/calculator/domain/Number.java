@@ -1,22 +1,22 @@
-package step1;
+package calculator.domain;
 
 import java.util.Objects;
 
 public class Number {
 
-    private final int number;
+    private final int value;
 
     public Number(String number) {
-        this.number = parseStringToNumber(number);
+        this.value = parseStringToNumber(number);
     }
 
     public Number(int number) {
-        this.number = number;
+        this.value = number;
     }
 
     private int parseStringToNumber(String input) {
 
-        int number = 0;
+        int number;
         try{
             number = Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -28,22 +28,26 @@ public class Number {
 
     public Number plus(Number number) {
 
-        return new Number(this.number + number.number);
+        return new Number(this.value + number.value);
     }
 
     public Number minus(Number number) {
 
-        return new Number(this.number - number.number);
+        return new Number(this.value - number.value);
     }
 
     public Number multiply(Number number) {
 
-        return new Number(this.number * number.number);
+        return new Number(this.value * number.value);
     }
 
     public Number divide(Number number) {
 
-        return new Number(this.number / number.number);
+        return new Number(this.value / number.value);
+    }
+
+    public int value() {
+        return value;
     }
 
     @Override
@@ -51,11 +55,11 @@ public class Number {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Number number1 = (Number) o;
-        return number == number1.number;
+        return value == number1.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
+        return Objects.hash(value);
     }
 }

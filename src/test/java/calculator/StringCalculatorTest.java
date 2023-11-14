@@ -1,19 +1,12 @@
-package step1;
+package calculator;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import calculator.domain.Number;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class StringCalculatorTest {
-
-    private StringCalculator stringCalculator;
-
-    @BeforeEach
-    void setUp() {
-        stringCalculator = new StringCalculator();
-    }
 
     @Test
     @DisplayName("두 문자열을 더한다.")
