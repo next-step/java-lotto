@@ -1,5 +1,7 @@
 package lottoauto.domain.aggregate;
 
+import lottoauto.domain.EarningRateCalculator;
+import lottoauto.domain.WinnerBoard;
 import lottoauto.domain.lotto.Lotto;
 import lottoauto.domain.lotto.Lottos;
 import org.junit.jupiter.api.DisplayName;
@@ -9,9 +11,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class AggregatorTest {
-
-
+class EarningRateCalculatorTest {
 
     @Test
     @DisplayName("상금 보드를 이용해 총 수익률을 계산해줍니다.")
@@ -20,12 +20,11 @@ class AggregatorTest {
         Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = new Lotto(List.of(7, 8, 9, 10, 11, 12));
         Lotto lotto3 = new Lotto(List.of(13, 14, 15, 16, 17, 18));
-        Aggregator aggregator = new Aggregator();
-        WinnerBoard winnerBoard = new WinnerBoard();
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3));
-        lottos.checkWinnerLotto(winnerBoard, List.of(4, 5, 6, 7, 8, 9));
+        WinnerBoard winnerBoard = lottos.checkWinnerLotto("4, 5, 6, 7, 8, 9");
+        EarningRateCalculator earningRateCalculator = new EarningRateCalculator();
         // when
-        double earningRate = aggregator.calculateEarningRate(winnerBoard, lottos);
+        double earningRate = earningRateCalculator.calculateEarningRate(winnerBoard, lottos);
         // then
         assertThat(earningRate).isEqualTo(3.33);
     }
@@ -37,12 +36,11 @@ class AggregatorTest {
         Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = new Lotto(List.of(7, 8, 9, 10, 11, 12));
         Lotto lotto3 = new Lotto(List.of(13, 14, 15, 16, 17, 18));
-        Aggregator aggregator = new Aggregator();
-        WinnerBoard winnerBoard = new WinnerBoard();
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3));
-        lottos.checkWinnerLotto(winnerBoard, List.of(21, 22, 23, 24, 25, 26));
+        WinnerBoard winnerBoard = lottos.checkWinnerLotto("21, 22, 23, 24, 25, 26");
+        EarningRateCalculator earningRateCalculator = new EarningRateCalculator();
         // when
-        double earningRate = aggregator.calculateEarningRate(winnerBoard, lottos);
+        double earningRate = earningRateCalculator.calculateEarningRate(winnerBoard, lottos);
         // then
         assertThat(earningRate).isEqualTo(0);
     }

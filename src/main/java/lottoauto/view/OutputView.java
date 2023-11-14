@@ -1,6 +1,6 @@
 package lottoauto.view;
 
-import lottoauto.domain.aggregate.WinnerBoard;
+import lottoauto.domain.WinnerBoard;
 import lottoauto.domain.lotto.Lotto;
 import lottoauto.domain.lotto.Lottos;
 
@@ -35,7 +35,7 @@ public class OutputView {
         StringBuilder stringBuilder = new StringBuilder();
         String output = stringBuilder.append("총 수익률은 " + earningRate + "입니다.")
                 .append("(기준이 1이기 때문에 결과적으로 ")
-                .append(earningRate >= 1 ? "이득이" : "손헤")
+                .append(earningRate >= 1 ? "이득이" : "손해")
                 .append("라는 의미임)")
                 .toString();
         System.out.println(output);

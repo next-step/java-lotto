@@ -1,4 +1,4 @@
-package lottoauto.domain.aggregate;
+package lottoauto.domain.lotto;
 
 import java.util.List;
 

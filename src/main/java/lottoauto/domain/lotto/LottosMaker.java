@@ -1,7 +1,5 @@
 package lottoauto.domain.lotto;
 
-import lottoauto.domain.aggregate.CustomShuffle;
-
 import java.util.ArrayList;
 import java.util.List;
 
