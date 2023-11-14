@@ -1,24 +1,21 @@
 package step1;
 
-import java.util.List;
+import java.util.Queue;
 
 public class Calculator {
 
-    private final List<Integer> numbers;
-    private final List<Operator> operators;
+    private final Queue<Integer> numbers;
+    private final Queue<Operator> operators;
 
-    public Calculator(List<Integer> numbers, List<Operator> operators) {
+    public Calculator(Queue<Integer> numbers, Queue<Operator> operators) {
         this.numbers = numbers;
         this.operators = operators;
     }
 
     public int calculate() {
-        int result = numbers.get(0);
-        for (int i = 0; i < operators.size(); i++) {
-            Operator operator = operators.get(i);
-            Integer rightNumber = numbers.get(i + 1);
-
-            result = operator.apply(result, rightNumber);
+        Integer result = numbers.poll();
+        while(!operators.isEmpty()) {
+            result = operators.poll().apply(result, numbers.poll());
         }
         return result;
     }

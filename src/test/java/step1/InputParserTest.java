@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -32,7 +33,7 @@ public class InputParserTest {
     public void 숫자_리스트_반환_테스트() {
         List<String> tokens = makeTokens();
 
-        List<Integer> numbers = inputParser.parseFromTokenToNumber(tokens);
+        Queue<Integer> numbers = inputParser.parseFromTokenToNumber(tokens);
 
         assertThat(numbers).hasSize(3);
         assertThat(numbers).containsExactly(1, 2, 3);
@@ -42,7 +43,7 @@ public class InputParserTest {
     public void 연산기호_리스트_정상_반환_테스트() {
         List<String> tokens = makeTokens();
 
-        List<Operator> operators = inputParser.parseFromTokenToOperator(tokens);
+        Queue<Operator> operators = inputParser.parseFromTokenToOperator(tokens);
 
         assertThat(operators).hasSize(2);
         assertThat(operators).containsExactly(Operator.PLUS, Operator.MULTIPLICATION);

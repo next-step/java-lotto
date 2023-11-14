@@ -2,6 +2,7 @@ package step1;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class InputParser {
 
@@ -21,18 +22,18 @@ public class InputParser {
         }
     }
 
-    public List<Integer> parseFromTokenToNumber(List<String> tokens) {
-        List<Integer> numbers = new LinkedList<>();
+    public Queue<Integer> parseFromTokenToNumber(List<String> tokens) {
+        Queue<Integer> numbers = new LinkedList<>();
         for (int i = NUMBER_START_INDEX; i < tokens.size(); i = i + INDEX_INCREMENT) {
             numbers.add(Integer.parseInt(tokens.get(i)));
         }
         return numbers;
     }
 
-    public List<Operator> parseFromTokenToOperator(List<String> tokens) {
-        List<Operator> operators = new LinkedList<>();
+    public Queue<Operator> parseFromTokenToOperator(List<String> tokens) {
+        Queue<Operator> operators = new LinkedList<>();
         for (int i = OPERATOR_START_INDEX; i < tokens.size(); i = i + INDEX_INCREMENT) {
-            operators.add(Operator.findOperatorByUserInput(tokens.get(i).charAt(0))); //Operator의 필드를 String으로 바꿀지, 기존로직을 이용할지 고민
+            operators.add(Operator.findOperatorByUserInput(tokens.get(i))); //Operator의 필드를 String으로 바꿀지, 기존로직을 이용할지 고민
         }
         return operators;
     }

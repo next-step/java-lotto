@@ -1,45 +1,45 @@
 package step1;
 
 public enum Operator {
-    PLUS('+') {
+    PLUS("+") {
         @Override
-        public int apply(int leftNumber, int rightNumber) {
+        public int apply(Integer leftNumber, Integer rightNumber) {
             return leftNumber + rightNumber;
         }
     },
-    MINUS('-') {
+    MINUS("-") {
         @Override
-        public int apply(int leftNumber, int rightNumber) {
+        public int apply(Integer leftNumber, Integer rightNumber) {
             return leftNumber - rightNumber;
         }
     },
-    MULTIPLICATION('*') {
+    MULTIPLICATION("*") {
         @Override
-        public int apply(int leftNumber, int rightNumber) {
+        public int apply(Integer leftNumber, Integer rightNumber) {
             return leftNumber * rightNumber;
         }
     },
-    DIVISION('/') {
+    DIVISION("/") {
         @Override
-        public int apply(int leftNumber, int rightNumber) {
+        public int apply(Integer leftNumber, Integer rightNumber) {
             return leftNumber / rightNumber;
         }
     };
 
-    private final char symbol;
+    private final String symbol;
 
-    Operator(char symbol) {
+    Operator(String symbol) {
         this.symbol = symbol;
     }
 
-    public static Operator findOperatorByUserInput(char symbol) {
+    public static Operator findOperatorByUserInput(String symbol) {
         for (Operator op : values()) {
-            if (op.symbol == symbol) {
+            if (op.symbol.equals(symbol)) {
                 return op;
             }
         }
         throw new IllegalArgumentException("사칙연산의 기호가 아닙니다");
     }
 
-    public abstract int apply(int leftNumber, int rightNumber);
+    public abstract int apply(Integer leftNumber, Integer rightNumber);
 }
