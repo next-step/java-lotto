@@ -1,5 +1,7 @@
 package calculator.model;
 
+import calculator.model.constants.Operators;
+
 import java.util.List;
 
 public class Calculator {
@@ -14,37 +16,9 @@ public class Calculator {
     public int calculate() {
         int result = numbers.get(0);
         for (int i = 0; i < operators.size(); i++) {
-            result = getResult(result, i);
+            result = Operators.calculate(operators.get(i), result, numbers.get(i + 1));
         }
         return result;
     }
 
-    private int getResult(int result, int index) {
-        if ("+".equals(operators.get(index))) {
-            return addition(result, numbers.get(index + 1));
-        }
-        if ("-".equals(operators.get(index))) {
-            return subtraction(result, numbers.get(index + 1));
-        }
-        if ("*".equals(operators.get(index))) {
-            return multiplication(result, numbers.get(index + 1));
-        }
-        return division(result, numbers.get(index + 1));
-    }
-
-    private int addition(int left, int right) {
-        return left + right;
-    }
-
-    private int subtraction(int left, int right) {
-        return left - right;
-    }
-
-    private int multiplication(int left, int right) {
-        return left * right;
-    }
-
-    private int division(int left, int right) {
-        return left / right;
-    }
 }
