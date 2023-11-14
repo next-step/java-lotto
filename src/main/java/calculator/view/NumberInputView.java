@@ -4,8 +4,13 @@ import java.util.Scanner;
 
 public class NumberInputView {
 
-    public String inputNumbers() {
+    private static final String BLANK = " ";
+
+    public String[] inputNumbers() {
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        String input = scanner.nextLine();
+        scanner.close();
+
+        return input.split(BLANK);
     }
 }
