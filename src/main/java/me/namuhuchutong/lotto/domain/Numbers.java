@@ -2,13 +2,9 @@ package me.namuhuchutong.lotto.domain;
 
 import me.namuhuchutong.lotto.domain.generator.NumberGenerator;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Numbers {
-
-    private static final int FREQUENCY_NUMBER = 1;
 
     private final List<Number> values;
 
@@ -29,12 +25,11 @@ public class Numbers {
     }
 
     private void validateDuplicatedNumbers(List<Number> values) {
-        values.stream()
-              .filter(number -> Collections.frequency(values, number) > FREQUENCY_NUMBER)
-              .findAny()
-              .ifPresent(value -> {
-                  throw new IllegalArgumentException("중복된 값이 존재합니다. - " + value);
-              });
+        int setSize = new HashSet<>(values).size();
+        int valuesSize = values.size();
+        if (setSize != valuesSize) {
+            throw new IllegalArgumentException("중복된 값이 존재합니다. - " + values);
+        }
     }
 
     public int size() {
@@ -42,11 +37,14 @@ public class Numbers {
     }
 
     public long howManyMatch(Numbers numbers) {
+        Set<Number> numberSet = new HashSet<>(numbers.values);
         return this.values.stream()
-                          .filter(number1 -> numbers.values
-                                                    .stream()
-                                                    .anyMatch(number1::equals))
+                          .filter(numberSet::contains)
                           .count();
+    }
+
+    public boolean contains(Number number) {
+        return this.values.contains(number);
     }
 
     @Override

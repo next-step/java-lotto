@@ -1,6 +1,8 @@
 package me.namuhuchutong.lotto.domain;
 
+import static java.util.Collections.*;
 import static java.util.stream.Collectors.*;
+import static me.namuhuchutong.lotto.domain.LottoWinnings.*;
 
 import java.util.List;
 import java.util.Map;
@@ -23,14 +25,27 @@ public class Lotto {
         this.values = values;
     }
 
-    public LottoResult getMatchNumbers(Numbers given) {
+    public LottoResult getMatchNumbers(Numbers given, Number bonusNumber) {
         Map<LottoCount, Lotto> collect = this.values.stream()
                                                     .collect(groupingBy(
-                                                            numbers -> new LottoCount(numbers.howManyMatch(given)),
-                                                            collectingAndThen(toUnmodifiableList(), Lotto::new)));
+                                                                    numbers -> new LottoCount(numbers.howManyMatch(given)),
+                                                            collectingAndThen(toList(), Lotto::new)));
+        Lotto fiveMatches = collect.getOrDefault(new LottoCount(FIVE.getCount()), new Lotto(EMPTY_LIST));
+        Lotto bonusMatches = fiveMatches.values.stream()
+                                           .filter(numbers -> numbers.contains(bonusNumber))
+                                           .collect(collectingAndThen(toList(), Lotto::new));
+        removeDuplicated(collect, fiveMatches, bonusMatches);
         return new LottoResult(collect);
     }
 
+    private void removeDuplicated(Map<LottoCount, Lotto> collect, Lotto fiveMatches, Lotto bonusMatches) {
+        fiveMatches.values.removeAll(bonusMatches.values);
+        collect.put(new LottoCount(BONUS.getCount()), bonusMatches);
+    }
+
+    public int size() {
+        return this.values.size();
+    }
 
     @Override
     public String toString() {
