@@ -4,12 +4,8 @@ import domain.Lotto;
 import domain.LottoService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import policy.LottoNumber;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -22,7 +18,15 @@ public class LottoServiceTest {
 
         List<Lotto> lotto = lottoService.generateLotto(2);
 
+        for (Lotto lotto1 : lotto) {
+            System.out.println("lotto1.getLottoNumbers() = " + lotto1.getLottoNumbers());
+        }
         assertThat(lotto.size()).isEqualTo(2);
     }
 
+    @Test
+    @DisplayName("당첨 번호를 6개 미만으로 입력하는 경우 오류가 발생한다.")
+    void invalidInputExceptionTest() {
+
+    }
 }

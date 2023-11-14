@@ -2,7 +2,7 @@ package Lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import policy.LottoNumber;
+import util.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,6 +31,14 @@ public class LottoNumberTest {
         List<Integer> lottoNumbers = LottoNumber.generateLottoNumber();
 
         assertThat(lottoNumbers.stream().distinct().count()).isEqualTo(6);
+    }
+    @Test
+    @DisplayName("로또 생성은 Collections.shuffle() 메소드를 활용한다.")
+    void generateNumberShuffleTest2() {
+        for (int i = 0; i < 2; i++) {
+            List<Integer> lottoNumbers = LottoNumber.generateLottoNumber();
+            System.out.println("lottoNumbers = " + lottoNumbers);
+        }
     }
 
     @Test

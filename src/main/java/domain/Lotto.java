@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -8,7 +9,7 @@ public class Lotto {
 
     public Lotto(List<Integer> lottoNumbers) {
         Collections.sort(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
     public List<Integer> getLottoNumbers() {
