@@ -83,6 +83,17 @@ public class CalculatorTest {
         // when, then
         assertThat(calculator.multiplication(2,5)).isEqualTo(10);
     }
+
+    @DisplayName("나눗셈 기능을 구현한다.")
+    @Test
+    void divisionTest() {
+        // given
+        String input = "4 / 2";
+        Calculator calculator = new Calculator(input);
+
+        // when, then
+        assertThat(calculator.division(4,2)).isEqualTo(2);
+    }
 }
 
 
