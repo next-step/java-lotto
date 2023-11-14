@@ -2,21 +2,36 @@ package step1;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import java.util.LinkedList;
+import java.util.Queue;
+import org.junit.jupiter.api.Test;
 
 public class CalculateTest {
 
-    private final InputParser inputParser = new InputParser();
+    @Test
+    public void 사칙연산_혼합_테스트() {
+        //userInput = "4 + 2 / 3"
+        //expected 2
+        Queue<Integer> numbers = makeNumbers();
+        Queue<Operator> operators = makeOperators();
 
-    @ParameterizedTest
-    @CsvSource(value = {"1 + 3 - 2:2", "5 * 2 - 5:5", "4 - 2 * 7 / 2:7"}, delimiter = ':')
-    public void 사칙연산_혼합_테스트(String userInput, int expected) {
-        List<String> tokens = inputParser.splitUserInput(userInput);
-        Calculator calculator = new Calculator(inputParser.parseFromTokenToNumber(tokens),
-                inputParser.parseFromTokenToOperator(tokens));
+        Calculator calculator = new Calculator(numbers, operators);
 
-        assertThat(calculator.calculate()).isEqualTo(expected);
+        assertThat(calculator.calculate()).isEqualTo((4+2)/3);
+    }
+
+    private Queue<Integer> makeNumbers() {
+        Queue<Integer> numbers = new LinkedList<>();
+        numbers.add(4);
+        numbers.add(2);
+        numbers.add(3);
+        return numbers;
+    }
+
+    private Queue<Operator> makeOperators() {
+        Queue<Operator> operators = new LinkedList<>();
+        operators.add(Operator.PLUS);
+        operators.add(Operator.DIVISION);
+        return operators;
     }
 }
