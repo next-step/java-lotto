@@ -7,3 +7,14 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## TODO 기능 요구사항
+* [x] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+* [x] 사칙연산 메소드가 있는 계산기 구현
+* [x] 사칙연산 메소드가 있는 계산기 테스트
+* [x] 나눗셈 0으로 나눴을 경우 IllegalArgumentException throw 
+* [x] 입력 문자열을 공백으로 SPILT 구분 구현
+* [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
+
+
+
