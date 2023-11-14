@@ -7,11 +7,9 @@ import step2.constant.Prize;
 
 public class Lotteries {
 
-    private int lotteryCount;
     private final List<Lottery> lotteries;
 
     public Lotteries() {
-        lotteryCount = 0;
         lotteries = new ArrayList<>();
     }
 
