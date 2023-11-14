@@ -10,11 +10,9 @@ public class LottoNumberFactory {
     private LottoNumberFactory() {
     }
 
-    public static final int MIN_LOTTO_BOUND = 1;
-    public static final int MAX_LOTTO_BOUND = 45;
     private static final int START_POSITION = 0;
     private static final int END_POSITION = 6;
-    private static final List<Integer> LOTTO_NUMBERS = IntStream.rangeClosed(MIN_LOTTO_BOUND, MAX_LOTTO_BOUND)
+    private static final List<Integer> LOTTO_NUMBERS = IntStream.rangeClosed(LottoNumber.MIN_LOTTO_BOUND, LottoNumber.MAX_LOTTO_BOUND)
             .boxed()
             .collect(Collectors.toList());
 
