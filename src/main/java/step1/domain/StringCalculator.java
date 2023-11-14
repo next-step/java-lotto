@@ -6,6 +6,8 @@ import java.util.Queue;
 
 public class StringCalculator {
 
+    private static Calculator calculator = new Calculator();
+
     public static Number calc(String strOperation) {
         validateStringOperation(strOperation);
 
@@ -28,7 +30,7 @@ public class StringCalculator {
     }
 
     private static Number doOperation(Number left, Operator op, Number right) {
-        Calculator calculator = new Calculator();
+
         if (op.isAdd()) {
             return calculator.add(left, right);
         }
