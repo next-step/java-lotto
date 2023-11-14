@@ -6,6 +6,7 @@ public class LottoNumbers {
     public static final int MAX_LOTTO_NUMBER = 45;
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int LOTTO_NUMBER_COUNT = 6;
+    public static final String INVALID_COUNT = "로또 번호는 6개여야 합니다.";
     private Set<Integer> numbers;
 
     public LottoNumbers() {
@@ -13,7 +14,14 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(final Set<Integer> numbers) {
+        validationCheck(numbers);
         this.numbers = numbers;
+    }
+
+    private static void validationCheck(final Set<Integer> numbers) {
+        if (numbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException(INVALID_COUNT);
+        }
     }
 
     private Set<Integer> initLottoNumbers() {
