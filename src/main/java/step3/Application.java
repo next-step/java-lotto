@@ -1,11 +1,22 @@
 package step3;
 
+import step3.domain.*;
+import step3.view.InputView;
+import step3.view.OutputView;
+
 public class Application {
 
-    private static final InputView inputView = new InputView();
-    private static final OutputView outputView = new OutputView();
-
     public static void main(String[] args) {
-        // TODO 구현 진행
+        int inputMoney = InputView.inputMoney();
+        Lottos lottos = new LottoMachine().play(inputMoney);
+        OutputView.printPurchaseComplete(lottos);
+
+        Lotto winningNumberLotto = InputView.inputWinningNumbers();
+        LottoNumber bonusNumber = InputView.inputBonusNumber();
+
+        WinningNumbers winningNumbers = WinningNumbers.of(winningNumberLotto, bonusNumber);
+        WinningResult result = new ResultProcessor().result(winningNumbers, lottos);
+
+        OutputView.print(result);
     }
 }

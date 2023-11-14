@@ -1,6 +1,7 @@
 package step3.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -31,5 +32,13 @@ public class Lotto {
         return lottoNumbers.stream()
                 .mapToInt(LottoNumber::number)
                 .anyMatch(number -> number == lottoNumber.number());
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::number)
+                .map(String::valueOf)
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 }

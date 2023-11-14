@@ -1,5 +1,7 @@
 package step3.domain;
 
+import step3.cache.LottoNumberCache;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,8 +11,8 @@ public class LottoMachine {
 
     public static final int PRICE_PER_LOTTO = 1_000;
     private static final int LOTTO_SIZE = Lotto.LOTTO_SIZE;
-    private static final int NUMBER_BOX_START_NUMBER = 1;
-    private static final int NUMBER_BOX_END_NUMBER = 45;
+    public static final int NUMBER_BOX_START_NUMBER = 1;
+    public static final int NUMBER_BOX_END_NUMBER = 45;
 
     private final List<Integer> numberBox;
 
@@ -52,7 +54,7 @@ public class LottoMachine {
         Collections.shuffle(numberBox);
         return numberBox.subList(0, LOTTO_SIZE)
                 .stream()
-                .map(LottoNumber::of)
+                .map(LottoNumberCache::getLottoNumber)
                 .collect(Collectors.toList());
     }
 }

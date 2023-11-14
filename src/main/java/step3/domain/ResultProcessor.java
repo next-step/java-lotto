@@ -1,8 +1,6 @@
 package step3.domain;
 
 import step2.domain.LottoMachine;
-
-import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
 
 public class ResultProcessor {
@@ -22,11 +20,8 @@ public class ResultProcessor {
         return new WinningResult(result, earningRate(result, lottos));
     }
 
-    private static String earningRate(LinkedHashMap<LottoRank, Integer> result, Lottos lottos) {
-        DecimalFormat df = new DecimalFormat("0.00");
-        int earningRate = totalEarningMoney(result) / totalPurchasePrice(lottos);
-        return df.format(earningRate);
-
+    private static double earningRate(LinkedHashMap<LottoRank, Integer> result, Lottos lottos) {
+        return (double) totalEarningMoney(result) / totalPurchasePrice(lottos);
     }
 
     private static int totalPurchasePrice(Lottos lottos) {
