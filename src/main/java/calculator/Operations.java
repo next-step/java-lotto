@@ -20,10 +20,7 @@ public class Operations {
 
     public boolean isOperation(String element) {
         Matcher operationMatcher = OPERATION_PATTERN.matcher(element);
-        if (operationMatcher.find()) {
-            return true;
-        }
-        return false;
+        return operationMatcher.matches();
     }
 
     public final List<Operation> findAllOperation() {
