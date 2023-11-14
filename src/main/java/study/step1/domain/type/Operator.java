@@ -3,25 +3,18 @@ package study.step1.domain.type;
 import java.util.Arrays;
 import java.util.function.BiFunction;
 
-import study.step1.domain.DefaultOperation;
+import study.step1.domain.exception.CalculatorException;
 
 public enum Operator {
 
-    PLUS("+", "더하기", (x, y) -> {
-        DefaultOperation operation = new DefaultOperation();
-        return operation.plus(x, y);
-    }),
-    MINUS("-", "빼기", (x, y) -> {
-        DefaultOperation operation = new DefaultOperation();
-        return operation.minus(x, y);
-    }),
-    TIMES("*", "곱하기", (x, y) -> {
-        DefaultOperation operation = new DefaultOperation();
-        return operation.times(x, y);
-    }),
+    PLUS("+", "더하기", (x, y) -> x + y),
+    MINUS("-", "빼기", (x, y) -> x - y),
+    TIMES("*", "곱하기", (x, y) -> x * y),
     DIVIDE("/", "나누기", (x, y) -> {
-        DefaultOperation operation = new DefaultOperation();
-        return operation.divide(x, y);
+        if (y == 0) {
+            throw new CalculatorException("DivideError: 0으로는 나눌 수 없습니다.");
+        }
+        return x / y;
     });
 
     private final String code;
