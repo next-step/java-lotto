@@ -2,6 +2,8 @@ package calculator;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalculatorTest {
@@ -32,4 +34,10 @@ public class CalculatorTest {
         assertEquals(2, result);
     }
 
+    @Test
+    void 나누기는_정수로_한정한다() {
+        assertThatIllegalArgumentException().isThrownBy(()-> {
+            calculator.divide(4, 3);
+        });
+    }
 }

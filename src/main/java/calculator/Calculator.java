@@ -14,6 +14,9 @@ public class Calculator {
     }
 
     public int divide(int result, int value) {
+        if (result % value != 0) {
+            throw new IllegalArgumentException();
+        }
         return result/value;
     }
 }
