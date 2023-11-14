@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import calculator.domain.OperatorEnum;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
