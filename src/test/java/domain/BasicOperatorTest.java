@@ -1,57 +1,25 @@
 package domain;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-
-import domain.BasicOperator;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 class BasicOperatorTest {
-    private BasicOperator basicOperator;
-
-    @BeforeEach
-    void setUp() {
-        basicOperator = new BasicOperator();
-    }
-
     @ParameterizedTest
-    @DisplayName("덧셈 확인")
-    @CsvSource(value={"1|2"},delimiter = '|')
-    void add_확인(int a, int b) {
-        assertThat(basicOperator.add(a,b)).isEqualTo(3);
-    }
-
-    @ParameterizedTest
-    @DisplayName("뺄셈 확인")
-    @CsvSource(value={"1|2"},delimiter = '|')
-    void substract_확인(int a, int b) {
-        assertThat(basicOperator.substract(a,b)).isEqualTo(-1);
-    }
-
-    @ParameterizedTest
-    @DisplayName("곱셈 확인")
-    @CsvSource(value={"1|2"},delimiter = '|')
-    void multiply_확인(int a, int b) {
-        assertThat(basicOperator.multiply(a,b)).isEqualTo(2);
-    }
-
-    @ParameterizedTest
-    @DisplayName("나눗셈 확인")
-    @CsvSource(value={"5|2"},delimiter = '|')
-    void divide_확인(int a, int b) {
-        assertThat(basicOperator.divide(a,b)).isEqualTo(2);
-    }
-
-    @ParameterizedTest
-    @DisplayName("나눗셈 분모 0 확인")
-    @CsvSource(value={"5|0"},delimiter = '|')
-    void divide_분모0확인(int a, int b) {
-        assertThatThrownBy(()-> basicOperator.divide(a,b))
-                .isInstanceOf(ArithmeticException.class);
-                //.hasMessageContaining("0 으로 나눌 수 없습니다.");
+    @DisplayName("사칙연산 확인")
+    @CsvSource(value = {"2 + 3 * 4 / 2"})
+    void calculator_확인(String a) {
+        List<String> input = Arrays.asList(a.split(" "));
+        int result = Integer.parseInt(input.get(0));
+        for (int i = 1; i < input.size() - 1; i += 2) {
+            BasicOperator basicOperator = BasicOperator.mapping(String.valueOf(input.get(i)));
+            result = basicOperator.apply(result, Integer.parseInt(input.get(i + 1)));
+        }
+        assertThat(result).isEqualTo(10);
     }
 }

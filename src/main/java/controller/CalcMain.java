@@ -9,7 +9,7 @@ public class CalcMain {
 
     public static void main(String[] args) {
         StringCalculator stringCalculator = new StringCalculator(new StringSplit(InputView.inputString()).split());
-        int result = stringCalculator.calculator();
+        int result = stringCalculator.calculator2();
         OutView.printResult(result);
     }
 }

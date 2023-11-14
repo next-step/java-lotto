@@ -1,8 +1,6 @@
 package domain;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class StringCalculator {
 
@@ -22,24 +20,30 @@ public class StringCalculator {
         return operatorMap;
     }
 
-    private static String checkOperator(String operator) {
-        if (!"+".equals(operator) && !"-".equals(operator) && !"*".equals(operator) && !"/".equals(operator)) {
+    public int calculator() {
+        Map<String, Calculator> operatorMap = getStringCalculatorMap();
+        int result = Integer.parseInt(input.get(0));
+        for (int i = 1; i < input.size() - 1; i += 2) {
+            calculator = operatorMap.get(validate(input.get(i)));
+            result = calculator.calculator(result, Integer.parseInt(input.get(i + 1)));
+        }
+        return result;
+    }
+
+    public int calculator2() {
+        int result = Integer.parseInt(input.get(0));
+        for (int i = 1; i < input.size() - 1; i += 2) {
+            BasicOperator basicOperator = BasicOperator.mapping(validate(String.valueOf(input.get(i))));
+            result = basicOperator.apply(result, Integer.parseInt(input.get(i + 1)));
+        }
+        return result;
+    }
+
+    public String validate(String operator) {
+        Set<String> validOperators = new HashSet<>(Arrays.asList("+", "-", "*", "/"));
+        if (!validOperators.contains(operator)) {
             throw new IllegalArgumentException("사칙연산 기호는 +, -, *, / 만 가능합니다.");
         }
         return operator;
-    }
-
-    public int calculator() {
-        Map<String, Calculator> operatorMap = getStringCalculatorMap();
-        try {
-            int result = Integer.parseInt(input.get(0));
-            for (int i = 1; i < input.size() - 1; i += 2) {
-                calculator = operatorMap.get(checkOperator(input.get(i)));
-                result = calculator.calculator(result, Integer.parseInt(input.get(i + 1)));
-            }
-            return result;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자를 입력해 주세요.");
-        }
     }
 }
