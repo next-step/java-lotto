@@ -4,9 +4,6 @@ import java.util.Deque;
 import java.util.List;
 
 public class Calculator {
-
-    private String text;
-
     private final Deque<Integer> inputNumbers;
     private final Deque<String> inputOperators;
 
@@ -19,6 +16,7 @@ public class Calculator {
         this.inputOperators = Parser.operatorParsing(splitText);
 
     }
+
     public int calculate() {
         int totalOperatorsSize = inputOperators.size();
         for (int i = 0; i < totalOperatorsSize; i++) {

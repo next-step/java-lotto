@@ -11,7 +11,7 @@ public class Parser {
     public static Deque<Integer> numberParsing(List<String> texts) {
         Deque<Integer> numbers = new ArrayDeque<>();
 
-        for(int evenIndex = 0; evenIndex < texts.size(); evenIndex += 2) {
+        for (int evenIndex = 0; evenIndex < texts.size(); evenIndex += 2) {
             int number = parseNumberFormat(texts.get(evenIndex));
             numbers.addLast(number);
         }
@@ -21,18 +21,18 @@ public class Parser {
 
     public static Deque<String> operatorParsing(List<String> texts) {
         Deque<String> operators = new ArrayDeque<>();
-        for(int oddIndex = 1; oddIndex < texts.size(); oddIndex += 2) {
+        for (int oddIndex = 1; oddIndex < texts.size(); oddIndex += 2) {
             operatorCheck(texts.get(oddIndex));
             operators.addLast(texts.get(oddIndex));
         }
 
         return operators;
     }
+
     private static int parseNumberFormat(String numberString) {
         try {
-            int result = Integer.parseInt(numberString);
-            return result;
-        } catch (NumberFormatException e){
+            return Integer.parseInt(numberString);
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자가 아닙니다", e);
         }
     }

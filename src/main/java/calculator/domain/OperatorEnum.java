@@ -11,6 +11,7 @@ public enum OperatorEnum {
 
     private String operator;
     private BiFunction<Integer, Integer, Integer> function;
+
     OperatorEnum(String operator, BiFunction<Integer, Integer, Integer> function) {
         this.operator = operator;
         this.function = function;
