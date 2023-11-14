@@ -30,4 +30,22 @@ public class WinningNumbersTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> WinningNumbers.of(lottoFixture(1,2,3,4,5,6), LottoNumber.of(6, true)));
     }
+
+    @Test
+    @DisplayName("로또를 입력으로 받아서 몇개의 숫자가 일치하는지 확인한다.")
+    void matchCount(){
+        WinningNumbers winningNumbers = WinningNumbers.of(lottoFixture(1,2,3,4,5,6), LottoNumber.of(7, true));
+        assertThat(winningNumbers.matchCount(lottoFixture(1,2,3,4,5,6))).isEqualTo(6);
+        assertThat(winningNumbers.matchCount(lottoFixture(1,2,3,4,5,7))).isEqualTo(6);
+        assertThat(winningNumbers.matchCount(lottoFixture(1,10,11,12,13,14))).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("로또를 입력으로 받아서 일치하는 숫자중에 보너스볼이 있는지 확인한다.")
+    void matchBonus(){
+        WinningNumbers winningNumbers = WinningNumbers.of(lottoFixture(1,2,3,4,5,6), LottoNumber.of(7, true));
+        assertThat(winningNumbers.containBonus(lottoFixture(1,2,3,4,5,6))).isFalse();
+        assertThat(winningNumbers.containBonus(lottoFixture(1,2,3,4,5,7))).isTrue();
+    }
+
 }

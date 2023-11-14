@@ -6,7 +6,7 @@ import java.util.List;
 public class WinningNumbers {
 
     private static final int WINNING_NUMBER_SIZE = 7;
-    private final List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> winningNumbers;
 
     public static WinningNumbers of(Lotto lotto, LottoNumber bonusNumber) {
         List<LottoNumber> lottoNumbers = new ArrayList<>(lotto.lottoNumbers());
@@ -14,9 +14,9 @@ public class WinningNumbers {
         return new WinningNumbers(lottoNumbers);
     }
 
-    private WinningNumbers(List<LottoNumber> lottoNumbers) {
-        inputValidation(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+    private WinningNumbers(List<LottoNumber> winningNumbers) {
+        inputValidation(winningNumbers);
+        this.winningNumbers = winningNumbers;
     }
 
     private void inputValidation(List<LottoNumber> lottoNumbers) {
@@ -29,4 +29,16 @@ public class WinningNumbers {
         }
     }
 
+    public int matchCount(Lotto lotto) {
+        return (int) winningNumbers.stream()
+                .filter(lotto::contains)
+                .count();
+    }
+
+    public boolean containBonus(Lotto lotto) {
+        return winningNumbers.stream()
+                .filter(lotto::contains)
+                .anyMatch(LottoNumber::isBonus);
+
+    }
 }
