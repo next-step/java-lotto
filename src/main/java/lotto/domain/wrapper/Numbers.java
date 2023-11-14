@@ -3,7 +3,6 @@ package lotto.domain.wrapper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Numbers {
 
@@ -13,7 +12,7 @@ public class Numbers {
     }
 
     public Numbers(List<Integer> inputs) {
-        inputs.forEach(number -> numbers.add(new Number(number)));
+        inputs.forEach(input -> numbers.add(new Number(input)));
     }
 
     public List<Integer> numbers() {
@@ -23,7 +22,7 @@ public class Numbers {
     }
 
     public int countMatchingNumbers(Numbers target) {
-        return (int)numbers.stream()
+        return (int) numbers.stream()
             .filter(target::contains)
             .count();
     }
