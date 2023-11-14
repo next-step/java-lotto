@@ -34,7 +34,7 @@ public class Lotto {
         private List<Ticket> generateTickets() {
                 List<Ticket> generatedTicket = new ArrayList<>();
                 for (int i = 0; i < purchaseQuantity; i++) {
-                        generatedTicket.add(new Ticket());
+                        generatedTicket.add(new Ticket(new RandomNumbers()));
                 }
                 return generatedTicket;
         }
