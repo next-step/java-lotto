@@ -2,7 +2,8 @@ package step1;
 
 public class StringCalculator {
 
-    public int add(String left, String right) {
+    public int plus(String left, String right) {
+
         return 0;
     }
 

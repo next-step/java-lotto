@@ -22,11 +22,12 @@ class StringCalculatorTest {
         String left = "1";
         String right = "2";
 
+
         // when
-        int add = stringCalculator.add(left, right);
+        Number plus = new Number(left).plus(new Number(right));
 
         // then
-        assertThat(add).isEqualTo(3);
+        assertThat(plus).isEqualTo(new Number(3));
     }
 
     @Test
