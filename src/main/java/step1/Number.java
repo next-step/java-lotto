@@ -31,6 +31,21 @@ public class Number {
         return new Number(this.number + number.number);
     }
 
+    public Number minus(Number number) {
+
+        return new Number(this.number - number.number);
+    }
+
+    public Number multiply(Number number) {
+
+        return new Number(this.number * number.number);
+    }
+
+    public Number divide(Number number) {
+
+        return new Number(this.number / number.number);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

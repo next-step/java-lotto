@@ -38,10 +38,10 @@ class StringCalculatorTest {
         String right = "2";
 
         // when
-        int minus = stringCalculator.minus(left, right);
+        Number minus = new Number(left).minus(new Number(right));
 
         // then
-        assertThat(minus).isEqualTo(1);
+        assertThat(minus).isEqualTo(new Number(1));
     }
 
     @Test
@@ -52,10 +52,10 @@ class StringCalculatorTest {
         String right = "2";
 
         // when
-        int multiply = stringCalculator.multiply(left, right);
+        Number multiply = new Number(left).multiply(new Number(right));
 
         // then
-        assertThat(multiply).isEqualTo(6);
+        assertThat(multiply).isEqualTo(new Number(6));
     }
 
     @Test
@@ -66,10 +66,10 @@ class StringCalculatorTest {
         String right = "2";
 
         // when
-        int divide = stringCalculator.divide(left, right);
+        Number divide = new Number(left).divide(new Number(right));
 
         // then
-        assertThat(divide).isEqualTo(3);
+        assertThat(divide).isEqualTo(new Number(3));
     }
 
 }
