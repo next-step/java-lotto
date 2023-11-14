@@ -1,15 +1,13 @@
 package lotto.domain;
 
-import lotto.strategy.LottoGenerator;
-
 import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
     private LottoNumbers lottoNumbers;
 
-    public Lotto(LottoGenerator lottoGenerator) {
-        this.lottoNumbers = new LottoNumbers(lottoGenerator);
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public long matchCount(List<Integer> winLottoNumbers) {

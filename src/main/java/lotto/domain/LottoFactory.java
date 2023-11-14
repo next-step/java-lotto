@@ -13,7 +13,7 @@ public class LottoFactory {
                 .boxed()
                 .collect(Collectors.toMap(
                         index -> index,
-                        index -> List.of(new Lotto(new RandomLottoGenerator()))
+                        index -> List.of(new Lotto(new LottoNumbers(new RandomLottoGenerator())))
                 ));
         return new Lottos(lottos);
     }
