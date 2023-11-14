@@ -18,18 +18,10 @@ public class Winning {
     public static Winning from(String numberStr) {
         String[] split = numberStr.replaceAll(" ", "").split(",");
         List<Integer> numbers = Arrays.stream(split)
-                                   .map(Integer::parseInt)
-                                   .collect(Collectors.toList());
+                                      .map(Integer::parseInt)
+                                      .collect(Collectors.toList());
 
         return new Winning(numbers);
-    }
-
-    public List<Integer> getWin() {
-        return win;
-    }
-
-    public int getWinCount() {
-        return winCount;
     }
 
     public void setWinCount(int number) {

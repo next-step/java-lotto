@@ -17,15 +17,12 @@ public class InputView {
     public static int start() {
         System.out.println(ASK_MONEY);
         String moneyStr = SCANNER.nextLine();
-        int money = parse(moneyStr);
 
-        return getTrialCount(money);
+        return parse(moneyStr);
     }
 
-    public static int getTrialCount(int money) {
-        int ticketCount = money / 1000;
+    public static void showTicketCount(int ticketCount) {
         System.out.println(ticketCount + PURCHASE);
-        return ticketCount;
     }
 
     public static void showActorLotteries(List<Lottery> tickets) {

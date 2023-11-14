@@ -12,6 +12,11 @@ public class LotteryMachine {
         this.balls = new ArrayList<>();
     }
 
+    public int getTicketCount(int money) {
+        return money / 1000;
+    }
+
+
     public List<Integer> getBall(List<Integer> hands) {
         List<Integer> choices = new ArrayList<>();
         for (int hand : hands) {
@@ -23,6 +28,9 @@ public class LotteryMachine {
 
     public void run() {
         prepareBalls();
+    }
+
+    public void shuffle() {
         Collections.shuffle(balls);
     }
 
