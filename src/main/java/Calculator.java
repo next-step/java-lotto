@@ -9,7 +9,6 @@ public class Calculator {
     public static final List<String> OPSLIST = Arrays.asList("+", "*", "/", "-");
 
     public static int doCalculate(String inputValue){
-
         String[] strList = splitText(inputValue);
         ArrayList<Integer> valueList = filterValue(strList);
         ArrayList<String> opsList = filterOps(strList);
@@ -24,14 +23,12 @@ public class Calculator {
 
         // 첫번째 값 -> Result에 대입하기
         int resultValue = valueList.get(0);
-
         /**
          * 계산 공식 돌리기
          */
         for (int i = 0 ; i < opsList.size() ; i++){
             resultValue = getResultValue(valueList.get(i +1), opsList.get(i), resultValue);
         }
-
         return resultValue;
     }
 
@@ -65,7 +62,6 @@ public class Calculator {
         if ("/".equals(ops)){
             resultValue = divide(resultValue, value);
         }
-
         return resultValue;
     }
 
@@ -77,12 +73,10 @@ public class Calculator {
                 opsList.add(inputList[idx]);
             }
         });
-
         return opsList;
     }
 
     private static boolean checkOps(String text) {
-
         try {
             return OPSLIST.stream().anyMatch(p -> p.equals(text));
         }catch (NumberFormatException e){
@@ -93,13 +87,11 @@ public class Calculator {
 
     public static ArrayList<Integer> filterValue(String[] inputList){
         ArrayList<Integer> valueList = new ArrayList<Integer>();
-
         IntStream.range(0, inputList.length).forEach(idx -> {
             if (idx%2 == 0){
                 valueList.add(convertNum(inputList[idx]));
             }
         });
-
         return valueList;
     }
 
@@ -129,7 +121,6 @@ public class Calculator {
     }
 
     public static int divide(int number1, int number2){
-
         if (!checkDivideValue(number1,number2)){
             throw new IllegalArgumentException("나눗셈 결과 값이 정수로 떨어지지 않습니다.");
         }

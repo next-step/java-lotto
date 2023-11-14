@@ -17,7 +17,6 @@ public class CalculatorTest {
         String text = "2 + 3 * 4 / 2";
         Calculator calcu = new Calculator();
         assertThat(calcu.doCalculate(text)).isEqualTo(10);
-
     }
 
 
@@ -56,35 +55,30 @@ public class CalculatorTest {
     @Test
     @DisplayName("더하기: add")
     void add_더하기() {
-
         assertThat(Calculator.add(1,2)).isEqualTo(3);
     }
 
     @Test
     @DisplayName("빼기: subtract")
     void subtract_빼기() {
-
         assertThat(Calculator.subtract(2,1)).isEqualTo(1);
     }
 
     @Test
     @DisplayName("곱하기: multiply")
     void multiply_곱하기() {
-
         assertThat(Calculator.multiply(2,2)).isEqualTo(4);
     }
 
     @Test
     @DisplayName("정수로 떨어지는 나누기: divide")
     void divide_정수() {
-
         assertThat(Calculator.divide(2,2)).isEqualTo(1);
     }
 
     @Test
     @DisplayName("나눗셈 정수로 떨어지는지 체크")
     void divide_체크() {
-
         assertThat(Calculator.checkDivideValue(3,2)).isFalse();
 
     }
