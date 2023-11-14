@@ -1,4 +1,4 @@
-package domain;
+package util;
 
 import java.util.function.IntBinaryOperator;
 

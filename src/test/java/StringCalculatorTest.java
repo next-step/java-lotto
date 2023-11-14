@@ -1,5 +1,5 @@
 import domain.Calculator;
-import domain.Operation;
+import util.Operation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
