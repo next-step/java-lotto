@@ -21,7 +21,7 @@ public class LottoOutput {
         System.out.println();
     }
 
-    public static void viewLottoTotal(int correctCount, long count) {
-        System.out.println(count);
+    public static void viewLottoTotal(int correctCount, int count) {
+        System.out.println(Dividend.getDividend(correctCount) + "" + count + "개");
     }
 }
