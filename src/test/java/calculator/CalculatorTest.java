@@ -37,6 +37,17 @@ public class CalculatorTest {
             .hasSize(3)
             .contains("+");
     }
+
+    @DisplayName("사칙연산 기호가 아닌값이 있는지 확인한다.")
+    @Test
+    void validateOperator() {
+        // given
+        String input = "1 & 2";
+
+        // when, then
+        assertThatThrownBy(() -> new Calculator(input))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
 }
 
 
