@@ -1,28 +1,42 @@
 package lotto.domain;
 
-import lotto.application.LottoGeneration;
-import org.assertj.core.api.Assertions;
+import calculator.domain.NumberGeneration;
+import calculator.domain.RandomNumberGeneration;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+@DisplayName("구매한 로또 목록 관련 테스트")
 public class LottosTest {
+
     @Test
-    @DisplayName("당첨번호와 로또 번호 목록을 비교하여 맞은번호마다 갯수를 카운트하는 map을 확인")
-    void 로또당첨_목록_확인() {
-        List<Integer> winList = Arrays.asList(6,5,4,3,2,1);
+    @DisplayName("구매한 로또 개수를 확인한다")
+    void 구매_로또수_확인() {
+        NumberGeneration numberGeneration = new RandomNumberGeneration();
+        int amount = 14000;
+
+        Lottos lottos = new Lottos(amount, numberGeneration);
+
+        assertThat(lottos.count()).isEqualTo(14);
+    }
+
+    @Test
+    @DisplayName("로또당첨 번호와 매치한 결과를 리턴")
+    void 로또당첨_목록확인() {
+        List<Integer> winList =  new ArrayList<>(Arrays.asList(6,5,4,2,3,10));
         NumberGeneration numberGeneration = new TestNumberGeneration();
-        LottoGeneration lottoGeneration = new LottoGeneration();
-        LottoRank lottoRank = LottoRank.findMatchNumber(6);
+        int amount = 5000;
+        int bonus = 1;
 
-        Lottos lottos = lottoGeneration.generateLottoNumbers(5, numberGeneration);
-        Map<LottoRank,Integer> ranks = lottos.findMatchNumbers(winList);
+        Lottos lottos = new Lottos(amount, numberGeneration);
+        Map<LottoRank, Integer> result = lottos.findRanks(winList, bonus);
 
-        Assertions.assertThat(ranks).hasSize(1).containsEntry(lottoRank
-        ,5);
-
+        assertThat(result).hasSize(1).containsEntry(LottoRank.SECOND, 5);
     }
 }

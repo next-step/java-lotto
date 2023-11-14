@@ -1,37 +1,31 @@
 package lotto.domain;
 
+import calculator.domain.NumberGeneration;
+
 import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-    public static final int COUNT = 6;
-    private final List<Integer> numbers;
+    private final List<Integer> lotto;
 
     public Lotto(NumberGeneration numberGeneration) {
-        this.numbers = makeLotto(numberGeneration);
+        this.lotto = numberGeneration.generate();
+    }
+    public List<Integer> find() {
+        return Collections.unmodifiableList(lotto);
     }
 
-    public static List<Integer> makeLotto(NumberGeneration numberGeneration) {
-        return numberGeneration.generate();
+    public int countMath(List<Integer> winList) {
+        winList.retainAll(lotto);
+        return winList.size();
     }
 
-    public int countMatchNumber(List<Integer> winningList) {
-        int count = 0;
-        for (int i = 0; i < COUNT; i++) {
-            count += checkMatch(winningList.get(i));
-        }
-        return count;
+    public boolean isHaveBonus(int bonus) {
+        return lotto.contains(bonus);
     }
 
-    private int checkMatch( int matchNumber) {
-        if (numbers.contains(matchNumber)) {
-            return 1;
-        }
-        return 0;
-    }
-
-    public String findNumbersExtract() {
-        Collections.sort(numbers);
-        return numbers.toString();
+    public boolean isRank(List<Integer> winList){
+        winList.retainAll(lotto);
+        return winList.size()>2;
     }
 }

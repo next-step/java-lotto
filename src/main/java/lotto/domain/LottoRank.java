@@ -1,41 +1,48 @@
 package lotto.domain;
 
 public enum LottoRank {
-    ZERO(0, 0L),
-    ONE(1, 0L),
-    TWO(2, 0L),
-    THREE(3, 5_000L),
-    FOUR(4, 50_000L),
-    FIVE(5, 1_500_000L),
-    SIX(6, 2_000_000_000L);
+    MISS_THREE(0, 0L),
+    MISS_TWO(1, 0L),
+    MISS_ONE(2,  0L),
+    FIFTH(3, 5_000L),
+    FOURTH(4, 50_000L),
+    THIRD(5, 1_500_000L),
+    SECOND(5, 30_000_000L),
+    FIRST(6, 2_000_000_000L);
 
-    private final int number;
-    private final Long prizeMoney;
+    private final int count;
+    private final long prizeMoney;
 
-    LottoRank(int number, Long prizeMoney) {
-        this.number = number;
+    LottoRank(int count, long prizeMoney) {
+        this.count = count;
         this.prizeMoney = prizeMoney;
     }
 
-    public int matchNumber() {
-        return this.number;
-    }
-
-    public Long prize() {
-        return this.prizeMoney;
-    }
-
-    public static LottoRank findMatchNumber(int matchNumber) {
-        for (LottoRank lottoRank : LottoRank.values()) {
-            if (lottoRank.number == matchNumber) {
+    public static LottoRank findMatchCount(int matchNumber, boolean bouns){
+        if(matchNumber==5&&bouns){
+            return LottoRank.SECOND;
+        }
+        for(LottoRank lottoRank : LottoRank.values()){
+            if(lottoRank.count == matchNumber){
                 return lottoRank;
             }
         }
-        throw new IllegalArgumentException("로또 매칭이 올바르지 않습니다");
+        throw new IllegalArgumentException("로또 매치가 올바르지 않습니다");
     }
 
-    public long sumPrize(int count) {
-        return this.prizeMoney * count;
+    public long sumPrize(int count){
+        return this.prizeMoney*count;
     }
 
+    public boolean matchCount(int number){
+        return this.count > number;
+    }
+
+    public int count(){
+        return this.count;
+    }
+
+    public long prize(){
+        return this.prizeMoney;
+    }
 }
