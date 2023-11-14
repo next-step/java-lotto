@@ -30,6 +30,7 @@
 - [ ] Numbers - 로또 번호 6개를 컬렉션 필드로 가지는 일급 컬렉션. 당첨번호와 자신이 가진 숫자가 일치하는 지 검증하는 행위를 한다.
 - [ ] Lotto - Numbers를 속성으로 가진다. 당첨번호와 자신이 가진 숫자가 일치하는 지 검증하는 행위를 한다.
 - [ ] Lottos - Lotto객체를 컬렉션으로 가지는 일급 컬렉션. Lotto객체가 가지고 있는 숫자와 당첨번호가 일치하는 지 검증하는 행위를 한다.
+- [ ] LotteryRank - 등수 별 상금을 상수로 가지는 enum.
 - [ ] LottoNumber - 1~45범위를 가지는 난수 6개를 반환하는 행위를 한다.
 - [ ] ProfitCalculator - 로또로 얻은 수익, 수익률을 계산한다.
 - [ ] LottoGame - Lotto 게임을 진행한다. Lottos, ProfitCalculator를 필드 변수로 가진다.
