@@ -20,10 +20,11 @@ public class LottoController {
         PrintView.printLottoTickets(lottoMachine.getLottoTickets());
 
         String winningNumbers = InputView.requestWinningNumber();
-        WinningLotto winningLotto = WinningLotto.createWinningNumbers(winningNumbers);
+        int bonusNumber = InputView.requestBonusNumber();
+        WinningLotto winningLotto = WinningLotto.createWinningNumbers(winningNumbers, bonusNumber);
         LottoResult lottoResult = new LottoResult(winningLotto, lottoMachine.getLottoTickets());
 
-        Map<Rank, Long> winningRanks = lottoResult.findWinningRanks();
+        Map<Rank, Long> winningRanks = lottoResult.findWinningRankCont();
         PrintView.printStatistics(winningRanks);
 
         Money totalWinningMoney = new WinningRank(winningRanks).calcTotalWinningPrice();

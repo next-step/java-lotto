@@ -25,4 +25,14 @@ public class InputView {
         scanner.nextLine();
         return scanner.nextLine();
     }
+
+    public static int requestBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+
+        try {
+            return scanner.nextInt();
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자만 입력이 가능합니다.");
+        }
+    }
 }

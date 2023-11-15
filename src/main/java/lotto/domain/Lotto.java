@@ -25,6 +25,10 @@ public class Lotto {
                 .count();
     }
 
+    public boolean isContain(LottoNumber bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
+    }
+
     private boolean isMatchNumber(int number) {
         return getIntegerLottoNumbers().contains(number);
     }

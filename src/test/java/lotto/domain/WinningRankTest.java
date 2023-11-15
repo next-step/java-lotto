@@ -15,11 +15,11 @@ class WinningRankTest {
     @Test
     @DisplayName("4등 3개 3등 1개에 당첨이 된경우 최종 상금은 65,000원 이다")
     void calcTotalWinningPrice() {
-        this.winningRanks.put(Rank.FOURTH, 3L);
-        this.winningRanks.put(Rank.THIRD, 1L);
+        this.winningRanks.put(Rank.FIFTH, 3L);
+        this.winningRanks.put(Rank.FOURTH, 1L);
 
         WinningRank winningRank = new WinningRank(this.winningRanks);
 
-        assertThat(winningRank.calcTotalWinningPrice()).isEqualTo(new Money(65000));
+        assertThat(winningRank.calcTotalWinningPrice()).isEqualTo(new Money(65_000));
     }
 }
