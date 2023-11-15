@@ -1,6 +1,9 @@
 package src.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 import java.util.Set;
@@ -10,20 +13,36 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoTest {
 
     @Test
-    void 로또와_매치하여_순위를_확인할_수_있다() {
+    void 다른_로또와_몇개의_숫자가_매치되는지_확인할_수_있다() {
         // given
         Lotto gameLotto = Lotto.of(
                 Set.of(GameNumber.of(1), GameNumber.of(2), GameNumber.of(3),
                         GameNumber.of(4), GameNumber.of(5), GameNumber.of(6))
         );
-
-        Lotto winningLotto = Lotto.of(Set.of(GameNumber.of(4), GameNumber.of(5), GameNumber.of(6),
+        Lotto matchLotto = Lotto.of(Set.of(GameNumber.of(4), GameNumber.of(5), GameNumber.of(6),
                 GameNumber.of(7), GameNumber.of(8), GameNumber.of(9)));
+        int expectedMatchCount = 3;
 
         // when
-        Place place = gameLotto.match(winningLotto);
+        int matchCount = gameLotto.matchCount(matchLotto);
 
         // then
-        assertThat(place).isEqualTo(Place.FOURTH_PLACE);
+        assertThat(matchCount).isEqualTo(expectedMatchCount);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1: true", "45:false"}, delimiter = ':')
+    void 보너스_볼이_매치_여부를_확인할_수_있다(int number, boolean expectedMatchBonus) {
+        // given
+        Lotto gameLotto = Lotto.of(
+                Set.of(GameNumber.of(1), GameNumber.of(2), GameNumber.of(3),
+                        GameNumber.of(4), GameNumber.of(5), GameNumber.of(6))
+        );
+        GameNumber bonusNumber = GameNumber.of(number);
+
+        // when
+        boolean matchBonus = gameLotto.matchBonus(bonusNumber);
+        // then
+        assertThat(matchBonus).isEqualTo(expectedMatchBonus);
     }
 }
