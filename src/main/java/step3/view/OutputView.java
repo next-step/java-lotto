@@ -10,6 +10,7 @@ public class OutputView {
 
     private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.";
     private static final String WINNING_MESSAGE = "%d개 일치 (%d원)- %d개";
+    private static final String WINNING_MESSAGE_BONUS = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
     private static final String EARNING_RATE_MESSAGE = "총 수익률은 %s입니다.";
 
     public static void printPurchaseComplete(Lottos lottos){
@@ -46,7 +47,12 @@ public class OutputView {
 
     private static void printRankInfo(WinningResult result) {
         for(Map.Entry<LottoRank, Integer> info : result.getResult().entrySet()){
-            System.out.println(String.format(WINNING_MESSAGE, info.getKey().matchCount(), info.getKey().winningMoney(), info.getValue()));
+            LottoRank rank = info.getKey();
+            if(rank == LottoRank.SECOND){
+                System.out.println(String.format(WINNING_MESSAGE_BONUS, rank.matchCount(), rank.winningMoney(), info.getValue()));
+                return;
+            }
+            System.out.println(String.format(WINNING_MESSAGE, rank.matchCount(), rank.winningMoney(), info.getValue()));
         }
     }
 
