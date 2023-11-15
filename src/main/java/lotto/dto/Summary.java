@@ -3,11 +3,11 @@ package lotto.dto;
 import java.util.Objects;
 
 public class Summary {
-    private long firstCount;
-    private long secondCount;
-    private long thirdCount;
-    private long fourthCount;
-    private float profitRate;
+    private final long firstCount;
+    private final long secondCount;
+    private final long thirdCount;
+    private final long fourthCount;
+    private final float profitRate;
 
     public Summary(long firstCount, long secondCount, long thirdCount, long fourthCount, float profitRate) {
         this.firstCount = firstCount;

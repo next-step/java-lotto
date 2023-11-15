@@ -16,7 +16,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber of(Integer lottoNumber) {
-        return new LottoNumber(lottoNumber.intValue());
+        return new LottoNumber(lottoNumber);
     }
 
     private void validateRange(int number) {

@@ -1,12 +1,14 @@
 package lotto.domain.lotto;
 
 import lotto.dto.Summary;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottosTest {
     @Test
@@ -15,11 +17,11 @@ class LottosTest {
 
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-        Assertions.assertThat(
+        assertThat(
                 Lottos.of(10000, () -> list).size()
         ).isEqualTo(10);
 
-        Assertions.assertThatThrownBy(
+        assertThatThrownBy(
                 () -> Lottos.of(900, () -> list).size()
         ).isInstanceOf(IllegalArgumentException.class);
     }
@@ -31,6 +33,6 @@ class LottosTest {
         Lotto jackpot = Lotto.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 20, 30, 40)));
         Summary match = lottos.match(jackpot);
 
-        Assertions.assertThat(match).isEqualTo(new Summary(0, 0, 0, 10, 5f));
+        assertThat(match).isEqualTo(new Summary(0, 0, 0, 10, 5f));
     }
 }

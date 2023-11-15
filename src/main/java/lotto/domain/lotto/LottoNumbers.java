@@ -25,7 +25,7 @@ public class LottoNumbers {
     private List<LottoNumber> validate(List<Integer> numbers) {
         validateCount(numbers);
         return numbers.stream()
-                .map(integer -> LottoNumber.of(integer))
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 
