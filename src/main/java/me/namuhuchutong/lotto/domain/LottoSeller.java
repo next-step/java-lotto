@@ -6,6 +6,8 @@ import me.namuhuchutong.lotto.dto.UserInputInformation;
 
 public class LottoSeller {
 
+    private static final int LOTTO_PRICE = 1000;
+
     private final NumberGenerator generator;
 
     public LottoSeller(NumberGenerator generator) {
@@ -17,7 +19,7 @@ public class LottoSeller {
         Number bonusNumber = new Number(information.getBonusNumber());
         validateAmount(amount);
         Lotto lotto = Lotto.create(
-                amount / 1000,
+                amount / LOTTO_PRICE,
                 generator,
                 information.getManualNumbers());
         return lotto.getMatchNumbers(information.getNumbers(), bonusNumber);

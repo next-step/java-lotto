@@ -10,6 +10,9 @@ import me.namuhuchutong.lotto.domain.generator.NumberGenerator;
 
 public class Numbers {
 
+    private static final int MAX_CONDITION = 6;
+    private static final String COMMA_AND_WHITE_SPACE_REGEX = ",\\s*";
+
     private final List<Number> values;
 
     public static Numbers create(NumberGenerator numberGenerator) {
@@ -17,7 +20,7 @@ public class Numbers {
     }
 
     public static Numbers create(String manualNumbers) {
-        List<Number> collect = Arrays.stream(manualNumbers.split(",\\s*"))
+        List<Number> collect = Arrays.stream(manualNumbers.split(COMMA_AND_WHITE_SPACE_REGEX))
                                      .map(Integer::valueOf)
                                      .map(Number::new)
                                      .collect(Collectors.toList());
@@ -31,7 +34,7 @@ public class Numbers {
     }
 
     private void validateSixNumbers(List<Number> values) {
-        if (values.size() != 6) {
+        if (values.size() != MAX_CONDITION) {
             throw new IllegalArgumentException("숫자는 6개여야 합니다.");
         }
     }
