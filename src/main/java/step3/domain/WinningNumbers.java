@@ -6,6 +6,7 @@ import java.util.List;
 public class WinningNumbers {
 
     private static final int WINNING_NUMBER_SIZE = 7;
+
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
 

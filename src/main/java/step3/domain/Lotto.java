@@ -1,5 +1,6 @@
 package step3.domain;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,7 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> list) {
         inputValidation(list);
+        list.sort(Comparator.comparingInt(LottoNumber::number));
         this.lottoNumbers = list;
     }
 

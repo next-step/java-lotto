@@ -26,7 +26,6 @@ public class OutputView {
         for(Lotto lotto: lottos.lottos()){
             String lottoNumbers = lotto.lottoNumbers().stream()
                     .map(LottoNumber::number)
-                    .sorted()
                     .map(String::valueOf)
                     .collect(Collectors.joining(", ", "[", "]"));
             System.out.println(lottoNumbers);
