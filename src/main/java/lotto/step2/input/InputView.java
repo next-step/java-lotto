@@ -3,9 +3,9 @@ package lotto.step2.input;
 import lotto.step2.domain.Lotto;
 import lotto.step2.domain.WinnerNumbers;
 import lotto.step2.service.LottoProgram;
+import lotto.step2.util.StringToIntegerSetConverter;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class InputView {
     private InputView() {
@@ -46,10 +46,7 @@ public class InputView {
     private static Lotto inputEachPassiveLottoNumbersByScanner() {
         try {
             final String inputStringLine = new Scanner(System.in).nextLine();
-            final String[] splits = inputStringLine.split(", ");
-            final Set<Integer> integers = Arrays.stream(splits)
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toSet());
+            final Set<Integer> integers = StringToIntegerSetConverter.convert(inputStringLine);
 
             return new Lotto(integers);
         } catch (NoSuchElementException | IllegalArgumentException e) {
