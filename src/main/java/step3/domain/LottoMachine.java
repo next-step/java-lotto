@@ -11,8 +11,8 @@ public class LottoMachine {
 
     public static final int PRICE_PER_LOTTO = 1_000;
     private static final int LOTTO_SIZE = Lotto.LOTTO_SIZE;
-    public static final int NUMBER_BOX_START_NUMBER = 1;
-    public static final int NUMBER_BOX_END_NUMBER = 45;
+    public static final int NUMBER_BOX_START_NUMBER = LottoNumber.NUMBER_BOX_START_NUMBER;
+    public static final int NUMBER_BOX_END_NUMBER = LottoNumber.NUMBER_BOX_END_NUMBER;
 
     private final List<Integer> numberBox;
 

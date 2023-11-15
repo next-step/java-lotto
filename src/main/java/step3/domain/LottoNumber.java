@@ -4,6 +4,9 @@ import java.util.Objects;
 
 public class LottoNumber {
 
+    public static final int NUMBER_BOX_START_NUMBER = 1;
+    public static final int NUMBER_BOX_END_NUMBER = 45;
+
     private final int number;
     private boolean isBonus = false;
 
