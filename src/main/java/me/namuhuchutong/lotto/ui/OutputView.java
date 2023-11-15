@@ -25,7 +25,7 @@ public class OutputView {
     }
 
     private double getRevenue(int amount, LottoResult lottoResult) {
-        return ((double) amount) / lottoResult.getWinnings(MINIMUM_COUNT);
+        return  lottoResult.getWinnings(MINIMUM_COUNT) / ((double) amount);
     }
 
     public void showGeneratedLotto(LottoResult lottoResult) {
