@@ -35,9 +35,7 @@ public class LottoResult {
     private Stream<LottoCount> getResultStreamAndFilterMinimumCount(long minimumCount) {
         return lottoResult.keySet()
                           .stream()
-                          .filter(filterMinimumCount(minimumCount))
-                          .filter(count -> this.lottoResult.get(count)
-                                                           .size() > 0);
+                          .filter(filterMinimumCount(minimumCount));
     }
 
     private Predicate<LottoCount> filterMinimumCount(long minimumCount) {
@@ -46,6 +44,10 @@ public class LottoResult {
 
     private Function<LottoCount, String> buildMatchNumberAndCount() {
         return lottoCount -> lottoCount.toString() + ": " + lottoResult.get(lottoCount) + "\n";
+    }
+
+    public int size() {
+        return this.lottoResult.size();
     }
 
     @Override

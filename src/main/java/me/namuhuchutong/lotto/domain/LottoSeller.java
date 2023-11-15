@@ -16,7 +16,10 @@ public class LottoSeller {
         int amount = information.getAmount();
         Number bonusNumber = new Number(information.getBonusNumber());
         validateAmount(amount);
-        Lotto lotto = Lotto.create(amount / 1000, generator);
+        Lotto lotto = Lotto.create(
+                amount / 1000,
+                generator,
+                information.getManualNumbers());
         return lotto.getMatchNumbers(information.getNumbers(), bonusNumber);
     }
 

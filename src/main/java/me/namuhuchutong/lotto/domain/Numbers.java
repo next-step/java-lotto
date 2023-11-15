@@ -1,8 +1,12 @@
 package me.namuhuchutong.lotto.domain;
 
+import java.util.Objects;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import me.namuhuchutong.lotto.domain.generator.NumberGenerator;
-
-import java.util.*;
 
 public class Numbers {
 
@@ -10,6 +14,14 @@ public class Numbers {
 
     public static Numbers create(NumberGenerator numberGenerator) {
         return new Numbers(numberGenerator.createNumbers());
+    }
+
+    public static Numbers create(String manualNumbers) {
+        List<Number> collect = Arrays.stream(manualNumbers.split(",\\s*"))
+                                     .map(Integer::valueOf)
+                                     .map(Number::new)
+                                     .collect(Collectors.toList());
+        return new Numbers(collect);
     }
 
     public Numbers(List<Number> values) {
