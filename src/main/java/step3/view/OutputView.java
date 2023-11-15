@@ -40,8 +40,8 @@ public class OutputView {
     }
 
     private static void printFinalEarningRate(WinningResult result) {
-        DecimalFormat df = new DecimalFormat("#.##");
-        System.out.println(String.format(EARNING_RATE_MESSAGE, df.format(result.getEarningRate())));
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        System.out.println(String.format(EARNING_RATE_MESSAGE, decimalFormat.format(result.getEarningRate())));
     }
 
     private static void printRankInfo(WinningResult result) {
