@@ -35,7 +35,7 @@ public class LottoGame {
 
         List<Integer> winningNumbers = parsingText(winningNumberText);
 
-        return lottos.draw(new LottoNumbers(new HashSet<>(winningNumbers)), bonusNumber);
+        return lottos.draw(new LottoNumbers(winningNumbers), bonusNumber);
     }
 
     private List<Integer> parsingText(final String winningNumberText) {

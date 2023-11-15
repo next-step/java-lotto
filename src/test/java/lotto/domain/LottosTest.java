@@ -31,7 +31,7 @@ class LottosTest {
         final Lottos lottos = new Lottos(new Amount(14500));
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            lottos.draw(new LottoNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))), 6);
+            lottos.draw(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), 6);
         });
     }
 
@@ -39,12 +39,11 @@ class LottosTest {
     @Test
     void drawTest() {
         //given
-        final Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        final Lotto lotto = new Lotto(new LottoNumbers(numbers));
+        final Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
         final Lottos lottos = new Lottos(Arrays.asList(lotto));
 
         //when
-        final Winning winning = lottos.draw(new LottoNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))), 7);
+        final Winning winning = lottos.draw(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
 
         //then
         assertThat(winning).isEqualTo(new Winning(Map.of(Rank.FIRST, 1)));

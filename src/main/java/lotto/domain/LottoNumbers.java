@@ -19,6 +19,12 @@ public class LottoNumbers {
         this.numbers = numbers;
     }
 
+    public LottoNumbers(final List<Integer> numbers) {
+        final Set<Integer> numberSet = new HashSet<>(numbers);
+        validationCheck(numberSet);
+        this.numbers = numberSet;
+    }
+
     private void validationCheck(final Set<Integer> numbers) {
         lottoCountCheck(numbers);
 
@@ -73,6 +79,7 @@ public class LottoNumbers {
         if (contains(number)) {
             rightNumber++;
         }
+
         return rightNumber;
     }
 

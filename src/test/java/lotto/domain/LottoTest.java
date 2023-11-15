@@ -14,10 +14,9 @@ class LottoTest {
     @DisplayName("로또의 getRightNumber()는 동일한 번호의 갯수를 반환한다.")
     @Test
     void getRightNumberTest() {
-        final Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        final Lotto lotto = new Lotto(new LottoNumbers(numbers));
+        final Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-        final int rightNumber = lotto.getRightNumber(new LottoNumbers(new HashSet<>(Arrays.asList(1,2,3,4,5,6))));
+        final int rightNumber = lotto.getRightNumber(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
 
         assertThat(rightNumber).isEqualTo(6);
     }
@@ -25,10 +24,9 @@ class LottoTest {
     @DisplayName("로또의 getRightNumber()는 동일한 번호가 없으면 0을 리턴한다.")
     @Test
     void rightNumberEmptyTest() {
-        final Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        final Lotto lotto = new Lotto(new LottoNumbers(numbers));
+        final Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-        final int rightNumber = lotto.getRightNumber(new LottoNumbers(new HashSet<>(Arrays.asList(7,8,9,10,11,12))));
+        final int rightNumber = lotto.getRightNumber(new LottoNumbers(Arrays.asList(7,8,9,10,11,12)));
 
         assertThat(rightNumber).isEqualTo(0);
     }
