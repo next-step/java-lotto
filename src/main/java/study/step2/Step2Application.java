@@ -5,8 +5,10 @@ import java.util.*;
 import study.step2.domain.LottoNumbers;
 import study.step2.domain.LottoNumbersGenerator;
 import study.step2.domain.dto.PurchaseAmount;
+import study.step2.domain.dto.WinningNumbers;
 
 import static study.step2.view.InputView.input;
+import static study.step2.view.InputView.inputWinningNumbers;
 import static study.step2.view.ResultView.lottoCount;
 import static study.step2.view.ResultView.show;
 
@@ -23,8 +25,9 @@ public class Step2Application {
             LottoNumbersGenerator generator = new LottoNumbersGenerator(random);
             results.add(generator.generate());
         }
-
         show(results);
+
+        WinningNumbers winningNumbers = inputWinningNumbers();
 
     }
 }
