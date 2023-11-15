@@ -17,7 +17,8 @@ public class Lotto {
     }
 
     public Winning match(Lotto jackpot) {
-        long match = jackpot.lottoNumbers.match(lottoNumbers);
+        long match = jackpot.lottoNumbers
+                .match(lottoNumbers);
         return Winning.of(match);
     }
 
