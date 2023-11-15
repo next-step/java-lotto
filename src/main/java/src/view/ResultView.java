@@ -33,7 +33,7 @@ public final class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         List<Place> places = Place.winningPlaces();
-        places.sort(Comparator.comparing(Place::matchedCount));
+        places.sort(Comparator.comparing(Place::matchCount));
         for (Place place : places) {
             Integer matchedCount = matchStatus.status().getOrDefault(place, 0);
             printWinningPlaceResult(place, matchedCount);
@@ -41,7 +41,7 @@ public final class ResultView {
     }
 
     private static void printWinningPlaceResult(Place place, int matchedCount) {
-        String print = String.format("%d개 일치 (%f.0원) - %d개", place.matchedCount(), place.amount(), matchedCount);
+        String print = String.format("%d개 일치 (%f.0원) - %d개", place.matchCount(), place.amount(), matchedCount);
         System.out.println(print);
     }
 
