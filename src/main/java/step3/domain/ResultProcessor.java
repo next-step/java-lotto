@@ -25,7 +25,7 @@ public class ResultProcessor {
     }
 
     private static int totalPurchasePrice(Lottos lottos) {
-        return lottos.lottos().size() * PRICE_PER_LOTTO;
+        return lottos.size() * PRICE_PER_LOTTO;
     }
 
     private static int totalEarningMoney(LinkedHashMap<LottoRank, Integer> result) {

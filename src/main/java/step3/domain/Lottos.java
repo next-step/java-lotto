@@ -17,4 +17,8 @@ public class Lottos {
     public void addLotto(Lotto lotto) {
         this.lottos.add(lotto);
     }
+
+    public int size() {
+        return lottos.size();
+    }
 }
