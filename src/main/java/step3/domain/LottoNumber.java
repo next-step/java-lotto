@@ -1,5 +1,7 @@
 package step3.domain;
 
+import step3.cache.LottoNumberCache;
+
 import java.util.Objects;
 
 public class LottoNumber {
@@ -11,6 +13,9 @@ public class LottoNumber {
     private boolean isBonus = false;
 
     public static LottoNumber of(int number) {
+        if(LottoNumberCache.getLottoNumber(number) != null){
+            LottoNumberCache.getLottoNumber(number);
+        }
         return new LottoNumber(number);
     }
 

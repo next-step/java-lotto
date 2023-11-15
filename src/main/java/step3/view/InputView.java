@@ -27,7 +27,7 @@ public class InputView {
         List<LottoNumber> lottoNumberList = Arrays.stream(scanner.nextLine().split(","))
                 .map(String::trim)
                 .map(Integer::valueOf)
-                .map(LottoNumberCache::getLottoNumber)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
         return new Lotto(lottoNumberList);
 
