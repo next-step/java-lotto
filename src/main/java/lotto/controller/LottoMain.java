@@ -18,6 +18,7 @@ public class LottoMain {
         OutputView outputView = new OutputView();
         Lottos lottos = generateLottosAndPrint(outputView, price);
 
+        inputView.inputBonusBall();
         LottoResult lottoResult = calculateLottoResult(inputView, lottos);
 
         List<LottoWinResult> lottoWinResults = calculateLottoStatisticsAndPrint(outputView, lottoResult);
