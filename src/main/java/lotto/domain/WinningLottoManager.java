@@ -1,7 +1,10 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+
+import static lotto.domain.WinningAmount.*;
 
 public class WinningLottoManager {
     private final List<Integer> WINNING_NUMBER;
@@ -27,6 +30,11 @@ public class WinningLottoManager {
     }
 
     public final HashMap<WinningAmount, Integer> findWinningLottos() {
-        return winningLottos;
+        LinkedHashMap<WinningAmount, Integer> sortedWinningLottos = new LinkedHashMap<>();
+        sortedWinningLottos.put(THREE_MATCH, winningLottos.get((THREE_MATCH)));
+        sortedWinningLottos.put(FOUR_MATCH, winningLottos.get((FOUR_MATCH)));
+        sortedWinningLottos.put(FIVE_MATCH, winningLottos.get((FIVE_MATCH)));
+        sortedWinningLottos.put(SIX_MATCH, winningLottos.get((SIX_MATCH)));
+        return sortedWinningLottos;
     }
 }
