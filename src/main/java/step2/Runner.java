@@ -17,6 +17,7 @@ public class Runner {
         ResultView resultView = new ResultView();
 
         BigDecimal price = stringToBigDecimal(inputView.price());
+        int manualCount = inputView.manual();
         Lottos lottos = lottos(price);
         resultView.printPurchaseMessage(lottos.size());
         resultView.printLottos(lottos);
