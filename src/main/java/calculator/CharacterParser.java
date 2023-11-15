@@ -6,16 +6,30 @@ import java.util.Objects;
 
 public class CharacterParser {
 
+    private List<Integer> operands = new ArrayList<>();
+    private List<Operator> operators = new ArrayList<>();
 
-    public List<String> parsingFormula(String input) {
+    public CharacterParser() {}
+
+    public CharacterParser(List<Integer> operands, List<Operator> operators) {
+        this.operands = operands;
+        this.operators = operators;
+    }
+
+    public List<Integer> operands() {
+        return operands;
+    }
+
+    public List<Operator> operators() {
+        return operators;
+    }
+
+    public void parsingFormula(String input) {
         isNullAndBlank(input);
         String[] formula = input.split(" ");
-        List<String> parsingList = new ArrayList<>();
         for (String character : formula) {
-            validateOperator(character);
-            parsingList.add(character);
+            classifyExpression(character);
         }
-        return parsingList;
     }
 
     private void isNullAndBlank(String input) {
@@ -24,11 +38,17 @@ public class CharacterParser {
         }
     }
 
-    private void validateOperator(String character) {
-        if (character.chars().allMatch(CharacterParser::isParsingNumber))
+    private void classifyExpression(String character) {
+        if (character.chars().allMatch(CharacterParser::isParsingNumber)){
+            operands.add(Integer.parseInt(character));
             return;
-        if(!Operator.isBasicOperation(character))
-            throw new IllegalArgumentException();
+        }
+
+        if(Operator.isBasicOperation(character)){
+            operators.add(Operator.findSymbol(character));
+            return;
+        }
+        throw new IllegalArgumentException();
     }
 
     private static boolean isParsingNumber(int value) {

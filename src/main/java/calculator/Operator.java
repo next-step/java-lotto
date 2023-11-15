@@ -21,4 +21,10 @@ public enum Operator {
         return Arrays.stream(Operator.values()).map(Operator::symbol)
                 .anyMatch((result) -> result.equals(character));
     }
+
+    public static Operator findSymbol(String character) {
+        return Arrays.stream(Operator.values())
+                .filter(operator ->  operator.symbol.equals(character)).findAny()
+                .orElseThrow(IllegalArgumentException::new);
+    }
 }

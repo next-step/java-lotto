@@ -12,10 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class CharacterParserTest {
 
     @Test
-    void 식을_받으면_리스트로_돌려준다() {
+    void 식을_받으면_연산자_피연산자로_돌려준다() {
         CharacterParser characterParser = new CharacterParser();
-        List<String> expected = List.of("1","+","3");
-        assertEquals(expected, characterParser.parsingFormula("1 + 3"));
+        characterParser.parsingFormula("1 + 3");
+        List<Integer> expectedOperand = List.of(1,3);
+        List<Operator> expectedOperator = List.of(Operator.ADD);
+        assertEquals(expectedOperand, characterParser.operands());
+        assertEquals(expectedOperator, characterParser.operators());
     }
 
     @ParameterizedTest
