@@ -16,22 +16,28 @@ public class UserInputInformation {
 
     private final int amount;
 
+    private final String[] manualNumbers;
+
     private final String numbers;
 
     private final int bonusNumber;
 
-    public UserInputInformation(int amount, String numbers, int bonusNumber) {
+    public UserInputInformation(int amount, String[] manualNumbers, String numbers, int bonusNumber) {
         validateZeroOrNegative(amount);
         validateNonNumeric(numbers);
         this.amount = amount;
+        validateManualNumbers(manualNumbers);
         this.numbers = numbers;
-        validateBonusNumber(bonusNumber);
+        this.manualNumbers = manualNumbers;
+        validateDuplicatedNumbers(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateBonusNumber(int bonusNumber) {
-        validateExceedNumber(bonusNumber);
-        validateDuplicatedNumbers(bonusNumber);
+    private void validateManualNumbers(String[] manualNumbers) {
+        if (manualNumbers.length > amount/1000) {
+            throw new IllegalArgumentException("수동 로또 수는 전체 금액을 초과할 수 없습니다.");
+        }
+        validateNonNumeric(String.join(", ", manualNumbers));
     }
 
     private void validateDuplicatedNumbers(int bonusNumber) {
@@ -42,15 +48,9 @@ public class UserInputInformation {
         }
     }
 
-    private void validateExceedNumber(int bonusNumber) {
-        if (bonusNumber < 1 || bonusNumber > 45) {
-            throw new IllegalArgumentException("보너스 넘버는 1~45를 넘을 수 없습니다.");
-        }
-    }
-
     private void validateNonNumeric(String numbers) {
         String[] split = numbers.split(NON_NUMERIC_REGEX);
-        if (split.length != 0) {
+        if ((split.length != 0) && (!numbers.isBlank())) {
             throw new IllegalArgumentException("로또 번호만 입력할 수 있습니다.");
         }
     }
@@ -73,7 +73,11 @@ public class UserInputInformation {
         return new Numbers(collect);
     }
 
-    public Number getBonusNumber() {
-        return new Number(this.bonusNumber);
+    public int getBonusNumber() {
+        return this.bonusNumber;
+    }
+
+    public String[] getManualNumbers() {
+        return manualNumbers;
     }
 }

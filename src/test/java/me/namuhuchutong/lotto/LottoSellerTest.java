@@ -13,7 +13,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoSellerTest {
-    
+
+    private static final String[] EMPTY_MANUAL_LOTTO = {};
+
     @DisplayName("로또를 구입할 수 없는 금액일 경우 예외가 발생한다.")
     @Test
     void throw_exception_when_can_not_buy_lotto() {
@@ -22,7 +24,11 @@ class LottoSellerTest {
         String givenNumbers = "1, 2, 3, 4, 5, 6";
         int bonusNumber = 7;
         LottoSeller lottoSeller = new LottoSeller(() -> null);
-        UserInputInformation information = new UserInputInformation(givenAmount, givenNumbers, bonusNumber);
+        UserInputInformation information = new UserInputInformation(
+                givenAmount,
+                EMPTY_MANUAL_LOTTO,
+                givenNumbers,
+                bonusNumber);
 
         //when, then
         assertThatThrownBy(() -> lottoSeller.sellLotto(information))
@@ -33,11 +39,15 @@ class LottoSellerTest {
     @Test
     void if_5_numbers_and_bonus_number_matched_get_winnings() {
         //given
-        int amount = 1000;
-        String givenNumber = "1, 2, 3, 4, 5, 6";
+        int givenAmount = 1000;
+        String givenNumbers = "1, 2, 3, 4, 5, 6";
         int bonusNumber = 7;
-        UserInputInformation information = new UserInputInformation(amount, givenNumber, bonusNumber);
         LottoSeller lottoSeller = new LottoSeller(new TestGenerator());
+        UserInputInformation information = new UserInputInformation(
+                givenAmount,
+                EMPTY_MANUAL_LOTTO,
+                givenNumbers,
+                bonusNumber);
 
         //when
         LottoResult lottoResult = lottoSeller.sellLotto(information);
@@ -50,12 +60,16 @@ class LottoSellerTest {
     @Test
     void five_matches_is_not_same_as_five_and_bonus_matches() {
         //given
-        int amount = 2000;
-        String givenNumber = "1, 2, 3, 4, 5, 6";
+        int givenAmount = 2000;
+        String givenNumbers = "1, 2, 3, 4, 5, 6";
         int bonusNumber = 7;
-        UserInputInformation information = new UserInputInformation(amount, givenNumber, bonusNumber);
         LottoSeller lottoSeller = new LottoSeller(new TestGenerator());
         long expected = FIVE.getWinnings() + BONUS.getWinnings();
+        UserInputInformation information = new UserInputInformation(
+                givenAmount,
+                EMPTY_MANUAL_LOTTO,
+                givenNumbers,
+                bonusNumber);
 
         //when
         LottoResult lottoResult = lottoSeller.sellLotto(information);
@@ -63,7 +77,7 @@ class LottoSellerTest {
         //then
         assertThat(lottoResult.getWinnings(THREE.getCount())).isEqualTo(expected);
     }
-    
+
     static class TestGenerator implements NumberGenerator {
 
         private int count = 0;

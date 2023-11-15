@@ -6,6 +6,8 @@ import me.namuhuchutong.lotto.dto.UserInputInformation;
 
 public class LottoSeller {
 
+    private static final int LOTTO_PRICE = 1000;
+
     private final NumberGenerator generator;
 
     public LottoSeller(NumberGenerator generator) {
@@ -14,10 +16,13 @@ public class LottoSeller {
 
     public LottoResult sellLotto(UserInputInformation information) {
         int amount = information.getAmount();
+        Number bonusNumber = new Number(information.getBonusNumber());
         validateAmount(amount);
-        int times = amount / 1000;
-        Lotto lotto = Lotto.create(times, generator);
-        return lotto.getMatchNumbers(information.getNumbers(), information.getBonusNumber());
+        Lotto lotto = Lotto.create(
+                amount / LOTTO_PRICE,
+                generator,
+                information.getManualNumbers());
+        return lotto.getMatchNumbers(information.getNumbers(), bonusNumber);
     }
 
     private void validateAmount(int amount) {

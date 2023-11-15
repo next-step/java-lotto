@@ -7,9 +7,20 @@ public class InputView {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public int inputBonusNumber() {
-        printMessage("보너스 번호를 입력하세요.");
+    public int inputAmount() {
+        printMessage("금액을 입력하세요.");
         return inputNumber();
+    }
+
+    public String[] inputManualLotto() {
+        printMessage("수동으로 구매할 로또 수를 입력하세요.");
+        int iterateCount = inputNumber();
+        String[] manualLottos = new String[iterateCount];
+        printMessage("로또 번호를 입력하세요. - " + iterateCount);
+        for (int i = 0; i < iterateCount; i++) {
+            manualLottos[i] = scanner.nextLine();
+        }
+        return manualLottos;
     }
 
     public String inputNumbers() {
@@ -17,8 +28,8 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public int inputAmount() {
-        printMessage("금액을 입력하세요.");
+    public int inputBonusNumber() {
+        printMessage("보너스 번호를 입력하세요.");
         return inputNumber();
     }
 
