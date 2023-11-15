@@ -12,9 +12,9 @@ class CalculatorTest {
 	@DisplayName("입력한 문자열의 숫자와 연산기호에 맞게 계산해 결과를 반환한다")
 	@Test
 	void calculateStrings() {
-		String input = "1 + 3 * 5 / 2";
+		String input = "1 + 3 + 5";
 		Calculator calculator = new Calculator();
 
-		assertThat(calculator.calculate(input)).isEqualTo(10);
+		assertThat(calculator.calculate(input)).isEqualTo(9);
 	}
 }

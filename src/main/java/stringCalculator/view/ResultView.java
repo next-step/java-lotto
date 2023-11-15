@@ -1,8 +1,8 @@
 package stringCalculator.view;
 
-public class resultView {
+public class ResultView {
 
-	public void printResult(int result) {
+	public static void printResult(int result) {
 		System.out.println("계산 결과 : " + result);
 	}
 }
