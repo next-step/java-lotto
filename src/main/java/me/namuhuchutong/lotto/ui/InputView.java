@@ -16,6 +16,7 @@ public class InputView {
         printMessage("수동으로 구매할 로또 수를 입력하세요.");
         int iterateCount = inputNumber();
         String[] manualLottos = new String[iterateCount];
+        printMessage("로또 번호를 입력하세요. - " + iterateCount);
         for (int i = 0; i < iterateCount; i++) {
             manualLottos[i] = scanner.nextLine();
         }
