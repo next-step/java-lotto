@@ -6,7 +6,7 @@ public class Calculator {
     }
 
     public static int calculate(String value) {
-        String[] tokens = value.trim().split(" ");
+        String[] tokens = value.split(" ");
         int result = StringToInt(tokens[0]);
 
         for (int i = 1; i < tokens.length; i += 2) {
