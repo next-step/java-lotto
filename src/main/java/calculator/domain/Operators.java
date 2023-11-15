@@ -17,7 +17,7 @@ public class Operators {
         this.operators = operators;
     }
 
-    public List<String> operators() {
+    public List<String> gerOperators() {
         return this.operators;
     }
 

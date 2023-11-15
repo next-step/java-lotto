@@ -29,7 +29,7 @@ public class Calculator {
 
     public int result() {
         result = this.operands.get(0);
-        for (int i = 0; i < this.operators.operators().size(); ++i) {
+        for (int i = 0; i < this.operators.gerOperators().size(); ++i) {
             calculate(i);
         }
         return result;

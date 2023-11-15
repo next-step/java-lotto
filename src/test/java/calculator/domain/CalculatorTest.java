@@ -34,7 +34,7 @@ public class CalculatorTest {
         assertThat(calculator.operands())
             .hasSize(4)
             .contains(1);
-        assertThat(calculator.operators().operators())
+        assertThat(calculator.operators().gerOperators())
             .hasSize(3)
             .contains("+");
     }
