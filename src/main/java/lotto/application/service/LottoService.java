@@ -12,15 +12,16 @@ public class LottoService {
     public LottoResponse calculateBenefit(LottoRequest request) {
         Lottos lottos = new Lottos(request.getLottos());
         HashMap<WinningAmount, Integer> countAllWinning = lottos.countAllWinning(request.getWinningLottoNumber());
-        int rateOfReturn = calculateRateOfReturn(request.getInputAmount(), countAllWinning);
+        String rateOfReturn = calculateRateOfReturn(request.getInputAmount(), countAllWinning);
         return new LottoResponse(rateOfReturn, countAllWinning);
     }
 
-    private int calculateRateOfReturn(Integer inputAmount, HashMap<WinningAmount, Integer> countAllWinning) {
+    private String calculateRateOfReturn(Integer inputAmount, HashMap<WinningAmount, Integer> countAllWinning) {
         Integer getAllAmount = 0;
         for (WinningAmount winningAmount : countAllWinning.keySet()) {
             getAllAmount += (winningAmount.getAmount() * countAllWinning.get(winningAmount));
         }
-        return getAllAmount / inputAmount;
+        Double result = Double.valueOf(getAllAmount) / Double.valueOf(inputAmount);
+        return String.format("%.2f", result);
     }
 }

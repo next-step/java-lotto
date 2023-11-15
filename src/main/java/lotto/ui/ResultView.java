@@ -23,7 +23,7 @@ public class ResultView {
         System.out.println(matchCount + "개 일치(" + amount + ")-" + count + "개");
     }
 
-    private void printRateOfReturn(int rateOfReturn) {
-        System.out.println("총 수익률 : " + rateOfReturn);
+    private void printRateOfReturn(String rateOfReturn) {
+        System.out.println("총 수익률: " + rateOfReturn);
     }
 }

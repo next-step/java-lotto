@@ -5,15 +5,15 @@ import lotto.domain.WinningAmount;
 import java.util.HashMap;
 
 public class LottoResponse {
-    private int rateOfReturn;
+    private String rateOfReturn;
     private HashMap<WinningAmount, Integer> countAllWinning;
 
-    public LottoResponse(int rateOfReturn, HashMap<WinningAmount, Integer> countAllWinning) {
+    public LottoResponse(String rateOfReturn, HashMap<WinningAmount, Integer> countAllWinning) {
         this.rateOfReturn = rateOfReturn;
         this.countAllWinning = countAllWinning;
     }
 
-    public int getRateOfReturn() {
+    public String getRateOfReturn() {
         return rateOfReturn;
     }
 

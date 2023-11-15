@@ -42,6 +42,7 @@ public class InputView {
         System.out.println("당첨 번호를 입력해주세요.");
         Scanner scanner = new Scanner(System.in);
         String winningNumber = scanner.nextLine();
+        System.out.println("");
         return convertToLottoNumber(winningNumber);
     }
 
