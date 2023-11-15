@@ -30,4 +30,12 @@ public class CalculatorTest {
         Assertions.assertThat(Calculator.multiple(2,0))
                 .isEqualTo(0);
     }
+
+    @Test
+    public void 나눗셈() {
+        Assertions.assertThat(Calculator.divide(4,2))
+                .isEqualTo(2);
+        Assertions.assertThat(Calculator.divide(-2,1))
+                .isEqualTo(-2);
+    }
 }

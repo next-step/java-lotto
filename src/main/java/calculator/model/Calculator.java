@@ -13,4 +13,8 @@ public class Calculator {
     public static int multiple(int left, int right) {
         return left * right;
     }
+
+    public static int divide(int left, int right) {
+        return left / right;
+    }
 }
