@@ -6,6 +6,8 @@ import java.util.List;
 public class Lottos {
     public static final String LINE_BREAK = "\n";
     private static final int LOTTO_AMOUNT = 1000;
+    public static final String INVALID_LOTTO_COUNT_MSG = "로또 번호는 6개 여야 합니다.";
+    public static final String DUPLICATE_BONUS_NUMBER_MSG = "보너스번호는 중복될 수 없습니다.";
 
     private List<Lotto> lottos;
 
@@ -29,13 +31,27 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Winning draw(final List<Integer> winningNumbers) {
+    public Winning draw(final List<Integer> winningNumbers, int bonusNumber) {
+
+        validaitonNumber(winningNumbers, bonusNumber);
+
         final Winning winning = new Winning();
         for (Lotto lotto : lottos) {
-            winning.addWinning(lotto.getRightNumber(winningNumbers));
+
+            winning.addWinning(lotto.getRightNumber(winningNumbers), lotto.isRightBonusNumber(bonusNumber));
         }
 
         return winning;
+    }
+
+    private void validaitonNumber(List<Integer> winningNumbers, int bonusNumber) {
+        if (winningNumbers.size() != 6) {
+            throw new IllegalArgumentException(INVALID_LOTTO_COUNT_MSG);
+        }
+
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER_MSG);
+        }
     }
 
     @Override

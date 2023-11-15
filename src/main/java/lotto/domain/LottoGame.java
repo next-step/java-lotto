@@ -24,12 +24,12 @@ public class LottoGame {
         return lottos.purchaseCount();
     }
 
-    public Winning draw(final String winningNumberText) {
+    public Winning draw(final String winningNumberText, final int bonusNumber) {
         validationCheck(winningNumberText);
 
         List<Integer> winningNumbers = parsingText(winningNumberText);
 
-        return lottos.draw(winningNumbers);
+        return lottos.draw(winningNumbers, bonusNumber);
     }
 
     private List<Integer> parsingText(final String winningNumberText) {

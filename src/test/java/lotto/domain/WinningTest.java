@@ -3,8 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningTest {
@@ -13,7 +11,7 @@ class WinningTest {
     @Test
     void addWinnerSuccessTest() {
         final Winning winning = new Winning();
-        winning.addWinning(3);
+        winning.addWinning(3, true);
 
         final int winnerCount = winning.getWinnerCount(Rank.FIFTH);
         assertThat(winnerCount).isEqualTo(1);
@@ -23,7 +21,7 @@ class WinningTest {
     @Test
     void addWinnerFailTest() {
         final Winning winner = new Winning();
-        winner.addWinning(2);
+        winner.addWinning(2, true);
 
         final int winnerCount = winner.getWinnerCount(Rank.FIFTH);
         assertThat(winnerCount).isEqualTo(0);
@@ -33,7 +31,7 @@ class WinningTest {
     @Test
     void getReturnRateTest() {
         final Winning winner = new Winning();
-        winner.addWinning(6);
+        winner.addWinning(6, true);
 
         final double returnRate = winner.getReturnRate(new Amount(10000));
 

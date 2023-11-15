@@ -19,7 +19,7 @@ public class LottoApp {
         String winningNumberText = InputView.inputWinningNumber();
         int bonusNumber = InputView.inputBonusNumber();
 
-        final Winning winner = lottoGame.draw(winningNumberText);
+        final Winning winner = lottoGame.draw(winningNumberText, bonusNumber);
         ResultView.print(winner.toString());
 
         final double returnRate = winner.getReturnRate(purchaseAmount);

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum Rank {
     FIRST(6, new Amount(2_000_000_000)),
@@ -23,11 +24,20 @@ public enum Rank {
                 .anyMatch(v -> v.count == rightNumber);
     }
 
-    static Rank ofRightNumber(final int rightNumber) {
-        return Arrays.stream(values())
-                .filter(v -> v.count == rightNumber)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(INVALID_COUNT));
+    static Rank ofRightNumber(final int rightNumber, boolean bonusMatch) {
+        Optional<Rank> rankOptional = Arrays.stream(values())
+                .filter(rank -> rank.count == rightNumber)
+                .findFirst();
+
+        return rankOptional.map(rank -> {
+            if (rightNumber == 5 && bonusMatch) {
+                return Rank.SECOND;
+            } else if (rightNumber == 5) {
+                return Rank.THIRD;
+            }
+
+            return rank;
+        }).orElseThrow(() -> new IllegalArgumentException(INVALID_COUNT));
     }
 
     public Amount getAmount() {

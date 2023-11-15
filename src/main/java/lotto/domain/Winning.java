@@ -9,9 +9,9 @@ public class Winning {
     public Winning() {
         this.winnerCountMap = new HashMap<>();
     }
-    public void addWinning(int rightNumber) {
+    public void addWinning(int rightNumber, boolean bonusMatch) {
         if (Rank.isWinning(rightNumber)) {
-            final Rank rank = Rank.ofRightNumber(rightNumber);
+            final Rank rank = Rank.ofRightNumber(rightNumber, bonusMatch);
             winnerCountMap.put(rank, winnerCountMap.getOrDefault(rank, 0) + 1);
         }
     }
