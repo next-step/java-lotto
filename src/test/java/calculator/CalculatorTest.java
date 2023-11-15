@@ -5,8 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import java.util.function.BiFunction;
-
 import static calculator.Calculator.calculation;
 import static calculator.exception.CustomExceptionCode.*;
 import static java.lang.Integer.parseInt;
