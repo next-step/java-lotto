@@ -23,6 +23,6 @@ public class Application {
                 .collect(toList());
         Lotto winningNumbersLotto = new Lotto(winningNumbers);
 
-        LottoResultView.printResultTest(new WinningLotto(winningNumbersLotto).winningInfos(lottos), lottos);
+        LottoResultView.printResult(new WinningLotto(winningNumbersLotto).winningInfos(lottos));
     }
 }

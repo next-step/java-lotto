@@ -15,10 +15,6 @@ public class Lottos{
         list.add(lotto);
     }
 
-    public void removeLotto(Lotto lotto) {
-        list.remove(lotto);
-    }
-
     public List<Lotto> getLottos() {
         return list;
     }

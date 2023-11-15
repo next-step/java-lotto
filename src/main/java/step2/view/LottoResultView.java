@@ -21,7 +21,7 @@ public class LottoResultView {
         }
     }
 
-    public static void printResultTest(WinningInfos winningInfos, Lottos lottos) {
+    public static void printResult(WinningInfos winningInfos) {
         printResultTitle();
 
         for(WinningInfo info : winningInfos.winningInfoList()){
@@ -31,13 +31,13 @@ public class LottoResultView {
         printEarningRate(winningInfos.earningRate());
     }
 
-    private static void printEachWinning(WinningInfo info) {
-        System.out.println(String.format(LOTTO_RESULT_MESSAGE, info.matchCount(), info.winningMoney(), info.winningCount()));
-    }
-
     private static void printResultTitle() {
         System.out.println("당첨 통계");
         System.out.println("---------");
+    }
+
+    private static void printEachWinning(WinningInfo info) {
+        System.out.println(String.format(LOTTO_RESULT_MESSAGE, info.matchCount(), info.winningMoney(), info.winningCount()));
     }
 
     private static void printEarningRate(double earningRate) {

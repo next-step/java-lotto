@@ -6,6 +6,7 @@ public class Lotto {
 
     private final List<LottoNumber> numbers;
     private static final int LOTTO_SIZE = 6;
+
     public Lotto(List<LottoNumber> numbers) {
         inputCheck(numbers);
         this.numbers = numbers;
