@@ -1,30 +1,31 @@
 package step2;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import step2.domain.type.Prize;
-import step2.exception.NotFoundPrizeException;
 
-import java.math.BigDecimal;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 public class PrizeTest {
 
-    @Test
-    @DisplayName("6개 초과하여 번호를 맞출 수 없다")
-    public void invalid_lotto_number() {
-        assertThatExceptionOfType(NotFoundPrizeException.class)
-            .isThrownBy(() -> {
-                Prize.of(7);
-            }).withMessageMatching("당첨 정보를 찾을 수 없습니다");
+    @ParameterizedTest
+    @MethodSource("lottoWithPrize")
+    @DisplayName("일치 개수와 보너스 일치에 따라 당첨을 계산할 수 있다")
+    public void prize(int matchCount, boolean isBonusMatched, Prize prize) {
+        assertThat(Prize.of(matchCount, isBonusMatched)).isEqualTo(prize);
     }
 
-    @Test
-    @DisplayName("맞춘 개수에 따라 당첨 금액을 가져올 수 있다")
-    public void prize_per_count() {
-        assertThat(Prize.of(6)).extracting(Prize::prizeMoney).isEqualTo(BigDecimal.valueOf(2000000000));
+    private static Stream<Arguments> lottoWithPrize() {
+        return Stream.of(
+            Arguments.arguments(6, false, Prize.FIRST),
+            Arguments.arguments(5, true, Prize.SECOND),
+            Arguments.arguments(5, false, Prize.THIRD),
+            Arguments.arguments(1, false, Prize.NO_PRIZE)
+        );
     }
 
 }

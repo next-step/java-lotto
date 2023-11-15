@@ -1,49 +1,57 @@
 package step2.domain;
 
-import step2.exception.InvalidLottoNumberCountException;
+import step2.exception.InvalidLottoNumberException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class LottoNumber {
 
+    private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
-    private static final int LOTTO_MAX_COUNT = 6;
-    private static final int ZERO = 0;
-    private static final List<Integer> defaultNumbers = defaultNumbers();
+    private static final List<LottoNumber> ALL_NUMBERS = defaultNumbers();
 
-    private final Set<Integer> numbers;
+    private int number;
 
-    public LottoNumber(List<Integer> numbers) {
-        Set<Integer> uniqueNumbers = new HashSet<>(numbers);
-        validate(uniqueNumbers);
-        this.numbers = uniqueNumbers;
+    public LottoNumber(int number) {
+        validate(number);
+        this.number = number;
     }
 
-    public LottoNumber() {
-        this(lottoNumbers());
-    }
-
-    private void validate(Set<Integer> numbers) {
-        if (numbers.size() > LOTTO_MAX_COUNT) {
-            throw new InvalidLottoNumberCountException();
+    private void validate(int number) {
+        if (number > LOTTO_MAX_NUMBER || number < LOTTO_MIN_NUMBER) {
+            throw new InvalidLottoNumberException();
         }
     }
 
-    private static List<Integer> defaultNumbers() {
-        List<Integer> numbers = new ArrayList<>();
+    private static List<LottoNumber> defaultNumbers() {
+        List<LottoNumber> numbers = new ArrayList<>();
         for (int i = 1; i <= LOTTO_MAX_NUMBER; i++) {
-            numbers.add(i);
+            numbers.add(new LottoNumber(i));
         }
         return numbers;
     }
 
-    private static List<Integer> lottoNumbers() {
-        Collections.shuffle(defaultNumbers);
-        return defaultNumbers.subList(ZERO, LOTTO_MAX_COUNT);
+    public static List<LottoNumber> allLottoNumbers() {
+        return ALL_NUMBERS;
     }
 
-    public List<Integer> numbers() {
-        return new ArrayList<>(this.numbers);
+    public int number() {
+        return this.number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 
 }

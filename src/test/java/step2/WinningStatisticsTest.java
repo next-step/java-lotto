@@ -3,7 +3,6 @@ package step2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.*;
-import step2.domain.type.Prize;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -17,8 +16,8 @@ public class WinningStatisticsTest {
     public void winning_statistics() {
         WinningStatistics winningStatistics = winningStatistics();
 
-        assertThat(winningStatistics.winningLottoCountByPrize(Prize.of(3))).isEqualTo(1);
-        assertThat(winningStatistics.winningLottoCountByPrize(Prize.of(4))).isEqualTo(1);
+        assertThat(winningStatistics.winningLottoCountByPrize(prizeLotto().prize(threeMatchLotto()))).isEqualTo(1);
+        assertThat(winningStatistics.winningLottoCountByPrize(prizeLotto().prize(fourMatchLotto()))).isEqualTo(1);
     }
 
     @Test
@@ -30,12 +29,23 @@ public class WinningStatisticsTest {
     }
 
     private WinningStatistics winningStatistics() {
-        Lotto threeMatchLotto = new Lotto(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        Lotto fourMatchLotto = new Lotto(new LottoNumber(Arrays.asList(3, 9, 10, 11, 42, 43)));
-        PrizeLotto prizeLotto = new PrizeLotto(new LottoNumber(Arrays.asList(1, 2, 3, 9, 10, 11)));
+        Lotto threeMatchLotto = threeMatchLotto();
+        Lotto fourMatchLotto = fourMatchLotto();
         Lottos lottos = new Lottos(Arrays.asList(threeMatchLotto, fourMatchLotto));
 
-        return WinningStatistics.of(lottos, prizeLotto);
+        return WinningStatistics.of(lottos, prizeLotto());
+    }
+
+    private static Lotto threeMatchLotto() {
+        return new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    }
+
+    private static Lotto fourMatchLotto() {
+        return new Lotto(new LottoNumbers(Arrays.asList(3, 9, 10, 11, 42, 43)));
+    }
+
+    private static PrizeLotto prizeLotto() {
+        return new PrizeLotto(new LottoNumbers(Arrays.asList(1, 2, 3, 9, 10, 11)), 7);
     }
 
 }

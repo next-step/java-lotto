@@ -17,33 +17,34 @@ public class ResultView {
     private static final String LOTTO_NUMBER_MESSAGE = "[%s]";
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
     private static final String DIVIDING_LINE = "---------";
-    private static final String MATCH_MESSAGE = "%d개 일치 (%.0f원)- %d개";
+    private static final String MATCH_MESSAGE = "%d개 일치%s (%.0f원)- %d개";
+    private static final String BONUS_MATCH_ADDITIONAL_MESSAGE = ", 보너스 볼 일치";
     private static final String RATE_OF_RETURN_MESSAGE = "총 수익률은 %.2f입니다.";
     private static final String COMMA = ", ";
 
-    public static void printPurchaseMessage(int count) {
+    public void printPurchaseMessage(int count) {
         System.out.println(String.format(PURCHASE_MESSAGE, count));
     }
 
-    public static void printLottos(Lottos lottos) {
-        lottos.lottos().stream().forEach(ResultView::printLotto);
+    public void printLottos(Lottos lottos) {
+        lottos.lottos().stream().forEach(lotto -> printLotto(lotto));
         System.out.println();
     }
 
-    private static void printLotto(Lotto lotto) {
+    private void printLotto(Lotto lotto) {
         System.out.println(String.format(LOTTO_NUMBER_MESSAGE, lottoText(lotto)));
     }
 
-    private static String lottoText(Lotto lotto) {
+    private String lottoText(Lotto lotto) {
         return StringUtils.join(sortedLottoNumbers(lotto.numbers()), COMMA);
     }
 
-    private static List<Integer> sortedLottoNumbers(List<Integer> lottoNumbers) {
+    private List<Integer> sortedLottoNumbers(List<Integer> lottoNumbers) {
         Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
 
-    public static void printWinningStatistics(WinningStatistics winningStatistics) {
+    public void printWinningStatistics(WinningStatistics winningStatistics) {
         System.out.println();
         System.out.println(WINNING_STATISTICS_MESSAGE);
         System.out.println(DIVIDING_LINE);
@@ -51,25 +52,33 @@ public class ResultView {
         printWinningStatisticsPerPrize(winningStatistics);
     }
 
-    private static void printWinningStatisticsPerPrize(WinningStatistics winningStatistics) {
+    private void printWinningStatisticsPerPrize(WinningStatistics winningStatistics) {
         Arrays.stream(Prize.values())
             .filter(Prize::isWinningPrize)
             .map(prize -> winningStatisticsText(prize, winningStatistics))
             .forEach(System.out::println);
     }
 
-    private static String winningStatisticsText(Prize prize, WinningStatistics winningStatistics) {
+    private String winningStatisticsText(Prize prize, WinningStatistics winningStatistics) {
+        if (prize.useBonusAndMatched()) {
+            return winningStatisticsText(BONUS_MATCH_ADDITIONAL_MESSAGE, prize, winningStatistics);
+        }
+        return winningStatisticsText(StringUtils.EMPTY, prize, winningStatistics);
+    }
+
+    private String winningStatisticsText(String additionalMessage, Prize prize, WinningStatistics winningStatistics) {
         return String.format(MATCH_MESSAGE,
             prize.matchCount(),
+            additionalMessage,
             prize.prizeMoney(),
             winningStatistics.winningLottoCountByPrize(prize));
     }
 
-    public static void printRateOfReturn(BigDecimal price, WinningStatistics winningStatistics) {
+    public void printRateOfReturn(BigDecimal price, WinningStatistics winningStatistics) {
         System.out.println(rateOfReturnText(price, winningStatistics));
     }
 
-    private static String rateOfReturnText(BigDecimal price, WinningStatistics winningStatistics) {
+    private String rateOfReturnText(BigDecimal price, WinningStatistics winningStatistics) {
         return String.format(RATE_OF_RETURN_MESSAGE, winningStatistics.rateOfReturn(price));
     }
 

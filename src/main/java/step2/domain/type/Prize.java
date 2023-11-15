@@ -5,44 +5,52 @@ import step2.exception.NotFoundPrizeException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiFunction;
 
 public enum Prize {
 
-    SEVENTH(0, BigDecimal.ZERO),
-    SIXTH(1, BigDecimal.ZERO),
-    FIFTH(2, BigDecimal.ZERO),
-    FOURTH(3, BigDecimal.valueOf(5000)),
-    THIRD(4, BigDecimal.valueOf(50000)),
-    SECOND(5, BigDecimal.valueOf(1500000)),
-    FIRST(6, BigDecimal.valueOf(2000000000));
+    NO_PRIZE(0, Bonus.NOT_USE, BigDecimal.ZERO, (count, bonus) -> count <= 2),
+    FIFTH(3, Bonus.NOT_USE, BigDecimal.valueOf(5000), (count, bonus) -> count == 3),
+    FOURTH(4, Bonus.NOT_USE, BigDecimal.valueOf(50000), (count, bonus) -> count == 4),
+    THIRD(5, Bonus.USE_AND_NOT_MATCHED, BigDecimal.valueOf(1500000), (count, bonus) -> count == 5 && !bonus),
+    SECOND(5, Bonus.USE_AND_MATCHED, BigDecimal.valueOf(30000000), (count, bonus) -> count == 5 && bonus),
+    FIRST(6, Bonus.NOT_USE, BigDecimal.valueOf(2000000000), (count, bonus) -> count == 6);
 
-    private static final List<Prize> WINNING = Arrays.asList(FIRST, SECOND, THIRD, FOURTH);
+    private static final List<Prize> WINNING = Arrays.asList(FIRST, SECOND, THIRD, FOURTH, FIFTH);
 
-    private int matchCount;
-    private BigDecimal prizeMoney;
+    private final int matchCount;
+    private final Bonus bonus;
+    private final BigDecimal prizeMoney;
+    private final BiFunction<Integer, Boolean, Boolean> expression;
 
-    Prize(int matchCount, BigDecimal prizeMoney) {
+    Prize(int matchCount, Bonus bonus, BigDecimal prizeMoney, BiFunction<Integer, Boolean, Boolean> expression) {
         this.matchCount = matchCount;
+        this.bonus = bonus;
         this.prizeMoney = prizeMoney;
+        this.expression = expression;
     }
 
-    public static Prize of(int matchCount) {
+    public boolean prize(int matchCount, boolean isBonusMatched) {
+        return expression.apply(matchCount, isBonusMatched);
+    }
+
+    public static Prize of(int matchCount, boolean isBonusMatched) {
         return Arrays.stream(Prize.values())
-            .filter(prize -> prize.equalMatchCount(matchCount))
+            .filter(prize -> prize.prize(matchCount, isBonusMatched))
             .findFirst()
             .orElseThrow(() -> new NotFoundPrizeException());
     }
 
-    private boolean equalMatchCount(int matchCount) {
-        return this.matchCount == matchCount;
-    }
-
-    public static boolean isWinningPrize(Prize prize) {
-        return WINNING.contains(prize);
+    public boolean isWinningPrize() {
+        return WINNING.contains(this);
     }
 
     public int matchCount() {
         return this.matchCount;
+    }
+
+    public boolean useBonusAndMatched() {
+        return this.bonus.useBonusAndMatched();
     }
 
     public BigDecimal prizeMoney() {
