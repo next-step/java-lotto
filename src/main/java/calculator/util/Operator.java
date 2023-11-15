@@ -1,4 +1,7 @@
-package step1.domain;
+package calculator.util;
+
+import calculator.domain.Calculator;
+import calculator.domain.Number;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;

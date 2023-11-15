@@ -1,4 +1,4 @@
-package step1.domain;
+package calculator.domain;
 
 public class Calculator {
     public Number add(Number left, Number right) {

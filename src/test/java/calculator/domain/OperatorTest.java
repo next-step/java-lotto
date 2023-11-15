@@ -1,5 +1,6 @@
-package step1.domain;
+package calculator.domain;
 
+import calculator.util.Operator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

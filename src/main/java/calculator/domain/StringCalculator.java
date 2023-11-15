@@ -1,4 +1,6 @@
-package step1.domain;
+package calculator.domain;
+
+import calculator.util.Operator;
 
 import java.util.ArrayDeque;
 import java.util.List;
