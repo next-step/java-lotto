@@ -27,6 +27,14 @@ public class Calculator {
         return this.operators;
     }
 
+    public int result() {
+        result = this.operands.get(0);
+        for (int i = 0; i < this.operators.operators().size(); ++i) {
+            calculate(i);
+        }
+        return result;
+    }
+
     private void validateInput(String input) {
         boolean isNull = input == null;
         if (isNull) {
@@ -59,31 +67,23 @@ public class Calculator {
     }
 
 
-    public int sum(int operand1, int operand2) {
+    private int sum(int operand1, int operand2) {
         result = operand1 + operand2;
         return result;
     }
 
-    public int subtraction(int operand1, int operand2) {
+    private int subtraction(int operand1, int operand2) {
         result = operand1 - operand2;
         return result;
     }
 
-    public int multiplication(int operand1, int operand2) {
+    private int multiplication(int operand1, int operand2) {
         result = operand1 * operand2;
         return result;
     }
 
-    public int division(int operand1, int operand2) {
+    private int division(int operand1, int operand2) {
         result = operand1 / operand2;
-        return result;
-    }
-
-    public int result() {
-        result = this.operands.get(0);
-        for (int i = 0; i < this.operators.operators().size(); ++i) {
-            calculate(i);
-        }
         return result;
     }
 
