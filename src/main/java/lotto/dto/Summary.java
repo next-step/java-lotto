@@ -9,9 +9,6 @@ public class Summary {
     private long fourthCount;
     private float profitRate;
 
-    public Summary() {
-    }
-
     public Summary(long firstCount, long secondCount, long thirdCount, long fourthCount, float profitRate) {
         this.firstCount = firstCount;
         this.secondCount = secondCount;

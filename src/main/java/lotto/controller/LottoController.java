@@ -22,7 +22,7 @@ public class LottoController {
     }
 
     public void start() {
-        Integer purchasePrice = inputView.readPurchasePrice();
+        int purchasePrice = inputView.readPurchasePrice();
 
         Lottos lottos = Lottos.of(purchasePrice, strategy);
 
