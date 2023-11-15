@@ -21,23 +21,20 @@ public class LottoRanks {
     }
 
     public Map<LottoRank, Integer> find() {
-        Map<LottoRank, Integer> resultMap = new EnumMap<>(LottoRank.class);
+        Map<LottoRank, Integer> rankList = new EnumMap<>(LottoRank.class);
+
         for (LottoRank lottoRank : LottoRank.values()) {
-            addMap(lottoRank, resultMap);
+            addRankResult(rankList, lottoRank);
         }
-        return resultMap;
+
+        return Collections.unmodifiableMap(rankList);
     }
 
-    private void addMap(LottoRank lottoRank, Map<LottoRank, Integer> resultMap) {
-        if (lottoRank.matchCount(2)) {
-            resultMap.put(lottoRank, resultMap.getOrDefault(lottoRank, 0));
+    private void addRankResult(Map<LottoRank, Integer> rankList, LottoRank lottoRank) {
+        if (lottoRank.count() > 0) {
+            rankList.put(lottoRank, this.ranks.getOrDefault(lottoRank, 0));
         }
     }
 
-    @Override
-    public String toString() {
-        return "LottoRanks{" +
-                "ranks=" + ranks +
-                '}';
-    }
+
 }

@@ -1,9 +1,9 @@
 package lotto;
 
-import calculator.domain.NumberGeneration;
-import calculator.domain.RandomNumberGeneration;
 import lotto.domain.LottoRanks;
 import lotto.domain.Lottos;
+import lotto.domain.NumberGeneration;
+import lotto.domain.RandomNumberGeneration;
 
 import java.util.List;
 
@@ -15,9 +15,11 @@ public class LottoController {
     public static final NumberGeneration NUMBER_GENERATION = new RandomNumberGeneration();
 
     public static void main(String[] args) {
+
         int amount = inputPurchaseAmount();
 
         Lottos lottos = new Lottos(amount, NUMBER_GENERATION);
+
         printLottoCount(lottos.count());
         printLottoBundle(lottos.find());
 
@@ -25,11 +27,9 @@ public class LottoController {
         int bonus = inputBonusBall();
 
         LottoRanks lottoRanks = new LottoRanks(lottos, winNumbers, bonus);
-        printMatchStats(lottoRanks.find());
-        System.out.println(lottoRanks.find()
-        );
-        printMatchResult(amount, lottoRanks.findPrizeMoney());
 
+        printMatchStats(lottoRanks.find());
+        printMatchResult(amount, lottoRanks.findPrizeMoney());
 
     }
 }

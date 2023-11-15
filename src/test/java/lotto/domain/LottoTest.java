@@ -29,7 +29,6 @@ public class LottoTest {
 
         assertThat(result).hasSize(6);
         assertThat(result.toString()).isEqualTo(text);
-
     }
 
     @Test

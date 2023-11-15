@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,7 +22,7 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         String text = SCANNER.nextLine();
-        return checkNumbers(splitText(text));
+        return checkNumbers(checkListSize(splitText(text)));
     }
 
     public static int inputBonusBall() {
@@ -47,6 +48,14 @@ public class InputView {
 
     private static String[] splitText(String text) {
         return text.split(PATTERN);
+    }
+
+    private static String[] checkListSize(String[] textArray) {
+        if (textArray.length != 6) {
+            throw new InputMismatchException("당첨 번호는 6개여야 합니다");
+        }
+        return textArray;
+
     }
 
 }

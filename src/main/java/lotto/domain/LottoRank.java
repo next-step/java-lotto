@@ -1,9 +1,7 @@
 package lotto.domain;
 
 public enum LottoRank {
-    MISS_THREE(0, 0L),
-    MISS_TWO(1, 0L),
-    MISS_ONE(2,  0L),
+    MISS(0, 0L),
     FIFTH(3, 5_000L),
     FOURTH(4, 50_000L),
     THIRD(5, 1_500_000L),
@@ -18,31 +16,29 @@ public enum LottoRank {
         this.prizeMoney = prizeMoney;
     }
 
-    public static LottoRank findMatchCount(int matchNumber, boolean bouns){
-        if(matchNumber==5&&bouns){
+    public static LottoRank findMatchCount(int matchNumber, boolean bouns) {
+        if (matchNumber == 5 && bouns) {
             return LottoRank.SECOND;
         }
-        for(LottoRank lottoRank : LottoRank.values()){
-            if(lottoRank.count == matchNumber){
+
+        for (LottoRank lottoRank : LottoRank.values()) {
+            if (lottoRank.count == matchNumber) {
                 return lottoRank;
             }
         }
+
         throw new IllegalArgumentException("로또 매치가 올바르지 않습니다");
     }
-
-    public long sumPrize(int count){
-        return this.prizeMoney*count;
+    
+    public long sumPrize(int count) {
+        return this.prizeMoney * count;
     }
 
-    public boolean matchCount(int number){
-        return this.count > number;
-    }
-
-    public int count(){
+    public int count() {
         return this.count;
     }
 
-    public long prize(){
+    public long prize() {
         return this.prizeMoney;
     }
 }
