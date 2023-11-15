@@ -3,26 +3,30 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000, false),
-    SECOND(5, 30_000_000, true),
-    THIRD(5, 1_500_000, false),
-    FOURTH(4, 50_000, false),
-    FIFTH(3, 5_000, false),
-    NONE(0, 0, false);
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    NONE(0, 0),
+    ;
 
     private final int matchCount;
     private final long winningPrice;
-    private final boolean isBonus;
 
-    Rank(int matchCount, long winningPrice, boolean isBonus) {
+    Rank(int matchCount, long winningPrice) {
         this.matchCount = matchCount;
         this.winningPrice = winningPrice;
-        this.isBonus = isBonus;
     }
 
-    public static Rank findRank(int userMatchCount, boolean isBonusWinning) {
+    public static Rank findRank(int userMatchCount, boolean isWinningBonus) {
+        if (isSecondRank(userMatchCount, isWinningBonus)) {
+            return SECOND;
+        }
+
         return Arrays.stream(values())
-                .filter(rank -> rank.isEqualMatchCount(userMatchCount, isBonusWinning))
+                .filter(Rank::isNotSecondRank)
+                .filter(rank -> rank.isEqualMatchCount(userMatchCount))
                 .findFirst()
                 .orElse(NONE);
     }
@@ -43,18 +47,15 @@ public enum Rank {
         return this.winningPrice * winningCount;
     }
 
-    public boolean isBonus() {
-        return isBonus;
+    private boolean isEqualMatchCount(int userMatchCount) {
+        return userMatchCount == this.matchCount;
     }
 
-    private boolean isEqualMatchCount(int userMatchCount, boolean isBonus) {
-        return userMatchCount == this.matchCount && eqaulBonusCondition(isBonus);
+    private static boolean isSecondRank(int userMatchCount, boolean isWinningBonus) {
+        return userMatchCount == SECOND.matchCount && isWinningBonus;
     }
 
-    private boolean eqaulBonusCondition(boolean isBonus) {
-        if (this.isBonus) {
-            return isBonus;
-        }
-        return true;
+    private boolean isNotSecondRank() {
+        return this != SECOND;
     }
 }

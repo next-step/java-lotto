@@ -5,11 +5,8 @@ import lotto.domain.Rank;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class PrintView {
 
@@ -30,7 +27,7 @@ public class PrintView {
                     long count = winningRanks.getOrDefault(rank, 0L);
                     String printString = rank.getMatchCount() + "개 일치 (" + rank.getWinningPrice() + "원) - " + count;
 
-                    if (rank.isBonus()) {
+                    if (rank == Rank.SECOND) {
                         printString = rank.getMatchCount() + "개 일치, 보너스 볼 일치(" + rank.getWinningPrice() + "원) - " + count;
                     }
                     System.out.println(printString);
