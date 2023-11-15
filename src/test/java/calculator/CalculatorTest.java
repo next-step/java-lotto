@@ -1,5 +1,6 @@
 package calculator;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -56,5 +57,16 @@ class CalculatorTest {
         String input = "1 + 1 * 3 / 2";
 
         assertThat(Calculator.calculate(input)).isEqualTo(3);
+    }
+
+    @Test
+    void assertNullTypeInput() {
+        String input = null;
+
+        NullPointerException thrown = Assertions.assertThrows(NullPointerException.class, () -> {
+            Calculator.calculate(input);
+        });
+
+        assertThat(thrown.getMessage()).contains("null");
     }
 }
