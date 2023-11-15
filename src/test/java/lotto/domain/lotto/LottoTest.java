@@ -27,8 +27,8 @@ class LottoTest {
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 45), Winning.SECOND),
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 44, 45), Winning.THIRD),
                 Arguments.of(Arrays.asList(1, 2, 3, 43, 44, 45), Winning.FOURTH),
-                Arguments.of(Arrays.asList(1, 2, 42, 43, 44, 45), Winning.FIFTH),
-                Arguments.of(Arrays.asList(1, 41, 42, 43, 44, 45), Winning.SIXTH),
-                Arguments.of(Arrays.asList(40, 41, 42, 43, 44, 45), Winning.BLANK));
+                Arguments.of(Arrays.asList(1, 2, 42, 43, 44, 45), Winning.FAIL),
+                Arguments.of(Arrays.asList(1, 41, 42, 43, 44, 45), Winning.FAIL),
+                Arguments.of(Arrays.asList(40, 41, 42, 43, 44, 45), Winning.FAIL));
     }
 }

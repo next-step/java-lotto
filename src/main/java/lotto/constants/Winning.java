@@ -7,9 +7,7 @@ public enum Winning {
     SECOND(5, 1500000),
     THIRD(4, 50000),
     FOURTH(3, 50000),
-    FIFTH(2, 0),
-    SIXTH(1, 0),
-    BLANK(0, 0);
+    FAIL(0, 0);
 
     private static final String MESSAGE = "%s개 일치 (%s원)";
 
@@ -25,7 +23,7 @@ public enum Winning {
 
     public static Winning of(long matchCount) {
         return Arrays.stream(values())
-                .filter(winning -> winning.matchCount == matchCount)
+                .filter(winning -> winning.matchCount <= matchCount)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Invalid match count: " + matchCount));
     }
