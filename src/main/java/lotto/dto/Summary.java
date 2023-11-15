@@ -20,6 +20,26 @@ public class Summary {
         this.profitRate = profitRate;
     }
 
+    public long firstCount() {
+        return firstCount;
+    }
+
+    public long secondCount() {
+        return secondCount;
+    }
+
+    public long thirdCount() {
+        return thirdCount;
+    }
+
+    public long fourthCount() {
+        return fourthCount;
+    }
+
+    public float profitRate() {
+        return profitRate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
