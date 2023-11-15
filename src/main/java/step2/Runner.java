@@ -11,7 +11,8 @@ public class Runner {
 
     private static final InputView inputView = new InputView();
     private static final ResultView resultView = new ResultView();
-    private static final LottoStore lottoStore = new LottoStore();
+    private static final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+    private static final LottoStore lottoStore = new LottoStore(lottoNumberGenerator);
 
     public static void main(String[] args) {
         LottoRequest request = new LottoRequest(inputView.price(), inputView.manual());

@@ -62,7 +62,7 @@ public class ResultView {
     }
 
     private String winningStatisticsText(Prize prize, WinningStatistics winningStatistics) {
-        if (prize.useBonusAndMatched()) {
+        if (prize == Prize.SECOND) {
             return winningStatisticsText(BONUS_MATCH_ADDITIONAL_MESSAGE, prize, winningStatistics);
         }
         return winningStatisticsText(StringUtils.EMPTY, prize, winningStatistics);

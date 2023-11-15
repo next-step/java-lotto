@@ -2,10 +2,7 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.domain.Lotto;
-import step2.domain.LottoNumbers;
-import step2.domain.LottoStore;
-import step2.domain.Lottos;
+import step2.domain.*;
 import step2.domain.dto.LottoRequest;
 
 import java.util.Arrays;
@@ -14,7 +11,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoStoreTest {
 
-    private final LottoStore lottoStore = new LottoStore();
+    private final LottoStore lottoStore = new LottoStore(new LottoNumberGenerator());
 
     @Test
     @DisplayName("주어진 로또 넘버대로 로또를 발급할 수 있다")

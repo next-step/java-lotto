@@ -13,8 +13,8 @@ public class LottoStore {
 
     private final LottoNumberGenerator lottoNumberGenerator;
 
-    public LottoStore() {
-        this.lottoNumberGenerator = new LottoNumberGenerator();
+    public LottoStore(LottoNumberGenerator lottoNumberGenerator) {
+        this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
     public Lottos lottos(LottoRequest request) {
