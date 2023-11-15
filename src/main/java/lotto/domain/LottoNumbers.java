@@ -10,4 +10,7 @@ public class LottoNumbers {
         this.numbers = new ArrayList<>();
     }
 
+    public void add(LottoNumber number) {
+        numbers.add(number);
+    }
 }
