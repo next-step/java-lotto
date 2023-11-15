@@ -1,4 +1,6 @@
-import java.io.PrintStream;
+package calculator;
+
+import calculator.controller.CalculatorController;
 import java.util.Scanner;
 
 public class Main {

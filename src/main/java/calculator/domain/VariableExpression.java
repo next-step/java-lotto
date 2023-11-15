@@ -1,3 +1,5 @@
+package calculator.domain;
+
 public class VariableExpression{
 
     private final char character;

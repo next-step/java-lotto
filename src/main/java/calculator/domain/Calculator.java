@@ -1,6 +1,10 @@
+package calculator.domain;
+
+import calculator.domain.CalculatorExpression;
+import calculator.domain.CalculatorService;
+import calculator.domain.VariableExpression;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Stack;
 
 public class Calculator {
 

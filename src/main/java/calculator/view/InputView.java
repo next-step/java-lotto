@@ -1,3 +1,5 @@
+package calculator.view;
+
 import java.io.PrintStream;
 import java.util.Scanner;
 

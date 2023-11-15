@@ -1,3 +1,5 @@
+package calculator;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.core.api.Assertions;
@@ -9,7 +11,7 @@ public class MultiplicationExpressionTest {
     @DisplayName("곱셈을 합니다.")
     @Test
     void multiplicationCalculate(){
-//        MultiplicationExpression multiplicationExpression = new MultiplicationExpression(new VariableExpression('2'),new VariableExpression('3'));
+//        domain.MultiplicationExpression multiplicationExpression = new domain.MultiplicationExpression(new calculator.domain.VariableExpression('2'),new calculator.domain.VariableExpression('3'));
 //        int result = multiplicationExpression.calculate();
 //        assertThat(result).isEqualTo(6);
     }
