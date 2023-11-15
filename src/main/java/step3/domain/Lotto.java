@@ -34,11 +34,4 @@ public class Lotto {
                 .anyMatch(number -> number == lottoNumber.number());
     }
 
-    @Override
-    public String toString() {
-        return lottoNumbers.stream()
-                .map(LottoNumber::number)
-                .map(String::valueOf)
-                .collect(Collectors.joining(", ", "[", "]"));
-    }
 }

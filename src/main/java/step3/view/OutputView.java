@@ -1,12 +1,10 @@
 package step3.view;
 
-import step3.domain.Lotto;
-import step3.domain.LottoRank;
-import step3.domain.Lottos;
-import step3.domain.WinningResult;
+import step3.domain.*;
 
 import java.text.DecimalFormat;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class OutputView {
 
@@ -25,7 +23,12 @@ public class OutputView {
 
     private static void printEachLotto(Lottos lottos) {
         for(Lotto lotto: lottos.lottos()){
-            System.out.println(lotto);
+            String lottoNumbers = lotto.lottoNumbers().stream()
+                    .map(LottoNumber::number)
+                    .sorted()
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(", ", "[", "]"));
+            System.out.println(lottoNumbers);
         }
     }
 
