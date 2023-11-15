@@ -1,45 +1,37 @@
 package step2;
 
 import step2.domain.*;
+import step2.domain.dto.LottoRequest;
 import step2.view.InputView;
 import step2.view.ResultView;
 
-import java.math.BigDecimal;
-import java.util.List;
-
-import static step2.util.BigDecimalUtil.stringToBigDecimal;
 import static step2.util.StringUtil.numbers;
 
 public class Runner {
 
-    public static void main(String[] args) {
-        InputView inputView = new InputView();
-        ResultView resultView = new ResultView();
+    private static final InputView inputView = new InputView();
+    private static final ResultView resultView = new ResultView();
+    private static final LottoStore lottoStore = new LottoStore();
 
-        BigDecimal price = stringToBigDecimal(inputView.price());
-        int manualCount = inputView.manual();
-        Lottos lottos = lottos(price);
-        resultView.printPurchaseMessage(lottos.size());
+    public static void main(String[] args) {
+        LottoRequest request = new LottoRequest(inputView.price(), inputView.manual());
+        Lottos lottos = lottoStore.lottos(request);
+        resultView.printPurchaseMessage(request);
         resultView.printLottos(lottos);
 
         WinningStatistics winningStatistics = winningStatistics(lottos, inputView.prizeLottoNumber(), inputView.bonusNumber());
         resultView.printWinningStatistics(winningStatistics);
-        resultView.printRateOfReturn(price, winningStatistics);
-    }
-
-    private static Lottos lottos(BigDecimal price) {
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-        LottoStore lottoStore = new LottoStore();
-
-        List<LottoNumbers> lottoNumbers = lottoNumberGenerator.lottoNumbers(lottoStore.numberOfLotto(price));
-        return lottoStore.lottos(lottoNumbers);
+        resultView.printRateOfReturn(request.price(), winningStatistics);
     }
 
     private static WinningStatistics winningStatistics(Lottos lottos, String prizeLottoNumberText, int bonusNumber) {
-        LottoNumbers prizeLottoNumbers = new LottoNumbers(numbers(prizeLottoNumberText));
-        PrizeLotto prizeLotto = new PrizeLotto(prizeLottoNumbers, bonusNumber);
-
+        PrizeLotto prizeLotto = prizeLotto(prizeLottoNumberText, bonusNumber);
         return WinningStatistics.of(lottos, prizeLotto);
+    }
+
+    private static PrizeLotto prizeLotto(String prizeLottoNumberText, int bonusNumber) {
+        LottoNumbers prizeLottoNumbers = new LottoNumbers(numbers(prizeLottoNumberText));
+        return new PrizeLotto(prizeLottoNumbers, bonusNumber);
     }
 
 }
