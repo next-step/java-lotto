@@ -12,4 +12,12 @@ public class CalculatorTest {
         Assertions.assertThat(Calculator.add(0,0))
                 .isEqualTo(0);
     }
+
+    @Test
+    public void 뺄셈() {
+        Assertions.assertThat(Calculator.sub(5,3))
+                .isEqualTo(2);
+        Assertions.assertThat(Calculator.sub(3,5))
+                .isEqualTo(-2);
+    }
 }
