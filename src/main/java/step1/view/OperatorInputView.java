@@ -2,9 +2,9 @@ package step1.view;
 
 import java.util.Scanner;
 
-import static step1.constants.QuestionConstants.PUT_FORMULA;
-
 public class OperatorInputView {
+
+    public static final String PUT_FORMULA = "연산식을 입력해주세요.";
 
     public String inputString() {
         Scanner scanner = new Scanner(System.in);
