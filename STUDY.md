@@ -66,6 +66,7 @@
   - Database CRUD
 - 함수형 인터페이스 사용시 테스트가 쉬워짐
 - @CsvSource 로 표현하기 복잡할땐 @MethodSource 사용하기
+- for-loop와 같은 반복문이나 if절과 같은 조건문은 가능한 테스트 코드에서 지양
 
 
 
