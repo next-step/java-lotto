@@ -1,8 +1,9 @@
-package lotto.domain.lotto;
+package lotto.domain.lotto.wrapper;
 
+import lotto.domain.lotto.LotteryRank;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.rankcount.RankCount;
 import lotto.domain.rankcount.RankCountGroup;
-import lotto.domain.wrapper.Numbers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,15 +19,15 @@ public class Lottos {
     public Lottos() {
     }
 
-    public Lottos(List<Numbers> numberses) {
-        numberses.forEach(numbers -> lottos.add(new Lotto(numbers)));
+    public Lottos(List<LottoNumbers> lottoNumberses) {
+        lottoNumberses.forEach(numbers -> lottos.add(new Lotto(numbers)));
     }
 
     public int getNumOfLotto() {
         return this.lottos.size();
     }
 
-    public RankCountGroup groupByRankCount(Numbers winningNumbers) {
+    public RankCountGroup groupByRankCount(LottoNumbers winningNumbers) {
         LotteryRank[] ranks = values();
 
         List<RankCount> rankCounts = Arrays.stream(ranks)
@@ -36,10 +37,10 @@ public class Lottos {
         return new RankCountGroup(rankCounts);
     }
 
-    private long countByRank(Numbers winningNumbers, LotteryRank rank) {
+    private long countByRank(LottoNumbers winningNumbers, LotteryRank rank) {
         return lottos.stream()
             .map(lotto -> lotto.countMatchingNumbers(winningNumbers))
-            .filter(i -> i == rank.matchingCount())
+            .filter(rank::equalsWith)
             .count();
     }
 }

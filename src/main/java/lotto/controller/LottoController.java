@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoGame;
-import lotto.domain.wrapper.Numbers;
+import lotto.domain.lotto.wrapper.LottoNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -30,7 +30,7 @@ public class LottoController {
         }
         resultView.printPurchaseResult(numOfLotto);
 
-        Numbers winningNumbers;
+        LottoNumbers winningNumbers;
         while (true) {
             try {
                 winningNumbers = inputView.inputWinningNumbers();

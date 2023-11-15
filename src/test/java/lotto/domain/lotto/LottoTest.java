@@ -1,7 +1,6 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lotto.Lotto;
-import lotto.domain.wrapper.Numbers;
+import lotto.domain.lotto.wrapper.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,10 +14,10 @@ public class LottoTest {
     @Test
     void countMatchingNumbers() {
         // given
-        Numbers numbers = new Numbers(List.of(1, 5, 12, 21, 32, 43));
-        Lotto lotto = new Lotto(numbers);
+        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 5, 12, 21, 32, 43));
+        Lotto lotto = new Lotto(lottoNumbers);
 
-        Numbers winningNumbers = new Numbers(List.of(1, 10, 12, 26, 32, 41));
+        LottoNumbers winningNumbers = new LottoNumbers(List.of(1, 10, 12, 26, 32, 41));
 
         // when
         int count = lotto.countMatchingNumbers(winningNumbers);

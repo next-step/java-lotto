@@ -1,19 +1,19 @@
 package lotto.domain.lotto;
 
-import lotto.domain.wrapper.Numbers;
+import lotto.domain.lotto.wrapper.LottoNumbers;
 
 public class Lotto {
 
-    private Numbers numbers;
+    private LottoNumbers lottoNumbers;
 
     public Lotto() {
     }
 
-    public Lotto(Numbers numbers) {
-        this.numbers = numbers;
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public int countMatchingNumbers(Numbers winningNumbers) {
-        return this.numbers.countMatchingNumbers(winningNumbers);
+    public int countMatchingNumbers(LottoNumbers winningLottoNumbers) {
+        return this.lottoNumbers.countMatchingNumbers(winningLottoNumbers);
     }
 }

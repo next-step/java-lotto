@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.lotto.Lottos;
-import lotto.domain.wrapper.Numbers;
+import lotto.domain.lotto.wrapper.Lottos;
+import lotto.domain.lotto.wrapper.LottoNumbers;
 import lotto.domain.rankcount.RankCountGroup;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,10 +20,10 @@ public class ProfitCalculatorTest {
 
         Lottos lottos = new Lottos(
             List.of(
-                new Numbers(List.of(1, 5, 12, 25, 35, 43)),
-                new Numbers(List.of(1, 5, 24, 27, 29, 43))
+                new LottoNumbers(List.of(1, 5, 12, 25, 35, 43)),
+                new LottoNumbers(List.of(1, 5, 24, 27, 29, 43))
             ));
-        Numbers winningNumbers = new Numbers(List.of(1, 5, 12, 21, 32, 43));
+        LottoNumbers winningNumbers = new LottoNumbers(List.of(1, 5, 12, 21, 32, 43));
         RankCountGroup rankCountGroup = lottos.groupByRankCount(winningNumbers);
 
         ProfitCalculator profitCalculator = new ProfitCalculator();

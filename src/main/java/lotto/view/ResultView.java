@@ -1,10 +1,9 @@
 package lotto.view;
 
 import lotto.domain.LottoGame;
-import lotto.domain.lotto.LotteryRank;
 import lotto.domain.rankcount.RankCountGroup;
-import lotto.domain.wrapper.Numbers;
-import lotto.util.LottoNumber;
+import lotto.domain.lotto.wrapper.LottoNumbers;
+import lotto.util.LottoMachine;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,34 +21,40 @@ public class ResultView {
     }
 
     public void printPurchaseResult(int numOfLotto) {
-        List<Numbers> numberses = printResult(numOfLotto);
-        lottoGame.createLottos(numberses);
+        List<LottoNumbers> lottoNumberses = printResult(numOfLotto);
+        lottoGame.createLottos(lottoNumberses);
     }
 
-    private List<Numbers> printResult(int numOfLotto) {
-        printNumOfLotto(numOfLotto);
+    private List<LottoNumbers> printResult(int numOfLotto) {
+        List<LottoNumbers> lottoNumberses = drawLottoNumberses(numOfLotto);
 
-        return printLottoNumbers(numOfLotto);
+        printNumOfLotto(numOfLotto);
+        printLottoNumbers(lottoNumberses);
+
+        return lottoNumberses;
     }
 
     private void printNumOfLotto(int numOfLotto) {
         System.out.println(numOfLotto + "개를 구매했습니다.");
     }
 
-    private List<Numbers> printLottoNumbers(int numOfLotto) {
-        List<Numbers> numberses = new ArrayList<>();
+    private List<LottoNumbers> drawLottoNumberses(int numOfLotto) {
+        List<LottoNumbers> lottoNumberses = new ArrayList<>();
 
         IntStream.range(0, numOfLotto)
             .forEach(i -> {
-                Numbers numbers = LottoNumber.drawLottoNumbers();
-                numberses.add(numbers);
-                System.out.println("[" + numbers.toString() + "]");
+                LottoNumbers lottoNumbers = LottoMachine.drawLottoNumbers();
+                lottoNumberses.add(lottoNumbers);
             });
 
-        return numberses;
+        return lottoNumberses;
     }
 
-    public void printLottoGameResult(Numbers winningNumbers) {
+    private void printLottoNumbers(List<LottoNumbers> lottoNumberses) {
+        lottoNumberses.forEach(System.out::println);
+    }
+
+    public void printLottoGameResult(LottoNumbers winningNumbers) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 

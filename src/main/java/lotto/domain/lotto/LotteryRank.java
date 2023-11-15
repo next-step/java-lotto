@@ -22,6 +22,10 @@ public enum LotteryRank {
         return this.matchingCount;
     }
 
+    public boolean equalsWith(int matchingCount) {
+        return this.matchingCount == matchingCount;
+    }
+
     public long prize() {
         return this.prize;
     }

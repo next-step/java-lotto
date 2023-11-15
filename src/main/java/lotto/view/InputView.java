@@ -1,9 +1,8 @@
 package lotto.view;
 
-import lotto.domain.wrapper.Numbers;
+import lotto.domain.lotto.wrapper.LottoNumbers;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -36,7 +35,7 @@ public class InputView {
         return (int) Long.parseLong(purchase) / LOTTO_PRICE;
     }
 
-    public Numbers inputWinningNumbers() {
+    public LottoNumbers inputWinningNumbers() {
         System.out.println("이번 주 당첨 번호를 입력해 주세요.");
         String input = validateWinningNumbers();
 
@@ -50,10 +49,10 @@ public class InputView {
         return input;
     }
 
-    private Numbers convertToNumbers(String input) {
+    private LottoNumbers convertToNumbers(String input) {
         String[] stringNumbers = input.split(DELIMITER);
 
-        return new Numbers(Arrays.stream(stringNumbers)
+        return new LottoNumbers(Arrays.stream(stringNumbers)
             .map(stringNumber -> Integer.parseInt(stringNumber.trim()))
             .collect(Collectors.toUnmodifiableList()));
     }

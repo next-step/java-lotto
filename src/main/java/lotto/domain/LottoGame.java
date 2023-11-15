@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.wrapper.Lottos;
 import lotto.domain.rankcount.RankCountGroup;
-import lotto.domain.wrapper.Numbers;
+import lotto.domain.lotto.wrapper.LottoNumbers;
 
 import java.util.List;
 
@@ -13,12 +13,12 @@ public class LottoGame {
     private Lottos lottos;
     private ProfitCalculator profitCalculator;
 
-    public void createLottos(List<Numbers> numberses) {
-        lottos = new Lottos(numberses);
+    public void createLottos(List<LottoNumbers> lottoNumberses) {
+        lottos = new Lottos(lottoNumberses);
         this.profitCalculator = new ProfitCalculator();
     }
 
-    public RankCountGroup groupByRankCount(Numbers winningNumbers) {
+    public RankCountGroup groupByRankCount(LottoNumbers winningNumbers) {
         return lottos.groupByRankCount(winningNumbers);
     }
 
