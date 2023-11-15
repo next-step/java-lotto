@@ -19,7 +19,7 @@ public class ExpressionValidator {
             throw new IllegalArgumentException(ERR_INVALID_SYMBOL);
         }
 
-        if (checkNumberOnEdge(expression)) {
+        if (!checkNumberOnEdge(expression)) {
             throw new IllegalArgumentException(ERR_INVALID_EXPRESSION);
         }
     }
@@ -29,10 +29,11 @@ public class ExpressionValidator {
     }
 
     private static boolean checkNumberOnEdge(String expression) {
-        if (Expression.isNumeric(Expression.split(expression).get(-1))) {
+        List<String> elements = Expression.split(expression);
+        if (Expression.isNumeric(elements.get(elements.size()-1))) {
             return true;
         }
-        if (Expression.isNumeric(Expression.split(expression).get(0))) {
+        if (Expression.isNumeric(elements.get(0))) {
             return true;
         }
         return false;
