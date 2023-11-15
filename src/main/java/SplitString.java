@@ -3,31 +3,23 @@ import java.util.List;
 
 public class SplitString {
     private static final String SPLIT_DELIMITER = " ";
+    private static final String SUM_OPERATOR = "+";
+    private static final String SUBTRACTION_OPERATOR = "-";
+    private static final String MULTIPLICATION_OPERATOR = "*";
+    private static final String DIVISION_OPERATOR = "/";
 
-    public static List<Integer> splitNumber(String input) {
-        List<Integer> numbers = new ArrayList<>();
+    public List<String> splitStrings;
 
-        for(String string : splitWithDelimiter(input)){
-            if(isNumeric(string)){
-                numbers.add(Integer.parseInt(string));
-            }
+    public SplitString(String input){
+        splitStrings = new ArrayList<>();
+
+        for(String string : splitWithDelimiter(input)) {
+            addElement(string);
         }
-        return numbers;
     }
 
-    public static List<String> splitOperator(String input){
-        List<String> operators = new ArrayList<>();
-
-        for(String string : splitWithDelimiter(input)){
-            if(!isNumeric(string) && isOperator(string)){
-                operators.add(string);
-            }
-        }
-        return operators;
-    }
-
-    private static boolean isNumeric(String string){
-        return Character.isDigit(string.charAt(0));
+    public List<String> splitString(){
+        return splitStrings;
     }
 
     private static String[] splitWithDelimiter(String input){
@@ -37,12 +29,31 @@ public class SplitString {
         return input.split(SPLIT_DELIMITER);
     }
 
-    private static boolean isOperator(String string){
-        if(!(string.equals("+") || string.equals("-") || string.equals("*") || string.equals("/"))) {
+    private void addElement(String string){
+        if(isNumeric(string) || isOperator(string)) {
+            splitStrings.add(string);
+        }
+    }
+
+    private boolean isNumeric(String string){
+        return Character.isDigit(string.charAt(0));
+    }
+
+    private boolean isOperator(String string){
+        if(!(string.equals(SUM_OPERATOR) || string.equals(SUBTRACTION_OPERATOR) || string.equals(MULTIPLICATION_OPERATOR) || string.equals(DIVISION_OPERATOR))) {
             throw new IllegalArgumentException();
         }
-
         return true;
+    }
+
+    public int stringOperate(){
+        int result = Integer.parseInt(splitStrings.get(0));
+
+        for(int i=1; i<splitStrings.size(); i+=2){
+            result = Calculator.operate(splitStrings.get(i), result, Integer.parseInt(splitStrings.get(i +1)));
+        }
+
+        return result;
     }
 
 }

@@ -1,29 +1,22 @@
 import java.util.List;
 
 public class Calculator {
-    private static final String SUM_DELIMITER = "+";
-    private static final String SUBTRACTION_DELIMITER = "-";
-    private static final String MULTIPLICATION_DELIMITER = "*";
-    private static final String DIVISION_DELIMITER = "/";
+    private static final String SUM_OPERATOR = "+";
+    private static final String SUBTRACTION_OPERATOR = "-";
+    private static final String MULTIPLICATION_OPERATOR = "*";
+    private static final String DIVISION_OPERATOR = "/";
 
     public static int stringCalculate(String inputString) {
-        List<Integer> numberList = SplitString.splitNumber(inputString);
-        List<String> operatorList = SplitString.splitOperator(inputString);
+        SplitString splitString = new SplitString(inputString);
 
-        int result = numberList.get(0);
-
-        for(int i=0; i<operatorList.size(); i++){
-            result = operate(operatorList.get(i), result, numberList.get(i +1));
-        }
-
-        return result;
+        return splitString.stringOperate();
     }
 
     public static int operate(String operator, int result, int operand) {
-        if(operator.equals(SUM_DELIMITER)) return sum(result, operand);
-        if(operator.equals(SUBTRACTION_DELIMITER)) return subtraction(result, operand);
-        if(operator.equals(MULTIPLICATION_DELIMITER)) return multiplication(result, operand);
-        if (operator.equals(DIVISION_DELIMITER)) return division(result, operand);
+        if(operator.equals(SUM_OPERATOR)) return sum(result, operand);
+        if(operator.equals(SUBTRACTION_OPERATOR)) return subtraction(result, operand);
+        if(operator.equals(MULTIPLICATION_OPERATOR)) return multiplication(result, operand);
+        if (operator.equals(DIVISION_OPERATOR)) return division(result, operand);
 
         return 0;
     }

@@ -11,11 +11,10 @@ public class StringCalculatorTest {
     @DisplayName("입력 문자열의 숫자와 사칙 연산자를 빈 공백 문자로 구분한다.")
     void 문자열_공백으로_구분(){
         String inputString = "2 + 3 * 4 / 2";
-        List<Integer> numberList = SplitString.splitNumber(inputString);
-        List<String> operatorList = SplitString.splitOperator(inputString);
 
-        assertThat(numberList).contains(2,3,4,2);
-        assertThat(operatorList).containsExactly("+","*","/");
+        SplitString splitString = new SplitString(inputString);
+
+        assertThat(splitString.splitStrings).containsExactly("2","+","3","*","4","/","2");
     }
 
     @Test
@@ -25,11 +24,11 @@ public class StringCalculatorTest {
         String inputBlank = " ";
 
         assertThatThrownBy( () -> {
-            assertThat(SplitString.splitNumber(inputNull));
+            assertThat(new SplitString(inputNull));
         }).isInstanceOf(IllegalArgumentException.class);
 
         assertThatThrownBy( () -> {
-            assertThat(SplitString.splitNumber(inputBlank));
+            assertThat(new SplitString(inputBlank));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -39,7 +38,7 @@ public class StringCalculatorTest {
         String nonOperator = "1 x 4";
 
         assertThatThrownBy( () -> {
-            assertThat(SplitString.splitOperator(nonOperator).get(0));
+            assertThat(new SplitString(nonOperator));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
