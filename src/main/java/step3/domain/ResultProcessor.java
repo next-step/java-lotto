@@ -8,15 +8,7 @@ public class ResultProcessor {
     private static final int PRICE_PER_LOTTO = LottoMachine.PRICE_PER_LOTTO;
 
     public WinningResult result(WinningNumbers winningNumbers, Lottos lottos) {
-
-        LinkedHashMap<LottoRank, Integer> result = new LinkedHashMap<>();
-        for(Lotto lotto: lottos.lottos()){
-            int matchCount = winningNumbers.matchCount(lotto);
-            boolean matchBonus = winningNumbers.containBonus(lotto);
-            LottoRank lottoRank = LottoRank.valueOf(matchCount, matchBonus);
-            result.put(lottoRank, result.getOrDefault(lottoRank, 0) + 1);
-        }
-
+        LinkedHashMap<LottoRank, Integer> result = lottos.matchingResult(winningNumbers);
         return new WinningResult(result, earningRate(result, lottos));
     }
 
