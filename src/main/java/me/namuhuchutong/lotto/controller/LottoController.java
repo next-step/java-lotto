@@ -20,11 +20,18 @@ public class LottoController {
     }
 
     public void start() {
-        UserInputInformation inputInformation = new UserInputInformation(
-                inputView.inputAmount(), inputView.inputManualLotto(), inputView.inputNumbers(), inputView.inputBonusNumber());
+        UserInputInformation inputInformation = getUserInputInformation();
         LottoSeller lottoSeller = new LottoSeller(numberGenerator);
         LottoResult lottoResult = lottoSeller.sellLotto(inputInformation);
         outputView.showGeneratedLotto(lottoResult);
         outputView.showLottoResult(inputInformation.getAmount(), lottoResult);
+    }
+
+    private UserInputInformation getUserInputInformation() {
+        return new UserInputInformation(
+                inputView.inputAmount(),
+                inputView.inputManualLotto(),
+                inputView.inputNumbers(),
+                inputView.inputBonusNumber());
     }
 }
