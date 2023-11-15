@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Calculator {
     public static int calculate(String input) {
-        if (input == null) {
+        if (isNullOrEmpty(input)) {
             throw new IllegalArgumentException("Input String can't be null");
         }
 
@@ -15,6 +15,10 @@ public class Calculator {
             result = compute(result, splittedInput, i);
         }
         return result;
+    }
+
+    private static boolean isNullOrEmpty(String input) {
+        return input == null || input.isEmpty();
     }
 
     private static int compute(int result, List<String> splittedInput, int i) {
