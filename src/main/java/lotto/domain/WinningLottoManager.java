@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +17,14 @@ public class WinningLottoManager {
     public void countWinning(Lotto lotto) {
         Integer countMatch = lotto.countWinningNumber(winningNumber);
         WinningAmount winningAmount = WinningAmount.findWinningAmountByMatchCount(countMatch);
-        winningLottos.merge(winningAmount, 1, Integer::sum);
+        mergeIfMoreThanThreeMatch(winningAmount);
+
+    }
+
+    private void mergeIfMoreThanThreeMatch(WinningAmount winningAmount) {
+        if (winningAmount != null) {
+            winningLottos.merge(winningAmount, 1, Integer::sum);
+        };
     }
 
     public final HashMap<WinningAmount, Integer> findWinningLottos() {

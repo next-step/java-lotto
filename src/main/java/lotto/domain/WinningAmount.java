@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.HashMap;
 
@@ -9,7 +9,7 @@ public enum WinningAmount {
     FIVE_MATCH(5,1500000),
     SIX_MATCH(6,2000000000);
 
-    private static final HashMap<Integer, WinningAmount> WINNING_AMOUNT_FINDER = new HashMap<>(4);
+    private static final HashMap<Integer, WinningAmount> WINNING_AMOUNT_FINDER = new HashMap<>(5);
     static {
         for (WinningAmount winningAmount : WinningAmount.values()) {
             WINNING_AMOUNT_FINDER.put(winningAmount.matchCount, winningAmount);
@@ -33,9 +33,6 @@ public enum WinningAmount {
     }
 
     public static WinningAmount findWinningAmountByMatchCount(int matchCount) {
-        if (WINNING_AMOUNT_FINDER.get(matchCount) == null) {
-            throw new IllegalArgumentException("Check match count less then 2 or more then 6");
-        }
         return WINNING_AMOUNT_FINDER.get(matchCount);
     }
 }
