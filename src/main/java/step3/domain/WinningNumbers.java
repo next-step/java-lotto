@@ -6,20 +6,23 @@ import java.util.List;
 public class WinningNumbers {
 
     private static final int WINNING_NUMBER_SIZE = 7;
-    private final List<LottoNumber> winningNumbers;
+    private final Lotto lotto;
+    private final LottoNumber bonusNumber;
 
     public static WinningNumbers of(Lotto lotto, LottoNumber bonusNumber) {
+        return new WinningNumbers(lotto, bonusNumber);
+    }
+
+    private WinningNumbers(Lotto lotto, LottoNumber bonusNumber) {
+        inputValidation(lotto, bonusNumber);
+        this.lotto = lotto;
+        this.bonusNumber = bonusNumber;
+    }
+
+    private void inputValidation(Lotto lotto, LottoNumber bonusNumber) {
         List<LottoNumber> lottoNumbers = new ArrayList<>(lotto.lottoNumbers());
         lottoNumbers.add(bonusNumber);
-        return new WinningNumbers(lottoNumbers);
-    }
 
-    private WinningNumbers(List<LottoNumber> winningNumbers) {
-        inputValidation(winningNumbers);
-        this.winningNumbers = winningNumbers;
-    }
-
-    private void inputValidation(List<LottoNumber> lottoNumbers) {
         if(lottoNumbers.size() != WINNING_NUMBER_SIZE){
             throw new IllegalArgumentException("당첨 번호는 7개여야 합니다.");
         }
@@ -30,15 +33,20 @@ public class WinningNumbers {
     }
 
     public int matchCount(Lotto lotto) {
-        return (int) winningNumbers.stream()
+        return matchCountWithOutBonus(lotto) + matchCountWithBonus(lotto);
+    }
+
+    private int matchCountWithOutBonus(Lotto lotto) {
+        return (int) this.lotto.lottoNumbers().stream()
                 .filter(lotto::contains)
                 .count();
     }
 
-    public boolean containBonus(Lotto lotto) {
-        return winningNumbers.stream()
-                .filter(lotto::contains)
-                .anyMatch(LottoNumber::isBonus);
+    public int matchCountWithBonus(Lotto lotto) {
+        return lotto.contains(bonusNumber) ? 1 : 0;
+    }
 
+    public boolean containBonus(Lotto lotto) {
+        return lotto.contains(bonusNumber);
     }
 }

@@ -11,11 +11,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoNumberTest {
 
     @Test
-    @DisplayName("로또번호는 숫자와 보너스볼여부를 갖는다.")
+    @DisplayName("로또번호는 숫자")
     void create() {
-        LottoNumber lottoNumber = LottoNumber.of(1, true);
+        LottoNumber lottoNumber = LottoNumber.of(1);
         assertThat(lottoNumber.number()).isEqualTo(1);
-        assertThat(lottoNumber.isBonus()).isTrue();
     }
 
     @ParameterizedTest
