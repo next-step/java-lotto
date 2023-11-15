@@ -11,9 +11,7 @@ public class ResultView {
     }
 
     public static void show(List<LottoNumbers> results) {
-        for (LottoNumbers lottoNumbers: results) {
-            System.out.println(lottoNumbers.lottoNumbers().toString());
-        }
+        results.forEach(lottoNumbers -> System.out.println(lottoNumbers.lottoNumbers().toString()));
         System.out.println();
     }
 
