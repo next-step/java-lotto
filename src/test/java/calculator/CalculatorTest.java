@@ -3,6 +3,9 @@ package calculator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -49,6 +52,24 @@ public class CalculatorTest {
     void test5() {
         Calculator calculator = new Calculator();
         assertThatThrownBy(() -> calculator.division(10, 3))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {""})
+    @DisplayName("빈 공백 문자일 경우 IllegalArgumentException 발생한다.")
+    void test6(String value) {
+        Validator validator = new Validator();
+        assertThatThrownBy(() -> validator.isNullOrEmpty(value))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @DisplayName("null일 경우 IllegalArgumentException 발생한다.")
+    @NullAndEmptySource
+    void test7(String value) {
+        Validator validator = new Validator();
+        assertThatThrownBy(() -> validator.isNullOrEmpty(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

@@ -12,8 +12,6 @@
 * [x] 문자열 계산기 곱셈 기능
 * [x] 문자열 계산기 나눗셈 기능
 * [x] 나눗셈의 경우 결괏값은 정수 값으로 한정한다.
-* [ ] 공백 문자열을 빈 공백 문자로 분리할 수 있다.
-* [ ] null 값 validation 
-* [ ] 빈 공백 문자 validation
+* [x] null / 빈 공백 문자 validation 
 * [ ] 사칙 연산이 아닌 경우를 IllegalArgumentException 발생
 * [ ] 사칙 연산을 모두 포함(+, -, *, /)
