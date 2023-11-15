@@ -48,7 +48,7 @@ public class OutputView {
     private static void printRankInfo(WinningResult result) {
         for(Map.Entry<LottoRank, Integer> info : result.getResult().entrySet()){
             LottoRank rank = info.getKey();
-            if(rank == LottoRank.SECOND){
+            if(rank.isSecond()){
                 System.out.println(String.format(WINNING_MESSAGE_BONUS, rank.matchCount(), rank.winningMoney(), info.getValue()));
                 return;
             }

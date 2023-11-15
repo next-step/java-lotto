@@ -25,6 +25,10 @@ public enum LottoRank {
         return winningMoney;
     }
 
+    public boolean isSecond(){
+        return this == SECOND;
+    }
+
     public static LottoRank valueOf(int matchCount, boolean matchBonus) {
         if (matchCount == 5 && matchBonus) {
             return SECOND;
