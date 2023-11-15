@@ -7,7 +7,7 @@ public class Summary {
     private long secondCount;
     private long thirdCount;
     private long fourthCount;
-    float profitRate;
+    private float profitRate;
 
     public Summary() {
     }
