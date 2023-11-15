@@ -5,19 +5,22 @@ import study.step2.domain.dto.WinningNumbers;
 public class Lotto {
 
     private final LottoNumbers lottoNumbers;
-    private int numberOfWinnings = 0;
+    private int hitCount = 0;
 
     public Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public void match(WinningNumbers winningNumbers) {
-        lottoNumbers.lottoNumbers().forEach(lottoNumber -> compare(lottoNumber, winningNumbers));
+    public Rank match(WinningNumbers winningNumbers) {
+        lottoNumbers.lottoNumbers().forEach(lottoNumber -> {
+            compare(lottoNumber, winningNumbers);
+        });
+        return Rank.valueOfHitCount(hitCount);
     }
 
     private void compare(Integer lottoNumber, WinningNumbers winningNumbers) {
         if (winningNumbers.contains(lottoNumber)) {
-            numberOfWinnings += 1;
+            hitCount += 1;
         }
     }
 
@@ -25,8 +28,8 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public int numberOfWinnings() {
-        return numberOfWinnings;
+    public int hitCount() {
+        return hitCount;
     }
 
 }

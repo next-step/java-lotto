@@ -6,11 +6,11 @@ import study.step2.domain.Lotto;
 
 public class ResultView {
 
-    public static void lottoCount(int count) {
+    public static void showLottoCount(int count) {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void show(List<Lotto> lottos) {
+    public static void showLottos(List<Lotto> lottos) {
         lottos.forEach(lotto -> System.out.println(lotto.lottoNumbers().lottoNumbers().toString()));
         System.out.println();
     }
