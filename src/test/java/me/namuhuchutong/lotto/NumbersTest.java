@@ -136,4 +136,26 @@ class NumbersTest {
         //then
         assertThat(result).isEqualTo(false);
     }
+
+    @DisplayName("문자열로 구성된 숫자 목록이 주어질 때, Numbers 객체로 변환한다.")
+    @Test
+    void create_numbers_given_string() {
+        //given
+        String given = "1, 2, 3, 4, 5, 6";
+        List<Number> givenNumbers = List.of(
+                new Number(1),
+                new Number(2),
+                new Number(3),
+                new Number(4),
+                new Number(5),
+                new Number(6)
+        );
+        Numbers expected = new Numbers(givenNumbers);
+
+        //when
+        Numbers numbers = Numbers.create(given);
+
+        //then
+        assertThat(numbers).isEqualTo(expected);
+    }
 }
