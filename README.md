@@ -19,3 +19,6 @@
 - [X] 여러 assert문이 있는 테스트 개선
 - [X] 단위 테스트 네이밍 규칙 적용
 - [X] 사칙연산 기호가 아닌 경우 발생하는 IllegalArgumentException에 잘못된 기호 표기
+- [X] 빈값 및 null값 테스트 수정
+- [X] enum 클래스 내부 멤버변수명 수정
+- [X] Operator에 대한 테스트 추가

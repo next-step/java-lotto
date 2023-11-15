@@ -6,10 +6,10 @@ import java.util.function.BiFunction;
 import static calculator.exception.CustomExceptionCode.NOT_FOUR_BASIC_OPERATIONS;
 
 public enum Operator {
-    PLUS("+", (a, b) -> a + b),
-    MINUS("-", (a, b) -> a - b),
-    MULTIPLY("*", (a, b) -> a * b),
-    DEVIDE("/", (a, b) -> a / b);
+    PLUS("+", (number1, number2) -> number1 + number2),
+    MINUS("-", (number1, number2) -> number1 - number2),
+    MULTIPLY("*", (number1, number2) -> number1 * number2),
+    DEVIDE("/", (number1, number2) -> number1 / number2);
 
     private final String sign;
     private final BiFunction<Integer, Integer, Integer> expression;
