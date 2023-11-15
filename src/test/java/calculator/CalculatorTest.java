@@ -44,4 +44,12 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(5);
     }
 
+    @Test
+    @DisplayName("나눗셈의 경우 결괏값이 정수가 아니면 IllegalArgumentException 발생한다.")
+    void test5() {
+        Calculator calculator = new Calculator();
+        assertThatThrownBy(() -> calculator.division(10, 3))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }

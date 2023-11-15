@@ -14,6 +14,13 @@ public class Calculator {
     }
 
     public int division(int first, int second) {
+        validate(first, second);
         return first / second;
+    }
+
+    private static void validate(int first, int second) {
+        if (first % second != 0) {
+            throw new IllegalArgumentException();
+        }
     }
 }
