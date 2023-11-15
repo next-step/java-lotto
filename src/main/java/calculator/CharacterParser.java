@@ -43,12 +43,7 @@ public class CharacterParser {
             operands.add(Integer.parseInt(character));
             return;
         }
-
-        if(Operator.isBasicOperation(character)){
-            operators.add(Operator.findSymbol(character));
-            return;
-        }
-        throw new IllegalArgumentException();
+        operators.add(Operator.findSymbol(character));
     }
 
     private static boolean isParsingNumber(int value) {
