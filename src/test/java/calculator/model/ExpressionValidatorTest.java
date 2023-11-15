@@ -30,10 +30,10 @@ public class ExpressionValidatorTest {
     @DisplayName("사칙연산 기호가 아닌 기호가 있는 경우 exception 발생 - 괄호 비허용")
     public void 사칙연산_기호_확인() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            ExpressionValidator.validate("(1+2)-3");
+            ExpressionValidator.validate("( 1 + 2 ) - 3");
         });
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            ExpressionValidator.validate("1%3+1");
+            ExpressionValidator.validate(" 1 % 3 + 1");
         });
 //        assertThatCode(() -> {
 //            ExpressionValidator.validate("1+2-3");
@@ -44,7 +44,7 @@ public class ExpressionValidatorTest {
     @DisplayName("사칙연산 기호가 연속해서 있는 경우 exception 발생")
     public void 사칙연산_연속_확인() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            ExpressionValidator.validate("1++3+1");
+            ExpressionValidator.validate("1 + + 3 + 1");
         });
 //        assertThatCode(() -> {
 //            ExpressionValidator.validate("1+2-3");
@@ -55,10 +55,10 @@ public class ExpressionValidatorTest {
     @DisplayName("사칙연산 기호로 시작하거나 끝나는 경우 exception 발생")
     public void 가장자리_연산자_확인() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            ExpressionValidator.validate("+1+3+1-");
+            ExpressionValidator.validate("+ 1 + 3 + 1 -");
         });
-//        assertThatCode(() -> {
-//            ExpressionValidator.validate("1+2-3");
-//        }).doesNotThrowAnyException();
+        assertThatCode(() -> {
+            ExpressionValidator.validate("1 + 2 - 3 - ");
+        }).doesNotThrowAnyException();
     }
 }

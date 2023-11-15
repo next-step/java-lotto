@@ -14,4 +14,12 @@ public class ExpressionTest {
                 .isEqualTo("+");
     }
 
+    @Test
+    public void 숫자_하나() {
+        Assertions.assertThat(new Expression("1").isMonomial())
+                .isTrue();
+        Assertions.assertThat(new Expression("1 + 2").isMonomial())
+                .isFalse();
+    }
+
 }

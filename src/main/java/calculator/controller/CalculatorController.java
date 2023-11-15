@@ -1,5 +1,7 @@
 package calculator.controller;
 
+import calculator.model.Calculator;
+import calculator.model.Expression;
 import calculator.view.InputView;
 
 public class CalculatorController {
@@ -8,9 +10,8 @@ public class CalculatorController {
         // input
         String expression = InputView.inputExpression();
 
-        // validate
-
         // calculate
+        int result = Calculator.run(new Expression(expression));
 
         // output
 

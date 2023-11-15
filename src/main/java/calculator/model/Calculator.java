@@ -1,25 +1,31 @@
 package calculator.model;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class Calculator {
-    private static final String ERR_INVALID_OPERATOR = "Invalid operator: ";
 
-    public static int calculateOnce(int left, int right, Operator operator) {
-        if (operator == Operator.ADD) {
-            return add(left, right);
+    public static int run(Expression exp) {
+        while (!exp.isMonomial()) {
+            exp = calculateOnce(exp);
         }
-        if (operator == Operator.SUB) {
-            return sub(left, right);
+        return exp.getResult();
+    }
+
+    private static Expression calculateOnce(Expression exp) {
+        int result = calculateBinomial(exp.popBinomial());
+        exp.addToFront(result);
+        return exp;
+    }
+
+    private static int calculateBinomial(Binomial bin) {
+        if (bin.getOperationType() == Operator.ADD) {
+            return add(bin.getLeftNumber(), bin.getRightNumber());
         }
-        if (operator == Operator.MUL) {
-            return multiple(left, right);
+        if (bin.getOperationType() == Operator.SUB) {
+            return sub(bin.getLeftNumber(), bin.getRightNumber());
         }
-        if (operator == Operator.DIV) {
-            return divide(left, right);
+        if (bin.getOperationType() == Operator.MUL) {
+            return multiple(bin.getLeftNumber(), bin.getRightNumber());
         }
-        throw new IllegalArgumentException(ERR_INVALID_OPERATOR + operator.toString());
+        return divide(bin.getLeftNumber(), bin.getRightNumber());
     }
 
     private static int add(int left, int right) {

@@ -24,15 +24,16 @@ public class ExpressionValidator {
     }
 
     private static boolean containsInvalidSymbol(String expression) {
-        return Pattern.compile("[^0-9+\\-*/]").matcher(expression).find();
+        String regex = "^[0-9+\\-*/\\s]*$";
+        return !Pattern.matches(regex, expression);
     }
 
     private static boolean checkNumberOnEdge(String expression) {
-        List<String> elements = Expression.split(expression);
-        if (Expression.isNumeric(elements.get(elements.size()-1))) {
+        expression = expression.trim();
+        if (Pattern.matches("^\\d.*", expression) || Pattern.matches("^-\\d.*", expression)) {
             return true;
         }
-        if (Expression.isNumeric(elements.get(0))) {
+        if (Pattern.matches(".*\\d$", expression)) {
             return true;
         }
         return false;
