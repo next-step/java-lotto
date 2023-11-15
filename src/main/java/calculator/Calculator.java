@@ -1,7 +1,5 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
@@ -21,15 +19,19 @@ public class Calculator {
 
     private static int compute(int result, List<String> splittedInput, int i) {
         if (i == 1) {
-            result = runOperator(Integer.parseInt(splittedInput.get(i -1)), splittedInput.get(i).toString(), Integer.parseInt(splittedInput.get(i +1)));
+            result = runOperator(Integer.parseInt(splittedInput.get(i -1)), splittedInput.get(i), Integer.parseInt(splittedInput.get(i +1)));
         }
         if (i > 1) {
-            result = runOperator(result, splittedInput.get(i).toString(), Integer.parseInt(splittedInput.get(i +1)));
+            result = runOperator(result, splittedInput.get(i), Integer.parseInt(splittedInput.get(i +1)));
         }
         return result;
     }
 
     private static int runOperator(int leftValue, String operator, int rightValue) {
+        if (!operator.matches("^[-+*\\/]*$")) {
+            throw new IllegalArgumentException("You can't use other operator");
+        }
+
         int result = 0 ;
         if (operator.equals("+")) {
             result = addNum(leftValue, rightValue);

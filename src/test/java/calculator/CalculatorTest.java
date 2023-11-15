@@ -54,9 +54,9 @@ class CalculatorTest {
 
     @Test
     void assertCalculate() {
-        String input = "1 + 1 * 3 / 2";
+        String input = "1 + 1 * 3";
 
-        assertThat(Calculator.calculate(input)).isEqualTo(3);
+        assertThat(Calculator.calculate(input)).isEqualTo(6);
     }
 
     @Test
@@ -67,6 +67,17 @@ class CalculatorTest {
             Calculator.calculate(input);
         });
 
-        assertThat(thrown.getMessage()).contains("null");
+        assertThat(thrown.getMessage()).contains("Input String can't be null");
+    }
+
+    @Test
+    void assertValidOperator() {
+        String input = "1 + 2 % 3";
+
+        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Calculator.calculate(input);
+        });
+
+        assertThat(thrown.getMessage()).contains("You can't use other operator");
     }
 }
