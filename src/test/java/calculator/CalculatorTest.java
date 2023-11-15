@@ -35,4 +35,13 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(8);
     }
 
+    @Test
+    @DisplayName("나눗셈 기능")
+    void test4() {
+        Calculator calculator = new Calculator();
+        int result = calculator.division(10, 2);
+
+        assertThat(result).isEqualTo(5);
+    }
+
 }
