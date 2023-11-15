@@ -1,4 +1,4 @@
-public class VariableExpression implements CalculatorExpression{
+public class VariableExpression{
 
     private final char character;
 
@@ -6,7 +6,7 @@ public class VariableExpression implements CalculatorExpression{
         this.character = character;
     }
 
-    public int calculate(){
+    public int value(){
         return Character.getNumericValue(character);
     }
 }

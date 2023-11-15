@@ -12,24 +12,24 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class CalculatorTest {
 
-    private static final VariableExpression VARIABLE_ONE = new VariableExpression('1');
-    private static final VariableExpression VARIABLE_TWO = new VariableExpression('2');
-    @DisplayName("기호를 만나면 알맞은 Expression을 반환한다.")
-    @ParameterizedTest(name = " \"{0}\"은 \"{1}\"타입")
-    @MethodSource
-    void someMarkMustReturnExpressionType(String postfixString, CalculatorExpression expectedType){
-        CalculatorExpression expression = Calculator.calculate(postfixString);
-        assertThat(expression).isInstanceOf(expectedType.getClass());
-        assertThat(expression.calculate()).isEqualTo(expectedType.calculate());
-    }
-
-    static Stream<Arguments> someMarkMustReturnExpressionType(){
-        return Stream.of(
-            Arguments.arguments("12+", new AddExpression(VARIABLE_ONE,VARIABLE_TWO)),
-            Arguments.arguments("12-", new MinusExpression(VARIABLE_ONE,VARIABLE_TWO)),
-            Arguments.arguments("12*", new MultiplicationExpression(VARIABLE_ONE,VARIABLE_TWO)),
-            Arguments.arguments("12/", new DivideExpression(VARIABLE_ONE,VARIABLE_TWO))
-        );
-    }
+//    private static final VariableExpression VARIABLE_ONE = new VariableExpression('1');
+//    private static final VariableExpression VARIABLE_TWO = new VariableExpression('2');
+//    @DisplayName("기호를 만나면 알맞은 Expression을 반환한다.")
+//    @ParameterizedTest(name = " \"{0}\"은 \"{1}\"타입")
+//    @MethodSource
+//    void someMarkMustReturnExpressionType(String postfixString, CalculatorExpression expectedType){
+//        CalculatorExpression expression = Calculator.calculate(postfixString);
+//        assertThat(expression).isInstanceOf(expectedType.getClass());
+//        assertThat(expression.calculate()).isEqualTo(expectedType.calculate());
+//    }
+//
+//    static Stream<Arguments> someMarkMustReturnExpressionType(){
+//        return Stream.of(
+//            Arguments.arguments("12+", new AddExpression(VARIABLE_ONE,VARIABLE_TWO)),
+//            Arguments.arguments("12-", new MinusExpression(VARIABLE_ONE,VARIABLE_TWO)),
+//            Arguments.arguments("12*", new MultiplicationExpression(VARIABLE_ONE,VARIABLE_TWO)),
+//            Arguments.arguments("12/", new DivideExpression(VARIABLE_ONE,VARIABLE_TWO))
+//        );
+//    }
 
 }

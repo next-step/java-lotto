@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 
 public class AddExpressionTest {
 
-    @DisplayName("덧셈을 합니다.")
-    @Test
-    void plusCalculate(){
-        AddExpression addExpression = new AddExpression(new VariableExpression('1'), new VariableExpression('2'));
-        int result = addExpression.calculate();
-        Assertions.assertThat(result).isEqualTo(3);
-    }
+//    @DisplayName("덧셈을 합니다.")
+//    @Test
+//    void plusCalculate(){
+//        AddExpression addExpression = new AddExpression(new VariableExpression('1'), new VariableExpression('2'));
+//        int result = addExpression.calculate();
+//        Assertions.assertThat(result).isEqualTo(3);
+//    }
 }

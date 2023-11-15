@@ -1,3 +1,5 @@
 public interface CalculatorExpression {
-    int calculate();
+
+    static final int RADIX = 10;
+    VariableExpression calculate(VariableExpression result, VariableExpression variableExpression);
 }

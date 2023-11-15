@@ -1,5 +1,6 @@
 import java.io.PrintStream;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class CalculatorController {
 
@@ -17,7 +18,7 @@ public class CalculatorController {
 
     public void calculate(){
         String origin = inputView.calculatorString();
-        CalculatorExpression expression = Calculator.calculate(origin);
-        resultView.calculateResult(expression.calculate());
+        VariableExpression expression = Calculator.calculate(origin.chars().mapToObj(e -> (char)e).collect(Collectors.toList()));
+        resultView.calculateResult(expression.value());
     }
 }

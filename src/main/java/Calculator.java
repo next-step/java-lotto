@@ -1,31 +1,17 @@
+import java.util.Iterator;
+import java.util.List;
 import java.util.Stack;
 
 public class Calculator {
 
-    public static CalculatorExpression calculate(String postfix) {
-        Stack<CalculatorExpression> stack = new Stack<>();
-        for (char c : postfix.toCharArray()) {
-            switch (c) {
-                case '+':
-                    stack.push(new AddExpression(stack.pop(), stack.pop()));
-                    break;
-                case '-':
-                    CalculatorExpression right = stack.pop();
-                    CalculatorExpression left = stack.pop();
-                    stack.push(new MinusExpression(left, right));
-                    break;
-                case '*':
-                    stack.push(new MultiplicationExpression(stack.pop(), stack.pop()));
-                    break;
-                case '/':
-                    CalculatorExpression dividend = stack.pop();
-                    CalculatorExpression divisor = stack.pop();
-                    stack.push(new DivideExpression(divisor, dividend));
-                    break;
-                default:
-                    stack.push(new VariableExpression(c));
-            }
+    public static VariableExpression calculate(List<Character> origin) {
+        Iterator<Character> iterator = origin.iterator();
+        VariableExpression result = new VariableExpression(iterator.next());
+        while (iterator.hasNext()){
+            CalculatorService calculatorService = new CalculatorService();
+            CalculatorExpression expression = calculatorService.typeOfExpression(iterator.next());
+            result = expression.calculate(result, new VariableExpression(iterator.next()));
         }
-        return stack.pop();
+        return result;
     }
 }
