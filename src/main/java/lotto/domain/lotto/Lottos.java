@@ -79,7 +79,7 @@ public class Lottos {
 
     private long prizeTotal(List<Winning> winnings) {
         return winnings.stream()
-                .mapToInt(Winning::prize)
+                .mapToLong(Winning::prize)
                 .sum();
     }
 

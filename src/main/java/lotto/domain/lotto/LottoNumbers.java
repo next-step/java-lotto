@@ -48,4 +48,11 @@ public class LottoNumbers {
     public List<Integer> numbers() {
         return Collections.unmodifiableList(numbers);
     }
+
+    @Override
+    public String toString() {
+        return "LottoNumbers{" +
+                "numbers=" + numbers +
+                '}';
+    }
 }
