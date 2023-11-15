@@ -2,6 +2,8 @@ package lotto;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -17,9 +19,12 @@ public class Lotto {
     }
 
 
-    private List<Integer> matchNumber(List<Integer> numberList){
-        numberList.retainAll(this.numbers);
-        return numberList;
+    private Set<Integer> matchNumber(List<Integer> numberList){
+        return findCommonElements(numberList, this.numbers);
+    }
+
+    private static <T> Set<T> findCommonElements(List<T> first, List<T> second) {
+        return first.stream().filter(second::contains).collect(Collectors.toSet());
     }
 
     @Override
