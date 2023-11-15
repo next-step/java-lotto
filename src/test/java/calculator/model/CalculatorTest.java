@@ -20,4 +20,14 @@ public class CalculatorTest {
         Assertions.assertThat(Calculator.sub(3,5))
                 .isEqualTo(-2);
     }
+
+    @Test
+    public void 곱셈() {
+        Assertions.assertThat(Calculator.multiple(2,3))
+                .isEqualTo(6);
+        Assertions.assertThat(Calculator.multiple(-2,3))
+                .isEqualTo(-6);
+        Assertions.assertThat(Calculator.multiple(2,0))
+                .isEqualTo(0);
+    }
 }
