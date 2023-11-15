@@ -3,7 +3,6 @@ package step2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.*;
-import step2.domain.type.Prize;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -17,8 +16,8 @@ public class WinningStatisticsTest {
     public void winning_statistics() {
         WinningStatistics winningStatistics = winningStatistics();
 
-        assertThat(winningStatistics.winningLottoCountByPrize(Prize.of(threeMatchLotto(), prizeLotto()))).isEqualTo(1);
-        assertThat(winningStatistics.winningLottoCountByPrize(Prize.of(fourMatchLotto(), prizeLotto()))).isEqualTo(1);
+        assertThat(winningStatistics.winningLottoCountByPrize(prizeLotto().prize(threeMatchLotto()))).isEqualTo(1);
+        assertThat(winningStatistics.winningLottoCountByPrize(prizeLotto().prize(fourMatchLotto()))).isEqualTo(1);
     }
 
     @Test

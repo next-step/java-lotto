@@ -15,6 +15,14 @@ public class Lotto {
         return this.lottoNumbers.numbers();
     }
 
+    public int numberOfMatches(LottoNumbers lottoNumbers) {
+        return this.lottoNumbers.numberOfMatches(lottoNumbers);
+    }
+
+    public boolean isContain(LottoNumber number) {
+        return this.lottoNumbers.contain(number);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

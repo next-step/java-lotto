@@ -2,7 +2,10 @@ package step2.domain;
 
 import step2.exception.InvalidLottoSizeException;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static step2.domain.LottoNumber.allLottoNumbers;
@@ -29,15 +32,25 @@ public class LottoNumbers {
         this.numbers = numbers;
     }
 
+    private static Set<LottoNumber> automaticLottoNumbers() {
+        Collections.shuffle(allLottoNumbers());
+        return new HashSet<>(allLottoNumbers().subList(DEFAULT_FROM_INDEX, LOTTO_MAX_SIZE));
+    }
+
     private void validate(Set<LottoNumber> numbers) {
         if (numbers.size() > LOTTO_MAX_SIZE) {
             throw new InvalidLottoSizeException();
         }
     }
 
-    private static Set<LottoNumber> automaticLottoNumbers() {
-        Collections.shuffle(allLottoNumbers());
-        return new HashSet<>(allLottoNumbers().subList(DEFAULT_FROM_INDEX, LOTTO_MAX_SIZE));
+    public int numberOfMatches(LottoNumbers lottoNumbers) {
+        return Math.toIntExact(this.numbers.stream()
+            .filter(lottoNumbers::contain)
+            .count());
+    }
+
+    public boolean contain(LottoNumber number) {
+        return this.numbers.contains(number);
     }
 
     public List<Integer> numbers() {

@@ -4,6 +4,7 @@ import step2.exception.InvalidLottoNumberException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoNumber {
 
@@ -38,6 +39,19 @@ public class LottoNumber {
 
     public int number() {
         return this.number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 
 }
