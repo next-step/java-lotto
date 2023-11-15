@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class ExpressionValidator {
-    private static final List<String> VALID_OPERATOR = Arrays.asList("+", "-", "*", "/");
     private static final String ERR_EMPTY_EXPRESSION = "Empty input values are not allowed.";
-    private static final String ERR_INVALID_SYMBOL = "Only the following symbols can be used: " + VALID_OPERATOR;
+    private static final String ERR_INVALID_SYMBOL = "Only the following symbols can be used: " + Operator.getAllSymbols();
     private static final String ERR_INVALID_EXPRESSION = "Expression is not valid.";
 
     public static void validate(String expression) {
