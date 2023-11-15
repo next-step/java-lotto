@@ -16,7 +16,7 @@
   * [X] 입력값이 비어있을 경우 IllegalArgumentException throw
   * [X] 사칙연산 기호가 아닌 기호가 있는 경우 IllegalArgumentException throw
   * [ ] 사칙연산 기호가 연속해서 있는 경우 IllegalArgumentException throw
-  * [ ] 사칙연산 기호가 식의 맨 앞이나 뒤에 위치하는 경우 IllegalArgumentException throw
+  * [X] 사칙연산 기호가 식의 맨 앞이나 뒤에 위치하는 경우 IllegalArgumentException throw
 * [X] 기호와 숫자 분리 (빈 공백으로 분리되어 입력됨)
 * [ ] 사칙연산 계산
   * [ ] 덧셈
