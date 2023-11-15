@@ -25,4 +25,14 @@ public class CalculatorTest {
 
         assertThat(result).isEqualTo(2);
     }
+
+    @Test
+    @DisplayName("곱셈 기능")
+    void test3() {
+        Calculator calculator = new Calculator();
+        int result = calculator.multiply(4, 2);
+
+        assertThat(result).isEqualTo(8);
+    }
+
 }
