@@ -81,4 +81,11 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(4);
     }
 
+    @Test
+    @DisplayName("사칙연산이 아닌 경우 IllegalArgumentException이 발생한다.")
+    void test9() {
+        assertThatThrownBy(() -> calculate("1 % 2 # 4 / 3"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }

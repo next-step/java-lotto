@@ -18,6 +18,11 @@ public class Calculator {
     }
 
     private static int calculate(String operator, int result, int number) {
+
+        if (!(operator.contains("+") || operator.contains("-") || operator.contains("*") || operator.contains("/"))) {
+            throw new IllegalArgumentException();
+        }
+
         if (operator.equals("+")) {
             result += number;
         }
