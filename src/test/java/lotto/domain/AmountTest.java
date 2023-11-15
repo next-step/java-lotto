@@ -25,4 +25,11 @@ class AmountTest {
 
         assertThat(result).isEqualTo(new Amount(6000));
     }
+
+    @Test
+    void plusTest() {
+        final Amount result = new Amount(2000).plus(new Amount(1000));
+
+        assertThat(result).isEqualTo(new Amount(3000));
+    }
 }

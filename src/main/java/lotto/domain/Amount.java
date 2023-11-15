@@ -36,6 +36,10 @@ public class Amount {
         return new Amount(value * count);
     }
 
+    public Amount plus(final Amount amount) {
+        return new Amount(value + amount.value);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

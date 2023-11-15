@@ -29,10 +29,7 @@ public class Winning {
     public double getReturnRate(final Amount purchaseAmount) {
         Amount sum = Amount.ZERO;
         for (Rank rank : winnerCountMap.keySet()) {
-            final Amount rankPrice = rank.getAmount();
-
-            final int count = winnerCountMap.get(rank);
-            sum = rankPrice.multiply(count);
+            sum = sum.plus(rank.multiply(winnerCountMap.get(rank)));
         }
 
         return sum.divide(purchaseAmount);
