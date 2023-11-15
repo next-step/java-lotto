@@ -28,12 +28,8 @@ public class Amount {
         return value;
     }
 
-    public double divideWithDecimal(final Amount amount) {
+    public double divide(final Amount amount) {
         return (double) this.value / amount.value;
-    }
-
-    public int divideWithoutDecimal(final Amount amount) {
-        return this.value / amount.value;
     }
 
     public Amount multiply(final int count) {

@@ -29,7 +29,7 @@ public class Winning {
             sum = rankPrice.multiply(count);
         }
 
-        return sum.divideWithDecimal(purchaseAmount);
+        return sum.divide(purchaseAmount);
     }
 
     @Override

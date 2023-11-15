@@ -18,7 +18,7 @@ public class Lottos {
     private List<Lotto> initLottos(final Amount amount) {
         final List<Lotto> lottos = new ArrayList<>();
 
-        final int purchaseCount = amount.divideWithoutDecimal(new Amount(LOTTO_AMOUNT));
+        final int purchaseCount = (int) amount.divide(new Amount(LOTTO_AMOUNT));
 
         for (int i = 0; i < purchaseCount; i++) {
             lottos.add(new Lotto());
