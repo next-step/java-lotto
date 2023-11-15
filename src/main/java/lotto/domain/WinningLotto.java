@@ -33,11 +33,11 @@ public class WinningLotto {
     }
 
     public boolean isBonusWinning(Lotto userLotto) {
-        return userLotto.isContain(this.bonusNumber);
+        return userLotto.isContains(this.bonusNumber);
     }
 
     private void validate(Lotto lotto, LottoNumber bonusNumber) {
-        if (lotto.isContain(bonusNumber)) {
+        if (lotto.isContains(bonusNumber)) {
             throw new IllegalArgumentException("기존 당첨번호와 중복된 번호는 입력할 수 없습니다.");
         }
     }
