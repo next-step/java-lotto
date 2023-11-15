@@ -28,7 +28,7 @@ public class Lottos {
 
         List<Lotto> lottoList = new ArrayList<>();
         for (int index = 0; index < lottoCount; index++) {
-            lottoList.add(Lotto.of(strategy));
+            lottoList.add(Lotto.of(LottoNumbers.of(strategy.generate())));
         }
 
         return new Lottos(lottoList, purchasePrice);

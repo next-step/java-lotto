@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumbers;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.strategy.GenerateStrategy;
 import lotto.view.InputView;
@@ -31,7 +32,7 @@ public class LottoController {
         List<Integer> jackpotNumber = inputView.readJackpotNumber();
         System.out.println(jackpotNumber);
 
-        Lotto jackpot = Lotto.of(() -> jackpotNumber);
+        Lotto jackpot = Lotto.of(LottoNumbers.of(jackpotNumber));
         outputView.printSummary(lottos.match(jackpot));
     }
 }

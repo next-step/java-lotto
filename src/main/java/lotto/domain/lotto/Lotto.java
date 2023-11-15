@@ -1,7 +1,6 @@
 package lotto.domain.lotto;
 
 import lotto.constants.Winning;
-import lotto.domain.lotto.strategy.GenerateStrategy;
 
 import java.util.List;
 
@@ -9,12 +8,12 @@ public class Lotto {
 
     private final LottoNumbers lottoNumbers;
 
-    private Lotto(GenerateStrategy strategy) {
-        this.lottoNumbers = LottoNumbers.of(strategy.generate());
+    private Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto of(GenerateStrategy strategy) {
-        return new Lotto(strategy);
+    public static Lotto of(LottoNumbers lottoNumbers) {
+        return new Lotto(lottoNumbers);
     }
 
     public Winning match(Lotto jackpot) {
