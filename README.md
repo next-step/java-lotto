@@ -23,15 +23,22 @@ classDiagram
     InputValidator <.. LottoMain: Dependency
     LottoStatistics <.. LottoMain: Dependency
     Lottos <.. LottoMain: Dependency
+    BonusBall <.. LottoMain: Dependency
+    LottoResult <.. LottoMain: Dependency
+    LottoWinResult <.. LottoMain: Dependency
     Lotto <.. LottoFactory: Dependency
     LottoGenerator <.. RandomLottoGenerator: Inheritance
     LottoGenerator <.. TestLottoGenerator: Inheritance
+    LottoRank <.. LottoWinNumbers: Dependency
+    BonusBall <.. LottoWinNumbers: Dependency
     LottoWinNumbers <.. Lottos: Dependency
+    LottoRank <.. Lottos: Dependency
     Lotto o-- Lottos: Aggregation
+    LottoWinResult <.. LottoResult Dependency
     LottNumbers o-- Lotto: Aggregation
+    LottoWinNumbers o-- Lotto: Aggregation
     LottoGenerator o-- LottNumbers: Aggregation
     LottoWinNumbers o-- LottNumbers: Aggregation
-    LottoWinNumbers o-- Lotto: Aggregation
     LottoWinResult o-- LottoWinPercentage: Aggregation
 
     class StringParser {
@@ -87,7 +94,7 @@ classDiagram
     class LottoWinPercentage {
     }
 
-    class LottoPrice {
+    class LottoRank {
         <<enumeration>>
     }
 
@@ -107,7 +114,7 @@ classDiagram
 * [X] 6개의 숫자를 가진 하나의 로또가 구입한 로또 개수 만큼 화면에 출력된다.
 * [X] 지난 주 당첨 번호인 숫자 6자리를 쉼표로 구분하여 입력한다.
 * [X] 구입한 로또와 당첨 번호를 비교하여 당첨 통계를 화면에 출력한다.
-* [ ] 숫자 5개가 일치하고 보너스볼이 일치한 경우 당첨 통계에 출력한다.
+* [X] 숫자 5개가 일치하고 보너스볼이 일치한 경우 당첨 통계에 출력한다.
 * [X] 구입한 금액과 당첨 해서 받은 로또 금액을 비교하여 총 수익률을 소수점 두자리까지에 한정하여 출력한다.
 
 ---

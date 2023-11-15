@@ -11,9 +11,11 @@ public class LottoWinNumbers {
         this.winningLottoNumbers = new ArrayList<>(winningLottoNumbers);
     }
 
-    public long matchCount(List<Integer> lottoNumbers) {
-        return lottoNumbers.stream()
+    public LottoRank matchCount(List<Integer> lottoNumbers, BonusBall bonusBall) {
+        long matchCount = lottoNumbers.stream()
                 .filter(winningLottoNumbers::contains)
                 .count();
+
+        return LottoRank.of(matchCount, bonusBall.containsBonusBall(lottoNumbers));
     }
 }

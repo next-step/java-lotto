@@ -31,20 +31,21 @@ class LottoNumbersTest {
     @ParameterizedTest
     @MethodSource("provideWinLottoNumbersAndWinCount")
     @DisplayName("성공 - 로또 번호와 당첨 번호를 비교하여 당첨 번호와 일치하는 개수를 반환한다.")
-    void success_lotto_match_count(List<Integer> inputLottoNumbers, List<Integer> winLottoNumbers, long expectCount) {
+    void success_lotto_match_count(List<Integer> inputLottoNumbers, List<Integer> winLottoNumbers, int bonusBall, LottoRank expectLottoRank) {
         LottoNumbers lottoNumbers = new LottoNumbers(new TestLottoGenerator(inputLottoNumbers));
 
-        long matchCount = lottoNumbers.matchCount(new LottoWinNumbers(winLottoNumbers));
+        LottoRank lottoRank = lottoNumbers.matchCount(new LottoWinNumbers(winLottoNumbers), new BonusBall(bonusBall));
 
-        assertThat(matchCount).isEqualTo(expectCount);
+        assertThat(lottoRank).isEqualTo(expectLottoRank);
     }
 
     private static Stream<Arguments> provideWinLottoNumbersAndWinCount() {
         return Stream.of(
-                Arguments.of(List.of(13, 14, 16, 38, 42, 45), List.of(13, 14, 16, 37, 41, 44), 3L),
-                Arguments.of(List.of(13, 14, 16, 38, 42, 45), List.of(13, 14, 16, 38, 41, 44), 4L),
-                Arguments.of(List.of(13, 14, 16, 38, 42, 45), List.of(13, 14, 16, 38, 42, 44), 5L),
-                Arguments.of(List.of(13, 14, 16, 38, 42, 45), List.of(13, 14, 16, 38, 42, 45), 6L)
+                Arguments.of(List.of(13, 14, 16, 38, 42, 45), List.of(13, 14, 16, 37, 41, 43), 43, LottoRank.FIFTH),
+                Arguments.of(List.of(13, 14, 16, 38, 42, 45), List.of(13, 14, 16, 38, 41, 44), 43, LottoRank.FOURTH),
+                Arguments.of(List.of(13, 14, 16, 38, 42, 45), List.of(13, 14, 16, 38, 42, 44), 43, LottoRank.THIRD),
+                Arguments.of(List.of(13, 14, 16, 38, 41, 42), List.of(13, 14, 16, 38, 42, 43), 42, LottoRank.SECOND),
+                Arguments.of(List.of(13, 14, 16, 38, 42, 45), List.of(13, 14, 16, 38, 42, 45), 43, LottoRank.FIRST)
         );
     }
 

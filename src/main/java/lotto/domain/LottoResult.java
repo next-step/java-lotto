@@ -9,21 +9,21 @@ public class LottoResult {
 
     private static final int LOTTO_MIN_MATCH_COUNT = 3;
 
-    private final Map<Long, Long> lottoResult;
+    private final Map<LottoRank, Long> lottoResult;
 
-    public LottoResult(Map<Long, Long> lottoResult) {
+    public LottoResult(Map<LottoRank, Long> lottoResult) {
         this.lottoResult = lottoResult;
     }
 
     public List<LottoWinResult> lottoStatistics() {
-        List<LottoWinResult> lottoResults = new ArrayList<>();
+        List<LottoWinResult> lottoWinResults = new ArrayList<>();
         lottoResult.entrySet().stream()
-                .filter(entry -> entry.getKey() >= LOTTO_MIN_MATCH_COUNT)
-                .forEach(entry -> lottoResults.add(new LottoWinResult(entry.getKey(), entry.getValue())));
-        return lottoResults;
+                .filter(entry -> entry.getKey().getMatchCount() >= LOTTO_MIN_MATCH_COUNT)
+                .forEach(entry -> lottoWinResults.add(new LottoWinResult(entry.getKey().getMatchCount(), entry.getValue(), entry.getKey().isBonus())));
+        return lottoWinResults;
     }
 
-    public Map<Long, Long> getLottoResult() {
+    public Map<LottoRank, Long> getLottoResult() {
         return Collections.unmodifiableMap(lottoResult);
     }
 }

@@ -22,7 +22,7 @@ public class OutputView {
 
     public void printLottoResult(List<LottoWinResult> lottoWinResults) {
         for (LottoWinResult lottoWinResult : lottoWinResults) {
-            System.out.println(lottoWinResult.getMachCount() + "개 일치 (" + lottoWinResult.getPrizeAmount() + "원)- " + lottoWinResult.getWinCount() + "개");
+            System.out.println(lottoWinResult);
         }
     }
 

@@ -15,23 +15,25 @@ class LottoResultTest {
     @Test
     @DisplayName("로또 결과를 기준으로 당첨 통계를 구한다.")
     void success_generate_lotto_statistics() {
-        Map<Long, Long> lottoResults = Map.ofEntries(
-                entry(3L, 1L),
-                entry(4L, 1L),
-                entry(5L, 0L),
-                entry(6L, 1L)
+        Map<LottoRank, Long> lottoResults = Map.ofEntries(
+                entry(LottoRank.FIFTH, 1L),
+                entry(LottoRank.FOURTH, 1L),
+                entry(LottoRank.THIRD, 1L),
+                entry(LottoRank.SECOND, 0L),
+                entry(LottoRank.FIRST, 1L)
         );
 
         LottoResult lottoResult = new LottoResult(lottoResults);
         List<LottoWinResult> lottoWinResults = lottoResult.lottoStatistics();
 
-        assertThat(lottoWinResults).hasSize(4)
-                .extracting("machCount", "prizeAmount", "winCount")
+        assertThat(lottoWinResults).hasSize(5)
+                .extracting("machCount", "prizeAmount", "winCount", "isBonus")
                 .containsExactlyInAnyOrder(
-                        tuple(3L, 5000L, 1L),
-                        tuple(4L, 50000L, 1L),
-                        tuple(5L, 1500000L, 0L),
-                        tuple(6L, 2000000000L, 1L)
+                        tuple(3L, 5_000L, 1L, false),
+                        tuple(4L, 50_000L, 1L, false),
+                        tuple(5L, 1_500_000L, 1L, false),
+                        tuple(5L, 30_000_000L, 0L, true),
+                        tuple(6L, 2_000_000_000L, 1L, false)
                 );
     }
 
