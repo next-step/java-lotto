@@ -25,20 +25,42 @@ public class InputView {
         List<Lotto> passiveLottos = new ArrayList<>();
 
         while (!passiveLottoCount.isSameWithListSize(passiveLottos)) {
-            passiveLottos.add(inputPassiveLottoNumbersByScanner());
+            passiveLottos.add(inputEachPassiveLottoNumbers());
+            System.out.printf("입력이 필요한 %d개 수동 로또 중에 %d개를 입력하셨습니다.%n",
+                    passiveLottoCount.getValue(), passiveLottos.size());
         }
 
         return passiveLottos;
     }
 
-    private static Lotto inputPassiveLottoNumbersByScanner() {
-        final String inputStringLine = new Scanner(System.in).nextLine();
-        final String[] splits = inputStringLine.split(", ");
-        final Set<Integer> integers = Arrays.stream(splits)
-                .map(Integer::parseInt)
-                .collect(Collectors.toSet());
+    private static Lotto inputEachPassiveLottoNumbers() {
+        Lotto lotto = null;
 
-        return new Lotto(integers);
+        while (lotto == null) {
+            lotto = inputEachPassiveLottoNumbersByScanner();
+        }
+
+        return lotto;
+    }
+
+    private static Lotto inputEachPassiveLottoNumbersByScanner() {
+        try {
+            final String inputStringLine = new Scanner(System.in).nextLine();
+            final String[] splits = inputStringLine.split(", ");
+            final Set<Integer> integers = Arrays.stream(splits)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toSet());
+
+            return new Lotto(integers);
+        } catch (NoSuchElementException | IllegalArgumentException e) {
+            printPassiveLottoNumbersException();
+
+            return null;
+        }
+    }
+
+    private static void printPassiveLottoNumbersException() {
+        System.out.println("숫자로만, ', '를 구분자로 해서, 숫자 6개를 입력해주세요. (예시 : 1, 2, 3, 4, 5, 6)");
     }
 
     private static PurchaseAmount inputPurchaseAmount() {
