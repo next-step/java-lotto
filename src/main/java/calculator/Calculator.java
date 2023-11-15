@@ -6,7 +6,6 @@ public class Calculator {
 
     private int result;
 
-
     public int plus(int result, int value) {
         return  result + value;
     }
@@ -36,19 +35,16 @@ public class Calculator {
     }
 
     private int expressCalculating(Integer operand, Operator operator) {
-        if (Operator.ADD.equals(operator)) {
-            return plus(result, operand);
+        switch (operator) {
+            case ADD:
+                return plus(result, operand);
+            case SUBTRACT:
+                return minus(result, operand);
+            case MULTIPLY:
+                return multiply(result, operand);
+            default:
+                return divide(result, operand);
         }
-
-        if (Operator.SUBTRACT.equals(operator)) {
-            return minus(result, operand);
-        }
-
-        if (Operator.MULTIPLY.equals(operator)) {
-            return multiply(result, operand);
-        }
-
-        return divide(result, operand);
     }
 
     private void validateExpression(List<Integer> operands, List<Operator> operators) {
