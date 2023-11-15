@@ -27,7 +27,7 @@ public class WinningNumbers {
             throw new IllegalArgumentException("당첨 번호는 7개여야 합니다.");
         }
 
-        if(lottoNumbers.stream().mapToInt(LottoNumber::number).distinct().count() != WINNING_NUMBER_SIZE){
+        if(lotto.contains(bonusNumber)){
             throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
         }
     }
