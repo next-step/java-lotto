@@ -1,4 +1,4 @@
-package domain;
+package stringCalculator.domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 

@@ -17,11 +17,17 @@ public enum Operator {
 		this.function = function;
 	}
 
-	public int calculate(int num1, int num2) {
-		return function.apply(num1, num2);
+	public static Operator toApply(String input) {
+		Operator[] operators = Operator.values();
+		for (Operator operator : operators) {
+			if(operator.symbol.equals(input)) {
+				return operator;
+			}
+		}
+		throw new IllegalArgumentException("사칙 연산 기호가 아닙니다");
 	}
 
-	public String getSymbol() {
-		return symbol;
+	public int calculate(int num1, int num2) {
+		return function.apply(num1, num2);
 	}
 }
