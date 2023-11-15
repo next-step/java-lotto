@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static calculator.Calculator.calculate;
 import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
@@ -71,6 +72,13 @@ public class CalculatorTest {
         Validator validator = new Validator();
         assertThatThrownBy(() -> validator.isNullOrEmpty(value))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("사칙연산을 포함한 계산 기능")
+    void test8() {
+        int result = calculate("1 + 2 * 4 / 3");
+        assertThat(result).isEqualTo(4);
     }
 
 }
