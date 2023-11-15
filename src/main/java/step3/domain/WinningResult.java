@@ -12,7 +12,7 @@ public class WinningResult {
         this.earningRate = earningRate;
     }
 
-    public Map<LottoRank, Integer> getResult() {
+    public Map<LottoRank, Integer> result() {
         return result;
     }
 
