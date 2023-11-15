@@ -17,7 +17,7 @@ public class LottoProgram {
     }
 
     public static void start() {
-        final UserInput input = InputView.inputPurchaseAmount();
+        final UserInput input = InputView.input();
         final int purchaseAmount = input.getPurchaseAmount();
         final int numberOfLottos = LottoProgramManager.calculateNumberOfLottos(purchaseAmount, LOTTO_PRICE);
 

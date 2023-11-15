@@ -4,9 +4,9 @@ public class UserInput {
     private final PurchaseAmount purchaseAmount;
     private final PassiveLottoCount passiveLottoCount;
 
-    public UserInput(final int purchaseAmount, final int passiveLottoCount) {
-        this.purchaseAmount = new PurchaseAmount(purchaseAmount);
-        this.passiveLottoCount = new PassiveLottoCount(passiveLottoCount);
+    public UserInput(final PurchaseAmount purchaseAmount, final PassiveLottoCount passiveLottoCount) {
+        this.purchaseAmount = purchaseAmount;
+        this.passiveLottoCount = passiveLottoCount;
     }
 
     public int getPurchaseAmount() {
