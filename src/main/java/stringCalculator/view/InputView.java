@@ -9,7 +9,7 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
     public String inputData() {
-        System.out.println(Message.QUESTION_FOR_CALCULATOR);
+        System.out.println(Message.QUESTION_FOR_CALCULATOR.getMessage());
         return checkInputData(scanner.nextLine());
     }
 
