@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
 
@@ -24,6 +23,38 @@ class CalculatorTest {
     void assertAddNum() {
         int leftValue = 1;
         int rightValue = 1;
+
         assertThat(Calculator.addNum(leftValue, rightValue)).isEqualTo(2);
+    }
+
+    @Test
+    void assertSubtractionNum() {
+        int leftValue = 4;
+        int rightValue = 2;
+
+        assertThat(Calculator.subtractNum(leftValue, rightValue)).isEqualTo(2);
+    }
+
+    @Test
+    void assertMultiplyNum() {
+        int leftValue = 2;
+        int rightValue = 2;
+
+        assertThat(Calculator.multiplyNum(leftValue, rightValue)).isEqualTo(4);
+    }
+
+    @Test
+    void assertDivideNum() {
+        int leftValue = 2;
+        int rightValue = 2;
+
+        assertThat(Calculator.divideNum(leftValue, rightValue)).isEqualTo(1);
+    }
+
+    @Test
+    void assertCalculate() {
+        String input = "1 + 1 * 3 / 2";
+
+        assertThat(Calculator.calculate(input)).isEqualTo(3);
     }
 }
