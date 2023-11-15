@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ public class Calculator {
 
     private final List<Integer> operands;
 
-    private final List<String> operators;
+    private final Operators operators;
 
     private int result = 0;
 
@@ -15,7 +15,7 @@ public class Calculator {
         validateInput(input);
         String[] inputs = splitInput(input);
         this.operands = operandsFrom(inputs);
-        this.operators = operatorsFrom(inputs);
+        this.operators = new Operators(inputs);
     }
 
     public List<Integer> operands() {
@@ -23,7 +23,7 @@ public class Calculator {
     }
 
 
-    public List<String> operators() {
+    public Operators operators() {
         return this.operators;
     }
 
@@ -58,28 +58,6 @@ public class Calculator {
         }
     }
 
-    private List<String> operatorsFrom(String[] inputs) {
-        int i = 0;
-        List<String> operators = new ArrayList<>();
-        for (String o : inputs) {
-            addOperator(i, operators, o);
-            ++i;
-        }
-        return operators;
-    }
-
-    private void validateOperator(String o) {
-        if (!o.equals("+") && !o.equals("-") && !o.equals("*") && !o.equals("/")) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private void addOperator(int i, List<String> operators, String o) {
-        if (i % 2 != 0) {
-            validateOperator(o);
-            operators.add(o);
-        }
-    }
 
     public int sum(int operand1, int operand2) {
         result = operand1 + operand2;
@@ -99,5 +77,30 @@ public class Calculator {
     public int division(int operand1, int operand2) {
         result = operand1 / operand2;
         return result;
+    }
+
+    public int result() {
+        result = this.operands.get(0);
+        for (int i = 0; i < this.operators.operators().size(); ++i) {
+            calculate(i);
+        }
+        return result;
+    }
+
+    private void calculate(int i) {
+        switch (this.operators.operators().get(i)) {
+            case "+":
+                result = sum(result, this.operands.get(i + 1));
+                break;
+            case "-":
+                result = subtraction(result, this.operands.get(i + 1));
+                break;
+            case "*":
+                result = multiplication(result, this.operands.get(i + 1));
+                break;
+            case "/":
+                result = division(result, this.operands.get(i + 1));
+                break;
+        }
     }
 }

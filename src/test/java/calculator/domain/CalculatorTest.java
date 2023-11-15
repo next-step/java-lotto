@@ -1,7 +1,8 @@
-package calculator;
+package calculator.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import calculator.domain.Calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +34,7 @@ public class CalculatorTest {
         assertThat(calculator.operands())
             .hasSize(4)
             .contains(1);
-        assertThat(calculator.operators())
+        assertThat(calculator.operators().operators())
             .hasSize(3)
             .contains("+");
     }
@@ -57,7 +58,7 @@ public class CalculatorTest {
         Calculator calculator = new Calculator(input);
 
         // when, then
-        assertThat(calculator.sum(1,2)).isEqualTo(3);
+        assertThat(calculator.result()).isEqualTo(3);
     }
 
 
@@ -69,7 +70,7 @@ public class CalculatorTest {
         Calculator calculator = new Calculator(input);
 
         // when, then
-        assertThat(calculator.subtraction(2,1)).isEqualTo(1);
+        assertThat(calculator.result()).isEqualTo(1);
     }
 
 
@@ -81,7 +82,7 @@ public class CalculatorTest {
         Calculator calculator = new Calculator(input);
 
         // when, then
-        assertThat(calculator.multiplication(2,5)).isEqualTo(10);
+        assertThat(calculator.result()).isEqualTo(10);
     }
 
     @DisplayName("나눗셈 기능을 구현한다.")
@@ -92,7 +93,18 @@ public class CalculatorTest {
         Calculator calculator = new Calculator(input);
 
         // when, then
-        assertThat(calculator.division(4,2)).isEqualTo(2);
+        assertThat(calculator.result()).isEqualTo(2);
+    }
+
+    @DisplayName("사칙연산을 모두 포함하는 기능을 구현한다.")
+    @Test
+    void calculateTest() {
+        // given
+        String input = "1 + 2 * 3 - 4 / 5";
+        Calculator calculator = new Calculator(input);
+
+        // when, then
+        assertThat(calculator.result()).isEqualTo(1);
     }
 }
 
