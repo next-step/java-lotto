@@ -3,16 +3,13 @@ package lotto.step2.input;
 import lotto.step2.domain.Lotto;
 import lotto.step2.service.LottoProgram;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,9 +19,7 @@ class UserInputTest {
     @DisplayName("객체를 생성할 때 구매 금액과 수동으로 구매할 로또 수를 입력하면, 생성된 userInput 객체는 구매 금액를 가지고 있다.")
     void testUserInputConstructorForPurchaseAmount(final int userInputPurchaseAmount) {
         //given
-        final PurchaseAmount purchaseAmountInput = new PurchaseAmount(userInputPurchaseAmount);
-        final PassiveLottoCount passiveLottoCountInput = new PassiveLottoCount(1, purchaseAmountInput.getMaxPassiveLottoCount());
-        final UserInput input = new UserInput(purchaseAmountInput, passiveLottoCountInput, Collections.emptyList());
+        final UserInput input = makeUserInput(userInputPurchaseAmount, 1);
 
         //when
         final int purchaseAmount = input.getPurchaseAmount();
@@ -38,9 +33,7 @@ class UserInputTest {
     @DisplayName("객체를 생성할 때 구매 금액과 수동으로 구매할 로또 수를 입력하면, 생성된 userInput 객체는 수동으로 구매할 로또 수를 가지고 있다.")
     void testUserInputConstructorForPassiveLottoCount(final int userInputPassiveLottoCount) {
         //given
-        final PurchaseAmount purchaseAmountInput = new PurchaseAmount(15000);
-        final PassiveLottoCount passiveLottoCountInput = new PassiveLottoCount(userInputPassiveLottoCount, purchaseAmountInput.getMaxPassiveLottoCount());
-        final UserInput input = new UserInput(purchaseAmountInput, passiveLottoCountInput, Collections.emptyList());
+        final UserInput input = makeUserInput(15000, userInputPassiveLottoCount);
 
         //when
         final int passiveLottoCount = input.getPassiveLottoCount();
@@ -49,29 +42,20 @@ class UserInputTest {
         assertThat(passiveLottoCount).isEqualTo(userInputPassiveLottoCount);
     }
 
-    @ParameterizedTest
-    @MethodSource("userInputConstructorForPassiveLottos")
+    @Test
     @DisplayName("객체를 생성할 때 수동 로또 목록을 입력하면, 생성된 userInput 객체는 수동 로또 목록을 가지고 있다.")
-    void testUserInputConstructorForPassiveLottos(final List<Lotto> userInputPassiveLottos) {
+    void testUserInputConstructorForPassiveLottos() {
         //given
         final PurchaseAmount purchaseAmountInput = new PurchaseAmount(15000);
         final PassiveLottoCount passiveLottoCountInput = new PassiveLottoCount(3, purchaseAmountInput.getMaxPassiveLottoCount());
-        final UserInput input = new UserInput(purchaseAmountInput, passiveLottoCountInput, userInputPassiveLottos);
+        final List<Lotto> passiveLottosInput = generatePassiveLottos(3);
+        final UserInput input = new UserInput(purchaseAmountInput, passiveLottoCountInput, passiveLottosInput);
 
         //when
         final List<Lotto> passiveLottos = input.getPassiveLottos();
 
         //then
-        assertThat(passiveLottos).isEqualTo(userInputPassiveLottos);
-    }
-
-    public static Stream<Arguments> userInputConstructorForPassiveLottos() {
-        return Stream.of(
-                Arguments.of(List.of(new Lotto(Set.of(1, 2, 3, 4, 5, 6)))),
-                Arguments.of(List.of(
-                        new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                        new Lotto(Set.of(7, 8, 9, 10, 11, 12))
-                )));
+        assertThat(passiveLottos).isEqualTo(passiveLottosInput);
     }
 
     @ParameterizedTest
@@ -79,11 +63,7 @@ class UserInputTest {
     @DisplayName("getAutoLottoCount() 메서드를 사용하면, 자동 로또의 개수를 알 수 있다.")
     void testGetAutoLottoCount(final int passiveLottoCount) {
         //given
-        final PurchaseAmount purchaseAmountInput = new PurchaseAmount(15000);
-        final PassiveLottoCount passiveLottoCountInput = new PassiveLottoCount(passiveLottoCount, purchaseAmountInput.getMaxPassiveLottoCount());
-        final List<Lotto> passiveLottos = generatePassiveLottos(passiveLottoCount);
-
-        final UserInput input = new UserInput(purchaseAmountInput, passiveLottoCountInput, passiveLottos);
+        final UserInput input = makeUserInput(15000, passiveLottoCount);
 
         //when
         final int autoLottoCount = input.getAutoLottoCount();
@@ -97,17 +77,21 @@ class UserInputTest {
     @DisplayName("getTotalLottosCount() 메서드를 사용하면, 전체 로또의 개수를 알 수 있다.")
     void testGetTotalLottoCount(final int purchaseAmount) {
         //given
-        final PurchaseAmount purchaseAmountInput = new PurchaseAmount(purchaseAmount);
-        final PassiveLottoCount passiveLottoCountInput = new PassiveLottoCount(1, purchaseAmountInput.getMaxPassiveLottoCount());
-        final List<Lotto> passiveLottos = generatePassiveLottos(1);
-
-        final UserInput input = new UserInput(purchaseAmountInput, passiveLottoCountInput, passiveLottos);
+        final UserInput input = makeUserInput(purchaseAmount, 1);
 
         //when
         final int totalLottosCount = input.getTotalLottosCount();
 
         //then
         assertThat(totalLottosCount).isEqualTo(purchaseAmount / LottoProgram.LOTTO_PRICE);
+    }
+
+    private UserInput makeUserInput(final int userInputPurchaseAmount, final int passiveLottoCount) {
+        final PurchaseAmount purchaseAmountInput = new PurchaseAmount(userInputPurchaseAmount);
+        final PassiveLottoCount passiveLottoCountInput = new PassiveLottoCount(passiveLottoCount, purchaseAmountInput.getMaxPassiveLottoCount());
+        final List<Lotto> passiveLottos = generatePassiveLottos(passiveLottoCount);
+
+        return new UserInput(purchaseAmountInput, passiveLottoCountInput, passiveLottos);
     }
 
     private List<Lotto> generatePassiveLottos(final int passiveLottoCount) {
