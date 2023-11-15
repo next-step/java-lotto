@@ -1,5 +1,6 @@
 package lotto.domain.lotto.strategy;
 
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoNumbers;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.stream.IntStream;
 
 public class RandomStrategy implements GenerateStrategy {
 
-    private static final List<Integer> LOTTO_NUMBERS = IntStream.rangeClosed(LottoNumbers.NUMBER_MIN, LottoNumbers.NUMBER_MAX)
+    private static final List<Integer> LOTTO_NUMBERS = IntStream.rangeClosed(LottoNumber.NUMBER_MIN, LottoNumber.NUMBER_MAX)
             .boxed()
             .collect(Collectors.toList());
 

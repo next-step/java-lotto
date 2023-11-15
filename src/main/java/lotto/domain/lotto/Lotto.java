@@ -22,7 +22,7 @@ public class Lotto {
         return Winning.of(match);
     }
 
-    public List<Integer> numbers() {
+    public List<LottoNumber> numbers() {
         return lottoNumbers.numbers();
     }
 
