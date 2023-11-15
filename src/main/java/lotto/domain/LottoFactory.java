@@ -8,6 +8,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoFactory {
+
+    private LottoFactory() {
+    }
+
     public static Lottos generateLottos(int lottoCount) {
         Map<Integer, List<Lotto>> lottos = IntStream.range(0, lottoCount)
                 .boxed()

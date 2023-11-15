@@ -10,6 +10,9 @@ public class InputValidator {
     private static final int MIN_PRICE = 1000;
     private static final int ZERO = 0;
 
+    private InputValidator() {
+    }
+
     public static void validatePurchasePrice(int price) {
         validatePriceMinimumCondition(price);
         validatePriceUnitCondition(price);

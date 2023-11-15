@@ -6,6 +6,9 @@ import java.util.stream.Stream;
 
 public class StringParser {
 
+    private StringParser() {
+    }
+
     private static final String DEFAULT_PATTERN = ", ";
 
     public static List<Integer> parseToInts(String text) {
