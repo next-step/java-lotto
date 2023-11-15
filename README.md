@@ -12,7 +12,7 @@
 # STEP 1
 ## 기능 요구 사항
 ### TODO
-* [ ] 사용자 입력 받기
+* [X] 사용자 입력 받기
   * [ ] 입력값이 비어있을 경우 IllegalArgumentException throw
   * [ ] 사칙연산 기호가 아닌 기호가 있는 경우 IllegalArgumentException throw
   * [ ] 사칙연산 기호가 연속해서 있는 경우 IllegalArgumentException throw
