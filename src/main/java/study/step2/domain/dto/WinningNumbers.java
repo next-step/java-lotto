@@ -16,13 +16,19 @@ public class WinningNumbers {
         this.winningNumbers = numbers;
     }
 
+    private static boolean containsWinningNumbersRange(Integer n) {
+        return n >= WINNING_START_NUMBER && n <= WINNING_END_NUMBER;
+    }
+
     private void validate(List<Integer> numbers) {
         if (!isValidSize(numbers)) {
             throw new LottoException("당첨 번호 개수는 6개여야 합니다.");
         }
-
         if (!isValidNumbers(numbers)) {
             throw new LottoException("당첨 번호는 1 ~ 45 사이의 숫자여야 합니다.");
+        }
+        if (!isDistinct(numbers)) {
+            throw new LottoException("당첨 번호에는 중복 값이 있을 수 없습니다.");
         }
     }
 
@@ -32,11 +38,13 @@ public class WinningNumbers {
 
     private boolean isValidNumbers(List<Integer> numbers) {
         return numbers.stream()
-            .allMatch(n -> n >= WINNING_START_NUMBER && n <= WINNING_END_NUMBER);
+            .allMatch(WinningNumbers::containsWinningNumbersRange);
     }
 
-    public List<Integer> winningNumbers() {
-        return winningNumbers;
+    private boolean isDistinct(List<Integer> numbers) {
+        return WINNING_NUMBERS_SIZE == numbers.stream()
+            .distinct()
+            .count();
     }
 
     public boolean contains(Integer number) {

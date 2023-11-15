@@ -1,8 +1,9 @@
 package study.step2.domain;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import study.step2.domain.dto.Result;
 
 public enum Rank {
 
@@ -25,15 +26,41 @@ public enum Rank {
 
     public static Rank valueOfHitCount(int hitCount) {
         return Arrays.stream(values())
-            .filter(place -> place.hitCount() == hitCount)
+            .filter(rank -> rank.hitCountEquals(hitCount))
             .findAny()
             .orElse(NO_HIT);
     }
 
-    public static List<Integer> valuesOfHitCount() {
+    private boolean hitCountEquals(int hitCount) {
+        return this.hitCount == hitCount;
+    }
+
+    public static List<Result> statistics(List<Rank> ranks) {
+        List<Result> results = new ArrayList<>();
+        for (Rank r: valuesWithoutNoHit()) {
+            results.add(new Result(r, countWinning(ranks, r)));
+        }
+        return results;
+    }
+
+    private static List<Rank> valuesWithoutNoHit() {
         return Arrays.stream(values())
-            .map(Rank::hitCount)
+            .filter(Rank::isHit)
             .collect(Collectors.toList());
+    }
+
+    private static int countWinning(List<Rank> ranks, Rank r) {
+        return (int) ranks.stream()
+            .filter(rank -> rank.equals(r))
+            .count();
+    }
+
+    private boolean isHit() {
+        return this != NO_HIT;
+    }
+
+    public boolean equals(Rank rank) {
+        return this == rank;
     }
 
     public int hitCount() {
@@ -43,5 +70,4 @@ public enum Rank {
     public int amount() {
         return amount;
     }
-
 }

@@ -1,5 +1,7 @@
 package study.step2.domain;
 
+import java.util.List;
+
 import study.step2.domain.dto.WinningNumbers;
 
 public class Lotto {
@@ -11,21 +13,20 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Rank match(WinningNumbers winningNumbers) {
-        lottoNumbers.lottoNumbers().forEach(lottoNumber -> {
-            compare(lottoNumber, winningNumbers);
-        });
+    public Rank matches(WinningNumbers winningNumbers) {
+        lottoNumbers.lottoNumbers()
+            .forEach(number -> calculateHitCount(number, winningNumbers));
         return Rank.valueOfHitCount(hitCount);
     }
 
-    private void compare(Integer lottoNumber, WinningNumbers winningNumbers) {
+    private void calculateHitCount(Integer lottoNumber, WinningNumbers winningNumbers) {
         if (winningNumbers.contains(lottoNumber)) {
             hitCount += 1;
         }
     }
 
-    public LottoNumbers lottoNumbers() {
-        return lottoNumbers;
+    public List<Integer> lottoNumbers() {
+        return lottoNumbers.lottoNumbers();
     }
 
     public int hitCount() {

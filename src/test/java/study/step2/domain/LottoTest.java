@@ -14,7 +14,7 @@ public class LottoTest {
         LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         Lotto lotto = new Lotto(lottoNumbers);
         WinningNumbers winningNumbers = new WinningNumbers(List.of(3, 5, 6, 9, 23, 43));
-        lotto.match(winningNumbers);
+        lotto.matches(winningNumbers);
         assertThat(lotto.hitCount()).isEqualTo(3);
     }
 }

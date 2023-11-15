@@ -9,7 +9,7 @@ import static study.step2.view.InputParser.parse;
 
 public class InputView {
 
-    public static PurchaseAmount input() {
+    public static PurchaseAmount inputPurchaseAmount() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
         return new PurchaseAmount(scanner.nextInt());

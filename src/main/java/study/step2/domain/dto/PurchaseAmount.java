@@ -23,11 +23,10 @@ public class PurchaseAmount {
     }
 
     public int numberOfLottos() {
-        return calculate(amount);
-    }
-
-    private static int calculate(int amount) {
         return amount / LOTTO_PRICE;
     }
 
+    public int amount() {
+        return amount;
+    }
 }

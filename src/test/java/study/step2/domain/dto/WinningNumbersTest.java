@@ -22,4 +22,11 @@ public class WinningNumbersTest {
             .isThrownBy(() -> new WinningNumbers(List.of(1, 2, 3, 4, 5, 46)))
             .withMessage("당첨 번호는 1 ~ 45 사이의 숫자여야 합니다.");
     }
+
+    @Test
+    void 당첨_번호_중복() {
+        assertThatExceptionOfType(LottoException.class)
+            .isThrownBy(() -> new WinningNumbers(List.of(1, 2, 3, 4, 5, 5)))
+            .withMessage("당첨 번호에는 중복 값이 있을 수 없습니다.");
+    }
 }

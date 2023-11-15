@@ -1,4 +1,4 @@
-package study.step2;
+package study.step2.view;
 
 import org.junit.jupiter.api.Test;
 import study.step2.domain.exception.LottoException;

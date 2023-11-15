@@ -11,12 +11,12 @@ public class LottoGeneratorTest {
     void 로또_번호_생성() {
         LottoGenerator generator = new LottoGenerator(new Always1To6Numbers());
         Lotto lotto = generator.generate();
-        assertThat(lotto.lottoNumbers().lottoNumbers()).hasSize(6);
-        assertThat(lotto.lottoNumbers().lottoNumbers()).contains(1);
-        assertThat(lotto.lottoNumbers().lottoNumbers()).contains(2);
-        assertThat(lotto.lottoNumbers().lottoNumbers()).contains(3);
-        assertThat(lotto.lottoNumbers().lottoNumbers()).contains(4);
-        assertThat(lotto.lottoNumbers().lottoNumbers()).contains(5);
-        assertThat(lotto.lottoNumbers().lottoNumbers()).contains(6);
+        assertThat(lotto.lottoNumbers()).hasSize(6);
+        assertThat(lotto.lottoNumbers()).contains(1);
+        assertThat(lotto.lottoNumbers()).contains(2);
+        assertThat(lotto.lottoNumbers()).contains(3);
+        assertThat(lotto.lottoNumbers()).contains(4);
+        assertThat(lotto.lottoNumbers()).contains(5);
+        assertThat(lotto.lottoNumbers()).contains(6);
     }
 }

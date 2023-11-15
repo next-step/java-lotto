@@ -17,13 +17,13 @@ public class LottoGenerator {
     public Lotto generate() {
         List<Integer> pool = lottoNumbers.pool();
         Collections.shuffle(pool, random);
-        IntStream.range(0, LOTTO_NUMBERS_SIZE).forEach(n -> pickAndAddNumber(pool));
+        IntStream.range(0, LOTTO_NUMBERS_SIZE)
+            .forEach(n -> pickAndAdd(pool));
         lottoNumbers.sort();
         return new Lotto(lottoNumbers);
     }
 
-    private void pickAndAddNumber(List<Integer> pool) {
-        Integer pickedNumber = pool.remove(0);
-        lottoNumbers.add(pickedNumber);
+    private void pickAndAdd(List<Integer> pool) {
+        lottoNumbers.add(pool.remove(0));
     }
 }
