@@ -16,8 +16,8 @@ public class CalculatorController {
     }
 
     public void calculate(){
-        String postfixString = Postfix.of(inputView.calculatorString()).postfixString();
-        CalculatorExpression expression = Calculator.calculate(postfixString);
+        String origin = inputView.calculatorString();
+        CalculatorExpression expression = Calculator.calculate(origin);
         resultView.calculateResult(expression.calculate());
     }
 }
