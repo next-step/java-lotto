@@ -14,7 +14,7 @@ public class ExpressionValidator {
             throw new IllegalArgumentException(ERR_EMPTY_EXPRESSION);
         }
 
-        if (containsInvalidSymbol(expression)) {
+        if (containsInvalidSymbol(expression) || containsConsecutiveOperators(expression)) {
             throw new IllegalArgumentException(ERR_INVALID_SYMBOL);
         }
 
@@ -37,5 +37,10 @@ public class ExpressionValidator {
             return true;
         }
         return false;
+    }
+
+    private static boolean containsConsecutiveOperators(String expression) {
+        String regex = ".*[+\\-*/]{2,}.*";
+        return Pattern.matches(regex, expression.replaceAll("\\s", ""));
     }
 }
