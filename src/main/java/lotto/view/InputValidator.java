@@ -1,6 +1,8 @@
 package lotto.view;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class InputValidator {
 
@@ -38,8 +40,9 @@ public class InputValidator {
         validateDelimiter(input, delimiter);
         String[] numbersString = input.split(delimiter);
 
-        validateAmountOfNumbers(numbersString);
-        validateParseInt(numbersString);
+        List<Integer> numbers = validateParseInt(numbersString);
+        validateNegative(numbers);
+        validateDuplicate(numbers);
     }
 
     private void validateDelimiter(String input, String delimiter) {
@@ -48,18 +51,42 @@ public class InputValidator {
         }
     }
 
-    private void validateAmountOfNumbers(String[] splitedInput) {
-        if (splitedInput.length != 6) {
-            throw new IllegalArgumentException("로또 당첨 번호는 6개가 입력되어야 합니다.");
+    private List<Integer> validateParseInt(String[] numbersString) {
+        List<Integer> numbers;
+
+        try {
+            numbers = Arrays.stream(numbersString)
+                .map(number -> Integer.parseInt(number.trim()))
+                .collect(Collectors.toUnmodifiableList());
+        } catch (NumberFormatException e){
+            throw new IllegalArgumentException("당첨 번호는 정수를 입력해야 합니다.");
+        }
+
+        return numbers;
+    }
+
+    private void validateNegative(List<Integer> numbers) {
+        if (isOutOfRange(numbers)) {
+            throw new IllegalArgumentException("숫자의 범위는 1~45입니다.");
         }
     }
 
-    private void validateParseInt(String[] numbersString) {
-        try {
-            Arrays.stream(numbersString)
-                .forEach(number -> Integer.parseInt(number.trim()));
-        } catch (NumberFormatException e){
-            throw new IllegalArgumentException("당첨 번호는 정수를 입력해야 합니다.");
+    private boolean isOutOfRange(List<Integer> numbers) {
+        return numbers.stream()
+            .anyMatch(number -> number < 1 || number > 45);
+    }
+
+    private void validateDuplicate(List<Integer> numbers) {
+        List<Integer> distinct = numbers.stream()
+            .distinct()
+            .collect(Collectors.toUnmodifiableList());
+
+        validateAmountOfNumbers(distinct);
+    }
+
+    private void validateAmountOfNumbers(List<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("로또 당첨 번호는 6개가 입력되어야 합니다.");
         }
     }
 }
