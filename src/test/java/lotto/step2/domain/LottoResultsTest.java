@@ -115,7 +115,7 @@ class LottoResultsTest {
     @DisplayName("calculateResults 메서드의 입력으로 Lotto List 와 winnerNumbers를 넣으면, 입력한 Lotto List의 당첨 통계를 구한다. - 1등 [당첨 번호 6개]")
     void testCheckLottoWinningNumbers_LottoRank_FIRST() {
         //given
-        int bonusWinnerNumber = 7;
+        final LottoNumber bonusWinnerNumber = new LottoNumber(7);
         final Lotto winnerLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
 
         final WinnerNumbers winnerNumbers = new WinnerNumbers(winnerLotto, bonusWinnerNumber);
@@ -132,7 +132,7 @@ class LottoResultsTest {
     @DisplayName("calculateResults 메서드의 입력으로 Lotto List 와 winnerNumbers를 넣으면, 입력한 Lotto List의 당첨 통계를 구한다. - 2등 [당첨 번호 5개, 보너스 번호 일치]")
     void testCheckLottoWinningNumbers_LottoRank_SECOND() {
         //given
-        int bonusWinnerNumber = 7;
+        final LottoNumber bonusWinnerNumber = new LottoNumber(7);
         final Lotto winnerLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
 
         final WinnerNumbers winnerNumbers = new WinnerNumbers(winnerLotto, bonusWinnerNumber);
@@ -151,7 +151,7 @@ class LottoResultsTest {
     @DisplayName("calculateResults 메서드의 입력으로 Lotto List 와 winnerNumbers를 넣으면, 입력한 Lotto List의 당첨 통계를 구한다. - 3등 [당첨 번호 5개, 보너스 번호 불일치]")
     void testCheckLottoWinningNumbers_LottoRank_THIRD() {
         //given
-        int bonusWinnerNumber = 7;
+        final LottoNumber bonusWinnerNumber = new LottoNumber(7);
         final Lotto winnerLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
 
         final WinnerNumbers winnerNumbers = new WinnerNumbers(winnerLotto, bonusWinnerNumber);
@@ -172,7 +172,7 @@ class LottoResultsTest {
     @DisplayName("calculateResults 메서드의 입력으로 Lotto List 와 winnerNumbers를 넣으면, 입력한 Lotto List의 당첨 통계를 구한다. - 4등 [당첨 번호 4개]")
     void testCheckLottoWinningNumbers_LottoRank_FOURTH() {
         //given
-        int bonusWinnerNumber = 7;
+        final LottoNumber bonusWinnerNumber = new LottoNumber(7);
         final Lotto winnerLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
 
         final WinnerNumbers winnerNumbers = new WinnerNumbers(winnerLotto, bonusWinnerNumber);
@@ -194,7 +194,7 @@ class LottoResultsTest {
     @DisplayName("calculateResults 메서드의 입력으로 Lotto List 와 winnerNumbers를 넣으면, 입력한 Lotto List의 당첨 통계를 구한다. - 5등 [당첨 번호 3개]")
     void testCheckLottoWinningNumbers_LottoRank_FIFTH() {
         //given
-        int bonusWinnerNumber = 7;
+        final LottoNumber bonusWinnerNumber = new LottoNumber(7);
         final Lotto winnerLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
 
         final WinnerNumbers winnerNumbers = new WinnerNumbers(winnerLotto, bonusWinnerNumber);

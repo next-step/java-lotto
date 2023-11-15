@@ -1,6 +1,7 @@
 package lotto.step2.input;
 
 import lotto.step2.domain.Lotto;
+import lotto.step2.domain.LottoNumber;
 import lotto.step2.domain.WinnerNumbers;
 import lotto.step2.service.LottoProgram;
 import lotto.step2.util.StringToIntegerSetConverter;
@@ -119,10 +120,26 @@ public class InputView {
     }
 
     public static WinnerNumbers inputWinnersNumbers() {
-        final Lotto winnerLotto = inputWinnerLotto();
-        final int bonusWinnerNumber = getBonusWinnerNumber();
+        WinnerNumbers winnerNumbers = null;
 
-        return new WinnerNumbers(winnerLotto, bonusWinnerNumber);
+        while (winnerNumbers == null) {
+            winnerNumbers = inputWinnerNumberElement();
+        }
+
+        return winnerNumbers;
+    }
+
+    private static WinnerNumbers inputWinnerNumberElement() {
+        try {
+            final Lotto winnerLotto = inputWinnerLotto();
+            final LottoNumber bonusLottoNumber = getBonusWinnerNumber();
+
+            return new WinnerNumbers(winnerLotto, bonusLottoNumber);
+        } catch (IllegalArgumentException e) {
+            System.out.println("보너스 번호는 중복될 수 없습니다. \n");
+
+            return null;
+        }
     }
 
     private static Lotto inputWinnerLotto() {
@@ -130,8 +147,26 @@ public class InputView {
         return inputLottoNumbers();
     }
 
-    private static int getBonusWinnerNumber() {
+    private static LottoNumber getBonusWinnerNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new Scanner(System.in).nextInt();
+        LottoNumber lottoNumber = null;
+
+        while (lottoNumber == null) {
+            lottoNumber = inputLottoNumberByScanner();
+        }
+
+        return lottoNumber;
+    }
+
+    private static LottoNumber inputLottoNumberByScanner() {
+        try {
+            final int lottoNumber = new Scanner(System.in).nextInt();
+
+            return new LottoNumber(lottoNumber);
+        } catch (InputMismatchException | IllegalArgumentException e) {
+            System.out.println("보너스 볼을 숫자로만 다시 입력해 주세요. (범위 : 1 ~ 45)");
+
+            return null;
+        }
     }
 }

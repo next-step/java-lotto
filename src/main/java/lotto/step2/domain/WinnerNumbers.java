@@ -6,10 +6,9 @@ public class WinnerNumbers {
     private final Lotto winnerLotto;
     private final LottoNumber bonusNumber;
 
-    public WinnerNumbers(final Lotto winnerLotto, final int bonusWinnerNumber) {
+    public WinnerNumbers(final Lotto winnerLotto, final LottoNumber bonusLottoNumber) {
         this.winnerLotto = winnerLotto;
 
-        final LottoNumber bonusLottoNumber = new LottoNumber(bonusWinnerNumber);
         validateBonusWinnerNumber(bonusLottoNumber);
 
         this.bonusNumber = bonusLottoNumber;
