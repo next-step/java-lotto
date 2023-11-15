@@ -21,6 +21,10 @@ public class Operators {
         return this.operators;
     }
 
+    public String operator(int position) {
+        return this.operators.get(position);
+    }
+
     private void addOperator(int i, List<String> operators, String o) {
         if (i % 2 != 0) {
             validateOperator(o);

@@ -88,7 +88,7 @@ public class Calculator {
     }
 
     private void calculate(int i) {
-        switch (this.operators.operators().get(i)) {
+        switch (this.operators.operator(i)) {
             case "+":
                 result = sum(result, this.operands.get(i + 1));
                 break;
