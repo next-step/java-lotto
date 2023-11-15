@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
 
@@ -44,5 +45,17 @@ class LottoTest {
         boolean matchBonus = gameLotto.matchBonus(bonusNumber);
         // then
         assertThat(matchBonus).isEqualTo(expectedMatchBonus);
+    }
+
+    @Test
+    void 로또는_6개의_게임번호가_아닐시_생성할_수_없다() {
+        // given
+        Set<GameNumber> numbers = Set.of(GameNumber.of(1), GameNumber.of(2), GameNumber.of(3),
+                GameNumber.of(4), GameNumber.of(5));
+
+        // when then
+        assertThatThrownBy(() -> Lotto.of(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또의 번호는 6자리입니다.");
     }
 }

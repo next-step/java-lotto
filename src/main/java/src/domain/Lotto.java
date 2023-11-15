@@ -13,6 +13,10 @@ public class Lotto {
     }
 
     public static Lotto of(Set<GameNumber> numbers) {
+        if(numbers.size() != 6) {
+            throw new IllegalArgumentException("로또의 번호는 6자리입니다.");
+        }
+
         return new Lotto(numbers);
     }
 
