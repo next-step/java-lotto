@@ -1,17 +1,13 @@
 package lotto.step2.input;
 
 public class UserInput {
-    private final int purchaseAmount;
+    private final PurchaseAmount purchaseAmount;
 
     public UserInput(final int purchaseAmount) {
-        if (purchaseAmount <= 0) {
-            throw new IllegalArgumentException("purchaseAmount must be greater than 0");
-        }
-        
-        this.purchaseAmount = purchaseAmount;
+        this.purchaseAmount = new PurchaseAmount(purchaseAmount);
     }
 
     public int getPurchaseAmount() {
-        return purchaseAmount;
+        return purchaseAmount.getValue();
     }
 }
