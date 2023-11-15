@@ -28,11 +28,9 @@ public enum Operator {
     }
 
     public static Operator getBySymbol(String symbol) {
-        for (Operator operator: values()) {
-            if (operator.getSymbol().equals(symbol)) {
-                return operator;
-            }
-        }
-        throw new IllegalArgumentException(ERR_INVALID_SYMBOL);
+        return Arrays.stream(values())
+                .filter(operator -> operator.getSymbol().equals(symbol))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ERR_INVALID_SYMBOL));
     }
 }
