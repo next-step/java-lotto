@@ -48,7 +48,6 @@ public class OutputView {
         for(Map.Entry<LottoRank, Integer> info : result.getResult().entrySet()){
             System.out.println(String.format(WINNING_MESSAGE, info.getKey().matchCount(), info.getKey().winningMoney(), info.getValue()));
         }
-        ;
     }
 
     private static void printTitle() {
