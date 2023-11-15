@@ -7,7 +7,7 @@ import java.util.List;
 public class Calculator {
     public static int calculate(String input) {
         if (input == null) {
-            throw new NullPointerException("Input String can't be null");
+            throw new IllegalArgumentException("Input String can't be null");
         }
 
         int result = 0;

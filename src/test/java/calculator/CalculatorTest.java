@@ -63,7 +63,7 @@ class CalculatorTest {
     void assertNullTypeInput() {
         String input = null;
 
-        NullPointerException thrown = Assertions.assertThrows(NullPointerException.class, () -> {
+        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
             Calculator.calculate(input);
         });
 
