@@ -1,34 +1,22 @@
 package step1.domain;
 
-public class Operator {
+import java.util.Arrays;
 
-    private static final String fourOperators = "+-*/";
-    private String operator;
+public enum Operator {
 
-    public Operator(String operator) {
-        validate(operator);
-        this.operator = operator;
+    ADD("+"), SUBTRACT("-"), MULTIPLY("*"), DIVIDE("/");
+
+    private String label;
+
+    Operator(String label) {
+        this.label = label;
     }
 
-    private void validate(String op) {
-        if (!fourOperators.contains(op)) {
-            throw new IllegalArgumentException();
-        }
+    public static Operator valueOfLabel(String label) {
+        return Arrays.stream(values())
+                .filter(value -> value.label.equals(label))
+                .findAny()
+                .orElseThrow();
     }
 
-    public boolean isAdd() {
-        return operator.equals("+");
-    }
-
-    public boolean isSubtract() {
-        return operator.equals("-");
-    }
-
-    public boolean isMultiply() {
-        return operator.equals("*");
-    }
-
-    public boolean isDivide() {
-        return operator.equals("/");
-    }
 }

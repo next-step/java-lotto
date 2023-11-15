@@ -17,7 +17,7 @@ public class StringCalculator {
         Number firstValue = new Number(operatorSequence.poll());
         Number cumulativeValue = firstValue;
         while (!operatorSequence.isEmpty()) {
-            Operator operator = new Operator(operatorSequence.poll());
+            Operator operator = Operator.valueOfLabel(operatorSequence.poll());
             Number number = new Number(operatorSequence.poll());
             cumulativeValue = doOperation(cumulativeValue, operator, number);
         }
@@ -29,19 +29,17 @@ public class StringCalculator {
         return strOperation.split(" ");
     }
 
-    private static Number doOperation(Number left, Operator op, Number right) {
+    private static Number doOperation(Number left, Operator operator, Number right) {
 
-        if (op.isAdd()) {
-            return calculator.add(left, right);
-        }
-        if (op.isSubtract()) {
-            return calculator.subtract(left, right);
-        }
-        if (op.isMultiply()) {
-            return calculator.multiply(left, right);
-        }
-        if (op.isDivide()) {
-            return calculator.divide(left, right);
+        switch (operator) {
+            case ADD:
+                return calculator.add(left, right);
+            case SUBTRACT:
+                return calculator.subtract(left, right);
+            case MULTIPLY:
+                return calculator.multiply(left, right);
+            case DIVIDE:
+                return calculator.divide(left, right);
         }
 
         throw new IllegalArgumentException();
