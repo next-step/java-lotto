@@ -18,12 +18,8 @@ public class Lotto {
 
     private void lottoSizeCheck(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("로또번호는 정확히" + LOTTO_NUMBER_SIZE + "개 여야 합니다.");
+            throw new IllegalArgumentException("로또번호는 정확히 6개 여야 합니다.");
         }
     }
 
-    @Override
-    public String toString() {
-        return numbers.toString();
-    }
 }

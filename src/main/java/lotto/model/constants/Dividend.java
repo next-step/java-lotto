@@ -9,8 +9,8 @@ public enum Dividend {
     THIRD(4, 50000),
     FOURTH(3, 5000);
 
-    private int correctCount;
-    private long dividendAmount;
+    private final int correctCount;
+    private final long dividendAmount;
 
     Dividend(int correctCount, long dividendAmount) {
         this.correctCount = correctCount;
@@ -20,17 +20,11 @@ public enum Dividend {
     public static Dividend getDividend(int correctCount) {
         return Arrays.stream(values())
                 .filter(dividend -> dividend.correctCount == correctCount)
-                .findAny().get();
+                .findAny().orElseThrow(() -> new IllegalArgumentException("3 ~ 6사이의 값을 입력해주세요."));
     }
 
-    public static long getMoney(int correctCount, int winCount) {
-        return Arrays.stream(values())
-                .filter(dividend -> dividend.correctCount == correctCount)
-                .findAny().get().dividendAmount * winCount;
+    public long dividendAmount() {
+        return this.dividendAmount;
     }
 
-    @Override
-    public String toString() {
-        return correctCount + "개 일치 (" + dividendAmount + "원) - ";
-    }
 }

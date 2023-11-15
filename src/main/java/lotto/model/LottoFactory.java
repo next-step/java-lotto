@@ -9,9 +9,9 @@ public class LottoFactory {
     private LottoFactory() {
     }
 
-    public static List<Lotto> generateLotto(int count) {
+    public static List<Lotto> generateLotto(BuyLotto bank) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < bank.purchaseCount(); i++) {
             lottos.add(new Lotto(generateRandomSixNumber()));
         }
         return lottos;
