@@ -25,23 +25,13 @@ class LottosTest {
         assertThat(result).isEqualTo(14);
     }
 
-    @DisplayName("당첨 번호는 6개가 아니면 예외가 발생한다.")
-    @Test
-    void 로또당첨번호_6글자_미만() {
-        final Lottos lottos = new Lottos(new Amount(14500));
-
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            lottos.draw(Arrays.asList(1, 5, 4, 2, 5), 10);
-        });
-    }
-
     @DisplayName("로또 당첨 번호와 보너스 번호가 중복되면 예외가 발생한다.")
     @Test
     void drawBonusNumberDuplicateTest() {
         final Lottos lottos = new Lottos(new Amount(14500));
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            lottos.draw(Arrays.asList(1, 2, 3, 4, 5, 6), 6);
+            lottos.draw(new LottoNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))), 6);
         });
     }
 
@@ -54,7 +44,7 @@ class LottosTest {
         final Lottos lottos = new Lottos(Arrays.asList(lotto));
 
         //when
-        final Winning winning = lottos.draw(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        final Winning winning = lottos.draw(new LottoNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))), 7);
 
         //then
         assertThat(winning).isEqualTo(new Winning(Map.of(Rank.FIRST, 1)));

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class LottoGame {
@@ -34,7 +35,7 @@ public class LottoGame {
 
         List<Integer> winningNumbers = parsingText(winningNumberText);
 
-        return lottos.draw(winningNumbers, bonusNumber);
+        return lottos.draw(new LottoNumbers(new HashSet<>(winningNumbers)), bonusNumber);
     }
 
     private List<Integer> parsingText(final String winningNumberText) {

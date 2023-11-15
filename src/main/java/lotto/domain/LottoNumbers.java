@@ -4,6 +4,7 @@ import java.util.*;
 
 public class LottoNumbers {
     public static final String INVALID_COUNT = "로또 번호는 6개여야 합니다.";
+    public static final String INVALID_LOTTO_NUMBER_MSG = "로또 번호는 1이상 45이하 여야 합니다.";
     public static final int MAX_LOTTO_NUMBER = 45;
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int LOTTO_NUMBER_COUNT = 6;
@@ -19,8 +20,22 @@ public class LottoNumbers {
     }
 
     private void validationCheck(final Set<Integer> numbers) {
+        lottoCountCheck(numbers);
+
+        for (Integer number : numbers) {
+            lottoNumberCheck(number);
+        }
+    }
+
+    private void lottoCountCheck(final Set<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(INVALID_COUNT);
+        }
+    }
+
+    private void lottoNumberCheck(final Integer number) {
+        if (MIN_LOTTO_NUMBER > number && number > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_MSG);
         }
     }
 
@@ -43,6 +58,22 @@ public class LottoNumbers {
 
     public boolean contains(int winningNumber) {
         return numbers.contains(winningNumber);
+    }
+
+    public int getRightNumber(final LottoNumbers winningNumbers) {
+        int rightNumber = 0;
+        for (int number : winningNumbers.numbers) {
+            rightNumber = plusRightNumber(rightNumber, number);
+        }
+
+        return rightNumber;
+    }
+
+    private int plusRightNumber(int rightNumber, final int number) {
+        if (contains(number)) {
+            rightNumber++;
+        }
+        return rightNumber;
     }
 
     @Override
