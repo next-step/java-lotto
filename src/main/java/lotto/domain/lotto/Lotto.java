@@ -6,9 +6,6 @@ public class Lotto {
 
     private LottoNumbers lottoNumbers;
 
-    public Lotto() {
-    }
-
     public Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }

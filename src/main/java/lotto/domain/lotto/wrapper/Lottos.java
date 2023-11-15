@@ -16,9 +16,6 @@ public class Lottos {
 
     private List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos() {
-    }
-
     public Lottos(List<LottoNumbers> lottoNumberses) {
         lottoNumberses.forEach(numbers -> lottos.add(new Lotto(numbers)));
     }
