@@ -12,9 +12,9 @@ class CalculatorTest {
     @Test
     void assertToIntArray() {
         List<Object> result = new ArrayList<>();
-        result.add(1);
+        result.add("1");
         result.add("+");
-        result.add(1);
+        result.add("1");
 
         assertThat(Calculator.toIntArray("1 + 1")).isEqualTo(result);
     }

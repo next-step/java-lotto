@@ -8,19 +8,19 @@ public class Calculator {
     public static int calculate(String input) {
         int result = 0;
 
-        List<Object> splittedInput = toIntArray(input);
+        List<String> splittedInput = toIntArray(input);
         for (int i = 1; i < splittedInput.size(); i = i+2) {
             result = compute(result, splittedInput, i);
         }
         return result;
     }
 
-    private static int compute(int result, List<Object> splittedInput, int i) {
+    private static int compute(int result, List<String> splittedInput, int i) {
         if (i == 1) {
-            result = runOperator((Integer) splittedInput.get(i -1), splittedInput.get(i).toString(), (Integer) splittedInput.get(i +1));
+            result = runOperator(Integer.parseInt(splittedInput.get(i -1)), splittedInput.get(i).toString(), Integer.parseInt(splittedInput.get(i +1)));
         }
         if (i > 1) {
-            result = runOperator(result, splittedInput.get(i).toString(), (Integer) splittedInput.get(i +1));
+            result = runOperator(result, splittedInput.get(i).toString(), Integer.parseInt(splittedInput.get(i +1)));
         }
         return result;
     }
@@ -42,22 +42,9 @@ public class Calculator {
         return result;
     }
 
-    public static List<Object> toIntArray(String input) {
+    public static List<String> toIntArray(String input) {
         String[] splittedString = input.split(" ");
-        return processEachLetter(splittedString);
-    }
-
-    private static List<Object> processEachLetter(String[] spliitedString) {
-        List<Object> result = new ArrayList<>();
-        Arrays.stream(spliitedString).forEach(eachWord-> {
-            try {
-                int num = Integer.parseInt(eachWord);
-                result.add(num);
-            } catch (NumberFormatException nfe) {
-                result.add(eachWord);
-            }
-        });
-        return result;
+        return List.of(splittedString);
     }
 
     public static int addNum(int leftValue, int rightValue) {
