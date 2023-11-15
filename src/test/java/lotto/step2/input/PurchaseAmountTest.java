@@ -25,7 +25,7 @@ class PurchaseAmountTest {
     @ParameterizedTest
     @ValueSource(ints = {0, -1000, -3000})
     @DisplayName("생성자로 0원 이하의 구매 금액이 입력되면, IllegalArgumentException이 발생한다.")
-    void throwIllegalArgumentExceptionWhenPurchaseAmountIsLessThanZero(final int userPriceInput) {
+    void throwIllegalArgumentExceptionWhenPurchaseAmountIsLessThanZeroAndIsEqualToZero(final int userPriceInput) {
         //given, when, then
         assertThatThrownBy(() -> new PurchaseAmount(userPriceInput))
                 .isInstanceOf(IllegalArgumentException.class)
