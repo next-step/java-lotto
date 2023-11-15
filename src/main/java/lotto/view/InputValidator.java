@@ -1,12 +1,12 @@
 package lotto.view;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 public class InputValidator {
 
     public void validatePurchaseMoney(String purchase, int lottoPrice) {
         long purchaseMoney = validateParseLong(purchase);
+        validateMinimum(purchaseMoney, lottoPrice);
         validatePurchaseUnit(purchaseMoney, lottoPrice);
     }
 
@@ -20,6 +20,12 @@ public class InputValidator {
         }
 
         return purchaseMoney;
+    }
+
+    private void validateMinimum(long purchaseMoney, int lottoPrice) {
+        if (purchaseMoney < lottoPrice) {
+            throw new IllegalArgumentException("구입 금액은 천원 이하가 될 수 없습니다.");
+        }
     }
 
     private void validatePurchaseUnit(long purchaseMoney, int lottoPrice) {
