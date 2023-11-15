@@ -1,8 +1,9 @@
 package calculator.controller;
 
+import calculator.domain.Calculator;
 import calculator.domain.Operator;
 import calculator.domain.Splitter;
-import calculator.util.Validator;
+import calculator.domain.Validator;
 
 import java.util.List;
 
@@ -13,26 +14,9 @@ public class CalculatorController {
     }
 
     public int calculate(String expression) {
-        List<Integer> numbers = splitNumbers(expression);
-        List<Operator> operators = SplitOperators(expression);
+        List<Integer> numbers = Splitter.splitNumbers(expression);
+        List<Operator> operators = Splitter.splitOperators(expression);
 
-        int result = numbers.get(0);
-
-        for (int i = 0; i < operators.size(); i++) {
-            Operator operator = operators.get(i);
-            int nextNumber = numbers.get(i + 1);
-
-            result = operator.apply(result, nextNumber);
-        }
-
-        return result;
-    }
-
-    private static List<Operator> SplitOperators(String expression) {
-        return Splitter.splitOperators(expression);
-    }
-
-    private static List<Integer> splitNumbers(String expression) {
-        return Splitter.splitNumbers(expression);
+        return Calculator.calculate(numbers, operators);
     }
 }
