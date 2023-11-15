@@ -1,12 +1,6 @@
 package lotto.view;
 
 
-import lotto.domain.Amount;
-import lotto.domain.Rank;
-import lotto.domain.Winning;
-
-import java.math.BigDecimal;
-
 public class ResultView {
     private final static String PURCHASE_PRINT_DESCRIPTION = "개를 구매했습니다.";
     public static final String RETURN_RATE_DESCRIPTION = "총 수익률은 %.2f입니다.";
