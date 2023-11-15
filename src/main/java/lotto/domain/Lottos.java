@@ -11,6 +11,10 @@ public class Lottos {
 
     private List<Lotto> lottos;
 
+    public Lottos(final List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
     public Lottos(final Amount amount) {
         this.lottos = initLottos(amount);
     }
@@ -37,7 +41,6 @@ public class Lottos {
 
         final Winning winning = new Winning();
         for (Lotto lotto : lottos) {
-
             winning.addWinning(lotto.getRightNumber(winningNumbers), lotto.contains(bonusNumber));
         }
 

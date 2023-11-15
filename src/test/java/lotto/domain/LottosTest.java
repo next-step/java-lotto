@@ -4,6 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -34,7 +37,7 @@ class LottosTest {
 
     @DisplayName("로또 당첨 번호와 보너스 번호가 중복되면 예외가 발생한다.")
     @Test
-    void drawTest() {
+    void drawBonusNumberDuplicateTest() {
         final Lottos lottos = new Lottos(new Amount(14500));
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
@@ -42,4 +45,18 @@ class LottosTest {
         });
     }
 
+    @DisplayName("로또 번호 6개가 전부 일치하면 FIRST RANK를 가지는 Winning을 리턴한다.")
+    @Test
+    void drawTest() {
+        //given
+        final Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final Lotto lotto = new Lotto(new LottoNumbers(numbers));
+        final Lottos lottos = new Lottos(Arrays.asList(lotto));
+
+        //when
+        final Winning winning = lottos.draw(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+
+        //then
+        assertThat(winning).isEqualTo(new Winning(Map.of(Rank.FIRST, 1)));
+    }
 }

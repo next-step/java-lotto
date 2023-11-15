@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Winning {
     private Map<Rank, Integer> winnerCountMap;
@@ -9,6 +10,11 @@ public class Winning {
     public Winning() {
         this.winnerCountMap = new HashMap<>();
     }
+
+    public Winning(final Map<Rank, Integer> winnerCountMap) {
+        this.winnerCountMap = winnerCountMap;
+    }
+
     public void addWinning(int rightNumber, boolean bonusMatch) {
         if (Rank.isWinning(rightNumber)) {
             final Rank rank = Rank.ofRightNumber(rightNumber, bonusMatch);
@@ -30,6 +36,19 @@ public class Winning {
         }
 
         return sum.divide(purchaseAmount);
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final Winning winning = (Winning) o;
+        return Objects.equals(winnerCountMap, winning.winnerCountMap);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winnerCountMap);
     }
 
     @Override

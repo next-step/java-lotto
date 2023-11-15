@@ -9,6 +9,11 @@ public class LottoGame {
     private static final int LOTTO_AMOUNT = 1000;
     public static final String SPLIT_TEXT = ",";
     private Lottos lottos;
+
+    public LottoGame(final Lottos lottos) {
+        this.lottos = lottos;
+    }
+
     public LottoGame(final Amount purchaseAmount) {
         validationCheckAmount(purchaseAmount);
         this.lottos = new Lottos(purchaseAmount);

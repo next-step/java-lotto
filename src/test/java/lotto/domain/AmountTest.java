@@ -13,9 +13,16 @@ class AmountTest {
     }
 
     @Test
-    void divideWithDecimalTest() {
+    void divideTest() {
         final double result = new Amount(2000).divide(new Amount(1000));
 
         assertThat(result).isEqualTo(2.00);
+    }
+
+    @Test
+    void multiplyTest() {
+        final Amount result = new Amount(2000).multiply(3);
+
+        assertThat(result).isEqualTo(new Amount(6000));
     }
 }

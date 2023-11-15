@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 class LottoNumbersTest {
     @DisplayName("로또번호가 있으면 true를 반환한다.")
     @Test
-    void isRightTest() {
+    void containsTest() {
         final Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         final LottoNumbers lottoNumbers = new LottoNumbers(numbers);
 
