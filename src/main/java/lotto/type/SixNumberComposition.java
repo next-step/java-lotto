@@ -49,9 +49,13 @@ public class SixNumberComposition {
         Set<SingleNumber> uniqueNumbers = new HashSet<>();
 
         for (SingleNumber number : singleNumbers) {
-            if (!uniqueNumbers.add(number)) {
-                throw new IllegalArgumentException("Duplicate number found: " + number);
-            }
+            checkNotIn(number, uniqueNumbers);
+        }
+    }
+
+    private static void checkNotIn(SingleNumber number, Set<SingleNumber> uniqueNumbers) {
+        if (!uniqueNumbers.add(number)) {
+            throw new IllegalArgumentException("Duplicate number found: " + number);
         }
     }
 

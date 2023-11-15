@@ -20,15 +20,15 @@ public class WinningAmount {
             return new WinningAmount(0);
         }
 
-        if (winningLevel == WinningLevel.FIVE) {
+        if (winningLevel == WinningLevel.FIFTH) {
             return new WinningAmount(5000);
         }
 
-        if (winningLevel == WinningLevel.FOUR) {
+        if (winningLevel == WinningLevel.FOURTH) {
             return new WinningAmount(50000);
         }
 
-        if (winningLevel == WinningLevel.THREE) {
+        if (winningLevel == WinningLevel.THIRD) {
             return new WinningAmount(1500000);
         }
 

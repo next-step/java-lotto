@@ -73,7 +73,7 @@ public class WinningNumberTest {
         WinningNumber winningNumber = WinningNumber.of(List.of(1,2,3,14,15,16));
 
         assertThat(winningNumber.whatRank(lotto))
-                .isEqualTo(WinningLevel.FIVE);
+                .isEqualTo(WinningLevel.FIFTH);
     }
 
     @Test
@@ -83,7 +83,7 @@ public class WinningNumberTest {
         WinningNumber winningNumber = WinningNumber.of(List.of(1,2,3,4,15,16));
 
         assertThat(winningNumber.whatRank(lotto))
-                .isEqualTo(WinningLevel.FOUR);
+                .isEqualTo(WinningLevel.FOURTH);
     }
 
     @Test
@@ -93,7 +93,7 @@ public class WinningNumberTest {
         WinningNumber winningNumber = WinningNumber.of(List.of(1,2,3,4,5,16));
 
         assertThat(winningNumber.whatRank(lotto))
-                .isEqualTo(WinningLevel.THREE);
+                .isEqualTo(WinningLevel.THIRD);
     }
 
     @Test
@@ -103,6 +103,6 @@ public class WinningNumberTest {
         WinningNumber winningNumber = WinningNumber.of(List.of(1,2,3,4,5,6));
 
         assertThat(winningNumber.whatRank(lotto))
-                .isEqualTo(WinningLevel.ONE);
+                .isEqualTo(WinningLevel.FIRST);
     }
 }

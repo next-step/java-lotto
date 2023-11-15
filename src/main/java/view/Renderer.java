@@ -41,13 +41,13 @@ public class Renderer {
         if (rank == WinningLevel.NONE) {
             return "2개 이하 일치";
         }
-        if (rank == WinningLevel.FIVE) {
+        if (rank == WinningLevel.FIFTH) {
             return "3개 일치";
         }
-        if (rank == WinningLevel.FOUR) {
+        if (rank == WinningLevel.FOURTH) {
             return "4개 일치";
         }
-        if (rank == WinningLevel.THREE) {
+        if (rank == WinningLevel.THIRD) {
             return "5개 일치";
         }
 
@@ -59,13 +59,13 @@ public class Renderer {
         if (rank == WinningLevel.NONE) {
             return "0원";
         }
-        if (rank == WinningLevel.FIVE) {
+        if (rank == WinningLevel.FIFTH) {
             return "5000원";
         }
-        if (rank == WinningLevel.FOUR) {
+        if (rank == WinningLevel.FOURTH) {
             return "50000원";
         }
-        if (rank == WinningLevel.THREE) {
+        if (rank == WinningLevel.THIRD) {
             return "1500000원";
         }
 

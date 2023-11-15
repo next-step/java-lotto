@@ -2,7 +2,6 @@ package lotto.type;
 
 import controller.WinningStatistic;
 import lotto.WinningAmount;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +22,7 @@ public class WinningStatisticTest {
     @DisplayName("[WinningStatistic.occurs] 당첨이 발생했음을 알리면 -> 당첨횟수 1 증가")
     void occursShouldIncreaseCountByOne() {
         WinningStatistic statistic = new WinningStatistic();
-        WinningLevel rank = WinningLevel.ONE;
+        WinningLevel rank = WinningLevel.FIRST;
 
         statistic.occurs(rank);
 
@@ -34,12 +33,12 @@ public class WinningStatisticTest {
     @DisplayName("[WinningStatistic.getAmount] 당첨 횟수를 알리면 -> 총 당첨금액 계산")
     void getTotalWinAmountShouldReturnCorrectSum() {
         WinningStatistic statistic = new WinningStatistic();
-        statistic.occurs(WinningLevel.ONE);
-        statistic.occurs(WinningLevel.THREE);
-        statistic.occurs(WinningLevel.THREE);
+        statistic.occurs(WinningLevel.FIRST);
+        statistic.occurs(WinningLevel.THIRD);
+        statistic.occurs(WinningLevel.THIRD);
 
-        WinningAmount expectedAmount = WinningAmount.of(WinningLevel.ONE)
-                .add(WinningAmount.of(WinningLevel.THREE).multiply(2));
+        WinningAmount expectedAmount = WinningAmount.of(WinningLevel.FIRST)
+                .add(WinningAmount.of(WinningLevel.THIRD).multiply(2));
 
         assertThat(statistic.getTotalWinAmount()).isEqualTo(expectedAmount);
     }

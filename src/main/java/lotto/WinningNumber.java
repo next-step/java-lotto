@@ -45,19 +45,19 @@ public class WinningNumber {
         }
 
         if (matchCount == 3) {
-            return WinningLevel.FIVE;
+            return WinningLevel.FIFTH;
         }
 
         if (matchCount == 4) {
-            return WinningLevel.FOUR;
+            return WinningLevel.FOURTH;
         }
 
         if (matchCount == 5) {
-            return WinningLevel.THREE;
+            return WinningLevel.THIRD;
         }
 
         if (matchCount == 6) {
-            return WinningLevel.ONE;
+            return WinningLevel.FIRST;
         }
 
         throw new IllegalArgumentException("로또 용지가 당첨 번호와 매치되는 숫자는 6개를 넘을 수 없으나 알 수 없는 이유로 6개를 넘어 " + matchCount +"가 매치되었습니다." + lotto + this);
