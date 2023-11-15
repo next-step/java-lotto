@@ -27,7 +27,7 @@ public class Calculator {
         return this.operators;
     }
 
-    public int result() {
+    public int calculateAndGetResult() {
         result = this.operands.get(0);
         for (int i = 0; i < this.operators.gerOperators().size(); ++i) {
             calculate(i);

@@ -58,7 +58,7 @@ public class CalculatorTest {
         Calculator calculator = new Calculator(input);
 
         // when, then
-        assertThat(calculator.result()).isEqualTo(3);
+        assertThat(calculator.calculateAndGetResult()).isEqualTo(3);
     }
 
 
@@ -70,7 +70,7 @@ public class CalculatorTest {
         Calculator calculator = new Calculator(input);
 
         // when, then
-        assertThat(calculator.result()).isEqualTo(1);
+        assertThat(calculator.calculateAndGetResult()).isEqualTo(1);
     }
 
 
@@ -82,7 +82,7 @@ public class CalculatorTest {
         Calculator calculator = new Calculator(input);
 
         // when, then
-        assertThat(calculator.result()).isEqualTo(10);
+        assertThat(calculator.calculateAndGetResult()).isEqualTo(10);
     }
 
     @DisplayName("나눗셈 기능을 구현한다.")
@@ -93,7 +93,7 @@ public class CalculatorTest {
         Calculator calculator = new Calculator(input);
 
         // when, then
-        assertThat(calculator.result()).isEqualTo(2);
+        assertThat(calculator.calculateAndGetResult()).isEqualTo(2);
     }
 
     @DisplayName("사칙연산을 모두 포함하는 기능을 구현한다.")
@@ -104,7 +104,7 @@ public class CalculatorTest {
         Calculator calculator = new Calculator(input);
 
         // when, then
-        assertThat(calculator.result()).isEqualTo(1);
+        assertThat(calculator.calculateAndGetResult()).isEqualTo(1);
     }
 }
 
