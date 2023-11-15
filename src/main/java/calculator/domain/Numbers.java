@@ -1,7 +1,6 @@
 package calculator.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static calculator.validation.Validation.checkNumber;
@@ -30,7 +29,7 @@ public class Numbers {
     }
 
 
-    public int findNumber(int index) {
+    public int find(int index) {
         return list.get(index);
     }
 

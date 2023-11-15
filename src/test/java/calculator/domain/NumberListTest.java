@@ -15,7 +15,7 @@ public class NumberListTest {
         List<Integer> result = List.of(2, 10, 3, 6, 3);
         Numbers numberList = new Numbers(textArray);
 
-        Assertions.assertThat(numberList.findNumber(0)).isEqualTo(2);
+        Assertions.assertThat(numberList.find(0)).isEqualTo(2);
 
     }
 }

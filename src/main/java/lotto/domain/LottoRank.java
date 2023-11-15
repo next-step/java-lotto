@@ -29,7 +29,7 @@ public enum LottoRank {
 
         throw new IllegalArgumentException("로또 매치가 올바르지 않습니다");
     }
-    
+
     public long sumPrize(int count) {
         return this.prizeMoney * count;
     }
