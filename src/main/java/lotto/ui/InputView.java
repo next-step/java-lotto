@@ -26,7 +26,7 @@ public class InputView {
 
     private List<Lotto> generateLottos(Integer lottoCount) {
         LottoGenerator generator = new LottoGenerator();
-        List<Lotto> lottos = generator.generateByInputNumber(lottoCount);
+        List<Lotto> lottos = generator.generateByLottoCount(lottoCount);
         printLottos(lottos);
         return lottos;
     }
