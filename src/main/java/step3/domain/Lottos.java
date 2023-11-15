@@ -29,6 +29,9 @@ public class Lottos {
             int matchCount = winningNumbers.matchCount(lotto);
             boolean matchBonus = winningNumbers.containBonus(lotto);
             LottoRank lottoRank = LottoRank.valueOf(matchCount, matchBonus);
+            if(lottoRank == LottoRank.MISS){
+                continue;
+            }
             result.put(lottoRank, result.getOrDefault(lottoRank, 0) + 1);
         }
         return result;
