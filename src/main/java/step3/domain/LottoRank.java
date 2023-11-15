@@ -31,6 +31,10 @@ public enum LottoRank {
         return this == SECOND;
     }
 
+    public boolean isNotMiss(){
+        return this != MISS;
+    }
+
     public static LottoRank valueOf(int matchCount, boolean matchBonus) {
         if (matchCount == 5 && matchBonus) {
             return SECOND;

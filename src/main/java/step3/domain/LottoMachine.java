@@ -2,6 +2,7 @@ package step3.domain;
 
 import step3.cache.LottoNumberCache;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,11 +40,11 @@ public class LottoMachine {
     }
 
     private Lottos lottos(int gameCount) {
-        Lottos lottos = new Lottos();
+        List<Lotto> lottoList = new ArrayList<>();
         for(int i = 0; i< gameCount; i++){
-            lottos.addLotto(createLotto());
+            lottoList.add(createLotto());
         }
-        return lottos;
+        return new Lottos(lottoList);
     }
 
     private Lotto createLotto() {
