@@ -11,24 +11,36 @@ public class InputView {
     private static final int LOTTO_PRICE = 1000;
     private static final String DELIMITER = ",";
 
-    private Scanner sc = new Scanner(System.in);
-    private InputValidator inputValidator;
+    private final Scanner sc;
+    private final InputValidator inputValidator;
 
     public InputView() {
+        this.sc = new Scanner(System.in);
         this.inputValidator = new InputValidator();
     }
 
     public int inputPurchaseMoney() {
         System.out.println("구입금액을 입력해 주세요");
-        String purchase = validatePurchaseMoney();
+        String input = validatePurchaseMoney();
 
-        return calculateNumOfLotto(purchase);
+        return calculateNumOfLotto(input);
     }
 
     private String validatePurchaseMoney() {
-        String purchase = sc.nextLine();
-        inputValidator.validatePurchaseMoney(purchase, LOTTO_PRICE);
-        return purchase;
+        String input;
+
+        while (true) {
+            input = sc.nextLine();
+            try {
+                inputValidator.validatePurchaseMoney(input, LOTTO_PRICE);
+            } catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+                continue;
+            }
+            break;
+        }
+
+        return input;
     }
 
     private int calculateNumOfLotto(String purchase) {
@@ -43,8 +55,18 @@ public class InputView {
     }
 
     private String validateWinningNumbers() {
-        String input = sc.nextLine();
-        inputValidator.validateWinningNumbers(input, DELIMITER);
+        String input;
+
+        while (true) {
+            input = sc.nextLine();
+            try {
+                inputValidator.validateWinningNumbers(input, DELIMITER);
+            } catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+                continue;
+            }
+            break;
+        }
 
         return input;
     }
