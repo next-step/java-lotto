@@ -15,7 +15,7 @@ public class InputView {
         scanner = new Scanner(System.in);
     }
 
-    public Integer readPurchasePrice() {
+    public int readPurchasePrice() {
         System.out.println(INPUT_PURCHASE_PRICE_MESSAGE);
         return scanner.nextInt();
     }
