@@ -7,6 +7,7 @@ import src.domain.LottoMachine;
 import src.domain.Lottos;
 import src.domain.MatchStatus;
 import src.domain.Money;
+import src.domain.WinningLotto;
 import src.view.InputView;
 import src.view.ResultView;
 
@@ -22,7 +23,7 @@ public class LottoGameController {
         Lottos lottos = lottoMachine.buyLottos(money);
         printLottos(lottos);
 
-        Lotto winningLotto = inputWinningLotto();
+        WinningLotto winningLotto = inputWinningLotto();
 
         MatchStatus matchStatus = lottos.match(winningLotto);
         double profitRate = matchStatus.profitRate(Lotto.PRICE_OF_LOTTO);
@@ -36,13 +37,13 @@ public class LottoGameController {
         ResultView.printLottos(lottos);
     }
 
-    private static Lotto inputWinningLotto() {
+    private static WinningLotto inputWinningLotto() {
         Set<GameNumber> winningNumbers = new HashSet<>(6);
-
         for (Integer number : InputView.inputWinningNumbers()) {
             winningNumbers.add(GameNumber.of(number));
         }
+        GameNumber bonusNumber = GameNumber.of(InputView.inputBonusNumber());
 
-        return Lotto.of(winningNumbers);
+        return WinningLotto.of(Lotto.of(winningNumbers), bonusNumber);
     }
 }

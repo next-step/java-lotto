@@ -1,7 +1,5 @@
 package src.domain;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 public class Lotto {
@@ -15,18 +13,19 @@ public class Lotto {
     }
 
     public static Lotto of(Set<GameNumber> numbers) {
+        if(numbers.size() != 6) {
+            throw new IllegalArgumentException("로또의 번호는 6자리입니다.");
+        }
+
         return new Lotto(numbers);
     }
 
-    public Place match(Lotto lotto) {
-        Map<Boolean, Integer> matchStatus = new HashMap<>(2);
+    public int matchCount(Lotto lotto) {
+        return (int) this.numbers.stream().filter(lotto.numbers::contains).count();
+    }
 
-        for (GameNumber gameNumber : lotto.numbers) {
-            Integer value = matchStatus.getOrDefault(numbers.contains(gameNumber), 0);
-            matchStatus.put(numbers.contains(gameNumber), value + 1);
-        }
-
-        return Place.byMatchedCount(matchStatus.getOrDefault(Boolean.TRUE, 0));
+    public boolean matchBonus(GameNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 
     @Override

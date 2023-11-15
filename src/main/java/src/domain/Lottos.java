@@ -17,7 +17,7 @@ public class Lottos {
         return new Lottos(values);
     }
 
-    public MatchStatus match(Lotto winningLotto) {
+    public MatchStatus match(WinningLotto winningLotto) {
         Map<Place, Integer> matchStatus = new EnumMap<>(Place.class);
         for (Lotto lotto : values) {
             Place place = winningLotto.match(lotto);

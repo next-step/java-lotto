@@ -14,13 +14,12 @@ class MatchStatusTest {
     void 수익_금액을_알_수_있다() {
         // given
         Map<Place, Integer> matchStatusMap = Map.of(Place.FOURTH_PLACE, 1);
-        double expectedProfit = 5000.0; // 4등(5000원) 1개
+        double expectedProfit = 50000.0; // 4등(50000원) 1개
 
         // when
         MatchStatus matchStatus = MatchStatus.of(matchStatusMap);
 
         // then
         assertThat(matchStatus.profit()).isEqualTo(expectedProfit);
-
     }
 }
