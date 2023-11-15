@@ -25,7 +25,6 @@ public class UserInputInformation {
     public UserInputInformation(int amount, String[] manualNumbers, String numbers, int bonusNumber) {
         validateZeroOrNegative(amount);
         validateNonNumeric(numbers);
-        validateNonNumeric(String.join("", manualNumbers));
         this.amount = amount;
         validateManualNumbers(manualNumbers);
         this.numbers = numbers;
@@ -38,6 +37,7 @@ public class UserInputInformation {
         if (manualNumbers.length > amount/1000) {
             throw new IllegalArgumentException("수동 로또 수는 전체 금액을 초과할 수 없습니다.");
         }
+        validateNonNumeric(String.join(", ", manualNumbers));
     }
 
     private void validateDuplicatedNumbers(int bonusNumber) {
@@ -50,7 +50,7 @@ public class UserInputInformation {
 
     private void validateNonNumeric(String numbers) {
         String[] split = numbers.split(NON_NUMERIC_REGEX);
-        if (split.length != 0) {
+        if ((split.length != 0) && (!numbers.isBlank())) {
             throw new IllegalArgumentException("로또 번호만 입력할 수 있습니다.");
         }
     }
@@ -75,5 +75,9 @@ public class UserInputInformation {
 
     public int getBonusNumber() {
         return this.bonusNumber;
+    }
+
+    public String[] getManualNumbers() {
+        return manualNumbers;
     }
 }
