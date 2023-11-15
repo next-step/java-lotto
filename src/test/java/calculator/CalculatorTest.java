@@ -71,7 +71,7 @@ class CalculatorTest {
     }
 
     @Test
-    void assertValidOperator() {
+    void assertInvalidOperator() {
         String input = "1 + 2 % 3";
 
         IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {

@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
@@ -36,19 +37,12 @@ public class Calculator {
             throw new IllegalArgumentException("You can't use other operator");
         }
 
-        int result = 0 ;
-        if (operator.equals("+")) {
-            result = addNum(leftValue, rightValue);
-        }
-        if (operator.equals("-")) {
-            result = subtractNum(leftValue, rightValue);
-        }
-        if (operator.equals("*")) {
-            result = multiplyNum(leftValue, rightValue);
-        }
-        if (operator.equals("/")) {
-            result = divideNum(leftValue, rightValue);
-        }
+        int result = Arrays.stream(Operator.values())
+                .filter(oper -> oper.operator().equals(operator))
+                .findFirst()
+                .get()
+                .calculate(leftValue, rightValue);
+
         return result;
     }
 
