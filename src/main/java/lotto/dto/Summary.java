@@ -20,47 +20,6 @@ public class Summary {
         this.profitRate = profitRate;
     }
 
-    public long firstCount() {
-        return firstCount;
-    }
-
-    public void setFirstCount(long firstCount) {
-        this.firstCount = firstCount;
-    }
-
-    public long secondCount() {
-        return secondCount;
-    }
-
-    public void setSecondCount(long secondCount) {
-        this.secondCount = secondCount;
-    }
-
-    public long thirdCount() {
-        return thirdCount;
-    }
-
-    public void setThirdCount(long thirdCount) {
-        this.thirdCount = thirdCount;
-    }
-
-    public long fourthCount() {
-        return fourthCount;
-    }
-
-    public void setFourthCount(long fourthCount) {
-        this.fourthCount = fourthCount;
-    }
-
-    public float profitRate() {
-        return profitRate;
-    }
-
-    public void setProfitRate(float profitRate) {
-        this.profitRate = profitRate;
-    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

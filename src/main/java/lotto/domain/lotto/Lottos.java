@@ -1,6 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.constants.LottoConstants;
 import lotto.constants.Winning;
 import lotto.domain.lotto.strategy.GenerateStrategy;
 import lotto.dto.Summary;
@@ -10,6 +9,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
+
+    private static final int PRICE_PER_TICKET = 1000;
+
+    private static final String PURCHASE_ERROR_MESSAGE = String.format("로또를 구매할 금액이 부족합니다. 로또 한장의 가격은 %s원 입니다.", PRICE_PER_TICKET);
+
+
     private final List<Lotto> lottos;
     private final long purchasePrice;
 
@@ -30,14 +35,14 @@ public class Lottos {
     }
 
     private static int lottoCount(int purchasePrice) {
-        int lottoCount = purchasePrice / LottoConstants.PRICE_PER_TICKET;
+        int lottoCount = purchasePrice / PRICE_PER_TICKET;
         validation(lottoCount);
         return lottoCount;
     }
 
     private static void validation(int lottoCount) {
         if (noPurchase(lottoCount)) {
-            throw new IllegalArgumentException(LottoConstants.PURCHASE_ERROR_MESSAGE);
+            throw new IllegalArgumentException(PURCHASE_ERROR_MESSAGE);
         }
     }
 
@@ -57,14 +62,13 @@ public class Lottos {
     }
 
     public Summary winningResult(List<Winning> winnings) {
-        Summary summary = new Summary();
-        summary.setFirstCount(winningCount(winnings, Winning.FIRST));
-        summary.setSecondCount(winningCount(winnings, Winning.SECOND));
-        summary.setThirdCount(winningCount(winnings, Winning.THIRD));
-        summary.setFourthCount(winningCount(winnings, Winning.FOURTH));
-        summary.setProfitRate(profitRate(winnings));
 
-        return summary;
+        return new Summary(
+                winningCount(winnings, Winning.FIRST),
+                winningCount(winnings, Winning.SECOND),
+                winningCount(winnings, Winning.THIRD),
+                winningCount(winnings, Winning.FOURTH),
+                profitRate(winnings));
     }
 
     private float profitRate(List<Winning> winnings) {
