@@ -5,6 +5,8 @@ import step1.model.calculate.*;
 
 public class FourBasicOperation {
 
+    private static final int INDEX_OF_OPERATOR = 2;
+
     private final String formula;
 
     public FourBasicOperation(String formula) {
@@ -15,7 +17,7 @@ public class FourBasicOperation {
         String[] formulaInputList = new ConvertFormulaString(formula).get();
         int result = Integer.parseInt(formulaInputList[0]);
 
-        for (int i=2; i < formulaInputList.length; i = i+2) {
+        for (int i=INDEX_OF_OPERATOR; i < formulaInputList.length; i = i+INDEX_OF_OPERATOR) {
             result = calculate(result, Integer.parseInt(formulaInputList[i]), formulaInputList[i-1]);
         }
 
