@@ -1,4 +1,4 @@
-package domain;
+package stringCalculator.domain;
 
 import java.util.function.BiFunction;
 
