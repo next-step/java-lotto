@@ -12,7 +12,7 @@ public class VariableExpressionTest {
     @Test
     void transformCharacterToInteger(){
         VariableExpression variableExpression = new VariableExpression('1');
-        int result = variableExpression.calculate();
+        int result = variableExpression.value();
         assertThat(result).isEqualTo(1);
     }
 

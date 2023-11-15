@@ -8,11 +8,14 @@ import org.junit.jupiter.api.Test;
 
 public class MinusExpressionTest {
 
+    private final static VariableExpression ONE = new VariableExpression('1');
+    private final static VariableExpression TWO = new VariableExpression('2');
+
     @DisplayName("뺄셈을 합니다.")
     @Test
     void minusCalculate(){
-        MinusExpression minusExpression = new MinusExpression(new VariableExpression('5'), new VariableExpression('2'));
-        int result = minusExpression.calculate();
-        Assertions.assertThat(result).isEqualTo(3);
+        MinusExpression minusExpression = new MinusExpression();
+        VariableExpression result = minusExpression.calculate(ONE, TWO);
+        Assertions.assertThat(result.value()).isEqualTo(-1);
     }
 }
