@@ -2,9 +2,7 @@ package lottosecond.domain.lotto;
 
 import lottosecond.domain.WinnerBoard;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -18,8 +16,8 @@ public class Lottos {
     }
 
     public WinnerBoard checkWinnerLotto(String winNumbersString) {
-        List<Integer> winNumbers = extractWinningNumbers(winNumbersString);
-        Lotto winLotto = new Lotto(winNumbers);
+        List<LottoNumber> winNumbers = extractWinningNumbers(winNumbersString);
+        Lotto winLotto = new Lotto(new HashSet<>(winNumbers));
 
         Map<Integer, Long> winnerLottoCount = lottoList.stream()
                 .map(lotto -> lotto.getLottoScore(winLotto))
@@ -45,10 +43,17 @@ public class Lottos {
         return lottoList;
     }
 
-    private List<Integer> extractWinningNumbers(String winNumbersString) {
-        return Arrays.stream(winNumbersString.split(","))
+    private List<LottoNumber> extractWinningNumbers(String winNumbersString) {
+        List<LottoNumber> result = Arrays.stream(winNumbersString.split(","))
                 .map(strNumber -> Integer.parseInt(strNumber.strip()))
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
+
+        if (result.size() != 6) {
+            throw new IllegalArgumentException("로또 번호는 반드시 6개여야 합니다.");
+        }
+
+        return result;
     }
 
     private void fillZeroWinnerLottoCount(Map<Integer, Long> winnerLottoCount) {

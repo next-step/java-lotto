@@ -1,8 +1,9 @@
 package lottosecond.view;
 
-import lottoauto.domain.WinnerBoard;
-import lottoauto.domain.lotto.Lotto;
-import lottoauto.domain.lotto.Lottos;
+
+import lottosecond.domain.WinnerBoard;
+import lottosecond.domain.lotto.Lotto;
+import lottosecond.domain.lotto.Lottos;
 
 public class OutputView {
 

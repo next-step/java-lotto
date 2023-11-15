@@ -1,12 +1,12 @@
 package lottosecond;
 
-import lottoauto.domain.EarningRateCalculator;
-import lottoauto.domain.WinnerBoard;
-import lottoauto.domain.lotto.LottoShuffler;
-import lottoauto.domain.lotto.Lottos;
-import lottoauto.domain.lotto.LottosMaker;
-import lottoauto.view.InputView;
-import lottoauto.view.OutputView;
+import lottosecond.domain.EarningRateCalculator;
+import lottosecond.domain.WinnerBoard;
+import lottosecond.domain.lotto.LottoShuffler;
+import lottosecond.domain.lotto.Lottos;
+import lottosecond.domain.lotto.LottosMaker;
+import lottosecond.view.InputView;
+import lottosecond.view.OutputView;
 
 public class LottoAuto {
 

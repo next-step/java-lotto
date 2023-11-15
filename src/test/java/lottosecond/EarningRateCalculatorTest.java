@@ -4,6 +4,7 @@ import lottosecond.domain.EarningRateCalculator;
 import lottosecond.domain.WinnerBoard;
 import lottosecond.domain.lotto.Lotto;
 import lottosecond.domain.lotto.Lottos;
+import lottosecond.testutil.TestUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,9 +18,9 @@ class EarningRateCalculatorTest {
     @DisplayName("상금 보드를 이용해 총 수익률을 계산해줍니다.")
     void calculateEarningRate() {
         // given
-        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = new Lotto(List.of(7, 8, 9, 10, 11, 12));
-        Lotto lotto3 = new Lotto(List.of(13, 14, 15, 16, 17, 18));
+        Lotto lotto1 = new Lotto(TestUtil.makeLottoNumberSet(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = new Lotto(TestUtil.makeLottoNumberSet(7, 8, 9, 10, 11, 12));
+        Lotto lotto3 = new Lotto(TestUtil.makeLottoNumberSet(13, 14, 15, 16, 17, 18));
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3));
         WinnerBoard winnerBoard = lottos.checkWinnerLotto("4, 5, 6, 7, 8, 9");
         EarningRateCalculator earningRateCalculator = new EarningRateCalculator();
@@ -33,9 +34,9 @@ class EarningRateCalculatorTest {
     @DisplayName("총 수익률이 0이 나오는 경우")
     void zeroEarningRate() {
         // given
-        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = new Lotto(List.of(7, 8, 9, 10, 11, 12));
-        Lotto lotto3 = new Lotto(List.of(13, 14, 15, 16, 17, 18));
+        Lotto lotto1 = new Lotto(TestUtil.makeLottoNumberSet(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = new Lotto(TestUtil.makeLottoNumberSet(7, 8, 9, 10, 11, 12));
+        Lotto lotto3 = new Lotto(TestUtil.makeLottoNumberSet(13, 14, 15, 16, 17, 18));
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3));
         WinnerBoard winnerBoard = lottos.checkWinnerLotto("21, 22, 23, 24, 25, 26");
         EarningRateCalculator earningRateCalculator = new EarningRateCalculator();

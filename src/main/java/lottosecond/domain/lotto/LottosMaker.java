@@ -1,7 +1,10 @@
 package lottosecond.domain.lotto;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottosMaker {
 
@@ -15,7 +18,7 @@ public class LottosMaker {
 
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lottoList.add(new Lotto(shuffle.makeShuffle()));
+            lottoList.add(new Lotto(new HashSet<>(shuffle.makeShuffle())));
         }
 
         return new Lottos(lottoList);

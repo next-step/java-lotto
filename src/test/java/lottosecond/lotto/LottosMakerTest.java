@@ -1,6 +1,7 @@
 package lottosecond.lotto;
 
 import lottosecond.domain.lotto.LottosMaker;
+import lottosecond.testutil.TestUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ class LottosMakerTest {
         // given
         // when
         // then
-        assertThatThrownBy(() -> LottosMaker.makeLottoList(() -> List.of(1, 2, 3, 4, 5, 6), 1200))
+        assertThatThrownBy(() -> LottosMaker.makeLottoList(() -> TestUtil.makeLottoNumberList(1, 2, 3, 4, 5, 6), 1200))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 구매 금액은 1000의 배수여야 합니다.");
     }

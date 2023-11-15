@@ -8,12 +8,13 @@ import java.util.stream.IntStream;
 
 public class LottoShuffler implements CustomShuffle {
 
-    private final List<Integer> defaultLottoNumbers =  IntStream.range(1, 46)
+    private final List<LottoNumber> defaultLottoNumbers =  IntStream.range(1, 46)
             .boxed()
+            .map(LottoNumber::of)
             .collect(Collectors.toList());
 
     @Override
-    public List<Integer> makeShuffle() {
+    public List<LottoNumber> makeShuffle() {
         Collections.shuffle(defaultLottoNumbers, new Random(System.currentTimeMillis()));
         return defaultLottoNumbers.stream().limit(6).collect(Collectors.toList());
     }
