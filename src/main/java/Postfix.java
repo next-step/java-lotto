@@ -26,7 +26,8 @@ public class Postfix {
     }
 
     public static Postfix of(String origin) {
-        return new Postfix(origin);
+        String string = origin.replaceAll("\\s", "");
+        return new Postfix(string);
     }
 
     public String postfixString() {
