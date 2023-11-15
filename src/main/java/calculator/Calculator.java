@@ -5,14 +5,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
-    public static int calculate(String s) {
+    public static int calculate(String input) {
         int result = 0;
         return result;
     }
 
-    public static List<Object> toIntArray(String s) {
-        String[] spliitedString = s.split(" ");
-        return processEachLetter(spliitedString);
+    public static List<Object> toIntArray(String input) {
+        String[] splittedString = input.split(" ");
+        return processEachLetter(splittedString);
     }
 
     private static List<Object> processEachLetter(String[] spliitedString) {
@@ -26,5 +26,9 @@ public class Calculator {
             }
         });
         return result;
+    }
+
+    public static int addNum(int leftValue, int rightValue) {
+        return leftValue+rightValue;
     }
 }

@@ -19,4 +19,11 @@ class CalculatorTest {
 
         assertThat(Calculator.toIntArray("1 + 1")).isEqualTo(result);
     }
+
+    @Test
+    void assertAddNum() {
+        int leftValue = 1;
+        int rightValue = 1;
+        assertThat(Calculator.addNum(leftValue, rightValue)).isEqualTo(2);
+    }
 }
