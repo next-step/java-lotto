@@ -10,7 +10,7 @@ public class ConvertFormulaString {
     }
 
     public String[] get() {
-        if (formula.isEmpty()) {
+        if (formula == null || formula.isEmpty()) {
             throw new IllegalArgumentException("입력 된 연산식이 없습니다.");
         }
 
