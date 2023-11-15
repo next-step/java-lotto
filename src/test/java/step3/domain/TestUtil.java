@@ -1,6 +1,7 @@
 package step3.domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class TestUtil {
@@ -14,10 +15,7 @@ public class TestUtil {
     }
 
     static Lottos lottosFixture(Lotto... lottos) {
-        Lottos result = new Lottos();
-        Arrays.stream(lottos)
-                .forEach(result::addLotto);
-        return result;
+        return new Lottos(List.of(lottos));
     }
 
 }
