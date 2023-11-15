@@ -10,7 +10,17 @@ import java.util.List;
 
 public class LottoController {
 
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final GenerateStrategy strategy;
+
     public LottoController(InputView inputView, OutputView outputView, GenerateStrategy strategy) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+        this.strategy = strategy;
+    }
+
+    public void start() {
         Integer purchasePrice = inputView.readPurchasePrice();
 
         Lottos lottos = Lottos.of(purchasePrice, strategy);
