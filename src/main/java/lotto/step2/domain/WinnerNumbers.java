@@ -1,17 +1,13 @@
 package lotto.step2.domain;
 
-import java.util.Arrays;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class WinnerNumbers {
     private final Lotto winnerLotto;
     private final LottoNumber bonusNumber;
 
-    public WinnerNumbers(final String winnerNumbersText, final int bonusWinnerNumber) {
-        final Set<Integer> integers = conventStringToLottoNumberSet(winnerNumbersText);
-
-        this.winnerLotto = new Lotto(integers);
+    public WinnerNumbers(final Lotto winnerLotto, final int bonusWinnerNumber) {
+        this.winnerLotto = winnerLotto;
 
         final LottoNumber bonusLottoNumber = new LottoNumber(bonusWinnerNumber);
         validateBonusWinnerNumber(bonusLottoNumber);
@@ -23,12 +19,6 @@ public class WinnerNumbers {
         if (this.winnerLotto.contains(bonusLottoNumber)) {
             throw new IllegalArgumentException("bonus winner number must not be in winner nums");
         }
-    }
-
-    private static Set<Integer> conventStringToLottoNumberSet(final String winnerNumbersText) {
-        return Arrays.stream(winnerNumbersText.split(", "))
-                .map(Integer::parseInt)
-                .collect(Collectors.toSet());
     }
 
     public LottoNumber getBonusNumber() {

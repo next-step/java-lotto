@@ -25,7 +25,7 @@ public class InputView {
         List<Lotto> passiveLottos = new ArrayList<>();
 
         while (!passiveLottoCount.isSameWithListSize(passiveLottos)) {
-            passiveLottos.add(inputEachPassiveLottoNumbers());
+            passiveLottos.add(inputLottoNumbers());
             System.out.printf("입력이 필요한 %d개 수동 로또 중에 %d개를 입력하셨습니다.%n",
                     passiveLottoCount.getValue(), passiveLottos.size());
         }
@@ -33,17 +33,17 @@ public class InputView {
         return passiveLottos;
     }
 
-    private static Lotto inputEachPassiveLottoNumbers() {
+    private static Lotto inputLottoNumbers() {
         Lotto lotto = null;
 
         while (lotto == null) {
-            lotto = inputEachPassiveLottoNumbersByScanner();
+            lotto = inputLottoNumbersByScanner();
         }
 
         return lotto;
     }
 
-    private static Lotto inputEachPassiveLottoNumbersByScanner() {
+    private static Lotto inputLottoNumbersByScanner() {
         try {
             final String inputStringLine = new Scanner(System.in).nextLine();
             final Set<Integer> integers = StringToIntegerSetConverter.convert(inputStringLine);
@@ -57,7 +57,7 @@ public class InputView {
     }
 
     private static void printPassiveLottoNumbersException() {
-        System.out.println("숫자로만, ', '를 구분자로 해서, 숫자 6개를 입력해주세요. (예시 : 1, 2, 3, 4, 5, 6)");
+        System.out.println("1 ~ 45까지의 범위의 숫자로만, 중복되지 않게, ', '를 구분자로 해서, 총 6개를 입력해주세요. (예시 : 1, 2, 3, 4, 5, 6 / 11, 23, 29, 33, 40, 44)");
     }
 
     private static PurchaseAmount inputPurchaseAmount() {
@@ -119,15 +119,15 @@ public class InputView {
     }
 
     public static WinnerNumbers inputWinnersNumbers() {
-        final String winnerNumbersText = getWinnerNumbersText();
+        final Lotto winnerLotto = inputWinnerLotto();
         final int bonusWinnerNumber = getBonusWinnerNumber();
 
-        return new WinnerNumbers(winnerNumbersText, bonusWinnerNumber);
+        return new WinnerNumbers(winnerLotto, bonusWinnerNumber);
     }
 
-    private static String getWinnerNumbersText() {
+    private static Lotto inputWinnerLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new Scanner(System.in).nextLine();
+        return inputLottoNumbers();
     }
 
     private static int getBonusWinnerNumber() {

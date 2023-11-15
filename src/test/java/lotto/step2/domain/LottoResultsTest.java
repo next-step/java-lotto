@@ -116,8 +116,9 @@ class LottoResultsTest {
     void testCheckLottoWinningNumbers_LottoRank_FIRST() {
         //given
         int bonusWinnerNumber = 7;
+        final Lotto winnerLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
 
-        final WinnerNumbers winnerNumbers = new WinnerNumbers("1, 2, 3, 4, 5, 6", bonusWinnerNumber);
+        final WinnerNumbers winnerNumbers = new WinnerNumbers(winnerLotto, bonusWinnerNumber);
         final List<Lotto> lottos = List.of(new Lotto(Set.of(1, 2, 3, 4, 5, 6)));
 
         //when
@@ -132,8 +133,9 @@ class LottoResultsTest {
     void testCheckLottoWinningNumbers_LottoRank_SECOND() {
         //given
         int bonusWinnerNumber = 7;
+        final Lotto winnerLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
 
-        final WinnerNumbers winnerNumbers = new WinnerNumbers("1, 2, 3, 4, 5, 6", bonusWinnerNumber);
+        final WinnerNumbers winnerNumbers = new WinnerNumbers(winnerLotto, bonusWinnerNumber);
         final List<Lotto> lottos = List.of(
                 new Lotto(Set.of(1, 2, 3, 4, 5, 7)),
                 new Lotto(Set.of(1, 2, 3, 4, 6, 7)));
@@ -150,8 +152,9 @@ class LottoResultsTest {
     void testCheckLottoWinningNumbers_LottoRank_THIRD() {
         //given
         int bonusWinnerNumber = 7;
+        final Lotto winnerLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
 
-        final WinnerNumbers winnerNumbers = new WinnerNumbers("1, 2, 3, 4, 5, 6", bonusWinnerNumber);
+        final WinnerNumbers winnerNumbers = new WinnerNumbers(winnerLotto, bonusWinnerNumber);
         final List<Lotto> lottos = List.of(
                 new Lotto(Set.of(1, 2, 3, 4, 5, 8)),
                 new Lotto(Set.of(1, 2, 3, 4, 6, 8)),
@@ -170,8 +173,9 @@ class LottoResultsTest {
     void testCheckLottoWinningNumbers_LottoRank_FOURTH() {
         //given
         int bonusWinnerNumber = 7;
+        final Lotto winnerLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
 
-        final WinnerNumbers winnerNumbers = new WinnerNumbers("1, 2, 3, 4, 5, 6", bonusWinnerNumber);
+        final WinnerNumbers winnerNumbers = new WinnerNumbers(winnerLotto, bonusWinnerNumber);
         final List<Lotto> lottos = List.of(
                 new Lotto(Set.of(1, 2, 3, 4, 7, 8)),
                 new Lotto(Set.of(2, 3, 4, 6, 7, 8)),
@@ -191,8 +195,9 @@ class LottoResultsTest {
     void testCheckLottoWinningNumbers_LottoRank_FIFTH() {
         //given
         int bonusWinnerNumber = 7;
+        final Lotto winnerLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
 
-        final WinnerNumbers winnerNumbers = new WinnerNumbers("1, 2, 3, 4, 5, 6", bonusWinnerNumber);
+        final WinnerNumbers winnerNumbers = new WinnerNumbers(winnerLotto, bonusWinnerNumber);
         final List<Lotto> lottos = List.of(
                 new Lotto(Set.of(1, 2, 3, 7, 8, 10)),
                 new Lotto(Set.of(2, 3, 4, 7, 8, 11)),
