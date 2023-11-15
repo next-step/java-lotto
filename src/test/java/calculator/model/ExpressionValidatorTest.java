@@ -25,4 +25,18 @@ public class ExpressionValidatorTest {
             ExpressionValidator.validate("  _ ");
         }).doesNotThrowAnyException();
     }
+
+    @Test
+    @DisplayName("사칙연산 기호가 아닌 기호가 있는 경우 exception 발생 - 괄호 비허용")
+    public void 사칙연산_기호_확인() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            ExpressionValidator.validate("(1+2)-3");
+        });
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            ExpressionValidator.validate("1%3+1");
+        });
+        assertThatCode(() -> {
+            ExpressionValidator.validate("1+2-3");
+        }).doesNotThrowAnyException();
+    }
 }
