@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalculatorTest {
 
-    private Calculator calculator =  new Calculator(new CharacterParser());
+    private Calculator calculator = new Calculator();
 
     @Test
     void 더하기_기능() {
