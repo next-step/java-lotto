@@ -2,6 +2,8 @@ package lotto;
 
 import lotto.type.WinningLevel;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -13,27 +15,6 @@ public class WinningAmount {
 
     private WinningAmount(int winningAmount) {
         this.winningAmount = winningAmount;
-    }
-
-    public static WinningAmount of(WinningLevel winningLevel) {
-        if (winningLevel == WinningLevel.NONE) {
-            return new WinningAmount(0);
-        }
-
-        if (winningLevel == WinningLevel.FIFTH) {
-            return new WinningAmount(5000);
-        }
-
-        if (winningLevel == WinningLevel.FOURTH) {
-            return new WinningAmount(50000);
-        }
-
-        if (winningLevel == WinningLevel.THIRD) {
-            return new WinningAmount(1500000);
-        }
-
-        // 1등
-        return new WinningAmount(2000000000);
     }
 
     public static WinningAmount of(int winningAmount) {

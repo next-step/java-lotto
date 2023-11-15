@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.rule.*;
+import lotto.type.SingleNumber;
 import lotto.type.SixNumberComposition;
 import lotto.type.WinningLevel;
 
@@ -38,29 +40,21 @@ public class WinningNumber {
      * @return 이 로또의 당첨 등수
      */
     public WinningLevel whatRank(Lotto lotto) {
-        final int matchCount = lotto.howManyContain(this.numbers.toList());
+        List<WinningRule> rules = List.of(
+                FirstRule.getInstance(),
+                ThirdRule.getInstance(),
+                FourthRule.getInstance(),
+                FifthRule.getInstance()
+        );
 
-        if (matchCount < 3) {
-            return WinningLevel.NONE;
+        for (WinningRule rule : rules) {
+            //TODO: 이 if문을 빼버리고 for문 하나로 이를 처리할 수 있을까요??
+            if (rule.isMatched(lotto, this)) {
+                return rule.getRank();
+            }
         }
 
-        if (matchCount == 3) {
-            return WinningLevel.FIFTH;
-        }
-
-        if (matchCount == 4) {
-            return WinningLevel.FOURTH;
-        }
-
-        if (matchCount == 5) {
-            return WinningLevel.THIRD;
-        }
-
-        if (matchCount == 6) {
-            return WinningLevel.FIRST;
-        }
-
-        throw new IllegalArgumentException("로또 용지가 당첨 번호와 매치되는 숫자는 6개를 넘을 수 없으나 알 수 없는 이유로 6개를 넘어 " + matchCount +"가 매치되었습니다." + lotto + this);
+        return WinningLevel.NONE;
     }
 
     @Override
@@ -88,5 +82,12 @@ public class WinningNumber {
         return "WinningNumber{" +
                 "numbers=" + numbers +
                 '}';
+    }
+
+    /**
+     * 이 타입과 호환되지 않는 곳에서 사용하기 위하여 리스트로 변환합니다.
+     */
+    public List<SingleNumber> toList() {
+        return List.copyOf(this.numbers.toList());
     }
 }

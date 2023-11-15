@@ -44,7 +44,7 @@ public class Lotto {
      * @param nums 확인할 번호 목록
      * @return 로또 용지가 가지고 있는 번호 개수
      */
-    int howManyContain(List<SingleNumber> nums) {
+    public int howManyContain(List<SingleNumber> nums) {
         int containCount = 0;
         for (SingleNumber num : nums) {
             containCount += this.contains(num) ? 1 : 0;

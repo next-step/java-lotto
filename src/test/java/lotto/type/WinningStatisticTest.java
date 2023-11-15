@@ -2,6 +2,7 @@ package lotto.type;
 
 import controller.WinningStatistic;
 import lotto.WinningAmount;
+import lotto.WinningLevelToAmountTable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -37,8 +38,8 @@ public class WinningStatisticTest {
         statistic.occurs(WinningLevel.THIRD);
         statistic.occurs(WinningLevel.THIRD);
 
-        WinningAmount expectedAmount = WinningAmount.of(WinningLevel.FIRST)
-                .add(WinningAmount.of(WinningLevel.THIRD).multiply(2));
+        WinningAmount expectedAmount = WinningLevelToAmountTable.convert(WinningLevel.FIRST)
+                .add(WinningLevelToAmountTable.convert(WinningLevel.THIRD).multiply(2));
 
         assertThat(statistic.getTotalWinAmount()).isEqualTo(expectedAmount);
     }

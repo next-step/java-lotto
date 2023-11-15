@@ -18,7 +18,7 @@ public class WinningAmountTest {
     })
     @DisplayName("[WinningAmount] 등수 별 당첨 금액 테스트")
     public void amountTest(int winningLevel, int expectedWinningAmount) {
-        assertThat(WinningAmount.of(WinningLevel.of(winningLevel)))
+        assertThat(WinningLevelToAmountTable.convert(WinningLevel.of(winningLevel)))
                 .isEqualTo(WinningAmount.of(expectedWinningAmount));
     }
 }
