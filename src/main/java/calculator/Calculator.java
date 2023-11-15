@@ -4,12 +4,8 @@ import java.util.List;
 
 public class Calculator {
 
-    private final CharacterParser parser;
     private int result;
 
-    public Calculator(CharacterParser parser) {
-        this.parser = parser;
-    }
 
     public int plus(int result, int value) {
         return  result + value;
