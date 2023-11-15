@@ -6,8 +6,6 @@ import java.util.Queue;
 
 public class StringCalculator {
 
-    private static Calculator calculator = new Calculator();
-
     public static Number calc(String strOperation) {
         validateStringOperation(strOperation);
 
@@ -17,9 +15,9 @@ public class StringCalculator {
         Number firstValue = new Number(operatorSequence.poll());
         Number cumulativeValue = firstValue;
         while (!operatorSequence.isEmpty()) {
-            Operator operator = Operator.valueOfLabel(operatorSequence.poll());
+            String operator = operatorSequence.poll();
             Number number = new Number(operatorSequence.poll());
-            cumulativeValue = doOperation(cumulativeValue, operator, number);
+            cumulativeValue = Operator.calculate(cumulativeValue, operator, number);
         }
 
         return cumulativeValue;
@@ -27,22 +25,6 @@ public class StringCalculator {
 
     private static String[] split(String strOperation) {
         return strOperation.split(" ");
-    }
-
-    private static Number doOperation(Number left, Operator operator, Number right) {
-
-        switch (operator) {
-            case ADD:
-                return calculator.add(left, right);
-            case SUBTRACT:
-                return calculator.subtract(left, right);
-            case MULTIPLY:
-                return calculator.multiply(left, right);
-            case DIVIDE:
-                return calculator.divide(left, right);
-        }
-
-        throw new IllegalArgumentException();
     }
 
     private static void validateStringOperation(String strOperation) {
