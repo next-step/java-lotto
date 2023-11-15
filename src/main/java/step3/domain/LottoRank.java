@@ -1,5 +1,7 @@
 package step3.domain;
 
+import java.util.Arrays;
+
 public enum LottoRank {
 
     FIRST(6, 2_000_000_000),
@@ -33,11 +35,8 @@ public enum LottoRank {
         if (matchCount == 5 && matchBonus) {
             return SECOND;
         }
-        for (LottoRank lottoRank : LottoRank.values()) {
-            if (lottoRank.matchCount == matchCount) {
-                return lottoRank;
-            }
-        }
-        return MISS;
+        return Arrays.stream(values())
+                .filter(lottoRank -> lottoRank.matchCount == matchCount)
+                .findFirst().orElse(MISS);
     }
 }
