@@ -1,10 +1,11 @@
 package lotto.step2.input;
 
+import lotto.step2.domain.Lotto;
 import lotto.step2.domain.WinnerNumbers;
 import lotto.step2.service.LottoProgram;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class InputView {
     private InputView() {
@@ -14,8 +15,30 @@ public class InputView {
     public static UserInput input() {
         final PurchaseAmount purchaseAmount = inputPurchaseAmount();
         final PassiveLottoCount passiveLottoCount = inputPassiveLottoCount(purchaseAmount.getMaxPassiveLottoCount());
+        final List<Lotto> passiveLottos = inputPassiveLottoNumbers(passiveLottoCount);
 
-        return new UserInput(purchaseAmount, passiveLottoCount);
+        return new UserInput(purchaseAmount, passiveLottoCount, passiveLottos);
+    }
+
+    private static List<Lotto> inputPassiveLottoNumbers(final PassiveLottoCount passiveLottoCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<Lotto> passiveLottos = new ArrayList<>();
+
+        while (!passiveLottoCount.isSameWithListSize(passiveLottos)) {
+            passiveLottos.add(inputPassiveLottoNumbersByScanner());
+        }
+
+        return passiveLottos;
+    }
+
+    private static Lotto inputPassiveLottoNumbersByScanner() {
+        final String inputStringLine = new Scanner(System.in).nextLine();
+        final String[] splits = inputStringLine.split(", ");
+        final Set<Integer> integers = Arrays.stream(splits)
+                .map(Integer::parseInt)
+                .collect(Collectors.toSet());
+
+        return new Lotto(integers);
     }
 
     private static PurchaseAmount inputPurchaseAmount() {

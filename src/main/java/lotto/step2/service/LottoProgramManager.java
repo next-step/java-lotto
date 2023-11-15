@@ -1,6 +1,7 @@
 package lotto.step2.service;
 
 import lotto.step2.domain.Lotto;
+import lotto.step2.input.UserInput;
 import lotto.step2.util.LottoNumberGenerator;
 
 import java.util.ArrayList;
@@ -11,11 +12,16 @@ public class LottoProgramManager {
         throw new IllegalStateException("Service class");
     }
 
-    public static int calculateNumberOfLottos(final int purchaseAmount, final int lottoPrice) {
-        return purchaseAmount / lottoPrice;
+    public static List<Lotto> generateLottos(final UserInput input) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        lottos.addAll(input.getPassiveLottos());
+        lottos.addAll(genarateAutoLottos(input.getAutoLottoCount()));
+
+        return lottos;
     }
 
-    public static List<Lotto> generateLottos(final int numberOfLottos) {
+    private static List<Lotto> genarateAutoLottos(final int numberOfLottos) {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < numberOfLottos; i++) {

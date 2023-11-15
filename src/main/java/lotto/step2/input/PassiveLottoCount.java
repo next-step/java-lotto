@@ -1,5 +1,9 @@
 package lotto.step2.input;
 
+import lotto.step2.domain.Lotto;
+
+import java.util.List;
+
 public class PassiveLottoCount {
     public static final int MIN_VALUE = 1;
     private final int value;
@@ -17,6 +21,10 @@ public class PassiveLottoCount {
     }
 
     public int getValue() {
-        return value;
+        return this.value;
+    }
+
+    public boolean isSameWithListSize(final List<Lotto> lottos) {
+        return lottos.size() == this.value;
     }
 }

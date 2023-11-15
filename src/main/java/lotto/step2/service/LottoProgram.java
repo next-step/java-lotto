@@ -18,17 +18,15 @@ public class LottoProgram {
 
     public static void start() {
         final UserInput input = InputView.input();
-        final int purchaseAmount = input.getPurchaseAmount();
-        final int numberOfLottos = LottoProgramManager.calculateNumberOfLottos(purchaseAmount, LOTTO_PRICE);
 
-        List<Lotto> lottos = LottoProgramManager.generateLottos(numberOfLottos);
-        ResultView.printLottos(lottos);
+        List<Lotto> lottos = LottoProgramManager.generateLottos(input);
+        ResultView.printLottos(lottos, input.getPassiveLottoCount());
 
         final WinnerNumbers winnerNumbers = InputView.inputWinnersNumbers();
         final LottoResults lottoResults = LottoResults.calculateResults(lottos, winnerNumbers);
         ResultView.printLottoResults(lottoResults);
 
-        final double rateOfReturn = lottoResults.calculateRateOfReturn(purchaseAmount);
+        final double rateOfReturn = lottoResults.calculateRateOfReturn(input.getPurchaseAmount());
         ResultView.printRateOfReturn(rateOfReturn);
     }
 }
