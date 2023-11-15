@@ -41,7 +41,7 @@ public class LottoNumbers {
         return new LinkedHashSet<>(tempNumber);
     }
 
-    public boolean isRight(int winningNumber) {
+    public boolean contains(int winningNumber) {
         return numbers.contains(winningNumber);
     }
 

@@ -38,7 +38,7 @@ public class Lottos {
         final Winning winning = new Winning();
         for (Lotto lotto : lottos) {
 
-            winning.addWinning(lotto.getRightNumber(winningNumbers), lotto.isRightBonusNumber(bonusNumber));
+            winning.addWinning(lotto.getRightNumber(winningNumbers), lotto.contains(bonusNumber));
         }
 
         return winning;

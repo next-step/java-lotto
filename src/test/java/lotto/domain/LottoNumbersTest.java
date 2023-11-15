@@ -17,7 +17,7 @@ class LottoNumbersTest {
         final Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         final LottoNumbers lottoNumbers = new LottoNumbers(numbers);
 
-        final boolean result = lottoNumbers.isRight(3);
+        final boolean result = lottoNumbers.contains(3);
 
         assertThat(result).isTrue();
     }

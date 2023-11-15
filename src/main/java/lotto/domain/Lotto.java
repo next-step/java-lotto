@@ -23,12 +23,12 @@ public class Lotto {
         return rightNumber;
     }
 
-    boolean isRightBonusNumber(final int bonusNumber) {
-        return lottoNumbers.isRight(bonusNumber);
+    boolean contains(final int bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     private int plusRightNumber(int rightNumber, final int winningNumber) {
-        if (lottoNumbers.isRight(winningNumber)) {
+        if (lottoNumbers.contains(winningNumber)) {
             rightNumber++;
         }
         return rightNumber;
