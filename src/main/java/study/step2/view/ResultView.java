@@ -2,7 +2,7 @@ package study.step2.view;
 
 import java.util.List;
 
-import study.step2.domain.LottoNumbers;
+import study.step2.domain.Lotto;
 
 public class ResultView {
 
@@ -10,12 +10,9 @@ public class ResultView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void show(List<LottoNumbers> results) {
-        results.forEach(lottoNumbers -> System.out.println(lottoNumbers.lottoNumbers().toString()));
+    public static void show(List<Lotto> lottos) {
+        lottos.forEach(lotto -> System.out.println(lotto.lottoNumbers().lottoNumbers().toString()));
         System.out.println();
     }
 
-    public static void statistics() {
-
-    }
 }

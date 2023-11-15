@@ -1,9 +1,8 @@
-package study.step2;
+package study.step2.domain.dto;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import study.step2.domain.dto.WinningNumbers;
 import study.step2.domain.exception.LottoException;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;

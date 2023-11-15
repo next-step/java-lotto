@@ -1,7 +1,6 @@
 package study.step2.domain;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -9,7 +8,10 @@ public class LottoNumbers {
 
     public static final int POOL_START_NUMBER = 1;
     public static final int POOL_END_NUMBER = 45;
-    private final List<Integer> lottoNumbers;
+    private List<Integer> lottoNumbers = new ArrayList<>();
+
+    public LottoNumbers() {
+    }
 
     public LottoNumbers(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
@@ -32,4 +34,5 @@ public class LottoNumbers {
     public List<Integer> lottoNumbers() {
         return lottoNumbers;
     }
+
 }

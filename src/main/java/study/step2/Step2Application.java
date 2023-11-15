@@ -2,10 +2,9 @@ package study.step2;
 
 import java.util.*;
 
-import study.step2.domain.LottoNumbers;
-import study.step2.domain.LottoNumbersGenerator;
+import study.step2.domain.Lotto;
+import study.step2.domain.LottoGenerator;
 import study.step2.domain.dto.PurchaseAmount;
-import study.step2.domain.dto.WinningNumbers;
 
 import static study.step2.view.InputView.input;
 import static study.step2.view.InputView.inputWinningNumbers;
@@ -19,15 +18,12 @@ public class Step2Application {
         int numberOfLottos = amount.numberOfLottos();
         lottoCount(numberOfLottos);
 
-        Random random = new Random();
-        List<LottoNumbers> results = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < numberOfLottos; i++) {
-            LottoNumbersGenerator generator = new LottoNumbersGenerator(random);
-            results.add(generator.generate());
+            LottoGenerator generator = new LottoGenerator(new Random());
+            lottos.add(generator.generate());
         }
-        show(results);
-
-        WinningNumbers winningNumbers = inputWinningNumbers();
-
+        show(lottos);
+        lottos.forEach(lotto -> lotto.match(inputWinningNumbers()));
     }
 }

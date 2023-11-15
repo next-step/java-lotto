@@ -38,4 +38,8 @@ public class WinningNumbers {
     public List<Integer> winningNumbers() {
         return winningNumbers;
     }
+
+    public boolean contains(Integer number) {
+        return winningNumbers.contains(number);
+    }
 }
