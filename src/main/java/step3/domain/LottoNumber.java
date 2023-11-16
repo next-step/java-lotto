@@ -2,6 +2,8 @@ package step3.domain;
 
 import step3.cache.LottoNumberCache;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
@@ -31,6 +33,22 @@ public class LottoNumber {
 
     public int number() {
         return number;
+    }
+
+
+    static class LottoNumberCache {
+
+        private static final Map<Integer, LottoNumber> LottoNumberCache = new HashMap<>();
+
+        static {
+            for (int i = NUMBER_BOX_START_NUMBER; i <= NUMBER_BOX_END_NUMBER; i++) {
+                LottoNumberCache.put(i, LottoNumber.of(i));
+            }
+        }
+
+        public static LottoNumber getLottoNumber(int number) {
+            return LottoNumberCache.get(number);
+        }
     }
 
 }
