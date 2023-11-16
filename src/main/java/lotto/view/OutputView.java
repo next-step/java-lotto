@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.constants.Winning;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumbers;
 import lotto.dto.Summary;
 
 import java.util.List;
@@ -25,13 +24,13 @@ public class OutputView {
 
     public void printLottos(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            printNumbers(lotto.lottoNumbers());
+            printNumbers(lotto);
         }
         System.out.println();
     }
 
-    private void printNumbers(LottoNumbers lottoNumbers) {
-        System.out.println(lottoNumbers);
+    private void printNumbers(Lotto lotto) {
+        System.out.println(lotto);
     }
 
     public void printSummary(Summary summary) {

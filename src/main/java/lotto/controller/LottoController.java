@@ -2,7 +2,6 @@ package lotto.controller;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoNumbers;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.strategy.GenerateStrategy;
 import lotto.view.InputView;
@@ -35,7 +34,7 @@ public class LottoController {
 
         int bonusNumber = inputView.readBonusNumber();
 
-        Lotto jackpot = Lotto.of(LottoNumbers.of(jackpotNumber));
+        Lotto jackpot = Lotto.of(jackpotNumber);
         outputView.printSummary(lottos.match(jackpot, LottoNumber.of(bonusNumber)));
     }
 }

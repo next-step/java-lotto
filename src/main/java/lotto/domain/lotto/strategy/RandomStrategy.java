@@ -1,7 +1,7 @@
 package lotto.domain.lotto.strategy;
 
+import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoNumbers;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +21,7 @@ public class RandomStrategy implements GenerateStrategy {
         Collections.shuffle(randomNumber);
 
         return randomNumber.stream()
-                .limit(LottoNumbers.NUMBER_COUNT)
+                .limit(Lotto.NUMBER_COUNT)
                 .collect(Collectors.toList());
     }
 }

@@ -30,7 +30,7 @@ class LottosTest {
     @DisplayName("당첨 통계를 조회한다. 각 등수별 당첨수와 수익률을 반환한다")
     public void match() {
         Lottos lottos = Lottos.of(10000, () -> Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto jackpot = Lotto.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 30, 40)));
+        Lotto jackpot = Lotto.of(Arrays.asList(1, 2, 3, 4, 30, 40));
         Summary match = lottos.match(jackpot, LottoNumber.of(20));
 
         assertThat(match).isEqualTo(new Summary(0, 0, 0, 10, 50f));
