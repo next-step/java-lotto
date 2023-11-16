@@ -1,44 +1,45 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+import static lotto.view.ResultView.printInputMoney;
+import static lotto.view.ResultView.printLastWeekLottoNumbers;
+
 public class InputView {
+
+    private static final Scanner scanner = new Scanner(System.in);
+
     private InputView() {
     }
 
-    public static String inputMoney() {
-        return null;
+    public static int inputMoney() {
+        printInputMoney();
+        return parseInt(scanner.nextLine());
     }
 
-    public static String inputManualLottoCount() {
-        return null;
+
+    public static List<Integer> inputLastWeekLottoNumbers() {
+        printLastWeekLottoNumbers();
+        return parseLottoNumbers(scanner.nextLine());
     }
 
-    public static String inputManualLottoNumbers() {
-        return null;
+    private static int parseInt(String input) {
+        return Integer.parseInt(input);
     }
 
-    public static String inputWinningLottoNumbers() {
-        return null;
+    private static List<Integer> parseLottoNumbers(String input) {
+        input = removeTrim(input);
+        List<String> lottoNumbersString = Arrays.asList(input.split(","));
+        List<Integer> parsedLottoNumbers = lottoNumbersString.stream().mapToInt(Integer::parseInt).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+        return parsedLottoNumbers;
     }
 
-    public static String inputBonusNumber() {
-        return null;
+    private static String removeTrim(String originString) {
+        originString = originString.replace(" ", "");
+        return originString;
     }
-
-    public static String inputLastWeekLottoNumbers() {
-        return null;
-    }
-
-    public static String inputLastWeekBonusNumber() {
-        return null;
-    }
-
-    public static String inputWinningResult() {
-        return null;
-    }
-
-    public static String inputWinningMoney() {
-        return null;
-    }
-
 
 }

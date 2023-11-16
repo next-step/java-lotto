@@ -16,17 +16,17 @@ public class NumberShuffler {
     private NumberShuffler() {
     }
 
-    public static int[] getShuffledNumbers() {
+    public static List<Integer> getShuffledNumbers() {
         List<Integer> shuffledNumbers = toIntegerList(LOTTO_NUMBERS);
         Collections.shuffle(shuffledNumbers);
-        return toIntArray(shuffledNumbers.subList(0, 6));
+        return extractLottoNumbers(shuffledNumbers);
     }
 
     private static List<Integer> toIntegerList(int[] array) {
         return Arrays.stream(array).boxed().collect(Collectors.toList());
     }
 
-    private static int[] toIntArray(List<Integer> list) {
-        return list.stream().mapToInt(Integer::intValue).toArray();
+    private static List<Integer> extractLottoNumbers(List<Integer> shuffledNumbers) {
+        return shuffledNumbers.subList(0, 6);
     }
 }
