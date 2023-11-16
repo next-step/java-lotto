@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
+    public static final int LOTTO_PRICE = 1000;
     private List<Integer> numbers;
 
     public Lotto() {
@@ -33,11 +34,7 @@ public class Lotto {
     public WinningInfoDTO winningInfo(String numbers) {
         int correctCount = correctCount(numbers);
 
-        int winningAmount = Arrays.stream(WinningEnum.values())
-                .filter(winningEnum -> winningEnum.getCorrectCount() == correctCount)
-                .mapToInt(WinningEnum::getWinningAmount)
-                .findFirst()
-                .orElse(0);
+        int winningAmount = WinningEnum.winningAmount(correctCount).orElse(0);
 
         return new WinningInfoDTO(correctCount, winningAmount);
     }
@@ -50,11 +47,8 @@ public class Lotto {
                 .size();
     }
 
-
     @Override
     public String toString() {
-        return "Lotto{" +
-                "numbers=" + numbers +
-                '}';
+        return numbers.toString();
     }
 }
