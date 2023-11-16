@@ -11,14 +11,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int money = inputMoney();
-        LottoSimulator simulator = initLottoSimulator(money);
-
+        LottoSimulator simulator = initLottoSimulator(inputMoney());
         printLottoCount(simulator.getLottoCount());
         printLottos(simulator.getLottos());
 
-        List<Integer> lastWeekLottoNumbers = inputLastWeekLottoNumbers();
-
-        printStatistics(simulator.getStatistics(lastWeekLottoNumbers), simulator.getLottoCount());
+        printStatistics(simulator.getStatistics(inputLastWeekLottoNumbers()), simulator.getLottoCount());
     }
 }
