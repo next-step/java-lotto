@@ -7,8 +7,6 @@ import java.util.Map;
 
 public class LottoResult {
 
-    private static final int LOTTO_MIN_MATCH_COUNT = 3;
-
     private final Map<LottoRank, Long> lottoResult;
 
     public LottoResult(Map<LottoRank, Long> lottoResult) {
@@ -18,7 +16,7 @@ public class LottoResult {
     public List<LottoWinResult> lottoStatistics() {
         List<LottoWinResult> lottoWinResults = new ArrayList<>();
         lottoResult.entrySet().stream()
-                .filter(entry -> entry.getKey().getMatchCount() >= LOTTO_MIN_MATCH_COUNT)
+                .filter(entry -> entry.getKey() != LottoRank.MISS)
                 .forEach(entry -> lottoWinResults.add(new LottoWinResult(entry.getKey().getMatchCount(), entry.getValue(), entry.getKey().isBonus())));
         return lottoWinResults;
     }
