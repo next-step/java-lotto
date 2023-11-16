@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class Lotto {
     private LottoNumbers lottoNumbers;
 
@@ -13,21 +11,12 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    int getRightNumber(List<Integer> winningNumbers) {
-        int rightNumber = 0;
-
-        for (int winningNumber : winningNumbers) {
-            rightNumber = plusRightNumber(rightNumber, winningNumber);
-        }
-
-        return rightNumber;
+    int getRightNumber(LottoNumbers winningNumbers) {
+        return lottoNumbers.getRightNumber(winningNumbers);
     }
 
-    private int plusRightNumber(int rightNumber, final int winningNumber) {
-        if (lottoNumbers.isRight(winningNumber)) {
-            rightNumber++;
-        }
-        return rightNumber;
+    boolean contains(final int bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     @Override

@@ -4,20 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    private static final String INVALID_AMOUNT = "로또 금액보다 높은 금액을 입력해야 합니다.";
-    private static final int LOTTO_AMOUNT = 1000;
     public static final String LINE_BREAK = "\n";
+    private static final int LOTTO_AMOUNT = 1000;
+    public static final String DUPLICATE_BONUS_NUMBER_MSG = "보너스번호는 중복될 수 없습니다.";
+
     private List<Lotto> lottos;
 
-    public Lottos(final int purchaseAmount) {
-        validationCheck(purchaseAmount);
-
-        this.lottos = initLottos(purchaseAmount);
+    public Lottos(final List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    private List<Lotto> initLottos(final int purchaseAmount) {
+    public Lottos(final Amount amount) {
+        this.lottos = initLottos(amount);
+    }
+
+    private List<Lotto> initLottos(final Amount amount) {
         final List<Lotto> lottos = new ArrayList<>();
-        final int purchaseCount = purchaseAmount / LOTTO_AMOUNT;
+
+        final int purchaseCount = (int) amount.divide(new Amount(LOTTO_AMOUNT));
 
         for (int i = 0; i < purchaseCount; i++) {
             lottos.add(new Lotto());
@@ -26,23 +30,26 @@ public class Lottos {
         return lottos;
     }
 
-    private void validationCheck(final int purchaseAmount) {
-        if (purchaseAmount < LOTTO_AMOUNT) {
-            throw new IllegalArgumentException(INVALID_AMOUNT);
-        }
-    }
-
     public int purchaseCount() {
         return lottos.size();
     }
 
-    public WinnerCount draw(final List<Integer> winningNumbers) {
-        final WinnerCount winner = new WinnerCount();
+    public Winning draw(final LottoNumbers winningNumbers, int bonusNumber) {
+
+        validaitonNumber(winningNumbers, bonusNumber);
+
+        final Winning winning = new Winning();
         for (Lotto lotto : lottos) {
-            winner.addWinner(lotto.getRightNumber(winningNumbers));
+            winning.addWinning(lotto.getRightNumber(winningNumbers), lotto.contains(bonusNumber));
         }
 
-        return winner;
+        return winning;
+    }
+
+    private void validaitonNumber(LottoNumbers winningNumbers, int bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER_MSG);
+        }
     }
 
     @Override
