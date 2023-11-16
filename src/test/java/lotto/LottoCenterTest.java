@@ -32,14 +32,31 @@ class LottoCenterTest {
     @Test
     void 당첨_여부_확인() {
         int buyCount = 1;
-        List<Lotto> lottos = new LottoCenter().generateTicket(buyCount);
-        System.out.println("lottos.get(0) = " + lottos.get(0).selectedNumber());
+        LottoCenter lottoCenter = new LottoCenter();
+        List<Lotto> lottos = lottoCenter.generateTicket(buyCount);
         List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-        List<Lotto> checkedLotteries = new LottoCenter().matchWinningNumber(lottos, winningNumber);
-        int result = checkedLotteries.get(0).getMatchCount();
+        lottoCenter.matchWinningNumber(lottos, winningNumber);
+        int result = lottos.get(0).getMatchCount();
 
         assertThat(result).isLessThanOrEqualTo(6);
+    }
+
+    @Test
+    void 통계_당첨_결과() {
+        LottoCenter lottoCenter = new LottoCenter();
+        int cash = 1000;
+        int buyCount = lottoCenter.buyLotto(cash);
+        List<Lotto> lottos = lottoCenter.generateTicket(buyCount);
+
+        List<Integer> winning = Arrays.asList(1, 2, 3, 4, 5, 6);
+        lottoCenter.matchWinningNumber(lottos, winning);
+
+        List<Long> result = lottoCenter.checkWinningResult(lottos);
+        float rate = lottoCenter.checkWinningRate();
+
+        assertThat(result.get(0)).isLessThanOrEqualTo(1);
+        assertThat(rate).isLessThanOrEqualTo(1);
     }
 
 }

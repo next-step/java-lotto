@@ -29,5 +29,12 @@ public class Main {
 
         //당첨 확인
         lottoCenter.matchWinningNumber(lottos, winningNumbers);
+
+        //통계 산출
+        List<Long> result = lottoCenter.checkWinningResult(lottos);
+        float rate = lottoCenter.checkWinningRate();
+
+        //통계 출력
+        resultView.finalResult(result, rate);
     }
 }
