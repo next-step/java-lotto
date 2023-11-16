@@ -22,4 +22,9 @@ public class StringCalculatorTest {
     void minus() {
         assertThat(stringCalculator.calculate("2 - 3")).isEqualTo(-1);
     }
+
+    @Test
+    void multiply() {
+        assertThat(stringCalculator.calculate("2 * 3")).isEqualTo(6);
+    }
 }
