@@ -20,7 +20,7 @@ class LottosTest {
         // given
         Lottos lottos = LottosMaker.makeLottoList(() -> TestUtil.makeLottoNumberList(1, 2, 3, 4, 5, 6), 1000);
         // when
-        WinnerBoard winnerBoard = lottos.checkWinnerLotto("1, 2, 3, 7, 8, 9");
+        WinnerBoard winnerBoard = lottos.checkWinnerLotto(TestUtil.makeLottoNumberList(1, 2, 3, 7, 8, 9));
         // then
         assertThat(winnerBoard).isEqualTo(new WinnerBoard(Map.of(
                 3, 1L,
@@ -35,7 +35,7 @@ class LottosTest {
     void zeroWinningLotto() {
         // given
         Lottos lottos = LottosMaker.makeLottoList(() -> TestUtil.makeLottoNumberList(1, 2, 3, 4, 5, 6), 1000);
-        WinnerBoard winnerBoard = lottos.checkWinnerLotto("11, 12, 13, 14, 15, 16");
+        WinnerBoard winnerBoard = lottos.checkWinnerLotto(TestUtil.makeLottoNumberList(11, 12, 13, 14, 15, 16));
         // then
         assertThat(winnerBoard).isEqualTo(new WinnerBoard(Map.of(
                 3, 0L,
@@ -52,7 +52,7 @@ class LottosTest {
         Lottos lottos = LottosMaker.makeLottoList(() -> TestUtil.makeLottoNumberList(1, 2, 3, 4, 5, 6), 1000);
         // when
         // then
-        assertThatThrownBy(() -> lottos.checkWinnerLotto("1, 2, 3"))
+        assertThatThrownBy(() -> lottos.checkWinnerLotto(TestUtil.makeLottoNumberList(1, 2, 3)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 반드시 6개여야 합니다.");
 
@@ -65,7 +65,7 @@ class LottosTest {
         Lottos lottos = LottosMaker.makeLottoList(() -> TestUtil.makeLottoNumberList(1, 2, 3, 4, 5, 6), 1000);
         // when
         // then
-        assertThatThrownBy(() -> lottos.checkWinnerLotto("1, 2, 3, 3, 4, 5, 6"))
+        assertThatThrownBy(() -> lottos.checkWinnerLotto(TestUtil.makeLottoNumberList(1, 2, 3, 3, 4, 5, 6)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 반드시 6개여야 합니다.");
     }
@@ -77,7 +77,7 @@ class LottosTest {
         Lottos lottos = LottosMaker.makeLottoList(() -> TestUtil.makeLottoNumberList(1, 2, 3, 4, 5, 6), 1000);
         // when
         // then
-        assertThatThrownBy(() -> lottos.checkWinnerLotto("1, 2, 3, 3, 4, 5"))
+        assertThatThrownBy(() -> lottos.checkWinnerLotto(TestUtil.makeLottoNumberList(1, 2, 3, 3, 4, 5)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 반드시 6개여야 합니다.");
 

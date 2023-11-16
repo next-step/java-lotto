@@ -8,15 +8,19 @@ import java.util.stream.IntStream;
 
 public class Lottos {
 
-    private final List<Lotto> lottoList;
     public static final int EACH_LOTTO_PRICE = 1000;
+
+    private final List<Lotto> lottoList;
 
     public Lottos(List<Lotto> lottoList) {
         this.lottoList = lottoList;
     }
 
-    public WinnerBoard checkWinnerLotto(String winNumbersString) {
-        List<LottoNumber> winNumbers = extractWinningNumbers(winNumbersString);
+    public WinnerBoard checkWinnerLotto(List<LottoNumber> winNumbers) {
+        if (winNumbers.size() != 6) {
+            throw new IllegalArgumentException("로또 번호는 반드시 6개여야 합니다.");
+        }
+
         Lotto winLotto = new Lotto(new HashSet<>(winNumbers));
 
         Map<Integer, Long> winnerLottoCount = lottoList.stream()
@@ -43,18 +47,6 @@ public class Lottos {
         return lottoList;
     }
 
-    private List<LottoNumber> extractWinningNumbers(String winNumbersString) {
-        List<LottoNumber> result = Arrays.stream(winNumbersString.split(","))
-                .map(strNumber -> Integer.parseInt(strNumber.strip()))
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
-
-        if (result.size() != 6) {
-            throw new IllegalArgumentException("로또 번호는 반드시 6개여야 합니다.");
-        }
-
-        return result;
-    }
 
     private void fillZeroWinnerLottoCount(Map<Integer, Long> winnerLottoCount) {
         IntStream.range(3, 7).boxed()

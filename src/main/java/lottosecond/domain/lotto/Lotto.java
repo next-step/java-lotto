@@ -4,10 +4,12 @@ import java.util.Set;
 
 public class Lotto {
 
+    public static final int LOTTO_SIZE = 6;
+
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 반드시 6개여야 합니다.");
         }
         this.lottoNumbers = lottoNumbers;
