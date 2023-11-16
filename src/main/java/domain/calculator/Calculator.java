@@ -11,23 +11,27 @@ public class Calculator implements CalculatorAble {
 
     private final Operators operators;
     private final Numbers numbers;
-    private String input;
 
     public Calculator() {
         operators = new Operators();
         numbers = new Numbers();
     }
 
-    public String getInput() {
-        return input;
-    }
-
     public Numbers getNumbers() {
         return numbers;
     }
 
-    public int doCalculate(String input) {
+    public Operators getOperators() {
+        return operators;
+    }
+
+    public int getResult(String input) {
         String[] strings = StringParser.parseWhiteSpace(input);
+        setNumbersAndOperators(strings);
+        return doCalculate();
+    }
+
+    private void setNumbersAndOperators(String[] strings) {
         Arrays.stream(strings).forEach(o -> {
             try {
                 int integer = Integer.parseInt(o);
@@ -41,32 +45,38 @@ public class Calculator implements CalculatorAble {
                 throw new IllegalArgumentException("잘못된 입력입니다.");
             }
         });
+    }
 
-
-        this.input = input;
-
+    private int doCalculate() {
         int result = 0;
-
         int i = 0;
         while (i != operators.size()) {
-            if (operators.getOperatorList().get(i).getValue() == OperatorEnum.PLUS) {
-                result += sum(numbers.getNumbers().get(i).getValue(), numbers.getNumbers().get(i + 1).getValue());
-            }
-
-            if (operators.getOperatorList().get(i).getValue() == OperatorEnum.MINUS) {
-                result += subtract(numbers.getNumbers().get(i).getValue(), numbers.getNumbers().get(i + 1).getValue());
-            }
-
-            if (operators.getOperatorList().get(i).getValue() == OperatorEnum.MULTIPLY) {
-                result += multiply(numbers.getNumbers().get(i).getValue(), numbers.getNumbers().get(i + 1).getValue());
-            }
-
-            if (operators.getOperatorList().get(i).getValue() == OperatorEnum.DIVIDE) {
-                result += divide(numbers.getNumbers().get(i).getValue(), numbers.getNumbers().get(i + 1).getValue());
-            }
+            int leftNumber = i == 0 ? numbers.getNumberList().get(i).getValue() : result;
+            int rightNumber = numbers.getNumberList().get(i + 1).getValue();
+            result = calculate(leftNumber, rightNumber, operators.getOperatorList().get(i));
             i++;
         }
 
         return result;
+    }
+
+    private int calculate(int leftNumber, int rightNumber, Operator operator) {
+        if (operator.getValue() == OperatorEnum.PLUS) {
+            return sum(leftNumber, rightNumber);
+        }
+
+        if (operator.getValue() == OperatorEnum.MINUS) {
+            return subtract(leftNumber, rightNumber);
+        }
+
+        if (operator.getValue() == OperatorEnum.MULTIPLY) {
+            return multiply(leftNumber, rightNumber);
+        }
+
+        if (operator.getValue() == OperatorEnum.DIVIDE) {
+            return divide(leftNumber, rightNumber);
+        }
+        
+        throw new IllegalArgumentException("잘못된 입력입니다.");
     }
 }

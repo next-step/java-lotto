@@ -1,6 +1,7 @@
 package domain;
 
 import domain.calculator.Calculator;
+import domain.calculator.vo.OperatorEnum;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,16 +21,19 @@ class CalculatorTest {
     @Test
     void calculator_register_input_success() {
         Calculator calculator = new Calculator();
-        calculator.doCalculate("1 + 2");
+        calculator.getResult("1 + 2");
 
-        assertThat(calculator.getInput()).isEqualTo("1 + 2");
+        assertThat(calculator.getNumbers().getNumberList())
+                .extracting("value").containsExactly(1, 2);
+        assertThat(calculator.getOperators().getOperatorList())
+                .extracting("value").containsExactly(OperatorEnum.PLUS);
     }
 
     @DisplayName("Calculator 수식 계산 (더하기) 성공")
     @Test
     void calculator_sum_success() {
         Calculator calculator = new Calculator();
-        int result = calculator.doCalculate("1 + 2");
+        int result = calculator.getResult("1 + 2");
 
         assertThat(result).isEqualTo(3);
     }
@@ -38,7 +42,7 @@ class CalculatorTest {
     @Test
     void calculator_subtract_success() {
         Calculator calculator = new Calculator();
-        int result = calculator.doCalculate("1 - 2");
+        int result = calculator.getResult("1 - 2");
 
         assertThat(result).isEqualTo(-1);
     }
@@ -47,7 +51,7 @@ class CalculatorTest {
     @Test
     void calculator_multiply_success() {
         Calculator calculator = new Calculator();
-        int result = calculator.doCalculate("1 * 2");
+        int result = calculator.getResult("1 * 2");
 
         assertThat(result).isEqualTo(2);
     }
@@ -56,7 +60,25 @@ class CalculatorTest {
     @Test
     void calculator_divide_success() {
         Calculator calculator = new Calculator();
-        int result = calculator.doCalculate("2 / 2");
+        int result = calculator.getResult("2 / 2");
+
+        assertThat(result).isEqualTo(1);
+    }
+
+    @DisplayName("요구사항 입력값(2 + 3 * 4 / 2) 계산 성공")
+    @Test
+    void calculate_complex_success() {
+        Calculator calculator = new Calculator();
+        int result = calculator.getResult("2 + 3 * 4 / 2");
+
+        assertThat(result).isEqualTo(10);
+    }
+
+    @DisplayName("소숫점 결과의 나눗셈은 정수 자리만 리턴한다.")
+    @Test
+    void calculate_divide_success() {
+        Calculator calculator = new Calculator();
+        int result = calculator.getResult("5 / 3");
 
         assertThat(result).isEqualTo(1);
     }
