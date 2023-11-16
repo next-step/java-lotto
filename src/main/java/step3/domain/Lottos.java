@@ -26,5 +26,4 @@ public class Lottos {
                 .filter(LottoRank::isNotMiss)
                 .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
     }
-
 }

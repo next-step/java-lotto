@@ -30,5 +30,4 @@ public class LottoNumberTest {
         assertThat(LottoNumber.of(1)).isEqualTo(LottoNumber.of(1));
     }
 
-
 }

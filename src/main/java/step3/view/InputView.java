@@ -64,5 +64,4 @@ public class InputView {
         return LottoNumber.of(intInputProcessor.processInput(scanner).get());
     }
 
-
 }

@@ -12,6 +12,7 @@ public class LottoMachineTest {
 
     private static final int PAID_MONEY = 20_000;
     private static final Lottos lottos = TestUtil.lottosFixtureHasSizeOne();
+  
     @Test
     @DisplayName("로또머신은 구매한 로또 리스트를 반환한다.")
     void playReturn() {
@@ -47,4 +48,5 @@ public class LottoMachineTest {
     void purchaseWithManualLotto(){
         assertThat(new LottoMachine().play(PAID_MONEY, TestUtil.lottosFixtureHasSizeOne())).isInstanceOf(Lottos.class);
     }
+
 }

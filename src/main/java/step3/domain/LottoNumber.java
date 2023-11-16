@@ -1,6 +1,5 @@
 package step3.domain;
 
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -33,7 +32,6 @@ public class LottoNumber {
     public int number() {
         return number;
     }
-
 
     static class LottoNumberCache {
 
