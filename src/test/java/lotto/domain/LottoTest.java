@@ -16,7 +16,8 @@ public class LottoTest {
         // given when
         Lotto lotto = Lotto.of(Arrays.asList(3, 6, 5, 4, 1, 2));
         // then
-        assertThat(lotto.getNums()).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(lotto.getLottoNums())
+                .containsExactly(new LottoNum(1), new LottoNum(2), new LottoNum(3), new LottoNum(4), new LottoNum(5), new LottoNum(6));
     }
 
     @Test

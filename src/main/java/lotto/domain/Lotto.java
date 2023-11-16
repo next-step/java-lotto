@@ -21,11 +21,7 @@ public class Lotto {
     }
 
     public List<LottoNum> getLottoNums() {
-        return lottoNums;
-    }
-
-    public List<Integer> getNums() {
-        return lottoNums.stream().map(LottoNum::getNum).collect(Collectors.toList());
+        return Collections.unmodifiableList(lottoNums);
     }
 
     private void validate(List<LottoNum> lottoNums) {
