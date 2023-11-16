@@ -1,10 +1,10 @@
 package lotto.domain;
 
 public class LottoWinResult {
-    private long machCount;
-    private long prizeAmount;
-    private long winCount;
-    private boolean isBonus;
+    private final long machCount;
+    private final long prizeAmount;
+    private final long winCount;
+    private final boolean isBonus;
 
     public LottoWinResult(long machCount, long winCount, boolean isBonus) {
         this.machCount = machCount;
