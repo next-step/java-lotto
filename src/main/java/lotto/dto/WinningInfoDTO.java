@@ -1,16 +1,16 @@
 package lotto.dto;
 
 public class WinningInfoDTO {
-    private int rank;
+    private int correctCount;
     private int winningAmount;
 
-    public WinningInfoDTO(int rank, int winningAmount) {
-        this.rank = rank;
+    public WinningInfoDTO(int correctCount, int winningAmount) {
+        this.correctCount = correctCount;
         this.winningAmount = winningAmount;
     }
 
-    public int getRank() {
-        return rank;
+    public int getCorrectCount() {
+        return correctCount;
     }
 
     public int getWinningAmount() {
