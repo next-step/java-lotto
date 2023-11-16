@@ -19,6 +19,10 @@ public class Lotto {
                 .count();
     }
 
+    public boolean hasLottoNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     @Override
     public String toString() {
         return String.valueOf(lottoNumbers);
