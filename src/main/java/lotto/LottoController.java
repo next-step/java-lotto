@@ -9,6 +9,7 @@ import lotto.domain.WinningRank;
 import lotto.view.InputView;
 import lotto.view.PrintView;
 
+import java.util.List;
 import java.util.Map;
 
 public class LottoController {
@@ -16,8 +17,11 @@ public class LottoController {
         long inputAmount = InputView.requestPurchaseAmount();
         Money userMoney = new Money(inputAmount);
 
-        LottoMachine lottoMachine = new LottoMachine(userMoney);
-        PrintView.printLottoTickets(lottoMachine.getLottoTickets());
+        int manualLottoCount = InputView.requestManualLottoCount();
+        List<String> manualLottoNumbers = InputView.requestManualLottoNumber(manualLottoCount);
+
+        LottoMachine lottoMachine = LottoMachine.buyLottos(userMoney, manualLottoNumbers);
+        PrintView.printLottoTickets(lottoMachine.getLottos(), lottoMachine.getManaulLottos());
 
         String winningNumbers = InputView.requestWinningNumber();
         int bonusNumber = InputView.requestBonusNumber();
