@@ -3,14 +3,13 @@ package view;
 import domain.Lotto;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class ResultView {
 
     private ResultView() {
     }
 
-    public static void printLottoCount(Long count) {
+    public static void printLottoCount(int count) {
         System.out.println(count + "개를 구매했습니다.");
     }
 

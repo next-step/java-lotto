@@ -2,7 +2,7 @@ package Lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import util.LottoNumber;
+import domain.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;

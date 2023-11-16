@@ -1,11 +1,10 @@
 import domain.Lotto;
 import domain.LottoService;
-import domain.LottoWinningInfo;
-import policy.SplitWinningNumber;
+import domain.WinningLotto;
+import validator.LottoNumberValidator;
 import view.InputView;
 import view.ResultView;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoApplication {
@@ -15,11 +14,11 @@ public class LottoApplication {
 
         Long money = InputView.inputLottoPurchaseAmount();
         List<Lotto> lottoTickets = lottoService.generateLotto(money);
+        ResultView.printLottoCount(lottoTickets.size());
         ResultView.printLottoNumbers(lottoTickets);
 
-        String InputWinningNumbers = InputView.inputWinningNumbers();
-        String[] winningNumbers = SplitWinningNumber.splitByComma(InputWinningNumbers);
-        LottoWinningInfo winnerNumber = new LottoWinningInfo(Arrays.asList(winningNumbers));
+        String inputWinningNumbers = InputView.inputWinningNumbers();
+        lottoService.generateWinningInfo(inputWinningNumbers);
 
     }
 }
