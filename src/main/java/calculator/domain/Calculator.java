@@ -9,7 +9,9 @@ public class Calculator {
         Iterator<String> iterator = origin.iterator();
         Variable result = Variable.of(iterator.next());
         while (iterator.hasNext()){
-            result = Expression.of(iterator.next()).expression(result, Variable.of(iterator.next())).calculate();
+            String anyExpression = iterator.next();
+            String anyVariable = iterator.next();
+            result = Expression.of(anyExpression).expression(result, Variable.of(anyVariable)).calculate();
         }
         return result;
     }
