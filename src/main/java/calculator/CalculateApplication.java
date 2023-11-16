@@ -3,7 +3,7 @@ package calculator;
 import calculator.view.InputView;
 import calculator.view.ResultView;
 
-import static calculator.Calculator.calculate;
+import static calculator.domain.Calculator.calculate;
 
 public class CalculateApplication {
     public static void main(String[] args) {
