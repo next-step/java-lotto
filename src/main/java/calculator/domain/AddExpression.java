@@ -12,6 +12,6 @@ public class AddExpression implements CalculatorExpression {
 
     public VariableExpression calculate() {
         int result = left.value() + right.value();
-        return new VariableExpression(Character.forDigit(result, CalculatorExpression.RADIX));
+        return new VariableExpression(Integer.toString(result));
     }
 }

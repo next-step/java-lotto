@@ -11,7 +11,7 @@ public class VariableExpressionTest {
     @DisplayName("캐릭터를 정수로 바꿉니다.")
     @Test
     void transformCharacterToInteger(){
-        VariableExpression variableExpression = new VariableExpression('1');
+        VariableExpression variableExpression = new VariableExpression("1");
         int result = variableExpression.value();
         assertThat(result).isEqualTo(1);
     }

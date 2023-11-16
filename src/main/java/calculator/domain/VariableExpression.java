@@ -2,13 +2,13 @@ package calculator.domain;
 
 public class VariableExpression{
 
-    private final char character;
+    private final String string;
 
-    public VariableExpression(char character) {
-        this.character = character;
+    public VariableExpression(String string) {
+        this.string = string;
     }
 
     public int value(){
-        return Character.getNumericValue(character);
+        return Integer.parseInt(string);
     }
 }

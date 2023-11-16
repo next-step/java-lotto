@@ -9,8 +9,8 @@ import java.util.function.BiFunction;
 
 public class Calculator {
 
-    public static VariableExpression calculate(List<Character> origin) {
-        Iterator<Character> iterator = origin.iterator();
+    public static VariableExpression calculate(List<String> origin) {
+        Iterator<String> iterator = origin.iterator();
         VariableExpression result = new VariableExpression(iterator.next());
         while (iterator.hasNext()){
             CalculatorService calculatorService = new CalculatorService();

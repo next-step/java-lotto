@@ -10,14 +10,12 @@ import org.junit.jupiter.api.Test;
 
 public class MultiplicationExpressionTest {
 
-    private final static VariableExpression ONE = new VariableExpression('1');
-    private final static VariableExpression TWO = new VariableExpression('2');
 
     @DisplayName("곱셈을 합니다.")
     @Test
     void multiplicationCalculate() {
-        MultiplicationExpression multiplicationExpression = new MultiplicationExpression();
-        VariableExpression result = multiplicationExpression.calculate(ONE, TWO);
+        MultiplicationExpression multiplicationExpression = new MultiplicationExpression(TestProperties.ONE, TestProperties.TWO);
+        VariableExpression result = multiplicationExpression.calculate();
         assertThat(result.value()).isEqualTo(2);
     }
 }

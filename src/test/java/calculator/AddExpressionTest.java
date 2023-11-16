@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 
 public class AddExpressionTest {
 
-    private final static VariableExpression ONE = new VariableExpression('1');
-    private final static VariableExpression TWO = new VariableExpression('2');
+    private final static VariableExpression ONE = new VariableExpression("1");
+    private final static VariableExpression TWO = new VariableExpression("2");
     @DisplayName("덧셈을 합니다.")
     @Test
     void plusCalculate(){

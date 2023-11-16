@@ -12,17 +12,17 @@ import java.util.function.Function;
 
 public class CalculatorService {
 
-    private static Map<Character, BiFunction<VariableExpression,VariableExpression, CalculatorExpression>> expressionMap;
+    private static Map<String, BiFunction<VariableExpression,VariableExpression, CalculatorExpression>> expressionMap;
 
     public CalculatorService() {
         expressionMap = new HashMap<>();
-        expressionMap.put('+', AddExpression::new);
-        expressionMap.put('-', MinusExpression::new);
-        expressionMap.put('*', MultiplicationExpression::new);
-        expressionMap.put('/', DivideExpression::new);
+        expressionMap.put("+", AddExpression::new);
+        expressionMap.put("-", MinusExpression::new);
+        expressionMap.put("*", MultiplicationExpression::new);
+        expressionMap.put("/", DivideExpression::new);
     }
 
-    public BiFunction<VariableExpression, VariableExpression, CalculatorExpression> typeOfExpression(char mark){
+    public BiFunction<VariableExpression, VariableExpression, CalculatorExpression> typeOfExpression(String mark){
         return expressionMap.get(mark);
     }
 }
