@@ -3,7 +3,6 @@ package calculator.domain;
 
 import calculator.domain.operator.Operator;
 import calculator.domain.operator.OperatorFactory;
-import calculator.exception.DivisionResultFloatException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -56,12 +55,12 @@ public class OperatorTest {
     }
 
     @Test
-    @DisplayName("나눗셈/결과가 소수점/DivisionResultFloatException")
+    @DisplayName("나눗셈/결과가 소수점/IllegalArgumentException")
     void divisionFailFloat() {
         // given
         Operator operator = OperatorFactory.of("/");
 
         // when then
-        assertThatThrownBy(() -> operator.operate(4, 3)).isInstanceOf(DivisionResultFloatException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> operator.operate(4, 3));
     }
 }
