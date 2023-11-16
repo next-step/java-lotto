@@ -13,16 +13,16 @@ public class LottoResult {
         this.four = four;
         this.five = five;
         this.six = six;
-        this.rateOfReturn= rateOfReturn;
+        this.rateOfReturn = rateOfReturn;
     }
 
     @Override
     public String toString() {
         String rateOfReturnMessage = "입니다.(기준이 0이기 때문에 결과적으로 손해라는 의미임)";
-        if(this.rateOfReturn == 0){
+        if (this.rateOfReturn == 0) {
             rateOfReturnMessage = "입니다.(기준이 0이기 때문에 결과적으로 본전임)";
         }
-        if(this.rateOfReturn > 0){
+        if (this.rateOfReturn > 0) {
             rateOfReturnMessage = "입니다.(기준이 0이기 때문에 결과적으로 수익이라는 의미임)";
         }
         return "당첨 통계" + "\n" +

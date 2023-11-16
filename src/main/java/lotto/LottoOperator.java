@@ -25,6 +25,7 @@ public class LottoOperator {
                 return x / y;
             }
         };
+
         public abstract double apply(double x, double y);
     }
 

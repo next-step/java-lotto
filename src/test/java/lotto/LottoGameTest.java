@@ -22,9 +22,9 @@ class LottoGameTest {
     @DisplayName("로또 번호 정렬")
     void sortLottoNumber_로또넘버정렬() {
 
-        List<Integer> numbers = new ArrayList(Arrays.asList(1,4,3,5,2,6));
+        List<Integer> numbers = new ArrayList(Arrays.asList(1, 4, 3, 5, 2, 6));
         Lotto lotto1 = new Lotto(LottoGame.sortLottoNumber((ArrayList<Integer>) numbers));
-        Lotto lotto2 = new Lotto(new ArrayList(Arrays.asList(1,2,3,4,5,6)));
+        Lotto lotto2 = new Lotto(new ArrayList(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         assertThat(lotto1).isEqualTo(lotto2);
     }
@@ -42,7 +42,7 @@ class LottoGameTest {
 
         String values = "1, 2, 3, 4, 5, 6";
         List<Integer> convertLastLottoNumbers = LottoGame.convertLastLottoNumbers(values);
-        Lotto lotto = new Lotto(new ArrayList(Arrays.asList(1,4,6,7,8,9)));
+        Lotto lotto = new Lotto(new ArrayList(Arrays.asList(1, 4, 6, 7, 8, 9)));
         int matchCount = lotto.matchCount(convertLastLottoNumbers);
         assertThat(matchCount).isEqualTo(3);
     }

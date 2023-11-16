@@ -14,12 +14,12 @@ public class Lotto {
     }
 
 
-    public int matchCount(List<Integer> numberList){
+    public int matchCount(List<Integer> numberList) {
         return matchNumber(numberList).size();
     }
 
 
-    private Set<Integer> matchNumber(List<Integer> numberList){
+    private Set<Integer> matchNumber(List<Integer> numberList) {
         return findCommonElements(numberList, this.numbers);
     }
 
@@ -42,6 +42,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return numbers.toString() ;
+        return numbers.toString();
     }
 }
