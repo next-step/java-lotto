@@ -12,7 +12,7 @@ import java.util.Map;
 public class PrintView {
 
     public static void printLottoTickets(Lottos manualLottos, Lottos autoLottos) {
-        System.out.println("수동으로 " + manualLottos.countLotto() + "장, 자동으로 " + autoLottos.countLotto() + "장을 구매했습니다.");
+        System.out.println("수동으로 " + manualLottos.getLottos().size() + "장, 자동으로 " + autoLottos.getLottos().size() + "장을 구매했습니다.");
         manualLottos.getLottos().forEach(System.out::println);
         autoLottos.getLottos().forEach(System.out::println);
     }
