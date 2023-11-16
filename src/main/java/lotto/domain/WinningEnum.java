@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public enum WinningEnum {
     FIRST(6,2000000000),
     THIRD(5,1500000),
@@ -14,11 +17,10 @@ public enum WinningEnum {
         this.winningAmount = winningAmount;
     }
 
-    public int getCorrectCount() {
-        return correctCount;
-    }
-
-    public int getWinningAmount() {
-        return winningAmount;
+    public static Optional<Integer> winningAmount(int correctCount) {
+        return Arrays.stream(WinningEnum.values())
+                .filter(value -> value.correctCount == correctCount)
+                .map(value -> value.winningAmount)
+                .findFirst();
     }
 }
