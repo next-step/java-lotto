@@ -4,7 +4,7 @@ import calculator.domain.Calculator;
 import calculator.domain.Number;
 
 import java.util.Arrays;
-import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 public enum Operator {
 
@@ -14,10 +14,10 @@ public enum Operator {
     DIVIDE("/", (a, b) -> divide(a, b));
 
     private final String label;
-    private final BiFunction<Number, Number, Number> expression;
+    private final BinaryOperator<Number> expression;
     private static Calculator calculator = new Calculator();
 
-    Operator(final String label, BiFunction<Number, Number, Number> expression) {
+    Operator(final String label, BinaryOperator<Number> expression) {
         this.label = label;
         this.expression = expression;
     }
