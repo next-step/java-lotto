@@ -9,4 +9,9 @@ public class Lotto {
     public Lotto(List<Integer> generatedNumbers) {
         this.lottoNumbers = new LottoNumbers(generatedNumbers);
     }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }

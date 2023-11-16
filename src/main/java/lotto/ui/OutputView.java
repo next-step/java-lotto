@@ -1,5 +1,9 @@
 package lotto.ui;
 
+import lotto.domain.Lotto;
+
+import java.util.List;
+
 public class OutputView {
 
     public static void outputQuantity(int amount) {
@@ -7,6 +11,12 @@ public class OutputView {
     }
 
     private static int numberOfLottos(int amount) {
-        return amount / 1000;
+        return amount;
+    }
+
+    public static void outputLottos(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto.toString());
+        }
     }
 }
