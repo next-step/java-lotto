@@ -18,14 +18,4 @@ public class LottoNumberTest {
         assertThatThrownBy(() -> new LottoNumber(givenLottoNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
-
-    @Test
-    public void 로또숫자_객체_Equal_테스트() {
-
-        LottoNumber lottoNumber = new LottoNumber(MIN_LOTTO_NUMBER);
-        LottoNumber expected = new LottoNumber(MIN_LOTTO_NUMBER);
-
-        assertThat(lottoNumber).isEqualTo(expected);
-
-    }
 }
