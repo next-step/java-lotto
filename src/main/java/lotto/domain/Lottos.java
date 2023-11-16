@@ -43,6 +43,14 @@ public class Lottos {
         return Collections.unmodifiableList(allLottos);
     }
 
+    public void addLotto(Lotto lotto) {
+        this.lottos.add(lotto);
+    }
+
+    public int countLottoSize() {
+        return this.lottos.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

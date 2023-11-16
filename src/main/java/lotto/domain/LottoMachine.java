@@ -11,47 +11,37 @@ public class LottoMachine {
 
     private static final int LOTTO_PRICE = 1_000;
     private final Lottos lottos;
-    private final Lottos manaulLottos;
-
 
     public LottoMachine(Money money) {
         this.lottos = Lottos.of(calcPossibleLottoCount(money));
-        this.manaulLottos = Lottos.of(0);
     }
 
-    public LottoMachine(Lottos lottos, Lottos manaulLottos) {
-        this.lottos = lottos;
-        this.manaulLottos = manaulLottos;
+    public LottoMachine(Money money, List<String> manualNumbers) {
+        this.lottos = Lottos.of(calcAutoLottoCount(money, manualNumbers.size()));
+        List<List<Integer>> manualLottoNumbers = parseManulNumbers(manualNumbers);
+
+        manualLottoNumbers.stream()
+                .map(Lotto::new)
+                .forEach(this.lottos::addLotto);
     }
 
-    public static LottoMachine buyLottos(Money money, List<String> manualNumbers) {
-        int autoLottoCount = calcAutoLottoCount(money, manualNumbers.size());
-
-        return new LottoMachine(Lottos.of(autoLottoCount), Lottos.of(parseManulNumbers(manualNumbers)));
+    public List<Lotto> getLottos() {
+        return lottos.getLottos();
     }
 
-    public Lottos getLottoTickets() {
-        List<Lotto> totalLottos = this.lottos.sumLottos(this.manaulLottos);
-        return new Lottos(totalLottos);
+    public int countTotalLotto() {
+        return this.lottos.countLottoSize();
     }
 
-    public Lottos getLottos() {
-        return lottos;
-    }
-
-    public Lottos getManaulLottos() {
-        return manaulLottos;
-    }
-
-    private static int calcPossibleLottoCount(Money money) {
+    private int calcPossibleLottoCount(Money money) {
         return (int) money.getMoney() / LOTTO_PRICE;
     }
 
-    private static int calcAutoLottoCount(Money money, int manualLottoCount) {
-        return calcPossibleLottoCount(money) - manualLottoCount;
+    private int calcAutoLottoCount(Money money, int manaulLottoCount) {
+        return calcPossibleLottoCount(money) - manaulLottoCount;
     }
 
-    private static List<List<Integer>> parseManulNumbers(List<String> manualNumbers) {
+    private List<List<Integer>> parseManulNumbers(List<String> manualNumbers) {
         return manualNumbers.stream()
                 .map(Splitter::splitString)
                 .map(lottoNumber -> Arrays.stream(lottoNumber)

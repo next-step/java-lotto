@@ -6,21 +6,19 @@ import java.util.stream.Collectors;
 
 public class LottoResult {
     private final WinningLotto winningLotto;
-    private final Lottos lottos;
 
-    public LottoResult(WinningLotto winningLotto, Lottos lottos) {
+    public LottoResult(WinningLotto winningLotto) {
         this.winningLotto = winningLotto;
-        this.lottos = lottos;
     }
 
-    public Map<Rank, Long> findWinningRankCont() {
-        return findWinningRanks().stream()
+    public Map<Rank, Long> findWinningRankCont(List<Lotto> lottos) {
+        return findWinningRanks(lottos).stream()
                 .filter(Rank::isWinningRank)
                 .collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
     }
 
-    private List<Rank> findWinningRanks() {
-        return this.lottos.getLottos().stream()
+    private List<Rank> findWinningRanks(List<Lotto> lottos) {
+        return lottos.stream()
                 .map(userLotto -> {
                     int matchCount = this.winningLotto.match(userLotto);
                     boolean isBonusWinning = this.winningLotto.isBonusWinning(userLotto);
