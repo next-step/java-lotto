@@ -15,32 +15,32 @@
 # 문자열 사칙 연산 계산기
 
 ### 기능 요구사항
-[✔] 사용자가 문자열을 입력합니다.
-[✔] 입력 문자열의 숫자와 사칙연산 사이에는 반드시 빈 공백 문자열이 있습니다.
-[✔] 나눗셈의 경우 결과 값을 정수입니다.
-[✔] 연산자 우선순위는 무시합니다.
+[x] 사용자가 문자열을 입력합니다.
+[x] 입력 문자열의 숫자와 사칙연산 사이에는 반드시 빈 공백 문자열이 있습니다.
+[x] 나눗셈의 경우 결과 값을 정수입니다.
+[x] 연산자 우선순위는 무시합니다.
 
 ### 기술 요구사항
-[✔] depth 1 단계
-[✔] `if() { while(){}; }` <- 불가
-[✔] 메소드는 최대 10라인
-[] 예상외의 값 입력시 예외처리
-[] 사칙연산 기호가 아닐경우 예외처리
-[✔] 반복적인 패턴을 찾아 반복문으로 구현
+[x] depth 1 단계
+[x] `if() { while(){}; }` <- 불가
+[x] 메소드는 최대 10라인
+[x] 예상외의 값 입력시 예외처리
+[x] 사칙연산 기호가 아닐경우 예외처리
+[x] 반복적인 패턴을 찾아 반복문으로 구현
 
 ### 산출 클래스
 - controller
   Main.java
   CalculatorController.java
 - **domain** (테스트 필수)
-  [✔] AddExpression.java
-  [✔] Calculator.java
-  [❌] CalculatorExpression.java (인터페이스)
-  [] Expression.java (ENUM 테스트)
-  [✔] DivideExpression.java
-  [✔] MinusExpression.java
-  [✔] MultiplicationExpression.java
-  [✔] VariableExpression.java
+  [x] AddExpression.java
+  [x] Calculator.java
+  [] CalculatorExpression.java (인터페이스)
+  [x] Expression.java (ENUM 테스트)
+  [x] DivideExpression.java
+  [x] MinusExpression.java
+  [x] MultiplicationExpression.java
+  [x] VariableExpression.java
 - view
   InputView.java
   ResultView.java
