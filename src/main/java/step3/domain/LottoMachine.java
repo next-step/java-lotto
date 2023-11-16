@@ -40,11 +40,11 @@ public class LottoMachine {
     }
 
     private Lottos lottos(int gameCount) {
-        List<Lotto> lottoList = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
         for(int i = 0; i< gameCount; i++){
-            lottoList.add(createLotto());
+            lottos.add(createLotto());
         }
-        return new Lottos(lottoList);
+        return new Lottos(lottos);
     }
 
     private Lotto createLotto() {
