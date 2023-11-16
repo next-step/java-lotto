@@ -7,6 +7,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -106,5 +108,108 @@ class LottoResultsTest {
 
         //then
         assertThat(rateOfReturn).isEqualTo(expectedRateOfReturn);
+    }
+
+
+    @Test
+    @DisplayName("calculateResults 메서드의 입력으로 Lotto List 와 winnerNumbers를 넣으면, 입력한 Lotto List의 당첨 통계를 구한다. - 1등 [당첨 번호 6개]")
+    void testCheckLottoWinningNumbers_LottoRank_FIRST() {
+        //given
+        final LottoNumber bonusWinnerNumber = new LottoNumber(7);
+        final Lotto winnerLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+
+        final WinnerNumbers winnerNumbers = new WinnerNumbers(winnerLotto, bonusWinnerNumber);
+        final List<Lotto> lottos = List.of(new Lotto(Set.of(1, 2, 3, 4, 5, 6)));
+
+        //when
+        LottoResults lottoResults = LottoResults.calculateResults(lottos, winnerNumbers);
+
+        //then
+        assertThat(lottoResults.getCount(LottoRank.FIRST)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("calculateResults 메서드의 입력으로 Lotto List 와 winnerNumbers를 넣으면, 입력한 Lotto List의 당첨 통계를 구한다. - 2등 [당첨 번호 5개, 보너스 번호 일치]")
+    void testCheckLottoWinningNumbers_LottoRank_SECOND() {
+        //given
+        final LottoNumber bonusWinnerNumber = new LottoNumber(7);
+        final Lotto winnerLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+
+        final WinnerNumbers winnerNumbers = new WinnerNumbers(winnerLotto, bonusWinnerNumber);
+        final List<Lotto> lottos = List.of(
+                new Lotto(Set.of(1, 2, 3, 4, 5, 7)),
+                new Lotto(Set.of(1, 2, 3, 4, 6, 7)));
+
+        //when
+        LottoResults lottoResults = LottoResults.calculateResults(lottos, winnerNumbers);
+
+        //then
+        assertThat(lottoResults.getCount(LottoRank.SECOND)).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("calculateResults 메서드의 입력으로 Lotto List 와 winnerNumbers를 넣으면, 입력한 Lotto List의 당첨 통계를 구한다. - 3등 [당첨 번호 5개, 보너스 번호 불일치]")
+    void testCheckLottoWinningNumbers_LottoRank_THIRD() {
+        //given
+        final LottoNumber bonusWinnerNumber = new LottoNumber(7);
+        final Lotto winnerLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+
+        final WinnerNumbers winnerNumbers = new WinnerNumbers(winnerLotto, bonusWinnerNumber);
+        final List<Lotto> lottos = List.of(
+                new Lotto(Set.of(1, 2, 3, 4, 5, 8)),
+                new Lotto(Set.of(1, 2, 3, 4, 6, 8)),
+                new Lotto(Set.of(2, 3, 4, 5, 6, 8))
+        );
+
+        //when
+        LottoResults lottoResults = LottoResults.calculateResults(lottos, winnerNumbers);
+
+        //then
+        assertThat(lottoResults.getCount(LottoRank.THIRD)).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("calculateResults 메서드의 입력으로 Lotto List 와 winnerNumbers를 넣으면, 입력한 Lotto List의 당첨 통계를 구한다. - 4등 [당첨 번호 4개]")
+    void testCheckLottoWinningNumbers_LottoRank_FOURTH() {
+        //given
+        final LottoNumber bonusWinnerNumber = new LottoNumber(7);
+        final Lotto winnerLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+
+        final WinnerNumbers winnerNumbers = new WinnerNumbers(winnerLotto, bonusWinnerNumber);
+        final List<Lotto> lottos = List.of(
+                new Lotto(Set.of(1, 2, 3, 4, 7, 8)),
+                new Lotto(Set.of(2, 3, 4, 6, 7, 8)),
+                new Lotto(Set.of(1, 2, 3, 4, 10, 11)),
+                new Lotto(Set.of(3, 4, 5, 6, 8, 10))
+        );
+
+        //when
+        LottoResults lottoResults = LottoResults.calculateResults(lottos, winnerNumbers);
+
+        //then
+        assertThat(lottoResults.getCount(LottoRank.FOURTH)).isEqualTo(4);
+    }
+
+    @Test
+    @DisplayName("calculateResults 메서드의 입력으로 Lotto List 와 winnerNumbers를 넣으면, 입력한 Lotto List의 당첨 통계를 구한다. - 5등 [당첨 번호 3개]")
+    void testCheckLottoWinningNumbers_LottoRank_FIFTH() {
+        //given
+        final LottoNumber bonusWinnerNumber = new LottoNumber(7);
+        final Lotto winnerLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+
+        final WinnerNumbers winnerNumbers = new WinnerNumbers(winnerLotto, bonusWinnerNumber);
+        final List<Lotto> lottos = List.of(
+                new Lotto(Set.of(1, 2, 3, 7, 8, 10)),
+                new Lotto(Set.of(2, 3, 4, 7, 8, 11)),
+                new Lotto(Set.of(1, 2, 6, 7, 10, 11)),
+                new Lotto(Set.of(3, 4, 6, 8, 10, 15)),
+                new Lotto(Set.of(1, 3, 6, 10, 15, 33))
+        );
+
+        //when
+        LottoResults lottoResults = LottoResults.calculateResults(lottos, winnerNumbers);
+
+        //then
+        assertThat(lottoResults.getCount(LottoRank.FIFTH)).isEqualTo(5);
     }
 }

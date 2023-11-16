@@ -1,6 +1,7 @@
 package lotto.step2.service;
 
 import lotto.step2.domain.Lotto;
+import lotto.step2.domain.LottoGenerator;
 import lotto.step2.domain.LottoResults;
 import lotto.step2.domain.WinnerNumbers;
 import lotto.step2.input.InputView;
@@ -17,18 +18,16 @@ public class LottoProgram {
     }
 
     public static void start() {
-        final UserInput input = InputView.inputPurchaseAmount();
-        final int purchaseAmount = input.getPurchaseAmount();
-        final int numberOfLottos = LottoProgramManager.calculateNumberOfLottos(purchaseAmount, LOTTO_PRICE);
+        final UserInput input = InputView.input();
 
-        List<Lotto> lottos = LottoProgramManager.generateLottos(numberOfLottos);
-        ResultView.printLottos(lottos);
+        List<Lotto> lottos = LottoGenerator.generateLottos(input);
+        ResultView.printLottos(lottos, input.getPassiveLottoCount());
 
         final WinnerNumbers winnerNumbers = InputView.inputWinnersNumbers();
-        final LottoResults lottoResults = winnerNumbers.matchLottos(lottos);
+        final LottoResults lottoResults = LottoResults.calculateResults(lottos, winnerNumbers);
         ResultView.printLottoResults(lottoResults);
 
-        final double rateOfReturn = lottoResults.calculateRateOfReturn(purchaseAmount);
+        final double rateOfReturn = lottoResults.calculateRateOfReturn(input.getPurchaseAmount());
         ResultView.printRateOfReturn(rateOfReturn);
     }
 }

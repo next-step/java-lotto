@@ -16,13 +16,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateNumber(final int num) {
-        throwExceptionIfValueIsNotValid(num);
-    }
-
-    private void throwExceptionIfValueIsNotValid(final int num) {
-        if (num < 1 || num > 45) {
+        if (isOutOfRange(num)) {
             throw new IllegalArgumentException("lotto num value must be 1 ~ 45");
         }
+    }
+
+    private boolean isOutOfRange(final int num) {
+        return num < 1 || num > 45;
     }
 
     @Override

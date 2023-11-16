@@ -64,4 +64,14 @@ public class LottoResults {
     public double calculateRateOfReturn(final int paymentAmount) {
         return ((double) getTotalPrizeMoney()) / paymentAmount;
     }
+
+    public static LottoResults calculateResults(final List<Lotto> lottos, final WinnerNumbers winnerNumbers) {
+        LottoResults lottoResults = new LottoResults();
+
+        for (Lotto lotto : lottos) {
+            lottoResults.incrementRankCount(lotto.calculateLottoRank(winnerNumbers));
+        }
+
+        return lottoResults;
+    }
 }

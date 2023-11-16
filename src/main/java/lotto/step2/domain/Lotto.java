@@ -1,6 +1,7 @@
 package lotto.step2.domain;
 
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -47,5 +48,18 @@ public class Lotto {
 
     public boolean contains(final LottoNumber bonusLottoNumber) {
         return this.nums.contains(bonusLottoNumber);
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final Lotto lotto = (Lotto) o;
+        return Objects.equals(nums, lotto.nums);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nums);
     }
 }
