@@ -17,4 +17,9 @@ public class StringCalculatorTest {
     void plus() {
         assertThat(stringCalculator.calculate("2 + 3")).isEqualTo(5);
     }
+
+    @Test
+    void minus() {
+        assertThat(stringCalculator.calculate("2 - 3")).isEqualTo(-1);
+    }
 }
