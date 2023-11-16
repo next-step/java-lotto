@@ -13,7 +13,7 @@ public class LottoNumber {
 
     public static LottoNumber of(int number) {
         if(LottoNumberCache.getLottoNumber(number) != null){
-            LottoNumberCache.getLottoNumber(number);
+            return LottoNumberCache.getLottoNumber(number);
         }
         return new LottoNumber(number);
     }
@@ -21,10 +21,6 @@ public class LottoNumber {
     private LottoNumber(int number) {
         inputValidation(number);
         this.number = number;
-    }
-
-    private LottoNumber(int number, boolean isBonus) {
-        this(number);
     }
 
     private void inputValidation(int number) {

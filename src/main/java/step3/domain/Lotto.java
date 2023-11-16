@@ -32,8 +32,7 @@ public class Lotto {
 
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.stream()
-                .mapToInt(LottoNumber::number)
-                .anyMatch(number -> number == lottoNumber.number());
+                .anyMatch(number -> number.equals(lottoNumber));
     }
 
 }
