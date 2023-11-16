@@ -28,6 +28,6 @@ public enum Operator implements IntBinaryOperator {
         return Stream.of(Operator.values())
                      .filter(opt -> opt.symbol.equals(input))
                      .findFirst()
-                     .orElseThrow(() -> new IllegalArgumentException("부_적절한 연산_기호"));
+                     .orElseThrow(() -> new IllegalArgumentException("부적절한 연산기호"));
     }
 }
