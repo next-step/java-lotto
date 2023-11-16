@@ -22,10 +22,12 @@ public class Lottos {
 
     public LinkedHashMap<LottoRank, Integer> matchingResult(WinningNumbers winningNumbers) {
         LinkedHashMap<LottoRank, Integer> result = initResult();
+
         lottos.stream()
                 .map(lotto -> LottoRank.valueOf(winningNumbers.matchCount(lotto), winningNumbers.containBonus(lotto)))
                 .filter(LottoRank::isNotMiss)
-                .forEach(lottoRank -> result.put(lottoRank, result.getOrDefault(lottoRank, 0) + 1));
+                .forEach(lottoRank -> result.merge(lottoRank, 1, Integer::sum));
+
         return result;
     }
 
