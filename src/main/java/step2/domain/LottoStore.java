@@ -1,33 +1,31 @@
 package step2.domain;
 
-import step2.exception.InvalidPriceUnitException;
+import step2.domain.dto.LottoRequest;
 
-import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 public class LottoStore {
 
-    private static final BigDecimal PRICE_PER_SHEET = BigDecimal.valueOf(1000);
+    private final LottoNumberGenerator lottoNumberGenerator;
 
-    public int numberOfLotto(BigDecimal price) {
-        validate(price);
-        return price.divide(PRICE_PER_SHEET).intValue();
+    public LottoStore(LottoNumberGenerator lottoNumberGenerator) {
+        this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    private void validate(BigDecimal price) {
-        if (!isValidUnit(price)) {
-            throw new InvalidPriceUnitException();
-        }
+    public Lottos lottos(LottoRequest request) {
+        List<LottoNumbers> manualLottoNumbers = lottoNumberGenerator.lottoNumbers(request.manualNumbers());
+        List<LottoNumbers> automaticLottoNumbers = lottoNumberGenerator.lottoNumbers(request.automaticCount());
+
+        return lottos(Stream.concat(manualLottoNumbers.stream(), automaticLottoNumbers.stream())
+            .collect(Collectors.toList()));
     }
 
-    private boolean isValidUnit(BigDecimal price) {
-        return price.remainder(PRICE_PER_SHEET).equals(BigDecimal.ZERO);
-    }
-
-    public Lottos lottos(List<LottoNumbers> lottoNumbers) {
+    private Lottos lottos(List<LottoNumbers> lottoNumbers) {
         return lottoNumbers.stream()
             .map(Lotto::new)
             .collect(collectingAndThen(toList(), Lottos::new));

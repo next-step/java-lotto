@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import step2.domain.Lotto;
 import step2.domain.Lottos;
 import step2.domain.WinningStatistics;
+import step2.domain.dto.LottoRequest;
 import step2.domain.type.Prize;
 
 import java.math.BigDecimal;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class ResultView {
 
-    private static final String PURCHASE_MESSAGE = "%s개를 구매했습니다.";
+    private static final String PURCHASE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String LOTTO_NUMBER_MESSAGE = "[%s]";
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
     private static final String DIVIDING_LINE = "---------";
@@ -22,8 +23,9 @@ public class ResultView {
     private static final String RATE_OF_RETURN_MESSAGE = "총 수익률은 %.2f입니다.";
     private static final String COMMA = ", ";
 
-    public void printPurchaseMessage(int count) {
-        System.out.println(String.format(PURCHASE_MESSAGE, count));
+    public void printPurchaseMessage(LottoRequest request) {
+        System.out.println();
+        System.out.println(String.format(PURCHASE_MESSAGE, request.manualCount(), request.automaticCount()));
     }
 
     public void printLottos(Lottos lottos) {
@@ -60,7 +62,7 @@ public class ResultView {
     }
 
     private String winningStatisticsText(Prize prize, WinningStatistics winningStatistics) {
-        if (prize.useBonusAndMatched()) {
+        if (prize == Prize.SECOND) {
             return winningStatisticsText(BONUS_MATCH_ADDITIONAL_MESSAGE, prize, winningStatistics);
         }
         return winningStatisticsText(StringUtils.EMPTY, prize, winningStatistics);

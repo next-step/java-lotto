@@ -2,10 +2,7 @@ package step2.domain;
 
 import step2.exception.InvalidLottoSizeException;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static step2.domain.LottoNumber.allLottoNumbers;
@@ -57,6 +54,19 @@ public class LottoNumbers {
         return this.numbers.stream()
             .map(LottoNumber::number)
             .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(numbers, that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 
 }
