@@ -13,11 +13,9 @@ public class LottoMachine {
     public static final int NUMBER_BOX_START_NUMBER = LottoNumber.NUMBER_BOX_START_NUMBER;
     public static final int NUMBER_BOX_END_NUMBER = LottoNumber.NUMBER_BOX_END_NUMBER;
 
-    private static List<LottoNumber> rangeClosedNumberBox() {
-        return IntStream.rangeClosed(NUMBER_BOX_START_NUMBER, NUMBER_BOX_END_NUMBER)
-                .mapToObj(LottoNumber::of)
-                .collect(Collectors.toList());
-    }
+    private static List<LottoNumber> BOX = IntStream.rangeClosed(NUMBER_BOX_START_NUMBER, NUMBER_BOX_END_NUMBER)
+                                            .mapToObj(LottoNumber::of)
+                                            .collect(Collectors.toList());
 
     public Lottos play(int paidMoney, Lottos inputManualLottos) {
         validatePaidMoney(paidMoney, inputManualLottos);
@@ -58,7 +56,7 @@ public class LottoMachine {
     }
 
     private List<LottoNumber> lottoNumbers() {
-        List<LottoNumber> numberBox = rangeClosedNumberBox();
+        List<LottoNumber> numberBox = new ArrayList<>(BOX);
         Collections.shuffle(numberBox);
         return numberBox.subList(0, LOTTO_SIZE);
     }
