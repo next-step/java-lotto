@@ -1,8 +1,6 @@
 package lotto.step2.domain;
 
-import lotto.step2.util.LottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -15,11 +13,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
-    @RepeatedTest(3)
-    @DisplayName("Lotto 객체를 생성하면, Lotto는 1~45까지의 수를 중복되지 않게 6개 가지고 있다.")
+    @Test
+    @DisplayName("1 ~ 45사이의 중복되지 않는 6개의 값을 Lotto 생성자로 입력하면, Lotto 객체가 생성된다.")
     void testLottoHasUniqueSixNumbers() {
         //given
-        Lotto lotto = new Lotto(LottoNumberGenerator.generateLottoNumbers());
+        Lotto lotto = new Lotto(Set.of(1, 10, 20, 30, 40, 45));
 
         //when
         Set<LottoNumber> numbers = lotto.nums();

@@ -1,10 +1,10 @@
 package lotto.step2.input;
 
 import lotto.step2.domain.Lotto;
+import lotto.step2.domain.LottoGenerator;
 import lotto.step2.domain.LottoNumber;
 import lotto.step2.domain.WinnerNumbers;
 import lotto.step2.service.LottoProgram;
-import lotto.step2.util.StringToIntegerSetConverter;
 
 import java.util.*;
 
@@ -47,9 +47,8 @@ public class InputView {
     private static Lotto inputLottoNumbersByScanner() {
         try {
             final String inputStringLine = new Scanner(System.in).nextLine();
-            final Set<Integer> integers = StringToIntegerSetConverter.convert(inputStringLine);
 
-            return new Lotto(integers);
+            return LottoGenerator.generatePassiveLottos(inputStringLine);
         } catch (NoSuchElementException | IllegalArgumentException e) {
             printPassiveLottoNumbersException();
 

@@ -31,4 +31,19 @@ class LottoNumberTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("lotto num value must be 1 ~ 45");
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 15, 40, 45})
+    @DisplayName("LottoNumber는 number값이 같으면, 같은 객체로 취급한다.")
+    void testEqualsReturnsTrueIfNumberIsTheSame(final int num) {
+        //given
+        final LottoNumber lottoNumber1 = new LottoNumber(num);
+        final LottoNumber lottoNumber2 = new LottoNumber(num);
+
+        //when
+        final boolean equals = lottoNumber1.equals(lottoNumber2);
+
+        //then
+        assertThat(equals).isTrue();
+    }
 }

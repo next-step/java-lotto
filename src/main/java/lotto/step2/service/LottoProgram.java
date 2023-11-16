@@ -1,6 +1,7 @@
 package lotto.step2.service;
 
 import lotto.step2.domain.Lotto;
+import lotto.step2.domain.LottoGenerator;
 import lotto.step2.domain.LottoResults;
 import lotto.step2.domain.WinnerNumbers;
 import lotto.step2.input.InputView;
@@ -19,7 +20,7 @@ public class LottoProgram {
     public static void start() {
         final UserInput input = InputView.input();
 
-        List<Lotto> lottos = LottoProgramManager.generateLottos(input);
+        List<Lotto> lottos = LottoGenerator.generateLottos(input);
         ResultView.printLottos(lottos, input.getPassiveLottoCount());
 
         final WinnerNumbers winnerNumbers = InputView.inputWinnersNumbers();
