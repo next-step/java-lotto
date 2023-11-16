@@ -16,8 +16,8 @@ public class Winning {
     }
 
     public void addWinning(int rightNumber, boolean bonusMatch) {
-        if (Rank.isWinning(rightNumber)) {
-            final Rank rank = Rank.ofRightNumber(rightNumber, bonusMatch);
+        if (Rank.isRank(rightNumber)) {
+            final Rank rank = Rank.rank(rightNumber, bonusMatch);
             winnerCountMap.put(rank, winnerCountMap.getOrDefault(rank, 0) + 1);
         }
     }
