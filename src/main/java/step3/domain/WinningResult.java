@@ -1,19 +1,33 @@
 package step3.domain;
 
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class WinningResult {
 
-    private Map<LottoRank, Integer> result;
-    private Double earningRate;
+    private final List<LottoRank> winningLottos;
+    private final Double earningRate;
+    private final LinkedHashMap<LottoRank, Integer> winningResult;
 
-    public WinningResult(Map<LottoRank, Integer> result, Double earningRate) {
-        this.result = result;
+    public WinningResult(List<LottoRank> result, Double earningRate) {
+        winningResult = initResult();
+        this.winningLottos = result;
         this.earningRate = earningRate;
     }
 
-    public Map<LottoRank, Integer> result() {
+    private LinkedHashMap<LottoRank, Integer> initResult() {
+        LinkedHashMap<LottoRank, Integer> result = new LinkedHashMap<>();
+        Arrays.stream(LottoRank.values()).filter(LottoRank::isNotMiss).forEach(rank -> result.put(rank, 0));
         return result;
+    }
+
+    public Map<LottoRank, Integer> winningResult() {
+        for (LottoRank lottoRank : winningLottos) {
+            winningResult.merge(lottoRank, 1, Integer::sum);
+        }
+        return winningResult;
     }
 
     public Double getEarningRate() {

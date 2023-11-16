@@ -20,20 +20,12 @@ public class Lottos {
         return lottos.size();
     }
 
-    public LinkedHashMap<LottoRank, Integer> matchingResult(WinningNumbers winningNumbers) {
-        LinkedHashMap<LottoRank, Integer> result = initResult();
+    public List<LottoRank> matchingResult(WinningNumbers winningNumbers) {
 
-        lottos.stream()
+        return lottos.stream()
                 .map(lotto -> LottoRank.valueOf(winningNumbers.matchCount(lotto), winningNumbers.containBonus(lotto)))
                 .filter(LottoRank::isNotMiss)
-                .forEach(lottoRank -> result.merge(lottoRank, 1, Integer::sum));
-
-        return result;
+                .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
     }
 
-    private static LinkedHashMap<LottoRank, Integer> initResult() {
-        LinkedHashMap<LottoRank, Integer> result = new LinkedHashMap<>();
-        Arrays.stream(LottoRank.values()).forEach(lottoRank -> result.put(lottoRank, 0));
-        return result;
-    }
 }

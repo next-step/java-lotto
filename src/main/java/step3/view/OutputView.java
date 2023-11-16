@@ -39,13 +39,13 @@ public class OutputView {
         printFinalEarningRate(result);
     }
 
-    private static void printFinalEarningRate(WinningResult result) {
-        DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        System.out.println(String.format(EARNING_RATE_MESSAGE, decimalFormat.format(result.getEarningRate())));
+    private static void printTitle() {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
     }
 
     private static void printRankInfo(WinningResult result) {
-        for(Map.Entry<LottoRank, Integer> info : result.result().entrySet()){
+        for(Map.Entry<LottoRank, Integer> info : result.winningResult().entrySet()){
             printEach(info);
         }
     }
@@ -59,8 +59,9 @@ public class OutputView {
         System.out.println(String.format(WINNING_MESSAGE, rank.matchCount(), rank.winningMoney(), info.getValue()));
     }
 
-    private static void printTitle() {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+    private static void printFinalEarningRate(WinningResult result) {
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        System.out.println(String.format(EARNING_RATE_MESSAGE, decimalFormat.format(result.getEarningRate())));
     }
+
 }

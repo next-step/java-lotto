@@ -1,6 +1,5 @@
 package step3.domain;
 
-import step3.cache.LottoNumberCache;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -51,4 +50,16 @@ public class LottoNumber {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
+    }
 }
