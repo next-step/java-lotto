@@ -6,10 +6,10 @@ import java.util.stream.Collectors;
 public class Lottos {
     private final List<LottoRank> DISPLAY_LOTTO_RANKS = List.of(LottoRank.FIFTH, LottoRank.FOURTH, LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST);
 
-    private final Map<Integer, List<Lotto>> lottos;
+    private final List<Lotto> lottos;
 
-    public Lottos(Map<Integer, List<Lotto>> lottos) {
-        this.lottos = new HashMap<>(lottos);
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public LottoResult winCounts(LottoWinNumbers lottoWinNumbers, BonusBall bonusBall) {
@@ -18,16 +18,14 @@ public class Lottos {
             lottoRanks.put(lottoRank, 0L);
         }
 
-        lottos.values().stream()
-                .flatMap(List::stream)
-                .forEach(lotto -> {
+        lottos.forEach(lotto -> {
                     LottoRank rank = lotto.matchCount(lottoWinNumbers, bonusBall);
                     lottoRanks.merge(rank, 1L, Long::sum);
                 });
         return new LottoResult(lottoRanks);
     }
 
-    public Map<Integer, List<Lotto>> getLottos() {
-        return Collections.unmodifiableMap(lottos);
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 }

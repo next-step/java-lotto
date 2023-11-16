@@ -19,9 +19,7 @@ class LottosTest {
     @MethodSource("provideWinLottoNumbersAndWinCount")
     @DisplayName("성공 - 로또 번호와 당첨 번호를 비교하여 당첨 통계를 낸다.")
     void success_lotto_winning_count(List<Integer> lottoNumbers, List<Integer> winLottoNumbers, int bonusBall, LottoRank lottoRank, long winCount) {
-        Lottos lottos = new Lottos(Map.ofEntries(
-                entry(1, List.of(new Lotto(new LottoNumbers(new TestLottoGenerator(lottoNumbers)))))
-        ));
+        Lottos lottos = new Lottos(List.of(new Lotto(new LottoNumbers(new TestLottoGenerator(lottoNumbers)))));
         LottoResult lottoResult = lottos.winCounts(new LottoWinNumbers(winLottoNumbers), new BonusBall(bonusBall));
         assertThat(lottoResult.getLottoResult()).hasSize(5)
                 .contains(
