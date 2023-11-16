@@ -6,18 +6,21 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum LottoMatch {
-	THREE(3),
-	FOUR(4),
-	FIVE(5),
-	SIX(6);
+	THREE(3, 5000),
+	FOUR(4, 50000),
+	FIVE(5, 1500000),
+	SIX(6, 2000000000);
 
 	private static final Map<Integer, LottoMatch> stringToEnum =
 			Stream.of(values()).collect(Collectors.toMap(LottoMatch::matchCount, e -> e));
 
 	private final int matchCount;
 
-	LottoMatch(int matchCount) {
+	private final long amount;
+
+	LottoMatch(int matchCount, long amount) {
 		this.matchCount = matchCount;
+		this.amount = amount;
 	}
 
 	public static LottoMatch fromInt(int matchCount) {
@@ -27,5 +30,9 @@ public enum LottoMatch {
 
 	public int matchCount() {
 		return this.matchCount;
+	}
+
+	public long amount() {
+		return this.amount;
 	}
 }
