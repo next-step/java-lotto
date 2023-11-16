@@ -2,9 +2,9 @@ package lotto.domain.lotto;
 
 import lotto.constants.Winning;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -12,28 +12,28 @@ public class Lotto {
 
     private static final String NUMBER_COUNT_ERROR_MESSAGE = String.format("로또 번호는 총 %s자리 입니다", NUMBER_COUNT);
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    private Lotto(List<Integer> lottoNumbers) {
-        this.lottoNumbers = new ArrayList<>(validate(lottoNumbers));
-    }
-
-    public static Lotto of(List<Integer> lottoNumbers) {
-        return new Lotto(lottoNumbers);
+    private Lotto(Collection<Integer> lottoNumbers) {
+        this.lottoNumbers = new HashSet<>(validate(lottoNumbers));
     }
 
     public static Lotto of(Integer... lottoNumbers) {
-        return new Lotto(Arrays.asList(lottoNumbers));
+        return of(Set.of(lottoNumbers));
     }
 
-    private List<LottoNumber> validate(List<Integer> lottoNumbers) {
+    public static Lotto of(Collection<Integer> lottoNumbers) {
+        return new Lotto(lottoNumbers);
+    }
+
+    private Collection<LottoNumber> validate(Collection<Integer> lottoNumbers) {
         validateCount(lottoNumbers);
         return lottoNumbers.stream()
                 .map(LottoNumber::of)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
-    private void validateCount(List<Integer> lottoNumbers) {
+    private void validateCount(Collection<Integer> lottoNumbers) {
         if (lottoNumbers.size() != NUMBER_COUNT) {
             throw new IllegalArgumentException(NUMBER_COUNT_ERROR_MESSAGE);
         }
