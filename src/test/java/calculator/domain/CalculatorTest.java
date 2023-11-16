@@ -2,6 +2,8 @@ package calculator.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 
@@ -10,43 +12,21 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 class CalculatorTest {
 
-    @Test
-    @DisplayName("계산기능/4/4")
-    void calculateOneParam() {
+    @ParameterizedTest(name = "계산기능 / {0} = 결과: {1}")
+    @CsvSource({
+            "4, 4",
+            "4 + 2, 6",
+            "2 + 3 * 4 / 2 - 1, 9"
+    })
+    void calculate(String inputs, int assertResult) {
         // given
-        Calculator calculator = new Calculator(Arrays.asList("4"));
+        Calculator calculator = new Calculator(Arrays.asList(inputs.split(" ")));
 
         // when
         int result = calculator.calculate();
 
         // then
-        assertThat(result).isEqualTo(4);
-    }
-
-    @Test
-    @DisplayName("계산기능/4+2/6")
-    void calculateSimple() {
-        // given
-        Calculator calculator = new Calculator(Arrays.asList("4", "+", "2"));
-
-        // when
-        int result = calculator.calculate();
-
-        // then
-        assertThat(result).isEqualTo(6);
-    }
-
-    @Test
-    @DisplayName("계산기능/ 2+3*4/2-1 / 9")
-    void calculateSequential() {
-        // given
-        Calculator calculator = new Calculator(Arrays.asList("2", "+", "3", "*", "4", "/", "2", "-", "1"));
-
-        // when
-        int result = calculator.calculate();
-
-        // then
-        assertThat(result).isEqualTo(9);
+        assertThat(result).isEqualTo(assertResult);
     }
 
     @Test
