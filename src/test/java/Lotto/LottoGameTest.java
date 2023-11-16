@@ -46,8 +46,4 @@ public class LottoGameTest {
         assertThat(lottoPrizeIntegerMap.get(6).intValue()).isEqualTo(1);
     }
 
-    @Test
-    void calculateRateTest() {
-
-    }
 }
