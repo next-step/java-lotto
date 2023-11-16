@@ -12,6 +12,6 @@ public class MinusExpression implements CalculatorExpression {
 
     public VariableExpression calculate() {
         int result = left.value() - right.value();
-        return new VariableExpression(Integer.toString(result));
+        return VariableExpression.of(Integer.toString(result));
     }
 }

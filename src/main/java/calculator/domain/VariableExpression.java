@@ -4,9 +4,14 @@ public class VariableExpression{
 
     private final String string;
 
-    public VariableExpression(String string) {
+    private VariableExpression(String string) {
         this.string = string;
     }
+
+    public static VariableExpression of(String string){
+        return new VariableExpression(string);
+    }
+
 
     public int value(){
         return Integer.parseInt(string);
