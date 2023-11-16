@@ -31,7 +31,7 @@ public class LottoMachine {
     }
 
     public Lottos getLottoTickets() {
-        List<Lotto> totalLottos = this.lottos.sumLottos(this.manaulLottos.getLottos());
+        List<Lotto> totalLottos = this.lottos.sumLottos(this.manaulLottos);
         return new Lottos(totalLottos);
     }
 
