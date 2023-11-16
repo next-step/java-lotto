@@ -18,7 +18,7 @@ public class StatisticsWinnerResult {
 
     private int totalPrize() {
         return result.entrySet().stream()
-                .mapToInt(entry -> entry.getKey().winningMoney() * entry.getValue())
+                .mapToInt(entry -> entry.getKey().calculateWinningMoney(entry.getValue()))
                 .sum();
     }
 
