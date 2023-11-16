@@ -1,6 +1,7 @@
 package step2;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,13 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public Lotto(List<Integer> givenLottoNumbers) {
+        this.lottoNumbers = givenLottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
+        validateLottoNumberSize(this.lottoNumbers);
+    }
+
     public Lotto(int[] givenLottoNumbers) {
         this.lottoNumbers = Arrays.stream(givenLottoNumbers)
                 .mapToObj(LottoNumber::new)
@@ -20,9 +28,7 @@ public class Lotto {
         validateLottoNumberSize(this.lottoNumbers);
     }
 
-    public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
-    }
+
 
     private void validateLottoNumberSize(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
