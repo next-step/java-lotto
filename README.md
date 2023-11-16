@@ -16,13 +16,11 @@
 - 즉, 수학에서는 곱셈, 나눗셈이 덧셈, 뺼셈 보다 먼저 계산해야 하지만 이를 무시한다.
 - 예를 들어 2 = 3 * 4 / 2와 같은 문자열을 입력할 경우 실행결과인 10을 출력해야 한다.
 
-## Operation
-* [X] 두 수를 더 할 수 있다. - addition
-* [X] 두 수를 뺄 수 있다. - subtraction
-* [X] 두 수를 나눌 수 있다. - division
-* [X] 두 수를 곱 할 수 있다. - multiply
-
 ## StringCalculator
+* [ ] 두 수를 더 할 수 있다.
+* [ ] 두 수를 뺄 수 있다.
+* [ ] 두 수를 나눌 수 있다.
+* [ ] 두 수를 곱 할 수 있다.
 * [ ] 입력 값을 받아 사칙연산을 할 수 있다.
-* [X] 입력 값이 null 이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+* [ ] 입력 값이 null 이거나 빈 공백 문자일 경우 IllegalArgumentException throw
 * [ ] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
