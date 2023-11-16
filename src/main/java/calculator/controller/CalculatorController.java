@@ -3,6 +3,7 @@ package calculator.controller;
 import calculator.domain.Calculator;
 import calculator.domain.VariableExpression;
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -23,10 +24,14 @@ public class CalculatorController {
         return new CalculatorController(scanner, printStream);
     }
 
-    public void calculate(){
+    public void calculate() {
         String origin = inputView.calculatorString();
-        List<String> strings = origin.lines().collect(Collectors.toList());
+        List<String> strings = splitStrings(origin);
         VariableExpression expression = Calculator.calculate(strings);
         resultView.calculateResult(expression.value());
+    }
+
+    private static List<String> splitStrings(String origin) {
+        return Arrays.stream(origin.split(" ")).collect(Collectors.toList());
     }
 }
