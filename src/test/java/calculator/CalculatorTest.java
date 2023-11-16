@@ -18,7 +18,7 @@ public class CalculatorTest {
     @DisplayName("빈 공백 문자일 경우 IllegalArgumentException 발생한다.")
     void 빈_공백_문자열을_입력하면_IllegalArgumentException_발생한다(String value) {
         Validator validator = new Validator();
-        assertThatThrownBy(() -> validator.isNullOrEmpty(value))
+        assertThatThrownBy(() -> validator.checkNullOrEmpty(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -27,7 +27,7 @@ public class CalculatorTest {
     @NullAndEmptySource
     void Null_을_입력할_경우_IllegalArgumentException_발생한다(String value) {
         Validator validator = new Validator();
-        assertThatThrownBy(() -> validator.isNullOrEmpty(value))
+        assertThatThrownBy(() -> validator.checkNullOrEmpty(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
