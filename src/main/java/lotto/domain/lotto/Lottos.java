@@ -62,29 +62,7 @@ public class Lottos {
     }
 
     public Summary winningResult(List<Winning> winnings) {
-
-        return new Summary(
-                winningCount(winnings, Winning.FIRST),
-                winningCount(winnings, Winning.SECOND),
-                winningCount(winnings, Winning.THIRD),
-                winningCount(winnings, Winning.FOURTH),
-                profitRate(winnings));
-    }
-
-    private float profitRate(List<Winning> winnings) {
-        return (float) prizeTotal(winnings) / (float) purchasePrice;
-    }
-
-    private long winningCount(List<Winning> winnings, Winning winning) {
-        return winnings.stream()
-                .filter(winning::equals)
-                .count();
-    }
-
-    private long prizeTotal(List<Winning> winnings) {
-        return winnings.stream()
-                .mapToLong(Winning::prize)
-                .sum();
+        return new Summary(winnings, purchasePrice);
     }
 
     public int size() {

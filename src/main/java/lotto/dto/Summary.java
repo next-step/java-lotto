@@ -1,5 +1,8 @@
 package lotto.dto;
 
+import lotto.constants.Winning;
+
+import java.util.List;
 import java.util.Objects;
 
 public class Summary {
@@ -15,6 +18,30 @@ public class Summary {
         this.thirdCount = thirdCount;
         this.fourthCount = fourthCount;
         this.profitRate = profitRate;
+    }
+
+    public Summary(List<Winning> winnings, Long purchasePrice) {
+        this.firstCount = winningCount(winnings, Winning.FIRST);
+        this.secondCount = winningCount(winnings, Winning.SECOND);
+        this.thirdCount = winningCount(winnings, Winning.THIRD);
+        this.fourthCount = winningCount(winnings, Winning.FOURTH);
+        this.profitRate = profitRate(winnings, purchasePrice);
+    }
+
+    private long winningCount(List<Winning> winnings, Winning winning) {
+        return winnings.stream()
+                .filter(winning::equals)
+                .count();
+    }
+
+    private float profitRate(List<Winning> winnings, long purchasePrice) {
+        return (float) prizeTotal(winnings) / (float) purchasePrice;
+    }
+
+    private long prizeTotal(List<Winning> winnings) {
+        return winnings.stream()
+                .mapToLong(Winning::prize)
+                .sum();
     }
 
     public long firstCount() {
