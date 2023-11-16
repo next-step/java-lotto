@@ -33,10 +33,13 @@ class LottoMachineTest {
     @DisplayName("10000원으로 Lotto를 생성할 때 수동이2개라면 자동은 8개가 생성된다.")
     void createLotto_수동_자동() {
         List<String> manualNumbers = List.of("1,2,3,4,5,6", "7,8,9,10,11,12");
-        LottoMachine lottoMachine = new LottoMachine(new Money(10_000), manualNumbers);
-        Lottos lottoTickets = lottoMachine.getLottoTickets();
+        LottoMachine lottoMachine = LottoMachine.buyLottos(new Money(10_000), manualNumbers);
+        Lottos totalLottos = lottoMachine.getLottoTickets();
+        Lottos manaulLottos = lottoMachine.getManaulLottos();
+        Lottos autoLottos = lottoMachine.getLottos();
 
-        assertThat(lottoTickets.getManualLottos()).hasSize(manualNumbers.size());
-        assertThat(lottoTickets.getLottos()).hasSize(10 - manualNumbers.size());
+        assertThat(totalLottos.getLottos()).hasSize(10);
+        assertThat(manaulLottos.getLottos()).hasSize(manualNumbers.size());
+        assertThat(autoLottos.getLottos()).hasSize(10 - manualNumbers.size());
     }
 }
