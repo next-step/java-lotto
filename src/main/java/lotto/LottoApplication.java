@@ -10,8 +10,6 @@ import lotto.ui.OutputView;
 import lotto.ui.dto.LottoStatsResponse;
 import lotto.ui.dto.MyLottosResponse;
 
-import java.util.List;
-
 public class LottoApplication {
     public static void main(String[] args) {
         int inputMoney = InputView.inputMoney();
@@ -22,9 +20,7 @@ public class LottoApplication {
         MyLottos myLottos = LottoFactory.buy(money);
         OutputView.outputMyLottos(MyLottosResponse.from(myLottos));
 
-        List<Integer> nums = InputView.winningNumbers();
-        WinningLotto winningLotto = new WinningLotto(nums);
-
+        WinningLotto winningLotto = new WinningLotto(InputView.winningNumbers());
         LottoResult lottoResult = myLottos.getLottoResult(winningLotto);
 
         OutputView.outputLottoStats(LottoStatsResponse.from(lottoResult, money));

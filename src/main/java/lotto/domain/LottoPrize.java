@@ -30,7 +30,6 @@ public enum LottoPrize {
         return money;
     }
 
-    // TODO 삭제예정
     public int getMatchCount() {
         return matchCount;
     }
