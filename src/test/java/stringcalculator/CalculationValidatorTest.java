@@ -5,17 +5,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class CalculationValidationTest {
+class CalculationValidatorTest {
 
     @DisplayName("인자로 받은 문자열 배열의 요소가 공백이면 예외를 던진다.")
     @Test
     void splitByBlankWhenElementIsBlank() {
         // given
-        CalculationValidation calculationValidation = new CalculationValidation();
         String[] numAndSymbols = {"2","+","3","*"," ","/","2"};
 
         // when & then
-        assertThatThrownBy(() -> calculationValidation.validate(numAndSymbols)).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> CalculationValidator.validate(numAndSymbols)).isInstanceOf(IllegalArgumentException.class)
             .hasMessage("숫자, 연산 기호 자리에는 공백이 입력될 수 없습니다.");
     }
 
@@ -23,11 +22,10 @@ class CalculationValidationTest {
     @Test
     void splitByBlankWhenStringIsNotRealNumber() {
         // given
-        CalculationValidation calculationValidation = new CalculationValidation();
         String[] numAndSymbols = {"2","+","3","*","string","/","2"};
 
         // when & then
-        assertThatThrownBy(() -> calculationValidation.validate(numAndSymbols)).isInstanceOf(NumberFormatException.class)
+        assertThatThrownBy(() -> CalculationValidator.validate(numAndSymbols)).isInstanceOf(NumberFormatException.class)
             .hasMessage("숫자 자리에는 실수만 입력 가능합니다.");
     }
 
@@ -35,11 +33,10 @@ class CalculationValidationTest {
     @Test
     void splitByBlankWhenStringIsNotSymbols() {
         // given
-        CalculationValidation calculationValidation = new CalculationValidation();
         String[] numAndSymbols = {"2","+","3",":","5","/","2"};
 
         // when & then
-        assertThatThrownBy(() -> calculationValidation.validate(numAndSymbols)).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> CalculationValidator.validate(numAndSymbols)).isInstanceOf(IllegalArgumentException.class)
             .hasMessage("연산기호는 (+, -, *, /)만 가능합니다.");
     }
 }

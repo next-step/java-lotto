@@ -6,17 +6,17 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.*;
 
-class StringCalculatorServiceTest {
+class StringOperationSymbolsServiceTest {
 
     @DisplayName("정수 - 문자열을 숫자로 바꿔 사칙연산을 한다.")
     @ParameterizedTest
     @CsvSource({"2 + 3,5", "5 - 3, 2", "3 - 5,-2", "3 * 5,15", "6 / 2,3"})
     void calculateStringParsedToDouleWhenInputIsInteger(String input, double expectedResult) {
         // given
-        StringCalculatorService stringCalculatorService = new StringCalculatorService();
+        StringCalculator stringCalculator = new StringCalculator();
 
         // when
-        double result = stringCalculatorService.startCalculation(input);
+        double result = stringCalculator.startCalculation(input);
 
         // then
         assertThat(result).isEqualTo(expectedResult);
@@ -27,10 +27,10 @@ class StringCalculatorServiceTest {
     @CsvSource({"2.5 + 3.2,5.7", "5.78 - 3.23, 2.55", "3.83434 - 5.5456,-1.71", "4.3454 * 7.435345,32.31", "5.345 / 2.342,2"})
     void calculateStringParsedToDouleWhenInputIsRealNumber(String input, double expectedResult) {
         // given
-        StringCalculatorService stringCalculatorService = new StringCalculatorService();
+        StringCalculator stringCalculator = new StringCalculator();
 
         // when
-        double result = stringCalculatorService.startCalculation(input);
+        double result = stringCalculator.startCalculation(input);
 
         // then
         assertThat(result).isEqualTo(expectedResult);
