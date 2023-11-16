@@ -14,6 +14,8 @@ public class InputView {
     private final Scanner sc;
     private final InputValidator inputValidator;
 
+    private String input;
+
     public InputView() {
         this.sc = new Scanner(System.in);
         this.inputValidator = new InputValidator();
@@ -21,26 +23,21 @@ public class InputView {
 
     public int inputPurchaseMoney() {
         System.out.println("구입금액을 입력해 주세요");
-        String input = validatePurchaseMoney();
+        input = sc.nextLine();
+
+        validatePurchaseMoney();
 
         return calculateNumOfLotto(input);
     }
 
-    private String validatePurchaseMoney() {
-        String input;
-
-        while (true) {
+    private void validatePurchaseMoney() {
+        try {
+            inputValidator.validatePurchaseMoney(input, LOTTO_PRICE);
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
             input = sc.nextLine();
-            try {
-                inputValidator.validatePurchaseMoney(input, LOTTO_PRICE);
-            } catch (IllegalArgumentException e){
-                System.out.println(e.getMessage());
-                continue;
-            }
-            break;
+            validatePurchaseMoney();
         }
-
-        return input;
     }
 
     private int calculateNumOfLotto(String purchase) {
@@ -48,27 +45,28 @@ public class InputView {
     }
 
     public LottoNumbers inputWinningNumbers() {
+        clearInput();
+
         System.out.println("이번 주 당첨 번호를 입력해 주세요.");
-        String input = validateWinningNumbers();
+        input = sc.nextLine();
+
+        validateWinningNumbers();
 
         return convertToNumbers(input);
     }
 
-    private String validateWinningNumbers() {
-        String input;
+    private void clearInput() {
+        input = "";
+    }
 
-        while (true) {
+    private void validateWinningNumbers() {
+        try {
+            inputValidator.validateWinningNumbers(input, DELIMITER);
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
             input = sc.nextLine();
-            try {
-                inputValidator.validateWinningNumbers(input, DELIMITER);
-            } catch (IllegalArgumentException e){
-                System.out.println(e.getMessage());
-                continue;
-            }
-            break;
+            validateWinningNumbers();
         }
-
-        return input;
     }
 
     private LottoNumbers convertToNumbers(String input) {
@@ -76,6 +74,6 @@ public class InputView {
 
         return new LottoNumbers(Arrays.stream(stringNumbers)
             .map(stringNumber -> Integer.parseInt(stringNumber.trim()))
-            .collect(Collectors.toUnmodifiableList()));
+            .collect(Collectors.toUnmodifiableSet()));
     }
 }

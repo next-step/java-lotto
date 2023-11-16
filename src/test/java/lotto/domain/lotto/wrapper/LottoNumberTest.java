@@ -28,7 +28,7 @@ public class LottoNumberTest {
     void createNumberWhenInputIsNotInRange(int input) {
         // when & then
         assertThatThrownBy(() -> new LottoNumber(input)).isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("숫자의 범위는 1~45입니다.");
+            .hasMessage("숫자의 범위는 1 ~ 45입니다.");
     }
 
     @DisplayName("인자로 전달받은 Number객체의 값이 자신의 값과 동일한지 확인한다.")

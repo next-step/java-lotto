@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Set;
 
 import static lotto.domain.lotto.LotteryRank.*;
 import static org.assertj.core.api.Assertions.*;
@@ -18,15 +19,15 @@ class LottoGameTest {
     void groupByRankCount() {
         // given
         List<LottoNumbers> lottoNumberses = List.of(
-            new LottoNumbers(List.of(1, 5, 12, 21, 32, 43)),
-            new LottoNumbers(List.of(1, 5, 12, 21, 32, 45)),
-            new LottoNumbers(List.of(1, 5, 12, 21, 33, 45)),
-            new LottoNumbers(List.of(2, 3, 4, 6, 8, 43))
+            new LottoNumbers(Set.of(1, 5, 12, 21, 32, 43)),
+            new LottoNumbers(Set.of(1, 5, 12, 21, 32, 45)),
+            new LottoNumbers(Set.of(1, 5, 12, 21, 33, 45)),
+            new LottoNumbers(Set.of(2, 3, 4, 6, 8, 43))
         );
 
         LottoGame lottoGame = new LottoGame();
         lottoGame.createLottos(lottoNumberses);
-        LottoNumbers winningNumbers = new LottoNumbers(List.of(1, 5, 12, 21, 32, 43));
+        LottoNumbers winningNumbers = new LottoNumbers(Set.of(1, 5, 12, 21, 32, 43));
 
         // when
         RankCountGroup rankCountGroup = lottoGame.groupByRankCount(winningNumbers);
@@ -45,16 +46,16 @@ class LottoGameTest {
     void calculateProfitRate() {
         // given
         List<LottoNumbers> lottoNumberses = List.of(
-            new LottoNumbers(List.of(1, 5, 12, 21, 33, 45)),
-            new LottoNumbers(List.of(2, 6, 13, 22, 34, 45)),
-            new LottoNumbers(List.of(1, 5, 13, 24, 31, 44)),
-            new LottoNumbers(List.of(3, 7, 15, 22, 32, 43))
+            new LottoNumbers(Set.of(1, 5, 12, 21, 33, 45)),
+            new LottoNumbers(Set.of(2, 6, 13, 22, 34, 45)),
+            new LottoNumbers(Set.of(1, 5, 13, 24, 31, 44)),
+            new LottoNumbers(Set.of(3, 7, 15, 22, 32, 43))
         );
 
         LottoGame lottoGame = new LottoGame();
         lottoGame.createLottos(lottoNumberses);
 
-        LottoNumbers winningNumbers = new LottoNumbers(List.of(1, 5, 12, 21, 32, 43));
+        LottoNumbers winningNumbers = new LottoNumbers(Set.of(1, 5, 12, 21, 32, 43));
         RankCountGroup rankCountGroup = lottoGame.groupByRankCount(winningNumbers);
 
         // when

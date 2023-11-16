@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Set;
 
 import static lotto.domain.lotto.LotteryRank.*;
 import static org.assertj.core.api.Assertions.*;
@@ -17,15 +18,15 @@ public class LottosTest {
         // given
         Lottos lottos = new Lottos(
             List.of(
-                new LottoNumbers(List.of(1, 5, 12, 21, 32, 43)),
-                new LottoNumbers(List.of(1, 5, 12, 21, 32, 43)),
-                new LottoNumbers(List.of(1, 5, 12, 21, 32, 43)),
-                new LottoNumbers(List.of(1, 5, 12, 21, 32, 42)),
-                new LottoNumbers(List.of(1, 5, 12, 21, 31, 44)),
-                new LottoNumbers(List.of(3, 7, 15, 22, 32, 43))
+                new LottoNumbers(Set.of(1, 5, 12, 21, 32, 43)),
+                new LottoNumbers(Set.of(1, 5, 12, 21, 32, 43)),
+                new LottoNumbers(Set.of(1, 5, 12, 21, 32, 43)),
+                new LottoNumbers(Set.of(1, 5, 12, 21, 32, 42)),
+                new LottoNumbers(Set.of(1, 5, 12, 21, 31, 44)),
+                new LottoNumbers(Set.of(3, 7, 15, 22, 32, 43))
             ));
 
-        LottoNumbers winningNumbers = new LottoNumbers(List.of(1, 5, 12, 21, 32, 43));
+        LottoNumbers winningNumbers = new LottoNumbers(Set.of(1, 5, 12, 21, 32, 43));
 
         // when
         RankCountGroup rankCountGroup = lottos.groupByRankCount(winningNumbers);

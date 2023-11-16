@@ -1,32 +1,26 @@
 package lotto.domain.lotto.wrapper;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    private List<LottoNumber> lottoNumberses = new ArrayList<>();
+    public static final int AMOUNT_OF_NUMBERS = 6;
 
-    public LottoNumbers() {
-    }
+    private final TreeSet<LottoNumber> lottoNumberses = new TreeSet<>();
 
-    public LottoNumbers(List<Integer> numbers) {
+    public LottoNumbers(Set<Integer> numbers) {
         validateAmountOfNumbers(numbers);
 
         numbers.forEach(number -> lottoNumberses.add(new LottoNumber(number)));
     }
 
-    private void validateAmountOfNumbers(List<Integer> numbers) {
-        if (removeDuplicate(numbers).size() != 6) {
-            throw new IllegalArgumentException("로또 당첨 번호는 6개가 입력되어야 합니다.");
+    private void validateAmountOfNumbers(Set<Integer> numbers) {
+        if (numbers.size() != AMOUNT_OF_NUMBERS) {
+            throw new IllegalArgumentException(String.format("로또 당첨 번호는 %d개가 입력되어야 합니다.", AMOUNT_OF_NUMBERS));
         }
-    }
-
-    private List<Integer> removeDuplicate(List<Integer> inputs) {
-        return inputs.stream()
-            .distinct()
-            .collect(Collectors.toUnmodifiableList());
     }
 
     public List<Integer> numbers() {

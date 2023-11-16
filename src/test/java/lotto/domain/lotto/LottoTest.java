@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -14,10 +15,10 @@ public class LottoTest {
     @Test
     void countMatchingNumbers() {
         // given
-        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 5, 12, 21, 32, 43));
+        LottoNumbers lottoNumbers = new LottoNumbers(Set.of(1, 5, 12, 21, 32, 43));
         Lotto lotto = new Lotto(lottoNumbers);
 
-        LottoNumbers winningNumbers = new LottoNumbers(List.of(1, 10, 12, 26, 32, 41));
+        LottoNumbers winningNumbers = new LottoNumbers(Set.of(1, 10, 12, 26, 32, 41));
 
         // when
         int count = lotto.countMatchingNumbers(winningNumbers);

@@ -9,26 +9,28 @@ import lotto.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoController {
 
-    private final LottoGame lottoGame;
     private final InputView inputView;
     private final ResultView resultView;
 
     public LottoController() {
-        lottoGame = new LottoGame();
+
         inputView = new InputView();
         resultView = new ResultView();
     }
 
     public void startGame() {
-        purchase();
-        winning();
+        LottoGame lottoGame = new LottoGame();
+
+        purchase(lottoGame);
+        winning(lottoGame);
     }
 
-    private void purchase() {
+    private void purchase(LottoGame lottoGame) {
         int numOfLotto = inputView.inputPurchaseMoney();
 
         List<LottoNumbers> lottoNumberses = drawLottoNumberses(numOfLotto);
@@ -38,18 +40,12 @@ public class LottoController {
     }
 
     private List<LottoNumbers> drawLottoNumberses(int numOfLotto) {
-        List<LottoNumbers> lottoNumberses = new ArrayList<>();
-
-        IntStream.range(0, numOfLotto)
-            .forEach(i -> {
-                LottoNumbers lottoNumbers = LottoMachine.drawLottoNumbers();
-                lottoNumberses.add(lottoNumbers);
-            });
-
-        return lottoNumberses;
+        return IntStream.range(0, numOfLotto)
+            .mapToObj(i -> LottoMachine.drawLottoNumbers())
+            .collect(Collectors.toUnmodifiableList());
     }
 
-    private void winning() {
+    private void winning(LottoGame lottoGame) {
         LottoNumbers winningNumbers = inputView.inputWinningNumbers();
 
         RankCountGroup rankCountGroup = lottoGame.groupByRankCount(winningNumbers);
