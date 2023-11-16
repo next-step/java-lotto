@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import calculator.domain.Operators.Operator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,21 +19,15 @@ public class Calculator {
         this.operators = new Operators(inputs);
     }
 
-    public List<Integer> operands() {
-        return this.operands;
+    public int result() {
+        return this.result;
     }
 
-
-    public Operators operators() {
-        return this.operators;
-    }
-
-    public int calculateAndGetResult() {
+    public void calculate() {
         result = this.operands.get(0);
-        for (int i = 0; i < this.operators.gerOperators().size(); ++i) {
-            calculate(i);
+        for (int i = 0; i < this.operators.operators().size(); ++i) {
+            result = this.operators.operators().get(i).calculate(result, this.operands.get(i + 1));
         }
-        return result;
     }
 
     private void validateInput(String input) {
@@ -67,40 +62,4 @@ public class Calculator {
     }
 
 
-    private int sum(int operand1, int operand2) {
-        result = operand1 + operand2;
-        return result;
-    }
-
-    private int subtraction(int operand1, int operand2) {
-        result = operand1 - operand2;
-        return result;
-    }
-
-    private int multiplication(int operand1, int operand2) {
-        result = operand1 * operand2;
-        return result;
-    }
-
-    private int division(int operand1, int operand2) {
-        result = operand1 / operand2;
-        return result;
-    }
-
-    private void calculate(int i) {
-        switch (this.operators.operator(i)) {
-            case "+":
-                result = sum(result, this.operands.get(i + 1));
-                break;
-            case "-":
-                result = subtraction(result, this.operands.get(i + 1));
-                break;
-            case "*":
-                result = multiplication(result, this.operands.get(i + 1));
-                break;
-            case "/":
-                result = division(result, this.operands.get(i + 1));
-                break;
-        }
-    }
 }
