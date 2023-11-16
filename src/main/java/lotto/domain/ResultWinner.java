@@ -9,6 +9,10 @@ public class ResultWinner {
 
         List<String> lastWeek = List.of(lastWeekWinner.split(","));
 
+        for(String number : lastWeek){
+            validation(number);
+        }
+
         List<Integer> resultList = new ArrayList<>();
 
         for(List<Integer> buyLottoList : list){
@@ -19,16 +23,26 @@ public class ResultWinner {
 
         Map<Integer, Integer> resultMap = makeResultMap();
 
-        for(int i=0; i<resultList.size(); i++){
-            if(resultMap.containsKey(resultList.get(i))){
-                resultMap.put(resultList.get(i), resultMap.get(resultList.get(i))+1);
-            }
-        }
+        resultAdd(resultList, resultMap);
 
         return resultMap;
     }
 
-    private static Map<Integer, Integer> makeResultMap() {
+    private static void validation(String number) {
+        if(Integer.parseInt(number) > 45){
+            throw new RuntimeException("로또 번호는 45를 넘을수 없습니다.");
+        }
+    }
+
+    private void resultAdd(List<Integer> resultList, Map<Integer, Integer> resultMap) {
+        for(int i = 0; i< resultList.size(); i++){
+            if(resultMap.containsKey(resultList.get(i))){
+                resultMap.put(resultList.get(i), resultMap.get(resultList.get(i))+1);
+            }
+        }
+    }
+
+    private Map<Integer, Integer> makeResultMap() {
         Map<Integer, Integer> resultMap = new HashMap<>();
 
         resultMap.put(3,0);
@@ -38,7 +52,7 @@ public class ResultWinner {
         return resultMap;
     }
 
-    private static int getAnswerCount(List<Integer> buyLottoList, List<String> lastWeek, int answerCount) {
+    private int getAnswerCount(List<Integer> buyLottoList, List<String> lastWeek, int answerCount) {
         boolean checkContains;
         for(String number : lastWeek){
             checkContains = buyLottoList.contains(Integer.parseInt(number));
@@ -47,10 +61,11 @@ public class ResultWinner {
         return answerCount;
     }
 
-    private static int getAnswerCalc(boolean checkContains, int answerCount) {
+    private int getAnswerCalc(boolean checkContains, int answerCount) {
         if(checkContains){
             answerCount++;
         }
         return answerCount;
     }
+
 }

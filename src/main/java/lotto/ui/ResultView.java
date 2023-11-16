@@ -13,7 +13,7 @@ public class ResultView {
 
     static final String RESULT_WINNER = "%d개 일치 (%d원)- %d개\n";
 
-    static final String TOTAL_AMOUNT = "총 수익률은 %d입니다.";
+    static final String TOTAL_AMOUNT = "총 수익률은 %.2f입니다.";
 
     static final int LOTTO_PRICE = 1000;
 
@@ -33,7 +33,7 @@ public class ResultView {
             System.out.printf(RESULT_WINNER, key, WinningToLotto.getWinningAmount(key), value);
             sumAmount += value*WinningToLotto.getWinningAmount(key);
         }
-        System.out.println(lottoCount*LOTTO_PRICE/sumAmount);
-        System.out.printf(TOTAL_AMOUNT, lottoCount*LOTTO_PRICE/sumAmount);
+
+        System.out.printf(TOTAL_AMOUNT, (double)sumAmount/(lottoCount*LOTTO_PRICE));
     }
 }
