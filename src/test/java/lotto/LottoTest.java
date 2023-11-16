@@ -17,4 +17,12 @@ public class LottoTest {
         Assertions.assertThat(selectedNumber).hasSize(6);
     }
 
+    @Test
+    void 당첨_번호_갯수_확인() {
+        Lotto lotto = new Lotto();
+        lotto.matchResult(3);
+
+        Assertions.assertThat(lotto.getMatchCount()).isEqualTo(3);
+    }
+
 }

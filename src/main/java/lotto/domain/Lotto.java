@@ -7,6 +7,7 @@ import java.util.List;
 public class Lotto {
 
     private final List<Integer> lottoNumber;
+    private int matchCount;
 
     public Lotto() {
         lottoNumber = randomNumbers().subList(0, 6);
@@ -24,5 +25,13 @@ public class Lotto {
 
     public List<Integer> selectedNumber() {
         return lottoNumber;
+    }
+
+    public void matchResult(int matchCount) {
+        this.matchCount = matchCount;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 }

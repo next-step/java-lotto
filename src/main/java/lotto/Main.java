@@ -23,5 +23,11 @@ public class Main {
 
         //생성된 로또 번호 표시
         resultView.issuedTicket(lottos);
+
+        //당첨 번호 입력
+        List<Integer> winningNumbers = inputView.winningNumberInput();
+
+        //당첨 확인
+        lottoCenter.matchWinningNumber(lottos, winningNumbers);
     }
 }
