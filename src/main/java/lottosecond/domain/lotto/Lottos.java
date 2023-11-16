@@ -17,7 +17,7 @@ public class Lottos {
     }
 
     public WinnerBoard checkWinnerLotto(List<LottoNumber> winNumbers) {
-        if (winNumbers.size() != 6) {
+        if (winNumbers.size() != Lotto.LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 반드시 6개여야 합니다.");
         }
 
