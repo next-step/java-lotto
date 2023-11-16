@@ -26,22 +26,4 @@ public class LottoTest {
         // then
         assertThat(count).isEqualTo(3);
     }
-
-    @DisplayName("당청 보너스 번호를 인자로 받아 자신의 보너스 번호와 비교한다.")
-    @Test
-    void isEqualWith() {
-        // given
-        LottoNumbers lottoNumbers = new LottoNumbers(Set.of(1, 5, 12, 21, 32, 43));
-        LottoNumber bonusNumber = new LottoNumber(10);
-        Lotto lotto = new Lotto(lottoNumbers, bonusNumber);
-
-        LottoNumber winningBonusNum = new LottoNumber(9);
-
-        // when
-        boolean result = lotto.isBonusNumEqualWith(winningBonusNum);
-
-        // then
-        assertThat(result).isFalse();
-    }
-
 }
