@@ -10,8 +10,7 @@ import static lotto.validate.InputValidation.inputValidate;
 
 public class Purchase {
 
-    private static final int LOTTO_AMOUNT = 1000;
-    private final int amount;
+    private final Amount amount;
     private final List<Lotto> lottos;
 
     public Purchase(int amount) {
@@ -20,12 +19,12 @@ public class Purchase {
 
     public Purchase(int amount, NumberStrategy numberStrategy) {
         inputValidate(amount);
-        this.amount = amount;
+        this.amount = new Amount(amount);
         this.lottos = numberStrategy.create(lottoCount());
     }
 
     public int amount() {
-        return amount;
+        return amount.price();
     }
 
     public List<Lotto> lottos() {
@@ -37,7 +36,7 @@ public class Purchase {
     }
 
     private int lottoCount() {
-        return amount / LOTTO_AMOUNT;
+        return amount.lottoCount();
     }
 
     @Override

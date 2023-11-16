@@ -32,15 +32,11 @@ public class WinnerNumber {
 
     public Map<RankLotto, Integer> statisticsResult(List<Lotto> lottos) {
         return lottos.stream()
-                .map(lotto -> RankLotto.findRank(lotto.match(this.winLotto), lotto.matchBonus(this.bonusNumber)))
+                .map(lotto -> RankLotto.findRank(lotto.match(this.winLotto), lotto.matchNumber(this.bonusNumber)))
                 .collect(Collectors.toMap(rank -> rank, rank -> 1, Integer::sum));
     }
 
     public Lotto resultLotto() {
         return winLotto;
-    }
-
-    public LottoNumber bonusNumber() {
-        return bonusNumber;
     }
 }

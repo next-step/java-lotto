@@ -58,7 +58,7 @@ public class LottoTest {
         Lotto lotto = new Lotto();
         lotto.create(List.of(1, 2, 7, 4, 5, 6));
         // when
-        boolean result = lotto.matchBonus(bonusNumber);
+        boolean result = lotto.matchNumber(bonusNumber);
         // then
         assertThat(result).isTrue();
     }

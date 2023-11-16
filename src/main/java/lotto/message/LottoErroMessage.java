@@ -14,7 +14,7 @@ public enum LottoErroMessage {
         this.message = message;
     }
 
-    public String getMessage() {
+    public String message() {
         return message;
     }
 

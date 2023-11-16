@@ -43,8 +43,8 @@ public class Lotto {
                 .collect(Collectors.toList()).size();
     }
 
-    public boolean matchBonus(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+    public boolean matchNumber(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 
     @Override

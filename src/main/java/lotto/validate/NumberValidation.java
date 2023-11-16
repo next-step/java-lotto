@@ -11,20 +11,20 @@ public class NumberValidation {
 
     public static void checkNumberRange(int number) {
         if (number < 1 || number > 45) {
-            throw new IllegalArgumentException(NOT_ENOUGH_LOTTO_NUMBER_RANGE.getMessage());
+            throw new IllegalArgumentException(NOT_ENOUGH_LOTTO_NUMBER_RANGE.message());
         }
     }
 
     public static void checkLottoSize(List<LottoNumber> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException(NOT_ENOUGH_LOTTO_NUMBER.getMessage());
+            throw new IllegalArgumentException(NOT_ENOUGH_LOTTO_NUMBER.message());
         }
     }
 
     public static void checkBonusNumber(Lotto lotto, LottoNumber bonusNumber) {
         checkNumberRange(bonusNumber.number());
-        if (lotto.matchBonus(bonusNumber)) {
-            throw new IllegalArgumentException(NOT_ENOUGH_LOTTO_BONUS_NUMBER.getMessage());
+        if (lotto.matchNumber(bonusNumber)) {
+            throw new IllegalArgumentException(NOT_ENOUGH_LOTTO_BONUS_NUMBER.message());
         }
     }
 }
