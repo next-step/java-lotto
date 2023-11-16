@@ -1,6 +1,5 @@
 package calculator.util;
 
-import calculator.domain.Calculator;
 import calculator.domain.Number;
 
 import java.util.Arrays;
@@ -15,7 +14,6 @@ public enum Operator {
 
     private final String label;
     private final BinaryOperator<Number> expression;
-    private static Calculator calculator = new Calculator();
 
     Operator(final String label, BinaryOperator<Number> expression) {
         this.label = label;
@@ -33,20 +31,23 @@ public enum Operator {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 연산자입니다."));
     }
 
-    private static Number add(Number a, Number b) {
-        return calculator.add(a, b);
+    private static Number add(Number left, Number right) {
+        return new Number(left.value() + right.value());
     }
 
-    private static Number subtract(Number a, Number b) {
-        return calculator.subtract(a, b);
+    private static Number subtract(Number left, Number right) {
+        return new Number(left.value() - right.value());
     }
 
-    private static Number multiply(Number a, Number b) {
-        return calculator.multiply(a, b);
+    private static Number multiply(Number left, Number right) {
+        return new Number(left.value() * right.value());
     }
 
-    private static Number divide(Number a, Number b) {
-        return calculator.divide(a, b);
+    private static Number divide(Number left, Number right) {
+        if (right.value() == 0) {
+            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        }
+        return new Number(left.value() / right.value());
     }
 
 }
