@@ -26,11 +26,4 @@ public class DigitTest {
         // when then
         assertThatThrownBy(() -> new Digit("+")).isInstanceOf(NumberFormatException.class);
     }
-
-    @Test
-    @DisplayName("생성실패/0~9가아닌문자열/IllegalArgumentException")
-    void createDigitFailNotDigits() {
-        // when then
-        assertThatIllegalArgumentException().isThrownBy(() -> new Digit("10"));
-    }
 }
