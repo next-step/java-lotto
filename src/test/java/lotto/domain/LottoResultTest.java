@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoStatTest {
+class LottoResultTest {
 
     @Test
     @DisplayName("일치개수확인/MyLotto와WinningLotto를 넣는다/일치개수별 로또의 개수가 나온다.")
@@ -19,13 +19,12 @@ class LottoStatTest {
         MyLottos myLottos = new MyLottos(Arrays.asList(lotto1, lotto2));
 
         // when
-        LottoStat lottoStat = new LottoStat();
-        lottoStat.check(myLottos, winningLotto);
+        LottoResult lottoResult = myLottos.getLottoResult(winningLotto);
 
         // then
-        assertThat(lottoStat.getMatchCountResult(6)).isEqualTo(1);
-        assertThat(lottoStat.getMatchCountResult(5)).isEqualTo(0);
-        assertThat(lottoStat.getMatchCountResult(4)).isEqualTo(1);
+        assertThat(lottoResult.getPrizeCount(LottoPrize.FirstPrizeMoney)).isEqualTo(1);
+        assertThat(lottoResult.getPrizeCount(LottoPrize.SecondPrizeMoney)).isEqualTo(0);
+        assertThat(lottoResult.getPrizeCount(LottoPrize.ThirdPrizeMoney)).isEqualTo(1);
     }
 
     @Test
@@ -39,13 +38,10 @@ class LottoStatTest {
         MyLottos myLottos = new MyLottos(Arrays.asList(lotto1, lotto2));
 
         // when
-        LottoStat lottoStat = new LottoStat();
-        lottoStat.check(myLottos, winningLotto);
+        LottoResult lottoResult = myLottos.getLottoResult(winningLotto);
 
         // then
-        System.out.println(LottoPrize.ThirdPrizeMoney.getMoney());
-        System.out.println(LottoPrize.FirstPrizeMoney.getMoney());
-        assertThat(lottoStat.getProfitRate(money))
+        assertThat(lottoResult.getProfitRate(money))
                 .isEqualTo((float) (LottoPrize.ThirdPrizeMoney.getMoney() + LottoPrize.FirstPrizeMoney.getMoney()) / money.getMoney());
     }
 }

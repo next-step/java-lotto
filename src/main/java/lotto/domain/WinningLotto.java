@@ -9,6 +9,10 @@ public class WinningLotto {
         this.lotto = Lotto.of(nums);
     }
 
+    public WinningLotto(Lotto lotto) {
+        this.lotto = lotto;
+    }
+
     public LottoPrize getPrize(Lotto lotto) {
         int matchCount = (int) lotto.getLottoNums().stream()
                 .filter(lottoNum -> this.lotto.getLottoNums().contains(lottoNum))

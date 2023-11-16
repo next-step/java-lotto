@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoFactory;
-import lotto.domain.LottoStat;
+import lotto.domain.LottoResult;
 import lotto.domain.Money;
 import lotto.domain.MyLottos;
 import lotto.domain.WinningLotto;
@@ -25,10 +25,9 @@ public class LottoApplication {
         List<Integer> nums = InputView.winningNumbers();
         WinningLotto winningLotto = new WinningLotto(nums);
 
-        LottoStat lottoStat = new LottoStat();
-        lottoStat.check(myLottos, winningLotto);
+        LottoResult lottoResult = myLottos.getLottoResult(winningLotto);
 
-        OutputView.outputLottoStats(LottoStatsResponse.from(lottoStat, money));
+        OutputView.outputLottoStats(LottoStatsResponse.from(lottoResult, money));
     }
 
 }
