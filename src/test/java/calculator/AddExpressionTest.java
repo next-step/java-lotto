@@ -13,8 +13,8 @@ public class AddExpressionTest {
     @DisplayName("덧셈을 합니다.")
     @Test
     void plusCalculate(){
-        AddExpression addExpression = new AddExpression();
-        VariableExpression result = addExpression.calculate(ONE, TWO);
+        AddExpression addExpression = new AddExpression(ONE, TWO);
+        VariableExpression result = addExpression.calculate();
         Assertions.assertThat(result.value()).isEqualTo(3);
     }
 }

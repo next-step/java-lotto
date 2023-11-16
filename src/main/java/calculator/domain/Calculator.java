@@ -5,6 +5,7 @@ import calculator.domain.CalculatorService;
 import calculator.domain.VariableExpression;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.BiFunction;
 
 public class Calculator {
 
@@ -13,8 +14,9 @@ public class Calculator {
         VariableExpression result = new VariableExpression(iterator.next());
         while (iterator.hasNext()){
             CalculatorService calculatorService = new CalculatorService();
-            CalculatorExpression expression = calculatorService.typeOfExpression(iterator.next());
-            result = expression.calculate(result, new VariableExpression(iterator.next()));
+            BiFunction<VariableExpression, VariableExpression, CalculatorExpression> biFunction = calculatorService.typeOfExpression(
+                iterator.next());
+            result = biFunction.apply(result,new VariableExpression(iterator.next())).calculate();
         }
         return result;
     }
