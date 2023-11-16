@@ -35,7 +35,7 @@
 - **domain** (테스트 필수)
   [✔] AddExpression.java
   [✔] Calculator.java
-  [❌] CalculatorExpression.java 
+  [❌] CalculatorExpression.java (인터페이스)
   [] Expression.java (ENUM 테스트)
   [✔] DivideExpression.java
   [✔] MinusExpression.java
