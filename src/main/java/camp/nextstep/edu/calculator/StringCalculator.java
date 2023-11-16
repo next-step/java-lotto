@@ -28,33 +28,12 @@ public class StringCalculator {
         return result;
     }
 
-    private static int calculate(String strLeft, String operator, String strRight) {
-        if (!isValidOperator(operator)) {
-            throw new IllegalArgumentException("지원하지 않는 잘못된 연산자입니다.");
-        }
-
+    private static int calculate(String strLeft, String strOperator, String strRight) {
+        Operator operator = Operator.from(strOperator);
         int left = Integer.parseInt(strLeft);
         int right = Integer.parseInt(strRight);
 
-        return calculate(operator, left, right);
-    }
-
-    private static boolean isValidOperator(String operator) {
-        return "+".equals(operator) || "-".equals(operator)
-            || "*".equals(operator) || "/".equals(operator);
-    }
-
-    private static int calculate(String operator, int left, int right) {
-        if ("+".equals(operator)) {
-            return left + right;
-        }
-        if ("-".equals(operator)) {
-            return left - right;
-        }
-        if ("*".equals(operator)) {
-            return left * right;
-        }
-        return left / right;
+        return operator.operate(left, right);
     }
 
     private static boolean isEmpty(String input) {
