@@ -2,6 +2,8 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
@@ -39,11 +41,10 @@ class RankTest {
         assertThat(Rank.rank(3, false)).isEqualTo(Rank.FIFTH);
     }
 
-    @Test
-    void rank_꽝() {
-        assertThatIllegalArgumentException().isThrownBy(() -> Rank.rank(2, false));
-        assertThatIllegalArgumentException().isThrownBy(() -> Rank.rank(1, false));
-        assertThatIllegalArgumentException().isThrownBy(() -> Rank.rank(0, false));
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 2})
+    void rank_꽝(int input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> Rank.rank(input, false));
     }
 
     @Test
