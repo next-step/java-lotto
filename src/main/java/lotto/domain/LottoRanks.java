@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import calculator.domain.Money;
+
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
@@ -13,11 +15,11 @@ public class LottoRanks {
     }
 
     public long findPrizeMoney() {
-        long money = 0;
+        Money money = new Money(0);
         for (LottoRank lottoRank : ranks.keySet()) {
-            money = money + lottoRank.sumPrize(ranks.get(lottoRank));
+            money = money.plus(lottoRank.sumPrize(ranks.get(lottoRank)));
         }
-        return money;
+        return money.find();
     }
 
     public Map<LottoRank, Integer> find() {

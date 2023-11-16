@@ -21,7 +21,7 @@ public class LottoRanksTest {
         int amount = 5000;
         int bonus = 1;
 
-        Lottos lottos = new Lottos(amount, numberGeneration);
+        Lottos lottos = Lottos.extracted(amount, numberGeneration);
         LottoRanks lottoRanks = new LottoRanks(lottos, winList, bonus);
 
         assertThat(lottoRanks.findPrizeMoney()).isEqualTo(150_000_000L);

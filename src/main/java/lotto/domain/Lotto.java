@@ -6,12 +6,12 @@ import java.util.List;
 public class Lotto {
     private final List<Integer> lotto;
 
-    public Lotto(NumberGeneration numberGeneration) {
-        this.lotto = numberGeneration.generate();
-    }
-
     public Lotto(List<Integer> list) {
         this.lotto = list;
+    }
+
+    public Lotto(NumberGeneration numberGeneration) {
+        this(numberGeneration.generate());
     }
 
     public List<Integer> find() {
@@ -21,13 +21,13 @@ public class Lotto {
 
     public LottoRank findRank(List<Integer> winList, int bonus) {
         if (isRank(winList)) {
-            return LottoRank.findMatchCount(countMath(winList), isHaveBonus(bonus));
+            return LottoRank.findMatchCount(countMath(winList), contains(bonus));
         }
         return LottoRank.MISS;
 
     }
 
-    boolean isHaveBonus(int bonus) {
+    boolean contains(int bonus) {
         return lotto.contains(bonus);
     }
 

@@ -19,7 +19,7 @@ public class LottosTest {
         NumberGeneration numberGeneration = new RandomNumberGeneration();
         int amount = 14000;
 
-        Lottos lottos = new Lottos(amount, numberGeneration);
+        Lottos lottos = Lottos.extracted(amount, numberGeneration);
 
         assertThat(lottos.count()).isEqualTo(14);
     }

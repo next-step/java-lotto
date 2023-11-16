@@ -1,33 +1,37 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.BiFunction;
+
 public enum LottoRank {
-    MISS(0, 0L),
-    FIFTH(3, 5_000L),
-    FOURTH(4, 50_000L),
-    THIRD(5, 1_500_000L),
-    SECOND(5, 30_000_000L),
-    FIRST(6, 2_000_000_000L);
+    MISS(0, 0L, (count,bonus) -> count <= 2),
+    FIFTH(3, 5_000L, (count,bonus) -> count == 3),
+    FOURTH(4, 50_000L, (count,bonus) -> count == 4),
+    THIRD(5, 1_500_000L, (count,bonus) -> count == 5&&!bonus),
+    SECOND(5, 30_000_000L, (count,bonus) -> count == 5&&bonus),
+    FIRST(6, 2_000_000_000L, (count,bonus) -> count == 6);
 
     private final int count;
     private final long prizeMoney;
+    private final BiFunction<Integer, Boolean, Boolean> expression;
 
-    LottoRank(int count, long prizeMoney) {
+    LottoRank(int count, long prizeMoney, BiFunction<Integer, Boolean, Boolean> expression) {
         this.count = count;
         this.prizeMoney = prizeMoney;
+        this.expression = expression;
     }
 
-    public static LottoRank findMatchCount(int matchNumber, boolean bouns) {
-        if (matchNumber == 5 && bouns) {
-            return LottoRank.SECOND;
-        }
+    public static LottoRank findMatchCount(int matchNumber, boolean bonus) {
+        return Arrays.stream(values())
+                .filter(lottoRank -> lottoRank.match(matchNumber, bonus))
+                .findFirst()
+                .orElse(MISS);
+    }
 
-        for (LottoRank lottoRank : LottoRank.values()) {
-            if (lottoRank.count == matchNumber) {
-                return lottoRank;
-            }
-        }
-
-        throw new IllegalArgumentException("로또 매치가 올바르지 않습니다");
+    private boolean match(int matchNumber, boolean bonus) {
+        return this.expression.apply(matchNumber, bonus);
     }
 
     public long sumPrize(int count) {
@@ -36,6 +40,10 @@ public enum LottoRank {
 
     public int count() {
         return this.count;
+    }
+
+    private boolean sameNumber(int number){
+         return this.count == number;
     }
 
     public long prize() {

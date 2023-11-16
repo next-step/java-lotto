@@ -18,7 +18,7 @@ public class LottoController {
 
         int amount = inputPurchaseAmount();
 
-        Lottos lottos = new Lottos(amount, NUMBER_GENERATION);
+        Lottos lottos = Lottos.extracted(amount, NUMBER_GENERATION);
 
         printLottoCount(lottos.count());
         printLottoBundle(lottos.find());

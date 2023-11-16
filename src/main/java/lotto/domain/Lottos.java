@@ -10,19 +10,22 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Lottos(int amount, NumberGeneration numberGeneration) {
+    public static Lottos extracted(int amount, NumberGeneration numberGeneration) {
         int count = calculateCount(amount);
-        this.lottos = extracted(count, numberGeneration);
-    }
-
-    private List<Lotto> extracted(int count, NumberGeneration numberGeneration) {
         List<Lotto> lottoList = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
             lottoList.add(new Lotto(numberGeneration));
         }
 
-        return lottoList;
+        return new Lottos(lottoList);
+    }
+    private static int calculateCount(int amount) {
+        if (amount % UNIT != 0) {
+            throw new IllegalArgumentException("금액은 " + UNIT + "단위 입니다");
+        }
+
+        return amount / UNIT;
     }
 
     public int count() {
@@ -44,13 +47,7 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    private int calculateCount(int amount) {
-        if (amount % UNIT != 0) {
-            throw new IllegalArgumentException("금액은 " + UNIT + "단위 입니다");
-        }
 
-        return amount / UNIT;
-    }
 
 
 }

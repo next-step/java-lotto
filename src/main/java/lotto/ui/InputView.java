@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class InputView {
 
     public static final Scanner SCANNER = new Scanner(System.in);
-    public static final String PATTERN = ", ";
+    public static final String PATTERN = ",";
 
     private InputView() {
     }
@@ -47,7 +47,7 @@ public class InputView {
     }
 
     private static String[] splitText(String text) {
-        return text.split(PATTERN);
+        return text.replaceAll(" ","").split(PATTERN);
     }
 
     private static String[] checkListSize(String[] textArray) {

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,7 +44,7 @@ public class LottoTest {
     @DisplayName("로또번호에 보너스 볼 번호가 있는지 확인")
     void 보너스볼_유무_확인() {
         int bonus = 7;
-        assertThat(lotto.isHaveBonus(bonus)).isFalse();
+        assertThat(lotto.contains(bonus)).isFalse();
 
     }
 }
