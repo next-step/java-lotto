@@ -24,10 +24,6 @@ public class WinningNumbers {
         List<LottoNumber> lottoNumbers = new ArrayList<>(lotto.lottoNumbers());
         lottoNumbers.add(bonusNumber);
 
-        if(lottoNumbers.size() != WINNING_NUMBER_SIZE){
-            throw new IllegalArgumentException("당첨 번호는 7개여야 합니다.");
-        }
-
         if(lotto.contains(bonusNumber)){
             throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
         }
