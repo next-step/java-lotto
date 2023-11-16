@@ -1,6 +1,8 @@
 package calculator.domain.operator;
 
-public interface Operator {
+import java.util.function.BiFunction;
 
-    public int operate(int num1, int num2);
+@FunctionalInterface
+public interface Operator extends BiFunction<Integer, Integer, Integer> {
+
 }

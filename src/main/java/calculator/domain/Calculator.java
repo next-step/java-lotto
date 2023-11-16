@@ -4,6 +4,7 @@ import calculator.domain.operator.Operator;
 import calculator.domain.operator.OperatorFactory;
 
 import java.util.List;
+import java.util.function.BiFunction;
 
 public class Calculator {
     private final int START_POINT = 1;
@@ -27,7 +28,7 @@ public class Calculator {
     }
 
     private int partialCalculate(int num1, Operator operator, Digit num2) {
-        return operator.operate(num1, num2.getNum());
+        return operator.apply(num1, num2.getNum());
     }
 
     private Operator getNextOperator() {

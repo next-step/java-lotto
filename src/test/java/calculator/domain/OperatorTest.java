@@ -41,7 +41,7 @@ public class OperatorTest {
         Operator operator = OperatorFactory.of(inputOperator);
 
         // when then
-        assertThat(operator.operate(num1, num2)).isEqualTo(result);
+        assertThat(operator.apply(num1, num2)).isEqualTo(result);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class OperatorTest {
         Operator operator = OperatorFactory.of("/");
 
         // when then
-        assertThatThrownBy(() -> operator.operate(4, 0)).isInstanceOf(ArithmeticException.class);
+        assertThatThrownBy(() -> operator.apply(4, 0)).isInstanceOf(ArithmeticException.class);
     }
 
     @Test
@@ -61,6 +61,6 @@ public class OperatorTest {
         Operator operator = OperatorFactory.of("/");
 
         // when then
-        assertThatIllegalArgumentException().isThrownBy(() -> operator.operate(4, 3));
+        assertThatIllegalArgumentException().isThrownBy(() -> operator.apply(4, 3));
     }
 }
