@@ -1,12 +1,12 @@
 package Lotto;
 
-import domain.*;
+import domain.Lotto;
+import domain.LottoGame;
+import domain.UserLotto;
+import domain.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import view.ResultView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 

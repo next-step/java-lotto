@@ -20,6 +20,7 @@ public class WinningLotto {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList()));
     }
+
     public WinningLotto(List<Integer> numbers) {
         if (numbers.size() < LOTTO_NUMBER_COUNT_LIMIT) {
             throw new IllegalArgumentException("로또 숫자는 6개 입력이 필요합니다.");

@@ -1,4 +1,7 @@
-import domain.*;
+import domain.Lotto;
+import domain.LottoGame;
+import domain.UserLotto;
+import domain.WinningLotto;
 import view.InputView;
 import view.ResultView;
 

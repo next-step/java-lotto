@@ -18,6 +18,7 @@ public class UserLotto {
     public UserLotto(Lotto lotto) {
         this.lottoTickets = Arrays.asList(lotto);
     }
+
     public UserLotto(List<Lotto> lotto) {
         this.lottoTickets = lotto;
     }

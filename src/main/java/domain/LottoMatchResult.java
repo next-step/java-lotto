@@ -2,7 +2,6 @@ package domain;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class LottoMatchResult {
     private Map<Integer, Integer> matchResult = new HashMap<>();
