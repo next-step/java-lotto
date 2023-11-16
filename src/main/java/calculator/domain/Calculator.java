@@ -4,7 +4,6 @@ import calculator.domain.operator.Operator;
 import calculator.domain.operator.OperatorFactory;
 
 import java.util.List;
-import java.util.function.BiFunction;
 
 public class Calculator {
     private final int START_POINT = 1;
