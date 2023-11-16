@@ -21,13 +21,13 @@ public class LottoMachine {
                 .collect(Collectors.toList());
     }
 
-    public Lottos play(int paidMoney){
-        validatePaidMoney(paidMoney);
+    public Lottos play(int paidMoney, Lottos inputLottos) {
+        validatePaidMoney(paidMoney, inputLottos);
         int gameCount = paidMoney / PRICE_PER_LOTTO;
         return lottos(gameCount);
     }
 
-    private void validatePaidMoney(int paidMoney) {
+    private void validatePaidMoney(int paidMoney, Lottos lottos) {
         if (paidMoney % PRICE_PER_LOTTO != 0 || paidMoney < PRICE_PER_LOTTO) {
             throw new IllegalArgumentException("로또 구입 금액은 " + PRICE_PER_LOTTO + "원 단위로 가능합니다. (현재 금액: " + paidMoney + "원)");
         }

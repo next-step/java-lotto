@@ -11,11 +11,11 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottoMachineTest {
 
     private static final int PAID_MONEY = 20_000;
-
+    private static final Lottos lottos = TestUtil.lottosFixtureHasSizeOne();
     @Test
     @DisplayName("로또머신은 구매한 로또 리스트를 반환한다.")
     void playReturn() {
-        assertThat(new LottoMachine().play(PAID_MONEY))
+        assertThat(new LottoMachine().play(PAID_MONEY,lottos))
                 .isInstanceOf(Lottos.class);
     }
 
@@ -25,20 +25,26 @@ public class LottoMachineTest {
     @DisplayName("로또 구매금액은 PRICE_PER_LOTTO 보다 커야한다.")
     void paidMoneyAmountCheck(int input) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoMachine().play(input));
+                .isThrownBy(() -> new LottoMachine().play(input,lottos));
     }
 
     @Test
     @DisplayName("로또 구매금액은 PRICE_PER_LOTTO 로 나누어 떨어져야한다.")
     void paidMoneyUnitCheck() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoMachine().play(1_001));
+                .isThrownBy(() -> new LottoMachine().play(1_001,lottos));
     }
 
     @Test
     @DisplayName("로또 구매 테스트")
     void purchase(){
-        assertThat(new LottoMachine().play(PAID_MONEY).lottos().size())
+        assertThat(new LottoMachine().play(PAID_MONEY,lottos).lottos().size())
                 .isEqualTo(PAID_MONEY / LottoMachine.PRICE_PER_LOTTO);
+    }
+
+    @Test
+    @DisplayName("로또 구매시 수동 구매 로또 목록을 받아 처리한다.")
+    void purchaseWithManualLotto(){
+        assertThat(new LottoMachine().play(PAID_MONEY, TestUtil.lottosFixtureHasSizeOne())).isInstanceOf(Lottos.class);
     }
 }
