@@ -1,7 +1,9 @@
 package lotto.controller;
 
 import lotto.domain.AutoLottoNumberGenerator;
+import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoWinningMachine;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
 
@@ -23,6 +25,8 @@ public class LottoController {
         OutputView.outputLottos(lottoMachine.getLottos());
 
         List<Integer> winningNumbers = InputView.inputWinningNumbers(DELIMITER);
+
+        LottoWinningMachine winningMachine = new LottoWinningMachine(new Lotto(winningNumbers));
 
     }
 }
