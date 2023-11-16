@@ -7,6 +7,9 @@ import java.util.Map;
 
 public class Lotto {
 	private final static int NUMBER_COUNT = 6;
+	private final static int MIN_MATCH = 3;
+	private final static int MIN_NUMBER = 1;
+	private final static int MAX_NUMBER = 10;
 	private final List<Integer> lottoNumbers;
 
 	public Lotto() {
@@ -37,7 +40,7 @@ public class Lotto {
 
 	private List<Integer> allNumbers() {
 		List<Integer> numbers = new ArrayList<>();
-		for (int i = 1; i <= 45; i++) {
+		for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
 			numbers.add(i);
 		}
 
@@ -52,6 +55,10 @@ public class Lotto {
 						Map<LottoMatch, Integer> lottoMatchResult)
 	{
 		int matchedCount = lottoWinningNumbers.matchedCount(this);
+		if(matchedCount < MIN_MATCH) {
+			return;
+		}
+
 		lottoMatchResult.merge(LottoMatch.fromInt(matchedCount), 1, Integer::sum);
 	}
 }

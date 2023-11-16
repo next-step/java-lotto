@@ -1,6 +1,5 @@
 package lotto;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -19,10 +18,10 @@ public class LottoResultTest {
 		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningLotto);
 		LottoList lottoList = new LottoList(List.of(lottoOne, lottoTwo));
 
-		LottoResult lottoResult = new LottoResult(purchaseAmount);
-		lottoResult.matchesWinningNumbers(lottoList, lottoWinningNumbers);
+		LottoResult lottoResult = new LottoResult(lottoList);
+		lottoResult.matchesWinningNumbers(lottoWinningNumbers);
 
-		Map<LottoMatch, Integer> matchResult = lottoResult.result();
+		Map<LottoMatch, Integer> matchResult = lottoResult.lottoMatchMap();
 		assertThat(matchResult.get(LottoMatch.THREE)).isEqualTo(1);
 		assertThat(matchResult.get(LottoMatch.FOUR)).isEqualTo(1);
 		assertEquals(lottoResult.rateOfReturn(), 300, 0.001);

@@ -1,29 +1,34 @@
 package lotto;
 
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoResult {
+	private static final int LOTTO_PRICE = 1000;
+
 	private final Map<LottoMatch, Integer> lottoMatchResult;
-	private final long purchaseAmount;
+	private final LottoList lottoList;
 	private int rateOfReturn;
 
-	public LottoResult(long purchaseAmount) {
-		lottoMatchResult = new HashMap<>();
-		this.purchaseAmount = purchaseAmount;
+	public LottoResult(LottoList lottoList) {
+		lottoMatchResult = new EnumMap<>(LottoMatch.class);
+		this.lottoList = lottoList;
 	}
 
-	public void matchesWinningNumbers(LottoList lottoList, LottoWinningNumbers lottoWinningNumbers) {
-		lottoMatchResult.clear();
-		List<Lotto> lottos = lottoList.lottoList();
-
-		for (Lotto lotto : lottos) {
+	public void matchesWinningNumbers(LottoWinningNumbers lottoWinningNumbers) {
+		initializeLottoMatchMap();
+		for (Lotto lotto : lottoList) {
 			lotto.matches(lottoWinningNumbers, lottoMatchResult);
 		}
 
 		calculateRateOfReturn();
+	}
+
+	private void initializeLottoMatchMap() {
+		for(LottoMatch lottoMatch : LottoMatch.values()) {
+			lottoMatchResult.put(lottoMatch, 0);
+		}
 	}
 
 	private void calculateRateOfReturn() {
@@ -37,10 +42,10 @@ public class LottoResult {
 			amount += lottoMatch.amount() * count;
 		}
 
-		this.rateOfReturn = (int) ((amount / purchaseAmount) * 100);
+		this.rateOfReturn = (int) ((amount / (lottoList.size() * LOTTO_PRICE)) * 100);
 	}
 
-	public Map<LottoMatch, Integer> result() {
+	public Map<LottoMatch, Integer> lottoMatchMap() {
 		return Collections.unmodifiableMap(this.lottoMatchResult);
 	}
 
