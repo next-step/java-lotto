@@ -1,15 +1,15 @@
 package calculator.domain;
 
 public class DivideExpression implements CalculatorExpression {
-    private final VariableExpression dividend;
-    private final VariableExpression divisor;
+    private final Variable dividend;
+    private final Variable divisor;
 
-    public DivideExpression(VariableExpression left, VariableExpression right) {
+    public DivideExpression(Variable left, Variable right) {
         this.dividend = left;
         this.divisor = right;
     }
-    public VariableExpression calculate() {
+    public Variable calculate() {
         int result = Math.round((float)dividend.value() / divisor.value());
-        return VariableExpression.of(Integer.toString(result));
+        return Variable.of(Integer.toString(result));
     }
 }

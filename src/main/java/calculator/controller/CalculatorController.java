@@ -1,12 +1,11 @@
 package calculator.controller;
 
 import calculator.domain.Calculator;
-import calculator.domain.VariableExpression;
+import calculator.domain.Variable;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 import calculator.view.InputView;
 import calculator.view.ResultView;
 
@@ -27,7 +26,7 @@ public class CalculatorController {
     public void calculate() {
         String origin = inputView.calculatorString();
         List<String> strings = splitStrings(origin);
-        VariableExpression expression = Calculator.calculate(strings);
+        Variable expression = Calculator.calculate(strings);
         resultView.calculateResult(expression.value());
     }
 
