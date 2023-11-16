@@ -43,8 +43,9 @@ class LottoStatTest {
         lottoStat.check(myLottos, winningLotto);
 
         // then
-        System.out.println("lottoStat.getProfitRate(money) = " + lottoStat.getProfitRate(money));
+        System.out.println(LottoPrize.ThirdPrizeMoney.getMoney());
+        System.out.println(LottoPrize.FirstPrizeMoney.getMoney());
         assertThat(lottoStat.getProfitRate(money))
-                .isEqualTo((float) (ReceiveMoney.MATCH_4_RECEIVE_MONEY.getMoney() + ReceiveMoney.MATCH_6_RECEIVE_MONEY.getMoney()) / money.getMoney());
+                .isEqualTo((float) (LottoPrize.ThirdPrizeMoney.getMoney() + LottoPrize.FirstPrizeMoney.getMoney()) / money.getMoney());
     }
 }

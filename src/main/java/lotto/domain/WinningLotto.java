@@ -9,14 +9,12 @@ public class WinningLotto {
         this.lotto = Lotto.of(nums);
     }
 
-    public int matchCount(Lotto lotto) {
-        int matchCount = 0;
-        for (int num : lotto.getNums()) {
-            if (this.lotto.getNums().contains(num)) {
-                matchCount++;
-            }
-        }
-        return matchCount;
+    public LottoPrize getPrize(Lotto lotto) {
+        int matchCount = (int) lotto.getLottoNums().stream()
+                .filter(lottoNum -> this.lotto.getLottoNums().contains(lottoNum))
+                .count();
+
+        return LottoPrize.valueOf(matchCount);
     }
 
 }

@@ -6,16 +6,18 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class WinningLottoTest {
 
     @Test
-    @DisplayName("정답로또/로또와비교/몇개가맞는지 반환")
-    void matchCount() {
+    @DisplayName("정답로또/로또와비교/등수반환")
+    void getPrize() {
         // given
         Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         // when then
-        Assertions.assertThat(winningLotto.matchCount(lotto)).isEqualTo(6);
+        assertThat(winningLotto.getPrize(lotto)).isEqualTo(LottoPrize.FirstPrizeMoney);
     }
 }

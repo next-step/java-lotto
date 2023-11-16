@@ -20,6 +20,10 @@ public class Lotto {
         return new Lotto(nums.stream().map(LottoNum::new).collect(Collectors.toList()));
     }
 
+    public List<LottoNum> getLottoNums() {
+        return lottoNums;
+    }
+
     public List<Integer> getNums() {
         return lottoNums.stream().map(LottoNum::getNum).collect(Collectors.toList());
     }

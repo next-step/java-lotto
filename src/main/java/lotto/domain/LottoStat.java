@@ -19,7 +19,7 @@ public class LottoStat {
 
     public void check(MyLottos myLottos, WinningLotto winningLotto) {
         myLottos.getLottos().forEach(lotto -> {
-            addMatchCount(winningLotto.matchCount(lotto));
+            addMatchCount(winningLotto.getPrize(lotto).getMatchCount());
         });
     }
 
@@ -32,10 +32,10 @@ public class LottoStat {
     }
 
     private int getReceiveMoney() {
-        return statistics.get(3) * ReceiveMoney.MATCH_3_RECEIVE_MONEY.getMoney()
-                + statistics.get(4) * ReceiveMoney.MATCH_4_RECEIVE_MONEY.getMoney()
-                + statistics.get(5) * ReceiveMoney.MATCH_5_RECEIVE_MONEY.getMoney()
-                + statistics.get(6) * ReceiveMoney.MATCH_6_RECEIVE_MONEY.getMoney();
+        return statistics.get(3) * LottoPrize.ForthPrizeMoney.getMoney()
+                + statistics.get(4) * LottoPrize.ThirdPrizeMoney.getMoney()
+                + statistics.get(5) * LottoPrize.SecondPrizeMoney.getMoney()
+                + statistics.get(6) * LottoPrize.FirstPrizeMoney.getMoney();
     }
 
     public float getProfitRate(Money buyMoney) {
