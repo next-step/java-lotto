@@ -15,7 +15,8 @@ public class LottoController {
         int quantity = amount / PRICE_OF_LOTTO;
         OutputView.outputQuantity(quantity);
 
-        LottoMachine lottoMachine = new LottoMachine(quantity, new AutoLottoNumberGenerator());
+        LottoMachine lottoMachine = new LottoMachine();
+        lottoMachine.issueLottos(quantity, new AutoLottoNumberGenerator());
 
         OutputView.outputLottos(lottoMachine.getLottoNumbers());
 

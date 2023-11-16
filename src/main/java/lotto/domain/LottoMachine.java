@@ -7,10 +7,12 @@ public class LottoMachine {
 
     private final List<Lotto> lottos;
 
-    public LottoMachine(int amount, LottoNumberGenerator lottoNumberGenerator) {
+    public LottoMachine() {
         this.lottos = new ArrayList<>();
+    }
 
-        for (int i = 0; i < amount; i++) {
+    public void issueLottos(final int quantity, LottoNumberGenerator lottoNumberGenerator) {
+        for (int i = 0; i < quantity; i++) {
             this.lottos.add(new Lotto(lottoNumberGenerator.generate()));
         }
     }
