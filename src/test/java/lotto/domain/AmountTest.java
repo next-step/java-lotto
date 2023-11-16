@@ -14,9 +14,9 @@ class AmountTest {
 
     @Test
     void divideTest() {
-        final double result = new Amount(2000).divide(new Amount(1000));
+        final Amount result = new Amount(2000).divide(new Amount(1000));
 
-        assertThat(result).isEqualTo(2.00);
+        assertThat(result).isEqualTo(new Amount(2.00));
     }
 
     @Test
