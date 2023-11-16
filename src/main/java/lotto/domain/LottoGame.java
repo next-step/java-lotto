@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class LottoGame {
@@ -9,7 +8,7 @@ public class LottoGame {
     private static final String INVALID_AMOUNT = "로또 금액보다 높은 금액을 입력해야 합니다.";
     private static final int LOTTO_AMOUNT = 1000;
     public static final String SPLIT_TEXT = ",";
-    private Lottos lottos;
+    private final Lottos lottos;
 
     public LottoGame(final Lottos lottos) {
         this.lottos = lottos;
