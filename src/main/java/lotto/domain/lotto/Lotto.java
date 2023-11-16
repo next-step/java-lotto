@@ -2,8 +2,6 @@ package lotto.domain.lotto;
 
 import lotto.constants.Winning;
 
-import java.util.List;
-
 public class Lotto {
 
     private final LottoNumbers lottoNumbers;
@@ -24,9 +22,6 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public List<LottoNumber> numbers() {
-        return lottoNumbers.numbers();
-    }
 
     @Override
     public String toString() {

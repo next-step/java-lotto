@@ -1,7 +1,6 @@
 package lotto.domain.lotto;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,14 +40,8 @@ public class LottoNumbers {
                 .count();
     }
 
-    public List<LottoNumber> numbers() {
-        return Collections.unmodifiableList(numbers);
-    }
-
     @Override
     public String toString() {
-        return "LottoNumbers{" +
-                "numbers=" + numbers +
-                '}';
+        return numbers.toString();
     }
 }
