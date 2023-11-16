@@ -8,17 +8,22 @@ public class LottoGame {
 
     public static final int ZERO = 0;
     public static final int ONE_GAME = 1000;
+    public static final int TREE_MATCH = 3;
+    public static final int FOUR_MATCH = 4;
+    public static final int FIVE_MATCH = 5;
+    public static final int SIX_MATCH = 6;
+    public static final double RATE_OF_RETURN = 0.0;
 
     public static List<Lotto> createLottoGames(int gameCount){
         List<Lotto> lottos = new ArrayList<>();
-        for(int i = 0; i <gameCount; i++){
+        for(int i = 0; i < gameCount; i++){
             lottos.add(new Lotto(sortLottoNumber(createLottoNumber())));
         }
         return lottos;
     }
 
     public static int countGame(int money){
-        return money/ONE_GAME;
+        return money / ONE_GAME;
     }
 
     public static List<Integer> createLottoNumber(){
@@ -33,7 +38,7 @@ public class LottoGame {
     public static List<Integer> convertLastLottoNumbers(String text){
         List<Integer> lastLottoNumbers = new ArrayList<>();
         String[] values = splitText(clearValue(text));
-        for(String str: values){
+        for(String str : values){
             lastLottoNumbers.add(convertNum(str));
         }
         checkLottoNumberCount(lastLottoNumbers);
@@ -71,19 +76,37 @@ public class LottoGame {
     public static LottoResult lottoResult(int money, List<Lotto> lottos, List<Integer> lastLotto){
         List <Integer> lottoMatchResults = new ArrayList<>();
 
-        for(Lotto lotto: lottos){
+        for(Lotto lotto : lottos){
             lottoMatchResults.add(lotto.matchCount(lastLotto));
         }
 
-        int tree = (int)lottoMatchResults.stream().filter(number -> number==3).count();
-        int four = (int)lottoMatchResults.stream().filter(number -> number==4).count();
-        int five = (int)lottoMatchResults.stream().filter(number -> number==5).count();
-        int six = (int)lottoMatchResults.stream().filter(number -> number==6).count();
+        int tree = getCount(lottoMatchResults, TREE_MATCH);
+        int four = getCount(lottoMatchResults, FOUR_MATCH);
+        int five = getCount(lottoMatchResults, FIVE_MATCH);
+        int six = getCount(lottoMatchResults, SIX_MATCH);;
 
-        double rateOfReturn = Math.round((double)(tree * 5000 + four * 50000 + five * 1500000 + six * 2000000000) / money * 100) / 100.0;
+        double rateOfReturn = rate(tree, four, five, six, money);
         LottoResult lottoResult = new LottoResult(tree, four, five, six, rateOfReturn);
 
         return lottoResult;
+    }
+
+    private static double rate(int tree, int four, int five, int six, int money) {
+        LottoOperator calc = new LottoOperator();
+        double rate = RATE_OF_RETURN;
+
+        rate += calc.calculate(tree, 5000, LottoOperator.Operator.MULTIPLY);
+        rate += calc.calculate(four, 50000, LottoOperator.Operator.MULTIPLY );
+        rate += calc.calculate(five, 1500000, LottoOperator.Operator.MULTIPLY );
+        rate += calc.calculate(six, 2000000000, LottoOperator.Operator.MULTIPLY );
+        rate = calc.calculate(rate, money, LottoOperator.Operator.MINUS );
+        rate = calc.calculate(rate, money, LottoOperator.Operator.DIVIDE );
+
+        return rate;
+    }
+
+    private static int getCount(List<Integer> lottoMatchResults, int matchNum) {
+        return (int) lottoMatchResults.stream().filter(number -> number == matchNum).count();
     }
 
 }
