@@ -2,10 +2,14 @@ package lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoWinningNumbersTest {
 	@Test
@@ -29,5 +33,15 @@ public class LottoWinningNumbersTest {
 		boolean isSame = lottoWinningNumbers.isSame(differentNumbers);
 
 		assertThat(isSame).isFalse();
+	}
+
+	@ParameterizedTest
+	@NullSource
+	@DisplayName("LottoWinningNumbers 는 아무런 로또번호가 주어지지 않으면 예외를 던진다")
+	void newObject_nullLotto_throwsException(Lotto nullLotto) {
+
+		assertThatThrownBy(
+				() -> new LottoWinningNumbers(nullLotto)
+		).isInstanceOf(IllegalArgumentException.class);
 	}
 }

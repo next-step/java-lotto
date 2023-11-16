@@ -9,7 +9,8 @@ public class Lotto {
 	private final static int NUMBER_COUNT = 6;
 	private final static int MIN_MATCH = 3;
 	private final static int MIN_NUMBER = 1;
-	private final static int MAX_NUMBER = 10;
+	private final static int MAX_NUMBER = 45;
+
 	private final List<Integer> lottoNumbers;
 
 	public Lotto() {
@@ -21,7 +22,7 @@ public class Lotto {
 	}
 
 	private List<Integer> randomLottoNumbers() {
-		List<Integer> allNumbers = allNumbers();
+		List<Integer> allNumbers = betweenMinAndMaxNumbers();
 		List<Integer> randomLottoNumbers = sortedRandomNumbers(allNumbers);
 
 		return Collections.unmodifiableList(randomLottoNumbers);
@@ -38,7 +39,7 @@ public class Lotto {
 		return randomLottoNumbers;
 	}
 
-	private List<Integer> allNumbers() {
+	private List<Integer> betweenMinAndMaxNumbers() {
 		List<Integer> numbers = new ArrayList<>();
 		for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
 			numbers.add(i);

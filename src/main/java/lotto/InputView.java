@@ -8,12 +8,12 @@ import java.util.stream.Collectors;
 
 public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
-	private static final int LOTTO_PRICE = 1000;
+	private static final long LOTTO_PRICE = 1000;
 
 	public static LottoList inputLottoList() {
 		System.out.println("구입금액을 입력해주세요");
 		int purchaseAmount = scanner.nextInt();
-		int purchaseCount = purchaseAmount / LOTTO_PRICE;
+		int purchaseCount = (int) (purchaseAmount / LOTTO_PRICE);
 		System.out.printf("%d개를 구매했습니다.\n", purchaseCount);
 
 		List<Lotto> lottos = new ArrayList<>();

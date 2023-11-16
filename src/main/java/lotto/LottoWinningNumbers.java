@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoWinningNumbers {
-	private final static int NUMBER_COUNT = 6;
-
 	private final Lotto lottoWinningNumbers;
 
-	public LottoWinningNumbers(Lotto lottoWinningNumbers) {
-		this.lottoWinningNumbers = lottoWinningNumbers;
+	public LottoWinningNumbers(Lotto lotto) {
+		checkLottoSizeIsValid(lotto);
+		this.lottoWinningNumbers = lotto;
+	}
+
+	private void checkLottoSizeIsValid(Lotto lotto) {
+		if(lotto == null || lotto.lottoNumbers().isEmpty()) {
+			throw new IllegalArgumentException("로또 번호가 존재해야 합니다");
+		}
 	}
 
 	public boolean isSame(Lotto lotto) {

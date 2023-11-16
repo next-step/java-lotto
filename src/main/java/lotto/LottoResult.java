@@ -5,15 +5,22 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoResult {
-	private static final int LOTTO_PRICE = 1000;
+	private static final long LOTTO_PRICE = 1000;
 
 	private final Map<LottoMatch, Integer> lottoMatchResult;
 	private final LottoList lottoList;
 	private int rateOfReturn;
 
 	public LottoResult(LottoList lottoList) {
+		checkLottoListSizeIsValid(lottoList);
 		lottoMatchResult = new EnumMap<>(LottoMatch.class);
 		this.lottoList = lottoList;
+	}
+
+	private void checkLottoListSizeIsValid(LottoList lottoList) {
+		if(lottoList == null || lottoList.size() == 0) {
+			throw new IllegalArgumentException("최소 1개 이상의 로또 번호가 존재해야 합니다");
+		}
 	}
 
 	public void matchesWinningNumbers(LottoWinningNumbers lottoWinningNumbers) {
@@ -32,17 +39,19 @@ public class LottoResult {
 	}
 
 	private void calculateRateOfReturn() {
-		long amount = 0;
+		long winningAmount = 0;
 		LottoMatch lottoMatch = null;
 		int count = 0;
+
 		for (Map.Entry<LottoMatch, Integer> entry : lottoMatchResult.entrySet()) {
 			lottoMatch = entry.getKey();
 			count = entry.getValue();
 
-			amount += lottoMatch.amount() * count;
+			winningAmount += lottoMatch.amount() * count;
 		}
 
-		this.rateOfReturn = (int) ((amount / (lottoList.size() * LOTTO_PRICE)) * 100);
+		long purchaseAmount = lottoList.size() * LOTTO_PRICE;
+		this.rateOfReturn = (int) (winningAmount / purchaseAmount * 100);
 	}
 
 	public Map<LottoMatch, Integer> lottoMatchMap() {
