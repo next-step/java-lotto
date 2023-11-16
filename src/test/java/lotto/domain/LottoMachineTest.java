@@ -14,6 +14,6 @@ class LottoMachineTest {
 
         lottoMachine.issueLottos(5, new AutoLottoNumberGenerator());
 
-        assertThat(lottoMachine.getLottoNumbers()).hasSize(5);
+        assertThat(lottoMachine.getLottos()).hasSize(5);
     }
 }

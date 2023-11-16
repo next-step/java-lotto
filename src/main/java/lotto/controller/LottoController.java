@@ -5,6 +5,8 @@ import lotto.domain.LottoMachine;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
 
+import java.util.List;
+
 public class LottoController {
 
     private static final int PRICE_OF_LOTTO = 1000;
@@ -18,9 +20,9 @@ public class LottoController {
         LottoMachine lottoMachine = new LottoMachine();
         lottoMachine.issueLottos(quantity, new AutoLottoNumberGenerator());
 
-        OutputView.outputLottos(lottoMachine.getLottoNumbers());
+        OutputView.outputLottos(lottoMachine.getLottos());
 
-        String[] winningNumbers = InputView.inputWinningNumbers(DELIMITER);
+        List<Integer> winningNumbers = InputView.inputWinningNumbers(DELIMITER);
 
     }
 }

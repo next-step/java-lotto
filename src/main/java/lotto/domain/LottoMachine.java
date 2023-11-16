@@ -17,7 +17,7 @@ public class LottoMachine {
         }
     }
 
-    public List<Lotto> getLottoNumbers() {
+    public List<Lotto> getLottos() {
         return lottos;
     }
 }
