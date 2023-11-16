@@ -1,6 +1,4 @@
-package domain;
-
-import util.Operation;
+package arithmetic;
 
 import static java.lang.Integer.parseInt;
 

@@ -1,7 +1,4 @@
-package validator;
-
-import util.NumberTypeChecker;
-import util.ArithmeticSplit;
+package arithmetic;
 
 import java.util.Arrays;
 import java.util.List;

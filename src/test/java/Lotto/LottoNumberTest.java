@@ -2,7 +2,7 @@ package Lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import domain.LottoNumber;
+import policy.LottoRandomNumberGenerator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,7 +28,7 @@ public class LottoNumberTest {
     @Test
     @DisplayName("로또 생성은 Collections.shuffle() 메소드를 활용한다.")
     void generateNumberShuffleTest() {
-        List<Integer> lottoNumbers = LottoNumber.generateLottoNumber();
+        List<Integer> lottoNumbers = LottoRandomNumberGenerator.generateLottoNumber();
 
         assertThat(lottoNumbers.stream().distinct().count()).isEqualTo(6);
     }
@@ -36,7 +36,7 @@ public class LottoNumberTest {
     @DisplayName("로또 생성은 Collections.shuffle() 메소드를 활용한다.")
     void generateNumberShuffleTest2() {
         for (int i = 0; i < 2; i++) {
-            List<Integer> lottoNumbers = LottoNumber.generateLottoNumber();
+            List<Integer> lottoNumbers = LottoRandomNumberGenerator.generateLottoNumber();
             System.out.println("lottoNumbers = " + lottoNumbers);
         }
     }
@@ -44,7 +44,7 @@ public class LottoNumberTest {
     @Test
     @DisplayName("로또 번호 출력은 Collections.sort()를 활용한다.")
     void usingSortTest() {
-        List<Integer> lottoNumbers = LottoNumber.generateLottoNumber();
+        List<Integer> lottoNumbers = LottoRandomNumberGenerator.generateLottoNumber();
         Collections.sort(lottoNumbers);
 
         System.out.println("lottoNumbers = " + lottoNumbers);

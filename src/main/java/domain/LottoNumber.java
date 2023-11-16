@@ -1,33 +1,23 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 public class LottoNumber {
+
+    private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
-    private static final int LOTTO_NUMBER_COUNT_LIMIT = 6;
+    private int lottoNumber;
 
-    private static List<Integer> allNumbers;
-
-    static {
-        initialize();
+    public LottoNumber(int lottoNumber) {
+        validateNumberRange(lottoNumber);
+        this.lottoNumber = lottoNumber;
     }
 
-    private LottoNumber() {
-    }
-
-    private static void initialize() {
-        allNumbers = new ArrayList<>();
-        for (int i = 1; i <= MAX_LOTTO_NUMBER; i++) {
-            allNumbers.add(i);
+    private static void validateNumberRange(int lottoNumber) {
+        if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(String.format("로또 숫자는 %d과 %d 사이만 가능합니다.", MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
         }
     }
 
-    public static List<Integer> generateLottoNumber() {
-        Collections.shuffle(allNumbers);
-
-        List<Integer> lottoNumbers = allNumbers.subList(0, LOTTO_NUMBER_COUNT_LIMIT);
-        return lottoNumbers;
+    public int getLottoNumber() {
+        return lottoNumber;
     }
 }

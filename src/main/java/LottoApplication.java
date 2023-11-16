@@ -1,24 +1,29 @@
-import domain.Lotto;
-import domain.LottoService;
-import domain.WinningLotto;
-import validator.LottoNumberValidator;
+import domain.*;
 import view.InputView;
 import view.ResultView;
 
 import java.util.List;
+import java.util.Map;
 
 public class LottoApplication {
 
     public static void main(String[] args) {
-        LottoService lottoService = new LottoService();
+        UserLotto userLotto = new UserLotto();
 
         Long money = InputView.inputLottoPurchaseAmount();
-        List<Lotto> lottoTickets = lottoService.generateLotto(money);
+        List<Lotto> lottoTickets = userLotto.generateRandomLottoTickets(money);
+
         ResultView.printLottoCount(lottoTickets.size());
         ResultView.printLottoNumbers(lottoTickets);
 
+        LottoGame lottoGame = new LottoGame(userLotto);
         String inputWinningNumbers = InputView.inputWinningNumbers();
-        lottoService.generateWinningInfo(inputWinningNumbers);
+        WinningLotto winningLotto = new WinningLotto(inputWinningNumbers);
 
+        Map<Integer, Integer> lottoPrizeIntegerMap = lottoGame.matchNumbers(winningLotto);
+        ResultView.printLottoGameResult(lottoPrizeIntegerMap);
+
+        float rate = lottoGame.calculateReturnRate(money, lottoPrizeIntegerMap);
+        ResultView.printLottoReturnRate(rate);
     }
 }

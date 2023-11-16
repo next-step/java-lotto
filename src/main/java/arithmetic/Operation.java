@@ -1,4 +1,4 @@
-package util;
+package arithmetic;
 
 import java.util.function.IntBinaryOperator;
 
@@ -9,7 +9,7 @@ public enum Operation {
     DIVIDE("/", (a, b) -> a / b),
     ;
 
-    final String symbol;
+    private final String symbol;
     private final IntBinaryOperator operation;
 
     Operation(String symbol, IntBinaryOperator operation) {
