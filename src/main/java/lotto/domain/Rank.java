@@ -47,6 +47,10 @@ public enum Rank {
         return this.winningPrice * winningCount;
     }
 
+    public boolean isBonusRank() {
+        return this == SECOND;
+    }
+
     private boolean isEqualMatchCount(int userMatchCount) {
         return userMatchCount == this.matchCount;
     }

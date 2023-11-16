@@ -28,7 +28,7 @@ public class PrintView {
                     long count = winningRanks.getOrDefault(rank, 0L);
                     String printString = rank.getMatchCount() + "개 일치 (" + rank.getWinningPrice() + "원) - " + count;
 
-                    if (rank == Rank.SECOND) {
+                    if (rank.isBonusRank()) {
                         printString = rank.getMatchCount() + "개 일치, 보너스 볼 일치(" + rank.getWinningPrice() + "원) - " + count;
                     }
                     System.out.println(printString);
