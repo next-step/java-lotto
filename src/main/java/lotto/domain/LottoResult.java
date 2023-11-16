@@ -20,7 +20,7 @@ public class LottoResult {
     }
 
     private List<Rank> findWinningRanks() {
-        return this.lottos.getLottos().stream()
+        return this.lottos.getTotalLottos().stream()
                 .map(userLotto -> {
                     int matchCount = this.winningLotto.match(userLotto);
                     boolean isBonusWinning = this.winningLotto.isBonusWinning(userLotto);
