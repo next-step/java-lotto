@@ -3,8 +3,10 @@ package step2;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGenerator {
+    private static final String DELIMITER = ", ";
     private final List<Integer> lottoNumbers;
 
     public LottoGenerator() {
@@ -25,5 +27,19 @@ public class LottoGenerator {
     private Lotto generateLotto() {
         Collections.shuffle(lottoNumbers);
         return new Lotto(lottoNumbers.subList(0, 6));
+    }
+
+    public Lotto generateWinningLotto(String userInput) {
+        return new Lotto(parseWinningNumbers(splitWinningNumbers(userInput)));
+    }
+
+    private List<Integer> parseWinningNumbers(List<String> splitWinningNumbers) {
+        return splitWinningNumbers.stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
+    private List<String> splitWinningNumbers(String userInput) {
+        return List.of(userInput.split(DELIMITER));
     }
 }
