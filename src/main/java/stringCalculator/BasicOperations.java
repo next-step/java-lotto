@@ -29,7 +29,7 @@ public enum BasicOperations {
 			.orElseThrow(() -> new IllegalArgumentException("사칙 연산 기호가 아닙니다."));
 	}
 
-	public Integer calculate(int num1, int num2) {
+	public int calculate(int num1, int num2) {
 		return this.expression.apply(num1, num2);
 	}
 }
