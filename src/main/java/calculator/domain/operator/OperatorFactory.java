@@ -3,14 +3,15 @@ package calculator.domain.operator;
 public class OperatorFactory {
 
     public static Operator of(String operator) {
-        switch (operator) {
-            case "+":
+        OperatorType type = OperatorType.of(operator);
+        switch (type) {
+            case ADDITION:
                 return Integer::sum;
-            case "-":
+            case SUBTRACTION:
                 return (num1, num2) -> num1 - num2;
-            case "*":
+            case MULTIPLICATION:
                 return (num1, num2) -> num1 * num2;
-            case "/":
+            case DIVISION:
                 return (num1, num2) -> {
                     validateDivision(num1, num2);
                     return num1 / num2;
