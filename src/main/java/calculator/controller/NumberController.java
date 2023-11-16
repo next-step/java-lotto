@@ -10,6 +10,9 @@ import java.util.LinkedList;
 
 public class NumberController {
 
+    private static final int EVEN_MEASURE = 2;
+    private static final int EVEN = 0;
+    private static final int ODD = 1;
     private final NumberInputView inputView;
     private final NumberOutputView outputView;
 
@@ -53,7 +56,7 @@ public class NumberController {
     }
 
     private boolean isNumber(int i) {
-        return i % 2 == 0;
+        return i % EVEN_MEASURE == EVEN;
     }
 
     private void addOperators(int i, Deque<Operator> operators, String[] split) {
@@ -63,6 +66,6 @@ public class NumberController {
     }
 
     private boolean isOperator(int i) {
-        return i % 2 == 1;
+        return i % EVEN_MEASURE == ODD;
     }
 }
