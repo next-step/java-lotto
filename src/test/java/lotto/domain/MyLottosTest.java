@@ -14,7 +14,7 @@ class MyLottosTest {
     @DisplayName("로또다수/넣은로또만큼/생성된다.")
     void 로또를_여러개_생성한다() {
         // given
-        List<Lotto> lottos = List.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        List<Lotto> lottos = List.of(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)), Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         // when
         MyLottos myLottos = new MyLottos(lottos);

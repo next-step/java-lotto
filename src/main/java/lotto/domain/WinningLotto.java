@@ -6,7 +6,7 @@ public class WinningLotto {
     public Lotto lotto;
 
     public WinningLotto(List<Integer> nums) {
-        this.lotto = new Lotto(nums);
+        this.lotto = Lotto.of(nums);
     }
 
     public int matchCount(Lotto lotto) {

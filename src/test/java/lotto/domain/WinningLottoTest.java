@@ -12,7 +12,7 @@ public class WinningLottoTest {
     @DisplayName("정답로또/로또와비교/몇개가맞는지 반환")
     void matchCount() {
         // given
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         // when then

@@ -14,7 +14,7 @@ public class LottoTest {
     @DisplayName("로또정렬/숫자6개로생성/정렬된다.")
     void 숫자6개인_로또_정렬생성() {
         // given when
-        Lotto lotto = new Lotto(Arrays.asList(3, 6, 5, 4, 1, 2));
+        Lotto lotto = Lotto.of(Arrays.asList(3, 6, 5, 4, 1, 2));
         // then
         assertThat(lotto.getNums()).containsExactly(1, 2, 3, 4, 5, 6);
     }
@@ -23,6 +23,13 @@ public class LottoTest {
     @DisplayName("로또생성실패/숫자7개로생성/IllegalArgumentException")
     void 숫자7개인_로또_생성실패() {
         // when then
-        assertThatThrownBy(() -> new Lotto(Arrays.asList(3, 6, 5, 4, 1, 2, 8))).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Lotto.of(Arrays.asList(3, 6, 5, 4, 1, 2, 8))).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("로또생성실패/중복된값/IllegalArgumentException")
+    void 중복된_로또_생성실패() {
+        // when then
+        assertThatThrownBy(() -> Lotto.of(Arrays.asList(1, 1, 1, 1, 1, 1))).isInstanceOf(IllegalArgumentException.class);
     }
 }

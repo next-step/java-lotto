@@ -14,8 +14,8 @@ class LottoStatTest {
     void statisticsMatchCount() {
         // given
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8));
+        Lotto lotto1 = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = Lotto.of(Arrays.asList(3, 4, 5, 6, 7, 8));
         MyLottos myLottos = new MyLottos(Arrays.asList(lotto1, lotto2));
 
         // when
@@ -34,8 +34,8 @@ class LottoStatTest {
         // given
         Money money = new Money(2000);
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8));
+        Lotto lotto1 = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = Lotto.of(Arrays.asList(3, 4, 5, 6, 7, 8));
         MyLottos myLottos = new MyLottos(Arrays.asList(lotto1, lotto2));
 
         // when

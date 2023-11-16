@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class LottoNum implements Comparable<LottoNum> {
     private final int num;
 
@@ -21,5 +23,22 @@ public class LottoNum implements Comparable<LottoNum> {
     @Override
     public int compareTo(LottoNum o) {
         return this.num - o.num;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        };
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNum lottoNum = (LottoNum) o;
+        return num == lottoNum.num;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(num);
     }
 }
