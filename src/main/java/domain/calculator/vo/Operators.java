@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Operators {
-    private final List<Operator> operatorList = new ArrayList<>();
+    private final List<OperatorEnum> operatorList = new ArrayList<>();
 
-    public void add(Operator operator) {
+    public void add(OperatorEnum operator) {
         operatorList.add(operator);
     }
 
-    public List<Operator> getOperatorList() {
+    public List<OperatorEnum> getOperatorList() {
         return operatorList;
     }
 

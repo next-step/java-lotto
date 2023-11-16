@@ -2,7 +2,9 @@ package domain.calculator;
 
 
 import domain.calculator.vo.Number;
-import domain.calculator.vo.*;
+import domain.calculator.vo.Numbers;
+import domain.calculator.vo.OperatorEnum;
+import domain.calculator.vo.Operators;
 import util.StringParser;
 
 import java.util.Arrays;
@@ -33,16 +35,11 @@ public class Calculator implements CalculatorAble {
 
     private void setNumbersAndOperators(String[] strings) {
         Arrays.stream(strings).forEach(o -> {
-            try {
-                int integer = Integer.parseInt(o);
-                Number number = new Number(integer);
-                numbers.add(number);
-            } catch (NumberFormatException e) {
-                Operator operator = new Operator(OperatorEnum.of(o));
-                operators.add(operator);
-
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("잘못된 입력입니다.");
+            if (validateNumber(o)) {
+                numbers.add(new Number(Integer.parseInt(o)));
+            }
+            if (validateOperator(o)) {
+                operators.add(OperatorEnum.of(o));
             }
         });
     }
@@ -60,23 +57,15 @@ public class Calculator implements CalculatorAble {
         return result;
     }
 
-    private int calculate(int leftNumber, int rightNumber, Operator operator) {
-        if (operator.getValue() == OperatorEnum.PLUS) {
-            return sum(leftNumber, rightNumber);
-        }
+    private boolean validateNumber(String number) {
+        return number.matches("^\\d*$");
+    }
 
-        if (operator.getValue() == OperatorEnum.MINUS) {
-            return subtract(leftNumber, rightNumber);
-        }
+    private boolean validateOperator(String operator) {
+        return operator.matches("^[+-/*]$");
+    }
 
-        if (operator.getValue() == OperatorEnum.MULTIPLY) {
-            return multiply(leftNumber, rightNumber);
-        }
-
-        if (operator.getValue() == OperatorEnum.DIVIDE) {
-            return divide(leftNumber, rightNumber);
-        }
-        
-        throw new IllegalArgumentException("잘못된 입력입니다.");
+    private int calculate(int leftNumber, int rightNumber, OperatorEnum operator) {
+        return operator.calculate(leftNumber, rightNumber);
     }
 }

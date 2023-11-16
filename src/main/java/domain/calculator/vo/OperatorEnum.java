@@ -1,12 +1,22 @@
 package domain.calculator.vo;
 
+import domain.calculator.CalculatorAble;
+
+import java.util.function.BinaryOperator;
+
 public enum OperatorEnum {
-    PLUS("+"), MINUS("-"), MULTIPLY("*"), DIVIDE("/");
+    PLUS("+", CalculatorAble::sum),
+    MINUS("-", CalculatorAble::subtract),
+    MULTIPLY("*", CalculatorAble::multiply),
+    DIVIDE("/", CalculatorAble::divide);
 
     private final String symbol;
 
-    OperatorEnum(String symbol) {
+    private final BinaryOperator<Integer> calculate;
+
+    OperatorEnum(String symbol, BinaryOperator<Integer> calculate) {
         this.symbol = symbol;
+        this.calculate = calculate;
     }
 
     public static OperatorEnum of(String symbol) {
@@ -18,7 +28,7 @@ public enum OperatorEnum {
         throw new IllegalArgumentException("연산자가 존재하지 않습니다.");
     }
 
-    public String getSymbol() {
-        return symbol;
+    public int calculate(int leftNumber, int rightNumber) {
+        return calculate.apply(leftNumber, rightNumber);
     }
 }
