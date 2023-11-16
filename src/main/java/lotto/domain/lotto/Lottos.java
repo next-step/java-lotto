@@ -50,11 +50,11 @@ public class Lottos {
         return lottoCount == 0;
     }
 
-    public Summary match(Lotto jackpot) {
+    public Summary match(Lotto jackpot, LottoNumber bonusNumber) {
         List<Winning> winnings = new ArrayList<>();
 
         for (Lotto lotto : lottos) {
-            Winning winning = jackpot.match(lotto);
+            Winning winning = lotto.match(jackpot, bonusNumber);
             winnings.add(winning);
         }
 

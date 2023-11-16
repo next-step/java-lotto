@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class InputView {
     private static final String INPUT_PURCHASE_PRICE_MESSAGE = "구입 금액을 입력해 주세요.";
     public static final String INPUT_JACKPOT_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    public static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
 
     private final Scanner scanner;
 
@@ -28,6 +29,11 @@ public class InputView {
 
 
         return convertInteger(next);
+    }
+
+    public int readBonusNumber() {
+        System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
+        return scanner.nextInt();
     }
 
     private List<Integer> convertInteger(String text) {

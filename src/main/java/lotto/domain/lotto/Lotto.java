@@ -14,8 +14,12 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public Winning match(Lotto jackpot) {
-        return Winning.of(lottoNumbers.match(jackpot.lottoNumbers()));
+    public Winning match(Lotto jackpot, LottoNumber bonusNumber) {
+        return Winning.of(lottoNumbers.match(jackpot.lottoNumbers()), bonusMatch(bonusNumber));
+    }
+
+    public boolean bonusMatch(LottoNumber bonusNumber) {
+        return lottoNumbers.bonusMatch(bonusNumber);
     }
 
     public LottoNumbers lottoNumbers() {

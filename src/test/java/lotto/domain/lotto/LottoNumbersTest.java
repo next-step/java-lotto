@@ -46,4 +46,11 @@ class LottoNumbersTest {
                 Arguments.of(0, Arrays.asList(40, 41, 42, 43, 44, 45)));
     }
 
+    @Test
+    @DisplayName("현재 로또에 2등 번호의 존재 여부를 리턴한다")
+    void bonusmatch() {
+        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6).bonusMatch(LottoNumber.of(1))).isTrue();
+        assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6).bonusMatch(LottoNumber.of(45))).isFalse();
+    }
+
 }

@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,10 @@ public class LottoNumbers {
         return new LottoNumbers(numbers);
     }
 
+    public static LottoNumbers of(Integer... numbers) {
+        return new LottoNumbers(Arrays.asList(numbers));
+    }
+
     private List<LottoNumber> validate(List<Integer> numbers) {
         validateCount(numbers);
         return numbers.stream()
@@ -38,6 +43,10 @@ public class LottoNumbers {
         return jackpot.numbers.stream()
                 .filter(numbers::contains)
                 .count();
+    }
+
+    public boolean bonusMatch(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 
     @Override
