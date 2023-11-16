@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.List;
-
 import static lotto.LottoSimulator.initLottoSimulator;
 import static lotto.view.InputView.inputLastWeekLottoNumbers;
 import static lotto.view.InputView.inputMoney;
@@ -13,7 +11,7 @@ public class Main {
 
         LottoSimulator simulator = initLottoSimulator(inputMoney());
         printLottoCount(simulator.getLottoCount());
-        printLottos(simulator.getLottos());
+        printLottos(simulator.getLottoList());
 
         printStatistics(simulator.getStatistics(inputLastWeekLottoNumbers()), simulator.getLottoCount());
     }
