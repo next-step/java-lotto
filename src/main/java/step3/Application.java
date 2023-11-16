@@ -5,23 +5,34 @@ import step3.view.InputView;
 import step3.view.OutputView;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Application {
 
     public static void main(String[] args) {
-        int inputMoney = InputView.inputMoney();
-        int inputManualCount = InputView.inputManualLottoCount();
-        Lottos inputLottos = InputView.inputManualLottoNumbers(inputManualCount);
+        Optional<Integer> inputMoney = InputView.inputMoney();
 
-        Lottos lottos = new LottoMachine().play(inputMoney, inputLottos);
-        OutputView.printPurchaseComplete(lottos);
+        inputMoney.ifPresent((money)->{
+            Optional<Integer> inputManualCount = InputView.inputManualLottoCount();
 
-        Lotto winningNumberLotto = InputView.inputWinningNumbers();
-        LottoNumber bonusNumber = InputView.inputBonusNumber();
+            inputManualCount.ifPresent((manualCount)->{
+                Optional<Lottos> inputLottos = InputView.inputManualLottoNumbers(manualCount);
 
-        WinningNumbers winningNumbers = WinningNumbers.of(winningNumberLotto, bonusNumber);
-        WinningResult result = new ResultProcessor().result(winningNumbers, lottos);
+                inputLottos.ifPresent((manualLottos)->{
+                    Lottos lottos = new LottoMachine().play(money, manualLottos);
+                    OutputView.printPurchaseComplete(lottos);
 
-        OutputView.print(result);
+                    Lotto winningNumberLotto = InputView.inputWinningNumbers();
+                    LottoNumber bonusNumber = InputView.inputBonusNumber();
+
+                    WinningNumbers winningNumbers = WinningNumbers.of(winningNumberLotto, bonusNumber);
+                    WinningResult result = new ResultProcessor().result(winningNumbers, lottos);
+
+                    OutputView.print(result);
+                });
+            });
+        });
+
+
     }
 }
