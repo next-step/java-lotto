@@ -16,6 +16,6 @@ public class InputView {
 
     public String calculatorString(){
         sout.println(CALCULATE_INIT_MESSAGE);
-        return scanner.nextLine().replaceAll("\\s", "");
+        return scanner.nextLine();
     }
 }

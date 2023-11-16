@@ -32,6 +32,6 @@ public class CalculatorController {
     }
 
     private static List<String> splitStrings(String origin) {
-        return Arrays.stream(origin.split(" ")).collect(Collectors.toList());
+        return Arrays.asList(origin.split(" "));
     }
 }
