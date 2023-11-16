@@ -4,14 +4,14 @@ import java.util.List;
 
 public class BonusBall {
 
-    private final int bounsBall;
+    private final int bonusBall;
 
-    public BonusBall(int bounsBall) {
-        this.bounsBall = bounsBall;
+    public BonusBall(int bonusBall) {
+        this.bonusBall = bonusBall;
     }
 
     public boolean containsBonusBall(List<Integer> lottoNumbers) {
         return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber == bounsBall);
+                .anyMatch(lottoNumber -> lottoNumber == bonusBall);
     }
 }
