@@ -47,7 +47,7 @@ public class LottoNumber {
         }
 
         public static LottoNumber getLottoNumber(int number) {
-            return LottoNumberCache.get(number);
+            return LottoNumberCache.getOrDefault(number, LottoNumber.of(number));
         }
     }
 
