@@ -1,7 +1,5 @@
 package step3.domain;
 
-import step3.cache.LottoNumberCache;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,10 +19,9 @@ public class LottoMachine {
                 .collect(Collectors.toList());
     }
 
-    public Lottos play(int paidMoney, Lottos inputLottos) {
-        validatePaidMoney(paidMoney, inputLottos);
-        int gameCount = paidMoney / PRICE_PER_LOTTO;
-        return lottos(gameCount);
+    public Lottos play(int paidMoney, Lottos inputManualLottos) {
+        validatePaidMoney(paidMoney, inputManualLottos);
+        return mergeLottos(autoLottosWithGameCount(getGameCount(paidMoney, inputManualLottos)), inputManualLottos);
     }
 
     private void validatePaidMoney(int paidMoney, Lottos lottos) {
@@ -33,7 +30,22 @@ public class LottoMachine {
         }
     }
 
-    private Lottos lottos(int gameCount) {
+    private int getGameCount(int paidMoney, Lottos inputManualLottos) {
+        return moneyForAuto(paidMoney, inputManualLottos) / PRICE_PER_LOTTO;
+    }
+
+    private Lottos mergeLottos(Lottos autoLottos, Lottos manualLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(manualLottos.lottos());
+        lottos.addAll(autoLottos.lottos());
+        return new Lottos(lottos);
+    }
+
+    private int moneyForAuto(int paidMoney, Lottos inputLottos) {
+        return paidMoney - (inputLottos.size() * PRICE_PER_LOTTO);
+    }
+
+    private Lottos autoLottosWithGameCount(int gameCount) {
         List<Lotto> lottos = new ArrayList<>();
         for(int i = 0; i< gameCount; i++){
             lottos.add(createLotto());

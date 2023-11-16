@@ -21,7 +21,6 @@ public class Lottos {
     }
 
     public List<LottoRank> matchingResult(WinningNumbers winningNumbers) {
-
         return lottos.stream()
                 .map(lotto -> LottoRank.valueOf(winningNumbers.matchCount(lotto), winningNumbers.containBonus(lotto)))
                 .filter(LottoRank::isNotMiss)

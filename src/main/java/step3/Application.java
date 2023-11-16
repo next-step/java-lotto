@@ -11,7 +11,7 @@ public class Application {
     public static void main(String[] args) {
         int inputMoney = InputView.inputMoney();
         int inputManualCount = InputView.inputManualLottoCount();
-        Lottos inputLottos = InputView.inputManualLottoNumbers();
+        Lottos inputLottos = InputView.inputManualLottoNumbers(inputManualCount);
 
         Lottos lottos = new LottoMachine().play(inputMoney, inputLottos);
         OutputView.printPurchaseComplete(lottos);

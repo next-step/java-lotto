@@ -1,6 +1,5 @@
 package step3.view;
 
-import step3.cache.LottoNumberCache;
 import step3.domain.LottoNumber;
 import step3.domain.Lotto;
 import step3.domain.Lottos;
@@ -30,10 +29,11 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static Lottos inputManualLottoNumbers() {
+    public static Lottos inputManualLottoNumbers(int inputManualLottoCount) {
+        scanner.nextLine();
         System.out.println(INPUT_MANUAL_LOTTO_NUMBERS);
         List<Lotto> lottos = new ArrayList<>();
-        for(int i=0; i<inputManualLottoCount(); i++){
+        for(int i=0; i<inputManualLottoCount; i++){
             lottos.add(
                     new Lotto(Arrays.stream(scanner.nextLine().split(","))
                             .map(String::trim)
@@ -46,7 +46,6 @@ public class InputView {
     }
 
     public static Lotto inputWinningNumbers() {
-        scanner.nextLine();
         System.out.println(INPUT_WINNING_NUMBERS);
         List<LottoNumber> lottoNumberList = Arrays.stream(scanner.nextLine().split(","))
                 .map(String::trim)
