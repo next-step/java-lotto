@@ -9,44 +9,50 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalculatorTest {
 
-    private Calculator calculator = new Calculator();
+    private final Calculator calculator = new Calculator();
 
     @Test
     void 더하기_기능() {
-        int result = calculator.plus(1,1);
-        assertEquals(2, result);
+        List<Integer> operands = List.of(1, 2);
+        List<Operator> operators = List.of(Operator.ADD);
+        assertEquals(3, calculator.calc(operands, operators));
     }
 
     @Test
     void 빼기_기능() {
-        int result = calculator.minus(1, 1);
-        assertEquals(0, result);
+        List<Integer> operands = List.of(3, 2);
+        List<Operator> operators = List.of(Operator.SUBTRACT);
+        assertEquals(1, calculator.calc(operands, operators));
     }
 
     @Test
     void 곱하기_기능() {
-        int result = calculator.multiply(3,4);
-        assertEquals(12, result);
+        List<Integer> operands = List.of(5, 2);
+        List<Operator> operators = List.of(Operator.MULTIPLY);
+        assertEquals(10, calculator.calc(operands, operators));
     }
 
     @Test
     void 나누기_기능() {
-        int result = calculator.divide(4, 2);
-        assertEquals(2, result);
+        List<Integer> operands = List.of(4, 2);
+        List<Operator> operators = List.of(Operator.DIVIDE);
+        assertEquals(2, calculator.calc(operands, operators));
     }
 
     @Test
     void 나누기는_정수로_한정한다() {
+        List<Integer> operands = List.of(4, 3);
+        List<Operator> operators = List.of(Operator.DIVIDE);
         assertThatIllegalArgumentException().isThrownBy(()-> {
-            calculator.divide(4, 3);
+            calculator.calc(operands, operators);
         });
     }
 
     @Test
-    void 연산자리스트가_주어지면_값을_계산한다() {
-        List<Integer> operands = List.of(1,2);
-        List<Operator> operators = List.of(Operator.ADD);
-        assertEquals(3, calculator.calc(operands, operators));
+    void 연산자리스트가_주어진_순서대로_계산한다() {
+        List<Integer> operands = List.of(1, 2, 5);
+        List<Operator> operators = List.of(Operator.ADD, Operator.SUBTRACT);
+        assertEquals(-2, calculator.calc(operands, operators));
     }
 
 }

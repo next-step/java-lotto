@@ -8,7 +8,6 @@ public class Calculator {
 
     public int calc(List<Integer> operands, List<Operator> operators) {
         initialize(operands);
-        validateExpression(operands, operators);
         for (int index = 0; index <operators.size(); index++) {
             result = expressCalculating(operands.get(index+1), operators.get(index));
         }
