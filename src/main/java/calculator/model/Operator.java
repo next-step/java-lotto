@@ -21,7 +21,7 @@ public class Operator {
 
     public static void isOperator(List<String> operators) {
         if (hasInvalidOperator(operators)) {
-            throw new IllegalArgumentException("사칙연산 기호가 아닙니다");
+            throw new IllegalArgumentException("사칙연산 기호가 아닙니다 (+,-,*,/)");
         }
     }
 
