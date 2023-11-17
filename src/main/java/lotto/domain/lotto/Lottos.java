@@ -53,8 +53,10 @@ public class Lottos {
     public Summary match(Lotto jackpot, LottoNumber bonusNumber) {
         List<Winning> winnings = new ArrayList<>();
 
+        WinningLotto winningLotto = WinningLotto.of(jackpot, bonusNumber);
+
         for (Lotto lotto : lottos) {
-            Winning winning = lotto.match(jackpot, bonusNumber);
+            Winning winning = winningLotto.match(lotto);
             winnings.add(winning);
         }
 

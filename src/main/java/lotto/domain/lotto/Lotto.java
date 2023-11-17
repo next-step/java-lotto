@@ -1,7 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.constants.Winning;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,9 +16,6 @@ public class Lotto {
         this.lottoNumbers = new HashSet<>(validate(lottoNumbers));
     }
 
-    public static Lotto of(Integer... lottoNumbers) {
-        return of(Set.of(lottoNumbers));
-    }
 
     public static Lotto of(Collection<Integer> lottoNumbers) {
         return new Lotto(lottoNumbers);
@@ -39,18 +34,14 @@ public class Lotto {
         }
     }
 
-    public Winning match(Lotto jackpot, LottoNumber bonusNumber) {
-        return Winning.of(match(jackpot), bonusMatch(bonusNumber));
-    }
-
-    public long match(Lotto jackpot) {
-        return jackpot.lottoNumbers.stream()
-                .filter(lottoNumbers::contains)
+    public long matchCount(Lotto lotto) {
+        return lottoNumbers.stream()
+                .filter(lotto.lottoNumbers::contains)
                 .count();
     }
 
-    public boolean bonusMatch(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+    public boolean contains(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 
     @Override
