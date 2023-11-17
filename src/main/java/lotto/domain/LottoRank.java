@@ -34,9 +34,16 @@ public enum LottoRank {
 
     public static LottoRank of(long countOfMatch, boolean matchBonus) {
         return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.getMatchCount() == countOfMatch && lottoRank.isBonus == matchBonus)
+                .filter(lottoRank -> filterLottoRank(lottoRank, countOfMatch, matchBonus))
                 .findFirst()
                 .orElse(MISS);
+    }
+
+    private static boolean filterLottoRank(LottoRank lottoRank, long countOfMatch, boolean matchBonus) {
+        if (countOfMatch == SECOND.getMatchCount()) {
+            return lottoRank.getMatchCount() == countOfMatch && lottoRank.isBonus() == matchBonus;
+        }
+        return lottoRank.getMatchCount() == countOfMatch;
     }
 
     public static int prizeAmount(int matchCount, boolean matchBonus) {
