@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.lotto.wrapper.LottoNumber;
 import lotto.domain.lotto.wrapper.LottoNumbers;
 
 import java.util.Arrays;
@@ -55,10 +56,6 @@ public class InputView {
         return convertToNumbers(input);
     }
 
-    private void clearInput() {
-        input = "";
-    }
-
     private void validateWinningNumbers() {
         try {
             inputValidator.validateWinningNumbers(input, DELIMITER);
@@ -69,11 +66,36 @@ public class InputView {
         }
     }
 
+    private void clearInput() {
+        input = "";
+    }
+
     private LottoNumbers convertToNumbers(String input) {
         String[] stringNumbers = input.split(DELIMITER);
 
         return new LottoNumbers(Arrays.stream(stringNumbers)
             .map(stringNumber -> Integer.parseInt(stringNumber.trim()))
             .collect(Collectors.toUnmodifiableSet()));
+    }
+
+    public LottoNumber inputBonusNumber(LottoNumbers winningNumbers) {
+        clearInput();
+
+        System.out.println("보너스 볼을 입력해주세요.");
+        input = sc.nextLine();
+
+        validateBonusNumber(winningNumbers);
+
+        return new LottoNumber(Integer.parseInt(input));
+    }
+
+    private void validateBonusNumber(LottoNumbers winningNumbers) {
+        try {
+            inputValidator.validateBonusNumber(input, winningNumbers);
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            input = sc.nextLine();
+            validateBonusNumber(winningNumbers);
+        }
     }
 }
