@@ -30,8 +30,8 @@ public class LottoNumbers {
                 .allMatch(number -> number >= MIN_NUMBER && number <= MAX_NUMBER);
     }
 
-    public long matchCount(LottoWinNumbers lottoWinNumbers) {
-        return lottoWinNumbers.matchCount(numbers);
+    public LottoRank matchCount(LottoWinNumbers lottoWinNumbers, BonusBall bonusBall) {
+        return lottoWinNumbers.matchCount(numbers, bonusBall);
     }
 
     @Override

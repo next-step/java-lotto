@@ -13,10 +13,11 @@ class LottoWinPercentageTest {
     @DisplayName("로또 구입 금액과 로또 당첨 통계를 기준으로 총 수익률을 구한다.")
     void success_lotto_win_percentage() {
         List<LottoWinResult> lottoWinResults = List.of(
-                new LottoWinResult(3L, 1L),
-                new LottoWinResult(4L, 0L),
-                new LottoWinResult(5L, 0L),
-                new LottoWinResult(6L, 0L)
+                new LottoWinResult(3L, 1L, false),
+                new LottoWinResult(4L, 0L, false),
+                new LottoWinResult(5L, 0L, false),
+                new LottoWinResult(5L, 0L,true),
+                new LottoWinResult(6L, 0L, false)
         );
 
         LottoWinPercentage lottoWinPercentage = new LottoWinPercentage(14000, lottoWinResults);

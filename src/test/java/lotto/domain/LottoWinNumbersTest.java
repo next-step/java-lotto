@@ -16,20 +16,22 @@ class LottoWinNumbersTest {
     @ParameterizedTest
     @MethodSource("provideLottoNumbersAndMatchCount")
     @DisplayName("성공 - 로또 번호와 당첨 번호를 비교하여 당첨된 숫자의 개수를 반환한다.")
-    void success_lotto_number_compare_match_count(List<Integer> lottoNumbers, long matchCount) {
+    void success_lotto_number_compare_match_count(List<Integer> lottoNumbers, int bonusBall, LottoRank expectLottoRank) {
         LottoWinNumbers lottoWinNumbers = new LottoWinNumbers(
-                List.of(1,2,3,4,5,6)
+                List.of(1, 2, 3, 4, 5, 6)
         );
 
-        assertThat(lottoWinNumbers.matchCount(lottoNumbers)).isEqualTo(matchCount);
+        LottoRank lottoRank = lottoWinNumbers.matchCount(lottoNumbers, new BonusBall(bonusBall));
+        assertThat(lottoRank).isEqualTo(expectLottoRank);
     }
 
     private static Stream<Arguments> provideLottoNumbersAndMatchCount() {
         return Stream.of(
-                Arguments.of(List.of(1,2,3,7,8,9), 3),
-                Arguments.of(List.of(1,2,3,4,8,9), 4),
-                Arguments.of(List.of(1,2,3,4,5,9), 5),
-                Arguments.of(List.of(1,2,3,4,5,6), 6)
+                Arguments.of(List.of(1, 2, 3, 7, 8, 9), 10, LottoRank.FIFTH),
+                Arguments.of(List.of(1, 2, 3, 4, 8, 9), 10, LottoRank.FOURTH),
+                Arguments.of(List.of(1, 2, 3, 4, 5, 9), 10, LottoRank.THIRD),
+                Arguments.of(List.of(1, 2, 3, 4, 5, 10), 10, LottoRank.SECOND),
+                Arguments.of(List.of(1, 2, 3, 4, 5, 6), 10, LottoRank.FIRST)
         );
     }
 

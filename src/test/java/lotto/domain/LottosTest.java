@@ -7,36 +7,59 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 
-import static java.util.Map.entry;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
 
     @ParameterizedTest
-    @MethodSource("provideWinLottoNumbersAndWinCount")
-    @DisplayName("성공 - 로또 번호와 당첨 번호를 비교하여 당첨 통계를 낸다.")
-    void success_lotto_winning_count(List<Integer> lottoNumbers, List<Integer> winLottoNumbers, long matchCount, long winCount) {
-        Lottos lottos = new Lottos(Map.ofEntries(
-                entry(1, List.of(new Lotto(new LottoNumbers(new TestLottoGenerator(lottoNumbers)))))
-        ));
+    @MethodSource("provideLottoRankGenerateCondition")
+    @DisplayName("성공 - 로또의 당첨 결과를 구한다.")
+    void success_lotto_match_count(
+            List<Integer> lottoNumbers,
+            List<Integer> lottoWinNumbers,
+            int bonusBall,
+            LottoRank expectLottoRank
+    ) {
+        Lottos lottos = new Lottos(List.of(new Lotto(new LottoNumbers(new TestLottoGenerator(lottoNumbers)))));
+        LottoRank lottoRank = lottos.matchCount(0, new LottoWinNumbers(lottoWinNumbers), new BonusBall(bonusBall));
 
-        LottoResult lottoResult = lottos.winCounts(new LottoWinNumbers(winLottoNumbers));
-
-        assertThat(lottoResult.getLottoResult()).hasSize(4)
-                .contains(
-                        entry(matchCount, winCount)
-                );
+        assertThat(lottoRank).isEqualTo(expectLottoRank);
     }
 
-    private static Stream<Arguments> provideWinLottoNumbersAndWinCount() {
+    private static Stream<Arguments> provideLottoRankGenerateCondition() {
         return Stream.of(
-                Arguments.of(List.of(3, 5, 11, 1, 2, 4), List.of(3, 5, 11, 20, 21, 22), 3L, 1L),
-                Arguments.of(List.of(7, 11, 16, 35, 2, 4), List.of(7, 11, 16, 35, 1, 3), 4L, 1L),
-                Arguments.of(List.of(1, 8, 11, 31, 41, 44), List.of(1, 8, 11, 31, 41, 43), 5L, 1L),
-                Arguments.of(List.of(13, 14, 16, 38, 42, 45), List.of(13, 14, 16, 38, 42, 45), 6L, 1L)
+                Arguments.of(
+                        List.of(1, 2, 3, 7, 8, 9),
+                        List.of(1, 2, 3, 4, 5, 6),
+                        40,
+                        LottoRank.FIFTH
+                ),
+                Arguments.of(
+                        List.of(1, 2, 3, 4, 8, 9),
+                        List.of(1, 2, 3, 4, 5, 6),
+                        40,
+                        LottoRank.FOURTH
+                ),
+                Arguments.of(
+                        List.of(1, 2, 3, 4, 5, 9),
+                        List.of(1, 2, 3, 4, 5, 6),
+                        40,
+                        LottoRank.THIRD
+                ),
+                Arguments.of(
+                        List.of(1, 2, 3, 4, 5, 40),
+                        List.of(1, 2, 3, 4, 5, 6),
+                        40,
+                        LottoRank.SECOND
+                ),
+                Arguments.of(
+                        List.of(1, 2, 3, 4, 5, 6),
+                        List.of(1, 2, 3, 4, 5, 6),
+                        40,
+                        LottoRank.FIRST
+                )
         );
     }
 

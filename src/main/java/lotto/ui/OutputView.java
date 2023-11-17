@@ -10,7 +10,7 @@ public class OutputView {
 
     public void printLottos(int lottoCount, Lottos lottos) {
         System.out.println(lottoCount + "개를 구매했습니다.");
-        lottos.getLottos().forEach((key, value) -> System.out.println(value));
+        lottos.getLottos().forEach(lotto -> System.out.println(lotto));
         System.out.println();
     }
 
@@ -22,7 +22,7 @@ public class OutputView {
 
     public void printLottoResult(List<LottoWinResult> lottoWinResults) {
         for (LottoWinResult lottoWinResult : lottoWinResults) {
-            System.out.println(lottoWinResult.getMachCount() + "개 일치 (" + lottoWinResult.getPrizeAmount() + "원)- " + lottoWinResult.getWinCount() + "개");
+            System.out.println(lottoWinResult);
         }
     }
 
