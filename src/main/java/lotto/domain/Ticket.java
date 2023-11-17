@@ -1,35 +1,31 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Ticket {
 
-        private RandomNumbers numbers;
-        private int matchCount;
+        private final LottoNumbers numbers;
 
-        public Ticket(RandomNumbers numbers) {
+        public Ticket(LottoNumbers numbers) {
                 this.numbers = numbers;
         }
 
-        public Rank rank() {
-                return Rank.valueOfRank(matchCount);
+        public int[] numbers() {
+                return numbers.values();
         }
 
-        public RandomNumbers numbers() {
-                return numbers;
+        public int countWinningNumber(WinningNumbers winningNumbers) {
+                AtomicInteger matchCount = new AtomicInteger();
+                winningNumbers.values()
+                    .forEach(value -> matchCount.set(matchCount.get() + getOneIfWinningNumberContained(value)));
+                return matchCount.get();
         }
 
-        public int matchCount() {
-                return matchCount;
-        }
-
-        public void matchInOneTicket(List<Integer> winningNumbers) {
-                winningNumbers.forEach(this::addOneIfContained);
-        }
-
-        private void addOneIfContained(int winningNumber) {
-                if (numbers.values().contains(winningNumber)) {
-                        ++matchCount;
+        private int getOneIfWinningNumberContained(int winningNumber) {
+                if (Arrays.stream(numbers.values()).anyMatch(value -> value == winningNumber)) {
+                        return 1;
                 }
+                return 0;
         }
 }

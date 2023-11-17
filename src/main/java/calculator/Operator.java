@@ -12,9 +12,11 @@ public enum Operator {
         MULTIPLICATION("*", "곱하기", (valueX, valueY) -> valueX * valueY),
         DIVISION("/", "나누기", (valueX, valueY) -> valueX / valueY);
 
+        private static final Map<String, Operator> CODE_MAP =
+            Stream.of(values()).collect(Collectors.toMap(Operator::code, operator -> operator));
+        private final BiFunction<Integer, Integer, Integer> expression;
         private final String code;
         private final String description;
-        private final BiFunction<Integer, Integer, Integer> expression;
 
         Operator(String code, String description, BiFunction<Integer, Integer, Integer> expression) {
                 this.code = code;
@@ -50,6 +52,4 @@ public enum Operator {
                 }
         }
 
-        private static final Map<String, Operator> CODE_MAP =
-            Stream.of(values()).collect(Collectors.toMap(Operator::code, operator -> operator));
 }

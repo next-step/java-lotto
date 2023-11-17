@@ -8,14 +8,14 @@ import java.util.concurrent.atomic.AtomicLong;
 public class Tickets {
 
         private final List<Ticket> values;
-        private EnumMap<Rank, Integer> matchRankCountMap = new EnumMap<>(Rank.class);
+        private Map<Rank, Integer> matchRankCountMap = new EnumMap<>(Rank.class);
         private double rateOfBenefit;
 
         public Tickets(List<Ticket> tickets) {
                 this.values = tickets;
         }
 
-        public List<Ticket> tickets() {
+        public List<Ticket> values() {
                 return values;
         }
 
@@ -27,16 +27,19 @@ public class Tickets {
                 return rateOfBenefit;
         }
 
-        public void analyzeLottoResults(List<Integer> winningNumbers, long purchaseAmount) {
+        public void analyzeLottoResults(WinningNumbers winningNumbers, long purchaseAmount) {
                 countWinningTickets(winningNumbers);
                 calculateRateOfBenefit(purchaseAmount);
         }
 
-        private void countWinningTickets(List<Integer> winningNumbers) {
+
+        private void countWinningTickets(WinningNumbers winningNumbers) {
                 initMatchRankCountMap();
-                values.forEach(ticket -> ticket.matchInOneTicket(winningNumbers));
-                values.forEach(
-                    ticket -> matchRankCountMap.put(ticket.rank(), matchRankCountMap.get(ticket.rank()) + 1));
+                values.forEach(ticket -> {
+                        int countOfWinningNumber = ticket.countWinningNumber(winningNumbers);
+                        Rank rank = Rank.valueOfRank(countOfWinningNumber);
+                        matchRankCountMap.put(rank, matchRankCountMap.get(rank) + 1);
+                });
         }
 
         private void initMatchRankCountMap() {
@@ -47,9 +50,8 @@ public class Tickets {
 
         private void calculateRateOfBenefit(long purchaseAmount) {
                 AtomicLong benefitSum = new AtomicLong();
-                matchRankCountMap.forEach((rank, integer) -> {
-                        benefitSum.set(benefitSum.get() + rank.winningMoney() * matchRankCountMap.get(rank));
-                });
+                matchRankCountMap.forEach((rank, integer) -> benefitSum.set(
+                    benefitSum.get() + rank.winningMoney() * matchRankCountMap.get(rank)));
                 rateOfBenefit = Math.round((double) benefitSum.get() / purchaseAmount * 100.00) / 100.00;
         }
 }
