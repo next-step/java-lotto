@@ -1,19 +1,23 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class LottoTicket {
     private List<Integer> ticket = new ArrayList<>();
+    private int MAX_COUNT = 6;
 
     public LottoTicket(Random random) {
-        for (int i = 0; i < 6 ; i++) {
-            int randomNumber = random.nextInt(100 - 1) + 1;
-            ticket.add(randomNumber);
+        while (ticket.size() < MAX_COUNT) {
+            int randomNumber = random.nextInt(45) + 1;
+            addNumber(randomNumber);
         }
         Collections.shuffle(ticket);
         Collections.sort(ticket);
+    }
+
+    private void addNumber(int randomNumber) {
+        if (!ticket.contains(randomNumber)) {
+            ticket.add(randomNumber);
+        }
     }
 }
