@@ -1,31 +1,36 @@
 package lotto.ui;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 
 import java.util.List;
 import java.util.Map;
 
 public class ResultView {
+    private ResultView() {
+    }
 
-    private ResultView(){}
     public static void printLottoCount(int count) {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void printLottoBundle(List<String> result) {
-        for (String string : result) {
-            System.out.println(string);
+    public static void printLottoBundle(List<Lotto> result) {
+        for (Lotto lotto : result) {
+            System.out.println(lotto.find().toString());
         }
+        System.out.println();
     }
 
     public static void printMatchStats(Map<LottoRank, Integer> resultMap) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (LottoRank lottoRank : resultMap.keySet()) {
-            System.out.printf("%d개 일치 (%d원)- %d개%n"
-                    , lottoRank.matchNumber()
-                    , lottoRank.prize()
-                    , resultMap.get(lottoRank));
+            System.out.printf("%d개 일치", lottoRank.count());
+            if (lottoRank.name().equals("SECOND")) {
+                System.out.print(", 보너스 볼 일치");
+            }
+            System.out.printf("(%d원)- ", lottoRank.prize());
+            System.out.printf("%d개%n", resultMap.get(lottoRank));
         }
 
     }
@@ -38,4 +43,5 @@ public class ResultView {
         }
 
     }
+
 }

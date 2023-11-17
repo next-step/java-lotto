@@ -16,7 +16,7 @@ public class Calculation {
         int result = numbers.first();
         for (int i = 0; i < operations.size(); i++) {
             Operation operation = Operation.findOperationBySign(operations.findSign(i));
-            result = operation.calculate(result, numbers.findNumber(i + 1));
+            result = operation.calculate(result, numbers.find(i + 1));
         }
         return result;
 

@@ -1,41 +1,52 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.BiFunction;
+
 public enum LottoRank {
-    ZERO(0, 0L),
-    ONE(1, 0L),
-    TWO(2, 0L),
-    THREE(3, 5_000L),
-    FOUR(4, 50_000L),
-    FIVE(5, 1_500_000L),
-    SIX(6, 2_000_000_000L);
+    MISS(0, 0L, (count,bonus) -> count <= 2),
+    FIFTH(3, 5_000L, (count,bonus) -> count == 3),
+    FOURTH(4, 50_000L, (count,bonus) -> count == 4),
+    THIRD(5, 1_500_000L, (count,bonus) -> count == 5&&!bonus),
+    SECOND(5, 30_000_000L, (count,bonus) -> count == 5&&bonus),
+    FIRST(6, 2_000_000_000L, (count,bonus) -> count == 6);
 
-    private final int number;
-    private final Long prizeMoney;
+    private final int count;
+    private final long prizeMoney;
+    private final BiFunction<Integer, Boolean, Boolean> expression;
 
-    LottoRank(int number, Long prizeMoney) {
-        this.number = number;
+    LottoRank(int count, long prizeMoney, BiFunction<Integer, Boolean, Boolean> expression) {
+        this.count = count;
         this.prizeMoney = prizeMoney;
+        this.expression = expression;
     }
 
-    public int matchNumber() {
-        return this.number;
+    public static LottoRank findMatchCount(int matchNumber, boolean bonus) {
+        return Arrays.stream(values())
+                .filter(lottoRank -> lottoRank.match(matchNumber, bonus))
+                .findFirst()
+                .orElse(MISS);
     }
 
-    public Long prize() {
-        return this.prizeMoney;
-    }
-
-    public static LottoRank findMatchNumber(int matchNumber) {
-        for (LottoRank lottoRank : LottoRank.values()) {
-            if (lottoRank.number == matchNumber) {
-                return lottoRank;
-            }
-        }
-        throw new IllegalArgumentException("로또 매칭이 올바르지 않습니다");
+    private boolean match(int matchNumber, boolean bonus) {
+        return this.expression.apply(matchNumber, bonus);
     }
 
     public long sumPrize(int count) {
         return this.prizeMoney * count;
     }
 
+    public int count() {
+        return this.count;
+    }
+
+    private boolean sameNumber(int number){
+         return this.count == number;
+    }
+
+    public long prize() {
+        return this.prizeMoney;
+    }
 }

@@ -4,34 +4,42 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-    public static final int COUNT = 6;
-    private final List<Integer> numbers;
+    private final List<Integer> lotto;
+
+    public Lotto(List<Integer> list) {
+        this.lotto = list;
+    }
 
     public Lotto(NumberGeneration numberGeneration) {
-        this.numbers = makeLotto(numberGeneration);
+        this(numberGeneration.generate());
     }
 
-    public static List<Integer> makeLotto(NumberGeneration numberGeneration) {
-        return numberGeneration.generate();
+    public List<Integer> find() {
+        return Collections.unmodifiableList(lotto);
     }
 
-    public int countMatchNumber(List<Integer> winningList) {
+
+    public LottoRank findRank(List<Integer> winList, int bonus) {
+        if (isRank(winList)) {
+            return LottoRank.findMatchCount(countMath(winList), contains(bonus));
+        }
+        return LottoRank.MISS;
+
+    }
+
+    boolean contains(int bonus) {
+        return lotto.contains(bonus);
+    }
+
+    private boolean isRank(List<Integer> winList) {
+        return countMath(winList) > 2;
+    }
+
+    int countMath(List<Integer> winList) {
         int count = 0;
-        for (int i = 0; i < COUNT; i++) {
-            count += checkMatch(winningList.get(i));
+        for (int i = 0; i < lotto.size(); i++) {
+            count += Collections.frequency(winList, lotto.get(i));
         }
         return count;
-    }
-
-    private int checkMatch( int matchNumber) {
-        if (numbers.contains(matchNumber)) {
-            return 1;
-        }
-        return 0;
-    }
-
-    public String findNumbersExtract() {
-        Collections.sort(numbers);
-        return numbers.toString();
     }
 }
