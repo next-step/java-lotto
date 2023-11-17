@@ -56,7 +56,11 @@ public class CharacterParser {
     }
 
     private void classifyOperands(String input) {
-        operands.add(Integer.parseInt(input));
+        try {
+            operands.add(Integer.parseInt(input));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
     }
 
 
