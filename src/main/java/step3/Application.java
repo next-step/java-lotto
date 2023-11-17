@@ -8,7 +8,9 @@ public class Application {
 
     public static void main(String[] args) {
         int inputMoney = InputView.inputMoney();
-        Lottos lottos = new LottoMachine().play(inputMoney);
+        int inputManualCount = InputView.inputManualLottoCount();
+        Lottos inputLottos = InputView.inputManualLottoNumbers(inputManualCount);
+        Lottos lottos = new LottoMachine().play(inputMoney, inputLottos);
         OutputView.printPurchaseComplete(lottos);
 
         Lotto winningNumberLotto = InputView.inputWinningNumbers();

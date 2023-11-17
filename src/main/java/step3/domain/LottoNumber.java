@@ -1,7 +1,7 @@
 package step3.domain;
 
-import step3.cache.LottoNumberCache;
-
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
@@ -13,7 +13,7 @@ public class LottoNumber {
 
     public static LottoNumber of(int number) {
         if(LottoNumberCache.getLottoNumber(number) != null){
-            LottoNumberCache.getLottoNumber(number);
+            return LottoNumberCache.getLottoNumber(number);
         }
         return new LottoNumber(number);
     }
@@ -21,10 +21,6 @@ public class LottoNumber {
     private LottoNumber(int number) {
         inputValidation(number);
         this.number = number;
-    }
-
-    private LottoNumber(int number, boolean isBonus) {
-        this(number);
     }
 
     private void inputValidation(int number) {
@@ -37,4 +33,31 @@ public class LottoNumber {
         return number;
     }
 
+    static class LottoNumberCache {
+
+        private static final Map<Integer, LottoNumber> LottoNumberCache = new HashMap<>();
+
+        static {
+            for (int i = NUMBER_BOX_START_NUMBER; i <= NUMBER_BOX_END_NUMBER; i++) {
+                LottoNumberCache.put(i, LottoNumber.of(i));
+            }
+        }
+
+        public static LottoNumber getLottoNumber(int number) {
+            return LottoNumberCache.getOrDefault(number, new LottoNumber(number));
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
+    }
 }

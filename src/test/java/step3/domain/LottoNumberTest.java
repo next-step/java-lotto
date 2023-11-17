@@ -24,5 +24,10 @@ public class LottoNumberTest {
         Assertions.assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.of(input));
     }
 
+    @Test
+    @DisplayName("같은 번호를 갖는 로또번호는 같다.")
+    void equals() {
+        assertThat(LottoNumber.of(1)).isEqualTo(LottoNumber.of(1));
+    }
 
 }

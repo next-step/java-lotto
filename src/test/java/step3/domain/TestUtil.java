@@ -18,4 +18,8 @@ public class TestUtil {
         return new Lottos(List.of(lottos));
     }
 
+    static Lottos lottosFixtureHasSizeOne() {
+        return new Lottos(List.of(lottoFixture(1, 2, 3, 4, 5, 6)));
+    }
+
 }
