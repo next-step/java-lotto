@@ -11,9 +11,6 @@ public class RankCountGroup {
 
     private List<RankCount> rankCountGruop = new ArrayList<>();
 
-    public RankCountGroup() {
-    }
-
     public RankCountGroup(List<RankCount> rankCountGruop) {
         this.rankCountGruop.addAll(rankCountGruop);
     }

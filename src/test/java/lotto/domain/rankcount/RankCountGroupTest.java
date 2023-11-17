@@ -25,5 +25,4 @@ class RankCountGroupTest {
         // then
         assertThat(winningCount).isEqualTo(1);
     }
-
 }

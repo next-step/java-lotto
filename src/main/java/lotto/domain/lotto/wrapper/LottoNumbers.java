@@ -9,12 +9,12 @@ public class LottoNumbers {
 
     public static final int AMOUNT_OF_NUMBERS = 6;
 
-    private final TreeSet<LottoNumber> lottoNumberses = new TreeSet<>();
+    private final TreeSet<LottoNumber> lottoNumbers = new TreeSet<>();
 
     public LottoNumbers(Set<Integer> numbers) {
         validateAmountOfNumbers(numbers);
 
-        numbers.forEach(number -> lottoNumberses.add(new LottoNumber(number)));
+        numbers.forEach(number -> lottoNumbers.add(new LottoNumber(number)));
     }
 
     private void validateAmountOfNumbers(Set<Integer> numbers) {
@@ -24,19 +24,19 @@ public class LottoNumbers {
     }
 
     public List<Integer> numbers() {
-        return lottoNumberses.stream()
+        return lottoNumbers.stream()
             .map(LottoNumber::number)
             .collect(Collectors.toUnmodifiableList());
     }
 
-    public int countMatchingNumbers(LottoNumbers target) {
-        return (int) lottoNumberses.stream()
-            .filter(target::contains)
+    public int countMatchingNumbers(WinningNumber winningNumber) {
+        return (int) lottoNumbers.stream()
+            .filter(winningNumber::contains)
             .count();
     }
 
-    private boolean contains(LottoNumber target) {
-        return this.lottoNumberses.contains(target);
+    public boolean contains(LottoNumber target) {
+        return this.lottoNumbers.contains(target);
     }
 
     @Override
