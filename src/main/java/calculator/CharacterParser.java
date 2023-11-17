@@ -31,6 +31,7 @@ public class CharacterParser {
         for (int index = 0; index < formula.length; index++) {
             classifyExpression(index, formula[index]);
         }
+        validateExpression();
     }
 
     private void isNullAndBlank(String input) {
@@ -59,6 +60,12 @@ public class CharacterParser {
         try {
             operands.add(Integer.parseInt(input));
         } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateExpression() {
+        if (operands.size() != operators.size() + 1) {
             throw new IllegalArgumentException();
         }
     }
