@@ -28,7 +28,7 @@ public class Lottos {
 
         List<Lotto> lottoList = new ArrayList<>();
         for (int index = 0; index < lottoCount; index++) {
-            lottoList.add(Lotto.of(LottoNumbers.of(strategy.generate())));
+            lottoList.add(Lotto.of(strategy.generate()));
         }
 
         return new Lottos(lottoList, purchasePrice);
@@ -50,11 +50,13 @@ public class Lottos {
         return lottoCount == 0;
     }
 
-    public Summary match(Lotto jackpot) {
+    public Summary match(Lotto jackpot, LottoNumber bonusNumber) {
         List<Winning> winnings = new ArrayList<>();
 
+        WinningLotto winningLotto = WinningLotto.of(jackpot, bonusNumber);
+
         for (Lotto lotto : lottos) {
-            Winning winning = jackpot.match(lotto);
+            Winning winning = winningLotto.match(lotto);
             winnings.add(winning);
         }
 
@@ -62,29 +64,7 @@ public class Lottos {
     }
 
     public Summary winningResult(List<Winning> winnings) {
-
-        return new Summary(
-                winningCount(winnings, Winning.FIRST),
-                winningCount(winnings, Winning.SECOND),
-                winningCount(winnings, Winning.THIRD),
-                winningCount(winnings, Winning.FOURTH),
-                profitRate(winnings));
-    }
-
-    private float profitRate(List<Winning> winnings) {
-        return (float) prizeTotal(winnings) / (float) purchasePrice;
-    }
-
-    private long winningCount(List<Winning> winnings, Winning winning) {
-        return winnings.stream()
-                .filter(winning::equals)
-                .count();
-    }
-
-    private long prizeTotal(List<Winning> winnings) {
-        return winnings.stream()
-                .mapToLong(Winning::prize)
-                .sum();
+        return new Summary(winnings, purchasePrice);
     }
 
     public int size() {

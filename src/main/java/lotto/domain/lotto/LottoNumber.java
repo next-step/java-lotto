@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
@@ -8,15 +10,23 @@ public class LottoNumber {
     public static final int NUMBER_MAX = 45;
     private static final String NUMBER_ERROR_MESSAGE = String.format("로또 번호는 %s ~ %s 사이의 숫자이어야 합니다.", NUMBER_MIN, NUMBER_MAX);
 
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+
     private final int lottoNumber;
 
-    private LottoNumber(int lottoNumber) {
-        validateRange(lottoNumber);
-        this.lottoNumber = lottoNumber;
+    private LottoNumber(int number) {
+        validateRange(number);
+        this.lottoNumber = number;
+
+        lottoNumbers.put(number, this);
     }
 
-    public static LottoNumber of(Integer lottoNumber) {
-        return new LottoNumber(lottoNumber);
+    public static LottoNumber of(Integer number) {
+        if (lottoNumbers.containsKey(number)) {
+            return lottoNumbers.get(number);
+        }
+
+        return new LottoNumber(number);
     }
 
     private void validateRange(int number) {

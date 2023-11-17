@@ -4,10 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Winning {
-    FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     FAIL(0, 0);
 
     static final Map<Long, Winning> winnings = new HashMap<>();
@@ -34,9 +35,12 @@ public enum Winning {
         }
     }
 
+    public static Winning of(long matchCount, boolean bonusMatch) {
+        if (matchCount == 5 && bonusMatch) {
+            return SECOND;
+        }
 
-    public static Winning of(long matchCount) {
-        return winnings.getOrDefault(matchCount, Winning.FAIL);
+        return winnings.getOrDefault(matchCount, FAIL);
     }
 
     public String message() {
