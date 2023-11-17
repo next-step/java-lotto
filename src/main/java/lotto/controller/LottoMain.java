@@ -16,9 +16,10 @@ public class LottoMain {
         int price = validatePrice(inputView);
 
         OutputView outputView = new OutputView();
-        Lottos lottos = generateLottosAndPrint(outputView, price);
+        int lottoCount = price / PRICE_UNIT;
+        Lottos lottos = generateLottosAndPrint(outputView, lottoCount);
 
-        LottoResult lottoResult = calculateLottoResult(inputView, lottos);
+        LottoResult lottoResult = calculateLottoResult(lottoCount, inputView, lottos);
 
         List<LottoWinResult> lottoWinResults = calculateLottoStatisticsAndPrint(outputView, lottoResult);
 
@@ -31,17 +32,16 @@ public class LottoMain {
         return price;
     }
 
-    private static Lottos generateLottosAndPrint(OutputView outputView, int price) {
-        int lottoCount = price / PRICE_UNIT;
+    private static Lottos generateLottosAndPrint(OutputView outputView, int lottoCount) {
         Lottos lottos = LottoFactory.generateLottos(lottoCount);
         outputView.printLottos(lottoCount, lottos);
         return lottos;
     }
 
-    private static LottoResult calculateLottoResult(InputView inputView, Lottos lottos) {
+    private static LottoResult calculateLottoResult(int lottoCount, InputView inputView, Lottos lottos) {
         List<Integer> winningLottoNumbers = StringParser.parseToInts(inputView.inputWinningNumber());
         BonusBall bonusBall = new BonusBall(inputView.inputBonusBall());
-        return lottos.winCounts(new LottoWinNumbers(winningLottoNumbers), bonusBall);
+        return new LottoResult(lottoCount, lottos, new LottoWinNumbers(winningLottoNumbers), bonusBall);
     }
 
     private static List<LottoWinResult> calculateLottoStatisticsAndPrint(OutputView outputView, LottoResult lottoResult) {
