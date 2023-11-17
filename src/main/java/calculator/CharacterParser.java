@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class CharacterParser {
 
+    public static final String DELIMITER = " ";
     private List<Integer> operands = new ArrayList<>();
     private List<Operator> operators = new ArrayList<>();
 
@@ -26,9 +27,9 @@ public class CharacterParser {
 
     public void parsingFormula(String input) {
         isNullAndBlank(input);
-        String[] formula = input.split(" ");
-        for (String character : formula) {
-            classifyExpression(character);
+        String[] formula = input.split(DELIMITER);
+        for (int index = 0; index < formula.length; index++) {
+            classifyExpression(index, formula[index]);
         }
     }
 
@@ -38,16 +39,20 @@ public class CharacterParser {
         }
     }
 
-    private void classifyExpression(String character) {
-        if (character.chars().allMatch(CharacterParser::isParsingNumber)){
-            operands.add(Integer.parseInt(character));
+    private void classifyExpression(int index, String input) {
+        if (index % 2 == 0) {
+            classifyOperands(input);
             return;
         }
-        operators.add(Operator.findSymbol(character));
+        classifyOperators(input);
     }
 
-    private static boolean isParsingNumber(int value) {
-        return value >= '0' && value <= '9';
+    private void classifyOperators(String input) {
+        operators.add(Operator.findSymbol(input));
+    }
+
+    private void classifyOperands(String input) {
+        operands.add(Integer.parseInt(input));
     }
 
 
