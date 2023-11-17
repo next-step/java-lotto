@@ -1,10 +1,11 @@
 package step3.view.Input;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public class InputHandler<T> {
 
-    public Optional<T> input(String question, InputProcess<T> inputProcess){
+    public Optional<T> input(String question, Supplier<T> inputProcess){
 
         System.out.println(question);
         Optional<T> result = Optional.empty();
@@ -12,7 +13,7 @@ public class InputHandler<T> {
         boolean isInputValid = false;
         while(!isInputValid){
             try{
-                result = Optional.of(inputProcess.input());
+                result = Optional.of(inputProcess.get());
                 isInputValid = true;
             }catch (Exception e){
                 System.out.println(question);
