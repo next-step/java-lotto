@@ -1,14 +1,8 @@
 package lotto;
 
-import lotto.model.Lottery;
-import lotto.model.Lotto;
-import lotto.model.BuyLotto;
+import lotto.model.*;
 import lotto.view.LottoInput;
 import lotto.view.LottoOutput;
-
-import java.util.List;
-
-import static lotto.model.LottoFactory.generateLotto;
 
 public class LottoApplication {
     private final LottoInput lottoInput;
@@ -20,14 +14,17 @@ public class LottoApplication {
     }
 
     public void run() {
-        BuyLotto buyLotto = new BuyLotto(lottoInput.getInput());
-        lottoOutput.viewLottoCount(buyLotto);
-        List<Lotto> lottos = generateLotto(buyLotto);
+        LottoFactory lottoFactory = new LottoFactory(lottoInput.getInput());
+        Lottos lottos = lottoFactory.generateLottos();
+
+        lottoOutput.viewLottoCount(lottos);
         lottoOutput.viewLottoDetail(lottos);
-        List<Integer> winnerNumbers = lottoInput.getWinningNumber();
+
+        WinnerNumbers winnerNumbers = lottoInput.getWinningNumber();
         Lottery lottery = new Lottery(winnerNumbers, lottos);
+
         lottoOutput.viewCorrectLottos(lottery);
-        lottoOutput.viewTotalIncomeRatio(lottery, buyLotto);
+        lottoOutput.viewTotalIncomeRatio(lottery);
     }
 
 }

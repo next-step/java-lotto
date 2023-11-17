@@ -1,25 +1,32 @@
 package lotto.model;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
-    public static final int LOTTO_NUMBER_SIZE = 6;
-    private final List<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
-        lottoSizeCheck(numbers);
-        Collections.sort(numbers);
-        this.numbers = Collections.unmodifiableList(numbers);
-    }
-    public List<Integer> lottoNumbers(){
-        return this.numbers;
+    private final LottoNumbers numbers;
+
+    public Lotto(LottoNumbers numbers) {
+        this.numbers = numbers;
     }
 
-    private void lottoSizeCheck(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("로또번호는 정확히 6개 여야 합니다.");
+    public Lotto(Set<Integer> numbers) {
+        this.numbers = new LottoNumbers(numbers);
+    }
+
+    public Set<Integer> numbers() {
+        return this.numbers.lottoNumbers();
+    }
+
+    public int match(WinnerNumbers winnerNumbers, int correctCount) {
+        int result = (int) numbers.lottoNumbers().stream()
+                .filter(winnerNumbers::has)
+                .count();
+        if (result == correctCount) {
+            return 1;
         }
+        return 0;
     }
 
 }

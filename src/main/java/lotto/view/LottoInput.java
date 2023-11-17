@@ -1,7 +1,9 @@
 package lotto.view;
 
+import lotto.model.LottoNumbers;
+import lotto.model.WinnerNumbers;
+
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -13,11 +15,13 @@ public class LottoInput {
         return scanner.nextInt();
     }
 
-    public List<Integer> getWinningNumber() {
+    public WinnerNumbers getWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         scanner.nextLine();
-        return Arrays.stream(scanner.nextLine().split(", "))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        LottoNumbers numbers = new LottoNumbers(
+                Arrays.stream(scanner.nextLine().split(", "))
+                        .map(Integer::parseInt)
+                        .collect(Collectors.toSet()));
+        return new WinnerNumbers(numbers);
     }
 }

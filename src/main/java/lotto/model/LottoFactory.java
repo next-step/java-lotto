@@ -1,28 +1,46 @@
 package lotto.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoFactory {
+    private static final int LOTTO_PRICE = 1000;
+    public static final int MAX_LOTTO_NUMBER = 45;
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_SIZE = 6;
+    private final int purchaseMoney;
 
-    private LottoFactory() {
+    public LottoFactory(int purchaseMoney) {
+        checkMoneyOverThousand(purchaseMoney);
+        this.purchaseMoney = purchaseMoney;
     }
 
-    public static List<Lotto> generateLotto(BuyLotto bank) {
+    private void checkMoneyOverThousand(int purchaseMoney) {
+        if (purchaseMoney < LOTTO_PRICE) {
+            throw new IllegalArgumentException("구입 금액은 1000원 이상이어야 합니다.");
+        }
+    }
+
+    public Lottos generateLottos() {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < bank.purchaseCount(); i++) {
+        for (int i = 0; i < lottoCount(); i++) {
             lottos.add(new Lotto(generateRandomSixNumber()));
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 
-    public static List<Integer> generateRandomSixNumber() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            numbers.add(i);
+    public LottoNumbers generateRandomSixNumber() {
+        Set<Integer> numbers = new HashSet<>();
+        while (numbers.size() != MAX_LOTTO_SIZE) {
+            numbers.add(generateRandomNumber());
         }
-        Collections.shuffle(numbers);
-        return numbers.subList(0, 6);
+        return new LottoNumbers(numbers);
+    }
+
+    int generateRandomNumber() {
+        return (int) (Math.random() * MAX_LOTTO_NUMBER + MIN_LOTTO_NUMBER);
+    }
+
+    public int lottoCount() {
+        return this.purchaseMoney / LOTTO_PRICE;
     }
 }

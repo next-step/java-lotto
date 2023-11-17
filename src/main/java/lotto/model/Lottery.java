@@ -2,35 +2,30 @@ package lotto.model;
 
 import lotto.model.constants.Dividend;
 
-import java.util.Collections;
-import java.util.List;
-
 public class Lottery {
-    private final List<Integer> winnerNumbers;
-    private final List<Lotto> lottos;
+    public static final int MIN_CORRECT_COUNT = 3;
+    public static final int MAX_CORRECT_COUNT = 6;
+    private final WinnerNumbers winnerNumbers;
+    private final Lottos lottos;
 
-    public Lottery(List<Integer> winnerNumbers, List<Lotto> lottos) {
+    public Lottery(WinnerNumbers winnerNumbers, Lottos lottos) {
         this.winnerNumbers = winnerNumbers;
-        this.lottos = Collections.unmodifiableList(lottos);
+        this.lottos = lottos;
     }
 
     public long depositTotalMoney(){
         long totalMoney = 0;
-        for (int i = 3; i <= 6; i++) {
-            totalMoney += WinnerMoney.findWinnerMoney(Dividend.getDividend(i), checkForWin(i));
+        for (int i = MIN_CORRECT_COUNT; i <= MAX_CORRECT_COUNT; i++) {
+            totalMoney += Dividend.findWinnerMoney(Dividend.getDividend(i), checkForWin(i));
         }
         return totalMoney;
     }
-    public double getInvestment(int purchaseAmount) {
-        return (double) depositTotalMoney() / purchaseAmount;
+    public double getInvestment() {
+        return (double) depositTotalMoney() / lottos.totalPurchasePrice();
     }
 
     public int checkForWin(int correctCount) {
-        return (int) lottos.stream()
-                .filter(lotto -> winnerNumbers.stream()
-                        .filter(number -> lotto.lottoNumbers().contains(number))
-                        .count() == correctCount)
-                .count();
+        return lottos.correctCount(winnerNumbers, correctCount);
     }
 
 }

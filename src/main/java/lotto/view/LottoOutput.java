@@ -1,33 +1,31 @@
 package lotto.view;
 
-import lotto.model.Lottery;
-import lotto.model.Lotto;
-import lotto.model.BuyLotto;
+import lotto.model.*;
 import lotto.model.constants.Dividend;
 
-import java.util.List;
-
 public class LottoOutput {
+    public static final int MIN_CORRECT_COUNT = 3;
+    public static final int MAX_CORRECT_COUNT = 6;
 
-    public void viewLottoCount(BuyLotto bank) {
-        System.out.println(bank.purchaseCount() + "개를 구매했습니다.");
+    public void viewLottoCount(Lottos lottos) {
+        System.out.println(lottos.lottoCount() + "개를 구매했습니다.");
     }
 
-    public void viewLottoDetail(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto.lottoNumbers());
+    public void viewLottoDetail(Lottos lottos) {
+        for (Lotto lotto : lottos.lottoList()) {
+            System.out.println(lotto.numbers());
         }
         System.out.println();
     }
 
-    public void viewTotalIncomeRatio(Lottery lottery, BuyLotto buyLotto) {
-        System.out.println("총 수익률은 " + String.format("%.2f", lottery.getInvestment(buyLotto.purchaseAmount())) + "입니다.");
+    public void viewTotalIncomeRatio(Lottery lottery) {
+        System.out.println("총 수익률은 " + String.format("%.2f", lottery.getInvestment()) + "입니다.");
     }
 
-    public void viewCorrectLottos(Lottery lottery){
+    public void viewCorrectLottos(Lottery lottery) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (int i = 3; i <= 6; i++) {
+        for (int i = MIN_CORRECT_COUNT; i <= MAX_CORRECT_COUNT; i++) {
             viewCorrectLotto(i, lottery.checkForWin(i));
         }
     }
