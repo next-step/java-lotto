@@ -6,16 +6,15 @@ import study.step2.domain.dto.WinningNumbers;
 
 public class Lotto {
 
-    private final LottoNumbers lottoNumbers;
+    private final List<Integer> lottoNumbers;
     private int hitCount = 0;
 
-    public Lotto(LottoNumbers lottoNumbers) {
+    public Lotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
     public Rank matches(WinningNumbers winningNumbers) {
-        lottoNumbers.lottoNumbers()
-            .forEach(number -> calculateHitCount(number, winningNumbers));
+        lottoNumbers.forEach(number -> calculateHitCount(number, winningNumbers));
         return Rank.valueOfHitCount(hitCount);
     }
 
@@ -26,7 +25,7 @@ public class Lotto {
     }
 
     public List<Integer> lottoNumbers() {
-        return lottoNumbers.lottoNumbers();
+        return lottoNumbers;
     }
 
     public int hitCount() {
