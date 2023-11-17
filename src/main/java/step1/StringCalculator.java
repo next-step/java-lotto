@@ -5,8 +5,6 @@ import java.util.List;
 public class StringCalculator {
 
     private final List<Token> tokens;
-    private int index = 0;
-    private int result = 0;
 
     public StringCalculator(List<Token> tokens) {
         this.tokens = tokens;
@@ -14,38 +12,40 @@ public class StringCalculator {
 
     public int calculate() {
 
-        while(index < tokens.size()) {
-            Token token = tokens.get(index);
-            processToken(token);
+        Status status = new Status(0, 0);
+
+        while(status.index < tokens.size()) {
+            Token token = tokens.get(status.index);
+            processToken(token, status);
         }
 
-        return result;
+        return status.result;
     }
 
-    private void processToken(Token token) {
-        if(token.isNumber() && index == 0 ) {
-            result = token.toInt();
-            index++;
+    private void processToken(Token token, Status status) {
+        if(token.isNumber() && status.index == 0 ) {
+            status.result = token.toInt();
+            status.index++;
             return;
         }
         if(token.isPlusOperator()) {
-            result = plus(result, tokens.get(index + 1).toInt());
-            index+=2;
+            status.result = plus(status.result, tokens.get(status.index + 1).toInt());
+            status.index+=2;
             return;
         }
         if(token.isMinusOperator()) {
-            result = minus(result, tokens.get(index + 1).toInt());
-            index+=2;
+            status.result = minus(status.result, tokens.get(status.index + 1).toInt());
+            status.index+=2;
             return;
         }
         if(token.isMultiplyOperator()) {
-            result = multiply(result, tokens.get(index + 1).toInt());
-            index+=2;
+            status.result = multiply(status.result, tokens.get(status.index + 1).toInt());
+            status.index+=2;
             return;
         }
         if(token.isDevideOperator()) {
-            result = divide(result, tokens.get(index + 1).toInt());
-            index+=2;
+            status.result = divide(status.result, tokens.get(status.index + 1).toInt());
+            status.index+=2;
             return;
         }
     }
@@ -64,5 +64,16 @@ public class StringCalculator {
 
     private int divide(int a, int b) {
     	return a / b;
+    }
+
+    static class Status {
+    	private int index;
+    	private int result;
+
+    	public Status(int index, int result) {
+    		this.index = index;
+    		this.result = result;
+    	}
+
     }
 }
