@@ -2,6 +2,8 @@ package stringcalculator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringCalculator {
@@ -9,6 +11,7 @@ public class StringCalculator {
         if (isNullOrBlank(text)) {
             throw new IllegalArgumentException("null 값이나 공백은 입력할 수 없습니다");
         }
+
         String[] splitArr = text.split(" ");
 
         List<String> operateList = createOperateList(splitArr);
@@ -16,12 +19,19 @@ public class StringCalculator {
         List<Integer> numberList = createNumberList(splitArr);
 
         int result = numberList.get(0);
+        result = calculation(operateList, numberList, result);
+        return result;
+    }
 
+    private static int calculation(List<String> operateList, List<Integer> numberList, int result) {
         for (int i = 0; i < operateList.size(); i++) {
 
             String operator = operateList.get(i);
             int number = numberList.get(i + 1);
-
+            Matcher matcher = validateOperator(operator);
+            if (matcher.find()) {
+                throw new IllegalArgumentException("사용할 수 없는 사칙연산 기호입니다");
+            }
             if ("+".equals(operator)) {
                 result = plus(result, number);
             }
@@ -36,6 +46,14 @@ public class StringCalculator {
             }
         }
         return result;
+    }
+
+    private static Matcher validateOperator(String operator) {
+        String regex = "[^+\\-*/]";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(operator);
+        return matcher;
     }
 
     private static boolean isNullOrBlank(String text) {

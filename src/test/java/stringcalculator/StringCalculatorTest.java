@@ -47,4 +47,12 @@ public class StringCalculatorTest {
             stringCalculator.calculate(null);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("사칙연사기호가 아닌 문자열을 입력받을 경우 IllegalArgumentException throw")
+    void not_operation() {
+        assertThatThrownBy(() -> {
+            stringCalculator.calculate("2 + 4 ) 3 * 5 / 2");
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }
