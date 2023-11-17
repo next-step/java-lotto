@@ -20,7 +20,7 @@ public enum LotteryRank {
         return this.matchingCount;
     }
 
-    public boolean equalsMatchingCount(int matchingCount) {
+    public boolean isEqualCount(int matchingCount) {
         return this.matchingCount == matchingCount;
     }
 

@@ -27,7 +27,7 @@ public class LottosTest {
         WinningNumber winningNumber = new WinningNumber(Set.of(1, 5, 12, 21, 32, 43), 45);
 
         // when
-        RankCountGroup rankCountGroup = lottos.groupByRankCount(winningNumber);
+        RankCountGroup rankCountGroup = lottos.groupByRank(winningNumber);
 
         // then
         assertAll(

@@ -31,7 +31,7 @@ public class Lottos {
         return this.lottos.size();
     }
 
-    public RankCountGroup groupByRankCount(WinningNumber winningNumber) {
+    public RankCountGroup groupByRank(WinningNumber winningNumber) {
         LotteryRank[] ranks = values();
 
         return new RankCountGroup(Arrays.stream(ranks)
@@ -55,7 +55,7 @@ public class Lottos {
 
     private List<LottoNumbers> filterByRank(WinningNumber winningNumber, LotteryRank rank) {
         return lottos.stream()
-            .filter(lotto -> rank.equalsMatchingCount(lotto.countMatchingNumbers(winningNumber)))
+            .filter(lotto -> rank.isEqualCount(lotto.countMatchingNumbers(winningNumber)))
             .collect(Collectors.toUnmodifiableList());
     }
 

@@ -21,8 +21,8 @@ public class LottoGame {
         this.profitCalculator = new ProfitCalculator();
     }
 
-    public RankCountGroup groupByRankCount() {
-        return lottos.groupByRankCount(winningNumber);
+    public RankCountGroup groupByRank() {
+        return lottos.groupByRank(winningNumber);
     }
 
     public double calculateProfitRate(RankCountGroup rankCountGroup) {

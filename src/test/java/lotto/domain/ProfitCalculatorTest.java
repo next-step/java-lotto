@@ -26,7 +26,7 @@ public class ProfitCalculatorTest {
                 new LottoNumbers(Set.of(1, 5, 24, 27, 29, 43))
             ));
         WinningNumber winningNumber = new WinningNumber(Set.of(1, 5, 12, 21, 32, 43), 45);
-        RankCountGroup rankCountGroup = lottos.groupByRankCount(winningNumber);
+        RankCountGroup rankCountGroup = lottos.groupByRank(winningNumber);
 
         ProfitCalculator profitCalculator = new ProfitCalculator();
 

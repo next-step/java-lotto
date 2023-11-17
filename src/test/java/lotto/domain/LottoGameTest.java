@@ -29,7 +29,7 @@ class LottoGameTest {
         LottoGame lottoGame = new LottoGame(lottoNumberses, winningNumber);
 
         // when
-        RankCountGroup rankCountGroup = lottoGame.groupByRankCount();
+        RankCountGroup rankCountGroup = lottoGame.groupByRank();
 
         // then
         assertAll(
@@ -53,7 +53,7 @@ class LottoGameTest {
         WinningNumber winningNumber = new WinningNumber(Set.of(1, 5, 12, 21, 32, 43), 45);
         LottoGame lottoGame = new LottoGame(lottoNumberses, winningNumber);
 
-        RankCountGroup rankCountGroup = lottoGame.groupByRankCount();
+        RankCountGroup rankCountGroup = lottoGame.groupByRank();
 
         // when
         double profitRate = lottoGame.calculateProfitRate(rankCountGroup);
