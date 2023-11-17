@@ -8,17 +8,34 @@ public class StringCalculator {
         String operate = splitArr[1];
 
         if ("+".equals(operate)) {
-            return number1 + number2;
+            return plus(number1, number2);
         }
         if ("-".equals(operate)) {
-            return number1 - number2;
+            return minus(number1, number2);
         }
         if ("*".equals(operate)) {
-            return number1 * number2;
+            return multiply(number1, number2);
         }
         if ("/".equals(operate)) {
-            return (int) Math.ceil((double) number1 / number2);
+            return divide((double) number1, number2);
         }
         return 0;
     }
+
+    private static int plus(int number1, int number2) {
+        return number1 + number2;
+    }
+
+    private static int minus(int number1, int number2) {
+        return number1 - number2;
+    }
+
+    private static int multiply(int number1, int number2) {
+        return number1 * number2;
+    }
+
+    private static int divide(double number1, int number2) {
+        return (int) Math.ceil(number1 / number2);
+    }
+
 }
