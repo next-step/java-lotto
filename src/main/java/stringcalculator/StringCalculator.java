@@ -25,35 +25,40 @@ public class StringCalculator {
 
     private static int calculation(List<String> operateList, List<Integer> numberList, int result) {
         for (int i = 0; i < operateList.size(); i++) {
-
             String operator = operateList.get(i);
             int number = numberList.get(i + 1);
-            Matcher matcher = validateOperator(operator);
-            if (matcher.find()) {
-                throw new IllegalArgumentException("사용할 수 없는 사칙연산 기호입니다");
-            }
-            if ("+".equals(operator)) {
-                result = plus(result, number);
-            }
-            if ("-".equals(operator)) {
-                result = minus(result, number);
-            }
-            if ("*".equals(operator)) {
-                result = multiply(result, number);
-            }
-            if ("/".equals(operator)) {
-                result = divide(result, number);
-            }
+            validateOperator(operator);
+
+            result = getResult(result, operator, number);
         }
         return result;
     }
 
-    private static Matcher validateOperator(String operator) {
+    private static int getResult(int result, String operator, int number) {
+        if ("+".equals(operator)) {
+            result = plus(result, number);
+        }
+        if ("-".equals(operator)) {
+            result = minus(result, number);
+        }
+        if ("*".equals(operator)) {
+            result = multiply(result, number);
+        }
+        if ("/".equals(operator)) {
+            result = divide(result, number);
+        }
+        return result;
+    }
+
+    private static void validateOperator(String operator) {
         String regex = "[^+\\-*/]";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(operator);
-        return matcher;
+
+        if (matcher.find()) {
+            throw new IllegalArgumentException("사용할 수 없는 사칙연산 기호입니다");
+        }
     }
 
     private static boolean isNullOrBlank(String text) {
