@@ -10,6 +10,10 @@ public class Lotto {
     private static final int NUMBERS_SIZE = 6;
     private final List<LottoNumber> numbers = new ArrayList<>();
 
+    public Lotto(Integer... numbers) {
+        this(List.of(numbers));
+    }
+
     public Lotto(List<Integer> generatedNumbers) {
         validateDuplicate(generatedNumbers);
         validateSize(generatedNumbers);
@@ -39,5 +43,17 @@ public class Lotto {
     @Override
     public String toString() {
         return numbers.toString();
+    }
+
+    public int matchCount(Lotto winningLotto) {
+        int count = 0;
+
+        for (LottoNumber number : winningLotto.getNumbers()) {
+            if (numbers.contains(number)) {
+                count++;
+            }
+        }
+
+        return count;
     }
 }

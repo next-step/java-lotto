@@ -8,39 +8,27 @@ import java.util.Map;
 
 public class LottoWinningMachine {
 
-    private Map<Rank, Integer> rankCounts;
+    private final Map<Rank, Integer> rankCounts;
+    private final Lotto winningLotto;
 
-    public LottoWinningMachine() {
+    public LottoWinningMachine(Lotto winningLotto) {
         this.rankCounts = new HashMap<>();
+        this.winningLotto = winningLotto;
     }
 
-    public Map<Rank, Integer> start(Lotto winningLotto, List<Lotto> lottos) {
+    public Map<Rank, Integer> getRankCounts(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            int count = checkCount(winningLotto, lotto);
-            Rank rank = Rank.rankByCount(count);
-            int countOfRank = getCountOfRank(rank);
-            rankCounts.put(rank, countOfRank + 1);
+            int matchCount = lotto.matchCount(winningLotto);
+
+            Rank rank = Rank.rankByCount(matchCount);
+
+            rankCounts.put(rank, getCountOfRank(rank) + 1);
         }
 
         return rankCounts;
     }
 
-    public int checkCount(Lotto winningLotto, Lotto lotto) {
-        int count = 0;
-
-        List<LottoNumber> numbers = lotto.getNumbers();
-        List<LottoNumber> winningNumbers = winningLotto.getNumbers();
-
-        for (LottoNumber number : numbers) {
-            if (winningNumbers.contains(number)) {
-                count++;
-            }
-        }
-
-        return count;
-    }
-
-    public int getCountOfRank(Rank rank) {
+    private int getCountOfRank(Rank rank) {
         if (rankCounts.containsKey(rank)) {
             return rankCounts.get(rank);
         }
@@ -53,7 +41,7 @@ public class LottoWinningMachine {
 
         for (Map.Entry<Rank, Integer> rankCounts : result.entrySet()) {
             Rank rank = rankCounts.getKey();
-            sumOfPrizeMoney += rank.getPrizeMoney() * rankCounts.getValue();
+            sumOfPrizeMoney += (long) rank.getPrizeMoney() * rankCounts.getValue();
         }
 
         return new BigDecimal(sumOfPrizeMoney).divide(new BigDecimal(amount), 2, RoundingMode.HALF_UP).doubleValue();
