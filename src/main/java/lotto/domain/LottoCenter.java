@@ -2,58 +2,48 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
+
+import static lotto.domain.Match.*;
 
 public class LottoCenter {
 
     public static final int PRICE = 1000;
-    private static final int THREEPRIZE = 5000;
-    private static final int FOURPRIZE = 50000;
-    private static final int FIVEPRIZE = 1500000;
-    private static final int SIXPRIZE = 2000000000;
 
-    private static int cash;
     private final List<Long> result = new ArrayList<>();
+    private static int cash;
 
-    public int buyLotto(int cash) {
+    public List<Lotto> buyLotto(int cash) {
         LottoCenter.cash = cash;
-        return cash / PRICE;
+        return generateTicket(cash);
     }
 
-    public List<Lotto> generateTicket(int buyCount) {
+    private List<Lotto> generateTicket(int cash) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < buyCount; i++) {
+        for (int i = 0; i < cash / PRICE; i++) {
             Lotto lotto = new Lotto();
             lottos.add(lotto);
         }
         return lottos;
     }
 
-    public void matchWinningNumber(List<Lotto> lottos, List<Integer> winningNumber) {
+    public void matchWinningNumber(List<Lotto> lottos, Lotto winningNumbers) {
         for (Lotto lotto : lottos) {
-            List<Integer> matchedList = lotto.selectedNumber().stream()
-                    .filter(n -> winningNumber.stream().anyMatch(Predicate.isEqual(n)))
-                    .collect(Collectors.toList());
-            lotto.matchResult(matchedList.size());
+            lotto.matchCount(winningNumbers);
         }
     }
 
     public List<Long> checkWinningResult(List<Lotto> lottos) {
-        for (int i = 3; i <= 6; i++) {
-            int winningMatch = i;
-            long count = lottos.stream()
-                    .filter(lotto -> lotto.getMatchCount() == winningMatch)
-                    .count();
-            this.result.add(count);
+        for (Match match : values()) {
+            result.add(lottos.stream()
+                    .filter(lotto -> Match.valueOf(lotto).equals(match)).count());
         }
         return result;
     }
 
     public float checkWinningRate() {
-        return (float) ((result.get(0) * THREEPRIZE)
-                + (result.get(1) * FOURPRIZE)
-                + (result.get(2) * FIVEPRIZE)
-                + (result.get(3) * SIXPRIZE)) / cash;
+        return (float) ((result.get(0) * THREEMATCH.prize())
+                + (result.get(1) * FOURMATCH.prize())
+                + (result.get(2) * FIVEMATCH.prize())
+                + (result.get(3) * SIXMATCH.prize())) / cash;
     }
 }

@@ -8,7 +8,7 @@ public class ResultView {
 
     public void issuedTicket(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            System.out.println(lotto.selectedNumber());
+            System.out.println(lotto.getNumbers());
         }
     }
 

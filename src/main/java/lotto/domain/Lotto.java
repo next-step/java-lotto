@@ -1,37 +1,33 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Lotto {
 
-    private final List<Integer> lottoNumber;
-    private int matchCount;
+    private final LottoNumber lottoNumber;
+    private Match match;
+
+    public Lotto(List<Integer> numbers) {
+        lottoNumber = new LottoNumber(numbers);
+    }
 
     public Lotto() {
-        lottoNumber = randomNumbers().subList(0, 6);
-        Collections.sort(lottoNumber);
+        lottoNumber = new LottoNumber();
     }
 
-    private static List<Integer> randomNumbers() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 0; i < 46; i++) {
-            numbers.add(i + 1);
-        }
-        Collections.shuffle(numbers);
-        return numbers;
+    public List<Integer> getNumbers() {
+        return lottoNumber.getNumbers();
     }
 
-    public List<Integer> selectedNumber() {
-        return lottoNumber;
+    public void matchCount(Lotto winningNumbers) {
+        int count = (int) lottoNumber.getNumbers().stream()
+                .filter(n -> winningNumbers.getNumbers().stream()
+                        .anyMatch(Predicate.isEqual(n))).count();
+        this.match = Match.valueOf(count);
     }
 
-    public void matchResult(int matchCount) {
-        this.matchCount = matchCount;
-    }
-
-    public int getMatchCount() {
-        return matchCount;
+    public Match getMatch() {
+        return match;
     }
 }
