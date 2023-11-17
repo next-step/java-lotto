@@ -40,11 +40,15 @@ public class CharacterParser {
     }
 
     private void classifyExpression(int index, String input) {
-        if (index % 2 == 0) {
+        if (isOperands(index)) {
             classifyOperands(input);
             return;
         }
         classifyOperators(input);
+    }
+
+    private boolean isOperands(int index) {
+        return index % 2 == 0;
     }
 
     private void classifyOperators(String input) {
