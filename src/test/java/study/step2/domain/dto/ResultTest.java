@@ -1,7 +1,5 @@
 package study.step2.domain.dto;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
 import study.step2.domain.Rank;
 
@@ -11,12 +9,10 @@ public class ResultTest {
 
     @Test
     void 당첨_금액_합계() {
-        int winningAmount = Result.sumWinningAmount(
-            Arrays.asList(
-                new Result(Rank.SECOND, 1),
-                new Result(Rank.THIRD, 2)
-            )
-        );
-        assertThat(winningAmount).isEqualTo((Rank.SECOND.amount()) + (Rank.THIRD.amount() * 2));
+        Result result = new Result();
+        result.add(Rank.SECOND);
+        result.add(Rank.THIRD);
+        result.add(Rank.THIRD);
+        assertThat(result.totalWiningAmount()).isEqualTo((Rank.SECOND.amount()) + (Rank.THIRD.amount() * 2));
     }
 }

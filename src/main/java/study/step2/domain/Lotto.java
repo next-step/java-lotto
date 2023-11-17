@@ -1,16 +1,20 @@
 package study.step2.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import study.step2.domain.dto.WinningNumbers;
+import static study.step2.domain.LottoNumber.validateNumbers;
 
 public class Lotto {
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
     private int hitCount = 0;
 
-    public Lotto(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(List<Integer> numbers) {
+        validateNumbers(numbers);
+        this.lottoNumbers = numbers.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
     }
 
     public Rank matches(WinningNumbers winningNumbers) {
@@ -18,13 +22,13 @@ public class Lotto {
         return Rank.valueOfHitCount(hitCount);
     }
 
-    private void calculateHitCount(Integer lottoNumber, WinningNumbers winningNumbers) {
-        if (winningNumbers.contains(lottoNumber)) {
+    private void calculateHitCount(LottoNumber number, WinningNumbers winningNumbers) {
+        if (winningNumbers.contains(number)) {
             hitCount += 1;
         }
     }
 
-    public List<Integer> lottoNumbers() {
+    public List<LottoNumber> lottoNumbers() {
         return lottoNumbers;
     }
 

@@ -1,39 +1,45 @@
 package study.step2.domain.dto;
 
-import java.util.List;
+import java.util.*;
 
 import study.step2.domain.Rank;
 
 public class Result {
 
-    private final Rank rank;
-    private final int winningCount;
+    private final Map<Rank, List<Rank>> map = new LinkedHashMap<>();
 
-    public Result(Rank rank, int counts) {
-        this.rank = rank;
-        this.winningCount = counts;
+    public Result() {
+        Rank.valuesToList()
+            .forEach(v -> map.put(v, new ArrayList<>()));
     }
 
-    public static int sumWinningAmount(List<Result> results) {
-        return results.stream()
-            .mapToInt(Result::calculate)
-            .sum();
+    public void add(Rank rank) {
+        if (map.containsKey(rank)) {
+            map.get(rank).add(rank);
+        }
     }
 
-    private int calculate() {
-        return rank.amount() * winningCount;
+    public int size(Rank rank) {
+        return map.get(rank).size();
     }
 
-    public static float revenue(int winingAmount, int purchaseAmount) {
+    public int totalWiningAmount() {
+        int sum = 0;
+        for (Rank rank: map.keySet()) {
+            sum += (rank.amount() * map.get(rank).size());
+        }
+        return sum;
+    }
+
+    public float toRevenue(int winingAmount, int purchaseAmount) {
         return (float) winingAmount / purchaseAmount;
     }
 
-    public Rank rank() {
-        return rank;
+    public Map<Rank, List<Rank>> map() {
+        return map;
     }
 
-    public int winningCount() {
-        return winningCount;
+    public int size() {
+        return map.size();
     }
-
 }

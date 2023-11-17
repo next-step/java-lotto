@@ -3,7 +3,7 @@ package study.step2.view;
 import java.util.List;
 
 import study.step2.domain.Lotto;
-import study.step2.domain.dto.Result;
+import study.step2.domain.Rank;
 
 public class ResultView {
 
@@ -20,8 +20,8 @@ public class ResultView {
         System.out.println("\n당첨 통계\n---------");
     }
 
-    public static void showStatistics(Result result) {
-        System.out.println(String.format("%d개 일치 (%d원)- %d개", result.rank().hitCount(), result.rank().amount(), result.winningCount()));
+    public static void showStatistics(Rank rank, int winningCount) {
+        System.out.println(String.format("%d개 일치 (%d원)- %d개", rank.hitCount(), rank.amount(), winningCount));
     }
 
     public static void showRevenue(float revenue) {

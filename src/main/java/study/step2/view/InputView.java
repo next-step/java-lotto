@@ -2,8 +2,8 @@ package study.step2.view;
 
 import java.util.Scanner;
 
+import study.step2.domain.WinningNumbers;
 import study.step2.domain.dto.PurchaseAmount;
-import study.step2.domain.dto.WinningNumbers;
 
 import static study.step2.view.InputParser.parse;
 

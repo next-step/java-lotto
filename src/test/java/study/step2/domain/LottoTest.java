@@ -3,7 +3,6 @@ package study.step2.domain;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import study.step2.domain.dto.WinningNumbers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
