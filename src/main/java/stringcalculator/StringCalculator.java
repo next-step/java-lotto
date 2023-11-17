@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 public class StringCalculator {
     public int calculate(String text) {
+        if (isNullOrBlank(text)) {
+            throw new IllegalArgumentException("null 값이나 공백은 입력할 수 없습니다");
+        }
         String[] splitArr = text.split(" ");
 
         List<String> operateList = createOperateList(splitArr);
@@ -33,6 +36,10 @@ public class StringCalculator {
             }
         }
         return result;
+    }
+
+    private static boolean isNullOrBlank(String text) {
+        return text == null || text.isBlank();
     }
 
     private List<String> createOperateList(String[] splitArr) {

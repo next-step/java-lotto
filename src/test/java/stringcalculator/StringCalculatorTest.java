@@ -37,4 +37,14 @@ public class StringCalculatorTest {
     void sum() {
         assertThat(stringCalculator.calculate("2 + 4 - 3 * 5 / 2")).isEqualTo(8);
     }
+    @Test
+    @DisplayName("입력 값이 null 이거나 빈 공백 문자일 경우 IllegalArgumentException throw")
+    void null_or_blank() {
+        assertThatThrownBy(() -> {
+            stringCalculator.calculate("");
+        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> {
+            stringCalculator.calculate(null);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }
