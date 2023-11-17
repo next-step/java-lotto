@@ -16,6 +16,9 @@ public class StringCalculator {
         if ("*".equals(operate)) {
             return number1 * number2;
         }
+        if ("/".equals(operate)) {
+            return (int) Math.ceil((double) number1 / number2);
+        }
         return 0;
     }
 }

@@ -18,9 +18,9 @@
 
 ## StringCalculator
 * [X] 두 수를 더 할 수 있다.
-* [ ] 두 수를 뺄 수 있다.
-* [ ] 두 수를 나눌 수 있다.
-* [ ] 두 수를 곱 할 수 있다.
+* [X] 두 수를 뺄 수 있다.
+* [X] 두 수를 나눌 수 있다.
+* [X] 두 수를 곱 할 수 있다.
 * [ ] 입력 값을 받아 사칙연산을 할 수 있다.
 * [ ] 입력 값이 null 이거나 빈 공백 문자일 경우 IllegalArgumentException throw
 * [ ] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw

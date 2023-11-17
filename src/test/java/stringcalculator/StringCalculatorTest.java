@@ -27,4 +27,8 @@ public class StringCalculatorTest {
     void multiply() {
         assertThat(stringCalculator.calculate("2 * 3")).isEqualTo(6);
     }
+    @Test
+    void divide() {
+        assertThat(stringCalculator.calculate("2 / 3")).isEqualTo(1);
+    }
 }
