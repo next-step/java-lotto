@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class CharacterParserTest {
 
@@ -17,8 +17,8 @@ class CharacterParserTest {
         characterParser.parsingFormula("1 + 3");
         List<Integer> expectedOperand = List.of(1,3);
         List<Operator> expectedOperator = List.of(Operator.ADD);
-        assertEquals(expectedOperand, characterParser.operands());
-        assertEquals(expectedOperator, characterParser.operators());
+        assertThat(characterParser.operands()).isEqualTo(expectedOperand);
+        assertThat(characterParser.operators()).isEqualTo(expectedOperator);
     }
 
     @ParameterizedTest
@@ -35,6 +35,14 @@ class CharacterParserTest {
         CharacterParser characterParser = new CharacterParser();
         assertThatIllegalArgumentException().isThrownBy(() -> {
             characterParser.parsingFormula("1 ? 1");
+        });
+    }
+
+    @Test
+    void 갯수가_맞지_않아도_오류() {
+        CharacterParser characterParser = new CharacterParser();
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            characterParser.parsingFormula("1 - 1 +");
         });
     }
 }
