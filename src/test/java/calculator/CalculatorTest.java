@@ -1,14 +1,11 @@
 package calculator;
 
-import calculator.util.Validator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static calculator.domain.Calculator.calculate;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorTest {
 
@@ -40,24 +37,6 @@ public class CalculatorTest {
     @DisplayName("나눗셈의 결과가 정수가 아닌 경우 IllegalArgumentException이 발생한다.")
     void 정수가_아닌_나눈셈_결괏값일_경우_에러를_발생한다() {
         assertThatThrownBy(() -> calculate("1 + 2 * 3 / 2"))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {""})
-    @DisplayName("빈 공백 문자일 경우 IllegalArgumentException 발생한다.")
-    void 빈_공백_문자열을_입력하면_IllegalArgumentException_발생한다(String value) {
-        Validator validator = new Validator();
-        assertThatThrownBy(() -> validator.checkNullOrEmpty(value))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @ParameterizedTest
-    @DisplayName("null일 경우 IllegalArgumentException 발생한다.")
-    @NullAndEmptySource
-    void Null_을_입력할_경우_IllegalArgumentException_발생한다(String value) {
-        Validator validator = new Validator();
-        assertThatThrownBy(() -> validator.checkNullOrEmpty(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

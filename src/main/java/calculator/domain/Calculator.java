@@ -6,16 +6,18 @@ public class Calculator {
     }
 
     public static int calculate(String value) {
-        String[] tokens = value.split(" ");
+        String[] tokens = splitValidate(value);
         int result = stringToInt(tokens[0]);
 
         for (int i = 1; i < tokens.length; i += 2) {
-            Operator operator = OperatorFactory.of(tokens[i]);
-            int number = stringToInt(tokens[i + 1]);
-
-            result = calculate(operator, result, number);
+            result = calculate(findOperator(tokens[i]), result, stringToInt(tokens[i + 1]));
         }
+
         return result;
+    }
+
+    private static String[] splitValidate(String value) {
+        return value.split(" ");
     }
 
     private static int stringToInt(String token) {
@@ -24,5 +26,9 @@ public class Calculator {
 
     private static int calculate(Operator operator, int result, int number) {
         return operator.operate(result, number);
+    }
+
+    private static Operator findOperator(String tokens) {
+        return OperatorFactory.of(tokens);
     }
 }
