@@ -31,4 +31,10 @@ public class StringCalculatorTest {
     void divide() {
         assertThat(stringCalculator.calculate("2 / 3")).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("주어진 문자열의 총합을 구할 수 있다")
+    void sum() {
+        assertThat(stringCalculator.calculate("2 + 4 - 3 * 5 / 2")).isEqualTo(8);
+    }
 }

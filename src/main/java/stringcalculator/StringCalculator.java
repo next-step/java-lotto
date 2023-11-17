@@ -1,25 +1,53 @@
 package stringcalculator;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class StringCalculator {
     public int calculate(String text) {
         String[] splitArr = text.split(" ");
-        int number1 = Integer.parseInt(splitArr[0]);
-        int number2 = Integer.parseInt(splitArr[2]);
-        String operate = splitArr[1];
 
-        if ("+".equals(operate)) {
-            return plus(number1, number2);
+        List<String> operateList = Arrays.stream(splitArr)
+                .filter(el -> !isNumber(el))
+                .collect(Collectors.toList());
+
+        List<Integer> numberList = Arrays.stream(splitArr)
+                .filter(el -> isNumber(el))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        int result = numberList.get(0);
+
+        for (int i = 0; i < operateList.size(); i++) {
+            System.out.println(i);
+            String operator = operateList.get(i);
+            int number = numberList.get(i + 1);
+
+            if ("+".equals(operator)) {
+                result = plus(result, number);
+            }
+            if ("-".equals(operator)) {
+                result = minus(result, number);
+            }
+            if ("*".equals(operator)) {
+                result = multiply(result, number);
+            }
+            if ("/".equals(operator)) {
+                result = divide(result, number);
+            }
         }
-        if ("-".equals(operate)) {
-            return minus(number1, number2);
+
+        return result;
+    }
+
+    private boolean isNumber(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
-        if ("*".equals(operate)) {
-            return multiply(number1, number2);
-        }
-        if ("/".equals(operate)) {
-            return divide((double) number1, number2);
-        }
-        return 0;
     }
 
     private static int plus(int number1, int number2) {
@@ -35,7 +63,9 @@ public class StringCalculator {
     }
 
     private static int divide(double number1, int number2) {
+        if (number2 == 0) {
+            throw new ArithmeticException("나눗셈은 0으로 나눌 수 없습니다.");
+        }
         return (int) Math.ceil(number1 / number2);
     }
-
 }
