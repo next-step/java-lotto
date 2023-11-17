@@ -1,4 +1,4 @@
-package calculator.domain;
+package lotto.domain;
 
 public class Money {
 

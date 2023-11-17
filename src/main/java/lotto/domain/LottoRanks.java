@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import calculator.domain.Money;
-
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
