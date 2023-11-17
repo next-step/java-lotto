@@ -35,6 +35,10 @@ public class ResultView {
         Arrays.stream(values())
             .forEach(rank -> {
                 long winningCount = rankCountGroup.findWinningCountBy(rank);
+                if (rank == BONUS) {
+                    System.out.println(rank.matchingCount() + "개 일치, 보너스 볼 일치(" + rank.prize() + "원) - " + winningCount + "개");
+                    return;
+                }
                 System.out.println(rank.matchingCount() + "개 일치 (" + rank.prize() + "원) - " + winningCount + "개");
             });
     }

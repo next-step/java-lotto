@@ -1,7 +1,9 @@
 package lotto.controller;
 
 import lotto.domain.LottoGame;
+import lotto.domain.lotto.wrapper.LottoNumber;
 import lotto.domain.lotto.wrapper.LottoNumbers;
+import lotto.domain.lotto.wrapper.WinningNumber;
 import lotto.domain.rankcount.RankCountGroup;
 import lotto.util.LottoMachine;
 import lotto.view.InputView;
@@ -24,19 +26,21 @@ public class LottoController {
     }
 
     public void startGame() {
-        LottoGame lottoGame = new LottoGame();
+        List<LottoNumbers> lottoNumberses = purchase();
+        WinningNumber winningNumber = winning();
 
-        purchase(lottoGame);
-        winning(lottoGame);
+        LottoGame lottoGame = new LottoGame(lottoNumberses, winningNumber);
+        RankCountGroup rankCountGroup = lottoGame.groupByRankCount();
+
+        result(rankCountGroup, lottoGame.calculateProfitRate(rankCountGroup));
     }
 
-    private void purchase(LottoGame lottoGame) {
+    private List<LottoNumbers> purchase() {
         int numOfLotto = inputView.inputPurchaseMoney();
-
         List<LottoNumbers> lottoNumberses = drawLottoNumberses(numOfLotto);
-        lottoGame.createLottos(lottoNumberses);
 
         resultView.printPurchaseResult(numOfLotto, lottoNumberses);
+        return lottoNumberses;
     }
 
     private List<LottoNumbers> drawLottoNumberses(int numOfLotto) {
@@ -45,12 +49,14 @@ public class LottoController {
             .collect(Collectors.toUnmodifiableList());
     }
 
-    private void winning(LottoGame lottoGame) {
+    private WinningNumber winning() {
         LottoNumbers winningNumbers = inputView.inputWinningNumbers();
+        LottoNumber bonusNumber = inputView.inputBonusNumber(winningNumbers);
 
-        RankCountGroup rankCountGroup = lottoGame.groupByRankCount(winningNumbers);
-        double profitRate = lottoGame.calculateProfitRate(rankCountGroup);
+        return new WinningNumber(winningNumbers, bonusNumber);
+    }
 
+    private void result(RankCountGroup rankCountGroup, double profitRate) {
         resultView.printLottoGameResult(rankCountGroup, profitRate);
     }
 }
