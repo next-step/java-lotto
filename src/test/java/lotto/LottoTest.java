@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import java.util.stream.Stream;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -19,12 +18,12 @@ public class LottoTest {
     void a(List<Integer> anyNumbers) {
         assertThatNoException().isThrownBy(() -> Lotto.from(anyNumbers));
     }
-    
+
     @DisplayName("중복 된 숫자는 만들 수 없다.")
     @MethodSource(value = "anyNumbersDuplicated")
     @ParameterizedTest
-    void b(List<Integer> anyNumbersDuplicated){
-        assertThatThrownBy(()-> Lotto.from(anyNumbersDuplicated));
+    void b(List<Integer> anyNumbersDuplicated) {
+        assertThatThrownBy(() -> Lotto.from(anyNumbersDuplicated));
     }
 
     private static Stream<Arguments> anyNumbers() {

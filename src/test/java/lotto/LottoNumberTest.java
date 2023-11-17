@@ -16,19 +16,19 @@ public class LottoNumberTest {
     @ValueSource(ints = {1, 2, 24, 33, 43, 44, 45})
     @ParameterizedTest
     void doesNotThrowAnyExceptionWhenCreateCorrectly(int number) {
-        assertThatNoException().isThrownBy(()-> LottoNumber.from(number));
+        assertThatNoException().isThrownBy(() -> LottoNumber.from(number));
     }
 
     @DisplayName("46 이상의 숫자는 만들 수 없다.")
     @Test
     void throwIllegalArgumentExceptionWhenOver46() {
-        assertThatThrownBy(()-> LottoNumber.from(46));
+        assertThatThrownBy(() -> LottoNumber.from(46));
     }
 
     @DisplayName("0 이하의 숫자는 만들 수 없다.")
     @Test
     void throwIllegalArgumentExceptionWhenUnder0() {
-        assertThatThrownBy(()-> LottoNumber.from(0));
+        assertThatThrownBy(() -> LottoNumber.from(0));
     }
 
     @DisplayName("인자와 값을 비교한다.")
