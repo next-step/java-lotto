@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Lotto {
     public static final String INVALID_COUNT = "로또 번호는 6개여야 합니다.";
+    public static final String SPLIT_TEXT = ",";
     public static final int LOTTO_NUMBER_COUNT = 6;
 
     private Set<LottoNumber> lottoNumbers = new HashSet<>();
@@ -20,6 +21,16 @@ public class Lotto {
         for (Integer number : numbers) {
             this.lottoNumbers.add(LottoNumber.of(number));
         }
+        lottoCountCheck();
+    }
+
+    public Lotto(String tokens) {
+        final String[] lottoNumberTokens = tokens.split(SPLIT_TEXT);
+
+        for (String token : lottoNumberTokens) {
+            this.lottoNumbers.add(LottoNumber.of(Integer.valueOf(token.trim())));
+        }
+
         lottoCountCheck();
     }
 

@@ -19,6 +19,11 @@ public class LottoGame {
         this.lottos = new Lottos(purchaseAmount);
     }
 
+    public LottoGame(final List<Lotto> manualLottos, final Amount purchaseAmount) {
+        validationCheckAmount(purchaseAmount);
+        this.lottos = new Lottos(manualLottos, purchaseAmount);
+    }
+
     private void validationCheckAmount(final Amount purchaseAmount) {
         if (purchaseAmount.isSmallThan(new Amount(LOTTO_AMOUNT))) {
             throw new IllegalArgumentException(INVALID_AMOUNT);

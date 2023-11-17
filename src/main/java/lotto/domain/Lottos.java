@@ -17,6 +17,14 @@ public class Lottos {
         this.lottos = initLottos(amount);
     }
 
+    public Lottos(final List<Lotto> manualLottos, final Amount amount) {
+        List<Lotto> lottoList = new ArrayList<>(manualLottos);
+
+        lottoList.addAll(initLottos(amount));
+
+        this.lottos = lottoList;
+    }
+
     private List<Lotto> initLottos(final Amount amount) {
         final List<Lotto> lottos = new ArrayList<>();
 
