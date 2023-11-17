@@ -11,6 +11,10 @@ public class Ticket {
                 this.numbers = numbers;
         }
 
+        public Ticket(int[] numbers) {
+                this.numbers = new LottoNumbers(numbers);
+        }
+
         public int[] numbers() {
                 return numbers.values();
         }

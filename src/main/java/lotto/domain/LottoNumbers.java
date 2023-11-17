@@ -1,8 +1,8 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -11,12 +11,12 @@ public class LottoNumbers {
 
         public LottoNumbers(Set<Integer> values) {
                 this.values = values.stream().map(LottoNumber::new)
-                    .sorted().collect(Collectors.toCollection(LinkedHashSet::new));
+                    .sorted().collect(Collectors.toCollection(TreeSet::new));
         }
 
         public LottoNumbers(int... values) {
-                this.values = Arrays.stream(values).mapToObj(LottoNumber::new)
-                    .collect(Collectors.toSet());
+                this.values = Arrays.stream(values).mapToObj(LottoNumber::new).sorted()
+                    .collect(Collectors.toCollection(TreeSet::new));
         }
 
         public int[] values() {

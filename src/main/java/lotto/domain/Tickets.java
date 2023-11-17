@@ -1,9 +1,11 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 public class Tickets {
 
@@ -13,6 +15,10 @@ public class Tickets {
 
         public Tickets(List<Ticket> tickets) {
                 this.values = tickets;
+        }
+
+        public Tickets(int[][] tickets) {
+                this.values = Arrays.stream(tickets).map(Ticket::new).collect(Collectors.toList());
         }
 
         public List<Ticket> values() {
@@ -31,7 +37,6 @@ public class Tickets {
                 countWinningTickets(winningNumbers);
                 calculateRateOfBenefit(purchaseAmount);
         }
-
 
         private void countWinningTickets(WinningNumbers winningNumbers) {
                 initMatchRankCountMap();
