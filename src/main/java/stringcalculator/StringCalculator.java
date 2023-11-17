@@ -8,19 +8,14 @@ public class StringCalculator {
     public int calculate(String text) {
         String[] splitArr = text.split(" ");
 
-        List<String> operateList = Arrays.stream(splitArr)
-                .filter(el -> !isNumber(el))
-                .collect(Collectors.toList());
+        List<String> operateList = createOperateList(splitArr);
 
-        List<Integer> numberList = Arrays.stream(splitArr)
-                .filter(el -> isNumber(el))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        List<Integer> numberList = createNumberList(splitArr);
 
         int result = numberList.get(0);
 
         for (int i = 0; i < operateList.size(); i++) {
-            System.out.println(i);
+
             String operator = operateList.get(i);
             int number = numberList.get(i + 1);
 
@@ -37,8 +32,20 @@ public class StringCalculator {
                 result = divide(result, number);
             }
         }
-
         return result;
+    }
+
+    private List<String> createOperateList(String[] splitArr) {
+        return Arrays.stream(splitArr)
+                .filter(el -> !isNumber(el))
+                .collect(Collectors.toList());
+    }
+
+    private List<Integer> createNumberList(String[] splitArr) {
+        return Arrays.stream(splitArr)
+                .filter(el -> isNumber(el))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     private boolean isNumber(String str) {
