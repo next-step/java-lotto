@@ -24,13 +24,9 @@ public class CalculatorController {
     }
 
     public void calculate() {
-        String origin = inputView.calculatorString();
-        List<String> strings = splitStrings(origin);
-        Variable expression = Calculator.calculate(strings);
+        Calculator calculator = Calculator.of(inputView.calculatorString());
+        Variable expression = calculator.calculate();
         resultView.calculateResult(expression.value());
     }
 
-    private static List<String> splitStrings(String origin) {
-        return Arrays.asList(origin.split(" "));
-    }
 }
