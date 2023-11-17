@@ -1,13 +1,11 @@
 package lotto.controller;
 
-import lotto.domain.AutoLottoNumberGenerator;
-import lotto.domain.Lotto;
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoWinningMachine;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
 
 import java.util.List;
+import java.util.Map;
 
 public class LottoController {
 
@@ -26,7 +24,10 @@ public class LottoController {
 
         List<Integer> winningNumbers = InputView.inputWinningNumbers(DELIMITER);
 
-        LottoWinningMachine winningMachine = new LottoWinningMachine(new Lotto(winningNumbers));
+        LottoWinningMachine winningMachine = new LottoWinningMachine();
+        Map<Rank, Integer> rankCounts = winningMachine.start(new Lotto(winningNumbers), lottoMachine.getLottos());
+        OutputView.outputWinningResult(rankCounts);
+        OutputView.outputRateOfResult(winningMachine.calculateRateOfResult(rankCounts, amount));
 
     }
 }
