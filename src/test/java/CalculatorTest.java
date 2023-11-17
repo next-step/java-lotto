@@ -18,10 +18,10 @@ public class CalculatorTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("입력 순서대로 계산한 결과를 반환한다.")
     void 문자열_계산결과_반환(){
         String inputString = "2 + 3 * 4 / 2";
 
-        assertThat(Calculator.stringCalculate(inputString)).isEqualTo(10);
+        assertThat(Calculator.returnCalculateResult(inputString)).isEqualTo(10);
     }
 }

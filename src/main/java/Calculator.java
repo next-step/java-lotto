@@ -1,39 +1,25 @@
 import java.util.List;
 
 public class Calculator {
-    private static final String SUM_OPERATOR = "+";
-    private static final String SUBTRACTION_OPERATOR = "-";
-    private static final String MULTIPLICATION_OPERATOR = "*";
-    private static final String DIVISION_OPERATOR = "/";
 
-    public static int stringCalculate(String inputString) {
-        SplitString splitString = new SplitString(inputString);
+    public static int returnCalculateResult(String inputString) {
+        List<String> splitStrings = SplitString.splitInputString(inputString);
 
-        return splitString.stringOperate();
+        return operateString(splitStrings);
     }
 
-    public static int operate(String operator, int result, int operand) {
-        if(operator.equals(SUM_OPERATOR)) return sum(result, operand);
-        if(operator.equals(SUBTRACTION_OPERATOR)) return subtraction(result, operand);
-        if(operator.equals(MULTIPLICATION_OPERATOR)) return multiplication(result, operand);
-        if (operator.equals(DIVISION_OPERATOR)) return division(result, operand);
+    public static int operateString(List<String> splitStrings){
+        int result = Integer.parseInt(splitStrings.get(0));
 
-        return 0;
+        for(int i=1; i<splitStrings.size(); i+=2){
+            result = Calculator.operate(splitStrings.get(i), result, Integer.parseInt(splitStrings.get(i +1)));
+        }
+
+        return result;
     }
 
-    private static int sum(int number1, int number2){
-        return number1 + number2;
+    public static int operate(String operator, int number1, int number2) {
+        return OperatorMapping.returnOperation(operator).calculate(number1, number2);
     }
 
-    private static int subtraction(int number1, int number2){
-        return number1 - number2;
-    }
-
-    private static int multiplication(int number1, int number2) {
-        return number1 * number2;
-    }
-
-    private static int division(int number1, int number2) {
-        return number1 / number2;
-    }
 }

@@ -12,9 +12,7 @@ public class StringCalculatorTest {
     void 문자열_공백으로_구분(){
         String inputString = "2 + 3 * 4 / 2";
 
-        SplitString splitString = new SplitString(inputString);
-
-        assertThat(splitString.splitStrings).containsExactly("2","+","3","*","4","/","2");
+        assertThat(SplitString.splitInputString(inputString)).containsExactly("2","+","3","*","4","/","2");
     }
 
     @Test
@@ -24,11 +22,11 @@ public class StringCalculatorTest {
         String inputBlank = " ";
 
         assertThatThrownBy( () -> {
-            assertThat(new SplitString(inputNull));
+            assertThat(SplitString.splitInputString(inputNull));
         }).isInstanceOf(IllegalArgumentException.class);
 
         assertThatThrownBy( () -> {
-            assertThat(new SplitString(inputBlank));
+            assertThat(SplitString.splitInputString(inputBlank));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -38,7 +36,7 @@ public class StringCalculatorTest {
         String nonOperator = "1 x 4";
 
         assertThatThrownBy( () -> {
-            assertThat(new SplitString(nonOperator));
+            assertThat(SplitString.splitInputString(nonOperator));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
