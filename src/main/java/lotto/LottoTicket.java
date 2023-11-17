@@ -20,4 +20,9 @@ public class LottoTicket {
             ticket.add(randomNumber);
         }
     }
+
+    @Override
+    public String toString() {
+        return this.ticket.toString();
+    }
 }

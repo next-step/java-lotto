@@ -17,4 +17,8 @@ public class LottoTickets {
     public int numberOfPurchasedTicket () {
         return tickets.size();
     }
+
+    public List<LottoTicket> tickets() {
+        return this.tickets;
+    }
 }
