@@ -1,6 +1,7 @@
 package step2.view;
 
-import step2.domain.WinningCount;
+import step2.domain.lotto.LottoNumber;
+import step2.domain.lotto.WinningCount;
 
 import java.util.List;
 import java.util.Map;
@@ -9,8 +10,11 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    public static void printLotteryNumbers(List<Integer> lotteryNumbers) {
-        String result = lotteryNumbers.stream().map(Objects::toString).collect(Collectors.joining(", "));
+    public static void printLottoNumbers(List<LottoNumber> lottoNumbers) {
+        String result = lottoNumbers.get(0).getNumbers()
+                .stream()
+                .map(Objects::toString)
+                .collect(Collectors.joining(", "));
         System.out.println("[" + result + "]");
     }
 
@@ -20,10 +24,11 @@ public class OutputView {
 
         int totalWinningAmount = 0;
         for (WinningCount winningCount : winningCountMap.keySet()) {
+            if (winningCount.getMatchingCount() == 0) {
+                return;
+            }
             totalWinningAmount += winningCount.getWinningAmount() * winningCountMap.get(winningCount);
-            System.out.println(winningCount.getMatchingCount()
-                    + "개 일치 (" + winningCount.getWinningAmount() + "원) - "
-                    + winningCountMap.get(winningCount) + "개");
+            System.out.println(winningCount + " - " + winningCountMap.get(winningCount) + "개");
         }
 
         calculateRevenueRate(purchaseAmount, totalWinningAmount);
