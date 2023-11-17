@@ -8,8 +8,8 @@ import lotto.view.ResultView;
 public class UserInterface {
     public static void main(String[] args) {
         int money = Parser.numberParsing(InputView.purchaseMoney());
-        ResultView.purchaseCount(money);
         Lottos lottos = new Lottos(money);
+        ResultView.purchaseCount(lottos);
         ResultView.lottos(lottos);
         String winningNumber = InputView.winningNumber();
         System.out.println();

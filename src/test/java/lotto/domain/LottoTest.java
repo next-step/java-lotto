@@ -4,8 +4,6 @@ import lotto.dto.WinningInfoDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTest {
@@ -15,6 +13,6 @@ class LottoTest {
         Lotto lotto = new Lotto("5, 2,21,45, 34,30");
         assertThat(lotto.winningInfo("1,2,3,45,5,6"))
                 .usingRecursiveComparison()
-                .isEqualTo(new WinningInfoDTO(3, 5000));
+                .isEqualTo(new WinningInfoDTO(3, new WinningAmount(5000)));
     }
 }

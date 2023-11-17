@@ -1,10 +1,12 @@
 package lotto.dto;
 
+import lotto.domain.WinningAmount;
+
 public class WinningInfoDTO {
     private int correctCount;
-    private int winningAmount;
+    private WinningAmount winningAmount;
 
-    public WinningInfoDTO(int correctCount, int winningAmount) {
+    public WinningInfoDTO(int correctCount, WinningAmount winningAmount) {
         this.correctCount = correctCount;
         this.winningAmount = winningAmount;
     }
@@ -14,6 +16,6 @@ public class WinningInfoDTO {
     }
 
     public int getWinningAmount() {
-        return winningAmount;
+        return winningAmount.amount();
     }
 }

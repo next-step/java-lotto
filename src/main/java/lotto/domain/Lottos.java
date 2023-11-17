@@ -21,15 +21,15 @@ public class Lottos {
     }
 
     private int purchasableLottoCount(int value) {
-        return value/Lotto.LOTTO_PRICE;
+        return value / Lotto.LOTTO_PRICE;
     }
 
     public int totalWinningAmount(String winningNumber) {
-        int winnigAmount = 0;
+        WinningAmount winningAmount = new WinningAmount();
         for (Lotto lotto : this.lottos) {
-            winnigAmount += lotto.winningInfo(winningNumber).getWinningAmount();
+            winningAmount.add(lotto.winningInfo(winningNumber).getWinningAmount());
         }
-        return winnigAmount;
+        return winningAmount.amount();
     }
 
     public BigDecimal rateOfReturn(String winningNumber) {
@@ -43,13 +43,13 @@ public class Lottos {
         return Collections.unmodifiableList(this.lottos);
     }
 
+    public int size() {
+        return this.lottos.size();
+    }
+
     public int winningCount(String winningNumber, int correctCount) {
-        int winningCount = 0;
-        for (Lotto lotto : this.lottos) {
-            if (lotto.winningInfo(winningNumber).getCorrectCount() == correctCount) {
-                winningCount += 1;
-            }
-        }
-        return winningCount;
+        return (int) this.lottos.stream()
+                .filter(lotto -> lotto.winningInfo(winningNumber).getCorrectCount() == correctCount)
+                .count();
     }
 }

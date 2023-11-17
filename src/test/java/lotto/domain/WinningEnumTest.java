@@ -3,8 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningEnumTest {
@@ -14,10 +12,9 @@ class WinningEnumTest {
         int correctCount = 3;
         int expectedWinningAmount = 5000;
 
-        Optional<Integer> result = WinningEnum.winningAmount(correctCount);
+        int result = WinningEnum.winningAmount(correctCount);
 
-        assertThat(result).isPresent();
-        assertThat(result).hasValue(expectedWinningAmount);
+        assertThat(result).isEqualTo(expectedWinningAmount);
     }
 
     @DisplayName("enum에 유효하지 않은 값을 전달할경우")
@@ -25,8 +22,8 @@ class WinningEnumTest {
     void 유효하지않은_값() {
         int correctCount = 9;
 
-        Optional<Integer> result = WinningEnum.winningAmount(correctCount);
+        int result = WinningEnum.winningAmount(correctCount);
 
-        assertThat(result).isEmpty();
+        assertThat(result).isEqualTo(0);
     }
 }

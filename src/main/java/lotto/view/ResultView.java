@@ -7,8 +7,8 @@ import lotto.domain.WinningEnum;
 import java.math.BigDecimal;
 
 public class ResultView {
-    public static void purchaseCount(int money) {
-        System.out.println((money / Lotto.LOTTO_PRICE) + "개를 구매했습니다.");
+    public static void purchaseCount(Lottos lottos) {
+        System.out.println(lottos.size() + "개를 구매했습니다.");
     }
 
     public static void lottos(Lottos lottos) {
@@ -25,8 +25,8 @@ public class ResultView {
     }
 
     public static void winningStatics(int correctCount, int winningCount) {
-        int winningAmount = WinningEnum.winningAmount(correctCount).orElse(0);
-        System.out.println(correctCount + "개 일치 (" + winningAmount + "원) - " + winningCount+"개");
+        int winningAmount = WinningEnum.winningAmount(correctCount);
+        System.out.println(correctCount + "개 일치 (" + winningAmount + "원) - " + winningCount + "개");
     }
 
     public static void rateOfReturn(BigDecimal rate) {

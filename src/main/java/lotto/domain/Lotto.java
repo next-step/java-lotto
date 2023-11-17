@@ -3,24 +3,27 @@ package lotto.domain;
 import lotto.dto.WinningInfoDTO;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_PRICE = 1000;
+    private static final int START_NUMBER = 1;
+    private static final int END_NUMBER = 45;
+
     private List<Integer> numbers;
 
     public Lotto() {
         List<Integer> numbersRange = new ArrayList<>();
-        for (int number = 1; number <= 45; number++) {
+        for (int number = START_NUMBER; number <= END_NUMBER; number++) {
             numbersRange.add(number);
         }
         Collections.shuffle(numbersRange);
         this.numbers = new ArrayList<>(purchasing(numbersRange));
 
     }
+
     public Lotto(String numbers) {
         this.numbers = new ArrayList<>(Parser.numbersParsing(numbers));
     }
@@ -33,10 +36,7 @@ public class Lotto {
 
     public WinningInfoDTO winningInfo(String numbers) {
         int correctCount = correctCount(numbers);
-
-        int winningAmount = WinningEnum.winningAmount(correctCount).orElse(0);
-
-        return new WinningInfoDTO(correctCount, winningAmount);
+        return new WinningInfoDTO(correctCount, new WinningAmount(WinningEnum.winningAmount(correctCount)));
     }
 
     private int correctCount(String numbers) {

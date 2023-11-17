@@ -16,7 +16,7 @@ class LottosTest {
     @Test
     void 로또_구매() {
         Lottos lottos = new Lottos(14000);
-        assertThat(lottos.getLottos().size()).isEqualTo(14000 / Lotto.LOTTO_PRICE);
+        assertThat(lottos.size()).isEqualTo(14);
     }
 
     @DisplayName("로또 총 당첨 금액을 리턴한다.")
