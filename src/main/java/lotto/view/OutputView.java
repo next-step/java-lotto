@@ -1,8 +1,6 @@
 package lotto.view;
 
-import lotto.LottoTickets;
-
-import java.util.Arrays;
+import lotto.domain.LottoTickets;
 
 public class OutputView {
     public static void requestAmountOfPurchase() {
