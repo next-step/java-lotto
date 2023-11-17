@@ -9,9 +9,6 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ---
-
-# 문자열 사칙 연산 계산기
-
 # 문자열 사칙 연산 계산기
 
 ### 기능 요구사항
@@ -45,3 +42,45 @@
   InputView.java
   ResultView.java
  끝.
+
+---
+
+# 로또
+
+### 기술 요구사항
+[] else 금물, switch 금물
+[] depth 1 단계
+[] 메소드는 최대 15라인
+[] 예상외의 값 입력시 예외처리
+[] 도메인은 무조건 테스트
+
+### 기능 요구사항
+[] 로또 구입 금액을 입력
+[] 구입 금액에 해당하는 로또 발급
+[] 로또 1장의 가격은 1000원
+[] 지난주 당첨 번호 입력
+[] 통계 (3개 일치 - 5000)
+[] 통계 (4개 일치 - 50000)
+[] 통계 (5개 일치 - 1500000)
+[] 통계 (6개 일치 - 2000000000)
+[] 수익율 계산
+
+### 산출 클래스 예상
+- controller
+  Main.java
+  LottoController.java
+- **domain (유동적, 테스트 필수)**
+  Lotto.java (List<LottoNumber> 로또 한장)
+  LottoNumber.java (Integer로 로또 번호 하나)
+  LottoWallet.java (List<Lotto> 로또 여러장)
+  WinningLotto.java (Lotto 지난주 로또 한장)
+  MoneyWallet.java (사용자가 입력한 값)
+  StatisticsReport.java (로또 통계레포트) 🤔
+  PAndLReport.java (로또 손익레포트)
+- util
+  LottoGenerator.java
+- view
+  InputView.java
+  ResultView.java
+
+
