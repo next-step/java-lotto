@@ -9,7 +9,8 @@ public class LottoTickets {
 
     public LottoTickets(int numberOfTickets, Random random) {
         for (int i = 0; i < numberOfTickets; i++) {
-            LottoTicket ticket = new LottoTicket(random);
+            LottoFactory lottoFactory = new LottoFactory(random);
+            LottoTicket ticket = new LottoTicket(lottoFactory.numbers());
             tickets.add(ticket);
         }
     }

@@ -1,6 +1,9 @@
 package lotto;
 
+import lotto.domain.LottoFactory;
 import lotto.domain.LottoTickets;
+import lotto.domain.PrizeStatus;
+import lotto.domain.WinnerNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -18,6 +21,14 @@ public class LottoPlay {
         LottoTickets lottoTickets = new LottoTickets(numOfTickets, random);
         OutputView.displayLottoTickets(lottoTickets);
 
+        LottoFactory lottoFactory = new LottoFactory(random);
+        WinnerNumbers winnerNumbers = new WinnerNumbers(lottoFactory.numbers());
+
+        OutputView.displayWinnerNumbers(winnerNumbers);
+        PrizeStatus prizeStatus = new PrizeStatus(lottoTickets, winnerNumbers);
+
+        OutputView.displayPrizeStatMessage();
+        OutputView.displayPrizeStatus(prizeStatus);
     }
 
 }
