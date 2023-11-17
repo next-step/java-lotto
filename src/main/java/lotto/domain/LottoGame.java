@@ -34,7 +34,7 @@ public class LottoGame {
 
         List<Integer> winningNumbers = parsingText(winningNumberText);
 
-        return lottos.draw(new LottoNumbers(winningNumbers), bonusNumber);
+        return lottos.draw(new WinningNumber(winningNumbers, LottoNumber.of(bonusNumber)));
     }
 
     private List<Integer> parsingText(final String winningNumberText) {
