@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoGame {
 
@@ -8,14 +9,12 @@ public class LottoGame {
 
         Lotto lotto = new Lotto();
 
-        List<Integer> lottoList = lotto.getLotto();
+        List<Integer> lottos = lotto.getLotto();
 
         List<List<Integer>> buyLottoList = new ArrayList<>();
 
-        List<Integer> buyLotto;
-
-        for(int i=0; i<lottoCount; i++){
-            buyLotto = shuffleStrategy.shufflable(lottoList);
+        for (int i = 0; i < lottoCount; i++) {
+            List<Integer> buyLotto = shuffleStrategy.shufflable(lottos);
             buyLottoList.add(buyLotto);
         }
 

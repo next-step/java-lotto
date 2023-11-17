@@ -6,15 +6,15 @@ import java.util.stream.IntStream;
 
 public class Lotto {
 
-    private List<Integer> lottoList;
+    private List<Integer> lottos;
 
-    public Lotto(){
-        this.lottoList = IntStream.range(1, 45)
+    public Lotto() {
+        this.lottos = IntStream.range(1, 45)
                 .boxed()
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> getLotto(){
-        return lottoList;
+    public List<Integer> getLotto() {
+        return lottos;
     }
 }

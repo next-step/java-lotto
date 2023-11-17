@@ -1,60 +1,73 @@
 package lotto.domain;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
 
 public class ResultWinner {
 
-    public Map<Integer, Integer> countOfWinner(List<List<Integer>> list, String lastWeekWinner){
+    static final int LOTTO_MAX_NUMBER = 45;
+    static final int LOTTO_MIN_NUMBER = 1;
 
-        List<String> lastWeek = List.of(lastWeekWinner.split(","));
 
-        for(String number : lastWeek){
+    public EnumMap<Rank, Integer> countOfWinner(List<List<Integer>> list, List<String> lastWeekWinner) {
+
+        for (String number : lastWeekWinner) {
             validation(number);
         }
 
         List<Integer> resultList = new ArrayList<>();
 
-        for(List<Integer> buyLottoList : list){
+        for (List<Integer> buyLottoList : list) {
             int answerCount = 0;
-            answerCount = getAnswerCount(buyLottoList, lastWeek, answerCount);
+            answerCount = getAnswerCount(buyLottoList, lastWeekWinner, answerCount);
             resultList.add(answerCount);
         }
 
-        Map<Integer, Integer> resultMap = makeResultMap();
+        EnumMap<Rank, Integer> resultMap = makeResultMap();
 
         resultAdd(resultList, resultMap);
-
         return resultMap;
     }
 
-    private static void validation(String number) {
-        if(Integer.parseInt(number) > 45){
-            throw new RuntimeException("로또 번호는 45를 넘을수 없습니다.");
+    private void validation(String number) {
+        if (Integer.parseInt(number) < LOTTO_MIN_NUMBER || Integer.parseInt(number) > LOTTO_MAX_NUMBER) {
+            throw new RuntimeException("유효하지 않은 로또 번호 입니다.");
         }
     }
 
-    private void resultAdd(List<Integer> resultList, Map<Integer, Integer> resultMap) {
-        for(int i = 0; i< resultList.size(); i++){
-            if(resultMap.containsKey(resultList.get(i))){
-                resultMap.put(resultList.get(i), resultMap.get(resultList.get(i))+1);
-            }
+    private void resultAdd(List<Integer> resultList, EnumMap<Rank, Integer> resultMap) {
+        for (int i = 0; i < resultList.size(); i++) {
+            getResultMap(resultList, resultMap, i);
         }
     }
 
-    private Map<Integer, Integer> makeResultMap() {
-        Map<Integer, Integer> resultMap = new HashMap<>();
+    private void getResultMap(List<Integer> resultList, EnumMap<Rank, Integer> resultMap, int i) {
+        if (Rank.valueOf(resultList.get(i)).isPresent()) {
+            validMapContainsKey(resultList, resultMap, i);
+        }
+    }
 
-        resultMap.put(3,0);
-        resultMap.put(4,0);
-        resultMap.put(5,0);
-        resultMap.put(6,0);
+    private void validMapContainsKey(List<Integer> resultList, EnumMap<Rank, Integer> resultMap, int i) {
+        if (resultMap.containsKey(Rank.valueOf(resultList.get(i)).get())) {
+            resultMap.put(Rank.valueOf(resultList.get(i)).get(), resultMap.get(Rank.valueOf(resultList.get(i)).get()) + 1);
+        }
+    }
+
+    private EnumMap<Rank, Integer> makeResultMap() {
+
+        EnumMap<Rank, Integer> resultMap = new EnumMap<>(Rank.class);
+
+        for (Rank constant : Rank.values()) {
+            resultMap.put(constant, 0);
+        }
+
         return resultMap;
     }
 
     private int getAnswerCount(List<Integer> buyLottoList, List<String> lastWeek, int answerCount) {
         boolean checkContains;
-        for(String number : lastWeek){
+        for (String number : lastWeek) {
             checkContains = buyLottoList.contains(Integer.parseInt(number));
             answerCount = getAnswerCalc(checkContains, answerCount);
         }
@@ -62,7 +75,7 @@ public class ResultWinner {
     }
 
     private int getAnswerCalc(boolean checkContains, int answerCount) {
-        if(checkContains){
+        if (checkContains) {
             answerCount++;
         }
         return answerCount;
