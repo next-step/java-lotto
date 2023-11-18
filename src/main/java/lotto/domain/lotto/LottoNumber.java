@@ -1,38 +1,49 @@
 package lotto.domain.lotto;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
 
+    private static final Map<Integer, LottoNumber> CACHED_LOTTO_NUMBERS = initializeCachedLottoNumbers();
+
     public static final int NUMBER_MIN = 1;
     public static final int NUMBER_MAX = 45;
-    private static final String NUMBER_ERROR_MESSAGE = String.format("로또 번호는 %s ~ %s 사이의 숫자이어야 합니다.", NUMBER_MIN, NUMBER_MAX);
 
-    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    private static final String NUMBER_ERROR_MESSAGE = String.format("로또 번호는 %s ~ %s 사이의 숫자이어야 합니다.", NUMBER_MIN, NUMBER_MAX);
 
     private final int lottoNumber;
 
     private LottoNumber(int number) {
         validateRange(number);
         this.lottoNumber = number;
-
-        lottoNumbers.put(number, this);
     }
 
     public static LottoNumber of(Integer number) {
-        if (lottoNumbers.containsKey(number)) {
-            return lottoNumbers.get(number);
-        }
-
-        return new LottoNumber(number);
+        validateRange(number);
+        return CACHED_LOTTO_NUMBERS.get(number);
     }
 
-    private void validateRange(int number) {
+    private static void validateRange(int number) {
         if (number < NUMBER_MIN || number > NUMBER_MAX) {
             throw new IllegalArgumentException(NUMBER_ERROR_MESSAGE);
         }
+    }
+
+    private static Map<Integer, LottoNumber> initializeCachedLottoNumbers() {
+        return newLottoNumbers(Collectors.toMap(
+                number -> number,
+                number -> new LottoNumber(number)
+        ));
+    }
+
+    public static <T> T newLottoNumbers(Collector<Integer, ?, T> collector) {
+        return IntStream.rangeClosed(LottoNumber.NUMBER_MIN, LottoNumber.NUMBER_MAX)
+                .boxed()
+                .collect(collector);
     }
 
     public int value() {
