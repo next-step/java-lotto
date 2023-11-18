@@ -25,11 +25,7 @@ public class SecondRule implements WinningRule {
             return false;
         }
 
-        if (lotto.containBonusNumber(winningNumber)) {
-            return true;
-        }
-
-        return false;
+        return lotto.containBonusNumber(winningNumber);
     }
 
     @Override
