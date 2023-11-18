@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Validator {
     private static final int PRICE_OF_LOTTO = 1000;
+    private static final int NUMBERS_SIZE = 6;
 
     public static void validateAmount(int amount) {
         if (isInvalidAmount(amount) || isNegativeAmount(amount)) {
@@ -23,7 +24,7 @@ public class Validator {
     }
 
     public static void validateLottoNumbers(List<Integer> winningNumbers) {
-        if (winningNumbers.size() != 6) {
+        if (winningNumbers.size() != NUMBERS_SIZE) {
             throw new InvalidLottoNumbersException();
         }
     }
