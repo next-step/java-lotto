@@ -13,17 +13,6 @@ import static org.assertj.core.api.Assertions.entry;
 
 @DisplayName("구매한 로또 목록 관련 테스트")
 public class LottosTest {
-    @Test
-    @DisplayName("구매한 로또 개수를 확인한다")
-    void 구매_로또수_확인() {
-        NumberGeneration numberGeneration = new RandomNumberGeneration();
-        int amount = 14000;
-
-        Lottos lottos = Lottos.extracted(amount, numberGeneration);
-
-        assertThat(lottos.count()).isEqualTo(14);
-    }
-
 
     @Test
     @DisplayName("당첨 번호와 매치한 결과 번호목록에 있는 랭킹 값 목록만 리턴")

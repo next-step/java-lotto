@@ -1,35 +1,15 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 
 public class Lottos {
-    private static final int UNIT = 1000;
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
-    }
-
-    public static Lottos extracted(int amount, NumberGeneration numberGeneration) {
-        int count = calculateCount(amount);
-        List<Lotto> lottoList = new ArrayList<>();
-
-        for (int i = 0; i < count; i++) {
-            lottoList.add(new Lotto(numberGeneration));
-        }
-
-        return new Lottos(lottoList);
-    }
-    private static int calculateCount(int amount) {
-        if (amount % UNIT != 0) {
-            throw new IllegalArgumentException("금액은 " + UNIT + "단위 입니다");
-        }
-
-        return amount / UNIT;
-    }
-
-    public int count() {
-        return lottos.size();
     }
 
     public Map<LottoRank, Integer> findRanks(List<Integer> winList, int bonus) {
@@ -46,8 +26,6 @@ public class Lottos {
     public List<Lotto> find() {
         return Collections.unmodifiableList(lottos);
     }
-
-
 
 
 }

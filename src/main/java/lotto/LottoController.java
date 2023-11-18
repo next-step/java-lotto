@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoRanks;
-import lotto.domain.Lottos;
-import lotto.domain.NumberGeneration;
-import lotto.domain.RandomNumberGeneration;
+import lotto.domain.*;
 
 import java.util.List;
 
@@ -17,10 +14,14 @@ public class LottoController {
     public static void main(String[] args) {
 
         int amount = inputPurchaseAmount();
+        int count = countByAmount(amount);
+        int manual = inputManualCount();
+        List<List<Integer>> manualList = inputManualList(manual);
 
-        Lottos lottos = Lottos.extracted(amount, NUMBER_GENERATION);
+        LottoGeneration lottoGeneration = new LottoGeneration(manualList, NUMBER_GENERATION,count);
+        Lottos lottos = new Lottos(lottoGeneration.find());
 
-        printLottoCount(lottos.count());
+        printLottoCount(count, manual);
         printLottoBundle(lottos.find());
 
         List<Integer> winNumbers = inputWiningNumbers();

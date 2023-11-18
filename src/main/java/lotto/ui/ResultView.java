@@ -10,13 +10,13 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printLottoCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    public static void printLottoCount(int all, int manual) {
+        System.out.println("수동으로 "+manual+"장, 자동으로 "+(all-manual)+"개를 구매했습니다.");
     }
 
     public static void printLottoBundle(List<Lotto> result) {
         for (Lotto lotto : result) {
-            System.out.println(lotto.find().toString());
+            System.out.println(lotto.find());
         }
         System.out.println();
     }

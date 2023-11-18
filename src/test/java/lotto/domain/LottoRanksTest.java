@@ -16,13 +16,12 @@ public class LottoRanksTest {
     @Test
     @DisplayName("모든 로또 당첨금의 합계를 확인")
     void 당첨금_합계확인() {
-        List<Integer> winList = new ArrayList<>(Arrays.asList(6, 5, 4, 3, 2, 10));
-        NumberGeneration numberGeneration = new TestNumberGeneration();
-        int amount = 5000;
+        int count = 5;
         int bonus = 1;
+        LottoGeneration lottoGeneration = new LottoGeneration(new ArrayList<>(), new TestNumberGeneration(),count);
+        Lottos lottos = new Lottos(lottoGeneration.find());
 
-        Lottos lottos = Lottos.extracted(amount, numberGeneration);
-        LottoRanks lottoRanks = new LottoRanks(lottos, winList, bonus);
+        LottoRanks lottoRanks = new LottoRanks(lottos, new ArrayList<>(Arrays.asList(6, 5, 4, 3, 2, 10)), bonus);
 
         assertThat(lottoRanks.findPrizeMoney()).isEqualTo(150_000_000L);
     }

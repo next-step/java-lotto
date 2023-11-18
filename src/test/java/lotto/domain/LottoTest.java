@@ -18,16 +18,7 @@ public class LottoTest {
     @BeforeEach
     void create(){
         text = "[1, 2, 3, 4, 5, 6]";
-        lotto = new Lotto(new TestNumberGeneration());
-    }
-
-    @Test
-    @DisplayName("로또가 전략에 맞게 6개가 생성되는지 확인.")
-    void 로또_생성_확인() {
-        List<Integer> result = lotto.find();
-
-        assertThat(result).hasSize(6);
-        assertThat(result.toString()).isEqualTo(text);
+        lotto = new Lotto(new TestNumberGeneration().generate());
     }
 
     @Test
