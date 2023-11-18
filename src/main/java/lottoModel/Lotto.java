@@ -1,4 +1,4 @@
-package lotto;
+package lottoModel;
 
 import java.util.List;
 import java.util.Objects;
@@ -7,23 +7,31 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private List<Integer> numbers;
+    private Set<Integer> numbers;
+
+    public Set<Integer> getNumbers() {
+        return numbers;
+    }
+
+    public Lotto(Set<Integer> numbers) {
+        this.numbers = numbers;
+    }
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
+        this.numbers = numbers.stream().collect(Collectors.toSet());
     }
 
 
     public int matchCount(List<Integer> numberList) {
-        return matchNumber(numberList).size();
+        return matchNumber(numberList.stream().collect(Collectors.toSet())).size();
     }
 
 
-    private Set<Integer> matchNumber(List<Integer> numberList) {
+    private Set<Integer> matchNumber(Set<Integer> numberList) {
         return findCommonElements(numberList, this.numbers);
     }
 
-    private static <T> Set<T> findCommonElements(List<T> first, List<T> second) {
+    private static Set<Integer> findCommonElements(Set<Integer> first, Set<Integer> second) {
         return first.stream().filter(second::contains).collect(Collectors.toSet());
     }
 
@@ -44,4 +52,5 @@ public class Lotto {
     public String toString() {
         return numbers.toString();
     }
+
 }

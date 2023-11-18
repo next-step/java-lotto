@@ -1,3 +1,7 @@
+package calculator;
+
+import calculatorModel.Calculator;
+import calculatorModel.Operation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,8 +1,8 @@
-package lotto;
+package lottoModel;
 
 public class LottoOperator {
 
-    enum Operator {
+    public enum Operator {
 
         MINUS {
             @Override

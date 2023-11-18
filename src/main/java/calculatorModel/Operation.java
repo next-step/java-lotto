@@ -1,6 +1,8 @@
+package calculatorModel;
+
 public class Operation {
 
-    enum Operator {
+    public enum Operator {
         ADD("+") {
             public int apply(int x, int y) {
                 return x + y;
