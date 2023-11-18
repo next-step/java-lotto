@@ -2,12 +2,14 @@ package lotto.rule;
 
 import lotto.Lotto;
 import lotto.WinningNumber;
-import lotto.rule.*;
 import lotto.type.WinningLevel;
 
 import java.util.List;
 
-public class WinningLevelDeterminator {
+/**
+ * 로또 번호와 당첨 번호 + 보너스 번호를 가지고 몇 등인지 판단하는 규칙 집합
+ */
+public class WinningLevelDetermination {
     private static final List<WinningRule> WINNING_RULES = List.of(
             FirstRule.getInstance(),
             SecondRule.getInstance(),
@@ -16,7 +18,7 @@ public class WinningLevelDeterminator {
             FifthRule.getInstance()
     );
 
-    private WinningLevelDeterminator() {
+    private WinningLevelDetermination() {
     }
 
     /**

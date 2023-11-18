@@ -2,7 +2,7 @@ package controller;
 
 import lotto.Lotto;
 import lotto.LottoGenerator;
-import lotto.rule.WinningLevelDeterminator;
+import lotto.rule.WinningLevelDetermination;
 import lotto.type.WinningLevel;
 import lotto.WinningNumber;
 import util.calculator.Ratio;
@@ -44,7 +44,7 @@ public class LottoController {
     private void resultPhase() {
         WinningStatistic result = new WinningStatistic();
         for (Lotto myLotto : lottos) {
-            WinningLevel rank = WinningLevelDeterminator.whatRank(myLotto, winningNumber);
+            WinningLevel rank = WinningLevelDetermination.whatRank(myLotto, winningNumber);
             result.occurs(rank);
         }
         Renderer.printResult(result);
