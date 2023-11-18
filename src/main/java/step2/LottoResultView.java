@@ -10,7 +10,12 @@ public class LottoResultView {
         }
     }
 
-    public static void printLottoResult(LottoResult lottoResult) {
+    public static void printFinalLottoResult(LottoResult lottoResult, Money money) {
+        printLottoStatistics(lottoResult);
+        printProfitRate(lottoResult, money);
+    }
+
+    public static void printLottoStatistics(LottoResult lottoResult) {
         System.out.print(lottoResult.toString());
     }
 
