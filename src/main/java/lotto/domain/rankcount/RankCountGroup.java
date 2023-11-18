@@ -2,24 +2,19 @@ package lotto.domain.rankcount;
 
 import lotto.domain.lotto.LotteryRank;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 public class RankCountGroup {
 
-    private static final long DEFAULT_COUNT = 0;
+    private static final Long DEFAULT_COUNT = 0L;
 
-    private List<RankCount> rankCountGruop = new ArrayList<>();
+    private final Map<LotteryRank, Long> rankCountGroup;
 
-    public RankCountGroup(List<RankCount> rankCountGruop) {
-        this.rankCountGruop.addAll(rankCountGruop);
+    public RankCountGroup(Map<LotteryRank, Long> rankCountGruop) {
+        this.rankCountGroup = rankCountGruop;
     }
 
     public long findWinningCountBy(LotteryRank rank) {
-        return rankCountGruop.stream()
-            .filter(rankCount -> rankCount.isSameRank(rank))
-            .findFirst()
-            .map(RankCount::winningCount)
-            .orElse(DEFAULT_COUNT);
+        return rankCountGroup.getOrDefault(rank, DEFAULT_COUNT);
     }
 }
