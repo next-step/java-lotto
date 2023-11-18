@@ -10,31 +10,33 @@ import java.util.stream.Collectors;
 
 public class LottoWinner {
 
-    private Map<Integer, Long> winnerNumber;
+    private Map<Integer, Long> winnerNumberCount;
     private final List<Lotto> lottos;
+    private final String winNumber;
 
-    public LottoWinner(List<Lotto> lottos) {
-        winnerNumber = new HashMap<>();
+    public LottoWinner(List<Lotto> lottos, String winNumber) {
+        winnerNumberCount = new HashMap<>();
         this.lottos = lottos;
+        this.winNumber = winNumber;
     }
 
     public int getTotalPrice() {
         int totalPrice = 0;
-        for (int match : this.winnerNumber.keySet()) {
+        for (int match : this.winnerNumberCount.keySet()) {
             totalPrice += LottoRank.getPriceByMatch(match);
         }
 
         return totalPrice;
     }
 
-    public Map<Integer, Long> getWinnerScore(String winnerNumbers) {
-        List<Integer> winNumbers = splitWinNumberString(winnerNumbers);
-        this.winnerNumber = this.lottos.stream()
+    public Map<Integer, Long> getWinnerScore() {
+        List<Integer> winNumbers = splitWinNumberString(this.winNumber);
+        this.winnerNumberCount = this.lottos.stream()
                 .map(lotto -> lotto.getLottoWinner(winNumbers))
                 .filter(score -> score >= 3)
                 .collect(Collectors.groupingBy(c -> c, Collectors.counting()));
 
-        return this.winnerNumber;
+        return this.winnerNumberCount;
     }
 
     public Double getRating(int payPrice) {
@@ -45,6 +47,8 @@ public class LottoWinner {
     private List<Integer> splitWinNumberString(String winnerNumbers) {
         return Arrays.stream(winnerNumbers.split(","))
                 .map(Integer::parseInt)
+                .filter(e -> !new LottoNumber().isOverMaxNumber(e))
                 .collect(Collectors.toList());
+
     }
 }
