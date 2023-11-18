@@ -38,6 +38,6 @@ public class OutputView {
     }
 
     public static void displayProfit(double profit) {
-        System.out.println("총 수익률은 "+profit+"입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        System.out.println("총 수익률은 "+profit+"입니다.");
     }
 }
