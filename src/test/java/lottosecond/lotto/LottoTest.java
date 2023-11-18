@@ -5,6 +5,8 @@ import lottosecond.testutil.TestUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -29,6 +31,17 @@ class LottoTest {
         // when
         // then
         assertThatThrownBy(() -> new Lotto(TestUtil.makeLottoNumberSet(1, 2, 3, 4, 5, 6, 7, 8, 9)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호는 반드시 6개여야 합니다.");
+    }
+
+    @DisplayName("중복된 번호를 포함해서 6개가 입력되어도 에러를 발생시킵니다.")
+    @Test
+    void duplicateError() {
+        // given
+        // when
+        // then
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 3, 4, 5)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 반드시 6개여야 합니다.");
     }

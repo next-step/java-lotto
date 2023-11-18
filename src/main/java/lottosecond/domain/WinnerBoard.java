@@ -1,38 +1,23 @@
 package lottosecond.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.Objects;
 
 public class WinnerBoard {
 
-    private Map<Integer, Long> winnerBoard;
-    private Map<Integer, Integer> priceBoard;
+    private final List<Winner> winners;
 
-    public WinnerBoard(Map<Integer, Long> winnerBoard) {
-        this.winnerBoard = winnerBoard;
-
-        this.priceBoard = new HashMap<>();
-        this.priceBoard.put(3, 5000);
-        this.priceBoard.put(4, 50000);
-        this.priceBoard.put(5, 1500000);
-        this.priceBoard.put(6, 2000000000);
+    public WinnerBoard(List<Winner> winners) {
+        this.winners = winners;
     }
 
-    public int calculateTotalPrice() {
-        int totalPrice = 0;
-        for (Integer key : priceBoard.keySet()) {
-            totalPrice += priceBoard.get(key) * winnerBoard.get(key);
-        }
-        return totalPrice;
+    public long calculateTotalPrice() {
+        return winners.stream().mapToLong(Winner::getPrice)
+                .sum();
     }
 
-    public long getWinningLottoCount(int key) {
-        return winnerBoard.get(key);
-    }
-
-    public int getWinningLottoPrice(int key) {
-        return priceBoard.get(key);
+    public List<Winner> getWinners() {
+        return winners;
     }
 
     @Override
@@ -40,11 +25,11 @@ public class WinnerBoard {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinnerBoard that = (WinnerBoard) o;
-        return Objects.equals(winnerBoard, that.winnerBoard) && Objects.equals(priceBoard, that.priceBoard);
+        return Objects.equals(winners, that.winners);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(winnerBoard, priceBoard);
+        return Objects.hash(winners);
     }
 }

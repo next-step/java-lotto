@@ -1,8 +1,10 @@
 package lottosecond;
 
+import lottosecond.domain.BonusBall;
 import lottosecond.domain.EarningRateCalculator;
 import lottosecond.domain.WinnerBoard;
-import lottosecond.domain.lotto.LottoNumber;
+import lottosecond.domain.WinningLottoAndBonusBall;
+import lottosecond.domain.lotto.Lotto;
 import lottosecond.domain.lotto.LottoShuffler;
 import lottosecond.domain.lotto.Lottos;
 import lottosecond.domain.lotto.LottosMaker;
@@ -23,9 +25,12 @@ public class LottoAuto {
         outputView.printLottoListInfo(lottos);
 
         String winNumbersString = inputView.inputWinningNumbers();
-        List<LottoNumber> winningNumbers = extractWinningNumbers(winNumbersString);
+        Lotto winningLotto = extractWinningLotto(winNumbersString);
 
-        WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningNumbers);
+        int bonusNumber = inputView.inputBonusNumber();
+        WinningLottoAndBonusBall winningLottoAndBonusBall = new WinningLottoAndBonusBall(winningLotto, new BonusBall(bonusNumber));
+
+        WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningLottoAndBonusBall);
         outputView.printWinnerStatistics(winnerBoard);
 
         EarningRateCalculator earningRateCalculator = new EarningRateCalculator();
@@ -33,10 +38,11 @@ public class LottoAuto {
         outputView.printEarningRate(earningRate);
     }
 
-    private static List<LottoNumber> extractWinningNumbers(String winNumbersString) {
-        return Arrays.stream(winNumbersString.split(","))
+    private static Lotto extractWinningLotto(String winNumbersString) {
+        List<Integer> collect = Arrays.stream(winNumbersString.split(","))
                 .map(strNumber -> Integer.parseInt(strNumber.strip()))
-                .map(LottoNumber::of)
                 .collect(Collectors.toList());
+
+        return new Lotto(collect);
     }
 }

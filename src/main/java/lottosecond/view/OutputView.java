@@ -1,9 +1,15 @@
 package lottosecond.view;
 
 
+import lottosecond.domain.Winner;
 import lottosecond.domain.WinnerBoard;
 import lottosecond.domain.lotto.Lotto;
 import lottosecond.domain.lotto.Lottos;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class OutputView {
 
@@ -23,13 +29,39 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
+        Map<Winner, Long> winnerMap = new LinkedHashMap<>();
+        fillCollectMap(winnerMap);
+
+        List<Winner> winners = winnerBoard.getWinners();
+        Map<Winner, Long> collect = winners.stream().collect(Collectors.groupingBy(
+                winner -> winner,
+                Collectors.counting()
+        ));
+
+        for (Winner winner : collect.keySet()) {
+            winnerMap.put(winner, collect.get(winner));
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
-        for (int matchCount=3; matchCount<=6; matchCount++) {
-            stringBuilder.append(matchCount + "개 일치 " + "(" + winnerBoard.getWinningLottoPrice(matchCount) + "원)- ")
-                    .append(winnerBoard.getWinningLottoCount(matchCount) + "개\n");
+
+        for (Winner winner : winnerMap.keySet()) {
+            stringBuilder.append(winner.getNormalNumberMatchCount() + "개 일치");
+            if (winner == Winner.SECOND) {
+                stringBuilder.append(", 보너스 볼 일치");
+            }
+            stringBuilder.append(" (" + winner.getPrice() + "원)- ")
+                    .append(winnerMap.get(winner) + "개\n");
         }
         String winnerStatic = stringBuilder.toString();
         System.out.println(winnerStatic);
+    }
+
+    private void fillCollectMap(Map<Winner, Long> collect) {
+        collect.putIfAbsent(Winner.FIFTH, 0L);
+        collect.putIfAbsent(Winner.FOURTH, 0L);
+        collect.putIfAbsent(Winner.THIRD, 0L);
+        collect.putIfAbsent(Winner.SECOND, 0L);
+        collect.putIfAbsent(Winner.FIRST, 0L);
     }
 
     public void printEarningRate(double earningRate) {

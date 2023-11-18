@@ -11,8 +11,11 @@ public class BonusBall {
         this.lottoNumber = LottoNumber.of(number);
     }
 
-
     public boolean isDuplicateWithLastWinningLottoNumber(Lotto lotto) {
         return lotto.hasLottoNumber(lottoNumber);
+    }
+
+    public LottoNumber getNumber() {
+        return lottoNumber;
     }
 }

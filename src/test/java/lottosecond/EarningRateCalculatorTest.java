@@ -1,7 +1,9 @@
 package lottosecond;
 
+import lottosecond.domain.BonusBall;
 import lottosecond.domain.EarningRateCalculator;
 import lottosecond.domain.WinnerBoard;
+import lottosecond.domain.WinningLottoAndBonusBall;
 import lottosecond.domain.lotto.Lotto;
 import lottosecond.domain.lotto.Lottos;
 import lottosecond.testutil.TestUtil;
@@ -22,7 +24,10 @@ class EarningRateCalculatorTest {
         Lotto lotto2 = new Lotto(TestUtil.makeLottoNumberSet(7, 8, 9, 10, 11, 12));
         Lotto lotto3 = new Lotto(TestUtil.makeLottoNumberSet(13, 14, 15, 16, 17, 18));
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3));
-        WinnerBoard winnerBoard = lottos.checkWinnerLotto(TestUtil.makeLottoNumberList(4, 5, 6, 7, 8, 9));
+
+        WinningLottoAndBonusBall winningLottoAndBonusBall = new WinningLottoAndBonusBall(new Lotto(List.of(4, 5, 6, 7, 8, 9)), new BonusBall(40));
+
+        WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningLottoAndBonusBall);
         EarningRateCalculator earningRateCalculator = new EarningRateCalculator();
         // when
         double earningRate = earningRateCalculator.calculateEarningRate(winnerBoard, lottos);
@@ -38,7 +43,10 @@ class EarningRateCalculatorTest {
         Lotto lotto2 = new Lotto(TestUtil.makeLottoNumberSet(7, 8, 9, 10, 11, 12));
         Lotto lotto3 = new Lotto(TestUtil.makeLottoNumberSet(13, 14, 15, 16, 17, 18));
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3));
-        WinnerBoard winnerBoard = lottos.checkWinnerLotto(TestUtil.makeLottoNumberList(21, 22, 23, 24, 25, 26));
+
+        WinningLottoAndBonusBall winningLottoAndBonusBall = new WinningLottoAndBonusBall(new Lotto(List.of(21, 22, 23, 24, 25, 26)), new BonusBall(40));
+
+        WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningLottoAndBonusBall);
         EarningRateCalculator earningRateCalculator = new EarningRateCalculator();
         // when
         double earningRate = earningRateCalculator.calculateEarningRate(winnerBoard, lottos);

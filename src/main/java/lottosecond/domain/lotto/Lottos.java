@@ -1,8 +1,13 @@
 package lottosecond.domain.lotto;
 
+import lottosecond.domain.Winner;
 import lottosecond.domain.WinnerBoard;
+import lottosecond.domain.WinningLottoAndBonusBall;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -16,23 +21,15 @@ public class Lottos {
         this.lottoList = lottoList;
     }
 
-    public WinnerBoard checkWinnerLotto(List<LottoNumber> winNumbers) {
-        if (winNumbers.size() != Lotto.LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 반드시 6개여야 합니다.");
-        }
+    public WinnerBoard checkWinnerLotto(WinningLottoAndBonusBall winningLottoAndBonusBall) {
+        List<Winner> winners = lottoList.stream()
+                .map(lotto -> Winner.calculateWinner(lotto, winningLottoAndBonusBall))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
 
-        Lotto winLotto = new Lotto(new HashSet<>(winNumbers));
+        winners.sort(Comparator.comparingLong(Winner::getPrice));
 
-        Map<Integer, Long> winnerLottoCount = lottoList.stream()
-                .map(lotto -> lotto.getLottoScore(winLotto))
-                .filter(score -> score >= 3)
-                .collect(Collectors.groupingBy(
-                        score -> score,
-                        Collectors.counting()
-                ));
-        fillZeroWinnerLottoCount(winnerLottoCount);
-
-        return new WinnerBoard(winnerLottoCount);
+        return new WinnerBoard(winners);
     }
 
     public int totalLottoBuyMoney() {
