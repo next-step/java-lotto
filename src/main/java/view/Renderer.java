@@ -50,6 +50,9 @@ public class Renderer {
         if (rank == WinningLevel.THIRD) {
             return "5개 일치";
         }
+        if (rank == WinningLevel.SECOND) {
+            return "5개 일치, 보너스 볼 일치";
+        }
 
         // rank == WinningLevel.ONE
         return "6개 일치";
@@ -67,6 +70,9 @@ public class Renderer {
         }
         if (rank == WinningLevel.THIRD) {
             return "1500000원";
+        }
+        if (rank == WinningLevel.SECOND) {
+            return "30000000원";
         }
 
         // rank == WinningLevel.ONE
