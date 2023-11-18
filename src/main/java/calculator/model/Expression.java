@@ -7,6 +7,11 @@ import java.util.regex.Pattern;
 
 public class Expression {
     private final List<String> tokens;
+    private static final Pattern VAILD_SYMBOL_PATTERN = Pattern.compile("^[0-9+\\-*/\\s]*$");
+    private static final Pattern CONSECUTIVE_OPERATOR_PATTERN = Pattern.compile(".*[+\\-*/]{2,}.*");
+    private static final Pattern FRONT_POSITIVE_NUMBER_PATTERN = Pattern.compile("^\\d.*");
+    private static final Pattern FRONT_NEGATIVE_NUMBER_PATTERN = Pattern.compile("^-\\d.*");
+    private static final Pattern BACK_NUMBER_PATTERN = Pattern.compile(".*\\d$");
     private static final String ERR_EMPTY_EXPRESSION = "Empty input values are not allowed.";
     private static final String ERR_INVALID_SYMBOL = "Only the following symbols can be used: " + Operator.getAllSymbols();
     private static final String ERR_INVALID_EXPRESSION = "Expression is not valid.";
@@ -33,23 +38,23 @@ public class Expression {
     }
 
     private static boolean containsInvalidSymbol(String expression) {
-        String regex = "^[0-9+\\-*/\\s]*$";
-        return !Pattern.matches(regex, expression);
+        return !VAILD_SYMBOL_PATTERN.matcher(expression).matches();
     }
 
     private static boolean checkNumberOnEdge(String expression) {
         expression = expression.trim();
-        if ((Pattern.matches("^\\d.*", expression)
-                || Pattern.matches("^-\\d.*", expression))
-                && Pattern.matches(".*\\d$", expression)) {
+        if ((FRONT_POSITIVE_NUMBER_PATTERN.matcher(expression).matches()
+                || FRONT_NEGATIVE_NUMBER_PATTERN.matcher(expression).matches())
+                && BACK_NUMBER_PATTERN.matcher(expression).matches()) {
             return true;
         }
         return false;
     }
 
     private static boolean containsConsecutiveOperators(String expression) {
-        String regex = ".*[+\\-*/]{2,}.*";
-        return Pattern.matches(regex, expression.replaceAll("\\s", ""));
+        return CONSECUTIVE_OPERATOR_PATTERN.matcher(
+                expression.replaceAll("\\s", "")
+        ).matches();
     }
 
     public static ArrayList<String> split(String expression) {
