@@ -28,7 +28,7 @@ public class LottoNumbersTest {
     void countMatchingNumbersWithBonus() {
         // given
         LottoNumbers lotto = new LottoNumbers(Set.of(1, 5, 12, 21, 32, 43));
-        WinningNumber winningNumber = new WinningNumber(Set.of(1, 5, 12, 21, 32, 43), 45);
+        LottoNumbers winningNumber = new LottoNumbers(Set.of(1, 5, 12, 21, 32, 43));
 
         // when
         int count = lotto.countMatchingNumbers(winningNumber);
