@@ -7,10 +7,10 @@ public class LottoResult {
     private final List<LottoRank> DISPLAY_LOTTO_RANKS = List.of(LottoRank.FIFTH, LottoRank.FOURTH, LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST);
     private final Map<LottoRank, Long> lottoResult;
 
-    public LottoResult(int lottoCount, Lottos lottos, LottoWinNumbers lottoWinNumbers, BonusBall bonusBall) {
+    public LottoResult(Lottos lottos, LottoWin lottoWin) {
         lottoResult = new EnumMap<>(LottoRank.class);
         initLottoResult();
-        createLottoResult(lottoCount, lottos, lottoWinNumbers, bonusBall);
+        createLottoResult(lottos, lottoWin);
     }
 
     private void initLottoResult() {
@@ -19,9 +19,9 @@ public class LottoResult {
         }
     }
 
-    private void createLottoResult(int lottoCount, Lottos lottos, LottoWinNumbers lottoWinNumbers, BonusBall bonusBall) {
-        for (int i = 0; i < lottoCount; i++) {
-            LottoRank rank = lottos.matchCount(i, lottoWinNumbers, bonusBall);
+    private void createLottoResult(Lottos lottos, LottoWin lottoWin) {
+        List<LottoRank> ranks = lottos.matchCount(lottoWin);
+        for (LottoRank rank : ranks) {
             lottoResult.merge(rank, 1L, Long::sum);
         }
     }

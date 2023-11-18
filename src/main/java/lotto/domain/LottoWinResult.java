@@ -1,14 +1,14 @@
 package lotto.domain;
 
 public class LottoWinResult {
-    private final long machCount;
+    private final long matchCount;
     private final long prizeAmount;
     private final long winCount;
     private final boolean isBonus;
 
-    public LottoWinResult(long machCount, long winCount, boolean isBonus) {
-        this.machCount = machCount;
-        this.prizeAmount = LottoRank.prizeAmount((int) machCount, isBonus);
+    public LottoWinResult(long matchCount, long winCount, boolean isBonus) {
+        this.matchCount = matchCount;
+        this.prizeAmount = LottoRank.prizeAmount((int) matchCount, isBonus);
         this.winCount = winCount;
         this.isBonus = isBonus;
     }
@@ -17,8 +17,8 @@ public class LottoWinResult {
         return prizeAmount * winCount;
     }
 
-    public long getMachCount() {
-        return machCount;
+    public long getMatchCount() {
+        return matchCount;
     }
 
     public long getPrizeAmount() {
@@ -32,7 +32,7 @@ public class LottoWinResult {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getMachCount() + "개 일치");
+        sb.append(getMatchCount() + "개 일치");
         if (isBonus) {
             sb.append(", 보너스 볼 일치");
         }

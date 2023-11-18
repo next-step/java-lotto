@@ -34,7 +34,9 @@ class LottoNumbersTest {
     void success_lotto_match_count(List<Integer> inputLottoNumbers, List<Integer> winLottoNumbers, int bonusBall, LottoRank expectLottoRank) {
         LottoNumbers lottoNumbers = new LottoNumbers(new TestLottoGenerator(inputLottoNumbers));
 
-        LottoRank lottoRank = lottoNumbers.matchCount(new LottoWinNumbers(winLottoNumbers), new BonusBall(bonusBall));
+        LottoRank lottoRank = lottoNumbers.matchCount(
+                new LottoWin(new LottoWinNumbers(winLottoNumbers), new BonusBall(bonusBall))
+        );
 
         assertThat(lottoRank).isEqualTo(expectLottoRank);
     }
