@@ -19,6 +19,7 @@ public class WinningLevelToAmountTable {
         winningAmountTable.put(WinningLevel.FIFTH, WinningAmount.of(5000));
         winningAmountTable.put(WinningLevel.FOURTH, WinningAmount.of(50000));
         winningAmountTable.put(WinningLevel.THIRD, WinningAmount.of(1500000));
+        winningAmountTable.put(WinningLevel.SECOND, WinningAmount.of(30000000));
         winningAmountTable.put(WinningLevel.FIRST, WinningAmount.of(2000000000));
     }
 

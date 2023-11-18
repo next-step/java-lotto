@@ -13,6 +13,7 @@ public enum WinningLevel {
     FIFTH(5),
     FOURTH(4),
     THIRD(3),
+    SECOND(2),
     FIRST(1);
 
     private final int winningLevel;
@@ -37,6 +38,7 @@ class WinningLevelTable {
         winningLevelTable.put(5, WinningLevel.FIFTH);
         winningLevelTable.put(4, WinningLevel.FOURTH);
         winningLevelTable.put(3, WinningLevel.THIRD);
+        winningLevelTable.put(2, WinningLevel.SECOND);
         winningLevelTable.put(1, WinningLevel.FIRST);
     }
 
