@@ -23,10 +23,9 @@ public class GenerateLottosTest {
 
     @Test
     void 수량만큼_수동로또를_생성한다() {
-        int manualCount = 1;
         List<String> manualNumbers = List.of("1,2,3,4,5,6");
-        List<Lotto> manualLottos = GenerateLottos.manualGenerateLottos(manualCount, manualNumbers);
+        List<Lotto> manualLottos = GenerateLottos.manualGenerateLottos(manualNumbers);
 
-        assertThat(manualLottos.size()).isEqualTo(manualCount);
+        assertThat(manualLottos.size()).isEqualTo(1);
     }
 }

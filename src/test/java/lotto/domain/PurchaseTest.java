@@ -14,11 +14,12 @@ public class PurchaseTest {
     void 로또_구매_갯수() {
         // given
         List<Lotto> lottos = List.of(new Lotto(1, 2, 3, 4, 5, 6));
-        purchase = new Purchase(lottos);
+        List<Lotto> lottos2 = List.of(new Lotto(1, 2, 3, 4, 5, 6));
+        purchase = new Purchase(lottos, lottos2);
         // when
         int lottoCount = purchase.lottosSize();
         // then
-        assertThat(lottoCount).isEqualTo(1);
+        assertThat(lottoCount).isEqualTo(2);
     }
 
 

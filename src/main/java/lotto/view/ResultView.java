@@ -1,8 +1,10 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.RankLotto;
 import lotto.domain.StatisticsWinnerResult;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -28,5 +30,15 @@ public class ResultView {
                 .map(entry -> String.format("%s - %d개", entry.getKey(), entry.getValue()))
                 .collect(Collectors.joining("\n")));
         print(sb.toString());
+    }
+
+    public static void purchsePrint(int manualCount, int autoCount) {
+        print(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualCount, autoCount));
+    }
+
+    public static void lottosNumberPrint(List<Lotto> lottos) {
+        lottos.stream()
+                .map(Lotto::toString)
+                .forEach(System.out::println);
     }
 }

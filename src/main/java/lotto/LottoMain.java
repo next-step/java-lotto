@@ -7,6 +7,7 @@ import lotto.strategy.RandomNumberStrategy;
 import java.util.List;
 
 import static lotto.domain.GenerateLottos.autoGenerateLottos;
+import static lotto.domain.GenerateLottos.manualGenerateLottos;
 import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
 
@@ -19,10 +20,14 @@ public class LottoMain {
         Money money = new Money(inputMoney());
         int manualCount = inputManualCount(money.lottoCount());
         List<String> manualNumbers = inputManualNumber(manualCount);
-        List<Lotto> autoLottos = autoGenerateLottos(money.lottoCount(), NUMBER_STRATEGY);
+        purchsePrint(manualCount, money.autoCount(manualCount));
 
-        Purchase purchase = new Purchase(autoLottos);
-        print(purchase.toString());
+        List<Lotto> manualLottos = manualGenerateLottos(manualNumbers);
+        List<Lotto> autoLottos = autoGenerateLottos(money.autoCount(manualCount), NUMBER_STRATEGY);
+
+        Purchase purchase = new Purchase(manualLottos, autoLottos);
+        lottosNumberPrint(purchase.lottos());
+
         WinnerNumber winnerNumber = new WinnerNumber(inputWinNumber(), inputBonusNumber());
         StatisticsWinnerResult winnerResult = new StatisticsWinnerResult(winnerNumber.statisticsResult(purchase.lottos()));
         winnigStatisticsPrintString(winnerResult);

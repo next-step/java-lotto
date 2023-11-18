@@ -19,4 +19,8 @@ public class Money {
     public int lottoCount() {
         return price / LOTTO_AMOUNT;
     }
+
+    public int autoCount(int manualCount) {
+        return lottoCount() - manualCount;
+    }
 }
