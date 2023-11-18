@@ -44,6 +44,10 @@ public class Lottos {
         }
     }
 
+    private static boolean noPurchase(long lottoCount) {
+        return lottoCount == 0;
+    }
+
     public static Lottos of(List<List<Integer>> lottos) {
         List<Lotto> lottoList = lottos.stream()
                 .map(Lotto::of)
@@ -52,8 +56,10 @@ public class Lottos {
         return new Lottos(lottoList);
     }
 
-    private static boolean noPurchase(long lottoCount) {
-        return lottoCount == 0;
+    public static Lottos concat(Lottos lottosA, Lottos lottosB) {
+        List<Lotto> collect = Stream.concat(lottosA.lottos.stream(), lottosB.lottos.stream())
+                .collect(Collectors.toList());
+        return new Lottos(collect);
     }
 
     public Summary match(Lotto jackpot, LottoNumber bonusNumber) {

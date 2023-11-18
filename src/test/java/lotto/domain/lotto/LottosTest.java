@@ -38,11 +38,24 @@ class LottosTest {
 
     @Test
     @DisplayName("당첨 통계를 조회한다. 각 등수별 당첨수와 수익률을 반환한다")
-    public void match() {
+    public void summary() {
         Lottos lottos = Lottos.of(10000, () -> Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto jackpot = Lotto.of(Arrays.asList(1, 2, 3, 4, 30, 40));
         Summary match = lottos.match(jackpot, LottoNumber.of(20));
 
         assertThat(match).isEqualTo(new Summary(0, 0, 0, 10, 50f));
+    }
+
+    @Test
+    @DisplayName("로또 목록 2개를 합치고 각 등수별 당첨수와 수익률을 반환한다")
+    public void merge_summary() {
+        Lottos lottosA = Lottos.of(10000, () -> Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lottos lottosB = Lottos.of(10000, () -> Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lottos mergedLottos = Lottos.concat(lottosA, lottosB);
+        Lotto jackpot = Lotto.of(Arrays.asList(1, 2, 3, 4, 30, 40));
+
+        Summary match = mergedLottos.match(jackpot, LottoNumber.of(20));
+
+        assertThat(match).isEqualTo(new Summary(0, 0, 0, 20, 50f));
     }
 }
