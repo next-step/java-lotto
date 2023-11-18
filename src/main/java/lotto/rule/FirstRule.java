@@ -8,11 +8,17 @@ import lotto.type.WinningLevel;
  * 1등 규칙 판정
  */
 public class FirstRule implements WinningRule {
+    private static FirstRule instance;
+
     private FirstRule() {
     }
 
     public static FirstRule getInstance() {
-        return new FirstRule();
+        if (instance == null) {
+            instance = new FirstRule();
+        }
+
+        return instance;
     }
 
     @Override

@@ -8,11 +8,17 @@ import lotto.type.WinningLevel;
  * 5등 규칙 판정
  */
 public class FifthRule implements WinningRule {
+    private static FifthRule instance;
+
     private FifthRule() {
     }
 
     public static FifthRule getInstance() {
-        return new FifthRule();
+        if (instance == null) {
+            instance = new FifthRule();
+        }
+
+        return instance;
     }
 
     @Override
