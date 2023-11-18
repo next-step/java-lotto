@@ -15,4 +15,8 @@ public class OutputView {
     public void printLottos(Lottos lottos) {
         System.out.println(lottos.findLottos());
     }
+
+    public void askWinningLotto() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    }
 }

@@ -1,8 +1,10 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -12,7 +14,7 @@ public class Lotto {
     private List<LottoNumber> values;
 
     public Lotto() {
-        values = new ArrayList<>();
+        this.values = new ArrayList<>();
         Random random = new Random();
         while (values.size() < LOTTO_SIZE) {
             LottoNumber lottoNumber = new LottoNumber(lottoRange(random));
@@ -20,6 +22,19 @@ public class Lotto {
             if (!values.contains(lottoNumber)) {
                 values.add(lottoNumber);
             }
+        }
+    }
+
+    public Lotto(String values) {
+
+        this.values = Arrays.stream(values.split(", "))
+                .mapToInt(Integer::parseInt)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+
+
+        if (this.values.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("중복된 숫자는 입력할 수 없습니다.");
         }
     }
 
