@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.validate.NumberValidation.checkLottoSize;
+import static lotto.message.LottoErroMessage.NOT_ENOUGH_LOTTO_NUMBER;
 
 public class Lotto {
 
@@ -41,6 +41,12 @@ public class Lotto {
     private List<LottoNumber> sortLotto(List<LottoNumber> lottoNumbers) {
         return Collections.unmodifiableList(lottoNumbers.stream()
                 .sorted().collect(Collectors.toList()));
+    }
+
+    private void checkLottoSize(List<LottoNumber> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException(NOT_ENOUGH_LOTTO_NUMBER.message());
+        }
     }
 
     public List<LottoNumber> lottoNumbers() {

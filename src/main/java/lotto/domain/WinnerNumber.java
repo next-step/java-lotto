@@ -1,11 +1,8 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import static lotto.validate.NumberValidation.checkBonusNumber;
 
 public class WinnerNumber {
 
@@ -19,7 +16,7 @@ public class WinnerNumber {
     public WinnerNumber(String lottoNumbers, int bonusNumber) {
         this.winLotto = new Lotto(lottoNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
-        checkBonusNumber(this.winLotto, this.bonusNumber);
+        this.bonusNumber.checkBonusNumber(this.winLotto, this.bonusNumber);
     }
 
     public Map<RankLotto, Integer> statisticsResult(List<Lotto> lottos) {

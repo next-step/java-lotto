@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import static lotto.validate.NumberValidation.checkNumberRange;
+import static lotto.message.LottoErroMessage.NOT_ENOUGH_LOTTO_BONUS_NUMBER;
+import static lotto.message.LottoErroMessage.NOT_ENOUGH_LOTTO_NUMBER_RANGE;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
@@ -12,6 +13,19 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public int number() {
         return number;
+    }
+
+    public static void checkNumberRange(int number) {
+        if (number < 1 || number > 45) {
+            throw new IllegalArgumentException(NOT_ENOUGH_LOTTO_NUMBER_RANGE.message());
+        }
+    }
+
+    public static void checkBonusNumber(Lotto lotto, LottoNumber bonusNumber) {
+        checkNumberRange(bonusNumber.number());
+        if (lotto.matchNumber(bonusNumber)) {
+            throw new IllegalArgumentException(NOT_ENOUGH_LOTTO_BONUS_NUMBER.message());
+        }
     }
 
     @Override
