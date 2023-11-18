@@ -6,10 +6,10 @@ import java.util.Map;
 
 public class LottoResult {
 	private static final long LOTTO_PRICE = 1000;
+	private final static int MIN_MATCH = 3;
 
 	private final Map<LottoMatch, Integer> lottoMatchResult;
 	private final LottoList lottoList;
-	private int rateOfReturn;
 
 	public LottoResult(LottoList lottoList) {
 		checkLottoListSizeIsValid(lottoList);
@@ -26,10 +26,11 @@ public class LottoResult {
 	public void matchesWinningNumbers(LottoWinningNumbers lottoWinningNumbers) {
 		initializeLottoMatchMap();
 		for (Lotto lotto : lottoList) {
-			lotto.matches(lottoWinningNumbers, lottoMatchResult);
+			int matchedCount = lottoWinningNumbers.matchesNumber(lotto);
+			if(matchedCount > MIN_MATCH) {
+				lottoMatchResult.merge(LottoMatch.fromInt(matchedCount), 1, Integer::sum);
+			}
 		}
-
-		calculateRateOfReturn();
 	}
 
 	private void initializeLottoMatchMap() {
@@ -38,7 +39,7 @@ public class LottoResult {
 		}
 	}
 
-	private void calculateRateOfReturn() {
+	public double rateOfReturn() {
 		long winningAmount = 0;
 		LottoMatch lottoMatch = null;
 		int count = 0;
@@ -51,14 +52,11 @@ public class LottoResult {
 		}
 
 		long purchaseAmount = lottoList.size() * LOTTO_PRICE;
-		this.rateOfReturn = (int) (winningAmount / purchaseAmount * 100);
+
+		return (double) (winningAmount / purchaseAmount * 100);
 	}
 
 	public Map<LottoMatch, Integer> lottoMatchMap() {
 		return Collections.unmodifiableMap(this.lottoMatchResult);
-	}
-
-	public double rateOfReturn() {
-		return this.rateOfReturn;
 	}
 }

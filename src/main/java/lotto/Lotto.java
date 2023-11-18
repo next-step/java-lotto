@@ -1,65 +1,29 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-public class Lotto {
-	private final static int NUMBER_COUNT = 6;
-	private final static int MIN_MATCH = 3;
-	private final static int MIN_NUMBER = 1;
-	private final static int MAX_NUMBER = 45;
-
-	private final List<Integer> lottoNumbers;
+public class Lotto implements Iterable<LottoNumber> {
+	private final List<LottoNumber> lottoNumbers;
 
 	public Lotto() {
-		this.lottoNumbers = randomLottoNumbers();
+		this.lottoNumbers = LottoFactory.createLotto();
 	}
 
-	public Lotto(List<Integer> lottoNumbers) {
-		this.lottoNumbers = lottoNumbers;
-	}
-
-	private List<Integer> randomLottoNumbers() {
-		List<Integer> allNumbers = betweenMinAndMaxNumbers();
-		List<Integer> randomLottoNumbers = sortedRandomNumbers(allNumbers);
-
-		return Collections.unmodifiableList(randomLottoNumbers);
-	}
-
-	private List<Integer> sortedRandomNumbers(List<Integer> numbers) {
-		Collections.shuffle(numbers);
-		List<Integer> randomLottoNumbers = new ArrayList<>();
-		for(int i = 0; i < Lotto.NUMBER_COUNT; i++) {
-			randomLottoNumbers.add(numbers.get(i));
+	public Lotto(List<Integer> inputLottoNumbers) {
+		this.lottoNumbers = new ArrayList<>();
+		for (int lottoNumber : inputLottoNumbers) {
+			lottoNumbers.add(new LottoNumber(lottoNumber));
 		}
-		Collections.sort(randomLottoNumbers);
-
-		return randomLottoNumbers;
 	}
 
-	private List<Integer> betweenMinAndMaxNumbers() {
-		List<Integer> numbers = new ArrayList<>();
-		for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-			numbers.add(i);
-		}
-
-		return numbers;
-	}
-
-	public List<Integer> lottoNumbers() {
+	public List<LottoNumber> lottoNumbers() {
 		return this.lottoNumbers;
 	}
 
-	public void matches(LottoWinningNumbers lottoWinningNumbers,
-						Map<LottoMatch, Integer> lottoMatchResult)
-	{
-		int matchedCount = lottoWinningNumbers.matchedCount(this);
-		if(matchedCount < MIN_MATCH) {
-			return;
-		}
-
-		lottoMatchResult.merge(LottoMatch.fromInt(matchedCount), 1, Integer::sum);
+	@Override
+	public Iterator<LottoNumber> iterator() {
+		return this.lottoNumbers.iterator();
 	}
 }

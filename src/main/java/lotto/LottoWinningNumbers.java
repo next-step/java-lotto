@@ -21,9 +21,10 @@ public class LottoWinningNumbers {
 		return this.lottoWinningNumbers.equals(lotto);
 	}
 
-	public int matchedCount(Lotto lotto) {
-		List<Integer> lottoWinningList = new ArrayList<>(lottoWinningNumbers.lottoNumbers());
-		List<Integer> lottoList = new ArrayList<>(lotto.lottoNumbers());
+	public int matchesNumber(Lotto lotto) {
+		List<LottoNumber> lottoWinningList = new ArrayList<>(lottoWinningNumbers.lottoNumbers());
+		List<LottoNumber> lottoList = new ArrayList<>(lotto.lottoNumbers());
+
 		lottoWinningList.retainAll(lottoList);
 
 		return lottoWinningList.size();

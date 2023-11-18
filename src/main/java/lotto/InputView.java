@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
+	private static final StringBuilder sb = new StringBuilder();
 	private static final long LOTTO_PRICE = 1000;
 
 	public static LottoList inputLottoList() {
@@ -21,10 +22,26 @@ public class InputView {
 		for (int i = 0; i < purchaseCount; i++) {
 			lotto = new Lotto();
 			lottos.add(lotto);
-			System.out.println(lotto.lottoNumbers());
+
+			printLottoList(lotto);
 		}
 
 		return new LottoList(lottos);
+	}
+
+	private static void printLottoList(Lotto lotto) {
+		sb.setLength(0);
+		sb.append("[");
+
+		for(LottoNumber lottoNumber : lotto) {
+			sb.append(lottoNumber.lottoNumber());
+			sb.append(", ");
+		}
+
+		sb.setLength(sb.length() - 2);
+		sb.append("]");
+
+		System.out.println(sb);
 	}
 
 	public static List<Integer> inputWinningNumbers() {
