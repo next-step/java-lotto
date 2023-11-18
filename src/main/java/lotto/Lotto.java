@@ -12,22 +12,25 @@ public class Lotto {
     private static final int END_LOTTO_NUMBER = 45;
     private final List<Integer> lottoNumber = new ArrayList<>();
 
-    public List<Integer> createNumber() {
-        List<Integer> values = generateLottoNumber();
-        shuffle(values);
-
-        lottoNumber.addAll(values.subList(0, 6));
-        sort(lottoNumber);
+    public List<Integer> execute() {
+        generateLottoNumber();
 
         return lottoNumber;
     }
 
-    private List<Integer> generateLottoNumber() {
+    private void generateLottoNumber() {
         List<Integer> values = new ArrayList<>();
+        makeStartToEndLottoNumber(values);
+        shuffle(values);
+
+        lottoNumber.addAll(values.subList(0, 6));
+
+        sort(lottoNumber);
+    }
+
+    private static void makeStartToEndLottoNumber(List<Integer> values) {
         for (int i = START_LOTTO_NUMBER; i <= END_LOTTO_NUMBER; i++) {
             values.add(i);
         }
-
-        return values;
     }
 }

@@ -14,7 +14,7 @@ public class LottoTest {
     void 로또_번호_1부터_45사이의_수를_생성한다() {
         Lotto lotto = new Lotto();
 
-        List<Integer> result = lotto.createNumber();
+        List<Integer> result = lotto.execute();
 
         assertThat(result).size().isBetween(1, 45);
     }
@@ -24,7 +24,7 @@ public class LottoTest {
     void 로또_한장의_번호_갯수는_6개이다() {
         Lotto lotto = new Lotto();
 
-        List<Integer> result = lotto.createNumber();
+        List<Integer> result = lotto.execute();
 
         assertThat(result.size()).isEqualTo(6);
     }
@@ -34,11 +34,11 @@ public class LottoTest {
     void 로또_번호를_오름차순으로_정렬한다() {
         Lotto lotto = new Lotto();
 
-        List<Integer> result = lotto.createNumber();
+        List<Integer> result = lotto.execute();
         int firstNumber = result.get(0);
-        int lastNumber = result.get(44);
+        int lastNumber = result.get(5);
 
-        assertThat(firstNumber).isEqualTo(1);
-        assertThat(lastNumber).isEqualTo(45);
+        assertThat(firstNumber).isLessThan(lastNumber);
+
     }
 }
