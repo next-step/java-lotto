@@ -10,13 +10,15 @@ public class Summary {
     private final long secondCount;
     private final long thirdCount;
     private final long fourthCount;
+    private final long fifthCount;
     private final float profitRate;
 
-    public Summary(long firstCount, long secondCount, long thirdCount, long fourthCount, float profitRate) {
+    public Summary(long firstCount, long secondCount, long thirdCount, long fourthCount, long fifthCount, float profitRate) {
         this.firstCount = firstCount;
         this.secondCount = secondCount;
         this.thirdCount = thirdCount;
         this.fourthCount = fourthCount;
+        this.fifthCount = fifthCount;
         this.profitRate = profitRate;
     }
 
@@ -25,6 +27,7 @@ public class Summary {
         this.secondCount = winningCount(winnings, Winning.SECOND);
         this.thirdCount = winningCount(winnings, Winning.THIRD);
         this.fourthCount = winningCount(winnings, Winning.FOURTH);
+        this.fifthCount = winningCount(winnings, Winning.FIFTH);
         this.profitRate = profitRate(winnings, purchasePrice);
     }
 
@@ -60,6 +63,10 @@ public class Summary {
         return fourthCount;
     }
 
+    public long fifthCount() {
+        return fifthCount;
+    }
+
     public float profitRate() {
         return profitRate;
     }
@@ -69,12 +76,12 @@ public class Summary {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Summary summary = (Summary) o;
-        return firstCount == summary.firstCount && secondCount == summary.secondCount && thirdCount == summary.thirdCount && fourthCount == summary.fourthCount && Float.compare(profitRate, summary.profitRate) == 0;
+        return firstCount == summary.firstCount && secondCount == summary.secondCount && thirdCount == summary.thirdCount && fourthCount == summary.fourthCount && fifthCount == summary.fifthCount && Float.compare(profitRate, summary.profitRate) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstCount, secondCount, thirdCount, fourthCount, profitRate);
+        return Objects.hash(firstCount, secondCount, thirdCount, fourthCount, fifthCount, profitRate);
     }
 
     @Override
@@ -84,6 +91,7 @@ public class Summary {
                 ", secondCount=" + secondCount +
                 ", thirdCount=" + thirdCount +
                 ", fourthCount=" + fourthCount +
+                ", fifthCount=" + fifthCount +
                 ", profitRate=" + profitRate +
                 '}';
     }

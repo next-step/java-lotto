@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -18,22 +19,27 @@ public class InputView {
 
     public int readPurchasePrice() {
         System.out.println(INPUT_PURCHASE_PRICE_MESSAGE);
-        return scanner.nextInt();
+        return readInteger();
+    }
+
+    private int readInteger() {
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public List<Integer> readJackpotNumber() {
         System.out.println(INPUT_JACKPOT_NUMBER_MESSAGE);
-        scanner.nextLine();
+        return readLottoNumber();
+    }
+
+    public List<Integer> readLottoNumber() {
         String next = scanner.nextLine();
         next = trimAll(next);
-
-
         return convertInteger(next);
     }
 
     public int readBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
-        return scanner.nextInt();
+        return readInteger();
     }
 
     private List<Integer> convertInteger(String text) {
@@ -41,6 +47,27 @@ public class InputView {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
+
+    public List<List<Integer>> readManualLotto(int count) {
+        if (empty(count)) return new ArrayList<>();
+
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<List<Integer>> list = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            list.add(readLottoNumber());
+        }
+        return list;
+    }
+
+    private boolean empty(int count) {
+        return count <= 0;
+    }
+
+    public int readManulLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return readInteger();
+    }
+
 
     private String[] split(String text) {
         return text.split(",");

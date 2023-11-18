@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 public class Lottos {
 
-    private static final int PRICE_PER_TICKET = 1000;
+    public static final int PRICE_PER_TICKET = 1000;
 
     private static final String PURCHASE_ERROR_MESSAGE = String.format("로또를 구매할 금액이 부족합니다. 로또 한장의 가격은 %s원 입니다.", PRICE_PER_TICKET);
 
@@ -33,19 +33,7 @@ public class Lottos {
     }
 
     private static long lottoCount(long purchasePrice) {
-        long lottoCount = purchasePrice / PRICE_PER_TICKET;
-        validateCount(lottoCount);
-        return lottoCount;
-    }
-
-    private static void validateCount(long lottoCount) {
-        if (noPurchase(lottoCount)) {
-            throw new IllegalArgumentException(PURCHASE_ERROR_MESSAGE);
-        }
-    }
-
-    private static boolean noPurchase(long lottoCount) {
-        return lottoCount == 0;
+        return purchasePrice / PRICE_PER_TICKET;
     }
 
     public static Lottos of(List<List<Integer>> lottos) {
