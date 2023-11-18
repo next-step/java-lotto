@@ -2,28 +2,32 @@ package lotto.domain.rankcount;
 
 import lotto.domain.lotto.LotteryRank;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
+import static lotto.domain.lotto.LotteryRank.*;
 import static org.assertj.core.api.Assertions.*;
 
 class RankCountGroupTest {
 
     @DisplayName("인자로 받은 LotteryRank에 해당하는 로또 당첨 개수를 반환한다.")
-    @Test
-    void findWinningCountBy() {
+    @ParameterizedTest
+    @CsvSource({"FIRST,1", "SECOND,2", "THIRD,0", "FOURTH,0"})
+    void findWinningCountBy(LotteryRank rank, int expectedWinningCount) {
         // given
-        RankCount firstCount = new RankCount(LotteryRank.FIRST, 1);
-        RankCount secondCount = new RankCount(LotteryRank.FIRST, 2);
-        RankCountGroup rankCountGroup = new RankCountGroup(List.of(firstCount, secondCount));
+        Map<LotteryRank, Long> rankCountMap = new HashMap<>();
+        rankCountMap.put(FIRST, 1L);
+        rankCountMap.put(SECOND, 2L);
+
+        RankCountGroup rankCountGroup = new RankCountGroup(rankCountMap);
 
         // when
-        LotteryRank rank = LotteryRank.FIRST;
         long winningCount = rankCountGroup.findWinningCountBy(rank);
 
         // then
-        assertThat(winningCount).isEqualTo(1);
+        assertThat(winningCount).isEqualTo(expectedWinningCount);
     }
-
 }

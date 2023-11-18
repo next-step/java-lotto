@@ -2,11 +2,13 @@ package lotto.domain;
 
 import lotto.domain.lotto.wrapper.Lottos;
 import lotto.domain.lotto.wrapper.LottoNumbers;
+import lotto.domain.lotto.wrapper.WinningNumber;
 import lotto.domain.rankcount.RankCountGroup;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -20,11 +22,11 @@ public class ProfitCalculatorTest {
 
         Lottos lottos = new Lottos(
             List.of(
-                new LottoNumbers(List.of(1, 5, 12, 25, 35, 43)),
-                new LottoNumbers(List.of(1, 5, 24, 27, 29, 43))
+                new LottoNumbers(Set.of(1, 5, 12, 25, 35, 43)),
+                new LottoNumbers(Set.of(1, 5, 24, 27, 29, 43))
             ));
-        LottoNumbers winningNumbers = new LottoNumbers(List.of(1, 5, 12, 21, 32, 43));
-        RankCountGroup rankCountGroup = lottos.groupByRankCount(winningNumbers);
+        WinningNumber winningNumber = new WinningNumber(Set.of(1, 5, 12, 21, 32, 43), 45);
+        RankCountGroup rankCountGroup = lottos.groupByRank(winningNumber);
 
         ProfitCalculator profitCalculator = new ProfitCalculator();
 

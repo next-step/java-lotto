@@ -1,43 +1,33 @@
 package lotto.domain.lotto.wrapper;
 
 import lotto.domain.lotto.LotteryRank;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.rankcount.RankCount;
 import lotto.domain.rankcount.RankCountGroup;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static lotto.domain.lotto.LotteryRank.*;
+import static java.util.stream.Collectors.*;
 
 public class Lottos {
 
-    private List<Lotto> lottos = new ArrayList<>();
+    private final List<LottoNumbers> lottos;
 
-    public Lottos(List<LottoNumbers> lottoNumberses) {
-        lottoNumberses.forEach(numbers -> lottos.add(new Lotto(numbers)));
+    public Lottos(List<LottoNumbers> lottos) {
+        this.lottos = lottos;
     }
 
     public int getNumOfLotto() {
         return this.lottos.size();
     }
 
-    public RankCountGroup groupByRankCount(LottoNumbers winningNumbers) {
-        LotteryRank[] ranks = values();
-
-        List<RankCount> rankCounts = Arrays.stream(ranks)
-            .map(rank -> new RankCount(rank, countByRank(winningNumbers, rank)))
-            .collect(Collectors.toUnmodifiableList());
-
-        return new RankCountGroup(rankCounts);
+    public RankCountGroup groupByRank(WinningNumber winningNumber) {
+        return new RankCountGroup(lottos.stream()
+            .collect(groupingBy(lotto -> findRank(winningNumber, lotto), counting())));
     }
 
-    private long countByRank(LottoNumbers winningNumbers, LotteryRank rank) {
-        return lottos.stream()
-            .map(lotto -> lotto.countMatchingNumbers(winningNumbers))
-            .filter(rank::equalsWith)
-            .count();
+    private LotteryRank findRank(WinningNumber winningNumber, LottoNumbers lotto) {
+        int matchingCount = winningNumber.countMatchingNumbers(lotto);
+        boolean bonus = winningNumber.containsBonus(lotto);
+
+        return LotteryRank.findRankBy(matchingCount, bonus);
     }
 }

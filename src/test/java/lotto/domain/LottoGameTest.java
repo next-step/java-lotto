@@ -1,11 +1,13 @@
 package lotto.domain;
 
+import lotto.domain.lotto.wrapper.WinningNumber;
 import lotto.domain.rankcount.RankCountGroup;
 import lotto.domain.lotto.wrapper.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Set;
 
 import static lotto.domain.lotto.LotteryRank.*;
 import static org.assertj.core.api.Assertions.*;
@@ -18,25 +20,23 @@ class LottoGameTest {
     void groupByRankCount() {
         // given
         List<LottoNumbers> lottoNumberses = List.of(
-            new LottoNumbers(List.of(1, 5, 12, 21, 32, 43)),
-            new LottoNumbers(List.of(1, 5, 12, 21, 32, 45)),
-            new LottoNumbers(List.of(1, 5, 12, 21, 33, 45)),
-            new LottoNumbers(List.of(2, 3, 4, 6, 8, 43))
+            new LottoNumbers(Set.of(1, 5, 12, 21, 32, 43)),
+            new LottoNumbers(Set.of(1, 5, 12, 21, 32, 42)),
+            new LottoNumbers(Set.of(1, 5, 12, 21, 33, 45)),
+            new LottoNumbers(Set.of(2, 3, 4, 6, 8, 43))
         );
-
-        LottoGame lottoGame = new LottoGame();
-        lottoGame.createLottos(lottoNumberses);
-        LottoNumbers winningNumbers = new LottoNumbers(List.of(1, 5, 12, 21, 32, 43));
+        WinningNumber winningNumber = new WinningNumber(Set.of(1, 5, 12, 21, 32, 43), 45);
+        LottoGame lottoGame = new LottoGame(lottoNumberses, winningNumber);
 
         // when
-        RankCountGroup rankCountGroup = lottoGame.groupByRankCount(winningNumbers);
+        RankCountGroup rankCountGroup = lottoGame.groupByRank();
 
         // then
         assertAll(
-            () -> assertEquals(rankCountGroup.findWinningCountBy(FIRST), 1),
-            () -> assertEquals(rankCountGroup.findWinningCountBy(SECOND), 1),
-            () -> assertEquals(rankCountGroup.findWinningCountBy(THIRD), 1),
-            () -> assertEquals(rankCountGroup.findWinningCountBy(FOURTH), 0)
+            () -> assertEquals(1, rankCountGroup.findWinningCountBy(FIRST)),
+            () -> assertEquals(1, rankCountGroup.findWinningCountBy(THIRD)),
+            () -> assertEquals(1, rankCountGroup.findWinningCountBy(FOURTH)),
+            () -> assertEquals(0, rankCountGroup.findWinningCountBy(FIFTH))
         );
     }
 
@@ -45,17 +45,15 @@ class LottoGameTest {
     void calculateProfitRate() {
         // given
         List<LottoNumbers> lottoNumberses = List.of(
-            new LottoNumbers(List.of(1, 5, 12, 21, 33, 45)),
-            new LottoNumbers(List.of(2, 6, 13, 22, 34, 45)),
-            new LottoNumbers(List.of(1, 5, 13, 24, 31, 44)),
-            new LottoNumbers(List.of(3, 7, 15, 22, 32, 43))
+            new LottoNumbers(Set.of(1, 5, 12, 21, 33, 45)),
+            new LottoNumbers(Set.of(2, 6, 13, 22, 34, 45)),
+            new LottoNumbers(Set.of(1, 5, 13, 24, 31, 44)),
+            new LottoNumbers(Set.of(3, 7, 15, 22, 32, 43))
         );
+        WinningNumber winningNumber = new WinningNumber(Set.of(1, 5, 12, 21, 32, 43), 45);
+        LottoGame lottoGame = new LottoGame(lottoNumberses, winningNumber);
 
-        LottoGame lottoGame = new LottoGame();
-        lottoGame.createLottos(lottoNumberses);
-
-        LottoNumbers winningNumbers = new LottoNumbers(List.of(1, 5, 12, 21, 32, 43));
-        RankCountGroup rankCountGroup = lottoGame.groupByRankCount(winningNumbers);
+        RankCountGroup rankCountGroup = lottoGame.groupByRank();
 
         // when
         double profitRate = lottoGame.calculateProfitRate(rankCountGroup);

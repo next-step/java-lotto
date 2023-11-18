@@ -20,8 +20,7 @@ public class LottoMachine {
 
         return new LottoNumbers(lottoNumbers.stream()
             .limit(SIZE)
-            .sorted()
-            .collect(Collectors.toUnmodifiableList()));
+            .collect(Collectors.toUnmodifiableSet()));
     }
 
     private static List<Integer> createLottoNumbers() {

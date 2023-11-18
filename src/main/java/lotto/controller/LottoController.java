@@ -1,60 +1,60 @@
 package lotto.controller;
 
 import lotto.domain.LottoGame;
+import lotto.domain.lotto.wrapper.LottoNumber;
 import lotto.domain.lotto.wrapper.LottoNumbers;
+import lotto.domain.lotto.wrapper.WinningNumber;
 import lotto.domain.rankcount.RankCountGroup;
 import lotto.util.LottoMachine;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoController {
 
-    private final LottoGame lottoGame;
     private final InputView inputView;
     private final ResultView resultView;
 
     public LottoController() {
-        lottoGame = new LottoGame();
         inputView = new InputView();
         resultView = new ResultView();
     }
 
     public void startGame() {
-        purchase();
-        winning();
+        List<LottoNumbers> lottoNumberses = purchase();
+        WinningNumber winningNumber = winning();
+
+        LottoGame lottoGame = new LottoGame(lottoNumberses, winningNumber);
+        RankCountGroup rankCountGroup = lottoGame.groupByRank();
+
+        result(rankCountGroup, lottoGame.calculateProfitRate(rankCountGroup));
     }
 
-    private void purchase() {
+    private List<LottoNumbers> purchase() {
         int numOfLotto = inputView.inputPurchaseMoney();
+        List<LottoNumbers> lottos = drawLottos(numOfLotto);
 
-        List<LottoNumbers> lottoNumberses = drawLottoNumberses(numOfLotto);
-        lottoGame.createLottos(lottoNumberses);
-
-        resultView.printPurchaseResult(numOfLotto, lottoNumberses);
+        resultView.printPurchaseResult(numOfLotto, lottos);
+        return lottos;
     }
 
-    private List<LottoNumbers> drawLottoNumberses(int numOfLotto) {
-        List<LottoNumbers> lottoNumberses = new ArrayList<>();
-
-        IntStream.range(0, numOfLotto)
-            .forEach(i -> {
-                LottoNumbers lottoNumbers = LottoMachine.drawLottoNumbers();
-                lottoNumberses.add(lottoNumbers);
-            });
-
-        return lottoNumberses;
+    private List<LottoNumbers> drawLottos(int numOfLotto) {
+        return IntStream.range(0, numOfLotto)
+            .mapToObj(i -> LottoMachine.drawLottoNumbers())
+            .collect(Collectors.toUnmodifiableList());
     }
 
-    private void winning() {
+    private WinningNumber winning() {
         LottoNumbers winningNumbers = inputView.inputWinningNumbers();
+        LottoNumber bonusNumber = inputView.inputBonusNumber(winningNumbers);
 
-        RankCountGroup rankCountGroup = lottoGame.groupByRankCount(winningNumbers);
-        double profitRate = lottoGame.calculateProfitRate(rankCountGroup);
+        return new WinningNumber(winningNumbers, bonusNumber);
+    }
 
+    private void result(RankCountGroup rankCountGroup, double profitRate) {
         resultView.printLottoGameResult(rankCountGroup, profitRate);
     }
 }
