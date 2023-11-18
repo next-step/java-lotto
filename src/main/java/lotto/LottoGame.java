@@ -1,7 +1,10 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoGame {
 
@@ -12,9 +15,15 @@ public class LottoGame {
     public void buyLotto(int price) {
         int gameCount = getGameCount(price);
         while(countLotto() < gameCount) {
-            Lotto lotto = new Lotto();
+            Lotto lotto = new Lotto(makingLottoNumbers());
             lottos.add(lotto);
         }
+    }
+
+    private List<Integer> makingLottoNumbers() {
+        List<Integer> list = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+        Collections.shuffle(list);
+        return list.subList(0, 6);
     }
 
     private int getGameCount(int price) {
