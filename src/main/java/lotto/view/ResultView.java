@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.lotto.LotteryRank;
 import lotto.domain.rankcount.RankCountGroup;
 import lotto.domain.lotto.wrapper.LottoNumbers;
 
@@ -27,20 +28,25 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        printNumOfMatching(rankCountGroup);
+        printMatchingResult(rankCountGroup);
         printProfitRate(profitRate);
     }
 
-    private void printNumOfMatching(RankCountGroup rankCountGroup) {
+    private void printMatchingResult(RankCountGroup rankCountGroup) {
         Arrays.stream(values())
             .forEach(rank -> {
                 long winningCount = rankCountGroup.findWinningCountBy(rank);
-                if (rank == SECOND) {
-                    System.out.println(rank.matchingCount() + "개 일치, 보너스 볼 일치(" + rank.prize() + "원) - " + winningCount + "개");
-                    return;
-                }
-                System.out.println(rank.matchingCount() + "개 일치 (" + rank.prize() + "원) - " + winningCount + "개");
+                printByRank(rank, winningCount);
             });
+    }
+
+    private void printByRank(LotteryRank rank, long winningCount) {
+        if (rank == SECOND) {
+            System.out.println(rank.matchingCount() + "개 일치, 보너스 볼 일치(" + rank.prize() + "원) - " + winningCount + "개");
+            return;
+        }
+
+        System.out.println(rank.matchingCount() + "개 일치 (" + rank.prize() + "원) - " + winningCount + "개");
     }
 
     private void printProfitRate(double profitRate) {
