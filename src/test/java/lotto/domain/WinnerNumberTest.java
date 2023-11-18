@@ -35,8 +35,7 @@ public class WinnerNumberTest {
         String winNumber = "1,2,3,4,5,6";
         int bonusNumber = 7;
         winnerNumber = new WinnerNumber(winNumber, bonusNumber);
-        Lotto buyLotto = new Lotto();
-        buyLotto.create(List.of(1, 2, 3, 4, 5, 6));
+        Lotto buyLotto = new Lotto(1, 2, 3, 4, 5, 6);
         List<Lotto> buyLottos = List.of(buyLotto);
         // when
         Map<RankLotto, Integer> result = winnerNumber.statisticsResult(buyLottos);

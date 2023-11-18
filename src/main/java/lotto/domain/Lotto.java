@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,8 +21,8 @@ public class Lotto {
         this.lottoNumbers = sortLotto(lottoNumbers);
     }
 
-    public void create(List<Integer> numbers) {
-        List<LottoNumber> lotto = numbers.stream()
+    public Lotto(Integer... numbers) {
+        List<LottoNumber> lotto = Arrays.stream(numbers)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
         checkLottoSize(lotto);
