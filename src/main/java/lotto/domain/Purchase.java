@@ -6,25 +6,22 @@ import lotto.strategy.RandomNumberStrategy;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.validate.InputValidation.inputValidate;
-
 public class Purchase {
 
-    private final Amount amount;
+    private final Money money;
     private final List<Lotto> lottos;
 
-    public Purchase(int amount) {
-        this(amount, new RandomNumberStrategy());
+    public Purchase(int money) {
+        this(money, new RandomNumberStrategy());
     }
 
     public Purchase(int amount, NumberStrategy numberStrategy) {
-        inputValidate(amount);
-        this.amount = new Amount(amount);
+        this.money = new Money(amount);
         this.lottos = numberStrategy.create(lottoCount());
     }
 
     public int amount() {
-        return amount.price();
+        return money.price();
     }
 
     public List<Lotto> lottos() {
@@ -36,7 +33,7 @@ public class Purchase {
     }
 
     private int lottoCount() {
-        return amount.lottoCount();
+        return money.lottoCount();
     }
 
     @Override

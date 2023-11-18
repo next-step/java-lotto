@@ -75,5 +75,15 @@ public class LottoNumberTest {
             // then
             assertThat(result).isEqualTo(1);
         }
+
+        @Test
+        public void 로또_번호_6개_보너스_추가_유효성_검사_중복번호_입력() {
+            // given
+            Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+            LottoNumber bonusNumber = new LottoNumber(6);
+            // when
+            assertThatIllegalArgumentException().isThrownBy(() -> bonusNumber.checkBonusNumber(lotto, bonusNumber));
+            // then
+        }
     }
 }

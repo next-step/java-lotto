@@ -1,12 +1,15 @@
 package lotto.domain;
 
-public class Amount {
+import static lotto.validate.InputValidation.inputValidate;
+
+public class Money {
 
     private static final int LOTTO_AMOUNT = 1000;
     private final int price;
 
-    public Amount(int amount) {
-        this.price = amount;
+    public Money(int price) {
+        inputValidate(price);
+        this.price = price;
     }
 
     public int price() {

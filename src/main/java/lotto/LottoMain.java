@@ -14,6 +14,7 @@ public class LottoMain {
     private static final NumberStrategy NUMBER_STRATEGY = new RandomNumberStrategy();
 
     public static void main(String[] args) {
+
         Purchase purchase = new Purchase(inputMoney(), NUMBER_STRATEGY);
         print(purchase.toString());
         WinnerNumber winnerNumber = new WinnerNumber(inputWinNumber(), inputBonusNumber());
