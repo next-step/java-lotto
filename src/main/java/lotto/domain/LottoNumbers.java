@@ -28,4 +28,12 @@ public class LottoNumbers {
             throw new IllegalArgumentException("로또는 숫자 6개로 구성되어야 합니다.");
         }
     }
+
+    void validateRange() {
+        for (Integer number : this.lottoNumbers) {
+            if (number < 1 || 45 < number) {
+                throw new IllegalArgumentException("로또는 1~45의 숫자만 가능합니다.");
+            }
+        }
+    }
 }

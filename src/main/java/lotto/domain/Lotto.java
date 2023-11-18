@@ -9,6 +9,7 @@ public class Lotto {
 
     public Lotto(LottoNumbers numbers) {
         numbers.validateDigit();
+        numbers.validateRange();
         this.numbers = numbers;
     }
 }

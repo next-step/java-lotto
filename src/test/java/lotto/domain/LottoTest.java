@@ -13,8 +13,15 @@ public class LottoTest {
 
     @DisplayName("6자리 테스트")
     @Test
-    void numberTest() {
+    void numberDigitTest() {
         assertThatThrownBy(() -> new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 6, 7)))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또 숫자 범위 테스트")
+    @Test
+    void numberRangeTest() {
+        assertThatThrownBy(() -> new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 6, 46)))
             .isInstanceOf(IllegalArgumentException.class);
     }
 }
