@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import static lotto.message.LottoErroMessage.NOT_ENOUGH_LOTTO_BONUS_NUMBER;
-import static lotto.message.LottoErroMessage.NOT_ENOUGH_LOTTO_NUMBER_RANGE;
+import static lotto.message.LottoErroMessage.*;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
