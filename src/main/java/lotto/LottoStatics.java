@@ -24,4 +24,8 @@ public class LottoStatics {
     public Integer rewardTotalWinningLottos() {
         return winningLottos.totalRewardWinningLottos();
     }
+
+    public WinningLottos winningLottos() {
+        return winningLottos;
+    }
 }

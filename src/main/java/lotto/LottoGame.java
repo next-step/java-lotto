@@ -11,6 +11,7 @@ public class LottoGame {
     public static final int LOTTO_PRICE = 1000;
     private List<Lotto> lottos = new ArrayList<>();
     private Lotto winningLotto;
+    private LottoStatics lottoStatics = new LottoStatics();
 
     public void buyLotto(int price) {
         int gameCount = getGameCount(price);
@@ -48,4 +49,22 @@ public class LottoGame {
     public Lotto winningLotto() {
         return winningLotto;
     }
+
+    public List<Lotto> lottos() {
+        return lottos;
+    }
+
+    public void classifyRankLotto() {
+        lottoStatics.classifyRankLotto(lottos, winningLotto);
+    }
+
+    public WinningLottos winningLottos() {
+        return lottoStatics.winningLottos();
+    }
+
+    public double investingPercent(int price) {
+        return (double) lottoStatics.rewardTotalWinningLottos() / price;
+    }
+
+
 }
