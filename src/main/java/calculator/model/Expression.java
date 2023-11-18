@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Expression {
     private final List<String> tokens;
@@ -13,7 +14,7 @@ public class Expression {
     private static final Pattern FRONT_NEGATIVE_NUMBER_PATTERN = Pattern.compile("^-\\d.*");
     private static final Pattern BACK_NUMBER_PATTERN = Pattern.compile(".*\\d$");
     private static final String ERR_EMPTY_EXPRESSION = "Empty input values are not allowed.";
-    private static final String ERR_INVALID_SYMBOL = "Only the following symbols can be used: " + Operator.getAllSymbols();
+    private static final String ERR_INVALID_SYMBOL = "Invalid symbol found: ";
     private static final String ERR_INVALID_EXPRESSION = "Expression is not valid.";
 
     public Expression(String expression) {
@@ -35,13 +36,19 @@ public class Expression {
             throw new IllegalArgumentException(ERR_EMPTY_EXPRESSION);
         }
 
-        if (containsInvalidSymbol(expression) || containsConsecutiveOperators(expression)) {
-            throw new IllegalArgumentException(ERR_INVALID_SYMBOL);
+        if (containsInvalidSymbol(expression)) {
+            throw new IllegalArgumentException(ERR_INVALID_SYMBOL + findInvalidSymbol(expression));
         }
 
-        if (!checkNumberOnEdge(expression)) {
+        if (!checkNumberOnEdge(expression)  || containsConsecutiveOperators(expression)) {
             throw new IllegalArgumentException(ERR_INVALID_EXPRESSION);
         }
+    }
+
+    private static List<String> findInvalidSymbol(String expression) {
+        return Arrays.stream(expression.split(" "))
+                .filter(Expression::containsInvalidSymbol)
+                .collect(Collectors.toList());
     }
 
     private static boolean containsInvalidSymbol(String expression) {
