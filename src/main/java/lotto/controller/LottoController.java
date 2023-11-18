@@ -16,8 +16,9 @@ public class LottoController {
     }
 
     public static void run() {
-        int amount = InputView.inputAmount();
-        int quantity = amount / PRICE_OF_LOTTO;
+        final int amount = InputView.inputAmount();
+        Validator.validateAmount(amount);
+        final int quantity = amount / PRICE_OF_LOTTO;
         OutputView.outputQuantity(quantity);
 
         LottoMachine lottoMachine = new LottoMachine();
@@ -26,11 +27,11 @@ public class LottoController {
         OutputView.outputLottos(lottoMachine.getLottos());
 
         List<Integer> winningNumbers = InputView.inputWinningNumbers(DELIMITER);
-
         LottoWinningMachine winningMachine = new LottoWinningMachine(new Lotto(winningNumbers));
+
         Map<Rank, Integer> rankCounts = winningMachine.getRankCounts(lottoMachine.getLottos());
+
         OutputView.outputWinningResult(rankCounts);
         OutputView.outputRateOfResult(winningMachine.calculateRateOfResult(rankCounts, amount));
-
     }
 }
