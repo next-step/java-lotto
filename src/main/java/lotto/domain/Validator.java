@@ -1,6 +1,9 @@
 package lotto.domain;
 
 import lotto.exceptions.InvalidLottoAmountException;
+import lotto.exceptions.InvalidLottoNumbersException;
+
+import java.util.List;
 
 public class Validator {
     private static final int PRICE_OF_LOTTO = 1000;
@@ -17,5 +20,11 @@ public class Validator {
 
     private static boolean isNegativeAmount(int amount) {
         return amount < 0;
+    }
+
+    public static void validateLottoNumbers(List<Integer> winningNumbers) {
+        if (winningNumbers.size() != 6) {
+            throw new InvalidLottoNumbersException();
+        }
     }
 }

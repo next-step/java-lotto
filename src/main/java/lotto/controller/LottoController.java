@@ -27,8 +27,9 @@ public class LottoController {
         OutputView.outputLottos(lottoMachine.getLottos());
 
         List<Integer> winningNumbers = InputView.inputWinningNumbers(DELIMITER);
-        LottoWinningMachine winningMachine = new LottoWinningMachine(new Lotto(winningNumbers));
+        Validator.validateLottoNumbers(winningNumbers);
 
+        LottoWinningMachine winningMachine = new LottoWinningMachine(new Lotto(winningNumbers));
         Map<Rank, Integer> rankCounts = winningMachine.getRankCounts(lottoMachine.getLottos());
 
         OutputView.outputWinningResult(rankCounts);
