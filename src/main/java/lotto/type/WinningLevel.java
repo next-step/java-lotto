@@ -27,6 +27,8 @@ public enum WinningLevel {
 }
 
 class WinningLevelTable {
+    private static WinningLevelTable instance;
+
     private final Map<Integer, WinningLevel> winningLevelTable;
     
     private WinningLevelTable() {
@@ -39,7 +41,11 @@ class WinningLevelTable {
     }
 
     private static WinningLevelTable getInstance() {
-        return new WinningLevelTable();
+        if (instance == null) {
+            instance = new WinningLevelTable();
+        }
+
+        return instance;
     }
 
     /**
