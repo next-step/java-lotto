@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +12,7 @@ public class LottoWinningMachine {
     private final Lotto winningLotto;
 
     public LottoWinningMachine(Lotto winningLotto) {
-        this.rankCounts = new HashMap<>();
+        this.rankCounts = new EnumMap<>(Rank.class);
         this.winningLotto = winningLotto;
     }
 
