@@ -4,10 +4,8 @@ import lotto.domain.lotto.LotteryRank;
 import lotto.domain.rankcount.RankCount;
 import lotto.domain.rankcount.RankCountGroup;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -15,16 +13,10 @@ import static lotto.domain.lotto.LotteryRank.*;
 
 public class Lottos {
 
-    private List<LottoNumbers> lottos = new ArrayList<>();
+    private final List<LottoNumbers> lottos;
 
     public Lottos(List<LottoNumbers> lottos) {
         this.lottos = lottos;
-    }
-
-    @SafeVarargs
-    public Lottos(Set<Integer>... lottos) {
-        Arrays.stream(lottos)
-            .forEach(lotto -> this.lottos.add(new LottoNumbers(lotto)));
     }
 
     public int getNumOfLotto() {
@@ -42,12 +34,12 @@ public class Lottos {
     private long countByRank(WinningNumber winningNumber, LotteryRank rank) {
         List<LottoNumbers> filteredLottos = filterByRank(winningNumber, rank);
 
-        if (BONUS == rank) {
-            return count(winningNumber::isBonus, filteredLottos);
+        if (SECOND == rank) {
+            return count(winningNumber::containsBonus, filteredLottos);
         }
 
-        if (SECOND == rank) {
-            return count(winningNumber::isSecond, filteredLottos);
+        if (THIRD == rank) {
+            return count(winningNumber::containsNotBonus, filteredLottos);
         }
 
         return count((i) -> true, filteredLottos);
@@ -55,7 +47,7 @@ public class Lottos {
 
     private List<LottoNumbers> filterByRank(WinningNumber winningNumber, LotteryRank rank) {
         return lottos.stream()
-            .filter(lotto -> rank.isEqualCount(lotto.countMatchingNumbers(winningNumber)))
+            .filter(lotto -> rank.isEqualCount(winningNumber.countMatchingNumbers(lotto)))
             .collect(Collectors.toUnmodifiableList());
     }
 

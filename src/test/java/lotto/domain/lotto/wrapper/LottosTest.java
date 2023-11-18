@@ -4,6 +4,7 @@ import lotto.domain.rankcount.RankCountGroup;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Set;
 
 import static lotto.domain.lotto.LotteryRank.*;
@@ -16,13 +17,15 @@ public class LottosTest {
     void countByMatchingNumGroupWithBonusNumber() {
         // given
         Lottos lottos = new Lottos(
-                Set.of(1, 5, 12, 21, 32, 43),
-                Set.of(1, 5, 12, 21, 32, 43),
-                Set.of(1, 5, 12, 21, 42, 45),
-                Set.of(1, 5, 12, 21, 32, 42),
-                Set.of(1, 5, 12, 21, 32, 45),
-                Set.of(1, 5, 12, 21, 31, 45),
-                Set.of(1, 5, 12, 22, 31, 45));
+            List.of(
+                new LottoNumbers(Set.of(1, 5, 12, 21, 32, 43)),
+                new LottoNumbers(Set.of(1, 5, 12, 21, 32, 43)),
+                new LottoNumbers(Set.of(1, 5, 12, 21, 42, 45)),
+                new LottoNumbers(Set.of(1, 5, 12, 21, 32, 42)),
+                new LottoNumbers(Set.of(1, 5, 12, 21, 32, 45)),
+                new LottoNumbers(Set.of(1, 5, 12, 21, 31, 45)),
+                new LottoNumbers(Set.of(1, 5, 12, 22, 31, 45))
+            ));
 
         WinningNumber winningNumber = new WinningNumber(Set.of(1, 5, 12, 21, 32, 43), 45);
 
@@ -32,10 +35,10 @@ public class LottosTest {
         // then
         assertAll(
             () -> assertEquals(2,rankCountGroup.findWinningCountBy(FIRST)),
-            () -> assertEquals(1, rankCountGroup.findWinningCountBy(BONUS)),
             () -> assertEquals(1, rankCountGroup.findWinningCountBy(SECOND)),
-            () -> assertEquals(2, rankCountGroup.findWinningCountBy(THIRD)),
-            () -> assertEquals(1, rankCountGroup.findWinningCountBy(FOURTH))
+            () -> assertEquals(1, rankCountGroup.findWinningCountBy(THIRD)),
+            () -> assertEquals(2, rankCountGroup.findWinningCountBy(FOURTH)),
+            () -> assertEquals(1, rankCountGroup.findWinningCountBy(FIFTH))
         );
     }
 }
