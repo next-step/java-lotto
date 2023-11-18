@@ -10,8 +10,8 @@ public enum Rank {
     ZERO(0, 0);
 
     public static final Rank[] VALUES = values();
-    private int matchCount;
-    private int prizeMoney;
+    private final int matchCount;
+    private final int prizeMoney;
 
     Rank(int matchCount, int prizeMoney) {
         this.matchCount = matchCount;
