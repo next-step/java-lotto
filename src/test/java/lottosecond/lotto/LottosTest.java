@@ -7,15 +7,13 @@ import lottosecond.domain.WinningLottoAndBonusBall;
 import lottosecond.domain.lotto.Lotto;
 import lottosecond.domain.lotto.Lottos;
 import lottosecond.domain.lotto.LottosMaker;
-import lottosecond.testutil.TestUtil;
+import lottosecond.testutil.TestShuffler;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottosTest {
 
@@ -23,7 +21,7 @@ class LottosTest {
     @Test
     void bonusNumber() {
         // given
-        Lottos lottos = LottosMaker.makeLottoList(() -> TestUtil.makeLottoNumberList(1, 2, 3, 4, 5, 6), 1000);
+        Lottos lottos = LottosMaker.makeLottoList(new TestShuffler(), 1000);
         WinningLottoAndBonusBall winningLottoAndBonusBall = new WinningLottoAndBonusBall(new Lotto(List.of(1, 2, 3, 4, 5, 9)), new BonusBall(6));
         // when
         WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningLottoAndBonusBall);
@@ -36,7 +34,7 @@ class LottosTest {
     @DisplayName("일치하는 당첨 로또들을 일치 수에 맞도록 winnerBoard 에 추가합니다.")
     void checkLotto() {
         // given
-        Lottos lottos = LottosMaker.makeLottoList(() -> TestUtil.makeLottoNumberList(1, 2, 3, 4, 5, 6), 1000);
+        Lottos lottos = LottosMaker.makeLottoList(new TestShuffler(), 1000);
         WinningLottoAndBonusBall winningLottoAndBonusBall = new WinningLottoAndBonusBall(new Lotto(List.of(1, 2, 3, 7, 8, 9)), new BonusBall(4));
         // when
         WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningLottoAndBonusBall);
@@ -48,7 +46,7 @@ class LottosTest {
     @DisplayName("우승 로또가 없다면 winnerBoard 의 우승 로또 수는 모두 0이 됩니다.")
     void zeroWinningLotto() {
         // given
-        Lottos lottos = LottosMaker.makeLottoList(() -> TestUtil.makeLottoNumberList(1, 2, 3, 4, 5, 6), 1000);
+        Lottos lottos = LottosMaker.makeLottoList(new TestShuffler(), 1000);
         WinningLottoAndBonusBall winningLottoAndBonusBall = new WinningLottoAndBonusBall(new Lotto(List.of(11, 12, 13, 14, 15, 16)), new BonusBall(4));
         WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningLottoAndBonusBall);
         // then

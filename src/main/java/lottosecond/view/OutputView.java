@@ -29,18 +29,7 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        Map<Winner, Long> winnerMap = new LinkedHashMap<>();
-        fillCollectMap(winnerMap);
-
-        List<Winner> winners = winnerBoard.getWinners();
-        Map<Winner, Long> collect = winners.stream().collect(Collectors.groupingBy(
-                winner -> winner,
-                Collectors.counting()
-        ));
-
-        for (Winner winner : collect.keySet()) {
-            winnerMap.put(winner, collect.get(winner));
-        }
+        Map<Winner, Long> winnerMap = makeWinnerMap(winnerBoard);
 
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -56,14 +45,6 @@ public class OutputView {
         System.out.println(winnerStatic);
     }
 
-    private void fillCollectMap(Map<Winner, Long> collect) {
-        collect.putIfAbsent(Winner.FIFTH, 0L);
-        collect.putIfAbsent(Winner.FOURTH, 0L);
-        collect.putIfAbsent(Winner.THIRD, 0L);
-        collect.putIfAbsent(Winner.SECOND, 0L);
-        collect.putIfAbsent(Winner.FIRST, 0L);
-    }
-
     public void printEarningRate(double earningRate) {
         StringBuilder stringBuilder = new StringBuilder();
         String output = stringBuilder.append("총 수익률은 " + earningRate + "입니다.")
@@ -73,6 +54,32 @@ public class OutputView {
                 .toString();
         System.out.println(output);
     }
+
+    private Map<Winner, Long> makeWinnerMap(WinnerBoard winnerBoard) {
+        Map<Winner, Long> winnerMap = new LinkedHashMap<>();
+        fillCollectMap(winnerMap);
+
+        List<Winner> winners = winnerBoard.getWinners();
+        Map<Winner, Long> collect = winners.stream().collect(Collectors.groupingBy(
+                winner -> winner,
+                Collectors.counting()
+        ));
+
+        for (Winner winner : collect.keySet()) {
+            winnerMap.put(winner, collect.get(winner));
+        }
+        return winnerMap;
+    }
+
+    private void fillCollectMap(Map<Winner, Long> collect) {
+        collect.putIfAbsent(Winner.FIFTH, 0L);
+        collect.putIfAbsent(Winner.FOURTH, 0L);
+        collect.putIfAbsent(Winner.THIRD, 0L);
+        collect.putIfAbsent(Winner.SECOND, 0L);
+        collect.putIfAbsent(Winner.FIRST, 0L);
+    }
+
+
 
     private void totalLottoCount(int lottoCount) {
         System.out.println(lottoCount + "개를 구매했습니다.");

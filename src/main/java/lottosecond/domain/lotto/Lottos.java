@@ -25,9 +25,8 @@ public class Lottos {
         List<Winner> winners = lottoList.stream()
                 .map(lotto -> Winner.calculateWinner(lotto, winningLottoAndBonusBall))
                 .filter(Objects::nonNull)
+                .sorted(Comparator.comparingLong(Winner::getPrice))
                 .collect(Collectors.toList());
-
-        winners.sort(Comparator.comparingLong(Winner::getPrice));
 
         return new WinnerBoard(winners);
     }
@@ -42,11 +41,5 @@ public class Lottos {
 
     public List<Lotto> getLottoList() {
         return lottoList;
-    }
-
-
-    private void fillZeroWinnerLottoCount(Map<Integer, Long> winnerLottoCount) {
-        IntStream.range(3, 7).boxed()
-                        .forEach(key -> winnerLottoCount.putIfAbsent(key, 0L));
     }
 }

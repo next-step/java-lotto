@@ -1,11 +1,12 @@
 package lottosecond.domain;
 
 import lottosecond.domain.lotto.Lotto;
-import lottosecond.testutil.TestUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -27,7 +28,7 @@ class BonusBallTest {
     @Test
     void duplicatedNumberWithWinningLotto() {
         // given
-        Lotto lotto = new Lotto(TestUtil.makeLottoNumberSet(1, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         // when
         BonusBall bonusBall = new BonusBall(6);
         // then
@@ -38,7 +39,7 @@ class BonusBallTest {
     @Test
     void notDuplicatedNumber() {
         // given
-        Lotto lotto = new Lotto(TestUtil.makeLottoNumberSet(1, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         // when
         BonusBall bonusBall = new BonusBall(7);
         // then
