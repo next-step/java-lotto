@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PrizeStatusTest {
 
     @Test
-    public void test1() {
+    public void assertCalculateProfit() {
         List<Integer> lottoNumbersForTicket = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> lottoNumbersForWinnerNumbers = Arrays.asList(1, 2, 3, 4, 5, 7);
 
