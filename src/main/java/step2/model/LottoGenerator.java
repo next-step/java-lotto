@@ -1,4 +1,4 @@
-package step2;
+package step2.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,8 +32,8 @@ public class LottoGenerator {
         return new Lotto(lottoNumbers.subList(0, LOTTO_SIZE));
     }
 
-    public Lotto generateWinningLotto(String userInput) {
-        return new Lotto(parseWinningNumbers(splitWinningNumbers(userInput)));
+    public WinningLotto generateWinningLotto(String userInput, Integer bonusNumber) {
+        return new WinningLotto(parseWinningNumbers(splitWinningNumbers(userInput)), bonusNumber);
     }
 
     private List<Integer> parseWinningNumbers(List<String> splitWinningNumbers) {

@@ -1,11 +1,11 @@
-package step2;
+package step2.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import step2.model.LottoNumber;
 
 public class LottoNumberTest {
 
