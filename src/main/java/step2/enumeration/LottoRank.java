@@ -21,6 +21,8 @@ public enum LottoRank {
         this.price = price;
     }
 
+    public static final List<LottoRank> ALL_LOTTO_RANK = Arrays.asList(LottoRank.values());
+
     public static int getPriceByMatch(int match) {
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank.match == match)
@@ -30,7 +32,7 @@ public enum LottoRank {
     }
 
     public static List<Integer> getMatches() {
-        return Arrays.stream(LottoRank.values())
+        return ALL_LOTTO_RANK.stream()
                 .map(e -> e.match)
                 .collect(Collectors.toList());
     }
