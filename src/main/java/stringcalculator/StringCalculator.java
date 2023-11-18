@@ -8,9 +8,6 @@ import java.util.stream.Collectors;
 
 public class StringCalculator {
 
-    public static final String REGEX = "[^+\\-*/]";
-    public static final Pattern PATTERN = Pattern.compile(REGEX);
-
     public int calculate(String text) {
         if (isNullOrBlank(text)) {
             throw new IllegalArgumentException("null 값이나 공백은 입력할 수 없습니다");
@@ -18,7 +15,7 @@ public class StringCalculator {
 
         String[] splitArr = text.split(" ");
 
-        List<String> operateList = createOperateList(splitArr);
+        List<Operator> operateList = createOperateList(splitArr);
 
         List<Integer> numberList = createNumberList(splitArr);
 
@@ -27,49 +24,45 @@ public class StringCalculator {
         return result;
     }
 
-    private static int calculation(List<String> operateList, List<Integer> numberList, int result) {
+    private static int calculation(List<Operator> operateList, List<Integer> numberList, int result) {
         for (int i = 0; i < operateList.size(); i++) {
-            String operator = operateList.get(i);
+            Operator operator = operateList.get(i);
             int number = numberList.get(i + 1);
-            validateOperator(operator);
 
             result = getResult(result, operator, number);
         }
         return result;
     }
 
-    private static int getResult(int result, String operator, int number) {
-        if ("+".equals(operator)) {
+    private static int getResult(int result, Operator operator, int number) {
+        if (operator == Operator.PLUS) {
             result = plus(result, number);
         }
-        if ("-".equals(operator)) {
+        if (operator == Operator.MINUS) {
             result = minus(result, number);
         }
-        if ("*".equals(operator)) {
+        if (operator == Operator.MULTIPLY) {
             result = multiply(result, number);
         }
-        if ("/".equals(operator)) {
+        if (operator == Operator.DIVIDE) {
             result = divide(result, number);
         }
         return result;
-    }
-
-    private static void validateOperator(String operator) {
-        Matcher matcher = PATTERN.matcher(operator);
-
-        if (matcher.find()) {
-            throw new IllegalArgumentException("사용할 수 없는 사칙연산 기호입니다");
-        }
     }
 
     private static boolean isNullOrBlank(String text) {
         return text == null || text.isBlank();
     }
 
-    private List<String> createOperateList(String[] splitArr) {
+    private List<Operator> createOperateList(String[] splitArr) {
         return Arrays.stream(splitArr)
                 .filter(el -> !isNumber(el))
+                .map(this::getOperatorFromString)
                 .collect(Collectors.toList());
+    }
+
+    private Operator getOperatorFromString(String operator) {
+        return Operator.fromName(operator);
     }
 
     private List<Integer> createNumberList(String[] splitArr) {
