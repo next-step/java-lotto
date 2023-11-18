@@ -33,4 +33,9 @@ public class ThirdRule implements WinningRule {
 
         return true;
     }
+
+    @Override
+    public String getDescription() {
+        return "5개 일치";
+    }
 }

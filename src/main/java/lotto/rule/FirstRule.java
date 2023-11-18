@@ -25,4 +25,9 @@ public class FirstRule implements WinningRule {
     public boolean isMatched(Lotto lotto, WinningNumber winningNumber) {
         return lotto.howManyContain(winningNumber) == 6;
     }
+
+    @Override
+    public String getDescription() {
+        return "6개 일치";
+    }
 }

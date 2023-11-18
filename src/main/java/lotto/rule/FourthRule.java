@@ -25,4 +25,9 @@ public class FourthRule implements WinningRule {
     public boolean isMatched(Lotto lotto, WinningNumber winningNumber) {
         return lotto.howManyContain(winningNumber) == 4;
     }
+
+    @Override
+    public String getDescription() {
+        return "4개 일치";
+    }
 }

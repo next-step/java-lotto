@@ -38,24 +38,7 @@ public class Renderer {
     }
 
     private static String rankRule(WinningLevel rank) {
-        if (rank == WinningLevel.NONE) {
-            return "2개 이하 일치";
-        }
-        if (rank == WinningLevel.FIFTH) {
-            return "3개 일치";
-        }
-        if (rank == WinningLevel.FOURTH) {
-            return "4개 일치";
-        }
-        if (rank == WinningLevel.THIRD) {
-            return "5개 일치";
-        }
-        if (rank == WinningLevel.SECOND) {
-            return "5개 일치, 보너스 볼 일치";
-        }
-
-        // rank == WinningLevel.ONE
-        return "6개 일치";
+        return rank.getDescription();
     }
 
     private static String rankAmount(WinningLevel rank) {

@@ -17,4 +17,12 @@ public interface WinningRule {
      * @return 판정 여부
      */
     public boolean isMatched(Lotto lotto, WinningNumber winningNumber);
+
+    /**
+     * 이 규칙의 조건을 자연어로 설명한 문구입니다.
+     * 사용자에게 보여주기 위한 용도입니다.
+     *
+     * @return 자연어 설명 문구
+     */
+    public String getDescription();
 }

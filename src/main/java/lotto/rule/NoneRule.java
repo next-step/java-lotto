@@ -25,4 +25,9 @@ public class NoneRule implements WinningRule {
     public boolean isMatched(Lotto lotto, WinningNumber winningNumber) {
         return lotto.howManyContain(winningNumber) < 3;
     }
+
+    @Override
+    public String getDescription() {
+        return "2개 이하 일치";
+    }
 }

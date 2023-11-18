@@ -25,4 +25,9 @@ public class FifthRule implements WinningRule {
     public boolean isMatched(Lotto lotto, WinningNumber winningNumber) {
         return lotto.howManyContain(winningNumber) == 3;
     }
+
+    @Override
+    public String getDescription() {
+        return "3개 일치";
+    }
 }

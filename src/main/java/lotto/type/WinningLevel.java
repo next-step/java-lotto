@@ -57,6 +57,10 @@ public enum WinningLevel {
     public WinningAmount getAmount() {
         return this.amount;
     }
+
+    public String getDescription() {
+        return this.rule.getDescription();
+    }
 }
 
 class WinningLevelTable {

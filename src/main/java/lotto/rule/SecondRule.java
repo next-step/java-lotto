@@ -27,4 +27,9 @@ public class SecondRule implements WinningRule {
 
         return lotto.containBonusNumber(winningNumber);
     }
+
+    @Override
+    public String getDescription() {
+        return "5개 일치, 보너스 볼 일치";
+    }
 }
