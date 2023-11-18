@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_NUMBER_SIZE = 6;
+
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> givenLottoNumbers) {
@@ -32,11 +33,11 @@ public class Lotto {
 
     public Integer compareToMatchNumberCount(Lotto other) {
         return Math.toIntExact(this.lottoNumbers.stream()
-                .filter(other::containsLottoNumber) //위의 코드는 lottoNumbers를 꺼내게 되는 상황.
+                .filter(other::containsLottoNumber)
                 .count());
     }
 
-    private boolean containsLottoNumber(LottoNumber lottoNumber) {
+    public boolean containsLottoNumber(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
     }
 

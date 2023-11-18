@@ -21,7 +21,7 @@ public class Lottos {
     public List<LottoRank> calculateTotalRank(WinningLotto winnerLotto) {
         List<LottoRank> lottoRanks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            lottoRanks.add(LottoRank.evaluateLottoRankByMatchCount(winnerLotto.compareToMatchNumberCount(lotto)));
+            lottoRanks.add(LottoRank.evaluateLottoRankByMatchCount(winnerLotto.compareToMatchNumberCount(lotto), winnerLotto.checkBonusNumber(lotto)));
         }
         return lottoRanks;
     }
