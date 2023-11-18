@@ -1,10 +1,8 @@
 package lotto.ui;
 
+import lotto.domain.LottoResult;
 import lotto.domain.LottoWinPercentage;
-import lotto.domain.LottoWinResult;
 import lotto.domain.Lottos;
-
-import java.util.List;
 
 public class OutputView {
 
@@ -20,10 +18,8 @@ public class OutputView {
         System.out.println("---------");
     }
 
-    public void printLottoResult(List<LottoWinResult> lottoWinResults) {
-        for (LottoWinResult lottoWinResult : lottoWinResults) {
-            System.out.println(lottoWinResult);
-        }
+    public void printLottoResult(LottoResult lottoResult) {
+        System.out.println(lottoResult);
     }
 
     public void printLottoRate(LottoWinPercentage lottoWinPercentage) {

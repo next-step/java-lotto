@@ -21,9 +21,9 @@ public class LottoMain {
 
         LottoResult lottoResult = calculateLottoResult(inputView, lottos);
 
-        List<LottoWinResult> lottoWinResults = calculateLottoStatisticsAndPrint(outputView, lottoResult);
+        calculateLottoStatisticsAndPrint(outputView, lottoResult);
 
-        printLottoRate(outputView, price, lottoWinResults);
+        printLottoRate(outputView, price, lottoResult);
     }
 
     private static int validatePrice(InputView inputView) {
@@ -44,15 +44,13 @@ public class LottoMain {
         return new LottoResult(lottos, new LottoWin(new LottoWinNumbers(winningLottoNumbers), bonusBall));
     }
 
-    private static List<LottoWinResult> calculateLottoStatisticsAndPrint(OutputView outputView, LottoResult lottoResult) {
-        List<LottoWinResult> lottoWinResults = lottoResult.lottoStatistics();
+    private static void calculateLottoStatisticsAndPrint(OutputView outputView, LottoResult lottoResult) {
         outputView.printLottoResultInfo();
-        outputView.printLottoResult(lottoWinResults);
-        return lottoWinResults;
+        outputView.printLottoResult(lottoResult);
     }
 
-    private static void printLottoRate(OutputView outputView, int print, List<LottoWinResult> lottoWinResults) {
-        LottoWinPercentage lottoWinPercentage = new LottoWinPercentage(print, lottoWinResults);
+    private static void printLottoRate(OutputView outputView, int print, LottoResult lottoResult) {
+        LottoWinPercentage lottoWinPercentage = new LottoWinPercentage(print, lottoResult);
         outputView.printLottoRate(lottoWinPercentage);
     }
 

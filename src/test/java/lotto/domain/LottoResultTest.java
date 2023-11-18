@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.tuple;
 
 class LottoResultTest {
 
@@ -67,8 +66,8 @@ class LottoResultTest {
 
     @ParameterizedTest
     @MethodSource("provideLottoStatisticsGenerateCondition")
-    @DisplayName("성공 - 로또 결과를 토대로 당첨 통계를 구한다.")
-    void success_generate_lotto_statistics(
+    @DisplayName("성공 - 로또 결과를 토대로 총 당첨 금액을 구한다.")
+    void success_generate_lotto_sum(
             List<Lotto> lottos,
             List<Integer> lottoWinNumbers,
             int bonusBall
@@ -81,17 +80,9 @@ class LottoResultTest {
                 )
         );
 
-        List<LottoWinResult> lottoWinResults = lottoResult.lottoStatistics();
+        int lottoSum = lottoResult.totalLottoIncome();
 
-        assertThat(lottoWinResults).hasSize(5)
-                .extracting("matchCount", "prizeAmount", "winCount", "isBonus")
-                .containsExactlyInAnyOrder(
-                        tuple(3L, 5_000L, 1L, false),
-                        tuple(4L, 50_000L, 1L, false),
-                        tuple(5L, 1_500_000L, 1L, false),
-                        tuple(5L, 30_000_000L, 1L, true),
-                        tuple(6L, 2_000_000_000L, 1L, false)
-                );
+        assertThat(lottoSum).isEqualTo(2_031_555_000L);
     }
 
     private static Stream<Arguments> provideLottoStatisticsGenerateCondition() {

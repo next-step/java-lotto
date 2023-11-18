@@ -26,15 +26,43 @@ public class LottoResult {
         }
     }
 
-    public List<LottoWinResult> lottoStatistics() {
-        List<LottoWinResult> lottoWinResults = new ArrayList<>();
-        lottoResult.entrySet().stream()
-                .filter(entry -> entry.getKey() != LottoRank.MISS)
-                .forEach(entry -> lottoWinResults.add(new LottoWinResult(entry.getKey().getMatchCount(), entry.getValue(), entry.getKey().isBonus())));
-        return lottoWinResults;
+    public int totalLottoIncome() {
+        return lottoResult.entrySet().stream()
+                .mapToInt(this::lottoIncome)
+                .sum();
+    }
+
+    private int lottoIncome(Map.Entry<LottoRank, Long> lottoResult) {
+        return lottoResult.getKey().getPrizeAmount() * lottoResult.getValue().intValue();
     }
 
     public Map<LottoRank, Long> getLottoResult() {
         return Collections.unmodifiableMap(lottoResult);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (LottoRank lottoRank : DISPLAY_LOTTO_RANKS) {
+            long winCount = lottoResult.getOrDefault(lottoRank, 0L);
+            sb.append(lottoRank.getMatchCount()).append("개 일치");
+            toStringIsBonus(lottoRank, sb);
+            toStringPrizeMount(lottoRank, sb, winCount);
+        }
+        return sb.toString();
+    }
+
+    private void toStringPrizeMount(LottoRank lottoRank, StringBuilder sb, long winCount) {
+        sb.append(" (").append(lottoRank.getPrizeAmount()).append("원) - ")
+                .append(winCount).append("개");
+        if (lottoRank != LottoRank.FIRST) {
+            sb.append("\n");
+        }
+    }
+
+    private void toStringIsBonus(LottoRank rank, StringBuilder sb) {
+        if (rank.isBonus()) {
+            sb.append(", 보너스 볼 일치");
+        }
     }
 }
