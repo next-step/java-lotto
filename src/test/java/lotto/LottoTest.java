@@ -18,4 +18,17 @@ public class LottoTest {
 
         assertThat(result).size().isBetween(1, 45);
     }
+
+    @Test
+    @DisplayName("로또 번호를 오름차순으로 정렬한다.")
+    void 로또_번호를_오름차순으로_정렬한다() {
+        Lotto lotto = new Lotto();
+
+        List<Integer> result = lotto.createNumber();
+        int firstNumber = result.get(0);
+        int lastNumber = result.get(44);
+
+        assertThat(firstNumber).isEqualTo(1);
+        assertThat(lastNumber).isEqualTo(45);
+    }
 }

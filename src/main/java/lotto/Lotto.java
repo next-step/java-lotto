@@ -1,11 +1,10 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static java.util.Collections.shuffle;
+import static java.util.Collections.sort;
 
 public class Lotto {
 
@@ -16,6 +15,7 @@ public class Lotto {
     public List<Integer> createNumber() {
         generateLottoNumber();
         shuffle(list);
+        sort(list);
 
         return list;
     }
