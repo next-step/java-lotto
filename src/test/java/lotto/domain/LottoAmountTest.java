@@ -44,4 +44,18 @@ class LottoAmountTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("숫자만 입력할 수 있습니다.");
     }
+
+    @Test
+    @DisplayName("로또를 생성한 후 로또 개수를 확인할 수 있다.")
+    void findLottoCountTest() {
+        // given
+        String input = "1000";
+        LottoAmount lottoAmount = new LottoAmount(input);
+
+        // when
+        int lottoCount = lottoAmount.findLottoCount();
+
+        // then
+        assertThat(lottoCount).isEqualTo(1);
+    }
 }

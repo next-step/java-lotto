@@ -30,6 +30,11 @@ public class LottoAmount {
         }
     }
 
+    public int findLottoCount() {
+
+        return amount / LOTTO_PRICE;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
