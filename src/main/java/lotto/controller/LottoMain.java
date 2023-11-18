@@ -7,16 +7,17 @@ import lotto.util.StringParser;
 
 import java.util.List;
 
-import static lotto.constant.Constant.PRICE_UNIT;
+import static lotto.constant.Constant.LOTTO_PRICE;
 
 public class LottoMain {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
         int price = validatePrice(inputView);
+        int manualLottoCount = validateLottoPurchaseAmount(price, inputView);
 
         OutputView outputView = new OutputView();
-        int lottoCount = price / PRICE_UNIT;
+        int lottoCount = price / LOTTO_PRICE;
         Lottos lottos = generateLottosAndPrint(outputView, lottoCount);
 
         LottoResult lottoResult = calculateLottoResult(inputView, lottos);
@@ -29,6 +30,12 @@ public class LottoMain {
     private static int validatePrice(InputView inputView) {
         int price = inputView.inputPrice();
         InputValidator.validatePurchasePrice(price);
+        return price;
+    }
+
+    private static int validateLottoPurchaseAmount(int price, InputView inputView) {
+        int manualLottoCount = inputView.inputManualLottoCount();
+        InputValidator.validateLottoPurchaseAmount(manualLottoCount, price);
         return price;
     }
 

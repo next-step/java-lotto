@@ -1,9 +1,10 @@
 package lotto.domain;
 
+import lotto.exception.ExceedLottoPurchaseException;
 import lotto.exception.InsufficientPriceException;
 import lotto.exception.MisMatchPriceUnitException;
 
-import static lotto.constant.Constant.PRICE_UNIT;
+import static lotto.constant.Constant.LOTTO_PRICE;
 
 public class InputValidator {
 
@@ -25,8 +26,15 @@ public class InputValidator {
     }
 
     private static void validatePriceUnitCondition(int price) {
-        if (price % PRICE_UNIT != ZERO) {
+        if (price % LOTTO_PRICE != ZERO) {
             throw new MisMatchPriceUnitException();
         }
     }
+
+    public static void validateLottoPurchaseAmount(int manualLottoCount, int price) {
+        if (manualLottoCount * LOTTO_PRICE > price) {
+            throw new ExceedLottoPurchaseException(manualLottoCount, price);
+        }
+    }
+
 }
