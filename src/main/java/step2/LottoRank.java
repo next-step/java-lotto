@@ -1,6 +1,5 @@
 package step2;
 
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,6 +11,7 @@ public enum LottoRank {
     FOURTH_PRIZE(3, 5_000),
     NO_PRIZE(0, 0);
 
+    private static final int MAX_NO_PRIZE_NUMBER = 2;
     private static final Map<Integer, LottoRank> lottoRanks =
             Stream.of(values()).collect(Collectors.toMap(rank -> rank.matchCount, rank -> rank));
     private final int matchCount;
@@ -23,7 +23,7 @@ public enum LottoRank {
     }
 
     public static LottoRank evaluateLottoRankByMatchCount(int matchCount) {
-        if (matchCount < 3) {
+        if (matchCount <= MAX_NO_PRIZE_NUMBER) {
             return LottoRank.NO_PRIZE;
         }
         return lottoRanks.get(matchCount);
