@@ -64,7 +64,7 @@ public class Expression {
         ).matches();
     }
 
-    public static ArrayList<String> split(String expression) {
+    private static ArrayList<String> split(String expression) {
         String[] splitArray = expression.trim().split("\\s+");
         return new ArrayList<>(Arrays.asList(splitArray));
     }

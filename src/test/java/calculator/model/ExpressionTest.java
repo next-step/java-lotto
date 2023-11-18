@@ -13,9 +13,9 @@ public class ExpressionTest {
     @Test
     @DisplayName("기호와 숫자 분리")
     public void 기호_숫자_분리() {
-        Assertions.assertThat(Expression.split("1  + 2     - 3  * 4  ").size())
+        Assertions.assertThat(new Expression("1  + 2     - 3  * 4  ").tokens().size())
                 .isEqualTo(7);
-        Assertions.assertThat(Expression.split("  1 + - 2 - 3 * 4 2 ").get(1))
+        Assertions.assertThat(new Expression("  1 + 2 - 3 * 4  ").tokens().get(1))
                 .isEqualTo("+");
     }
 
