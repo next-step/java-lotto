@@ -26,10 +26,6 @@ public class WinningNumber {
 
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
-        return winningNumbers.contains(lottoNumber);
-    }
-
     public int countMatchingNumbers(LottoNumbers lottoNumbers) {
         return winningNumbers.countMatchingNumbers(lottoNumbers);
     }

@@ -18,16 +18,16 @@ public class LottosTest {
         // given
         Lottos lottos = new Lottos(
             List.of(
-                new LottoNumbers(Set.of(1, 5, 12, 21, 32, 43)),
-                new LottoNumbers(Set.of(1, 5, 12, 21, 32, 43)),
-                new LottoNumbers(Set.of(1, 5, 12, 21, 42, 45)),
-                new LottoNumbers(Set.of(1, 5, 12, 21, 32, 42)),
-                new LottoNumbers(Set.of(1, 5, 12, 21, 32, 45)),
-                new LottoNumbers(Set.of(1, 5, 12, 21, 31, 45)),
-                new LottoNumbers(Set.of(1, 5, 12, 22, 31, 45))
+                new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6)), //6
+                new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6)), //6
+                new LottoNumbers(Set.of(1, 2, 3, 4, 5, 45)), //5+b
+                new LottoNumbers(Set.of(1, 2, 3, 4, 5, 42)), //5
+                new LottoNumbers(Set.of(1, 2, 3, 4, 7, 45)), //4
+                new LottoNumbers(Set.of(1, 2, 3, 4, 7, 45)), //4
+                new LottoNumbers(Set.of(1, 2, 3, 7, 8, 45))  //3
             ));
 
-        WinningNumber winningNumber = new WinningNumber(Set.of(1, 5, 12, 21, 32, 43), 45);
+        WinningNumber winningNumber = new WinningNumber(Set.of(1, 2, 3, 4, 5, 6), 45);
 
         // when
         RankCountGroup rankCountGroup = lottos.groupByRank(winningNumber);
