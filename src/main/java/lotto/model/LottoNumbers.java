@@ -26,10 +26,18 @@ public class LottoNumbers {
         }
     }
 
-
-    public int matchCount(WinnerNumbers winnerNumbers) {
-        return (int)this.lottoNumbers.stream()
-                .filter(winnerNumbers::has)
-                .count();
+    public CorrectNumbers matchCountAndBonus(WinnerNumbers winnerNumbers) {
+        int count = 0;
+        boolean flag = false;
+        for (PositiveNumber number : lottoNumbers) {
+            if (winnerNumbers.has(number)) {
+                count++;
+            }
+            if (winnerNumbers.correctBonus(number)) {
+                flag = true;
+            }
+        }
+        return new CorrectNumbers(count, flag);
     }
+
 }

@@ -20,7 +20,7 @@ public class LottoApplication {
         lottoOutput.viewLottoCount(lottos);
         lottoOutput.viewLottosDetail(lottos);
 
-        WinnerNumbers winnerNumbers = lottoInput.getWinningNumber();
+        WinnerNumbers winnerNumbers = new WinnerNumbers(lottoInput.getWinningNumber(), lottoInput.getBonusBall());
         Lottery lottery = new Lottery(winnerNumbers, lottos);
 
         lottoOutput.viewCorrectLottos(lottery);

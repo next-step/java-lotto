@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.model.BonusBall;
 import lotto.model.LottoNumbers;
 import lotto.model.PositiveNumber;
 import lotto.model.WinnerNumbers;
@@ -16,14 +17,18 @@ public class LottoInput {
         return scanner.nextLong();
     }
 
-    public WinnerNumbers getWinningNumber() {
+    public BonusBall getBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return new BonusBall(new PositiveNumber(scanner.nextInt()));
+    }
+
+    public LottoNumbers getWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         scanner.nextLine();
-        LottoNumbers numbers = new LottoNumbers(
+        return new LottoNumbers(
                 Arrays.stream(scanner.nextLine().split(", "))
                         .map(Integer::parseInt)
                         .map(PositiveNumber::new)
                         .collect(Collectors.toSet()));
-        return new WinnerNumbers(numbers);
     }
 }

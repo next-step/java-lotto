@@ -13,20 +13,33 @@ public class Lottery {
         this.lottos = lottos;
     }
 
-    public long depositTotalMoney(){
+    public long depositTotalMoney() {
         long totalMoney = 0;
-        for (int i = MIN_CORRECT_COUNT; i <= MAX_CORRECT_COUNT; i++) {
-            totalMoney += Dividend.getDividend(i)
-                    .findWinnerMoney(checkForWin(i));
+        for (int correctCount = MIN_CORRECT_COUNT; correctCount <= MAX_CORRECT_COUNT; correctCount++) {
+            totalMoney += Dividend.valueOf(correctCount, false)
+                    .findWinnerMoney(checkForWin(correctCount, false));
+            totalMoney = depositSecondMoney(totalMoney, correctCount);
         }
         return totalMoney;
     }
+
+    private long depositSecondMoney(long totalMoney, int correctCount) {
+        if (correctCount == Dividend.SECOND.correctCount()) {
+            totalMoney += Dividend.valueOf(correctCount, true)
+                    .findWinnerMoney(checkForWin(correctCount, true));
+        }
+        return totalMoney;
+    }
+
     public double getInvestment() {
         return (double) depositTotalMoney() / lottos.totalPurchasePrice();
     }
 
-    public int checkForWin(int correctCount) {
-        return lottos.correctCount(winnerNumbers, correctCount);
+    public int checkForWin(int correctCount, boolean needBonus) {
+        return (int) lottos.matchCountAndBonus(winnerNumbers)
+                .stream()
+                .filter(numbers -> numbers.isMatchNumberAndBonus(correctCount, needBonus))
+                .count();
     }
 
 }

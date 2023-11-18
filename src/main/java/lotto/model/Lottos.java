@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
     public static final int LOTTO_PRICE = 1000;
@@ -22,10 +23,10 @@ public class Lottos {
         return this.lottos.size() * LOTTO_PRICE;
     }
 
-    public int correctCount(WinnerNumbers winnerNumbers, int correctCount) {
-        return (int)lottos.stream()
-                .filter(lotto -> lotto.isMatch(winnerNumbers, correctCount))
-                .count();
+    public List<CorrectNumbers> matchCountAndBonus(WinnerNumbers winnerNumbers) {
+        return lottos.stream()
+                .map(lotto -> lotto.matchCountAndBonus(winnerNumbers))
+                .collect(Collectors.toList());
     }
 
 }

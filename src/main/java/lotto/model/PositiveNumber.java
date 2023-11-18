@@ -37,6 +37,7 @@ public class PositiveNumber implements Comparable<PositiveNumber>{
 
     @Override
     public int compareTo(PositiveNumber o) {
-        return o.number - this.number;
+        return this.number - o.number;
     }
+
 }

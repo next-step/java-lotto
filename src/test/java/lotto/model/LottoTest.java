@@ -10,30 +10,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTest {
     WinnerNumbers winnerNumbers;
+    LottoNumbers lottoNumbers;
     Lotto lotto;
 
     @BeforeEach
     void setUp() {
-        winnerNumbers = new WinnerNumbers(Set.of(
+        lottoNumbers = new LottoNumbers(Set.of(
                 new PositiveNumber(1),
                 new PositiveNumber(2),
                 new PositiveNumber(3),
                 new PositiveNumber(4),
                 new PositiveNumber(5),
                 new PositiveNumber(6)));
+        winnerNumbers = new WinnerNumbers(lottoNumbers, new BonusBall(new PositiveNumber(7)));
         lotto = new Lotto(Set.of(1, 3, 5, 6, 7, 8));
     }
 
     @Test
-    @DisplayName("로또 한장과 당첨번호가 count만큼 일치하면 1을 리턴한다.")
+    @DisplayName("보너스 숫자는 당첨번호에 카운트되지 않는다")
     void test1() throws Exception {
-        int correctCount = 4;
-        assertThat(lotto.isMatch(winnerNumbers, correctCount)).isEqualTo(1);
-    }
-    @Test
-    @DisplayName("로또 한장과 당첨번호가 count만큼 일치하지 않으면 0을 리턴")
-    void test2() throws Exception {
-        int correctCount = 6;
-        assertThat(lotto.isMatch(winnerNumbers, correctCount)).isEqualTo(0);
+        int correctCount = 5;
+        assertThat(lotto.matchCountAndBonus(winnerNumbers).correctCount())
+                .isNotEqualTo(correctCount);
     }
 }

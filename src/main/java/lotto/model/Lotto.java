@@ -1,6 +1,6 @@
 package lotto.model;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class Lotto {
@@ -12,7 +12,7 @@ public class Lotto {
     }
 
     public Lotto(Set<Integer> numbers) {
-        Set<PositiveNumber> positiveNumbers = new HashSet<>();
+        Set<PositiveNumber> positiveNumbers = new LinkedHashSet<>();
         for (int number : numbers) {
             positiveNumbers.add(new PositiveNumber(number));
         }
@@ -23,8 +23,8 @@ public class Lotto {
         return this.numbers.lottoNumbers();
     }
 
-    public boolean isMatch(WinnerNumbers winnerNumbers, int correctCount) {
-        return numbers.matchCount(winnerNumbers) == correctCount;
+    public CorrectNumbers matchCountAndBonus(WinnerNumbers winnerNumbers) {
+        return numbers.matchCountAndBonus(winnerNumbers);
     }
 
 }

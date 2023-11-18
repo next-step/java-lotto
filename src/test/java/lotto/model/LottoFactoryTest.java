@@ -18,6 +18,7 @@ class LottoFactoryTest {
         LottoFactory lottoFactory = new LottoFactory(purchaseMoney);
         assertThat(lottoFactory.lottoCount()).isEqualTo(4);
     }
+
     @Test
     @DisplayName("구입금액은 1000원 이상이어야한다.")
     void test2() throws Exception {

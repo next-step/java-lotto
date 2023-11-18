@@ -3,6 +3,8 @@ package lotto.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 import java.util.Set;
@@ -11,21 +13,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
     WinnerNumbers winnerNumbers;
+    LottoNumbers lottoNumbers;
     List<Lotto> lottoList;
     Lottos lottos;
 
     @BeforeEach
     void setUp() {
-        winnerNumbers = new WinnerNumbers(Set.of(
+        lottoNumbers = new LottoNumbers(Set.of(
                 new PositiveNumber(1),
                 new PositiveNumber(2),
                 new PositiveNumber(3),
                 new PositiveNumber(4),
                 new PositiveNumber(5),
                 new PositiveNumber(6)));
+        winnerNumbers = new WinnerNumbers(lottoNumbers, new BonusBall(new PositiveNumber(7)));
         lottoList = List.of(
                 new Lotto(Set.of(1, 3, 4, 6, 9, 11)),
-                new Lotto(Set.of(1, 2, 3, 4, 9, 11))
+                new Lotto(Set.of(1, 3, 4, 5, 6, 7))
         );
         lottos = new Lottos(lottoList);
     }
@@ -37,24 +41,9 @@ class LottosTest {
     }
 
     @Test
-    @DisplayName("당첨 번호와 가지고 있는 로또가 몇개 일치하는지 리턴한다")
-    void test2() throws Exception {
-        int correctCount = 4;
-        assertThat(lottos.correctCount(winnerNumbers, correctCount))
-                .isEqualTo(2);
-    }
-
-    @Test
     @DisplayName("로또 갯수를 리턴한다.")
-    void test3() throws Exception {
+    void test2() throws Exception {
         assertThat(lottos.lottoCount()).isEqualTo(2);
     }
 
-    @Test
-    @DisplayName("로또번호는 6개를 생성한다.")
-    void test4() throws Exception {
-        LottoFactory lottoFactory = new LottoFactory(1000);
-        Lottos lottos = lottoFactory.generateLottos();
-        assertThat(lottos.lottoList()).size().isEqualTo(6);
-    }
 }

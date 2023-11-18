@@ -4,6 +4,7 @@ import lotto.model.*;
 import lotto.model.constants.Dividend;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoOutput {
@@ -36,12 +37,19 @@ public class LottoOutput {
     public void viewCorrectLottos(Lottery lottery) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (int i = MIN_CORRECT_COUNT; i <= MAX_CORRECT_COUNT; i++) {
-            viewCorrectLotto(i, lottery.checkForWin(i));
+        for (int correctCount = MIN_CORRECT_COUNT; correctCount <= MAX_CORRECT_COUNT; correctCount++) {
+            viewCorrectLotto(Dividend.valueOf(correctCount, false), lottery.checkForWin(correctCount, false));
+            viewSecondCorrectLotto(correctCount, lottery);
         }
     }
 
-    public void viewCorrectLotto(int correctCount, int count) {
-        System.out.println(correctCount + "개 일치 (" + Dividend.getDividend(correctCount).dividendAmount() + "원) - " + count + "개");
+    private void viewSecondCorrectLotto(int correctCount, Lottery lottery) {
+        if (Dividend.SECOND.correctCount() == correctCount) {
+            System.out.println(correctCount + "개 일치, 보너스 볼 일치(" + Dividend.SECOND.dividendAmount() + "원) - " + lottery.checkForWin(correctCount, true) + "개");
+        }
+    }
+
+    public void viewCorrectLotto(Dividend dividend, int count) {
+        System.out.println(dividend.correctCount() + "개 일치 (" + dividend.dividendAmount() + "원) - " + count + "개");
     }
 }

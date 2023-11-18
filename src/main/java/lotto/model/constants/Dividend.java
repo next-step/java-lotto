@@ -1,30 +1,42 @@
 package lotto.model.constants;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 public enum Dividend {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000);
+    FIRST(6, 2_000_000_000, false),
+    SECOND(5, 30_000_000, true),
+    THIRD(5, 1_500_000, false),
+    FOURTH(4, 50_000, false),
+    FIFTH(3, 5_000, false),
+    MISS(0, 0, false),
+    ;
 
     private final int correctCount;
     private final long dividendAmount;
+    private final boolean hasBonus;
 
-    Dividend(int correctCount, long dividendAmount) {
+    Dividend(int correctCount, long dividendAmount, boolean hasBonus) {
         this.correctCount = correctCount;
         this.dividendAmount = dividendAmount;
+        this.hasBonus = hasBonus;
+    }
+    public int correctCount(){
+        return this.correctCount;
     }
 
     public long findWinnerMoney(int winCount) {
         return this.dividendAmount() * winCount;
     }
 
-    public static Dividend getDividend(int correctCount) {
+    public static Dividend valueOf(int correctCount, boolean matchBonus) {
         return Arrays.stream(values())
                 .filter(dividend -> dividend.correctCount == correctCount)
-                .findAny().orElseThrow(() -> new IllegalArgumentException("로또는 3 ~ 6회의 숫자를 맞춰야합니다. 3 ~ 6사이의 값을 입력해주세요."));
+                .filter(dividend -> dividend.hasBonus == matchBonus)
+                .findFirst()
+                .orElse(MISS);
+    }
+    public boolean hasBonus(){
+        return this.hasBonus;
     }
 
     public long dividendAmount() {
