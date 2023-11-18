@@ -1,41 +1,32 @@
 package calculator.domain;
 
 import java.util.Arrays;
+import java.util.function.BinaryOperator;
 
 public enum Operator {
-    PLUS("+"),
-    MINUS("-"),
-    MULTIPLY("*"),
-    DIVISION("/");
+    PLUS("+", Number::plus),
+    MINUS("-", Number::minus),
+    MULTIPLY("*", Number::multiply),
+    DIVISION("/", Number::divide);
 
     private final String symbol;
+    private final BinaryOperator<Number> operation;
 
-    Operator(String symbol) {
+    Operator(String symbol, BinaryOperator<Number> operation) {
         this.symbol = symbol;
+        this.operation = operation;
     }
 
     public Number apply(Number leftOperand, Number rightOperand) {
-
-        if (this == PLUS) {
-            return leftOperand.plus(rightOperand);
-        }
-        if (this == MINUS) {
-            return leftOperand.minus(rightOperand);
-        }
-        if (this == MULTIPLY) {
-            return leftOperand.multiply(rightOperand);
-        }
-        return leftOperand.divide(rightOperand);
+        return operation.apply(leftOperand, rightOperand);
     }
 
     public static Operator fromSymbol(String symbol) {
-
         return Arrays.stream(Operator.values())
                 .filter(op -> op.symbol.equals(symbol))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("올바른 연산자가 아닙니다: " + symbol));
     }
-
 
     @Override
     public String toString() {
