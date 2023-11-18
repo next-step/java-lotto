@@ -15,9 +15,9 @@ public enum LottoRank {
     private static final Map<Integer, LottoRank> lottoRanks =
             Stream.of(values()).collect(Collectors.toMap(rank -> rank.matchCount, rank -> rank));
     private final int matchCount;
-    private final int prizeMoney;
+    private final long prizeMoney;
 
-    LottoRank(int matchCount, int prizeMoney) {
+    LottoRank(int matchCount, long prizeMoney) {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
     }
@@ -29,7 +29,7 @@ public enum LottoRank {
         return lottoRanks.get(matchCount);
     }
 
-    public int getPrizeMoney() {
+    public long getPrizeMoney() {
         return prizeMoney;
     }
 }

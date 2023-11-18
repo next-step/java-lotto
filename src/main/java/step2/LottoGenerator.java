@@ -16,9 +16,9 @@ public class LottoGenerator {
         }
     }
 
-    public List<Lotto> generateLottos(int money) {
+    public List<Lotto> generateLottos(int lottoPurchaseCount) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < money / 1000; i++) {
+        for (int i = 0; i < lottoPurchaseCount; i++) {
             lottos.add(generateLotto());
         }
         return lottos;

@@ -8,10 +8,10 @@ public class LottoGameController {
 
     public void game() {
         int userInput = 2000;
+        Money money = new Money(userInput);
         String userWinningInput = "1, 2, 3, 4, 5, 6";
-        Lottos lottos = new Lottos(lottoGenerator.generateLottos(userInput));
+        Lottos lottos = new Lottos(lottoGenerator.generateLottos(money.determineLottoPurchaseCount()));
         Lotto winningLotto = lottoGenerator.generateWinningLotto(userWinningInput);
         LottoResult lottoResult = new LottoResult(lottos.calculateTotalRank(winningLotto));
-        lottoResult.calculateTotalPrizeMoney();
     }
 }

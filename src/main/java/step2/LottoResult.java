@@ -19,9 +19,13 @@ public class LottoResult {
         this.lottoRanks = ranks;
     }
 
-    public int calculateTotalPrizeMoney() {
+    public double calculateProfitRate(int money) {
+        return (calculateTotalPrizeMoney() * 100 / (money * 1000));
+    }
+
+    private long calculateTotalPrizeMoney() {
         return this.lottoRanks.stream()
-                .mapToInt(LottoRank::getPrizeMoney)
+                .mapToLong(LottoRank::getPrizeMoney)
                 .sum();
     }
 }
