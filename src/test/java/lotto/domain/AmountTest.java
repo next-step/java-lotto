@@ -21,7 +21,7 @@ class AmountTest {
 
     @Test
     void multiplyTest() {
-        final Amount result = new Amount(2000).multiply(3);
+        final Amount result = new Amount(2000).multiply(Amount.of(3));
 
         assertThat(result).isEqualTo(new Amount(6000));
     }

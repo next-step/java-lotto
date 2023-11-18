@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Lottos {
     public static final String LINE_BREAK = "\n";
-    private static final int LOTTO_AMOUNT = 1000;
 
     private List<Lotto> lottos;
 
@@ -28,10 +27,10 @@ public class Lottos {
     private List<Lotto> initLottos(final Amount amount) {
         final List<Lotto> lottos = new ArrayList<>();
 
-        final Amount lottoCount = amount.divide(new Amount(LOTTO_AMOUNT));
+        final Amount lottoCount = amount.divide(Amount.lotto());
 
         for (int i = 1; i <= lottoCount.get(); i++) {
-            lottos.add(new Lotto());
+            lottos.add(Lotto.auto());
         }
 
         return lottos;

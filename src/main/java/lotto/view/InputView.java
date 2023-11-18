@@ -28,11 +28,11 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static List<Lotto> inputManualLotto(final int manualLottoCount) {
+    public static List<Lotto> inputManualLotto(final Amount manualLottoCount) {
         System.out.println(MANUAL_LOTTO_INPUT_DESCRIPTION);
 
         List<Lotto> manualLottos = new ArrayList<>();
-        for (int i = 0; i < manualLottoCount; i++) {
+        for (int i = 0; i < manualLottoCount.get(); i++) {
             String tokens = SCANNER.next();
             manualLottos.add(new Lotto(tokens));
         }

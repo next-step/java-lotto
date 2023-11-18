@@ -9,8 +9,8 @@ public class Lotto {
 
     private Set<LottoNumber> lottoNumbers = new HashSet<>();
 
-    public Lotto() {
-        this.lottoNumbers = LottoNumberGenerator.generate();
+    private Lotto(final Set<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public Lotto(Integer... number) {
@@ -22,6 +22,10 @@ public class Lotto {
             this.lottoNumbers.add(LottoNumber.of(number));
         }
         lottoCountCheck();
+    }
+
+    public static Lotto auto() {
+        return new Lotto(LottoNumberGenerator.generate());
     }
 
     public Lotto(String tokens) {
@@ -40,7 +44,7 @@ public class Lotto {
         }
     }
 
-    int getRightNumber(Lotto lotto) {
+    public int getRightNumber(Lotto lotto) {
         int rightNumber = 0;
 
         for (LottoNumber lottoNumber : lottoNumbers) {
@@ -52,7 +56,7 @@ public class Lotto {
         return rightNumber;
     }
 
-    boolean contains(final LottoNumber lottoNumber) {
+    public boolean contains(final LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 

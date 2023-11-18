@@ -49,7 +49,7 @@ class RankTest {
 
     @Test
     void multiply_TEST() {
-        Amount result = Rank.THIRD.multiply(2);
+        Amount result = Rank.THIRD.multiply(Amount.of(2));
         assertThat(result).isEqualTo(new Amount(3_000_000));
     }
 

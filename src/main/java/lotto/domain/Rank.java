@@ -49,7 +49,7 @@ public enum Rank {
         return price;
     }
 
-    public Amount multiply(final int count) {
+    public Amount multiply(final Amount count) {
         return this.price.multiply(count);
     }
 }

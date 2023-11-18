@@ -11,14 +11,14 @@ import java.util.List;
 
 public class LottoApp {
     public static void main(String[] args) {
-        final int purchaseAmount = InputView.inputPurchaseAmount();
-        final int manualLottoCount = InputView.inputManualLottoCount();
+        final Amount purchaseAmount = Amount.of(InputView.inputPurchaseAmount());
+        final Amount manualLottoCount = Amount.of(InputView.inputManualLottoCount());
 
         List<Lotto> manualLottos = InputView.inputManualLotto(manualLottoCount);
         ResultView.purchaseCountPrint(manualLottoCount, purchaseAmount);
 
-        int autoPurchaseAmount = purchaseAmount - (manualLottoCount * 1000);
-        final LottoGame lottoGame = new LottoGame(manualLottos, new Amount(autoPurchaseAmount));
+        Amount autoPurchaseAmount = purchaseAmount.minus(manualLottoCount.multiply(Amount.lotto()));
+        final LottoGame lottoGame = new LottoGame(manualLottos, autoPurchaseAmount);
         ResultView.print(lottoGame.toString());
 
         String winningNumberText = InputView.inputWinningNumber();
@@ -27,7 +27,7 @@ public class LottoApp {
         final Winning winner = lottoGame.draw(winningNumberText, bonusNumber);
         ResultView.print(winner.toString());
 
-        final double returnRate = winner.getReturnRate(new Amount(purchaseAmount));
+        final double returnRate = winner.getReturnRate(purchaseAmount);
         ResultView.returnRatePrint(returnRate);
     }
 }
