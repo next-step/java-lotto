@@ -16,4 +16,8 @@ public class LottoStatics {
     public Integer matchCountRanks(int count) {
         return winningLottos.countLottoByWinningNumber(count);
     }
+
+    public Integer rewardWinningLotto(int count) {
+        return winningLottos.rewardWinningLotto(count);
+    }
 }
