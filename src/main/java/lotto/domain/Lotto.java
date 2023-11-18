@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -37,12 +38,7 @@ public class Lotto {
     }
 
     public List<LottoNumber> getNumbers() {
-        return numbers;
-    }
-
-    @Override
-    public String toString() {
-        return numbers.toString();
+        return numbers.stream().collect(Collectors.toUnmodifiableList());
     }
 
     public int matchCount(Lotto winningLotto) {
@@ -55,5 +51,10 @@ public class Lotto {
         }
 
         return count;
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }
