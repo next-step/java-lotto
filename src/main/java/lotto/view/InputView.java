@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class InputView {
 
+    public static final String DELIMITER = ", ";
     Scanner scanner = new Scanner(System.in);
 
     public int inputIntegerCommand(String message) {
@@ -17,6 +18,8 @@ public class InputView {
     public List<Integer> inputListCommand(String message) {
         System.out.println(message);
         String result = scanner.nextLine();
-        return Arrays.stream(result.split(", ")).map(Integer::parseInt).collect(Collectors.toList());
+        return Arrays.stream(result.split(DELIMITER))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 }
