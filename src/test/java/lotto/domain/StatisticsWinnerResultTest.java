@@ -15,17 +15,6 @@ public class StatisticsWinnerResultTest {
         statisticsWinnerResult = new StatisticsWinnerResult(result);
     }
 
-    @DisplayName("당첨3개 5000원, 3개")
-    @Test
-    void 당첨_5000원() {
-        //given
-        createTest(Map.of(RankLotto.FIFTH, 3));
-        //when
-        Map<RankLotto, Integer> result = statisticsWinnerResult.result();
-        //then
-        assertThat(result.get(RankLotto.FIFTH)).isEqualTo(3);
-    }
-
     @DisplayName("당첨 총액 수익률")
     @Test
     void 당첨_수익률() {

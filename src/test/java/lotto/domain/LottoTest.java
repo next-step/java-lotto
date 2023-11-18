@@ -49,6 +49,17 @@ public class LottoTest {
         assertThat(result).isEqualTo(4);
     }
 
+    @DisplayName("수동입력으로_로또번호를_만든다")
+    @Test
+    void 수동입력으로_로또번호를_만든다() {
+        // given
+        String lottoNumbers = "1, 2, 3, 4, 5, 6";
+        Lotto resultLotto = new Lotto(lottoNumbers);
+        // when
+        // then
+        assertThat(resultLotto.match(new Lotto(1, 2, 3, 4, 5, 6))).isEqualTo(6);
+    }
+
     @DisplayName("보너스 번호 일치 테스트")
     @Test
     void 보너스_번호는_당첨번호와_다른번호이다() {

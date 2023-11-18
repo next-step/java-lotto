@@ -10,6 +10,7 @@ import static lotto.validate.NumberValidation.checkLottoSize;
 
 public class Lotto {
 
+    private static final String DELIMITER = ", ";
     private List<LottoNumber> lottoNumbers;
 
     public Lotto() {
@@ -26,6 +27,14 @@ public class Lotto {
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
         checkLottoSize(lotto);
+        this.lottoNumbers = sortLotto(lotto);
+    }
+
+    public Lotto(String lottoNumbers) {
+        List<LottoNumber> lotto = Arrays.stream(lottoNumbers.split(DELIMITER))
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
         this.lottoNumbers = sortLotto(lotto);
     }
 
