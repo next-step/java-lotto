@@ -10,7 +10,7 @@ import static lotto.message.LottoErroMessage.NOT_ENOUGH_LOTTO_NUMBER;
 
 public class Lotto {
 
-    private static final String DELIMITER = ", ";
+    private static final String DELIMITER = ",";
     private List<LottoNumber> lottoNumbers;
 
     public Lotto() {

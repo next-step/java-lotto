@@ -8,20 +8,10 @@ import java.util.stream.Collectors;
 
 public class Purchase {
 
-    private final Money money;
-    private final List<Lotto> lottos;
+    private List<Lotto> lottos;
 
-    public Purchase(int money) {
-        this(money, new RandomNumberStrategy());
-    }
-
-    public Purchase(int amount, NumberStrategy numberStrategy) {
-        this.money = new Money(amount);
-        this.lottos = numberStrategy.create(lottoCount());
-    }
-
-    public int amount() {
-        return money.price();
+    public Purchase(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public List<Lotto> lottos() {
@@ -32,14 +22,10 @@ public class Purchase {
         return lottos.size();
     }
 
-    private int lottoCount() {
-        return money.lottoCount();
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(lottoCount());
+        sb.append(lottos.size());
         sb.append("개를 구매했습니다.\n");
         sb.append(toStringLottos());
 

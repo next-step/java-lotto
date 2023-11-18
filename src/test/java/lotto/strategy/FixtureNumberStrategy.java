@@ -7,8 +7,6 @@ import java.util.List;
 
 public class FixtureNumberStrategy implements NumberStrategy {
 
-    int number = 0;
-
     @Override
     public List<Lotto> create(int count) {
         List<LottoNumber> lottoNumbers = List.of(

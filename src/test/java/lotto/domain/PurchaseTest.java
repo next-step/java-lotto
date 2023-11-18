@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import lotto.strategy.FixtureNumberStrategy;
-import lotto.strategy.NumberStrategy;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,18 +10,16 @@ public class PurchaseTest {
 
     private Purchase purchase;
 
-    void createTest(int amount) {
-        purchase = new Purchase(amount);
-    }
-
     @Test
     void 로또_구매_갯수() {
         // given
-        NumberStrategy numberStrategy = new FixtureNumberStrategy();
-        purchase = new Purchase(1000, numberStrategy);
+        List<Lotto> lottos = List.of(new Lotto(1, 2, 3, 4, 5, 6));
+        purchase = new Purchase(lottos);
         // when
         int lottoCount = purchase.lottosSize();
         // then
         assertThat(lottoCount).isEqualTo(1);
     }
+
+
 }
