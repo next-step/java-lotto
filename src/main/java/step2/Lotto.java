@@ -10,11 +10,6 @@ public class Lotto {
     private static final int LOTTO_NUMBER_SIZE = 6;
     private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(Set<LottoNumber> lottoNumbers) {
-        validateLottoNumberSize(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
-    }
-
     public Lotto(List<Integer> givenLottoNumbers) {
         this.lottoNumbers = givenLottoNumbers.stream()
                 .map(LottoNumber::new)
