@@ -14,11 +14,21 @@ public class SingleNumber implements Comparable<SingleNumber> {
 
     private final int lottoNumber;
 
-    private SingleNumber(int lottoNumber) {
+    /**
+     * 로또 번호나 당첨 번호에 사용되는 번호를 생성합니다.
+     * int 타입을 wrapping합니다.
+     * 불변 객체입니다.
+     */
+    public SingleNumber(int lottoNumber) {
         checkRange(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
 
+    /**
+     * 로또 번호나 당첨 번호에 사용되는 번호를 생성합니다.
+     * int 타입을 wrapping합니다.
+     * 불변 객체입니다.
+     */
     public static SingleNumber of(int lottoNumber) {
         return new SingleNumber(lottoNumber);
     }
