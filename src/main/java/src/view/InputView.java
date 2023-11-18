@@ -37,7 +37,9 @@ public final class InputView {
         return scanner.nextInt();
     }
 
-    public static void inputPurchaseManualLottoNumber() {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    public static void inputPurchaseManualLottoNumber(int manualLottoSize) {
+        if (manualLottoSize > 0) {
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        }
     }
 }

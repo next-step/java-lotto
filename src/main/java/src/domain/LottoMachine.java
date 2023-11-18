@@ -1,7 +1,8 @@
 package src.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoMachine {
 
@@ -14,10 +15,9 @@ public class LottoMachine {
     public Lottos buyLottos(Money money) {
         int lottoCount = money.lottoCount(Lotto.PRICE_OF_LOTTO);
         checkAvailableForPurchase(lottoCount);
-        List<Lotto> lottos = new ArrayList<>(lottoCount);
-        for (int idx = 0; idx < lottoCount; idx++) {
-            lottos.add(buyLotto());
-        }
+        List<Lotto> lottos = IntStream.range(0, lottoCount)
+                .mapToObj(idx -> buyLotto())
+                .collect(Collectors.toList());
 
         return Lottos.of(lottos);
     }

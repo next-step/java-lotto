@@ -13,13 +13,16 @@ import src.view.ManualLottoGameNumberGenerator;
 import src.view.ResultView;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class LottoGameController {
 
     public static void main(String[] args) {
-        Map<String, Money> moneyMap = inputMoneys();
+        int purchasePrice = InputView.inputPurchasePrice();
+        int manualLottoCount = InputView.inputPurchaseManualLottoCount();
+        Map<String, Money> moneyMap = inputMoneys(purchasePrice, manualLottoCount);
         Money moneyOfAutoLotto = moneyMap.get("AUTO");
         Money moneyOfManualLotto = moneyMap.get("MANUAL");
 
@@ -27,9 +30,8 @@ public class LottoGameController {
 
         Lottos autoLottos = lottoMachine.buyLottos(moneyOfAutoLotto);
 
-        InputView.inputPurchaseManualLottoNumber();
-        lottoMachine.changeLottoGameNumberGenerator(new ManualLottoGameNumberGenerator());
-        Lottos manualLottos = lottoMachine.buyLottos(moneyOfManualLotto);
+
+        Lottos manualLottos = buyManualLottos(manualLottoCount, lottoMachine, moneyOfManualLotto);
 
         Lottos lottos = autoLottos.addLottos(manualLottos);
         printLottos(lottos, autoLottos.size(), manualLottos.size());
@@ -41,10 +43,18 @@ public class LottoGameController {
         ResultView.printMatchResult(matchStatus, profitRate);
     }
 
-    private static Map<String, Money> inputMoneys() {
-        Money totalMoney = Money.of(InputView.inputPurchasePrice());
+    private static Lottos buyManualLottos(int manualLottoCount, LottoMachine lottoMachine, Money moneyOfManualLotto) {
+        if (manualLottoCount <= 0) {
+            return Lottos.of(List.of());
+        }
 
-        int manualLottoCount = InputView.inputPurchaseManualLottoCount();
+        InputView.inputPurchaseManualLottoNumber(manualLottoCount);
+        lottoMachine.changeLottoGameNumberGenerator(new ManualLottoGameNumberGenerator());
+        return lottoMachine.buyLottos(moneyOfManualLotto);
+    }
+
+    private static Map<String, Money> inputMoneys(int purchasePrice, int manualLottoCount) {
+        Money totalMoney = Money.of(purchasePrice);
         Money moneyOfManualLotto = Money.of(manualLottoCount * Lotto.PRICE_OF_LOTTO);
 
         try {
