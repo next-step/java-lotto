@@ -3,6 +3,8 @@ package calculator.model;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class ExpressionTest {
     @Test
@@ -14,12 +16,11 @@ public class ExpressionTest {
                 .isEqualTo("+");
     }
 
-    @Test
-    public void 숫자_하나() {
-        Assertions.assertThat(new Expression("1").isMonomial())
-                .isTrue();
-        Assertions.assertThat(new Expression("1 + 2").isMonomial())
-                .isFalse();
+    @ParameterizedTest
+    @CsvSource({"1, true", "1 + 2, false"})
+    public void 숫자_하나(String input, boolean expected) {
+        Assertions.assertThat(new Expression(input).isMonomial())
+                .isEqualTo(expected);
     }
 
 }
