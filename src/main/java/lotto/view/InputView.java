@@ -14,6 +14,8 @@ public class InputView {
     private final static String MANUAL_LOTTO_INPUT_DESCRIPTION = "수동으로 구매할 번호를 입력해 주세요..";
     private final static String WINNING_NUMBER_INPUT_DESCRIPTION = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String BONUS_INPUT_DESCRIPTION = "보너스 볼을 입력해 주세요.";
+    public static final String SPLIT_TEXT = ",";
+
 
     private InputView() {
     }
@@ -34,7 +36,9 @@ public class InputView {
         List<Lotto> manualLottos = new ArrayList<>();
         for (int i = 0; i < manualLottoCount.get(); i++) {
             String tokens = SCANNER.next();
-            manualLottos.add(new Lotto(tokens));
+            String[] lottoNumberTokens = tokens.split(SPLIT_TEXT);
+
+            manualLottos.add(new Lotto(lottoNumberTokens));
         }
 
         return manualLottos;
