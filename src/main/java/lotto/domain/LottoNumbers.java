@@ -36,4 +36,8 @@ public class LottoNumbers {
             }
         }
     }
+
+    boolean isContain(int number) {
+        return this.lottoNumbers.contains(number);
+    }
 }

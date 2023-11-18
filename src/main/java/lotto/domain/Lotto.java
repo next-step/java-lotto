@@ -5,11 +5,21 @@ import java.util.List;
 
 public class Lotto {
 
-    private final LottoNumbers numbers;
+    private final LottoNumbers lottoNumbers;
 
     public Lotto(LottoNumbers numbers) {
         numbers.validateDigit();
         numbers.validateRange();
-        this.numbers = numbers;
+        this.lottoNumbers = numbers;
+    }
+
+    public int matchCount(List<Integer> winningNumbers) {
+        int matchCount = 0;
+        for (int number : winningNumbers) {
+            if (lottoNumbers.isContain(number)) {
+                ++matchCount;
+            }
+        }
+        return matchCount;
     }
 }

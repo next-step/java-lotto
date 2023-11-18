@@ -24,4 +24,12 @@ public class LottoTest {
         assertThatThrownBy(() -> new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 6, 46)))
             .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("로또 번호 일치 개수 확인 테스트")
+    @Test
+    void matchCountTest() {
+        List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 10));
+        assertThat(lotto.matchCount(winningNumbers)).isEqualTo(5);
+    }
 }
