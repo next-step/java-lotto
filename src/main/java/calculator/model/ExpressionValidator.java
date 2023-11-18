@@ -30,10 +30,9 @@ public class ExpressionValidator {
 
     private static boolean checkNumberOnEdge(String expression) {
         expression = expression.trim();
-        if (Pattern.matches("^\\d.*", expression) || Pattern.matches("^-\\d.*", expression)) {
-            return true;
-        }
-        if (Pattern.matches(".*\\d$", expression)) {
+        if ((Pattern.matches("^\\d.*", expression)
+                || Pattern.matches("^-\\d.*", expression))
+                && Pattern.matches(".*\\d$", expression)) {
             return true;
         }
         return false;
