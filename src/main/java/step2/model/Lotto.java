@@ -8,16 +8,16 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
+        validate(numbers);
         this.numbers = numbers;
-        validate();
     }
     
-    private void validate() {
-        if (this.numbers == null || this.numbers.isEmpty()) {
+    private void validate(List<Integer> numbers) {
+        if (numbers == null || numbers.isEmpty()) {
             throw new IllegalArgumentException("로또 번호가 없습니다.");
         }
 
-        if (this.numbers.size() != 6) {
+        if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호는 6개가 되어야 합니다.");
         }
     }
