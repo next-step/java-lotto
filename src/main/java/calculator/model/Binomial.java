@@ -3,9 +3,9 @@ package calculator.model;
 import java.util.List;
 
 public class Binomial {
-    private int leftNumber;
-    private int rightNumber;
-    private Operator operator;
+    private final int leftNumber;
+    private final int rightNumber;
+    private final Operator operator;
 
 
     public Binomial(List<String> tokens) {

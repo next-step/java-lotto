@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Expression {
-    private ArrayList<String> tokens;
+    private final List<String> tokens;
 
     public Expression(String expression) {
         // validate
