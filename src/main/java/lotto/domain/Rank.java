@@ -9,6 +9,7 @@ public enum Rank {
     FOURTH(3, 5000),
     ZERO(0, 0);
 
+    public static final Rank[] VALUES = values();
     private int matchCount;
     private int prizeMoney;
 
@@ -18,7 +19,7 @@ public enum Rank {
     }
 
     public static Rank rankByCount(int count) {
-        return Arrays.stream(values())
+        return Arrays.stream(VALUES)
                 .filter(rank -> rank.matchCount == count)
                 .findFirst()
                 .orElse(Rank.ZERO);
