@@ -8,4 +8,10 @@ public class Lottos {
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
+
+    public void calculateTotalRank(Lotto winnerLotto) {
+        for (Lotto lotto : lottos) {
+            lotto.compareToMatchNumberCount(winnerLotto);
+        }
+    }
 }

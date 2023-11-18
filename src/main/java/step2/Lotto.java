@@ -35,6 +35,17 @@ public class Lotto {
         }
     }
 
+    public Long compareToMatchNumberCount(Lotto other) {
+        return this.lottoNumbers.stream()
+//                .filter(other.lottoNumbers::contains)
+                .filter(other::containsLottoNumber) //위의 코드는 lottoNumbers를 꺼내게 되는 상황.
+                .count();
+    }
+
+    private boolean containsLottoNumber(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
