@@ -9,20 +9,25 @@ import static java.util.Collections.sort;
 public class Lotto {
 
     private static final int START_LOTTO_NUMBER = 1;
-    private static final int END_LOTTO_NUMBER = 46;
-    private final List<Integer> list = new ArrayList<>();
+    private static final int END_LOTTO_NUMBER = 45;
+    private final List<Integer> lottoNumber = new ArrayList<>();
 
     public List<Integer> createNumber() {
-        generateLottoNumber();
-        shuffle(list);
-        sort(list);
+        List<Integer> values = generateLottoNumber();
+        shuffle(values);
 
-        return list;
+        lottoNumber.addAll(values.subList(0, 6));
+        sort(lottoNumber);
+
+        return lottoNumber;
     }
 
-    private void generateLottoNumber() {
-        for (int i = START_LOTTO_NUMBER; i < END_LOTTO_NUMBER; i++) {
-            list.add(i);
+    private List<Integer> generateLottoNumber() {
+        List<Integer> values = new ArrayList<>();
+        for (int i = START_LOTTO_NUMBER; i <= END_LOTTO_NUMBER; i++) {
+            values.add(i);
         }
+
+        return values;
     }
 }
