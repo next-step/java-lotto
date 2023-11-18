@@ -24,12 +24,9 @@ public class Lotto {
     }
 
     public int getLottoWinner(List<Integer> winNumbers) {
-        int totalCount = 0;
-        for (int winNumber : winNumbers) {
-            if (this.numbers.contains(winNumber)) totalCount++;
-        }
-
-        return totalCount;
+        return (int) winNumbers.stream()
+                .filter(this.numbers::contains)
+                .count();
     }
 
     @Override
