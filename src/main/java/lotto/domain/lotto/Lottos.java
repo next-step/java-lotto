@@ -7,6 +7,8 @@ import lotto.dto.Summary;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -14,39 +16,43 @@ public class Lottos {
 
     private static final String PURCHASE_ERROR_MESSAGE = String.format("로또를 구매할 금액이 부족합니다. 로또 한장의 가격은 %s원 입니다.", PRICE_PER_TICKET);
 
-
     private final List<Lotto> lottos;
-    private final long purchasePrice;
 
-    public Lottos(List<Lotto> lottos, long purchasePrice) {
+    private Lottos(List<Lotto> lottos) {
         this.lottos = new ArrayList<>(lottos);
-        this.purchasePrice = purchasePrice;
     }
 
-    public static Lottos of(int purchasePrice, GenerateStrategy strategy) {
-        int lottoCount = lottoCount(purchasePrice);
+    public static Lottos of(long purchasePrice, GenerateStrategy strategy) {
+        long lottoCount = lottoCount(purchasePrice);
 
-        List<Lotto> lottoList = new ArrayList<>();
-        for (int index = 0; index < lottoCount; index++) {
-            lottoList.add(Lotto.of(strategy.generate()));
-        }
+        List<Lotto> lottoList = Stream.generate(() -> Lotto.of(strategy.generate()))
+                .limit(lottoCount)
+                .collect(Collectors.toList());
 
-        return new Lottos(lottoList, purchasePrice);
+        return new Lottos(lottoList);
     }
 
-    private static int lottoCount(int purchasePrice) {
-        int lottoCount = purchasePrice / PRICE_PER_TICKET;
-        validation(lottoCount);
+    private static long lottoCount(long purchasePrice) {
+        long lottoCount = purchasePrice / PRICE_PER_TICKET;
+        validateCount(lottoCount);
         return lottoCount;
     }
 
-    private static void validation(int lottoCount) {
+    private static void validateCount(long lottoCount) {
         if (noPurchase(lottoCount)) {
             throw new IllegalArgumentException(PURCHASE_ERROR_MESSAGE);
         }
     }
 
-    private static boolean noPurchase(int lottoCount) {
+    public static Lottos of(List<List<Integer>> lottos) {
+        List<Lotto> lottoList = lottos.stream()
+                .map(Lotto::of)
+                .collect(Collectors.toList());
+
+        return new Lottos(lottoList);
+    }
+
+    private static boolean noPurchase(long lottoCount) {
         return lottoCount == 0;
     }
 
@@ -64,7 +70,11 @@ public class Lottos {
     }
 
     public Summary winningResult(List<Winning> winnings) {
-        return new Summary(winnings, purchasePrice);
+        return new Summary(winnings, purchasePrice());
+    }
+
+    public long purchasePrice() {
+        return lottos.size() * PRICE_PER_TICKET;
     }
 
     public int size() {
