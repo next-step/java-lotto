@@ -64,11 +64,11 @@ public class Expression {
         return new Binomial(List.of(leftNumber, operator, rightNumber));
     }
 
-    public boolean isMonomial() {
+    public boolean isNotMonomial() {
         if (this.tokens.size() == 1) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public void addToFront(int number) {

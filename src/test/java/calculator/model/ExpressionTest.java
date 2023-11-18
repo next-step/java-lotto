@@ -20,9 +20,9 @@ public class ExpressionTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"1, true", "1 + 2, false"})
+    @CsvSource({"1, false", "1 + 2, true"})
     public void 숫자_하나(String input, boolean expected) {
-        Assertions.assertThat(new Expression(input).isMonomial())
+        Assertions.assertThat(new Expression(input).isNotMonomial())
                 .isEqualTo(expected);
     }
 

@@ -3,7 +3,7 @@ package calculator.model;
 public class Calculator {
 
     public static int run(Expression expression) {
-        while (!expression.isMonomial()) {
+        while (expression.isNotMonomial()) {
             expression = calculateOnce(expression);
         }
         return expression.getResult();
