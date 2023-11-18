@@ -5,10 +5,10 @@ import java.util.List;
 
 public class LottoMachine {
 
-    private final LottoGameNumberGenerator gameNumberGenerator;
+    private LottoGameNumberGenerator lottoGameNumberGenerator;
 
-    public LottoMachine(LottoGameNumberGenerator gameNumberGenerator) {
-        this.gameNumberGenerator = gameNumberGenerator;
+    public LottoMachine(LottoGameNumberGenerator lottoGameNumberGenerator) {
+        this.lottoGameNumberGenerator = lottoGameNumberGenerator;
     }
 
     public Lottos buyLottos(Money money) {
@@ -29,6 +29,10 @@ public class LottoMachine {
     }
 
     private Lotto buyLotto() {
-        return Lotto.of(gameNumberGenerator.gameNumbers());
+        return Lotto.of(lottoGameNumberGenerator.gameNumbers());
+    }
+
+    public void changeLottoGameNumberGenerator(LottoGameNumberGenerator lottoGameNumberGenerator) {
+        this.lottoGameNumberGenerator = lottoGameNumberGenerator;
     }
 }

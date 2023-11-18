@@ -15,4 +15,13 @@ public class Money {
     public int lottoCount(int lottoPrice) {
         return value / lottoPrice;
     }
+
+    public Money minus(Money money) {
+        int minusValue = value - money.value;
+        if (minusValue < 0) {
+            throw new IllegalArgumentException("Money는 음수일 수 없습니다.");
+        }
+
+        return new Money(minusValue);
+    }
 }
