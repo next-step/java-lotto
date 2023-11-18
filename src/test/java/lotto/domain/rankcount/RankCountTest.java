@@ -15,7 +15,7 @@ class RankCountTest {
         RankCount rankCount = new RankCount(LotteryRank.FIRST, 3);
 
         // when
-        boolean result = rankCount.isSameRank(LotteryRank.SECOND);
+        boolean result = rankCount.isSameRank(LotteryRank.THIRD);
 
         // then
         assertThat(result).isFalse();

@@ -34,9 +34,9 @@ class LottoGameTest {
         // then
         assertAll(
             () -> assertEquals(1, rankCountGroup.findWinningCountBy(FIRST)),
-            () -> assertEquals(1, rankCountGroup.findWinningCountBy(SECOND)),
             () -> assertEquals(1, rankCountGroup.findWinningCountBy(THIRD)),
-            () -> assertEquals(0, rankCountGroup.findWinningCountBy(FOURTH))
+            () -> assertEquals(1, rankCountGroup.findWinningCountBy(FOURTH)),
+            () -> assertEquals(0, rankCountGroup.findWinningCountBy(FIFTH))
         );
     }
 
