@@ -7,7 +7,8 @@ public enum Rank {
     SECOND(5, new Amount(30_000_000)),
     THIRD(5, new Amount(1_500_000)),
     FOURTH(4, new Amount(50_000)),
-    FIFTH(3, new Amount(5_000));
+    FIFTH(3, new Amount(5_000)),
+    DEFAULT(0, new Amount(0));
 
     public static final String INVALID_COUNT = "올바른 당첨수가 아닙니다.";
     private int count;
@@ -18,11 +19,6 @@ public enum Rank {
         this.price = price;
     }
 
-    static boolean isRank(final int rightNumber) {
-        return Arrays.stream(values())
-                .anyMatch(v -> v.count == rightNumber);
-    }
-
     static Rank rank(final int rightNumber, boolean bonusMatch) {
         if (SECOND.isMatchCount(rightNumber)) {
             return rankSecondAndThird(bonusMatch);
@@ -30,7 +26,7 @@ public enum Rank {
 
         return Arrays.stream(values()).filter(rank -> rank.isMatchCount(rightNumber))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(INVALID_COUNT));
+                .orElse(DEFAULT);
     }
 
     private static Rank rankSecondAndThird(final boolean bonusMathch) {
