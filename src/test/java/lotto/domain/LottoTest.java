@@ -68,6 +68,6 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(numbers);
 
-        assertThat(lotto.isContain(new LottoNumber(bonusNumber))).isEqualTo(expected);
+        assertThat(lotto.isContains(new LottoNumber(bonusNumber))).isEqualTo(expected);
     }
 }

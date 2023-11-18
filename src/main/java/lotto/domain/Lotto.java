@@ -25,7 +25,7 @@ public class Lotto {
                 .count();
     }
 
-    public boolean isContain(LottoNumber bonusNumber) {
+    public boolean isContains(LottoNumber bonusNumber) {
         return this.lottoNumbers.contains(bonusNumber);
     }
 

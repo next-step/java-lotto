@@ -1,22 +1,19 @@
 package lotto.view;
 
+import lotto.domain.LottoMachine;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class PrintView {
 
-    public static void printLottoTickets(Lottos lottos) {
-        System.out.println(lottos.getTotalTicketCount() + "개를 구매했습니다.");
-
-        lottos.getLottos().forEach(System.out::println);
+    public static void printLottoTickets(LottoMachine lottoMachine, int manaulLottoCount) {
+        System.out.println("수동으로 " + manaulLottoCount + "장, 자동으로 " + (lottoMachine.countTotalLotto() - manaulLottoCount) + "장을 구매했습니다.");
+        lottoMachine.getLottos().forEach(System.out::println);
     }
 
     public static void printStatistics(Map<Rank, Long> winningRanks) {
@@ -30,7 +27,7 @@ public class PrintView {
                     long count = winningRanks.getOrDefault(rank, 0L);
                     String printString = rank.getMatchCount() + "개 일치 (" + rank.getWinningPrice() + "원) - " + count;
 
-                    if (rank.isBonus()) {
+                    if (rank.isBonusRank()) {
                         printString = rank.getMatchCount() + "개 일치, 보너스 볼 일치(" + rank.getWinningPrice() + "원) - " + count;
                     }
                     System.out.println(printString);

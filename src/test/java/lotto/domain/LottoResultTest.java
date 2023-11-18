@@ -20,9 +20,9 @@ class LottoResultTest {
         Lotto winnigLotto = new Lotto((Arrays.asList(1, 2, 3, 10, 11, 12)));
         LottoNumber lottoNumber = new LottoNumber(7);
 
-        this.lottoResult = new LottoResult(new WinningLotto(winnigLotto, lottoNumber), new Lottos(lottos));
+        this.lottoResult = new LottoResult(new WinningLotto(winnigLotto, lottoNumber));
 
-        Map<Rank, Long> winningRanks = this.lottoResult.findWinningRankCont();
+        Map<Rank, Long> winningRanks = this.lottoResult.findWinningRankCont(lottos);
 
         assertThat(winningRanks).containsEntry(Rank.FIFTH, 1L);
     }
