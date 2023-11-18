@@ -17,7 +17,7 @@ class WinningNumberTest {
         WinningNumber winningNumber = new WinningNumber(Set.of(1, 5, 12, 21, 32, 43), 45);
 
         // when
-        boolean result = winningNumber.isBonus(lotto);
+        boolean result = winningNumber.containsBonus(lotto);
 
         // then
         assertThat(result).isTrue();
@@ -31,7 +31,7 @@ class WinningNumberTest {
         WinningNumber winningNumber = new WinningNumber(Set.of(1, 5, 12, 21, 32, 43), 45);
 
         // when
-        boolean result = winningNumber.isSecond(lotto);
+        boolean result = winningNumber.containsNotBonus(lotto);
 
         // then
         assertThat(result).isTrue();

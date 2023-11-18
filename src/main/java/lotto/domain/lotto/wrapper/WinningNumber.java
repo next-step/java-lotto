@@ -17,16 +17,20 @@ public class WinningNumber {
         this.bonusNumber = bonusNumber;
     }
 
-    public boolean isBonus(LottoNumbers lotto) {
+    public boolean containsBonus(LottoNumbers lotto) {
         return lotto.contains(bonusNumber);
     }
 
-    public boolean isSecond(LottoNumbers lotto) {
+    public boolean containsNotBonus(LottoNumbers lotto) {
         return !lotto.contains(bonusNumber);
 
     }
 
     public boolean contains(LottoNumber lottoNumber) {
         return winningNumbers.contains(lottoNumber);
+    }
+
+    public int countMatchingNumbers(LottoNumbers lottoNumbers) {
+        return winningNumbers.countMatchingNumbers(lottoNumbers);
     }
 }
