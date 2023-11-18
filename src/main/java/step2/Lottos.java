@@ -25,4 +25,11 @@ public class Lottos {
         }
         return lottoRanks;
     }
+
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+    public int getPurchaseLottoSize() {
+        return lottos.size();
+    }
 }
