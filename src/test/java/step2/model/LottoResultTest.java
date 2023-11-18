@@ -1,8 +1,11 @@
-package step2;
+package step2.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
+import step2.model.LottoRank;
+import step2.model.LottoResult;
+import step2.model.Money;
 
 public class LottoResultTest {
 

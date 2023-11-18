@@ -1,10 +1,13 @@
-package step2;
+package step2.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import step2.model.LottoGenerator;
+import step2.model.Lotto;
+import step2.model.Money;
 
 public class LottoGeneratorTest {
 
