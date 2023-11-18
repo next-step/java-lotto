@@ -13,10 +13,15 @@ class WinnerNumbersTest {
     @Test
     @DisplayName("당첨 번호 중 해당 번호가 있는지 확인")
     void test1() throws Exception {
-        Set<Integer> numbers = new HashSet<>(Set.of(1, 2, 3, 4, 5, 6));
-        WinnerNumbers winnerNumbers = new WinnerNumbers(numbers);
-        assertThat(winnerNumbers.has(3)).isTrue();
-        assertThat(winnerNumbers.has(7)).isFalse();
+        WinnerNumbers winnerNumbers = new WinnerNumbers(Set.of(
+                new PositiveNumber(1),
+                new PositiveNumber(2),
+                new PositiveNumber(3),
+                new PositiveNumber(4),
+                new PositiveNumber(5),
+                new PositiveNumber(6)));
+        assertThat(winnerNumbers.has(new PositiveNumber(3))).isTrue();
+        assertThat(winnerNumbers.has(new PositiveNumber(7))).isFalse();
     }
 
 }

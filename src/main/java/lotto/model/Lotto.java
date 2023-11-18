@@ -1,6 +1,6 @@
 package lotto.model;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Lotto {
@@ -12,21 +12,19 @@ public class Lotto {
     }
 
     public Lotto(Set<Integer> numbers) {
-        this.numbers = new LottoNumbers(numbers);
+        Set<PositiveNumber> positiveNumbers = new HashSet<>();
+        for (int number : numbers) {
+            positiveNumbers.add(new PositiveNumber(number));
+        }
+        this.numbers = new LottoNumbers(positiveNumbers);
     }
 
-    public Set<Integer> numbers() {
+    public Set<PositiveNumber> numbers() {
         return this.numbers.lottoNumbers();
     }
 
-    public int match(WinnerNumbers winnerNumbers, int correctCount) {
-        int result = (int) numbers.lottoNumbers().stream()
-                .filter(winnerNumbers::has)
-                .count();
-        if (result == correctCount) {
-            return 1;
-        }
-        return 0;
+    public boolean isMatch(WinnerNumbers winnerNumbers, int correctCount) {
+        return numbers.matchCount(winnerNumbers) == correctCount;
     }
 
 }

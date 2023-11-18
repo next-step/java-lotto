@@ -16,7 +16,13 @@ class LottosTest {
 
     @BeforeEach
     void setUp() {
-        winnerNumbers = new WinnerNumbers(Set.of(1, 2, 3, 4, 5, 6));
+        winnerNumbers = new WinnerNumbers(Set.of(
+                new PositiveNumber(1),
+                new PositiveNumber(2),
+                new PositiveNumber(3),
+                new PositiveNumber(4),
+                new PositiveNumber(5),
+                new PositiveNumber(6)));
         lottoList = List.of(
                 new Lotto(Set.of(1, 3, 4, 6, 9, 11)),
                 new Lotto(Set.of(1, 2, 3, 4, 9, 11))
@@ -42,5 +48,13 @@ class LottosTest {
     @DisplayName("로또 갯수를 리턴한다.")
     void test3() throws Exception {
         assertThat(lottos.lottoCount()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("로또번호는 6개를 생성한다.")
+    void test4() throws Exception {
+        LottoFactory lottoFactory = new LottoFactory(1000);
+        Lottos lottos = lottoFactory.generateLottos();
+        assertThat(lottos.lottoList()).size().isEqualTo(6);
     }
 }

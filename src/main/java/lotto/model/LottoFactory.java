@@ -2,21 +2,22 @@ package lotto.model;
 
 import java.util.*;
 
-public class LottoFactory {
-    private static final int LOTTO_PRICE = 1000;
-    public static final int MAX_LOTTO_NUMBER = 45;
-    public static final int MIN_LOTTO_NUMBER = 1;
-    public static final int MAX_LOTTO_SIZE = 6;
-    private final int purchaseMoney;
+import static lotto.model.LottoNumbers.*;
+import static lotto.model.Lottos.LOTTO_PRICE;
+import static lotto.model.PositiveNumber.LOTTO_MAX_RANGE;
+import static lotto.model.PositiveNumber.LOTTO_MIN_RANGE;
 
-    public LottoFactory(int purchaseMoney) {
+public class LottoFactory {
+    private final long purchaseMoney;
+
+    public LottoFactory(long purchaseMoney) {
         checkMoneyOverThousand(purchaseMoney);
         this.purchaseMoney = purchaseMoney;
     }
 
-    private void checkMoneyOverThousand(int purchaseMoney) {
+    private void checkMoneyOverThousand(long purchaseMoney) {
         if (purchaseMoney < LOTTO_PRICE) {
-            throw new IllegalArgumentException("구입 금액은 1000원 이상이어야 합니다.");
+            throw new IllegalArgumentException("구입 금액은 1000원 이상이어야 합니다. 현재 "+purchaseMoney+"원을 입력했습니다.");
         }
     }
 
@@ -28,19 +29,19 @@ public class LottoFactory {
         return new Lottos(lottos);
     }
 
-    public LottoNumbers generateRandomSixNumber() {
-        Set<Integer> numbers = new HashSet<>();
-        while (numbers.size() != MAX_LOTTO_SIZE) {
-            numbers.add(generateRandomNumber());
+    private LottoNumbers generateRandomSixNumber() {
+        Set<PositiveNumber> numbers = new HashSet<>();
+        while (numbers.size() != LOTTO_MAX_COUNT) {
+            numbers.add(new PositiveNumber(generateRandomNumber()));
         }
         return new LottoNumbers(numbers);
     }
 
-    int generateRandomNumber() {
-        return (int) (Math.random() * MAX_LOTTO_NUMBER + MIN_LOTTO_NUMBER);
+    private int generateRandomNumber() {
+        return (int) (Math.random() * LOTTO_MAX_RANGE + LOTTO_MIN_RANGE);
     }
 
     public int lottoCount() {
-        return this.purchaseMoney / LOTTO_PRICE;
+        return (int) (this.purchaseMoney / LOTTO_PRICE);
     }
 }

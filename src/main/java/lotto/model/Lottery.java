@@ -16,7 +16,8 @@ public class Lottery {
     public long depositTotalMoney(){
         long totalMoney = 0;
         for (int i = MIN_CORRECT_COUNT; i <= MAX_CORRECT_COUNT; i++) {
-            totalMoney += Dividend.findWinnerMoney(Dividend.getDividend(i), checkForWin(i));
+            totalMoney += Dividend.getDividend(i)
+                    .findWinnerMoney(checkForWin(i));
         }
         return totalMoney;
     }

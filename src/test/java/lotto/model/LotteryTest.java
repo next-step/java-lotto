@@ -18,7 +18,13 @@ class LotteryTest {
 
     @BeforeEach
     void setUp() {
-        winnerNumbers = new WinnerNumbers(Set.of(1, 2, 3, 4, 5, 6));
+        winnerNumbers = new WinnerNumbers(Set.of(
+                new PositiveNumber(1),
+                new PositiveNumber(2),
+                new PositiveNumber(3),
+                new PositiveNumber(4),
+                new PositiveNumber(5),
+                new PositiveNumber(6)));
         lottos = new Lottos(List.of(
                 new Lotto(Set.of(1, 3, 5, 7, 9, 11)),
                 new Lotto(Set.of(1, 2, 3, 4, 9, 11))

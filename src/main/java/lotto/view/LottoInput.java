@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.model.LottoNumbers;
+import lotto.model.PositiveNumber;
 import lotto.model.WinnerNumbers;
 
 import java.util.Arrays;
@@ -10,9 +11,9 @@ import java.util.stream.Collectors;
 public class LottoInput {
     static Scanner scanner = new Scanner(System.in);
 
-    public int getInput() {
+    public long getInput() {
         System.out.println("구입금액을 입력하세요.");
-        return scanner.nextInt();
+        return scanner.nextLong();
     }
 
     public WinnerNumbers getWinningNumber() {
@@ -21,6 +22,7 @@ public class LottoInput {
         LottoNumbers numbers = new LottoNumbers(
                 Arrays.stream(scanner.nextLine().split(", "))
                         .map(Integer::parseInt)
+                        .map(PositiveNumber::new)
                         .collect(Collectors.toSet()));
         return new WinnerNumbers(numbers);
     }

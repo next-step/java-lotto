@@ -17,8 +17,8 @@ public enum Dividend {
         this.dividendAmount = dividendAmount;
     }
 
-    public static long findWinnerMoney(Dividend dividend, int winCount) {
-        return dividend.dividendAmount() * winCount;
+    public long findWinnerMoney(int winCount) {
+        return this.dividendAmount() * winCount;
     }
 
     public static Dividend getDividend(int correctCount) {
