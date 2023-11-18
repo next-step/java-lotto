@@ -19,7 +19,7 @@ public class LottoWinnerTest {
     @DisplayName("당첨번호와 일치하는 숫자값에 해당하는 가격을 가져온다.")
     void getTotalPriceTest(String winnerNumber, int expectedPrice) {
         LottoWinner lottoWinner = new LottoWinner(List.of(new Lotto(List.of(18,1,24,25,20,21))), winnerNumber);
-        Map<Integer, Long> winnerScore = lottoWinner.getWinnerNumberMatchCount();
+        lottoWinner.getWinnerNumberMatchCount();
         int totalPrice = lottoWinner.getTotalPrice();
 
         assertThat(totalPrice).isEqualTo(expectedPrice);
