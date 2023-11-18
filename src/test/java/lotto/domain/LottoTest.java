@@ -11,6 +11,6 @@ class LottoTest {
     @Test
     void 당첨정보_리턴() {
         Lotto lotto = new Lotto("5, 2,21,45, 34,30");
-        assertThat(lotto.winningInfo("1,2,3,45,5,6")).isEqualTo(new WinningInfoDTO(3, new WinningAmount(5000)));
+        assertThat(lotto.winningInfo("1,2,3,45,5,6")).isEqualTo(new WinningInfoDTO(3, new Amount(5000)));
     }
 }

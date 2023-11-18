@@ -1,16 +1,16 @@
 package lotto.dto;
 
-import lotto.domain.WinningAmount;
+import lotto.domain.Amount;
 
 import java.util.Objects;
 
 public class WinningInfoDTO {
     private int correctCount;
-    private WinningAmount winningAmount;
+    private Amount amount;
 
-    public WinningInfoDTO(int correctCount, WinningAmount winningAmount) {
+    public WinningInfoDTO(int correctCount, Amount amount) {
         this.correctCount = correctCount;
-        this.winningAmount = winningAmount;
+        this.amount = amount;
     }
 
     public int getCorrectCount() {
@@ -18,7 +18,7 @@ public class WinningInfoDTO {
     }
 
     public int getWinningAmount() {
-        return winningAmount.amount();
+        return amount.amount();
     }
 
     @Override
@@ -26,11 +26,11 @@ public class WinningInfoDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinningInfoDTO that = (WinningInfoDTO) o;
-        return correctCount == that.correctCount && Objects.equals(winningAmount, that.winningAmount);
+        return correctCount == that.correctCount && Objects.equals(amount, that.amount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(correctCount, winningAmount);
+        return Objects.hash(correctCount, amount);
     }
 }

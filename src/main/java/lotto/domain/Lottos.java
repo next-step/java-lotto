@@ -25,18 +25,18 @@ public class Lottos {
     }
 
     public int totalWinningAmount(String winningNumber) {
-        WinningAmount winningAmount = new WinningAmount();
+        Amount amount = new Amount();
         for (Lotto lotto : this.lottos) {
-            winningAmount.add(lotto.winningInfo(winningNumber).getWinningAmount());
+            amount.add(lotto.winningInfo(winningNumber).getWinningAmount());
         }
-        return winningAmount.amount();
+        return amount.amount();
     }
 
     public BigDecimal rateOfReturn(String winningNumber) {
-        BigDecimal purchaseAmount = new BigDecimal(this.lottos.size() * Lotto.LOTTO_PRICE);
-        BigDecimal winningAmount = new BigDecimal(totalWinningAmount(winningNumber));
+        Amount purchaseAmount = new Amount(this.lottos.size() * Lotto.LOTTO_PRICE);
+        Amount winningAmount = new Amount(totalWinningAmount(winningNumber));
 
-        return winningAmount.divide(purchaseAmount, 2, RoundingMode.HALF_UP);
+        return winningAmount.divide(purchaseAmount.amount(), 2);
     }
 
     public List<Lotto> getLottos() {
