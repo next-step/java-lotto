@@ -5,14 +5,13 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoTest {
 
     @Test
     void 로또는_6_개의_숫자를_가진다() {
-        Lotto lotto = new Lotto();
-        lotto.makeNumbers();
+        Lotto lotto = new Lotto(List.of(9, 8, 2, 1, 3, 10));
         assertThat(lotto.size()).isEqualTo(6);
     }
 

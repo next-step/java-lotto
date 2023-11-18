@@ -13,7 +13,6 @@ public class LottoGame {
         int gameCount = getGameCount(price);
         while(countLotto() < gameCount) {
             Lotto lotto = new Lotto();
-            lotto.makeNumbers();
             lottos.add(lotto);
         }
     }

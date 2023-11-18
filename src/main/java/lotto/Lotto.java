@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lotto {
 
@@ -36,11 +38,10 @@ public class Lotto {
     }
 
     public void makeNumbers() {
-        this.numbers = new ArrayList<>();
+        List<Integer> list = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+        Collections.shuffle(list);
+        mapLottoNumbers(list.subList(0, 6));
         sortNumbers();
-//        for (int i = 0; i <6; i++) {
-//            numbers.add(i);
-//        }
     }
 
     public int countMatchingWinningLotto(Lotto lotto) {
