@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public enum Rank {
 
@@ -8,7 +9,7 @@ public enum Rank {
     SECOND(5, 1500000),
     THIRD(4, 50000),
     FORTH(3, 5000),
-    FAIL(0, 0);;
+    FAIL(0, 0);
 
     private final Integer matchingCount;
     private final Integer rewardPrice;
@@ -16,6 +17,13 @@ public enum Rank {
     Rank(Integer matchingCount, Integer rewardPrice) {
         this.matchingCount = matchingCount;
         this.rewardPrice = rewardPrice;
+    }
+
+    public static Rank[] winningRanks() {
+        return Arrays.stream(Rank.values())
+                .filter(it -> it.matchingCount > 0)
+                .sorted(Comparator.comparingInt(Rank::matchingCount))
+                .toArray(Rank[]::new);
     }
 
     public static Rank convertRanking(int count) {
