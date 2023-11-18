@@ -20,4 +20,8 @@ public class LottoStatics {
     public Integer rewardWinningLotto(int count) {
         return winningLottos.rewardWinningLotto(count);
     }
+
+    public Integer rewardTotalWinningLottos() {
+        return winningLottos.totalRewardWinningLottos();
+    }
 }

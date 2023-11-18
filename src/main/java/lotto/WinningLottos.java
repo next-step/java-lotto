@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class WinningLottos {
 
-    private Map<Integer, Integer> winningLottos = new HashMap<>();
-
+    private Map<Rank, Integer> winningLottos = new HashMap<>();
+    private Integer totalRewardPrice = 0;
 
     public Integer countLottoByWinningNumber(int count) {
         return winningLottos.getOrDefault(Rank.convertRanking(count), 0);
@@ -23,6 +23,13 @@ public class WinningLottos {
 
     private Integer rewardWinningLotto(Rank rank) {
         return this.countLottoByWinningNumber(rank.matchingCount()) * rank.rewardPrice();
+    }
+
+    public Integer totalRewardWinningLottos() {
+        for (Rank rank : winningLottos.keySet()) {
+            totalRewardPrice += rewardWinningLotto(rank);
+        }
+        return totalRewardPrice;
     }
 
 }
