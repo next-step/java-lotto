@@ -3,9 +3,9 @@ package step2.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import static step2.model.Lotto.EACH_LOTTO_PRICE;
-
 public class LottoMake {
+
+    public static final int EACH_LOTTO_PRICE = 1000;
 
     private final int lottoPayPrice;
 

@@ -1,11 +1,9 @@
 package step2.model;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final int EACH_LOTTO_PRICE = 1000;
     private static final int MAX_LOTTO_SIZE = 6;
     private final List<Integer> numbers;
 

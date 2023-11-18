@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import static step2.enumeration.LottoRank.ZERO;
-import static step2.model.Lotto.EACH_LOTTO_PRICE;
+import static step2.model.LottoMake.EACH_LOTTO_PRICE;
 
 public class OutputView {
 
