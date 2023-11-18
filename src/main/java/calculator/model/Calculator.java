@@ -1,5 +1,7 @@
 package calculator.model;
 
+import java.util.List;
+
 public class Calculator {
 
     public static int run(Expression expression) {
@@ -9,10 +11,11 @@ public class Calculator {
         return expression.getResult();
     }
 
-    private static Expression calculateOnce(Expression exp) {
-        int result = calculateBinomial(exp.popBinomial());
-        exp.addToFront(result);
-        return exp;
+    private static Expression calculateOnce(Expression expression) {
+        int result = calculateBinomial(expression.popBinomial());
+        List<String> tokens = expression.tokens();
+        tokens.add(0, String.valueOf(result));
+        return new Expression(tokens);
     }
 
     private static int calculateBinomial(Binomial bin) {

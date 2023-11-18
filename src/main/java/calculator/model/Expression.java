@@ -23,6 +23,13 @@ public class Expression {
         this.tokens = split(expression);
     }
 
+    public Expression(List<String> tokens) {
+        // validate
+        Expression.validate(String.join(" ", tokens));
+
+        this.tokens = tokens;
+    }
+
     public static void validate(String expression) {
         if (expression == null || expression.isBlank()) {
             throw new IllegalArgumentException(ERR_EMPTY_EXPRESSION);
@@ -76,11 +83,11 @@ public class Expression {
         return true;
     }
 
-    public void addToFront(int number) {
-        this.tokens.add(0, String.valueOf(number));
-    }
-
     public int getResult() {
         return Integer.parseInt(this.tokens.get(0));
+    }
+
+    public List<String> tokens() {
+        return this.tokens;
     }
 }
