@@ -1,9 +1,14 @@
 package lotto.domain;
 
+import lotto.exception.NotNumberRangeException;
+import lotto.strategy.TestLottoGenerator;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -11,6 +16,14 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoWinNumbersTest {
+
+    @Test
+    @DisplayName("실패 - 당첨 번호의 숫자가 1 ~ 45범위가 아니면 당첨 번호는 생성되지 않는다. ")
+    void fail_not_range_win_lotto_number() {
+        Assertions.assertThatThrownBy(() -> new LottoWinNumbers(List.of(0, 2, 3, 4, 5, 46)))
+                .isInstanceOf(NotNumberRangeException.class)
+                .hasMessage("로또 숫자는 1부터 45까지 입니다.");
+    }
 
     @ParameterizedTest
     @MethodSource("provideLottoNumbersAndMatchCount")

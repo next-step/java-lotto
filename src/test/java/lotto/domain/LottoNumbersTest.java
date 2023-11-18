@@ -18,7 +18,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoNumbersTest {
 
     @Test
-    @ValueSource(ints = {0, 46})
     @DisplayName("실패 - 로또의 숫자가 1 ~ 45범위가 아니면 로또번호는 생성되지 않는다. ")
     void fail_not_range_lotto_number() {
         TestLottoGenerator testLottoGenerator = new TestLottoGenerator(List.of(0, 2, 3, 4, 5, 46));
