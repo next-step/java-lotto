@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.WinningEnum;
+import lotto.domain.Winning;
 
 import java.math.BigDecimal;
 
@@ -25,7 +25,7 @@ public class ResultView {
     }
 
     public static void winningStatics(int correctCount, int winningCount) {
-        int winningAmount = WinningEnum.winningAmount(correctCount);
+        int winningAmount = Winning.winningAmount(correctCount);
         System.out.println(correctCount + "개 일치 (" + winningAmount + "원) - " + winningCount + "개");
     }
 

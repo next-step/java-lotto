@@ -5,14 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class WinningEnumTest {
+class WinningTest {
     @DisplayName("당첨개수에 해당하는 당첨 금액을 리턴")
     @Test
     void 당첨_금액() {
         int correctCount = 3;
         int expectedWinningAmount = 5000;
 
-        int result = WinningEnum.winningAmount(correctCount);
+        int result = Winning.winningAmount(correctCount);
 
         assertThat(result).isEqualTo(expectedWinningAmount);
     }
@@ -22,7 +22,7 @@ class WinningEnumTest {
     void 유효하지않은_값() {
         int correctCount = 9;
 
-        int result = WinningEnum.winningAmount(correctCount);
+        int result = Winning.winningAmount(correctCount);
 
         assertThat(result).isEqualTo(0);
     }

@@ -36,7 +36,7 @@ public class Lotto {
 
     public WinningInfoDTO winningInfo(String numbers) {
         int correctCount = correctCount(numbers);
-        return new WinningInfoDTO(correctCount, new WinningAmount(WinningEnum.winningAmount(correctCount)));
+        return new WinningInfoDTO(correctCount, new WinningAmount(Winning.winningAmount(correctCount)));
     }
 
     private int correctCount(String numbers) {

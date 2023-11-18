@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-public enum WinningEnum {
+public enum Winning {
     FIRST(6, 2000000000),
     THIRD(5, 1500000),
     FOuRTH(4, 50000),
@@ -11,13 +11,13 @@ public enum WinningEnum {
     private int correctCount;
     private int winningAmount;
 
-    WinningEnum(int correctCount, int winningAmount) {
+    Winning(int correctCount, int winningAmount) {
         this.correctCount = correctCount;
         this.winningAmount = winningAmount;
     }
 
     public static int winningAmount(int correctCount) {
-        return Arrays.stream(WinningEnum.values())
+        return Arrays.stream(Winning.values())
                 .filter(value -> value.correctCount == correctCount)
                 .map(value -> value.winningAmount)
                 .findFirst()
