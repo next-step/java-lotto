@@ -2,11 +2,11 @@ package calculator.model;
 
 public class Calculator {
 
-    public static int run(Expression exp) {
-        while (!exp.isMonomial()) {
-            exp = calculateOnce(exp);
+    public static int run(Expression expression) {
+        while (!expression.isMonomial()) {
+            expression = calculateOnce(expression);
         }
-        return exp.getResult();
+        return expression.getResult();
     }
 
     private static Expression calculateOnce(Expression exp) {
