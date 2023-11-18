@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -7,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
+    private static final int MAX_TICKET_NUMBERS = 6;
     private final List<LottoNumber> ticket;
 
     public Lotto(List<Integer> anyNumbers) {
@@ -25,5 +27,12 @@ public class Lotto {
 
     public static Lotto from(List<Integer> anyNumbers) {
         return new Lotto(anyNumbers);
+    }
+
+
+    public int matchCount(Lotto lotto) {
+        List<LottoNumber> difference = new ArrayList<>(this.ticket);
+        difference.removeAll(lotto.ticket);
+        return MAX_TICKET_NUMBERS - difference.size();
     }
 }
