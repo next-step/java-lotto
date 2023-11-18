@@ -18,10 +18,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<LottoRank> calculateTotalRank(Lotto winnerLotto) {
+    public List<LottoRank> calculateTotalRank(WinningLotto winnerLotto) {
         List<LottoRank> lottoRanks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            lottoRanks.add(LottoRank.evaluateLottoRankByMatchCount(lotto.compareToMatchNumberCount(winnerLotto)));
+            lottoRanks.add(LottoRank.evaluateLottoRankByMatchCount(lotto.compareToMatchNumberCount(winnerLotto.getLotto())));
         }
         return lottoRanks;
     }
