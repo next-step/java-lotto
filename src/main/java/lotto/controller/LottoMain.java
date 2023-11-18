@@ -65,6 +65,7 @@ public class LottoMain {
 
     private static LottoResult calculateLottoResult(InputView inputView, Lottos lottos) {
         List<Integer> winningLottoNumbers = StringParser.parseToInts(inputView.inputWinningNumber());
+        InputValidator.validateNumberCount(winningLottoNumbers.size());
         BonusBall bonusBall = new BonusBall(inputView.inputBonusBall());
         return new LottoResult(lottos, new LottoWin(new LottoWinNumbers(winningLottoNumbers), bonusBall));
     }

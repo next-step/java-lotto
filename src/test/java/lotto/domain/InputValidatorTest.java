@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.exception.ExceedLottoPurchaseException;
 import lotto.exception.InsufficientPriceException;
+import lotto.exception.LottoSizeException;
 import lotto.exception.MisMatchPriceUnitException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -38,7 +39,7 @@ public class InputValidatorTest {
 
     @Test
     @DisplayName("성공 - 구입한 수동 로또 개수가 구입 금액을 초과하지 않을 경우 예외가 발생하지 않는다.")
-    void success_() {
+    void success_lotto_purchase_not_exceed_amount() {
         int manualLottoCount = 3;
         int price = 4000;
         InputValidator.validateLottoPurchaseAmount(manualLottoCount, price);
@@ -46,12 +47,26 @@ public class InputValidatorTest {
 
     @Test
     @DisplayName("실패 - 구입한 수동 로또 개수가 구입 금액을 초과할 경우 예외가 발생한다.")
-    void test() {
+    void fail_lotto_purchase_exceed_amount() {
         int manualLottoCount = 5;
         int price = 4000;
         Assertions.assertThatThrownBy(() -> InputValidator.validateLottoPurchaseAmount(manualLottoCount, price))
                 .isInstanceOf(ExceedLottoPurchaseException.class)
                 .hasMessage("구매할 수동 로또 개수에 비해 구입 금액이 부족합니다.");
+    }
+
+    @Test
+    @DisplayName("성공 - 입력한 번호 개수가 6개면 예외가 발생하지 않는다.")
+    void success_lotto_size() {
+        InputValidator.validateNumberCount(6);
+    }
+
+    @Test
+    @DisplayName("실패 - 구입한 수동 로또 개수가 구입 금액을 초과할 경우 예외가 발생한다.")
+    void fail_lotto_size() {
+        Assertions.assertThatThrownBy(() -> InputValidator.validateNumberCount(7))
+                .isInstanceOf(LottoSizeException.class)
+                .hasMessage("번호는 반드시 6개를 입력해야 합니다.");
     }
 
 }

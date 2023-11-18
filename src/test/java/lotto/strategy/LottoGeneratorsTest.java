@@ -14,8 +14,8 @@ class LottoGeneratorsTest {
     @DisplayName("성공 - LottoGenerators 객체가 생성된다.")
     void success_generate_lotto_generators() {
         List<String> stringFormatManualLottos = List.of(
-                "1,2,3,4,5,6",
-                "1,2,3,4,5,7"
+                "1, 2, 3, 4, 5, 6",
+                "1, 2, 3, 4, 5, 7"
         );
         int autoLottoCount = 3;
 
@@ -28,8 +28,8 @@ class LottoGeneratorsTest {
     @DisplayName("성공 - 로또가 생성된다.")
     void success_generate_lottos() {
         List<String> stringFormatManualLottos = List.of(
-                "1,2,3,4,5,6",
-                "1,2,3,4,5,7"
+                "1, 2, 3, 4, 5, 6",
+                "1, 2, 3, 4, 5, 7"
         );
         int autoLottoCount = 3;
 
