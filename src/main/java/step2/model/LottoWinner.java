@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 public class LottoWinner {
 
+    private static final int MINIMUM_WIN_COUNT = 3;
     private Map<Integer, Long> winnerNumberCount;
     private final List<Lotto> lottos;
     private final String winNumber;
@@ -33,7 +34,7 @@ public class LottoWinner {
         List<Integer> winNumbers = splitWinNumberString(this.winNumber);
         this.winnerNumberCount = this.lottos.stream()
                 .map(lotto -> lotto.getLottoWinner(winNumbers))
-                .filter(score -> score >= 3)
+                .filter(score -> score >= MINIMUM_WIN_COUNT)
                 .collect(Collectors.groupingBy(c -> c, Collectors.counting()));
 
         return this.winnerNumberCount;
