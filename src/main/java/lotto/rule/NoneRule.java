@@ -5,17 +5,17 @@ import lotto.WinningNumber;
 import lotto.type.WinningLevel;
 
 /**
- * 4등 규칙 판정
+ * 미당첨 규칙 판정
  */
-public class FourthRule implements WinningRule {
-    private static FourthRule instance;
+public class NoneRule implements WinningRule {
+    private static NoneRule instance;
 
-    private FourthRule() {
+    private NoneRule() {
     }
 
-    public static FourthRule getInstance() {
+    public static NoneRule getInstance() {
         if (instance == null) {
-            instance = new FourthRule();
+            instance = new NoneRule();
         }
 
         return instance;
@@ -23,6 +23,6 @@ public class FourthRule implements WinningRule {
 
     @Override
     public boolean isMatched(Lotto lotto, WinningNumber winningNumber) {
-        return lotto.howManyContain(winningNumber) == 4;
+        return lotto.howManyContain(winningNumber) < 3;
     }
 }

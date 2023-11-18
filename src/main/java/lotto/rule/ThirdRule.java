@@ -33,9 +33,4 @@ public class ThirdRule implements WinningRule {
 
         return true;
     }
-
-    @Override
-    public WinningLevel getRank() {
-        return WinningLevel.THIRD;
-    }
 }

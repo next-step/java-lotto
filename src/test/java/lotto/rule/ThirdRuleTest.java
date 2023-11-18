@@ -12,13 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ThirdRuleTest {
     @Test
-    @DisplayName("[ThirdRule.getRank] 호출 시 -> 3등 enum 반환")
-    public void getCorrectRank() {
-        assertThat(ThirdRule.getInstance().getRank())
-                .isEqualTo(WinningLevel.THIRD);
-    }
-
-    @Test
     @DisplayName("[ThirdRule.isMatched] 딱 5개 일치 and 보너스 번호 불일치 -> 조건 만족 판정")
     public void matchSuccessTest() {
         Lotto lotto = Lotto.of(List.of(1,2,3,4,5,6));

@@ -12,13 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FifthRuleTest {
     @Test
-    @DisplayName("[FifthRule.getRank] 호출 시 -> 5등 enum 반환")
-    public void getCorrectRank() {
-        assertThat(FifthRule.getInstance().getRank())
-                .isEqualTo(WinningLevel.FIFTH);
-    }
-
-    @Test
     @DisplayName("[FifthRule.isMatched] 딱 3개 일치 시 -> 조건 만족 판정")
     public void matchSuccessTest() {
         Lotto lotto = Lotto.of(List.of(1,2,3,4,5,6));

@@ -17,12 +17,4 @@ public interface WinningRule {
      * @return 판정 여부
      */
     public boolean isMatched(Lotto lotto, WinningNumber winningNumber);
-
-    /**
-     * 이 당첨 로직의 당첨 등수를 확인합니다.
-     *
-     * @return 당첨 등수
-     */
-    public WinningLevel getRank();
-
 }

@@ -25,9 +25,4 @@ public class FirstRule implements WinningRule {
     public boolean isMatched(Lotto lotto, WinningNumber winningNumber) {
         return lotto.howManyContain(winningNumber) == 6;
     }
-
-    @Override
-    public WinningLevel getRank() {
-        return WinningLevel.FIRST;
-    }
 }

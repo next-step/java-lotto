@@ -27,9 +27,4 @@ public class SecondRule implements WinningRule {
 
         return lotto.containBonusNumber(winningNumber);
     }
-
-    @Override
-    public WinningLevel getRank() {
-        return WinningLevel.SECOND;
-    }
 }

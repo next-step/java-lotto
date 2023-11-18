@@ -12,13 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FourthRuleTest {
     @Test
-    @DisplayName("[Fourth.getRank] 호출 시 -> 4등 enum 반환")
-    public void getCorrectRank() {
-        assertThat(FourthRule.getInstance().getRank())
-                .isEqualTo(WinningLevel.FOURTH);
-    }
-
-    @Test
     @DisplayName("[FourthRule.isMatched] 딱 4개 일치 시 -> 조건 만족 판정")
     public void matchSuccessTest() {
         Lotto lotto = Lotto.of(List.of(1,2,3,4,5,6));
