@@ -7,6 +7,10 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringCalculator {
+
+    public static final String REGEX = "[^+\\-*/]";
+    public static final Pattern PATTERN = Pattern.compile(REGEX);
+
     public int calculate(String text) {
         if (isNullOrBlank(text)) {
             throw new IllegalArgumentException("null 값이나 공백은 입력할 수 없습니다");
@@ -51,10 +55,7 @@ public class StringCalculator {
     }
 
     private static void validateOperator(String operator) {
-        String regex = "[^+\\-*/]";
-
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(operator);
+        Matcher matcher = PATTERN.matcher(operator);
 
         if (matcher.find()) {
             throw new IllegalArgumentException("사용할 수 없는 사칙연산 기호입니다");
