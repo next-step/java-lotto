@@ -11,14 +11,14 @@ public class Lotto {
     private final Set<GameNumber> numbers;
 
     private Lotto(Set<GameNumber> numbers) {
-        this.numbers = numbers;
-    }
-
-    public static Lotto of(Set<GameNumber> numbers) {
         if(numbers.size() != LOTTO_GAME_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또의 번호는 6자리입니다.");
         }
 
+        this.numbers = numbers;
+    }
+
+    public static Lotto of(Set<GameNumber> numbers) {
         return new Lotto(numbers);
     }
 
