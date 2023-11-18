@@ -9,6 +9,8 @@ import java.util.Map;
  * 당첨 등수와 상금간의 매핑용 테이블입니다.
  */
 public class WinningLevelToAmountTable {
+    private static WinningLevelToAmountTable instance;
+
     private final Map<WinningLevel, WinningAmount> winningAmountTable;
 
     private WinningLevelToAmountTable() {
@@ -21,7 +23,11 @@ public class WinningLevelToAmountTable {
     }
 
     private static WinningLevelToAmountTable getInstance() {
-        return new WinningLevelToAmountTable();
+        if (instance == null) {
+            instance = new WinningLevelToAmountTable();
+        }
+
+        return instance;
     }
 
     /**
