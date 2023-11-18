@@ -34,12 +34,22 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 당첨번호와 일치하는 숫자가 3개가 있다면 3을 리턴한다.")
+    @DisplayName("로또 당첨번호와 일치하는 숫자만큼 리턴한다.")
     void lottoWinnerTest() {
         Lotto lotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9)));
         List<Integer> winNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         int count = lotto.getLottoWinner(winNumbers);
         assertThat(count).isEqualTo(3);
+
+        List<Integer> winNumbersMatchOne = new ArrayList<>(Arrays.asList(1, 35, 23, 11, 12, 21));
+
+        int countOne = lotto.getLottoWinner(winNumbersMatchOne);
+        assertThat(countOne).isEqualTo(1);
+
+        List<Integer> winNumbersAllMatch = new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9));
+
+        int allMatch = lotto.getLottoWinner(winNumbersAllMatch);
+        assertThat(allMatch).isEqualTo(6);
     }
 }
