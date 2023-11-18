@@ -34,6 +34,7 @@ public class ResultView {
 
     private void printMatchingResult(RankCountGroup rankCountGroup) {
         Arrays.stream(values())
+            .filter(rank -> rank != UNRANK)
             .forEach(rank -> {
                 long winningCount = rankCountGroup.findWinningCountBy(rank);
                 printByRank(rank, winningCount);
