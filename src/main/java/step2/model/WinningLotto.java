@@ -23,7 +23,7 @@ public class WinningLotto {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public Lotto getLotto() {
-        return lotto;
+    public Integer compareToMatchNumberCount(Lotto other) {
+        return this.lotto.compareToMatchNumberCount(other);
     }
 }

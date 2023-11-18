@@ -32,7 +32,6 @@ public class Lotto {
 
     public Integer compareToMatchNumberCount(Lotto other) {
         return Math.toIntExact(this.lottoNumbers.stream()
-//                .filter(other.lottoNumbers::contains)
                 .filter(other::containsLottoNumber) //위의 코드는 lottoNumbers를 꺼내게 되는 상황.
                 .count());
     }
