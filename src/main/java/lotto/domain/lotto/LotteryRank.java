@@ -1,7 +1,10 @@
 package lotto.domain.lotto;
 
+import java.util.Arrays;
+
 public enum LotteryRank {
 
+    UNRANK(0, 0),
     FIFTH(3, 5_000L),
     FOURTH(4, 50_000L),
     THIRD(5, 1_500_000L),
@@ -16,12 +19,19 @@ public enum LotteryRank {
         this.prize = prize;
     }
 
-    public int matchingCount() {
-        return this.matchingCount;
+    public static LotteryRank findRankBy(int matchingCount, boolean bonus) {
+        if (bonus && SECOND.matchingCount == matchingCount) {
+            return SECOND;
+        }
+
+        return Arrays.stream(values())
+            .filter(val -> val.matchingCount == matchingCount)
+            .findFirst()
+            .orElse(UNRANK);
     }
 
-    public boolean isEqualCount(int matchingCount) {
-        return this.matchingCount == matchingCount;
+    public int matchingCount() {
+        return this.matchingCount;
     }
 
     public long prize() {
