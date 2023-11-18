@@ -23,7 +23,7 @@ public class FirstRuleTest {
     @DisplayName("[FirstRule.isMatched] 6개 전부 일치 시 -> 조건 만족 판정")
     public void matchSuccessTest() {
         Lotto lotto = Lotto.of(List.of(1,2,3,4,5,6));
-        WinningNumber winningNumber = WinningNumber.of(List.of(1,2,3,4,5,6));
+        WinningNumber winningNumber = WinningNumber.of(List.of(1,2,3,4,5,6), 7);
 
         assertThat(FirstRule.getInstance().isMatched(lotto, winningNumber)).isTrue();
     }
@@ -32,7 +32,7 @@ public class FirstRuleTest {
     @DisplayName("[FirstRule.isMatched] 5개만 일치 시 -> 조건 불만족 판정")
     public void matchFailTest() {
         Lotto lotto = Lotto.of(List.of(1,2,3,4,5,6));
-        WinningNumber winningNumber = WinningNumber.of(List.of(10,2,3,4,5,6));
+        WinningNumber winningNumber = WinningNumber.of(List.of(10,2,3,4,5,6), 7);
 
         assertThat(FirstRule.getInstance().isMatched(lotto, winningNumber)).isFalse();
     }

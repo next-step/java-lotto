@@ -24,4 +24,5 @@ public interface WinningRule {
      * @return 당첨 등수
      */
     public WinningLevel getRank();
+
 }

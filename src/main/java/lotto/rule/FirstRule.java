@@ -23,7 +23,7 @@ public class FirstRule implements WinningRule {
 
     @Override
     public boolean isMatched(Lotto lotto, WinningNumber winningNumber) {
-        return lotto.howManyContain(winningNumber.toList()) == 6;
+        return lotto.howManyContain(winningNumber) == 6;
     }
 
     @Override

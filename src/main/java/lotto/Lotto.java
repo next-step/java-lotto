@@ -29,27 +29,30 @@ public class Lotto {
     }
 
     /**
-     * 이 로또 용지가 주어진 번호를 가지고 있는지 확인합니다.
+     * 이 로또 용지가 주어진 당첨 번호에서 몇 개나 일치하는 번호인지 개수를 확인합니다.
+     * (보너스 번호의 일치 여부는 포함되지 않습니다.)
      *
-     * @param num 확인할 번호
-     * @return 가지고 있다면 true
+     * @param winningNumber 확인할 당첨 번호
+     * @return 로또 용지가 가지고 있는 번호 개수 (보너스 번호 일치 여부 미포함)
      */
-    boolean contains(SingleNumber num) {
-        return lottoNumbers.contains(num);
+    public int howManyContain(WinningNumber winningNumber) {
+        int containCount = 0;
+
+        for (SingleNumber num : winningNumber.getWinningNumbers()) {
+            containCount += this.lottoNumbers.contains(num) ? 1 : 0;
+        }
+
+        return containCount;
     }
 
     /**
-     * 이 로또 용지가 주어진 번호 목록 중 몇 개나 가지고 있는지 확인합니다.
+     * 이 로또 용지가 당첨 번호의 보너스 번호를 포함하는지 확인합니다.
      *
-     * @param nums 확인할 번호 목록
-     * @return 로또 용지가 가지고 있는 번호 개수
+     * @param winningNumber 확인할 당첨 번호
+     * @return 보너스 번호 일치 여부. 일치 시 true
      */
-    public int howManyContain(List<SingleNumber> nums) {
-        int containCount = 0;
-        for (SingleNumber num : nums) {
-            containCount += this.contains(num) ? 1 : 0;
-        }
-        return containCount;
+    public boolean containBonusNumber(WinningNumber winningNumber) {
+        return this.lottoNumbers.contains(winningNumber.getBonusNumber());
     }
 
     @Override

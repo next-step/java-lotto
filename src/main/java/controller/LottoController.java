@@ -2,6 +2,7 @@ package controller;
 
 import lotto.Lotto;
 import lotto.LottoGenerator;
+import lotto.rule.WinningLevelDeterminator;
 import lotto.type.WinningLevel;
 import lotto.WinningNumber;
 import util.calculator.Ratio;
@@ -35,13 +36,15 @@ public class LottoController {
 
     private void inputWinningNumberPhase() {
         List<Integer> userInputWinningNumber = Question.intListAsk("지난 주 당첨 번호를 입력해 주세요.");
-        winningNumber = WinningNumber.of(userInputWinningNumber);
+        int userInputBonusNumber = Question.intAsk("보너스 볼을 입력해 주세요.");
+
+        winningNumber = WinningNumber.of(userInputWinningNumber, userInputBonusNumber);
     }
 
     private void resultPhase() {
         WinningStatistic result = new WinningStatistic();
         for (Lotto myLotto : lottos) {
-            WinningLevel rank = winningNumber.whatRank(myLotto);
+            WinningLevel rank = WinningLevelDeterminator.whatRank(myLotto, winningNumber);
             result.occurs(rank);
         }
         Renderer.printResult(result);

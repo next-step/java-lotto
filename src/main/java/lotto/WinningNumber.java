@@ -1,93 +1,93 @@
 package lotto;
 
-import lotto.rule.*;
 import lotto.type.SingleNumber;
 import lotto.type.SixNumberComposition;
-import lotto.type.WinningLevel;
 
 import java.util.*;
 
 /**
  * 당첨 번호입니다.
- * 당첨 번호는 중복되지 않은 6개의 숫자로 이루어집니다. 추후 보너스 번호가 추가될 수 있습니다.
- *
+ * 당첨 번호는 중복되지 않은 6개의 숫자와 보너스 번호 1개로 이루어집니다.
+ * 불변 객체입니다.
  */
 public class WinningNumber {
-    public static final List<WinningRule> WINNING_RULES = List.of(
-            FirstRule.getInstance(),
-            ThirdRule.getInstance(),
-            FourthRule.getInstance(),
-            FifthRule.getInstance()
-    );
+    private final SixNumberComposition winningNumbers;
+    private final SingleNumber bonusNumber;
 
-    private SixNumberComposition numbers;
+    private WinningNumber(SixNumberComposition winningNumbers, SingleNumber bonusNumber) {
+        checkDuplication(winningNumbers, bonusNumber);
 
-    private WinningNumber() {
+        this.winningNumbers = winningNumbers;
+        this.bonusNumber = bonusNumber;
+    }
+
+    /**
+     * 보너스 번호가 이미 winningNumber에 있는지 확인합니다.
+     * 없다면 유효성 검사를 통과합니다.
+     *
+     * @param winningNumbers 당첨 번호
+     * @param bonusNumber 보너스 당첨 번호
+     */
+    private void checkDuplication(SixNumberComposition winningNumbers, SingleNumber bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 당첨 번호 " + bonusNumber + "가 당첨 번호 목록" + winningNumbers + "에 이미 있습니다.");
+        }
     }
 
     /**
      * 주어진 번호로 당첨번호를 세팅합니다.
      *
-     * @param numbers 당첨 번호
+     * @param winningNumbers 당첨 번호
+     * @param bonusNumber 보너스 당첨 번호
      *
      * @return 생성된 당첨 번호
      */
-    public static WinningNumber of(List<Integer> numbers) {
-        WinningNumber winningNumber = new WinningNumber();
-        winningNumber.numbers = SixNumberComposition.ofByInt(numbers);
-
-        return winningNumber;
+    public static WinningNumber of(List<Integer> winningNumbers, int bonusNumber) {
+        return new WinningNumber(
+                SixNumberComposition.ofByInt(winningNumbers),
+                SingleNumber.of(bonusNumber)
+        );
     }
 
-    /**
-     * 주어진 로또에 이 당첨번호를 적용했을 때 몇 등인지 계산합니다.
-     *
-     * @param lotto 로또 용지
-     *
-     * @return 이 로또의 당첨 등수
-     */
-    public WinningLevel whatRank(Lotto lotto) {
-        for (WinningRule rule : WINNING_RULES) {
-            //TODO: 이 if문을 빼버리고 for문 하나로 이를 처리할 수 있을까요??
-            if (rule.isMatched(lotto, this)) {
-                return rule.getRank();
-            }
-        }
-
-        return WinningLevel.NONE;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
         WinningNumber that = (WinningNumber) o;
 
-        return Objects.equals(numbers, that.numbers);
+        if (!Objects.equals(winningNumbers, that.winningNumbers)) {
+            return false;
+        }
+
+        return Objects.equals(bonusNumber, that.bonusNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
-    }
-
-    @Override
-    public String toString() {
-        return "WinningNumber{" +
-                "numbers=" + numbers +
-                '}';
+        int result = winningNumbers != null ? winningNumbers.hashCode() : 0;
+        result = 31 * result + (bonusNumber != null ? bonusNumber.hashCode() : 0);
+        return result;
     }
 
     /**
-     * 이 타입과 호환되지 않는 곳에서 사용하기 위하여 리스트로 변환합니다.
+     * 당첨 번호 목록을 반환합니다. 보너스 번호는 포함하지 않습니다.
+     * 같은 패키지 간 연산을 위한 default getter 메서드.
      */
-    public List<SingleNumber> toList() {
-        return List.copyOf(this.numbers.toList());
+    List<SingleNumber> getWinningNumbers() {
+        return List.copyOf(this.winningNumbers.toList());
+    }
+
+    /**
+     * 보너스 번호를 반환합니다.
+     * 같은 패키지 간 연산을 위한 default getter 메서드
+     */
+    SingleNumber getBonusNumber() {
+        return this.bonusNumber;
     }
 }

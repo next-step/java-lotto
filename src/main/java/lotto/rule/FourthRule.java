@@ -23,7 +23,7 @@ public class FourthRule implements WinningRule {
 
     @Override
     public boolean isMatched(Lotto lotto, WinningNumber winningNumber) {
-        return lotto.howManyContain(winningNumber.toList()) == 4;
+        return lotto.howManyContain(winningNumber) == 4;
     }
 
     @Override

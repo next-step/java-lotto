@@ -23,7 +23,7 @@ public class FifthRule implements WinningRule {
 
     @Override
     public boolean isMatched(Lotto lotto, WinningNumber winningNumber) {
-        return lotto.howManyContain(winningNumber.toList()) == 3;
+        return lotto.howManyContain(winningNumber) == 3;
     }
 
     @Override
