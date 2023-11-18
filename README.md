@@ -20,6 +20,9 @@
 * [x] 입력 문자열의 숫자와 사칙 연산 사이에는 반드시 빈 공백 문자열이 있다고 가정한다.
 * [x] 나눗셈의 경우 결과 값을 정수로 떨어지는 값으로 한정한다.
 * [x] 사칙연산의 계산 우선순위가 아닌 입력 값에 따라 계산 순서가 결정된다.
+* [x] 입력값이 null 이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+* [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
+  * [x] Sign 클래스 생성 후 검증
 
 #### 프로그래밍 요구사항
 * [ ] indent depth는 최대 1단계까지
