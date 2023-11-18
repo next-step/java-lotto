@@ -15,6 +15,10 @@ public class LottoTickets {
         }
     }
 
+    public LottoTickets(LottoTicket lottoTicket) {
+        tickets.add(lottoTicket);
+    }
+
     public int numberOfPurchasedTicket () {
         return tickets.size();
     }

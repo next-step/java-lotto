@@ -29,6 +29,7 @@ public class LottoPlay {
 
         OutputView.displayPrizeStatMessage();
         OutputView.displayPrizeStatus(prizeStatus);
+        OutputView.displayProfit(prizeStatus.calculateProfit(purchasedAmt));
     }
 
 }
