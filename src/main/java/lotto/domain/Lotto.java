@@ -45,11 +45,16 @@ public class Lotto {
         int count = 0;
 
         for (LottoNumber number : winningLotto.getNumbers()) {
-            if (numbers.contains(number)) {
-                count++;
-            }
+            count = plusCountIfContains(number, count);
         }
 
+        return count;
+    }
+
+    private int plusCountIfContains(LottoNumber number, int count) {
+        if (numbers.contains(number)) {
+            return count + 1;
+        }
         return count;
     }
 
