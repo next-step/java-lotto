@@ -36,9 +36,10 @@ public class LottoNumbers {
 
     @Override
     public String toString() {
-        return String.join(", ", numbers.stream()
+        String numbersString = numbers.stream()
                 .map(String::valueOf)
-                .collect(Collectors.toList()));
+                .collect(Collectors.joining(", "));
+        return "[" + numbersString + "]";
     }
 
     @Override

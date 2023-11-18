@@ -1,10 +1,13 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.strategy.LottoGenerator;
+import lotto.strategy.LottoGenerators;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
 import lotto.util.StringParser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static lotto.constant.Constant.LOTTO_PRICE;
@@ -14,11 +17,15 @@ public class LottoMain {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         int price = validatePrice(inputView);
-        int manualLottoCount = validateLottoPurchaseAmount(price, inputView);
+        int manualLottoCount = inputView.inputManualLottoCount();
+        validateLottoPurchaseAmount(manualLottoCount, price);
+
+        inputView.inputManualLottoInform();
+        List<String> stringFormatManualLottos = inputStringFormatManualLottos(manualLottoCount, inputView);
 
         OutputView outputView = new OutputView();
-        int lottoCount = price / LOTTO_PRICE;
-        Lottos lottos = generateLottosAndPrint(outputView, lottoCount);
+        int autoLottoCount = autoLottoCount(price, manualLottoCount);
+        Lottos lottos = generateLottosAndPrint(stringFormatManualLottos, outputView, manualLottoCount, autoLottoCount);
 
         LottoResult lottoResult = calculateLottoResult(inputView, lottos);
 
@@ -33,15 +40,26 @@ public class LottoMain {
         return price;
     }
 
-    private static int validateLottoPurchaseAmount(int price, InputView inputView) {
-        int manualLottoCount = inputView.inputManualLottoCount();
+    private static void validateLottoPurchaseAmount(int manualLottoCount, int price) {
         InputValidator.validateLottoPurchaseAmount(manualLottoCount, price);
-        return price;
     }
 
-    private static Lottos generateLottosAndPrint(OutputView outputView, int lottoCount) {
-        Lottos lottos = LottoFactory.generateLottos(lottoCount);
-        outputView.printLottos(lottoCount, lottos);
+    private static List<String> inputStringFormatManualLottos(int manualLottoCount, InputView inputView) {
+        List<String> stringFormatManualLottos = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            stringFormatManualLottos.add(inputView.inputManualLotto());
+        }
+        return stringFormatManualLottos;
+    }
+
+    private static int autoLottoCount(int price, int manualLottoCount) {
+        return (price / LOTTO_PRICE) - manualLottoCount;
+    }
+
+    private static Lottos generateLottosAndPrint(List<String> stringFormatManualLottos, OutputView outputView, int manualLottoCount, int autoLottoCount) {
+        LottoGenerators lottoGenerators = new LottoGenerators(stringFormatManualLottos, autoLottoCount);
+        Lottos lottos = lottoGenerators.generateLottos();
+        outputView.printLottos(manualLottoCount, autoLottoCount, lottos);
         return lottos;
     }
 

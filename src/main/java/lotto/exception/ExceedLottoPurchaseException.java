@@ -7,7 +7,7 @@ public class ExceedLottoPurchaseException extends RuntimeException {
 
     public ExceedLottoPurchaseException(int manualLottoCount, int price) {
         super(MESSAGE);
-        System.out.println("Manual Lotto Purchase Price " + (manualLottoCount * LOTTO_PRICE) + "price " + price);
+        System.out.println("Manual Lotto Purchase Price: " + (manualLottoCount * LOTTO_PRICE) + ", price: " + price);
     }
 
 }
