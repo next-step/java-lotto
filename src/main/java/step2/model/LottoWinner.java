@@ -30,7 +30,7 @@ public class LottoWinner {
         return totalPrice;
     }
 
-    public Map<Integer, Long> getWinnerScore() {
+    public Map<Integer, Long> getWinnerNumberMatchCount() {
         List<Integer> winNumbers = splitWinNumberString(this.winNumber);
         this.winnerNumberCount = this.lottos.stream()
                 .map(lotto -> lotto.getLottoWinner(winNumbers))

@@ -24,7 +24,7 @@ public class LottoAutoController {
         String lastWinNumbers = inputView.putLastWinNumbers();
         LottoWinner lottoWinner = new LottoWinner(lottos, lastWinNumbers);
 
-        Map<Integer, Long> winnerScore = lottoWinner.getWinnerScore();
+        Map<Integer, Long> winnerScore = lottoWinner.getWinnerNumberMatchCount();
         outputView.viewLottoRating(winnerScore);
 
         outputView.viewRating(lottoWinner.getRating(payPrice));
