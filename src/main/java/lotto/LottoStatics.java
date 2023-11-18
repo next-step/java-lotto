@@ -1,22 +1,19 @@
 package lotto;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class LottoStatics {
 
-    private Map<Integer, Integer> matchingRanks = new HashMap<>();
-
+    private WinningLottos winningLottos = new WinningLottos();
 
     public void classifyRankLotto(List<Lotto> lottos, Lotto winningLotto) {
         for (Lotto lotto : lottos) {
-            Integer matchingCount = winningLotto.countMatchingWinningLotto(lotto);
-            matchingRanks.put(matchingCount, matchCountRanks(matchingCount) + 1);
+            int matchingCount = winningLotto.countMatchingWinningLotto(lotto);
+            winningLottos.putWinningMatchingNumberLotto(matchingCount);
         }
     }
 
     public Integer matchCountRanks(int count) {
-        return matchingRanks.getOrDefault(count, 0);
+        return winningLottos.countLottoByWinningNumber(count);
     }
 }
