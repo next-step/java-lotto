@@ -13,7 +13,7 @@ public class LottoResultTest {
                 LottoRank.FOURTH_PRIZE, LottoRank.NO_PRIZE);
 
         double expected = (LottoRank.FIRST_PRIZE.getPrizeMoney() + LottoRank.SECOND_PRIZE.getPrizeMoney()
-                +LottoRank.FOURTH_PRIZE.getPrizeMoney() + LottoRank.NO_PRIZE.getPrizeMoney()) * 100 / 4000 ;
+                +LottoRank.FOURTH_PRIZE.getPrizeMoney() + LottoRank.NO_PRIZE.getPrizeMoney()) / 4000 ;
 
         assertThat(lottoResult.calculateProfitRate(money.determineLottoPurchaseCount()))
                 .isEqualTo(expected);
