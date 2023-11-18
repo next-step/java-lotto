@@ -9,6 +9,8 @@ import lotto.view.OutputView;
 
 import java.util.List;
 
+import static lotto.domain.lotto.Lottos.PRICE_PER_TICKET;
+
 public class LottoController {
 
     private final InputView inputView;
@@ -20,27 +22,25 @@ public class LottoController {
     }
 
     public void start() {
-
         try {
             play();
         } catch (NumberFormatException e) {
             System.out.println("ERROR : " + "숫자만 입력 가능합니다.");
         } catch (IllegalArgumentException e) {
             System.out.println("ERROR : " + e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
     public void play() {
         int purchasePrice = inputView.readPurchasePrice();
         int manualLottoCount = inputView.readManulLottoCount();
-        validatePurchase(purchasePrice, manualLottoCount);
         int remainingPurchasePrice = remainingPurchasePrice(purchasePrice, manualLottoCount);
+
+        Lottos.validate(purchasePrice, manualLottoCount);
 
         List<List<Integer>> lists = inputView.readManualLotto(manualLottoCount);
 
-        Lottos manualLottos = Lottos.of(lists);
+        Lottos manualLottos = Lottos.of(purchasePrice, lists);
         Lottos autoLottos = Lottos.of(remainingPurchasePrice, new RandomStrategy());
 
         Lottos lottos = Lottos.concat(manualLottos, autoLottos);
@@ -58,17 +58,7 @@ public class LottoController {
     }
 
     private int remainingPurchasePrice(int purchasePrice, int manualLottoCount) {
-        return purchasePrice - manualLottoCount * Lottos.PRICE_PER_TICKET;
-    }
-
-    private void validatePurchase(int purchasePrice, int manualLottoCount) {
-        if (purchasePrice < Lottos.PRICE_PER_TICKET) {
-            throw new IllegalArgumentException("최소 구입 금액은 " + Lottos.PRICE_PER_TICKET + "입니다.");
-        }
-
-        if (purchasePrice < manualLottoCount * Lottos.PRICE_PER_TICKET) {
-            throw new IllegalArgumentException("지불금액 보다 수동 구매금액이 더 많습니다.");
-        }
+        return purchasePrice - manualLottoCount * PRICE_PER_TICKET;
     }
 }
 

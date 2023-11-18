@@ -19,7 +19,7 @@ public class OutputView {
 
 
     public void printLottoCount(int manual, int auto) {
-        System.out.println(String.format(PURCHASE_COUNT_MESSAGE, manual, auto));
+        System.out.printf((PURCHASE_COUNT_MESSAGE) + "%n", manual, auto);
     }
 
     public void printLottos(List<Lotto> lottos) {

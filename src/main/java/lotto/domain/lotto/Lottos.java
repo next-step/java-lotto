@@ -23,6 +23,7 @@ public class Lottos {
     }
 
     public static Lottos of(long purchasePrice, GenerateStrategy strategy) {
+        validatePurchasePrice(purchasePrice);
         long lottoCount = lottoCount(purchasePrice);
 
         List<Lotto> lottoList = Stream.generate(() -> Lotto.of(strategy.generate()))
@@ -32,16 +33,37 @@ public class Lottos {
         return new Lottos(lottoList);
     }
 
+    private static void validatePurchasePrice(long purchasePrice) {
+        if (purchasePrice < PRICE_PER_TICKET) {
+            throw new IllegalArgumentException(String.format(PURCHASE_ERROR_MESSAGE, PRICE_PER_TICKET));
+        }
+    }
+
     private static long lottoCount(long purchasePrice) {
         return purchasePrice / PRICE_PER_TICKET;
+    }
+
+    public static Lottos of(long purchasePrice, List<List<Integer>> lottos) {
+        validateLottoCount(purchasePrice, lottos.size());
+        return of(lottos);
     }
 
     public static Lottos of(List<List<Integer>> lottos) {
         List<Lotto> lottoList = lottos.stream()
                 .map(Lotto::of)
                 .collect(Collectors.toList());
-
         return new Lottos(lottoList);
+    }
+
+    private static void validateLottoCount(long purchasePrice, long manualLottoCount) {
+        if (purchasePrice < manualLottoCount * PRICE_PER_TICKET) {
+            throw new IllegalArgumentException("지불금액 보다 수동 구매금액이 더 많습니다.");
+        }
+    }
+
+    public static void validate(long purchasePrice, long manualLottoCount) {
+        validatePurchasePrice(purchasePrice);
+        validateLottoCount(purchasePrice, manualLottoCount);
     }
 
     public static Lottos concat(Lottos lottosA, Lottos lottosB) {
@@ -68,7 +90,7 @@ public class Lottos {
     }
 
     public long purchasePrice() {
-        return lottos.size() * PRICE_PER_TICKET;
+        return (long) lottos.size() * PRICE_PER_TICKET;
     }
 
     public int size() {
