@@ -12,6 +12,9 @@ public class LottoController {
     private static final int PRICE_OF_LOTTO = 1000;
     private static final String DELIMITER = ", ";
 
+    private LottoController() {
+    }
+
     public static void run() {
         int amount = InputView.inputAmount();
         int quantity = amount / PRICE_OF_LOTTO;
