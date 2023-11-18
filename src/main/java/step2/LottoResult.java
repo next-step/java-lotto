@@ -27,7 +27,7 @@ public class LottoResult {
 
     private long calculateTotalPrizeMoney() {
         return this.lottoRanks.stream()
-                .mapToLong(LottoRank::getPrizeMoney)
+                .mapToLong(LottoRank::getPrizeMoney) //todo print문이 아님에도 get함수 사용중.
                 .sum();
     }
 
