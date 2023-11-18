@@ -1,6 +1,7 @@
 package lotto.util;
 
 import lotto.exception.MisMatchNumberException;
+import lotto.exception.NumberInputRuleException;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -23,6 +24,8 @@ public class StringParser {
     private static int inputNumber(String stringFormatNumber) {
         try {
             return Integer.parseInt(stringFormatNumber);
+        } catch (NumberFormatException ex) {
+            throw new NumberInputRuleException();
         } catch (InputMismatchException ex) {
             throw new MisMatchNumberException();
         }
