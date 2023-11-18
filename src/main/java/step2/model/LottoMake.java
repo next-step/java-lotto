@@ -1,11 +1,11 @@
 package step2.model;
 
+import step2.utils.CalculateUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMake {
-
-    public static final int EACH_LOTTO_PRICE = 1000;
 
     private final int lottoPayPrice;
 
@@ -14,7 +14,7 @@ public class LottoMake {
     }
 
     public List<Lotto> makeLottos() {
-        int lottoCount = this.lottoPayPrice / EACH_LOTTO_PRICE;
+        int lottoCount = CalculateUtils.lottoCount(this.lottoPayPrice);
 
         List<Lotto> lottos = new ArrayList<>();
         for (int i=0; i < lottoCount; i++) {
