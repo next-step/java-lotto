@@ -11,7 +11,7 @@ public class Sign {
 	}
 
 	private void validate(String sign) {
-		if (!Pattern.matches("[+\\-*/]", sign)){
+		if (!Pattern.matches("[+\\-*/]", sign)) {
 			throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
 		}
 	}
