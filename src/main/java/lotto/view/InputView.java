@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import static java.lang.System.*;
+
 public class InputView {
 
     private static final int LOTTO_PRICE = 1000;
@@ -15,29 +17,22 @@ public class InputView {
     private final Scanner sc;
     private final InputValidator inputValidator;
 
-    private String input;
-
     public InputView() {
-        this.sc = new Scanner(System.in);
+        this.sc = new Scanner(in);
         this.inputValidator = new InputValidator();
     }
 
     public int inputPurchaseMoney() {
-        System.out.println("구입금액을 입력해 주세요");
-        input = sc.nextLine();
+        print("구입 금액을 입력해주세요.");
 
-        validatePurchaseMoney();
-
-        return calculateNumOfLotto(input);
-    }
-
-    private void validatePurchaseMoney() {
         try {
-            inputValidator.validatePurchaseMoney(input, LOTTO_PRICE);
+            String purchase = input();
+            inputValidator.validatePurchaseMoney(purchase, LOTTO_PRICE);
+
+            return calculateNumOfLotto(purchase);
         } catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
-            input = sc.nextLine();
-            validatePurchaseMoney();
+            print(e.getMessage());
+            return inputPurchaseMoney();
         }
     }
 
@@ -46,28 +41,17 @@ public class InputView {
     }
 
     public LottoNumbers inputWinningNumbers() {
-        clearInput();
+        print("이번 주 당첨 번호를 입력해 주세요.");
 
-        System.out.println("이번 주 당첨 번호를 입력해 주세요.");
-        input = sc.nextLine();
-
-        validateWinningNumbers();
-
-        return convertToNumbers(input);
-    }
-
-    private void validateWinningNumbers() {
         try {
+            String input = input();
             inputValidator.validateWinningNumbers(input, DELIMITER);
-        } catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
-            input = sc.nextLine();
-            validateWinningNumbers();
-        }
-    }
 
-    private void clearInput() {
-        input = "";
+            return convertToNumbers(input);
+        } catch (IllegalArgumentException e){
+            print(e.getMessage());
+            return inputWinningNumbers();
+        }
     }
 
     private LottoNumbers convertToNumbers(String input) {
@@ -79,23 +63,24 @@ public class InputView {
     }
 
     public LottoNumber inputBonusNumber(LottoNumbers winningNumbers) {
-        clearInput();
+        print("보너스 볼을 입력해주세요.");
 
-        System.out.println("보너스 볼을 입력해주세요.");
-        input = sc.nextLine();
+        try {
+            String input = input();
+            inputValidator.validateBonusNumber(input, winningNumbers);
 
-        validateBonusNumber(winningNumbers);
-
-        return new LottoNumber(Integer.parseInt(input));
+            return new LottoNumber(Integer.parseInt(input));
+        } catch (IllegalArgumentException e){
+            print(e.getMessage());
+            return inputBonusNumber(winningNumbers);
+        }
     }
 
-    private void validateBonusNumber(LottoNumbers winningNumbers) {
-        try {
-            inputValidator.validateBonusNumber(input, winningNumbers);
-        } catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
-            input = sc.nextLine();
-            validateBonusNumber(winningNumbers);
-        }
+    private String input() {
+        return sc.nextLine();
+    }
+
+    private void print(String message) {
+        out.println(message);
     }
 }
