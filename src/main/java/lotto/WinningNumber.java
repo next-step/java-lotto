@@ -13,6 +13,13 @@ import java.util.*;
  *
  */
 public class WinningNumber {
+    public static final List<WinningRule> WINNING_RULES = List.of(
+            FirstRule.getInstance(),
+            ThirdRule.getInstance(),
+            FourthRule.getInstance(),
+            FifthRule.getInstance()
+    );
+
     private SixNumberComposition numbers;
 
     private WinningNumber() {
@@ -40,14 +47,7 @@ public class WinningNumber {
      * @return 이 로또의 당첨 등수
      */
     public WinningLevel whatRank(Lotto lotto) {
-        List<WinningRule> rules = List.of(
-                FirstRule.getInstance(),
-                ThirdRule.getInstance(),
-                FourthRule.getInstance(),
-                FifthRule.getInstance()
-        );
-
-        for (WinningRule rule : rules) {
+        for (WinningRule rule : WINNING_RULES) {
             //TODO: 이 if문을 빼버리고 for문 하나로 이를 처리할 수 있을까요??
             if (rule.isMatched(lotto, this)) {
                 return rule.getRank();
