@@ -38,5 +38,4 @@ public class Operand {
         return new Operand(this.operandValue / rightOperand.operandValue);
     }
 
-
 }

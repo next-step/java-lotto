@@ -1,4 +1,4 @@
-package step1.controller.utils;
+package step1.utils;
 
 import static org.assertj.core.api.Assertions.*;
 

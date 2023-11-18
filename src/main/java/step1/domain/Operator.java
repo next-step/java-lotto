@@ -17,10 +17,6 @@ public enum Operator {
         this.calculatorExecutor = calculatorExecutor;
     }
 
-    public String getOperatorValue() {
-        return operatorValue;
-    }
-
     public static Operator find(final String token) {
         return Arrays.stream(Operator.values())
             .filter(operator -> token.equals(operator.operatorValue))

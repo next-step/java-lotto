@@ -11,7 +11,7 @@ public class StringCalculator {
         this.expression = new Expression(ExpressionSplitter.splitExpression(inputExpression));
     }
 
-    public int calculateExecute() {
+    public Operand calculateExecute() {
         return expression.calculate();
     }
 

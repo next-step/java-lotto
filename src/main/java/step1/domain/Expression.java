@@ -15,8 +15,17 @@ public class Expression {
         }
     }
 
-    public int calculate() {
+    public Operand calculate() {
         Operand resultOperand = Operand.of(tokens[0]);
-        return 0;
+
+        for (int i = 1; i < tokens.length; i += 2) {
+            Operator operator = Operator.find(tokens[i]);
+            Operand operand = Operand.of(tokens[i + 1]);
+
+            resultOperand = operator.calculate(resultOperand, operand);
+        };
+
+        return resultOperand;
     }
+
 }
