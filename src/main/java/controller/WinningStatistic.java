@@ -1,7 +1,6 @@
 package controller;
 
 import lotto.WinningAmount;
-import lotto.WinningLevelToAmountTable;
 import lotto.type.WinningLevel;
 
 import java.util.HashMap;
@@ -54,7 +53,9 @@ public class WinningStatistic {
 
         for (WinningLevel rank : WinningLevel.values()) {
             int count = winCountTable.get(rank);
-            totalSum = WinningLevelToAmountTable.convert(rank).multiply(count).add(totalSum);
+            totalSum = rank.getAmount()
+                    .multiply(count)
+                    .add(totalSum);
         }
 
         return totalSum;

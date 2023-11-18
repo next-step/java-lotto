@@ -59,24 +59,7 @@ public class Renderer {
     }
 
     private static String rankAmount(WinningLevel rank) {
-        if (rank == WinningLevel.NONE) {
-            return "0원";
-        }
-        if (rank == WinningLevel.FIFTH) {
-            return "5000원";
-        }
-        if (rank == WinningLevel.FOURTH) {
-            return "50000원";
-        }
-        if (rank == WinningLevel.THIRD) {
-            return "1500000원";
-        }
-        if (rank == WinningLevel.SECOND) {
-            return "30000000원";
-        }
-
-        // rank == WinningLevel.ONE
-        return "2000000000원";
+        return rank.getAmount() + "원";
     }
 
     public static void printRatio(double ratio) {

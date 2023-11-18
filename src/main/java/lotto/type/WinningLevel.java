@@ -1,5 +1,7 @@
 package lotto.type;
 
+import lotto.WinningAmount;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,21 +11,27 @@ import java.util.Map;
  * 미당첨을 의미하는 NONE도 존재합니다.
  */
 public enum WinningLevel {
-    NONE(0),
-    FIFTH(5),
-    FOURTH(4),
-    THIRD(3),
-    SECOND(2),
-    FIRST(1);
+    NONE(0, 0),
+    FIFTH(5, 5000),
+    FOURTH(4, 50000),
+    THIRD(3, 1500000),
+    SECOND(2, 30000000),
+    FIRST(1, 2000000000);
 
-    private final int winningLevel;
+    private final int level;
+    private final WinningAmount amount;
 
-    WinningLevel(int winningLevel) {
-        this.winningLevel = winningLevel;
+    WinningLevel(int winningLevel, int winningAmount) {
+        this.level = winningLevel;
+        this.amount = WinningAmount.of(winningAmount);
     }
 
     public static WinningLevel of(int winningLevel) {
         return WinningLevelTable.convert(winningLevel);
+    }
+
+    public WinningAmount getAmount() {
+        return this.amount;
     }
 }
 
