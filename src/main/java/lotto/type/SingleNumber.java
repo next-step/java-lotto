@@ -12,18 +12,25 @@ public class SingleNumber implements Comparable<SingleNumber> {
     /** 로또 번호 상한선 (경계값 포함) */
     private static final int MAX_NUM = 45;
 
-    private int lottoNumber;
+    private final int lottoNumber;
 
-    private SingleNumber() {
+    /**
+     * 로또 번호나 당첨 번호에 사용되는 번호를 생성합니다.
+     * int 타입을 wrapping합니다.
+     * 불변 객체입니다.
+     */
+    public SingleNumber(int lottoNumber) {
+        checkRange(lottoNumber);
+        this.lottoNumber = lottoNumber;
     }
 
+    /**
+     * 로또 번호나 당첨 번호에 사용되는 번호를 생성합니다.
+     * int 타입을 wrapping합니다.
+     * 불변 객체입니다.
+     */
     public static SingleNumber of(int lottoNumber) {
-        checkRange(lottoNumber);
-
-        SingleNumber lotto = new SingleNumber();
-        lotto.lottoNumber = lottoNumber;
-
-        return lotto;
+        return new SingleNumber(lottoNumber);
     }
 
     /**
@@ -77,7 +84,7 @@ public class SingleNumber implements Comparable<SingleNumber> {
      *
      * @return 정수값
      */
-    public Integer toInt() {
+    public int toInt() {
         return this.lottoNumber;
     }
 }

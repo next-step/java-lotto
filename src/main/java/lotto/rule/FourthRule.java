@@ -8,11 +8,17 @@ import lotto.type.WinningLevel;
  * 4등 규칙 판정
  */
 public class FourthRule implements WinningRule {
+    private static FourthRule instance;
+
     private FourthRule() {
     }
 
     public static FourthRule getInstance() {
-        return new FourthRule();
+        if (instance == null) {
+            instance = new FourthRule();
+        }
+
+        return instance;
     }
 
     @Override
