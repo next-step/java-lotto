@@ -4,32 +4,35 @@ import java.util.Arrays;
 
 public enum Rank {
 
-    FOURTH(3, 5000, "4등"),
-    THIRD(4, 50000, "3등"),
-    SECOND(5, 1500000, "2등"),
-    FIRST(6, 2000000000, "1등"),
-    NO_HIT(0, 0, "미당첨");
+    FIFTH(3, false, 5000, "5등"),
+    FOURTH(4, false, 50000, "4등"),
+    THIRD(5, false, 1500000, "3등"),
+    SECOND(5, true, 30000000, "2등"),
+    FIRST(6, false, 2000000000, "1등"),
+    NO_HIT(0, false, 0, "미당첨");
 
 
     private final int hitCount;
+    private final boolean isBonus;
     private final int amount;
     private final String message;
 
-    Rank(int hitCount, int amount, String message) {
+    Rank(int hitCount, boolean isBonus, int amount, String message) {
         this.hitCount = hitCount;
+        this.isBonus = isBonus;
         this.amount = amount;
         this.message = message;
     }
 
-    public static Rank valueOfHitCount(int hitCount) {
+    public static Rank valueOf(int hitCount, boolean isBonus) {
         return Arrays.stream(values())
-            .filter(rank -> rank.hitCountEquals(hitCount))
+            .filter(rank -> rank.condition(hitCount, isBonus))
             .findAny()
             .orElse(NO_HIT);
     }
 
-    private boolean hitCountEquals(int hitCount) {
-        return this.hitCount == hitCount;
+    private boolean condition(int hitCount, boolean isBonus) {
+        return this.hitCount == hitCount && this.isBonus == isBonus;
     }
 
     public boolean isHit() {

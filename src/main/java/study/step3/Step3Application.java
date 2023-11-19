@@ -29,7 +29,7 @@ public class Step3Application {
         LottoNumber bonusNumber = inputBonusNumber();
 
         List<Rank> ranks = lottos.stream()
-            .map(lotto -> lotto.matches(winningNumbers.toIntegers()))
+            .map(lotto -> lotto.matches(winningNumbers.toIntegers(), bonusNumber.lottoNumber()))
             .collect(Collectors.toList());
 
         Result result = new Result();
