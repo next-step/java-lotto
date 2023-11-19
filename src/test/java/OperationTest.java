@@ -1,3 +1,8 @@
+import operation.*;
+import operation.implemantation.DivideOperation;
+import operation.implemantation.MinusOperation;
+import operation.implemantation.MultiplyOperation;
+import operation.implemantation.PlusOperation;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
