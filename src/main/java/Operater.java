@@ -12,6 +12,8 @@ public class Operater {
     }
 
     public static Operater defaultOf(String numberAndOperation) {
+        canMake(numberAndOperation);
+
         String[] numberOrOperations = numberAndOperation.split(" ");
         Deque<Integer> numbers = new LinkedList<>();
         List<String> operations = new ArrayList<>();
@@ -22,6 +24,16 @@ public class Operater {
         }
 
         return new Operater(numbers,operations);
+    }
+
+    private static void canMake(String numberAndOperation) {
+        if (numberAndOperation == null) {
+            throw new IllegalArgumentException("빈 문자열이 들어올 수 없습니다.");
+        }
+
+        if (numberAndOperation.trim().length() < 3) {
+            throw new IllegalArgumentException("최소 두개의 숫자 하나의 연산자로 이루어져있어야 합니다.");
+        }
     }
 
     private static void judgeOperation(String numberOrOperation, List<String> operations) {
@@ -36,18 +48,19 @@ public class Operater {
         }
     }
 
-    public static boolean isNumberic(String str) {
+    private static boolean isNumberic(String str) {
         return str.chars().allMatch(Character::isDigit);
     }
 
     public int calculate(){
-        for (int i = 0; i < operations.size(); i++) {
-            String s = operations.get(i);
+        for (String s : operations) {
             int first = 0;
             int second = 0;
             Operation operation = OperationFactory.make(s);
+
             first = numbers.pop();
             second = numbers.pop();
+
             int result = operation.calculate(first, second);
             numbers.addFirst(result);
         }
