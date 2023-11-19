@@ -1,8 +1,15 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoController {
 
@@ -10,6 +17,13 @@ public class LottoController {
     private static ResultView resultView = new ResultView();
 
     public static void main(String[] args) {
+        Lotto[] purchasedLottoList = buyLotto();
+        Lotto winningLotto = EnterWinningNumber();
+
+        checkWinningStatistics(purchasedLottoList, winningLotto);
+    }
+
+    private static Lotto[] buyLotto() {
         int purchasePrice = inputView.askPurchasePrice();
 
         int lottoCount = purchasePrice / 1000;
@@ -18,8 +32,28 @@ public class LottoController {
         Lotto[] lottoList = new Lotto[lottoCount];
         for (int index = 0; index < lottoCount; index++) {
             lottoList[index] = new Lotto();
-            resultView.printLottoNumbers(lottoList[index]);
         }
+        resultView.printLottoNumbers(lottoList);
+
+        return lottoList;
+    }
+
+    private static Lotto EnterWinningNumber() {
+        List<Integer> winningNumbers = inputView.askLottoWinningNumbers();
+        Lotto winningLotto = new Lotto(winningNumbers);
+        return winningLotto;
+    }
+
+    private static void checkWinningStatistics(Lotto[] lottoList, Lotto winningLotto) {
+        Map<LottoResult, Integer> lottoResults = Arrays.stream(LottoResult.values())
+                .collect(Collectors.toMap(k -> k, v -> 0, (x, y) -> y, LinkedHashMap::new));
+
+        for (Lotto lotto : lottoList) {
+            LottoResult lottoResult = lotto.match(winningLotto);
+            lottoResults.put(lottoResult, lottoResults.getOrDefault(lottoResult, 0) + 1);
+        }
+
+        resultView.printWinningStatistics(lottoResults);
     }
 
 }

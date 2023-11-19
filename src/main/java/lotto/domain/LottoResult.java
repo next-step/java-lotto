@@ -25,4 +25,11 @@ public enum LottoResult {
                 .orElse(LottoResult.FAIL);
     }
 
+    public int matchCount() {
+        return this.matchCount;
+    }
+
+    public int prize() {
+        return this.prize;
+    }
 }
