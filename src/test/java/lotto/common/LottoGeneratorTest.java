@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.common;
 
+import lotto.domain.Lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,14 +11,12 @@ class LottoGeneratorTest {
     @DisplayName("로또 객체를 생성한다.")
     @Test
     void generateLotto() {
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        Assertions.assertThat(lottoGenerator.generate() instanceof Lotto);
+        Assertions.assertThat(LottoGenerator.generate() instanceof Lotto);
     }
 
     @DisplayName("입력 받은 수 만큼 로또를 생성한다.")
     @Test
     void generateLottos() {
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        Assertions.assertThat(lottoGenerator.generateByLottoCount(14).size()).isEqualTo(14);
+        Assertions.assertThat(LottoGenerator.generateByLottoCount(14).size()).isEqualTo(14);
     }
 }

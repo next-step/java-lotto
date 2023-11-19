@@ -1,7 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoGenerator;
+import lotto.common.LottoGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +25,7 @@ public class InputView {
     }
 
     private List<Lotto> generateLottos(Integer lottoCount) {
-        LottoGenerator generator = new LottoGenerator();
-        List<Lotto> lottos = generator.generateByLottoCount(lottoCount);
+        List<Lotto> lottos = LottoGenerator.generateByLottoCount(lottoCount);
         printLottos(lottos);
         return lottos;
     }
