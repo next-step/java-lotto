@@ -1,7 +1,6 @@
 import domain.Lotto;
 import service.LottoGameService;
 import repository.UserLottoRepository;
-import domain.WinningLotto;
 import service.UserLottoService;
 import view.InputView;
 import view.ResultView;
@@ -29,7 +28,7 @@ public class LottoApplication {
          */
         LottoGameService lottoGame = new LottoGameService(userLottoRepository);
         String inputWinningNumbers = InputView.inputWinningNumbers();
-        WinningLotto winningLotto = new WinningLotto(inputWinningNumbers);
+        Lotto winningLotto = new Lotto(inputWinningNumbers);
 
         /**
          * userLotto와 당첨번호 당첨결과 확인

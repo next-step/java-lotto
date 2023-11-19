@@ -34,10 +34,10 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public int matchCount(WinningLotto winningLotto) {
+    public int matchCount(Lotto winningLotto) {
         int count = 0;
         for (Integer lottoNumber : lottoNumbers) {
-            if (winningLotto.getWinnerNumbers().contains(lottoNumber)) {
+            if (winningLotto.getLottoNumbers().contains(lottoNumber)) {
                 count++;
             }
         }

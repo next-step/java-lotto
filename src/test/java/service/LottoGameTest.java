@@ -1,9 +1,7 @@
 package service;
 
 import domain.Lotto;
-import service.LottoGameService;
 import repository.UserLottoRepository;
-import domain.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +15,7 @@ public class LottoGameTest {
     @Test
     @DisplayName("당첨 번호를 6개 미만으로 입력하는 경우 Exception이 발생한다.")
     void invalidInputExceptionTest() {
-        assertThrows(IllegalArgumentException.class, () -> new WinningLotto(1, 2, 3, 4, 5));
+        assertThrows(IllegalArgumentException.class, () -> new Lotto(1, 2, 3, 4, 5));
     }
 
     @Test
@@ -27,7 +25,7 @@ public class LottoGameTest {
 
         UserLottoRepository userLotto = new UserLottoRepository(lotto);
         LottoGameService lottoGame = new LottoGameService(userLotto);
-        WinningLotto winningLotto = new WinningLotto(1, 2, 3, 4, 5, 6);
+        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
 
         Map<Integer, Integer> lottoPrizeIntegerMap = lottoGame.matchUserLotto(winningLotto);
         assertThat(lottoPrizeIntegerMap.get(6).intValue()).isEqualTo(1);
