@@ -3,7 +3,7 @@ package step2.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import step2.constant.Prize;
+import step2.domain.Lottery;
 
 public class Lotteries {
 
@@ -19,22 +19,5 @@ public class Lotteries {
 
     public void keep(Lottery lottery) {
         lotteries.add(lottery);
-    }
-
-    public List<Prize> getPirzeList(Winning winning) {
-       List<Prize> result = new ArrayList<>();
-        for (Lottery lottery : lotteries) {
-            result.add(find(lottery, winning));
-        }
-
-        return result;
-    }
-
-    private Prize find(Lottery lottery, Winning winning) {
-        for (int number : lottery.getNumbers()) {
-            winning.setWinCount(number);
-        }
-
-        return winning.getPrizes();
     }
 }

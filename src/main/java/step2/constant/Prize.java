@@ -4,25 +4,27 @@ import java.util.stream.Stream;
 
 public enum Prize {
 
-    THREE(3, 5000, "3개 일치 (5000원)- "),
-    FOUR(4, 50000, "4개 일치 (50000원)- "),
-    FIVE(5, 1500000, "5개 일치 (1500000원)- "),
-    ALL(6, 2000000000, "6개 일치 (2000000000원)- "),
-    BAD_LUCK(0, 0, "꽝!");
+    FIRST(6, false, 2000000000),
+    SECOND(5, true, 1500000),
+    THIRD(5, false, 1500000),
+    FOURTH(4, false, 50000),
+    FIFTH(3, false, 5000),
+    BAD_LUCK(0,false,  0);
 
     private int correct;
+    private boolean bonus;
     private long reward;
-    private String comment;
 
-    Prize(int correct, long reward, String comment) {
+    Prize(int correct, boolean bonus, long reward) {
         this.correct = correct;
+        this.bonus = bonus;
         this.reward = reward;
-        this.comment = comment;
     }
 
-    public static Prize getPrize(int number) {
+    public static Prize getPrize(int number, boolean bonus) {
         return Stream.of(Prize.values())
-                     .filter(prize -> prize.getCorrect() == number)
+                     .filter(prize -> prize.getCorrect() == number &&
+                                      prize.isBonus() == bonus)
                      .findFirst().orElse(BAD_LUCK);
     }
 
@@ -30,11 +32,11 @@ public enum Prize {
         return correct;
     }
 
-    public String getComment() {
-        return comment;
-    }
-
     public long getReward() {
         return reward;
+    }
+
+    public boolean isBonus() {
+        return bonus;
     }
 }
