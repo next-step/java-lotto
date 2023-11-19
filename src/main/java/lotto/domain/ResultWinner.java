@@ -2,25 +2,18 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.Iterator;
 import java.util.List;
 
 public class ResultWinner {
 
-    static final int LOTTO_MAX_NUMBER = 45;
-    static final int LOTTO_MIN_NUMBER = 1;
-
-
-    public EnumMap<Rank, Integer> countOfWinner(List<List<Integer>> list, List<String> lastWeekWinner) {
-
-        for (String number : lastWeekWinner) {
-            validation(number);
-        }
+    public EnumMap<Rank, Integer> countOfWinner(Lottos lottos, List<String> lastWeekWinner) {
 
         List<Integer> resultList = new ArrayList<>();
 
-        for (List<Integer> buyLottoList : list) {
+        for(int i = 0; i < lottos.getLottosSize(); i++) {
             int answerCount = 0;
-            answerCount = getAnswerCount(buyLottoList, lastWeekWinner, answerCount);
+            answerCount = getAnswerCount(lottos.getLottoIndex(i), lastWeekWinner, answerCount);
             resultList.add(answerCount);
         }
 
@@ -28,12 +21,6 @@ public class ResultWinner {
 
         resultAdd(resultList, resultMap);
         return resultMap;
-    }
-
-    private void validation(String number) {
-        if (Integer.parseInt(number) < LOTTO_MIN_NUMBER || Integer.parseInt(number) > LOTTO_MAX_NUMBER) {
-            throw new RuntimeException("유효하지 않은 로또 번호 입니다.");
-        }
     }
 
     private void resultAdd(List<Integer> resultList, EnumMap<Rank, Integer> resultMap) {
@@ -65,10 +52,10 @@ public class ResultWinner {
         return resultMap;
     }
 
-    private int getAnswerCount(List<Integer> buyLottoList, List<String> lastWeek, int answerCount) {
+    private int getAnswerCount(Lotto buyLottoList, List<String> lastWeek, int answerCount) {
         boolean checkContains;
         for (String number : lastWeek) {
-            checkContains = buyLottoList.contains(Integer.parseInt(number));
+            checkContains = buyLottoList.getLotto().contains(Integer.parseInt(number));
             answerCount = getAnswerCalc(checkContains, answerCount);
         }
         return answerCount;
@@ -80,5 +67,4 @@ public class ResultWinner {
         }
         return answerCount;
     }
-
 }

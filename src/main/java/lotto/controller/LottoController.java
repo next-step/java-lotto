@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoShuffleStrategy;
-import lotto.domain.Rank;
-import lotto.domain.ResultWinner;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -19,7 +16,7 @@ public class LottoController {
 
         int lottoCount = inputView.buyOfLottoPrice();
         LottoGame lotto = new LottoGame();
-        List<List<Integer>> buyLottoList = lotto.lottoGame(lottoCount, new LottoShuffleStrategy());
+        Lottos buyLottoList = lotto.lottoGame(lottoCount);
         resultView.PrintThePurchasedLotto(buyLottoList);
 
         List<String> lastWeekLottoNumber = inputView.getLastWeekLottoNumber();

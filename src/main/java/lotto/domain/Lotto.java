@@ -1,41 +1,47 @@
 package lotto.domain;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
 
-    static final int LOTTO_MAX_NUMBER = 45;
-    static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_MAX_NUMBER = 45;
+    private static final int LOTTO_MIN_NUMBER = 1;
 
-    private List<Integer> lottos;
+    private Set<Integer> lotto;
 
-    public Lotto() {
-        this.lottos = IntStream.range(1, 45)
-                .boxed()
-                .collect(Collectors.toList());
-    }
-
-    public Lotto(List<Integer> numbers) {
+    public Lotto(Set<Integer> numbers) {
         validation(numbers);
-        this.lottos = numbers;
+        this.lotto = numbers;
     }
 
-    public List<Integer> getLotto() {
-        return lottos;
+    public Set<Integer> getLotto() {
+        return lotto;
     }
 
-    private void validation(List<Integer> numbers) {
+    private void validation(Set<Integer> numbers) {
+        lottoNumberValidation(numbers);
+        lottoSizeValidation(numbers);
+    }
 
-        for(int number : numbers){
-            validationNumber(number);
+    private static void lottoNumberValidation(Set<Integer> numbers) {
+        Iterator<Integer> iter = numbers.iterator();
+        while (iter.hasNext())
+            lottoMinMaxValidation(iter);
+    }
+
+    private static void lottoMinMaxValidation(Iterator<Integer> iter) {
+        if(iter.next() < LOTTO_MIN_NUMBER || iter.next() > LOTTO_MAX_NUMBER){
+            throw new IllegalArgumentException("유효하지 않은 번호 입니다.");
         }
     }
 
-    private static void validationNumber(int number) {
-        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
-            throw new IllegalArgumentException("유효하지 않은 로또 번호 입니다.");
+    private static void lottoSizeValidation(Set<Integer> numbers) {
+        if(numbers.size() != 6){
+            throw new IllegalArgumentException("유효하지 않은 로또입니다.");
         }
     }
 }

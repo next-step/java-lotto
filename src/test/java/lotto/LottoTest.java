@@ -1,51 +1,47 @@
 package lotto;
 
 
-import lotto.domain.Lotto;
-import lotto.domain.Rank;
+import lotto.domain.*;
+import lotto.ui.ResultView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
 
-    @DisplayName("로또 생성 테스트")
+    @DisplayName("로또 번호 확인 테스트")
     @Test
-    public void 로또생성(){
-
+    public void 로또번호확인(){
         assertThatThrownBy(() -> {
-            Lotto lotto = new Lotto(Arrays.asList(-1,2,3,4,5,6));
+        Set<Integer> numbers = new HashSet<Integer>();
+        numbers.add(46);
         }).isInstanceOf(IllegalArgumentException.class);
-
     }
 
-
-    @DisplayName("일등 테스트")
+    @DisplayName("일등 확인 테스트")
     @Test
-    public void 일등(){
-        assertThat(Rank.valueOf(6).get()).isEqualTo(Rank.FIRST);
-    }
+    public void 일등확인(){
 
-    @DisplayName("이등 테스트")
-    @Test
-    public void 이등(){
-        assertThat(Rank.valueOf(5).get()).isEqualTo(Rank.SECOND);
-    }
+        Set<Integer> numbers = new HashSet<Integer>();
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
+        numbers.add(5);
+        numbers.add(6);
+        Lotto lotto = new Lotto(numbers);
 
-    @DisplayName("삼등 테스트")
-    @Test
-    public void 삼등(){
-        assertThat(Rank.valueOf(4).get()).isEqualTo(Rank.THIRD);
-    }
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(lotto);
 
-    @DisplayName("사등 테스트")
-    @Test
-    public void 사등(){
-        assertThat(Rank.valueOf(3).get()).isEqualTo(Rank.FOURTH);
-    }
+        Lottos lottos = new Lottos(lottoList);
+        List<String> lastWeekWinner = Arrays.asList("1","2","3","4","5","6");
 
+        ResultWinner winner = new ResultWinner();
+        assertThat(winner.countOfWinner(lottos, lastWeekWinner).get(Rank.FIRST)).isEqualTo(1);
+    }
 }

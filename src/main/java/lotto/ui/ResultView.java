@@ -1,8 +1,10 @@
 package lotto.ui;
 
+import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
 import java.util.EnumMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -12,9 +14,14 @@ public class ResultView {
     static final String TOTAL_AMOUNT = "총 수익률은 %.2f입니다.";
     static final int LOTTO_PRICE = 1000;
 
-    public void PrintThePurchasedLotto(List<List<Integer>> buyLottoList) {
-        for (List<Integer> list : buyLottoList) {
-            System.out.println(list);
+    public void PrintThePurchasedLotto(Lottos buyLottoList) {
+
+        for(int i = 0; i < buyLottoList.getLottosSize(); i++) {
+            Iterator<Integer> iterSet = buyLottoList.getLottoIndex(i).getLotto().iterator();
+            while(iterSet.hasNext()){
+                System.out.print(iterSet.next()+" ");
+            }
+            System.out.println();
         }
     }
 
