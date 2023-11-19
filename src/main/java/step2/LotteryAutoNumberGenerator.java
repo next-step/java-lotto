@@ -14,12 +14,11 @@ import step2.view.ResultView;
 public class LotteryAutoNumberGenerator {
 
     public static void main(String[] args) {
-        Lotteries lotteries = new Lotteries();
-
         int money = InputView.start();
         int ticketCount = InputView.getTicketCount(money);
         InputView.showTicketCount(ticketCount);
 
+        Lotteries lotteries = new Lotteries();
         for (int i = 0; i < ticketCount; i++) {
             Lottery lottery = Lottery.of(LotteryUtil.getBall());
             lotteries.keep(lottery);
