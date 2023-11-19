@@ -28,6 +28,4 @@ public class LottoGameController {
 
         winningController.result(rankCountGroup, lottoGame.calculateProfitRate(rankCountGroup));
     }
-
-
 }

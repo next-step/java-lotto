@@ -1,6 +1,5 @@
 package lotto.view;
 
-
 import java.util.*;
 import java.util.stream.Collectors;
 
