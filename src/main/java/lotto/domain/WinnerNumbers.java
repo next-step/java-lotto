@@ -4,14 +4,9 @@ import java.util.*;
 
 public class WinnerNumbers {
     private final List<Integer> winnerNummbers = new ArrayList<>();
-    private HashMap<Integer, Integer> prizeStatus = new HashMap<>();
 
     public WinnerNumbers(List<Integer> generatedNumbers) {
         winnerNummbers.addAll(generatedNumbers);
-        prizeStatus.put(3, 0);
-        prizeStatus.put(4, 0);
-        prizeStatus.put(5, 0);
-        prizeStatus.put(6, 0);
     }
 
     @Override
