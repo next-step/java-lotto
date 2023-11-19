@@ -13,7 +13,7 @@ public class LottoShopTest {
     void createLottoTicketAsYouWant() {
         MoneyWallet moneyWallet = new MoneyWallet(10000);
         LottoWallet lottoWallet = LottoShop.buy(moneyWallet);
-        assertThat(lottoWallet.remainTicketsCount()).isEqualTo(10);
+        assertThat(lottoWallet.totalTicketCount()).isEqualTo(10);
     }
 
     @DisplayName("개수만큼의 로또 티켓을 만들고 난 후엔 돈이 줄어든다.")

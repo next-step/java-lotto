@@ -22,7 +22,7 @@ public class LottoWallet {
         return new LottoWallet(lottos);
     }
 
-    public int remainTicketsCount() {
+    public int totalTicketCount() {
         return lottos.size();
     }
 

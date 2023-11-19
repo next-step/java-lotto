@@ -14,7 +14,7 @@ public class PAndLReport {
     }
 
     public static PAndLReport of(LottoWallet lottoWallet, StatisticsReport statisticsReport) {
-        return new PAndLReport(LottoShop.LOTTO_PRICE * lottoWallet.remainTicketsCount()
+        return new PAndLReport(LottoShop.LOTTO_PRICE * lottoWallet.totalTicketCount()
             , statisticsReport.totalPrize());
     }
 
