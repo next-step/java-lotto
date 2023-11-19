@@ -28,3 +28,10 @@
 * [x] indent depth는 최대 1단계까지
 * [x] 메소드 크기가 최대 10라인 이하(한가지 일만 하도록 한다.)
 * [x] else 를 사용하지 않는다.
+
+#### Feedback 23.11.19
+* [ ] Stack -> Queue 변경
+* [ ] while -> for 변경
+* [ ] Sign Enum 구현
+* [ ] 연산작업에 대한 위치 고민
+* [x] Main 클래스 생성
