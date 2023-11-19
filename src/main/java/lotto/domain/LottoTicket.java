@@ -1,9 +1,10 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class LottoTicket {
-    private final List<Integer> ticket = new ArrayList<>();
+    private final Set<Integer> ticket = new HashSet<>();
 
     public LottoTicket(List<Integer> lottoNumber) {
         ticket.addAll(lottoNumber);
@@ -14,17 +15,20 @@ public class LottoTicket {
         return this.ticket.toString();
     }
 
-    public boolean isThisNumberMatched(WinnerNumbers winnerNummbers, int i) {
-        return winnerNummbers.isContain(ticket.get(i));
+    public boolean isThisNumberMatched(WinnerNumbers winnerNummbers, int number) {
+        return winnerNummbers.isContain(number);
     }
 
     public int calculateTotalMatchedCount(WinnerNumbers winnerNummbers) {
-        int sum = 0;
-        for (int i = 0; i < 6; i++) {
-            if (isThisNumberMatched(winnerNummbers, i)) {
-                sum++;
+        AtomicInteger sum = new AtomicInteger(0);
+
+        ticket.iterator().forEachRemaining(number -> {
+
+            if (isThisNumberMatched(winnerNummbers, number)) {
+                sum.getAndIncrement();
             }
-        }
-        return sum;
+        });
+
+        return sum.get();
     }
 }
