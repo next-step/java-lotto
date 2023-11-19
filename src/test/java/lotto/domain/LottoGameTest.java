@@ -45,7 +45,7 @@ class LottoGameTest {
     @Test
     void drawTest() {
         //given
-        final Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        final Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
         final LottoGame lottoGame = new LottoGame(new Lottos(Arrays.asList(lotto)));
 
         //when

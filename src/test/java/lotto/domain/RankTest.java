@@ -1,13 +1,10 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-
 
 class RankTest {
 
@@ -39,28 +36,15 @@ class RankTest {
         assertThat(Rank.rank(3, false)).isEqualTo(Rank.FIFTH);
     }
 
-    @Test
-    void rank_꽝() {
-        assertThatIllegalArgumentException().isThrownBy(() -> Rank.rank(2, false));
-        assertThatIllegalArgumentException().isThrownBy(() -> Rank.rank(1, false));
-        assertThatIllegalArgumentException().isThrownBy(() -> Rank.rank(0, false));
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 2})
+    void rank_미당첨(int input) {
+        assertThat(Rank.rank(input, false)).isEqualTo(Rank.DEFAULT);
     }
 
     @Test
     void multiply_TEST() {
-        Amount result = Rank.THIRD.multiply(2);
+        Amount result = Rank.THIRD.multiply(Amount.of(2));
         assertThat(result).isEqualTo(new Amount(3_000_000));
-    }
-
-    @DisplayName("정답인 수가 3번 이상이라면 true를 반환한다. ")
-    @Test
-    void rank_TEST() {
-        assertThat(Rank.isRank(3)).isTrue();
-    }
-
-    @DisplayName("정답인 수가 3번 미만이라면 false를 반환한다. ")
-    @Test
-    void unRank_TEST() {
-        assertThat(Rank.isRank(2)).isFalse();
     }
 }
