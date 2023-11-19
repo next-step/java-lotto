@@ -19,7 +19,7 @@ class LottoStatisticsTest {
         lottoTickets.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         lottoTickets.add(new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8)));
         lottoTickets.add(new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8)));
-        lottoStatistics = new LottoStatistics(lottoTickets, Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottoStatistics = new LottoStatistics(lottoTickets, new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @Test

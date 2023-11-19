@@ -8,9 +8,9 @@ public class LottoStatistics {
     private static final int LOTTO_PRICE = 1000;
     private static final int ZERO = 0;
     private List<Lotto> lottoTickets;
-    private List<Integer> lastWeekWinNumber;
+    private Lotto lastWeekWinNumber;
 
-    public LottoStatistics(List<Lotto> lottoTickets, List<Integer> lastWeekWinNumber) {
+    public LottoStatistics(List<Lotto> lottoTickets, Lotto lastWeekWinNumber) {
         this.lottoTickets = lottoTickets;
         this.lastWeekWinNumber = lastWeekWinNumber;
     }
@@ -18,9 +18,7 @@ public class LottoStatistics {
     public Map<Rank, Integer> calcuratorRankCount() {
         Map<Rank, Integer> rankCount = new HashMap<>();
         for (Lotto ticket : lottoTickets) {
-            Rank rank = Rank.of((int) ticket.lottoNumbers().stream()
-                    .filter(lastWeekWinNumber::contains)
-                    .count());
+            Rank rank = Rank.of(lastWeekWinNumber.matchCount(ticket, lastWeekWinNumber));
             rankCount.put(rank, rankCount.getOrDefault(rank, 0) + 1);
         }
         return rankCount;

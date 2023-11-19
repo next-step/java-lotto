@@ -8,8 +8,8 @@ import java.util.stream.IntStream;
 
 public class LottoGame {
     private int ticketCount;
-
     private LottoNumberGenerator lottoNumberGenerator;
+    private Lotto lotto;
 
     public LottoGame(int ticketCount, LottoNumberGenerator lottoNumberGenerator) {
         this.ticketCount = ticketCount;
