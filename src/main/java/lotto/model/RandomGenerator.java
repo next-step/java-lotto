@@ -17,6 +17,8 @@ public class RandomGenerator {
 
 	public List<Integer> generate() {
 		Collections.shuffle(numbers);
-		return numbers.subList(0, 6);
+		List<Integer> result = numbers.subList(0, 6);
+		Collections.sort(result);
+		return result;
 	}
 }
