@@ -21,7 +21,14 @@ public class ResultView {
     }
 
     public static void showStatistics(Rank rank, int winningCount) {
-        System.out.println(String.format("%d개 일치 (%d원)- %d개", rank.hitCount(), rank.amount(), winningCount));
+        System.out.println(String.format("%d개 일치%s (%d원)- %d개", rank.hitCount(), isBonus(rank), rank.amount(), winningCount));
+    }
+
+    private static String isBonus(Rank rank) {
+        if (rank.isBonus()) {
+            return ", 보너스 볼 일치";
+        }
+        return "";
     }
 
     public static void showRevenue(double revenue) {
