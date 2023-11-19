@@ -12,13 +12,13 @@ public class ResultView {
     static final String TOTAL_AMOUNT = "총 수익률은 %.2f입니다.";
     static final int LOTTO_PRICE = 1000;
 
-    public static void buyLottoList(List<List<Integer>> buyLottoList) {
+    public void PrintThePurchasedLotto(List<List<Integer>> buyLottoList) {
         for (List<Integer> list : buyLottoList) {
             System.out.println(list);
         }
     }
 
-    public static void resultView(EnumMap<Rank, Integer> resultMap, int lottoCount) {
+    public void PrintTheWinningResults(EnumMap<Rank, Integer> resultMap, int lottoCount) {
 
         System.out.println(WINNER_STATISTICS);
 

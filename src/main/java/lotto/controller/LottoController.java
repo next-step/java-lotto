@@ -14,18 +14,19 @@ public class LottoController {
 
     public static void main(String[] args) {
 
-        InputView inputview = new InputView();
+        InputView inputView = new InputView();
+        ResultView resultView = new ResultView();
 
-        int lottoCount = inputview.buyOfLottoPrice();
+        int lottoCount = inputView.buyOfLottoPrice();
         LottoGame lotto = new LottoGame();
         List<List<Integer>> buyLottoList = lotto.lottoGame(lottoCount, new LottoShuffleStrategy());
-        ResultView.buyLottoList(buyLottoList);
+        resultView.PrintThePurchasedLotto(buyLottoList);
 
-        List<String> lastWeekLottoNumber = inputview.getLastWeekLottoNumber();
+        List<String> lastWeekLottoNumber = inputView.getLastWeekLottoNumber();
         ResultWinner winner = new ResultWinner();
 
         EnumMap<Rank, Integer> resultMap = winner.countOfWinner(buyLottoList, lastWeekLottoNumber);
-        ResultView.resultView(resultMap, lottoCount);
+        resultView.PrintTheWinningResults(resultMap, lottoCount);
 
     }
 }
