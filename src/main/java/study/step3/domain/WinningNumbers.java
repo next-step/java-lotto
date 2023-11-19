@@ -22,4 +22,8 @@ public class WinningNumbers {
             .collect(Collectors.toList());
     }
 
+    public boolean containsNumber(LottoNumber number) {
+        return toIntegers().contains(number.lottoNumber());
+    }
+
 }

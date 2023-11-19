@@ -32,15 +32,23 @@ public class Lotto {
             .size() == LOTTO_NUMBERS_SIZE;
     }
 
-    public Rank matches(List<Integer> winningNumbers, Integer bonusNumber) {
+    public Rank matches(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
         lottoNumbers.forEach(number -> calculate(number, winningNumbers, bonusNumber));
         return Rank.valueOf(hitCount, isBonus);
     }
 
-    private void calculate(LottoNumber number, List<Integer> winningNumbers, Integer bonusNumber) {
-        if (number.containsWinningNumber(winningNumbers)) {
+    private void calculate(LottoNumber number, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
+        winningNumbers(number, winningNumbers);
+        bonusNumber(number, bonusNumber);
+    }
+
+    private void winningNumbers(LottoNumber number, WinningNumbers winningNumbers) {
+        if (winningNumbers.containsNumber(number)) {
             hitCount += 1;
         }
+    }
+
+    private void bonusNumber(LottoNumber number, LottoNumber bonusNumber) {
         if (number.matchesBonusNumber(bonusNumber)) {
             isBonus = true;
         }
@@ -48,10 +56,6 @@ public class Lotto {
 
     public List<LottoNumber> lottoNumbers() {
         return lottoNumbers;
-    }
-
-    public int hitCount() {
-        return hitCount;
     }
 
 }

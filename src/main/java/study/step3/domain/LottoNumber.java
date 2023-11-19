@@ -1,7 +1,5 @@
 package study.step3.domain;
 
-import java.util.List;
-
 import study.step3.domain.exception.LottoException;
 
 public class LottoNumber {
@@ -25,12 +23,8 @@ public class LottoNumber {
         return number >= LOTTO_START_NUMBER && number <= LOTTO_END_NUMBER;
     }
 
-    public boolean containsWinningNumber(List<Integer> winningNumbers) {
-        return winningNumbers.contains(lottoNumber);
-    }
-
-    public boolean matchesBonusNumber(Integer bonusNumber) {
-        return lottoNumber.equals(bonusNumber);
+    public boolean matchesBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumber.equals(bonusNumber.lottoNumber());
     }
 
     public Integer lottoNumber() {
