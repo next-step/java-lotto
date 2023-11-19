@@ -1,9 +1,9 @@
-package controller;
+package calculator.controller;
 
-import domain.StringCalculator;
-import domain.StringSplit;
-import ui.InputView;
-import ui.OutView;
+import calculator.domain.StringCalculator;
+import calculator.domain.StringSplit;
+import calculator.ui.InputView;
+import calculator.ui.OutView;
 
 public class CalcMain {
 

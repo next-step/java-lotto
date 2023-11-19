@@ -1,4 +1,4 @@
-package domain;
+package calculator.domain;
 
 public class Addition implements Calculator {
 

@@ -1,4 +1,4 @@
-package ui;
+package calculator.ui;
 
 import java.util.Scanner;
 
