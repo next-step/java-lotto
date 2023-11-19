@@ -17,15 +17,14 @@ public class LottoController {
     private static ResultView resultView = new ResultView();
 
     public static void main(String[] args) {
-        Lotto[] purchasedLottoList = buyLotto();
+        int purchasePrice = inputView.askPurchasePrice();
+        Lotto[] purchasedLottoList = buyLotto(purchasePrice);
         Lotto winningLotto = EnterWinningNumber();
 
-        checkWinningStatistics(purchasedLottoList, winningLotto);
+        checkWinningStatistics(purchasePrice, purchasedLottoList, winningLotto);
     }
 
-    private static Lotto[] buyLotto() {
-        int purchasePrice = inputView.askPurchasePrice();
-
+    private static Lotto[] buyLotto(int purchasePrice) {
         int lottoCount = purchasePrice / 1000;
         ResultView.printPurchaseInfo(lottoCount);
 
@@ -44,7 +43,7 @@ public class LottoController {
         return winningLotto;
     }
 
-    private static void checkWinningStatistics(Lotto[] lottoList, Lotto winningLotto) {
+    private static void checkWinningStatistics(int purchasePrice, Lotto[] lottoList, Lotto winningLotto) {
         Map<LottoResult, Integer> lottoResults = Arrays.stream(LottoResult.values())
                 .collect(Collectors.toMap(k -> k, v -> 0, (x, y) -> y, LinkedHashMap::new));
 
@@ -53,7 +52,7 @@ public class LottoController {
             lottoResults.put(lottoResult, lottoResults.getOrDefault(lottoResult, 0) + 1);
         }
 
-        resultView.printWinningStatistics(lottoResults);
+        resultView.printWinningStatistics(purchasePrice, lottoResults);
     }
 
 }
