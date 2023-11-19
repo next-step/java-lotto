@@ -34,4 +34,11 @@ public class InputView {
 
         return new Lotto(winningNumbers);
     }
+
+    public int bonusNumberInput() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("보너스 볼을 입력해 주세요.");
+
+        return scanner.nextInt();
+    }
 }

@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.domain.Match.*;
+import static lotto.domain.Rank.*;
 
 public class LottoCenter {
 
@@ -26,24 +26,25 @@ public class LottoCenter {
         return lottos;
     }
 
-    public void matchWinningNumber(List<Lotto> lottos, Lotto winningNumbers) {
+    public void matchWinningNumbers(List<Lotto> lottos, Lotto winningNumbers, int bonusNumber) {
         for (Lotto lotto : lottos) {
-            lotto.matchCount(winningNumbers);
+            lotto.matchCount(winningNumbers, bonusNumber);
         }
     }
 
     public List<Long> checkWinningResult(List<Lotto> lottos) {
-        for (Match match : values()) {
+        for (Rank rank : values()) {
             result.add(lottos.stream()
-                    .filter(lotto -> Match.valueOf(lotto).equals(match)).count());
+                    .filter(lotto -> Rank.valueOf(lotto).equals(rank)).count());
         }
         return result;
     }
 
     public float checkWinningRate() {
-        return (float) ((result.get(0) * THREEMATCH.prize())
-                + (result.get(1) * FOURMATCH.prize())
-                + (result.get(2) * FIVEMATCH.prize())
-                + (result.get(3) * SIXMATCH.prize())) / cash;
+        return (float) ((result.get(0) * FIRST.getWinningMoney())
+                + (result.get(1) * SECOND.getWinningMoney())
+                + (result.get(2) * THIRD.getWinningMoney())
+                + (result.get(3) * FOURTH.getWinningMoney())
+                + (result.get(4) * FIFTH.getWinningMoney())) / cash;
     }
 }

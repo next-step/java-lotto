@@ -23,9 +23,10 @@ public class Main {
 
         //당첨 번호 입력
         Lotto winningNumbers = inputView.winningNumberInput();
+        int bonusNumber = inputView.bonusNumberInput();
 
         //당첨 확인
-        lottoCenter.matchWinningNumber(lottos, winningNumbers);
+        lottoCenter.matchWinningNumbers(lottos, winningNumbers, bonusNumber);
 
         //통계 산출
         List<Long> result = lottoCenter.checkWinningResult(lottos);

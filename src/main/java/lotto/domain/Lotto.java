@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 public class Lotto {
 
     private final LottoNumber lottoNumber;
-    private Match match;
+    private Rank rank;
 
     public Lotto(List<Integer> numbers) {
         lottoNumber = new LottoNumber(numbers);
@@ -20,14 +20,16 @@ public class Lotto {
         return lottoNumber.getNumbers();
     }
 
-    public void matchCount(Lotto winningNumbers) {
+    public void matchCount(Lotto winningNumbers, int bonusNumber) {
         int count = (int) lottoNumber.getNumbers().stream()
                 .filter(n -> winningNumbers.getNumbers().stream()
                         .anyMatch(Predicate.isEqual(n))).count();
-        this.match = Match.valueOf(count);
+        boolean bonusMatch = lottoNumber.getNumbers().stream()
+                .anyMatch(Predicate.isEqual(bonusNumber));
+        this.rank = Rank.valueOf(count, bonusMatch);
     }
 
-    public Match getMatch() {
-        return match;
+    public Rank getRank() {
+        return rank;
     }
 }
