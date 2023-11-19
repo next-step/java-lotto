@@ -37,13 +37,10 @@ public class Lotto {
     }
 
     public int calculateMatchCount(Lotto winningLotto) {
-        int count = 0;
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            if (winningLotto.getLottoNumbers().contains(lottoNumber.getLottoNumber())) {
-                count++;
-            }
-        }
-        return count;
+        return (int) lottoNumbers.stream()
+                .map(LottoNumber::getLottoNumber)
+                .filter(winningLotto.getLottoNumbers()::contains)
+                .count();
     }
 
 }
