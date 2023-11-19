@@ -10,10 +10,10 @@ public class CalculatorTest {
     @DisplayName("연산자와 두 숫자를 입력하면 연산을 수행한다.")
     void 사칙연산_수행(){
         assertAll(
-                () -> assertThat(Calculator.operate("+",2, 3)).isEqualTo(5),
-                () -> assertThat(Calculator.operate("-",7, 3)).isEqualTo(4),
-                () -> assertThat(Calculator.operate("*",2, 3)).isEqualTo(6),
-                () -> assertThat(Calculator.operate("/",7, 3)).isEqualTo(2)
+                () -> assertThat(Calculator.returnCalculateResult("2 + 3")).isEqualTo(5),
+                () -> assertThat(Calculator.returnCalculateResult("7 - 3")).isEqualTo(4),
+                () -> assertThat(Calculator.returnCalculateResult("2 * 3")).isEqualTo(6),
+                () -> assertThat(Calculator.returnCalculateResult("7 / 3")).isEqualTo(2)
         );
     }
 
