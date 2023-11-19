@@ -5,7 +5,7 @@ import domain.calculator.CalculatorAble;
 import java.util.function.BinaryOperator;
 
 public enum OperatorEnum {
-    PLUS("+", (a, b) -> a + b),
+    PLUS("+", CalculatorAble::sum),
     MINUS("-", CalculatorAble::subtract),
     MULTIPLY("*", CalculatorAble::multiply),
     DIVIDE("/", CalculatorAble::divide);
