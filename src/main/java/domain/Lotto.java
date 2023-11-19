@@ -30,14 +30,16 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getLottoNumber)
+                .collect(Collectors.toList());
     }
 
-    public int matchCount(Lotto winningLotto) {
+    public int calculateMatchCount(Lotto winningLotto) {
         int count = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
-            if (winningLotto.getLottoNumbers().contains(lottoNumber)) {
+            if (winningLotto.getLottoNumbers().contains(lottoNumber.getLottoNumber())) {
                 count++;
             }
         }

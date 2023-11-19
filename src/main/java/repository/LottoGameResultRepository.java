@@ -11,11 +11,10 @@ public class LottoGameResultRepository {
     }
 
     public Map<Integer, Integer> getAllResult() {
-        return matchResult;
+        return new HashMap<>(matchResult);
     }
 
     public void clearStore(){
         matchResult.clear();
     }
-
 }

@@ -19,10 +19,10 @@ public class LottoGameService {
     public Map<Integer, Integer> matchUserLotto(Lotto winningLotto) {
         LottoGameResultRepository lottoMatchResult = new LottoGameResultRepository();
         List<Lotto> lottoTickets = userLottoRepository.getUserLottoTickets();
+
         int matchCount = 0;
         for (Lotto lottoTicket : lottoTickets) {
-            matchCount = lottoTicket.matchCount(winningLotto);
-
+            matchCount = lottoTicket.calculateMatchCount(winningLotto);
             lottoMatchResult.saveResult(LottoPrize.fromMatchCount(matchCount).getMatchCount());
         }
         return lottoMatchResult.getAllResult();
