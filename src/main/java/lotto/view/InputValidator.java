@@ -41,7 +41,10 @@ public class InputValidator {
         validateDelimiter(input, delimiter);
         String[] numbersString = input.split(delimiter);
 
-        List<Integer> numbers = validateParseInt(numbersString);
+        List<Integer> numbers = Arrays.stream(numbersString)
+            .map(this::validateParseInt)
+            .collect(Collectors.toUnmodifiableList());
+
         validateNegative(numbers);
         validateDuplicate(numbers);
     }
@@ -52,18 +55,16 @@ public class InputValidator {
         }
     }
 
-    private List<Integer> validateParseInt(String[] numbersString) {
-        List<Integer> numbers;
+    private int validateParseInt(String numberString) {
+        int number;
 
         try {
-            numbers = Arrays.stream(numbersString)
-                .map(number -> Integer.parseInt(number.trim()))
-                .collect(Collectors.toUnmodifiableList());
+            number = Integer.parseInt(numberString);
         } catch (NumberFormatException e){
             throw new IllegalArgumentException("당첨 번호는 정수를 입력해야 합니다.");
         }
 
-        return numbers;
+        return number;
     }
 
     private void validateNegative(List<Integer> numbers) {
@@ -104,6 +105,19 @@ public class InputValidator {
     private void validateDuplicate(Set<Integer> winningNumbers, int number) {
         if (winningNumbers.contains(number)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복이 되면 안됩니다.");
+        }
+    }
+
+    public void validateCountOfManual(String input, int numOfLotto) {
+        int countOfManual = validateParseInt(input);
+
+        validateNegative(List.of(countOfManual));
+        validateRangeOfManualCount(countOfManual, numOfLotto);
+    }
+
+    private void validateRangeOfManualCount(int countOfManual, int numOfLotto) {
+        if (countOfManual > numOfLotto) {
+            throw new IllegalArgumentException("수동으로 구매할 수 있는 로또 개수는 " + numOfLotto + "개 이하입니다.");
         }
     }
 }

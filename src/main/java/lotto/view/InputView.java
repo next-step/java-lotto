@@ -21,6 +21,24 @@ public class InputView {
         this.inputValidator = new InputValidator();
     }
 
+    public int inputCountOfManual(int numOfLotto) {
+        print("수동으로 구매할 로또 수를 입력해 주세요.");
+
+        try {
+            String countOfManual = input();
+            inputValidator.validateCountOfManual(countOfManual, numOfLotto);
+
+            return Integer.parseInt(countOfManual);
+        } catch (IllegalArgumentException e){
+            print(e.getMessage());
+            return inputCountOfManual(numOfLotto);
+        }
+    }
+
+    private int calculateNumOfLotto(String purchase) {
+        return (int) Long.parseLong(purchase) / LOTTO_PRICE;
+    }
+
     public int inputPurchaseMoney() {
         print("구입 금액을 입력해주세요.");
 
@@ -33,10 +51,6 @@ public class InputView {
             print(e.getMessage());
             return inputPurchaseMoney();
         }
-    }
-
-    private int calculateNumOfLotto(String purchase) {
-        return (int) Long.parseLong(purchase) / LOTTO_PRICE;
     }
 
     public Set<Integer> inputWinningNumbers() {
