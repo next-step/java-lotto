@@ -1,44 +1,36 @@
 package step2;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Map;
 
-import step2.constant.Prize;
-import step2.domain.Actor;
-import step2.domain.LotteryMachine;
-import step2.domain.StatisticsMachine;
+import step2.util.LotteryUtil;
+import step2.util.StatisticsUtil;
 import step2.model.Lotteries;
-import step2.model.Lottery;
+import step2.domain.Lottery;
+import step2.domain.Winning;
 import step2.view.InputView;
 import step2.view.ResultView;
 
 public class LotteryAutoNumberGenerator {
 
     public static void main(String[] args) {
-        Actor actor = new Actor();
-        Lotteries lotteries = new Lotteries();
-        StatisticsMachine statisticsMachine = new StatisticsMachine();
-
         int money = InputView.start();
-        int ticketCount = LotteryMachine.getTicketCount(money);
+        int ticketCount = InputView.getTicketCount(money);
         InputView.showTicketCount(ticketCount);
 
+        Lotteries lotteries = new Lotteries();
         for (int i = 0; i < ticketCount; i++) {
-            LotteryMachine.run();
-            LotteryMachine.shuffle();
-            Lottery lottery = Lottery.of(LotteryMachine.getBall(actor.choose()));
+            Lottery lottery = Lottery.of(LotteryUtil.getBall());
             lotteries.keep(lottery);
         }
-        InputView.showActorLotteries(lotteries.getLotteries());
+        InputView.showLotteries(lotteries.getLotteries());
+        Winning winning = Winning.from(InputView.getWinNumber());
 
-        List<Prize> pirzeList = lotteries.getPirzeList(InputView.getWinning());
+        Map<String, Integer> summarize = StatisticsUtil.summarize(winning.getPirzeList(lotteries));
+        long rewards = StatisticsUtil.getRewards(summarize);
+        BigDecimal roi = StatisticsUtil.getRoi(money, rewards);
 
-        Map<String, Integer> sortedPrize = statisticsMachine.sortPrize(pirzeList);
-        long rewards = statisticsMachine.getRewards(sortedPrize);
-        BigDecimal roi = statisticsMachine.getRoi(money, rewards);
-
-        ResultView.showRewards(sortedPrize);
+        ResultView.showRewards(summarize);
         ResultView.showRoi(roi);
     }
 }
