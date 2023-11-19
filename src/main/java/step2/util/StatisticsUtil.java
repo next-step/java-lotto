@@ -17,16 +17,16 @@ import step2.constant.Prize;
 
 public class StatisticsUtil {
 
-    private static Map<String, Integer> map;
+    private static Map<String, Integer> map = new HashMap<>();
 
-    public StatisticsUtil() {
-        map = new HashMap<>();
+    private static void init() {
         for (Prize p : Prize.values()) {
             map.put(p.name(), 0);
         }
     }
 
     public static Map<String, Integer> summarize(List<Prize> pirzeList) {
+        init();
         for (Prize p : pirzeList) {
             count(p.name());
         }
