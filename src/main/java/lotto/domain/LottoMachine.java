@@ -1,11 +1,11 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class LottoMachine {
 
@@ -27,11 +27,13 @@ public class LottoMachine {
         }
 
         private Set<Integer> generateLottoNumbers() {
-                Set<Integer> lottoNumbers = new HashSet<>();
-                while (lottoNumbers.size() != 6) {
-                        lottoNumbers.add(random.nextInt(45) + 1);
+                List<Integer> lottoNumbers = new ArrayList<>();
+                for (int i = 1; i <= 45; i++) {
+                        lottoNumbers.add(i);
                 }
-                return lottoNumbers.stream().collect(Collectors.toSet());
+                Collections.shuffle(lottoNumbers);
+                lottoNumbers = lottoNumbers.subList(0, 6);
+                return new HashSet<>(lottoNumbers);
         }
 
         private long calculatePurchaseQuantity(long purchaseAmount) {

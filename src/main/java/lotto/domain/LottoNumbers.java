@@ -15,11 +15,14 @@ public class LottoNumbers {
         }
 
         public LottoNumbers(int... values) {
-                this.values = Arrays.stream(values).mapToObj(LottoNumber::new).sorted()
-                    .collect(Collectors.toCollection(TreeSet::new));
+                this(Arrays.stream(values).boxed().sorted().collect(Collectors.toCollection(TreeSet::new)));
         }
 
-        public int[] values() {
-                return values.stream().mapToInt(LottoNumber::value).toArray();
+        public Set<LottoNumber> values() {
+                return values;
+        }
+
+        public boolean contains(int winningNumber) {
+                return values.stream().mapToInt(LottoNumber::value).anyMatch(value -> value == winningNumber);
         }
 }

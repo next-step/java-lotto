@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Ticket {
@@ -11,12 +10,8 @@ public class Ticket {
                 this.numbers = numbers;
         }
 
-        public Ticket(int[] numbers) {
-                this.numbers = new LottoNumbers(numbers);
-        }
-
         public int[] numbers() {
-                return numbers.values();
+                return numbers.values().stream().mapToInt(LottoNumber::value).toArray();
         }
 
         public int countWinningNumber(WinningNumbers winningNumbers) {
@@ -27,7 +22,7 @@ public class Ticket {
         }
 
         private int getOneIfWinningNumberContained(int winningNumber) {
-                if (Arrays.stream(numbers.values()).anyMatch(value -> value == winningNumber)) {
+                if (numbers.contains(winningNumber)) {
                         return 1;
                 }
                 return 0;

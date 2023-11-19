@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import lotto.domain.Rank;
 import lotto.domain.Ticket;
-import lotto.domain.Tickets;
 
 public class OutputView {
 
@@ -21,22 +20,20 @@ public class OutputView {
                 System.out.println();
         }
 
-        public static void printResult(Tickets tickets) {
-                printResultOfWinningTitle();
-                printResultOfWinning(tickets.matchRankCountMap());
-                printRateOfBenefit(tickets.rateOfBenefit());
-        }
-
-        private static void printResultOfWinningTitle() {
+        public static void printResultOfWinningTitle() {
                 System.out.println();
                 System.out.println("당첨 통계");
                 System.out.println("---------");
         }
 
-        private static void printResultOfWinning(Map<Rank, Integer> matchRankCountMap) {
+        public static void printResultOfWinning(Map<Rank, Integer> matchRankCountMap) {
                 for (Rank rank : Rank.values()) {
                         printExceptForMissRank(rank, matchRankCountMap);
                 }
+        }
+
+        public static void printRateOfBenefit(double rateOfBenefit) {
+                System.out.println("총 수익률은 " + rateOfBenefit + "입니다.");
         }
 
         private static void printExceptForMissRank(Rank rank, Map<Rank, Integer> matchRankCountMap) {
@@ -45,9 +42,5 @@ public class OutputView {
                             rank.matchCount() + "개 일치 (" + rank.winningMoney() + "원)" + " - " + matchRankCountMap.get(
                                 rank) + "개");
                 }
-        }
-
-        private static void printRateOfBenefit(double rateOfBenefit) {
-                System.out.println("총 수익률은 " + rateOfBenefit + "입니다.");
         }
 }

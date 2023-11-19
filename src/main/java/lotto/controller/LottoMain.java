@@ -1,6 +1,8 @@
 package lotto.controller;
 
+import java.util.Map;
 import lotto.domain.LottoMachine;
+import lotto.domain.Rank;
 import lotto.domain.Tickets;
 import lotto.domain.WinningNumbers;
 import lotto.utils.TextManipulator;
@@ -21,7 +23,9 @@ public class LottoMain {
                 WinningNumbers winningNumbers = new WinningNumbers(TextManipulator.splitNumberTextByComma(
                     InputView.scanWinningNumberText()));
 
-                tickets.analyzeLottoResults(winningNumbers, purchaseAmount);
-                OutputView.printResult(tickets);
+                Map<Rank, Integer> matchRankCountMap = tickets.countWinningTickets(winningNumbers);
+                OutputView.printResultOfWinningTitle();
+                OutputView.printResultOfWinning(matchRankCountMap);
+                OutputView.printRateOfBenefit(tickets.calculateRateOfBenefit(matchRankCountMap, purchaseAmount));
         }
 }

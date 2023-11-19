@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class WinningNumbers {
 
         private static final int WINNING_NUMBERS_COUNT = 6;
+
         private final Set<Integer> values;
 
         public WinningNumbers(List<Integer> values) {
