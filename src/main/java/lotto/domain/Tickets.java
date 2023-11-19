@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -22,10 +23,11 @@ public class Tickets {
                 initMatchRankCountMap(matchRankCountMap);
                 values.forEach(ticket -> {
                         int countOfWinningNumber = ticket.countWinningNumber(winningNumbers);
-                        Rank rank = Rank.valueOfRank(countOfWinningNumber);
+                        Rank rank = Rank.valueOfRank(countOfWinningNumber,
+                            ticket.isBonusNumberContained(winningNumbers));
                         matchRankCountMap.put(rank, matchRankCountMap.get(rank) + 1);
                 });
-                return matchRankCountMap;
+                return Collections.unmodifiableMap(matchRankCountMap);
         }
 
         public double calculateRateOfBenefit(Map<Rank, Integer> matchRankCountMap, long purchaseAmount) {

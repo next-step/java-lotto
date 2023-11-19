@@ -21,8 +21,12 @@ public class Ticket {
                 return matchCount.get();
         }
 
+        public boolean isBonusNumberContained(WinningNumbers winningNumbers) {
+                return numbers.isBonusNumberContained(winningNumbers.bonusNumber());
+        }
+
         private int getOneIfWinningNumberContained(int winningNumber) {
-                if (numbers.contains(winningNumber)) {
+                if (numbers.isWinningNumberContained(winningNumber)) {
                         return 1;
                 }
                 return 0;

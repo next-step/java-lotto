@@ -22,7 +22,11 @@ public class LottoNumbers {
                 return values;
         }
 
-        public boolean contains(int winningNumber) {
+        public boolean isWinningNumberContained(int winningNumber) {
                 return values.stream().mapToInt(LottoNumber::value).anyMatch(value -> value == winningNumber);
+        }
+
+        public boolean isBonusNumberContained(LottoNumber bonusNumber) {
+                return values.stream().anyMatch(value -> value == bonusNumber);
         }
 }
