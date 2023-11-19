@@ -13,20 +13,20 @@ public class LottoWalletTest {
     @DisplayName("입력한 개수만큼의 로또 저장한다.")
     @Test
     void saveLottoAsYouWant() {
-        LottoWallet lottoWallet = LottoWallet.from(1);
-        lottoWallet.saveLotto(new Lotto(Collections.emptyList()));
+        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = new Lotto(List.of(6, 5, 4, 3, 2, 1));
+        LottoWallet lottoWallet = LottoWallet.from(List.of(lotto1, lotto2));
         assertThat(lottoWallet.remainTicketsCount()).isEqualTo(2);
     }
 
     @DisplayName("저장한 로또중 한장을 준다.")
     @Test
     void returnLottoTicketAsYouWant() {
-        LottoWallet lottoWallet = LottoWallet.from(1);
+        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = new Lotto(List.of(6, 5, 4, 3, 2, 1));
+        LottoWallet lottoWallet = LottoWallet.from(List.of(lotto1, lotto2));
 
-        Lotto expectedTicket = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        lottoWallet.saveLotto(expectedTicket);
-
-        assertThat(lottoWallet.oneTicket(1)).isEqualTo(expectedTicket);
+        assertThat(lottoWallet.oneTicket(1)).isEqualTo(lotto2);
     }
 
 }

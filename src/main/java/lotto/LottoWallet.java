@@ -10,13 +10,9 @@ public class LottoWallet {
         this.lottos = lottos;
     }
 
-    public static LottoWallet from(int count) {
-        LottoFactory lottoFactory = new LottoFactory();
-        return new LottoWallet(lottoFactory.from(count));
-    }
 
-    public void saveLotto(Lotto lotto) {
-        this.lottos.add(lotto);
+    public static LottoWallet from(List<Lotto> lottos) {
+        return new LottoWallet(lottos);
     }
 
     public int remainTicketsCount() {
