@@ -57,6 +57,7 @@ public class InputView {
     private LottoNumbers convertToNumbers(String input) {
         String[] stringNumbers = input.split(DELIMITER);
 
+        // TODO : view - domain간 의존관계 생기니 값 그대로를 반환하도록 하자 아래 메서드도 마찬가지
         return new LottoNumbers(Arrays.stream(stringNumbers)
             .map(stringNumber -> Integer.parseInt(stringNumber.trim()))
             .collect(Collectors.toUnmodifiableSet()));
@@ -69,7 +70,7 @@ public class InputView {
             String input = input();
             inputValidator.validateBonusNumber(input, winningNumbers);
 
-            return new LottoNumber(Integer.parseInt(input));
+            return LottoNumber.of(Integer.parseInt(input));
         } catch (IllegalArgumentException e){
             print(e.getMessage());
             return inputBonusNumber(winningNumbers);

@@ -1,23 +1,37 @@
 package lotto.domain.lotto.wrapper;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int MIN = 1;
     private static final int MAX = 45;
+    private static final List<LottoNumber> numbers = IntStream.rangeClosed(MIN, MAX)
+        .mapToObj(LottoNumber::new)
+        .collect(Collectors.toUnmodifiableList());
 
     private final int number;
 
-    public LottoNumber(int number) {
-        if (isOutOfRange(number)) {
-            throw new IllegalArgumentException(String.format("숫자의 범위는 %d ~ %d입니다.", MIN, MAX));
-        }
-
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private boolean isOutOfRange(int number) {
+    public static LottoNumber of(int number) {
+        validateRange(number);
+
+        return numbers.get(number - MIN);
+    }
+
+    private static void validateRange(int number) {
+        if (isOutOfRange(number)) {
+            throw new IllegalArgumentException(String.format("숫자의 범위는 %d ~ %d입니다.", MIN, MAX));
+        }
+    }
+
+    private static boolean isOutOfRange(int number) {
         return number < MIN || number > MAX;
     }
 

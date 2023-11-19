@@ -15,7 +15,7 @@ public class WinningNumber {
     }
 
     public WinningNumber(Set<Integer> winningNumbers, int bonusNumber) {
-        this(new LottoNumbers(winningNumbers), new LottoNumber(bonusNumber));
+        this(new LottoNumbers(winningNumbers), LottoNumber.of(bonusNumber));
     }
 
     private void validateBonusNumber(LottoNumbers winningNumbers, LottoNumber bonusNumber) {

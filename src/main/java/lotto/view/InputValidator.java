@@ -99,7 +99,7 @@ public class InputValidator {
     }
 
     private void validateDuplicate(LottoNumbers winningNumbers, int number) {
-        if (winningNumbers.contains(new LottoNumber(number))) {
+        if (winningNumbers.contains(LottoNumber.of(number))) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복이 되면 안됩니다.");
         }
     }
