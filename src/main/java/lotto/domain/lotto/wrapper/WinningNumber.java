@@ -21,11 +21,6 @@ public class WinningNumber {
         return lotto.contains(bonusNumber);
     }
 
-    public boolean containsNotBonus(LottoNumbers lotto) {
-        return !lotto.contains(bonusNumber);
-
-    }
-
     public int countMatchingNumbers(LottoNumbers lottoNumbers) {
         return winningNumbers.countMatchingNumbers(lottoNumbers);
     }
