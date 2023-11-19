@@ -3,7 +3,7 @@ package repository;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LottoGameResult {
+public class LottoGameResultRepository {
     private Map<Integer, Integer> matchResult = new HashMap<>();
 
     public void saveResult(int matchCount) {

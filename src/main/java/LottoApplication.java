@@ -18,7 +18,7 @@ public class LottoApplication {
         /**
          * 가격에 맞게 로또 구매
          */
-        Long money = InputView.inputLottoPurchaseAmount();
+        long money = InputView.inputLottoPurchaseAmount();
         userLottoService.buyRandomLottoTickets(money);
         List<Lotto> lottoTickets = userLottoService.getAllLottoTickets();
         ResultView.printLottoCount(lottoTickets.size());

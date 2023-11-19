@@ -1,7 +1,7 @@
 package service;
 
 import domain.Lotto;
-import repository.LottoGameResult;
+import repository.LottoGameResultRepository;
 import domain.LottoPrize;
 import domain.WinningLotto;
 import repository.UserLottoRepository;
@@ -18,7 +18,7 @@ public class LottoGameService {
     }
 
     public Map<Integer, Integer> matchUserLotto(WinningLotto winningLotto) {
-        LottoGameResult lottoMatchResult = new LottoGameResult();
+        LottoGameResultRepository lottoMatchResult = new LottoGameResultRepository();
         List<Lotto> lottoTickets = userLottoRepository.getUserLottoTickets();
         int matchCount = 0;
         for (Lotto lottoTicket : lottoTickets) {
