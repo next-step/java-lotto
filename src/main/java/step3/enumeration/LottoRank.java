@@ -22,38 +22,17 @@ public enum LottoRank {
         this.price = price;
     }
 
-    public static final List<LottoRank> ALL_LOTTO_RANK = Arrays.asList(LottoRank.values());
-    public static final List<LottoRank> ALL_BONUS_RANK = List.of(LottoRank.SECOND);
+    public static final List<LottoRank> ALL_LOTTO_RANK = Arrays.stream(LottoRank.values()).collect(Collectors.toList());
     public static final List<LottoRank> ALL_NORMAL_LOTTO_RANK = Arrays.stream(LottoRank.values())
             .filter(rank -> rank != SECOND && rank != ZERO)
             .collect(Collectors.toList());
 
-    public static int getPriceByMatch(int match) {
-        return ALL_NORMAL_LOTTO_RANK.stream()
-                .filter(lottoRank -> lottoRank.match == match)
+    public static int getPriceByName(String name) {
+        return ALL_LOTTO_RANK.stream()
+                .filter(lottoRank -> lottoRank.name().equals(name))
                 .map(e -> e.price)
                 .findFirst()
                 .orElse(ZERO.price);
-    }
-
-    public static int getBonusPriceByMatch(int match) {
-        return ALL_BONUS_RANK.stream()
-                .filter(lottoRank -> lottoRank.match == match)
-                .map(e -> e.price)
-                .findFirst()
-                .orElse(ZERO.price);
-    }
-
-    public static List<Integer> getMatches() {
-        return ALL_NORMAL_LOTTO_RANK.stream()
-                .map(e -> e.match)
-                .collect(Collectors.toList());
-    }
-
-    public static List<Integer> getBonusMatches() {
-        return ALL_BONUS_RANK.stream()
-                .map(e -> e.match)
-                .collect(Collectors.toList());
     }
 
     public int getPrice() {
@@ -62,5 +41,13 @@ public enum LottoRank {
 
     public int getMatch() {
         return this.match;
+    }
+
+    public static String getName(int match) {
+        return ALL_NORMAL_LOTTO_RANK.stream()
+                .filter(lottoRank -> lottoRank.match == match)
+                .map(Enum::name)
+                .findFirst()
+                .orElse(ZERO.name());
     }
 }

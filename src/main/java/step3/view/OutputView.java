@@ -2,13 +2,13 @@ package step3.view;
 
 import step3.enumeration.LottoRank;
 import step3.model.Lotto;
+import step3.model.WinnerBoard;
 import step3.utils.CalculateUtils;
 import step3.utils.NumberUtils;
 
 import java.util.List;
-import java.util.Map;
 
-import static step2.enumeration.LottoRank.ZERO;
+import static step3.enumeration.LottoRank.SECOND;
 
 public class OutputView {
 
@@ -20,26 +20,18 @@ public class OutputView {
         System.out.println(lottos.toString() + "\n");
     }
 
-    public void viewLottoRating(Map<Integer, Long> winnerScore, Map<Integer, Long> bonusScore) {
+    public void viewLottoRating(WinnerBoard winnerBoard) {
         System.out.println("당첨 통계\n" + "---------");
-        viewLottoRatingWithoutScore(winnerScore);
-        viewLottoBonusScore(bonusScore);
-        LottoRank.getMatches()
-            .stream()
-            .filter(match -> winnerScore.get(match) != null)
-            .forEach(match -> System.out.println(match + "개 일치 (" + LottoRank.getPriceByMatch(match) + "원) - " + winnerScore.get(match) + "개"));
+
+        for (LottoRank rank : LottoRank.ALL_NORMAL_LOTTO_RANK) {
+            System.out.println(rank.getMatch() + "개 일치 (" + LottoRank.getPriceByName(rank.name()) + "원) - " + NumberUtils.getSafeNumber(winnerBoard.winnerBoard.get(rank.name())) + "개");
+        }
+
+        viewLottoBonusScore(winnerBoard.winnerBoard.get(SECOND.name()));
     }
 
-    public void viewLottoRatingWithoutScore(Map<Integer, Long> winnerScore) {
-        LottoRank.getMatches()
-                .stream()
-                .filter(match -> winnerScore.get(match) == null)
-                .forEach(match -> System.out.println(match + "개 일치 (" + LottoRank.getPriceByMatch(match) + "원) - " + ZERO.getPrice() + "개"));
-    }
-
-    public void viewLottoBonusScore(Map<Integer, Long> bonusScore) {
-        LottoRank.getBonusMatches()
-                .forEach(match -> System.out.println(match + "개 일치, 보너스 볼 일치 (" + LottoRank.getBonusPriceByMatch(match) + "원) - " + NumberUtils.getSafeNumber(bonusScore.get(match)) + "개"));
+    public void viewLottoBonusScore(Integer count) {
+        System.out.println(SECOND.getMatch() + "개 일치, 보너스 볼 일치 (" + SECOND.getPrice() + "원) - " + NumberUtils.getSafeNumber(count) + "개");
     }
 
     public void viewRating(Double rating) {

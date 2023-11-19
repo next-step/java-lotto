@@ -3,54 +3,42 @@ package step3.model;
 import step3.enumeration.LottoRank;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static step3.enumeration.LottoRank.SECOND;
-
 public class LottoWinner {
 
-    private static final int MINIMUM_WIN_COUNT = 3;
-    private Map<Integer, Long> winnerNumberCount;
+    private final WinnerBoard winnerBoard;
     private final List<Lotto> lottos;
     private final List<Integer> winNumbers;
     private final int bonusNumber;
 
-    public LottoWinner(List<Lotto> lottos, String winNumber, int bonusNumber) {
-        winnerNumberCount = new HashMap<>();
+    public LottoWinner(List<Lotto> lottos, String winNumber, WinnerBoard winnerBoard, int bonusNumber) {
+        this.winnerBoard = winnerBoard;
         this.lottos = lottos;
         this.winNumbers = splitWinNumberString(winNumber);
+
+        validateBonusNumber(winNumbers, bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
     public int getTotalPrice() {
         int totalPrice = 0;
-        for (int match : this.winnerNumberCount.keySet()) {
-            totalPrice += LottoRank.getPriceByMatch(match);
+        for (Map.Entry<String, Integer> board : this.winnerBoard.winnerBoard.entrySet()) {
+            if (board.getValue() > 0) totalPrice += LottoRank.getPriceByName(board.getKey());
         }
 
         return totalPrice;
     }
 
-    public Map<Integer, Long> getWinnerNumberMatchCount() {
-        this.winnerNumberCount = this.lottos.stream()
-                .map(lotto -> lotto.getLottoWinner(this.winNumbers))
-                .filter(score -> score >= MINIMUM_WIN_COUNT)
-                .collect(Collectors.groupingBy(c -> c, Collectors.counting()));
+    public WinnerBoard getWinnerNumberMatchCount() {
+        for (Lotto lotto : this.lottos) {
+            String rankName = lotto.getLottoWinner(this.winNumbers, this.bonusNumber);
+            this.winnerBoard.winnerBoard.put(rankName, winnerBoard.winnerBoard.get(rankName) + 1);
+        }
 
-        return this.winnerNumberCount;
-    }
-
-    public Map<Integer, Long> getBonusNumberMatchCount() {
-        Map<Integer, Long> bonus = this.lottos.stream()
-                .map(lotto -> lotto.getBonusNumberCount(this.winNumbers, this.bonusNumber))
-                .filter(match -> match == SECOND.getMatch())
-                .collect(Collectors.groupingBy(c -> c, Collectors.counting()));
-
-        bonus.entrySet().stream().map(bonusNumber -> this.winnerNumberCount.put(bonusNumber.getKey(), bonusNumber.getValue()));
-        return this.winnerNumberCount;
+        return this.winnerBoard;
     }
 
     public Double getRating(int payPrice) {
@@ -64,5 +52,11 @@ public class LottoWinner {
                 .filter(e -> !new LottoNumber().isOverMaxNumber(e))
                 .collect(Collectors.toList());
 
+    }
+
+    private void validateBonusNumber(List<Integer> winNumbers, int bonusNumber) {
+        if (winNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("당첨번호에 포함된 보너스 번호 입니다.");
+        }
     }
 }
