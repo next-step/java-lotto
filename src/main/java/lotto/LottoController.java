@@ -18,8 +18,7 @@ public class LottoController {
         int manual = inputManualCount();
         List<List<Integer>> manualList = inputManualList(manual);
 
-        LottoGeneration lottoGeneration = new LottoGeneration(manualList, NUMBER_GENERATION,count);
-        Lottos lottos = new Lottos(lottoGeneration.find());
+        Lottos lottos = Lottos.generate(manualList, NUMBER_GENERATION,count);
 
         printLottoCount(count, manual);
         printLottoBundle(lottos.find());

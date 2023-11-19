@@ -8,23 +8,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("로또 관련 객체 테스트")
 public class LottoTest {
-    private String text;
     private Lotto lotto;
 
     @BeforeEach
-    void create(){
-        text = "[1, 2, 3, 4, 5, 6]";
+    void create() {
         lotto = new Lotto(new TestNumberGeneration().generate());
     }
 
     @Test
     @DisplayName("당첨번호 중 맞춘 숫자 개수를 리턴")
     void 로또_당첨번호_count() {
-        List<Integer> winList =  new ArrayList<>(Arrays.asList(6,5,4,10,10,10));
+        List<Integer> winList = new ArrayList<>(Arrays.asList(6, 5, 4, 10, 10, 10));
         int count = lotto.countMath(winList);
 
         assertThat(count).isEqualTo(3);

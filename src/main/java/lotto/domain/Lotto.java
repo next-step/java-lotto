@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.*;
 
 public class Lotto {
+    public static final int SIZE = 6;
     private final List<LottoNumber> lotto;
 
     public Lotto(List<Integer> list) {
@@ -19,7 +20,7 @@ public class Lotto {
     }
 
     private List<LottoNumber> validate(List<LottoNumber> list) {
-        if (list.size() == 6) {
+        if (list.size() == SIZE) {
             return list;
         }
         throw new InputMismatchException("로또 번호는 6자리를 입력해 주세요.");

@@ -1,15 +1,35 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+
+    public static Lottos generate(List<List<Integer>> manualNumbers, NumberGeneration numberGeneration, int count) {
+        List<Lotto> list = new ArrayList<>();
+        int randomCount = count - manualNumbers.size();
+
+        manualGenerate(manualNumbers, list);
+        autoGenerate(numberGeneration, randomCount, list);
+
+       return new Lottos(list);
+    }
+
+    private static void autoGenerate(NumberGeneration numberGeneration, int randomCount, List<Lotto> list) {
+        for (int i = 0; i < randomCount; i++) {
+            list.add(new Lotto(numberGeneration.generate()));
+        }
+    }
+
+    private static void manualGenerate(List<List<Integer>> manualNumbers, List<Lotto> list) {
+        for (List<Integer> manualNumber : manualNumbers) {
+            list.add(new Lotto(manualNumber));
+        }
     }
 
     public Map<LottoRank, Integer> findRanks(List<Integer> winList, int bonus) {

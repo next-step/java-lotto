@@ -18,8 +18,7 @@ public class LottoRanksTest {
     void 당첨금_합계확인() {
         int count = 5;
         int bonus = 1;
-        LottoGeneration lottoGeneration = new LottoGeneration(new ArrayList<>(), new TestNumberGeneration(),count);
-        Lottos lottos = new Lottos(lottoGeneration.find());
+        Lottos lottos = Lottos.generate(new ArrayList<>(), new TestNumberGeneration(),count);
 
         LottoRanks lottoRanks = new LottoRanks(lottos, new ArrayList<>(Arrays.asList(6, 5, 4, 3, 2, 10)), bonus);
 
