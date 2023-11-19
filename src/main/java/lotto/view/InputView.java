@@ -1,10 +1,9 @@
 package lotto.view;
 
-import lotto.domain.lotto.wrapper.LottoNumber;
-import lotto.domain.lotto.wrapper.LottoNumbers;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.lang.System.*;
@@ -40,7 +39,7 @@ public class InputView {
         return (int) Long.parseLong(purchase) / LOTTO_PRICE;
     }
 
-    public LottoNumbers inputWinningNumbers() {
+    public Set<Integer> inputWinningNumbers() {
         print("이번 주 당첨 번호를 입력해 주세요.");
 
         try {
@@ -54,23 +53,22 @@ public class InputView {
         }
     }
 
-    private LottoNumbers convertToNumbers(String input) {
+    private Set<Integer> convertToNumbers(String input) {
         String[] stringNumbers = input.split(DELIMITER);
 
-        // TODO : view - domain간 의존관계 생기니 값 그대로를 반환하도록 하자 아래 메서드도 마찬가지
-        return new LottoNumbers(Arrays.stream(stringNumbers)
+        return Arrays.stream(stringNumbers)
             .map(stringNumber -> Integer.parseInt(stringNumber.trim()))
-            .collect(Collectors.toUnmodifiableSet()));
+            .collect(Collectors.toUnmodifiableSet());
     }
 
-    public LottoNumber inputBonusNumber(LottoNumbers winningNumbers) {
+    public int inputBonusNumber(Set<Integer> winningNumbers) {
         print("보너스 볼을 입력해주세요.");
 
         try {
             String input = input();
             inputValidator.validateBonusNumber(input, winningNumbers);
 
-            return LottoNumber.of(Integer.parseInt(input));
+            return Integer.parseInt(input);
         } catch (IllegalArgumentException e){
             print(e.getMessage());
             return inputBonusNumber(winningNumbers);

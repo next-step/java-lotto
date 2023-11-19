@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.LottoGame;
-import lotto.domain.lotto.wrapper.LottoNumber;
 import lotto.domain.lotto.wrapper.LottoNumbers;
 import lotto.domain.lotto.wrapper.WinningNumber;
 import lotto.domain.rankcount.RankCountGroup;
@@ -10,6 +9,7 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -48,8 +48,8 @@ public class LottoController {
     }
 
     private WinningNumber winning() {
-        LottoNumbers winningNumbers = inputView.inputWinningNumbers();
-        LottoNumber bonusNumber = inputView.inputBonusNumber(winningNumbers);
+        Set<Integer> winningNumbers = inputView.inputWinningNumbers();
+        int bonusNumber = inputView.inputBonusNumber(winningNumbers);
 
         return new WinningNumber(winningNumbers, bonusNumber);
     }

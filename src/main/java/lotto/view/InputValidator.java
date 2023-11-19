@@ -1,10 +1,8 @@
 package lotto.view;
 
-import lotto.domain.lotto.wrapper.LottoNumber;
-import lotto.domain.lotto.wrapper.LottoNumbers;
-
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputValidator {
@@ -69,14 +67,17 @@ public class InputValidator {
     }
 
     private void validateNegative(List<Integer> numbers) {
-        if (isOutOfRange(numbers)) {
+        numbers.forEach(this::validateRangeOfNumber);
+    }
+
+    private void validateRangeOfNumber(Integer number) {
+        if (isOutOfRange(number)) {
             throw new IllegalArgumentException("숫자의 범위는 1~45입니다.");
         }
     }
 
-    private boolean isOutOfRange(List<Integer> numbers) {
-        return numbers.stream()
-            .anyMatch(number -> number < 1 || number > 45);
+    private boolean isOutOfRange(int number) {
+        return number < 1 || number > 45;
     }
 
     private void validateDuplicate(List<Integer> numbers) {
@@ -93,13 +94,15 @@ public class InputValidator {
         }
     }
 
-    public void validateBonusNumber(String input, LottoNumbers winningNumbers) {
+    public void validateBonusNumber(String input, Set<Integer> winningNumbers) {
         int number = (int) validateParseLong(input);
+
+        validateRangeOfNumber(number);
         validateDuplicate(winningNumbers, number);
     }
 
-    private void validateDuplicate(LottoNumbers winningNumbers, int number) {
-        if (winningNumbers.contains(LottoNumber.of(number))) {
+    private void validateDuplicate(Set<Integer> winningNumbers, int number) {
+        if (winningNumbers.contains(number)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복이 되면 안됩니다.");
         }
     }
