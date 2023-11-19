@@ -11,7 +11,7 @@ public class PrizeTest {
     @CsvSource(value = {"3,5000", "4,50000", "5,1500000", "6,2000000000"})
     @ParameterizedTest(name = "{0} 개 일치시 {1}")
     void prizeByRank(int rank, int expectedPrize) {
-        int actualPrize = Prize.prizeByRank(rank);
+        int actualPrize = Prize.priceByRank(rank);
         Assertions.assertThat(actualPrize).isEqualTo(expectedPrize);
     }
 
