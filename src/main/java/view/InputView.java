@@ -9,7 +9,7 @@ public class InputView {
     private InputView() { // 인스턴스화 방지
     }
 
-    public static Long inputLottoPurchaseAmount() {
+    public static long inputLottoPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         return scanner.nextLong();
     }

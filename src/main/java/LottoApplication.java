@@ -1,7 +1,8 @@
 import domain.Lotto;
-import domain.LottoGame;
-import domain.UserLotto;
+import service.LottoGameService;
+import repository.UserLottoRepository;
 import domain.WinningLotto;
+import service.UserLottoService;
 import view.InputView;
 import view.ResultView;
 
@@ -11,21 +12,34 @@ import java.util.Map;
 public class LottoApplication {
 
     public static void main(String[] args) {
-        UserLotto userLotto = new UserLotto();
+        UserLottoRepository userLottoRepository = new UserLottoRepository();
+        UserLottoService userLottoService = new UserLottoService(userLottoRepository);
 
+        /**
+         * 가격에 맞게 로또 구매
+         */
         Long money = InputView.inputLottoPurchaseAmount();
-        List<Lotto> lottoTickets = userLotto.generateRandomLottoTickets(money);
-
+        userLottoService.buyRandomLottoTickets(money);
+        List<Lotto> lottoTickets = userLottoService.getAllLottoTickets();
         ResultView.printLottoCount(lottoTickets.size());
         ResultView.printLottoNumbers(lottoTickets);
 
-        LottoGame lottoGame = new LottoGame(userLotto);
+        /**
+         * 당첨번호 입력
+         */
+        LottoGameService lottoGame = new LottoGameService(userLottoRepository);
         String inputWinningNumbers = InputView.inputWinningNumbers();
         WinningLotto winningLotto = new WinningLotto(inputWinningNumbers);
 
-        Map<Integer, Integer> lottoPrizeIntegerMap = lottoGame.matchNumbers(winningLotto);
+        /**
+         * userLotto와 당첨번호 당첨결과 확인
+         */
+        Map<Integer, Integer> lottoPrizeIntegerMap = lottoGame.matchUserLotto(winningLotto);
         ResultView.printLottoGameResult(lottoPrizeIntegerMap);
 
+        /**
+         * 당첨금액과 수익률 출력
+         */
         float rate = lottoGame.calculateReturnRate(money, lottoPrizeIntegerMap);
         ResultView.printLottoReturnRate(rate);
     }

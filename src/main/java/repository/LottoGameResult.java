@@ -1,12 +1,12 @@
-package domain;
+package repository;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class LottoMatchResult {
+public class LottoGameResult {
     private Map<Integer, Integer> matchResult = new HashMap<>();
 
-    public void storeResult(int matchCount) {
+    public void saveResult(int matchCount) {
         matchResult.put(matchCount, matchResult.getOrDefault(matchCount, 0) + 1);
     }
 
@@ -14,8 +14,8 @@ public class LottoMatchResult {
         return matchResult;
     }
 
-    public long getPrizeSum() {
-        return 0;
+    public void clearStore(){
+        matchResult.clear();
     }
 
 }

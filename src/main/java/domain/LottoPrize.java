@@ -4,10 +4,10 @@ public enum LottoPrize {
     NO_MATCH(0, 0),
     ONE_MATCH(1, 0),
     TWO_MATCH(2, 0),
-    THREE_MATCH(3, 5000L),
-    FOUR_MATCH(4, 50000L),
-    FIVE_MATCH(5, 1500000L),
-    SIX_MATCH(6, 2000000000L),
+    THREE_MATCH(3, 5_000L),
+    FOUR_MATCH(4, 50_000L),
+    FIVE_MATCH(5, 1_500_000L),
+    SIX_MATCH(6, 2_000_000_000L),
     ;
 
     private final int matchCount;
