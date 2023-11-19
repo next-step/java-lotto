@@ -27,11 +27,7 @@ public class ThirdRule implements WinningRule {
             return false;
         }
 
-        if (lotto.containBonusNumber(winningNumber)) {
-            return false;
-        }
-
-        return true;
+        return !lotto.containBonusNumber(winningNumber);
     }
 
     @Override
