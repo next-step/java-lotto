@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoGame;
+import lotto.domain.lotto.wrapper.LottoNumber;
 import lotto.domain.lotto.wrapper.LottoNumbers;
 import lotto.domain.lotto.wrapper.WinningNumber;
 import lotto.domain.rankcount.RankCountGroup;
@@ -8,6 +9,7 @@ import lotto.util.LottoMachine;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -24,10 +26,10 @@ public class LottoController {
     }
 
     public void startGame() {
-        List<LottoNumbers> lottoNumberses = purchase();
+        List<LottoNumbers> lottos = purchase();
         WinningNumber winningNumber = winning();
 
-        LottoGame lottoGame = new LottoGame(lottoNumberses, winningNumber);
+        LottoGame lottoGame = new LottoGame(lottos, winningNumber);
         RankCountGroup rankCountGroup = lottoGame.groupByRank();
 
         result(rankCountGroup, lottoGame.calculateProfitRate(rankCountGroup));
@@ -35,7 +37,14 @@ public class LottoController {
 
     private List<LottoNumbers> purchase() {
         int numOfLotto = inputView.inputPurchaseMoney();
-        List<LottoNumbers> lottos = drawLottos(numOfLotto);
+        int countOfManual = inputView.inputCountOfManual(numOfLotto);
+        int countOfAuto = numOfLotto - countOfManual;
+
+        List<LottoNumbers> lottos = IntStream.range(0, countOfManual)
+            .mapToObj(i -> new LottoNumbers(inputView.inputManualLotto()))
+            .collect(Collectors.toList());
+
+        lottos.addAll(drawLottos(countOfAuto));
 
         resultView.printPurchaseResult(numOfLotto, lottos);
         return lottos;

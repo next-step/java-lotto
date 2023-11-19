@@ -2,6 +2,7 @@ package lotto.view;
 
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,24 +22,6 @@ public class InputView {
         this.inputValidator = new InputValidator();
     }
 
-    public int inputCountOfManual(int numOfLotto) {
-        print("수동으로 구매할 로또 수를 입력해 주세요.");
-
-        try {
-            String countOfManual = input();
-            inputValidator.validateCountOfManual(countOfManual, numOfLotto);
-
-            return Integer.parseInt(countOfManual);
-        } catch (IllegalArgumentException e){
-            print(e.getMessage());
-            return inputCountOfManual(numOfLotto);
-        }
-    }
-
-    private int calculateNumOfLotto(String purchase) {
-        return (int) Long.parseLong(purchase) / LOTTO_PRICE;
-    }
-
     public int inputPurchaseMoney() {
         print("구입 금액을 입력해주세요.");
 
@@ -53,13 +36,44 @@ public class InputView {
         }
     }
 
+    private int calculateNumOfLotto(String purchase) {
+        return (int) Long.parseLong(purchase) / LOTTO_PRICE;
+    }
+
+    public int inputCountOfManual(int numOfLotto) {
+        print("수동으로 구매할 로또 수를 입력해 주세요.");
+
+        try {
+            String countOfManual = input();
+            inputValidator.validateCountOfManual(countOfManual, numOfLotto);
+
+            return Integer.parseInt(countOfManual);
+        } catch (IllegalArgumentException e){
+            print(e.getMessage());
+            return inputCountOfManual(numOfLotto);
+        }
+    }
+
+    public Set<Integer> inputManualLotto() {
+        print("수동으로 구매할 번호를 입력해 주세요.");
+
+            try {
+                String input = input();
+                inputValidator.validateLottoNumbers(input, DELIMITER);
+                return convertToNumbers(input);
+            } catch (IllegalArgumentException e){
+                print(e.getMessage());
+                return inputManualLotto();
+            }
+
+    }
+
     public Set<Integer> inputWinningNumbers() {
         print("이번 주 당첨 번호를 입력해 주세요.");
 
         try {
             String input = input();
-            inputValidator.validateWinningNumbers(input, DELIMITER);
-
+            inputValidator.validateLottoNumbers(input, DELIMITER);
             return convertToNumbers(input);
         } catch (IllegalArgumentException e){
             print(e.getMessage());

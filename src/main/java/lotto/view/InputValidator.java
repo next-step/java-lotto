@@ -37,7 +37,7 @@ public class InputValidator {
         }
     }
 
-    public void validateWinningNumbers(String input, String delimiter) {
+    public void validateLottoNumbers(String input, String delimiter) {
         validateDelimiter(input, delimiter);
         String[] numbersString = input.split(delimiter);
 
