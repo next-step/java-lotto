@@ -22,8 +22,9 @@ public class LottoMain {
 
                 WinningNumbers winningNumbers = new WinningNumbers(TextManipulator.splitNumberTextByComma(
                     InputView.scanWinningNumberText()));
-
+                winningNumbers.addBonusNumberInToTheWinningNumbers(InputView.scanBonusNumberText());
                 Map<Rank, Integer> matchRankCountMap = tickets.countWinningTickets(winningNumbers);
+
                 OutputView.printResultOfWinningTitle();
                 OutputView.printResultOfWinning(matchRankCountMap);
                 OutputView.printRateOfBenefit(tickets.calculateRateOfBenefit(matchRankCountMap, purchaseAmount));
