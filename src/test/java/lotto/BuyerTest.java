@@ -27,8 +27,8 @@ public class BuyerTest {
         Buyer.purchasedLottoNumbers.add(purchasedNumber);
         buyer.checkLottoWinningNumbers(buyer,winningNumbers);
 
-        HashMap<Rank,Integer> result = Buyer.lottoResult;
+        HashMap<Rank,Integer> result = buyer.lottoResult;
 
-        assertThat(result.get(Rank.Four)).isEqualTo(1);
+        assertThat(result.get(Rank.FOURTH)).isEqualTo(1);
     }
 }

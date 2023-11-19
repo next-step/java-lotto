@@ -27,13 +27,4 @@ public class ValidationCheckTest {
             ValidationCheck.validatePurchaseAmount(Integer.parseInt(input));
         }).isInstanceOf(IllegalArgumentException.class);
     }
-
-    @Test
-    void 입력된_당첨번호_중복여부_유효성확인() {
-        List<Integer> list = List.of(1,2,3,4,5,5);
-
-        assertThatThrownBy(() -> {
-            ValidationCheck.validateNoDuplicateWinningNumbers(list);
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
 }

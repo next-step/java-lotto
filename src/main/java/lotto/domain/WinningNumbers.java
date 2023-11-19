@@ -6,18 +6,18 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class WinningNumbers {
-    private final List<Integer> winningNumbers;
+    private final Set<Integer> winningNumbers;
 
     public WinningNumbers(String winningNumbers) {
         ValidationCheck.validateWinningNumbersLength(winningNumbers);
         this.winningNumbers = Arrays.asList(winningNumbers.trim().split(","))
                 .stream()
                 .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         ValidationCheck.validateNoDuplicateWinningNumbers(getWinningNumbers());
     }
 
-    public final List<Integer> getWinningNumbers() {
-        return winningNumbers;
+    public final Set<Integer> getWinningNumbers() {
+        return new HashSet<>(winningNumbers);
     }
 }

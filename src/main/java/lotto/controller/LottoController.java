@@ -5,8 +5,6 @@ import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.*;
-
 public class LottoController {
     public static void main(String[] args) {
         Buyer buyer = new Buyer();
@@ -15,9 +13,7 @@ public class LottoController {
 
         buyer.purchaseLotto(Integer.parseInt(inputMoney));
 
-        for (List<Integer> lottoNumbers : buyer.purchasedLottoNumbers) {
-            ResultView.printResult(lottoNumbers.toString());
-        }
+        ResultView.printPurchasedLottoNumbers(Buyer.purchasedLottoNumbers);
         String inputWinningNumbers = InputView.inputWinningNumbers();
         winningNumbers = new WinningNumbers(inputWinningNumbers);
 

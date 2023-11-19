@@ -1,13 +1,13 @@
 package lotto.domain;
 
 public enum Rank {
-    ZERO(0, 0),
-    ONE(1, 0),
-    TWO(2, 0),
-    THREE(3, 5000),
-    Four(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000);
+    NO_RANK_ZERO(0, 0),
+    NO_RANK_ONE(1, 0),
+    NO_RANK_TWO(2, 0),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    FIRST(6, 2_000_000_000);
 
     final private int count;
     final private long prize;
