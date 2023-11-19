@@ -27,11 +27,21 @@ public enum Rank {
                 .toArray(Rank[]::new);
     }
 
-    public static Rank convertRanking(int count) {
+    public static Rank convertRanking(int count, boolean matchBonus) {
+        if (count == 5) {
+            return mathchBounusRank(matchBonus);
+        }
         return Arrays.stream(Rank.values())
                 .filter(it -> it.matchingCount.equals(count))
                 .findFirst()
                 .orElse(FAIL);
+    }
+
+    private static Rank mathchBounusRank(boolean matchBonus) {
+        if (matchBonus) {
+            return SECOND;
+        }
+        return THIRD;
     }
 
     public Integer matchingCount() {
