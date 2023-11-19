@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoTickets;
+import lotto.domain.LottoFactory;
 import lotto.domain.PrizeStatus;
 import lotto.domain.WinnerNumbers;
 
@@ -10,8 +10,8 @@ public class OutputView {
         System.out.println(amountOfPurchase/1000+"개를 구매했습니다.");
     }
 
-    public static void displayLottoTickets(LottoTickets lottoTickets) {
-        lottoTickets.tickets().forEach(lottoTicket -> {
+    public static void displayLottoTickets(LottoFactory lottoFactory) {
+        lottoFactory.tickets().forEach(lottoTicket -> {
             System.out.println(lottoTicket.toString());
         });
     }

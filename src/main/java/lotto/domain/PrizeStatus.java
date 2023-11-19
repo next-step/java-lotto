@@ -7,12 +7,12 @@ public class PrizeStatus {
     private HashMap<Rank, Integer> prizeStatus = new HashMap<>();
     private int totalEarning;
 
-    public PrizeStatus(LottoTickets lottoTickets, WinnerNumbers winnerNumbers) {
+    public PrizeStatus(LottoFactory lottoFactory, WinnerNumbers winnerNumbers) {
         int totalProfit = 0;
         setupPrizeStatus();
 
-        for (int i = 0; i < lottoTickets.numberOfPurchasedTicket(); i++) {
-            int totalMatchedCount = lottoTickets.tickets().get(i).calculateTotalMatchedCount(winnerNumbers);
+        for (int i = 0; i < lottoFactory.numberOfPurchasedTicket(); i++) {
+            int totalMatchedCount = lottoFactory.selectTicket(i).calculateTotalMatchedCount(winnerNumbers);
             int updatedTotalProfit = updatePrizeStatus(totalMatchedCount, totalProfit);
             totalProfit = updatedTotalProfit;
         }

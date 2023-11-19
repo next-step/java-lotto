@@ -15,10 +15,10 @@ class PrizeStatusTest {
         List<Integer> lottoNumbersForWinnerNumbers = Arrays.asList(1, 2, 3, 4, 5, 7);
 
         LottoTicket lottoTicket = new LottoTicket(lottoNumbersForTicket);
-        LottoTickets lottoTickets = new LottoTickets(lottoTicket);
+        LottoFactory lottoFactory = new LottoFactory(lottoTicket);
         WinnerNumbers winnerNumbers = new WinnerNumbers(lottoNumbersForWinnerNumbers);
 
-        PrizeStatus prizeStatus = new PrizeStatus(lottoTickets, winnerNumbers);
+        PrizeStatus prizeStatus = new PrizeStatus(lottoFactory, winnerNumbers);
         double profit = prizeStatus.calculateProfit(1000);
 
         assertThat(profit).isEqualTo(1500000/1000);

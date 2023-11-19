@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.LottoFactory;
-import lotto.domain.LottoTickets;
 import lotto.domain.PrizeStatus;
 import lotto.domain.WinnerNumbers;
 import lotto.view.InputView;
@@ -17,14 +16,13 @@ public class LottoGame {
         int numOfTickets = purchasedAmt / 1000;
         OutputView.displayNumberOfPurchasedTickets(purchasedAmt);
 
-        LottoTickets lottoTickets = new LottoTickets(numOfTickets, random);
-        OutputView.displayLottoTickets(lottoTickets);
+        LottoFactory lottoFactory = new LottoFactory(numOfTickets, random);
+        OutputView.displayLottoTickets(lottoFactory);
 
-        LottoFactory lottoFactory = new LottoFactory(random);
-        WinnerNumbers winnerNumbers = new WinnerNumbers(lottoFactory.numbers());
+        WinnerNumbers winnerNumbers = new WinnerNumbers(lottoFactory.generateTicket(random));
 
         OutputView.displayWinnerNumbers(winnerNumbers);
-        PrizeStatus prizeStatus = new PrizeStatus(lottoTickets, winnerNumbers);
+        PrizeStatus prizeStatus = new PrizeStatus(lottoFactory, winnerNumbers);
 
         OutputView.displayPrizeStatMessage();
         OutputView.displayPrizeStatus(prizeStatus);

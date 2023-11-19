@@ -6,14 +6,14 @@ import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoTicketsTest {
+class LottoFactoryTest {
 
     @Test
     void assertNumberOfPurchasedTicket() {
         int numberOfTickets = 5;
         Random random = new Random();
 
-        LottoTickets lottoTickets = new LottoTickets(numberOfTickets, random);
-        assertThat(lottoTickets.numberOfPurchasedTicket()).isEqualTo(5);
+        LottoFactory lottoFactory = new LottoFactory(numberOfTickets, random);
+        assertThat(lottoFactory.numberOfPurchasedTicket()).isEqualTo(5);
     }
 }

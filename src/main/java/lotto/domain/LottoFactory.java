@@ -6,24 +6,45 @@ import java.util.List;
 import java.util.Random;
 
 public class LottoFactory {
-    private List<Integer> numbers = new ArrayList<>();
+    private List<LottoTicket> tickets = new ArrayList<>();
     private int MAX_COUNT = 6;
 
-    public LottoFactory(Random random) {
-        while (numbers.size() < MAX_COUNT) {
+    public LottoFactory(int numberOfTickets, Random random) {
+        for (int i = 0; i < numberOfTickets; i++) {
+            LottoTicket ticket = new LottoTicket(generateTicket(random));
+            tickets.add(ticket);
+        }
+    }
+
+    public LottoFactory(LottoTicket lottoTicket) {
+        tickets.add(lottoTicket);
+    }
+
+    public int numberOfPurchasedTicket () {
+        return tickets.size();
+    }
+
+    public List<LottoTicket> tickets() {
+        return this.tickets;
+    }
+
+    private void addNumber(int randomNumber, List<Integer> ticket) {
+        if (!ticket.contains(randomNumber)) {
+            ticket.add(randomNumber);
+        }
+    }
+
+    public List<Integer> generateTicket(Random random) {
+        List<Integer> ticket = new ArrayList<>();
+        while (ticket.size() < MAX_COUNT) {
             int randomNumber = random.nextInt(45) + 1;
-            addNumber(randomNumber);
+            addNumber(randomNumber, ticket);
         }
-        Collections.sort(numbers);
+        Collections.sort(ticket);
+        return ticket;
     }
 
-    private void addNumber(int randomNumber) {
-        if (!numbers.contains(randomNumber)) {
-            numbers.add(randomNumber);
-        }
-    }
-
-    public List<Integer> numbers() {
-        return this.numbers;
+    public LottoTicket selectTicket(int n) {
+        return tickets.get(n);
     }
 }
