@@ -14,11 +14,10 @@ public class LottoApp {
         final Amount purchaseAmount = Amount.of(InputView.inputPurchaseAmount());
         final Amount manualLottoCount = Amount.of(InputView.inputManualLottoCount());
 
-        List<Lotto> manualLottos = InputView.inputManualLotto(manualLottoCount);
+        List<String> manualLottoTexts = InputView.inputManualLotto(manualLottoCount);
         ResultView.purchaseCountPrint(manualLottoCount, purchaseAmount);
 
-        Amount autoPurchaseAmount = purchaseAmount.minus(manualLottoCount.multiply(Amount.lotto()));
-        final LottoGame lottoGame = new LottoGame(manualLottos, autoPurchaseAmount);
+        final LottoGame lottoGame = new LottoGame(manualLottoTexts, purchaseAmount);
         ResultView.print(lottoGame.toString());
 
         String winningNumberText = InputView.inputWinningNumber();

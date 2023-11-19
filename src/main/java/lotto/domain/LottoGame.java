@@ -19,9 +19,27 @@ public class LottoGame {
         this.lottos = new Lottos(purchaseAmount);
     }
 
-    public LottoGame(final List<Lotto> manualLottos, final Amount purchaseAmount) {
+    public LottoGame(final List<String> manualLottoTexts, final Amount purchaseAmount) {
         validationCheckAmount(purchaseAmount);
-        this.lottos = new Lottos(manualLottos, purchaseAmount);
+
+        Amount autoPurchaseAmount = getAutoPurchaseAmount(manualLottoTexts, purchaseAmount);
+
+        List<Lotto> manualLottos = getManualLottos(manualLottoTexts);
+
+        this.lottos = new Lottos(manualLottos, autoPurchaseAmount);
+    }
+
+    private List<Lotto> getManualLottos(final List<String> manualLottoTexts) {
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (String manualLottoText : manualLottoTexts) {
+            manualLottos.add(new Lotto(manualLottoText.split(SPLIT_TEXT)));
+        }
+        return manualLottos;
+    }
+
+    private Amount getAutoPurchaseAmount(final List<String> manualLottoTexts, final Amount purchaseAmount) {
+        final int manualLottoCount = manualLottoTexts.size();
+        return purchaseAmount.minus(Amount.of(manualLottoCount).multiply(Amount.lotto()));
     }
 
     private void validationCheckAmount(final Amount purchaseAmount) {
