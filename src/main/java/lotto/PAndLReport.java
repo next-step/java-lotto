@@ -13,8 +13,8 @@ public class PAndLReport {
         this.totalPrize = totalPrize;
     }
 
-    public static PAndLReport of(LottoWallet lottoWallet, StatisticsReport statisticsReport) {
-        return new PAndLReport(LottoShop.LOTTO_PRICE * lottoWallet.totalTicketCount()
+    public static PAndLReport of(StatisticsReport statisticsReport) {
+        return new PAndLReport(LottoShop.LOTTO_PRICE * statisticsReport.lottoWallet().totalTicketCount()
             , statisticsReport.totalPrize());
     }
 

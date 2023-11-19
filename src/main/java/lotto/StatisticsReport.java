@@ -57,4 +57,7 @@ public class StatisticsReport {
         return total;
     }
 
+    public LottoWallet lottoWallet() {
+        return this.lottoWallet;
+    }
 }
