@@ -7,7 +7,6 @@ import lotto.domain.Lottos;
 import lotto.util.StringParser;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,10 +32,6 @@ public class LottoGenerators {
         for (int i = 0; i < autoLottoCount; i++) {
             lottoGenerators.add(new RandomLottoGenerator());
         }
-    }
-
-    public List<LottoGenerator> getLottoGenerators() {
-        return Collections.unmodifiableList(lottoGenerators);
     }
 
     public Lottos generateLottos() {
