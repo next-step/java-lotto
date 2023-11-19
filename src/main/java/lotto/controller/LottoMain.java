@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.strategy.LottoGenerators;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
 import lotto.util.StringParser;
@@ -59,8 +58,7 @@ public class LottoMain {
     }
 
     private static Lottos generateLottosAndPrint(List<String> stringFormatManualLottos, OutputView outputView, int manualLottoCount, int autoLottoCount) {
-        LottoGenerators lottoGenerators = new LottoGenerators(stringFormatManualLottos, autoLottoCount);
-        Lottos lottos = lottoGenerators.generateLottos();
+        Lottos lottos = LottoFactory.generateLottos(stringFormatManualLottos, autoLottoCount);
         outputView.printLottos(manualLottoCount, autoLottoCount, lottos);
         return lottos;
     }
