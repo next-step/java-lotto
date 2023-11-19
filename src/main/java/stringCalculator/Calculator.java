@@ -1,3 +1,7 @@
+package stringCalculator;
+
+import stringCalculator.operator.OperatorMapping;
+
 import java.util.List;
 
 public class Calculator {
