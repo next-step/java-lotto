@@ -15,7 +15,22 @@ public class LottoGenerator {
         for (int number = MIN_LOTTO_NUMBER; number <= MAX_LOTTO_NUMBER; number++) {
             numbers.add(number);
         }
-        Collections.shuffle(numbers);
-        return numbers.subList(0, LOTTO_NUMBER_COUNT);
+        return shuffleAndSort(numbers);
     }
+
+    public static List<Integer> generate(List<Integer> lottoNumbers) {
+        List<Integer> numbers = new ArrayList<>();
+        for (Integer lottoNumber : lottoNumbers) {
+            numbers.add(lottoNumber);
+        }
+        return shuffleAndSort(numbers);
+    }
+
+    private static List<Integer> shuffleAndSort(List<Integer> numbers) {
+        Collections.shuffle(numbers);
+        numbers = numbers.subList(0, LOTTO_NUMBER_COUNT);
+        Collections.sort(numbers);
+        return numbers;
+    }
+
 }
