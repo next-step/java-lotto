@@ -16,18 +16,25 @@ public class ResultView {
     }
 
     public static void printResultLottoTicketValue(List<Integer> value) {
+
+
+
         List<Integer[]> list = new ArrayList<>();
 
+        arrayToListValue(value, list);
+
+        for (Integer[] arr : list) {
+            System.out.println(Arrays.toString(arr));
+        }
+    }
+
+    private static void arrayToListValue(List<Integer> value, List<Integer[]> list) {
         for (int i = 0; i < value.size(); i += 6) {
             Integer[] subArr = new Integer[6];
             for (int j = 0; j < 6; j++) {
                 subArr[j] = value.get(i+j);
             }
             list.add(subArr);
-        }
-
-        for (Integer[] arr : list) {
-            System.out.println(Arrays.toString(arr));
         }
     }
 }
