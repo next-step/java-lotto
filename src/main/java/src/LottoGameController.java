@@ -14,7 +14,6 @@ import src.view.ResultView;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class LottoGameController {
@@ -22,12 +21,10 @@ public class LottoGameController {
     public static void main(String[] args) {
         int purchasePrice = InputView.inputPurchasePrice();
         int manualLottoCount = InputView.inputPurchaseManualLottoCount();
-        Map<String, Money> moneyMap = inputMoneys(purchasePrice, manualLottoCount);
-        Money moneyOfAutoLotto = moneyMap.get("AUTO");
-        Money moneyOfManualLotto = moneyMap.get("MANUAL");
+        InputMoney inputMoney = inputMoneys(purchasePrice, manualLottoCount);
         LottoMachine lottoMachine = new LottoMachine(new AutoLottoGameNumberGenerator());
-        Lottos autoLottos = lottoMachine.buyLottos(moneyOfAutoLotto);
-        Lottos manualLottos = buyManualLottos(manualLottoCount, lottoMachine, moneyOfManualLotto);
+        Lottos autoLottos = lottoMachine.buyLottos(inputMoney.getAutoMoney());
+        Lottos manualLottos = buyManualLottos(manualLottoCount, lottoMachine, inputMoney.getManualMoney());
         Lottos lottos = autoLottos.addLottos(manualLottos);
         printLottos(lottos, autoLottos.size(), manualLottos.size());
         WinningLotto winningLotto = inputWinningLotto();
@@ -35,14 +32,14 @@ public class LottoGameController {
         ResultView.printMatchResult(matchStatus, matchStatus.profitRate(Lotto.PRICE_OF_LOTTO));
     }
 
-    private static Map<String, Money> inputMoneys(int purchasePrice, int manualLottoCount) {
+    private static InputMoney inputMoneys(int purchasePrice, int manualLottoCount) {
         Money totalMoney = Money.of(purchasePrice);
         Money moneyOfManualLotto = Money.of(manualLottoCount * Lotto.PRICE_OF_LOTTO);
 
         try {
             Money moneyOfAutoLotto = totalMoney.minus(moneyOfManualLotto);
 
-            return Map.of("AUTO", moneyOfAutoLotto, "MANUAL", moneyOfManualLotto);
+            return new InputMoney(moneyOfAutoLotto, moneyOfManualLotto);
         } catch (IllegalArgumentException e) {
             int maximumLottoCount = totalMoney.lottoCount(Lotto.PRICE_OF_LOTTO);
             throw new IllegalArgumentException("최대 " + maximumLottoCount + "개 구매 가능합니다.");
