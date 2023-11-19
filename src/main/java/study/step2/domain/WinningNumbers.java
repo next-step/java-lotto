@@ -3,7 +3,7 @@ package study.step2.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static study.step2.domain.LottoNumber.validateNumbers;
+import static study.step2.domain.Lotto.validateNumbers;
 
 public class WinningNumbers {
 
@@ -16,8 +16,10 @@ public class WinningNumbers {
             .collect(Collectors.toList());
     }
 
-    public boolean contains(LottoNumber number) {
+    public List<Integer> toIntegers() {
         return winningNumbers.stream()
-            .anyMatch(winningNumber -> winningNumber.equals(number));
+            .map(LottoNumber::lottoNumber)
+            .collect(Collectors.toList());
     }
+
 }

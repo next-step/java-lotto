@@ -19,16 +19,16 @@ public class Step2Application {
         int numberOfLottos = purchaseAmount.numberOfLottos();
         show(numberOfLottos);
 
+        LottoGenerator generator = new LottoGenerator();
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < numberOfLottos; i++) {
-            LottoGenerator generator = new LottoGenerator();
             lottos.add(generator.generate());
         }
         show(lottos);
 
         WinningNumbers winningNumbers = inputWinningNumbers();
         List<Rank> ranks = lottos.stream()
-            .map(lotto -> lotto.matches(winningNumbers))
+            .map(lotto -> lotto.matches(winningNumbers.toIntegers()))
             .collect(Collectors.toList());
 
         Result result = new Result();
@@ -36,7 +36,8 @@ public class Step2Application {
 
         showStatisticsTitle();
 
-        result.map().keySet()
+        result.map().keySet().stream()
+            .filter(Rank::isHit)
             .forEach(rank -> showStatistics(rank, result.size(rank)));
 
         int totalWinningAmount = result.totalWiningAmount();

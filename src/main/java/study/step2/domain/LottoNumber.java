@@ -1,11 +1,6 @@
 package study.step2.domain;
 
-import java.util.HashSet;
-import java.util.List;
-
 import study.step2.domain.exception.LottoException;
-
-import static study.step2.domain.LottoGenerator.LOTTO_NUMBERS_SIZE;
 
 public class LottoNumber {
 
@@ -30,17 +25,6 @@ public class LottoNumber {
 
     public boolean equals(LottoNumber number) {
         return lottoNumber.equals(number.lottoNumber());
-    }
-
-    public static void validateNumbers(List<Integer> numbers) {
-        if (!isValidNumbers(numbers)) {
-            throw new LottoException("번호는 6자리 중복되지 않은 값이어야 합니다.");
-        }
-    }
-
-    private static boolean isValidNumbers(List<Integer> numbers) {
-        return new HashSet<>(numbers)
-            .size() == LOTTO_NUMBERS_SIZE;
     }
 
     public Integer lottoNumber() {

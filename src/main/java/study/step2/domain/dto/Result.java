@@ -9,14 +9,12 @@ public class Result {
     private final Map<Rank, List<Rank>> map = new LinkedHashMap<>();
 
     public Result() {
-        Rank.valuesToList()
+        Arrays.stream(Rank.values())
             .forEach(v -> map.put(v, new ArrayList<>()));
     }
 
     public void add(Rank rank) {
-        if (map.containsKey(rank)) {
-            map.get(rank).add(rank);
-        }
+        map.get(rank).add(rank);
     }
 
     public int size(Rank rank) {
@@ -31,8 +29,8 @@ public class Result {
         return sum;
     }
 
-    public float toRevenue(int winingAmount, int purchaseAmount) {
-        return (float) winingAmount / purchaseAmount;
+    public double toRevenue(int winingAmount, int purchaseAmount) {
+        return (double) winingAmount / purchaseAmount;
     }
 
     public Map<Rank, List<Rank>> map() {

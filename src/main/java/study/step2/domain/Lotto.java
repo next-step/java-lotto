@@ -1,9 +1,12 @@
 package study.step2.domain;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static study.step2.domain.LottoNumber.validateNumbers;
+import study.step2.domain.exception.LottoException;
+
+import static study.step2.domain.LottoGenerator.LOTTO_NUMBERS_SIZE;
 
 public class Lotto {
 
@@ -17,12 +20,25 @@ public class Lotto {
             .collect(Collectors.toList());
     }
 
-    public Rank matches(WinningNumbers winningNumbers) {
-        lottoNumbers.forEach(number -> calculateHitCount(number, winningNumbers));
+    public static void validateNumbers(List<Integer> numbers) {
+        if (!isValidNumbers(numbers)) {
+            throw new LottoException("번호는 6자리 중복되지 않은 값이어야 합니다.");
+        }
+    }
+
+    private static boolean isValidNumbers(List<Integer> numbers) {
+        return new HashSet<>(numbers)
+            .size() == LOTTO_NUMBERS_SIZE;
+    }
+
+    public Rank matches(List<Integer> winningNumbers) {
+        lottoNumbers.stream()
+            .map(LottoNumber::lottoNumber)
+            .forEach(number -> calculateHitCount(number, winningNumbers));
         return Rank.valueOfHitCount(hitCount);
     }
 
-    private void calculateHitCount(LottoNumber number, WinningNumbers winningNumbers) {
+    private void calculateHitCount(Integer number, List<Integer> winningNumbers) {
         if (winningNumbers.contains(number)) {
             hitCount += 1;
         }

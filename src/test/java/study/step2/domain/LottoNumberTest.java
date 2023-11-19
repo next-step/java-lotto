@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import study.step2.domain.exception.LottoException;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static study.step2.domain.LottoNumber.validateNumbers;
+import static study.step2.domain.Lotto.validateNumbers;
 
 public class LottoNumberTest {
 

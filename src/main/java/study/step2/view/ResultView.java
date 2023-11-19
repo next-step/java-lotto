@@ -24,7 +24,7 @@ public class ResultView {
         System.out.println(String.format("%d개 일치 (%d원)- %d개", rank.hitCount(), rank.amount(), winningCount));
     }
 
-    public static void showRevenue(float revenue) {
+    public static void showRevenue(double revenue) {
         System.out.println(String.format("총 수익률은 %.2f입니다.", revenue));
     }
 }
