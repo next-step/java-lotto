@@ -1,6 +1,9 @@
 package operation;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Operater {
     private Deque<Integer> numbers;
@@ -16,15 +19,14 @@ public class Operater {
 
         String[] numberOrOperations = numberAndOperation.split(" ");
         Deque<Integer> numbers = new LinkedList<>();
-        List<String> operations = new ArrayList<>();
-        Operations operations1 = Operations.defaultOf();
+        Operations operations = Operations.defaultOf();
 
         for (String numberOrOperation: numberOrOperations) {
             addNumber(numberOrOperation, numbers);
-            addOperation(numberOrOperation, operations1);
+            addOperation(numberOrOperation, operations);
         }
 
-        return new Operater(numbers,operations1);
+        return new Operater(numbers,operations);
     }
 
     private static void canMake(String numberAndOperation) {

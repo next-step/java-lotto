@@ -1,6 +1,5 @@
 package operation;
 
-import operation.Operation;
 import operation.implemantation.DivideOperation;
 import operation.implemantation.MinusOperation;
 import operation.implemantation.MultiplyOperation;
@@ -20,6 +19,10 @@ public class OperationFactory {
             return new MultiplyOperation();
         }
 
-        return new DivideOperation();
+        if (stringOperation.equals("/")) {
+            return new DivideOperation();
+        }
+
+        throw new IllegalArgumentException("사칙연산만 실행 가능합니다.");
     }
 }
