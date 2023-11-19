@@ -11,6 +11,9 @@ public class Lotto {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_MIN_NUMBER = 1;
 
+    private static final String NUMBER_IS_INVALID = "유효하지 않은 번호 입니다.";
+    private static final String LOTTO_IS_INVALID = "유효하지 않은 로또입니다.";
+
     private Set<Integer> lotto;
 
     public Lotto(Set<Integer> numbers) {
@@ -35,13 +38,13 @@ public class Lotto {
 
     private static void lottoMinMaxValidation(Iterator<Integer> iter) {
         if(iter.next() < LOTTO_MIN_NUMBER || iter.next() > LOTTO_MAX_NUMBER){
-            throw new IllegalArgumentException("유효하지 않은 번호 입니다.");
+            throw new IllegalArgumentException(NUMBER_IS_INVALID);
         }
     }
 
     private static void lottoSizeValidation(Set<Integer> numbers) {
         if(numbers.size() != 6){
-            throw new IllegalArgumentException("유효하지 않은 로또입니다.");
+            throw new IllegalArgumentException(LOTTO_IS_INVALID);
         }
     }
 }
