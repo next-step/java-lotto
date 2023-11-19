@@ -35,16 +35,6 @@ public class LottoGameController {
         ResultView.printMatchResult(matchStatus, matchStatus.profitRate(Lotto.PRICE_OF_LOTTO));
     }
 
-    private static Lottos buyManualLottos(int manualLottoCount, LottoMachine lottoMachine, Money moneyOfManualLotto) {
-        if (manualLottoCount <= 0) {
-            return Lottos.of(List.of());
-        }
-
-        InputView.inputPurchaseManualLottoNumber(manualLottoCount);
-        lottoMachine.changeLottoGameNumberGenerator(new ManualLottoGameNumberGenerator());
-        return lottoMachine.buyLottos(moneyOfManualLotto);
-    }
-
     private static Map<String, Money> inputMoneys(int purchasePrice, int manualLottoCount) {
         Money totalMoney = Money.of(purchasePrice);
         Money moneyOfManualLotto = Money.of(manualLottoCount * Lotto.PRICE_OF_LOTTO);
@@ -57,6 +47,16 @@ public class LottoGameController {
             int maximumLottoCount = totalMoney.lottoCount(Lotto.PRICE_OF_LOTTO);
             throw new IllegalArgumentException("최대 " + maximumLottoCount + "개 구매 가능합니다.");
         }
+    }
+
+    private static Lottos buyManualLottos(int manualLottoCount, LottoMachine lottoMachine, Money moneyOfManualLotto) {
+        if (manualLottoCount <= 0) {
+            return Lottos.of(List.of());
+        }
+
+        InputView.inputPurchaseManualLottoNumber(manualLottoCount);
+        lottoMachine.changeLottoGameNumberGenerator(new ManualLottoGameNumberGenerator());
+        return lottoMachine.buyLottos(moneyOfManualLotto);
     }
 
     private static void printLottos(Lottos lottos, int autoLottoSize, int manualLottoSize) {
