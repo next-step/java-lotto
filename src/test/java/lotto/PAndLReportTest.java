@@ -15,7 +15,7 @@ public class PAndLReportTest {
         Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         LottoWallet lottoWallet = LottoWallet.from(List.of(lotto1, lotto2));
-        StatisticsReport statisticsReport = new StatisticsReport(Map.of(Prize.THIRD, 1));
+        StatisticsReport statisticsReport = new StatisticsReport(lottoWallet, Map.of(Prize.THIRD, 1));
         PAndLReport pAndLReport = PAndLReport.of(lottoWallet, statisticsReport);
         BigDecimal rate = pAndLReport.rate();
         Assertions.assertThat(rate).isEqualTo(BigDecimal.valueOf(0.36));
