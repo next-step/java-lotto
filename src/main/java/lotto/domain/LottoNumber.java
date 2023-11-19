@@ -9,7 +9,6 @@ public class LottoNumber {
 
     public LottoNumber(int number) {
         if (number < START_NUMBER && START_NUMBER < number) {
-            System.out.println(number);
             throw new IllegalArgumentException("Lotto number is more than 1 and less then 46");
         }
         this.number = number;

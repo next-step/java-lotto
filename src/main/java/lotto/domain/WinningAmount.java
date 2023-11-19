@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public enum WinningAmount {
 
@@ -9,7 +10,7 @@ public enum WinningAmount {
     FIVE_MATCH(5,1500000),
     SIX_MATCH(6,2000000000);
 
-    private static final HashMap<Integer, WinningAmount> WINNING_AMOUNT_FINDER = new HashMap<>(5);
+    private static final Map<Integer, WinningAmount> WINNING_AMOUNT_FINDER = new HashMap<>();
     static {
         for (WinningAmount winningAmount : WinningAmount.values()) {
             WINNING_AMOUNT_FINDER.put(winningAmount.matchCount, winningAmount);

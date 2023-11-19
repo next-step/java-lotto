@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -14,7 +14,7 @@ class LottoTest {
     @DisplayName("45개 이하의 숫자 6개를 가진다.")
     @Test
     void checkLottoNumber() {
-        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
         for (LottoNumber number : lotto.getNumbers()) {
             Assertions.assertTrue(number.getLottoNumber() <= 45);
         }
@@ -24,7 +24,7 @@ class LottoTest {
     @Test
     void checkLottoSize() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new Lotto(Arrays.asList(1,2,3,4,5,6,7));
+            new Lotto(List.of(1,2,3,4,5,6,7));
         });
     }
 
@@ -32,15 +32,15 @@ class LottoTest {
     @Test
     void checkDuplicateNumber() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new Lotto(Arrays.asList(1,1,3,4,5,6));
+            new Lotto(List.of(1,1,3,4,5,6));
         });
     }
 
     @DisplayName("로또 당첨 개수를 확인한다.")
     @Test
     void countWinning() {
-        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
-        Lotto winningLotto = new Lotto(Arrays.asList(4,5,6,7,8,9));
+        Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
+        Lotto winningLotto = new Lotto(List.of(4,5,6,7,8,9));
         Assertions.assertEquals(lotto.countWinningNumber(winningLotto.getNumbers()), 3);
     }
 }

@@ -7,7 +7,6 @@ import java.util.List;
 public class Lotto {
     private List<LottoNumber> numbers = new ArrayList<>(6);
     private final int NUMBERS_MAX_SIZE = 6;
-    private int countWinning = 0;
 
     public Lotto(List<Integer> inputLottoNumbers) {
         for (Integer inputNumber : inputLottoNumbers) {
@@ -38,13 +37,16 @@ public class Lotto {
     }
 
     public int countWinningNumber(List<LottoNumber> winningNumbers) {
+        Integer countWinning = 0;
         for (LottoNumber lottoNumber : numbers) {
-            addIfEqualWinningNumber(lottoNumber, winningNumbers);
+            countWinning = addIfEqualWinningNumber(lottoNumber, winningNumbers, countWinning);
         }
         return countWinning;
     }
 
-    private int addIfEqualWinningNumber(LottoNumber lottoNumber, List<LottoNumber> winningNumbers) {
+    private Integer addIfEqualWinningNumber(LottoNumber lottoNumber,
+                                        List<LottoNumber> winningNumbers,
+                                        Integer countWinning) {
         for (LottoNumber winningNumber : winningNumbers) {
             countWinning += getNumberIfEqual(lottoNumber, winningNumber);
         }
