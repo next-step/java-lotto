@@ -20,4 +20,9 @@ public class Lotto {
                 .count();
         return LottoResult.findResult(matchCount);
     }
+
+    public List<Integer> numbers() {
+        return this.numbers;
+    }
+
 }
