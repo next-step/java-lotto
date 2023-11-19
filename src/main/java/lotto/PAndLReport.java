@@ -14,8 +14,11 @@ public class PAndLReport {
     }
 
     public static PAndLReport of(StatisticsReport statisticsReport) {
-        return new PAndLReport(LottoShop.LOTTO_PRICE * statisticsReport.lottoWallet().totalTicketCount()
-            , statisticsReport.totalPrize());
+        return new PAndLReport(getTotalPurchasePrice(statisticsReport), statisticsReport.totalPrize());
+    }
+
+    private static int getTotalPurchasePrice(StatisticsReport statisticsReport) {
+        return LottoShop.LOTTO_PRICE * statisticsReport.lottoWallet().totalTicketCount();
     }
 
     public BigDecimal rate() {
