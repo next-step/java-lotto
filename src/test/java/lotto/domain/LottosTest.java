@@ -20,9 +20,9 @@ class LottosTest {
         Lotto lotto1 = new Lotto(Arrays.asList(1,2,3,4,5,6));
         Lotto lotto2 = new Lotto(Arrays.asList(1,2,3,4,6,6));
         Lotto lotto3 = new Lotto(Arrays.asList(1,2,3,6,6,6));
-        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
+        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3), winningNumber);
 
-        HashMap<WinningAmount, Integer> result = lottos.countAllWinning(winningNumber);
+        HashMap<WinningAmount, Integer> result = lottos.countAllWinning();
         Assertions.assertThat(result.get(SIX_MATCH)).isEqualTo(1);
         Assertions.assertThat(result.get(FIVE_MATCH)).isEqualTo(1);
         Assertions.assertThat(result.get(FOUR_MATCH)).isEqualTo(1);

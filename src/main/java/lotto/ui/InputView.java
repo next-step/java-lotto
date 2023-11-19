@@ -2,6 +2,7 @@ package lotto.ui;
 
 import lotto.domain.Lotto;
 import lotto.common.LottoGenerator;
+import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +33,17 @@ public class InputView {
 
     private void printLottos(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            System.out.println(lotto.getLottoNumbers());
+            printLottoNumber(lotto);
         }
         System.out.println("");
+    }
+
+    private void printLottoNumber(Lotto lotto) {
+        ArrayList<Integer> lottoNumbersForPrint = new ArrayList<>();
+        for (LottoNumber number : lotto.getNumbers()) {
+            lottoNumbersForPrint.add(number.getLottoNumber());
+        }
+        System.out.println(lottoNumbersForPrint);
     }
 
     public List<Integer> inputWinningNumber() {

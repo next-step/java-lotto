@@ -1,38 +1,57 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> numbers = new ArrayList<>(6);
+    private final int NUMBERS_MAX_SIZE = 6;
     private int countWinning = 0;
 
-    public Lotto(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(List<Integer> inputLottoNumbers) {
+        for (Integer inputNumber : inputLottoNumbers) {
+            checkCanAdd(inputNumber);
+            numbers.add(new LottoNumber(inputNumber));
+        }
     }
 
-    public final List<Integer> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    private void checkCanAdd(Integer inputNumber) {
+        checkNumberSize();
+        checkDuplicateNumber(inputNumber);
     }
 
-    public int countWinningNumber(List<Integer> winningNumbers) {
-        for (int lottoNumber : lottoNumbers) {
+    private void checkNumberSize() {
+        if (NUMBERS_MAX_SIZE <= numbers.size()) {
+            throw new IllegalArgumentException("Lotto`s size status is max, So can not add number.");
+        }
+    }
+
+    private void checkDuplicateNumber(int inputNumber) {
+        for (LottoNumber number : numbers) {
+            number.checkDuplicateNumber(new LottoNumber(inputNumber));
+        }
+    }
+
+    public final List<LottoNumber> getNumbers() {
+        return Collections.unmodifiableList(numbers);
+    }
+
+    public int countWinningNumber(List<LottoNumber> winningNumbers) {
+        for (LottoNumber lottoNumber : numbers) {
             addIfEqualWinningNumber(lottoNumber, winningNumbers);
         }
         return countWinning;
     }
 
-    private int addIfEqualWinningNumber(int lottoNumber, List<Integer> winningNumbers) {
-        for (int winningNumber : winningNumbers) {
+    private int addIfEqualWinningNumber(LottoNumber lottoNumber, List<LottoNumber> winningNumbers) {
+        for (LottoNumber winningNumber : winningNumbers) {
             countWinning += getNumberIfEqual(lottoNumber, winningNumber);
         }
         return countWinning;
     }
 
-    private int getNumberIfEqual(int lottoNumber, int winningNumber) {
-        if (lottoNumber == winningNumber) {
-            return 1;
-        }
-        return 0;
+    private int getNumberIfEqual(LottoNumber lottoNumber, LottoNumber winningNumber) {
+        return lottoNumber.getResultIfEqual(winningNumber);
     }
 }
