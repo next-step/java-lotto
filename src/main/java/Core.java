@@ -7,8 +7,8 @@ public class Core {
         String input = scanner.nextLine();
 
         Operater operater = Operater.defaultOf(input);
-        int calculate = operater.calculate();
+        int result = operater.calculate();
 
-
+        OutPutView.result(result);
     }
 }

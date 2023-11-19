@@ -19,8 +19,8 @@ public class Operater {
         List<String> operations = new ArrayList<>();
 
         for (String numberOrOperation: numberOrOperations) {
-            judgeNumber(numberOrOperation, numbers);
-            judgeOperation(numberOrOperation, operations);
+            addNumber(numberOrOperation, numbers);
+            addOperation(numberOrOperation, operations);
         }
 
         return new Operater(numbers,operations);
@@ -31,18 +31,18 @@ public class Operater {
             throw new IllegalArgumentException("빈 문자열이 들어올 수 없습니다.");
         }
 
-        if (numberAndOperation.trim().length() < 3) {
+        if (numberAndOperation.trim().length() < 5) {
             throw new IllegalArgumentException("최소 두개의 숫자 하나의 연산자로 이루어져있어야 합니다.");
         }
     }
 
-    private static void judgeOperation(String numberOrOperation, List<String> operations) {
+    private static void addOperation(String numberOrOperation, List<String> operations) {
         if (!isNumberic(numberOrOperation)) {
             operations.add(numberOrOperation);
         }
     }
 
-    private static void judgeNumber(String numberOrOperation, Deque<Integer> numbers) {
+    private static void addNumber(String numberOrOperation, Deque<Integer> numbers) {
         if (isNumberic(numberOrOperation)) {
             numbers.offer(Integer.parseInt(numberOrOperation));
         }
