@@ -23,10 +23,8 @@ class LottoWinPercentageTest {
     ) {
         LottoResult lottoResult = new LottoResult(
                 new Lottos(lottos),
-                new LottoWin(
-                        new LottoWinNumbers(lottoWinNumbers),
-                        new BonusBall(bonusBall)
-                )
+                new LottoWinNumbers(lottoWinNumbers),
+                new BonusBall(bonusBall)
         );
         LottoWinPercentage lottoWinPercentage = new LottoWinPercentage(14000, lottoResult);
         assertThat(lottoWinPercentage.getRate()).isEqualTo(0.35d);

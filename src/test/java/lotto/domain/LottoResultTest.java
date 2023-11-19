@@ -24,7 +24,7 @@ class LottoResultTest {
     ) {
         LottoResult lottoResult = new LottoResult(
                 new Lottos(List.of(new Lotto(new LottoNumbers(new TestLottoGenerator(lottoNumbers))))),
-                new LottoWin(new LottoWinNumbers(lottoWinNumbers), new BonusBall(bonusBall))
+                new LottoWinNumbers(lottoWinNumbers), new BonusBall(bonusBall)
         );
         assertThat(lottoResult.getLottoResult().containsKey(expectLottoRank)).isTrue();
     }
@@ -74,10 +74,8 @@ class LottoResultTest {
     ) {
         LottoResult lottoResult = new LottoResult(
                 new Lottos(lottos),
-                new LottoWin(
-                        new LottoWinNumbers(lottoWinNumbers),
-                        new BonusBall(bonusBall)
-                )
+                new LottoWinNumbers(lottoWinNumbers),
+                new BonusBall(bonusBall)
         );
 
         int lottoSum = lottoResult.totalLottoIncome();

@@ -75,7 +75,7 @@ public class LottoMain {
         List<Integer> winningLottoNumbers = StringParser.parseToInts(inputView.inputWinningNumber());
         InputValidator.validateNumberCount(winningLottoNumbers.size());
         BonusBall bonusBall = new BonusBall(inputView.inputBonusBall());
-        return new LottoResult(lottos, new LottoWin(new LottoWinNumbers(winningLottoNumbers), bonusBall));
+        return new LottoResult(lottos, new LottoWinNumbers(winningLottoNumbers), bonusBall);
     }
 
     private static void calculateLottoStatisticsAndPrint(OutputView outputView, LottoResult lottoResult) {

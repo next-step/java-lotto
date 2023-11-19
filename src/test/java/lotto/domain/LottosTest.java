@@ -23,9 +23,7 @@ class LottosTest {
             LottoRank expectLottoRank
     ) {
         Lottos lottos = new Lottos(List.of(new Lotto(new LottoNumbers(new TestLottoGenerator(lottoNumbers)))));
-        List<LottoRank> lottoRank = lottos.matchCount(
-                new LottoWin(new LottoWinNumbers(lottoWinNumbers), new BonusBall(bonusBall))
-        );
+        List<LottoRank> lottoRank = lottos.matchCount(new LottoWinNumbers(lottoWinNumbers), new BonusBall(bonusBall));
 
         assertThat(lottoRank).containsOnlyOnce(expectLottoRank);
     }

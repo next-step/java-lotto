@@ -9,10 +9,10 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public List<LottoRank> matchCount(LottoWin lottoWin) {
+    public List<LottoRank> matchCount(LottoWinNumbers lottoWinNumbers, BonusBall bonusBall) {
         List<LottoRank> lottoRanks = new ArrayList<>();
         for (Lotto lotto : this.lottos) {
-            LottoRank lottoRank = lotto.matchCount(lottoWin);
+            LottoRank lottoRank = lotto.matchCount(lottoWinNumbers, bonusBall);
             lottoRanks.add(lottoRank);
         }
         return lottoRanks;

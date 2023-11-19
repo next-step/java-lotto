@@ -9,8 +9,8 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoRank matchCount(LottoWin lottoWin) {
-        return lottoNumbers.matchCount(lottoWin);
+    public LottoRank matchCount(LottoWinNumbers lottoWinNumbers, BonusBall bonusBall) {
+        return lottoNumbers.matchCount(lottoWinNumbers, bonusBall);
     }
 
     @Override
