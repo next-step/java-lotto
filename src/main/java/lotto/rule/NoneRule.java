@@ -5,17 +5,17 @@ import lotto.WinningNumber;
 import lotto.type.WinningLevel;
 
 /**
- * 1등 규칙 판정
+ * 미당첨 규칙 판정
  */
-public class FirstRule implements WinningRule {
-    private static FirstRule instance;
+public class NoneRule implements WinningRule {
+    private static NoneRule instance;
 
-    private FirstRule() {
+    private NoneRule() {
     }
 
-    public static FirstRule getInstance() {
+    public static NoneRule getInstance() {
         if (instance == null) {
-            instance = new FirstRule();
+            instance = new NoneRule();
         }
 
         return instance;
@@ -23,11 +23,11 @@ public class FirstRule implements WinningRule {
 
     @Override
     public boolean isMatched(Lotto lotto, WinningNumber winningNumber) {
-        return lotto.howManyContain(winningNumber) == 6;
+        return lotto.howManyContain(winningNumber) < 3;
     }
 
     @Override
     public String getDescription() {
-        return "6개 일치";
+        return "2개 이하 일치";
     }
 }

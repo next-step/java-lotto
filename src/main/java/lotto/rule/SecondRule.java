@@ -4,22 +4,20 @@ import lotto.Lotto;
 import lotto.WinningNumber;
 import lotto.type.WinningLevel;
 
-/**
- * 3등 규칙 판정
- */
-public class ThirdRule implements WinningRule {
-    private static ThirdRule instance;
+public class SecondRule implements WinningRule {
+    private static SecondRule instance;
 
-    private ThirdRule() {
+    private SecondRule() {
     }
 
-    public static ThirdRule getInstance() {
+    public static SecondRule getInstance() {
         if (instance == null) {
-            instance = new ThirdRule();
+            instance = new SecondRule();
         }
 
         return instance;
     }
+
 
     @Override
     public boolean isMatched(Lotto lotto, WinningNumber winningNumber) {
@@ -27,11 +25,11 @@ public class ThirdRule implements WinningRule {
             return false;
         }
 
-        return !lotto.containBonusNumber(winningNumber);
+        return lotto.containBonusNumber(winningNumber);
     }
 
     @Override
     public String getDescription() {
-        return "5개 일치";
+        return "5개 일치, 보너스 볼 일치";
     }
 }

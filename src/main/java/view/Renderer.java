@@ -38,39 +38,11 @@ public class Renderer {
     }
 
     private static String rankRule(WinningLevel rank) {
-        if (rank == WinningLevel.NONE) {
-            return "2개 이하 일치";
-        }
-        if (rank == WinningLevel.FIFTH) {
-            return "3개 일치";
-        }
-        if (rank == WinningLevel.FOURTH) {
-            return "4개 일치";
-        }
-        if (rank == WinningLevel.THIRD) {
-            return "5개 일치";
-        }
-
-        // rank == WinningLevel.ONE
-        return "6개 일치";
+        return rank.getDescription();
     }
 
     private static String rankAmount(WinningLevel rank) {
-        if (rank == WinningLevel.NONE) {
-            return "0원";
-        }
-        if (rank == WinningLevel.FIFTH) {
-            return "5000원";
-        }
-        if (rank == WinningLevel.FOURTH) {
-            return "50000원";
-        }
-        if (rank == WinningLevel.THIRD) {
-            return "1500000원";
-        }
-
-        // rank == WinningLevel.ONE
-        return "2000000000원";
+        return rank.getAmount() + "원";
     }
 
     public static void printRatio(double ratio) {

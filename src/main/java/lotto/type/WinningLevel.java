@@ -1,7 +1,11 @@
 package lotto.type;
 
-import java.util.HashMap;
-import java.util.Map;
+import lotto.Lotto;
+import lotto.WinningAmount;
+import lotto.WinningNumber;
+import lotto.rule.*;
+
+import java.util.*;
 
 /**
  * 당첨 등수
@@ -9,24 +13,59 @@ import java.util.Map;
  * 미당첨을 의미하는 NONE도 존재합니다.
  */
 public enum WinningLevel {
-    NONE(0),
-    FIFTH(5),
-    FOURTH(4),
-    THIRD(3),
-    FIRST(1);
+    NONE(0, 0, NoneRule.getInstance()),
+    FIFTH(5, 5000, FifthRule.getInstance()),
+    FOURTH(4, 50000, FourthRule.getInstance()),
+    THIRD(3, 1500000, ThirdRule.getInstance()),
+    SECOND(2, 30000000, SecondRule.getInstance()),
+    FIRST(1, 2000000000, FirstRule.getInstance());
 
-    private final int winningLevel;
+    private final int level;
+    private final WinningAmount amount;
+    private final WinningRule rule;
 
-    WinningLevel(int winningLevel) {
-        this.winningLevel = winningLevel;
+    WinningLevel(int winningLevel, int winningAmount, WinningRule winningRule) {
+        this.level = winningLevel;
+        this.amount = WinningAmount.of(winningAmount);
+        this.rule = winningRule;
     }
 
     public static WinningLevel of(int winningLevel) {
         return WinningLevelTable.convert(winningLevel);
     }
+
+    public static WinningLevel decideFinalWinningLevel(Lotto lotto, WinningNumber winningNumber) {
+        List<WinningLevel> matchedRule = new ArrayList<>();
+
+        for (WinningLevel level : WinningLevel.values()) {
+            addIfRuleMatched(lotto, winningNumber, level, matchedRule);
+        }
+
+        return matchedRule.get(0);
+    }
+
+    private static void addIfRuleMatched(Lotto lotto, WinningNumber winningNumber, WinningLevel level, List<WinningLevel> matchedRule) {
+        if (level.isMatched(lotto, winningNumber)) {
+            matchedRule.add(level);
+        }
+    }
+
+    public boolean isMatched(Lotto lotto, WinningNumber winningNumber) {
+        return this.rule.isMatched(lotto, winningNumber);
+    }
+
+    public WinningAmount getAmount() {
+        return this.amount;
+    }
+
+    public String getDescription() {
+        return this.rule.getDescription();
+    }
 }
 
 class WinningLevelTable {
+    private static WinningLevelTable instance;
+
     private final Map<Integer, WinningLevel> winningLevelTable;
     
     private WinningLevelTable() {
@@ -35,11 +74,16 @@ class WinningLevelTable {
         winningLevelTable.put(5, WinningLevel.FIFTH);
         winningLevelTable.put(4, WinningLevel.FOURTH);
         winningLevelTable.put(3, WinningLevel.THIRD);
+        winningLevelTable.put(2, WinningLevel.SECOND);
         winningLevelTable.put(1, WinningLevel.FIRST);
     }
 
     private static WinningLevelTable getInstance() {
-        return new WinningLevelTable();
+        if (instance == null) {
+            instance = new WinningLevelTable();
+        }
+
+        return instance;
     }
 
     /**

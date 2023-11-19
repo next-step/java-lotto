@@ -8,20 +8,26 @@ import lotto.type.WinningLevel;
  * 5등 규칙 판정
  */
 public class FifthRule implements WinningRule {
+    private static FifthRule instance;
+
     private FifthRule() {
     }
 
     public static FifthRule getInstance() {
-        return new FifthRule();
+        if (instance == null) {
+            instance = new FifthRule();
+        }
+
+        return instance;
     }
 
     @Override
     public boolean isMatched(Lotto lotto, WinningNumber winningNumber) {
-        return lotto.howManyContain(winningNumber.toList()) == 3;
+        return lotto.howManyContain(winningNumber) == 3;
     }
 
     @Override
-    public WinningLevel getRank() {
-        return WinningLevel.FIFTH;
+    public String getDescription() {
+        return "3개 일치";
     }
 }
