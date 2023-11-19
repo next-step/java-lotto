@@ -25,22 +25,14 @@ public class LottoGameController {
         Map<String, Money> moneyMap = inputMoneys(purchasePrice, manualLottoCount);
         Money moneyOfAutoLotto = moneyMap.get("AUTO");
         Money moneyOfManualLotto = moneyMap.get("MANUAL");
-
         LottoMachine lottoMachine = new LottoMachine(new AutoLottoGameNumberGenerator());
-
         Lottos autoLottos = lottoMachine.buyLottos(moneyOfAutoLotto);
-
-
         Lottos manualLottos = buyManualLottos(manualLottoCount, lottoMachine, moneyOfManualLotto);
-
         Lottos lottos = autoLottos.addLottos(manualLottos);
         printLottos(lottos, autoLottos.size(), manualLottos.size());
-
         WinningLotto winningLotto = inputWinningLotto();
-
         MatchStatus matchStatus = lottos.match(winningLotto);
-        double profitRate = matchStatus.profitRate(Lotto.PRICE_OF_LOTTO);
-        ResultView.printMatchResult(matchStatus, profitRate);
+        ResultView.printMatchResult(matchStatus, matchStatus.profitRate(Lotto.PRICE_OF_LOTTO));
     }
 
     private static Lottos buyManualLottos(int manualLottoCount, LottoMachine lottoMachine, Money moneyOfManualLotto) {
