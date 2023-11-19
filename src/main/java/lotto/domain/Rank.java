@@ -1,21 +1,28 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
-    FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
-    NO_MATCH(0,0);
+    FIRST(6),
+    SECOND(5),
+    THIRD(4),
+    FOURTH(3),
+    NO_MATCH(0);
 
     private int matchCount;
-    private int money;
 
-    Rank(int matchCount, int money) {
+    Rank(int matchCount) {
         this.matchCount = matchCount;
-        this.money = money;
     }
 
-    public int matchCount() {
-        return this.matchCount;
+    public static Rank of(int matchCount){
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.isSameMatchCount(matchCount))
+                .findFirst()
+                .orElse(NO_MATCH);
+    }
+
+    private boolean isSameMatchCount(int matchCount) {
+        return this.matchCount == matchCount;
     }
 }
