@@ -32,11 +32,11 @@ public class Lottos {
         }
     }
 
-    public Map<LottoRank, Integer> findRanks(List<Integer> winList, int bonus) {
+    public Map<LottoRank, Integer> findRanks(Lotto winLotto, LottoNumber bonus) {
         Map<LottoRank, Integer> ranks = new EnumMap<>(LottoRank.class);
 
         for (Lotto lotto : lottos) {
-            LottoRank lottoRank = lotto.findRank(winList, bonus);
+            LottoRank lottoRank = lotto.findRank(winLotto, bonus);
             ranks.put(lottoRank, ranks.getOrDefault(lottoRank, 0) + 1);
         }
 

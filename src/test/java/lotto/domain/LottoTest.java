@@ -23,7 +23,8 @@ public class LottoTest {
     @DisplayName("당첨번호 중 맞춘 숫자 개수를 리턴")
     void 로또_당첨번호_count() {
         List<Integer> winList = new ArrayList<>(Arrays.asList(6, 5, 4, 10, 10, 10));
-        int count = lotto.countMath(winList);
+        Lotto winLotto = new Lotto(Arrays.asList(6, 5, 4, 10, 11, 12));
+        int count = lotto.countMath(winLotto);
 
         assertThat(count).isEqualTo(3);
 
@@ -32,7 +33,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또번호에 보너스 볼 번호가 있는지 확인")
     void 보너스볼_유무_확인() {
-        int bonus = 7;
+        LottoNumber bonus = LottoNumber.valueOf(7);
         assertThat(lotto.contains(bonus)).isFalse();
 
     }

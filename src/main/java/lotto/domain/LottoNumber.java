@@ -1,29 +1,37 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumber {
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
     private final int number;
 
-    public LottoNumber(int i) {
+    private LottoNumber(int i) {
         this.number = validate(i);
     }
-
-    private int validate(int i) {
-        if (i > 0 && i < 46) {
-            return i;
+    public static LottoNumber valueOf(int number){
+        if(number>=MIN_NUMBER&&number<=MAX_NUMBER){
+            return CACHE.get(number);
         }
-        throw new IllegalArgumentException("로또 숫자는 1-45 사이로 입력해야 합니다");
+        return new LottoNumber(number);
     }
 
-    public int exist(List<Integer> list) {
-        return Collections.frequency(list, number);
+    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
+
+    static {
+        for (int number = MIN_NUMBER; number <= MAX_NUMBER; number++) {
+            CACHE.put(number, new LottoNumber(number));
+        }
     }
 
-    public boolean same(int compareNumber) {
-        return number == compareNumber;
+
+    private int validate(int number) {
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
+            throw new IllegalArgumentException("로또 숫자는 1-45 사이로 입력해야 합니다");
+        }
+        return number;
+
     }
 
     @Override

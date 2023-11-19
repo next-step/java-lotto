@@ -17,10 +17,10 @@ public class LottoRanksTest {
     @DisplayName("모든 로또 당첨금의 합계를 확인")
     void 당첨금_합계확인() {
         int count = 5;
-        int bonus = 1;
+        LottoNumber bonus = LottoNumber.valueOf(1);
         Lottos lottos = Lottos.generate(new ArrayList<>(), new TestNumberGeneration(),count);
 
-        LottoRanks lottoRanks = new LottoRanks(lottos, new ArrayList<>(Arrays.asList(6, 5, 4, 3, 2, 10)), bonus);
+        LottoRanks lottoRanks = new LottoRanks(lottos, new Lotto(Arrays.asList(6, 5, 4, 3, 2, 10)), bonus);
 
         assertThat(lottoRanks.findPrizeMoney()).isEqualTo(150_000_000L);
     }
@@ -28,8 +28,8 @@ public class LottoRanksTest {
     @Test
     @DisplayName("로또당첨 번호와 매치한 결과를 miss를 제외한 랭킹값 모두 리턴")
     void 로또당첨_목록확인() {
-        List<Integer> winList = new ArrayList<>(Arrays.asList(6, 5, 4, 2, 3, 1));
-        int bonus = 1;
+        Lotto winList = new Lotto(Arrays.asList(6, 5, 4, 2, 3, 1));
+        LottoNumber bonus = LottoNumber.valueOf(1);
 
         List<Lotto> list = new ArrayList<>();
         Lotto lotto1 = new Lotto(new ArrayList<>(Arrays.asList(6, 5, 4, 10, 11, 12)));

@@ -8,8 +8,8 @@ import java.util.Map;
 public class LottoRanks {
     private final Map<LottoRank, Integer> ranks;
 
-    public LottoRanks(Lottos lottos, List<Integer> winList, int bonus) {
-        this.ranks = lottos.findRanks(winList, bonus);
+    public LottoRanks(Lottos lottos, Lotto winLotto, LottoNumber bonus) {
+        this.ranks = lottos.findRanks(winLotto, bonus);
     }
 
     public long findPrizeMoney() {

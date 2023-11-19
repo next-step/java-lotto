@@ -17,8 +17,8 @@ public class LottosTest {
     @Test
     @DisplayName("당첨 번호와 매치한 결과 번호목록에 있는 랭킹 값 목록만 리턴")
     void 로또당첨_목록확인() {
-        List<Integer> winList = new ArrayList<>(Arrays.asList(6, 5, 4, 2, 3, 1));
-        int bonus = 1;
+        Lotto winList = new Lotto(Arrays.asList(6, 5, 4, 2, 3, 1));
+        LottoNumber bonus = LottoNumber.valueOf(1);
 
         List<Lotto> list = new ArrayList<>();
         Lotto lotto1 = new Lotto(new ArrayList<>(Arrays.asList(6, 5, 4, 10, 11, 12)));

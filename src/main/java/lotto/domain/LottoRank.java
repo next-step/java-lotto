@@ -42,10 +42,6 @@ public enum LottoRank {
         return this.count;
     }
 
-    private boolean sameNumber(int number){
-         return this.count == number;
-    }
-
     public long prize() {
         return this.prizeMoney;
     }

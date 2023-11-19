@@ -14,7 +14,7 @@ public class Lotto {
         List<LottoNumber> lottoList = new ArrayList<>();
 
         for (Integer integer : list) {
-            lottoList.add(new LottoNumber(integer));
+            lottoList.add(LottoNumber.valueOf(integer));
         }
         return lottoList;
     }
@@ -30,29 +30,27 @@ public class Lotto {
         return Collections.unmodifiableList(lotto);
     }
 
-    public LottoRank findRank(List<Integer> winList, int bonus) {
-        if (isRank(winList)) {
-            return LottoRank.findMatchCount(countMath(winList), contains(bonus));
+    public LottoRank findRank(Lotto winLotto, LottoNumber bonus) {
+        if (isRank(winLotto)) {
+            return LottoRank.findMatchCount(countMath(winLotto), contains(bonus));
         }
         return LottoRank.MISS;
 
     }
 
-    public boolean contains(int bonus) {
+    public boolean contains(LottoNumber bonus) {
         return lotto.stream()
-                .anyMatch(lottoNumber -> lottoNumber.same(bonus));
+                .anyMatch(lottoNumber -> lottoNumber.equals(bonus));
     }
 
-    public int countMath(List<Integer> winList) {
-        int count = 0;
-        for (LottoNumber lottoNumber : lotto) {
-            count += lottoNumber.exist(winList);
-        }
-        return count;
+    public int countMath(Lotto winLotto) {
+        List<LottoNumber> matchResult = new ArrayList<>(lotto);
+        matchResult.retainAll(winLotto.find());
+        return matchResult.size();
     }
 
-    private boolean isRank(List<Integer> winList) {
-        return countMath(winList) > 2;
+    private boolean isRank(Lotto winLotto) {
+        return countMath(winLotto) > 2;
     }
 
     @Override

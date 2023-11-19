@@ -23,8 +23,8 @@ public class LottoController {
         printLottoCount(count, manual);
         printLottoBundle(lottos.find());
 
-        List<Integer> winNumbers = inputWiningNumbers();
-        int bonus = inputBonusBall();
+        Lotto winNumbers = new Lotto(inputWiningNumbers());
+        LottoNumber bonus = LottoNumber.valueOf(inputBonusBall());
 
         LottoRanks lottoRanks = new LottoRanks(lottos, winNumbers, bonus);
 
