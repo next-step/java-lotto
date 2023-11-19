@@ -23,6 +23,16 @@ public class StatisticsReport {
         }
     }
 
+    public StatisticsReport report(WinningLotto winningLotto, LottoWallet lottoWallet) {
+        for (int i = 0; i < lottoWallet.totalTicketCount(); i++) {
+            Lotto lotto = lottoWallet.oneTicket(i);
+            int matchedCount = winningLotto.compare(lotto);
+            Prize prize = Prize.prizeByMatchedCount(matchedCount);
+            this.matchCountByPrize.put(prize,Integer.sum(matchCountByPrize.get(prize),1));
+        }
+        return this;
+    }
+
     public int countByPrize(Prize prize) {
         return matchCountByPrize.get(prize);
     }
@@ -36,4 +46,5 @@ public class StatisticsReport {
         }
         return total;
     }
+
 }
