@@ -24,11 +24,4 @@ public enum LottoResult {
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 당첨정보입니다."));
     }
 
-    public int matchCount() {
-        return this.matchCount;
-    }
-
-    public int prize() {
-        return this.prize;
-    }
 }
