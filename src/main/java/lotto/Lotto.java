@@ -35,4 +35,11 @@ public class Lotto {
         difference.removeAll(lotto.ticket);
         return MAX_TICKET_NUMBERS - difference.size();
     }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+            "ticket=" + ticket.toString() +
+            '}';
+    }
 }
