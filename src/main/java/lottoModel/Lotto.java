@@ -26,7 +26,6 @@ public class Lotto {
         return matchNumber(numberList.stream().collect(Collectors.toSet())).size();
     }
 
-
     private Set<Integer> matchNumber(Set<Integer> numberList) {
         return findCommonElements(numberList, this.numbers);
     }

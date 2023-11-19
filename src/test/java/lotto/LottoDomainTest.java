@@ -2,13 +2,11 @@ package lotto;
 
 import lottoModel.Lotto;
 import lottoController.LottoDomain;
+import lottoModel.LottoInputValue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,6 +39,15 @@ class LottoDomainTest {
         assertThat(lottos.size()).isEqualTo(14);
     }
 
+    @Test
+    @DisplayName("당첨 번호 문자 -> 숫자 변환 ")
+    void convertLastLottoNumbers() {
 
+        Integer[] array = {1, 2, 3, 4, 5, 6};
+        Set<Integer> set = Arrays.stream(array).collect(Collectors.toSet());
 
+        LottoInputValue lottoInputValue = new LottoInputValue("1, 2, 3, 4, 5, 6");
+        Set<Integer> lastLottoNumbers = lottoInputValue.convertLastLottoNumbers();
+        assertThat(lastLottoNumbers).isEqualTo(set);
+    }
 }

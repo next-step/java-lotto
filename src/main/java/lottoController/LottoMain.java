@@ -2,10 +2,10 @@ package lottoController;
 
 
 import lottoModel.Lotto;
+import lottoModel.LottoInputValue;
 import lottoModel.LottoResult;
 import lottoView.InputView;
 import lottoView.ResultView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -20,10 +20,10 @@ public class LottoMain {
         List<Lotto> lottos = LottoDomain.createLottoGames(gameCount);
         ResultView.printLottoNumber(lottos);
 
-        String str = InputView.lastLottoNumbers();
-        Set<Integer> lastLotto = LottoDomain.convertLastLottoNumbers(str);
+        LottoInputValue lottoInputValue = InputView.lastLottoNumbers();
+        Set<Integer> lastLotto = lottoInputValue.convertLastLottoNumbers();
 
-        LottoResult lottoResult = LottoDomain.lottoResult(money, lottos, new ArrayList<>(lastLotto));
+        LottoResult lottoResult = LottoResult.result(money, lottos, new ArrayList<>(lastLotto));
         ResultView.printLottoResult(lottoResult);
     }
 

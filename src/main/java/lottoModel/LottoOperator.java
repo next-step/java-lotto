@@ -3,7 +3,12 @@ package lottoModel;
 public class LottoOperator {
 
     public enum Operator {
-
+        ADD {
+            @Override
+            public double apply(double x, double y) {
+                return x + y;
+            }
+        },
         MINUS {
             @Override
             public double apply(double x, double y) {
