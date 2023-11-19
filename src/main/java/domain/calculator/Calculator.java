@@ -39,7 +39,7 @@ public class Calculator implements CalculatorAble {
                 numbers.add(new Number(Integer.parseInt(o)));
             }
             if (validateOperator(o)) {
-                operators.add(OperatorEnum.of(o));
+                operators.add(OperatorEnum.from(o));
             }
         });
     }
