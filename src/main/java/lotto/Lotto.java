@@ -1,29 +1,26 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class Lotto implements Iterable<LottoNumber> {
-	private final List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-	public Lotto() {
-		this.lottoNumbers = LottoFactory.createLotto();
-	}
+    public Lotto(List<LottoNumber> inputLottoNumbers) {
+        this.lottoNumbers = inputLottoNumbers;
+    }
 
-	public Lotto(List<Integer> inputLottoNumbers) {
-		this.lottoNumbers = new ArrayList<>();
-		for (int lottoNumber : inputLottoNumbers) {
-			lottoNumbers.add(new LottoNumber(lottoNumber));
-		}
-	}
+    public Lotto(String inputNumbers) {
+        this.lottoNumbers = LottoFactory.createLotto(inputNumbers);
+    }
 
-	public List<LottoNumber> lottoNumbers() {
-		return this.lottoNumbers;
-	}
 
-	@Override
-	public Iterator<LottoNumber> iterator() {
-		return this.lottoNumbers.iterator();
-	}
+    public List<LottoNumber> lottoNumbers() {
+        return this.lottoNumbers;
+    }
+
+    @Override
+    public Iterator<LottoNumber> iterator() {
+        return this.lottoNumbers.iterator();
+    }
 }

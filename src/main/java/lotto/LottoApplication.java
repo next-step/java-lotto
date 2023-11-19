@@ -1,17 +1,16 @@
 package lotto;
 
-import java.util.List;
-
 public class LottoApplication {
-	public static void main(String[] args) {
-		LottoList lottoList = InputView.inputLottoList();
-		List<Integer> winningNumbers = InputView.inputWinningNumbers();
-		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(new Lotto(winningNumbers));
+    public static void main(String[] args) {
+        int purChaseCount = InputView.inputPurchaseCount();
+        LottoList lottoList = new LottoList(purChaseCount);
+        String winningNumbers = InputView.inputWinningNumbers();
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(new Lotto(winningNumbers));
 
-		LottoResult lottoResult = new LottoResult(lottoList);
-		lottoResult.matchesWinningNumbers(lottoWinningNumbers);
+        LottoResult lottoResult = new LottoResult(lottoList);
+        lottoResult.matchesWinningNumbers(lottoWinningNumbers);
 
-		OutputView.printResultPhrase();
-		OutputView.printResult(lottoResult);
-	}
+        OutputView.printResultPhrase();
+        OutputView.printResult(lottoResult);
+    }
 }
