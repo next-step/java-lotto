@@ -20,7 +20,7 @@ public class Lottos {
 
     public Map<LottoRank, Long> calculateTotalRank(WinningLotto winnerLotto) {
         return lottos.stream()
-                .map(lotto -> LottoRank.evaluateLottoRankByMatchCount(winnerLotto.compareToMatchNumberCount(lotto), winnerLotto.checkBonusNumber(lotto)))
+                .map(lotto -> LottoRank.findLottoRankByMatchCountAndMatchBonus(winnerLotto.compareToMatchNumberCount(lotto), winnerLotto.checkBonusNumber(lotto)))
                 .collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
     }
 

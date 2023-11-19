@@ -1,8 +1,6 @@
 package step2.model;
 
-import java.util.Arrays;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -14,7 +12,16 @@ public enum LottoRank {
     FIFTH_PRIZE(3, 5_000),
     NO_PRIZE(0, 0);
 
+    private static final int MAX_NO_PRIZE_NUMBER = 2;
     private static final int MATCH_COUNT_SECOND_OR_THIRD = 5;
+    private static final Map<Integer, LottoRank> lottoRankMapping =
+            Stream.of(values())
+                    .collect(Collectors.toMap(
+                            lottoRank -> lottoRank.matchCount,
+                            lottoRank -> lottoRank,
+                            (existing, replacement) -> existing // 중복된 키가 있을 때 기존 값을 유지하도록 함
+                    ));
+
     private final int matchCount;
     private final long prizeMoney;
 
@@ -23,15 +30,17 @@ public enum LottoRank {
         this.prizeMoney = prizeMoney;
     }
 
-    public static LottoRank evaluateLottoRankByMatchCount(int matchCount, boolean matchBonus) {
-        LottoRank lottoRank = Arrays.stream(LottoRank.values())
-                .filter(rank -> rank.matchCount == matchCount)
-                .findAny()
-                .orElse(LottoRank.NO_PRIZE); //todo else문을 쓰는게 맞을지 고민 필요.
-        if (lottoRank.matchCount == MATCH_COUNT_SECOND_OR_THIRD) {
-            return matchBonus ? LottoRank.SECOND_PRIZE : LottoRank.THIRD_PRIZE;
+    public static LottoRank findLottoRankByMatchCountAndMatchBonus(int matchCount, boolean matchBonus) {
+        if (matchCount <= MAX_NO_PRIZE_NUMBER) {
+            return NO_PRIZE;
         }
-        return lottoRank;
+        if (matchCount == MATCH_COUNT_SECOND_OR_THIRD && matchBonus) {
+            return SECOND_PRIZE;
+        }
+        if (matchCount == MATCH_COUNT_SECOND_OR_THIRD && !matchBonus) {
+            return THIRD_PRIZE;
+        }
+        return lottoRankMapping.get(matchCount);
     }
 
     public long getPrizeMoney() {
