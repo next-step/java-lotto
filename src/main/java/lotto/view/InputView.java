@@ -1,10 +1,7 @@
 package lotto.view;
 
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.lang.System.*;
@@ -54,18 +51,19 @@ public class InputView {
         }
     }
 
-    public Set<Integer> inputManualLotto() {
-        print("수동으로 구매할 번호를 입력해 주세요.");
+    public Set<Integer> inputManualLotto(int idx) {
+        if (idx == 0) {
+            print("수동으로 구매할 번호를 입력해 주세요.");
+        }
 
-            try {
-                String input = input();
-                inputValidator.validateLottoNumbers(input, DELIMITER);
-                return convertToNumbers(input);
-            } catch (IllegalArgumentException e){
-                print(e.getMessage());
-                return inputManualLotto();
-            }
-
+        try {
+            String input = input();
+            inputValidator.validateLottoNumbers(input, DELIMITER);
+            return convertToNumbers(input);
+        } catch (IllegalArgumentException e){
+            print(e.getMessage());
+            return inputManualLotto(idx);
+        }
     }
 
     public Set<Integer> inputWinningNumbers() {

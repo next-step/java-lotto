@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 
 public class InputValidator {
 
+    public static final int MIN = 1;
+    public static final int MAX = 45;
+
     public void validatePurchaseMoney(String purchase, int lottoPrice) {
         long purchaseMoney = validateParseLong(purchase);
         validateMinimum(purchaseMoney, lottoPrice);
@@ -45,7 +48,7 @@ public class InputValidator {
             .map(this::validateParseInt)
             .collect(Collectors.toUnmodifiableList());
 
-        validateNegative(numbers);
+        numbers.forEach(number -> validateRangeOfNumber(number, MIN, MAX));
         validateDuplicate(numbers);
     }
 
@@ -61,24 +64,20 @@ public class InputValidator {
         try {
             number = Integer.parseInt(numberString);
         } catch (NumberFormatException e){
-            throw new IllegalArgumentException("당첨 번호는 정수를 입력해야 합니다.");
+            throw new IllegalArgumentException("로또 번호는 정수를 입력해야 합니다.");
         }
 
         return number;
     }
 
-    private void validateNegative(List<Integer> numbers) {
-        numbers.forEach(this::validateRangeOfNumber);
-    }
-
-    private void validateRangeOfNumber(Integer number) {
-        if (isOutOfRange(number)) {
-            throw new IllegalArgumentException("숫자의 범위는 1~45입니다.");
+    private void validateRangeOfNumber(Integer number, int min, int max) {
+        if (isOutOfRange(number, min, max)) {
+            throw new IllegalArgumentException(String.format("숫자의 범위는 %d ~ %d입니다.", min, max));
         }
     }
 
-    private boolean isOutOfRange(int number) {
-        return number < 1 || number > 45;
+    private boolean isOutOfRange(int number, int min, int max) {
+        return number < min || number > max;
     }
 
     private void validateDuplicate(List<Integer> numbers) {
@@ -91,14 +90,14 @@ public class InputValidator {
 
     private void validateAmountOfNumbers(List<Integer> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException("로또 당첨 번호는 6개가 입력되어야 합니다.");
+            throw new IllegalArgumentException("로또 번호는 6개가 입력되어야 합니다.");
         }
     }
 
     public void validateBonusNumber(String input, Set<Integer> winningNumbers) {
         int number = (int) validateParseLong(input);
 
-        validateRangeOfNumber(number);
+        validateRangeOfNumber(number, MIN, MAX);
         validateDuplicate(winningNumbers, number);
     }
 
@@ -111,13 +110,6 @@ public class InputValidator {
     public void validateCountOfManual(String input, int numOfLotto) {
         int countOfManual = validateParseInt(input);
 
-        validateNegative(List.of(countOfManual));
-        validateRangeOfManualCount(countOfManual, numOfLotto);
-    }
-
-    private void validateRangeOfManualCount(int countOfManual, int numOfLotto) {
-        if (countOfManual > numOfLotto) {
-            throw new IllegalArgumentException("수동으로 구매할 수 있는 로또 개수는 " + numOfLotto + "개 이하입니다.");
-        }
+        validateRangeOfNumber(countOfManual, 0, numOfLotto);
     }
 }

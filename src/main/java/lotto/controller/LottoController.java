@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.LottoGame;
-import lotto.domain.lotto.wrapper.LottoNumber;
 import lotto.domain.lotto.wrapper.LottoNumbers;
 import lotto.domain.lotto.wrapper.WinningNumber;
 import lotto.domain.rankcount.RankCountGroup;
@@ -40,17 +39,22 @@ public class LottoController {
         int countOfManual = inputView.inputCountOfManual(numOfLotto);
         int countOfAuto = numOfLotto - countOfManual;
 
-        List<LottoNumbers> lottos = IntStream.range(0, countOfManual)
-            .mapToObj(i -> new LottoNumbers(inputView.inputManualLotto()))
-            .collect(Collectors.toList());
+        List<LottoNumbers> lottos = new ArrayList<>();
+        lottos.addAll(drawManualLottos(countOfManual));
+        lottos.addAll(drawAutoLottos(countOfAuto));
 
-        lottos.addAll(drawLottos(countOfAuto));
-
-        resultView.printPurchaseResult(numOfLotto, lottos);
+        resultView.printNumOfLotto(countOfManual, countOfAuto);
+        resultView.printLottoNumbers(lottos);
         return lottos;
     }
 
-    private List<LottoNumbers> drawLottos(int numOfLotto) {
+    private List<LottoNumbers> drawManualLottos(int countOfManual) {
+        return IntStream.range(0, countOfManual)
+            .mapToObj(i -> new LottoNumbers(inputView.inputManualLotto(i)))
+            .collect(Collectors.toList());
+    }
+
+    private List<LottoNumbers> drawAutoLottos(int numOfLotto) {
         return IntStream.range(0, numOfLotto)
             .mapToObj(i -> LottoMachine.drawLottoNumbers())
             .collect(Collectors.toUnmodifiableList());
