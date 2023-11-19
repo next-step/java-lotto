@@ -1,5 +1,6 @@
 package lotto.util;
 
+import lotto.domain.LottoNumber;
 import lotto.exception.NumberInputRuleException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -17,10 +18,11 @@ class StringParserTest {
         String text = "1, 2, 3, 4, 5, 6";
         int size = 6;
 
-        List<Integer> parseText = StringParser.parseToInts(text);
+        List<LottoNumber> parseText = StringParser.parseToInts(text);
 
         assertThat(parseText).hasSize(size)
-                .containsExactly(1, 2, 3, 4, 5, 6);
+                .extracting("number")
+                .containsOnly(1, 2, 3, 4, 5, 6);
     }
 
     @Test

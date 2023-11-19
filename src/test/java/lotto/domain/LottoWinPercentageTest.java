@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.strategy.TestLottoGenerator;
+import lotto.testutil.TestUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -23,7 +24,7 @@ class LottoWinPercentageTest {
     ) {
         LottoResult lottoResult = new LottoResult(
                 new Lottos(lottos),
-                new LottoWinNumbers(lottoWinNumbers),
+                new LottoWinNumbers(TestUtil.generateLottoNumbers(lottoWinNumbers)),
                 new BonusBall(bonusBall)
         );
         LottoWinPercentage lottoWinPercentage = new LottoWinPercentage(14000, lottoResult);
@@ -35,7 +36,7 @@ class LottoWinPercentageTest {
         return Stream.of(
                 Arguments.of(
                         List.of(
-                                new Lotto(new LottoNumbers(new TestLottoGenerator(List.of(1, 2, 3, 7, 8, 9))))
+                                new Lotto(new LottoNumbers(new TestLottoGenerator(TestUtil.generateLottoNumbers(List.of(1, 2, 3, 7, 8, 9)))))
                         ),
                         List.of(1, 2, 3, 4, 5, 6),
                         40

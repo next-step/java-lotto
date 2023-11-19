@@ -1,9 +1,6 @@
 package lotto.strategy;
 
-import lotto.domain.InputValidator;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.util.StringParser;
 
 import java.util.ArrayList;
@@ -22,7 +19,7 @@ public class LottoGenerators {
 
     private void generateManualLotto(List<String> stringFormatManualLottos, List<LottoGenerator> lottoGenerators) {
         for (String stringFormatManualLotto : stringFormatManualLottos) {
-            List<Integer> manualLotto = StringParser.parseToInts(stringFormatManualLotto);
+            List<LottoNumber> manualLotto = StringParser.parseToInts(stringFormatManualLotto);
             InputValidator.validateNumberCount(manualLotto.size());
             lottoGenerators.add(new ManualLottoGenerator(manualLotto));
         }

@@ -1,5 +1,6 @@
 package lotto.util;
 
+import lotto.domain.LottoNumber;
 import lotto.exception.MisMatchNumberException;
 import lotto.exception.NumberInputRuleException;
 
@@ -15,9 +16,9 @@ public class StringParser {
 
     private static final String DEFAULT_PATTERN = ", ";
 
-    public static List<Integer> parseToInts(String text) {
+    public static List<LottoNumber> parseToInts(String text) {
         return Stream.of(text.split(DEFAULT_PATTERN))
-                .map(StringParser::inputNumber)
+                .map(stringNumber -> new LottoNumber(inputNumber(stringNumber)))
                 .collect(Collectors.toList());
     }
 

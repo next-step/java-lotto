@@ -10,8 +10,8 @@ public class BonusBall {
         this.bonusBall = bonusBall;
     }
 
-    public boolean containsBonusBall(List<Integer> lottoNumbers) {
+    public boolean containsBonusBall(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber == bonusBall);
+                .anyMatch(lottoNumber -> lottoNumber.isBonusBall(bonusBall));
     }
 }
