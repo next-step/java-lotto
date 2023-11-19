@@ -14,7 +14,6 @@ public class TicketsTest {
 
         @Test
         void 보너스_번호_포함_당첨_티켓_갯수() {
-                long purchaseAmount = 3_000;
                 WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
                 Ticket ticket1 = newTicket(new int[]{1, 2, 3, 7, 8, 9});
                 Ticket ticket2 = newTicket(new int[]{10, 11, 12, 13, 14, 15});
