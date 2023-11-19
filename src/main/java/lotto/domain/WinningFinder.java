@@ -6,11 +6,11 @@ import java.util.List;
 
 import static lotto.domain.WinningAmount.*;
 
-public class WinningLottoManager {
+public class WinningFinder {
     private final List<Integer> WINNING_NUMBER;
     private HashMap<WinningAmount, Integer> winningLottos = new HashMap<>();
 
-    public WinningLottoManager(List<Integer> winningNumber) {
+    public WinningFinder(List<Integer> winningNumber) {
         this.WINNING_NUMBER = winningNumber;
         for (WinningAmount winningAmount : WinningAmount.values()) {
             winningLottos.put(winningAmount, 0);

@@ -1,13 +1,13 @@
-package lotto.ui.controller;
+package lotto;
 
 import lotto.application.dto.LottoRequest;
 import lotto.application.dto.LottoResponse;
-import lotto.application.service.LottoService;
+import lotto.application.service.BenefitCalculator;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
 
-public class LottoController {
+public class LottoProcessor {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
@@ -16,7 +16,7 @@ public class LottoController {
                                                 inputView.calculateLottoCount(amount),
                                                 inputView.inputWinningNumber());
 
-        LottoService service = new LottoService();
+        BenefitCalculator service = new BenefitCalculator();
         LottoResponse response = service.calculateBenefit(request);
 
         ResultView resultView = new ResultView();

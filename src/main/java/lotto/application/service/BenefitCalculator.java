@@ -7,7 +7,7 @@ import lotto.domain.WinningAmount;
 
 import java.util.HashMap;
 
-public class LottoService {
+public class BenefitCalculator {
 
     public LottoResponse calculateBenefit(LottoRequest request) {
         Lottos lottos = new Lottos(request.getLottos());

@@ -11,7 +11,7 @@ public class Lottos {
     }
 
     public HashMap<WinningAmount, Integer> countAllWinning(List<Integer> winningNumber) {
-        WinningLottoManager winningManager = new WinningLottoManager(winningNumber);
+        WinningFinder winningManager = new WinningFinder(winningNumber);
         for (Lotto lotto : lottoList) {
             winningManager.countWinning(lotto);
         }
