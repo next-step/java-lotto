@@ -6,7 +6,14 @@ public class LottoWallet {
 
     private final List<Lotto> lottos;
 
+    private final int totalPurchaseAmount;
+
     public LottoWallet(List<Lotto> lottos) {
+        this(lottos, 0);
+    }
+
+    public LottoWallet(List<Lotto> lottos, int totalPurchaseAmount) {
+        this.totalPurchaseAmount = totalPurchaseAmount;
         this.lottos = lottos;
     }
 
@@ -21,6 +28,14 @@ public class LottoWallet {
 
     public Lotto oneTicket(int index) {
         return lottos.get(index);
+    }
+
+    public MoneyWallet withdrawMoney(MoneyWallet moneyWallet) {
+        return moneyWallet.withdraw(totalPurchaseAmount);
+    }
+
+    public int totalPurchaseAmount() {
+        return totalPurchaseAmount;
     }
 
 }
