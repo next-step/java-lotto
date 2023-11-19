@@ -14,7 +14,6 @@ public class LottoFactory {
             int randomNumber = random.nextInt(45) + 1;
             addNumber(randomNumber);
         }
-        Collections.shuffle(numbers);
         Collections.sort(numbers);
     }
 
