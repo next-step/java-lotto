@@ -13,11 +13,18 @@ public class LottoTicket {
     public String toString() {
         return this.ticket.toString();
     }
-    public List<Integer> ticket() {
-        return this.ticket;
+
+    public boolean isThisNumberMatched(WinnerNumbers winnerNummbers, int i) {
+        return winnerNummbers.isContain(ticket.get(i));
     }
 
-    public boolean isThisNumberMatched(List<Integer> winnerNummbers, int i) {
-        return winnerNummbers.contains(ticket.get(i));
+    public int calculateTotalMatchedCount(WinnerNumbers winnerNummbers) {
+        int sum = 0;
+        for (int i = 0; i < 6; i++) {
+            if (isThisNumberMatched(winnerNummbers, i)) {
+                sum++;
+            }
+        }
+        return sum;
     }
 }

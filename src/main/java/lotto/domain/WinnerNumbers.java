@@ -14,13 +14,7 @@ public class WinnerNumbers {
         return this.winnerNummbers.toString();
     }
 
-    public int calculateTotalMatchedCount(LottoTicket lottoTicket) {
-        int sum = 0;
-        for (int i = 0; i < lottoTicket.ticket().size(); i++) {
-            if (lottoTicket.isThisNumberMatched(winnerNummbers, i)) {
-                sum++;
-            }
-        }
-        return sum;
+    public boolean isContain(int number) {
+        return winnerNummbers.contains(number);
     }
 }

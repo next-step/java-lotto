@@ -12,7 +12,7 @@ public class PrizeStatus {
         setupPrizeStatus();
 
         for (int i = 0; i < lottoTickets.numberOfPurchasedTicket(); i++) {
-            int totalMatchedCount = winnerNumbers.calculateTotalMatchedCount(lottoTickets.tickets().get(i));
+            int totalMatchedCount = lottoTickets.tickets().get(i).calculateTotalMatchedCount(winnerNumbers);
             int updatedTotalProfit = updatePrizeStatus(totalMatchedCount, totalProfit);
             totalProfit = updatedTotalProfit;
         }

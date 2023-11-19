@@ -16,7 +16,7 @@ class WinnerNumbersTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbersForTest);
         WinnerNumbers winnerNumbers = new WinnerNumbers(lottoNumbersForTest);
 
-        assertThat(winnerNumbers.calculateTotalMatchedCount(lottoTicket)).isEqualTo(6);
+        assertThat(winnerNumbers.isContain(6)).isEqualTo(true);
     }
 
 }
