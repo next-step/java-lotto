@@ -1,7 +1,5 @@
 package lottosecond.domain.lotto;
 
-import lottosecond.domain.BonusBall;
-
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -25,23 +23,10 @@ public class Lotto {
                 .collect(Collectors.toSet()));
     }
 
-    public int getLottoScore(Lotto winLotto) {
-        return (int) lottoNumbers.stream()
-                .filter(winLotto.lottoNumbers::contains)
-                .count();
-    }
-
     public int matchNumberCount(Lotto winLotto) {
         return (int) winLotto.lottoNumbers.stream()
                 .filter(lottoNumbers::contains)
                 .count();
-    }
-
-    public int matchBonusBallNumberCount(BonusBall bonusBall) {
-        if (lottoNumbers.contains(bonusBall.getNumber())) {
-            return 1;
-        }
-        return 0;
     }
 
     public boolean hasLottoNumber(LottoNumber lottoNumber) {

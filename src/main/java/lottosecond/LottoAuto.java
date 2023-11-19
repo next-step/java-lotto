@@ -1,9 +1,8 @@
 package lottosecond;
 
-import lottosecond.domain.BonusBall;
 import lottosecond.domain.EarningRateCalculator;
 import lottosecond.domain.WinnerBoard;
-import lottosecond.domain.WinningLottoAndBonusBall;
+import lottosecond.domain.WinningCondition;
 import lottosecond.domain.lotto.Lotto;
 import lottosecond.domain.lotto.LottoShuffler;
 import lottosecond.domain.lotto.Lottos;
@@ -28,9 +27,9 @@ public class LottoAuto {
         Lotto winningLotto = extractWinningLotto(winNumbersString);
 
         int bonusNumber = inputView.inputBonusNumber();
-        WinningLottoAndBonusBall winningLottoAndBonusBall = new WinningLottoAndBonusBall(winningLotto, new BonusBall(bonusNumber));
+        WinningCondition winningCondition = new WinningCondition(winningLotto, bonusNumber);
 
-        WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningLottoAndBonusBall);
+        WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningCondition);
         outputView.printWinnerStatistics(winnerBoard);
 
         EarningRateCalculator earningRateCalculator = new EarningRateCalculator();

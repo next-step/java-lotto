@@ -25,11 +25,11 @@ public class WinnerBoard {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinnerBoard that = (WinnerBoard) o;
-        return Objects.equals(winners, that.winners);
+        return Objects.equals(getWinners(), that.getWinners());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(winners);
+        return Objects.hash(getWinners());
     }
 }

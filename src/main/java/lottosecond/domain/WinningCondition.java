@@ -1,16 +1,19 @@
 package lottosecond.domain;
 
 import lottosecond.domain.lotto.Lotto;
+import lottosecond.domain.lotto.LottoNumber;
 
-public class WinningLottoAndBonusBall {
+public class WinningCondition {
 
     private final Lotto lotto;
-    private final BonusBall bonusBall;
+    private final LottoNumber bonusBall;
 
-    public WinningLottoAndBonusBall(Lotto lotto, BonusBall bonusBall) {
+    public WinningCondition(Lotto lotto, int bonusNumber) {
         this.lotto = lotto;
 
-        if (bonusBall.isDuplicateWithLastWinningLottoNumber(lotto)) {
+        LottoNumber bonusBall = LottoNumber.of(bonusNumber);
+
+        if (lotto.hasLottoNumber(bonusBall)) {
             throw new IllegalArgumentException("지난 주 당첨 번호와 동일합니다.");
         }
         this.bonusBall = bonusBall;
@@ -20,7 +23,7 @@ public class WinningLottoAndBonusBall {
         return lotto;
     }
 
-    public BonusBall getBonusBall() {
+    public LottoNumber getBonusBall() {
         return bonusBall;
     }
 }

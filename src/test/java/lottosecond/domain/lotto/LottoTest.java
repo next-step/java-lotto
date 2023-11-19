@@ -1,26 +1,37 @@
-package lottosecond.lotto;
+package lottosecond.domain.lotto;
 
-import lottosecond.domain.lotto.Lotto;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
 
     @Test
-    @DisplayName("입력 받은 당첨번호를 통해 몇 개의 번호가 일치하는지 알려줍니다.")
-    void getLottoScore() {
+    @DisplayName("입력받은 로또와 자신의 로또 번호 중 몇개가 겹치는지 반환해줍니다.")
+    void matchNumberCount() {
         // given
-        Lotto winnerNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 7, 8, 9));
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 7, 8));
         // when
-        int lottoScore = lotto.getLottoScore(winnerNumbers);
+        int result = lotto.matchNumberCount(winningLotto);
         // then
-        assertThat(lottoScore).isEqualTo(3);
+        Assertions.assertThat(result).isEqualTo(4);
+    }
+
+    @Test
+    @DisplayName("겹치는 번호가 하나도 없으면 0을 반환합니다.")
+    void noMatchNumber() {
+        // given
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = new Lotto(List.of(11, 12, 13, 14, 17, 18));
+        // when
+        int result = lotto.matchNumberCount(winningLotto);
+        // then
+        Assertions.assertThat(result).isEqualTo(0);
     }
 
     @Test

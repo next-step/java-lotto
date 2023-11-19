@@ -1,7 +1,5 @@
-package lottosecond.lotto;
+package lottosecond.domain.lotto;
 
-import lottosecond.domain.lotto.LottoNumber;
-import lottosecond.domain.lotto.LottoShuffler;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

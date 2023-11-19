@@ -1,6 +1,5 @@
-package lottosecond.lotto;
+package lottosecond.domain.lotto;
 
-import lottosecond.domain.lotto.LottoNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

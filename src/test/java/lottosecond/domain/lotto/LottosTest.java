@@ -1,12 +1,8 @@
-package lottosecond.lotto;
+package lottosecond.domain.lotto;
 
-import lottosecond.domain.BonusBall;
 import lottosecond.domain.Winner;
 import lottosecond.domain.WinnerBoard;
-import lottosecond.domain.WinningLottoAndBonusBall;
-import lottosecond.domain.lotto.Lotto;
-import lottosecond.domain.lotto.Lottos;
-import lottosecond.domain.lotto.LottosMaker;
+import lottosecond.domain.WinningCondition;
 import lottosecond.testutil.TestShuffler;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,9 +18,9 @@ class LottosTest {
     void bonusNumber() {
         // given
         Lottos lottos = LottosMaker.makeLottoList(new TestShuffler(), 1000);
-        WinningLottoAndBonusBall winningLottoAndBonusBall = new WinningLottoAndBonusBall(new Lotto(List.of(1, 2, 3, 4, 5, 9)), new BonusBall(6));
+        WinningCondition winningCondition = new WinningCondition(new Lotto(List.of(1, 2, 3, 4, 5, 9)), 6);
         // when
-        WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningLottoAndBonusBall);
+        WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningCondition);
         // then
         assertThat(winnerBoard).isEqualTo(new WinnerBoard(List.of(Winner.SECOND)));
 
@@ -35,9 +31,9 @@ class LottosTest {
     void checkLotto() {
         // given
         Lottos lottos = LottosMaker.makeLottoList(new TestShuffler(), 1000);
-        WinningLottoAndBonusBall winningLottoAndBonusBall = new WinningLottoAndBonusBall(new Lotto(List.of(1, 2, 3, 7, 8, 9)), new BonusBall(4));
+        WinningCondition winningCondition = new WinningCondition(new Lotto(List.of(1, 2, 3, 7, 8, 9)), 4);
         // when
-        WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningLottoAndBonusBall);
+        WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningCondition);
         // then
         assertThat(winnerBoard).isEqualTo(new WinnerBoard(List.of(Winner.FIFTH)));
     }
@@ -47,8 +43,8 @@ class LottosTest {
     void zeroWinningLotto() {
         // given
         Lottos lottos = LottosMaker.makeLottoList(new TestShuffler(), 1000);
-        WinningLottoAndBonusBall winningLottoAndBonusBall = new WinningLottoAndBonusBall(new Lotto(List.of(11, 12, 13, 14, 15, 16)), new BonusBall(4));
-        WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningLottoAndBonusBall);
+        WinningCondition winningCondition = new WinningCondition(new Lotto(List.of(11, 12, 13, 14, 15, 16)), 4);
+        WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningCondition);
         // then
         assertThat(winnerBoard).isEqualTo(new WinnerBoard(List.of()));
     }
@@ -64,11 +60,10 @@ class LottosTest {
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3, lotto4));
 
         Lotto targetLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        BonusBall bonusBall = new BonusBall(7);
 
-        WinningLottoAndBonusBall winningLottoAndBonusBall = new WinningLottoAndBonusBall(targetLotto, bonusBall);
+        WinningCondition winningCondition = new WinningCondition(targetLotto, 7);
         // when
-        WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningLottoAndBonusBall);
+        WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningCondition);
         // then
         assertThat(winnerBoard).isEqualTo(
                 new WinnerBoard(List.of(Winner.FIFTH, Winner.FOURTH, Winner.SECOND, Winner.FIRST))

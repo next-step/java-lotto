@@ -1,7 +1,5 @@
-package lottosecond;
+package lottosecond.domain;
 
-import lottosecond.domain.Winner;
-import lottosecond.domain.WinnerBoard;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

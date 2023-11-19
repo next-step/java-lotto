@@ -1,6 +1,5 @@
-package lottosecond.lotto;
+package lottosecond.domain.lotto;
 
-import lottosecond.domain.lotto.LottosMaker;
 import lottosecond.testutil.TestShuffler;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,11 +1,8 @@
 package lottosecond.domain;
 
-import lottosecond.domain.lotto.Lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 class WinnerTest {
 
@@ -13,11 +10,8 @@ class WinnerTest {
     @Test
     void calculate() {
         // given
-        Lotto myLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto targetLotto = new Lotto(List.of(1, 2, 3, 7, 8, 9));
-        WinningLottoAndBonusBall winningLottoAndBonusBall = new WinningLottoAndBonusBall(targetLotto, new BonusBall(4));
         // when
-        Winner winner = Winner.calculateWinner(myLotto, winningLottoAndBonusBall);
+        Winner winner = Winner.calculateWinner(3, false);
         // then
         Assertions.assertThat(winner).isEqualTo(Winner.FIFTH);
     }
@@ -26,11 +20,8 @@ class WinnerTest {
     @Test
     void bonusBall() {
         // given
-        Lotto myLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto targetLotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
-        WinningLottoAndBonusBall winningLottoAndBonusBall = new WinningLottoAndBonusBall(targetLotto, new BonusBall(6));
         // when
-        Winner winner = Winner.calculateWinner(myLotto, winningLottoAndBonusBall);
+        Winner winner = Winner.calculateWinner(5, true);
         // then
         Assertions.assertThat(winner).isEqualTo(Winner.SECOND);
     }
@@ -39,11 +30,8 @@ class WinnerTest {
     @Test
     void notMatchBonusBall() {
         // given
-        Lotto myLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto targetLotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
-        WinningLottoAndBonusBall winningLottoAndBonusBall = new WinningLottoAndBonusBall(targetLotto, new BonusBall(8));
         // when
-        Winner winner = Winner.calculateWinner(myLotto, winningLottoAndBonusBall);
+        Winner winner = Winner.calculateWinner(5, false);
         // then
         Assertions.assertThat(winner).isEqualTo(Winner.THIRD);
     }

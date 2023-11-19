@@ -2,14 +2,11 @@ package lottosecond.domain.lotto;
 
 import lottosecond.domain.Winner;
 import lottosecond.domain.WinnerBoard;
-import lottosecond.domain.WinningLottoAndBonusBall;
+import lottosecond.domain.WinningCondition;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lottos {
 
@@ -21,10 +18,14 @@ public class Lottos {
         this.lottoList = lottoList;
     }
 
-    public WinnerBoard checkWinnerLotto(WinningLottoAndBonusBall winningLottoAndBonusBall) {
+    public WinnerBoard checkWinnerLotto(WinningCondition winningCondition) {
         List<Winner> winners = lottoList.stream()
-                .map(lotto -> Winner.calculateWinner(lotto, winningLottoAndBonusBall))
-                .filter(Objects::nonNull)
+                .map(lotto -> {
+                    int matchCount = lotto.matchNumberCount(winningCondition.getLotto());
+                    boolean matchBonusBall = lotto.hasLottoNumber(winningCondition.getBonusBall());
+                    return Winner.calculateWinner(matchCount, matchBonusBall);
+                })
+                .filter(winner -> winner != Winner.NONE)
                 .sorted(Comparator.comparingLong(Winner::getPrice))
                 .collect(Collectors.toList());
 
