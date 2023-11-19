@@ -6,9 +6,10 @@ import java.util.Comparator;
 public enum Rank {
 
     FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FORTH(3, 5000),
+    SECOND(5, 30000000),
+    THIRD(5, 1500000),
+    FORTH(4, 50000),
+    FIFTH(3, 5000),
     FAIL(0, 0);
 
     private final Integer matchingCount;
