@@ -17,7 +17,7 @@ public class LottoResult {
     }
 
     public LottoResult(LottoRank... lottoRanks) {
-        this.lottoRanks = new ArrayList<>(Arrays.asList(lottoRanks));
+        this(new ArrayList<>(Arrays.asList(lottoRanks)));
     }
 
     public double calculateProfitRate(int money) {

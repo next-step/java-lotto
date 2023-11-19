@@ -1,7 +1,9 @@
 package step2.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -11,11 +13,9 @@ public class Lottos {
     }
 
     public Lottos(int[]... lottosnumbers) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int[] lottonumbers : lottosnumbers) {
-            lottos.add(new Lotto(lottonumbers));
-        }
-        this.lottos = lottos;
+        this(Arrays.stream(lottosnumbers)
+                .map(Lotto::new)
+                .collect(Collectors.toList()));
     }
 
     public List<LottoRank> calculateTotalRank(WinningLotto winnerLotto) {

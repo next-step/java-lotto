@@ -1,6 +1,8 @@
 package step2.model;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningLotto {
     private final Lotto lotto;
@@ -12,8 +14,9 @@ public class WinningLotto {
     }
 
     public WinningLotto(int[] givenWinningLottoNumbers, Integer bonusNumber) {
-        this.lotto = new Lotto(givenWinningLottoNumbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this(Arrays.stream(givenWinningLottoNumbers)
+                .boxed()
+                .collect(Collectors.toList()), bonusNumber);
     }
 
     public Integer compareToMatchNumberCount(Lotto other) {
