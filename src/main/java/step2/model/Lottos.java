@@ -1,8 +1,8 @@
 package step2.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -18,12 +18,10 @@ public class Lottos {
                 .collect(Collectors.toList()));
     }
 
-    public List<LottoRank> calculateTotalRank(WinningLotto winnerLotto) {
-        List<LottoRank> lottoRanks = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            lottoRanks.add(LottoRank.evaluateLottoRankByMatchCount(winnerLotto.compareToMatchNumberCount(lotto), winnerLotto.checkBonusNumber(lotto)));
-        }
-        return lottoRanks;
+    public Map<LottoRank, Long> calculateTotalRank(WinningLotto winnerLotto) {
+        return lottos.stream()
+                .map(lotto -> LottoRank.evaluateLottoRankByMatchCount(winnerLotto.compareToMatchNumberCount(lotto), winnerLotto.checkBonusNumber(lotto)))
+                .collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
     }
 
     public List<Lotto> getLottos() {

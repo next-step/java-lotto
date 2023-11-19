@@ -2,6 +2,7 @@ package step2.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 import step2.model.Lotto;
 import step2.model.LottoRank;
@@ -19,6 +20,6 @@ public class LottosTest {
         WinningLotto winnerLotto = new WinningLotto(new int[]{1, 2, 3, 4, 5, 6}, 7); //우승 당첨 로또
 
         assertThat(lottos.calculateTotalRank(winnerLotto))
-                .containsExactly(LottoRank.FIRST_PRIZE, LottoRank.NO_PRIZE, LottoRank.NO_PRIZE);
+                .containsExactlyInAnyOrderEntriesOf(Map.of(LottoRank.FIRST_PRIZE, 1L, LottoRank.NO_PRIZE, 2L));
     }
 }

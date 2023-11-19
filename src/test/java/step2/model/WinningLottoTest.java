@@ -29,4 +29,13 @@ public class WinningLottoTest {
 
         assertThat(winningLotto.compareToMatchNumberCount(myLotto)).isEqualTo(3);
     }
+
+    @Test
+    public void 구매한로또와_우승자로또의_보너스번호_일치여부_반환_테스트() {
+        WinningLotto winningLotto = new WinningLotto(new int[]{1, 2, 3, 4, 5, 6}, 7);
+        Lotto myLotto = new Lotto(new int[]{1, 2, 3, 4, 5, 7});
+
+        assertThat(winningLotto.checkBonusNumber(myLotto)).isTrue();
+
+    }
 }
