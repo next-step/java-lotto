@@ -1,4 +1,4 @@
-package lotto;
+package lotto.controller;
 
 import lotto.domain.LottoFactory;
 import lotto.domain.LottoTickets;
@@ -9,9 +9,9 @@ import lotto.view.OutputView;
 
 import java.util.Random;
 
-public class LottoPlay {
-    public static void main (String [] arg) {
-        Random random = new Random();
+public class LottoGame {
+
+    public void start(Random random) {
 
         int purchasedAmt = InputView.getAmountOfPurchase();
         int numOfTickets = purchasedAmt / 1000;
@@ -30,5 +30,4 @@ public class LottoPlay {
         OutputView.displayPrizeStatus(prizeStatus);
         OutputView.displayProfit(prizeStatus.calculateProfit(purchasedAmt));
     }
-
 }
