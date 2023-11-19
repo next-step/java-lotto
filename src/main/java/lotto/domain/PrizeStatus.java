@@ -51,10 +51,10 @@ public class PrizeStatus {
     }
 
     private void setupPrizeStatus() {
-        prizeStatus.put(3, 0);
-        prizeStatus.put(4, 0);
-        prizeStatus.put(5, 0);
-        prizeStatus.put(6, 0);
+        prizeStatus.put(Rank.FOURTH.matchCount(), 0);
+        prizeStatus.put(Rank.THIRD.matchCount(), 0);
+        prizeStatus.put(Rank.SECOND.matchCount(), 0);
+        prizeStatus.put(Rank.FIRST.matchCount(), 0);
     }
 
     public double calculateProfit(int purchasedAmt) {
