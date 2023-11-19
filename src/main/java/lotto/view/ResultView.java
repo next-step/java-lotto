@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Winning;
+import lotto.dto.WinningNumbersDTO;
 
 import java.math.BigDecimal;
 
@@ -11,6 +12,12 @@ public class ResultView {
         System.out.println(lottos.size() + "개를 구매했습니다.");
     }
 
+    private ResultView() {
+
+    }
+    public static void noGame() {
+        System.out.println("구입한 로또가 없습니다.");
+    }
     public static void lottos(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.toString());
@@ -24,9 +31,16 @@ public class ResultView {
         System.out.println("---------");
     }
 
-    public static void winningStatics(int correctCount, int winningCount) {
-        int winningAmount = Winning.winningAmount(correctCount);
-        System.out.println(correctCount + "개 일치 (" + winningAmount + "원) - " + winningCount + "개");
+    public static void winningStatics(WinningNumbersDTO winningNumbersDTO, Lottos lottos, Winning winning) {
+        int correctCount = winning.correctCount();
+        int bonusCorrectCount = winning.bonusCorrectCount();
+        int winningAmount = winning.winningAmount();
+
+        if (bonusCorrectCount > 0) {
+            System.out.println(correctCount + "개 일치, 보너스 볼 일치(" + winningAmount + "원) - " + lottos.winningCorrectCount(winningNumbersDTO, winning) + "개");
+            return ;
+        }
+        System.out.println(correctCount + "개 일치 (" + winningAmount + "원) - " + lottos.winningCorrectCount(winningNumbersDTO, winning) + "개");
     }
 
     public static void rateOfReturn(BigDecimal rate) {

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.dto.WinningInfoDTO;
+import lotto.dto.WinningNumbersDTO;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,9 +35,10 @@ public class Lotto {
         return game;
     }
 
-    public WinningInfoDTO winningInfo(String numbers) {
-        int correctCount = correctCount(numbers);
-        return new WinningInfoDTO(correctCount, new Amount(Winning.winningAmount(correctCount)));
+    public WinningInfoDTO winningInfo(WinningNumbersDTO winningNumbersDTO) {
+        int correctCount = correctCount(winningNumbersDTO.getWinningNumbers());
+        int bonusCorrectCount = bonusCorrectCount(winningNumbersDTO.getBonusNumber());
+        return new WinningInfoDTO(correctCount, bonusCorrectCount, new Amount(Winning.winningAmount(correctCount, bonusCorrectCount)));
     }
 
     private int correctCount(String numbers) {
@@ -45,6 +47,13 @@ public class Lotto {
                 .filter(value -> this.numbers.contains(value))
                 .collect(Collectors.toList())
                 .size();
+    }
+
+    private int bonusCorrectCount(String numbers) {
+        int bonusNumber = Parser.parseNumberFormat(numbers);
+        return (int) this.numbers.stream()
+                .filter(value -> value == bonusNumber)
+                .count();
     }
 
     @Override

@@ -2,6 +2,8 @@ package lotto;
 
 import lotto.domain.Lottos;
 import lotto.domain.Parser;
+import lotto.domain.Winning;
+import lotto.dto.WinningNumbersDTO;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -9,14 +11,21 @@ public class UserInterface {
     public static void main(String[] args) {
         int money = Parser.numberParsing(InputView.purchaseMoney());
         Lottos lottos = new Lottos(money);
+        if(lottos.size() == 0) {
+            ResultView.noGame();
+            return;
+        }
         ResultView.purchaseCount(lottos);
         ResultView.lottos(lottos);
-        String winningNumber = InputView.winningNumber();
+        String winningNumbers = InputView.winningNumbers();
+        String bonusNumber = InputView.bonusNumber();
+        WinningNumbersDTO winningNumbersDTO = new WinningNumbersDTO(winningNumbers, bonusNumber);
         System.out.println();
         ResultView.winningStaticsMessage();
-        for (int count = 3; count <= 6; count++) {
-            ResultView.winningStatics(count, lottos.winningCount(winningNumber, count));
+
+        for (Winning winning : Winning.values()) {
+            ResultView.winningStatics(winningNumbersDTO, lottos, winning);
         }
-        ResultView.rateOfReturn(lottos.rateOfReturn(winningNumber));
+        ResultView.rateOfReturn(lottos.rateOfReturn(winningNumbersDTO));
     }
 }

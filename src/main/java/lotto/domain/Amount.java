@@ -5,27 +5,31 @@ import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Amount {
-    private int amount;
+    private Long amount;
 
     public Amount() {
-        this.amount = 0;
+        this.amount = 0l;
     }
 
     public Amount(int amount) {
+        this.amount = Long.valueOf(amount);
+    }
+
+    public Amount(Long amount) {
         this.amount = amount;
     }
 
-    public void add(int value) {
+    public void add(Long value) {
         this.amount += value;
     }
 
-    public BigDecimal divide(int amount,  int digit) {
+    public BigDecimal divide(Long amount, int digit) {
         BigDecimal numerator = new BigDecimal(this.amount);
         BigDecimal denominator = new BigDecimal(amount);
         return numerator.divide(denominator, digit, RoundingMode.HALF_UP);
     }
 
-    public int amount() {
+    public Long amount() {
         return amount;
     }
 
@@ -40,5 +44,12 @@ public class Amount {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
+    }
+
+    @Override
+    public String toString() {
+        return "Amount{" +
+                "amount=" + amount +
+                '}';
     }
 }

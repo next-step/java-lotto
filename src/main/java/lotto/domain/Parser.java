@@ -15,7 +15,7 @@ public class Parser {
         return parseNumberFormat(value);
     }
 
-    private static int parseNumberFormat(String numberString) {
+    public static int parseNumberFormat(String numberString) {
         try {
             return Integer.parseInt(numberString);
         } catch (NumberFormatException e) {
