@@ -35,7 +35,6 @@ public class Lotto {
         Collections.sort(numbers);
     }
 
-
     public int countMatchingWinningLotto(Lotto lotto) {
         int count = 0;
         for (LottoNumber number : lotto.numbers()) {
@@ -43,6 +42,11 @@ public class Lotto {
         }
         return count;
     }
+
+    public boolean matchBonusNumber(LottoNumber bonus) {
+        return numbers.contains(bonus);
+    }
+
 
     private int containsWinningNumber(LottoNumber lottoNumber) {
         if (numbers.contains(lottoNumber)) {
