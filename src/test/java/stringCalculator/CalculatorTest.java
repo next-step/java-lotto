@@ -1,3 +1,5 @@
+package stringCalculator;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import stringCalculator.domain.Calculator;
