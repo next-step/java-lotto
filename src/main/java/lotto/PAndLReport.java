@@ -23,6 +23,7 @@ public class PAndLReport {
 
     public BigDecimal rate() {
         return BigDecimal.valueOf(totalPrize)
-            .divide(BigDecimal.valueOf(totalPurchasePrice), 2, RoundingMode.HALF_UP);
+            .divide(BigDecimal.valueOf(totalPurchasePrice), 2, RoundingMode.HALF_UP)
+            .stripTrailingZeros();
     }
 }
