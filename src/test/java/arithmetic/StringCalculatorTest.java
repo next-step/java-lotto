@@ -1,3 +1,5 @@
+package arithmetic;
+
 import arithmetic.Calculator;
 import arithmetic.Operation;
 import org.junit.jupiter.api.DisplayName;

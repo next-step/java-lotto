@@ -1,3 +1,5 @@
+package service;
+
 import domain.Lotto;
 import service.LottoGameService;
 import repository.UserLottoRepository;
