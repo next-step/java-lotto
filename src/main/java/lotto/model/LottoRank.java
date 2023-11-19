@@ -1,43 +1,56 @@
 package lotto.model;
 
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public enum LottoRank {
-	FIRST(6, 2000000000),
-	SECOND(7, 1500000),
-	THIRD(8, 50000),
-	FOURTH(9, 5000),
-	BLANK(12, 0);
+
+	FOURTH(3, 5_000),
+	THIRD(4, 50_000),
+	SECOND(5, 1_500_000),
+	FIRST(6, 2_000_000_000),
+	BLANK(0, 0);
 
 
-	private int rank;
-	private int money;
+	private final int rank;
+	private final int money;
+
+	private static final int OK = 1;
+	private static final int NOT_FOUND = 0;
 
 	LottoRank(int rank, int money) {
 		this.rank = rank;
 		this.money = money;
 	}
 
-	public static int moneyByRank(int rank) {
-		for (LottoRank lottoRank : values()) {
-			if (lottoRank.rank == rank) {
-				return lottoRank.money;
-			}
+	public static LottoRank match(List<Integer> winning, List<Integer> random) {
+		int count = 0;
+		for (Integer number : winning) {
+			count += numberMatch(number, random);
 		}
-		return LottoRank.BLANK.money;
+		return LottoRank.lottoRank(count);
 	}
 
-	public static int match(List<Integer> winning, List<Integer> random) {
-		Set<Integer> set = new HashSet<>();
-		set.addAll(winning);
-		set.addAll(random);
-		return LottoRank.moneyByRank(set.size());
+	private static int numberMatch(int number, List<Integer> random) {
+		if (random.contains(number)) {
+			return OK;
+		}
+		return NOT_FOUND;
+	}
+
+	private static LottoRank lottoRank(int rank) {
+		return Arrays.stream(values())
+				.filter(lottoRank -> lottoRank.rank == rank)
+				.findAny()
+				.orElse(LottoRank.BLANK);
 	}
 
 	public int money() {
 		return this.money;
+	}
+
+	public int rank() {
+		return this.rank;
 	}
 
 }

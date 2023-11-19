@@ -7,11 +7,13 @@ import java.util.List;
 public class RandomGenerator {
 
 	private final List<Integer> numbers;
+	private final static int LOW_BOUND = 1;
+	private final static int MAX_BOUND = 45;
 
 	public RandomGenerator() {
 		numbers = new ArrayList<>();
-		for (int i = 1; i <= 45; i++) {
-			numbers.add(i);
+		for (int number = LOW_BOUND; number <= MAX_BOUND; number++) {
+			numbers.add(number);
 		}
 	}
 
