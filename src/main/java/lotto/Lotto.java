@@ -7,7 +7,7 @@ import java.util.List;
 public class Lotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
 
-    private final List<Integer> numbers = new ArrayList<>();
+    private List<Integer> numbers = new ArrayList<>();
 
     Lotto(){
         List<Integer> generatedNumbers = LottoUtil.generateLottoNumber();
@@ -19,9 +19,32 @@ public class Lotto {
         Collections.sort(numbers);
     }
 
+    public Lotto(List<Integer> numbers) {
+        this.numbers = numbers;
+    }
+
     List<Integer> numbers(){
         return this.numbers;
     }
+
+    int matchCount(List<Integer> winningNumbers) {
+        int matchCount = 0;
+
+        for(int i = 0; i < winningNumbers.size(); i++){
+            matchCount = addMatchCount(matchCount, winningNumbers.get(i));
+        }
+
+        return matchCount;
+    }
+
+    private int addMatchCount(int matchCount, int winningNumber){
+        if(numbers.contains(winningNumber)){
+            matchCount ++;
+        }
+
+        return matchCount;
+    }
+
 
     @Override
     public String toString() {
