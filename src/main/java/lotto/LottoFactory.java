@@ -5,6 +5,7 @@ import java.util.List;
 
 public class LottoFactory {
 
+    public static final int LOTTO_PRICE = 1000;
     private final LottoNumberFactory lottoNumberFactory = LottoNumberFactory.getInstance();
 
     public List<Lotto> from(int quantity) {

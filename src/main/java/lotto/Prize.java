@@ -22,4 +22,12 @@ public enum Prize {
             .findFirst()
             .get().prize;
     }
+
+    public int rank() {
+        return rank;
+    }
+
+    public int prize() {
+        return prize;
+    }
 }
