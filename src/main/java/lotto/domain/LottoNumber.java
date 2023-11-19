@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class LottoNumber {
     private static final int ONE = 1;
-    private static final int FORTY_FIVE = 1;
+    private static final int FORTY_FIVE = 45;
     private int number;
     public LottoNumber(int number) {
         validateNumber(number);

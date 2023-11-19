@@ -16,4 +16,13 @@ public class LottoTest {
             new Lotto(lottoNumbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("로또의 사이즈가 6이하이면 예외가 발생한다.")
+    void size() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5));
+        Assertions.assertThatThrownBy(() -> {
+            new Lotto(lottoNumbers);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }
