@@ -1,15 +1,12 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
     private static final int LOTTO_NUMBER_COUNT_LIMIT = 6;
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
     public Lotto(Integer... input) {
         this(Arrays.asList(input));
@@ -27,16 +24,19 @@ public class Lotto {
             throw new IllegalArgumentException("로또 숫자는 6개 입니다.");
         }
         Collections.sort(lottoNumbers);
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+
+        this.lottoNumbers = lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 
     public int matchCount(Lotto winningLotto) {
         int count = 0;
-        for (Integer lottoNumber : lottoNumbers) {
+        for (LottoNumber lottoNumber : lottoNumbers) {
             if (winningLotto.getLottoNumbers().contains(lottoNumber)) {
                 count++;
             }

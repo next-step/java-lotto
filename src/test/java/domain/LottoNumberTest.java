@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Random;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LottoNumberTest {
 
@@ -49,4 +50,11 @@ public class LottoNumberTest {
 
         System.out.println("lottoNumbers = " + lottoNumbers);
     }
+
+    @Test
+    @DisplayName("당첨 번호를 6개 미만으로 입력하는 경우 Exception이 발생한다.")
+    void invalidInputExceptionTest() {
+        assertThrows(IllegalArgumentException.class, () -> new Lotto(1, 2, 3, 4, 5));
+    }
+
 }

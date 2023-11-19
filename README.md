@@ -36,9 +36,9 @@
 * [X] 구입 금액 대비 총 당첨금액 수익률을 계산해 출력한다.
 
 ## TODO, step2 보완점
-* [ ] LottoNumber을 활용해 원시값을 분리해본다. (winninglotto, generator)
+* [X] LottoNumber을 활용해 원시값을 분리해본다. (winninglotto)
 * [ ] 당첨 번호가 1~45 사이 값이 아닌 경우 Exception 발생한다.
-* [ ] Lottoprice를 어떻게 관리할지
+* [X] Lottoprice를 어떻게 관리할지
 * [ ] 현재 public api에 대한 테스트 케이스 채우기
 * [X] '오류' 대신 Exception 용어 활용 
 * [X] 래퍼 클래스 대신 Primitive 타입사용하기
