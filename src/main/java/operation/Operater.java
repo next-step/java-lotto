@@ -1,12 +1,12 @@
-import operation.Operation;
+package operation;
 
 import java.util.*;
 
 public class Operater {
     private Deque<Integer> numbers;
-    private List<String> operations;
+    private Operations operations;
     
-    private Operater(Deque<Integer> numbers, List<String> operations) {
+    private Operater(Deque<Integer> numbers, Operations operations) {
         this.numbers = numbers;
         this.operations = operations;
     }
@@ -17,13 +17,14 @@ public class Operater {
         String[] numberOrOperations = numberAndOperation.split(" ");
         Deque<Integer> numbers = new LinkedList<>();
         List<String> operations = new ArrayList<>();
+        Operations operations1 = Operations.defaultOf();
 
         for (String numberOrOperation: numberOrOperations) {
             addNumber(numberOrOperation, numbers);
-            addOperation(numberOrOperation, operations);
+            addOperation(numberOrOperation, operations1);
         }
 
-        return new Operater(numbers,operations);
+        return new Operater(numbers,operations1);
     }
 
     private static void canMake(String numberAndOperation) {
@@ -36,7 +37,7 @@ public class Operater {
         }
     }
 
-    private static void addOperation(String numberOrOperation, List<String> operations) {
+    private static void addOperation(String numberOrOperation, Operations operations) {
         if (!isNumberic(numberOrOperation)) {
             operations.add(numberOrOperation);
         }
@@ -52,19 +53,7 @@ public class Operater {
         return str.chars().allMatch(Character::isDigit);
     }
 
-    public int calculate(){
-        for (String s : operations) {
-            int first = 0;
-            int second = 0;
-            Operation operation = OperationFactory.make(s);
-
-            first = numbers.pop();
-            second = numbers.pop();
-
-            int result = operation.calculate(first, second);
-            numbers.addFirst(result);
-        }
-
-        return numbers.peek();
+    public int calculate() {
+        return this.operations.calculate(this.numbers);
     }
 }
