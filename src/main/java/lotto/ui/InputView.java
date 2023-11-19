@@ -4,7 +4,9 @@ import lotto.domain.Lotto;
 import lotto.common.LottoGenerator;
 import lotto.domain.LottoNumber;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -39,10 +41,11 @@ public class InputView {
     }
 
     private void printLottoNumber(Lotto lotto) {
-        ArrayList<Integer> lottoNumbersForPrint = new ArrayList<>();
+        List<Integer> lottoNumbersForPrint = new ArrayList<>();
         for (LottoNumber number : lotto.getNumbers()) {
             lottoNumbersForPrint.add(number.getLottoNumber());
         }
+        lottoNumbersForPrint.sort(Comparator.comparingInt(Integer::intValue));
         System.out.println(lottoNumbersForPrint);
     }
 
