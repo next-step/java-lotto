@@ -22,12 +22,16 @@ public class LottoNumber {
     }
 
     public static LottoNumber of(int number) {
-        LottoNumber lottoNumber = lottoNumberMap.get(number);
+        LottoNumber lottoNumber = memorizeNumber(number);
         if (lottoNumber == null) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_MSG);
         }
 
         return lottoNumber;
+    }
+
+    public static LottoNumber memorizeNumber(int number) {
+        return lottoNumberMap.get(number);
     }
 
     @Override
