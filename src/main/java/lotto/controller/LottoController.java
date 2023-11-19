@@ -13,12 +13,15 @@ import java.util.List;
 public class LottoController {
 
     public static void main(String[] args) {
-        int lottoCount = new InputView().buyOfLottoPrice();
+
+        InputView inputview = new InputView();
+
+        int lottoCount = inputview.buyOfLottoPrice();
         LottoGame lotto = new LottoGame();
         List<List<Integer>> buyLottoList = lotto.lottoGame(lottoCount, new LottoShuffleStrategy());
         ResultView.buyLottoList(buyLottoList);
 
-        List<String> lastWeekLottoNumber = new InputView().getLastWeekLottoNumber();
+        List<String> lastWeekLottoNumber = inputview.getLastWeekLottoNumber();
         ResultWinner winner = new ResultWinner();
 
         EnumMap<Rank, Integer> resultMap = winner.countOfWinner(buyLottoList, lastWeekLottoNumber);
