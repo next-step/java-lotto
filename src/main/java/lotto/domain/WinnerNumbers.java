@@ -17,7 +17,7 @@ public class WinnerNumbers {
     public int calculateTotalMatchedCount(LottoTicket lottoTicket) {
         int sum = 0;
         for (int i = 0; i < lottoTicket.ticket().size(); i++) {
-            if (winnerNummbers.contains(lottoTicket.ticket().get(i))) {
+            if (lottoTicket.isThisNumberMatched(winnerNummbers, i)) {
                 sum++;
             }
         }

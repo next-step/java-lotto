@@ -16,4 +16,8 @@ public class LottoTicket {
     public List<Integer> ticket() {
         return this.ticket;
     }
+
+    public boolean isThisNumberMatched(List<Integer> winnerNummbers, int i) {
+        return winnerNummbers.contains(ticket.get(i));
+    }
 }
