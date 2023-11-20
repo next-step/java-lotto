@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private static final int MAX_TICKET_NUMBERS = 6;
+
     private final List<LottoNumber> ticket;
 
     public Lotto(List<Integer> anyNumbers) {
@@ -50,7 +51,7 @@ public class Lotto {
             stringBuilder.append(lottoNumber.toString()).append(",");
         });
         int lastIndexOf = stringBuilder.lastIndexOf(",");
-        stringBuilder.replace(lastIndexOf , lastIndexOf + 1, "]");
+        stringBuilder.replace(lastIndexOf, lastIndexOf + 1, "]");
         return stringBuilder.toString();
     }
 }
