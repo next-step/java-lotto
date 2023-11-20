@@ -6,6 +6,8 @@ import java.util.List;
 
 public class ResultWinner {
 
+    static final int HIT_FICE_LOTTO_NUMBERS = 5;
+
     public EnumMap<Rank, Integer> countOfWinner(Lottos lottos, List<String> lastWeekWinner, String bonusNumber) {
 
         List<Integer> resultList = new ArrayList<>();
@@ -48,13 +50,13 @@ public class ResultWinner {
         boolean checkContains;
         int answerCount = 0;
         for (String number : lastWeek) {
-            checkContains = buyLottoList.getLotto().contains(Integer.parseInt(number));
+            checkContains = buyLottoList.getLotto().stream().anyMatch(num -> num.getNumber() == Integer.parseInt(number));
             answerCount = getAnswerCalc(checkContains, answerCount);
         }
 
-        boolean bo = buyLottoList.getLotto().contains(Integer.parseInt(bonusNumber));
+        boolean checkBonusNumber = buyLottoList.getLotto().stream().anyMatch(num -> num.getNumber() == Integer.parseInt(bonusNumber));
 
-        EnumMap<Rank, Integer> second = getRankSecond(resultMap, answerCount, bo);
+        EnumMap<Rank, Integer> second = getRankSecond(resultMap, answerCount, checkBonusNumber);
         if (second != null) return second;
 
         resultMap.put(Rank.valueOf(answerCount), resultMap.get(Rank.valueOf(answerCount)) + 1);
@@ -62,8 +64,8 @@ public class ResultWinner {
         return resultMap;
     }
 
-    private EnumMap<Rank, Integer> getRankSecond(EnumMap<Rank, Integer> resultMap, int answerCount, boolean bo) {
-        if (answerCount == 5 && bo) {
+    private EnumMap<Rank, Integer> getRankSecond(EnumMap<Rank, Integer> resultMap, int answerCount, boolean checkBonusNumber) {
+        if (answerCount == HIT_FICE_LOTTO_NUMBERS && checkBonusNumber) {
             resultMap.put(Rank.SECOND, resultMap.get(Rank.SECOND) + 1);
             return resultMap;
         }

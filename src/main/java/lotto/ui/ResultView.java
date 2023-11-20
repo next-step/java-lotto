@@ -1,5 +1,6 @@
 package lotto.ui;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
@@ -19,9 +20,9 @@ public class ResultView {
     public void PrintThePurchasedLotto(Lottos buyLottoList) {
 
         for (int i = 0; i < buyLottoList.getLottosSize(); i++) {
-            Iterator<Integer> iterSet = buyLottoList.getLottoIndex(i).getLotto().iterator();
+            Iterator<LottoNumber> iterSet = buyLottoList.getLottoIndex(i).getLotto().iterator();
             while (iterSet.hasNext()) {
-                System.out.print(iterSet.next() + " ");
+                System.out.print(iterSet.next().getNumber() + " ");
             }
             System.out.println();
         }
