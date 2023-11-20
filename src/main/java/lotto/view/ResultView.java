@@ -11,11 +11,16 @@ import static lotto.domain.lotto.LotteryRank.*;
 
 public class ResultView {
 
-    public void printNumOfLotto(int countOfManual, int countOfAuto) {
+    public void printPurchaseResult(List<LottoNumbers> lottos, int countOfManual) {
+        printNumOfLotto(countOfManual, lottos.size() - countOfManual);
+        printLottoNumbers(lottos);
+    }
+
+    private void printNumOfLotto(int countOfManual, int countOfAuto) {
         System.out.println("수동으로 " + countOfManual + "장, 자동으로 " + countOfAuto + "장을 구매했습니다.");
     }
 
-    public void printLottoNumbers(List<LottoNumbers> lottos) {
+    private void printLottoNumbers(List<LottoNumbers> lottos) {
         lottos.forEach(System.out::println);
     }
 

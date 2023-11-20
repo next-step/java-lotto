@@ -19,11 +19,17 @@ public class LottoMachine {
         .mapToObj(LottoNumber::of)
         .collect(Collectors.toList());
 
-    public static LottoNumbers drawLottoNumbers() {
+    public static List<LottoNumbers> drawNumbersByAuto(int countOfAuto) {
+        return IntStream.range(0, countOfAuto)
+            .mapToObj(i -> drawLottoNumbers())
+            .collect(Collectors.toList());
+    }
+
+    private static LottoNumbers drawLottoNumbers() {
         Collections.shuffle(lottoNumbers);
 
         return new LottoNumbers(lottoNumbers.stream()
             .limit(SIZE)
-            .collect(Collectors.toUnmodifiableList()));
+            .collect(Collectors.toList()));
     }
 }

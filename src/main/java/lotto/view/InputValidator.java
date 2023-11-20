@@ -1,8 +1,10 @@
 package lotto.view;
 
+import lotto.domain.lotto.wrapper.LottoNumber;
+import lotto.domain.lotto.wrapper.LottoNumbers;
+
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static lotto.domain.lotto.wrapper.LottoNumber.*;
@@ -93,15 +95,15 @@ public class InputValidator {
         }
     }
 
-    public void validateBonusNumber(String input, Set<Integer> winningNumbers) {
+    public void validateBonusNumber(String input, LottoNumbers winningNumbers) {
         int number = (int) validateParseLong(input);
 
         validateRangeOfNumber(number, MIN, MAX);
         validateDuplicate(winningNumbers, number);
     }
 
-    private void validateDuplicate(Set<Integer> winningNumbers, int number) {
-        if (winningNumbers.contains(number)) {
+    private void validateDuplicate(LottoNumbers winningNumbers, int number) {
+        if (winningNumbers.contains(LottoNumber.of(number))) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복이 되면 안됩니다.");
         }
     }

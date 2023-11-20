@@ -2,7 +2,6 @@ package lotto.domain.lotto.wrapper;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -23,8 +22,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(int number) {
-        return Optional.ofNullable(numbers.get(number - MIN))
-            .orElseThrow(() -> new IllegalArgumentException(String.format("숫자의 범위는 %d ~ %d입니다.", MIN, MAX)));
+        validateRange(number);
+
+        return numbers.get(number - MIN);
     }
 
     private static void validateRange(int number) {
