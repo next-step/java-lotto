@@ -3,9 +3,9 @@ package lotto;
 import java.util.Arrays;
 
 public enum Prize {
-
+    ZERO(0, 0),
     FIRST(1, 0),
-    SECOND(2,0),
+    SECOND(2, 0),
     THIRD(3, 5000),
     FOURTH(4, 50000),
     FIFTH(5, 1500000),
@@ -21,7 +21,7 @@ public enum Prize {
 
     public static Prize prizeByMatchedCount(int matchedCount) {
         return Arrays.stream(Prize.values())
-            .filter(prizes -> Integer.compare(prizes.rank, matchedCount) == 1)
+            .filter(prizes -> Integer.compare(prizes.rank, matchedCount) == 0)
             .findFirst()
             .get();
     }
@@ -37,7 +37,7 @@ public enum Prize {
         return rank;
     }
 
-    public int prize() {
+    public int price() {
         return price;
     }
 }
