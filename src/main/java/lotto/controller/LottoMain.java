@@ -12,10 +12,10 @@ import lotto.view.OutputView;
 public class LottoMain {
 
         public static void main(String[] args) {
-                long purchaseAmount = InputView.scanPurchaseAmount();
+                long givenAmount = InputView.scanGivenAmount();
                 LottoMachine lottoMachine = new LottoMachine();
-                Tickets tickets = new Tickets(lottoMachine.buy(purchaseAmount));
-                int purchaseCount = tickets.values().size();
+                Tickets tickets = new Tickets(lottoMachine.buy(givenAmount));
+                int purchaseCount = tickets.getCountOfTickets();
                 OutputView.printPurchaseCount(purchaseCount);
 
                 OutputView.printGeneratedTickets(tickets.values());
@@ -27,6 +27,7 @@ public class LottoMain {
 
                 OutputView.printResultOfWinningTitle();
                 OutputView.printResultOfWinning(matchRankCountMap);
+                long purchaseAmount = lottoMachine.getPurchaseAmount(tickets);
                 OutputView.printRateOfBenefit(tickets.calculateRateOfBenefit(matchRankCountMap, purchaseAmount));
         }
 }

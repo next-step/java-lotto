@@ -16,6 +16,10 @@ public class LottoMachine {
                 validatePurchaseAmount(purchaseAmount);
                 return generateTickets(purchaseAmount);
         }
+        
+        public long getPurchaseAmount(Tickets tickets) {
+                return tickets.getCountOfTickets() * LOTTO_TICKET_PRICE;
+        }
 
         private List<Ticket> generateTickets(long purchaseAmount) {
                 List<Ticket> generatedTicket = new ArrayList<>();
