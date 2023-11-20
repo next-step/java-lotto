@@ -27,4 +27,12 @@ public enum Rank {
 	private boolean equalNum(int num) {
 		return this.num == num;
 	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
 }

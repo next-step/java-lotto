@@ -14,7 +14,7 @@ public class LottoValidator {
 	public LottoTicket valid(LottoTicket lottoTicket) {
 		int sameNumbers = (int) winningNumbers.stream()
 			.filter(
-				wn -> lottoTicket.getNumbersToList().stream()
+				wn -> lottoTicket.getNumbers().stream()
 					.anyMatch(Predicate.isEqual(wn))
 			)
 			.count();

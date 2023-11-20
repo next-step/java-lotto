@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.List;
 
+import lotto.domain.WinningInfo;
 import lotto.domain.LottoTicket;
 
 public class ResultView {
@@ -20,13 +21,26 @@ public class ResultView {
 	private void showLottoTicket(LottoTicket ticket) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
-		for (int i = 0; i < ticket.getNumbersToList().size(); i++) {
-			sb.append(ticket.getNumbersToList().get(i));
+		for (int i = 0; i < ticket.getNumbers().size(); i++) {
+			sb.append(ticket.getNumbers().get(i));
 			// StringBuilder를 넘겨받아 indent를 줄이는 것이 좋을까?
-			if (i != ticket.getNumbersToList().size() - 1)
+			if (i != ticket.getNumbers().size() - 1)
 				sb.append(", ");
 		}
 		sb.append("]");
 		System.out.println(sb);
+	}
+
+	public void showResultStatics(List<WinningInfo> winningInfos) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("당첨 통계\n");
+		sb.append("----------\n");
+		for (WinningInfo result : winningInfos) {
+			sb.append(result.getRank().getNum() + "개 일치");
+			sb.append("(" + result.getRank().getAmount() + ")- ");
+			sb.append(" " + result.getNumOfWinners() + "개");
+			System.out.println(sb);
+			sb.setLength(0);
+		}
 	}
 }

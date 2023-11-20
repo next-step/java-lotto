@@ -2,10 +2,14 @@ package lotto.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+import lotto.domain.WinningInfo;
 import lotto.domain.LottoShop;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoValidator;
+import lotto.domain.Rank;
 import lotto.domain.strategy.AutoGenerateStrategy;
 import lotto.domain.strategy.GenerateStrategy;
 import lotto.view.InputView;
@@ -36,7 +40,13 @@ public class LottoController {
 		List<LottoTicket> updatedTicket = new ArrayList<>();
 		for (LottoTicket ticket : lottoTickets) {
 			updatedTicket.add(new LottoValidator(winningNumList).valid(ticket));
-			System.out.println(ticket.toString());
 		}
+
+		Map<Rank, Long> lottoResults = updatedTicket.stream()
+			.collect(Collectors.groupingBy(LottoTicket::getRank, Collectors.counting()));
+		List<WinningInfo> results = lottoResults.entrySet().stream()
+			.map(r -> new WinningInfo(r.getKey(), r.getValue().intValue()))
+			.collect(Collectors.toList());
+		new ResultView().showResultStatics(results);
 	}
 }

@@ -18,7 +18,7 @@ public class LottoTicket {
 		isNumbersSizeEqCount();
 	}
 
-	public List<Integer> getNumbersToList() {
+	public List<Integer> getNumbers() {
 		List<Integer> numberList = new ArrayList<>(numbers);
 		Collections.sort(numberList);
 		return Collections.unmodifiableList(numberList);
