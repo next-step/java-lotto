@@ -23,6 +23,9 @@ public class LottoMain {
         LottoInputValue lottoInputValue = InputView.lastLottoNumbers();
         Set<Integer> lastLotto = lottoInputValue.convertLastLottoNumbers();
 
+        LottoInputValue lottoInputBonusNumber = InputView.inputLottoBonusNumber();
+        int lottoBonusNumber = lottoInputBonusNumber.convertLottoBonusNumbers();
+
         LottoResult lottoResult = LottoResult.result(money, lottos, new ArrayList<>(lastLotto));
         ResultView.printLottoResult(lottoResult);
     }

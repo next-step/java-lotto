@@ -6,10 +6,19 @@ import java.util.Set;
 public class LottoInputValue {
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
-    private String text ;
+    private String text;
+
+    public LottoInputValue() {
+    }
 
     public LottoInputValue(String text) {
         this.text = text;
+    }
+
+    public int convertLottoBonusNumbers() {
+        int number = convertNum(this.text);
+        checkValid(number);
+        return number;
     }
 
     public Set<Integer> convertLastLottoNumbers() {
@@ -49,7 +58,7 @@ public class LottoInputValue {
         try {
             return Integer.parseInt(text);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자 변환시 오류 발생 하였습니다. 숫자 List에 숫자가 아닌 값이 존재 합니다.");
+            throw new IllegalArgumentException("숫자 변환시 오류 발생 하였습니다.");
 
         }
     }
