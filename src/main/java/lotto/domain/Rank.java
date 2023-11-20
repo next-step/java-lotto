@@ -28,14 +28,17 @@ public enum Rank {
                 return winningMoney;
         }
 
-        public boolean isSameMatchCount(int matchCount, boolean matchedBonus) {
-                return this.matchCount == matchCount && this.matchedBonus == matchedBonus;
-        }
-
         public static Rank valueOfRank(int matchCount, boolean matchedBonus) {
                 return Stream.of(Rank.values())
                     .filter(val -> val.isSameMatchCount(matchCount, matchedBonus))
                     .findAny()
                     .orElse(MISS);
+        }
+
+        private boolean isSameMatchCount(int matchCount, boolean matchedBonus) {
+                if (matchCount != 5) {
+                        return this.matchCount == matchCount;
+                }
+                return this.matchCount == matchCount && this.matchedBonus == matchedBonus;
         }
 }
