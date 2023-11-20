@@ -1,7 +1,4 @@
-package validator;
-
-import utils.MathUtils;
-import utils.StringUtils;
+package arithmetic;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,8 +19,8 @@ public class ArithmeticInputValidator {
     }
 
     private static String[] splitInputAndCheckSize(String input) {
-        String[] operandsAndOperators = StringUtils.splitByPattern(input);
-        if (MathUtils.isEvenValue(operandsAndOperators.length)) {
+        String[] operandsAndOperators = ArithmeticSplit.splitByPattern(input);
+        if (NumberTypeChecker.isEvenValue(operandsAndOperators.length)) {
             throw new IllegalArgumentException("사칙연산 입력 패턴을 다시 확인해주세요. length : " + operandsAndOperators.length);
         }
         return operandsAndOperators;
@@ -45,7 +42,7 @@ public class ArithmeticInputValidator {
     }
 
     private static boolean validateOperandAndOperators(String operandsOrOperator, int index) {
-        if (MathUtils.isEvenValue(index)) {
+        if (NumberTypeChecker.isEvenValue(index)) {
             return validateOperand(operandsOrOperator);
         }
         return validateOperator(operandsOrOperator);
@@ -63,7 +60,7 @@ public class ArithmeticInputValidator {
             parseInt(operand);
             return true;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("사칙연산 기호자리에 숫자가 입력되었습니다. input : " + operand);
+            throw new IllegalArgumentException("사칙연산 기호자리에 숫자 또는 숫자자리에 문자가 입력되었습니다. input : " + operand);
         }
     }
 }
