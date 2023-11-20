@@ -4,18 +4,18 @@ import java.util.Arrays;
 
 public class Lotto {
 
-    private final LottoNumbers numbers;
+    private final LottoNumbers lottoNumbers;
 
     public Lotto(LottoNumbers numbers) {
-        this.numbers = numbers;
+        this.lottoNumbers = numbers;
     }
 
-    public LottoNumbers getNumbers() {
-        return this.numbers;
+    public LottoNumbers getLottoNumbers() {
+        return this.lottoNumbers;
     }
 
     @Override
     public String toString() {
-        return Arrays.toString(this.numbers.getNumbers().toArray());
+        return Arrays.toString(this.lottoNumbers.getNumbers().toArray());
     }
 }
