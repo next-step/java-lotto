@@ -15,13 +15,4 @@ class LottoTest {
         assertThat(lotto.winningInfo(new WinningNumbersDTO("1,2,3,5,6,45", "34")))
                 .isEqualTo(new WinningInfoDTO(3, 1,new Amount(5000)));
     }
-
-    @DisplayName("당첨번호 포함 갯수에 따른 당첨정보 리턴2")
-    @Test
-    void 당첨정보_리턴2() {
-        Lotto lotto = new Lotto("2, 5,21,45, 34,30");
-        assertThat(lotto.winningInfo(new WinningNumbersDTO("1,2,3,5,6,45", "34")))
-                .usingRecursiveComparison()
-                .isEqualTo(new WinningInfoDTO(3, 1,new Amount(5000)));
-    }
 }

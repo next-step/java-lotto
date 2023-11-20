@@ -38,7 +38,7 @@ public class Amount {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Amount that = (Amount) o;
-        return amount == that.amount;
+        return amount.equals(that.amount);
     }
 
     @Override
