@@ -22,8 +22,8 @@ public class Buyer {
         ResultView.printPurchaseCount(count);
 
         for (int i = 0; i < count; i++) {
-            LottoNumber lottoNumber = new LottoNumber(new LottoNumbers());
-            List<Integer> generatedNumbers = lottoNumber.generateLottoNumbers();
+            LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumber());
+            List<Integer> generatedNumbers = lottoNumbers.generateLottoNumbers();
             Collections.sort(generatedNumbers);
             purchasedLottoNumbers.add(generatedNumbers);
         }
@@ -31,7 +31,7 @@ public class Buyer {
 
     public void checkLottoWinningNumbers(Buyer buyer, WinningNumbers winningNumbers) {
         for (List<Integer> purchasedList : purchasedLottoNumbers) {
-            Rank rank = determineLottoRank(winningNumbers.getWinningNumbers(), purchasedList);
+            Rank rank = determineLottoRank(winningNumbers, purchasedList);
             lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
         }
         ResultView.showLottoResult(lottoResult, purchaseAmount);
@@ -50,8 +50,22 @@ public class Buyer {
         return NONE;
     }
 
-    private Rank determineLottoRank(Set<Integer> winningList, List<Integer> purchasedList) {
-        int count = countSameNumber(winningList, purchasedList);
-        return Rank.values()[count];
+    private boolean containsBonusNumber(List<Integer> purchasedList, int bonusNumber) {
+        return purchasedList.contains(bonusNumber);
+    }
+
+    private Rank determineLottoRank(WinningNumbers winningNumbers, List<Integer> purchasedList) {
+        int count = countSameNumber(winningNumbers.getWinningNumbers(), purchasedList);
+        boolean correctBonusNumber = containsBonusNumber(purchasedList, winningNumbers.getBonusNumber());
+
+        if (count < 3) {
+            return Rank.NO_RANK;
+        }
+
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.getCount() == count)
+                .findFirst()
+                .map(rank -> (rank == Rank.THIRD && correctBonusNumber) ? Rank.SECOND : rank)
+                .orElseThrow();
     }
 }

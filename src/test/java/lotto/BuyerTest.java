@@ -21,7 +21,7 @@ public class BuyerTest {
     @Test
     void 당첨된결과가_정확한지테스트() {
         List<Integer> purchasedNumber = List.of(1,2,3,4,5,6);
-        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,7,8");
+        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,8", 6);
         Buyer buyer = new Buyer();
 
         Buyer.purchasedLottoNumbers.add(purchasedNumber);
@@ -29,6 +29,8 @@ public class BuyerTest {
 
         HashMap<Rank,Integer> result = buyer.lottoResult;
 
-        assertThat(result.get(Rank.FOURTH)).isEqualTo(1);
+        System.out.println(">>>>>" + result.values());
+
+        assertThat(result.get(Rank.SECOND)).isEqualTo(1);
     }
 }

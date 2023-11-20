@@ -7,17 +7,23 @@ import java.util.stream.Collectors;
 
 public class WinningNumbers {
     private final Set<Integer> winningNumbers;
+    private final int bonusNumber;
 
-    public WinningNumbers(String winningNumbers) {
+    public WinningNumbers(String winningNumbers, int bonusNumber) {
         ValidationCheck.validateWinningNumbersLength(winningNumbers);
         this.winningNumbers = Arrays.asList(winningNumbers.trim().split(","))
                 .stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet());
-        ValidationCheck.validateNoDuplicateWinningNumbers(getWinningNumbers());
+        ValidationCheck.validateNoDuplicateBonusNumbers(getWinningNumbers(), bonusNumber);
+        this.bonusNumber = bonusNumber;
     }
 
     public final Set<Integer> getWinningNumbers() {
         return new HashSet<>(winningNumbers);
+    }
+
+    public final int getBonusNumber() {
+        return bonusNumber;
     }
 }

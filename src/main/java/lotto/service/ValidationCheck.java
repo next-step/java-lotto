@@ -17,10 +17,9 @@ public class ValidationCheck {
         }
     }
 
-    public static void validateNoDuplicateWinningNumbers(Set<Integer> list) {
-        HashSet<Integer> set = new HashSet<>(list);
-        if (list.size() != set.size()) {
-            throw new IllegalArgumentException("당첨번호는 중복될 수 없습니다.");
+    public static void validateNoDuplicateBonusNumbers(Set<Integer> list, int number) {
+        if(list.contains(number)){
+            throw new IllegalArgumentException("보너스 볼은 당첨 번호와 중복될 수 없습니다.");
         }
     }
 }
