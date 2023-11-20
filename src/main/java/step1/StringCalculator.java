@@ -4,9 +4,9 @@ import java.util.List;
 
 public class StringCalculator {
 
-    private final List<Token> tokens;
+    private final List<String> tokens;
 
-    public StringCalculator(List<Token> tokens) {
+    public StringCalculator(List<String> tokens) {
         this.tokens = tokens;
     }
 
@@ -15,55 +15,31 @@ public class StringCalculator {
         Status status = new Status(0, 0);
 
         while(status.index < tokens.size()) {
-            Token token = tokens.get(status.index);
+            String token  = tokens.get(status.index);
             processToken(token, status);
         }
 
         return status.result;
     }
 
-    private void processToken(Token token, Status status) {
-        if(token.isNumber() && status.index == 0 ) {
-            status.result = token.toInt();
+    private void processToken(String token, Status status) {
+        if(Operand.isOperand(token)) {
+            status.result = Operand.operand(token);
             status.index++;
             return;
         }
-        if(token.isPlusOperator()) {
-            status.result = plus(status.result, tokens.get(status.index + 1).toInt());
-            status.index+=2;
-            return;
-        }
-        if(token.isMinusOperator()) {
-            status.result = minus(status.result, tokens.get(status.index + 1).toInt());
-            status.index+=2;
-            return;
-        }
-        if(token.isMultiplyOperator()) {
-            status.result = multiply(status.result, tokens.get(status.index + 1).toInt());
-            status.index+=2;
-            return;
-        }
-        if(token.isDevideOperator()) {
-            status.result = divide(status.result, tokens.get(status.index + 1).toInt());
-            status.index+=2;
-            return;
-        }
+        processOperator(token, status);
     }
 
-    private int plus(int a, int b) {
-    	return a + b;
-    }
 
-    private int minus(int a, int b) {
-    	return a - b;
-    }
+    private void processOperator(String token, Status status) {
 
-    private int multiply(int a, int b) {
-    	return a * b;
-    }
+        int result = status.result;
+        status.index++;
 
-    private int divide(int a, int b) {
-    	return a / b;
+        String nextToken = tokens.get(status.index);
+        status.result = new Operator(token).calculate(result, Operand.operand(nextToken));
+        status.index++;
     }
 
     static class Status {

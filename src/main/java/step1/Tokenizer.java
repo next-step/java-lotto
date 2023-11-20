@@ -1,38 +1,32 @@
 package step1;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Tokenizer {
 
-    public static List<Token> tokens(String input) {
-        List<Token> tokens = new ArrayList<>();
+    public static List<String> tokens(String input) {
 
         if(input == null || input.isBlank()) {
             throw new IllegalArgumentException("input is null or empty");
         }
 
-        String[] split = input.split(" ");
-        for (String s : split) {
-            tokens.add(new Token(s));
-        }
+        verifyTokens(input);
 
-        verifyTokens(tokens);
+        String[] tokens = input.split(" ");
+        return Arrays.asList(tokens);
 
-        return tokens;
+
     }
 
-    private static void verifyTokens(List<Token> tokens) {
-
-        for (Token token : tokens) {
-            verifyToken(token);
-        }
-    }
-
-    private static void verifyToken(Token token) {
-        if(!token.isNumber() && !token.isOperator()) {
+    private static void verifyTokens(String input) {
+        String regex = "(?:\\d\\s[\\+\\-\\*\\/]+\\s)+\\d+";
+        if(!input.matches(regex)) {
             throw new IllegalArgumentException("invalid token");
         }
     }
 
+
+    private Tokenizer() {
+    }
 }
