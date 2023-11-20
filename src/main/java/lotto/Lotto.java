@@ -13,13 +13,17 @@ public class Lotto implements Iterable<LottoNumber> {
     }
 
     public Lotto(String inputNumbers) {
-        String[] arrayNumbers = inputNumbers.split(",");
-        List<LottoNumber> lottoNumbers = from(arrayNumbers);
+        List<LottoNumber> lottoNumbers = from(inputNumbers);
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private List<LottoNumber> from(String[] arrayNumbers) {
+    private List<LottoNumber> from(String inputNumbers) {
+        if (inputNumbers == null || inputNumbers.isBlank()) {
+            return new ArrayList<>();
+        }
+
+        String[] arrayNumbers = inputNumbers.split(",");
         return Arrays.stream(arrayNumbers)
             .map(LottoNumber::new)
             .collect(Collectors.toList());
