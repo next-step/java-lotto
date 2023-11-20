@@ -12,7 +12,7 @@ public class Lotto {
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 반드시 6개여야 합니다.");
+            throw new IllegalArgumentException("로또 번호는 반드시 6개여야 합니다. 입력받은 로또 번호 개수는 " + lottoNumbers.size() + "개 입니다.");
         }
         this.lottoNumbers = lottoNumbers;
     }

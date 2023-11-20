@@ -1,12 +1,10 @@
 package lottosecond;
 
 import lottosecond.domain.EarningRateCalculator;
+import lottosecond.domain.LottoBuyMoney;
 import lottosecond.domain.WinnerBoard;
 import lottosecond.domain.WinningCondition;
-import lottosecond.domain.lotto.Lotto;
-import lottosecond.domain.lotto.LottoShuffler;
-import lottosecond.domain.lotto.Lottos;
-import lottosecond.domain.lotto.LottosMaker;
+import lottosecond.domain.lotto.*;
 import lottosecond.view.InputView;
 import lottosecond.view.OutputView;
 
@@ -20,14 +18,14 @@ public class LottoAuto {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
-        Lottos lottos = LottosMaker.makeLottoList(new LottoShuffler(), inputView.inputLottoBuyMoney());
+        Lottos lottos = LottosMaker.makeLottoList(new LottoShuffler(), new LottoBuyMoney(inputView.inputLottoBuyMoney()));
         outputView.printLottoListInfo(lottos);
 
         String winNumbersString = inputView.inputWinningNumbers();
         Lotto winningLotto = extractWinningLotto(winNumbersString);
 
         int bonusNumber = inputView.inputBonusNumber();
-        WinningCondition winningCondition = new WinningCondition(winningLotto, bonusNumber);
+        WinningCondition winningCondition = new WinningCondition(winningLotto, LottoNumber.of(bonusNumber));
 
         WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningCondition);
         outputView.printWinnerStatistics(winnerBoard);
