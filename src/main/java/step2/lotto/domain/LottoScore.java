@@ -30,6 +30,14 @@ public class LottoScore {
         });
     }
 
+    public double calculateProfitRatio(final LottoPurchaseInfo purchaseInfo) {
+        return calculateTotalPrizeAmount() / purchaseInfo.getLottoPurchaseMoney();
+    }
 
+    private long calculateTotalPrizeAmount() {
+        return Arrays.stream(LottoRank.values())
+            .mapToLong(lottoRank -> lottoRank.lottoRankTotalPrizeAmount(lottoScore.get(lottoRank)))
+            .sum();
+    }
 
 }

@@ -26,15 +26,19 @@ public enum LottoRank {
         return prizeAmount;
     }
 
-    public static LottoRank matchLottoRank(final int matchCount) {
+    public static LottoRank matchLottoRank(final int matchNumberCount) {
         return Arrays.stream(LottoRank.values())
-            .filter(value -> value.matches(matchCount))
-            .findAny()
+            .filter(value -> value.matches(matchNumberCount))
+            .findFirst()
             .orElse(LOSE);
     }
 
     private boolean matches(int count) {
         return this.matchNumber == count;
+    }
+
+    public long lottoRankTotalPrizeAmount(final int scoreCount) {
+        return this.prizeAmount * scoreCount;
     }
 
 }

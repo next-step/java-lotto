@@ -1,6 +1,5 @@
 package step2.lotto.controller;
 
-import java.util.Set;
 import step2.lotto.domain.LottoMachine;
 import step2.lotto.domain.LottoWinNumberInfo;
 import step2.lotto.strategy.LottoNumberRandomGenerator;
@@ -23,6 +22,6 @@ public class LottoController {
             NumberSplitter.splitNumber(inputView.inputWinNumbers()));
         lottoMachine.calculateLottoStatistics(lottoWinNumberInfo);
 
-        resultView.printResultStatics(lottoMachine.getLottoScore());
+        resultView.printResultStatics(lottoMachine.getLottoScore(), lottoMachine.getLottoPurchaseInfo());
     }
 }
