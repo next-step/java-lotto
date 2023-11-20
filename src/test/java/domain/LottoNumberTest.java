@@ -27,7 +27,7 @@ public class LottoNumberTest {
     }
 
     @Test
-    @DisplayName("로또 생성은 Collections.shuffle() 메소드를 활용한다.")
+    @DisplayName("로또 번호는 6개 숫자로 생성된다.")
     void generateNumberShuffleTest() {
         List<Integer> lottoNumbers = LottoRandomNumberGenerator.generateLottoNumber();
 
@@ -56,5 +56,5 @@ public class LottoNumberTest {
     void invalidInputExceptionTest() {
         assertThrows(IllegalArgumentException.class, () -> new Lotto(1, 2, 3, 4, 5));
     }
-
+    
 }

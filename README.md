@@ -39,7 +39,7 @@
 * [X] LottoNumber을 활용해 원시값을 분리해본다. (winninglotto)
 * [X] 로또번호가 1~45 사이 값이 아닌 경우 Exception 발생한다.
 * [X] Lottoprice를 어떻게 관리할지
-* [ ] 현재 public api에 대한 테스트 케이스 채우기
+* [X] 현재 public api에 대한 테스트 케이스 채우기
 * [X] '오류' 대신 Exception 용어 활용 
 * [X] 래퍼 클래스 대신 Primitive 타입사용하기
 * [X] 테스트코드 클래스 패키지 명칭 및 구조 보완하기

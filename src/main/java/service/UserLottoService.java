@@ -4,6 +4,7 @@ import domain.Lotto;
 import repository.UserLottoRepository;
 import util.LottoRandomNumberGenerator;
 
+import java.util.Collections;
 import java.util.List;
 
 public class UserLottoService {
@@ -24,7 +25,7 @@ public class UserLottoService {
 
         for (int i = 0; i < ticketCount; i++) {
             List<Integer> lottoNumbers = LottoRandomNumberGenerator.generateLottoNumber();
-
+            Collections.sort(lottoNumbers);
             Lotto lotto = new Lotto(lottoNumbers);
             userLottoRepository.saveUserLottoTickets(lotto);
         }
