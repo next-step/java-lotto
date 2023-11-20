@@ -30,12 +30,16 @@ public enum LottoPrize {
     }
 
     public static LottoPrize fromMatchCount(int num) {
-        if (num > FIRST.matchCount) {
-            throw new IllegalArgumentException("로또 최대 매칭 가능한 갯수는 " + FIRST.matchCount + "입니다.");
-        }
+        validateMatchCount(num);
         return Arrays.stream(values())
                 .filter(type -> type.isMatched(num))
                 .findFirst().orElse(NO_MATCH);
+    }
+
+    private static void validateMatchCount(int num) {
+        if (num > FIRST.matchCount) {
+            throw new IllegalArgumentException("로또 최대 매칭 가능한 갯수는 " + FIRST.matchCount + "입니다.");
+        }
     }
 
     private boolean isMatched(int num) {

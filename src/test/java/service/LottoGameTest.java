@@ -1,6 +1,7 @@
 package service;
 
 import domain.Lotto;
+import domain.LottoPrize;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import repository.UserLottoRepository;
@@ -16,12 +17,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class LottoGameTest {
 
     UserLottoRepository userLottoRepository;
-    LottoGameService lottoGameService;
+    LottoResultService lottoGameService;
 
     @BeforeEach
     public void beforeEach() {
         userLottoRepository = new UserLottoRepository();
-        lottoGameService = new LottoGameService(userLottoRepository);
+        lottoGameService = new LottoResultService(userLottoRepository);
     }
 
     @AfterEach
@@ -38,13 +39,10 @@ public class LottoGameTest {
 
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
         List<Lotto> userLottoTickets = userLottoRepository.getUserLottoTickets();
-        for (Lotto userLottoTicket : userLottoTickets) {
-            System.out.println("userLottoTicket = " + userLottoTicket.getLottoNumbers());
-            System.out.println("winningLotto = " + winningLotto.getLottoNumbers());
-        }
 
-        Map<Integer, Integer> lottoPrizeIntegerMap = lottoGameService.matchUserLotto(winningLotto);
-        System.out.println("lottoPrizeIntegerMap = " + lottoPrizeIntegerMap);
+
+        Map<LottoPrize, Integer> lottoPrizeIntegerMap = lottoGameService.matchUserLotto(winningLotto).getAllResult();
+
         assertThat(lottoPrizeIntegerMap.get(6).intValue()).isEqualTo(1);
     }
     @Test

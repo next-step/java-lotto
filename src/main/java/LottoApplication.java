@@ -1,12 +1,14 @@
 import domain.Lotto;
-import service.LottoGameService;
+import repository.LottoGameResultRepository;
+import service.LottoResultService;
 import repository.UserLottoRepository;
 import service.UserLottoService;
+import domain.Currency;
 import view.InputView;
 import view.ResultView;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 public class LottoApplication {
 
@@ -26,20 +28,16 @@ public class LottoApplication {
         /**
          * 당첨번호 입력
          */
-        LottoGameService lottoGame = new LottoGameService(userLottoRepository);
         String inputWinningNumbers = InputView.inputWinningNumbers();
         Lotto winningLotto = new Lotto(inputWinningNumbers);
 
         /**
-         * userLotto와 당첨번호 당첨결과 확인
+         * 로또 당첨결과 확인 및 출력
          */
-        Map<Integer, Integer> lottoPrizeIntegerMap = lottoGame.matchUserLotto(winningLotto);
-        ResultView.printLottoGameResult(lottoPrizeIntegerMap);
-
-        /**
-         * 당첨금액과 수익률 출력
-         */
-        float rate = lottoGame.calculateReturnRate(money, lottoPrizeIntegerMap);
-        ResultView.printLottoReturnRate(rate);
+        Optional<Currency> optionalCurrency = Currency.fromCountryType("kor");
+        LottoResultService lottoResultService = new LottoResultService(userLottoRepository);
+        LottoGameResultRepository lottoGameResult = lottoResultService.matchUserLotto(winningLotto);
+        float rate = lottoResultService.calculateReturnRate(money, lottoGameResult, optionalCurrency);
+        ResultView.printLottoGameResult(lottoGameResult, rate, optionalCurrency);
     }
 }

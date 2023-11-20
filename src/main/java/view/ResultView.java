@@ -1,10 +1,13 @@
 package view;
 
+import domain.Currency;
 import domain.Lotto;
 import domain.LottoPrize;
+import repository.LottoGameResultRepository;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class ResultView {
 
@@ -19,27 +22,35 @@ public class ResultView {
         for (Lotto lottoTicket : lottoTickets) {
             System.out.println(lottoTicket.getLottoNumbers());
         }
-        System.out.println("");
+        System.out.println();
     }
 
-    public static void printLottoGameResult(Map<Integer, Integer> lottoMatchResult) {
-        System.out.println("당첨 통계");
+    public static void printLottoGameResult(LottoGameResultRepository lottoMatchResult, float rate, Optional<Currency> currency) {
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
 
-        for (int i = 3; i < 7; i++) {
-            if (lottoMatchResult.get(i) == null) {
-                System.out.println(String.format("%d개 일치 (%d원) - 0개",
-                        LottoPrize.fromMatchCount(i).getMatchCount(),
-                        LottoPrize.fromMatchCount(i).winningPrize()));
+        /**
+         * 당첨결과 출력
+         */
+        Map<LottoPrize, Integer> allResult = lottoMatchResult.getAllResult();
+        for (Map.Entry<LottoPrize, Integer> result : allResult.entrySet()) {
+            if (result.getKey().equals(LottoPrize.NO_MATCH)) {
                 continue;
             }
-            System.out.println(String.format("%d개 일치 (%d원) - %d개", i,
-                    LottoPrize.fromMatchCount(i).winningPrize(),
-                    lottoMatchResult.get(i)));
+            System.out.println(String.format("%d개 일치 (%d%s) - %d개"
+                    , result.getKey().getMatchCount()
+                    , result.getKey().winningPrize()
+                    , currency.get().getCurrencyType()
+                    , result.getValue()
+            ));
         }
-    }
 
-    public static void printLottoReturnRate(float rate) {
-        System.out.println(String.format("총 수익률은 %f 입니다.", rate));
+        /**
+         * 수익률 출력
+         */
+        System.out.print(String.format("총 수익률은 %.2f 입니다.", rate));
+        if (rate < 1) {
+            System.out.println(" (기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
     }
 }
