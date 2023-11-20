@@ -34,7 +34,6 @@ public enum Operator implements Operation{
     };
 
     private final String operator;
-    private static int number = 0;
 
     Operator(String operator) {
         this.operator = operator;
@@ -51,23 +50,25 @@ public enum Operator implements Operation{
     }
 
     public static int calc(List<String> list){
-        number = 0;
+        int calcNumber = 0;
         for(int i=0; i< list.size(); i++){
-            checkOperator(list, i);
+            calcNumber = checkOperator(list, i, calcNumber);
         }
-        return number;
+
+        return calcNumber;
     }
 
-    private static void checkOperator(List<String> list, int i) {
+    private static int checkOperator(List<String> list, int i, int calcNumber) {
         if(i%2 != 0){
-            number = getNumber(list, number, i);
+            return getNumber(list, calcNumber, i);
         }
+        return calcNumber;
     }
 
-    private static int getNumber(List<String> list, int number, int i) {
-        if(number == 0 && i == 1) {
+    private static int getNumber(List<String> list, int calcNumber, int i) {
+        if(calcNumber == 0 && i == 1) {
             return Operator.valueOfLabel(list.get(i)).calculator(Integer.parseInt(list.get(i - 1)), Integer.parseInt(list.get(i + 1)));
         }
-        return Operator.valueOfLabel(list.get(i)).calculator(number, Integer.parseInt(list.get(i + 1)));
+        return Operator.valueOfLabel(list.get(i)).calculator(calcNumber, Integer.parseInt(list.get(i + 1)));
     }
 }
