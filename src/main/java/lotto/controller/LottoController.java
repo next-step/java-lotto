@@ -34,7 +34,6 @@ public class LottoController {
         outputView.askWinningLotto();
         Lotto winningLotto = inputView.inputWinningLotto();
 
-        // TODO: 수익률 계산
         Map<String, Integer> results = lottoResultCalculator.calculateResults(lottos, winningLotto);
         double profit = lottoResultCalculator.calculateProfit(results, lottoCount);
         outputView.printResults(results, profit);

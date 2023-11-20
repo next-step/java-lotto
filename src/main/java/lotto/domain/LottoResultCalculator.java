@@ -20,16 +20,15 @@ public class LottoResultCalculator {
     public Map<String, Integer> calculateResults(Lottos lottos, Lotto winningNumbers) {
         Map<String, Integer> results = new HashMap<>();
         for (WinningStrategy strategy : strategies) {
-            results.put(strategy.getResultKey(), 0);
+            results.put(strategy.getResultKey(), DEFAULT_VALUE);
         }
 
-        for (Lotto lotto : lottos.getValue()) {
-            for (WinningStrategy strategy : strategies) {
-                if (strategy.matches(lotto, winningNumbers)) {
-                    results.put(strategy.getResultKey(), results.get(strategy.getResultKey()) + 1);
-                }
-            }
-        }
+        lottos.getValue().stream()
+                .flatMap(lotto -> strategies.stream()
+                        .filter(strategy -> strategy.matches(lotto, winningNumbers))
+                        .map(WinningStrategy::getResultKey))
+                .forEach(key -> results.merge(key, 1, Integer::sum));
+
         return results;
     }
 
@@ -39,13 +38,7 @@ public class LottoResultCalculator {
                 .mapToDouble(strategy -> results.getOrDefault(strategy.getResultKey(), DEFAULT_VALUE) * strategy.getWinningMoney())
                 .sum();
 
-        System.out.println(profit);
-
         double profitRate = (profit / (lottoCount * LOTTO_PRICE));
-        System.out.println(profitRate);
-
-        profitRate = Math.round(profitRate * RATIO) / RATIO;
-
-        return profitRate;
+        return Math.round(profitRate * RATIO) / RATIO;
     }
 }
