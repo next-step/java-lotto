@@ -25,7 +25,7 @@ public class LottoGame {
 
     private List<Integer> makingLottoNumbers() {
         Collections.shuffle(lottoNumbers);
-        return list.subList(0, 6);
+        return lottoNumbers.subList(0, 6);
     }
 
     private int getGameCount(int price) {
