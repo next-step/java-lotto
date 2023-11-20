@@ -16,15 +16,9 @@ class LottoStoreTest {
 
     @Test
     @DisplayName("Lotto 구매 금액 저장 & Lotto 구매 가능 개수")
-    void preservePurchasePrice_howMuchLotto() {
+    void purchaseLottery_howMuchLotto() {
         LottoStore store = new LottoStore();
-        store.preservePurchaseMoney(Money.from(10000));
-        assertThat(store.howMuchLotto()).isEqualTo(10);
-    }
-
-    @Test
-    void howMuchLotto_without_preservePurchasePrice() {
-        LottoStore store = new LottoStore();
-        assertThat(store.howMuchLotto()).isZero();
+        store.purchaseLottery(Money.from(10000));
+        assertThat(store.howMuchLotto(Money.from(10000))).isEqualTo(10);
     }
 }

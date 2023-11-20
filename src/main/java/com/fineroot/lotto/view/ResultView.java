@@ -1,15 +1,23 @@
 package com.fineroot.lotto.view;
 
-import com.fineroot.lotto.entity.LottoStore;
+import com.fineroot.lotto.dto.LottoBundleStatus;
+import com.fineroot.lotto.viewmodel.ResultViewModel;
 
 public class ResultView {
-    private LottoStore lottoStore;
+    private ResultViewModel resultViewModel;
 
-    public ResultView(LottoStore lottoStore){
-        this.lottoStore = lottoStore;
+    public ResultView(ResultViewModel resultViewModel){
+        this.resultViewModel = resultViewModel;
     }
 
-    public void draw(){
-        System.out.println(Integer.toString(lottoStore.howMuchLotto()).concat("개를 구매했습니다."));
+    public void drawTotalLottoCount(){
+        System.out.println(Integer.toString(resultViewModel.getLottoCount()).concat("개를 구매했습니다."));
+    }
+
+    public void drawLotteryBundleStatus(){
+        LottoBundleStatus lotteryBundleStatus = resultViewModel.getLotteryBundleStatus();
+        for (int i = 0; i < lotteryBundleStatus.size(); i++) {
+            System.out.println("[".concat(lotteryBundleStatus.get(i)).concat("]").concat(System.lineSeparator()));
+        }
     }
 }
