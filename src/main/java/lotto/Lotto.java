@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final int MAX_TICKET_NUMBERS = 6;
+    private static final int MAX_TICKET_NUMBERS = 6;
     private final List<LottoNumber> ticket;
 
     public Lotto(List<Integer> anyNumbers) {
