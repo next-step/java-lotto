@@ -8,7 +8,7 @@ import step3.utils.NumberUtils;
 
 import java.util.List;
 
-import static step3.enumeration.LottoRank.SECOND;
+import static step3.enumeration.LottoRank.*;
 
 public class OutputView {
 
@@ -23,14 +23,11 @@ public class OutputView {
     public void viewLottoRating(WinnerBoard winnerBoard) {
         System.out.println("당첨 통계\n" + "---------");
 
-        LottoRank.ALL_LOTTO_RANK.forEach(rank -> {
-            System.out.println(rank.getMatch() + "개 일치 (" + LottoRank.getPriceByName(rank.name()) + "원) - " + NumberUtils.getSafeNumber(winnerBoard.winnerBoard.get(rank.name())) + "개");
-            if (rank.equals(SECOND)) viewLottoBonusScore(winnerBoard.winnerBoard.get(rank.name()));
-        });
-    }
-
-    public void viewLottoBonusScore(Integer count) {
-        System.out.println(SECOND.getMatch() + "개 일치, 보너스 볼 일치 (" + SECOND.getPrice() + "원) - " + NumberUtils.getSafeNumber(count) + "개");
+        System.out.println(FIRST.getMatch() + "개 일치 (" + LottoRank.getPriceByName(FIRST.name()) + "원) - " + NumberUtils.getSafeNumber(winnerBoard.winnerBoard.get(FIRST.name())) + "개");
+        System.out.println(SECOND.getMatch() + "개 일치, 보너스 볼 일치 (" + SECOND.getPrice() + "원) - " + NumberUtils.getSafeNumber(winnerBoard.winnerBoard.get(SECOND.name())) + "개");
+        System.out.println(THIRD.getMatch() + "개 일치 (" + LottoRank.getPriceByName(THIRD.name()) + "원) - " + NumberUtils.getSafeNumber(winnerBoard.winnerBoard.get(THIRD.name())) + "개");
+        System.out.println(FOURTH.getMatch() + "개 일치 (" + LottoRank.getPriceByName(FIRST.name()) + "원) - " + NumberUtils.getSafeNumber(winnerBoard.winnerBoard.get(FOURTH.name())) + "개");
+        System.out.println(FIFTH.getMatch() + "개 일치 (" + LottoRank.getPriceByName(FIRST.name()) + "원) - " + NumberUtils.getSafeNumber(winnerBoard.winnerBoard.get(FIFTH.name())) + "개");
     }
 
     public void viewRating(Double rating) {
