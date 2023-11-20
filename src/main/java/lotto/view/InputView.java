@@ -3,8 +3,7 @@ package lotto.view;
 import lotto.domain.lotto.wrapper.LottoNumber;
 import lotto.domain.lotto.wrapper.LottoNumbers;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.lang.System.*;
@@ -40,13 +39,51 @@ public class InputView {
         return (int) Long.parseLong(purchase) / LOTTO_PRICE;
     }
 
+    public int inputCountOfManual(int numOfLotto) {
+        print("수동으로 구매할 로또 수를 입력해 주세요.");
+
+        try {
+            String countOfManual = input();
+            inputValidator.validateCountOfManual(countOfManual, numOfLotto);
+
+            return Integer.parseInt(countOfManual);
+        } catch (IllegalArgumentException e){
+            print(e.getMessage());
+            return inputCountOfManual(numOfLotto);
+        }
+    }
+
+    public List<LottoNumbers> drawNumbersByManual(int countOfManual) {
+        print("수동으로 구매할 번호를 입력해 주세요.");
+
+        List<LottoNumbers> lottos = new ArrayList<>();
+        inputManualNumbers(lottos, countOfManual);
+
+        return lottos;
+    }
+
+    private void inputManualNumbers(List<LottoNumbers> lottos, int countOfManual) {
+        if (countOfManual == 0) {
+            return;
+        }
+
+        try {
+            String input = input();
+            inputValidator.validateLottoNumbers(input, DELIMITER);
+            lottos.add(convertToNumbers(input));
+            inputManualNumbers(lottos, countOfManual - 1);
+        } catch (IllegalArgumentException e){
+            print(e.getMessage());
+            inputManualNumbers(lottos, countOfManual);
+        }
+    }
+
     public LottoNumbers inputWinningNumbers() {
         print("이번 주 당첨 번호를 입력해 주세요.");
 
         try {
             String input = input();
-            inputValidator.validateWinningNumbers(input, DELIMITER);
-
+            inputValidator.validateLottoNumbers(input, DELIMITER);
             return convertToNumbers(input);
         } catch (IllegalArgumentException e){
             print(e.getMessage());
@@ -58,8 +95,8 @@ public class InputView {
         String[] stringNumbers = input.split(DELIMITER);
 
         return new LottoNumbers(Arrays.stream(stringNumbers)
-            .map(stringNumber -> Integer.parseInt(stringNumber.trim()))
-            .collect(Collectors.toUnmodifiableSet()));
+            .map(stringNumber -> LottoNumber.of(Integer.parseInt(stringNumber.trim())))
+            .collect(Collectors.toUnmodifiableList()));
     }
 
     public LottoNumber inputBonusNumber(LottoNumbers winningNumbers) {
@@ -69,7 +106,7 @@ public class InputView {
             String input = input();
             inputValidator.validateBonusNumber(input, winningNumbers);
 
-            return new LottoNumber(Integer.parseInt(input));
+            return LottoNumber.of(Integer.parseInt(input));
         } catch (IllegalArgumentException e){
             print(e.getMessage());
             return inputBonusNumber(winningNumbers);

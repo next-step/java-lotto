@@ -16,7 +16,7 @@ public class LottoNumberTest {
         int input = 34;
 
         // when
-        LottoNumber lottoNumber = new LottoNumber(input);
+        LottoNumber lottoNumber = LottoNumber.of(input);
 
         // then
         assertThat(lottoNumber.number()).isEqualTo(34);
@@ -27,7 +27,7 @@ public class LottoNumberTest {
     @ValueSource(ints = {0, 46})
     void createNumberWhenInputIsNotInRange(int input) {
         // when & then
-        assertThatThrownBy(() -> new LottoNumber(input)).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> LottoNumber.of(input)).isInstanceOf(IllegalArgumentException.class)
             .hasMessage("숫자의 범위는 1 ~ 45입니다.");
     }
 
@@ -36,13 +36,13 @@ public class LottoNumberTest {
     void compareNumber() {
         // given
         int input = 5;
-        LottoNumber origin = new LottoNumber(input);
-        LottoNumber target = new LottoNumber(input);
+        LottoNumber origin = LottoNumber.of(input);
 
         // when
-        boolean isEqual = origin.equals(target);
+        LottoNumber target = LottoNumber.of(input);
 
         // then
-        assertThat(isEqual).isTrue();
+        assertThat(origin).isEqualTo(target);
+        assertThat(origin).isSameAs(target);
     }
 }

@@ -11,12 +11,16 @@ public class LottoNumbers {
 
     private final TreeSet<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(Set<Integer> numbers) {
-        validateAmountOfNumbers(numbers);
+    public LottoNumbers(Set<Integer> lottoNumbers) {
+        validateAmountOfNumbers(lottoNumbers);
 
-        this.lottoNumbers = numbers.stream()
-            .map(LottoNumber::new)
+        this.lottoNumbers = lottoNumbers.stream()
+            .map(LottoNumber::of)
             .collect(Collectors.toCollection(TreeSet::new));
+    }
+
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = new TreeSet<>(lottoNumbers);
     }
 
     private void validateAmountOfNumbers(Set<Integer> numbers) {
