@@ -25,6 +25,10 @@ public class Lotto {
         return new ArrayList<>(numbers);
     }
 
+    public List<Integer> numbers() {
+        return this.numbers;
+    }
+
     @Override
     public boolean equals(Object obj) {
         Lotto other = (Lotto) obj;

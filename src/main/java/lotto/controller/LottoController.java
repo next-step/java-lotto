@@ -10,7 +10,11 @@ import java.util.List;
 public class LottoController {
 
     public static void main(String[] args) {
-        buyLotto();
+        List<Lotto> lottoTickets = buyLotto();
+
+        for (int i = 0; i < lottoTickets.size(); i++) {
+            ResultView.printLottoTicket(lottoTickets.get(i));
+        }
 
         //checkLottoResult();
     }
