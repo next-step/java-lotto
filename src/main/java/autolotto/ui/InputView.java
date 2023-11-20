@@ -32,4 +32,9 @@ public class InputView {
         }
         return winningNumbers;
     }
+
+    public static int bonusNumber(){
+        System.out.println("\n보너스 볼을 입력해 주세요.");
+        return Integer.parseInt(checkNllOrBlank(scanner.nextLine()));
+    }
 }

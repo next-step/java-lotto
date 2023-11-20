@@ -8,17 +8,20 @@ public class LottoStatistics {
     private static final int LOTTO_PRICE = 1000;
     private static final int ZERO = 0;
     private List<Lotto> lottoTickets;
-    private Lotto lastWeekWinNumber;
+    private WinLotto winLotto;
+//    private int bonusNumber;
 
-    public LottoStatistics(List<Lotto> lottoTickets, Lotto lastWeekWinNumber) {
+    public LottoStatistics(List<Lotto> lottoTickets, WinLotto winLotto) {
         this.lottoTickets = lottoTickets;
-        this.lastWeekWinNumber = lastWeekWinNumber;
+        this.winLotto = winLotto;
     }
 
     public Map<Rank, Integer> calcuratorRankCount() {
         Map<Rank, Integer> rankCount = new HashMap<>();
+
         for (Lotto ticket : lottoTickets) {
-            Rank rank = Rank.of(lastWeekWinNumber.matchCount(ticket, lastWeekWinNumber));
+            boolean hasBonusNumber = ticket.lottoNumbers().contains(winLotto.getBonusNumber());
+            Rank rank = Rank.of(ticket.matchCount(ticket, winLotto.getLastWeekWinNumber()),hasBonusNumber);
             rankCount.put(rank, rankCount.getOrDefault(rank, 0) + 1);
         }
         return rankCount;
