@@ -20,7 +20,7 @@ public class ResultView {
 
     public void out(LottoWallet lottoWallet) {
         for (int i = 0; i < lottoWallet.totalTicketCount(); i++){
-            System.out.println(lottoWallet.oneTicket(i).toString());
+            System.out.println(lottoWallet.oneTicket(i).lottoNumbers());
         }
     }
 
