@@ -14,6 +14,10 @@ public class Lottos {
         }
     }
 
+    public Lottos(List<Lotto> value) {
+        this.value = value;
+    }
+
     public String findLottos() {
         StringBuilder sc = new StringBuilder();
         for (Lotto lotto : value) {
