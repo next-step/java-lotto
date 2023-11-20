@@ -34,13 +34,21 @@ public enum LottoRank {
         if (matchCount <= MAX_NO_PRIZE_NUMBER) {
             return NO_PRIZE;
         }
-        if (matchCount == MATCH_COUNT_SECOND_OR_THIRD && matchBonus) {
+        if (isSecondPrize(matchCount, matchBonus)) {
             return SECOND_PRIZE;
         }
-        if (matchCount == MATCH_COUNT_SECOND_OR_THIRD && !matchBonus) {
+        if (isThirdPrize(matchCount, matchBonus)) {
             return THIRD_PRIZE;
         }
         return lottoRankMapping.get(matchCount);
+    }
+
+    private static boolean isSecondPrize(int matchCount, boolean matchBonus) {
+        return matchCount == MATCH_COUNT_SECOND_OR_THIRD && matchBonus;
+    }
+
+    private static boolean isThirdPrize(int matchCount, boolean matchBonus) {
+        return matchCount == MATCH_COUNT_SECOND_OR_THIRD && !matchBonus;
     }
 
     public long getPrizeMoney() {
