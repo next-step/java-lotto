@@ -1,20 +1,22 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class LottoMachine {
 
         private static final int LOTTO_TICKET_PRICE = 1_000;
-        private static final Random random = new Random();
 
         public List<Ticket> buy(long purchaseAmount) {
                 validatePurchaseAmount(purchaseAmount);
                 return generateTickets(purchaseAmount);
+        }
+
+        public long getPurchaseAmount(Tickets tickets) {
+                return (long) tickets.getCountOfTickets() * LOTTO_TICKET_PRICE;
         }
 
         private List<Ticket> generateTickets(long purchaseAmount) {
@@ -26,12 +28,11 @@ public class LottoMachine {
                 return generatedTicket;
         }
 
-        private Set<Integer> generateLottoNumbers() {
-                Set<Integer> lottoNumbers = new HashSet<>();
-                while (lottoNumbers.size() != 6) {
-                        lottoNumbers.add(random.nextInt(45) + 1);
-                }
-                return lottoNumbers.stream().collect(Collectors.toSet());
+        private Set<LottoNumber> generateLottoNumbers() {
+                List<LottoNumber> lottoNumbers = LottoNumberCandidatesFactory.getInstance();
+                Collections.shuffle(lottoNumbers);
+                lottoNumbers = lottoNumbers.subList(0, 6);
+                return new HashSet<>(lottoNumbers);
         }
 
         private long calculatePurchaseQuantity(long purchaseAmount) {

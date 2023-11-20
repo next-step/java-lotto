@@ -7,12 +7,8 @@ import org.junit.jupiter.api.Test;
 public class RankTest {
 
         @Test
-        void 당첨된_번호_갯수가_3일_경우_4등() {
-                assertThat(Rank.valueOfRank(3)).isEqualTo(Rank.FOURTH);
-        }
-
-        @Test
-        void 당첨된_번호_갯수가_3미만일_경우_MISS() {
-                assertThat(Rank.valueOfRank(2)).isEqualTo(Rank.MISS);
+        void 보너스_번호_포함_여부에_따른_등수_확인() {
+                assertThat(Rank.valueOfRank(5, true)).isEqualTo(Rank.SECOND);
+                assertThat(Rank.valueOfRank(5, false)).isEqualTo(Rank.THIRD);
         }
 }

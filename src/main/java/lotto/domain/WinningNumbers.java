@@ -8,29 +8,48 @@ import java.util.stream.Collectors;
 public class WinningNumbers {
 
         private static final int WINNING_NUMBERS_COUNT = 6;
-        private final Set<Integer> values;
+        private static final int COUNT_OF_BONUS_NUMBER_ADDED = 7;
 
-        public WinningNumbers(List<Integer> values) {
-                this.values = Set.copyOf(values);
-                validateCountOfValues();
+        private final Set<LottoNumber> basicWinningNumbers;
+        private final LottoNumber bonusNumber;
+
+        public WinningNumbers(List<LottoNumber> values, LottoNumber bonusNumber) {
+                validateCountOfWinningNumbersExceptForBonus(values);
+                values.add(bonusNumber);
+                this.basicWinningNumbers = Set.copyOf(values);
+                this.bonusNumber = bonusNumber;
+                validateCountOfNumbers();
         }
 
-        public WinningNumbers(int... values) {
-                this.values = Arrays.stream(values).boxed().collect(Collectors.toSet());
-                validateCountOfValues();
+        public WinningNumbers(LottoNumber bonusNumber, int... values) {
+                this(Arrays.stream(values).mapToObj(LottoNumber::new).collect(Collectors.toList()), bonusNumber);
         }
 
-        public Set<Integer> values() {
-                return values;
+        public Set<LottoNumber> values() {
+                return basicWinningNumbers;
         }
 
-        private void validateCountOfValues() {
-                if (!isFixedCount()) {
+        public LottoNumber bonusNumber() {
+                return bonusNumber;
+        }
+
+        private void validateCountOfWinningNumbersExceptForBonus(List<LottoNumber> lottoNumbers) {
+                if (!isFixedCountOfWinningNumbersExceptForBonus(lottoNumbers.size())) {
                         throw new IllegalArgumentException("6개의 당첨번호를 중복되지않게 입력해주세요.");
                 }
         }
 
-        private boolean isFixedCount() {
-                return values.size() == WINNING_NUMBERS_COUNT;
+        private boolean isFixedCountOfWinningNumbersExceptForBonus(int countOfNumber) {
+                return countOfNumber == WINNING_NUMBERS_COUNT;
+        }
+
+        private void validateCountOfNumbers() {
+                if (!isFixedCountOfBonusNumberAdded()) {
+                        throw new IllegalArgumentException("6개의 당첨번호와 한개의 보너스번호가 모두 중복되지않게 입력해주세요.");
+                }
+        }
+
+        private boolean isFixedCountOfBonusNumberAdded() {
+                return basicWinningNumbers.size() == COUNT_OF_BONUS_NUMBER_ADDED;
         }
 }
