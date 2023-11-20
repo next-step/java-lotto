@@ -1,23 +1,23 @@
 package src.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoMachine {
 
-    private final LottoGameNumberGenerator gameNumberGenerator;
+    private LottoGameNumberGenerator lottoGameNumberGenerator;
 
-    public LottoMachine(LottoGameNumberGenerator gameNumberGenerator) {
-        this.gameNumberGenerator = gameNumberGenerator;
+    public LottoMachine(LottoGameNumberGenerator lottoGameNumberGenerator) {
+        this.lottoGameNumberGenerator = lottoGameNumberGenerator;
     }
 
     public Lottos buyLottos(Money money) {
         int lottoCount = money.lottoCount(Lotto.PRICE_OF_LOTTO);
         checkAvailableForPurchase(lottoCount);
-        List<Lotto> lottos = new ArrayList<>(lottoCount);
-        for (int idx = 0; idx < lottoCount; idx++) {
-            lottos.add(buyLotto());
-        }
+        List<Lotto> lottos = IntStream.range(0, lottoCount)
+                .mapToObj(idx -> buyLotto())
+                .collect(Collectors.toList());
 
         return Lottos.of(lottos);
     }
@@ -29,6 +29,10 @@ public class LottoMachine {
     }
 
     private Lotto buyLotto() {
-        return Lotto.of(gameNumberGenerator.gameNumbers());
+        return Lotto.of(lottoGameNumberGenerator.gameNumbers());
+    }
+
+    public void changeLottoGameNumberGenerator(LottoGameNumberGenerator lottoGameNumberGenerator) {
+        this.lottoGameNumberGenerator = lottoGameNumberGenerator;
     }
 }

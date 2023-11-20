@@ -34,4 +34,11 @@ public class Lottos {
     public List<Lotto> values() {
         return new ArrayList<>(values);
     }
+
+    public Lottos addLottos(Lottos lottos) {
+        List<Lotto> cloneLottos = values();
+        cloneLottos.addAll(lottos.values());
+
+        return new Lottos(cloneLottos);
+    }
 }

@@ -6,13 +6,13 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoGameNumberGeneratorTest {
+class AutoLottoGameNumberGeneratorTest {
 
     @Test
     void 로또의_번호는_6개로_구성되어있다() {
         // given
         int lottoNumberCount = 6;
-        LottoGameNumberGenerator gameNumberGenerator = new LottoGameNumberGenerator();
+        AutoLottoGameNumberGenerator gameNumberGenerator = new AutoLottoGameNumberGenerator();
 
         // when
         Set<GameNumber> gameNumbers = gameNumberGenerator.gameNumbers();
