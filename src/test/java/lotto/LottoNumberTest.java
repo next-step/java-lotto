@@ -36,6 +36,6 @@ public class LottoNumberTest {
     @ParameterizedTest
     void compareNumber(int compareInteger, boolean expected) {
         LottoNumber lottoNumber = LottoNumber.from(33);
-        Assertions.assertThat(lottoNumber.compare(compareInteger)).isEqualTo(expected);
+        Assertions.assertThat(lottoNumber.equalNumber(compareInteger)).isEqualTo(expected);
     }
 }

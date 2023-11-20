@@ -27,7 +27,7 @@ public class LottoNumber {
         }
     }
 
-    public boolean compare(int compareInteger) {
+    public boolean equalNumber(int compareInteger) {
         return this.number == compareInteger;
     }
 
