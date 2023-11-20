@@ -16,4 +16,8 @@ public class WinningInfo {
 	public Integer getNumOfWinners() {
 		return winners;
 	}
+
+	public Integer calcTotalAmount() {
+		return rank.calcTotalAmount(winners);
+	}
 }

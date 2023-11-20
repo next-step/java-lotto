@@ -35,4 +35,8 @@ public enum Rank {
 	public int getAmount() {
 		return amount;
 	}
+
+	public Integer calcTotalAmount(Integer winners) {
+		return this.amount * winners;
+	}
 }
