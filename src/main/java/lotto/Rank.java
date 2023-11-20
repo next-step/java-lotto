@@ -21,7 +21,7 @@ public enum Rank {
 
     public static Rank[] winningRanks() {
         return Arrays.stream(Rank.values())
-                .filter(it -> it.matchingCount > 0)
+                .filter(Rank::isFail)
                 .sorted(Comparator.comparingInt(Rank::matchingCount))
                 .toArray(Rank[]::new);
     }
@@ -35,6 +35,10 @@ public enum Rank {
 
     public Integer matchingCount() {
         return matchingCount;
+    }
+
+    public boolean isFail() {
+        return matchingCount > 0;
     }
 
     public Integer rewardPrice() {
