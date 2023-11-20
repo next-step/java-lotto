@@ -70,10 +70,10 @@ public class LottoResult {
         LottoOperator calc = new LottoOperator();
         double rate = RATE_OF_RETURN;
 
-        rate += calc.calculate(tree, 5000, LottoOperator.Operator.MULTIPLY);
-        rate += calc.calculate(four, 50000, LottoOperator.Operator.MULTIPLY);
-        rate += calc.calculate(five, 1500000, LottoOperator.Operator.MULTIPLY);
-        rate += calc.calculate(six, 2000000000, LottoOperator.Operator.MULTIPLY);
+        rate += calc.calculate(tree, 5_000, LottoOperator.Operator.MULTIPLY);
+        rate += calc.calculate(four, 50_000, LottoOperator.Operator.MULTIPLY);
+        rate += calc.calculate(five, 1_500_000, LottoOperator.Operator.MULTIPLY);
+        rate += calc.calculate(six, 2_000_000_000, LottoOperator.Operator.MULTIPLY);
         rate = calc.calculate(rate, money, LottoOperator.Operator.MINUS);
         rate = calc.calculate(rate, money, LottoOperator.Operator.DIVIDE);
 
