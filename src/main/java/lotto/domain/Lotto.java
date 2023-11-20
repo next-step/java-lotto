@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 public class Lotto {
@@ -18,6 +20,12 @@ public class Lotto {
     public Lotto(Set<Integer> numbers) {
         validation(numbers);
         this.lotto = numbers;
+    }
+
+    public Lotto(List<Integer> numbers) {
+        Set<Integer> listToSet = new HashSet<>(numbers);
+        validation(listToSet);
+        this.lotto = listToSet;
     }
 
     public Set<Integer> getLotto() {

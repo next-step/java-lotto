@@ -11,26 +11,26 @@ public class RankTest {
 
     @DisplayName("일등 테스트")
     @Test
-    public void 일등(){
-        assertThat(Rank.valueOf(6).get()).isEqualTo(Rank.FIRST);
+    public void 일등() {
+        assertThat(Rank.valueOf(6)).isEqualTo(Rank.FIRST);
     }
 
     @DisplayName("이등 테스트")
     @Test
-    public void 이등(){
-        assertThat(Rank.valueOf(5).get()).isEqualTo(Rank.SECOND);
+    public void 이등() {
+        assertThat(Rank.valueOf(5)).isEqualTo(Rank.SECOND);
     }
 
     @DisplayName("삼등 테스트")
     @Test
-    public void 삼등(){
-        assertThat(Rank.valueOf(4).get()).isEqualTo(Rank.THIRD);
+    public void 삼등() {
+        assertThat(Rank.valueOf(4)).isEqualTo(Rank.THIRD);
     }
 
     @DisplayName("사등 테스트")
     @Test
-    public void 사등(){
-        assertThat(Rank.valueOf(3).get()).isEqualTo(Rank.FOURTH);
+    public void 사등() {
+        assertThat(Rank.valueOf(3)).isEqualTo(Rank.FOURTH);
     }
 
 }
