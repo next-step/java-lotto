@@ -19,6 +19,7 @@ public class ResultWinner {
         }
 
         resultAdd(resultList, resultMap);
+        System.out.println(resultMap);
         return resultMap;
     }
 
