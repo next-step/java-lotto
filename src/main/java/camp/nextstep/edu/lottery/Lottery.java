@@ -1,6 +1,8 @@
 package camp.nextstep.edu.lottery;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Lottery {
 
@@ -40,6 +42,14 @@ public class Lottery {
 
     private boolean isBetween1And45(int number) {
         return number >= 1 && number <= 45;
+    }
+
+    public int calcMatchingCount(Lottery that) {
+        Set<Integer> thisSet = new HashSet<>(this.numbers);
+        Set<Integer> thatSet = new HashSet<>(that.numbers);
+
+        thisSet.retainAll(thatSet);
+        return thisSet.size();
     }
 
     public int getNumber(int index) {

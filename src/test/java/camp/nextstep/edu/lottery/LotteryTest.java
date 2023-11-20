@@ -1,5 +1,6 @@
 package camp.nextstep.edu.lottery;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -72,6 +73,32 @@ public class LotteryTest {
         assertThrows(
             IllegalArgumentException.class,
             () -> new Lottery(numbers)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateLotteryMatch")
+    @DisplayName("서로 다른 로또에 대해 몇 개의 번호가 서로 일치하는지 계산한다")
+    void lottery_compare(Lottery lottery, int expected) {
+        // given
+        Lottery standard = new Lottery(List.of(1, 2, 3, 4, 5, 6));
+
+        // when
+        int matchingCount = standard.calcMatchingCount(lottery);
+
+        // then
+        assertThat(matchingCount).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> generateLotteryMatch() {
+        return Stream.of(
+            Arguments.of(new Lottery(List.of(6, 5, 4, 3, 2, 1)), 6),
+            Arguments.of(new Lottery(List.of(1, 2, 3, 4, 5, 45)), 5),
+            Arguments.of(new Lottery(List.of(1, 2, 3, 4, 44, 45)), 4),
+            Arguments.of(new Lottery(List.of(1, 2, 3, 43, 44, 45)), 3),
+            Arguments.of(new Lottery(List.of(1, 2, 41, 42, 43, 45)), 2),
+            Arguments.of(new Lottery(List.of(1, 40, 41, 42, 43, 45)), 1),
+            Arguments.of(new Lottery(List.of(39, 40, 41, 42, 43, 45)), 0)
         );
     }
 }
