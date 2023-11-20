@@ -12,10 +12,9 @@ public class CalculatorController {
         String expression = InputView.inputExpression();
 
         // calculate
-        int result = Calculator.run(new Expression(expression));
+        int result = Calculator.run(expression);
 
         // output
         ResultView.printResult(result);
-
     }
 }

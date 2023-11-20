@@ -7,62 +7,34 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Expression {
-    private final List<String> tokens;
-    private static final Pattern VAILD_SYMBOL_PATTERN = Pattern.compile("^[0-9+\\-*/\\s]*$");
     private static final Pattern CONSECUTIVE_OPERATOR_PATTERN = Pattern.compile(".*[+\\-*/]{2,}.*");
-    private static final Pattern FRONT_POSITIVE_NUMBER_PATTERN = Pattern.compile("^\\d.*");
-    private static final Pattern FRONT_NEGATIVE_NUMBER_PATTERN = Pattern.compile("^-\\d.*");
-    private static final Pattern BACK_NUMBER_PATTERN = Pattern.compile(".*\\d$");
     private static final String ERR_EMPTY_EXPRESSION = "Empty input values are not allowed.";
-    private static final String ERR_INVALID_SYMBOL = "Invalid symbol found: ";
-    private static final String ERR_INVALID_EXPRESSION = "Expression is not valid.";
-
-    public Expression(String expression) {
-        // validate
-        Expression.validate(expression);
-
-        this.tokens = split(expression);
-    }
-
-    public Expression(List<String> tokens) {
-        // validate
-        Expression.validate(String.join(" ", tokens));
-
-        this.tokens = tokens;
-    }
+    private static final String ERR_CONSECUTIVE_OPERATORS = "Consecutive operators are not allowed.";
+    private static final String ERR_STARTS_WITH_OPERATOR = "An operator cannot appear at the beginning of the expression.";
+    private static final String ERR_ENDS_WITH_OPERATOR = "An operator cannot appear at the end of the expression.";
+    private static final String ERR_INVALID_TOKENS = "The expression contains an invalid token. Only numbers and operators separated by spaces are allowed: ";
 
     public static void validate(String expression) {
         if (expression == null || expression.isBlank()) {
             throw new IllegalArgumentException(ERR_EMPTY_EXPRESSION);
         }
 
-        if (containsInvalidSymbol(expression)) {
-            throw new IllegalArgumentException(ERR_INVALID_SYMBOL + findInvalidSymbol(expression));
+        List<String> tokens = splitByTokens(expression);
+        if (isOperator(tokens.get(0))) {
+            throw new IllegalArgumentException(ERR_STARTS_WITH_OPERATOR);
+        }
+        if (isOperator(tokens.get(tokens.size()-1))) {
+            throw new IllegalArgumentException(ERR_ENDS_WITH_OPERATOR);
         }
 
-        if (!checkNumberOnEdge(expression)  || containsConsecutiveOperators(expression)) {
-            throw new IllegalArgumentException(ERR_INVALID_EXPRESSION);
+        if (containsConsecutiveOperators(expression)) {
+            throw new IllegalArgumentException(ERR_CONSECUTIVE_OPERATORS);
         }
-    }
 
-    private static List<String> findInvalidSymbol(String expression) {
-        return Arrays.stream(expression.split(" "))
-                .filter(Expression::containsInvalidSymbol)
-                .collect(Collectors.toList());
-    }
-
-    private static boolean containsInvalidSymbol(String expression) {
-        return !VAILD_SYMBOL_PATTERN.matcher(expression).matches();
-    }
-
-    private static boolean checkNumberOnEdge(String expression) {
-        expression = expression.trim();
-        if ((FRONT_POSITIVE_NUMBER_PATTERN.matcher(expression).matches()
-                || FRONT_NEGATIVE_NUMBER_PATTERN.matcher(expression).matches())
-                && BACK_NUMBER_PATTERN.matcher(expression).matches()) {
-            return true;
+        if (invalidTokens(tokens).size() != 0) {
+            throw new IllegalArgumentException(ERR_INVALID_TOKENS + tokens);
         }
-        return false;
+
     }
 
     private static boolean containsConsecutiveOperators(String expression) {
@@ -71,30 +43,26 @@ public class Expression {
         ).matches();
     }
 
-    private static ArrayList<String> split(String expression) {
-        String[] splitArray = expression.trim().split("\\s+");
-        return new ArrayList<>(Arrays.asList(splitArray));
+    public static boolean isNumber(String input) {
+        return input.chars().allMatch( Character::isDigit );
     }
 
-    public Binomial popBinomial() {
-        String leftNumber = this.tokens.remove(0);
-        String operator = this.tokens.remove(0);
-        String rightNumber = this.tokens.remove(0);
-        return new Binomial(List.of(leftNumber, operator, rightNumber));
-    }
-
-    public boolean isNotMonomial() {
-        if (this.tokens.size() == 1) {
+    public static boolean isOperator(String input) {
+        try {
+            Operator.getBySymbol(input);
+            return true;
+        } catch (IllegalArgumentException e) {
             return false;
         }
-        return true;
     }
 
-    public int getResult() {
-        return Integer.parseInt(this.tokens.get(0));
+    public static List<String> splitByTokens(String expression) {
+        return Arrays.asList(expression.trim().split("\\s+"));
     }
 
-    public List<String> tokens() {
-        return this.tokens;
+    private static List<String> invalidTokens(List<String> tokens) {
+        return tokens.stream()
+                .filter(token -> !isNumber(token) && !isOperator(token))
+                .collect(Collectors.toList());
     }
 }
