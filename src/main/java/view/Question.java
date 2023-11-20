@@ -1,6 +1,7 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,7 +22,13 @@ public class Question {
     public static int intAsk(String question) {
         clear();
         System.out.print(question + ": ");
-        return SCANNER.nextInt();
+
+        try {
+            return SCANNER.nextInt();
+        }
+        catch (InputMismatchException e) {
+            throw new NumberFormatException("숫자 입력을 기대했으나 숫자 외의 다른 입력이 들어왔습니다.");
+        }
     }
 
     public static List<Integer> intListAsk(String question) {
@@ -33,9 +40,18 @@ public class Question {
 
         List<Integer> integers = new ArrayList<>();
         for (String stringToken : spllitedString) {
-            integers.add(Integer.parseInt(stringToken));
+            addIfNumber(stringToken, integers);
         }
 
         return integers;
+    }
+
+    private static void addIfNumber(String stringToken, List<Integer> integers) {
+        try {
+            integers.add(Integer.parseInt(stringToken));
+        }
+        catch (NumberFormatException e) {
+            throw new NumberFormatException("숫자 입력을 기대했으나 숫자 외의 다른 입력이 들어왔습니다.");
+        }
     }
 }
