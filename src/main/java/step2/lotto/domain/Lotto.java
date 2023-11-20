@@ -7,6 +7,8 @@ public class Lotto {
 
     private final Set<Integer> lottoNumbers;
 
+    private static final int LOTTO_MINIMUM_BOUND = 1;
+    private static final int LOTTO_MAXIMUM_BOUND = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
 
     public Lotto(Set<Integer> lottoNumbers) {
@@ -27,7 +29,7 @@ public class Lotto {
 
     private void validateNumberBound(final Set<Integer> lottoNumbers) {
         lottoNumbers.stream().forEach(number -> {
-            if(number > 45 || number < 1) {
+            if(number > LOTTO_MAXIMUM_BOUND || number < LOTTO_MINIMUM_BOUND) {
                 throw new IllegalArgumentException("로또 번호는 1이상 45이하의 숫자들로만 이루어져야 합니다.");
             }
         });
