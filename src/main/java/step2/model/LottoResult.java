@@ -35,12 +35,10 @@ public class LottoResult {
 
     @Override
     public String toString() {
-        return "당첨 통계\n" +
-                "---------\n" +
-                "3개 일치 (5000원)- " + lottoRanks.get(LottoRank.FIFTH_PRIZE) + "개\n" +
-                "4개 일치 (50000원)- " + lottoRanks.get(LottoRank.FOURTH_PRIZE) + "개\n" +
-                "5개 일치 (1500000원)- " + lottoRanks.get(LottoRank.THIRD_PRIZE) + "개\n" +
-                "5개 일치, 보너스 볼 일치(30000000원) - " + lottoRanks.get(LottoRank.SECOND_PRIZE) + "개\n" +
-                "6개 일치 (2000000000)- " + lottoRanks.get(LottoRank.FIRST_PRIZE) + "개\n";
+        StringBuilder message = new StringBuilder("당첨 통계\n" + "---------\n");
+        lottoRanks.keySet()
+                .forEach(lottoRank -> message.append(String.format(lottoRank.getPrintMessage(), lottoRanks.get(lottoRank))));
+        return message.toString();
     }
+
 }

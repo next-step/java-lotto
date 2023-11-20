@@ -5,12 +5,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum LottoRank {
-    FIRST_PRIZE(6, 2_000_000_000),
-    SECOND_PRIZE(5,3_000_000),
-    THIRD_PRIZE(5, 1_500_000),
-    FOURTH_PRIZE(4, 50_000),
-    FIFTH_PRIZE(3, 5_000),
-    NO_PRIZE(0, 0);
+    NO_PRIZE(0, 0, ""),
+    FIFTH_PRIZE(3, 5_000, "3개 일치 (5000원)- %s개\n"),
+    FOURTH_PRIZE(4, 50_000, "4개 일치 (50000원)- %s개\n"),
+    THIRD_PRIZE(5, 1_500_000, "5개 일치 (1500000원)- %s개\n"),
+    SECOND_PRIZE(5,3_000_000, "5개 일치, 보너스 볼 일치(30000000원) - %s개\n"),
+    FIRST_PRIZE(6, 2_000_000_000, "6개 일치 (2000000000)- %s개\n");
 
     private static final int MAX_NO_PRIZE_NUMBER = 2;
     private static final int MATCH_COUNT_SECOND_OR_THIRD = 5;
@@ -24,10 +24,12 @@ public enum LottoRank {
 
     private final int matchCount;
     private final long prizeMoney;
+    private final String printMessage;
 
-    LottoRank(int matchCount, long prizeMoney) {
+    LottoRank(int matchCount, long prizeMoney, String printMessage) {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
+        this.printMessage = printMessage;
     }
 
     public static LottoRank findLottoRankByMatchCountAndMatchBonus(int matchCount, boolean matchBonus) {
@@ -53,5 +55,9 @@ public enum LottoRank {
 
     public long getPrizeMoney() {
         return prizeMoney;
+    }
+
+    public String getPrintMessage() {
+        return printMessage;
     }
 }
