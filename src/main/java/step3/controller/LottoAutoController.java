@@ -1,13 +1,12 @@
 package step3.controller;
 
-import step3.model.Lotto;
-import step3.model.LottoMake;
-import step3.model.LottoWinner;
-import step3.model.WinnerBoard;
+import step3.enumeration.LottoRank;
+import step3.model.*;
 import step3.view.InputView;
 import step3.view.OutputView;
 
 import java.util.List;
+import java.util.Map;
 
 public class LottoAutoController {
 
@@ -24,11 +23,11 @@ public class LottoAutoController {
         String lastWinNumbers = inputView.putLastWinNumbers();
         int bonusNumber = inputView.bonusNumberInput();
 
-        LottoWinner lottoWinner = new LottoWinner(lottos, lastWinNumbers, new WinnerBoard(), bonusNumber);
+        LottoWinner lottoWinner = new LottoWinner(lottos, new LottoWinNumbers(lastWinNumbers), bonusNumber);
 
-        WinnerBoard winnerScore = lottoWinner.getWinnerNumberMatchCount();
+        Map<LottoRank, Integer> winnerScore = lottoWinner.getWinnerNumberMatchCount();
         outputView.viewLottoRating(winnerScore);
 
-        outputView.viewRating(lottoWinner.getRating(payPrice));
+        outputView.viewRating(lottoWinner.getRating(payPrice, winnerScore));
     }
 }

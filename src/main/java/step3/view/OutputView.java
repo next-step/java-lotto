@@ -2,11 +2,10 @@ package step3.view;
 
 import step3.enumeration.LottoRank;
 import step3.model.Lotto;
-import step3.model.WinnerBoard;
 import step3.utils.CalculateUtils;
-import step3.utils.NumberUtils;
 
 import java.util.List;
+import java.util.Map;
 
 import static step3.enumeration.LottoRank.*;
 
@@ -20,14 +19,14 @@ public class OutputView {
         lottos.forEach(lotto -> System.out.println(lotto.toString()));
     }
 
-    public void viewLottoRating(WinnerBoard winnerBoard) {
+    public void viewLottoRating(Map<LottoRank, Integer> winnerBoard) {
         System.out.println("당첨 통계\n" + "---------");
 
-        System.out.println(FIRST.getMatch() + "개 일치 (" + LottoRank.getPriceByName(FIRST.name()) + "원) - " + NumberUtils.getSafeNumber(winnerBoard.winnerBoard.get(FIRST.name())) + "개");
-        System.out.println(SECOND.getMatch() + "개 일치, 보너스 볼 일치 (" + SECOND.getPrice() + "원) - " + NumberUtils.getSafeNumber(winnerBoard.winnerBoard.get(SECOND.name())) + "개");
-        System.out.println(THIRD.getMatch() + "개 일치 (" + LottoRank.getPriceByName(THIRD.name()) + "원) - " + NumberUtils.getSafeNumber(winnerBoard.winnerBoard.get(THIRD.name())) + "개");
-        System.out.println(FOURTH.getMatch() + "개 일치 (" + LottoRank.getPriceByName(FIRST.name()) + "원) - " + NumberUtils.getSafeNumber(winnerBoard.winnerBoard.get(FOURTH.name())) + "개");
-        System.out.println(FIFTH.getMatch() + "개 일치 (" + LottoRank.getPriceByName(FIRST.name()) + "원) - " + NumberUtils.getSafeNumber(winnerBoard.winnerBoard.get(FIFTH.name())) + "개");
+        System.out.println(FIRST.getMatch() + "개 일치 (" + LottoRank.getPriceByName(FIRST) + "원) - " + winnerBoard.get(FIRST) + "개");
+        System.out.println(SECOND.getMatch() + "개 일치, 보너스 볼 일치 (" + SECOND.getPrice() + "원) - " + winnerBoard.get(SECOND) + "개");
+        System.out.println(THIRD.getMatch() + "개 일치 (" + LottoRank.getPriceByName(THIRD) + "원) - " + winnerBoard.get(THIRD) + "개");
+        System.out.println(FOURTH.getMatch() + "개 일치 (" + LottoRank.getPriceByName(FIRST) + "원) - " + winnerBoard.get(FOURTH) + "개");
+        System.out.println(FIFTH.getMatch() + "개 일치 (" + LottoRank.getPriceByName(FIRST) + "원) - " + winnerBoard.get(FIFTH) + "개");
     }
 
     public void viewRating(Double rating) {
