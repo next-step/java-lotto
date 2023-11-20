@@ -37,12 +37,12 @@ public class LottoNumberTest {
         // given
         int input = 5;
         LottoNumber origin = LottoNumber.of(input);
-        LottoNumber target = LottoNumber.of(input);
 
         // when
-        boolean isEqual = origin.equals(target);
+        LottoNumber target = LottoNumber.of(input);
 
         // then
-        assertThat(isEqual).isTrue();
+        assertThat(origin).isEqualTo(target);
+        assertThat(origin).isSameAs(target);
     }
 }

@@ -2,13 +2,14 @@ package lotto.domain.lotto.wrapper;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final int MIN = 1;
-    private static final int MAX = 45;
+    public static final int MIN = 1;
+    public static final int MAX = 45;
     private static final List<LottoNumber> numbers = IntStream.rangeClosed(MIN, MAX)
         .mapToObj(LottoNumber::new)
         .collect(Collectors.toUnmodifiableList());
@@ -16,13 +17,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     private LottoNumber(int number) {
+        validateRange(number);
+
         this.number = number;
     }
 
     public static LottoNumber of(int number) {
-        validateRange(number);
-
-        return numbers.get(number - MIN);
+        return Optional.ofNullable(numbers.get(number - MIN))
+            .orElseThrow(() -> new IllegalArgumentException(String.format("숫자의 범위는 %d ~ %d입니다.", MIN, MAX)));
     }
 
     private static void validateRange(int number) {

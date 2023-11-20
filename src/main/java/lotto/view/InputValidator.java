@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class InputValidator {
+import static lotto.domain.lotto.wrapper.LottoNumber.*;
 
-    public static final int MIN = 1;
-    public static final int MAX = 45;
+public class InputValidator {
 
     public void validatePurchaseMoney(String purchase, int lottoPrice) {
         long purchaseMoney = validateParseLong(purchase);
