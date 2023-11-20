@@ -22,7 +22,7 @@ public class LottoResultTest {
         Lotto lotto2 = new Lotto(new ArrayList(Arrays.asList(6, 7, 8, 9, 10, 11)));
         lottos.add(lotto1);
         lottos.add(lotto2);
-        LottoResult lottoResult = LottoResult.result(money, lottos, lastLotto);
+        LottoResult lottoResult = LottoResult.result(money, lottos, lastLotto, 11);
         assertThat(lottoResult.getRateOfReturn()).isEqualTo(1.5);
     }
 }

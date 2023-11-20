@@ -13,16 +13,15 @@ public class LottoInputValueTest {
     @Test
     @DisplayName("로또 보너스 넘버 숫자 변환")
     void convertBonusNumber_로또보너스숫자변환() {
-
-        LottoInputValue lottoBonusNumber = new LottoInputValue("4");
-        assertThat(lottoBonusNumber.convertLottoBonusNumbers()).isEqualTo(4);
-
+        LottoInputValue lottoValue = new LottoInputValue("1, 2, 3, 4, 5, 6");
+        Set<Integer> lastLottoNumber = lottoValue.convertLastLottoNumbers();
+        LottoInputValue lottoBonusNumber = new LottoInputValue("7");
+        assertThat(lottoBonusNumber.convertLottoBonusNumbers(lastLottoNumber)).isEqualTo(7);
     }
 
     @Test
     @DisplayName("지난 주 당첨 번호")
     void convertLastLottoNumbers_지난주당첨번호벼환() {
-
         LottoInputValue lottoInputValue = new LottoInputValue("1, 2, 3, 4, 5, 6");
         Set<Integer> lastLotto = lottoInputValue.convertLastLottoNumbers();
         assertThat(lastLotto.size()).isEqualTo(6);

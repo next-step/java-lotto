@@ -6,6 +6,7 @@ import lottoModel.LottoInputValue;
 import lottoModel.LottoResult;
 import lottoView.InputView;
 import lottoView.ResultView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -24,9 +25,9 @@ public class LottoMain {
         Set<Integer> lastLotto = lottoInputValue.convertLastLottoNumbers();
 
         LottoInputValue lottoInputBonusNumber = InputView.inputLottoBonusNumber();
-        int lottoBonusNumber = lottoInputBonusNumber.convertLottoBonusNumbers();
+        int lottoBonusNumber = lottoInputBonusNumber.convertLottoBonusNumbers(lastLotto);
 
-        LottoResult lottoResult = LottoResult.result(money, lottos, new ArrayList<>(lastLotto));
+        LottoResult lottoResult = LottoResult.result(money, lottos, new ArrayList<>(lastLotto), lottoBonusNumber);
         ResultView.printLottoResult(lottoResult);
     }
 

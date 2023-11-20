@@ -15,10 +15,11 @@ public class LottoInputValue {
         this.text = text;
     }
 
-    public int convertLottoBonusNumbers() {
-        int number = convertNum(this.text);
-        checkValid(number);
-        return number;
+    public int convertLottoBonusNumbers(Set<Integer> lastLotto) {
+        int bonusNumber = convertNum(this.text);
+        checkValid(bonusNumber);
+        checkBonus(bonusNumber, lastLotto);
+        return bonusNumber;
     }
 
     public Set<Integer> convertLastLottoNumbers() {
@@ -51,6 +52,12 @@ public class LottoInputValue {
     private static void checkValid(int number) {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException("로또 범위에 속한 숫자가 아닙니다.");
+        }
+    }
+
+    private static void checkBonus(int bonusNumber, Set<Integer> lastLotto) {
+        if (lastLotto.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨번호에서 제외된 숫자여야 함.");
         }
     }
 
