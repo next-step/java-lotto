@@ -34,7 +34,7 @@ public class LottoTest {
     void lottoWinnerTest(String rank, List<Integer> lottoNumbers, List<Integer> winNumbers, int bonus) {
         Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
 
-        String rankName = lotto.getLottoWinner(winNumbers, bonus);
+        String rankName = lotto.getNumbers().getLottoRank(winNumbers, bonus);
         assertThat(rankName).isEqualTo(rank);
     }
 

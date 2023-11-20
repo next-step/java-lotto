@@ -1,11 +1,6 @@
 package step3.model;
 
-import step3.enumeration.LottoRank;
-
 import java.util.Arrays;
-import java.util.List;
-
-import static step3.enumeration.LottoRank.*;
 
 public class Lotto {
 
@@ -15,16 +10,8 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public String getLottoWinner(List<Integer> winNumbers, int bonusNumber) {
-        int count = (int) winNumbers.stream()
-                .filter(this.numbers.getNumbers()::contains)
-                .count();
-
-        if (SECOND.getMatch() == count && this.numbers.getNumbers().contains(bonusNumber)) {
-            return SECOND.name();
-        }
-
-        return LottoRank.getName(count);
+    public LottoNumbers getNumbers() {
+        return this.numbers;
     }
 
     @Override

@@ -34,7 +34,7 @@ public class LottoWinner {
 
     public WinnerBoard getWinnerNumberMatchCount() {
         for (Lotto lotto : this.lottos) {
-            String rankName = lotto.getLottoWinner(this.winNumbers, this.bonusNumber);
+            String rankName = lotto.getNumbers().getLottoRank(this.winNumbers, this.bonusNumber);
             this.winnerBoard.winnerBoard.put(rankName, winnerBoard.winnerBoard.get(rankName) + 1);
         }
 
