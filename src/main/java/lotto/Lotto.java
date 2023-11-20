@@ -17,31 +17,23 @@ public class Lotto {
         this.ticket = anyNumbers.stream().map(LottoNumber::from).collect(Collectors.toList());
     }
 
-    private void validation(List<Integer> anyNumbers) {
-        Set<Integer> temp = new HashSet<>();
-        List<Integer> duplicated = anyNumbers.stream().filter(i -> !temp.add(i))
-            .collect(Collectors.toList());
-        if (!duplicated.isEmpty()) {
-            throw new IllegalArgumentException(duplicated + " 중복된 숫자는 만들 수 없습니다.");
-        }
-    }
-
     public static Lotto from(List<Integer> anyNumbers) {
         return new Lotto(anyNumbers);
     }
 
+    private void validation(List<Integer> anyNumbers) {
+        Set<Integer> temp = new HashSet<>(anyNumbers);
+        if (temp.size() != anyNumbers.size()) {
+            List<Integer> duplicated = anyNumbers.stream().filter(i -> !temp.add(i))
+                .collect(Collectors.toList());
+            throw new IllegalArgumentException(duplicated + " 중복된 숫자는 만들 수 없습니다.");
+        }
+    }
 
     public int matchCount(Lotto lotto) {
         List<LottoNumber> difference = new ArrayList<>(this.ticket);
         difference.removeAll(lotto.ticket);
         return MAX_TICKET_NUMBERS - difference.size();
-    }
-
-    @Override
-    public String toString() {
-        return "Lotto{" +
-            "ticket=" + ticket.toString() +
-            '}';
     }
 
     public String lottoNumbers() {
@@ -53,5 +45,12 @@ public class Lotto {
         int lastIndexOf = stringBuilder.lastIndexOf(",");
         stringBuilder.replace(lastIndexOf, lastIndexOf + 1, "]");
         return stringBuilder.toString();
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+            "ticket=" + ticket.toString() +
+            '}';
     }
 }
