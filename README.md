@@ -23,7 +23,7 @@
 1. merge를 완료했다는 통보를 받으면 브랜치 변경 및 작업 브랜치 삭제(option)한다.
   : git checkout 본인_아이디
 2. 통합(merge)한 next-step 저장소와 동기화하기 위해 next-step 저장소 추가(최초 한번만)
-  : git remote add upstream https://github.com/next-step/java-lotto.git
+  : git remote add upstream https://github.com/next-step/java-lottoModel.git
 3. next-step 저장소에서 자기 브랜치 가져오기(또는 갱신하기)
   :git fetch upstream taegoon 
 4. NextStep 원격 저장소 로컬 동기화
@@ -56,3 +56,14 @@
 - [x] 한 메서드에 오직 한 단계의 들여쓰기만 한다
 - [x] else 예약어를 쓰지 않는다.
 - [x] 입력 값 포장하는 Class 생성
+
+# 3단계 - 로또(2등)
+- [ ] 2등을 위해 추가 번호를 하나 더 추첨한다.
+- [ ] 당첨 통계에 2등도 추가해야 한다.
+- [ ] 모든 기능을 TDD로 구현해 단위 테스트가 존재해야 한다. 단, UI(System.out, System.in) 로직은 제외
+- [ ] java enum을 적용해 프로그래밍을 구현한다.
+- [ ] 규칙 8: 일급 콜렉션을 쓴다.
+- [ ] indent(인덴트, 들여쓰기) depth를 2를 넘지 않도록 구현한다. 1까지만 허용한다.
+- [ ] 함수(또는 메소드)의 길이가 15라인을 넘어가지 않도록 구현한다.
+- [ ] 자바 코드 컨벤션을 지키면서 프로그래밍한다.
+- [ ] else 예약어를 쓰지 않는다.

@@ -1,8 +1,5 @@
-package lotto;
+package lottoModel;
 
-import lottoController.LottoDomain;
-import lottoModel.Lotto;
-import lottoModel.LottoInputValue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

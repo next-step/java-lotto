@@ -1,4 +1,4 @@
-package lotto;
+package lottoController;
 
 import lottoModel.Lotto;
 import lottoController.LottoDomain;

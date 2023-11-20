@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class LottoInputValue {
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_MAX_NUMBER = 45;
     private String text ;
 
     public LottoInputValue(String text) {
@@ -38,7 +40,7 @@ public class LottoInputValue {
     }
 
     private static void checkValid(int number) {
-        if (number < 1 || number > 45) {
+        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException("로또 범위에 속한 숫자가 아닙니다.");
         }
     }
