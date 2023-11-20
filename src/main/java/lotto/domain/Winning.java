@@ -5,11 +5,11 @@ import lotto.dto.WinningInfoDTO;
 import java.util.Arrays;
 
 public enum Winning {
-    FIRST(6, 0, 2000000000),
-    SECOND(5, 1, 30000000),
-    THIRD(5, 0, 1500000),
-    FOURTH(4, 0, 50000),
-    FIFTH(3, 0, 5000);
+    FIRST(6, 0, 2_000_000_000),
+    SECOND(5, 1, 30_000_000),
+    THIRD(5, 0, 1_500_000),
+    FOURTH(4, 0, 50_000),
+    FIFTH(3, 0, 5_000);
 
     private int correctCount;
     private int bonusCorrectCount;

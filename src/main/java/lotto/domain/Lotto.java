@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    public static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1_000;
     private static final int START_NUMBER = 1;
     private static final int END_NUMBER = 45;
 

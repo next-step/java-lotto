@@ -33,7 +33,7 @@ class LottosTest {
     @DisplayName("가격만큼의 로또를 구매")
     @Test
     void 로또_구매() {
-        Lottos lottos = new Lottos(14000);
+        Lottos lottos = new Lottos(14_000);
         assertThat(lottos.size()).isEqualTo(14);
     }
 
@@ -41,7 +41,7 @@ class LottosTest {
     @Test
     void 총_당첨_금액() {
         assertThat(lottos.totalWinningAmount(new WinningNumbersDTO("1,2,3,4,5,6", "33")))
-                .isEqualTo(2033115000l);
+                .isEqualTo(2_033_115_000l);
     }
     @DisplayName("당첨금액/구매금액 값을 소숫점 2자리까지 표현한 값을 리턴")
     @Test
