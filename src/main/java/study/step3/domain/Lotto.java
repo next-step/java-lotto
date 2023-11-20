@@ -11,8 +11,6 @@ import static study.step3.domain.LottoGenerator.LOTTO_NUMBERS_SIZE;
 public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
-    private boolean isBonus = false;
-    private int hitCount = 0;
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
@@ -33,25 +31,19 @@ public class Lotto {
     }
 
     public Rank matches(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
-        lottoNumbers.forEach(number -> calculate(number, winningNumbers, bonusNumber));
-        return Rank.valueOf(hitCount, isBonus);
+        return Rank.valueOf(hitCount(winningNumbers), isBonus(bonusNumber));
     }
 
-    private void calculate(LottoNumber number, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
-        winningNumbers(number, winningNumbers);
-        bonusNumber(number, bonusNumber);
+    private Integer hitCount(WinningNumbers winningNumbers) {
+        return lottoNumbers.stream()
+            .map(winningNumbers::containsNumber)
+            .map(v -> v.compareTo(false))
+            .reduce(0, Integer::sum);
     }
 
-    private void winningNumbers(LottoNumber number, WinningNumbers winningNumbers) {
-        if (winningNumbers.containsNumber(number)) {
-            hitCount += 1;
-        }
-    }
-
-    private void bonusNumber(LottoNumber number, LottoNumber bonusNumber) {
-        if (number.matchesBonusNumber(bonusNumber)) {
-            isBonus = true;
-        }
+    private boolean isBonus(LottoNumber bonusNumber) {
+        return lottoNumbers.stream()
+            .anyMatch(number -> number.matchesBonusNumber(bonusNumber));
     }
 
     public List<LottoNumber> lottoNumbers() {

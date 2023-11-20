@@ -16,14 +16,8 @@ public class WinningNumbers {
             .collect(Collectors.toList());
     }
 
-    public List<Integer> toIntegers() {
-        return winningNumbers.stream()
-            .map(LottoNumber::lottoNumber)
-            .collect(Collectors.toList());
-    }
-
     public boolean containsNumber(LottoNumber number) {
-        return toIntegers().contains(number.lottoNumber());
+        return winningNumbers.contains(number);
     }
 
 }

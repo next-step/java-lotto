@@ -25,7 +25,7 @@ public class ResultView {
     }
 
     private static String isBonus(Rank rank) {
-        if (rank.isBonus()) {
+        if (rank.isSecond()) {
             return ", 보너스 볼 일치";
         }
         return "";

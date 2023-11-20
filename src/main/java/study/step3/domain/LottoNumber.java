@@ -1,5 +1,7 @@
 package study.step3.domain;
 
+import java.util.Objects;
+
 import study.step3.domain.exception.LottoException;
 
 public class LottoNumber {
@@ -36,4 +38,20 @@ public class LottoNumber {
         return lottoNumber.toString();
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) object;
+        return Objects.equals(lottoNumber, that.lottoNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
+    }
 }
