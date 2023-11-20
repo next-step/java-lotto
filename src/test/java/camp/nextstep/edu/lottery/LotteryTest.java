@@ -1,4 +1,4 @@
-package camp.nextstep.edu.lotto;
+package camp.nextstep.edu.lottery;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -12,13 +12,13 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-public class LottoTest {
+public class LotteryTest {
 
     @Test
     @DisplayName("중복없는 1~45 사이의 6개 숫자가 들어오면 잘 만들어진다")
     void number_count_is_6() {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
-        assertDoesNotThrow(() -> new Lotto(numbers));
+        assertDoesNotThrow(() -> new Lottery(numbers));
     }
 
     @ParameterizedTest
@@ -27,7 +27,7 @@ public class LottoTest {
     void number_count_is_6(List<Integer> numbers) {
         assertThrows(
             IllegalArgumentException.class,
-            () -> new Lotto(numbers)
+            () -> new Lottery(numbers)
         );
     }
 
@@ -44,7 +44,7 @@ public class LottoTest {
     void numbers_not_null(List<Integer> numbers) {
         assertThrows(
             IllegalArgumentException.class,
-            () -> new Lotto(numbers)
+            () -> new Lottery(numbers)
         );
     }
 
@@ -54,7 +54,7 @@ public class LottoTest {
     void number_is_between_1_45(List<Integer> numbers) {
         assertThrows(
             IllegalArgumentException.class,
-            () -> new Lotto(numbers)
+            () -> new Lottery(numbers)
         );
     }
 
@@ -71,7 +71,7 @@ public class LottoTest {
         List<Integer> numbers = List.of(1, 1, 2, 3, 4, 5);
         assertThrows(
             IllegalArgumentException.class,
-            () -> new Lotto(numbers)
+            () -> new Lottery(numbers)
         );
     }
 }

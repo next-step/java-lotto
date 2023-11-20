@@ -1,15 +1,15 @@
-package camp.nextstep.edu.lotto;
+package camp.nextstep.edu.lottery;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 
-public class LottoGeneratorTest {
+public class LotteryGeneratrTest {
 
     @RepeatedTest(100)
     @DisplayName("로또를 정상적으로 잘 생성한다")
     void successfullyCreate() {
-        assertDoesNotThrow(() -> LottoGenerator.create());
+        assertDoesNotThrow(() -> LotteryGeneratr.create());
     }
 }

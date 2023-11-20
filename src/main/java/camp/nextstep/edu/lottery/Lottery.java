@@ -1,14 +1,14 @@
-package camp.nextstep.edu.lotto;
+package camp.nextstep.edu.lottery;
 
 import java.util.List;
 
-public class Lotto {
+public class Lottery {
 
     public static final int NUMBERS_COUNT = 6;
 
     private final List<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lottery(List<Integer> numbers) {
         if (!isValid(numbers)) {
             throw new IllegalArgumentException();
         }
