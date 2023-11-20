@@ -11,7 +11,8 @@ public class UserInterface {
     public static void main(String[] args) {
         int money = Parser.numberParsing(InputView.purchaseMoney());
         Lottos lottos = new Lottos(money);
-        if(lottos.size() == 0) {
+
+        if(lottos.isEmpty()) {
             ResultView.noGame();
             return;
         }

@@ -19,7 +19,7 @@ public class Parser {
         try {
             return Integer.parseInt(numberString);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자가 아닙니다", e);
+            throw new IllegalArgumentException("숫자가 아닙니다");
         }
     }
 

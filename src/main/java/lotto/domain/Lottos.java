@@ -47,6 +47,10 @@ public class Lottos {
         return this.lottos.size();
     }
 
+    public boolean isEmpty() {
+        return lottos.size() == 0;
+    }
+
     public int winningCorrectCount(WinningNumbersDTO winningNumbersDTO, Winning winning) {
         return (int) this.lottos.stream()
                 .filter(lotto -> Winning.hasMatchingCounts(lotto.winningInfo(winningNumbersDTO), winning))
