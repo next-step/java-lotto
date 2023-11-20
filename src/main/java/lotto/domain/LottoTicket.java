@@ -12,17 +12,21 @@ public class LottoTicket {
 
     public LottoTicket(int number) {
         this.lottoTicket = new ArrayList<>();
-        List<LottoNumber> numbers = IntStream.rangeClosed(1, 45)
-                .boxed()
-                .map(el -> new LottoNumber(el))
-                .collect(Collectors.toList());
+        List<LottoNumber> numbers = numberList();
         for (int i = 0; i < number; i++) {
             Collections.shuffle(numbers);
             lottoTicket.add(new Lotto(numbers.subList(0, 6)));
         }
     }
 
+    private static List<LottoNumber> numberList() {
+        return IntStream.rangeClosed(1, 45)
+                .boxed()
+                .map(el -> new LottoNumber(el))
+                .collect(Collectors.toList());
+    }
+
     public List<Lotto> getLottoTicket() {
-        return lottoTicket;
+        return Collections.unmodifiableList(lottoTicket);
     }
 }
