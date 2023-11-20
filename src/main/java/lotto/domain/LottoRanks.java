@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
 public class LottoRanks {
@@ -12,12 +11,12 @@ public class LottoRanks {
         this.ranks = lottos.findRanks(winLotto, bonus);
     }
 
-    public long findPrizeMoney() {
+    public Money findPrizeMoney() {
         Money money = new Money(0);
         for (LottoRank lottoRank : ranks.keySet()) {
             money = money.plus(lottoRank.sumPrize(ranks.get(lottoRank)));
         }
-        return money.find();
+        return money;
     }
 
     public Map<LottoRank, Integer> find() {

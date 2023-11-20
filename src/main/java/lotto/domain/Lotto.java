@@ -1,22 +1,15 @@
 package lotto.domain;
 
+import lotto.domain.strategy.NumberGeneration;
+
 import java.util.*;
 
 public class Lotto {
     public static final int SIZE = 6;
     private final List<LottoNumber> lotto;
 
-    public Lotto(List<Integer> list) {
-        this.lotto = validate(generateLotto(list));
-    }
-
-    private List<LottoNumber> generateLotto(List<Integer> list) {
-        List<LottoNumber> lottoList = new ArrayList<>();
-
-        for (Integer integer : list) {
-            lottoList.add(LottoNumber.valueOf(integer));
-        }
-        return lottoList;
+    public Lotto(NumberGeneration numberGeneration) {
+        this.lotto = validate(numberGeneration.generate());
     }
 
     private List<LottoNumber> validate(List<LottoNumber> list) {

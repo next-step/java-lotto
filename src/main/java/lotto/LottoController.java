@@ -1,6 +1,8 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.domain.strategy.AutoNumberGeneration;
+import lotto.domain.strategy.NumberGeneration;
 
 import java.util.List;
 
@@ -9,18 +11,17 @@ import static lotto.ui.ResultView.*;
 
 public class LottoController {
 
-    public static final NumberGeneration NUMBER_GENERATION = new RandomNumberGeneration();
+    public static final NumberGeneration AUTO_NUMBER_GENERATION = new AutoNumberGeneration(LottoNumberCache.values());
 
     public static void main(String[] args) {
 
-        int amount = inputPurchaseAmount();
-        int count = countByAmount(amount);
-        int manual = inputManualCount();
-        List<List<Integer>> manualList = inputManualList(manual);
+        Money amount = new Money(inputPurchaseAmount());
+        PurchaseQuantity allQuantity = new PurchaseQuantity(amount.calculateUnits());
+        PurchaseQuantity manualQuantity = new PurchaseQuantity(inputManualCount());
 
-        Lottos lottos = Lottos.generate(manualList, NUMBER_GENERATION,count);
+        Lottos lottos = Lottos.generate(inputManualList(manualQuantity), AUTO_NUMBER_GENERATION, allQuantity.diff(manualQuantity));
 
-        printLottoCount(count, manual);
+        printLottoCount(allQuantity, manualQuantity);
         printLottoBundle(lottos.find());
 
         Lotto winNumbers = new Lotto(inputWiningNumbers());
@@ -29,7 +30,7 @@ public class LottoController {
         LottoRanks lottoRanks = new LottoRanks(lottos, winNumbers, bonus);
 
         printMatchStats(lottoRanks.find());
-        printMatchResult(amount, lottoRanks.findPrizeMoney());
+        printMatchResult(lottoRanks.findPrizeMoney(), amount);
 
     }
 }

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.strategy.NumberGeneration;
+
 import java.util.*;
 
 public class Lottos {
@@ -10,24 +12,23 @@ public class Lottos {
     }
 
 
-    public static Lottos generate(List<List<Integer>> manualNumbers, NumberGeneration numberGeneration, int count) {
+    public static Lottos generate(List<NumberGeneration> manualNumbers, NumberGeneration numberGeneration, PurchaseQuantity randomQuantity) {
         List<Lotto> list = new ArrayList<>();
-        int randomCount = count - manualNumbers.size();
 
         manualGenerate(manualNumbers, list);
-        autoGenerate(numberGeneration, randomCount, list);
+        autoGenerate(numberGeneration, randomQuantity, list);
 
-       return new Lottos(list);
+        return new Lottos(list);
     }
 
-    private static void autoGenerate(NumberGeneration numberGeneration, int randomCount, List<Lotto> list) {
-        for (int i = 0; i < randomCount; i++) {
-            list.add(new Lotto(numberGeneration.generate()));
+    private static void autoGenerate(NumberGeneration numberGeneration, PurchaseQuantity randomQuantity, List<Lotto> list) {
+        for (int i = 0; i < randomQuantity.find(); i++) {
+            list.add(new Lotto(numberGeneration));
         }
     }
 
-    private static void manualGenerate(List<List<Integer>> manualNumbers, List<Lotto> list) {
-        for (List<Integer> manualNumber : manualNumbers) {
+    private static void manualGenerate(List<NumberGeneration> manualNumbers, List<Lotto> list) {
+        for (NumberGeneration manualNumber : manualNumbers) {
             list.add(new Lotto(manualNumber));
         }
     }

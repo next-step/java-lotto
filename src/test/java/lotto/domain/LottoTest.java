@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.strategy.ManualNumberGeneration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,14 +17,14 @@ public class LottoTest {
 
     @BeforeEach
     void create() {
-        lotto = new Lotto(new TestNumberGeneration().generate());
+        lotto = new Lotto(new ManualNumberGeneration(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @Test
     @DisplayName("당첨번호 중 맞춘 숫자 개수를 리턴")
     void 로또_당첨번호_count() {
         List<Integer> winList = new ArrayList<>(Arrays.asList(6, 5, 4, 10, 10, 10));
-        Lotto winLotto = new Lotto(Arrays.asList(6, 5, 4, 10, 11, 12));
+        Lotto winLotto = new Lotto(new ManualNumberGeneration(Arrays.asList(6, 5, 4, 10, 11, 12)));
         int count = lotto.countMath(winLotto);
 
         assertThat(count).isEqualTo(3);
