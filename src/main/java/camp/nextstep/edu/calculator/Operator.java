@@ -1,25 +1,28 @@
 package camp.nextstep.edu.calculator;
 
 import java.util.Map;
+import java.util.function.IntBinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum Operator {
-    PLUS("+"),
-    MINUS("-"),
-    MULTIPLY("*"),
-    DIVIDE("/");
+    PLUS("+", (x, y) -> x + y),
+    MINUS("-", (x, y) -> x - y),
+    MULTIPLY("*", (x, y) -> x * y),
+    DIVIDE("/", (x, y) -> x / y);
 
     private static final Map<String, Operator> symbolToOperator
         = Stream.of(values()).collect(Collectors.toMap(Operator::symbol, e -> e));
 
     private final String symbol;
+    private final IntBinaryOperator operationFunction;
 
-    Operator(String symbol) {
+    Operator(String symbol, IntBinaryOperator operationFunction) {
         this.symbol = symbol;
+        this.operationFunction = operationFunction;
     }
 
-    static Operator from(String symbol) {
+    static Operator fromSymbol(String symbol) {
         if (!symbolToOperator.containsKey(symbol)) {
             throw new IllegalArgumentException("지원하지 않는 잘못된 연산자입니다.");
         }
@@ -27,16 +30,7 @@ public enum Operator {
     }
 
     int operate(int left, int right) {
-        if ("+".equals(this.symbol)) {
-            return left + right;
-        }
-        if ("-".equals(this.symbol)) {
-            return left - right;
-        }
-        if ("*".equals(this.symbol)) {
-            return left * right;
-        }
-        return left / right;
+        return operationFunction.applyAsInt(left, right);
     }
 
     private String symbol() {

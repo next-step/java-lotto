@@ -29,7 +29,7 @@ public class StringCalculator {
     }
 
     private static int calculate(String strLeft, String strOperator, String strRight) {
-        Operator operator = Operator.from(strOperator);
+        Operator operator = Operator.fromSymbol(strOperator);
         int left = Integer.parseInt(strLeft);
         int right = Integer.parseInt(strRight);
 
