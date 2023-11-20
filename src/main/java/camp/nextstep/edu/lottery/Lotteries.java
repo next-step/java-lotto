@@ -17,7 +17,37 @@ public class Lotteries {
         }
     }
 
+    public Lotteries(List<Lottery> lotteries) {
+        this.lotteries = lotteries;
+    }
+
     public int count() {
         return lotteries.size();
+    }
+
+    public int count1stPrize(Lottery winningLottery) {
+        final int FIRST_PRIZE_MATCHING_COUNT = 6;
+        return countSameMatchingCount(winningLottery, FIRST_PRIZE_MATCHING_COUNT);
+    }
+
+    public int count3rdPrize(Lottery winningLottery) {
+        final int THIRD_PRIZE_MATCHING_COUNT = 5;
+        return countSameMatchingCount(winningLottery, THIRD_PRIZE_MATCHING_COUNT);
+    }
+
+    public int count4thPrize(Lottery winningLottery) {
+        final int FOURTH_PRIZE_MATCHING_COUNT = 4;
+        return countSameMatchingCount(winningLottery, FOURTH_PRIZE_MATCHING_COUNT);
+    }
+
+    public int count5thPrize(Lottery winningLottery) {
+        final int FIFTH_PRIZE_MATCHING_COUNT = 3;
+        return countSameMatchingCount(winningLottery, FIFTH_PRIZE_MATCHING_COUNT);
+    }
+
+    private int countSameMatchingCount(Lottery winningLottery, int targetCount) {
+        return (int) lotteries.stream()
+            .filter(lottery -> winningLottery.calcMatchingCount(lottery) == targetCount)
+            .count();
     }
 }
