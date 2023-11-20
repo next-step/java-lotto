@@ -28,7 +28,7 @@ public enum Operation {
         }
     };
 
-    private static Map<String, Operation> OPERATION_MAP = new HashMap<>();
+    private static final Map<String, Operation> OPERATION_MAP = new HashMap<>();
     private String operation;
 
     Operation(String operation) {
@@ -42,6 +42,9 @@ public enum Operation {
     }
 
     public static Operation getOperationByElement(String element) {
+        if (OPERATION_MAP.get(element) == null) {
+            throw new IllegalArgumentException("Check input operation");
+        }
         return OPERATION_MAP.get(element);
     }
 
