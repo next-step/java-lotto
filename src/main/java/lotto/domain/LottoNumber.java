@@ -1,8 +1,8 @@
 package lotto.domain;
 
 public class LottoNumber {
-    private final Integer START_NUMBER = 1;
-    private final Integer END_NUMBER = 45;
+    public static final int START_NUMBER = 1;
+    public static final int END_NUMBER = 45;
     private int number;
 
     public LottoNumber() {}
@@ -25,14 +25,6 @@ public class LottoNumber {
             return 1;
         }
         return 0;
-    }
-
-    public Integer getStartNumber() {
-        return START_NUMBER;
-    }
-
-    public Integer getEndNumber() {
-        return END_NUMBER;
     }
 
     public int getLottoNumber() { return number; }

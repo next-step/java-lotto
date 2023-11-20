@@ -11,7 +11,7 @@ public class LottoGenerator {
     private static LottoNumber lottoNumber = new LottoNumber();
 
     static {
-        for (int number = lottoNumber.getStartNumber(); number <= lottoNumber.getEndNumber(); number++) {
+        for (int number = lottoNumber.START_NUMBER; number <= lottoNumber.END_NUMBER; number++) {
             DUMMY_LOTTO_NUMBERS.add(number);
         }
     }
