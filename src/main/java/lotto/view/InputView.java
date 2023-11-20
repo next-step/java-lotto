@@ -27,7 +27,8 @@ public class InputView {
     public List<Integer> lastWeakLottoInit() {
         List<Integer> integerList = new ArrayList<>();
         sout.print(LAST_WEEK_LOTTO_INIT_MESSAGE);
-        String string = scanner.next();
+        scanner.skip("\n");
+        String string = scanner.nextLine().replaceAll(" ", "");
         for (String s : string.split(",")) {
             integerList.add(Integer.parseInt(s));
         }
