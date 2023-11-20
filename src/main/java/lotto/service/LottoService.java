@@ -8,23 +8,22 @@ import java.util.List;
 public class LottoService {
 
     private final List<Lotto> lottoList;
-    private MatchPointRank matchPointRank;
+    private final MatchPointRank matchPointRank;
 
-    public LottoService(List<Lotto> lottoList) {
+    public LottoService(List<Lotto> lottoList, MatchPointRank matchPointRank) {
         this.lottoList = lottoList;
-        matchPointRank = null;
+        this.matchPointRank = matchPointRank;
     }
 
     public void playLotto(String[] winningNum) {
-        this.compareWinningNumber(winningNum);
-        this.matchPointRank = new MatchPointRank();
+        this.compareLottoWinningNumber(winningNum);
 
         for (Lotto lotto : lottoList) {
             matchPointRank.compareMatchPoint(lotto);
         }
     }
 
-    private void compareWinningNumber(String[] winningNum) {
+    private void compareLottoWinningNumber(String[] winningNum) {
         for (Lotto lotto : this.lottoList) {
             lotto.compareWinningNumber(winningNum);
         }

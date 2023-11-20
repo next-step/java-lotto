@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.MatchPointRank;
 import lotto.service.LottoService;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class LottoMain {
     public static void main(String[] args) {
         int money = inputMoney();
 
-        LottoService lottoService = new LottoService(generateLottoList(money));
+        LottoService lottoService = new LottoService(generateLottoList(money), new MatchPointRank());
         printLottoList(lottoService.getLottoList());
 
         lottoService.playLotto(split(inputWinningNumbers()));

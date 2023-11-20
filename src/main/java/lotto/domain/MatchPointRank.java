@@ -16,16 +16,9 @@ public class MatchPointRank {
     }
 
     public void compareMatchPoint(Lotto lotto) {
-        for (MatchPoint mp : MatchPoint.values()) {
-            addMatchPoint(lotto, mp);
-        }
-    }
-
-    private void addMatchPoint(Lotto lotto, MatchPoint mp) {
-        if (mp.comparePoint(lotto.getMatchPoint())) {
-            int sameNum = this.matchPointMap.get(mp);
-            this.matchPointMap.put(mp, sameNum + 1);
-        }
+        MatchPoint mp = MatchPoint.findMatchPoint(lotto.getMatchPoint());
+        int sameNum = this.matchPointMap.get(mp);
+        this.matchPointMap.put(mp, sameNum + 1);
     }
 
     public Set<MatchPoint> getMatchPointSet() {

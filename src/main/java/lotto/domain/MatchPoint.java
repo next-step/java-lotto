@@ -1,11 +1,14 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum MatchPoint {
 
     THIRD(3, 5000),
     FOURTH(4, 50000),
     FIFTH(5, 1500000),
-    SIXTH(6, 2000000000);
+    SIXTH(6, 2000000000),
+    NO_MATCH(0, 0);
 
     private final int match;
     private final long winningAmt;
@@ -15,19 +18,19 @@ public enum MatchPoint {
         this.winningAmt = winningAmt;
     }
 
-    public int getMatch() {
-        return this.match;
-    }
-
     public long getWinningAmt() {
         return this.winningAmt;
     }
 
-    public boolean comparePoint(int matchPoint) {
-        if (this.match == matchPoint) {
-            return true;
-        }
-        return false;
+    private boolean isSameMatchPont(int matchPoint) {
+        return this.match == matchPoint;
+    }
+
+    public static MatchPoint findMatchPoint(int matchingPoint) {
+        return Arrays.stream(MatchPoint.values())
+                .filter(matchPoint -> matchPoint.isSameMatchPont(matchingPoint))
+                .findFirst()
+                .orElse(NO_MATCH);
     }
 
     @Override
