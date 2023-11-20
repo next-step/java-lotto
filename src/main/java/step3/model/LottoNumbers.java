@@ -8,16 +8,33 @@ import static step3.enumeration.LottoRank.SECOND;
 
 public class LottoNumbers {
 
-    public static final int MAX_LOTTO_SIZE = 6;
+    private static final int MAX_LOTTO_SIZE = 6;
     private final List<Integer> numbers;
 
+    public LottoNumbers(LottoNumber lottoNumber) {
+        List<Integer> shuffled = lottoNumber.getShufflingNumbers();
+        validate(shuffled);
+        this.numbers = shuffled;
+    }
+
     public LottoNumbers(List<Integer> numbers) {
-        validate(numbers);
         this.numbers = numbers;
     }
 
     public List<Integer> getNumbers() {
         return this.numbers;
+    }
+
+    public LottoRank getLottoRank(List<Integer> winNumbers, int bonusNumber) {
+        int count = (int) winNumbers.stream()
+                .filter(this.numbers::contains)
+                .count();
+
+        if (SECOND.getMatch() == count && this.numbers.contains(bonusNumber)) {
+            return SECOND;
+        }
+
+        return LottoRank.getRank(count);
     }
 
     private void validate(List<Integer> numbers) {
@@ -28,17 +45,5 @@ public class LottoNumbers {
         if (numbers.size() != MAX_LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개가 되어야 합니다.");
         }
-    }
-
-    public String getLottoRank(List<Integer> winNumbers, int bonusNumber) {
-        int count = (int) winNumbers.stream()
-                .filter(this.numbers::contains)
-                .count();
-
-        if (SECOND.getMatch() == count && this.numbers.contains(bonusNumber)) {
-            return SECOND.name();
-        }
-
-        return LottoRank.getName(count);
     }
 }
