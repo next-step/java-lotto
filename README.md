@@ -49,8 +49,8 @@
 
 ### 기술 요구사항
 [x] else 금물, switch 금물
-[x] depth 1 단계
-[] 메소드는 최대 15라인
+[] depth 1 단계
+[x] 메소드는 최대 15라인
 [x] 예상외의 값 입력시 예외처리
 [x] 도메인은 무조건 테스트
 
@@ -101,3 +101,7 @@
 - view
   InputView.java
   ResultView.java
+
+### 리팩토링 사항
+- StatisticsReport
+  1. totalPrize() [2 depth 위배]
