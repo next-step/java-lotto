@@ -2,11 +2,19 @@ package lotto;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class WinningLottos {
 
     private Map<Rank, Integer> winningLottos = new HashMap<>();
     private Integer totalRewardPrice = 0;
+
+    public WinningLottos() {
+    }
+
+    public WinningLottos(Map<Rank, Integer> winningLottos) {
+        this.winningLottos = winningLottos;
+    }
 
     public Integer countLottoByWinningNumber(int count) {
         return winningLottos.getOrDefault(Rank.convertRanking(count), 0);
@@ -32,4 +40,17 @@ public class WinningLottos {
         return totalRewardPrice;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WinningLottos that = (WinningLottos) o;
+        return Objects.equals(winningLottos, that.winningLottos) && Objects.equals(totalRewardPrice, that.totalRewardPrice);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winningLottos, totalRewardPrice);
+    }
 }
