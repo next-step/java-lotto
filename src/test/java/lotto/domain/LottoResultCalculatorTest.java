@@ -29,7 +29,7 @@ class LottoResultCalculatorTest {
         Lotto winningNumbers = new Lotto("1, 2, 3, 7, 8, 9");
 
         // when
-        Map<String, Integer> results = calculator.calculateResults(lottos, winningNumbers);
+        Map<String, Integer> results = calculator.calculateResults(lottos, winningNumbers, null);
 
         // then
         assertThat(results.getOrDefault("threeMatch", 0)).isEqualTo(2);

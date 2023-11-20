@@ -72,4 +72,9 @@ public class Lotto {
 
         return lottos;
     }
+
+    public boolean matchBonusNumber(LottoNumber bonusNumber) {
+
+        return values.contains(bonusNumber);
+    }
 }

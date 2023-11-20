@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoAmount;
-import lotto.domain.LottoResultCalculator;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -34,7 +31,10 @@ public class LottoController {
         outputView.askWinningLotto();
         Lotto winningLotto = inputView.inputWinningLotto();
 
-        Map<String, Integer> results = lottoResultCalculator.calculateResults(lottos, winningLotto);
+        outputView.askBonusLotto();
+        LottoNumber bonusNumber = inputView.inputBonusLotto();
+
+        Map<String, Integer> results = lottoResultCalculator.calculateResults(lottos, winningLotto, bonusNumber);
         double profit = lottoResultCalculator.calculateProfit(results, lottoCount);
         outputView.printResults(results, profit);
     }

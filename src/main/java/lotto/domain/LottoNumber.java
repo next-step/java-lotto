@@ -15,6 +15,17 @@ public class LottoNumber {
         this.value = value;
     }
 
+    public LottoNumber(String value) {
+        int number;
+        try {
+            number = Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("로또 번호는 숫자만 가능합니다.");
+        }
+
+        this.value = number;
+    }
+
     private static void validateLottoRange(int value) {
         if (value < LOTTO_MIN_NUMBER || value > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이의 숫자만 가능합니다.");

@@ -1,6 +1,7 @@
 package lotto.domain.strategy;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 public class FourMatchStrategy implements WinningStrategy{
 
@@ -9,7 +10,7 @@ public class FourMatchStrategy implements WinningStrategy{
     private static final int WINNING_MONEY = 50_000;
 
     @Override
-    public boolean matches(Lotto lotto, Lotto winningNumbers) {
+    public boolean matches(Lotto lotto, Lotto winningNumbers, LottoNumber bonusNumber) {
         return lotto.calculateMatchCount(winningNumbers) == FOUR_MATCH;
     }
 
