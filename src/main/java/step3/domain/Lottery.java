@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import step3.util.LotteryUtil;
-
 public class Lottery {
+
+    public static final int WINNING_STREAK = 6;
 
     private final List<Integer> numbers;
 
@@ -24,7 +24,7 @@ public class Lottery {
     }
 
     private void validateNumbers(List<Integer> numbers) {
-        if (LotteryUtil.WINNING_STREAK != numbers.size()) {
+        if (WINNING_STREAK != numbers.size()) {
             throw new IllegalArgumentException("잘 못 생성된 로또 - " + numbers.size());
         }
     }

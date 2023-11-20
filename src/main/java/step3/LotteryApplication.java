@@ -11,7 +11,7 @@ import step3.util.StatisticsUtil;
 import step3.view.InputView;
 import step3.view.ResultView;
 
-public class LotteryAutoNumberGenerator {
+public class LotteryApplication {
 
     public static void main(String[] args) {
         int money = InputView.start();
@@ -27,7 +27,7 @@ public class LotteryAutoNumberGenerator {
         Winning winning = Winning.from(InputView.getWinNumber());
         winning.setBonusWinNumber(InputView.getWinNumber());
 
-        Map<String, Integer> summarize = StatisticsUtil.summarize(winning.getPirzeList(lotteries));
+        Map<String, Integer> summarize = StatisticsUtil.summarize(winning.getPrizes(lotteries));
         long rewards = StatisticsUtil.getRewards(summarize);
         BigDecimal roi = StatisticsUtil.getRoi(money, rewards);
 

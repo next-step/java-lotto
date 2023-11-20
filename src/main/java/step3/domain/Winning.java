@@ -13,6 +13,8 @@ public class Winning {
     private int bonusWinNumber;
     private final List<Integer> win;
 
+    public static final int COUNT_BONUS = 5;
+
     public Winning(List<Integer> win) {
         this.win = win;
     }
@@ -30,7 +32,7 @@ public class Winning {
         this.bonusWinNumber = Integer.parseInt(bonusWinNumber);
     }
 
-    public List<Prize> getPirzeList(Lotteries lotteries) {
+    public List<Prize> getPrizes(Lotteries lotteries) {
         List<Prize> result = new ArrayList<>();
         for (Lottery lottery : lotteries.getLotteries()) {
             result.add(find(lottery));
@@ -57,7 +59,7 @@ public class Winning {
     }
 
     private boolean matchBonus(int winCount, Lottery lottery) {
-        if (winCount == 5) {
+        if (COUNT_BONUS == winCount) {
             return lottery.getNumbers().contains(bonusWinNumber);
         }
 

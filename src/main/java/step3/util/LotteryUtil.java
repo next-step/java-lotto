@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
+import step3.domain.Lottery;
+
 public class LotteryUtil {
 
-    public static final int WINNING_STREAK = 6;
     private static List<Integer> balls;
 
     public static Set<Integer> getBall() {
@@ -17,7 +18,7 @@ public class LotteryUtil {
         prepare();
         shuffle();
 
-        while (choices.size() != WINNING_STREAK) {
+        while (Lottery.WINNING_STREAK != choices.size()) {
             choices.add(balls.get(ThreadLocalRandom.current().nextInt(0, 45)));
         }
 

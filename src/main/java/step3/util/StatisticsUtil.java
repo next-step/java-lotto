@@ -1,11 +1,11 @@
 package step3.util;
 
 import static java.math.RoundingMode.DOWN;
-import static step2.constant.Prize.FIFTH;
-import static step2.constant.Prize.FIRST;
-import static step2.constant.Prize.FOURTH;
-import static step2.constant.Prize.SECOND;
-import static step2.constant.Prize.THIRD;
+import static step3.constant.Prize.FIFTH;
+import static step3.constant.Prize.FIRST;
+import static step3.constant.Prize.FOURTH;
+import static step3.constant.Prize.SECOND;
+import static step3.constant.Prize.THIRD;
 
 import java.math.BigDecimal;
 import java.util.HashMap;

@@ -21,43 +21,24 @@ class WinningTest {
     void 등수를_구하는_테스트(Lotteries lotteries, Prize prize) {
         Winning winning = new Winning(List.of(1, 2, 3, 4, 5, 6));
         winning.setBonusWinNumber("7");
-        List<Prize> pirzeList = winning.getPirzeList(lotteries);
+        List<Prize> pirzeList = winning.getPrizes(lotteries);
 
         assertThat(pirzeList.contains(prize)).isEqualTo(true);
     }
 
     static Stream<Arguments> generateData() {
-        Set<Integer> first = new HashSet<>();
-        for (int i = 1; i < 7; i++) {
-            first.add(i);
-        }
-
-        Set<Integer> second = new HashSet<>();
-        for (int i = 2; i < 8; i++) {
-            second.add(i);
-        }
-
-        Set<Integer> third = new HashSet<>();
-        third.add(10);
-        for (int i = 2; i < 7; i++) {
-            third.add(i);
-        }
-
-        Set<Integer> fourth = new HashSet<>();
-        for (int i = 3; i < 9; i++) {
-            fourth.add(i);
-        }
-
-        Set<Integer> fifth = new HashSet<>();
-        for (int i = 4; i < 10; i++) {
-            fifth.add(i);
-        }
+        Set<Integer> first = new HashSet<>(List.of(1, 2, 3, 4, 5, 6));
+        Set<Integer> second = new HashSet<>(List.of(2, 3, 4, 5, 6, 7));
+        Set<Integer> third = new HashSet<>(List.of(2, 3, 4, 5, 6, 10));
+        Set<Integer> fourth = new HashSet<>(List.of(3, 4, 5, 6, 7, 8));
+        Set<Integer> fifth = new HashSet<>(List.of(4, 5, 6, 7, 8, 9));
 
         Lotteries firstLotteries = new Lotteries();
         Lotteries thirdLotteries = new Lotteries();
         Lotteries secondLotteries = new Lotteries();
         Lotteries fourthLotteries = new Lotteries();
         Lotteries fifthLotteries = new Lotteries();
+
         firstLotteries.keep(Lottery.of(first));
         secondLotteries.keep(Lottery.of(second));
         thirdLotteries.keep(Lottery.of(third));
