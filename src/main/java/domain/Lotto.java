@@ -20,14 +20,18 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() < LOTTO_NUMBER_COUNT_LIMIT) {
-            throw new IllegalArgumentException("로또 숫자는 6개 입니다.");
-        }
+        validateLottoNumberCount(lottoNumbers);
         Collections.sort(lottoNumbers);
 
         this.lottoNumbers = lottoNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
+    }
+
+    private static void validateLottoNumberCount(List<Integer> lottoNumbers) {
+        if (lottoNumbers.stream().distinct().count() < LOTTO_NUMBER_COUNT_LIMIT) {
+            throw new IllegalArgumentException("로또 숫자는 6개 입니다.");
+        }
     }
 
     public List<Integer> getLottoNumbers() {

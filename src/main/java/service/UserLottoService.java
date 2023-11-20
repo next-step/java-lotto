@@ -25,7 +25,7 @@ public class UserLottoService {
 
         for (int i = 0; i < ticketCount; i++) {
             List<Integer> lottoNumbers = LottoRandomNumberGenerator.generateLottoNumber();
-            Collections.sort(lottoNumbers);
+
             Lotto lotto = new Lotto(lottoNumbers);
             userLottoRepository.saveUserLottoTickets(lotto);
         }
