@@ -13,7 +13,7 @@ public class LottoPurchaseInfoTest {
     @CsvSource(value = {"0,0", "5500,5"}, delimiter = ',')
     @DisplayName("입력한 금액별로 로또의 발행 갯수를 정한다.")
     void lottoPurchaseInfo(int purchaseAmount, int expected) {
-        assertThat(new LottoPurchaseInfo(purchaseAmount).getLottoPrice()).isEqualTo(expected);
+        assertThat(new LottoPurchaseInfo(purchaseAmount).getLottoTicketCount()).isEqualTo(expected);
     }
 
 }

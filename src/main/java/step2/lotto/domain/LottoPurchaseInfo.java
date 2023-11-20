@@ -10,7 +10,7 @@ public class LottoPurchaseInfo {
         this.lottoTicketCount = inputMoney / LOTTO_PRICE;
     }
 
-    public int getLottoPrice() {
+    public int getLottoTicketCount() {
         return lottoTicketCount;
     }
 }

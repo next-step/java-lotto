@@ -2,6 +2,7 @@ package step2.lotto.domain;
 
 import java.util.Collections;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -35,4 +36,11 @@ public class Lotto {
         });
     }
 
+    @Override
+    public String toString() {
+        return lottoNumbers.stream()
+            .sorted()
+            .collect(Collectors.toList())
+            .toString();
+    }
 }
