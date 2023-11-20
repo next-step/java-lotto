@@ -2,6 +2,7 @@ package step2.model;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
@@ -32,5 +33,22 @@ public class WinningLotto {
 
     public Boolean checkBonusNumber(Lotto other) {
         return other.containsLottoNumber(this.bonusNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        WinningLotto that = (WinningLotto) o;
+        return Objects.equals(lotto, that.lotto) && Objects.equals(bonusNumber, that.bonusNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto, bonusNumber);
     }
 }
