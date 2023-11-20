@@ -55,4 +55,13 @@ class PlaceTest {
         // then
         assertThat(place).isEqualTo(Place.THIRD_PLACE);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"6", "4", "3", "2", "1"})
+    void 볼_4개_이하_및_6개_매치는_보너스_볼_매치와_상관없다(int matchCount) {
+        Place bonusMatchFail = Place.byMatchCount(matchCount, Boolean.FALSE);
+        Place bonusMatchSuccess = Place.byMatchCount(matchCount, Boolean.TRUE);
+
+        assertThat(bonusMatchFail).isEqualTo(bonusMatchSuccess);
+    }
 }

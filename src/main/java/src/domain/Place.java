@@ -6,22 +6,19 @@ import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 
 public enum Place {
-    FIRST_PLACE(6, 2_000_000_000, (matchCount, bonusMatch) ->
-            matchCount == 6 && bonusMatch == Boolean.FALSE),
+    FIRST_PLACE(6, 2_000_000_000, (matchCount, bonusMatch) -> matchCount == 6),
+
     SECOND_PLACE(5, 30_000_000, (matchCount, bonusMatch) ->
             matchCount == 5 && bonusMatch == Boolean.TRUE),
 
     THIRD_PLACE(5,1_500_000, (matchCount, bonusMatch) ->
             matchCount == 5 && bonusMatch == Boolean.FALSE),
 
-    FOURTH_PLACE(4,50_000, (matchCount, bonusMatch) ->
-            matchCount == 4 && bonusMatch == Boolean.FALSE),
+    FOURTH_PLACE(4,50_000, (matchCount, bonusMatch) -> matchCount == 4),
 
-    FIFTH_PLACE(3,5_000, (matchCount, bonusMatch) ->
-            matchCount == 3 && bonusMatch == Boolean.FALSE),
+    FIFTH_PLACE(3,5_000, (matchCount, bonusMatch) -> matchCount == 3),
 
-    OTHER(2,0, (matchCount, bonusMatch) ->
-            matchCount == 2 && bonusMatch == Boolean.FALSE);
+    OTHER(2,0, (matchCount, bonusMatch) -> matchCount == 2);
 
     private final int matchCount;
 
