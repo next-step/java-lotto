@@ -1,7 +1,6 @@
 package step3.enumeration;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public enum LottoRank {
@@ -27,9 +26,9 @@ public enum LottoRank {
             .filter(rank -> rank != SECOND && rank != ZERO)
             .collect(Collectors.toList());
 
-    public static int getPriceByName(String name) {
+    public static int getPriceByName(LottoRank name) {
         return ALL_LOTTO_RANK.stream()
-                .filter(lottoRank -> lottoRank.name().equals(name))
+                .filter(lottoRank -> lottoRank.equals(name))
                 .map(e -> e.price)
                 .findFirst()
                 .orElse(ZERO.price);
@@ -43,11 +42,16 @@ public enum LottoRank {
         return this.match;
     }
 
-    public static String getName(int match) {
+    public static LottoRank getRank(int match) {
         return ALL_NORMAL_LOTTO_RANK.stream()
                 .filter(lottoRank -> lottoRank.match == match)
-                .map(Enum::name)
                 .findFirst()
-                .orElse(ZERO.name());
+                .orElse(ZERO);
+    }
+
+    public static Map<LottoRank, Integer> rankMap() {
+        Map<LottoRank, Integer> winnerBoard = new EnumMap<>(LottoRank.class);
+        ALL_LOTTO_RANK.forEach(rank -> winnerBoard.put(rank, 0));
+        return winnerBoard;
     }
 }

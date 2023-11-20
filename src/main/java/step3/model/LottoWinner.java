@@ -2,56 +2,45 @@ package step3.model;
 
 import step3.enumeration.LottoRank;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoWinner {
 
-    private final WinnerBoard winnerBoard;
     private final List<Lotto> lottos;
-    private final List<Integer> winNumbers;
+    private final LottoWinNumbers lottoWinNumbers;
     private final int bonusNumber;
 
-    public LottoWinner(List<Lotto> lottos, String winNumber, WinnerBoard winnerBoard, int bonusNumber) {
-        this.winnerBoard = winnerBoard;
+    public LottoWinner(List<Lotto> lottos, LottoWinNumbers lottoWinNumbers, int bonusNumber) {
         this.lottos = lottos;
-        this.winNumbers = splitWinNumberString(winNumber);
+        this.lottoWinNumbers = lottoWinNumbers;
 
-        validateBonusNumber(winNumbers, bonusNumber);
+        validateBonusNumber(lottoWinNumbers.getWinNumbers(), bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    public int getTotalPrice() {
+    public int getTotalPrice(Map<LottoRank, Integer> winnerBoard) {
         int totalPrice = 0;
-        for (Map.Entry<String, Integer> board : this.winnerBoard.winnerBoard.entrySet()) {
+        for (Map.Entry<LottoRank, Integer> board : winnerBoard.entrySet()) {
             if (board.getValue() > 0) totalPrice += LottoRank.getPriceByName(board.getKey());
         }
 
         return totalPrice;
     }
 
-    public WinnerBoard getWinnerNumberMatchCount() {
+    public Map<LottoRank, Integer> getWinnerNumberMatchCount() {
+        Map<LottoRank, Integer> winnerBoard = LottoRank.rankMap();
         for (Lotto lotto : this.lottos) {
-            String rankName = lotto.getNumbers().getLottoRank(this.winNumbers, this.bonusNumber);
-            this.winnerBoard.winnerBoard.put(rankName, winnerBoard.winnerBoard.get(rankName) + 1);
+            LottoRank rankName = lotto.getLottoNumbers().getLottoRank(this.lottoWinNumbers.getWinNumbers(), this.bonusNumber);
+            winnerBoard.put(rankName, winnerBoard.get(rankName) + 1);
         }
 
-        return this.winnerBoard;
+        return winnerBoard;
     }
 
-    public Double getRating(int payPrice) {
-        int totalPrice = getTotalPrice();
+    public Double getRating(int payPrice, Map<LottoRank, Integer> winnerBoard) {
+        int totalPrice = getTotalPrice(winnerBoard);
         return Math.floor(totalPrice * 100.0 / payPrice) / 100;
-    }
-
-    private List<Integer> splitWinNumberString(String winnerNumbers) {
-        return Arrays.stream(winnerNumbers.split(","))
-                .map(Integer::parseInt)
-                .filter(e -> !new LottoNumber().isOverMaxNumber(e))
-                .collect(Collectors.toList());
-
     }
 
     private void validateBonusNumber(List<Integer> winNumbers, int bonusNumber) {
