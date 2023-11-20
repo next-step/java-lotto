@@ -51,7 +51,7 @@ public class StatisticsReport {
         int total = 0;
         for (Prize key : matchCountByPrize.keySet()) {
             if( 0 < matchCountByPrize.get(key)){
-                total = total + key.prize();
+                total = total + key.price();
             }
         }
         return total;
