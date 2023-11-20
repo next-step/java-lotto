@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.Iterator;
 import java.util.List;
 
 public class ResultWinner {
@@ -11,9 +10,8 @@ public class ResultWinner {
 
         List<Integer> resultList = new ArrayList<>();
 
-        for(int i = 0; i < lottos.getLottosSize(); i++) {
-            int answerCount = 0;
-            answerCount = getAnswerCount(lottos.getLottoIndex(i), lastWeekWinner, answerCount);
+        for (int i = 0; i < lottos.getLottosSize(); i++) {
+            int answerCount = getAnswerCount(lottos.getLottoIndex(i), lastWeekWinner);
             resultList.add(answerCount);
         }
 
@@ -52,8 +50,9 @@ public class ResultWinner {
         return resultMap;
     }
 
-    private int getAnswerCount(Lotto buyLottoList, List<String> lastWeek, int answerCount) {
+    private int getAnswerCount(Lotto buyLottoList, List<String> lastWeek) {
         boolean checkContains;
+        int answerCount = 0;
         for (String number : lastWeek) {
             checkContains = buyLottoList.getLotto().contains(Integer.parseInt(number));
             answerCount = getAnswerCalc(checkContains, answerCount);
