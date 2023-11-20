@@ -1,6 +1,7 @@
 package lotto;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Scanner;
 import lotto.view.InputView;
@@ -26,7 +27,8 @@ public class Main {
         StatisticsReport report = StatisticsReport.of(lottoWallet).report(winningLotto);
         PAndLReport pAndLReport = PAndLReport.of(report);
         BigDecimal rate = pAndLReport.rate();
-        System.out.println(rate);
+        resultView.out(report);
+        resultView.out(rate);
     }
 
 }

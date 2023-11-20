@@ -1,7 +1,11 @@
 package lotto.view;
 
 import java.io.PrintStream;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.util.Arrays;
 import lotto.LottoWallet;
+import lotto.Prize;
 import lotto.StatisticsReport;
 
 public class ResultView {
@@ -20,11 +24,29 @@ public class ResultView {
 
     public void out(LottoWallet lottoWallet) {
         for (int i = 0; i < lottoWallet.totalTicketCount(); i++){
-            System.out.println(lottoWallet.oneTicket(i).lottoNumbers());
+            sout.println(lottoWallet.oneTicket(i).lottoNumbers());
         }
     }
 
     public void out(StatisticsReport statisticsReport) {
-        statisticsReport.totalPrize();
+        StringBuilder stringBuilder = new StringBuilder();
+        Arrays.stream(Prize.values()).forEach(prize -> {
+            if(prizeRankOver3(prize)){
+                stringBuilder.append(prize.rank());
+                stringBuilder.append("개 일치");
+                stringBuilder.append(" (").append(prize.price()).append(")-");
+                stringBuilder.append(statisticsReport.countByPrize(prize)).append("개 \n");
+            }
+        });
+        sout.print(stringBuilder.toString());
+    }
+
+    private static boolean prizeRankOver3(Prize prize) {
+        return prize.rank() >= 3;
+    }
+
+    public void out(BigDecimal rate) {
+        DecimalFormat decimalFormat = new DecimalFormat();
+        sout.printf("총 수익률은 %s 입니다. \n", decimalFormat.format(rate));
     }
 }
