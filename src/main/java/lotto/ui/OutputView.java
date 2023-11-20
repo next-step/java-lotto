@@ -1,17 +1,15 @@
 package lotto.ui;
 
+import lotto.domain.LottoResult;
 import lotto.domain.LottoWinPercentage;
-import lotto.domain.LottoWinResult;
 import lotto.domain.Lottos;
-
-import java.util.List;
 
 public class OutputView {
 
-    public void printLottos(int lottoCount, Lottos lottos) {
-        System.out.println(lottoCount + "개를 구매했습니다.");
-        lottos.getLottos().forEach(lotto -> System.out.println(lotto));
+    public void printLottos(int manualLottoCount, int autoLottoCount, Lottos lottos) {
         System.out.println();
+        System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoCount + "개를 구매했습니다.");
+        lottos.getLottos().forEach(lotto -> System.out.println(lotto));
     }
 
     public void printLottoResultInfo() {
@@ -20,10 +18,8 @@ public class OutputView {
         System.out.println("---------");
     }
 
-    public void printLottoResult(List<LottoWinResult> lottoWinResults) {
-        for (LottoWinResult lottoWinResult : lottoWinResults) {
-            System.out.println(lottoWinResult);
-        }
+    public void printLottoResult(LottoResult lottoResult) {
+        System.out.println(lottoResult);
     }
 
     public void printLottoRate(LottoWinPercentage lottoWinPercentage) {

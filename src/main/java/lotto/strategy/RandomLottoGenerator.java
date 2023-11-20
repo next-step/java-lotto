@@ -1,5 +1,7 @@
 package lotto.strategy;
 
+import lotto.domain.LottoNumber;
+
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -12,11 +14,11 @@ public class RandomLottoGenerator implements LottoGenerator {
     private static final int LOTTO_NUMBER_SIZE = 6;
 
     @Override
-    public List<Integer> lotto() {
+    public List<LottoNumber> lotto() {
         return IntStream.generate(() -> random.nextInt(MAX_NUMBER) + 1)
                 .distinct()
                 .limit(LOTTO_NUMBER_SIZE)
-                .boxed()
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 }

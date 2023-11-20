@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.strategy.TestLottoGenerator;
+import lotto.testutil.TestUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -22,10 +23,10 @@ class LottosTest {
             int bonusBall,
             LottoRank expectLottoRank
     ) {
-        Lottos lottos = new Lottos(List.of(new Lotto(new LottoNumbers(new TestLottoGenerator(lottoNumbers)))));
-        LottoRank lottoRank = lottos.matchCount(0, new LottoWinNumbers(lottoWinNumbers), new BonusBall(bonusBall));
+        Lottos lottos = new Lottos(List.of(new Lotto(new LottoNumbers(new TestLottoGenerator(TestUtil.generateLottoNumbers(lottoNumbers))))));
+        List<LottoRank> lottoRank = lottos.matchCount(new LottoWinNumbers(TestUtil.generateLottoNumbers(lottoWinNumbers)), new BonusBall(bonusBall));
 
-        assertThat(lottoRank).isEqualTo(expectLottoRank);
+        assertThat(lottoRank).containsOnlyOnce(expectLottoRank);
     }
 
     private static Stream<Arguments> provideLottoRankGenerateCondition() {

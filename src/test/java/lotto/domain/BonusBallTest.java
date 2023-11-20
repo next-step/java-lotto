@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.testutil.TestUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -16,7 +17,7 @@ public class BonusBallTest {
     @MethodSource("provideLottoNumbersAndBonusBall")
     @DisplayName("성공 - 보너스 볼이 존재하는지 알 수 있다.")
     void success_not_range_lotto_number(List<Integer> lottoNumbers, int bonusBall, boolean hasBonusBall) {
-        assertThat(new BonusBall(bonusBall).containsBonusBall(lottoNumbers)).isEqualTo(hasBonusBall);
+        assertThat(new BonusBall(bonusBall).containsBonusBall(TestUtil.generateLottoNumbers(lottoNumbers))).isEqualTo(hasBonusBall);
     }
 
     private static Stream<Arguments> provideLottoNumbersAndBonusBall() {

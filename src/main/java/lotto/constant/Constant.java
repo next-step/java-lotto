@@ -1,5 +1,5 @@
 package lotto.constant;
 
 public final class Constant {
-    public static final int PRICE_UNIT = 1000;
+    public static final int LOTTO_PRICE = 1000;
 }

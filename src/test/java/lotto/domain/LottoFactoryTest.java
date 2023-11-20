@@ -3,14 +3,24 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoFactoryTest {
+class LottoFactoryTest {
 
     @Test
-    @DisplayName("성공 - 생성할 로또 개수 만큼 로또가 생성된다.")
+    @DisplayName("성공 - 로또가 생성된다.")
     void success_generate_lottos() {
-        int lottoCount = 14;
-        assertThat(LottoFactory.generateLottos(lottoCount).getLottos()).hasSize(14);
+        List<String> stringFormatManualLottos = List.of(
+                "1, 2, 3, 4, 5, 6",
+                "1, 2, 3, 4, 5, 7"
+        );
+        int autoLottoCount = 3;
+
+        Lottos lottos = LottoFactory.generateLottos(stringFormatManualLottos, autoLottoCount);
+
+        assertThat(lottos.getLottos()).hasSize(5);
     }
+
 }

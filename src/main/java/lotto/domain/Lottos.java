@@ -9,8 +9,13 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public LottoRank matchCount(int lottoCount, LottoWinNumbers lottoWinNumbers, BonusBall bonusBall) {
-        return this.lottos.get(lottoCount).matchCount(lottoWinNumbers, bonusBall);
+    public List<LottoRank> matchCount(LottoWinNumbers lottoWinNumbers, BonusBall bonusBall) {
+        List<LottoRank> lottoRanks = new ArrayList<>();
+        for (Lotto lotto : this.lottos) {
+            LottoRank lottoRank = lotto.matchCount(lottoWinNumbers, bonusBall);
+            lottoRanks.add(lottoRank);
+        }
+        return lottoRanks;
     }
 
     public List<Lotto> getLottos() {
