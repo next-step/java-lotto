@@ -42,4 +42,15 @@ public class Lotto {
             "ticket=" + ticket.toString() +
             '}';
     }
+
+    public String lottoNumbers() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        ticket.forEach(lottoNumber -> {
+            stringBuilder.append(lottoNumber.toString()).append(",");
+        });
+        int lastIndexOf = stringBuilder.lastIndexOf(",");
+        stringBuilder.replace(lastIndexOf , lastIndexOf + 1, "]");
+        return stringBuilder.toString();
+    }
 }
