@@ -12,6 +12,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MyLottoTest {
 
     @Test
+    @DisplayName("입력 개수만큼 로또를 생성한다.")
+    void 입력_개수만큼_로또_생성(){
+        MyLottos myLottos = new MyLottos(14);
+        assertThat(myLottos.myLottos()).hasSize(14);
+        assertThat(myLottos.myLottos().get(13)).isInstanceOf(Lotto.class);
+    }
+
+    @Test
     @DisplayName("당첨 번호가 N개 일치하는 로또 개수를 반환한다.")
     void 당첨_번호가_N개_일치하는_로또_개수(){
         MyLottos myLottos = new MyLottos(List.of(

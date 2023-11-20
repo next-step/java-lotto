@@ -27,6 +27,10 @@ public class Lotto {
         return this.numbers;
     }
 
+    Object[] numbersToObject() {
+        return numbers.toArray();
+    }
+
     int matchCount(List<Integer> winningNumbers) {
         int matchCount = 0;
 
