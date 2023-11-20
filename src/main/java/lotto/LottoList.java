@@ -6,13 +6,21 @@ import java.util.List;
 public class LottoList implements Iterable<Lotto> {
     private final List<Lotto> lottoList;
 
+    public LottoList(int count) {
+        lottoList = LottoFactory.createLottos(count);
+    }
+
     public LottoList(List<Lotto> lottoList) {
-        checkLottoListSizeIsValid(lottoList);
+        validate(lottoList);
         this.lottoList = lottoList;
     }
 
-    public LottoList(int count) {
-        lottoList = LottoFactory.createLottoList(count);
+    public void validate(List<Lotto> lottoList) {
+        for (Lotto lotto : lottoList) {
+            lotto.validate(lotto.lottoNumbers());
+        }
+
+        checkLottoListSizeIsValid(lottoList);
     }
 
     private void checkLottoListSizeIsValid(List<Lotto> lottoList) {

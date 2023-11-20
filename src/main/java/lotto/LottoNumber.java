@@ -13,8 +13,12 @@ public class LottoNumber {
     }
 
     public LottoNumber(int lottoNumber) {
-        checkLottoNumberIsValid(lottoNumber);
+        validate(lottoNumber);
         this.lottoNumber = lottoNumber;
+    }
+
+    public void validate(int lottoNumber) {
+        checkLottoNumberIsValid(lottoNumber);
     }
 
     private void checkLottoNumberIsValid(int lottoNumber) {
@@ -28,6 +32,7 @@ public class LottoNumber {
     public int lottoNumber() {
         return this.lottoNumber;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -17,7 +17,7 @@ public class LottoResult {
 	}
 
 	private void checkLottoListSizeIsValid(LottoList lottoList) {
-		if (lottoList == null || lottoList.size() == 0) {
+		if(lottoList == null || lottoList.size() == 0) {
 			throw new IllegalArgumentException("최소 1개 이상의 로또 번호가 존재해야 합니다");
 		}
 	}

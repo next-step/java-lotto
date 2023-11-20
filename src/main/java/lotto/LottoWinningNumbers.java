@@ -7,8 +7,14 @@ public class LottoWinningNumbers {
     private final Lotto lottoWinningNumbers;
 
     public LottoWinningNumbers(Lotto lotto) {
-        checkLottoSizeIsValid(lotto);
+        validate(lotto);
         this.lottoWinningNumbers = lotto;
+    }
+
+    public void validate(Lotto lotto) {
+        lotto.validate(lotto.lottoNumbers());
+
+        checkLottoSizeIsValid(lotto);
     }
 
     private void checkLottoSizeIsValid(Lotto lotto) {
