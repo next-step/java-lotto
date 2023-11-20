@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ResultView {
     public static void main(String[] args) {
@@ -13,6 +14,8 @@ public class ResultView {
         for(int i = 0; i < lottoCount; i++){
             System.out.println(Arrays.toString(myLottos.lottoNumbersToArray(i)));
         }
+
+        List<Integer> winningNumbers = InputView.inputWinningNumbers();
 
     }
 }

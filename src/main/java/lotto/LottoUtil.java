@@ -22,4 +22,8 @@ public class LottoUtil {
 
         return numberList;
     }
+
+    public static String[] splitString(String string){
+        return string.split(",");
+    }
 }
