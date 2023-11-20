@@ -1,24 +1,25 @@
 package step2.model;
 
 import java.util.Arrays;
-import java.util.Map;
+import java.util.EnumMap;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoResult {
 
     private static final int EACH_LOTTO_PRICE = 1000;
 
-    private final Map<LottoRank, Long> lottoRanks;
+    private final EnumMap<LottoRank, Long> lottoRanks;
 
-    public LottoResult(Map<LottoRank, Long> lottoRanks) {
-        Map<LottoRank, Long> initialLottoRank = initializeLottoRankCountZero();
+    public LottoResult(EnumMap<LottoRank, Long> lottoRanks) {
+        EnumMap<LottoRank, Long> initialLottoRank = initializeLottoRankCountZero();
         initialLottoRank.putAll(lottoRanks);
         this.lottoRanks = initialLottoRank;
     }
 
-    private Map<LottoRank, Long> initializeLottoRankCountZero() {
-        return Arrays.stream(LottoRank.values())
-                .collect(Collectors.toMap(lottoRank -> lottoRank, lottoRank -> 0L));
+    private EnumMap<LottoRank, Long> initializeLottoRankCountZero() {
+        return new EnumMap<>(Arrays.stream(LottoRank.values())
+                .collect(Collectors.toMap(Function.identity(), lottoRank -> 0L)));
     }
 
     public double calculateProfitRate(int money) {

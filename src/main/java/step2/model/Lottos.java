@@ -1,8 +1,9 @@
 package step2.model;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -18,10 +19,10 @@ public class Lottos {
                 .collect(Collectors.toList()));
     }
 
-    public Map<LottoRank, Long> calculateTotalRank(WinningLotto winnerLotto) {
-        return lottos.stream()
+    public EnumMap<LottoRank, Long> calculateTotalRank(WinningLotto winnerLotto) {
+        return new EnumMap<>(lottos.stream()
                 .map(lotto -> LottoRank.findLottoRankByMatchCountAndMatchBonus(winnerLotto.compareToMatchNumberCount(lotto), winnerLotto.checkBonusNumber(lotto)))
-                .collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
     }
 
     public List<Lotto> getLottos() {
