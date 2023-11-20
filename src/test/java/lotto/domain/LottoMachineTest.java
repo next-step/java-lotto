@@ -18,6 +18,6 @@ class LottoMachineTest {
         void 구입금액이_14000원일_경우_14장_티켓_반환() {
                 long purchaseAmount = 14_000;
                 LottoMachine lottoMachine = new LottoMachine();
-                assertThat(lottoMachine.buy(purchaseAmount).size()).isEqualTo(14);
+                assertThat(lottoMachine.buy(purchaseAmount)).hasSize(14);
         }
 }

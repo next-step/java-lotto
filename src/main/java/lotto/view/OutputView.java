@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import lotto.domain.Rank;
 import lotto.domain.Ticket;
+import lotto.domain.WinningTickets;
 
 public class OutputView {
 
@@ -26,9 +27,9 @@ public class OutputView {
                 System.out.println("---------");
         }
 
-        public static void printResultOfWinning(Map<Rank, Integer> matchRankCountMap) {
+        public static void printResultOfWinning(WinningTickets winningTickets) {
                 for (Rank rank : Rank.values()) {
-                        printExceptForMissRank(rank, matchRankCountMap);
+                        printExceptForMissRank(rank, winningTickets.values());
                 }
         }
 
