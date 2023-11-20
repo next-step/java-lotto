@@ -6,7 +6,6 @@ import java.util.Map;
 
 public class LottoResult {
 	private static final long LOTTO_PRICE = 1000;
-	private final static int MIN_MATCH = 3;
 
 	private final Map<LottoMatch, Integer> lottoMatchResult;
 	private final LottoList lottoList;
@@ -18,7 +17,7 @@ public class LottoResult {
 	}
 
 	private void checkLottoListSizeIsValid(LottoList lottoList) {
-		if(lottoList == null || lottoList.size() == 0) {
+		if (lottoList == null || lottoList.size() == 0) {
 			throw new IllegalArgumentException("최소 1개 이상의 로또 번호가 존재해야 합니다");
 		}
 	}
@@ -26,10 +25,8 @@ public class LottoResult {
 	public void matchesWinningNumbers(LottoWinningNumbers lottoWinningNumbers) {
 		initializeLottoMatchMap();
 		for (Lotto lotto : lottoList) {
-			int matchedCount = lottoWinningNumbers.matchesNumber(lotto);
-			if(matchedCount > MIN_MATCH) {
-				lottoMatchResult.merge(LottoMatch.fromInt(matchedCount), 1, Integer::sum);
-			}
+			LottoMatch lottoMatch = lottoWinningNumbers.matchesLotto(lotto);
+			lottoMatchResult.merge(lottoMatch, 1, Integer::sum);
 		}
 	}
 

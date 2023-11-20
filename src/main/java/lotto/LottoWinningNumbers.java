@@ -21,12 +21,12 @@ public class LottoWinningNumbers {
         return this.lottoWinningNumbers.equals(lotto);
     }
 
-    public int matchesNumber(Lotto lotto) {
+    public LottoMatch matchesLotto(Lotto lotto) {
         List<LottoNumber> lottoWinningList = new ArrayList<>(lottoWinningNumbers.lottoNumbers());
         List<LottoNumber> lottoList = new ArrayList<>(lotto.lottoNumbers());
 
         lottoWinningList.retainAll(lottoList);
-
-        return lottoWinningList.size();
+        int matchCount = lottoWinningList.size();
+        return LottoMatch.fromInt(matchCount);
     }
 }

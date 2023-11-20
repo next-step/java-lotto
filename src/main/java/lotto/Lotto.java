@@ -7,13 +7,12 @@ public class Lotto implements Iterable<LottoNumber> {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> inputLottoNumbers) {
-        this.lottoNumbers = inputLottoNumbers;
+        this.lottoNumbers = LottoFactory.createLotto(inputLottoNumbers);
     }
 
     public Lotto(String inputNumbers) {
         this.lottoNumbers = LottoFactory.createLotto(inputNumbers);
     }
-
 
     public List<LottoNumber> lottoNumbers() {
         return this.lottoNumbers;

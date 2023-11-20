@@ -1,17 +1,19 @@
 package lotto;
 
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum LottoMatch {
+	ZERO(0, 0),
+	ONE(1, 0),
+	TWO(2, 0),
 	THREE(3, 5000),
 	FOUR(4, 50000),
 	FIVE(5, 1500000),
 	SIX(6, 2000000000);
 
-	private static final Map<Integer, LottoMatch> stringToEnum =
+	private static final Map<Integer, LottoMatch> INTEGER_TO_ENUM =
 			Stream.of(values()).collect(Collectors.toMap(LottoMatch::matchCount, e -> e));
 
 	private final int matchCount;
@@ -24,8 +26,7 @@ public enum LottoMatch {
 	}
 
 	public static LottoMatch fromInt(int matchCount) {
-		return Optional.ofNullable(stringToEnum.get(matchCount))
-				.orElseThrow(() -> new IllegalArgumentException("유효한 범위를 입력하세요"));
+		return INTEGER_TO_ENUM.get(matchCount);
 	}
 
 	public int matchCount() {

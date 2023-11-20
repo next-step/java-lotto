@@ -1,6 +1,8 @@
 package lotto;
 
+import java.sql.Array;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoFactory {
     private final static int NUMBER_COUNT = 6;
@@ -28,17 +30,23 @@ public class LottoFactory {
 
     public static List<LottoNumber> createLotto(String inputNumbers) {
         String[] arrayNumbers = inputNumbers.split(",");
-        Set<LottoNumber> setLottoNumbers = new HashSet<>();
-        for (String value : arrayNumbers) {
-            setLottoNumbers.add(new LottoNumber(Integer.parseInt(value.trim())));
-        }
+        List<LottoNumber> lottoNumbers = Arrays.stream(arrayNumbers)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
 
-        if(setLottoNumbers.size() != NUMBER_COUNT) {
+        return createLotto(lottoNumbers);
+    }
+
+    public static List<LottoNumber> createLotto(List<LottoNumber> lottoNumbers) {
+        checkLottoSizeIsValid(lottoNumbers);
+        return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    private static void checkLottoSizeIsValid(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
+        if (lottoNumberSet.size() != NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 중복되지 않은 6자리 숫자여야 합니다");
         }
-
-        List<LottoNumber> lottoNumbers = new ArrayList<>(setLottoNumbers);
-        return Collections.unmodifiableList(lottoNumbers);
     }
 
     public static List<LottoNumber> createLotto() {
