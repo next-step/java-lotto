@@ -5,19 +5,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LotteryGeneratr {
+public class LotteryGenerator {
 
-    public static final int LOTTO_NUMBER_COUNT = 6;
-    public static final int LOTTO_NUMBER_START = 1;
-    public static final int LOTTO_NUMBER_END = 45;
+    public static final int LOTTERY_NUMBER_COUNT = 6;
+    public static final int LOTTERY_NUMBER_START = 1;
+    public static final int LOTTERY_NUMBER_END = 45;
 
     static Lottery create() {
         List<Integer> numbers = IntStream
-            .rangeClosed(LOTTO_NUMBER_START, LOTTO_NUMBER_END)
+            .rangeClosed(LOTTERY_NUMBER_START, LOTTERY_NUMBER_END)
             .boxed()
             .collect(Collectors.toList());
         Collections.shuffle(numbers);
 
-        return new Lottery(numbers.subList(0, LOTTO_NUMBER_COUNT));
+        return new Lottery(numbers.subList(0, LOTTERY_NUMBER_COUNT));
     }
 }

@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 
-public class LotteryGeneratrTest {
+public class LotteryGeneratorTest {
 
     @RepeatedTest(100)
     @DisplayName("로또를 정상적으로 잘 생성한다")
     void successfullyCreate() {
-        assertDoesNotThrow(() -> LotteryGeneratr.create());
+        assertDoesNotThrow(() -> LotteryGenerator.create());
     }
 }
