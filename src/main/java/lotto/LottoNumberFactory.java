@@ -8,13 +8,9 @@ public class LottoNumberFactory {
 
     private final List<Integer> randomNumbers;
 
-    private final static int MIN_NUMBER = 1;
-    private final static int MAX_NUMBER = 45;
-    private static final int LOTTO_NUMBER_COUNT = 6;
-
     private LottoNumberFactory() {
         randomNumbers = new ArrayList<>();
-        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+        for (int i = LottoNumber.MIN_NUMBER; i <= LottoNumber.MAX_NUMBER; i++) {
             randomNumbers.add(i);
         }
     }
@@ -25,7 +21,7 @@ public class LottoNumberFactory {
 
     public List<Integer> number() {
         Collections.shuffle(randomNumbers);
-        return randomNumbers.subList(0, LOTTO_NUMBER_COUNT);
+        return randomNumbers.subList(0, Lotto.MAX_TICKET_NUMBERS);
     }
 
     private static class RandomHolder {
