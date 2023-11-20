@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class BenefitCalculator {
 
     public LottoResponse calculateBenefit(LottoRequest request) {
-        Lottos lottos = new Lottos(request.getLottos(), request.getWinningLottoNumber());
+        Lottos lottos = request.getLottos();
         HashMap<WinningAmount, Integer> countAllWinning = lottos.countAllWinning();
         String rateOfReturn = calculateRateOfReturn(request.getInputAmount(), countAllWinning);
         return new LottoResponse(rateOfReturn, countAllWinning);
