@@ -15,7 +15,7 @@ public class LottoTicket {
         List<LottoNumber> numbers = numberList();
         for (int i = 0; i < number; i++) {
             Collections.shuffle(numbers);
-            lottoTicket.add(new Lotto(numbers.subList(0, 6)));
+            lottoTicket.add(new Lotto(List.copyOf(numbers.subList(0, 6))));
         }
     }
 
