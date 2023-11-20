@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -30,15 +27,16 @@ public class Lotto {
 
     public Lotto(String values) {
 
-        this.values = Arrays.stream(values.split(", "))
+        Set<LottoNumber> lottoNumbers = Arrays.stream(values.split(", "))
                 .mapToInt(Integer::parseInt)
                 .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
-
-        if (this.values.size() != LOTTO_SIZE) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("중복된 숫자는 입력할 수 없습니다.");
         }
+
+        this.values = new ArrayList<>(lottoNumbers);
     }
 
     private int lottoRange(Random random) {
