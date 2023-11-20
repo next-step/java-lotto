@@ -1,7 +1,7 @@
-package lotto;
+package lotto.domain;
 
-import lotto.strategy.LottoGeneration;
-import lotto.strategy.ManualLottoGeneration;
+import lotto.domain.strategy.LottoGeneration;
+import lotto.domain.strategy.ManualLottoGeneration;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -35,5 +35,15 @@ public class LottoTest {
         LottoNumber lottoNumber = LottoNumber.valueOf(7);
 
         assertThat(lotto.contains(lottoNumber)).isTrue();
+    }
+
+    @Test
+    @DisplayName("로또와 당첨로또번호를 비교하여 당첨등수 확인")
+    void 로또랭킹_확인() {
+        Lotto lotto = new Lotto(new ManualLottoGeneration(Arrays.asList(1, 2, 3, 4, 5, 6)).generate());
+        Lotto winLotto = new Lotto(new ManualLottoGeneration(Arrays.asList(1, 2, 3, 4, 5, 9)).generate());
+        LottoNumber lottoNumber = LottoNumber.valueOf(6);
+
+        assertThat(lotto.findRank(winLotto,lottoNumber)).isEqualTo(LottoRank.SECOND);
     }
 }

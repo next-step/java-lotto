@@ -1,6 +1,6 @@
-package lotto.strategy;
+package lotto.domain.strategy;
 
-import lotto.LottoNumberCache;
+import lotto.domain.LottoNumberCache;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

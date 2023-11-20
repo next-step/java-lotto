@@ -1,9 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import lotto.strategy.ManualLottoGeneration;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
@@ -39,6 +35,11 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lottoNumber);
     }
 }
 

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.*;
 
@@ -30,5 +30,36 @@ public class Lotto {
 
     public boolean contains(LottoNumber lottoNumber) {
         return lotto.contains(lottoNumber);
+    }
+
+    public LottoRank findRank(Lotto winLotto, LottoNumber bonus) {
+        if (isRank(winLotto)) {
+            return LottoRank.findMatchCount(matchCount(winLotto), contains(bonus));
+        }
+        return LottoRank.MISS;
+
+    }
+
+    private boolean isRank(Lotto winLotto) {
+        return matchCount(winLotto) > 2;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto1 = (Lotto) o;
+        return Objects.equals(lotto, lotto1.lotto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto);
+    }
+
+    @Override
+    public String toString() {
+        return  lotto.toString();
     }
 }

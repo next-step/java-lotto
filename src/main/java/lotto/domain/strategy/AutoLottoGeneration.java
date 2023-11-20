@@ -1,6 +1,6 @@
-package lotto.strategy;
+package lotto.domain.strategy;
 
-import lotto.LottoNumber;
+import lotto.domain.LottoNumber;
 
 import java.util.*;
 

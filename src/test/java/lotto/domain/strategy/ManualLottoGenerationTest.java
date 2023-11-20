@@ -1,4 +1,4 @@
-package lotto.strategy;
+package lotto.domain.strategy;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
