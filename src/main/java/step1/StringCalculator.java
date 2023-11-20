@@ -50,6 +50,5 @@ public class StringCalculator {
     		this.index = index;
     		this.result = result;
     	}
-
     }
 }

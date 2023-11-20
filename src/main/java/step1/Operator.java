@@ -12,15 +12,15 @@ public class Operator {
         return "+".equals(operator);
     }
 
-    public  boolean isMinusOperator() {
+    private  boolean isMinusOperator() {
         return "-".equals(operator);
     }
 
-    public  boolean isMultiplyOperator() {
+    private  boolean isMultiplyOperator() {
         return "*".equals(operator);
     }
 
-    public  boolean isDivideOperator() {
+    private  boolean isDivideOperator() {
         return "/".equals(operator);
     }
 
@@ -37,6 +37,6 @@ public class Operator {
         if(isDivideOperator()) {
             return a/b;
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("invalid operator");
     }
 }

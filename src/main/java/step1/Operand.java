@@ -1,9 +1,16 @@
 package step1;
 
+import java.util.regex.Pattern;
+
 public class Operand {
+    static Pattern pattern = Pattern.compile("\\d+");
+
+    private Operand() {
+    }
 
     public static boolean isOperand(String token) {
-        return token.matches("\\d+");
+
+        return pattern.matcher(token).matches();
     }
 
     public static int operand(String token) {
@@ -14,8 +21,5 @@ public class Operand {
             throw new IllegalArgumentException("invalid operand");
         }
         return result;
-    }
-
-    private Operand() {
     }
 }
