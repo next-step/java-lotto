@@ -23,11 +23,10 @@ public class OutputView {
     public void viewLottoRating(WinnerBoard winnerBoard) {
         System.out.println("당첨 통계\n" + "---------");
 
-        for (LottoRank rank : LottoRank.ALL_NORMAL_LOTTO_RANK) {
+        LottoRank.ALL_LOTTO_RANK.forEach(rank -> {
             System.out.println(rank.getMatch() + "개 일치 (" + LottoRank.getPriceByName(rank.name()) + "원) - " + NumberUtils.getSafeNumber(winnerBoard.winnerBoard.get(rank.name())) + "개");
-        }
-
-        viewLottoBonusScore(winnerBoard.winnerBoard.get(SECOND.name()));
+            if (rank.equals(SECOND)) viewLottoBonusScore(winnerBoard.winnerBoard.get(rank.name()));
+        });
     }
 
     public void viewLottoBonusScore(Integer count) {
