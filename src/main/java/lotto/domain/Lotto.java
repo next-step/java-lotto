@@ -18,12 +18,20 @@ public class Lotto {
         this.values = new ArrayList<>();
         Random random = new Random();
         while (values.size() < LOTTO_SIZE) {
-            LottoNumber lottoNumber = INITIALIZED_LOTTO.get(lottoRange(random) - 1);
+            LottoNumber lottoNumber = findUniquLottoNumber(random);
 
-            if (!values.contains(lottoNumber)) {
-                values.add(lottoNumber);
-            }
+            values.add(lottoNumber);
         }
+    }
+
+    private LottoNumber findUniquLottoNumber(Random random) {
+        LottoNumber lottoNumber;
+
+        do {
+            lottoNumber = INITIALIZED_LOTTO.get(lottoRange(random) - 1);
+        } while (values.contains(lottoNumber));
+
+        return lottoNumber;
     }
 
     public Lotto(String values) {
@@ -49,12 +57,16 @@ public class Lotto {
         stringBuilder.append(OPEN_BRACKET);
         for (int i = 0; i < values.size(); i++) {
             stringBuilder.append(values.get(i).findNumber());
-            if (i != LOTTO_SIZE - 1) {
-                stringBuilder.append(DELIMITER);
-            }
+            addDelimiter(i, stringBuilder);
         }
         stringBuilder.append(CLOSE_BRACKET);
         return stringBuilder.toString();
+    }
+
+    private void addDelimiter(int i, StringBuilder stringBuilder) {
+        if (i != LOTTO_SIZE - 1) {
+            stringBuilder.append(DELIMITER);
+        }
     }
 
     public long calculateMatchCount(Lotto winningNumbers) {
