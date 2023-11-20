@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.strategy.WinningStrategy;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,10 +8,13 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
+    private static final String DELIMITER = ", ";
+    private static final String OPEN_BRACKET = "[";
+    private static final String CLOSE_BRACKET = "]";
     private static final int LOTTO_SIZE = 6;
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_MIN_NUMBER = 1;
-    private List<LottoNumber> values;
+    private final List<LottoNumber> values;
 
     public Lotto() {
         this.values = new ArrayList<>();
@@ -46,19 +47,15 @@ public class Lotto {
 
     public String findLotto() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
+        stringBuilder.append(OPEN_BRACKET);
         for (int i = 0; i < values.size(); i++) {
             stringBuilder.append(values.get(i).findNumber());
             if (i != LOTTO_SIZE - 1) {
-                stringBuilder.append(", ");
+                stringBuilder.append(DELIMITER);
             }
         }
-        stringBuilder.append("]");
+        stringBuilder.append(CLOSE_BRACKET);
         return stringBuilder.toString();
-    }
-
-    public void test(Lotto lotto, WinningStrategy strategy) {
-        strategy.matches(lotto, this);
     }
 
     public long calculateMatchCount(Lotto winningNumbers) {

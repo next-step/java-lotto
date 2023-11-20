@@ -37,6 +37,5 @@ public class LottoController {
         Map<String, Integer> results = lottoResultCalculator.calculateResults(lottos, winningLotto);
         double profit = lottoResultCalculator.calculateProfit(results, lottoCount);
         outputView.printResults(results, profit);
-
     }
 }

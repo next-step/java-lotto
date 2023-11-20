@@ -6,7 +6,7 @@ public class LottoAmount {
 
     private static final int LOTTO_PRICE = 1000;
     private static final int REMAIN = 0;
-    private int amount;
+    private final int amount;
 
     public LottoAmount(String amount) {
         int value = validateType(amount);
@@ -15,7 +15,7 @@ public class LottoAmount {
     }
 
     private int validateType(String amount) {
-        int value = 0;
+        int value;
         try {
             value = Integer.parseInt(amount);
         }catch (NumberFormatException e) {

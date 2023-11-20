@@ -1,14 +1,11 @@
 package lotto.domain;
 
-import lotto.domain.strategy.WinningStrategy;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Lottos {
 
-    private List<Lotto> value;
+    private final List<Lotto> value;
 
     public Lottos(int lottoCount) {
         value = new ArrayList<>();
@@ -19,8 +16,8 @@ public class Lottos {
 
     public String findLottos() {
         StringBuilder sc = new StringBuilder();
-        for (int i = 0; i < value.size(); i++) {
-            sc.append(value.get(i).findLotto());
+        for (Lotto lotto : value) {
+            sc.append(lotto.findLotto());
             sc.append(System.lineSeparator());
         }
         return sc.toString();

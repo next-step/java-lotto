@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    private int value;
+    private final int value;
 
     public LottoNumber(int value) {
         this.value = value;
