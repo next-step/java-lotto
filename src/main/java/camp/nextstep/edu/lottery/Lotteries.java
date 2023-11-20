@@ -50,4 +50,14 @@ public class Lotteries {
             .filter(lottery -> winningLottery.calcMatchingCount(lottery) == targetCount)
             .count();
     }
+
+    public double calcReturnRate(Lottery winningLottery) {
+        int usedMoney = lotteries.size() * LOTTERY_PRICE;
+        int returnMoney = count1stPrize(winningLottery) * 2000000000;
+        returnMoney += count3rdPrize(winningLottery) * 1500000;
+        returnMoney += count4thPrize(winningLottery) * 50000;
+        returnMoney += count5thPrize(winningLottery) * 5000;
+
+        return (double) returnMoney / usedMoney;
+    }
 }

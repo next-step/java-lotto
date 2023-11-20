@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -218,5 +219,29 @@ public class LotteriesTest {
                 2
             )
         );
+    }
+
+    @Test
+    void calcReturnRate() {
+        // given
+        Lotteries lotteries = new Lotteries(
+            List.of(
+                new Lottery(List.of(1, 2, 3, 43, 44, 45)),
+                new Lottery(List.of(40, 41, 42, 43, 44, 45)),
+                new Lottery(List.of(40, 41, 42, 43, 44, 45)),
+                new Lottery(List.of(40, 41, 42, 43, 44, 45)),
+                new Lottery(List.of(40, 41, 42, 43, 44, 45)),
+                new Lottery(List.of(40, 41, 42, 43, 44, 45)),
+                new Lottery(List.of(40, 41, 42, 43, 44, 45)),
+                new Lottery(List.of(40, 41, 42, 43, 44, 45)),
+                new Lottery(List.of(40, 41, 42, 43, 44, 45)),
+                new Lottery(List.of(40, 41, 42, 43, 44, 45))
+            )
+        );
+        Lottery winningLottery = new Lottery(List.of(1, 2, 3, 4, 5, 6));
+
+        // when
+        double returnRate = lotteries.calcReturnRate(winningLottery);
+        assertThat(returnRate).isEqualTo(0.5);
     }
 }
