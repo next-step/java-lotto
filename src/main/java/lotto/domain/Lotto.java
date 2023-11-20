@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.strategy.WinningStrategy;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,5 +55,16 @@ public class Lotto {
         }
         stringBuilder.append("]");
         return stringBuilder.toString();
+    }
+
+    public void test(Lotto lotto, WinningStrategy strategy) {
+        strategy.matches(lotto, this);
+    }
+
+    public long calculateMatchCount(Lotto winningNumbers) {
+
+        return values.stream()
+                .filter(winningNumbers.values::contains)
+                .count();
     }
 }

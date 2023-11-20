@@ -1,7 +1,10 @@
 package lotto.domain;
 
+import lotto.domain.strategy.WinningStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Lottos {
 
@@ -21,5 +24,9 @@ public class Lottos {
             sc.append(System.lineSeparator());
         }
         return sc.toString();
+    }
+
+    public List<Lotto> getValue() {
+        return value;
     }
 }
