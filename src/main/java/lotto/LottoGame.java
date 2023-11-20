@@ -5,25 +5,26 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoGame {
 
     public static final int LOTTO_PRICE = 1000;
-    private List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> lottos;
     private Lotto winningLotto;
+    private List<Integer> lottoNumbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
     private LottoStatics lottoStatics = new LottoStatics();
+    
 
     public void buyLotto(int price) {
-        int gameCount = getGameCount(price);
-        while(countLotto() < gameCount) {
-            Lotto lotto = new Lotto(makingLottoNumbers());
-            lottos.add(lotto);
-        }
+        this.lottos = Stream
+            .generate(() -> new Lotto(makingLottoNumbers()))
+            .limit(getGameCount(price))
+            .collect(Collectors.toList());
     }
 
     private List<Integer> makingLottoNumbers() {
-        List<Integer> list = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
-        Collections.shuffle(list);
+        Collections.shuffle(lottoNumbers);
         return list.subList(0, 6);
     }
 
@@ -31,7 +32,7 @@ public class LottoGame {
         if (isValidBuyLottoPrice(price)) {
             throw new IllegalArgumentException();
         }
-        return price /1000;
+        return price / LOTTO_PRICE;
     }
 
     private  boolean isValidBuyLottoPrice(int price) {
