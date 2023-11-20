@@ -17,7 +17,7 @@ public class OutputView {
     }
 
     public void viewLotto(List<Lotto> lottos) {
-        System.out.println(lottos.toString() + "\n");
+        lottos.forEach(lotto -> System.out.println(lotto.toString()));
     }
 
     public void viewLottoRating(WinnerBoard winnerBoard) {

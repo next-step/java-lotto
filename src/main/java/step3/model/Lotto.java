@@ -2,6 +2,7 @@ package step3.model;
 
 import step3.enumeration.LottoRank;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static step3.enumeration.LottoRank.*;
@@ -28,6 +29,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return this.numbers.getNumbers().toString();
+        return Arrays.toString(this.numbers.getNumbers().toArray());
     }
 }

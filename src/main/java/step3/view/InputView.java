@@ -21,7 +21,6 @@ public class InputView {
     }
 
     public int bonusNumberInput() {
-        scanner.nextLine();
         System.out.println(PUT_BONUS_NUMBER);
         return scanner.nextInt();
     }
