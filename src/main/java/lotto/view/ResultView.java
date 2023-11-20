@@ -33,10 +33,10 @@ public class ResultView {
 
     public static void winningStatics(WinningNumbersDTO winningNumbersDTO, Lottos lottos, Winning winning) {
         int correctCount = winning.correctCount();
-        int bonusCorrectCount = winning.bonusCorrectCount();
+        boolean bonusCorrect = winning.bonusCorrectCount();
         int winningAmount = winning.winningAmount();
 
-        if (bonusCorrectCount > 0) {
+        if (bonusCorrect) {
             System.out.println(correctCount + "개 일치, 보너스 볼 일치(" + winningAmount + "원) - " + lottos.winningCorrectCount(winningNumbersDTO, winning) + "개");
             return ;
         }

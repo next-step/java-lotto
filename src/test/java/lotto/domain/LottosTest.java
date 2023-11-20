@@ -14,6 +14,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
     private Lottos lottos;
+    private WinningNumber winningNumber;
+    private BonusNumber bonusNumber;
 
     @BeforeEach
     void setUp() {
@@ -28,6 +30,8 @@ class LottosTest {
                 new Lotto("1, 2,3,9, 30,40"),//5000
                 new Lotto("1, 2,6,9, 30,40")//5000
         ));
+        winningNumber = new WinningNumber("1,2,3,4,5,6");
+        bonusNumber = new BonusNumber("33");
     }
 
     @DisplayName("가격만큼의 로또를 구매")
@@ -40,44 +44,44 @@ class LottosTest {
     @DisplayName("로또 총 당첨 금액을 리턴한다.")
     @Test
     void 총_당첨_금액() {
-        assertThat(lottos.totalWinningAmount(new WinningNumbersDTO("1,2,3,4,5,6", "33")))
+        assertThat(lottos.totalWinningAmount(new WinningNumbersDTO(winningNumber, bonusNumber)))
                 .isEqualTo(2_033_115_000l);
     }
     @DisplayName("당첨금액/구매금액 값을 소숫점 2자리까지 표현한 값을 리턴")
     @Test
     void 수익률() {
-        assertThat(lottos.rateOfReturn(new WinningNumbersDTO("1,2,3,4,5,6", "33")))
+        assertThat(lottos.rateOfReturn(new WinningNumbersDTO(winningNumber, bonusNumber)))
                 .isEqualTo(new BigDecimal("225901.67"));
     }
 
     @DisplayName("1등 당첨 갯수")
     @Test
     void FIRST_당첨_개수() {
-        assertThat(lottos.winningCorrectCount(new WinningNumbersDTO("1,2,3,4,5,6", "33"), Winning.FIRST))
+        assertThat(lottos.winningCorrectCount(new WinningNumbersDTO(winningNumber, bonusNumber), Winning.FIRST))
                 .isEqualTo(1);
     }
     @DisplayName("2등 당첨 갯수")
     @Test
     void SECOND_당첨_개수() {
-        assertThat(lottos.winningCorrectCount(new WinningNumbersDTO("1,2,3,4,5,6", "33"), Winning.SECOND))
+        assertThat(lottos.winningCorrectCount(new WinningNumbersDTO(winningNumber, bonusNumber), Winning.SECOND))
                 .isEqualTo(1);
     }
     @DisplayName("3등 당첨 갯수")
     @Test
     void THIRD_당첨_개수() {
-        assertThat(lottos.winningCorrectCount(new WinningNumbersDTO("1,2,3,4,5,6", "33"), Winning.THIRD))
+        assertThat(lottos.winningCorrectCount(new WinningNumbersDTO(winningNumber, bonusNumber), Winning.THIRD))
                 .isEqualTo(2);
     }
     @DisplayName("4등 당첨 갯수")
     @Test
     void FOURTH_당첨_개수() {
-        assertThat(lottos.winningCorrectCount(new WinningNumbersDTO("1,2,3,4,5,6", "33"), Winning.FOURTH))
+        assertThat(lottos.winningCorrectCount(new WinningNumbersDTO(winningNumber, bonusNumber), Winning.FOURTH))
                 .isEqualTo(2);
     }
     @DisplayName("5등 당첨 갯수")
     @Test
     void FIFTH_당첨_개수() {
-        assertThat(lottos.winningCorrectCount(new WinningNumbersDTO("1,2,3,4,5,6", "33"), Winning.FIFTH))
+        assertThat(lottos.winningCorrectCount(new WinningNumbersDTO(winningNumber, bonusNumber), Winning.FIFTH))
                 .isEqualTo(3);
     }
 }

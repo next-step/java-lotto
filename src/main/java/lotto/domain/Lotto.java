@@ -6,12 +6,11 @@ import lotto.dto.WinningNumbersDTO;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_PRICE = 1_000;
-    private static final int START_NUMBER = 1;
-    private static final int END_NUMBER = 45;
+    public static final int START_NUMBER = 1;
+    public static final int END_NUMBER = 45;
 
     private List<Integer> numbers;
 
@@ -36,24 +35,11 @@ public class Lotto {
     }
 
     public WinningInfoDTO winningInfo(WinningNumbersDTO winningNumbersDTO) {
-        int correctCount = correctCount(winningNumbersDTO.getWinningNumbers());
-        int bonusCorrectCount = bonusCorrectCount(winningNumbersDTO.getBonusNumber());
-        return new WinningInfoDTO(correctCount, bonusCorrectCount, new Amount(Winning.winningAmount(correctCount, bonusCorrectCount)));
-    }
-
-    private int correctCount(String numbers) {
-        return Parser.numbersParsing(numbers)
-                .stream()
-                .filter(value -> this.numbers.contains(value))
-                .collect(Collectors.toList())
-                .size();
-    }
-
-    private int bonusCorrectCount(String numbers) {
-        int bonusNumber = Parser.parseNumberFormat(numbers);
-        return (int) this.numbers.stream()
-                .filter(value -> value == bonusNumber)
-                .count();
+        WinningNumber winningNumbers = winningNumbersDTO.getWinningNumbers();
+        BonusNumber bonusNumber = winningNumbersDTO.getBonusNumber();
+        int correctCount = winningNumbers.correctCount(numbers);
+        boolean bonusCorrect = bonusNumber.belongs(numbers);
+        return new WinningInfoDTO(correctCount, bonusCorrect, new Amount(Winning.winningAmount(correctCount, bonusCorrect)));
     }
 
     @Override

@@ -5,26 +5,26 @@ import lotto.dto.WinningInfoDTO;
 import java.util.Arrays;
 
 public enum Winning {
-    FIRST(6, 0, 2_000_000_000),
-    SECOND(5, 1, 30_000_000),
-    THIRD(5, 0, 1_500_000),
-    FOURTH(4, 0, 50_000),
-    FIFTH(3, 0, 5_000);
+    FIRST(6, false, 2_000_000_000),
+    SECOND(5, true, 30_000_000),
+    THIRD(5, false, 1_500_000),
+    FOURTH(4, false, 50_000),
+    FIFTH(3, false, 5_000);
 
     private int correctCount;
-    private int bonusCorrectCount;
+    private boolean bonusCorrect;
     private int winningAmount;
 
-    Winning(int correctCount, int bonusCorrectCount, int winningAmount) {
+    Winning(int correctCount, boolean bonusCorrect, int winningAmount) {
         this.correctCount = correctCount;
-        this.bonusCorrectCount = bonusCorrectCount;
+        this.bonusCorrect = bonusCorrect;
         this.winningAmount = winningAmount;
     }
 
-    public static int winningAmount(int correctCount, int bonusCorrectCount) {
+    public static int winningAmount(int correctCount, boolean bonusCorrectCount) {
         if (correctCount == 5) {
             return Arrays.stream(Winning.values())
-                    .filter(value -> value.correctCount == correctCount && value.bonusCorrectCount == bonusCorrectCount)
+                    .filter(value -> value.correctCount == correctCount && value.bonusCorrect == bonusCorrectCount)
                     .map(value -> value.winningAmount)
                     .findFirst()
                     .orElse(0);
@@ -37,19 +37,19 @@ public enum Winning {
     }
 
     public static boolean hasMatchingCounts(WinningInfoDTO winningInfoDTO, Winning winning) {
-        if (winningInfoDTO.getCorrectCount() == winning.correctCount()
-                && winningInfoDTO.getBonusCorrectCount() == winning.bonusCorrectCount()) {
-            return true;
+        if (winning.correctCount == 5) {
+            return winningInfoDTO.getCorrectCount() == winning.correctCount()
+                    && winningInfoDTO.getBonusCorrect() == winning.bonusCorrectCount();
         }
-        return false;
+        return winningInfoDTO.getCorrectCount() == winning.correctCount();
     }
 
     public int correctCount() {
         return this.correctCount;
     }
 
-    public int bonusCorrectCount() {
-        return this.bonusCorrectCount;
+    public boolean bonusCorrectCount() {
+        return this.bonusCorrect;
     }
 
     public int winningAmount() {

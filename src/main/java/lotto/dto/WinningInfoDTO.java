@@ -6,12 +6,12 @@ import java.util.Objects;
 
 public class WinningInfoDTO {
     private int correctCount;
-    private int bonusCorrectCount;
+    private boolean bonusCorrect;
     private Amount amount;
 
-    public WinningInfoDTO(int correctCount, int bonusCorrectCount, Amount amount) {
+    public WinningInfoDTO(int correctCount, boolean bonusCorrect, Amount amount) {
         this.correctCount = correctCount;
-        this.bonusCorrectCount = bonusCorrectCount;
+        this.bonusCorrect = bonusCorrect;
         this.amount = amount;
     }
 
@@ -19,8 +19,8 @@ public class WinningInfoDTO {
         return correctCount;
     }
 
-    public int getBonusCorrectCount() {
-        return bonusCorrectCount;
+    public boolean getBonusCorrect() {
+        return bonusCorrect;
     }
 
     public Long getWinningAmount() {
@@ -32,19 +32,19 @@ public class WinningInfoDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinningInfoDTO that = (WinningInfoDTO) o;
-        return correctCount == that.correctCount && bonusCorrectCount == that.bonusCorrectCount && Objects.equals(amount, that.amount);
+        return correctCount == that.correctCount && bonusCorrect == that.bonusCorrect && Objects.equals(amount, that.amount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(correctCount, bonusCorrectCount, amount);
+        return Objects.hash(correctCount, bonusCorrect, amount);
     }
 
     @Override
     public String toString() {
         return "WinningInfoDTO{" +
                 "correctCount=" + correctCount +
-                ", bonusCorrectCount=" + bonusCorrectCount +
+                ", bonusCorrectCount=" + bonusCorrect +
                 ", amount=" + amount +
                 '}';
     }

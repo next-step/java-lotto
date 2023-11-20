@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.Lottos;
-import lotto.domain.Parser;
-import lotto.domain.Winning;
+import lotto.domain.*;
 import lotto.dto.WinningNumbersDTO;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -18,9 +16,15 @@ public class UserInterface {
         }
         ResultView.purchaseCount(lottos);
         ResultView.lottos(lottos);
-        String winningNumbers = InputView.winningNumbers();
-        String bonusNumber = InputView.bonusNumber();
-        WinningNumbersDTO winningNumbersDTO = new WinningNumbersDTO(winningNumbers, bonusNumber);
+
+        WinningNumber winningNumber = new WinningNumber(InputView.winningNumbers());
+
+        BonusNumber bonusNumber = new BonusNumber(InputView.bonusNumber());
+
+        if (winningNumber.contains(bonusNumber.getBonusNumber())) {
+            throw new IllegalArgumentException("당첨 번호에 보너스 볼 번호가 포함되면 안됩니다.");
+        }
+        WinningNumbersDTO winningNumbersDTO = new WinningNumbersDTO(winningNumber, bonusNumber);
         System.out.println();
         ResultView.winningStaticsMessage();
 
