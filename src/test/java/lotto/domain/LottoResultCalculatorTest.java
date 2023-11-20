@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.strategy.FiveAndBonusMatchStrategy;
 import lotto.domain.strategy.ThreeMatchStrategy;
 import lotto.domain.strategy.WinningStrategy;
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoResultCalculatorTest {
 
@@ -52,6 +54,48 @@ class LottoResultCalculatorTest {
         // then
         double expectedProfitRate = 1.0;
         assertThat(profit).isEqualTo(expectedProfitRate);
+    }
+
+    @Test
+    @DisplayName("로또 번호 5개와 보너스 번호를 맞추는 경우 테스트")
+    void fiveAndBonusMatchTest() {
+        // given
+        WinningStrategy threeMatchStrategy = new FiveAndBonusMatchStrategy();
+        List<WinningStrategy> strategies = List.of(threeMatchStrategy);
+        LottoResultCalculator calculator = new LottoResultCalculator(strategies);
+
+        Lottos lottos = new Lottos(List.of(
+                new Lotto("1, 2, 3, 4, 5, 6")
+        ));
+        Lotto winningNumbers = new Lotto("1, 2, 3, 4, 5, 9");
+        LottoNumber bonusNumber = new LottoNumber(6);
+
+        // when
+        Map<String, Integer> results = calculator.calculateResults(lottos, winningNumbers, bonusNumber);
+
+        // then
+        assertThat(results.getOrDefault("fiveMatchWithBonus", 0)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("로또 번호 5개와 보너스 번호를 맞추지 못하는 경우 테스트")
+    void fiveMatchAndNotBonusTest() {
+        // given
+        WinningStrategy threeMatchStrategy = new FiveAndBonusMatchStrategy();
+        List<WinningStrategy> strategies = List.of(threeMatchStrategy);
+        LottoResultCalculator calculator = new LottoResultCalculator(strategies);
+
+        Lottos lottos = new Lottos(List.of(
+                new Lotto("1, 2, 3, 4, 5, 6")
+        ));
+        Lotto winningNumbers = new Lotto("1, 2, 3, 4, 5, 9");
+        LottoNumber bonusNumber = new LottoNumber(10);
+
+        // when
+        Map<String, Integer> results = calculator.calculateResults(lottos, winningNumbers, bonusNumber);
+
+        // then
+        assertThat(results.getOrDefault("fiveMatchWithBonus", 0)).isZero();
     }
 }
 
