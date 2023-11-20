@@ -26,11 +26,11 @@ public class Lotto implements Iterable<LottoNumber> {
     }
 
     public void validate(List<LottoNumber> lottoNumbers) {
+        checkLottoSizeIsValid(lottoNumbers);
+
         for (LottoNumber lottoNumber : lottoNumbers) {
             lottoNumber.validate(lottoNumber.lottoNumber());
         }
-
-        checkLottoSizeIsValid(lottoNumbers);
     }
 
     private void checkLottoSizeIsValid(List<LottoNumber> lottoNumbers) {

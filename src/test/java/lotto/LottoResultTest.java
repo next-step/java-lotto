@@ -35,9 +35,9 @@ public class LottoResultTest {
 		LottoResult lottoResult = new LottoResult(lottoList);
 		lottoResult.matchesWinningNumbers(lottoWinningNumbers);
 
-		Map<LottoMatch, Integer> lottoMatchResult = lottoResult.lottoMatchMap();
-		assertThat(lottoMatchResult.get(LottoMatch.THREE)).isEqualTo(1);
-		assertThat(lottoMatchResult.get(LottoMatch.FOUR)).isEqualTo(1);
-		assertEquals(lottoResult.rateOfReturn(), 2700, 0.001);
+		LottoMatchResult lottoMatchResult = lottoResult.matchesWinningNumbers(lottoWinningNumbers);
+		assertThat(LottoMatch.matchesCount(3, lottoMatchResult)).isEqualTo(1);
+		assertThat(LottoMatch.matchesCount(4, lottoMatchResult)).isEqualTo(1);
+		assertEquals(lottoResult.rateOfReturn(lottoWinningNumbers), 2700, 0.001);
 	}
 }

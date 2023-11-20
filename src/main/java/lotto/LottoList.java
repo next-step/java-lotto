@@ -16,11 +16,11 @@ public class LottoList implements Iterable<Lotto> {
     }
 
     public void validate(List<Lotto> lottoList) {
+        checkLottoListSizeIsValid(lottoList);
+
         for (Lotto lotto : lottoList) {
             lotto.validate(lotto.lottoNumbers());
         }
-
-        checkLottoListSizeIsValid(lottoList);
     }
 
     private void checkLottoListSizeIsValid(List<Lotto> lottoList) {

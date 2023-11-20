@@ -9,7 +9,7 @@ public class LottoNumber {
     private final int lottoNumber;
 
     public LottoNumber(String lottoNumber) {
-        this(Integer.parseInt(lottoNumber));
+        this(Integer.parseInt(lottoNumber.trim()));
     }
 
     public LottoNumber(int lottoNumber) {

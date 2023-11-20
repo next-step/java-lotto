@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -27,6 +28,16 @@ public enum LottoMatch {
 
 	public static LottoMatch fromInt(int matchCount) {
 		return INTEGER_TO_ENUM.get(matchCount);
+	}
+
+	public static int matchesCount(int matchCount, LottoMatchResult lottoMatchResult) {
+		long matchedCount =
+			lottoMatchResult.lottoMatches()
+				.stream()
+				.filter(lottoMatch -> lottoMatch.matchCount() == matchCount)
+				.count();
+
+		return (int) matchedCount;
 	}
 
 	public int matchCount() {

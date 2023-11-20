@@ -27,6 +27,11 @@ public class LottoWinningNumbers {
         return this.lottoWinningNumbers.equals(lotto);
     }
 
+    public long amount(Lotto lotto) {
+        LottoMatch lottoMatch = matchesLotto(lotto);
+        return lottoMatch.amount();
+    }
+
     public LottoMatch matchesLotto(Lotto lotto) {
         List<LottoNumber> lottoWinningList = new ArrayList<>(lottoWinningNumbers.lottoNumbers());
         List<LottoNumber> lottoList = new ArrayList<>(lotto.lottoNumbers());
