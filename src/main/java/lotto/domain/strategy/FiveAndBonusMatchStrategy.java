@@ -3,15 +3,15 @@ package lotto.domain.strategy;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
-public class ThreeMatchStrategy implements WinningStrategy {
+public class FiveAndBonusMatchStrategy implements WinningStrategy{
 
-    private static final int THREE_MATCH = 3;
-    private static final String STRATEGY_NAME = "threeMatch";
-    private static final int WINNING_MONEY = 5_000;
+    private static final int FIVE_MATCH = 5;
+    private static final String STRATEGY_NAME = "fiveMatchWithBonus";
+    private static final int WINNING_MONEY = 30_000_000;
 
     @Override
     public boolean matches(Lotto lotto, Lotto winningNumbers, LottoNumber bonusNumber) {
-        return lotto.calculateMatchCount(winningNumbers) == THREE_MATCH;
+        return lotto.calculateMatchCount(winningNumbers) == FIVE_MATCH && lotto.matchBonusNumber(bonusNumber);
     }
 
     @Override

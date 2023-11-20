@@ -11,18 +11,27 @@ public class Lotto {
     private static final int LOTTO_SIZE = 6;
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_MIN_NUMBER = 1;
+    private static final List<LottoNumber> INITIALIZED_LOTTO = initLottos();
     private final List<LottoNumber> values;
 
     public Lotto() {
         this.values = new ArrayList<>();
         Random random = new Random();
         while (values.size() < LOTTO_SIZE) {
-            LottoNumber lottoNumber = new LottoNumber(lottoRange(random));
+            LottoNumber lottoNumber = findUniquLottoNumber(random);
 
-            if (!values.contains(lottoNumber)) {
-                values.add(lottoNumber);
-            }
+            values.add(lottoNumber);
         }
+    }
+
+    private LottoNumber findUniquLottoNumber(Random random) {
+        LottoNumber lottoNumber;
+
+        do {
+            lottoNumber = INITIALIZED_LOTTO.get(lottoRange(random) - 1);
+        } while (values.contains(lottoNumber));
+
+        return lottoNumber;
     }
 
     public Lotto(String values) {
@@ -48,12 +57,16 @@ public class Lotto {
         stringBuilder.append(OPEN_BRACKET);
         for (int i = 0; i < values.size(); i++) {
             stringBuilder.append(values.get(i).findNumber());
-            if (i != LOTTO_SIZE - 1) {
-                stringBuilder.append(DELIMITER);
-            }
+            addDelimiter(i, stringBuilder);
         }
         stringBuilder.append(CLOSE_BRACKET);
         return stringBuilder.toString();
+    }
+
+    private void addDelimiter(int i, StringBuilder stringBuilder) {
+        if (i != LOTTO_SIZE - 1) {
+            stringBuilder.append(DELIMITER);
+        }
     }
 
     public long calculateMatchCount(Lotto winningNumbers) {
@@ -61,5 +74,19 @@ public class Lotto {
         return values.stream()
                 .filter(winningNumbers.values::contains)
                 .count();
+    }
+
+    private static List<LottoNumber> initLottos() {
+        List<LottoNumber> lottos = new ArrayList<>();
+        for (int i = 1; i <= 45; i++) {
+            lottos.add(new LottoNumber(i));
+        }
+
+        return lottos;
+    }
+
+    public boolean matchBonusNumber(LottoNumber bonusNumber) {
+
+        return values.contains(bonusNumber);
     }
 }

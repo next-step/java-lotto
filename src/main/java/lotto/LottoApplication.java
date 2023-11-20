@@ -2,10 +2,7 @@ package lotto;
 
 import lotto.controller.LottoController;
 import lotto.domain.LottoResultCalculator;
-import lotto.domain.strategy.FiveMatchStrategy;
-import lotto.domain.strategy.FourMatchStrategy;
-import lotto.domain.strategy.SixMatchStrategy;
-import lotto.domain.strategy.ThreeMatchStrategy;
+import lotto.domain.strategy.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -22,6 +19,7 @@ public class LottoApplication {
                                 new ThreeMatchStrategy(),
                                 new FourMatchStrategy(),
                                 new FiveMatchStrategy(),
+                                new FiveAndBonusMatchStrategy(),
                                 new SixMatchStrategy()
                         )
                 )
