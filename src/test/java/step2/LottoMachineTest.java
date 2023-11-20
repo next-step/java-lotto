@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.lotto.domain.LottoMachine;
-import step2.lotto.domain.LottoNumberRandomGenerator;
+import step2.lotto.strategy.LottoNumberRandomGenerator;
 
 class LottoMachineTest {
 
@@ -17,6 +17,5 @@ class LottoMachineTest {
         assertThat(lottoMachine.getLottoPurchaseInfo().getLottoTicketCount()).isEqualTo(10);
         assertThat(lottoMachine.getPurchaseLottos().getLottos()).hasSize(10);
     }
-
 
 }

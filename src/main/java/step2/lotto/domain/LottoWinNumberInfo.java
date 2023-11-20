@@ -13,4 +13,10 @@ public class LottoWinNumberInfo {
     public Lotto getWinLotto() {
         return winLotto;
     }
+
+    public int matchCount(final Lotto lotto) {
+        return (int) winLotto.getLottoNumbers().stream()
+            .filter(winNumber -> lotto.getLottoNumbers().contains(winNumber))
+            .count();
+    }
 }

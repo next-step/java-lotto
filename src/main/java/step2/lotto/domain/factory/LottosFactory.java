@@ -1,8 +1,10 @@
-package step2.lotto.domain;
+package step2.lotto.domain.factory;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import step2.lotto.domain.Lotto;
+import step2.lotto.strategy.LottoNumberGenerator;
 
 public class LottosFactory {
 

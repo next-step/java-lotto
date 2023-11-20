@@ -2,6 +2,7 @@ package step2;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.lotto.domain.Lotto;
@@ -36,6 +37,15 @@ class LottoWinNumberInfoTest {
 
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoWinNumberInfo(
             NumberSplitter.splitNumber(inputNumbers)));
+    }
+
+    @Test
+    @DisplayName("우승번호와 비교하여 일치하는 번호의 갯수를 반환한다.")
+    void matchCountTest() {
+        LottoWinNumberInfo lottoWinNumberInfo = new LottoWinNumberInfo(Set.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(Set.of(1,2,3,4,5,6));
+
+        assertThat(lottoWinNumberInfo.matchCount(lotto)).isEqualTo(6);
     }
 
 }

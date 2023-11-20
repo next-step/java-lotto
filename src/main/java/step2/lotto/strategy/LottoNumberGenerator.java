@@ -1,4 +1,4 @@
-package step2.lotto.domain;
+package step2.lotto.strategy;
 
 import java.util.Set;
 

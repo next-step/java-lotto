@@ -10,7 +10,7 @@ public class InputView {
 
     public int inputMoney() {
         System.out.println(INPUT_PURCHASE_MESSAGE);
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public String inputWinNumbers() {

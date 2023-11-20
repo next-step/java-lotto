@@ -2,7 +2,8 @@ package step2.lotto.controller;
 
 import java.util.Set;
 import step2.lotto.domain.LottoMachine;
-import step2.lotto.domain.LottoNumberRandomGenerator;
+import step2.lotto.domain.LottoWinNumberInfo;
+import step2.lotto.strategy.LottoNumberRandomGenerator;
 import step2.lotto.utility.NumberSplitter;
 import step2.lotto.view.InputView;
 import step2.lotto.view.ResultView;
@@ -15,12 +16,13 @@ public class LottoController {
         int inputMoney = inputView.inputMoney();
 
         LottoMachine lottoMachine = new LottoMachine(inputMoney, new LottoNumberRandomGenerator());
-        resultView.printPurchaseResultMessage(lottoMachine.getLottoPurchaseInfo());
+        resultView.printPurchase(lottoMachine.getLottoPurchaseInfo());
         resultView.printPurchaseLottoTicketNumbers(lottoMachine.getPurchaseLottos());
 
-        Set<Integer> winNumbers = NumberSplitter.splitNumber(inputView.inputWinNumbers());
+        LottoWinNumberInfo lottoWinNumberInfo = new LottoWinNumberInfo(
+            NumberSplitter.splitNumber(inputView.inputWinNumbers()));
+        lottoMachine.calculateLottoStatistics(lottoWinNumberInfo);
 
-
-
+        resultView.printResultStatics(lottoMachine.getLottoScore());
     }
 }

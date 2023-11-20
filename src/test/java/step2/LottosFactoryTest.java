@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.lotto.domain.LottoNumberRandomGenerator;
-import step2.lotto.domain.LottosFactory;
+import step2.lotto.strategy.LottoNumberRandomGenerator;
+import step2.lotto.domain.factory.LottosFactory;
 
 class LottosFactoryTest {
 
