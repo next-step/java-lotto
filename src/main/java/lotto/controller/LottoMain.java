@@ -1,10 +1,11 @@
 package lotto.controller;
 
-import java.util.Map;
+import java.util.stream.Collectors;
 import lotto.domain.LottoMachine;
-import lotto.domain.Rank;
+import lotto.domain.LottoNumber;
 import lotto.domain.Tickets;
 import lotto.domain.WinningNumbers;
+import lotto.domain.WinningTickets;
 import lotto.utils.TextManipulator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -20,14 +21,15 @@ public class LottoMain {
 
                 OutputView.printGeneratedTickets(tickets.values());
 
-                WinningNumbers winningNumbers = new WinningNumbers(TextManipulator.splitNumberTextByComma(
-                    InputView.scanWinningNumberText()));
-                winningNumbers.addBonusNumberInToTheWinningNumbers(InputView.scanBonusNumberText());
-                Map<Rank, Integer> matchRankCountMap = tickets.countWinningTickets(winningNumbers);
+                WinningNumbers winningNumbers = new WinningNumbers(
+                    TextManipulator.splitNumberTextByComma(InputView.scanWinningNumberText()).stream()
+                        .map(LottoNumber::new).collect(Collectors.toList()),
+                    new LottoNumber(InputView.scanBonusNumberText()));
+                WinningTickets winningTickets = tickets.analyzeWinningTickets(winningNumbers);
 
                 OutputView.printResultOfWinningTitle();
-                OutputView.printResultOfWinning(matchRankCountMap);
+                OutputView.printResultOfWinning(winningTickets);
                 long purchaseAmount = lottoMachine.getPurchaseAmount(tickets);
-                OutputView.printRateOfBenefit(tickets.calculateRateOfBenefit(matchRankCountMap, purchaseAmount));
+                OutputView.printRateOfBenefit(winningTickets.calculateRateOfBenefit(purchaseAmount));
         }
 }
