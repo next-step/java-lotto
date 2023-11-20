@@ -18,7 +18,7 @@ public class Lotto {
         this.values = new ArrayList<>();
         Random random = new Random();
         while (values.size() < LOTTO_SIZE) {
-            LottoNumber lottoNumber = INITIALIZED_LOTTO.get(lottoRange(random));
+            LottoNumber lottoNumber = INITIALIZED_LOTTO.get(lottoRange(random) - 1);
 
             if (!values.contains(lottoNumber)) {
                 values.add(lottoNumber);

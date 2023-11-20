@@ -4,10 +4,21 @@ import java.util.Objects;
 
 public class LottoNumber {
 
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_MAX_NUMBER = 45;
     private final int value;
 
     public LottoNumber(int value) {
+
+        validateLottoRange(value);
+
         this.value = value;
+    }
+
+    private static void validateLottoRange(int value) {
+        if (value < LOTTO_MIN_NUMBER || value > LOTTO_MAX_NUMBER) {
+            throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이의 숫자만 가능합니다.");
+        }
     }
 
     public String findNumber() {
