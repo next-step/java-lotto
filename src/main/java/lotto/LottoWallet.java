@@ -17,7 +17,6 @@ public class LottoWallet {
         this.lottos = lottos;
     }
 
-
     public static LottoWallet from(List<Lotto> lottos) {
         return new LottoWallet(lottos);
     }
