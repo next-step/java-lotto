@@ -5,6 +5,7 @@ import java.util.List;
 
 import lotto.domain.LottoShop;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoValidator;
 import lotto.domain.strategy.AutoGenerateStrategy;
 import lotto.domain.strategy.GenerateStrategy;
 import lotto.view.InputView;
@@ -24,5 +25,18 @@ public class LottoController {
 			lottoTickets.add(new LottoTicket(strategy));
 		}
 		new ResultView().showLottoTickets(lottoTickets);
+
+		String winningNumbers = new InputView().inputWinningNumbers();
+		String[] winningNums = winningNumbers.split(", ");
+		List<Integer> winningNumList = new ArrayList<>();
+		for (String num : winningNums) {
+			winningNumList.add(Integer.parseInt(num));
+		}
+
+		List<LottoTicket> updatedTicket = new ArrayList<>();
+		for (LottoTicket ticket : lottoTickets) {
+			updatedTicket.add(new LottoValidator(winningNumList).valid(ticket));
+			System.out.println(ticket.toString());
+		}
 	}
 }
