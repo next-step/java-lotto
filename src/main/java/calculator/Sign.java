@@ -3,7 +3,7 @@ package calculator;
 import java.util.regex.Pattern;
 
 public class Sign {
-	String sign;
+	private final String sign;
 
 	public Sign(String sign) {
 		validate(sign);

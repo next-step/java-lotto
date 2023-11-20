@@ -1,54 +1,19 @@
 package calculator;
 
-import java.util.Stack;
+import java.util.Queue;
 
 public class Numbers {
-	private final Stack<Integer> numbers;
+	private final Queue<Integer> numbers;
 
-	public Numbers(Stack<Integer> numbers) {
+	public Numbers(Queue<Integer> numbers) {
 		this.numbers = numbers;
 	}
 
-	public int pop() {
-		return numbers.pop();
+	public int poll() {
+		return numbers.poll();
 	}
 
-	public void push(int number) {
-		numbers.push(number);
-	}
-
-	public void pushBySign(Sign sign) {
-		if (sign.isPlusSign()) {
-			plus();
-		}
-		if (sign.isMinusSign()) {
-			minus();
-		}
-		if (sign.isMultiplicationSign()) {
-			multiplication();
-		}
-		if (sign.isDivisionSign()) {
-			division();
-		}
-	}
-
-	public void plus() {
-		numbers.push(numbers.pop() + numbers.pop());
-	}
-
-	public void minus() {
-		numbers.push(numbers.pop() - numbers.pop());
-	}
-
-	public void multiplication() {
-		numbers.push(numbers.pop() * numbers.pop());
-	}
-
-	public void division() {
-		numbers.push(numbers.pop() / numbers.pop());
-	}
-
-	public int size() {
-		return numbers.size();
+	public void add(int number) {
+		numbers.add(number);
 	}
 }

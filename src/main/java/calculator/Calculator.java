@@ -1,22 +1,24 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 
 public class Calculator {
-	Numbers numbers = new Numbers(new Stack<>());
-	Signs signs = new Signs(new Stack<>());
-	List<String> inputList = new ArrayList<>();
+	private final Numbers numbers = new Numbers(new LinkedList<>());
+	private final Signs signs = new Signs(new ArrayList<>());
+
+	private List<String> inputs = new ArrayList<>();
+	private int result = 0;
 
 	public int run(String input) {
 		validate(input);
-		inputList = List.of(input.split(" "));
+		inputs = List.of(input.split(" "));
 
-		pushEachStack();
+		ready();
 		calculate();
 
-		return numbers.pop();
+		return result;
 	}
 
 	private void validate(String input) {
@@ -25,28 +27,55 @@ public class Calculator {
 		}
 	}
 
-	private void pushEachStack() {
-		for (int i = inputList.size() - 1; i >= 0; i--) {
-			pushByCondition(i);
+	private void ready() {
+		for (String input : inputs) {
+			divide(input);
 		}
-	}
-
-	private void pushByCondition(int i) {
-		if (i % 2 == 0) {
-			numbers.push(parseInt(inputList.get(i)));
-		}
-		if (i % 2 != 0) {
-			signs.push(new Sign(inputList.get(i)));
-		}
+		result = numbers.poll();
 	}
 
 	private void calculate() {
-		while (numbers.size() > 1) {
-			numbers.pushBySign(signs.pop());
+		for (Sign sign : signs.signs()) {
+			if (sign.isPlusSign()) {
+				plus();
+			}
+			if (sign.isMinusSign()) {
+				minus();
+			}
+			if (sign.isMultiplicationSign()) {
+				multiplication();
+			}
+			if (sign.isDivisionSign()) {
+				division();
+			}
+		}
+	}
+
+	private void divide(String input) {
+		try {
+			numbers.add(parseInt(input));
+		} catch (NumberFormatException ne) {
+			signs.add(new Sign(input));
 		}
 	}
 
 	private static int parseInt(String input) {
 		return Integer.parseInt(input);
+	}
+
+	private void plus() {
+		result = result + numbers.poll();
+	}
+
+	private void minus() {
+		result = result - numbers.poll();
+	}
+
+	private void multiplication() {
+		result = result * numbers.poll();
+	}
+
+	private void division() {
+		result = result / numbers.poll();
 	}
 }

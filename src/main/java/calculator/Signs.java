@@ -1,19 +1,19 @@
 package calculator;
 
-import java.util.Stack;
+import java.util.List;
 
 public class Signs {
-	private final Stack<Sign> signs;
+	private final List<Sign> signs;
 
-	public Signs(Stack<Sign> signs) {
+	public Signs(List<Sign> signs) {
 		this.signs = signs;
 	}
 
-	public void push(Sign sign) {
-		signs.push(sign);
+	public void add(Sign sign) {
+		signs.add(sign);
 	}
 
-	public Sign pop() {
-		return signs.pop();
+	public List<Sign> signs() {
+		return signs;
 	}
 }
