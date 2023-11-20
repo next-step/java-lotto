@@ -13,6 +13,25 @@ public class Lotto {
         this.lotto = lottoNumbers;
     }
 
+    public int match(Lotto winningLotto) {
+        int count = 0;
+        for (LottoNumber lottoNumber : lotto) {
+            count = getCount(winningLotto, count, lottoNumber);
+        }
+        return count;
+    }
+
+    private static int getCount(Lotto winningLotto, int count, LottoNumber lottoNumber) {
+        if (winningLotto.contains(lottoNumber)) {
+            count += 1;
+        }
+        return count;
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
+    }
+
     private static void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() < LOTTO_MAX_SIZE) {
             throw new IllegalArgumentException("로또 사이즈는 6보다 작을 수 없습니다.");

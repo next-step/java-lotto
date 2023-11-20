@@ -25,4 +25,13 @@ public class LottoTest {
             new Lotto(lottoNumbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("로또의 넘버와 당첨번호와 매칭하여 count를 리턴한다.")
+    void match() {
+        Lotto lotto = new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+        Lotto winningLotto = new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+        int matchCount = lotto.match(winningLotto);
+        Assertions.assertThat(matchCount).isEqualTo(6);
+    }
 }
