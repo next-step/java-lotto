@@ -13,6 +13,7 @@ public class InputView {
         if (money % MONEY_UNIT != ZERO) {
             throw new IllegalArgumentException("로또 구매는 1000원 단위로 구매할 수 있습니다.");
         }
+        System.out.println(money / MONEY_UNIT + "개를 구매했습니다.");
         return money / MONEY_UNIT;
     }
 }
