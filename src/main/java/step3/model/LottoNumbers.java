@@ -18,6 +18,7 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(List<Integer> numbers) {
+        validate(numbers);
         this.numbers = numbers;
     }
 
