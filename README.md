@@ -32,6 +32,7 @@
 #### Feedback 23.11.19
 * [x] Stack -> Queue 변경
 * [x] while -> for 변경
-* [ ] Sign Enum 구현
-* [ ] 연산작업에 대한 위치 고민
+* [x] Sign Enum 구현
+* [x] 연산작업에 대한 위치 고민
+  * [x] Sign Enum 에게 위임
 * [x] Main 클래스 생성

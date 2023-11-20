@@ -3,43 +3,47 @@ package calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 public class SignTest {
+
 	@Test
-	@DisplayName("생성자_사칙연산 외 기호_throw IllegalArgumentException")
-	void new_sign() {
-		assertThatIllegalArgumentException().isThrownBy(() -> {
-			Sign sign = new Sign(",");
-		}).withMessage("사칙연산 기호가 아닙니다.");
+	@DisplayName("of_사칙연산 외 기호, 사칙연산 기호_throw IllegalArgumentException, no Exception")
+	void of() {
+		assertThatThrownBy(() -> {
+			Sign.of(",");
+		}).isInstanceOf(IllegalArgumentException.class).hasMessage("사칙연산 기호가 아닙니다.");
+
+		assertThatNoException().isThrownBy(() -> {
+			Sign.of("+");
+		});
 	}
 
 	@Test
-	@DisplayName("isPlusSign_덧셈 기호로 생성_true")
-	void sign_isPlusSign() {
-		Sign sign = new Sign("+");
-		assertThat(sign.isPlusSign()).isTrue();
+	@DisplayName("calculate_덧셈 기호로 생성_덧셈 결과값")
+	void calculate_plus() {
+		Sign sign = Sign.of("+");
+		assertThat(sign.calculate(1, 2)).isEqualTo(3);
 	}
 
 	@Test
-	@DisplayName("isMinusSign_뺄셈 기호로 생성_true")
-	void sign_isMinusSign() {
-		Sign sign = new Sign("-");
-		assertThat(sign.isMinusSign()).isTrue();
+	@DisplayName("calculate_뺄셈 기호로 생성_뺄셈 결과값")
+	void calculate_minus() {
+		Sign sign = Sign.of("-");
+		assertThat(sign.calculate(2, 1)).isEqualTo(1);
 	}
 
 	@Test
-	@DisplayName("isMultiplicationSign_곱셈 기호로 생성_true")
-	void sign_isMultiplicationSign() {
-		Sign sign = new Sign("*");
-		assertThat(sign.isMultiplicationSign()).isTrue();
+	@DisplayName("calculate_곱셈 기호로 생성_곱셈 결과값")
+	void calculate_multiplication() {
+		Sign sign = Sign.of("*");
+		assertThat(sign.calculate(3, 2)).isEqualTo(6);
 	}
 
 	@Test
-	@DisplayName("isDivisionSign_나눗셈 기호로 생성_true")
-	void sign_isDivisionSign() {
-		Sign sign = new Sign("/");
-		assertThat(sign.isDivisionSign()).isTrue();
+	@DisplayName("calculate_나눗셈 기호로 생성_나눗셈 결과값")
+	void calculate_division() {
+		Sign sign = Sign.of("/");
+		assertThat(sign.calculate(3, 2)).isEqualTo(1);
 	}
 }

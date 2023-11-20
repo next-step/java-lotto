@@ -34,48 +34,21 @@ public class Calculator {
 		result = numbers.poll();
 	}
 
-	private void calculate() {
-		for (Sign sign : signs.signs()) {
-			if (sign.isPlusSign()) {
-				plus();
-			}
-			if (sign.isMinusSign()) {
-				minus();
-			}
-			if (sign.isMultiplicationSign()) {
-				multiplication();
-			}
-			if (sign.isDivisionSign()) {
-				division();
-			}
-		}
-	}
-
 	private void divide(String input) {
 		try {
 			numbers.add(parseInt(input));
 		} catch (NumberFormatException ne) {
-			signs.add(new Sign(input));
+			signs.add(Sign.of(input));
+		}
+	}
+
+	private void calculate() {
+		for (Sign sign : signs.signs()) {
+			result = sign.calculate(result, numbers.poll());
 		}
 	}
 
 	private static int parseInt(String input) {
 		return Integer.parseInt(input);
-	}
-
-	private void plus() {
-		result = result + numbers.poll();
-	}
-
-	private void minus() {
-		result = result - numbers.poll();
-	}
-
-	private void multiplication() {
-		result = result * numbers.poll();
-	}
-
-	private void division() {
-		result = result / numbers.poll();
 	}
 }
