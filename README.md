@@ -48,22 +48,22 @@
 # 로또
 
 ### 기술 요구사항
-[] else 금물, switch 금물
-[] depth 1 단계
+[x] else 금물, switch 금물
+[x] depth 1 단계
 [] 메소드는 최대 15라인
-[] 예상외의 값 입력시 예외처리
-[] 도메인은 무조건 테스트
+[x] 예상외의 값 입력시 예외처리
+[x] 도메인은 무조건 테스트
 
 ### 기능 요구사항
-[] 로또 구입 금액을 입력
-[] 구입 금액에 해당하는 로또 발급
-[] 로또 1장의 가격은 1000원
-[] 지난주 당첨 번호 입력
-[] 통계 (3개 일치 - 5000)
-[] 통계 (4개 일치 - 50000)
-[] 통계 (5개 일치 - 1500000)
-[] 통계 (6개 일치 - 2000000000)
-[] 수익율 계산
+[x] 로또 구입 금액을 입력
+[x] 구입 금액에 해당하는 로또 발급
+[x] 로또 1장의 가격은 1000원
+[x] 지난주 당첨 번호 입력
+[x] 통계 (3개 일치 - 5000)
+[x] 통계 (4개 일치 - 50000)
+[x] 통계 (5개 일치 - 1500000)
+[x] 통계 (6개 일치 - 2000000000)
+[x] 수익율 계산
 
 ### 산출 클래스 예상
 - controller
@@ -83,4 +83,21 @@
   InputView.java
   ResultView.java
 
-
+### 산출 클래스 진행중
+- controller
+  Main.java
+  LottoController.java
+- **domain**
+  [x]Lotto.java (List<LottoNumber> 로또 한장)
+  [x]LottoNumber.java (Integer로 로또 번호 하나)
+  [x]LottoShop.java (로또 생성 팩토리)
+  [x]LottoNumberFactory.java (로또 넘버 자동 생성 팩토리)
+  [x]LottoWallet.java (List<Lotto> 로또 여러장)
+  [x]WinningLotto.java (Lotto 지난주 로또 한장)
+  [x]MoneyWallet.java (사용자가 입력한 값)
+  [x]Prize.java (로또 등수 상금)
+  [x]StatisticsReport.java (로또 통계레포트) 🤔
+  [x]PAndLReport.java (로또 손익레포트)
+- view
+  InputView.java
+  ResultView.java
