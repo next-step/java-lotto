@@ -18,7 +18,7 @@ public class LottoMake {
 
         List<Lotto> lottos = new ArrayList<>();
         for (int i=0; i < lottoCount; i++) {
-            lottos.add(new Lotto(new LottoNumbers(new LottoNumber().getNumber())));
+            lottos.add(new Lotto(new LottoNumbers(new LottoNumber())));
         }
 
         return lottos;
