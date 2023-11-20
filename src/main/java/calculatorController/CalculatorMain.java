@@ -1,5 +1,8 @@
-import view.ResultView;
-import view.InputView;
+package calculatorController;
+
+import calculatorModel.Calculator;
+import calculatorView.ResultView;
+import calculatorView.InputView;
 
 public class CalculatorMain {
 
