@@ -8,7 +8,7 @@ public class LottoNumber {
     public LottoNumber() {}
 
     public LottoNumber(int number) {
-        if (number < START_NUMBER && START_NUMBER < number) {
+        if (number < START_NUMBER || END_NUMBER < number) {
             throw new IllegalArgumentException("Lotto number is more than 1 and less then 46");
         }
         this.number = number;
