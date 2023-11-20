@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoFactory;
+import lotto.domain.LottoGame;
 import lotto.domain.PrizeStatus;
 import lotto.domain.WinnerNumbers;
 import lotto.view.InputView;
@@ -8,24 +9,27 @@ import lotto.view.OutputView;
 
 import java.util.Random;
 
+import static lotto.view.OutputView.*;
+import static lotto.view.OutputView.displayNumberOfPurchasedTickets;
+
 public class LottoPlayApplication {
+    public LottoPlayApplication() {
+    }
+
     public static void main (String [] arg) {
         Random random = new Random();
 
         int purchasedAmt = InputView.getAmountOfPurchase();
         int numOfTickets = purchasedAmt / 1000;
-        OutputView.displayNumberOfPurchasedTickets(purchasedAmt);
+        displayNumberOfPurchasedTickets(purchasedAmt);
 
-        LottoFactory lottoFactory = new LottoFactory(numOfTickets, random);
-        OutputView.displayLottoTickets(lottoFactory);
+        LottoGame lottoGame = new LottoGame(numOfTickets, random);
 
-        WinnerNumbers winnerNumbers = new WinnerNumbers(lottoFactory.generateTicket(random));
+        displayLottoTickets(lottoGame.tickets());
 
-        OutputView.displayWinnerNumbers(winnerNumbers);
-        PrizeStatus prizeStatus = new PrizeStatus(lottoFactory, winnerNumbers);
+        displayWinnerNumbers(lottoGame.winnerNumbers());
+        PrizeStatus prizeStatus = new PrizeStatus(lottoGame);
 
-        OutputView.displayPrizeStatMessage();
-        OutputView.displayPrizeStatus(prizeStatus);
-        OutputView.displayProfit(prizeStatus.calculateProfit(purchasedAmt));
+        displayResult(prizeStatus, purchasedAmt);
     }
 }

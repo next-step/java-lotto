@@ -1,11 +1,25 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class PrizeStatus {
 
     private HashMap<Rank, Integer> prizeStatus = new HashMap<>();
     private int totalEarning;
+
+    public PrizeStatus(LottoGame lottoGame) {
+        List<LottoTicket> tickets = lottoGame.tickets();
+        int totalProfit = 0;
+        setupPrizeStatus();
+
+        for (int i = 0; i < tickets.size(); i++) {
+            int totalMatchedCount = tickets.get(i).calculateTotalMatchedCount(lottoGame.winnerNumbers());
+            int updatedTotalProfit = updatePrizeStatus(totalMatchedCount, totalProfit);
+            totalProfit = updatedTotalProfit;
+        }
+        this.totalEarning = totalProfit;
+    }
 
     public PrizeStatus(LottoFactory lottoFactory, WinnerNumbers winnerNumbers) {
         int totalProfit = 0;

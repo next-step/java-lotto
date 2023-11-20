@@ -1,8 +1,11 @@
 package lotto.view;
 
 import lotto.domain.LottoFactory;
+import lotto.domain.LottoTicket;
 import lotto.domain.PrizeStatus;
 import lotto.domain.WinnerNumbers;
+
+import java.util.List;
 
 public class OutputView {
 
@@ -10,8 +13,8 @@ public class OutputView {
         System.out.println(amountOfPurchase/1000+"개를 구매했습니다.");
     }
 
-    public static void displayLottoTickets(LottoFactory lottoFactory) {
-        lottoFactory.tickets().forEach(lottoTicket -> {
+    public static void displayLottoTickets(List<LottoTicket> tickets) {
+        tickets.forEach(lottoTicket -> {
             System.out.println(lottoTicket.toString());
         });
     }
@@ -36,5 +39,11 @@ public class OutputView {
 
     public static void displayProfit(double profit) {
         System.out.println("총 수익률은 "+profit+"입니다.");
+    }
+
+    public static void displayResult(PrizeStatus prizeStatus, int purchasedAmt) {
+        displayPrizeStatMessage();
+        displayPrizeStatus(prizeStatus);
+        displayProfit(prizeStatus.calculateProfit(purchasedAmt));
     }
 }
