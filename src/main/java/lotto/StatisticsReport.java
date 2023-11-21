@@ -48,13 +48,12 @@ public class StatisticsReport {
     }
 
     public int totalPrize() {
-        int total = 0;
-        for (Prize key : matchCountByPrize.keySet()) {
-            if (0 < matchCountByPrize.get(key)) {
-                total = total + key.price();
+        return matchCountByPrize.keySet().stream().mapToInt(prize -> {
+            if (0 < matchCountByPrize.get(prize)) {
+                return prize.price();
             }
-        }
-        return total;
+            return 0;
+        }).sum();
     }
 
     public LottoWallet lottoWallet() {
