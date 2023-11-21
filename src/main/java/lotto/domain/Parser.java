@@ -12,6 +12,10 @@ public class Parser {
     }
 
     public static int numberParsing(String value) {
+        int number = parseNumberFormat(value);
+        if (number < 0) {
+            throw new IllegalArgumentException("숫자가 음수이면 안됩니다.");
+        }
         return parseNumberFormat(value);
     }
 
