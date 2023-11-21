@@ -28,14 +28,18 @@ public class LottoNumbers {
 
     public LottoRank getLottoRank(List<Integer> winNumbers, int bonusNumber) {
         int count = (int) winNumbers.stream()
-                .filter(this.numbers::contains)
+                .filter(this::isContain)
                 .count();
 
-        if (SECOND.getMatch() == count && this.numbers.contains(bonusNumber)) {
+        if (SECOND.getMatch() == count && isContain(bonusNumber)) {
             return SECOND;
         }
 
         return LottoRank.getRank(count);
+    }
+
+    public boolean isContain(int number) {
+        return this.numbers.contains(number);
     }
 
     private void validate(List<Integer> numbers) {
