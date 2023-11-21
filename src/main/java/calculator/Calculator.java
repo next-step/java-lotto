@@ -15,6 +15,10 @@ public class Calculator {
             return firstOperand - secondOperand;
         }
 
-        return firstOperand * secondOperand;
+        if (operator.equals("*")) {
+            return firstOperand * secondOperand;
+        }
+
+        return firstOperand / secondOperand;
     }
 }

@@ -48,4 +48,18 @@ public class CalculatorTest {
         // then
         assertThat(result).isEqualTo(15);
     }
+
+    @Test
+    @DisplayName("나눗셈을 할 수 있다.")
+    void divide() {
+        // given
+        Calculator calculator = new Calculator();
+        String given = "15 / 3";
+
+        // when
+        long result = calculator.calculate(given);
+
+        // then
+        assertThat(result).isEqualTo(5);
+    }
 }
