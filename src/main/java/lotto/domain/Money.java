@@ -5,37 +5,43 @@ public class Money {
     public static final String CANNOT_BUY_EVEN_ONLY_ONE_LOTTO_EXCEPTION = "돈이 부족해 1개의 로또도 살 수 없습니다.";
     public static final String MONEY_TO_GO_BACK_EXCEPTION = "로또를 구매해도 거슬러줄 금액이 존재합니다.";
 
-    public long lottoQuantity(long fee) {
-        validateMoney(fee);
-        return changeToLottoCnt(fee);
+    private final long money;
+
+    public Money(long money) {
+        this.money = money;
     }
 
-    private void validateMoney(long fee) {
-        validateMoneyToBuyLotto(fee);
-        validateMoneyToGoBack(fee);
+    public long lottoQuantity() {
+        validateMoney();
+        return changeToLottoCnt();
     }
 
-    private void validateMoneyToBuyLotto(long fee) {
-        if (purchasable(fee)) {
+    private void validateMoney() {
+        validateMoneyToBuyLotto();
+        validateMoneyToGoBack();
+    }
+
+    private void validateMoneyToBuyLotto() {
+        if (purchasable()) {
             throw new IllegalStateException(CANNOT_BUY_EVEN_ONLY_ONE_LOTTO_EXCEPTION);
         }
     }
 
-    private boolean purchasable(long fee) {
-        return fee < LOTTO_PRICE;
+    private boolean purchasable() {
+        return money < LOTTO_PRICE;
     }
 
-    private void validateMoneyToGoBack(long fee) {
-        if (isLeft(fee)) {
+    private void validateMoneyToGoBack() {
+        if (changeable()) {
             throw new IllegalStateException(MONEY_TO_GO_BACK_EXCEPTION);
         }
     }
 
-    private boolean isLeft(long fee) {
-        return fee % LOTTO_PRICE != 0;
+    private boolean changeable() {
+        return money % LOTTO_PRICE != 0;
     }
 
-    private long changeToLottoCnt(long fee) {
-        return fee / LOTTO_PRICE;
+    private long changeToLottoCnt() {
+        return money / LOTTO_PRICE;
     }
 }
