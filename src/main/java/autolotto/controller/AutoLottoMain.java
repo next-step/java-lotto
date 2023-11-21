@@ -16,7 +16,9 @@ public class AutoLottoMain {
         List<Lotto> lottoTickets = lottoGame.getLottoTickets();
         ResultView.printLottoNumber(lottoTickets);
 
-        LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, new Lotto(InputView.lastWeekWinNumber()));
+        LottoStatistics lottoStatistics
+                = new LottoStatistics(lottoTickets, new WinLotto(new Lotto(InputView.lastWeekWinNumber()), InputView.bonusNumber()));
+
         Map<Rank, Integer> rankIntegerMap = lottoStatistics.calcuratorRankCount();
         ResultView.printStatistics(rankIntegerMap, lottoStatistics.calcuratorProfit(rankIntegerMap, ticketsCount));
     }

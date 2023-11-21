@@ -14,6 +14,8 @@ public class ResultView {
 
     public static void printStatistics(Map<Rank, Integer> rankCount, double profit) {
         System.out.println("\n당첨 통계\n---------");
+//        List<Rank> ranks = Arrays.asList(Rank.values());
+//        ranks.sort(money);
         Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.NO_MATCH)
                 .forEach(rank -> printWinCount(rankCount, rank));
