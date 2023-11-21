@@ -12,4 +12,10 @@ public class InputValidation {
             throw new IllegalArgumentException(NOT_ENOUGH_MONEY_UNIT.message());
         }
     }
+
+    public static void purchaseManualValidate(int manualCount, int lottoCount) {
+        if (manualCount > lottoCount) {
+            throw new IllegalArgumentException(OVER_INPUT_MANUAL_COUNT.message());
+        }
+    }
 }

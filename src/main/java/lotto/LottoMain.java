@@ -8,6 +8,7 @@ import java.util.List;
 
 import static lotto.domain.GenerateLottos.autoGenerateLottos;
 import static lotto.domain.GenerateLottos.manualGenerateLottos;
+import static lotto.validate.InputValidation.purchaseManualValidate;
 import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
 
@@ -19,6 +20,7 @@ public class LottoMain {
 
         Money money = new Money(inputMoney());
         int manualCount = inputManualCount(money.lottoCount());
+        purchaseManualValidate(manualCount, money.lottoCount());
         List<String> manualNumbers = inputManualNumber(manualCount);
         purchsePrint(manualCount, money.autoCount(manualCount));
 
