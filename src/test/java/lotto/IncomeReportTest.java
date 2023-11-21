@@ -16,7 +16,7 @@ public class IncomeReportTest {
         Lotto lotto2 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         LottoWallet lottoWallet = LottoWallet.of(List.of(lotto1, lotto2), 2);
         StatisticsReport statisticsReport = new StatisticsReport(lottoWallet,
-            Map.of(Prize.THIRD, 1));
+            Map.of(Prize.FOURTH, 1));
         IncomeReport incomeReport = IncomeReport.of(statisticsReport);
         BigDecimal actual = incomeReport.rate();
         Assertions.assertThat(actual).isEqualTo(BigDecimal.valueOf(2.5));
