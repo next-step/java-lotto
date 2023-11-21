@@ -23,7 +23,7 @@ public enum Operator {
                 .orElseThrow(() ->new IllegalArgumentException("올바른 연산자가 아닙니다."));
     }
 
-    public int calculateBy(int sum, int number) {
+    public int calculate(int sum, int number) {
         return calculator.calculate(sum, number);
     }
 }
