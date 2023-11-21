@@ -29,11 +29,11 @@ public class ResultView {
         }
         String result = "당첨 통계" + "\n" +
                 "---------" + "\n" +
-                "3개 일치 (5000원)- " + lottoResult.getFifthCount() + "\n" +
-                "4개 일치 (50000원)- " + lottoResult.getFourthCount() + "\n" +
-                "5개 일치 (1500000원)- " + lottoResult.getThirdCount() + "\n" +
-                "5개 일치, 보너스 볼 일치(30000000원)- " + lottoResult.getSecondCount() + "\n" +
-                "6개 일치 (2000000000)- " + lottoResult.getFirstCount() + "\n" +
+                "3개 일치 (5_000원)- " + lottoResult.getFifthCount() + "\n" +
+                "4개 일치 (50_000원)- " + lottoResult.getFourthCount() + "\n" +
+                "5개 일치 (1_500_000원)- " + lottoResult.getThirdCount() + "\n" +
+                "5개 일치, 보너스 볼 일치(30_000_000원)- " + lottoResult.getSecondCount() + "\n" +
+                "6개 일치 (2_000_000_000)- " + lottoResult.getFirstCount() + "\n" +
                 "총 수익률은 " + lottoResult.getRateOfReturn() +
                 rateOfReturnMessage;
 

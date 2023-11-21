@@ -22,4 +22,11 @@ public class LottoTest {
         assertThat(matchCount).isEqualTo(3);
     }
 
+    @Test
+    @DisplayName("로또 넘버에 보너스 넘버 포함 체크")
+    void isContainBonus_보너스넘버포함여부체크() {
+        Lotto lotto = new Lotto(new ArrayList(Arrays.asList(1, 4, 6, 7, 8, 9)));
+        assertThat(lotto.isContainBonus(7)).isTrue();
+        assertThat(lotto.isContainBonus(10)).isFalse();
+    }
 }

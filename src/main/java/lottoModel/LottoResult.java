@@ -52,7 +52,9 @@ public class LottoResult {
         for (Lotto lotto : lottos) {
             int matchNumber = lotto.matchCount(lastLotto);
             lottoMatchResults.add(matchNumber);
-            bonusMatchCount = getBonusMatchCount(lottoBonusNumber, lotto, matchNumber);
+            if (getBonusMatchCount(lottoBonusNumber, lotto, matchNumber)) {
+                bonusMatchCount++;
+            }
         }
         int fifthCount = getCount(lottoMatchResults, Rank.FIFTH.getCountOfMatch());
         int fourthCount = getCount(lottoMatchResults, Rank.FOURTH.getCountOfMatch());
@@ -64,12 +66,11 @@ public class LottoResult {
         return lottoResult;
     }
 
-    private static int getBonusMatchCount(int lottoBonusNumber, Lotto lotto, int matchNumber) {
-        int bonusMatchCount = 0;
+    private static boolean getBonusMatchCount(int lottoBonusNumber, Lotto lotto, int matchNumber) {
         if (matchNumber == Rank.SECOND.getCountOfMatch() && lotto.isContainBonus(lottoBonusNumber)) {
-            bonusMatchCount++;
+            return true;
         }
-        return bonusMatchCount;
+        return false;
     }
 
     private static int getCount(List<Integer> lottoMatchResults, int matchNum) {

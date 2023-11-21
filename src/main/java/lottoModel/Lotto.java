@@ -52,7 +52,7 @@ public class Lotto {
         return numbers.toString();
     }
 
-    public boolean isContainBonus(int bonusNumber){
+    public boolean isContainBonus(int bonusNumber) {
         return this.numbers.contains(bonusNumber);
     }
 }

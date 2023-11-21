@@ -35,7 +35,7 @@ public enum Rank {
 
         // 다른 일반적인 경우에 대한 처리
         for (Rank rank : ranks) {
-            if (rank.getCountOfMatch() == countOfMatch) {
+            if (rank.getCountOfMatch() == countOfMatch && rank != SECOND) {
                 return rank;
             }
         }

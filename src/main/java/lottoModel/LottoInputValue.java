@@ -8,9 +8,6 @@ public class LottoInputValue {
     private static final int LOTTO_MAX_NUMBER = 45;
     private String text;
 
-    public LottoInputValue() {
-    }
-
     public LottoInputValue(String text) {
         this.text = text;
     }
@@ -18,7 +15,9 @@ public class LottoInputValue {
     public int convertLottoBonusNumbers(Set<Integer> lastLotto) {
         int bonusNumber = convertNum(this.text);
         checkValid(bonusNumber);
-        checkBonus(bonusNumber, lastLotto);
+        if ((new Lotto(lastLotto)).isContainBonus(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨번호에서 제외된 숫자여야 함.");
+        }
         return bonusNumber;
     }
 
@@ -55,17 +54,11 @@ public class LottoInputValue {
         }
     }
 
-    private static void checkBonus(int bonusNumber, Set<Integer> lastLotto) {
-        if (lastLotto.contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 번호는 당첨번호에서 제외된 숫자여야 함.");
-        }
-    }
-
     public static int convertNum(String text) {
         try {
             return Integer.parseInt(text);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자 변환시 오류 발생 하였습니다.");
+            throw new IllegalArgumentException("문자 : " + text + " 숫자 변환시 오류 발생 하였습니다.");
 
         }
     }
