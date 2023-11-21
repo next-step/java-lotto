@@ -15,7 +15,6 @@ public class LotteryUtil {
 
     public static Set<Integer> getBall() {
         Set<Integer> choices = new HashSet<>();
-        prepare();
         shuffle();
 
         while (Lottery.WINNING_STREAK != choices.size()) {
@@ -29,7 +28,7 @@ public class LotteryUtil {
         Collections.shuffle(balls);
     }
 
-    private static void prepare() {
+    public static void prepare() {
         balls = new ArrayList<>();
         for (int ball = 1; ball <= 45; ball++) {
             balls.add(ball);

@@ -8,24 +8,33 @@ public class Lottery {
 
     public static final int WINNING_STREAK = 6;
 
-    private final List<Integer> numbers;
+    private List<Integer> win;
+    private final Balls balls;
 
-    public Lottery(List<Integer> numbers) {
-        validateNumbers(numbers);
-        this.numbers = numbers;
+    public Lottery(Balls balls) {
+        this.balls = balls;
     }
 
     public static Lottery of(Set<Integer> numbers) {
-        return new Lottery(new ArrayList<>(numbers));
+        return new Lottery(Balls.of(new ArrayList<>(numbers)));
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public List<Integer> getBalls() {
+        return balls.getBalls();
     }
 
-    private void validateNumbers(List<Integer> numbers) {
-        if (WINNING_STREAK != numbers.size()) {
-            throw new IllegalArgumentException("잘 못 생성된 로또 - " + numbers.size());
+    public void setWin(List<Integer> win) {
+        this.win = win;
+    }
+
+    public int getWinCount() {
+        int winCount = 0;
+        for (int number : getBalls()) {
+            if (win.contains(number)) {
+                winCount++;
+            }
         }
+
+        return winCount;
     }
 }

@@ -19,9 +19,8 @@ class WinningTest {
     @ParameterizedTest
     @MethodSource("generateData")
     void 등수를_구하는_테스트(Lotteries lotteries, Prize prize) {
-        Winning winning = new Winning(List.of(1, 2, 3, 4, 5, 6));
-        winning.setBonusWinNumber("7");
-        List<Prize> pirzeList = winning.getPrizes(lotteries);
+        lotteries.setWin("1, 2, 3, 4, 5, 6");
+        List<Prize> pirzeList = Winning.from("7").getPrizes(lotteries);
 
         assertThat(pirzeList.contains(prize)).isEqualTo(true);
     }

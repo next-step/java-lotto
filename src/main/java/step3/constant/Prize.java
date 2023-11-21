@@ -1,48 +1,30 @@
 package step3.constant;
 
-import static step3.domain.Winning.COUNT_BONUS;
-
+import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
 public enum Prize {
 
-    FIRST(6, 2000000000),
-    SECOND(5,1500000),
-    THIRD(5, 1500000),
-    FOURTH(4,50000),
-    FIFTH(3, 5000),
-    BAD_LUCK(0,  0);
+    FIRST(6, 2_000_000_000, (correct, bonus) -> correct == 6 && !bonus),
+    SECOND(5,1_500_000, (correct, bonus) -> correct == 5 && bonus),
+    THIRD(5, 1_500_000, (correct, bonus) -> correct == 5 && !bonus),
+    FOURTH(4,50_000, (correct, bonus) -> correct == 4 && !bonus),
+    FIFTH(3, 5_000, (correct, bonus) -> correct == 3 && !bonus),
+    BAD_LUCK(0,  0, (correct, bonus) -> correct == 6 && !bonus);
 
     private final int correct;
     private final long reward;
+    private final BiFunction<Integer, Boolean, Boolean> expression;
 
-    Prize(int correct, long reward) {
+    Prize(int correct, long reward, BiFunction<Integer, Boolean, Boolean> expression) {
         this.correct = correct;
         this.reward = reward;
+        this.expression = expression;
     }
-
     public static Prize getPrize(int number, boolean bonus) {
-        Prize prize = Stream.of(Prize.values())
-                             .filter(p -> p.getCorrect() == number)
-                             .findFirst().orElse(BAD_LUCK);
-
-        if (countBonus(prize.getCorrect())) {
-            return getPrizeByBonus(bonus, prize);
-        }
-
-        return prize;
-    }
-
-    private static boolean countBonus(int correct) {
-        return COUNT_BONUS == correct;
-    }
-
-    private static Prize getPrizeByBonus(boolean bonus, Prize prize) {
-        if (COUNT_BONUS == prize.getCorrect() && bonus) {
-            return SECOND;
-        }
-
-        return THIRD;
+        return Stream.of(Prize.values())
+                     .filter(p -> p.expression.apply(number, bonus))
+                     .findFirst().orElse(BAD_LUCK);
     }
 
     public int getCorrect() {
