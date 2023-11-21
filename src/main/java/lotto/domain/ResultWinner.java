@@ -58,7 +58,9 @@ public class ResultWinner {
         boolean checkBonusNumber = buyLottoList.getLotto().stream().anyMatch(num -> num.getNumber() == Integer.parseInt(bonusNumber));
 
         EnumMap<Rank, Integer> second = getRankSecond(resultMap, answerCount, checkBonusNumber);
-        if (second != null) return second;
+        if (second != null) {
+            return second;
+        }
 
         resultMap.put(Rank.valueOf(answerCount), resultMap.get(Rank.valueOf(answerCount)) + 1);
 
