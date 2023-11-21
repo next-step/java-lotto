@@ -1,5 +1,6 @@
 package calculator;
 
+import static calculator.Calculator.INPUT_OPERATOR_EXCEPTION;
 import static calculator.Calculator.INPUT_TEXT_EXCEPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class CalculatorTest {
 
@@ -78,5 +80,18 @@ public class CalculatorTest {
         assertThatThrownBy(() -> calculator.calculate(given))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(INPUT_TEXT_EXCEPTION);
+    }
+
+    @ParameterizedTest
+    @DisplayName("사칙연산 기호가 아닌 경우 예외를 던진다.")
+    @ValueSource(strings = {"3 ^ 4", "8 # 7"})
+    void input_operator_exception(String given) {
+        // given
+        Calculator calculator = new Calculator();
+
+        // when // then
+        assertThatThrownBy(() -> calculator.calculate(given))
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessage(INPUT_OPERATOR_EXCEPTION);
     }
 }
