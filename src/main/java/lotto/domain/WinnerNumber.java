@@ -1,8 +1,11 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static lotto.message.LottoErroMessage.NOT_ENOUGH_LOTTO_BONUS_NUMBER;
 
@@ -29,9 +32,16 @@ public class WinnerNumber {
     }
 
     public Map<RankLotto, Integer> statisticsResult(List<Lotto> lottos) {
-        return lottos.stream()
+        Map<RankLotto, Integer> result = new HashMap<>();
+        initResult(result);
+        lottos.stream()
                 .map(lotto -> RankLotto.findRank(lotto.match(this.winLotto), lotto.matchNumber(this.bonusNumber)))
-                .collect(Collectors.toMap(rank -> rank, rank -> 1, Integer::sum));
+                .forEach(rank -> result.put(rank, result.get(rank) + 1));
+        return result;
+    }
+
+    private void initResult(Map<RankLotto, Integer> result) {
+        Arrays.stream(RankLotto.values()).forEach(rank -> result.put(rank, 0));
     }
 
     public Lotto resultLotto() {
