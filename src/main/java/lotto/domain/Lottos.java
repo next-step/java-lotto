@@ -53,7 +53,7 @@ public class Lottos {
 
     public int winningCorrectCount(WinningLottoDTO winningLottoDTO, Winning winning) {
         return (int) this.lottos.stream()
-                .filter(lotto -> Winning.hasMatchingCounts(lotto.winningInfo(winningLottoDTO), winning))
+                .filter(lotto -> Winning.isMatched(lotto.winningInfo(winningLottoDTO), winning))
                 .count();
     }
 }

@@ -36,7 +36,7 @@ public enum Winning {
                 .orElse(0);
     }
 
-    public static boolean hasMatchingCounts(WinningInfoDTO winningInfoDTO, Winning winning) {
+    public static boolean isMatched(WinningInfoDTO winningInfoDTO, Winning winning) {
         if (winning.correctCount == 5) {
             return winningInfoDTO.getCorrectCount() == winning.correctCount()
                     && winningInfoDTO.getBonusCorrect() == winning.bonusCorrectCount();
