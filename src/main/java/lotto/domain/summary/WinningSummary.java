@@ -2,9 +2,9 @@ package lotto.domain.summary;
 
 import lotto.constants.Winning;
 
-import java.util.EnumMap;
-import java.util.EnumSet;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningSummary {
@@ -13,21 +13,19 @@ public class WinningSummary {
     private static final String MATCH_MESSAGE = " - %s개";
     private static final String SECOND_MATCH_MESSAGE = ", 보너스 볼 일치 - %s개";
 
-    private final EnumMap<Winning, Long> winnings;
+    private final Map<Winning, Long> winnings;
 
 
     public WinningSummary() {
         winnings = prizeWinningMap();
     }
 
-    private EnumMap<Winning, Long> prizeWinningMap() {
+    private Map<Winning, Long> prizeWinningMap() {
         return Winning.prizeWinning()
                 .stream()
                 .collect(Collectors.toMap(
                         winning -> winning,
-                        winning -> 0L,
-                        (a, b) -> b,
-                        () -> new EnumMap<>(Winning.class)
+                        winning -> 0L
                 ));
     }
 
@@ -39,7 +37,7 @@ public class WinningSummary {
         winnings.merge(winning, count, Long::sum);
     }
 
-    public EnumMap<Winning, Long> winnings() {
+    public Map<Winning, Long> winnings() {
         return winnings;
     }
 
@@ -58,7 +56,7 @@ public class WinningSummary {
 
     @Override
     public String toString() {
-        EnumSet<Winning> prizeWinnings = Winning.prizeWinning();
+        Set<Winning> prizeWinnings = Winning.prizeWinning();
 
         StringBuffer stringBuffer = new StringBuffer();
         for (Winning prizeWinning : prizeWinnings) {

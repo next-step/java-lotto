@@ -2,7 +2,6 @@ package lotto.domain.summary;
 
 import lotto.constants.Winning;
 
-import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -19,11 +18,11 @@ public class Summary {
     }
 
 
-    private float profitRate(EnumMap<Winning, Long> winnings, long purchasePrice) {
+    private float profitRate(Map<Winning, Long> winnings, long purchasePrice) {
         return (float) prizeTotal(winnings) / (float) purchasePrice;
     }
 
-    private long prizeTotal(EnumMap<Winning, Long> winnings) {
+    private long prizeTotal(Map<Winning, Long> winnings) {
         return winnings.entrySet().stream()
                 .mapToLong(this::prizeTotalByWinning)
                 .sum();

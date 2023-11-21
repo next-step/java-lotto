@@ -1,16 +1,17 @@
 package lotto.constants;
 
-import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 public enum Winning {
-    FAIL(0, 0),
-    FIFTH(3, 5_000),
-    FOURTH(4, 50_000),
-    THIRD(5, 1_500_000),
+    FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
-    FIRST(6, 2_000_000_000);
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    FAIL(0, 0);
 
     static final Map<Long, Winning> winnings = new HashMap<>();
 
@@ -41,10 +42,14 @@ public enum Winning {
         return winnings.getOrDefault(matchCount, FAIL);
     }
 
-    public static EnumSet<Winning> prizeWinning() {
-        EnumSet<Winning> result = EnumSet.allOf(Winning.class);
-        result.remove(FAIL);
-        return result;
+    public static Set<Winning> prizeWinning() {
+        return new LinkedHashSet<>() {{
+            add(FIFTH);
+            add(FOURTH);
+            add(THIRD);
+            add(SECOND);
+            add(FIRST);
+        }};
     }
 
     public long prize() {
