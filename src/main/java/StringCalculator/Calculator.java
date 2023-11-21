@@ -9,8 +9,12 @@ public class Calculator {
     }
 
     public int calculate(String input){
-        String[] list = input.split(" ");
         int result = 0;
+        String[] list;
+
+        isBlank(input);
+
+        list = input.split(" ");
 
         List<String> directives = findDirective(list);
         List<Integer> numbers = findNumbers(list);
@@ -32,6 +36,13 @@ public class Calculator {
         }
 
         return result;
+    }
+
+    private void isBlank(String s){
+        s = s.trim();
+        if (s.isBlank() || s.isEmpty()){
+            throw new IllegalArgumentException();
+        }
     }
     
     private List<Integer> findNumbers(String[] list){
