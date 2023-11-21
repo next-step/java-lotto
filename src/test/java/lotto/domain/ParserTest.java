@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +19,13 @@ class ParserTest {
     @Test
     void 숫자포맷_파싱() {
         assertThat(Parser.numberParsing("14000")).isEqualTo(14_000);
+    }
+
+    @DisplayName("음수 전달 시 예외 발생")
+    @Test
+    void 음수_전달() {
+        assertThatThrownBy(() -> Parser.numberParsing("-14000"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("파싱된 숫자 리스트 사이즈가 6이 아닐경우 예외 발생")

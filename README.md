@@ -5,6 +5,7 @@
 ### Paser
 - 문자열이 숫자포맷이 아니라면 IllegalArgumentException 예외를 발생한다.
 - 문자열을 숫자로 파싱한 결과를 리턴한다.
+- 문자열이 숫자 파싱 경과가 음수일경우 IllegalArgumentException 예외를 발생한다.
 - 숫자포맷 문자열의 공백을 제거하고 구분자(콤마)로 분리된 숫자 리스트의 크기가 6이 아니라면 IllegalArgumentException 예외를 발생한다.
 - 숫자포맷 문자열의 공백을 제거하고 구분자(콤마)로 분리된 숫자 리스트를 리턴한다. (당첨번호)
 
