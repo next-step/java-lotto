@@ -30,4 +30,10 @@ public class StringUtilityTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> StringUtility.validateOperator(new String[] {"1", "+", "2", "(", "4"}));
     }
+
+    @Test
+    @DisplayName("문자열을 숫자로 형변환한다.")
+    void convertToInt() {
+        assertThat(StringUtility.convertToInt("3")).isEqualTo(3);
+    }
 }

@@ -27,6 +27,6 @@ public class StringCalculatorTest {
     @Test
     @DisplayName("두 수를 나눈다.")
     void divide() {
-        assertThat(StringCalculator.devide(5, 2)).isEqualTo(2);
+        assertThat(StringCalculator.divide(5, 2)).isEqualTo(2);
     }
 }

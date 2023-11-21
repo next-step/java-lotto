@@ -31,4 +31,8 @@ public class StringUtility {
             throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_OPERATION);
         }
     }
+
+    public static int convertToInt(String value) {
+        return Integer.parseInt(value);
+    }
 }
