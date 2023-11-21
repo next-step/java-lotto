@@ -7,7 +7,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class PAndLReportTest {
+public class IncomeReportTest {
 
     @DisplayName("2,000원 로또를 구매하고 5,000원이 당첨 되면 손익률은 2.5입니다.")
     @Test
@@ -17,8 +17,8 @@ public class PAndLReportTest {
         LottoWallet lottoWallet = LottoWallet.of(List.of(lotto1, lotto2), 2);
         StatisticsReport statisticsReport = new StatisticsReport(lottoWallet,
             Map.of(Prize.THIRD, 1));
-        PAndLReport pAndLReport = PAndLReport.of(statisticsReport);
-        BigDecimal actual = pAndLReport.rate();
+        IncomeReport incomeReport = IncomeReport.of(statisticsReport);
+        BigDecimal actual = incomeReport.rate();
         Assertions.assertThat(actual).isEqualTo(BigDecimal.valueOf(2.5));
     }
 }

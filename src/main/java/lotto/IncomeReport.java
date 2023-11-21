@@ -3,18 +3,18 @@ package lotto;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class PAndLReport {
+public class IncomeReport {
 
     private final int totalPurchasePrice;
     private final int totalPrize;
 
-    public PAndLReport(int totalPurchasePrice, int totalPrize) {
+    public IncomeReport(int totalPurchasePrice, int totalPrize) {
         this.totalPurchasePrice = totalPurchasePrice;
         this.totalPrize = totalPrize;
     }
 
-    public static PAndLReport of(StatisticsReport statisticsReport) {
-        return new PAndLReport(getTotalPurchasePrice(statisticsReport), statisticsReport.totalPrize());
+    public static IncomeReport of(StatisticsReport statisticsReport) {
+        return new IncomeReport(getTotalPurchasePrice(statisticsReport), statisticsReport.totalPrize());
     }
 
     private static int getTotalPurchasePrice(StatisticsReport statisticsReport) {

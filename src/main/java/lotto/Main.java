@@ -24,8 +24,8 @@ public class Main {
         WinningLotto winningLotto = WinningLotto.from(Lotto.from(lastWeakLottoInit));
 
         StatisticsReport report = StatisticsReport.of(lottoWallet).report(winningLotto);
-        PAndLReport pAndLReport = PAndLReport.of(report);
-        BigDecimal rate = pAndLReport.rate();
+        IncomeReport incomeReport = IncomeReport.of(report);
+        BigDecimal rate = incomeReport.rate();
         resultView.out(report);
         resultView.out(rate);
     }

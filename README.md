@@ -76,7 +76,7 @@
   WinningLotto.java (Lotto 지난주 로또 한장)
   MoneyWallet.java (사용자가 입력한 값)
   StatisticsReport.java (로또 통계레포트) 🤔
-  PAndLReport.java (로또 손익레포트)
+  IncomeReport.java (로또 손익레포트)
 - util
   LottoGenerator.java
 - view
@@ -97,7 +97,7 @@
   [x]MoneyWallet.java (사용자가 입력한 값)
   [x]Prize.java (로또 등수 상금)
   [x]StatisticsReport.java (로또 통계레포트) 🤔
-  [x]PAndLReport.java (로또 손익레포트)
+  [x]IncomeReport.java (로또 손익레포트)
 - view
   InputView.java
   ResultView.java
