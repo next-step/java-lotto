@@ -1,13 +1,15 @@
 package com.fineroot.lotto.entity;
 
 import com.fineroot.lotto.dto.LottoBundleStatus;
+import com.fineroot.lotto.dto.WinningNumber;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoBundle {
 
-    private List<Lotto> lottoList;
+    private final List<Lotto> lottoList;
 
 
     private LottoBundle(int lotteryCount) {
@@ -17,11 +19,32 @@ public class LottoBundle {
         }
     }
 
+    private LottoBundle(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
+    }
+
     public static LottoBundle from(int lotteryCount) {
         return new LottoBundle(lotteryCount);
     }
 
-    LottoBundleStatus toLottoBundleStatus() {
+    public static LottoBundle fromList(List<String> lottoList) {
+        return new LottoBundle(
+                lottoList.stream().map(e -> Arrays.stream(e.split(",")).mapToInt(Integer::parseInt).toArray())
+                        .map(e -> Lotto.from(Arrays.stream(e).boxed().toArray(Integer[]::new))).collect(
+                                Collectors.toList()));
+    }
+
+    public LottoBundleStatus toLottoBundleStatus() {
         return LottoBundleStatus.from(lottoList.stream().map(Lotto::toString).collect(Collectors.toList()));
     }
+
+    public WinnerStatus matchWinner(WinningNumber winningNumber) {
+        WinnerStatus winnerStatus = WinnerStatus.create();
+        for (Lotto lotto : lottoList) {
+            WinningRank rank = lotto.matchWithWinningNumber(winningNumber);
+            winnerStatus.increaseWinningCount(rank);
+        }
+        return winnerStatus;
+    }
+
 }

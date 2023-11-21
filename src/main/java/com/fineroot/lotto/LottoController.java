@@ -14,7 +14,7 @@ public class LottoController {
     private final InputView inputView;
     private final ResultView resultView;
 
-    public LottoController(LottoStore lottoStore, InputViewModel inputViewModel, ResultViewModel resultViewModel){
+    public LottoController(LottoStore lottoStore, InputViewModel inputViewModel, ResultViewModel resultViewModel) {
         this.lottoStore = lottoStore;
         this.inputViewModel = inputViewModel;
         this.resultViewModel = resultViewModel;
@@ -22,13 +22,15 @@ public class LottoController {
         this.resultView = new ResultView(resultViewModel);
     }
 
-    public void lotto(){
+    public void startLotteryGame() {
         purchaseLottery();
         matchWithWinningNumber();
     }
 
     private void matchWithWinningNumber() {
         inputView.drawInputWinningNumberView();
+        resultViewModel.saveWinnerStatus(lottoStore.winnerStatus(inputViewModel.getWinningNumber()));
+        resultView.drawStatistics();
     }
 
     private void purchaseLottery() {

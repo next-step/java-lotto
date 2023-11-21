@@ -12,17 +12,18 @@ import java.util.stream.Stream;
 public class Lotto {
     private final Set<LottoNumber> lottoNumberSet;
 
-    private static final List<Integer> integerSet = Stream.iterate(1, i -> i + 1).limit(45).collect(Collectors.toList());
+    private static final List<Integer> integerSet = Stream.iterate(1, i -> i + 1).limit(45)
+            .collect(Collectors.toList());
 
-    private Lotto(Set<LottoNumber> lottoNumberSet){
+    private Lotto(Set<LottoNumber> lottoNumberSet) {
         this.lottoNumberSet = lottoNumberSet;
     }
 
-    public static Lotto from(Integer ...numbers){
+    public static Lotto from(Integer... numbers) {
         return new Lotto(Arrays.stream(numbers).map(LottoNumber::from).collect(Collectors.toSet()));
     }
 
-    public static Lotto create(){
+    public static Lotto create() {
         return new Lotto(createLottoNumberSet());
     }
 
@@ -35,12 +36,14 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public int matchWithWinningNumber(WinningNumber lotto) {
-        return (int) lottoNumberSet.stream().filter(lottoNumber -> lotto.getLottoNumbers().contains(lottoNumber)).count();
+    public WinningRank matchWithWinningNumber(WinningNumber lotto) {
+        return WinningRank.of(
+                (int) lottoNumberSet.stream().filter(lottoNumber -> lotto.getLottoNumbers().contains(lottoNumber))
+                        .count());
     }
 
     @Override
     public String toString() {
-        return lottoNumberSet.stream().map(LottoNumber::toString).collect(Collectors.joining(", ")).strip();
+        return lottoNumberSet.stream().sorted().map(LottoNumber::toString).collect(Collectors.joining(", ")).strip();
     }
 }
