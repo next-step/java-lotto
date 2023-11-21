@@ -82,4 +82,18 @@ class LottosTest {
         assertThat(lottos.winningCorrectCount(new WinningLottoDTO(winningLotto, lottoNumber), Winning.FIFTH))
                 .isEqualTo(3);
     }
+
+    @DisplayName("로또 게임 수")
+    @Test
+    void 게임_수() {
+        assertThat(lottos.size()).isEqualTo(9);
+    }
+
+    @DisplayName("게임이 하나도 없는지 확인")
+    @Test
+    void 게임_존재_여부() {
+        assertThat(lottos.isEmpty()).isFalse();
+        Lottos emptyLottos = new Lottos(0);
+        assertThat(emptyLottos.isEmpty()).isTrue();
+    }
 }
