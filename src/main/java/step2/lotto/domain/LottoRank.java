@@ -1,6 +1,8 @@
 package step2.lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public enum LottoRank {
 
@@ -9,6 +11,13 @@ public enum LottoRank {
     THIRD(4, 50_000),
     FORTH(3, 5_000),
     LOSE(0, 0);
+
+    private static final Map<Integer, LottoRank> LOTTO_RANK_CACHE = new HashMap<>();
+
+    static {
+        Arrays.stream(LottoRank.values())
+            .forEach(rank -> LOTTO_RANK_CACHE.put(rank.getMatchNumber(), rank));
+    }
 
     private final int matchNumber;
     private final int prizeAmount;
@@ -27,14 +36,7 @@ public enum LottoRank {
     }
 
     public static LottoRank matchLottoRank(final int matchNumberCount) {
-        return Arrays.stream(LottoRank.values())
-            .filter(value -> value.matches(matchNumberCount))
-            .findFirst()
-            .orElse(LOSE);
-    }
-
-    private boolean matches(int count) {
-        return this.matchNumber == count;
+        return LOTTO_RANK_CACHE.getOrDefault(matchNumberCount, LOSE);
     }
 
     public long lottoRankTotalPrizeAmount(final int scoreCount) {
