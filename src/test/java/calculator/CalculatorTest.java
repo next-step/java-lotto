@@ -34,4 +34,18 @@ public class CalculatorTest {
         // then
         assertThat(result).isEqualTo(-2);
     }
+
+    @Test
+    @DisplayName("곱셈을 할 수 있다.")
+    void multiply() {
+        // given
+        Calculator calculator = new Calculator();
+        String given = "3 * 5";
+
+        // when
+        long result = calculator.calculate(given);
+
+        // then
+        assertThat(result).isEqualTo(15);
+    }
 }
