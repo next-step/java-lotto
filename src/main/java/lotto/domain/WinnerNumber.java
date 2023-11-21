@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static lotto.message.LottoErroMessage.NOT_ENOUGH_LOTTO_BONUS_NUMBER;
+
 public class WinnerNumber {
 
     private Lotto winLotto;
@@ -16,7 +18,14 @@ public class WinnerNumber {
     public WinnerNumber(String lottoNumbers, int bonusNumber) {
         this.winLotto = new Lotto(lottoNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
-        this.bonusNumber.checkBonusNumber(this.winLotto, this.bonusNumber);
+        checkBonusNumber();
+    }
+
+    public void checkBonusNumber() {
+        bonusNumber.checkNumberRange();
+        if (winLotto.matchNumber(bonusNumber)) {
+            throw new IllegalArgumentException(NOT_ENOUGH_LOTTO_BONUS_NUMBER.message());
+        }
     }
 
     public Map<RankLotto, Integer> statisticsResult(List<Lotto> lottos) {
