@@ -2,15 +2,29 @@ package lotto.domain;
 
 import static lotto.domain.Money.CANNOT_BUY_EVEN_ONLY_ONE_LOTTO_EXCEPTION;
 import static lotto.domain.Money.MONEY_TO_GO_BACK_EXCEPTION;
+import static lotto.domain.Money.NEGATIVE_NUMBER_EXCEPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class MoneyTest {
+
+    @Test
+    @DisplayName("돈이 음수이면 예외를 던진다.")
+    void minus_money_exception() {
+        // given
+        long money = -1;
+
+        // when // then
+        assertThatThrownBy(() -> new Money(money))
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessage(NEGATIVE_NUMBER_EXCEPTION);
+    }
 
     @ParameterizedTest
     @DisplayName("돈으로 몇 개의 로또를 살 수 있는지 알려준다.")
@@ -34,7 +48,7 @@ public class MoneyTest {
         Money money = new Money(given);
 
         // when  // then
-        assertThatThrownBy(() -> money.lottoQuantity())
+        assertThatThrownBy(money::lottoQuantity)
                 .isExactlyInstanceOf(IllegalStateException.class)
                 .hasMessage(CANNOT_BUY_EVEN_ONLY_ONE_LOTTO_EXCEPTION);
     }
@@ -47,7 +61,7 @@ public class MoneyTest {
         Money money = new Money(given);
 
         // when  // then
-        assertThatThrownBy(() -> money.lottoQuantity())
+        assertThatThrownBy(money::lottoQuantity)
                 .isExactlyInstanceOf(IllegalStateException.class)
                 .hasMessage(MONEY_TO_GO_BACK_EXCEPTION);
     }
