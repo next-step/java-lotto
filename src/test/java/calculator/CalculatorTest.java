@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -93,5 +94,19 @@ public class CalculatorTest {
         assertThatThrownBy(() -> calculator.calculate(given))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(INPUT_OPERATOR_EXCEPTION);
+    }
+
+    @ParameterizedTest
+    @DisplayName("여러 사칙 연산을 한 개의 수식에서 사용할 수 있다.")
+    @CsvSource(value = {"3 + 4 * 6, 42", "4 - 8 * 2 / 8 + 3, 2"})
+    void use_multiple_arithmetic_operations(String given, long expected) {
+        // given
+        Calculator calculator = new Calculator();
+
+        // when
+        long result = calculator.calculate(given);
+
+        // then
+        assertThat(result).isEqualTo(expected);
     }
 }

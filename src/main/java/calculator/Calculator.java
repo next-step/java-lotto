@@ -9,23 +9,33 @@ public class Calculator {
         validateText(text);
 
         String[] splitText = text.split(" ");
-        long firstOperand = Long.parseLong(splitText[0]);
-        String operator = getOperator(splitText);
-        long secondOperand = Long.parseLong(splitText[2]);
 
-        if (operator.equals("+")) {
-            return firstOperand + secondOperand;
+        long sum = Long.parseLong(splitText[0]);;
+
+        for (int i = 1; i < splitText.length; i += 2) {
+            String operator = getOperator(splitText[i]);
+            long secondOperand = Long.parseLong(splitText[i + 1]);
+
+            if (operator.equals("+")) {
+                sum += secondOperand;
+                continue;
+            }
+
+            if (operator.equals("-")) {
+                sum -= secondOperand;
+                continue;
+            }
+
+            if (operator.equals("*")) {
+                sum *= secondOperand;
+                continue;
+            }
+
+            if (operator.equals("/")) {
+                sum /= secondOperand;
+            }
         }
-
-        if (operator.equals("-")) {
-            return firstOperand - secondOperand;
-        }
-
-        if (operator.equals("*")) {
-            return firstOperand * secondOperand;
-        }
-
-        return firstOperand / secondOperand;
+        return sum;
     }
 
     private void validateText(String text) {
@@ -38,8 +48,7 @@ public class Calculator {
         return text == null || text.isEmpty() || text.isBlank();
     }
 
-    private String getOperator(String[] splitText) {
-        String operator = splitText[1];
+    private String getOperator(String operator) {
         validateOperator(operator);
         return operator;
     }
