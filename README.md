@@ -7,3 +7,9 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+
+## 요구사항 분석
+1. 문자열을 받아서 공백으로 split
+2. 연산자에 따라 어떤 계산별 메서드 작성
+3. 주어진 순서대로 계산 반복
