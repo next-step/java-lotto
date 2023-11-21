@@ -10,11 +10,11 @@ public class Lotto {
 
     static final int MAX_TICKET_NUMBERS = 6;
 
-    private final List<LottoNumber> ticket;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> anyNumbers) {
         validation(anyNumbers);
-        this.ticket = anyNumbers.stream().map(LottoNumber::from).collect(Collectors.toList());
+        this.lottoNumbers = anyNumbers.stream().map(LottoNumber::from).collect(Collectors.toSet());
     }
 
     public static Lotto from(List<Integer> anyNumbers) {
@@ -31,15 +31,15 @@ public class Lotto {
     }
 
     public int matchCount(Lotto lotto) {
-        List<LottoNumber> difference = new ArrayList<>(this.ticket);
-        difference.removeAll(lotto.ticket);
+        List<LottoNumber> difference = new ArrayList<>(this.lottoNumbers);
+        difference.removeAll(lotto.lottoNumbers);
         return MAX_TICKET_NUMBERS - difference.size();
     }
 
     public String lottoNumbers() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("[");
-        ticket.forEach(lottoNumber -> {
+        lottoNumbers.forEach(lottoNumber -> {
             stringBuilder.append(lottoNumber.toString()).append(",");
         });
         int lastIndexOf = stringBuilder.lastIndexOf(",");
@@ -50,7 +50,7 @@ public class Lotto {
     @Override
     public String toString() {
         return "Lotto{" +
-            "ticket=" + ticket.toString() +
+            "ticket=" + lottoNumbers.toString() +
             '}';
     }
 }
