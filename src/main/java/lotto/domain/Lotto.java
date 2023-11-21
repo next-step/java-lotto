@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.dto.WinningInfoDTO;
-import lotto.dto.WinningNumbersDTO;
+import lotto.dto.WinningLottoDTO;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,9 +48,9 @@ public class Lotto {
         return game;
     }
 
-    public WinningInfoDTO winningInfo(WinningNumbersDTO winningNumbersDTO) {
-        Lotto winningLotto = winningNumbersDTO.getWinningLotto();
-        LottoNumber lottoNumber = winningNumbersDTO.getBonus();
+    public WinningInfoDTO winningInfo(WinningLottoDTO winningLottoDTO) {
+        Lotto winningLotto = winningLottoDTO.getWinningLotto();
+        LottoNumber lottoNumber = winningLottoDTO.getBonus();
         int correctCount = winningLotto.correctCount(numbers);
         boolean bonusCorrect = lottoNumber.belongs(numbers);
         return new WinningInfoDTO(correctCount, bonusCorrect, new Amount(Winning.winningAmount(correctCount, bonusCorrect)));

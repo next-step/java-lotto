@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.dto.WinningNumbersDTO;
+import lotto.dto.WinningLottoDTO;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -24,13 +24,13 @@ public class UserInterface {
         if (winningNumber.contains(lottoNumber.getNumber())) {
             throw new IllegalArgumentException("당첨 번호에 보너스 볼 번호가 포함되면 안됩니다.");
         }
-        WinningNumbersDTO winningNumbersDTO = new WinningNumbersDTO(winningNumber, lottoNumber);
+        WinningLottoDTO winningLottoDTO = new WinningLottoDTO(winningNumber, lottoNumber);
         System.out.println();
         ResultView.winningStaticsMessage();
 
         for (Winning winning : Winning.values()) {
-            ResultView.winningStatics(winningNumbersDTO, lottos, winning);
+            ResultView.winningStatics(winningLottoDTO, lottos, winning);
         }
-        ResultView.rateOfReturn(lottos.rateOfReturn(winningNumbersDTO));
+        ResultView.rateOfReturn(lottos.rateOfReturn(winningLottoDTO));
     }
 }

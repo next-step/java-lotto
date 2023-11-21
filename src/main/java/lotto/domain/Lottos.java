@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.WinningNumbersDTO;
+import lotto.dto.WinningLottoDTO;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -25,17 +25,17 @@ public class Lottos {
         return value / Lotto.LOTTO_PRICE;
     }
 
-    public Long totalWinningAmount(WinningNumbersDTO winningNumbersDTO) {
+    public Long totalWinningAmount(WinningLottoDTO winningLottoDTO) {
         Amount amount = new Amount();
         for (Lotto lotto : this.lottos) {
-            amount.add(lotto.winningInfo(winningNumbersDTO).getWinningAmount());
+            amount.add(lotto.winningInfo(winningLottoDTO).getWinningAmount());
         }
         return amount.amount();
     }
 
-    public BigDecimal rateOfReturn(WinningNumbersDTO winningNumbersDTO) {
+    public BigDecimal rateOfReturn(WinningLottoDTO winningLottoDTO) {
         Amount purchaseAmount = new Amount(this.lottos.size() * Lotto.LOTTO_PRICE);
-        Amount winningAmount = new Amount(totalWinningAmount(winningNumbersDTO));
+        Amount winningAmount = new Amount(totalWinningAmount(winningLottoDTO));
         return winningAmount.divide(purchaseAmount.amount(), 2);
     }
 
@@ -51,9 +51,9 @@ public class Lottos {
         return lottos.size() == 0;
     }
 
-    public int winningCorrectCount(WinningNumbersDTO winningNumbersDTO, Winning winning) {
+    public int winningCorrectCount(WinningLottoDTO winningLottoDTO, Winning winning) {
         return (int) this.lottos.stream()
-                .filter(lotto -> Winning.hasMatchingCounts(lotto.winningInfo(winningNumbersDTO), winning))
+                .filter(lotto -> Winning.hasMatchingCounts(lotto.winningInfo(winningLottoDTO), winning))
                 .count();
     }
 }
