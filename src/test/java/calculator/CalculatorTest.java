@@ -20,4 +20,18 @@ public class CalculatorTest {
         // then
         assertThat(result).isEqualTo(4);
     }
+
+    @Test
+    @DisplayName("뺼셈을 할 수 있다.")
+    void minus() {
+        // given
+        Calculator calculator = new Calculator();
+        String given = "2 - 4";
+
+        // when
+        long result = calculator.calculate(given);
+
+        // then
+        assertThat(result).isEqualTo(-2);
+    }
 }

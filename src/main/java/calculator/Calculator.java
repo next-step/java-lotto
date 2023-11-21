@@ -7,6 +7,10 @@ public class Calculator {
         String operator = splitText[1];
         long secondOperand = Long.parseLong(splitText[2]);
 
-        return firstOperand + secondOperand;
+        if (operator.equals("+")) {
+            return firstOperand + secondOperand;
+        }
+
+        return firstOperand - secondOperand;
     }
 }
