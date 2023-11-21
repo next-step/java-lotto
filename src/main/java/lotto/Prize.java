@@ -21,7 +21,7 @@ public enum Prize {
 
     public static Prize prizeByMatchedCount(int matchedCount) {
         return Arrays.stream(Prize.values())
-            .filter(prizes -> Integer.compare(prizes.rank, matchedCount) == 0)
+            .filter(prize -> prize.rank == matchedCount)
             .findFirst()
             .get();
     }
