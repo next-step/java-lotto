@@ -25,9 +25,9 @@ class LottoResultCalculatorTest {
         LottoResultCalculator calculator = new LottoResultCalculator(strategies);
 
         Lottos lottos = new Lottos(Arrays.asList(
-                new Lotto("1, 2, 3, 10, 11, 12"), // 3 matches
-                new Lotto("4, 5, 6, 10, 11, 12"), // no match
-                new Lotto("1, 2, 3, 4, 5, 6")));    // 3 matches
+                "1, 2, 3, 10, 11, 12", // 3 matches
+                "4, 5, 6, 10, 11, 12", // no match
+                "1, 2, 3, 4, 5, 6"));    // 3 matches
         Lotto winningNumbers = new Lotto("1, 2, 3, 7, 8, 9");
 
         // when
@@ -65,7 +65,7 @@ class LottoResultCalculatorTest {
         LottoResultCalculator calculator = new LottoResultCalculator(strategies);
 
         Lottos lottos = new Lottos(List.of(
-                new Lotto("1, 2, 3, 4, 5, 6")
+                "1, 2, 3, 4, 5, 6"
         ));
         Lotto winningNumbers = new Lotto("1, 2, 3, 4, 5, 9");
         LottoNumber bonusNumber = new LottoNumber(6);
@@ -86,7 +86,7 @@ class LottoResultCalculatorTest {
         LottoResultCalculator calculator = new LottoResultCalculator(strategies);
 
         Lottos lottos = new Lottos(List.of(
-                new Lotto("1, 2, 3, 4, 5, 6")
+                "1, 2, 3, 4, 5, 6"
         ));
         Lotto winningNumbers = new Lotto("1, 2, 3, 4, 5, 9");
         LottoNumber bonusNumber = new LottoNumber(10);

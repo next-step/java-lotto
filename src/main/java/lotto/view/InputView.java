@@ -22,10 +22,10 @@ public class InputView {
 
     public Lottos inputManualLotto(int manualLottoCount) {
         Scanner sc = new Scanner(System.in);
-        List<Lotto> lottos = new ArrayList<>();
+        List<String> lottos = new ArrayList<>();
 
         for (int i = 0; i < manualLottoCount; i++) {
-            lottos.add(new Lotto(sc.nextLine()));
+            lottos.add(sc.nextLine());
         }
 
         return new Lottos(lottos);
