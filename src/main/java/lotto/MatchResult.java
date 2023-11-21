@@ -12,15 +12,15 @@ public class MatchResult {
 
     MatchResult(){
         matchResult = new HashMap<>();
-        for(int matchCount = MIN_MATCH_COUNT; matchCount <= MAX_MATCH_COUNT; matchCount++){
+        for(int matchCount = 0; matchCount <= MAX_MATCH_COUNT; matchCount++){
             matchResult.put(matchCount, 0);
         }
     }
 
     MatchResult(List<Integer> matchNumberList){
         matchResult = new HashMap<>();
-        for(int matchCount = MIN_MATCH_COUNT; matchCount <= MAX_MATCH_COUNT; matchCount++){
-            matchResult.put(matchCount, matchNumberList.get(matchCount - MIN_MATCH_COUNT));
+        for(int matchCount = 0; matchCount <= MAX_MATCH_COUNT; matchCount++){
+            matchResult.put(matchCount, matchNumberList.get(matchCount));
         }
     }
 
@@ -28,9 +28,7 @@ public class MatchResult {
 
         for(Lotto lotto : myLottos){
             int myMatchCount = lotto.matchCount(winningNumbers);
-            if(myMatchCount >= 3){
-                matchResult.put(myMatchCount, matchResult.get(myMatchCount) + 1);
-            }
+            matchResult.put(myMatchCount, matchResult.get(myMatchCount) + 1);
         }
 
     }
