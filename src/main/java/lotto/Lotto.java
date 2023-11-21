@@ -12,19 +12,19 @@ public class Lotto {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> anyNumbers) {
+    public Lotto(List<LottoNumber> anyNumbers) {
         validation(anyNumbers);
-        this.lottoNumbers = anyNumbers.stream().map(LottoNumber::from).collect(Collectors.toSet());
+        this.lottoNumbers = new HashSet<>(anyNumbers);
     }
 
-    public static Lotto from(List<Integer> anyNumbers) {
+    public static Lotto from(List<LottoNumber> anyNumbers) {
         return new Lotto(anyNumbers);
     }
 
-    private void validation(List<Integer> anyNumbers) {
-        Set<Integer> temp = new HashSet<>(anyNumbers);
+    private void validation(List<LottoNumber> anyNumbers) {
+        Set<LottoNumber> temp = new HashSet<>(anyNumbers);
         if (temp.size() != anyNumbers.size()) {
-            List<Integer> duplicated = anyNumbers.stream().filter(i -> !temp.add(i))
+            List<LottoNumber> duplicated = anyNumbers.stream().filter(number -> !temp.add(number))
                 .collect(Collectors.toList());
             throw new IllegalArgumentException(duplicated + " 중복된 숫자는 만들 수 없습니다.");
         }

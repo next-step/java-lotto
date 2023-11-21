@@ -3,6 +3,7 @@ package lotto;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -20,14 +21,19 @@ public class Main {
         resultView.calculateResult(lottoWallet.totalTicketCount());
         resultView.out(lottoWallet);
 
-        List<Integer> lastWeakLottoInit = inputView.lastWeakLottoInit();
-        WinningLotto winningLotto = WinningLotto.from(Lotto.from(lastWeakLottoInit));
+        List<LottoNumber> lastWeakLottoNumbers = createLastWeakLottoNumbers(inputView.lastWeakLottoInit());
+        WinningLotto winningLotto = WinningLotto.from(new Lotto(lastWeakLottoNumbers));
 
         StatisticsReport report = StatisticsReport.of(lottoWallet).report(winningLotto);
         IncomeReport incomeReport = IncomeReport.of(report);
         BigDecimal rate = incomeReport.rate();
         resultView.out(report);
         resultView.out(rate);
+    }
+
+    private static List<LottoNumber> createLastWeakLottoNumbers(List<Integer> lastWeakLottoInit) {
+        return lastWeakLottoInit.stream().map(LottoNumber::new)
+            .collect(Collectors.toList());
     }
 
 }

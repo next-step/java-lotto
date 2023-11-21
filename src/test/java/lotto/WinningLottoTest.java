@@ -3,13 +3,16 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
-import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class WinningLottoTest {
 
-    private static final Lotto LAST_WEAK_LOTTO = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+    private static final Lotto LAST_WEAK_LOTTO = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+        .map(LottoNumber::new)
+        .collect(Collectors.toList()));
 
     @DisplayName("지난주 로또를 입력받는다.")
     @Test
@@ -21,7 +24,9 @@ public class WinningLottoTest {
     @Test
     void compareWithLastWeakLottoAndReturnMatchCount() {
         WinningLotto winningLotto = WinningLotto.from(LAST_WEAK_LOTTO);
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
+        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 7)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
         int matchCount = winningLotto.compare(lotto);
         assertThat(matchCount).isEqualTo(5);
     }
