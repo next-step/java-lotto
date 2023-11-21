@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.model.Lotto;
 import lotto.model.LottoMachine;
+import lotto.model.LottoReport;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -19,7 +20,7 @@ public class LottoController {
         }
 
         String winningNumber = InputView.inputWinningNumbers();
-        checkLottoResult(winningNumber, lottoTickets);
+        LottoReport.checkLottoResult(winningNumber, lottoTickets);
     }
 
     public static List<Lotto> buyLotto() {
@@ -27,11 +28,5 @@ public class LottoController {
         List<Lotto> tickets = LottoMachine.issue(money);
         ResultView.printCheckPurchaseMessage(tickets.size());
         return tickets;
-    }
-
-    public static void checkLottoResult(String winningNumber, List<Lotto> tickets) {
-        for (Lotto ticket : tickets) {
-            ticket.matchNumbers(winningNumber);
-        }
     }
 }

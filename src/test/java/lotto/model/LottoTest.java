@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTest {
 
@@ -44,8 +45,12 @@ public class LottoTest {
     @DisplayName("주어진 번호와 얼마나 일치하는지 확인")
     @CsvSource(value = {"1, 2, 3, 4, 5, 6:6", "3, 2, 4, 6, 5, 1:6", "2, 9, 13, 27, 42, 15:1"}, delimiter = ':')
     public void 로또_번호_비교(String otherNumbers, int expected) {
+        List<Integer> others = Arrays.stream(otherNumbers.split(", "))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
         List<Integer> numbers = List.of(1,2,3,4,5,6);
-        Assertions.assertThat(new Lotto(numbers).matchNumbers(otherNumbers))
+        Assertions.assertThat(new Lotto(numbers).matchNumbers(others))
                 .isEqualTo(expected);
     }
 }

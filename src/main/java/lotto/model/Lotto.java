@@ -34,18 +34,11 @@ public class Lotto {
         return this.numbers;
     }
 
-    public int matchNumbers(String otherNumbers) {
-        List<Integer> targets = convertStringToInt(otherNumbers);
+    public int matchNumbers(List<Integer> targets) {
         return targets.stream()
                 .filter(this::containsNumber)
                 .mapToInt(target -> 1)
                 .sum();
-    }
-
-    private static List<Integer> convertStringToInt(String numbers) {
-        return Arrays.stream(numbers.split(", "))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
     }
 
     private boolean containsNumber(int number) {
