@@ -23,4 +23,10 @@ public class StringCalculatorTest {
     void multiply() {
         assertThat(StringCalculator.multiply(3, 5)).isEqualTo(15);
     }
+
+    @Test
+    @DisplayName("두 수를 나눈다.")
+    void divide() {
+        assertThat(StringCalculator.devide(5, 2)).isEqualTo(2);
+    }
 }
