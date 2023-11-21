@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Arrays;
+import lotto.Lotto;
 import lotto.LottoWallet;
 import lotto.Prize;
 import lotto.StatisticsReport;
@@ -24,8 +25,18 @@ public class ResultView {
 
     public void out(LottoWallet lottoWallet) {
         for (int i = 0; i < lottoWallet.totalTicketCount(); i++){
-            sout.println(lottoWallet.oneTicket(i).lottoNumbers());
+            sout.println(lottoNumbers(lottoWallet.oneTicket(i)));
         }
+    }
+    private String lottoNumbers(Lotto lotto) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        lotto.lottoNumbers().forEach(lottoNumber -> {
+            stringBuilder.append(lottoNumber.toString()).append(",");
+        });
+        int lastIndexOf = stringBuilder.lastIndexOf(",");
+        stringBuilder.replace(lastIndexOf, lastIndexOf + 1, "]");
+        return stringBuilder.toString();
     }
 
     public void out(StatisticsReport statisticsReport) {

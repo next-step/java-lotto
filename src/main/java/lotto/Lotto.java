@@ -36,15 +36,8 @@ public class Lotto {
         return MAX_TICKET_NUMBERS - difference.size();
     }
 
-    public String lottoNumbers() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
-        lottoNumbers.forEach(lottoNumber -> {
-            stringBuilder.append(lottoNumber.toString()).append(",");
-        });
-        int lastIndexOf = stringBuilder.lastIndexOf(",");
-        stringBuilder.replace(lastIndexOf, lastIndexOf + 1, "]");
-        return stringBuilder.toString();
+    public Set<LottoNumber> lottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override
