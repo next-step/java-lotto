@@ -26,4 +26,12 @@ public class LottoUtil {
     public static String[] splitString(String string){
         return string.split(",");
     }
+
+    public static List<Integer> settingWinnerNumber(List<Integer> winningNumber, String[] winningNumbers) {
+        for(int i = 0; i < winningNumbers.length; i++){
+            winningNumber.add(Integer.parseInt(winningNumbers[i]));
+        }
+
+        return winningNumber;
+    }
 }

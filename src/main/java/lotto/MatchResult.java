@@ -7,6 +7,7 @@ import java.util.Map;
 public class MatchResult {
     private static final int MIN_MATCH_COUNT = 3;
     private static final int MAX_MATCH_COUNT = 6;
+    private static final WinningMoney winningMoney = new WinningMoney();
 
     private Map<Integer, Integer> matchResult;
 
@@ -38,8 +39,6 @@ public class MatchResult {
     }
 
     public double calculateReturnRate(int payMoney) {
-        WinningMoney winningMoney = new WinningMoney();
-
         int total = 0;
         for (int i = MIN_MATCH_COUNT; i <= MAX_MATCH_COUNT; i++){
             total += (matchResult.get(i) * winningMoney.winningMoneyOf(i));
