@@ -24,5 +24,6 @@ public class ResultView {
             System.out.println(i + "개 일치 (" + winningMoney.winningMoneyOf(i) + ") - " + myLottos.returnMatchCountOf(i) + "개");
         }
 
+        System.out.println("총 수익률은 " + myLottos.returnRate(payMoney) + "입니다.");
     }
 }
