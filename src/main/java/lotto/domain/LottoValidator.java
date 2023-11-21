@@ -1,25 +1,24 @@
 package lotto.domain;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 public class LottoValidator {
-	private final List<Integer> winningNumbers;
+	private final Set<Integer> winningNumbers;
 
-	public LottoValidator(List<Integer> winningNumbers) {
-		this.winningNumbers = Collections.unmodifiableList(winningNumbers);
+	public LottoValidator(Set<Integer> winningNumbers) {
+		this.winningNumbers = Collections.unmodifiableSet(winningNumbers);
 	}
 
-	public LottoTicket valid(LottoTicket lottoTicket) {
-		int sameNumbers = (int) winningNumbers.stream()
+	public Rank valid(LottoTicket lottoTicket) {
+		return Rank.matchRank(
+			(int) winningNumbers.stream()
 			.filter(
 				wn -> lottoTicket.getNumbers().stream()
 					.anyMatch(Predicate.isEqual(wn))
 			)
-			.count();
-
-		lottoTicket.updateRank(Rank.matchRank(sameNumbers));
-		return lottoTicket;
+			.count()
+		);
 	}
 }

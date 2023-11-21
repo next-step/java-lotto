@@ -35,8 +35,4 @@ public enum Rank {
 	public long getAmount() {
 		return amount;
 	}
-
-	public long calcTotalAmount(Integer winners) {
-		return this.amount * winners;
-	}
 }

@@ -1,8 +1,10 @@
 package lotto.view;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
-import lotto.domain.WinningInfo;
+import lotto.domain.Rank;
 import lotto.domain.LottoTicket;
 
 public class ResultView {
@@ -31,14 +33,14 @@ public class ResultView {
 		System.out.println(sb);
 	}
 
-	public void showResultStatics(List<WinningInfo> winningInfos) {
+	public void showResultStatics(LinkedHashMap<Rank, Integer> results) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("당첨 통계\n");
 		sb.append("----------\n");
-		for (WinningInfo result : winningInfos) {
-			sb.append(result.getRank().getNum() + "개 일치");
-			sb.append("(" + result.getRank().getAmount() + ")- ");
-			sb.append(" " + result.getNumOfWinners() + "개");
+		for (Map.Entry<Rank, Integer> result : results.entrySet()) {
+			sb.append(result.getKey().getNum() + "개 일치");
+			sb.append("(" + result.getKey().getAmount() + ")- ");
+			sb.append(" " + result.getValue() + "개");
 			System.out.println(sb);
 			sb.setLength(0);
 		}

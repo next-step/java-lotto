@@ -1,12 +1,10 @@
 package lotto.controller;
-
 import java.util.List;
+import java.util.Set;
 
 import lotto.domain.LottoTickets;
-import lotto.domain.WinningInfo;
+import lotto.domain.LottoValidator;
 import lotto.domain.LottoShop;
-import lotto.domain.LottoTicket;
-import lotto.domain.WinningInfos;
 import lotto.domain.strategy.AutoGenerateStrategy;
 import lotto.domain.util.StringSplitter;
 import lotto.view.InputView;
@@ -22,18 +20,11 @@ public class LottoController {
 		resultView.showHowManyBuyTicket(ticketQuantity);
 
 		LottoTickets lottoTickets = new LottoTickets(ticketQuantity, new AutoGenerateStrategy());
-		List<LottoTicket> tickets = lottoTickets.getLottoTickets();
-		resultView.showLottoTickets(tickets);
+		resultView.showLottoTickets(lottoTickets.getLottoTickets());
 
-		List<Integer> winningNums = StringSplitter.convertToIntegerList(inputView.inputWinningNumbers());
-		lottoTickets.validTicket(winningNums);
-		List<WinningInfo> results = lottoTickets.convertToWinningInfo();
-		resultView.showResultStatics(results);
+		Set<Integer> winningNums = StringSplitter.convertToIntegerSet(inputView.inputWinningNumbers());
+		resultView.showResultStatics(lottoTickets.validTicket(new LottoValidator(winningNums)));
 
-		WinningInfos winningInfos = new WinningInfos(results);
-		Double returnRate = lottoTickets.calcReturnRate(winningInfos.sumAmountEachRank(), totalPrice);
-		
-		resultView.showReturnRate(returnRate);
-
+		resultView.showReturnRate(lottoTickets.calcReturnRate(totalPrice));
 	}
 }

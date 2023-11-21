@@ -1,12 +1,13 @@
 package lotto.domain.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class StringSplitter {
-	public static List<Integer> convertToIntegerList(String str) {
+	public static Set<Integer> convertToIntegerSet(String str) {
 		String[] winningNums = str.split(", ");
-		List<Integer> winningNumToInteger = new ArrayList<>();
+		Set<Integer> winningNumToInteger = new LinkedHashSet<>();
 		for (String num : winningNums) {
 			winningNumToInteger.add(strToInt(num));
 		}

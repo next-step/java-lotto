@@ -2,7 +2,6 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -23,24 +22,24 @@ public class LottoValidatorTest {
 	static Stream<Arguments> lottoNumbersAndRank() {
 		return Stream.of(
 			Arguments.arguments(
-				new LottoValidator(List.of(1, 2, 3, 4, 5, 6))
-					.valid(new LottoTicket((() -> Set.of(1, 2, 3, 4, 5, 6)))).getRank(), Rank.FIRST
+				new LottoValidator(Set.of(1, 2, 3, 4, 5, 6))
+					.valid(new LottoTicket((() -> Set.of(1, 2, 3, 4, 5, 6)))), Rank.FIRST
 			),
 			Arguments.arguments(
-				new LottoValidator(List.of(1, 2, 3, 4, 5, 6))
-					.valid(new LottoTicket((() -> Set.of(1, 2, 3, 4, 5, 7)))).getRank(), Rank.SECOND
+				new LottoValidator(Set.of(1, 2, 3, 4, 5, 6))
+					.valid(new LottoTicket((() -> Set.of(1, 2, 3, 4, 5, 7)))), Rank.SECOND
 			),
 			Arguments.arguments(
-				new LottoValidator(List.of(1, 2, 3, 4, 5, 6))
-					.valid(new LottoTicket((() -> Set.of(1, 2, 3, 4, 7, 8)))).getRank(), Rank.THIRD
+				new LottoValidator(Set.of(1, 2, 3, 4, 5, 6))
+					.valid(new LottoTicket((() -> Set.of(1, 2, 3, 4, 7, 8)))), Rank.THIRD
 			),
 			Arguments.arguments(
-				new LottoValidator(List.of(1, 2, 3, 4, 5, 6))
-					.valid(new LottoTicket((() -> Set.of(1, 2, 3, 7, 8, 9)))).getRank(), Rank.FOURTH
+				new LottoValidator(Set.of(1, 2, 3, 4, 5, 6))
+					.valid(new LottoTicket((() -> Set.of(1, 2, 3, 7, 8, 9)))), Rank.FOURTH
 			),
 			Arguments.arguments(
-				new LottoValidator(List.of(1, 2, 3, 4, 5, 6))
-					.valid(new LottoTicket((() -> Set.of(1, 2, 7, 8, 9, 10)))).getRank(), Rank.NOT
+				new LottoValidator(Set.of(1, 2, 3, 4, 5, 6))
+					.valid(new LottoTicket((() -> Set.of(1, 2, 7, 8, 9, 10)))), Rank.NOT
 			)
 		);
 	}

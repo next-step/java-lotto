@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -9,36 +11,47 @@ import java.util.stream.Collectors;
 import lotto.domain.strategy.GenerateStrategy;
 
 public class LottoTickets {
-	private final List<LottoTicket> lottoTickets = new ArrayList<>();
+	private List<LottoTicket> lottoTickets = new ArrayList<>();
+	private final LinkedHashMap<Rank, Integer> result = new LinkedHashMap<>();
 
 	public LottoTickets(int ticketQuantity, GenerateStrategy strategy) {
 		for (int i = 0; i < ticketQuantity; i++) {
 			lottoTickets.add(new LottoTicket(strategy));
 		}
+		for (Rank rank : Rank.values()) {
+			result.put(rank, 0);
+		}
+	}
+
+	public LottoTickets(List<LottoTicket> lottoTickets) {
+		this.lottoTickets = lottoTickets;
 	}
 
 	public List<LottoTicket> getLottoTickets() {
 		return Collections.unmodifiableList(lottoTickets);
 	}
 
-	public List<LottoTicket> validTicket(List<Integer> winningNums) {
-		return lottoTickets.stream()
-			.map(lt -> new LottoValidator(winningNums).valid(lt))
+	public LinkedHashMap<Rank, Integer> validTicket(LottoValidator lottoValidator) {
+		List<Rank> ranks =  lottoTickets.stream()
+			.map(lottoValidator::valid)
 			.collect(Collectors.toList());
+
+		for (Rank rank : ranks) {
+			result.put(rank, result.get(rank) + 1);
+		}
+		return result;
 	}
 
-	public List<WinningInfo> convertToWinningInfo() {
-		return groupByRank().entrySet().stream()
-			.map(r -> new WinningInfo(r.getKey(), r.getValue().intValue()))
-			.collect(Collectors.toList());
+	// bigDecimal?
+	public double calcReturnRate(int totalAmount) {
+		return calcTotalAmount() / totalAmount;
 	}
 
-	private Map<Rank, Long> groupByRank() {
-		return lottoTickets.stream()
-			.collect(Collectors.groupingBy(LottoTicket::getRank, Collectors.counting()));
-	}
-
-	public Double calcReturnRate(Double totalAmount, int totalPrice) {
-		return totalAmount / totalPrice;
+	private long calcTotalAmount() {
+		long sum = 0;
+		for (Map.Entry<Rank, Integer> result : result.entrySet()) {
+			sum += result.getKey().getAmount() * result.getValue();
+		}
+		return sum;
 	}
 }
