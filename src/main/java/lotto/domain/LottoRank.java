@@ -21,12 +21,13 @@ public enum LottoRank {
         this.expression = expression;
     }
 
-    public static LottoRank findMatchCount(int matchNumber, boolean bonus){
+    public static LottoRank findMatchCount(int matchNumber, boolean bonus) {
         return Arrays.stream(values())
-                .filter(lottoRank -> lottoRank.match(matchNumber,bonus))
+                .filter(lottoRank -> lottoRank.match(matchNumber, bonus))
                 .findFirst()
                 .orElse(MISS);
     }
+
     private boolean match(int matchNumber, boolean bonus) {
         return this.expression.apply(matchNumber, bonus);
     }

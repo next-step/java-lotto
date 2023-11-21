@@ -5,7 +5,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoRanks {
-    private Map<LottoRank, Integer> lottoRanks;
+    private final Map<LottoRank, Integer> lottoRanks;
 
     public LottoRanks(Lottos lottos, Lotto winLotto, LottoNumber bonus) {
         this.lottoRanks = lottos.callRanks(winLotto, bonus);
