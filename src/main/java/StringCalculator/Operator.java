@@ -30,8 +30,4 @@ public enum Operator {
     public int calculate(int sum, int number) {
         return calculator.calculate(sum, number);
     }
-
-    public String getValue() {
-        return value;
-    }
 }
