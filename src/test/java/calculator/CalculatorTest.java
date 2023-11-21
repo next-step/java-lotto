@@ -12,17 +12,17 @@ import java.util.List;
 
 public class CalculatorTest {
     @Test
-    void 입력값_null_공백() throws Exception {
+    void 입력값_null_공백() {
         assertThatThrownBy(() -> Classifier.classifyInteger(new String[]{})).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void 사칙연산기호() throws Exception {
+    void 사칙연산기호() {
         assertThatThrownBy(() -> Operator.isOperator(List.of("3"))).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void 덧셈() throws Exception {
+    void 덧셈() {
         //given
         InputNumber numbers = new InputNumber(List.of(1, 2));
         Operator operators = new Operator(List.of("+"));
@@ -32,7 +32,7 @@ public class CalculatorTest {
     }
 
     @Test
-    void 뺄셈() throws Exception {
+    void 뺄셈() {
         //given
         InputNumber numbers = new InputNumber(List.of(1, 2));
         Operator operators = new Operator(List.of("-"));
@@ -42,7 +42,7 @@ public class CalculatorTest {
     }
 
     @Test
-    void 곱셈() throws Exception {
+    void 곱셈() {
         //given
         InputNumber numbers = new InputNumber(List.of(1, 2));
         Operator operators = new Operator(List.of("*"));
@@ -52,7 +52,7 @@ public class CalculatorTest {
     }
 
     @Test
-    void 나눗셈() throws Exception {
+    void 나눗셈() {
         //given
         InputNumber numbers = new InputNumber(List.of(1, 2));
         Operator operators = new Operator(List.of("/"));
@@ -63,7 +63,7 @@ public class CalculatorTest {
     }
 
     @Test
-    void 우선순위_무시() throws Exception {
+    void 우선순위_무시() {
         //given
         InputNumber numbers = new InputNumber(List.of(2, 3, 4, 2));
         Operator operators = new Operator(List.of("+", "*", "/"));

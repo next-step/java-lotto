@@ -25,19 +25,4 @@ public class LottoNumbers {
             throw new IllegalArgumentException("로또 번호가 중복이거나 6개가 아닙니다.");
         }
     }
-
-    public CorrectNumbers matchCountAndBonus(WinnerNumbers winnerNumbers) {
-        int count = 0;
-        boolean flag = false;
-        for (LottoNumberValidate number : lottoNumbers) {
-            if (winnerNumbers.has(number)) {
-                count++;
-            }
-            if (winnerNumbers.correctBonus(number)) {
-                flag = true;
-            }
-        }
-        return new CorrectNumbers(count, flag);
-    }
-
 }

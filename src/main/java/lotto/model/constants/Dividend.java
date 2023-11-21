@@ -1,7 +1,6 @@
 package lotto.model.constants;
 
 import java.util.Arrays;
-import java.util.List;
 
 public enum Dividend {
     FIRST(6, 2_000_000_000, false),

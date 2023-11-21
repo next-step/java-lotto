@@ -23,8 +23,4 @@ public class Lotto {
         return this.numbers.lottoNumbers();
     }
 
-    public CorrectNumbers matchCountAndBonus(WinnerNumbers winnerNumbers) {
-        return numbers.matchCountAndBonus(winnerNumbers);
-    }
-
 }
