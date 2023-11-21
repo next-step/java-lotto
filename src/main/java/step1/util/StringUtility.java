@@ -2,6 +2,7 @@ package step1.util;
 
 public class StringUtility {
     private final static String EXCEPTION_MESSAGE_BLANK_INPUT = "입력값이 빈 값이거나 공백으로만 이뤄졌습니다.";
+    private final static String SEPARATOR = " ";
 
     public static void validateString(String input) {
         if (blankString(input)) {
@@ -11,5 +12,9 @@ public class StringUtility {
 
     private static boolean blankString(String input) {
         return input.isBlank();
+    }
+
+    public static String[] split(String str) {
+        return str.split(SEPARATOR);
     }
 }
