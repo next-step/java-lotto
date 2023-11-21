@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoGame;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
-import lotto.domain.ResultWinner;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -24,9 +21,11 @@ public class LottoController {
 
         List<String> lastWeekLottoNumber = inputView.getLastWeekLottoNumber();
         String lastWeekBounusLottoNumber = inputView.getLastWeekBonusLottoNumber(lastWeekLottoNumber);
+
+        WinningNumber winningNumber = new WinningNumber(lastWeekLottoNumber, Integer.parseInt(lastWeekBounusLottoNumber));
         ResultWinner winner = new ResultWinner();
 
-        EnumMap<Rank, Integer> resultMap = winner.countOfWinner(buyLottoList, lastWeekLottoNumber, lastWeekBounusLottoNumber);
+        EnumMap<Rank, Integer> resultMap = winner.countOfWinner(buyLottoList, winningNumber);
         resultView.PrintTheWinningResults(resultMap, lottoCount);
 
     }

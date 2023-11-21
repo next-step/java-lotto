@@ -1,42 +1,18 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.List;
 
 public class ResultWinner {
 
     static final int HIT_FICE_LOTTO_NUMBERS = 5;
 
-    public EnumMap<Rank, Integer> countOfWinner(Lottos lottos, List<String> lastWeekWinner, String bonusNumber) {
-
-        List<Integer> resultList = new ArrayList<>();
-
+    public EnumMap<Rank, Integer> countOfWinner(Lottos lottos, WinningNumber winningNumber) {
         EnumMap<Rank, Integer> resultMap = makeResultMap();
-
         for (int i = 0; i < lottos.getLottosSize(); i++) {
-            resultMap = getAnswerCount(lottos.getLottoIndex(i), lastWeekWinner, bonusNumber, resultMap);
+            Rank rank = getAnswerCount(lottos.getLottoIndex(i), winningNumber);
+            resultMap.put(rank, resultMap.get(rank) + 1);
         }
-
-        resultAdd(resultList, resultMap);
-        System.out.println(resultMap);
         return resultMap;
-    }
-
-    private void resultAdd(List<Integer> resultList, EnumMap<Rank, Integer> resultMap) {
-        for (int i = 0; i < resultList.size(); i++) {
-            getResultMap(resultList, resultMap, i);
-        }
-    }
-
-    private void getResultMap(List<Integer> resultList, EnumMap<Rank, Integer> resultMap, int i) {
-        validMapContainsKey(resultList, resultMap, i);
-    }
-
-    private void validMapContainsKey(List<Integer> resultList, EnumMap<Rank, Integer> resultMap, int i) {
-        if (resultMap.containsKey(Rank.valueOf(resultList.get(i)))) {
-            resultMap.put(Rank.valueOf(resultList.get(i)), resultMap.get(Rank.valueOf(resultList.get(i))) + 1);
-        }
     }
 
     private EnumMap<Rank, Integer> makeResultMap() {
@@ -47,38 +23,21 @@ public class ResultWinner {
         return resultMap;
     }
 
-    private EnumMap<Rank, Integer> getAnswerCount(Lotto buyLottoList, List<String> lastWeek, String bonusNumber, EnumMap<Rank, Integer> resultMap) {
-        boolean checkContains;
-        int answerCount = 0;
-        for (String number : lastWeek) {
-            checkContains = buyLottoList.getLotto().stream().anyMatch(num -> num.getNumber() == Integer.parseInt(number));
-            answerCount = getAnswerCalc(checkContains, answerCount);
-        }
+    private Rank getAnswerCount(Lotto buyLotto, WinningNumber winningNumber) {
+        int matchCount = winningNumber.matchNumbers(buyLotto);
+        boolean checkBonusNumber = winningNumber.matchBonusNumber(buyLotto);
 
-        boolean checkBonusNumber = buyLottoList.getLotto().stream().anyMatch(num -> num.getNumber() == Integer.parseInt(bonusNumber));
-
-        EnumMap<Rank, Integer> second = getRankSecond(resultMap, answerCount, checkBonusNumber);
+        Rank second = getRankSecond(matchCount, checkBonusNumber);
         if (second != null) {
             return second;
         }
-
-        resultMap.put(Rank.valueOf(answerCount), resultMap.get(Rank.valueOf(answerCount)) + 1);
-
-        return resultMap;
+        return Rank.valueOf(matchCount);
     }
 
-    private EnumMap<Rank, Integer> getRankSecond(EnumMap<Rank, Integer> resultMap, int answerCount, boolean checkBonusNumber) {
-        if (answerCount == HIT_FICE_LOTTO_NUMBERS && checkBonusNumber) {
-            resultMap.put(Rank.SECOND, resultMap.get(Rank.SECOND) + 1);
-            return resultMap;
+    private Rank getRankSecond(int matchCount, boolean checkBonusNumber) {
+        if (matchCount == HIT_FICE_LOTTO_NUMBERS && checkBonusNumber) {
+            return Rank.SECOND;
         }
         return null;
-    }
-
-    private int getAnswerCalc(boolean checkContains, int answerCount) {
-        if (checkContains) {
-            answerCount++;
-        }
-        return answerCount;
     }
 }

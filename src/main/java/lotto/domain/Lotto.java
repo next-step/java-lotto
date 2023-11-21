@@ -39,4 +39,6 @@ public class Lotto {
             throw new IllegalArgumentException(LOTTO_IS_INVALID);
         }
     }
+
+    
 }

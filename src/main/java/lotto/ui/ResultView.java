@@ -21,10 +21,14 @@ public class ResultView {
 
         for (int i = 0; i < buyLottoList.getLottosSize(); i++) {
             Iterator<LottoNumber> iterSet = buyLottoList.getLottoIndex(i).getLotto().iterator();
-            while (iterSet.hasNext()) {
-                System.out.print(iterSet.next().getNumber() + " ");
-            }
+            viewLottoNumbers(iterSet);
             System.out.println();
+        }
+    }
+
+    private static void viewLottoNumbers(Iterator<LottoNumber> iterSet) {
+        while (iterSet.hasNext()) {
+            System.out.print(iterSet.next().getNumber() + " ");
         }
     }
 
