@@ -5,36 +5,34 @@ import java.util.List;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
+    private List<Lotto> lottoList;
 
-    private static final int MIN_MATCH_COUNT = 3;
-
-    public Lottos(int lottoCount) {
-        this.lottos = createLotto(lottoCount);
+    public Lottos(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
     }
 
-    private List<Lotto> createLotto(int lottoCount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto());
+    public static List<Lotto> createLottos(int purchaseCount) {
+        List<Lotto> newLottoList = new ArrayList<>();
+        for (int i = 0; i < purchaseCount; i++) {
+            newLottoList.add(new Lotto(Lotto.createLotto()));
         }
-        return lottos;
+        return newLottoList;
     }
 
     public int getSize() {
-        return lottos.size();
+        return lottoList.size();
     }
 
     public Lotto getLotto(int index) {
-        return lottos.get(index);
+        return lottoList.get(index);
     }
 
-    public MatchNumbers matchNumbers(List<Integer> winningNumbers) {
-        MatchNumbers matchNumbers = new MatchNumbers();
-        for (Lotto lotto : lottos) {
-            int matchCount = lotto.matchCount(winningNumbers);
-            matchNumbers.add(matchCount < MIN_MATCH_COUNT ? 0 : matchCount);
+    public LottoMatchNumbers matchNumbers(WinningNumbers winningNumberList) {
+        LottoMatchNumbers lottoMatchNumbers = new LottoMatchNumbers();
+        for (Lotto lotto : lottoList) {
+            int matchCount = lotto.matchCount(winningNumberList);
+            lottoMatchNumbers.put(matchCount);
         }
-        return matchNumbers;
+        return lottoMatchNumbers;
     }
 }

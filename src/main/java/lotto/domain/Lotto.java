@@ -3,38 +3,28 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lotto {
 
-    private final List<Integer> NUMBER_LIST = IntStream.range(1, 46).boxed().collect(Collectors.toList());
+    private List<Integer> numbers;
 
-    private List<Integer> lotto;
-
-    public Lotto() {
-        this.lotto = createLotto();
+    public Lotto(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
-    private List<Integer> createLotto() {
-        Collections.shuffle(NUMBER_LIST);
-        List<Integer> newLotto = new ArrayList<>(NUMBER_LIST.subList(0, 6));
+    public static List<Integer> createLotto() {
+        List<Integer> newLotto = new ArrayList<>(LottoNumbers.shuffle().subList(0, 6));
         Collections.sort(newLotto);
         return newLotto;
     }
 
-    public List<Integer> getLotto() {
-        return Collections.unmodifiableList(lotto);
+    public List<Integer> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 
-    public int matchCount(List<Integer> winningNumbers) {
-        return lotto.stream().mapToInt(number -> compare(winningNumbers, number)).sum();
-    }
-
-    private int compare(List<Integer> winningNumbers, int number) {
-        if (winningNumbers.contains(number)) {
-            return 1;
-        }
-        return 0;
+    public int matchCount(WinningNumbers winningNumbers) {
+        return (int) numbers.stream()
+                .filter(number -> winningNumbers.getList().contains(number))
+                .count();
     }
 }

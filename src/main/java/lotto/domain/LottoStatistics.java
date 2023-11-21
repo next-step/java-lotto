@@ -7,46 +7,27 @@ public class LottoStatistics {
 
     private static final double NUMBER_FOR_RATE = 100.0;
 
-    private Map<Integer, LottoMatchInformation> information  = new HashMap<>();
-    private double rate;
+    private Map<Integer, LottoMatchInformation> information = new HashMap<>();
 
-    public LottoStatistics(int purchaseAmount, MatchNumbers matchNumbers) {
-        for (LottoMatchInformation matchInformation : LottoMatchInformation.values()) {
-            this.information.put(matchInformation.getMatch(), matchInformation);
+    public LottoStatistics() {
+        for (LottoMatchInformation lottoMatchInformation : LottoMatchInformation.values()) {
+            information.put(lottoMatchInformation.getMatch(), lottoMatchInformation);
         }
-
-        matchNumbers(matchNumbers);
-        calculateRate(purchaseAmount);
-    }
-
-    private void matchNumbers(MatchNumbers matchNumbers) {
-        for (int i=0; i<matchNumbers.size(); i++) {
-            tryAddCount(matchNumbers, i);
-        }
-    }
-
-    private void tryAddCount(MatchNumbers matchNumbers, int index) {
-        LottoMatchInformation getInformation = information.get(matchNumbers.get(index));
-        if (getInformation == null) {
-            return;
-        }
-        getInformation.addCount();
-    }
-
-    private double totalPrize() {
-        return information.values().stream().mapToDouble(LottoMatchInformation::calculatePrize).sum();
-    }
-
-    private void calculateRate(int purchaseAmount) {
-        double totalPrize = totalPrize();
-        this.rate = Math.round(totalPrize / purchaseAmount * NUMBER_FOR_RATE) / NUMBER_FOR_RATE;
     }
 
     public Map<Integer, LottoMatchInformation> getInformation() {
         return this.information;
     }
+    public double getTotalPrize(LottoMatchNumbers lottoMatchNumbers) {
+        double totalPrize = 0;
+        Map<Integer, Integer> matchNumberMap = lottoMatchNumbers.getMatchNumberMap();
+        for (Integer key : matchNumberMap.keySet()) {
+            totalPrize += matchNumberMap.get(key) * information.get(key).getPrize();
+        }
+        return totalPrize;
+    }
 
-    public double getRate() {
-        return this.rate;
+    public double getRate(Purchase purchase, double totalPrize) {
+        return Math.round(totalPrize / purchase.getAmount() * NUMBER_FOR_RATE) / NUMBER_FOR_RATE;
     }
 }
