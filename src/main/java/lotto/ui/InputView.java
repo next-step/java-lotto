@@ -10,6 +10,8 @@ public class InputView {
     static final String PURCHASE_AMOUNT = "구입금액을 입력해주세요.";
     static final String LOTTO_COUNT = "개를 구매했습니다.";
     static final String LAST_WEEK_LOTTO_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+    static final String LOTTO_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+    static final String DUPLICATE_BONUS_NUMBER = "당첨 번호에 포함된 값입니다.";
 
     static final int LOTTO_AMOUNT = 1000;
 
@@ -28,5 +30,14 @@ public class InputView {
     public List<String> getLastWeekLottoNumber() {
         System.out.println(LAST_WEEK_LOTTO_NUMBER);
         return List.of(SCANNER.nextLine().replaceAll(" ", "").split(","));
+    }
+
+    public String getLastWeekBonusLottoNumber(List<String> lastWeekLottoNumbers) {
+        System.out.println(LOTTO_BONUS_NUMBER);
+        String bonusNumber = SCANNER.nextLine();
+        if (lastWeekLottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER);
+        }
+        return bonusNumber;
     }
 }

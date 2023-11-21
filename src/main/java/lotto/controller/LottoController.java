@@ -20,9 +20,12 @@ public class LottoController {
         resultView.PrintThePurchasedLotto(buyLottoList);
 
         List<String> lastWeekLottoNumber = inputView.getLastWeekLottoNumber();
+        String lastWeekBounusLottoNumber = inputView.getLastWeekBonusLottoNumber(lastWeekLottoNumber);
+
+        WinningNumber winningNumber = new WinningNumber(lastWeekLottoNumber, Integer.parseInt(lastWeekBounusLottoNumber));
         ResultWinner winner = new ResultWinner();
 
-        EnumMap<Rank, Integer> resultMap = winner.countOfWinner(buyLottoList, lastWeekLottoNumber);
+        EnumMap<Rank, Integer> resultMap = winner.countOfWinner(buyLottoList, winningNumber);
         resultView.PrintTheWinningResults(resultMap, lottoCount);
 
     }
