@@ -25,7 +25,7 @@ public class Summary {
 
     private long prizeTotal(EnumMap<Winning, Long> winnings) {
         return winnings.entrySet().stream()
-                .mapToLong(winning -> prizeTotalByWinning(winning))
+                .mapToLong(this::prizeTotalByWinning)
                 .sum();
     }
 
@@ -48,7 +48,7 @@ public class Summary {
 
     @Override
     public String toString() {
-        StringBuffer stringBuffer = new StringBuffer();
+        StringBuilder stringBuffer = new StringBuilder();
         stringBuffer.append(winningSummary);
         stringBuffer.append(String.format(PROFIT_RATE_MESSAGE, profitRate));
 
