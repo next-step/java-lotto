@@ -24,6 +24,7 @@ public class LottoResult {
         return statistics.get(LottoPrize.FIFTH) * LottoPrize.FIFTH.getMoney()
                 + statistics.get(LottoPrize.FOURTH) * LottoPrize.FOURTH.getMoney()
                 + statistics.get(LottoPrize.THIRD) * LottoPrize.THIRD.getMoney()
+                + statistics.get(LottoPrize.SECOND) * LottoPrize.SECOND.getMoney()
                 + statistics.get(LottoPrize.FIRST) * LottoPrize.FIRST.getMoney();
     }
 

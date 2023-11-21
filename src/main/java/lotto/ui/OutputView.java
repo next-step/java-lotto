@@ -1,5 +1,6 @@
 package lotto.ui;
 
+import lotto.domain.LottoPrize;
 import lotto.ui.dto.LottoStatsResponse;
 import lotto.ui.dto.MyLottosResponse;
 
@@ -19,6 +20,13 @@ public class OutputView {
         System.out.println("---------");
         lottoStatsResponse.getLottoStats().forEach(
                 lottoStatResponse -> {
+                    if (lottoStatResponse.getReceiveMoney() == LottoPrize.SECOND.getMoney()) {
+                        System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개\n"
+                                , lottoStatResponse.getMatchCount()
+                                , lottoStatResponse.getReceiveMoney()
+                                , lottoStatResponse.getMatchCountResult());
+                        return;
+                    }
                     System.out.printf("%d개 일치 (%d원)- %d개\n"
                             , lottoStatResponse.getMatchCount()
                             , lottoStatResponse.getReceiveMoney()
