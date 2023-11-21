@@ -1,4 +1,4 @@
-package step2;
+package step2.view;
 
 import java.util.Scanner;
 
@@ -13,5 +13,11 @@ public class LottoInputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
+    }
+
+    public static int inputWinningLottoBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
     }
 }

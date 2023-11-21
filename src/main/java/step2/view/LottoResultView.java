@@ -1,6 +1,10 @@
-package step2;
+package step2.view;
 
 import java.util.Arrays;
+import step2.model.Lotto;
+import step2.model.LottoResult;
+import step2.model.Lottos;
+import step2.model.Money;
 
 public class LottoResultView {
     public static void printLottos(Lottos lottos) {

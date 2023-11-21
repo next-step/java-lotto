@@ -1,4 +1,4 @@
-package step2;
+package step2.model;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,20 +8,24 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_NUMBER_SIZE = 6;
+
     private final Set<LottoNumber> lottoNumbers;
 
+    public Lotto(Set<LottoNumber> lottoNumbers) {
+        validateLottoNumberSize(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+    }
+
     public Lotto(List<Integer> givenLottoNumbers) {
-        this.lottoNumbers = givenLottoNumbers.stream()
+        this(givenLottoNumbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toSet());
-        validateLottoNumberSize(this.lottoNumbers);
+                .collect(Collectors.toSet()));
     }
 
     public Lotto(int[] givenLottoNumbers) {
-        this.lottoNumbers = Arrays.stream(givenLottoNumbers)
+        this(Arrays.stream(givenLottoNumbers)
                 .mapToObj(LottoNumber::new)
-                .collect(Collectors.toSet());
-        validateLottoNumberSize(this.lottoNumbers);
+                .collect(Collectors.toSet()));
     }
 
     private void validateLottoNumberSize(Set<LottoNumber> lottoNumbers) {
@@ -32,12 +36,11 @@ public class Lotto {
 
     public Integer compareToMatchNumberCount(Lotto other) {
         return Math.toIntExact(this.lottoNumbers.stream()
-//                .filter(other.lottoNumbers::contains)
-                .filter(other::containsLottoNumber) //위의 코드는 lottoNumbers를 꺼내게 되는 상황.
+                .filter(other::containsLottoNumber)
                 .count());
     }
 
-    private boolean containsLottoNumber(LottoNumber lottoNumber) {
+    public boolean containsLottoNumber(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
