@@ -8,12 +8,11 @@ import lotto.dto.WinningLottoDTO;
 import java.math.BigDecimal;
 
 public class ResultView {
-    public static void purchaseCount(Lottos lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
-    }
-
     private ResultView() {
 
+    }
+    public static void purchaseCount(Lottos lottos, int manulCount) {
+        System.out.println("수동으로 "+ manulCount +"장, 자동으로 "+ (lottos.size() - manulCount) +"장을 구매했습니다.");
     }
     public static void noGame() {
         System.out.println("구입한 로또가 없습니다.");
