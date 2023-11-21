@@ -37,12 +37,4 @@ public class LottoTicket {
 	public void updateRank(Rank rank) {
 		this.rank = rank;
 	}
-
-	@Override
-	public String toString() {
-		return "LottoTicket{" +
-			"numbers=" + numbers +
-			", rank=" + rank +
-			'}';
-	}
 }
