@@ -26,13 +26,6 @@ public enum Prize {
             .get();
     }
 
-    public static int priceByRank(int rank) {
-        return Arrays.stream(Prize.values())
-            .filter(prizes -> rank == prizes.rank)
-            .findFirst()
-            .get().price;
-    }
-
     public int rank() {
         return rank;
     }
