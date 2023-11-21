@@ -8,6 +8,6 @@ public class InputView {
 
     public static String inputString() {
         System.out.println(INPUT_COMMAND);
-        return scanner.next();
+        return scanner.nextLine();
     }
 }

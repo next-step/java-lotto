@@ -21,7 +21,7 @@ public class StringUtility {
     }
 
     public static void validateOperator(String[] values) {
-        for (int i = 0; i < values.length; i = i + 2) {
+        for (int i = 1; i < values.length; i += 2) {
             illegalOperator(values[i]);
         }
     }
