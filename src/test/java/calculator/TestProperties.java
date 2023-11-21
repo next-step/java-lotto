@@ -1,9 +1,9 @@
 package calculator;
 
-import calculator.domain.VariableExpression;
+import calculator.domain.Variable;
 
 public class TestProperties{
-    final static VariableExpression ONE = VariableExpression.of("1");
-    final static VariableExpression TWO = VariableExpression.of("2");
+    final static Variable ONE = Variable.of("1");
+    final static Variable TWO = Variable.of("2");
 
 }

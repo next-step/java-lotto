@@ -10,8 +10,8 @@ public enum Expression {
     DIVIDE("/", DivideExpression::new);
 
     private final String mark;
-    private final BiFunction<VariableExpression, VariableExpression, CalculatorExpression> calculatorExpression;
-    Expression(String mark, BiFunction<VariableExpression, VariableExpression, CalculatorExpression> expression) {
+    private final BiFunction<Variable, Variable, CalculatorExpression> calculatorExpression;
+    Expression(String mark, BiFunction<Variable, Variable, CalculatorExpression> expression) {
         this.mark = mark;
         calculatorExpression = expression;
     }
@@ -23,7 +23,7 @@ public enum Expression {
             .orElseThrow(() -> new IllegalArgumentException(String.format("해당 연산자는 존재하지 않습니다.")));
     }
 
-    CalculatorExpression expression(VariableExpression left, VariableExpression right){
+    CalculatorExpression expression(Variable left, Variable right){
         return this.calculatorExpression.apply(left,right);
     }
 

@@ -2,16 +2,16 @@ package calculator.domain;
 
 public class AddExpression implements CalculatorExpression {
 
-    private final VariableExpression left;
-    private final VariableExpression right;
+    private final Variable left;
+    private final Variable right;
 
-    public AddExpression(VariableExpression left, VariableExpression right) {
+    public AddExpression(Variable left, Variable right) {
         this.left = left;
         this.right = right;
     }
 
-    public VariableExpression calculate() {
+    public Variable calculate() {
         int result = left.value() + right.value();
-        return VariableExpression.of(Integer.toString(result));
+        return Variable.of(Integer.toString(result));
     }
 }

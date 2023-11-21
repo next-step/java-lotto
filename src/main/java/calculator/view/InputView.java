@@ -9,12 +9,13 @@ public class InputView {
 
     private final Scanner scanner;
     private final PrintStream sout;
+
     public InputView(Scanner scanner, PrintStream sout) {
         this.scanner = scanner;
         this.sout = sout;
     }
 
-    public String calculatorString(){
+    public String calculatorString() {
         sout.println(CALCULATE_INIT_MESSAGE);
         return scanner.nextLine();
     }
