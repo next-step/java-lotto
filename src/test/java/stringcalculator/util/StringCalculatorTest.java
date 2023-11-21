@@ -12,4 +12,9 @@ public class StringCalculatorTest {
         assertThat(StringCalculator.add(1, 3)).isEqualTo(4);
     }
 
+    @Test
+    @DisplayName("두 수를 뺀다.")
+    void subtract() {
+        assertThat(StringCalculator.subtract(4, 2)).isEqualTo(2);
+    }
 }
