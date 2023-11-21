@@ -21,7 +21,7 @@ public class StatisticsReport {
         }
     }
 
-    public static StatisticsReport of(LottoWallet lottoWallet){
+    public static StatisticsReport of(LottoWallet lottoWallet) {
         return new StatisticsReport(lottoWallet);
     }
 
@@ -38,7 +38,7 @@ public class StatisticsReport {
             Lotto lotto = lottoWallet.oneTicket(i);
             int matchedCount = winningLotto.compare(lotto);
             Prize prize = Prize.prizeByMatchedCount(matchedCount);
-            this.matchCountByPrize.put(prize,Integer.sum(matchCountByPrize.get(prize),1));
+            this.matchCountByPrize.put(prize, Integer.sum(matchCountByPrize.get(prize), 1));
         }
         return this;
     }
@@ -50,7 +50,7 @@ public class StatisticsReport {
     public int totalPrize() {
         int total = 0;
         for (Prize key : matchCountByPrize.keySet()) {
-            if( 0 < matchCountByPrize.get(key)){
+            if (0 < matchCountByPrize.get(key)) {
                 total = total + key.price();
             }
         }
