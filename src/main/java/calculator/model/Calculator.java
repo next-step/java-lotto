@@ -1,49 +1,43 @@
 package calculator.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static calculator.model.Expression.splitByTokens;
 
 public class Calculator {
 
-    public static int run(Expression expression) {
-        while (expression.isNotMonomial()) {
-            expression = calculateOnce(expression);
+    public static int run(String input) {
+        input = input.trim();
+        Expression.validate(input);
+
+        if (Expression.isNumber(input)) {
+            return Integer.parseInt(input);
         }
-        return expression.getResult();
+        return run(calculateOnce(input));
     }
 
-    private static Expression calculateOnce(Expression expression) {
-        int result = calculateBinomial(expression.popBinomial());
-        List<String> tokens = expression.tokens();
-        tokens.add(0, String.valueOf(result));
-        return new Expression(tokens);
+    private static String calculateOnce(String expression) {
+        List<String> subExpressions = splitFirstSubExpression(expression);
+        String binomial = subExpressions.get(0);
+        String restExpressions = subExpressions.get(1);
+
+        List<String> tokens = splitByTokens(binomial);
+        Operator operator = Operator.getBySymbol(tokens.get(1));
+        int result = operator.calculate(
+                Integer.parseInt(tokens.get(0)),
+                Integer.parseInt(tokens.get(2))
+        );
+
+        return String.valueOf(result) + " " + restExpressions;
     }
 
-    private static int calculateBinomial(Binomial bin) {
-        if (bin.getOperationType() == Operator.ADD) {
-            return add(bin.getLeftNumber(), bin.getRightNumber());
-        }
-        if (bin.getOperationType() == Operator.SUB) {
-            return sub(bin.getLeftNumber(), bin.getRightNumber());
-        }
-        if (bin.getOperationType() == Operator.MUL) {
-            return multiple(bin.getLeftNumber(), bin.getRightNumber());
-        }
-        return divide(bin.getLeftNumber(), bin.getRightNumber());
-    }
+    private static List<String> splitFirstSubExpression(String expression) {
+        List<String> tokens = splitByTokens(expression);
 
-    private static int add(int left, int right) {
-        return left + right;
-    }
-
-    private static int sub(int left, int right) {
-        return left - right;
-    }
-
-    private static int multiple(int left, int right) {
-        return left * right;
-    }
-
-    private static int divide(int left, int right) {
-        return left / right;
+        String binomial = String.join(" ", tokens.subList(0, 3));
+        String restExpression = String.join(" ", tokens.subList(3, tokens.size()));
+        return List.of(binomial, restExpression);
     }
 }
