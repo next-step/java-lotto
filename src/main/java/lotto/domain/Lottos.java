@@ -18,6 +18,12 @@ public class Lottos {
         this.value = value;
     }
 
+    public Lottos(Lottos manualLottos, Lottos autoLottos) {
+        value = new ArrayList<>();
+        value.addAll(manualLottos.value);
+        value.addAll(autoLottos.value);
+    }
+
     public String findLottos() {
         StringBuilder sc = new StringBuilder();
         for (Lotto lotto : value) {
