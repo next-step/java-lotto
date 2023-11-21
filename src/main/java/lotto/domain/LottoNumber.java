@@ -9,11 +9,11 @@ public class LottoNumber {
     private int number;
 
     public LottoNumber(int number) {
-        lottoMinMaxValidation(number);
+        validateMinMaxNumber(number);
         this.number = number;
     }
 
-    private void lottoMinMaxValidation(int number) {
+    private void validateMinMaxNumber(int number) {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException(NUMBER_IS_INVALID);
         }
