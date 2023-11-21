@@ -34,13 +34,9 @@ public enum Sign {
 	);
 
 	public static Sign of(final String sign){
-		validate(sign);
-		return Sign.valueOf(Sign.CODE_MAP.get(sign));
-	}
-
-	private static void validate(String sign) {
-		if (!Pattern.matches("[+\\-*/]", sign)) {
+		if(Sign.CODE_MAP.get(sign) == null){
 			throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
 		}
+		return Sign.valueOf(Sign.CODE_MAP.get(sign));
 	}
 }
