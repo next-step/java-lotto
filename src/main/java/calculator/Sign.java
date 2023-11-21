@@ -3,7 +3,6 @@ package calculator;
 import java.util.Collections;
 import java.util.Map;
 import java.util.function.BiFunction;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -33,8 +32,8 @@ public enum Sign {
 			Stream.of(values()).collect(Collectors.toMap(Sign::getSign, Sign::name))
 	);
 
-	public static Sign of(final String sign){
-		if(Sign.CODE_MAP.get(sign) == null){
+	public static Sign of(final String sign) {
+		if (Sign.CODE_MAP.get(sign) == null) {
 			throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
 		}
 		return Sign.valueOf(Sign.CODE_MAP.get(sign));

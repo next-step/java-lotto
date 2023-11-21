@@ -44,5 +44,4 @@
   * [x] Calculator 클래스 전체 구조 수정
 * [x] 사용자 입력 기능 추가
 * [x] Sign의 validate 방식 변경
-* [ ] 사칙연산 기호 input 시 정상반환 test 추가
-* [ ] Sign의 of()와 calculate() 테스트 분리
+* [x] Sign의 of()와 calculate() 테스트 분리

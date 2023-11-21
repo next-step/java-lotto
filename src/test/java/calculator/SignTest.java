@@ -20,30 +20,50 @@ public class SignTest {
 	}
 
 	@Test
-	@DisplayName("calculate_덧셈 기호로 생성_덧셈 결과값")
+	@DisplayName("of_String +_Sign.PLUS")
+	void plus_정상반환() {
+		assertThat(Sign.of("+")).isEqualTo(Sign.PLUS);
+	}
+
+	@Test
+	@DisplayName("calculate_덧셈_덧셈 결과값")
 	void calculate_plus() {
-		Sign sign = Sign.of("+");
-		assertThat(sign.calculate(1, 2)).isEqualTo(3);
+		assertThat(Sign.PLUS.calculate(1, 2)).isEqualTo(3);
 	}
 
 	@Test
-	@DisplayName("calculate_뺄셈 기호로 생성_뺄셈 결과값")
+	@DisplayName("of_String -_Sign.MINUS")
+	void minus_정상반환() {
+		assertThat(Sign.of("-")).isEqualTo(Sign.MINUS);
+	}
+
+	@Test
+	@DisplayName("calculate_뺄셈_뺄셈 결과값")
 	void calculate_minus() {
-		Sign sign = Sign.of("-");
-		assertThat(sign.calculate(2, 1)).isEqualTo(1);
+		assertThat(Sign.MINUS.calculate(2, 1)).isEqualTo(1);
 	}
 
 	@Test
-	@DisplayName("calculate_곱셈 기호로 생성_곱셈 결과값")
+	@DisplayName("of_String *_Sign.MULTIPLICATION")
+	void multiplication_정상반환() {
+		assertThat(Sign.of("*")).isEqualTo(Sign.MULTIPLICATION);
+	}
+
+	@Test
+	@DisplayName("calculate_곱셈_곱셈 결과값")
 	void calculate_multiplication() {
-		Sign sign = Sign.of("*");
-		assertThat(sign.calculate(3, 2)).isEqualTo(6);
+		assertThat(Sign.MULTIPLICATION.calculate(3, 2)).isEqualTo(6);
 	}
 
 	@Test
-	@DisplayName("calculate_나눗셈 기호로 생성_나눗셈 결과값")
+	@DisplayName("of_String /_Sign.DIVISION")
+	void division_정상반환() {
+		assertThat(Sign.of("/")).isEqualTo(Sign.DIVISION);
+	}
+
+	@Test
+	@DisplayName("calculate_나눗셈_나눗셈 결과값")
 	void calculate_division() {
-		Sign sign = Sign.of("/");
-		assertThat(sign.calculate(3, 2)).isEqualTo(1);
+		assertThat(Sign.DIVISION.calculate(3, 2)).isEqualTo(1);
 	}
 }
