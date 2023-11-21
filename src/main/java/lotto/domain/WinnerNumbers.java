@@ -8,7 +8,7 @@ public class WinnerNumbers {
 
     public WinnerNumbers(List<Integer> generatedNumbers, Random random) {
         winnerNumbers.addAll(generatedNumbers);
-        while (bonusNumber != 0) {
+        while (bonusNumber == 0) {
             generateBonusNumber(random);
         }
     }
@@ -27,5 +27,9 @@ public class WinnerNumbers {
 
     public boolean isContain(int number) {
         return winnerNumbers.contains(number);
+    }
+
+    public int bonusNumber() {
+        return this.bonusNumber;
     }
 }

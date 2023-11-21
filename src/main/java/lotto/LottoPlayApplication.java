@@ -28,6 +28,7 @@ public class LottoPlayApplication {
         displayLottoTickets(lottoGame.tickets());
 
         displayWinnerNumbers(lottoGame.winnerNumbers());
+
         PrizeStatus prizeStatus = new PrizeStatus(lottoGame);
 
         displayResult(prizeStatus, purchasedAmt);
