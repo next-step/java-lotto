@@ -24,6 +24,14 @@ public class Lotto {
         return Collections.unmodifiableList(lottoNums);
     }
 
+    public int getMatchCount(Lotto winningLotto) {
+        return (int) lottoNums.stream().filter(winningLotto::match).count();
+    }
+
+    public boolean match(LottoNum lottoNum) {
+        return lottoNums.contains(lottoNum);
+    }
+
     private void validate(List<LottoNum> lottoNums) {
         if (lottoNums.size() != LOTTO_NUM_SIZE) {
             throw new IllegalArgumentException("Lotto 숫자의 사이즈는 6개 입니다.");
