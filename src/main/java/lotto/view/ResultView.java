@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.util.ProfitCalculator;
 
+import java.util.List;
 import java.util.Map;
 
 public class ResultView {
@@ -12,7 +13,7 @@ public class ResultView {
         System.out.println(String.format("%d개를 구매했습니다.", lottoCount));
     }
 
-    public void printLottoNumbers(Lotto[] lottoList) {
+    public void printLottoNumbers(List<Lotto> lottoList) {
         for (Lotto lotto : lottoList) {
             System.out.println(lotto.numbers().toString());
         }
@@ -38,7 +39,7 @@ public class ResultView {
             );
         }
 
-        System.out.println(String.format("총 수익률은 %f입니다.", ProfitCalculator.calculateProfitRate(purchasePrice, profitPrice)));
+        System.out.println(String.format("총 수익률은 %.2f입니다.", ProfitCalculator.calculateProfitRate(purchasePrice, profitPrice)));
     }
 
 }

@@ -1,16 +1,13 @@
 package lotto;
 
 import lotto.domain.Lotto;
-import lotto.strategy.LottoRandomGenerator;
 import lotto.domain.LottoResult;
 import lotto.strategy.LottoGenerator;
+import lotto.strategy.LottoRandomGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoController {
@@ -21,19 +18,19 @@ public class LottoController {
 
     public static void main(String[] args) {
         int purchasePrice = inputView.askPurchasePrice();
-        Lotto[] purchasedLottoList = buyLotto(purchasePrice);
+        List<Lotto> purchasedLottoList = buyLotto(purchasePrice);
         Lotto winningLotto = EnterWinningNumber();
 
         checkWinningStatistics(purchasePrice, purchasedLottoList, winningLotto);
     }
 
-    private static Lotto[] buyLotto(int purchasePrice) {
+    private static List<Lotto> buyLotto(int purchasePrice) {
         int lottoCount = purchasePrice / 1000;
         ResultView.printPurchaseInfo(lottoCount);
 
-        Lotto[] lottoList = new Lotto[lottoCount];
+        List<Lotto> lottoList = new ArrayList<>();
         for (int index = 0; index < lottoCount; index++) {
-            lottoList[index] = new Lotto(lottoRandomGenerator);
+            lottoList.add(new Lotto(lottoRandomGenerator));
         }
         resultView.printLottoNumbers(lottoList);
 
@@ -42,11 +39,10 @@ public class LottoController {
 
     private static Lotto EnterWinningNumber() {
         List<Integer> winningNumbers = inputView.askLottoWinningNumbers();
-        Lotto winningLotto = new Lotto(winningNumbers);
-        return winningLotto;
+        return new Lotto(winningNumbers);
     }
 
-    private static void checkWinningStatistics(int purchasePrice, Lotto[] lottoList, Lotto winningLotto) {
+    private static void checkWinningStatistics(int purchasePrice, List<Lotto> lottoList, Lotto winningLotto) {
         Map<LottoResult, Integer> lottoResults = Arrays.stream(LottoResult.values())
                 .collect(Collectors.toMap(k -> k, v -> 0, (x, y) -> y, LinkedHashMap::new));
 
