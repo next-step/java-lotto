@@ -1,8 +1,8 @@
 package domain.lotto;
 
 import domain.lotto.domain.LottoGame;
-import domain.lotto.domain.LottoLine;
 import domain.lotto.domain.LottoNumber;
+import domain.lotto.domain.WinnginLottoLine;
 import domain.lotto.view.InputView;
 import domain.lotto.view.OutputView;
 
@@ -18,7 +18,7 @@ public class LottoApplication {
 
         OutputView.printBuyingCount(lottoGame.getLottoLines().size());
         OutputView.printLottoLines(lottoGame);
-        
+
         String winningNumberAnswer = InputView.getWinningNumber();
         String[] winningNumbersString = winningNumberAnswer.split(", ");
         Set<LottoNumber> winningNumbers = Arrays.stream(winningNumbersString)
@@ -26,7 +26,7 @@ public class LottoApplication {
                 .mapToObj(LottoNumber::from)
                 .collect(Collectors.toSet());
 
-        lottoGame.registerWinningLottoLine(new LottoLine(winningNumbers));
+        lottoGame.registerWinningLottoLine(new WinnginLottoLine(winningNumbers));
 
         lottoGame.calculateStatistics();
 
