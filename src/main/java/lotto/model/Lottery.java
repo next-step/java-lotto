@@ -2,9 +2,9 @@ package lotto.model;
 
 import lotto.model.constants.Dividend;
 
+import java.util.*;
+
 public class Lottery {
-    public static final int MIN_CORRECT_COUNT = 3;
-    public static final int MAX_CORRECT_COUNT = 6;
     private final WinnerNumbers winnerNumbers;
     private final Lottos lottos;
 
@@ -13,19 +13,24 @@ public class Lottery {
         this.lottos = lottos;
     }
 
-    public long depositTotalMoney(){
+    public long depositTotalMoney() {
         long totalMoney = 0;
-        for (int i = MIN_CORRECT_COUNT; i <= MAX_CORRECT_COUNT; i++) {
-            totalMoney += Dividend.findWinnerMoney(Dividend.getDividend(i), checkForWin(i));
+        for (Lotto lotto : lottos.lottoList()) {
+            totalMoney += winnerNumbers.winnerMoney(lotto);
         }
         return totalMoney;
     }
+
+    public Map<Dividend, Integer> totalCorrect() {
+        Map<Dividend, Integer> correctCountResult = new HashMap<>();
+        for (Lotto lotto : lottos.lottoList()) {
+            Dividend dividend = winnerNumbers.winResult(lotto);
+            correctCountResult.put(dividend, correctCountResult.getOrDefault(dividend, 0) + 1);
+        }
+        return correctCountResult;
+    }
+
     public double getInvestment() {
         return (double) depositTotalMoney() / lottos.totalPurchasePrice();
     }
-
-    public int checkForWin(int correctCount) {
-        return lottos.correctCount(winnerNumbers, correctCount);
-    }
-
 }

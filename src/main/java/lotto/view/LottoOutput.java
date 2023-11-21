@@ -3,19 +3,31 @@ package lotto.view;
 import lotto.model.*;
 import lotto.model.constants.Dividend;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class LottoOutput {
-    public static final int MIN_CORRECT_COUNT = 3;
-    public static final int MAX_CORRECT_COUNT = 6;
+
+    public static final int RANK_NUMBER = Dividend.values().length - 2;
 
     public void viewLottoCount(Lottos lottos) {
         System.out.println(lottos.lottoCount() + "개를 구매했습니다.");
     }
 
-    public void viewLottoDetail(Lottos lottos) {
+    public void viewLottosDetail(Lottos lottos) {
         for (Lotto lotto : lottos.lottoList()) {
-            System.out.println(lotto.numbers());
+            System.out.println("[" + getLottoDetail(lotto) + "]");
         }
         System.out.println();
+    }
+
+    private String getLottoDetail(Lotto lotto) {
+        List<String> list = new ArrayList<>();
+        for (LottoNumberValidate number : lotto.numbers()) {
+            list.add(Integer.toString(number.number()));
+        }
+        return String.join(", ", list);
     }
 
     public void viewTotalIncomeRatio(Lottery lottery) {
@@ -25,12 +37,19 @@ public class LottoOutput {
     public void viewCorrectLottos(Lottery lottery) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (int i = MIN_CORRECT_COUNT; i <= MAX_CORRECT_COUNT; i++) {
-            viewCorrectLotto(i, lottery.checkForWin(i));
+        Map<Dividend, Integer> correctDetails = lottery.totalCorrect();
+        for (int count = RANK_NUMBER; count >= 0; count--) {
+            viewCorrectLotto(Dividend.values()[count], correctDetails.getOrDefault(Dividend.values()[count], 0));
         }
+
     }
 
-    public void viewCorrectLotto(int correctCount, int count) {
-        System.out.println(correctCount + "개 일치 (" + Dividend.getDividend(correctCount).dividendAmount() + "원) - " + count + "개");
+
+    public void viewCorrectLotto(Dividend dividend, int count) {
+        if (dividend.equals(Dividend.SECOND)) {
+            System.out.println(dividend.correctCount() + "개 일치, 보너스 볼 일치(" + dividend.dividendAmount() + "원) - " + count + "개");
+            return;
+        }
+        System.out.println(dividend.correctCount() + "개 일치 (" + dividend.dividendAmount() + "원) - " + count + "개");
     }
 }

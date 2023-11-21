@@ -1,23 +1,18 @@
 package lotto.model;
 
+import lotto.strategy.LottoStrategy;
+import lotto.strategy.RandomNumber;
+
 import java.util.*;
 
+import static lotto.model.LottoNumbers.*;
+import static lotto.model.Lottos.LOTTO_PRICE;
+
 public class LottoFactory {
-    private static final int LOTTO_PRICE = 1000;
-    public static final int MAX_LOTTO_NUMBER = 45;
-    public static final int MIN_LOTTO_NUMBER = 1;
-    public static final int MAX_LOTTO_SIZE = 6;
-    private final int purchaseMoney;
+    private final PurchaseMoney purchaseMoney;
 
-    public LottoFactory(int purchaseMoney) {
-        checkMoneyOverThousand(purchaseMoney);
-        this.purchaseMoney = purchaseMoney;
-    }
-
-    private void checkMoneyOverThousand(int purchaseMoney) {
-        if (purchaseMoney < LOTTO_PRICE) {
-            throw new IllegalArgumentException("구입 금액은 1000원 이상이어야 합니다.");
-        }
+    public LottoFactory(long purchaseMoney) {
+        this.purchaseMoney = new PurchaseMoney(purchaseMoney);
     }
 
     public Lottos generateLottos() {
@@ -28,19 +23,20 @@ public class LottoFactory {
         return new Lottos(lottos);
     }
 
-    public LottoNumbers generateRandomSixNumber() {
-        Set<Integer> numbers = new HashSet<>();
-        while (numbers.size() != MAX_LOTTO_SIZE) {
-            numbers.add(generateRandomNumber());
+    private LottoNumbers generateRandomSixNumber() {
+        Set<LottoNumberValidate> numbers = new HashSet<>();
+        while (numbers.size() != LOTTO_MAX_COUNT) {
+            int randomNumber = generateRandomNumber(new RandomNumber());
+            numbers.add(new LottoNumberValidate(randomNumber));
         }
         return new LottoNumbers(numbers);
     }
 
-    int generateRandomNumber() {
-        return (int) (Math.random() * MAX_LOTTO_NUMBER + MIN_LOTTO_NUMBER);
+    private int generateRandomNumber(LottoStrategy lottoStrategy) {
+        return lottoStrategy.generateNumber();
     }
 
     public int lottoCount() {
-        return this.purchaseMoney / LOTTO_PRICE;
+        return (int) (this.purchaseMoney.money() / LOTTO_PRICE);
     }
 }

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.controller;
 
 import lotto.model.*;
 import lotto.view.LottoInput;
@@ -18,9 +18,9 @@ public class LottoApplication {
         Lottos lottos = lottoFactory.generateLottos();
 
         lottoOutput.viewLottoCount(lottos);
-        lottoOutput.viewLottoDetail(lottos);
+        lottoOutput.viewLottosDetail(lottos);
 
-        WinnerNumbers winnerNumbers = lottoInput.getWinningNumber();
+        WinnerNumbers winnerNumbers = new WinnerNumbers(lottoInput.getWinningNumber(), lottoInput.getBonusBall());
         Lottery lottery = new Lottery(winnerNumbers, lottos);
 
         lottoOutput.viewCorrectLottos(lottery);
