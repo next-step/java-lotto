@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.*;
 
 public class WinnerNumbers {
-    private final List<Integer> winnerNummbers = new ArrayList<>();
+    private final List<Integer> winnerNumbers = new ArrayList<>();
     private int bonusNumber = 0;
 
     public WinnerNumbers(List<Integer> generatedNumbers, Random random) {
-        winnerNummbers.addAll(generatedNumbers);
+        winnerNumbers.addAll(generatedNumbers);
         while (bonusNumber != 0) {
             generateBonusNumber(random);
         }
@@ -22,10 +22,10 @@ public class WinnerNumbers {
 
     @Override
     public String toString() {
-        return this.winnerNummbers.toString();
+        return this.winnerNumbers.toString();
     }
 
     public boolean isContain(int number) {
-        return winnerNummbers.contains(number);
+        return winnerNumbers.contains(number);
     }
 }
