@@ -1,9 +1,9 @@
-package study.step2.view;
+package study.step3.view;
 
 import java.util.List;
 
-import study.step2.domain.Lotto;
-import study.step2.domain.Rank;
+import study.step3.domain.Lotto;
+import study.step3.domain.Rank;
 
 public class ResultView {
 
@@ -21,7 +21,14 @@ public class ResultView {
     }
 
     public static void showStatistics(Rank rank, int winningCount) {
-        System.out.println(String.format("%d개 일치 (%d원)- %d개", rank.hitCount(), rank.amount(), winningCount));
+        System.out.println(String.format("%d개 일치%s (%d원)- %d개", rank.hitCount(), isBonus(rank), rank.amount(), winningCount));
+    }
+
+    private static String isBonus(Rank rank) {
+        if (rank.isSecond()) {
+            return ", 보너스 볼 일치";
+        }
+        return "";
     }
 
     public static void showRevenue(double revenue) {

@@ -1,17 +1,16 @@
-package study.step2.domain;
+package study.step3.domain;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import study.step2.domain.exception.LottoException;
+import study.step3.domain.exception.LottoException;
 
-import static study.step2.domain.LottoGenerator.LOTTO_NUMBERS_SIZE;
+import static study.step3.domain.LottoGenerator.LOTTO_NUMBERS_SIZE;
 
 public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
-    private int hitCount = 0;
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
@@ -31,25 +30,24 @@ public class Lotto {
             .size() == LOTTO_NUMBERS_SIZE;
     }
 
-    public Rank matches(List<Integer> winningNumbers) {
-        lottoNumbers.stream()
-            .map(LottoNumber::lottoNumber)
-            .forEach(number -> calculateHitCount(number, winningNumbers));
-        return Rank.valueOfHitCount(hitCount);
+    public Rank matches(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
+        return Rank.valueOf(hitCount(winningNumbers), isBonus(bonusNumber));
     }
 
-    private void calculateHitCount(Integer number, List<Integer> winningNumbers) {
-        if (winningNumbers.contains(number)) {
-            hitCount += 1;
-        }
+    private Integer hitCount(WinningNumbers winningNumbers) {
+        return lottoNumbers.stream()
+            .map(winningNumbers::containsNumber)
+            .map(v -> v.compareTo(false))
+            .reduce(0, Integer::sum);
+    }
+
+    private boolean isBonus(LottoNumber bonusNumber) {
+        return lottoNumbers.stream()
+            .anyMatch(number -> number.matchesBonusNumber(bonusNumber));
     }
 
     public List<LottoNumber> lottoNumbers() {
         return lottoNumbers;
-    }
-
-    public int hitCount() {
-        return hitCount;
     }
 
 }

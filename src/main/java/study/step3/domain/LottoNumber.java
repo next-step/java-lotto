@@ -1,6 +1,8 @@
-package study.step2.domain;
+package study.step3.domain;
 
-import study.step2.domain.exception.LottoException;
+import java.util.Objects;
+
+import study.step3.domain.exception.LottoException;
 
 public class LottoNumber {
 
@@ -23,8 +25,8 @@ public class LottoNumber {
         return number >= LOTTO_START_NUMBER && number <= LOTTO_END_NUMBER;
     }
 
-    public boolean equals(LottoNumber number) {
-        return lottoNumber.equals(number.lottoNumber());
+    public boolean matchesBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumber.equals(bonusNumber.lottoNumber());
     }
 
     public Integer lottoNumber() {
@@ -36,4 +38,20 @@ public class LottoNumber {
         return lottoNumber.toString();
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) object;
+        return Objects.equals(lottoNumber, that.lottoNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
+    }
 }

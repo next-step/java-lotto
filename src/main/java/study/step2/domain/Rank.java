@@ -1,8 +1,6 @@
 package study.step2.domain;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public enum Rank {
 
@@ -30,17 +28,11 @@ public enum Rank {
             .orElse(NO_HIT);
     }
 
-    public static List<Rank> valuesToList() {
-        return Arrays.stream(values())
-            .filter(Rank::isHit)
-            .collect(Collectors.toList());
-    }
-
     private boolean hitCountEquals(int hitCount) {
         return this.hitCount == hitCount;
     }
 
-    private boolean isHit() {
+    public boolean isHit() {
         return this != NO_HIT;
     }
 

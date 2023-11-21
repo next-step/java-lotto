@@ -1,9 +1,9 @@
-package study.step2.domain;
+package study.step3.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static study.step2.domain.Lotto.validateNumbers;
+import static study.step3.domain.Lotto.validateNumbers;
 
 public class WinningNumbers {
 
@@ -16,10 +16,8 @@ public class WinningNumbers {
             .collect(Collectors.toList());
     }
 
-    public List<Integer> toIntegers() {
-        return winningNumbers.stream()
-            .map(LottoNumber::lottoNumber)
-            .collect(Collectors.toList());
+    public boolean containsNumber(LottoNumber number) {
+        return winningNumbers.contains(number);
     }
 
 }

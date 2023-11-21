@@ -12,7 +12,7 @@ public class LottoTest {
     void 당첨_계산() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         WinningNumbers winningNumbers = new WinningNumbers(List.of(3, 5, 6, 9, 23, 43));
-        lotto.matches(winningNumbers);
+        lotto.matches(winningNumbers.toIntegers());
         assertThat(lotto.hitCount()).isEqualTo(3);
     }
 }

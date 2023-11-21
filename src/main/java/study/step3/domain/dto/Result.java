@@ -1,8 +1,8 @@
-package study.step2.domain.dto;
+package study.step3.domain.dto;
 
 import java.util.*;
 
-import study.step2.domain.Rank;
+import study.step3.domain.Rank;
 
 public class Result {
 

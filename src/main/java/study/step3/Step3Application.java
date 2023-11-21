@@ -1,18 +1,17 @@
-package study.step2;
+package study.step3;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import study.step2.domain.*;
-import study.step2.domain.dto.PurchaseAmount;
-import study.step2.domain.dto.Result;
+import study.step3.domain.*;
+import study.step3.domain.dto.PurchaseAmount;
+import study.step3.domain.dto.Result;
 
-import static study.step2.view.InputView.inputPurchaseAmount;
-import static study.step2.view.InputView.inputWinningNumbers;
-import static study.step2.view.ResultView.*;
+import static study.step3.view.InputView.*;
+import static study.step3.view.ResultView.*;
 
-public class Step2Application {
+public class Step3Application {
 
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = inputPurchaseAmount();
@@ -27,8 +26,10 @@ public class Step2Application {
         show(lottos);
 
         WinningNumbers winningNumbers = inputWinningNumbers();
+        LottoNumber bonusNumber = inputBonusNumber();
+
         List<Rank> ranks = lottos.stream()
-            .map(lotto -> lotto.matches(winningNumbers.toIntegers()))
+            .map(lotto -> lotto.matches(winningNumbers, bonusNumber))
             .collect(Collectors.toList());
 
         Result result = new Result();
