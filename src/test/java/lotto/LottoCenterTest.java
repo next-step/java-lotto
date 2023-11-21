@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCenter;
 import lotto.domain.Rank;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -37,13 +38,14 @@ class LottoCenterTest {
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(lotto);
 
-        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningNumber = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         int bonusNumber = 7;
 
-        new LottoCenter().matchWinningNumbers(lottos, winningNumbers, bonusNumber);
-        Rank rank = lottos.get(0).getRank();
+        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
+        LottoCenter lottoCenter = new LottoCenter(winningLotto);
+        List<Rank> ranks = lottoCenter.matchWinningNumbers(lottos);
 
-        assertThat(rank).isEqualTo(Rank.FIFTH);
+        assertThat(ranks.get(0)).isEqualTo(Rank.FIFTH);
     }
 
     @Test
@@ -52,13 +54,14 @@ class LottoCenterTest {
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(lotto);
 
-        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningNumber = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         int bonusNumber = 9;
+        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
 
-        new LottoCenter().matchWinningNumbers(lottos, winningNumbers, bonusNumber);
-        Rank rank = lottos.get(0).getRank();
+        LottoCenter lottoCenter = new LottoCenter(winningLotto);
+        List<Rank> ranks = lottoCenter.matchWinningNumbers(lottos);
 
-        assertThat(rank).isEqualTo(Rank.SECOND);
+        assertThat(ranks.get(0)).isEqualTo(Rank.SECOND);
     }
 
     @Test
@@ -69,25 +72,29 @@ class LottoCenterTest {
 
         Lotto winningNumber = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         int bonusNumber = 7;
-        LottoCenter lottoCenter = new LottoCenter();
-        lottoCenter.matchWinningNumbers(lottos, winningNumber, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
 
-        List<Long> result = lottoCenter.checkWinningResult(lottos);
+        LottoCenter lottoCenter = new LottoCenter(winningLotto);
+        lottoCenter.matchWinningNumbers(lottos);
 
-        assertThat(result.get(0)).isEqualTo(0);
-        assertThat(result.get(2)).isEqualTo(1);
+        List<Integer> result = lottoCenter.checkWinningResult();
+
+        assertThat(result.get(0)).isEqualTo(0); //1st
+        assertThat(result.get(2)).isEqualTo(1); //3rd
     }
 
     @Test
     void 통계_당첨_수익률() {
-        int cash = 1000;
-        LottoCenter lottoCenter = new LottoCenter();
-        List<Lotto> lottos = lottoCenter.buyLotto(cash);
-
         Lotto winningNumber = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         int bonusNumber = 7;
-        lottoCenter.matchWinningNumbers(lottos, winningNumber, bonusNumber);
-        lottoCenter.checkWinningResult(lottos);
+        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
+        LottoCenter lottoCenter = new LottoCenter(winningLotto);
+
+        int cash = 1000;
+        List<Lotto> lottos = lottoCenter.buyLotto(cash);
+
+        lottoCenter.matchWinningNumbers(lottos);
+        lottoCenter.checkWinningResult();
 
         float rate = lottoCenter.checkWinningRate();
 

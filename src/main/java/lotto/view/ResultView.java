@@ -12,7 +12,7 @@ public class ResultView {
         }
     }
 
-    public void finalResult(List<Long> result, float rate) {
+    public void finalResult(List<Integer> result, float rate) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.println("3개 일치 (5000원)- " + result.get(4) + "개");

@@ -26,10 +26,6 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank valueOf(Lotto lotto) {
-        return lotto.getRank();
-    }
-
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         Rank matchedRank = Arrays.stream(values())
                 .filter(m -> m.getCountOfMatch() == countOfMatch)
