@@ -19,8 +19,8 @@ class LottoTest {
     @DisplayName("Lotto Number 확인")
     void isContain() {
         Lotto lotto = Lotto.from(1, 2, 3, 4, 5, 6);
-        assertThat(lotto.matchWithWinningNumber(WinningNumber.from("1, 2, 3, 4, 5, 6"))).isEqualTo(6);
-        assertThat(lotto.matchWithWinningNumber(WinningNumber.from("1, 2, 3, 4, 5, 8"))).isEqualTo(5);
+        assertThat(lotto.matchWithWinningNumber(WinningNumber.from("1, 2, 3, 4, 5, 6")).getMatchCount()).isEqualTo(6);
+        assertThat(lotto.matchWithWinningNumber(WinningNumber.from("1, 2, 3, 4, 5, 8")).getMatchCount()).isEqualTo(5);
     }
 
     @Test
