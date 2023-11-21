@@ -17,4 +17,10 @@ public class StringCalculatorTest {
     void subtract() {
         assertThat(StringCalculator.subtract(4, 2)).isEqualTo(2);
     }
+
+    @Test
+    @DisplayName("두 수를 곱한다.")
+    void multiply() {
+        assertThat(StringCalculator.multiply(3, 5)).isEqualTo(15);
+    }
 }
