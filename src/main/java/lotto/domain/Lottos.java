@@ -11,11 +11,15 @@ public class Lottos {
     private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = new ArrayList<>(lottos);
+        this(0, lottos);
     }
 
     public Lottos(int value) {
-        this.lottos = new ArrayList<>();
+        this(value, new ArrayList<>());
+    }
+
+    public Lottos(int value, List<Lotto> manualLottos) {
+        this.lottos = new ArrayList<>(manualLottos);
         for (int game = 0; game < purchasableLottoCount(value); game++) {
             this.lottos.add(new Lotto());
         }
