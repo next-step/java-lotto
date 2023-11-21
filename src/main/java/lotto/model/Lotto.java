@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,10 @@ public class Lotto {
         this.numbers = createLottoNumbers();
     }
 
+    public Lotto(List<Integer> numbers) {
+        this.numbers = numbers;
+    }
+
     private static List<Integer> createLottoNumbers() {
         Collections.shuffle(CANDIDATE_NUMBERS);
         List<Integer> numbers = CANDIDATE_NUMBERS.subList(0, LOTTO_NUMBER_COUNT);
@@ -27,6 +32,24 @@ public class Lotto {
 
     public List<Integer> numbers() {
         return this.numbers;
+    }
+
+    public int matchNumbers(String otherNumbers) {
+        List<Integer> targets = convertStringToInt(otherNumbers);
+        return targets.stream()
+                .filter(this::containsNumber)
+                .mapToInt(target -> 1)
+                .sum();
+    }
+
+    private static List<Integer> convertStringToInt(String numbers) {
+        return Arrays.stream(numbers.split(", "))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
+    private boolean containsNumber(int number) {
+        return this.numbers.contains(number);
     }
 
     @Override
