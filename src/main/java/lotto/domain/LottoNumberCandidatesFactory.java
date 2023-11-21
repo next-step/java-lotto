@@ -5,7 +5,11 @@ import java.util.List;
 
 public class LottoNumberCandidatesFactory {
 
-        private static List<LottoNumber> lottoNumberCandidates = new ArrayList<>();
+        private static final List<LottoNumber> lottoNumberCandidates = new ArrayList<>();
+
+        private LottoNumberCandidatesFactory() {
+
+        }
 
         public static List<LottoNumber> getInstance() {
                 if (lottoNumberCandidates.isEmpty()) {

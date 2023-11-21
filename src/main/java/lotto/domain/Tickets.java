@@ -21,8 +21,7 @@ public class Tickets {
                 initMatchRankCountMap(matchRankCountMap);
                 values.forEach(ticket -> {
                         int countOfWinningNumber = ticket.countWinningNumber(winningNumbers);
-                        Rank rank = Rank.valueOfRank(countOfWinningNumber,
-                            ticket.hasBonusNumber(winningNumbers));
+                        Rank rank = Rank.valueOfRank(countOfWinningNumber, ticket.hasBonusNumber(winningNumbers));
                         matchRankCountMap.computeIfPresent(rank, (k, v) -> v + 1);
                 });
                 return new WinningTickets(matchRankCountMap);

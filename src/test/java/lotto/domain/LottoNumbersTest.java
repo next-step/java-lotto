@@ -4,7 +4,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 
-public class LottoNumbersTest {
+class LottoNumbersTest {
 
         @Test
         void 로또_번호_중복_제거_후_6개_아닐_시_에러() {

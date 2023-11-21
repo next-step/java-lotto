@@ -5,9 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-public class WinningTicketsTest {
+class WinningTicketsTest {
 
-        public Ticket newTicket(int[] numbers) {
+        private Ticket newTicket(int[] numbers) {
                 return new Ticket(new LottoNumbers(numbers));
         }
 

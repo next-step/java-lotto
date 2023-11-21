@@ -21,13 +21,4 @@ public class WinningTickets {
                     benefitSum.get() + rank.winningMoney() * values.get(rank)));
                 return Math.round((double) benefitSum.get() / purchaseAmount * 100.00) / 100.00;
         }
-
-        @Override
-        public String toString() {
-                return values.toString();
-        }
-
-        public int countOfWinningTickets() {
-                return values.values().stream().reduce(0, Integer::sum) - values.get(Rank.MISS);
-        }
 }

@@ -16,8 +16,9 @@ public class Ticket {
 
         public int countWinningNumber(WinningNumbers winningNumbers) {
                 AtomicInteger matchCount = new AtomicInteger();
-                winningNumbers.values()
+                winningNumbers.basicWinningNumbers()
                     .forEach(value -> matchCount.set(matchCount.get() + getOneIfWinningNumberContained(value)));
+                matchCount.set(matchCount.get() + getOneIfWinningNumberContained(winningNumbers.bonusNumber()));
                 return matchCount.get();
         }
 

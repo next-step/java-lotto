@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-public class TicketTest {
+class TicketTest {
 
         @Test
         void 한_장의_로또_티켓_내_포함된_당첨_번호_갯수() {
