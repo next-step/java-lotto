@@ -1,11 +1,8 @@
 package lotto;
 
-import lotto.domain.LottoFactory;
 import lotto.domain.LottoGame;
 import lotto.domain.PrizeStatus;
-import lotto.domain.WinnerNumbers;
 import lotto.view.InputView;
-import lotto.view.OutputView;
 
 import java.util.Random;
 

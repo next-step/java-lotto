@@ -15,19 +15,27 @@ public class LottoTicket {
         return this.ticket.toString();
     }
 
-    public boolean isThisNumberMatched(WinnerNumbers winnerNummbers, int number) {
-        return winnerNummbers.isContain(number);
+    public boolean isThisNumberMatched(WinnerNumbers winnerNumbers, int number) {
+        return winnerNumbers.isContain(number);
     }
 
-    public int calculateTotalMatchedCount(WinnerNumbers winnerNummbers) {
+    public boolean isMatchedWithBonusNum(WinnerNumbers winnerNumbers) {
+        return ticket.contains(winnerNumbers.bonusNumber());
+    }
+
+    public int calculateTotalMatchedCount(WinnerNumbers winnerNumbers) {
         AtomicInteger sum = new AtomicInteger(0);
 
         ticket.iterator().forEachRemaining(number -> {
 
-            if (isThisNumberMatched(winnerNummbers, number)) {
+            if (isThisNumberMatched(winnerNumbers, number)) {
                 sum.getAndIncrement();
             }
         });
+
+        if (sum.get() == 5 && isMatchedWithBonusNum(winnerNumbers)) {
+            return 50;
+        }
 
         return sum.get();
     }
