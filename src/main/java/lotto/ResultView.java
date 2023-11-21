@@ -16,6 +16,13 @@ public class ResultView {
         }
 
         List<Integer> winningNumbers = InputView.inputWinningNumbers();
+        myLottos.matchingNumbers(winningNumbers);
+
+        WinningMoney winningMoney = new WinningMoney();
+
+        for (int i = 3; i <= 6; i++){
+            System.out.println(i + "개 일치 (" + winningMoney.winningMoneyOf(i) + ") - " + myLottos.returnMatchCountOf(i) + "개");
+        }
 
     }
 }

@@ -41,7 +41,7 @@ public class MatchResult {
         WinningMoney winningMoney = new WinningMoney();
 
         int total = 0;
-        for (int i = MIN_MATCH_COUNT; i < MAX_MATCH_COUNT; i++){
+        for (int i = MIN_MATCH_COUNT; i <= MAX_MATCH_COUNT; i++){
             total += (matchResult.get(i) * winningMoney.winningMoneyOf(i));
         }
 
