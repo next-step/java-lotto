@@ -24,7 +24,7 @@ public class LottoController {
         ResultView.printResultReport(report);
     }
 
-    public static List<Lotto> buyLotto() {
+    private static List<Lotto> buyLotto() {
         int money = InputView.inputMoney();
         List<Lotto> tickets = LottoMachine.issue(money);
         ResultView.printCheckPurchaseMessage(tickets.size());

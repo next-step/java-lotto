@@ -8,10 +8,10 @@ public class LottoMachine {
 
     public static List<Lotto> issue(int money) {
         int ticketCount = calculateTicketCount(money);
-        return generate(ticketCount);
+        return generateTickets(ticketCount);
     }
 
-    private static List<Lotto> generate(int count) {
+    private static List<Lotto> generateTickets(int count) {
         List<Lotto> tickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             tickets.add(new Lotto());

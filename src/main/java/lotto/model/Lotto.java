@@ -36,12 +36,12 @@ public class Lotto {
 
     public int matchNumbers(List<Integer> targets) {
         return targets.stream()
-                .filter(this::containsNumber)
+                .filter(this::matchNumber)
                 .mapToInt(target -> 1)
                 .sum();
     }
 
-    private boolean containsNumber(int number) {
+    private boolean matchNumber(int number) {
         return this.numbers.contains(number);
     }
 
