@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ public class MyLottos {
     private List<Lotto> myLottos;
     private MatchResult matchResult;
 
-    MyLottos(int lottoCount){
+    public MyLottos(int lottoCount){
         this.myLottos = new ArrayList<>();
         this.matchResult = new MatchResult();
         for(int i = 0; i < lottoCount; i++){
@@ -16,7 +16,7 @@ public class MyLottos {
         }
     }
 
-    MyLottos(List<Lotto> lottos){
+    public MyLottos(List<Lotto> lottos){
         this.myLottos = lottos;
         this.matchResult = new MatchResult();
     }

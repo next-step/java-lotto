@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 public class WinningMoney {
     private final Map<Integer, Integer> winningMoney = new HashMap<>();
 
-    WinningMoney(){
+    public WinningMoney(){
         winningMoney.put(3, 5000);
         winningMoney.put(4, 50000);
         winningMoney.put(5, 1500000);

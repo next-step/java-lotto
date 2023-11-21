@@ -1,4 +1,8 @@
-package lotto;
+package lotto.view;
+
+import lotto.util.LottoUtil;
+import lotto.domain.MyLottos;
+import lotto.domain.WinningMoney;
 
 import java.util.Arrays;
 import java.util.List;

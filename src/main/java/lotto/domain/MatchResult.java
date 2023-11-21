@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,34 +11,35 @@ public class MatchResult {
 
     private Map<Integer, Integer> matchResult;
 
-    MatchResult(){
+    public MatchResult(){
         matchResult = new HashMap<>();
         for(int matchCount = 0; matchCount <= MAX_MATCH_COUNT; matchCount++){
             matchResult.put(matchCount, 0);
         }
     }
 
-    MatchResult(List<Integer> matchNumberList){
+    public MatchResult(List<Integer> matchNumberList){
         matchResult = new HashMap<>();
         for(int matchCount = 0; matchCount <= MAX_MATCH_COUNT; matchCount++){
             matchResult.put(matchCount, matchNumberList.get(matchCount));
         }
     }
 
-    public void addMatchResult(List<Lotto> myLottos, List<Integer> winningNumbers) {
+    void addMatchResult(List<Lotto> myLottos, List<Integer> winningNumbers) {
+        int myMatchCount = 0;
 
         for(Lotto lotto : myLottos){
-            int myMatchCount = lotto.matchCount(winningNumbers);
+            myMatchCount = lotto.matchCount(winningNumbers);
             matchResult.put(myMatchCount, matchResult.get(myMatchCount) + 1);
         }
 
     }
 
-    public int matchCountOf(int count){
+    int matchCountOf(int count){
         return matchResult.get(count);
     }
 
-    public double calculateReturnRate(int payMoney) {
+    double calculateReturnRate(int payMoney) {
         int total = 0;
         for (int i = MIN_MATCH_COUNT; i <= MAX_MATCH_COUNT; i++){
             total += (matchResult.get(i) * winningMoney.winningMoneyOf(i));
