@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import lotto.constants.Winning;
 import lotto.domain.lotto.strategy.GenerateStrategy;
 import lotto.dto.Summary;
+import lotto.dto.WinningSummary;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -70,20 +71,16 @@ public class Lottos {
     }
 
     public Summary match(Lotto jackpot, LottoNumber bonusNumber) {
-        List<Winning> winnings = new ArrayList<>();
+        WinningSummary winningSummary = new WinningSummary();
 
         WinningLotto winningLotto = WinningLotto.of(jackpot, bonusNumber);
 
         for (Lotto lotto : lottos) {
             Winning winning = winningLotto.match(lotto);
-            winnings.add(winning);
+            winningSummary.addWinning(winning);
         }
 
-        return winningResult(winnings);
-    }
-
-    public Summary winningResult(List<Winning> winnings) {
-        return new Summary(winnings, purchasePrice());
+        return new Summary(winningSummary, purchasePrice());
     }
 
     public long purchasePrice() {

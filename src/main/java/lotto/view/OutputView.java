@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.constants.Winning;
 import lotto.domain.lotto.Lotto;
 import lotto.dto.Summary;
 
@@ -37,19 +36,6 @@ public class OutputView {
         System.out.println();
         System.out.println(SUMMARY_HEAD);
         System.out.println(SEPARATOR_LINE);
-        System.out.println(summaryMessage(Winning.FIFTH, summary.fifthCount()));
-        System.out.println(summaryMessage(Winning.FOURTH, summary.fourthCount()));
-        System.out.println(summaryMessage(Winning.THIRD, summary.thirdCount()));
-        System.out.println(summarySecondMessage(summary.secondCount()));
-        System.out.println(summaryMessage(Winning.FIRST, summary.firstCount()));
-        System.out.printf((PROFIT_RATE_MESSAGE) + "%n", summary.profitRate());
-    }
-
-    private String summaryMessage(Winning winning, long count) {
-        return String.format(SUMMARY_WINNING_MESSAGE, winning.message(), count);
-    }
-
-    private String summarySecondMessage(long count) {
-        return String.format(SUMMARY_WINNING_SECOND_MESSAGE, Winning.SECOND.message(), count);
+        System.out.println(summary);
     }
 }

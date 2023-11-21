@@ -1,6 +1,8 @@
 package lotto.domain.lotto;
 
+import lotto.constants.Winning;
 import lotto.dto.Summary;
+import lotto.dto.WinningSummary;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -43,7 +45,10 @@ class LottosTest {
         Lotto jackpot = Lotto.of(Arrays.asList(1, 2, 3, 4, 30, 40));
         Summary match = lottos.match(jackpot, LottoNumber.of(20));
 
-        assertThat(match).isEqualTo(new Summary(0, 0, 0, 10, 0, 50f));
+        WinningSummary winningSummary = new WinningSummary();
+        winningSummary.addWinning(Winning.FOURTH, 10L);
+
+        assertThat(match).isEqualTo(new Summary(winningSummary, 10000L));
     }
 
     @Test
@@ -56,6 +61,9 @@ class LottosTest {
 
         Summary match = mergedLottos.match(jackpot, LottoNumber.of(20));
 
-        assertThat(match).isEqualTo(new Summary(0, 0, 0, 20, 0, 50f));
+        WinningSummary winningSummary = new WinningSummary();
+        winningSummary.addWinning(Winning.FOURTH, 20L);
+
+        assertThat(match).isEqualTo(new Summary(winningSummary, 20000L));
     }
 }
