@@ -7,14 +7,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int value;
 
-    private LottoNumber(int number){
-        if(number <= 0 || number > 45){
+    private LottoNumber(int number) {
+        if (number < 1 || number > 45) {
             throw new IllegalArgumentException(ExceptionMessage.LOTTO_NUMBER_OUT_OF_RANGE.getMessage());
         }
         value = number;
     }
 
-    public static LottoNumber from(int number){
+    public static LottoNumber from(int number) {
         return new LottoNumber(number);
     }
 
