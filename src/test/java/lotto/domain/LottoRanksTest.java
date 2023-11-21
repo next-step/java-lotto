@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import lotto.domain.strategy.AutoLottoGeneration;
+import lotto.domain.strategy.LottoGeneration;
+import lotto.domain.strategy.ManualLottoGeneration;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,47 +11,40 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Map.entry;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.entry;
 
-@DisplayName("로또 당첨 확인 관련 테스트")
 public class LottoRanksTest {
+    private static final LottoGeneration LOTTO_GENERATION = new AutoLottoGeneration(LottoNumberCache.values());
+    private LottoRanks lottoRanks;
 
-    @Test
-    @DisplayName("모든 로또 당첨금의 합계를 확인")
-    void 당첨금_합계확인() {
-        List<Integer> winList = new ArrayList<>(Arrays.asList(6, 5, 4, 3, 2, 10));
-        NumberGeneration numberGeneration = new TestNumberGeneration();
-        int amount = 5000;
-        int bonus = 1;
+    @BeforeEach
+    void create() {
+        List<LottoGeneration> generationList = new ArrayList<>();
+        generationList.add(new ManualLottoGeneration(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        generationList.add(new ManualLottoGeneration(Arrays.asList(1, 2, 3, 4, 5, 7)));
 
-        Lottos lottos = Lottos.extracted(amount, numberGeneration);
-        LottoRanks lottoRanks = new LottoRanks(lottos, winList, bonus);
+        Lottos lottos = new Lottos(new PurchaseQuantity(0), generationList, LOTTO_GENERATION);
+        Lotto winLotto = new Lotto(new ManualLottoGeneration(Arrays.asList(1, 2, 3, 4, 5, 6)).generate());
+        LottoNumber bonus = new LottoNumber(7);
 
-        assertThat(lottoRanks.findPrizeMoney()).isEqualTo(150_000_000L);
+        lottoRanks = new LottoRanks(lottos, winLotto, bonus);
     }
 
     @Test
-    @DisplayName("로또당첨 번호와 매치한 결과를 miss를 제외한 랭킹값 모두 리턴")
-    void 로또당첨_목록확인() {
-        List<Integer> winList = new ArrayList<>(Arrays.asList(6, 5, 4, 2, 3, 1));
-        int bonus = 1;
+    @DisplayName("로또 목록과 당첨 번호를 비교하여 로또 당첨 목록을 생성한다")
+    void 로또당첨목록_확인() {
+        assertThat(lottoRanks.findLottoResult()).hasSize(5)
+                .containsOnly(entry(LottoRank.FIFTH, 0)
+                        , entry(LottoRank.FOURTH, 0)
+                        , entry(LottoRank.THIRD, 0)
+                        , entry(LottoRank.SECOND, 1)
+                        , entry(LottoRank.FIRST, 1));
+    }
 
-        List<Lotto> list = new ArrayList<>();
-        Lotto lotto1 = new Lotto(new ArrayList<>(Arrays.asList(6, 5, 4, 10, 11, 12)));
-        Lotto lotto2 = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 20, 21, 22)));
-        list.add(lotto1);
-        list.add(lotto2);
-        Lottos lottos = new Lottos(list);
-
-        LottoRanks lottoRanks = new LottoRanks(lottos, winList, bonus);
-
-        assertThat(lottoRanks.find()).hasSize(5)
-                .containsOnly(
-                        entry(LottoRank.FIFTH, 2),
-                        entry(LottoRank.FOURTH, 0),
-                        entry(LottoRank.THIRD, 0),
-                        entry(LottoRank.SECOND, 0),
-                        entry(LottoRank.FIRST, 0));
+    @Test
+    @DisplayName("당첨된 로또 금액을 확인")
+    void 로또당첨금_확인() {
+        assertThat(lottoRanks.findPrizeMoney()).isEqualTo(new Money(2_000_000_000L + 30_000_000L));
     }
 }

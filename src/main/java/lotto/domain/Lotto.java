@@ -1,45 +1,66 @@
 package lotto.domain;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 public class Lotto {
-    private final List<Integer> lotto;
-
-    public Lotto(List<Integer> list) {
-        this.lotto = list;
-    }
-
-    public Lotto(NumberGeneration numberGeneration) {
-        this(numberGeneration.generate());
-    }
-
-    public List<Integer> find() {
-        return Collections.unmodifiableList(lotto);
+    private final Set<LottoNumber> lotto;
+    public Lotto(Set<LottoNumber> numberSet) {
+        this.lotto = validate(numberSet);
     }
 
 
-    public LottoRank findRank(List<Integer> winList, int bonus) {
-        if (isRank(winList)) {
-            return LottoRank.findMatchCount(countMath(winList), contains(bonus));
+    private Set<LottoNumber> validate(Set<LottoNumber> numberSet){
+        if(numberSet.size() == 6){
+            return numberSet;
+        }
+        throw new IllegalArgumentException("로또 숫자는 6자리여야 합니다");
+    }
+
+    public int matchCount(Lotto winLotto) {
+        Set<LottoNumber> result = new HashSet<>(lotto);
+        result.retainAll(winLotto.find());
+        return result.size();
+
+    }
+
+    public Set<LottoNumber> find(){
+        return Collections.unmodifiableSet(lotto);
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
+    }
+
+    public LottoRank findRank(Lotto winLotto, LottoNumber bonus) {
+        if (isRank(winLotto)) {
+            return LottoRank.findMatchCount(matchCount(winLotto), contains(bonus));
         }
         return LottoRank.MISS;
 
     }
 
-    boolean contains(int bonus) {
-        return lotto.contains(bonus);
+    private boolean isRank(Lotto winLotto) {
+        return matchCount(winLotto) > 2;
     }
 
-    private boolean isRank(List<Integer> winList) {
-        return countMath(winList) > 2;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto1 = (Lotto) o;
+        return Objects.equals(lotto, lotto1.lotto);
     }
 
-    int countMath(List<Integer> winList) {
-        int count = 0;
-        for (int i = 0; i < lotto.size(); i++) {
-            count += Collections.frequency(winList, lotto.get(i));
-        }
-        return count;
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto);
+    }
+
+    @Override
+    public String toString() {
+        return  lotto.toString();
     }
 }

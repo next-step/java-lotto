@@ -1,17 +1,15 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.BiFunction;
 
 public enum LottoRank {
-    MISS(0, 0L, (count,bonus) -> count <= 2),
-    FIFTH(3, 5_000L, (count,bonus) -> count == 3),
-    FOURTH(4, 50_000L, (count,bonus) -> count == 4),
-    THIRD(5, 1_500_000L, (count,bonus) -> count == 5&&!bonus),
-    SECOND(5, 30_000_000L, (count,bonus) -> count == 5&&bonus),
-    FIRST(6, 2_000_000_000L, (count,bonus) -> count == 6);
+    MISS(0, 0L, (count, bonus) -> count <= 2),
+    FIFTH(3, 5_000L, (count, bonus) -> count == 3),
+    FOURTH(4, 50_000L, (count, bonus) -> count == 4),
+    THIRD(5, 1_500_000L, (count, bonus) -> count == 5 && !bonus),
+    SECOND(5, 30_000_000L, (count, bonus) -> count == 5 && bonus),
+    FIRST(6, 2_000_000_000L, (count, bonus) -> count == 6);
 
     private final int count;
     private final long prizeMoney;
@@ -42,11 +40,8 @@ public enum LottoRank {
         return this.count;
     }
 
-    private boolean sameNumber(int number){
-         return this.count == number;
-    }
-
     public long prize() {
         return this.prizeMoney;
     }
+
 }

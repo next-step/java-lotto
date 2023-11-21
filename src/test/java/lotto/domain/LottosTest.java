@@ -1,44 +1,46 @@
 package lotto.domain;
 
+import lotto.domain.strategy.AutoLottoGeneration;
+import lotto.domain.strategy.LottoGeneration;
+import lotto.domain.strategy.ManualLottoGeneration;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.entry;
+import static org.assertj.core.api.Assertions.*;
 
-@DisplayName("구매한 로또 목록 관련 테스트")
 public class LottosTest {
-    @Test
-    @DisplayName("구매한 로또 개수를 확인한다")
-    void 구매_로또수_확인() {
-        NumberGeneration numberGeneration = new RandomNumberGeneration();
-        int amount = 14000;
 
-        Lottos lottos = Lottos.extracted(amount, numberGeneration);
+    public static final LottoGeneration LOTTO_GENERATION = new AutoLottoGeneration(LottoNumberCache.values());
 
-        assertThat(lottos.count()).isEqualTo(14);
+    List<LottoGeneration> generationList;
+    Lottos lottos;
+    @BeforeEach
+    void create(){
+        generationList = new ArrayList<>();
+        generationList.add(new ManualLottoGeneration(Arrays.asList(1,2,3,4,5,6)));
+
+        lottos = new Lottos(new PurchaseQuantity(0), generationList,LOTTO_GENERATION);
     }
 
-
     @Test
-    @DisplayName("당첨 번호와 매치한 결과 번호목록에 있는 랭킹 값 목록만 리턴")
-    void 로또당첨_목록확인() {
-        List<Integer> winList = new ArrayList<>(Arrays.asList(6, 5, 4, 2, 3, 1));
-        int bonus = 1;
-
-        List<Lotto> list = new ArrayList<>();
-        Lotto lotto1 = new Lotto(new ArrayList<>(Arrays.asList(6, 5, 4, 10, 11, 12)));
-        Lotto lotto2 = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 20, 21, 22)));
-        list.add(lotto1);
-        list.add(lotto2);
-        Lottos lottos = new Lottos(list);
-
-        assertThat(lottos.findRanks(winList,bonus)).hasSize(1).containsOnly(entry(LottoRank.FIFTH, 2));
+    @DisplayName("로또목록 생성 확인")
+    void 로또_목록_리턴() {
+        assertThat(lottos.find())
+                .containsOnly(new Lotto(generationList.get(0).generate()));
     }
 
+    @Test
+    @DisplayName("당첨번호와 로또 목록 비교하여 값이 있는 랭킹 값 목록만 리턴")
+    void 로또당첨_확인() {
+        Lotto winLotto = new Lotto(new ManualLottoGeneration(Arrays.asList(1, 2, 3, 4, 5, 6)).generate());
+        LottoNumber bonus = new LottoNumber(7);
+
+        assertThat(lottos.callRanks(winLotto,bonus)).hasSize(1).containsOnly(entry(LottoRank.FIRST,1));
+
+    }
 }

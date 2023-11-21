@@ -2,39 +2,31 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
 public class LottoRanks {
-    private final Map<LottoRank, Integer> ranks;
+    private final Map<LottoRank, Integer> lottoRanks;
 
-    public LottoRanks(Lottos lottos, List<Integer> winList, int bonus) {
-        this.ranks = lottos.findRanks(winList, bonus);
+    public LottoRanks(Lottos lottos, Lotto winLotto, LottoNumber bonus) {
+        this.lottoRanks = lottos.callRanks(winLotto, bonus);
     }
 
-    public long findPrizeMoney() {
-        Money money = new Money(0);
-        for (LottoRank lottoRank : ranks.keySet()) {
-            money = money.plus(lottoRank.sumPrize(ranks.get(lottoRank)));
-        }
-        return money.find();
-    }
-
-    public Map<LottoRank, Integer> find() {
-        Map<LottoRank, Integer> rankList = new EnumMap<>(LottoRank.class);
+    public Map<LottoRank, Integer> findLottoResult() {
+        Map<LottoRank, Integer> map = new EnumMap<>(LottoRank.class);
 
         for (LottoRank lottoRank : LottoRank.values()) {
-            addRankResult(rankList, lottoRank);
+            if (lottoRank.count() > 0) {
+                map.put(lottoRank, lottoRanks.getOrDefault(lottoRank, 0));
+            }
         }
-
-        return Collections.unmodifiableMap(rankList);
+        return Collections.unmodifiableMap(map);
     }
 
-    private void addRankResult(Map<LottoRank, Integer> rankList, LottoRank lottoRank) {
-        if (lottoRank.count() > 0) {
-            rankList.put(lottoRank, this.ranks.getOrDefault(lottoRank, 0));
+    public Money findPrizeMoney() {
+        Money money = new Money(0);
+        for (LottoRank lottoRank : lottoRanks.keySet()) {
+            money = money.plus(lottoRank.sumPrize(lottoRanks.get(lottoRank)));
         }
+        return money;
     }
-
-
 }
