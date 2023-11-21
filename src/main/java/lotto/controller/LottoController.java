@@ -20,7 +20,7 @@ public class LottoController {
         }
 
         String winningNumber = InputView.inputWinningNumbers();
-        LottoReport.checkLottoResult(winningNumber, lottoTickets);
+        LottoReport report = new LottoReport(winningNumber, lottoTickets);
     }
 
     public static List<Lotto> buyLotto() {
