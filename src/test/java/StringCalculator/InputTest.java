@@ -14,7 +14,7 @@ public class InputTest {
 
     @DisplayName("정상적이지 않은 입력에 대해서 예외를 발생한다.")
     @ParameterizedTest
-    @ValueSource(strings = {" ", "102", "-102", "1+ 2", "1 + 2  3", "1 +/ 2"})
+    @ValueSource(strings = {" ", "102", "-102", "1+ 2", "a + 2"})
     void validateInput(String input) {
         systemIn(input);
 

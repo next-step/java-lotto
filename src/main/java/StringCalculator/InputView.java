@@ -1,15 +1,11 @@
 package StringCalculator;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class InputView {
-    public static final int NUMBER_POSITION_DEVIDE_CRITERION = 2;
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
-    private static final List<String> OPERATORS = Arrays.asList("+", "-", "*", "/");
     public static final int MIN_INPUT_VALUE_COUNT = 3;
 
     public static String[] inputCalculation() {
@@ -42,17 +38,8 @@ public class InputView {
     }
 
     private static void validateForm(String[] values) {
-        for (int index = 0; index < values.length; index++) {
-            validateCalculationValue(values[index], index);
-        }
-    }
-
-    private static void validateCalculationValue(String value, int index) {
-        if (isNumberPosition(index)) {
-            validateNumber(value);
-        }
-        if (!isNumberPosition(index)) {
-            validateOperator(value);
+        for (int index = 0; index < values.length; index += 2) {
+            validateNumber(values[index]);
         }
     }
 
@@ -62,22 +49,8 @@ public class InputView {
         }
     }
 
-    private static void validateOperator(String value) {
-        if (!isOperator(value)) {
-            throw new IllegalArgumentException("정상적인 연산자를 입력해주세요");
-        }
-
-    }
-
-    private static boolean isNumberPosition(int index) {
-        return index % NUMBER_POSITION_DEVIDE_CRITERION == 0;
-    }
-
     private static boolean isNumber(String value) {
         return NUMBER_PATTERN.matcher(value).matches();
     }
 
-    private static boolean isOperator(String value) {
-        return OPERATORS.contains(value);
-    }
 }

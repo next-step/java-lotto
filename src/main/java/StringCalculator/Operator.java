@@ -18,12 +18,20 @@ public enum Operator {
 
     public static Operator from(String rawOperator) {
         return Arrays.stream(values())
-                .filter(operator -> operator.value.equals(rawOperator))
+                .filter(operator -> operator.isSameValue(rawOperator))
                 .findFirst()
                 .orElseThrow(() ->new IllegalArgumentException("올바른 연산자가 아닙니다."));
     }
 
+    public boolean isSameValue(String rawOperator) {
+        return value.equals(rawOperator);
+    }
+
     public int calculate(int sum, int number) {
         return calculator.calculate(sum, number);
+    }
+
+    public String getValue() {
+        return value;
     }
 }

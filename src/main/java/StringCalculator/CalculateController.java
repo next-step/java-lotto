@@ -13,7 +13,6 @@ public class CalculateController {
         List<Operator> operators = extractOperators(calcaultionValues);
 
         int sum = calculateSum(numbers, operators);
-
         System.out.println(sum);
     }
 
@@ -38,7 +37,6 @@ public class CalculateController {
         for (int index = 0; index < operators.size(); index++) {
             Operator operator = operators.get(index);
             int number = numbers.get(index + OPERATOR_INDEX_OFFSET);
-
             sum = operator.calculate(sum, number);
         }
         return sum;
