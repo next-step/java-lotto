@@ -14,7 +14,7 @@ public class LottoShop {
         for (int i = 0; i < count; i++) {
             lottos.add(createLottoTicket());
         }
-        return new LottoWallet(lottos, totalPurchaseAmount(count));
+        return LottoWallet.of(lottos, totalPurchaseAmount(count));
     }
 
     private static int totalPurchaseAmount(int count) {

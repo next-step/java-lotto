@@ -8,17 +8,13 @@ public class LottoWallet {
 
     private final int totalPurchaseAmount;
 
-    public LottoWallet(List<Lotto> lottos) {
-        this(lottos, 0);
-    }
-
     public LottoWallet(List<Lotto> lottos, int totalPurchaseAmount) {
         this.totalPurchaseAmount = totalPurchaseAmount;
         this.lottos = lottos;
     }
 
-    public static LottoWallet from(List<Lotto> lottos) {
-        return new LottoWallet(lottos);
+    public static LottoWallet of(List<Lotto> lottos, int totalPurchaseAmount) {
+        return new LottoWallet(lottos, totalPurchaseAmount);
     }
 
     public int totalTicketCount() {

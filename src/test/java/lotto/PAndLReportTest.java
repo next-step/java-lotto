@@ -14,7 +14,7 @@ public class PAndLReportTest {
     void rate() {
         Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        LottoWallet lottoWallet = LottoWallet.from(List.of(lotto1, lotto2));
+        LottoWallet lottoWallet = LottoWallet.of(List.of(lotto1, lotto2), 2);
         StatisticsReport statisticsReport = new StatisticsReport(lottoWallet,
             Map.of(Prize.THIRD, 1));
         PAndLReport pAndLReport = PAndLReport.of(statisticsReport);
