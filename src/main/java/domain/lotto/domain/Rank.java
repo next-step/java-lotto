@@ -18,18 +18,13 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public static int winningMoneyOf(int countOfMatch) {
+    public static Rank valueOf(int countOfMatch) {
         return Arrays.stream(values())
                 .filter(o -> o.countOfMatch == countOfMatch)
                 .findFirst()
-                .orElse(MISS)
-                .getWinningMoney();
+                .orElse(MISS);
     }
-
-    public int getCountOfMatch() {
-        return countOfMatch;
-    }
-
+    
     public int getWinningMoney() {
         return winningMoney;
     }

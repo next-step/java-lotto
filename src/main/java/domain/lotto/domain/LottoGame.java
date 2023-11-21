@@ -1,9 +1,11 @@
 package domain.lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class LottoGame {
-    private static final Random RANDOM = new Random();
     private static final int LOTTO_PRICE = 1000;
     private final List<LottoLine> lottoLines;
     private final LottoStatistics lottoStatistics;
@@ -38,7 +40,7 @@ public class LottoGame {
     private void buyLottoLines() {
         int index = 0;
         while (index < gameCount) {
-            lottoLines.add(LottoLine.create(RANDOM));
+            lottoLines.add(LottoLine.create());
             index++;
         }
     }

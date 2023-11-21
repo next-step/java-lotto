@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.Random;
 
 public class LottoNumber {
-    int number;
+    private final int number;
 
     private LottoNumber(int number) {
         validateNumber(number);

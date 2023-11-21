@@ -4,27 +4,29 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoLine {
+    private static final Random RANDOM = new Random();
     private static final int LOTTO_LINE_SIZE = 6;
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoLine(Set<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
     }
 
-    public static LottoLine create(Random random) {
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
-        chooseLottoNumber(random, lottoNumbers);
+    public static LottoLine create() {
+        Set<LottoNumber> lottoNumbers = chooseLottoNumber();
         return new LottoLine(lottoNumbers);
     }
 
-    private static void chooseLottoNumber(Random random, Set<LottoNumber> lottoNumbers) {
+    private static Set<LottoNumber> chooseLottoNumber() {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+
         while (lottoNumbers.size() < LOTTO_LINE_SIZE) {
-            LottoNumber lottoNumber = LottoNumber.from(random);
+            LottoNumber lottoNumber = LottoNumber.from(RANDOM);
             lottoNumbers.add(lottoNumber);
         }
+        return Collections.unmodifiableSet(lottoNumbers);
     }
-
 
     private void validateLottoNumbers(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_LINE_SIZE) {
@@ -33,7 +35,7 @@ public class LottoLine {
     }
 
     public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableSet(new HashSet<>(lottoNumbers));
     }
 
     public String getLine() {
@@ -45,6 +47,5 @@ public class LottoLine {
         return sortedNumbers.toString();
 
     }
-
 }
 

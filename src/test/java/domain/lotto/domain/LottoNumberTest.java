@@ -19,7 +19,7 @@ class LottoNumberTest {
         LottoNumber lottoNumber = LottoNumber.from(number);
 
         assertThat(lottoNumber).isNotNull();
-        assertThat(lottoNumber.number).isEqualTo(number);
+        assertThat(lottoNumber.getNumber()).isEqualTo(number);
     }
 
     @DisplayName("1~45 이외의 수로 로또 번호 생성 시 IllegalArgumentException 예외 발생")
