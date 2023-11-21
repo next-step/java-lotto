@@ -1,15 +1,21 @@
 package lotto.model;
 
 public class BonusBall {
-    private final PositiveNumber bonusNumber;
+    private final LottoNumberValidate bonusNumber;
 
-    public BonusBall(PositiveNumber bonusNumber) {
+    public BonusBall(LottoNumberValidate bonusNumber) {
         this.bonusNumber = bonusNumber;
     }
-    public PositiveNumber bonus(){
+
+    public LottoNumberValidate bonus() {
         return this.bonusNumber;
     }
-    public int number(){
+
+    public int number() {
         return this.bonusNumber.number();
+    }
+
+    public boolean isBonusBall(LottoNumberValidate number) {
+        return number.equals(this.bonusNumber);
     }
 }

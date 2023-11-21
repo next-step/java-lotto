@@ -20,23 +20,23 @@ class LottoNumbersTest {
     @BeforeEach
     void setUp() {
         lottoNumbers = new LottoNumbers(Set.of(
-                new PositiveNumber(1),
-                new PositiveNumber(2),
-                new PositiveNumber(3),
-                new PositiveNumber(4),
-                new PositiveNumber(5),
-                new PositiveNumber(6)));
-        winnerNumbers = new WinnerNumbers(lottoNumbers, new BonusBall(new PositiveNumber(7)));
+                new LottoNumberValidate(1),
+                new LottoNumberValidate(2),
+                new LottoNumberValidate(3),
+                new LottoNumberValidate(4),
+                new LottoNumberValidate(5),
+                new LottoNumberValidate(6)));
+        winnerNumbers = new WinnerNumbers(lottoNumbers, new BonusBall(new LottoNumberValidate(7)));
     }
     @Test
     @DisplayName("로또 번호가 6개가 아니면 에러")
     void test1() throws Exception {
-        Set<PositiveNumber> numbers = new HashSet<>();
-        numbers.add(new PositiveNumber(1));
-        numbers.add(new PositiveNumber(2));
-        numbers.add(new PositiveNumber(3));
-        numbers.add(new PositiveNumber(4));
-        numbers.add(new PositiveNumber(5));
+        Set<LottoNumberValidate> numbers = new HashSet<>();
+        numbers.add(new LottoNumberValidate(1));
+        numbers.add(new LottoNumberValidate(2));
+        numbers.add(new LottoNumberValidate(3));
+        numbers.add(new LottoNumberValidate(4));
+        numbers.add(new LottoNumberValidate(5));
         assertThatThrownBy(() -> new LottoNumbers(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -44,13 +44,13 @@ class LottoNumbersTest {
     @Test
     @DisplayName("로또 번호가 중복이면 에러")
     void test2() throws Exception {
-        Set<PositiveNumber> numbers = new HashSet<>();
-        numbers.add(new PositiveNumber(1));
-        numbers.add(new PositiveNumber(2));
-        numbers.add(new PositiveNumber(3));
-        numbers.add(new PositiveNumber(4));
-        numbers.add(new PositiveNumber(5));
-        numbers.add(new PositiveNumber(5));
+        Set<LottoNumberValidate> numbers = new HashSet<>();
+        numbers.add(new LottoNumberValidate(1));
+        numbers.add(new LottoNumberValidate(2));
+        numbers.add(new LottoNumberValidate(3));
+        numbers.add(new LottoNumberValidate(4));
+        numbers.add(new LottoNumberValidate(5));
+        numbers.add(new LottoNumberValidate(5));
         assertThatThrownBy(() -> new LottoNumbers(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -58,13 +58,13 @@ class LottoNumbersTest {
     @Test
     @DisplayName("2등은 당첨번호 5개, 보너스번호를 맞아야한다.")
     void test3() throws Exception {
-        Set<PositiveNumber> numbers = new HashSet<>();
-        numbers.add(new PositiveNumber(1));
-        numbers.add(new PositiveNumber(2));
-        numbers.add(new PositiveNumber(3));
-        numbers.add(new PositiveNumber(4));
-        numbers.add(new PositiveNumber(5));
-        numbers.add(new PositiveNumber(7));
+        Set<LottoNumberValidate> numbers = new HashSet<>();
+        numbers.add(new LottoNumberValidate(1));
+        numbers.add(new LottoNumberValidate(2));
+        numbers.add(new LottoNumberValidate(3));
+        numbers.add(new LottoNumberValidate(4));
+        numbers.add(new LottoNumberValidate(5));
+        numbers.add(new LottoNumberValidate(7));
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
         assertThat(lottoNumbers.matchCountAndBonus(winnerNumbers)
                 .isMatchNormalCount(5)).isTrue();

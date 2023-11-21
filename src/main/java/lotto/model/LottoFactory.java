@@ -1,24 +1,18 @@
 package lotto.model;
 
+import lotto.strategy.LottoStrategy;
+import lotto.strategy.RandomNumber;
+
 import java.util.*;
 
 import static lotto.model.LottoNumbers.*;
 import static lotto.model.Lottos.LOTTO_PRICE;
-import static lotto.model.PositiveNumber.LOTTO_MAX_RANGE;
-import static lotto.model.PositiveNumber.LOTTO_MIN_RANGE;
 
 public class LottoFactory {
-    private final long purchaseMoney;
+    private final PurchaseMoney purchaseMoney;
 
     public LottoFactory(long purchaseMoney) {
-        checkMoneyOverThousand(purchaseMoney);
-        this.purchaseMoney = purchaseMoney;
-    }
-
-    private void checkMoneyOverThousand(long purchaseMoney) {
-        if (purchaseMoney < LOTTO_PRICE) {
-            throw new IllegalArgumentException("구입 금액은 1000원 이상이어야 합니다. 현재 "+purchaseMoney+"원을 입력했습니다.");
-        }
+        this.purchaseMoney = new PurchaseMoney(purchaseMoney);
     }
 
     public Lottos generateLottos() {
@@ -30,18 +24,19 @@ public class LottoFactory {
     }
 
     private LottoNumbers generateRandomSixNumber() {
-        Set<PositiveNumber> numbers = new HashSet<>();
+        Set<LottoNumberValidate> numbers = new HashSet<>();
         while (numbers.size() != LOTTO_MAX_COUNT) {
-            numbers.add(new PositiveNumber(generateRandomNumber()));
+            int randomNumber = generateRandomNumber(new RandomNumber());
+            numbers.add(new LottoNumberValidate(randomNumber));
         }
         return new LottoNumbers(numbers);
     }
 
-    private int generateRandomNumber() {
-        return (int) (Math.random() * LOTTO_MAX_RANGE + LOTTO_MIN_RANGE);
+    private int generateRandomNumber(LottoStrategy lottoStrategy) {
+        return lottoStrategy.generateNumber();
     }
 
     public int lottoCount() {
-        return (int) (this.purchaseMoney / LOTTO_PRICE);
+        return (int) (this.purchaseMoney.money() / LOTTO_PRICE);
     }
 }

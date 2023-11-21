@@ -2,12 +2,12 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class PositiveNumber implements Comparable<PositiveNumber>{
+public class LottoNumberValidate implements Comparable<LottoNumberValidate>{
     public static final int LOTTO_MIN_RANGE = 1;
     public static final int LOTTO_MAX_RANGE = 45;
     private final int number;
 
-    public PositiveNumber(int number) {
+    public LottoNumberValidate(int number) {
         validateNumberRange(number);
         this.number = number;
     }
@@ -26,7 +26,7 @@ public class PositiveNumber implements Comparable<PositiveNumber>{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PositiveNumber number1 = (PositiveNumber) o;
+        LottoNumberValidate number1 = (LottoNumberValidate) o;
         return number == number1.number;
     }
 
@@ -36,7 +36,7 @@ public class PositiveNumber implements Comparable<PositiveNumber>{
     }
 
     @Override
-    public int compareTo(PositiveNumber o) {
+    public int compareTo(LottoNumberValidate o) {
         return this.number - o.number;
     }
 

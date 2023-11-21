@@ -16,13 +16,13 @@ class LottoTest {
     @BeforeEach
     void setUp() {
         lottoNumbers = new LottoNumbers(Set.of(
-                new PositiveNumber(1),
-                new PositiveNumber(2),
-                new PositiveNumber(3),
-                new PositiveNumber(4),
-                new PositiveNumber(5),
-                new PositiveNumber(6)));
-        winnerNumbers = new WinnerNumbers(lottoNumbers, new BonusBall(new PositiveNumber(7)));
+                new LottoNumberValidate(1),
+                new LottoNumberValidate(2),
+                new LottoNumberValidate(3),
+                new LottoNumberValidate(4),
+                new LottoNumberValidate(5),
+                new LottoNumberValidate(6)));
+        winnerNumbers = new WinnerNumbers(lottoNumbers, new BonusBall(new LottoNumberValidate(7)));
         lotto = new Lotto(Set.of(1, 3, 5, 6, 7, 8));
     }
 

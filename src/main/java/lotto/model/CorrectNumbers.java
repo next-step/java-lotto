@@ -18,9 +18,6 @@ public class CorrectNumbers {
     public boolean isMatchNumberAndBonus(int correctCount, boolean isMatch){
         return isMatchNormalCount(correctCount) && isMatch(isMatch);
     }
-    public boolean match(){
-        return this.isMatch;
-    }
 
     public boolean isMatch(boolean isMatch) {
         return this.isMatch == isMatch;

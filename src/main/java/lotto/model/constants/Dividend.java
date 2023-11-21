@@ -1,6 +1,7 @@
 package lotto.model.constants;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Dividend {
     FIRST(6, 2_000_000_000, false),
@@ -20,12 +21,9 @@ public enum Dividend {
         this.dividendAmount = dividendAmount;
         this.hasBonus = hasBonus;
     }
-    public int correctCount(){
-        return this.correctCount;
-    }
 
-    public long findWinnerMoney(int winCount) {
-        return this.dividendAmount() * winCount;
+    public int correctCount() {
+        return this.correctCount;
     }
 
     public static Dividend valueOf(int correctCount, boolean matchBonus) {
@@ -34,9 +32,6 @@ public enum Dividend {
                 .filter(dividend -> dividend.hasBonus == matchBonus)
                 .findFirst()
                 .orElse(MISS);
-    }
-    public boolean hasBonus(){
-        return this.hasBonus;
     }
 
     public long dividendAmount() {

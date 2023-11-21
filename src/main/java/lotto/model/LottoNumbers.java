@@ -7,20 +7,20 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
     public static final int LOTTO_MAX_COUNT = 6;
 
-    private final Set<PositiveNumber> lottoNumbers;
+    private final Set<LottoNumberValidate> lottoNumbers;
 
-    public LottoNumbers(Set<PositiveNumber> lottoNumbers) {
+    public LottoNumbers(Set<LottoNumberValidate> lottoNumbers) {
         validateSizeAndDistinct(lottoNumbers);
         this.lottoNumbers = lottoNumbers.stream()
                 .sorted()
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    public Set<PositiveNumber> lottoNumbers() {
+    public Set<LottoNumberValidate> lottoNumbers() {
         return this.lottoNumbers;
     }
 
-    private static void validateSizeAndDistinct(Set<PositiveNumber> lottoNumbers) {
+    private static void validateSizeAndDistinct(Set<LottoNumberValidate> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_MAX_COUNT) {
             throw new IllegalArgumentException("로또 번호가 중복이거나 6개가 아닙니다.");
         }
@@ -29,7 +29,7 @@ public class LottoNumbers {
     public CorrectNumbers matchCountAndBonus(WinnerNumbers winnerNumbers) {
         int count = 0;
         boolean flag = false;
-        for (PositiveNumber number : lottoNumbers) {
+        for (LottoNumberValidate number : lottoNumbers) {
             if (winnerNumbers.has(number)) {
                 count++;
             }

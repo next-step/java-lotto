@@ -12,14 +12,14 @@ public class Lotto {
     }
 
     public Lotto(Set<Integer> numbers) {
-        Set<PositiveNumber> positiveNumbers = new LinkedHashSet<>();
+        Set<LottoNumberValidate> lottoNumberValidates = new LinkedHashSet<>();
         for (int number : numbers) {
-            positiveNumbers.add(new PositiveNumber(number));
+            lottoNumberValidates.add(new LottoNumberValidate(number));
         }
-        this.numbers = new LottoNumbers(positiveNumbers);
+        this.numbers = new LottoNumbers(lottoNumberValidates);
     }
 
-    public Set<PositiveNumber> numbers() {
+    public Set<LottoNumberValidate> numbers() {
         return this.numbers.lottoNumbers();
     }
 

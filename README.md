@@ -40,7 +40,7 @@
 - `LottoNumbers`
   - 로또 번호 6개를 담고있는 class 
   - 로또 번호의 갯수, 중복, 정렬을 담당
-- `PositiveNumber`
+- `LottoNumberValidation`
   - 로또번호 하나의 Validation을 담당
 - `BonusBall`
   - 보너스 번호를 가지고 있는 class

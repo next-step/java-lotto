@@ -3,8 +3,6 @@ package lotto.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 import java.util.Set;
@@ -20,13 +18,13 @@ class LottosTest {
     @BeforeEach
     void setUp() {
         lottoNumbers = new LottoNumbers(Set.of(
-                new PositiveNumber(1),
-                new PositiveNumber(2),
-                new PositiveNumber(3),
-                new PositiveNumber(4),
-                new PositiveNumber(5),
-                new PositiveNumber(6)));
-        winnerNumbers = new WinnerNumbers(lottoNumbers, new BonusBall(new PositiveNumber(7)));
+                new LottoNumberValidate(1),
+                new LottoNumberValidate(2),
+                new LottoNumberValidate(3),
+                new LottoNumberValidate(4),
+                new LottoNumberValidate(5),
+                new LottoNumberValidate(6)));
+        winnerNumbers = new WinnerNumbers(lottoNumbers, new BonusBall(new LottoNumberValidate(7)));
         lottoList = List.of(
                 new Lotto(Set.of(1, 3, 4, 6, 9, 11)),
                 new Lotto(Set.of(1, 3, 4, 5, 6, 7))
