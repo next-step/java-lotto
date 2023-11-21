@@ -38,7 +38,7 @@ public class Lotto {
 
         Set<LottoNumber> lottoNumbers = Arrays.stream(values.split(", "))
                 .mapToInt(Integer::parseInt)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(value -> INITIALIZED_LOTTO.get(value - 1))
                 .collect(Collectors.toSet());
 
         if (lottoNumbers.size() != LOTTO_SIZE) {
