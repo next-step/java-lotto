@@ -14,8 +14,8 @@ public class ProfitCalculatorTest {
 
     @Test
     void 당첨금_범위() {
-        double profitRate = ProfitCalculator.calculateProfitRate(14000, 4000000000L);
-        assertThat(profitRate).isEqualTo(0.35);
+        double profitRate = ProfitCalculator.calculateProfitRate(14000, 4_000_000_000L);
+        assertThat(profitRate).isEqualTo(285_714.28);
     }
 
 }
