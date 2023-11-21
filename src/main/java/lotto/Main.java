@@ -1,7 +1,6 @@
 package lotto;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Scanner;
 import lotto.view.InputView;
@@ -17,7 +16,7 @@ public class Main {
 
         MoneyWallet moneyWallet = new MoneyWallet(money);
         LottoWallet lottoWallet = LottoShop.buy(moneyWallet);
-        moneyWallet = lottoWallet.withdrawMoney(moneyWallet);
+        moneyWallet = moneyWallet.withdraw(lottoWallet.totalPurchaseAmount());
         resultView.calculateResult(lottoWallet.totalTicketCount());
         resultView.out(lottoWallet);
 

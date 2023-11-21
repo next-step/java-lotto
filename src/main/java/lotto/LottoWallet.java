@@ -25,10 +25,6 @@ public class LottoWallet {
         return lottos.get(index);
     }
 
-    public MoneyWallet withdrawMoney(MoneyWallet moneyWallet) {
-        return moneyWallet.withdraw(totalPurchaseAmount);
-    }
-
     public int totalPurchaseAmount() {
         return totalPurchaseAmount;
     }
