@@ -6,11 +6,11 @@ public class LottoFactory {
     private final static int NUMBER_COUNT = 6;
     private final static int MIN_NUMBER = 1;
     private final static int MAX_NUMBER = 45;
-    private static final List<LottoNumber> ALL_LOTTO_NUMBERS = allLottoNumbers();
+    private static final List<LottoNumber> ALL_LOTTO_NUMBERS = allLottoNumbers(MIN_NUMBER, MAX_NUMBER);
 
-    private static List<LottoNumber> allLottoNumbers() {
+    private static List<LottoNumber> allLottoNumbers(int min, int max) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int number = MIN_NUMBER; number <= MAX_NUMBER; number++) {
+        for (int number = min; number <= max; number++) {
             lottoNumbers.add(new LottoNumber(number));
         }
 
