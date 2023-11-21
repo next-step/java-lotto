@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static lotto.message.LottoErroMessage.NOT_ENOUGH_LOTTO_NUMBER;
+import static lotto.message.LottoErroMessage.NOT_ENOUGH_LOTTO_NUMBER_DUPLICATE;
 
 public class Lotto {
 
@@ -35,6 +36,8 @@ public class Lotto {
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
+        checkLottoSize(lotto);
+        checkDuplicate(lotto);
         this.lottoNumbers = sortLotto(lotto);
     }
 
@@ -49,6 +52,11 @@ public class Lotto {
         }
     }
 
+    private void checkDuplicate(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.stream().distinct().count() != 6) {
+            throw new IllegalArgumentException(NOT_ENOUGH_LOTTO_NUMBER_DUPLICATE.message());
+        }
+    }
     public List<LottoNumber> lottoNumbers() {
         return lottoNumbers;
     }
