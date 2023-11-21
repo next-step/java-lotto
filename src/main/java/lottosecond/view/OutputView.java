@@ -4,6 +4,7 @@ package lottosecond.view;
 import lottosecond.domain.Winner;
 import lottosecond.domain.WinnerBoard;
 import lottosecond.domain.lotto.Lotto;
+import lottosecond.domain.lotto.LottoCount;
 import lottosecond.domain.lotto.Lottos;
 
 import java.util.LinkedHashMap;
@@ -14,8 +15,6 @@ import java.util.stream.Collectors;
 public class OutputView {
 
     public void printLottoListInfo(Lottos lottos) {
-        totalLottoCount(lottos.getLottoCount());
-
         StringBuilder stringBuilder = new StringBuilder();
         for (Lotto lotto : lottos.getLottoList()) {
             stringBuilder.append(lotto)
@@ -55,6 +54,13 @@ public class OutputView {
         System.out.println(output);
     }
 
+    public void printManualAndAutoLottoInfo(LottoCount lottoCount) {
+        int manualLotto = lottoCount.manualLottoCount();
+        int autoLotto = lottoCount.autoLottoCount();
+        System.out.println();
+        System.out.println("수동으로 " + manualLotto + "장, 자동으로 " + autoLotto + "개를 구매했습니다.");
+    }
+
     private Map<Winner, Long> makeWinnerMap(WinnerBoard winnerBoard) {
         Map<Winner, Long> winnerMap = new LinkedHashMap<>();
         fillCollectMap(winnerMap);
@@ -77,12 +83,6 @@ public class OutputView {
         collect.putIfAbsent(Winner.THIRD, 0L);
         collect.putIfAbsent(Winner.SECOND, 0L);
         collect.putIfAbsent(Winner.FIRST, 0L);
-    }
-
-
-
-    private void totalLottoCount(int lottoCount) {
-        System.out.println(lottoCount + "개를 구매했습니다.");
     }
 
     private void lottoList(Object object) {

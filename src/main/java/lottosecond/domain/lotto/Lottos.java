@@ -32,6 +32,10 @@ public class Lottos {
         return new WinnerBoard(winners);
     }
 
+    public void addLotto(Lotto lotto) {
+        lottoList.add(lotto);
+    }
+
     public int totalLottoBuyMoney() {
         return lottoList.size() * EACH_LOTTO_PRICE;
     }
