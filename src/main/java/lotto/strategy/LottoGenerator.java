@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface LottoGenerator {
 
-    List<Integer> generate();
+    List<Integer> generate(int minLottoNumber, int maxLottoNumber, int lottoNumberCount);
 
 }

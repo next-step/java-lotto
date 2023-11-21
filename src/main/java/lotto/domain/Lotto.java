@@ -19,7 +19,7 @@ public class Lotto {
     }
 
     public Lotto(LottoGenerator lottoGenerator) {
-        this(lottoGenerator.generate());
+        this(lottoGenerator.generate(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, LOTTO_NUMBER_COUNT));
     }
 
     private void validate() {
