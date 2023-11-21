@@ -16,7 +16,7 @@ public class LottoController {
             ResultView.printLottoTicket(lottoTickets.get(i));
         }
 
-        //checkLottoResult();
+        String winningNumber = InputView.inputWinningNumbers();
     }
 
     public static List<Lotto> buyLotto() {
