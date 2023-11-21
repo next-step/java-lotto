@@ -1,22 +1,22 @@
 package lotto.dto;
 
-import lotto.domain.BonusNumber;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lotto;
 
 public class WinningNumbersDTO {
     private Lotto winningLotto;
-    private BonusNumber bonusNumber;
+    private LottoNumber bonus;
 
-    public WinningNumbersDTO(Lotto winningNumbers, BonusNumber bonusNumber) {
+    public WinningNumbersDTO(Lotto winningNumbers, LottoNumber bonus) {
         this.winningLotto = winningNumbers;
-        this.bonusNumber = bonusNumber;
+        this.bonus = bonus;
     }
 
-    public Lotto getWinningNumbers() {
+    public Lotto getWinningLotto() {
         return winningLotto;
     }
 
-    public BonusNumber getBonusNumber() {
-        return bonusNumber;
+    public LottoNumber getBonus() {
+        return bonus;
     }
 }

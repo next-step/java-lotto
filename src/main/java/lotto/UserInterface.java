@@ -19,12 +19,12 @@ public class UserInterface {
 
         Lotto winningNumber = new Lotto(InputView.winningNumbers());
 
-        BonusNumber bonusNumber = new BonusNumber(InputView.bonusNumber());
+        LottoNumber lottoNumber = new LottoNumber(InputView.bonusNumber());
 
-        if (winningNumber.contains(bonusNumber.getBonusNumber())) {
+        if (winningNumber.contains(lottoNumber.getNumber())) {
             throw new IllegalArgumentException("당첨 번호에 보너스 볼 번호가 포함되면 안됩니다.");
         }
-        WinningNumbersDTO winningNumbersDTO = new WinningNumbersDTO(winningNumber, bonusNumber);
+        WinningNumbersDTO winningNumbersDTO = new WinningNumbersDTO(winningNumber, lottoNumber);
         System.out.println();
         ResultView.winningStaticsMessage();
 
