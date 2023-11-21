@@ -28,6 +28,12 @@ public class Renderer {
         System.out.println("]");
     }
 
+    public static void printLottos(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            printLotto(lotto);
+        }
+    }
+
     public static void printResult(WinningStatistic result) {
         simplePrint("당첨 통계");
         simplePrint("--------------");
@@ -52,4 +58,5 @@ public class Renderer {
         }
         simplePrint("총 수익률은 " + ratio + "입니다.");
     }
+
 }
