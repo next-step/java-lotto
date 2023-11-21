@@ -7,3 +7,11 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 구현 목록
+- [X] 구매 금액 입력
+- [X] 구매 금액에 따른 로또 구매
+- [X] 로또 번호 추출
+- [X] 로또 당첨 번호 입력
+- [X] 당첨 통계 작성
+- [X] 총 수익률 계산
