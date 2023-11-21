@@ -21,10 +21,10 @@ public class LottoResult {
     }
 
     private int getReceiveMoney() {
-        return statistics.get(LottoPrize.ForthPrizeMoney) * LottoPrize.ForthPrizeMoney.getMoney()
-                + statistics.get(LottoPrize.ThirdPrizeMoney) * LottoPrize.ThirdPrizeMoney.getMoney()
-                + statistics.get(LottoPrize.SecondPrizeMoney) * LottoPrize.SecondPrizeMoney.getMoney()
-                + statistics.get(LottoPrize.FirstPrizeMoney) * LottoPrize.FirstPrizeMoney.getMoney();
+        return statistics.get(LottoPrize.FIFTH) * LottoPrize.FIFTH.getMoney()
+                + statistics.get(LottoPrize.FOURTH) * LottoPrize.FOURTH.getMoney()
+                + statistics.get(LottoPrize.THIRD) * LottoPrize.THIRD.getMoney()
+                + statistics.get(LottoPrize.FIRST) * LottoPrize.FIRST.getMoney();
     }
 
     public float getProfitRate(Money buyMoney) {

@@ -20,7 +20,7 @@ public class LottoApplication {
         MyLottos myLottos = LottoFactory.buy(money);
         OutputView.outputMyLottos(MyLottosResponse.from(myLottos));
 
-        WinningLotto winningLotto = new WinningLotto(InputView.winningNumbers());
+        WinningLotto winningLotto = new WinningLotto(InputView.winningNumbers(), 30);
         LottoResult lottoResult = myLottos.getLottoResult(winningLotto);
 
         OutputView.outputLottoStats(LottoStatsResponse.from(lottoResult, money));
