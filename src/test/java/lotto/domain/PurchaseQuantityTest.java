@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.InputMismatchException;
 
+import static org.assertj.core.api.Assertions.*;
+
 public class PurchaseQuantityTest {
     @Test
     @DisplayName("로또 구매 수량에 맞게 수동 로또 갯수 생성을 하는지 확인")
@@ -13,7 +15,8 @@ public class PurchaseQuantityTest {
         PurchaseQuantity purchaseQuantity = new PurchaseQuantity(5);
         PurchaseQuantity manualPurchase = new PurchaseQuantity(6);
 
-        Assertions.assertThatThrownBy(() -> purchaseQuantity.diff(manualPurchase))
+
+        assertThatThrownBy(() -> purchaseQuantity.diff(manualPurchase))
                 .isInstanceOf(InputMismatchException.class);
     }
 }

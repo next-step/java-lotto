@@ -1,9 +1,11 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 public class Lotto {
-
     private final Set<LottoNumber> lotto;
     public Lotto(Set<LottoNumber> numberSet) {
         this.lotto = validate(numberSet);
@@ -43,7 +45,6 @@ public class Lotto {
     private boolean isRank(Lotto winLotto) {
         return matchCount(winLotto) > 2;
     }
-
 
     @Override
     public boolean equals(Object o) {

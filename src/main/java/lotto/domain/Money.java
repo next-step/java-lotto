@@ -3,16 +3,15 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
-
-    public static final int THOUSAND_UNIT = 1000;
+    private static final int THOUSAND_UNIT = 1000;
     private final long money;
 
     public Money(long money) {
         this.money = money;
     }
 
-    public Money plus(Money addMoney){
-        return new Money(money+ addMoney.find());
+    public Money plus(long addMoney){
+        return new Money(money+ addMoney);
     }
 
     public long find() {
@@ -21,6 +20,10 @@ public class Money {
 
     public int cutByThousand(){
         return (int) money/ THOUSAND_UNIT;
+    }
+
+    public float rateOfReturn(long prizeMoney) {
+        return (float) prizeMoney/money;
     }
 
     @Override
@@ -41,7 +44,5 @@ public class Money {
         return String.valueOf(money);
     }
 
-    public float rateOfreturn(long prize) {
-        return (float) prize/money;
-    }
+
 }

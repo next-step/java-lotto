@@ -1,5 +1,6 @@
 package lotto.ui;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.PurchaseQuantity;
 import lotto.domain.strategy.LottoGeneration;
 import lotto.domain.strategy.ManualLottoGeneration;
@@ -18,18 +19,30 @@ public class InputView {
         return  checkNumber(SCANNER.nextLine());
     }
     public static int inputManualCount(){
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        System.out.printf("%n수동으로 구매할 로또 수를 입력해 주세요.%n");
         return checkNumber(SCANNER.nextLine());
     }
 
     public static List<LottoGeneration> inputManualList(PurchaseQuantity purchaseQuantity){
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-
         List<LottoGeneration> result = new ArrayList<>();
+        if(purchaseQuantity.find()==0) return result;
+
+        System.out.printf("%n수동으로 구매할 번호를 입력해 주세요.%n");
+
         for(int i=0;i<purchaseQuantity.find();i++){
-            result.add(new ManualLottoGeneration(makeIntegarList(split(SCANNER.nextLine()))));
+            result.add(generateManualLotto());
         }
         return result;
+    }
+
+    public static LottoGeneration inputWinLotto(){
+        System.out.printf("%n지난 주 당첨 번호를 입력해 주세요.%n");
+        return generateManualLotto();
+    }
+
+    public static LottoNumber inputBonus(){
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return new LottoNumber(checkNumber(SCANNER.nextLine()));
     }
 
 
@@ -52,6 +65,10 @@ public class InputView {
         }catch (NumberFormatException error){
             throw new NumberFormatException("숫자만 입력해주세요");
         }
+    }
+
+    private static LottoGeneration generateManualLotto(){
+        return new ManualLottoGeneration(makeIntegarList(split(SCANNER.nextLine())));
     }
 
 

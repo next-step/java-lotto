@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoNumberCache;
-import lotto.domain.Lottos;
-import lotto.domain.Money;
-import lotto.domain.PurchaseQuantity;
+import lotto.domain.*;
 import lotto.domain.strategy.AutoLottoGeneration;
 import lotto.domain.strategy.LottoGeneration;
 import lotto.ui.InputView;
@@ -19,8 +16,15 @@ public class LottoController {
     public static final LottoGeneration AUTO_LOTTO_GENERATION = new AutoLottoGeneration(LottoNumberCache.values());
 
     public void play() {
+
         Money money = new Money(inputPurchaseAmount());
 
+        Lottos lottos = buyLotto(money);
+        checkWinning(lottos, money);
+
+    }
+
+    public Lottos buyLotto(Money money){
         PurchaseQuantity allQuantity =new PurchaseQuantity(money.cutByThousand());
         PurchaseQuantity manualQuantity= new PurchaseQuantity(inputManualCount());
 
@@ -30,6 +34,17 @@ public class LottoController {
 
         printPurchaseCount(allQuantity,manualQuantity);
         printLottoList(lottos);
+
+        return lottos;
+    }
+
+    public void checkWinning(Lottos lottos, Money money){
+        Lotto winLotto = new Lotto(inputWinLotto().generate());
+        LottoNumber bonus = inputBonus();
+
+        LottoRanks lottoRanks = new LottoRanks(lottos,winLotto,bonus);
+        printStatistics(lottoRanks.findLottoResult());
+        printRateOfReturn(money,lottoRanks.findPrizeMoney());
 
     }
 }

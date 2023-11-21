@@ -1,9 +1,10 @@
 package lotto.domain.strategy;
 
 import lotto.domain.LottoNumberCache;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AutoLottoGenerationTest {
     @Test
@@ -11,6 +12,6 @@ public class AutoLottoGenerationTest {
     void 자동로또_생성_확인() {
         AutoLottoGeneration autoLottoGeneration = new AutoLottoGeneration(LottoNumberCache.values());
 
-        Assertions.assertThat(autoLottoGeneration.generate().size()).isEqualTo(6);
+        assertThat(autoLottoGeneration.generate().size()).isEqualTo(6);
     }
 }

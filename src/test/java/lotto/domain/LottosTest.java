@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.domain.strategy.AutoLottoGeneration;
 import lotto.domain.strategy.LottoGeneration;
 import lotto.domain.strategy.ManualLottoGeneration;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,7 +40,7 @@ public class LottosTest {
         Lotto winLotto = new Lotto(new ManualLottoGeneration(Arrays.asList(1, 2, 3, 4, 5, 6)).generate());
         LottoNumber bonus = new LottoNumber(7);
 
-        assertThat(lottos.findRanks(winLotto,bonus)).hasSize(1).containsOnly(entry(LottoRank.FIRST,1));
+        assertThat(lottos.callRanks(winLotto,bonus)).hasSize(1).containsOnly(entry(LottoRank.FIRST,1));
 
     }
 }

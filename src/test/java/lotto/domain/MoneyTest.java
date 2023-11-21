@@ -1,12 +1,11 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MoneyTest {
 
@@ -14,8 +13,7 @@ public class MoneyTest {
     @DisplayName("금액이 추가되면 새로운 객체를 생성하는지 확인")
     void 추가금액_객체생성_확인() {
         Money seedMoney = new Money(1000);
-        Money addMoney = new Money(2000);
-        assertThat(seedMoney.plus(addMoney)).isInstanceOf(Money.class);
+        assertThat(seedMoney.plus(2000)).isInstanceOf(Money.class);
     }
 
     @Test
@@ -27,10 +25,10 @@ public class MoneyTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value ={"10000:1000:0.1","1000:0:0","1000:1000:1"},delimiter = ':')
-    void 수익률_계산_확인(long seed, long prize,float result) {
+    @CsvSource(value = {"10000:1000:0.1", "1000:0:0", "1000:1000:1"}, delimiter = ':')
+    void 수익률_계산_확인(long seed, long prize, float result) {
         Money money = new Money(seed);
 
-        assertThat(money.rateOfreturn(prize)).isEqualTo(result);
+        assertThat(money.rateOfReturn(prize)).isEqualTo(result);
     }
 }
