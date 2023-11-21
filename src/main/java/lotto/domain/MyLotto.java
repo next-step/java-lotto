@@ -12,4 +12,21 @@ public class MyLotto {
             lottoList.add(new Lotto());
         }
     }
+
+    public List<Lotto> getLottoList() {
+        return lottoList;
+    }
+
+    public PrizeResult getResult(List<Integer> winningNumbers){
+        PrizeResult prizeResult = new PrizeResult();
+        for(Lotto lotto : lottoList){
+            prizeResult.addPrizeResult(matchResult(winningNumbers, lotto));
+        }
+
+        return prizeResult;
+    }
+
+    private MatchInfo matchResult(List<Integer> winningNumbers, Lotto lotto){
+        return MatchInfo.checkMatch(lotto.getMatchCount(winningNumbers));
+    }
 }

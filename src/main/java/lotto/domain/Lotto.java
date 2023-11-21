@@ -27,4 +27,10 @@ public class Lotto {
     public List<Integer> getLottoNumberList() {
         return this.lottoNumberList;
     }
+
+    public long getMatchCount(List<Integer> winningNumbers){
+        return lottoNumberList.stream()
+            .filter(val -> winningNumbers.contains(val))
+            .count();
+    }
 }
