@@ -2,12 +2,12 @@ package step2.lotto.domain;
 
 import java.util.Set;
 
-public class LottoWinNumberInfo {
+public class LottoWin {
 
     private final Lotto winLotto;
 
-    public LottoWinNumberInfo(final Set<Integer> lottoWinNumbers) {
-        this.winLotto = new Lotto(lottoWinNumbers);
+    public LottoWin(final Set<Integer> lottoWinNumbers) {
+        this.winLotto = Lotto.of(lottoWinNumbers);
     }
 
     public Lotto getWinLotto() {
@@ -16,7 +16,7 @@ public class LottoWinNumberInfo {
 
     public int matchCount(final Lotto lotto) {
         return (int) winLotto.getLottoNumbers().stream()
-            .filter(winNumber -> lotto.getLottoNumbers().contains(winNumber))
+            .filter(lottoNumber -> lotto.getLottoNumbers().contains(lottoNumber))
             .count();
     }
 }

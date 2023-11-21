@@ -6,19 +6,19 @@ import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.lotto.domain.Lotto;
-import step2.lotto.domain.LottoWinNumberInfo;
+import step2.lotto.domain.LottoWin;
 import step2.lotto.utility.NumberSplitter;
 
-class LottoWinNumberInfoTest {
+class LottoWinLottoNumberInfoTest {
 
     @Test
     @DisplayName("입력한 우승로또 번호를 바탕으로 우승 로또정보 객체를 만들 수 있다.")
     void createWinLottoTest() {
         String inputNumbers = "1, 2, 3, 4, 5, 6";
-        Lotto winLotto = new LottoWinNumberInfo(
+        Lotto winLotto = new LottoWin(
             NumberSplitter.splitNumber(inputNumbers)).getWinLotto();
 
-        assertThat(winLotto.getLottoNumbers()).contains(1,2,3,4,5,6);
+        assertThat(winLotto.getLottoNumbers()).hasSize(6);
     }
 
     @Test
@@ -26,7 +26,7 @@ class LottoWinNumberInfoTest {
     void winLottoDuplicateTest() {
         String inputNumbers = "1, 2, 3, 4, 5, 5";
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoWinNumberInfo(
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoWin(
             NumberSplitter.splitNumber(inputNumbers)));
     }
 
@@ -35,17 +35,17 @@ class LottoWinNumberInfoTest {
     void winLottoNumberRangeTest() {
         String inputNumbers = "1, 2, 3, 4, 5, 46";
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoWinNumberInfo(
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoWin(
             NumberSplitter.splitNumber(inputNumbers)));
     }
 
     @Test
     @DisplayName("우승번호와 비교하여 일치하는 번호의 갯수를 반환한다.")
     void matchCountTest() {
-        LottoWinNumberInfo lottoWinNumberInfo = new LottoWinNumberInfo(Set.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(Set.of(1,2,3,4,5,6));
+        LottoWin lottoWin = new LottoWin(Set.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.of(Set.of(1, 2, 3, 4, 5, 6));
 
-        assertThat(lottoWinNumberInfo.matchCount(lotto)).isEqualTo(6);
+        assertThat(lottoWin.matchCount(lotto)).isEqualTo(6);
     }
 
 }

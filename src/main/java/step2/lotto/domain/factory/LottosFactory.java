@@ -9,7 +9,7 @@ import step2.lotto.strategy.LottoNumberGenerator;
 public class LottosFactory {
 
     public static List<Lotto> createLottos(final int lottoGameCount, final LottoNumberGenerator lottoNumberGenerator) {
-        return Stream.generate(() -> new Lotto(lottoNumberGenerator.generateLottoNumbers()))
+        return Stream.generate(() -> Lotto.of(lottoNumberGenerator.generateLottoNumbers()))
             .limit(lottoGameCount)
             .collect(Collectors.toList());
     }
