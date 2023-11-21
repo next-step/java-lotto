@@ -33,10 +33,6 @@ public class LottoTicket {
             }
         });
 
-        if (sum.get() == 5 && isMatchedWithBonusNum(winnerNumbers)) {
-            return 50;
-        }
-
         return sum.get();
     }
 }

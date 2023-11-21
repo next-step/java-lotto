@@ -47,7 +47,7 @@ public class PrizeStatus {
             totalProfit += 50000;
         }
 
-        if (totalMatchedCount == 5) {
+        if (totalMatchedCount == 5 && !lottoTicket.isMatchedWithBonusNum(winnerNumbers)) {
             int currentNumOfPrize = getCurrentNumOfPrize(totalMatchedCount, false);
             this.prizeStatus.put(Rank.THIRD, currentNumOfPrize + 1);
             totalProfit += 1500000;

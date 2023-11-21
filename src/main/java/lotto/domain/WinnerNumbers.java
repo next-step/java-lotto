@@ -13,6 +13,11 @@ public class WinnerNumbers {
         }
     }
 
+    public WinnerNumbers(List<Integer> generatedNumbers, int bonusNumber) {
+        winnerNumbers.addAll(generatedNumbers);
+        this.bonusNumber = bonusNumber;
+    }
+
     private void generateBonusNumber(Random random) {
         int generatedBonusNum = random.nextInt(45) + 1;
         if (!isContain(generatedBonusNum)) {
