@@ -7,10 +7,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoReport {
-    private static final int CASH_PRIZE_COLLECT_3 = 5000;
-    private static final int CASH_PRIZE_COLLECT_4 = 50000;
-    private static final int CASH_PRIZE_COLLECT_5 = 1500000;
-    private static final int CASH_PRIZE_COLLECT_6 = 2000000000;
+    private static final List<Integer> CASH_PRIZE = Arrays.asList(
+            0,
+            0,
+            0,
+            5000,
+            50000,
+            1500000,
+            2000000000
+    );
 
     private final List<Integer> result;
     private final double rateOfReturn;
@@ -44,10 +49,10 @@ public class LottoReport {
     }
 
     private double calculateTotalCashPrize() {
-        return this.result.get(3) * CASH_PRIZE_COLLECT_3
-                + this.result.get(4) * CASH_PRIZE_COLLECT_4
-                + this.result.get(5) * CASH_PRIZE_COLLECT_5
-                + this.result.get(6) * CASH_PRIZE_COLLECT_6;
+        return this.result.get(3) * CASH_PRIZE.get(3)
+                + this.result.get(4) * CASH_PRIZE.get(4)
+                + this.result.get(5) * CASH_PRIZE.get(5)
+                + this.result.get(6) * CASH_PRIZE.get(6);
     }
 
     private double calculateTotalInvestment() {
@@ -65,4 +70,7 @@ public class LottoReport {
         return this.rateOfReturn;
     }
 
+    public List<Integer> cashPrize() {
+        return CASH_PRIZE;
+    }
 }

@@ -21,6 +21,7 @@ public class LottoController {
 
         String winningNumber = InputView.inputWinningNumbers();
         LottoReport report = new LottoReport(winningNumber, lottoTickets);
+        ResultView.printResultReport(report);
     }
 
     public static List<Lotto> buyLotto() {
