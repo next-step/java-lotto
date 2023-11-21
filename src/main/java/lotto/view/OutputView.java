@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.lotto.Lotto;
-import lotto.dto.Summary;
+import lotto.domain.summary.Summary;
 
 import java.util.List;
 

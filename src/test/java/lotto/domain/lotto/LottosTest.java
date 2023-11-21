@@ -1,8 +1,8 @@
 package lotto.domain.lotto;
 
 import lotto.constants.Winning;
-import lotto.dto.Summary;
-import lotto.dto.WinningSummary;
+import lotto.domain.summary.Summary;
+import lotto.domain.summary.WinningSummary;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

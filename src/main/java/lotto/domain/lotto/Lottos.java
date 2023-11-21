@@ -2,8 +2,8 @@ package lotto.domain.lotto;
 
 import lotto.constants.Winning;
 import lotto.domain.lotto.strategy.GenerateStrategy;
-import lotto.dto.Summary;
-import lotto.dto.WinningSummary;
+import lotto.domain.summary.Summary;
+import lotto.domain.summary.WinningSummary;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package lotto.dto;
+package lotto.domain.summary;
 
 import lotto.constants.Winning;
 
