@@ -24,16 +24,16 @@ class LottosTest {
     @Test
     @DisplayName("수동으로 로또를 생성한다. 로또번호가 1~45 숫자가 아니거나 6자리가 아니거나 빈값인 경우 예외가 발생한다.")
     public void create_manual() {
-        List<List<Integer>> list = List.of(
-                List.of(1, 2, 3, 4, 5, 6),
-                List.of(7, 8, 9, 10, 11, 12),
-                List.of(13, 14, 15, 16, 17, 18)
+        List<Lotto> list = List.of(
+                Lotto.of(1, 2, 3, 4, 5, 6),
+                Lotto.of(7, 8, 9, 10, 11, 12),
+                Lotto.of(13, 14, 15, 16, 17, 18)
         );
 
         assertThat(Lottos.of(list).size()).isEqualTo(3);
-        assertThatThrownBy(() -> Lottos.of(List.of(List.of(1, 2, 3, 4, 5)))).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> Lottos.of(List.of(List.of(1, 2, 3, 4, 5, 46)))).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> Lottos.of(List.of(List.of(1, 2, 3, 4, 5, 6, 7)))).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Lottos.of(List.of(Lotto.of(1, 2, 3, 4, 5)))).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Lottos.of(List.of(Lotto.of(1, 2, 3, 4, 5, 46)))).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Lottos.of(List.of(Lotto.of(1, 2, 3, 4, 5, 6, 7)))).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

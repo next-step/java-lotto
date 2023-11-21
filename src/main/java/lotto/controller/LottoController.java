@@ -38,7 +38,7 @@ public class LottoController {
 
         Lottos.validate(purchasePrice, manualLottoCount);
 
-        List<List<Integer>> lists = inputView.readManualLotto(manualLottoCount);
+        List<Lotto> lists = inputView.readManualLotto(manualLottoCount);
 
         Lottos manualLottos = Lottos.of(purchasePrice, lists);
         Lottos autoLottos = Lottos.of(remainingPurchasePrice, new RandomStrategy());

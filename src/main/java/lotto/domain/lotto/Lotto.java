@@ -2,6 +2,7 @@ package lotto.domain.lotto;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,9 @@ public class Lotto {
         this.lottoNumbers = new HashSet<>(validate(lottoNumbers));
     }
 
+    public static Lotto of(Integer... lottoNumbers) {
+        return of(List.of(lottoNumbers));
+    }
 
     public static Lotto of(Collection<Integer> lottoNumbers) {
         return new Lotto(lottoNumbers);

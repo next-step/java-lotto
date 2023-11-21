@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.lotto.Lotto;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -48,13 +50,13 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-    public List<List<Integer>> readManualLotto(int count) {
+    public List<Lotto> readManualLotto(int count) {
         if (empty(count)) return new ArrayList<>();
 
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<List<Integer>> list = new ArrayList<>();
+        List<Lotto> list = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            list.add(readLottoNumber());
+            list.add(Lotto.of(readLottoNumber()));
         }
         return list;
     }

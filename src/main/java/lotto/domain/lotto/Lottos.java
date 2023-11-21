@@ -43,16 +43,13 @@ public class Lottos {
         return purchasePrice / PRICE_PER_TICKET;
     }
 
-    public static Lottos of(long purchasePrice, List<List<Integer>> lottos) {
+    public static Lottos of(long purchasePrice, List<Lotto> lottos) {
         validateLottoCount(purchasePrice, lottos.size());
         return of(lottos);
     }
 
-    public static Lottos of(List<List<Integer>> lottos) {
-        List<Lotto> lottoList = lottos.stream()
-                .map(Lotto::of)
-                .collect(Collectors.toList());
-        return new Lottos(lottoList);
+    public static Lottos of(List<Lotto> lottos) {
+        return new Lottos(lottos);
     }
 
     private static void validateLottoCount(long purchasePrice, long manualLottoCount) {
