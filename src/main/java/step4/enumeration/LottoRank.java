@@ -1,28 +1,33 @@
 package step4.enumeration;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public enum LottoRank {
 
-    FIRST(6, 2000000000),
-    SECOND(5, 30000000),
-    THIRD(5, 1500000),
-    FOURTH(4, 50000),
-    FIFTH(3, 5000),
-    ZERO(0, 0);
+    FIRST(6, 2_000_000_000, "6개 일치 (2000000000원) - %s개"),
+    SECOND(5, 30_000_000, "5개 일치, 보너스 볼 일치 (30000000원) - %s개"),
+    THIRD(5, 1_500_000, "5개 일치 (1500000원) - %s개"),
+    FOURTH(4, 50_000, "4개 일치 (50000원) - %s개"),
+    FIFTH(3, 5_000, "3개 일치 (5000원) - %s개"),
+    ZERO(0, 0, "");
 
     private final int match;
     private final int price;
+    private final String message;
 
 
-    LottoRank(int match, int price) {
+    LottoRank(int match, int price, String message) {
         this.match = match;
         this.price = price;
+        this.message = message;
     }
 
-    public static final List<LottoRank> ALL_LOTTO_RANK = Arrays.stream(LottoRank.values()).collect(Collectors.toList());
-    public static final List<LottoRank> ALL_NORMAL_LOTTO_RANK = Arrays.stream(LottoRank.values())
+    private static final List<LottoRank> ALL_LOTTO_RANK = Arrays.stream(LottoRank.values()).collect(Collectors.toList());
+    private static final List<LottoRank> ALL_NORMAL_LOTTO_RANK = Arrays.stream(LottoRank.values())
             .filter(rank -> rank != SECOND && rank != ZERO)
             .collect(Collectors.toList());
 
@@ -40,6 +45,10 @@ public enum LottoRank {
 
     public int getMatch() {
         return this.match;
+    }
+
+    public String getMessage() {
+        return this.message;
     }
 
     public static LottoRank getRank(int match) {
