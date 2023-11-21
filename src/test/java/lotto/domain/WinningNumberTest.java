@@ -12,6 +12,6 @@ class WinningNumberTest {
     @ParameterizedTest
     @CsvSource(value = {"1:true","3:true", "5:true", "7:false"}, delimiter = ':')
     void contains(int number, boolean expectedFlag) {
-        assertThat(new WinningNumber("1,2,3,4,5,6").contains(number)).isEqualTo(expectedFlag);
+        assertThat(new Lotto("1,2,3,4,5,6").contains(number)).isEqualTo(expectedFlag);
     }
 }

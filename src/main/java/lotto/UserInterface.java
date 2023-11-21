@@ -17,7 +17,7 @@ public class UserInterface {
         ResultView.purchaseCount(lottos);
         ResultView.lottos(lottos);
 
-        WinningNumber winningNumber = new WinningNumber(InputView.winningNumbers());
+        Lotto winningNumber = new Lotto(InputView.winningNumbers());
 
         BonusNumber bonusNumber = new BonusNumber(InputView.bonusNumber());
 
