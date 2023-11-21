@@ -1,7 +1,8 @@
 package lotto.domain;
 
+import lotto.dto.WinningNumbersDTO;
+
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,19 +25,18 @@ public class Lottos {
         return value / Lotto.LOTTO_PRICE;
     }
 
-    public int totalWinningAmount(String winningNumber) {
-        WinningAmount winningAmount = new WinningAmount();
+    public Long totalWinningAmount(WinningNumbersDTO winningNumbersDTO) {
+        Amount amount = new Amount();
         for (Lotto lotto : this.lottos) {
-            winningAmount.add(lotto.winningInfo(winningNumber).getWinningAmount());
+            amount.add(lotto.winningInfo(winningNumbersDTO).getWinningAmount());
         }
-        return winningAmount.amount();
+        return amount.amount();
     }
 
-    public BigDecimal rateOfReturn(String winningNumber) {
-        BigDecimal purchaseAmount = new BigDecimal(this.lottos.size() * Lotto.LOTTO_PRICE);
-        BigDecimal winningAmount = new BigDecimal(totalWinningAmount(winningNumber));
-
-        return winningAmount.divide(purchaseAmount, 2, RoundingMode.HALF_UP);
+    public BigDecimal rateOfReturn(WinningNumbersDTO winningNumbersDTO) {
+        Amount purchaseAmount = new Amount(this.lottos.size() * Lotto.LOTTO_PRICE);
+        Amount winningAmount = new Amount(totalWinningAmount(winningNumbersDTO));
+        return winningAmount.divide(purchaseAmount.amount(), 2);
     }
 
     public List<Lotto> getLottos() {
@@ -47,9 +47,13 @@ public class Lottos {
         return this.lottos.size();
     }
 
-    public int winningCount(String winningNumber, int correctCount) {
+    public boolean isEmpty() {
+        return lottos.size() == 0;
+    }
+
+    public int winningCorrectCount(WinningNumbersDTO winningNumbersDTO, Winning winning) {
         return (int) this.lottos.stream()
-                .filter(lotto -> lotto.winningInfo(winningNumber).getCorrectCount() == correctCount)
+                .filter(lotto -> Winning.hasMatchingCounts(lotto.winningInfo(winningNumbersDTO), winning))
                 .count();
     }
 }

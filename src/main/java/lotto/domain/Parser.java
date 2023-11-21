@@ -15,11 +15,11 @@ public class Parser {
         return parseNumberFormat(value);
     }
 
-    private static int parseNumberFormat(String numberString) {
+    public static int parseNumberFormat(String numberString) {
         try {
             return Integer.parseInt(numberString);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자가 아닙니다", e);
+            throw new IllegalArgumentException("숫자가 아닙니다");
         }
     }
 

@@ -19,7 +19,7 @@ class ParserTest {
     @DisplayName("문자열을 숫자로 파싱한 결과를 리턴.")
     @Test
     void 숫자포맷_파싱() {
-        assertThat(Parser.numberParsing("14000")).isEqualTo(14000);
+        assertThat(Parser.numberParsing("14000")).isEqualTo(14_000);
     }
 
     @DisplayName("파싱된 숫자 리스트 사이즈가 6이 아닐경우 예외 발생")

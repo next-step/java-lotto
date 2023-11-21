@@ -1,16 +1,16 @@
 package lotto.domain;
 
 import lotto.dto.WinningInfoDTO;
+import lotto.dto.WinningNumbersDTO;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
-    public static final int LOTTO_PRICE = 1000;
-    private static final int START_NUMBER = 1;
-    private static final int END_NUMBER = 45;
+    public static final int LOTTO_PRICE = 1_000;
+    public static final int START_NUMBER = 1;
+    public static final int END_NUMBER = 45;
 
     private List<Integer> numbers;
 
@@ -34,17 +34,12 @@ public class Lotto {
         return game;
     }
 
-    public WinningInfoDTO winningInfo(String numbers) {
-        int correctCount = correctCount(numbers);
-        return new WinningInfoDTO(correctCount, new WinningAmount(WinningEnum.winningAmount(correctCount)));
-    }
-
-    private int correctCount(String numbers) {
-        return Parser.numbersParsing(numbers)
-                .stream()
-                .filter(value -> this.numbers.contains(value))
-                .collect(Collectors.toList())
-                .size();
+    public WinningInfoDTO winningInfo(WinningNumbersDTO winningNumbersDTO) {
+        WinningNumber winningNumbers = winningNumbersDTO.getWinningNumbers();
+        BonusNumber bonusNumber = winningNumbersDTO.getBonusNumber();
+        int correctCount = winningNumbers.correctCount(numbers);
+        boolean bonusCorrect = bonusNumber.belongs(numbers);
+        return new WinningInfoDTO(correctCount, bonusCorrect, new Amount(Winning.winningAmount(correctCount, bonusCorrect)));
     }
 
     @Override
