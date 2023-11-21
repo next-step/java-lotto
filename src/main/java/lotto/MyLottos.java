@@ -30,15 +30,19 @@ public class MyLottos {
         return myLottos.get(index).numbersToObject();
     }
 
-    public Map<Integer, Integer> myMatchResult(List<Integer> winningNumbers){
-        return matchResult.addMatchResult(myLottos, winningNumbers);
+    public void matchingNumbers(List<Integer> winningNumbers){
+        matchResult.addMatchResult(myLottos, winningNumbers);
+    }
+
+    public int returnMatchCountOf(int count){
+        return matchResult.matchCountOf(count);
     }
 
     @Override
     public String toString() {
         return "MyLottos{" +
                 "myLottos=" + myLottos +
-                ", matchResult=" + matchResult +
+                ", matchResult=" + matchResult.toString() +
                 '}';
     }
 }

@@ -24,14 +24,19 @@ public class MatchResult {
         }
     }
 
-    public Map<Integer, Integer> addMatchResult(List<Lotto> myLottos, List<Integer> winningNumbers) {
+    public void addMatchResult(List<Lotto> myLottos, List<Integer> winningNumbers) {
 
         for(Lotto lotto : myLottos){
             int myMatchCount = lotto.matchCount(winningNumbers);
-            matchResult.put(myMatchCount, matchResult.get(myMatchCount) + 1);
+            if(myMatchCount >= 3){
+                matchResult.put(myMatchCount, matchResult.get(myMatchCount) + 1);
+            }
         }
 
-        return matchResult;
+    }
+
+    public int matchCountOf(int count){
+        return matchResult.get(count);
     }
 
     public double calculateReturnRate(int payMoney) {
@@ -43,5 +48,12 @@ public class MatchResult {
         }
 
         return Math.floor((double)total / payMoney * 100) / 100;
+    }
+
+    @Override
+    public String toString() {
+        return "MatchResult{" +
+                "matchResult=" + matchResult +
+                '}';
     }
 }
