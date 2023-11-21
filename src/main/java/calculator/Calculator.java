@@ -8,17 +8,14 @@ public class Calculator {
 	private final Numbers numbers = new Numbers(new LinkedList<>());
 	private final Signs signs = new Signs(new ArrayList<>());
 
-	private List<String> inputs = new ArrayList<>();
-	private int result = 0;
-
 	public int run(String input) {
 		validate(input);
-		inputs = List.of(input.split(" "));
+		List<String> inputs = List.of(input.split(" "));
 
-		ready();
-		calculate();
+		makeNumbers(inputs);
+		makeSigns(inputs);
 
-		return result;
+		return calculate(numbers.poll());
 	}
 
 	private void validate(String input) {
@@ -27,28 +24,26 @@ public class Calculator {
 		}
 	}
 
-	private void ready() {
-		for (String input : inputs) {
-			divide(input);
-		}
-		result = numbers.poll();
-	}
-
-	private void divide(String input) {
-		try {
-			numbers.add(parseInt(input));
-		} catch (NumberFormatException ne) {
-			signs.add(Sign.of(input));
+	private void makeNumbers(List<String> inputs) {
+		for (int i = 0; i < inputs.size(); i += 2) {
+			numbers.add(parseInt(inputs.get(i)));
 		}
 	}
 
-	private void calculate() {
+	private int parseInt(String input) {
+		return Integer.parseInt(input);
+	}
+
+	private void makeSigns(List<String> inputs) {
+		for (int i = 1; i < inputs.size(); i += 2) {
+			signs.add(Sign.of(inputs.get(i)));
+		}
+	}
+
+	private int calculate(int result) {
 		for (Sign sign : signs.signs()) {
 			result = sign.calculate(result, numbers.poll());
 		}
-	}
-
-	private static int parseInt(String input) {
-		return Integer.parseInt(input);
+		return result;
 	}
 }
