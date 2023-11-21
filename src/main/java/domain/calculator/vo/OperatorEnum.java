@@ -19,7 +19,7 @@ public enum OperatorEnum {
         this.calculate = calculate;
     }
 
-    public static OperatorEnum of(String symbol) {
+    public static OperatorEnum from(String symbol) {
         for (OperatorEnum operatorEnum : OperatorEnum.values()) {
             if (operatorEnum.symbol.equals(symbol)) {
                 return operatorEnum;
