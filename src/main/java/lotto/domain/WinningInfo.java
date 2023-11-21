@@ -17,7 +17,7 @@ public class WinningInfo {
 		return winners;
 	}
 
-	public Integer calcTotalAmount() {
+	public long calcTotalAmount() {
 		return rank.calcTotalAmount(winners);
 	}
 }

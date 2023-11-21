@@ -10,7 +10,7 @@ public enum Rank {
 	NOT(0, 0);
 
 	private final int num;
-	private final int amount;
+	private final long amount;
 
 	Rank(int num, int amount) {
 		this.num = num;
@@ -32,11 +32,11 @@ public enum Rank {
 		return num;
 	}
 
-	public int getAmount() {
+	public long getAmount() {
 		return amount;
 	}
 
-	public Integer calcTotalAmount(Integer winners) {
+	public long calcTotalAmount(Integer winners) {
 		return this.amount * winners;
 	}
 }
