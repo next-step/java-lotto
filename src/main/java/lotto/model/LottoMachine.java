@@ -22,4 +22,8 @@ public class LottoMachine {
     public static int calculateTicketCount(int money) {
         return money/TICKET_PRICE;
     }
+
+    public static int ticketPrice() {
+        return TICKET_PRICE;
+    }
 }

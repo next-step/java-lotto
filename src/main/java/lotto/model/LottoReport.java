@@ -7,12 +7,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoReport {
-    private final List<Integer> result = new ArrayList<>(Collections.nCopies(7, 0));
+    private static final int CASH_PRIZE_COLLECT_3 = 5000;
+    private static final int CASH_PRIZE_COLLECT_4 = 50000;
+    private static final int CASH_PRIZE_COLLECT_5 = 1500000;
+    private static final int CASH_PRIZE_COLLECT_6 = 2000000000;
+
+    private final List<Integer> result;
+    private final double rateOfReturn;
 
     public LottoReport(String winningNumber, List<Lotto> tickets) {
+        this.result = new ArrayList<>(Collections.nCopies(7, 0));
         for (Lotto ticket : tickets) {
             addResult(winningNumber, ticket);
         }
+        this.rateOfReturn = calculateRateOfReturn();
+    }
+
+    public LottoReport(List<Integer> result) {
+        this.result = result;
+        this.rateOfReturn = calculateRateOfReturn();
     }
 
     private static List<Integer> convertStringToInt(String numbers) {
@@ -26,7 +39,30 @@ public class LottoReport {
         this.result.set(matchCount, this.result.get(matchCount) + 1);
     }
 
+    private double calculateRateOfReturn() {
+        return Math.floor(calculateTotalCashPrize() / calculateTotalInvestment() * 100) / 100;
+    }
+
+    private double calculateTotalCashPrize() {
+        return this.result.get(3) * CASH_PRIZE_COLLECT_3
+                + this.result.get(4) * CASH_PRIZE_COLLECT_4
+                + this.result.get(5) * CASH_PRIZE_COLLECT_5
+                + this.result.get(6) * CASH_PRIZE_COLLECT_6;
+    }
+
+    private double calculateTotalInvestment() {
+        int ticketCount = this.result.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+        return ticketCount * LottoMachine.ticketPrice();
+    }
+
     public List<Integer> result() {
         return this.result;
     }
+
+    public double rateOfReturn() {
+        return this.rateOfReturn;
+    }
+
 }
