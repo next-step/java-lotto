@@ -11,7 +11,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -57,8 +56,8 @@ class LottoTest {
         assertThat(lottoResult).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> LottoMatchParameterProvider() {
-        return Stream.of(
+    private static List<Arguments> LottoMatchParameterProvider() {
+        return List.of(
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 3, 5, 7, 9, 11), LottoResult.THREE),
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 9, 11), LottoResult.FOUR),
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 11), LottoResult.FIVE),
