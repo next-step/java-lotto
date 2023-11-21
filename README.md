@@ -7,3 +7,19 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 기능 요구사항
+* 로또 게임 기능을 구현해야 한다. 구현할 기능 목록은 아래와 같다.
+    * 로또 구입 금액을 입력받는다.(InputView)
+    * 입력 금액에 해당하는 로또 장수를 산정한다.(LottoTickets)
+      * 로또 번호를 입력받는다.(InputView)
+    * 해당 장수 만큼 로또를 발급 한다.(LottoIssuer)
+      * 로또 번호.(Lotto)
+      * 로또 번호를 출력한다.(OutputView)
+    * 로또 번호 당첨을 확인한다.(LottoResult)
+      * 당첨 번호를 입력받는다.(InputView)
+    * 당첨에 갯수에 금액을 관리한다.(LottoReward) 
+    * 당첨 통계를 출력한다.(OutputView)
+    * 로또 당첨 금액은 고정되어 있는 것으로 가정한다.
+    * 수익률을 계산해 출력해야 한다.
+    * 수익률은 소수점 두 자리까지 출력해야 한다.
