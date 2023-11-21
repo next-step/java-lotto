@@ -20,7 +20,9 @@ class MoneyTest {
     @Test
     @DisplayName("음수 money 생성 예외 발생")
     void create_Negative_Exception() {
-        assertThatThrownBy(()->{Money.from(-1);})
+        assertThatThrownBy(() -> {
+            Money.from(-1);
+        })
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.MONEY_NEGATIVE.getMessage());
     }

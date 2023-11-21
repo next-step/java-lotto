@@ -15,9 +15,11 @@ class WinningNumberTest {
         WinningNumber winningNumber1 = WinningNumber.from("1, 2, 3, 4, 5, 6");
         WinningNumber winningNumber2 = WinningNumber.defaultCreate();
 
-        assertThat(winningNumber1.getLottoNumbers()).containsAll(Stream.of(1,2,3,4,5,6).map(LottoNumber::from).collect(
-                Collectors.toList()));
-        assertThat(winningNumber2.getLottoNumbers()).containsAll(Stream.of(1,1,1,1,1,1).map(LottoNumber::from).collect(
-                Collectors.toList()));
+        assertThat(winningNumber1.getLottoNumbers()).containsAll(
+                Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::from).collect(
+                        Collectors.toList()));
+        assertThat(winningNumber2.getLottoNumbers()).containsAll(
+                Stream.of(1, 1, 1, 1, 1, 1).map(LottoNumber::from).collect(
+                        Collectors.toList()));
     }
 }

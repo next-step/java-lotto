@@ -20,9 +20,9 @@ public class WinningNumber {
                         .collect(Collectors.toList()));
     }
 
-    public static WinningNumber defaultCreate(){
+    public static WinningNumber defaultCreate() {
         return new WinningNumber(
-                Stream.of(1,1,1,1,1,1)
+                Stream.of(1, 1, 1, 1, 1, 1)
                         .map(LottoNumber::from)
                         .collect(Collectors.toList()));
     }
