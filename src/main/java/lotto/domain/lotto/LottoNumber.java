@@ -18,25 +18,18 @@ public class LottoNumber {
     private final int lottoNumber;
 
     private LottoNumber(int number) {
-        validateRange(number);
         this.lottoNumber = number;
     }
 
     public static LottoNumber of(Integer number) {
-        validateRange(number);
-        return CACHED_LOTTO_NUMBERS.get(number);
+        return Objects.requireNonNull(CACHED_LOTTO_NUMBERS.get(number), NUMBER_ERROR_MESSAGE);
     }
 
-    private static void validateRange(int number) {
-        if (number < NUMBER_MIN || number > NUMBER_MAX) {
-            throw new IllegalArgumentException(NUMBER_ERROR_MESSAGE);
-        }
-    }
 
     private static Map<Integer, LottoNumber> initializeCachedLottoNumbers() {
         return newLottoNumbers(Collectors.toMap(
                 number -> number,
-                number -> new LottoNumber(number)
+                LottoNumber::new
         ));
     }
 

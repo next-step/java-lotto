@@ -32,7 +32,7 @@ class LottosTest {
 
         assertThat(Lottos.of(list).size()).isEqualTo(3);
         assertThatThrownBy(() -> Lottos.of(List.of(Lotto.of(1, 2, 3, 4, 5)))).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> Lottos.of(List.of(Lotto.of(1, 2, 3, 4, 5, 46)))).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Lottos.of(List.of(Lotto.of(1, 2, 3, 4, 5, 46)))).isInstanceOf(NullPointerException.class);
         assertThatThrownBy(() -> Lottos.of(List.of(Lotto.of(1, 2, 3, 4, 5, 6, 7)))).isInstanceOf(IllegalArgumentException.class);
     }
 

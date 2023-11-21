@@ -9,7 +9,7 @@ class LottoNumberTest {
     @Test
     @DisplayName("로또번호를 생성한다. 로또 번호가 1~45 의 숫자가 아닌 경우 예외가 발생한다")
     public void create() {
-        Assertions.assertThatThrownBy(() -> LottoNumber.of(46)).isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(() -> LottoNumber.of(46)).isInstanceOf(NullPointerException.class);
     }
 
     @Test
