@@ -7,19 +7,27 @@ import java.util.List;
 
 public class LottoMake {
 
-    public List<Lotto> makeAutoLottos(int autoLottoCount) {
+    private final int autoLottoCount;
+    private final List<String> manualLottoNumber;
+
+    public LottoMake(int autoLottoCount, List<String> manualLottoNumber) {
+        this.autoLottoCount = autoLottoCount;
+        this.manualLottoNumber = manualLottoNumber;
+    }
+
+    public List<Lotto> makeAutoLottos() {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i=0; i < autoLottoCount; i++) {
+        for (int i=0; i < this.autoLottoCount; i++) {
             lottos.add(new Lotto(new LottoNumbers(new LottoNumber())));
         }
 
         return lottos;
     }
 
-    public List<Lotto> makeManualLottos(List<String> manualLottoNumber) {
+    public List<Lotto> makeManualLottos() {
         List<Lotto> lottos = new ArrayList<>();
 
-        for (String numbers : manualLottoNumber) {
+        for (String numbers : this.manualLottoNumber) {
             lottos.add(new Lotto(new LottoNumbers(NumberSplitUtils.splitWinNumberString(numbers))));
         }
 

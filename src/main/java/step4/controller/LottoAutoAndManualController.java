@@ -12,23 +12,38 @@ import java.util.Map;
 
 public class LottoAutoAndManualController {
 
-    public static void main(String[] args) {
-        InputView inputView = new InputView();
-        int payPrice = inputView.payPriceInput();
-        OutputView outputView = new OutputView();
+    private static final InputView inputView = new InputView();
+    private static final OutputView outputView = new OutputView();
 
+    public static void main(String[] args) {
+        int payPrice = inputView.payPriceInput();
+
+        LottoMake lottoMake = getLottoCountAndReadyToMake(payPrice);
+        List<Lotto> allLottos = makeAllLottos(lottoMake);
+
+        winnerResult(allLottos, payPrice);
+    }
+
+    private static LottoMake getLottoCountAndReadyToMake(int payPrice) {
         int manualLottoCount = inputView.manualLottoCountInput();
         List<String> manualLottoNumber = inputView.manualLottoNumberInput(manualLottoCount);
 
         outputView.viewLottoCount(payPrice, manualLottoCount);
 
+        return new LottoMake(CalculateUtils.autoLottoCount(CalculateUtils.lottoCount(payPrice), manualLottoCount), manualLottoNumber);
+    }
+
+    private static List<Lotto> makeAllLottos(LottoMake lottoMake) {
         List<Lotto> allLottos = new ArrayList<>();
-        List<Lotto> lottoAuto = new LottoMake().makeAutoLottos(CalculateUtils.autoLottoCount(CalculateUtils.lottoCount(payPrice), manualLottoCount));
+        List<Lotto> lottoAuto = lottoMake.makeAutoLottos();
         allLottos.addAll(lottoAuto);
-        allLottos.addAll(new LottoMake().makeManualLottos(manualLottoNumber));
+        allLottos.addAll(lottoMake.makeManualLottos());
 
         outputView.viewLotto(lottoAuto);
+        return allLottos;
+    }
 
+    private static void winnerResult(List<Lotto> allLottos, int payPrice) {
         String lastWinNumbers = inputView.putLastWinNumbers();
         int bonusNumber = inputView.bonusNumberInput();
 
