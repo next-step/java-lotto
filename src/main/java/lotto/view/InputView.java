@@ -10,6 +10,8 @@ public class InputView {
     private final static String LOTTO_INIT_MESSAGE = "구입금액을 입력해 주세요.\n";
     private final static String LAST_WEEK_LOTTO_INIT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.\n";
 
+    private final static String BONUS_BALL_INIT_MESSAGE = "보너스 볼을 입력해 주세요.\n";
+
     private final Scanner scanner;
     private final PrintStream sout;
 
@@ -32,5 +34,10 @@ public class InputView {
             integerList.add(Integer.parseInt(s));
         }
         return integerList;
+    }
+
+    public int bonusBallInit() {
+        sout.print(BONUS_BALL_INIT_MESSAGE);
+        return scanner.nextInt();
     }
 }

@@ -40,6 +40,10 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
     @Override
     public String toString() {
         return "Lotto{" +

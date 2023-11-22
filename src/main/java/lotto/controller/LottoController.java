@@ -36,7 +36,8 @@ public class LottoController {
         resultView.out(lottoWallet);
 
         List<LottoNumber> lastWeakLottoNumbers = createLastWeakLottoNumbers(inputView.lastWeakLottoInit());
-        WinningLotto winningLotto = WinningLotto.from(new Lotto(lastWeakLottoNumbers));
+        int bonusBall = inputView.bonusBallInit();
+        WinningLotto winningLotto = WinningLotto.of(new Lotto(lastWeakLottoNumbers), new LottoNumber(bonusBall));
 
         StatisticsReport report = StatisticsReport.of(lottoWallet).report(winningLotto);
         resultView.out(report);
