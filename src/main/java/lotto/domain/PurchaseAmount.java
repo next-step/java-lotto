@@ -26,4 +26,8 @@ public class PurchaseAmount {
     public int getLottoCount() {
         return purchaseAmount / LOTTO_PRICE;
     }
+
+    public int devideWith(int prizeAmount) {
+        return prizeAmount / purchaseAmount;
+    }
 }

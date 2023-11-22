@@ -27,4 +27,8 @@ public enum Prize {
     public int getPrizeAmount() {
         return prizeAmount;
     }
+
+    public int calculatePrizeByCount(int count) {
+        return prizeAmount * count;
+    }
 }

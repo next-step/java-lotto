@@ -6,6 +6,7 @@ import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
 import lotto.domain.Prize;
 import lotto.domain.PrizeSummary;
+import lotto.domain.Profit;
 import lotto.view.formatter.OutputFomatter;
 import lotto.view.printer.Printer;
 
@@ -46,5 +47,10 @@ public class OutputView {
 
             printer.printLine("%d개 일치 (%d원)- %d개", matchingCount, prizeAmount, prizeCount);
         }
+    }
+
+    public void printProfit(Profit rawProfit) {
+        double profit = formatter.toProfit(rawProfit);
+        printer.printLine("총 수익률은 %.2f입니다.", profit);
     }
 }

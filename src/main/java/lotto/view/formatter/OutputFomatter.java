@@ -7,6 +7,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoNumber;
 import lotto.domain.Prize;
+import lotto.domain.Profit;
 
 public class OutputFomatter {
 
@@ -32,5 +33,9 @@ public class OutputFomatter {
 
     public int toPrizeCount(Entry<Prize, Integer> rawPrizeDetail) {
         return rawPrizeDetail.getValue();
+    }
+
+    public double toProfit(Profit profit) {
+        return profit.getProfit();
     }
 }

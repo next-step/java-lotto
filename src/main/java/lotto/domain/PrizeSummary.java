@@ -12,4 +12,10 @@ public class PrizeSummary {
     public Map<Prize, Integer> getPrizeSummary() {
         return prizeSummary;
     }
+
+    public int getPrizeAmount() {
+        return prizeSummary.entrySet().stream()
+                .mapToInt(prizeDetail -> prizeDetail.getKey().calculatePrizeByCount(prizeDetail.getValue()))
+                .sum();
+    }
 }
