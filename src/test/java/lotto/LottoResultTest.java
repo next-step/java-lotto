@@ -37,8 +37,11 @@ public class LottoResultTest {
 		lottoResult.matchesWinningNumbers(lottoWinningNumbers);
 
 		LottoMatchResult lottoMatchResult = lottoResult.matchesWinningNumbers(lottoWinningNumbers);
-		assertThat(LottoMatch.matchesCount(3, false, lottoMatchResult)).isEqualTo(1);
-		assertThat(LottoMatch.matchesCount(4, false, lottoMatchResult)).isEqualTo(1);
+
+		LottoMatch.Match match_three = LottoMatch.Match.from(3, false);
+		LottoMatch.Match match_four = LottoMatch.Match.from(3, false);
+		assertThat(LottoMatch.matchesCount(match_three, lottoMatchResult)).isEqualTo(1);
+		assertThat(LottoMatch.matchesCount(match_four, lottoMatchResult)).isEqualTo(1);
 		assertEquals(lottoResult.rateOfReturn(lottoWinningNumbers), 27527.5, 0.001);
 	}
 }

@@ -34,7 +34,9 @@ public class OutputView {
             if (lottoMatch.matchCount() < 3) {
                 continue;
             }
-            int count = LottoMatch.matchesCount(lottoMatch.matchCount(), lottoMatch.isBonus(), lottoMatchResult);
+
+            LottoMatch.Match match = LottoMatch.Match.from(lottoMatch.matchCount(), lottoMatch.isBonus());
+            int count = LottoMatch.matchesCount(match, lottoMatchResult);
             System.out.printf("%d개 일치 (%d원) - %d개\n",
                 lottoMatch.matchCount(), lottoMatch.amount(), count);
         }
