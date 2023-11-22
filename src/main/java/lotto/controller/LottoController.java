@@ -36,7 +36,7 @@ public class LottoController {
     }
 
     private Lottos generateLottos(LottoCount lottoCount) {
-        LottoSeller lottoSeller = new LottoSeller(lottoCount);
+        LottoSeller lottoSeller = LottoSeller.from(lottoCount);
         return lottoSeller.generateLottos();
     }
 }

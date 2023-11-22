@@ -11,9 +11,13 @@ public class LottoSeller implements Seller {
     private final LottoCount lottoCount;
     private final Random random;
 
-    public LottoSeller(LottoCount lottoCount) {
+    public LottoSeller(LottoCount lottoCount, Random random) {
         this.lottoCount = lottoCount;
-        this.random = new Random();
+        this.random = random;
+    }
+
+    public static LottoSeller from(LottoCount lottoCount) {
+        return new LottoSeller(lottoCount, new Random());
     }
 
     @Override
