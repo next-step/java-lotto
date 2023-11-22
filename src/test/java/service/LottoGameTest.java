@@ -38,12 +38,10 @@ public class LottoGameTest {
         userLottoRepository.saveUserLottoTickets(lotto);
 
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        List<Lotto> userLottoTickets = userLottoRepository.getUserLottoTickets();
-
 
         Map<LottoPrize, Integer> lottoPrizeIntegerMap = lottoGameService.matchUserLotto(winningLotto).getAllResult();
 
-        assertThat(lottoPrizeIntegerMap.get(6).intValue()).isEqualTo(1);
+        assertThat(lottoPrizeIntegerMap.get(LottoPrize.FIRST)).isEqualTo(1);
     }
     @Test
     @DisplayName("당첨 번호가 1~45 사이 값이 아닌 경우 exception throw")

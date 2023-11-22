@@ -2,11 +2,12 @@ package repository;
 
 import domain.LottoPrize;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LottoGameResultRepository {
-    private Map<LottoPrize, Integer> matchResult = new HashMap<>();
+    private EnumMap<LottoPrize, Integer> matchResult = new EnumMap<>(LottoPrize.class);
 
     public void saveResult(LottoPrize prize) {
         matchResult.put(prize, matchResult.getOrDefault(prize, 0) + 1);
