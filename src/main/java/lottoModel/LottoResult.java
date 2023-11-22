@@ -5,78 +5,91 @@ import java.util.List;
 
 public class LottoResult {
 
-    private final int tree;
-    private final int four;
-    private final int five;
-    private final int six;
+    private final int fifthCount;
+    private final int fourthCount;
+    private final int thirdCount;
+    private final int secondCount;
+    private final int firstCount;
     private final double rateOfReturn;
-    public static final int TREE_MATCH = 3;
-    public static final int FOUR_MATCH = 4;
-    public static final int FIVE_MATCH = 5;
-    public static final int SIX_MATCH = 6;
     public static final double RATE_OF_RETURN = 0.0;
 
-    public LottoResult(int tree, int four, int five, int six, double rateOfReturn) {
-        this.tree = tree;
-        this.four = four;
-        this.five = five;
-        this.six = six;
+    public LottoResult(int fifthCount, int fourthCount, int thirdCount, int secondCount, int firstCount, double rateOfReturn) {
+        this.fifthCount = fifthCount;
+        this.fourthCount = fourthCount;
+        this.thirdCount = thirdCount;
+        this.secondCount = secondCount;
+        this.firstCount = firstCount;
         this.rateOfReturn = rateOfReturn;
     }
 
-    public int getTree() {
-        return tree;
+    public int getFifthCount() {
+        return fifthCount;
     }
 
-    public int getFour() {
-        return four;
+    public int getFourthCount() {
+        return fourthCount;
     }
 
-    public int getFive() {
-        return five;
+    public int getThirdCount() {
+        return thirdCount;
     }
 
-    public int getSix() {
-        return six;
+    public int getSecondCount() {
+        return secondCount;
+    }
+
+    public int getFirstCount() {
+        return firstCount;
     }
 
     public double getRateOfReturn() {
         return rateOfReturn;
     }
 
-    public static LottoResult result(int money, List<Lotto> lottos, List<Integer> lastLotto) {
+    public static LottoResult result(int money, List<Lotto> lottos, List<Integer> lastLotto, int lottoBonusNumber) {
         List<Integer> lottoMatchResults = new ArrayList<>();
-
+        int bonusMatchCount = 0;
         for (Lotto lotto : lottos) {
-            lottoMatchResults.add(lotto.matchCount(lastLotto));
+            int matchNumber = lotto.matchCount(lastLotto);
+            lottoMatchResults.add(matchNumber);
+            if (getBonusMatchCount(lottoBonusNumber, lotto, matchNumber)) {
+                bonusMatchCount++;
+            }
         }
-
-        int tree = getCount(lottoMatchResults, TREE_MATCH);
-        int four = getCount(lottoMatchResults, FOUR_MATCH);
-        int five = getCount(lottoMatchResults, FIVE_MATCH);
-        int six = getCount(lottoMatchResults, SIX_MATCH);
-
-        double rateOfReturn = rate(tree, four, five, six, money);
-        LottoResult lottoResult = new LottoResult(tree, four, five, six, rateOfReturn);
-
+        int fifthCount = getCount(lottoMatchResults, Rank.FIFTH.getCountOfMatch());
+        int fourthCount = getCount(lottoMatchResults, Rank.FOURTH.getCountOfMatch());
+        int thirdCount = getCount(lottoMatchResults, Rank.THIRD.getCountOfMatch()) - bonusMatchCount;
+        int secondCount = bonusMatchCount;
+        int firstCount = getCount(lottoMatchResults, Rank.FIRST.getCountOfMatch());
+        double rateOfReturn = rate(fifthCount, fourthCount, thirdCount, secondCount, firstCount, money);
+        LottoResult lottoResult = new LottoResult(fifthCount, fourthCount, thirdCount, secondCount, firstCount, rateOfReturn);
         return lottoResult;
+    }
+
+    private static boolean getBonusMatchCount(int lottoBonusNumber, Lotto lotto, int matchNumber) {
+        if (matchNumber == Rank.SECOND.getCountOfMatch() && lotto.isContainBonus(lottoBonusNumber)) {
+            return true;
+        }
+        return false;
     }
 
     private static int getCount(List<Integer> lottoMatchResults, int matchNum) {
         return (int) lottoMatchResults.stream().filter(number -> number == matchNum).count();
     }
 
-    private static double rate(int tree, int four, int five, int six, int money) {
+    private static double rate(int fifthCount, int fourthCount, int thirdCount, int secondCount, int firstCount, int money) {
         LottoOperator calc = new LottoOperator();
         double rate = RATE_OF_RETURN;
 
-        rate += calc.calculate(tree, 5000, LottoOperator.Operator.MULTIPLY);
-        rate += calc.calculate(four, 50000, LottoOperator.Operator.MULTIPLY);
-        rate += calc.calculate(five, 1500000, LottoOperator.Operator.MULTIPLY);
-        rate += calc.calculate(six, 2000000000, LottoOperator.Operator.MULTIPLY);
+        rate += calc.calculate(fifthCount, Rank.FIFTH.getWinningMoney(), LottoOperator.Operator.MULTIPLY);
+        rate += calc.calculate(fourthCount, Rank.FOURTH.getWinningMoney(), LottoOperator.Operator.MULTIPLY);
+        rate += calc.calculate(thirdCount, Rank.THIRD.getWinningMoney(), LottoOperator.Operator.MULTIPLY);
+        rate += calc.calculate(secondCount, Rank.SECOND.getWinningMoney(), LottoOperator.Operator.MULTIPLY);
+        rate += calc.calculate(firstCount, Rank.FIRST.getWinningMoney(), LottoOperator.Operator.MULTIPLY);
         rate = calc.calculate(rate, money, LottoOperator.Operator.MINUS);
         rate = calc.calculate(rate, money, LottoOperator.Operator.DIVIDE);
 
         return rate;
     }
+
 }
