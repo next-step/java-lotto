@@ -25,9 +25,7 @@ public class InputView {
                 String manualNumberInOneLine;
                 for (int i = 0; i < countOfManualTickets * 2; i++) {
                         manualNumberInOneLine = scanner.nextLine();
-                        if (!manualNumberInOneLine.isBlank()) {
-                                manualTickets.add(manualNumberInOneLine);
-                        }
+                        addManualNumberLineIntoTheManualTickets(manualNumberInOneLine, manualTickets);
                 }
                 return manualTickets;
         }
@@ -40,5 +38,12 @@ public class InputView {
         public static int scanBonusNumberText() {
                 System.out.println("보너스 볼을 입력해 주세요.");
                 return Integer.parseInt(scanner.nextLine());
+        }
+
+        private static void addManualNumberLineIntoTheManualTickets(String manualNumberInOneLine,
+            List<String> manualTickets) {
+                if (!manualNumberInOneLine.isBlank()) {
+                        manualTickets.add(manualNumberInOneLine);
+                }
         }
 }
