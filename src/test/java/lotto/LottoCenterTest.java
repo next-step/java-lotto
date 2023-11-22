@@ -13,9 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoCenterTest {
 
     @Test
-    void 로또_구매() {
+    void 로또_수동_구매() {
         Cash cash = new Cash(14000);
-        List<Lotto> lottos = new LottoCenter().buyLotto(cash);
+        List<Lotto> manualLottos = new ArrayList<>();
+        List<Lotto> lottos = new LottoCenter().manualBuyLotto(cash, manualLottos);
 
         assertThat(lottos.size()).isEqualTo(14);
     }
@@ -23,7 +24,8 @@ class LottoCenterTest {
     @Test
     void 로또_생성() {
         Cash cash = new Cash(1000);
-        List<Lotto> issuedTicket = new LottoCenter().buyLotto(cash);
+        List<Lotto> manualLottos = new ArrayList<>();
+        List<Lotto> issuedTicket = new LottoCenter().manualBuyLotto(cash, manualLottos);
         Lotto lotto = issuedTicket.get(0);
 
         assertThat(lotto.size()).isEqualTo(6);
@@ -88,7 +90,8 @@ class LottoCenterTest {
         LottoCenter lottoCenter = new LottoCenter(winningLotto);
 
         Cash cash = new Cash(1000);
-        List<Lotto> lottos = lottoCenter.buyLotto(cash);
+        List<Lotto> manualLottos = new ArrayList<>();
+        List<Lotto> lottos = lottoCenter.manualBuyLotto(cash, manualLottos);
 
         lottoCenter.matchWinningNumbers(lottos);
         lottoCenter.checkWinningResult();

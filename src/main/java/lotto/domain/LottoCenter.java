@@ -18,9 +18,16 @@ public class LottoCenter {
         this.winningLotto = winningLotto;
     }
 
-    public List<Lotto> buyLotto(Cash cash) {
+    public List<Lotto> manualBuyLotto(Cash cash, List<Lotto> manualLottos) {
         LottoCenter.cash = cash;
-        return generateTicket(cash);
+        if (manualLottos == null || manualLottos.isEmpty()) {
+            return generateTicket(cash);
+        }
+        Cash autoCash = cash.autoBuy(manualLottos);
+        List<Lotto> lottos = generateTicket(autoCash);
+        manualLottos.addAll(lottos);
+
+        return manualLottos;
     }
 
     private List<Lotto> generateTicket(Cash cash) {
@@ -56,6 +63,6 @@ public class LottoCenter {
             int count = result.countRank(value);
             sum = sum + count * value.getWinningMoney();
         }
-        return (float) sum / cash.getCash();
+        return cash.winningRate(sum);
     }
 }

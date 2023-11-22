@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -12,12 +13,33 @@ public class InputView {
     public List<Lotto> buyTicket() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
-
         Cash cash = new Cash(scanner.nextInt());
-        List<Lotto> lottos = new LottoCenter().buyLotto(cash);
 
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int manualCount = scanner.nextInt();
+
+        LottoCenter lottoCenter = new LottoCenter();
+        List<Lotto> manualNumbers = manualLottoInput(manualCount);
+        List<Lotto> lottos = lottoCenter.manualBuyLotto(cash, manualNumbers);
+
+        System.out.println("수동으로 " + manualCount + "장, 자동으로 " + (lottos.size() - manualCount) + "개를 구매했습니다.");
+
         return lottos;
+    }
+
+    private static List<Lotto> manualLottoInput(int manualCount) {
+        List<Lotto> manualNumbers = new ArrayList<>();
+        Scanner numbers = new Scanner(System.in);
+
+        if (manualCount != 0) {
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        }
+        for (int i = 0; i < manualCount; i++) {
+            List<LottoNo> lottoNos = getLottoNos(numbers);
+            Lotto lotto = new Lotto(lottoNos);
+            manualNumbers.add(lotto);
+        }
+        return manualNumbers;
     }
 
     public WinningLotto winningLottoInput() {

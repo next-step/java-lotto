@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class Cash {
 
-    private static final int PRICE = 1000;
+    static final int PRICE = 1000;
 
     private final int cash;
 
@@ -10,11 +12,15 @@ public class Cash {
         this.cash = cash;
     }
 
-    int getCash() {
-        return cash;
-    }
-
     public int count() {
         return cash / PRICE;
+    }
+
+    public float winningRate(int sum) {
+        return (float) sum / cash;
+    }
+
+    public Cash autoBuy(List<Lotto> manualLottos) {
+        return new Cash(cash - manualLottos.size() * PRICE);
     }
 }
