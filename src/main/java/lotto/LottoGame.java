@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,6 +11,7 @@ public class LottoGame {
     public static final int LOTTO_PRICE = 1000;
     private List<Lotto> lottos;
     private Lotto winningLotto;
+    private LottoNumber bonusBall;
     private List<Integer> lottoNumbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
     private LottoStatics lottoStatics = new LottoStatics();
     
@@ -35,7 +35,7 @@ public class LottoGame {
         return price / LOTTO_PRICE;
     }
 
-    private  boolean isValidBuyLottoPrice(int price) {
+    private boolean isValidBuyLottoPrice(int price) {
         return price % LOTTO_PRICE != 0;
     }
 
@@ -47,6 +47,10 @@ public class LottoGame {
         this.winningLotto = new Lotto(numbers);
     }
 
+    public void registerBonusBall(Integer number) {
+        this.bonusBall = new LottoNumber(number);
+    }
+
     public Lotto winningLotto() {
         return winningLotto;
     }
@@ -56,11 +60,15 @@ public class LottoGame {
     }
 
     public void classifyRankLotto() {
-        lottoStatics.classifyRankLotto(lottos, winningLotto);
+        lottoStatics.classifyRankLotto(lottos, winningLotto, bonusBall);
     }
 
     public WinningLottos winningLottos() {
         return lottoStatics.winningLottos();
+    }
+
+    public LottoNumber bonusBall() {
+        return bonusBall;
     }
 
     public double investingPercent(int price) {
