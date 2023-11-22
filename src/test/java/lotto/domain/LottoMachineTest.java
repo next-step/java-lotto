@@ -1,22 +1,27 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class LottoMachineTest {
 
         @Test
-        void 구입금액이_1000원_미만인_경우_에러() {
-                assertThatThrownBy(() -> new PurchaseAmount(500)).isInstanceOf(
-                    IllegalArgumentException.class).hasMessage("1000원 이상 입력하셔야합니다. (로또 장당 1000원)");
+        void 구입금액_14000원으로_자동만_구입할_경우_자동만_14장_티켓_반환() {
+                LottoMachine lottoMachine = new LottoMachine();
+                PurchaseAmount purchaseAmount = PurchaseAmount.createPurchaseAmountOfScanned(14_000);
+
+                assertThat(lottoMachine.buyOnlyAutoTickets(purchaseAmount).getCountOfTickets()).isEqualTo(14);
         }
 
         @Test
-        void 구입금액이_14000원일_경우_14장_티켓_반환() {
+        void 구입금액_14000원으로_자동만_구입할_경우_자동과_수동_도합_14장_티켓_반환() {
                 LottoMachine lottoMachine = new LottoMachine();
-                PurchaseAmount purchaseAmount = new PurchaseAmount(14_000);
-                assertThat(lottoMachine.buy(purchaseAmount)).hasSize(14);
+                List<LottoNumbers> manualLottoNumbers = List.of(new LottoNumbers(1, 2, 3, 4, 5, 6));
+                PurchaseAmount purchaseAmount = PurchaseAmount.createPurchaseAmountOfScanned(14_000);
+                
+                assertThat(lottoMachine.buyAutoAndManualTickets(purchaseAmount, manualLottoNumbers)
+                    .getCountOfTickets()).isEqualTo(14);
         }
 }

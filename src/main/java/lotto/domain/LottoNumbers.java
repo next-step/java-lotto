@@ -25,17 +25,17 @@ public class LottoNumbers {
                 return values;
         }
 
-        private void validateCountOfLottoNumbers(Set<LottoNumber> values) {
-                if (values.size() != COUNT_OF_LOTTO_NUMBERS_LIMIT) {
-                        throw new IllegalArgumentException("로또는 6개의 번호를 가져야 합니다.");
-                }
-        }
-
         public boolean hasWinningNumber(LottoNumber winningNumber) {
                 return values.contains(winningNumber);
         }
 
         public boolean hasBonusNumber(LottoNumber bonusNumber) {
                 return values.contains(bonusNumber);
+        }
+
+        private void validateCountOfLottoNumbers(Set<LottoNumber> values) {
+                if (values.size() != COUNT_OF_LOTTO_NUMBERS_LIMIT) {
+                        throw new IllegalArgumentException("로또는 6개의 중복되지 않는 번호를 가져야 합니다.");
+                }
         }
 }
