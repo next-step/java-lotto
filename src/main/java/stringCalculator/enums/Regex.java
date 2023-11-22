@@ -1,11 +1,11 @@
 package stringCalculator.enums;
 
-public enum regex {
+public enum Regex {
     REGEX_BLANK(" "), REGEX_OPERATOR("[+\\-*/]"), REGEX_NUM_OR_OPERATOR("^[0-9]+( [+\\-*/] [0-9]+)*$");
 
     private final String regex;
 
-    regex(String regex) {
+    Regex(String regex) {
         this.regex = regex;
     }
 

@@ -1,7 +1,7 @@
 package stringCalculator.domain;
 
-import static stringCalculator.enums.regex.REGEX_BLANK;
-import static stringCalculator.enums.regex.REGEX_NUM_OR_OPERATOR;
+import static stringCalculator.enums.Regex.REGEX_BLANK;
+import static stringCalculator.enums.Regex.REGEX_NUM_OR_OPERATOR;
 
 public class Parser {
 
