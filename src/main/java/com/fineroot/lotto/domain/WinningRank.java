@@ -1,4 +1,4 @@
-package com.fineroot.lotto.entity;
+package com.fineroot.lotto.domain;
 
 import java.util.Arrays;
 

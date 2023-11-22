@@ -1,6 +1,6 @@
 package com.fineroot.lotto.dto;
 
-import com.fineroot.lotto.entity.LottoNumber;
+import com.fineroot.lotto.domain.LottoNumber;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;

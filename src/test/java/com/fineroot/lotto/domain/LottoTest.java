@@ -1,9 +1,8 @@
-package com.fineroot.lotto.entity;
+package com.fineroot.lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fineroot.lotto.dto.WinningNumber;
-import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

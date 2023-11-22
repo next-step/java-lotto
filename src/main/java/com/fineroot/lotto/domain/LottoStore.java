@@ -1,4 +1,4 @@
-package com.fineroot.lotto.entity;
+package com.fineroot.lotto.domain;
 
 import com.fineroot.lotto.dto.LottoBundleStatus;
 import com.fineroot.lotto.dto.Money;

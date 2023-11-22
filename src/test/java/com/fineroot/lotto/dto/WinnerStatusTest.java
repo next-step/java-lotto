@@ -2,9 +2,9 @@ package com.fineroot.lotto.dto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.fineroot.lotto.entity.LottoBundle;
-import com.fineroot.lotto.entity.WinnerStatus;
-import com.fineroot.lotto.entity.WinningRank;
+import com.fineroot.lotto.domain.LottoBundle;
+import com.fineroot.lotto.domain.WinnerStatus;
+import com.fineroot.lotto.domain.WinningRank;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;

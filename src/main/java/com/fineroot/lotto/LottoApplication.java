@@ -1,6 +1,6 @@
 package com.fineroot.lotto;
 
-import com.fineroot.lotto.entity.LottoStore;
+import com.fineroot.lotto.domain.LottoStore;
 import com.fineroot.lotto.viewmodel.InputViewModel;
 import com.fineroot.lotto.viewmodel.ResultViewModel;
 

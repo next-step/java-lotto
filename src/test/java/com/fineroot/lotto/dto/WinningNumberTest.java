@@ -2,7 +2,7 @@ package com.fineroot.lotto.dto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.fineroot.lotto.entity.LottoNumber;
+import com.fineroot.lotto.domain.LottoNumber;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;

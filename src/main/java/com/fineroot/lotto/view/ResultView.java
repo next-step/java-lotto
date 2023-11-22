@@ -1,7 +1,7 @@
 package com.fineroot.lotto.view;
 
 import com.fineroot.lotto.dto.LottoBundleStatus;
-import com.fineroot.lotto.entity.WinningRank;
+import com.fineroot.lotto.domain.WinningRank;
 import com.fineroot.lotto.viewmodel.ResultViewModel;
 
 public class ResultView {

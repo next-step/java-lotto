@@ -2,8 +2,8 @@ package com.fineroot.lotto.viewmodel;
 
 import com.fineroot.lotto.dto.LottoBundleStatus;
 import com.fineroot.lotto.dto.Money;
-import com.fineroot.lotto.entity.WinnerStatus;
-import com.fineroot.lotto.entity.WinningRank;
+import com.fineroot.lotto.domain.WinnerStatus;
+import com.fineroot.lotto.domain.WinningRank;
 import com.fineroot.lotto.util.LottoUtils;
 import java.util.List;
 
