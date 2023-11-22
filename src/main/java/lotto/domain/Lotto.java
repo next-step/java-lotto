@@ -47,4 +47,15 @@ public class Lotto {
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
+
+    public Prize determinePrize(Lotto winningLotto) {
+        int matchingCount = (int) lottoNumbers.stream()
+                .filter(winningLotto::contain)
+                .count();
+        return PrizeSelector.selectByCount(matchingCount);
+    }
+
+    private boolean contain(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }

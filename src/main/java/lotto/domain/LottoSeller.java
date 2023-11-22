@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -33,6 +34,8 @@ public class LottoSeller implements Seller {
             isValidLotto = lottoNumbers.add(lottoNumber);
             presentLottoNumberCount++;
         }
-        return Lotto.from(new ArrayList<>(lottoNumbers));
+        List<Integer> lotto = new ArrayList<>(lottoNumbers);
+        Collections.sort(lotto);
+        return Lotto.from(lotto);
     }
 }

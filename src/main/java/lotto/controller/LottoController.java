@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoSeller;
 import lotto.domain.Lottos;
+import lotto.domain.PrizeSummary;
 import lotto.domain.PurchaseAmount;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -25,5 +26,7 @@ public class LottoController {
         Lottos lottos = lottoSeller.generateLottos();
         outputview.printLottos(lottos);
         Lotto winningLotto = inputView.inputWinningLotto();
+        PrizeSummary prizeSummary = lottos.getPrizeSummary(winningLotto);
+        outputview.printPrizeSummary(prizeSummary);
     }
 }

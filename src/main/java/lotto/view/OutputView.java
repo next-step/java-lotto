@@ -1,8 +1,11 @@
 package lotto.view;
 
+import java.util.Map.Entry;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
+import lotto.domain.Prize;
+import lotto.domain.PrizeSummary;
 import lotto.view.formatter.OutputFomatter;
 import lotto.view.printer.Printer;
 
@@ -27,5 +30,21 @@ public class OutputView {
     private void printLotto(Lotto rawLotto) {
         String lotto = formatter.toLotto(rawLotto);
         printer.printLine("[%s]", lotto);
+    }
+
+    public void printPrizeSummary(PrizeSummary prizeSummary) {
+        printer.printLine("당첨 통계");
+        printer.printLine("---------");
+        prizeSummary.getPrizeSummary().entrySet().forEach(prizeDetail -> printPrizeDetail(prizeDetail));
+    }
+
+    private void printPrizeDetail(Entry<Prize, Integer> rawPrizeDetail) {
+        if (rawPrizeDetail.getKey() != Prize.NOTHING) {
+            int matchingCount = formatter.toMatchingCount(rawPrizeDetail);
+            int prizeAmount = formatter.toPrizeAmount(rawPrizeDetail);
+            int prizeCount = formatter.toPrizeCount(rawPrizeDetail);
+
+            printer.printLine("%d개 일치 (%d원)- %d개", matchingCount, prizeAmount, prizeCount);
+        }
     }
 }
