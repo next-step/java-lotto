@@ -9,7 +9,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoNumberTest {
-    @DisplayName("랜덤값이 1이상 45이하이다.")
+    @DisplayName("로또 숫자 체크")
     @Test
     void randomNumber() {
         List<Integer> lottoNumber = new LottoNumber().pickLotto();

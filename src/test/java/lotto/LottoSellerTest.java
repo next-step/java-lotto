@@ -29,7 +29,7 @@ public class LottoSellerTest {
                 .isThrownBy(() -> new LottoSeller("+")).withMessage("For input string: \"+\"");
     }
 
-    @DisplayName("1000미만의 숫자가 들어왔다.")
+    @DisplayName("로또 최소금액 미달시 예외 발생")
     @Test
     void under1000Test() {
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
