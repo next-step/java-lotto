@@ -1,13 +1,15 @@
 package lottosecond.domain.lotto;
 
-import lottosecond.domain.*;
+import lottosecond.domain.Money;
+import lottosecond.domain.Winner;
+import lottosecond.domain.WinnerBoard;
+import lottosecond.domain.WinningCondition;
 import lottosecond.domain.lottomaker.LottoMaker;
 import lottosecond.domain.lottomaker.TestLottoNumberGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;

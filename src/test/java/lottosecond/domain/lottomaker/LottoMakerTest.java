@@ -9,8 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 class LottoMakerTest {
 
     @DisplayName("LottoCount에 맞는 개수의 로또를 생성하여 Lottos 객체를 만들어줍니다.")

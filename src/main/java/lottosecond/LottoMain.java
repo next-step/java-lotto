@@ -14,7 +14,8 @@ public class LottoMain {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
-        TotalLottoCount lottoCount = new TotalLottoCount(new Money(inputView.inputLottoBuyMoney()), inputView.manualLottoCount());
+        Money money = new Money(inputView.inputLottoBuyMoney());
+        TotalLottoCount lottoCount = new TotalLottoCount(money, inputView.manualLottoCount());
 
         LottoMaker manualLottoMaker = new LottoMaker(new ManualLottoNumberGenerator());
         LottoMaker autoLottoMaker = new LottoMaker(new AutoLottoNumberGenerator());
@@ -37,7 +38,7 @@ public class LottoMain {
         outputView.printWinnerStatistics(winnerBoard);
 
         EarningRateCalculator earningRateCalculator = new EarningRateCalculator();
-        double earningRate = earningRateCalculator.calculateEarningRate(winnerBoard, lottos);
+        double earningRate = earningRateCalculator.calculateEarningRate(winnerBoard, money);
         outputView.printEarningRate(earningRate);
     }
 }

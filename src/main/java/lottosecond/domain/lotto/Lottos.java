@@ -1,6 +1,5 @@
 package lottosecond.domain.lotto;
 
-import lottosecond.domain.Money;
 import lottosecond.domain.Winner;
 import lottosecond.domain.WinnerBoard;
 import lottosecond.domain.WinningCondition;
@@ -38,10 +37,6 @@ public class Lottos {
                 .collect(Collectors.toList());
 
         return new WinnerBoard(winners);
-    }
-
-    public int totalLottoBuyMoney() {
-        return lottoList.size() * Money.EACH_LOTTO_PRICE;
     }
 
     public List<Lotto> getLottoList() {

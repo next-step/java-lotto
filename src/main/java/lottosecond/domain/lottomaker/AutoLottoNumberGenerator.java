@@ -2,7 +2,6 @@ package lottosecond.domain.lottomaker;
 
 import lottosecond.domain.lotto.Lotto;
 import lottosecond.domain.lotto.LottoNumber;
-import lottosecond.domain.lottomaker.LottoNumberGenerator;
 
 import java.util.Collections;
 import java.util.List;

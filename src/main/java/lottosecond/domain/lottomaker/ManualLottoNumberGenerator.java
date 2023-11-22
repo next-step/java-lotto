@@ -1,7 +1,6 @@
 package lottosecond.domain.lottomaker;
 
 import lottosecond.domain.lotto.LottoNumber;
-import lottosecond.domain.lottomaker.LottoNumberGenerator;
 
 import java.util.Arrays;
 import java.util.List;

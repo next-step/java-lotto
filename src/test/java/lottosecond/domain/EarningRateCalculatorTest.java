@@ -26,7 +26,7 @@ class EarningRateCalculatorTest {
         WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningCondition);
         EarningRateCalculator earningRateCalculator = new EarningRateCalculator();
         // when
-        double earningRate = earningRateCalculator.calculateEarningRate(winnerBoard, lottos);
+        double earningRate = earningRateCalculator.calculateEarningRate(winnerBoard, new Money(3000));
         // then
         assertThat(earningRate).isEqualTo(3.33);
     }
@@ -45,7 +45,7 @@ class EarningRateCalculatorTest {
         WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningCondition);
         EarningRateCalculator earningRateCalculator = new EarningRateCalculator();
         // when
-        double earningRate = earningRateCalculator.calculateEarningRate(winnerBoard, lottos);
+        double earningRate = earningRateCalculator.calculateEarningRate(winnerBoard, new Money(3000));
         // then
         assertThat(earningRate).isEqualTo(0);
     }

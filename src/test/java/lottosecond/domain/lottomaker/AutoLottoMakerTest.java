@@ -1,7 +1,6 @@
 package lottosecond.domain.lottomaker;
 
 import lottosecond.domain.lotto.LottoNumber;
-import lottosecond.domain.lottomaker.AutoLottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

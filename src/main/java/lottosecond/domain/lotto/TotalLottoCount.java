@@ -13,10 +13,6 @@ public class TotalLottoCount {
         this.autoLottoCount = LottoCount.from(totalLottoCount - manualLottoCount, totalLottoCount);
     }
 
-    public int totalLottoCount() {
-        return manualLottoCount.getLottoCount() + autoLottoCount.getLottoCount();
-    }
-
     public int manualLottoCount() {
         return manualLottoCount.getLottoCount();
     }

@@ -2,7 +2,7 @@ package lottosecond.domain;
 
 public class Money {
 
-    public static final int EACH_LOTTO_PRICE = 1000;
+    private static final int EACH_LOTTO_PRICE = 1000;
 
     private final int money;
 
@@ -20,5 +20,9 @@ public class Money {
 
     private boolean isValidBuyPrice(int lottoBuyMoney) {
         return lottoBuyMoney % EACH_LOTTO_PRICE == 0;
+    }
+
+    public int getMoney() {
+        return money;
     }
 }

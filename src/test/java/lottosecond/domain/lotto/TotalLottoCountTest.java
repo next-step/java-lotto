@@ -35,15 +35,4 @@ class TotalLottoCountTest {
         // then
         assertThat(result).isEqualTo(3);
     }
-
-    @DisplayName("전체 로또 개수를 반환합니다.")
-    @Test
-    void totalLottoCount() {
-        // given
-        // when
-        int result = totalLottoCount.totalLottoCount();
-        // then
-        assertThat(result).isEqualTo(13);
-    }
-
 }
