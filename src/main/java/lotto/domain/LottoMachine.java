@@ -37,14 +37,14 @@ public class LottoMachine {
                 return generatedTicket;
         }
 
+        private List<Ticket> generateManualTickets(List<LottoNumbers> manualLottoNumbers) {
+                return manualLottoNumbers.stream().map(Ticket::new).collect(Collectors.toList());
+        }
+
         private List<LottoNumber> generateAutoLottoNumbers() {
                 List<LottoNumber> lottoNumbers = LottoNumberCandidatesFactory.getInstance();
                 Collections.shuffle(lottoNumbers);
                 lottoNumbers = lottoNumbers.subList(0, 6);
                 return new ArrayList<>(lottoNumbers);
-        }
-
-        private List<Ticket> generateManualTickets(List<LottoNumbers> manualLottoNumbers) {
-                return manualLottoNumbers.stream().map(Ticket::new).collect(Collectors.toList());
         }
 }

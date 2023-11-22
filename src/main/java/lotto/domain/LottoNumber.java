@@ -20,18 +20,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
                 return value;
         }
 
-        private boolean isValidNumber(int value) {
-                if (value < MIN) {
-                        return false;
-                }
-                return value <= MAX;
-        }
-
-        @Override
-        public int compareTo(LottoNumber o) {
-                return this.value - o.value;
-        }
-
         @Override
         public boolean equals(Object o) {
                 if (this == o) {
@@ -47,5 +35,17 @@ public class LottoNumber implements Comparable<LottoNumber> {
         @Override
         public int hashCode() {
                 return Objects.hash(value);
+        }
+
+        @Override
+        public int compareTo(LottoNumber o) {
+                return this.value - o.value;
+        }
+
+        private boolean isValidNumber(int value) {
+                if (value < MIN) {
+                        return false;
+                }
+                return value <= MAX;
         }
 }

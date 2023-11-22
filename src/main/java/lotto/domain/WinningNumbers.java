@@ -40,14 +40,14 @@ public class WinningNumbers {
                 }
         }
 
-        private boolean isFixedCountOfWinningNumbersExceptForBonus(int countOfNumber) {
-                return countOfNumber == WINNING_NUMBERS_COUNT;
-        }
-
         private void validateBonusNumber(List<LottoNumber> values, LottoNumber bonusNumber) {
                 if (hasBonusNumber(values, bonusNumber)) {
                         throw new IllegalArgumentException("6개의 당첨번호와 한개의 보너스번호가 모두 중복되지않게 입력해주세요.");
                 }
+        }
+
+        private boolean isFixedCountOfWinningNumbersExceptForBonus(int countOfNumber) {
+                return countOfNumber == WINNING_NUMBERS_COUNT;
         }
 
         private boolean hasBonusNumber(List<LottoNumber> values, LottoNumber bonusNumber) {

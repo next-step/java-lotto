@@ -8,7 +8,6 @@ public class LottoNumberCandidatesFactory {
         private static final List<LottoNumber> lottoNumberCandidates = new ArrayList<>();
 
         private LottoNumberCandidatesFactory() {
-
         }
 
         public static List<LottoNumber> getInstance() {
