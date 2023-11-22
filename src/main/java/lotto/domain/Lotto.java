@@ -44,9 +44,10 @@ public class Lotto {
         return countWinning;
     }
 
-    private Integer addIfEqualWinningNumber(LottoNumber lottoNumber,
-                                        List<LottoNumber> winningNumbers,
-                                        Integer countWinning) {
+    private Integer addIfEqualWinningNumber(
+            LottoNumber lottoNumber,
+            List<LottoNumber> winningNumbers,
+            Integer countWinning) {
         for (LottoNumber winningNumber : winningNumbers) {
             countWinning += getNumberIfEqual(lottoNumber, winningNumber);
         }

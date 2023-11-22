@@ -17,13 +17,13 @@ class LottosTest {
     void countAllWinningLotto() {
         List<Integer> winningNumber = List.of(1,2,3,4,5,6);
         Lotto lotto1 = new Lotto(List.of(1,2,3,4,5,6));
-        Lotto lotto2 = new Lotto(List.of(1,2,3,4,5,7));
-        Lotto lotto3 = new Lotto(List.of(1,2,3,6,7,8));
+        Lotto lotto2 = new Lotto(List.of(10,2,3,4,5,6));
+        Lotto lotto3 = new Lotto(List.of(10,11,3,4,5,6));
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3), winningNumber);
 
         HashMap<WinningAmount, Integer> result = lottos.countAllWinning();
-        Assertions.assertThat(result.get(SIX_MATCH)).isEqualTo(1);
-        Assertions.assertThat(result.get(FIVE_MATCH)).isEqualTo(1);
         Assertions.assertThat(result.get(FOUR_MATCH)).isEqualTo(1);
+        Assertions.assertThat(result.get(FIVE_MATCH)).isEqualTo(1);
+        Assertions.assertThat(result.get(SIX_MATCH)).isEqualTo(1);
     }
 }

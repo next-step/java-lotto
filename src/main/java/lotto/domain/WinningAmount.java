@@ -8,6 +8,7 @@ public enum WinningAmount {
     THREE_MATCH(3,5000),
     FOUR_MATCH(4,50000),
     FIVE_MATCH(5,1500000),
+    FIVE_MATCH_AND_BONUS(5,30000000),
     SIX_MATCH(6,2000000000);
 
     private static final Map<Integer, WinningAmount> WINNING_AMOUNT_FINDER = new HashMap<>();
@@ -17,23 +18,26 @@ public enum WinningAmount {
         }
     }
 
-    private Integer matchCount;
-    private Integer amount;
+    private int matchCount;
+    private int amount;
 
-    WinningAmount(Integer matchCount, Integer amount) {
+    WinningAmount(int matchCount, int amount) {
         this.matchCount = matchCount;
         this.amount = amount;
     }
 
-    public Integer getMatchCount() {
+    public int getMatchCount() {
         return matchCount;
     }
 
-    public Integer getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public static WinningAmount findWinningAmountByMatchCount(int matchCount) {
+    public static WinningAmount findWinningAmountByMatchCount(int matchCount, boolean matchBonus) {
+        if (matchBonus == false && matchCount == 5) {
+            return FIVE_MATCH;
+        }
         return WINNING_AMOUNT_FINDER.get(matchCount);
     }
 }
