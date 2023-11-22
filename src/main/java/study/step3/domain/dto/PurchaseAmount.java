@@ -22,7 +22,8 @@ public class PurchaseAmount {
         return amount < LOTTO_PRICE;
     }
 
-    public int numberOfLottos() {
+
+    public int purchaseCount() {
         return amount / LOTTO_PRICE;
     }
 
