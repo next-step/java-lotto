@@ -11,6 +11,7 @@ import service.UserLottoService;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UserLottoTest {
     UserLottoRepository userLottoRepository;
@@ -37,5 +38,10 @@ public class UserLottoTest {
             System.out.println("lotto1.getLottoNumbers() = " + lotto.getLottoNumbers());
         }
         assertThat(lottoTickets.size()).isEqualTo(2);
+    }
+    @Test
+    @DisplayName("1000원 미만을 입력하는 경우 IllegalArgumentException throw 테스트")
+    void lessMoneyExceptionTest() {
+        assertThrows(IllegalArgumentException.class, () -> userLottoService.buyRandomLottoTickets(900));
     }
 }
