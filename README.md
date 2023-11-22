@@ -42,4 +42,4 @@
 ### LottoMachine
 * [X] 로또 머신은 로또티켓을 만들 수 있다.
 ### Rank
-* [ ] matchCount로 rank를 선정할 수 있다.
+* [X] matchCount로 rank를 선정할 수 있다.
