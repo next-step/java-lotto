@@ -17,13 +17,13 @@ public class LottoResultCalculator {
         this.strategies = strategies;
     }
 
-    public Map<String, Integer> calculateResults(Lottos lottos, Lotto winningNumbers, LottoNumber bonusNumber) {
+    public Map<String, Integer> calculateResults(Lottos autoLottos, Lotto winningNumbers, LottoNumber bonusNumber) {
         Map<String, Integer> results = new HashMap<>();
         for (WinningStrategy strategy : strategies) {
             results.put(strategy.getResultKey(), DEFAULT_VALUE);
         }
 
-        lottos.getValue().stream()
+        autoLottos.getValue().stream()
                 .flatMap(lotto -> strategies.stream()
                         .filter(strategy -> strategy.matches(lotto, winningNumbers, bonusNumber))
                         .map(WinningStrategy::getResultKey))

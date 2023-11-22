@@ -14,8 +14,21 @@ public class Lottos {
         }
     }
 
-    public Lottos(List<Lotto> value) {
-        this.value = value;
+//    public Lottos(List<Lotto> value) {
+//        this.value = value;
+//    }
+
+    public Lottos(List<String> value) {
+        this.value = new ArrayList<>();
+        for (String lotto : value) {
+            this.value.add(new Lotto(lotto));
+        }
+    }
+
+    public Lottos(Lottos manualLottos, Lottos autoLottos) {
+        value = new ArrayList<>();
+        value.addAll(manualLottos.value);
+        value.addAll(autoLottos.value);
     }
 
     public String findLottos() {

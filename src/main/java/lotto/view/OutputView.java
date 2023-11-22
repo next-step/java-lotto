@@ -10,12 +10,20 @@ public class OutputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public void printLottoCount(int lottoCount) {
-        System.out.println(lottoCount + "개를 구매했습니다.");
+    public void askManualLottoAmount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
     }
 
-    public void printLottos(Lottos lottos) {
-        System.out.println(lottos.findLottos());
+    public void askManualLottos() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public void printLottoCount(int manualLottoCount, int autoLottoCount) {
+        System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " +autoLottoCount + "개를 구매했습니다.");
+    }
+
+    public void printLottos(Lottos manualLottos, Lottos autoLottos) {
+        System.out.println(manualLottos.findLottos() + autoLottos.findLottos());
     }
 
     public void askWinningLotto() {

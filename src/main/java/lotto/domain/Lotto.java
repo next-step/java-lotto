@@ -12,13 +12,13 @@ public class Lotto {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final List<LottoNumber> INITIALIZED_LOTTO = initLottos();
+    private static final Random RANDOM = new Random();
     private final List<LottoNumber> values;
 
     public Lotto() {
         this.values = new ArrayList<>();
-        Random random = new Random();
         while (values.size() < LOTTO_SIZE) {
-            LottoNumber lottoNumber = findUniquLottoNumber(random);
+            LottoNumber lottoNumber = findUniquLottoNumber(RANDOM);
 
             values.add(lottoNumber);
         }
@@ -38,7 +38,7 @@ public class Lotto {
 
         Set<LottoNumber> lottoNumbers = Arrays.stream(values.split(", "))
                 .mapToInt(Integer::parseInt)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(value -> INITIALIZED_LOTTO.get(value - 1))
                 .collect(Collectors.toSet());
 
         if (lottoNumbers.size() != LOTTO_SIZE) {
