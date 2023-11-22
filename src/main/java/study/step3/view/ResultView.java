@@ -7,8 +7,8 @@ import study.step3.domain.Rank;
 
 public class ResultView {
 
-    public static void show(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    public static void show(int manualLottoCount, int autoLottoCount) {
+        System.out.println(String.format("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottoCount, autoLottoCount));
     }
 
     public static void show(List<Lotto> lottos) {

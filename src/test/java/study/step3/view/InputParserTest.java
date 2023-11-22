@@ -12,6 +12,6 @@ public class InputParserTest {
     void 컴마로_구분되지_않음() {
         assertThatExceptionOfType(LottoException.class)
             .isThrownBy(() -> parse("a, b, c, d, e"))
-            .withMessage("당첨 번호는 숫자를 입력해야 합니다.");
+            .withMessage("로또 번호는 숫자를 입력해야 합니다.");
     }
 }

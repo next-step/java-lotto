@@ -14,19 +14,23 @@ import static study.step3.view.ResultView.*;
 public class Step3Application {
 
     public static void main(String[] args) {
-        PurchaseAmount purchaseAmount = inputPurchaseAmount();
+        PurchaseAmount purchaseAmount = purchaseAmount();
         int numberOfLottos = purchaseAmount.numberOfLottos();
-        show(numberOfLottos);
+
+        int manualLottoCount = manualLottoCount();
+        int autoLottoCount = numberOfLottos - manualLottoCount;
+
+        List<Lotto> lottos = new ArrayList<>(manualLottos(manualLottoCount));
+        show(manualLottoCount, autoLottoCount);
 
         LottoGenerator generator = new LottoGenerator();
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < numberOfLottos; i++) {
+        for (int i = 0; i < autoLottoCount; i++) {
             lottos.add(generator.generate());
         }
         show(lottos);
 
-        Lotto winningNumbers = inputWinningNumbers();
-        LottoNumber bonusNumber = inputBonusNumber();
+        Lotto winningNumbers = winningNumbers();
+        LottoNumber bonusNumber = bonusNumber();
 
         List<Rank> ranks = lottos.stream()
             .map(lotto -> lotto.matches(winningNumbers, bonusNumber))

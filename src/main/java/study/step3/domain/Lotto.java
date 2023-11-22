@@ -26,8 +26,7 @@ public class Lotto {
     }
 
     private static boolean isValidNumbers(List<Integer> numbers) {
-        return new HashSet<>(numbers)
-            .size() == LOTTO_NUMBERS_SIZE;
+        return new HashSet<>(numbers).size() == LOTTO_NUMBERS_SIZE;
     }
 
     public Rank matches(Lotto winningNumbers, LottoNumber bonusNumber) {
