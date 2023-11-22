@@ -14,4 +14,8 @@ public class LottoCount {
     public int getLottoCount() {
         return lottoCount;
     }
+
+    public boolean isLessThanCount(int presentLottoCount) {
+        return presentLottoCount < lottoCount ;
+    }
 }
