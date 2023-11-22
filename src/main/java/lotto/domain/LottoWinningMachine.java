@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exceptions.InvalidBonusNumberException;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.EnumMap;
@@ -13,13 +15,21 @@ public class LottoWinningMachine {
     private final LottoNumber bonusNumber;
 
     public LottoWinningMachine(int number, Integer... numbers) {
+
         this(new Lotto(numbers), new LottoNumber(number));
     }
 
     public LottoWinningMachine(Lotto winningLotto, LottoNumber bonusNumber) {
+        validateWinningLottoAndBonusNumber(winningLotto, bonusNumber);
         this.rankCounts = new EnumMap<>(Rank.class);
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
+    }
+
+    private void validateWinningLottoAndBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
+        if (winningLotto.contains(bonusNumber)) {
+            throw new InvalidBonusNumberException(bonusNumber);
+        }
     }
 
     public Map<Rank, Integer> getRankCounts(List<Lotto> lottos) {
