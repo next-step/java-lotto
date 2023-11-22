@@ -18,7 +18,7 @@ public class LottoSimulator {
         LottoSimulator lottoSimulator = new LottoSimulator();
         int lottoCount = money / EACH_LOTTO_PRICE;
         for (int i = 0; i < lottoCount; i++) {
-            lottoSimulator.lottoList.add(Lotto.of(NumberShuffler.getShuffledNumbers()));
+            lottoSimulator.lottoList.add(new Lotto());
         }
         return lottoSimulator;
     }
