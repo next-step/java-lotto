@@ -11,7 +11,8 @@ public class Lottos {
     private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        this(0, lottos);
+        this.lottos = lottos;
+//        this(0, lottos);
     }
 
     public Lottos(int value) {
