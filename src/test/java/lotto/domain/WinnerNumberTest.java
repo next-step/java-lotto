@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class WinnerNumberTest {
 
@@ -35,8 +34,7 @@ public class WinnerNumberTest {
         String winNumber = "1,2,3,4,5,6";
         int bonusNumber = 7;
         winnerNumber = new WinnerNumber(winNumber, bonusNumber);
-        Lotto buyLotto = new Lotto();
-        buyLotto.create(List.of(1, 2, 3, 4, 5, 6));
+        Lotto buyLotto = new Lotto(1, 2, 3, 4, 5, 6);
         List<Lotto> buyLottos = List.of(buyLotto);
         // when
         Map<RankLotto, Integer> result = winnerNumber.statisticsResult(buyLottos);
@@ -114,6 +112,16 @@ public class WinnerNumberTest {
             assertThatThrownBy(() -> {
                 winnerNumber = new WinnerNumber(lottoNumbers, bonusNumber);
             }).isInstanceOf(IllegalArgumentException.class);
+        }
+
+        @Test
+        public void 로또_번호_6개_보너스_추가_유효성_검사_중복번호_입력() {
+            // given
+            String winNumber = "1,2,3,4,5,6";
+            int bonusNumber = 6;
+            // when
+            assertThatIllegalArgumentException().isThrownBy(() -> new WinnerNumber(winNumber, bonusNumber));
+            // then
         }
     }
 }

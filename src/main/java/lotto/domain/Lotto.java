@@ -1,14 +1,17 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.validate.NumberValidation.checkLottoSize;
+import static lotto.message.LottoErroMessage.NOT_ENOUGH_LOTTO_NUMBER;
+import static lotto.message.LottoErroMessage.NOT_ENOUGH_LOTTO_NUMBER_DUPLICATE;
 
 public class Lotto {
 
+    private static final String DELIMITER = ",";
     private List<LottoNumber> lottoNumbers;
 
     public Lotto() {
@@ -20,11 +23,21 @@ public class Lotto {
         this.lottoNumbers = sortLotto(lottoNumbers);
     }
 
-    public void create(List<Integer> numbers) {
-        List<LottoNumber> lotto = numbers.stream()
+    public Lotto(Integer... numbers) {
+        List<LottoNumber> lotto = Arrays.stream(numbers)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
         checkLottoSize(lotto);
+        this.lottoNumbers = sortLotto(lotto);
+    }
+
+    public Lotto(String lottoNumbers) {
+        List<LottoNumber> lotto = Arrays.stream(lottoNumbers.split(DELIMITER))
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        checkLottoSize(lotto);
+        checkDuplicate(lotto);
         this.lottoNumbers = sortLotto(lotto);
     }
 
@@ -33,6 +46,17 @@ public class Lotto {
                 .sorted().collect(Collectors.toList()));
     }
 
+    private void checkLottoSize(List<LottoNumber> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException(NOT_ENOUGH_LOTTO_NUMBER.message());
+        }
+    }
+
+    private void checkDuplicate(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.stream().distinct().count() != 6) {
+            throw new IllegalArgumentException(NOT_ENOUGH_LOTTO_NUMBER_DUPLICATE.message());
+        }
+    }
     public List<LottoNumber> lottoNumbers() {
         return lottoNumbers;
     }
@@ -43,8 +67,8 @@ public class Lotto {
                 .collect(Collectors.toList()).size();
     }
 
-    public boolean matchBonus(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+    public boolean matchNumber(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 
     @Override

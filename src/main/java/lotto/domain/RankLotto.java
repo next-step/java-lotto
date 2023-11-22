@@ -37,6 +37,10 @@ public enum RankLotto {
         return winningMoney;
     }
 
+    int calculateWinningMoney(int count) {
+        return winningMoney * count;
+    }
+
     @Override
     public String toString() {
         if (this != SECOND) {

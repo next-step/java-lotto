@@ -42,23 +42,32 @@ public class LottoTest {
         NumberStrategy numberStrategy = new FixtureNumberStrategy();
         List<Lotto> buyLottos = numberStrategy.create(1);
         Lotto buyLotto = buyLottos.get(0);
-        Lotto resultLotto = new Lotto();
-        resultLotto.create(List.of(1, 2, 3, 4, 5, 6));
+        Lotto resultLotto = new Lotto(1, 2, 3, 4, 5, 6);
         // when
         int result = buyLotto.match(resultLotto);
         // then
         assertThat(result).isEqualTo(4);
     }
 
+    @DisplayName("수동입력으로_로또번호를_만든다")
+    @Test
+    void 수동입력으로_로또번호를_만든다() {
+        // given
+        String lottoNumbers = "1, 2, 3, 4, 5, 6";
+        Lotto resultLotto = new Lotto(lottoNumbers);
+        // when
+        // then
+        assertThat(resultLotto.match(new Lotto(1, 2, 3, 4, 5, 6))).isEqualTo(6);
+    }
+
     @DisplayName("보너스 번호 일치 테스트")
     @Test
-    void 보너스_번호가_일치하는지_확인한다() {
+    void 보너스_번호는_당첨번호와_다른번호이다() {
         // given
         LottoNumber bonusNumber = new LottoNumber(7);
-        Lotto lotto = new Lotto();
-        lotto.create(List.of(1, 2, 7, 4, 5, 6));
+        Lotto lotto = new Lotto(1, 2, 7, 4, 5, 6);
         // when
-        boolean result = lotto.matchBonus(bonusNumber);
+        boolean result = lotto.matchNumber(bonusNumber);
         // then
         assertThat(result).isTrue();
     }

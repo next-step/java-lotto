@@ -1,46 +1,50 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import static lotto.validate.NumberValidation.checkBonusNumber;
+import static lotto.message.LottoErroMessage.NOT_ENOUGH_LOTTO_BONUS_NUMBER;
 
 public class WinnerNumber {
 
-    private static final String DELIMITER = ",";
     private Lotto winLotto;
     private LottoNumber bonusNumber;
 
     public WinnerNumber(String lottoNumbers) {
-        this.winLotto = new Lotto(createLottoNumbers(lottoNumbers));
+        this.winLotto = new Lotto(lottoNumbers);
     }
 
     public WinnerNumber(String lottoNumbers, int bonusNumber) {
-        this.winLotto = new Lotto(createLottoNumbers(lottoNumbers));
+        this.winLotto = new Lotto(lottoNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
-        checkBonusNumber(this.winLotto, this.bonusNumber);
+        checkBonusNumber();
     }
 
-    private List<LottoNumber> createLottoNumbers(String lottoNumbers) {
-        return Arrays.stream(lottoNumbers.split(DELIMITER))
-                .map(Integer::parseInt)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+    public void checkBonusNumber() {
+        bonusNumber.checkNumberRange();
+        if (winLotto.matchNumber(bonusNumber)) {
+            throw new IllegalArgumentException(NOT_ENOUGH_LOTTO_BONUS_NUMBER.message());
+        }
     }
 
     public Map<RankLotto, Integer> statisticsResult(List<Lotto> lottos) {
-        return lottos.stream()
-                .map(lotto -> RankLotto.findRank(lotto.match(this.winLotto), lotto.matchBonus(this.bonusNumber)))
-                .collect(Collectors.toMap(rank -> rank, rank -> 1, Integer::sum));
+        Map<RankLotto, Integer> result = new HashMap<>();
+        initResult(result);
+        lottos.stream()
+                .map(lotto -> RankLotto.findRank(lotto.match(this.winLotto), lotto.matchNumber(this.bonusNumber)))
+                .forEach(rank -> result.put(rank, result.get(rank) + 1));
+        return result;
+    }
+
+    private void initResult(Map<RankLotto, Integer> result) {
+        Arrays.stream(RankLotto.values()).forEach(rank -> result.put(rank, 0));
     }
 
     public Lotto resultLotto() {
         return winLotto;
-    }
-
-    public LottoNumber bonusNumber() {
-        return bonusNumber;
     }
 }
