@@ -25,6 +25,14 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("로또 번호를 생성하는 경우 정렬되어 저장한다. - 문자 입력 정적 팩토리 활용")
+    void lottoListInputTest() {
+        Lotto lotto = new Lotto(Arrays.asList(3, 2, 5, 11, 1, 8));
+
+        assertThat(lotto.getLottoNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 5, 8, 11));
+    }
+
+    @Test
     @DisplayName("보너스 번호가 일치하는 경우 true return ")
     void matchBonusTest() {
         Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);

@@ -11,14 +11,13 @@ public class WinningLotto {
     private LottoNumber bonusNumber;
 
     public WinningLotto(int bonus, Integer... numbers) {
-        this(Arrays.stream(numbers).sorted().collect(Collectors.toList()), bonus);
+        this(Arrays.stream(numbers).collect(Collectors.toList()), bonus);
     }
 
     public WinningLotto(String numbers, int bonus) {
         this(Arrays.stream(numbers.split(","))
                         .map(String::trim)
                         .map(Integer::parseInt)
-                        .sorted()
                         .collect(Collectors.toList())
                 , bonus);
     }
@@ -27,6 +26,7 @@ public class WinningLotto {
         validateLottoNumberCount(lottoNumbers);
 
         this.lottoNumbers = lottoNumbers.stream()
+                .sorted()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
         this.bonusNumber = new LottoNumber(bonus);

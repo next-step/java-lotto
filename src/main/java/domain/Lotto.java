@@ -9,14 +9,13 @@ public class Lotto {
     private List<LottoNumber> lottoNumbers;
 
     public Lotto(Integer... input) {
-        this(Arrays.stream(input).sorted().collect(Collectors.toList()));
+        this(Arrays.stream(input).collect(Collectors.toList()));
     }
 
     public Lotto(String input) {
         this(Arrays.stream(input.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
-                .sorted()
                 .collect(Collectors.toList()));
     }
 
@@ -24,6 +23,7 @@ public class Lotto {
         validateLottoNumberCount(lottoNumbers);
 
         this.lottoNumbers = lottoNumbers.stream()
+                .sorted()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }

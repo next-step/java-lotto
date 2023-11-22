@@ -34,8 +34,11 @@ public class ResultView {
             if (result.getKey().equals(LottoPrize.NO_MATCH)) {
                 continue;
             }
-            System.out.println(String.format("%d개 일치 (%d%s) - %d개"
-                    , result.getKey().getMatchCount()
+            System.out.print(String.format("%d개 일치 ", result.getKey().getMatchCount()));
+            if (result.getKey().equals(LottoPrize.SECOND)) {
+                System.out.print(", 보너스볼 일치");
+            }
+            System.out.println(String.format(" (%d%s) - %d개"
                     , result.getKey().winningPrize()
                     , currency.get().getCurrencyType()
                     , result.getValue()
