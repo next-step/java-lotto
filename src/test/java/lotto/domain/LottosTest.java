@@ -26,4 +26,15 @@ class LottosTest {
         Assertions.assertThat(result.get(FIVE_MATCH)).isEqualTo(1);
         Assertions.assertThat(result.get(SIX_MATCH)).isEqualTo(1);
     }
+
+    @DisplayName("보너스 번호에 따른 로또를 확인한다.")
+    @Test
+    void findLottoHasBonus() {
+        List<Integer> winningNumber = List.of(1,2,3,4,5,6);
+        Lotto lotto = new Lotto(List.of(1,2,3,4,10,11));
+        Lottos lottos = new Lottos(List.of(lotto), winningNumber, 5);
+
+        HashMap<WinningAmount, Integer> result = lottos.countAllWinning();
+        Assertions.assertThat(result.get(FIVE_MATCH_AND_BONUS)).isEqualTo(1);
+    }
 }

@@ -49,6 +49,14 @@ public class InputView {
         System.out.println(lottoNumbersForPrint);
     }
 
+    public Integer inputBonusNumber() {
+        System.out.println("보너스 번호를 입력해주세요.");
+        Scanner scanner = new Scanner(System.in);
+        String bonusNumber = scanner.nextLine();
+        System.out.println("");
+        return Integer.parseInt(bonusNumber);
+    }
+
     public List<Integer> inputWinningNumber() {
         System.out.println("당첨 번호를 입력해주세요.");
         Scanner scanner = new Scanner(System.in);

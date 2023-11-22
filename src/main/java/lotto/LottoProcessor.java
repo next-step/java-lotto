@@ -13,9 +13,13 @@ public class LottoProcessor {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         Integer amount = inputView.inputAmount();
+        Lottos lottos = new Lottos(
+                inputView.calculateLottoCount(amount),
+                inputView.inputWinningNumber(),
+                inputView.inputBonusNumber());
         LottoRequest request = new LottoRequest(
-                amount, new Lottos(inputView.calculateLottoCount(amount),
-                inputView.inputWinningNumber()));
+                amount,
+                lottos);
 
         BenefitCalculator calculator = new BenefitCalculator();
         LottoResponse response = calculator.calculateBenefit(request);

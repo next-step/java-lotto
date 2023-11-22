@@ -27,6 +27,7 @@ public class WinningFinder {
 
     public void countWinning(Lotto lotto) {
         int countMatch = lotto.countWinningNumber(WINNING_NUMBER);
+        System.out.println("countMatch : " + countMatch);
         WinningAmount winningAmount = WinningAmount.findWinningAmountByMatchCount(countMatch, hasBonus());
         mergeIfMoreThanThreeMatch(winningAmount);
     }
