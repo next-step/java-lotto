@@ -2,13 +2,19 @@ package lotto.domain;
 
 import lotto.exceptions.InvalidLottoAmountException;
 
-public class Money {
+public class PurchaseAmount {
 
     private static final int PRICE_OF_LOTTO = 1000;
 
-    public static int calculateLottoQuantity(int purchaseAmount) {
-        validateAmount(purchaseAmount);
-        return purchaseAmount / PRICE_OF_LOTTO;
+    private final int amount;
+
+    public PurchaseAmount(int amount) {
+        validateAmount(amount);
+        this.amount = amount;
+    }
+
+    public int calculateLottoQuantity() {
+        return amount / PRICE_OF_LOTTO;
     }
 
     private static void validateAmount(int amount) {
