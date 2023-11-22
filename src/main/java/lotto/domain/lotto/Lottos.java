@@ -71,7 +71,7 @@ public class Lottos {
     }
 
     public Summary match(Lotto jackpot, LottoNumber bonusNumber) {
-        WinningSummary winningSummary = new WinningSummary();
+        WinningSummary winningSummary = WinningSummary.newInstance();
 
         WinningLotto winningLotto = WinningLotto.of(jackpot, bonusNumber);
 

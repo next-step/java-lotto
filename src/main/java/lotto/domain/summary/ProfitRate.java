@@ -8,8 +8,12 @@ import java.util.Objects;
 public class ProfitRate {
     private final float profitRate;
 
-    public ProfitRate(WinningSummary winningSummary, Long purchasePrice) {
+    private ProfitRate(WinningSummary winningSummary, Long purchasePrice) {
         this.profitRate = profitRate(winningSummary.winnings(), purchasePrice);
+    }
+
+    public static ProfitRate of(WinningSummary winningSummary, Long purchasePrice) {
+        return new ProfitRate(winningSummary, purchasePrice);
     }
 
     private float profitRate(Map<Winning, Long> winnings, long purchasePrice) {

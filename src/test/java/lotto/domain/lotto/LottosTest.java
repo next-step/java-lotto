@@ -45,7 +45,7 @@ class LottosTest {
         Lotto jackpot = Lotto.of(Arrays.asList(1, 2, 3, 4, 30, 40));
         Summary match = lottos.match(jackpot, LottoNumber.of(20));
 
-        WinningSummary winningSummary = new WinningSummary();
+        WinningSummary winningSummary = WinningSummary.newInstance();
         winningSummary.addWinning(Winning.FOURTH, 10L);
 
         assertThat(match).isEqualTo(new Summary(winningSummary, 10000L));
@@ -61,7 +61,7 @@ class LottosTest {
 
         Summary match = mergedLottos.match(jackpot, LottoNumber.of(20));
 
-        WinningSummary winningSummary = new WinningSummary();
+        WinningSummary winningSummary = WinningSummary.newInstance();
         winningSummary.addWinning(Winning.FOURTH, 20L);
 
         assertThat(match).isEqualTo(new Summary(winningSummary, 20000L));

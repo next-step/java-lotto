@@ -11,7 +11,7 @@ public class Summary {
 
     public Summary(WinningSummary winningSummary, Long purchasePrice) {
         this.winningSummary = winningSummary;
-        this.profitRate = new ProfitRate(winningSummary, purchasePrice);
+        this.profitRate = ProfitRate.of(winningSummary, purchasePrice);
     }
 
     @Override

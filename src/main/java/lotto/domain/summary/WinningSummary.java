@@ -16,8 +16,12 @@ public class WinningSummary {
     private final Map<Winning, Long> winnings;
 
 
-    public WinningSummary() {
+    private WinningSummary() {
         winnings = prizeWinningMap();
+    }
+
+    public static WinningSummary newInstance() {
+        return new WinningSummary();
     }
 
     private Map<Winning, Long> prizeWinningMap() {
