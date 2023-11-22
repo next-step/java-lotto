@@ -25,10 +25,8 @@ public class Main {
         WinningLotto winningLotto = WinningLotto.from(new Lotto(lastWeakLottoNumbers));
 
         StatisticsReport report = StatisticsReport.of(lottoWallet).report(winningLotto);
-        IncomeReport incomeReport = IncomeReport.of(report);
-        BigDecimal rate = incomeReport.rate();
         resultView.out(report);
-        resultView.out(rate);
+        resultView.out(report.rate());
     }
 
     private static List<LottoNumber> createLastWeakLottoNumbers(List<Integer> lastWeakLottoInit) {

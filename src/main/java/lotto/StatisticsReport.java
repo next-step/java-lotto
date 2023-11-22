@@ -1,5 +1,7 @@
 package lotto;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -58,5 +60,12 @@ public class StatisticsReport {
 
     public LottoWallet lottoWallet() {
         return this.lottoWallet;
+    }
+
+    public BigDecimal rate() {
+        int totalPurchasePrice = LottoShop.LOTTO_PRICE * this.lottoWallet.totalTicketCount();
+        return BigDecimal.valueOf(totalPrize())
+            .divide(BigDecimal.valueOf(totalPurchasePrice), 2, RoundingMode.HALF_UP)
+            .stripTrailingZeros();
     }
 }
