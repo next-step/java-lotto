@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 
 public class WinningSummary {
 
-    private static final String PRIZE_MESSAGE = "%s개 일치 (%s원)";
-    private static final String MATCH_MESSAGE = " - %s개";
-    private static final String SECOND_MATCH_MESSAGE = ", 보너스 볼 일치 - %s개";
+    private static final String PRIZE_MESSAGE = "%,d개 일치 (%,d원)";
+    private static final String MATCH_MESSAGE = " - %,d개";
+    private static final String SECOND_MATCH_MESSAGE = ", 보너스 볼 일치 - %,d개";
 
     private final Map<Winning, Long> winnings;
 

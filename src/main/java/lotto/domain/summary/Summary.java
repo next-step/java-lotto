@@ -4,10 +4,10 @@ import java.util.Objects;
 
 public class Summary {
 
-    public static final String PROFIT_RATE_MESSAGE = "총 수익률은 %f입니다.";
+    public static final String PROFIT_RATE_MESSAGE = "총 수익률은 %,.3f입니다.";
 
     private final WinningSummary winningSummary;
-    private ProfitRate profitRate;
+    private final ProfitRate profitRate;
 
     public Summary(WinningSummary winningSummary, Long purchasePrice) {
         this.winningSummary = winningSummary;
