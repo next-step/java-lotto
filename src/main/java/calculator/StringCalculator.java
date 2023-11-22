@@ -46,6 +46,7 @@ public class StringCalculator {
         }
 
         if (Objects.equals(operation, "/")) {
+            checkRemainder(result,number);
             return Math.floorDiv(result, number);
         }
 
@@ -54,6 +55,12 @@ public class StringCalculator {
 
     private static int parseInteger(String number) {
         return Integer.parseInt(number);
+    }
+
+    private static void checkRemainder(int number, int number2) {
+        if (Math.floorMod(number, number2) != 0) {
+            throw new IllegalArgumentException("나머지가 존재합니다.");
+        }
     }
 
 }
