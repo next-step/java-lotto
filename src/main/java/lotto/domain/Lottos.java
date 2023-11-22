@@ -11,8 +11,7 @@ public class Lottos {
     private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
-//        this(0, lottos);
+        this(new Amount(0), lottos);
     }
 
     public Lottos(Amount amount) {
@@ -24,10 +23,6 @@ public class Lottos {
         for (int game = 0; game < amount.purchasableLottoCount(); game++) {
             this.lottos.add(new Lotto());
         }
-    }
-
-    private int purchasableLottoCount(int value) {
-        return value / Lotto.LOTTO_PRICE;
     }
 
     public Long totalWinningAmount(WinningLottoDTO winningLottoDTO) {
