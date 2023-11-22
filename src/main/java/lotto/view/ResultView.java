@@ -1,7 +1,6 @@
 package lotto.view;
 
 import java.util.EnumMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +38,7 @@ public class ResultView {
 		sb.append("당첨 통계\n");
 		sb.append("----------\n");
 		for (Map.Entry<Rank, Integer> result : results.entrySet()) {
-			sb.append(result.getKey().getNum() + "개 일치");
+			sb.append(result.getKey().getMatchCount() + "개 일치");
 			sb.append("(" + result.getKey().getAmount() + ")- ");
 			sb.append(" " + result.getValue() + "개");
 			System.out.println(sb);

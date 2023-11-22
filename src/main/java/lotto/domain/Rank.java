@@ -9,11 +9,11 @@ public enum Rank {
 	FOURTH(3, 50_000),
 	NOT(0, 0);
 
-	private final int num;
+	private final int matchCount;
 	private final long amount;
 
-	Rank(int num, int amount) {
-		this.num = num;
+	Rank(int matchCount, int amount) {
+		this.matchCount = matchCount;
 		this.amount = amount;
 	}
 
@@ -25,11 +25,11 @@ public enum Rank {
 	}
 
 	private boolean equalNum(int num) {
-		return this.num == num;
+		return this.matchCount == num;
 	}
 
-	public int getNum() {
-		return num;
+	public int getMatchCount() {
+		return matchCount;
 	}
 
 	public long getAmount() {
