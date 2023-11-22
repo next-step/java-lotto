@@ -5,7 +5,7 @@ import lottosecond.domain.lotto.*;
 import lottosecond.view.InputView;
 import lottosecond.view.OutputView;
 
-public class LottoAuto {
+public class LottoMain {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
