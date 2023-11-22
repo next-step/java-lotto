@@ -30,9 +30,9 @@ public class LottoNumberTest {
     @DisplayName("로또 번호는 6개 숫자로 생성된다.")
     void generateNumberShuffleTest() {
         List<Integer> lottoNumbers = LottoRandomNumberGenerator.generateLottoNumber();
-
         assertThat(lottoNumbers.stream().distinct().count()).isEqualTo(6);
     }
+
     @Test
     @DisplayName("로또 생성은 Collections.shuffle() 메소드를 활용한다.")
     void generateNumberShuffleTest2() {
@@ -56,6 +56,7 @@ public class LottoNumberTest {
     void invalidInputLessSixExceptionTest() {
         assertThrows(IllegalArgumentException.class, () -> new Lotto(1, 2, 3, 4, 5));
     }
+
     @Test
     @DisplayName("당첨 번호를 중복으로 입력하는 경우 6개 미만 Exception throw.")
     void invalidInputExceptionTest() {
