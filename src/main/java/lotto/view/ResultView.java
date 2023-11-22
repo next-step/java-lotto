@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static lotto.RewardPrice.*;
-import static lotto.RoRCalculator.calculateYield;
+import static lotto.RateOfReturnCalculator.calculateYield;
 
 public class ResultView {
 

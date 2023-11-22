@@ -2,10 +2,10 @@ package lotto;
 
 import static lotto.RewardPrice.*;
 
-public class RoRCalculator {
+public class RateOfReturnCalculator {
 
     private static final double LOTTO_PRICE = 1000.0;
-    private RoRCalculator() {
+    private RateOfReturnCalculator() {
     }
 
     public static double calculateYield(int [] statistics, int lottoCount) {
