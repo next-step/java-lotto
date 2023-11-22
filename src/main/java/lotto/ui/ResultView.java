@@ -11,16 +11,24 @@ public class ResultView {
         System.out.println("당첨 통계");
         HashMap<WinningAmount, Integer> countAllWinning = response.getCountAllWinning();
         for (WinningAmount winningAmount : countAllWinning.keySet()) {
-            printWinningResult(countAllWinning, winningAmount);
+            int matchCount = winningAmount.getMatchCount();
+            int amount = winningAmount.getAmount();
+            int count = countAllWinning.get(winningAmount);
+            printResult(winningAmount, matchCount, amount, count);
         }
         printRateOfReturn(response.getRateOfReturn());
     }
 
-    private void printWinningResult(HashMap<WinningAmount, Integer> countAllWinning, WinningAmount winningAmount) {
-        int matchCount = winningAmount.getMatchCount();
-        int amount = winningAmount.getAmount();
-        int count = countAllWinning.get(winningAmount);
-        System.out.println(matchCount + "개 일치(" + amount + ")-" + count + "개");
+    private void printResult(WinningAmount winningAmount, int matchCount, int amount, int count) {
+        if (winningAmount == WinningAmount.FIVE_MATCH_AND_BONUS) {
+            hasBonusResult(matchCount, amount, count);
+            return;
+        }
+        System.out.println(matchCount + "개 일치, 보너스 볼 일치(" + amount + ")-" + count + "개");
+    }
+
+    private void hasBonusResult(int matchCount, int amount, int count) {
+        System.out.println(matchCount + "개 일치, 보너스 볼 일치(" + amount + ")-" + count + "개");
     }
 
     private void printRateOfReturn(String rateOfReturn) {
