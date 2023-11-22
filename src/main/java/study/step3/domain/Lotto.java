@@ -30,15 +30,18 @@ public class Lotto {
             .size() == LOTTO_NUMBERS_SIZE;
     }
 
-    public Rank matches(WinningNumbers winningNumbers, LottoNumber bonusNumber) {
+    public Rank matches(Lotto winningNumbers, LottoNumber bonusNumber) {
         return Rank.valueOf(hitCount(winningNumbers), isBonus(bonusNumber));
     }
 
-    private Integer hitCount(WinningNumbers winningNumbers) {
-        return lottoNumbers.stream()
-            .map(winningNumbers::containsNumber)
-            .map(v -> v.compareTo(false))
-            .reduce(0, Integer::sum);
+    private int hitCount(Lotto winningNumbers) {
+        return (int) lottoNumbers.stream()
+            .filter(winningNumbers::containsNumber)
+            .count();
+    }
+
+    private boolean containsNumber(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 
     private boolean isBonus(LottoNumber bonusNumber) {

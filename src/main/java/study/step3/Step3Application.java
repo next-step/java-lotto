@@ -25,7 +25,7 @@ public class Step3Application {
         }
         show(lottos);
 
-        WinningNumbers winningNumbers = inputWinningNumbers();
+        Lotto winningNumbers = inputWinningNumbers();
         LottoNumber bonusNumber = inputBonusNumber();
 
         List<Rank> ranks = lottos.stream()

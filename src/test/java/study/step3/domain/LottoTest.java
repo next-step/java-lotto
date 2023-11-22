@@ -15,7 +15,7 @@ public class LottoTest {
     @MethodSource
     void 등수_테스트(List<Integer> lottoNumbers, List<Integer> winningNumbers, Integer bonusNumber, Rank rank) {
         Lotto lotto = new Lotto(lottoNumbers);
-        Rank result = lotto.matches(new WinningNumbers(winningNumbers), new LottoNumber(bonusNumber));
+        Rank result = lotto.matches(new Lotto(winningNumbers), new LottoNumber(bonusNumber));
         assertThat(result).isEqualTo(rank);
     }
 
