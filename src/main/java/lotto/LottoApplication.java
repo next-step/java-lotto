@@ -23,7 +23,7 @@ public class LottoApplication {
         WinningLotto winningLotto = new WinningLotto(InputView.winningNumbers(), InputView.bonusNumber());
         LottoResult lottoResult = myLottos.getLottoResult(winningLotto);
 
-        OutputView.outputLottoStats(LottoStatsResponse.from(lottoResult, money));
+        OutputView.outputLottoStats(LottoStatsResponse.of(lottoResult, money));
     }
 
 }

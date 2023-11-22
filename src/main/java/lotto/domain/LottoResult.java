@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,5 +31,9 @@ public class LottoResult {
 
     public float getProfitRate(Money buyMoney) {
         return (float) getReceiveMoney() / buyMoney.getMoney();
+    }
+
+    public Map<LottoPrize, Integer> getStatistics() {
+        return Collections.unmodifiableMap(statistics);
     }
 }
