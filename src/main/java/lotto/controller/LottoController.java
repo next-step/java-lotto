@@ -5,6 +5,7 @@ import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.strategy.RandomStrategy;
 import lotto.domain.summary.Summary;
+import lotto.dto.view.LottoResultDTO;
 import lotto.dto.view.UserInputDTO;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -41,7 +42,7 @@ public class LottoController {
 
         outputView.printLottoCount(manualLottos.size(), autoLottos.size());
         outputView.printLottos(lottos.lottos());
-        outputView.printSummary(summary(lottos));
+        outputView.printSummary(lottoResult(lottos));
     }
 
     private UserInputDTO userInput() {
@@ -60,8 +61,9 @@ public class LottoController {
         return Lottos.of(remainingPurchasePrice, new RandomStrategy());
     }
 
-    public Summary summary(Lottos lottos) {
-        return lottos.match(jackpotLotto(), bonusNumber());
+    public LottoResultDTO lottoResult(Lottos lottos) {
+        Summary summary = lottos.match(jackpotLotto(), bonusNumber());
+        return new LottoResultDTO(summary.winnings(), summary.profitRate());
     }
 
     private Lotto jackpotLotto() {

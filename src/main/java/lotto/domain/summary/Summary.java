@@ -1,11 +1,11 @@
 package lotto.domain.summary;
 
+import lotto.constants.Winning;
+
+import java.util.Map;
 import java.util.Objects;
 
 public class Summary {
-
-    public static final String PROFIT_RATE_MESSAGE = "총 수익률은 %,.3f입니다.";
-
     private final WinningSummary winningSummary;
     private final ProfitRate profitRate;
 
@@ -16,6 +16,14 @@ public class Summary {
 
     public static Summary of(WinningSummary winningSummary, Long purchasePrice) {
         return new Summary(winningSummary, purchasePrice);
+    }
+
+    public Map<Winning, Long> winnings() {
+        return winningSummary.winnings();
+    }
+
+    public float profitRate() {
+        return profitRate.value();
     }
 
     @Override
@@ -29,14 +37,5 @@ public class Summary {
     @Override
     public int hashCode() {
         return Objects.hash(winningSummary, profitRate);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder stringBuffer = new StringBuilder();
-        stringBuffer.append(winningSummary);
-        stringBuffer.append(String.format(PROFIT_RATE_MESSAGE, profitRate.value()));
-
-        return stringBuffer.toString();
     }
 }

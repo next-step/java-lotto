@@ -3,29 +3,28 @@ package lotto.domain.summary;
 import lotto.constants.Winning;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningSummary {
 
-    private static final String PRIZE_MESSAGE = "%,d개 일치 (%,d원)";
-    private static final String MATCH_MESSAGE = " - %,d개";
-    private static final String SECOND_MATCH_MESSAGE = ", 보너스 볼 일치 - %,d개";
-
     private final Map<Winning, Long> winnings;
 
+    private WinningSummary(List<Winning> winnings) {
+        this.winnings = initializeWinnings();
 
-    private WinningSummary() {
-        winnings = prizeWinningMap();
+        for (Winning winning : winnings) {
+            addWinning(winning);
+        }
     }
 
-    public static WinningSummary newInstance() {
-        return new WinningSummary();
+    public static WinningSummary of(List<Winning> winnings) {
+        return new WinningSummary(winnings);
     }
 
-    private Map<Winning, Long> prizeWinningMap() {
+    private Map<Winning, Long> initializeWinnings() {
         return Winning.prizeWinning()
                 .stream()
                 .collect(Collectors.toMap(
@@ -34,12 +33,8 @@ public class WinningSummary {
                 ));
     }
 
-    public void addWinning(Winning winning) {
-        addWinning(winning, 1L);
-    }
-
-    public void addWinning(Winning winning, Long count) {
-        winnings.merge(winning, count, Long::sum);
+    private void addWinning(Winning winning) {
+        winnings.merge(winning, 1L, Long::sum);
     }
 
     public Map<Winning, Long> winnings() {
@@ -57,29 +52,5 @@ public class WinningSummary {
     @Override
     public int hashCode() {
         return Objects.hash(winnings);
-    }
-
-    @Override
-    public String toString() {
-        Set<Winning> prizeWinnings = Winning.prizeWinning();
-
-        StringBuffer stringBuffer = new StringBuffer();
-        for (Winning prizeWinning : prizeWinnings) {
-            Long matchCount = winnings.get(prizeWinning);
-            makeMessage(prizeWinning, stringBuffer, matchCount);
-        }
-
-        return stringBuffer.toString();
-    }
-
-    private void makeMessage(Winning prizeWinning, StringBuffer stringBuffer, Long matchCount) {
-        stringBuffer.append(String.format(PRIZE_MESSAGE, prizeWinning.matchCount(), prizeWinning.prize()));
-
-        if (prizeWinning == Winning.SECOND) {
-            stringBuffer.append(String.format(SECOND_MATCH_MESSAGE, matchCount)).append("\n");
-            return;
-        }
-
-        stringBuffer.append(String.format(MATCH_MESSAGE, matchCount)).append("\n");
     }
 }

@@ -66,16 +66,19 @@ public class Lottos {
     }
 
     public Summary match(Lotto jackpot, LottoNumber bonusNumber) {
-        WinningSummary winningSummary = WinningSummary.newInstance();
+        WinningSummary winningSummary = WinningSummary.of(winnings(jackpot, bonusNumber));
+        return Summary.of(winningSummary, purchasePrice());
+    }
 
+    private List<Winning> winnings(Lotto jackpot, LottoNumber bonusNumber) {
         WinningLotto winningLotto = WinningLotto.of(jackpot, bonusNumber);
+        List<Winning> winnings = new ArrayList<>();
 
         for (Lotto lotto : lottos) {
-            Winning winning = winningLotto.match(lotto);
-            winningSummary.addWinning(winning);
+            winnings.add(winningLotto.match(lotto));
         }
 
-        return Summary.of(winningSummary, purchasePrice());
+        return winnings;
     }
 
     public long purchasePrice() {

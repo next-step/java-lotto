@@ -41,29 +41,26 @@ class LottosTest {
     @Test
     @DisplayName("당첨 통계를 조회한다. 각 등수별 당첨수와 수익률을 반환한다")
     public void summary() {
-        Lottos lottos = Lottos.of(10000, () -> Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lottos lottos = Lottos.of(2000, () -> Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto jackpot = Lotto.of(Arrays.asList(1, 2, 3, 4, 30, 40));
         Summary match = lottos.match(jackpot, LottoNumber.of(20));
 
-        WinningSummary winningSummary = WinningSummary.newInstance();
-        winningSummary.addWinning(Winning.FOURTH, 10L);
-
-        assertThat(match).isEqualTo(Summary.of(winningSummary, 10000L));
+        WinningSummary winningSummary = WinningSummary.of(List.of(Winning.FOURTH, Winning.FOURTH));
+        assertThat(match).isEqualTo(Summary.of(winningSummary, 2000L));
     }
 
     @Test
     @DisplayName("로또 목록 2개를 합치고 각 등수별 당첨수와 수익률을 반환한다")
     public void merge_summary() {
-        Lottos lottosA = Lottos.of(10000, () -> Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lottos lottosB = Lottos.of(10000, () -> Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lottos lottosA = Lottos.of(1000, () -> Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lottos lottosB = Lottos.of(1000, () -> Arrays.asList(1, 2, 3, 4, 5, 6));
         Lottos mergedLottos = Lottos.concat(lottosA, lottosB);
         Lotto jackpot = Lotto.of(Arrays.asList(1, 2, 3, 4, 30, 40));
 
         Summary match = mergedLottos.match(jackpot, LottoNumber.of(20));
 
-        WinningSummary winningSummary = WinningSummary.newInstance();
-        winningSummary.addWinning(Winning.FOURTH, 20L);
+        WinningSummary winningSummary = WinningSummary.of(List.of(Winning.FOURTH, Winning.FOURTH));
 
-        assertThat(match).isEqualTo(Summary.of(winningSummary, 20000L));
+        assertThat(match).isEqualTo(Summary.of(winningSummary, 2000L));
     }
 }
