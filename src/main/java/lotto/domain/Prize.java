@@ -20,15 +20,15 @@ public enum Prize {
        return this.matchingCount == matchingCount;
     }
 
+    public int calculatePrizeByCount(int count) {
+        return prizeAmount * count;
+    }
+
     public int getMatchingCount() {
         return matchingCount;
     }
 
     public int getPrizeAmount() {
         return prizeAmount;
-    }
-
-    public int calculatePrizeByCount(int count) {
-        return prizeAmount * count;
     }
 }

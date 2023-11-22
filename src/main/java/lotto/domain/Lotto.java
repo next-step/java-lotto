@@ -8,7 +8,7 @@ public class Lotto {
     public static final int LOTTO_NUMBER_COUNT = 6;
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    private Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -44,18 +44,18 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
-    }
-
     public Prize determinePrize(Lotto winningLotto) {
         int matchingCount = (int) lottoNumbers.stream()
                 .filter(winningLotto::contain)
                 .count();
-        return PrizeSelector.selectByCount(matchingCount);
+        return new PrizeSelector().selectByCount(matchingCount);
     }
 
     private boolean contain(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 }

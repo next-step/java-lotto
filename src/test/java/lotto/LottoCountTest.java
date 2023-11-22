@@ -13,7 +13,10 @@ public class LottoCountTest {
     @ParameterizedTest
     @CsvSource(value = {"1000, 1", "11000, 11"})
     void getLottoCount(int putchaseAmout, int expected) {
+        // given
         LottoCount lottoCount = LottoCount.from(PurchaseAmount.from(putchaseAmout));
+
+        // when & then
         assertThat(lottoCount.getLottoCount()).isEqualTo(expected);
     }
 }

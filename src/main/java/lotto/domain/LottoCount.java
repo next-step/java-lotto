@@ -3,7 +3,7 @@ package lotto.domain;
 public class LottoCount {
     private final int lottoCount;
 
-    public LottoCount(int lottoCount) {
+    private LottoCount(int lottoCount) {
         this.lottoCount = lottoCount;
     }
 
@@ -11,11 +11,11 @@ public class LottoCount {
         return new LottoCount(purchaseAmount.getLottoCount());
     }
 
-    public int getLottoCount() {
-        return lottoCount;
-    }
-
     public boolean isLessThanCount(int presentLottoCount) {
         return presentLottoCount < lottoCount ;
+    }
+
+    public int getLottoCount() {
+        return lottoCount;
     }
 }

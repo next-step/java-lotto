@@ -23,13 +23,20 @@ public class LottoController {
         PurchaseAmount purchaseAmount = inputView.inputPurchaseAmount();
         LottoCount lottoCount = LottoCount.from(purchaseAmount);
         outputview.printLottoCount(lottoCount);
-        LottoSeller lottoSeller = new LottoSeller(lottoCount);
-        Lottos lottos = lottoSeller.generateLottos();
+
+        Lottos lottos = generateLottos(lottoCount);
         outputview.printLottos(lottos);
+
         Lotto winningLotto = inputView.inputWinningLotto();
         PrizeSummary prizeSummary = lottos.getPrizeSummary(winningLotto);
         outputview.printPrizeSummary(prizeSummary);
+
         Profit profit = Profit.of(purchaseAmount, prizeSummary);
         outputview.printProfit(profit);
+    }
+
+    private Lottos generateLottos(LottoCount lottoCount) {
+        LottoSeller lottoSeller = new LottoSeller(lottoCount);
+        return lottoSeller.generateLottos();
     }
 }

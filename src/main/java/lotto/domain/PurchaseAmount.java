@@ -4,7 +4,7 @@ public class PurchaseAmount {
     public static final int LOTTO_PRICE = 1000;
     private final int purchaseAmount;
 
-    public PurchaseAmount(int purchaseAmount) {
+    private PurchaseAmount(int purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
     }
 
@@ -23,11 +23,11 @@ public class PurchaseAmount {
         return purchaseAmount % LOTTO_PRICE == 0;
     }
 
-    public int getLottoCount() {
-        return purchaseAmount / LOTTO_PRICE;
+    public double devideWith(int prizeAmount) {
+        return (double) prizeAmount / purchaseAmount;
     }
 
-    public int devideWith(int prizeAmount) {
-        return prizeAmount / purchaseAmount;
+    public int getLottoCount() {
+        return purchaseAmount / LOTTO_PRICE;
     }
 }

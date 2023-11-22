@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -9,10 +10,6 @@ public class Lottos {
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
-    }
-
-    public List<Lotto> getLottos() {
-        return lottos;
     }
 
     public PrizeSummary getPrizeSummary(Lotto winningLotto) {
@@ -34,5 +31,9 @@ public class Lottos {
             Prize prize = lotto.determinePrize(winningLotto);
             prizeSummary.put(prize, prizeSummary.get(prize) + 1);
         }
+    }
+
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 }

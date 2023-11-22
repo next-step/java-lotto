@@ -3,7 +3,7 @@ package lotto.domain;
 public class Profit {
     private final double profit;
 
-    public Profit(double profit) {
+    private Profit(double profit) {
         this.profit = profit;
     }
 

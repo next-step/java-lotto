@@ -30,7 +30,7 @@ public class LottoSeller implements Seller {
         boolean isValidLotto = true;
         int presentLottoNumberCount = 0;
         while (isValidLotto && presentLottoNumberCount < 6) {
-            int lottoNumber = new Random().nextInt(45) + 1; // 테스트 위해 랜덤 클래스로 빼서 주입 시키기
+            int lottoNumber = new Random().nextInt(LottoNumber.MAX_LOTTO_NUMBER) + 1;
             isValidLotto = lottoNumbers.add(lottoNumber);
             presentLottoNumberCount++;
         }

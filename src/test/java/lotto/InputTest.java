@@ -22,6 +22,7 @@ public class InputTest {
         Reader reader = new FakeReader(input);
         InputView inputView = InputView.of(reader, printer);
 
+        // when & then
         assertThatIllegalArgumentException().isThrownBy(inputView::inputPurchaseAmount);
     }
 
@@ -35,6 +36,7 @@ public class InputTest {
         Reader reader = new FakeReader(input);
         InputView inputView = InputView.of(reader, printer);
 
+        // when & then
         assertThatIllegalArgumentException().isThrownBy(inputView::inputWinningLotto);
     }
 }
