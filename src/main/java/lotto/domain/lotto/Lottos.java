@@ -59,11 +59,6 @@ public class Lottos {
         }
     }
 
-    public static void validate(long purchasePrice, long manualLottoCount) {
-        validatePurchasePrice(purchasePrice);
-        validateLottoCount(purchasePrice, manualLottoCount);
-    }
-
     public static Lottos concat(Lottos lottosA, Lottos lottosB) {
         List<Lotto> collect = Stream.concat(lottosA.lottos.stream(), lottosB.lottos.stream())
                 .collect(Collectors.toList());
