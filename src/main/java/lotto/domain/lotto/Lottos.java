@@ -80,7 +80,7 @@ public class Lottos {
             winningSummary.addWinning(winning);
         }
 
-        return new Summary(winningSummary, purchasePrice());
+        return Summary.of(winningSummary, purchasePrice());
     }
 
     public long purchasePrice() {

@@ -9,9 +9,13 @@ public class Summary {
     private final WinningSummary winningSummary;
     private final ProfitRate profitRate;
 
-    public Summary(WinningSummary winningSummary, Long purchasePrice) {
+    private Summary(WinningSummary winningSummary, Long purchasePrice) {
         this.winningSummary = winningSummary;
         this.profitRate = ProfitRate.of(winningSummary, purchasePrice);
+    }
+
+    public static Summary of(WinningSummary winningSummary, Long purchasePrice) {
+        return new Summary(winningSummary, purchasePrice);
     }
 
     @Override

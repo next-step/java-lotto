@@ -48,7 +48,7 @@ class LottosTest {
         WinningSummary winningSummary = WinningSummary.newInstance();
         winningSummary.addWinning(Winning.FOURTH, 10L);
 
-        assertThat(match).isEqualTo(new Summary(winningSummary, 10000L));
+        assertThat(match).isEqualTo(Summary.of(winningSummary, 10000L));
     }
 
     @Test
@@ -64,6 +64,6 @@ class LottosTest {
         WinningSummary winningSummary = WinningSummary.newInstance();
         winningSummary.addWinning(Winning.FOURTH, 20L);
 
-        assertThat(match).isEqualTo(new Summary(winningSummary, 20000L));
+        assertThat(match).isEqualTo(Summary.of(winningSummary, 20000L));
     }
 }
