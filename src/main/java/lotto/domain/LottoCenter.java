@@ -3,14 +3,22 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.domain.Match.*;
+import static lotto.domain.Rank.*;
 
 public class LottoCenter {
 
     public static final int PRICE = 1000;
 
-    private final List<Long> result = new ArrayList<>();
     private static int cash;
+    private WinningLotto winningLotto;
+    private List<Rank> result;
+
+    public LottoCenter() {
+    }
+
+    public LottoCenter(WinningLotto winningLotto) {
+        this.winningLotto = winningLotto;
+    }
 
     public List<Lotto> buyLotto(int cash) {
         LottoCenter.cash = cash;
@@ -26,24 +34,30 @@ public class LottoCenter {
         return lottos;
     }
 
-    public void matchWinningNumber(List<Lotto> lottos, Lotto winningNumbers) {
+    public List<Rank> matchWinningNumbers(List<Lotto> lottos) {
+        List<Rank> checkedResult = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            lotto.matchCount(winningNumbers);
+            checkedResult.add(winningLotto.matchRank(lotto));
         }
+        this.result = checkedResult;
+        return this.result;
     }
 
-    public List<Long> checkWinningResult(List<Lotto> lottos) {
-        for (Match match : values()) {
-            result.add(lottos.stream()
-                    .filter(lotto -> Match.valueOf(lotto).equals(match)).count());
+    public List<Integer> checkWinningResult() {
+        List<Integer> statistic = new ArrayList<>();
+        for (Rank value : values()) {
+            int count = (int) result.stream().filter(n -> n.equals(value)).count();
+            statistic.add(count);
         }
-        return result;
+        return statistic;
     }
 
     public float checkWinningRate() {
-        return (float) ((result.get(0) * THREEMATCH.prize())
-                + (result.get(1) * FOURMATCH.prize())
-                + (result.get(2) * FIVEMATCH.prize())
-                + (result.get(3) * SIXMATCH.prize())) / cash;
+        int sum = 0;
+        for (Rank value : values()) {
+            int count = (int) result.stream().filter(n -> n.equals(value)).count();
+            sum = sum + count * value.getWinningMoney();
+        }
+        return (float) sum / cash;
     }
 }
