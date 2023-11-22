@@ -35,10 +35,15 @@ class ParserTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("파싱된 숫자 리스트 사이즈가 6일때 숫자 리스트 리턴")
+    @DisplayName("파싱된 숫자 리스트 사이즈가 6일때 LottoNumber 리스트 리턴")
     @Test
     void 숫자_리스트_파싱() {
-        List<Integer> numbers = Parser.numbersParsing("1,2,3,4,5,6");
-        assertThat(numbers).containsExactly(1, 2, 3, 4, 5, 6);
+        List<LottoNumber> numbers = Parser.numbersParsing("1,2,3,4,5,6");
+        assertThat(numbers).containsExactly(new LottoNumber(1)
+                , new LottoNumber(2)
+                , new LottoNumber(3)
+                , new LottoNumber(4)
+                , new LottoNumber(5)
+                , new LottoNumber(6));
     }
 }

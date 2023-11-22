@@ -13,12 +13,12 @@ public class Lotto {
     public static final int START_NUMBER = 1;
     public static final int END_NUMBER = 45;
 
-    private List<Integer> numbers;
+    private List<LottoNumber> numbers;
 
     public Lotto() {
-        List<Integer> numbersRange = new ArrayList<>();
+        List<LottoNumber> numbersRange = new ArrayList<>();
         for (int number = START_NUMBER; number <= END_NUMBER; number++) {
-            numbersRange.add(number);
+            numbersRange.add(new LottoNumber(number));
         }
         Collections.shuffle(numbersRange);
         this.numbers = new ArrayList<>(purchasing(numbersRange));
@@ -26,24 +26,24 @@ public class Lotto {
     }
 
     public Lotto(String value) {
-        List<Integer> numbers = new ArrayList<>(Parser.numbersParsing(value));
-        validationCheck(numbers);
+        List<LottoNumber> numbers = new ArrayList<>(Parser.numbersParsing(value));
+        duplicationCheck(numbers);
         this.numbers = numbers;
     }
 
-    public int correctCount(List<Integer> values) {
+    public int correctCount(List<LottoNumber> values) {
         return values.stream()
                 .filter(value -> this.numbers.contains(value))
                 .collect(Collectors.toList())
                 .size();
     }
 
-    public boolean contains(int value) {
-        return this.numbers.contains(value);
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
     }
 
-    private List<Integer> purchasing(List<Integer> numbersRange) {
-        List<Integer> game = numbersRange.subList(0, 6);
+    private List<LottoNumber> purchasing(List<LottoNumber> numbersRange) {
+        List<LottoNumber> game = numbersRange.subList(0, 6);
         Collections.sort(game);
         return game;
     }
@@ -56,21 +56,10 @@ public class Lotto {
         return new WinningInfoDTO(correctCount, bonusCorrect, new Amount(Winning.winningAmount(correctCount, bonusCorrect)));
     }
 
-    private void validationCheck(List<Integer> list) {
-        if (numberRangeCheck(list)) {
-            throw new IllegalArgumentException("번호중 숫자 범위를 벗어나는 수가 있습니다. 숫자범위 : 1~45");
-        }
-        if (duplicationCheck(list)) {
+    private void duplicationCheck(List<LottoNumber> list) {
+        if (list.stream().distinct().count() != list.size()) {
             throw new IllegalArgumentException("번호에 중복이 있습니다.");
         }
-    }
-
-    private boolean numberRangeCheck(List<Integer> list) {
-        return list.stream().anyMatch(value -> value < START_NUMBER || value > END_NUMBER);
-    }
-
-    private boolean duplicationCheck(List<Integer> list) {
-        return list.stream().distinct().count() != list.size();
     }
 
     @Override

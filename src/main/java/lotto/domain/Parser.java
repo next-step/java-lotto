@@ -27,11 +27,11 @@ public class Parser {
         }
     }
 
-    public static List<Integer> numbersParsing(String value) {
+    public static List<LottoNumber> numbersParsing(String value) {
 
         value = value.replaceAll(EMPTY_SPACE, "");
 
-        List<Integer> numbers = stringNumbersConversion(stringSplit(value));
+        List<LottoNumber> numbers = stringNumbersConversion(stringSplit(value));
 
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("숫자는 6개를 입력해야됩니다.");
@@ -44,10 +44,10 @@ public class Parser {
         return Arrays.asList(splitText);
     }
 
-    private static List<Integer> stringNumbersConversion(List<String> values) {
-        List<Integer> numbers = new ArrayList<>();
+    private static List<LottoNumber> stringNumbersConversion(List<String> values) {
+        List<LottoNumber> numbers = new ArrayList<>();
         for (String value : values) {
-            numbers.add(numberParsing(value));
+            numbers.add(new LottoNumber(numberParsing(value)));
         }
         return numbers;
     }
