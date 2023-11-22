@@ -1,6 +1,6 @@
 package lottosecond.domain.lotto;
 
-import lottosecond.domain.LottoBuyMoney;
+import lottosecond.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ class ManualLottoCountTest {
     @Test
     void moreManualLotto() {
         // given
-        LottoBuyMoney lottoBuyMoney = new LottoBuyMoney(12000);
+        Money lottoBuyMoney = new Money(12000);
         // when
         // then
         assertThatThrownBy(() -> ManualLottoCount.from(13, lottoBuyMoney))
@@ -24,7 +24,7 @@ class ManualLottoCountTest {
     @Test
     void underZero() {
         // given
-        LottoBuyMoney lottoBuyMoney = new LottoBuyMoney(12000);
+        Money lottoBuyMoney = new Money(12000);
         // when
         // then
         assertThatThrownBy(() -> ManualLottoCount.from(-1, lottoBuyMoney))

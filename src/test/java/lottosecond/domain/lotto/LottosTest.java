@@ -1,9 +1,6 @@
 package lottosecond.domain.lotto;
 
-import lottosecond.domain.StringToLottoConvertor;
-import lottosecond.domain.Winner;
-import lottosecond.domain.WinnerBoard;
-import lottosecond.domain.WinningCondition;
+import lottosecond.domain.*;
 import lottosecond.testutil.TestShuffler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,12 +14,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottosTest {
 
     private LottoMaker lottoMaker;
-    private LottoCount lottoCount;
+    private TotalLottoCount lottoCount;
 
     @BeforeEach
     void setUp() {
-        lottoCount = new LottoCount(1000, 0);
-        lottoMaker = new LottoMaker(new StringToLottoConvertor(), lottoCount);
+        lottoCount = new TotalLottoCount(new Money(1000), 0);
+        lottoMaker = new LottoMaker(lottoCount);
     }
 
     @DisplayName("기존 로또 목록에서 새로운 로또를 추가합니다.")

@@ -1,6 +1,8 @@
 package lottosecond.view;
 
+import lottosecond.domain.lotto.LottoCount;
 import lottosecond.domain.lotto.ManualLottoCount;
+import lottosecond.domain.lotto.TotalLottoCount;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,12 +40,11 @@ public class InputView {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 
-    public List<String> inputManualLottoNumber(ManualLottoCount manualLottoCount) {
+    public List<String> inputManualLottoNumber(TotalLottoCount totalLottoCount) {
         Scanner scanner = new Scanner(System.in);
         List<String> lottoNumberList = new ArrayList<>();
 
-        int lottoCount = manualLottoCount.getManualLottoCount();
-        for (int i = 0; i < lottoCount; i++) {
+        for (int i = 0; i < totalLottoCount.manualLottoCount(); i++) {
             lottoNumberList.add(scanner.nextLine());
         }
         return lottoNumberList;

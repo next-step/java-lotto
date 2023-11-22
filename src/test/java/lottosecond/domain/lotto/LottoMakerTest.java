@@ -1,5 +1,6 @@
 package lottosecond.domain.lotto;
 
+import lottosecond.domain.Money;
 import lottosecond.domain.StringToLottoConvertor;
 import lottosecond.testutil.TestShuffler;
 import org.junit.jupiter.api.DisplayName;
@@ -15,8 +16,8 @@ class LottoMakerTest {
     @Test
     void notSameSize() {
         // given
-        LottoCount lottoCount = new LottoCount(4000, 3);
-        LottoMaker lottoMaker = new LottoMaker(new StringToLottoConvertor(), lottoCount);
+        TotalLottoCount lottoCount = new TotalLottoCount(new Money(4000), 3);
+        LottoMaker lottoMaker = new LottoMaker(lottoCount);
         // when
         // then
         assertThatThrownBy(() -> lottoMaker.makeTotalLottos(new TestShuffler(), new ArrayList<>()))

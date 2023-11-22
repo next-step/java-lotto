@@ -16,10 +16,9 @@ class StringToLottoConvertorTest {
     void illegalNumber() {
         // given
         String stringNumber = "1, 2, 3: 4, 5, 6";
-        StringToLottoConvertor stringToLottoConvertor = new StringToLottoConvertor();
         // when
         // then
-        assertThatThrownBy(() -> stringToLottoConvertor.lottoConvert(stringNumber))
+        assertThatThrownBy(() -> StringToLottoConvertor.lottoConvert(stringNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("올바르지 않은 로또 번호 입력 형태입니다.");
     }
@@ -29,9 +28,8 @@ class StringToLottoConvertorTest {
     void makeLotto() {
         // given
         String stringNumber = "1, 2, 3, 4, 5, 6";
-        StringToLottoConvertor stringToLottoConvertor = new StringToLottoConvertor();
         // when
-        Lotto lotto = stringToLottoConvertor.lottoConvert(stringNumber);
+        Lotto lotto = StringToLottoConvertor.lottoConvert(stringNumber);
         // then
         assertThat(lotto).isEqualTo(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
     }
@@ -41,9 +39,8 @@ class StringToLottoConvertorTest {
     void makeLottoList() {
         // given
         List<String> stringNumberList = List.of("1, 2, 3, 4, 5, 6", "11, 12, 13, 14, 15, 16");
-        StringToLottoConvertor stringToLottoConvertor = new StringToLottoConvertor();
         // when
-        List<Lotto> lottoList = stringToLottoConvertor.lottoListConvert(stringNumberList);
+        List<Lotto> lottoList = StringToLottoConvertor.lottoListConvert(stringNumberList);
         // then
         assertThat(lottoList).isEqualTo(List.of(
                 new Lotto(List.of(1, 2, 3, 4, 5, 6)),

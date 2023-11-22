@@ -11,11 +11,11 @@ public class LottoMain {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
-        LottoCount lottoCount = new LottoCount(inputView.inputLottoBuyMoney(), inputView.manualLottoCount());
-        LottoMaker lottoMaker = new LottoMaker(new StringToLottoConvertor(), lottoCount);
+        TotalLottoCount lottoCount = new TotalLottoCount(new Money(inputView.inputLottoBuyMoney()), inputView.manualLottoCount());
+        LottoMaker lottoMaker = new LottoMaker(lottoCount);
 
         inputView.printManualLotto();
-        Lottos lottos = lottoMaker.makeTotalLottos(new LottoShuffler(), inputView.inputManualLottoNumber(lottoCount.getManualLottoCount()));
+        Lottos lottos = lottoMaker.makeTotalLottos(new LottoShuffler(), inputView.inputManualLottoNumber(lottoCount));
 
         outputView.printManualAndAutoLottoInfo(lottoCount);
         outputView.printLottoListInfo(lottos);

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoBuyMoneyTest {
+class MoneyTest {
 
     @Test
     @DisplayName("구입 금액은 1000의 배수여야 합니다.")
@@ -14,7 +14,7 @@ class LottoBuyMoneyTest {
         // given
         // when
         // then
-        assertThatThrownBy(() -> new LottoBuyMoney(1300))
+        assertThatThrownBy(() -> new Money(1300))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 구매 금액은 1000의 배수여야 합니다.");
     }
@@ -23,7 +23,7 @@ class LottoBuyMoneyTest {
     @DisplayName("로또 구입 금액을 통해 총 몇 장의 로또를 샀는지 알려줍니다.")
     void countLotto() {
         // given
-        LottoBuyMoney lottoBuyMoney = new LottoBuyMoney(13000);
+        Money lottoBuyMoney = new Money(13000);
         // when
         int result = lottoBuyMoney.countLotto();
         // then

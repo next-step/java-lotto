@@ -1,6 +1,6 @@
 package lottosecond.domain.lotto;
 
-import lottosecond.domain.LottoBuyMoney;
+import lottosecond.domain.Money;
 
 public class ManualLottoCount {
 
@@ -13,7 +13,7 @@ public class ManualLottoCount {
         this.manualLottoCount = manualLottoCount;
     }
 
-    public static ManualLottoCount from(int manualLottoCount, LottoBuyMoney lottoBuyMoney) {
+    public static ManualLottoCount from(int manualLottoCount, Money lottoBuyMoney) {
         int totalLottoCount = lottoBuyMoney.countLotto();
         if (manualLottoCount > totalLottoCount) {
             throw new IllegalArgumentException("수동 로또 개수가 총 구매 로또 수보다 클 수 없습니다.");

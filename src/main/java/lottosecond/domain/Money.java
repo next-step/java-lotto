@@ -1,12 +1,12 @@
 package lottosecond.domain;
 
-import lottosecond.domain.lotto.Lottos;
+public class Money {
 
-public class LottoBuyMoney {
+    public static final int EACH_LOTTO_PRICE = 1000;
 
     private final int money;
 
-    public LottoBuyMoney(int money) {
+    public Money(int money) {
         if (!isValidBuyPrice(money)) {
             throw new IllegalArgumentException("로또 구매 금액은 1000의 배수여야 합니다.");
         }
@@ -15,10 +15,10 @@ public class LottoBuyMoney {
     }
 
     public int countLotto() {
-        return money / Lottos.EACH_LOTTO_PRICE;
+        return money / EACH_LOTTO_PRICE;
     }
 
     private boolean isValidBuyPrice(int lottoBuyMoney) {
-        return lottoBuyMoney % Lottos.EACH_LOTTO_PRICE == 0;
+        return lottoBuyMoney % EACH_LOTTO_PRICE == 0;
     }
 }

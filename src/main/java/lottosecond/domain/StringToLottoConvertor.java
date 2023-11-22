@@ -8,7 +8,10 @@ import java.util.stream.Collectors;
 
 public class StringToLottoConvertor {
 
-    public Lotto lottoConvert(String lottoString) {
+    private StringToLottoConvertor() {
+    }
+
+    public static Lotto lottoConvert(String lottoString) {
         List<Integer> collect = Arrays.stream(lottoString.split(","))
                 .map(strNumber -> {
                     try {
@@ -22,8 +25,8 @@ public class StringToLottoConvertor {
         return new Lotto(collect);
     }
 
-    public List<Lotto> lottoListConvert(List<String> stringNumberList) {
-        return stringNumberList.stream().map(this::lottoConvert)
+    public static List<Lotto> lottoListConvert(List<String> stringNumberList) {
+        return stringNumberList.stream().map(StringToLottoConvertor::lottoConvert)
                 .collect(Collectors.toList());
     }
 }

@@ -1,30 +1,26 @@
 package lottosecond.domain.lotto;
 
-import lottosecond.domain.LottoBuyMoney;
-
 public class LottoCount {
 
-    private final LottoBuyMoney lottoBuyMoney;
-    private final ManualLottoCount manualLottoCount;
+    private final int lottoCount;
 
-    public LottoCount(int money, int manualLottoCount) {
-        this.lottoBuyMoney = new LottoBuyMoney(money);
-        this.manualLottoCount = ManualLottoCount.from(manualLottoCount, lottoBuyMoney);
+    private LottoCount(int autoLottoCount) {
+        if (autoLottoCount < 0) {
+            throw new IllegalArgumentException("로또 개수가 0보다 작을 수 없습니다.");
+        }
+
+        this.lottoCount = autoLottoCount;
     }
 
-    public int totalLottoCount() {
-        return lottoBuyMoney.countLotto();
+    public static LottoCount from(int targetLottoCount, int totalLottoCount) {
+        if (targetLottoCount > totalLottoCount) {
+            throw new IllegalArgumentException("로또 개수가 총 구매 로또 수보다 클 수 없습니다.");
+        }
+
+        return new LottoCount(targetLottoCount);
     }
 
-    public int manualLottoCount() {
-        return manualLottoCount.getManualLottoCount();
-    }
-
-    public int autoLottoCount() {
-        return lottoBuyMoney.countLotto() - manualLottoCount();
-    }
-
-    public ManualLottoCount getManualLottoCount() {
-        return manualLottoCount;
+    public int getLottoCount() {
+        return lottoCount;
     }
 }

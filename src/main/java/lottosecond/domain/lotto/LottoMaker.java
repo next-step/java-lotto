@@ -7,11 +7,9 @@ import java.util.List;
 
 public class LottoMaker {
 
-    private final StringToLottoConvertor stringToLottoConvertor;
-    private final LottoCount lottoCount;
+    private final TotalLottoCount lottoCount;
 
-    public LottoMaker(StringToLottoConvertor stringToLottoConvertor, LottoCount lottoCount) {
-        this.stringToLottoConvertor = stringToLottoConvertor;
+    public LottoMaker(TotalLottoCount lottoCount) {
         this.lottoCount = lottoCount;
     }
 
@@ -32,11 +30,11 @@ public class LottoMaker {
     }
 
     public Lotto makeLotto(String winNumbersString) {
-        return stringToLottoConvertor.lottoConvert(winNumbersString);
+        return StringToLottoConvertor.lottoConvert(winNumbersString);
     }
 
     private Lottos makeManualLottos(List<String> lottoNumbers) {
-        List<Lotto> lottoList = stringToLottoConvertor.lottoListConvert(lottoNumbers);
+        List<Lotto> lottoList = StringToLottoConvertor.lottoListConvert(lottoNumbers);
 
         return new Lottos(lottoList);
     }

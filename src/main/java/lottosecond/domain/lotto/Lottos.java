@@ -1,5 +1,6 @@
 package lottosecond.domain.lotto;
 
+import lottosecond.domain.Money;
 import lottosecond.domain.Winner;
 import lottosecond.domain.WinnerBoard;
 import lottosecond.domain.WinningCondition;
@@ -9,8 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lottos {
-
-    public static final int EACH_LOTTO_PRICE = 1000;
 
     private final List<Lotto> lottoList;
 
@@ -37,7 +36,7 @@ public class Lottos {
     }
 
     public int totalLottoBuyMoney() {
-        return lottoList.size() * EACH_LOTTO_PRICE;
+        return lottoList.size() * Money.EACH_LOTTO_PRICE;
     }
 
     public int getLottoCount() {

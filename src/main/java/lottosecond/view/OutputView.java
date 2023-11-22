@@ -4,7 +4,7 @@ package lottosecond.view;
 import lottosecond.domain.Winner;
 import lottosecond.domain.WinnerBoard;
 import lottosecond.domain.lotto.Lotto;
-import lottosecond.domain.lotto.LottoCount;
+import lottosecond.domain.lotto.TotalLottoCount;
 import lottosecond.domain.lotto.Lottos;
 
 import java.util.LinkedHashMap;
@@ -54,7 +54,7 @@ public class OutputView {
         System.out.println(output);
     }
 
-    public void printManualAndAutoLottoInfo(LottoCount lottoCount) {
+    public void printManualAndAutoLottoInfo(TotalLottoCount lottoCount) {
         int manualLotto = lottoCount.manualLottoCount();
         int autoLotto = lottoCount.autoLottoCount();
         System.out.println();
