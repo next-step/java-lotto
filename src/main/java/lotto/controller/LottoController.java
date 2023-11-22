@@ -9,7 +9,6 @@ import java.util.Map;
 
 public class LottoController {
 
-    private static final int PRICE_OF_LOTTO = 1000;
     private static final String DELIMITER = ", ";
 
     private LottoController() {
@@ -17,8 +16,7 @@ public class LottoController {
 
     public static void run() {
         final int amount = InputView.inputAmount();
-        Validator.validateAmount(amount);
-        final int quantity = amount / PRICE_OF_LOTTO;
+        final int quantity = Money.calculateLottoQuantity(amount);
         OutputView.outputQuantity(quantity);
 
         LottoMachine lottoMachine = new LottoMachine();
