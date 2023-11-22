@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
 
 import java.util.*;
@@ -9,9 +10,9 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printPurchasedLottoNumbers(List<List<Integer>> lottoNumbers) {
-        for (List<Integer> numbers : lottoNumbers) {
-            System.out.println(numbers);
+    public static void printPurchasedLottoNumbers(List<LottoNumber> lottoNumbers) {
+        for(int i=0; i<lottoNumbers.size();i++) {
+            System.out.println(lottoNumbers.get(i).getNumbers());
         }
     }
 

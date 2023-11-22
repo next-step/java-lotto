@@ -1,15 +1,18 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumbers {
-    private final LottoNumber lottoNumber;
+    private final List<LottoNumber> lottoTicket = new ArrayList<>();
 
-    public LottoNumbers(LottoNumber lottoNumber) {
-        this.lottoNumber = lottoNumber;
+    public List<LottoNumber> getLottoTicket() {
+        return new ArrayList<>(lottoTicket);
     }
 
-    public List<Integer> generateLottoNumbers() {
-        return lottoNumber.getNumbers();
+    public void buyLottoTicket(int count) {
+        for(int i=0; i<count; i++) {
+            lottoTicket.add(new LottoNumber());
+        }
     }
 }

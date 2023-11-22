@@ -21,12 +21,9 @@ public class Buyer {
         int count = money / LOTTO_PRICE;
         ResultView.printPurchaseCount(count);
 
-        for (int i = 0; i < count; i++) {
-            LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumber());
-            List<Integer> generatedNumbers = lottoNumbers.generateLottoNumbers();
-            Collections.sort(generatedNumbers);
-            purchasedLottoNumbers.add(generatedNumbers);
-        }
+        LottoNumbers lottoNumbers = new LottoNumbers();
+        lottoNumbers.buyLottoTicket(count);
+        ResultView.printPurchasedLottoNumbers(lottoNumbers.getLottoTicket());
     }
 
     public void checkLottoWinningNumbers(Buyer buyer, WinningNumbers winningNumbers) {
