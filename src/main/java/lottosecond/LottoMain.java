@@ -2,6 +2,9 @@ package lottosecond;
 
 import lottosecond.domain.*;
 import lottosecond.domain.lotto.*;
+import lottosecond.domain.lottomaker.AutoLottoNumberGenerator;
+import lottosecond.domain.lottomaker.LottoMaker;
+import lottosecond.domain.lottomaker.ManualLottoNumberGenerator;
 import lottosecond.view.InputView;
 import lottosecond.view.OutputView;
 
@@ -12,18 +15,23 @@ public class LottoMain {
         OutputView outputView = new OutputView();
 
         TotalLottoCount lottoCount = new TotalLottoCount(new Money(inputView.inputLottoBuyMoney()), inputView.manualLottoCount());
-        LottoMaker lottoMaker = new LottoMaker(lottoCount);
+
+        LottoMaker manualLottoMaker = new LottoMaker(new ManualLottoNumberGenerator());
+        LottoMaker autoLottoMaker = new LottoMaker(new AutoLottoNumberGenerator());
 
         inputView.printManualLotto();
-        Lottos lottos = lottoMaker.makeTotalLottos(new LottoShuffler(), inputView.inputManualLottoNumber(lottoCount));
+        Lottos manualLottos = manualLottoMaker.makeLottos(lottoCount.getManualLottoCount());
+        Lottos autoLottos = autoLottoMaker.makeLottos(lottoCount.getAutoLottoCount());
+
+        Lottos lottos = Lottos.makeTotalLottos(manualLottos, autoLottos);
 
         outputView.printManualAndAutoLottoInfo(lottoCount);
         outputView.printLottoListInfo(lottos);
 
-        Lotto winningLotto = lottoMaker.makeLotto(inputView.inputWinningNumbers());
+        inputView.printWinningNumbers();
+        Lotto winningLotto = manualLottoMaker.makeLotto();
 
-        int bonusNumber = inputView.inputBonusNumber();
-        WinningCondition winningCondition = new WinningCondition(winningLotto, LottoNumber.of(bonusNumber));
+        WinningCondition winningCondition = new WinningCondition(winningLotto, LottoNumber.of(inputView.inputBonusNumber()));
 
         WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningCondition);
         outputView.printWinnerStatistics(winnerBoard);

@@ -24,4 +24,12 @@ public class TotalLottoCount {
     public int autoLottoCount() {
         return autoLottoCount.getLottoCount();
     }
+
+    public LottoCount getManualLottoCount() {
+        return manualLottoCount;
+    }
+
+    public LottoCount getAutoLottoCount() {
+        return autoLottoCount;
+    }
 }

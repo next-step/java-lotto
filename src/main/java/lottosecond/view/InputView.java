@@ -1,11 +1,5 @@
 package lottosecond.view;
 
-import lottosecond.domain.lotto.LottoCount;
-import lottosecond.domain.lotto.ManualLottoCount;
-import lottosecond.domain.lotto.TotalLottoCount;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -16,10 +10,8 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public String inputWinningNumbers() {
-        Scanner scanner = new Scanner(System.in);
+    public void printWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.nextLine();
     }
 
     public int inputBonusNumber() {
@@ -38,15 +30,5 @@ public class InputView {
     public void printManualLotto() {
         System.out.println();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-    }
-
-    public List<String> inputManualLottoNumber(TotalLottoCount totalLottoCount) {
-        Scanner scanner = new Scanner(System.in);
-        List<String> lottoNumberList = new ArrayList<>();
-
-        for (int i = 0; i < totalLottoCount.manualLottoCount(); i++) {
-            lottoNumberList.add(scanner.nextLine());
-        }
-        return lottoNumberList;
     }
 }

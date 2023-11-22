@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoShufflerTest {
+class AutoLottoMakerTest {
 
     @Test
     @DisplayName("6개의 랜덤한 숫자를 반환하는지 확인하는 테스트")
