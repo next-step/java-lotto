@@ -65,7 +65,7 @@ public class InputView {
         return count <= 0;
     }
 
-    public int readManulLottoCount() {
+    public int readManualLottoCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         return readInteger();
     }
