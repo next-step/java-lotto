@@ -6,10 +6,9 @@ import java.util.Comparator;
 public enum Rank {
 
     FIRST(6, 2000000000),
-    SECOND(5, 30000000),
-    THIRD(5, 1500000),
-    FORTH(4, 50000),
-    FIFTH(3, 5000),
+    SECOND(5, 1500000),
+    THIRD(4, 50000),
+    FORTH(3, 5000),
     FAIL(0, 0);
 
     private final Integer matchingCount;
@@ -22,30 +21,24 @@ public enum Rank {
 
     public static Rank[] winningRanks() {
         return Arrays.stream(Rank.values())
-                .filter(it -> it.matchingCount > 0)
+                .filter(Rank::isFail)
                 .sorted(Comparator.comparingInt(Rank::matchingCount))
                 .toArray(Rank[]::new);
     }
 
-    public static Rank convertRanking(int count, boolean matchBonus) {
-        if (count == 5) {
-            return mathchBounusRank(matchBonus);
-        }
+    public static Rank convertRanking(int count) {
         return Arrays.stream(Rank.values())
                 .filter(it -> it.matchingCount.equals(count))
                 .findFirst()
                 .orElse(FAIL);
     }
 
-    private static Rank mathchBounusRank(boolean matchBonus) {
-        if (matchBonus) {
-            return SECOND;
-        }
-        return THIRD;
-    }
-
     public Integer matchingCount() {
         return matchingCount;
+    }
+
+    public boolean isFail() {
+        return matchingCount > 0;
     }
 
     public Integer rewardPrice() {

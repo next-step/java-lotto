@@ -6,6 +6,13 @@ public class LottoStatics {
 
     private WinningLottos winningLottos = new WinningLottos();
 
+    public LottoStatics() {
+    }
+
+    public LottoStatics(WinningLottos winningLottos) {
+        this.winningLottos = winningLottos;
+    }
+
     public void classifyRankLotto(List<Lotto> lottos, Lotto winningLotto) {
         for (Lotto lotto : lottos) {
             int matchingCount = winningLotto.countMatchingWinningLotto(lotto);
