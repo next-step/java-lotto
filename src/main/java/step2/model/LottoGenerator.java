@@ -33,16 +33,20 @@ public class LottoGenerator {
     }
 
     public WinningLotto generateWinningLotto(String userInput, Integer bonusNumber) {
-        return new WinningLotto(parseWinningNumbers(splitWinningNumbers(userInput)), bonusNumber);
+        return new WinningLotto(parseLottoNumbers(splitLottoNumbers(userInput)), bonusNumber);
     }
 
-    private List<Integer> parseWinningNumbers(List<String> splitWinningNumbers) {
+    public Lotto generateManualLotto(String userInput) {
+        return new Lotto(parseLottoNumbers(splitLottoNumbers(userInput)));
+    }
+
+    private List<Integer> parseLottoNumbers(List<String> splitWinningNumbers) {
         return splitWinningNumbers.stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
-    private List<String> splitWinningNumbers(String userInput) {
+    private List<String> splitLottoNumbers(String userInput) {
         return List.of(userInput.split(DELIMITER));
     }
 }

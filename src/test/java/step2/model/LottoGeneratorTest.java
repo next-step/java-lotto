@@ -26,4 +26,10 @@ public class LottoGeneratorTest {
         assertThat(lottoGenerator.generateWinningLotto(userInput, bonusNumber))
                 .isEqualTo(new WinningLotto(new int[]{1, 2, 3, 4, 5, 6}, bonusNumber));
     }
+
+    @Test
+    public void 사용자가_입력한_수동_로또_1장_생성하기() {
+        assertThat(lottoGenerator.generateManualLotto("1, 2, 3, 4, 5, 6"))
+                .isEqualTo(new Lotto(new int[]{1, 2, 3, 4, 5, 6}));
+    }
 }
