@@ -6,8 +6,7 @@ import java.util.function.IntBinaryOperator;
 import java.util.function.LongBinaryOperator;
 
 public enum Currency {
-
-    KOREA("kor", "원", (profitAmount, investmentAmount) -> (profitAmount / investmentAmount)),
+    KOREA("kor", "원", (profitAmount, investmentAmount) -> (profitAmount / investmentAmount))
     ;
     private final String countryType;
     private final String currencyType;
