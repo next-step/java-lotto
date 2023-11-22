@@ -15,13 +15,13 @@ public class Lottos {
 //        this(0, lottos);
     }
 
-    public Lottos(int value) {
-        this(value, new ArrayList<>());
+    public Lottos(Amount amount) {
+        this(amount, new ArrayList<>());
     }
 
-    public Lottos(int value, List<Lotto> manualLottos) {
+    public Lottos(Amount amount, List<Lotto> manualLottos) {
         this.lottos = new ArrayList<>(manualLottos);
-        for (int game = 0; game < purchasableLottoCount(value); game++) {
+        for (int game = 0; game < amount.purchasableLottoCount(); game++) {
             this.lottos.add(new Lotto());
         }
     }

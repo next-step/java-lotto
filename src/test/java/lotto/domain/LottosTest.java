@@ -35,7 +35,7 @@ class LottosTest {
     @DisplayName("가격만큼의 로또를 구매")
     @Test
     void 로또_구매() {
-        Lottos lottos = new Lottos(14_000);
+        Lottos lottos = new Lottos(new Amount(14_000));
         assertThat(lottos.size()).isEqualTo(14);
     }
 
@@ -93,7 +93,7 @@ class LottosTest {
     @Test
     void 게임_존재_여부() {
         assertThat(lottos.isEmpty()).isFalse();
-        Lottos emptyLottos = new Lottos(0);
+        Lottos emptyLottos = new Lottos(new Amount(0));
         assertThat(emptyLottos.isEmpty()).isTrue();
     }
 }

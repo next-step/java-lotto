@@ -7,15 +7,15 @@ import lotto.view.ResultView;
 
 public class UserInterface {
     public static void main(String[] args) {
-        int money = Parser.numberParsing(InputView.purchaseMoney());
+        Amount money = new Amount(Parser.numberParsing(InputView.purchaseMoney()));
         int manualCount = Parser.numberParsing(InputView.manualCount());
-        int manualPurchaseMoney = manualCount * Lotto.LOTTO_PRICE;
+        Amount manualPurchaseMoney = new Amount((manualCount * Lotto.LOTTO_PRICE));
 
-        if (money < manualPurchaseMoney) {
+        if (money.compareTo(manualPurchaseMoney) < 0) {
             throw new IllegalArgumentException("금액을 초과하여 구매할수 없습니다.");
         }
 
-        Lottos lottos = new Lottos(money - manualPurchaseMoney, InputView.manualLottos(manualCount));
+        Lottos lottos = new Lottos(money.minus(manualPurchaseMoney), InputView.manualLottos(manualCount));
 
         if(lottos.isEmpty()) {
             ResultView.noGame();
