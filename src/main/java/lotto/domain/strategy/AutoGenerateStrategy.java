@@ -6,13 +6,19 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import lotto.domain.LottoConfig;
+import lotto.domain.LottoNumber;
+
 public class AutoGenerateStrategy implements GenerateStrategy{
-	private static final Integer NUMBERS_COUNT = 6;
+
 	@Override
-	public Set<Integer> generate() {
-		List<Integer> numbers
-			= IntStream.rangeClosed(1,45).boxed().collect(Collectors.toList());
+	public Set<LottoNumber> generate() {
+		List<LottoNumber> numbers
+			= IntStream.rangeClosed(LottoConfig.LOWER_BOUND, LottoConfig.UPPER_BOUND)
+			.boxed()
+			.map(LottoNumber::new)
+			.collect(Collectors.toList());
 		Collections.shuffle(numbers);
-		return Set.copyOf(numbers.subList(0, NUMBERS_COUNT));
+		return Set.copyOf(numbers.subList(0, LottoConfig.NUMBERS_COUNT));
 	}
 }

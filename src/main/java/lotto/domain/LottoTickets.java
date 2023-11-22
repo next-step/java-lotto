@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -11,8 +12,8 @@ import java.util.stream.Collectors;
 import lotto.domain.strategy.GenerateStrategy;
 
 public class LottoTickets {
-	private List<LottoTicket> lottoTickets = new ArrayList<>();
-	private final LinkedHashMap<Rank, Integer> result = new LinkedHashMap<>();
+	private final List<LottoTicket> lottoTickets = new ArrayList<>();
+	private final EnumMap<Rank, Integer> result = new EnumMap<>(Rank.class);
 
 	public LottoTickets(int ticketQuantity, GenerateStrategy strategy) {
 		for (int i = 0; i < ticketQuantity; i++) {
@@ -23,15 +24,11 @@ public class LottoTickets {
 		}
 	}
 
-	public LottoTickets(List<LottoTicket> lottoTickets) {
-		this.lottoTickets = lottoTickets;
-	}
-
 	public List<LottoTicket> getLottoTickets() {
 		return Collections.unmodifiableList(lottoTickets);
 	}
 
-	public LinkedHashMap<Rank, Integer> validTicket(LottoValidator lottoValidator) {
+	public EnumMap<Rank, Integer> validTicket(LottoValidator lottoValidator) {
 		List<Rank> ranks =  lottoTickets.stream()
 			.map(lottoValidator::valid)
 			.collect(Collectors.toList());

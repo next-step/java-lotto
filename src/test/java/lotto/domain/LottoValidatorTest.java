@@ -20,27 +20,13 @@ public class LottoValidatorTest {
 	}
 
 	static Stream<Arguments> lottoNumbersAndRank() {
+		LottoValidator validator = new LottoValidator(1, 2, 3, 4, 5, 6);
 		return Stream.of(
-			Arguments.arguments(
-				new LottoValidator(Set.of(1, 2, 3, 4, 5, 6))
-					.valid(new LottoTicket((() -> Set.of(1, 2, 3, 4, 5, 6)))), Rank.FIRST
-			),
-			Arguments.arguments(
-				new LottoValidator(Set.of(1, 2, 3, 4, 5, 6))
-					.valid(new LottoTicket((() -> Set.of(1, 2, 3, 4, 5, 7)))), Rank.SECOND
-			),
-			Arguments.arguments(
-				new LottoValidator(Set.of(1, 2, 3, 4, 5, 6))
-					.valid(new LottoTicket((() -> Set.of(1, 2, 3, 4, 7, 8)))), Rank.THIRD
-			),
-			Arguments.arguments(
-				new LottoValidator(Set.of(1, 2, 3, 4, 5, 6))
-					.valid(new LottoTicket((() -> Set.of(1, 2, 3, 7, 8, 9)))), Rank.FOURTH
-			),
-			Arguments.arguments(
-				new LottoValidator(Set.of(1, 2, 3, 4, 5, 6))
-					.valid(new LottoTicket((() -> Set.of(1, 2, 7, 8, 9, 10)))), Rank.NOT
-			)
+			Arguments.arguments(validator.valid(new LottoTicket(1, 2, 3, 4, 5, 6)), Rank.FIRST),
+			Arguments.arguments(validator.valid(new LottoTicket(1, 2, 3, 4, 5, 7)), Rank.SECOND),
+			Arguments.arguments(validator.valid(new LottoTicket(1, 2, 3, 4, 7, 8)), Rank.THIRD),
+			Arguments.arguments(validator.valid(new LottoTicket(1, 2, 3, 7, 8, 9)), Rank.FOURTH),
+			Arguments.arguments(validator.valid(new LottoTicket(1, 2, 7, 8, 9, 10)), Rank.NOT)
 		);
 	}
 }

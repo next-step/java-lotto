@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class ResultView {
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
 		for (int i = 0; i < ticket.getNumbers().size(); i++) {
-			sb.append(ticket.getNumbers().get(i));
+			sb.append(ticket.getNumbers().get(i).getNum());
 			// StringBuilder를 넘겨받아 indent를 줄이는 것이 좋을까?
 			if (i != ticket.getNumbers().size() - 1)
 				sb.append(", ");
@@ -33,7 +34,7 @@ public class ResultView {
 		System.out.println(sb);
 	}
 
-	public void showResultStatics(LinkedHashMap<Rank, Integer> results) {
+	public void showResultStatics(EnumMap<Rank, Integer> results) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("당첨 통계\n");
 		sb.append("----------\n");

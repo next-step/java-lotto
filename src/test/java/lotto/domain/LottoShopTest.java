@@ -14,3 +14,4 @@ public class LottoShopTest {
 		Assertions.assertThat(new LottoShop().sellTicket(amount)).isEqualTo(expected);
 	}
 }
+
