@@ -16,7 +16,7 @@ public class Main {
         int money = inputView.lottoInitCount();
 
         MoneyWallet moneyWallet = new MoneyWallet(money);
-        LottoWallet lottoWallet = LottoShop.buy(moneyWallet);
+        LottoWallet lottoWallet = LottoShop.from(money).purchase();
         moneyWallet = moneyWallet.withdraw(lottoWallet.totalPurchaseAmount());
         resultView.calculateResult(lottoWallet.totalTicketCount());
         resultView.out(lottoWallet);
