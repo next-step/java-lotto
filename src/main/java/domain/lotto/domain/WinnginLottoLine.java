@@ -11,12 +11,16 @@ public class WinnginLottoLine extends LottoLine {
         super(lottoNumbers);
     }
 
-    public void match(List<LottoLine> lottoLines, LottoStatistics lottoStatistics) {
+    public LottoStatistics match(List<LottoLine> lottoLines) {
+        LottoStatistics lottoStatistics = new LottoStatistics();
+
         lottoLines.forEach(lottoLine -> {
             Set<LottoNumber> winningLottoNumbers = new HashSet<>(this.getLottoNumbers());
             winningLottoNumbers.retainAll(lottoLine.getLottoNumbers());
             int matchCount = winningLottoNumbers.size();
             lottoStatistics.calculate(matchCount);
         });
+
+        return lottoStatistics;
     }
 }

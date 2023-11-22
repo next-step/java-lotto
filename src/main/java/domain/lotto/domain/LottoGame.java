@@ -6,13 +6,12 @@ import java.util.List;
 public class LottoGame {
     private static final int LOTTO_PRICE = 1000;
     private final List<LottoLine> lottoLines;
-    private final LottoStatistics lottoStatistics;
     private final int gameCount;
+    private LottoStatistics lottoStatistics;
     private WinnginLottoLine winningLottoLine;
 
 
     private LottoGame(int buyingPrice) {
-        this.lottoStatistics = new LottoStatistics();
         this.lottoLines = new ArrayList<>();
         this.gameCount = calculateGameCount(buyingPrice);
         buyLottoLines();
@@ -21,14 +20,14 @@ public class LottoGame {
     private static int calculateGameCount(int buyingPrice) {
         return buyingPrice / LOTTO_PRICE;
     }
-    
+
     public static LottoGame from(Integer buyingPrice) {
         return new LottoGame(buyingPrice);
     }
 
 
     public void calculateStatistics() {
-        winningLottoLine.match(lottoLines, lottoStatistics);
+        this.lottoStatistics = winningLottoLine.match(lottoLines);
     }
 
     public void registerWinningLottoLine(WinnginLottoLine winningLottoLine) {

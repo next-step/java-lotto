@@ -24,8 +24,12 @@ public enum Rank {
                 .findFirst()
                 .orElse(MISS);
     }
-    
+
     public int getWinningMoney() {
         return winningMoney;
+    }
+
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 }

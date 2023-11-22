@@ -30,4 +30,8 @@ public class LottoStatistics {
     public int getMatchCount(Rank rank) {
         return rankCounts.get(rank);
     }
+
+    public Map<Rank, Integer> getRankCounts() {
+        return rankCounts;
+    }
 }
