@@ -11,31 +11,29 @@ public class LottoSimulator {
 
     private final List<Lotto> lottoList = new ArrayList<>();
 
-    private LottoSimulator() {
+    public LottoSimulator() {
     }
 
-    public static LottoSimulator initLottoSimulator(int money) {
-        LottoSimulator lottoSimulator = new LottoSimulator();
+    public void buyingLotto(int money) {
         int lottoCount = money / EACH_LOTTO_PRICE;
         for (int i = 0; i < lottoCount; i++) {
-            lottoSimulator.lottoList.add(new Lotto());
+            this.lottoList.add(new Lotto());
         }
-        return lottoSimulator;
-    }
-
-    public int[] getStatistics(List<Integer> lastWeekLottoNumbers) {
-        int[] statistics = new int[LOTTO_STATISTICS_SIZE];
-        for (Lotto lotto : lottoList) {
-            statistics[lotto.getMatchCount(lastWeekLottoNumbers)]++;
-        }
-        return statistics;
     }
 
     public int getLottoCount() {
         return lottoList.size();
     }
 
-    public List<Lotto> getLottoList() {
+    public List<Lotto> getLottos() {
         return lottoList;
+    }
+
+    public int[] calculateStatistics(List<Integer> lastWeekLottoNumbers) {
+        int[] statistics = new int[LOTTO_STATISTICS_SIZE];
+        for (Lotto lotto : lottoList) {
+            statistics[lotto.getMatchCount(lastWeekLottoNumbers)]++;
+        }
+        return statistics;
     }
 }

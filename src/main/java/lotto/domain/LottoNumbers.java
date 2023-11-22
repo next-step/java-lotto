@@ -12,8 +12,8 @@ public class LottoNumbers {
     public LottoNumbers(int minLottoNumber, int maxLottoNumber) {
         List<Integer> shuffledNumbers = IntStream.rangeClosed(minLottoNumber, maxLottoNumber).boxed().collect(Collectors.toList());
         Collections.shuffle(shuffledNumbers);
-        Collections.sort(shuffledNumbers);
         this.lottoNumbers = shuffledNumbers.subList(0, 6);
+        Collections.sort(this.lottoNumbers);
     }
 
     public List<Integer> getLottoNumbers() {

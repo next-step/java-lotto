@@ -4,15 +4,14 @@ import static lotto.RewardPrice.*;
 
 public class RateOfReturnCalculator {
 
-    private static final double LOTTO_PRICE = 1000.0;
-    private RateOfReturnCalculator() {
+    public RateOfReturnCalculator() {
     }
 
-    public static double calculateYield(int [] statistics, int lottoCount) {
+    public double calculateYield(int [] statistics, int money) {
         long totalPrize = statistics[MATCH_3.getCount()] * MATCH_3.getPrice()
                 + statistics[MATCH_4.getCount()] * MATCH_4.getPrice()
                 + statistics[MATCH_5.getCount()] * MATCH_5.getPrice()
                 + statistics[MATCH_6.getCount()] * MATCH_6.getPrice();
-        return totalPrize / (lottoCount * LOTTO_PRICE);
+        return (double) totalPrize / money;
     }
 }
