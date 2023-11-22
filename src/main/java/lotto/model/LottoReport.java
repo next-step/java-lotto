@@ -33,9 +33,9 @@ public class LottoReport {
         this.rateOfReturn = calculateRateOfReturn();
     }
 
-    private static List<Integer> convertStringToInt(String numbers) {
+    private static List<LottoNumber> convertStringToInt(String numbers) {
         return Arrays.stream(numbers.split(", "))
-                .map(Integer::parseInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 

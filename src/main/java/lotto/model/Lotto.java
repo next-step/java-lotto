@@ -13,14 +13,17 @@ public class Lotto {
             .boxed()
             .collect(Collectors.toList());
 
-    private final List<Integer> numbers;
-
-    public Lotto() {
-        this.numbers = createLottoNumbers();
-    }
+    private final List<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        this.numbers = lottoNumbers;
+    }
+
+    public Lotto() {
+        this(createLottoNumbers());
     }
 
     private static List<Integer> createLottoNumbers() {
@@ -30,18 +33,18 @@ public class Lotto {
         return new ArrayList<>(numbers);
     }
 
-    public List<Integer> numbers() {
+    public List<LottoNumber> numbers() {
         return this.numbers;
     }
 
-    public int matchNumbers(List<Integer> targets) {
+    public int matchNumbers(List<LottoNumber> targets) {
         return targets.stream()
                 .filter(this::matchNumber)
                 .mapToInt(target -> 1)
                 .sum();
     }
 
-    private boolean matchNumber(int number) {
+    private boolean matchNumber(LottoNumber number) {
         return this.numbers.contains(number);
     }
 
