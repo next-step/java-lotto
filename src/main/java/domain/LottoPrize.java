@@ -8,7 +8,7 @@ public enum LottoPrize {
     SECOND(5, 1_500_000L, (matchCount) -> matchCount == 5),
     THIRD(4, 50_000L, (matchCount) -> matchCount == 4),
     FOURTH(3, 5_000L, (matchCount) -> matchCount == 3),
-    NO_MATCH(0, 0, (matchCount) -> matchCount >= 0 && matchCount < 3),
+    NO_MATCH(0, 0, (matchCount) -> matchCount >= 0 && matchCount < 3)
     ;
 
     private final int matchCount;

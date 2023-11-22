@@ -23,7 +23,7 @@ public enum Currency {
     }
 
     public static Optional<Currency> fromCountryType(String countryType) {
-        return Arrays.stream(values()).filter(type -> type.countryType.equals(countryType)).findAny();
+        return Arrays.stream(values()).filter(currency -> currency.countryType.equals(countryType)).findAny();
     }
 
     public String getCurrencyType() {

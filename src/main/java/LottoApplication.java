@@ -25,7 +25,7 @@ public class LottoApplication {
         String inputWinningNumbers = InputView.inputWinningNumbers();
         Lotto winningLotto = new Lotto(inputWinningNumbers);
 
-        Optional<Currency> optionalCurrency = Currency.fromCountryType("kor");
+        Optional<Currency> optionalCurrency = Optional.of(Currency.KOREA);
         LottoResultService lottoResultService = new LottoResultService(userLottoRepository);
         LottoGameResultRepository lottoGameResult = lottoResultService.matchUserLotto(winningLotto);
         float rate = lottoResultService.calculateReturnRate(money, lottoGameResult, optionalCurrency);

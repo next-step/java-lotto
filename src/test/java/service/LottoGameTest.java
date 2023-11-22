@@ -46,7 +46,7 @@ public class LottoGameTest {
         assertThat(lottoPrizeIntegerMap.get(6).intValue()).isEqualTo(1);
     }
     @Test
-    @DisplayName("당첨 번호가 1~45 사이 값이 아닌 경우 Exception 발생한다.")
+    @DisplayName("당첨 번호가 1~45 사이 값이 아닌 경우 exception throw")
     void wrongWinningNumbersTest() {
         assertThrows(IllegalArgumentException.class, () -> new Lotto(1, 2, 3, 50, 5, 6));
     }

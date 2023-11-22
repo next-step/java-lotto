@@ -9,8 +9,7 @@ public class LottoSalesTest {
     @Test
     @DisplayName("입력한 금액만큼 로또티켓을 구매한다.")
     void buyLottoTest() {
-        LottoSalesService lottoSalesService = new LottoSalesService();
-        int tickets = lottoSalesService.buyTickets(2000);
+        int tickets = LottoSalesService.validateMoneyAndReturnTicketCount(2000);
 
         assertThat(tickets).isEqualTo(2);
     }

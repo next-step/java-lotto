@@ -29,9 +29,6 @@ public class ResultView {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
-        /**
-         * 당첨결과 출력
-         */
         Map<LottoPrize, Integer> allResult = lottoMatchResult.getAllResult();
         for (Map.Entry<LottoPrize, Integer> result : allResult.entrySet()) {
             if (result.getKey().equals(LottoPrize.NO_MATCH)) {
@@ -45,9 +42,6 @@ public class ResultView {
             ));
         }
 
-        /**
-         * 수익률 출력
-         */
         System.out.print(String.format("총 수익률은 %.2f 입니다.", rate));
         if (rate < 1) {
             System.out.println(" (기준이 1이기 때문에 결과적으로 손해라는 의미임)");
