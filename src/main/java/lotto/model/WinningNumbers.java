@@ -36,7 +36,6 @@ public class WinningNumbers {
                 .stream()
                 .filter(o -> winningLottoNumbers.stream().anyMatch(Predicate.isEqual(o)))
                 .count();
-
         if (count == 5) {
             rankList.add(Rank.valueOf(count, checkBonus(lotto)));
         }
@@ -61,7 +60,6 @@ public class WinningNumbers {
             profit += rank.getWinningMoney();
         }
         margin = (double) profit / primeCost;
-
         return String.format("%.2f", margin);
     }
 }

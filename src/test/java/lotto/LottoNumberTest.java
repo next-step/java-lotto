@@ -9,6 +9,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoNumberTest {
+
     @DisplayName("로또 숫자 체크")
     @Test
     void randomNumber() {

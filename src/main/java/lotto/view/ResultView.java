@@ -1,5 +1,6 @@
 package lotto.view;
 
+
 import lotto.model.LottoSeller;
 import lotto.model.Lottos;
 import lotto.model.Rank;
