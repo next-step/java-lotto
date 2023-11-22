@@ -13,7 +13,8 @@ public class LottoWinningNumbersTest {
     @DisplayName("isSame 은 주어진 로또 번호와 당첨 로또 번호가 같으면 true 를 반환한다")
     void isSame_lottoWinningNumbersWithSameNumbers_true() {
         Lotto lottoNumbers = new Lotto("1, 2, 3, 4, 5, 6");
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers);
+        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers, bonusNumber);
 
         boolean isSame = lottoWinningNumbers.isSame(lottoNumbers);
 
@@ -25,7 +26,8 @@ public class LottoWinningNumbersTest {
     void isSame_lottoWinningNumbersWithDifferentNumbers_false() {
         Lotto differentNumbers = new Lotto("1, 2, 3, 4, 5, 7");
         Lotto lottoNumbers = new Lotto("1, 2, 3, 4, 5, 6");
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers);
+        LottoNumber bonusNumber = new LottoNumber(8);
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers, bonusNumber);
 
         boolean isSame = lottoWinningNumbers.isSame(differentNumbers);
 
@@ -36,9 +38,10 @@ public class LottoWinningNumbersTest {
     @NullSource
     @DisplayName("LottoWinningNumbers 는 아무런 로또번호가 주어지지 않으면 예외를 던진다")
     void newObject_nullLotto_throwsException(Lotto nullLotto) {
+        LottoNumber bonusNumber = new LottoNumber(8);
 
         assertThatThrownBy(
-            () -> new LottoWinningNumbers(nullLotto)
+            () -> new LottoWinningNumbers(nullLotto, bonusNumber)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 }

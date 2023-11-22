@@ -31,10 +31,10 @@ public class OutputView {
 
     public static void printMatchesResult(LottoMatchResult lottoMatchResult) {
         for (LottoMatch lottoMatch : LottoMatch.values()) {
-            if (lottoMatch.matchCount() < 4) {
+            if (lottoMatch.matchCount() < 3) {
                 continue;
             }
-            int count = LottoMatch.matchesCount(lottoMatch.matchCount(), lottoMatchResult);
+            int count = LottoMatch.matchesCount(lottoMatch.matchCount(), lottoMatch.isBonus(), lottoMatchResult);
             System.out.printf("%d개 일치 (%d원) - %d개\n",
                 lottoMatch.matchCount(), lottoMatch.amount(), count);
         }

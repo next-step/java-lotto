@@ -29,15 +29,16 @@ public class LottoResultTest {
 		Lotto lottoOne = new Lotto("1, 2, 3, 4, 5, 6");
 		Lotto lottoTwo = new Lotto("7, 8, 6, 11, 12, 13");
 		Lotto winningLotto = new Lotto("4, 5, 6, 11, 12, 13");
-		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningLotto);
+		LottoNumber bonusNumber = new LottoNumber(15);
+		LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningLotto, bonusNumber);
 		LottoList lottoList = new LottoList(List.of(lottoOne, lottoTwo));
 
 		LottoResult lottoResult = new LottoResult(lottoList);
 		lottoResult.matchesWinningNumbers(lottoWinningNumbers);
 
 		LottoMatchResult lottoMatchResult = lottoResult.matchesWinningNumbers(lottoWinningNumbers);
-		assertThat(LottoMatch.matchesCount(3, lottoMatchResult)).isEqualTo(1);
-		assertThat(LottoMatch.matchesCount(4, lottoMatchResult)).isEqualTo(1);
-		assertEquals(lottoResult.rateOfReturn(lottoWinningNumbers), 2700, 0.001);
+		assertThat(LottoMatch.matchesCount(3, false, lottoMatchResult)).isEqualTo(1);
+		assertThat(LottoMatch.matchesCount(4, false, lottoMatchResult)).isEqualTo(1);
+		assertEquals(lottoResult.rateOfReturn(lottoWinningNumbers), 27527.5, 0.001);
 	}
 }

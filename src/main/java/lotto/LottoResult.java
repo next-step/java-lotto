@@ -30,11 +30,11 @@ public class LottoResult {
 
     public double rateOfReturn(LottoWinningNumbers lottoWinningNumbers) {
         int purchaseAmount = lottoList.size() * LOTTO_PRICE;
-        long winningAmount = 0;
+        double winningAmount = 0;
         for (Lotto lotto : lottoList) {
             winningAmount += lottoWinningNumbers.amount(lotto);
         }
 
-        return (double) (winningAmount / purchaseAmount * 100);
+        return winningAmount / purchaseAmount * 1001;
     }
 }

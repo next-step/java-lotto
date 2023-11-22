@@ -6,8 +6,11 @@ public class LottoApplication {
         LottoList lottoList = new LottoList(purChaseCount);
         OutputView.printLottoList(lottoList);
         String winningNumbers = InputView.inputWinningNumbers();
+        String bonusNumber = InputView.inputBonusNumber();
 
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(new Lotto(winningNumbers));
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(
+                new Lotto(winningNumbers), new LottoNumber(bonusNumber)
+        );
 
         LottoResult lottoResult = new LottoResult(lottoList);
         LottoMatchResult lottoMatchResult = lottoResult.matchesWinningNumbers(lottoWinningNumbers);

@@ -5,14 +5,17 @@ import java.util.List;
 
 public class LottoWinningNumbers {
     private final Lotto lottoWinningNumbers;
+    private final LottoNumber bonusNumber;
 
-    public LottoWinningNumbers(Lotto lotto) {
-        validate(lotto);
+    public LottoWinningNumbers(Lotto lotto, LottoNumber bonusNumber) {
+        validate(lotto, bonusNumber);
         this.lottoWinningNumbers = lotto;
+        this.bonusNumber = bonusNumber;
     }
 
-    public void validate(Lotto lotto) {
+    public void validate(Lotto lotto, LottoNumber lottoNumber) {
         lotto.validate(lotto.lottoNumbers());
+        lottoNumber.validate(lottoNumber.lottoNumber());
 
         checkLottoSizeIsValid(lotto);
     }
@@ -38,6 +41,10 @@ public class LottoWinningNumbers {
 
         lottoWinningList.retainAll(lottoList);
         int matchCount = lottoWinningList.size();
-        return LottoMatch.fromInt(matchCount);
+        boolean isBonus = false;
+        if (matchCount == 5 && lottoList.contains(bonusNumber)) {
+            isBonus = true;
+        }
+        return LottoMatch.fromInt(matchCount, isBonus);
     }
 }
