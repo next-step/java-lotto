@@ -13,15 +13,15 @@ public class WinningLottoTest {
 
     @ParameterizedTest(name = "정답로또:{0}, 보너스번호:{1} / 입력한로또: {2} / 등수 : {3}")
     @CsvSource(value = {
-            "1|2|3|4|5|6, 7, 1|2|3|4|5|6, 1등, 6, true",
-            "1|2|3|4|5|6, 7, 1|2|3|4|5|7, 2등, 5, true",
-            "1|2|3|4|5|6, 7, 1|2|3|4|5|20, 3등, 5, false",
-            "1|2|3|4|5|6, 7, 1|2|3|4|20|21, 4등, 4, false",
-            "1|2|3|4|5|6, 7, 1|2|3|19|20|21, 5등, 3, false",
-            "1|2|3|4|5|6, 7, 1|2|18|19|20|21, 등수없음, 2, false",
+            "1|2|3|4|5|6, 7, 1|2|3|4|5|6, FIRST",
+            "1|2|3|4|5|6, 7, 1|2|3|4|5|7, SECOND",
+            "1|2|3|4|5|6, 7, 1|2|3|4|5|20, THIRD",
+            "1|2|3|4|5|6, 7, 1|2|3|4|20|21, FOURTH",
+            "1|2|3|4|5|6, 7, 1|2|3|19|20|21, FIFTH",
+            "1|2|3|4|5|6, 7, 1|2|18|19|20|21, MISS",
     })
     @DisplayName("정답로또/로또와비교/등수반환")
-    void getPrize(String inputWinningLotto, int bonusNum, String inputLotto, String rank, int matchCount, boolean bonusMatch) {
+    void getPrize(String inputWinningLotto, int bonusNum, String inputLotto, LottoPrize lottoPrize) {
         // given
         Lotto lotto = Lotto.of(
                 Stream.of(inputLotto.split("\\|")).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList()));
@@ -31,6 +31,6 @@ public class WinningLottoTest {
                 , bonusNum);
 
         // when then
-        assertThat(winningLotto.getPrize(lotto)).isEqualTo(LottoPrize.valueOf(matchCount, bonusMatch));
+        assertThat(winningLotto.getPrize(lotto)).isEqualTo(lottoPrize);
     }
 }
