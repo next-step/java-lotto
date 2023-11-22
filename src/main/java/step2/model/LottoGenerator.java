@@ -1,6 +1,7 @@
 package step2.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,7 +37,13 @@ public class LottoGenerator {
         return new WinningLotto(parseLottoNumbers(splitLottoNumbers(userInput)), bonusNumber);
     }
 
-    public Lotto generateManualLotto(String userInput) {
+    public List<Lotto> generateManualLottos(List<String> userInputs) {
+        return userInputs.stream()
+                .map(this::generateManualLotto)
+                .collect(Collectors.toList());
+    }
+
+    Lotto generateManualLotto(String userInput) {
         return new Lotto(parseLottoNumbers(splitLottoNumbers(userInput)));
     }
 
