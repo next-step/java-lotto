@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class WinningNumbersTest {
 
         @Test
-        void 당첨번호를_6개_이상_입력했을_경우_에러() {
+        void 당첨번호를_6개_초과_입력했을_경우_에러() {
                 LottoNumber bonusNumber = new LottoNumber(10);
                 assertThatThrownBy(
                     () -> new WinningNumbers(bonusNumber, 1, 2, 3, 4, 5, 6, 7)).isInstanceOf(
