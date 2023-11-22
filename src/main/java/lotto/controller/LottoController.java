@@ -5,9 +5,9 @@ import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.strategy.RandomStrategy;
 import lotto.domain.summary.Summary;
+import lotto.dto.view.UserInputDTO;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-import lotto.view.UserInput;
 
 import static lotto.domain.lotto.Lottos.PRICE_PER_TICKET;
 
@@ -32,10 +32,10 @@ public class LottoController {
     }
 
     public void play() {
-        UserInput userInput = userInput();
+        UserInputDTO userInputDTO = userInput();
 
-        Lottos manualLottos = manualLottos(userInput);
-        Lottos autoLottos = autoLottos(remainingPurchasePrice(userInput));
+        Lottos manualLottos = manualLottos(userInputDTO);
+        Lottos autoLottos = autoLottos(remainingPurchasePrice(userInputDTO));
 
         Lottos lottos = Lottos.concat(manualLottos, autoLottos);
 
@@ -44,16 +44,16 @@ public class LottoController {
         outputView.printSummary(summary(lottos));
     }
 
-    private UserInput userInput() {
-        return new UserInput(inputView.readPurchasePrice(), inputView.readManualLottoCount());
+    private UserInputDTO userInput() {
+        return new UserInputDTO(inputView.readPurchasePrice(), inputView.readManualLottoCount());
     }
 
-    private Lottos manualLottos(UserInput userInput) {
-        return Lottos.of(userInput.purchasePrice(), inputView.readManualLotto(userInput.manualLottoCount()));
+    private Lottos manualLottos(UserInputDTO userInputDTO) {
+        return Lottos.of(userInputDTO.purchasePrice(), inputView.readManualLotto(userInputDTO.manualLottoCount()));
     }
 
-    private int remainingPurchasePrice(UserInput userInput) {
-        return userInput.purchasePrice() - userInput.manualLottoCount() * PRICE_PER_TICKET;
+    private int remainingPurchasePrice(UserInputDTO userInputDTO) {
+        return userInputDTO.purchasePrice() - userInputDTO.manualLottoCount() * PRICE_PER_TICKET;
     }
 
     private Lottos autoLottos(int remainingPurchasePrice) {

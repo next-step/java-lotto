@@ -1,10 +1,10 @@
-package lotto.view;
+package lotto.dto.view;
 
-public class UserInput {
+public class UserInputDTO {
     private final int purchasePrice;
     private final int manualLottoCount;
 
-    public UserInput(int purchasePrice, int manualLottoCount) {
+    public UserInputDTO(int purchasePrice, int manualLottoCount) {
         this.purchasePrice = purchasePrice;
         this.manualLottoCount = manualLottoCount;
     }
