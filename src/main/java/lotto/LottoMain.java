@@ -5,11 +5,13 @@ import lotto.domain.MatchPointRank;
 import lotto.service.LottoService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static lotto.util.Util.floorDiv;
 import static lotto.util.Util.split;
-import static lotto.view.IoView.*;
+import static lotto.view.InputView.*;
+import static lotto.view.OutView.printLottoList;
 import static lotto.view.OutView.printResult;
 
 public class LottoMain {
@@ -19,7 +21,7 @@ public class LottoMain {
         LottoService lottoService = new LottoService(generateLottoList(money), new MatchPointRank());
         printLottoList(lottoService.getLottoList());
 
-        lottoService.playLotto(split(inputWinningNumbers()));
+        lottoService.playLotto(Arrays.asList(split(inputWinningNumbers())), inputBonusNumber());
         printResult(money, lottoService.getMatchPointMap());
     }
 

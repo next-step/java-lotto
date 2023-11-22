@@ -11,8 +11,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MatchPointTest {
     @DisplayName("MatchPoint 같은 value 찾기")
     @ParameterizedTest
-    @CsvSource(value = {"3, 5000", "4, 50000", "5, 1500000", "6, 2000000000", "0, 0"})
-    void findMatchPoint(int matchPont, int amt) {
-        assertThat(MatchPoint.findMatchPoint(matchPont).getWinningAmt()).isEqualTo(amt);
+    @CsvSource(value = {"3, 5000, 1", "4, 50000, 0", "5, 1500000, 0", "4, 30000000, 1", "6, 2000000000, 1", "0, 0, 0"})
+    void findMatchPoint(int matchPont, int amt, int bonus) {
+        assertThat(MatchPoint.findMatchPoint(matchPont, bonus).getWinningAmt()).isEqualTo(amt);
     }
 }
