@@ -29,8 +29,8 @@ public class LottoTicketsTest {
 	void valid_tickets() {
 		GenerateStrategy strategy = new ManualGenerateStrategy(1,2,3,4,5,6);
 		LottoTickets lottoTickets = new LottoTickets(1, strategy);
-		LottoValidator lottoValidator = new LottoValidator(1,2,3,7,8,9);
-		EnumMap<Rank, Integer> map = lottoTickets.validTicket(lottoValidator);
+		LottoChecker lottoChecker = new LottoChecker(1,2,3,7,8,9);
+		EnumMap<Rank, Integer> map = lottoTickets.checkTicket(lottoChecker);
 		assertThat(map.get(Rank.FOURTH)).isEqualTo(1);
 	}
 
@@ -40,7 +40,7 @@ public class LottoTicketsTest {
 	void calc_return_rate() {
 		GenerateStrategy strategy = new ManualGenerateStrategy(1,2,3,4,8,9);
 		LottoTickets lottoTickets = new LottoTickets(5, strategy);
-		lottoTickets.validTicket(new LottoValidator(1,2,3,4,5,6));
+		lottoTickets.checkTicket(new LottoChecker(1,2,3,4,5,6));
 		assertThat(lottoTickets.calcReturnRate(5000)).isEqualTo(2000.0);
 	}
 }

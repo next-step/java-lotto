@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -28,9 +26,9 @@ public class LottoTickets {
 		return Collections.unmodifiableList(lottoTickets);
 	}
 
-	public EnumMap<Rank, Integer> validTicket(LottoValidator lottoValidator) {
+	public EnumMap<Rank, Integer> checkTicket(LottoChecker lottoChecker) {
 		List<Rank> ranks =  lottoTickets.stream()
-			.map(lottoValidator::valid)
+			.map(lottoChecker::check)
 			.collect(Collectors.toList());
 
 		for (Rank rank : ranks) {

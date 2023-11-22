@@ -1,9 +1,8 @@
 package lotto.controller;
-import java.util.List;
 import java.util.Set;
 
 import lotto.domain.LottoTickets;
-import lotto.domain.LottoValidator;
+import lotto.domain.LottoChecker;
 import lotto.domain.LottoShop;
 import lotto.domain.strategy.AutoGenerateStrategy;
 import lotto.domain.util.StringSplitter;
@@ -23,7 +22,7 @@ public class LottoController {
 		resultView.showLottoTickets(lottoTickets.getLottoTickets());
 
 		Set<Integer> winningNums = StringSplitter.convertToIntegerSet(inputView.inputWinningNumbers());
-		resultView.showResultStatics(lottoTickets.validTicket(new LottoValidator(winningNums)));
+		resultView.showResultStatics(lottoTickets.checkTicket(new LottoChecker(winningNums)));
 
 		resultView.showReturnRate(lottoTickets.calcReturnRate(totalPrice));
 	}
