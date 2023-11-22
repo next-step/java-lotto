@@ -17,7 +17,7 @@ public class UserInterface {
 
         Lottos lottos = new Lottos(money.minus(manualPurchaseMoney), InputView.manualLottos(manualCount));
 
-        if(lottos.isEmpty()) {
+        if (lottos.isEmpty()) {
             ResultView.noGame();
             return;
         }

@@ -11,12 +11,15 @@ public class ResultView {
     private ResultView() {
 
     }
+
     public static void purchaseCount(Lottos lottos, int manulCount) {
-        System.out.println("수동으로 "+ manulCount +"장, 자동으로 "+ (lottos.size() - manulCount) +"장을 구매했습니다.");
+        System.out.println("수동으로 " + manulCount + "장, 자동으로 " + (lottos.size() - manulCount) + "장을 구매했습니다.");
     }
+
     public static void noGame() {
         System.out.println("구입한 로또가 없습니다.");
     }
+
     public static void lottos(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.toString());
@@ -37,7 +40,7 @@ public class ResultView {
 
         if (bonusCorrect) {
             System.out.println(correctCount + "개 일치, 보너스 볼 일치(" + winningAmount + "원) - " + lottos.winningCorrectCount(winningLottoDTO, winning) + "개");
-            return ;
+            return;
         }
         System.out.println(correctCount + "개 일치 (" + winningAmount + "원) - " + lottos.winningCorrectCount(winningLottoDTO, winning) + "개");
     }

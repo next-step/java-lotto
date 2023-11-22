@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber implements Comparable<LottoNumber> {
     private int number;
 
     public LottoNumber(int value) {
@@ -16,6 +16,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
         numberRangeCheck(valueNumber);
         this.number = valueNumber;
     }
+
     public boolean belongs(List<LottoNumber> values) {
         return values.contains(new LottoNumber(this.number));
     }
@@ -25,6 +26,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
             throw new IllegalArgumentException("숫자 범위를 벗어납니다. 숫자범위 : 1~45");
         }
     }
+
     @Override
     public int compareTo(LottoNumber other) {
         return Integer.compare(this.number, other.number);
