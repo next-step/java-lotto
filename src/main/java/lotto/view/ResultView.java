@@ -11,9 +11,14 @@ public class ResultView {
     public void printWinningStatics(WinningLottos winningLottos) {
         System.out.printf("당첨 통계%n======%n");
         for (Rank rank : Rank.winningRanks()) {
-            System.out.printf("%d개 일치 (%d원) - %d개%n", rank.matchingCount(), rank.rewardPrice(),
-                    winningLottos.countLottoByWinningNumber(rank.matchingCount()));
+            printWinningStatics(winningLottos, rank);
         }
+    }
+
+    private void printWinningStatics(WinningLottos winningLottos, Rank rank) {
+        System.out.printf("%d개%s 일치 (%d원) - %d개%n", rank.matchingCount(),
+                Rank.SECOND.equals(rank) ? ", 보너스 볼 일치" : "", rank.rewardPrice(),
+                winningLottos.countLottoByWinningNumber(rank));
     }
 
     public void printRateOfReturn(double rate) {
