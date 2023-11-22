@@ -65,6 +65,8 @@
 - 자료구조 선택만으로 검증 로직을 줄일 수 있다. 주의깊게 선택하기
 - 생성자는 메모리 누수에 위험, 정적 팩토리로 만들자, 그리고 캐싱 고려하기
 - 항상 객체 뽑아낼 수 없을지 생각하기 (ex: 당첨번호(Lotto) + 보너스번호(LottoNumber) = WinningLotto)
+- 이중 중괄호 생성자는 쓰지말기
+    - https://www.baeldung.com/java-double-brace-initialization
 
 ---
 
