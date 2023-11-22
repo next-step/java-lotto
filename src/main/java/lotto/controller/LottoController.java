@@ -22,12 +22,13 @@ public class LottoController {
         OutputView.outputQuantity(quantity);
 
         LottoMachine lottoMachine = new LottoMachine();
-        lottoMachine.issueLottos(quantity, new AutoLottoNumberGenerator());
-        OutputView.outputLottos(lottoMachine.getLottos());
+        List<Lotto> lottos = lottoMachine.issueLottos(quantity, new AutoLottoNumberGenerator());
+        OutputView.outputLottos(lottos);
 
         List<Integer> winningNumbers = InputView.inputWinningNumbers(DELIMITER);
-        LottoWinningMachine winningMachine = new LottoWinningMachine(new Lotto(winningNumbers));
-        Map<Rank, Integer> rankCounts = winningMachine.getRankCounts(lottoMachine.getLottos());
+        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
+        LottoWinningMachine winningMachine = new LottoWinningMachine(new Lotto(winningNumbers), bonusNumber);
+        Map<Rank, Integer> rankCounts = winningMachine.getRankCounts(lottos);
 
         OutputView.outputWinningResult(rankCounts);
         OutputView.outputRateOfResult(winningMachine.calculateRateOfResult(rankCounts, amount));
