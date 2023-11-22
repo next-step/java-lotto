@@ -32,8 +32,8 @@ public class LottoResultTest {
     }
 
     @Test
-    @DisplayName("당첨 번호와 각 로또 번호를 매칭해 당첨 결과를 출력한다.")
-    void printResultTest() {
+    @DisplayName("6개를 모두 맞추는 경우 1등 상태가 된다.")
+    void printFirstResultTest() {
         Lotto winningNum = new Lotto(1, 2, 3, 4, 5, 6);
         userLottoRepository.saveUserLottoTickets(new Lotto(1,2,3,4,5,6));
 
@@ -42,6 +42,32 @@ public class LottoResultTest {
         Set<LottoPrize> prizes = allResult.keySet();
 
         assertThat(prizes.stream().findFirst().get()).isEqualTo(LottoPrize.FIRST);
+    }
+
+    @Test
+    @DisplayName("3개를 맞추는 경우 4등 상태가 된다.")
+    void printFourthResultTest() {
+        Lotto winningNum = new Lotto(1, 2, 3, 4, 5, 6);
+        userLottoRepository.saveUserLottoTickets(new Lotto(1,2,3,11,12,13));
+
+        LottoGameResultRepository result = lottoResultService.matchUserLotto(winningNum);
+        Map<LottoPrize, Integer> allResult = result.getAllResult();
+        Set<LottoPrize> prizes = allResult.keySet();
+
+        assertThat(prizes.stream().findFirst().get()).isEqualTo(LottoPrize.FOURTH);
+    }
+
+    @Test
+    @DisplayName("3개 미만 동일한 경우 NO MATCH 상태가 된다.")
+    void printNoMatchResultTest() {
+        Lotto winningNum = new Lotto(1, 2, 3, 4, 5, 6);
+        userLottoRepository.saveUserLottoTickets(new Lotto(1,44,3,11,12,13));
+
+        LottoGameResultRepository result = lottoResultService.matchUserLotto(winningNum);
+        Map<LottoPrize, Integer> allResult = result.getAllResult();
+        Set<LottoPrize> prizes = allResult.keySet();
+
+        assertThat(prizes.stream().findFirst().get()).isEqualTo(LottoPrize.NO_MATCH);
     }
 
     @Test
