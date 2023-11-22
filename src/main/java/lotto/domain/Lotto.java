@@ -16,7 +16,7 @@ public class Lotto {
 
     public Lotto(List<LottoNo> numbers) {
         if (numbers.size() != LOTTO_COUNT) {
-            throw new IllegalArgumentException("로또 번호는 6개입니다.");
+            throw new IllegalArgumentException("6개 숫자를 입력해주세요.");
         }
         if (numbers.stream().distinct().count() < LOTTO_COUNT) {
             throw new IllegalArgumentException("중복된 번호는 입력할 수 없습니다.");

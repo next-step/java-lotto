@@ -23,11 +23,24 @@ public class LottoCenter {
         if (manualLottos == null || manualLottos.isEmpty()) {
             return generateTicket(cash);
         }
-        Cash autoCash = cash.autoBuy(manualLottos);
+
+        Cash autoCash = cash.autoBuyCash(manualLottos);
+        if (autoCash == null) {
+            return manualLottos;
+        }
+
         List<Lotto> lottos = generateTicket(autoCash);
         manualLottos.addAll(lottos);
-
         return manualLottos;
+    }
+
+    public void manualBuyValidCheck(Cash cash, int manualCount) {
+        if (manualCount > cash.count()) {
+            throw new IllegalArgumentException("구입 가능 금액을 초과합니다.");
+        }
+        if (manualCount < 0) {
+            throw new IllegalArgumentException("0 이상의 숫자를 입력하세요.");
+        }
     }
 
     private List<Lotto> generateTicket(Cash cash) {

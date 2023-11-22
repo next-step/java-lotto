@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 
 class LottoCenterTest {
@@ -19,6 +20,19 @@ class LottoCenterTest {
         List<Lotto> lottos = new LottoCenter().manualBuyLotto(cash, manualLottos);
 
         assertThat(lottos.size()).isEqualTo(14);
+    }
+
+    @Test
+    void 구입_가능_숫자_예외() {
+        Cash cash = new Cash(1000);
+        int manualCountOver = 2;
+        int manualCountUnderZero = -1;
+        LottoCenter lottoCenter = new LottoCenter();
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoCenter.manualBuyValidCheck(cash, manualCountOver));
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoCenter.manualBuyValidCheck(cash, manualCountUnderZero));
     }
 
     @Test

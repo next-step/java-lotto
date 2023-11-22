@@ -8,7 +8,7 @@ public class WinningLotto {
 
     public WinningLotto(Lotto winningNumbers, LottoNo bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("중복된 번호는 입력할 수 없습니다.");
+            throw new IllegalArgumentException("당첨번호와 중복된 번호는 입력할 수 없습니다.");
         }
         this.winningLotto = winningNumbers;
         this.bonusNumber = bonusNumber;

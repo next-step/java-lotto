@@ -19,6 +19,8 @@ public class InputView {
         int manualCount = scanner.nextInt();
 
         LottoCenter lottoCenter = new LottoCenter();
+        lottoCenter.manualBuyValidCheck(cash, manualCount);
+
         List<Lotto> manualNumbers = manualLottoInput(manualCount);
         List<Lotto> lottos = lottoCenter.manualBuyLotto(cash, manualNumbers);
 

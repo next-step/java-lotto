@@ -9,6 +9,9 @@ public class Cash {
     private final int cash;
 
     public Cash(int cash) {
+        if (cash < 1000) {
+            throw new IllegalArgumentException("1000원 이상의 금액을 입력하세요.");
+        }
         this.cash = cash;
     }
 
@@ -20,7 +23,11 @@ public class Cash {
         return (float) sum / cash;
     }
 
-    public Cash autoBuy(List<Lotto> manualLottos) {
-        return new Cash(cash - manualLottos.size() * PRICE);
+    public Cash autoBuyCash(List<Lotto> manualLottos) {
+        int autoCash = cash - manualLottos.size() * PRICE;
+        if (autoCash == 0) {
+            return null;
+        }
+        return new Cash(autoCash);
     }
 }
