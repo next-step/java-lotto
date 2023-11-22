@@ -22,4 +22,8 @@ public class PurchaseAmount {
     private static boolean isValidUnit(int purchaseAmount) {
         return purchaseAmount % LOTTO_PRICE == 0;
     }
+
+    public int getLottoCount() {
+        return purchaseAmount / LOTTO_PRICE;
+    }
 }
