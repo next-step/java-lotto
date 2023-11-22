@@ -4,7 +4,7 @@ public class LottoApplication {
     public static void main(String[] args) {
         int purChaseCount = InputView.inputPurchaseCount();
         LottoList lottoList = new LottoList(purChaseCount);
-        OutputView.printLottoList(lottoList);
+        OutputView.printLotto(lottoList);
         String winningNumbers = InputView.inputWinningNumbers();
         String bonusNumber = InputView.inputBonusNumber();
 
@@ -16,7 +16,7 @@ public class LottoApplication {
         LottoMatchResult lottoMatchResult = lottoResult.matchesWinningNumbers(lottoWinningNumbers);
 
         OutputView.printResultPhrase();
-        OutputView.printMatchesResult(lottoMatchResult);
+        OutputView.printMatchesResults(lottoMatchResult);
         OutputView.printRateOfReturn(lottoResult, lottoWinningNumbers);
     }
 }
