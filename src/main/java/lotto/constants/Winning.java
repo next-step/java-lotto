@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum Winning {
     FIRST(6, 2_000_000_000),
@@ -43,13 +45,8 @@ public enum Winning {
     }
 
     public static Set<Winning> prizeWinning() {
-        return new LinkedHashSet<>() {{
-            add(FIFTH);
-            add(FOURTH);
-            add(THIRD);
-            add(SECOND);
-            add(FIRST);
-        }};
+        return Stream.of(FIFTH, FOURTH, THIRD, SECOND, FIRST)
+                .collect((Collectors.toCollection(LinkedHashSet::new)));
     }
 
     public long prize() {
