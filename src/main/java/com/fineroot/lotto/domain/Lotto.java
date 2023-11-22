@@ -38,7 +38,7 @@ public class Lotto {
 
     public WinningRank matchWithWinningNumber(WinningNumber lotto) {
         return WinningRank.of(
-                (int) lottoNumberSet.stream().filter(lottoNumber -> lotto.getLottoNumbers().contains(lottoNumber))
+                (int) lottoNumberSet.stream().filter(lotto::contains)
                         .count());
     }
 

@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class InputViewModelTest {
     @Test
@@ -19,12 +21,12 @@ class InputViewModelTest {
         assertThat(inputViewModel.getMoney().getValue()).isEqualTo(1000);
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("당첨 번호 저장 및 확인")
-    void saveWinningNumber() {
+    @CsvSource({"1,true","7,false"})
+    void saveWinningNumber(int input,boolean expected) {
         InputViewModel inputViewModel = new InputViewModel();
         inputViewModel.saveWinningNumber(WinningNumber.from("1, 2, 3, 4, 5, 6"));
-        assertThat(inputViewModel.getWinningNumber().getLottoNumbers()).containsAll(
-                Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::from).collect(Collectors.toList()));
+        assertThat(inputViewModel.getWinningNumber().contains(LottoNumber.from(input))).isEqualTo(expected);
     }
 }

@@ -27,7 +27,7 @@ public class WinningNumber {
                         .collect(Collectors.toList()));
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public boolean contains(LottoNumber lottoNumber){
+        return lottoNumbers.contains(lottoNumber);
     }
 }
