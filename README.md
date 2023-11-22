@@ -45,3 +45,6 @@
 * [x] 사용자 입력 기능 추가
 * [x] Sign의 validate 방식 변경
 * [x] Sign의 of()와 calculate() 테스트 분리
+
+#### Feedback 23.11.22
+* [x] Sign 구조 개선
