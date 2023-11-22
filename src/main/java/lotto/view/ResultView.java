@@ -4,10 +4,10 @@ import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Arrays;
-import lotto.Lotto;
-import lotto.LottoWallet;
-import lotto.Prize;
-import lotto.StatisticsReport;
+import lotto.domain.Lotto;
+import lotto.domain.LottoWallet;
+import lotto.domain.Prize;
+import lotto.domain.StatisticsReport;
 
 public class ResultView {
 

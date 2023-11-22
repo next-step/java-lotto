@@ -5,6 +5,9 @@ import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

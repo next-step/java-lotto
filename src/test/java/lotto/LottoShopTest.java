@@ -3,7 +3,9 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import org.assertj.core.api.Assertions;
+import lotto.domain.Lotto;
+import lotto.domain.LottoShop;
+import lotto.domain.LottoWallet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
