@@ -8,11 +8,11 @@ public class Profit {
     }
 
     public static Profit of(PurchaseAmount purchaseAmount, PrizeSummary prizeSummary) {
-        return new Profit(calculateProfit(purchaseAmount, prizeSummary.getPrizeAmount()));
+        return new Profit(calculateProfit(purchaseAmount, prizeSummary.calculatePrizeAmount()));
     }
 
     private static double calculateProfit(PurchaseAmount purchaseAmount, int prizeAmount) {
-        return purchaseAmount.devideWith(prizeAmount);
+        return purchaseAmount.divideByPurchaseAmount(prizeAmount);
     }
 
     public double getProfit() {

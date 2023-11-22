@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.Map;
 
 public class PrizeSummary {
@@ -9,13 +10,13 @@ public class PrizeSummary {
         this.prizeSummary = prizeSummary;
     }
 
-    public int getPrizeAmount() {
+    public int calculatePrizeAmount() {
         return prizeSummary.entrySet().stream()
                 .mapToInt(prizeDetail -> prizeDetail.getKey().calculatePrizeByCount(prizeDetail.getValue()))
                 .sum();
     }
 
     public Map<Prize, Integer> getPrizeSummary() {
-        return prizeSummary;
+        return Collections.unmodifiableMap(prizeSummary);
     }
 }
