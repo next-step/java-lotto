@@ -1,14 +1,12 @@
 package operation;
 
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.List;
 
 public class Operater {
     private Deque<Integer> numbers;
     private Operations operations;
-    
+
     private Operater(Deque<Integer> numbers, Operations operations) {
         this.numbers = numbers;
         this.operations = operations;
