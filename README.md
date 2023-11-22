@@ -9,7 +9,6 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ### 로또 TODO
-- [ ] LottoSimulator 테스트: 금액별 로또 구매
 - [ ] Lotto 테스트: 지난주 당첨번호와 비교하여 등수 계산
 - [ ] Lotto 테스트: 로또 번호 정렬
 
@@ -28,6 +27,7 @@
 - [X] 로또 어플리케이션(main)이 view의 종류와 상관없이 자유롭게 사용할 수 있도록 개선
 - [X] static function부분을 객체간 메세징으로 개선해보기
 - [X] RateOfReturn 테스트: 수익률 계산
+- [X] LottoSimulator 테스트: 금액별 로또 구매
 
 
 ### 문자열 계산기 DONE
