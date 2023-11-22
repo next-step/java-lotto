@@ -29,4 +29,14 @@ public class LottoTest {
             new Lotto(lottoNumbers2);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+    @Test
+    @DisplayName("로또와 당첨 로또의 값을 비교하여 count를 반환한다")
+    void match() {
+        List<LottoNumber> lottoNumbers1 = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        List<LottoNumber> lottoNumbers2 = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        Lotto lotto1 = new Lotto(lottoNumbers1);
+        Lotto lotto2 = new Lotto(lottoNumbers2);
+
+        Assertions.assertThat(lotto1.match(lotto2)).isEqualTo(6);
+    }
 }

@@ -13,6 +13,25 @@ public class Lotto {
         validateDuplicate(lottoNumbers);
         this.lotto = new ArrayList<>(lottoNumbers);
     }
+    public int match(Lotto winningLotto) {
+        int count = 0;
+        for (LottoNumber lottoNumber : lotto) {
+            count = getCount(winningLotto, count, lottoNumber);
+        }
+        return count;
+    }
+
+    private static int getCount(Lotto winningLotto, int count, LottoNumber lottoNumber) {
+        if (winningLotto.contains(lottoNumber)) {
+            count++;
+        }
+        return count;
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
+    }
+
     private static void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 사이즈는 6이어야한다.");
