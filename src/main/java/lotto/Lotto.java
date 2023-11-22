@@ -35,6 +35,10 @@ public class Lotto {
             .count();  
     }
 
+    public boolean matchBonusNumber(LottoNumber bonus) {
+        return numbers.contains(bonus);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
