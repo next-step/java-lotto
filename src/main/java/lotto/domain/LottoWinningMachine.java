@@ -10,30 +10,28 @@ public class LottoWinningMachine {
 
     private final Map<Rank, Integer> rankCounts;
     private final Lotto winningLotto;
+    private final LottoNumber bonusNumber;
 
-    public LottoWinningMachine(Lotto winningLotto) {
+    public LottoWinningMachine(int number, Integer... numbers) {
+        this(new Lotto(numbers), new LottoNumber(number));
+    }
+
+    public LottoWinningMachine(Lotto winningLotto, LottoNumber bonusNumber) {
         this.rankCounts = new EnumMap<>(Rank.class);
         this.winningLotto = winningLotto;
+        this.bonusNumber = bonusNumber;
     }
 
     public Map<Rank, Integer> getRankCounts(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             int matchCount = lotto.matchCount(winningLotto);
 
-            Rank rank = Rank.rankByCount(matchCount);
+            Rank rank = Rank.rankByCount(matchCount, lotto.contains(bonusNumber));
 
-            rankCounts.put(rank, getCountOfRank(rank) + 1);
+            rankCounts.put(rank, rankCounts.getOrDefault(rank, 0) + 1);
         }
 
         return rankCounts;
-    }
-
-    private int getCountOfRank(Rank rank) {
-        if (rankCounts.containsKey(rank)) {
-            return rankCounts.get(rank);
-        }
-
-        return 0;
     }
 
     public double calculateRateOfResult(Map<Rank, Integer> result, int amount) {
