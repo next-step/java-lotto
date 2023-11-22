@@ -18,7 +18,7 @@ public class LottoGeneratorTest {
     @ParameterizedTest
     @CsvSource(value = {"500:0", "1000:1", "2500:2"}, delimiter = ':')
     public void 금액에_맞게_생성된_로또_개수_확인_테스트(int userMoney, int expectedSize) {
-        assertThat(lottoGenerator.generateLottos(new Money(userMoney).determineLottoPurchaseCount())).hasSize(expectedSize);
+        assertThat(lottoGenerator.generateLottos(new Money(userMoney))).hasSize(expectedSize);
     }
 
     @Test

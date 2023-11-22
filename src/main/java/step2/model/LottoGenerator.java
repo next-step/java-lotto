@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoGenerator {
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -20,21 +21,19 @@ public class LottoGenerator {
         }
     }
 
-    public List<Lotto> generateLottos(int lottoPurchaseCount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoPurchaseCount; i++) {
-            lottos.add(generateLotto());
-        }
+    public List<Lotto> generateLottos(Money money) {
+
+        List<Lotto> lottos = generateManualLottos(getUserInputs(money));
+
+        lottos.addAll(generateAutoLottos(money));
+
         return lottos;
     }
 
-    private Lotto generateLotto() {
-        Collections.shuffle(lottoNumbers);
-        return new Lotto(lottoNumbers.subList(0, LOTTO_SIZE));
-    }
-
-    public WinningLotto generateWinningLotto(String userInput, Integer bonusNumber) {
-        return new WinningLotto(parseLottoNumbers(splitLottoNumbers(userInput)), bonusNumber);
+    private static List<String> getUserInputs(Money money) {
+        int manualLottoCount = 2; //todo InputView
+        money.purchaseManualLotto(manualLottoCount);
+        return Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12");
     }
 
     public List<Lotto> generateManualLottos(List<String> userInputs) {
@@ -45,6 +44,21 @@ public class LottoGenerator {
 
     Lotto generateManualLotto(String userInput) {
         return new Lotto(parseLottoNumbers(splitLottoNumbers(userInput)));
+    }
+
+    private List<Lotto> generateAutoLottos(Money money) {
+        return IntStream.range(0, money.determineLottoPurchaseCount())
+                .mapToObj(count -> generateAutoLotto())
+                .collect(Collectors.toList());
+    }
+
+    private Lotto generateAutoLotto() {
+        Collections.shuffle(lottoNumbers);
+        return new Lotto(lottoNumbers.subList(0, LOTTO_SIZE));
+    }
+
+    public WinningLotto generateWinningLotto(String userInput, Integer bonusNumber) {
+        return new WinningLotto(parseLottoNumbers(splitLottoNumbers(userInput)), bonusNumber);
     }
 
     private List<Integer> parseLottoNumbers(List<String> splitWinningNumbers) {
