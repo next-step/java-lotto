@@ -1,19 +1,19 @@
 package stringCalculator.domain;
 
-public class Parser {
+import static stringCalculator.enums.regex.REGEX_BLANK;
+import static stringCalculator.enums.regex.REGEX_NUM_OR_OPERATOR;
 
-    public static final String REGEX_BLANK = " ";
-    public static final String REGEX_NUM_OR_OPERATOR = "^[0-9]+( [+\\-*/] [0-9]+)*$";
+public class Parser {
 
     public static String[] parseInput(String input) {
         validateString(input);
-        return input.split(REGEX_BLANK);
+        return input.split(REGEX_BLANK.toString());
     }
 
     private static void validateString(String input) {
         // ^[0-9]+ 숫자로 시작되어야함
         // ()* 괄호 사이의 패턴이 반복
-        if (!input.matches(REGEX_NUM_OR_OPERATOR)) {
+        if (!input.matches(REGEX_NUM_OR_OPERATOR.toString())) {
             throw new IllegalArgumentException("입력값을 확인해주세요.");
         }
     }
