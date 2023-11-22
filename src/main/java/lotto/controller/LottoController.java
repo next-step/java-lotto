@@ -6,22 +6,22 @@ import lotto.model.LottoReport;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoController {
 
     public static void main(String[] args) {
+        buyLottoAndCheckResult();
+    }
+
+    public static void buyLottoAndCheckResult() {
         List<Lotto> lottoTickets = buyLotto();
 
-        for (int i = 0; i < lottoTickets.size(); i++) {
-            ResultView.printLottoTicket(lottoTickets.get(i));
+        for (Lotto lottoTicket : lottoTickets) {
+            ResultView.printLottoTicket(lottoTicket);
         }
 
-        String winningNumber = InputView.inputWinningNumbers();
-        LottoReport report = new LottoReport(winningNumber, lottoTickets);
-        ResultView.printResultReport(report);
+        checkLottoResult(lottoTickets);
     }
 
     private static List<Lotto> buyLotto() {
@@ -29,5 +29,11 @@ public class LottoController {
         List<Lotto> tickets = LottoMachine.issue(money);
         ResultView.printCheckPurchaseMessage(tickets.size());
         return tickets;
+    }
+
+    private static void checkLottoResult(List<Lotto> tickets) {
+        String winningNumber = InputView.inputWinningNumbers();
+        LottoReport report = new LottoReport(winningNumber, tickets);
+        ResultView.printResultReport(report);
     }
 }
