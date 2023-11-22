@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoSeller;
 import lotto.domain.Lottos;
@@ -23,5 +24,6 @@ public class LottoController {
         LottoSeller lottoSeller = new LottoSeller(lottoCount);
         Lottos lottos = lottoSeller.generateLottos();
         outputview.printLottos(lottos);
+        Lotto winningLotto = inputView.inputWinningLotto();
     }
 }
