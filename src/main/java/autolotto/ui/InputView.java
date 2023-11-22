@@ -1,10 +1,9 @@
 package autolotto.ui;
 
 import autolotto.domain.Lotto;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+import autolotto.domain.LottoNo;
+
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -33,12 +32,20 @@ public class InputView {
     public static List<Integer> lastWeekWinNumber() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         List<Integer> winningNumbers = inputNumbers();
+        checkDuplicateNumber(winningNumbers);
         return winningNumbers;
     }
 
-    public static int bonusNumber() {
+    private static void checkDuplicateNumber(List<Integer> winningNumbers) {
+        Set<Integer> uniqueNumber = winningNumbers.stream().collect(Collectors.toSet());
+        if(winningNumbers.size() != uniqueNumber.size()){
+            throw new IllegalArgumentException("당첨번호 중 중복된 숫자가 존재합니다. 다시 입력해 주세요.");
+        }
+    }
+
+    public static LottoNo bonusNumber() {
         System.out.println("\n보너스 볼을 입력해 주세요.");
-        return Integer.parseInt(checkNllOrBlank(scanner.nextLine()));
+        return new LottoNo(Integer.parseInt(checkNllOrBlank(scanner.nextLine())));
     }
 
     public static List<Lotto> manualLotto() {
@@ -46,7 +53,9 @@ public class InputView {
         if(manualLottoCount == 0){
             return null;
         }
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
         return Stream.generate(() -> new Lotto(inputNumbers()))
+                .limit(manualLottoCount)
                 .collect(Collectors.toList());
     }
 
@@ -63,7 +72,6 @@ public class InputView {
     }
 
     private static List<Integer> inputNumbers() {
-        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
         return Arrays.stream(checkNllOrBlank(scanner.nextLine()).split(SPLIT_PATTERN))
                 .map(String::trim)
                 .map(Integer::parseInt)

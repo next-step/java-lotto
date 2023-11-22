@@ -9,7 +9,6 @@ public class LottoStatistics {
     private static final int ZERO = 0;
     private List<Lotto> lottoTickets;
     private WinLotto winLotto;
-//    private int bonusNumber;
 
     public LottoStatistics(List<Lotto> lottoTickets, WinLotto winLotto) {
         this.lottoTickets = lottoTickets;
@@ -21,7 +20,7 @@ public class LottoStatistics {
 
         for (Lotto ticket : lottoTickets) {
             boolean hasBonusNumber = ticket.lottoNumbers().contains(winLotto.getBonusNumber());
-            Rank rank = Rank.of(ticket.matchCount(ticket, winLotto.getLastWeekWinNumber()),hasBonusNumber);
+            Rank rank = Rank.of(ticket.matchCount(ticket, winLotto.getLastWeekWinNumber()), hasBonusNumber);
             rankCount.put(rank, rankCount.getOrDefault(rank, 0) + 1);
         }
         return rankCount;
