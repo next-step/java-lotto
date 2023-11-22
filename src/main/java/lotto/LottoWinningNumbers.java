@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoWinningNumbers {
+    private final static int FIVE_LOTTO_MATCH = 5;
     private final Lotto lottoWinningNumbers;
     private final LottoNumber bonusNumber;
 
@@ -26,10 +27,6 @@ public class LottoWinningNumbers {
         }
     }
 
-    public boolean isSame(Lotto lotto) {
-        return this.lottoWinningNumbers.equals(lotto);
-    }
-
     public long amount(Lotto lotto) {
         LottoMatch lottoMatch = matchesLotto(lotto);
         return lottoMatch.amount();
@@ -41,10 +38,7 @@ public class LottoWinningNumbers {
 
         lottoWinningList.retainAll(lottoList);
         int matchCount = lottoWinningList.size();
-        boolean isBonus = false;
-        if (matchCount == 5 && lottoList.contains(bonusNumber)) {
-            isBonus = true;
-        }
+        boolean isBonus = matchCount == FIVE_LOTTO_MATCH && lottoList.contains(bonusNumber);
         return LottoMatch.fromInt(matchCount, isBonus);
     }
 }

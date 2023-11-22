@@ -5,8 +5,8 @@ import java.util.*;
 public class LottoFactory {
     private final static int NUMBER_COUNT = 6;
     private final static int MIN_NUMBER = 1;
-    private final static int MAX_NUMBER = 10;
-    private static final List<LottoNumber> ALL_LOTTO_NUMBERS = allLottoNumbers(MIN_NUMBER, MAX_NUMBER);
+    private final static int MAX_NUMBER = 45;
+    private final static List<LottoNumber> ALL_LOTTO_NUMBERS = allLottoNumbers(MIN_NUMBER, MAX_NUMBER);
 
     private static List<LottoNumber> allLottoNumbers(int min, int max) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
