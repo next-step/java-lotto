@@ -1,9 +1,8 @@
-package step2;
+package step2.domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import step2.domain.LottoRank;
 
 class LottoRankTest {
 
@@ -13,7 +12,5 @@ class LottoRankTest {
         Assertions.assertThat(LottoRank.valueOf("FIRST")).isEqualTo(LottoRank.FIRST);
         Assertions.assertThat(LottoRank.valueOf("SECOND")).isEqualTo(LottoRank.SECOND);
         Assertions.assertThat(LottoRank.valueOf("THIRD")).isEqualTo(LottoRank.THIRD);
-
     }
-
 }

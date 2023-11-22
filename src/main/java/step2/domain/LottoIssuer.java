@@ -1,8 +1,17 @@
-package step2;
+package step2.domain;
 
 import java.util.*;
 
 public class LottoIssuer {
+
+    private final List<Integer> numbers = new ArrayList<>();
+    private final int BASE_MONEY = 1000;
+
+    public LottoIssuer() {
+        for (int i = LottoNumber.LOTTO_NUM_START; i <= LottoNumber.LOTTO_NUM_END; i++) {
+            numbers.add(i);
+        }
+    }
 
     public List<LottoTicket> issueTickets(int count) {
         List<LottoTicket> tickets = new ArrayList<>();
@@ -13,18 +22,15 @@ public class LottoIssuer {
     }
 
     public List<LottoTicket> issueTicketsByMoney(int money) {
-        int count = money / 1000;
+        int count = money / BASE_MONEY;
         return issueTickets(count);
     }
 
-    private Set<Lotto> issueTicket() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            numbers.add(i);
-        }
+    private Set<LottoNumber> issueTicket() {
         Collections.shuffle(numbers);
         return numbers.subList(0, 6).stream()
-                .map(Lotto::new)
+                .sorted()
+                .map(LottoNumber::new)
                 .collect(java.util.stream.Collectors.toSet());
     }
 }

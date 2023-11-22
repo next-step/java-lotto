@@ -1,11 +1,13 @@
-package step2;
+package step2.domain;
 
 import java.util.Objects;
 
-public class Lotto {
+public class LottoNumber {
     private final int number;
+    public final static int LOTTO_NUM_START=1;
+    public final static int LOTTO_NUM_END=45;
 
-    public Lotto(int number) {
+    public LottoNumber(int number) {
         checkNumber(number);
         this.number = number;
     }
@@ -15,7 +17,7 @@ public class Lotto {
     }
 
     private void checkNumber(int number) {
-        if (number < 1 || number > 45) {
+        if (number < LOTTO_NUM_START || number > LOTTO_NUM_END) {
             throw new IllegalArgumentException("로또 번호는 1~45 사이여야 합니다.");
         }
     }
@@ -24,8 +26,8 @@ public class Lotto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto = (Lotto) o;
-        return number == lotto.number;
+        LottoNumber lottoNumber = (LottoNumber) o;
+        return number == lottoNumber.number;
     }
 
     @Override

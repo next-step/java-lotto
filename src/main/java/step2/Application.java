@@ -1,7 +1,12 @@
 package step2;
 
+import step2.domain.LottoIssuer;
+import step2.domain.LottoResult;
+import step2.domain.LottoTicket;
+import step2.view.ResultView;
+import step2.view.InputView;
+
 import java.util.List;
-import java.util.Map;
 
 public class Application {
 

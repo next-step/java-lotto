@@ -1,7 +1,9 @@
-package step2;
+package step2.domain;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import step2.domain.LottoResult;
+import step2.domain.LottoTicket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,5 @@ class LottoResultTest {
                 () -> assertThat(lottoResult.countOfMatch(4)).isEqualTo(2),
                 () -> assertThat(lottoResult.countOfMatch(2)).isEqualTo(1)
         );
-
-
     }
 }

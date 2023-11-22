@@ -1,12 +1,12 @@
-package step2;
+package step2.domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import step2.domain.LottoProfit;
+import step2.domain.LottoResult;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoProfitTest {
 

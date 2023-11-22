@@ -1,9 +1,10 @@
-package step2;
+package step2.domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import step2.domain.LottoTicket;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -26,5 +27,4 @@ class LottoTicketTest {
         LottoTicket winningTicket = new LottoTicket(winningInput);
         Assertions.assertThat(lottoTicket.winningCount(winningTicket)).isEqualTo(expected);
     }
-
 }

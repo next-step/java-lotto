@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 public enum LottoRank {
     FIRST(6, 2000000000),
