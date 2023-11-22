@@ -29,6 +29,9 @@ public enum Operator {
     DIVIDE("/") {
         @Override
         public int apply(int x, int y) {
+            if (x % y != 0) {
+                throw new IllegalArgumentException("정수로 나누어떨어지지 않는 연산입니다.");
+            }
             return x / y;
         }
     };

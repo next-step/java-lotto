@@ -3,6 +3,7 @@ package stringCalculator.domain;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class StringCalculatorTest {
     @Test
@@ -28,5 +29,10 @@ class StringCalculatorTest {
     @Test
     void test_mixedOp() {
         assertThat(StringCalculator.calculate("15 / 5 * 2 + 4 - 1")).isEqualTo(9);
+    }
+
+    @Test
+    void exceptionTest_정수가아닌나눗셈() {
+        assertThatIllegalArgumentException().isThrownBy(() -> StringCalculator.calculate("7 / 8 / 9"));
     }
 }
