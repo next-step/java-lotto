@@ -2,6 +2,7 @@ package lotto.domain.summary;
 
 import lotto.constants.Winning;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -42,7 +43,7 @@ public class WinningSummary {
     }
 
     public Map<Winning, Long> winnings() {
-        return winnings;
+        return Collections.unmodifiableMap(winnings);
     }
 
     @Override
