@@ -3,6 +3,7 @@ package autolotto.domain;
 import autolotto.strategy.LottoNumberGenerator;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -11,14 +12,13 @@ public class LottoGame {
     private LottoNumberGenerator lottoNumberGenerator;
     private Lotto lotto;
 
-    public LottoGame(int ticketCount, LottoNumberGenerator lottoNumberGenerator) {
-        this.ticketCount = ticketCount;
+    public LottoGame(LottoNumberGenerator lottoNumberGenerator) {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    public List<Lotto> getLottoTickets() {
-        return IntStream.range(0, ticketCount)
+    public Optional<List<Lotto>> getLottoTickets(int ticketCount) {
+        return Optional.of(IntStream.range(0, ticketCount)
                 .mapToObj(i -> new Lotto(lottoNumberGenerator.generateNumbers()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 }
