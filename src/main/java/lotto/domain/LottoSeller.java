@@ -1,23 +1,26 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoSeller implements Seller {
     private final LottoCount lottoCount;
+    private final Random random;
 
     public LottoSeller(LottoCount lottoCount) {
         this.lottoCount = lottoCount;
+        this.random = new Random();
     }
 
     @Override
     public Lottos generateLottos() {
         List<Lotto> lottos = new ArrayList<>();
         int presentLottoCount = 0;
+
         while (lottoCount.isLessThanCount(presentLottoCount)) {
             lottos.add(generateLotto());
             presentLottoCount++;
@@ -26,16 +29,27 @@ public class LottoSeller implements Seller {
     }
 
     public Lotto generateLotto() {
+        Set<Integer> lottoNumbers = generateUniqueNumbers();
+        return Lotto.from(sortLotto(lottoNumbers));
+    }
+
+    private Set<Integer> generateUniqueNumbers() {
         Set<Integer> lottoNumbers = new HashSet<>();
         boolean isValidLotto = true;
-        int presentLottoNumberCount = 0;
-        while (isValidLotto && presentLottoNumberCount < 6) {
-            int lottoNumber = new Random().nextInt(LottoNumber.MAX_LOTTO_NUMBER) + 1;
-            isValidLotto = lottoNumbers.add(lottoNumber);
-            presentLottoNumberCount++;
+
+        while (isValidLotto && isWithinLottoCountLimit(lottoNumbers)) {
+            isValidLotto = lottoNumbers.add(random.nextInt(LottoNumber.MAX_LOTTO_NUMBER) + 1);
         }
-        List<Integer> lotto = new ArrayList<>(lottoNumbers);
-        Collections.sort(lotto);
-        return Lotto.from(lotto);
+        return lottoNumbers;
+    }
+
+    private List<Integer> sortLotto(Set<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    private static boolean isWithinLottoCountLimit(Set<Integer> lottoNumbers) {
+        return lottoNumbers.size() < Lotto.LOTTO_NUMBER_COUNT;
     }
 }
