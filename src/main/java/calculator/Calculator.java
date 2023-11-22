@@ -7,6 +7,7 @@ public class Calculator {
 
     public static final String INPUT_TEXT_EXCEPTION = "문자열이 빈 값이거나, 공백만 존재합니다.";
     public static final String INPUT_OPERATOR_EXCEPTION = "입력하신 연산자가 사칙 연산 연산자가 아닙니다.";
+
     private final List<Operator> operators;
 
     public Calculator(List<Operator> operators) {
