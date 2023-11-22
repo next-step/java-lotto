@@ -7,11 +7,9 @@ import static lotto.domain.Rank.*;
 
 public class LottoCenter {
 
-    public static final int PRICE = 1000;
-
-    private static int cash;
+    private static Cash cash;
     private WinningLotto winningLotto;
-    private List<Rank> result;
+    private Result result;
 
     public LottoCenter() {
     }
@@ -20,22 +18,22 @@ public class LottoCenter {
         this.winningLotto = winningLotto;
     }
 
-    public List<Lotto> buyLotto(int cash) {
+    public List<Lotto> buyLotto(Cash cash) {
         LottoCenter.cash = cash;
         return generateTicket(cash);
     }
 
-    private List<Lotto> generateTicket(int cash) {
+    private List<Lotto> generateTicket(Cash cash) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < cash / PRICE; i++) {
+        for (int i = 0; i < cash.count(); i++) {
             Lotto lotto = new Lotto();
             lottos.add(lotto);
         }
         return lottos;
     }
 
-    public List<Rank> matchWinningNumbers(List<Lotto> lottos) {
-        List<Rank> checkedResult = new ArrayList<>();
+    public Result matchWinningNumbers(List<Lotto> lottos) {
+        Result checkedResult = new Result();
         for (Lotto lotto : lottos) {
             checkedResult.add(winningLotto.matchRank(lotto));
         }
@@ -46,7 +44,7 @@ public class LottoCenter {
     public List<Integer> checkWinningResult() {
         List<Integer> statistic = new ArrayList<>();
         for (Rank value : values()) {
-            int count = (int) result.stream().filter(n -> n.equals(value)).count();
+            int count = result.countRank(value);
             statistic.add(count);
         }
         return statistic;
@@ -55,9 +53,9 @@ public class LottoCenter {
     public float checkWinningRate() {
         int sum = 0;
         for (Rank value : values()) {
-            int count = (int) result.stream().filter(n -> n.equals(value)).count();
+            int count = result.countRank(value);
             sum = sum + count * value.getWinningMoney();
         }
-        return (float) sum / cash;
+        return (float) sum / cash.getCash();
     }
 }
