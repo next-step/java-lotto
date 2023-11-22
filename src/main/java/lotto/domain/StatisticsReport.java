@@ -3,63 +3,40 @@ package lotto.domain;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class StatisticsReport {
 
     private final LottoWallet lottoWallet;
-    private final Map<Prize, Integer> matchCountByPrize;
+    private static final int ONE_SCORE = 1;
 
     private StatisticsReport(LottoWallet lottoWallet) {
         this.lottoWallet = lottoWallet;
-        this.matchCountByPrize = initializationMap();
-    }
-
-    public StatisticsReport(LottoWallet lottoWallet, Map<Prize, Integer> matchCountByPrize) {
-        this(lottoWallet);
-        for (Prize key : matchCountByPrize.keySet()) {
-            this.matchCountByPrize.put(key, matchCountByPrize.get(key));
-        }
     }
 
     public static StatisticsReport of(LottoWallet lottoWallet) {
         return new StatisticsReport(lottoWallet);
     }
 
-    private static Map<Prize, Integer> initializationMap() {
-        Map<Prize, Integer> matchCountByPrize = new HashMap<>();
-        Arrays.stream(Prize.values()).forEach(prize -> {
-            matchCountByPrize.put(prize, 0);
-        });
-        return matchCountByPrize;
-    }
-
     public StatisticsReport report(WinningLotto winningLotto) {
-        for (int i = 0; i < lottoWallet.totalTicketCount(); i++) {
-            Lotto lotto = lottoWallet.oneTicket(i);
-            int matchedCount = winningLotto.compare(lotto);
-            Prize prize = Prize.prizeByMatchedCount(matchedCount);
-            this.matchCountByPrize.put(prize, Integer.sum(matchCountByPrize.get(prize), 1));
-        }
+        lottoNumberJudge(winningLotto);
+        bonusNumberJudge(winningLotto);
         return this;
     }
 
-    public int countByPrize(Prize prize) {
-        return matchCountByPrize.get(prize);
+    private void bonusNumberJudge(WinningLotto winningLotto) {
+        for (int i = 0; i < lottoWallet.totalTicketCount(); i++) {
+            int matchedCount = winningLotto.compareBonus(lottoWallet.oneTicket(i));
+            Prize bonus = Prize.BONUS;
+            bonus.addScore(matchedCount);
+        }
     }
 
-    public int totalPrize() {
-        return matchCountByPrize.keySet().stream().mapToInt(prize -> {
-            if (0 < matchCountByPrize.get(prize)) {
-                return prize.price();
-            }
-            return 0;
-        }).sum();
-    }
-
-    public LottoWallet lottoWallet() {
-        return this.lottoWallet;
+    private void lottoNumberJudge(WinningLotto winningLotto) {
+        for (int i = 0; i < lottoWallet.totalTicketCount(); i++) {
+            int matchedCount = winningLotto.compare(lottoWallet.oneTicket(i));
+            Prize prize = Prize.prizeByMatchedCount(matchedCount);
+            prize.addScore(ONE_SCORE);
+        }
     }
 
     public BigDecimal rate() {
@@ -68,4 +45,12 @@ public class StatisticsReport {
             .divide(BigDecimal.valueOf(totalPurchasePrice), 2, RoundingMode.HALF_UP)
             .stripTrailingZeros();
     }
+
+    public int totalPrize() {
+        return Arrays.stream(Prize.values())
+            .mapToInt(prize -> prize.rank().getScore())
+            .sum();
+    }
+
+
 }

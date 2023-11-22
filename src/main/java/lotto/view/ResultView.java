@@ -39,21 +39,30 @@ public class ResultView {
         return stringBuilder.toString();
     }
 
-    public void out(StatisticsReport statisticsReport) {
+    public void resultOut() {
         StringBuilder stringBuilder = new StringBuilder();
         Arrays.stream(Prize.values()).forEach(prize -> {
-            if(prizeRankOver3(prize)){
-                stringBuilder.append(prize.rank());
-                stringBuilder.append("개 일치");
-                stringBuilder.append(" (").append(prize.price()).append(")-");
-                stringBuilder.append(statisticsReport.countByPrize(prize)).append("개 \n");
+            if(prizeRankOver3Under6(prize)){
+                createStringBuilderWithPrize(prize, stringBuilder);
             }
         });
+        stringBuilder.append("5개 일치, 보너스 볼 일치");
+        stringBuilder.append(" (").append(Prize.BONUS.price()).append(")-");
+        stringBuilder.append(Prize.BONUS.rank().getRank()).append("개 \n");
+
+        createStringBuilderWithPrize(Prize.FIRST, stringBuilder);
         sout.print(stringBuilder.toString());
     }
 
-    private static boolean prizeRankOver3(Prize prize) {
-        return prize.rank() >= 3;
+    private static void createStringBuilderWithPrize(Prize prize, StringBuilder stringBuilder) {
+        stringBuilder.append(prize.rank().toString());
+        stringBuilder.append("개 일치");
+        stringBuilder.append(" (").append(prize.price()).append(")-");
+        stringBuilder.append(prize.rank().getScore()).append("개 \n");
+    }
+
+    private static boolean prizeRankOver3Under6(Prize prize) {
+        return 3 <= prize.rank().getRank();
     }
 
     public void out(BigDecimal rate) {

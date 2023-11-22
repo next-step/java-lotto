@@ -16,16 +16,15 @@ public class WinningLotto {
     }
 
     public int compare(Lotto lotto) {
-        int matchCount = lastWeakLotto.matchCount(lotto);
-        matchCount += matchBonusBall(lotto);
-        return matchCount;
+        return lastWeakLotto.matchCount(lotto);
     }
 
-    private int matchBonusBall(Lotto lotto) {
-        if (lotto.contains(this.bonusBall)) {
-            return 1;
-        }
-        return 0;
+    public int compareBonus(Lotto lotto) {
+        return lotto.lottoNumbers().stream().mapToInt(lottoNumber -> {
+            if(lottoNumber.equals(bonusBall)){
+                return 1;
+            }
+            return 0;
+        }).sum();
     }
-
 }
