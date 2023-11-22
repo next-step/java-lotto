@@ -1,3 +1,5 @@
+package stringCalculator;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import stringCalculator.domain.Calculator;
@@ -6,7 +8,7 @@ import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
 
-    @DisplayName("계산기에 +를 사용하먄 전달받은 두 수를 더한다.")
+    @DisplayName("계산기에 +를 사용하면 전달받은 두 수를 더한다.")
     @Test
     void calculatorPlusTest() {
         Calculator calculator = new Calculator();
@@ -38,12 +40,21 @@ public class CalculatorTest {
         assertThat(calculator.calculate("/", 5, 2)).isNotEqualTo(2.5);
     }
 
-    @DisplayName("계산기에 사칙연산 외 특수문자를 전달하면 에러를 발생시킨다.")
+    @DisplayName("계산기에 사칙연산 외 특수문자를 전달하면 에러를 던진다.")
     @Test
     void calculatorOperatorTest() {
         Calculator calculator = new Calculator();
         assertThatThrownBy(() -> calculator.calculate("?", 1, 2))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("사칙연산을 제외한 문자는 계산할 수 없습니다.");
+    }
+
+    @DisplayName("계산기에 분리된 문자열을 전달하면 계산한 결과를 반환한다.")
+    @Test
+    void calculatorTest() {
+        String[] data = "1 + 2".split(" ");
+        Calculator calculator = new Calculator();
+
+        assertThat(calculator.calculate(data[1], Integer.parseInt(data[0]), Integer.parseInt(data[2]))).isEqualTo(3);
     }
 }
