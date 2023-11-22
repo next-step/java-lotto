@@ -43,4 +43,9 @@ public class Lotto {
             throw new IllegalArgumentException("중복된 숫자를 가징 수 없습니다.");
         }
     }
+
+    @Override
+    public String toString() {
+        return lotto + "";
+    }
 }
