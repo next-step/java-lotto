@@ -13,19 +13,19 @@ public class LottoStatics {
         this.winningLottos = winningLottos;
     }
 
-    public void classifyRankLotto(List<Lotto> lottos, Lotto winningLotto) {
+    public void classifyRankLotto(List<Lotto> lottos, Lotto winningLotto, LottoNumber bonusBall) {
         for (Lotto lotto : lottos) {
             int matchingCount = winningLotto.countMatchingWinningLotto(lotto);
-            winningLottos.putWinningMatchingNumberLotto(matchingCount);
+            winningLottos.putWinningMatchingNumberLotto(matchingCount, lotto.matchBonusNumber(bonusBall));
         }
     }
 
-    public Integer matchCountRanks(int count) {
-        return winningLottos.countLottoByWinningNumber(count);
+    public Integer matchCountRanks(int count, boolean matchBonus) {
+        return winningLottos.countLottoByWinningNumber(count, matchBonus);
     }
 
-    public Integer rewardWinningLotto(int count) {
-        return winningLottos.rewardWinningLotto(count);
+    public Integer rewardWinningLotto(int count, boolean matchBonus) {
+        return winningLottos.rewardWinningLotto(count, matchBonus);
     }
 
     public Integer rewardTotalWinningLottos() {
