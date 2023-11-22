@@ -1,13 +1,15 @@
 package stringCalculator.domain;
 
+import java.util.List;
+
 import static stringCalculator.enums.Regex.REGEX_BLANK;
 import static stringCalculator.enums.Regex.REGEX_NUM_OR_OPERATOR;
 
 public class Parser {
 
-    public static String[] parseInput(String input) {
+    public static List<String> parseInput(String input) {
         validateString(input);
-        return input.split(REGEX_BLANK.toString());
+        return List.of(input.split(REGEX_BLANK.toString()));
     }
 
     private static void validateString(String input) {

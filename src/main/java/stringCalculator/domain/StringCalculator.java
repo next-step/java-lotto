@@ -2,7 +2,6 @@ package stringCalculator.domain;
 
 import stringCalculator.enums.Operator;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
@@ -10,7 +9,7 @@ import java.util.Queue;
 public class StringCalculator {
 
     public static int calculate(String input) {
-        Queue<String> stringQueue = new LinkedList<>(Arrays.asList(Parser.parseInput(input)));
+        Queue<String> stringQueue = new LinkedList<>(Parser.parseInput(input));
         int result = Integer.parseInt(Objects.requireNonNull(stringQueue.poll()));
 
         while (!stringQueue.isEmpty()) {
