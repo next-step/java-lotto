@@ -2,6 +2,7 @@ package service;
 
 import domain.Currency;
 import domain.Lotto;
+import domain.WinningLotto;
 import repository.LottoGameResultRepository;
 import domain.LottoPrize;
 import repository.UserLottoRepository;
@@ -18,20 +19,22 @@ public class LottoResultService {
         this.userLottoRepository = userLottoRepository;
     }
 
-    public LottoGameResultRepository matchUserLotto(Lotto winningLotto) {
+    public LottoGameResultRepository matchUserLotto(WinningLotto winningLotto) {
         LottoGameResultRepository lottoMatchResult = new LottoGameResultRepository();
         List<Lotto> lottoTickets = userLottoRepository.getUserLottoTickets();
 
         int matchCount = 0;
+        boolean matchBonus = false;
         for (Lotto lottoTicket : lottoTickets) {
             matchCount = lottoTicket.calculateMatchCount(winningLotto);
-            lottoMatchResult.saveResult(getPrize(matchCount));
+            matchBonus = lottoTicket.isMatchBonusNumber(winningLotto);
+            lottoMatchResult.saveResult(getPrize(matchCount, matchBonus));
         }
         return lottoMatchResult;
     }
 
-    private static LottoPrize getPrize(int matchCount) {
-        return LottoPrize.fromMatchCount(matchCount);
+    private static LottoPrize getPrize(int matchCount, boolean matchBonus) {
+        return LottoPrize.fromMatchCount(matchCount, matchBonus);
     }
 
     public float calculateReturnRate(long money, LottoGameResultRepository result, Optional<Currency> currency) {

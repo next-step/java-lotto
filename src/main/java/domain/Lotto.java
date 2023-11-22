@@ -40,11 +40,17 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public int calculateMatchCount(Lotto winningLotto) {
+    public int calculateMatchCount(WinningLotto winningLotto) {
         return (int) lottoNumbers.stream()
                 .map(LottoNumber::getLottoNumber)
-                .filter(winningLotto.getLottoNumbers()::contains)
+                .filter(lottoNum -> winningLotto.getLottoNumbers().contains(lottoNum) || lottoNum == winningLotto.getBonusNumber())
                 .count();
+    }
+
+    public boolean isMatchBonusNumber(WinningLotto winningLotto) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getLottoNumber)
+                .anyMatch(lottoNumber -> lottoNumber.equals(winningLotto.getBonusNumber()));
     }
 
 }

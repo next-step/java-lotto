@@ -2,6 +2,7 @@ package service;
 
 import domain.Lotto;
 import domain.LottoPrize;
+import domain.WinningLotto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import repository.UserLottoRepository;
@@ -37,7 +38,7 @@ public class LottoGameTest {
         Lotto lotto = new Lotto("1, 2,3,4,5,6");
         userLottoRepository.saveUserLottoTickets(lotto);
 
-        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        WinningLotto winningLotto = new WinningLotto(1, 2, 3, 4, 5, 6, 7);
 
         Map<LottoPrize, Integer> lottoPrizeIntegerMap = lottoGameService.matchUserLotto(winningLotto).getAllResult();
 

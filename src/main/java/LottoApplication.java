@@ -1,4 +1,5 @@
 import domain.Lotto;
+import domain.WinningLotto;
 import repository.LottoGameResultRepository;
 import service.LottoResultService;
 import repository.UserLottoRepository;
@@ -23,9 +24,10 @@ public class LottoApplication {
         ResultView.printLottoNumbers(lottoTickets);
 
         String inputWinningNumbers = InputView.inputWinningNumbers();
-        Lotto winningLotto = new Lotto(inputWinningNumbers);
+        int inputBonusNumber = InputView.inputBonusNumber();
+        WinningLotto winningLotto = new WinningLotto(inputWinningNumbers, inputBonusNumber);
 
-        Optional<Currency> optionalCurrency = Optional.of(Currency.KOREA);
+        Optional<Currency> optionalCurrency = Optional.of(Currency.KRW);
         LottoResultService lottoResultService = new LottoResultService(userLottoRepository);
         LottoGameResultRepository lottoGameResult = lottoResultService.matchUserLotto(winningLotto);
         float rate = lottoResultService.calculateReturnRate(money, lottoGameResult, optionalCurrency);
