@@ -1,31 +1,39 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber> {
-    private int number;
+public class LottoNumber implements Comparable<LottoNumber>{
+    private PositiveNumber number;
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
-    public LottoNumber(int value) {
-        numberRangeCheck(value);
-        this.number = value;
-    }
-
-    public LottoNumber(String value) {
-        int valueNumber = Parser.parseNumberFormat(value);
-        numberRangeCheck(valueNumber);
-        this.number = valueNumber;
-    }
-
-    private void numberRangeCheck(int value) {
-        if (value < Lotto.START_NUMBER || value > Lotto.END_NUMBER) {
-            throw new IllegalArgumentException("숫자 범위를 벗어납니다. 숫자범위 : 1~45");
+    static {
+        for (int i = Lotto.START_NUMBER; i <= Lotto.END_NUMBER; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
         }
     }
 
-    @Override
-    public int compareTo(LottoNumber other) {
-        return Integer.compare(this.number, other.number);
+    public static LottoNumber of(int value) {
+        numberRangeCheck(value);
+        return lottoNumbers.get(value);
+    }
+
+    public static LottoNumber of(String value) {
+        int valueNumber = Parser.parseNumberFormat(value);
+        numberRangeCheck(valueNumber);
+        return lottoNumbers.get(valueNumber);
+    }
+
+    private LottoNumber(int value) {
+        numberRangeCheck(value);
+        this.number = new PositiveNumber(value);
+    }
+
+    private static void numberRangeCheck(int value) {
+        if (value < Lotto.START_NUMBER || value > Lotto.END_NUMBER) {
+            throw new IllegalArgumentException("숫자 범위를 벗어납니다. 숫자범위 : 1~45");
+        }
     }
 
     @Override
@@ -33,7 +41,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return number == that.number;
+        return number.equals(that.number);
     }
 
     @Override
@@ -42,7 +50,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     @Override
+    public int compareTo(LottoNumber o) {
+        return number.compareTo(o.number);
+    }
+
+    @Override
     public String toString() {
-        return String.valueOf(number);
+        return number.toString();
     }
 }

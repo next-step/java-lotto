@@ -7,15 +7,19 @@ import java.util.Objects;
 public class Amount implements Comparable<Amount> {
     private Long amount;
 
-    public Amount() {
-        this.amount = 0l;
+    public static Amount of(PositiveNumber value) {
+        return new Amount(Long.valueOf(value.getPositiveNumber()));
     }
 
-    public Amount(int amount) {
-        this.amount = Long.valueOf(amount);
+    public static Amount of(int amount) {
+        return new Amount(Long.valueOf(amount));
     }
 
-    public Amount(Long amount) {
+    public static Amount of(Long amount) {
+        return new Amount(amount);
+    }
+
+    private Amount(Long amount) {
         this.amount = amount;
     }
 

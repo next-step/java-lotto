@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.PositiveNumber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,14 +33,14 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static List<Lotto> manualLottos(int manualCount) {
+    public static List<Lotto> manualLottos(PositiveNumber manualCount) {
         List<Lotto> manualLottos = new ArrayList<>();
-        if (manualCount == 0) {
+        if (manualCount.isZero()) {
             return manualLottos;
         }
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        for (int count = 0; count < manualCount; count++) {
+        for (int count = 0; count < manualCount.getPositiveNumber(); count++) {
             manualLottos.add(new Lotto(scanner.nextLine()));
         }
         return manualLottos;

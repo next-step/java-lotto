@@ -11,14 +11,6 @@ public class Parser {
     private Parser() {
     }
 
-    public static int numberParsing(String value) {
-        int number = parseNumberFormat(value);
-        if (number < 0) {
-            throw new IllegalArgumentException("숫자가 음수이면 안됩니다.");
-        }
-        return parseNumberFormat(value);
-    }
-
     public static int parseNumberFormat(String numberString) {
         try {
             return Integer.parseInt(numberString);
@@ -47,7 +39,7 @@ public class Parser {
     private static List<LottoNumber> stringNumbersConversion(List<String> values) {
         List<LottoNumber> numbers = new ArrayList<>();
         for (String value : values) {
-            numbers.add(new LottoNumber(numberParsing(value)));
+            numbers.add(LottoNumber.of(value));
         }
         return numbers;
     }

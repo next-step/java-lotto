@@ -7,9 +7,9 @@ import lotto.view.ResultView;
 
 public class UserInterface {
     public static void main(String[] args) {
-        Amount money = new Amount(Parser.numberParsing(InputView.purchaseMoney()));
-        int manualCount = Parser.numberParsing(InputView.manualCount());
-        Amount manualPurchaseMoney = new Amount((manualCount * Lotto.LOTTO_PRICE));
+        Amount money = Amount.of(new PositiveNumber(InputView.purchaseMoney()));
+        PositiveNumber manualCount = new PositiveNumber(Parser.parseNumberFormat(InputView.manualCount()));
+        Amount manualPurchaseMoney = Amount.of((manualCount.getPositiveNumber() * Lotto.LOTTO_PRICE));
 
         if (money.compareTo(manualPurchaseMoney) < 0) {
             throw new IllegalArgumentException("금액을 초과하여 구매할수 없습니다.");
@@ -25,7 +25,7 @@ public class UserInterface {
         ResultView.purchaseCount(lottos, manualCount);
         ResultView.lottos(lottos);
         Lotto winningNumber = new Lotto(InputView.winningNumbers());
-        LottoNumber bonusNumber = new LottoNumber(InputView.bonusNumber());
+        LottoNumber bonusNumber = LottoNumber.of(InputView.bonusNumber());
 
         if (winningNumber.contains(bonusNumber)) {
             throw new IllegalArgumentException("당첨 번호에 보너스 볼 번호가 포함되면 안됩니다.");

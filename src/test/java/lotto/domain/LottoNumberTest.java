@@ -16,6 +16,6 @@ class LottoNumberTest {
     @DisplayName("보너스 번호가 일치하면 true반환")
     @Test
     void 번호_확인() {
-        assertThat(new LottoNumber(1)).isEqualTo(new LottoNumber(1));
+        assertThat(LottoNumber.of(1)).isEqualTo(LottoNumber.of(1));
     }
 }

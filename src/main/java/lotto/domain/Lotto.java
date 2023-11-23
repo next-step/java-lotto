@@ -18,7 +18,7 @@ public class Lotto {
     public Lotto() {
         List<LottoNumber> numbersRange = new ArrayList<>();
         for (int number = START_NUMBER; number <= END_NUMBER; number++) {
-            numbersRange.add(new LottoNumber(number));
+            numbersRange.add(LottoNumber.of(number));
         }
         Collections.shuffle(numbersRange);
         this.numbers = new ArrayList<>(purchasing(numbersRange));
@@ -53,7 +53,7 @@ public class Lotto {
         LottoNumber bonusNumber = winningLottoDTO.getBonus();
         int correctCount = winningLotto.correctCount(numbers);
         boolean bonusCorrect = this.numbers.contains(bonusNumber);
-        return new WinningInfoDTO(correctCount, bonusCorrect, new Amount(Winning.winningAmount(correctCount, bonusCorrect)));
+        return new WinningInfoDTO(correctCount, bonusCorrect, Winning.winningAmount(correctCount, bonusCorrect));
     }
 
     private void duplicationCheck(List<LottoNumber> list) {

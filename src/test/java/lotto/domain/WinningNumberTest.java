@@ -4,9 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningNumberTest {
@@ -15,6 +12,6 @@ class WinningNumberTest {
     @ParameterizedTest
     @CsvSource(value = {"1:true","3:true", "5:true", "7:false"}, delimiter = ':')
     void contains(int number, boolean expectedFlag) {
-        assertThat(new Lotto("1,2,3,4,5,6").contains(new LottoNumber(number))).isEqualTo(expectedFlag);
+        assertThat(new Lotto("1,2,3,4,5,6").contains(LottoNumber.of(number))).isEqualTo(expectedFlag);
     }
 }

@@ -29,13 +29,13 @@ class LottosTest {
                 new Lotto("1, 2,6,9, 30,40")//5000
         ));
         winningLotto = new Lotto("1,2,3,4,5,6");
-        lottoNumber = new LottoNumber("33");
+        lottoNumber = LottoNumber.of("33");
     }
 
     @DisplayName("가격만큼의 로또를 구매")
     @Test
     void 로또_구매() {
-        Lottos lottos = new Lottos(new Amount(14_000));
+        Lottos lottos = new Lottos(Amount.of(14_000));
         assertThat(lottos.size()).isEqualTo(14);
     }
 
@@ -93,7 +93,7 @@ class LottosTest {
     @Test
     void 게임_존재_여부() {
         assertThat(lottos.isEmpty()).isFalse();
-        Lottos emptyLottos = new Lottos(new Amount(0));
+        Lottos emptyLottos = new Lottos(Amount.of(0));
         assertThat(emptyLottos.isEmpty()).isTrue();
     }
 }

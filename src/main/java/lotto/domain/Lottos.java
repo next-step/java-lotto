@@ -11,7 +11,7 @@ public class Lottos {
     private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        this(new Amount(0), lottos);
+        this(Amount.of(0), lottos);
     }
 
     public Lottos(Amount amount) {
@@ -26,7 +26,7 @@ public class Lottos {
     }
 
     public Long totalWinningAmount(WinningLottoDTO winningLottoDTO) {
-        Amount amount = new Amount();
+        Amount amount = Amount.of(0);
         for (Lotto lotto : this.lottos) {
             amount.add(lotto.winningInfo(winningLottoDTO).getWinningAmount());
         }
@@ -34,8 +34,8 @@ public class Lottos {
     }
 
     public BigDecimal rateOfReturn(WinningLottoDTO winningLottoDTO) {
-        Amount purchaseAmount = new Amount(this.lottos.size() * Lotto.LOTTO_PRICE);
-        Amount winningAmount = new Amount(totalWinningAmount(winningLottoDTO));
+        Amount purchaseAmount = Amount.of(this.lottos.size() * Lotto.LOTTO_PRICE);
+        Amount winningAmount = Amount.of(totalWinningAmount(winningLottoDTO));
         return winningAmount.divideToBigDecimal(purchaseAmount.amount(), 2);
     }
 

@@ -13,8 +13,8 @@ class LottoTest {
     void 당첨정보_리턴() {
         Lotto lotto = new Lotto("2, 5,21,45, 34,30");
         Lotto winningLotto = new Lotto("1,2,3,5,6,45");
-        LottoNumber lottoNumber = new LottoNumber("34");
+        LottoNumber lottoNumber = LottoNumber.of("34");
         assertThat(lotto.winningInfo(new WinningLottoDTO(winningLotto, lottoNumber)))
-                .isEqualTo(new WinningInfoDTO(3, true ,new Amount(5_000)));
+                .isEqualTo(new WinningInfoDTO(3, true ,Amount.of(5_000)));
     }
 }
