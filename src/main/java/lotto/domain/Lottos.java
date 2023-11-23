@@ -20,7 +20,7 @@ public class Lottos {
 
     public Lottos(Amount amount, List<Lotto> manualLottos) {
         this.lottos = new ArrayList<>(manualLottos);
-        for (int game = 0; game < amount.purchasableLottoCount(); game++) {
+        for (int game = 0; game < amount.divideToInt(Lotto.LOTTO_PRICE); game++) {
             this.lottos.add(new Lotto());
         }
     }
@@ -36,7 +36,7 @@ public class Lottos {
     public BigDecimal rateOfReturn(WinningLottoDTO winningLottoDTO) {
         Amount purchaseAmount = new Amount(this.lottos.size() * Lotto.LOTTO_PRICE);
         Amount winningAmount = new Amount(totalWinningAmount(winningLottoDTO));
-        return winningAmount.divide(purchaseAmount.amount(), 2);
+        return winningAmount.divideToBigDecimal(purchaseAmount.amount(), 2);
     }
 
     public List<Lotto> getLottos() {

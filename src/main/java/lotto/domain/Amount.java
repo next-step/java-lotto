@@ -23,11 +23,11 @@ public class Amount implements Comparable<Amount> {
         this.amount += value;
     }
 
-    public int purchasableLottoCount() {
-        return (int) (amount / Lotto.LOTTO_PRICE);
+    public int divideToInt(int value) {
+        return (int) (amount / value);
     }
 
-    public BigDecimal divide(Long amount, int digit) {
+    public BigDecimal divideToBigDecimal(Long amount, int digit) {
         BigDecimal numerator = new BigDecimal(this.amount);
         BigDecimal denominator = new BigDecimal(amount);
         return numerator.divide(denominator, digit, RoundingMode.HALF_UP);

@@ -6,15 +6,13 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class AmountTest {
     @DisplayName("두 Amount를 나눈 값을 소수점 2자리까지 표현한다.")
     @Test
     void 나눗셈() {
         Amount numerator = new Amount(243000);
         Amount denominator = new Amount(7000);
-        Assertions.assertThat(numerator.divide(denominator.amount(), 2)).isEqualTo(new BigDecimal("34.71"));
+        Assertions.assertThat(numerator.divideToBigDecimal(denominator.amount(), 2)).isEqualTo(new BigDecimal("34.71"));
     }
 
     @DisplayName("값 비교")
