@@ -30,10 +30,19 @@ class LottoGameTest {
 
         LottoGame lottoGame = LottoGame.from(1000);
 
-        lottoGame.registerWinningLottoLine(new LottoLine(winningNumbers));
+        lottoGame.registerWinningLottoLine(new WinnginLottoLine(winningNumbers));
 
         assertThat(lottoGame.getWinningLottoLine().getLottoNumbers())
                 .extracting("number")
                 .containsExactlyInAnyOrderElementsOf(given);
+    }
+
+    @DisplayName("로또 보너스볼 등록 성공")
+    @Test
+    void register_bonus_ball_success() {
+        LottoGame lottoGame = LottoGame.from(1000);
+        lottoGame.registerBonusBall(7);
+
+        assertThat(lottoGame.getBonusBall().getNumber()).isEqualTo(7);
     }
 }

@@ -27,6 +27,7 @@ public class LottoApplication {
                 .collect(Collectors.toSet());
 
         lottoGame.registerWinningLottoLine(new WinnginLottoLine(winningNumbers));
+        lottoGame.registerBonusBall(InputView.getBonusBall());
 
         lottoGame.calculateStatistics();
 

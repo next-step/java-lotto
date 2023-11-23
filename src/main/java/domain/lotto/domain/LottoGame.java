@@ -9,9 +9,10 @@ public class LottoGame {
     private final int gameCount;
     private LottoStatistics lottoStatistics;
     private WinnginLottoLine winningLottoLine;
+    private LottoNumber bonusBall;
 
 
-    private LottoGame(int buyingPrice) {
+    protected LottoGame(int buyingPrice) {
         this.lottoLines = new ArrayList<>();
         this.gameCount = calculateGameCount(buyingPrice);
         buyLottoLines();
@@ -27,7 +28,7 @@ public class LottoGame {
 
 
     public void calculateStatistics() {
-        this.lottoStatistics = winningLottoLine.match(lottoLines);
+        this.lottoStatistics = winningLottoLine.match(lottoLines, bonusBall);
     }
 
     public void registerWinningLottoLine(WinnginLottoLine winningLottoLine) {
@@ -59,7 +60,15 @@ public class LottoGame {
         return lottoStatistics;
     }
 
+    public LottoNumber getBonusBall() {
+        return bonusBall;
+    }
+
     public double getProfitRate() {
         return lottoStatistics.getTotalProfit() / ((double) gameCount * LOTTO_PRICE);
+    }
+
+    public void registerBonusBall(int bonusBall) {
+        this.bonusBall = LottoNumber.from(bonusBall);
     }
 }

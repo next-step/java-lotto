@@ -25,7 +25,7 @@ public class OutputView {
         System.out.println("---------\n");
 
         lottoGame.getLottoStatistics().getRankCounts().forEach((rank, count) -> {
-            System.out.println(rank.getCountOfMatch() + "개 일치 (" + rank.getWinningMoney() + "원)-" + count + "개");
+            System.out.println(rank.getDescription() + "-" + count + "개");
         });
         System.out.println("총 수익률은 " + String.format("%.2f", lottoGame.getProfitRate()) + " 입니다.");
     }

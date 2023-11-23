@@ -17,18 +17,31 @@ public class LottoStatistics {
                 Rank.MISS, 0));
     }
 
-    public void calculate(int matchCount) {
-        Rank rank = Rank.valueOf(matchCount);
+
+    public void calculate(int matchCount, boolean matchBonusBall) {
+        if (isSecondWin(matchCount, matchBonusBall)) {
+            updateSecondWin();
+            return;
+        }
+        updateRankCounts(Rank.valueOf(matchCount));
+    }
+
+    private boolean isSecondWin(int matchCount, boolean matchBonusBall) {
+        return matchCount == Rank.SECOND.getCountOfMatch() && matchBonusBall;
+    }
+
+    private void updateSecondWin() {
+        Rank rank = Rank.SECOND;
+        updateRankCounts(rank);
+    }
+
+    private void updateRankCounts(Rank rank) {
         rankCounts.put(rank, rankCounts.get(rank) + 1);
         totalProfit += rank.getWinningMoney();
     }
 
     public int getTotalProfit() {
         return totalProfit;
-    }
-
-    public int getMatchCount(Rank rank) {
-        return rankCounts.get(rank);
     }
 
     public Map<Rank, Integer> getRankCounts() {
