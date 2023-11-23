@@ -10,18 +10,15 @@ import java.util.Map;
 
 public class LottoWinningMachine {
 
-    private final Map<Rank, Integer> rankCounts;
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
     public LottoWinningMachine(int number, Integer... numbers) {
-
         this(new Lotto(numbers), new LottoNumber(number));
     }
 
     public LottoWinningMachine(Lotto winningLotto, LottoNumber bonusNumber) {
         validateWinningLottoAndBonusNumber(winningLotto, bonusNumber);
-        this.rankCounts = new EnumMap<>(Rank.class);
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
     }
@@ -33,11 +30,10 @@ public class LottoWinningMachine {
     }
 
     public Map<Rank, Integer> getRankCounts(List<Lotto> lottos) {
+        Map<Rank, Integer> rankCounts = new EnumMap<>(Rank.class);
+
         for (Lotto lotto : lottos) {
-            int matchCount = lotto.matchCount(winningLotto);
-
-            Rank rank = Rank.rankByCount(matchCount, lotto.contains(bonusNumber));
-
+            Rank rank = Rank.rankByCount(lotto.matchCount(winningLotto), lotto.contains(bonusNumber));
             rankCounts.put(rank, rankCounts.getOrDefault(rank, 0) + 1);
         }
 
