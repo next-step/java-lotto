@@ -10,51 +10,51 @@ import java.util.function.Predicate;
 import lotto.domain.strategy.GenerateStrategy;
 
 public class LottoTicket {
-	private Set<LottoNumber> numbers;
+    private Set<LottoNumber> numbers;
 
-	public LottoTicket(GenerateStrategy strategy) {
-		numbers = new LinkedHashSet<>();
-		this.numbers = strategy.generate();
-		isNumbersSizeEqCount();
-	}
+    public LottoTicket(GenerateStrategy strategy) {
+        numbers = new LinkedHashSet<>();
+        this.numbers = strategy.generate();
+        isNumbersSizeEqCount();
+    }
 
-	public LottoTicket(Set<Integer> nums) {
-		numbers = new LinkedHashSet<>();
-		for (Integer num : nums) {
-			numbers.add(new LottoNumber(num));
-		}
-		isNumbersSizeEqCount();
-	}
+    public LottoTicket(Set<Integer> nums) {
+        numbers = new LinkedHashSet<>();
+        for (Integer num : nums) {
+            numbers.add(new LottoNumber(num));
+        }
+        isNumbersSizeEqCount();
+    }
 
-	public LottoTicket(int... nums) {
-		numbers = new LinkedHashSet<>();
-		for (int num : nums) {
-			this.numbers.add(new LottoNumber(num));
-		}
-		isNumbersSizeEqCount();
-	}
+    public LottoTicket(int... nums) {
+        numbers = new LinkedHashSet<>();
+        for (int num : nums) {
+            this.numbers.add(new LottoNumber(num));
+        }
+        isNumbersSizeEqCount();
+    }
 
-	public List<LottoNumber> getNumbers() {
-		return Collections.unmodifiableList(new ArrayList<>(numbers));
-	}
+    public List<LottoNumber> getNumbers() {
+        return Collections.unmodifiableList(new ArrayList<>(numbers));
+    }
 
-	private void isNumbersSizeEqCount() {
-		if (numbers.size() != LottoConfig.NUMBERS_COUNT) {
-			throw new IllegalArgumentException("올바르지 않은 추첨 결과입니다.");
-		}
-	}
+    private void isNumbersSizeEqCount() {
+        if (numbers.size() != LottoConfig.NUMBERS_COUNT) {
+            throw new IllegalArgumentException("올바르지 않은 추첨 결과입니다.");
+        }
+    }
 
-	public int calcMatchCount(LottoTicket winningNums) {
-		return (int)numbers.stream()
-			.filter(
-				wn -> winningNums.getNumbers().stream()
-					.anyMatch(Predicate.isEqual(wn))
-			)
-			.count();
-	}
+    public int calcMatchCount(LottoTicket winningNums) {
+        return (int)numbers.stream()
+            .filter(
+                wn -> winningNums.getNumbers().stream()
+                    .anyMatch(Predicate.isEqual(wn))
+            )
+            .count();
+    }
 
-	public boolean isMatchBonusNum(LottoNumber bonusNum) {
-		return numbers.stream()
-			.anyMatch(bonusNum::equals);
-	}
+    public boolean isMatchBonusNum(LottoNumber bonusNum) {
+        return numbers.stream()
+            .anyMatch(bonusNum::equals);
+    }
 }

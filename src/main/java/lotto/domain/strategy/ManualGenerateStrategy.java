@@ -5,18 +5,18 @@ import java.util.Set;
 
 import lotto.domain.LottoNumber;
 
-public class ManualGenerateStrategy implements GenerateStrategy{
-	private Set<LottoNumber> numbers;
+public class ManualGenerateStrategy implements GenerateStrategy {
+    private Set<LottoNumber> numbers;
 
-	public ManualGenerateStrategy(int... nums) {
-		numbers = new HashSet<>();
-		for (int num : nums) {
-			numbers.add(new LottoNumber(num));
-		}
-	}
+    public ManualGenerateStrategy(int... nums) {
+        numbers = new HashSet<>();
+        for (int num : nums) {
+            numbers.add(new LottoNumber(num));
+        }
+    }
 
-	@Override
-	public Set<LottoNumber> generate() {
-		return numbers;
-	}
+    @Override
+    public Set<LottoNumber> generate() {
+        return numbers;
+    }
 }
