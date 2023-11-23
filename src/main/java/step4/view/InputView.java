@@ -1,8 +1,11 @@
 package step4.view;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import step4.domain.Lottery;
 import step4.util.LotteryUtil;
@@ -37,9 +40,12 @@ public class InputView {
     public static List<List<Integer>> getManualNumbers(int manualTicketCount) {
         System.out.println(ASK_NUMBER_OF_MANUAL_LOTTERY_NUMBERS);
 
-        List<List<Integer>>  manualTickets = new ArrayList<>();
+        List<List<Integer>> manualTickets = new ArrayList<>();
         for (int count = 0; count < manualTicketCount; count++) {
-            manualTickets.add(LotteryUtil.getNumbers(SCANNER.nextLine()));
+            List<Integer> numbers = LotteryUtil.getNumbers(SCANNER.nextLine());
+            isDuplicated(numbers);
+
+            manualTickets.add(numbers);
         }
 
         return manualTickets;
@@ -84,6 +90,15 @@ public class InputView {
 
         if ((money % UNIT_OF_PRICE) > 0) {
             throw new IllegalArgumentException("천원 단위로 넣어주세요 투입 금액 - " + money);
+        }
+    }
+
+    private static void isDuplicated(List<Integer> numbers) {
+        Set<Integer> collect = numbers.stream().filter(i -> Collections.frequency(numbers, i) > 1)
+                                      .collect(Collectors.toSet());
+
+        if (!collect.isEmpty()) {
+            throw new IllegalArgumentException("중복된 숫자를 넣을 수 없어요.");
         }
     }
 }

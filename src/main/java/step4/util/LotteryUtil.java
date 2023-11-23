@@ -41,9 +41,9 @@ public class LotteryUtil {
         String[] split = numberStr.replaceAll(" ", "")
                                   .split(",");
 
-        return  Arrays.stream(split)
-                      .map(Integer::parseInt)
-                      .collect(Collectors.toList());
+        return Arrays.stream(split)
+                     .map(Integer::parseInt)
+                     .collect(Collectors.toList());
 
     }
 }
