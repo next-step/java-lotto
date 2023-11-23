@@ -40,8 +40,6 @@ public class LottoResultTest {
 
 		LottoMatch.Match match_three = LottoMatch.Match.from(3, false);
 		LottoMatch.Match match_four = LottoMatch.Match.from(3, false);
-		assertThat(LottoMatch.matchesCount(match_three, lottoMatchResult)).isEqualTo(1);
-		assertThat(LottoMatch.matchesCount(match_four, lottoMatchResult)).isEqualTo(1);
 		assertEquals(lottoResult.rateOfReturn(lottoWinningNumbers), 27527.5, 0.001);
 	}
 }

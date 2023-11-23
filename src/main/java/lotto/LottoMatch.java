@@ -34,7 +34,7 @@ public enum LottoMatch {
             this.isBonus = isBonus;
         }
 
-        public static Match from(int matchCount, boolean isBonus) {
+        static Match from(int matchCount, boolean isBonus) {
             return Arrays.stream(values())
                     .filter(match -> match.matchCount == matchCount && match.isBonus == isBonus)
                     .findAny()
@@ -58,26 +58,12 @@ public enum LottoMatch {
         return MATCH_TO_ENUM.get(match);
     }
 
-    public static int matchesCount(Match match, LottoMatchResult lottoMatchResult) {
-        long matchedCount =
-                lottoMatchResult.lottoMatches()
-                        .stream()
-                        .filter(lottoMatch -> lottoMatch.match == match)
-                        .count();
-
-        return (int) matchedCount;
-    }
-
     public Match match() {
         return this.match;
     }
 
     public int matchCount() {
         return this.match.matchCount;
-    }
-
-    public boolean isBonus() {
-        return this.match.isBonus;
     }
 
     public long amount() {

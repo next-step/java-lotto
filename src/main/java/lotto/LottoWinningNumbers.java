@@ -38,8 +38,12 @@ public class LottoWinningNumbers {
 
         lottoWinningList.retainAll(lottoList);
         int matchCount = lottoWinningList.size();
-        boolean isBonus = matchCount == FIVE_LOTTO_MATCH && lottoList.contains(bonusNumber);
+        boolean isBonus = isBonus(matchCount, lottoList);
         LottoMatch.Match match = LottoMatch.Match.from(matchCount, isBonus);
         return LottoMatch.fromMatch(match);
+    }
+
+    private boolean isBonus(int matchCount, List<LottoNumber> lottolist) {
+        return matchCount == FIVE_LOTTO_MATCH && lottolist.contains(bonusNumber);
     }
 }
