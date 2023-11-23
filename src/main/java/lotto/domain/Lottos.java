@@ -25,23 +25,11 @@ public class Lottos {
         return lottos;
     }
 
-    public void checkWinning(Lotto winningLotto) {
-        lottos.forEach(lotto -> lotto.checkWinning(winningLotto));
+    public void rank(Lotto winningLotto) {
+        lottos.forEach(lotto -> lotto.rank(winningLotto));
     }
 
-    public int countFifthWinner() {
-        return (int) lottos.stream().filter(Lotto::isFifthWinner).count();
-    }
-
-    public int countFourthWinner() {
-        return (int) lottos.stream().filter(Lotto::isFourthWinner).count();
-    }
-
-    public int countThirdWinner() {
-        return (int) lottos.stream().filter(Lotto::isThirdWinner).count();
-    }
-
-    public int countFirstWinner() {
-        return (int) lottos.stream().filter(Lotto::isFirstWinner).count();
+    public int countByRanking(Ranking ranking) {
+        return (int) lottos.stream().filter(lotto -> lotto.ranking() == ranking).count();
     }
 }

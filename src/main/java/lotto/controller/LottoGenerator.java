@@ -19,7 +19,7 @@ public class LottoGenerator {
         resultView.lottos(lottos);
 
         Lotto winningLotto = inputView.pastLotto();
-        lottos.checkWinning(winningLotto);
+        lottos.rank(winningLotto);
         resultView.winningStats(lottos);
     }
 }
