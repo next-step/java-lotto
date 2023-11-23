@@ -19,13 +19,14 @@ public class LottoCheckerTest {
 	}
 
 	static Stream<Arguments> lottoNumbersAndRank() {
-		LottoChecker validator = new LottoChecker(1, 2, 3, 4, 5, 6);
+		LottoChecker validator = new LottoChecker(7, 1, 2, 3, 4, 5, 6);
 		return Stream.of(
 			Arguments.arguments(validator.check(new LottoTicket(1, 2, 3, 4, 5, 6)), Rank.FIRST),
 			Arguments.arguments(validator.check(new LottoTicket(1, 2, 3, 4, 5, 7)), Rank.SECOND),
-			Arguments.arguments(validator.check(new LottoTicket(1, 2, 3, 4, 7, 8)), Rank.THIRD),
-			Arguments.arguments(validator.check(new LottoTicket(1, 2, 3, 7, 8, 9)), Rank.FOURTH),
-			Arguments.arguments(validator.check(new LottoTicket(1, 2, 7, 8, 9, 10)), Rank.NOT)
+			Arguments.arguments(validator.check(new LottoTicket(1, 2, 3, 4, 5, 8)), Rank.THIRD),
+			Arguments.arguments(validator.check(new LottoTicket(1, 2, 3, 4, 7, 9)), Rank.FOURTH),
+			Arguments.arguments(validator.check(new LottoTicket(1, 2, 3, 8, 9, 10)), Rank.FIFTH),
+			Arguments.arguments(validator.check(new LottoTicket(1, 7, 8, 9, 10, 11)), Rank.NOT)
 		);
 	}
 }
