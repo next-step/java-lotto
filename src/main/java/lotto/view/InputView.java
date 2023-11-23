@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class InputView {
     public static final String INPUT_PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
-    public static final String INPUT_WINNER_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    public static final String INPUT_WINNER_NUMBERS_MESSAGE = "\n지난 주 당첨 번호를 입력해 주세요.";
 
     public static final String INPUT_PURCHASE_AMOUNT_EXCEPTION = "구입금액은 숫자만 입력할 수 있습니다.";
     public static final String INPUT_WINNER_NUMBERS_EXCEPTION = "당첨 번호는 숫자만 입력할 수 있습니다.";
