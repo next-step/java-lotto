@@ -21,7 +21,7 @@ public class Lotto {
         return count;
     }
 
-    private static int getCount(Lotto winningLotto, int count, LottoNumber lottoNumber) {
+    private int getCount(Lotto winningLotto, int count, LottoNumber lottoNumber) {
         if (winningLotto.contains(lottoNumber)) {
             count++;
         }
@@ -32,12 +32,12 @@ public class Lotto {
         return lotto.contains(lottoNumber);
     }
 
-    private static void validateSize(List<LottoNumber> lottoNumbers) {
+    private void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 사이즈는 6이어야한다.");
         }
     }
-    private static void validateDuplicate(List<LottoNumber> lottoNumbers) {
+    private void validateDuplicate(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> nonDuplicateNumberList = new HashSet<>(lottoNumbers);
         if (nonDuplicateNumberList.size() < LOTTO_SIZE) {
             throw new IllegalArgumentException("중복된 숫자를 가징 수 없습니다.");
