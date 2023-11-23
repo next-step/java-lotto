@@ -21,4 +21,9 @@ public class Number implements Comparable<Number> {
     public int compareTo(Number o) {
         return this.number - o.number;
     }
+
+    @Override
+    public String toString() {
+        return this.number + "";
+    }
 }
