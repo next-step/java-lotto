@@ -1,6 +1,9 @@
 package lotto.domain.rank;
 
-public class NotRank extends AbstractRank{
+import lotto.domain.Lotto;
+import lotto.domain.WinningLotto;
+
+public class NotRank extends AbstractRank {
 
     private static final int MIN_RANK = 2;
 
@@ -9,8 +12,10 @@ public class NotRank extends AbstractRank{
     }
 
     @Override
-    public boolean integerEqualToRank(int integer) {
-        return integer <= MIN_RANK;
+    public void apply(WinningLotto winningLotto, Lotto lotto) {
+        if (winningLotto.compare(lotto) <= MIN_RANK) {
+            score += 1;
+        }
     }
 
     @Override

@@ -1,15 +1,15 @@
 package lotto.domain.rank;
 
+import lotto.domain.Lotto;
+import lotto.domain.WinningLotto;
+
 public interface Rank {
 
     int score = 0;
-
-    boolean integerEqualToRank(int integer);
-
-    void addScore(int score);
 
     int getScore();
 
     int getRank();
 
+    void apply(WinningLotto winningLotto, Lotto lotto);
 }
