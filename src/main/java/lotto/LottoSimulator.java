@@ -1,20 +1,20 @@
 package lotto;
 
 import lotto.domain.Numbers;
-import lotto.domain.Ticket;
 import lotto.domain.Tickets;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
 public class LottoSimulator {
-    private long amount;
+    private final long amount;
 
     public LottoSimulator(long amount) {
         this.amount = amount;
     }
 
     public void run() {
-        Tickets tickets = this.initTickets();
+        Tickets tickets = new Tickets();
+        tickets.sellTickets(this.amount);
         LottoResultView.printTicket(tickets);
 
         Numbers winningNumber = inputWinningNumbers();
@@ -22,17 +22,6 @@ public class LottoSimulator {
         Result result = new Result(tickets.makeStatistics(winningNumber), tickets.calcRateOfReturn(winningNumber));
 
         LottoResultView.printResult(result);
-    }
-
-    private Tickets initTickets() {
-        Tickets tickets = new Tickets();
-
-        while (this.amount >= Ticket.PRICE) {
-            Ticket ticket = new Ticket();
-            tickets.addTicket(ticket);
-            this.amount -= Ticket.PRICE;
-        }
-        return tickets;
     }
 
     private static Numbers inputWinningNumbers() {

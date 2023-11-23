@@ -9,6 +9,14 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class TicketsTest {
+
+    @Test
+    void test_티켓판매() {
+        Tickets tickets = new Tickets();
+        tickets.sellTickets(32500L);
+        assertThat(tickets.ticketCount()).isEqualTo(32);
+    }
+
     @Test
     void test_등수별카운드() {
         Tickets tickets = new Tickets(List.of(new Ticket(new Numbers("1, 2, 3, 4, 5, 6")), new Ticket(new Numbers("1, 2, 3, 4, 5, 45"))));

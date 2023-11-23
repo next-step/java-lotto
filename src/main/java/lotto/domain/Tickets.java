@@ -14,6 +14,14 @@ public class Tickets {
         this.tickets = tickets;
     }
 
+    public void sellTickets(long amount) {
+        while (amount >= Ticket.PRICE) {
+            Ticket ticket = new Ticket();
+            this.addTicket(ticket);
+            amount -= Ticket.PRICE;
+        }
+    }
+
     public EnumMap<Rank, Integer> makeStatistics(Numbers winningNumbers) {
         EnumMap<Rank, Integer> countPerPrize = new EnumMap<>(Rank.class);
         initEnumMap(countPerPrize);
@@ -42,7 +50,7 @@ public class Tickets {
         this.tickets.add(ticket);
     }
 
-    private int ticketCount() {
+    public int ticketCount() {
         return tickets.size();
     }
 
