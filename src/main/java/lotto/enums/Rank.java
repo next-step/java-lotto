@@ -29,7 +29,7 @@ public enum Rank {
         return Optional.ofNullable(matchCountToRank.get(count));
     }
 
-    public long multiplyWinningCount(int winningCount) {
+    public long calcWinningAmountPerRank(int winningCount) {
         return this.prizeAmount * winningCount;
     }
 
