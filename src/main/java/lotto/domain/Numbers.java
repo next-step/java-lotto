@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,19 +12,15 @@ public class Numbers {
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
     public static final String DELIMITER = ",";
+    private static final List<Number> rangeNumbers = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER).boxed().map(Number::new).collect(Collectors.toList());
 
-    private final List<Number> numbers;
+    private List<Number> numbers;
 
     // 랜덤 생성
     public Numbers() {
-        this.numbers = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
-                .distinct()
-                .limit(COUNT)
-                .boxed()
-                .map(Number::new)
-                .collect(Collectors.toList());
-
+        this.numbers = new ArrayList<>(rangeNumbers);
         Collections.shuffle(this.numbers);
+        this.numbers = this.numbers.subList(0, 6);
     }
 
     // 수동 생성
@@ -44,6 +41,11 @@ public class Numbers {
 
     public List<Number> numbers() {
         return Collections.unmodifiableList(numbers);
+    }
+
+    @Override
+    public String toString() {
+        return this.numbers.toString();
     }
 
     private void validateValue(String input) {
