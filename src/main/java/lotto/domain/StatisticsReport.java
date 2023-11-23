@@ -36,7 +36,7 @@ public class StatisticsReport {
 
     public int totalPrize() {
         return Arrays.stream(Prize.values())
-            .mapToInt(prize -> prize.rank().getScore() * prize.price())
+            .mapToInt(prize -> prize.rank().score() * prize.price())
             .sum();
     }
 
