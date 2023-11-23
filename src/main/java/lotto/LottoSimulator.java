@@ -10,10 +10,10 @@ import java.util.List;
 
 public class LottoSimulator {
     public final int PRICE = 1000;
-    private int amount;
+    private long amount;
     private final List<Ticket> ticketList = new ArrayList<>();
 
-    public LottoSimulator(int amount) {
+    public LottoSimulator(long amount) {
         this.amount = amount;
     }
 
