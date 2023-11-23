@@ -1,23 +1,28 @@
 package lottosecond.domain.lottomaker;
 
-import lottosecond.domain.lotto.LottoNumber;
+import lottosecond.domain.lotto.Lotto;
+import lottosecond.domain.lotto.LottoCount;
+import lottosecond.domain.lotto.Lottos;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 class AutoLottoMakerTest {
 
+    @DisplayName("LottoCount에 맞는 개수의 로또를 생성하여 Lottos 객체를 만들어줍니다.")
     @Test
-    @DisplayName("6개의 랜덤한 숫자를 반환하는지 확인하는 테스트")
-    void getSizList() {
+    void makeLottos() {
         // given
-        AutoLottoNumberGenerator autoLottoMaker = new AutoLottoNumberGenerator();
+        LottoCount lottoCount = LottoCount.from(2, 4);
+        AutoLottoMaker lottoMaker = new AutoLottoMaker(new TestLottoNumberGenerator());
         // when
-        List<LottoNumber> result = autoLottoMaker.makeLottoNumberList();
+        Lottos lottos = lottoMaker.makeLottos(lottoCount);
         // then
-        assertThat(result).hasSize(6);
+        Assertions.assertThat(lottos).isEqualTo(new Lottos(List.of(
+                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+                new Lotto(List.of(1, 2, 3, 4, 5, 6))
+        )));
     }
 }

@@ -4,7 +4,7 @@ import lottosecond.domain.Money;
 import lottosecond.domain.Winner;
 import lottosecond.domain.WinnerBoard;
 import lottosecond.domain.WinningCondition;
-import lottosecond.domain.lottomaker.LottoMaker;
+import lottosecond.domain.lottomaker.AutoLottoMaker;
 import lottosecond.domain.lottomaker.TestLottoNumberGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,13 +16,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
 
-    private LottoMaker lottoMaker;
+    private AutoLottoMaker lottoMaker;
     private TotalLottoCount lottoCount;
 
     @BeforeEach
     void setUp() {
         lottoCount = new TotalLottoCount(new Money(1000), 0);
-        lottoMaker = new LottoMaker(new TestLottoNumberGenerator());
+        lottoMaker = new AutoLottoMaker(new TestLottoNumberGenerator());
     }
 
     @DisplayName("추가 로또 번호도 확인해야 합니다.")

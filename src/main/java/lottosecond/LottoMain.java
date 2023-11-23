@@ -3,10 +3,14 @@ package lottosecond;
 import lottosecond.domain.*;
 import lottosecond.domain.lotto.*;
 import lottosecond.domain.lottomaker.AutoLottoNumberGenerator;
-import lottosecond.domain.lottomaker.LottoMaker;
-import lottosecond.domain.lottomaker.ManualLottoNumberGenerator;
+import lottosecond.domain.lottomaker.AutoLottoMaker;
+import lottosecond.domain.lottomaker.ManualLottoMaker;
 import lottosecond.view.InputView;
 import lottosecond.view.OutputView;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMain {
 
@@ -17,11 +21,13 @@ public class LottoMain {
         Money money = new Money(inputView.inputLottoBuyMoney());
         TotalLottoCount lottoCount = new TotalLottoCount(money, inputView.manualLottoCount());
 
-        LottoMaker manualLottoMaker = new LottoMaker(new ManualLottoNumberGenerator());
-        LottoMaker autoLottoMaker = new LottoMaker(new AutoLottoNumberGenerator());
+        ManualLottoMaker manualLottoMaker = new ManualLottoMaker();
+        AutoLottoMaker autoLottoMaker = new AutoLottoMaker(new AutoLottoNumberGenerator());
 
-        inputView.printManualLotto();
-        Lottos manualLottos = manualLottoMaker.makeLottos(lottoCount.getManualLottoCount());
+        inputView.printManualLottos();
+        List<String> stringLottoNumbers = inputView.inputManualLottoNumbers(lottoCount.manualLottoCount());
+
+        Lottos manualLottos = manualLottoMaker.makeLottos(stringListToIntegerListConvert(stringLottoNumbers));
         Lottos autoLottos = autoLottoMaker.makeLottos(lottoCount.getAutoLottoCount());
 
         Lottos lottos = Lottos.makeTotalLottos(manualLottos, autoLottos);
@@ -29,8 +35,8 @@ public class LottoMain {
         outputView.printManualAndAutoLottoInfo(lottoCount);
         outputView.printLottoListInfo(lottos);
 
-        inputView.printWinningNumbers();
-        Lotto winningLotto = manualLottoMaker.makeLotto();
+        String winningLottoNumbers = inputView.printWinningNumbers();
+        Lotto winningLotto = manualLottoMaker.makeLotto(stringToIntegerConvert(winningLottoNumbers));
 
         WinningCondition winningCondition = new WinningCondition(winningLotto, LottoNumber.of(inputView.inputBonusNumber()));
 
@@ -40,5 +46,18 @@ public class LottoMain {
         EarningRateCalculator earningRateCalculator = new EarningRateCalculator();
         double earningRate = earningRateCalculator.calculateEarningRate(winnerBoard, money);
         outputView.printEarningRate(earningRate);
+    }
+
+    private static List<List<Integer>> stringListToIntegerListConvert(List<String> lottoNumberList) {
+        return lottoNumberList.stream().map(lottoNumbers -> Arrays.stream(lottoNumbers.split(","))
+                        .map(stringNumber -> Integer.valueOf(stringNumber.strip()))
+                        .collect(Collectors.toList()))
+                .collect(Collectors.toList());
+    }
+
+    private static List<Integer> stringToIntegerConvert(String lottoNumber) {
+        return Arrays.stream(lottoNumber.split(","))
+                .map(stringNumber -> Integer.valueOf(stringNumber.strip()))
+                .collect(Collectors.toList());
     }
 }
