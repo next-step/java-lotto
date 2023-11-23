@@ -5,15 +5,17 @@ import java.util.List;
 
 public class RandomNumbersGenerator {
 
+    private final RandomNumberStrategy randomNumberStrategy;
     private final List<Integer> numbers;
 
-    public RandomNumbersGenerator(List<Integer> numbers) {
+    public RandomNumbersGenerator(RandomNumberStrategy randomNumberStrategy, List<Integer> numbers) {
+        this.randomNumberStrategy = randomNumberStrategy;
         this.numbers = numbers;
     }
 
-    public List<Integer> createRandomNumbers(RandomNumberStrategy randomNumberStrategy) {
+    public List<Integer> createRandomNumbers() {
         shuffleSavedNumbers();
-        return randomNumberStrategy.getRandomNumbers(numbers);
+        return this.randomNumberStrategy.getRandomNumbers(numbers);
     }
 
     private void shuffleSavedNumbers() {

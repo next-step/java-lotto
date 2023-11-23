@@ -13,20 +13,22 @@ class RandomNumbersGeneratorTest {
     @DisplayName("랜덤 숫자 6개를 생성한다.")
     void create_random_numbers() {
         // given
-        RandomNumbersGenerator generator = new RandomNumbersGenerator(numbers());
+        RandomNumbersGenerator generator = new RandomNumbersGenerator(
+                numbers -> List.of(1, 21, 26, 31, 40, 42),
+                numbers());
 
         // when
-        List<Integer> result = generator.createRandomNumbers(numbers -> List.of(1, 21, 26, 31, 40, 42));
+        List<Integer> result = generator.createRandomNumbers();
 
         // then
         assertThat(result).isEqualTo(List.of(1, 21, 26, 31, 40, 42));
     }
 
     private List<Integer> numbers() {
-        List<Integer> given = new ArrayList<>();
+        List<Integer> numbers = new ArrayList<>();
         for (int i = 1; i <= 45; i++) {
-            given.add(i);
+            numbers.add(i);
         }
-        return given;
+        return numbers;
     }
 }
