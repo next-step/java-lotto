@@ -5,11 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-import calculator.operator.DivideOperator;
-import calculator.operator.MinusOperator;
-import calculator.operator.MultiplyOperator;
+import calculator.operator.Operation;
 import calculator.operator.Operator;
-import calculator.operator.PlusOperator;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,10 +23,10 @@ class OperationRepositoryTest {
     @BeforeEach
     void setUp() {
         operationRepository = new OperationRepository(List.of(
-                new PlusOperator(),
-                new MinusOperator(),
-                new MultiplyOperator(),
-                new DivideOperator()
+                Operation.PLUS,
+                Operation.MINUS,
+                Operation.MULTIPLY,
+                Operation.DIVIDE
         ));
     }
 
@@ -46,10 +43,10 @@ class OperationRepositoryTest {
 
     private static Stream<Arguments> parametersProvider() {
         return Stream.of(
-                arguments("+", PlusOperator.class),
-                arguments("-", MinusOperator.class),
-                arguments("*", MultiplyOperator.class),
-                arguments("/", DivideOperator.class)
+                arguments("+", Operation.PLUS.getClass()),
+                arguments("-", Operation.MINUS.getClass()),
+                arguments("*", Operation.MULTIPLY.getClass()),
+                arguments("/", Operation.DIVIDE.getClass())
         );
     }
 

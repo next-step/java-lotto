@@ -2,7 +2,6 @@ package calculator;
 
 import calculator.operator.Operator;
 import java.util.List;
-import java.util.Optional;
 
 public class OperationRepository {
 

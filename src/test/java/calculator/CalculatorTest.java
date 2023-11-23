@@ -5,10 +5,7 @@ import static calculator.OperationRepository.INPUT_OPERATOR_EXCEPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import calculator.operator.DivideOperator;
-import calculator.operator.MinusOperator;
-import calculator.operator.MultiplyOperator;
-import calculator.operator.PlusOperator;
+import calculator.operator.Operation;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,10 +22,10 @@ public class CalculatorTest {
     @BeforeEach
     void setUp() {
         operationRepository = new OperationRepository(List.of(
-                new PlusOperator(),
-                new MinusOperator(),
-                new MultiplyOperator(),
-                new DivideOperator()
+                Operation.PLUS,
+                Operation.MINUS,
+                Operation.MULTIPLY,
+                Operation.DIVIDE
         ));
     }
 
