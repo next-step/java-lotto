@@ -1,11 +1,11 @@
 package calculator.operator;
 
-public enum Operation implements Operator {
+public enum OperatorStrategy {
 
     PLUS("+") {
         @Override
-        public boolean match(String expression) {
-            return "+".equals(expression);
+        public boolean matchable(String operator) {
+            return this.expression.equals(operator);
         }
 
         @Override
@@ -15,8 +15,8 @@ public enum Operation implements Operator {
     },
     MINUS("-") {
         @Override
-        public boolean match(String expression) {
-            return "-".equals(expression);
+        public boolean matchable(String operator) {
+            return this.expression.equals(operator);
         }
 
         @Override
@@ -26,8 +26,8 @@ public enum Operation implements Operator {
     },
     MULTIPLY("*") {
         @Override
-        public boolean match(String expression) {
-            return "*".equals(expression);
+        public boolean matchable(String operator) {
+            return this.expression.equals(operator);
         }
 
         @Override
@@ -37,8 +37,8 @@ public enum Operation implements Operator {
     },
     DIVIDE("/") {
         @Override
-        public boolean match(String expression) {
-            return "/".equals(expression);
+        public boolean matchable(String operator) {
+            return this.expression.equals(operator);
         }
 
         @Override
@@ -47,9 +47,13 @@ public enum Operation implements Operator {
         }
     };
 
-    private final String expression;
+    protected final String expression;
 
-    Operation(String expression) {
+    OperatorStrategy(String expression) {
         this.expression = expression;
     }
+
+    public abstract boolean matchable(String operator);
+
+    public abstract long calculate(long sum, long operand);
 }
