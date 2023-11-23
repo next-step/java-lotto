@@ -14,12 +14,12 @@ public class NotRank extends AbstractRank {
     @Override
     public void apply(WinningLotto winningLotto, Lotto lotto) {
         if (winningLotto.compare(lotto) <= MIN_RANK) {
-            score += 1;
+            score = 0;
         }
     }
 
     @Override
-    public int getRank() {
+    public int rank() {
         return 0;
     }
 
