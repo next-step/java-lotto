@@ -11,12 +11,6 @@ public class LottoNumbers {
     private static final int MAX_LOTTO_SIZE = 6;
     private final List<Integer> numbers;
 
-    public LottoNumbers(LottoNumber lottoNumber) {
-        List<Integer> shuffled = lottoNumber.getShufflingNumbers();
-        validate(shuffled);
-        this.numbers = shuffled;
-    }
-
     public LottoNumbers(List<Integer> numbers) {
         validate(numbers);
         this.numbers = numbers;
