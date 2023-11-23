@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -33,14 +34,17 @@ public class Lotto {
         lottoSizeValidation(numbers);
     }
 
-
-    private static void lottoSizeValidation(Set<LottoNumber> numbers) {
+    private void lottoSizeValidation(Set<LottoNumber> numbers) {
         if (numbers.size() != SIZE_OF_LOTTO) {
             throw new IllegalArgumentException(LOTTO_IS_INVALID);
         }
     }
 
     public int matchNumbers(Lotto winningNumbers) {
+        Iterator<LottoNumber> iter = lotto.iterator();
+
+        System.out.println();
+
         int answerCount = (int) winningNumbers.getLotto().stream()
                 .filter(lotto::contains)
                 .count();
