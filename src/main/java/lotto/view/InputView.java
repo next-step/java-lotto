@@ -1,5 +1,9 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
+
 public interface InputView {
-    int purchaseGuide();
+    int purchase();
+
+    Lotto pastLotto();
 }
