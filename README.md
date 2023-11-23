@@ -44,3 +44,6 @@
 * [X] 당첨로또와 로또를 비교하여 Rank를 선정할 수 있다.
 ### Rank
 * [X] matchCount로 rank를 선정할 수 있다.
+
+### LottoStatistics
+* [ ] 랭크를 기록한 데이터를 반환한다.
