@@ -15,6 +15,34 @@ public enum LottoMatch {
     FIVE_BONUS(Match.FIVE_BONUS, 30000000),
     SIX(Match.SIX, 2000000000);
 
+    private final Match match;
+
+    private final long amount;
+
+    LottoMatch(Match match, long amount) {
+        this.match = match;
+        this.amount = amount;
+    }
+
+    private static final Map<Match, LottoMatch> MATCH_TO_ENUM =
+            Stream.of(values()).collect(Collectors.toMap(LottoMatch::match, e -> e));
+
+    public static LottoMatch fromMatch(Match match) {
+        return MATCH_TO_ENUM.get(match);
+    }
+
+    private Match match() {
+        return this.match;
+    }
+
+    public int matchCount() {
+        return this.match.matchCount;
+    }
+
+    public long amount() {
+        return this.amount;
+    }
+
     public enum Match {
         ZERO(0, false),
         ONE(1, false),
@@ -40,33 +68,5 @@ public enum LottoMatch {
                     .findAny()
                     .orElse(Match.ZERO);
         }
-    }
-
-    private final Match match;
-
-    private final long amount;
-
-    LottoMatch(Match match, long amount) {
-        this.match = match;
-        this.amount = amount;
-    }
-
-    private static final Map<Match, LottoMatch> MATCH_TO_ENUM =
-            Stream.of(values()).collect(Collectors.toMap(LottoMatch::match, e -> e));
-
-    public static LottoMatch fromMatch(Match match) {
-        return MATCH_TO_ENUM.get(match);
-    }
-
-    public Match match() {
-        return this.match;
-    }
-
-    public int matchCount() {
-        return this.match.matchCount;
-    }
-
-    public long amount() {
-        return this.amount;
     }
 }
