@@ -1,8 +1,7 @@
 package lotto;
 
-import lotto.domain.Buyer;
-import lotto.domain.Rank;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
+import lotto.view.ResultView;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -17,14 +16,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BuyerTest {
 
     static Stream<Arguments> generateData() {
-        return Stream.of(Arguments.of(Arrays.asList(11, 12, 13, 14, 15, 16), Rank.NO_RANK),
-                Arguments.of(Arrays.asList(1, 12, 13, 14, 15, 16), Rank.NO_RANK),
-                Arguments.of(Arrays.asList(1, 2, 13, 14, 15, 16), Rank.NO_RANK),
-                Arguments.of(Arrays.asList(1, 2, 3, 14, 15, 16), Rank.FIFTH),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 15, 16), Rank.FOURTH),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 16), Rank.THIRD),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Rank.SECOND),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 8), Rank.FIRST));
+        return Stream.of(Arguments.of(List.of(new LottoNumber(Arrays.asList(11, 12, 13, 14, 15, 16))), Rank.NO_RANK),
+                Arguments.of(List.of(new LottoNumber(Arrays.asList(1, 12, 13, 14, 15, 16))), Rank.NO_RANK),
+                Arguments.of(List.of(new LottoNumber(Arrays.asList(1, 2, 13, 14, 15, 16))), Rank.NO_RANK),
+                Arguments.of(List.of(new LottoNumber(Arrays.asList(1, 2, 3, 14, 15, 16))), Rank.FIFTH),
+                Arguments.of(List.of(new LottoNumber(Arrays.asList(1, 2, 3, 4, 15, 16))), Rank.FOURTH),
+                Arguments.of(List.of(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 16))), Rank.THIRD),
+                Arguments.of(List.of(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6))), Rank.SECOND),
+                Arguments.of(List.of(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 8))), Rank.FIRST));
     }
 
     @Test
@@ -37,13 +36,13 @@ public class BuyerTest {
 
     @ParameterizedTest
     @MethodSource("generateData")
-    void 당첨된결과가_정확한지테스트(List<Integer> purchasedNumber, Rank rank) {
+    void 당첨된결과가_정확한지테스트(List<LottoNumber> purchasedNumber, Rank rank) {
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,8", 6);
         Buyer buyer = new Buyer();
 
-        Buyer.purchasedLottoNumbers.add(purchasedNumber);
+        Buyer.purchasedLottoNumbers.addAll(purchasedNumber);
         buyer.checkLottoWinningNumbers(buyer, winningNumbers);
-
+        
         HashMap<Rank, Integer> result = buyer.lottoResult;
         assertThat(result.containsKey(rank)).isTrue();
     }

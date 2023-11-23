@@ -6,8 +6,7 @@ import lotto.view.ResultView;
 import java.util.*;
 
 public class Buyer {
-
-    public static final List<List<Integer>> purchasedLottoNumbers = new ArrayList<>();
+    public static final List<LottoNumber> purchasedLottoNumbers = new ArrayList<>();
     private static final int LOTTO_PRICE = 1000;
     private static final int SAME = 1;
     private static final int NONE = 0;
@@ -23,19 +22,20 @@ public class Buyer {
 
         LottoNumbers lottoNumbers = new LottoNumbers();
         lottoNumbers.buyLottoTicket(count);
+        purchasedLottoNumbers.addAll(lottoNumbers.getLottoTicket());
         ResultView.printPurchasedLottoNumbers(lottoNumbers.getLottoTicket());
     }
 
     public void checkLottoWinningNumbers(Buyer buyer, WinningNumbers winningNumbers) {
-        for (List<Integer> purchasedList : purchasedLottoNumbers) {
+        for (LottoNumber purchasedList : purchasedLottoNumbers) {
             Rank rank = determineLottoRank(winningNumbers, purchasedList);
             lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
         }
         ResultView.showLottoResult(lottoResult, purchaseAmount);
     }
 
-    private int countSameNumber(Set<Integer> winningList, List<Integer> purchasedList) {
-        return (int) purchasedList.stream()
+    private int countSameNumber(Set<Integer> winningList, LottoNumber purchasedList) {
+        return (int) purchasedList.getNumbers().stream()
                 .mapToInt(number -> findSameNumber(winningList, number))
                 .sum();
     }
@@ -47,11 +47,11 @@ public class Buyer {
         return NONE;
     }
 
-    private boolean containsBonusNumber(List<Integer> purchasedList, int bonusNumber) {
-        return purchasedList.contains(bonusNumber);
+    private boolean containsBonusNumber(LottoNumber purchasedList, int bonusNumber) {
+        return purchasedList.getNumbers().contains(bonusNumber);
     }
 
-    private Rank determineLottoRank(WinningNumbers winningNumbers, List<Integer> purchasedList) {
+    private Rank determineLottoRank(WinningNumbers winningNumbers, LottoNumber purchasedList) {
         int count = countSameNumber(winningNumbers.getWinningNumbers(), purchasedList);
         boolean correctBonusNumber = containsBonusNumber(purchasedList, winningNumbers.getBonusNumber());
 

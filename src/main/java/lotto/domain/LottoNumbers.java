@@ -7,7 +7,7 @@ public class LottoNumbers {
     private final List<LottoNumber> lottoTicket = new ArrayList<>();
 
     public List<LottoNumber> getLottoTicket() {
-        return new ArrayList<>(lottoTicket);
+        return lottoTicket;
     }
 
     public void buyLottoTicket(int count) {

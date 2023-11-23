@@ -16,8 +16,14 @@ public class LottoNumber {
         this.numbers = getGenerateNumbers();
     }
 
+    public LottoNumber(List<Integer> list) {
+        this.numbers = new HashSet<>(list);
+    }
+
     public List<Integer> getNumbers() {
-        return new ArrayList<>(numbers);
+        List<Integer> sortedNumbers = new ArrayList<>((numbers));
+        Collections.sort(sortedNumbers);
+        return sortedNumbers;
     }
 
     private Set<Integer> getGenerateNumbers() {
