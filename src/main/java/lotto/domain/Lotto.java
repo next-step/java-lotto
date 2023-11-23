@@ -40,5 +40,15 @@ public class Lotto {
         }
     }
 
-    
+    public int matchNumbers(Lotto winningNumbers) {
+        int answerCount = (int) winningNumbers.getLotto().stream()
+                .filter(lotto::contains)
+                .count();
+        return answerCount;
+    }
+
+    public boolean matchBonusNumber(int bonusNumber) {
+        return lotto.stream().anyMatch(num -> num.getNumber() == bonusNumber);
+    }
+
 }

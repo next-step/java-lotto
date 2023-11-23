@@ -5,7 +5,6 @@ import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
 import java.util.EnumMap;
-import java.util.List;
 
 public class LottoController {
 
@@ -19,8 +18,8 @@ public class LottoController {
         Lottos buyLottoList = lotto.lottoGame(lottoCount);
         resultView.PrintThePurchasedLotto(buyLottoList);
 
-        List<String> lastWeekLottoNumber = inputView.getLastWeekLottoNumber();
-        String lastWeekBounusLottoNumber = inputView.getLastWeekBonusLottoNumber(lastWeekLottoNumber);
+        Lotto lastWeekLottoNumber = inputView.getLastWeekLottoNumber();
+        String lastWeekBounusLottoNumber = inputView.getLastWeekBonusLottoNumber();
 
         WinningNumber winningNumber = new WinningNumber(lastWeekLottoNumber, Integer.parseInt(lastWeekBounusLottoNumber));
         ResultWinner winner = new ResultWinner();
