@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import lotto.domain.rank.BonusRank;
 import lotto.domain.rank.FirstRank;
 import lotto.domain.rank.FourthRank;
 import lotto.domain.rank.NotRank;
@@ -10,14 +9,12 @@ import lotto.domain.rank.SecondRank;
 import lotto.domain.rank.ThirdRank;
 
 public enum Prize {
-    EIGHTH(new NotRank(), 0),
-    SEVENTH(new NotRank(), 0),
-    FIFTH(new NotRank(), 0),
+    NOT_RANK(new NotRank(), 0),
     FOURTH(new FourthRank(), 5_000),
     THIRD(new ThirdRank(), 50_000),
     SECOND(new SecondRank(), 1_500_000),
-    FIRST(new FirstRank(), 2_000_000_000),
-    BONUS(new BonusRank(), 30_000_000);
+    BONUS(new NotRank(), 3_000_000),
+    FIRST(new FirstRank(), 2_000_000_000);
 
     private final Rank rank;
     private final int price;
@@ -27,11 +24,11 @@ public enum Prize {
         this.price = price;
     }
 
-    public static Prize prizeByMatchedCount(int matchedCount) {
-        return Arrays.stream(Prize.values())
-            .filter(prize -> prize.rank.integerEqualToRank(matchedCount))
-            .findFirst()
-            .get();
+    public static void applyPrize(WinningLotto winningLotto, Lotto lotto) {
+        Arrays.stream(Prize.values())
+            .forEach(prize -> {
+                prize.rank().apply(winningLotto, lotto);
+            });
     }
 
     public Rank rank() {
@@ -42,7 +39,4 @@ public enum Prize {
         return price;
     }
 
-    public void addScore(int score) {
-        this.rank.addScore(score);
-    }
 }
