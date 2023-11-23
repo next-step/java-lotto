@@ -7,17 +7,13 @@ import java.util.EnumMap;
 import java.util.List;
 
 public class Tickets {
-    private  List<Ticket> tickets = new ArrayList<>();
+    private List<Ticket> tickets = new ArrayList<>();
 
     public Tickets() {
     }
 
     public Tickets(List<Ticket> tickets) {
         this.tickets = tickets;
-    }
-
-    public void addTicket(Ticket ticket){
-        this.tickets.add(ticket);
     }
 
     public EnumMap<Rank, Integer> makeStatistics(Numbers winningNumbers) {
@@ -29,6 +25,14 @@ public class Tickets {
         }
 
         return countPerPrize;
+    }
+
+    public void addTicket(Ticket ticket) {
+        this.tickets.add(ticket);
+    }
+
+    public int ticketCount() {
+        return tickets.size();
     }
 
     private void initEnumMap(EnumMap<Rank, Integer> countPerPrize) {

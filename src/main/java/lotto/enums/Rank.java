@@ -21,17 +21,17 @@ public enum Rank {
         this.prizeAmount = prizeAmount;
     }
 
-    private static final Map<Long, Rank> countToRank = Stream.of(values()).collect(toMap(Rank::getMatchCount, Function.identity()));
+    private static final Map<Long, Rank> matchCountToRank = Stream.of(values()).collect(toMap(Rank::getMatchCount, Function.identity()));
 
     public static Optional<Rank> fromCount(long count) {
-        return Optional.ofNullable(countToRank.get(count));
+        return Optional.ofNullable(matchCountToRank.get(count));
     }
 
     private long getMatchCount() {
         return matchCount;
     }
 
-    private long getPrizeAmount() {
+    public long getPrizeAmount() {
         return prizeAmount;
     }
 }
