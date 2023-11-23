@@ -1,33 +1,53 @@
 package step4.view;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import step4.domain.Lottery;
+import step4.util.LotteryUtil;
 
 public class InputView {
 
     public static final int UNIT_OF_PRICE = 1000;
     private static final String ASK_MONEY = "구입금액을 입력해 주세요.";
-    private static final String PURCHASE = "개를 구매했습니다.";
     private static final String ASK_LAST_WEEK_LOTTERY_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String ASK_BUNUS_LOTTERY_NUMBERS = "보너스 볼을 입력해 주세요.";
+    private static final String ASK_TICKETS_OF_MANUAL_LOTTERY = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String ASK_NUMBER_OF_MANUAL_LOTTERY_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static int getTicketCount(int money) {
+    public static int getAllTicketCount(int money) {
         return money / UNIT_OF_PRICE;
     }
 
-    public static int start() {
+    public static int getMoney() {
         System.out.println(ASK_MONEY);
         String moneyStr = SCANNER.nextLine();
 
         return parse(moneyStr);
     }
 
-    public static void showTicketCount(int ticketCount) {
-        System.out.println(ticketCount + PURCHASE);
+    public static int getManualTicketCount() {
+        System.out.println(ASK_TICKETS_OF_MANUAL_LOTTERY);
+        return Integer.parseInt(SCANNER.nextLine());
+    }
+
+    public static List<List<Integer>> getManualNumbers(int manualTicketCount) {
+        System.out.println(ASK_NUMBER_OF_MANUAL_LOTTERY_NUMBERS);
+
+        List<List<Integer>>  manualTickets = new ArrayList<>();
+        for (int count = 0; count < manualTicketCount; count++) {
+            manualTickets.add(LotteryUtil.getNumbers(SCANNER.nextLine()));
+        }
+
+        return manualTickets;
+    }
+
+    public static void showTicketCount(int manualTicketCount, int autoTicketCount) {
+        System.out.println("수동으로 " + manualTicketCount +
+                           "장, 자동으로" + autoTicketCount + "개를 구매했습니다.");
     }
 
     public static void showLotteries(List<Lottery> tickets) {

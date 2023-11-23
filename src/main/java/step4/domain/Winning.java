@@ -1,13 +1,11 @@
 package step4.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import step4.constant.Prize;
 import step4.model.Lotteries;
+import step4.util.LotteryUtil;
 
 public class Winning {
 
@@ -16,12 +14,12 @@ public class Winning {
     private int bonusWinNumber;
     private final Lottery win;
 
-    public Winning(Set<Integer> winNumber) {
+    public Winning(List<Integer> winNumber) {
         win = Lottery.of(winNumber);
     }
 
     public static Winning from(String winNumber) {
-        return new Winning(setWin(winNumber));
+        return new Winning(LotteryUtil.getNumbers(winNumber));
     }
 
     public void setBonusWinNumber(String number) {
@@ -59,15 +57,5 @@ public class Winning {
         }
 
         return false;
-    }
-
-    private static Set<Integer> setWin(String numberStr) {
-        String[] split = numberStr.replaceAll(" ", "")
-                                  .split(",");
-
-       return  Arrays.stream(split)
-                     .map(Integer::parseInt)
-                     .collect(Collectors.toSet());
-
     }
 }

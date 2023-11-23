@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import step4.domain.Lottery;
+import step4.util.LotteryUtil;
 
 public class Lotteries {
 
@@ -17,7 +18,21 @@ public class Lotteries {
         return lotteries;
     }
 
-    public void keep(Lottery lottery) {
+    private void keep(Lottery lottery) {
         lotteries.add(lottery);
+    }
+
+    public void generateManualLottery(List<List<Integer>> manualNumbers) {
+        for (List<Integer> numbers : manualNumbers) {
+            Lottery lottery = Lottery.of(numbers);
+            keep(lottery);
+        }
+    }
+
+    public void generateAutoLottery(int ticketCount) {
+        for (int ticket = 0; ticket < ticketCount; ticket++) {
+            Lottery lottery = Lottery.of(LotteryUtil.getBall());
+            keep(lottery);
+        }
     }
 }

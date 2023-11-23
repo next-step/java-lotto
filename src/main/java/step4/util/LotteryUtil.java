@@ -1,11 +1,13 @@
 package step4.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 import step4.domain.Lottery;
 
@@ -33,5 +35,15 @@ public class LotteryUtil {
         for (int ball = 1; ball <= 45; ball++) {
             balls.add(ball);
         }
+    }
+
+    public static List<Integer> getNumbers(String numberStr) {
+        String[] split = numberStr.replaceAll(" ", "")
+                                  .split(",");
+
+        return  Arrays.stream(split)
+                      .map(Integer::parseInt)
+                      .collect(Collectors.toList());
+
     }
 }

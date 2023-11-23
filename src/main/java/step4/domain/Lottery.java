@@ -21,6 +21,10 @@ public class Lottery {
         return new Lottery(new ArrayList<>(numbers));
     }
 
+    public static Lottery of(List<Integer> numbers) {
+        return new Lottery(numbers);
+    }
+
     public List<Integer> getNumbers() {
         return numbers;
     }
