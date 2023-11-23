@@ -43,6 +43,10 @@ public class Lottos {
         return rankResults;
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

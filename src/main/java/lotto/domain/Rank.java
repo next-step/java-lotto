@@ -27,4 +27,12 @@ public enum Rank {
     public long calculateTotalPrizePerRank(long rankCnt) {
         return this.prizeMoney * rankCnt;
     }
+
+    public int getCountOfMatch() {
+        return countOfMatch;
+    }
+
+    public long getPrizeMoney() {
+        return prizeMoney;
+    }
 }

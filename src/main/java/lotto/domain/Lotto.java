@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import lotto.dto.LottoDto;
 
 public class Lotto {
 
@@ -52,6 +53,10 @@ public class Lotto {
         return (int) this.lotto.stream()
                 .filter(winnerLotto.lotto::contains)
                 .count();
+    }
+
+    public List<LottoNumber> getLotto() {
+        return lotto;
     }
 
     @Override
