@@ -3,6 +3,8 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.domain.Lotto;
@@ -43,14 +45,13 @@ public class WinningLottoTest {
         assertThatNoException().isThrownBy(() -> WinningLotto.of(LAST_WEAK_LOTTO, bonusBall));
     }
 
-    @DisplayName("보너스 볼까지 점수로 반환합니다.")
+    @DisplayName("보너스 볼의 여부를 판단할 수 있습니다.")
     @Test
     void compareWithLastWeakLottoAndBonusBallAndReturnMatchCount() {
         LottoNumber bonusBall = new LottoNumber(8);
         WinningLotto winningLotto = WinningLotto.of(LAST_WEAK_LOTTO, bonusBall);
-        Lotto myLotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 8)
-            .map(LottoNumber::new)
-            .collect(Collectors.toList()));
-        assertThat(winningLotto.compare(myLotto)).isEqualTo(6);
+        Lotto myLotto = LottoGenerator.generate(Set.of(1, 2, 3, 4, 5, 8));
+        assertThat(winningLotto.compare(myLotto)).isEqualTo(5);
+        assertThat(winningLotto.compareBonus(myLotto)).isEqualTo(1);
     }
 }
