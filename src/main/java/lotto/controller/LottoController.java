@@ -31,6 +31,7 @@ public class LottoController {
         Lotto winningLotto = inputView.inputWinningLotto();
         LottoNumber bonusBall = inputView.inputBonusBall();
         PrizeSummary prizeSummary = lottos.getPrizeSummary(winningLotto, bonusBall);
+
         outputview.printPrizeSummary(prizeSummary);
 
         Profit profit = Profit.of(purchaseAmount, prizeSummary);

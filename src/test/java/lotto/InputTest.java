@@ -40,7 +40,6 @@ public class InputTest {
         assertThatIllegalArgumentException().isThrownBy(inputView::inputWinningLotto);
     }
 
-
     @DisplayName("정상적이지 않은 보너스볼 입력에 대해서 예외를 발생한다.")
     @ParameterizedTest
     @ValueSource(strings = {"", " ", "2two", "2147483648", "-2147483649", "-1", "0", "46"})
