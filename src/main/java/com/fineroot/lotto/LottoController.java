@@ -29,7 +29,7 @@ public class LottoController {
 
     private void matchWithWinningNumber() {
         inputView.drawInputWinningNumberView();
-        resultViewModel.saveWinnerStatus(lottoStore.winnerStatus(inputViewModel.getWinningNumber()));
+        resultViewModel.saveWinnerStatus(lottoStore.winnerStatus(inputViewModel.getWinningNumberSet()));
         resultView.drawStatistics();
     }
 

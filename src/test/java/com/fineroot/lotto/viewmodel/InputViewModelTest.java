@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.fineroot.lotto.dto.Money;
 import com.fineroot.lotto.dto.WinningNumber;
 import com.fineroot.lotto.domain.LottoNumber;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,10 +23,18 @@ class InputViewModelTest {
 
     @ParameterizedTest
     @DisplayName("당첨 번호 저장 및 확인")
-    @CsvSource({"1,true","7,false"})
-    void saveWinningNumber(int input,boolean expected) {
+    @CsvSource({"'1, 2, 3, 4, 5, 7',1,true", "'1, 2, 3, 4, 5, 6',7,false"})
+    void saveWinningNumberAndBonusNumber(String dummy, int input, boolean expected) {
+        String winNumber = "1, 2, 3, 4, 5, 6";
         InputViewModel inputViewModel = new InputViewModel();
-        inputViewModel.saveWinningNumber(WinningNumber.from("1, 2, 3, 4, 5, 6"));
-        assertThat(inputViewModel.getWinningNumber().contains(LottoNumber.from(input))).isEqualTo(expected);
+        inputViewModel.saveWinningNumber(WinningNumber.from(winNumber));
+        inputViewModel.saveBonusNumber(LottoNumber.from(7));
+        assertThat(inputViewModel.getWinningNumberSet().contains(LottoNumber.from(input))).isEqualTo(expected);
+        assertThat(inputViewModel.getWinningNumberSet().hasBonus(
+                Arrays.stream(dummy.split(","))
+                        .map(String::trim)
+                        .map(Integer::parseInt)
+                        .map(LottoNumber::from)
+                        .collect(Collectors.toList()))).isEqualTo(expected);
     }
 }

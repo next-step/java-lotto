@@ -1,10 +1,13 @@
-package com.fineroot.lotto.dto;
+package com.fineroot.lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fineroot.lotto.domain.LottoBundle;
 import com.fineroot.lotto.domain.WinnerStatus;
 import com.fineroot.lotto.domain.WinningRank;
+import com.fineroot.lotto.dto.Money;
+import com.fineroot.lotto.dto.WinningNumber;
+import com.fineroot.lotto.dto.WinningNumberSet;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +18,7 @@ import org.junit.jupiter.api.Test;
 class WinnerStatusTest {
 
     private LottoBundle lottoBundle;
-    private WinningNumber winningNumber;
+    private WinningNumberSet winningNumber;
 
     @BeforeEach
     void setUp() {
@@ -25,7 +28,7 @@ class WinnerStatusTest {
                         "13,14,15,16,17,18",
                         "19,20,21,22,23,24",
                         "25,26,27,28,29,30"));
-        winningNumber = WinningNumber.from("1,2,3,7,8,9");
+        winningNumber = WinningNumberSet.of(WinningNumber.from("1,2,3,7,8,9"), LottoNumber.from(10));
     }
 
     @Test

@@ -3,6 +3,7 @@ package com.fineroot.lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fineroot.lotto.dto.WinningNumber;
+import com.fineroot.lotto.dto.WinningNumberSet;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ class LottoBundleTest {
     @DisplayName("당첨 확인")
     void matchWinner() {
         LottoBundle lottoBundle = LottoBundle.fromList(List.of("1,2,3,4,5,6", "7,8,9,10,11,12", "13,14,15,16,17,18"));
-        WinnerStatus winnerStatus = lottoBundle.matchWinner(WinningNumber.from("1,2,3,8,9,10"));
-        assertThat(winnerStatus.matchCount(WinningRank.FORTH_PRIZE)).isEqualTo(2);
+        WinnerStatus winnerStatus = lottoBundle.matchWinner(WinningNumberSet.of(WinningNumber.from("1,2,3,8,9,10"), LottoNumber.from(11)));
+        assertThat(winnerStatus.matchCount(WinningRank.FIFTH_PRIZE)).isEqualTo(2);
     }
 }
