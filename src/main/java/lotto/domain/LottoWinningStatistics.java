@@ -12,7 +12,7 @@ public class LottoWinningStatistics {
     }
 
     public List<RankResult> informStatistics(Lottos lottos) {
-        Map<Rank, Long> rankStatistics = lottos.seekStatistics(this.winnerLotto);
+        Map<Rank, Long> rankStatistics = lottos.seekRankStatistics(this.winnerLotto);
         return createRankResults(rankStatistics);
     }
 

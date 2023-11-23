@@ -1,5 +1,11 @@
 package lotto.domain;
 
+import static lotto.domain.Rank.FIRST;
+import static lotto.domain.Rank.FOURTH;
+import static lotto.domain.Rank.NOTHING;
+import static lotto.domain.Rank.SECOND;
+import static lotto.domain.Rank.THIRD;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,13 +23,23 @@ public class Lottos {
         this.lottos = List.of(lottos);
     }
 
-    public Map<Rank, Long> seekStatistics(Lotto winnerLotto) {
-        Map<Rank, Long> rankResults = new LinkedHashMap<>();
+    public Map<Rank, Long> seekRankStatistics(Lotto winnerLotto) {
+        Map<Rank, Long> rankResults = initRankResults();
         for (Lotto lotto : lottos) {
             int countOfMatch = lotto.countOfMatch(winnerLotto);
             Rank rank = Rank.valeOf(countOfMatch);
-            rankResults.put(rank, rankResults.getOrDefault(rank, 0L) + 1);
+            rankResults.put(rank, rankResults.get(rank) + 1);
         }
+        return rankResults;
+    }
+
+    private Map<Rank, Long> initRankResults() {
+        Map<Rank, Long> rankResults = new LinkedHashMap<>();
+        rankResults.put(NOTHING, 0L);
+        rankResults.put(FOURTH, 0L);
+        rankResults.put(THIRD, 0L);
+        rankResults.put(SECOND, 0L);
+        rankResults.put(FIRST, 0L);
         return rankResults;
     }
 
