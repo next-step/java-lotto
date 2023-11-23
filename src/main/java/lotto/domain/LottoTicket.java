@@ -10,6 +10,10 @@ import java.util.stream.IntStream;
 public class LottoTicket {
     private List<Lotto> lottoTicket;
 
+    public LottoTicket(Lotto lotto) {
+        this.lottoTicket = new ArrayList<>();
+        lottoTicket.add(lotto);
+    }
     public LottoTicket(int number) {
         this.lottoTicket = new ArrayList<>();
         List<LottoNumber> numbers = numberList();
