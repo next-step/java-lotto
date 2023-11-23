@@ -28,7 +28,7 @@ public class Tickets {
     public long calcWinningAmount(Numbers winningNumbers) {
         long totalAmount = 0;
         for (Map.Entry<Rank, Integer> entry : this.makeStatistics(winningNumbers).entrySet()) {
-            totalAmount += entry.getKey().getPrizeAmount() * entry.getValue();
+            totalAmount += entry.getKey().multiplyWinningCount(entry.getValue());
         }
         return totalAmount;
     }
