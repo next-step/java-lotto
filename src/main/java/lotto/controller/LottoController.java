@@ -3,39 +3,75 @@ package lotto.controller;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.strategy.GenerateStrategy;
+import lotto.domain.lotto.strategy.RandomStrategy;
+import lotto.domain.summary.Summary;
+import lotto.dto.view.LottoResultDTO;
+import lotto.dto.view.UserInputDTO;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
+import static lotto.domain.lotto.Lottos.PRICE_PER_TICKET;
 
 public class LottoController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final GenerateStrategy strategy;
 
-    public LottoController(InputView inputView, OutputView outputView, GenerateStrategy strategy) {
+    public LottoController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.strategy = strategy;
     }
 
     public void start() {
-        int purchasePrice = inputView.readPurchasePrice();
+        try {
+            play();
+        } catch (NumberFormatException e) {
+            System.out.println("ERROR : " + "숫자만 입력 가능합니다.");
+        } catch (IllegalArgumentException | NullPointerException e) {
+            System.out.println("ERROR : " + e.getMessage());
+        }
+    }
 
-        Lottos lottos = Lottos.of(purchasePrice, strategy);
+    public void play() {
+        UserInputDTO userInputDTO = userInput();
 
-        outputView.printLottoCount(lottos.size());
+        Lottos manualLottos = manualLottos(userInputDTO);
+        Lottos autoLottos = autoLottos(remainingPurchasePrice(userInputDTO));
+
+        Lottos lottos = Lottos.concat(manualLottos, autoLottos);
+
+        outputView.printLottoCount(manualLottos.size(), autoLottos.size());
         outputView.printLottos(lottos.lottos());
+        outputView.printSummary(lottoResult(lottos));
+    }
 
-        List<Integer> jackpotNumber = inputView.readJackpotNumber();
-        System.out.println(jackpotNumber);
+    private UserInputDTO userInput() {
+        return new UserInputDTO(inputView.readPurchasePrice(), inputView.readManualLottoCount());
+    }
 
-        int bonusNumber = inputView.readBonusNumber();
+    private Lottos manualLottos(UserInputDTO userInputDTO) {
+        return Lottos.of(userInputDTO.purchasePrice(), inputView.readManualLotto(userInputDTO.manualLottoCount()));
+    }
 
-        Lotto jackpot = Lotto.of(jackpotNumber);
-        outputView.printSummary(lottos.match(jackpot, LottoNumber.of(bonusNumber)));
+    private int remainingPurchasePrice(UserInputDTO userInputDTO) {
+        return userInputDTO.purchasePrice() - userInputDTO.manualLottoCount() * PRICE_PER_TICKET;
+    }
+
+    private Lottos autoLottos(int remainingPurchasePrice) {
+        return Lottos.of(remainingPurchasePrice, new RandomStrategy());
+    }
+
+    public LottoResultDTO lottoResult(Lottos lottos) {
+        Summary summary = lottos.match(jackpotLotto(), bonusNumber());
+        return new LottoResultDTO(summary.winnings(), summary.profitRate());
+    }
+
+    private Lotto jackpotLotto() {
+        return Lotto.of(inputView.readJackpotNumber());
+    }
+
+    private LottoNumber bonusNumber() {
+        return LottoNumber.of(inputView.readBonusNumber());
     }
 }
 

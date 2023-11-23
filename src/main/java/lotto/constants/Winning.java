@@ -1,7 +1,11 @@
 package lotto.constants;
 
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum Winning {
     FIRST(6, 2_000_000_000),
@@ -13,16 +17,13 @@ public enum Winning {
 
     static final Map<Long, Winning> winnings = new HashMap<>();
 
-    private static final String MESSAGE = "%s개 일치 (%s원)";
 
-    private final String message;
     private final long matchCount;
     private final long prize;
 
     Winning(long matchCount, long prize) {
         this.matchCount = matchCount;
         this.prize = prize;
-        this.message = String.format(MESSAGE, matchCount, prize);
     }
 
     static {
@@ -43,11 +44,16 @@ public enum Winning {
         return winnings.getOrDefault(matchCount, FAIL);
     }
 
-    public String message() {
-        return message;
+    public static Set<Winning> prizeWinning() {
+        return Stream.of(FIFTH, FOURTH, THIRD, SECOND, FIRST)
+                .collect((Collectors.toCollection(LinkedHashSet::new)));
     }
 
     public long prize() {
         return prize;
+    }
+
+    public long matchCount() {
+        return matchCount;
     }
 }
