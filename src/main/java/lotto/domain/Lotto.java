@@ -48,6 +48,12 @@ public class Lotto {
         return lotto;
     }
 
+    public int countOfMatch(Lotto winnerLotto) {
+        return (int) this.lotto.stream()
+                .filter(winnerLotto.lotto::contains)
+                .count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
