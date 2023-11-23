@@ -2,7 +2,7 @@ package calculator.domain;
 
 import java.util.List;
 
-public class Calculator {
+public class CalculatorExecutor {
 
     private static final int INITIAL_RESULT_INDEX = 0;
 

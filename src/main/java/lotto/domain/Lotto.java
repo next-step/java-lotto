@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private static final int NUMBERS_SIZE = 6;
+
     private final List<LottoNumber> numbers = new ArrayList<>();
 
     public Lotto(Integer... numbers) {
@@ -56,6 +57,10 @@ public class Lotto {
             return count + 1;
         }
         return count;
+    }
+
+    public boolean contains(LottoNumber bonusNumber) {
+        return this.numbers.contains(bonusNumber);
     }
 
     @Override

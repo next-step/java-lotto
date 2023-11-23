@@ -9,7 +9,6 @@ import java.util.Map;
 
 public class LottoController {
 
-    private static final int PRICE_OF_LOTTO = 1000;
     private static final String DELIMITER = ", ";
 
     private LottoController() {
@@ -17,20 +16,19 @@ public class LottoController {
 
     public static void run() {
         final int amount = InputView.inputAmount();
-        Validator.validateAmount(amount);
-        final int quantity = amount / PRICE_OF_LOTTO;
+
+        PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
+        final int quantity = purchaseAmount.calculateLottoQuantity();
         OutputView.outputQuantity(quantity);
 
         LottoMachine lottoMachine = new LottoMachine();
-        lottoMachine.issueLottos(quantity, new AutoLottoNumberGenerator());
-
-        OutputView.outputLottos(lottoMachine.getLottos());
+        List<Lotto> lottos = lottoMachine.issueLottos(quantity, new AutoLottoNumberGenerator());
+        OutputView.outputLottos(lottos);
 
         List<Integer> winningNumbers = InputView.inputWinningNumbers(DELIMITER);
-        Validator.validateLottoNumbers(winningNumbers);
-
-        LottoWinningMachine winningMachine = new LottoWinningMachine(new Lotto(winningNumbers));
-        Map<Rank, Integer> rankCounts = winningMachine.getRankCounts(lottoMachine.getLottos());
+        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
+        LottoWinningMachine winningMachine = new LottoWinningMachine(new Lotto(winningNumbers), bonusNumber);
+        Map<Rank, Integer> rankCounts = winningMachine.getRankCounts(lottos);
 
         OutputView.outputWinningResult(rankCounts);
         OutputView.outputRateOfResult(winningMachine.calculateRateOfResult(rankCounts, amount));

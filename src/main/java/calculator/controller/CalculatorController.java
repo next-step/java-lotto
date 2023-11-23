@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.domain.Calculator;
+import calculator.domain.CalculatorExecutor;
 import calculator.domain.Operator;
 import calculator.domain.Splitter;
 import calculator.domain.Validator;
@@ -17,6 +17,6 @@ public class CalculatorController {
         List<Integer> numbers = Splitter.splitNumbers(expression);
         List<Operator> operators = Splitter.splitOperators(expression);
 
-        return Calculator.calculate(numbers, operators);
+        return CalculatorExecutor.calculate(numbers, operators);
     }
 }

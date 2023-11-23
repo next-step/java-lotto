@@ -25,7 +25,7 @@ public class OutputView {
     public static void outputWinningResult(Map<Rank, Integer> winningResult) {
         for (Map.Entry<Rank, Integer> entry : winningResult.entrySet()) {
             Rank rank = entry.getKey();
-            System.out.println(rank.getMatchCount() + "개 일치 (" + rank.getPrizeMoney() + "원) - " + entry.getValue() + "개");
+            System.out.println(rank.getTitle() + " (" + rank.getPrizeMoney() + "원) - " + entry.getValue() + "개");
         }
     }
 
