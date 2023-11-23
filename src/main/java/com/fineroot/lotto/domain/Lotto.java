@@ -1,6 +1,6 @@
 package com.fineroot.lotto.domain;
 
-import com.fineroot.lotto.dto.WinningNumber;
+import com.fineroot.lotto.dto.WinningNumberSet;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -36,10 +36,10 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public WinningRank matchWithWinningNumber(WinningNumber lotto) {
-        return WinningRank.of(
-                (int) lottoNumberSet.stream().filter(lotto::contains)
-                        .count());
+    public WinningRank matchWithWinningNumber(WinningNumberSet winningNumberSet) {
+        return WinningRank.valueOf(
+                (int) lottoNumberSet.stream().filter(winningNumberSet::contains)
+                        .count(), winningNumberSet.hasBonus(lottoNumberSet));
     }
 
     @Override

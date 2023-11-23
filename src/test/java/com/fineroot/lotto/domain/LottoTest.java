@@ -3,6 +3,7 @@ package com.fineroot.lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fineroot.lotto.dto.WinningNumber;
+import com.fineroot.lotto.dto.WinningNumberSet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,8 +19,11 @@ class LottoTest {
     @DisplayName("Lotto Number 확인")
     void isContain() {
         Lotto lotto = Lotto.from(1, 2, 3, 4, 5, 6);
-        assertThat(lotto.matchWithWinningNumber(WinningNumber.from("1, 2, 3, 4, 5, 6")).getMatchCount()).isEqualTo(6);
-        assertThat(lotto.matchWithWinningNumber(WinningNumber.from("1, 2, 3, 4, 5, 8")).getMatchCount()).isEqualTo(5);
+        LottoNumber bonus = LottoNumber.from(9);
+        assertThat(lotto.matchWithWinningNumber(WinningNumberSet.of(WinningNumber.from("1, 2, 3, 4, 5, 6"), bonus))
+                .getMatchCount()).isEqualTo(6);
+        assertThat(lotto.matchWithWinningNumber(WinningNumberSet.of(WinningNumber.from("1, 2, 3, 4, 5, 8"), bonus))
+                .getMatchCount()).isEqualTo(5);
     }
 
     @Test

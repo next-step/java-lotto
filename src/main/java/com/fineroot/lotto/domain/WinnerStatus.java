@@ -1,20 +1,19 @@
 package com.fineroot.lotto.domain;
 
 import com.fineroot.lotto.dto.Money;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class WinnerStatus {
 
     private final Map<WinningRank, Integer> winningMap;
 
     private WinnerStatus() {
-        winningMap = new EnumMap<>(Map.of(
-                WinningRank.FIRST_PRIZE, 0,
-                WinningRank.SECOND_PRIZE, 0,
-                WinningRank.THIRD_PRIZE, 0,
-                WinningRank.FORTH_PRIZE, 0));
+        winningMap = new EnumMap<WinningRank, Integer>(
+                Arrays.stream(WinningRank.values()).collect(Collectors.toMap(e -> e, e -> 0)));
     }
 
     private WinnerStatus(Map<WinningRank, Integer> winningMap) {

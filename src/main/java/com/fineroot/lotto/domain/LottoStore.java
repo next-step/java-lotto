@@ -2,7 +2,7 @@ package com.fineroot.lotto.domain;
 
 import com.fineroot.lotto.dto.LottoBundleStatus;
 import com.fineroot.lotto.dto.Money;
-import com.fineroot.lotto.dto.WinningNumber;
+import com.fineroot.lotto.dto.WinningNumberSet;
 import com.fineroot.lotto.util.LottoUtils;
 
 public class LottoStore {
@@ -28,7 +28,7 @@ public class LottoStore {
         return lottoBundle.toLottoBundleStatus();
     }
 
-    public WinnerStatus winnerStatus(WinningNumber winningNumber) {
-        return lottoBundle.matchWinner(winningNumber);
+    public WinnerStatus winnerStatus(WinningNumberSet winningNumberSet) {
+        return lottoBundle.matchWinner(winningNumberSet);
     }
 }

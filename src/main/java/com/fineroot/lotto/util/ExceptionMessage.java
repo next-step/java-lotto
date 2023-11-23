@@ -5,7 +5,9 @@ public enum ExceptionMessage {
 
     LOTTO_NUMBER_OUT_OF_RANGE("허용 범위를 벗어난 값입니다.(1 ~ 45)"),
 
-    UTILITY_CLASS("유틸리티 클래스는 생성 불가능합니다.");
+    UTILITY_CLASS("유틸리티 클래스는 생성 불가능합니다."),
+
+    BONUS_NUMBER_DUPLICATED("보너스 번호는 당첨 번호와 중복이 될 수 없습니다.");
 
     final String message;
 

@@ -1,7 +1,7 @@
 package com.fineroot.lotto.domain;
 
 import com.fineroot.lotto.dto.LottoBundleStatus;
-import com.fineroot.lotto.dto.WinningNumber;
+import com.fineroot.lotto.dto.WinningNumberSet;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,10 +38,10 @@ public class LottoBundle {
         return LottoBundleStatus.from(lottoList.stream().map(Lotto::toString).collect(Collectors.toList()));
     }
 
-    public WinnerStatus matchWinner(WinningNumber winningNumber) {
+    public WinnerStatus matchWinner(WinningNumberSet winningNumberSet) {
         WinnerStatus winnerStatus = WinnerStatus.create();
         for (Lotto lotto : lottoList) {
-            WinningRank rank = lotto.matchWithWinningNumber(winningNumber);
+            WinningRank rank = lotto.matchWithWinningNumber(winningNumberSet);
             winnerStatus.increaseWinningCount(rank);
         }
         return winnerStatus;
