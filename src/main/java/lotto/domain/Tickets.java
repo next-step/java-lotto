@@ -2,10 +2,7 @@ package lotto.domain;
 
 import lotto.enums.Rank;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Tickets {
     private List<Ticket> tickets = new ArrayList<>();
@@ -38,7 +35,7 @@ public class Tickets {
 
 
     public double calcRateOfReturn(Numbers winningNumbers) {
-        return (double) this.calcWinningAmount(winningNumbers) / (this.ticketCount() * 1000L);
+        return (double) this.calcWinningAmount(winningNumbers) / (this.ticketCount() * Ticket.PRICE);
     }
 
     public void addTicket(Ticket ticket) {
@@ -47,6 +44,10 @@ public class Tickets {
 
     private int ticketCount() {
         return tickets.size();
+    }
+
+    public List<Ticket> getTickets() {
+        return Collections.unmodifiableList(this.tickets);
     }
 
     private void initEnumMap(EnumMap<Rank, Integer> countPerPrize) {

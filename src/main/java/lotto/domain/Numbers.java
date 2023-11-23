@@ -7,12 +7,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+
 public class Numbers {
     private static final int COUNT = 6;
-    public static final int MIN_NUMBER = 1;
-    public static final int MAX_NUMBER = 45;
     public static final String DELIMITER = ",";
-    private static final List<Number> rangeNumbers = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER).boxed().map(Number::new).collect(Collectors.toList());
+    public static final String REGEX = "^[0-9,\\s]+$";
+    private static final List<Number> rangeNumbers = IntStream.rangeClosed(Number.MIN_NUMBER, Number.MAX_NUMBER).boxed().map(Number::new).collect(Collectors.toList());
 
     private List<Number> numbers;
 
@@ -28,8 +28,7 @@ public class Numbers {
         this.validateValue(input);
 
         this.numbers = Stream.of(input.split(DELIMITER))
-                .map(String::trim)
-                .map(number -> new Number(Integer.parseInt(number)))
+                .map(number -> new Number(Integer.parseInt(number.trim())))
                 .collect(Collectors.toList());
 
         this.validateCount();
@@ -49,7 +48,7 @@ public class Numbers {
     }
 
     private void validateValue(String input) {
-        if (!input.matches("^[0-9,\\s]+$")) {
+        if (!input.matches(REGEX)) {
             throw new IllegalArgumentException("유효하지 않은 입력값입니다.");
         }
     }

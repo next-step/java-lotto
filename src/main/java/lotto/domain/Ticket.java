@@ -1,6 +1,7 @@
 package lotto.domain;
 
 public class Ticket {
+    public static final int PRICE = 1000;
     private Numbers numbers = new Numbers();
 
     public Ticket() {

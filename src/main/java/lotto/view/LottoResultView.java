@@ -2,13 +2,16 @@ package lotto.view;
 
 import lotto.Result;
 import lotto.domain.Ticket;
+import lotto.domain.Tickets;
 import lotto.enums.Rank;
 
 import java.util.Map;
 
 public class LottoResultView {
-    public static void printTicket(Ticket ticket) {
-        System.out.println(ticket);
+    public static void printTicket(Tickets tickets) {
+        for (Ticket ticket : tickets.getTickets()) {
+            System.out.println(ticket);
+        }
     }
 
     public static void printResult(Result result) {

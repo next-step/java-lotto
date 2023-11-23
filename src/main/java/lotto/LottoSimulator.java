@@ -6,11 +6,7 @@ import lotto.domain.Tickets;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoSimulator {
-    public final int PRICE = 1000;
     private long amount;
 
     public LottoSimulator(long amount) {
@@ -18,21 +14,30 @@ public class LottoSimulator {
     }
 
     public void run() {
-        List<Ticket> ticketList = new ArrayList<>();
-        while (this.amount >= PRICE) {
-            Ticket ticket = new Ticket();
-            ticketList.add(ticket);
-            LottoResultView.printTicket(ticket);
-            this.amount -= PRICE;
-        }
+        Tickets tickets = this.initTickets();
+        LottoResultView.printTicket(tickets);
 
-        LottoInputView lottoInputView = new LottoInputView();
-        Numbers winningNumber = new Numbers(lottoInputView.inputStringLine("당첨번호를 입력해주세요."));
+        Numbers winningNumber = inputWinningNumbers();
 
-        Tickets tickets = new Tickets(ticketList);
         Result result = new Result(tickets.makeStatistics(winningNumber), tickets.calcRateOfReturn(winningNumber));
 
         LottoResultView.printResult(result);
+    }
+
+    private Tickets initTickets() {
+        Tickets tickets = new Tickets();
+
+        while (this.amount >= Ticket.PRICE) {
+            Ticket ticket = new Ticket();
+            tickets.addTicket(ticket);
+            this.amount -= Ticket.PRICE;
+        }
+        return tickets;
+    }
+
+    private static Numbers inputWinningNumbers() {
+        LottoInputView lottoInputView = new LottoInputView();
+        return new Numbers(lottoInputView.inputStringLine("당첨번호를 입력해주세요."));
     }
 
 }

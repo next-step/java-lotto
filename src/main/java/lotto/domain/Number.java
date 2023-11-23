@@ -18,8 +18,8 @@ public class Number implements Comparable<Number> {
     }
 
     @Override
-    public int compareTo(Number o) {
-        return this.number - o.number;
+    public int compareTo(Number target) {
+        return this.number - target.number;
     }
 
     @Override
