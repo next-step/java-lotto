@@ -26,8 +26,8 @@ class LottoScoreTest {
             Lotto.of(Set.of(1, 2, 3, 4, 5, 6)),
             Lotto.of(Set.of(10, 11, 12, 13, 14, 15))
         ));
-
-        lottoWin = new LottoWin(Set.of(1, 2, 3, 4, 5, 6));
+        int bonusNumber = 7;
+        lottoWin = new LottoWin(Set.of(1, 2, 3, 4, 5, 6), bonusNumber);
         lottoScore = LottoScore.create();
         lottoScore.recordMatchLotto(lottos, lottoWin);
     }

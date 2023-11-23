@@ -11,7 +11,7 @@ class LottoNumberTest {
     @Test
     @DisplayName("로또 번호는 1이상 45이하의 정수로만 생성가능하다.")
     void numberTest() {
-        assertThat(new LottoNumber(45).getNumber()).isEqualTo(45);
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(46));
+        assertThat(LottoNumber.valueOf(45).getNumber()).isEqualTo(45);
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.valueOf(46));
     }
 }

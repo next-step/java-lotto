@@ -12,6 +12,7 @@ public class ResultView {
     private static final String WINNING_STATISTICS_MESSAGE = "당첨통계";
     private static final String DEFAULT_CONTOUR = "--------------------------";
     private static final String LOTTO_RESULT_SCORE = "%d개 일치 (%d)원 - %d개";
+    private static final String LOTTO_RESULT_SCORE_BONUS = "%d개 일치, 보너스볼 일치 (%d)원 - %d개";
     private static final String LOTTO_RESULT_PROFIT_RATIO = "총 수익률은 %.2f 입니다.";
 
     public void printPurchase(final LottoPurchase purchaseInfo) {
@@ -27,17 +28,23 @@ public class ResultView {
         System.out.println(DEFAULT_CONTOUR);
 
         Arrays.stream(LottoRank.values())
+            .filter(lottoRank -> lottoRank != LottoRank.LOSE)
             .forEach(lottoRank -> System.out.println(printLottoScoreResult(lottoRank, lottoScore)));
 
         System.out.println(printLottoProfitRatio(lottoScore, lottoPurchase));
     }
 
     private String printLottoScoreResult(final LottoRank lottoRank, final LottoScore lottoScore) {
-        return String.format(LOTTO_RESULT_SCORE, lottoRank.getMatchNumber(),
+        if (lottoRank == LottoRank.SECOND) {
+            return String.format(LOTTO_RESULT_SCORE_BONUS, lottoRank.getCountOfMatch(),
+                lottoRank.getPrizeAmount(), lottoScore.getLottoScore().get(lottoRank));
+        }
+        return String.format(LOTTO_RESULT_SCORE, lottoRank.getCountOfMatch(),
             lottoRank.getPrizeAmount(), lottoScore.getLottoScore().get(lottoRank));
     }
 
-    private String printLottoProfitRatio(final LottoScore lottoScore, final LottoPurchase lottoPurchase) {
+    private String printLottoProfitRatio(final LottoScore lottoScore,
+        final LottoPurchase lottoPurchase) {
         return String.format(LOTTO_RESULT_PROFIT_RATIO, lottoScore.calculateProfitRatio(
             lottoPurchase));
     }

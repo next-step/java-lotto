@@ -20,7 +20,7 @@ public class LottoController {
         resultView.printPurchaseLottoTicketNumbers(lottoMachine.getPurchaseLottos());
 
         LottoWin lottoWin = new LottoWin(
-            NumberSplitter.splitNumber(inputView.inputWinNumbers()));
+            NumberSplitter.splitNumber(inputView.inputWinNumbers()), inputView.inputBonusNumber());
         resultView.printResultStatics(lottoMachine.calculateLottoStatistics(lottoWin), lottoMachine.getLottoPurchaseInfo());
     }
 }

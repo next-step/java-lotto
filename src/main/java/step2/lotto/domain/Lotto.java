@@ -29,7 +29,8 @@ public class Lotto {
 
     public static Lotto of(final Set<Integer> inputNumbers) {
         Set<LottoNumber> lottoNumbers = inputNumbers.stream()
-            .map(LottoNumber::new)
+            .distinct()
+            .map(LottoNumber::valueOf)
             .collect(Collectors.toSet());
         return new Lotto(lottoNumbers);
     }

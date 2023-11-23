@@ -8,6 +8,7 @@ public class LottoPurchase {
     private static final int LOTTO_PRICE = 1000;
 
     public LottoPurchase(final int inputMoney) {
+        validateInputMoney(inputMoney);
         this.lottoPurchaseMoney = inputMoney;
         this.lottoTicketCount = inputMoney / LOTTO_PRICE;
     }
@@ -18,5 +19,11 @@ public class LottoPurchase {
 
     public int getLottoPurchaseMoney() {
         return lottoPurchaseMoney;
+    }
+
+    private void validateInputMoney(final int inputMoney) {
+        if (inputMoney < LOTTO_PRICE) {
+            throw new IllegalArgumentException("로또 구입 최소금액은 " + LOTTO_PRICE + "원 입니다.");
+        }
     }
 }
