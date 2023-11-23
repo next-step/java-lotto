@@ -41,22 +41,25 @@ public class OutputView {
             return;
         }
 
-        if(lottoMatch == LottoMatch.FIVE_BONUS) {
-            printBonusLottoMatch(lottoMatch);
+        LottoMatch.Match match = LottoMatch.Match.from(lottoMatch.matchCount(), lottoMatch.isBonus());
+        int count = lottoMatch.matchesCount(match, lottoMatchResult);
+
+        if(match == LottoMatch.Match.FIVE_BONUS) {
+            printBonusLottoMatch(lottoMatch, count);
             return;
         }
 
-        printLottoMatch(lottoMatch);
+        printLottoMatch(lottoMatch, count);
     }
 
-    private static void printBonusLottoMatch(LottoMatch lottoMatch) {
+    private static void printBonusLottoMatch(LottoMatch lottoMatch, int count) {
         System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개\n",
-                lottoMatch.matchCount(), lottoMatch.amount(), lottoMatch.matchCount());
+                lottoMatch.matchCount(), lottoMatch.amount(), count);
     }
 
-    private static void printLottoMatch(LottoMatch lottoMatch) {
+    private static void printLottoMatch(LottoMatch lottoMatch, int count) {
         System.out.printf("%d개 일치 (%d원) - %d개\n",
-                lottoMatch.matchCount(), lottoMatch.amount(), lottoMatch.matchCount());
+                lottoMatch.matchCount(), lottoMatch.amount(), count);
     }
 
     public static void printRateOfReturn(LottoResult lottoResult,

@@ -35,8 +35,21 @@ public enum LottoMatch {
         return this.match;
     }
 
+    public int matchesCount(Match match, LottoMatchResult lottoMatchResult) {
+        long count = lottoMatchResult.lottoMatches()
+                .stream()
+                .filter(lottoMatch -> lottoMatch == fromMatch(match))
+                .count();
+
+        return (int) count;
+    }
+
     public int matchCount() {
         return this.match.matchCount;
+    }
+
+    public boolean isBonus() {
+        return this.match.isBonus;
     }
 
     public long amount() {
