@@ -29,10 +29,10 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winningNumbers = scanner.nextLine();
         checkValidationWinningNumbers(winningNumbers);
-        return getWinningLottoNumbers(winningNumbers);
+        return getWinningNumbers(winningNumbers);
     }
 
-    private static Set<Integer> getWinningLottoNumbers(String winningNumbers) {
+    private static Set<Integer> getWinningNumbers(String winningNumbers) {
         return Arrays.stream(winningNumbers.trim().split(DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet());
