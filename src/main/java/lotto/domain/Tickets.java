@@ -16,8 +16,7 @@ public class Tickets {
 
     public void sellTickets(long amount) {
         while (amount >= Ticket.PRICE) {
-            Ticket ticket = new Ticket();
-            this.addTicket(ticket);
+            this.addTicket(new Ticket());
             amount -= Ticket.PRICE;
         }
     }
