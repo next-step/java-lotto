@@ -7,9 +7,9 @@ public interface Rank {
 
     int score = 0;
 
-    int getScore();
+    int score();
 
-    int getRank();
+    int rank();
 
     void apply(WinningLotto winningLotto, Lotto lotto);
 }
