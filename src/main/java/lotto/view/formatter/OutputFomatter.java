@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoNumber;
-import lotto.domain.Prize;
+import lotto.domain.Rank;
 import lotto.domain.Profit;
 
 public class OutputFomatter {
@@ -23,15 +23,20 @@ public class OutputFomatter {
         return String.join(", ", lottoNumbers);
     }
 
-    public int toMatchingCount(Entry<Prize, Integer> rawPrizeDetail) {
-        return rawPrizeDetail.getKey().getMatchingCount();
+    public String toCountOfMatchMessage(Entry<Rank, Integer> rawPrizeDetail) {
+        int countOfMatch = rawPrizeDetail.getKey().getCountOfMatch();
+
+        if (rawPrizeDetail.getKey() == Rank.SECOND) {
+            return String.format("%d개 일치, 보너스 볼", countOfMatch);
+        }
+        return String.format("%d개", countOfMatch);
     }
 
-    public int toPrizeAmount(Entry<Prize, Integer> rawPrizeDetail) {
-        return rawPrizeDetail.getKey().getPrizeAmount();
+    public int toWinningMoney(Entry<Rank, Integer> rawPrizeDetail) {
+        return rawPrizeDetail.getKey().getWinningMoney();
     }
 
-    public int toPrizeCount(Entry<Prize, Integer> rawPrizeDetail) {
+    public int toPrizeCount(Entry<Rank, Integer> rawPrizeDetail) {
         return rawPrizeDetail.getValue();
     }
 

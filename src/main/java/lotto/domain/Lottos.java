@@ -12,24 +12,24 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public PrizeSummary getPrizeSummary(Lotto winningLotto) {
-        Map<Prize, Integer> prizeSummary = initializePrizeSummary();
-        countPrizes(winningLotto, prizeSummary);
+    public PrizeSummary getPrizeSummary(Lotto winningLotto, LottoNumber bonusBall) {
+        Map<Rank, Integer> prizeSummary = initializePrizeSummary();
+        countPrizes(winningLotto, bonusBall, prizeSummary);
         return new PrizeSummary(prizeSummary);
     }
 
-    private Map<Prize, Integer> initializePrizeSummary() {
-        Map<Prize, Integer> prizeSummary = new EnumMap<>(Prize.class);
-        for (Prize prize : Prize.values()) {
-            prizeSummary.put(prize, 0);
+    private Map<Rank, Integer> initializePrizeSummary() {
+        Map<Rank, Integer> prizeSummary = new EnumMap<>(Rank.class);
+        for (Rank rank : Rank.values()) {
+            prizeSummary.put(rank, 0);
         }
         return prizeSummary;
     }
 
-    private void countPrizes(Lotto winningLotto, Map<Prize, Integer> prizeSummary) {
+    private void countPrizes(Lotto winningLotto, LottoNumber bonusBall, Map<Rank, Integer> prizeSummary) {
         for (Lotto lotto : lottos) {
-            Prize prize = lotto.determinePrize(winningLotto);
-            prizeSummary.put(prize, prizeSummary.get(prize) + 1);
+            Rank rank = lotto.determinePrize(winningLotto, bonusBall);
+            prizeSummary.put(rank, prizeSummary.get(rank) + 1);
         }
     }
 

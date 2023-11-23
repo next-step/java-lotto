@@ -35,6 +35,12 @@ public class InputValidator {
         validateLottoNumber(Converter.splitToList(LOTTO_NUMBER_SEPARATOR, lotto), target);
     }
 
+    public void validateBonusBall(String bonusBall, String target) {
+        StringValidator.validateBlank(bonusBall, target);
+        StringValidator.validateNumeric(bonusBall, target);
+        StringValidator.validateIntegerRange(bonusBall, target);
+    }
+
     private void validateLottoNumber(List<String> lottoNumbers, String target) {
         lottoNumbers.forEach(lottoNumber -> StringValidator.validateNumeric(lottoNumber.trim(), target));
         lottoNumbers.forEach(lottoNumber -> StringValidator.validateIntegerRange(lottoNumber.trim(), target));

@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.PurchaseAmount;
 import lotto.util.converter.Converter;
 import lotto.view.printer.Printer;
@@ -34,5 +35,12 @@ public class InputView {
         String lotto = reader.readLine();
         validator.validateLotto(lotto, "당첨 번호");
         return Lotto.from(Converter.splitToIntList(InputValidator.LOTTO_NUMBER_SEPARATOR, lotto));
+    }
+
+    public LottoNumber inputBonusBall() {
+        printer.printLine("보너스 볼을 입력해 주세요.");
+        String bonusBall = reader.readLine();
+        validator.validateBonusBall(bonusBall, "보너스 볼");
+        return LottoNumber.from(Converter.convertToInt(bonusBall));
     }
 }

@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.PrizeSummary;
 import lotto.domain.Profit;
@@ -11,7 +12,6 @@ import lotto.domain.PurchaseAmount;
 import org.junit.jupiter.api.Test;
 
 public class ProfitTest {
-    Lotto winningLotto = Lotto.from(List.of(1, 2, 3, 4, 5, 6));
 
     @Test
     void calculateProfit() {
@@ -20,7 +20,10 @@ public class ProfitTest {
                 Lotto.from(List.of(1, 2, 3, 41, 42, 43)),
                 Lotto.from(List.of(1, 2, 4, 40, 42, 43)),
                 Lotto.from(List.of(1, 2, 3, 4, 41, 42))));
-        PrizeSummary prizeSummary = lottos.getPrizeSummary(winningLotto);
+        LottoNumber bonusBall = LottoNumber.from(45);
+
+        Lotto winningLotto = Lotto.from(List.of(1, 2, 3, 4, 5, 6));
+        PrizeSummary prizeSummary = lottos.getPrizeSummary(winningLotto, bonusBall);
 
         // when
         Profit profit = Profit.of(PurchaseAmount.from(13000), prizeSummary);
