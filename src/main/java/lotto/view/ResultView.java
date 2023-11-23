@@ -46,7 +46,7 @@ public class ResultView {
         });
     }
     private static boolean prizeRankOver3Under6(Prize prize) {
-        return 3 <= prize.rank().getRank() && prize.rank().getRank() <= 6;
+        return 3 <= prize.rank().rank() && prize.rank().rank() <= 6;
     }
 
     public void out(BigDecimal rate) {
