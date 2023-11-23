@@ -1,9 +1,11 @@
 package step3.controller;
 
 import step3.domain.lotto.LottoGame;
+import step3.domain.lotto.LottoNumber;
 import step3.domain.lotto.LottoResult;
-import step3.domain.lotto.LottoTicket;
+import step3.view.OutputView;
 
+import java.util.List;
 import java.util.Set;
 
 import static step3.view.InputView.bonusNumber;
@@ -19,12 +21,14 @@ public class LottoMain {
         int totalCount = totalCount(purchaseAmount);
 
         LottoGame lottoGame = new LottoGame();
-        LottoTicket userLottoTicket = lottoGame.createUserLottoTicket(totalCount);
-        Set<Integer> winningLottoNumbers = winningNumbers();
-        LottoTicket winningLottoTicket = lottoGame.createWinningLottoTicket(winningLottoNumbers);
-        int bonusNumber = bonusNumber(winningLottoNumbers);
+        List<LottoNumber> userLottoNumbers = lottoGame.createUserLottoNumbers(totalCount);
+        userLottoNumbers.stream().forEach(OutputView::printLottoNumbers);
 
-        LottoResult lottoResult = lottoGame.playLottoGame(userLottoTicket, winningLottoTicket, bonusNumber);
+        Set<Integer> winningNumbers = winningNumbers();
+        LottoNumber winningLottoNumber = lottoGame.createWinningLottoNumber(winningNumbers);
+        int bonusNumber = bonusNumber(winningNumbers);
+
+        LottoResult lottoResult = lottoGame.playLottoGame(userLottoNumbers, winningLottoNumber, bonusNumber);
         result(purchaseAmount, lottoResult);
     }
 }

@@ -13,7 +13,7 @@ public class LottoNumber {
 
     private static final List<Integer> NUMBER_LIST = IntStream.range(1, 46).boxed().collect(Collectors.toList());
 
-    private Set<Integer> numbers;
+    private final Set<Integer> numbers;
 
     public LottoNumber() {
         Collections.shuffle(NUMBER_LIST);
@@ -41,5 +41,9 @@ public class LottoNumber {
 
     public boolean hasBonusNumber(final int bonusNumber) {
         return this.numbers.contains(bonusNumber);
+    }
+
+    public boolean hasNumber(final int number) {
+        return this.numbers.contains(number);
     }
 }

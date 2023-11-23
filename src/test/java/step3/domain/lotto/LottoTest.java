@@ -8,14 +8,14 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoTicketTest {
+class LottoTest {
 
-    WinningLottoTicket winningLottoTicket;
-    LottoTicket userLottoTicket;
+    WinningLotto winningLotto;
+    UserLotto userLotto;
 
     @BeforeEach
     void setUp() {
-        winningLottoTicket = WinningLottoTicket.from(new LottoNumber(Arrays.asList(1, 2, 4, 8, 16, 32)));
+        winningLotto = WinningLotto.of(new LottoNumber(Arrays.asList(1, 2, 4, 8, 16, 32)), 45);
     }
 
     @Test
@@ -23,8 +23,8 @@ class LottoTicketTest {
         LottoNumber lottoNumberA = new LottoNumber(List.of(32, 8, 16, 1, 4, 2));
         LottoNumber lottoNumberB = new LottoNumber(List.of(3, 2, 5, 8, 16, 33));
 
-        userLottoTicket = new LottoTicket(List.of(lottoNumberA, lottoNumberB));
-        assertThat(winningLottoTicket.findCountOfMatch(lottoNumberA)).isEqualTo(6);
-        assertThat(winningLottoTicket.findCountOfMatch(lottoNumberB)).isEqualTo(3);
+        userLotto = new UserLotto(List.of(lottoNumberA, lottoNumberB));
+        assertThat(winningLotto.findCountOfMatch(lottoNumberA)).isEqualTo(6);
+        assertThat(winningLotto.findCountOfMatch(lottoNumberB)).isEqualTo(3);
     }
 }

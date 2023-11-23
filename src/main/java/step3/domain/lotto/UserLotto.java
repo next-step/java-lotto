@@ -2,19 +2,23 @@ package step3.domain.lotto;
 
 import java.util.List;
 
-public class LottoTicket {
+public class UserLotto {
 
-    private List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(final List<LottoNumber> lottoNumbers) {
+    public UserLotto(final List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoResult match(WinningLottoTicket winningLottoTicket, int bonusNumber) {
+    public static UserLotto from(List<LottoNumber> lottoNumbers) {
+        return new UserLotto(lottoNumbers);
+    }
+
+    public LottoResult match(WinningLotto winningLotto, int bonusNumber) {
         LottoResult lottoResult = new LottoResult();
         this.lottoNumbers.stream().forEach(lottoNumber -> {
             boolean hasBonusNumber = lottoNumber.hasBonusNumber(bonusNumber);
-            int countOfMatch = winningLottoTicket.findCountOfMatch(lottoNumber);
+            int countOfMatch = winningLotto.findCountOfMatch(lottoNumber);
             lottoResult.increaseCount(Rank.findRank(countOfMatch, hasBonusNumber));
         });
         return lottoResult;
