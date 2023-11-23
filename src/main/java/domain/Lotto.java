@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private static final int LOTTO_NUMBER_COUNT_LIMIT = 6;
-    private List<LottoNumber> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers;
 
     public Lotto(Integer... input) {
         this(Arrays.stream(input).collect(Collectors.toList()));
@@ -20,16 +20,17 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> lottoNumbers) {
-        validateLottoNumberCount(lottoNumbers);
+        Set<Integer> numbers = new HashSet<>(lottoNumbers);
+        validateLottoNumberCount(numbers);
 
         this.lottoNumbers = lottoNumbers.stream()
                 .sorted()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
-    private static void validateLottoNumberCount(List<Integer> lottoNumbers) {
-        if (lottoNumbers.stream().distinct().count() < LOTTO_NUMBER_COUNT_LIMIT) {
+    private static void validateLottoNumberCount(Set<Integer> lottoNumbers) {
+        if (lottoNumbers.stream().count() < LOTTO_NUMBER_COUNT_LIMIT) {
             throw new IllegalArgumentException("로또 숫자는 6개 입니다.");
         }
     }
