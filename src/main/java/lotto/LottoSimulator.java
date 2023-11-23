@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Numbers;
 import lotto.domain.Ticket;
+import lotto.domain.Tickets;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
@@ -11,13 +12,13 @@ import java.util.List;
 public class LottoSimulator {
     public final int PRICE = 1000;
     private long amount;
-    private final List<Ticket> ticketList = new ArrayList<>();
 
     public LottoSimulator(long amount) {
         this.amount = amount;
     }
 
     public void run() {
+        List<Ticket> ticketList = new ArrayList<>();
         while (this.amount >= PRICE) {
             Ticket ticket = new Ticket();
             ticketList.add(ticket);
@@ -28,11 +29,10 @@ public class LottoSimulator {
         LottoInputView lottoInputView = new LottoInputView();
         Numbers winningNumber = new Numbers(lottoInputView.inputStringLine("당첨번호를 입력해주세요."));
 
-        for (Ticket ticket : this.ticketList) {
-            ticket.match(winningNumber);
-        }
+        Tickets tickets = new Tickets(ticketList);
+        Result result = new Result(tickets.makeStatistics(winningNumber), tickets.calcRateOfReturn(winningNumber));
 
-
+        LottoResultView.printResult(result);
     }
 
 }
