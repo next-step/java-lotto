@@ -14,27 +14,29 @@ public class ConsoleInputView implements InputView {
         Scanner scanner = new Scanner(System.in);
 
         int payment = scanner.nextInt();
-        int lottoCount = payment / 1000;
+        int lottoCount = payment / Lotto.PRICE;
         System.out.println(lottoCount + "개를 구입했습니다.");
         return lottoCount;
     }
 
-    public Lotto pastLotto() {
+    public Lotto winningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
         Scanner scanner = new Scanner(System.in);
 
         String winningLottoString = scanner.nextLine();
-        Lotto winningLotto = makeWinningLotto(winningLottoString);
         System.out.println();
-        return winningLotto;
+        return makeWinningLotto(winningLottoString);
     }
 
-    private Lotto makeWinningLotto(String pastLottoString) {
-        String[] pastLottoArr = pastLottoString.split(",");
+    private Lotto makeWinningLotto(String winningLottoString) {
+        return new Lotto(stringToList(winningLottoString));
+    }
+
+    private List<Integer> stringToList(String winningLottoString) {
         List<Integer> lotto = new ArrayList<>();
-        for (String pastLottoNo : pastLottoArr) {
+        for (String pastLottoNo : winningLottoString.split(",")) {
             lotto.add(Integer.parseInt(pastLottoNo.trim()));
         }
-        return new Lotto(lotto);
+        return lotto;
     }
 }

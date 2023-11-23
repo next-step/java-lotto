@@ -18,7 +18,7 @@ public class LottoGenerator {
         Lottos lottos = new Lottos(inputView.purchase());
         resultView.lottos(lottos);
 
-        Lotto winningLotto = inputView.pastLotto();
+        Lotto winningLotto = inputView.winningLotto();
         lottos.rank(winningLotto);
         resultView.winningStats(lottos);
     }

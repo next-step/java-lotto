@@ -32,4 +32,29 @@ public class Lottos {
     public int countByRanking(Ranking ranking) {
         return (int) lottos.stream().filter(lotto -> lotto.ranking() == ranking).count();
     }
+
+    public double profitRate() {
+        double profits = 0;
+        for (Ranking ranking : Ranking.ranked()) {
+            profits += profitsPerRanking(ranking);
+        }
+
+        return profitRateFormat(profits / payment());
+    }
+
+    private int profitsPerRanking(Ranking ranking) {
+        return countByRanking(ranking) * ranking.profit();
+    }
+
+    private int payment() {
+        return lottos.size() * Lotto.PRICE;
+    }
+
+    private double profitRateFormat(double result) {
+        return Math.floor(result * 100) / 100.0;
+    }
+
+    public boolean isLoss() {
+        return profitRate() < 1;
+    }
 }
