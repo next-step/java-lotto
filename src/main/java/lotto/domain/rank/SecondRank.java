@@ -15,19 +15,18 @@ public class SecondRank extends AbstractRank {
     }
 
     @Override
-    public int getRank() {
+    public int rank() {
         return RANK;
     }
 
     @Override
-    public int getScore() {
+    public int score() {
         return score + bonusScore;
     }
 
     @Override
     public void apply(WinningLotto winningLotto, Lotto lotto) {
         compareNormalScore(winningLotto, lotto);
-        compareBonusScore(winningLotto, lotto);
     }
 
     private void compareBonusScore(WinningLotto winningLotto, Lotto lotto) {
@@ -39,6 +38,7 @@ public class SecondRank extends AbstractRank {
     private void compareNormalScore(WinningLotto winningLotto, Lotto lotto) {
         if (RANK == winningLotto.compare(lotto)) {
             score += 1;
+            compareBonusScore(winningLotto, lotto);
         }
     }
 
