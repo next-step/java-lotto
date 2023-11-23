@@ -13,12 +13,16 @@ public class Application {
     public static void main(String[] args) {
         Reader reader = new ConsoleReader();
         Printer printer = new ConsolePrinter();
-        InputView inputView = InputView.of(reader, printer);
 
-        OutputFomatter outputFomatter = new OutputFomatter();
-        OutputView outputView = new OutputView(printer, outputFomatter);
+        InputView inputView = InputView.of(reader, printer);
+        OutputView outputView = setOutputView(printer);
 
         LottoController lottoController = new LottoController(inputView, outputView);
         lottoController.run();
+    }
+
+    private static OutputView setOutputView(Printer printer) {
+        OutputFomatter outputFomatter = new OutputFomatter();
+        return new OutputView(printer, outputFomatter);
     }
 }

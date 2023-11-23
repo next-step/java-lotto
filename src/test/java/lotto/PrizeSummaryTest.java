@@ -10,20 +10,8 @@ import lotto.domain.Prize;
 import lotto.domain.PrizeSummary;
 import org.junit.jupiter.api.Test;
 
-public class PrizeTest {
+public class PrizeSummaryTest {
     Lotto winningLotto = Lotto.from(List.of(1, 2, 3, 4, 5, 6));
-
-    @Test
-    void determinePrize() {
-        // given
-        Lotto lotto = Lotto.from(List.of(1, 2, 3, 4, 40, 41));
-
-        // when
-        Prize prize = lotto.determinePrize(winningLotto);
-
-        // then
-        assertThat(prize).isEqualTo(Prize.FOUR_MATCHING);
-    }
 
     @Test
     void prizeSummary() {

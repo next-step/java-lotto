@@ -1,11 +1,16 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
-    public static final int MIN_LOTTO_NUMBER = 1;
-    public static final int MAX_LOTTO_NUMBER = 45;
+    private static final List<LottoNumber> LOTTO_NUMBERS = initializeLottoNumbers();
 
+    public static final int MIN_LOTTO_NUMBER = 1;
+
+    public static final int MAX_LOTTO_NUMBER = 45;
     private final int lottoNumber;
 
     private LottoNumber(int lottoNumber) {
@@ -14,7 +19,13 @@ public class LottoNumber {
 
     public static LottoNumber from(int lottoNumber) {
         validateRange(lottoNumber);
-        return new LottoNumber(lottoNumber);
+        return LOTTO_NUMBERS.get(lottoNumber - 1);
+    }
+
+    private static List<LottoNumber> initializeLottoNumbers() {
+        return IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private static void validateRange(int lottoNumber) {

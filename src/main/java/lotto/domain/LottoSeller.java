@@ -41,8 +41,8 @@ public class LottoSeller implements Seller {
         Set<Integer> lottoNumbers = new HashSet<>();
         boolean isValidLotto = true;
 
-        while (isValidLotto && isWithinLottoCountLimit(lottoNumbers)) {
-            isValidLotto = lottoNumbers.add(random.nextInt(LottoNumber.MAX_LOTTO_NUMBER) + 1);
+        while (isWithinLottoCountLimit(lottoNumbers)) {
+            lottoNumbers.add(random.nextInt(LottoNumber.MAX_LOTTO_NUMBER) + 1);
         }
         return lottoNumbers;
     }

@@ -1,10 +1,10 @@
 package lotto.domain;
 
 public enum Prize {
-    THREE_MATCHING(3, 5000),
-    FOUR_MATCHING(4, 50000),
-    FIVE_MATCHING(5, 1500000),
-    SIX_MATCHING(6, 2000000000),
+    THREE_MATCHING(3, 5_000),
+    FOUR_MATCHING(4, 50_000),
+    FIVE_MATCHING(5, 1_500_000),
+    SIX_MATCHING(6, 2_000_000_000),
     NOTHING(0, 0),
     ;
 
