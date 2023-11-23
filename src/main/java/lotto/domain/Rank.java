@@ -5,8 +5,9 @@ import java.util.Arrays;
 public enum Rank {
 	FIRST(6, 1_000_000_000),
 	SECOND(5, 40_000_000),
-	THIRD(4, 2_000_000),
-	FOURTH(3, 50_000),
+	THIRD(5, 2_000_000),
+	FOURTH(4, 50_000),
+	FIFTH(3, 50_00),
 	NOT(0, 0);
 
 	private final int matchCount;
@@ -17,7 +18,11 @@ public enum Rank {
 		this.amount = amount;
 	}
 
-	public static Rank matchRank(int num) {
+	public static Rank matchRank(int num, boolean isMatchBonusNum) {
+		if (num == 5) {
+			return isMatchBonusNum ? Rank.SECOND : Rank.THIRD;
+		}
+
 		return Arrays.stream(Rank.values())
 			.filter(r -> r.equalNum(num))
 			.findAny()
