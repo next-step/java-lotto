@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.strategy.LottoGenerator;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,6 +22,10 @@ public class Lotto {
 
     public Lotto(LottoGenerator lottoGenerator) {
         this(lottoGenerator.generate(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, LOTTO_NUMBER_COUNT));
+    }
+
+    public Lotto(Integer... numbers) {
+        this(Arrays.asList(numbers));
     }
 
     private void validate() {

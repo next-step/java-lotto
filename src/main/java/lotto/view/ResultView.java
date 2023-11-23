@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoBundle;
 import lotto.domain.LottoResult;
 import lotto.util.ProfitCalculator;
 
@@ -9,11 +10,12 @@ import java.util.Map;
 
 public class ResultView {
 
-    public static void printPurchaseInfo(int lottoCount) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottoCount));
+    public void printPurchaseInfo(LottoBundle lottoBundle) {
+        System.out.println(String.format("%d개를 구매했습니다.", lottoBundle.lottoCount()));
+        printLottoNumbers(lottoBundle.lottoList());
     }
 
-    public void printLottoNumbers(List<Lotto> lottoList) {
+    private void printLottoNumbers(List<Lotto> lottoList) {
         for (Lotto lotto : lottoList) {
             System.out.println(lotto.numbers().toString());
         }
