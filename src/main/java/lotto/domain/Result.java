@@ -5,12 +5,16 @@ import java.util.List;
 import java.util.Map;
 
 public class Result {
-	private final EnumMap<Rank, Integer> result = new EnumMap<>(Rank.class);
+	private EnumMap<Rank, Integer> result = new EnumMap<>(Rank.class);
 
 	public Result() {
 		for (Rank rank : Rank.values()) {
 			result.put(rank, 0);
 		}
+	}
+
+	public Result(EnumMap<Rank, Integer> result) {
+		this.result = result;
 	}
 
 	public EnumMap<Rank, Integer> aggregateResult(List<Rank> ranks) {
