@@ -8,10 +8,8 @@ public class WinningCondition {
     private final Lotto lotto;
     private final LottoNumber bonusBall;
 
-    public WinningCondition(Lotto lotto, int bonusNumber) {
+    public WinningCondition(Lotto lotto, LottoNumber bonusBall) {
         this.lotto = lotto;
-
-        LottoNumber bonusBall = LottoNumber.of(bonusNumber);
 
         if (lotto.hasLottoNumber(bonusBall)) {
             throw new IllegalArgumentException("지난 주 당첨 번호와 동일합니다.");

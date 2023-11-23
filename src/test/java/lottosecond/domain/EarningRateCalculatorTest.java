@@ -1,6 +1,7 @@
 package lottosecond.domain;
 
 import lottosecond.domain.lotto.Lotto;
+import lottosecond.domain.lotto.LottoNumber;
 import lottosecond.domain.lotto.Lottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,12 +21,12 @@ class EarningRateCalculatorTest {
         Lotto lotto3 = new Lotto(List.of(13, 14, 15, 16, 17, 18));
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3));
 
-        WinningCondition winningCondition = new WinningCondition(new Lotto(List.of(4, 5, 6, 7, 8, 9)), 40);
+        WinningCondition winningCondition = new WinningCondition(new Lotto(List.of(4, 5, 6, 7, 8, 9)), LottoNumber.of(40));
 
         WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningCondition);
         EarningRateCalculator earningRateCalculator = new EarningRateCalculator();
         // when
-        double earningRate = earningRateCalculator.calculateEarningRate(winnerBoard, lottos);
+        double earningRate = earningRateCalculator.calculateEarningRate(winnerBoard, new Money(3000));
         // then
         assertThat(earningRate).isEqualTo(3.33);
     }
@@ -39,12 +40,12 @@ class EarningRateCalculatorTest {
         Lotto lotto3 = new Lotto(List.of(13, 14, 15, 16, 17, 18));
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3));
 
-        WinningCondition winningCondition = new WinningCondition(new Lotto(List.of(21, 22, 23, 24, 25, 26)), 40);
+        WinningCondition winningCondition = new WinningCondition(new Lotto(List.of(21, 22, 23, 24, 25, 26)), LottoNumber.of(40));
 
         WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningCondition);
         EarningRateCalculator earningRateCalculator = new EarningRateCalculator();
         // when
-        double earningRate = earningRateCalculator.calculateEarningRate(winnerBoard, lottos);
+        double earningRate = earningRateCalculator.calculateEarningRate(winnerBoard, new Money(3000));
         // then
         assertThat(earningRate).isEqualTo(0);
     }

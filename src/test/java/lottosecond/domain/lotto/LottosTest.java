@@ -1,9 +1,12 @@
 package lottosecond.domain.lotto;
 
+import lottosecond.domain.Money;
 import lottosecond.domain.Winner;
 import lottosecond.domain.WinnerBoard;
 import lottosecond.domain.WinningCondition;
-import lottosecond.testutil.TestShuffler;
+import lottosecond.domain.lottomaker.AutoLottoMaker;
+import lottosecond.domain.lottomaker.TestLottoNumberGenerator;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,12 +16,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
 
+    private AutoLottoMaker lottoMaker;
+    private TotalLottoCount lottoCount;
+
+    @BeforeEach
+    void setUp() {
+        lottoCount = new TotalLottoCount(new Money(1000), 0);
+        lottoMaker = new AutoLottoMaker(new TestLottoNumberGenerator());
+    }
+
     @DisplayName("추가 로또 번호도 확인해야 합니다.")
     @Test
     void bonusNumber() {
         // given
-        Lottos lottos = LottosMaker.makeLottoList(new TestShuffler(), 1000);
-        WinningCondition winningCondition = new WinningCondition(new Lotto(List.of(1, 2, 3, 4, 5, 9)), 6);
+        Lottos lottos = lottoMaker.makeLottos(LottoCount.from(1, 1));
+        WinningCondition winningCondition = new WinningCondition(new Lotto(List.of(1, 2, 3, 4, 5, 9)), LottoNumber.of(6));
         // when
         WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningCondition);
         // then
@@ -30,8 +42,8 @@ class LottosTest {
     @DisplayName("일치하는 당첨 로또들을 일치 수에 맞도록 winnerBoard 에 추가합니다.")
     void checkLotto() {
         // given
-        Lottos lottos = LottosMaker.makeLottoList(new TestShuffler(), 1000);
-        WinningCondition winningCondition = new WinningCondition(new Lotto(List.of(1, 2, 3, 7, 8, 9)), 4);
+        Lottos lottos = lottoMaker.makeLottos(LottoCount.from(1, 1));
+        WinningCondition winningCondition = new WinningCondition(new Lotto(List.of(1, 2, 3, 7, 8, 9)), LottoNumber.of(4));
         // when
         WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningCondition);
         // then
@@ -42,8 +54,8 @@ class LottosTest {
     @DisplayName("우승 로또가 없다면 winnerBoard 의 우승 로또 수는 모두 0이 됩니다.")
     void zeroWinningLotto() {
         // given
-        Lottos lottos = LottosMaker.makeLottoList(new TestShuffler(), 1000);
-        WinningCondition winningCondition = new WinningCondition(new Lotto(List.of(11, 12, 13, 14, 15, 16)), 4);
+        Lottos lottos = lottoMaker.makeLottos(LottoCount.from(1, 1));
+        WinningCondition winningCondition = new WinningCondition(new Lotto(List.of(11, 12, 13, 14, 15, 16)), LottoNumber.of(4));
         WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningCondition);
         // then
         assertThat(winnerBoard).isEqualTo(new WinnerBoard(List.of()));
@@ -61,7 +73,7 @@ class LottosTest {
 
         Lotto targetLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
-        WinningCondition winningCondition = new WinningCondition(targetLotto, 7);
+        WinningCondition winningCondition = new WinningCondition(targetLotto, LottoNumber.of(7));
         // when
         WinnerBoard winnerBoard = lottos.checkWinnerLotto(winningCondition);
         // then

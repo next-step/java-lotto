@@ -4,18 +4,25 @@ import lottosecond.domain.Winner;
 import lottosecond.domain.WinnerBoard;
 import lottosecond.domain.WinningCondition;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lottos {
-
-    public static final int EACH_LOTTO_PRICE = 1000;
 
     private final List<Lotto> lottoList;
 
     public Lottos(List<Lotto> lottoList) {
         this.lottoList = lottoList;
+    }
+
+    public static Lottos makeTotalLottos(Lottos manualLottos, Lottos autoLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(manualLottos.lottoList);
+        lottos.addAll(autoLottos.lottoList);
+        return new Lottos(lottos);
     }
 
     public WinnerBoard checkWinnerLotto(WinningCondition winningCondition) {
@@ -32,15 +39,20 @@ public class Lottos {
         return new WinnerBoard(winners);
     }
 
-    public int totalLottoBuyMoney() {
-        return lottoList.size() * EACH_LOTTO_PRICE;
-    }
-
-    public int getLottoCount() {
-        return lottoList.size();
-    }
-
     public List<Lotto> getLottoList() {
         return lottoList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lottos lottos = (Lottos) o;
+        return Objects.equals(lottoList, lottos.lottoList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoList);
     }
 }
