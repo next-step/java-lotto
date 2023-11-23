@@ -2,19 +2,21 @@ package stringcalculator.model;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.regex.Pattern;
 
-public class Operand {
+public class Operands {
     public static final String OPERAND_REGEX = "\\d+";
+    public static final Pattern OPERAND_PATTERN = Pattern.compile(OPERAND_REGEX);
     private final Queue<Integer> operand = new LinkedList<>();
 
-    public Operand(String[] textArr) {
+    public Operands(String[] textArr) {
         for (String text : textArr) {
             addOperand(text);
         }
     }
 
     private void addOperand(String text) {
-        if (text.matches(OPERAND_REGEX)) {
+        if (OPERAND_PATTERN.matcher(text).matches()) {
             this.operand.add(Integer.parseInt(text));
         }
     }
