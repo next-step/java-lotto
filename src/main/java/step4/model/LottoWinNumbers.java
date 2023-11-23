@@ -1,8 +1,8 @@
 package step4.model;
 
-import java.util.Arrays;
+import step4.utils.NumberSplitUtils;
+
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoWinNumbers {
 
@@ -10,7 +10,7 @@ public class LottoWinNumbers {
     private final List<Integer> winNumbers;
 
     public LottoWinNumbers(String winNumber) {
-        List<Integer> winNumbers = splitWinNumberString(winNumber);
+        List<Integer> winNumbers = NumberSplitUtils.splitWinNumberString(winNumber);
         validate(winNumbers.size());
         this.winNumbers = winNumbers;
     }
@@ -23,12 +23,5 @@ public class LottoWinNumbers {
         if (number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또 숫자가 아닙니다.");
         }
-    }
-
-    private List<Integer> splitWinNumberString(String winnerNumbers) {
-        return Arrays.stream(winnerNumbers.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-
     }
 }
