@@ -7,31 +7,21 @@ import java.util.stream.IntStream;
 
 public class LottoNumbers {
 
-    private List<Integer> lottoNumbers;
+    private List<Integer> numbers;
+
+    public LottoNumbers(int ... numbers) {
+        this.numbers = IntStream.of(numbers).boxed().collect(Collectors.toList());
+    }
 
     public LottoNumbers(int minLottoNumber, int maxLottoNumber) {
         List<Integer> shuffledNumbers = IntStream.rangeClosed(minLottoNumber, maxLottoNumber).boxed().collect(Collectors.toList());
         Collections.shuffle(shuffledNumbers);
-        this.lottoNumbers = shuffledNumbers.subList(0, 6);
-        Collections.sort(this.lottoNumbers);
+        this.numbers = shuffledNumbers.subList(0, 6);
+        Collections.sort(this.numbers);
     }
 
-    public List<Integer> getLottoNumbers() {
-        return this.lottoNumbers;
+    public List<Integer> getNumbers() {
+        return this.numbers;
     }
 
-    public int matchCount(List<Integer> lastWeekLottoNumbers) {
-        int matchCount = 0;
-        for (int i = 0; i < lastWeekLottoNumbers.size(); i++) {
-            matchCount = calculateMatchCount(lastWeekLottoNumbers, i, matchCount);
-        }
-        return matchCount;
-    }
-
-    private int calculateMatchCount(List<Integer> lastWeekLottoNumbers, int idx, int matchCount) {
-        if (lottoNumbers.contains(lastWeekLottoNumbers.get(idx))) {
-            matchCount++;
-        }
-        return matchCount;
-    }
 }
