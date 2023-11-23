@@ -4,11 +4,12 @@ import java.util.List;
 
 import study.step3.domain.Lotto;
 import study.step3.domain.Rank;
+import study.step3.domain.dto.LottoCount;
 
 public class ResultView {
 
-    public static void show(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    public static void show(LottoCount manualLottoCount, LottoCount autoLottoCount) {
+        System.out.println(String.format("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottoCount.count(), autoLottoCount.count()));
     }
 
     public static void show(List<Lotto> lottos) {

@@ -22,11 +22,9 @@ public class Result {
     }
 
     public int totalWiningAmount() {
-        int sum = 0;
-        for (Rank rank: map.keySet()) {
-            sum += (rank.amount() * map.get(rank).size());
-        }
-        return sum;
+        return map.keySet().stream()
+            .map(rank -> rank.amount() * map.get(rank).size())
+            .reduce(0, Integer::sum);
     }
 
     public double toRevenue(int winingAmount, int purchaseAmount) {

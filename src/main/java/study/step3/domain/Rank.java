@@ -22,7 +22,7 @@ public enum Rank {
         this.message = message;
     }
 
-    public static Rank valueOf(Integer hitCount, boolean isBonus) {
+    public static Rank valueOf(int hitCount, boolean isBonus) {
         return Arrays.stream(values())
             .map(rank -> rank.condition(hitCount, isBonus))
             .filter(Rank::isHit)

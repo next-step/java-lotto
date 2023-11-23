@@ -17,7 +17,7 @@ public class InputParser {
                 .boxed()
                 .collect(Collectors.toList());
         } catch (NumberFormatException e) {
-            throw new LottoException("당첨 번호는 숫자를 입력해야 합니다.");
+            throw new LottoException("로또 번호는 숫자를 입력해야 합니다.");
         }
     }
 }
