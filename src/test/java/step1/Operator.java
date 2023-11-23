@@ -1,5 +1,7 @@
 package step1;
 
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.function.BiFunction;
 
 public enum Operator {
@@ -21,6 +23,12 @@ public enum Operator {
 
     public Integer calculate(Integer a, Integer b) {
         return operate.apply(a, b);
+    }
+
+    public static Operator of(final String symbol) {
+        return Arrays.stream(values()).filter(a -> Objects.equals(a.symbol, symbol))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
 }
