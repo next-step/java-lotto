@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -17,5 +18,18 @@ public class RankTest {
 
         // then
         assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("등수 당 총 당첨금을 계산한다.")
+    void calculate_total_prize_per_rank() {
+        // given
+        Rank rank = Rank.SECOND;
+
+        // when
+        long result = rank.calculateTotalPrizePerRank(3);
+
+        // then
+        assertThat(result).isEqualTo(4500000);
     }
 }

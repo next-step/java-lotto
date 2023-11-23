@@ -23,4 +23,8 @@ public enum Rank {
         }
         return NOTHING;
     }
+
+    public long calculateTotalPrizePerRank(long rankCnt) {
+        return this.prizeMoney * rankCnt;
+    }
 }
