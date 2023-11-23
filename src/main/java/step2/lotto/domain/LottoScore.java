@@ -35,7 +35,6 @@ public class LottoScore {
         });
     }
 
-
     public double calculateProfitRatio(final LottoPurchase purchaseInfo) {
         return calculateTotalPrizeAmount() / purchaseInfo.getLottoPurchaseMoney();
     }
