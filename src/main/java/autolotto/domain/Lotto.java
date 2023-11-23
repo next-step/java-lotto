@@ -43,4 +43,7 @@ public class Lotto {
             throw new IllegalArgumentException("로또번호 중 중복된 숫자가 존재합니다. 다시 입력해 주세요.");
         }
     }
+    public boolean containsBonusNumber(LottoNo bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
 }

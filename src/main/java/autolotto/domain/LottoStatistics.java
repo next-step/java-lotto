@@ -19,7 +19,7 @@ public class LottoStatistics {
         Map<Rank, Integer> rankCount = new HashMap<>();
 
         for (Lotto ticket : lottoTickets) {
-            boolean hasBonusNumber = ticket.lottoNumbers().contains(winLotto.getBonusNumber());
+            boolean hasBonusNumber = ticket.containsBonusNumber(winLotto.getBonusNumber());
             Rank rank = Rank.of(ticket.matchCount(ticket, winLotto.getLastWeekWinNumber()), hasBonusNumber);
             rankCount.put(rank, rankCount.getOrDefault(rank, 0) + 1);
         }

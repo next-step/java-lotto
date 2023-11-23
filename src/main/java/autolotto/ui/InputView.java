@@ -1,12 +1,10 @@
 package autolotto.ui;
 
-import autolotto.domain.Lotto;
-import autolotto.domain.LottoNo;
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class InputView {
 
@@ -38,43 +36,41 @@ public class InputView {
 
     private static void checkDuplicateNumber(List<Integer> winningNumbers) {
         Set<Integer> uniqueNumber = winningNumbers.stream().collect(Collectors.toSet());
-        if(winningNumbers.size() != uniqueNumber.size()){
+        if (winningNumbers.size() != uniqueNumber.size()) {
             throw new IllegalArgumentException("당첨번호 중 중복된 숫자가 존재합니다. 다시 입력해 주세요.");
         }
     }
 
-    public static LottoNo bonusNumber() {
+    public static int bonusNumber() {
         System.out.println("\n보너스 볼을 입력해 주세요.");
-        return new LottoNo(Integer.parseInt(checkNllOrBlank(scanner.nextLine())));
+        return Integer.parseInt(checkNllOrBlank(scanner.nextLine()));
     }
 
-    public static List<Lotto> manualLotto() {
-        int manualLottoCount = getManualLottoCount();
-        if(manualLottoCount == 0){
-            return null;
+    public static int manualLottoCount(int ticketsCount) {
+        int manualLottoCount = inputManualLottoCount();
+        if (manualLottoCount > ticketsCount) {
+            throw new IllegalArgumentException("구매한 금액보다 많은 수를 입력하였습니다.");
         }
-        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-        return Stream.generate(() -> new Lotto(inputNumbers()))
-                .limit(manualLottoCount)
-                .collect(Collectors.toList());
+        if (manualLottoCount > 0) {
+            printInputMessage();
+        }
+        return manualLottoCount;
     }
 
-    private static int getManualLottoCount() {
+    private static int inputManualLottoCount() {
         System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
         int manualLottoCount = Integer.parseInt(checkNllOrBlank(scanner.nextLine()));
         return manualLottoCount;
     }
 
-    private static List<Lotto> manual(int manualLottoCount) {
-        return IntStream.range(0, manualLottoCount)
-                .mapToObj(i -> new Lotto(inputNumbers()))
-                .collect(Collectors.toList());
-    }
-
-    private static List<Integer> inputNumbers() {
+    public static List<Integer> inputNumbers() {
         return Arrays.stream(checkNllOrBlank(scanner.nextLine()).split(SPLIT_PATTERN))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    private static void printInputMessage() {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
     }
 }

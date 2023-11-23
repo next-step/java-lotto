@@ -49,3 +49,9 @@
 - 예외 처리를 통해 에러가 발생하지 않도록 한다.
     * [x] 사용자가 잘못된 값을 입력했을 때 java exception으로 에러 처리를 한다.
     * [x] java8에 추가된 Optional을 적용해 NullPointerException이 발생하지 않도록 한다.
+# feedback ^^
+* [x] WinLotto 중복번호 확인 Lotto 객체에 메시지를 보내서 처리하도록 수정
+* [x] 주석 및 불필요한 소스 정리
+* [x] inputview 에 Lotto 객체 생성을 하지 않고 분리!!( controller를 통해 ui와 domain 접근. ui 에서 직접 domain 접근하지 않는다.)
+* [x] 로또발급을 여기저기서 하고 있었다.. ㅠㅠ 자동/수동 발급은 LottoGame 에서 한다.
+* [x] 테스트코드 추가 작성
