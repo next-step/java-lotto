@@ -7,7 +7,6 @@ import java.util.Arrays;
 import lotto.domain.Lotto;
 import lotto.domain.LottoWallet;
 import lotto.domain.Prize;
-import lotto.domain.StatisticsReport;
 
 public class ResultView {
 
@@ -39,30 +38,15 @@ public class ResultView {
         return stringBuilder.toString();
     }
 
-    public void resultOut() {
-        StringBuilder stringBuilder = new StringBuilder();
-        Arrays.stream(Prize.values()).forEach(prize -> {
+    public void resultOut(Prize[] prizes) {
+        Arrays.stream(prizes).forEach(prize -> {
             if(prizeRankOver3Under6(prize)){
-                createStringBuilderWithPrize(prize, stringBuilder);
+                sout.print(prize.rank().toString());
             }
         });
-        stringBuilder.append("5개 일치, 보너스 볼 일치");
-        stringBuilder.append(" (").append(Prize.BONUS.price()).append(")-");
-        stringBuilder.append(Prize.BONUS.rank().getRank()).append("개 \n");
-
-        createStringBuilderWithPrize(Prize.FIRST, stringBuilder);
-        sout.print(stringBuilder.toString());
     }
-
-    private static void createStringBuilderWithPrize(Prize prize, StringBuilder stringBuilder) {
-        stringBuilder.append(prize.rank().toString());
-        stringBuilder.append("개 일치");
-        stringBuilder.append(" (").append(prize.price()).append(")-");
-        stringBuilder.append(prize.rank().getScore()).append("개 \n");
-    }
-
     private static boolean prizeRankOver3Under6(Prize prize) {
-        return 3 <= prize.rank().getRank();
+        return 3 <= prize.rank().getRank() && prize.rank().getRank() <= 6;
     }
 
     public void out(BigDecimal rate) {
