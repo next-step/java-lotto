@@ -58,4 +58,18 @@ public class LottoTest {
         // then
         assertThat(lotto).isEqualTo(new Lotto(1, 2, 3, 4, 5, 6));
     }
+
+    @Test
+    @DisplayName("당첨 로또와 자신의 로또를 비교해 몇개가 일치하는지 알려준다.")
+    void compare_lotto_with_winner_lotto() {
+        // given
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+        Lotto winnerLotto = new Lotto(1, 4, 13, 16, 29, 40);
+
+        // when
+        int result = lotto.countOfMatch(winnerLotto);
+
+        // then
+        assertThat(result).isEqualTo(2);
+    }
 }
