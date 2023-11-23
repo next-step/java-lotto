@@ -17,10 +17,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = valueNumber;
     }
 
-    public boolean belongs(List<LottoNumber> values) {
-        return values.contains(new LottoNumber(this.number));
-    }
-
     private void numberRangeCheck(int value) {
         if (value < Lotto.START_NUMBER || value > Lotto.END_NUMBER) {
             throw new IllegalArgumentException("숫자 범위를 벗어납니다. 숫자범위 : 1~45");

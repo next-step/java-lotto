@@ -50,9 +50,9 @@ public class Lotto {
 
     public WinningInfoDTO winningInfo(WinningLottoDTO winningLottoDTO) {
         Lotto winningLotto = winningLottoDTO.getWinningLotto();
-        LottoNumber lottoNumber = winningLottoDTO.getBonus();
+        LottoNumber bonusNumber = winningLottoDTO.getBonus();
         int correctCount = winningLotto.correctCount(numbers);
-        boolean bonusCorrect = lottoNumber.belongs(numbers);
+        boolean bonusCorrect = this.numbers.contains(bonusNumber);
         return new WinningInfoDTO(correctCount, bonusCorrect, new Amount(Winning.winningAmount(correctCount, bonusCorrect)));
     }
 
