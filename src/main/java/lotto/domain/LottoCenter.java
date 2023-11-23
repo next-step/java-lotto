@@ -7,11 +7,9 @@ import static lotto.domain.Rank.*;
 
 public class LottoCenter {
 
-    public static final int PRICE = 1000;
-
-    private static int cash;
+    private static Cash cash;
     private WinningLotto winningLotto;
-    private List<Rank> result;
+    private Result result;
 
     public LottoCenter() {
     }
@@ -20,24 +18,44 @@ public class LottoCenter {
         this.winningLotto = winningLotto;
     }
 
-    public List<Lotto> buyLotto(int cash) {
+    public List<Lotto> manualBuyLotto(Cash cash, List<Lotto> manualLottos) {
         LottoCenter.cash = cash;
-        return generateTicket(cash);
+        if (manualLottos == null || manualLottos.isEmpty()) {
+            return generateTicket(cash);
+        }
+
+        Cash autoCash = cash.autoBuyCash(manualLottos);
+        if (autoCash == null) {
+            return manualLottos;
+        }
+
+        List<Lotto> lottos = generateTicket(autoCash);
+        manualLottos.addAll(lottos);
+        return manualLottos;
     }
 
-    private List<Lotto> generateTicket(int cash) {
+    public void manualBuyValidCheck(Cash cash, int manualCount) {
+        if (manualCount > cash.count()) {
+            throw new IllegalArgumentException("구입 가능 금액을 초과합니다.");
+        }
+        if (manualCount < 0) {
+            throw new IllegalArgumentException("0 이상의 숫자를 입력하세요.");
+        }
+    }
+
+    private List<Lotto> generateTicket(Cash cash) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < cash / PRICE; i++) {
+        for (int i = 0; i < cash.count(); i++) {
             Lotto lotto = new Lotto();
             lottos.add(lotto);
         }
         return lottos;
     }
 
-    public List<Rank> matchWinningNumbers(List<Lotto> lottos) {
-        List<Rank> checkedResult = new ArrayList<>();
+    public Result matchWinningNumbers(List<Lotto> lottos) {
+        Result checkedResult = new Result();
         for (Lotto lotto : lottos) {
-            checkedResult.add(winningLotto.matchRank(lotto));
+            checkedResult.put(winningLotto.matchRank(lotto));
         }
         this.result = checkedResult;
         return this.result;
@@ -46,7 +64,7 @@ public class LottoCenter {
     public List<Integer> checkWinningResult() {
         List<Integer> statistic = new ArrayList<>();
         for (Rank value : values()) {
-            int count = (int) result.stream().filter(n -> n.equals(value)).count();
+            int count = result.countRank(value);
             statistic.add(count);
         }
         return statistic;
@@ -55,9 +73,9 @@ public class LottoCenter {
     public float checkWinningRate() {
         int sum = 0;
         for (Rank value : values()) {
-            int count = (int) result.stream().filter(n -> n.equals(value)).count();
+            int count = result.countRank(value);
             sum = sum + count * value.getWinningMoney();
         }
-        return (float) sum / cash;
+        return cash.winningRate(sum);
     }
 }
