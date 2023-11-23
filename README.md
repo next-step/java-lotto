@@ -9,8 +9,6 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ### 로또 TODO
-- [ ] Lotto 테스트: 지난주 당첨번호와 비교하여 등수 계산
-- [ ] Lotto 테스트: 로또 번호 정렬
 
 ### 로또 DONE
 - [X] 일치 갯수 별 상금 지정 기능 (3개 일치 5000원, 4개 일치 50000원, 5개 일치 1500000원, 6개 일치 2000000000원)
@@ -28,6 +26,11 @@
 - [X] static function부분을 객체간 메세징으로 개선해보기
 - [X] RateOfReturn 테스트: 수익률 계산
 - [X] LottoSimulator 테스트: 금액별 로또 구매
+- [X] Lotto: 로또 번호 수동 생성 (지난주 당첨로또, 1~45만 입력 가능 - validation) 
+- [X] Lotto 테스트: 로또 번호 정렬
+- [X] Lotto: 로또 번호 수동 생성 시 중복값 체크 
+- [X] Lotto 테스트: 중복값 체크
+- [X] Lotto 테스트: 로또와 비교하여 일치하는 갯수 계산
 
 
 ### 문자열 계산기 DONE
