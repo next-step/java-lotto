@@ -5,6 +5,7 @@ import lotto.enums.Rank;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class Tickets {
     private List<Ticket> tickets = new ArrayList<>();
@@ -27,11 +28,24 @@ public class Tickets {
         return countPerPrize;
     }
 
+    public long calcWinningAmount(Numbers winningNumbers) {
+        long totalAmount = 0;
+        for (Map.Entry<Rank, Integer> entry : this.makeStatistics(winningNumbers).entrySet()) {
+            totalAmount += entry.getKey().getPrizeAmount() * entry.getValue();
+        }
+        return totalAmount;
+    }
+
+
+    public double calcRateOfReturn(Numbers winningNumbers) {
+        return (double) this.calcWinningAmount(winningNumbers) / (this.ticketCount() * 1000L);
+    }
+
     public void addTicket(Ticket ticket) {
         this.tickets.add(ticket);
     }
 
-    public int ticketCount() {
+    private int ticketCount() {
         return tickets.size();
     }
 
