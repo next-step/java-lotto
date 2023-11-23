@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 public class Numbers {
     private static final int COUNT = 6;
     public static final String DELIMITER = ",";
-    public static final String REGEX = "^[0-9,\\s]+$";
+    public static final String NUMBER_COMMA_BLANK_ONLY = "^[0-9,\\s]+$";
     private static final List<Number> rangeNumbers = IntStream.rangeClosed(Number.MIN_NUMBER, Number.MAX_NUMBER).boxed().map(Number::new).collect(Collectors.toList());
 
     private List<Number> numbers;
@@ -48,7 +48,7 @@ public class Numbers {
     }
 
     private void validateValue(String input) {
-        if (!input.matches(REGEX)) {
+        if (!input.matches(NUMBER_COMMA_BLANK_ONLY)) {
             throw new IllegalArgumentException("유효하지 않은 입력값입니다.");
         }
     }
