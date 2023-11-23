@@ -1,15 +1,16 @@
 package calculator;
 
-import calculator.operator.Operator;
+import calculator.operator.OperatorRepository;
+import calculator.operator.OperatorStrategy;
 
 public class Calculator {
 
     public static final String INPUT_TEXT_EXCEPTION = "문자열이 빈 값이거나, 공백만 존재합니다.";
 
-    private final OperationRepository operationRepository;
+    private final OperatorRepository operatorRepository;
 
-    public Calculator(OperationRepository operationRepository) {
-        this.operationRepository = operationRepository;
+    public Calculator(OperatorRepository operatorRepository) {
+        this.operatorRepository = operatorRepository;
     }
 
     public long calculate(String text) {
@@ -40,7 +41,7 @@ public class Calculator {
         return findOperation(textOperator).calculate(sum, operand);
     }
 
-    private Operator findOperation(String textOperator) {
-        return operationRepository.findOperation(textOperator);
+    private OperatorStrategy findOperation(String textOperator) {
+        return operatorRepository.findOperation(textOperator);
     }
 }
