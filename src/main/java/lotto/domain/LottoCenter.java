@@ -55,7 +55,7 @@ public class LottoCenter {
     public Result matchWinningNumbers(List<Lotto> lottos) {
         Result checkedResult = new Result();
         for (Lotto lotto : lottos) {
-            checkedResult.add(winningLotto.matchRank(lotto));
+            checkedResult.put(winningLotto.matchRank(lotto));
         }
         this.result = checkedResult;
         return this.result;

@@ -1,20 +1,23 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class Result {
 
-    private final List<Rank> result = new ArrayList<>();
+    private final Map<Rank, Integer> result = new EnumMap<>(Rank.class);
 
     public Result() {
+        for (Rank value : Rank.values()) {
+            result.put(value, 0);
+        }
     }
 
-    public void add(Rank rank) {
-        result.add(rank);
+    public void put(Rank rank) {
+        result.put(rank, result.get(rank) + 1);
     }
 
     public int countRank(Rank value) {
-        return (int) result.stream().filter(n -> n.equals(value)).count();
+        return result.get(value);
     }
 }

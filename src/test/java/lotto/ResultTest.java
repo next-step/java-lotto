@@ -11,7 +11,7 @@ class ResultTest {
     @Test
     void rankAddCount() {
         Result result = new Result();
-        result.add(Rank.FIFTH);
+        result.put(Rank.FIFTH);
 
         int fifthCount = result.countRank(Rank.FIFTH);
         int firstCount = result.countRank(Rank.FIRST);

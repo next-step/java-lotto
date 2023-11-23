@@ -42,18 +42,13 @@ public class Lotto {
         return selectedNumbers;
     }
 
-    private List<LottoNo> lottoNumber() {
-        return lottoNumber;
-    }
-
     public boolean contains(LottoNo lottoNo) {
         return lottoNumber.contains(lottoNo);
     }
 
-    public int matchCount(Lotto winningLotto) {
+    public int matchCount(Lotto lotto) {
         return (int) lottoNumber.stream()
-                .filter(n -> winningLotto.lottoNumber().stream()
-                        .anyMatch(Predicate.isEqual(n)))
+                .filter(lotto::contains)
                 .count();
     }
 
