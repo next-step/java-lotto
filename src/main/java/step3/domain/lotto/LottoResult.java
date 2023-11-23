@@ -1,20 +1,29 @@
 package step3.domain.lotto;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
 
-    private Map<Rank, Integer> rankMap;
+    private final Map<Rank, Integer> rankMap;
 
     public LottoResult() {
         this.rankMap = new LinkedHashMap<>();
-        for (Rank rank : Rank.values()) {
-            this.rankMap.put(rank, 0);
-        }
+        initLottoResult();
     }
 
-    public void increaseCount(Rank rank) {
+    public void initLottoResult() {
+        Arrays.stream(Rank.values()).forEach(rank -> this.rankMap.put(rank, 0));
+    }
+
+    public LottoResult(final List<Rank> rankList) {
+        this();
+        rankList.stream().forEach(rank -> increaseCount(rank));
+    }
+
+    public void increaseCount(final Rank rank) {
         Integer count = rankMap.getOrDefault(rank, 0);
         rankMap.put(rank, count + 1);
     }
