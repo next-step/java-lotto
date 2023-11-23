@@ -13,7 +13,7 @@ public class ThirdRank extends AbstractRank{
     }
 
     @Override
-    public int getRank() {
+    public int rank() {
         return RANK;
     }
 
@@ -26,6 +26,6 @@ public class ThirdRank extends AbstractRank{
 
     @Override
     public String toString() {
-        return String.format("%d개 일치 (%s)-%d개 \n", RANK, Prize.THIRD.price(), getScore());
+        return String.format("%d개 일치 (%s)-%d개 \n", RANK, Prize.THIRD.price(), score());
     }
 }

@@ -20,12 +20,12 @@ public class FourthRank extends AbstractRank{
     }
 
     @Override
-    public int getRank() {
+    public int rank() {
         return RANK;
     }
 
     @Override
     public String toString() {
-        return String.format("%d개 일치 (%s)-%d개 \n", RANK, Prize.FOURTH.price(), getScore());
+        return String.format("%d개 일치 (%s)-%d개 \n", RANK, Prize.FOURTH.price(), score());
     }
 }
