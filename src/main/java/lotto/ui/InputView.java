@@ -14,12 +14,17 @@ public class InputView {
 
     public static List<Integer> winningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String[] inputStrings = SCANNER.nextLine().split(", ");
+        String[] inputWinningLottos = SCANNER.nextLine().split(", ");
 
         ArrayList<Integer> nums = new ArrayList<>();
-        for (String inputString : inputStrings) {
-            nums.add(Integer.parseInt(inputString));
+        for (String inputWinningLotto : inputWinningLottos) {
+            nums.add(Integer.parseInt(inputWinningLotto));
         }
         return nums;
+    }
+
+    public static Integer bonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요.");
+        return Integer.parseInt(SCANNER.nextLine());
     }
 }

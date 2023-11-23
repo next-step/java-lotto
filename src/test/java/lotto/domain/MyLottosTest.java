@@ -36,12 +36,12 @@ class MyLottosTest {
     void 로또의_결과를_확인한다() {
         // given
         MyLottos myLottos = new MyLottos(List.of(lotto_123456, lotto_123457));
-        WinningLotto winningLotto = new WinningLotto(lotto_123456);
+        WinningLotto winningLotto = new WinningLotto(lotto_123456, 30);
 
         // when
         LottoResult lottoResult = myLottos.getLottoResult(winningLotto);
 
         // then
-        assertThat(lottoResult.getPrizeCount(LottoPrize.FirstPrizeMoney)).isEqualTo(1);
+        assertThat(lottoResult.getPrizeCount(LottoPrize.FIRST)).isEqualTo(1);
     }
 }

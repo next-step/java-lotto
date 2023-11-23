@@ -1,23 +1,36 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningLottoTest {
 
-    @Test
+    @ParameterizedTest(name = "정답로또:{0}, 보너스번호:{1} / 입력한로또: {2} / 등수 : {3}")
+    @CsvSource(value = {
+            "1|2|3|4|5|6, 7, 1|2|3|4|5|6, FIRST",
+            "1|2|3|4|5|6, 7, 1|2|3|4|5|7, SECOND",
+            "1|2|3|4|5|6, 7, 1|2|3|4|5|20, THIRD",
+            "1|2|3|4|5|6, 7, 1|2|3|4|20|21, FOURTH",
+            "1|2|3|4|5|6, 7, 1|2|3|19|20|21, FIFTH",
+            "1|2|3|4|5|6, 7, 1|2|18|19|20|21, MISS",
+    })
     @DisplayName("정답로또/로또와비교/등수반환")
-    void getPrize() {
+    void getPrize(String inputWinningLotto, int bonusNum, String inputLotto, LottoPrize lottoPrize) {
         // given
-        Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.of(
+                Stream.of(inputLotto.split("\\|")).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList()));
+
+        WinningLotto winningLotto = new WinningLotto(
+                Stream.of(inputWinningLotto.split("\\|")).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList())
+                , bonusNum);
 
         // when then
-        assertThat(winningLotto.getPrize(lotto)).isEqualTo(LottoPrize.FirstPrizeMoney);
+        assertThat(winningLotto.getPrize(lotto)).isEqualTo(lottoPrize);
     }
 }

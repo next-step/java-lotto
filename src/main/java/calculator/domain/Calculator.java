@@ -1,7 +1,6 @@
 package calculator.domain;
 
-import calculator.domain.operator.Operator;
-import calculator.domain.operator.OperatorFactory;
+import calculator.domain.operator.OperatorType;
 
 import java.util.List;
 
@@ -20,18 +19,14 @@ public class Calculator {
         point = START_POINT;
         while (point < elements.size()) {
             validateCalculate();
-            result = partialCalculate(result, getNextOperator(), getNextDigit());
+            result = OperatorType.of(getOperator()).calculate(result, getNextDigit().getNum());
             moveNextPoint();
         }
         return result;
     }
 
-    private int partialCalculate(int num1, Operator operator, Digit num2) {
-        return operator.apply(num1, num2.getNum());
-    }
-
-    private Operator getNextOperator() {
-        return OperatorFactory.of(elements.get(point));
+    private String getOperator() {
+        return elements.get(point);
     }
 
     private Digit getNextDigit() {

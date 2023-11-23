@@ -1,8 +1,7 @@
 package calculator.domain;
 
 
-import calculator.domain.operator.Operator;
-import calculator.domain.operator.OperatorFactory;
+import calculator.domain.operator.OperatorType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,14 +18,14 @@ public class OperatorTest {
     @ValueSource(strings = {"+", "-", "*", "/"})
     void createOperator(String operator) {
         // when then
-        assertThat(OperatorFactory.of(operator)).isInstanceOf(Operator.class);
+        assertThat(OperatorType.of(operator)).isInstanceOf(OperatorType.class);
     }
 
     @Test
     @DisplayName("연산자생성/연산기호가아닌것/IllegalArgumentException")
     void createOperatorFail() {
         // when then
-        assertThatIllegalArgumentException().isThrownBy(() -> OperatorFactory.of("0"));
+        assertThatIllegalArgumentException().isThrownBy(() -> OperatorType.of("0"));
     }
 
     @ParameterizedTest(name = "연산 / {0}{1}{2} / 결과:  {3}")
@@ -38,29 +37,29 @@ public class OperatorTest {
     })
     void operate(int num1, String inputOperator, int num2, int result) {
         // given
-        Operator operator = OperatorFactory.of(inputOperator);
+        OperatorType operatorType = OperatorType.of(inputOperator);
 
         // when then
-        assertThat(operator.apply(num1, num2)).isEqualTo(result);
+        assertThat(operatorType.calculate(num1, num2)).isEqualTo(result);
     }
 
     @Test
     @DisplayName("나눗셈/0으로 나누기/ArithmeticException")
     void divisionFail0() {
         // given
-        Operator operator = OperatorFactory.of("/");
+        OperatorType operatorType = OperatorType.of("/");
 
         // when then
-        assertThatThrownBy(() -> operator.apply(4, 0)).isInstanceOf(ArithmeticException.class);
+        assertThatThrownBy(() -> operatorType.calculate(4, 0)).isInstanceOf(ArithmeticException.class);
     }
 
     @Test
     @DisplayName("나눗셈/결과가 소수점/IllegalArgumentException")
     void divisionFailFloat() {
         // given
-        Operator operator = OperatorFactory.of("/");
+        OperatorType operatorType = OperatorType.of("/");
 
         // when then
-        assertThatIllegalArgumentException().isThrownBy(() -> operator.apply(4, 3));
+        assertThatIllegalArgumentException().isThrownBy(() -> operatorType.calculate(4, 3));
     }
 }
