@@ -7,7 +7,6 @@ import java.util.Arrays;
 public class StatisticsReport {
 
     private final LottoWallet lottoWallet;
-    private static final int ONE_SCORE = 1;
 
     private StatisticsReport(LottoWallet lottoWallet) {
         this.lottoWallet = lottoWallet;
@@ -19,23 +18,12 @@ public class StatisticsReport {
 
     public StatisticsReport report(WinningLotto winningLotto) {
         lottoNumberJudge(winningLotto);
-        bonusNumberJudge(winningLotto);
         return this;
-    }
-
-    private void bonusNumberJudge(WinningLotto winningLotto) {
-        for (int i = 0; i < lottoWallet.totalTicketCount(); i++) {
-            int matchedCount = winningLotto.compareBonus(lottoWallet.oneTicket(i));
-            Prize bonus = Prize.BONUS;
-            bonus.addScore(matchedCount);
-        }
     }
 
     private void lottoNumberJudge(WinningLotto winningLotto) {
         for (int i = 0; i < lottoWallet.totalTicketCount(); i++) {
-            int matchedCount = winningLotto.compare(lottoWallet.oneTicket(i));
-            Prize prize = Prize.prizeByMatchedCount(matchedCount);
-            prize.addScore(ONE_SCORE);
+            Prize.applyPrize(winningLotto, lottoWallet.oneTicket(i));
         }
     }
 
@@ -48,7 +36,7 @@ public class StatisticsReport {
 
     public int totalPrize() {
         return Arrays.stream(Prize.values())
-            .mapToInt(prize -> prize.rank().getScore())
+            .mapToInt(prize -> prize.rank().getScore() * prize.price())
             .sum();
     }
 
