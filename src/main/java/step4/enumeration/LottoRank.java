@@ -39,10 +39,6 @@ public enum LottoRank {
                 .orElse(ZERO.price);
     }
 
-    public int getPrice() {
-        return this.price;
-    }
-
     public int getMatch() {
         return this.match;
     }
