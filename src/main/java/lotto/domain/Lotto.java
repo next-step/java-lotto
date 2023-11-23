@@ -59,12 +59,12 @@ public class Lotto {
         return count;
     }
 
+    public boolean contains(LottoNumber bonusNumber) {
+        return this.numbers.contains(bonusNumber);
+    }
+
     @Override
     public String toString() {
         return numbers.toString();
-    }
-
-    public boolean contains(LottoNumber bonusNumber) {
-        return this.numbers.contains(bonusNumber);
     }
 }
