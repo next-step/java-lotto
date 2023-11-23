@@ -1,8 +1,6 @@
 package lotto.view;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 import static lotto.view.ResultView.printInputMoney;
@@ -21,20 +19,23 @@ public class InputView {
     }
 
 
-    public static List<Integer> inputLastWeekLottoNumbers() {
+    public static int [] inputLastWeekLottoNumbers() {
         printLastWeekLottoNumbers();
-        return parseLottoNumbers(scanner.nextLine());
+        String input = scanner.nextLine();
+        return parseLottoNumbers(input);
     }
 
     private static int parseInt(String input) {
         return Integer.parseInt(input);
     }
 
-    private static List<Integer> parseLottoNumbers(String input) {
+    private static int [] parseLottoNumbers(String input) {
         input = removeTrim(input);
-        List<String> lottoNumbersString = Arrays.asList(input.split(","));
-        List<Integer> parsedLottoNumbers = lottoNumbersString.stream().mapToInt(Integer::parseInt).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
-        return parsedLottoNumbers;
+        String [] lottoNumbersString = input.split(",");
+
+        return Arrays.stream(lottoNumbersString)
+                .mapToInt(Integer::parseInt)
+                .toArray();
     }
 
     private static String removeTrim(String originString) {

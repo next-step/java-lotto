@@ -1,6 +1,6 @@
 package lotto;
 
-import java.util.List;
+import lotto.domain.Lotto;
 
 import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
@@ -18,9 +18,11 @@ public class Main {
         printLottoCount(lottoSimulator.getLottoCount());
         printLottos(lottoSimulator.getLottos());
 
-        List<Integer> lastWeekLottoNumbers = inputLastWeekLottoNumbers();
+        int[] lastWeekLottoNumbers = inputLastWeekLottoNumbers();
+        Lotto lastWeekWinningLotto = Lotto.of(lastWeekLottoNumbers);
 
-        int[] statistics = lottoSimulator.calculateStatistics(lastWeekLottoNumbers);
+
+        int[] statistics = lottoSimulator.calculateStatistics(lastWeekWinningLotto);
 
         double rateOfReturn = rateOfReturnCalculator.calculateYield(statistics, money);
 

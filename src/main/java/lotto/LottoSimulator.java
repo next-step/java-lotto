@@ -29,10 +29,10 @@ public class LottoSimulator {
         return lottoList;
     }
 
-    public int[] calculateStatistics(List<Integer> lastWeekLottoNumbers) {
+    public int[] calculateStatistics(Lotto lastWeekWinningLotto) {
         int[] statistics = new int[LOTTO_STATISTICS_SIZE];
         for (Lotto lotto : lottoList) {
-            statistics[lotto.getMatchCount(lastWeekLottoNumbers)]++;
+            statistics[lotto.getMatchCount(lastWeekWinningLotto)]++;
         }
         return statistics;
     }
