@@ -5,13 +5,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 
 public class LottoNumbers {
     private static final int COUNT = 6;
-    public static final String DELIMITER = ",";
-    public static final String NUMBER_COMMA_BLANK_ONLY = "^[0-9,\\s]+$";
     private static final List<LottoNumber> RANGE_LOTTO_NUMBERS = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER).boxed().map(LottoNumber::new).collect(Collectors.toList());
 
     private List<LottoNumber> lottoNumbers;
@@ -24,14 +21,9 @@ public class LottoNumbers {
     }
 
     // 수동 생성
-    public LottoNumbers(String input) {
-        this.validateValue(input);
-
-        this.lottoNumbers = Stream.of(input.split(DELIMITER))
-                .map(number -> new LottoNumber(Integer.parseInt(number.trim())))
-                .collect(Collectors.toList());
-
-        this.validateCount();
+    public LottoNumbers(List<Integer> input) {
+        this.validateCount(input);
+        this.lottoNumbers = input.stream().map(LottoNumber::new).collect(Collectors.toList());
     }
 
     public long compareNumbers(LottoNumbers targetLottoNumbers) {
@@ -47,14 +39,8 @@ public class LottoNumbers {
         return this.lottoNumbers.toString();
     }
 
-    private void validateValue(String input) {
-        if (!input.matches(NUMBER_COMMA_BLANK_ONLY)) {
-            throw new IllegalArgumentException("유효하지 않은 입력값입니다.");
-        }
-    }
-
-    private void validateCount() {
-        if (lottoNumbers.size() != COUNT) {
+    private void validateCount(List<Integer> input) {
+        if (input.size() != COUNT) {
             throw new IllegalArgumentException("숫자 6개를 입력해주세요.");
         }
     }
