@@ -21,7 +21,7 @@ public class RankTest {
         lottoList.add(lotto);
 
         Lottos lottos = new Lottos(lottoList);
-        List<String> lastWeekWinner = Arrays.asList("1", "2", "3", "4", "5", "6");
+        Lotto lastWeekWinner = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         WinningNumber winningNumber = new WinningNumber(lastWeekWinner, 7);
 
@@ -38,7 +38,7 @@ public class RankTest {
         lottoList.add(lotto);
 
         Lottos lottos = new Lottos(lottoList);
-        List<String> lastWeekWinner = Arrays.asList("1", "2", "3", "4", "5", "8");
+        Lotto lastWeekWinner = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8));
 
         WinningNumber winningNumber = new WinningNumber(lastWeekWinner, 7);
 
@@ -55,7 +55,7 @@ public class RankTest {
         lottoList.add(lotto);
 
         Lottos lottos = new Lottos(lottoList);
-        List<String> lastWeekWinner = Arrays.asList("1", "2", "3", "4", "5", "10");
+        Lotto lastWeekWinner = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10));
 
         WinningNumber winningNumber = new WinningNumber(lastWeekWinner, 7);
 
@@ -72,7 +72,7 @@ public class RankTest {
         lottoList.add(lotto);
 
         Lottos lottos = new Lottos(lottoList);
-        List<String> lastWeekWinner = Arrays.asList("1", "2", "3", "4", "9", "10");
+        Lotto lastWeekWinner = new Lotto(Arrays.asList(1, 2, 3, 4, 9, 10));
 
         WinningNumber winningNumber = new WinningNumber(lastWeekWinner, 7);
 

@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Lotto {
 
@@ -18,7 +18,7 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> numbers) {
-        Set<LottoNumber> listToSet = new HashSet<>();
+        Set<LottoNumber> listToSet = new TreeSet<>(Comparator.comparing(LottoNumber::getNumber));
         for (Integer num : numbers) {
             listToSet.add(new LottoNumber(num));
         }
@@ -41,10 +41,6 @@ public class Lotto {
     }
 
     public int matchNumbers(Lotto winningNumbers) {
-        Iterator<LottoNumber> iter = lotto.iterator();
-
-        System.out.println();
-
         int answerCount = (int) winningNumbers.getLotto().stream()
                 .filter(lotto::contains)
                 .count();
