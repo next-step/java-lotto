@@ -15,8 +15,7 @@ public class LottoTicket {
     public LottoTicket(String lottoNumbers) {
 
         Set<LottoNumber> newLottoNumbers = Arrays.stream(lottoNumbers.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
+                .map(s -> Integer.parseInt(s.trim()))
                 .sorted(Comparator.comparingInt(Integer::intValue))
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
@@ -30,10 +29,14 @@ public class LottoTicket {
         }
     }
 
-    public int winningCount(LottoTicket winningTicket) {
+    public int matchCount(LottoTicket winningTicket) {
         return (int) lottoNumbers.stream()
                 .filter(winningTicket::contains)
                 .count();
+    }
+
+    public boolean bonusMatch(LottoNumber bonusNumber) {
+        return contains(bonusNumber);
     }
 
     private boolean contains(LottoNumber lottoNumber) {
@@ -41,7 +44,6 @@ public class LottoTicket {
     }
 
     public Set<LottoNumber> lottoNumbers() {
-        return Collections.unmodifiableSet(lottoNumbers);
+        return lottoNumbers;
     }
-
 }

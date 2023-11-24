@@ -9,10 +9,6 @@ public class LottoProfit {
     }
 
     private double totalPrize(LottoResult lottoResult) {
-
-        return  Arrays.stream(LottoRank.values())
-                .map(rank -> rank.reward()*lottoResult.countOfMatch(rank.countOfMatch()))
-                .reduce(Integer::sum).orElse(0);
-
+        return Arrays.stream(LottoRank.values()).map(lottoRank -> {return lottoResult.result().get(lottoRank)*lottoRank.reward();}).reduce(Integer::sum).orElse(0);
     }
 }

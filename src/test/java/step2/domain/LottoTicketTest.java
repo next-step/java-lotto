@@ -4,7 +4,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step2.domain.LottoTicket;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -25,6 +24,6 @@ class LottoTicketTest {
     public void winningCountTest(String lottoInput, String winningInput, int expected) {
         LottoTicket lottoTicket = new LottoTicket(lottoInput);
         LottoTicket winningTicket = new LottoTicket(winningInput);
-        Assertions.assertThat(lottoTicket.winningCount(winningTicket)).isEqualTo(expected);
+        Assertions.assertThat(lottoTicket.matchCount(winningTicket)).isEqualTo(expected);
     }
 }

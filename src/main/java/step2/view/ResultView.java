@@ -26,14 +26,12 @@ public class ResultView {
         });
     }
 
-
     public void printLottoResult(int ticketMoney, LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         Arrays.stream(LottoRank.values()).forEach(rank -> {
-            System.out.println(rank.countOfMatch()+"개 일치" + "(" + rank.reward() + "원) - " + lottoResult.countOfMatch(rank.countOfMatch()));
+            System.out.println(rank.matchCount()+"개 일치" + "(" + rank.reward() + "원) - " + lottoResult.matchCount(rank));
         });
-
         System.out.println("총 수익률은 " + new LottoProfit().profit(ticketMoney, lottoResult) + "입니다.");
     }
 }
