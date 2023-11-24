@@ -10,9 +10,9 @@ public class PrizeSummary {
         this.prizeSummary = prizeSummary;
     }
 
-    public int calculatePrizeAmount() {
+    public long calculatePrizeAmount() {
         return prizeSummary.entrySet().stream()
-                .mapToInt(prizeDetail -> prizeDetail.getKey().calculateRankByCount(prizeDetail.getValue()))
+                .mapToLong(prizeDetail -> prizeDetail.getKey().calculateRankByCount(prizeDetail.getValue()))
                 .sum();
     }
 

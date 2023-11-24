@@ -11,7 +11,7 @@ public class Profit {
         return new Profit(calculateProfit(purchaseAmount, prizeSummary.calculatePrizeAmount()));
     }
 
-    private static double calculateProfit(PurchaseAmount purchaseAmount, int prizeAmount) {
+    private static double calculateProfit(PurchaseAmount purchaseAmount, long prizeAmount) {
         return purchaseAmount.divideByPurchaseAmount(prizeAmount);
     }
 

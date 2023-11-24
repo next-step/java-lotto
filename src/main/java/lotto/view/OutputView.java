@@ -42,7 +42,7 @@ public class OutputView {
     private void printPrizeDetail(Entry<Rank, Integer> rawPrizeDetail) {
         if (rawPrizeDetail.getKey() != Rank.MISS) {
             String countOfMatchMessage = formatter.toCountOfMatchMessage(rawPrizeDetail);
-            int winningMoney = formatter.toWinningMoney(rawPrizeDetail);
+            long winningMoney = formatter.toWinningMoney(rawPrizeDetail);
             int prizeCount = formatter.toPrizeCount(rawPrizeDetail);
 
             printer.printLine("%s 일치 (%d원)- %d개", countOfMatchMessage, winningMoney, prizeCount);

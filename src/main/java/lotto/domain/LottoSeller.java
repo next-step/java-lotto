@@ -39,7 +39,6 @@ public class LottoSeller implements Seller {
 
     private Set<Integer> generateUniqueNumbers() {
         Set<Integer> lottoNumbers = new HashSet<>();
-        boolean isValidLotto = true;
 
         while (isWithinLottoCountLimit(lottoNumbers)) {
             lottoNumbers.add(random.nextInt(LottoNumber.MAX_LOTTO_NUMBER) + 1);

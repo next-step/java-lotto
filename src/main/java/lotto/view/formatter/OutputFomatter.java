@@ -32,7 +32,7 @@ public class OutputFomatter {
         return String.format("%d개", countOfMatch);
     }
 
-    public int toWinningMoney(Entry<Rank, Integer> rawPrizeDetail) {
+    public long toWinningMoney(Entry<Rank, Integer> rawPrizeDetail) {
         return rawPrizeDetail.getKey().getWinningMoney();
     }
 
