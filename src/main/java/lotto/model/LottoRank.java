@@ -16,6 +16,7 @@ public enum LottoRank {
 
     private static final String ERR_INVALID_MATCH_COUNT = "The number of matched lotto numbers cannot exceed 6, as there are a total of 6 lotto numbers.";
     private static final String ERR_BONUS_MATCH_CONDITION = "A bonus number match is only required if 5 numbers are correct.";
+    private static final String ERR_INVALID_RANK = "Invalid rank";
     private final int matchCount;
     private final int cashPrize;
 
@@ -55,7 +56,22 @@ public enum LottoRank {
                 .orElseThrow(() -> new IllegalArgumentException(ERR_INVALID_MATCH_COUNT));
     }
 
+    public static LottoRank getByRank(int rank) {
+        return Arrays.stream(values())
+                .filter(element -> element.ordinal()+1 == rank)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ERR_INVALID_RANK));
+    }
+
     public int cashPrize() {
         return this.cashPrize;
+    }
+
+    public int matchCount() {
+        return this.matchCount;
+    }
+
+    public boolean isSecondRank() {
+        return this == LottoRank.SECOND;
     }
 }

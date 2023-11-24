@@ -36,4 +36,10 @@ public class LottoRankTest {
         Assertions.assertThat(LottoRank.calculateTotalPrize(matchResult))
                 .isEqualTo(2_000_005_000);
     }
+
+    @Test
+    public void 랭킹_숫자로_LottoRank_객체_가져오기() {
+        Assertions.assertThat(LottoRank.getByRank(1))
+                .isEqualTo(LottoRank.FIRST);
+    }
 }

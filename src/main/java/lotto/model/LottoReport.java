@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LottoReport {
@@ -19,8 +20,8 @@ public class LottoReport {
         return Lotto.price(this.result.size());
     }
 
-    public List<LottoRank> result() {
-        return this.result;
+    public int countRank(LottoRank rank) {
+        return Collections.frequency(this.result, rank);
     }
 
     public double rateOfReturn() {
