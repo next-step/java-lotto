@@ -31,6 +31,10 @@ public class Lotto {
         return count * TICKET_PRICE;
     }
 
+    public int matchNumbers(LottoNumbers winningNumber) {
+        return this.numbers.matchNumbers(winningNumber);
+    }
+
     @Override
     public boolean equals(Object obj) {
         Lotto other = (Lotto) obj;

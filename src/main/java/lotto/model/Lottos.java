@@ -35,7 +35,7 @@ public class Lottos {
     public List<Integer> matchNumbers(LottoNumbers winningNumber) {
         List<Integer> result = new ArrayList<>(Collections.nCopies(7, 0));
         for (Lotto ticket : this.tickets) {
-            int matchCount = ticket.numbers().matchNumbers(winningNumber);
+            int matchCount = ticket.matchNumbers(winningNumber);
             result.set(matchCount, result.get(matchCount) + 1);
         }
         return result;
