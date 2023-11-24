@@ -1,10 +1,10 @@
 package lotto.domain;
 
 public class Money {
-    public static final int LOTTO_PRICE = 1000;
-    public static final String CANNOT_BUY_EVEN_ONLY_ONE_LOTTO_EXCEPTION = "돈이 부족해 1개의 로또도 살 수 없습니다.";
-    public static final String MONEY_TO_GO_BACK_EXCEPTION = "로또를 구매해도 거슬러줄 금액이 존재합니다.";
-    public static final String NEGATIVE_NUMBER_EXCEPTION = "돈은 음수가 될 수 없습니다.";
+    private static final int LOTTO_PRICE = 1000;
+    protected static final String CANNOT_BUY_EVEN_ONLY_ONE_LOTTO_EXCEPTION = "돈이 부족해 1개의 로또도 살 수 없습니다.";
+    protected static final String MONEY_TO_GO_BACK_EXCEPTION = "로또를 구매해도 거슬러줄 금액이 존재합니다.";
+    protected static final String NEGATIVE_NUMBER_EXCEPTION = "돈은 음수가 될 수 없습니다.";
 
     private final long money;
 

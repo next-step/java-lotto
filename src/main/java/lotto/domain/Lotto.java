@@ -9,9 +9,9 @@ import lotto.dto.LottoDto;
 
 public class Lotto {
 
-    public static final String LOTTO_NUMBERS_DUPLICATION_EXCEPTION = "로또 숫자에 중복이 존재합니다.";
-    public static final String LOTTO_NUMBERS_SIZE_EXCEPTION = "로또를 이루는 숫자가 6개가 아닙니다.";
-    public static final int CORRECT_LOTTO_SIZE = 6;
+    protected static final String LOTTO_NUMBERS_DUPLICATION_EXCEPTION = "로또 숫자에 중복이 존재합니다.";
+    protected static final String LOTTO_NUMBERS_SIZE_EXCEPTION = "로또를 이루는 숫자가 6개가 아닙니다.";
+    protected static final int CORRECT_LOTTO_SIZE = 6;
     private final List<LottoNumber> lotto;
 
     public Lotto(List<Integer> lottoNumbers) {
