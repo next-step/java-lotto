@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
     NOTHING(0, 0),
     FOURTH(3, 5000),
@@ -16,12 +18,10 @@ public enum Rank {
     }
 
     public static Rank valeOf(int countOfMatch) {
-        for (Rank rank : values()) {
-            if (rank.countOfMatch == countOfMatch) {
-                return rank;
-            }
-        }
-        return NOTHING;
+        return Arrays.stream(values())
+                .filter(rank -> rank.countOfMatch == countOfMatch)
+                .findFirst()
+                .orElse(NOTHING);
     }
 
     public long calculateTotalPrizePerRank(long rankCnt) {
