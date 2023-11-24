@@ -13,6 +13,7 @@ public class InputView {
     private static final String NUMBERS_DELIMITER = ", ";
     private static final String QUESTION_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
     private static final String QUESTION_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String QUESTION_BONUS_BALL = "보너스 볼을 입력해 주세요.";
 
     public static int inputMoney() {
         System.out.println(QUESTION_PURCHASE_AMOUNT);
@@ -29,5 +30,11 @@ public class InputView {
         return Arrays.stream(numbers.split(NUMBERS_DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    public static int inputBonusBallNumber() {
+        System.out.println();
+        System.out.println(QUESTION_BONUS_BALL);
+        return Integer.parseInt(scanner.nextLine());
     }
 }

@@ -4,10 +4,6 @@ import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 public class LottoController {
 
     public static void main(String[] args) {
@@ -29,6 +25,7 @@ public class LottoController {
 
     private static void checkLottoResult(Lottos tickets) {
         LottoNumbers winningNumber = LottoNumbers.of(InputView.inputWinningNumbers());
+        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusBallNumber());
         LottoReport report = new LottoReport(tickets.matchNumbers(winningNumber));
         ResultView.printResultReport(report);
     }
