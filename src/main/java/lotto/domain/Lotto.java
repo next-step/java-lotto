@@ -1,82 +1,62 @@
 package lotto.domain;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
+import lotto.dto.LottoDto;
 
 public class Lotto {
 
     protected static final String LOTTO_NUMBERS_DUPLICATION_EXCEPTION = "로또 숫자에 중복이 존재합니다.";
     protected static final String LOTTO_NUMBERS_SIZE_EXCEPTION = "로또를 이루는 숫자가 6개가 아닙니다.";
     protected static final int CORRECT_LOTTO_SIZE = 6;
+    private final List<LottoNumber> lotto;
 
-    private final Set<LottoNumber> lottoNumbers;
-
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    public Lotto(List<Integer> lottoNumbers) {
         validateLotto(lottoNumbers);
-        this.lottoNumbers = createLotto(lottoNumbers);
+        this.lotto = createLotto(lottoNumbers);
     }
 
     public Lotto(Integer... lottoNumber) {
-        // 문제의 코드에서 나오는 오류는 다른 생성자를 호출하는 부분에서 발생하고 있습니다.
-        // Java에서 생성자 내에서 다른 생성자를 호출할 때는 해당 호출이 반드시 첫 번째 문장이어야 합니다.
-        // 여러 생성자가 상호 호출될 때, 이 호출은 항상 첫 번째 문장이어야 합니다.
-        this(Arrays.stream(lottoNumber).map(LottoNumber::valueOf).collect(Collectors.toList()));
+        this(List.of(lottoNumber));
     }
 
-//    public Lotto(List<Integer> lottoNumbers) {
-//        this(lottoNumbers.stream().map(LottoNumber::valueOf).collect(Collectors.toList()));
-//    }
-
-    private void validateLotto(List<LottoNumber> lottoNumbers) {
+    private void validateLotto(List<Integer> lottoNumbers) {
         validateLottoNumbersSize(lottoNumbers);
         validateDuplication(lottoNumbers);
     }
 
-    private void validateLottoNumbersSize(List<LottoNumber> lottoNumbers) {
+    private void validateLottoNumbersSize(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != CORRECT_LOTTO_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_SIZE_EXCEPTION);
         }
     }
 
-    private void validateDuplication(List<LottoNumber> lottoNumbers) {
-        Set<LottoNumber> uniqueLottoNumbers = new HashSet<>(lottoNumbers);
+    private void validateDuplication(List<Integer> lottoNumbers) {
+        Set<Integer> uniqueLottoNumbers = new HashSet<>(lottoNumbers);
         if (uniqueLottoNumbers.size() != CORRECT_LOTTO_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_DUPLICATION_EXCEPTION);
         }
     }
 
-    private Set<LottoNumber> createLotto(List<LottoNumber> lottoNumbers) {
-        return new HashSet<>(lottoNumbers);
-    }
-
-    private Set<LottoNumber> createLotto(Integer... lottoNumbers) {
-        Set<LottoNumber> uniqueLottoNumbers = new HashSet<>();
+    private List<LottoNumber> createLotto(List<Integer> lottoNumbers) {
+        List<LottoNumber> lotto = new ArrayList<>();
         for (Integer lottoNumber : lottoNumbers) {
-            uniqueLottoNumbers.add(LottoNumber.valueOf(lottoNumber));
+            lotto.add(new LottoNumber(lottoNumber));
         }
-        return uniqueLottoNumbers;
+        return lotto;
     }
 
-    public int countOfMatch(Lotto lotto) {
-        return (int) this.lottoNumbers.stream()
-                .filter(lotto.lottoNumbers::contains)
+    public int countOfMatch(Lotto winnerLotto) {
+        return (int) this.lotto.stream()
+                .filter(winnerLotto.lotto::contains)
                 .count();
     }
 
-    public Set<LottoNumber> getLotto() {
-        return lottoNumbers;
-    }
-
-    public boolean isOverlapping(LottoNumber number) {
-        return this.lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber == number);
-    }
-
-    public boolean containsBonus(Bonus bonus) {
-        return this.lottoNumbers.stream().anyMatch(bonus::isSame);
+    public List<LottoNumber> getLotto() {
+        return lotto;
     }
 
     @Override
@@ -88,11 +68,11 @@ public class Lotto {
             return false;
         }
         Lotto lotto1 = (Lotto) o;
-        return Objects.equals(lottoNumbers, lotto1.lottoNumbers);
+        return Objects.equals(lotto, lotto1.lotto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumbers);
+        return Objects.hash(lotto);
     }
 }
