@@ -35,4 +35,8 @@ public class LottoTicket {
 
         return sum.get();
     }
+
+    public boolean isContain(int number) {
+        return this.ticket.contains(number);
+    }
 }

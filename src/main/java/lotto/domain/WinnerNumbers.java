@@ -3,18 +3,18 @@ package lotto.domain;
 import java.util.*;
 
 public class WinnerNumbers {
-    private final List<Integer> winnerNumbers = new ArrayList<>();
+    private LottoTicket winnerNumbers;
     private int bonusNumber = 0;
 
     public WinnerNumbers(List<Integer> generatedNumbers, Random random) {
-        winnerNumbers.addAll(generatedNumbers);
+        this.winnerNumbers = new LottoTicket(generatedNumbers);
         while (bonusNumber == 0) {
             generateBonusNumber(random);
         }
     }
 
     public WinnerNumbers(List<Integer> generatedNumbers, int bonusNumber) {
-        winnerNumbers.addAll(generatedNumbers);
+        this.winnerNumbers = new LottoTicket(generatedNumbers);
         this.bonusNumber = bonusNumber;
     }
 
@@ -31,7 +31,7 @@ public class WinnerNumbers {
     }
 
     public boolean isContain(int number) {
-        return winnerNumbers.contains(number);
+        return winnerNumbers.isContain(number);
     }
 
     public int bonusNumber() {
