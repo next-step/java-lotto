@@ -3,6 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 
@@ -42,5 +44,15 @@ class LottoTest {
         Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
         Lotto winningLotto = new Lotto(List.of(4,5,6,7,8,9));
         Assertions.assertEquals(lotto.countWinningNumber(winningLotto.getNumbers()), 3);
+    }
+
+    @DisplayName("로또 번호가 오름차순인지 확인한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"0:1", "1:2", "2:3", "3:5", "4:6", "5:7"}, delimiter = ':')
+    void checkSortNumber(int index, int expectedNumber) {
+        Lotto lotto = new Lotto(List.of(1,5,2,6,3,7));
+        List<LottoNumber> numbers = lotto.getNumbers();
+
+        Assertions.assertEquals(numbers.get(index).getLottoNumber(), expectedNumber);
     }
 }

@@ -1,27 +1,31 @@
 package lotto.application.dto;
 
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 
-import java.util.List;
 
 public class LottoRequest {
     private Integer inputAmount;
-    private List<Lotto> lottos;
-    private List<Integer> winningLottoNumber;
+    private Lottos lottos;
+    private Lotto winningLotto;
+    private Integer bonusNumber;
 
-    public LottoRequest(Integer inputAmount, List<Lotto> lottos, List<Integer> winningLottoNumber) {
+    public LottoRequest(Integer inputAmount, Lottos lottos, Lotto winningLotto, Integer bonusNumber) {
         this.inputAmount = inputAmount;
         this.lottos = lottos;
-        this.winningLottoNumber = winningLottoNumber;
+        this.winningLotto = winningLotto;
+        this.bonusNumber = bonusNumber;
     }
 
     public Integer getInputAmount() { return inputAmount; }
 
-    public List<Lotto> getLottos() {
+    public Lottos getLottos() {
         return lottos;
     }
 
-    public List<Integer> getWinningLottoNumber() {
-        return winningLottoNumber;
+    public Lotto getWinningLotto() {
+        return winningLotto;
     }
+
+    public Integer getBonusNumber() { return bonusNumber; }
 }

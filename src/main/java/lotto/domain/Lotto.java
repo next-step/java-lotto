@@ -2,10 +2,11 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Lotto {
-    private List<LottoNumber> numbers = new ArrayList<>(6);
+    private List<LottoNumber> numbers = new ArrayList<>();
     private final int NUMBERS_MAX_SIZE = 6;
 
     public Lotto(List<Integer> inputLottoNumbers) {
@@ -13,6 +14,7 @@ public class Lotto {
             checkCanAdd(inputNumber);
             numbers.add(new LottoNumber(inputNumber));
         }
+        numbers.sort(Comparator.comparingInt(LottoNumber::getLottoNumber));
     }
 
     private void checkCanAdd(Integer inputNumber) {
@@ -44,9 +46,10 @@ public class Lotto {
         return countWinning;
     }
 
-    private Integer addIfEqualWinningNumber(LottoNumber lottoNumber,
-                                        List<LottoNumber> winningNumbers,
-                                        Integer countWinning) {
+    private Integer addIfEqualWinningNumber(
+            LottoNumber lottoNumber,
+            List<LottoNumber> winningNumbers,
+            Integer countWinning) {
         for (LottoNumber winningNumber : winningNumbers) {
             countWinning += getNumberIfEqual(lottoNumber, winningNumber);
         }
@@ -55,5 +58,10 @@ public class Lotto {
 
     private int getNumberIfEqual(LottoNumber lottoNumber, LottoNumber winningNumber) {
         return lottoNumber.getResultIfEqual(winningNumber);
+    }
+
+    public boolean hasBonus(LottoNumber bonus) {
+        return bonus != null && numbers.stream()
+                .anyMatch(e -> e.getResultIfEqual(bonus) == 1);
     }
 }

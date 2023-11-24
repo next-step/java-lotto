@@ -8,10 +8,9 @@ import java.util.*;
 public class LottoGenerator {
     private static final List<Integer> DUMMY_LOTTO_NUMBERS = new ArrayList<>();
     private static Random random = new Random();
-    private static LottoNumber lottoNumber = new LottoNumber();
 
     static {
-        for (int number = lottoNumber.getStartNumber(); number <= lottoNumber.getEndNumber(); number++) {
+        for (int number = LottoNumber.START_NUMBER; number <= LottoNumber.END_NUMBER; number++) {
             DUMMY_LOTTO_NUMBERS.add(number);
         }
     }

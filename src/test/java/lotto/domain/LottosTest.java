@@ -3,6 +3,8 @@ package lotto.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,13 +19,35 @@ class LottosTest {
     void countAllWinningLotto() {
         List<Integer> winningNumber = List.of(1,2,3,4,5,6);
         Lotto lotto1 = new Lotto(List.of(1,2,3,4,5,6));
-        Lotto lotto2 = new Lotto(List.of(1,2,3,4,5,7));
-        Lotto lotto3 = new Lotto(List.of(1,2,3,6,7,8));
-        Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3), winningNumber);
+        Lotto lotto2 = new Lotto(List.of(10,2,3,4,5,6));
+        Lotto lotto3 = new Lotto(List.of(10,11,3,4,5,6));
+        Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3));
 
-        HashMap<WinningAmount, Integer> result = lottos.countAllWinning();
-        Assertions.assertThat(result.get(SIX_MATCH)).isEqualTo(1);
-        Assertions.assertThat(result.get(FIVE_MATCH)).isEqualTo(1);
+        HashMap<WinningAmount, Integer> result = lottos
+                .countAllWinning(new WinningLotto(new Lotto(winningNumber)));
         Assertions.assertThat(result.get(FOUR_MATCH)).isEqualTo(1);
+        Assertions.assertThat(result.get(FIVE_MATCH)).isEqualTo(1);
+        Assertions.assertThat(result.get(SIX_MATCH)).isEqualTo(1);
+    }
+
+    @DisplayName("보너스 번호에 따른 로또를 확인한다.")
+    @Test
+    void findLottoHasBonus() {
+        Lotto lotto = new Lotto(List.of(1,2,3,4,10,11));
+        Lottos lottos = new Lottos(List.of(lotto));
+        List<Integer> winningNumber = List.of(1,2,3,4,5,6);
+
+        HashMap<WinningAmount, Integer> result = lottos
+                .countAllWinning(new WinningLotto(new Lotto(winningNumber), 10));
+
+        Assertions.assertThat(result.get(FIVE_MATCH_AND_BONUS)).isEqualTo(1);
+    }
+
+    @DisplayName("로또 번호에 보너스 번호가 있는지 확인한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "7:false"}, delimiter = ':')
+    void checkHasBonus(int bonusNumber, boolean result) {
+        Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
+        Assertions.assertThat(lotto.hasBonus(new LottoNumber(bonusNumber))).isEqualTo(result);
     }
 }

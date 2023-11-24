@@ -5,10 +5,11 @@ import java.util.Map;
 
 public enum WinningAmount {
 
-    THREE_MATCH(3,5000),
-    FOUR_MATCH(4,50000),
-    FIVE_MATCH(5,1500000),
-    SIX_MATCH(6,2000000000);
+    THREE_MATCH(3,5_000),
+    FOUR_MATCH(4,50_000),
+    FIVE_MATCH(5,1_500_000),
+    FIVE_MATCH_AND_BONUS(5,30_000_000),
+    SIX_MATCH(6,2_000_000_000);
 
     private static final Map<Integer, WinningAmount> WINNING_AMOUNT_FINDER = new HashMap<>();
     static {
@@ -17,23 +18,33 @@ public enum WinningAmount {
         }
     }
 
-    private Integer matchCount;
-    private Integer amount;
+    private int matchCount;
+    private int amount;
 
-    WinningAmount(Integer matchCount, Integer amount) {
+    WinningAmount(int matchCount, int amount) {
         this.matchCount = matchCount;
         this.amount = amount;
     }
 
-    public Integer getMatchCount() {
+    public int getMatchCount() {
         return matchCount;
     }
 
-    public Integer getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public static WinningAmount findWinningAmountByMatchCount(int matchCount) {
+    public static WinningAmount findWinningAmountByMatchCount(int matchCount, boolean matchBonus) {
+        if (!matchBonus && matchCount == 5) {
+            return FIVE_MATCH;
+        }
+        return isMatchBonus(matchCount, matchBonus);
+    }
+
+    private static WinningAmount isMatchBonus(int matchCount, boolean matchBonus) {
+        if (matchBonus && matchCount == 4) {
+            return FIVE_MATCH_AND_BONUS;
+        }
         return WINNING_AMOUNT_FINDER.get(matchCount);
     }
 }
