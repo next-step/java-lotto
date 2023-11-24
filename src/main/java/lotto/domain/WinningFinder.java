@@ -2,31 +2,30 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 
 public class WinningFinder {
-    private final List<LottoNumber> WINNING_NUMBER;
+    private Lotto winningLotto;
     private LottoNumber bonusNumber;
     private HashMap<WinningAmount, Integer> winningLottos = new HashMap<>();
 
-    public WinningFinder(List<LottoNumber> winningNumber) {
-        WINNING_NUMBER = winningNumber;
+    public WinningFinder(Lotto winningLotto) {
+        this.winningLotto = winningLotto;
         for (WinningAmount winningAmount : WinningAmount.values()) {
             winningLottos.put(winningAmount, 0);
         }
     }
 
-    public WinningFinder(List<LottoNumber> winningNumber, int bonusNumber) {
+    public WinningFinder(Lotto winningLotto, int bonusNumber) {
+        this.winningLotto = winningLotto;
         this.bonusNumber = new LottoNumber(bonusNumber);
-        WINNING_NUMBER = winningNumber;
         for (WinningAmount winningAmount : WinningAmount.values()) {
             winningLottos.put(winningAmount, 0);
         }
     }
 
     public void countWinning(Lotto lotto) {
-        int countMatch = lotto.countWinningNumber(WINNING_NUMBER);
+        int countMatch = lotto.countWinningNumber(winningLotto.getNumbers());
         WinningAmount winningAmount = WinningAmount.findWinningAmountByMatchCount(countMatch, hasBonus());
         mergeIfMoreThanThreeMatch(winningAmount);
     }

@@ -17,7 +17,7 @@ public class WinningFinderTest {
     void findSecondWinningLotto() {
         Lotto lotto = new Lotto(List.of(1,2,3,4,5,7));
         Lotto winningLotto = new Lotto(List.of(1,2,3,4,5,6));
-        WinningFinder finder = new WinningFinder(winningLotto.getNumbers(), 7);
+        WinningFinder finder = new WinningFinder(winningLotto, 7);
 
         finder.countWinning(lotto);
         HashMap<WinningAmount, Integer> result = finder.findWinningLottos();

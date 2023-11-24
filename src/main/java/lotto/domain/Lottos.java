@@ -9,12 +9,12 @@ public class Lottos {
 
     public Lottos(List<Lotto> lottoList, List<Integer> winningLottoNumbers) {
         this.lottoList = lottoList;
-        finder = new WinningFinder(new Lotto(winningLottoNumbers).getNumbers());
+        finder = new WinningFinder(new Lotto(winningLottoNumbers));
     }
 
     public Lottos(List<Lotto> lottoList, List<Integer> winningLottoNumbers, Integer bonusNumber) {
         this.lottoList = lottoList;
-        finder = new WinningFinder(new Lotto(winningLottoNumbers).getNumbers(), bonusNumber);
+        finder = new WinningFinder(new Lotto(winningLottoNumbers), bonusNumber);
     }
 
     public HashMap<WinningAmount, Integer> countAllWinning() {
