@@ -44,11 +44,15 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public Prize determinePrize(Lotto winningLotto) {
+    public Rank determinePrize(Lotto winningLotto, LottoNumber bonusBall) {
         int matchingCount = (int) lottoNumbers.stream()
                 .filter(winningLotto::contain)
                 .count();
-        return new PrizeSelector().selectByCount(matchingCount);
+
+        boolean matchBonus = lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.equals(bonusBall));
+
+        return Rank.valueOf(matchingCount, matchBonus);
     }
 
     private boolean contain(LottoNumber lottoNumber) {

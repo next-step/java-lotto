@@ -23,7 +23,7 @@ public class PurchaseAmount {
         return purchaseAmount % LOTTO_PRICE == 0;
     }
 
-    public double divideByPurchaseAmount(int prizeAmount) {
+    public double divideByPurchaseAmount(long prizeAmount) {
         return (double) prizeAmount / purchaseAmount;
     }
 

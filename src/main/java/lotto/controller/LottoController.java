@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoSeller;
 import lotto.domain.Lottos;
 import lotto.domain.PrizeSummary;
@@ -28,7 +29,9 @@ public class LottoController {
         outputview.printLottos(lottos);
 
         Lotto winningLotto = inputView.inputWinningLotto();
-        PrizeSummary prizeSummary = lottos.getPrizeSummary(winningLotto);
+        LottoNumber bonusBall = inputView.inputBonusBall();
+        PrizeSummary prizeSummary = lottos.getPrizeSummary(winningLotto, bonusBall);
+
         outputview.printPrizeSummary(prizeSummary);
 
         Profit profit = Profit.of(purchaseAmount, prizeSummary);

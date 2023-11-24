@@ -4,7 +4,7 @@ import java.util.Map.Entry;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
-import lotto.domain.Prize;
+import lotto.domain.Rank;
 import lotto.domain.PrizeSummary;
 import lotto.domain.Profit;
 import lotto.view.formatter.OutputFomatter;
@@ -39,13 +39,13 @@ public class OutputView {
         prizeSummary.getPrizeSummary().entrySet().forEach(prizeDetail -> printPrizeDetail(prizeDetail));
     }
 
-    private void printPrizeDetail(Entry<Prize, Integer> rawPrizeDetail) {
-        if (rawPrizeDetail.getKey() != Prize.NOTHING) {
-            int matchingCount = formatter.toMatchingCount(rawPrizeDetail);
-            int prizeAmount = formatter.toPrizeAmount(rawPrizeDetail);
+    private void printPrizeDetail(Entry<Rank, Integer> rawPrizeDetail) {
+        if (rawPrizeDetail.getKey() != Rank.MISS) {
+            String countOfMatchMessage = formatter.toCountOfMatchMessage(rawPrizeDetail);
+            long winningMoney = formatter.toWinningMoney(rawPrizeDetail);
             int prizeCount = formatter.toPrizeCount(rawPrizeDetail);
 
-            printer.printLine("%d개 일치 (%d원)- %d개", matchingCount, prizeAmount, prizeCount);
+            printer.printLine("%s 일치 (%d원)- %d개", countOfMatchMessage, winningMoney, prizeCount);
         }
     }
 

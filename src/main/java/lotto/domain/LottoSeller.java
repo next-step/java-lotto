@@ -11,7 +11,7 @@ public class LottoSeller implements Seller {
     private final LottoCount lottoCount;
     private final Random random;
 
-    public LottoSeller(LottoCount lottoCount, Random random) {
+    private LottoSeller(LottoCount lottoCount, Random random) {
         this.lottoCount = lottoCount;
         this.random = random;
     }
@@ -39,10 +39,9 @@ public class LottoSeller implements Seller {
 
     private Set<Integer> generateUniqueNumbers() {
         Set<Integer> lottoNumbers = new HashSet<>();
-        boolean isValidLotto = true;
 
-        while (isValidLotto && isWithinLottoCountLimit(lottoNumbers)) {
-            isValidLotto = lottoNumbers.add(random.nextInt(LottoNumber.MAX_LOTTO_NUMBER) + 1);
+        while (isWithinLottoCountLimit(lottoNumbers)) {
+            lottoNumbers.add(random.nextInt(LottoNumber.MAX_LOTTO_NUMBER) + 1);
         }
         return lottoNumbers;
     }
