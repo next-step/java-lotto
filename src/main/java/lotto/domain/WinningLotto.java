@@ -2,12 +2,12 @@ package lotto.domain;
 
 public class WinningLotto {
 
-    private final Lotto lastWeakLotto;
+    private final Lotto lastWeekLotto;
 
     private final LottoNumber bonusBall;
 
-    public WinningLotto(Lotto lastWeakLotto, LottoNumber bonusBall) {
-        this.lastWeakLotto = lastWeakLotto;
+    public WinningLotto(Lotto lastWeekLotto, LottoNumber bonusBall) {
+        this.lastWeekLotto = lastWeekLotto;
         this.bonusBall = bonusBall;
     }
 
@@ -16,7 +16,7 @@ public class WinningLotto {
     }
 
     public int compare(Lotto lotto) {
-        return lastWeakLotto.matchCount(lotto);
+        return lastWeekLotto.matchCount(lotto);
     }
 
     public int compareBonus(Lotto lotto) {
