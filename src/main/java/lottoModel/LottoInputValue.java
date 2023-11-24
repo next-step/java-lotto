@@ -14,8 +14,9 @@ public class LottoInputValue {
 
     public int convertLottoBonusNumbers(Set<Integer> lastLotto) {
         int bonusNumber = convertNum(this.text);
+        Lotto lotto = new Lotto(lastLotto);
         checkValid(bonusNumber);
-        if ((new Lotto(lastLotto)).isContainBonus(bonusNumber)) {
+        if ((lotto).isContainBonus(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨번호에서 제외된 숫자여야 함.");
         }
         return bonusNumber;

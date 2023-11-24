@@ -12,7 +12,6 @@ public class RankTest {
     void getCountOfMatch() {
         assertEquals(6, Rank.FIRST.getCountOfMatch());
         assertEquals(5, Rank.SECOND.getCountOfMatch());
-        // 나머지 Rank에 대해서도 비슷하게 테스트
     }
 
     @Test
@@ -20,7 +19,6 @@ public class RankTest {
     void getWinningMoney() {
         assertEquals(2_000_000_000, Rank.FIRST.getWinningMoney());
         assertEquals(30_000_000, Rank.SECOND.getWinningMoney());
-        // 나머지 Rank에 대해서도 비슷하게 테스트
     }
 
     @Test
@@ -37,6 +35,6 @@ public class RankTest {
         assertEquals(Rank.FOURTH, Rank.valueOf(4, false));
         assertEquals(Rank.FIFTH, Rank.valueOf(3, false));
         assertEquals(Rank.MISS, Rank.valueOf(2, false));
-        // 다른 조건에 대해서도 테스트
+
     }
 }

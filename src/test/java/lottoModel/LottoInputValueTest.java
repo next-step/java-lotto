@@ -30,6 +30,7 @@ public class LottoInputValueTest {
     }
 
     @Test
+    @DisplayName("예외 검증 테스트")
     void textConvertNumber_문자숫자변환() {
 
         String text = "12a3";
