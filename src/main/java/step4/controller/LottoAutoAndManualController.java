@@ -2,7 +2,6 @@ package step4.controller;
 
 import step4.enumeration.LottoRank;
 import step4.model.*;
-import step4.utils.CalculateUtils;
 import step4.utils.NumberSplitUtils;
 import step4.view.InputView;
 import step4.view.OutputView;
@@ -17,33 +16,26 @@ public class LottoAutoAndManualController {
     private static final OutputView outputView = new OutputView();
 
     public static void main(String[] args) {
-        int payPrice = inputView.payPriceInput();
+        Price price = inputView.payPriceInput();
 
-        int manualLottoCount = inputView.manualLottoCountInput();
-        List<String> manualLottoNumber = inputView.manualLottoNumberInput(manualLottoCount);
+        LottoCount manualLottoCount = inputView.manualLottoCountInput();
+        List<Lotto> manualLottos = inputView.manualLottoNumberInput(manualLottoCount);
 
-        outputView.viewLottoCount(payPrice, manualLottoCount);
+        int allLottoCount = price.lottoCount();
+        outputView.viewLottoCount(allLottoCount, manualLottoCount.getCount());
 
-        int autoLottoCount = CalculateUtils.autoLottoCount(CalculateUtils.lottoCount(payPrice), manualLottoCount);
-        LottoAutoMake lottoAutoMake = new LottoAutoMake(new LottoCount(autoLottoCount));
+        LottoCount autoLottoCount = new LottoCount().autoLottoCount(allLottoCount, manualLottoCount.getCount());
+        LottoAutoMake lottoAutoMake = new LottoAutoMake(autoLottoCount);
 
-        LottoManualMake lottoManualMake = new LottoManualMake(manualLottoNumber);
-        List<Lotto> allLottos = makeAllLottos(lottoAutoMake, lottoManualMake);
-
-        winnerResult(allLottos, payPrice);
-    }
-
-    private static List<Lotto> makeAllLottos(LottoAutoMake lottoAutoMake, LottoManualMake lottoManualMake) {
-        List<Lotto> allLottos = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>(manualLottos);
         List<Lotto> lottoAuto = lottoAutoMake.makeAutoLottos();
-        allLottos.addAll(lottoAuto);
-        allLottos.addAll(lottoManualMake.makeLottos());
-
         outputView.viewLotto(lottoAuto);
-        return allLottos;
+        lottos.addAll(lottoAuto);
+
+        winnerResult(lottos, price);
     }
 
-    private static void winnerResult(List<Lotto> allLottos, int payPrice) {
+    private static void winnerResult(List<Lotto> allLottos, Price price) {
         List<Integer> lastWinNumbers = NumberSplitUtils.splitWinNumberString(inputView.putLastWinNumbers());
         int bonusNumber = inputView.bonusNumberInput();
 
@@ -53,6 +45,6 @@ public class LottoAutoAndManualController {
         outputView.viewLottoRating(winnerScore);
 
         LottoWinner lottoWinner = new LottoWinner(winnerScore);
-        outputView.viewRating(lottoWinner.getRating(payPrice));
+        outputView.viewRating(lottoWinner.getRating(price));
     }
 }

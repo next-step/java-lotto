@@ -8,7 +8,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import step4.model.Lotto;
 import step4.model.LottoAutoMake;
 import step4.model.LottoCount;
-import step4.model.LottoManualMake;
+import step4.model.LottoNumbers;
+import step4.utils.NumberSplitUtils;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -30,10 +31,9 @@ public class LottoMakeTest {
     @MethodSource("generateData")
     @DisplayName("수동으로 입력한 로또는 입력받은 숫자 그대로 로또를 생성한다.")
     void lottoManualMakeTest(String manualLottoNumber, List<Integer> expectedLottoNumbers) {
-        LottoManualMake lottoAutoMake = new LottoManualMake(List.of(manualLottoNumber));
-        List<Lotto> lottoManual = lottoAutoMake.makeLottos();
+        Lotto lotto = new Lotto(new LottoNumbers(NumberSplitUtils.splitWinNumberString(manualLottoNumber)));
 
-        assertThat(lottoManual.get(0).getLottoNumbers().getNumbers()).isEqualTo(expectedLottoNumbers);
+        assertThat(lotto.getLottoNumbers().getNumbers()).isEqualTo(expectedLottoNumbers);
     }
 
     @ParameterizedTest

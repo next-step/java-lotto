@@ -1,8 +1,15 @@
 package step4.view;
 
-import java.util.ArrayList;
+import step4.model.Lotto;
+import step4.model.LottoCount;
+import step4.model.LottoNumbers;
+import step4.model.Price;
+import step4.utils.NumberSplitUtils;
+
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
 
@@ -13,26 +20,24 @@ public class InputView {
     private static final String PUT_LAST_WIN_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String PUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
-    public int payPriceInput() {
+    public Price payPriceInput() {
         System.out.println(PUT_PAY_PRICE);
-        return scanner.nextInt();
+        return new Price(scanner.nextInt());
     }
 
-    public int manualLottoCountInput() {
+    public LottoCount manualLottoCountInput() {
         scanner.nextLine();
         System.out.println(MANUAL_LOTTO_COUNT);
-        return scanner.nextInt();
+        return new LottoCount(scanner.nextInt());
     }
 
-    public List<String> manualLottoNumberInput(int manualLottoCount) {
+    public List<Lotto> manualLottoNumberInput(LottoCount manualLottoCount) {
         scanner.nextLine();
-        List<String> manualLottoNumber = new ArrayList<>();
         System.out.println(MANUAL_LOTTO_NUMBERS);
 
-        for (int i=0; i<manualLottoCount; i++) {
-            manualLottoNumber.add(scanner.nextLine());
-        }
-        return manualLottoNumber;
+        return IntStream.range(0, manualLottoCount.getCount())
+                .mapToObj(n -> new Lotto(new LottoNumbers(NumberSplitUtils.splitWinNumberString(scanner.nextLine()))))
+                .collect(Collectors.toList());
     }
 
     public String putLastWinNumbers() {

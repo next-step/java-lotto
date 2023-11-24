@@ -2,15 +2,14 @@ package step4.view;
 
 import step4.enumeration.LottoRank;
 import step4.model.Lotto;
-import step4.utils.CalculateUtils;
 
 import java.util.List;
 import java.util.Map;
 
 public class OutputView {
 
-    public void viewLottoCount(int payPrice, int manualLottoCount) {
-        System.out.println("수동으로 " + manualLottoCount + ", 자동으로 " + CalculateUtils.autoLottoCount(CalculateUtils.lottoCount(payPrice), manualLottoCount) + "개를 구매했습니다.");
+    public void viewLottoCount(int allLottoCount, int manualLottoCount) {
+        System.out.println("수동으로 " + manualLottoCount + ", 자동으로 " + allLottoCount + "개를 구매했습니다.");
     }
 
     public void viewLotto(List<Lotto> lottos) {

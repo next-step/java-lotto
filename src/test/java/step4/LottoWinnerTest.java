@@ -57,7 +57,7 @@ public class LottoWinnerTest {
         LottoWinner lottoWinner = new LottoWinner(winnerBoard);
         lottoWinner.getTotalPrice();
 
-        assertThat(lottoWinner.getRating(1000)).isEqualTo(rating);
+        assertThat(lottoWinner.getRating(new Price(1000))).isEqualTo(rating);
     }
 
     @ParameterizedTest

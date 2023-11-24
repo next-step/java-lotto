@@ -21,8 +21,8 @@ public class LottoWinner {
         return totalPrice;
     }
 
-    public Double getRating(int payPrice) {
+    public Double getRating(Price price) {
         int totalPrice = getTotalPrice();
-        return Math.floor(totalPrice * 100.0 / payPrice) / 100;
+        return Math.floor(totalPrice * 100.0 / price.getPayPrice()) / 100;
     }
 }
