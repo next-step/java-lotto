@@ -5,21 +5,21 @@ public class PurchaseAmount {
     private final int purchaseAmount;
 
     private PurchaseAmount(int purchaseAmount) {
+        validateUnit(purchaseAmount);
         this.purchaseAmount = purchaseAmount;
     }
 
     public static PurchaseAmount from(int purchaseAmount) {
-        validateUnit(purchaseAmount);
         return new PurchaseAmount(purchaseAmount);
     }
 
-    private static void validateUnit(int purchaseAmount) {
+    private void validateUnit(int purchaseAmount) {
         if (!isValidUnit(purchaseAmount)) {
             throw new IllegalArgumentException(String.format("구입 금액에는 %d원 단위의 숫자를 입력해야합니다.", LOTTO_PRICE));
         }
     }
 
-    private static boolean isValidUnit(int purchaseAmount) {
+    private boolean isValidUnit(int purchaseAmount) {
         return purchaseAmount % LOTTO_PRICE == 0;
     }
 

@@ -12,9 +12,9 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public PrizeSummary getPrizeSummary(Lotto winningLotto, LottoNumber bonusBall) {
+    public PrizeSummary getPrizeSummary(WinningCombo winningCombo) {
         Map<Rank, Integer> prizeSummary = initializePrizeSummary();
-        countPrizes(winningLotto, bonusBall, prizeSummary);
+        countPrizes(winningCombo, prizeSummary);
         return new PrizeSummary(prizeSummary);
     }
 
@@ -26,9 +26,9 @@ public class Lottos {
         return prizeSummary;
     }
 
-    private void countPrizes(Lotto winningLotto, LottoNumber bonusBall, Map<Rank, Integer> prizeSummary) {
+    private void countPrizes(WinningCombo winningCombo, Map<Rank, Integer> prizeSummary) {
         for (Lotto lotto : lottos) {
-            Rank rank = lotto.determinePrize(winningLotto, bonusBall);
+            Rank rank = winningCombo.determinePrize(lotto);
             prizeSummary.put(rank, prizeSummary.get(rank) + 1);
         }
     }

@@ -8,6 +8,7 @@ import lotto.domain.Lottos;
 import lotto.domain.PrizeSummary;
 import lotto.domain.Profit;
 import lotto.domain.PurchaseAmount;
+import lotto.domain.WinningCombo;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -28,14 +29,19 @@ public class LottoController {
         Lottos lottos = generateLottos(lottoCount);
         outputview.printLottos(lottos);
 
-        Lotto winningLotto = inputView.inputWinningLotto();
-        LottoNumber bonusBall = inputView.inputBonusBall();
-        PrizeSummary prizeSummary = lottos.getPrizeSummary(winningLotto, bonusBall);
+        WinningCombo winningCombo = createWinningCombo();
+        PrizeSummary prizeSummary = lottos.getPrizeSummary(winningCombo);
 
         outputview.printPrizeSummary(prizeSummary);
 
         Profit profit = Profit.of(purchaseAmount, prizeSummary);
         outputview.printProfit(profit);
+    }
+
+    private WinningCombo createWinningCombo() {
+        Lotto winningLotto = inputView.inputWinningLotto();
+        LottoNumber bonusBall = inputView.inputBonusBall();
+        return new WinningCombo(winningLotto, bonusBall);
     }
 
     private Lottos generateLottos(LottoCount lottoCount) {
