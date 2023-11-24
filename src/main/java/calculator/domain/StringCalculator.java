@@ -11,18 +11,15 @@ public class StringCalculator {
     public static Number calc(String strOperation) {
         validateStringOperation(strOperation);
 
-        Queue<String> operatorSequence = new ArrayDeque<>();
-        operatorSequence.addAll(List.of(split(strOperation)));
-
+        Queue<String> operatorSequence = new ArrayDeque<>(List.of(split(strOperation)));
         Number firstValue = new Number(operatorSequence.poll());
-        Number cumulativeValue = firstValue;
         while (!operatorSequence.isEmpty()) {
             String operator = operatorSequence.poll();
-            Number number = new Number(operatorSequence.poll());
-            cumulativeValue = Operator.calculate(cumulativeValue, operator, number);
+            Number secondValue = new Number(operatorSequence.poll());
+            firstValue = Operator.calculate(firstValue, operator, secondValue);
         }
 
-        return cumulativeValue;
+        return firstValue;
     }
 
     private static String[] split(String strOperation) {
