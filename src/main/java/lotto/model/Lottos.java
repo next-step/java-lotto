@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
@@ -32,11 +31,10 @@ public class Lottos {
         return this.tickets;
     }
 
-    public List<Integer> matchNumbers(LottoNumbers winningNumber) {
-        List<Integer> result = new ArrayList<>(Collections.nCopies(7, 0));
+    public List<LottoRank> ranks(LottoNumbers winningNumber, LottoNumber bonusNumber) {
+        List<LottoRank> result = new ArrayList<>();
         for (Lotto ticket : this.tickets) {
-            int matchCount = ticket.matchNumbers(winningNumber);
-            result.set(matchCount, result.get(matchCount) + 1);
+            result.add(ticket.rank(winningNumber, bonusNumber));
         }
         return result;
     }

@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.model.Lotto;
-import lotto.model.LottoCashPrize;
+import lotto.model.LottoRank;
 import lotto.model.LottoReport;
 import lotto.model.Lottos;
 
@@ -28,7 +28,7 @@ public class ResultView {
     public static void printResultReport(LottoReport report) {
         System.out.println(RESULT_MESSAGE);
         for (int i = 3; i < 7; i++) {
-            System.out.println(String.format(COLLECT_MESSAGE, i, LottoCashPrize.getByMatchCount(i).cashPrize(), report.result().get(i)));
+            System.out.println(String.format(COLLECT_MESSAGE, i, LottoRank.valueOf(i, false).cashPrize(), report.result().get(i)));
         }
         System.out.println(String.format(RATE_OF_RETURN_MESSAGE, report.rateOfReturn()));
     }

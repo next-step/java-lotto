@@ -3,26 +3,23 @@ package lotto.model;
 import java.util.List;
 
 public class LottoReport {
-    private final List<Integer> result;
+    private final List<LottoRank> result;
     private final double rateOfReturn;
 
-    public LottoReport(List<Integer> result) {
+    public LottoReport(List<LottoRank> result) {
         this.result = result;
         this.rateOfReturn = calculateRateOfReturn();
     }
 
     private double calculateRateOfReturn() {
-        return Math.floor(LottoCashPrize.calculateTotalPrize(this.result) / calculateTotalInvestment() * 100) / 100;
+        return Math.floor(LottoRank.calculateTotalPrize(this.result) / calculateTotalInvestment() * 100) / 100;
     }
 
     private double calculateTotalInvestment() {
-        int ticketCount = this.result.stream()
-                .mapToInt(Integer::intValue)
-                .sum();
-        return Lotto.price(ticketCount);
+        return Lotto.price(this.result.size());
     }
 
-    public List<Integer> result() {
+    public List<LottoRank> result() {
         return this.result;
     }
 

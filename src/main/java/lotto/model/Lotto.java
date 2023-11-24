@@ -31,8 +31,8 @@ public class Lotto {
         return count * TICKET_PRICE;
     }
 
-    public int matchNumbers(LottoNumbers winningNumber) {
-        return this.numbers.matchNumbers(winningNumber);
+    public LottoRank rank(LottoNumbers winningNumber, LottoNumber bonusNumber) {
+        return LottoRank.valueOf(this.numbers.matchNumbers(winningNumber), this.numbers.containsNumber(bonusNumber));
     }
 
     @Override
