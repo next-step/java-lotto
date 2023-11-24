@@ -29,8 +29,9 @@ public class MyLottos {
         return myLottos.get(index).numbersToObject();
     }
 
-    public void matchingNumbers(List<Integer> winningNumbers){
-        matchResult.addMatchResult(myLottos, winningNumbers);
+    public MatchResult matchMyLotto(WinningLotto winningLotto){
+        matchResult.addMatchResult(myLottos, winningLotto);
+        return matchResult;
     }
 
     public int returnMatchCountOf(int count){

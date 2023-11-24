@@ -24,17 +24,17 @@ public class MatchResult {
         }
     }
 
-    void addMatchResult(List<Lotto> myLottos, List<Integer> winningNumbers) {
+    void addMatchResult(List<Lotto> myLottos, WinningLotto winningLotto) {
         int myMatchCount = 0;
 
         for(Lotto lotto : myLottos){
-            myMatchCount = lotto.matchCount(winningNumbers);
+            myMatchCount = winningLotto.matchCount(lotto);
             matchResult.put(myMatchCount, matchResult.get(myMatchCount) + 1);
         }
 
     }
 
-    int matchCountOf(int count){
+    public int matchCountOf(int count){
         return matchResult.get(count);
     }
 
