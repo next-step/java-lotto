@@ -13,10 +13,13 @@ class LottoRankTest {
     @ParameterizedTest
     @CsvSource({
         "6, FIRST, false",
+        "6, FIRST, true",
         "5, SECOND, true",
         "5, THIRD, false",
         "4, FORTH, false",
+        "4, FORTH, true",
         "3, FIFTH, false",
+        "3, FIFTH, true",
         "0, LOSE, false",
         "0, LOSE, true",
     })
