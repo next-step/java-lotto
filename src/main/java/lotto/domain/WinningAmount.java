@@ -42,7 +42,7 @@ public enum WinningAmount {
     }
 
     private static WinningAmount isMatchBonus(int matchCount, boolean matchBonus) {
-        if (matchBonus == true && matchCount == 4) {
+        if (matchBonus && matchCount == 4) {
             return FIVE_MATCH_AND_BONUS;
         }
         return WINNING_AMOUNT_FINDER.get(matchCount);

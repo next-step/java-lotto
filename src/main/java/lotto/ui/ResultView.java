@@ -24,7 +24,7 @@ public class ResultView {
             hasBonusResult(matchCount, amount, count);
             return;
         }
-        System.out.println(matchCount + "개 일치, 보너스 볼 일치(" + amount + ")-" + count + "개");
+        System.out.println(matchCount + "개 일치(" + amount + ")-" + count + "개");
     }
 
     private void hasBonusResult(int matchCount, int amount, int count) {

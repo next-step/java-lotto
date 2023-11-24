@@ -1,17 +1,30 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class LottoNumber {
     public static final int START_NUMBER = 1;
     public static final int END_NUMBER = 45;
     private int number;
-
-    public LottoNumber() {}
 
     public LottoNumber(int number) {
         if (number < START_NUMBER || END_NUMBER < number) {
             throw new IllegalArgumentException("Lotto number is more than 1 and less then 46");
         }
         this.number = number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
+        LottoNumber other = (LottoNumber) o;
+        return number == other.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 
     public void checkDuplicateNumber(LottoNumber other) {

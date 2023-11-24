@@ -12,7 +12,7 @@ public class Lottos {
         finder = new WinningFinder(new Lotto(winningLottoNumbers));
     }
 
-    public Lottos(List<Lotto> lottoList, List<Integer> winningLottoNumbers, Integer bonusNumber) {
+    public Lottos(List<Lotto> lottoList, List<Integer> winningLottoNumbers, int bonusNumber) {
         this.lottoList = lottoList;
         finder = new WinningFinder(new Lotto(winningLottoNumbers), bonusNumber);
     }

@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 
 public class WinningFinder {
@@ -26,12 +25,9 @@ public class WinningFinder {
 
     public void countWinning(Lotto lotto) {
         int countMatch = lotto.countWinningNumber(winningLotto.getNumbers());
-        WinningAmount winningAmount = WinningAmount.findWinningAmountByMatchCount(countMatch, hasBonus());
+        boolean hasBonus = lotto.hasBonus(bonusNumber);
+        WinningAmount winningAmount = WinningAmount.findWinningAmountByMatchCount(countMatch, hasBonus);
         mergeIfMoreThanThreeMatch(winningAmount);
-    }
-
-    private boolean hasBonus() {
-        return bonusNumber != null;
     }
 
     private void mergeIfMoreThanThreeMatch(WinningAmount winningAmount) {
@@ -40,11 +36,23 @@ public class WinningFinder {
         };
     }
 
-    public final HashMap<WinningAmount, Integer> findWinningLottos() {
+    public final LinkedHashMap<WinningAmount, Integer> findWinningLottos() {
         LinkedHashMap<WinningAmount, Integer> sortedWinningLottos = new LinkedHashMap<>();
-        for (WinningAmount winningAmount : WinningAmount.values()) {
+        WinningAmount[] winningAmounts = checkBonusNumber(WinningAmount.values());
+
+        for (WinningAmount winningAmount : winningAmounts) {
             sortedWinningLottos.put(winningAmount, winningLottos.get(winningAmount));
         }
         return sortedWinningLottos;
+    }
+
+    private WinningAmount[] checkBonusNumber(WinningAmount[] winningAmounts) {
+        if (bonusNumber == null) {
+            List<WinningAmount> winningAmountsList = new ArrayList<>(Arrays.asList(WinningAmount.values()));
+            winningAmountsList.remove(WinningAmount.FIVE_MATCH_AND_BONUS);
+            WinningAmount[] filteredArray = winningAmountsList.toArray(new WinningAmount[0]);
+            return filteredArray;
+        }
+        return winningAmounts;
     }
 }

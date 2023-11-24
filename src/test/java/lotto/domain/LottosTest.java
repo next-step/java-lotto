@@ -3,6 +3,8 @@ package lotto.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,11 +32,19 @@ class LottosTest {
     @DisplayName("보너스 번호에 따른 로또를 확인한다.")
     @Test
     void findLottoHasBonus() {
-        List<Integer> winningNumber = List.of(1,2,3,4,5,6);
         Lotto lotto = new Lotto(List.of(1,2,3,4,10,11));
-        Lottos lottos = new Lottos(List.of(lotto), winningNumber, 5);
+        List<Integer> winningNumber = List.of(1,2,3,4,5,6);
+        Lottos lottos = new Lottos(List.of(lotto), winningNumber, 10);
 
         HashMap<WinningAmount, Integer> result = lottos.countAllWinning();
         Assertions.assertThat(result.get(FIVE_MATCH_AND_BONUS)).isEqualTo(1);
+    }
+
+    @DisplayName("로또 번호에 보너스 번호가 있는지 확인한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "7:false"}, delimiter = ':')
+    void checkHasBonus(int bonusNumber, boolean result) {
+        Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
+        Assertions.assertThat(lotto.hasBonus(new LottoNumber(bonusNumber))).isEqualTo(result);
     }
 }

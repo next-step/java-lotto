@@ -59,4 +59,9 @@ public class Lotto {
     private int getNumberIfEqual(LottoNumber lottoNumber, LottoNumber winningNumber) {
         return lottoNumber.getResultIfEqual(winningNumber);
     }
+
+    public boolean hasBonus(LottoNumber bonus) {
+        return bonus != null && numbers.stream()
+                .anyMatch(e -> e.getResultIfEqual(bonus) == 1);
+    }
 }
