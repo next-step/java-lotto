@@ -9,8 +9,14 @@ public class Money {
     private final long money;
 
     public Money(long money) {
-        validateMoney(money);
+        validate(money);
         this.money = money;
+    }
+
+    private void validate(long money) {
+        validateMoney(money);
+        validateMoneyToBuyLotto(money);
+        validateMoneyToGoBack(money);
     }
 
     private void validateMoney(long money) {
@@ -23,34 +29,28 @@ public class Money {
         return money < 0;
     }
 
-    public long lottoQuantity() {
-        validateFee();
-        return changeToLottoCnt();
-    }
-
-    private void validateFee() {
-        validateMoneyToBuyLotto();
-        validateMoneyToGoBack();
-    }
-
-    private void validateMoneyToBuyLotto() {
-        if (!purchasable()) {
+    private void validateMoneyToBuyLotto(long money) {
+        if (!purchasable(money)) {
             throw new IllegalStateException(CANNOT_BUY_EVEN_ONLY_ONE_LOTTO_EXCEPTION);
         }
     }
 
-    private boolean purchasable() {
-        return money > LOTTO_PRICE;
+    private boolean purchasable(long money) {
+        return money >= LOTTO_PRICE;
     }
 
-    private void validateMoneyToGoBack() {
-        if (changeable()) {
+    private void validateMoneyToGoBack(long money) {
+        if (changeable(money)) {
             throw new IllegalStateException(MONEY_TO_GO_BACK_EXCEPTION);
         }
     }
 
-    private boolean changeable() {
+    private boolean changeable(long money) {
         return money % LOTTO_PRICE != 0;
+    }
+
+    public long lottoQuantity() {
+        return changeToLottoCnt();
     }
 
     private long changeToLottoCnt() {
