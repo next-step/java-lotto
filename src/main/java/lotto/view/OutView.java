@@ -35,7 +35,7 @@ public class OutView {
     }
 
     public static String printMatchPoint(MatchPoint matchPoint) {
-        if(matchPoint == MatchPoint.FIFTH_BONUS) {
+        if(MatchPoint.isSameFIFTH_BONUS(matchPoint)) {
             return matchPoint.getMatch() + "개 일치, 보너스 볼 일치" + "(" + matchPoint.getWinningAmt() + "원)-";
         }
         return matchPoint.getMatch() + "개 일치" + "(" + matchPoint.getWinningAmt() + "원)-";

@@ -19,6 +19,10 @@ public enum MatchPoint {
         this.winningAmt = winningAmt;
     }
 
+    public static boolean isSameFIFTH_BONUS(MatchPoint matchPoint) {
+        return matchPoint == FIFTH_BONUS;
+    }
+
     public int getMatch() {
         return this.match;
     }
