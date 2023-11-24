@@ -7,20 +7,20 @@ public class RankResultDto {
 
     private final int countOfMatch;
     private final long prizeMoney;
-    private final long rankCnt;
+    private final long rankCount;
 
-    public RankResultDto(int countOfMatch, long prizeMoney, long rankCnt) {
+    public RankResultDto(int countOfMatch, long prizeMoney, long rankCount) {
         this.countOfMatch = countOfMatch;
         this.prizeMoney = prizeMoney;
-        this.rankCnt = rankCnt;
+        this.rankCount = rankCount;
     }
 
     public static RankResultDto valueOf(RankResult rankResult) {
         Rank rank = rankResult.getRank();
         int countOfMatch = rank.getCountOfMatch();
         long prizeMoney = rank.getPrizeMoney();
-        long rankCnt = rankResult.getRankCnt();
-        return new RankResultDto(countOfMatch, prizeMoney, rankCnt);
+        long rankCount = rankResult.getRankCnt();
+        return new RankResultDto(countOfMatch, prizeMoney, rankCount);
     }
 
     public int getCountOfMatch() {
@@ -32,6 +32,6 @@ public class RankResultDto {
     }
 
     public long getRankCnt() {
-        return rankCnt;
+        return rankCount;
     }
 }
