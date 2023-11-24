@@ -34,7 +34,7 @@ public class LottoGenerator {
 
     private static List<String> getUserInputs(Money money) {
         int manualLottoCount = LottoInputView.inputPurchaseManualLottoCount();
-        money.purchaseManualLotto(manualLottoCount);
+        money = money.purchaseManualLotto(manualLottoCount);
         return LottoInputView.inputManualLottoNumbers(manualLottoCount);
     }
 
