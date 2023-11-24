@@ -18,6 +18,10 @@ public class LottoLine {
         return new LottoLine(lottoNumbers);
     }
 
+    public static LottoLine create(Set<LottoNumber> lottoNumbers) {
+        return new LottoLine(lottoNumbers);
+    }
+
     private static Set<LottoNumber> chooseLottoNumber() {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
 

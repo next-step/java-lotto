@@ -17,8 +17,12 @@ public class LottoStatistics {
                 Rank.MISS, 0));
     }
 
-    public void calculate(int matchCount) {
-        Rank rank = Rank.valueOf(matchCount);
+
+    public void calculate(int matchCount, boolean matchBonusBall) {
+        updateRankCounts(Rank.valueOf(matchCount, matchBonusBall));
+    }
+
+    private void updateRankCounts(Rank rank) {
         rankCounts.put(rank, rankCounts.get(rank) + 1);
         totalProfit += rank.getWinningMoney();
     }
@@ -27,7 +31,7 @@ public class LottoStatistics {
         return totalProfit;
     }
 
-    public int getMatchCount(Rank rank) {
-        return rankCounts.get(rank);
+    public Map<Rank, Integer> getRankCounts() {
+        return rankCounts;
     }
 }

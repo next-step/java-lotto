@@ -11,12 +11,26 @@ public class WinnginLottoLine extends LottoLine {
         super(lottoNumbers);
     }
 
-    public void match(List<LottoLine> lottoLines, LottoStatistics lottoStatistics) {
+    public LottoStatistics match(List<LottoLine> lottoLines, LottoNumber bonusBall) {
+        LottoStatistics lottoStatistics = new LottoStatistics();
+
         lottoLines.forEach(lottoLine -> {
-            Set<LottoNumber> winningLottoNumbers = new HashSet<>(this.getLottoNumbers());
+            Set<LottoNumber> winningLottoNumbers = getWinningLottoNumbers(bonusBall);
+
             winningLottoNumbers.retainAll(lottoLine.getLottoNumbers());
             int matchCount = winningLottoNumbers.size();
-            lottoStatistics.calculate(matchCount);
+            boolean matchBonusBall = lottoLine.getLottoNumbers().contains(bonusBall);
+
+            lottoStatistics.calculate(matchCount, matchBonusBall);
         });
+
+        return lottoStatistics;
+    }
+
+    private Set<LottoNumber> getWinningLottoNumbers(LottoNumber bonusBall) {
+        Set<LottoNumber> winningLottoNumbers = new HashSet<>(this.getLottoNumbers());
+        winningLottoNumbers.add(bonusBall);
+
+        return winningLottoNumbers;
     }
 }

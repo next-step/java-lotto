@@ -6,13 +6,15 @@ import java.util.List;
 public class LottoGame {
     private static final int LOTTO_PRICE = 1000;
     private final List<LottoLine> lottoLines;
-    private final LottoStatistics lottoStatistics;
     private final int gameCount;
+    private LottoStatistics lottoStatistics;
     private WinnginLottoLine winningLottoLine;
+    private LottoNumber bonusBall;
+
+    private double profitRate;
 
 
-    private LottoGame(int buyingPrice) {
-        this.lottoStatistics = new LottoStatistics();
+    protected LottoGame(int buyingPrice) {
         this.lottoLines = new ArrayList<>();
         this.gameCount = calculateGameCount(buyingPrice);
         buyLottoLines();
@@ -21,14 +23,15 @@ public class LottoGame {
     private static int calculateGameCount(int buyingPrice) {
         return buyingPrice / LOTTO_PRICE;
     }
-    
+
     public static LottoGame from(Integer buyingPrice) {
         return new LottoGame(buyingPrice);
     }
 
 
     public void calculateStatistics() {
-        winningLottoLine.match(lottoLines, lottoStatistics);
+        this.lottoStatistics = winningLottoLine.match(lottoLines, bonusBall);
+        this.profitRate = lottoStatistics.getTotalProfit() / ((double) gameCount * LOTTO_PRICE);
     }
 
     public void registerWinningLottoLine(WinnginLottoLine winningLottoLine) {
@@ -60,7 +63,16 @@ public class LottoGame {
         return lottoStatistics;
     }
 
+    public LottoNumber getBonusBall() {
+        return bonusBall;
+    }
+
+
     public double getProfitRate() {
-        return lottoStatistics.getTotalProfit() / ((double) gameCount * LOTTO_PRICE);
+        return profitRate;
+    }
+
+    public void registerBonusBall(int bonusBall) {
+        this.bonusBall = LottoNumber.from(bonusBall);
     }
 }
