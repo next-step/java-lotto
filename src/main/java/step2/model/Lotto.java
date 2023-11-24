@@ -13,13 +13,13 @@ public class Lotto {
 
     public Lotto(int[] givenLottoNumbers) {
         this(Arrays.stream(givenLottoNumbers)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toSet()));
     }
 
     public Lotto(List<Integer> givenLottoNumbers) {
         this(givenLottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet()));
     }
 

@@ -1,5 +1,7 @@
 package step2.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
@@ -7,14 +9,26 @@ public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private final int number;
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
-    public LottoNumber(int number) {
-        validateRangeLottoNumber(number);
+    static {
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
+    }
+
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private void validateRangeLottoNumber(int number) {
-        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
+    public static LottoNumber of(int number) {
+        LottoNumber lottoNumber = lottoNumbers.get(number);
+        validateRangeLottoNumber(lottoNumber);
+        return lottoNumber;
+    }
+
+    private static void validateRangeLottoNumber(LottoNumber lottoNumber) {
+        if (lottoNumber == null) {
             throw new IllegalArgumentException("로또 숫자는 1에서 45 사이만 가능합니다.");
         }
     }

@@ -16,7 +16,7 @@ public class LottoTest {
     @Test
     public void 로또가_보너스번호를_포함여부_테스트() {
         Lotto lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
-        LottoNumber bonusNumber = new LottoNumber(1);
+        LottoNumber bonusNumber = LottoNumber.of(1);
 
         assertThat(lotto.containsLottoNumber(bonusNumber)).isTrue();
     }

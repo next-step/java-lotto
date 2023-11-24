@@ -15,14 +15,14 @@ public class LottoNumberTest {
 
     @Test
     void 로또번호는_숫자가_같으면_같다() {
-        LottoNumber lottoNumber1 = new LottoNumber(1);
-        LottoNumber lottoNumber2 = new LottoNumber(1);
+        LottoNumber lottoNumber1 = LottoNumber.of(1);
+        LottoNumber lottoNumber2 = LottoNumber.of(1);
         assertThat(lottoNumber1).isEqualTo(lottoNumber2);
     }
     @ParameterizedTest
     @ValueSource(ints = {MIN_LOTTO_NUMBER - 1, MAX_LOTTO_NUMBER + 1})
     public void 범위를_벗어난_로또숫자_전달_시_예외_테스트(int givenLottoNumber) {
-        assertThatThrownBy(() -> new LottoNumber(givenLottoNumber))
+        assertThatThrownBy(() -> LottoNumber.of(givenLottoNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

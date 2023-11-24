@@ -10,13 +10,13 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public WinningLotto(List<Integer> givenWinningLottoNumbers, Integer bonusNumber) {
-        this(new Lotto(givenWinningLottoNumbers), new LottoNumber(bonusNumber));
+        this(new Lotto(givenWinningLottoNumbers), LottoNumber.of(bonusNumber));
     }
 
     public WinningLotto(int[] givenWinningLottoNumbers, Integer bonusNumber) {
         this(new Lotto(Arrays.stream(givenWinningLottoNumbers)
                 .boxed()
-                .collect(Collectors.toList())), new LottoNumber(bonusNumber));
+                .collect(Collectors.toList())), LottoNumber.of(bonusNumber));
     }
 
     public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
