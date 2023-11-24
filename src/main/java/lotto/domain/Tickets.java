@@ -21,28 +21,28 @@ public class Tickets {
         }
     }
 
-    public EnumMap<Rank, Integer> makeStatistics(Numbers winningNumbers) {
+    public EnumMap<Rank, Integer> makeStatistics(LottoNumbers winningLottoNumbers) {
         EnumMap<Rank, Integer> countPerPrize = new EnumMap<>(Rank.class);
         initEnumMap(countPerPrize);
 
         for (Ticket ticket : tickets) {
-            Rank.fromCount(ticket.match(winningNumbers)).ifPresent(rank -> countPerPrize.put(rank, countPerPrize.get(rank) + 1));
+            Rank.fromCount(ticket.match(winningLottoNumbers)).ifPresent(rank -> countPerPrize.put(rank, countPerPrize.get(rank) + 1));
         }
 
         return countPerPrize;
     }
 
-    public long calcWinningAmount(Numbers winningNumbers) {
+    public long calcWinningAmount(LottoNumbers winningLottoNumbers) {
         long totalAmount = 0;
-        for (Map.Entry<Rank, Integer> entry : this.makeStatistics(winningNumbers).entrySet()) {
+        for (Map.Entry<Rank, Integer> entry : this.makeStatistics(winningLottoNumbers).entrySet()) {
             totalAmount += entry.getKey().calcWinningAmountPerRank(entry.getValue());
         }
         return totalAmount;
     }
 
 
-    public double calcRateOfReturn(Numbers winningNumbers) {
-        return (double) this.calcWinningAmount(winningNumbers) / (this.ticketCount() * Ticket.PRICE);
+    public double calcRateOfReturn(LottoNumbers winningLottoNumbers) {
+        return (double) this.calcWinningAmount(winningLottoNumbers) / (this.ticketCount() * Ticket.PRICE);
     }
 
     public void addTicket(Ticket ticket) {

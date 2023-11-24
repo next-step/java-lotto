@@ -1,12 +1,12 @@
 package lotto.domain;
 
-public class Number implements Comparable<Number> {
+public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
 
     private final int number;
 
-    public Number(int input) {
+    public LottoNumber(int input) {
         validateNumber(input);
         this.number = input;
     }
@@ -18,12 +18,12 @@ public class Number implements Comparable<Number> {
     }
 
     @Override
-    public int compareTo(Number target) {
+    public int compareTo(LottoNumber target) {
         return this.number - target.number;
     }
 
     @Override
     public String toString() {
-        return this.number + "";
+        return String.valueOf(this.number);
     }
 }

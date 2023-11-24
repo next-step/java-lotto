@@ -4,11 +4,11 @@ import lotto.enums.Rank;
 
 import java.util.EnumMap;
 
-public class Result {
+public class LottoResult {
     private final EnumMap<Rank, Integer> winningCountPerRank;
     private final double rateOfReturn;
 
-    public Result(EnumMap<Rank, Integer> winningCountPerRank, double rateOfReturn) {
+    public LottoResult(EnumMap<Rank, Integer> winningCountPerRank, double rateOfReturn) {
         this.winningCountPerRank = winningCountPerRank;
         this.rateOfReturn = rateOfReturn;
     }

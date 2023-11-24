@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.Result;
+import lotto.LottoResult;
 import lotto.domain.Ticket;
 import lotto.domain.Tickets;
 import lotto.enums.Rank;
@@ -14,13 +14,11 @@ public class LottoResultView {
         }
     }
 
-    public static void printResult(Result result) {
+    public static void printResult(LottoResult lottoResult) {
         System.out.println("당첨결과\n================================");
-        for (Map.Entry<Rank, Integer> entry : result.getWinningCountPerRank().entrySet()) {
-            System.out.printf("%s : %d개 일치(%d원) - %d개%n",
-                    entry.getKey().toString(), entry.getKey().getMatchCount(), entry.getKey().getPrizeAmount(), entry.getValue()
-            );
+        for (Map.Entry<Rank, Integer> entry : lottoResult.getWinningCountPerRank().entrySet()) {
+            System.out.printf("%d개 일치(%d원) - %d개%n", entry.getKey().getMatchCount(), entry.getKey().getPrizeAmount(), entry.getValue());
         }
-        System.out.printf("총 수익률은 %.2f 입니다.%n", result.getRateOfReturn());
+        System.out.printf("총 수익률은 %.2f 입니다.%n", lottoResult.getRateOfReturn());
     }
 }
