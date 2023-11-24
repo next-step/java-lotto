@@ -44,7 +44,7 @@ public class Lotto {
     private Set<LottoNumber> createLotto(List<Integer> lottoNumbers) {
         Set<LottoNumber> lotto = new HashSet<>();
         for (Integer lottoNumber : lottoNumbers) {
-            lotto.add(new LottoNumber(lottoNumber));
+            lotto.add(LottoNumber.randomLottoNumber(lottoNumber));
         }
         return lotto;
     }
