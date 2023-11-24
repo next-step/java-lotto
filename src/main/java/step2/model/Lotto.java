@@ -11,9 +11,10 @@ public class Lotto {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(Set<LottoNumber> lottoNumbers) {
-        validateLottoNumberSize(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(int[] givenLottoNumbers) {
+        this(Arrays.stream(givenLottoNumbers)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toSet()));
     }
 
     public Lotto(List<Integer> givenLottoNumbers) {
@@ -22,10 +23,9 @@ public class Lotto {
                 .collect(Collectors.toSet()));
     }
 
-    public Lotto(int[] givenLottoNumbers) {
-        this(Arrays.stream(givenLottoNumbers)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toSet()));
+    public Lotto(Set<LottoNumber> lottoNumbers) {
+        validateLottoNumberSize(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
     private void validateLottoNumberSize(Set<LottoNumber> lottoNumbers) {
