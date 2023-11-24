@@ -5,22 +5,16 @@ import java.util.List;
 
 public class Lottos {
     private List<Lotto> lottoList;
-    private WinningFinder finder;
 
-    public Lottos(List<Lotto> lottoList, List<Integer> winningLottoNumbers) {
+    public Lottos(List<Lotto> lottoList) {
         this.lottoList = lottoList;
-        finder = new WinningFinder(new Lotto(winningLottoNumbers));
     }
 
-    public Lottos(List<Lotto> lottoList, List<Integer> winningLottoNumbers, int bonusNumber) {
-        this.lottoList = lottoList;
-        finder = new WinningFinder(new Lotto(winningLottoNumbers), bonusNumber);
-    }
-
-    public HashMap<WinningAmount, Integer> countAllWinning() {
+    public HashMap<WinningAmount, Integer> countAllWinning(WinningLotto winningLotto) {
         for (Lotto lotto : lottoList) {
-            finder.countWinning(lotto);
+            winningLotto.countWinning(lotto);
         }
-        return finder.findWinningLottos();
+
+        return winningLotto.sortWinningLottos();
     }
 }

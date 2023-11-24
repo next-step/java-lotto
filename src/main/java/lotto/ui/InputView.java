@@ -21,7 +21,7 @@ public class InputView {
         return Integer.parseInt(amount);
     }
 
-    public List<Lotto> calculateLottoCount(Integer amount) {
+    public List<Lotto> calculateLottos(Integer amount) {
         Integer lottoCount = amount / LOTTO_PRICE;
         System.out.println(lottoCount + "개를 구입했습니다.");
         return generateLottos(lottoCount);
@@ -57,20 +57,20 @@ public class InputView {
         return Integer.parseInt(bonusNumber);
     }
 
-    public List<Integer> inputWinningNumber() {
+    public Lotto inputWinningLotto() {
         System.out.println("당첨 번호를 입력해주세요.");
         Scanner scanner = new Scanner(System.in);
         String winningNumber = scanner.nextLine();
         System.out.println("");
-        return convertToLottoNumber(winningNumber);
+        return convertToLotto(winningNumber);
     }
 
-    private List<Integer> convertToLottoNumber(String winningNumber) {
+    private Lotto convertToLotto(String winningNumber) {
         List<Integer> winningLottoNumber = new ArrayList<>(6);
         String[] numbers = winningNumber.split(DELIMITER_COMMA_EMPTY);
         for (String number : numbers) {
             winningLottoNumber.add(Integer.valueOf(number));
         }
-        return winningLottoNumber;
+        return new Lotto(winningLottoNumber);
     }
 }

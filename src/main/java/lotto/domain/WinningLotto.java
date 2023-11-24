@@ -3,23 +3,23 @@ package lotto.domain;
 import java.util.*;
 
 
-public class WinningFinder {
+public class WinningLotto {
     private Lotto winningLotto;
     private LottoNumber bonusNumber;
-    private HashMap<WinningAmount, Integer> winningLottos = new HashMap<>();
+    private HashMap<WinningAmount, Integer> countByMatch  = new HashMap<>();
 
-    public WinningFinder(Lotto winningLotto) {
+    public WinningLotto(Lotto winningLotto) {
         this.winningLotto = winningLotto;
         for (WinningAmount winningAmount : WinningAmount.values()) {
-            winningLottos.put(winningAmount, 0);
+            countByMatch.put(winningAmount, 0);
         }
     }
 
-    public WinningFinder(Lotto winningLotto, int bonusNumber) {
+    public WinningLotto(Lotto winningLotto, int bonusNumber) {
         this.winningLotto = winningLotto;
         this.bonusNumber = new LottoNumber(bonusNumber);
         for (WinningAmount winningAmount : WinningAmount.values()) {
-            winningLottos.put(winningAmount, 0);
+            countByMatch.put(winningAmount, 0);
         }
     }
 
@@ -32,16 +32,16 @@ public class WinningFinder {
 
     private void mergeIfMoreThanThreeMatch(WinningAmount winningAmount) {
         if (winningAmount != null) {
-            winningLottos.merge(winningAmount, 1, Integer::sum);
+            countByMatch.merge(winningAmount, 1, Integer::sum);
         };
     }
 
-    public final LinkedHashMap<WinningAmount, Integer> findWinningLottos() {
+    public final LinkedHashMap<WinningAmount, Integer> sortWinningLottos() {
         LinkedHashMap<WinningAmount, Integer> sortedWinningLottos = new LinkedHashMap<>();
         WinningAmount[] winningAmounts = checkBonusNumber(WinningAmount.values());
 
         for (WinningAmount winningAmount : winningAmounts) {
-            sortedWinningLottos.put(winningAmount, winningLottos.get(winningAmount));
+            sortedWinningLottos.put(winningAmount, countByMatch.get(winningAmount));
         }
         return sortedWinningLottos;
     }

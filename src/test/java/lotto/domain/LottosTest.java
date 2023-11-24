@@ -21,9 +21,10 @@ class LottosTest {
         Lotto lotto1 = new Lotto(List.of(1,2,3,4,5,6));
         Lotto lotto2 = new Lotto(List.of(10,2,3,4,5,6));
         Lotto lotto3 = new Lotto(List.of(10,11,3,4,5,6));
-        Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3), winningNumber);
+        Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3));
 
-        HashMap<WinningAmount, Integer> result = lottos.countAllWinning();
+        HashMap<WinningAmount, Integer> result = lottos
+                .countAllWinning(new WinningLotto(new Lotto(winningNumber)));
         Assertions.assertThat(result.get(FOUR_MATCH)).isEqualTo(1);
         Assertions.assertThat(result.get(FIVE_MATCH)).isEqualTo(1);
         Assertions.assertThat(result.get(SIX_MATCH)).isEqualTo(1);
@@ -33,10 +34,12 @@ class LottosTest {
     @Test
     void findLottoHasBonus() {
         Lotto lotto = new Lotto(List.of(1,2,3,4,10,11));
+        Lottos lottos = new Lottos(List.of(lotto));
         List<Integer> winningNumber = List.of(1,2,3,4,5,6);
-        Lottos lottos = new Lottos(List.of(lotto), winningNumber, 10);
 
-        HashMap<WinningAmount, Integer> result = lottos.countAllWinning();
+        HashMap<WinningAmount, Integer> result = lottos
+                .countAllWinning(new WinningLotto(new Lotto(winningNumber), 10));
+
         Assertions.assertThat(result.get(FIVE_MATCH_AND_BONUS)).isEqualTo(1);
     }
 

@@ -4,6 +4,7 @@ import lotto.application.dto.LottoRequest;
 import lotto.application.dto.LottoResponse;
 import lotto.domain.Lottos;
 import lotto.domain.WinningAmount;
+import lotto.domain.WinningLotto;
 
 import java.util.HashMap;
 
@@ -11,7 +12,9 @@ public class BenefitCalculator {
 
     public LottoResponse calculateBenefit(LottoRequest request) {
         Lottos lottos = request.getLottos();
-        HashMap<WinningAmount, Integer> countAllWinning = lottos.countAllWinning();
+        WinningLotto winningLotto = new WinningLotto(request.getWinningLotto(), request.getBonusNumber());
+
+        HashMap<WinningAmount, Integer> countAllWinning = lottos.countAllWinning(winningLotto);
         String rateOfReturn = calculateRateOfReturn(request.getInputAmount(), countAllWinning);
         return new LottoResponse(rateOfReturn, countAllWinning);
     }
