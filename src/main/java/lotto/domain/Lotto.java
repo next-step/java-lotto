@@ -4,20 +4,21 @@ import lotto.enums.Rank;
 
 import java.util.*;
 
-public class Tickets {
-    private List<Ticket> tickets = new ArrayList<>();
+public class Lotto {
+    public static final int PRICE = 1000;
+    private List<LottoNumbers> lottoNumbers = new ArrayList<>();
 
-    public Tickets() {
+    public Lotto() {
     }
 
-    public Tickets(List<Ticket> tickets) {
-        this.tickets = tickets;
+    public Lotto(List<LottoNumbers> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public void sellTickets(long amount) {
-        while (amount >= Ticket.PRICE) {
-            this.addTicket(new Ticket());
-            amount -= Ticket.PRICE;
+    public void sellLotto(long amount) {
+        while (amount >= PRICE) {
+            this.lottoNumbers.add(new LottoNumbers());
+            amount -= PRICE;
         }
     }
 
@@ -25,8 +26,8 @@ public class Tickets {
         EnumMap<Rank, Integer> countPerPrize = new EnumMap<>(Rank.class);
         initEnumMap(countPerPrize);
 
-        for (Ticket ticket : tickets) {
-            Rank.fromCount(ticket.match(winningLottoNumbers)).ifPresent(rank -> countPerPrize.put(rank, countPerPrize.get(rank) + 1));
+        for (LottoNumbers numbers : lottoNumbers) {
+            Rank.fromCount(numbers.compareNumbers(winningLottoNumbers)).ifPresent(rank -> countPerPrize.put(rank, countPerPrize.get(rank) + 1));
         }
 
         return countPerPrize;
@@ -42,19 +43,16 @@ public class Tickets {
 
 
     public double calcRateOfReturn(LottoNumbers winningLottoNumbers) {
-        return (double) this.calcWinningAmount(winningLottoNumbers) / (this.ticketCount() * Ticket.PRICE);
+        return (double) this.calcWinningAmount(winningLottoNumbers) / (lottoNumbersCount() * PRICE);
     }
 
-    public void addTicket(Ticket ticket) {
-        this.tickets.add(ticket);
+    int lottoNumbersCount() {
+        return this.lottoNumbers.size();
     }
 
-    public int ticketCount() {
-        return tickets.size();
-    }
 
-    public List<Ticket> getTickets() {
-        return Collections.unmodifiableList(this.tickets);
+    public List<LottoNumbers> getLottoNumbers() {
+        return Collections.unmodifiableList(this.lottoNumbers);
     }
 
     private void initEnumMap(EnumMap<Rank, Integer> countPerPrize) {

@@ -8,18 +8,18 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class TicketsTest {
+class LottoTest {
 
     @Test
-    void test_티켓판매() {
-        Tickets tickets = new Tickets();
-        tickets.sellTickets(32500L);
-        assertThat(tickets.ticketCount()).isEqualTo(32);
+    void test_로또판매() {
+        Lotto lotto = new Lotto();
+        lotto.sellLotto(32500L);
+        assertThat(lotto.lottoNumbersCount()).isEqualTo(32);
     }
 
     @Test
     void test_등수별카운드() {
-        Tickets tickets = new Tickets(List.of(new Ticket(new LottoNumbers("1, 2, 3, 4, 5, 6")), new Ticket(new LottoNumbers("1, 2, 3, 4, 5, 45"))));
+        Lotto lotto = new Lotto(List.of(new LottoNumbers("1, 2, 3, 4, 5, 6"), new LottoNumbers("1, 2, 3, 4, 5, 45")));
         LottoNumbers winningLottoNumbers = new LottoNumbers("1, 2, 3, 4, 5, 6");
 
         EnumMap<Rank, Integer> countPerPrize = new EnumMap<>(Rank.class);
@@ -29,23 +29,23 @@ class TicketsTest {
             countPerPrize.putIfAbsent(rank, 0);
         }
 
-        assertThat(countPerPrize.toString()).isEqualTo(tickets.makeStatistics(winningLottoNumbers).toString());
+        assertThat(countPerPrize.toString()).isEqualTo(lotto.makeStatistics(winningLottoNumbers).toString());
     }
 
     @Test
     void test_당첨금계산() {
+        Lotto lotto = new Lotto(List.of(new LottoNumbers("1, 2, 3, 4, 5, 6"), new LottoNumbers("1, 2, 3, 4, 5, 45")));
         LottoNumbers winningLottoNumbers = new LottoNumbers("1, 2, 3, 4, 5, 6");
-        Tickets tickets = new Tickets(List.of(new Ticket(new LottoNumbers("1, 2, 3, 4, 5, 6")), new Ticket(new LottoNumbers("1, 2, 3, 4, 5, 45"))));
 
-        assertThat(tickets.calcWinningAmount(winningLottoNumbers)).isEqualTo(2000000000L + 150000000L);
+        assertThat(lotto.calcWinningAmount(winningLottoNumbers)).isEqualTo(2000000000L + 150000000L);
     }
 
     @Test
     void test_수익률계산() {
+        Lotto lotto = new Lotto(List.of(new LottoNumbers("1, 2, 3, 4, 5, 6"), new LottoNumbers("1, 2, 3, 4, 5, 45")));
         LottoNumbers winningLottoNumbers = new LottoNumbers("1, 2, 3, 4, 5, 6");
-        Tickets tickets = new Tickets(List.of(new Ticket(new LottoNumbers("1, 2, 3, 4, 5, 6")), new Ticket(new LottoNumbers("1, 2, 3, 4, 5, 45"))));
 
         double rateOfReturn = (double) (2000000000L + 150000000L) / 2000L;
-        assertThat(tickets.calcRateOfReturn(winningLottoNumbers)).isEqualTo(rateOfReturn);
+        assertThat(lotto.calcRateOfReturn(winningLottoNumbers)).isEqualTo(rateOfReturn);
     }
 }
