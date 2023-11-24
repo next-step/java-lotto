@@ -23,8 +23,7 @@ public class LottoController {
     }
 
     public LottosDto buyLottos(long fee) {
-        Money money = new Money(fee);
-        long lottoQuantity = money.lottoQuantity();
+        long lottoQuantity = new Money(fee).lottoQuantity();
         outputView.printPurchasedLottoCnt(lottoQuantity);
         Lottos purchasedLottos = lottoMachine.createLottos(lottoQuantity);
         LottosDto lottosDto = LottosDto.valueOf(purchasedLottos);
