@@ -25,7 +25,7 @@ public class LottoFactory {
     }
 
     public LottoController lottoController() {
-        return new LottoController(lottoMachine(), outputView());
+        return new LottoController(lottoMachine());
     }
 
     private LottoMachine lottoMachine() {
@@ -49,7 +49,7 @@ public class LottoFactory {
         return possibleLottoNumbers;
     }
 
-    private OutputView outputView() {
+    public OutputView outputView() {
         return new OutputView();
     }
 }
