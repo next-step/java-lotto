@@ -8,9 +8,9 @@ public class WinnerNumbers {
 
     public WinnerNumbers(List<Integer> generatedNumbers, Random random) {
         this.winnerNumbers = new LottoTicket(generatedNumbers);
-        while (bonusNumber == 0) {
-            generateBonusNumber(random);
-        }
+//        while (bonusNumber == 0) {
+//            generateBonusNumber(random);
+//        }
     }
 
     public WinnerNumbers(List<Integer> generatedNumbers, int bonusNumber) {
@@ -36,5 +36,9 @@ public class WinnerNumbers {
 
     public int bonusNumber() {
         return this.bonusNumber;
+    }
+
+    public void throwBonusBall(int bonusNumber) {
+        this.bonusNumber = bonusNumber;
     }
 }
