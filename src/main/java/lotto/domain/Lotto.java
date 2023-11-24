@@ -12,7 +12,7 @@ public class Lotto {
     protected static final String LOTTO_NUMBERS_SIZE_EXCEPTION = "로또를 이루는 숫자가 6개가 아닙니다.";
     protected static final int CORRECT_LOTTO_SIZE = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
         validateLotto(lottoNumbers);
@@ -41,8 +41,8 @@ public class Lotto {
         }
     }
 
-    private List<LottoNumber> createLotto(List<Integer> lottoNumbers) {
-        List<LottoNumber> lotto = new ArrayList<>();
+    private Set<LottoNumber> createLotto(List<Integer> lottoNumbers) {
+        Set<LottoNumber> lotto = new HashSet<>();
         for (Integer lottoNumber : lottoNumbers) {
             lotto.add(new LottoNumber(lottoNumber));
         }
@@ -55,7 +55,7 @@ public class Lotto {
                 .count();
     }
 
-    public List<LottoNumber> getLotto() {
+    public Set<LottoNumber> getLotto() {
         return lottoNumbers;
     }
 
