@@ -9,14 +9,14 @@ import java.util.stream.Collectors;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
-    }
-
     public Lottos(int[]... lottosnumbers) {
         this(Arrays.stream(lottosnumbers)
                 .map(Lotto::new)
                 .collect(Collectors.toList()));
+    }
+
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public EnumMap<LottoRank, Long> calculateTotalRank(WinningLotto winnerLotto) {
@@ -27,8 +27,5 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return lottos;
-    }
-    public int getPurchaseLottoSize() {
-        return lottos.size();
     }
 }

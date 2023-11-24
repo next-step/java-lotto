@@ -8,7 +8,6 @@ public class LottoNumber {
     private static final int MAX_LOTTO_NUMBER = 45;
     private final int number;
 
-
     public LottoNumber(int number) {
         validateRangeLottoNumber(number);
         this.number = number;
