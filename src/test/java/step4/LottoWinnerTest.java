@@ -20,9 +20,13 @@ public class LottoWinnerTest {
     @DisplayName("당첨번호와 일치하는 숫자값에 해당하는 가격을 가져온다.")
     void getTotalPriceTest(String winnerNumber, int expectedPrice) {
         List<Integer> numbers = NumberSplitUtils.splitWinNumberString(winnerNumber);
-        LottoWinner lottoWinner = new LottoWinner(List.of(new Lotto(new LottoNumbers(List.of(18,1,24,25,20,21)))), new LottoWinNumbers(new LottoNumbers(numbers), 45));
-        Map<LottoRank, Integer> winnerBoard = lottoWinner.getWinnerNumberMatchCount(45);
-        int totalPrice = lottoWinner.getTotalPrice(winnerBoard);
+        LottoWinNumbers lottoWinNumbers = new LottoWinNumbers(new LottoNumbers(numbers), 45);
+
+        LottoNumbers lottoNumbers = new LottoNumbers(List.of(18,1,24,25,20,21));
+        Map<LottoRank, Integer> winnerBoard = lottoWinNumbers.getWinnerNumberMatchCount(List.of(new Lotto(lottoNumbers)));
+
+        LottoWinner lottoWinner = new LottoWinner(winnerBoard);
+        int totalPrice = lottoWinner.getTotalPrice();
 
         assertThat(totalPrice).isEqualTo(expectedPrice);
     }
@@ -32,9 +36,10 @@ public class LottoWinnerTest {
     @DisplayName("3개 이상 6개 이하 일치하는 숫자가 있다면 일치하는 갯수를 카운트한다.")
     void getWinnerScoreTest(String winnerNumbers, LottoRank expectedRank) {
         List<Integer> numbers = NumberSplitUtils.splitWinNumberString(winnerNumbers);
-        LottoWinner lottoWinner = new LottoWinner
-                (List.of(new Lotto(new LottoNumbers(List.of(1,2,3,17,16,15)))), new LottoWinNumbers(new LottoNumbers(numbers), 45));
-        Map<LottoRank, Integer> winnerBoard = lottoWinner.getWinnerNumberMatchCount(45);
+        LottoWinNumbers lottoWinNumbers = new LottoWinNumbers(new LottoNumbers(numbers), 45);
+
+        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1,2,3,17,16,15));
+        Map<LottoRank, Integer> winnerBoard = lottoWinNumbers.getWinnerNumberMatchCount(List.of(new Lotto(lottoNumbers)));
 
         assertThat(winnerBoard.get(expectedRank)).isEqualTo(1);
     }
@@ -44,11 +49,15 @@ public class LottoWinnerTest {
     @DisplayName("로또로 얻은 수익률을 계산한다.")
     void getRatingTest(String winnerNumber, Double rating) {
         List<Integer> numbers = NumberSplitUtils.splitWinNumberString(winnerNumber);
-        LottoWinner lottoWinner = new LottoWinner(List.of(new Lotto(new LottoNumbers(List.of(18,1,24,25,20,21)))), new LottoWinNumbers(new LottoNumbers(numbers), 45));
-        Map<LottoRank, Integer> winnerBoard = lottoWinner.getWinnerNumberMatchCount(45);
-        lottoWinner.getTotalPrice(winnerBoard);
+        LottoWinNumbers lottoWinNumbers = new LottoWinNumbers(new LottoNumbers(numbers), 45);
 
-        assertThat(lottoWinner.getRating(1000, winnerBoard)).isEqualTo(rating);
+        LottoNumbers lottoNumbers = new LottoNumbers(List.of(18,1,24,25,20,21));
+        Map<LottoRank, Integer> winnerBoard = lottoWinNumbers.getWinnerNumberMatchCount(List.of(new Lotto(lottoNumbers)));
+
+        LottoWinner lottoWinner = new LottoWinner(winnerBoard);
+        lottoWinner.getTotalPrice();
+
+        assertThat(lottoWinner.getRating(1000)).isEqualTo(rating);
     }
 
     @ParameterizedTest
@@ -56,7 +65,7 @@ public class LottoWinnerTest {
     @DisplayName("당첨번호에 포함된 보너스 번호가 넘어오면 예외를 발생시킨다.")
     void validateBonusNumberTest(String winNumbers, int bonusNumber) {
         List<Integer> numbers = NumberSplitUtils.splitWinNumberString(winNumbers);
-        assertThatThrownBy(() -> new LottoWinner(List.of(new Lotto(new LottoNumbers(List.of(18,1,24,25,20,21)))), new LottoWinNumbers(new LottoNumbers(numbers), bonusNumber)))
+        assertThatThrownBy(() -> new LottoWinNumbers(new LottoNumbers(numbers), bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("당첨번호에 포함된 보너스 번호 입니다.");
 

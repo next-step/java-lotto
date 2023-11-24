@@ -24,13 +24,12 @@ public class Lotto {
                 .filter(lottoNumbers::isContain)
                 .count();
 
-        if (lottoNumbers.isSecondRank(count, bonusNumber)) {
+        if (LottoRank.isSecondRank(count, bonusNumber, this.lottoNumbers.getNumbers())) {
             return SECOND;
         }
 
         return LottoRank.getRank(count);
     }
-
 
     @Override
     public String toString() {

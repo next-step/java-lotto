@@ -25,7 +25,7 @@ public class LottoNumbers {
                 .filter(this::isContain)
                 .count();
 
-        if (isSecondRank(count, bonusNumber)) {
+        if (LottoRank.isSecondRank(count, bonusNumber, this.numbers)) {
             return SECOND;
         }
 
@@ -34,10 +34,6 @@ public class LottoNumbers {
 
     public boolean isContain(int number) {
         return this.numbers.contains(number);
-    }
-
-    public boolean isSecondRank(int count, int bonusNumber) {
-        return SECOND.getMatch() == count && isContain(bonusNumber);
     }
 
     private void validate(List<Integer> numbers) {

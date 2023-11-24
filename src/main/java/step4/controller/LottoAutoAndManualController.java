@@ -47,11 +47,12 @@ public class LottoAutoAndManualController {
         List<Integer> lastWinNumbers = NumberSplitUtils.splitWinNumberString(inputView.putLastWinNumbers());
         int bonusNumber = inputView.bonusNumberInput();
 
-        LottoWinner lottoWinner = new LottoWinner(allLottos, new LottoWinNumbers(new LottoNumbers(lastWinNumbers), bonusNumber));
+        LottoWinNumbers lottoWinNumbers = new LottoWinNumbers(new LottoNumbers(lastWinNumbers), bonusNumber);
 
-        Map<LottoRank, Integer> winnerScore = lottoWinner.getWinnerNumberMatchCount(bonusNumber);
+        Map<LottoRank, Integer> winnerScore = lottoWinNumbers.getWinnerNumberMatchCount(allLottos);
         outputView.viewLottoRating(winnerScore);
 
-        outputView.viewRating(lottoWinner.getRating(payPrice, winnerScore));
+        LottoWinner lottoWinner = new LottoWinner(winnerScore);
+        outputView.viewRating(lottoWinner.getRating(payPrice));
     }
 }

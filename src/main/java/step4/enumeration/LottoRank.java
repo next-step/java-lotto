@@ -54,6 +54,10 @@ public enum LottoRank {
                 .orElse(ZERO);
     }
 
+    public static boolean isSecondRank(int count, int bonusNumber, List<Integer> numbers) {
+        return SECOND.getMatch() == count && numbers.contains(bonusNumber);
+    }
+
     public static Map<LottoRank, Integer> rankMap() {
         Map<LottoRank, Integer> winnerBoard = new EnumMap<>(LottoRank.class);
         ALL_LOTTO_RANK.forEach(rank -> winnerBoard.put(rank, 0));

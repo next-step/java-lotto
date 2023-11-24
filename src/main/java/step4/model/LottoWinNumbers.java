@@ -1,6 +1,9 @@
 package step4.model;
 
+import step4.enumeration.LottoRank;
+
 import java.util.List;
+import java.util.Map;
 
 public class LottoWinNumbers {
 
@@ -16,6 +19,16 @@ public class LottoWinNumbers {
 
     public List<Integer> getWinNumbers() {
         return this.lottoNumbers.getNumbers();
+    }
+
+    public Map<LottoRank, Integer> getWinnerNumberMatchCount(List<Lotto> lottos) {
+        Map<LottoRank, Integer> winnerBoard = LottoRank.rankMap();
+        for (Lotto lotto : lottos) {
+            LottoRank rankName = lotto.getLottoRank(this.lottoNumbers.getNumbers(), this.bonusNumber);
+            winnerBoard.put(rankName, winnerBoard.get(rankName) + 1);
+        }
+
+        return winnerBoard;
     }
 
     private void validate(int number, LottoNumbers lottoNumbers, int bonusNumber) {
