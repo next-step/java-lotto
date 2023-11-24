@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import lotto.dto.LottoDto;
 
 public class Lotto {
 
@@ -13,11 +12,11 @@ public class Lotto {
     protected static final String LOTTO_NUMBERS_SIZE_EXCEPTION = "로또를 이루는 숫자가 6개가 아닙니다.";
     protected static final int CORRECT_LOTTO_SIZE = 6;
 
-    private final List<LottoNumber> lotto;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
         validateLotto(lottoNumbers);
-        this.lotto = createLotto(lottoNumbers);
+        this.lottoNumbers = createLotto(lottoNumbers);
     }
 
     public Lotto(Integer... lottoNumber) {
@@ -51,13 +50,13 @@ public class Lotto {
     }
 
     public int countOfMatch(Lotto winnerLotto) {
-        return (int) this.lotto.stream()
-                .filter(winnerLotto.lotto::contains)
+        return (int) this.lottoNumbers.stream()
+                .filter(winnerLotto.lottoNumbers::contains)
                 .count();
     }
 
     public List<LottoNumber> getLotto() {
-        return lotto;
+        return lottoNumbers;
     }
 
     @Override
@@ -69,11 +68,11 @@ public class Lotto {
             return false;
         }
         Lotto lotto1 = (Lotto) o;
-        return Objects.equals(lotto, lotto1.lotto);
+        return Objects.equals(lottoNumbers, lotto1.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lotto);
+        return Objects.hash(lottoNumbers);
     }
 }
