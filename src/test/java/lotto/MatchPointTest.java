@@ -15,4 +15,11 @@ public class MatchPointTest {
     void findMatchPoint(int matchPont, int amt, int bonus) {
         assertThat(MatchPoint.findMatchPoint(matchPont, bonus).getWinningAmt()).isEqualTo(amt);
     }
+
+    @DisplayName("2등 찾기")
+    @Test
+    void 두번째당첨자() {
+        MatchPoint mp = MatchPoint.findMatchPoint(4, 1);
+        assertThat(MatchPoint.isSameFIFTH_BONUS(mp)).isTrue();
+    }
 }
