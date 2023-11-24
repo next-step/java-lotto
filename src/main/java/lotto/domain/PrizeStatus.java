@@ -34,41 +34,21 @@ public class PrizeStatus {
     private int updatePrizeStatus(LottoTicket lottoTicket, WinnerNumbers winnerNumbers) {
         int totalProfit = 0;
         int totalMatchedCount = lottoTicket.calculateTotalMatchedCount(winnerNumbers);
+        boolean isBonusWinner = lottoTicket.isMatchedWithBonusNum(winnerNumbers);
+        int currentNumOfPrize = getCurrentNumOfPrize(totalMatchedCount, isBonusWinner);
+        Rank userRank = Rank.of(totalMatchedCount, isBonusWinner);
 
-        if (totalMatchedCount == 3) {
-            int currentNumOfPrize = getCurrentNumOfPrize(totalMatchedCount, false);
-            this.prizeStatus.put(Rank.FIFTH, currentNumOfPrize + 1);
-            totalProfit += 5000;
-        }
+        this.prizeStatus.put(userRank, currentNumOfPrize +1);
+        totalProfit += userRank.winningMoney();
 
-        if (totalMatchedCount == 4) {
-            int currentNumOfPrize = getCurrentNumOfPrize(totalMatchedCount, false   );
-            this.prizeStatus.put(Rank.FOURTH, currentNumOfPrize + 1);
-            totalProfit += 50000;
-        }
-
-        if (totalMatchedCount == 5 && !lottoTicket.isMatchedWithBonusNum(winnerNumbers)) {
-            int currentNumOfPrize = getCurrentNumOfPrize(totalMatchedCount, false);
-            this.prizeStatus.put(Rank.THIRD, currentNumOfPrize + 1);
-            totalProfit += 1500000;
-        }
-
-        if (totalMatchedCount == 5 && lottoTicket.isMatchedWithBonusNum(winnerNumbers)) {
-            int currentNumOfPrize = getCurrentNumOfPrize(totalMatchedCount, true);
-            this.prizeStatus.put(Rank.SECOND, currentNumOfPrize + 1);
-            totalProfit += 3000000;
-        }
-
-        if (totalMatchedCount == 6) {
-            int currentNumOfPrize = getCurrentNumOfPrize(totalMatchedCount, false);
-            this.prizeStatus.put(Rank.FIRST, currentNumOfPrize + 1);
-            totalProfit += 2000000000;
-        }
         return totalProfit;
     }
 
     public int getCurrentNumOfPrize(int totalMatchedCount, boolean isBonusWinner) {
-        return prizeStatus.get(Rank.of(totalMatchedCount, isBonusWinner));
+        if (totalMatchedCount >= 3) {
+            return prizeStatus.get(Rank.of(totalMatchedCount, isBonusWinner));
+        }
+        return 0;
     }
 
     private void setupPrizeStatus() {
