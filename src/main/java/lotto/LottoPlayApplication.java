@@ -28,8 +28,7 @@ public class LottoPlayApplication {
         int bonusBall = InputView.getBonusBall();
         lottoGame.winnerNumbers().throwBonusBall(bonusBall);
 
-        PrizeStatus prizeStatus = new PrizeStatus(lottoGame);
-
+        PrizeStatus prizeStatus = lottoGame.processResult();
         displayResult(prizeStatus, purchasedAmt);
     }
 }

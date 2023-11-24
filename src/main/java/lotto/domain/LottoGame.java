@@ -20,4 +20,10 @@ public class LottoGame {
     public WinnerNumbers winnerNumbers() {
         return this.winnerNumbers;
     }
+
+    public PrizeStatus processResult() {
+        PrizeStatus prizeStatus = new PrizeStatus(this);
+        return prizeStatus;
+    }
+
 }
