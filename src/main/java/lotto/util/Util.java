@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Util {
-    private static final String SEPARATOR = ", ";
+    private static final String SEPARATOR = ",";
     private static final Random random = new Random();
 
     public static Integer randomNum() {

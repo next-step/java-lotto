@@ -9,6 +9,8 @@ import static lotto.util.Util.parseIntegerList;
 
 public class LottoService {
 
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
     private final List<Lotto> lottoList;
     private final MatchPointRank matchPointRank;
 
@@ -51,7 +53,7 @@ public class LottoService {
     }
 
     private void invalidBonusNumber(List<Integer> integerList, int bonusNumber) {
-        if(bonusNumber < 1 || bonusNumber > 45) {
+        if(bonusNumber < MIN_LOTTO_NUMBER || bonusNumber > MAX_LOTTO_NUMBER) {
            throw new IllegalArgumentException("1 ~ 45 사이 보너스 볼만 입력 가능 합니다.");
         }
 
