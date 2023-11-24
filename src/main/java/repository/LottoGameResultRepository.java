@@ -3,7 +3,6 @@ package repository;
 import domain.LottoPrize;
 
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.Map;
 
 public class LottoGameResultRepository {
@@ -17,7 +16,7 @@ public class LottoGameResultRepository {
         return matchResult;
     }
 
-    public void clearStore(){
+    public void clearStore() {
         matchResult.clear();
     }
 }

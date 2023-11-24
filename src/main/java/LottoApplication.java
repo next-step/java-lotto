@@ -14,8 +14,9 @@ import java.util.Optional;
 public class LottoApplication {
 
     public static void main(String[] args) {
-        UserLottoRepository userLottoRepository = new UserLottoRepository();
-        UserLottoService userLottoService = new UserLottoService(userLottoRepository);
+        AppConfig appConfig = new AppConfig();
+        UserLottoService userLottoService = appConfig.userLottoService();
+        LottoResultService lottoResultService = appConfig.lottoResultService();
 
         long money = InputView.inputLottoPurchaseAmount();
         userLottoService.buyRandomLottoTickets(money);
@@ -28,7 +29,6 @@ public class LottoApplication {
         WinningLotto winningLotto = new WinningLotto(inputWinningNumbers, inputBonusNumber);
 
         Optional<Currency> optionalCurrency = Optional.of(Currency.KRW);
-        LottoResultService lottoResultService = new LottoResultService(userLottoRepository);
         LottoGameResultRepository lottoGameResult = lottoResultService.matchUserLotto(winningLotto);
         float rate = lottoResultService.calculateReturnRate(money, lottoGameResult, optionalCurrency);
         ResultView.printLottoGameResult(lottoGameResult, rate, optionalCurrency);

@@ -29,7 +29,6 @@ public class WinningLotto {
         validateLottoNumberCount(numbers);
 
         this.lottoNumbers = lottoNumbers.stream()
-                .sorted()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
         this.bonusNumber = new LottoNumber(bonus);
@@ -39,11 +38,16 @@ public class WinningLotto {
         if (lottoNumbers.stream().count() < LOTTO_NUMBER_COUNT_LIMIT) {
             throw new IllegalArgumentException("로또 숫자는 6개 입니다.");
         }
+
+        if (lottoNumbers.stream().count() > LOTTO_NUMBER_COUNT_LIMIT) {
+            throw new IllegalArgumentException("로또 숫자는 6개 입니다.");
+        }
     }
 
     public List<Integer> getLottoNumbers() {
         return lottoNumbers.stream()
                 .map(LottoNumber::getLottoNumber)
+                .sorted()
                 .collect(Collectors.toList());
     }
 

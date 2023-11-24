@@ -28,7 +28,7 @@ public class UserLottoRepository {
         return lottoTickets;
     }
 
-    public void clearStore(){
+    public void clearStore() {
         lottoTickets.clear();
     }
 

@@ -2,9 +2,9 @@ package service;
 
 import domain.Currency;
 import domain.Lotto;
+import domain.LottoPrize;
 import domain.WinningLotto;
 import repository.LottoGameResultRepository;
-import domain.LottoPrize;
 import repository.UserLottoRepository;
 
 import java.util.List;
