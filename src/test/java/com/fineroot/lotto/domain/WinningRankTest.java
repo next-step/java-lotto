@@ -12,12 +12,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class WinningRankTest {
 
-    @Test
-    @DisplayName("WinningRank of")
-    void of() {
-        assertThat(WinningRank.of(3)).isEqualTo(WinningRank.FIFTH_PRIZE);
-    }
-
     @ParameterizedTest
     @DisplayName("WinningRank valueOf 확인 (SECOND_PRIZE 예외)")
     @CsvSource({"3,'FIFTH_PRIZE'","4,'FORTH_PRIZE'","5,'THIRD_PRIZE'","6,'FIRST_PRIZE'"})

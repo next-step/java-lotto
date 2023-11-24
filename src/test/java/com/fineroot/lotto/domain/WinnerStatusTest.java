@@ -17,20 +17,6 @@ import org.junit.jupiter.api.Test;
 
 class WinnerStatusTest {
 
-    private LottoBundle lottoBundle;
-    private WinningNumberSet winningNumber;
-
-    @BeforeEach
-    void setUp() {
-        lottoBundle = LottoBundle.fromList(
-                List.of("1,2,3,4,5,6",
-                        "7,8,9,10,11,12",
-                        "13,14,15,16,17,18",
-                        "19,20,21,22,23,24",
-                        "25,26,27,28,29,30"));
-        winningNumber = WinningNumberSet.of(WinningNumber.from("1,2,3,7,8,9"), LottoNumber.from(10));
-    }
-
     @Test
     @DisplayName("create 생성")
     void create() {
@@ -61,6 +47,13 @@ class WinnerStatusTest {
     @Test
     @DisplayName("총 수익률")
     void totalEarningRate() {
+        LottoBundle lottoBundle = LottoBundle.fromList(
+                List.of("1,2,3,4,5,6",
+                        "7,8,9,10,11,12",
+                        "13,14,15,16,17,18",
+                        "19,20,21,22,23,24",
+                        "25,26,27,28,29,30"));
+        WinningNumberSet winningNumber = WinningNumberSet.of(WinningNumber.from("1,2,3,7,8,9"), LottoNumber.from(10));
         WinnerStatus winnerStatus = lottoBundle.matchWinner(winningNumber);
         double earningRate = winnerStatus.totalEarningRate(Money.from(5000));
         assertThat(earningRate).isEqualTo(2.0d);
