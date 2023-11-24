@@ -23,6 +23,6 @@ public class LottoMatchTest {
 	void fromMatch_invalidInteger_ZERO(int key) {
 		LottoMatch lottoMatch = LottoMatch.fromMatch(LottoMatch.Match.from(key, false));
 
-		assertThat(lottoMatch).isEqualTo(LottoMatch.ZERO);
+		assertThat(lottoMatch).isEqualTo(LottoMatch.NONE);
 	}
 }

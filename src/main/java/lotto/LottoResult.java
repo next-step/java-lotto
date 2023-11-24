@@ -35,6 +35,6 @@ public class LottoResult {
             winningAmount += lottoWinningNumbers.amount(lotto);
         }
 
-        return winningAmount / purchaseAmount * 1001;
+        return winningAmount / purchaseAmount * 100;
     }
 }

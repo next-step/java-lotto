@@ -6,14 +6,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum LottoMatch {
-    ZERO(Match.ZERO, 0),
-    ONE(Match.ONE, 0),
-    TWO(Match.TWO, 0),
-    THREE(Match.THREE, 5000),
-    FOUR(Match.FOUR, 50000),
-    FIVE(Match.FIVE, 1500000),
-    FIVE_BONUS(Match.FIVE_BONUS, 30000000),
-    SIX(Match.SIX, 2000000000);
+    NONE(Match.ZERO, 0),
+    FIFTH(Match.THREE, 5000),
+    FOURTH(Match.FOUR, 50000),
+    THIRD(Match.FIVE, 1500000),
+    SECOND(Match.FIVE_WITH_BONUS, 30000000),
+    FIRST(Match.SIX, 2000000000);
 
     private final Match match;
 
@@ -58,12 +56,10 @@ public enum LottoMatch {
 
     public enum Match {
         ZERO(0, false),
-        ONE(1, false),
-        TWO(2, false),
         THREE(3, false),
         FOUR(4, false),
         FIVE(5, false),
-        FIVE_BONUS(5, true),
+        FIVE_WITH_BONUS(5, true),
         SIX(6, false);
 
         private final int matchCount;
@@ -76,8 +72,12 @@ public enum LottoMatch {
         }
 
         static Match from(int matchCount, boolean isBonus) {
+            if (matchCount == Match.FIVE_WITH_BONUS.matchCount && isBonus) {
+                return FIVE_WITH_BONUS;
+            }
+
             return Arrays.stream(values())
-                    .filter(match -> match.matchCount == matchCount && match.isBonus == isBonus)
+                    .filter(match -> match.matchCount == matchCount)
                     .findAny()
                     .orElse(Match.ZERO);
         }

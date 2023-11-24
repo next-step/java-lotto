@@ -44,7 +44,7 @@ public class OutputView {
         LottoMatch.Match match = LottoMatch.Match.from(lottoMatch.matchCount(), lottoMatch.isBonus());
         int count = lottoMatch.matchesCount(match, lottoMatchResult);
 
-        if(match == LottoMatch.Match.FIVE_BONUS) {
+        if(match == LottoMatch.Match.FIVE_WITH_BONUS) {
             printBonusLottoMatch(lottoMatch, count);
             return;
         }

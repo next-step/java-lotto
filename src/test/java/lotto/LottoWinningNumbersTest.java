@@ -30,6 +30,6 @@ public class LottoWinningNumbersTest {
 
         LottoMatch lottoMatch = lottoWinningNumbers.matchesLotto(matchesLotto);
 
-        assertThat(lottoMatch).isEqualTo(LottoMatch.FIVE_BONUS);
+        assertThat(lottoMatch).isEqualTo(LottoMatch.SECOND);
     }
 }
