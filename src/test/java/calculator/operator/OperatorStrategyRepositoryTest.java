@@ -1,6 +1,6 @@
 package calculator.operator;
 
-import static calculator.operator.OperatorRepository.INPUT_OPERATOR_EXCEPTION;
+import static calculator.operator.OperatorResolver.INPUT_OPERATOR_EXCEPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
@@ -16,11 +16,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class OperatorStrategyRepositoryTest {
 
-    private OperatorRepository operatorRepository;
+    private OperatorResolver operatorResolver;
 
     @BeforeEach
     void setUp() {
-        operatorRepository = new OperatorRepository(List.of(
+        operatorResolver = new OperatorResolver(List.of(
                 OperatorStrategy.PLUS,
                 OperatorStrategy.MINUS,
                 OperatorStrategy.MULTIPLY,
@@ -33,7 +33,7 @@ class OperatorStrategyRepositoryTest {
     @MethodSource("parametersProvider")
     void find_operation(String given, Class<?> expected) {
         // when
-        OperatorStrategy result = operatorRepository.findOperator(given);
+        OperatorStrategy result = operatorResolver.findOperator(given);
 
         // then
         assertThat(result).isExactlyInstanceOf(expected);
@@ -53,7 +53,7 @@ class OperatorStrategyRepositoryTest {
     @ValueSource(strings = {"^", "$", "%"})
     void find_operation_exception(String given) {
         // when // then
-        assertThatThrownBy(() -> operatorRepository.findOperator(given))
+        assertThatThrownBy(() -> operatorResolver.findOperator(given))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage(INPUT_OPERATOR_EXCEPTION);
     }

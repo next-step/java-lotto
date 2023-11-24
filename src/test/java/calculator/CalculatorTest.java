@@ -1,11 +1,11 @@
 package calculator;
 
 import static calculator.Calculator.INPUT_TEXT_EXCEPTION;
-import static calculator.operator.OperatorRepository.INPUT_OPERATOR_EXCEPTION;
+import static calculator.operator.OperatorResolver.INPUT_OPERATOR_EXCEPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import calculator.operator.OperatorRepository;
+import calculator.operator.OperatorResolver;
 import calculator.operator.OperatorStrategy;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,11 +18,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class CalculatorTest {
 
-    private OperatorRepository operatorRepository;
+    private OperatorResolver operatorResolver;
 
     @BeforeEach
     void setUp() {
-        operatorRepository = new OperatorRepository(List.of(
+        operatorResolver = new OperatorResolver(List.of(
                 OperatorStrategy.PLUS,
                 OperatorStrategy.MINUS,
                 OperatorStrategy.MULTIPLY,
@@ -34,7 +34,7 @@ public class CalculatorTest {
     @DisplayName("덧셈을 할 수 있다.")
     void plus() {
         // given
-        Calculator calculator = new Calculator(operatorRepository);
+        Calculator calculator = new Calculator(operatorResolver);
         String given = "1 + 3";
 
         // when
@@ -48,7 +48,7 @@ public class CalculatorTest {
     @DisplayName("뺼셈을 할 수 있다.")
     void minus() {
         // given
-        Calculator calculator = new Calculator(operatorRepository);
+        Calculator calculator = new Calculator(operatorResolver);
         String given = "2 - 4";
 
         // when
@@ -62,7 +62,7 @@ public class CalculatorTest {
     @DisplayName("곱셈을 할 수 있다.")
     void multiply() {
         // given
-        Calculator calculator = new Calculator(operatorRepository);
+        Calculator calculator = new Calculator(operatorResolver);
         String given = "3 * 5";
 
         // when
@@ -76,7 +76,7 @@ public class CalculatorTest {
     @DisplayName("나눗셈을 할 수 있다.")
     void divide() {
         // given
-        Calculator calculator = new Calculator(operatorRepository);
+        Calculator calculator = new Calculator(operatorResolver);
         String given = "15 / 3";
 
         // when
@@ -91,7 +91,7 @@ public class CalculatorTest {
     @NullAndEmptySource
     void input_text_exception(String given) {
         // given
-        Calculator calculator = new Calculator(operatorRepository);
+        Calculator calculator = new Calculator(operatorResolver);
 
         // when // then
         assertThatThrownBy(() -> calculator.calculate(given))
@@ -104,7 +104,7 @@ public class CalculatorTest {
     @ValueSource(strings = {"3 ^ 4", "8 # 7"})
     void input_operator_exception(String given) {
         // given
-        Calculator calculator = new Calculator(operatorRepository);
+        Calculator calculator = new Calculator(operatorResolver);
 
         // when // then
         assertThatThrownBy(() -> calculator.calculate(given))
@@ -117,7 +117,7 @@ public class CalculatorTest {
     @CsvSource(value = {"3 + 4 * 6, 42", "4 - 8 * 2 / 8 + 3, 2"})
     void use_multiple_arithmetic_operations(String given, long expected) {
         // given
-        Calculator calculator = new Calculator(operatorRepository);
+        Calculator calculator = new Calculator(operatorResolver);
 
         // when
         long result = calculator.calculate(given);
