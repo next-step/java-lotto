@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class LottoTicket {
-    private final Set<Integer> ticket = new HashSet<>();
+    private final TreeSet<Integer> ticket = new TreeSet<>();
 
     public LottoTicket(List<Integer> lottoNumber) {
         ticket.addAll(lottoNumber);
