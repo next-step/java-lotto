@@ -13,9 +13,8 @@ class WinnerNumbersTest {
     @Test
     void assertMatchForPrize() {
         List<Integer> lottoNumbersForTest = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Random random = new Random();
 
-        WinnerNumbers winnerNumbers = new WinnerNumbers(lottoNumbersForTest, random);
+        WinnerNumbers winnerNumbers = new WinnerNumbers(lottoNumbersForTest);
 
         assertThat(winnerNumbers.isContain(6)).isEqualTo(true);
     }

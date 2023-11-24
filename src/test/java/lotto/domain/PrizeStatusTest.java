@@ -11,10 +11,9 @@ class PrizeStatusTest {
 
     @Test
     public void assertCalculateProfit() {
-        Random random = new Random();
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoFactory lottoFactory = new LottoFactory(lottoTicket);
-        WinnerNumbers winnerNumbers = new WinnerNumbers(Arrays.asList(1, 2, 3, 4, 5, 7), random);
+        WinnerNumbers winnerNumbers = new WinnerNumbers(Arrays.asList(1, 2, 3, 4, 5, 7));
 
         PrizeStatus prizeStatus = new PrizeStatus(lottoFactory, winnerNumbers);
         double profit = prizeStatus.calculateProfit(1000);

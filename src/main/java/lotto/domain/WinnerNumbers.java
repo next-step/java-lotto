@@ -6,11 +6,8 @@ public class WinnerNumbers {
     private LottoTicket winnerNumbers;
     private int bonusNumber = 0;
 
-    public WinnerNumbers(List<Integer> generatedNumbers, Random random) {
+    public WinnerNumbers(List<Integer> generatedNumbers) {
         this.winnerNumbers = new LottoTicket(generatedNumbers);
-//        while (bonusNumber == 0) {
-//            generateBonusNumber(random);
-//        }
     }
 
     public WinnerNumbers(List<Integer> generatedNumbers, int bonusNumber) {
