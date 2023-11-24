@@ -7,6 +7,7 @@ public class WinningLotto {
     private final LottoNumber bonusBall;
 
     public WinningLotto(Lotto lastWeekLotto, LottoNumber bonusBall) {
+        validation(lastWeekLotto, bonusBall);
         this.lastWeekLotto = lastWeekLotto;
         this.bonusBall = bonusBall;
     }
@@ -15,13 +16,19 @@ public class WinningLotto {
         return new WinningLotto(lotto, bonusBall);
     }
 
+    private void validation(Lotto lastWeekLotto, LottoNumber bonusBall) {
+        if(lastWeekLotto.contains(bonusBall)){
+            throw new IllegalArgumentException(" 보너스 번호는 당첨 번호와 중복일 수 없습니다.");
+        }
+    }
+
     public int compare(Lotto lotto) {
         return lastWeekLotto.matchCount(lotto);
     }
 
     public int compareBonus(Lotto lotto) {
         return lotto.lottoNumbers().stream().mapToInt(lottoNumber -> {
-            if(lottoNumber.equals(bonusBall)){
+            if (lottoNumber.equals(bonusBall)) {
                 return 1;
             }
             return 0;
