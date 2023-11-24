@@ -13,6 +13,12 @@ public class LottoGame {
         this.winnerNumbers = new WinnerNumbers(lottoFactory.generateTicket(random));
     }
 
+    public LottoGame(LottoTicket lottoTicket, List<Integer> winnerNumbers) {
+        LottoFactory lottoFactory = new LottoFactory(lottoTicket);
+        this.tickets = lottoFactory.tickets();
+        this.winnerNumbers = new WinnerNumbers(winnerNumbers);
+    }
+
     public List<LottoTicket> tickets() {
         return this.tickets;
     }
