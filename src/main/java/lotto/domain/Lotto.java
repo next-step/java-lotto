@@ -49,9 +49,9 @@ public class Lotto {
         return lotto;
     }
 
-    public int countOfMatch(Lotto winnerLotto) {
+    public int countOfMatch(Lotto lotto) {
         return (int) this.lottoNumbers.stream()
-                .filter(winnerLotto.lottoNumbers::contains)
+                .filter(lotto.lottoNumbers::contains)
                 .count();
     }
 
