@@ -1,23 +1,23 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Winning;
-import lotto.dto.WinningNumbersDTO;
+import lotto.domain.*;
+import lotto.dto.WinningLottoDTO;
 
 import java.math.BigDecimal;
 
 public class ResultView {
-    public static void purchaseCount(Lottos lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
-    }
-
     private ResultView() {
 
     }
+
+    public static void purchaseCount(Lottos lottos, PositiveNumber manulCount) {
+        System.out.println("수동으로 " + manulCount + "장, 자동으로 " + (lottos.size() - manulCount.getPositiveNumber()) + "장을 구매했습니다.");
+    }
+
     public static void noGame() {
         System.out.println("구입한 로또가 없습니다.");
     }
+
     public static void lottos(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.toString());
@@ -31,16 +31,16 @@ public class ResultView {
         System.out.println("---------");
     }
 
-    public static void winningStatics(WinningNumbersDTO winningNumbersDTO, Lottos lottos, Winning winning) {
+    public static void winningStatics(WinningLottoDTO winningLottoDTO, Lottos lottos, Winning winning) {
         int correctCount = winning.correctCount();
         boolean bonusCorrect = winning.bonusCorrectCount();
-        int winningAmount = winning.winningAmount();
+        Amount winningAmount = winning.winningAmount();
 
         if (bonusCorrect) {
-            System.out.println(correctCount + "개 일치, 보너스 볼 일치(" + winningAmount + "원) - " + lottos.winningCorrectCount(winningNumbersDTO, winning) + "개");
-            return ;
+            System.out.println(correctCount + "개 일치, 보너스 볼 일치(" + winningAmount.amount() + "원) - " + lottos.winningCorrectCount(winningLottoDTO, winning) + "개");
+            return;
         }
-        System.out.println(correctCount + "개 일치 (" + winningAmount + "원) - " + lottos.winningCorrectCount(winningNumbersDTO, winning) + "개");
+        System.out.println(correctCount + "개 일치 (" + winningAmount.amount() + "원) - " + lottos.winningCorrectCount(winningLottoDTO, winning) + "개");
     }
 
     public static void rateOfReturn(BigDecimal rate) {

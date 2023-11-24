@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.WinningNumbersDTO;
+import lotto.dto.WinningLottoDTO;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -11,32 +11,32 @@ public class Lottos {
     private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = new ArrayList<>(lottos);
+        this(Amount.of(0), lottos);
     }
 
-    public Lottos(int value) {
-        this.lottos = new ArrayList<>();
-        for (int game = 0; game < purchasableLottoCount(value); game++) {
+    public Lottos(Amount amount) {
+        this(amount, new ArrayList<>());
+    }
+
+    public Lottos(Amount amount, List<Lotto> manualLottos) {
+        this.lottos = new ArrayList<>(manualLottos);
+        for (int game = 0; game < amount.divideToInt(Lotto.LOTTO_PRICE); game++) {
             this.lottos.add(new Lotto());
         }
     }
 
-    private int purchasableLottoCount(int value) {
-        return value / Lotto.LOTTO_PRICE;
-    }
-
-    public Long totalWinningAmount(WinningNumbersDTO winningNumbersDTO) {
-        Amount amount = new Amount();
+    public Long totalWinningAmount(WinningLottoDTO winningLottoDTO) {
+        Amount amount = Amount.of(0);
         for (Lotto lotto : this.lottos) {
-            amount.add(lotto.winningInfo(winningNumbersDTO).getWinningAmount());
+            amount.add(lotto.winningInfo(winningLottoDTO).getWinningAmount());
         }
         return amount.amount();
     }
 
-    public BigDecimal rateOfReturn(WinningNumbersDTO winningNumbersDTO) {
-        Amount purchaseAmount = new Amount(this.lottos.size() * Lotto.LOTTO_PRICE);
-        Amount winningAmount = new Amount(totalWinningAmount(winningNumbersDTO));
-        return winningAmount.divide(purchaseAmount.amount(), 2);
+    public BigDecimal rateOfReturn(WinningLottoDTO winningLottoDTO) {
+        Amount purchaseAmount = Amount.of(this.lottos.size() * Lotto.LOTTO_PRICE);
+        Amount winningAmount = Amount.of(totalWinningAmount(winningLottoDTO));
+        return winningAmount.divideToBigDecimal(purchaseAmount.amount(), 2);
     }
 
     public List<Lotto> getLottos() {
@@ -51,9 +51,9 @@ public class Lottos {
         return lottos.size() == 0;
     }
 
-    public int winningCorrectCount(WinningNumbersDTO winningNumbersDTO, Winning winning) {
+    public int winningCorrectCount(WinningLottoDTO winningLottoDTO, Winning winning) {
         return (int) this.lottos.stream()
-                .filter(lotto -> Winning.hasMatchingCounts(lotto.winningInfo(winningNumbersDTO), winning))
+                .filter(lotto -> Winning.isMatched(lotto.winningInfo(winningLottoDTO), winning))
                 .count();
     }
 }

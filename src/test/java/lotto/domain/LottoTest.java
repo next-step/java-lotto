@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.dto.WinningInfoDTO;
-import lotto.dto.WinningNumbersDTO;
+import lotto.dto.WinningLottoDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,9 +12,9 @@ class LottoTest {
     @Test
     void 당첨정보_리턴() {
         Lotto lotto = new Lotto("2, 5,21,45, 34,30");
-        WinningNumber winningNumber = new WinningNumber("1,2,3,5,6,45");
-        BonusNumber bonusNumber = new BonusNumber("34");
-        assertThat(lotto.winningInfo(new WinningNumbersDTO(winningNumber, bonusNumber)))
-                .isEqualTo(new WinningInfoDTO(3, true ,new Amount(5_000)));
+        Lotto winningLotto = new Lotto("1,2,3,5,6,45");
+        LottoNumber lottoNumber = LottoNumber.of("34");
+        assertThat(lotto.winningInfo(new WinningLottoDTO(winningLotto, lottoNumber)))
+                .isEqualTo(new WinningInfoDTO(3, true ,Amount.of(5_000)));
     }
 }

@@ -4,18 +4,22 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
-public class Amount {
+public class Amount implements Comparable<Amount> {
     private Long amount;
 
-    public Amount() {
-        this.amount = 0l;
+    public static Amount of(PositiveNumber value) {
+        return new Amount(Long.valueOf(value.getPositiveNumber()));
     }
 
-    public Amount(int amount) {
-        this.amount = Long.valueOf(amount);
+    public static Amount of(int amount) {
+        return new Amount(Long.valueOf(amount));
     }
 
-    public Amount(Long amount) {
+    public static Amount of(Long amount) {
+        return new Amount(amount);
+    }
+
+    private Amount(Long amount) {
         this.amount = amount;
     }
 
@@ -23,10 +27,18 @@ public class Amount {
         this.amount += value;
     }
 
-    public BigDecimal divide(Long amount, int digit) {
+    public int divideToInt(int value) {
+        return (int) (amount / value);
+    }
+
+    public BigDecimal divideToBigDecimal(Long amount, int digit) {
         BigDecimal numerator = new BigDecimal(this.amount);
         BigDecimal denominator = new BigDecimal(amount);
         return numerator.divide(denominator, digit, RoundingMode.HALF_UP);
+    }
+
+    public Amount minus(Amount amount) {
+        return new Amount(this.amount - amount.amount());
     }
 
     public Long amount() {
@@ -44,6 +56,12 @@ public class Amount {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
+    }
+
+    @Override
+    public int compareTo(Amount other) {
+        // 직접 필드 값을 비교하여 대소를 판단합니다.
+        return Long.compare(this.amount, other.amount);
     }
 
     @Override
