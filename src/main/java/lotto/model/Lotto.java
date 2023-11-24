@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
     private static final int TICKET_PRICE = 1000;
@@ -34,5 +35,10 @@ public class Lotto {
     public boolean equals(Object obj) {
         Lotto other = (Lotto) obj;
         return this.numbers.equals(other.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(numbers);
     }
 }
