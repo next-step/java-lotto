@@ -16,7 +16,7 @@ public class LottoGameController {
         Money money = new Money(LottoInputView.inputPurchaseMoney());
 
         Lottos lottos = new Lottos(lottoGenerator.generateLottos(money));
-        LottoResultView.printLottos(lottos);
+        LottoResultView.printLottos(lottos, money);
 
         WinningLotto winningLotto = lottoGenerator.generateWinningLotto(
                 LottoInputView.inputWinningLottoNumber(), LottoInputView.inputWinningLottoBonusNumber());
