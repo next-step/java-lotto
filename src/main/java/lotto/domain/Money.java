@@ -34,13 +34,13 @@ public class Money {
     }
 
     private void validateMoneyToBuyLotto() {
-        if (purchasable()) {
+        if (!purchasable()) {
             throw new IllegalStateException(CANNOT_BUY_EVEN_ONLY_ONE_LOTTO_EXCEPTION);
         }
     }
 
     private boolean purchasable() {
-        return money < LOTTO_PRICE;
+        return money > LOTTO_PRICE;
     }
 
     private void validateMoneyToGoBack() {
