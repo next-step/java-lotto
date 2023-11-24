@@ -7,3 +7,14 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 1단계 - 문자열 계산기 기능 요구사항
+* [X] 사용자 값 입력받기 
+* [X] 빈 공백 문자열로 나누기
+* [X] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+* [X] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
+* [X] 덧셈
+* [X] 뺄셈
+* [X] 곱셈
+* [X] 나눗셈
+* [X] 사칙연산의 계산 우선순위 X 입력 값에 따라 계산 순서 결정
