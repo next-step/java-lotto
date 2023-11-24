@@ -1,11 +1,11 @@
 package lotto.controller;
 
-import lotto.model.Lotto;
-import lotto.model.LottoMachine;
-import lotto.model.LottoReport;
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoController {
@@ -15,25 +15,21 @@ public class LottoController {
     }
 
     public static void buyLottoAndCheckResult() {
-        List<Lotto> lottoTickets = buyLotto();
+        Lottos tickets = buyLotto();
+        ResultView.printCheckPurchaseMessage(tickets.count());
+        ResultView.printLottoTickets(tickets);
 
-        for (Lotto lottoTicket : lottoTickets) {
-            ResultView.printLottoTicket(lottoTicket);
-        }
-
-        checkLottoResult(lottoTickets);
+        checkLottoResult(tickets);
     }
 
-    private static List<Lotto> buyLotto() {
+    private static Lottos buyLotto() {
         int money = InputView.inputMoney();
-        List<Lotto> tickets = LottoMachine.issue(money);
-        ResultView.printCheckPurchaseMessage(tickets.size());
-        return tickets;
+        return Lottos.issue(money);
     }
 
-    private static void checkLottoResult(List<Lotto> tickets) {
-        String winningNumber = InputView.inputWinningNumbers();
-        LottoReport report = new LottoReport(winningNumber, tickets);
+    private static void checkLottoResult(Lottos tickets) {
+        LottoNumbers winningNumber = LottoNumbers.of(InputView.inputWinningNumbers());
+        LottoReport report = new LottoReport(tickets.matchNumbers(winningNumber));
         ResultView.printResultReport(report);
     }
 }

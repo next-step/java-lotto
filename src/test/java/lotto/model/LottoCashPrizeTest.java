@@ -10,22 +10,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoReportTest {
+public class LottoCashPrizeTest {
 
     @ParameterizedTest
-    @DisplayName("수익률 계산 - 소수점 둘째자리 이하 버림")
     @CsvSource(value = {
-            "1, 0, 0, 2, 1, 0, 0:15",
+            "1, 0, 0, 0, 1, 0, 1:2000050000",
             "3, 0, 0, 0, 0, 0, 0:0",
-            "1, 1, 1, 0, 0, 0, 1:500000",
-            "13, 0, 0, 1, 0, 0, 0:0.35"},
+            "2, 1, 0, 1, 0, 0, 0:5000"},
             delimiter = ':')
-    public void 리포트_수익률_계산(String result, double expected) {
-        List<Integer> resultReport = Arrays.stream(result.split(", "))
+    public void 전체_상금_계산 (String result, int expected) {
+        List<Integer> matchResult = Arrays.stream(result.split(", "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-
-        Assertions.assertThat(new LottoReport(resultReport).rateOfReturn())
+        Assertions.assertThat(LottoCashPrize.calculateTotalPrize(matchResult))
                 .isEqualTo(expected);
     }
 }

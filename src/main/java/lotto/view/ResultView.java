@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.model.Lotto;
 import lotto.model.LottoCashPrize;
 import lotto.model.LottoReport;
+import lotto.model.Lottos;
 
 public class ResultView {
     private static final String CHECK_PURCHASE = "개를 구매했습니다.";
@@ -14,7 +15,13 @@ public class ResultView {
         System.out.println(String.valueOf(purchaseAmount) + CHECK_PURCHASE);
     }
 
-    public static void printLottoTicket(Lotto ticket) {
+    public static void printLottoTickets(Lottos tickets) {
+        for (Lotto ticket : tickets.tickets()) {
+            printLottoTicket(ticket);
+        }
+    }
+
+    private static void printLottoTicket(Lotto ticket) {
         System.out.println(ticket.numbers());
     }
 
