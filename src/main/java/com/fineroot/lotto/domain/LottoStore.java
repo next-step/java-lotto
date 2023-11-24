@@ -1,9 +1,7 @@
 package com.fineroot.lotto.domain;
 
 import com.fineroot.lotto.dto.LottoBundleStatus;
-import com.fineroot.lotto.dto.Money;
 import com.fineroot.lotto.dto.WinningNumberSet;
-import com.fineroot.lotto.util.LottoUtils;
 
 public class LottoStore {
     private LottoBundle lottoBundle;
@@ -12,16 +10,12 @@ public class LottoStore {
         lottoBundle = LottoBundle.from(0);
     }
 
-    public int howMuchLotto(Money money) {
-        return getLotteryCount(money);
+    public void purchaseLottery(LottoPayment lottoPayment) {
+        lottoBundle = LottoBundle.from(lottoPayment.toLotteryCount());
     }
 
-    public void purchaseLottery(Money money) {
-        lottoBundle = LottoBundle.from(getLotteryCount(money));
-    }
-
-    private int getLotteryCount(Money money) {
-        return money.getValue() / LottoUtils.LOTTO_EACH_PRICE;
+    public void purchaseLottery(LotteryOrder lotteryOrder) {
+        lottoBundle = lotteryOrder.lottoBundle();
     }
 
     public LottoBundleStatus lottoBundleStatus() {

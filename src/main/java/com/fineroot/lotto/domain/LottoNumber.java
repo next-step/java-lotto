@@ -18,6 +18,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return new LottoNumber(number);
     }
 
+    public boolean isSameAs(final int number) {
+        return value == number;
+    }
+
     @Override
     public int compareTo(LottoNumber o) {
         return Integer.compare(value, o.value);

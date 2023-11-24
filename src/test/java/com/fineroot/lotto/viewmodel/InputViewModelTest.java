@@ -2,9 +2,10 @@ package com.fineroot.lotto.viewmodel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.fineroot.lotto.dto.Money;
-import com.fineroot.lotto.dto.WinningNumber;
 import com.fineroot.lotto.domain.LottoNumber;
+import com.fineroot.lotto.domain.LottoPayment;
+import com.fineroot.lotto.dto.LotteryCount;
+import com.fineroot.lotto.dto.WinningNumber;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
@@ -17,8 +18,8 @@ class InputViewModelTest {
     @DisplayName("입력 금액 저장 및 확인")
     void saveMoney() {
         InputViewModel inputViewModel = new InputViewModel();
-        inputViewModel.saveMoney(Money.from(1000));
-        assertThat(inputViewModel.getMoney().getValue()).isEqualTo(1000);
+        inputViewModel.saveLottoPayment(LottoPayment.from(1000));
+        assertThat(inputViewModel.getLottoPayment()).isEqualTo(LottoPayment.from(1000));
     }
 
     @ParameterizedTest
@@ -36,5 +37,13 @@ class InputViewModelTest {
                         .map(Integer::parseInt)
                         .map(LottoNumber::from)
                         .collect(Collectors.toList()))).isEqualTo(expected);
+    }
+
+    @Test
+    void saveManualPurchaseCount() {
+        InputViewModel inputViewModel = new InputViewModel();
+        inputViewModel.saveLottoPayment(LottoPayment.from(10000));
+        inputViewModel.saveManualPurchaseCount(LotteryCount.from(5));
+        assertThat(inputViewModel.getLotteryCountSet().getManualLotteryCount()).isEqualTo(LotteryCount.from(5));
     }
 }

@@ -1,7 +1,7 @@
 package com.fineroot.lotto.view;
 
 import com.fineroot.lotto.domain.LottoNumber;
-import com.fineroot.lotto.dto.Money;
+import com.fineroot.lotto.domain.LottoPayment;
 import com.fineroot.lotto.dto.WinningNumber;
 import com.fineroot.lotto.viewmodel.InputViewModel;
 import java.util.Scanner;
@@ -17,7 +17,7 @@ public class InputView {
     public void drawInputMoneyView(){
         System.out.println("구입금액을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        inputViewModel.saveMoney(Money.from(scanner.nextInt()));
+        inputViewModel.saveLottoPayment(LottoPayment.from(scanner.nextInt()));
     }
 
     public void drawInputWinningNumberView(){

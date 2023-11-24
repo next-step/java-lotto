@@ -1,7 +1,7 @@
 package com.fineroot.lotto.viewmodel;
 
 import com.fineroot.lotto.dto.LottoBundleStatus;
-import com.fineroot.lotto.dto.Money;
+import com.fineroot.lotto.domain.LottoPayment;
 import com.fineroot.lotto.domain.WinnerStatus;
 import com.fineroot.lotto.domain.WinningRank;
 import com.fineroot.lotto.util.LottoUtils;
@@ -46,6 +46,6 @@ public class ResultViewModel {
 
     public double getTotalEarningRate() {
         return Math.floor(
-                winnerStatus.totalEarningRate(Money.from(lottoCount * LottoUtils.LOTTO_EACH_PRICE)) * 100) /100;
+                winnerStatus.totalEarningRate(LottoPayment.from(lottoCount * LottoUtils.LOTTO_EACH_PRICE)) * 100) /100;
     }
 }

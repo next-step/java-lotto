@@ -1,5 +1,6 @@
 package com.fineroot.lotto.domain;
 
+import com.fineroot.lotto.dto.LotteryCount;
 import com.fineroot.lotto.dto.LottoBundleStatus;
 import com.fineroot.lotto.dto.WinningNumberSet;
 import java.util.ArrayList;
@@ -19,12 +20,23 @@ public class LottoBundle {
         }
     }
 
+    private LottoBundle(final LotteryCount count) {
+        lottoList = new ArrayList<>();
+        for (int i = 0; count.isGreaterThanFromInteger(i); i++) {
+            lottoList.add(Lotto.create());
+        }
+    }
+
     private LottoBundle(List<Lotto> lottoList) {
         this.lottoList = lottoList;
     }
 
     public static LottoBundle from(int lotteryCount) {
         return new LottoBundle(lotteryCount);
+    }
+
+    public static LottoBundle fromLotteryCount(final LotteryCount count) {
+        return new LottoBundle(count);
     }
 
     public static LottoBundle fromList(List<String> lottoList) {
@@ -47,4 +59,13 @@ public class LottoBundle {
         return winnerStatus;
     }
 
+    public LottoBundle addBundle(LottoBundle from) {
+        List<Lotto> list = lottoList.stream().map(Lotto::copy).collect(Collectors.toList());
+        list.addAll(from.lottoList.stream().map(Lotto::copy).collect(Collectors.toList()));
+        return new LottoBundle(list);
+    }
+
+    public int size() {
+        return lottoList.size();
+    }
 }

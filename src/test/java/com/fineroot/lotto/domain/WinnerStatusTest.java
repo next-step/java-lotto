@@ -2,16 +2,11 @@ package com.fineroot.lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.fineroot.lotto.domain.LottoBundle;
-import com.fineroot.lotto.domain.WinnerStatus;
-import com.fineroot.lotto.domain.WinningRank;
-import com.fineroot.lotto.dto.Money;
 import com.fineroot.lotto.dto.WinningNumber;
 import com.fineroot.lotto.dto.WinningNumberSet;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -55,7 +50,7 @@ class WinnerStatusTest {
                         "25,26,27,28,29,30"));
         WinningNumberSet winningNumber = WinningNumberSet.of(WinningNumber.from("1,2,3,7,8,9"), LottoNumber.from(10));
         WinnerStatus winnerStatus = lottoBundle.matchWinner(winningNumber);
-        double earningRate = winnerStatus.totalEarningRate(Money.from(5000));
+        double earningRate = winnerStatus.totalEarningRate(LottoPayment.from(5000));
         assertThat(earningRate).isEqualTo(2.0d);
     }
 }

@@ -2,7 +2,7 @@ package com.fineroot.lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.fineroot.lotto.dto.Money;
+import com.fineroot.lotto.dto.LotteryCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,10 +15,11 @@ class LottoStoreTest {
     }
 
     @Test
-    @DisplayName("Lotto 구매 금액 저장 & Lotto 구매 가능 개수")
-    void purchaseLottery_howMuchLotto() {
+    @DisplayName("Lotto 구매: Order 넘겨받기")
+    void purchaseLottery_WithLotteryOrder() {
         LottoStore store = new LottoStore();
-        store.purchaseLottery(Money.from(10000));
-        assertThat(store.howMuchLotto(Money.from(10000))).isEqualTo(10);
+        store.purchaseLottery(
+                LotteryOrder.of(LotteryCount.from(10), LottoBundle.fromLotteryCount(LotteryCount.from(4))));
+        assertThat(store.lottoBundleStatus().size()).isEqualTo(14);
     }
 }

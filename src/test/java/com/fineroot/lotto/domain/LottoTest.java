@@ -31,4 +31,12 @@ class LottoTest {
     void string() {
         assertThat(Lotto.from(1, 2, 3, 4, 5, 6).toString()).hasToString("1, 2, 3, 4, 5, 6");
     }
+
+    @Test
+    @DisplayName("복사 생성 테스트: 의도된 shallow copy (for using cache)")
+    void copy() {
+        Lotto origin = Lotto.from(1, 2, 3, 4, 5, 6);
+        Lotto copy = origin.copy();
+        assertThat(copy.toString()).hasToString(origin.toString());
+    }
 }
