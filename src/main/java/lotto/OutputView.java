@@ -4,13 +4,15 @@ public class OutputView {
     private static final StringBuilder sb = new StringBuilder();
     private static final int PRINT_MATCHES_LIMIT = 3;
 
-    public static void printLotto(LottoList lottoList) {
+    public static void printLottoList(LottoList lottoList, int manualLottoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",
+                manualLottoCount, lottoList.size() - manualLottoCount);
         for (Lotto lotto : lottoList) {
-            printLotto(lotto);
+            printLottoList(lotto);
         }
     }
 
-    private static void printLotto(Lotto lotto) {
+    private static void printLottoList(Lotto lotto) {
         sb.setLength(0);
         sb.append("[");
 

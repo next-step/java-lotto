@@ -10,6 +10,10 @@ public class LottoList implements Iterable<Lotto> {
         lottoList = LottoFactory.createLottos(count);
     }
 
+    public LottoList(int count, List<String> inputManualLottos) {
+        lottoList = LottoFactory.createLottos(count, inputManualLottos);
+    }
+
     public LottoList(List<Lotto> lottoList) {
         validate(lottoList);
         this.lottoList = lottoList;

@@ -1,10 +1,13 @@
 package lotto;
 
+import java.util.List;
+
 public class LottoApplication {
     public static void main(String[] args) {
         int purChaseCount = InputView.inputPurchaseCount();
-        LottoList lottoList = new LottoList(purChaseCount);
-        OutputView.printLotto(lottoList);
+        List<String> manualLotto = InputView.inputManualLotto();
+        LottoList lottoList = new LottoList(purChaseCount - manualLotto.size(), manualLotto);
+        OutputView.printLottoList(lottoList, manualLotto.size());
         String winningNumbers = InputView.inputWinningNumbers();
         String bonusNumber = InputView.inputBonusNumber();
 

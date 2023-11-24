@@ -26,6 +26,19 @@ public class LottoFactory {
         return Collections.unmodifiableList(lottoList);
     }
 
+    public static List<Lotto> createLottos(int automaticLottoCount, List<String> manualLottos) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < automaticLottoCount; i++) {
+            lottoList.add(new Lotto());
+        }
+
+        for(String inputManualLotto : manualLottos) {
+            lottoList.add(new Lotto(inputManualLotto));
+        }
+
+        return Collections.unmodifiableList(lottoList);
+    }
+
     public static List<LottoNumber> createLottoNumbers() {
         List<LottoNumber> randomLottoNumbers = sortedRandomNumbers();
         return Collections.unmodifiableList(randomLottoNumbers);
