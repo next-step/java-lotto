@@ -1,38 +1,49 @@
 package lotto.domain;
 
+import lotto.util.Util;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private final List<Integer> lottoNumbers;
+    private final List<Number> lottoNumbers;
+    private static final int REPEAT = 6;
 
     public LottoNumbers() {
-        List<Integer> temp = new ArrayList<>();
+        lottoNumbers = new ArrayList<Number>();
 
-        for (int i = 1; i <= 45; i++) {
-            temp.add(i);
+        for (int i = 0; i <REPEAT; i++) {
+            lottoNumbers.add(new Number(Util.randomNum()));
         }
-
-        Collections.shuffle(temp);
-        this.lottoNumbers = temp.subList(0, 6);
         sort();
     }
 
-    public LottoNumbers(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public LottoNumbers(List<Integer> integerNumbers) {
+        lottoNumbers = new ArrayList<Number>();
+
+        for (int number : integerNumbers) {
+            lottoNumbers.add(new Number(number));
+        }
+
+        sort();
     }
+
 
     private void sort() {
         Collections.sort(this.lottoNumbers);
     }
 
     public boolean isContains(int winningNumber) {
-        return this.lottoNumbers.contains(winningNumber);
+        return this.lottoNumbers.stream()
+                .map(Number::getNumber)
+                .collect(Collectors.toList())
+                .contains(winningNumber);
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+    public List<Number> getLottoNumbers() {
+        return this.lottoNumbers;
     }
 
     @Override

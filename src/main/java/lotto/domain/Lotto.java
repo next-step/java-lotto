@@ -38,7 +38,7 @@ public class Lotto {
         return this.matchCount.getLottoOriginMatchNumber();
     }
 
-    public List<Integer> getLottoNumber() {
+    public List<Number> getLottoNumber() {
         return this.lottoNumbers.getLottoNumbers();
     }
 
