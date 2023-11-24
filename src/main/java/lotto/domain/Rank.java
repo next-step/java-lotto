@@ -22,9 +22,9 @@ public enum Rank {
         this.prizeMoney = prizeMoney;
     }
 
-    public static Rank rankByCount(int count, boolean isMatchBonus) {
-        if (count == 5) {
-            return isMatchBonus ? Rank.SECOND : Rank.THIRD;
+    public static Rank rankByCount(int count, boolean matchBonus) {
+        if (matchBonus && SECOND.matchCount == count) {
+            return SECOND;
         }
 
         return Arrays.stream(VALUES)
