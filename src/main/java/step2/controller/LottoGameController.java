@@ -1,5 +1,7 @@
 package step2.controller;
 
+import java.util.List;
+import step2.model.Lotto;
 import step2.model.LottoGenerator;
 import step2.model.WinningLotto;
 import step2.view.LottoInputView;
@@ -15,7 +17,7 @@ public class LottoGameController {
     public void game() {
         Money money = new Money(LottoInputView.inputPurchaseMoney());
 
-        Lottos lottos = new Lottos(lottoGenerator.generateLottos(money));
+        Lottos lottos = new Lottos(generateLottos(money));
         LottoResultView.printLottos(lottos, money);
 
         WinningLotto winningLotto = lottoGenerator.generateWinningLotto(
@@ -24,5 +26,14 @@ public class LottoGameController {
         LottoResult lottoResult = new LottoResult(lottos.calculateTotalRank(winningLotto));
         LottoResultView.printFinalLottoResult(lottoResult, money);
 
+    }
+
+    public List<Lotto> generateLottos(Money money) {
+
+        int manualLottoCount = LottoInputView.inputPurchaseManualLottoCount();
+        Money moneyAfterPurchaseManualLotto = money.purchaseManualLotto(manualLottoCount);
+
+        return lottoGenerator.generateLottos(LottoInputView.inputManualLottoNumbers(manualLottoCount),
+                moneyAfterPurchaseManualLotto);
     }
 }

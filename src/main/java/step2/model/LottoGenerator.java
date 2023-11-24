@@ -1,13 +1,11 @@
 package step2.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import step2.view.LottoInputView;
-import step2.view.LottoResultView;
 
 public class LottoGenerator {
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -23,23 +21,14 @@ public class LottoGenerator {
         }
     }
 
-    public List<Lotto> generateLottos(Money money) {
-
-        List<Lotto> lottos = generateManualLottos(getUserInputs(money));
-
-        lottos.addAll(generateAutoLottos(money));
-
+    public List<Lotto> generateLottos(List<String> manualLottos, Money moneyAfterPurchaseManualLotto) {
+        List<Lotto> lottos = generateManualLottos(manualLottos);
+        lottos.addAll(generateAutoLottos(moneyAfterPurchaseManualLotto));
         return lottos;
     }
 
-    private static List<String> getUserInputs(Money money) {
-        int manualLottoCount = LottoInputView.inputPurchaseManualLottoCount();
-        money = money.purchaseManualLotto(manualLottoCount);
-        return LottoInputView.inputManualLottoNumbers(manualLottoCount);
-    }
-
-    public List<Lotto> generateManualLottos(List<String> userInputs) {
-        return userInputs.stream()
+    List<Lotto> generateManualLottos(List<String> manualLottos) {
+        return manualLottos.stream()
                 .map(this::generateManualLotto)
                 .collect(Collectors.toList());
     }
@@ -48,7 +37,7 @@ public class LottoGenerator {
         return new Lotto(parseLottoNumbers(splitLottoNumbers(userInput)));
     }
 
-    private List<Lotto> generateAutoLottos(Money money) {
+    List<Lotto> generateAutoLottos(Money money) {
         return IntStream.range(0, money.determineLottoPurchaseCount())
                 .mapToObj(count -> generateAutoLotto())
                 .collect(Collectors.toList());
