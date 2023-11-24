@@ -6,29 +6,25 @@ import step2.lotto.strategy.LottoNumberGenerator;
 public class LottoMachine {
 
     private final Lottos purchaseLottos;
-    private final LottoPurchaseInfo lottoPurchaseInfo;
-    private final LottoScore lottoScore;
+    private final LottoPurchase lottoPurchase;
 
     public LottoMachine(final int inputMoney, final LottoNumberGenerator lottoNumberGenerator) {
-        this.lottoPurchaseInfo = new LottoPurchaseInfo(inputMoney);
+        this.lottoPurchase = new LottoPurchase(inputMoney);
         this.purchaseLottos = new Lottos(
-            LottosFactory.createLottos(lottoPurchaseInfo.getLottoTicketCount(), lottoNumberGenerator));
-        this.lottoScore = new LottoScore();
+            LottosFactory.createLottos(lottoPurchase.getLottoTicketCount(), lottoNumberGenerator));
     }
 
-    public LottoPurchaseInfo getLottoPurchaseInfo () {
-        return lottoPurchaseInfo;
+    public LottoPurchase getLottoPurchaseInfo () {
+        return lottoPurchase;
     }
 
     public Lottos getPurchaseLottos() {
         return purchaseLottos;
     }
 
-    public LottoScore getLottoScore() {
-        return lottoScore;
-    }
-
-    public void calculateLottoStatistics(final LottoWinNumberInfo winNumberInfo) {
+    public LottoScore calculateLottoStatistics(final LottoWin winNumberInfo) {
+        LottoScore lottoScore = LottoScore.create();
         lottoScore.recordMatchLotto(purchaseLottos, winNumberInfo);
+        return lottoScore;
     }
 }

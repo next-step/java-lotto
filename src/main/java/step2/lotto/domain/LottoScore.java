@@ -2,35 +2,40 @@ package step2.lotto.domain;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoScore {
 
     private final Map<LottoRank, Integer> lottoScore;
 
-    public LottoScore() {
-        this.lottoScore = createLottoScore();
+    private LottoScore() {
+        this.lottoScore = initLottoScore();
     }
 
     public Map<LottoRank, Integer> getLottoScore() {
         return Collections.unmodifiableMap(lottoScore);
     }
 
-    private Map<LottoRank, Integer> createLottoScore() {
-        Map<LottoRank, Integer> lottoScore = new HashMap<>();
+    public static LottoScore create() {
+        return new LottoScore();
+    }
+
+    private Map<LottoRank, Integer> initLottoScore() {
+        Map<LottoRank, Integer> lottoScore = new EnumMap<>(LottoRank.class);
         Arrays.stream(LottoRank.values()).forEach(lottoRank -> lottoScore.put(lottoRank, 0));
         return lottoScore;
     }
 
-    public void recordMatchLotto(final Lottos lottos, final LottoWinNumberInfo winNumberInfo) {
+    public void recordMatchLotto(final Lottos lottos, final LottoWin lottoWin) {
         lottos.getLottos().stream().forEach(lotto -> {
-            LottoRank lottoRank = LottoRank.matchLottoRank(winNumberInfo.matchCount(lotto));
+            LottoRank lottoRank =
+                LottoRank.valueOf(lottoWin.matchCount(lotto), lottoWin.matchBonusNumber(lotto));
             lottoScore.merge(lottoRank, 1, Integer::sum);
         });
     }
 
-    public double calculateProfitRatio(final LottoPurchaseInfo purchaseInfo) {
+    public double calculateProfitRatio(final LottoPurchase purchaseInfo) {
         return calculateTotalPrizeAmount() / purchaseInfo.getLottoPurchaseMoney();
     }
 

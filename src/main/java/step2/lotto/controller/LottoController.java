@@ -1,7 +1,8 @@
 package step2.lotto.controller;
 
 import step2.lotto.domain.LottoMachine;
-import step2.lotto.domain.LottoWinNumberInfo;
+import step2.lotto.domain.LottoScore;
+import step2.lotto.domain.LottoWin;
 import step2.lotto.strategy.LottoNumberRandomGenerator;
 import step2.lotto.utility.NumberSplitter;
 import step2.lotto.view.InputView;
@@ -18,10 +19,8 @@ public class LottoController {
         resultView.printPurchase(lottoMachine.getLottoPurchaseInfo());
         resultView.printPurchaseLottoTicketNumbers(lottoMachine.getPurchaseLottos());
 
-        LottoWinNumberInfo lottoWinNumberInfo = new LottoWinNumberInfo(
-            NumberSplitter.splitNumber(inputView.inputWinNumbers()));
-        lottoMachine.calculateLottoStatistics(lottoWinNumberInfo);
-
-        resultView.printResultStatics(lottoMachine.getLottoScore(), lottoMachine.getLottoPurchaseInfo());
+        LottoWin lottoWin = new LottoWin(
+            NumberSplitter.splitNumber(inputView.inputWinNumbers()), inputView.inputBonusNumber());
+        resultView.printResultStatics(lottoMachine.calculateLottoStatistics(lottoWin), lottoMachine.getLottoPurchaseInfo());
     }
 }

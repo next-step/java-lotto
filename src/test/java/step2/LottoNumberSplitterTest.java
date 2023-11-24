@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.lotto.utility.NumberSplitter;
 
-class NumberSplitterTest {
+class LottoNumberSplitterTest {
 
     @Test
     @DisplayName("입력한 당첨 번호 문자열을 Set으로 변경한다.")

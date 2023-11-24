@@ -7,7 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.lotto.strategy.LottoNumberRandomGenerator;
 
-class LottoNumberRandomGeneratorTest {
+class LottoLottoNumberRandomGeneratorTest {
 
     @Test
     @DisplayName("6개의 Lotto Numbers를 생성")
