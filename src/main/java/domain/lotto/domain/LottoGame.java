@@ -11,6 +11,8 @@ public class LottoGame {
     private WinnginLottoLine winningLottoLine;
     private LottoNumber bonusBall;
 
+    private double profitRate;
+
 
     protected LottoGame(int buyingPrice) {
         this.lottoLines = new ArrayList<>();
@@ -29,6 +31,7 @@ public class LottoGame {
 
     public void calculateStatistics() {
         this.lottoStatistics = winningLottoLine.match(lottoLines, bonusBall);
+        this.profitRate = lottoStatistics.getTotalProfit() / ((double) gameCount * LOTTO_PRICE);
     }
 
     public void registerWinningLottoLine(WinnginLottoLine winningLottoLine) {
@@ -64,8 +67,9 @@ public class LottoGame {
         return bonusBall;
     }
 
+
     public double getProfitRate() {
-        return lottoStatistics.getTotalProfit() / ((double) gameCount * LOTTO_PRICE);
+        return profitRate;
     }
 
     public void registerBonusBall(int bonusBall) {

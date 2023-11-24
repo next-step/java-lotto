@@ -19,20 +19,7 @@ public class LottoStatistics {
 
 
     public void calculate(int matchCount, boolean matchBonusBall) {
-        if (isSecondWin(matchCount, matchBonusBall)) {
-            updateSecondWin();
-            return;
-        }
-        updateRankCounts(Rank.valueOf(matchCount));
-    }
-
-    private boolean isSecondWin(int matchCount, boolean matchBonusBall) {
-        return matchCount == Rank.SECOND.getCountOfMatch() && matchBonusBall;
-    }
-
-    private void updateSecondWin() {
-        Rank rank = Rank.SECOND;
-        updateRankCounts(rank);
+        updateRankCounts(Rank.valueOf(matchCount, matchBonusBall));
     }
 
     private void updateRankCounts(Rank rank) {

@@ -44,7 +44,7 @@ class LottoStatisticsTest {
         LottoStatistics lottoStatistics = new LottoStatistics();
 
         lottoStatistics.calculate(input, false);
-        assertThat(lottoStatistics.getRankCounts().get(Rank.valueOf(input)))
+        assertThat(lottoStatistics.getRankCounts().get(Rank.valueOf(input, false)))
                 .isEqualTo(1);
     }
 
