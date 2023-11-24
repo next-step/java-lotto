@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import step2.view.LottoInputView;
 import step2.view.LottoResultView;
 
 public class LottoGenerator {
@@ -32,9 +33,9 @@ public class LottoGenerator {
     }
 
     private static List<String> getUserInputs(Money money) {
-        int manualLottoCount = 2; //todo InputView
+        int manualLottoCount = LottoInputView.inputPurchaseManualLottoCount();
         money.purchaseManualLotto(manualLottoCount);
-        return Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12");
+        return LottoInputView.inputManualLottoNumbers(manualLottoCount);
     }
 
     public List<Lotto> generateManualLottos(List<String> userInputs) {
