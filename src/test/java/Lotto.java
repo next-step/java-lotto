@@ -19,8 +19,26 @@ public class Lotto {
         }
         return new Lotto(lottoNumbers);
     }
+    public static Lotto defaultOf(List<LottoNumber> lottoNumbers) {
+        return new Lotto(lottoNumbers);
+    }
 
     public int size() {
         return this.lottoNumbers.size();
+    }
+
+    public int howManySameNumber(Lotto lotto) {
+        int sameNumberCount = 0;
+        for (LottoNumber lottoNumber : this.lottoNumbers) {
+            if (lotto.hasNumber(lottoNumber)) {
+                sameNumberCount++;
+            }
+        }
+        return sameNumberCount;
+    }
+
+    private boolean hasNumber(LottoNumber comparingLottoNumber) {
+        return this.lottoNumbers.stream()
+                .anyMatch(lottoNumber -> comparingLottoNumber.equals(lottoNumber));
     }
 }

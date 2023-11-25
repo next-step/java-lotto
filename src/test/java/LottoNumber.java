@@ -21,7 +21,22 @@ public class LottoNumber {
 
     public static LottoNumber defaultOf() {
         Random random = new Random();
-        int lottoNumber = random.nextInt(46);
+        int lottoNumber = random.nextInt(45) + 1;
         return new LottoNumber(lottoNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LottoNumber that = (LottoNumber) o;
+
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return number;
     }
 }
