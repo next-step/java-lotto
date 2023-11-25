@@ -59,12 +59,8 @@ public class LottoGame {
         return lottos;
     }
 
-    public void classifyRankLotto() {
-        lottoStatics.classifyRankLotto(lottos, winningLotto, bonusBall);
-    }
-
-    public WinningLottos winningLottos() {
-        return lottoStatics.winningLottos();
+    public WinningLottos classifyRankLotto() {
+        return lottoStatics.classifyRankLotto(lottos, winningLotto, bonusBall);
     }
 
     public LottoNumber bonusBall() {
