@@ -2,29 +2,11 @@ package lotto.view;
 
 import lotto.domain.MatchResult;
 import lotto.domain.Rank;
-import lotto.domain.WinningLotto;
-import lotto.util.LottoUtil;
 import lotto.domain.MyLottos;
 
 import java.util.Arrays;
 
 public class ResultView {
-
-    public static void main(String[] args) {
-        int payMoney = InputView.inputPayMoney();
-        int lottoCount = LottoUtil.returnLottoCount(payMoney);
-        printLottoCount(lottoCount);
-
-        MyLottos myLottos = new MyLottos(lottoCount);
-        printMyLottos(myLottos, lottoCount);
-
-        WinningLotto winningLotto = InputView.inputWinningNumbers();
-        MatchResult matchResult = myLottos.matchMyLotto(winningLotto);
-
-        printMatchResult(matchResult);
-
-        printReturnRate(myLottos.returnRate(payMoney));
-    }
 
     public static void printLottoCount(int lottoCount){
         System.out.println(lottoCount + "개를 구매했습니다.");

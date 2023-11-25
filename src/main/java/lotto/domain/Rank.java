@@ -15,17 +15,6 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public static int winningMoneyOf(int matchCount){
-        Rank[] ranks = values();
-
-        for (Rank rank : ranks){
-            if(rank.matchCount == matchCount)
-                return rank.winningMoney;
-        }
-
-        throw new IllegalArgumentException("일치 갯수가 잘못되었습니다.");
-    }
-
     public static Rank returnRank(int matchCount){
         Rank[] ranks = values();
 
