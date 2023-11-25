@@ -21,7 +21,7 @@ public class LottoSeller implements Seller {
     }
 
     @Override
-    public Lottos generateLottos() {
+    public Lottos generateAutoLottos() {
         List<Lotto> lottos = new ArrayList<>();
         int presentLottoCount = 0;
 
@@ -32,7 +32,7 @@ public class LottoSeller implements Seller {
         return new Lottos(lottos);
     }
 
-    public Lotto generateLotto() {
+    private Lotto generateLotto() {
         Set<Integer> lottoNumbers = generateUniqueNumbers();
         return Lotto.from(sortLotto(lottoNumbers));
     }

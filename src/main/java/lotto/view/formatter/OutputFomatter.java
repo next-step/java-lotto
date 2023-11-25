@@ -12,16 +12,12 @@ import lotto.domain.Rank;
 import lotto.domain.Profit;
 
 public class OutputFomatter {
-
-    public int toLottoCount(LottoCount lottoCount) {
-        return lottoCount.getLottoCount();
-    }
-
     public String toLotto(Lotto lotto) {
         List<LottoNumber> rawLottoNumbers = lotto.getLottoNumbers();
         List<String> lottoNumbers = rawLottoNumbers.stream()
                 .map(lottoNumber -> Integer.toString(lottoNumber.getLottoNumber()))
                 .collect(Collectors.toList());
+
         return String.join(", ", lottoNumbers);
     }
 

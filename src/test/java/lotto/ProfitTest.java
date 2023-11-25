@@ -25,7 +25,7 @@ public class ProfitTest {
         PrizeSummary prizeSummary = lottos.getPrizeSummary(winningCombo);
 
         // when
-        Profit profit = Profit.of(PurchaseAmount.from(13000), prizeSummary);
+        Profit profit = Profit.of(new PurchaseAmount(13000), prizeSummary);
 
         // then
         assertThat(Math.round(profit.getProfit() * 100) / 100.0).isEqualTo(4.62);

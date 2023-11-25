@@ -4,13 +4,13 @@ public class LottoCountSummary {
     private final ManualLottoCount manulLottoCount;
     private final LottoCount autoLottoCount;
 
-    public LottoCountSummary(ManualLottoCount manulLottoCount, LottoCount autoLottoCount) {
+    private LottoCountSummary(ManualLottoCount manulLottoCount, LottoCount autoLottoCount) {
         this.manulLottoCount = manulLottoCount;
         this.autoLottoCount = autoLottoCount;
     }
 
     public static LottoCountSummary of(LottoCount totalLottoCount, ManualLottoCount manulLottoCount) {
-        int autoLottoCount = manulLottoCount.calculateAutoLottoCountByTotalCount(totalLottoCount);
+        int autoLottoCount = manulLottoCount.calculateAutoLottoCount(totalLottoCount);
         return new LottoCountSummary(manulLottoCount, LottoCount.from(autoLottoCount));
     }
 

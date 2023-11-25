@@ -40,4 +40,17 @@ public class LottosTest {
                 Rank.MISS, 1
         ));
     }
+
+    @Test
+    void mergeLottos() {
+        Lottos manualLottos = Lottos.of(List.of(1, 2, 3, 4, 5, 6), List.of(7, 8, 9, 10, 11, 12));
+        Lottos autoLottos = Lottos.of(List.of(11, 12, 13, 14, 15, 16), List.of(17, 18, 19, 20, 21, 22));
+        assertThat(manualLottos.mergeLottos(autoLottos))
+                .extracting(Lottos::getLottos)
+                .asList()
+                .containsExactly(Lotto.of(1, 2, 3, 4, 5, 6),
+                        Lotto.of(7, 8, 9, 10, 11, 12),
+                        Lotto.of(11, 12, 13, 14, 15, 16),
+                        Lotto.of(17, 18, 19, 20, 21, 22));
+    }
 }

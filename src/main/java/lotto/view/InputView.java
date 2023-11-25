@@ -34,7 +34,7 @@ public class InputView {
         printer.printLine("구입금액을 입력해 주세요.");
         String purchaseAmount = reader.readLine();
         validator.validatePurchaseAmount(purchaseAmount, "구입 금액");
-        return PurchaseAmount.from(Converter.convertToInt(purchaseAmount));
+        return new PurchaseAmount(Converter.convertToInt(purchaseAmount));
     }
 
     public Lotto inputWinningLotto() {
@@ -61,10 +61,12 @@ public class InputView {
 
     public Lottos inputManualLottos(LottoCountSummary lottoCountSummary) {
         printer.printLine("수동으로 구매할 번호를 입력해 주세요.");
+
         int manualLottoCount = lottoCountSummary.getManulLottoCount().getManualLottoCount();
         List<Lotto> manualLottos = IntStream.range(0, manualLottoCount)
                 .mapToObj(inputCount -> inputManulLotto())
                 .collect(Collectors.toList());
+
         return new Lottos(manualLottos);
     }
 

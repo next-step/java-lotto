@@ -1,16 +1,30 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public static Lottos of(List<Integer> ... rawLottos) {
+        List<Lotto> lottos = Arrays.stream(rawLottos)
+                .map(Lotto::from)
+                .collect(Collectors.toList());
+        return new Lottos(lottos);
+    }
+
+    public PrizeSummary getPrizeSummary(WinningCombo winningCombo) {
+        Map<Rank, Integer> prizeSummary = initializePrizeSummary();
+        countPrizes(winningCombo, prizeSummary);
+        return new PrizeSummary(prizeSummary);
     }
 
     public Lottos mergeLottos(Lottos autoLottos) {
@@ -24,12 +38,6 @@ public class Lottos {
 
         manualLottos.addAll(autoLottos);
         return new Lottos(manualLottos);
-    }
-
-    public PrizeSummary getPrizeSummary(WinningCombo winningCombo) {
-        Map<Rank, Integer> prizeSummary = initializePrizeSummary();
-        countPrizes(winningCombo, prizeSummary);
-        return new PrizeSummary(prizeSummary);
     }
 
     private Map<Rank, Integer> initializePrizeSummary() {

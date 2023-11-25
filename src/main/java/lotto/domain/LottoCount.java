@@ -25,8 +25,8 @@ public class LottoCount {
         return otherLottoCount <= lottoCount;
     }
 
-    public int minusBy(int manualLottoCount) {
-        return lottoCount - manualLottoCount;
+    public int calculateDifference(int otherLottoCount) {
+        return lottoCount - otherLottoCount;
     }
 
     public int getLottoCount() {

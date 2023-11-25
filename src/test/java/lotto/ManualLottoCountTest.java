@@ -19,16 +19,16 @@ public class ManualLottoCountTest {
     @ValueSource(ints = {0, 11, 12})
     void validateManualLottoCount(int input) {
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new ManualLottoCount(input, totalLottoCount));
+        assertThatIllegalArgumentException().isThrownBy(() -> ManualLottoCount.of(input, totalLottoCount));
 
-        assertThatCode(() -> new ManualLottoCount(1, totalLottoCount))
+        assertThatCode(() -> ManualLottoCount.of(1, totalLottoCount))
                 .doesNotThrowAnyException();
     }
 
     @Test
     void calculateAutoLottoCountByTotalCount() {
-        ManualLottoCount manualLottoCount = new ManualLottoCount(3, totalLottoCount);
-        assertThat(manualLottoCount.calculateAutoLottoCountByTotalCount(totalLottoCount))
+        ManualLottoCount manualLottoCount = ManualLottoCount.of(3, totalLottoCount);
+        assertThat(manualLottoCount.calculateAutoLottoCount(totalLottoCount))
                 .isEqualTo(7);
     }
 }

@@ -28,7 +28,6 @@ public class LottoController {
         LottoCountSummary lottoCountSummary = createLottoCountSummary(purchaseAmount);
 
         Lottos totalLottos = createTotalLottos(lottoCountSummary);
-
         outputview.printLottoCountSummary(lottoCountSummary);
         outputview.printLottos(totalLottos);
 
@@ -60,6 +59,6 @@ public class LottoController {
 
     private Lottos generateAutoLottos(LottoCountSummary lottoCountSummary) {
         LottoSeller lottoSeller = LottoSeller.from(lottoCountSummary);
-        return lottoSeller.generateLottos();
+        return lottoSeller.generateAutoLottos();
     }
 }
