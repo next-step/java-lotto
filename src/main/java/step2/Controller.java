@@ -11,12 +11,7 @@ public class Controller {
 
         try {
             price = stringToInteger(inputView.inputPrice());
-            rounds = getPlayRounds(price);
-
-            for (int i = 0; i < rounds; i++) {
-                Lotto lotto = new Lotto();
-                lotto.printLotto();
-            }
+            PlayLotto playLotto = new PlayLotto(getPlayRounds(price));
 
         }catch (Exception e){
             e.printStackTrace();
