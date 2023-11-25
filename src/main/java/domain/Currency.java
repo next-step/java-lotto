@@ -2,12 +2,10 @@ package domain;
 
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.function.IntBinaryOperator;
 import java.util.function.LongBinaryOperator;
 
 public enum Currency {
-    KRW("kor", "원", (profitAmount, investmentAmount) -> (profitAmount / investmentAmount))
-    ;
+    KRW("kor", "원", (profitAmount, investmentAmount) -> (profitAmount / investmentAmount));
     private final String countryType;
     private final String currencyType;
     private final LongBinaryOperator returnRateOperation;

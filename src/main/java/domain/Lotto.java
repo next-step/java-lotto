@@ -9,30 +9,33 @@ public class Lotto {
     private Set<LottoNumber> lottoNumbers;
 
     public Lotto(Integer... input) {
-        this(Arrays.stream(input).collect(Collectors.toList()));
+        this(Arrays.stream(input)
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet()));
     }
 
     public Lotto(String input) {
         this(Arrays.stream(input.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
-                .collect(Collectors.toList()));
-    }
-
-    public Lotto(List<Integer> lottoNumbers) {
-        Set<Integer> numbers = new HashSet<>(lottoNumbers);
-        validateLottoNumberCount(numbers);
-
-        this.lottoNumbers = lottoNumbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet()));
     }
 
-    private static void validateLottoNumberCount(Set<Integer> lottoNumbers) {
-        if (lottoNumbers.stream().count() < LOTTO_NUMBER_COUNT_LIMIT) {
-            throw new IllegalArgumentException("로또 숫자는 6개 입니다.");
-        }
-        if (lottoNumbers.stream().count() > LOTTO_NUMBER_COUNT_LIMIT) {
+    public Lotto (List<Integer> lottoNumbers) {
+        this(lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet()));
+    }
+
+    public Lotto(Set<LottoNumber> lottoNumbers) {
+        validateLottoNumberCount(lottoNumbers);
+
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    private static void validateLottoNumberCount(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() < LOTTO_NUMBER_COUNT_LIMIT) {
             throw new IllegalArgumentException("로또 숫자는 6개 입니다.");
         }
     }
