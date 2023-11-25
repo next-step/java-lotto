@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class Lotto {
@@ -14,7 +13,7 @@ public class Lotto {
             checkCanAdd(inputNumber);
             numbers.add(new LottoNumber(inputNumber));
         }
-        numbers.sort(Comparator.comparingInt(LottoNumber::getLottoNumber));
+        Collections.sort(numbers);
     }
 
     private void checkCanAdd(Integer inputNumber) {
