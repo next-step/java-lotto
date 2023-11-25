@@ -7,9 +7,9 @@ import java.util.List;
 public class LottoNumberGenerator {
 
     private static List<Integer> allNumbers;
-    public static Integer MIN_LOTTO_NUMBER = Integer.valueOf(1);
-    public static Integer MAX_LOTTO_NUMBER = Integer.valueOf(45);
-    public static Integer LOTTO_NUMBER_COUNT_LIMIT = Integer.valueOf(6);
+    public static final Integer MIN_LOTTO_NUMBER = Integer.valueOf(1);
+    public static final Integer MAX_LOTTO_NUMBER = Integer.valueOf(45);
+    public static final Integer LOTTO_NUMBER_COUNT_LIMIT = Integer.valueOf(6);
 
     static {
         initialize();
