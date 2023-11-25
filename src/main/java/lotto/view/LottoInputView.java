@@ -10,7 +10,7 @@ public class LottoInputView {
         return scanner.next();
     }
 
-    public int inputAmount(String question) {
+    public int inputNumber(String question) {
         System.out.println(question);
         return scanner.nextInt();
     }
