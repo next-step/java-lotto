@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoNumbersValidateTest {
+class LottoNumberTest {
     @Test
     @DisplayName("로또 번호는 1이상 45이하이다.")
     void test1() {
