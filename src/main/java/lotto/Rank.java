@@ -26,7 +26,7 @@ public enum Rank {
     }
 
     public static Rank convertRanking(int count, boolean matchBonus) {
-        if (isSecond(count)) {
+        if (isSecondOrThird(count)) {
             return matchSecondRank(matchBonus);
         }
         return Arrays.stream(Rank.values())
@@ -42,7 +42,7 @@ public enum Rank {
         return THIRD;
     }
 
-    private static boolean isSecond(int count) {
+    private static boolean isSecondOrThird(int count) {
         return count == 5;
     }
 
