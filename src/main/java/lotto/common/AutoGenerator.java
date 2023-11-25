@@ -5,7 +5,7 @@ import lotto.domain.LottoNumber;
 
 import java.util.*;
 
-public class LottoGenerator {
+public class AutoGenerator {
     private static final List<Integer> DUMMY_LOTTO_NUMBERS = new ArrayList<>();
     private static Random random = new Random();
 
@@ -15,7 +15,7 @@ public class LottoGenerator {
         }
     }
 
-    private LottoGenerator() {}
+    private AutoGenerator() {}
 
     public static List<Lotto> generateByLottoCount(Integer lottoCount) {
         checkLottoCount(lottoCount);
