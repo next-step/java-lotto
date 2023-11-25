@@ -20,7 +20,7 @@ public class LottoPlayApplication {
         int purchasedAmt = InputView.getAmountOfPurchase();
         int numOfManualTickets = getNumOfManualTicket();
         int numOfTickets = (purchasedAmt / 1000) - numOfManualTickets;
-        List<LottoTicket> manualLottoTickets = getManualLottoTickets(numOfManualTickets);
+        List<String []> manualLottoTickets = getManualLottoTickets(numOfManualTickets);
 
         LottoGame lottoGame = new LottoGame(numOfTickets, manualLottoTickets);
 

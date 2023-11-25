@@ -27,17 +27,13 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<LottoTicket> getManualLottoTickets(int manualLottoCount) {
+    public static List<String []> getManualLottoTickets(int manualLottoCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<LottoTicket> manualTickets = new ArrayList<>();
+        List<String[]> manualTickets = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
             String inputValue = scannerForString.nextLine();
             String[] splittedInputValue = inputValue.split(", ");
-            List<Integer> inputInList = Arrays.stream(splittedInputValue)
-                    .map(Integer::valueOf)
-                    .collect(Collectors.toList());
-            LottoTicket manualTicket = new LottoTicket(inputInList);
-            manualTickets.add(manualTicket);
+            manualTickets.add(splittedInputValue);
         }
         return manualTickets;
     }
