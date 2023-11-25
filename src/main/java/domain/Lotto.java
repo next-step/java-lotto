@@ -57,9 +57,11 @@ public class Lotto {
     }
 
     public boolean isMatchBonusNumber(WinningLotto winningLotto) {
-        return lottoNumbers.stream()
-                .map(LottoNumber::getLottoNumber)
-                .anyMatch(lottoNumber -> lottoNumber.equals(winningLotto.getBonusNumber()));
+        return contains(winningLotto.getBonusNumber());
+    }
+
+    private boolean contains(int bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
 }
