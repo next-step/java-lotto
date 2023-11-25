@@ -22,18 +22,18 @@ public class Lotto {
         }
     }
 
-    public EnumMap<Rank, Integer> makeStatistics(LottoNumbers winningLottoNumbers) {
+    public EnumMap<Rank, Integer> makeStatistics(WinningNumbers winningLottoNumbers) {
         EnumMap<Rank, Integer> countPerPrize = new EnumMap<>(Rank.class);
         initEnumMap(countPerPrize);
 
         for (LottoNumbers numbers : lottoNumbers) {
-            Rank.fromCount(numbers.compareNumbers(winningLottoNumbers)).ifPresent(rank -> countPerPrize.put(rank, countPerPrize.get(rank) + 1));
+            Rank.valueOf(winningLottoNumbers.matchNumbers(numbers), winningLottoNumbers.containBonusNumber(numbers)).ifPresent(rank -> countPerPrize.put(rank, countPerPrize.get(rank) + 1));
         }
 
         return countPerPrize;
     }
 
-    public long calcWinningAmount(LottoNumbers winningLottoNumbers) {
+    public long calcWinningAmount(WinningNumbers winningLottoNumbers) {
         long totalAmount = 0;
         for (Map.Entry<Rank, Integer> entry : this.makeStatistics(winningLottoNumbers).entrySet()) {
             totalAmount += entry.getKey().calcWinningAmountPerRank(entry.getValue());
@@ -42,7 +42,7 @@ public class Lotto {
     }
 
 
-    public double calcRateOfReturn(LottoNumbers winningLottoNumbers) {
+    public double calcRateOfReturn(WinningNumbers winningLottoNumbers) {
         return (double) this.calcWinningAmount(winningLottoNumbers) / (lottoNumbersCount() * PRICE);
     }
 
