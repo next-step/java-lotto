@@ -7,22 +7,16 @@ import java.util.function.Predicate;
 
 public class WinningNumbers {
     private static final int LOTTO_COST = 1000;
-    List<Integer> winningLottoNumbers;
-    Integer bonusNumber;
+    List<LottoNumber> winningLottoNumbers;
+    LottoNumber bonusNumber;
     List<Rank> rankList = new ArrayList<>();
 
     public WinningNumbers(List<Integer> winningLottoNumbers) {
-        for (Integer winningNumber : winningLottoNumbers) {
-            checkWinningNumbers(winningNumber);
+        this.winningLottoNumbers = new ArrayList<>();
+        for (Integer winningNumber : winningLottoNumbers.subList(0,6)) {
+            this.winningLottoNumbers.add(new LottoNumber(winningNumber));
         }
-        this.winningLottoNumbers = winningLottoNumbers.subList(0, 6);
-        this.bonusNumber = winningLottoNumbers.get(6);
-    }
-
-    private void checkWinningNumbers(int number) {
-        if (number > 45 || number < 1) {
-            throw new IllegalArgumentException("당첨번호가 올바르지 않습니다.");
-        }
+        this.bonusNumber = new LottoNumber(winningLottoNumbers.get(6));
     }
 
     public void winLotto(List<Lotto> lottoList) {
@@ -34,18 +28,16 @@ public class WinningNumbers {
     private void sameNumberCount(List<Integer> lotto) {
         int count = (int) lotto
                 .stream()
-                .filter(o -> winningLottoNumbers.stream().anyMatch(Predicate.isEqual(o)))
+                .filter(o -> winningLottoNumbers.stream().map(LottoNumber::getLottoNumber).anyMatch(Predicate.isEqual(o)))
                 .count();
-        if (count == 5) {
-            rankList.add(Rank.valueOf(count, checkBonus(lotto)));
-        }
-
-        rankList.add(Rank.valueOf(count, checkBonus(lotto)));
+        rankList.add(Rank.valueOf(count, containsBonus(count,lotto)));
     }
 
-    //보너스 번호 체크
-    private boolean checkBonus(List<Integer> lotto) {
-        return lotto.contains(bonusNumber);
+    private boolean containsBonus(Integer count, List<Integer> lotto) {
+        if (count == 5){
+            return lotto.contains(bonusNumber.getLottoNumber());
+        }
+        return false;
     }
 
     public Integer getWinnerNumber(Rank rank) {

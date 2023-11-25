@@ -1,19 +1,25 @@
 package lotto.model;
 
+import java.util.Arrays;
+import java.util.Objects;
+
+
 public enum Rank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000),
-    MISS(0, 0);
+    FIRST(6, 2_000_000_000, false),
+    SECOND(5, 30_000_000, true),
+    THIRD(5, 1_500_000, false),
+    FOURTH(4, 50_000, false),
+    FIFTH(3, 5_000, false),
+    MISS(0, 0, false);
 
     private final int countOfMatch;
     private final int winningMoney;
+    private final boolean matchBonus;
 
-    private Rank(int countOfMatch, int winningMoney) {
+    private Rank(int countOfMatch, int winningMoney, boolean matchBonus) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
+        this.matchBonus = matchBonus;
     }
 
     public int getCountOfMatch() {
@@ -26,33 +32,12 @@ public enum Rank {
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         // TODO 일치하는 수를 로또 등수로 변경한다. enum 값 목록은 "Rank[] ranks = values();"와 같이 가져올 수 있다.
-        if (countOfMatch<3) {
+        if (countOfMatch < 3) {
             return Rank.MISS;
         }
-
-        if (countOfMatch == 3) {
-            return Rank.FIFTH;
-        }
-
-        if (countOfMatch == 4) {
-            return Rank.FOURTH;
-        }
-
-        if (countOfMatch == 5) {
-            return checkBonus(matchBonus);
-        }
-
-        if (countOfMatch == 6) {
-            return Rank.FIRST;
-        }
-
-        throw new IllegalArgumentException("매치하는 숫자가 올바르지 않습니다.");
-    }
-
-    private static Rank checkBonus(boolean matchBonus) {
-        if (matchBonus) {
-            return Rank.SECOND;
-        }
-        return Rank.THIRD;
+        return Arrays.stream(values())
+                .filter(rank -> Objects.equals(rank.matchBonus, matchBonus) && Objects.equals(rank.countOfMatch, countOfMatch))
+                .findFirst()
+                .orElseThrow(()->new IllegalArgumentException("맞는 번호의 개수가 맞지 않습니다."));
     }
 }

@@ -20,7 +20,7 @@ public class RankTest {
     @Test
     void incorrectValueOf() {
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> Rank.valueOf(7, false)).withMessage("매치하는 숫자가 올바르지 않습니다.");
+                .isThrownBy(() -> Rank.valueOf(7, false)).withMessage("맞는 번호의 개수가 맞지 않습니다.");
     }
 
     @DisplayName("맞힌 개수를 올바르게 갖고온다.")
@@ -29,7 +29,7 @@ public class RankTest {
         assertThat(Rank.FIRST.getCountOfMatch()).isEqualTo(6);
     }
 
-    @DisplayName("랭크 valueof 함수 올바른 예시")
+    @DisplayName("등수에 맞는 금액을 호출한다.")
     @Test
     void winningMoneyTest() {
         assertThat(Rank.FIRST.getWinningMoney()).isEqualTo(2_000_000_000);
