@@ -9,19 +9,19 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
-    private static final int LOTTO_NUMBER_COUNT = 6;
+    public static final int LOTTO_NUMBER_COUNT = 6;
 
     private final List<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = numbers.stream().map(value -> new LottoNumber(value)).collect(Collectors.toList());
+        this.numbers = numbers.stream()
+                .map(value -> new LottoNumber(value))
+                .collect(Collectors.toList());
         validate();
     }
 
     public Lotto(LottoGenerator lottoGenerator) {
-        this(lottoGenerator.generate(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, LOTTO_NUMBER_COUNT));
+        this(lottoGenerator.generate());
     }
 
     public Lotto(Integer... numbers) {
