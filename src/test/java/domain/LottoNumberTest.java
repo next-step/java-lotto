@@ -2,7 +2,7 @@ package domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import util.LottoRandomNumberGenerator;
+import util.LottoNumberGenerator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,15 +29,15 @@ public class LottoNumberTest {
     @Test
     @DisplayName("로또 번호는 6개 숫자로 생성된다.")
     void generateNumberShuffleTest() {
-        List<Integer> lottoNumbers = LottoRandomNumberGenerator.generateLottoNumber();
-
+        List<Integer> lottoNumbers = LottoNumberGenerator.generateLottoNumber();
         assertThat(lottoNumbers.stream().distinct().count()).isEqualTo(6);
     }
+
     @Test
     @DisplayName("로또 생성은 Collections.shuffle() 메소드를 활용한다.")
     void generateNumberShuffleTest2() {
         for (int i = 0; i < 2; i++) {
-            List<Integer> lottoNumbers = LottoRandomNumberGenerator.generateLottoNumber();
+            List<Integer> lottoNumbers = LottoNumberGenerator.generateLottoNumber();
             System.out.println("lottoNumbers = " + lottoNumbers);
         }
     }
@@ -45,20 +45,21 @@ public class LottoNumberTest {
     @Test
     @DisplayName("로또 번호 출력은 Collections.sort()를 활용한다.")
     void usingSortTest() {
-        List<Integer> lottoNumbers = LottoRandomNumberGenerator.generateLottoNumber();
+        List<Integer> lottoNumbers = LottoNumberGenerator.generateLottoNumber();
         Collections.sort(lottoNumbers);
 
         System.out.println("lottoNumbers = " + lottoNumbers);
     }
 
     @Test
-    @DisplayName("당첨 번호를 6개 미만으로 입력하는 경우 Exception이 발생한다.")
+    @DisplayName("당첨 번호를 6개 미만으로 입력하는 경우 Exception throw.")
     void invalidInputLessSixExceptionTest() {
-        assertThrows(IllegalArgumentException.class, () -> new Lotto(1, 2, 3, 4, 5));
+        assertThrows(IllegalArgumentException.class, () -> new Lotto("1, 2, 3, 4, 5"));
     }
+
     @Test
-    @DisplayName("당첨 번호를 중복으로 입력하는 경우 6개 미만 Exception이 발생한다.")
+    @DisplayName("당첨 번호를 중복으로 입력하는 경우 6개 미만 Exception throw.")
     void invalidInputExceptionTest() {
-        assertThrows(IllegalArgumentException.class, () -> new Lotto(1, 2, 3, 3, 4, 5));
+        assertThrows(IllegalArgumentException.class, () -> new Lotto("1, 2, 3, 3, 4, 5"));
     }
 }

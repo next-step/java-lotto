@@ -1,14 +1,9 @@
 package domain;
 
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.function.IntBinaryOperator;
 import java.util.function.LongBinaryOperator;
 
 public enum Currency {
-
-    KOREA("kor", "원", (profitAmount, investmentAmount) -> (profitAmount / investmentAmount)),
-    ;
+    KRW("kor", "원", (profitAmount, investmentAmount) -> (profitAmount / investmentAmount));
     private final String countryType;
     private final String currencyType;
     private final LongBinaryOperator returnRateOperation;
@@ -21,10 +16,6 @@ public enum Currency {
 
     public float calculate(long profitAmount, long investmentAmount) {
         return returnRateOperation.applyAsLong(profitAmount, investmentAmount);
-    }
-
-    public static Optional<Currency> fromCountryType(String countryType) {
-        return Arrays.stream(values()).filter(type -> type.countryType.equals(countryType)).findAny();
     }
 
     public String getCurrencyType() {

@@ -1,9 +1,10 @@
 package domain;
 
-public class LottoNumber {
+import java.util.Objects;
 
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+import static util.LottoNumberGenerator.*;
+
+public class LottoNumber {
     private int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
@@ -19,5 +20,22 @@ public class LottoNumber {
 
     public int getLottoNumber() {
         return lottoNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 }
