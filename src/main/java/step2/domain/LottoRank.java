@@ -13,14 +13,16 @@ public enum LottoRank {
     private final int matchCount;
     private final int reward;
 
+    public static final LottoRank[] VALUES = values();
+
     LottoRank(int matchCount, int reward) {
         this.matchCount = matchCount;
         this.reward = reward;
     }
 
     public static LottoRank lottoRank(int matchCount, boolean matchBonus) {
-        if (matchCount == 5 && !matchBonus) {return THIRD;}
-        return Arrays.stream(LottoRank.values()).filter(rank -> rank.matchCount()==matchCount).findFirst().orElse(NONE);
+        if (matchCount == LottoRank.THIRD.matchCount && !matchBonus) {return THIRD;}
+        return Arrays.stream(LottoRank.VALUES).filter(rank -> rank.matchCount()==matchCount).findFirst().orElse(NONE);
     }
 
     public int reward() {

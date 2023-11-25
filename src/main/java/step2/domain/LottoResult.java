@@ -19,9 +19,9 @@ public class LottoResult {
 
     private void process(List<LottoTicket> tickets, LottoWinningTicket winningTicket) {
             lottoRankResult = tickets.stream()
-                .map(ticket -> {return LottoRank.lottoRank(ticket.matchCount(winningTicket.winningTicket()), ticket.bonusMatch(winningTicket.bonusNumber()));})
+                .map(ticket -> LottoRank.lottoRank(ticket.matchCount(winningTicket.winningTicket()), ticket.bonusMatch(winningTicket.bonusNumber())))
                 .collect(Collectors.groupingBy(LottoRank::valueOf, Collectors.summingInt(e -> 1)));
-            Arrays.stream(LottoRank.values()).forEach(lottoRank -> {lottoRankResult.putIfAbsent(lottoRank, 0);});
+            Arrays.stream(LottoRank.VALUES).forEach(lottoRank -> {lottoRankResult.putIfAbsent(lottoRank, 0);});
     }
 
     public Map<LottoRank, Integer> result() {

@@ -13,7 +13,7 @@ class LottoResultTest {
     @Test
     void checkResult() {
         LottoTicket lottoTicket1 = new LottoTicket("1,2,3,4,5,6");
-        LottoTicket lottoTicket2 = new LottoTicket("1,2,3,4,5,7");
+        LottoTicket lottoTicket2 = new LottoTicket("1,2,3,4,5,30");
         LottoTicket lottoTicket3 = new LottoTicket("1,2,3,4,7,8");
         LottoTicket lottoTicket4 = new LottoTicket("1,2,3,4,8,9");
         LottoTicket lottoTicket5 = new LottoTicket("1,2,7,8,9,10");

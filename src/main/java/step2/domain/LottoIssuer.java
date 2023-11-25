@@ -12,9 +12,6 @@ public class LottoIssuer {
                     .collect(Collectors.toCollection(ArrayList::new));
     private final int BASE_MONEY = 1000;
 
-    public LottoIssuer() {
-    }
-
     public List<LottoTicket> issueTickets(int count) {
         List<LottoTicket> tickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {

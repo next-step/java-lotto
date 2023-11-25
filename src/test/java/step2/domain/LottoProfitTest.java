@@ -21,6 +21,6 @@ class LottoProfitTest {
         result.put(LottoRank.FIFTH, 2);
         result.put(LottoRank.NONE, 0);
 
-        Assertions.assertThat(new LottoProfit().profit(5000, new LottoResult(result))).isEqualTo(2.0);
+        Assertions.assertThat(new LottoProfit(result).profit(5000)).isEqualTo(2.0);
     }
 }
