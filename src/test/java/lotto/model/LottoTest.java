@@ -5,52 +5,47 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTest {
 
     @Test
-    @DisplayName("로또 번호는 매번 다르게 생성됨")
-    public void 로또_번호_랜덤_생성() {
-        Lotto lotto = new Lotto();
-        Lotto lotto1 = new Lotto();
-        Assertions.assertThat(lotto)
-                .isNotEqualTo(lotto1);
+    @DisplayName("입력된 돈에 따른 로또 티켓 갯수 계산")
+    public void 티켓_갯수_계산() {
+        Assertions.assertThat(Lotto.calculateTicketCount(4000))
+                .isEqualTo(4);
     }
 
     @Test
-    @DisplayName("로또 번호는 6개로 구성됨")
-    public void 로또_번호_6개() {
-        Assertions.assertThat(new Lotto().numbers().size())
-                .isEqualTo(6);
+    @DisplayName("n개의 티켓 가격 계산")
+    public void 티켓_가격_계산() {
+        Assertions.assertThat(Lotto.price(4))
+                .isEqualTo(4000);
     }
 
-    @Test
-    @DisplayName("로또 번호는 정렬되어 있음")
-    public void 로또_번호_정렬() {
-        List<Integer> numbers = new Lotto().numbers();
-        List<Integer> beforeNumbers = new ArrayList<>(numbers);
-        Collections.sort(numbers);
-        Assertions.assertThat(numbers)
-                .isEqualTo(beforeNumbers);
-    }
 
     @ParameterizedTest
-    @DisplayName("주어진 번호와 얼마나 일치하는지 확인")
-    @CsvSource(value = {"1, 2, 3, 4, 5, 6:6", "3, 2, 4, 6, 5, 1:6", "2, 9, 13, 27, 42, 15:1"}, delimiter = ':')
-    public void 로또_번호_비교(String otherNumbers, int expected) {
-        List<Integer> others = Arrays.stream(otherNumbers.split(", "))
+    @DisplayName("일치하는 숫자 개수별 통계")
+    @CsvSource(value = {
+            "1, 2, 3, 4, 5, 6:1",
+            "3, 4, 5, 6, 7, 8:4",
+            "20, 21, 22, 23, 24, 25:8",
+            "1, 2, 3, 4, 5, 7:2"},
+            delimiter = ':')
+    public void 티켓별_랭킹_확인 (String numbers, int expectedRank) {
+        List<Integer> numberList = Arrays.stream(numbers.split(", "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
-        List<Integer> numbers = List.of(1,2,3,4,5,6);
-        Assertions.assertThat(new Lotto(numbers).matchNumbers(others))
-                .isEqualTo(expected);
+        Lotto ticket = new Lotto(numberList);
+
+        LottoNumbers winningNumber = LottoNumbers.of(Arrays.asList(1,2,3,4,5,6));
+        LottoNumber bonusNumber = new LottoNumber(7);
+
+        Assertions.assertThat(ticket.rank(winningNumber, bonusNumber).ordinal()+1)
+                .isEqualTo(expectedRank);
     }
 }
