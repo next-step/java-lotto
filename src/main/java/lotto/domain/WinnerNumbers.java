@@ -15,13 +15,6 @@ public class WinnerNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    private void generateBonusNumber(Random random) {
-        int generatedBonusNum = random.nextInt(45) + 1;
-        if (!isContain(generatedBonusNum)) {
-            this.bonusNumber = generatedBonusNum;
-        }
-    }
-
     @Override
     public String toString() {
         return this.winnerNumbers.toString();
