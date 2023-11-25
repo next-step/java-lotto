@@ -15,8 +15,8 @@
 3. 주어진 순서대로 계산 반복
 
 ## 🚀 2단계 - 로또(자동)
-* [] 로또 구입 금액을 입력 UI 클래스(InputView) 생성
-* [] Controller View에서 int만 금액을 입력받을 수 있도록 구현 / catch로 exception 처리
+* [X] 로또 구입 금액을 입력 UI 클래스(InputView) 생성
+* [X] Controller View에서 int만 금액을 입력받을 수 있도록 구현 / catch로 exception 처리
 * [] 입력받은 금액을 1000 단위로 나눠서 몫 구하는 클래스 작성 (getPlayRounds) / 테스트 코드 작성
 * [] 로또 class 생성하여 생성자를 통해 Set 자료형으로 6개의 랜덤 번호를 갖고있도록 구현 / 테스트 코드 작성
 * [] 로또 class에서 중복되는 숫자 없이 총 6개의 번호가 내림차순으로 정렬될 수 있도록 구현 / 테스트 코드 작성
