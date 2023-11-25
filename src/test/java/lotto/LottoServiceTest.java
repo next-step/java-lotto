@@ -40,7 +40,7 @@ public class LottoServiceTest {
 
         LottoService lottoService = new LottoService(lottoList, new MatchPointRank());
 
-        lottoService.playLotto(new String[]{"1", "2", "3", "4", "7", "10"});
+        lottoService.playLotto(List.of(new String[]{"1", "2", "3", "4", "7", "10"}), 22);
 
         assertThat(lottoService.getMatchPointMap().getMatchPoint(MatchPoint.FOURTH)).isEqualTo(1);
     }

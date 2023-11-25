@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static lotto.util.Util.parseIntegerList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
@@ -31,11 +32,22 @@ public class LottoTest {
     @Test
     void 당첨번호_비교() {
         Lotto lotto = new Lotto(defaultLottoNumber);
-        String[] winningNum = new String[]{"1", "2", "3", "4", "5", "6"};
+        List<Integer> winningNumerList = parseIntegerList(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        int bonusNumber = 7;
 
-        lotto.compareWinningNumber(winningNum);
+        lotto.compareWinningNumber(winningNumerList);
 
-        assertThat(lotto.getMatchPoint()).isEqualTo(6);
+        assertThat(lotto.getLottoOriginMatchNumber()).isEqualTo(6);
     }
 
+    @DisplayName("당첨번호 비교 테스트")
+    @Test
+    void 보너스번호_비교() {
+        Lotto lotto = new Lotto(defaultLottoNumber);
+        int bonusNumber = 5;
+
+        lotto.addBonusMatchPoint(bonusNumber);
+
+        assertThat(lotto.getLottoBonusMatchNumber()).isEqualTo(1);
+    }
 }

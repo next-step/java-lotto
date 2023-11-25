@@ -6,7 +6,7 @@ import java.util.*;
 
 import static lotto.util.Util.floorDiv;
 
-public class IoView {
+public class InputView {
     private static Scanner sc = new Scanner(System.in);
 
     public static int inputMoney() {
@@ -23,15 +23,15 @@ public class IoView {
         return sc.nextLine();
     }
 
-    public static void printLottoList(List<Lotto> lottoList) {
-        for (Lotto lotto : lottoList) {
-            System.out.println(lotto.toString());
-        }
-    }
 
     private static void invalidInputMoney(int money) {
         if(money < 1000) {
             throw new IllegalArgumentException("1000원 이상의 금액만 가능합니다.");
         }
+    }
+
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return sc.nextInt();
     }
 }
