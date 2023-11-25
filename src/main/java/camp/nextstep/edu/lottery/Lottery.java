@@ -18,6 +18,14 @@ public class Lottery {
         this.numbers = numbers;
     }
 
+    public int calcMatchingCount(Lottery that) {
+        Set<Integer> thisSet = new HashSet<>(this.numbers);
+        Set<Integer> thatSet = new HashSet<>(that.numbers);
+
+        thisSet.retainAll(thatSet);
+        return thisSet.size();
+    }
+
     private boolean isValid(List<Integer> numbers) {
         boolean isEmpty = numbers == null || numbers.isEmpty();
         if (isEmpty) {
@@ -44,15 +52,8 @@ public class Lottery {
         return number >= 1 && number <= 45;
     }
 
-    public int calcMatchingCount(Lottery that) {
-        Set<Integer> thisSet = new HashSet<>(this.numbers);
-        Set<Integer> thatSet = new HashSet<>(that.numbers);
-
-        thisSet.retainAll(thatSet);
-        return thisSet.size();
-    }
-
-    public int getNumber(int index) {
-        return numbers.get(index);
+    @Override
+    public String toString() {
+        return this.numbers.toString();
     }
 }

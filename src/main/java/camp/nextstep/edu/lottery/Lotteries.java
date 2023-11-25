@@ -2,10 +2,12 @@ package camp.nextstep.edu.lottery;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotteries {
 
     public static final int LOTTERY_PRICE = 1000;
+    
     private final List<Lottery> lotteries;
     
     public Lotteries(int money) {
@@ -59,5 +61,10 @@ public class Lotteries {
         returnMoney += count5thPrize(winningLottery) * 5000;
 
         return (double) returnMoney / usedMoney;
+    }
+
+    @Override
+    public String toString() {
+        return this.lotteries.stream().map(Lottery::toString).collect(Collectors.joining("\n"));
     }
 }
