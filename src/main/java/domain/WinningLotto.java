@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class WinningLotto {
 
@@ -11,9 +12,9 @@ public class WinningLotto {
     private Set<LottoNumber> lottoNumbers;
     private LottoNumber bonusNumber;
 
-    public WinningLotto(int bonus, Integer... numbers) {
-        this(Arrays.stream(numbers)
-                        .map(LottoNumber::new)
+    public WinningLotto(int bonus, int num1, int num2, int num3, int num4, int num5, int num6) {
+        this(IntStream.of(num1, num2, num3, num4, num5, num6)
+                        .mapToObj(LottoNumber::new)
                         .collect(Collectors.toSet())
                 , bonus);
     }

@@ -4,15 +4,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lotto {
 
     private static final int LOTTO_NUMBER_COUNT_LIMIT = 6;
     private Set<LottoNumber> lottoNumbers;
 
-    public Lotto(Integer... input) {
-        this(Arrays.stream(input)
-                .map(LottoNumber::new)
+    public Lotto(int num1, int num2, int num3, int num4, int num5, int num6) {
+        this(IntStream.of(num1, num2, num3, num4, num5, num6)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toSet()));
     }
 

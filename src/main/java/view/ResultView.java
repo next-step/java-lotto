@@ -45,7 +45,7 @@ public class ResultView {
             return;
         }
         
-        stringBuilder.append(String.format("%d개 일치 ", key.getMatchCount()));
+        stringBuilder.append(String.format("%d개 일치", key.getMatchCount()));
         if (LottoPrize.SECOND.equals(key)) {
             stringBuilder.append(", 보너스볼 일치");
         }
