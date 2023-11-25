@@ -17,7 +17,7 @@ public class LotteryApplication {
         int money = InputView.getMoney();
         int allTicketCount = InputView.getAllTicketCount(money);
         int manualTicketCount = InputView.getManualTicketCount();
-        int autoTicketCount = allTicketCount - manualTicketCount;
+        int autoTicketCount = LotteryUtil.getAutoTicketCount(allTicketCount, manualTicketCount);
 
         Lotteries lotteries = new Lotteries();
         lotteries.generateManualLottery(InputView.getManualNumbers(manualTicketCount));
@@ -28,8 +28,7 @@ public class LotteryApplication {
         InputView.showTicketCount(manualTicketCount, autoTicketCount);
         InputView.showLotteries(lotteries.getLotteries());
 
-        Winning winning = Winning.from(InputView.getWinNumber());
-        winning.setBonusWinNumber(InputView.getBonusNumber());
+        Winning winning = Winning.from(InputView.getBonusNumber(), InputView.getWinNumber());
         Map<Prize, Integer> summarize = StatisticsUtil.summarize(winning.getPrizes(lotteries));
 
         long rewards = StatisticsUtil.getRewards(summarize);

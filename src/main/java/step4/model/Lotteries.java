@@ -31,7 +31,7 @@ public class Lotteries {
 
     public void generateAutoLottery(int ticketCount) {
         for (int ticket = 0; ticket < ticketCount; ticket++) {
-            Lottery lottery = Lottery.of(LotteryUtil.getBall());
+            Lottery lottery = Lottery.of(new ArrayList<>(LotteryUtil.getBall()));
             keep(lottery);
         }
     }

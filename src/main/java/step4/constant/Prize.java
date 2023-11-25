@@ -5,12 +5,12 @@ import java.util.stream.Stream;
 
 public enum Prize {
 
-    FIRST(6, 2_000_000_000, (correct, bonus) -> correct == 6 && !bonus),
+    FIRST(6, 2_000_000_000, (correct, bonus) -> correct == 6),
     SECOND(5,1_500_000, (correct, bonus) -> correct == 5 && bonus),
-    THIRD(5, 1_500_000, (correct, bonus) -> correct == 5 && !bonus),
-    FOURTH(4,50_000, (correct, bonus) -> correct == 4 && !bonus),
-    FIFTH(3, 5_000, (correct, bonus) -> correct == 3 && !bonus),
-    BAD_LUCK(0,  0, (correct, bonus) -> correct == 6 && !bonus);
+    THIRD(5, 1_500_000, (correct, bonus) -> correct == 5),
+    FOURTH(4,50_000, (correct, bonus) -> correct == 4),
+    FIFTH(3, 5_000, (correct, bonus) -> correct == 3),
+    BAD_LUCK(0,  0, (correct, bonus) -> correct == 6);
 
     private final int correct;
     private final long reward;

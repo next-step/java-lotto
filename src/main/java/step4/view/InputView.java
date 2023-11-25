@@ -57,7 +57,7 @@ public class InputView {
     }
 
     public static void showLotteries(List<Lottery> tickets) {
-        tickets.forEach(t -> System.out.println(t.getNumbers()));
+        tickets.forEach(t -> System.out.println(t.getLotteryNumbers()));
     }
 
     public static String getWinNumber() {

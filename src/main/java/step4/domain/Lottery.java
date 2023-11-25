@@ -1,37 +1,37 @@
 package step4.domain;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import step2.util.LotteryUtil;
+import step4.constant.LotteryNumber;
+import step4.util.LotteryUtil;
 
 public class Lottery {
 
-    public static final int WINNING_STREAK = 6;
+    private final List<LotteryNumber> lotteryNumbers;
 
-    private final List<Integer> numbers;
-
-    public Lottery(List<Integer> numbers) {
-        validateNumbers(numbers);
-        this.numbers = numbers;
-    }
-
-    public static Lottery of(Set<Integer> numbers) {
-        return new Lottery(new ArrayList<>(numbers));
+    public Lottery(List<LotteryNumber> numbers) {
+        this.lotteryNumbers = numbers;
     }
 
     public static Lottery of(List<Integer> numbers) {
-        return new Lottery(numbers);
+        return new Lottery(LotteryNumber.of(numbers));
     }
 
-    public List<Integer> getNumbers() {
+    public List<Integer> getLotteryNumbers() {
+        List<Integer> numbers = LotteryNumber.getNumbers(lotteryNumbers);
+        LotteryUtil.validateNumbers(numbers);
+
         return numbers;
     }
 
-    private void validateNumbers(List<Integer> numbers) {
-        if (LotteryUtil.WINNING_STREAK != numbers.size()) {
-            throw new IllegalArgumentException("잘 못 생성된 로또 - " + numbers.size());
+    public int getMatchCount(Lottery win) {
+        int winCount = 0;
+        for (int number : getLotteryNumbers()) {
+            if (win.getLotteryNumbers().contains(number)) {
+                winCount++;
+            }
         }
+
+        return winCount;
     }
 }

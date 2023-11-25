@@ -11,19 +11,21 @@ public class Winning {
 
     public static final int COUNT_BONUS = 5;
 
-    private int bonusWinNumber;
+    private final int bonusWinNumber;
     private final Lottery win;
 
-    public Winning(List<Integer> winNumber) {
+    public Winning(int bonus, List<Integer> winNumber) {
+        bonusWinNumber = bonus;
         win = Lottery.of(winNumber);
     }
 
-    public static Winning from(String winNumber) {
-        return new Winning(LotteryUtil.getNumbers(winNumber));
-    }
+    public static Winning from(String bonusNumber, String winNumber) {
+        int bonus = Integer.parseInt(bonusNumber);
+        List<Integer> numbers = LotteryUtil.getNumbers(winNumber);
 
-    public void setBonusWinNumber(String number) {
-        bonusWinNumber = Integer.parseInt(number);
+        LotteryUtil.checkBonusNumber(bonus, numbers);
+
+        return new Winning(bonus, numbers);
     }
 
     public List<Prize> getPrizes(Lotteries lotteries) {
@@ -36,24 +38,13 @@ public class Winning {
     }
 
     private Prize find(Lottery lottery) {
-        int winCount = getWinCount(lottery.getNumbers());
+        int winCount = lottery.getMatchCount(win);
         return Prize.getPrize(winCount, matchBonus(winCount, lottery));
-    }
-
-    public int getWinCount(List<Integer> numbers) {
-        int winCount = 0;
-        for (int number : numbers) {
-            if (win.getNumbers().contains(number)) {
-                winCount++;
-            }
-        }
-
-        return winCount;
     }
 
     private boolean matchBonus(int winCount, Lottery lottery) {
         if (COUNT_BONUS == winCount) {
-            return lottery.getNumbers().contains(bonusWinNumber);
+            return lottery.getLotteryNumbers().contains(bonusWinNumber);
         }
 
         return false;
