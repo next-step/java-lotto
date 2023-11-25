@@ -4,7 +4,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class Lotto {
-
+    public static final int LOTTO_PRICE = 1000;
     private final LottoNumbers numbers;
 
     public Lotto(LottoNumbers numbers) {

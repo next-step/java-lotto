@@ -26,13 +26,13 @@ class LotteryTest {
         BonusBall bonusBall = new BonusBall(LottoNumber.of(20));
         WinnerNumbers winnerNumbers = new WinnerNumbers(lottoNumbers, bonusBall);
 
-        Lottos lottos = new Lottos(List.of(
+        TotalLottos totalLottos = new TotalLottos(List.of(
                 new Lotto(Set.of(1, 2, 35, 29, 9, 11)),
                 new Lotto(Set.of(1, 3, 16, 29, 9, 11)),
                 new Lotto(Set.of(1, 2, 3, 4, 5, 20))
         ));
 
-        Lottery lottery = new Lottery(winnerNumbers, lottos);
+        Lottery lottery = new Lottery(winnerNumbers, totalLottos);
         //then
         assertThat(lottery.depositTotalMoney()).isEqualTo(30000000L);
     }
@@ -51,13 +51,13 @@ class LotteryTest {
         BonusBall bonusBall = new BonusBall(LottoNumber.of(20));
         WinnerNumbers winnerNumbers = new WinnerNumbers(lottoNumbers, bonusBall);
 
-        Lottos lottos = new Lottos(List.of(
+        TotalLottos totalLottos = new TotalLottos(List.of(
                 new Lotto(Set.of(1, 2, 35, 29, 9, 11)),
                 new Lotto(Set.of(1, 3, 16, 29, 9, 11)),
                 new Lotto(Set.of(1, 2, 3, 4, 5, 20))
         ));
 
-        Lottery lottery = new Lottery(winnerNumbers, lottos);
+        Lottery lottery = new Lottery(winnerNumbers, totalLottos);
         //then
         assertThat(lottery.getInvestment()).isEqualTo(10000.0);
     }
@@ -76,13 +76,13 @@ class LotteryTest {
         BonusBall bonusBall = new BonusBall(LottoNumber.of(20));
         WinnerNumbers winnerNumbers = new WinnerNumbers(lottoNumbers, bonusBall);
 
-        Lottos lottos = new Lottos(List.of(
+        TotalLottos totalLottos = new TotalLottos(List.of(
                 new Lotto(Set.of(1, 2, 3, 4, 9, 11)),
                 new Lotto(Set.of(1, 3, 5, 6, 9, 11)),
                 new Lotto(Set.of(1, 2, 3, 4, 5, 20))
         ));
 
-        Lottery lottery = new Lottery(winnerNumbers, lottos);
+        Lottery lottery = new Lottery(winnerNumbers, totalLottos);
         Map<Dividend, Integer> result = lottery.totalCorrect();
         //then
         assertThat(result.get(Dividend.SECOND)).isEqualTo(1);

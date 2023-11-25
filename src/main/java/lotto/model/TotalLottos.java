@@ -2,11 +2,10 @@ package lotto.model;
 
 import java.util.List;
 
-public class Lottos {
-    public static final int LOTTO_PRICE = 1000;
+public class TotalLottos {
     private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos) {
+    public TotalLottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
@@ -19,7 +18,7 @@ public class Lottos {
     }
 
     public int totalPurchasePrice() {
-        return this.lottos.size() * LOTTO_PRICE;
+        return this.lottos.size() * Lotto.LOTTO_PRICE;
     }
 
 }
