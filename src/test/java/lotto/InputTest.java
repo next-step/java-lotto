@@ -2,6 +2,8 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import lotto.domain.LottoCount;
+import lotto.domain.LottoCountSummary;
 import lotto.mock.FakePrinter;
 import lotto.mock.FakeReader;
 import lotto.view.InputView;
@@ -50,5 +52,32 @@ public class InputTest {
 
         // when & then
         assertThatIllegalArgumentException().isThrownBy(inputView::inputBonusBall);
+    }
+  
+    @DisplayName("정상적이지 않은 수동 로또 개수 입력에 대해서 예외를 발생한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"", " ", "2two", "2147483648", "-2147483649"})
+    void validateManualLottoCount(String input) {
+        // given
+        Reader reader = new FakeReader(input);
+        InputView inputView = InputView.of(reader, printer);
+
+        // when & then
+        assertThatIllegalArgumentException().isThrownBy(() -> inputView.inputManualLottoCount(LottoCount.from(1)));
+    }
+
+    @DisplayName("정상적이지 않은 수동 로또 번호 입력에 대해서 예외를 발생한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"", " ", "1,,2,3,4,5,6", ",1,2,3,4,5,6", "1,2,3,4,5,6,", "1one, 2,3,4,5,6",
+            "2147483648, 2,3,4,5,6", "-2147483649, 2,3,4,5,6", "-1, 2,3,4,5,6", "0, 2,3,4,5,6", "46,2,3,4,5,6",
+            "1,2,3,4,5", "1,1,2,3,4,5"})
+    void validateManualLotto(String input) {
+        // given
+        Reader reader = new FakeReader(input);
+        InputView inputView = InputView.of(reader, printer);
+        LottoCountSummary lottoCountSummary = LottoCountSummary.of(1, 2);
+
+        // when & then
+        assertThatIllegalArgumentException().isThrownBy(() -> inputView.inputManualLottos(lottoCountSummary));
     }
 }

@@ -4,11 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.PrizeSummary;
 import lotto.domain.Profit;
 import lotto.domain.PurchaseAmount;
+import lotto.domain.WinningCombo;
 import org.junit.jupiter.api.Test;
 
 public class ProfitTest {
@@ -20,13 +20,12 @@ public class ProfitTest {
                 Lotto.from(List.of(1, 2, 3, 41, 42, 43)),
                 Lotto.from(List.of(1, 2, 4, 40, 42, 43)),
                 Lotto.from(List.of(1, 2, 3, 4, 41, 42))));
-        LottoNumber bonusBall = LottoNumber.from(45);
+        WinningCombo winningCombo = WinningCombo.of(List.of(1, 2, 3, 4, 5, 6), 45);
 
-        Lotto winningLotto = Lotto.from(List.of(1, 2, 3, 4, 5, 6));
-        PrizeSummary prizeSummary = lottos.getPrizeSummary(winningLotto, bonusBall);
+        PrizeSummary prizeSummary = lottos.getPrizeSummary(winningCombo);
 
         // when
-        Profit profit = Profit.of(PurchaseAmount.from(13000), prizeSummary);
+        Profit profit = Profit.of(new PurchaseAmount(13000), prizeSummary);
 
         // then
         assertThat(Math.round(profit.getProfit() * 100) / 100.0).isEqualTo(4.62);

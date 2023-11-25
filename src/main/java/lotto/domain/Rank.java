@@ -38,7 +38,6 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        // TODO 일치하는 수를 로또 등수로 변경한다. enum 값 목록은 "Rank[] ranks = values();"와 같이 가져올 수 있다.
         return Arrays.stream(values())
                 .filter(rank -> rank.countOfMatch == countOfMatch && rank.bonusMatching.match(matchBonus))
                 .findFirst()

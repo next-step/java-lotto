@@ -8,31 +8,31 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoSeller implements Seller {
-    private final LottoCount lottoCount;
+    private final LottoCountSummary lottoCountSummary;
     private final Random random;
 
-    private LottoSeller(LottoCount lottoCount, Random random) {
-        this.lottoCount = lottoCount;
+    private LottoSeller(LottoCountSummary lottoCountSummary, Random random) {
+        this.lottoCountSummary = lottoCountSummary;
         this.random = random;
     }
 
-    public static LottoSeller from(LottoCount lottoCount) {
-        return new LottoSeller(lottoCount, new Random());
+    public static LottoSeller from(LottoCountSummary lottoCountSummary) {
+        return new LottoSeller(lottoCountSummary, new Random());
     }
 
     @Override
-    public Lottos generateLottos() {
+    public Lottos generateAutoLottos() {
         List<Lotto> lottos = new ArrayList<>();
         int presentLottoCount = 0;
 
-        while (lottoCount.isLessThanCount(presentLottoCount)) {
+        while (lottoCountSummary.isLessThanAutoLottoCount(presentLottoCount)) {
             lottos.add(generateLotto());
             presentLottoCount++;
         }
         return new Lottos(lottos);
     }
 
-    public Lotto generateLotto() {
+    private Lotto generateLotto() {
         Set<Integer> lottoNumbers = generateUniqueNumbers();
         return Lotto.from(sortLotto(lottoNumbers));
     }

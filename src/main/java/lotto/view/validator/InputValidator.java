@@ -26,6 +26,12 @@ public class InputValidator {
         validatePositiveNumber(purchaseAmount, target);
     }
 
+    public void validateManualLottoCount(String manualLottoCount, String target) {
+        StringValidator.validateBlank(manualLottoCount, target);
+        StringValidator.validateNumeric(manualLottoCount, target);
+        StringValidator.validateIntegerRange(manualLottoCount, target);
+    }
+  
     public void validateLotto(String lotto, String target) {
         StringValidator.validateBlank(lotto, target);
         GeneralValidator.validateDuplicateSubstring(LOTTO_NUMBER_SEPARATOR, lotto, target);
