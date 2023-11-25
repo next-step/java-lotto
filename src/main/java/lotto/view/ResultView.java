@@ -9,8 +9,6 @@ import lotto.domain.MyLottos;
 import java.util.Arrays;
 
 public class ResultView {
-    private static final int MIN_MATCH_COUNT = 3;
-    private static final int MAX_MATCH_COUNT = 6;
 
     public static void main(String[] args) {
         int payMoney = InputView.inputPayMoney();
@@ -39,8 +37,9 @@ public class ResultView {
     }
 
     public static void printMatchResult(MatchResult matchResult){
-        for (int matchCount = MIN_MATCH_COUNT; matchCount <= MAX_MATCH_COUNT; matchCount++) {
-            System.out.println(matchCount + "개 일치 (" + Rank.winningMoneyOf(matchCount) + ") - " + matchResult.matchCountOf(matchCount) + "개");
+        for (Rank rank : Rank.values()){
+            if(rank.getMatchCount() == 0) continue;
+            System.out.println(rank.getMatchCount() + "개 일치 (" + rank.getWinningMoney() + ") - " + matchResult.matchCountOf(rank) + "개");
         }
     }
 

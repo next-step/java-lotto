@@ -31,8 +31,8 @@ public class MyLottoTest {
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(4,5,6,7,8,9));
         MatchResult matchResult = myLottos.matchMyLotto(winningLotto);
 
-        assertThat(matchResult.matchCountOf(1)).isEqualTo(1);
-        assertThat(matchResult.matchCountOf(3)).isEqualTo(2);
-        assertThat(matchResult.matchCountOf(4)).isEqualTo(1);
+        assertThat(matchResult.matchCountOf(Rank.MISS)).isEqualTo(1);
+        assertThat(matchResult.matchCountOf(Rank.FOURTH)).isEqualTo(2);
+        assertThat(matchResult.matchCountOf(Rank.THIRD)).isEqualTo(1);
     }
 }

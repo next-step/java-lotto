@@ -34,10 +34,6 @@ public class MyLottos {
         return matchResult;
     }
 
-    public int returnMatchCountOf(int count){
-        return matchResult.matchCountOf(count);
-    }
-
     public double returnRate(int payMoney){
         return matchResult.calculateReturnRate(payMoney);
     }
