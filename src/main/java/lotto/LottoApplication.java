@@ -7,10 +7,10 @@ public class LottoApplication {
         LottoList lottoList = generateLottoList();
         LottoWinningNumbers lottoWinningNumbers = generateLottoWinningNumbers();
 
-        LottoResult lottoResult = new LottoResult(lottoList);
-        LottoMatchResult lottoMatchResult = lottoResult.matchesWinningNumbers(lottoWinningNumbers);
+        LottoGame lottoGame = new LottoGame(lottoList, lottoWinningNumbers);
+        LottoResult lottoResult = lottoGame.start();
 
-        printResult(lottoResult, lottoMatchResult, lottoWinningNumbers);
+        printResult(lottoResult);
     }
 
     public static LottoList generateLottoList() {
@@ -32,11 +32,7 @@ public class LottoApplication {
         return lottoWinningNumbers;
     }
 
-    public static void printResult(LottoResult lottoResult,
-                                   LottoMatchResult lottoMatchResult,
-                                   LottoWinningNumbers lottoWinningNumbers) {
-        OutputView.printResultPhrase();
-        OutputView.printMatchesResults(lottoMatchResult);
-        OutputView.printRateOfReturn(lottoResult, lottoWinningNumbers);
+    public static void printResult(LottoResult lottoResult) {
+        OutputView.printResult(lottoResult);
     }
 }
