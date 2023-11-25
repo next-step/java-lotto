@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.Arrays;
-import java.util.Optional;
 import java.util.function.LongBinaryOperator;
 
 public enum Currency {

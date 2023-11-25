@@ -103,7 +103,7 @@ public class LottoResultTest {
     @DisplayName("5개 일치+보너스번호가 일치하는 경우 2등 상태가 된다.")
     void fiveMatchesTestAndBonusTest() {
         WinningLotto winningNum = new WinningLotto(1, 2, 3, 4, 5, 8, 9);
-        userLottoRepository.saveUserLottoTickets(new Lotto(1, 2, 3, 4, 5, 7));
+        userLottoRepository.saveUserLottoTickets(new Lotto(1, 10, 3, 4, 5, 9));
 
         LottoGameResultRepository result = lottoResultService.matchUserLotto(winningNum);
         Map<LottoPrize, Integer> allResult = result.getAllResult();

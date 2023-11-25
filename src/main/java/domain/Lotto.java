@@ -38,7 +38,7 @@ public class Lotto {
     }
 
     private static void validateLottoNumberCount(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() < LOTTO_NUMBER_COUNT_LIMIT) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT_LIMIT) {
             throw new IllegalArgumentException("로또 숫자는 6개 입니다.");
         }
     }
@@ -53,7 +53,7 @@ public class Lotto {
     public int calculateMatchCount(WinningLotto winningLotto) {
         return (int) lottoNumbers.stream()
                 .map(LottoNumber::getLottoNumber)
-                .filter(lottoNum -> winningLotto.getLottoNumbers().contains(lottoNum) || lottoNum == winningLotto.getBonusNumber())
+                .filter(lottoNum -> winningLotto.getLottoNumbers().contains(lottoNum) || lottoNum == winningLotto.getBonusNumber().getLottoNumber())
                 .count();
     }
 
@@ -61,7 +61,7 @@ public class Lotto {
         return contains(winningLotto.getBonusNumber());
     }
 
-    private boolean contains(int bonusNumber) {
+    private boolean contains(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
     }
 

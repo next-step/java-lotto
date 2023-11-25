@@ -12,14 +12,6 @@ public class UserLottoRepository {
     public UserLottoRepository() {
     }
 
-    public UserLottoRepository(Lotto lotto) {
-        this.lottoTickets = Arrays.asList(lotto);
-    }
-
-    public UserLottoRepository(List<Lotto> lotto) {
-        this.lottoTickets = lotto;
-    }
-
     public void saveUserLottoTickets(Lotto lottoTicket) {
         lottoTickets.add(lottoTicket);
     }

@@ -54,12 +54,12 @@ public class LottoNumberTest {
     @Test
     @DisplayName("당첨 번호를 6개 미만으로 입력하는 경우 Exception throw.")
     void invalidInputLessSixExceptionTest() {
-        assertThrows(IllegalArgumentException.class, () -> new Lotto(1, 2, 3, 4, 5));
+        assertThrows(IllegalArgumentException.class, () -> new Lotto("1, 2, 3, 4, 5"));
     }
 
     @Test
     @DisplayName("당첨 번호를 중복으로 입력하는 경우 6개 미만 Exception throw.")
     void invalidInputExceptionTest() {
-        assertThrows(IllegalArgumentException.class, () -> new Lotto(1, 2, 3, 3, 4, 5));
+        assertThrows(IllegalArgumentException.class, () -> new Lotto("1, 2, 3, 3, 4, 5"));
     }
 }
