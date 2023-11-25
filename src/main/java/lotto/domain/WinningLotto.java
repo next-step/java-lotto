@@ -25,15 +25,8 @@ public class WinningLotto {
 
     public void countWinning(Lotto lotto) {
         int countMatch = lotto.countWinningNumber(winningLotto.getNumbers());
-        boolean hasBonus = lotto.hasBonus(bonus);
-        WinningAmount winningAmount = WinningAmount.findWinningAmountByMatchCount(countMatch, hasBonus);
-        mergeIfMoreThanThreeMatch(winningAmount);
-    }
-
-    private void mergeIfMoreThanThreeMatch(WinningAmount winningAmount) {
-        if (winningAmount != null) {
-            countByMatch.merge(winningAmount, 1, Integer::sum);
-        };
+        WinningAmount winningAmount = WinningAmount.findWinningAmountByMatchCount(countMatch, lotto.hasBonus(bonus));
+        countByMatch.merge(winningAmount, 1, Integer::sum);
     }
 
     public final LinkedHashMap<WinningAmount, Integer> sortWinningLottos() {

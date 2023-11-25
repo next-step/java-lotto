@@ -14,7 +14,6 @@ public class Lottos {
         for (Lotto lotto : lottoList) {
             winningLotto.countWinning(lotto);
         }
-
         return winningLotto.sortWinningLottos();
     }
 }
