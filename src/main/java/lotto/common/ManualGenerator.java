@@ -8,11 +8,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ManualGenerator {
+    private static final String DELIMITER_COMMA_EMPTY = "\\s*,\\s*";
 
     public static List<Lotto> generate(List<String> lottoNumbers) {
         List<Lotto> lottos = new ArrayList<>();
         for (String number : lottoNumbers) {
-            String[] splitNumbers = number.split(",");
+            String[] splitNumbers = number.split(DELIMITER_COMMA_EMPTY);
             lottos.add(convertToLotto(splitNumbers));
         }
         return lottos;
