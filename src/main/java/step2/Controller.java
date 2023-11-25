@@ -1,5 +1,7 @@
 package step2;
 
+import static step2.PlayRounds.getPlayRounds;
+
 public class Controller {
 
     public static void main(String[] args){
@@ -9,6 +11,13 @@ public class Controller {
 
         try {
             price = stringToInteger(inputView.inputPrice());
+            rounds = getPlayRounds(price);
+
+            for (int i = 0; i < rounds; i++) {
+                Lotto lotto = new Lotto();
+                lotto.printLotto();
+            }
+
         }catch (Exception e){
             e.printStackTrace();
         }
