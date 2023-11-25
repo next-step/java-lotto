@@ -7,7 +7,7 @@ public class Number implements Comparable<Number> {
 
 
     public Number(int number) {
-        checkValidNumber();
+        checkValidNumber(number);
         this.number = number;
     }
 
@@ -26,8 +26,8 @@ public class Number implements Comparable<Number> {
     }
 
 
-    private void checkValidNumber() {
-        if (this.number < MIN_NUMBER || this.number > MAX_NUMBER) {
+    private void checkValidNumber(int number) {
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException("1 ~ 45 사이 숫자만 입력 가능합니다.");
         }
     }

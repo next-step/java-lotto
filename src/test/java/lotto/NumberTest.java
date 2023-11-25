@@ -13,7 +13,7 @@ public class NumberTest {
 
     @DisplayName("로또번호 숫자생성")
     @ParameterizedTest
-    @ValueSource(ints = {0, 46})
+    @ValueSource(ints = {1, 45})
     void 로또번호숫자_생성오류테스트(int number) {
         assertThatThrownBy(()-> {
             new Number(number);
