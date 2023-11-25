@@ -14,7 +14,7 @@ public class LottoCountTest {
     @CsvSource(value = {"1000, 1", "11000, 11"})
     void getLottoCount(int putchaseAmout, int expected) {
         // given
-        LottoCount lottoCount = LottoCount.from(PurchaseAmount.from(putchaseAmout));
+        LottoCount lottoCount = LottoCount.fromPurchaseAmount(PurchaseAmount.from(putchaseAmout));
 
         // when & then
         assertThat(lottoCount.getLottoCount()).isEqualTo(expected);

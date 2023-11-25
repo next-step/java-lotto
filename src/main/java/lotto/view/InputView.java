@@ -1,7 +1,11 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoCountSummary;
 import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
 import lotto.util.converter.Converter;
 import lotto.view.printer.Printer;
@@ -42,5 +46,25 @@ public class InputView {
         String bonusBall = reader.readLine();
         validator.validateBonusBall(bonusBall, "보너스 볼");
         return LottoNumber.from(Converter.convertToInt(bonusBall));
+    }
+
+    public int inputManualLottoCount() {
+        printer.printLine("수동으로 구매할 로또 수를 입력해 주세요.");
+        String manualLottoCount = reader.readLine();
+        validator.validateManualLottoCount(manualLottoCount, "수동 구매 로또 수");
+        return Converter.convertToInt(manualLottoCount);
+//        return ManualLottoCount.from(Converter.convertToInt(manualLottoCount));
+    }
+
+    public Lottos inputManualLottos(LottoCountSummary lottoCountSummary) {
+        printer.printLine("수동으로 구매할 번호를 입력해 주세요.");
+        int manualLottoCount = lottoCountSummary.getManulLottoCount().getManualLottoCount();
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (int inputCount = 0; inputCount < manualLottoCount; inputCount++) {
+            String manualLotto = reader.readLine();
+            validator.validateLotto(manualLotto, "수동 구매 번호");
+            manualLottos.add(Lotto.from(Converter.splitToIntList(InputValidator.LOTTO_NUMBER_SEPARATOR, manualLotto)));
+        }
+        return new Lottos(manualLottos);
     }
 }

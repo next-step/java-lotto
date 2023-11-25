@@ -27,7 +27,7 @@ public class PurchaseAmount {
         return (double) prizeAmount / purchaseAmount;
     }
 
-    public int getLottoCount() {
+    public int calculateLottoCount() {
         return purchaseAmount / LOTTO_PRICE;
     }
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
@@ -10,6 +11,13 @@ public class Lottos {
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public static Lottos mergeLottos(Lottos manualLottos, Lottos autoLottos) {
+        List<Lotto> totalLottos = new ArrayList<>();
+        totalLottos.addAll(manualLottos.lottos);
+        totalLottos.addAll(autoLottos.lottos);
+        return new Lottos(totalLottos);
     }
 
     public PrizeSummary getPrizeSummary(WinningCombo winningCombo) {

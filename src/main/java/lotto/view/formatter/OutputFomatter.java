@@ -5,7 +5,9 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
+import lotto.domain.LottoCountSummary;
 import lotto.domain.LottoNumber;
+import lotto.domain.ManualLottoCount;
 import lotto.domain.Rank;
 import lotto.domain.Profit;
 
@@ -42,5 +44,15 @@ public class OutputFomatter {
 
     public double toProfit(Profit profit) {
         return profit.getProfit();
+    }
+
+    public int toManualLottoCount(LottoCountSummary lottoCountSummary) {
+        ManualLottoCount manulLottoCount = lottoCountSummary.getManulLottoCount();
+        return manulLottoCount.getManualLottoCount();
+    }
+
+    public int toAutoLottoCount(LottoCountSummary lottoCountSummary) {
+        LottoCount autoLottoCount = lottoCountSummary.getAutoLottoCount();
+        return autoLottoCount.getLottoCount();
     }
 }

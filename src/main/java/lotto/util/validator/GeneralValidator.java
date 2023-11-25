@@ -22,9 +22,18 @@ public class GeneralValidator {
         }
     }
 
+    public static void validatePositiveNumber(int number, String target) {
+        if (!isPositiveNumber(number)) {
+            throw new IllegalArgumentException(String.format("%s은(는) 0보다 큰 수여야 합니다..", target));
+        }
+    }
+
     private static boolean containsDuplicateSubstring(String substring, String value) {
         String doubleSubstring = substring.repeat(2);
         return value.contains(doubleSubstring);
     }
 
+    private static boolean isPositiveNumber(int number) {
+        return number > 0;
+    }
 }

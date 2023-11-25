@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.Map.Entry;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
+import lotto.domain.LottoCountSummary;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 import lotto.domain.PrizeSummary;
@@ -52,5 +53,11 @@ public class OutputView {
     public void printProfit(Profit rawProfit) {
         double profit = formatter.toProfit(rawProfit);
         printer.printLine("총 수익률은 %.2f입니다.", profit);
+    }
+
+    public void printLottoCountSummary(LottoCountSummary lottoCountSummary) {
+        int manualLottoCount = formatter.toManualLottoCount(lottoCountSummary);
+        int autoLottoCount = formatter.toAutoLottoCount(lottoCountSummary);
+        printer.printLine("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottoCount, autoLottoCount);
     }
 }
