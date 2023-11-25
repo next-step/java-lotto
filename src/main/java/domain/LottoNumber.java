@@ -2,10 +2,9 @@ package domain;
 
 import java.util.Objects;
 
-public class LottoNumber {
+import static util.LottoNumberGenerator.*;
 
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+public class LottoNumber {
     private int lottoNumber;
 
     public LottoNumber(int lottoNumber) {

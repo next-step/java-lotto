@@ -2,10 +2,9 @@ package service;
 
 import domain.Lotto;
 import repository.UserLottoRepository;
-import util.LottoRandomNumberGenerator;
+import util.LottoNumberGenerator;
 
 import java.util.List;
-import java.util.Set;
 
 public class UserLottoService {
 
@@ -23,7 +22,7 @@ public class UserLottoService {
         int ticketCount = LottoSalesService.validateMoneyAndReturnTicketCount(money);
 
         for (int i = 0; i < ticketCount; i++) {
-            List<Integer> lottoNumbers = LottoRandomNumberGenerator.generateLottoNumber();
+            List<Integer> lottoNumbers = LottoNumberGenerator.generateLottoNumber();
 
             Lotto lotto = new Lotto (lottoNumbers);
             userLottoRepository.saveUserLottoTickets(lotto);

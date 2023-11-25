@@ -6,9 +6,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class WinningLotto {
+import static util.LottoNumberGenerator.LOTTO_NUMBER_COUNT_LIMIT;
 
-    private static final int LOTTO_NUMBER_COUNT_LIMIT = 6;
+public class WinningLotto {
     private Set<LottoNumber> lottoNumbers;
     private LottoNumber bonusNumber;
 
