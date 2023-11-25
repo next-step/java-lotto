@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,33 +12,30 @@ public class WinningLotto {
     private LottoNumber bonusNumber;
 
     public WinningLotto(int bonus, Integer... numbers) {
-        this(Arrays.stream(numbers).collect(Collectors.toList()), bonus);
+        this(Arrays.stream(numbers)
+                        .map(LottoNumber::new)
+                        .collect(Collectors.toSet())
+                , bonus);
     }
 
     public WinningLotto(String numbers, int bonus) {
         this(Arrays.stream(numbers.split(","))
                         .map(String::trim)
                         .map(Integer::parseInt)
-                        .collect(Collectors.toList())
+                        .map(LottoNumber::new)
+                        .collect(Collectors.toSet())
                 , bonus);
     }
 
-    public WinningLotto(List<Integer> lottoNumbers, int bonus) {
-        Set<Integer> numbers = new HashSet<>(lottoNumbers);
-        validateLottoNumberCount(numbers);
+    public WinningLotto(Set<LottoNumber> lottoNumbers, int bonus) {
+        validateLottoNumberCount(lottoNumbers);
 
-        this.lottoNumbers = lottoNumbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+        this.lottoNumbers = lottoNumbers;
         this.bonusNumber = new LottoNumber(bonus);
     }
 
-    private static void validateLottoNumberCount(Set<Integer> lottoNumbers) {
-        if (lottoNumbers.stream().count() < LOTTO_NUMBER_COUNT_LIMIT) {
-            throw new IllegalArgumentException("로또 숫자는 6개 입니다.");
-        }
-
-        if (lottoNumbers.stream().count() > LOTTO_NUMBER_COUNT_LIMIT) {
+    private static void validateLottoNumberCount(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() < LOTTO_NUMBER_COUNT_LIMIT) {
             throw new IllegalArgumentException("로또 숫자는 6개 입니다.");
         }
     }
