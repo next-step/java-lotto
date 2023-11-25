@@ -3,27 +3,31 @@ package step2;
 import stringCalculator.Operator;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public enum PrizeType {
 
-    THREE(3, value -> value * 5000),
-    FOUR(4, value -> value * 50000),
-    FIVE(5, value -> value * 1500000),
-    SIX(6, value -> value * 2000000000),
-    UNKNOWN(0, null);
+    THREE(3, (value, p) -> value * p),
+    FOUR(4, (value, p) -> value * p),
+    FIVE(5, (value, p) -> value * p),
+    SIX(6, (value, p) -> value * p),
+    UNKNOWN(0, (value, p) -> value * p);
 
 
-    private final Function<Integer, Integer> run;
+    private final BiFunction<Integer, Integer, Integer> cal;
+
     private final int matchCount;
+    private final Prize prize;
 
-    PrizeType(int matchCount, Function<Integer, Integer> run) {
-        this.run = run;
+    PrizeType(int matchCount, BiFunction<Integer, Integer, Integer> cal) {
+        this.cal = cal;
         this.matchCount = matchCount;
+        this.prize = new Prize(matchCount);
     }
 
     public int calculate(int value){
-        return run.apply(value);
+        return this.cal.apply(value, prize.findPrizeByWinningCount());
     }
 
     public static PrizeType findPrizeType(int winningCount) {
