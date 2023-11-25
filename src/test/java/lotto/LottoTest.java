@@ -34,7 +34,7 @@ public class LottoTest {
     void 로또는_보너스볼을_일치여부를_판단한다() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonus = new LottoNumber(5);
-        assertThat(lotto.matchBonusNumber(bonus)).isTrue();
+        assertThat(lotto.matchLottoNumber(bonus)).isTrue();
     }
 
 }

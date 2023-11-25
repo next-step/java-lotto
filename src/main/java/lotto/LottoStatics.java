@@ -16,7 +16,7 @@ public class LottoStatics {
     public void classifyRankLotto(List<Lotto> lottos, Lotto winningLotto, LottoNumber bonusBall) {
         for (Lotto lotto : lottos) {
             int matchingCount = winningLotto.countMatchingWinningLotto(lotto);
-            winningLottos.putWinningMatchingNumberLotto(matchingCount, lotto.matchBonusNumber(bonusBall));
+            winningLottos.putWinningMatchingNumberLotto(matchingCount, lotto.matchLottoNumber(bonusBall));
         }
     }
 
