@@ -42,15 +42,14 @@ public class LottoController {
 
     private LottoCountSummary createLottoCountSummary(PurchaseAmount purchaseAmount) {
         LottoCount totalLottoCount = LottoCount.fromPurchaseAmount(purchaseAmount);
-        int rawManualLottoCount = inputView.inputManualLottoCount();
-        ManualLottoCount manulLottoCount = new ManualLottoCount(rawManualLottoCount, totalLottoCount);
+        ManualLottoCount manulLottoCount = inputView.inputManualLottoCount(totalLottoCount);
         return LottoCountSummary.of(totalLottoCount, manulLottoCount);
     }
 
     private Lottos createTotalLottos(LottoCountSummary lottoCountSummary) {
         Lottos manualLottos = inputView.inputManualLottos(lottoCountSummary);
         Lottos autoLottos = generateAutoLottos(lottoCountSummary);
-        return Lottos.mergeLottos(manualLottos, autoLottos);
+        return manualLottos.mergeLottos(autoLottos);
     }
 
     private WinningCombo createWinningCombo() {

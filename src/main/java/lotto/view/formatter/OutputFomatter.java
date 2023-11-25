@@ -20,7 +20,7 @@ public class OutputFomatter {
     public String toLotto(Lotto lotto) {
         List<LottoNumber> rawLottoNumbers = lotto.getLottoNumbers();
         List<String> lottoNumbers = rawLottoNumbers.stream()
-                .map(lottoNumber -> lottoNumber.getLottoNumber() + "")
+                .map(lottoNumber -> Integer.toString(lottoNumber.getLottoNumber()))
                 .collect(Collectors.toList());
         return String.join(", ", lottoNumbers);
     }

@@ -10,8 +10,6 @@ public class LottoCountSummary {
     }
 
     public static LottoCountSummary of(LottoCount totalLottoCount, ManualLottoCount manulLottoCount) {
-//        int totalLottoCount = purchaseAmount.calculateLottoCount();
-//        int autoLottoCount = manulLottoCount.calculateAutoLottoCountByTotalCount(totalLottoCount);
         int autoLottoCount = manulLottoCount.calculateAutoLottoCountByTotalCount(totalLottoCount);
         return new LottoCountSummary(manulLottoCount, LottoCount.from(autoLottoCount));
     }

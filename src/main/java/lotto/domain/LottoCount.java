@@ -17,11 +17,6 @@ public class LottoCount {
         return new LottoCount(purchaseAmount.calculateLottoCount());
     }
 
-//    public static LottoCount generateAutoLottoCount(LottoCount totalLottoCount, ManualLottoCount manulLottoCount) {
-//       return LottoCount.from(totalLottoCount.lottoCount - manulLottoCount.lottoCount);
-//    }
-
-
     public boolean isCountGreaterThan(int presentLottoCount) {
         return presentLottoCount < lottoCount ;
     }

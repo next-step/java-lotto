@@ -13,11 +13,17 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos mergeLottos(Lottos manualLottos, Lottos autoLottos) {
-        List<Lotto> totalLottos = new ArrayList<>();
-        totalLottos.addAll(manualLottos.lottos);
-        totalLottos.addAll(autoLottos.lottos);
-        return new Lottos(totalLottos);
+    public Lottos mergeLottos(Lottos autoLottos) {
+        List<Lotto> manualLottos = this.lottos;
+
+        return autoLottos.mergeWith(manualLottos);
+    }
+
+    private Lottos mergeWith(List<Lotto> manualLottos) {
+        List<Lotto> autoLottos = this.lottos;
+
+        manualLottos.addAll(autoLottos);
+        return new Lottos(manualLottos);
     }
 
     public PrizeSummary getPrizeSummary(WinningCombo winningCombo) {

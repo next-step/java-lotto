@@ -19,6 +19,10 @@ public class ManualLottoCount {
         return new ManualLottoCount(manualLottoCount);
     }
 
+    public static ManualLottoCount of(int manualLottoCount, LottoCount totalLottoCount) {
+        return new ManualLottoCount(manualLottoCount, totalLottoCount);
+    }
+
     private void validateRange(int manualLottoCount, LottoCount totalLottoCount) {
         GeneralValidator.validatePositiveNumber(manualLottoCount, "수동 로또의 개수");
         if (!totalLottoCount.isCountGreaterOrEqualTo(manualLottoCount)) {

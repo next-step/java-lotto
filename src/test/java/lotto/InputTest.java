@@ -2,6 +2,7 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import lotto.domain.LottoCount;
 import lotto.domain.LottoCountSummary;
 import lotto.mock.FakePrinter;
 import lotto.mock.FakeReader;
@@ -61,7 +62,7 @@ public class InputTest {
         InputView inputView = InputView.of(reader, printer);
 
         // when & then
-        assertThatIllegalArgumentException().isThrownBy(inputView::inputManualLottoCount);
+        assertThatIllegalArgumentException().isThrownBy(() -> inputView.inputManualLottoCount(LottoCount.from(1)));
     }
 
     @DisplayName("정상적이지 않은 수동 로또 번호 입력에 대해서 예외를 발생한다.")
