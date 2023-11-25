@@ -20,8 +20,8 @@ class LottoTest {
 
     @Test
     void test_등수별카운드() {
-        Lotto lotto = new Lotto(List.of(new LottoNumbers(stringToIntegerList("1, 2, 3, 4, 5, 6")), new LottoNumbers(stringToIntegerList("1, 2, 3, 4, 5, 45"))));
-        LottoNumbers winningLottoNumbers = new LottoNumbers(stringToIntegerList("1, 2, 3, 4, 5, 6"));
+        Lotto lotto = new Lotto(List.of(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), new LottoNumbers(List.of(1, 2, 3, 4, 5, 45))));
+        LottoNumbers winningLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
 
         EnumMap<Rank, Integer> countPerPrize = new EnumMap<>(Rank.class);
         countPerPrize.put(Rank.FIRST_PLACE, 1);

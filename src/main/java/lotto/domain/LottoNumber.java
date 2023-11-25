@@ -19,11 +19,26 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber target) {
-        return this.number - target.number;
+        return Integer.compare(this.number, target.number);
     }
 
     @Override
     public String toString() {
         return String.valueOf(this.number);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LottoNumber that = (LottoNumber) o;
+
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return number;
     }
 }
