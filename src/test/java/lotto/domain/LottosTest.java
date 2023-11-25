@@ -1,12 +1,12 @@
 package lotto.domain;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,5 +34,17 @@ class LottosTest {
     void checkHasBonus(int bonusNumber, boolean result) {
         Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
         Assertions.assertThat(lotto.hasBonus(new LottoNumber(bonusNumber))).isEqualTo(result);
+    }
+
+    @DisplayName("로또를 추가한다.")
+    @Test
+    void add() {
+        Lotto lotto = new Lotto(new ArrayList<>(List.of(1,2,3,4,5,6)));
+        Lotto otherLotto = new Lotto(new ArrayList<>(List.of(2,3,4,5,6,7)));
+        Lottos lottos = new Lottos(new ArrayList<>(List.of(lotto)));
+        Lottos otherLottos = new Lottos(List.of(otherLotto));
+        lottos.addLottos(otherLottos);
+
+        Assertions.assertThat(lottos.getLottosSize()).isEqualTo(2);
     }
 }
