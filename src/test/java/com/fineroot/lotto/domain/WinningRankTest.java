@@ -27,11 +27,13 @@ class WinningRankTest {
     }
 
     @Test
+    @DisplayName("일치 수 확인")
     void getMatchCount() {
         assertThat(WinningRank.FORTH_PRIZE.getMatchCount()).isEqualTo(4);
     }
 
     @Test
+    @DisplayName("상금 확인")
     void getWinnerPrice() {
         assertThat(WinningRank.FIFTH_PRIZE.getWinnerPrice()).isEqualTo(5000);
     }
