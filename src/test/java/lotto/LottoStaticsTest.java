@@ -16,11 +16,10 @@ public class LottoStaticsTest {
         List<Lotto> lottos = List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)),
                 new Lotto(List.of(1, 2, 3, 4, 5, 9))
         );
-        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumber bonusBall = new LottoNumber(9);
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(List.of(1, 2, 3, 4, 5, 6), 9);
         Map<Rank, Integer> rankMap = Map.of(Rank.FIRST, 1, Rank.SECOND, 1);
         WinningLottos result = new WinningLottos(rankMap);
-        assertThat(lottoStatics.classifyRankLotto(lottos, winningLotto, bonusBall)).isEqualTo(result);
+        assertThat(lottoStatics.classifyRankLotto(lottos, winningLottoNumbers)).isEqualTo(result);
     }
 
 }

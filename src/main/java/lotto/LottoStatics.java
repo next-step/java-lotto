@@ -9,11 +9,11 @@ public class LottoStatics {
     public LottoStatics() {
     }
 
-    public WinningLottos classifyRankLotto(List<Lotto> lottos, Lotto winningLotto, LottoNumber bonusBall) {
+    public WinningLottos classifyRankLotto(List<Lotto> lottos, WinningLottoNumbers winningLottoNumbers) {
         winningLottos = new WinningLottos();
         for (Lotto lotto : lottos) {
-            int matchingCount = winningLotto.countMatchingWinningLotto(lotto);
-            winningLottos.putWinningMatchingNumberLotto(matchingCount, lotto.matchLottoNumber(bonusBall));
+            winningLottos.putWinningMatchingNumberLotto(winningLottoNumbers.countMatchingWinningLotto(lotto),
+                    winningLottoNumbers.matchBonusBall(lotto));
         }
         return winningLottos;
     }
