@@ -1,11 +1,8 @@
 package lotto;
 
-import lotto.domain.LottoFactory;
 import lotto.domain.LottoGame;
 import lotto.domain.PrizeStatus;
-import lotto.domain.WinnerNumbers;
 import lotto.view.InputView;
-import lotto.view.OutputView;
 
 import java.util.Random;
 
@@ -28,8 +25,10 @@ public class LottoPlayApplication {
         displayLottoTickets(lottoGame.tickets());
 
         displayWinnerNumbers(lottoGame.winnerNumbers());
-        PrizeStatus prizeStatus = new PrizeStatus(lottoGame);
+        int bonusBall = InputView.getBonusBall();
+        lottoGame.winnerNumbers().throwBonusBall(bonusBall);
 
+        PrizeStatus prizeStatus = lottoGame.processResult();
         displayResult(prizeStatus, purchasedAmt);
     }
 }

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -14,6 +13,12 @@ public class LottoGame {
         this.winnerNumbers = new WinnerNumbers(lottoFactory.generateTicket(random));
     }
 
+    public LottoGame(LottoTicket lottoTicket, List<Integer> winnerNumbers) {
+        LottoFactory lottoFactory = new LottoFactory(lottoTicket);
+        this.tickets = lottoFactory.tickets();
+        this.winnerNumbers = new WinnerNumbers(winnerNumbers);
+    }
+
     public List<LottoTicket> tickets() {
         return this.tickets;
     }
@@ -21,4 +26,10 @@ public class LottoGame {
     public WinnerNumbers winnerNumbers() {
         return this.winnerNumbers;
     }
+
+    public PrizeStatus processResult() {
+        PrizeStatus prizeStatus = new PrizeStatus(this);
+        return prizeStatus;
+    }
+
 }

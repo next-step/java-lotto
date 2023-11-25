@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.LottoFactory;
 import lotto.domain.LottoTicket;
 import lotto.domain.PrizeStatus;
 import lotto.domain.WinnerNumbers;
@@ -30,11 +29,11 @@ public class OutputView {
     }
 
     public static void displayPrizeStatus(PrizeStatus prizeStatus) {
-        System.out.println("3개 일치 (5000원)- "+prizeStatus.getCurrentNumOfPrize(3));
-        System.out.println("4개 일치 (50000원)- "+prizeStatus.getCurrentNumOfPrize(4));
-        System.out.println("5개 일치 (1500000원)- "+prizeStatus.getCurrentNumOfPrize(5));
-        System.out.println("6개 일치 (2000000000원)- "+prizeStatus.getCurrentNumOfPrize(6));
-
+        System.out.println("3개 일치 (5000원)- "+prizeStatus.getCurrentNumOfPrize(3, false));
+        System.out.println("4개 일치 (50000원)- "+prizeStatus.getCurrentNumOfPrize(4, false));
+        System.out.println("5개 일치 (1500000원)- "+prizeStatus.getCurrentNumOfPrize(5, false));
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원)- "+prizeStatus.getCurrentNumOfPrize(5, true));
+        System.out.println("6개 일치 (2000000000원)- "+prizeStatus.getCurrentNumOfPrize(6, false));
     }
 
     public static void displayProfit(double profit) {

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -40,7 +39,6 @@ public class LottoFactory {
             int randomNumber = random.nextInt(45) + 1;
             addNumber(randomNumber, ticket);
         }
-        Collections.sort(ticket);
         return ticket;
     }
 

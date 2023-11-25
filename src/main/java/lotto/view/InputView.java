@@ -9,4 +9,9 @@ public class InputView {
         System.out.println("구입금액을 입력해 주세요.");
         return scanner.nextInt();
     }
+
+    public static int getBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
+    }
 }

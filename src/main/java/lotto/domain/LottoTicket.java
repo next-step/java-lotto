@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class LottoTicket {
-    private final Set<Integer> ticket = new HashSet<>();
+    private final TreeSet<Integer> ticket = new TreeSet<>();
 
     public LottoTicket(List<Integer> lottoNumber) {
         ticket.addAll(lottoNumber);
@@ -15,20 +15,28 @@ public class LottoTicket {
         return this.ticket.toString();
     }
 
-    public boolean isThisNumberMatched(WinnerNumbers winnerNummbers, int number) {
-        return winnerNummbers.isContain(number);
+    public boolean isThisNumberMatched(WinnerNumbers winnerNumbers, int number) {
+        return winnerNumbers.isContain(number);
     }
 
-    public int calculateTotalMatchedCount(WinnerNumbers winnerNummbers) {
+    public boolean isMatchedWithBonusNum(WinnerNumbers winnerNumbers) {
+        return ticket.contains(winnerNumbers.bonusNumber());
+    }
+
+    public int calculateTotalMatchedCount(WinnerNumbers winnerNumbers) {
         AtomicInteger sum = new AtomicInteger(0);
 
         ticket.iterator().forEachRemaining(number -> {
 
-            if (isThisNumberMatched(winnerNummbers, number)) {
+            if (isThisNumberMatched(winnerNumbers, number)) {
                 sum.getAndIncrement();
             }
         });
 
         return sum.get();
+    }
+
+    public boolean isContain(int number) {
+        return this.ticket.contains(number);
     }
 }
