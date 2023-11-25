@@ -12,6 +12,7 @@ public class Controller {
         try {
             price = stringToInteger(inputView.inputPrice());
             PlayLotto playLotto = new PlayLotto(getPlayRounds(price));
+            int[] winningNumbers = WinningNumber.getWinnerNumberList(inputView.inputWinningNumber());
 
         }catch (Exception e){
             e.printStackTrace();
