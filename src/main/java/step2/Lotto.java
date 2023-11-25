@@ -23,6 +23,21 @@ public class Lotto {
         this.lotto = lotto;
     }
 
+    public int matchWinningNumber(int[] winningNumber){
+        int winningCount = 0;
+        for (int i : winningNumber) {
+            winningCount += hasNumber(i);
+        }
+        return winningCount;
+    }
+
+    private int hasNumber(int number){
+        if (lotto.contains(number)){
+            return 1;
+        }
+        return 0;
+    }
+
     public void printLotto(){
         System.out.println(lotto.toString());
     }
