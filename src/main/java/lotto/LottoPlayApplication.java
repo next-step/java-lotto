@@ -1,12 +1,10 @@
 package lotto;
 
 import lotto.domain.LottoGame;
-import lotto.domain.LottoTicket;
 import lotto.domain.PrizeStatus;
 import lotto.view.InputView;
 
 import java.util.List;
-import java.util.Random;
 
 import static lotto.view.OutputView.*;
 import static lotto.view.InputView.*;
