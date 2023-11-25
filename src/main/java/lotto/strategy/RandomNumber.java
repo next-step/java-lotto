@@ -1,7 +1,7 @@
 package lotto.strategy;
 
-import static lotto.model.LottoNumberValidate.LOTTO_MAX_RANGE;
-import static lotto.model.LottoNumberValidate.LOTTO_MIN_RANGE;
+import static lotto.model.LottoNumber.LOTTO_MAX_RANGE;
+import static lotto.model.LottoNumber.LOTTO_MIN_RANGE;
 
 public class RandomNumber implements LottoStrategy{
     @Override

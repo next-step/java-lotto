@@ -24,7 +24,7 @@ public class LottoOutput {
 
     private String getLottoDetail(Lotto lotto) {
         List<String> list = new ArrayList<>();
-        for (LottoNumberValidate number : lotto.numbers()) {
+        for (LottoNumber number : lotto.numbers()) {
             list.add(Integer.toString(number.number()));
         }
         return String.join(", ", list);

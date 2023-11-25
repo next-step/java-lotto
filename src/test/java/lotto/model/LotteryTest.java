@@ -1,9 +1,11 @@
 package lotto.model;
 
+import lotto.model.constants.Dividend;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,17 +13,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LotteryTest {
 
     @Test
-    @DisplayName("등수에 따른 당첨금을 리턴한다.")
+    @DisplayName("등수에 따른 모든 당첨금을 리턴한다.")
     void test1() {
         //given
         LottoNumbers lottoNumbers = new LottoNumbers(Set.of(
-                new LottoNumberValidate(1),
-                new LottoNumberValidate(2),
-                new LottoNumberValidate(3),
-                new LottoNumberValidate(4),
-                new LottoNumberValidate(5),
-                new LottoNumberValidate(6)));
-        BonusBall bonusBall = new BonusBall(new LottoNumberValidate(20));
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)));
+        BonusBall bonusBall = new BonusBall(LottoNumber.of(20));
         WinnerNumbers winnerNumbers = new WinnerNumbers(lottoNumbers, bonusBall);
 
         Lottos lottos = new Lottos(List.of(
@@ -40,13 +42,13 @@ class LotteryTest {
     void test2() {
         //given
         LottoNumbers lottoNumbers = new LottoNumbers(Set.of(
-                new LottoNumberValidate(1),
-                new LottoNumberValidate(2),
-                new LottoNumberValidate(3),
-                new LottoNumberValidate(4),
-                new LottoNumberValidate(5),
-                new LottoNumberValidate(6)));
-        BonusBall bonusBall = new BonusBall(new LottoNumberValidate(20));
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)));
+        BonusBall bonusBall = new BonusBall(LottoNumber.of(20));
         WinnerNumbers winnerNumbers = new WinnerNumbers(lottoNumbers, bonusBall);
 
         Lottos lottos = new Lottos(List.of(
@@ -58,5 +60,32 @@ class LotteryTest {
         Lottery lottery = new Lottery(winnerNumbers, lottos);
         //then
         assertThat(lottery.getInvestment()).isEqualTo(10000.0);
+    }
+
+    @Test
+    @DisplayName("당첨된 결과에 맞는 개수를 리턴한다.")
+    void test3() {
+        //given
+        LottoNumbers lottoNumbers = new LottoNumbers(Set.of(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)));
+        BonusBall bonusBall = new BonusBall(LottoNumber.of(20));
+        WinnerNumbers winnerNumbers = new WinnerNumbers(lottoNumbers, bonusBall);
+
+        Lottos lottos = new Lottos(List.of(
+                new Lotto(Set.of(1, 2, 3, 4, 9, 11)),
+                new Lotto(Set.of(1, 3, 5, 6, 9, 11)),
+                new Lotto(Set.of(1, 2, 3, 4, 5, 20))
+        ));
+
+        Lottery lottery = new Lottery(winnerNumbers, lottos);
+        Map<Dividend, Integer> result = lottery.totalCorrect();
+        //then
+        assertThat(result.get(Dividend.SECOND)).isEqualTo(1);
+        assertThat(result.get(Dividend.FOURTH)).isEqualTo(2);
     }
 }

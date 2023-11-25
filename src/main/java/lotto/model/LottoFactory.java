@@ -24,10 +24,10 @@ public class LottoFactory {
     }
 
     private LottoNumbers generateRandomSixNumber() {
-        Set<LottoNumberValidate> numbers = new HashSet<>();
+        Set<LottoNumber> numbers = new HashSet<>();
         while (numbers.size() != LOTTO_MAX_COUNT) {
             int randomNumber = generateRandomNumber(new RandomNumber());
-            numbers.add(new LottoNumberValidate(randomNumber));
+            numbers.add(LottoNumber.of(randomNumber));
         }
         return new LottoNumbers(numbers);
     }

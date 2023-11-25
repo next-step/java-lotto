@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.model.BonusBall;
 import lotto.model.LottoNumbers;
-import lotto.model.LottoNumberValidate;
+import lotto.model.LottoNumber;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -18,7 +18,7 @@ public class LottoInput {
 
     public BonusBall getBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new BonusBall(new LottoNumberValidate(scanner.nextInt()));
+        return new BonusBall(LottoNumber.of(scanner.nextInt()));
     }
 
     public LottoNumbers getWinningNumber() {
@@ -27,7 +27,7 @@ public class LottoInput {
         return new LottoNumbers(
                 Arrays.stream(scanner.nextLine().split(", "))
                         .map(Integer::parseInt)
-                        .map(LottoNumberValidate::new)
+                        .map(LottoNumber::of)
                         .collect(Collectors.toSet()));
     }
 }
