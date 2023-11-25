@@ -1,4 +1,4 @@
-package com.fineroot.lotto.dto;
+package com.fineroot.lotto.domain.vo;
 
 import com.fineroot.lotto.util.ExceptionMessage;
 import java.util.Objects;
@@ -22,7 +22,7 @@ public class LotteryCount {
     }
 
     public boolean isGreaterThanFromInteger(final int value) {
-        return value < this.value;
+        return this.value > value;
     }
 
     public LotteryCount subtract(LotteryCount o) {

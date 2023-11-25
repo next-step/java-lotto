@@ -1,5 +1,6 @@
 package com.fineroot.lotto.domain;
 
+import com.fineroot.lotto.domain.vo.LotteryCount;
 import com.fineroot.lotto.util.ExceptionMessage;
 import com.fineroot.lotto.util.LottoUtils;
 import java.util.Objects;
@@ -19,16 +20,12 @@ public class LottoPayment {
         return new LottoPayment(value);
     }
 
-    public int toLotteryCount() {
-        return lotteryCount();
+    public LotteryCount toLotteryCount() {
+        return LotteryCount.from(lotteryCount());
     }
 
     public double divide(final double sum) {
         return sum / value;
-    }
-
-    public int toAutoLotteryCount(final int manualLotteryCount) {
-        return lotteryCount() - manualLotteryCount;
     }
 
     private int lotteryCount() {

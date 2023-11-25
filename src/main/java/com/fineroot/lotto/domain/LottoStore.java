@@ -10,10 +10,6 @@ public class LottoStore {
         lottoBundle = LottoBundle.from(0);
     }
 
-    public void purchaseLottery(LottoPayment lottoPayment) {
-        lottoBundle = LottoBundle.from(lottoPayment.toLotteryCount());
-    }
-
     public void purchaseLottery(LotteryOrder lotteryOrder) {
         lottoBundle = lotteryOrder.lottoBundle();
     }

@@ -1,20 +1,22 @@
 package com.fineroot.lotto.domain;
 
-import com.fineroot.lotto.dto.LotteryCount;
+import com.fineroot.lotto.dto.LotteryOrderSet;
 
 public class LotteryOrder {
 
-    private final LottoBundle lottoBundle;
+    private final LotteryOrderSet lotteryOrderSet;
+    private final LottoBundle lottoManualBundle;
 
-    private LotteryOrder(final LotteryCount autoLotteryCount, final LottoBundle manualLottoNumbers) {
-        this.lottoBundle = manualLottoNumbers.addBundle(LottoBundle.fromLotteryCount(autoLotteryCount));
+    private LotteryOrder(final LotteryOrderSet lotteryOrderSet, final LottoBundle lottoManualBundle) {
+        this.lotteryOrderSet = lotteryOrderSet;
+        this.lottoManualBundle = lottoManualBundle;
     }
 
-    public static LotteryOrder of(final LotteryCount autoLotteryCount, final LottoBundle manualLottoNumbers) {
-        return new LotteryOrder(autoLotteryCount, manualLottoNumbers);
+    public static LotteryOrder of(final LotteryOrderSet lotteryOrderSet, final LottoBundle lottoManualBundle) {
+        return new LotteryOrder(lotteryOrderSet, lottoManualBundle);
     }
 
     public LottoBundle lottoBundle() {
-        return lottoBundle;
+        return lottoManualBundle.addBundle(LottoBundle.fromLotteryCount(lotteryOrderSet.getAutoLotteryCount()));
     }
 }

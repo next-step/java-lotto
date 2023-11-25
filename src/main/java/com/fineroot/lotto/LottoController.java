@@ -34,10 +34,10 @@ public class LottoController {
     }
 
     private void purchaseLottery() {
-        inputView.drawInputMoneyView();
-        lottoStore.purchaseLottery(inputViewModel.getLottoPayment());
-        resultViewModel.saveLottoCount(inputViewModel.getLottoPayment().toLotteryCount());
+        inputView.drawLotteryPurchaseView();
+        lottoStore.purchaseLottery(inputViewModel.getLotteryOrder());
         resultViewModel.saveLotteryBundleStatus(lottoStore.lottoBundleStatus());
+        resultViewModel.saveLotteryCountSet(inputViewModel.getLotteryOrderSet());
         resultView.drawEachLotteryCount();
         resultView.drawLotteryBundleStatus();
     }

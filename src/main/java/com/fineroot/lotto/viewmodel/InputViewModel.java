@@ -1,24 +1,28 @@
 package com.fineroot.lotto.viewmodel;
 
+import com.fineroot.lotto.domain.LotteryOrder;
+import com.fineroot.lotto.domain.LottoBundle;
 import com.fineroot.lotto.domain.LottoNumber;
-import com.fineroot.lotto.dto.LotteryCount;
-import com.fineroot.lotto.dto.LotteryCountSet;
 import com.fineroot.lotto.domain.LottoPayment;
+import com.fineroot.lotto.domain.vo.LotteryCount;
+import com.fineroot.lotto.dto.LotteryOrderSet;
 import com.fineroot.lotto.dto.WinningNumber;
 import com.fineroot.lotto.dto.WinningNumberSet;
+import com.fineroot.lotto.util.LottoUtils;
 
 public class InputViewModel {
 
     private LottoPayment lottoPayment;
     private WinningNumber winningNumber;
     private LottoNumber bonusNumber;
-    private LotteryCountSet lotteryCountSet;
+    private LotteryOrderSet lotteryOrderSet;
+    private LottoBundle lottoBundle;
 
     public InputViewModel() {
         this.lottoPayment = LottoPayment.from(0);
         this.winningNumber = WinningNumber.defaultCreate();
         this.bonusNumber = LottoNumber.from(1);
-        this.lotteryCountSet = LotteryCountSet.of(1, 1);
+        this.lotteryOrderSet = LotteryOrderSet.of(LottoUtils.LOTTO_EACH_PRICE, 0);
     }
 
     public void saveLottoPayment(LottoPayment lottoPayment) {
@@ -33,19 +37,27 @@ public class InputViewModel {
         this.bonusNumber = number;
     }
 
-    public LottoPayment getLottoPayment() {
-        return lottoPayment;
-    }
-
     public WinningNumberSet getWinningNumberSet() {
         return WinningNumberSet.of(winningNumber, bonusNumber);
     }
 
     public void saveManualPurchaseCount(LotteryCount count) {
-        lotteryCountSet = LotteryCountSet.of(LotteryCount.from(lottoPayment.toLotteryCount()), count);
+        lotteryOrderSet = LotteryOrderSet.of(lottoPayment, count);
     }
 
-    public LotteryCountSet getLotteryCountSet() {
-        return lotteryCountSet;
+    public void saveManualLottoBundle(LottoBundle lottoBundle) {
+        this.lottoBundle = lottoBundle;
+    }
+
+    public LotteryOrder getLotteryOrder() {
+        return LotteryOrder.of(lotteryOrderSet, lottoBundle);
+    }
+
+    public LotteryOrderSet getLotteryOrderSet(){
+        return lotteryOrderSet;
+    }
+
+    public boolean manualLotteryIsGreaterThan(final int index) {
+        return lotteryOrderSet.getManualLotteryCount().isGreaterThanFromInteger(index);
     }
 }

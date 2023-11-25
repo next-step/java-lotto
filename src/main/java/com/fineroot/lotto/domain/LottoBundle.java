@@ -1,6 +1,6 @@
 package com.fineroot.lotto.domain;
 
-import com.fineroot.lotto.dto.LotteryCount;
+import com.fineroot.lotto.domain.vo.LotteryCount;
 import com.fineroot.lotto.dto.LottoBundleStatus;
 import com.fineroot.lotto.dto.WinningNumberSet;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class LottoBundle {
 
     public static LottoBundle fromList(List<String> lottoList) {
         return new LottoBundle(
-                lottoList.stream().map(e -> Arrays.stream(e.split(",")).mapToInt(Integer::parseInt).toArray())
+                lottoList.stream().map(e -> Arrays.stream(e.split(",")).map(String::trim).mapToInt(Integer::parseInt).toArray())
                         .map(e -> Lotto.from(Arrays.stream(e).boxed().toArray(Integer[]::new))).collect(
                                 Collectors.toList()));
     }

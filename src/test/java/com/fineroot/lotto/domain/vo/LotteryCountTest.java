@@ -1,4 +1,4 @@
-package com.fineroot.lotto.dto;
+package com.fineroot.lotto.domain.vo;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -32,9 +32,9 @@ class LotteryCountTest {
     }
 
     @ParameterizedTest
-    @DisplayName("다른 특정 정수 값보다 같은지 검증")
+    @DisplayName("다른 특정 정수 값보다 같거나 큰지 검증")
     @CsvSource({"1,true", "2,false", "3,false"})
-    void isSame(int other, boolean expected) {
+    void isGreaterThanFromInteger(int other, boolean expected) {
         assertThat(LotteryCount.from(2).isGreaterThanFromInteger(other)).isEqualTo(expected);
     }
 

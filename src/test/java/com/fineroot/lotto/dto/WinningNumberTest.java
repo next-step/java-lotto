@@ -10,18 +10,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class WinningNumberTest {
 
-    private WinningNumber winningNumber;
-
-    @BeforeEach
-    void setUp() {
-        winningNumber = WinningNumber.from("1, 2, 3, 4, 5, 6");
-    }
-
     @ParameterizedTest
     @DisplayName("생성 확인: from")
     @CsvSource({"1,true","7,false"})
     void from(int input,boolean expected) {
-        assertThat(winningNumber.contains(LottoNumber.from(input))).isEqualTo(expected);
+        assertThat(WinningNumber.from("1, 2, 3, 4, 5, 6").contains(LottoNumber.from(input))).isEqualTo(expected);
     }
 
     @ParameterizedTest

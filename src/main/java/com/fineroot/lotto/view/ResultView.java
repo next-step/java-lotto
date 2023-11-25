@@ -14,10 +14,6 @@ public class ResultView {
         this.resultViewModel = resultViewModel;
     }
 
-    public void drawTotalLottoCount() {
-        System.out.println(Integer.toString(resultViewModel.getLottoCount()).concat("개를 구매했습니다."));
-    }
-
     public void drawEachLotteryCount() {
         System.out.println("수동으로 "
                 .concat(resultViewModel.manualLotteryCount())
