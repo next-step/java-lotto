@@ -30,9 +30,13 @@ public class Lotto {
     }
 
     public int countMatchingWinningLotto(Lotto lotto) {
-        return (int) lotto.numbers.stream()  
-            .filter(numbers::contains)  
+        return (int) lotto.numbers.stream()
+                .filter(this::matchLottoNumber)
             .count();  
+    }
+
+    public boolean matchLottoNumber(LottoNumber bonus) {
+        return numbers.contains(bonus);
     }
 
     @Override

@@ -16,21 +16,25 @@ public class WinningLottos {
         this.winningLottos = winningLottos;
     }
 
-    public Integer countLottoByWinningNumber(int count) {
-        return winningLottos.getOrDefault(Rank.convertRanking(count), 0);
+    public Integer countLottoByWinningNumber(int count, boolean matchBonus) {
+        return this.countLottoByWinningNumber(Rank.convertRanking(count, matchBonus));
     }
 
-    public void putWinningMatchingNumberLotto(int count) {
-        winningLottos.put(Rank.convertRanking(count), countLottoByWinningNumber(count) + 1);
+    public Integer countLottoByWinningNumber(Rank rank) {
+        return winningLottos.getOrDefault(rank, 0);
     }
 
-    public Integer rewardWinningLotto(int count) {
-        Rank rank = Rank.convertRanking(count);
-        return this.countLottoByWinningNumber(count) * rank.rewardPrice();
+    public void putWinningMatchingNumberLotto(int count, boolean matchBonus) {
+        winningLottos.put(Rank.convertRanking(count, matchBonus), countLottoByWinningNumber(count, matchBonus) + 1);
+    }
+
+    public Integer rewardWinningLotto(int count, boolean matchBonus) {
+        Rank rank = Rank.convertRanking(count, matchBonus);
+        return this.countLottoByWinningNumber(count, matchBonus) * rank.rewardPrice();
     }
 
     private Integer rewardWinningLotto(Rank rank) {
-        return this.countLottoByWinningNumber(rank.matchingCount()) * rank.rewardPrice();
+        return this.countLottoByWinningNumber(rank) * rank.rewardPrice();
     }
 
     public Integer totalRewardWinningLottos() {

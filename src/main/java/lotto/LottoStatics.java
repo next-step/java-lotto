@@ -4,35 +4,22 @@ import java.util.List;
 
 public class LottoStatics {
 
-    private WinningLottos winningLottos = new WinningLottos();
+    private WinningLottos winningLottos;
 
     public LottoStatics() {
     }
 
-    public LottoStatics(WinningLottos winningLottos) {
-        this.winningLottos = winningLottos;
-    }
-
-    public void classifyRankLotto(List<Lotto> lottos, Lotto winningLotto) {
+    public WinningLottos classifyRankLotto(List<Lotto> lottos, WinningLottoNumbers winningLottoNumbers) {
+        winningLottos = new WinningLottos();
         for (Lotto lotto : lottos) {
-            int matchingCount = winningLotto.countMatchingWinningLotto(lotto);
-            winningLottos.putWinningMatchingNumberLotto(matchingCount);
+            winningLottos.putWinningMatchingNumberLotto(winningLottoNumbers.countMatchingWinningLotto(lotto),
+                    winningLottoNumbers.matchBonusBall(lotto));
         }
-    }
-
-    public Integer matchCountRanks(int count) {
-        return winningLottos.countLottoByWinningNumber(count);
-    }
-
-    public Integer rewardWinningLotto(int count) {
-        return winningLottos.rewardWinningLotto(count);
+        return winningLottos;
     }
 
     public Integer rewardTotalWinningLottos() {
         return winningLottos.totalRewardWinningLottos();
     }
 
-    public WinningLottos winningLottos() {
-        return winningLottos;
-    }
 }

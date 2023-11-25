@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -33,6 +34,13 @@ public class LottoGameTest {
         List<Integer> winningNumbers = List.of(1,2,3,4,5,6);
         lottoGame.registerWinningLotto(winningNumbers);
         assertEquals(lottoGame.winningLotto(), new Lotto(winningNumbers));
+    }
+
+    @Test
+    void 보너스볼을_받을_수_있다() {
+        LottoGame lottoGame = new LottoGame();
+        lottoGame.registerBonusBall(5);
+        assertThat(lottoGame.bonusBall()).isEqualTo(new LottoNumber(5));
     }
 
 
