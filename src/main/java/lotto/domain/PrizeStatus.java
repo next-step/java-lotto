@@ -32,16 +32,14 @@ public class PrizeStatus {
     }
 
     private int updatePrizeStatus(LottoTicket lottoTicket, WinnerNumbers winnerNumbers) {
-        int totalProfit = 0;
         int totalMatchedCount = lottoTicket.calculateTotalMatchedCount(winnerNumbers);
         boolean isBonusWinner = lottoTicket.isMatchedWithBonusNum(winnerNumbers);
         int currentNumOfPrize = getCurrentNumOfPrize(totalMatchedCount, isBonusWinner);
         Rank userRank = Rank.of(totalMatchedCount, isBonusWinner);
 
         this.prizeStatus.put(userRank, currentNumOfPrize +1);
-        totalProfit += userRank.winningMoney();
 
-        return totalProfit;
+        return userRank.winningMoney();
     }
 
     public int getCurrentNumOfPrize(int totalMatchedCount, boolean isBonusWinner) {
