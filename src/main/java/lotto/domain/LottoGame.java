@@ -7,9 +7,11 @@ public class LottoGame {
     private List<LottoTicket> tickets;
     private WinnerNumbers winnerNumbers;
 
-    public LottoGame(int numOfTickets, Random random) {
+    public LottoGame(int numOfTickets, List<LottoTicket> manualLottoTickets) {
+        Random random = new Random();
         LottoFactory lottoFactory = new LottoFactory(numOfTickets, random);
         this.tickets = lottoFactory.tickets();
+        this.tickets.addAll(manualLottoTickets);
         this.winnerNumbers = new WinnerNumbers(lottoFactory.generateTicket(random));
     }
 
