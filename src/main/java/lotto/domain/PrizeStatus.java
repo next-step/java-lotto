@@ -45,10 +45,11 @@ public class PrizeStatus {
     }
 
     public int getCurrentNumOfPrize(int totalMatchedCount, boolean isBonusWinner) {
+        Rank selectedRank = Rank.of(totalMatchedCount, isBonusWinner);
         if (totalMatchedCount >= 3) {
-            return prizeStatus.get(Rank.of(totalMatchedCount, isBonusWinner));
+            return prizeStatus.get(selectedRank);
         }
-        return 0;
+        return prizeStatus.getOrDefault(selectedRank, 0);
     }
 
     private void setupPrizeStatus() {
