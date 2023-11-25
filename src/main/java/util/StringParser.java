@@ -7,4 +7,8 @@ public class StringParser {
     public static String[] parseWhiteSpace(String input) {
         return input.split(" ");
     }
+    
+    public static String[] parseComma(String input) {
+        return input.split(", ");
+    }
 }
