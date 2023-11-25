@@ -1,16 +1,16 @@
 package calculator;
 
-import calculator.operator.Operator;
-import java.util.List;
+import calculator.operator.OperatorResolver;
+import calculator.operator.OperatorStrategy;
 
 public class Calculator {
 
     public static final String INPUT_TEXT_EXCEPTION = "문자열이 빈 값이거나, 공백만 존재합니다.";
-    public static final String INPUT_OPERATOR_EXCEPTION = "입력하신 연산자가 사칙 연산 연산자가 아닙니다.";
-    private final List<Operator> operators;
 
-    public Calculator(List<Operator> operators) {
-        this.operators = operators;
+    private final OperatorResolver operatorResolver;
+
+    public Calculator(OperatorResolver operatorResolver) {
+        this.operatorResolver = operatorResolver;
     }
 
     public long calculate(String text) {
@@ -38,10 +38,10 @@ public class Calculator {
     }
 
     private long calculateWithOperator(String textOperator, long sum, long operand) {
-        return operators.stream()
-                .filter(operator -> operator.match(textOperator))
-                .findFirst()
-                .map(operator -> operator.calculate(sum, operand))
-                .orElseThrow(() -> new IllegalArgumentException(INPUT_OPERATOR_EXCEPTION));
+        return findOperator(textOperator).calculate(sum, operand);
+    }
+
+    private OperatorStrategy findOperator(String textOperator) {
+        return operatorResolver.findOperator(textOperator);
     }
 }
