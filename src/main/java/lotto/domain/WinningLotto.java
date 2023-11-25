@@ -5,27 +5,27 @@ import java.util.*;
 
 public class WinningLotto {
     private Lotto winningLotto;
-    private LottoNumber bonusNumber;
+    private LottoNumber bonus;
     private HashMap<WinningAmount, Integer> countByMatch  = new HashMap<>();
 
-    public WinningLotto(Lotto winningLotto) {
+    public WinningLotto(Lotto winningLotto, int bonusNumber) {
         this.winningLotto = winningLotto;
+        bonus = new LottoNumber(bonusNumber);
+        checkWinningHasBonus(winningLotto, bonus);
         for (WinningAmount winningAmount : WinningAmount.values()) {
             countByMatch.put(winningAmount, 0);
         }
     }
 
-    public WinningLotto(Lotto winningLotto, int bonusNumber) {
-        this.winningLotto = winningLotto;
-        this.bonusNumber = new LottoNumber(bonusNumber);
-        for (WinningAmount winningAmount : WinningAmount.values()) {
-            countByMatch.put(winningAmount, 0);
+    private void checkWinningHasBonus(Lotto winningLotto, LottoNumber bonus) {
+        if (winningLotto.hasBonus(bonus)) {
+            throw new IllegalArgumentException("Don`t put bonus in winning lotto");
         }
     }
 
     public void countWinning(Lotto lotto) {
         int countMatch = lotto.countWinningNumber(winningLotto.getNumbers());
-        boolean hasBonus = lotto.hasBonus(bonusNumber);
+        boolean hasBonus = lotto.hasBonus(bonus);
         WinningAmount winningAmount = WinningAmount.findWinningAmountByMatchCount(countMatch, hasBonus);
         mergeIfMoreThanThreeMatch(winningAmount);
     }
@@ -38,21 +38,9 @@ public class WinningLotto {
 
     public final LinkedHashMap<WinningAmount, Integer> sortWinningLottos() {
         LinkedHashMap<WinningAmount, Integer> sortedWinningLottos = new LinkedHashMap<>();
-        WinningAmount[] winningAmounts = checkBonusNumber(WinningAmount.values());
-
-        for (WinningAmount winningAmount : winningAmounts) {
+        for (WinningAmount winningAmount : WinningAmount.values()) {
             sortedWinningLottos.put(winningAmount, countByMatch.get(winningAmount));
         }
         return sortedWinningLottos;
-    }
-
-    private WinningAmount[] checkBonusNumber(WinningAmount[] winningAmounts) {
-        if (bonusNumber == null) {
-            List<WinningAmount> winningAmountsList = new ArrayList<>(Arrays.asList(WinningAmount.values()));
-            winningAmountsList.remove(WinningAmount.FIVE_MATCH_AND_BONUS);
-            WinningAmount[] filteredArray = winningAmountsList.toArray(new WinningAmount[0]);
-            return filteredArray;
-        }
-        return winningAmounts;
     }
 }

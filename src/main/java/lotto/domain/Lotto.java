@@ -60,7 +60,7 @@ public class Lotto {
     }
 
     public boolean hasBonus(LottoNumber bonus) {
-        return bonus != null && numbers.stream()
+        return numbers.stream()
                 .anyMatch(e -> e.getResultIfEqual(bonus) == 1);
     }
 }
