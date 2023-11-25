@@ -44,11 +44,8 @@ public class Lotto {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
-    public List<Integer> printLotto() {
-        return lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
-                .sorted()
-                .collect(Collectors.toList());
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override

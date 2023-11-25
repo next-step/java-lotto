@@ -1,7 +1,9 @@
 package step2.view;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 import step2.model.Lotto;
+import step2.model.LottoNumber;
 import step2.model.LottoResult;
 import step2.model.Lottos;
 import step2.model.Money;
@@ -11,7 +13,11 @@ public class LottoResultView {
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",
                 lottos.getLottos().size() - money.determineLottoPurchaseCount(), money.determineLottoPurchaseCount());
         for (Lotto lotto : lottos.getLottos()) {
-            System.out.println(Arrays.toString(lotto.printLotto().toArray()));
+            System.out.println(Arrays.toString(lotto.getLottoNumbers()
+                    .stream()
+                    .map(LottoNumber::getNumber)
+                    .sorted()
+                    .toArray()));
         }
     }
 
