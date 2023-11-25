@@ -1,6 +1,8 @@
 package domain;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -22,7 +24,7 @@ public class Lotto {
                 .collect(Collectors.toSet()));
     }
 
-    public Lotto (List<Integer> lottoNumbers) {
+    public Lotto(List<Integer> lottoNumbers) {
         this(lottoNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet()));

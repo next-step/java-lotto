@@ -20,10 +20,6 @@ public enum Currency {
         return returnRateOperation.applyAsLong(profitAmount, investmentAmount);
     }
 
-    public static Optional<Currency> fromCountryType(String countryType) {
-        return Arrays.stream(values()).filter(currency -> currency.countryType.equals(countryType)).findAny();
-    }
-
     public String getCurrencyType() {
         return currencyType;
     }
