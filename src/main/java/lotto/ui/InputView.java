@@ -1,10 +1,10 @@
 package lotto.ui;
 
+import lotto.common.GeneratorFactory;
 import lotto.domain.Lotto;
-import lotto.common.LottoGenerator;
 import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -21,20 +21,36 @@ public class InputView {
         return Integer.parseInt(amount);
     }
 
-    public List<Lotto> calculateLottos(Integer amount) {
-        Integer lottoCount = amount / LOTTO_PRICE;
-        System.out.println(lottoCount + "개를 구입했습니다.");
-        return generateLottos(lottoCount);
+    public Integer inputManualCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        String count = scanner.nextLine();
+        return Integer.parseInt(count);
     }
 
-    private List<Lotto> generateLottos(Integer lottoCount) {
-        List<Lotto> lottos = LottoGenerator.generateByLottoCount(lottoCount);
-        printLottos(lottos);
+    public List<Lotto> calculateManualLottos(Integer endTurn) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<String> inputLottos = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        for (int turn = 0; turn < endTurn; turn++) {
+            inputLottos.add(scanner.nextLine());
+        }
+        return GeneratorFactory.generate(inputLottos);
+    }
+
+    public List<Lotto> calculateAutoLottos(Integer amount) {
+        return generateAutoLottos(amount);
+    }
+
+    private List<Lotto> generateAutoLottos(Integer lottoCount) {
+        List<Lotto> lottos = GeneratorFactory.generate(lottoCount);
         return lottos;
     }
 
-    private void printLottos(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
+    public void printLottos(Integer manualCount, Integer autoCount, Lottos lottos) {
+        System.out.println("");
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualCount, autoCount));
+        for (Lotto lotto : lottos.getLottoList()) {
             printLottoNumber(lotto);
         }
         System.out.println("");

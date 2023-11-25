@@ -10,7 +10,11 @@ public class LottoRequest {
     private Lotto winningLotto;
     private Integer bonusNumber;
 
-    public LottoRequest(Integer inputAmount, Lottos lottos, Lotto winningLotto, Integer bonusNumber) {
+    public LottoRequest(
+            Integer inputAmount,
+            Lottos lottos,
+            Lotto winningLotto,
+            Integer bonusNumber) {
         this.inputAmount = inputAmount;
         this.lottos = lottos;
         this.winningLotto = winningLotto;
@@ -19,9 +23,7 @@ public class LottoRequest {
 
     public Integer getInputAmount() { return inputAmount; }
 
-    public Lottos getLottos() {
-        return lottos;
-    }
+    public Lottos getLottos() { return lottos; }
 
     public Lotto getWinningLotto() {
         return winningLotto;
