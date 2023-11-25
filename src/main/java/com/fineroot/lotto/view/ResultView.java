@@ -1,7 +1,7 @@
 package com.fineroot.lotto.view;
 
-import com.fineroot.lotto.dto.LottoBundleStatus;
 import com.fineroot.lotto.domain.WinningRank;
+import com.fineroot.lotto.dto.LottoBundleStatus;
 import com.fineroot.lotto.viewmodel.ResultViewModel;
 
 public class ResultView {
@@ -16,6 +16,14 @@ public class ResultView {
 
     public void drawTotalLottoCount() {
         System.out.println(Integer.toString(resultViewModel.getLottoCount()).concat("개를 구매했습니다."));
+    }
+
+    public void drawEachLotteryCount() {
+        System.out.println("수동으로 "
+                .concat(resultViewModel.manualLotteryCount())
+                .concat("장, 자동으로 ")
+                .concat(resultViewModel.autoLotteryCount())
+                .concat("개를 구매했습니다."));
     }
 
     public void drawLotteryBundleStatus() {
@@ -38,18 +46,18 @@ public class ResultView {
     }
 
     private void drawStatusRow(WinningRank value) {
-        if(value !=WinningRank.NONE){
+        if (value != WinningRank.NONE) {
             System.out.print(Integer.toString(value.getMatchCount()).concat(STATISTIC_VIEW_ROW));
             secondOnlyPrint(value);
             System.out.println(" (".concat(Integer.toString(value.getWinnerPrice())
-                            .concat("원)- ")
-                            .concat(Integer.toString(resultViewModel.matchCount(value)))
-                            .concat("개")));
+                    .concat("원)- ")
+                    .concat(Integer.toString(resultViewModel.matchCount(value)))
+                    .concat("개")));
         }
     }
 
     private void secondOnlyPrint(WinningRank value) {
-        if(value == WinningRank.SECOND_PRIZE){
+        if (value == WinningRank.SECOND_PRIZE) {
             System.out.print(", 보너스 볼 일치(");
         }
     }

@@ -38,7 +38,7 @@ public class LottoController {
         lottoStore.purchaseLottery(inputViewModel.getLottoPayment());
         resultViewModel.saveLottoCount(inputViewModel.getLottoPayment().toLotteryCount());
         resultViewModel.saveLotteryBundleStatus(lottoStore.lottoBundleStatus());
-        resultView.drawTotalLottoCount();
+        resultView.drawEachLotteryCount();
         resultView.drawLotteryBundleStatus();
     }
 

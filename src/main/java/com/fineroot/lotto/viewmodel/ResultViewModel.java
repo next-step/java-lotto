@@ -1,5 +1,6 @@
 package com.fineroot.lotto.viewmodel;
 
+import com.fineroot.lotto.dto.LotteryCountSet;
 import com.fineroot.lotto.dto.LottoBundleStatus;
 import com.fineroot.lotto.domain.LottoPayment;
 import com.fineroot.lotto.domain.WinnerStatus;
@@ -10,8 +11,8 @@ import java.util.List;
 public class ResultViewModel {
 
     private int lottoCount;
+    private LotteryCountSet lotteryCountSet;
     private LottoBundleStatus lotteryBundleStatus;
-
     private WinnerStatus winnerStatus;
 
     public ResultViewModel() {
@@ -22,6 +23,10 @@ public class ResultViewModel {
 
     public void saveLottoCount(final int lottoCount) {
         this.lottoCount = lottoCount;
+    }
+
+    public void saveLotteryCountSet(final LotteryCountSet lotteryCountSet){
+        this.lotteryCountSet=lotteryCountSet;
     }
 
     public void saveLotteryBundleStatus(final LottoBundleStatus lotteryBundleStatus) {
@@ -47,5 +52,13 @@ public class ResultViewModel {
     public double getTotalEarningRate() {
         return Math.floor(
                 winnerStatus.totalEarningRate(LottoPayment.from(lottoCount * LottoUtils.LOTTO_EACH_PRICE)) * 100) /100;
+    }
+
+    public String autoLotteryCount(){
+        return lotteryCountSet.getAutoLotteryCount().toString();
+    }
+
+    public String manualLotteryCount(){
+        return lotteryCountSet.getManualLotteryCount().toString();
     }
 }

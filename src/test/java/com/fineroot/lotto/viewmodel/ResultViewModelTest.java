@@ -2,6 +2,8 @@ package com.fineroot.lotto.viewmodel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.fineroot.lotto.dto.LotteryCount;
+import com.fineroot.lotto.dto.LotteryCountSet;
 import com.fineroot.lotto.dto.LottoBundleStatus;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +17,15 @@ class ResultViewModelTest {
         ResultViewModel resultViewModel = new ResultViewModel();
         resultViewModel.saveLottoCount(10);
         assertThat(resultViewModel.getLottoCount()).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("LottoCountSet 저장 및 확인")
+    void saveLotteryCountSet() {
+        ResultViewModel resultViewModel = new ResultViewModel();
+        resultViewModel.saveLotteryCountSet(LotteryCountSet.of(14,4));
+        assertThat(resultViewModel.autoLotteryCount()).isEqualTo(LotteryCount.from(10).toString());
+        assertThat(resultViewModel.manualLotteryCount()).isEqualTo(LotteryCount.from(4).toString());
     }
 
     @Test
