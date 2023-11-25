@@ -27,7 +27,6 @@ public class GeneralValidator {
             throw new IllegalArgumentException(String.format("%s은(는) 0보다 큰 수여야 합니다..", target));
         }
     }
-
     private static boolean containsDuplicateSubstring(String substring, String value) {
         String doubleSubstring = substring.repeat(2);
         return value.contains(doubleSubstring);

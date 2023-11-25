@@ -53,6 +53,7 @@ public class InputTest {
         // when & then
         assertThatIllegalArgumentException().isThrownBy(inputView::inputBonusBall);
     }
+  
     @DisplayName("정상적이지 않은 수동 로또 개수 입력에 대해서 예외를 발생한다.")
     @ParameterizedTest
     @ValueSource(strings = {"", " ", "2two", "2147483648", "-2147483649"})

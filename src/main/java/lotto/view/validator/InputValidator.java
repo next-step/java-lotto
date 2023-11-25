@@ -31,7 +31,7 @@ public class InputValidator {
         StringValidator.validateNumeric(manualLottoCount, target);
         StringValidator.validateIntegerRange(manualLottoCount, target);
     }
-
+  
     public void validateLotto(String lotto, String target) {
         StringValidator.validateBlank(lotto, target);
         GeneralValidator.validateDuplicateSubstring(LOTTO_NUMBER_SEPARATOR, lotto, target);

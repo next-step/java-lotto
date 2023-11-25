@@ -17,7 +17,6 @@ public class OutputFomatter {
         List<String> lottoNumbers = rawLottoNumbers.stream()
                 .map(lottoNumber -> Integer.toString(lottoNumber.getLottoNumber()))
                 .collect(Collectors.toList());
-
         return String.join(", ", lottoNumbers);
     }
 
