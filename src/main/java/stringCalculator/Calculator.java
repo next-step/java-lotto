@@ -1,7 +1,4 @@
-package StringCalculator;
-
-import java.util.ArrayList;
-import java.util.List;
+package stringCalculator;
 
 public class Calculator {
 
