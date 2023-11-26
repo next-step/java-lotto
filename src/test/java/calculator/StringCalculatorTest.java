@@ -22,6 +22,11 @@ public class StringCalculatorTest {
         assertThat(minus("3 - 1")).isEqualTo(2);
     }
 
+    @Test
+    void 곱셈() {
+        assertThat(multiply("3 * 2")).isEqualTo(6);
+    }
+
 
 
 
