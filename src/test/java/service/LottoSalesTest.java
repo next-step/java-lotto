@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LottoSalesTest {
@@ -21,8 +22,14 @@ public class LottoSalesTest {
     }
 
     @Test
-    @DisplayName("사용자가 총 구매 가능 로또 수를 초과 입력하는 경우 Exception throw")
+    @DisplayName("사용자가 총 구매 가능 로또 수보다 수동 로또 수를 적게 입력하면 통과")
     void checkTicketCountTest() {
+        assertDoesNotThrow(() -> LottoSalesService.checkAvailableTicketCount(10, 3));
+    }
 
+    @Test
+    @DisplayName("사용자가 총 구매 가능 로또 수를 초과 입력하는 경우 Exception throw")
+    void checkTicketCountExceptionTest() {
+        assertThrows(IllegalArgumentException.class, () -> LottoSalesService.checkAvailableTicketCount(10, 11));
     }
 }
