@@ -13,7 +13,7 @@ public class Operater {
     }
 
     public static Operater defaultOf(String numberAndOperation) {
-        canMake(numberAndOperation);
+        validate(numberAndOperation);
 
         String[] numberOrOperations = numberAndOperation.split(" ");
         Deque<Integer> numbers = new LinkedList<>();
@@ -27,13 +27,20 @@ public class Operater {
         return new Operater(numbers,operations);
     }
 
-    private static void canMake(String numberAndOperation) {
-        if (numberAndOperation == null) {
-            throw new IllegalArgumentException("빈 문자열이 들어올 수 없습니다.");
-        }
+    private static void validate(String numberAndOperation) {
+        validateEmptyOrNull(numberAndOperation);
+        validateMinimumSize(numberAndOperation);
+    }
 
+    private static void validateMinimumSize(String numberAndOperation) {
         if (numberAndOperation.trim().length() < 5) {
             throw new IllegalArgumentException("최소 두개의 숫자 하나의 연산자로 이루어져있어야 합니다.");
+        }
+    }
+
+    private static void validateEmptyOrNull(String numberAndOperation) {
+        if (numberAndOperation == null || numberAndOperation.trim().isBlank()) {
+            throw new IllegalArgumentException("빈 문자열이 들어올 수 없습니다.");
         }
     }
 
