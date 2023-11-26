@@ -3,6 +3,7 @@ import domain.WinningLotto;
 import repository.LottoGameResultRepository;
 import service.LottoResultService;
 import repository.UserLottoRepository;
+import service.LottoSalesService;
 import service.UserLottoService;
 import domain.Currency;
 import view.InputView;
@@ -19,7 +20,19 @@ public class LottoApplication {
         LottoResultService lottoResultService = appConfig.lottoResultService();
 
         long money = InputView.inputLottoPurchaseAmount();
-        userLottoService.buyRandomLottoTickets(money);
+        int totalTicketCount = LottoSalesService.validateMoneyAndReturnTicketCount(money);
+
+        int manualTicketCount = InputView.inputManualLottoCount();
+        if (manualTicketCount > totalTicketCount) {
+            throw new IllegalArgumentException("전체 구매 가능한 매수를 초과했습니다. 전체 구매 가능 로또 수 : " + totalTicketCount);
+        }
+
+        for (int i = 0; i < manualTicketCount; i++) {
+            List<Integer> numbers = InputView.inputSelectedNumber();
+            userLottoService.buyManualLottoTickets(numbers);
+        }
+
+        userLottoService.buyRandomLottoTickets(totalTicketCount-manualTicketCount);
         List<Lotto> lottoTickets = userLottoService.getAllLottoTickets();
         ResultView.printLottoCount(lottoTickets.size());
         ResultView.printLottoNumbers(lottoTickets);
