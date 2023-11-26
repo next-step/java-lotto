@@ -43,4 +43,10 @@ public class StringCalculatorTest {
                 .hasMessage("입력값이 빈문자열 또는 공백입니다.");
     }
 
+
+    @Test
+    void 계산() {
+        assertThat(calculate("2 + 3 * 4 / 2")).isEqualTo(10);
+    }
+
 }
