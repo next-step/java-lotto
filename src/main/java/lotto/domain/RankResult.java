@@ -37,11 +37,4 @@ public class RankResult {
     public int hashCode() {
         return Objects.hash(rankStatistics);
     }
-
-    @Override
-    public String toString() {
-        return "RankResult{" +
-                "rankStatistics=" + rankStatistics +
-                '}';
-    }
 }

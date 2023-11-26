@@ -1,7 +1,7 @@
 package lotto.dto;
 
+import java.util.Map.Entry;
 import lotto.domain.Rank;
-import lotto.domain.RankResult;
 
 public class RankResultDto {
 
@@ -15,11 +15,11 @@ public class RankResultDto {
         this.rankCount = rankCount;
     }
 
-    public static RankResultDto valueOf(RankResult rankResult) {
-        Rank rank = rankResult.getRank();
+    public static RankResultDto valueOf(Entry<Rank, Long> rankResult) {
+        Rank rank = rankResult.getKey();
         int countOfMatch = rank.getCountOfMatch();
         long prizeMoney = rank.getPrizeMoney();
-        long rankCount = rankResult.getRankCnt();
+        long rankCount = rankResult.getValue();
         return new RankResultDto(countOfMatch, prizeMoney, rankCount);
     }
 
