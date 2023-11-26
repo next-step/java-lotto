@@ -46,11 +46,6 @@ public class PurchaseAmount implements Comparable<PurchaseAmount> {
                 return value / LOTTO_TICKET_PRICE;
         }
 
-        @Override
-        public int compareTo(PurchaseAmount o) {
-                return (int) (this.value - o.value);
-        }
-
         private static void validatePurchaseAmount(long purchaseAmount) {
                 if (purchaseAmount < LOTTO_TICKET_PRICE) {
                         throw new IllegalArgumentException("1000원 이상 입력하셔야합니다. (로또 장당 1000원)");
@@ -69,5 +64,10 @@ public class PurchaseAmount implements Comparable<PurchaseAmount> {
 
         private long subtract(PurchaseAmount o) {
                 return this.value - o.value;
+        }
+
+        @Override
+        public int compareTo(PurchaseAmount o) {
+                return (int) (this.value - o.value);
         }
 }
