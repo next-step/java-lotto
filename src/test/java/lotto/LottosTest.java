@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
-    @DisplayName("모든 로또들의 랜덤값이 1이상 45이하이다.")
+    @DisplayName("모든 로또들의 숫자 체크")
     @Test
     void numberOfLotto() {
         Lottos lottos = new Lottos(10);

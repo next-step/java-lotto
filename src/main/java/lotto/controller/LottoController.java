@@ -6,6 +6,8 @@ import lotto.model.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoController {
     public static void main(String[] args) {
         String money = InputView.money();
@@ -15,7 +17,10 @@ public class LottoController {
         Lottos lottos = new Lottos(lottoSeller.getNumberOfLotto());
         ResultView.printLottoList(lottos);
 
-        String winningLottoNumber = InputView.winningLottoNumber();
+
+        List<Integer> winningLottoNumber = InputView.winningLottoNumber();
+        Integer bonusNumber = InputView.bonusNumber();
+        winningLottoNumber.add(bonusNumber);
         WinningNumbers winningNumbers = new WinningNumbers(winningLottoNumber);
         ResultView.winnerOfLottery(winningNumbers, lottos, lottoSeller);
     }

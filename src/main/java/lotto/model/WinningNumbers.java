@@ -1,79 +1,57 @@
 package lotto.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Predicate;
 
 public class WinningNumbers {
-    private static int LOTTO_COST = 1000;
-    private static int MINIMUM_RANK=3;
-    private static int MAXIMUM_RANK=6;
-    List<Integer> winningLottoNumbers;
-    List<Integer> sameNumberCount = new ArrayList<>();
-    List<Integer> rankList = new ArrayList<>();
-    Map<Integer,Integer> winnerMoney = new HashMap<>();
-    public WinningNumbers(String input) {
-        this.winningLottoNumbers = convertList(splitLottoNumbers(input));
-        setWinnerMoney();
-    }
+    private static final int LOTTO_COST = 1000;
+    List<LottoNumber> winningLottoNumbers;
+    LottoNumber bonusNumber;
+    List<Rank> rankList = new ArrayList<>();
 
-    private void setWinnerMoney() {
-        winnerMoney.put(3, 5_000);
-        winnerMoney.put(4, 50_000);
-        winnerMoney.put(5, 1_500_000);
-        winnerMoney.put(6, 2_000_000_000);
-    }
-
-    private String[] splitLottoNumbers(String input) {
-        return input.split(",");
-    }
-
-    private List<Integer> convertList(String[] winningNumbers) {
-        List<Integer> numbers = new ArrayList<>();
-        for (String winningNumber : winningNumbers) {
-            numbers.add(Integer.parseInt(winningNumber));
+    public WinningNumbers(List<Integer> winningLottoNumbers) {
+        this.winningLottoNumbers = new ArrayList<>();
+        for (Integer winningNumber : winningLottoNumbers.subList(0,6)) {
+            this.winningLottoNumbers.add(new LottoNumber(winningNumber));
         }
-        return numbers;
+        this.bonusNumber = new LottoNumber(winningLottoNumbers.get(6));
     }
 
     public void winLotto(List<Lotto> lottoList) {
-        for (Lotto lotto:lottoList) {
+        for (Lotto lotto : lottoList) {
             sameNumberCount(lotto.getLottoNumber());
         }
-        rankList();
     }
 
     private void sameNumberCount(List<Integer> lotto) {
         int count = (int) lotto
                 .stream()
-                .filter(o -> winningLottoNumbers.stream().anyMatch(Predicate.isEqual(o)))
+                .filter(o -> winningLottoNumbers.stream().map(LottoNumber::getLottoNumber).anyMatch(Predicate.isEqual(o)))
                 .count();
-
-        sameNumberCount.add(count);
+        rankList.add(Rank.valueOf(count, containsBonus(count,lotto)));
     }
 
-    private void rankList() {
-        for (int i=0; i <= 6; i++) {
-            rankList.add(Collections.frequency(sameNumberCount, i));
+    private boolean containsBonus(Integer count, List<Integer> lotto) {
+        if (count == 5){
+            return lotto.contains(bonusNumber.getLottoNumber());
         }
+        return false;
     }
 
-    public Integer getWinnerNumber(int rank) {
-        return rankList.get(rank);
-    }
-
-    public Integer getWinnerPrice(int rank) {
-        return winnerMoney.get(rank);
+    public Integer getWinnerNumber(Rank rank) {
+        return Collections.frequency(rankList, rank);
     }
 
     public String getRate(Integer money) {
         double margin;
         int profit = 0;
         int primeCost = money * LOTTO_COST;
-        for (int i=MINIMUM_RANK; i<=MAXIMUM_RANK; i++) {
-            profit += winnerMoney.get(i) * rankList.get(i);
+        for (Rank rank : rankList) {
+            profit += rank.getWinningMoney();
         }
-        margin = (double) profit/primeCost;
-
+        margin = (double) profit / primeCost;
         return String.format("%.2f", margin);
     }
 }
