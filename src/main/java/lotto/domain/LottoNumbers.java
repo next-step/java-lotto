@@ -20,11 +20,16 @@ public class LottoNumbers {
     // 수동 생성
     public LottoNumbers(List<Integer> numbers) {
         this.validateCount(numbers);
-        this.numbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toCollection(TreeSet::new));
+        this.numbers = numbers
+                .stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
     public boolean isNumberMatched(LottoNumber lottoNumber) {
-        return this.numbers.stream().anyMatch(target -> target.compareTo(lottoNumber) == 0);
+        return this.numbers
+                .stream()
+                .anyMatch(target -> target.compareTo(lottoNumber) == 0);
     }
 
     Set<LottoNumber> numbers() {

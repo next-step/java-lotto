@@ -13,7 +13,11 @@ public class WinningNumbers extends LottoNumbers {
     // 수동 생성(당첨번호)
     public WinningNumbers(List<Integer> numbers, int bonusNumber) {
         this.validateCount(numbers);
-        this.numbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toCollection(TreeSet::new));
+        this.numbers = numbers
+                .stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(TreeSet::new));
+
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
@@ -22,7 +26,10 @@ public class WinningNumbers extends LottoNumbers {
     }
 
     private long matchNumbers(LottoNumbers targetLottoNumbers) {
-        return this.numbers.stream().filter(targetLottoNumbers::isNumberMatched).count();
+        return this.numbers
+                .stream()
+                .filter(targetLottoNumbers::isNumberMatched)
+                .count();
     }
 
     private boolean containBonusNumber(LottoNumbers targetLottoNumbers) {
