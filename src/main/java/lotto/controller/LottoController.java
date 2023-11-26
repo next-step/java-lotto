@@ -20,13 +20,13 @@ public class LottoController {
         final int quantity = purchaseAmount.calculateLottoQuantity();
 
         final int manualQuantity = InputView.inputManualQuantity();
-        List<Lotto> manualLottos = LottoMachine.issueManualLottos(InputView.inputManualNumbers(manualQuantity));
+        Lottos manualLottos = LottoMachine.issueManualLottos(InputView.inputManualNumbers(manualQuantity));
 
         final int autoQuantity = quantity - manualQuantity;
-        List<Lotto> autoLottos = LottoMachine.issueAutoLottos(autoQuantity);
+        Lottos autoLottos = LottoMachine.issueAutoLottos(autoQuantity);
 
         OutputView.outputQuantity(manualQuantity, autoQuantity);
-        List<Lotto> lottos = LottoMachine.addAllLottos(manualLottos, autoLottos);
+        Lottos lottos = new Lottos(manualLottos, autoLottos);
         OutputView.outputLottos(lottos);
 
         List<Integer> winningNumbers = InputView.inputWinningNumbers(DELIMITER);

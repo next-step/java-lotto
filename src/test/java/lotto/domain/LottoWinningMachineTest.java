@@ -19,13 +19,13 @@ class LottoWinningMachineTest {
     void winning_result() {
         LottoWinningMachine winningMachine = new LottoWinningMachine(30, 1, 2, 3, 4, 5, 6);
 
-        List<Lotto> lottos = List.of(
+        Lottos lottos = new Lottos(List.of(
                 new Lotto(1, 2, 3, 4, 5, 6),
                 new Lotto(1, 2, 3, 4, 5, 30),
                 new Lotto(1, 2, 3, 4, 5, 23),
                 new Lotto(1, 2, 3, 4, 21, 23),
                 new Lotto(1, 2, 3, 20, 21, 23)
-        );
+        ));
 
         Map<Rank, Integer> result = winningMachine.getRankCounts(lottos);
 

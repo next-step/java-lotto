@@ -1,9 +1,9 @@
 package lotto.ui;
 
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
-import java.util.List;
 import java.util.Map;
 
 public class OutputView {
@@ -12,8 +12,8 @@ public class OutputView {
         System.out.println("수동으로 " + manualQuantity + "장, 자동으로 " + autoQuantity + "장을 구매했습니다.");
     }
 
-    public static void outputLottos(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
+    public static void outputLottos(Lottos lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.toString());
         }
     }
