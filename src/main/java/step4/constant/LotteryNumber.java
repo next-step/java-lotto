@@ -3,8 +3,6 @@ package step4.constant;
 import java.util.ArrayList;
 import java.util.List;
 
-import step4.util.LotteryUtil;
-
 public class LotteryNumber {
 
     private static final List<LotteryNumber> ALL_NUMBERS;
@@ -16,16 +14,18 @@ public class LotteryNumber {
     }
 
     public LotteryNumber(int value) {
-        LotteryUtil.validateNumber(value);
+        validateNumber(value);
+
         this.value = value;
     }
 
     public static List<LotteryNumber> of(List<Integer> numbers) {
+        List<LotteryNumber> lotteryNumbers = new ArrayList<>();
         for (int number : numbers) {
-            ALL_NUMBERS.add(new LotteryNumber(number));
+            lotteryNumbers.add(new LotteryNumber(number));
         }
 
-        return ALL_NUMBERS;
+        return lotteryNumbers;
     }
 
     public static List<Integer> getNumbers(List<LotteryNumber> numbers) {
@@ -39,5 +39,30 @@ public class LotteryNumber {
 
     public int getValue() {
         return value;
+    }
+
+    private static void validateNumber(int number) {
+        if (46 < number) {
+            throw new IllegalArgumentException("잘 못 생성된 로또 번호 - " + number);
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof LotteryNumber)) {
+            return false;
+        }
+        LotteryNumber that = (LotteryNumber) o;
+
+        return getValue() == that.getValue();
+    }
+
+    @Override
+    public int hashCode() {
+        return getValue();
     }
 }

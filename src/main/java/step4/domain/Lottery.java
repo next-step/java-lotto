@@ -3,9 +3,10 @@ package step4.domain;
 import java.util.List;
 
 import step4.constant.LotteryNumber;
-import step4.util.LotteryUtil;
 
 public class Lottery {
+
+    public static final int WINNING_STREAK = 6;
 
     private final List<LotteryNumber> lotteryNumbers;
 
@@ -14,12 +15,14 @@ public class Lottery {
     }
 
     public static Lottery of(List<Integer> numbers) {
+        validateNumbers(numbers);
+
         return new Lottery(LotteryNumber.of(numbers));
     }
 
     public List<Integer> getLotteryNumbers() {
         List<Integer> numbers = LotteryNumber.getNumbers(lotteryNumbers);
-        LotteryUtil.validateNumbers(numbers);
+        validateNumbers(numbers);
 
         return numbers;
     }
@@ -33,5 +36,11 @@ public class Lottery {
         }
 
         return winCount;
+    }
+
+    private static void validateNumbers(List<Integer> numbers) {
+        if (WINNING_STREAK != numbers.size()) {
+            throw new IllegalArgumentException("잘 못 생성된 로또 - " + numbers.size());
+        }
     }
 }
