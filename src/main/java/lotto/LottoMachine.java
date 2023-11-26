@@ -7,7 +7,7 @@ public class LottoMachine {
     private LottoMachine() {
     }
 
-    public static Lotto makeOne() {
+    public static Lotto one() {
         return Lotto.defaultOf();
     }
 
@@ -19,11 +19,7 @@ public class LottoMachine {
         return Lottos.of(lottos);
     }
 
-    public static Lotto resultIs() {
-        return Lotto.defaultOf();
-    }
-
     public static LottoResult match(Lotto result, Lottos lottos) {
-        return lottos.countMatching(result);
+        return lottos.result(result);
     }
 }

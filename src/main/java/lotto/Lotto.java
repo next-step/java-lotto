@@ -16,14 +16,19 @@ public class Lotto {
   public static Lotto defaultOf() {
     List<LottoNumber> lottoNumbers = new ArrayList<>();
     for (int i = 0; i < LOTTOSIZE; i++) {
-      LottoNumber lottoNumber = LottoNumber.defaultOf();
-      if (lottoNumbers.contains(lottoNumber)) {
-        i--;
-        continue;
-      }
-      lottoNumbers.add(lottoNumber);
+      i = judgeSameNumbers(lottoNumbers, i);
     }
     return new Lotto(lottoNumbers);
+  }
+
+  private static int judgeSameNumbers(List<LottoNumber> lottoNumbers, int i) {
+    LottoNumber lottoNumber = LottoNumber.defaultOf();
+    if (lottoNumbers.contains(lottoNumber)) {
+      i--;
+      return i;
+    }
+    lottoNumbers.add(lottoNumber);
+    return i;
   }
 
   public static Lotto defaultOf(List<LottoNumber> lottoNumbers) {
@@ -37,9 +42,14 @@ public class Lotto {
   public int howManySameNumber(Lotto lotto) {
     int sameNumberCount = 0;
     for (LottoNumber lottoNumber : this.lottoNumbers) {
-      if (lotto.hasNumber(lottoNumber)) {
-        sameNumberCount++;
-      }
+      sameNumberCount = judgeSameNumber(lotto, lottoNumber, sameNumberCount);
+    }
+    return sameNumberCount;
+  }
+
+  private int judgeSameNumber(Lotto lotto, LottoNumber lottoNumber, int sameNumberCount) {
+    if (lotto.hasNumber(lottoNumber)) {
+      sameNumberCount++;
     }
     return sameNumberCount;
   }
@@ -49,10 +59,18 @@ public class Lotto {
         .anyMatch(comparingLottoNumber::equals);
   }
 
-  @Override
-  public String toString() {
-    return "lotto.Lotto{" +
-        "lottoNumbers=" + lottoNumbers +
-        '}';
+
+  public String toStringStatus() {
+    StringBuilder stringBuilder = new StringBuilder();
+
+    stringBuilder.append("[");
+    for (LottoNumber lottoNumber : this.lottoNumbers) {
+      stringBuilder.append(lottoNumber.toString()).append(", ");
+    }
+    String status = stringBuilder.toString();
+    int i = status.lastIndexOf(",");
+    String lastStatus = status.substring(0, i);
+
+    return lastStatus + "]";
   }
 }

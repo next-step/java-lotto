@@ -55,10 +55,10 @@ public class LottoResultTest {
     LottoResult lottoResult = LottoMachine.match(resultLotto, lottos);
 
     // when
-    boolean result = lottoResult.findTreeMatchResult(LottoResultType.TREE).sameSize(2);
+    int result = lottoResult.findMatchResultCount(LottoResultType.THREE);
 
     // then
-    assertThat(result).isTrue();
+    assertThat(result).isEqualTo(2);
   }
 
   @Test

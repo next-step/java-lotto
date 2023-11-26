@@ -24,7 +24,7 @@ public class LottoTest {
   @DisplayName("로또 한장 발급 기능")
   public void lotto_print_only_one() {
     // given
-    Lotto lotto = LottoMachine.makeOne();
+    Lotto lotto = LottoMachine.one();
     // then
     assertThat(lotto.size()).isEqualTo(6);
   }
@@ -44,9 +44,9 @@ public class LottoTest {
   @DisplayName("금액대로 로또 사기")
   public void make_lotto_with_price() {
     int amount = 14000;
-    LottoStore lottoStore = new LottoStore(amount);
+    LottoStore lottoStore = new LottoStore();
 
-    Lottos lottos = lottoStore.sell();
+    Lottos lottos = lottoStore.sell(amount);
 
     assertThat(lottos.sameSize(14)).isTrue();
   }

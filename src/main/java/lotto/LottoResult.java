@@ -14,20 +14,19 @@ public class LottoResult {
     return new LottoResult(result);
   }
 
-  public Lottos findTreeMatchResult(LottoResultType resultType) {
-    return result.get(resultType);
+  public int findMatchResultCount(LottoResultType resultType) {
+    return result.get(resultType).size();
   }
 
   public double calculateProfitRate(int amount) {
-    Lottos lottosThree = result.get(LottoResultType.TREE);
-    double three = lottosThree.calculatePrice(LottoResultType.TREE);
-    Lottos lottosFour = result.get(LottoResultType.FOUR);
-    double four = lottosFour.calculatePrice(LottoResultType.FOUR);
-    Lottos lottosFive = result.get(LottoResultType.FIVE);
-    double five = lottosFive.calculatePrice(LottoResultType.FIVE);
-    Lottos lottosAll = result.get(LottoResultType.ALL);
-    double all = lottosAll.calculatePrice(LottoResultType.ALL);
-    double total = three + four + five + all;
+    double total = 0 ;
+    for (LottoResultType lottoResultType : LottoResultType.values()) {
+      total += this.calculatePrice(lottoResultType);
+    }
     return total / amount;
+  }
+  private double calculatePrice(LottoResultType lottoResultType) {
+    return result.get(lottoResultType)
+                 .calculatePrice(lottoResultType);
   }
 }
