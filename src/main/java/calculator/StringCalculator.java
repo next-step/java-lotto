@@ -7,4 +7,10 @@ public class StringCalculator {
         return split;
     }
 
+    public static int plus(String text) {
+        String[] split = getSplit(text);
+        int result = Integer.parseInt(split[0]) + Integer.parseInt(split[2]);
+        return result;
+    }
+
 }
