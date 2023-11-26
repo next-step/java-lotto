@@ -22,7 +22,7 @@ class LottoTest {
     @Test
     void test_등수별카운드() {
         Lotto lotto = new Lotto(List.of(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), new LottoNumbers(List.of(1, 2, 3, 4, 5, 7))));
-        WinningNumbers winningLottoNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
+        WinningNumbers winningLottoNumbers = new WinningNumbers(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
 
         EnumMap<Rank, Integer> countPerPrize = new EnumMap<>(Rank.class);
         countPerPrize.put(Rank.FIRST_PLACE, 1);
@@ -37,7 +37,7 @@ class LottoTest {
     @Test
     void test_당첨금계산() {
         Lotto lotto = new Lotto(List.of(new LottoNumbers(stringToIntegerList("1, 2, 3, 4, 5, 6")), new LottoNumbers(stringToIntegerList("1, 2, 3, 4, 5, 7"))));
-        WinningNumbers winningLottoNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
+        WinningNumbers winningLottoNumbers = new WinningNumbers(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
 
         assertThat(lotto.calcWinningAmount(winningLottoNumbers)).isEqualTo(Rank.FIRST_PLACE.getPrizeAmount() + Rank.SECOND_PLACE.getPrizeAmount());
     }
@@ -45,7 +45,7 @@ class LottoTest {
     @Test
     void test_수익률계산() {
         Lotto lotto = new Lotto(List.of(new LottoNumbers(stringToIntegerList("1, 2, 3, 4, 5, 6")), new LottoNumbers(stringToIntegerList("1, 2, 3, 4, 5, 7"))));
-        WinningNumbers winningLottoNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
+        WinningNumbers winningLottoNumbers = new WinningNumbers(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
 
         double rateOfReturn = (double) (Rank.FIRST_PLACE.getPrizeAmount() + Rank.SECOND_PLACE.getPrizeAmount()) / (PRICE * 2);
         assertThat(lotto.calcRateOfReturn(winningLottoNumbers)).isEqualTo(rateOfReturn);

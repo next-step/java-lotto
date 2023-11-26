@@ -1,6 +1,9 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -24,6 +27,13 @@ public class LottoNumbers {
                 .stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toCollection(TreeSet::new));
+    }
+
+    public long matchedNumberCount(LottoNumbers targetLottoNumbers) {
+        return this.numbers
+                .stream()
+                .filter(targetLottoNumbers::isNumberMatched)
+                .count();
     }
 
     public boolean isNumberMatched(LottoNumber lottoNumber) {
