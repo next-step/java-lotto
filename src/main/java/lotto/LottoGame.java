@@ -10,8 +10,6 @@ public class LottoGame {
 
     public static final int LOTTO_PRICE = 1000;
     private List<Lotto> lottos;
-    private Lotto winningLotto;
-    private LottoNumber bonusBall;
     private WinningLottoNumbers winningLottoNumbers;
     private List<Integer> lottoNumbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
     private LottoStatics lottoStatics = new LottoStatics();
@@ -44,20 +42,8 @@ public class LottoGame {
         return lottos.size();
     }
 
-    public void registerWinningLotto(List<Integer> numbers) {
-        this.winningLotto = new Lotto(numbers);
-    }
-
     public WinningLottoNumbers registerWinningLottoNumbers(List<Integer> lotto, Integer bonus) {
         return new WinningLottoNumbers(lotto, bonus);
-    }
-
-    public void registerBonusBall(Integer number) {
-        this.bonusBall = new LottoNumber(number);
-    }
-
-    public Lotto winningLotto() {
-        return winningLotto;
     }
 
     public List<Lotto> lottos() {
@@ -66,10 +52,6 @@ public class LottoGame {
 
     public WinningLottos classifyRankLotto() {
         return lottoStatics.classifyRankLotto(lottos, winningLottoNumbers);
-    }
-
-    public LottoNumber bonusBall() {
-        return bonusBall;
     }
 
 }

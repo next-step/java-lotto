@@ -14,8 +14,8 @@ public class Application {
         lottoGame.buyLotto(price);
         resultView.printLottoCount(lottoGame.countLotto());
         resultView.printLottos(lottoGame.lottos());
-        lottoGame.registerWinningLotto(inputView.inputListCommand("지난 주 당첨 번호를 입력해 주세요."));
-        lottoGame.registerBonusBall(inputView.inputIntegerCommand("보너스 볼을 입력해 주세요."));
+        lottoGame.registerWinningLottoNumbers(inputView.inputListCommand("지난 주 당첨 번호를 입력해 주세요."),
+                inputView.inputIntegerCommand("보너스 볼을 입력해 주세요."));
         resultView.printWinningStatics(lottoGame.classifyRankLotto(), price);
     }
 
