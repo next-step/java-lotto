@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.enums.Rank;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -25,18 +26,10 @@ class WinningNumbersTest {
     }
 
     @Test
-    void test_번호일치여부() {
-        WinningNumbers lottoNumbers = new WinningNumbers(stringToIntegerList("1, 2, 3, 4, 5, 6"), 7);
+    void test_랭크구하기() {
+        WinningNumbers winningNumbers = new WinningNumbers(stringToIntegerList("1, 2, 3, 4, 5, 6"), 45);
         LottoNumbers target = new LottoNumbers(stringToIntegerList("6, 5, 4, 3, 45, 1"));
 
-        assertThat(lottoNumbers.matchNumbers(target)).isEqualTo(5);
-    }
-
-    @Test
-    void test_보너스넘버포함여부() {
-        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 7));
-        WinningNumbers winningNumber = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
-
-        assertThat(winningNumber.containBonusNumber(lottoNumbers)).isTrue();
+        assertThat(winningNumbers.findRank(target).get()).isEqualTo(Rank.SECOND_PLACE);
     }
 }

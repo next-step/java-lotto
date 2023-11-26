@@ -27,7 +27,7 @@ public class Lotto {
         initEnumMap(countPerPrize);
 
         for (LottoNumbers numbers : lottoNumbers) {
-            Rank.valueOf(winningLottoNumbers.matchNumbers(numbers), winningLottoNumbers.containBonusNumber(numbers)).ifPresent(rank -> countPerPrize.put(rank, countPerPrize.get(rank) + 1));
+            winningLottoNumbers.findRank(numbers).ifPresent(rank -> countPerPrize.put(rank, countPerPrize.get(rank) + 1));
         }
 
         return countPerPrize;

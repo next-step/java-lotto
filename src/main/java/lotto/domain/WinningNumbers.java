@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import lotto.enums.Rank;
+
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class WinningNumbers extends LottoNumbers {
@@ -13,11 +16,15 @@ public class WinningNumbers extends LottoNumbers {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public long matchNumbers(LottoNumbers targetLottoNumbers) {
+    public Optional<Rank> findRank(LottoNumbers numbers) {
+        return Rank.valueOf(this.matchNumbers(numbers), this.containBonusNumber(numbers));
+    }
+
+    private long matchNumbers(LottoNumbers targetLottoNumbers) {
         return this.numbers.stream().filter(targetLottoNumbers::isNumberMatched).count();
     }
 
-    public boolean containBonusNumber(LottoNumbers targetLottoNumbers) {
+    private boolean containBonusNumber(LottoNumbers targetLottoNumbers) {
         return targetLottoNumbers.isNumberMatched(this.bonusNumber);
     }
 
