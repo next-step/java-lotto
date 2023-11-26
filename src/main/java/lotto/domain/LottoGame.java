@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoGame {
@@ -24,11 +21,19 @@ public class LottoGame {
             List<Integer> inputInList = Arrays.stream(manualLottoTickets.get(i))
                     .map(Integer::valueOf)
                     .collect(Collectors.toList());
-            if (inputInList.size() != 6) {
-                throw new IllegalArgumentException("로또 갯가 6개가 아닙니다. ");
-            }
+            validateTicketNumbers(inputInList);
             LottoTicket manualTicket = new LottoTicket(inputInList);
             this.tickets.add(manualTicket);
+        }
+    }
+
+    private static void validateTicketNumbers(List<Integer> inputInList) {
+        if (inputInList.size() != 6) {
+            throw new IllegalArgumentException("로또 갯수가 6개가 아닙니다. ");
+        }
+        Set<Integer> set = new HashSet<>(inputInList);
+        if (set.size() != inputInList.size()) {
+            throw new IllegalArgumentException("로또 입력시 중복 숫자 불가합니다. ");
         }
     }
 
