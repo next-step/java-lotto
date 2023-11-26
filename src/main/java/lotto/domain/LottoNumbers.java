@@ -25,12 +25,8 @@ public class LottoNumbers {
                 return values;
         }
 
-        public boolean hasWinningNumber(LottoNumber winningNumber) {
-                return values.contains(winningNumber);
-        }
-
-        public boolean hasBonusNumber(LottoNumber bonusNumber) {
-                return values.contains(bonusNumber);
+        public boolean hasMatchingNumber(LottoNumber number) {
+                return values.contains(number);
         }
 
         private void validateCountOfLottoNumbers(Set<LottoNumber> values) {

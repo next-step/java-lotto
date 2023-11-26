@@ -63,7 +63,7 @@ public class PurchaseAmount implements Comparable<PurchaseAmount> {
         }
 
         private static boolean isNotAvailableToBuyAuto(long purchaseAmountOfAuto) {
-                return purchaseAmountOfAuto < 1000;
+                return purchaseAmountOfAuto < LOTTO_TICKET_PRICE;
         }
 
         @Override

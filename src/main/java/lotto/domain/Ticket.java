@@ -23,11 +23,11 @@ public class Ticket {
         }
 
         public boolean hasBonusNumber(WinningNumbers winningNumbers) {
-                return numbers.hasBonusNumber(winningNumbers.bonusNumber());
+                return numbers.hasMatchingNumber(winningNumbers.bonusNumber());
         }
 
         private int getOneIfWinningNumberContained(LottoNumber winningNumber) {
-                if (numbers.hasWinningNumber(winningNumber)) {
+                if (numbers.hasMatchingNumber(winningNumber)) {
                         return 1;
                 }
                 return 0;

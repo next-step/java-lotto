@@ -18,7 +18,7 @@ class LottoNumbersTest {
                 LottoNumber oneWinningNumber = new LottoNumber(7);
                 LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 7);
 
-                assertThat(lottoNumbers.hasWinningNumber(oneWinningNumber)).isTrue();
+                assertThat(lottoNumbers.hasMatchingNumber(oneWinningNumber)).isTrue();
         }
 
         @Test
@@ -26,6 +26,6 @@ class LottoNumbersTest {
                 LottoNumber bonusNumber = new LottoNumber(7);
                 LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 7);
 
-                assertThat(lottoNumbers.hasBonusNumber(bonusNumber)).isTrue();
+                assertThat(lottoNumbers.hasMatchingNumber(bonusNumber)).isTrue();
         }
 }
