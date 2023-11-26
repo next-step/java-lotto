@@ -1,34 +1,35 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private final Set<Integer> ticket = new TreeSet<>();
+    private final Set<LottoNumber> ticket = new HashSet<>();
 
-    public LottoTicket(List<Integer> lottoNumber) {
-        ticket.addAll(lottoNumber);
-    }
-
-    @Override
-    public String toString() {
-        return this.ticket.toString();
-    }
-
-    public boolean isThisNumberMatched(WinnerNumbers winnerNumbers, int number) {
-        return winnerNumbers.isContain(number);
+    public LottoTicket(List<Integer> lottoNumberList) {
+        for (int i = 0; i < lottoNumberList.size(); i++) {
+            LottoNumber lottoNumber = new LottoNumber(lottoNumberList.get(i));
+            ticket.add(lottoNumber);
+        }
     }
 
     public boolean isMatchedWithBonusNum(WinnerNumbers winnerNumbers) {
-        return ticket.contains(winnerNumbers.bonusNumber());
+        AtomicBoolean result = new AtomicBoolean(false);
+        ticket.iterator().forEachRemaining(number -> {
+            if (number.isThisNumberMatched(winnerNumbers.bonusNumber())) {
+                result.set(true);
+            }
+        });
+        return result.get();
     }
 
     public int calculateTotalMatchedCount(WinnerNumbers winnerNumbers) {
         AtomicInteger sum = new AtomicInteger(0);
 
         ticket.iterator().forEachRemaining(number -> {
-
-            if (isThisNumberMatched(winnerNumbers, number)) {
+            if (winnerNumbers.printWinnerNumbers().contains(number.lottoNumber())) {
                 sum.getAndIncrement();
             }
         });
@@ -36,7 +37,14 @@ public class LottoTicket {
         return sum.get();
     }
 
-    public boolean isContain(int number) {
-        return this.ticket.contains(number);
+    public Boolean isContain(int number) {
+        return printLottoNumbers().contains(number);
+    }
+
+    public List<Integer> printLottoNumbers() {
+        return ticket.stream()
+                .map(LottoNumber::lottoNumber)
+                .sorted()
+                .collect(Collectors.toList());
     }
 }
