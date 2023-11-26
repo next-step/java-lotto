@@ -9,8 +9,6 @@ import step4.util.LotteryUtil;
 
 public class Winning {
 
-    public static final int COUNT_BONUS = 5;
-
     private final int bonusWinNumber;
     private final Lottery win;
 

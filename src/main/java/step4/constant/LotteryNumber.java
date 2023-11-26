@@ -5,13 +5,7 @@ import java.util.List;
 
 public class LotteryNumber {
 
-    private static final List<LotteryNumber> ALL_NUMBERS;
-
     private final int value;
-
-    static {
-        ALL_NUMBERS = new ArrayList<>();
-    }
 
     public LotteryNumber(int value) {
         validateNumber(value);
