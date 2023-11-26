@@ -16,7 +16,7 @@ public class LottoGame {
     protected LottoGame(int buyingPrice) {
         this.lottoLines = new ArrayList<>();
         this.gameCount = calculateGameCount(buyingPrice);
-        buyLottoLines(gameCount);
+        buyAutoLottoLines(gameCount);
     }
 
     protected LottoGame(int buyingPrice, int manualLottoCount, List<LottoLine> manualLottoLines) {
@@ -24,8 +24,8 @@ public class LottoGame {
         this.gameCount = calculateGameCount(buyingPrice);
 
         validateManualLottoCount(manualLottoCount);
-        buyLottoLines(manualLottoLines);
-        buyLottoLines(gameCount - manualLottoCount);
+        buyManualLottoLines(manualLottoLines);
+        buyAutoLottoLines(gameCount - manualLottoCount);
     }
 
     private static int calculateGameCount(int buyingPrice) {
@@ -55,7 +55,7 @@ public class LottoGame {
         this.winningLottoLine = winningLottoLine;
     }
 
-    private void buyLottoLines(int buyCount) {
+    private void buyAutoLottoLines(int buyCount) {
         int index = 0;
         while (index < buyCount) {
             lottoLines.add(LottoLine.create());
@@ -63,7 +63,7 @@ public class LottoGame {
         }
     }
 
-    private void buyLottoLines(List<LottoLine> manualLottoLines) {
+    private void buyManualLottoLines(List<LottoLine> manualLottoLines) {
         lottoLines.addAll(manualLottoLines);
     }
 
