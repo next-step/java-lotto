@@ -5,29 +5,22 @@ import operation.implemantation.MinusOperation;
 import operation.implemantation.MultiplyOperation;
 import operation.implemantation.PlusOperation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class OperationFactory {
 
+    private static final Map<String,Operation> operations = new HashMap<>();
+
+    static {
+        operations.put("+", new PlusOperation());
+        operations.put("-", new MinusOperation());
+        operations.put("*", new MultiplyOperation());
+        operations.put("/", new DivideOperation());
+
+    }
+
     public static int calculateRightNow(int result, int number, String stringOperation) {
-        if (stringOperation.equals("+")) {
-            PlusOperation plusOperation = new PlusOperation();
-            return plusOperation.calculate(result,number);
-        }
-
-        if (stringOperation.equals("-")) {
-            MinusOperation minusOperation = new MinusOperation();
-            return minusOperation.calculate(result, number);
-        }
-
-        if (stringOperation.equals("*")) {
-            MultiplyOperation multiplyOperation = new MultiplyOperation();
-            return multiplyOperation.calculate(result, number);
-        }
-
-        if (stringOperation.equals("/")) {
-            DivideOperation divideOperation = new DivideOperation();
-            return divideOperation.calculate(result, number);
-        }
-
-        throw new IllegalArgumentException("사칙연산만 실행 가능합니다.");
+        return operations.get(stringOperation).calculate(result,number);
     }
 }
