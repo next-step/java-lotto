@@ -14,25 +14,23 @@ public class WinningLotto {
 
     public WinningLotto(int num1, int num2, int num3, int num4, int num5, int num6, int bonus) {
         this(IntStream.of(num1, num2, num3, num4, num5, num6)
-                        .mapToObj(LottoNumber::new)
+                        .mapToObj(LottoNumber::valueOf)
                         .collect(Collectors.toSet())
                 , bonus);
     }
 
     public WinningLotto(String numbers, int bonus) {
         this(Arrays.stream(numbers.split(","))
-                        .map(String::trim)
-                        .map(Integer::parseInt)
-                        .map(LottoNumber::new)
+                        .map(LottoNumber::from)
                         .collect(Collectors.toSet())
                 , bonus);
     }
 
-    public WinningLotto(Set<LottoNumber> lottoNumbers, int bonus) {
+    private WinningLotto(Set<LottoNumber> lottoNumbers, int bonus) {
         validateLottoNumberCount(lottoNumbers);
 
         this.lottoNumbers = lottoNumbers;
-        this.bonusNumber = new LottoNumber(bonus);
+        this.bonusNumber = LottoNumber.valueOf(bonus);
     }
 
     private static void validateLottoNumberCount(Set<LottoNumber> lottoNumbers) {

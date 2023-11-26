@@ -16,7 +16,7 @@ public class LottoNumber {
         return new LottoNumber(num);
     }
 
-    public LottoNumber(int lottoNumber) {
+    private LottoNumber(int lottoNumber) {
         validateNumberRange(lottoNumber);
         this.lottoNumber = lottoNumber;
     }

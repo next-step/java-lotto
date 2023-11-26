@@ -29,7 +29,7 @@ public class Lotto {
                 .collect(Collectors.toSet()));
     }
 
-    public Lotto(Set<LottoNumber> lottoNumbers) {
+    private Lotto(Set<LottoNumber> lottoNumbers) {
         validateLottoNumberCount(lottoNumbers);
 
         this.lottoNumbers = lottoNumbers;

@@ -3,6 +3,9 @@ package domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class WinningLottoTest {
@@ -22,5 +25,21 @@ public class WinningLottoTest {
     @DisplayName("당첨로또 숫자 범위가 45를 초과하는 경우 exception throw")
     void overRangeTest() {
         assertThrows(IllegalArgumentException.class, () -> new WinningLotto("45, 56, 1, 2, 3, 5", 7));
+    }
+
+    @Test
+    @DisplayName("숫자 입력으로 winningLotto 정적 팩토리 메소드 활용 확인")
+    void inputNumberCreate() {
+        WinningLotto winningLotto = new WinningLotto(3, 2, 5, 11, 1, 8, 1);
+
+        assertThat(winningLotto.getLottoNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 5, 8, 11));
+    }
+
+    @Test
+    @DisplayName("문자 입력으로 winningLotto 정적 팩토리 메소드 활용 확인")
+    void inputStringCreate() {
+        WinningLotto winningLotto = new WinningLotto("3,2,5,11,1,8", 1);
+
+        assertThat(winningLotto.getLottoNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 5, 8, 11));
     }
 }

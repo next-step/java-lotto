@@ -51,15 +51,19 @@ public class LottoNumberTest {
         System.out.println("lottoNumbers = " + lottoNumbers);
     }
 
+
     @Test
-    @DisplayName("당첨 번호를 6개 미만으로 입력하는 경우 Exception throw.")
-    void invalidInputLessSixExceptionTest() {
-        assertThrows(IllegalArgumentException.class, () -> new Lotto("1, 2, 3, 4, 5"));
+    @DisplayName("로또 번호가 45를 초과하는 경우 exception throw")
+    void overRangeTest() {
+        assertThrows(IllegalArgumentException.class, () -> LottoNumber.valueOf(55));
     }
 
     @Test
-    @DisplayName("당첨 번호를 중복으로 입력하는 경우 6개 미만 Exception throw.")
-    void invalidInputExceptionTest() {
-        assertThrows(IllegalArgumentException.class, () -> new Lotto("1, 2, 3, 3, 4, 5"));
+    @DisplayName("로또 번호 캐싱 테스트")
+    void cachingNumberTest() {
+        LottoNumber lottoNumber1 = LottoNumber.valueOf(3);
+        LottoNumber lottoNumber2 = LottoNumber.valueOf(3);
+
+        assertThat(lottoNumber1.equals(lottoNumber2)).isTrue();
     }
 }
