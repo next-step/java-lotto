@@ -19,12 +19,12 @@ public class LottoMain {
         int manualCount = InputView.inputLottoManualNumber();
         int autoCount = gameCount - manualCount;
 
-        /**
-         *  수동 로또 번호 입력
-         */
-        LottoInputValue manualInputValue = InputView.manualLottoNumbers();
-        List<Lotto> manualLottos = manualInputValue.convertManualLottoNumbers(manualCount);
+        if (autoCount < 0) {
+            throw new IllegalArgumentException("금액이 부족 해서 원하는 수동만큼 구매가 불가 합니다.금액 다시 확인 하세요");
+        }
 
+        LottoInputValue manualInputValue = InputView.manualLottoNumbers(manualCount);
+        List<Lotto> manualLottos = manualInputValue.convertManualLottoNumbers(manualCount);
 
         ResultView.resultCount(manualCount, autoCount);
         List<Lotto> lottos = LottoDomain.createLottoGames(autoCount);
