@@ -14,32 +14,20 @@ public class StringCalculator {
         return true;
     }
 
-    public static int plus(String text) {
-        isBlank(text);
-        String[] split = getSplit(text);
-        int result = Integer.parseInt(split[0]) + Integer.parseInt(split[2]);
-        return result;
+    public static int plus(int number1, int number2) {
+        return number1 + number2;
     }
 
-    public static int minus(String text) {
-        isBlank(text);
-        String[] split = getSplit(text);
-        int result = Integer.parseInt(split[0]) - Integer.parseInt(split[2]);
-        return result;
+    public static int minus(int number1, int number2) {
+        return number1 - number2;
     }
 
-    public static int multiply(String text) {
-        isBlank(text);
-        String[] split = getSplit(text);
-        int result = Integer.parseInt(split[0]) * Integer.parseInt(split[2]);
-        return result;
+    public static int multiply(int number1, int number2) {
+        return number1 * number2;
     }
 
-    public static int divide(String text) {
-        isBlank(text);
-        String[] split = getSplit(text);
-        int result = Integer.parseInt(split[0]) / Integer.parseInt(split[2]);
-        return result;
+    public static int divide(int number1, int number2) {
+        return number1 / number2;
     }
 
 }

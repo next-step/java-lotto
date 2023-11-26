@@ -17,22 +17,22 @@ public class StringCalculatorTest {
 
     @Test
     void 덧셈() {
-        assertThat(plus("1 + 2")).isEqualTo(3);
+        assertThat(plus(1, 2)).isEqualTo(3);
     }
 
     @Test
     void 뺄셈() {
-        assertThat(minus("3 - 1")).isEqualTo(2);
+        assertThat(minus(3, 1)).isEqualTo(2);
     }
 
     @Test
     void 곱셈() {
-        assertThat(multiply("3 * 2")).isEqualTo(6);
+        assertThat(multiply(3, 2)).isEqualTo(6);
     }
 
     @Test
     void 나눗셈() {
-        assertThat(divide("6 / 2")).isEqualTo(3);
+        assertThat(divide(6, 2)).isEqualTo(3);
     }
 
     @ParameterizedTest
