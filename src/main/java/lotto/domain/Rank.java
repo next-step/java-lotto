@@ -37,12 +37,20 @@ public enum Rank {
         }
 
         private boolean isSameMatchCount(int matchCount, boolean matchedBonus) {
-                if (matchCount != 5) {
+                int matchCountWithoutBonus = getMatchCountWithoutBonus(matchCount, matchedBonus);
+                if (matchCountWithoutBonus != 5) {
                         return this.matchCount == matchCount;
                 }
-                if (this.matchCount == matchCount && matchedBonus) {
+                if (matchedBonus) {
                         return this == SECOND;
                 }
                 return this == THIRD;
+        }
+
+        private int getMatchCountWithoutBonus(int matchCount, boolean matchedBonus) {
+                if (matchedBonus) {
+                        return --matchCount;
+                }
+                return matchCount;
         }
 }

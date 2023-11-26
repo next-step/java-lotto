@@ -35,6 +35,5 @@ class RankTest {
                     Arguments.arguments(3, false, Rank.FIFTH),
                     Arguments.arguments(0, false, Rank.MISS)
                 );
-
         }
 }
