@@ -1,8 +1,6 @@
 package step2;
 
-import step2.domain.LottoIssuer;
-import step2.domain.LottoResult;
-import step2.domain.LottoTicket;
+import step2.domain.*;
 import step2.view.ResultView;
 import step2.view.InputView;
 
@@ -19,7 +17,8 @@ public class Application {
         resultView.printLottoTickets(lottoTickets);
 
         LottoTicket winningTicket = new LottoTicket(new InputView().readStringInput("지난 주 당첨 번호를 입력해 주세요."));
-        LottoResult lottoResult = new LottoResult(lottoTickets, winningTicket);
+        LottoNumber bonusNumber = new LottoNumber(new InputView().readIntInput("보너스 볼을 입력해 주세요."));
+        LottoResult lottoResult = new LottoResult(lottoTickets, new LottoWinningTicket(winningTicket, bonusNumber));
 
         resultView.printLottoResult(ticketMoney, lottoResult);
     }

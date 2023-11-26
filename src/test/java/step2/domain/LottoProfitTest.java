@@ -13,16 +13,14 @@ class LottoProfitTest {
     @Test
     void profit() {
 
-        Map<Integer, Integer> result = new HashMap<>();
-        result.put(6, 0);
-        result.put(5, 0);
-        result.put(4, 0);
-        result.put(3, 1);
-        result.put(2, 0);
-        result.put(1, 0);
-        result.put(0, 0);
+        Map<LottoRank, Integer> result = new HashMap<>();
+        result.put(LottoRank.FIRST, 0);
+        result.put(LottoRank.SECOND, 0);
+        result.put(LottoRank.THIRD, 0);
+        result.put(LottoRank.FOURTH, 0);
+        result.put(LottoRank.FIFTH, 2);
+        result.put(LottoRank.NONE, 0);
 
-        LottoProfit lottoProfit = new LottoProfit();
-        Assertions.assertThat(lottoProfit.profit(5000, new LottoResult(result))).isEqualTo(1.0);
+        Assertions.assertThat(new LottoProfit(result).profit(5000)).isEqualTo(2.0);
     }
 }

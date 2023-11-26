@@ -1,40 +1,34 @@
 package step2.domain;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoResult {
 
-    private Map<Integer, Integer> result = new HashMap<>();
+    private Map<LottoRank, Integer> lottoRankResult = new HashMap<>();
     public static final int LOTTO_MATCH_MIN=0;
     public static final int LOTTO_MATCH_MAX=6;
 
-    public LottoResult(List<LottoTicket> tickets, LottoTicket winningTicket) {
-
-        result(tickets, winningTicket);
+    public LottoResult(List<LottoTicket> tickets, LottoWinningTicket winningTicket) {
+        process(tickets, winningTicket);
     }
 
-    public LottoResult(Map<Integer, Integer> result) {
-        this.result = result;
+    public LottoResult(Map<LottoRank, Integer> result) {
+        this.lottoRankResult = result;
     }
 
-    public void result(List<LottoTicket> tickets, LottoTicket winningTicket) {
-
-        result = tickets.stream()
-                .map(ticket -> ticket.winningCount(winningTicket)).
-                collect(Collectors.groupingBy(Integer::intValue, Collectors.summingInt(e -> 1)));
-        postProcess();
-    }
-    
-    private void postProcess() {
-        for (int i = LOTTO_MATCH_MIN; i <= LOTTO_MATCH_MAX; i++) {
-            result.putIfAbsent(i, 0);
-        }
+    private void process(List<LottoTicket> tickets, LottoWinningTicket winningTicket) {
+            lottoRankResult = tickets.stream()
+                .map(ticket -> LottoRank.lottoRank(ticket.matchCount(winningTicket.winningTicket()), ticket.bonusMatch(winningTicket.bonusNumber())))
+                .collect(Collectors.groupingBy(LottoRank::valueOf, Collectors.summingInt(e -> 1)));
+            Arrays.stream(LottoRank.VALUES).forEach(lottoRank -> {lottoRankResult.putIfAbsent(lottoRank, 0);});
     }
 
-    public int countOfMatch( int match) {
-        return result.get(match);
+    public Map<LottoRank, Integer> result() {
+        return lottoRankResult;
+    }
+
+    public int matchCount(LottoRank lottoRank) {
+        return lottoRankResult.get(lottoRank);
     }
 }
