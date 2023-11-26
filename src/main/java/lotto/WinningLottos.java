@@ -37,7 +37,7 @@ public class WinningLottos {
         return this.countLottoByWinningNumber(rank) * rank.rewardPrice();
     }
 
-    public Integer totalRewardWinningLottos() {
+    private Integer totalRewardWinningLottos() {
         for (Rank rank : winningLottos.keySet()) {
             totalRewardPrice += rewardWinningLotto(rank);
         }

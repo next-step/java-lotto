@@ -17,10 +17,10 @@ class WinningLottosTest {
     }
 
     @Test
-    void 당첨_금액의_총액을_알려준다() {
-        Map<Rank, Integer> rankMap = Map.of(Rank.FIRST, 1, Rank.FOURTH, 1);
+    void 당첨_금액의_수익률을_노출함() {
+        Map<Rank, Integer> rankMap = Map.of(Rank.FOURTH, 1);
         WinningLottos winningLottos = new WinningLottos(rankMap);
-        assertThat(winningLottos.totalRewardWinningLottos()).isEqualTo(2000050000);
+        assertThat(winningLottos.investingPercent(50000)).isEqualTo(1);
     }
 
     @Test
