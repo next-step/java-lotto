@@ -6,14 +6,12 @@ import java.util.Scanner;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final long LOTTO_PRICE = 1000;
 
-    public static int inputPurchaseCount() {
+    public static int inputPurchaseAmount() {
         System.out.println("구입금액을 입력해주세요");
         int purchaseAmount = Integer.parseInt(scanner.nextLine());
-        int purchaseCount = (int) (purchaseAmount / LOTTO_PRICE);
 
-        return purchaseCount;
+        return purchaseAmount;
     }
 
     public static List<String> inputManualLotto() {

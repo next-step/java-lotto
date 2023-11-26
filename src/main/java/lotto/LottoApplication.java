@@ -14,9 +14,11 @@ public class LottoApplication {
     }
 
     public static LottoList generateLottoList() {
-        int purChaseCount = InputView.inputPurchaseCount();
+        int inputPurchaseAmount = InputView.inputPurchaseAmount();
+        PurchaseAmount purchaseAmount = new PurchaseAmount(inputPurchaseAmount);
         List<String> manualLotto = InputView.inputManualLotto();
-        LottoList lottoList = new LottoList(purChaseCount - manualLotto.size(), manualLotto);
+        int automaticLottoCount = purchaseAmount.automaticLottoCount(manualLotto.size());
+        LottoList lottoList = new LottoList(automaticLottoCount, manualLotto);
         OutputView.printLottoList(lottoList, manualLotto.size());
 
         return lottoList;
