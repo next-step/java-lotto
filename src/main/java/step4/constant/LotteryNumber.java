@@ -5,7 +5,17 @@ import java.util.List;
 
 public class LotteryNumber {
 
+    public static final int LOTTO_MIN = 1;
+    public static final int LOTTO_MAX = 45;
+    private static final List<LotteryNumber> LOTTERY_NUMBERS = new ArrayList<>();
+
     private final int value;
+
+    static {
+        for (int i = LOTTO_MIN; i <= LOTTO_MAX; i++) {
+            LOTTERY_NUMBERS.add(new LotteryNumber(i));
+        }
+    }
 
     public LotteryNumber(int value) {
         validateNumber(value);
@@ -16,7 +26,7 @@ public class LotteryNumber {
     public static List<LotteryNumber> of(List<Integer> numbers) {
         List<LotteryNumber> lotteryNumbers = new ArrayList<>();
         for (int number : numbers) {
-            lotteryNumbers.add(new LotteryNumber(number));
+            lotteryNumbers.add(getLotteryNumber(number));
         }
 
         return lotteryNumbers;
@@ -29,6 +39,10 @@ public class LotteryNumber {
         }
 
         return allNumbers;
+    }
+
+    private static LotteryNumber getLotteryNumber(int number) {
+        return LOTTERY_NUMBERS.get(number - 1);
     }
 
     public int getValue() {
