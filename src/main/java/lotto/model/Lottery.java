@@ -6,31 +6,22 @@ import java.util.*;
 
 public class Lottery {
     private final WinnerNumbers winnerNumbers;
-    private final TotalLottos totalLottos;
+    private final PurchasedLottos purchasedLottos;
 
-    public Lottery(WinnerNumbers winnerNumbers, TotalLottos totalLottos) {
+    public Lottery(WinnerNumbers winnerNumbers, PurchasedLottos purchasedLottos) {
         this.winnerNumbers = winnerNumbers;
-        this.totalLottos = totalLottos;
+        this.purchasedLottos = purchasedLottos;
     }
 
     public long depositTotalMoney() {
-        long totalMoney = 0;
-        for (Lotto lotto : totalLottos.lottoList()) {
-            totalMoney += winnerNumbers.winnerMoney(lotto);
-        }
-        return totalMoney;
+        return purchasedLottos.depositTotalMoney(winnerNumbers);
     }
 
     public Map<Dividend, Integer> totalCorrect() {
-        Map<Dividend, Integer> correctCountResult = new HashMap<>();
-        for (Lotto lotto : totalLottos.lottoList()) {
-            Dividend dividend = winnerNumbers.winResult(lotto);
-            correctCountResult.put(dividend, correctCountResult.getOrDefault(dividend, 0) + 1);
-        }
-        return correctCountResult;
+        return purchasedLottos.totalCorrect(winnerNumbers);
     }
 
     public double getInvestment() {
-        return (double) depositTotalMoney() / totalLottos.totalPurchasePrice();
+        return (double) depositTotalMoney() / purchasedLottos.totalPurchasePrice();
     }
 }

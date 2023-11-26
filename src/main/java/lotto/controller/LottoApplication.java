@@ -15,13 +15,13 @@ public class LottoApplication {
 
     public void run() {
         LottoFactory lottoFactory = new LottoFactory(lottoInput.getInput(), lottoInput.getManualLottoCount());
-        TotalLottos totalLottos = lottoFactory.generateLottos(lottoInput.getManualLottoNumbers(lottoFactory));
+        PurchasedLottos purchasedLottos = lottoFactory.generateLottos(lottoInput.getManualLottoNumbers(lottoFactory));
 
         lottoOutput.viewManualAndAutoCount(lottoFactory);
-        lottoOutput.viewLottosDetail(totalLottos);
+        lottoOutput.viewLottosDetail(purchasedLottos);
 
         WinnerNumbers winnerNumbers = new WinnerNumbers(lottoInput.getWinningNumber(), lottoInput.getBonusBall());
-        Lottery lottery = new Lottery(winnerNumbers, totalLottos);
+        Lottery lottery = new Lottery(winnerNumbers, purchasedLottos);
 
         lottoOutput.viewCorrectLottos(lottery);
         lottoOutput.viewTotalIncomeRatio(lottery);

@@ -20,7 +20,7 @@ public class LottoFactory {
         this(purchaseMoney, new ManualCount(0));
     }
 
-    public TotalLottos generateLottos(List<LottoNumbers> manualLottos) {
+    public PurchasedLottos generateLottos(List<LottoNumbers> manualLottos) {
         List<Lotto> lottos = new ArrayList<>();
         for (LottoNumbers lottoNumbers : manualLottos) {
             lottos.add(new Lotto(generateNumbers(new ManualLotto(lottoNumbers))));
@@ -29,7 +29,7 @@ public class LottoFactory {
         for (int i = 0; i < totalLottoCount() - purchaseMoney.manualCount(); i++) {
             lottos.add(new Lotto(generateNumbers(new RandomLotto())));
         }
-        return new TotalLottos(lottos);
+        return new PurchasedLottos(lottos);
     }
 
     private LottoNumbers generateNumbers(LottoStrategy lottoStrategy){

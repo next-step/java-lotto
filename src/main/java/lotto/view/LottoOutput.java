@@ -11,16 +11,16 @@ public class LottoOutput {
 
     public static final int RANK_NUMBER = Dividend.values().length - 2;
 
-    public void viewLottoCount(TotalLottos totalLottos) {
-        System.out.println(totalLottos.lottoCount() + "개를 구매했습니다.");
+    public void viewLottoCount(PurchasedLottos purchasedLottos) {
+        System.out.println(purchasedLottos.lottoCount() + "개를 구매했습니다.");
     }
 
     public void viewManualAndAutoCount(LottoFactory lottoFactory){
         System.out.println("수동으로 " + lottoFactory.manualLottoCount() + "장, 자동으로 " + lottoFactory.autoLottoCount() + "개를 구매했습니다.");
     }
 
-    public void viewLottosDetail(TotalLottos totalLottos) {
-        for (Lotto lotto : totalLottos.lottoList()) {
+    public void viewLottosDetail(PurchasedLottos purchasedLottos) {
+        for (Lotto lotto : purchasedLottos.lottoList()) {
             System.out.println("[" + getLottoDetail(lotto) + "]");
         }
         System.out.println();
