@@ -5,7 +5,16 @@ import java.util.Objects;
 import static util.LottoNumberGenerator.*;
 
 public class LottoNumber {
-    private int lottoNumber;
+    private final int lottoNumber;
+
+    public static LottoNumber from(String input) {
+        int num = Integer.parseInt(input.trim());
+        return LottoNumber.valueOf(num);
+    }
+
+    public static LottoNumber valueOf(int num) {
+        return new LottoNumber(num);
+    }
 
     public LottoNumber(int lottoNumber) {
         validateNumberRange(lottoNumber);

@@ -5,6 +5,7 @@ import service.UserLottoService;
 public class AppConfig {
 
     private UserLottoRepository userLottoRepository = new UserLottoRepository();
+
     public UserLottoService userLottoService() {
         return new UserLottoService(userLottoRepository);
     }

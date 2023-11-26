@@ -9,25 +9,23 @@ import java.util.stream.IntStream;
 import static util.LottoNumberGenerator.LOTTO_NUMBER_COUNT_LIMIT;
 
 public class Lotto {
-    private Set<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(int num1, int num2, int num3, int num4, int num5, int num6) {
         this(IntStream.of(num1, num2, num3, num4, num5, num6)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toSet()));
     }
 
     public Lotto(String input) {
         this(Arrays.stream(input.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toSet()));
     }
 
     public Lotto(List<Integer> lottoNumbers) {
         this(lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet()));
     }
 

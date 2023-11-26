@@ -28,7 +28,6 @@ public class LottoNumberGenerator {
     public static List<Integer> generateLottoNumber() {
         Collections.shuffle(allNumbers);
 
-        List<Integer> shuffleLottoNumbers = allNumbers.subList(0, LOTTO_NUMBER_COUNT_LIMIT);
-        return shuffleLottoNumbers;
+        return allNumbers.subList(0, LOTTO_NUMBER_COUNT_LIMIT);
     }
 }
