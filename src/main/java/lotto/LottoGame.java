@@ -72,9 +72,4 @@ public class LottoGame {
         return bonusBall;
     }
 
-    public double investingPercent(int price) {
-        return (double) lottoStatics.rewardTotalWinningLottos() / price;
-    }
-
-
 }

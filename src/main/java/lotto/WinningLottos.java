@@ -44,6 +44,10 @@ public class WinningLottos {
         return totalRewardPrice;
     }
 
+    public double investingPercent(int price) {
+        return (double) this.totalRewardWinningLottos() / price;
+    }
+
 
     @Override
     public boolean equals(Object o) {
