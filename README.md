@@ -81,3 +81,14 @@
 * [x] indent depth는 1까지 허용
 * [x] 함수(메소드) 길이가 15라인을 넘어가지 않도록 구현한다.
 * [x] else 예약어를 사용하지 않는다.
+
+#### Feedback 23.11.24
+* [ ] LottoGenerator 테스트를 위한 동작 분리
+* [ ] Lotto 내 변수의 재사용성 고민
+* [ ] Lotto의 생성자 2개 중 테스트를 위한 생성자를 없애기
+* [ ] Lotto의 멤버변수 ranking의 위치 고민
+* [ ] Lotto의 멤버변수 matchingCount를 쓰지 않기
+* [ ] Stream의 generate와 limit 활용
+* [ ] 수익률 계산 역할의 위치 고민
+* [ ] Map.of() 활용
+* 
