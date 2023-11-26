@@ -52,9 +52,12 @@ public class LottoMain {
 
         private static List<LottoNumbers> markManualLottoNumbers(int countOfManualTicket) {
                 return InputView.scanManualNumbers(countOfManualTicket)
-                    .stream().map(
-                        manualTicket -> new LottoNumbers(
-                            TextManipulator.splitNumberTextByComma(manualTicket).stream().map(LottoNumber::new)
-                                .collect(Collectors.toUnmodifiableSet()))).collect(Collectors.toList());
+                    .stream().map(LottoMain::convertLottoNumbersTextToLottoNumbers).collect(Collectors.toList());
+        }
+
+        private static LottoNumbers convertLottoNumbersTextToLottoNumbers(String lottoNumbersText) {
+                return new LottoNumbers(
+                    TextManipulator.splitNumberTextByComma(lottoNumbersText).stream().map(LottoNumber::new)
+                        .collect(Collectors.toUnmodifiableSet()));
         }
 }
