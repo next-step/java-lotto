@@ -27,7 +27,7 @@ public class UserLottoService {
         }
     }
 
-    public void buyManualLottoTickets(List<Integer> selectedNumbers) {
+    public void buyManualLottoTickets(String selectedNumbers) {
         Lotto manualLotto = new Lotto(selectedNumbers);
         userLottoRepository.saveUserLottoTickets(manualLotto);
     }

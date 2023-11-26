@@ -25,13 +25,13 @@ public class LottoApplication {
         LottoSalesService.checkAvailableTicketCount(totalTicketCount, manualTicketCount);
 
         for (int i = 0; i < manualTicketCount; i++) {
-            List<Integer> numbers = InputView.inputSelectedNumber();
-            userLottoService.buyManualLottoTickets(numbers);
+            String selectedNumber = InputView.inputSelectedNumber();
+            userLottoService.buyManualLottoTickets(selectedNumber);
         }
-
         userLottoService.buyRandomLottoTickets(totalTicketCount - manualTicketCount);
         List<Lotto> lottoTickets = userLottoService.getAllLottoTickets();
-        ResultView.printLottoCount(lottoTickets.size());
+
+        ResultView.printLottoCount(manualTicketCount, totalTicketCount - manualTicketCount);
         ResultView.printLottoNumbers(lottoTickets);
 
         String inputWinningNumbers = InputView.inputWinningNumbers();

@@ -41,8 +41,7 @@ public class UserLottoTest {
     @Test
     @DisplayName("수동 입력한 로또 번호에 맞춰 로또를 생성한다.")
     void generateManualLottoTest() {
-        List<Integer> selectedNum = Arrays.asList(1, 2, 3, 4, 5, 6);
-        userLottoService.buyManualLottoTickets(selectedNum);
+        userLottoService.buyManualLottoTickets("1, 2, 3, 4, 5, 6");
 
         assertThat(userLottoRepository.getUserLottoTickets().size()).isEqualTo(1);
     }
@@ -50,40 +49,30 @@ public class UserLottoTest {
     @Test
     @DisplayName("사용자가 숫자를 중복 입력하는 경우 Exception throw")
     void wrongInputManualLottoExceptionTest() {
-        List<Integer> selectedNum = Arrays.asList(1, 2, 3, 4, 5, 1);
-
-        assertThrows(IllegalArgumentException.class, () -> userLottoService.buyManualLottoTickets(selectedNum));
+        assertThrows(IllegalArgumentException.class, () -> userLottoService.buyManualLottoTickets("1, 2, 3, 4, 5, 1"));
     }
 
     @Test
     @DisplayName("사용자가 숫자를 6개 미만으로 입력하는 경우 Exception throw")
     void wrongInputManualLottoExceptionTest2() {
-        List<Integer> selectedNum = Arrays.asList(1, 2, 3, 4, 5);
-
-        assertThrows(IllegalArgumentException.class, () -> userLottoService.buyManualLottoTickets(selectedNum));
+        assertThrows(IllegalArgumentException.class, () -> userLottoService.buyManualLottoTickets("1, 2, 3, 4, 5"));
     }
 
     @Test
     @DisplayName("사용자가 숫자를 6개를 초과 입력하는 경우 Exception throw")
     void wrongInputManualLottoExceptionTest3() {
-        List<Integer> selectedNum = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
-
-        assertThrows(IllegalArgumentException.class, () -> userLottoService.buyManualLottoTickets(selectedNum));
+        assertThrows(IllegalArgumentException.class, () -> userLottoService.buyManualLottoTickets("1, 2, 3, 4, 5, 6, 7"));
     }
 
     @Test
     @DisplayName("수동 입력한 로또번호가 45를 초과하는 경우 exception throw")
     void wrongInputManualLottoExceptionTest4() {
-        List<Integer> selectedNum = Arrays.asList(1, 2, 3, 4, 5, 46);
-
-        assertThrows(IllegalArgumentException.class, () -> userLottoService.buyManualLottoTickets(selectedNum));
+        assertThrows(IllegalArgumentException.class, () -> userLottoService.buyManualLottoTickets("1, 2, 3, 4, 5, 46"));
     }
 
     @Test
     @DisplayName("수동 입력한 로또번호가 1 미만인 경우 exception throw")
     void wrongInputManualLottoExceptionTest5() {
-        List<Integer> selectedNum = Arrays.asList(1, 2, 3, 4, 5, -1);
-
-        assertThrows(IllegalArgumentException.class, () -> userLottoService.buyManualLottoTickets(selectedNum));
+        assertThrows(IllegalArgumentException.class, () -> userLottoService.buyManualLottoTickets("1, 2, 3, 4, 5, -1"));
     }
 }

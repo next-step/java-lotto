@@ -15,19 +15,23 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printLottoCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    public static void printLottoCount(int manualLottoCount, int autoLottoCount) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\n수동으로 ").append(manualLottoCount).append("장, ");
+        stringBuilder.append("자동으로 ").append(autoLottoCount).append("장을 구매했습니다.");
+        System.out.println(stringBuilder);
     }
 
     public static void printLottoNumbers(List<Lotto> lottoTickets) {
         for (Lotto lottoTicket : lottoTickets) {
             System.out.println(lottoTicket.getLottoNumbers());
         }
-        System.out.println();
+        printEnter();
     }
 
     public static void printLottoGameResult(LottoGameResultRepository lottoMatchResult, float rate, Optional<Currency> currency) {
-        System.out.println("\n당첨 통계");
+        printEnter();
+        System.out.println("당첨 통계");
         System.out.println("---------");
 
         EnumMap<LottoPrize, Integer> allResult = lottoMatchResult.getAllResult();
@@ -44,7 +48,7 @@ public class ResultView {
         if (LottoPrize.NO_MATCH.equals(key)) {
             return;
         }
-        
+
         stringBuilder.append(String.format("%d개 일치", key.getMatchCount()));
         if (LottoPrize.SECOND.equals(key)) {
             stringBuilder.append(", 보너스볼 일치");
@@ -62,5 +66,10 @@ public class ResultView {
         if (rate < 1) {
             System.out.println(" (기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
+        printEnter();
+    }
+
+    private static void printEnter() {
+        System.out.println();
     }
 }
