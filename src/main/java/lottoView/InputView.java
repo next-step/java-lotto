@@ -22,18 +22,11 @@ public class InputView {
     public static LottoInputValue manualLottoNumbers(int manualCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        int enterCount = 0;
         String text = "";
+        text = text.concat(scanner.nextLine());
 
-        while (enterCount < manualCount) {
-
-            if ("".equals(text)) {
-                text = text.concat(scanner.nextLine());
-                enterCount++;
-                continue;
-            }
+        for (int i = 1; i < manualCount; i++) {
             text = text.concat("\n" + scanner.nextLine());
-            enterCount++;
         }
         return new LottoInputValue(text);
     }
