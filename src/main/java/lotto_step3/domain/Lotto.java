@@ -43,7 +43,7 @@ public class Lotto {
         return (int) lotto.stream().filter(number -> otherLotto.contains(number)).count();
     }
 
-    private boolean contains(int number) {
+    public boolean contains(int number) {
         return lotto.contains(number);
     }
 

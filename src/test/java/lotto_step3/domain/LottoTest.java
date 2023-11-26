@@ -52,4 +52,13 @@ class LottoTest {
 
         assertThat(lotto.matchCount(otherLotto)).isEqualTo(3);
     }
+
+    @DisplayName("로또 객체에 전달받은 숫자의 포함여부를 반환한다.")
+    @Test
+    void containsTest() {
+        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+
+        assertThat(lotto.contains(4)).isTrue();
+        assertThat(lotto.contains(9)).isFalse();
+    }
 }

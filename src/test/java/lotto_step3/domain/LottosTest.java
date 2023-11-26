@@ -32,4 +32,19 @@ class LottosTest {
 
         assertThat(match).isInstanceOf(LottoResult.class);
     }
+
+    @DisplayName("당첨 로또 객체를 전달하면 결과 리스트를 반환한다.")
+    @Test
+    void winningLottoMatchTest() {
+        Lottos lottos = new Lottos(List.of(
+                new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
+                new Lotto(Set.of(1, 3, 5, 7, 9, 11)),
+                new Lotto(Set.of(12, 21, 23, 34, 35, 44))
+        ));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 5, 6)), 11);
+
+        LottoResult match = lottos.match(winningLotto);
+
+        assertThat(match).isInstanceOf(LottoResult.class);
+    }
 }

@@ -31,6 +31,15 @@ public class Lottos {
         return new LottoResult(result);
     }
 
+    public LottoResult match(WinningLotto winningLotto) {
+        List<LottoPrize> result = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            System.out.println(winningLotto.matchCount(lotto) + " " + winningLotto.matchBonus(lotto));
+            result.add(LottoPrize.from(winningLotto.matchCount(lotto), winningLotto.matchBonus(lotto)));
+        }
+        return new LottoResult(result);
+    }
+
     public String getLottoNumber(int index) {
         return lottos.get(index).toString();
     }

@@ -4,6 +4,7 @@ import lotto_step3.domain.Lotto;
 import lotto_step3.domain.LottoResult;
 import lotto_step3.domain.Lottos;
 import lotto_step3.domain.Money;
+import lotto_step3.domain.WinningLotto;
 import lotto_step3.view.LottoInputView;
 import lotto_step3.view.LottoResultView;
 
@@ -13,7 +14,7 @@ public class LottoController {
         Lottos lottos = Lottos.from(money.lottoCount());
         LottoResultView.showLottos(lottos);
 
-        Lotto winningLotto = Lotto.from(LottoInputView.inputWinningNumbers());
+        WinningLotto winningLotto = new WinningLotto(Lotto.from(LottoInputView.inputWinningNumbers()), LottoInputView.inputBonusNumber());
         LottoResult result = lottos.match(winningLotto);
 
         LottoResultView.showResult(result);
