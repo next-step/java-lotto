@@ -44,7 +44,7 @@ public class WinningLotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinningLotto that = (WinningLotto) o;
-        return bonusNumber == that.bonusNumber && Objects.equals(lottoNumbers, that.lottoNumbers);
+        return Objects.equals(lottoNumbers, that.lottoNumbers) && Objects.equals(bonusNumber, that.bonusNumber);
     }
 
     @Override
