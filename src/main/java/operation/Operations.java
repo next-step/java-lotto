@@ -8,7 +8,7 @@ import operation.implemantation.PlusOperation;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OperationFactory {
+public class Operations {
 
     private static final Map<String,Operation> operations = new HashMap<>();
 
