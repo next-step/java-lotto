@@ -7,3 +7,10 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+
+# 요구사항 
+* [x] 1 ~ 45 까지의 수가 생성되는 객체 생셩
+* [ ] 자동으로 6자리 수를 가지는 배열(Lotto) 생성 
+* [ ] 구입 금액을 입력하면 그만큼 Lotto가 발급
+* [ ] Lotto는 1000원에 한장 
