@@ -30,9 +30,9 @@ public class LottoController {
     }
 
     public RankStatisticsDto informRankStatistics(LottosDto lottosDto, List<Integer> winnerLotto, long cost) {
-        List<RankResult> rankResults = createLottoWinningStatistics(winnerLotto).informStatistics(lottosDto.toLottos());
-        double yield = YieldCalculator.calculate(cost, rankResults);
-        return RankStatisticsDto.valueOf(rankResults, yield);
+        RankResult rankResult = createLottoWinningStatistics(winnerLotto).informStatistics(lottosDto.toLottos());
+        double yield = YieldCalculator.calculate(cost, rankResult);
+        return RankStatisticsDto.valueOf(rankResult, yield);
     }
 
     private LottoWinningStatistics createLottoWinningStatistics(List<Integer> winnerLotto) {

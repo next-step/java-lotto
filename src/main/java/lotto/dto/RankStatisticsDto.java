@@ -2,6 +2,8 @@ package lotto.dto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
+import lotto.domain.Rank;
 import lotto.domain.RankResult;
 
 public class RankStatisticsDto {
@@ -14,10 +16,10 @@ public class RankStatisticsDto {
         this.yield = yield;
     }
 
-    public static RankStatisticsDto valueOf(List<RankResult> rankResults, double yield) {
+    public static RankStatisticsDto valueOf(RankResult rankResult, double yield) {
         List<RankResultDto> rankResultDtos = new ArrayList<>();
-        for (RankResult rankResult : rankResults) {
-            rankResultDtos.add(RankResultDto.valueOf(rankResult));
+        for (Entry<Rank, Long> singleRankStatistics : rankResult.getRankStatistics().entrySet()) {
+            rankResultDtos.add(RankResultDto.valueOf(singleRankStatistics));
         }
         return new RankStatisticsDto(rankResultDtos, yield);
     }

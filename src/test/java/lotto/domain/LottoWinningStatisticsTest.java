@@ -7,8 +7,9 @@ import static lotto.domain.Rank.SECOND;
 import static lotto.domain.Rank.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,10 +25,10 @@ public class LottoWinningStatisticsTest {
         LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(winnerLotto);
 
         // when
-        List<RankResult> result = lottoWinningStatistics.informStatistics(lottos);
+        RankResult result = lottoWinningStatistics.informStatistics(lottos);
 
         // then
-        assertThat(result).isEqualTo(createExpectedRankResults());
+        assertThat(result).isEqualTo(createExpectedRankResult());
     }
 
     private Lottos createGivenLottos() {
@@ -41,13 +42,13 @@ public class LottoWinningStatisticsTest {
         );
     }
 
-    private List<RankResult> createExpectedRankResults() {
-        List<RankResult> expectedRankResults = new ArrayList<>();
-        expectedRankResults.add(new RankResult(NOTHING, 2));
-        expectedRankResults.add(new RankResult(FOURTH, 2));
-        expectedRankResults.add(new RankResult(THIRD, 1));
-        expectedRankResults.add(new RankResult(SECOND, 0));
-        expectedRankResults.add(new RankResult(FIRST, 1));
-        return expectedRankResults;
+    private RankResult createExpectedRankResult() {
+        Map<Rank, Long> expectedRankResult = new HashMap<>();
+        expectedRankResult.put(NOTHING, 2L);
+        expectedRankResult.put(FOURTH, 2L);
+        expectedRankResult.put(THIRD, 1L);
+        expectedRankResult.put(SECOND, 0L);
+        expectedRankResult.put(FIRST, 1L);
+        return new RankResult(expectedRankResult);
     }
 }
