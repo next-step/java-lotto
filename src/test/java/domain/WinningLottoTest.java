@@ -42,4 +42,10 @@ public class WinningLottoTest {
 
         assertThat(winningLotto.getLottoNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 5, 8, 11));
     }
+
+    @Test
+    @DisplayName("winningLotto 보너스 숫자가 로또 숫자와 겹치는 경우 exception throw")
+    void wrongBonusInputExceptionTest() {
+        assertThrows(IllegalArgumentException.class, () -> new WinningLotto(1, 2, 3, 4, 5, 6, 6));
+    }
 }

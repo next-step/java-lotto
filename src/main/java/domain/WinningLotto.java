@@ -28,9 +28,16 @@ public class WinningLotto {
 
     private WinningLotto(Set<LottoNumber> lottoNumbers, int bonus) {
         validateLottoNumberCount(lottoNumbers);
+        validateBonusNumber(lottoNumbers, bonus);
 
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = LottoNumber.valueOf(bonus);
+    }
+
+    private static void validateBonusNumber(Set<LottoNumber> lottoNumbers, int bonus) {
+        if (lottoNumbers.contains(LottoNumber.valueOf(bonus))) {
+            throw new IllegalArgumentException("보너스 숫자가 로또 숫자와 중복입니다. bonusNumber - " + bonus);
+        }
     }
 
     private static void validateLottoNumberCount(Set<LottoNumber> lottoNumbers) {
