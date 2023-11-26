@@ -18,7 +18,6 @@ public class LottoRandomGenerator implements LottoGenerator {
         Collections.shuffle(numbers);
 
         numbers = numbers.subList(0, Lotto.LOTTO_NUMBER_COUNT);
-        Collections.sort(numbers);
 
         return numbers;
     }

@@ -4,19 +4,17 @@ import lotto.strategy.LottoGenerator;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
     public static final int LOTTO_NUMBER_COUNT = 6;
 
-    private final List<LottoNumber> numbers;
+    private final TreeSet<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = numbers.stream()
-                .map(value -> new LottoNumber(value))
-                .collect(Collectors.toList());
+        this.numbers = new TreeSet<>(parseLottoNumber(numbers));
         validate();
     }
 
@@ -28,9 +26,14 @@ public class Lotto {
         this(Arrays.asList(numbers));
     }
 
+    private List<LottoNumber> parseLottoNumber(List<Integer> numbers) {
+        return numbers.stream()
+                .map(value -> new LottoNumber(value))
+                .collect(Collectors.toList());
+    }
+
     private void validate() {
-        Set<LottoNumber> lottoSet = Set.copyOf(this.numbers);
-        if (lottoSet.size() != LOTTO_NUMBER_COUNT) {
+        if (this.numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(String.format("로또숫자는 %d개이어야 합니다.", LOTTO_NUMBER_COUNT));
         }
     }

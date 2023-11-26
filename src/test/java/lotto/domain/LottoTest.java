@@ -66,4 +66,10 @@ class LottoTest {
         );
     }
 
+    @Test
+    void 로또_오름차순정렬() {
+        Lotto lotto = new Lotto(6, 4, 2, 1, 3, 5);
+        assertThat(lotto.numbers().toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
+
 }
