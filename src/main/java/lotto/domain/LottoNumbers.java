@@ -12,7 +12,7 @@ public class LottoNumbers {
     public static final int COUNT = 6;
     private static final List<LottoNumber> RANGE_LOTTO_NUMBERS = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER).boxed().map(LottoNumber::new).collect(Collectors.toList());
 
-    Set<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
     // 랜덤 생성
     public LottoNumbers() {
