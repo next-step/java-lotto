@@ -1,3 +1,5 @@
+package stringCalculator.operator;
+
 import java.util.HashMap;
 import java.util.Map;
 
