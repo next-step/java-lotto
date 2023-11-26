@@ -24,6 +24,9 @@ public class LottoGame {
             List<Integer> inputInList = Arrays.stream(manualLottoTickets.get(i))
                     .map(Integer::valueOf)
                     .collect(Collectors.toList());
+            if (inputInList.size() != 6) {
+                throw new IllegalArgumentException("로또 갯가 6개가 아닙니다. ");
+            }
             LottoTicket manualTicket = new LottoTicket(inputInList);
             this.tickets.add(manualTicket);
         }
