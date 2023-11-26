@@ -21,8 +21,8 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printBuyingCount(int buyingCount, int passiveGameCount) {
-        System.out.printf(BUYING_CONFIRM_QUESTION, passiveGameCount, buyingCount - passiveGameCount);
+    public static void printBuyingCount(int buyingCount, int manualLottoCount) {
+        System.out.printf(BUYING_CONFIRM_QUESTION, manualLottoCount, buyingCount - manualLottoCount);
     }
 
     public static void printLottoLines(LottoGame lottoGame) {

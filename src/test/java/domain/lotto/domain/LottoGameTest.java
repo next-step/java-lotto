@@ -38,7 +38,7 @@ class LottoGameTest {
     @DisplayName("로또 게임 생성 실패 (1000원 입금 ->  2라인 수동)")
     @Test
     void create_lotto_game_with_manual_lines_fail() {
-        List<LottoLine> passiveLottoLines = List.of(
+        List<LottoLine> manualLottoLines = List.of(
                 LottoLine.create(Set.of(
                                 1, 2, 3, 4, 5, 6)
                         .stream()
@@ -51,7 +51,7 @@ class LottoGameTest {
                         .collect(Collectors.toSet()))
         );
 
-        assertThatThrownBy(() -> LottoGame.newInstance(1000, 2, passiveLottoLines))
+        assertThatThrownBy(() -> LottoGame.newInstance(1000, 2, manualLottoLines))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("수동 구매 수는 전체 수보다 클 수 없습니다.");
     }

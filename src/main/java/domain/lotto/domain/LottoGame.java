@@ -19,13 +19,13 @@ public class LottoGame {
         buyLottoLines(gameCount);
     }
 
-    protected LottoGame(int buyingPrice, int passiveGameCount, List<LottoLine> passiveLottoLines) {
+    protected LottoGame(int buyingPrice, int manualLottoCount, List<LottoLine> manualLottoLines) {
         this.lottoLines = new ArrayList<>();
         this.gameCount = calculateGameCount(buyingPrice);
-        
-        validatePassiveGameCount(passiveGameCount);
-        buyLottoLines(passiveLottoLines);
-        buyLottoLines(gameCount - passiveGameCount);
+
+        validateManualLottoCount(manualLottoCount);
+        buyLottoLines(manualLottoLines);
+        buyLottoLines(gameCount - manualLottoCount);
     }
 
     private static int calculateGameCount(int buyingPrice) {
@@ -36,12 +36,12 @@ public class LottoGame {
         return new LottoGame(buyingPrice);
     }
 
-    public static LottoGame newInstance(int buyingPrice, int passiveGameCount, List<LottoLine> passiveLottoLines) {
-        return new LottoGame(buyingPrice, passiveGameCount, passiveLottoLines);
+    public static LottoGame newInstance(int buyingPrice, int manualLottoCount, List<LottoLine> manualLottoLines) {
+        return new LottoGame(buyingPrice, manualLottoCount, manualLottoLines);
     }
 
-    private void validatePassiveGameCount(int passiveGameCount) {
-        if (passiveGameCount > gameCount) {
+    private void validateManualLottoCount(int manualLottoCount) {
+        if (manualLottoCount > gameCount) {
             throw new IllegalArgumentException("수동 구매 수는 전체 수보다 클 수 없습니다.");
         }
     }
@@ -63,8 +63,8 @@ public class LottoGame {
         }
     }
 
-    private void buyLottoLines(List<LottoLine> passiveLottoLines) {
-        lottoLines.addAll(passiveLottoLines);
+    private void buyLottoLines(List<LottoLine> manualLottoLines) {
+        lottoLines.addAll(manualLottoLines);
     }
 
 
