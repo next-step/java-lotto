@@ -4,6 +4,7 @@ import lotto.enums.Rank;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class WinningNumbers extends LottoNumbers {
@@ -12,7 +13,7 @@ public class WinningNumbers extends LottoNumbers {
     // 수동 생성(당첨번호)
     public WinningNumbers(List<Integer> numbers, int bonusNumber) {
         this.validateCount(numbers);
-        this.numbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toSet());
+        this.numbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toCollection(TreeSet::new));
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 

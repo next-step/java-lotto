@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -23,7 +20,7 @@ public class LottoNumbers {
     // 수동 생성
     public LottoNumbers(List<Integer> numbers) {
         this.validateCount(numbers);
-        this.numbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toSet());
+        this.numbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toCollection(TreeSet::new));
     }
 
     public boolean isNumberMatched(LottoNumber lottoNumber) {
