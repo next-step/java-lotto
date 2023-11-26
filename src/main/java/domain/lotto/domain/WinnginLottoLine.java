@@ -11,6 +11,10 @@ public class WinnginLottoLine extends LottoLine {
         super(lottoNumbers);
     }
 
+    public WinnginLottoLine(String lottoLineString) {
+        super(lottoLineString);
+    }
+
     public LottoStatistics match(List<LottoLine> lottoLines, LottoNumber bonusBall) {
         LottoStatistics lottoStatistics = new LottoStatistics();
 

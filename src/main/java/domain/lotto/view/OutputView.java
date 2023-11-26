@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class OutputView {
 
-    public static final String BUYING_CONFIRM_QUESTION = "개를 구매했습니다.";
+    public static final String BUYING_CONFIRM_QUESTION = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
 
     public static final Map<Rank, String> RANK_DESCRIPTIONS = Map.of(
             Rank.FIRST, "6개 일치 (2000000000원)",
@@ -21,8 +21,8 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printBuyingCount(Integer buyingCount) {
-        System.out.println(buyingCount + BUYING_CONFIRM_QUESTION);
+    public static void printBuyingCount(int buyingCount, int manualLottoCount) {
+        System.out.printf(BUYING_CONFIRM_QUESTION, manualLottoCount, buyingCount - manualLottoCount);
     }
 
     public static void printLottoLines(LottoGame lottoGame) {

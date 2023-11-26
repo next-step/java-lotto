@@ -10,24 +10,41 @@ public class LottoGame {
     private LottoStatistics lottoStatistics;
     private WinnginLottoLine winningLottoLine;
     private LottoNumber bonusBall;
-
     private double profitRate;
 
 
     protected LottoGame(int buyingPrice) {
         this.lottoLines = new ArrayList<>();
         this.gameCount = calculateGameCount(buyingPrice);
-        buyLottoLines();
+        buyAutoLottoLines(gameCount);
+    }
+
+    protected LottoGame(int buyingPrice, int manualLottoCount, List<LottoLine> manualLottoLines) {
+        this.lottoLines = new ArrayList<>();
+        this.gameCount = calculateGameCount(buyingPrice);
+
+        validateManualLottoCount(manualLottoCount);
+        buyManualLottoLines(manualLottoLines);
+        buyAutoLottoLines(gameCount - manualLottoCount);
     }
 
     private static int calculateGameCount(int buyingPrice) {
         return buyingPrice / LOTTO_PRICE;
     }
 
-    public static LottoGame from(Integer buyingPrice) {
+    public static LottoGame from(int buyingPrice) {
         return new LottoGame(buyingPrice);
     }
 
+    public static LottoGame newInstance(int buyingPrice, int manualLottoCount, List<LottoLine> manualLottoLines) {
+        return new LottoGame(buyingPrice, manualLottoCount, manualLottoLines);
+    }
+
+    private void validateManualLottoCount(int manualLottoCount) {
+        if (manualLottoCount > gameCount) {
+            throw new IllegalArgumentException("수동 구매 수는 전체 수보다 클 수 없습니다.");
+        }
+    }
 
     public void calculateStatistics() {
         this.lottoStatistics = winningLottoLine.match(lottoLines, bonusBall);
@@ -38,12 +55,16 @@ public class LottoGame {
         this.winningLottoLine = winningLottoLine;
     }
 
-    private void buyLottoLines() {
+    private void buyAutoLottoLines(int buyCount) {
         int index = 0;
-        while (index < gameCount) {
+        while (index < buyCount) {
             lottoLines.add(LottoLine.create());
             index++;
         }
+    }
+
+    private void buyManualLottoLines(List<LottoLine> manualLottoLines) {
+        lottoLines.addAll(manualLottoLines);
     }
 
 
@@ -66,7 +87,6 @@ public class LottoGame {
     public LottoNumber getBonusBall() {
         return bonusBall;
     }
-
 
     public double getProfitRate() {
         return profitRate;

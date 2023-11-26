@@ -1,5 +1,7 @@
 package domain.lotto.domain;
 
+import util.StringParser;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -13,10 +15,20 @@ public class LottoLine {
         this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
     }
 
+    protected LottoLine(String lottoLineString) {
+        this(parseLottoNumbers(lottoLineString));
+    }
+
     public static LottoLine create() {
         Set<LottoNumber> lottoNumbers = chooseLottoNumber();
         return new LottoLine(lottoNumbers);
     }
+
+    public static LottoLine from(String lottoLineString) {
+        Set<LottoNumber> lottoNumbers = parseLottoNumbers(lottoLineString);
+        return new LottoLine(lottoNumbers);
+    }
+
 
     public static LottoLine create(Set<LottoNumber> lottoNumbers) {
         return new LottoLine(lottoNumbers);
@@ -30,6 +42,14 @@ public class LottoLine {
             lottoNumbers.add(lottoNumber);
         }
         return Collections.unmodifiableSet(lottoNumbers);
+    }
+
+    private static Set<LottoNumber> parseLottoNumbers(String lottoLineString) {
+        String[] lottoNumbersString = StringParser.parseComma(lottoLineString);
+        return Arrays.stream(lottoNumbersString)
+                .mapToInt(Integer::parseInt)
+                .mapToObj(LottoNumber::from)
+                .collect(Collectors.toSet());
     }
 
     private void validateLottoNumbers(Set<LottoNumber> lottoNumbers) {
