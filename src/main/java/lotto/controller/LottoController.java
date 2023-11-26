@@ -16,13 +16,17 @@ public class LottoController {
 
     public static void run() {
         final int amount = InputView.inputAmount();
-
         PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
         final int quantity = purchaseAmount.calculateLottoQuantity();
-        OutputView.outputQuantity(quantity);
 
-        LottoMachine lottoMachine = new LottoMachine();
-        List<Lotto> lottos = lottoMachine.issueLottos(quantity, new AutoLottoNumberGenerator());
+        final int manualQuantity = InputView.inputManualQuantity();
+        List<Lotto> manualLottos = LottoMachine.issueManualLottos(InputView.inputManualNumbers(manualQuantity));
+
+        final int autoQuantity = quantity - manualQuantity;
+        List<Lotto> autoLottos = LottoMachine.issueAutoLottos(autoQuantity);
+
+        OutputView.outputQuantity(manualQuantity, autoQuantity);
+        List<Lotto> lottos = LottoMachine.addAllLottos(manualLottos, autoLottos);
         OutputView.outputLottos(lottos);
 
         List<Integer> winningNumbers = InputView.inputWinningNumbers(DELIMITER);
