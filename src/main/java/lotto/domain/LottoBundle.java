@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.strategy.LottoGenerator;
 
 import java.util.Arrays;
-import java.util.LinkedHashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -27,11 +27,11 @@ public class LottoBundle {
 
     public Map<LottoResult, Integer> checkWinningResult(Lotto winningLotto) {
         Map<LottoResult, Integer> lottoResults = Arrays.stream(LottoResult.values())
-                .collect(Collectors.toMap(k -> k, v -> 0, (x, y) -> y, LinkedHashMap::new));
+                .collect(Collectors.toMap(key -> key, value -> 0, (x, y) -> y, () -> new EnumMap<>(LottoResult.class)));
 
         for (Lotto lotto : lottoList) {
             LottoResult lottoResult = lotto.match(winningLotto);
-            lottoResults.put(lottoResult, lottoResults.getOrDefault(lottoResult, 0) + 1);
+            lottoResults.put(lottoResult, lottoResults.get(lottoResult) + 1);
         }
 
         return lottoResults;
