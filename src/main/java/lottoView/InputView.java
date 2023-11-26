@@ -14,13 +14,25 @@ public class InputView {
         return LottoInputValue.convertNum(text);
     }
 
+
     public static LottoInputValue lastLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return new LottoInputValue(SCANNER.nextLine());
+    }
+
+    public static LottoInputValue manualLottoNumbers() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         return new LottoInputValue(SCANNER.nextLine());
     }
 
     public static LottoInputValue inputLottoBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return new LottoInputValue(SCANNER.nextLine());
+    }
+
+    public static int inputLottoManualNumber() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        String text = SCANNER.nextLine();
+        return LottoInputValue.convertNum(text);
     }
 }

@@ -16,9 +16,18 @@ public class LottoMain {
     public static void main(String[] args) {
         int money = InputView.inputMoney();
         int gameCount = LottoDomain.countGame(money);
-        ResultView.resultCount(gameCount);
+        int manualCount = InputView.inputLottoManualNumber();
+        int autoCount = gameCount - manualCount;
 
-        List<Lotto> lottos = LottoDomain.createLottoGames(gameCount);
+        /**
+         *  수동 로또 번호 입력
+         */
+        LottoInputValue manualInputValue = InputView.manualLottoNumbers();
+        List<Lotto> manualLottos = manualInputValue.convertManualLottoNumbers(manualCount);
+
+
+        ResultView.resultCount(manualCount, autoCount);
+        List<Lotto> lottos = LottoDomain.createLottoGames(autoCount);
         ResultView.printLottoNumber(lottos);
 
         LottoInputValue lottoInputValue = InputView.lastLottoNumbers();
@@ -26,6 +35,8 @@ public class LottoMain {
 
         LottoInputValue lottoInputBonusNumber = InputView.inputLottoBonusNumber();
         int lottoBonusNumber = lottoInputBonusNumber.convertLottoBonusNumbers(lastLotto);
+
+        lottos.addAll(manualLottos);
 
         LottoResult lottoResult = LottoResult.result(money, lottos, new ArrayList<>(lastLotto), lottoBonusNumber);
         ResultView.printLottoResult(lottoResult);

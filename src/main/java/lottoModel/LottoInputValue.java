@@ -1,6 +1,8 @@
 package lottoModel;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class LottoInputValue {
@@ -20,6 +22,23 @@ public class LottoInputValue {
             throw new IllegalArgumentException("보너스 번호는 당첨번호에서 제외된 숫자여야 함.");
         }
         return bonusNumber;
+    }
+
+    public List<Lotto> convertManualLottoNumbers(int manualCount){
+
+        List<Lotto> manualLottos = new ArrayList<>();
+        String[] manualGames = splitTextByEnter();
+
+        if(manualGames.length!=manualCount){
+            throw new IllegalArgumentException("수동으로 구매한 게임수와 동일 하게 수동 넘버 수를 입력 해주세요.");
+        }
+
+        for(String str : manualGames){
+            LottoInputValue lottoInputValue = new LottoInputValue(str);
+            manualLottos.add(new Lotto(lottoInputValue.convertLastLottoNumbers()));
+        }
+
+        return manualLottos;
     }
 
     public Set<Integer> convertLastLottoNumbers() {
@@ -47,6 +66,10 @@ public class LottoInputValue {
 
     private static String[] splitText(String text) {
         return text.split(",");
+    }
+
+    public String[] splitTextByEnter() {
+        return this.text.split("\n");
     }
 
     private static void checkValid(int number) {
