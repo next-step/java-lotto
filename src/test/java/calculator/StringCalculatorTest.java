@@ -27,8 +27,9 @@ public class StringCalculatorTest {
         assertThat(multiply("3 * 2")).isEqualTo(6);
     }
 
-
-
-
+    @Test
+    void 나눗셈() {
+        assertThat(divide("6 / 2")).isEqualTo(3);
+    }
 
 }
