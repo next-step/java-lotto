@@ -25,10 +25,13 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static String inputSelectedNumber() {
-        scanner.nextLine();
+    public static void inputSelectedNumberInfo() {
         printEnter();
+        scanner.nextLine();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static String inputSelectedNumber() {
         return scanner.nextLine();
     }
 

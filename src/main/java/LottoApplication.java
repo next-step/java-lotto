@@ -24,6 +24,7 @@ public class LottoApplication {
         int manualTicketCount = InputView.inputManualLottoCount();
         LottoSalesService.checkAvailableTicketCount(totalTicketCount, manualTicketCount);
 
+        InputView.inputSelectedNumberInfo();
         for (int i = 0; i < manualTicketCount; i++) {
             String selectedNumber = InputView.inputSelectedNumber();
             userLottoService.buyManualLottoTickets(selectedNumber);
