@@ -2,6 +2,7 @@ package step4.constant;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LotteryNumber {
 
@@ -45,6 +46,10 @@ public class LotteryNumber {
         return LOTTERY_NUMBERS.get(number - 1);
     }
 
+    public static List<Integer> getAllLotteryNumber() {
+        return LOTTERY_NUMBERS.stream().map(l -> l.value).collect(Collectors.toList());
+    }
+
     public int getValue() {
         return value;
     }
@@ -72,5 +77,9 @@ public class LotteryNumber {
     @Override
     public int hashCode() {
         return getValue();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getAllLotteryNumber());
     }
 }

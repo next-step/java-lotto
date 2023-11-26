@@ -11,6 +11,8 @@ import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
+import step4.constant.LotteryNumber;
+
 public class LotteryUtil {
 
     private static List<Integer> balls;
@@ -31,10 +33,7 @@ public class LotteryUtil {
     }
 
     public static void prepare() {
-        balls = new ArrayList<>();
-        for (int ball = 1; ball <= 45; ball++) {
-            balls.add(ball);
-        }
+        balls = LotteryNumber.getAllLotteryNumber();
     }
 
     public static List<Integer> getNumbers(String numberStr) {
