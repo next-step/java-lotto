@@ -1,6 +1,5 @@
 package com.fineroot.lotto.domain;
 
-import com.fineroot.lotto.dto.Money;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
@@ -39,11 +38,11 @@ public class WinnerStatus {
         return winningMap.get(winningRank);
     }
 
-    public double totalEarningRate(Money purchaseMoney) {
+    public double totalEarningRate(LottoPayment purchaseLottoPayment) {
         double sum = 0.0d;
         for (Entry<WinningRank, Integer> winningMapEntry : winningMap.entrySet()) {
             sum += winningMapEntry.getKey().getWinnerPrice() * winningMapEntry.getValue();
         }
-        return sum / purchaseMoney.getValue();
+        return purchaseLottoPayment.divide(sum);
     }
 }

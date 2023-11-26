@@ -1,27 +1,24 @@
 package com.fineroot.lotto.viewmodel;
 
-import com.fineroot.lotto.dto.LottoBundleStatus;
-import com.fineroot.lotto.dto.Money;
 import com.fineroot.lotto.domain.WinnerStatus;
 import com.fineroot.lotto.domain.WinningRank;
-import com.fineroot.lotto.util.LottoUtils;
+import com.fineroot.lotto.dto.LotteryOrderSet;
+import com.fineroot.lotto.dto.LottoBundleStatus;
 import java.util.List;
 
 public class ResultViewModel {
 
-    private int lottoCount;
+    private LotteryOrderSet lotteryOrderSet;
     private LottoBundleStatus lotteryBundleStatus;
-
     private WinnerStatus winnerStatus;
 
     public ResultViewModel() {
-        this.lottoCount = 0;
         this.lotteryBundleStatus = LottoBundleStatus.from(List.of());
         this.winnerStatus = WinnerStatus.create();
     }
 
-    public void saveLottoCount(final int lottoCount) {
-        this.lottoCount = lottoCount;
+    public void saveLotteryCountSet(final LotteryOrderSet lotteryOrderSet) {
+        this.lotteryOrderSet = lotteryOrderSet;
     }
 
     public void saveLotteryBundleStatus(final LottoBundleStatus lotteryBundleStatus) {
@@ -30,10 +27,6 @@ public class ResultViewModel {
 
     public void saveWinnerStatus(final WinnerStatus winnerStatus) {
         this.winnerStatus = winnerStatus;
-    }
-
-    public int getLottoCount() {
-        return lottoCount;
     }
 
     public LottoBundleStatus getLotteryBundleStatus() {
@@ -46,6 +39,14 @@ public class ResultViewModel {
 
     public double getTotalEarningRate() {
         return Math.floor(
-                winnerStatus.totalEarningRate(Money.from(lottoCount * LottoUtils.LOTTO_EACH_PRICE)) * 100) /100;
+                winnerStatus.totalEarningRate(lotteryOrderSet.getLottoPayment()) * 100) / 100;
+    }
+
+    public String autoLotteryCount() {
+        return lotteryOrderSet.getAutoLotteryCount().toString();
+    }
+
+    public String manualLotteryCount() {
+        return lotteryOrderSet.getManualLotteryCount().toString();
     }
 }

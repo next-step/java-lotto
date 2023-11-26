@@ -27,7 +27,14 @@ class LottoBundleTest {
     @DisplayName("당첨 확인")
     void matchWinner() {
         LottoBundle lottoBundle = LottoBundle.fromList(List.of("1,2,3,4,5,6", "7,8,9,10,11,12", "13,14,15,16,17,18"));
-        WinnerStatus winnerStatus = lottoBundle.matchWinner(WinningNumberSet.of(WinningNumber.from("1,2,3,8,9,10"), LottoNumber.from(11)));
+        WinnerStatus winnerStatus = lottoBundle.matchWinner(
+                WinningNumberSet.of(WinningNumber.from("1,2,3,8,9,10"), LottoNumber.from(11)));
         assertThat(winnerStatus.matchCount(WinningRank.FIFTH_PRIZE)).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("다른 로또 묶음 더하기")
+    void addBundle() {
+        assertThat(LottoBundle.from(5).addBundle(LottoBundle.from(5)).size()).isEqualTo(10);
     }
 }

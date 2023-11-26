@@ -19,13 +19,6 @@ public enum WinningRank {
         this.winnerPrice = winnerPrice;
     }
 
-    public static WinningRank of(int matchCount) {
-        return Arrays.stream(WinningRank.values())
-                .filter(rank -> rank.matchCount == matchCount)
-                .findFirst()
-                .orElse(WinningRank.NONE);
-    }
-
     public static WinningRank valueOf(int matchCount, boolean hasBonus){
         if(isSecond(matchCount, hasBonus)){
             return WinningRank.SECOND_PRIZE;

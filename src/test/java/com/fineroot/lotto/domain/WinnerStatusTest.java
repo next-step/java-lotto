@@ -2,34 +2,15 @@ package com.fineroot.lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.fineroot.lotto.domain.LottoBundle;
-import com.fineroot.lotto.domain.WinnerStatus;
-import com.fineroot.lotto.domain.WinningRank;
-import com.fineroot.lotto.dto.Money;
 import com.fineroot.lotto.dto.WinningNumber;
 import com.fineroot.lotto.dto.WinningNumberSet;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class WinnerStatusTest {
-
-    private LottoBundle lottoBundle;
-    private WinningNumberSet winningNumber;
-
-    @BeforeEach
-    void setUp() {
-        lottoBundle = LottoBundle.fromList(
-                List.of("1,2,3,4,5,6",
-                        "7,8,9,10,11,12",
-                        "13,14,15,16,17,18",
-                        "19,20,21,22,23,24",
-                        "25,26,27,28,29,30"));
-        winningNumber = WinningNumberSet.of(WinningNumber.from("1,2,3,7,8,9"), LottoNumber.from(10));
-    }
 
     @Test
     @DisplayName("create 생성")
@@ -61,8 +42,15 @@ class WinnerStatusTest {
     @Test
     @DisplayName("총 수익률")
     void totalEarningRate() {
+        LottoBundle lottoBundle = LottoBundle.fromList(
+                List.of("1,2,3,4,5,6",
+                        "7,8,9,10,11,12",
+                        "13,14,15,16,17,18",
+                        "19,20,21,22,23,24",
+                        "25,26,27,28,29,30"));
+        WinningNumberSet winningNumber = WinningNumberSet.of(WinningNumber.from("1,2,3,7,8,9"), LottoNumber.from(10));
         WinnerStatus winnerStatus = lottoBundle.matchWinner(winningNumber);
-        double earningRate = winnerStatus.totalEarningRate(Money.from(5000));
+        double earningRate = winnerStatus.totalEarningRate(LottoPayment.from(5000));
         assertThat(earningRate).isEqualTo(2.0d);
     }
 }
