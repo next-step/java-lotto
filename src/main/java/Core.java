@@ -8,8 +8,7 @@ public class Core {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
-        Operater operater = Operater.defaultOf(input);
-        int result = operater.calculate();
+        int result = Operater.calculate(input);
 
         OutPutView.result(result);
     }

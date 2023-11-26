@@ -6,21 +6,26 @@ import operation.implemantation.MultiplyOperation;
 import operation.implemantation.PlusOperation;
 
 public class OperationFactory {
-    public static Operation make(String stringOperation) {
+
+    public static int calculateRightNow(int result, int number, String stringOperation) {
         if (stringOperation.equals("+")) {
-            return new PlusOperation();
+            PlusOperation plusOperation = new PlusOperation();
+            return plusOperation.calculate(result,number);
         }
 
         if (stringOperation.equals("-")) {
-            return new MinusOperation();
+            MinusOperation minusOperation = new MinusOperation();
+            return minusOperation.calculate(result, number);
         }
 
         if (stringOperation.equals("*")) {
-            return new MultiplyOperation();
+            MultiplyOperation multiplyOperation = new MultiplyOperation();
+            return multiplyOperation.calculate(result, number);
         }
 
         if (stringOperation.equals("/")) {
-            return new DivideOperation();
+            DivideOperation divideOperation = new DivideOperation();
+            return divideOperation.calculate(result, number);
         }
 
         throw new IllegalArgumentException("사칙연산만 실행 가능합니다.");
