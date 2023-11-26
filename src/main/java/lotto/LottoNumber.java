@@ -1,3 +1,5 @@
+package lotto;
+
 import java.util.Random;
 
 public class LottoNumber {
@@ -38,5 +40,12 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return number;
+    }
+
+    @Override
+    public String toString() {
+        return "lotto.LottoNumber{" +
+            "number=" + number +
+            '}';
     }
 }

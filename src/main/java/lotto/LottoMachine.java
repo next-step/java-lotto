@@ -1,3 +1,5 @@
+package lotto;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,5 +17,13 @@ public class LottoMachine {
             lottos.add(Lotto.defaultOf());
         }
         return Lottos.of(lottos);
+    }
+
+    public static Lotto resultIs() {
+        return Lotto.defaultOf();
+    }
+
+    public static LottoResult match(Lotto result, Lottos lottos) {
+        return lottos.countMatching(result);
     }
 }
