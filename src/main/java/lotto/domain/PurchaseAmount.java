@@ -14,7 +14,7 @@ public class PurchaseAmount implements Comparable<PurchaseAmount> {
                 return value;
         }
 
-        public static PurchaseAmount createPurchaseAmountOfScanned(long totalAmount) {
+        public static PurchaseAmount createPurchaseAmount(long totalAmount) {
                 validatePurchaseAmount(totalAmount);
                 return new PurchaseAmount(totalAmount);
         }

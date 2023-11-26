@@ -16,17 +16,17 @@ import lotto.view.OutputView;
 public class LottoMain {
 
         public static void main(String[] args) {
-                PurchaseAmount scanAmount = PurchaseAmount.createPurchaseAmountOfScanned(InputView.scanInputAmount());
-                int countOfManualTicket = InputView.scanCountOfManualNumberTicket();
+                PurchaseAmount inputAmount = PurchaseAmount.createPurchaseAmount(InputView.inputAmount());
+                int countOfManualTicket = InputView.inputCountOfManualNumberTicket();
 
                 LottoMachine lottoMachine = new LottoMachine();
                 Tickets tickets = new Tickets(null);
                 if (!hasManualTicket(countOfManualTicket)) {
-                        tickets = lottoMachine.buyOnlyAutoTickets((scanAmount));
+                        tickets = lottoMachine.buyOnlyAutoTickets((inputAmount));
                 }
                 if (hasManualTicket(countOfManualTicket)) {
                         List<LottoNumbers> manualLottoNumbers = markManualLottoNumbers(countOfManualTicket);
-                        tickets = lottoMachine.buyAutoAndManualTickets(scanAmount, manualLottoNumbers);
+                        tickets = lottoMachine.buyAutoAndManualTickets(inputAmount, manualLottoNumbers);
                 }
 
                 int purchaseCount = tickets.getCountOfTickets();
@@ -35,14 +35,14 @@ public class LottoMain {
                 OutputView.printGeneratedTickets(tickets.values());
 
                 WinningNumbers winningNumbers = new WinningNumbers(
-                    TextManipulator.splitNumberTextByComma(InputView.scanWinningNumberText()).stream()
+                    TextManipulator.splitNumberTextByComma(InputView.inputWinningNumberText()).stream()
                         .map(LottoNumber::new).collect(Collectors.toList()),
-                    new LottoNumber(InputView.scanBonusNumberText()));
+                    new LottoNumber(InputView.inputBonusNumberText()));
                 WinningTickets winningTickets = tickets.analyzeWinningTickets(winningNumbers);
 
                 OutputView.printResultOfWinningTitle();
                 OutputView.printResultOfWinning(winningTickets);
-                long netPurchaseAmount = scanAmount.calculateNetPurchaseAmount(tickets);
+                long netPurchaseAmount = inputAmount.calculateNetPurchaseAmount(tickets);
                 OutputView.printRateOfBenefit(winningTickets.calculateRateOfBenefit(netPurchaseAmount));
         }
 
@@ -51,7 +51,7 @@ public class LottoMain {
         }
 
         private static List<LottoNumbers> markManualLottoNumbers(int countOfManualTicket) {
-                return InputView.scanManualNumbers(countOfManualTicket)
+                return InputView.inputManualNumbers(countOfManualTicket)
                     .stream().map(LottoMain::convertLottoNumbersTextToLottoNumbers).collect(Collectors.toList());
         }
 
