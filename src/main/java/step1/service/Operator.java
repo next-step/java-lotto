@@ -1,8 +1,8 @@
-package step1;
+package step1.service;
 
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 public enum Operator {
 
@@ -14,22 +14,22 @@ public enum Operator {
 
     private String symbol;
 
-    private BiFunction<Integer, Integer, Integer> operate;
+    private BinaryOperator<Integer> operate;
 
-    Operator(final String symbol, final BiFunction<Integer, Integer, Integer> operate) {
+    Operator(final String symbol, final BinaryOperator<Integer> operate) {
         this.symbol = symbol;
         this.operate = operate;
     }
 
-    private static Integer subtract(Integer a, Integer b) {
+    private static int subtract(int a, int b) {
         return a - b;
     }
 
-    private static Integer multiple(Integer a, Integer b) {
+    private static int multiple(int a, int b) {
         return a * b;
     }
 
-    private static Integer divide(Integer a, Integer b) {
+    private static int divide(int a, int b) {
         if (a % b != 0) {
             throw new IllegalArgumentException("나눗셈의 경우 결과 값을 정수로 떨어지는 값으로 한정됩니다.");
         }
@@ -43,7 +43,7 @@ public enum Operator {
     public static Operator of(final String symbol) {
         return Arrays.stream(values()).filter(a -> Objects.equals(a.symbol, symbol))
                 .findFirst()
-                .orElseThrow(() -> { throw new IllegalArgumentException("사칙연산 기호가 아닙니다."); });
+                .orElseThrow(() -> new IllegalArgumentException("사칙연산 기호가 아닙니다."));
     }
 
 }

@@ -1,11 +1,13 @@
 package step1;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import step1.service.Operator;
+import step1.service.OperatorService;
 
 import static org.assertj.core.api.Assertions.*;
-import static step1.Operator.*;
 
 public class OperatorTest {
 
@@ -51,12 +53,6 @@ public class OperatorTest {
             Operator.of("$");
         }).withMessage("사칙연산 기호가 아닙니다.");
     }
-
-
-    @Test
-    @DisplayName("사칙 연산을 모두 포함하는 연산")
-    void 사칙_연산_모두_포함하는_연산() {
-        String input = "2 + 3 * 4 / 2";
-        assertThat(new OperatorService().operate(input)).isEqualTo(10);
-    }
 }
+
+
