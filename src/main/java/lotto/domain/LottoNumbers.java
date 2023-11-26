@@ -34,8 +34,12 @@ public class LottoNumbers {
         }
 
         private void validateCountOfLottoNumbers(Set<LottoNumber> values) {
-                if (values.size() != COUNT_OF_LOTTO_NUMBERS_LIMIT) {
+                if (isNotCountOfLottoNumbersLimit(values.size())) {
                         throw new IllegalArgumentException("로또는 6개의 중복되지 않는 번호를 가져야 합니다.");
                 }
+        }
+
+        private boolean isNotCountOfLottoNumbersLimit(int count) {
+                return count != COUNT_OF_LOTTO_NUMBERS_LIMIT;
         }
 }

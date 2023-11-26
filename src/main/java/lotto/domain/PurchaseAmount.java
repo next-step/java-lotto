@@ -38,12 +38,12 @@ public class PurchaseAmount implements Comparable<PurchaseAmount> {
                 return new PurchaseAmount(purchaseAmountOfAuto);
         }
 
-        public long calculateNetPurchaseAmount(Tickets tickets) {
-                return (long) tickets.getCountOfTickets() * LOTTO_TICKET_PRICE;
-        }
-
         public long calculatePurchaseQuantity() {
                 return value / LOTTO_TICKET_PRICE;
+        }
+
+        public long calculateNetPurchaseAmount(Tickets tickets) {
+                return (long) tickets.getCountOfTickets() * LOTTO_TICKET_PRICE;
         }
 
         private static void validatePurchaseAmount(long purchaseAmount) {
@@ -58,12 +58,12 @@ public class PurchaseAmount implements Comparable<PurchaseAmount> {
                 }
         }
 
-        private static boolean isNotAvailableToBuyAuto(long purchaseAmountOfAuto) {
-                return purchaseAmountOfAuto < 1000;
-        }
-
         private long subtract(PurchaseAmount o) {
                 return this.value - o.value;
+        }
+
+        private static boolean isNotAvailableToBuyAuto(long purchaseAmountOfAuto) {
+                return purchaseAmountOfAuto < 1000;
         }
 
         @Override
