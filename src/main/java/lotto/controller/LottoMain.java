@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.LottoMachine;
@@ -20,14 +21,11 @@ public class LottoMain {
                 int countOfManualTicket = InputView.inputCountOfManualNumberTicket();
 
                 LottoMachine lottoMachine = new LottoMachine();
-                Tickets tickets = new Tickets(null);
-                if (!hasManualTicket(countOfManualTicket)) {
-                        tickets = lottoMachine.buyOnlyAutoTickets((inputAmount));
-                }
+                List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
                 if (hasManualTicket(countOfManualTicket)) {
-                        List<LottoNumbers> manualLottoNumbers = markManualLottoNumbers(countOfManualTicket);
-                        tickets = lottoMachine.buyAutoAndManualTickets(inputAmount, manualLottoNumbers);
+                        manualLottoNumbers = markManualLottoNumbers(countOfManualTicket);
                 }
+                Tickets tickets = lottoMachine.buyTickets(inputAmount, manualLottoNumbers);
 
                 int purchaseCount = tickets.getCountOfTickets();
                 OutputView.printPurchaseCount(purchaseCount);
@@ -46,8 +44,8 @@ public class LottoMain {
                 OutputView.printRateOfBenefit(winningTickets.calculateRateOfBenefit(netPurchaseAmount));
         }
 
-        private static boolean hasManualTicket(int countOfManualTicket) {
-                return countOfManualTicket > 0;
+        private static boolean hasManualTicket(int countOfManualTickets) {
+                return countOfManualTickets != 0;
         }
 
         private static List<LottoNumbers> markManualLottoNumbers(int countOfManualTicket) {

@@ -12,11 +12,22 @@ import java.util.stream.Collectors;
 
 public class LottoMachine {
 
-        public Tickets buyOnlyAutoTickets(PurchaseAmount totalPurchaseAmount) {
+        public Tickets buyTickets(PurchaseAmount inputAmount, List<LottoNumbers> manualLottoNumbers) {
+                if (!hasManualTicket(manualLottoNumbers)) {
+                        return buyOnlyAutoTickets((inputAmount));
+                }
+                return buyAutoAndManualTickets(inputAmount, manualLottoNumbers);
+        }
+
+        private static boolean hasManualTicket(List<LottoNumbers> manualLottoNumbers) {
+                return !manualLottoNumbers.isEmpty();
+        }
+
+        private Tickets buyOnlyAutoTickets(PurchaseAmount totalPurchaseAmount) {
                 return new Tickets(generateAutoTickets(createPurchaseAmountOfAutoOnly(totalPurchaseAmount)));
         }
 
-        public Tickets buyAutoAndManualTickets(PurchaseAmount totalPurchaseAmount,
+        private Tickets buyAutoAndManualTickets(PurchaseAmount totalPurchaseAmount,
             List<LottoNumbers> manualLottoNumbers) {
                 PurchaseAmount purchaseAmountOfManualTickets = extractManualAmountFromTotal(totalPurchaseAmount,
                     manualLottoNumbers.size());
