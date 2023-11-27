@@ -26,7 +26,7 @@ public class LottoService {
 			numbers.add(Integer.parseInt(number));
 		}
 
-		lottoResult.addRanks(lottoCollection.match(new LottoNumber(numbers)));
+		lottoResult.addRanks(lottoCollection.lottoRanks(new LottoNumber(numbers)));
 		lottoResult.calculateTotalWinningMoney();
 		lottoResult.calculateReturnRate(totalMoney);
 	}

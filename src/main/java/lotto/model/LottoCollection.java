@@ -19,7 +19,7 @@ public class LottoCollection {
 		return this.lottoNumberList;
 	}
 
-	public List<LottoRank> match(LottoNumber winningNumbers) {
+	public List<LottoRank> lottoRanks(LottoNumber winningNumbers) {
 		List<LottoRank> lottoRanks = new ArrayList<>();
 		for (LottoNumber lottoNumber : lottoNumberList) {
 			lottoRanks.add(lottoRank(lottoNumber
