@@ -1,10 +1,11 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Map;
+import lotto.enums.LottoResultType;
 
 public class LottoResult {
 
-  private final Map<LottoResultType,Lottos> result;
+  private final Map<LottoResultType, Lottos> result;
 
   private LottoResult(Map<LottoResultType, Lottos> result) {
     this.result = result;

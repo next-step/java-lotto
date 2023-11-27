@@ -1,12 +1,14 @@
+package lotto;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import lotto.Lotto;
-import lotto.LottoMachine;
-import lotto.LottoNumber;
-import lotto.LottoResult;
-import lotto.LottoResultType;
-import lotto.Lottos;
+import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
+import lotto.domain.Lottos;
+import lotto.enums.LottoResultType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

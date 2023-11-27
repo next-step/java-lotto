@@ -1,11 +1,13 @@
+package lotto;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import lotto.Lotto;
-import lotto.LottoMachine;
-import lotto.LottoNumber;
-import lotto.LottoStore;
-import lotto.Lottos;
+import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
+import lotto.service.LottoStore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -52,7 +54,7 @@ public class LottoTest {
   }
 
   @Test
-  @DisplayName("lotto.LottoNumber equals 테스트")
+  @DisplayName("lotto.domain.LottoNumber equals 테스트")
   void lotto_number_equals() {
     // given
     LottoNumber lottoResultNumber1 = LottoNumber.of(5);

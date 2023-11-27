@@ -1,4 +1,4 @@
-package lotto;
+package lotto.enums;
 
 public enum LottoResultType {
 

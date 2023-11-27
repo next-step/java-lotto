@@ -1,8 +1,10 @@
-import lotto.LottoResult;
-import lotto.LottoStore;
-import lotto.Lottos;
-import view.InPutView;
-import view.OutPutView;
+package lotto;
+
+import lotto.domain.LottoResult;
+import lotto.service.LottoStore;
+import lotto.domain.Lottos;
+import lotto.view.InPutView;
+import lotto.view.OutPutView;
 
 public class Core {
 

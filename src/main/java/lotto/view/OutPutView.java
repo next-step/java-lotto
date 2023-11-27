@@ -1,8 +1,8 @@
-package view;
+package lotto.view;
 
-import lotto.LottoResult;
-import lotto.LottoResultType;
-import lotto.Lottos;
+import lotto.domain.LottoResult;
+import lotto.enums.LottoResultType;
+import lotto.domain.Lottos;
 
 public class OutPutView {
 
