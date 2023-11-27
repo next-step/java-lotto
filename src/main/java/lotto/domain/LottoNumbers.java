@@ -14,11 +14,15 @@ public class LottoNumbers {
 
     public LottoNumbers(int... numbers) {
         isPossibleLottoNumbers(numbers);
-        this.numbers = IntStream.of(numbers).boxed().collect(Collectors.toList());
+        this.numbers = IntStream.of(numbers)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     public LottoNumbers(int minLottoNumber, int maxLottoNumber) {
-        List<Integer> shuffledNumbers = IntStream.rangeClosed(minLottoNumber, maxLottoNumber).boxed().collect(Collectors.toList());
+        List<Integer> shuffledNumbers = IntStream.rangeClosed(minLottoNumber, maxLottoNumber)
+                .boxed()
+                .collect(Collectors.toList());
         Collections.shuffle(shuffledNumbers);
         this.numbers = shuffledNumbers.subList(0, 6);
         Collections.sort(this.numbers);
