@@ -10,9 +10,12 @@ public class LottoIssuer {
             IntStream.rangeClosed(LottoNumber.LOTTO_NUM_START, LottoNumber.LOTTO_NUM_END)
                     .boxed()
                     .collect(Collectors.toCollection(ArrayList::new));
-    private final int BASE_MONEY = 1000;
+    public static final int BASE_MONEY = 1000;
 
     public List<LottoTicket> issueTickets(int count) {
+        if(count < 0) {
+            throw new IllegalArgumentException("로또는 0개 이상이어야 합니다.");
+        }
         List<LottoTicket> tickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             tickets.add(new LottoTicket(issueTicket()));
