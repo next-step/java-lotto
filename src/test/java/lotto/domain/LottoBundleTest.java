@@ -17,8 +17,9 @@ public class LottoBundleTest {
     @MethodSource("LottoResultProvider")
     void 로또_당첨결과_확인(Lotto lotto, LottoResult lottoResult) {
         LottoBundle lottoBundle = new LottoBundle(List.of(lotto));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), 7);
 
-        Map<LottoResult, Integer> winningResult = lottoBundle.checkWinningResult(new Lotto(1, 2, 3, 4, 5, 6));
+        Map<LottoResult, Integer> winningResult = lottoBundle.checkWinningResult(winningLotto);
 
         assertThat(winningResult.get(lottoResult)).isEqualTo(1);
     }
@@ -26,7 +27,8 @@ public class LottoBundleTest {
     public static List<Arguments> LottoResultProvider() {
         return List.of(
                 Arguments.of(new Lotto(1, 2, 3, 4, 5, 6), LottoResult.SIX),
-                Arguments.of(new Lotto(1, 2, 3, 4, 5, 7), LottoResult.FIVE),
+                Arguments.of(new Lotto(1, 2, 3, 4, 5, 7), LottoResult.BONUS),
+                Arguments.of(new Lotto(1, 2, 3, 4, 5, 8), LottoResult.FIVE),
                 Arguments.of(new Lotto(1, 2, 3, 4, 7, 8), LottoResult.FOUR),
                 Arguments.of(new Lotto(1, 2, 3, 7, 8, 9), LottoResult.THREE),
                 Arguments.of(new Lotto(1, 2, 7, 8, 9, 10), LottoResult.FAIL)

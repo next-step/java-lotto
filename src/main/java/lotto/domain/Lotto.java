@@ -38,13 +38,6 @@ public class Lotto {
         }
     }
 
-    public LottoResult match(Lotto winningLotto) {
-        int matchCount = (int) numbers.stream()
-                .filter(number -> winningLotto.numbers.contains(number))
-                .count();
-        return LottoResult.findResult(matchCount);
-    }
-
     public List<Integer> numbers() {
         return this.numbers.stream().map(lottoNumber -> lottoNumber.value()).collect(Collectors.toList());
     }

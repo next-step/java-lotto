@@ -49,20 +49,23 @@ class LottoTest {
 
     @ParameterizedTest
     @MethodSource("LottoMatchParameterProvider")
-    void 로또_일치_확인(List<Integer> lottoList, List<Integer> winningLottoList, LottoResult expected) {
+    void 로또_일치_확인(List<Integer> lottoList, LottoResult expected) {
+        WinningLotto winningLotto = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), 7);
         Lotto lotto = new Lotto(lottoList);
-        Lotto winningLotto = new Lotto(winningLottoList);
-        LottoResult lottoResult = lotto.match(winningLotto);
+
+        LottoResult lottoResult = winningLotto.getLottoResult(lotto);
+
         assertThat(lottoResult).isEqualTo(expected);
     }
 
     private static List<Arguments> LottoMatchParameterProvider() {
         return List.of(
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 3, 5, 7, 9, 11), LottoResult.THREE),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 9, 11), LottoResult.FOUR),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 11), LottoResult.FIVE),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6), LottoResult.SIX),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(6, 7, 8, 9, 10, 11), LottoResult.FAIL)
+                Arguments.of(Arrays.asList(1, 3, 5, 7, 9, 11), LottoResult.THREE),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 9, 11), LottoResult.FOUR),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 11), LottoResult.FIVE),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 7), LottoResult.BONUS),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoResult.SIX),
+                Arguments.of(Arrays.asList(6, 7, 8, 9, 10, 11), LottoResult.FAIL)
         );
     }
 

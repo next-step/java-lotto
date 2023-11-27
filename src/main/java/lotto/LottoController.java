@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoBundle;
 import lotto.domain.LottoResult;
+import lotto.domain.WinningLotto;
 import lotto.strategy.LottoGenerator;
 import lotto.strategy.LottoRandomGenerator;
 import lotto.view.InputView;
@@ -23,7 +24,8 @@ public class LottoController {
         resultView.printPurchaseInfo(lottoBundle);
 
         Lotto winningLotto = inputView.askLottoWinningNumbers();
-        Map<LottoResult, Integer> lottoResults = lottoBundle.checkWinningResult(winningLotto);
+        int bonusNumber = inputView.askBonusNumber();
+        Map<LottoResult, Integer> lottoResults = lottoBundle.checkWinningResult(new WinningLotto(winningLotto, bonusNumber));
         resultView.printWinningStatistics(purchasePrice, lottoResults);
     }
 }

@@ -12,8 +12,8 @@ public class InputView {
     private static Scanner scanner = new Scanner(System.in);
 
     public int askPurchasePrice() {
-        System.out.println("구입금액을 입력해 주세요.");
-        return scanInt();
+            System.out.println("구입금액을 입력해 주세요.");
+            return scanInt();
     }
 
     public Lotto askLottoWinningNumbers() {
@@ -42,4 +42,8 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
+    public int askBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanInt();
+    }
 }
