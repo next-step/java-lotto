@@ -12,8 +12,8 @@ public class LottoNumbers {
         private final Set<LottoNumber> values;
 
         public LottoNumbers(Set<LottoNumber> values) {
+                validateCountOfLottoNumbers(values);
                 this.values = values.stream().sorted().collect(Collectors.toCollection(TreeSet::new));
-                validateCountOfLottoNumbers();
         }
 
         public LottoNumbers(int... values) {
@@ -25,17 +25,17 @@ public class LottoNumbers {
                 return values;
         }
 
-        private void validateCountOfLottoNumbers() {
-                if (this.values.size() != COUNT_OF_LOTTO_NUMBERS_LIMIT) {
-                        throw new IllegalArgumentException("로또는 6개의 번호를 가져야 합니다.");
+        public boolean hasMatchingNumber(LottoNumber number) {
+                return values.contains(number);
+        }
+
+        private void validateCountOfLottoNumbers(Set<LottoNumber> values) {
+                if (isNotCountOfLottoNumbersLimit(values.size())) {
+                        throw new IllegalArgumentException("로또는 6개의 중복되지 않는 번호를 가져야 합니다.");
                 }
         }
 
-        public boolean hasWinningNumber(LottoNumber winningNumber) {
-                return values.contains(winningNumber);
-        }
-
-        public boolean hasBonusNumber(LottoNumber bonusNumber) {
-                return values.contains(bonusNumber);
+        private boolean isNotCountOfLottoNumbersLimit(int count) {
+                return count != COUNT_OF_LOTTO_NUMBERS_LIMIT;
         }
 }

@@ -16,20 +16,19 @@ public class Tickets {
                 return values;
         }
 
+        public int getCountOfTickets() {
+                return values.size();
+        }
+
         public WinningTickets analyzeWinningTickets(WinningNumbers winningNumbers) {
                 Map<Rank, Integer> matchRankCountMap = new EnumMap<>(Rank.class);
                 initMatchRankCountMap(matchRankCountMap);
                 values.forEach(ticket -> {
                         int countOfWinningNumber = ticket.countWinningNumber(winningNumbers);
-                        Rank rank = Rank.valueOfRank(countOfWinningNumber,
-                            ticket.hasBonusNumber(winningNumbers));
+                        Rank rank = Rank.valueOfRank(countOfWinningNumber, ticket.hasBonusNumber(winningNumbers));
                         matchRankCountMap.computeIfPresent(rank, (k, v) -> v + 1);
                 });
                 return new WinningTickets(matchRankCountMap);
-        }
-
-        public int getCountOfTickets() {
-                return values.size();
         }
 
         private void initMatchRankCountMap(Map<Rank, Integer> matchRankCountMap) {

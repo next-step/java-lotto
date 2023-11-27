@@ -3,20 +3,18 @@ package lotto.domain;
 import java.util.stream.Stream;
 
 public enum Rank {
-        FIRST(6, false, 2_000_000_000),
-        SECOND(5, true, 30_000_000),
-        THIRD(5, false, 1_500_000),
-        FOURTH(4, false, 50_000),
-        FIFTH(3, false, 5_000),
-        MISS(0, false, 0);
+        FIRST(6, 2_000_000_000),
+        SECOND(5, 30_000_000),
+        THIRD(5, 1_500_000),
+        FOURTH(4, 50_000),
+        FIFTH(3, 5_000),
+        MISS(0, 0);
 
         private final int matchCount;
-        private final boolean matchedBonus;
         private final long winningMoney;
 
-        Rank(int matchCount, boolean matchedBonus, int winningMoney) {
+        Rank(int matchCount, int winningMoney) {
                 this.matchCount = matchCount;
-                this.matchedBonus = matchedBonus;
                 this.winningMoney = winningMoney;
         }
 
@@ -29,6 +27,9 @@ public enum Rank {
         }
 
         public static Rank valueOfRank(int matchCount, boolean matchedBonus) {
+                if (matchCount <= FIFTH.matchCount && matchedBonus) {
+                        return MISS;
+                }
                 return Stream.of(Rank.values())
                     .filter(val -> val.isSameMatchCount(matchCount, matchedBonus))
                     .findAny()
@@ -36,9 +37,20 @@ public enum Rank {
         }
 
         private boolean isSameMatchCount(int matchCount, boolean matchedBonus) {
-                if (matchCount != 5) {
+                int matchCountWithoutBonus = getMatchCountWithoutBonus(matchCount, matchedBonus);
+                if (matchCountWithoutBonus != 5) {
                         return this.matchCount == matchCount;
                 }
-                return this.matchCount == matchCount && this.matchedBonus == matchedBonus;
+                if (matchedBonus) {
+                        return this == SECOND;
+                }
+                return this == THIRD;
+        }
+
+        private int getMatchCountWithoutBonus(int matchCount, boolean matchedBonus) {
+                if (matchedBonus) {
+                        return --matchCount;
+                }
+                return matchCount;
         }
 }

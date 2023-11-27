@@ -16,17 +16,18 @@ public class Ticket {
 
         public int countWinningNumber(WinningNumbers winningNumbers) {
                 AtomicInteger matchCount = new AtomicInteger();
-                winningNumbers.values()
+                winningNumbers.basicWinningNumbers()
                     .forEach(value -> matchCount.set(matchCount.get() + getOneIfWinningNumberContained(value)));
+                matchCount.set(matchCount.get() + getOneIfWinningNumberContained(winningNumbers.bonusNumber()));
                 return matchCount.get();
         }
 
         public boolean hasBonusNumber(WinningNumbers winningNumbers) {
-                return numbers.hasBonusNumber(winningNumbers.bonusNumber());
+                return numbers.hasMatchingNumber(winningNumbers.bonusNumber());
         }
 
         private int getOneIfWinningNumberContained(LottoNumber winningNumber) {
-                if (numbers.hasWinningNumber(winningNumber)) {
+                if (numbers.hasMatchingNumber(winningNumber)) {
                         return 1;
                 }
                 return 0;
