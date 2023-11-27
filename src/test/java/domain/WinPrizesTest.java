@@ -1,0 +1,6 @@
+package domain;
+
+class WinPrizesTest {
+
+
+}

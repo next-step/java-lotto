@@ -6,4 +6,6 @@ public interface LottoNumbersGenerator {
 
     List<Integer> generate();
 
+    List<Integer> makeLottoNumbers();
+
 }
