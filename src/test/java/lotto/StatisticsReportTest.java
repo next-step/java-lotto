@@ -24,9 +24,9 @@ public class StatisticsReportTest {
         Lotto lotto2 = LottoGenerator.generate(Set.of(6, 5, 4, 3, 2, 1));
         LottoWallet lottoWallet = LottoWallet.of(List.of(lotto1, lotto2), 2);
 
-        Lotto lastWeakLotto = LottoGenerator.generate(Set.of(6, 5, 4, 13, 12, 11));
+        Lotto lastWeekLotto = LottoGenerator.generate(Set.of(6, 5, 4, 13, 12, 11));
         LottoNumber bonusBall = LottoNumber.from(45);
-        WinningLotto winningLotto = WinningLotto.of(lastWeakLotto, bonusBall);
+        WinningLotto winningLotto = WinningLotto.of(lastWeekLotto, bonusBall);
 
         StatisticsReport statisticsReport = StatisticsReport.of(lottoWallet).report(winningLotto);
 
@@ -43,8 +43,8 @@ public class StatisticsReportTest {
     void rate() {
         LottoWallet lottoWallet = getLottoWallet();
         StatisticsReport statisticsReport = StatisticsReport.of(lottoWallet);
-        Lotto lastWeakLotto = LottoGenerator.generate(Set.of(6, 5, 4, 13, 12, 11));
-        WinningLotto winningLotto = WinningLotto.of(lastWeakLotto, LottoNumber.from(45));
+        Lotto lastWeekLotto = LottoGenerator.generate(Set.of(6, 5, 4, 13, 12, 11));
+        WinningLotto winningLotto = WinningLotto.of(lastWeekLotto, LottoNumber.from(45));
         statisticsReport.report(winningLotto);
 
         assertThat(statisticsReport.rate()).isEqualTo(BigDecimal.valueOf(2.5));

@@ -25,7 +25,7 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public List<Integer> lastWeakLottoInit() {
+    public List<Integer> lastWeekLottoInit() {
         List<Integer> integerList = new ArrayList<>();
         sout.print(LAST_WEEK_LOTTO_INIT_MESSAGE);
         scanner.skip("\n");

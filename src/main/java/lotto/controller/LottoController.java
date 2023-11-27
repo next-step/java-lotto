@@ -9,7 +9,6 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoShop;
 import lotto.domain.LottoWallet;
 import lotto.domain.MoneyWallet;
-import lotto.domain.LottoRank;
 import lotto.domain.StatisticsReport;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
@@ -36,9 +35,9 @@ public class LottoController {
         resultView.calculateResult(lottoWallet.totalTicketCount());
         resultView.out(lottoWallet);
 
-        List<LottoNumber> lastWeakLottoNumbers = createLastWeakLottoNumbers(inputView.lastWeakLottoInit());
+        List<LottoNumber> lastWeekLottoNumbers = createLastWeekLottoNumbers(inputView.lastWeekLottoInit());
         int bonusBall = inputView.bonusBallInit();
-        WinningLotto winningLotto = WinningLotto.of(new Lotto(lastWeakLottoNumbers), new LottoNumber(bonusBall));
+        WinningLotto winningLotto = WinningLotto.of(new Lotto(lastWeekLottoNumbers), new LottoNumber(bonusBall));
 
         StatisticsReport report = StatisticsReport.of(lottoWallet).report(winningLotto);
         resultView.resultOut(report);
@@ -52,8 +51,8 @@ public class LottoController {
         return lottoWallet;
     }
 
-    private List<LottoNumber> createLastWeakLottoNumbers(List<Integer> lastWeakLottoInit) {
-        return lastWeakLottoInit.stream().map(LottoNumber::new)
+    private List<LottoNumber> createLastWeekLottoNumbers(List<Integer> lastWeekLottoInit) {
+        return lastWeekLottoInit.stream().map(LottoNumber::new)
             .collect(Collectors.toList());
     }
 
