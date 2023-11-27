@@ -33,7 +33,7 @@ public class StatisticsReport {
     }
 
     private void lottoNumberJudge(WinningLotto winningLotto) {
-        IntStream.range(0, lottoWallet.totalPurchaseAmount())
+        IntStream.range(0, lottoWallet.totalTicketCount())
             .mapToObj(
                 i -> LottoRank.prizeByMatchedCount(winningLotto.compare(lottoWallet.oneTicket(i)),
                     winningLotto.compareBonus(lottoWallet.oneTicket(i))))
