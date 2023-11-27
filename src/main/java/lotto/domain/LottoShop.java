@@ -38,7 +38,7 @@ public class LottoShop {
     }
 
     private static Lotto createLottoTicket() {
-        return Lotto.from(lottoNumberFactory.number());
+        return lottoNumberFactory.createLotto();
     }
 
     public LottoWallet purchase() {
