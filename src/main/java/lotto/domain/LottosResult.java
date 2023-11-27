@@ -22,7 +22,10 @@ public class LottosResult {
     }
 
     public int countByRanking(Ranking ranking) {
-        return (int) lottos.lottos().stream().filter(lotto -> lotto.matchingCount(winningLotto) == ranking.matchingCount()).count();
+        return (int) lottos.lottos()
+                .stream()
+                .filter(lotto -> lotto.matchingCount(winningLotto) == ranking.matchingCount())
+                .count();
     }
 
     private int payment(int amount) {

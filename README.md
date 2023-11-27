@@ -96,3 +96,8 @@
 * [x] 수익률 계산 역할의 위치 고민
 * [ ] Map.of() 활용
   * [x] Ranking 내 Map 삭제
+
+#### Feedback 23.11.27
+* [x] increaseMatchingCount() 구조 변경
+* [x] LottoGenerator 의 lottos() 구조 변경
+* [x] Stream 표현식을 가독성있게 변경

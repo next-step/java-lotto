@@ -15,11 +15,10 @@ public class Lotto {
     }
 
     public int matchingCount(Lotto winningLotto) {
-        int matchingCount = 0;
-        for (int number : winningLotto.lotto()) {
-            matchingCount = increaseMatchingCount(matchingCount, number);
-        }
-        return matchingCount;
+        return (int) winningLotto.lotto()
+                .stream()
+                .filter(lotto::contains)
+                .count();
     }
 
     private int increaseMatchingCount(int matchingCount, int number) {
