@@ -22,12 +22,8 @@ public class ResultView {
                 winningLottos.countLottoByWinningNumber(rank));
     }
 
-    public void printLottoCount(int count) {
-
-    }
-
     public void printLottos(List<Lotto> lottos, int count) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.", count, lottos.size() - count);
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", count, lottos.size() - count);
         for (Lotto lotto : lottos) {
             System.out.println(lotto.numbers());
         }

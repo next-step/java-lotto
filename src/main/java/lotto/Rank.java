@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public enum Rank {
 
@@ -21,6 +22,7 @@ public enum Rank {
 
     public static Rank[] winningRanks() {
         return Arrays.stream(Rank.values())
+                .sorted(Comparator.comparingInt(Rank::ordinal).reversed())
                 .filter(Rank::isMatch)
                 .toArray(Rank[]::new);
     }
