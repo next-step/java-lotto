@@ -11,12 +11,13 @@ public class Application {
     public static void main(String[] args) {
         LottoGame lottoGame = new LottoGame();
         int price = inputView.inputIntegerCommand("구입금액을 입력해 주세요.");
-        lottoGame.buyLotto(price);
+        int count = inputView.inputIntegerCommand("수동으로 구매할 로또 수를 입력해 주세요.");
+        lottoGame.buyManualSelectLotto(inputView.inputManualListCommand("수동으로 구매할 번호를 입력해 주세요.", count));
         resultView.printLottoCount(lottoGame.countLotto());
         resultView.printLottos(lottoGame.lottos());
-        lottoGame.registerWinningLottoNumbers(inputView.inputListCommand("지난 주 당첨 번호를 입력해 주세요."),
-                inputView.inputIntegerCommand("보너스 볼을 입력해 주세요."));
-        resultView.printWinningStatics(lottoGame.classifyRankLotto(), price);
+        resultView.printWinningStatics(lottoGame.classifyRankLotto(
+                lottoGame.registerWinningLottoNumbers(inputView.inputListCommand("지난 주 당첨 번호를 입력해 주세요."),
+                        inputView.inputIntegerCommand("보너스 볼을 입력해 주세요."))), price);
     }
 
 
