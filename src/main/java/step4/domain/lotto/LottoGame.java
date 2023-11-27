@@ -8,17 +8,14 @@ public class LottoGame {
 
     private final List<UserLotto> userLottoList;
 
-    public LottoGame() {
-        userLottoList = new ArrayList<>();
+    public LottoGame(LottoGenerator manualLottoGenerator, LottoGenerator automaticLottoGenerator) {
+        this.userLottoList = new ArrayList<>();
+        this.userLottoList.addAll(manualLottoGenerator.generate());
+        this.userLottoList.addAll(automaticLottoGenerator.generate());
     }
 
     public List<UserLotto> getUserLottoList() {
         return userLottoList;
-    }
-
-    public void createUserLottoList(List<UserLotto> manualUserLottoList, LottoGenerator lottoGenerator) {
-        this.userLottoList.addAll(manualUserLottoList);
-        this.userLottoList.addAll(lottoGenerator.generate());
     }
 
     public LottoResult playLottoGame(WinningLotto winningLotto) {

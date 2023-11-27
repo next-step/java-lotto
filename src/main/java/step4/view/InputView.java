@@ -1,7 +1,6 @@
 package step4.view;
 
 import step4.domain.lotto.LottoNumber;
-import step4.domain.lotto.UserLotto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,12 +31,12 @@ public class InputView {
         return manualLottoCount;
     }
 
-    public static List<UserLotto> manualLottoNumbers(final int manualLottoCount) {
+    public static List<Set<LottoNumber>> manualLottoNumbers(final int manualLottoCount) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         return IntStream.range(0, manualLottoCount)
                 .mapToObj(i -> scanner.nextLine())
-                .map(manualLottoNumbers -> new UserLotto(getLottoNumbers(manualLottoNumbers)))
+                .map(manualLottoNumbers -> getLottoNumbers(manualLottoNumbers))
                 .collect(Collectors.toList());
     }
 
@@ -54,7 +53,7 @@ public class InputView {
         return getLottoNumbers(winningNumbers);
     }
 
-    public static int bonusNumber(final Set<LottoNumber> winningLottoNumbers) {
+    public static int bonusNumber() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("보너스 볼을 입력해 주세요.");
         int bonusNumber = scanner.nextInt();

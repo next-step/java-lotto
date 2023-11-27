@@ -9,7 +9,9 @@ import java.util.stream.IntStream;
 
 public class AutomaticLottoGenerator implements LottoGenerator {
 
-    private static final List<Integer> NUMBER_LIST = IntStream.range(1, 46).boxed().collect(Collectors.toList());
+    private static final List<LottoNumber> NUMBER_LIST = IntStream.range(1, 46)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList());
     private static final int LOTTO_NUMBER_COUNT = 6;
 
     private final int count;
@@ -23,9 +25,7 @@ public class AutomaticLottoGenerator implements LottoGenerator {
         List<UserLotto> userLottoList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             Collections.shuffle(NUMBER_LIST);
-            Set<LottoNumber> lottoNumbers = NUMBER_LIST.stream().limit(LOTTO_NUMBER_COUNT)
-                    .map(LottoNumber::new)
-                    .collect(Collectors.toSet());
+            Set<LottoNumber> lottoNumbers = NUMBER_LIST.stream().limit(LOTTO_NUMBER_COUNT).collect(Collectors.toSet());
             userLottoList.add(new UserLotto(lottoNumbers));
         }
         return userLottoList;
