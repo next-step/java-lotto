@@ -50,8 +50,7 @@ public class LottoNumbers {
         return this.numbers.contains(number);
     }
 
-    @Override
-    public String toString() {
-        return this.numbers.toString();
+    public List<LottoNumber> toList() {
+        return this.numbers;
     }
 }

@@ -5,6 +5,10 @@ import lotto.model.LottoRank;
 import lotto.model.LottoReport;
 import lotto.model.Lottos;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ResultView {
     private static final String CHECK_PURCHASE = "개를 구매했습니다.";
     private static final String RESULT_MESSAGE = "당첨 통계\n---------";
@@ -23,7 +27,12 @@ public class ResultView {
     }
 
     private static void printLottoTicket(Lotto ticket) {
-        System.out.println(ticket.numbers());
+        List<Integer> numbers = ticket.numbers()
+                .toList()
+                .stream()
+                .map(number -> number.number())
+                .collect(Collectors.toList());
+        System.out.println(numbers);
     }
 
     public static void printResultReport(LottoReport report) {
