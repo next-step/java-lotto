@@ -43,8 +43,7 @@ public class LottoFactory {
 
     private List<LottoNumber> createPossibleLottoNumbers() {
         List<LottoNumber> possibleLottoNumbers = new ArrayList<>();
-        for (int possibleLottoNumber = MIN_LOTTO_NUMBER; possibleLottoNumber <= MAX_LOTTO_NUMBER;
-             possibleLottoNumber++) {
+        for (int possibleLottoNumber = MIN_LOTTO_NUMBER; possibleLottoNumber <= MAX_LOTTO_NUMBER; possibleLottoNumber++) {
             possibleLottoNumbers.add(LottoNumber.valueOf(possibleLottoNumber));
         }
         return possibleLottoNumbers;

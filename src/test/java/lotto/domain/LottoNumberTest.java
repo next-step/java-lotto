@@ -28,7 +28,7 @@ public class LottoNumberTest {
     @MethodSource("parametersProvider")
     void find_lotto_number_in_pool(int given, LottoNumber expected) {
         // when
-        LottoNumber result = LottoNumber.randomLottoNumber(given);
+        LottoNumber result = LottoNumber.valueOf(given);
 
         // then
         assertThat(result).isEqualTo(expected);

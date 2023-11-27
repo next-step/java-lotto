@@ -23,6 +23,11 @@ public class LottoNumber {
         this.value = value;
     }
 
+    public LottoNumber(Integer value) {
+        validateLottoNumber(value);
+        this.value = value;
+    }
+
     private void validateLottoNumber(int number) {
         if (outOfRange(number)) {
             throw new IllegalStateException(LOTTO_NUMBER_OUT_OF_RANGE_EXCEPTION);
@@ -37,7 +42,7 @@ public class LottoNumber {
         return value;
     }
 
-    public static LottoNumber randomLottoNumber(int number) {
+    public static LottoNumber valueOf(int number) {
         return lottoNumberPool.get(number);
     }
 
@@ -56,5 +61,12 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoNumber{" +
+                "value=" + value +
+                '}';
     }
 }
