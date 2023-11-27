@@ -1,6 +1,6 @@
-package lotto_step3.view;
+package lotto.view;
 
-import lotto_step3.domain.Money;
+import lotto.domain.Money;
 
 import java.util.Scanner;
 

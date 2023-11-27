@@ -5,34 +5,42 @@ import java.util.List;
 
 public class Lottos {
 
-    private List<Lotto> lottoList;
+    private List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    public static List<Lotto> createLottos(int purchaseCount) {
-        List<Lotto> newLottoList = new ArrayList<>();
-        for (int i = 0; i < purchaseCount; i++) {
-            newLottoList.add(new Lotto(Lotto.createLotto()));
+    public static Lottos from(int count) {
+        List<Lotto> newLottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            newLottos.add(Lotto.from(LottoNumber.randomList()));
         }
-        return newLottoList;
+        return new Lottos(newLottos);
     }
 
-    public int getSize() {
-        return lottoList.size();
+    public int size() {
+        return lottos.size();
     }
 
-    public Lotto getLotto(int index) {
-        return lottoList.get(index);
-    }
-
-    public LottoMatchNumbers matchNumbers(WinningNumbers winningNumberList) {
-        LottoMatchNumbers lottoMatchNumbers = new LottoMatchNumbers();
-        for (Lotto lotto : lottoList) {
-            int matchCount = lotto.matchCount(winningNumberList);
-            lottoMatchNumbers.put(matchCount);
+    public LottoResult match(Lotto winningLotto) {
+        List<LottoPrize> result = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            result.add(LottoPrize.from(winningLotto.matchCount(lotto)));
         }
-        return lottoMatchNumbers;
+        return new LottoResult(result);
+    }
+
+    public LottoResult match(WinningLotto winningLotto) {
+        List<LottoPrize> result = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            System.out.println(winningLotto.matchCount(lotto) + " " + winningLotto.matchBonus(lotto));
+            result.add(LottoPrize.from(winningLotto.matchCount(lotto), winningLotto.matchBonus(lotto)));
+        }
+        return new LottoResult(result);
+    }
+
+    public String getLottoNumber(int index) {
+        return lottos.get(index).toString();
     }
 }

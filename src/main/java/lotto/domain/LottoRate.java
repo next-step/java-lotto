@@ -1,4 +1,4 @@
-package lotto_step3.domain;
+package lotto.domain;
 
 public enum LottoRate {
     BENEFIT("이득이"),

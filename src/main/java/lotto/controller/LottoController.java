@@ -1,22 +1,23 @@
 package lotto.controller;
 
-import lotto.domain.*;
-import lotto.view.InputView;
-import lotto.view.ResultView;
+import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
+import lotto.domain.Lottos;
+import lotto.domain.Money;
+import lotto.domain.WinningLotto;
+import lotto.view.LottoInputView;
+import lotto.view.LottoResultView;
 
 public class LottoController {
     public static void run() {
-        int purchaseAmount = InputView.inputPurchaseAmount();
-        Purchase purchase = new Purchase(purchaseAmount, Purchase.purchaseCount(purchaseAmount));
-        ResultView.showLottoCount(purchase.getCount());
+        Money money = LottoInputView.inputMoney();
+        Lottos lottos = Lottos.from(money.lottoCount());
+        LottoResultView.showLottos(lottos);
 
-        Lottos lottoList = new Lottos(Lottos.createLottos(purchase.getCount()));
-        ResultView.showLottoList(lottoList);
+        WinningLotto winningLotto = new WinningLotto(Lotto.from(LottoInputView.inputWinningNumbers()), LottoInputView.inputBonusNumber());
+        LottoResult result = lottos.match(winningLotto);
 
-        WinningNumbers winningNumberList = new WinningNumbers(WinningNumbers.createList(InputView.inputWinningNumbers()));
-        LottoMatchNumbers lottoMatchNumbers = lottoList.matchNumbers(winningNumberList);
-        LottoStatistics lottoStatistics = new LottoStatistics();
-        ResultView.showLottoStatistics(lottoMatchNumbers, lottoStatistics);
-        ResultView.showRate(lottoStatistics.getRate(purchase, lottoStatistics.getTotalPrize(lottoMatchNumbers)));
+        LottoResultView.showResult(result);
+        LottoResultView.shotRate(result.getRate(money));
     }
 }

@@ -1,10 +1,9 @@
-package lotto_step3.view;
+package lotto.view;
 
-import lotto_step3.domain.Lotto;
-import lotto_step3.domain.LottoPrize;
-import lotto_step3.domain.LottoRate;
-import lotto_step3.domain.LottoResult;
-import lotto_step3.domain.Lottos;
+import lotto.domain.LottoPrize;
+import lotto.domain.LottoRate;
+import lotto.domain.LottoResult;
+import lotto.domain.Lottos;
 
 public class LottoResultView {
     private static final String NOTICE_WINNING_RATE = "\n당첨 통계\n-----";

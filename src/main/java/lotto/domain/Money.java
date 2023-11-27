@@ -1,4 +1,4 @@
-package lotto_step3.domain;
+package lotto.domain;
 
 public class Money {
 
