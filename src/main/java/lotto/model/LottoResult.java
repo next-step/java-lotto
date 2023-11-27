@@ -23,10 +23,11 @@ public class LottoResult {
 		}
 	}
 
-	public void calculateTotalWinningMoney() {
+	public int calculateTotalWinningMoney() {
 		for (Map.Entry<LottoRank, Integer> entry : win.entrySet()) {
 			totalWinningMoney += entry.getKey().money() * entry.getValue();
 		}
+		return this.totalWinningMoney;
 	}
 
 	public Map<LottoRank, Integer> totalWinningStatistics() {
