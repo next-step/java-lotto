@@ -9,6 +9,7 @@ public class LottoTicket {
     private final Set<LottoNumber> ticket = new HashSet<>();
 
     public LottoTicket(List<Integer> lottoNumberList) {
+        validateTicketNumbers(lottoNumberList);
         for (int i = 0; i < lottoNumberList.size(); i++) {
             LottoNumber lottoNumber = new LottoNumber(lottoNumberList.get(i));
             ticket.add(lottoNumber);
@@ -46,5 +47,15 @@ public class LottoTicket {
                 .map(LottoNumber::lottoNumber)
                 .sorted()
                 .collect(Collectors.toList());
+    }
+
+    private static void validateTicketNumbers(List<Integer> inputInList) {
+        if (inputInList.size() != 6) {
+            throw new IllegalArgumentException("로또 갯수가 6개가 아닙니다. ");
+        }
+        Set<Integer> set = new HashSet<>(inputInList);
+        if (set.size() != inputInList.size()) {
+            throw new IllegalArgumentException("로또 입력시 중복 숫자 불가합니다. ");
+        }
     }
 }
