@@ -6,8 +6,12 @@ import java.util.List;
 public class LottoList implements Iterable<Lotto> {
     private final List<Lotto> lottoList;
 
-    public LottoList(int count) {
-        lottoList = LottoFactory.createLottos(count);
+    public LottoList(int automaticLottoCount) {
+        lottoList = LottoFactory.createLottos(automaticLottoCount);
+    }
+
+    public LottoList(int automaticLottoCount, List<String> inputManualLottos) {
+        lottoList = LottoFactory.createLottos(automaticLottoCount, inputManualLottos);
     }
 
     public LottoList(List<Lotto> lottoList) {

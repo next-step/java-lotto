@@ -6,7 +6,7 @@ public class LottoFactory {
     private final static int NUMBER_COUNT = 6;
     private final static int MIN_NUMBER = 1;
     private final static int MAX_NUMBER = 45;
-    private final static List<LottoNumber> ALL_LOTTO_NUMBERS = allLottoNumbers(MIN_NUMBER, MAX_NUMBER);
+    private static final List<LottoNumber> ALL_LOTTO_NUMBERS = allLottoNumbers(MIN_NUMBER, MAX_NUMBER);
 
     private static List<LottoNumber> allLottoNumbers(int min, int max) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
@@ -17,10 +17,23 @@ public class LottoFactory {
         return lottoNumbers;
     }
 
-    public static List<Lotto> createLottos(int count) {
+    public static List<Lotto> createLottos(int automaticLottoCount) {
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < automaticLottoCount; i++) {
             lottoList.add(new Lotto());
+        }
+
+        return Collections.unmodifiableList(lottoList);
+    }
+
+    public static List<Lotto> createLottos(int automaticLottoCount, List<String> manualLottos) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < automaticLottoCount; i++) {
+            lottoList.add(new Lotto());
+        }
+
+        for(String inputManualLotto : manualLottos) {
+            lottoList.add(new Lotto(inputManualLotto));
         }
 
         return Collections.unmodifiableList(lottoList);
