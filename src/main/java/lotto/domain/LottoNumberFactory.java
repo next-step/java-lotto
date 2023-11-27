@@ -19,9 +19,11 @@ public class LottoNumberFactory {
         return RandomHolder.INSTANCE;
     }
 
-    public List<LottoNumber> number() {
+    public Lotto createLotto() {
         Collections.shuffle(randomNumbers);
-        return randomNumbers.subList(0, Lotto.MAX_TICKET_NUMBERS);
+        List<LottoNumber> lottoNumbers = randomNumbers.subList(0, Lotto.MAX_TICKET_NUMBERS);
+        Collections.sort(lottoNumbers);
+        return Lotto.from(lottoNumbers);
     }
 
     private static class RandomHolder {
