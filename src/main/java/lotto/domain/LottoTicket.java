@@ -30,7 +30,7 @@ public class LottoTicket {
         AtomicInteger sum = new AtomicInteger(0);
 
         ticket.iterator().forEachRemaining(number -> {
-            if (winnerNumbers.printWinnerNumbers().contains(number.lottoNumber())) {
+            if (number.isThisNumberMatched(winnerNumbers.printWinnerNumbers())) {
                 sum.getAndIncrement();
             }
         });

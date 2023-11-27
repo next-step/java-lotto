@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class LottoNumber implements Comparable<LottoNumber>{
     private int lottoNumber;
 
@@ -12,6 +14,10 @@ public class LottoNumber implements Comparable<LottoNumber>{
 
     public boolean isThisNumberMatched(int number) {
         return this.lottoNumber == number;
+    }
+
+    public boolean isThisNumberMatched(List<Integer> winnerNumbers) {
+        return winnerNumbers.contains(lottoNumber);
     }
 
     @Override
