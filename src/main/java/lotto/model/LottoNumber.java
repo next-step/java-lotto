@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final String ERR_NUMBER_RANGE = "Lotto numbers should by between 1 and 45";
-    private static final int UPPER_BOUND = 45;
-    private static final int LOWER_BOUND = 1;
+    public static final int UPPER_BOUND = 45;
+    public static final int LOWER_BOUND = 1;
     private final int number;
 
     public LottoNumber(int number) {
@@ -13,14 +13,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
             throw new IllegalArgumentException(ERR_NUMBER_RANGE);
         }
         this.number = number;
-    }
-
-    public static int upperBound() {
-        return UPPER_BOUND;
-    }
-
-    public static int lowerBound() {
-        return LOWER_BOUND;
     }
 
     @Override

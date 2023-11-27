@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class LottoNumbers {
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final List<LottoNumber> CANDIDATE_NUMBERS = IntStream.range(LottoNumber.lowerBound(), LottoNumber.upperBound() + 1)
+    private static final List<LottoNumber> CANDIDATE_NUMBERS = IntStream.range(LottoNumber.LOWER_BOUND, LottoNumber.UPPER_BOUND + 1)
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
     private static final String ERR_VALID_NUMBER_COUNT = "There must be a total of 6 lotto numbers.";
