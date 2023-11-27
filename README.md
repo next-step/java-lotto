@@ -17,6 +17,8 @@
 - [x] 2등은 당첨 숫자 5개, 보너스 볼 1개를 맞아야한다. 
 - [x] 보너스번호는 기존 당첨 번호와 중복될 수 없다.
 - [x] 보너스번호 또한 로또 번호의 동일 범위를 가진다.
+- [x] 수동으로 구매한 로또 수와 자동으로 구매한 로또수의 합이 최종 로또수의 합이 된다.
+- [x] 수동으로 구매할 로또 수는 최대 로또 수를 넘을 수 없다.
 
 ## 클래스별 역할
 - `Dividend`
@@ -28,7 +30,7 @@
 - `LottoFactory`
   - 구입 금액을 가지고 있는 class
   - 로또의 생성, 난수 생성, 로또의 갯수를 담당
-- `Lottos`
+- `TotalLottos`
   - 구매한 로또들을 담고있는 class
   - 총 구매금액, 총 구매횟수, 로또들이 몇개 맞았는지 담당
 - `Lotto`
@@ -39,11 +41,20 @@
 - `LottoNumbers`
   - 로또 번호 6개를 담고있는 class 
   - 로또 번호의 갯수, 중복, 정렬을 담당
-- `LottoNumberValidation`
+- `LottoNumber`
   - 로또번호 하나의 Validation을 담당
 - `BonusBall`
   - 보너스 번호를 가지고 있는 class
   - 보너스 번호를 리턴한다.
-- `CorrectNumbers`
-  - 당첨번호와 로또 번호가 얼마나 매치됐는지 정보를 가지는 class
-  - 보너스 번호도 맞췄는지 검사한다.
+- `PurchaseMoney`
+  - 구입 금액에 대한 책임을 가진다.
+- `ManualLotto`
+  - LottoStrategy의 구현체이며 수동 로또번호 생성을 담당
+- `RandomLotto`
+  - LottoStrategy의 구현체이며 자동 로또번호 생성을 담당
+- `StringToInteger`
+  - 번호 하나를 String으로 입력받아 숫자로 변환할 수 있는지 검증한다
+- `StringToLottoNumbers`
+  - input을 쉼표로 나눈 리스트가 숫자로 변환할 수 있는 리스트인지 검증한다.
+- `ManualCount`
+  - 수동 로또 번호의 validation을 담당한다.

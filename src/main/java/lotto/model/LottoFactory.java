@@ -1,42 +1,50 @@
 package lotto.model;
 
 import lotto.strategy.LottoStrategy;
-import lotto.strategy.RandomNumber;
+import lotto.strategy.ManualLotto;
+import lotto.strategy.RandomLotto;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import static lotto.model.LottoNumbers.*;
-import static lotto.model.Lottos.LOTTO_PRICE;
+import static lotto.model.Lotto.LOTTO_PRICE;
 
 public class LottoFactory {
     private final PurchaseMoney purchaseMoney;
 
+    public LottoFactory(long purchaseMoney, ManualCount manualCount) {
+        this.purchaseMoney = new PurchaseMoney(purchaseMoney, manualCount);
+    }
+
     public LottoFactory(long purchaseMoney) {
-        this.purchaseMoney = new PurchaseMoney(purchaseMoney);
+        this(purchaseMoney, new ManualCount(0));
     }
 
-    public Lottos generateLottos() {
+    public PurchasedLottos generateLottos(List<LottoNumbers> manualLottos) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount(); i++) {
-            lottos.add(new Lotto(generateRandomSixNumber()));
+        for (LottoNumbers lottoNumbers : manualLottos) {
+            lottos.add(new Lotto(generateNumbers(new ManualLotto(lottoNumbers))));
         }
-        return new Lottos(lottos);
-    }
 
-    private LottoNumbers generateRandomSixNumber() {
-        Set<LottoNumberValidate> numbers = new HashSet<>();
-        while (numbers.size() != LOTTO_MAX_COUNT) {
-            int randomNumber = generateRandomNumber(new RandomNumber());
-            numbers.add(new LottoNumberValidate(randomNumber));
+        for (int i = 0; i < totalLottoCount() - purchaseMoney.manualCount(); i++) {
+            lottos.add(new Lotto(generateNumbers(new RandomLotto())));
         }
-        return new LottoNumbers(numbers);
+        return new PurchasedLottos(lottos);
     }
 
-    private int generateRandomNumber(LottoStrategy lottoStrategy) {
-        return lottoStrategy.generateNumber();
+    private LottoNumbers generateNumbers(LottoStrategy lottoStrategy){
+        return lottoStrategy.generateSixNumber();
     }
 
-    public int lottoCount() {
+    public int totalLottoCount() {
         return (int) (this.purchaseMoney.money() / LOTTO_PRICE);
+    }
+
+    public int autoLottoCount(){
+        return this.purchaseMoney.autoCount();
+    }
+
+    public int manualLottoCount(){
+        return this.purchaseMoney.manualCount();
     }
 }

@@ -5,7 +5,7 @@ import lotto.model.constants.Dividend;
 import java.util.Set;
 
 public class WinnerNumbers {
-    private final Set<LottoNumberValidate> numbers;
+    private final Set<LottoNumber> numbers;
     private final BonusBall bonusBall;
 
     public WinnerNumbers(LottoNumbers numbers, BonusBall bonusBall) {
@@ -14,7 +14,7 @@ public class WinnerNumbers {
         this.bonusBall = bonusBall;
     }
 
-    public boolean has(LottoNumberValidate number) {
+    public boolean has(LottoNumber number) {
         return numbers.stream()
                 .anyMatch(positiveNumber -> positiveNumber.number() == number.number());
     }
@@ -31,21 +31,21 @@ public class WinnerNumbers {
     public Dividend winResult(Lotto lotto) {
         int correctCount = 0;
         boolean bonus = false;
-        for (LottoNumberValidate lottoNumber : lotto.numbers()) {
+        for (LottoNumber lottoNumber : lotto.numbers()) {
             correctCount = getCorrectCount(correctCount, lottoNumber);
             bonus = isBonus(lottoNumber);
         }
         return Dividend.valueOf(correctCount, bonus);
     }
 
-    private int getCorrectCount(int correctCount, LottoNumberValidate lottoNumber) {
+    private int getCorrectCount(int correctCount, LottoNumber lottoNumber) {
         if (has(lottoNumber)) {
             correctCount++;
         }
         return correctCount;
     }
 
-    private boolean isBonus(LottoNumberValidate lottoNumber) {
+    private boolean isBonus(LottoNumber lottoNumber) {
         return bonusBall.isBonusBall(lottoNumber);
     }
 }

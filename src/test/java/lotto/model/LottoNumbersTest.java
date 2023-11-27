@@ -12,12 +12,12 @@ class LottoNumbersTest {
     @Test
     @DisplayName("로또 번호가 6개가 아니면 에러")
     void test1() {
-        Set<LottoNumberValidate> numbers = new HashSet<>();
-        numbers.add(new LottoNumberValidate(1));
-        numbers.add(new LottoNumberValidate(2));
-        numbers.add(new LottoNumberValidate(3));
-        numbers.add(new LottoNumberValidate(4));
-        numbers.add(new LottoNumberValidate(5));
+        Set<LottoNumber> numbers = new HashSet<>();
+        numbers.add(LottoNumber.of(1));
+        numbers.add(LottoNumber.of(2));
+        numbers.add(LottoNumber.of(3));
+        numbers.add(LottoNumber.of(4));
+        numbers.add(LottoNumber.of(5));
         assertThatThrownBy(() -> new LottoNumbers(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -25,13 +25,13 @@ class LottoNumbersTest {
     @Test
     @DisplayName("로또 번호가 중복이면 에러")
     void test2() {
-        Set<LottoNumberValidate> numbers = new HashSet<>();
-        numbers.add(new LottoNumberValidate(1));
-        numbers.add(new LottoNumberValidate(2));
-        numbers.add(new LottoNumberValidate(3));
-        numbers.add(new LottoNumberValidate(4));
-        numbers.add(new LottoNumberValidate(5));
-        numbers.add(new LottoNumberValidate(5));
+        Set<LottoNumber> numbers = new HashSet<>();
+        numbers.add(LottoNumber.of(1));
+        numbers.add(LottoNumber.of(2));
+        numbers.add(LottoNumber.of(3));
+        numbers.add(LottoNumber.of(4));
+        numbers.add(LottoNumber.of(5));
+        numbers.add(LottoNumber.of(5));
         assertThatThrownBy(() -> new LottoNumbers(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }

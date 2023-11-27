@@ -11,12 +11,16 @@ public class LottoOutput {
 
     public static final int RANK_NUMBER = Dividend.values().length - 2;
 
-    public void viewLottoCount(Lottos lottos) {
-        System.out.println(lottos.lottoCount() + "개를 구매했습니다.");
+    public void viewLottoCount(PurchasedLottos purchasedLottos) {
+        System.out.println(purchasedLottos.lottoCount() + "개를 구매했습니다.");
     }
 
-    public void viewLottosDetail(Lottos lottos) {
-        for (Lotto lotto : lottos.lottoList()) {
+    public void viewManualAndAutoCount(LottoFactory lottoFactory){
+        System.out.println("수동으로 " + lottoFactory.manualLottoCount() + "장, 자동으로 " + lottoFactory.autoLottoCount() + "개를 구매했습니다.");
+    }
+
+    public void viewLottosDetail(PurchasedLottos purchasedLottos) {
+        for (Lotto lotto : purchasedLottos.lottoList()) {
             System.out.println("[" + getLottoDetail(lotto) + "]");
         }
         System.out.println();
@@ -24,7 +28,7 @@ public class LottoOutput {
 
     private String getLottoDetail(Lotto lotto) {
         List<String> list = new ArrayList<>();
-        for (LottoNumberValidate number : lotto.numbers()) {
+        for (LottoNumber number : lotto.numbers()) {
             list.add(Integer.toString(number.number()));
         }
         return String.join(", ", list);
