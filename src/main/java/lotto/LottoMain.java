@@ -29,7 +29,8 @@ public class LottoMain {
         outputView.printPurchasedLottos(lottosDto);
 
         List<Integer> winnerLotto = inputView.winnerLottoNumbers();
-        RankStatisticsDto rankStatisticsDto = controller.informRankStatistics(lottosDto, winnerLotto, cost);
+        int bonusNumber = inputView.bonusNumber();
+        RankStatisticsDto rankStatisticsDto = controller.informRankStatistics(lottosDto, winnerLotto, bonusNumber, cost);
         outputView.printLottoRankStatistics(rankStatisticsDto.getRankResultDtos());
         outputView.printLottoYield(rankStatisticsDto.getYield());
     }

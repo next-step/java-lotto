@@ -26,7 +26,8 @@ public class YieldCalculatorTest {
     private RankResult createRankResult() {
         Map<Rank, Long> rankResult = new HashMap<>();
         rankResult.put(Rank.NOTHING, 0L);
-        rankResult.put(Rank.FOURTH, 1L);
+        rankResult.put(Rank.FIFTH, 1L);
+        rankResult.put(Rank.FOURTH, 0L);
         rankResult.put(Rank.THIRD, 0L);
         rankResult.put(Rank.SECOND, 0L);
         rankResult.put(Rank.FIRST, 0L);

@@ -4,13 +4,16 @@ import java.util.Map;
 
 public class LottoWinningStatistics {
     private final Lotto winnerLotto;
+    private final Bonus bonus;
 
-    public LottoWinningStatistics(Lotto winnerLotto) {
+
+    public LottoWinningStatistics(Lotto winnerLotto, Bonus bonus) {
         this.winnerLotto = winnerLotto;
+        this.bonus = bonus;
     }
 
     public RankResult informStatistics(Lottos lottos) {
-        Map<Rank, Long> rankStatistics = lottos.seekRankStatistics(this.winnerLotto);
+        Map<Rank, Long> rankStatistics = lottos.seekRankStatistics(this.winnerLotto, this.bonus);
         return createRankResults(rankStatistics);
     }
 

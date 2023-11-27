@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static lotto.domain.Rank.FIFTH;
 import static lotto.domain.Rank.FIRST;
 import static lotto.domain.Rank.FOURTH;
 import static lotto.domain.Rank.NOTHING;
@@ -22,11 +23,12 @@ public class Lottos {
         this.lottos = List.of(lottos);
     }
 
-    public Map<Rank, Long> seekRankStatistics(Lotto winnerLotto) {
+    public Map<Rank, Long> seekRankStatistics(Lotto winnerLotto, Bonus bonus) {
         Map<Rank, Long> rankResults = initRankResults();
         for (Lotto lotto : lottos) {
             int countOfMatch = lotto.countOfMatch(winnerLotto);
-            Rank rank = Rank.valeOf(countOfMatch);
+            boolean containsBonus = lotto.containsBonus(bonus);
+            Rank rank = Rank.valeOf(countOfMatch, containsBonus);
             rankResults.put(rank, rankResults.get(rank) + 1);
         }
         return rankResults;
@@ -35,6 +37,7 @@ public class Lottos {
     private Map<Rank, Long> initRankResults() {
         Map<Rank, Long> rankResults = new LinkedHashMap<>();
         rankResults.put(NOTHING, 0L);
+        rankResults.put(FIFTH, 0L);
         rankResults.put(FOURTH, 0L);
         rankResults.put(THIRD, 0L);
         rankResults.put(SECOND, 0L);

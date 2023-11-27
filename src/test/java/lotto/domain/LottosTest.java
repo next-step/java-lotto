@@ -52,9 +52,11 @@ public class LottosTest {
     void create_rank_statistics() {
         // given
         Lottos lottos = createLottoBundle();
+        Lotto winnerLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        Bonus bonus = new Bonus(7, winnerLotto);
 
         // when
-        Map<Rank, Long> result = lottos.seekRankStatistics(new Lotto(1, 2, 3, 4, 5, 6));
+        Map<Rank, Long> result = lottos.seekRankStatistics(winnerLotto, bonus);
 
         // then
         assertThat(result).isEqualTo(createExpectedRankStatistics());
@@ -73,8 +75,9 @@ public class LottosTest {
     private Map<Rank, Long> createExpectedRankStatistics() {
         Map<Rank, Long> rankStatistics = new LinkedHashMap<>();
         rankStatistics.put(Rank.NOTHING, 3L);
-        rankStatistics.put(Rank.FOURTH, 0L);
-        rankStatistics.put(Rank.THIRD, 1L);
+        rankStatistics.put(Rank.FIFTH, 0L);
+        rankStatistics.put(Rank.FOURTH, 1L);
+        rankStatistics.put(Rank.THIRD, 0L);
         rankStatistics.put(Rank.SECOND, 0L);
         rankStatistics.put(Rank.FIRST, 1L);
 
