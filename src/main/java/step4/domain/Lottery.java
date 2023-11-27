@@ -11,20 +11,16 @@ public class Lottery {
     private final List<LotteryNumber> lotteryNumbers;
 
     public Lottery(List<LotteryNumber> numbers) {
+        validateNumbers(numbers);
         this.lotteryNumbers = numbers;
     }
 
     public static Lottery of(List<Integer> numbers) {
-        validateNumbers(numbers);
-
         return new Lottery(LotteryNumber.of(numbers));
     }
 
     public List<Integer> getLotteryNumbers() {
-        List<Integer> numbers = LotteryNumber.getNumbers(lotteryNumbers);
-        validateNumbers(numbers);
-
-        return numbers;
+        return LotteryNumber.getNumbers(lotteryNumbers);
     }
 
     public int getMatchCount(Lottery win) {
@@ -38,7 +34,7 @@ public class Lottery {
         return winCount;
     }
 
-    private static void validateNumbers(List<Integer> numbers) {
+    private static void validateNumbers(List<LotteryNumber> numbers) {
         if (WINNING_STREAK != numbers.size()) {
             throw new IllegalArgumentException("잘 못 생성된 로또 - " + numbers.size());
         }
