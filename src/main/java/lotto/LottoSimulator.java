@@ -2,12 +2,10 @@ package lotto;
 
 import lotto.domain.Lotto;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class LottoSimulator {
     private static final int EACH_LOTTO_PRICE = 1000;
-    private static final int LOTTO_STATISTICS_SIZE = 7;
 
     private final List<Lotto> lottoList = new ArrayList<>();
 
@@ -29,11 +27,17 @@ public class LottoSimulator {
         return lottoList;
     }
 
-    public int[] calculateStatistics(Lotto lastWeekWinningLotto) {
-        int[] statistics = new int[LOTTO_STATISTICS_SIZE];
+    public Map<RewardPrice, Integer> calculateStatistics(Lotto lastWeekWinningLotto) {
+        Map<RewardPrice, Integer> statistics = new HashMap<>();
         for (Lotto lotto : lottoList) {
-            statistics[lotto.getMatchCount(lastWeekWinningLotto)]++;
+            updateStatistics(lastWeekWinningLotto, lotto, statistics);
         }
         return statistics;
+    }
+
+    private static void updateStatistics(Lotto lastWeekWinningLotto, Lotto lotto, Map<RewardPrice, Integer> statistics) {
+        int matchCount = lotto.getMatchCount(lastWeekWinningLotto);
+        Optional.ofNullable(RewardPrice.fromCount(matchCount))
+                        .ifPresent(rewardPrice -> statistics.merge(rewardPrice, 1, Integer::sum));
     }
 }

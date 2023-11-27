@@ -1,9 +1,11 @@
 package lotto.view;
 
+import lotto.RewardPrice;
 import lotto.domain.Lotto;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static lotto.RewardPrice.*;
 
@@ -28,13 +30,10 @@ public class ResultView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    public static void printStatistics(int[] statistics, double rateOfReturn) {
+    public static void printStatistics(Map<RewardPrice, Integer> statistics, double rateOfReturn) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println(MATCH_3.getCount() + "개 일치 (" + MATCH_3.getPrice() + "원) - " + statistics[MATCH_3.getCount()] + "개");
-        System.out.println(MATCH_4.getCount() + "개 일치 (" + MATCH_4.getPrice() + "원) - " + statistics[MATCH_4.getCount()] + "개");
-        System.out.println(MATCH_5.getCount() + "개 일치 (" + MATCH_5.getPrice() + "원) - " + statistics[MATCH_5.getCount()] + "개");
-        System.out.println(MATCH_6.getCount() + "개 일치 (" + MATCH_6.getPrice() + "원) - " + statistics[MATCH_6.getCount()] + "개");
+        statistics.forEach((rewardPrice, count) -> System.out.println(rewardPrice.getCount() + "개 일치 (" + rewardPrice.getPrice() + "원) - " + count + "개"));
         System.out.println("총 수익률은 " + String.format("%.2f", rateOfReturn) + "입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 
