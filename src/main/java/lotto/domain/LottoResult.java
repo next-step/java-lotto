@@ -37,6 +37,9 @@ public enum LottoResult {
     public int matchCount() {
         return this.matchCount;
     }
+    public boolean matchBonus() {
+        return this.matchBonus;
+    }
 
     public int prize() {
         return this.prize;

@@ -34,8 +34,9 @@ public class ResultView {
             int count = entry.getValue();
             profitPrice += lottoResult.prize() * count;
             System.out.println(
-                    String.format("%d개 일치 (%d원)- %d개",
+                    String.format("%d개 일치%s (%d원) - %d개",
                             lottoResult.matchCount(),
+                            lottoResult.matchBonus() ? ", 보너스 볼 일치" : "",
                             lottoResult.prize(),
                             count)
             );
