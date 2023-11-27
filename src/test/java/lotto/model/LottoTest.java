@@ -42,10 +42,9 @@ public class LottoTest {
 
         Lotto ticket = new Lotto(numberList);
 
-        LottoNumbers winningNumber = LottoNumbers.of(Arrays.asList(1,2,3,4,5,6));
-        LottoNumber bonusNumber = new LottoNumber(7);
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1,2,3,4,5,6), 7);
 
-        Assertions.assertThat(ticket.rank(winningNumber, bonusNumber).ordinal()+1)
+        Assertions.assertThat(winningNumber.match(ticket).ordinal()+1)
                 .isEqualTo(expectedRank);
     }
 }

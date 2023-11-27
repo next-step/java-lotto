@@ -30,12 +30,4 @@ public class Lottos {
     public List<Lotto> tickets() {
         return this.tickets;
     }
-
-    public List<LottoRank> ranks(LottoNumbers winningNumber, LottoNumber bonusNumber) {
-        List<LottoRank> result = new ArrayList<>();
-        for (Lotto ticket : this.tickets) {
-            result.add(ticket.rank(winningNumber, bonusNumber));
-        }
-        return result;
-    }
 }

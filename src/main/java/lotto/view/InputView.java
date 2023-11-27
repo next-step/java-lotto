@@ -20,7 +20,7 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static List<Integer> inputWinningNumbers() {
+    public static List<Integer> inputDefaultWinningNumbers() {
         System.out.println();
         System.out.println(QUESTION_WINNING_NUMBERS);
         return convertStringToInt(scanner.nextLine());

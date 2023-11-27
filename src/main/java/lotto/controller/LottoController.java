@@ -5,6 +5,7 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoController {
 
@@ -14,9 +15,15 @@ public class LottoController {
         ResultView.printCheckPurchaseMessage(tickets.count());
         ResultView.printLottoTickets(tickets);
 
-        LottoNumbers winningNumber = LottoNumbers.of(InputView.inputWinningNumbers());
-        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusBallNumber());
-        LottoReport report = new LottoReport(tickets.ranks(winningNumber, bonusNumber));
+        WinningNumber winningNumber = new WinningNumber(
+                InputView.inputDefaultWinningNumbers(),
+                InputView.inputBonusBallNumber());
+
+        LottoReport report = new LottoReport(
+                tickets.tickets()
+                        .stream()
+                        .map(ticket -> winningNumber.match(ticket))
+                        .collect(Collectors.toList()));
         ResultView.printResultReport(report);
     }
 }

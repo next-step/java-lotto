@@ -31,10 +31,6 @@ public class Lotto {
         return count * TICKET_PRICE;
     }
 
-    public LottoRank rank(LottoNumbers winningNumber, LottoNumber bonusNumber) {
-        return LottoRank.valueOf(this.numbers.matchNumbers(winningNumber), this.numbers.containsNumber(bonusNumber));
-    }
-
     @Override
     public boolean equals(Object obj) {
         Lotto other = (Lotto) obj;
