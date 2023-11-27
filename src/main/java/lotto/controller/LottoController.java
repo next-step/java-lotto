@@ -19,7 +19,7 @@ public class LottoController {
     private final InputView inputView;
     private final ResultView resultView;
 
-    public LottoController(Scanner scanner, PrintStream out) {
+    private LottoController(Scanner scanner, PrintStream out) {
         this.inputView = new InputView(scanner, System.out);
         this.resultView = new ResultView(System.out);
     }
