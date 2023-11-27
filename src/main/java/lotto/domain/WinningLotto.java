@@ -27,6 +27,6 @@ public class WinningLotto {
     }
 
     public boolean compareBonus(Lotto lotto) {
-        return lotto.lottoNumbers().stream().anyMatch(lottoNumber -> lottoNumber.equals(bonusBall));
+        return lotto.contains(bonusBall);
     }
 }
