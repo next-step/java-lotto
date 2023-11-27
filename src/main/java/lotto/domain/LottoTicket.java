@@ -10,6 +10,7 @@ import java.util.function.Predicate;
 import lotto.domain.strategy.GenerateStrategy;
 
 public class LottoTicket {
+    private static final int NUMBERS_COUNT = 6;
     private Set<LottoNumber> numbers;
 
     public LottoTicket(GenerateStrategy strategy) {
@@ -39,7 +40,7 @@ public class LottoTicket {
     }
 
     private void isNumbersSizeEqCount() {
-        if (numbers.size() != LottoConfig.NUMBERS_COUNT) {
+        if (numbers.size() != NUMBERS_COUNT) {
             throw new IllegalArgumentException("올바르지 않은 추첨 결과입니다.");
         }
     }

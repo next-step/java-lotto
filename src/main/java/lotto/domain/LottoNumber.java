@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber {
+    private static final int LOWER_BOUND = 1;
+    private static final int UPPER_BOUND = 45;
     private final int num;
 
     public LottoNumber(int num) {
@@ -21,11 +23,11 @@ public class LottoNumber {
     }
 
     private boolean isUnderLowerBound() {
-        return num < LottoConfig.LOWER_BOUND;
+        return num < LOWER_BOUND;
     }
 
     private boolean isOverUpperBound() {
-        return num > LottoConfig.UPPER_BOUND;
+        return num > UPPER_BOUND;
     }
 
     @Override
