@@ -51,6 +51,11 @@ public class Lotto {
         return matchCount;
     }
 
+    public boolean isMatchBonusNumber(int bonusNumber){
+        if(numbers.contains(bonusNumber)) return true;
+        return false;
+    }
+
     public int numberOf(int idx){
         return numbers.get(idx);
     }

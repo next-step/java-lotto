@@ -22,4 +22,11 @@ public class LottoTest {
         Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
         assertThat(lotto.matchCount(Arrays.asList(1,2,3,7,7,7))).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("로또와 보너스볼의 숫자가 일치하는 확인한다.")
+    void 보너스볼_일치_확인(){
+        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        assertThat(lotto.isMatchBonusNumber(4)).isTrue();
+    }
 }
