@@ -19,7 +19,10 @@ public class RandomGenerator {
 
 	public List<Integer> generate() {
 		Collections.shuffle(numbers);
-		List<Integer> result = numbers.subList(0, 6);
+		List<Integer> result = new ArrayList<>();
+		for (int i = 0; i < 6; i++) {
+			result.add(numbers.get(i));
+		}
 		Collections.sort(result);
 		return result;
 	}

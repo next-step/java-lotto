@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
@@ -9,18 +10,17 @@ public class LottoResult {
 	private double returnRate;
 	private final Map<LottoRank, Integer> win;
 
-	public LottoResult(int totalWinningMoney, double returnRate) {
-		this.totalWinningMoney = totalWinningMoney;
-		this.returnRate = returnRate;
+	public LottoResult() {
+		this.totalWinningMoney = 0;
+		this.returnRate = 0.0;
 		this.win = new HashMap<>();
 	}
 
-	public void addRank(LottoRank lottoRank) {
-		if (win.get(lottoRank) == null) {
-			win.put(lottoRank, 1);
-			return;
+	public void addRanks(List<LottoRank> lottoRank) {
+		for (LottoRank rank : lottoRank) {
+			win.putIfAbsent(rank, 0);
+			win.put(rank, win.get(rank) + 1);
 		}
-		win.put(lottoRank, win.get(lottoRank) + 1);
 	}
 
 	public void calculateTotalWinningMoney() {
