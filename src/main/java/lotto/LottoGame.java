@@ -10,15 +10,18 @@ import java.util.stream.Stream;
 public class LottoGame {
 
     public static final int LOTTO_PRICE = 1000;
-    private List<Lotto> lottos;
     private List<Integer> lottoNumbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
 
-    public List<Lotto> buyManualSelectLotto(List<List<Integer>> numbers) {
+    public List<Lotto> buyLotto(int price, List<List<Integer>> numbers) {
+        return buyAutoSelectedLottos(price, buyManualSelectLotto(numbers));
+    }
+
+    private List<Lotto> buyManualSelectLotto(List<List<Integer>> numbers) {
         return numbers.stream().map(Lotto::new)
                 .collect(Collectors.toList());
     }
 
-    public List<Lotto> buyAutoSelectedLottos(int price, List<Lotto> lottos) {
+    private List<Lotto> buyAutoSelectedLottos(int price, List<Lotto> lottos) {
         List<Lotto> lottoList = new ArrayList<>(lottos);
         //자동 값 생성
         lottoList.addAll(Stream
@@ -48,19 +51,13 @@ public class LottoGame {
         return price % LOTTO_PRICE != 0;
     }
 
-    public int countLotto() {
-        return lottos.size();
-    }
 
     public WinningLottoNumbers registerWinningLottoNumbers(List<Integer> lotto, Integer bonus) {
         return new WinningLottoNumbers(lotto, bonus);
     }
 
-    public List<Lotto> lottos() {
-        return lottos;
-    }
 
-    public WinningLottos classifyRankLotto(WinningLottoNumbers winningLottoNumbers) {
+    public WinningLottos classifyRankLotto(List<Lotto> lottos, WinningLottoNumbers winningLottoNumbers) {
         LottoStatics lottoStatics = new LottoStatics();
         return lottoStatics.classifyRankLotto(lottos, winningLottoNumbers);
     }
