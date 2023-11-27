@@ -1,6 +1,19 @@
 package calculator;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class StringCalculator {
+
+    private final Map<String, BasicOperator> operators;
+
+    public StringCalculator() {
+        operators = new HashMap<>();
+        operators.put("+", new Plus());
+        operators.put("-", new Minus());
+        operators.put("*", new Multiply());
+        operators.put("/", new Divide());
+    }
 
     public static String[] getSplit(String text) {
         String[] split = text.split(" ");
@@ -41,18 +54,11 @@ public class StringCalculator {
         return result;
     }
 
-    private static int operate(int number1, int number2, String operator) {
-        switch (operator) {
-            case "+":
-                return plus(number1, number2);
-            case "-":
-                return minus(number1, number2);
-            case "*":
-                return multiply(number1, number2);
-            case "/":
-                return divide(number1, number2);
-            default:
-                throw new IllegalArgumentException("올바르지 않은 연산자입니다: " + operator);
+    public int operate(int number1, int number2, String operator) {
+        BasicOperator basicOperator = operators.get(operator);
+        if (basicOperator == null) {
+            throw new IllegalArgumentException("올바르지 않은 연산자입니다: " + operator);
         }
+        return basicOperator.calculate(number1, number2);
     }
 }
