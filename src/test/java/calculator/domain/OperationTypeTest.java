@@ -20,7 +20,7 @@ class OperationTypeTest {
 
     @ParameterizedTest()
     @ValueSource(strings = {"**", "//", "notOperator"})
-    @DisplayName("정의되지 않은 연산자가 들어올 경우 exception이 발생된다.")
+    @DisplayName("정의되지 않은 연산자가 들어올 경우 exception이 던져진다.")
     void getOperationTypeExceptionTest(String operator) {
         Assertions.assertThrows(IllegalArgumentException.class,
                                 () -> OperationType.getOperationType(operator));
