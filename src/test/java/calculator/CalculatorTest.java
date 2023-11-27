@@ -3,9 +3,12 @@ package calculator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static calculator.Calculator.calculation;
 import static calculator.exception.CustomExceptionCode.*;
+import static java.lang.Integer.parseInt;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,17 +20,11 @@ class CalculatorTest {
         assertEquals(expected, calculation(input));
     }
 
-    @Test
-    void calculation_null입력_오류출력() {
+    @ParameterizedTest
+    @NullAndEmptySource
+    void calculation_빈값입력_오류출력(String input) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> calculation(null))
-                .withMessage(NULL_OR_BLANK_INPUT.getMessage());
-    }
-
-    @Test
-    void calculation_빈값입력_오류출력() {
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> calculation(" "))
+                .isThrownBy(() -> calculation(input))
                 .withMessage(NULL_OR_BLANK_INPUT.getMessage());
     }
 
@@ -53,6 +50,13 @@ class CalculatorTest {
     void calculation_연속숫자입력_오류출력() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> calculation("2 - 3 3 2 * 4 +"));
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"2 + 3:5", "2 - 3:-1", "2 * 3:6", "4 / 2:2"}, delimiter = ':')
+    void operator_정상처리_정상출력(String input, int expected) {
+        String[] formulas = input.split(" ");
+        assertThat(Operator.calculate(parseInt(formulas[0]), parseInt(formulas[2]), formulas[1])).isEqualTo(expected);
     }
 
 }
