@@ -15,7 +15,7 @@ public class LottosTest {
     @DisplayName("로또 뭉치를 생성한다.")
     void create_lottos() {
         // given
-        List<List<Integer>> givenLottos = createGivenLottos();
+        List<Lotto> givenLottos = createGivenLottos();
 
         // when
         Lottos lottos = new Lottos(givenLottos);
@@ -24,13 +24,10 @@ public class LottosTest {
         assertThat(lottos).isEqualTo(createExpectedLottos());
     }
 
-    private List<List<Integer>> createGivenLottos() {
-        List<List<Integer>> given = new ArrayList<>();
+    private List<Lotto> createGivenLottos() {
+        List<Lotto> given = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            given.add(new ArrayList<>());
-        }
-        for (List<Integer> lotto : given) {
-            lotto.addAll(List.of(1, 2, 3, 4, 5, 6));
+            given.add(new Lotto(1, 2, 3, 4, 5, 6));
         }
         return given;
     }

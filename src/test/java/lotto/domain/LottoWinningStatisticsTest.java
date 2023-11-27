@@ -19,7 +19,7 @@ public class LottoWinningStatisticsTest {
     @DisplayName("로또 당첨 통계를 알려준다.")
     void inform_lotto_winning_statistics() {
         // given
-        Lotto winnerLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winnerLotto = new Lotto(1, 2, 3, 4, 5, 6);
         Lottos lottos = createGivenLottos();
 
         LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(winnerLotto);

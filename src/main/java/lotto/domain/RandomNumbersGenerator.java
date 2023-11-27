@@ -4,21 +4,20 @@ import java.util.Collections;
 import java.util.List;
 
 public class RandomNumbersGenerator {
-
     private final RandomNumberStrategy randomNumberStrategy;
-    private final List<Integer> numbers;
+    private final List<LottoNumber> possibleLottoNumbers;
 
-    public RandomNumbersGenerator(RandomNumberStrategy randomNumberStrategy, List<Integer> numbers) {
+    public RandomNumbersGenerator(RandomNumberStrategy randomNumberStrategy, List<LottoNumber> possibleLottoNumbers) {
         this.randomNumberStrategy = randomNumberStrategy;
-        this.numbers = numbers;
+        this.possibleLottoNumbers = possibleLottoNumbers;
     }
 
-    public List<Integer> createRandomNumbers() {
-        shuffleSavedNumbers();
-        return this.randomNumberStrategy.getRandomNumbers(numbers);
+    public List<LottoNumber> createRandomNumbers() {
+        shuffleTotalLottoNumbers(possibleLottoNumbers);
+        return randomNumberStrategy.getRandomNumbers(possibleLottoNumbers);
     }
 
-    private void shuffleSavedNumbers() {
-        Collections.shuffle(numbers);
+    private void shuffleTotalLottoNumbers(List<LottoNumber> possibleLottoNumbers) {
+        Collections.shuffle(possibleLottoNumbers);
     }
 }

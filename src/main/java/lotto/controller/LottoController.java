@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
@@ -10,7 +9,6 @@ import lotto.domain.Money;
 import lotto.domain.RankResult;
 import lotto.domain.YieldCalculator;
 import lotto.dto.LottosDto;
-import lotto.dto.RankResultDto;
 import lotto.dto.RankStatisticsDto;
 
 public class LottoController {
@@ -36,6 +34,6 @@ public class LottoController {
     }
 
     private LottoWinningStatistics createLottoWinningStatistics(List<Integer> winnerLotto) {
-        return new LottoWinningStatistics(new Lotto(winnerLotto));
+        return new LottoWinningStatistics(new Lotto(winnerLotto.toArray(Integer[]::new)));
     }
 }

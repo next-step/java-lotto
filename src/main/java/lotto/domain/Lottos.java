@@ -10,13 +10,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(List<List<Integer>> lottos) {
-        this.lottos = lottos.stream().map(Lotto::new).collect(Collectors.toList());
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public Lottos(Lotto... lottos) {
@@ -62,5 +61,12 @@ public class Lottos {
     @Override
     public int hashCode() {
         return Objects.hash(lottos);
+    }
+
+    @Override
+    public String toString() {
+        return "Lottos{" +
+                "lottos=" + lottos +
+                '}';
     }
 }

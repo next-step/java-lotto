@@ -22,9 +22,9 @@ public class LottosDto {
     }
 
     public Lottos toLottos() {
-        List<List<Integer>> lottos = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
         for (LottoDto lottoDto : this.lottoDtos) {
-            lottos.add(lottoDto.toLottoNumbers());
+            lottos.add(lottoDto.toLotto());
         }
         return new Lottos(lottos);
     }

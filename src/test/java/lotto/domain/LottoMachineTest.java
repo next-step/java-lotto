@@ -13,8 +13,7 @@ public class LottoMachineTest {
     @DisplayName("원하는 로또 갯수로 로또 뭉치를 생성한다.")
     void create_lottos() {
         // given
-        long lottoCnt = 6;
-        LottoMachine lottoMachine = new LottoMachine(new RandomNumbersGenerator(numbers -> List.of(1, 21, 26, 31, 40, 42), numbers()));
+        LottoMachine lottoMachine = new LottoMachine(new RandomNumbersGenerator(numbers -> given(), possibleNumbers()));
 
         // when
         Lottos result = lottoMachine.createLottos(6);
@@ -23,21 +22,29 @@ public class LottoMachineTest {
         assertThat(result).isEqualTo(createExpectedLottos());
     }
 
-    private List<Integer> numbers() {
-        List<Integer> given = new ArrayList<>();
+    private List<LottoNumber> given() {
+        return List.of(
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(21),
+                LottoNumber.valueOf(26),
+                LottoNumber.valueOf(31),
+                LottoNumber.valueOf(40),
+                LottoNumber.valueOf(42)
+        );
+    }
+
+    private List<LottoNumber> possibleNumbers() {
+        List<LottoNumber> numbers = new ArrayList<>();
         for (int i = 1; i <= 45; i++) {
-            given.add(i);
+            LottoNumber.valueOf(i);
         }
-        return given;
+        return numbers;
     }
 
     private Lottos createExpectedLottos() {
-        List<List<Integer>> lottos = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            lottos.add(new ArrayList<>());
-        }
-        for (List<Integer> lotto : lottos) {
-            lotto.addAll(List.of(1, 21, 26, 31, 40, 42));
+            lottos.add(new Lotto(1, 21, 26, 31, 40, 42));
         }
         return new Lottos(lottos);
     }

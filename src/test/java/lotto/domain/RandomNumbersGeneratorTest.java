@@ -13,22 +13,42 @@ class RandomNumbersGeneratorTest {
     @DisplayName("랜덤 숫자 6개를 생성한다.")
     void create_random_numbers() {
         // given
-        RandomNumbersGenerator generator = new RandomNumbersGenerator(
-                numbers -> List.of(1, 21, 26, 31, 40, 42),
-                numbers());
+        RandomNumbersGenerator generator = new RandomNumbersGenerator(numbers -> given(), possibleNumbers());
 
         // when
-        List<Integer> result = generator.createRandomNumbers();
+        List<LottoNumber> result = generator.createRandomNumbers();
 
         // then
-        assertThat(result).isEqualTo(List.of(1, 21, 26, 31, 40, 42));
+        assertThat(result).isEqualTo(getExpected());
     }
 
-    private List<Integer> numbers() {
-        List<Integer> numbers = new ArrayList<>();
+    private List<LottoNumber> given() {
+        return List.of(
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(21),
+                LottoNumber.valueOf(26),
+                LottoNumber.valueOf(31),
+                LottoNumber.valueOf(40),
+                LottoNumber.valueOf(42)
+        );
+    }
+
+    private List<LottoNumber> possibleNumbers() {
+        List<LottoNumber> numbers = new ArrayList<>();
         for (int i = 1; i <= 45; i++) {
-            numbers.add(i);
+            LottoNumber.valueOf(i);
         }
         return numbers;
+    }
+
+    private List<LottoNumber> getExpected() {
+        return List.of(
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(21),
+                LottoNumber.valueOf(26),
+                LottoNumber.valueOf(31),
+                LottoNumber.valueOf(40),
+                LottoNumber.valueOf(42)
+        );
     }
 }

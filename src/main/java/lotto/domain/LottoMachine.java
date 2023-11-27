@@ -12,19 +12,10 @@ public class LottoMachine {
     }
 
     public Lottos createLottos(long lottoCnt) {
-        List<List<Integer>> lottos = initLottosBy(lottoCnt);
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCnt; i++) {
-            lottos.get(i).addAll(randomNumberGenerator.createRandomNumbers());
+            lottos.add(new Lotto(randomNumberGenerator.createRandomNumbers()));
         }
         return new Lottos(lottos);
     }
-
-    private List<List<Integer>> initLottosBy(long lottoCnt) {
-        List<List<Integer>> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCnt; i++) {
-            lottos.add(new ArrayList<>());
-        }
-        return lottos;
-    }
-
 }
