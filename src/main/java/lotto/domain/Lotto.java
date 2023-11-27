@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,7 +15,7 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> anyNumbers) {
         validation(anyNumbers);
-        this.lottoNumbers = new HashSet<>(anyNumbers);
+        this.lottoNumbers = new LinkedHashSet<>(anyNumbers);
     }
 
     public static Lotto from(List<LottoNumber> anyNumbers) {
