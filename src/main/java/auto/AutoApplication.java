@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Map;
 
 public class AutoApplication {
-    private static final int LOTTO_PRICE = 1000;
+    private static final int LOTTERY_PRICE = 1000;
 
     public static void main(String[] args) {
         int purchaseAmount = InputView.inputPurchaseAmount();
-        int lotteryCount = purchaseAmount / LOTTO_PRICE;
-        ResultView.printLottoCounts(lotteryCount);
+        int lotteryCount = purchaseAmount / LOTTERY_PRICE;
+        ResultView.printLotteryCounts(lotteryCount);
 
         List<List<Integer>> totalLotteryNumbers = AutoService.createLotteryNumbersList(lotteryCount);
         ResultView.printTotalLotteryNumbers(totalLotteryNumbers);

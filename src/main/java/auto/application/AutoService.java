@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AutoService {
-    private final static int LOTTO_MIN_NUMBER = 1;
-    private final static int LOTTO_MAX_NUMBER = 45;
+    private final static int LOTTERY_MIN_NUMBER = 1;
+    private final static int LOTTERY_MAX_NUMBER = 45;
 
     public static List<List<Integer>> createLotteryNumbersList(int lotteryCount) {
         return IntStream.range(0, lotteryCount)
@@ -18,7 +18,7 @@ public class AutoService {
     }
 
     private static List<Integer> createLotteryNumbers() {
-        List<Integer> numbers = IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER + 1)
+        List<Integer> numbers = IntStream.range(LOTTERY_MIN_NUMBER, LOTTERY_MAX_NUMBER + 1)
                                          .boxed()
                                          .collect(Collectors.toList());
         Collections.shuffle(numbers);
