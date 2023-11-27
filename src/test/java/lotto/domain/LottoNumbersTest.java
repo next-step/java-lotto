@@ -22,10 +22,18 @@ class LottoNumbersTest {
         }
 
         @Test
-        void 로또번호_일급_컬렉션에_보너스번호가_있을_경우_TRUE() {
-                LottoNumber bonusNumber = new LottoNumber(7);
+        void 로또번호_일급_컬렉션에_당첨번호가_없을_경우_FALSE() {
+                LottoNumber oneWinningNumber = new LottoNumber(8);
                 LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 7);
 
-                assertThat(lottoNumbers.hasMatchingNumber(bonusNumber)).isTrue();
+                assertThat(lottoNumbers.hasMatchingNumber(oneWinningNumber)).isFalse();
+        }
+
+        @Test
+        void 로또번호_일급_컬렉션에_보너스번호가_없을_경우_FALSE() {
+                LottoNumber bonusNumber = new LottoNumber(8);
+                LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 7);
+
+                assertThat(lottoNumbers.hasMatchingNumber(bonusNumber)).isFalse();
         }
 }
