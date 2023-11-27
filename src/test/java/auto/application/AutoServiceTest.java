@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 class AutoServiceTest {
+    private final AutoService autoService = new AutoService();
     @Test
     @DisplayName("설정한 lotteryCount 만큼 로또 리스트 갯수가 만들어지고" +
                  "각 로또 번호는 1 ~ 45 사이이다.")
@@ -18,7 +19,7 @@ class AutoServiceTest {
         int MIN_LOTTERY_NUMBER = 1;
         int MAX_LOTTERY_NUMBER = 45;
         // when
-        List<List<Integer>> lotteryNumbersList = AutoService.createLotteryNumbersList(lotteryCount);
+        List<List<Integer>> lotteryNumbersList = autoService.createLotteryNumbersList(lotteryCount);
         // then
         SoftAssertions.assertSoftly((assertions) -> {
             assertions.assertThat(lotteryNumbersList).hasSize(lotteryCount);

@@ -11,13 +11,13 @@ public class AutoService {
     private final static int LOTTERY_MIN_NUMBER = 1;
     private final static int LOTTERY_MAX_NUMBER = 45;
 
-    public static List<List<Integer>> createLotteryNumbersList(int lotteryCount) {
+    public List<List<Integer>> createLotteryNumbersList(int lotteryCount) {
         return IntStream.range(0, lotteryCount)
-                        .mapToObj(i -> AutoService.createLotteryNumbers())
+                        .mapToObj(i -> createLotteryNumbers())
                         .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private static List<Integer> createLotteryNumbers() {
+    private List<Integer> createLotteryNumbers() {
         List<Integer> numbers = IntStream.range(LOTTERY_MIN_NUMBER, LOTTERY_MAX_NUMBER + 1)
                                          .boxed()
                                          .collect(Collectors.toList());

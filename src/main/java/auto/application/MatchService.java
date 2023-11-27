@@ -8,8 +8,8 @@ import static auto.application.MatchedAmount.findByCount;
 public class MatchService {
     private static final Map<Integer, Integer> matchedCountMap = MatchedAmount.getMatchedCountMap();
 
-    public static Map<Integer, Integer> getMatchedCountMap(List<List<Integer>> lotteryNumbersList,
-                                                           List<Integer> winningNumbersLastWeek) {
+    public Map<Integer, Integer> getMatchedCountMap(List<List<Integer>> lotteryNumbersList,
+                                                    List<Integer> winningNumbersLastWeek) {
 
         for (List<Integer> lotteryNumbers : lotteryNumbersList) {
             setMatchedCountMap(lotteryNumbers, winningNumbersLastWeek);
@@ -17,7 +17,7 @@ public class MatchService {
         return matchedCountMap;
     }
 
-    private static void setMatchedCountMap(List<Integer> lotteryNumbers, List<Integer> winningNumbersLastWeek) {
+    private void setMatchedCountMap(List<Integer> lotteryNumbers, List<Integer> winningNumbersLastWeek) {
         int matchedCountSum = lotteryNumbers.stream()
                                             .mapToInt(number -> winningNumbersLastWeek.contains(number) ? 1 : 0)
                                             .sum();

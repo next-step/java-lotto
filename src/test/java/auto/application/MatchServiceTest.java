@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 class MatchServiceTest {
+    private final MatchService matchService = new MatchService();
     @Test
     void getMatchedCountMapTest() {
         // given
@@ -21,7 +22,7 @@ class MatchServiceTest {
                 List.of(1, 2, 3, 4, 5, 11));
         var winningNumbersLastWeek = List.of(1, 2, 3, 4, 5, 6);
         // when
-        Map<Integer, Integer> matchedCountMap = MatchService.getMatchedCountMap(lotteryNumbersList, winningNumbersLastWeek);
+        Map<Integer, Integer> matchedCountMap = matchService.getMatchedCountMap(lotteryNumbersList, winningNumbersLastWeek);
         // then
         SoftAssertions.assertSoftly(assertions -> {
             assertions.assertThat(matchedCountMap.get(3)).isEqualTo(1);
