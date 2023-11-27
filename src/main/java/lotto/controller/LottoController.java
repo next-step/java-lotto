@@ -9,6 +9,7 @@ import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RankResult;
 import lotto.domain.YieldCalculator;
+import lotto.dto.LottoGameInfoDto;
 import lotto.dto.LottosDto;
 import lotto.dto.RankStatisticsDto;
 
@@ -28,9 +29,11 @@ public class LottoController {
         return LottosDto.valueOf(purchasedLottos);
     }
 
-    public RankStatisticsDto informRankStatistics(LottosDto lottosDto, List<Integer> winnerLotto, int bonusNumber, long cost) {
-        RankResult rankResult = createLottoWinningStatistics(winnerLotto, bonusNumber).informStatistics(lottosDto.toLottos());
-        double yield = YieldCalculator.calculate(cost, rankResult);
+    public RankStatisticsDto informRankStatistics(LottoGameInfoDto lottoGameInfoDto) {
+        RankResult rankResult = createLottoWinningStatistics(lottoGameInfoDto.getWinnerLotto(),
+                lottoGameInfoDto.getBonusNumber())
+                .informStatistics(lottoGameInfoDto.getLottosDto().toLottos());
+        double yield = YieldCalculator.calculate(lottoGameInfoDto.getCost(), rankResult);
         return RankStatisticsDto.valueOf(rankResult, yield);
     }
 
