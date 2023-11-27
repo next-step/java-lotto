@@ -27,11 +27,15 @@ public class ResultView {
         for (int i = 0; i < ticket.getNumbers().size(); i++) {
             sb.append(ticket.getNumbers().get(i).getNum());
             // StringBuilder를 넘겨받아 indent를 줄이는 것이 좋을까?
-            if (i != ticket.getNumbers().size() - 1)
-                sb.append(", ");
+            addComma(ticket, sb, i);
         }
         sb.append("]");
         System.out.println(sb);
+    }
+
+    private void addComma(LottoTicket ticket, StringBuilder sb, int i) {
+        if (i != ticket.getNumbers().size() - 1)
+            sb.append(", ");
     }
 
     public void showResultStatics(EnumMap<Rank, Integer> results) {
