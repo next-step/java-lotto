@@ -17,22 +17,26 @@ public class StringCalculatorTest {
 
     @Test
     void 덧셈() {
-        assertThat(plus(1, 2)).isEqualTo(3);
+        Plus plus = new Plus();
+        assertThat(plus.calculate(1, 2)).isEqualTo(3);
     }
 
     @Test
     void 뺄셈() {
-        assertThat(minus(3, 1)).isEqualTo(2);
+        Minus minus = new Minus();
+        assertThat(minus.calculate(3, 1)).isEqualTo(2);
     }
 
     @Test
     void 곱셈() {
-        assertThat(multiply(3, 2)).isEqualTo(6);
+        Multiply multiply = new Multiply();
+        assertThat(multiply.calculate(3, 2)).isEqualTo(6);
     }
 
     @Test
     void 나눗셈() {
-        assertThat(divide(6, 2)).isEqualTo(3);
+        Divide divide = new Divide();
+        assertThat(divide.calculate(6, 2)).isEqualTo(3);
     }
 
     @ParameterizedTest
@@ -46,7 +50,8 @@ public class StringCalculatorTest {
 
     @Test
     void 계산() {
-        assertThat(calculate("2 + 3 * 4 / 2")).isEqualTo(10);
+        StringCalculator cal = new StringCalculator();
+        assertThat(cal.calculate("2 + 3 * 4 / 2 * 6 + 4 / 2")).isEqualTo(32);
     }
 
 }
