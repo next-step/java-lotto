@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -57,4 +54,18 @@ public class LottoNumbers {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LottoNumbers that = (LottoNumbers) o;
+
+        return Objects.equals(numbers, that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return numbers != null ? numbers.hashCode() : 0;
+    }
 }

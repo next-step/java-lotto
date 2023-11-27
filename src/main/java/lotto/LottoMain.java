@@ -13,7 +13,11 @@ public class LottoMain {
         LottoInputView lottoInputView = new LottoInputView();
 
         Lotto lotto = new Lotto();
-        lotto.sellLotto(lottoInputView.inputBuyingMoney());
+        int buyingMoney = lottoInputView.inputBuyingMoney();
+        int manualCount = lottoInputView.inputManualCount();
+
+        lotto.sellLotto(buyingMoney, lottoInputView.inputManualNumbers(manualCount));
+        LottoResultView.printBuyingStatus(manualCount, lotto.lottoNumbersCount() - manualCount);
         LottoResultView.printLotto(lotto);
 
         WinningNumbers winningNumbers = new WinningNumbers(new LottoNumbers(lottoInputView.inputWinningNumbers()), new LottoNumber(lottoInputView.inputBonusNumber()));
