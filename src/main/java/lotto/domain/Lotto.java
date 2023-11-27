@@ -12,14 +12,14 @@ public class Lotto {
     private static final int MAX_SIZE = 6;
     private static final String STRING_SPLITTER = ", ";
 
-    private final Set<Integer> lotto;
+    private final Set<Integer> values;
 
     public Lotto(Set<Integer> lotto) {
         if (lotto.isEmpty() || lotto.size() > MAX_SIZE) {
             throw new IllegalArgumentException("유효하지 않은 로또입니다.");
         }
         LottoNumber.check(lotto);
-        this.lotto = lotto;
+        this.values = lotto;
     }
 
     public static Lotto from(List<Integer> numbers) {
@@ -40,16 +40,16 @@ public class Lotto {
     }
 
     public int matchCount(Lotto otherLotto) {
-        return (int) lotto.stream().filter(number -> otherLotto.contains(number)).count();
+        return (int) values.stream().filter(number -> otherLotto.contains(number)).count();
     }
 
     public boolean contains(int number) {
-        return lotto.contains(number);
+        return values.contains(number);
     }
 
     @Override
     public String toString() {
-        List<Integer> lottoList = lotto.stream().collect(Collectors.toList());
+        List<Integer> lottoList = values.stream().collect(Collectors.toList());
         Collections.sort(lottoList);
         return lottoList.toString();
     }
