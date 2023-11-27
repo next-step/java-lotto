@@ -29,6 +29,11 @@ public class LottoNumber {
         this.value = value;
     }
 
+    public static LottoNumber valueOf(int number) {
+        return Optional.ofNullable(lottoNumberPool.get(number))
+                .orElseThrow(() -> new IllegalStateException(LOTTO_NUMBER_OUT_OF_RANGE_EXCEPTION));
+    }
+
     private void validateLottoNumber(int number) {
         if (outOfRange(number)) {
             throw new IllegalStateException(LOTTO_NUMBER_OUT_OF_RANGE_EXCEPTION);
@@ -41,11 +46,6 @@ public class LottoNumber {
 
     public int getLottoNumber() {
         return value;
-    }
-
-    public static LottoNumber valueOf(int number) {
-        return Optional.ofNullable(lottoNumberPool.get(number))
-                .orElseThrow(() -> new IllegalStateException(LOTTO_NUMBER_OUT_OF_RANGE_EXCEPTION));
     }
 
     @Override

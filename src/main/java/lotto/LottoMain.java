@@ -1,14 +1,10 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 import lotto.config.LottoFactory;
 import lotto.controller.LottoController;
-import lotto.domain.RankResult;
-import lotto.domain.YieldCalculator;
 import lotto.dto.LottoGameInfoDto;
 import lotto.dto.LottosDto;
-import lotto.dto.RankResultDto;
 import lotto.dto.RankStatisticsDto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -31,7 +27,8 @@ public class LottoMain {
 
         List<Integer> winnerLotto = inputView.winnerLottoNumbers();
         int bonusNumber = inputView.bonusNumber();
-        RankStatisticsDto rankStatisticsDto = controller.informRankStatistics(new LottoGameInfoDto(lottosDto, winnerLotto, bonusNumber, cost));
+        RankStatisticsDto rankStatisticsDto = controller.informRankStatistics(
+                new LottoGameInfoDto(lottosDto, winnerLotto, bonusNumber, cost));
         outputView.printLottoRankStatistics(rankStatisticsDto.getRankResultDtos());
         outputView.printLottoYield(rankStatisticsDto.getYield());
     }
