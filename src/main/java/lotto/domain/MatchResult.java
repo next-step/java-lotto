@@ -9,10 +9,7 @@ public class MatchResult {
     private Map<Rank, Integer> matchResult;
 
     public MatchResult(){
-        matchResult = new HashMap<>();
-        for (Rank rank : Rank.values()){
-            matchResult.put(rank, 0);
-        }
+        this(List.of(0,0,0,0,0,0,0));
     }
 
     public MatchResult(List<Integer> matchNumberList){

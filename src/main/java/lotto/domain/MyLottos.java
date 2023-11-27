@@ -5,11 +5,10 @@ import java.util.List;
 
 public class MyLottos {
 
-    private List<Lotto> myLottos;
+    private List<Lotto> myLottos = new ArrayList<>();
     private MatchResult matchResult;
 
     public MyLottos(int lottoCount){
-        this.myLottos = new ArrayList<>();
         this.matchResult = new MatchResult();
         for(int i = 0; i < lottoCount; i++){
             myLottos.add(new Lotto());
