@@ -30,7 +30,7 @@ public class LottoController {
         Lotto winningLotto = new Lotto(InputView.inputWinningNumbers(DELIMITER));
         LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
         LottoWinningMachine winningMachine = new LottoWinningMachine(winningLotto, bonusNumber);
-        Map<Rank, Integer> rankCounts = winningMachine.getRankCounts(lottos);
+        Map<Rank, Integer> rankCounts = winningMachine.getWinningResult(lottos);
         OutputView.outputWinningResult(rankCounts);
         OutputView.outputRateOfResult(winningMachine.calculateRateOfResult(rankCounts, amount));
     }

@@ -4,8 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottosTest {
 
@@ -20,5 +22,28 @@ class LottosTest {
         assertThat(lottos.getLottos()).hasSize(3)
                 .containsAnyElementsOf(lotto1.getLottos())
                 .containsAnyElementsOf(lotto2.getLottos());
+    }
+
+    @Test
+    @DisplayName("맞춘 번호 개수에 맞는 Rank의 카운트를 반환한다.")
+    void winning_result() {
+        Lottos lottos = new Lottos(List.of(
+                new Lotto(1, 2, 3, 4, 5, 6),
+                new Lotto(1, 2, 3, 4, 5, 30),
+                new Lotto(1, 2, 3, 4, 5, 23),
+                new Lotto(1, 2, 3, 4, 21, 23),
+                new Lotto(1, 2, 3, 20, 21, 23)
+        ));
+
+        Map<Rank, Integer> result = lottos.calculateWinningResult(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(30));
+
+        assertAll(
+                () -> assertThat(result.get(Rank.FIRST)).isEqualTo(1),
+                () -> assertThat(result.get(Rank.SECOND)).isEqualTo(1),
+                () -> assertThat(result.get(Rank.THIRD)).isEqualTo(1),
+                () -> assertThat(result.get(Rank.FOURTH)).isEqualTo(1),
+                () -> assertThat(result.get(Rank.FIFTH)).isEqualTo(1),
+                () -> assertThat(result.containsKey(Rank.ZERO)).isFalse()
+        );
     }
 }

@@ -4,7 +4,6 @@ import lotto.exceptions.InvalidBonusNumberException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoWinningMachine {
@@ -28,15 +27,8 @@ public class LottoWinningMachine {
         }
     }
 
-    public Map<Rank, Integer> getRankCounts(Lottos lottos) {
-        Map<Rank, Integer> rankCounts = new EnumMap<>(Rank.class);
-
-        for (Lotto lotto : lottos.getLottos()) {
-            Rank rank = Rank.rankByCount(lotto.matchCount(winningLotto), lotto.contains(bonusNumber));
-            rankCounts.put(rank, rankCounts.getOrDefault(rank, 0) + 1);
-        }
-
-        return rankCounts;
+    public Map<Rank, Integer> getWinningResult(Lottos lottos) {
+        return lottos.calculateWinningResult(winningLotto, bonusNumber);
     }
 
     public double calculateRateOfResult(Map<Rank, Integer> result, int amount) {
