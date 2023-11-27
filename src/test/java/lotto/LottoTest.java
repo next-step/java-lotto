@@ -4,7 +4,10 @@ import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -16,14 +19,21 @@ public class LottoTest {
     @MethodSource(value = "anyNumbers")
     @ParameterizedTest
     void a(List<Integer> anyNumbers) {
-        assertThatNoException().isThrownBy(() -> Lotto.from(anyNumbers));
+        List<LottoNumber> lottoNumbers = getLottoNumbers(anyNumbers);
+        assertThatNoException().isThrownBy(() -> Lotto.from(lottoNumbers));
+    }
+
+    private static List<LottoNumber> getLottoNumbers(List<Integer> anyNumbers) {
+        return anyNumbers.stream().map(LottoNumber::new)
+            .collect(Collectors.toList());
     }
 
     @DisplayName("중복 된 숫자는 만들 수 없다.")
     @MethodSource(value = "anyNumbersDuplicated")
     @ParameterizedTest
     void b(List<Integer> anyNumbersDuplicated) {
-        assertThatThrownBy(() -> Lotto.from(anyNumbersDuplicated));
+        List<LottoNumber> lottoNumbers = getLottoNumbers(anyNumbersDuplicated);
+        assertThatThrownBy(() -> Lotto.from(lottoNumbers));
     }
 
     private static Stream<Arguments> anyNumbers() {
