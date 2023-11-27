@@ -4,6 +4,9 @@ public class LottoNumber implements Comparable<LottoNumber>{
     private int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
+        if (lottoNumber < 1 || lottoNumber > 45) {
+            throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이의 숫자여야 합니다.");
+        }
         this.lottoNumber = lottoNumber;
     }
 
