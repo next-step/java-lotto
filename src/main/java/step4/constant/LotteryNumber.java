@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 public class LotteryNumber {
 
-    public static final int LOTTO_MIN = 1;
-    public static final int LOTTO_MAX = 45;
+    private static final int LOTTO_MIN = 1;
+    private static final int LOTTO_MAX = 45;
     private static final List<LotteryNumber> LOTTERY_NUMBERS = new ArrayList<>();
 
     private final int value;
@@ -20,7 +20,6 @@ public class LotteryNumber {
 
     public LotteryNumber(int value) {
         validateNumber(value);
-
         this.value = value;
     }
 
@@ -55,7 +54,7 @@ public class LotteryNumber {
     }
 
     private static void validateNumber(int number) {
-        if (46 < number) {
+        if (LOTTO_MAX < number) {
             throw new IllegalArgumentException("잘 못 생성된 로또 번호 - " + number);
         }
     }
@@ -77,9 +76,5 @@ public class LotteryNumber {
     @Override
     public int hashCode() {
         return getValue();
-    }
-
-    public static void main(String[] args) {
-        System.out.println(getAllLotteryNumber());
     }
 }
