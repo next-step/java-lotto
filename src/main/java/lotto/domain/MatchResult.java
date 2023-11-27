@@ -33,7 +33,7 @@ public class MatchResult {
         return matchResult.get(rank);
     }
 
-    double calculateReturnRate(int payMoney) {
+    public double calculateReturnRate(int payMoney) {
         return Math.floor((double)Rank.calculateTotalWinningMoney(this) / payMoney * 100) / 100;
     }
 

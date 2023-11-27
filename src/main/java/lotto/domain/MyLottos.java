@@ -33,10 +33,6 @@ public class MyLottos {
         return matchResult;
     }
 
-    public double returnRate(int payMoney){
-        return matchResult.calculateReturnRate(payMoney);
-    }
-
     @Override
     public String toString() {
         return "MyLottos{" +

@@ -22,6 +22,6 @@ public class LottoApplication {
 
         printMatchResult(matchResult);
 
-        printReturnRate(myLottos.returnRate(payMoney));
+        printReturnRate(matchResult.calculateReturnRate(payMoney));
     }
 }
