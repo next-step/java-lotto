@@ -2,23 +2,22 @@ package lotto;
 
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.WinningNumbers;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
-
-import static lotto.utils.StringParser.stringToIntegerList;
 
 public class LottoMain {
     public static void main(String[] args) {
         LottoInputView lottoInputView = new LottoInputView();
 
         Lotto lotto = new Lotto();
-        lotto.sellLotto(lottoInputView.inputAmount("구매금액을 입력해주세요."));
+        lotto.sellLotto(lottoInputView.inputBuyingMoney());
         LottoResultView.printLotto(lotto);
 
-        LottoNumbers winningNumber = new LottoNumbers(stringToIntegerList(lottoInputView.inputStringLine("당첨번호를 입력해주세요.")));
-
-        LottoResult lottoResult = new LottoResult(lotto.makeStatistics(winningNumber), lotto.calcRateOfReturn(winningNumber));
+        WinningNumbers winningNumbers = new WinningNumbers(new LottoNumbers(lottoInputView.inputWinningNumbers()), new LottoNumber(lottoInputView.inputBonusNumber()));
+        LottoResult lottoResult = new LottoResult(lotto.makeStatistics(winningNumbers), lotto.calcRateOfReturn(winningNumbers));
 
         LottoResultView.printResult(lottoResult);
     }
