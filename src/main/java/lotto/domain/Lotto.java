@@ -24,7 +24,7 @@ public class Lotto {
         // 문제의 코드에서 나오는 오류는 다른 생성자를 호출하는 부분에서 발생하고 있습니다.
         // Java에서 생성자 내에서 다른 생성자를 호출할 때는 해당 호출이 반드시 첫 번째 문장이어야 합니다.
         // 여러 생성자가 상호 호출될 때, 이 호출은 항상 첫 번째 문장이어야 합니다.
-        this(Arrays.stream(lottoNumber).map(LottoNumber::new).collect(Collectors.toList()));
+        this(Arrays.stream(lottoNumber).map(LottoNumber::valueOf).collect(Collectors.toList()));
     }
 
 //    public Lotto(List<Integer> lottoNumbers) {
@@ -69,6 +69,24 @@ public class Lotto {
 
     public Set<LottoNumber> getLotto() {
         return lottoNumbers;
+    }
+
+    public boolean isOverlapping(LottoNumber number) {
+        for (LottoNumber lottoNumber : this.lottoNumbers) {
+            if (lottoNumber == number) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean containsBonus(Bonus bonus) {
+        for (LottoNumber lottoNumber : this.lottoNumbers) {
+            if (bonus.isSame(lottoNumber)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
