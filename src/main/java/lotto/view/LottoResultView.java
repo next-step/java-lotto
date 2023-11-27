@@ -8,6 +8,11 @@ import lotto.enums.Rank;
 import java.util.Map;
 
 public class LottoResultView {
+
+    public static void printBuyingStatus(int manual, int auto) {
+        System.out.printf("수동으로 %d개, 자동으로 %d개 구매했습니다.\n", manual, auto);
+    }
+
     public static void printLotto(Lotto lotto) {
         for (LottoNumbers numbers : lotto.getLottoNumbers()) {
             System.out.println(numbers);

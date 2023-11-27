@@ -13,10 +13,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoTest {
 
     @Test
-    void test_로또판매() {
+    void test_자동판매() {
         Lotto lotto = new Lotto();
-        lotto.sellLotto(32500L);
+        lotto.sellLotto(32500L, null);
         assertThat(lotto.lottoNumbersCount()).isEqualTo(32);
+    }
+
+    @Test
+    void test_수동판매() {
+        Lotto lotto = new Lotto();
+        lotto.sellLotto(2000L, List.of(List.of(1, 2, 3, 4, 5, 6)));
+        assertThat(lotto.getLottoNumbers()).contains(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
     }
 
     @Test

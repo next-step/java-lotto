@@ -15,9 +15,19 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public void sellLotto(long amount) {
+    public void sellLotto(long amount, List<List<Integer>> manualNumbersList) {
+        if (manualNumbersList == null) {
+            manualNumbersList = new ArrayList<>();
+        }
+        validatePurchaseAmount(amount, (long) manualNumbersList.size() * PRICE);
+
+        for (List<Integer> numbers : manualNumbersList) {
+            addLottoNumbers(numbers);
+            amount -= PRICE;
+        }
+
         while (amount >= PRICE) {
-            this.lottoNumbers.add(new LottoNumbers());
+            addLottoNumbers();
             amount -= PRICE;
         }
     }
@@ -46,7 +56,7 @@ public class Lotto {
         return (double) this.calcWinningAmount(winningLottoNumbers) / (lottoNumbersCount() * PRICE);
     }
 
-    int lottoNumbersCount() {
+    public int lottoNumbersCount() {
         return this.lottoNumbers.size();
     }
 
@@ -59,5 +69,19 @@ public class Lotto {
         for (Rank rank : Rank.values()) {
             countPerPrize.put(rank, 0);
         }
+    }
+
+    private void validatePurchaseAmount(long amount, long requiredAmount) {
+        if (amount < requiredAmount) {
+            throw new IllegalArgumentException("구매금액을 넘는 로또를 구매할 수 없습니다.");
+        }
+    }
+
+    private void addLottoNumbers() {
+        this.lottoNumbers.add(new LottoNumbers());
+    }
+
+    private void addLottoNumbers(List<Integer> numbers) {
+        this.lottoNumbers.add(new LottoNumbers(numbers));
     }
 }
