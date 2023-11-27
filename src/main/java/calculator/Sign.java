@@ -28,14 +28,14 @@ public enum Sign {
 		return expression.apply(result, number);
 	}
 
-	private static final Map<String, String> CODE_MAP = Collections.unmodifiableMap(
-			Stream.of(values()).collect(Collectors.toMap(Sign::getSign, Sign::name))
+	private static final Map<String, Sign> CODE_MAP = Collections.unmodifiableMap(
+			Stream.of(values()).collect(Collectors.toMap(Sign::getSign, sign -> sign))
 	);
 
 	public static Sign of(final String sign) {
 		if (Sign.CODE_MAP.get(sign) == null) {
 			throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
 		}
-		return Sign.valueOf(Sign.CODE_MAP.get(sign));
+		return Sign.CODE_MAP.get(sign);
 	}
 }
