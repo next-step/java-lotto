@@ -43,7 +43,7 @@ public class StringCalculator {
         return number1 / number2;
     }
 
-    public static int calculate(String input) {
+    public int calculate(String input) {
         isBlank(input);
         String[] split = getSplit(input);
         int result = Integer.parseInt(split[0]);
