@@ -72,21 +72,11 @@ public class Lotto {
     }
 
     public boolean isOverlapping(LottoNumber number) {
-        for (LottoNumber lottoNumber : this.lottoNumbers) {
-            if (lottoNumber == number) {
-                return true;
-            }
-        }
-        return false;
+        return this.lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber == number);
     }
 
     public boolean containsBonus(Bonus bonus) {
-        for (LottoNumber lottoNumber : this.lottoNumbers) {
-            if (bonus.isSame(lottoNumber)) {
-                return true;
-            }
-        }
-        return false;
+        return this.lottoNumbers.stream().anyMatch(bonus::isSame);
     }
 
     @Override
