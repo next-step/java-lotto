@@ -52,6 +52,6 @@ public class WinningLottoTest {
         WinningLotto winningLotto = WinningLotto.of(LAST_WEAK_LOTTO, bonusBall);
         Lotto myLotto = LottoGenerator.generate(Set.of(1, 2, 3, 4, 5, 8));
         assertThat(winningLotto.compare(myLotto)).isEqualTo(5);
-        assertThat(winningLotto.compareBonus(myLotto)).isEqualTo(1);
+        assertThat(winningLotto.compareBonus(myLotto)).isTrue();
     }
 }

@@ -4,9 +4,11 @@ import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Arrays;
+import java.util.stream.IntStream;
 import lotto.domain.Lotto;
 import lotto.domain.LottoWallet;
-import lotto.domain.Prize;
+import lotto.domain.LottoRank;
+import lotto.domain.StatisticsReport;
 
 public class ResultView {
 
@@ -38,15 +40,15 @@ public class ResultView {
         return stringBuilder.toString();
     }
 
-    public void resultOut(Prize[] prizes) {
-        Arrays.stream(prizes).forEach(prize -> {
-            if(prizeRankOver3Under6(prize)){
-                sout.print(prize.rank().toString());
-            }
+    public void resultOut(StatisticsReport report) {
+        IntStream.range(0, LottoRank.values().length).forEach(i -> {
+                LottoRank lottoRank = LottoRank.values()[i];
+                if(lottoRank.equals(LottoRank.SECOND)){
+                    System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d 개", i, lottoRank.prize(), report.count(lottoRank));
+                }else{
+                    System.out.printf("%d개 일치(%d원) - %d 개", i, lottoRank.prize(), report.count(lottoRank));
+                }
         });
-    }
-    private static boolean prizeRankOver3Under6(Prize prize) {
-        return 3 <= prize.rank().rank() && prize.rank().rank() <= 6;
     }
 
     public void out(BigDecimal rate) {

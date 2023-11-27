@@ -26,12 +26,10 @@ public class WinningLotto {
         return lastWeekLotto.matchCount(lotto);
     }
 
-    public int compareBonus(Lotto lotto) {
-        return lotto.lottoNumbers().stream().mapToInt(lottoNumber -> {
-            if (lottoNumber.equals(bonusBall)) {
-                return 1;
-            }
-            return 0;
-        }).sum();
+    public boolean compareBonus(Lotto lotto) {
+        if ( 5 == compare(lotto)){
+            return lotto.lottoNumbers().stream().anyMatch(lottoNumber -> lottoNumber.equals(bonusBall));
+        }
+        return false;
     }
 }
