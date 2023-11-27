@@ -13,25 +13,19 @@ import lotto.view.ResultView;
 
 public class LottoController {
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        ResultView resultView = new ResultView();
-
-        int totalPrice = inputView.inputTotalAmount();
+        int totalPrice = InputView.inputTotalAmount();
         int ticketQuantity = new LottoShop().sellTicket(totalPrice);
-        resultView.showHowManyBuyTicket(ticketQuantity);
+        ResultView.showHowManyBuyTicket(ticketQuantity);
 
         LottoTickets lottoTickets = new LottoTickets(ticketQuantity, new AutoGenerateStrategy());
-        resultView.showLottoTickets(lottoTickets.getLottoTickets());
+        ResultView.showLottoTickets(lottoTickets.getLottoTickets());
 
-        Set<Integer> winningNums = StringSplitter.convertToIntegerSet(inputView.inputWinningNumbers());
+        Set<Integer> winningNums = StringSplitter.convertToIntegerSet(InputView.inputWinningNumbers());
 
         Result result = new Result();
-        resultView.showResultStatics(
+        ResultView.showResultStatics(
             result.aggregateResult(
-                lottoTickets.checkTickets(new LottoChecker(winningNums, inputView.inputBonusNumber()))
-            )
-        );
-
-        resultView.showReturnRate(result.calcReturnRate(totalPrice));
+                lottoTickets.checkTickets(new LottoChecker(winningNums, InputView.inputBonusNumber()))));
+        ResultView.showReturnRate(result.calcReturnRate(totalPrice));
     }
 }
