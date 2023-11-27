@@ -26,12 +26,16 @@ public class Lottos {
     public Map<Rank, Long> seekRankStatistics(Lotto winnerLotto, Bonus bonus) {
         Map<Rank, Long> rankResults = initRankResults();
         for (Lotto lotto : lottos) {
-            int countOfMatch = lotto.countOfMatch(winnerLotto);
-            boolean containsBonus = lotto.containsBonus(bonus);
-            Rank rank = Rank.valeOf(countOfMatch, containsBonus);
+            Rank rank = findRankBy(winnerLotto, bonus, lotto);
             rankResults.put(rank, rankResults.get(rank) + 1);
         }
         return rankResults;
+    }
+
+    private Rank findRankBy(Lotto winnerLotto, Bonus bonus, Lotto lotto) {
+        int countOfMatch = lotto.countOfMatch(winnerLotto);
+        boolean containsBonus = lotto.containsBonus(bonus);
+        return Rank.valeOf(countOfMatch, containsBonus);
     }
 
     private Map<Rank, Long> initRankResults() {
