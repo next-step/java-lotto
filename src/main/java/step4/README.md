@@ -17,3 +17,4 @@
 - [X] Optional 을 적용해 NPE 가 발생하지 않도록 한다.
 - [X] 사용자가 잘못된 값을 입력했을 때 java exception 으로 에러 처리를 한다.
 - [X] 출력하는 곳이 아니면 getter 를 없애려고 노력
+- [X] view 클래스인 inputView 에서는 LottoNumber 만 알고, UserLotto 나 다른 클래스에 대한 간섭을 제거
