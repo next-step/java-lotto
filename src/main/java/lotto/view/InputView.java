@@ -38,6 +38,8 @@ public class InputView {
 
     public int bonusBallInit() {
         sout.print(BONUS_BALL_INIT_MESSAGE);
-        return scanner.nextInt();
+        int bonusBall = scanner.nextInt();
+        sout.print("\n");
+        return bonusBall;
     }
 }
