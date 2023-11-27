@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -15,15 +14,10 @@ public enum Ranking {
     NOT_RANKED(0, 0);
     private final int matchingCount;
     private final int profit;
-    private static final Map<Integer, Ranking> MATCHING_COUNT_MAP =Collections.unmodifiableMap(Stream.of(values()).collect(Collectors.toMap(o -> o.matchingCount, o -> o)));
 
     Ranking(int matchingCount, int profit) {
         this.matchingCount = matchingCount;
         this.profit = profit;
-    }
-
-    public static Ranking of(int matchingCount) {
-        return MATCHING_COUNT_MAP.get(matchingCount);
     }
 
     public int matchingCount() {

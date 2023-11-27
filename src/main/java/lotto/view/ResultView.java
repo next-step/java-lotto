@@ -1,9 +1,10 @@
 package lotto.view;
 
 import lotto.domain.Lottos;
+import lotto.domain.LottosResult;
 
 public interface ResultView {
-    void lottos(Lottos lottos);
+    void showLottos(Lottos lottos);
 
-    void winningStats(Lottos lottos);
+    void winningStats(LottosResult lottosResult);
 }

@@ -71,7 +71,7 @@
     * [x] Lotto 순위 enum 추가
       * [x] 몇 개일 때 당첨인지
       * [x] 당첨금은 얼마인지
-    * [x] Lottos가 관리하는 것
+    * [x] LottosResult 가 관리하는 것
       * [x] 전체 수익률
       * [x] 등수당 당첨 갯수
 
@@ -83,12 +83,16 @@
 * [x] else 예약어를 사용하지 않는다.
 
 #### Feedback 23.11.24
-* [ ] LottoGenerator 테스트를 위한 동작 분리
-* [ ] Lotto 내 변수의 재사용성 고민
-* [ ] Lotto의 생성자 2개 중 테스트를 위한 생성자를 없애기
-* [ ] Lotto의 멤버변수 ranking의 위치 고민
-* [ ] Lotto의 멤버변수 matchingCount를 쓰지 않기
-* [ ] Stream의 generate와 limit 활용
-* [ ] 수익률 계산 역할의 위치 고민
+* [x] LottoGenerator 테스트를 위한 동작 분리
+* [x] Lotto 내 변수의 재사용성 고민
+  * [x] 외부에서 주입받은 변수 외 멤버변수 삭제
+* [x] Lotto의 생성자 2개 중 테스트를 위한 생성자를 없애기
+  * [x] 생성자 방식 변경
+* [x] Lotto의 멤버변수 ranking의 위치 고민
+  * [x] 삭제
+* [x] Lotto의 멤버변수 matchingCount를 쓰지 않기
+  * [x] 삭제, 메서드 이용하여 return
+* [x] Stream의 generate와 limit 활용
+* [x] 수익률 계산 역할의 위치 고민
 * [ ] Map.of() 활용
-* 
+  * [x] Ranking 내 Map 삭제

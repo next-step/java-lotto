@@ -14,9 +14,9 @@ public class ConsoleInputView implements InputView {
         Scanner scanner = new Scanner(System.in);
 
         int payment = scanner.nextInt();
-        int lottoCount = payment / Lotto.PRICE;
-        System.out.println(lottoCount + "개를 구입했습니다.");
-        return lottoCount;
+        int amount = payment / Lotto.PRICE;
+        System.out.println(amount + "개를 구입했습니다.");
+        return amount;
     }
 
     public Lotto winningLotto() {
