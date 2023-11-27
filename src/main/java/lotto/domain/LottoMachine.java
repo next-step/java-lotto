@@ -5,16 +5,23 @@ import java.util.List;
 
 public class LottoMachine {
 
-    private final List<Lotto> lottos;
-
-    public LottoMachine() {
-        this.lottos = new ArrayList<>();
+    private LottoMachine() {
     }
 
-    public List<Lotto> issueLottos(final int quantity, LottoNumberGenerator lottoNumberGenerator) {
-        for (int i = 0; i < quantity; i++) {
-            this.lottos.add(new Lotto(lottoNumberGenerator.generate()));
+    public static Lottos issueManualLottos(List<String> numbers) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (String number : numbers) {
+            lottos.add(new Lotto(new ManualLottoNumberGenerator(number).generate()));
         }
-        return lottos;
+        return new Lottos(lottos);
     }
+
+    public static Lottos issueAutoLottos(final int quantity) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < quantity; i++) {
+            lottos.add(new Lotto(new AutoLottoNumberGenerator().generate()));
+        }
+        return new Lottos(lottos);
+    }
+
 }

@@ -4,7 +4,6 @@ import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
 
-import java.util.List;
 import java.util.Map;
 
 public class LottoController {
@@ -16,20 +15,22 @@ public class LottoController {
 
     public static void run() {
         final int amount = InputView.inputAmount();
-
         PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
         final int quantity = purchaseAmount.calculateLottoQuantity();
-        OutputView.outputQuantity(quantity);
 
-        LottoMachine lottoMachine = new LottoMachine();
-        List<Lotto> lottos = lottoMachine.issueLottos(quantity, new AutoLottoNumberGenerator());
+        final int manualQuantity = InputView.inputManualQuantity();
+        final int autoQuantity = quantity - manualQuantity;
+        OutputView.outputQuantity(manualQuantity, autoQuantity);
+
+        Lottos manualLottos = LottoMachine.issueManualLottos(InputView.inputManualNumbers(manualQuantity));
+        Lottos autoLottos = LottoMachine.issueAutoLottos(autoQuantity);
+        Lottos lottos = new Lottos(manualLottos, autoLottos);
         OutputView.outputLottos(lottos);
 
-        List<Integer> winningNumbers = InputView.inputWinningNumbers(DELIMITER);
+        Lotto winningLotto = new Lotto(InputView.inputWinningNumbers(DELIMITER));
         LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
-        LottoWinningMachine winningMachine = new LottoWinningMachine(new Lotto(winningNumbers), bonusNumber);
-        Map<Rank, Integer> rankCounts = winningMachine.getRankCounts(lottos);
-
+        LottoWinningMachine winningMachine = new LottoWinningMachine(winningLotto, bonusNumber);
+        Map<Rank, Integer> rankCounts = winningMachine.getWinningResult(lottos);
         OutputView.outputWinningResult(rankCounts);
         OutputView.outputRateOfResult(winningMachine.calculateRateOfResult(rankCounts, amount));
     }
