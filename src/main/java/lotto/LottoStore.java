@@ -16,14 +16,7 @@ public class LottoStore {
     }
 
     public LottoResult result(Lottos lottos, String resultLottoNumbers){
-        String[] split = resultLottoNumbers.split(",");
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (String number: split) {
-            LottoNumber lottoNumber = LottoNumber.of(Integer.parseInt(number));
-            lottoNumbers.add(lottoNumber);
-        }
-        Lotto resultLotto = Lotto.defaultOf(lottoNumbers);
-
+        Lotto resultLotto = Lotto.defaultOf(resultLottoNumbers);
         return LottoMachine.match(resultLotto, lottos);
     }
 

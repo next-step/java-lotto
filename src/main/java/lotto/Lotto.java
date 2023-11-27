@@ -34,6 +34,15 @@ public class Lotto {
   public static Lotto defaultOf(List<LottoNumber> lottoNumbers) {
     return new Lotto(lottoNumbers);
   }
+  public static Lotto defaultOf(String lottoNumberString) {
+    String[] split = lottoNumberString.split(",");
+    List<LottoNumber> lottoNumbers = new ArrayList<>();
+    for (String number: split) {
+      LottoNumber lottoNumber = LottoNumber.of(Integer.parseInt(number));
+      lottoNumbers.add(lottoNumber);
+    }
+    return new Lotto(lottoNumbers);
+  }
 
   public int size() {
     return this.lottoNumbers.size();
