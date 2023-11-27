@@ -27,15 +27,40 @@ class LottoTest {
         assertThat(lotto.getMatchCount(lastWeekLotto)).isEqualTo(expected);
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4", "1,2,3,11,12,46", "0,12,13,14,15,16", "45,1,2,44,36,100,55"}, delimiter = ':')
-    void Lotto_수동생성_실패(String inputNumbers) {
+    @Test
+    void Lotto_수동생성_실패_갯수미달() {
+        int[] numbers = {1,2,3,4};
 
-        int[] numbers = Arrays.stream(inputNumbers.split(","))
-                .mapToInt(Integer::parseInt)
-                .toArray();
         assertThatThrownBy(() -> of(numbers))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호는 6개만 가능합니다.");
+    }
+
+    @Test
+    void Lotto_수동생성_실패_갯수초과() {
+        int[] numbers = {1,2,3,4,5,6,7};
+
+        assertThatThrownBy(() -> of(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호는 6개만 가능합니다.");
+    }
+
+    @Test
+    void Lotto_수동생성_실패_1보다_작은수() {
+        int[] numbers = {0,12,13,14,15,16};
+
+        assertThatThrownBy(() -> of(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호는 1~45 사이의 숫자만 가능합니다.");
+    }
+
+    @Test
+    void Lotto_수동생성_실패_45보다큰수() {
+        int[] numbers = {45,1,2,44,100,55};
+
+        assertThatThrownBy(() -> of(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호는 1~45 사이의 숫자만 가능합니다.");
     }
 
     @Test
