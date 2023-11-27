@@ -1,7 +1,8 @@
 package calculator.domain;
 
 import java.util.Arrays;
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.DoubleBinaryOperator;
 
 public enum OperationType {
@@ -10,8 +11,15 @@ public enum OperationType {
     MULTIPLY("*", (x, y) -> x * y),
     DIVIDE("/", (x, y) -> x / y);
 
+    private static final Map<String, OperationType> OPERATION_TYPE_MAP = new HashMap<>();
+
     private final String type;
     private final DoubleBinaryOperator operation;
+
+    static {
+        Arrays.asList(values())
+              .forEach(operationTypeEnum -> OPERATION_TYPE_MAP.put(operationTypeEnum.type, operationTypeEnum));
+    }
 
     OperationType(String type, DoubleBinaryOperator operation) {
         this.type = type;
@@ -19,14 +27,9 @@ public enum OperationType {
     }
 
     public static OperationType getOperationType(String operationType) {
-        return Arrays.stream(values())
-                     .filter(type -> Objects.equals(operationType, type.getType()))
-                     .findAny()
-                     .orElseThrow(() -> new IllegalArgumentException("사칙연산 기호를 확인해주세요"));
-    }
-
-    public String getType() {
-        return type;
+        if (!OPERATION_TYPE_MAP.containsKey(operationType))
+            throw new IllegalArgumentException("사칙연산 기호를 확인해주세요");
+        return OPERATION_TYPE_MAP.get(operationType);
     }
 
     public double getOperationResult(double left, double right) {
