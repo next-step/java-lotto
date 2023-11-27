@@ -29,9 +29,8 @@ public enum MatchedAmount {
     }
 
     public static MatchedAmount findByCount(int count) {
-        if (!MATCHED_AMOUNT_MAP.containsKey(count)) {
+        if (!MATCHED_AMOUNT_MAP.containsKey(count))
             return NONE;
-        }
         return MATCHED_AMOUNT_MAP.get(count);
     }
 
