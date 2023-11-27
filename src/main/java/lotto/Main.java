@@ -9,9 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        LottoSimulator lottoSimulator = new LottoSimulator();
-        RateOfReturnCalculator rateOfReturnCalculator = new RateOfReturnCalculator();
 
+        LottoSimulator lottoSimulator = new LottoSimulator();
         int money = inputMoney();
         lottoSimulator.buyingLotto(money);
 
@@ -24,6 +23,7 @@ public class Main {
 
         int[] statistics = lottoSimulator.calculateStatistics(lastWeekWinningLotto);
 
+        RateOfReturnCalculator rateOfReturnCalculator = new RateOfReturnCalculator();
         double rateOfReturn = rateOfReturnCalculator.calculateYield(statistics, money);
 
         printStatistics(statistics, rateOfReturn);
