@@ -10,7 +10,7 @@ import java.util.Map;
 public class ResultView {
     private static final String WINNING_COUNT_MESSAGE = "%s개 일치 (%s원)- %s개";
 
-    public static void printLottoCounts(int count) {
+    public static void printLotteryCounts(int count) {
         System.out.println(count + "개를 구매했습니다.");
     }
 
