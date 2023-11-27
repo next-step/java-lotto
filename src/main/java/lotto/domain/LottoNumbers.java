@@ -19,7 +19,7 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
-    public LottoNumbers(int minLottoNumber, int maxLottoNumber) {
+    private LottoNumbers(int minLottoNumber, int maxLottoNumber) {
         List<Integer> shuffledNumbers = IntStream.rangeClosed(minLottoNumber, maxLottoNumber)
                 .boxed()
                 .collect(Collectors.toList());
