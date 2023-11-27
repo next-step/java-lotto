@@ -8,11 +8,12 @@ import java.util.List;
 
 public class ResultView {
 
-    public void printWinningStatics(WinningLottos winningLottos) {
+    public void printWinningStatics(WinningLottos winningLottos, Integer price) {
         System.out.printf("당첨 통계%n======%n");
         for (Rank rank : Rank.winningRanks()) {
             printWinningStatics(winningLottos, rank);
         }
+        System.out.printf("총 수익률은 %.2f입니다.", winningLottos.investingPercent(price));
     }
 
     private void printWinningStatics(WinningLottos winningLottos, Rank rank) {
@@ -21,15 +22,8 @@ public class ResultView {
                 winningLottos.countLottoByWinningNumber(rank));
     }
 
-    public void printRateOfReturn(double rate) {
-        System.out.printf("총 수익률은 %.2f입니다.", rate);
-    }
-
-    public void printLottoCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
-    }
-
-    public void printLottos(List<Lotto> lottos) {
+    public void printLottos(List<Lotto> lottos, int count) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", count, lottos.size() - count);
         for (Lotto lotto : lottos) {
             System.out.println(lotto.numbers());
         }

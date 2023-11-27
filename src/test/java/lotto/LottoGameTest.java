@@ -2,14 +2,16 @@ package lotto;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoGameTest {
 
@@ -17,31 +19,38 @@ public class LottoGameTest {
     @CsvSource(value = {"1000:1", "4000:4"}, delimiter= ':')
     void 로또를_산다(int price, int count) {
         LottoGame lottoGame = new LottoGame();
-        lottoGame.buyLotto(price);
-        assertEquals(lottoGame.countLotto(), count);
+        assertThat(lottoGame.buyLotto(price, List.of()).size()).isEqualTo(count);
+    }
+
+    @Test
+    void 로또액수가_수동선택횟수보다_많을수는_없다() {
+        LottoGame lottoGame = new LottoGame();
+        assertThatIllegalArgumentException().isThrownBy(() -> lottoGame.buyLotto(1000,
+                List.of(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 4, 5, 6))
+        ));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {200, 1300, 1001})
     void 금액이부족하면_로또가_사지지_않는다(int price) {
         LottoGame lottoGame = new LottoGame();
-        assertThatIllegalArgumentException().isThrownBy(() -> lottoGame.buyLotto(price));
+        assertThatIllegalArgumentException().isThrownBy(() -> lottoGame.buyLotto(price, List.of()));
     }
 
-    @Test
-    void 당첨번호를_받을_수_있다() {
+    @ParameterizedTest
+    @MethodSource("manaulSelectedLottos")
+    void 수동으로_로또를_산다(int price, List<List<Integer>> manaulLottos, List<Lotto> lottos) {
         LottoGame lottoGame = new LottoGame();
-        List<Integer> winningNumbers = List.of(1,2,3,4,5,6);
-        lottoGame.registerWinningLotto(winningNumbers);
-        assertEquals(lottoGame.winningLotto(), new Lotto(winningNumbers));
+        assertThat(lottoGame.buyLotto(price, manaulLottos)).isEqualTo(lottos);
     }
 
-    @Test
-    void 보너스볼을_받을_수_있다() {
-        LottoGame lottoGame = new LottoGame();
-        lottoGame.registerBonusBall(5);
-        assertThat(lottoGame.bonusBall()).isEqualTo(new LottoNumber(5));
+    static Stream<Arguments> manaulSelectedLottos() {
+        return Stream.of(
+                Arguments.arguments(1000, List.of(List.of(1, 2, 3, 4, 5, 6)), List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)))),
+                Arguments.arguments(2000, List.of(List.of(1, 2, 3, 4, 5, 6), List.of(2, 3, 4, 5, 6, 8)),
+                        List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Lotto(List.of(2, 3, 4, 5, 6, 8)))
+                )
+        );
     }
-
 
 }
