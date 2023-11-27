@@ -1,6 +1,7 @@
 package auto.application;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,7 +11,13 @@ public class AutoService {
     private final static int LOTTO_MIN_NUMBER = 1;
     private final static int LOTTO_MAX_NUMBER = 45;
 
-    public static List<Integer> createLotteryNumbers() {
+    public static List<List<Integer>> createLotteryNumbersList(int lotteryCount) {
+        return IntStream.range(0, lotteryCount)
+                        .mapToObj(i -> AutoService.createLotteryNumbers())
+                        .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    private static List<Integer> createLotteryNumbers() {
         List<Integer> numbers = IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER + 1)
                                          .boxed()
                                          .collect(Collectors.toList());
