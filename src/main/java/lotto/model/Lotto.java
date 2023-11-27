@@ -33,6 +33,12 @@ public class Lotto {
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Lotto)) {
+            return false;
+        }
         Lotto other = (Lotto) obj;
         return this.numbers.equals(other.numbers);
     }
