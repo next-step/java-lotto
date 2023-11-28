@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 public class LottoShopFactory {
 
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
     private static final LottoNumberFactory lottoNumberFactory = LottoNumberFactory.getInstance();
     private final List<List<String>> manuallyLotto;
 
