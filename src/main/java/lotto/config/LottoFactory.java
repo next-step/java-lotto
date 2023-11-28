@@ -2,7 +2,7 @@ package lotto.config;
 
 import java.util.Scanner;
 import lotto.controller.LottoController;
-import lotto.domain.LottoMachine;
+import lotto.domain.AutomaticLottoMachine;
 import lotto.domain.LottoRandomNumberStrategy;
 import lotto.domain.ManualLottoMachine;
 import lotto.domain.RandomLottoGenerator;
@@ -20,15 +20,15 @@ public class LottoFactory {
     }
 
     public LottoController lottoController() {
-        return new LottoController(manualLottoMachine(), lottoMachine());
+        return new LottoController(manualLottoMachine(), automaticLottoMachine());
     }
 
     private ManualLottoMachine manualLottoMachine() {
         return new ManualLottoMachine();
     }
 
-    private LottoMachine lottoMachine() {
-        return new LottoMachine(randomLottoGenerator());
+    private AutomaticLottoMachine automaticLottoMachine() {
+        return new AutomaticLottoMachine(randomLottoGenerator());
     }
 
     private RandomLottoGenerator randomLottoGenerator() {

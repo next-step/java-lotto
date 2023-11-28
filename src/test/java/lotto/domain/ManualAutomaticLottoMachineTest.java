@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class ManualLottoMachineTest {
+public class ManualAutomaticLottoMachineTest {
 
     @Test
     @DisplayName("수동으로 로또를 생성한다.")

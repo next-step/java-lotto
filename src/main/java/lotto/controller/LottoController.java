@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.domain.LottoMachine;
+import lotto.domain.AutomaticLottoMachine;
 import lotto.domain.LottoWinningStatistics;
 import lotto.domain.Lottos;
 import lotto.domain.ManualLottoMachine;
@@ -16,11 +16,11 @@ import lotto.dto.RankStatisticsDto;
 
 public class LottoController {
     private final ManualLottoMachine manualLottoMachine;
-    private final LottoMachine lottoMachine;
+    private final AutomaticLottoMachine automaticLottoMachine;
 
-    public LottoController(ManualLottoMachine manualLottoMachine, LottoMachine lottoMachine) {
+    public LottoController(ManualLottoMachine manualLottoMachine, AutomaticLottoMachine automaticLottoMachine) {
         this.manualLottoMachine = manualLottoMachine;
-        this.lottoMachine = lottoMachine;
+        this.automaticLottoMachine = automaticLottoMachine;
     }
 
     public long numberOfAutomaticLottos(long cost, long manualLottoCount) {
@@ -29,7 +29,7 @@ public class LottoController {
 
     public LottosDto buyLottos(List<List<Integer>> manualLottos, long automaticLottoCount) {
         Lottos manualPurachasedLottos = manualLottoMachine.createLottos(manualLottos);
-        Lottos automaticPurchasedLottos = lottoMachine.createLottos(automaticLottoCount);
+        Lottos automaticPurchasedLottos = automaticLottoMachine.createLottos(automaticLottoCount);
         return LottosDto.valueOf(manualPurachasedLottos, automaticPurchasedLottos);
     }
 
