@@ -1,9 +1,10 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class WinnerNumbers {
-    private LottoTicket winnerNumbers;
+    private final LottoTicket winnerNumbers;
     private int bonusNumber = 0;
 
     public WinnerNumbers(List<Integer> generatedNumbers) {
@@ -13,13 +14,6 @@ public class WinnerNumbers {
     public WinnerNumbers(List<Integer> generatedNumbers, int bonusNumber) {
         this.winnerNumbers = new LottoTicket(generatedNumbers);
         this.bonusNumber = bonusNumber;
-    }
-
-    private void generateBonusNumber(Random random) {
-        int generatedBonusNum = random.nextInt(45) + 1;
-        if (!isContain(generatedBonusNum)) {
-            this.bonusNumber = generatedBonusNum;
-        }
     }
 
     @Override
@@ -37,5 +31,9 @@ public class WinnerNumbers {
 
     public void throwBonusBall(int bonusNumber) {
         this.bonusNumber = bonusNumber;
+    }
+
+    public List<Integer> printWinnerNumbers() {
+        return this.winnerNumbers.printLottoNumbers();
     }
 }

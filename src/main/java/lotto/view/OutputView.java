@@ -14,13 +14,13 @@ public class OutputView {
 
     public static void displayLottoTickets(List<LottoTicket> tickets) {
         tickets.forEach(lottoTicket -> {
-            System.out.println(lottoTicket.toString());
+            System.out.println(lottoTicket.printLottoNumbers());
         });
     }
 
     public static void displayWinnerNumbers(WinnerNumbers winnerNumbers) {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        System.out.println(winnerNumbers.toString());
+        System.out.println(winnerNumbers.printWinnerNumbers());
     }
 
     public static void displayPrizeStatMessage() {
