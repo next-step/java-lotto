@@ -43,4 +43,15 @@ public class Lotto {
         return this.numbers.stream().collect(Collectors.toList());
     }
 
+    public boolean hasNumber(LottoNumber lottoNumber) {
+        return this.numbers().contains(lottoNumber);
+    }
+
+    public int matchCount(Lotto winningLotto) {
+        return (int) winningLotto.numbers()
+                .stream()
+                .filter(value -> this.hasNumber(value))
+                .count();
+    }
+
 }
