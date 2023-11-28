@@ -9,10 +9,11 @@ public class InputView {
         this.scanner = new Scanner(System.in);
     }
 
-    public String inputPrice(){
+    public int inputPrice(){
         System.out.println("구입금액을 입력해 주세요.");
         String cal = scanner.nextLine();
-        return cal;
+
+        return stringToInteger(cal);
     }
 
     public String inputWinningNumber(){
@@ -20,5 +21,14 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winningNum = scanner.nextLine();
         return winningNum;
+    }
+
+    private int stringToInteger(String text){
+        text = text.trim();
+        if (text.isEmpty() && text.isBlank()){
+            System.out.println("입력된 값이 없습니다.");
+            throw new IllegalArgumentException();
+        }
+        return Integer.parseInt(text);
     }
 }

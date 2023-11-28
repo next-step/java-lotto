@@ -13,7 +13,7 @@ public class Controller {
         int prize = 0;
 
         try {
-            price = stringToInteger(inputView.inputPrice());
+            price = inputView.inputPrice();
             rounds = getPlayRounds(price);
             PlayLotto playLotto = new PlayLotto(rounds);
 
@@ -31,15 +31,6 @@ public class Controller {
             e.printStackTrace();
         }
 
-    }
-
-    private static int stringToInteger(String text){
-        text = text.trim();
-        if (text.isEmpty() && text.isBlank()){
-            System.out.println("입력된 값이 없습니다.");
-            throw new IllegalArgumentException();
-        }
-        return Integer.parseInt(text);
     }
 
 }
