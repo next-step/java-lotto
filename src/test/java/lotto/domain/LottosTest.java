@@ -53,10 +53,10 @@ public class LottosTest {
         // given
         Lottos lottos = createLottoBundle();
         Lotto winnerLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        Bonus bonus = new Bonus(7, winnerLotto);
+        int bonusNumber = 7;
 
         // when
-        Map<Rank, Long> result = lottos.seekRankStatistics(winnerLotto, bonus);
+        Map<Rank, Long> result = lottos.seekRankStatistics(new WinnerLotto(winnerLotto, bonusNumber));
 
         // then
         assertThat(result).isEqualTo(createExpectedRankStatistics());

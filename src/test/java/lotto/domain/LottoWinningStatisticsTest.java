@@ -20,8 +20,9 @@ public class LottoWinningStatisticsTest {
     void inform_lotto_winning_statistics() {
         // given
         Lotto winnerLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        Bonus bonus = new Bonus(7, winnerLotto);
-        LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(winnerLotto, bonus);
+        int bonusNumber = 7;
+        LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(new WinnerLotto(winnerLotto,
+                bonusNumber));
 
         // when
         RankResult result = lottoWinningStatistics.informStatistics(createGivenLottos());

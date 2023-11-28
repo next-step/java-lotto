@@ -3,17 +3,14 @@ package lotto.domain;
 import java.util.Map;
 
 public class LottoWinningStatistics {
-    private final Lotto winnerLotto;
-    private final Bonus bonus;
+    private final WinnerLotto winnerLotto;
 
-
-    public LottoWinningStatistics(Lotto winnerLotto, Bonus bonus) {
+    public LottoWinningStatistics(WinnerLotto winnerLotto) {
         this.winnerLotto = winnerLotto;
-        this.bonus = bonus;
     }
 
     public RankResult informStatistics(Lottos lottos) {
-        Map<Rank, Long> rankStatistics = lottos.seekRankStatistics(this.winnerLotto, this.bonus);
+        Map<Rank, Long> rankStatistics = lottos.seekRankStatistics(winnerLotto);
         return createRankResults(rankStatistics);
     }
 

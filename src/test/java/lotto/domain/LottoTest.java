@@ -58,16 +58,17 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("당첨 로또와 자신의 로또를 비교해 몇개가 일치하는지 알려준다.")
-    void compare_lotto_with_winner_lotto() {
+    @DisplayName("당첨 로또와 보너스 숫자로 등수를 찾는다.")
+    void find_rank_by_winner_lotto() {
         // given
         Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-        Lotto winnerLotto = new Lotto(1, 4, 13, 16, 29, 40);
+        Lotto winnerLotto = new Lotto(1, 4, 6, 16, 29, 40);
+        int bonusNumber = 7;
 
         // when
-        int result = lotto.countOfMatch(winnerLotto);
+        Rank rank = lotto.findRankBy(new WinnerLotto(winnerLotto, bonusNumber));
 
         // then
-        assertThat(result).isEqualTo(2);
+        assertThat(rank).isEqualTo(Rank.FIFTH);
     }
 }

@@ -61,10 +61,10 @@ public class Lotto {
         return uniqueLottoNumbers;
     }
 
-    public int countOfMatch(Lotto lotto) {
-        return (int) this.lottoNumbers.stream()
-                .filter(lotto.lottoNumbers::contains)
-                .count();
+    public Rank findRankBy(WinnerLotto winnerLotto) {
+        int countOfMatch = winnerLotto.countOfMatch(this.lottoNumbers);
+        boolean containsBonus = winnerLotto.containsBonus(this.lottoNumbers);
+        return Rank.valeOf(countOfMatch, containsBonus);
     }
 
     public Set<LottoNumber> getLotto() {
@@ -73,6 +73,10 @@ public class Lotto {
 
     public boolean isOverlapping(LottoNumber number) {
         return this.lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber == number);
+    }
+
+    public int countOfMatch(Set<LottoNumber> lotto) {
+        return (int) lotto.stream().filter(this.lottoNumbers::contains).count();
     }
 
     public boolean containsBonus(Bonus bonus) {

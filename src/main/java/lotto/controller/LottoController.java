@@ -8,6 +8,7 @@ import lotto.domain.LottoWinningStatistics;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RankResult;
+import lotto.domain.WinnerLotto;
 import lotto.domain.YieldCalculator;
 import lotto.dto.CreateRankStatisticsDto;
 import lotto.dto.LottosDto;
@@ -39,6 +40,6 @@ public class LottoController {
 
     private LottoWinningStatistics createLottoWinningStatistics(List<Integer> lotto, int bonusNumber) {
         Lotto winnerLotto = new Lotto(lotto.toArray(Integer[]::new));
-        return new LottoWinningStatistics(winnerLotto, new Bonus(bonusNumber, winnerLotto));
+        return new LottoWinningStatistics(new WinnerLotto(winnerLotto, bonusNumber));
     }
 }
