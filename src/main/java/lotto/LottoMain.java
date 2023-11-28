@@ -19,10 +19,13 @@ public class LottoMain {
         OutputView outputView = lottoFactory.outputView();
 
         long cost = inputView.moneyToBuyLotto();
-        long lottoQuantity = controller.numberOfLottosToBuy(cost);
-        outputView.printPurchasedLottoCnt(lottoQuantity);
+        long manualLottoCount = inputView.manualLottoCount();
+        List<List<Integer>> manualLottos = inputView.manualLottos(manualLottoCount);
+        long automaticLottoCount = controller.numberOfAutomaticLottos(cost, manualLottoCount);
 
-        LottosDto lottosDto = controller.buyLottos(lottoQuantity);
+        outputView.printPurchasedLottoCnt(manualLottoCount, automaticLottoCount);
+
+        LottosDto lottosDto = controller.buyLottos(manualLottos , automaticLottoCount);
         outputView.printPurchasedLottos(lottosDto);
 
         List<Integer> winnerLotto = inputView.winnerLottoNumbers();

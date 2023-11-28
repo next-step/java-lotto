@@ -4,6 +4,7 @@ import java.util.Scanner;
 import lotto.controller.LottoController;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoRandomNumberStrategy;
+import lotto.domain.ManualLottoMachine;
 import lotto.domain.RandomLottoGenerator;
 import lotto.domain.RandomNumberStrategy;
 import lotto.view.InputView;
@@ -19,7 +20,11 @@ public class LottoFactory {
     }
 
     public LottoController lottoController() {
-        return new LottoController(lottoMachine());
+        return new LottoController(manualLottoMachine(), lottoMachine());
+    }
+
+    private ManualLottoMachine manualLottoMachine() {
+        return new ManualLottoMachine();
     }
 
     private LottoMachine lottoMachine() {

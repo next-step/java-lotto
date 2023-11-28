@@ -4,6 +4,7 @@ import java.util.List;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoWinningStatistics;
 import lotto.domain.Lottos;
+import lotto.domain.ManualLottoMachine;
 import lotto.domain.Money;
 import lotto.domain.RankResult;
 import lotto.domain.WinnerLotto;
@@ -14,19 +15,22 @@ import lotto.dto.LottosDto;
 import lotto.dto.RankStatisticsDto;
 
 public class LottoController {
+    private final ManualLottoMachine manualLottoMachine;
     private final LottoMachine lottoMachine;
 
-    public LottoController(LottoMachine lottoMachine) {
+    public LottoController(ManualLottoMachine manualLottoMachine, LottoMachine lottoMachine) {
+        this.manualLottoMachine = manualLottoMachine;
         this.lottoMachine = lottoMachine;
     }
 
-    public long numberOfLottosToBuy(long fee) {
-        return new Money(fee).lottoQuantity();
+    public long numberOfAutomaticLottos(long cost, long manualLottoCount) {
+        return new Money(cost).calculateAutomaticLottoCount(manualLottoCount);
     }
 
-    public LottosDto buyLottos(long lottoQuantity) {
-        Lottos purchasedLottos = lottoMachine.createLottos(lottoQuantity);
-        return LottosDto.valueOf(purchasedLottos);
+    public LottosDto buyLottos(List<List<Integer>> manualLottos, long automaticLottoCount) {
+        Lottos manualPurachasedLottos = manualLottoMachine.createLottos(manualLottos);
+        Lottos automaticPurchasedLottos = lottoMachine.createLottos(automaticLottoCount);
+        return LottosDto.valueOf(manualPurachasedLottos, automaticPurchasedLottos);
     }
 
     public RankStatisticsDto informRankStatistics(CreateRankStatisticsDto createRankStatisticsDto) {

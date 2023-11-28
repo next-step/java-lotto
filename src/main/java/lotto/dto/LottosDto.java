@@ -21,6 +21,17 @@ public class LottosDto {
         return new LottosDto(lottoDtos);
     }
 
+    public static LottosDto valueOf(Lottos manualPurachasedLottos, Lottos automaticPurchasedLottos) {
+        List<LottoDto> lottoDtos = new ArrayList<>();
+        for (Lotto lotto : manualPurachasedLottos.getLottos()) {
+            lottoDtos.add(LottoDto.valueOf(lotto));
+        }
+        for (Lotto lotto : automaticPurchasedLottos.getLottos()) {
+            lottoDtos.add(LottoDto.valueOf(lotto));
+        }
+        return new LottosDto(lottoDtos);
+    }
+
     public Lottos toLottos() {
         List<Lotto> lottos = new ArrayList<>();
         for (LottoDto lottoDto : this.lottoDtos) {
