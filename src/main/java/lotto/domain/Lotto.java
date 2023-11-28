@@ -1,10 +1,12 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -17,7 +19,8 @@ public class Lotto {
 
     private Lotto(List<LottoNumber> anyNumbers, LottoType type) {
         validation(anyNumbers);
-        this.lottoNumbers = new LinkedHashSet<>(anyNumbers);
+        Collections.sort(anyNumbers);
+        this.lottoNumbers = new TreeSet<>(anyNumbers);
         this.lottoType = type;
     }
 
