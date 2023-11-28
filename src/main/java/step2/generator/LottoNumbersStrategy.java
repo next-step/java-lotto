@@ -1,8 +1,8 @@
-package generator;
+package step2.generator;
 
 import java.util.List;
 
-public interface LottoNumbersGenerator {
+public interface LottoNumbersStrategy {
 
     List<Integer> generate();
 

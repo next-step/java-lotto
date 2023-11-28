@@ -1,17 +1,17 @@
-package generator;
+package step2.generator;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Lotto45NumbersGenerator implements LottoNumbersGenerator {
+public class Lotto45NumbersStrategy implements LottoNumbersStrategy {
 
     private static final int MINIMUM_LOTTO_NUMBER = 1;
 
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
 
-    private static final int PICK_NUMBERS = 6;
+    public static final int PICK_NUMBERS = 6;
 
     @Override
     public List<Integer> generate() {

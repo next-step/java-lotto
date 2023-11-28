@@ -1,6 +1,6 @@
-package domain;
+package step2.domain;
 
-import generator.LottoNumbersGenerator;
+import step2.generator.LottoNumbersStrategy;
 
 import java.util.List;
 
@@ -16,8 +16,12 @@ public class Lotto {
         return numbers;
     }
 
-    public static Lotto create(LottoNumbersGenerator generator) {
-        return new Lotto(generator.generate());
+    public static Lotto create(List<Integer> lottoNumbers) {
+        return new Lotto(lottoNumbers);
     }
 
+    @Override
+    public String toString() {
+        return "" + numbers;
+    }
 }
