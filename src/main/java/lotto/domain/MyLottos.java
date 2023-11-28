@@ -16,8 +16,8 @@ public class MyLottos {
         return Collections.unmodifiableList(this.lottos);
     }
 
-    public void addManualLottos(List<Lotto> lottos) {
-        this.lottos.addAll(lottos);
+    public void addManualLottos(MyLottos myLottos) {
+        this.lottos.addAll(myLottos.lottos);
     }
 
     public LottoResult getLottoResult(WinningLotto winningLotto) {
