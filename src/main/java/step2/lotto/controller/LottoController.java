@@ -25,7 +25,7 @@ public class LottoController {
 
         LottoMachine lottoMachine = new LottoMachine(lottoPurchase);
 
-        resultView.printPurchase(lottoMachine.getLottoPurchase());
+        resultView.printPurchase(lottoMachine.getLottoPurchase().getLottoTicketCount());
         resultView.printPurchaseLottoTicketNumbers(lottoMachine.getUserPurchaseLottos());
 
         LottoWin lottoWin = new LottoWin(
