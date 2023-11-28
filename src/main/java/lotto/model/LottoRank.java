@@ -26,12 +26,6 @@ public enum LottoRank {
         this.cashPrize = cash;
     }
 
-    public static int calculateTotalPrize(List<LottoRank> matchResult) {
-        return matchResult.stream()
-                .mapToInt(result -> result.cashPrize)
-                .sum();
-    }
-
     public static LottoRank valueOf(int matchCount, boolean matchBonus) {
         return Arrays.stream(values())
                 .filter(rank -> rank.condition.test(matchCount, matchBonus))

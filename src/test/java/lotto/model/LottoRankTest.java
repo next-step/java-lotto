@@ -25,19 +25,6 @@ public class LottoRankTest {
     }
 
     @Test
-    @DisplayName("티켓의 순위에 따른 전체 상금 계산")
-    public void 전체_상금_계산 () {
-        List<LottoRank> matchResult = Arrays.asList(
-                LottoRank.FIRST,
-                LottoRank.LAST,
-                LottoRank.LAST,
-                LottoRank.FIFTH
-        );
-        Assertions.assertThat(LottoRank.calculateTotalPrize(matchResult))
-                .isEqualTo(2_000_005_000);
-    }
-
-    @Test
     public void 랭킹_숫자로_LottoRank_객체_가져오기() {
         Assertions.assertThat(LottoRank.getByRank(1))
                 .isEqualTo(LottoRank.FIRST);

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    private static final int TICKET_PRICE = 1000;
     private final LottoNumbers numbers;
 
     public Lotto(LottoNumbers numbers) {
@@ -19,16 +18,8 @@ public class Lotto {
         this(LottoNumbers.of(numbers));
     }
 
-    public static int calculateTicketCount(int money) {
-        return money/TICKET_PRICE;
-    }
-
     public LottoNumbers numbers() {
         return this.numbers;
-    }
-
-    public static int price(int count) {
-        return count * TICKET_PRICE;
     }
 
     @Override

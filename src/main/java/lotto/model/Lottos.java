@@ -10,12 +10,7 @@ public class Lottos {
         this.tickets = tickets;
     }
 
-    public static Lottos issue(int money) {
-        int ticketCount = Lotto.calculateTicketCount(money);
-        return generate(ticketCount);
-    }
-
-    private static Lottos generate(int count) {
+    public static Lottos generate(int count) {
         List<Lotto> tickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             tickets.add(new Lotto());

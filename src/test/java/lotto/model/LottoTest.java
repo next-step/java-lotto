@@ -12,21 +12,6 @@ import java.util.stream.Collectors;
 
 public class LottoTest {
 
-    @Test
-    @DisplayName("입력된 돈에 따른 로또 티켓 갯수 계산")
-    public void 티켓_갯수_계산() {
-        Assertions.assertThat(Lotto.calculateTicketCount(4000))
-                .isEqualTo(4);
-    }
-
-    @Test
-    @DisplayName("n개의 티켓 가격 계산")
-    public void 티켓_가격_계산() {
-        Assertions.assertThat(Lotto.price(4))
-                .isEqualTo(4000);
-    }
-
-
     @ParameterizedTest
     @DisplayName("일치하는 숫자 개수별 통계")
     @CsvSource(value = {

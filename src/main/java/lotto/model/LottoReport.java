@@ -13,11 +13,17 @@ public class LottoReport {
     }
 
     private double calculateRateOfReturn() {
-        return Math.floor(LottoRank.calculateTotalPrize(this.result) / calculateTotalInvestment() * 100) / 100;
+        return Math.floor(calculateTotalPrize() / calculateTotalInvestment() * 100) / 100;
+    }
+
+    private int calculateTotalPrize() {
+        return this.result.stream()
+                .mapToInt(result -> result.cashPrize())
+                .sum();
     }
 
     private double calculateTotalInvestment() {
-        return Lotto.price(this.result.size());
+        return LottoSeller.price(this.result.size());
     }
 
     public int countRank(LottoRank rank) {
