@@ -32,7 +32,7 @@ public class LottoTest {
     @CsvSource(value = {
             "1, 2, 3, 4, 5, 6:1",
             "3, 4, 5, 6, 7, 8:4",
-            "20, 21, 22, 23, 24, 25:8",
+            "20, 21, 22, 23, 24, 25:6",
             "1, 2, 3, 4, 5, 7:2"},
             delimiter = ':')
     public void 티켓별_랭킹_확인 (String numbers, int expectedRank) {
@@ -44,7 +44,7 @@ public class LottoTest {
 
         WinningNumber winningNumber = new WinningNumber(Arrays.asList(1,2,3,4,5,6), 7);
 
-        Assertions.assertThat(winningNumber.match(ticket).ordinal()+1)
+        Assertions.assertThat(winningNumber.match(ticket).rank())
                 .isEqualTo(expectedRank);
     }
 }

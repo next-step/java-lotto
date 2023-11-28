@@ -29,8 +29,8 @@ public class LottoRankTest {
     public void 전체_상금_계산 () {
         List<LottoRank> matchResult = Arrays.asList(
                 LottoRank.FIRST,
-                LottoRank.COLLECT_0,
-                LottoRank.COLLECT_0,
+                LottoRank.LAST,
+                LottoRank.LAST,
                 LottoRank.FIFTH
         );
         Assertions.assertThat(LottoRank.calculateTotalPrize(matchResult))

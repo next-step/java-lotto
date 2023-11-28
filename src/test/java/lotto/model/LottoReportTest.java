@@ -14,7 +14,7 @@ public class LottoReportTest {
                 LottoRank.THIRD,
                 LottoRank.FIFTH,
                 LottoRank.FIFTH,
-                LottoRank.COLLECT_0
+                LottoRank.LAST
         );
 
         Assertions.assertThat(new LottoReport(result).rateOfReturn())
