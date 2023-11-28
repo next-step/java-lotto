@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoRandomNumberStrategy implements RandomNumberStrategy {
@@ -13,10 +12,6 @@ public class LottoRandomNumberStrategy implements RandomNumberStrategy {
     }
 
     private List<LottoNumber> createRandomNumbers(List<LottoNumber> possibleLottoNumbers) {
-        List<LottoNumber> randomNumbers = new ArrayList<>();
-        for (int i = 0; i < REQUIRED_RANDOM_NUMBERS_SIZE; i++) {
-            randomNumbers.add(possibleLottoNumbers.get(i));
-        }
-        return randomNumbers;
+        return possibleLottoNumbers.subList(0, REQUIRED_RANDOM_NUMBERS_SIZE);
     }
 }
