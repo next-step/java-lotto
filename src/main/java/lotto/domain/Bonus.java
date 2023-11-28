@@ -24,10 +24,6 @@ public class Bonus {
         return lotto.isOverlapping(bonusLottoNumber);
     }
 
-    public boolean isSame(LottoNumber lottoNumber) {
-        return this.bonusNumber == lottoNumber;
-    }
-
     public boolean containsBonus(Set<LottoNumber> lotto) {
         return lotto.contains(this.bonusNumber);
     }

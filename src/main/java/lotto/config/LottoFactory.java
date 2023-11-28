@@ -2,9 +2,9 @@ package lotto.config;
 
 import java.util.Scanner;
 import lotto.controller.LottoController;
-import lotto.domain.RandomLottoGenerator;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoRandomNumberStrategy;
+import lotto.domain.RandomLottoGenerator;
 import lotto.domain.RandomNumberStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;

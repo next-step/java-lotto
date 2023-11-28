@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
@@ -54,14 +53,6 @@ public class Lotto {
         return new LinkedHashSet<>(lottoNumbers);
     }
 
-    private Set<LottoNumber> createLotto(Integer... lottoNumbers) {
-        Set<LottoNumber> uniqueLottoNumbers = new LinkedHashSet<>();
-        for (Integer lottoNumber : lottoNumbers) {
-            uniqueLottoNumbers.add(LottoNumber.valueOf(lottoNumber));
-        }
-        return uniqueLottoNumbers;
-    }
-
     public Rank findRankBy(WinnerLotto winnerLotto) {
         int countOfMatch = winnerLotto.countOfMatch(this.lottoNumbers);
         boolean containsBonus = winnerLotto.containsBonus(this.lottoNumbers);
@@ -78,10 +69,6 @@ public class Lotto {
 
     public int countOfMatch(Set<LottoNumber> lotto) {
         return (int) lotto.stream().filter(this.lottoNumbers::contains).count();
-    }
-
-    public boolean containsBonus(Bonus bonus) {
-        return this.lottoNumbers.stream().anyMatch(bonus::isSame);
     }
 
     @Override

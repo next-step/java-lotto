@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -9,7 +8,7 @@ public class WinnerLotto {
     private final Lotto winnerLotto;
     private final Bonus bonus;
 
-    public WinnerLotto(int bonusNumber, Integer ... winnerLotto) {
+    public WinnerLotto(int bonusNumber, Integer... winnerLotto) {
         this(new Lotto(winnerLotto), bonusNumber);
     }
 

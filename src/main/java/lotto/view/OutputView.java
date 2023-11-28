@@ -6,13 +6,12 @@ import lotto.dto.LottosDto;
 import lotto.dto.RankResultDto;
 
 public class OutputView {
+    public static final String MONEY_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    public static final String SECOND_RANK_STATISTICS_FORMAT = "%s개 일치, 보너스 볼 일치(%s원)- %s개\n";
     private static final String PURCHASED_LOTTO_COUNT_MESSAGE = "%s개를 구매했습니다.\n";
     private static final String RANK_STATISTICS_MESSAGE = "\n당첨 통계\n" + "---------";
     private static final String TOTAL_YIELD_MESSAGE = "총 수익률은 %s입니다.";
-    public static final String MONEY_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
-
     private static final String NORMAL_RANK_STATISTICS_FORMAT = "%s개 일치 (%s원)- %s개\n";
-    public static final String SECOND_RANK_STATISTICS_FORMAT = "%s개 일치, 보너스 볼 일치(%s원)- %s개\n";
 
     public void printPurchasedLottoCnt(long lottoCnt) {
         System.out.printf(PURCHASED_LOTTO_COUNT_MESSAGE, lottoCnt);

@@ -31,6 +31,10 @@ public class LottoNumber {
                 .orElseThrow(() -> new IllegalStateException(LOTTO_NUMBER_OUT_OF_RANGE_EXCEPTION));
     }
 
+    public static List<LottoNumber> allNumbers() {
+        return new ArrayList<>(lottoNumberPool.values());
+    }
+
     private void validateLottoNumber(int number) {
         if (outOfRange(number)) {
             throw new IllegalStateException(LOTTO_NUMBER_OUT_OF_RANGE_EXCEPTION);
@@ -43,10 +47,6 @@ public class LottoNumber {
 
     public int getLottoNumber() {
         return value;
-    }
-
-    public static List<LottoNumber> allNumbers() {
-        return new ArrayList<>(lottoNumberPool.values());
     }
 
     public int compare(LottoNumber lottoNumber) {
