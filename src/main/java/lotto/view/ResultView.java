@@ -7,6 +7,7 @@ import lotto.util.ProfitCalculator;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -17,7 +18,10 @@ public class ResultView {
 
     private static void printLottoNumbers(List<Lotto> lottoList) {
         for (Lotto lotto : lottoList) {
-            System.out.println(lotto.numbers().toString());
+            List<Integer> lottoNumbers = lotto.numbers().stream()
+                    .map(lottoNumber -> lottoNumber.value())
+                    .collect(Collectors.toList());
+            System.out.println(lottoNumbers);
         }
         System.out.println();
     }
