@@ -7,7 +7,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
 
-    private final Integer value;
+    private final int value;
 
     public LottoNumber(int value) {
         this.value = value;
@@ -39,6 +39,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber other) {
-        return this.value.compareTo(other.value);
+        return Integer.compare(this.value, other.value);
     }
 }
