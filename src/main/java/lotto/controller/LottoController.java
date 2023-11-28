@@ -1,14 +1,13 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.domain.Bonus;
-import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoWinningStatistics;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RankResult;
 import lotto.domain.WinnerLotto;
+import lotto.domain.WinnerLottoGenerator;
 import lotto.domain.YieldCalculator;
 import lotto.dto.CreateRankStatisticsDto;
 import lotto.dto.LottosDto;
@@ -39,7 +38,11 @@ public class LottoController {
     }
 
     private LottoWinningStatistics createLottoWinningStatistics(List<Integer> lotto, int bonusNumber) {
-        Lotto winnerLotto = new Lotto(lotto.toArray(Integer[]::new));
-        return new LottoWinningStatistics(new WinnerLotto(winnerLotto, bonusNumber));
+        return new LottoWinningStatistics(createWinnerLotto(lotto, bonusNumber));
+    }
+
+    private WinnerLotto createWinnerLotto(List<Integer> lotto, int bonusNumber) {
+        WinnerLottoGenerator winnerLottoGenerator = new WinnerLottoGenerator();
+        return winnerLottoGenerator.createWinnerLotto(lotto, bonusNumber);
     }
 }

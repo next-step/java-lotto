@@ -2,18 +2,17 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class LottoGeneratorTest {
+class RandomLottoGeneratorTest {
 
     @Test
     @DisplayName("랜덤 숫자 6개를 생성한다.")
     void create_random_numbers() {
         // given
-        LottoGenerator generator = new LottoGenerator(numbers -> given());
+        RandomLottoGenerator generator = new RandomLottoGenerator(numbers -> given());
 
         // when
         List<LottoNumber> result = generator.createLotto(LottoNumber.allNumbers());
