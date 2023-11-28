@@ -20,14 +20,14 @@ public class LottoApplication {
         Money money = new Money(inputMoney);
 
         int manualLottoCount = InputView.manualLottoCount();
-        money.buyManualLotto(manualLottoCount);
+        Money balanceMoney = money.buyManualLotto(manualLottoCount);
 
         List<List<Integer>> inputManualLottoNumbers = InputView.manualLottoNumbers(manualLottoCount);
 
-        int purchaseCount = money.buyAllAutoLotto();
-        OutputView.outputPurchaseCount(manualLottoCount, purchaseCount);
+        int autoLottoCount = balanceMoney.availableBuyLottoCount();
+        OutputView.outputPurchaseCount(manualLottoCount, autoLottoCount);
 
-        MyLottos myLottos = LottoFactory.buy(purchaseCount);
+        MyLottos myLottos = LottoFactory.buy(autoLottoCount);
         myLottos.addManualLottos(
                 inputManualLottoNumbers.stream()
                         .map(Lotto::of)
