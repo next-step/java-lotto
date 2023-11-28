@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LottoShopFactory {
 
@@ -22,16 +21,11 @@ public class LottoShopFactory {
     public List<Lotto> createLottos(MoneyWallet moneyWallet) {
 
         List<Lotto> manuallyPurchase = manuallyPurchase();
-        int money = LOTTO_PRICE * manuallyLotto.size();
+        int money = LOTTO_PRICE * manuallyPurchase.size();
         moneyWallet = moneyWallet.withdraw(money);
 
-        List<Lotto> autoPurchase = autoPurchase(moneyWallet);
-
-        if (!manuallyPurchase.isEmpty()) {
-            return Stream.concat(manuallyPurchase.stream(), autoPurchase.stream())
-                .collect(Collectors.toList());
-        }
-        return autoPurchase;
+        manuallyPurchase.addAll(autoPurchase(moneyWallet));
+        return manuallyPurchase;
     }
 
     private List<Lotto> manuallyPurchase() {
@@ -62,7 +56,7 @@ public class LottoShopFactory {
         return money / LOTTO_PRICE;
     }
 
-    public int manuallyLottoCount(){
+    public int manuallyLottoCount() {
         return this.manuallyLotto.size();
     }
 
