@@ -3,6 +3,8 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class RandomGenerator {
 
@@ -12,18 +14,13 @@ public class RandomGenerator {
 
     public RandomGenerator() {
         numbers = new ArrayList<>();
-        for (int number = LOW_BOUND; number <= MAX_BOUND; number++) {
-            numbers.add(number);
-        }
+        IntStream.rangeClosed(LOW_BOUND, MAX_BOUND).forEach(numbers::add);
     }
 
     public List<Integer> generate() {
         Collections.shuffle(numbers);
-        List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            result.add(numbers.get(i));
-        }
-        Collections.sort(result);
-        return result;
+        return IntStream.range(0, 6).mapToObj(numbers::get)
+            .sorted()
+            .collect(Collectors.toList());
     }
 }

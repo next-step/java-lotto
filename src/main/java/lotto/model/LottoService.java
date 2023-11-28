@@ -1,9 +1,7 @@
 package lotto.model;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoService {
 
@@ -19,15 +17,9 @@ public class LottoService {
         this.lottoCollection = new LottoCollection(totalMoney / LOTTO_PRICE, random);
     }
 
-    public void drawLotto(String text) {
-        lottoResult.addRanks(lottoCollection.getLottoRanks(
-                new LottoNumbers(
-                    Arrays.stream(text.split(", "))
-                        .map(Integer::parseInt)
-                        .collect(Collectors.toList())
-                )
-            )
-        );
+    public void drawLotto(List<Integer> winningNumbers, int bonusNumber) {
+        lottoResult.addRanks(
+            lottoCollection.getLottoRanks(new WinningNumbers(winningNumbers, bonusNumber)));
         lottoResult.calculateTotalWinningMoney();
         lottoResult.calculateReturnRate(totalMoney);
     }
