@@ -1,14 +1,21 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MyLottos {
     private final List<Lotto> lottos = new ArrayList<>();
 
     public MyLottos(List<Lotto> lottos) {
         this.lottos.addAll(lottos);
+    }
+
+    public static MyLottos of(List<Lotto>... lottosList) {
+        return new MyLottos(Arrays.stream(lottosList)
+                .flatMap(List::stream).collect(Collectors.toList()));
     }
 
 

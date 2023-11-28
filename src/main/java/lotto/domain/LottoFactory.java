@@ -11,17 +11,15 @@ import java.util.stream.Stream;
 public class LottoFactory {
     private static final List<LottoNum> LOTTO_NUMBER_LIST = IntStream.range(1, 45).mapToObj(LottoNum::new).collect(Collectors.toList());
 
-    public static MyLottos buy(List<List<Integer>> manualLottoNumbers) {
-        return new MyLottos(
-                manualLottoNumbers.stream()
-                        .map(Lotto::of)
-                        .collect(Collectors.toList()));
+    public static List<Lotto> buy(List<List<Integer>> manualLottoNumbers) {
+        return manualLottoNumbers.stream()
+                .map(Lotto::of)
+                .collect(Collectors.toList());
     }
 
-    public static MyLottos buy(int purchaseCount) {
-        return new MyLottos(
-                Stream.generate(LottoFactory::generateRandomLotto)
-                        .limit(purchaseCount).collect(Collectors.toList()));
+    public static List<Lotto> buy(int purchaseCount) {
+        return Stream.generate(LottoFactory::generateRandomLotto)
+                .limit(purchaseCount).collect(Collectors.toList());
     }
 
     private static Lotto generateRandomLotto() {

@@ -24,8 +24,7 @@ public class LottoApplication {
         int autoLottoCount = balanceMoney.availableBuyLottoCount();
 
         List<List<Integer>> inputManualLottoNumbers = InputView.manualLottoNumbers(manualLottoCount);
-        MyLottos myLottos = LottoFactory.buy(autoLottoCount);
-        myLottos.addManualLottos(LottoFactory.buy(inputManualLottoNumbers));
+        MyLottos myLottos = MyLottos.of(LottoFactory.buy(autoLottoCount), LottoFactory.buy(inputManualLottoNumbers));
 
         OutputView.outputPurchaseCount(manualLottoCount, autoLottoCount);
         OutputView.outputMyLottos(MyLottosResponse.from(myLottos));
