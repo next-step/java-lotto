@@ -19,6 +19,10 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
+    public boolean contains(int lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
     private void validateLottoNumberSize(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또번호는 6개를 선택해야 합니다");
@@ -27,7 +31,7 @@ public class LottoNumbers {
 
     private void validateLottoNumberDuplicate(List<Integer> lottoNumbers) {
         if (new HashSet<>(lottoNumbers).size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("로또번호는 6개를 선택해야 합니다");
+            throw new IllegalArgumentException("로또번호는 중복이 불가능합니다.");
         }
     }
 

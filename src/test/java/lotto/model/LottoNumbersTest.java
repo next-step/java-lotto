@@ -23,7 +23,7 @@ class LottoNumbersTest {
         assertThatThrownBy(() -> {
             new LottoNumbers(Arrays.asList(1, 1, 3, 4, 5, 6));
         }).isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("로또번호는 6개를 선택해야 합니다");
+            .hasMessage("로또번호는 중복이 불가능합니다.");
     }
 
 }

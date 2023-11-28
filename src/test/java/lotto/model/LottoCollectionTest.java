@@ -12,7 +12,7 @@ class LottoCollectionTest {
     void match() {
         LottoCollection lottoCollection = new LottoCollection(1, new AlwaysReturn_1_2_3_4_5_6());
 
-        List<LottoRank> lottoRanks = lottoCollection.lottoRanks(
+        List<LottoRank> lottoRanks = lottoCollection.getLottoRanks(
             new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         assertThat(lottoRanks).hasSize(1)

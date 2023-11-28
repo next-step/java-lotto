@@ -1,8 +1,8 @@
 package lotto.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoCollection {
 
@@ -19,23 +19,14 @@ public class LottoCollection {
         return this.lottoNumbersList;
     }
 
-    public List<LottoRank> lottoRanks(LottoNumbers winningNumbers) {
-        List<LottoRank> lottoRanks = new ArrayList<>();
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            lottoRanks.add(lottoRank(lottoNumbers
-                .getLottoNumbers()
-                .stream()
-                .filter(winningNumbers.getLottoNumbers()::contains)
-                .count()));
-        }
-        return lottoRanks;
-    }
-
-    private LottoRank lottoRank(long rank) {
-        return Arrays.stream(LottoRank.values())
-            .filter(lottoRank -> lottoRank.rank() == rank)
-            .findAny()
-            .orElse(LottoRank.BLANK);
+    public List<LottoRank> getLottoRanks(LottoNumbers winningNumbers) {
+        return lottoNumbersList.stream()
+            .map(lottoNumbers -> LottoRank.getRank(
+                lottoNumbers.getLottoNumbers()
+                    .stream()
+                    .filter(winningNumbers::contains)
+                    .count())).collect(Collectors.toList()
+            );
     }
 
 }

@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.Arrays;
+
 public enum LottoRank {
 
     FOURTH(3, 5_000),
@@ -23,6 +25,13 @@ public enum LottoRank {
 
     public long rank() {
         return this.rank;
+    }
+
+    public static LottoRank getRank(long rank) {
+        return Arrays.stream(LottoRank.values())
+            .filter(lottoRank -> lottoRank.rank() == rank)
+            .findAny()
+            .orElse(LottoRank.BLANK);
     }
 
 }
