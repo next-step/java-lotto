@@ -21,7 +21,7 @@ public class LottoCollection {
 
     public List<LottoRank> getLottoRanks(LottoNumbers winningNumbers) {
         return lottoNumbersList.stream()
-            .map(lottoNumbers -> LottoRank.getRank(
+            .map(lottoNumbers -> LottoRank.valueOf(
                 lottoNumbers.getLottoNumbers()
                     .stream()
                     .filter(winningNumbers::contains)

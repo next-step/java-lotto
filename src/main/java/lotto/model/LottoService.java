@@ -1,8 +1,9 @@
 package lotto.model;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoService {
 
@@ -19,14 +20,14 @@ public class LottoService {
     }
 
     public void drawLotto(String text) {
-        String[] winningNumbers = text.split(", ");
-
-        List<Integer> numbers = new ArrayList<>();
-        for (String number : winningNumbers) {
-            numbers.add(Integer.parseInt(number));
-        }
-
-        lottoResult.addRanks(lottoCollection.getLottoRanks(new LottoNumbers(numbers)));
+        lottoResult.addRanks(lottoCollection.getLottoRanks(
+                new LottoNumbers(
+                    Arrays.stream(text.split(", "))
+                        .map(Integer::parseInt)
+                        .collect(Collectors.toList())
+                )
+            )
+        );
         lottoResult.calculateTotalWinningMoney();
         lottoResult.calculateReturnRate(totalMoney);
     }

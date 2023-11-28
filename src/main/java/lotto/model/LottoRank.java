@@ -4,9 +4,10 @@ import java.util.Arrays;
 
 public enum LottoRank {
 
-    FOURTH(3, 5_000),
-    THIRD(4, 50_000),
-    SECOND(5, 1_500_000),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000),
     BLANK(0, 0);
 
@@ -27,7 +28,7 @@ public enum LottoRank {
         return this.rank;
     }
 
-    public static LottoRank getRank(long rank) {
+    public static LottoRank valueOf(long rank) {
         return Arrays.stream(LottoRank.values())
             .filter(lottoRank -> lottoRank.rank() == rank)
             .findAny()

@@ -16,7 +16,7 @@ public class MainController {
         );
         outputView.printLotto(lottoService.getLottoNumberList());
 
-        lottoService.drawLotto(input.winningNumber());
+        lottoService.drawLotto(input.winningNumbers());
 
         outputView.printStatistics(lottoService.totalWinningStatistics(),
             lottoService.returnRate());
