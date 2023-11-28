@@ -4,6 +4,7 @@ import lotto.strategy.LottoGenerator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -11,7 +12,7 @@ public class Lotto {
 
     public static final int LOTTO_NUMBER_COUNT = 6;
 
-    private final TreeSet<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = new TreeSet<>(parseLottoNumber(numbers));
