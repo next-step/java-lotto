@@ -12,6 +12,10 @@ public class LottoController {
     public static void main(String[] args) {
         Lottos tickets = LottoSeller.issueLotto(InputView.inputMoney());
 
+        if (InputView.inputManualTicketCount() != 0) {
+            InputView.inputManualTicketNumbers();
+        }
+
         ResultView.printCheckPurchaseMessage(tickets.count());
         ResultView.printLottoTickets(tickets);
 
