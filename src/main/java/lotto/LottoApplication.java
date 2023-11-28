@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
 import lotto.domain.LottoResult;
 import lotto.domain.Money;
@@ -12,7 +11,6 @@ import lotto.ui.dto.LottoStatsResponse;
 import lotto.ui.dto.MyLottosResponse;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoApplication {
     public static void main(String[] args) {

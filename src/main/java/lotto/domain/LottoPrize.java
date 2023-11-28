@@ -43,6 +43,7 @@ public enum LottoPrize {
     private static boolean isSecond(int matchCount, boolean bonusMatch) {
         return matchCount == 5 && bonusMatch;
     }
+
     private static boolean isThird(int matchCount, boolean bonusMatch) {
         return matchCount == 5 && !bonusMatch;
     }
