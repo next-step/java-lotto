@@ -3,22 +3,26 @@ package lotto.model;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoNumbersTest {
-    @Test
+    @ParameterizedTest
     @DisplayName("6개가 아닌 번호로 로또 번호 생성 시 에러 발생")
-    public void validate_로또_번호_갯수() {
+    @ValueSource(ints = {5, 7})
+    public void validate_로또_번호_갯수(int size) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            LottoNumbers.of(Arrays.asList(1,2,3));
-        });
+            LottoNumbers.of(IntStream.range(1, size+1).boxed().collect(Collectors.toList()));
+        }).withMessageMatching("There must be a total of 6 lotto numbers.");
     }
 
     @Test

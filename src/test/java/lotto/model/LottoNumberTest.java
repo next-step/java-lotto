@@ -16,6 +16,6 @@ public class LottoNumberTest {
     public void validate_로또_번호_범위(int number) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             new LottoNumber(number);
-        });
+        }).withMessageMatching("Lotto numbers should by between 1 and 45. \\d+ is an invalid value.");
     }
 }
