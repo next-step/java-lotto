@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -43,18 +44,18 @@ public class Lotto {
     }
 
     private void validateDuplication(List<LottoNumber> lottoNumbers) {
-        Set<LottoNumber> uniqueLottoNumbers = new HashSet<>(lottoNumbers);
+        Set<LottoNumber> uniqueLottoNumbers = new LinkedHashSet<>(lottoNumbers);
         if (uniqueLottoNumbers.size() != CORRECT_LOTTO_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_DUPLICATION_EXCEPTION);
         }
     }
 
     private Set<LottoNumber> createLotto(List<LottoNumber> lottoNumbers) {
-        return new HashSet<>(lottoNumbers);
+        return new LinkedHashSet<>(lottoNumbers);
     }
 
     private Set<LottoNumber> createLotto(Integer... lottoNumbers) {
-        Set<LottoNumber> uniqueLottoNumbers = new HashSet<>();
+        Set<LottoNumber> uniqueLottoNumbers = new LinkedHashSet<>();
         for (Integer lottoNumber : lottoNumbers) {
             uniqueLottoNumbers.add(LottoNumber.valueOf(lottoNumber));
         }

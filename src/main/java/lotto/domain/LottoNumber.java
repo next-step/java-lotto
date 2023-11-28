@@ -49,6 +49,10 @@ public class LottoNumber {
         return new ArrayList<>(lottoNumberPool.values());
     }
 
+    public int compare(LottoNumber lottoNumber) {
+        return this.value - lottoNumber.value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
