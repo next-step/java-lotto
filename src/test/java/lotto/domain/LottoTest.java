@@ -44,4 +44,11 @@ class LottoTest {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         assertThat(lotto.matchingCount(winningLotto)).isEqualTo(Ranking.FIRST.matchingCount());
     }
+
+    @Test
+    @DisplayName("ranking_일반 번호 5개와 보너스 번호 1개가 일치하는 winningLotto_2등")
+    void ranking() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.ranking(new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 8)), 6))).isEqualTo(Ranking.SECOND);
+    }
 }

@@ -1,10 +1,12 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.WinningLotto;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class ConsoleInputView implements InputView {
 
@@ -19,24 +21,22 @@ public class ConsoleInputView implements InputView {
         return amount;
     }
 
-    public Lotto winningLotto() {
+    public WinningLotto winningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
         Scanner scanner = new Scanner(System.in);
 
         String winningLottoString = scanner.nextLine();
+        System.out.println("보너스 볼을 입력해주세요.");
+        int bonusNumber = scanner.nextInt();
         System.out.println();
-        return makeWinningLotto(winningLottoString);
-    }
-
-    private Lotto makeWinningLotto(String winningLottoString) {
-        return new Lotto(stringToList(winningLottoString));
+        return new WinningLotto(new Lotto(stringToList(winningLottoString)), bonusNumber);
     }
 
     private List<Integer> stringToList(String winningLottoString) {
-        List<Integer> lotto = new ArrayList<>();
-        for (String pastLottoNo : winningLottoString.split(",")) {
-            lotto.add(Integer.parseInt(pastLottoNo.trim()));
-        }
-        return lotto;
+        return Arrays
+                .stream(winningLottoString.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 }

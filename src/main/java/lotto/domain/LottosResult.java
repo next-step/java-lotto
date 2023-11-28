@@ -2,19 +2,19 @@ package lotto.domain;
 
 public class LottosResult {
     private final Lottos lottos;
-    private final Lotto winningLotto;
+    private final WinningLotto winningLotto;
 
-    public LottosResult(Lottos lottos, Lotto winningLotto) {
+    public LottosResult(Lottos lottos, WinningLotto winningLotto) {
         this.lottos = lottos;
         this.winningLotto = winningLotto;
     }
 
     public double profitRate() {
-        double profits = 0;
-        for (Ranking ranking : Ranking.ranked()) {
-            profits += profitsPerRanking(ranking);
-        }
-        return profitRateFormat(profits / payment(lottos.lottos().size()));
+        double profits = Ranking.ranked()
+                .stream()
+                .mapToDouble(this::profitsPerRanking)
+                .sum();
+        return profitRateFormat(profits / payment(lottos.get().size()));
     }
 
     private int profitsPerRanking(Ranking ranking) {
@@ -22,9 +22,9 @@ public class LottosResult {
     }
 
     public int countByRanking(Ranking ranking) {
-        return (int) lottos.lottos()
+        return (int) lottos.get()
                 .stream()
-                .filter(lotto -> lotto.matchingCount(winningLotto) == ranking.matchingCount())
+                .filter(lotto -> lotto.ranking(winningLotto) == ranking)
                 .count();
     }
 

@@ -27,4 +27,10 @@ public class Lotto {
         }
         return matchingCount;
     }
+
+    public Ranking ranking(WinningLotto winningLotto) {
+        int matchingCount = (int) lotto.stream().filter(winningLotto.lotto().lotto()::contains).count();
+        boolean hasBonusNumber = lotto.contains(winningLotto.bonusNumber());
+        return Ranking.of(matchingCount, hasBonusNumber);
+    }
 }
