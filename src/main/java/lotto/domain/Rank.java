@@ -76,4 +76,8 @@ public enum Rank {
     public boolean isSecond() {
         return this == SECOND;
     }
+
+    public boolean isNothing() {
+        return this == NOTHING;
+    }
 }

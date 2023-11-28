@@ -74,7 +74,6 @@ public class LottosTest {
 
     private Map<Rank, Long> createExpectedRankStatistics() {
         Map<Rank, Long> rankStatistics = new LinkedHashMap<>();
-        rankStatistics.put(Rank.NOTHING, 3L);
         rankStatistics.put(Rank.FIFTH, 0L);
         rankStatistics.put(Rank.FOURTH, 1L);
         rankStatistics.put(Rank.THIRD, 0L);

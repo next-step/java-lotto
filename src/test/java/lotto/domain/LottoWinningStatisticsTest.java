@@ -44,7 +44,6 @@ public class LottoWinningStatisticsTest {
 
     private RankResult createExpectedRankResult() {
         Map<Rank, Long> expectedRankResult = new HashMap<>();
-        expectedRankResult.put(NOTHING, 2L);
         expectedRankResult.put(FIFTH, 2L);
         expectedRankResult.put(FOURTH, 0L);
         expectedRankResult.put(THIRD, 0L);

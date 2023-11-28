@@ -3,7 +3,6 @@ package lotto.domain;
 import static lotto.domain.Rank.FIFTH;
 import static lotto.domain.Rank.FIRST;
 import static lotto.domain.Rank.FOURTH;
-import static lotto.domain.Rank.NOTHING;
 import static lotto.domain.Rank.SECOND;
 import static lotto.domain.Rank.THIRD;
 
@@ -25,16 +24,13 @@ public class Lottos {
 
     public Map<Rank, Long> seekRankStatistics(WinnerLotto winnerLotto) {
         Map<Rank, Long> rankResults = initRankResults();
-        for (Lotto lotto : lottos) {
-            Rank rank = lotto.findRankBy(winnerLotto);
-            rankResults.put(rank, rankResults.get(rank) + 1);
-        }
+        lottos.stream().map(lotto -> lotto.findRankBy(winnerLotto)).filter(rank -> !rank.isNothing())
+                .forEach(rank -> rankResults.put(rank, rankResults.get(rank) + 1));
         return rankResults;
     }
 
     private Map<Rank, Long> initRankResults() {
         Map<Rank, Long> rankResults = new LinkedHashMap<>();
-        rankResults.put(NOTHING, 0L);
         rankResults.put(FIFTH, 0L);
         rankResults.put(FOURTH, 0L);
         rankResults.put(THIRD, 0L);
