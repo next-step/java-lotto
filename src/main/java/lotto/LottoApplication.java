@@ -15,7 +15,10 @@ public class LottoApplication {
         int inputMoney = InputView.inputMoney();
         Money money = new Money(inputMoney);
 
-        OutputView.outputPurchaseCount(money.purchaseCount());
+        int manualLottoCount = InputView.manualLottoCount();
+        money.buyManualLotto(manualLottoCount);
+
+        OutputView.outputPurchaseCount(manualLottoCount, money.buyAllAutoLotto());
 
         MyLottos myLottos = LottoFactory.buy(money);
         OutputView.outputMyLottos(MyLottosResponse.from(myLottos));

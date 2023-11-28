@@ -29,6 +29,6 @@ public class MoneyTest {
         Money money = new Money(2000);
 
         // when then
-        assertThat(money.purchaseCount()).isEqualTo(2);
+        assertThat(money.buyAllAutoLotto()).isEqualTo(2);
     }
 }

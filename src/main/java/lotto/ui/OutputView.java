@@ -8,8 +8,8 @@ import lotto.ui.dto.MyLottosResponse;
 import java.util.stream.Stream;
 
 public class OutputView {
-    public static void outputPurchaseCount(int purchaseCount) {
-        System.out.printf("%d개를 구매했습니다.\n", purchaseCount);
+    public static void outputPurchaseCount(int manualLottoCount, int purchaseCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottoCount, purchaseCount);
     }
 
     public static void outputMyLottos(MyLottosResponse myLottosResponse) {

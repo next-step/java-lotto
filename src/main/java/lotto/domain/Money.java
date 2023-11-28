@@ -3,7 +3,7 @@ package lotto.domain;
 import static lotto.domain.Lotto.LOTTO_PRICE;
 
 public class Money {
-    private final int money;
+    private int money;
 
     public Money(int money) {
         validate(money);
@@ -20,7 +20,16 @@ public class Money {
         }
     }
 
-    public int purchaseCount() {
-        return money / LOTTO_PRICE;
+    public void buyManualLotto(int count) {
+        if (money < count * LOTTO_PRICE) {
+            throw new IllegalArgumentException("가진 돈보다 더 많은 수동 로또를 구매할 수 없습니다.");
+        }
+        money -= (count * LOTTO_PRICE);
+    }
+
+    public int buyAllAutoLotto() {
+        int autoLottoCount = money / LOTTO_PRICE;
+        money = 0;
+        return autoLottoCount;
     }
 }
