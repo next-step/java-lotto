@@ -24,9 +24,9 @@ public class LottoReport {
         return Math.floor(calculateTotalPrize() / calculateTotalInvestment() * 100) / 100;
     }
 
-    private int calculateTotalPrize() {
+    private long calculateTotalPrize() {
         return this.result.stream()
-                .mapToInt(result -> result.cashPrize())
+                .mapToLong(result -> result.cashPrize())
                 .sum();
     }
 
