@@ -21,7 +21,7 @@ public class LottoShopFactory {
 
     public List<Lotto> createLottos(MoneyWallet moneyWallet) {
 
-        List<Lotto> manuallyPurchase = manuallyPurchase(moneyWallet);
+        List<Lotto> manuallyPurchase = manuallyPurchase();
         int money = LOTTO_PRICE * manuallyLotto.size();
         moneyWallet = moneyWallet.withdraw(money);
 
@@ -34,7 +34,7 @@ public class LottoShopFactory {
         return autoPurchase;
     }
 
-    private List<Lotto> manuallyPurchase(MoneyWallet moneyWallet) {
+    private List<Lotto> manuallyPurchase() {
         return createManuallyLottoList();
     }
 
