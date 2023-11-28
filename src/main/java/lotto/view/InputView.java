@@ -55,17 +55,9 @@ public class InputView {
     }
 
     private List<List<Integer>> createManualLottos(long manualLottoCount) {
-        List<List<Integer>> manualLottos = initManualLottos(manualLottoCount);
-        for (int i = 0; i < manualLottoCount; i++) {
-            manualLottos.add(createManualLotto());
-        }
-        return manualLottos;
-    }
-
-    private List<List<Integer>> initManualLottos(long manualLottoCount) {
         List<List<Integer>> manualLottos = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
-            manualLottos.add(new ArrayList<>());
+            manualLottos.add(createManualLotto());
         }
         return manualLottos;
     }
