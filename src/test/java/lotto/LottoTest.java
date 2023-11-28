@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,8 +9,9 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.util.Util.parseIntegerList;
+import static lotto.util.ListUtil.parseIntegerList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
     List<Integer> defaultLottoNumber = null;
@@ -49,5 +51,13 @@ public class LottoTest {
         lotto.addBonusMatchPoint(bonusNumber);
 
         assertThat(lotto.getLottoBonusMatchNumber()).isEqualTo(1);
+    }
+
+    @DisplayName("중복테스트")
+    @Test
+    void 중복테스트() {
+        assertThatThrownBy(() -> {
+            new LottoNumbers(Arrays.asList(1,1,2,3,4,5));
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }

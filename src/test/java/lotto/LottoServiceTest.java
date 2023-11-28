@@ -20,11 +20,11 @@ public class LottoServiceTest {
     void 로또리스트생성() {
         List<Lotto> lottoList = new ArrayList<>();
 
-        lottoList.add(new Lotto());
-        lottoList.add(new Lotto());
-        lottoList.add(new Lotto());
-        lottoList.add(new Lotto());
-        lottoList.add(new Lotto());
+        lottoList.add(new Lotto(Arrays.asList(1,2,3,4,5,6)));
+        lottoList.add(new Lotto(Arrays.asList(1,2,3,4,5,6)));
+        lottoList.add(new Lotto(Arrays.asList(1,2,3,4,5,6)));
+        lottoList.add(new Lotto(Arrays.asList(1,2,3,4,5,6)));
+        lottoList.add(new Lotto(Arrays.asList(1,2,3,4,5,6)));
 
         LottoService lottoService = new LottoService(lottoList, new MatchPointRank());
 
