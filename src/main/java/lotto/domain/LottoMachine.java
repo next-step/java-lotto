@@ -2,29 +2,33 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMachine {
 
-    private final RandomNumbersGenerator randomNumberGenerator;
+    private final RandomLottoGenerator randomLottoGenerator;
 
-    public LottoMachine(RandomNumbersGenerator randomNumbersGenerator) {
-        this.randomNumberGenerator = randomNumbersGenerator;
+    public LottoMachine(RandomLottoGenerator randomLottoGenerator) {
+        this.randomLottoGenerator = randomLottoGenerator;
     }
 
     public Lottos createLottos(long lottoCnt) {
-        List<List<Integer>> lottos = initLottosBy(lottoCnt);
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCnt; i++) {
-            lottos.get(i).addAll(randomNumberGenerator.createRandomNumbers());
+            lottos.add(sortedLotto());
         }
         return new Lottos(lottos);
     }
 
-    private List<List<Integer>> initLottosBy(long lottoCnt) {
-        List<List<Integer>> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCnt; i++) {
-            lottos.add(new ArrayList<>());
-        }
-        return lottos;
+    private Lotto sortedLotto() {
+        return new Lotto(createSortedLottoNumbers(createRandomLottoNumbers()));
     }
 
+    private List<LottoNumber> createRandomLottoNumbers() {
+        return randomLottoGenerator.createLotto(LottoNumber.allNumbers());
+    }
+
+    private List<LottoNumber> createSortedLottoNumbers(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream().sorted(LottoNumber::compare).collect(Collectors.toList());
+    }
 }

@@ -1,13 +1,16 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 public class LottoNumber {
-    protected static final String LOTTO_NUMBER_OUT_OF_RANGE_EXCEPTION = "로또의 숫자는 1에서 45 사이의 숫자만 가능합니다.";
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+    static final String LOTTO_NUMBER_OUT_OF_RANGE_EXCEPTION = "로또의 숫자는 1에서 45 사이의 숫자만 가능합니다.";
+    static final int MIN_LOTTO_NUMBER = 1;
+    static final int MAX_LOTTO_NUMBER = 45;
     private static final Map<Integer, LottoNumber> lottoNumberPool = new HashMap<>();
 
     static {
@@ -18,9 +21,18 @@ public class LottoNumber {
 
     private final int value;
 
-    public LottoNumber(int value) {
+    private LottoNumber(int value) {
         validateLottoNumber(value);
         this.value = value;
+    }
+
+    public static LottoNumber valueOf(int number) {
+        return Optional.ofNullable(lottoNumberPool.get(number))
+                .orElseThrow(() -> new IllegalStateException(LOTTO_NUMBER_OUT_OF_RANGE_EXCEPTION));
+    }
+
+    public static List<LottoNumber> allNumbers() {
+        return new ArrayList<>(lottoNumberPool.values());
     }
 
     private void validateLottoNumber(int number) {
@@ -37,8 +49,8 @@ public class LottoNumber {
         return value;
     }
 
-    public static LottoNumber randomLottoNumber(int number) {
-        return lottoNumberPool.get(number);
+    public int compare(LottoNumber lottoNumber) {
+        return this.value - lottoNumber.value;
     }
 
     @Override
@@ -56,5 +68,12 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoNumber{" +
+                "value=" + value +
+                '}';
     }
 }

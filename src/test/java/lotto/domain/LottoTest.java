@@ -6,8 +6,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +18,7 @@ public class LottoTest {
     @ParameterizedTest
     @DisplayName("로또의 숫자 갯수가 6개인지 확인한다.")
     @MethodSource("parametersProvider")
-    void validate_lotto_size(List<Integer> given) {
+    void validate_lotto_size(Integer[] given) {
         // when // then
         assertThatThrownBy(() -> new Lotto(given))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
@@ -29,8 +27,8 @@ public class LottoTest {
 
     private static Stream<Arguments> parametersProvider() {
         return Stream.of(
-                arguments(Arrays.asList(1, 2, 3, 4, 5, 6, 7)),
-                arguments(Arrays.asList(1, 2, 3, 4, 5))
+                arguments((Object) new Integer[]{1, 2, 3, 4, 5, 6, 7}),
+                arguments((Object) new Integer[]{1, 2, 3, 4, 5})
         );
     }
 
@@ -38,7 +36,7 @@ public class LottoTest {
     @DisplayName("로또의 숫자에 중복이 없는지 확인한다.")
     void validate_lotto_duplication() {
         // given
-        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 5);
+        Integer[] lottoNumbers = new Integer[]{1, 2, 3, 4, 5, 5};
 
         // when // then
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
@@ -50,7 +48,7 @@ public class LottoTest {
     @DisplayName("로또를 생성한다.")
     void create_lotto() {
         // given
-        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Integer[] lottoNumbers = new Integer[]{1, 2, 3, 4, 5, 6};
 
         // when
         Lotto lotto = new Lotto(lottoNumbers);
@@ -60,16 +58,17 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("당첨 로또와 자신의 로또를 비교해 몇개가 일치하는지 알려준다.")
-    void compare_lotto_with_winner_lotto() {
+    @DisplayName("당첨 로또와 보너스 숫자로 등수를 찾는다.")
+    void find_rank_by_winner_lotto() {
         // given
         Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-        Lotto winnerLotto = new Lotto(1, 4, 13, 16, 29, 40);
+        Lotto winnerLotto = new Lotto(1, 4, 6, 16, 29, 40);
+        int bonusNumber = 7;
 
         // when
-        int result = lotto.countOfMatch(winnerLotto);
+        Rank rank = lotto.findRankBy(new WinnerLotto(winnerLotto, bonusNumber));
 
         // then
-        assertThat(result).isEqualTo(2);
+        assertThat(rank).isEqualTo(Rank.FIFTH);
     }
 }

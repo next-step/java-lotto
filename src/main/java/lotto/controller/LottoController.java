@@ -1,16 +1,16 @@
 package lotto.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoWinningStatistics;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RankResult;
+import lotto.domain.WinnerLotto;
+import lotto.domain.WinnerLottoGenerator;
 import lotto.domain.YieldCalculator;
+import lotto.dto.CreateRankStatisticsDto;
 import lotto.dto.LottosDto;
-import lotto.dto.RankResultDto;
 import lotto.dto.RankStatisticsDto;
 
 public class LottoController {
@@ -29,13 +29,20 @@ public class LottoController {
         return LottosDto.valueOf(purchasedLottos);
     }
 
-    public RankStatisticsDto informRankStatistics(LottosDto lottosDto, List<Integer> winnerLotto, long cost) {
-        List<RankResult> rankResults = createLottoWinningStatistics(winnerLotto).informStatistics(lottosDto.toLottos());
-        double yield = YieldCalculator.calculate(cost, rankResults);
-        return RankStatisticsDto.valueOf(rankResults, yield);
+    public RankStatisticsDto informRankStatistics(CreateRankStatisticsDto createRankStatisticsDto) {
+        RankResult rankResult = createLottoWinningStatistics(createRankStatisticsDto.getWinnerLotto(),
+                createRankStatisticsDto.getBonusNumber())
+                .informStatistics(createRankStatisticsDto.getLottosDto().toLottos());
+        double yield = YieldCalculator.calculate(createRankStatisticsDto.getCost(), rankResult);
+        return RankStatisticsDto.valueOf(rankResult, yield);
     }
 
-    private LottoWinningStatistics createLottoWinningStatistics(List<Integer> winnerLotto) {
-        return new LottoWinningStatistics(new Lotto(winnerLotto));
+    private LottoWinningStatistics createLottoWinningStatistics(List<Integer> lotto, int bonusNumber) {
+        return new LottoWinningStatistics(createWinnerLotto(lotto, bonusNumber));
+    }
+
+    private WinnerLotto createWinnerLotto(List<Integer> lotto, int bonusNumber) {
+        WinnerLottoGenerator winnerLottoGenerator = new WinnerLottoGenerator();
+        return winnerLottoGenerator.createWinnerLotto(lotto, bonusNumber);
     }
 }

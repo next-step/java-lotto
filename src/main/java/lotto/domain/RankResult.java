@@ -1,22 +1,24 @@
 package lotto.domain;
 
+import java.util.Map;
 import java.util.Objects;
 
 public class RankResult {
-    private final Rank rank;
-    private final long rankCnt;
+    private Map<Rank, Long> rankStatistics;
 
-    public RankResult(Rank rank, long rankCnt) {
-        this.rank = rank;
-        this.rankCnt = rankCnt;
+    public RankResult(Map<Rank, Long> rankStatistics) {
+        this.rankStatistics = rankStatistics;
     }
 
-    public Rank getRank() {
-        return rank;
+    public long calculateTotalPrizeMoney() {
+        return rankStatistics.entrySet().stream()
+                .mapToLong(
+                        rankStatistics -> rankStatistics.getKey().calculateTotalPrizePerRank(rankStatistics.getValue()))
+                .reduce(0L, Long::sum);
     }
 
-    public long getRankCnt() {
-        return rankCnt;
+    public Map<Rank, Long> getRankStatistics() {
+        return rankStatistics;
     }
 
     @Override
@@ -28,11 +30,18 @@ public class RankResult {
             return false;
         }
         RankResult that = (RankResult) o;
-        return rankCnt == that.rankCnt && rank == that.rank;
+        return Objects.equals(rankStatistics, that.rankStatistics);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rank, rankCnt);
+        return Objects.hash(rankStatistics);
+    }
+
+    @Override
+    public String toString() {
+        return "RankResult{" +
+                "rankStatistics=" + rankStatistics +
+                '}';
     }
 }

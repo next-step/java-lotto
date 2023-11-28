@@ -1,18 +1,14 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class YieldCalculator {
-    public static double calculate(long cost, List<RankResult> rankResults) {
-        long sum = 0L;
-        for (RankResult rankResult : rankResults) {
-            Rank rank = rankResult.getRank();
-            long rankCnt = rankResult.getRankCnt();
-            sum += rank.calculateTotalPrizePerRank(rankCnt);
-        }
-
-        double yield = (double) sum / cost;
+    public static double calculate(long cost, RankResult rankResult) {
+        long sum = rankResult.calculateTotalPrizeMoney();
+        double yield = calculateYield(cost, (double) sum);
         return createFormattedYield(yield);
+    }
+
+    private static double calculateYield(long cost, double sum) {
+        return sum / cost;
     }
 
     private static double createFormattedYield(double yield) {

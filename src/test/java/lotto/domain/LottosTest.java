@@ -15,7 +15,7 @@ public class LottosTest {
     @DisplayName("로또 뭉치를 생성한다.")
     void create_lottos() {
         // given
-        List<List<Integer>> givenLottos = createGivenLottos();
+        List<Lotto> givenLottos = createGivenLottos();
 
         // when
         Lottos lottos = new Lottos(givenLottos);
@@ -24,13 +24,10 @@ public class LottosTest {
         assertThat(lottos).isEqualTo(createExpectedLottos());
     }
 
-    private List<List<Integer>> createGivenLottos() {
-        List<List<Integer>> given = new ArrayList<>();
+    private List<Lotto> createGivenLottos() {
+        List<Lotto> given = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            given.add(new ArrayList<>());
-        }
-        for (List<Integer> lotto : given) {
-            lotto.addAll(List.of(1, 2, 3, 4, 5, 6));
+            given.add(new Lotto(1, 2, 3, 4, 5, 6));
         }
         return given;
     }
@@ -55,9 +52,11 @@ public class LottosTest {
     void create_rank_statistics() {
         // given
         Lottos lottos = createLottoBundle();
+        Lotto winnerLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
 
         // when
-        Map<Rank, Long> result = lottos.seekRankStatistics(new Lotto(1, 2, 3, 4, 5, 6));
+        Map<Rank, Long> result = lottos.seekRankStatistics(new WinnerLotto(winnerLotto, bonusNumber));
 
         // then
         assertThat(result).isEqualTo(createExpectedRankStatistics());
@@ -75,9 +74,9 @@ public class LottosTest {
 
     private Map<Rank, Long> createExpectedRankStatistics() {
         Map<Rank, Long> rankStatistics = new LinkedHashMap<>();
-        rankStatistics.put(Rank.NOTHING, 3L);
-        rankStatistics.put(Rank.FOURTH, 0L);
-        rankStatistics.put(Rank.THIRD, 1L);
+        rankStatistics.put(Rank.FIFTH, 0L);
+        rankStatistics.put(Rank.FOURTH, 1L);
+        rankStatistics.put(Rank.THIRD, 0L);
         rankStatistics.put(Rank.SECOND, 0L);
         rankStatistics.put(Rank.FIRST, 1L);
 

@@ -1,8 +1,8 @@
 package lotto.domain;
 
+import static lotto.domain.Rank.FIFTH;
 import static lotto.domain.Rank.FIRST;
 import static lotto.domain.Rank.FOURTH;
-import static lotto.domain.Rank.NOTHING;
 import static lotto.domain.Rank.SECOND;
 import static lotto.domain.Rank.THIRD;
 
@@ -10,32 +10,28 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(List<List<Integer>> lottos) {
-        this.lottos = lottos.stream().map(Lotto::new).collect(Collectors.toList());
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public Lottos(Lotto... lottos) {
         this.lottos = List.of(lottos);
     }
 
-    public Map<Rank, Long> seekRankStatistics(Lotto winnerLotto) {
+    public Map<Rank, Long> seekRankStatistics(WinnerLotto winnerLotto) {
         Map<Rank, Long> rankResults = initRankResults();
-        for (Lotto lotto : lottos) {
-            int countOfMatch = lotto.countOfMatch(winnerLotto);
-            Rank rank = Rank.valeOf(countOfMatch);
-            rankResults.put(rank, rankResults.get(rank) + 1);
-        }
+        lottos.stream().map(lotto -> lotto.findRankBy(winnerLotto)).filter(rank -> !rank.isNothing())
+                .forEach(rank -> rankResults.put(rank, rankResults.get(rank) + 1));
         return rankResults;
     }
 
     private Map<Rank, Long> initRankResults() {
         Map<Rank, Long> rankResults = new LinkedHashMap<>();
-        rankResults.put(NOTHING, 0L);
+        rankResults.put(FIFTH, 0L);
         rankResults.put(FOURTH, 0L);
         rankResults.put(THIRD, 0L);
         rankResults.put(SECOND, 0L);
@@ -62,5 +58,12 @@ public class Lottos {
     @Override
     public int hashCode() {
         return Objects.hash(lottos);
+    }
+
+    @Override
+    public String toString() {
+        return "Lottos{" +
+                "lottos=" + lottos +
+                '}';
     }
 }
