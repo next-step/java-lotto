@@ -66,7 +66,7 @@ public class LottoTest {
         int bonusNumber = 7;
 
         // when
-        Rank rank = lotto.findRankBy(new WinnerLotto(winnerLotto, bonusNumber));
+        Rank rank = lotto.findRankBy(new WinnerLotto(winnerLotto, LottoNumber.valueOf(bonusNumber)));
 
         // then
         assertThat(rank).isEqualTo(Rank.FIFTH);

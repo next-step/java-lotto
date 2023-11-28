@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 public class LottoNumber {
     static final String LOTTO_NUMBER_OUT_OF_RANGE_EXCEPTION = "로또의 숫자는 1에서 45 사이의 숫자만 가능합니다.";
@@ -51,6 +52,10 @@ public class LottoNumber {
 
     public int compare(LottoNumber lottoNumber) {
         return this.value - lottoNumber.value;
+    }
+
+    public boolean belongTo(Set<LottoNumber> lotto) {
+        return lotto.contains(this);
     }
 
     @Override

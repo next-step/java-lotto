@@ -20,6 +20,6 @@ class WinnerLottoGeneratorTest {
         WinnerLotto result = winnerLottoGenerator.createWinnerLotto(lottoNumbers, bonusNumber);
 
         // then
-        assertThat(result).isEqualTo(new WinnerLotto(7, 1, 2, 3, 4, 5, 6));
+        assertThat(result).isEqualTo(new WinnerLotto(LottoNumber.valueOf(7), 1, 2, 3, 4, 5, 6));
     }
 }

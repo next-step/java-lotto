@@ -21,7 +21,7 @@ public class LottoWinningStatisticsTest {
         Lotto winnerLotto = new Lotto(1, 2, 3, 4, 5, 6);
         int bonusNumber = 7;
         LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(new WinnerLotto(winnerLotto,
-                bonusNumber));
+                LottoNumber.valueOf(bonusNumber)));
 
         // when
         RankResult result = lottoWinningStatistics.informStatistics(createGivenLottos());
