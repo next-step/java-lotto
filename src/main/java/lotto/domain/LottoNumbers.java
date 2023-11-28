@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.util.Util;
+import lotto.util.NumberUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,31 +15,40 @@ public class LottoNumbers {
         lottoNumbers = new ArrayList<Number>();
 
         for (int i = 0; i <REPEAT; i++) {
-            lottoNumbers.add(new Number(Util.randomNum()));
+            addNumber(new Number(NumberUtil.randomNum()));
         }
         sort();
     }
-
     public LottoNumbers(List<Integer> integerNumbers) {
         lottoNumbers = new ArrayList<Number>();
 
         for (int number : integerNumbers) {
-            lottoNumbers.add(new Number(number));
+            addNumber(new Number(number));
         }
 
         sort();
     }
 
+    private void addNumber(Number number) {
+        checkDuple(number);
+        lottoNumbers.add(number);
+    }
+
+    private void checkDuple(Number insertNum) {
+        if(isContains(insertNum.getNumber())) {
+            throw new IllegalArgumentException("중복된 데이터가 존재합니다.");
+        }
+    }
 
     private void sort() {
         Collections.sort(this.lottoNumbers);
     }
 
-    public boolean isContains(int winningNumber) {
+    public boolean isContains(int number) {
         return this.lottoNumbers.stream()
                 .map(Number::getNumber)
                 .collect(Collectors.toList())
-                .contains(winningNumber);
+                .contains(number);
     }
 
     public List<Number> getLottoNumbers() {

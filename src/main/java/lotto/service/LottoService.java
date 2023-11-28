@@ -5,7 +5,7 @@ import lotto.domain.MatchPointRank;
 
 import java.util.List;
 
-import static lotto.util.Util.parseIntegerList;
+import static lotto.util.ListUtil.parseIntegerList;
 
 public class LottoService {
 
