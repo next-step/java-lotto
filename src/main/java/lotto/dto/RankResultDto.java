@@ -5,11 +5,13 @@ import lotto.domain.Rank;
 
 public class RankResultDto {
 
+    private final boolean isSecond;
     private final int countOfMatch;
     private final long prizeMoney;
     private final long rankCount;
 
-    public RankResultDto(int countOfMatch, long prizeMoney, long rankCount) {
+    public RankResultDto(boolean isSecond, int countOfMatch, long prizeMoney, long rankCount) {
+        this.isSecond = isSecond;
         this.countOfMatch = countOfMatch;
         this.prizeMoney = prizeMoney;
         this.rankCount = rankCount;
@@ -20,7 +22,11 @@ public class RankResultDto {
         int countOfMatch = rank.getCountOfMatch();
         long prizeMoney = rank.getPrizeMoney();
         long rankCount = rankResult.getValue();
-        return new RankResultDto(countOfMatch, prizeMoney, rankCount);
+        return new RankResultDto(rank.isSecond(), countOfMatch, prizeMoney, rankCount);
+    }
+
+    public boolean isSecond() {
+        return isSecond;
     }
 
     public int getCountOfMatch() {
@@ -31,7 +37,7 @@ public class RankResultDto {
         return prizeMoney;
     }
 
-    public long getRankCnt() {
+    public long getRankCount() {
         return rankCount;
     }
 }

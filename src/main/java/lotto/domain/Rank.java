@@ -72,4 +72,8 @@ public enum Rank {
     }
 
     protected abstract boolean matchRank(int countOfMatch, boolean containsBonus);
+
+    public boolean isSecond() {
+        return this == SECOND;
+    }
 }
