@@ -4,10 +4,13 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 import java.util.Set;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.lotto.domain.Lotto;
+import step2.lotto.domain.LottoPurchase;
+import step2.lotto.strategy.LottoNumberManualGenerator;
 
 public class LottoTest {
 
@@ -40,5 +43,6 @@ public class LottoTest {
         Set<Integer> lotto = Set.copyOf(lottoNumbers);
         assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(lotto));
     }
+
 
 }

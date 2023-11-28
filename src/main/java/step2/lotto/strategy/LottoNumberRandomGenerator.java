@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
+import step2.lotto.domain.Lotto;
+import step2.lotto.domain.LottoPurchase;
 
 public class LottoNumberRandomGenerator implements LottoNumberGenerator {
 
@@ -15,16 +18,23 @@ public class LottoNumberRandomGenerator implements LottoNumberGenerator {
 
     private static final List<Integer> BASE_NUMBERS =
         IntStream.rangeClosed(
-            LOTTO_MINIMUM_RANGE_BOUND, LOTTO_MAXIMUM_RANGE_BOUND)
-        .boxed()
-        .collect(Collectors.toList());
+                LOTTO_MINIMUM_RANGE_BOUND, LOTTO_MAXIMUM_RANGE_BOUND)
+            .boxed()
+            .collect(Collectors.toList());
 
     @Override
-    public Set<Integer> generateLottoNumbers() {
+    public List<Lotto> generateLottos(final LottoPurchase lottoPurchase) {
+        return Stream.generate(() -> Lotto.of(generateNumber()))
+            .limit(lottoPurchase.getLottoTicketCount().getRandomLottoTicketCount())
+            .collect(Collectors.toList());
+    }
+
+    private Set<Integer> generateNumber() {
         List<Integer> shuffledNumbers = new ArrayList<>(BASE_NUMBERS);
         Collections.shuffle(shuffledNumbers);
         return shuffledNumbers.stream()
-                    .limit(LOTTO_NUMBER_COUNT)
-                    .collect(Collectors.toSet());
+            .limit(LOTTO_NUMBER_COUNT)
+            .collect(Collectors.toSet());
     }
+
 }

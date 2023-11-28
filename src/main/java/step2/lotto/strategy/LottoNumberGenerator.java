@@ -1,7 +1,9 @@
 package step2.lotto.strategy;
 
-import java.util.Set;
+import java.util.List;
+import step2.lotto.domain.Lotto;
+import step2.lotto.domain.LottoPurchase;
 
 public interface LottoNumberGenerator {
-    Set<Integer> generateLottoNumbers();
+    List<Lotto> generateLottos(final LottoPurchase lottoPurchase);
 }

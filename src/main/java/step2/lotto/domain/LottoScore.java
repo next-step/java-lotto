@@ -29,14 +29,18 @@ public class LottoScore {
 
     public void recordMatchLotto(final Lottos lottos, final LottoWin lottoWin) {
         lottos.getLottos().stream().forEach(lotto -> {
-            LottoRank lottoRank =
-                LottoRank.valueOf(lottoWin.matchCount(lotto), lottoWin.matchBonusNumber(lotto));
+            LottoRank lottoRank = determineLottoRank(lotto, lottoWin);
             lottoScore.merge(lottoRank, 1, Integer::sum);
         });
     }
 
-    public double calculateProfitRatio(final LottoPurchase purchaseInfo) {
-        return calculateTotalPrizeAmount() / purchaseInfo.getLottoPurchaseMoney();
+    private LottoRank determineLottoRank(Lotto lotto, LottoWin lottoWin) {
+        return LottoRank.valueOf(lottoWin.matchCount(lotto), lottoWin.matchBonusNumber(lotto));
+    }
+
+    public double calculateProfitRatio(final LottoPurchase lottopurchase) {
+        return calculateTotalPrizeAmount() / lottopurchase.getLottoPurchaseMoney()
+            .getPurchaseMoney();
     }
 
     private long calculateTotalPrizeAmount() {

@@ -1,24 +1,41 @@
 package step2.lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class LottoPurchase {
 
-    private final int lottoPurchaseMoney;
-    private final int lottoTicketCount;
+    private final LottoPurchaseMoney lottoPurchaseMoney;
+    private final LottoTicketCount lottoTicketCount;
+    private final List<String> lottoManualNumbers;
 
     private static final int LOTTO_PRICE = 1000;
 
     public LottoPurchase(final int inputMoney) {
-        validateInputMoney(inputMoney);
-        this.lottoPurchaseMoney = inputMoney;
-        this.lottoTicketCount = inputMoney / LOTTO_PRICE;
+        this.lottoPurchaseMoney = new LottoPurchaseMoney(inputMoney);
+        this.lottoTicketCount = new LottoTicketCount(inputMoney / LOTTO_PRICE,
+            Collections.emptyList().size());
+        this.lottoManualNumbers = new ArrayList<>();
     }
 
-    public int getLottoTicketCount() {
+    public LottoPurchase(final int inputMoney, final List<String> inputManualNumbers) {
+        this.lottoPurchaseMoney = new LottoPurchaseMoney(inputMoney);
+        this.lottoTicketCount = new LottoTicketCount(inputMoney / LOTTO_PRICE,
+            inputManualNumbers.size());
+        this.lottoManualNumbers = new ArrayList<>(inputManualNumbers);
+    }
+
+    public LottoTicketCount getLottoTicketCount() {
         return lottoTicketCount;
     }
 
-    public int getLottoPurchaseMoney() {
+    public LottoPurchaseMoney getLottoPurchaseMoney() {
         return lottoPurchaseMoney;
+    }
+
+    public List<String> getLottoManualNumbers() {
+        return Collections.unmodifiableList(lottoManualNumbers);
     }
 
     private void validateInputMoney(final int inputMoney) {

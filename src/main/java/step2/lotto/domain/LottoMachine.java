@@ -1,30 +1,37 @@
 package step2.lotto.domain;
 
-import step2.lotto.domain.factory.LottosFactory;
-import step2.lotto.strategy.LottoNumberGenerator;
+import java.util.List;
 
 public class LottoMachine {
 
-    private final Lottos purchaseLottos;
+    private final Lottos userPurchaseLottos;
     private final LottoPurchase lottoPurchase;
 
-    public LottoMachine(final int inputMoney, final LottoNumberGenerator lottoNumberGenerator) {
-        this.lottoPurchase = new LottoPurchase(inputMoney);
-        this.purchaseLottos = new Lottos(
-            LottosFactory.createLottos(lottoPurchase.getLottoTicketCount(), lottoNumberGenerator));
+    public LottoMachine(final LottoPurchase lottoPurchase) {
+        this.lottoPurchase = lottoPurchase;
+        this.userPurchaseLottos = userPurchaseLottos(lottoPurchase);
     }
 
-    public LottoPurchase getLottoPurchaseInfo () {
+    public LottoMachine(final LottoPurchase lottoPurchase, final List<String> inputManualNumbers) {
+        this.lottoPurchase = lottoPurchase;
+        this.userPurchaseLottos = userPurchaseLottos(lottoPurchase);
+    }
+
+    public LottoPurchase getLottoPurchase() {
         return lottoPurchase;
     }
 
-    public Lottos getPurchaseLottos() {
-        return purchaseLottos;
+    public Lottos getUserPurchaseLottos() {
+        return userPurchaseLottos;
     }
 
     public LottoScore calculateLottoStatistics(final LottoWin winNumberInfo) {
         LottoScore lottoScore = LottoScore.create();
-        lottoScore.recordMatchLotto(purchaseLottos, winNumberInfo);
+        lottoScore.recordMatchLotto(userPurchaseLottos, winNumberInfo);
         return lottoScore;
+    }
+
+    private Lottos userPurchaseLottos(final LottoPurchase lottoPurchase) {
+        return Lottos.purchaseLottos(lottoPurchase);
     }
 }
