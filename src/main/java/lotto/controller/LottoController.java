@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 public class LottoController {
 
     public static void main(String[] args) {
-        Lottos tickets = LottoSeller.issueLotto(InputView.inputMoney());
+        Lottos tickets = LottoSeller.issueLotto(
+                InputView.inputMoney(),
+                InputView.inputManualTickets()
+        );
 
-        if (InputView.inputManualTicketCount() != 0) {
-            InputView.inputManualTicketNumbers();
-        }
 
         ResultView.printCheckPurchaseMessage(tickets.count());
         ResultView.printLottoTickets(tickets);
