@@ -14,18 +14,14 @@ public class LottoController {
         List<List<Integer>> ticketsNumbers = InputView.inputManualTickets();
         Lottos tickets = LottoSeller.issueLotto(money, ticketsNumbers);
 
-        ResultView.printCheckPurchaseMessage(ticketsNumbers.size(), ticketsNumbers.size()-tickets.count());
+        ResultView.printCheckPurchaseMessage(ticketsNumbers.size(), tickets.count()-ticketsNumbers.size());
         ResultView.printLottoTickets(tickets);
 
         WinningNumber winningNumber = new WinningNumber(
                 InputView.inputDefaultWinningNumbers(),
                 InputView.inputBonusBallNumber());
 
-        LottoReport report = new LottoReport(
-                tickets.tickets()
-                        .stream()
-                        .map(ticket -> winningNumber.match(ticket))
-                        .collect(Collectors.toList()));
+        LottoReport report = new LottoReport(tickets, winningNumber);
         ResultView.printResultReport(report);
     }
 }
