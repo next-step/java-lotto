@@ -3,7 +3,7 @@ package lotto;
 import java.util.List;
 import lotto.config.LottoFactory;
 import lotto.controller.LottoController;
-import lotto.dto.LottoGameInfoDto;
+import lotto.dto.CreateRankStatisticsDto;
 import lotto.dto.LottosDto;
 import lotto.dto.RankStatisticsDto;
 import lotto.view.InputView;
@@ -28,7 +28,7 @@ public class LottoMain {
         List<Integer> winnerLotto = inputView.winnerLottoNumbers();
         int bonusNumber = inputView.bonusNumber();
         RankStatisticsDto rankStatisticsDto = controller.informRankStatistics(
-                new LottoGameInfoDto(lottosDto, winnerLotto, bonusNumber, cost));
+                new CreateRankStatisticsDto(lottosDto, winnerLotto, bonusNumber, cost));
         outputView.printLottoRankStatistics(rankStatisticsDto.getRankResultDtos());
         outputView.printLottoYield(rankStatisticsDto.getYield());
     }
