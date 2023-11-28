@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class Bonus {
@@ -29,5 +30,29 @@ public class Bonus {
 
     public boolean containsBonus(Set<LottoNumber> lotto) {
         return lotto.contains(this.bonusNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Bonus bonus = (Bonus) o;
+        return Objects.equals(bonusNumber, bonus.bonusNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bonusNumber);
+    }
+
+    @Override
+    public String toString() {
+        return "Bonus{" +
+                "bonusNumber=" + bonusNumber +
+                '}';
     }
 }
