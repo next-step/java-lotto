@@ -17,6 +17,21 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
+    public static List<List<Integer>> manualLottoNumbers(int count) {
+        List<List<Integer>> manualLottoNumbers = new ArrayList<>();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        for (int i = 0; i < count; i++) {
+            String[] inputManualLottos = SCANNER.nextLine().split(", ");
+
+            ArrayList<Integer> nums = new ArrayList<>();
+            for (String inputManualLotto : inputManualLottos) {
+                nums.add(Integer.parseInt(inputManualLotto));
+            }
+            manualLottoNumbers.add(nums);
+        }
+        return manualLottoNumbers;
+    }
+
     public static List<Integer> winningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String[] inputWinningLottos = SCANNER.nextLine().split(", ");

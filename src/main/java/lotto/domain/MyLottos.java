@@ -16,6 +16,10 @@ public class MyLottos {
         return Collections.unmodifiableList(this.lottos);
     }
 
+    public void addManualLottos(List<Lotto> lottos) {
+        this.lottos.addAll(lottos);
+    }
+
     public LottoResult getLottoResult(WinningLotto winningLotto) {
         LottoResult lottoResult = new LottoResult();
         lottos.forEach(lotto -> lottoResult.add(winningLotto.getPrize(lotto)));

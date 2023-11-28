@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
 import lotto.domain.LottoResult;
 import lotto.domain.Money;
@@ -10,6 +11,9 @@ import lotto.ui.OutputView;
 import lotto.ui.dto.LottoStatsResponse;
 import lotto.ui.dto.MyLottosResponse;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class LottoApplication {
     public static void main(String[] args) {
         int inputMoney = InputView.inputMoney();
@@ -18,9 +22,16 @@ public class LottoApplication {
         int manualLottoCount = InputView.manualLottoCount();
         money.buyManualLotto(manualLottoCount);
 
-        OutputView.outputPurchaseCount(manualLottoCount, money.buyAllAutoLotto());
+        List<List<Integer>> inputManualLottoNumbers = InputView.manualLottoNumbers(manualLottoCount);
 
-        MyLottos myLottos = LottoFactory.buy(money);
+        int purchaseCount = money.buyAllAutoLotto();
+        OutputView.outputPurchaseCount(manualLottoCount, purchaseCount);
+
+        MyLottos myLottos = LottoFactory.buy(purchaseCount);
+        myLottos.addManualLottos(
+                inputManualLottoNumbers.stream()
+                        .map(Lotto::of)
+                        .collect(Collectors.toList()));
         OutputView.outputMyLottos(MyLottosResponse.from(myLottos));
 
         WinningLotto winningLotto = new WinningLotto(InputView.winningNumbers(), InputView.bonusNumber());

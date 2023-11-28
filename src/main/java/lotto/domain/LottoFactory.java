@@ -11,8 +11,7 @@ import java.util.stream.Stream;
 public class LottoFactory {
     private static final List<LottoNum> LOTTO_NUMBER_LIST = IntStream.range(1, 45).mapToObj(LottoNum::new).collect(Collectors.toList());
 
-    public static MyLottos buy(Money money) {
-        int purchaseCount = money.buyAllAutoLotto();
+    public static MyLottos buy(int purchaseCount) {
         return new MyLottos(
                 Stream.generate(LottoFactory::generateRandomLotto)
                         .limit(purchaseCount).collect(Collectors.toList()));
