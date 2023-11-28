@@ -10,13 +10,11 @@ import java.util.stream.Collectors;
 public class LottoController {
 
     public static void main(String[] args) {
-        Lottos tickets = LottoSeller.issueLotto(
-                InputView.inputMoney(),
-                InputView.inputManualTickets()
-        );
+        int money = InputView.inputMoney();
+        List<List<Integer>> ticketsNumbers = InputView.inputManualTickets();
+        Lottos tickets = LottoSeller.issueLotto(money, ticketsNumbers);
 
-
-        ResultView.printCheckPurchaseMessage(tickets.count());
+        ResultView.printCheckPurchaseMessage(ticketsNumbers.size(), ticketsNumbers.size()-tickets.count());
         ResultView.printLottoTickets(tickets);
 
         WinningNumber winningNumber = new WinningNumber(

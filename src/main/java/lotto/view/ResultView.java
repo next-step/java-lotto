@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    private static final String CHECK_PURCHASE = "개를 구매했습니다.";
+    private static final String CHECK_PURCHASE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String RESULT_MESSAGE = "당첨 통계\n---------";
     private static final String RANK_RESULT_MESSAGE = "%d개 일치 (%d원)- %d개";
     private static final String SECOND_RANK_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String RATE_OF_RETURN_MESSAGE = "총 수익률은 %.2f입니다.";
 
-    public static void printCheckPurchaseMessage(int purchaseAmount) {
-        System.out.println(String.valueOf(purchaseAmount) + CHECK_PURCHASE);
+    public static void printCheckPurchaseMessage(int manualCount, int autoCount) {
+        System.out.println(String.format(CHECK_PURCHASE, manualCount, autoCount));
     }
 
     public static void printLottoTickets(Lottos tickets) {
