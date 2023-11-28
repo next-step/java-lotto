@@ -38,9 +38,4 @@ public class LottoPurchase {
         return Collections.unmodifiableList(lottoManualNumbers);
     }
 
-    private void validateInputMoney(final int inputMoney) {
-        if (inputMoney < LOTTO_PRICE) {
-            throw new IllegalArgumentException("로또 구입 최소금액은 " + LOTTO_PRICE + "원 입니다.");
-        }
-    }
 }

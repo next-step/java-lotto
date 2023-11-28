@@ -12,11 +12,6 @@ public class LottoMachine {
         this.userPurchaseLottos = userPurchaseLottos(lottoPurchase);
     }
 
-    public LottoMachine(final LottoPurchase lottoPurchase, final List<String> inputManualNumbers) {
-        this.lottoPurchase = lottoPurchase;
-        this.userPurchaseLottos = userPurchaseLottos(lottoPurchase);
-    }
-
     public LottoPurchase getLottoPurchase() {
         return lottoPurchase;
     }
