@@ -6,32 +6,30 @@ import java.util.Map;
 
 public class LottoResult {
 
-    private final Map<LottoRank, Integer> win;
+    private final Map<LottoRank, Integer> countsByLottoRank;
     private int totalWinningMoney;
     private double returnRate;
 
     public LottoResult() {
         this.totalWinningMoney = 0;
         this.returnRate = 0.0;
-        this.win = new HashMap<>();
+        this.countsByLottoRank = new HashMap<>();
     }
 
     public void addRanks(List<LottoRank> lottoRank) {
-        for (LottoRank rank : lottoRank) {
-            win.putIfAbsent(rank, 0);
-            win.put(rank, win.get(rank) + 1);
-        }
+        lottoRank.forEach(rank -> {
+            countsByLottoRank.putIfAbsent(rank, 0);
+            countsByLottoRank.put(rank, countsByLottoRank.get(rank) + 1);
+        });
     }
 
     public int calculateTotalWinningMoney() {
-        for (Map.Entry<LottoRank, Integer> entry : win.entrySet()) {
-            totalWinningMoney += entry.getKey().money() * entry.getValue();
-        }
+        countsByLottoRank.forEach((key, value) -> totalWinningMoney += key.money() * value);
         return this.totalWinningMoney;
     }
 
     public Map<LottoRank, Integer> totalWinningStatistics() {
-        return this.win;
+        return this.countsByLottoRank;
     }
 
     public void calculateReturnRate(int totalPayMoney) {

@@ -14,7 +14,7 @@ class LottoResultTest {
 
     @ParameterizedTest
     @DisplayName("로또 당첨 등수를 기록한다")
-    @EnumSource(value = LottoRank.class, names = {"BLANK", "FOURTH", "THIRD", "SECOND", "FIRST"})
+    @EnumSource(value = LottoRank.class, names = {"MISS", "FOURTH", "THIRD", "SECOND", "FIRST"})
     void addRanks(LottoRank lottoRank) {
         LottoResult lottoResult = new LottoResult();
         lottoResult.addRanks(List.of(lottoRank));
@@ -38,7 +38,7 @@ class LottoResultTest {
     @CsvSource("5000,1.0")
     void calculateReturnRate(int totalMoney, double rate) {
         LottoResult lottoResult = new LottoResult();
-        lottoResult.addRanks(List.of(LottoRank.FOURTH));
+        lottoResult.addRanks(List.of(LottoRank.FIFTH));
 
         lottoResult.calculateTotalWinningMoney();
         lottoResult.calculateReturnRate(totalMoney);

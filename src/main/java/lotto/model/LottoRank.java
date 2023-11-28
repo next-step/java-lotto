@@ -1,6 +1,8 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public enum LottoRank {
 
@@ -9,7 +11,7 @@ public enum LottoRank {
     THIRD(5, 1_500_000),
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000),
-    BLANK(0, 0);
+    MISS(0, 0);
 
 
     private final long rank;
@@ -28,11 +30,18 @@ public enum LottoRank {
         return this.rank;
     }
 
-    public static LottoRank valueOf(long rank) {
-        return Arrays.stream(LottoRank.values())
+    public static LottoRank valueOf(long rank, long matchBonusNumber) {
+        if (matchBonusNumber > 0) {
+            return Arrays.stream(values())
+                .sorted(Collections.reverseOrder())
+                .filter(lottoRank -> lottoRank.rank() == rank)
+                .findAny()
+                .orElse(LottoRank.MISS);
+        }
+        return Arrays.stream(values())
             .filter(lottoRank -> lottoRank.rank() == rank)
             .findAny()
-            .orElse(LottoRank.BLANK);
+            .orElse(LottoRank.MISS);
     }
 
 }

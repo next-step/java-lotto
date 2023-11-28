@@ -20,14 +20,18 @@ public class OutputView {
         System.out.println("당첨통계");
         System.out.println("---------");
         for (LottoRank lottoRank : LottoRank.values()) {
-            if (lottoRank.equals(LottoRank.BLANK)) {
+            if (lottoRank.equals(LottoRank.MISS)) {
                 continue;
             }
             Integer t = lottoRankMap.get(lottoRank);
             if (t == null) {
                 t = 0;
             }
-            System.out.println(lottoRank.rank() + "개 일치 (" + lottoRank.money() + ") - " + t + "개");
+            String result = lottoRank.rank() + "개 일치 (" + lottoRank.money() + "원) - " + t + "개";
+            if (lottoRank.equals(LottoRank.SECOND)) {
+                result = lottoRank.rank() + "개 일치, 보너스 볼 일치 (" + lottoRank.money() + "원) - " + t + "개";
+            }
+            System.out.println(result);
         }
         System.out.println("총 수익률은 " + returnRate + "입니다.");
     }

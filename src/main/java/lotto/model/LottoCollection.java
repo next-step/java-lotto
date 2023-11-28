@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 public class LottoCollection {
 
-    private final ArrayList<LottoNumbers> lottoNumbersList;
+    private final List<LottoNumbers> lottoNumbersList;
 
     public LottoCollection(int numberOfLottoTickets, RandomGenerator randomGenerator) {
         this.lottoNumbersList = new ArrayList<>();
@@ -20,14 +20,18 @@ public class LottoCollection {
         return this.lottoNumbersList;
     }
 
-    public List<LottoRank> getLottoRanks(LottoNumbers winningNumbers) {
+    public List<LottoRank> getLottoRanks(WinningNumbers winningNumbers) {
         return lottoNumbersList.stream()
             .map(lottoNumbers -> LottoRank.valueOf(
                 lottoNumbers.getLottoNumbers()
                     .stream()
                     .filter(winningNumbers::contains)
-                    .count())).collect(Collectors.toList()
-            );
+                    .count()
+                , lottoNumbers.getLottoNumbers()
+                    .stream()
+                    .filter(winningNumbers::matchBonusNumber)
+                    .count()))
+            .collect(Collectors.toList());
     }
 
 }
