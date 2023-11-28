@@ -21,7 +21,7 @@ public class LottoBundle {
 
     public LottoBundle(LottoGenerator lottoGenerator, int lottoPurchasedPrice) {
         this(IntStream.range(0, lottoPurchasedPrice / LOTTO_PRICE)
-                .mapToObj(i -> new Lotto(lottoGenerator))
+                .mapToObj(i -> lottoGenerator.generate())
                 .collect(Collectors.toList()));
     }
 
@@ -48,4 +48,5 @@ public class LottoBundle {
     public int purchasedPrice() {
         return lottoCount() * LOTTO_PRICE;
     }
+
 }

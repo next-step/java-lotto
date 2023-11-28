@@ -21,13 +21,13 @@ class LottoTest {
 
     @Test
     void 자동생성테스트_로또는_6자리_숫자이다() {
-        Lotto lotto = new Lotto(lottoRandomGenerator);
+        Lotto lotto = lottoRandomGenerator.generate();
         assertThat(lotto.numbers().size()).isEqualTo(6);
     }
 
     @Test
     void 자동생성테스트_로또숫자는_중복되지_않는다() {
-        Lotto lotto = new Lotto(lottoRandomGenerator);
+        Lotto lotto = lottoRandomGenerator.generate();
         Set<LottoNumber> deduplication = Set.copyOf(lotto.numbers());
         assertThat(deduplication.size()).isEqualTo(6);
     }

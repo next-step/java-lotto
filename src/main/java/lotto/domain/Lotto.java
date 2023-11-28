@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.strategy.LottoGenerator;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -17,10 +15,6 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         this.numbers = new TreeSet<>(parseLottoNumber(numbers));
         validate();
-    }
-
-    public Lotto(LottoGenerator lottoGenerator) {
-        this(lottoGenerator.generate());
     }
 
     public Lotto(Integer... numbers) {
