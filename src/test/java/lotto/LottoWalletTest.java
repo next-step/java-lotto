@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoType;
 import lotto.domain.LottoWallet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,11 +19,11 @@ public class LottoWalletTest {
     void saveLottoAsYouWant() {
         Lotto lotto1 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
             .map(LottoNumber::new)
-            .collect(Collectors.toList()));
+            .collect(Collectors.toList()), LottoType.AUTO);
         Lotto lotto2 = new Lotto(Stream.of(6, 5, 4, 3, 2, 1)
             .map(LottoNumber::new)
-            .collect(Collectors.toList()));
-        LottoWallet lottoWallet = LottoWallet.of(List.of(lotto1, lotto2), 2);
+            .collect(Collectors.toList()), LottoType.AUTO);
+        LottoWallet lottoWallet = LottoWallet.of(List.of(lotto1, lotto2));
         assertThat(lottoWallet.totalTicketCount()).isEqualTo(2);
     }
 
@@ -31,11 +32,11 @@ public class LottoWalletTest {
     void returnLottoTicketAsYouWant() {
         Lotto lotto1 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
             .map(LottoNumber::new)
-            .collect(Collectors.toList()));
+            .collect(Collectors.toList()), LottoType.AUTO);
         Lotto lotto2 = new Lotto(Stream.of(6, 5, 4, 3, 2, 1)
             .map(LottoNumber::new)
-            .collect(Collectors.toList()));
-        LottoWallet lottoWallet = LottoWallet.of(List.of(lotto1, lotto2), 2);
+            .collect(Collectors.toList()), LottoType.AUTO);
+        LottoWallet lottoWallet = LottoWallet.of(List.of(lotto1, lotto2));
 
         assertThat(lottoWallet.oneTicket(1)).isEqualTo(lotto2);
     }

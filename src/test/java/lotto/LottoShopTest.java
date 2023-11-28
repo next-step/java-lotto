@@ -3,9 +3,14 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import lotto.domain.Lotto;
 import lotto.domain.LottoShop;
+import lotto.domain.LottoShopFactory;
 import lotto.domain.LottoWallet;
+import lotto.domain.MoneyWallet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,15 +20,9 @@ public class LottoShopTest {
     @Test
     void createLottoTicketAsYouWant() {
         int money = 1000;
-        List<Lotto> assignedLottoList = LottoShop.from(money).assignedLottoList();
-        assertThat(assignedLottoList.size()).isEqualTo(1);
-    }
-
-    @DisplayName("배정된 티켓을 확정구매한다.")
-    @Test
-    void purchaseTicketThatAssigned(){
-        LottoWallet lottoWallet = LottoShop.from(10000).purchase();
-        assertThat(lottoWallet.totalTicketCount()).isEqualTo(10);
+        LottoShop lottoShop = LottoShop.from(MoneyWallet.of(money), LottoShopFactory.of(null));
+        LottoWallet lottoWallet = lottoShop.purchase();
+        assertThat(lottoWallet.totalTicketCount()).isEqualTo(1);
     }
 
 }

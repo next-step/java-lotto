@@ -16,6 +16,8 @@ public class ResultView {
 
     private final static String LOTTO_PURCHASE_RESULT_MESSAGE = "%d개를 구매했습니다. \n";
 
+    private final static String LOTTO_PURCHASE_AUTO_MANUALLY_COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
+
     private static final Map<LottoRank, String> outputFormats = new HashMap<>();
 
     static {
@@ -42,6 +44,7 @@ public class ResultView {
     }
 
     public void out(LottoWallet lottoWallet) {
+        sout.printf(LOTTO_PURCHASE_AUTO_MANUALLY_COUNT_MESSAGE, lottoWallet.autoLottoCount(), lottoWallet.manuallyLottoCount());
         for (int i = 0; i < lottoWallet.totalTicketCount(); i++) {
             sout.println(lottoNumbers(lottoWallet.oneTicket(i)));
         }

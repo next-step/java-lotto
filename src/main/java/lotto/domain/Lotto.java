@@ -13,13 +13,24 @@ public class Lotto {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> anyNumbers) {
+    private final LottoType lottoType;
+
+    private Lotto(List<LottoNumber> anyNumbers, LottoType type) {
         validation(anyNumbers);
         this.lottoNumbers = new LinkedHashSet<>(anyNumbers);
+        this.lottoType = type;
     }
 
-    public static Lotto from(List<LottoNumber> anyNumbers) {
-        return new Lotto(anyNumbers);
+    public static Lotto auto(List<LottoNumber> anyNumbers) {
+        return new Lotto(anyNumbers, LottoType.AUTO);
+    }
+
+    public static Lotto manually(List<LottoNumber> anyNumbers) {
+        return new Lotto(anyNumbers, LottoType.MANUALLY);
+    }
+
+    public static Lotto winning(List<LottoNumber> anyNumbers) {
+        return new Lotto(anyNumbers, LottoType.WINNING);
     }
 
     private void validation(List<LottoNumber> anyNumbers) {
@@ -43,6 +54,10 @@ public class Lotto {
 
     public boolean contains(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    public LottoType lottoType() {
+        return lottoType;
     }
 
     @Override

@@ -20,7 +20,7 @@ public class LottoTest {
     @ParameterizedTest
     void a(List<Integer> anyNumbers) {
         List<LottoNumber> lottoNumbers = getLottoNumbers(anyNumbers);
-        assertThatNoException().isThrownBy(() -> Lotto.from(lottoNumbers));
+        assertThatNoException().isThrownBy(() -> Lotto.auto(lottoNumbers));
     }
 
     private static List<LottoNumber> getLottoNumbers(List<Integer> anyNumbers) {
@@ -33,7 +33,7 @@ public class LottoTest {
     @ParameterizedTest
     void b(List<Integer> anyNumbersDuplicated) {
         List<LottoNumber> lottoNumbers = getLottoNumbers(anyNumbersDuplicated);
-        assertThatThrownBy(() -> Lotto.from(lottoNumbers));
+        assertThatThrownBy(() -> Lotto.auto(lottoNumbers));
     }
 
     private static Stream<Arguments> anyNumbers() {
