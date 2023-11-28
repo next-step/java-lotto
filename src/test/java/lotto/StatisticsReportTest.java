@@ -28,7 +28,7 @@ public class StatisticsReportTest {
         LottoNumber bonusBall = LottoNumber.from(45);
         WinningLotto winningLotto = WinningLotto.of(lastWeekLotto, bonusBall);
 
-        StatisticsReport statisticsReport = StatisticsReport.of(lottoWallet).report(winningLotto);
+        StatisticsReport statisticsReport = StatisticsReport.from(lottoWallet, winningLotto);
 
         assertThat(statisticsReport.count(LottoRank.FIRST)).isEqualTo(0);
         assertThat(statisticsReport.count(LottoRank.SECOND)).isEqualTo(0);
@@ -42,10 +42,9 @@ public class StatisticsReportTest {
     @Test
     void rate() {
         LottoWallet lottoWallet = getLottoWallet();
-        StatisticsReport statisticsReport = StatisticsReport.of(lottoWallet);
-        Lotto lastWeekLotto = LottoGenerator.generate(Set.of(6, 5, 4, 13, 12, 11));
+        Lotto lastWeekLotto = LottoGenerator.generate(Set.of(6, 5, 4, 13, 12, 11)); //6, 5, 4 당첨
         WinningLotto winningLotto = WinningLotto.of(lastWeekLotto, LottoNumber.from(45));
-        statisticsReport.report(winningLotto);
+        StatisticsReport statisticsReport = StatisticsReport.from(lottoWallet, winningLotto);
 
         assertThat(statisticsReport.rate()).isEqualTo(BigDecimal.valueOf(2.5));
     }

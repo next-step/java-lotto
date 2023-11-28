@@ -18,9 +18,9 @@ class LottoNumberFactoryTest {
     void mustReturnNonDuplicatedIntegerList() {
         LottoNumberFactory lottoNumberFactory = LottoNumberFactory.getInstance();
         Set<LottoNumber> temp = new HashSet<>();
-//        List<LottoNumber> duplicated = lottoNumberFactory.createLottoNumbers().lottoNumbers().stream()
-//            .filter(lottoNumber -> !temp.add(lottoNumber))
-//            .collect(Collectors.toList());
+        List<LottoNumber> duplicated = lottoNumberFactory.createLottoNumbers().stream()
+            .filter(lottoNumber -> !temp.add(lottoNumber))
+            .collect(Collectors.toList());
         assertThat(duplicated.isEmpty()).isTrue();
     }
 

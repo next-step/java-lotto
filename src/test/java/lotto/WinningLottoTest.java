@@ -15,9 +15,9 @@ import org.junit.jupiter.api.Test;
 
 public class WinningLottoTest {
 
-    private static final Lotto LAST_WEEK_LOTTO = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+    private static final Lotto LAST_WEEK_LOTTO = Lotto.manually(Stream.of(1, 2, 3, 4, 5, 6)
         .map(LottoNumber::new)
-        .collect(Collectors.toList()), LottoType.AUTO);
+        .collect(Collectors.toList()));
 
 
     @DisplayName("지난주 로또를 입력받는다.")
@@ -31,9 +31,9 @@ public class WinningLottoTest {
     @Test
     void compareWithLastWeekLottoAndReturnMatchCount() {
         WinningLotto winningLotto = WinningLotto.of(LAST_WEEK_LOTTO, new LottoNumber(8));
-        Lotto myLotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 7)
+        Lotto myLotto = Lotto.manually(Stream.of(1, 2, 3, 4, 5, 7)
             .map(LottoNumber::new)
-            .collect(Collectors.toList()), LottoType.AUTO);
+            .collect(Collectors.toList()));
         int matchCount = winningLotto.compare(myLotto);
         assertThat(matchCount).isEqualTo(5);
     }
