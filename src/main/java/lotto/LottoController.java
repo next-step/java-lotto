@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoBundle;
-import lotto.domain.LottoResult;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.strategy.LottoGenerator;
 import lotto.strategy.LottoRandomGenerator;
 import lotto.view.InputView;
@@ -21,7 +18,7 @@ public class LottoController {
         ResultView.printPurchaseInfo(lottoBundle);
 
         Lotto winningLotto = InputView.askLottoWinningNumbers();
-        int bonusNumber = InputView.askBonusNumber();
+        LottoNumber bonusNumber = InputView.askBonusNumber();
         Map<LottoResult, Integer> lottoResults = lottoBundle.checkWinningResult(new WinningLotto(winningLotto, bonusNumber));
         ResultView.printWinningStatistics(purchasePrice, lottoResults);
     }

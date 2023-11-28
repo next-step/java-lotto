@@ -39,8 +39,8 @@ public class Lotto {
         }
     }
 
-    public List<Integer> numbers() {
-        return this.numbers.stream().map(lottoNumber -> lottoNumber.value()).collect(Collectors.toList());
+    public List<LottoNumber> numbers() {
+        return this.numbers.stream().collect(Collectors.toList());
     }
 
 }

@@ -28,7 +28,7 @@ class LottoTest {
     @Test
     void 자동생성테스트_로또숫자는_중복되지_않는다() {
         Lotto lotto = new Lotto(lottoRandomGenerator);
-        Set<Integer> deduplication = Set.copyOf(lotto.numbers());
+        Set<LottoNumber> deduplication = Set.copyOf(lotto.numbers());
         assertThat(deduplication.size()).isEqualTo(6);
     }
 
@@ -50,7 +50,7 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("LottoMatchParameterProvider")
     void 로또_일치_확인(List<Integer> lottoList, LottoResult expected) {
-        WinningLotto winningLotto = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), 7);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(7));
         Lotto lotto = new Lotto(lottoList);
 
         LottoResult lottoResult = winningLotto.getLottoResult(lotto);
@@ -72,7 +72,13 @@ class LottoTest {
     @Test
     void 로또_오름차순정렬() {
         Lotto lotto = new Lotto(6, 4, 2, 1, 3, 5);
-        assertThat(lotto.numbers().toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+        assertThat(lotto.numbers()).containsExactly(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6));
     }
 
 }

@@ -3,9 +3,9 @@ package lotto.domain;
 public class WinningLotto {
 
     private final Lotto winningLotto;
-    private final Integer bonus;
+    private final LottoNumber bonus;
 
-    public WinningLotto(Lotto winningLotto, Integer bonus) {
+    public WinningLotto(Lotto winningLotto, LottoNumber bonus) {
         this.winningLotto = winningLotto;
         this.bonus = bonus;
     }

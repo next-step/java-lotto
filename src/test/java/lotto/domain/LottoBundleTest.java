@@ -17,7 +17,7 @@ public class LottoBundleTest {
     @MethodSource("LottoResultProvider")
     void 로또_당첨결과_확인(Lotto lotto, LottoResult lottoResult) {
         LottoBundle lottoBundle = new LottoBundle(List.of(lotto));
-        WinningLotto winningLotto = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), 7);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(7));
 
         Map<LottoResult, Integer> winningResult = lottoBundle.checkWinningResult(winningLotto);
 
