@@ -2,7 +2,6 @@ package step4.domain.lotto;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
