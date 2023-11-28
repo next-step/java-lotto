@@ -11,7 +11,7 @@ import java.util.Map;
 public class ResultView {
 
     public static void printPurchaseInfo(LottoBundle lottoBundle) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottoBundle.lottoCount()));
+        System.out.printf("%d개를 구매했습니다.", lottoBundle.lottoCount());
         printLottoNumbers(lottoBundle.lottoList());
     }
 
@@ -33,16 +33,16 @@ public class ResultView {
             LottoResult lottoResult = entry.getKey();
             int count = entry.getValue();
             profitPrice += lottoResult.prize() * count;
-            System.out.println(
-                    String.format("%d개 일치%s (%d원) - %d개",
-                            lottoResult.matchCount(),
-                            lottoResult.matchBonus() ? ", 보너스 볼 일치" : "",
-                            lottoResult.prize(),
-                            count)
+            System.out.printf(
+                    "%d개 일치%s (%d원) - %d개\n",
+                    lottoResult.matchCount(),
+                    lottoResult.matchBonus() ? ", 보너스 볼 일치" : "",
+                    lottoResult.prize(),
+                    count
             );
         }
 
-        System.out.println(String.format("총 수익률은 %.2f입니다.", ProfitCalculator.calculateProfitRate(purchasePrice, profitPrice)));
+        System.out.printf("총 수익률은 %.2f입니다.\n", ProfitCalculator.calculateProfitRate(purchasePrice, profitPrice));
     }
 
 }
