@@ -13,19 +13,17 @@ import java.util.Map;
 
 public class LottoController {
 
-    private static InputView inputView = new InputView();
-    private static ResultView resultView = new ResultView();
-    private static LottoGenerator lottoRandomGenerator = new LottoRandomGenerator();
-
     public static void main(String[] args) {
-        int purchasePrice = inputView.askPurchasePrice();
+        int purchasePrice = InputView.askPurchasePrice();
 
+        LottoGenerator lottoRandomGenerator = new LottoRandomGenerator();
         LottoBundle lottoBundle = new LottoBundle(lottoRandomGenerator, purchasePrice);
-        resultView.printPurchaseInfo(lottoBundle);
+        ResultView.printPurchaseInfo(lottoBundle);
 
-        Lotto winningLotto = inputView.askLottoWinningNumbers();
-        int bonusNumber = inputView.askBonusNumber();
+        Lotto winningLotto = InputView.askLottoWinningNumbers();
+        int bonusNumber = InputView.askBonusNumber();
         Map<LottoResult, Integer> lottoResults = lottoBundle.checkWinningResult(new WinningLotto(winningLotto, bonusNumber));
-        resultView.printWinningStatistics(purchasePrice, lottoResults);
+        ResultView.printWinningStatistics(purchasePrice, lottoResults);
     }
+
 }

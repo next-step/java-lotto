@@ -10,19 +10,19 @@ import java.util.Map;
 
 public class ResultView {
 
-    public void printPurchaseInfo(LottoBundle lottoBundle) {
+    public static void printPurchaseInfo(LottoBundle lottoBundle) {
         System.out.println(String.format("%d개를 구매했습니다.", lottoBundle.lottoCount()));
         printLottoNumbers(lottoBundle.lottoList());
     }
 
-    private void printLottoNumbers(List<Lotto> lottoList) {
+    private static void printLottoNumbers(List<Lotto> lottoList) {
         for (Lotto lotto : lottoList) {
             System.out.println(lotto.numbers().toString());
         }
         System.out.println();
     }
 
-    public void printWinningStatistics(int purchasePrice, Map<LottoResult, Integer> lottoResults) {
+    public static void printWinningStatistics(int purchasePrice, Map<LottoResult, Integer> lottoResults) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 

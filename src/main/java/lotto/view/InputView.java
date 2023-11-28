@@ -11,12 +11,12 @@ public class InputView {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public int askPurchasePrice() {
-            System.out.println("구입금액을 입력해 주세요.");
-            return scanInt();
+    public static int askPurchasePrice() {
+        System.out.println("구입금액을 입력해 주세요.");
+        return scanInt();
     }
 
-    public Lotto askLottoWinningNumbers() {
+    public static Lotto askLottoWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return new Lotto(parseInt(asList(split(scanner.nextLine()))));
     }
@@ -42,7 +42,7 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-    public int askBonusNumber() {
+    public static int askBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return scanInt();
     }
