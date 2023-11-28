@@ -8,7 +8,6 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoShop;
 import lotto.domain.LottoShopFactory;
-import lotto.domain.LottoType;
 import lotto.domain.LottoWallet;
 import lotto.domain.MoneyWallet;
 import lotto.domain.StatisticsReport;
@@ -43,7 +42,7 @@ public class LottoController {
         int bonusBall = inputView.bonusBallInit();
         WinningLotto winningLotto = WinningLotto.of(Lotto.winning(lastWeekLottoNumbers), new LottoNumber(bonusBall));
 
-        StatisticsReport report = StatisticsReport.of(lottoWallet).report(winningLotto);
+        StatisticsReport report = StatisticsReport.from(lottoWallet, winningLotto);
         resultView.resultOut(report);
         resultView.out(report.rate());
     }
