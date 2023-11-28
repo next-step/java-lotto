@@ -24,11 +24,6 @@ public class LottoNumber {
         this.value = value;
     }
 
-    private LottoNumber(Integer value) {
-        validateLottoNumber(value);
-        this.value = value;
-    }
-
     public static LottoNumber valueOf(int number) {
         return Optional.ofNullable(lottoNumberPool.get(number))
                 .orElseThrow(() -> new IllegalStateException(LOTTO_NUMBER_OUT_OF_RANGE_EXCEPTION));
