@@ -49,7 +49,7 @@ public class MoneyTest {
     @ParameterizedTest
     @DisplayName("돈으로 몇 개의 로또를 살 수 있는지 알려준다.")
     @CsvSource(value = {"3000, 3", "1000, 1"})
-    void change_to_lotto_cnt(long given, long expected) {
+    void change_to_lotto_count(long given, long expected) {
         // given
         Money money = new Money(given);
 
@@ -58,5 +58,18 @@ public class MoneyTest {
 
         // then
         assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("자동으로 구매할 로또 갯수를 알려준다.")
+    void inform_automatic_purchased_lotto_count() {
+        // given
+        Money money = new Money(14000);
+
+        // when
+        long result = money.calculateAutomaticLottoCount(3);
+
+        // then
+        assertThat(result).isEqualTo(11);
     }
 }
