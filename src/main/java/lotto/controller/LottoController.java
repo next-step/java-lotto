@@ -10,9 +10,11 @@ import lotto.domain.RankResult;
 import lotto.domain.WinnerLotto;
 import lotto.domain.WinnerLottoGenerator;
 import lotto.domain.YieldCalculator;
-import lotto.dto.CreateRankStatisticsDto;
+import lotto.dto.BuyLottosRq;
+import lotto.dto.CreateRankStatisticsRq;
 import lotto.dto.LottosDto;
-import lotto.dto.RankStatisticsDto;
+import lotto.dto.CreateRankStatisticsRs;
+import lotto.dto.BuyLottosRs;
 
 public class LottoController {
     private final ManualLottoMachine manualLottoMachine;
@@ -23,22 +25,24 @@ public class LottoController {
         this.automaticLottoMachine = automaticLottoMachine;
     }
 
-    public long numberOfAutomaticLottos(long cost, long manualLottoCount) {
-        return new Money(cost).calculateAutomaticLottoCount(manualLottoCount);
+    public long numberOfAllLottos(long cost) {
+        return new Money(cost).lottoQuantity();
     }
 
-    public LottosDto buyLottos(List<List<Integer>> manualLottos, long automaticLottoCount) {
-        Lottos manualPurachasedLottos = manualLottoMachine.createLottos(manualLottos);
+    public BuyLottosRs buyLottos(BuyLottosRq buyLottosRq) {
+        Lottos manualPurachasedLottos = manualLottoMachine.createLottos(buyLottosRq.getManualLottos());
+        long automaticLottoCount = buyLottosRq.getNumberOfAllLottos() - buyLottosRq.getManualLottoCount();
         Lottos automaticPurchasedLottos = automaticLottoMachine.createLottos(automaticLottoCount);
-        return LottosDto.valueOf(manualPurachasedLottos, automaticPurchasedLottos);
+        LottosDto lottosDto = LottosDto.valueOf(manualPurachasedLottos, automaticPurchasedLottos);
+        return new BuyLottosRs(lottosDto, automaticLottoCount);
     }
 
-    public RankStatisticsDto informRankStatistics(CreateRankStatisticsDto createRankStatisticsDto) {
-        RankResult rankResult = createLottoWinningStatistics(createRankStatisticsDto.getWinnerLotto(),
-                createRankStatisticsDto.getBonusNumber())
-                .informStatistics(createRankStatisticsDto.getLottosDto().toLottos());
-        double yield = YieldCalculator.calculate(createRankStatisticsDto.getCost(), rankResult);
-        return RankStatisticsDto.valueOf(rankResult, yield);
+    public CreateRankStatisticsRs informRankStatistics(CreateRankStatisticsRq createRankStatisticsRq) {
+        RankResult rankResult = createLottoWinningStatistics(createRankStatisticsRq.getWinnerLotto(),
+                createRankStatisticsRq.getBonusNumber())
+                .informStatistics(createRankStatisticsRq.getLottosDto().toLottos());
+        double yield = YieldCalculator.calculate(createRankStatisticsRq.getCost(), rankResult);
+        return CreateRankStatisticsRs.valueOf(rankResult, yield);
     }
 
     private LottoWinningStatistics createLottoWinningStatistics(List<Integer> lotto, int bonusNumber) {
