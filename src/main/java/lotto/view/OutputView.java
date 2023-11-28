@@ -2,15 +2,15 @@ package lotto.view;
 
 import java.util.List;
 import java.util.Map;
-import lotto.model.LottoNumber;
+import lotto.model.LottoNumbers;
 import lotto.model.LottoRank;
 
 public class OutputView {
 
-    public void printLotto(List<LottoNumber> lottoNumberList) {
-        System.out.println(lottoNumberList.size() + "개를 구매했습니다.");
-        for (LottoNumber lottoNumber : lottoNumberList) {
-            System.out.println(lottoNumber);
+    public void printLotto(List<LottoNumbers> lottoNumbersList) {
+        System.out.println(lottoNumbersList.size() + "개를 구매했습니다.");
+        for (LottoNumbers lottoNumbers : lottoNumbersList) {
+            System.out.println(lottoNumbers);
         }
         System.out.println();
     }

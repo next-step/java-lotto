@@ -3,13 +3,13 @@ package lotto.model;
 import java.util.HashSet;
 import java.util.List;
 
-public class LottoNumber {
+public class LottoNumbers {
 
     private static final int LOTTO_NUMBER_SIZE = 6;
 
     private final List<Integer> lottoNumbers;
 
-    public LottoNumber(List<Integer> lottoNumbers) {
+    public LottoNumbers(List<Integer> lottoNumbers) {
         validateLottoNumberSize(lottoNumbers);
         validateLottoNumberDuplicate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;

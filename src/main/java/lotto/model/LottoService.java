@@ -26,7 +26,7 @@ public class LottoService {
             numbers.add(Integer.parseInt(number));
         }
 
-        lottoResult.addRanks(lottoCollection.lottoRanks(new LottoNumber(numbers)));
+        lottoResult.addRanks(lottoCollection.lottoRanks(new LottoNumbers(numbers)));
         lottoResult.calculateTotalWinningMoney();
         lottoResult.calculateReturnRate(totalMoney);
     }
@@ -39,7 +39,7 @@ public class LottoService {
         return lottoResult.returnRate();
     }
 
-    public List<LottoNumber> getLottoNumberList() {
+    public List<LottoNumbers> getLottoNumberList() {
         return lottoCollection.getLottoNumberList();
     }
 }
