@@ -7,16 +7,16 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class RandomNumbersGeneratorTest {
+class LottoGeneratorTest {
 
     @Test
     @DisplayName("랜덤 숫자 6개를 생성한다.")
     void create_random_numbers() {
         // given
-        RandomNumbersGenerator generator = new RandomNumbersGenerator(numbers -> given(), possibleNumbers());
+        LottoGenerator generator = new LottoGenerator(numbers -> given(), possibleNumbers());
 
         // when
-        List<LottoNumber> result = generator.createRandomNumbers();
+        List<LottoNumber> result = generator.createLotto();
 
         // then
         assertThat(result).isEqualTo(getExpected());

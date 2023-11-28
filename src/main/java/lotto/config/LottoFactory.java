@@ -6,9 +6,9 @@ import java.util.Scanner;
 import lotto.controller.LottoController;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoRandomNumberStrategy;
+import lotto.domain.RandomLottoNumberStrategy;
 import lotto.domain.RandomNumberStrategy;
-import lotto.domain.RandomNumbersGenerator;
+import lotto.domain.LottoGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -33,12 +33,12 @@ public class LottoFactory {
         return new LottoMachine(randomNumbersGenerator());
     }
 
-    private RandomNumbersGenerator randomNumbersGenerator() {
-        return new RandomNumbersGenerator(randomNumberStrategy(), createPossibleLottoNumbers());
+    private LottoGenerator randomNumbersGenerator() {
+        return new LottoGenerator(randomNumberStrategy(), createPossibleLottoNumbers());
     }
 
     private RandomNumberStrategy randomNumberStrategy() {
-        return new LottoRandomNumberStrategy();
+        return new RandomLottoNumberStrategy();
     }
 
     private List<LottoNumber> createPossibleLottoNumbers() {

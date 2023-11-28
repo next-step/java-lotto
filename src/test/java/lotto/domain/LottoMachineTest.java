@@ -13,7 +13,7 @@ public class LottoMachineTest {
     @DisplayName("원하는 로또 갯수로 로또 뭉치를 생성한다.")
     void create_lottos() {
         // given
-        LottoMachine lottoMachine = new LottoMachine(new RandomNumbersGenerator(numbers -> given(), possibleNumbers()));
+        LottoMachine lottoMachine = new LottoMachine(new LottoGenerator(numbers -> given(), possibleNumbers()));
 
         // when
         Lottos result = lottoMachine.createLottos(6);
