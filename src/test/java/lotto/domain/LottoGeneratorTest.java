@@ -13,10 +13,10 @@ class LottoGeneratorTest {
     @DisplayName("랜덤 숫자 6개를 생성한다.")
     void create_random_numbers() {
         // given
-        LottoGenerator generator = new LottoGenerator(numbers -> given(), possibleNumbers());
+        LottoGenerator generator = new LottoGenerator(numbers -> given());
 
         // when
-        List<LottoNumber> result = generator.createLotto();
+        List<LottoNumber> result = generator.createLotto(LottoNumber.allNumbers());
 
         // then
         assertThat(result).isEqualTo(getExpected());
@@ -31,14 +31,6 @@ class LottoGeneratorTest {
                 LottoNumber.valueOf(40),
                 LottoNumber.valueOf(42)
         );
-    }
-
-    private List<LottoNumber> possibleNumbers() {
-        List<LottoNumber> numbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            LottoNumber.valueOf(i);
-        }
-        return numbers;
     }
 
     private List<LottoNumber> getExpected() {

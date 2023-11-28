@@ -1,22 +1,15 @@
 package lotto.config;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import lotto.controller.LottoController;
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoNumber;
-import lotto.domain.RandomLottoNumberStrategy;
-import lotto.domain.RandomNumberStrategy;
 import lotto.domain.LottoGenerator;
+import lotto.domain.LottoMachine;
+import lotto.domain.LottoRandomNumberStrategy;
+import lotto.domain.RandomNumberStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoFactory {
-
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
-
     public InputView inputView() {
         return new InputView(scanner());
     }
@@ -30,24 +23,15 @@ public class LottoFactory {
     }
 
     private LottoMachine lottoMachine() {
-        return new LottoMachine(randomNumbersGenerator());
+        return new LottoMachine(lottoGenerator());
     }
 
-    private LottoGenerator randomNumbersGenerator() {
-        return new LottoGenerator(randomNumberStrategy(), createPossibleLottoNumbers());
+    private LottoGenerator lottoGenerator() {
+        return new LottoGenerator(randomNumberStrategy());
     }
 
     private RandomNumberStrategy randomNumberStrategy() {
-        return new RandomLottoNumberStrategy();
-    }
-
-    private List<LottoNumber> createPossibleLottoNumbers() {
-        List<LottoNumber> possibleLottoNumbers = new ArrayList<>();
-        for (int possibleLottoNumber = MIN_LOTTO_NUMBER; possibleLottoNumber <= MAX_LOTTO_NUMBER;
-             possibleLottoNumber++) {
-            possibleLottoNumbers.add(LottoNumber.valueOf(possibleLottoNumber));
-        }
-        return possibleLottoNumbers;
+        return new LottoRandomNumberStrategy();
     }
 
     public OutputView outputView() {

@@ -13,7 +13,7 @@ public class LottoMachineTest {
     @DisplayName("원하는 로또 갯수로 로또 뭉치를 생성한다.")
     void create_lottos() {
         // given
-        LottoMachine lottoMachine = new LottoMachine(new LottoGenerator(numbers -> given(), possibleNumbers()));
+        LottoMachine lottoMachine = new LottoMachine(new LottoGenerator(numbers -> given()));
 
         // when
         Lottos result = lottoMachine.createLottos(6);
@@ -31,14 +31,6 @@ public class LottoMachineTest {
                 LottoNumber.valueOf(40),
                 LottoNumber.valueOf(42)
         );
-    }
-
-    private List<LottoNumber> possibleNumbers() {
-        List<LottoNumber> numbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            LottoNumber.valueOf(i);
-        }
-        return numbers;
     }
 
     private Lottos createExpectedLottos() {

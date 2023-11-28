@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -41,6 +43,10 @@ public class LottoNumber {
 
     public int getLottoNumber() {
         return value;
+    }
+
+    public static List<LottoNumber> allNumbers() {
+        return new ArrayList<>(lottoNumberPool.values());
     }
 
     @Override

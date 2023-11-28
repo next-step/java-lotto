@@ -5,14 +5,12 @@ import java.util.List;
 
 public class LottoGenerator {
     private final RandomNumberStrategy randomNumberStrategy;
-    private final List<LottoNumber> possibleLottoNumbers;
 
-    public LottoGenerator(RandomNumberStrategy randomNumberStrategy, List<LottoNumber> possibleLottoNumbers) {
+    public LottoGenerator(RandomNumberStrategy randomNumberStrategy) {
         this.randomNumberStrategy = randomNumberStrategy;
-        this.possibleLottoNumbers = possibleLottoNumbers;
     }
 
-    public List<LottoNumber> createLotto() {
+    public List<LottoNumber> createLotto(List<LottoNumber> possibleLottoNumbers) {
         shuffleTotalLottoNumbers(possibleLottoNumbers);
         return randomNumberStrategy.getRandomNumbers(possibleLottoNumbers);
     }

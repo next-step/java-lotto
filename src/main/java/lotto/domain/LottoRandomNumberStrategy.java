@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RandomLottoNumberStrategy implements RandomNumberStrategy {
+public class LottoRandomNumberStrategy implements RandomNumberStrategy {
 
     private static final int REQUIRED_RANDOM_NUMBERS_SIZE = 6;
 
