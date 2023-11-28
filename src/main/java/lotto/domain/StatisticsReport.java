@@ -24,7 +24,7 @@ public class StatisticsReport {
     }
 
     public BigDecimal rate() {
-        int totalPurchasePrice = LottoShopFactory.LOTTO_PRICE * this.lottoWallet.totalTicketCount();
+        int totalPurchasePrice = LottoShop.LOTTO_PRICE * this.lottoWallet.totalTicketCount();
         return BigDecimal.valueOf(totalPrize())
             .divide(BigDecimal.valueOf(totalPurchasePrice), 2, RoundingMode.HALF_UP)
             .stripTrailingZeros();

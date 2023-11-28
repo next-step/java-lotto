@@ -1,12 +1,10 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LottoShop {
+
+    public static final int LOTTO_PRICE = 1000;
     private MoneyWallet moneyWallet;
     private final LottoShopFactory lottoShopFactory;
 
@@ -15,12 +13,27 @@ public class LottoShop {
         this.lottoShopFactory = lottoShopFactory;
     }
 
-    public static LottoShop from(MoneyWallet moneyWallet, LottoShopFactory lottoShopFactory) {
-        return new LottoShop(moneyWallet, lottoShopFactory);
+    public static LottoShop from(MoneyWallet moneyWallet) {
+        return new LottoShop(moneyWallet, new LottoShopFactory());
     }
 
-    public LottoWallet purchase() {
-        return new LottoWallet(lottoShopFactory.createLottos(moneyWallet));
+    public LottoWallet purchase(List<List<String>> manuallyLotto) {
+        List<Lotto> manuallyPurchaseLotto = lottoShopFactory.purchase(new ManuallyPurchase(manuallyLotto));
+        moneyDraw(LOTTO_PRICE * manuallyPurchaseLotto.size());
+
+        List<Lotto> autoPurchaseLotto = lottoShopFactory.purchase(new AutoPurchase(autoPurchaseCount(manuallyPurchaseLotto)));
+        moneyDraw(LOTTO_PRICE * autoPurchaseLotto.size());
+
+        manuallyPurchaseLotto.addAll(autoPurchaseLotto);
+        return new LottoWallet(manuallyPurchaseLotto);
+    }
+
+    private void moneyDraw(int money) {
+        moneyWallet = moneyWallet.withdraw(money);
+    }
+
+    private int autoPurchaseCount(List<Lotto> manuallyPurchaseLotto) {
+        return moneyWallet.balance() / LOTTO_PRICE;
     }
 
 }

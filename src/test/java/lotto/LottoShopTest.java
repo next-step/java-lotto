@@ -4,10 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import lotto.domain.Lotto;
 import lotto.domain.LottoShop;
 import lotto.domain.LottoShopFactory;
 import lotto.domain.LottoWallet;
@@ -21,8 +17,8 @@ public class LottoShopTest {
     @Test
     void createLottoTicketAsYouWant() {
         int money = 1000;
-        LottoShop lottoShop = LottoShop.from(MoneyWallet.of(money), LottoShopFactory.of(Collections.emptyList()));
-        LottoWallet lottoWallet = lottoShop.purchase();
+        LottoShop lottoShop = LottoShop.from(MoneyWallet.of(money));
+        LottoWallet lottoWallet = lottoShop.purchase(List.of(Collections.emptyList()));
         assertThat(lottoWallet.totalTicketCount()).isEqualTo(1);
     }
 

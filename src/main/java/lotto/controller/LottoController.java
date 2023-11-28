@@ -33,8 +33,8 @@ public class LottoController {
         int money = inputView.lottoInitCount();
         List<List<String>> manuallyLotto = inputView.manuallyLottoInit();
 
-        LottoShop lottoShop = LottoShop.from(MoneyWallet.of(money), LottoShopFactory.of(manuallyLotto));
-        LottoWallet lottoWallet = lottoShop.purchase();
+        LottoShop lottoShop = LottoShop.from(MoneyWallet.of(money));
+        LottoWallet lottoWallet = lottoShop.purchase(manuallyLotto);
         resultView.calculateResult(lottoWallet.totalTicketCount());
         resultView.out(lottoWallet);
 
