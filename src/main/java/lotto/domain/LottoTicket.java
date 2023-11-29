@@ -7,23 +7,20 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import lotto.domain.strategy.GenerateStrategy;
-
 public class LottoTicket {
     private static final int NUMBERS_COUNT = 6;
     private Set<LottoNumber> numbers;
-
-    public LottoTicket(GenerateStrategy strategy) {
-        numbers = new LinkedHashSet<>();
-        this.numbers = strategy.generate();
-        isNumbersSizeEqCount();
-    }
 
     public LottoTicket(Set<Integer> nums) {
         numbers = new LinkedHashSet<>();
         for (Integer num : nums) {
             numbers.add(new LottoNumber(num));
         }
+        isNumbersSizeEqCount();
+    }
+
+    public LottoTicket(Set<LottoNumber> lottoNumbers) {
+        this.numbers = lottoNumbers;
         isNumbersSizeEqCount();
     }
 

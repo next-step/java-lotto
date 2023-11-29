@@ -5,15 +5,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.domain.strategy.GenerateStrategy;
-
 public class LottoTickets {
-    private final List<LottoTicket> lottoTickets = new ArrayList<>();
+    private List<LottoTicket> lottoTickets = new ArrayList<>();
 
-    public LottoTickets(int ticketQuantity, GenerateStrategy strategy) {
+    public LottoTickets(int ticketQuantity) {
         for (int i = 0; i < ticketQuantity; i++) {
-            lottoTickets.add(new LottoTicket(strategy));
+            lottoTickets.add(new LottoTicket());
         }
+    }
+
+    public LottoTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
     }
 
     public List<LottoTicket> getLottoTickets() {
