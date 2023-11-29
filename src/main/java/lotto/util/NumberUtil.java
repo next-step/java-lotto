@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 public class NumberUtil {
     private static final Random random = new Random();
 
+    private NumberUtil() {
+    }
+
     public static Integer randomNum() {
         return random.nextInt(45) + 1;
     }
