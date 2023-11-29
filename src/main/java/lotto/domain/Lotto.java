@@ -7,6 +7,7 @@ import java.util.*;
 public class Lotto {
     public static final int PRICE = 1000;
     private List<LottoNumbers> lottoNumbers = new ArrayList<>();
+    private int manualCount = 0;
 
     public Lotto() {
     }
@@ -15,21 +16,14 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public void sellLotto(long amount, List<List<Integer>> manualNumbersList) {
-        if (manualNumbersList == null) {
-            manualNumbersList = new ArrayList<>();
-        }
-        validatePurchaseAmount(amount, (long) manualNumbersList.size() * PRICE);
+    public Lotto(List<LottoNumbers> lottoNumbers, int manualCount) {
+        this.lottoNumbers = lottoNumbers;
+        this.manualCount = manualCount;
+    }
 
-        for (List<Integer> numbers : manualNumbersList) {
-            addLottoNumbers(numbers);
-            amount -= PRICE;
-        }
-
-        while (amount >= PRICE) {
-            addLottoNumbers();
-            amount -= PRICE;
-        }
+    public static Lotto sellLotto(long amount, List<List<Integer>> manualNumbersList) {
+        validatePurchaseAmount(manualNumbersList, amount / PRICE);
+        return new Lotto(addTicktes(manualNumbersList, amount / PRICE), manualNumbersList == null ? 0 : manualNumbersList.size());
     }
 
     public EnumMap<Rank, Integer> makeStatistics(WinningNumbers winningLottoNumbers) {
@@ -60,6 +54,9 @@ public class Lotto {
         return this.lottoNumbers.size();
     }
 
+    public int manualCount() {
+        return this.manualCount;
+    }
 
     public List<LottoNumbers> getLottoNumbers() {
         return Collections.unmodifiableList(this.lottoNumbers);
@@ -71,17 +68,26 @@ public class Lotto {
         }
     }
 
-    private void validatePurchaseAmount(long amount, long requiredAmount) {
-        if (amount < requiredAmount) {
+    private static List<LottoNumbers> addTicktes(List<List<Integer>> manualNumbersList, long availableCount) {
+        if (manualNumbersList == null) {
+            manualNumbersList = new ArrayList<>();
+        }
+
+        List<LottoNumbers> tickets = new ArrayList<>();
+        for (List<Integer> numbers : manualNumbersList) {
+            tickets.add(new LottoNumbers(numbers));
+        }
+
+        for (int i = 0; i < availableCount - manualNumbersList.size(); i++) {
+            tickets.add(new LottoNumbers());
+        }
+
+        return tickets;
+    }
+
+    private static void validatePurchaseAmount(List<List<Integer>> manualNumbersList, long availableCount) {
+        if (manualNumbersList != null && availableCount < manualNumbersList.size()) {
             throw new IllegalArgumentException("구매금액을 넘는 로또를 구매할 수 없습니다.");
         }
-    }
-
-    private void addLottoNumbers() {
-        this.lottoNumbers.add(new LottoNumbers());
-    }
-
-    private void addLottoNumbers(List<Integer> numbers) {
-        this.lottoNumbers.add(new LottoNumbers(numbers));
     }
 }

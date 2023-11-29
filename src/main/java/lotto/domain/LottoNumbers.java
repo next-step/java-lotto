@@ -1,20 +1,32 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 
 public class LottoNumbers {
     public static final int COUNT = 6;
-    private static final List<LottoNumber> RANGE_LOTTO_NUMBERS = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER).boxed().map(LottoNumber::new).collect(Collectors.toList());
+
+    private static final List<LottoNumber> SUFFLED_LOTTO_NUMBER_LIST =
+            IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
+                    .boxed()
+                    .map(LottoNumber::new)
+                    .collect(Collectors.toList());
+    private static final Map<Integer, LottoNumber> RANGE_LOTTO_NUMBER_MAP =
+            IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
+                    .boxed()
+                    .map(LottoNumber::new)
+                    .collect(Collectors.toMap(LottoNumber::toInt, Function.identity()));
+
 
     private final Set<LottoNumber> numbers;
 
     // 랜덤 생성
     public LottoNumbers() {
-        Collections.shuffle(RANGE_LOTTO_NUMBERS);
-        this.numbers = new TreeSet<>(RANGE_LOTTO_NUMBERS.subList(0, COUNT));
+        Collections.shuffle(SUFFLED_LOTTO_NUMBER_LIST);
+        this.numbers = new TreeSet<>(SUFFLED_LOTTO_NUMBER_LIST.subList(0, COUNT));
     }
 
     // 수동 생성
@@ -22,7 +34,7 @@ public class LottoNumbers {
         this.validateCount(numbers);
         this.numbers = numbers
                 .stream()
-                .map(LottoNumber::new)
+                .map(number -> RANGE_LOTTO_NUMBER_MAP.getOrDefault(number, new LottoNumber(number)))
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 

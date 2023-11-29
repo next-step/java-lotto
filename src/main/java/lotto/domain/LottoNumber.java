@@ -11,6 +11,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = input;
     }
 
+    public int toInt() {
+        return this.number;
+    }
+
     private void validateNumber(int input) {
         if (input < MIN_NUMBER || input > MAX_NUMBER) {
             throw new IllegalArgumentException(String.format("%d부터 %d사이의 숫자여야합니다 : %d", MIN_NUMBER, MAX_NUMBER, input));
