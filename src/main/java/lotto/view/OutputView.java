@@ -27,9 +27,9 @@ public class OutputView {
             if (t == null) {
                 t = 0;
             }
-            String result = lottoRank.rank() + "개 일치 (" + lottoRank.money() + "원) - " + t + "개";
+            String result = lottoRank.matchCount() + "개 일치 (" + lottoRank.money() + "원) - " + t + "개";
             if (lottoRank.equals(LottoRank.SECOND)) {
-                result = lottoRank.rank() + "개 일치, 보너스 볼 일치 (" + lottoRank.money() + "원) - " + t + "개";
+                result = lottoRank.matchCount() + "개 일치, 보너스 볼 일치 (" + lottoRank.money() + "원) - " + t + "개";
             }
             System.out.println(result);
         }

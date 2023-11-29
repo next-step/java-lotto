@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.LottoService;
 import lotto.model.RandomGenerator;
@@ -13,16 +14,17 @@ public class MainController {
         InputView input = new InputView();
         OutputView outputView = new OutputView();
 
+        int totalMoney = Integer.parseInt(input.money());
         LottoService lottoService = new LottoService(
-            Integer.parseInt(input.money()), new RandomGenerator()
+            totalMoney, new RandomGenerator()
         );
         outputView.printLotto(lottoService.getLottoNumberList());
 
-        lottoService.drawLotto(
-            Arrays.stream(input.winningNumbers().split(", "))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList())
-            , Integer.parseInt(input.bonusNumber()));
+        List<Integer> winningNumbers = Arrays.stream(input.winningNumbers().split(", "))
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
+        int bonusNumber = Integer.parseInt(input.bonusNumber());
+        lottoService.drawLotto(winningNumbers, bonusNumber);
 
         outputView.printStatistics(lottoService.totalWinningStatistics(),
             lottoService.returnRate());

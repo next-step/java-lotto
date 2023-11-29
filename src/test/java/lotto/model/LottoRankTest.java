@@ -8,6 +8,6 @@ class LottoRankTest {
 
     @Test
     void rank() {
-        assertThat(LottoRank.valueOf(5, 1)).isEqualTo(LottoRank.SECOND);
+        assertThat(LottoRank.valueOf(5, true)).isEqualTo(LottoRank.SECOND);
     }
 }

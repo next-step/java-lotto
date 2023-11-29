@@ -3,8 +3,8 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class RandomGenerator {
 
@@ -19,8 +19,8 @@ public class RandomGenerator {
 
     public List<Integer> generate() {
         Collections.shuffle(numbers);
-        return IntStream.range(0, 6).mapToObj(numbers::get)
-            .sorted()
-            .collect(Collectors.toList());
+        List<Integer> result = new ArrayList<>(numbers.subList(0, 6));
+        Collections.sort(result);
+        return result;
     }
 }

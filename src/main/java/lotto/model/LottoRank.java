@@ -1,24 +1,22 @@
 package lotto.model;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public enum LottoRank {
 
-    FIFTH(3, 5_000),
-    FOURTH(4, 50_000),
-    THIRD(5, 1_500_000),
-    SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     MISS(0, 0);
 
 
-    private final long rank;
+    private final long matchCount;
     private final int money;
 
     LottoRank(long rank, int money) {
-        this.rank = rank;
+        this.matchCount = rank;
         this.money = money;
     }
 
@@ -26,20 +24,21 @@ public enum LottoRank {
         return this.money;
     }
 
-    public long rank() {
-        return this.rank;
+    public long matchCount() {
+        return this.matchCount;
     }
 
-    public static LottoRank valueOf(long rank, long matchBonusNumber) {
-        if (matchBonusNumber > 0) {
-            return Arrays.stream(values())
-                .sorted(Collections.reverseOrder())
-                .filter(lottoRank -> lottoRank.rank() == rank)
-                .findAny()
-                .orElse(LottoRank.MISS);
+    public static LottoRank valueOf(long rank, boolean matchBonusNumber) {
+        if (matchBonusNumber) {
+            return matchRank(lottoRank -> lottoRank.matchCount() == rank);
         }
+        return matchRank(
+            lottoRank -> lottoRank.matchCount() == rank && lottoRank != LottoRank.SECOND);
+    }
+
+    private static LottoRank matchRank(Conditional conditional) {
         return Arrays.stream(values())
-            .filter(lottoRank -> lottoRank.rank() == rank)
+            .filter(conditional::test)
             .findAny()
             .orElse(LottoRank.MISS);
     }

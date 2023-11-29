@@ -19,6 +19,19 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
+    public long matchCount(WinningNumbers winningNumbers) {
+        return this.lottoNumbers
+            .stream()
+            .filter(winningNumbers::contains)
+            .count();
+    }
+
+    public boolean matchBonusNumber(WinningNumbers winningNumbers) {
+        return this.lottoNumbers
+            .stream()
+            .anyMatch(winningNumbers::matchBonusNumber);
+    }
+
     public boolean contains(int lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
     }
