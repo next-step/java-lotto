@@ -36,7 +36,7 @@ class LottosResultTest {
     @Test
     @DisplayName("profitRate_5개 중 1개, 5등 1개 당첨_1.0")
     void profitRate() {
-        Lotto winningLotto = new Lotto(List.of(11, 12, 13, 0, 0, 0));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(11, 12, 13, 0, 0, 0)), 0);
         LottosResult lottosResult = new LottosResult(lottos, winningLotto);
         assertThat(lottosResult.profitRate()).isEqualTo(1.0);
     }
@@ -44,7 +44,7 @@ class LottosResultTest {
     @Test
     @DisplayName("isLoss_5개 중 1개, 5등 1개 당첨_false")
     void isLoss() {
-        Lotto winningLotto = new Lotto(List.of(0, 0, 0, 10, 11, 12));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(0, 0, 0, 10, 11, 12)), 0);
         LottosResult lottosResult = new LottosResult(lottos, winningLotto);
         assertThat(lottosResult.isLoss()).isFalse();
     }
@@ -52,11 +52,12 @@ class LottosResultTest {
     @Test
     @DisplayName("countByRanking_Raking value_ranking 값이 일치하는 lotto 갯수")
     void countWinner() {
-        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), 10);
         LottosResult lottosResult = new LottosResult(lottos, winningLotto);
 
         assertThat(lottosResult.countByRanking(Ranking.FIRST)).isEqualTo(1);
-        assertThat(lottosResult.countByRanking(Ranking.THIRD)).isEqualTo(1);
+        assertThat(lottosResult.countByRanking(Ranking.SECOND)).isEqualTo(1);
+        assertThat(lottosResult.countByRanking(Ranking.THIRD)).isEqualTo(0);
         assertThat(lottosResult.countByRanking(Ranking.FOURTH)).isEqualTo(1);
         assertThat(lottosResult.countByRanking(Ranking.FIFTH)).isEqualTo(1);
         assertThat(lottosResult.countByRanking(Ranking.NOT_RANKED)).isEqualTo(1);

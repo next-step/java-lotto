@@ -5,19 +5,19 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoGenerator {
-    private final int amount;
-    private final LottoNumbers lottoNumbers;
+	private final int amount;
+	private final LottoNumbers lottoNumbers;
 
-    public LottoGenerator(int amount, LottoNumbers lottoNumbers) {
-        this.amount = amount;
-        this.lottoNumbers = lottoNumbers;
-    }
+	public LottoGenerator(int amount, LottoNumbers lottoNumbers) {
+		this.amount = amount;
+		this.lottoNumbers = lottoNumbers;
+	}
 
-    public Lottos lottos() {
-        return new Lottos(generate());
-    }
-
-    private List<Lotto> generate() {
-        return Stream.generate(() -> new Lotto(lottoNumbers.lottoNumbers())).limit(amount).collect(Collectors.toList());
-    }
+	public Lottos generate() {
+		List<Lotto> lottos = Stream
+				.generate(() -> new Lotto(lottoNumbers.lottoNumbers()))
+				.limit(amount)
+				.collect(Collectors.toList());
+		return new Lottos(lottos);
+	}
 }

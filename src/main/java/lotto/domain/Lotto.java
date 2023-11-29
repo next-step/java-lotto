@@ -14,18 +14,10 @@ public class Lotto {
         return lotto;
     }
 
-    public int matchingCount(Lotto winningLotto) {
-        int matchingCount = 0;
-        for (int number : winningLotto.lotto()) {
-            matchingCount = increaseMatchingCount(matchingCount, number);
-        }
-        return matchingCount;
-    }
+    public Ranking ranking(WinningLotto winningLotto) {
+        int matchingCount = (int) lotto.stream().filter(winningLotto.lotto().lotto()::contains).count();
+        boolean hasBonusNumber = lotto.contains(winningLotto.bonusNumber());
 
-    private int increaseMatchingCount(int matchingCount, int number) {
-        if (lotto.contains(number)) {
-            matchingCount++;
-        }
-        return matchingCount;
+        return Ranking.of(matchingCount, hasBonusNumber);
     }
 }

@@ -7,7 +7,7 @@ import lotto.domain.Ranking;
 public class ConsoleResultView implements ResultView {
     @Override
     public void showLottos(Lottos lottos) {
-        lottos.lottos().forEach(lotto -> System.out.println(lotto.lotto()));
+        lottos.get().forEach(lotto -> System.out.println(lotto.lotto()));
         System.out.println();
     }
 
@@ -27,12 +27,16 @@ public class ConsoleResultView implements ResultView {
     }
 
     private void printProfitRate(LottosResult lottosResult) {
-        System.out.println("총 수익률은 " + lottosResult.profitRate() + "입니다.");
+        System.out.print("총 수익률은 " + lottosResult.profitRate() + "입니다.");
     }
 
     private void printRankingStat(LottosResult lottosResult) {
         for (Ranking ranking : Ranking.ranked()) {
-            System.out.print(ranking.matchingCount() + "개 일치(" + ranking.profit() + "원)- ");
+            System.out.print(ranking.matchingCount() + "개 일치");
+            if (ranking == Ranking.SECOND){
+                System.out.print(", 보너스볼 일치");
+            }
+            System.out.print("(" + ranking.profit() + "원)- ");
             System.out.print(lottosResult.countByRanking(ranking) + "개");
             System.out.println();
         }

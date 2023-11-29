@@ -15,10 +15,10 @@ public class LottoController {
 
     public void run() {
         int amount = inputView.purchase();
-        Lottos lottos = new LottoGenerator(amount, new RandomLottoNumbers()).lottos();
+        Lottos lottos = new LottoGenerator(amount, new RandomLottoNumbers()).generate();
         resultView.showLottos(lottos);
 
-        Lotto winningLotto = inputView.winningLotto();
+        WinningLotto winningLotto = inputView.winningLotto();
         resultView.winningStats(new LottosResult(lottos, winningLotto));
     }
 }
