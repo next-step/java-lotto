@@ -1,7 +1,5 @@
 package step2.domain;
 
-import step2.generator.LottoNumbersStrategy;
-
 import java.util.List;
 
 public class Lotto {

@@ -1,29 +1,19 @@
 package step2.domain;
 
 
-import static step2.domain.LottoWinGenerator.PRIZE_MAP;
-
 public class Prize {
 
-    private static final int NO_PRIZE = 0;
+    private final Money winningMoney;
 
-    private final int value;
+    private final Rank rank;
 
-    private final int lottoWinNumbers;
-
-    public int getValue() {
-        return value;
+    public Prize(int correctCount) {
+        this.rank = Rank.valueOf(correctCount);
+        this.winningMoney = rank.getWinningMoney();
     }
 
-
-    public Prize(int value) {
-        this.value = value;
-        this.lottoWinNumbers = PRIZE_MAP.get(value);
-    }
-
-
-    public boolean isWin() {
-        return lottoWinNumbers > NO_PRIZE;
+    public Rank getPrizeRank() {
+        return rank;
     }
 
 }

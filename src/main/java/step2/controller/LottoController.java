@@ -2,15 +2,10 @@ package step2.controller;
 
 import step2.domain.Lotto;
 import step2.domain.LottoGame;
-import step2.domain.WinPrizes;
-import step2.generator.Lotto45NumbersStrategy;
+import step2.domain.Prizes;
 import step2.service.LottoPrizeService;
 import step2.view.InputView;
 import step2.view.OutputView;
-
-import java.util.List;
-
-import static step2.generator.Lotto45NumbersStrategy.PICK_NUMBERS;
 
 public class LottoController {
 
@@ -29,8 +24,8 @@ public class LottoController {
     public void game() {
         LottoGame lottoGame = inputGame();
         Lotto winLotto = getWinLotto();
-        WinPrizes winPrizes = lottoGame.game(winLotto.getNumbers());
-        outputView.showPrize(winPrizes);
+        Prizes prizes = lottoGame.game(winLotto.getNumbers());
+        outputView.showPrize(prizes);
     }
 
     public LottoGame inputGame() {

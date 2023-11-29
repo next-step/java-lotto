@@ -1,7 +1,6 @@
 package step2.domain;
 
-public interface WinGenerator<T> {
+public interface WinGenerator {
 
-    Prize winPrize(T t);
-
+    boolean isWin(Rank rank);
 }

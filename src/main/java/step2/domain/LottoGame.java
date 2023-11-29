@@ -1,6 +1,6 @@
 package step2.domain;
 
-import step2.generator.LottoNumbersStrategy;
+import step2.generator.LottoNumbersMakeStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class LottoGame {
 
     public static LottoGame create(
             final int tryCount
-            , final LottoNumbersStrategy generator
+            , final LottoNumbersMakeStrategy generator
     ) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < tryCount; i++) {
@@ -29,21 +29,26 @@ public class LottoGame {
         return this.lottos;
     }
 
-    public WinPrizes game(List<Integer> prizeNumbers) {
-        WinPrizes winPrizes = new WinPrizes();
+    public Prizes game(List<Integer> prizeNumbers) {
+        Prizes prizes = new Prizes();
         for (Lotto lotto : lottos) {
-            getPrize(lotto, winPrizes, prizeNumbers);
+            getPrize(lotto, prizes, prizeNumbers);
         }
-        return winPrizes;
+        return prizes;
     }
 
-    private void getPrize(final Lotto lotto, final WinPrizes winPrizes, List<Integer> prizeNumbers) {
-        List<Integer> getNumbers = new ArrayList<>();
+    private void getPrize(final Lotto lotto, final Prizes prizes, List<Integer> prizeNumbers) {
+        List<Integer> prizeNumbers1 = new ArrayList<>();
         for (Integer number : lotto.getNumbers()) {
-            if (prizeNumbers.contains(number)) {
-                getNumbers.add(number);
-            }
+            getPrizeNumbers(number, prizeNumbers1);
         }
-        winPrizes.winPrize(new Prize(getNumbers.size()));
+        prizes.winPrize(new Prize(prizeNumbers1.size()));
+    }
+
+    private List<Integer> getPrizeNumbers(int number,  List<Integer> prizeNumbers) {
+        if (prizeNumbers.contains(number)) {
+            prizeNumbers.add(number);
+        }
+        return prizeNumbers;
     }
 }

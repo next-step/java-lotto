@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static step2.generator.Lotto45NumbersStrategy.PICK_NUMBERS;
+import static step2.generator.Lotto45NumbersMakeStrategy.PICK_NUMBERS;
 
 public class InputView {
 

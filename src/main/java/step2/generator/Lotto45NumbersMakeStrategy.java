@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Lotto45NumbersStrategy implements LottoNumbersStrategy {
+public class Lotto45NumbersMakeStrategy implements LottoNumbersMakeStrategy {
 
     private static final int MINIMUM_LOTTO_NUMBER = 1;
 
