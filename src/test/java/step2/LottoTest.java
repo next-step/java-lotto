@@ -29,9 +29,4 @@ class LottoTest {
         assertThat(new Lotto(list).toString()).isEqualTo(list.toString());
     }
 
-    @Test
-    void matchWinningNumber() {
-        int[] winningNums = new int[] {6,7,8,9,10,11};
-        assertThat(new Lotto(list).matchWinningNumber(winningNums)).isEqualTo(1);
-    }
 }

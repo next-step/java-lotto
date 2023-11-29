@@ -23,10 +23,10 @@ public class Lotto {
         this.lotto = lotto;
     }
 
-    public int matchWinningNumber(int[] winningNumber){
+    public int matchWinningNumber(Lotto winningNumber){
         int winningCount = 0;
-        for (int i : winningNumber) {
-            winningCount += hasNumber(i);
+        for (int i : lotto) {
+            winningCount += winningNumber.hasNumber(i);
         }
         return winningCount;
     }

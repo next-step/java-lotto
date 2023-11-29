@@ -12,7 +12,6 @@ public class InputView {
     public int inputPrice(){
         System.out.println("구입금액을 입력해 주세요.");
         String cal = scanner.nextLine();
-
         return stringToInteger(cal);
     }
 

@@ -1,43 +1,41 @@
 package step2;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Winnings {
 
-    private final Map<Integer, Integer> winnings;
+    private final Map<Prize, Integer> winnings;
+
     public Winnings() {
-        winnings = new HashMap<>();
-        winnings.put(3, 0);
-        winnings.put(4, 0);
-        winnings.put(5, 0);
-        winnings.put(6, 0);
+        this.winnings = new EnumMap<>(Prize.class);
+        winnings.put(Prize.UNKNOWN, 0);
+        winnings.put(Prize.THREE, 0);
+        winnings.put(Prize.FOUR, 0);
+        winnings.put(Prize.FIVE, 0);
+        winnings.put(Prize.SIX, 0);
     }
 
     public void addLottoValue(int key){
         if (checkLottoKey(key)){
-            int val = winnings.get(key);
-            winnings.put(key, val + 1);
+            int val = winnings.get(Prize.of(key));
+            winnings.put(Prize.of(key), val + 1);
         }
     }
 
     public void printWinnings(){
-        for (Integer key : winnings.keySet()) {
+        for (Prize key : winnings.keySet()) {
             int value = winnings.get(key);
-            System.out.println(key+"개 일치 ("+new Prize(key).findPrizeByWinningCount()+"원)- "+value+"개");
+            System.out.println(key.ordinal()+"개 일치 ("+ key.calculatePrize(key, 1)+"원)- "+value+"개");
         }
     }
 
-    public int getPrize(){
-        int prize = 0;
-        for (Integer key : winnings.keySet()) {
+    public int getTotal(){
+        int total = 0;
+        for (Prize key : winnings.keySet()) {
             int value = winnings.get(key);
-            PrizeType type = PrizeType.findPrizeType(key);
-            prize += type.calculate(value);
+            total += key.calculatePrize(key, value);
         }
-        return prize;
+        return total;
     }
 
     private boolean checkLottoKey(int key){

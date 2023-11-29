@@ -1,17 +1,18 @@
 package step2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WinningNumber {
 
     private WinningNumber() {
     }
 
-    public static int[] getWinnerNumberList(String winningNumber){
+    public static List<Integer> getWinnerNumberList(String winningNumber){
         String[] winningNumbers = winningNumber.split(",");
-        int[] result = new int[winningNumbers.length];
-        for (int i = 0; i < winningNumbers.length; i++) {
-            String winningNum = winningNumbers[i];
-            winningNum = winningNum.trim();
-            result[i] = Integer.parseInt(winningNum);
+        List<Integer> result = new ArrayList<>();
+        for (String number : winningNumbers) {
+            result.add(Integer.parseInt(number.trim()));
         }
         return result;
     }

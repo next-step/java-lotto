@@ -1,9 +1,7 @@
 package step2;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PlayLotto {
 
@@ -24,12 +22,12 @@ public class PlayLotto {
         }
     }
 
-    public int playLottos(int[] winningNumber){
+    public int playLottos(Lotto winningNumber){
         for (Lotto lotto : lottos) {
             int key = lotto.matchWinningNumber(winningNumber);
             winnings.addLottoValue(key);
         }
-        return winnings.getPrize();
+        return winnings.getTotal();
     }
 
     public void printWinnings(){

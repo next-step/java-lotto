@@ -20,8 +20,7 @@ public class Controller {
             resultView.printLottoCount(rounds);
             playLotto.printLottos();
 
-            int[] winningNumbers = WinningNumber.getWinnerNumberList(inputView.inputWinningNumber());
-            prize = playLotto.playLottos(winningNumbers);
+            prize = playLotto.playLottos(new Lotto(WinningNumber.getWinnerNumberList(inputView.inputWinningNumber())));
 
             resultView.printWinningStatics();
             playLotto.printWinnings();
