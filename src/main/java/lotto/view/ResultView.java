@@ -7,22 +7,26 @@ import lotto.util.ProfitCalculator;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public void printPurchaseInfo(LottoBundle lottoBundle) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottoBundle.lottoCount()));
+    public static void printPurchaseInfo(LottoBundle lottoBundle) {
+        System.out.printf("%d개를 구매했습니다.", lottoBundle.lottoCount());
         printLottoNumbers(lottoBundle.lottoList());
     }
 
-    private void printLottoNumbers(List<Lotto> lottoList) {
+    private static void printLottoNumbers(List<Lotto> lottoList) {
         for (Lotto lotto : lottoList) {
-            System.out.println(lotto.numbers().toString());
+            List<Integer> lottoNumbers = lotto.numbers().stream()
+                    .map(lottoNumber -> lottoNumber.value())
+                    .collect(Collectors.toList());
+            System.out.println(lottoNumbers);
         }
         System.out.println();
     }
 
-    public void printWinningStatistics(int purchasePrice, Map<LottoResult, Integer> lottoResults) {
+    public static void printWinningStatistics(int purchasePrice, Map<LottoResult, Integer> lottoResults) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
@@ -33,15 +37,16 @@ public class ResultView {
             LottoResult lottoResult = entry.getKey();
             int count = entry.getValue();
             profitPrice += lottoResult.prize() * count;
-            System.out.println(
-                    String.format("%d개 일치 (%d원)- %d개",
-                            lottoResult.matchCount(),
-                            lottoResult.prize(),
-                            count)
+            System.out.printf(
+                    "%d개 일치%s (%d원) - %d개\n",
+                    lottoResult.matchCount(),
+                    lottoResult.matchBonus() ? ", 보너스 볼 일치" : "",
+                    lottoResult.prize(),
+                    count
             );
         }
 
-        System.out.println(String.format("총 수익률은 %.2f입니다.", ProfitCalculator.calculateProfitRate(purchasePrice, profitPrice)));
+        System.out.printf("총 수익률은 %.2f입니다.\n", ProfitCalculator.calculateProfitRate(purchasePrice, profitPrice));
     }
 
 }

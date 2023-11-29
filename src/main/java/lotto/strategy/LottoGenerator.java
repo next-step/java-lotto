@@ -1,9 +1,9 @@
 package lotto.strategy;
 
-import java.util.List;
+import lotto.domain.Lotto;
 
 public interface LottoGenerator {
 
-    List<Integer> generate(int minLottoNumber, int maxLottoNumber, int lottoNumberCount);
+    Lotto generate();
 
 }

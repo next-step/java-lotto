@@ -1,27 +1,34 @@
 package lotto.domain;
 
-import lotto.strategy.LottoRandomGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoBundleTest {
+class WinningLottoTest {
+
+    @Test
+    void 로또번호_보너스번호_중복() {
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+        LottoNumber bonus = new LottoNumber(1);
+        assertThatThrownBy(() -> {
+            new WinningLotto(lotto, bonus);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 
     @ParameterizedTest
     @MethodSource("LottoResultProvider")
-    void 로또_당첨결과_확인(Lotto lotto, LottoResult lottoResult) {
-        LottoBundle lottoBundle = new LottoBundle(List.of(lotto));
-        WinningLotto winningLotto = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(7));
+    void 로또_당첨결과_확인(Lotto purchasedLotto, LottoResult expected) {
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+        LottoNumber bonus = new LottoNumber(7);
+        WinningLotto winningLotto = new WinningLotto(lotto, bonus);
 
-        Map<LottoResult, Integer> winningResult = lottoBundle.checkWinningResult(winningLotto);
-
-        assertThat(winningResult.get(lottoResult)).isEqualTo(1);
+        assertThat(winningLotto.getLottoResult(purchasedLotto)).isEqualTo(expected);
     }
 
     public static List<Arguments> LottoResultProvider() {
@@ -33,13 +40,6 @@ public class LottoBundleTest {
                 Arguments.of(new Lotto(1, 2, 3, 7, 8, 9), LottoResult.THREE),
                 Arguments.of(new Lotto(1, 2, 7, 8, 9, 10), LottoResult.FAIL)
         );
-    }
-
-    @Test
-    void 로또_여러개_구매() {
-        LottoBundle lottoBundle = new LottoBundle(new LottoRandomGenerator(), 5000);
-        assertThat(lottoBundle.lottoCount()).isEqualTo(5);
-        assertThat(lottoBundle.purchasedPrice()).isEqualTo(5000);
     }
 
 }

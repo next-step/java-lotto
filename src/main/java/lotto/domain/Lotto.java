@@ -1,49 +1,51 @@
 package lotto.domain;
 
-import lotto.strategy.LottoGenerator;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
-    private static final int LOTTO_NUMBER_COUNT = 6;
+    public static final int LOTTO_NUMBER_COUNT = 6;
 
-    private final List<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = numbers.stream().map(value -> new LottoNumber(value)).collect(Collectors.toList());
+        this.numbers = new TreeSet<>(parseLottoNumber(numbers));
         validate();
-    }
-
-    public Lotto(LottoGenerator lottoGenerator) {
-        this(lottoGenerator.generate(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, LOTTO_NUMBER_COUNT));
     }
 
     public Lotto(Integer... numbers) {
         this(Arrays.asList(numbers));
     }
 
+    private List<LottoNumber> parseLottoNumber(List<Integer> numbers) {
+        return numbers.stream()
+                .map(value -> new LottoNumber(value))
+                .collect(Collectors.toList());
+    }
+
     private void validate() {
-        Set<LottoNumber> lottoSet = Set.copyOf(this.numbers);
-        if (lottoSet.size() != LOTTO_NUMBER_COUNT) {
+        if (this.numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(String.format("로또숫자는 %d개이어야 합니다.", LOTTO_NUMBER_COUNT));
         }
     }
 
-    public LottoResult match(Lotto winningLotto) {
-        int matchCount = (int) numbers.stream()
-                .filter(number -> winningLotto.numbers.contains(number))
-                .count();
-        return LottoResult.findResult(matchCount);
+    public List<LottoNumber> numbers() {
+        return this.numbers.stream().collect(Collectors.toList());
     }
 
-    public List<Integer> numbers() {
-        return this.numbers.stream().map(lottoNumber -> lottoNumber.value()).collect(Collectors.toList());
+    public boolean hasNumber(LottoNumber lottoNumber) {
+        return this.numbers().contains(lottoNumber);
+    }
+
+    public int matchCount(Lotto winningLotto) {
+        return (int) winningLotto.numbers()
+                .stream()
+                .filter(value -> this.hasNumber(value))
+                .count();
     }
 
 }
