@@ -15,16 +15,32 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoServiceTest {
 
-    @DisplayName("로또리스트 생성 비교")
+    @DisplayName("수동생성")
     @Test
-    void 로또리스트생성() {
+    void 로또리스트수동생성() {
         List<Lotto> lottoList = new ArrayList<>();
 
-        lottoList.add(new Lotto(Arrays.asList(1,2,3,4,5,6)));
-        lottoList.add(new Lotto(Arrays.asList(1,2,3,4,5,6)));
-        lottoList.add(new Lotto(Arrays.asList(1,2,3,4,5,6)));
-        lottoList.add(new Lotto(Arrays.asList(1,2,3,4,5,6)));
-        lottoList.add(new Lotto(Arrays.asList(1,2,3,4,5,6)));
+        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+
+        LottoService lottoService = new LottoService(lottoList, new MatchPointRank());
+
+        assertThat(lottoService.getLottoList()).hasSize(5);
+    }
+
+    @DisplayName("자동생성")
+    @Test
+    void 로또리스트자동생성() {
+        List<Lotto> lottoList = new ArrayList<>();
+
+        lottoList.add(new Lotto());
+        lottoList.add(new Lotto());
+        lottoList.add(new Lotto());
+        lottoList.add(new Lotto());
+        lottoList.add(new Lotto());
 
         LottoService lottoService = new LottoService(lottoList, new MatchPointRank());
 
