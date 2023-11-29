@@ -25,12 +25,11 @@ public class Prizes {
             .collect(Collectors.toList());
     }
 
-    private int howManyGetPrize(int key) {
+    private int howManyGetPrize(int correctCount) {
         Map<Rank, List<Prize>> collect = prizeList.stream().collect(groupingBy(Prize::getPrizeRank));
-        if (collect.isEmpty()) {
-            System.out.println("뭐야");
+        if (collect.isEmpty() || collect.get(Rank.valueOf(correctCount)) == null) {
             return 0;
         }
-        return collect.get(Rank.valueOf(key)).size();
+        return collect.get(Rank.valueOf(correctCount)).size();
     }
 }

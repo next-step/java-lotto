@@ -16,4 +16,8 @@ public class Prize {
         return rank;
     }
 
+    public static Prize emptyPrize() {
+        return new Prize(Rank.MISS);
+    }
+
 }

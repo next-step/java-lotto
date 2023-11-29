@@ -2,6 +2,7 @@ package step2.controller;
 
 import step2.domain.Lotto;
 import step2.domain.LottoGame;
+import step2.domain.LottoWinGenerator;
 import step2.domain.Prizes;
 import step2.service.LottoPrizeService;
 import step2.view.InputView;
@@ -24,7 +25,8 @@ public class LottoController {
     public void game() {
         LottoGame lottoGame = inputGame();
         Lotto winLotto = getWinLotto();
-        Prizes prizes = lottoGame.game(winLotto.getNumbers());
+        LottoWinGenerator winGenerator = new LottoWinGenerator(winLotto.getNumbers());
+        Prizes prizes = lottoGame.game(winGenerator);
         outputView.showPrize(prizes);
     }
 

@@ -5,51 +5,44 @@ import step2.generator.LottoNumbersMakeStrategy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoGame {
 
     private final List<Lotto> lottos;
 
-    private final LottoWinGenerator generator;
 
-    public LottoGame(List<Lotto> lottos, LottoWinGenerator generator) {
+    public LottoGame(List<Lotto> lottos) {
         this.lottos = lottos;
-        this.generator = generator;
     }
 
     public static LottoGame create(
             final int tryCount
             , final LottoNumbersMakeStrategy numberMakeStrategy
-            , final LottoWinGenerator lottoWinGenerator
     ) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < tryCount; i++) {
             lottoList.add(Lotto.create(numberMakeStrategy.makeLottoNumber()));
         }
-        return new LottoGame(lottoList, lottoWinGenerator);
+        return new LottoGame(lottoList);
     }
 
     public List<Lotto> getLotto() {
         return this.lottos;
     }
 
-    public Prizes game(List<Integer> winNumbers) {
-        for (Lotto lotto : lottos) {
-            getPrizes(lotto, winNumbers);
-        }
-        return prizes;
+    public Prizes game(WinGenerator generator) {
+        return new Prizes(getPrizes(generator));
     }
 
-    private Prize getPrizes(final Lotto lotto, List<Integer> winNumbers) {
-        return lotto.stream()
-                .map(number -> new Prize(getRank(number, winNumbers)))
+    public void setWinNumbers(List<Integer> winNumbers) {
+//        generator.
+    }
+
+    public List<Prize> getPrizes(WinGenerator generator) {
+        return lottos.stream()
+                .map(generator::winPrize)
                 .collect(Collectors.toList());
-    }
-
-    public Prizes getPrizes() {
-        lottos.stream().map(lotto -> {
-            return Prize()
-        })
     }
 
     private Rank getRank(int number, List<Integer> winNumbers) {

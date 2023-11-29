@@ -14,7 +14,6 @@ class LottoGameTest {
     void tryNumber_getLotto() {
         LottoGame lottoGame = LottoGame.create(6
                 , new Lotto45NumbersMakeStrategy()
-                , new LottoWinGenerator()
         );
         Assertions.assertThat(lottoGame.getLotto().size()).isEqualTo(6);
     }

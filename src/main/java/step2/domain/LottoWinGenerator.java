@@ -16,10 +16,6 @@ public class LottoWinGenerator implements WinGenerator {
     }
 
     @Override
-    public boolean isWin(Rank rank) {
-        return false;
-    }
-
     public Prize winPrize(Lotto lotto) {
         List<Integer> resultNumber = new ArrayList<>();
         for (int number : lotto.getNumbers()) {
