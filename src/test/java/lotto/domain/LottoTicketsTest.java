@@ -2,7 +2,6 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.EnumMap;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -10,9 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import lotto.domain.strategy.AutoGenerateStrategy;
-import lotto.domain.strategy.GenerateStrategy;
-import lotto.domain.strategy.ManualGenerateStrategy;
+import lotto.domain.strategy.AutoLottoGenerator;
+import lotto.domain.strategy.LottoGenerator;
+import lotto.domain.strategy.ManualLottoGenerator;
 
 public class LottoTicketsTest {
 
@@ -20,7 +19,7 @@ public class LottoTicketsTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4})
     void create_ticket_in_quantity(int quantity) {
-        GenerateStrategy strategy = new AutoGenerateStrategy();
+        LottoGenerator strategy = new AutoLottoGenerator();
         LottoTickets lottoTickets = new LottoTickets(quantity, strategy);
         assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(quantity);
     }
@@ -28,7 +27,7 @@ public class LottoTicketsTest {
     @Test
     @DisplayName("로또를 검사한다.")
     void valid_tickets() {
-        GenerateStrategy strategy = new ManualGenerateStrategy(1, 2, 3, 4, 5, 6);
+        LottoGenerator strategy = new ManualLottoGenerator(1, 2, 3, 4, 5, 6);
         LottoTickets lottoTickets = new LottoTickets(1, strategy);
         LottoChecker lottoChecker = new LottoChecker(1, 2, 3, 4, 5, 6, 7);
         List<Rank> ranks = lottoTickets.checkTickets(lottoChecker);

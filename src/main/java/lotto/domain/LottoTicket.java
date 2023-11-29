@@ -11,14 +11,6 @@ public class LottoTicket {
     private static final int NUMBERS_COUNT = 6;
     private Set<LottoNumber> numbers;
 
-    public LottoTicket(Set<Integer> nums) {
-        numbers = new LinkedHashSet<>();
-        for (Integer num : nums) {
-            numbers.add(new LottoNumber(num));
-        }
-        isNumbersSizeEqCount();
-    }
-
     public LottoTicket(Set<LottoNumber> lottoNumbers) {
         this.numbers = lottoNumbers;
         isNumbersSizeEqCount();

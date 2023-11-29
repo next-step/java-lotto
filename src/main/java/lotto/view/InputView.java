@@ -32,12 +32,13 @@ public class InputView {
 
     public static String inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해주세요");
-        sc.nextLine();
         return sc.nextLine();
     }
 
     public static int inputBonusNumber() {
         System.out.println("보너스 번호를 입력해주세요.");
-        return sc.nextInt();
+        int bonusNumber = sc.nextInt();
+        sc.nextLine();
+        return bonusNumber;
     }
 }

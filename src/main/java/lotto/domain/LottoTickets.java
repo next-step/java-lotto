@@ -1,21 +1,19 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
-    private List<LottoTicket> lottoTickets = new ArrayList<>();
-
-    public LottoTickets(int ticketQuantity) {
-        for (int i = 0; i < ticketQuantity; i++) {
-            lottoTickets.add(new LottoTicket());
-        }
-    }
+    private List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
+    }
+
+    public LottoTickets add(LottoTickets lottoTickets) {
+        this.lottoTickets.addAll(lottoTickets.getLottoTickets());
+        return this;
     }
 
     public List<LottoTicket> getLottoTickets() {

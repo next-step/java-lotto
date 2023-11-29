@@ -8,11 +8,8 @@ import lotto.domain.Rank;
 import lotto.domain.LottoTicket;
 
 public class ResultView {
-    public static void showHowManyBuyTicket(int num) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(num);
-        sb.append("개 를 구매했습니다.");
-        System.out.println(sb);
+    public static void showHowManyBuyTicket(int manualQuantity, int autoQuantity) {
+        System.out.println("수동으로 " + manualQuantity + "장, 자동으로 " + autoQuantity + "장을 구매했습니다.");
     }
 
     public static void showLottoTickets(List<LottoTicket> lottoTickets) {

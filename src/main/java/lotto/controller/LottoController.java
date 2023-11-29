@@ -22,10 +22,11 @@ public class LottoController {
 
         List<LottoTicket> manualLottoTickets
             = StringSplitter.bulkConvertStrToLottoNumSet(InputView.inputManualNumbers(manualQuantity));
+        List<LottoTicket> autoLottoTickets = new AutoLottoGenerator().generate(autoQuantity);
+        LottoTickets lottoTickets
+            = new LottoTickets(manualLottoTickets).add(new LottoTickets(autoLottoTickets));
 
-        ResultView.showHowManyBuyTicket(ticketQuantity);
-
-        LottoTickets lottoTickets = new LottoTickets(ticketQuantity, new AutoLottoGenerator());
+        ResultView.showHowManyBuyTicket(manualQuantity, autoQuantity);
         ResultView.showLottoTickets(lottoTickets.getLottoTickets());
 
         Set<LottoNumber> winningNums = StringSplitter.convertStrToLottoNumSet(InputView.inputWinningNumbers());
