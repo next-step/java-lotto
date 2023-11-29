@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoShop;
+import lotto.domain.LottoShopFactory;
 import lotto.domain.LottoWallet;
 import lotto.domain.MoneyWallet;
 import lotto.domain.StatisticsReport;
@@ -19,7 +20,7 @@ public class LottoController {
     private final InputView inputView;
     private final ResultView resultView;
 
-    public LottoController(Scanner scanner, PrintStream out) {
+    private LottoController(Scanner scanner, PrintStream out) {
         this.inputView = new InputView(scanner, System.out);
         this.resultView = new ResultView(System.out);
     }
@@ -30,26 +31,22 @@ public class LottoController {
 
     public void start() {
         int money = inputView.lottoInitCount();
+        List<List<String>> manuallyLotto = inputView.manuallyLottoInit();
 
-        LottoWallet lottoWallet = purchaseLotto(money);
+        LottoShop lottoShop = LottoShop.from(MoneyWallet.of(money));
+        LottoWallet lottoWallet = lottoShop.purchase(manuallyLotto);
         resultView.calculateResult(lottoWallet.totalTicketCount());
         resultView.out(lottoWallet);
 
         List<LottoNumber> lastWeekLottoNumbers = createLastWeekLottoNumbers(inputView.lastWeekLottoInit());
         int bonusBall = inputView.bonusBallInit();
-        WinningLotto winningLotto = WinningLotto.of(new Lotto(lastWeekLottoNumbers), new LottoNumber(bonusBall));
+        WinningLotto winningLotto = WinningLotto.of(Lotto.winning(lastWeekLottoNumbers), new LottoNumber(bonusBall));
 
-        StatisticsReport report = StatisticsReport.of(lottoWallet).report(winningLotto);
+        StatisticsReport report = StatisticsReport.from(lottoWallet, winningLotto);
         resultView.resultOut(report);
         resultView.out(report.rate());
     }
 
-    private LottoWallet purchaseLotto(int money) {
-        MoneyWallet moneyWallet = new MoneyWallet(money);
-        LottoWallet lottoWallet = LottoShop.from(money).purchase();
-        moneyWallet = moneyWallet.withdraw(lottoWallet.totalPurchaseAmount());
-        return lottoWallet;
-    }
 
     private List<LottoNumber> createLastWeekLottoNumbers(List<Integer> lastWeekLottoInit) {
         return lastWeekLottoInit.stream().map(LottoNumber::new)

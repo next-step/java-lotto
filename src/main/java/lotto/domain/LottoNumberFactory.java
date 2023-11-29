@@ -19,7 +19,7 @@ public class LottoNumberFactory {
         return RandomHolder.INSTANCE;
     }
 
-    public List<LottoNumber> number() {
+    public List<LottoNumber> createLottoNumbers() {
         Collections.shuffle(randomNumbers);
         return randomNumbers.subList(0, Lotto.MAX_TICKET_NUMBERS);
     }

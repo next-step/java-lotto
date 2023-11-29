@@ -1,47 +1,39 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoShop {
 
     public static final int LOTTO_PRICE = 1000;
-    private static final LottoNumberFactory lottoNumberFactory = LottoNumberFactory.getInstance();
+    private MoneyWallet moneyWallet;
+    private final LottoShopFactory lottoShopFactory;
 
-    private final List<Lotto> assignedLottoList;
-
-    public LottoShop(List<Lotto> assignedLottoList) {
-        this.assignedLottoList = assignedLottoList;
+    private LottoShop(MoneyWallet moneyWallet, LottoShopFactory lottoShopFactory) {
+        this.moneyWallet = moneyWallet;
+        this.lottoShopFactory = lottoShopFactory;
     }
 
-    public static LottoShop from(int money) {
-        return new LottoShop(createLottoListWithMoney(money));
+    public static LottoShop from(MoneyWallet moneyWallet) {
+        return new LottoShop(moneyWallet, new LottoShopFactory());
     }
 
-    private static List<Lotto> createLottoListWithMoney(int money) {
-        return IntStream.range(0, countOfLottoAvailablePurchase(money))
-            .mapToObj(i -> createLottoTicket())
-            .collect(Collectors.toList());
+    public LottoWallet purchase(List<List<String>> manuallyLotto) {
+        List<Lotto> manuallyPurchaseLotto = lottoShopFactory.purchase(new ManuallyPurchase(manuallyLotto));
+        moneyDraw(LOTTO_PRICE * manuallyPurchaseLotto.size());
+
+        List<Lotto> autoPurchaseLotto = lottoShopFactory.purchase(new AutoPurchase(autoPurchaseCount(manuallyPurchaseLotto)));
+        moneyDraw(LOTTO_PRICE * autoPurchaseLotto.size());
+
+        manuallyPurchaseLotto.addAll(autoPurchaseLotto);
+        return new LottoWallet(manuallyPurchaseLotto);
     }
 
-    public List<Lotto> assignedLottoList() {
-        return this.assignedLottoList;
+    private void moneyDraw(int money) {
+        moneyWallet = moneyWallet.withdraw(money);
     }
 
-    private int totalPurchaseAmount() {
-        return this.assignedLottoList.size() * LOTTO_PRICE;
+    private int autoPurchaseCount(List<Lotto> manuallyPurchaseLotto) {
+        return moneyWallet.balance() / LOTTO_PRICE;
     }
 
-    private static int countOfLottoAvailablePurchase(int money) {
-        return money / LOTTO_PRICE;
-    }
-
-    private static Lotto createLottoTicket() {
-        return Lotto.from(lottoNumberFactory.number());
-    }
-
-    public LottoWallet purchase() {
-        return new LottoWallet(this.assignedLottoList, totalPurchaseAmount());
-    }
 }

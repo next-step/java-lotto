@@ -8,13 +8,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoType;
 import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class WinningLottoTest {
 
-    private static final Lotto LAST_WEEK_LOTTO = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+    private static final Lotto LAST_WEEK_LOTTO = Lotto.manually(Stream.of(1, 2, 3, 4, 5, 6)
         .map(LottoNumber::new)
         .collect(Collectors.toList()));
 
@@ -30,7 +31,7 @@ public class WinningLottoTest {
     @Test
     void compareWithLastWeekLottoAndReturnMatchCount() {
         WinningLotto winningLotto = WinningLotto.of(LAST_WEEK_LOTTO, new LottoNumber(8));
-        Lotto myLotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 7)
+        Lotto myLotto = Lotto.manually(Stream.of(1, 2, 3, 4, 5, 7)
             .map(LottoNumber::new)
             .collect(Collectors.toList()));
         int matchCount = winningLotto.compare(myLotto);

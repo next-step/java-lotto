@@ -10,8 +10,12 @@ public class MoneyWallet {
         this(DEFAULT_AMOUNT);
     }
 
-    public MoneyWallet(int amount) {
-        this.balance = amount;
+    private MoneyWallet(int balance) {
+        this.balance = balance;
+    }
+
+    public static MoneyWallet of(int balance){
+        return new MoneyWallet(balance);
     }
 
     public MoneyWallet deposit(int amount) {

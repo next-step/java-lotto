@@ -14,7 +14,12 @@ import lotto.domain.StatisticsReport;
 
 public class ResultView {
 
+    private final static String EMPTY_MESSAGE = "";
     private final static String LOTTO_PURCHASE_RESULT_MESSAGE = "%d개를 구매했습니다. \n";
+
+    private final static String LOTTO_PURCHASE_AUTO_MANUALLY_COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
+
+    private final static String LOTTO_WARNING_OF_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     private static final Map<LottoRank, String> outputFormats = new HashMap<>();
 
@@ -42,24 +47,28 @@ public class ResultView {
     }
 
     public void out(LottoWallet lottoWallet) {
+        sout.printf(LOTTO_PURCHASE_AUTO_MANUALLY_COUNT_MESSAGE, lottoWallet.autoLottoCount(), lottoWallet.manuallyLottoCount());
         for (int i = 0; i < lottoWallet.totalTicketCount(); i++) {
             sout.println(lottoNumbers(lottoWallet.oneTicket(i)));
         }
+        sout.print("\n");
     }
 
     private String lottoNumbers(Lotto lotto) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("[");
         lotto.lottoNumbers().forEach(lottoNumber -> {
-            stringBuilder.append(lottoNumber.toString()).append(",");
+            stringBuilder.append(lottoNumber.toString()).append(", ");
         });
-        int lastIndexOf = stringBuilder.lastIndexOf(",");
+        int lastIndexOf = stringBuilder.lastIndexOf(", ");
         stringBuilder.replace(lastIndexOf, lastIndexOf + 1, "]");
         return stringBuilder.toString();
     }
 
     public void resultOut(StatisticsReport report) {
-        IntStream.range(0, LottoRank.values().length).forEach(i -> {
+        sout.println("당첨 통계");
+        sout.println("---------");
+        IntStream.range(1, LottoRank.values().length).forEach(i -> {
             LottoRank lottoRank = LottoRank.values()[i];
             String output = String.format(outputFormats.get(lottoRank), lottoRank.rank(),
                 lottoRank.prize(), report.count(lottoRank));
@@ -69,6 +78,9 @@ public class ResultView {
 
     public void out(BigDecimal rate) {
         DecimalFormat decimalFormat = new DecimalFormat();
-        sout.printf("총 수익률은 %s 입니다. \n", decimalFormat.format(rate));
+        if(rate.compareTo(BigDecimal.ONE) <= 0){
+            sout.printf("총 수익률은 %s 입니다. %s\n", decimalFormat.format(rate), LOTTO_WARNING_OF_LOSS_MESSAGE);
+        }
+        sout.printf("총 수익률은 %s 입니다. %s\n", decimalFormat.format(rate), EMPTY_MESSAGE);
     }
 }

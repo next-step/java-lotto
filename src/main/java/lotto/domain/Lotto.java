@@ -1,9 +1,12 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -12,13 +15,25 @@ public class Lotto {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> anyNumbers) {
+    private final LottoType lottoType;
+
+    private Lotto(List<LottoNumber> anyNumbers, LottoType type) {
         validation(anyNumbers);
-        this.lottoNumbers = new HashSet<>(anyNumbers);
+        Collections.sort(anyNumbers);
+        this.lottoNumbers = new TreeSet<>(anyNumbers);
+        this.lottoType = type;
     }
 
-    public static Lotto from(List<LottoNumber> anyNumbers) {
-        return new Lotto(anyNumbers);
+    public static Lotto auto(List<LottoNumber> anyNumbers) {
+        return new Lotto(anyNumbers, LottoType.AUTO);
+    }
+
+    public static Lotto manually(List<LottoNumber> anyNumbers) {
+        return new Lotto(anyNumbers, LottoType.MANUALLY);
+    }
+
+    public static Lotto winning(List<LottoNumber> anyNumbers) {
+        return new Lotto(anyNumbers, LottoType.WINNING);
     }
 
     private void validation(List<LottoNumber> anyNumbers) {
@@ -42,6 +57,10 @@ public class Lotto {
 
     public boolean contains(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    public LottoType lottoType() {
+        return lottoType;
     }
 
     @Override
