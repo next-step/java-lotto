@@ -11,6 +11,9 @@ public class LottoPurchaseInfo {
     public LottoPurchaseInfo(int totalAmount, int manualQuantity) {
         this.totalAmount = totalAmount;
         this.manualQuantity = manualQuantity;
+
+        validTicket();
+        validTotalIsGreaterThanManual();
     }
 
     public int getTotalAmount() {
@@ -22,7 +25,6 @@ public class LottoPurchaseInfo {
     }
 
     public int calcTotalQuantity() {
-        validTicket();
         return totalAmount / LOTTO_TICKET_PRICE;
     }
 
@@ -33,7 +35,6 @@ public class LottoPurchaseInfo {
     }
 
     public int calcAutoQuantity() {
-        validTotalIsGreaterThanManual();
         return calcTotalQuantity() - manualQuantity;
     }
 

@@ -19,14 +19,14 @@ public class LottoPurchaseInfoTest {
     @DisplayName("로또는 최소 한 장 이상 구해할 수 있습니다.")
     @Test
     void buy_one_or_more_ticket() {
-        assertThatThrownBy(() -> new LottoPurchaseInfo(888, 0).calcTotalQuantity())
+        assertThatThrownBy(() -> new LottoPurchaseInfo(888, 0))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("수동 구매 개수가 총 구매 개수 보다 많을 시 IllegalArgumentException을 던진다. (자동 구매 개수는 0개 이상이어야 한다)")
     @Test
     void total_is_greater_than_manual() {
-        assertThatThrownBy(() -> new LottoPurchaseInfo(3000, 4).calcAutoQuantity())
+        assertThatThrownBy(() -> new LottoPurchaseInfo(3000, 4))
             .isInstanceOf(IllegalArgumentException.class);
     }
 }
