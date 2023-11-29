@@ -20,9 +20,11 @@ public class LottoController {
         int manualQuantity = InputView.inputManualQuantity();
         int autoQuantity = ticketQuantity - manualQuantity;
 
+        // 리팩토링 필요 부분
         List<LottoTicket> manualLottoTickets
             = StringSplitter.bulkConvertStrToLottoNumSet(InputView.inputManualNumbers(manualQuantity));
         List<LottoTicket> autoLottoTickets = new AutoLottoGenerator().generate(autoQuantity);
+
         LottoTickets lottoTickets
             = new LottoTickets(manualLottoTickets).add(new LottoTickets(autoLottoTickets));
 
