@@ -41,4 +41,11 @@ public class Lotto {
             throw new IllegalArgumentException("Lotto 숫자에 중복되는 사이즈가 있습니다.");
         }
     }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "lottoNums=" + lottoNums +
+                '}';
+    }
 }

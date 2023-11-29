@@ -24,7 +24,7 @@ public class WinningLotto {
 
     private static void validateBonusNum(Lotto lotto, int bonusNum) {
         if (lotto.match(new LottoNum(bonusNum))) {
-            throw new IllegalArgumentException("보너스볼이 로또와 중복됩니다.");
+            throw new IllegalArgumentException(String.format("보너스볼 %d는 로또번호 %s와 중복될 수 없습니다.", bonusNum, lotto.toString()));
         }
     }
 }
