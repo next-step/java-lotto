@@ -15,10 +15,6 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
-    }
-
     public long matchCount(WinningNumbers winningNumbers) {
         return this.lottoNumbers
             .stream()
