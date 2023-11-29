@@ -6,7 +6,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoChecker;
-import lotto.domain.LottoShop;
+import lotto.domain.LottoPurchaseInfo;
 import lotto.domain.Result;
 import lotto.domain.strategy.AutoLottoGenerator;
 import lotto.domain.util.StringSplitter;
@@ -15,20 +15,15 @@ import lotto.view.ResultView;
 
 public class LottoController {
     public static void main(String[] args) {
-        int totalPrice = InputView.inputTotalAmount();
-        int ticketQuantity = new LottoShop().sellTicket(totalPrice);
-        int manualQuantity = InputView.inputManualQuantity();
-        int autoQuantity = ticketQuantity - manualQuantity;
-
+        LottoPurchaseInfo purchaseInfo = new LottoPurchaseInfo(InputView.inputTotalAmount(), InputView.inputManualQuantity());
         // 리팩토링 필요 부분
         List<LottoTicket> manualLottoTickets
-            = StringSplitter.bulkConvertStrToLottoNumSet(InputView.inputManualNumbers(manualQuantity));
-        List<LottoTicket> autoLottoTickets = new AutoLottoGenerator().generate(autoQuantity);
+            = StringSplitter.bulkConvertStrToLottoNumSet(InputView.inputManualNumbers(purchaseInfo.getManualQuantity()));
+        List<LottoTicket> autoLottoTickets = new AutoLottoGenerator().generate(purchaseInfo.calcAutoQuantity());
 
-        LottoTickets lottoTickets
-            = new LottoTickets(manualLottoTickets).add(new LottoTickets(autoLottoTickets));
+        LottoTickets lottoTickets = new LottoTickets(manualLottoTickets).add(new LottoTickets(autoLottoTickets));
 
-        ResultView.showHowManyBuyTicket(manualQuantity, autoQuantity);
+        ResultView.showHowManyBuyTicket(purchaseInfo);
         ResultView.showLottoTickets(lottoTickets.getLottoTickets());
 
         Set<LottoNumber> winningNums = StringSplitter.convertStrToLottoNumSet(InputView.inputWinningNumbers());
@@ -37,6 +32,6 @@ public class LottoController {
         ResultView.showResultStatics(
             result.aggregateResult(
                 lottoTickets.checkTickets(new LottoChecker(winningNums, InputView.inputBonusNumber()))));
-        ResultView.showReturnRate(result.calcReturnRate(totalPrice));
+        ResultView.showReturnRate(result.calcReturnRate(purchaseInfo.getTotalAmount()));
     }
 }
