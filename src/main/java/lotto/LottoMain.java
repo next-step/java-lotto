@@ -22,7 +22,7 @@ public class LottoMain {
         WinningNumbers winningNumbers;
         while (true) {
             try {
-                winningNumbers = new WinningNumbers(new LottoNumbers(lottoInputView.inputWinningNumbers()), new LottoNumber(lottoInputView.inputBonusNumber()));
+                winningNumbers = new WinningNumbers(new LottoNumbers(lottoInputView.inputWinningNumbers()), LottoNumber.Of(lottoInputView.inputBonusNumber()));
                 break;
             } catch (IllegalArgumentException e) {
                 LottoResultView.printExceptionMsg(e.getMessage());

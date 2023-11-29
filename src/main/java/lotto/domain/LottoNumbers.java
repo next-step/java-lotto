@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -12,14 +11,8 @@ public class LottoNumbers {
     private static final List<LottoNumber> SUFFLED_LOTTO_NUMBER_LIST =
             IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
                     .boxed()
-                    .map(LottoNumber::new)
+                    .map(LottoNumber::Of)
                     .collect(Collectors.toList());
-    private static final Map<Integer, LottoNumber> RANGE_LOTTO_NUMBER_MAP =
-            IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
-                    .boxed()
-                    .map(LottoNumber::new)
-                    .collect(Collectors.toMap(LottoNumber::toInt, Function.identity()));
-
 
     private final Set<LottoNumber> numbers;
 
@@ -34,7 +27,7 @@ public class LottoNumbers {
         this.validateCount(numbers);
         this.numbers = numbers
                 .stream()
-                .map(number -> RANGE_LOTTO_NUMBER_MAP.getOrDefault(number, new LottoNumber(number)))
+                .map(LottoNumber::Of)
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 
