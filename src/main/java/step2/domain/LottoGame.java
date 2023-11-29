@@ -4,51 +4,59 @@ import step2.generator.LottoNumbersMakeStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGame {
 
     private final List<Lotto> lottos;
 
+    private final LottoWinGenerator generator;
 
-    public LottoGame(List<Lotto> lottos) {
+    public LottoGame(List<Lotto> lottos, LottoWinGenerator generator) {
         this.lottos = lottos;
+        this.generator = generator;
     }
 
     public static LottoGame create(
             final int tryCount
-            , final LottoNumbersMakeStrategy generator
+            , final LottoNumbersMakeStrategy numberMakeStrategy
+            , final LottoWinGenerator lottoWinGenerator
     ) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < tryCount; i++) {
-            lottoList.add(Lotto.create(generator.generate()));
+            lottoList.add(Lotto.create(numberMakeStrategy.makeLottoNumber()));
         }
-        return new LottoGame(lottoList);
+        return new LottoGame(lottoList, lottoWinGenerator);
     }
 
-    public List<Lotto> getLottos() {
+    public List<Lotto> getLotto() {
         return this.lottos;
     }
 
-    public Prizes game(List<Integer> prizeNumbers) {
-        Prizes prizes = new Prizes();
+    public Prizes game(List<Integer> winNumbers) {
         for (Lotto lotto : lottos) {
-            getPrize(lotto, prizes, prizeNumbers);
+            getPrizes(lotto, winNumbers);
         }
         return prizes;
     }
 
-    private void getPrize(final Lotto lotto, final Prizes prizes, List<Integer> prizeNumbers) {
-        List<Integer> prizeNumbers1 = new ArrayList<>();
-        for (Integer number : lotto.getNumbers()) {
-            getPrizeNumbers(number, prizeNumbers1);
-        }
-        prizes.winPrize(new Prize(prizeNumbers1.size()));
+    private Prize getPrizes(final Lotto lotto, List<Integer> winNumbers) {
+        return lotto.stream()
+                .map(number -> new Prize(getRank(number, winNumbers)))
+                .collect(Collectors.toList());
     }
 
-    private List<Integer> getPrizeNumbers(int number,  List<Integer> prizeNumbers) {
-        if (prizeNumbers.contains(number)) {
+    public Prizes getPrizes() {
+        lottos.stream().map(lotto -> {
+            return Prize()
+        })
+    }
+
+    private Rank getRank(int number, List<Integer> winNumbers) {
+        List<Integer> prizeNumbers = new ArrayList<>();
+        if (winNumbers.contains(number)) {
             prizeNumbers.add(number);
         }
-        return prizeNumbers;
+        return Rank.valueOf(prizeNumbers.size());
     }
 }

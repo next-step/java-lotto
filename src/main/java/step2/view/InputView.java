@@ -34,7 +34,7 @@ public class InputView {
     }
 
     public void showInputLotto(LottoGame lottoGame) {
-        lottoGame.getLottos().forEach(System.out::println);
+        lottoGame.getLotto().forEach(System.out::println);
     }
 
     public Lotto winLotto() {

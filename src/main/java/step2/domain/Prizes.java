@@ -1,8 +1,7 @@
 package step2.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -12,22 +11,26 @@ public class Prizes {
 
     List<Prize> prizeList = new ArrayList<>();
 
-    public void winPrize(Prize prize) {
-//        if (prize.isWin()) {
-            prizeList.add(prize);
-//        }
+    public Prizes(List<Prize> prizeList) {
+        this.prizeList = prizeList;
+    }
+
+    public void winPrize(Prize prize, WinGenerator winGenerator) {
+        prizeList.add(prize);
     }
 
     public List<String> getPrizesFormat() {
-        List<String> resultList = new ArrayList<>();
-        for (Rank rank : Rank.values()) {
-            resultList.add(String.format(PRIZE_FORMAT, rank.getCorrectCount(), rank.getWinningMoneyNumber(), getPrizeListByKey(rank.getCorrectCount())));
-        }
-        return resultList;
+        return Arrays.stream(Rank.values()).filter(Rank::isCanGetPrizeRank).map(rank ->
+                String.format(PRIZE_FORMAT, rank.getCorrectCount(), rank.getWinningMoneyNumber(), howManyGetPrize(rank.getCorrectCount())))
+            .collect(Collectors.toList());
     }
 
-    private int getPrizeListByKey(int key) {
+    private int howManyGetPrize(int key) {
         Map<Rank, List<Prize>> collect = prizeList.stream().collect(groupingBy(Prize::getPrizeRank));
+        if (collect.isEmpty()) {
+            System.out.println("뭐야");
+            return 0;
+        }
         return collect.get(Rank.valueOf(key)).size();
     }
 }

@@ -14,7 +14,7 @@ public class Lotto45NumbersMakeStrategy implements LottoNumbersMakeStrategy {
     public static final int PICK_NUMBERS = 6;
 
     @Override
-    public List<Integer> generate() {
+    public List<Integer> makeLottoNumber() {
         List<Integer> lottoNumbers = makeLottoNumbers();
         Collections.shuffle(lottoNumbers);
 
@@ -23,8 +23,7 @@ public class Lotto45NumbersMakeStrategy implements LottoNumbersMakeStrategy {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<Integer> makeLottoNumbers() {
+    private List<Integer> makeLottoNumbers() {
         return IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());

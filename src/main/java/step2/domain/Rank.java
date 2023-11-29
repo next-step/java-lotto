@@ -7,11 +7,14 @@ import static step2.domain.Money.ZERO_MONEY;
 public enum Rank {
 
     FIRST(6, new Money(2_000_000_000)),
-    SECOND(5, new Money(30_000_000)),
-    THIRD(5, new Money(1_500_000)),
-    FOURTH(4, new Money(50_000)),
-    FIFTH(3, new Money(5_000)),
+    SECOND(5, new Money(1_500_000)),
+    THIRD(4, new Money(50_000)),
+    FOURTH(3, new Money(5_000)),
     MISS(0, ZERO_MONEY);
+
+    public boolean isCanGetPrizeRank() {
+        return this != MISS;
+    }
 
     private final int correctCount;
 
@@ -39,4 +42,7 @@ public enum Rank {
         return Arrays.stream(values()).filter(rank -> rank.correctCount == correctCount)
                 .findFirst().orElse(MISS);
     }
+
+
+
 }

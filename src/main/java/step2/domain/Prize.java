@@ -7,8 +7,8 @@ public class Prize {
 
     private final Rank rank;
 
-    public Prize(int correctCount) {
-        this.rank = Rank.valueOf(correctCount);
+    public Prize(Rank rank) {
+        this.rank = rank;
         this.winningMoney = rank.getWinningMoney();
     }
 
