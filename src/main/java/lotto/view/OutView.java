@@ -25,7 +25,7 @@ public class OutView {
 
 
     public static void printLottoList(List<Lotto> lottoList, UserInput userInput) {
-        System.out.println("수동으로 " + userInput.getMassiveNumber() + "장, 자동으로 " + userInput.getAutoCount() + "개를 구매했습니다.");
+        System.out.println("수동으로 " + userInput.getPassiveNumber() + "장, 자동으로 " + userInput.getAutoCount() + "개를 구매했습니다.");
 
         for (Lotto lotto : lottoList) {
             System.out.println(lotto.toString());

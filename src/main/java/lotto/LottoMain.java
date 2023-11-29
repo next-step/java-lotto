@@ -28,12 +28,12 @@ public class LottoMain {
 
     private static List<Lotto> generateLottoList(UserInput userInput) {
         List<Lotto> lottoList = new ArrayList<>();
-        for(int i = 0; i < userInput.getMassiveNumber(); i++) {
+        for(int i = 0; i < userInput.getPassiveNumber(); i++) {
             List<String> numbers = Arrays.asList(split(inputPassiveNumbers()));
             Lotto lotto = new Lotto(parseIntegerList(numbers));
             lottoList.add(lotto);
         }
-        for (int i = 0; i < userInput.getFloorDivCount() - userInput.getMassiveNumber(); i++) {
+        for (int i = 0; i < userInput.getAutoCount(); i++) {
             Lotto lotto = new Lotto();
             lottoList.add(lotto);
         }

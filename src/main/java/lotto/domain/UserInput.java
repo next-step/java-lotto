@@ -2,11 +2,11 @@ package lotto.domain;
 
 public class UserInput {
     private final int money;
-    private final int massiveNumber;
+    private final int passiveNumber;
 
-    public UserInput(int money, int massiveNumber) {
+    public UserInput(int money, int passiveNumber) {
         this.money = money;
-        this.massiveNumber = massiveNumber;
+        this.passiveNumber = passiveNumber;
     }
 
     public int getMoney() {
@@ -17,11 +17,11 @@ public class UserInput {
         return Math.floorDiv(this.money, 1000);
     }
 
-    public int getMassiveNumber() {
-        return this.massiveNumber;
+    public int getPassiveNumber() {
+        return this.passiveNumber;
     }
 
     public int getAutoCount() {
-        return Math.subtractExact(this.getFloorDivCount(), this.massiveNumber);
+        return Math.subtractExact(this.getFloorDivCount(), this.passiveNumber);
     }
 }
