@@ -4,19 +4,21 @@ import java.util.Arrays;
 import step2.lotto.domain.LottoPurchase;
 import step2.lotto.domain.LottoRank;
 import step2.lotto.domain.LottoScore;
+import step2.lotto.domain.LottoTicketCount;
 import step2.lotto.domain.Lottos;
 
 public class ResultView {
 
-    private static final String PURCHASE_RESULT_MESSAGE = "%d개를 구매했습니다.\n";
+    private static final String PURCHASE_RESULT_MESSAGE = "수동으로 %d개, 자동으로 %d개를 구매했습니다.\n";
     private static final String WINNING_STATISTICS_MESSAGE = "당첨통계";
     private static final String DEFAULT_CONTOUR = "--------------------------";
     private static final String LOTTO_RESULT_SCORE = "%d개 일치 (%d)원 - %d개";
     private static final String LOTTO_RESULT_SCORE_BONUS = "%d개 일치, 보너스볼 일치 (%d)원 - %d개";
     private static final String LOTTO_RESULT_PROFIT_RATIO = "총 수익률은 %.2f 입니다.";
 
-    public void printPurchase(final LottoPurchase purchaseInfo) {
-        System.out.printf(PURCHASE_RESULT_MESSAGE, purchaseInfo.getLottoTicketCount());
+    public void printPurchase(final LottoTicketCount lottoTicketCount) {
+        System.out.printf(PURCHASE_RESULT_MESSAGE,
+            lottoTicketCount.getManualLottoTicketCount(), lottoTicketCount.getRandomLottoTicketCount());
     }
 
     public void printPurchaseLottoTicketNumbers(final Lottos lottos) {

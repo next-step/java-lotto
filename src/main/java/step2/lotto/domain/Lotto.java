@@ -1,6 +1,7 @@
 package step2.lotto.domain;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -14,7 +15,7 @@ public class Lotto {
 
     private Lotto(Set<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
 
     public Set<LottoNumber> getLottoNumbers() {
@@ -33,6 +34,23 @@ public class Lotto {
             .map(LottoNumber::valueOf)
             .collect(Collectors.toSet());
         return new Lotto(lottoNumbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 
     @Override

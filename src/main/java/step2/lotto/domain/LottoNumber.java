@@ -7,11 +7,11 @@ import java.util.stream.IntStream;
 
 public class LottoNumber {
 
-    private final int lottoNumber;
-
     private static final int LOTTO_MINIMUM_BOUND = 1;
     private static final int LOTTO_MAXIMUM_BOUND = 45;
     private static final Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE = new HashMap<>();
+
+    private final int lottoNumber;
 
     static {
         IntStream.rangeClosed(LOTTO_MINIMUM_BOUND, LOTTO_MAXIMUM_BOUND)
