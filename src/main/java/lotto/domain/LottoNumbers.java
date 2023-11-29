@@ -29,11 +29,20 @@ public class LottoNumbers {
         }
     }
 
-    void validateRange() {
+    void validateRangeOfNumbers() {
         for (Integer number : this.lottoNumbers) {
-            if (number < 1 || 45 < number) {
-                throw new IllegalArgumentException("로또는 1~45의 숫자만 가능합니다.");
-            }
+            validateRange(number);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return this.lottoNumbers.toString();
+    }
+
+    private static void validateRange(Integer number) {
+        if (number < 1 || 45 < number) {
+            throw new IllegalArgumentException("로또는 1~45의 숫자만 가능합니다.");
         }
     }
 

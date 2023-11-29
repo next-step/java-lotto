@@ -2,10 +2,6 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +24,7 @@ public class LottoTest {
     @DisplayName("로또 번호 일치 개수 확인 테스트")
     @Test
     void matchCountTest() {
-        List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6");
         Lotto lotto = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 10));
         assertThat(lotto.matchCount(winningNumbers)).isEqualTo(5);
     }
