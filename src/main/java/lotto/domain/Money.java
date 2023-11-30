@@ -20,7 +20,14 @@ public class Money {
         }
     }
 
-    public int purchaseCount() {
+    public Money buyManualLotto(int count) {
+        if (money < count * LOTTO_PRICE) {
+            throw new IllegalArgumentException("가진 돈보다 더 많은 수동 로또를 구매할 수 없습니다.");
+        }
+        return new Money(money - count * LOTTO_PRICE);
+    }
+
+    public int availableBuyLottoCount() {
         return money / LOTTO_PRICE;
     }
 }

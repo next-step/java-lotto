@@ -23,12 +23,12 @@ public class MoneyTest {
     }
 
     @Test
-    @DisplayName("복권구매개수//돈을 천원으로 나눈만큼 개수를 반환")
+    @DisplayName("복권구매개수//구매 가능한 로또 개수를 반환")
     void 복권구매개수_구하기() {
         // given
         Money money = new Money(2000);
 
         // when then
-        assertThat(money.purchaseCount()).isEqualTo(2);
+        assertThat(money.availableBuyLottoCount()).isEqualTo(2);
     }
 }

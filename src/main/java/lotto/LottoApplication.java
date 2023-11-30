@@ -10,14 +10,21 @@ import lotto.ui.OutputView;
 import lotto.ui.dto.LottoStatsResponse;
 import lotto.ui.dto.MyLottosResponse;
 
+import java.util.List;
+
 public class LottoApplication {
     public static void main(String[] args) {
         int inputMoney = InputView.inputMoney();
         Money money = new Money(inputMoney);
 
-        OutputView.outputPurchaseCount(money.purchaseCount());
+        int manualLottoCount = InputView.manualLottoCount();
+        Money balanceMoney = money.buyManualLotto(manualLottoCount);
+        int autoLottoCount = balanceMoney.availableBuyLottoCount();
 
-        MyLottos myLottos = LottoFactory.buy(money);
+        List<List<Integer>> inputManualLottoNumbers = InputView.manualLottoNumbers(manualLottoCount);
+        MyLottos myLottos = MyLottos.of(LottoFactory.buy(autoLottoCount), LottoFactory.buy(inputManualLottoNumbers));
+
+        OutputView.outputPurchaseCount(manualLottoCount, autoLottoCount);
         OutputView.outputMyLottos(MyLottosResponse.from(myLottos));
 
         WinningLotto winningLotto = new WinningLotto(InputView.winningNumbers(), InputView.bonusNumber());
