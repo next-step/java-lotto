@@ -6,6 +6,7 @@ public enum LottoResultType {
   , FOUR(4,50000)
   , FIVE(5,1500000)
   , ALL(6,2000000000)
+  , NO_MATCH(0,0)
   ;
   private final int number;
   private final double price;
