@@ -56,7 +56,7 @@ public class LottosTest {
         int bonusNumber = 7;
 
         // when
-        Map<Rank, Long> result = lottos.seekRankStatistics(new WinnerLotto(winnerLotto, bonusNumber));
+        Map<Rank, Long> result = lottos.seekRankStatistics(new WinnerLotto(winnerLotto, LottoNumber.valueOf(bonusNumber)));
 
         // then
         assertThat(result).isEqualTo(createExpectedRankStatistics());

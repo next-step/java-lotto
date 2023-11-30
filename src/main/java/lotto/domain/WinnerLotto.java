@@ -1,28 +1,37 @@
 package lotto.domain;
 
 import java.util.Objects;
-import java.util.Set;
 
 public class WinnerLotto {
+    protected static final String BONUS_NUMBER_OVERLAPPING_EXCEPTION = "보너스 숫자와 당첨 로또의 숫자가 겹칩니다.";
 
     private final Lotto winnerLotto;
-    private final Bonus bonus;
+    private final LottoNumber bonus;
 
-    public WinnerLotto(int bonusNumber, Integer... winnerLotto) {
+    public WinnerLotto(LottoNumber bonusNumber, Integer... winnerLotto) {
         this(new Lotto(winnerLotto), bonusNumber);
     }
 
-    public WinnerLotto(Lotto winnerLotto, int bonusNumber) {
+    public WinnerLotto(Lotto winnerLotto, LottoNumber bonusNumber) {
         this.winnerLotto = winnerLotto;
-        this.bonus = new Bonus(bonusNumber, winnerLotto);
+        validateOverlapping(bonusNumber, winnerLotto);
+        this.bonus = bonusNumber;
     }
 
-    public int countOfMatch(Set<LottoNumber> lotto) {
-        return this.winnerLotto.countOfMatch(lotto);
+    private void validateOverlapping(LottoNumber bonusLottoNumber, Lotto lotto) {
+        if (isOverlapping(bonusLottoNumber, lotto)) {
+            throw new IllegalArgumentException(BONUS_NUMBER_OVERLAPPING_EXCEPTION);
+        }
     }
 
-    public boolean containsBonus(Set<LottoNumber> lotto) {
-        return this.bonus.containsBonus(lotto);
+    private boolean isOverlapping(LottoNumber bonusLottoNumber, Lotto lotto) {
+        return lotto.isOverlapping(bonusLottoNumber);
+    }
+
+    public Rank findRankOf(Lotto lotto) {
+        int countOfMatch = this.winnerLotto.countOfMatch(lotto);
+        boolean containsBonus = lotto.isOverlapping(this.bonus);
+        return Rank.valeOf(countOfMatch, containsBonus);
     }
 
     @Override

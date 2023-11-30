@@ -7,16 +7,16 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoMachineTest {
+public class AutomaticLottoMachineTest {
 
     @Test
     @DisplayName("원하는 로또 갯수로 로또 뭉치를 생성한다.")
     void create_lottos() {
         // given
-        LottoMachine lottoMachine = new LottoMachine(new RandomLottoGenerator(numbers -> given()));
+        AutomaticLottoMachine automaticLottoMachine = new AutomaticLottoMachine(new RandomLottoGenerator(numbers -> given()));
 
         // when
-        Lottos result = lottoMachine.createLottos(6);
+        Lottos result = automaticLottoMachine.createLottos(6);
 
         // then
         assertThat(result).isEqualTo(createExpectedLottos());

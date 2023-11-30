@@ -1,48 +1,72 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoWinningStatistics;
-import lotto.domain.Lottos;
-import lotto.domain.Money;
-import lotto.domain.RankResult;
-import lotto.domain.WinnerLotto;
-import lotto.domain.WinnerLottoGenerator;
-import lotto.domain.YieldCalculator;
-import lotto.dto.CreateRankStatisticsDto;
+import lotto.dto.BuyLottosRequest;
+import lotto.dto.BuyLottosResponse;
+import lotto.dto.CreateRankStatisticsRequest;
+import lotto.dto.CreateRankStatisticsResponse;
+import lotto.dto.LottoMoneyDto;
 import lotto.dto.LottosDto;
-import lotto.dto.RankStatisticsDto;
+import lotto.exception.ExceptionSupplier;
+import lotto.service.LottoService;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoController {
-    private final LottoMachine lottoMachine;
 
-    public LottoController(LottoMachine lottoMachine) {
-        this.lottoMachine = lottoMachine;
+    private final LottoService lottoService;
+    private final InputView inputView;
+    private final OutputView outputView;
+
+    public LottoController(LottoService lottoService, InputView inputView, OutputView outputView) {
+        this.lottoService = lottoService;
+        this.inputView = inputView;
+        this.outputView = outputView;
     }
 
-    public long numberOfLottosToBuy(long fee) {
-        return new Money(fee).lottoQuantity();
+    public LottoMoneyDto getLottoMoneyDto() {
+        return ExceptionSupplier.<LottoMoneyDto>handleException(this::createLottoMoneyDto);
     }
 
-    public LottosDto buyLottos(long lottoQuantity) {
-        Lottos purchasedLottos = lottoMachine.createLottos(lottoQuantity);
-        return LottosDto.valueOf(purchasedLottos);
+    private LottoMoneyDto createLottoMoneyDto() {
+        long cost = inputView.moneyToBuyLotto();
+        long numberOfAllLottos = lottoService.numberOfAllLottos(cost);
+        return new LottoMoneyDto(cost, numberOfAllLottos);
     }
 
-    public RankStatisticsDto informRankStatistics(CreateRankStatisticsDto createRankStatisticsDto) {
-        RankResult rankResult = createLottoWinningStatistics(createRankStatisticsDto.getWinnerLotto(),
-                createRankStatisticsDto.getBonusNumber())
-                .informStatistics(createRankStatisticsDto.getLottosDto().toLottos());
-        double yield = YieldCalculator.calculate(createRankStatisticsDto.getCost(), rankResult);
-        return RankStatisticsDto.valueOf(rankResult, yield);
+    public long getManualLottoCount(LottoMoneyDto lottoMoneyDto) {
+        return inputView.manualLottoCount(lottoMoneyDto.getNumberOfAllLottos());
     }
 
-    private LottoWinningStatistics createLottoWinningStatistics(List<Integer> lotto, int bonusNumber) {
-        return new LottoWinningStatistics(createWinnerLotto(lotto, bonusNumber));
+    public LottosDto getLottosDto(long manualLottoCount, long numberOfAllLottos) {
+        return ExceptionSupplier.<LottosDto>handleException(() -> createLottosDto(manualLottoCount, numberOfAllLottos));
     }
 
-    private WinnerLotto createWinnerLotto(List<Integer> lotto, int bonusNumber) {
-        WinnerLottoGenerator winnerLottoGenerator = new WinnerLottoGenerator();
-        return winnerLottoGenerator.createWinnerLotto(lotto, bonusNumber);
+    private LottosDto createLottosDto(long manualLottoCount, long numberOfAllLottos) {
+        List<List<Integer>> manualLottos = inputView.manualLottos(manualLottoCount);
+
+        BuyLottosResponse buyLottosResponse = lottoService.buyLottos(
+                new BuyLottosRequest(manualLottos, numberOfAllLottos, manualLottoCount));
+
+        LottosDto lottosDto = buyLottosResponse.getLottosDto();
+        outputView.printPurchasedLottoCnt(manualLottoCount, buyLottosResponse.getAutomaticLottoCount());
+        outputView.printPurchasedLottos(lottosDto);
+
+        return lottosDto;
+    }
+
+    public void informLottoRankStatistics(LottosDto lottosDto, long cost) {
+        ExceptionSupplier.handleException(() -> createLottoRankStatistics(lottosDto, cost));
+    }
+
+    private void createLottoRankStatistics(LottosDto lottosDto, long cost) {
+        List<Integer> winnerLotto = inputView.winnerLottoNumbers();
+        int bonusNumber = inputView.bonusNumber();
+
+        CreateRankStatisticsResponse createRankStatisticsResponse = lottoService.informRankStatistics(
+                new CreateRankStatisticsRequest(lottosDto, winnerLotto, bonusNumber, cost));
+
+        outputView.printLottoRankStatistics(createRankStatisticsResponse.getRankResultDtos());
+        outputView.printLottoYield(createRankStatisticsResponse.getYield());
     }
 }

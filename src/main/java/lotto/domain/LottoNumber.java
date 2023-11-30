@@ -49,10 +49,6 @@ public class LottoNumber {
         return value;
     }
 
-    public int compare(LottoNumber lottoNumber) {
-        return this.value - lottoNumber.value;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

@@ -10,6 +10,6 @@ public class WinnerLottoGenerator {
         for (Integer number : lotto) {
             lottoNumbers.add(LottoNumber.valueOf(number));
         }
-        return new WinnerLotto(new Lotto(lottoNumbers), bonusNumber);
+        return new WinnerLotto(new Lotto(lottoNumbers), LottoNumber.valueOf(bonusNumber));
     }
 }

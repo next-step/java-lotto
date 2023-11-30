@@ -49,10 +49,10 @@ public class Money {
     }
 
     public long lottoQuantity() {
-        return changeToLottoCnt();
+        return money / LOTTO_PRICE;
     }
 
-    private long changeToLottoCnt() {
-        return money / LOTTO_PRICE;
+    public long calculateAutomaticLottoCount(long manualLottoCount) {
+        return lottoQuantity() - manualLottoCount;
     }
 }
