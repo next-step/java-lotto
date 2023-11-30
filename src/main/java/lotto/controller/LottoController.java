@@ -9,6 +9,7 @@ import lotto.domain.LottoChecker;
 import lotto.domain.LottoPurchase;
 import lotto.domain.Result;
 import lotto.domain.strategy.AutoLottoGenerator;
+import lotto.domain.strategy.ManualLottoGenerator;
 import lotto.domain.util.StringSplitter;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -16,12 +17,16 @@ import lotto.view.ResultView;
 public class LottoController {
     public static void main(String[] args) {
         LottoPurchase purchase = new LottoPurchase(InputView.inputTotalAmount(), InputView.inputManualQuantity());
-        // 리팩토링 필요 부분
-        List<LottoTicket> manualLottoTickets
-            = StringSplitter.bulkConvertStrToLottoNumSet(InputView.inputManualNumbers(purchase.getManualQuantity()));
-        List<LottoTicket> autoLottoTickets = new AutoLottoGenerator().generate(purchase.calcAutoQuantity());
 
-        LottoTickets lottoTickets = new LottoTickets(manualLottoTickets).add(new LottoTickets(autoLottoTickets));
+        LottoTickets lottoTickets
+            = new LottoTickets(
+				new ManualLottoGenerator(InputView.inputManualNumbers(purchase.getManualQuantity()))
+        	)
+            .add(
+                new LottoTickets(
+                    new AutoLottoGenerator(purchase.calcAutoQuantity())
+                )
+            );
 
         ResultView.showHowManyBuyTicket(purchase);
         ResultView.showLottoTickets(lottoTickets.getLottoTickets());

@@ -15,8 +15,14 @@ public class AutoLottoGenerator implements LottoGenerator {
     private static final int UPPER_BOUND = 45;
     private static final int NUMBERS_COUNT = 6;
 
+    private final int quantity;
+
+    public AutoLottoGenerator(int quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
-    public List<LottoTicket> generate(int quantity) {
+    public List<LottoTicket> generate() {
         List<LottoTicket> lottoTickets = new LinkedList<>();
         List<LottoNumber> numbers = initNumbers();
 
