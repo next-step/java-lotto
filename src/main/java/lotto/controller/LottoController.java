@@ -1,9 +1,7 @@
 package lotto.controller;
-import java.util.List;
 import java.util.Set;
 
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoChecker;
 import lotto.domain.LottoPurchase;
@@ -20,7 +18,7 @@ public class LottoController {
 
         LottoTickets lottoTickets
             = new LottoTickets(
-				new ManualLottoGenerator(InputView.inputManualNumbers(purchase.getManualQuantity()))
+                new ManualLottoGenerator(InputView.inputManualNumbers(purchase.getManualQuantity()))
         	)
             .add(
                 new LottoTickets(
