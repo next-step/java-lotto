@@ -13,7 +13,7 @@ class WinningNumbersTest {
     void bonus_number() {
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 10), 10);
 
-        assertThat(winningNumbers.matchBonusNumber(10)).isTrue();
+        assertThat(winningNumbers.contains(10)).isTrue();
     }
 
 }

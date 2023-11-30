@@ -6,23 +6,22 @@ import java.util.stream.Stream;
 
 public class LottoCollection {
 
-    private final List<LottoNumbers> lottoNumbersList;
+    private final List<LottoNumbers> lottoNumbers;
 
     public LottoCollection(int numberOfLottoTickets, RandomGenerator randomGenerator) {
-        this.lottoNumbersList = Stream.generate(() -> new LottoNumbers(randomGenerator.generate()))
+        this.lottoNumbers = Stream.generate(() -> new LottoNumbers(randomGenerator.generate()))
             .limit(numberOfLottoTickets)
             .collect(Collectors.toList());
     }
 
     public List<LottoNumbers> getLottoNumberList() {
-        return this.lottoNumbersList;
+        return this.lottoNumbers;
     }
 
     public List<LottoRank> getLottoRanks(WinningNumbers winningNumbers) {
-        return lottoNumbersList.stream()
-            .map(lottoNumbers -> LottoRank.valueOf(lottoNumbers.matchCount(winningNumbers),
-                lottoNumbers.matchBonusNumber(winningNumbers)))
+        return lottoNumbers.stream()
+            .map(lottoNumbers -> LottoRank.rankByMatchCountAndBonusNumber(lottoNumbers,
+                winningNumbers))
             .collect(Collectors.toList());
     }
-
 }

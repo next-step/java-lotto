@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 public enum LottoRank {
 
@@ -28,17 +29,24 @@ public enum LottoRank {
         return this.matchCount;
     }
 
-    public static LottoRank valueOf(long rank, boolean matchBonusNumber) {
+    public static LottoRank valueOf(long matchCount, boolean matchBonusNumber) {
         if (matchBonusNumber) {
-            return matchRank(lottoRank -> lottoRank.matchCount() == rank);
+            return matchRank(
+                lottoRank -> lottoRank.matchCount() == matchCount && lottoRank == LottoRank.SECOND);
         }
         return matchRank(
-            lottoRank -> lottoRank.matchCount() == rank && lottoRank != LottoRank.SECOND);
+            lottoRank -> lottoRank.matchCount() == matchCount && lottoRank != LottoRank.SECOND);
     }
 
-    private static LottoRank matchRank(Conditional conditional) {
+    public static LottoRank rankByMatchCountAndBonusNumber(LottoNumbers lottoNumbers,
+        WinningNumbers winningNumbers) {
+        return LottoRank.valueOf(lottoNumbers.matchCount(winningNumbers),
+            lottoNumbers.matchBonusNumber(winningNumbers));
+    }
+
+    private static LottoRank matchRank(Predicate<LottoRank> predicate) {
         return Arrays.stream(values())
-            .filter(conditional::test)
+            .filter(predicate)
             .findAny()
             .orElse(LottoRank.MISS);
     }
