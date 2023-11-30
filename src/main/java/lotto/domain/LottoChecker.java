@@ -6,7 +6,7 @@ public class LottoChecker {
     private final LottoTicket winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public LottoChecker(Set<Integer> winningNums, int bonusNumber) {
+    public LottoChecker(Set<LottoNumber> winningNums, int bonusNumber) {
         this.winningNumbers = new LottoTicket(winningNums);
         this.bonusNumber = new LottoNumber(bonusNumber);
     }

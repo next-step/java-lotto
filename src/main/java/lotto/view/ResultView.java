@@ -4,15 +4,13 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+import lotto.domain.LottoPurchase;
 import lotto.domain.Rank;
 import lotto.domain.LottoTicket;
 
 public class ResultView {
-    public static void showHowManyBuyTicket(int num) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(num);
-        sb.append("개 를 구매했습니다.");
-        System.out.println(sb);
+    public static void showHowManyBuyTicket(LottoPurchase purchase) {
+        System.out.println("수동으로 " + purchase.getManualQuantity() + "장, 자동으로 " + purchase.calcAutoQuantity() + "장을 구매했습니다.");
     }
 
     public static void showLottoTickets(List<LottoTicket> lottoTickets) {

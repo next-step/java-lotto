@@ -1,17 +1,30 @@
 package lotto.domain.util;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+
 public class StringSplitter {
-	public static Set<Integer> convertToIntegerSet(String str) {
-		String[] winningNums = str.split(", ");
-		Set<Integer> winningNumToInteger = new LinkedHashSet<>();
-		for (String num : winningNums) {
-			winningNumToInteger.add(strToInt(num));
+
+	public static List<LottoTicket> bulkConvertStrToLottoNumSet(List<String> strs) {
+		List<LottoTicket> tickets = new LinkedList<>();
+		for (String str : strs) {
+			tickets.add(new LottoTicket(convertStrToLottoNumSet(str)));
 		}
-		return winningNumToInteger;
+		return tickets;
+	}
+
+	public static Set<LottoNumber> convertStrToLottoNumSet(String str) {
+		String[] StrNums = str.split(", ");
+		Set<LottoNumber> IntNum = new LinkedHashSet<>();
+		for (String num : StrNums) {
+			IntNum.add(new LottoNumber(strToInt(num)));
+		}
+		return IntNum;
 	}
 
 	private static Integer strToInt(String str) {

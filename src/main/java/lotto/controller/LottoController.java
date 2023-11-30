@@ -4,28 +4,37 @@ import java.util.Set;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoChecker;
-import lotto.domain.LottoShop;
+import lotto.domain.LottoPurchase;
 import lotto.domain.Result;
-import lotto.domain.strategy.AutoGenerateStrategy;
+import lotto.domain.strategy.AutoLottoGenerator;
+import lotto.domain.strategy.ManualLottoGenerator;
 import lotto.domain.util.StringSplitter;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoController {
     public static void main(String[] args) {
-        int totalPrice = InputView.inputTotalAmount();
-        int ticketQuantity = new LottoShop().sellTicket(totalPrice);
-        ResultView.showHowManyBuyTicket(ticketQuantity);
+        LottoPurchase purchase = new LottoPurchase(InputView.inputTotalAmount(), InputView.inputManualQuantity());
 
-        LottoTickets lottoTickets = new LottoTickets(ticketQuantity, new AutoGenerateStrategy());
+        LottoTickets lottoTickets
+            = new LottoTickets(
+                new ManualLottoGenerator(InputView.inputManualNumbers(purchase.getManualQuantity()))
+        	)
+            .add(
+                new LottoTickets(
+                    new AutoLottoGenerator(purchase.calcAutoQuantity())
+                )
+            );
+
+        ResultView.showHowManyBuyTicket(purchase);
         ResultView.showLottoTickets(lottoTickets.getLottoTickets());
 
-        Set<Integer> winningNums = StringSplitter.convertToIntegerSet(InputView.inputWinningNumbers());
+        Set<LottoNumber> winningNums = StringSplitter.convertStrToLottoNumSet(InputView.inputWinningNumbers());
 
         Result result = new Result();
         ResultView.showResultStatics(
             result.aggregateResult(
                 lottoTickets.checkTickets(new LottoChecker(winningNums, InputView.inputBonusNumber()))));
-        ResultView.showReturnRate(result.calcReturnRate(totalPrice));
+        ResultView.showReturnRate(result.calcReturnRate(purchase.getTotalAmount()));
     }
 }
