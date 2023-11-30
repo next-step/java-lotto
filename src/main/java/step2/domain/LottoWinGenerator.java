@@ -1,11 +1,7 @@
 package step2.domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import static java.lang.Boolean.FALSE;
 
 public class LottoWinGenerator implements WinGenerator {
 
@@ -19,16 +15,14 @@ public class LottoWinGenerator implements WinGenerator {
     public Prize winPrize(Lotto lotto) {
         List<Integer> resultNumber = new ArrayList<>();
         for (int number : lotto.getNumbers()) {
-           if (winNumbers.contains(number)) {
-               resultNumber.add(number);
-           }
+            addNumberToResult(number, resultNumber);
         }
         return new Prize(Rank.valueOf(resultNumber.size()));
     }
 
-    public void addLottoNumber(int number, List<Integer> winLottoNumbers) {
+    private void addNumberToResult(int number, List<Integer> resultNumbers) {
         if (winNumbers.contains(number)) {
-            winLottoNumbers.add(number);
+            resultNumbers.add(number);
         }
     }
 }

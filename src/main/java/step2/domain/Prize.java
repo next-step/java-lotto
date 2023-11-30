@@ -16,6 +16,10 @@ public class Prize {
         return rank;
     }
 
+    public Money getWinningMoney() {
+        return winningMoney;
+    }
+
     public static Prize emptyPrize() {
         return new Prize(Rank.MISS);
     }

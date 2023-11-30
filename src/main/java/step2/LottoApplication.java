@@ -13,9 +13,7 @@ import java.util.List;
 public class LottoApplication {
 
     public static void main(String[] args) {
-        LottoController controller = new LottoController(
-                new InputView(), new OutputView(), new LottoPrizeService()
-        );
+        LottoController controller = new LottoController(new InputView(), new OutputView(), new LottoPrizeService());
         controller.game();
     }
 

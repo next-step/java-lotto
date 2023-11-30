@@ -9,22 +9,27 @@ import java.util.stream.Stream;
 
 public class LottoGame {
 
+    public final static Money ONE_TRY_MONEY = new Money(1_000);
+
     private final List<Lotto> lottos;
 
+    private final Money tryMoney;
 
-    public LottoGame(List<Lotto> lottos) {
+    public LottoGame(List<Lotto> lottos, Money money) {
         this.lottos = lottos;
+        this.tryMoney = money;
     }
 
-    public static LottoGame create(
-            final int tryCount
-            , final LottoNumbersMakeStrategy numberMakeStrategy
-    ) {
+    public static LottoGame create(Money tryMoney, LottoNumbersMakeStrategy makeNumberStrategy) {
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < tryCount; i++) {
-            lottoList.add(Lotto.create(numberMakeStrategy.makeLottoNumber()));
+        for (int i = 0; i < getTryCount(tryMoney) ; i++) {
+            lottoList.add(Lotto.create(makeNumberStrategy.makeLottoNumber()));
         }
-        return new LottoGame(lottoList);
+        return new LottoGame(lottoList, tryMoney);
+    }
+
+    private static int getTryCount(Money tryMoney) {
+        return tryMoney.divide(ONE_TRY_MONEY).intValue();
     }
 
     public List<Lotto> getLotto() {
@@ -32,11 +37,7 @@ public class LottoGame {
     }
 
     public Prizes game(WinGenerator generator) {
-        return new Prizes(getPrizes(generator));
-    }
-
-    public void setWinNumbers(List<Integer> winNumbers) {
-//        generator.
+        return new Prizes(getPrizes(generator), tryMoney);
     }
 
     public List<Prize> getPrizes(WinGenerator generator) {
@@ -45,11 +46,4 @@ public class LottoGame {
                 .collect(Collectors.toList());
     }
 
-    private Rank getRank(int number, List<Integer> winNumbers) {
-        List<Integer> prizeNumbers = new ArrayList<>();
-        if (winNumbers.contains(number)) {
-            prizeNumbers.add(number);
-        }
-        return Rank.valueOf(prizeNumbers.size());
-    }
 }

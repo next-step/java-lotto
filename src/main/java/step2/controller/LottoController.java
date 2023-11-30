@@ -24,15 +24,12 @@ public class LottoController {
 
     public void game() {
         LottoGame lottoGame = inputGame();
-        Lotto winLotto = getWinLotto();
-        LottoWinGenerator winGenerator = new LottoWinGenerator(winLotto.getNumbers());
-        Prizes prizes = lottoGame.game(winGenerator);
+        Prizes prizes = lottoGame.game(new LottoWinGenerator(getWinLotto().getNumbers()));
         outputView.showPrize(prizes);
     }
 
     public LottoGame inputGame() {
-        int tryNumbers = inputView.start();
-        LottoGame lottoGame = service.startLottoGame(tryNumbers);
+        LottoGame lottoGame = service.startLottoGame(inputView.start());
         inputView.nextLine();
         inputView.showInputLotto(lottoGame);
         return lottoGame;

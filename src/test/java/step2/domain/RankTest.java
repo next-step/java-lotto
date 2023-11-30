@@ -22,4 +22,11 @@ class RankTest {
         Assertions.assertThat(Rank.valueOf(correctNumber).getWinningMoney()).isEqualTo(new Money(winningMoney));
     }
 
+    @ParameterizedTest
+    @DisplayName("맞춘 Rank에 맞는 상금이 정해진다.")
+    @CsvSource(value = {"MISS,0", "FOURTH,5000", "THIRD,50000", "SECOND,1500000", "FIRST,2000000000"}, delimiter = ',')
+    void winningRank_winningMoney(String rank, int winningMoney) {
+        Assertions.assertThat(Rank.valueOf(rank).getWinningMoney()).isEqualTo(new Money(winningMoney));
+    }
+
 }

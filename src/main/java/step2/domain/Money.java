@@ -19,6 +19,14 @@ public class Money {
         return value;
     }
 
+    public Money add(Money money) {
+        return new Money(value + money.getValue());
+    }
+
+    public Double divide(Money money) {
+        return (double) (value / money.getValue());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
