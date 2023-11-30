@@ -5,8 +5,15 @@ public class UserInput {
     private final int passiveNumber;
 
     public UserInput(int money, int passiveNumber) {
+        checkValidInput(money, passiveNumber);
         this.money = money;
         this.passiveNumber = passiveNumber;
+    }
+
+    private static void checkValidInput(int money, int passiveNumber) {
+        if(money < passiveNumber) {
+            throw new IllegalArgumentException("입력된 금액보다 큰 수동금액을 살 수 없습니다.");
+        }
     }
 
     public int getMoney() {

@@ -5,7 +5,7 @@ import java.util.*;
 import static lotto.util.NumberUtil.floorDiv;
 
 public class InputView {
-    private static Scanner sc = new Scanner(System.in);
+    private static final Scanner sc = new Scanner(System.in);
 
     private InputView(){}
 
