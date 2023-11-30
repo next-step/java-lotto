@@ -1,14 +1,14 @@
 package lotto.domain;
 
 // 개선 필요
-public class LottoPurchaseInfo {
+public class LottoPurchase {
     private static final Integer LOTTO_TICKET_PRICE = 1000;
 
     private final int totalAmount;
 
     private final int manualQuantity;
 
-    public LottoPurchaseInfo(int totalAmount, int manualQuantity) {
+    public LottoPurchase(int totalAmount, int manualQuantity) {
         this.totalAmount = totalAmount;
         this.manualQuantity = manualQuantity;
 
