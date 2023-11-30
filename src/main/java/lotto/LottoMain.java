@@ -9,6 +9,7 @@ import lotto.dto.CreateRankStatisticsRq;
 import lotto.dto.CreateRankStatisticsRs;
 import lotto.dto.LottoMoneyDto;
 import lotto.dto.LottosDto;
+import lotto.exception.ExceptionSupplier;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -21,23 +22,19 @@ public class LottoMain {
         LottoController controller = lottoFactory.lottoController();
         OutputView outputView = lottoFactory.outputView();
 
+        runLottoGame(inputView, controller, outputView);
+    }
+
+    private static void runLottoGame(InputView inputView, LottoController controller, OutputView outputView) {
         LottoMoneyDto lottoMoneyDto = getLottoMoneyDto(inputView, controller);
-
-        long manualLottoCount = inputView.manualLottoCount(lottoMoneyDto.getNumberOfAllLottos());
-
+        long manualLottoCount = getManualLottoCount(inputView, lottoMoneyDto);
         LottosDto lottosDto = getLottosDto(inputView, manualLottoCount, controller,
                 lottoMoneyDto.getNumberOfAllLottos(), outputView);
-
         informLottoRankStatistics(inputView, controller, lottosDto, lottoMoneyDto.getCost(), outputView);
     }
 
     private static LottoMoneyDto getLottoMoneyDto(InputView inputView, LottoController controller) {
-        try {
-            return createLottoMoneyDto(inputView, controller);
-        } catch (IllegalStateException | IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return getLottoMoneyDto(inputView, controller);
-        }
+        return ExceptionSupplier.<LottoMoneyDto>handleException(() -> createLottoMoneyDto(inputView, controller));
     }
 
     private static LottoMoneyDto createLottoMoneyDto(InputView inputView, LottoController controller) {
@@ -46,14 +43,14 @@ public class LottoMain {
         return new LottoMoneyDto(cost, numberOfAllLottos);
     }
 
+    private static long getManualLottoCount(InputView inputView, LottoMoneyDto lottoMoneyDto) {
+        return inputView.manualLottoCount(lottoMoneyDto.getNumberOfAllLottos());
+    }
+
     private static LottosDto getLottosDto(InputView inputView, long manualLottoCount, LottoController controller,
                                           long numberOfAllLottos, OutputView outputView) {
-        try {
-            return createLottosDto(inputView, manualLottoCount, controller, numberOfAllLottos, outputView);
-        } catch (IllegalStateException | IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return getLottosDto(inputView, manualLottoCount, controller, numberOfAllLottos, outputView);
-        }
+        return ExceptionSupplier.<LottosDto>handleException(
+                () -> createLottosDto(inputView, manualLottoCount, controller, numberOfAllLottos, outputView));
     }
 
     private static LottosDto createLottosDto(InputView inputView, long manualLottoCount, LottoController controller,
@@ -72,12 +69,8 @@ public class LottoMain {
 
     private static void informLottoRankStatistics(InputView inputView, LottoController controller, LottosDto lottosDto,
                                                   long cost, OutputView outputView) {
-        try {
-            createLottoRankStatistics(inputView, controller, lottosDto, cost, outputView);
-        } catch (IllegalStateException | IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            informLottoRankStatistics(inputView, controller, lottosDto, cost, outputView);
-        }
+        ExceptionSupplier.handleException(() ->
+                createLottoRankStatistics(inputView, controller, lottosDto, cost, outputView));
     }
 
     private static void createLottoRankStatistics(InputView inputView, LottoController controller, LottosDto lottosDto,
