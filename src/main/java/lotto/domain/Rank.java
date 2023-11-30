@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
     NO_RANK(0, 0),
     FIFTH(3, 5_000),
@@ -22,5 +24,18 @@ public enum Rank {
 
     public long getPrize() {
         return prize;
+    }
+
+    public static Rank getRank(int count, LottoNumbers purchasedList, int bonusNumber) {
+        if (count < 3) {
+            return Rank.NO_RANK;
+        }
+        boolean correctBonusNumber = Buyer.containsBonusNumber(purchasedList, bonusNumber);
+
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.getCount() == count)
+                .findFirst()
+                .map(rank -> (rank == Rank.THIRD && correctBonusNumber) ? Rank.SECOND : rank)
+                .orElseThrow();
     }
 }

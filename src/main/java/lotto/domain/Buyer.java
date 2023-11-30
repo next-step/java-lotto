@@ -41,21 +41,11 @@ public class Buyer {
     }
 
     private Rank determineLottoRank(WinningNumbers winningNumbers, LottoNumbers purchasedList) {
-        int count = countSameNumber(winningNumbers.getWinningNumbers(), purchasedList);
-        boolean correctBonusNumber = containsBonusNumber(purchasedList, winningNumbers.getBonusNumber());
-
-        if (count < 3) {
-            return Rank.NO_RANK;
-        }
-
-        return Arrays.stream(Rank.values())
-                .filter(rank -> rank.getCount() == count)
-                .findFirst()
-                .map(rank -> (rank == Rank.THIRD && correctBonusNumber) ? Rank.SECOND : rank)
-                .orElseThrow();
+        int count = countMatchingNumbers(winningNumbers.getWinningNumbers(), purchasedList);
+        return Rank.getRank(count, purchasedList, winningNumbers.getBonusNumber());
     }
 
-    private int countSameNumber(Set<Integer> winningList, LottoNumbers purchasedList) {
+    private int countMatchingNumbers(Set<Integer> winningList, LottoNumbers purchasedList) {
         return (int) purchasedList.getLottoNumbers().stream()
                 .mapToInt(LottoNumber -> findSameNumber(winningList, LottoNumber.getNumber()))
                 .sum();
@@ -68,7 +58,7 @@ public class Buyer {
         return NONE;
     }
 
-    private boolean containsBonusNumber(LottoNumbers purchasedList, int bonusNumber) {
+    public static boolean containsBonusNumber(LottoNumbers purchasedList, int bonusNumber) {
         return purchasedList.getLottoNumbers().stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList())
