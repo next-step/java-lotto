@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,27 +25,13 @@ public class Lottos {
 
     public LottoResult result(Lotto resultLotto) {
         Map<LottoResultType,Lottos> result  = new HashMap<>();
-        List<Lotto> treeCount = this.lottos.stream()
-                                                .filter(each -> resultLotto.howManySameNumber(each) == 3)
-                                                .collect(Collectors.toList());
-        result.put(LottoResultType.THREE, Lottos.of(treeCount));
-
-        List<Lotto> fourCount = this.lottos.stream()
-                                            .filter(each -> resultLotto.howManySameNumber(each) == 4)
-                                            .collect(Collectors.toList());
-        result.put(LottoResultType.FOUR, Lottos.of(fourCount));
-
-        List<Lotto> fiveCount = this.lottos.stream()
-                                            .filter(each -> resultLotto.howManySameNumber(each) == 5)
-                                            .collect(Collectors.toList());
-        result.put(LottoResultType.FIVE, Lottos.of(fiveCount));
-
-        List<Lotto> allCount = this.lottos.stream()
-                                          .filter(each -> resultLotto.howManySameNumber(each) == 6)
-                                          .collect(Collectors.toList());
-        result.put(LottoResultType.ALL, Lottos.of(allCount));
-
-
+        for (LottoResultType lottoResultType : LottoResultType.values()) {
+            if (lottoResultType.equals(LottoResultType.NO_MATCH)) {
+                continue;
+            }
+            List<Lotto> matchLottos = lottoResultType.result(this.lottos, resultLotto);
+            result.put(lottoResultType, Lottos.of(matchLottos));
+        }
         return LottoResult.defaultOf(result);
     }
     public double calculatePrice(LottoResultType lottoResultType) {

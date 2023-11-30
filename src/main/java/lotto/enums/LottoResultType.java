@@ -1,6 +1,9 @@
 package lotto.enums;
 
+import java.util.List;
 import java.util.function.BiFunction;
+import java.util.stream.Collectors;
+import lotto.domain.Lotto;
 
 public enum LottoResultType {
 
@@ -12,7 +15,6 @@ public enum LottoResultType {
   ;
   private final int number;
   private final double price;
-  private BiFunction resultFunction;
 
   LottoResultType(int number, double price) {
     this.number = number;
@@ -27,4 +29,9 @@ public enum LottoResultType {
     return this.number == number;
   }
 
+  public List<Lotto> result(List<Lotto> lottos, Lotto resultLotto) {
+    return lottos.stream()
+                  .filter(each -> resultLotto.howManySameNumber(each) == this.number)
+                  .collect(Collectors.toList());
+  }
 }
