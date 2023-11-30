@@ -18,8 +18,8 @@ public class Core {
     OutPutView.printLotto(lottos);
 
     String resultLottoNumbers = InPutView.getResultLottoNumbers();
-
-    LottoResult result = lottoStore.result(lottos, resultLottoNumbers);
+    LottoGame lottoGame = LottoGame.defaultOf(resultLottoNumbers);
+    LottoResult result = lottoGame.result(lottos);
     double profitRate = result.calculateProfitRate(amount);
 
     // 결과 프린트
