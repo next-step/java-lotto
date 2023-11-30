@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoResult;
-import lotto.service.LottoStore;
+import lotto.domain.LottoStore;
 import lotto.domain.Lottos;
 import lotto.view.InPutView;
 import lotto.view.OutPutView;

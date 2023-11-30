@@ -7,7 +7,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
-import lotto.service.LottoStore;
+import lotto.domain.LottoStore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
