@@ -25,7 +25,7 @@ public class OutputView {
     }
 
     private List<Integer> sortLottoNumbers(LottoDto lottoDto) {
-        return lottoDto.getLottoNumbers().stream().sorted((a,b) -> a - b).collect(Collectors.toList());
+        return lottoDto.getLottoNumbers().stream().sorted((a, b) -> a - b).collect(Collectors.toList());
     }
 
     public void printLottoRankStatistics(List<RankResultDto> rankResultDtos) {

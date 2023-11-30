@@ -11,10 +11,10 @@ import lotto.domain.WinnerLotto;
 import lotto.domain.WinnerLottoGenerator;
 import lotto.domain.YieldCalculator;
 import lotto.dto.BuyLottosRequest;
-import lotto.dto.CreateRankStatisticsRequest;
-import lotto.dto.LottosDto;
-import lotto.dto.CreateRankStatisticsResponse;
 import lotto.dto.BuyLottosResponse;
+import lotto.dto.CreateRankStatisticsRequest;
+import lotto.dto.CreateRankStatisticsResponse;
+import lotto.dto.LottosDto;
 
 public class LottoService {
     private final ManualLottoMachine manualLottoMachine;

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Objects;
-import java.util.Set;
 
 public class WinnerLotto {
     protected static final String BONUS_NUMBER_OVERLAPPING_EXCEPTION = "보너스 숫자와 당첨 로또의 숫자가 겹칩니다.";

@@ -4,8 +4,6 @@ import lotto.config.LottoFactory;
 import lotto.controller.LottoController;
 import lotto.dto.LottoMoneyDto;
 import lotto.dto.LottosDto;
-import lotto.view.InputView;
-import lotto.view.OutputView;
 
 public class LottoMain {
 
