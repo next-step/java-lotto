@@ -1,18 +1,40 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumbers {
-    private final List<LottoNumber> lottoTicket = new ArrayList<>();
 
-    public List<LottoNumber> getLottoTicket() {
-        return lottoTicket;
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
+    private static final int LOTTO_COUNT = 6;
+    private final Set<LottoNumber> lottoNumbers;
+
+    public LottoNumbers(int... value) {
+        this.lottoNumbers = Arrays.stream(value)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toSet());
     }
 
-    public void buyLottoTicket(int count) {
-        for(int i=0; i<count; i++) {
-            lottoTicket.add(new LottoNumber());
-        }
+    public LottoNumbers() {
+        this.lottoNumbers = generateLottoNumbers();
+    }
+
+    public Set<LottoNumber> generateLottoNumbers() {
+        List<Integer> numberList = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
+
+        Collections.shuffle(numberList);
+
+        return numberList.stream()
+                .limit(LOTTO_COUNT)
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(TreeSet::new));
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 }

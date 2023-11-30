@@ -1,23 +1,36 @@
 package lotto.view;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
     private ResultView() {
     }
 
-    public static void printPurchasedLottoNumbers(List<LottoNumber> lottoNumbers) {
-        for(int i=0; i<lottoNumbers.size();i++) {
-            System.out.println(lottoNumbers.get(i).getNumbers());
+    public static void printPurchaseCount(int input) {
+        System.out.println(input + "개를 구매했습니다.");
+    }
+
+    public static void printPurchasedLottoNumbers(LottoTicket lottoTicket) {
+        List<LottoNumbers> tickets = lottoTicket.getLottoTicket();
+
+        for (LottoNumbers numbers : tickets) {
+            System.out.println(numbersToList(numbers.getLottoNumbers()));
         }
     }
 
-    public static void printPurchaseCount(int input) {
-        System.out.println(input + "개를 구매했습니다.");
+    private static List<Integer> numbersToList(Set<LottoNumber> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
     }
 
     public static void printWinningStatistics() {
