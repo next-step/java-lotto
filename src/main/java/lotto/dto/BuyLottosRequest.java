@@ -2,13 +2,13 @@ package lotto.dto;
 
 import java.util.List;
 
-public class BuyLottosRq {
+public class BuyLottosRequest {
 
     private final List<List<Integer>> manualLottos;
     private final long numberOfAllLottos;
     private final long manualLottoCount;
 
-    public BuyLottosRq(List<List<Integer>> manualLottos, long numberOfAllLottos, long manualLottoCount) {
+    public BuyLottosRequest(List<List<Integer>> manualLottos, long numberOfAllLottos, long manualLottoCount) {
         this.manualLottos = manualLottos;
         this.numberOfAllLottos = numberOfAllLottos;
         this.manualLottoCount = manualLottoCount;

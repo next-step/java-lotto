@@ -1,11 +1,11 @@
 package lotto.dto;
 
-public class BuyLottosRs {
+public class BuyLottosResponse {
 
     private final LottosDto lottosDto;
     private final long automaticLottoCount;
 
-    public BuyLottosRs(LottosDto lottosDto, long automaticLottoCount) {
+    public BuyLottosResponse(LottosDto lottosDto, long automaticLottoCount) {
         this.lottosDto = lottosDto;
         this.automaticLottoCount = automaticLottoCount;
     }

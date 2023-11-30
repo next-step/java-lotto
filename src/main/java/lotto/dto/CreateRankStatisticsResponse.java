@@ -6,22 +6,22 @@ import java.util.Map.Entry;
 import lotto.domain.Rank;
 import lotto.domain.RankResult;
 
-public class CreateRankStatisticsRs {
+public class CreateRankStatisticsResponse {
 
     private final List<RankResultDto> rankResultDtos;
     private final double yield;
 
-    private CreateRankStatisticsRs(List<RankResultDto> rankResultDtos, double yield) {
+    private CreateRankStatisticsResponse(List<RankResultDto> rankResultDtos, double yield) {
         this.rankResultDtos = rankResultDtos;
         this.yield = yield;
     }
 
-    public static CreateRankStatisticsRs valueOf(RankResult rankResult, double yield) {
+    public static CreateRankStatisticsResponse valueOf(RankResult rankResult, double yield) {
         List<RankResultDto> rankResultDtos = new ArrayList<>();
         for (Entry<Rank, Long> singleRankStatistics : rankResult.getRankStatistics().entrySet()) {
             rankResultDtos.add(RankResultDto.valueOf(singleRankStatistics));
         }
-        return new CreateRankStatisticsRs(rankResultDtos, yield);
+        return new CreateRankStatisticsResponse(rankResultDtos, yield);
     }
 
     public List<RankResultDto> getRankResultDtos() {

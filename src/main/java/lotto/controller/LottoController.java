@@ -1,10 +1,10 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.dto.BuyLottosRq;
-import lotto.dto.BuyLottosRs;
-import lotto.dto.CreateRankStatisticsRq;
-import lotto.dto.CreateRankStatisticsRs;
+import lotto.dto.BuyLottosRequest;
+import lotto.dto.BuyLottosResponse;
+import lotto.dto.CreateRankStatisticsRequest;
+import lotto.dto.CreateRankStatisticsResponse;
 import lotto.dto.LottoMoneyDto;
 import lotto.dto.LottosDto;
 import lotto.exception.ExceptionSupplier;
@@ -45,11 +45,11 @@ public class LottoController {
     private LottosDto createLottosDto(long manualLottoCount, long numberOfAllLottos) {
         List<List<Integer>> manualLottos = inputView.manualLottos(manualLottoCount);
 
-        BuyLottosRs buyLottosRs = lottoService.buyLottos(
-                new BuyLottosRq(manualLottos, numberOfAllLottos, manualLottoCount));
+        BuyLottosResponse buyLottosResponse = lottoService.buyLottos(
+                new BuyLottosRequest(manualLottos, numberOfAllLottos, manualLottoCount));
 
-        LottosDto lottosDto = buyLottosRs.getLottosDto();
-        outputView.printPurchasedLottoCnt(manualLottoCount, buyLottosRs.getAutomaticLottoCount());
+        LottosDto lottosDto = buyLottosResponse.getLottosDto();
+        outputView.printPurchasedLottoCnt(manualLottoCount, buyLottosResponse.getAutomaticLottoCount());
         outputView.printPurchasedLottos(lottosDto);
 
         return lottosDto;
@@ -63,10 +63,10 @@ public class LottoController {
         List<Integer> winnerLotto = inputView.winnerLottoNumbers();
         int bonusNumber = inputView.bonusNumber();
 
-        CreateRankStatisticsRs createRankStatisticsRs = lottoService.informRankStatistics(
-                new CreateRankStatisticsRq(lottosDto, winnerLotto, bonusNumber, cost));
+        CreateRankStatisticsResponse createRankStatisticsResponse = lottoService.informRankStatistics(
+                new CreateRankStatisticsRequest(lottosDto, winnerLotto, bonusNumber, cost));
 
-        outputView.printLottoRankStatistics(createRankStatisticsRs.getRankResultDtos());
-        outputView.printLottoYield(createRankStatisticsRs.getYield());
+        outputView.printLottoRankStatistics(createRankStatisticsResponse.getRankResultDtos());
+        outputView.printLottoYield(createRankStatisticsResponse.getYield());
     }
 }
