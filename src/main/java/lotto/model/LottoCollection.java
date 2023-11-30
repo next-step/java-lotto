@@ -1,41 +1,27 @@
 package lotto.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoCollection {
 
-	private final ArrayList<LottoNumber> lottoNumberList;
+    private final List<LottoNumbers> lottoNumbers;
 
-	public LottoCollection(int numberOfLottoTickets, RandomGenerator randomGenerator) {
-		this.lottoNumberList = new ArrayList<>();
-		for (int i = 0; i < numberOfLottoTickets; i++) {
-			this.lottoNumberList.add(new LottoNumber(randomGenerator.generate()));
-		}
-	}
+    public LottoCollection(int numberOfLottoTickets, RandomGenerator randomGenerator) {
+        this.lottoNumbers = Stream.generate(() -> new LottoNumbers(randomGenerator.generate()))
+            .limit(numberOfLottoTickets)
+            .collect(Collectors.toList());
+    }
 
-	public List<LottoNumber> getLottoNumberList() {
-		return this.lottoNumberList;
-	}
+    public List<LottoNumbers> getLottoNumberList() {
+        return this.lottoNumbers;
+    }
 
-	public List<LottoRank> lottoRanks(LottoNumber winningNumbers) {
-		List<LottoRank> lottoRanks = new ArrayList<>();
-		for (LottoNumber lottoNumber : lottoNumberList) {
-			lottoRanks.add(lottoRank(lottoNumber
-					.getLottoNumbers()
-					.stream()
-					.filter(winningNumbers.getLottoNumbers()::contains)
-					.count()));
-		}
-		return lottoRanks;
-	}
-
-	private LottoRank lottoRank(long rank) {
-		return Arrays.stream(LottoRank.values())
-				.filter(lottoRank -> lottoRank.rank() == rank)
-				.findAny()
-				.orElse(LottoRank.BLANK);
-	}
-
+    public List<LottoRank> getLottoRanks(WinningNumbers winningNumbers) {
+        return lottoNumbers.stream()
+            .map(lottoNumbers -> LottoRank.rankByMatchCountAndBonusNumber(lottoNumbers,
+                winningNumbers))
+            .collect(Collectors.toList());
+    }
 }
