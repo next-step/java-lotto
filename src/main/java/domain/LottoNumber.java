@@ -1,10 +1,14 @@
 package domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import static util.LottoNumberGenerator.*;
 
 public class LottoNumber {
+    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
+
     private final int lottoNumber;
 
     public static LottoNumber from(String input) {
@@ -13,7 +17,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber valueOf(int num) {
-        return new LottoNumber(num);
+        return CACHE.computeIfAbsent(num, LottoNumber::new);
     }
 
     private LottoNumber(int lottoNumber) {
