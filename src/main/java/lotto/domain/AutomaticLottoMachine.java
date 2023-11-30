@@ -15,20 +15,12 @@ public class AutomaticLottoMachine {
     public Lottos createLottos(long lottoCnt) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCnt; i++) {
-            lottos.add(sortedLotto());
+            lottos.add(createRandomLottoNumbers());
         }
         return new Lottos(lottos);
     }
 
-    private Lotto sortedLotto() {
-        return new Lotto(createSortedLottoNumbers(createRandomLottoNumbers()));
-    }
-
-    private List<LottoNumber> createRandomLottoNumbers() {
-        return randomLottoGenerator.createLotto(LottoNumber.allNumbers());
-    }
-
-    private List<LottoNumber> createSortedLottoNumbers(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.stream().sorted(LottoNumber::compare).collect(Collectors.toList());
+    private Lotto createRandomLottoNumbers() {
+        return new Lotto(randomLottoGenerator.createLotto(LottoNumber.allNumbers()));
     }
 }

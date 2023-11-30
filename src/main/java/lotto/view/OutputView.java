@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.dto.LottoDto;
 import lotto.dto.LottosDto;
 import lotto.dto.RankResultDto;
@@ -19,8 +20,12 @@ public class OutputView {
 
     public void printPurchasedLottos(LottosDto purchasedLottos) {
         for (LottoDto lottoDto : purchasedLottos.getLottoDtos()) {
-            System.out.println(lottoDto.getLottoNumbers().toString());
+            System.out.println(sortLottoNumbers(lottoDto));
         }
+    }
+
+    private List<Integer> sortLottoNumbers(LottoDto lottoDto) {
+        return lottoDto.getLottoNumbers().stream().sorted((a,b) -> a - b).collect(Collectors.toList());
     }
 
     public void printLottoRankStatistics(List<RankResultDto> rankResultDtos) {
