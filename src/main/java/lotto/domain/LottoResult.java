@@ -22,6 +22,9 @@ public class LottoResult {
   public double calculateProfitRate(int amount) {
     double total = 0 ;
     for (LottoResultType lottoResultType : LottoResultType.values()) {
+      if (lottoResultType.equals(LottoResultType.NO_MATCH)){
+        continue;
+      }
       total += this.calculatePrice(lottoResultType);
     }
     return total / amount;

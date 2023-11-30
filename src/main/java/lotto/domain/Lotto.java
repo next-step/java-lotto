@@ -1,27 +1,29 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
 
-  private List<LottoNumber> lottoNumbers;
+  private Set<LottoNumber> lottoNumbers;
   private static final int LOTTOSIZE = 6;
 
 
-  private Lotto(List<LottoNumber> lottoNumbers) {
+  private Lotto(Set<LottoNumber> lottoNumbers) {
     this.lottoNumbers = lottoNumbers;
   }
 
   public static Lotto defaultOf() {
-    List<LottoNumber> lottoNumbers = new ArrayList<>();
+    Set<LottoNumber> lottoNumbers = new HashSet<>();
     for (int i = 0; i < LOTTOSIZE; i++) {
       i = judgeSameNumbers(lottoNumbers, i);
     }
     return new Lotto(lottoNumbers);
   }
 
-  private static int judgeSameNumbers(List<LottoNumber> lottoNumbers, int i) {
+  private static int judgeSameNumbers(Set<LottoNumber> lottoNumbers, int i) {
     LottoNumber lottoNumber = LottoNumber.defaultOf();
     if (lottoNumbers.contains(lottoNumber)) {
       i--;
@@ -31,12 +33,12 @@ public class Lotto {
     return i;
   }
 
-  public static Lotto defaultOf(List<LottoNumber> lottoNumbers) {
+  public static Lotto defaultOf(Set<LottoNumber> lottoNumbers) {
     return new Lotto(lottoNumbers);
   }
   public static Lotto defaultOf(String lottoNumberString) {
     String[] split = lottoNumberString.split(",");
-    List<LottoNumber> lottoNumbers = new ArrayList<>();
+    Set<LottoNumber> lottoNumbers = new HashSet<>();
     for (String number: split) {
       LottoNumber lottoNumber = LottoNumber.of(Integer.parseInt(number));
       lottoNumbers.add(lottoNumber);

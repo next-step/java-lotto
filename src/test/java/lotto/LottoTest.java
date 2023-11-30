@@ -2,7 +2,10 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
@@ -77,8 +80,9 @@ public class LottoTest {
     LottoNumber lottoResultNumber4 = LottoNumber.of(6);
     LottoNumber lottoResultNumber5 = LottoNumber.of(1);
     LottoNumber lottoResultNumber6 = LottoNumber.of(40);
-    List<LottoNumber> lottoResultNumbers = List.of(lottoResultNumber1, lottoResultNumber2,
-        lottoResultNumber3, lottoResultNumber4, lottoResultNumber5, lottoResultNumber6);
+    Set<LottoNumber> lottoResultNumbers = new HashSet<>(
+        List.of(lottoResultNumber1, lottoResultNumber2,
+            lottoResultNumber3, lottoResultNumber4, lottoResultNumber5, lottoResultNumber6));
     Lotto resultLotto = Lotto.defaultOf(lottoResultNumbers);
 
     LottoNumber lottoNumber1 = LottoNumber.of(5);
@@ -87,8 +91,8 @@ public class LottoTest {
     LottoNumber lottoNumber4 = LottoNumber.of(8);
     LottoNumber lottoNumber5 = LottoNumber.of(2);
     LottoNumber lottoNumber6 = LottoNumber.of(43);
-    List<LottoNumber> lottoNumbers = List.of(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4,
-        lottoNumber5, lottoNumber6);
+    Set<LottoNumber> lottoNumbers = new HashSet<>(List.of(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4,
+        lottoNumber5, lottoNumber6));
     Lotto lotto = Lotto.defaultOf(lottoNumbers);
 
     // when

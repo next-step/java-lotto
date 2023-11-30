@@ -2,7 +2,9 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
@@ -21,32 +23,32 @@ public class LottoResultTest {
   @BeforeEach
   void setting_lotto() {
 
-    List<LottoNumber> threeMatchLottoNumbers = List.of(
+    Set<LottoNumber> threeMatchLottoNumbers =  new HashSet<>(List.of(
         LottoNumber.of(5), LottoNumber.of(25)
         , LottoNumber.of(30), LottoNumber.of(8)
         , LottoNumber.of(2), LottoNumber.of(43)
-    );
-    List<LottoNumber> threeMatchLottoNumbers2 = List.of(
+    ));
+    Set<LottoNumber> threeMatchLottoNumbers2 =  new HashSet<>(List.of(
         LottoNumber.of(5), LottoNumber.of(25)
         , LottoNumber.of(30), LottoNumber.of(8)
         , LottoNumber.of(2), LottoNumber.of(43)
-    );
+    ));
     Lotto threeMatchLotto = Lotto.defaultOf(threeMatchLottoNumbers);
     Lotto threeMatchLotto2 = Lotto.defaultOf(threeMatchLottoNumbers2);
 
-    List<LottoNumber> fourMatchLottoNumbers = List.of(
+    Set<LottoNumber> fourMatchLottoNumbers = new HashSet<>(List.of(
         LottoNumber.of(5), LottoNumber.of(25)
         , LottoNumber.of(30), LottoNumber.of(8)
         , LottoNumber.of(2), LottoNumber.of(40)
-    );
+    ));
     Lotto fourMatchLotto = Lotto.defaultOf(fourMatchLottoNumbers);
     lottos = Lottos.of(List.of(threeMatchLotto,threeMatchLotto2, fourMatchLotto));
 
-    List<LottoNumber> lottoResultNumbers = List.of(
+    Set<LottoNumber> lottoResultNumbers =  new HashSet<>(List.of(
         LottoNumber.of(5), LottoNumber.of(25)
         , LottoNumber.of(30), LottoNumber.of(6)
         , LottoNumber.of(1), LottoNumber.of(40)
-    );
+    ));
     resultLotto = Lotto.defaultOf(lottoResultNumbers);
   }
 
