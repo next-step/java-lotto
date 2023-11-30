@@ -2,6 +2,7 @@ package lotto.enums;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
@@ -36,6 +37,20 @@ public enum LottoResultType {
                                             .filter(it -> it.number == number)
                                             .findFirst()
                                             .orElseGet(() -> LottoResultType.NO_MATCH);
+  }
+
+  public static int findMaxNumber() {
+    return Arrays.stream(values()).mapToInt(it -> it.number)
+                                  .max()
+                                  .getAsInt();
+  }
+
+  public static int findMinimumNumber() {
+    return Arrays.stream(values())
+        .filter(it -> !it.equals(LottoResultType.NO_MATCH))
+        .mapToInt(it -> it.number)
+        .min()
+        .getAsInt();
   }
 
   public List<Lotto> result(List<Lotto> lottos, Lotto resultLotto) {
