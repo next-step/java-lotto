@@ -74,14 +74,12 @@ public class Lotto {
   public String toStringStatus() {
     StringBuilder stringBuilder = new StringBuilder();
 
-    stringBuilder.append("[");
     for (LottoNumber lottoNumber : this.lottoNumbers) {
       stringBuilder.append(lottoNumber.toString()).append(", ");
     }
     String status = stringBuilder.toString();
     int i = status.lastIndexOf(",");
-    String lastStatus = status.substring(0, i);
 
-    return lastStatus + "]";
+    return  status.substring(0, i);
   }
 }

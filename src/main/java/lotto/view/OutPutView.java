@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.Collection;
+import java.util.List;
 import lotto.domain.LottoResult;
 import lotto.enums.LottoResultType;
 import lotto.domain.Lottos;
@@ -21,8 +23,13 @@ public class OutPutView {
 
   public static void printLotto(Lottos lottos) {
     printSize(lottos.size());
-    String stringStatus = lottos.toStringStatus();
-    System.out.println(stringStatus);
+    List<String> stringStatus = lottos.toStringStatus();
+    stringStatus.forEach(each -> {
+              System.out.print('[');
+              System.out.print(each);
+              System.out.print(']');
+              System.out.println();
+            });
   }
 
   public static void printSize(int size) {

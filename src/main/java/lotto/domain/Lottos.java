@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,12 +56,15 @@ public class Lottos {
         return this.lottos.size();
     }
 
-    public String toStringStatus() {
-        StringBuilder stringBuilder = new StringBuilder();
+    public  List<String> toStringStatus() {
+
+        List<String> lottoStatusList = new ArrayList<>();
         for (Lotto lotto : this.lottos) {
-            stringBuilder.append(lotto.toStringStatus()).append("\n");
+            StringBuilder stringBuilder = new StringBuilder();
+            String lottoStatus = stringBuilder.append(lotto.toStringStatus()).toString();
+            lottoStatusList.add(lottoStatus);
         }
-        return stringBuilder.toString();
+        return lottoStatusList;
     }
 
 }

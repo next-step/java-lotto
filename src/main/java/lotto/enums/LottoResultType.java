@@ -1,5 +1,7 @@
 package lotto.enums;
 
+import java.util.function.BiFunction;
+
 public enum LottoResultType {
 
   THREE(3,5000)
@@ -10,6 +12,7 @@ public enum LottoResultType {
   ;
   private final int number;
   private final double price;
+  private BiFunction resultFunction;
 
   LottoResultType(int number, double price) {
     this.number = number;
