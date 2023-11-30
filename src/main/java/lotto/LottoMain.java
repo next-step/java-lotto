@@ -11,14 +11,36 @@ import lotto.view.LottoResultView;
 public class LottoMain {
     public static void main(String[] args) {
         LottoInputView lottoInputView = new LottoInputView();
-
-        Lotto lotto = new Lotto();
-        lotto.sellLotto(lottoInputView.inputBuyingMoney());
+        Lotto lotto = sellLotto(lottoInputView);
         LottoResultView.printLotto(lotto);
 
-        WinningNumbers winningNumbers = new WinningNumbers(new LottoNumbers(lottoInputView.inputWinningNumbers()), new LottoNumber(lottoInputView.inputBonusNumber()));
-        LottoResult lottoResult = new LottoResult(lotto.makeStatistics(winningNumbers), lotto.calcRateOfReturn(winningNumbers));
+        WinningNumbers winningNumbers = inputWinningNubmers(lottoInputView);
+        LottoResultView.printResult(new LottoResult(lotto.makeStatistics(winningNumbers), lotto.calcRateOfReturn(winningNumbers)));
+    }
 
-        LottoResultView.printResult(lottoResult);
+    private static WinningNumbers inputWinningNubmers(LottoInputView lottoInputView) {
+        WinningNumbers winningNumbers;
+        while (true) {
+            try {
+                winningNumbers = new WinningNumbers(new LottoNumbers(lottoInputView.inputWinningNumbers()), LottoNumber.Of(lottoInputView.inputBonusNumber()));
+                break;
+            } catch (IllegalArgumentException e) {
+                LottoResultView.printExceptionMsg(e.getMessage());
+            }
+        }
+        return winningNumbers;
+    }
+
+    private static Lotto sellLotto(LottoInputView lottoInputView) {
+        Lotto lotto;
+        while (true) {
+            try {
+                lotto = Lotto.sellLotto(lottoInputView.inputBuyingMoney(), lottoInputView.inputManualNumbers(lottoInputView.inputManualCount()));
+                break;
+            } catch (IllegalArgumentException e) {
+                LottoResultView.printExceptionMsg(e.getMessage());
+            }
+        }
+        return lotto;
     }
 }

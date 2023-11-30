@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class LottoResultView {
     public static void printLotto(Lotto lotto) {
+        System.out.printf("수동으로 %d개, 자동으로 %d개 구매했습니다.\n", lotto.manualCount(), lotto.lottoNumbersCount() - lotto.manualCount());
         for (LottoNumbers numbers : lotto.getLottoNumbers()) {
             System.out.println(numbers);
         }
@@ -24,5 +25,9 @@ public class LottoResultView {
             System.out.printf("(%d원) - %d개%n", entry.getKey().getPrizeAmount(), entry.getValue());
         }
         System.out.printf("총 수익률은 %.2f 입니다.%n", lottoResult.getRateOfReturn());
+    }
+
+    public static void printExceptionMsg(String msg) {
+        System.out.println(msg);
     }
 }

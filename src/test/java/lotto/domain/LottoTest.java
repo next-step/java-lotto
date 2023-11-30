@@ -13,16 +13,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoTest {
 
     @Test
-    void test_로또판매() {
-        Lotto lotto = new Lotto();
-        lotto.sellLotto(32500L);
+    void test_자동판매() {
+        Lotto lotto = Lotto.sellLotto(32500L, null);
         assertThat(lotto.lottoNumbersCount()).isEqualTo(32);
+    }
+
+    @Test
+    void test_수동판매() {
+        Lotto lotto = Lotto.sellLotto(2000L, List.of(List.of(1, 2, 3, 4, 5, 6)));
+        assertThat(lotto.getLottoNumbers()).contains(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
     }
 
     @Test
     void test_등수별카운드() {
         Lotto lotto = new Lotto(List.of(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), new LottoNumbers(List.of(1, 2, 3, 4, 5, 7))));
-        WinningNumbers winningLottoNumbers = new WinningNumbers(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
+        WinningNumbers winningLottoNumbers = new WinningNumbers(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), LottoNumber.Of(7));
 
         EnumMap<Rank, Integer> countPerPrize = new EnumMap<>(Rank.class);
         countPerPrize.put(Rank.FIRST_PLACE, 1);
@@ -37,7 +42,7 @@ class LottoTest {
     @Test
     void test_당첨금계산() {
         Lotto lotto = new Lotto(List.of(new LottoNumbers(stringToIntegerList("1, 2, 3, 4, 5, 6")), new LottoNumbers(stringToIntegerList("1, 2, 3, 4, 5, 7"))));
-        WinningNumbers winningLottoNumbers = new WinningNumbers(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
+        WinningNumbers winningLottoNumbers = new WinningNumbers(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), LottoNumber.Of(7));
 
         assertThat(lotto.calcWinningAmount(winningLottoNumbers)).isEqualTo(Rank.FIRST_PLACE.getPrizeAmount() + Rank.SECOND_PLACE.getPrizeAmount());
     }
@@ -45,7 +50,7 @@ class LottoTest {
     @Test
     void test_수익률계산() {
         Lotto lotto = new Lotto(List.of(new LottoNumbers(stringToIntegerList("1, 2, 3, 4, 5, 6")), new LottoNumbers(stringToIntegerList("1, 2, 3, 4, 5, 7"))));
-        WinningNumbers winningLottoNumbers = new WinningNumbers(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
+        WinningNumbers winningLottoNumbers = new WinningNumbers(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), LottoNumber.Of(7));
 
         double rateOfReturn = (double) (Rank.FIRST_PLACE.getPrizeAmount() + Rank.SECOND_PLACE.getPrizeAmount()) / (PRICE * 2);
         assertThat(lotto.calcRateOfReturn(winningLottoNumbers)).isEqualTo(rateOfReturn);
