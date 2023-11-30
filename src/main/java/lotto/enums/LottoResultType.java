@@ -1,6 +1,8 @@
 package lotto.enums;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
@@ -27,6 +29,13 @@ public enum LottoResultType {
 
   public boolean sameNumber(int number) {
     return this.number == number;
+  }
+
+  public static LottoResultType valueOf(int number) {
+    return Arrays.stream(values())
+                                            .filter(it -> it.number == number)
+                                            .findFirst()
+                                            .orElseGet(() -> LottoResultType.NO_MATCH);
   }
 
   public List<Lotto> result(List<Lotto> lottos, Lotto resultLotto) {
