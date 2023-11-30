@@ -29,12 +29,10 @@ public class WinnerLotto {
         return lotto.isOverlapping(bonusLottoNumber);
     }
 
-    public int countOfMatch(Set<LottoNumber> lotto) {
-        return this.winnerLotto.countOfMatch(lotto);
-    }
-
-    public boolean containsBonus(Set<LottoNumber> lotto) {
-        return this.bonus.belongTo(lotto);
+    public Rank findRankOf(Lotto lotto) {
+        int countOfMatch = this.winnerLotto.countOfMatch(lotto);
+        boolean containsBonus = lotto.isOverlapping(this.bonus);
+        return Rank.valeOf(countOfMatch, containsBonus);
     }
 
     @Override

@@ -54,10 +54,6 @@ public class LottoNumber {
         return this.value - lottoNumber.value;
     }
 
-    public boolean belongTo(Set<LottoNumber> lotto) {
-        return lotto.contains(this);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

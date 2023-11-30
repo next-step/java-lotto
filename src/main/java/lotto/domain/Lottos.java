@@ -24,7 +24,7 @@ public class Lottos {
 
     public Map<Rank, Long> seekRankStatistics(WinnerLotto winnerLotto) {
         Map<Rank, Long> rankResults = initRankResults();
-        lottos.stream().map(lotto -> lotto.findRankBy(winnerLotto)).filter(rank -> !rank.isNothing())
+        lottos.stream().map(winnerLotto::findRankOf).filter(rank -> !rank.isNothing())
                 .forEach(rank -> rankResults.put(rank, rankResults.get(rank) + 1));
         return rankResults;
     }

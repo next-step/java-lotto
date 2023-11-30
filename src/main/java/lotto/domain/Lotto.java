@@ -53,12 +53,6 @@ public class Lotto {
         return new LinkedHashSet<>(lottoNumbers);
     }
 
-    public Rank findRankBy(WinnerLotto winnerLotto) {
-        int countOfMatch = winnerLotto.countOfMatch(this.lottoNumbers);
-        boolean containsBonus = winnerLotto.containsBonus(this.lottoNumbers);
-        return Rank.valeOf(countOfMatch, containsBonus);
-    }
-
     public Set<LottoNumber> getLotto() {
         return lottoNumbers;
     }
@@ -67,8 +61,8 @@ public class Lotto {
         return this.lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber == number);
     }
 
-    public int countOfMatch(Set<LottoNumber> lotto) {
-        return (int) lotto.stream().filter(this.lottoNumbers::contains).count();
+    public int countOfMatch(Lotto lotto) {
+        return (int) this.lottoNumbers.stream().filter(lotto::isOverlapping).count();
     }
 
     @Override
