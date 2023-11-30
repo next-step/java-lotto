@@ -9,13 +9,10 @@ public class LottoNumber {
         if (number < 1 || 45 < number ) {
             throw new IllegalArgumentException("로또 번호에 맞는 숫자여야합니다.");
         }
-
         this.number = number;
     }
 
     public static LottoNumber of(int lottoNumber) {
-
-
         return new LottoNumber(lottoNumber);
     }
 
