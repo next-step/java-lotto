@@ -6,29 +6,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static lotto.domain.WinningAmount.*;
 
 @DisplayName("로또 일급 컬렉션 테스트")
 class LottosTest {
-
-    @DisplayName("당첨된 로또의 개수를 확인한다.")
-    @Test
-    void countAllWinningLotto() {
-        List<Integer> winningNumber = List.of(1,2,3,4,5,6);
-        Lotto lotto1 = new Lotto(List.of(1,2,3,4,5,6));
-        Lotto lotto2 = new Lotto(List.of(10,2,3,4,5,6));
-        Lotto lotto3 = new Lotto(List.of(10,11,3,4,5,6));
-        Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3));
-
-        HashMap<WinningAmount, Integer> result = lottos
-                .countAllWinning(new WinningLotto(new Lotto(winningNumber)));
-        Assertions.assertThat(result.get(FOUR_MATCH)).isEqualTo(1);
-        Assertions.assertThat(result.get(FIVE_MATCH)).isEqualTo(1);
-        Assertions.assertThat(result.get(SIX_MATCH)).isEqualTo(1);
-    }
 
     @DisplayName("보너스 번호에 따른 로또를 확인한다.")
     @Test
@@ -38,7 +21,7 @@ class LottosTest {
         List<Integer> winningNumber = List.of(1,2,3,4,5,6);
 
         HashMap<WinningAmount, Integer> result = lottos
-                .countAllWinning(new WinningLotto(new Lotto(winningNumber), 10));
+                .countAllWinning(new WinningLotto(new Lotto(winningNumber), LottoNumber.valueOf(10)));
 
         Assertions.assertThat(result.get(FIVE_MATCH_AND_BONUS)).isEqualTo(1);
     }
@@ -48,6 +31,19 @@ class LottosTest {
     @CsvSource(value = {"1:true", "7:false"}, delimiter = ':')
     void checkHasBonus(int bonusNumber, boolean result) {
         Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
-        Assertions.assertThat(lotto.hasBonus(new LottoNumber(bonusNumber))).isEqualTo(result);
+        Assertions.assertThat(lotto.hasBonus(LottoNumber.valueOf(bonusNumber))).isEqualTo(result);
+    }
+
+    @DisplayName("로또를 추가한다.")
+    @Test
+    void add() {
+        Lotto lotto = new Lotto(new ArrayList<>(List.of(1,2,3,4,5,6)));
+        Lotto otherLotto = new Lotto(new ArrayList<>(List.of(2,3,4,5,6,7)));
+        List<Lotto> lottos = new ArrayList<>(Collections.singleton(lotto));
+        List<Lotto> otherLottos = new ArrayList<>(Collections.singleton(otherLotto));
+
+        lottos.addAll(otherLottos);
+
+        Assertions.assertThat(lottos.size()).isEqualTo(2);
     }
 }

@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class Lotto {
@@ -12,9 +11,9 @@ public class Lotto {
     public Lotto(List<Integer> inputLottoNumbers) {
         for (Integer inputNumber : inputLottoNumbers) {
             checkCanAdd(inputNumber);
-            numbers.add(new LottoNumber(inputNumber));
+            numbers.add(LottoNumber.valueOf(inputNumber));
         }
-        numbers.sort(Comparator.comparingInt(LottoNumber::getLottoNumber));
+        Collections.sort(numbers);
     }
 
     private void checkCanAdd(Integer inputNumber) {
@@ -30,7 +29,7 @@ public class Lotto {
 
     private void checkDuplicateNumber(int inputNumber) {
         for (LottoNumber number : numbers) {
-            number.checkDuplicateNumber(new LottoNumber(inputNumber));
+            number.checkDuplicateNumber(LottoNumber.valueOf(inputNumber));
         }
     }
 
@@ -39,29 +38,19 @@ public class Lotto {
     }
 
     public int countWinningNumber(List<LottoNumber> winningNumbers) {
-        Integer countWinning = 0;
-        for (LottoNumber lottoNumber : numbers) {
-            countWinning = addIfEqualWinningNumber(lottoNumber, winningNumbers, countWinning);
-        }
-        return countWinning;
-    }
-
-    private Integer addIfEqualWinningNumber(
-            LottoNumber lottoNumber,
-            List<LottoNumber> winningNumbers,
-            Integer countWinning) {
-        for (LottoNumber winningNumber : winningNumbers) {
-            countWinning += getNumberIfEqual(lottoNumber, winningNumber);
-        }
-        return countWinning;
-    }
-
-    private int getNumberIfEqual(LottoNumber lottoNumber, LottoNumber winningNumber) {
-        return lottoNumber.getResultIfEqual(winningNumber);
+        return (int) numbers.stream()
+                .filter(element -> winningNumbers.contains(element))
+                .count();
     }
 
     public boolean hasBonus(LottoNumber bonus) {
-        return bonus != null && numbers.stream()
+        return numbers.stream()
                 .anyMatch(e -> e.getResultIfEqual(bonus) == 1);
+    }
+
+    public void checkWinningHasBonus(LottoNumber bonus) {
+        if (hasBonus(bonus)) {
+            throw new IllegalArgumentException("Don`t put bonus in winning lotto");
+        }
     }
 }

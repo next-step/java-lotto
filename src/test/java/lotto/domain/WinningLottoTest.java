@@ -15,12 +15,21 @@ public class WinningLottoTest {
     @DisplayName("5개의 당첨 번호와 보너스 볼이 일치한 로또 번호를 찾는다.")
     @Test
     void findSecondWinningLotto() {
-        Lotto lotto = new Lotto(List.of(1,2,3,4,5,7));
-        Lotto winningLotto = new Lotto(List.of(1,2,3,4,5,6));
-        WinningLotto winningLottoObject = new WinningLotto(winningLotto, 7);
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLottoObject = new WinningLotto(winningLotto, LottoNumber.valueOf(7));
         winningLottoObject.countWinning(lotto);
 
         HashMap<WinningAmount, Integer> result = winningLottoObject.sortWinningLottos();
         Assertions.assertThat(result.get(FIVE_MATCH_AND_BONUS)).isEqualTo(1);
+    }
+
+    @DisplayName("당첨 번호에 보너스 번호가 존재하면 예외가 발생한다.")
+    @Test
+    void checkInBonus() {
+        Assertions.assertThatIllegalArgumentException()
+                .isThrownBy(() -> {
+                    new WinningLotto(new Lotto(List.of(1,2,3,4,5,6)), LottoNumber.valueOf(6));
+                });
     }
 }
