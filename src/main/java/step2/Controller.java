@@ -31,8 +31,10 @@ public class Controller {
 
                 return;
 
-            }catch (Exception e){
+            }catch (NumberFormatException e){
                 System.out.println("입력 오류가 발생했습니다. 다시 입력해주세요.");
+                e.printStackTrace();
+            }catch (Exception e){
                 e.printStackTrace();
             }
 

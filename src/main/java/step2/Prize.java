@@ -3,46 +3,34 @@ package step2;
 import java.util.Arrays;
 
 public enum Prize {
-    THREE(3),
-    FOUR(4),
-    FIVE(5),
-    SIX(6),
-    UNKNOWN(0);
+    THREE(3, 5000),
+    FOUR(4, 50000),
+    FIVE(5, 1500000),
+    SIX(6, 2000000000),
+    UNKNOWN(0,0);
 
-    private final int WIN_PRIZE_THREE = 5000;
-    private final int WIN_PRIZE_FOUR = 50000;
-    private final int WIN_PRIZE_FIVE = 1500000;
-    private final int WIN_PRIZE_SIX = 2000000000;
+
     private final int value;
+    private final int money;
 
-    Prize(int value) {
+    Prize(int value, int money) {
         this.value = value;
+        this.money = money;
     }
 
     public int calculatePrize(Prize prize, int matchCount){
-        int result = 0;
-        switch (prize){
-            case THREE:
-                result = matchCount*WIN_PRIZE_THREE;
-                break;
-            case FOUR:
-                result = matchCount*WIN_PRIZE_FOUR;
-                break;
-            case FIVE:
-                result = matchCount*WIN_PRIZE_FIVE;
-                break;
-            case SIX:
-                result = matchCount*WIN_PRIZE_SIX;
-                break;
-        }
-        return result;
+        return prize.money * matchCount;
+    }
+
+    public String printValue(){
+        return this.value + "개 일치 (" + this.money + "원)= ";
     }
 
     static Prize of(int value) {
         return Arrays.stream(values())
                 .filter(v -> value == (v.value))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(String.format("해당 값을 찾을 수 없습니다.")));
+                .orElse(Prize.UNKNOWN);
     }
 
 }

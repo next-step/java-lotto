@@ -23,12 +23,12 @@ public class Lotto {
         this.lotto = lotto;
     }
 
-    public int matchWinningNumber(Lotto winningNumber){
+    public Prize matchWinningNumber(Lotto winningNumber){
         int winningCount = 0;
         for (int i : lotto) {
             winningCount += winningNumber.hasNumber(i);
         }
-        return winningCount;
+        return Prize.of(winningCount);
     }
 
     private int hasNumber(int number){
@@ -36,10 +36,6 @@ public class Lotto {
             return 1;
         }
         return 0;
-    }
-
-    public void printLotto(){
-        System.out.println(lotto.toString());
     }
 
 

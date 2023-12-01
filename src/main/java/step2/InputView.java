@@ -25,8 +25,7 @@ public class InputView {
     private int stringToInteger(String text){
         text = text.trim();
         if (text.isEmpty() && text.isBlank()){
-            System.out.println("입력된 값이 없습니다.");
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("입력된 값이 없습니다.");
         }
         return Integer.parseInt(text);
     }

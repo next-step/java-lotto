@@ -17,15 +17,16 @@ public class PlayLotto {
     }
 
     public void printLottos(){
+        ResultView resultView = new ResultView();
         for (Lotto lotto : lottos) {
-            lotto.printLotto();
+            resultView.printLotto(lotto.toString());
         }
     }
 
     public int playLottos(Lotto winningNumber){
         for (Lotto lotto : lottos) {
-            int key = lotto.matchWinningNumber(winningNumber);
-            winnings.addLottoValue(key);
+            Prize prize = lotto.matchWinningNumber(winningNumber);
+            winnings.addLottoValue(prize);
         }
         return winnings.getTotal();
     }

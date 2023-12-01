@@ -15,17 +15,15 @@ public class Winnings {
         winnings.put(Prize.SIX, 0);
     }
 
-    public void addLottoValue(int key){
-        if (checkLottoKey(key)){
-            int val = winnings.get(Prize.of(key));
-            winnings.put(Prize.of(key), val + 1);
-        }
+    public void addLottoValue(Prize prize){
+        int val = winnings.get(prize);
+        winnings.put(prize, val + 1);
     }
 
     public void printWinnings(){
-        for (Prize key : winnings.keySet()) {
-            int value = winnings.get(key);
-            System.out.println(key.ordinal()+"개 일치 ("+ key.calculatePrize(key, 1)+"원)- "+value+"개");
+        for (Prize prize : winnings.keySet()) {
+            int count = winnings.get(prize);
+            System.out.println(prize.printValue() + count + "개");
         }
     }
 
@@ -38,7 +36,4 @@ public class Winnings {
         return total;
     }
 
-    private boolean checkLottoKey(int key){
-        return key > 2;
-    }
 }

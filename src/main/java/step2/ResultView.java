@@ -5,6 +5,10 @@ public class ResultView {
     public ResultView() {
     }
 
+    public void printLotto(String lottoNum){
+        System.out.println(lottoNum);
+    }
+
     public void printLottoCount(int count){
         System.out.println(count+"개를 구매했습니다.");
     }
