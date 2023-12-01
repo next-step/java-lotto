@@ -4,42 +4,50 @@ import lotto.service.ValidationCheck;
 import lotto.view.ResultView;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Buyer {
-
-    public static final List<List<Integer>> purchasedLottoNumbers = new ArrayList<>();
+    public LottoTicket purchasedLottoTicket;
     private static final int LOTTO_PRICE = 1000;
     private static final int SAME = 1;
     private static final int NONE = 0;
     private static int purchaseAmount;
     public final HashMap<Rank, Integer> lottoResult = new HashMap<>();
 
-    public void purchaseLotto(int money) {
+    public void purchaseLottoTicket(int money) {
         ValidationCheck.validatePurchaseAmount(money);
 
         purchaseAmount = money;
-        int count = money / LOTTO_PRICE;
-        ResultView.printPurchaseCount(count);
+        int lottoTicketCount = calculateLottoTicketCount(money);
+        ResultView.printPurchaseCount(lottoTicketCount);
 
-        for (int i = 0; i < count; i++) {
-            LottoNumber lottoNumber = new LottoNumber(new LottoNumbers());
-            List<Integer> generatedNumbers = lottoNumber.generateLottoNumbers();
-            Collections.sort(generatedNumbers);
-            purchasedLottoNumbers.add(generatedNumbers);
-        }
+        LottoTicket lottoTicket = new LottoTicket(lottoTicketCount);
+        purchasedLottoTicket = lottoTicket;
+
+        ResultView.printPurchasedLottoNumbers(purchasedLottoTicket);
     }
 
-    public void checkLottoWinningNumbers(Buyer buyer, WinningNumbers winningNumbers) {
-        for (List<Integer> purchasedList : purchasedLottoNumbers) {
-            Rank rank = determineLottoRank(winningNumbers.getWinningNumbers(), purchasedList);
+    private int calculateLottoTicketCount(int money) {
+        return money / LOTTO_PRICE;
+    }
+
+    public void checkLottoWinningNumbers(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
+        for (LottoNumbers lottoNumbers : lottoTicket.getLottoTicket()) {
+            Rank rank = determineLottoRank(winningNumbers, lottoNumbers);
             lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
         }
+
         ResultView.showLottoResult(lottoResult, purchaseAmount);
     }
 
-    private int countSameNumber(Set<Integer> winningList, List<Integer> purchasedList) {
-        return (int) purchasedList.stream()
-                .mapToInt(number -> findSameNumber(winningList, number))
+    private Rank determineLottoRank(WinningNumbers winningNumbers, LottoNumbers purchasedList) {
+        int count = countMatchingNumbers(winningNumbers.getWinningNumbers(), purchasedList);
+        return Rank.getRank(count, purchasedList, winningNumbers.getBonusNumber());
+    }
+
+    private int countMatchingNumbers(Set<Integer> winningList, LottoNumbers purchasedList) {
+        return (int) purchasedList.getLottoNumbers().stream()
+                .mapToInt(LottoNumber -> findSameNumber(winningList, LottoNumber.getNumber()))
                 .sum();
     }
 
@@ -50,8 +58,10 @@ public class Buyer {
         return NONE;
     }
 
-    private Rank determineLottoRank(Set<Integer> winningList, List<Integer> purchasedList) {
-        int count = countSameNumber(winningList, purchasedList);
-        return Rank.values()[count];
+    public static boolean containsBonusNumber(LottoNumbers purchasedList, int bonusNumber) {
+        return purchasedList.getLottoNumbers().stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList())
+                .contains(bonusNumber);
     }
 }

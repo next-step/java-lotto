@@ -1,15 +1,18 @@
 package lotto.domain;
 
-import java.util.*;
+public class LottoNumber implements Comparable<LottoNumber> {
+    private final int number;
 
-public class LottoNumber {
-    private final LottoNumbers lottoNumbers;
-
-    public LottoNumber(LottoNumbers lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public LottoNumber(int number) {
+        this.number = number;
     }
 
-    public List<Integer> generateLottoNumbers() {
-        return lottoNumbers.getNumbers();
+    public int getNumber() {
+        return number;
+    }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return Integer.compare(this.number, other.number);
     }
 }
