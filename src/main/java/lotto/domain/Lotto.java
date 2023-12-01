@@ -38,25 +38,10 @@ public class Lotto {
     }
 
     public int countWinningNumber(List<LottoNumber> winningNumbers) {
-        Integer countWinning = 0;
-        for (LottoNumber lottoNumber : numbers) {
-            countWinning = addIfEqualWinningNumber(lottoNumber, winningNumbers, countWinning);
-        }
+        int countWinning = (int) numbers.stream()
+                .filter(element -> winningNumbers.contains(element))
+                .count();
         return countWinning;
-    }
-
-    private Integer addIfEqualWinningNumber(
-            LottoNumber lottoNumber,
-            List<LottoNumber> winningNumbers,
-            Integer countWinning) {
-        for (LottoNumber winningNumber : winningNumbers) {
-            countWinning += getNumberIfEqual(lottoNumber, winningNumber);
-        }
-        return countWinning;
-    }
-
-    private int getNumberIfEqual(LottoNumber lottoNumber, LottoNumber winningNumber) {
-        return lottoNumber.getResultIfEqual(winningNumber);
     }
 
     public boolean hasBonus(LottoNumber bonus) {
