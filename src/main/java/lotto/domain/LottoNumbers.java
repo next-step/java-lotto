@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.util.Util;
+import lotto.util.NumberUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,32 +14,52 @@ public class LottoNumbers {
     public LottoNumbers() {
         lottoNumbers = new ArrayList<Number>();
 
-        for (int i = 0; i <REPEAT; i++) {
-            lottoNumbers.add(new Number(Util.randomNum()));
+        while (lottoNumbers.size() != REPEAT) {
+            Number number = new Number(NumberUtil.randomNum());
+            validAddNumber(number);
         }
+
         sort();
+    }
+
+    private void validAddNumber(Number number) {
+        if (!isContains(number.getNumber())) {
+            lottoNumbers.add(number);
+        }
     }
 
     public LottoNumbers(List<Integer> integerNumbers) {
         lottoNumbers = new ArrayList<Number>();
 
         for (int number : integerNumbers) {
-            lottoNumbers.add(new Number(number));
+            Number passiveNumber = new Number(number);
+            isContainsError(passiveNumber);
+            lottoNumbers.add(passiveNumber);
         }
 
         sort();
     }
 
+    private void addNumber(Number number) {
+        isContainsError(number);
+        lottoNumbers.add(number);
+    }
+
+    private void isContainsError(Number insertNum) {
+        if (isContains(insertNum.getNumber())) {
+            throw new IllegalArgumentException("중복된 데이터가 존재합니다.");
+        }
+    }
 
     private void sort() {
         Collections.sort(this.lottoNumbers);
     }
 
-    public boolean isContains(int winningNumber) {
+    public boolean isContains(int number) {
         return this.lottoNumbers.stream()
                 .map(Number::getNumber)
                 .collect(Collectors.toList())
-                .contains(winningNumber);
+                .contains(number);
     }
 
     public List<Number> getLottoNumbers() {
