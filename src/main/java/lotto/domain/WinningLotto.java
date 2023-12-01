@@ -9,17 +9,11 @@ public class WinningLotto {
     private Map<WinningAmount, Integer> countByMatch  = new HashMap<>();
 
     public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
+        winningLotto.checkWinningHasBonus(bonusNumber);
         this.winningLotto = winningLotto;
         bonus = bonusNumber;
-        checkWinningHasBonus(winningLotto, bonus);
         for (WinningAmount winningAmount : WinningAmount.values()) {
             countByMatch.put(winningAmount, 0);
-        }
-    }
-
-    private void checkWinningHasBonus(Lotto winningLotto, LottoNumber bonus) {
-        if (winningLotto.hasBonus(bonus)) {
-            throw new IllegalArgumentException("Don`t put bonus in winning lotto");
         }
     }
 

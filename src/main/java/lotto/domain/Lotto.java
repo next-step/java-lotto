@@ -38,14 +38,19 @@ public class Lotto {
     }
 
     public int countWinningNumber(List<LottoNumber> winningNumbers) {
-        int countWinning = (int) numbers.stream()
+        return (int) numbers.stream()
                 .filter(element -> winningNumbers.contains(element))
                 .count();
-        return countWinning;
     }
 
     public boolean hasBonus(LottoNumber bonus) {
         return numbers.stream()
                 .anyMatch(e -> e.getResultIfEqual(bonus) == 1);
+    }
+
+    public void checkWinningHasBonus(LottoNumber bonus) {
+        if (hasBonus(bonus)) {
+            throw new IllegalArgumentException("Don`t put bonus in winning lotto");
+        }
     }
 }
