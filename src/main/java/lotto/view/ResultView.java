@@ -7,4 +7,6 @@ public interface ResultView {
     void showLottos(Lottos lottos);
 
     void winningStats(LottosResult lottosResult);
+
+    void generatedLottoGuide(int manualLottoAmount, int autoLottoAmount);
 }

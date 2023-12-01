@@ -6,6 +6,11 @@ import lotto.domain.Ranking;
 
 public class ConsoleResultView implements ResultView {
     @Override
+    public void generatedLottoGuide(int manualLottoAmount, int autoLottoAmount) {
+        System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.\n", manualLottoAmount, autoLottoAmount);
+    }
+
+    @Override
     public void showLottos(Lottos lottos) {
         lottos.get().forEach(lotto -> System.out.println(lotto.lotto()));
         System.out.println();
@@ -19,6 +24,7 @@ public class ConsoleResultView implements ResultView {
         printProfitRate(lottosResult);
         printIsLoss(lottosResult);
     }
+
 
     private void printIsLoss(LottosResult lottosResult) {
         if (lottosResult.isLoss()) {

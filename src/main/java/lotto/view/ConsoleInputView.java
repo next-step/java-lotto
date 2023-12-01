@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -16,9 +17,23 @@ public class ConsoleInputView implements InputView {
         Scanner scanner = new Scanner(System.in);
 
         int payment = scanner.nextInt();
-        int amount = payment / Lotto.PRICE;
-        System.out.println(amount + "개를 구입했습니다.");
-        return amount;
+        return payment / Lotto.PRICE;
+    }
+
+    @Override
+    public List<Lotto> manualLottos() {
+        System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
+        Scanner scanner = new Scanner(System.in);
+        int amount = Integer.parseInt(scanner.nextLine());
+
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<Lotto> manualLottos = new ArrayList<>();
+
+        for (int i=0;i<amount;i++){
+            String manualLotto = scanner.nextLine();
+            manualLottos.add(new Lotto(stringToList(manualLotto)));
+        }
+        return manualLottos;
     }
 
     public WinningLotto winningLotto() {

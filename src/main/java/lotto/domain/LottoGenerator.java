@@ -20,4 +20,11 @@ public class LottoGenerator {
 				.collect(Collectors.toList());
 		return new Lottos(lottos);
 	}
+
+	public List<Lotto> generateLottos() {
+		return Stream
+				.generate(() -> new Lotto(lottoNumbers.lottoNumbers()))
+				.limit(amount)
+				.collect(Collectors.toList());
+	}
 }
