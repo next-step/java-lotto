@@ -3,6 +3,7 @@ package lotto;
 import lotto.application.dto.LottoRequest;
 import lotto.application.dto.LottoResponse;
 import lotto.application.service.BenefitCalculator;
+import lotto.common.handler.UiExceptionHandler;
 import lotto.domain.Lottos;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
@@ -22,9 +23,9 @@ public class LottoProcessor {
 
     private static LottoRequest createLottoRequest() {
         InputView inputView = new InputView();
-        Integer amount = inputView.inputAmount();
-        Integer manualCount = inputView.inputManualCount();
-        Integer autoCount = (amount / 1000) - manualCount;
+        int amount = inputView.inputAmount();
+        int manualCount = inputView.inputManualCount();
+        int autoCount = UiExceptionHandler.calculateAutoCount(amount, manualCount);
         Lottos lottos = createLottos(inputView, manualCount, autoCount);
         inputView.printLottos(manualCount, autoCount, lottos);
 
@@ -35,11 +36,12 @@ public class LottoProcessor {
                 inputView.inputBonusNumber());
     }
 
-    private static Lottos createLottos(InputView inputView, Integer manualCount, Integer autoCount) {
+    private static Lottos createLottos(InputView inputView, int manualCount, int autoCount) {
         Lottos manualLottos = new Lottos(inputView.calculateManualLottos(manualCount));
-        Lottos autoLottos = new Lottos(inputView.calculateAutoLottos(autoCount));
-
-        manualLottos.addLottos(autoLottos);
+        if (autoCount > 0) {
+            Lottos autoLottos = new Lottos(inputView.calculateAutoLottos(autoCount));
+            manualLottos.addLottos(autoLottos);
+        }
         return manualLottos;
     }
 }

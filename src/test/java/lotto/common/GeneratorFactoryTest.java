@@ -1,5 +1,6 @@
 package lotto.common;
 
+import lotto.common.generator.GeneratorFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,9 +1,10 @@
 package lotto.ui;
 
-import lotto.common.GeneratorFactory;
+import lotto.common.generator.GeneratorFactory;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
+import lotto.common.handler.UiExceptionHandler;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -13,15 +14,19 @@ import java.util.Scanner;
 public class InputView {
     private final String DELIMITER_COMMA_EMPTY = "\\s*,\\s*";
     private final int LOTTO_PRICE = 1000;
+    UiExceptionHandler exceptionHandler = new UiExceptionHandler();
 
-    public Integer inputAmount() {
+    public int inputAmount() {
         System.out.println("로또 구입 금액을 입력해주세요.");
         Scanner scanner = new Scanner(System.in);
         String amount = scanner.nextLine();
+        if (exceptionHandler.inputAmountHandle(amount)) {
+            return inputAmount();
+        }
         return Integer.parseInt(amount);
     }
 
-    public Integer inputManualCount() {
+    public int inputManualCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         String count = scanner.nextLine();
