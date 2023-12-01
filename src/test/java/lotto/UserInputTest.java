@@ -13,7 +13,7 @@ public class UserInputTest {
     @Test
     void 수동금액이크면오류() {
         assertThatThrownBy(() -> {
-            new UserInput(5000, 6);
-        });
+            new UserInput(5_000, 6);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
