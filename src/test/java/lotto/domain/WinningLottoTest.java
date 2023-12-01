@@ -17,7 +17,7 @@ public class WinningLottoTest {
     void findSecondWinningLotto() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
         Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLottoObject = new WinningLotto(winningLotto, 7);
+        WinningLotto winningLottoObject = new WinningLotto(winningLotto, LottoNumber.valueOf(7));
         winningLottoObject.countWinning(lotto);
 
         HashMap<WinningAmount, Integer> result = winningLottoObject.sortWinningLottos();
@@ -29,7 +29,7 @@ public class WinningLottoTest {
     void checkInBonus() {
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() -> {
-                    new WinningLotto(new Lotto(List.of(1,2,3,4,5,6)), 6);
+                    new WinningLotto(new Lotto(List.of(1,2,3,4,5,6)), LottoNumber.valueOf(6));
                 });
     }
 }

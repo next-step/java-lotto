@@ -4,10 +4,12 @@ import lotto.application.dto.LottoRequest;
 import lotto.application.dto.LottoResponse;
 import lotto.application.service.BenefitCalculator;
 import lotto.common.handler.UiExceptionHandler;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
-
+import java.util.List;
 
 public class LottoProcessor {
 
@@ -33,15 +35,15 @@ public class LottoProcessor {
                 amount,
                 lottos,
                 inputView.inputWinningLotto(),
-                inputView.inputBonusNumber());
+                LottoNumber.valueOf(inputView.inputBonusNumber()));
     }
 
     private static Lottos createLottos(InputView inputView, int manualCount, int autoCount) {
-        Lottos manualLottos = new Lottos(inputView.calculateManualLottos(manualCount));
+        List<Lotto> manualLottoList = inputView.calculateManualLottos(manualCount);
         if (autoCount > 0) {
-            Lottos autoLottos = new Lottos(inputView.calculateAutoLottos(autoCount));
-            manualLottos.addLottos(autoLottos);
+            List<Lotto> autoLottoList = inputView.calculateAutoLottos(autoCount);
+            manualLottoList.addAll(autoLottoList);
         }
-        return manualLottos;
+        return new Lottos(manualLottoList);
     }
 }

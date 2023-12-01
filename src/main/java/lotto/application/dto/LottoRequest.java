@@ -1,6 +1,7 @@
 package lotto.application.dto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 
 
@@ -8,13 +9,13 @@ public class LottoRequest {
     private Integer inputAmount;
     private Lottos lottos;
     private Lotto winningLotto;
-    private Integer bonusNumber;
+    private LottoNumber bonusNumber;
 
     public LottoRequest(
             Integer inputAmount,
             Lottos lottos,
             Lotto winningLotto,
-            Integer bonusNumber) {
+            LottoNumber bonusNumber) {
         this.inputAmount = inputAmount;
         this.lottos = lottos;
         this.winningLotto = winningLotto;
@@ -29,5 +30,5 @@ public class LottoRequest {
         return winningLotto;
     }
 
-    public Integer getBonusNumber() { return bonusNumber; }
+    public LottoNumber getBonusNumber() { return bonusNumber; }
 }

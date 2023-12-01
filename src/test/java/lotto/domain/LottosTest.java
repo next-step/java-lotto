@@ -6,9 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static lotto.domain.WinningAmount.*;
 
@@ -23,7 +21,7 @@ class LottosTest {
         List<Integer> winningNumber = List.of(1,2,3,4,5,6);
 
         HashMap<WinningAmount, Integer> result = lottos
-                .countAllWinning(new WinningLotto(new Lotto(winningNumber), 10));
+                .countAllWinning(new WinningLotto(new Lotto(winningNumber), LottoNumber.valueOf(10)));
 
         Assertions.assertThat(result.get(FIVE_MATCH_AND_BONUS)).isEqualTo(1);
     }
@@ -41,10 +39,11 @@ class LottosTest {
     void add() {
         Lotto lotto = new Lotto(new ArrayList<>(List.of(1,2,3,4,5,6)));
         Lotto otherLotto = new Lotto(new ArrayList<>(List.of(2,3,4,5,6,7)));
-        Lottos lottos = new Lottos(new ArrayList<>(List.of(lotto)));
-        Lottos otherLottos = new Lottos(List.of(otherLotto));
-        lottos.addLottos(otherLottos);
+        List<Lotto> lottos = new ArrayList<>(Collections.singleton(lotto));
+        List<Lotto> otherLottos = new ArrayList<>(Collections.singleton(otherLotto));
 
-        Assertions.assertThat(lottos.getLottosSize()).isEqualTo(2);
+        lottos.addAll(otherLottos);
+
+        Assertions.assertThat(lottos.size()).isEqualTo(2);
     }
 }

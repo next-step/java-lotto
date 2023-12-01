@@ -6,11 +6,11 @@ import java.util.*;
 public class WinningLotto {
     private Lotto winningLotto;
     private LottoNumber bonus;
-    private HashMap<WinningAmount, Integer> countByMatch  = new HashMap<>();
+    private Map<WinningAmount, Integer> countByMatch  = new HashMap<>();
 
-    public WinningLotto(Lotto winningLotto, int bonusNumber) {
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
         this.winningLotto = winningLotto;
-        bonus = LottoNumber.valueOf(bonusNumber);
+        bonus = bonusNumber;
         checkWinningHasBonus(winningLotto, bonus);
         for (WinningAmount winningAmount : WinningAmount.values()) {
             countByMatch.put(winningAmount, 0);
