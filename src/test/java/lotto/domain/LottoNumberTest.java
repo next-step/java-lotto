@@ -14,7 +14,7 @@ public class LottoNumberTest {
     @ValueSource(ints = {0, 46})
     void LottoNumberTest(int number) {
         Assertions.assertThatIllegalArgumentException().isThrownBy(() -> {
-           new LottoNumber(number);
+            LottoNumber.valueOf(number);
         });
     }
 
@@ -22,6 +22,6 @@ public class LottoNumberTest {
     @Test
     void getResultIfEqual() {
         LottoNumber number = new LottoNumber(1);
-        Assertions.assertThat(number.getResultIfEqual(new LottoNumber(1))).isEqualTo(1);
+        Assertions.assertThat(number.getResultIfEqual(LottoNumber.valueOf(1))).isEqualTo(1);
     }
 }

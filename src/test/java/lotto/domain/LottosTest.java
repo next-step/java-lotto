@@ -33,7 +33,7 @@ class LottosTest {
     @CsvSource(value = {"1:true", "7:false"}, delimiter = ':')
     void checkHasBonus(int bonusNumber, boolean result) {
         Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
-        Assertions.assertThat(lotto.hasBonus(new LottoNumber(bonusNumber))).isEqualTo(result);
+        Assertions.assertThat(lotto.hasBonus(LottoNumber.valueOf(bonusNumber))).isEqualTo(result);
     }
 
     @DisplayName("로또를 추가한다.")

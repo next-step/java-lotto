@@ -10,7 +10,7 @@ public class WinningLotto {
 
     public WinningLotto(Lotto winningLotto, int bonusNumber) {
         this.winningLotto = winningLotto;
-        bonus = new LottoNumber(bonusNumber);
+        bonus = LottoNumber.valueOf(bonusNumber);
         checkWinningHasBonus(winningLotto, bonus);
         for (WinningAmount winningAmount : WinningAmount.values()) {
             countByMatch.put(winningAmount, 0);

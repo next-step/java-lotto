@@ -11,7 +11,7 @@ public class Lotto {
     public Lotto(List<Integer> inputLottoNumbers) {
         for (Integer inputNumber : inputLottoNumbers) {
             checkCanAdd(inputNumber);
-            numbers.add(new LottoNumber(inputNumber));
+            numbers.add(LottoNumber.valueOf(inputNumber));
         }
         Collections.sort(numbers);
     }
@@ -29,7 +29,7 @@ public class Lotto {
 
     private void checkDuplicateNumber(int inputNumber) {
         for (LottoNumber number : numbers) {
-            number.checkDuplicateNumber(new LottoNumber(inputNumber));
+            number.checkDuplicateNumber(LottoNumber.valueOf(inputNumber));
         }
     }
 
