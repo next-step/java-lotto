@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.LottoPrize;
-import lotto.domain.LottoRate;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 
@@ -11,6 +10,8 @@ public class LottoResultView {
     private static final String RESULT_MATCH_COUNT = "개 일치";
     private static final String RESULT_BONUS = ", 보너스 볼 일치";
     private static final String RESULT_COUNT = "개";
+
+    public static StringBuilder BUILDER = new StringBuilder();
 
     public static void showLottos(Lottos lottos) {
         for (int i = 0; i < lottos.size(); i++) {
@@ -29,18 +30,28 @@ public class LottoResultView {
         if (prize.equals(LottoPrize.NONE)) {
             return;
         }
-        StringBuilder builder = new StringBuilder();
-        builder.append(prize.getMatchCount() + RESULT_MATCH_COUNT);
+        BUILDER.setLength(0);
+        BUILDER.append(prize.getMatchCount() + RESULT_MATCH_COUNT);
         if (prize.equals(LottoPrize.SECOND)) {
-            builder.append(RESULT_BONUS);
+            BUILDER.append(RESULT_BONUS);
         }
-        builder.append(" (" + prize.getPrize() + ")- ");
-        builder.append(count + RESULT_COUNT);
-        System.out.println(builder.toString());
-
+        BUILDER.append(" (" + prize.getPrize() + ")- ");
+        BUILDER.append(count + RESULT_COUNT);
+        System.out.println(BUILDER.toString());
     }
 
     public static void shotRate(double rate) {
-        System.out.println(String.format(NOTICE_LOTTO_RATE, rate, LottoRate.getInfo(rate)));
+        System.out.println(String.format(NOTICE_LOTTO_RATE, rate, getRateInfo(rate)));
+    }
+
+    private static String getRateInfo(double rate) {
+        double baseRate = 1.0;
+        if (rate > baseRate) {
+            return "이득이";
+        }
+        if (rate == baseRate) {
+            return "본전이";
+        }
+        return "손해";
     }
 }
