@@ -24,7 +24,7 @@ public class LottoResult {
                 .sum();
     }
 
-    public double getRate(Money money) {
+    public double getRate(LottoMoney money) {
         double totalPrize = totalPrize();
         return Math.round(totalPrize / money.getMoney() * PERCENT_FOR_RATE) / PERCENT_FOR_RATE;
     }

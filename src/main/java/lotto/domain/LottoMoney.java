@@ -1,10 +1,10 @@
 package lotto.domain;
 
-public class Money {
+public class LottoMoney {
 
     private final int money;
 
-    public Money(int money) {
+    public LottoMoney(int money) {
         if (money < Lotto.PRICE) {
             throw new IllegalArgumentException("유효하지 않은 값입니다.");
         }

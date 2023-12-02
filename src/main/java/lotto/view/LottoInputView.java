@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Money;
+import lotto.domain.LottoMoney;
 
 import java.util.Scanner;
 
@@ -13,9 +13,9 @@ public class LottoInputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static Money inputMoney() {
+    public static LottoMoney inputMoney() {
         System.out.println(NOTICE_INPUT_MONEY);
-        Money money = new Money(Integer.parseInt(SCANNER.nextLine()));
+        LottoMoney money = new LottoMoney(Integer.parseInt(SCANNER.nextLine()));
         System.out.println(money.lottoCount() + INFORMATION_INPUT_COUNT);
         return money;
     }
