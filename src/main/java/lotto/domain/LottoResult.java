@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 
-public class LottoResult {
+public class LottoResult implements Rate{
 
     private static final double PERCENT_FOR_RATE = 100.0;
 
@@ -24,8 +24,9 @@ public class LottoResult {
                 .sum();
     }
 
-    public double getRate(LottoMoney money) {
+    @Override
+    public double getRate(Object obj) {
         double totalPrize = totalPrize();
-        return Math.round(totalPrize / money.getMoney() * PERCENT_FOR_RATE) / PERCENT_FOR_RATE;
+        return Math.round(totalPrize / ((LottoMoney) obj).getMoney() * PERCENT_FOR_RATE) / PERCENT_FOR_RATE;
     }
 }
