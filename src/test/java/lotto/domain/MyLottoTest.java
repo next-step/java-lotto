@@ -38,15 +38,37 @@ public class MyLottoTest {
 
     @Test
     @DisplayName("당첨 번호 5개와 보너스볼이 일치하면 당첨 결과 2등에 추가한다.")
-    void 당첨_결과_2등_추가(){
+    void 당첨_번호가_5개_일치하고_보너스볼이_일치하면_2등(){
         MyLottos myLottos = new MyLottos(List.of(
-                new Lotto(Arrays.asList(4,5,6,7,8,10)),
-                new Lotto(Arrays.asList(4,5,6,7,8,11)),
                 new Lotto(Arrays.asList(4,5,6,7,8,11))
         ));
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(4,5,6,7,8,9), 11);
         MatchResult matchResult = myLottos.matchMyLotto(winningLotto);
 
-        assertThat(matchResult.matchCountOf(Rank.SECOND)).isEqualTo(2);
+        assertThat(matchResult.matchCountOf(Rank.SECOND)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("당첨 번호 6개가 일치하면 당첨 결과 1등에 추가한다.")
+    void 당첨_번호가_6개_일치하면_1등(){
+        MyLottos myLottos = new MyLottos(List.of(
+                new Lotto(Arrays.asList(4,5,6,7,8,10))
+        ));
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(4,5,6,7,8,10), 11);
+        MatchResult matchResult = myLottos.matchMyLotto(winningLotto);
+
+        assertThat(matchResult.matchCountOf(Rank.FIRST)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("당첨 번호만 5개가 일치하면 당첨 결과 3등에 추가한다.")
+    void 당첨_번호만_5개_일치하면_3등(){
+        MyLottos myLottos = new MyLottos(List.of(
+                new Lotto(Arrays.asList(4,5,6,7,8,10))
+        ));
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(4,5,6,7,8,9), 11);
+        MatchResult matchResult = myLottos.matchMyLotto(winningLotto);
+
+        assertThat(matchResult.matchCountOf(Rank.THIRD)).isEqualTo(1);
     }
 }
