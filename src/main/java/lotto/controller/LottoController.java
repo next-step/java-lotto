@@ -24,7 +24,9 @@ public class LottoController {
     private Lottos buyLotto() {
         int money = inputView.inputMoney();
         List<List<Integer>> ticketsNumbers = inputView.inputManualTickets();
-        Lottos tickets = LottoSeller.issueLotto(money, ticketsNumbers);
+        Lottos tickets = LottoSeller.issueLotto(money, ticketsNumbers.stream()
+                .map(numbers -> LottoNumbers.of(numbers))
+                .collect(Collectors.toList()));
 
         outputView.printCheckPurchaseMessage(ticketsNumbers.size(), tickets.count()-ticketsNumbers.size());
         outputView.printLottoTickets(tickets);

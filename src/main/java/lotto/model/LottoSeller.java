@@ -14,7 +14,7 @@ public class LottoSeller {
         return count * TICKET_PRICE;
     }
 
-    public static Lottos issueLotto(int money, List<List<Integer>> manualTicketsNumbers) {
+    public static Lottos issueLotto(int money, List<LottoNumbers> manualTicketsNumbers) {
         int ticketCount = calculateTicketCount(money);
         validateTicketCount(ticketCount, manualTicketsNumbers.size());
 

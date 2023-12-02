@@ -28,10 +28,10 @@ public class LottoSellerTest {
     @Test
     @DisplayName("전체 티켓 갯수보다 수동 티켓 갯수가 많을 경우 에러 발생")
     public void validate_수동_티켓_갯수() {
-        List<List<Integer>> manualTicketsNumbers = Arrays.asList(
-                Arrays.asList(1,2,3,4,5,6),
-                Arrays.asList(7,8,9,10,11,12),
-                Arrays.asList(13,14,15,16,17,18)
+        List<LottoNumbers> manualTicketsNumbers = Arrays.asList(
+                LottoNumbers.of(Arrays.asList(1,2,3,4,5,6)),
+                LottoNumbers.of(Arrays.asList(7,8,9,10,11,12)),
+                LottoNumbers.of(Arrays.asList(13,14,15,16,17,18))
         );
         assertThatIllegalArgumentException().isThrownBy(() -> {
             LottoSeller.issueLotto(2000, manualTicketsNumbers);

@@ -20,7 +20,7 @@ public class Lottos {
         return new Lottos(tickets);
     }
 
-    public static Lottos generate(List<List<Integer>> ticketsNumbers) {
+    public static Lottos generate(List<LottoNumbers> ticketsNumbers) {
         return new Lottos(ticketsNumbers.stream()
                         .map(Lotto::new)
                         .collect(Collectors.toList()));
