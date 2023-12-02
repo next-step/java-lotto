@@ -20,13 +20,10 @@ public class MatchResult {
     }
 
     void addMatchResult(List<Lotto> myLottos, WinningLotto winningLotto) {
-        int myMatchCount = 0;
-
         for(Lotto lotto : myLottos){
-            myMatchCount = winningLotto.matchCount(lotto);
-            matchResult.put(Rank.returnRank(myMatchCount), matchResult.get(Rank.returnRank(myMatchCount)) + 1);
+            Rank rank = winningLotto.matchRank(lotto);
+            matchResult.put(rank, matchResult.get(rank) + 1);
         }
-
     }
 
     public int matchCountOf(Rank rank) {
