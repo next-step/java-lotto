@@ -29,14 +29,14 @@ public class LottoUtil {
         return string.split(",");
     }
 
-    public static WinningLotto settingWinnerNumber(String[] winningNumbers) {
+    public static WinningLotto settingWinnerNumber(String[] winningNumbers, int bonusNumber) {
         List<Integer> winningNumber = new ArrayList<>();
 
         for(int i = 0; i < winningNumbers.length; i++){
             winningNumber.add(Integer.parseInt(winningNumbers[i]));
         }
 
-        WinningLotto winningLotto = new WinningLotto(winningNumber);
+        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
 
         return winningLotto;
     }

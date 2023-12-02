@@ -11,17 +11,19 @@ public class InputView {
         System.out.println("구매금액을 입력해 주세요.");
 
         Scanner scanner = new Scanner(System.in);
-        int payMoney = scanner.nextInt();
 
-        return payMoney;
+        return scanner.nextInt();
     }
 
     public static WinningLotto inputWinningNumbers(){
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         Scanner scanner = new Scanner(System.in);
+        String[] winningNumbers = LottoUtil.splitString(scanner.nextLine());
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = scanner.nextInt();
 
-        return LottoUtil.settingWinnerNumber(LottoUtil.splitString(scanner.nextLine()));
+        return LottoUtil.settingWinnerNumber(winningNumbers, bonusNumber);
     }
 
 }
