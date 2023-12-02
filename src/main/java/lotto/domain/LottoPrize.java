@@ -20,6 +20,10 @@ public enum LottoPrize {
         this.prize = prize;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public int getPrize() {
         return this.prize;
     }
@@ -43,16 +47,5 @@ public enum LottoPrize {
         return Arrays.stream(values())
                 .filter(prize -> prize.matchCount == count)
                 .findFirst().get();
-    }
-
-    public String toString(int count) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(matchCount + "개 일치");
-        if (this.equals(LottoPrize.SECOND)) {
-            builder.append(", 보너스 볼 일치");
-        }
-        builder.append(" (" + prize + ")- ");
-        builder.append(count + "개");
-        return builder.toString();
     }
 }
