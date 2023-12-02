@@ -25,11 +25,13 @@ public class LottoTest {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
-        Lotto ticket = new Lotto(numberList);
+        Lottos tickets = new Lottos(
+                Arrays.asList(new Lotto(numberList))
+        );
 
         WinningNumber winningNumber = new WinningNumber(Arrays.asList(1,2,3,4,5,6), 7);
 
-        Assertions.assertThat(winningNumber.match(ticket).rank())
+        Assertions.assertThat(winningNumber.match(tickets).get(0).rank())
                 .isEqualTo(expectedRank);
     }
 }

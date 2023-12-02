@@ -13,13 +13,6 @@ public class LottoReport {
         this.rateOfReturn = calculateRateOfReturn();
     }
 
-    public LottoReport(Lottos tickets, WinningNumber winningNumber) {
-        this(tickets.tickets()
-                .stream()
-                .map(ticket -> winningNumber.match(ticket))
-                .collect(Collectors.toList()));
-    }
-
     private double calculateRateOfReturn() {
         return Math.floor(calculateTotalPrize() / calculateTotalInvestment() * 100) / 100;
     }

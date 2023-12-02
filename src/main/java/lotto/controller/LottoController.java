@@ -38,7 +38,7 @@ public class LottoController {
                 inputView.inputDefaultWinningNumbers(),
                 inputView.inputBonusBallNumber());
 
-        LottoReport report = new LottoReport(tickets, winningNumber);
+        LottoReport report = new LottoReport(winningNumber.match(tickets));
         outputView.printResultReport(report);
     }
 }
