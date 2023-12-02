@@ -34,7 +34,7 @@ public class Lottos {
     public LottoResult match(WinningLotto winningLotto) {
         List<LottoPrize> result = new ArrayList<>();
         for (Lotto lotto : values) {
-            result.add(LottoPrize.from(winningLotto.matchCount(lotto), winningLotto.matchBonus(lotto)));
+            result.add(LottoPrize.find(winningLotto.matchCount(lotto), winningLotto.matchBonus(lotto)));
         }
         return new LottoResult(result);
     }

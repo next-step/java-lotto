@@ -25,9 +25,9 @@ class LottoResultTest {
     @Test
     void lottoResultWithBonusTest() {
         LottoResult result = new LottoResult(List.of(
-                LottoPrize.from(2, false),
-                LottoPrize.from(3, true),
-                LottoPrize.from(5, true)
+                LottoPrize.find(2, false),
+                LottoPrize.find(3, true),
+                LottoPrize.find(5, true)
         ));
 
         assertThat(result).isInstanceOf(LottoResult.class);
@@ -51,10 +51,10 @@ class LottoResultTest {
     @Test
     void countingPrizeWithBonusTest() {
         LottoResult result = new LottoResult(List.of(
-                LottoPrize.from(2, true),
-                LottoPrize.from(5, false),
-                LottoPrize.from(3, true),
-                LottoPrize.from(5, true)
+                LottoPrize.find(2, true),
+                LottoPrize.find(5, false),
+                LottoPrize.find(3, true),
+                LottoPrize.find(5, true)
         ));
 
         assertThat(result.countingPrize(LottoPrize.SECOND)).isEqualTo(1);
@@ -78,9 +78,9 @@ class LottoResultTest {
     @Test
     void totalPrizeWithBonusTest() {
         LottoResult result = new LottoResult(List.of(
-                LottoPrize.from(5, false),
-                LottoPrize.from(0, true),
-                LottoPrize.from(5, true)
+                LottoPrize.find(5, false),
+                LottoPrize.find(0, true),
+                LottoPrize.find(5, true)
         ));
 
         assertThat(result.totalPrize()).isEqualTo(31500000);
@@ -102,9 +102,9 @@ class LottoResultTest {
     @Test
     void rateWithBonusTest() {
         LottoResult result = new LottoResult(List.of(
-                LottoPrize.from(5, false),
-                LottoPrize.from(0, true),
-                LottoPrize.from(3, true)
+                LottoPrize.find(5, false),
+                LottoPrize.find(0, true),
+                LottoPrize.find(3, true)
         ));
 
         assertThat(result.getRate(new LottoMoney(3000))).isEqualTo(501.67);
