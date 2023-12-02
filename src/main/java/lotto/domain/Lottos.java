@@ -14,7 +14,7 @@ public class Lottos {
     public static Lottos from(int count) {
         List<Lotto> newLottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            newLottos.add(Lotto.from(LottoNumber.randomList()));
+            newLottos.add(Lotto.from(LottoNumbers.randomList()));
         }
         return new Lottos(newLottos);
     }
@@ -34,7 +34,6 @@ public class Lottos {
     public LottoResult match(WinningLotto winningLotto) {
         List<LottoPrize> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            System.out.println(winningLotto.matchCount(lotto) + " " + winningLotto.matchBonus(lotto));
             result.add(LottoPrize.from(winningLotto.matchCount(lotto), winningLotto.matchBonus(lotto)));
         }
         return new LottoResult(result);

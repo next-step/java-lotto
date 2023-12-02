@@ -9,16 +9,12 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     public static final int PRICE = 1_000;
-    private static final int MAX_SIZE = 6;
     private static final String STRING_SPLITTER = ", ";
 
     private final Set<Integer> values;
 
     public Lotto(Set<Integer> lotto) {
-        if (lotto.isEmpty() || lotto.size() > MAX_SIZE) {
-            throw new IllegalArgumentException("유효하지 않은 로또입니다.");
-        }
-        LottoNumber.check(lotto);
+        LottoNumbers.check(lotto);
         this.values = lotto;
     }
 
