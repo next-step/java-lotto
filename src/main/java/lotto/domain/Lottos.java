@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
+    private List<Lotto> values;
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+        this.values = lottos;
     }
 
     public static Lottos from(int count) {
@@ -20,12 +20,12 @@ public class Lottos {
     }
 
     public int size() {
-        return lottos.size();
+        return values.size();
     }
 
     public LottoResult match(Lotto winningLotto) {
         List<LottoPrize> result = new ArrayList<>();
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : values) {
             result.add(LottoPrize.from(winningLotto.matchCount(lotto)));
         }
         return new LottoResult(result);
@@ -33,13 +33,13 @@ public class Lottos {
 
     public LottoResult match(WinningLotto winningLotto) {
         List<LottoPrize> result = new ArrayList<>();
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : values) {
             result.add(LottoPrize.from(winningLotto.matchCount(lotto), winningLotto.matchBonus(lotto)));
         }
         return new LottoResult(result);
     }
 
     public String getLottoNumber(int index) {
-        return lottos.get(index).toString();
+        return values.get(index).toString();
     }
 }
