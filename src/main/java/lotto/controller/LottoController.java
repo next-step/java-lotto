@@ -8,20 +8,35 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoController {
+    private final InputView inputView;
+    private final ResultView outputView;
 
-    public static void main(String[] args) {
-        int money = InputView.inputMoney();
-        List<List<Integer>> ticketsNumbers = InputView.inputManualTickets();
+    public LottoController(InputView inputView, ResultView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
+
+    public void run() {
+        Lottos tickets = buyLotto();
+        printResult(tickets);
+    }
+
+    private Lottos buyLotto() {
+        int money = inputView.inputMoney();
+        List<List<Integer>> ticketsNumbers = inputView.inputManualTickets();
         Lottos tickets = LottoSeller.issueLotto(money, ticketsNumbers);
 
-        ResultView.printCheckPurchaseMessage(ticketsNumbers.size(), tickets.count()-ticketsNumbers.size());
-        ResultView.printLottoTickets(tickets);
+        outputView.printCheckPurchaseMessage(ticketsNumbers.size(), tickets.count()-ticketsNumbers.size());
+        outputView.printLottoTickets(tickets);
+        return tickets;
+    }
 
+    private void printResult(Lottos tickets) {
         WinningNumber winningNumber = new WinningNumber(
-                InputView.inputDefaultWinningNumbers(),
-                InputView.inputBonusBallNumber());
+                inputView.inputDefaultWinningNumbers(),
+                inputView.inputBonusBallNumber());
 
         LottoReport report = new LottoReport(tickets, winningNumber);
-        ResultView.printResultReport(report);
+        outputView.printResultReport(report);
     }
 }
