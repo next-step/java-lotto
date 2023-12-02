@@ -12,7 +12,7 @@ public class ConsoleResultView implements ResultView {
 
     @Override
     public void showLottos(Lottos lottos) {
-        lottos.get().forEach(lotto -> System.out.println(lotto.lotto()));
+        lottos.get().forEach(System.out::println);
         System.out.println();
     }
 

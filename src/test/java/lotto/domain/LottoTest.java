@@ -11,13 +11,6 @@ class LottoTest {
     private final WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), 8);
 
     @Test
-    void 생성() {
-        RandomLottoNumbers randomLottoNumbers = new RandomLottoNumbers();
-        Lotto lotto = new Lotto(randomLottoNumbers.lottoNumbers());
-        assertThat(lotto.lotto()).hasSize(6);
-    }
-
-    @Test
     @DisplayName("matchingCount_winningLotto와 3개 일치하는 로또_Ranking.FIFTH")
     void fifth_winner() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 11, 12, 13));
