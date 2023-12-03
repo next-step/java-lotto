@@ -3,7 +3,9 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LottoNumbers {
 
@@ -18,11 +20,15 @@ public class LottoNumbers {
         }
         Collections.shuffle(seedNumbers);
         this.lottoNumbers = seedNumbers.subList(0, 6);
+        this.validateDigit();
+        this.validateRangeOfNumbers();
     }
 
     public LottoNumbers(Integer... numbers) {
         lottoNumbers = new ArrayList<>();
         lottoNumbers.addAll(Arrays.asList(numbers));
+        this.validateDigit();
+        this.validateRangeOfNumbers();
     }
 
     public LottoNumbers(String numbers) {
@@ -31,6 +37,8 @@ public class LottoNumbers {
         for (String s : strArr) {
             lottoNumbers.add(Integer.parseInt(s));
         }
+        this.validateDigit();
+        this.validateRangeOfNumbers();
     }
 
     public List<Integer> numbers() {
@@ -51,15 +59,22 @@ public class LottoNumbers {
         return matchCount;
     }
 
-    void validateDigit() {
-        if (this.lottoNumbers.size() != 6) {
+    private void validateDigit() {
+        Set<Integer> numbers = new HashSet<>(this.lottoNumbers);
+        if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또는 숫자 6개로 구성되어야 합니다.");
         }
     }
 
-    void validateRangeOfNumbers() {
+    private void validateRangeOfNumbers() {
         for (Integer number : this.lottoNumbers) {
             validateRange(number);
+        }
+    }
+
+    private static void validateRange(Integer number) {
+        if (number < 1 || 45 < number) {
+            throw new IllegalArgumentException("로또는 1~45의 숫자만 가능합니다.");
         }
     }
 
@@ -68,9 +83,5 @@ public class LottoNumbers {
         return this.lottoNumbers.toString();
     }
 
-    private static void validateRange(Integer number) {
-        if (number < 1 || 45 < number) {
-            throw new IllegalArgumentException("로또는 1~45의 숫자만 가능합니다.");
-        }
-    }
+
 }

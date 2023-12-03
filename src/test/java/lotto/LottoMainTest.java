@@ -11,7 +11,7 @@ public class LottoMainTest {
     @DisplayName("구매 테스트")
     @Test
     void purchaseTest() {
-        List<Lotto> lottos =  LottoMain.puchase(14000);
+        List<Lotto> lottos =  Lotto.puchase(14000);
         assertThat(lottos.size()).isEqualTo(14);
     }
 }
