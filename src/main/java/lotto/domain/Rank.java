@@ -11,7 +11,6 @@ public enum Rank {
     SECOND(5, 30000000, true),
     FIRST(6, 2000000000, false);
 
-    static final int HIT_FICE_LOTTO_NUMBERS = 5;
     private final int rank;
     private final int amount;
 
@@ -24,18 +23,28 @@ public enum Rank {
     }
 
     public static Rank valueOf(int label, boolean bonusNumber) {
+
+        boolean isBonus = (label == 5);
+
+        if (isBonus) {
+            return matchNumbersAndBonus(label, bonusNumber);
+        }
+        return matchNumbers(label);
+    }
+
+    private static Rank matchNumbersAndBonus(int label, boolean bonusNumber){
         return Arrays.stream(Rank.values())
                 .filter(win -> win.rank == label && win.bounusNumber == bonusNumber)
                 .findFirst()
                 .orElse(MISS);
     }
-//
-//    private Rank getRankSecond(int matchCount, boolean checkBonusNumber) {
-//        if (matchCount == HIT_FICE_LOTTO_NUMBERS && checkBonusNumber) {
-//            return Rank.SECOND;
-//        }
-//        return null;
-//    }
+
+    private static Rank matchNumbers(int label){
+        return Arrays.stream(Rank.values())
+                .filter(win -> win.rank == label)
+                .findFirst()
+                .orElse(MISS);
+    }
 
     public int getRank() {
         return rank;

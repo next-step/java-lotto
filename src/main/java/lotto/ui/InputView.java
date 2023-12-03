@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class InputView {
     static final String LOTTO_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     static final String MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     static final String MANUAL_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
+    static final String MANUAL_CANNOT_BE_GREATER_THEN_BUY_LOTTO = "수동으로 구매할 로또가 총 수량을 넘을수 없습니다.";
 
     static final int LOTTO_AMOUNT = 1000;
 
@@ -27,9 +29,14 @@ public class InputView {
         return getLottoCount(price);
     }
 
-    public int buyOfManualLotto(){
+    public int buyOfManualLotto(int lottoCount){
         System.out.println(MANUAL_LOTTO_COUNT);
-        return Integer.parseInt(SCANNER.nextLine());
+        int manualLottoCount = Integer.parseInt(SCANNER.nextLine())/LOTTO_AMOUNT;
+        if(lottoCount < manualLottoCount){
+            throw new IllegalArgumentException(MANUAL_CANNOT_BE_GREATER_THEN_BUY_LOTTO);
+        }
+
+        return manualLottoCount;
     }
 
     private int getLottoCount(String price) {
@@ -48,9 +55,11 @@ public class InputView {
         return lotto;
     }
 
-    public String getLastWeekBonusLottoNumber() {
+    public LottoNumber getLastWeekBonusLottoNumber() {
         System.out.println(LOTTO_BONUS_NUMBER);
-        return SCANNER.nextLine();
+        String str = SCANNER.nextLine();
+        LottoNumber lottoNumber = new LottoNumber(Integer.parseInt(str));
+        return lottoNumber;
     }
 
     public Lottos getManualLottoNNumbers(int manualLottoCount){

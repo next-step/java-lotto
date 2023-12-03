@@ -47,8 +47,8 @@ public class Lotto {
         return answerCount;
     }
 
-    public boolean matchBonusNumber(int bonusNumber) {
-        return lotto.stream().anyMatch(num -> num.getNumber() == bonusNumber);
+    public boolean matchBonusNumber(LottoNumber bonusNumber) {
+        return lotto.stream().anyMatch(num -> num.equals(bonusNumber));
     }
 
 }

@@ -23,7 +23,7 @@ public class RankTest {
         Lottos lottos = new Lottos(lottoList);
         Lotto lastWeekWinner = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        WinningNumber winningNumber = new WinningNumber(lastWeekWinner, 7);
+        WinningNumber winningNumber = new WinningNumber(lastWeekWinner, new LottoNumber(7));
 
         ResultWinner winner = new ResultWinner();
         assertThat(winner.countOfWinner(lottos, winningNumber).get(Rank.FIRST)).isEqualTo(1);
@@ -40,7 +40,7 @@ public class RankTest {
         Lottos lottos = new Lottos(lottoList);
         Lotto lastWeekWinner = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8));
 
-        WinningNumber winningNumber = new WinningNumber(lastWeekWinner, 7);
+        WinningNumber winningNumber = new WinningNumber(lastWeekWinner, new LottoNumber(7));
 
         ResultWinner winner = new ResultWinner();
         assertThat(winner.countOfWinner(lottos, winningNumber).get(Rank.SECOND)).isEqualTo(1);
@@ -57,7 +57,7 @@ public class RankTest {
         Lottos lottos = new Lottos(lottoList);
         Lotto lastWeekWinner = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10));
 
-        WinningNumber winningNumber = new WinningNumber(lastWeekWinner, 7);
+        WinningNumber winningNumber = new WinningNumber(lastWeekWinner, new LottoNumber(7));
 
         ResultWinner winner = new ResultWinner();
         assertThat(winner.countOfWinner(lottos, winningNumber).get(Rank.THIRD)).isEqualTo(1);
@@ -74,7 +74,7 @@ public class RankTest {
         Lottos lottos = new Lottos(lottoList);
         Lotto lastWeekWinner = new Lotto(Arrays.asList(1, 2, 3, 4, 9, 10));
 
-        WinningNumber winningNumber = new WinningNumber(lastWeekWinner, 7);
+        WinningNumber winningNumber = new WinningNumber(lastWeekWinner, new LottoNumber(7));
 
         ResultWinner winner = new ResultWinner();
         assertThat(winner.countOfWinner(lottos, winningNumber).get(Rank.FOURTH)).isEqualTo(1);
