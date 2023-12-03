@@ -5,32 +5,29 @@ import java.util.List;
 import java.util.function.BiPredicate;
 
 public enum LottoRank {
-    FIRST(1, 6, (matchedCount, matchBonus) -> matchedCount == 6,2_000_000_000),
-    SECOND(2, 5, (matchedCount, matchBonus) -> matchedCount == 5 && matchBonus,30_000_000),
-    THIRD(3, 5, (matchedCount, matchBonus) -> matchedCount == 5 && !matchBonus,1_500_000),
-    FOURTH(4, 4, (matchedCount, matchBonus) -> matchedCount == 4,50_000),
-    FIFTH(5, 3, (matchedCount, matchBonus) -> matchedCount == 3,5_000),
-    LAST(6, 0, (matchedCount, matchBonus) -> matchedCount < 3,0);
+    FIRST(1, LottoCondition.FIRST,2_000_000_000),
+    SECOND(2, LottoCondition.SECOND,30_000_000),
+    THIRD(3, LottoCondition.THIRD,1_500_000),
+    FOURTH(4, LottoCondition.FOURTH,50_000),
+    FIFTH(5, LottoCondition.FIFTH,5_000),
+    LAST(6, LottoCondition.LAST,0);
 
-    private static final String ERR_INVALID_MATCH_COUNT = "The number of matched lotto numbers cannot exceed 6, as there are a total of 6 lotto numbers.";
     private static final String ERR_INVALID_RANK = "Invalid rank";
     private final int rank;
-    private final int matchCount;
-    private final BiPredicate<Integer, Boolean> condition;
+    private final LottoCondition condition;
     private final int cashPrize;
 
-    LottoRank(int rank, int matchCount, BiPredicate<Integer, Boolean> condition, int cash) {
+    LottoRank(int rank, LottoCondition condition, int cash) {
         this.rank = rank;
-        this.matchCount = matchCount;
         this.condition = condition;
         this.cashPrize = cash;
     }
 
-    public static LottoRank valueOf(int matchCount, boolean matchBonus) {
+    public static LottoRank getByCondition(LottoCondition condition) {
         return Arrays.stream(values())
-                .filter(rank -> rank.condition.test(matchCount, matchBonus))
+                .filter(rank -> rank.condition.equals(condition))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(ERR_INVALID_MATCH_COUNT));
+                .orElse(LottoRank.LAST);
     }
 
     public static LottoRank getByRank(int rank) {
@@ -48,8 +45,8 @@ public enum LottoRank {
         return this.rank;
     }
 
-    public int matchCount() {
-        return this.matchCount;
+    public LottoCondition condition() {
+        return this.condition;
     }
 
     public int cashPrize() {

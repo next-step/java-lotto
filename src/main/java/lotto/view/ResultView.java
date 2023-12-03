@@ -46,9 +46,9 @@ public class ResultView {
 
     private static void printResultRank(LottoRank rank, long count) {
         if (rank.isSecondRank()) {
-            System.out.println(String.format(SECOND_RANK_RESULT_MESSAGE, rank.matchCount(), rank.cashPrize(), count));
+            System.out.println(String.format(SECOND_RANK_RESULT_MESSAGE, rank.condition().matchCount(), rank.cashPrize(), count));
             return;
         }
-        System.out.println(String.format(RANK_RESULT_MESSAGE, rank.matchCount(), rank.cashPrize(), count));
+        System.out.println(String.format(RANK_RESULT_MESSAGE, rank.condition().matchCount(), rank.cashPrize(), count));
     }
 }

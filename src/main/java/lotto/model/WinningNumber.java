@@ -26,8 +26,9 @@ public class WinningNumber {
     }
 
     private LottoRank match(Lotto ticket) {
-        return LottoRank.valueOf(
-            ticket.numbers().matchNumbers(this.defaultNumbers),
-            ticket.numbers().containsNumber(this.bonusNumber));
+        LottoCondition condition = LottoCondition.valueOf(
+                ticket.numbers().matchNumbers(this.defaultNumbers),
+                ticket.numbers().containsNumber(this.bonusNumber));
+        return LottoRank.getByCondition(condition);
     }
 }

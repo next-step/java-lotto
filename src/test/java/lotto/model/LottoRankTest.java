@@ -20,7 +20,7 @@ public class LottoRankTest {
             "5,false,3",
             "4,true,4"})
     public void 랭킹_조건_확인(int matchCount, boolean matchBonus, int expectedRank) {
-        Assertions.assertThat(LottoRank.valueOf(matchCount, matchBonus).ordinal()+1)
+        Assertions.assertThat(LottoRank.getByCondition(LottoCondition.valueOf(matchCount, matchBonus)).ordinal()+1)
                 .isEqualTo(expectedRank);
     }
 
