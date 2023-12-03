@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -33,18 +33,18 @@ public class Lotto {
         }
     }
 
-    public List<LottoNumber> numbers() {
-        return this.numbers.stream().collect(Collectors.toList());
+    public Set<LottoNumber> numbers() {
+        return Collections.unmodifiableSet(this.numbers);
     }
 
     public boolean hasNumber(LottoNumber lottoNumber) {
-        return this.numbers().contains(lottoNumber);
+        return this.numbers.contains(lottoNumber);
     }
 
     public int matchCount(Lotto winningLotto) {
         return (int) winningLotto.numbers()
                 .stream()
-                .filter(value -> this.hasNumber(value))
+                .filter(this::hasNumber)
                 .count();
     }
 
