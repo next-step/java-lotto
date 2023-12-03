@@ -7,35 +7,40 @@ import java.util.function.Predicate;
 
 public class WinningNumbers {
     private static final int LOTTO_COST = 1000;
-    List<LottoNumber> winningLottoNumbers;
+    Lotto winningLottoNumbers;
     LottoNumber bonusNumber;
     List<Rank> rankList = new ArrayList<>();
 
-    public WinningNumbers(List<Integer> winningLottoNumbers) {
-        this.winningLottoNumbers = new ArrayList<>();
-        for (Integer winningNumber : winningLottoNumbers.subList(0,6)) {
-            this.winningLottoNumbers.add(new LottoNumber(winningNumber));
-        }
-        this.bonusNumber = new LottoNumber(winningLottoNumbers.get(6));
+    public WinningNumbers(String winningLottoNumbers, Integer bonusNumber) {
+        this.winningLottoNumbers = new Lotto(winningLottoNumbers);
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     public void winLotto(List<Lotto> lottoList) {
         for (Lotto lotto : lottoList) {
-            sameNumberCount(lotto.getLottoNumber());
+            sameNumberCount(lotto);
         }
     }
 
-    private void sameNumberCount(List<Integer> lotto) {
-        int count = (int) lotto
+    private void sameNumberCount(Lotto lotto) {
+        long count = lotto.getLottoNumber()
                 .stream()
-                .filter(o -> winningLottoNumbers.stream().map(LottoNumber::getLottoNumber).anyMatch(Predicate.isEqual(o)))
+                .filter(o -> winningLottoNumbers.getLottoNumber().stream().anyMatch(Predicate.isEqual(o)))
                 .count();
-        rankList.add(Rank.valueOf(count, containsBonus(count,lotto)));
+        rankList.add(Rank.valueOf(count, containsBonus(count, lotto)));
     }
 
-    private boolean containsBonus(Integer count, List<Integer> lotto) {
-        if (count == 5){
-            return lotto.contains(bonusNumber.getLottoNumber());
+//    private void sameNumberCount(Lotto lotto) {
+//        int count = (int) lotto
+//                .stream()
+//                .filter(o -> winningLottoNumbers.stream().map(LottoNumber::getLottoNumber).anyMatch(Predicate.isEqual(o)))
+//                .count();
+//        rankList.add(Rank.valueOf(count, containsBonus(count,lotto)));
+//    }
+
+    private boolean containsBonus(long count, Lotto lotto) {
+        if (count == 5) {
+            return lotto.getLottoNumber().contains(bonusNumber);
         }
         return false;
     }

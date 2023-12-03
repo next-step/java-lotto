@@ -6,22 +6,25 @@ import lotto.model.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
-
 public class LottoController {
     public static void main(String[] args) {
-        String money = InputView.money();
+        Integer money = InputView.money();
+        Integer manualNumber = InputView.manual();
 
-        LottoSeller lottoSeller = new LottoSeller(money);
+        for (int i = 0; i < manualNumber; i++) {
+            String manualLottoNumbers = InputView.manualLottoNumbers();
+            Lottos lottos = new Lottos(manualLottoNumbers);
+        }
+
+        LottoSeller lottoSeller = new LottoSeller(money, manualNumber);
         ResultView.numberOfLotto(lottoSeller);
         Lottos lottos = new Lottos(lottoSeller.getNumberOfLotto());
         ResultView.printLottoList(lottos);
 
 
-        List<Integer> winningLottoNumber = InputView.winningLottoNumber();
+        String winningLottoNumber = InputView.winningLottoNumber();
         Integer bonusNumber = InputView.bonusNumber();
-        winningLottoNumber.add(bonusNumber);
-        WinningNumbers winningNumbers = new WinningNumbers(winningLottoNumber);
+        WinningNumbers winningNumbers = new WinningNumbers(winningLottoNumber, bonusNumber);
         ResultView.winnerOfLottery(winningNumbers, lottos, lottoSeller);
     }
 }

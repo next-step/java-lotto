@@ -30,14 +30,13 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        // TODO 일치하는 수를 로또 등수로 변경한다. enum 값 목록은 "Rank[] ranks = values();"와 같이 가져올 수 있다.
+    public static Rank valueOf(long countOfMatch, boolean matchBonus) {
         if (countOfMatch < 3) {
             return Rank.MISS;
         }
         return Arrays.stream(values())
                 .filter(rank -> Objects.equals(rank.matchBonus, matchBonus) && Objects.equals(rank.countOfMatch, countOfMatch))
                 .findFirst()
-                .orElseThrow(()->new IllegalArgumentException("맞는 번호의 개수가 맞지 않습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("맞는 번호의 개수가 맞지 않습니다."));
     }
 }

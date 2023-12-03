@@ -14,9 +14,9 @@ public class LottoNumberTest {
     @DisplayName("로또 숫자 체크")
     @Test
     void randomNumber() {
-        List<Integer> lottoNumber = new LottoNumber().pickLotto();
+        List<Integer> lottoNumber = new LottoNumber(lottoNumber).pickLotto();
 
-        for (Integer number:lottoNumber) {
+        for (Integer number : lottoNumber) {
             assertThat(number >= 1 && number <= 45).isTrue();
         }
     }
