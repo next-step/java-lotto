@@ -24,9 +24,13 @@ public class LottoResult implements Rate{
                 .sum();
     }
 
+    public double getRate(LottoMoney money) {
+        return getRate(money.getMoney());
+    }
+
     @Override
-    public double getRate(Object obj) {
+    public double getRate(int money) {
         double totalPrize = totalPrize();
-        return Math.round(totalPrize / ((LottoMoney) obj).getMoney() * PERCENT_FOR_RATE) / PERCENT_FOR_RATE;
+        return Math.round(totalPrize / money * PERCENT_FOR_RATE) / PERCENT_FOR_RATE;
     }
 }

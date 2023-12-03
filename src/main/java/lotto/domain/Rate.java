@@ -1,5 +1,6 @@
 package lotto.domain;
 
-public interface Rate<T> {
-    double getRate(T t);
+public interface Rate {
+
+    double getRate(int value);
 }
