@@ -10,20 +10,16 @@ public class LottoGame {
   private final LottoNumber bonusLottoNumber;
 
   private LottoGame(Lotto resultLotto, LottoNumber bonusLottoNumber) {
-
+    resultLotto.has(bonusLottoNumber);
     this.resultLotto = resultLotto;
     this.bonusLottoNumber = bonusLottoNumber;
   }
 
-  public static LottoGame defaultOf(String resultLottoNumbers, Integer bonusLottoNumber) {
-    return new LottoGame(Lotto.defaultOf(resultLottoNumbers), LottoNumber.of(bonusLottoNumber));
+  public static LottoGame defaultOf(String resultLottoNumbers, Integer bonusLottoNumberString) {
+    return new LottoGame(Lotto.defaultOf(resultLottoNumbers), LottoNumber.of(bonusLottoNumberString));
   }
 
   public LottoResult result(Lottos lottos){
     return LottoMachine.match(resultLotto, lottos);
-  }
-
-  public void findBonusLotto(LottoResult lottoResult) {
-      lottoResult.findBonusLotto(this.bonusLottoNumber);
   }
 }

@@ -66,6 +66,19 @@ public class LottoResultTest {
   }
 
   @Test
+  @DisplayName("Lotto중에 매칭 개수되는 Lotto들 카운팅하기")
+  public void bonus_number_matching() {
+    // given
+    LottoResult lottoResult = LottoMachine.match(resultLotto, lottos);
+
+    // when
+    int result = lottoResult.findMatchResultCount(LottoResultType.THREE);
+
+    // then
+    assertThat(result).isEqualTo(2);
+  }
+
+  @Test
   @DisplayName("수익률 계산 기능")
   public void caculate_profit_rate() throws Exception {
     // given

@@ -8,7 +8,7 @@ import java.util.Set;
 public class Lotto {
 
   private static final int LOTTOSIZE = 6;
-  private Set<LottoNumber> lottoNumbers;
+  private final Set<LottoNumber> lottoNumbers;
 
 
   private Lotto(Set<LottoNumber> lottoNumbers) {
@@ -71,5 +71,11 @@ public class Lotto {
     int i = status.lastIndexOf(",");
 
     return  status.substring(0, i);
+  }
+
+  public void has(LottoNumber bonusLottoNumber) {
+    if (lottoNumbers.contains(bonusLottoNumber)) {
+      throw new IllegalArgumentException("보너스 번호는 당첨 번호와 달라야합니다.");
+    }
   }
 }

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class LottoResultTypeTest {
 
   @Test
-  @DisplayName("")
+  @DisplayName("매칭 숫자로 LottoResultType 찾기")
   public void find_type_by_number() {
     //given
     int number = 3;

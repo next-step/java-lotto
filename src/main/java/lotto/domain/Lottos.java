@@ -25,12 +25,12 @@ public class Lottos {
     public LottoResult result(Lotto resultLotto) {
         Map<LottoResultType,Lottos> result  = new HashMap<>();
         for (LottoResultType lottoResultType : LottoResultType.values()) {
-            if (lottoResultType.equals(LottoResultType.NO_MATCH)) {
-                continue;
-            }
             List<Lotto> matchLottos = lottoResultType.result(this.lottos, resultLotto);
             result.put(lottoResultType, Lottos.of(matchLottos));
         }
+        // 5개 일치를 찾고
+        // 5개 일치 중에 보너스 번호가 -> 보너스 번호는
+        // LottoResultType.NO_MATCH 결과 삭제 로직 추가
         return LottoResult.defaultOf(result);
     }
     public double calculatePrice(LottoResultType lottoResultType) {
