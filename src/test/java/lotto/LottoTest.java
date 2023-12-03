@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
@@ -96,7 +95,7 @@ public class LottoTest {
     Lotto lotto = Lotto.defaultOf(lottoNumbers);
 
     // when
-    int result = resultLotto.howManySameNumber(lotto);
+    int result = resultLotto.sameNumberCount(lotto);
 
     // then
     assertThat(result).isEqualTo(2);

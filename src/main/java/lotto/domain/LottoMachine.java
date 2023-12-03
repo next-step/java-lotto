@@ -4,22 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
-    private LottoMachine() {
-    }
 
-    public static Lotto one() {
-        return Lotto.defaultOf();
-    }
+  private LottoMachine() {
+  }
 
-    public static Lottos make(int size) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            lottos.add(Lotto.defaultOf());
-        }
-        return Lottos.of(lottos);
-    }
+  public static Lotto one() {
+    return Lotto.defaultOf();
+  }
 
-    public static LottoResult match(Lotto result, Lottos lottos) {
-        return lottos.result(result);
+  public static Lottos make(int size) {
+    List<Lotto> lottos = new ArrayList<>();
+    for (int i = 0; i < size; i++) {
+      lottos.add(Lotto.defaultOf());
     }
+    return Lottos.of(lottos);
+  }
+
+  public static LottoResult matchWithBonusNumber(Lotto result, Lottos lottos,
+      LottoNumber bonusLottoNumber) {
+    return lottos.resultWithBonusNumber(result, bonusLottoNumber);
+  }
 }

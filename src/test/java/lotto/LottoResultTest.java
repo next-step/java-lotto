@@ -56,7 +56,7 @@ public class LottoResultTest {
   @DisplayName("Lotto중에 매칭 개수되는 Lotto들 카운팅하기")
   public void count_matching() {
     // given
-    LottoResult lottoResult = LottoMachine.match(resultLotto, lottos);
+    LottoResult lottoResult = LottoMachine.matchWithBonusNumber(resultLotto, lottos, null);
 
     // when
     int result = lottoResult.findMatchResultCount(LottoResultType.THREE);
@@ -69,7 +69,7 @@ public class LottoResultTest {
   @DisplayName("Lotto중에 매칭 개수되는 Lotto들 카운팅하기")
   public void bonus_number_matching() {
     // given
-    LottoResult lottoResult = LottoMachine.match(resultLotto, lottos);
+    LottoResult lottoResult = LottoMachine.matchWithBonusNumber(resultLotto, lottos,null);
 
     // when
     int result = lottoResult.findMatchResultCount(LottoResultType.THREE);
@@ -83,7 +83,7 @@ public class LottoResultTest {
   public void caculate_profit_rate() throws Exception {
     // given
     int amount = resultLotto.size() * 1000;
-    LottoResult result = LottoMachine.match(resultLotto, lottos);
+    LottoResult result = LottoMachine.matchWithBonusNumber(resultLotto, lottos, null);
 
     // when
     double profitRate = result.calculateProfitRate(amount);
