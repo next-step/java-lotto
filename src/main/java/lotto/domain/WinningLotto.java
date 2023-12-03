@@ -13,10 +13,10 @@ public class WinningLotto {
 
     private void validate() {
         this.winningLotto.numbers().stream()
-                .filter(winningLottoNumber -> winningLottoNumber.equals(this.bonus))
+                .filter(winningLottoNumber -> winningLotto.hasNumber(this.bonus))
                 .findAny()
                 .ifPresent(a -> {
-                    throw new IllegalArgumentException();
+                    throw new IllegalArgumentException("보너스번호가 당첨번호에 이미 포함된 번호입니다.");
                 });
     }
 
