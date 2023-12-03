@@ -9,16 +9,12 @@ public class Lotto {
 
     private final LottoNumbers lottoNumbers;
 
-    private int matchCount;
-
     public Lotto(LottoNumbers numbers) {
-        matchCount = 0;
         this.lottoNumbers = numbers;
     }
 
     public int matchCount(LottoNumbers winningNumbers) {
-        matchCount = this.lottoNumbers.matchCount(winningNumbers);
-        return matchCount;
+        return this.lottoNumbers.matchCount(winningNumbers);
     }
 
     public static List<Lotto> puchase(int money) {
