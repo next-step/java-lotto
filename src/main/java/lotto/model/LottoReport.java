@@ -2,13 +2,14 @@ package lotto.model;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoReport {
-    private final List<LottoRank> result;
+    private final Map<LottoRank, Long> result;
     private final double rateOfReturn;
 
-    public LottoReport(List<LottoRank> result) {
+    public LottoReport(Map<LottoRank, Long> result) {
         this.result = result;
         this.rateOfReturn = calculateRateOfReturn();
     }
@@ -18,17 +19,19 @@ public class LottoReport {
     }
 
     private long calculateTotalPrize() {
-        return this.result.stream()
-                .mapToLong(result -> result.cashPrize())
+        return this.result.entrySet().stream()
+                .mapToLong(entry -> entry.getKey().cashPrize() * entry.getValue())
                 .sum();
     }
 
     private double calculateTotalInvestment() {
-        return LottoSeller.price(this.result.size());
+        return LottoSeller.price(this.result.values().stream()
+                .mapToInt(count -> count.intValue())
+                .sum());
     }
 
-    public int countRank(LottoRank rank) {
-        return Collections.frequency(this.result, rank);
+    public long countRank(LottoRank rank) {
+        return this.result.getOrDefault(rank, 0L);
     }
 
     public double rateOfReturn() {

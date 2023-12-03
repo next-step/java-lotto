@@ -44,7 +44,7 @@ public class ResultView {
         System.out.println(String.format(RATE_OF_RETURN_MESSAGE, report.rateOfReturn()));
     }
 
-    private static void printResultRank(LottoRank rank, int count) {
+    private static void printResultRank(LottoRank rank, long count) {
         if (rank.isSecondRank()) {
             System.out.println(String.format(SECOND_RANK_RESULT_MESSAGE, rank.matchCount(), rank.cashPrize(), count));
             return;

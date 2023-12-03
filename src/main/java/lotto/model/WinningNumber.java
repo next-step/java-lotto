@@ -2,6 +2,8 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class WinningNumber {
@@ -17,11 +19,10 @@ public class WinningNumber {
         this(LottoNumbers.of(numbers), new LottoNumber(bonusNumber));
     }
 
-    public List<LottoRank> match(Lottos tickets) {
-        return tickets.tickets()
-                .stream()
+    public Map<LottoRank, Long> match(Lottos tickets) {
+        return tickets.tickets().stream()
                 .map(ticket -> this.match(ticket))
-                .collect(Collectors.toList());
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
     private LottoRank match(Lotto ticket) {
