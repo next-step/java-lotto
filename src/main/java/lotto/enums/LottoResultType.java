@@ -2,18 +2,16 @@ package lotto.enums;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 
 public enum LottoResultType {
 
-  THREE(3,5000)
-  , FOUR(4,50000)
-  , FIVE(5,1500000)
-  , ALL(6,2000000000)
+  THREE(3,5_000)
+  , FOUR(4,50_000)
+  , FIVE(5,1_500_000)
+  , BONUS(5,30_000_000)
+  , ALL(6,2_000_000_000)
   , NO_MATCH(0,0)
   ;
   private final int number;
@@ -26,10 +24,6 @@ public enum LottoResultType {
 
   public double calculatePrice(double count) {
     return price * count;
-  }
-
-  public boolean sameNumber(int number) {
-    return this.number == number;
   }
 
   public static LottoResultType valueOf(int number) {
@@ -57,5 +51,12 @@ public enum LottoResultType {
     return lottos.stream()
                   .filter(each -> resultLotto.howManySameNumber(each) == this.number)
                   .collect(Collectors.toList());
+  }
+
+  public String resultMessage(int size) {
+    if (this == LottoResultType.BONUS) {
+      return String.format("%s개 일치, 보너스 볼 일치(%s원)- %s개", number, (int)price, size);
+    }
+    return String.format("%s개 일치 (%s원)- %s개", number, (int)price, size);
   }
 }

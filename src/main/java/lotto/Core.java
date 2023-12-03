@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoGame;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoStore;
 import lotto.domain.Lottos;
@@ -18,8 +19,11 @@ public class Core {
     OutPutView.printLotto(lottos);
 
     String resultLottoNumbers = InPutView.getResultLottoNumbers();
-    LottoGame lottoGame = LottoGame.defaultOf(resultLottoNumbers);
+    Integer bonusLottoNumber = InPutView.getBonusLottoNumber();
+
+    LottoGame lottoGame = LottoGame.defaultOf(resultLottoNumbers, bonusLottoNumber);
     LottoResult result = lottoGame.result(lottos);
+
     double profitRate = result.calculateProfitRate(amount);
 
     // 결과 프린트

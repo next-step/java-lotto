@@ -1,6 +1,10 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lotto.enums.LottoResultType;
 
 public class LottoResult {
@@ -32,5 +36,17 @@ public class LottoResult {
   private double calculatePrice(LottoResultType lottoResultType) {
     return result.get(lottoResultType)
                  .calculatePrice(lottoResultType);
+  }
+
+  public void findBonusLotto(LottoNumber bonusLottoNumber) {
+    Lottos lottos = result.get(LottoResultType.FIVE);
+    Lottos bonusLottos = lottos.findBonusLottos(bonusLottoNumber);
+    result.put(LottoResultType.BONUS,bonusLottos);
+  }
+  public List<String> resultStatus(){
+    return Arrays.stream(LottoResultType.values())
+                 .filter(each -> each != LottoResultType.NO_MATCH)
+                 .map(each -> each.resultMessage(result.get(each).size()))
+                 .collect(Collectors.toList());
   }
 }

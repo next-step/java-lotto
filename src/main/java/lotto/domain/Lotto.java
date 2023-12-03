@@ -7,8 +7,8 @@ import java.util.Set;
 
 public class Lotto {
 
-  private Set<LottoNumber> lottoNumbers;
   private static final int LOTTOSIZE = 6;
+  private Set<LottoNumber> lottoNumbers;
 
 
   private Lotto(Set<LottoNumber> lottoNumbers) {
@@ -17,20 +17,10 @@ public class Lotto {
 
   public static Lotto defaultOf() {
     Set<LottoNumber> lottoNumbers = new HashSet<>();
-    for (int i = 0; i < LOTTOSIZE; i++) {
-      i = judgeSameNumbers(lottoNumbers, i);
+    while (lottoNumbers.size() != LOTTOSIZE) {
+      lottoNumbers.add(LottoNumber.defaultOf());
     }
     return new Lotto(lottoNumbers);
-  }
-
-  private static int judgeSameNumbers(Set<LottoNumber> lottoNumbers, int i) {
-    LottoNumber lottoNumber = LottoNumber.defaultOf();
-    if (lottoNumbers.contains(lottoNumber)) {
-      i--;
-      return i;
-    }
-    lottoNumbers.add(lottoNumber);
-    return i;
   }
 
   public static Lotto defaultOf(Set<LottoNumber> lottoNumbers) {

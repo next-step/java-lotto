@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,4 +53,10 @@ public class Lottos {
         return lottoStatusList;
     }
 
+    public Lottos findBonusLottos(LottoNumber bonusLottoNumber) {
+        List<Lotto> bonusMatchLottos = this.lottos.stream()
+            .filter(each -> each.equals(bonusLottoNumber))
+            .collect(Collectors.toList());
+        return Lottos.of(bonusMatchLottos);
+        }
 }

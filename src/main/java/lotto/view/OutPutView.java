@@ -15,11 +15,9 @@ public class OutPutView {
   public static void printResult(LottoResult result) {
     System.out.println("당첨 통계");
     System.out.println("---------");
-    int minimumNumber = LottoResultType.findMinimumNumber();
-    int maxNumber = LottoResultType.findMaxNumber();
-    for (int i = minimumNumber; i < maxNumber; i++) {
-      System.out.printf("%s개 일치 (5000원)- %s개", i, result.findMatchResultCount(LottoResultType.valueOf(i)));
-      System.out.println();
+    List<String> list = result.resultStatus();
+    for (String each: list) {
+      System.out.println(each);
     }
   }
 
