@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 
@@ -21,7 +22,12 @@ public class OutPutView {
 
   public static void printLotto(Lottos lottos) {
     printSize(lottos.size());
+    String delimiter = ",";
     List<String> stringStatus = lottos.toStringStatus();
+    stringStatus = stringStatus.stream()
+        .map(lottoString -> lottoString.replaceAll(",", delimiter))
+        .collect(Collectors.toList());
+
     stringStatus.forEach(each -> {
       System.out.print('[');
       System.out.print(each);
