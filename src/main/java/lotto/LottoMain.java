@@ -5,7 +5,6 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Result;
-import lotto.domain.WinningNumbers;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -20,7 +19,7 @@ public class LottoMain {
         int money = InputView.purchase();
         List<Lotto> lottos = puchase(money);
         ResultView.purchase(lottos);
-        WinningNumbers winningNumbers = new WinningNumbers(InputView.winningNumber());
+        LottoNumbers winningNumbers = new LottoNumbers(InputView.winningNumber());
         lottos.forEach(l -> {
             int count = l.matchCount(winningNumbers);
             result.update(count);

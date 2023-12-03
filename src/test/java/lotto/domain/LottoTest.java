@@ -24,7 +24,7 @@ public class LottoTest {
     @DisplayName("로또 번호 일치 개수 확인 테스트")
     @Test
     void matchCountTest() {
-        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6");
+        LottoNumbers winningNumbers = new LottoNumbers("1, 2, 3, 4, 5, 6");
         Lotto lotto = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 10));
         assertThat(lotto.matchCount(winningNumbers)).isEqualTo(5);
     }

@@ -6,6 +6,7 @@ import java.util.List;
 public class Lotto {
 
     private final LottoNumbers lottoNumbers;
+
     private int matchCount;
 
     public Lotto(LottoNumbers numbers) {
@@ -15,17 +16,8 @@ public class Lotto {
         this.lottoNumbers = numbers;
     }
 
-    public int matchCount(WinningNumbers winningNumbers) {
-        for (int number : winningNumbers.winningNumbers) {
-            matchCount = getMatchCount(number);
-        }
-        return matchCount;
-    }
-
-    private int getMatchCount(int number) {
-        if (lottoNumbers.isContain(number)) {
-            ++matchCount;
-        }
+    public int matchCount(LottoNumbers winningNumbers) {
+        matchCount = this.lottoNumbers.matchCount(winningNumbers);
         return matchCount;
     }
 
