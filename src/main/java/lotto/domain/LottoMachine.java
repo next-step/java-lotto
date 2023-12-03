@@ -19,9 +19,4 @@ public class LottoMachine {
     }
     return Lottos.of(lottos);
   }
-
-  public static LottoResult matchWithBonusNumber(Lotto result, Lottos lottos,
-      LottoNumber bonusLottoNumber) {
-    return lottos.resultWithBonusNumber(result, bonusLottoNumber);
-  }
 }

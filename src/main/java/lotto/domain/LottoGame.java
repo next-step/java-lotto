@@ -22,6 +22,6 @@ public class LottoGame {
   }
 
   public LottoResult resultWithBonusNumber() {
-    return LottoMachine.matchWithBonusNumber(resultLotto, lottos, bonusLottoNumber);
+    return lottos.resultWithBonusNumber(resultLotto,bonusLottoNumber);
   }
 }

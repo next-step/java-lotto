@@ -25,7 +25,7 @@ public class Lottos {
   public LottoResult resultWithBonusNumber(Lotto resultLotto, LottoNumber bonusNumber) {
     Map<LottoResultType, Lottos> result = new HashMap<>();
     for (LottoResultType lottoResultType : LottoResultType.values()) {
-      Lottos lottos = lottoResultType.resultBonusNumber(this.lottos, resultLotto, bonusNumber);
+      Lottos lottos = lottoResultType.result(this.lottos, resultLotto, bonusNumber);
       result.put(lottoResultType, lottos);
     }
     return LottoResult.defaultOf(result);
