@@ -14,6 +14,9 @@ public enum Rank {
         this.prizeAmount = prizeAmount;
     }
 
+    public int matchCount() {
+        return this.matchCount;
+    }
     public long prizeAmount() {
         return this.prizeAmount;
     }
