@@ -36,7 +36,7 @@ class LottosResultTest {
     @Test
     @DisplayName("profitRate_5개 중 1개, 5등 1개 당첨_1.0")
     void profitRate() {
-        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(11, 12, 13, 0, 0, 0)), 0);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(11, 12, 13, 40, 41, 42)), 45);
         LottosResult lottosResult = new LottosResult(lottos, winningLotto);
         assertThat(lottosResult.profitRate()).isEqualTo(1.0);
     }
@@ -44,7 +44,7 @@ class LottosResultTest {
     @Test
     @DisplayName("isLoss_5개 중 1개, 5등 1개 당첨_false")
     void isLoss() {
-        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(0, 0, 0, 10, 11, 12)), 0);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(40, 41, 42, 10, 11, 12)), 45);
         LottosResult lottosResult = new LottosResult(lottos, winningLotto);
         assertThat(lottosResult.isLoss()).isFalse();
     }

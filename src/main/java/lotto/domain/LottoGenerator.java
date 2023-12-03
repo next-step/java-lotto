@@ -13,11 +13,10 @@ public class LottoGenerator {
 		this.lottoNumbers = lottoNumbers;
 	}
 
-	public Lottos generate() {
-		List<Lotto> lottos = Stream
+	public List<Lotto> generate() {
+		return Stream
 				.generate(() -> new Lotto(lottoNumbers.lottoNumbers()))
 				.limit(amount)
 				.collect(Collectors.toList());
-		return new Lottos(lottos);
 	}
 }

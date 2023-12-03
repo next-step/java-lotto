@@ -8,6 +8,6 @@ class LottoGeneratorTest {
     @Test
     void 생성() {
         LottoGenerator lottoGenerator = new LottoGenerator(14, new RandomLottoNumbers());
-        assertThat(lottoGenerator.generate().get()).hasSize(14);
+        assertThat(lottoGenerator.generate()).hasSize(14);
     }
 }
