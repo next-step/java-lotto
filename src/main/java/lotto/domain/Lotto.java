@@ -13,7 +13,7 @@ public class Lotto {
     private static final int SIZE = 6;
     private static final String STRING_SPLITTER = ", ";
 
-    private final Set<LottoNumber> values;
+    private Set<LottoNumber> values = new HashSet<>();
 
     public Lotto(Set<LottoNumber> values) {
         if (values.isEmpty() || values.size() != SIZE) {
