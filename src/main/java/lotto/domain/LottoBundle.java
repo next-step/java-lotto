@@ -50,7 +50,7 @@ public class LottoBundle {
         Map<LottoResult, Integer> lottoResults = Arrays.stream(LottoResult.values())
                 .collect(Collectors.toMap(key -> key, value -> 0, (x, y) -> y, () -> new EnumMap<>(LottoResult.class)));
 
-        for (Lotto lotto : automaticLottoList) {
+        for (Lotto lotto : lottoList()) {
             LottoResult lottoResult = winningLotto.getLottoResult(lotto);
             lottoResults.put(lottoResult, lottoResults.get(lottoResult) + 1);
         }

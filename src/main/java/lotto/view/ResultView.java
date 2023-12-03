@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class ResultView {
 
     public static void printPurchaseInfo(LottoBundle lottoBundle) {
-        System.out.printf("%d개를 구매했습니다.", lottoBundle.totalLottoCount());
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lottoBundle.manualCount(), lottoBundle.automaticCount());
         printLottoNumbers(lottoBundle.lottoList());
     }
 
