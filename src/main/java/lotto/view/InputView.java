@@ -6,6 +6,7 @@ import lotto.domain.LottoNumber;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -36,11 +37,11 @@ public class InputView {
         return Arrays.asList(winningNumbers);
     }
 
-    private static List<Integer> parseInt(List<String> winningNumbers) {
+    private static Set<Integer> parseInt(List<String> winningNumbers) {
         return winningNumbers.stream()
                 .mapToInt(Integer::parseInt)
                 .boxed()
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public static LottoNumber askBonusNumber() {

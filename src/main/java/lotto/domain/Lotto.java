@@ -12,19 +12,19 @@ public class Lotto {
 
     private final Set<LottoNumber> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(Set<Integer> numbers) {
         this.numbers = new TreeSet<>(parseLottoNumber(numbers));
         validate();
     }
 
     public Lotto(Integer... numbers) {
-        this(Arrays.asList(numbers));
+        this(Set.copyOf(Arrays.asList(numbers)));
     }
 
-    private List<LottoNumber> parseLottoNumber(List<Integer> numbers) {
+    private Set<LottoNumber> parseLottoNumber(Set<Integer> numbers) {
         return numbers.stream()
                 .map(value -> new LottoNumber(value))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     private void validate() {

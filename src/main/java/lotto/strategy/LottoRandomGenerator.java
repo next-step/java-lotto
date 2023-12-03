@@ -6,6 +6,7 @@ import lotto.domain.LottoNumber;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class LottoRandomGenerator implements LottoGenerator {
 
@@ -17,7 +18,7 @@ public class LottoRandomGenerator implements LottoGenerator {
         }
         Collections.shuffle(numbers);
 
-        return new Lotto(numbers.subList(0, Lotto.LOTTO_NUMBER_COUNT));
+        return new Lotto(Set.copyOf(numbers.subList(0, Lotto.LOTTO_NUMBER_COUNT)));
     }
 
 }
