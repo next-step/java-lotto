@@ -18,30 +18,43 @@ class LottosTest {
         assertThat(lottos.size()).isEqualTo(3);
     }
 
-    @DisplayName("당첨번호를 전달하면 결과 리스트를 반환한다.")
-    @Test
-    void lottosMatchTest() {
-        Lottos lottos = new Lottos(List.of(
-                new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                new Lotto(Set.of(1, 3, 5, 7, 9, 11)),
-                new Lotto(Set.of(12, 21, 23, 34, 35, 44))
-        ));
-        Lotto winningLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-
-        LottoResult match = lottos.match(winningLotto);
-
-        assertThat(match).isInstanceOf(LottoResult.class);
-    }
-
     @DisplayName("당첨 로또 객체를 전달하면 결과 리스트를 반환한다.")
     @Test
     void winningLottoMatchTest() {
         Lottos lottos = new Lottos(List.of(
-                new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                new Lotto(Set.of(1, 3, 5, 7, 9, 11)),
-                new Lotto(Set.of(12, 21, 23, 34, 35, 44))
+                new Lotto(Set.of(
+                        LottoNumber.from(1),
+                        LottoNumber.from(2),
+                        LottoNumber.from(3),
+                        LottoNumber.from(4),
+                        LottoNumber.from(5),
+                        LottoNumber.from(6)
+                )),
+                new Lotto(Set.of(
+                        LottoNumber.from(1),
+                        LottoNumber.from(3),
+                        LottoNumber.from(5),
+                        LottoNumber.from(7),
+                        LottoNumber.from(9),
+                        LottoNumber.from(11)
+                )),
+                new Lotto(Set.of(
+                        LottoNumber.from(11),
+                        LottoNumber.from(12),
+                        LottoNumber.from(13),
+                        LottoNumber.from(14),
+                        LottoNumber.from(15),
+                        LottoNumber.from(16)
+                ))
         ));
-        WinningLotto winningLotto = new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 5, 6)), 11);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(Set.of(
+                LottoNumber.from(1),
+                LottoNumber.from(2),
+                LottoNumber.from(3),
+                LottoNumber.from(4),
+                LottoNumber.from(5),
+                LottoNumber.from(6)
+        )), LottoNumber.from(11));
 
         LottoResult match = lottos.match(winningLotto);
 

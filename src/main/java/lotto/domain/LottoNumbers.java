@@ -12,21 +12,18 @@ public class LottoNumbers {
     private static final int MIN_SIZE = 0;
     private static final int MAX_SIZE = 6;
 
-    private static List<Integer> NUMBERS = IntStream.range(1, 46).boxed().collect(Collectors.toList());;
+    private static List<LottoNumber> NUMBERS = new ArrayList<>();
+
+    static {
+        for (int i = 1; i <= 45; i++) {
+            NUMBERS.add(LottoNumber.from(i));
+        }
+    }
 
     private LottoNumbers() {}
 
-    public static List<Integer> randomList() {
+    public static List<LottoNumber> randomList() {
         Collections.shuffle(NUMBERS);
         return NUMBERS.subList(MIN_SIZE, MAX_SIZE);
-    }
-
-    public static void check(Set<Integer> numbers) {
-        if (numbers.isEmpty() || numbers.size() != MAX_SIZE) {
-            throw new IllegalArgumentException("유효하지 않은 로또입니다.");
-        }
-        for (Integer number : numbers) {
-            LottoNumber.check(number);
-        }
     }
 }

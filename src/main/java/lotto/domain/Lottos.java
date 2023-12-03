@@ -7,8 +7,8 @@ public class Lottos {
 
     private List<Lotto> values;
 
-    public Lottos(List<Lotto> lottos) {
-        this.values = lottos;
+    public Lottos(List<Lotto> values) {
+        this.values = values;
     }
 
     public static Lottos from(int count) {
@@ -21,14 +21,6 @@ public class Lottos {
 
     public int size() {
         return values.size();
-    }
-
-    public LottoResult match(Lotto winningLotto) {
-        List<LottoPrize> result = new ArrayList<>();
-        for (Lotto lotto : values) {
-            result.add(LottoPrize.from(winningLotto.matchCount(lotto)));
-        }
-        return new LottoResult(result);
     }
 
     public LottoResult match(WinningLotto winningLotto) {
