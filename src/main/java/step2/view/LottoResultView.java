@@ -9,9 +9,13 @@ import step2.model.Lottos;
 import step2.model.Money;
 
 public class LottoResultView {
-    public static void printLottos(Lottos lottos, Money money) {
+
+    public static void printLottosCount(Integer manualCount, Money money) {
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",
-                lottos.getLottos().size() - money.determineLottoPurchaseCount(), money.determineLottoPurchaseCount());
+                manualCount, money.determineLottoPurchaseCount());
+    }
+
+    public static void printPurchaseLotto(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(Arrays.toString(lotto.getLottoNumbers()
                     .stream()
