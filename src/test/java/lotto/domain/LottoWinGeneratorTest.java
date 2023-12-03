@@ -24,7 +24,7 @@ class LottoWinGeneratorTest {
         );
     }
 
-    @DisplayName("맞춘 수에 맞는 rank를 준다.")
+    @DisplayName("로또에 당첨된 수에 맞는 rank를 받는다.")
     @ParameterizedTest
     @MethodSource("namedArguments")
     void noCorrectNumber_getNoRank(Integer[] inputNumbers, String rank) {
