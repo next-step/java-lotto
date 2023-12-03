@@ -18,7 +18,8 @@ class WinningLottoTest {
         LottoNumber bonus = new LottoNumber(1);
         assertThatThrownBy(() -> {
             new WinningLotto(lotto, bonus);
-        }).isInstanceOf(IllegalArgumentException.class);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("보너스번호가 당첨번호에 이미 포함된 번호입니다.");
     }
 
     @ParameterizedTest

@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -35,7 +34,7 @@ class LottoTest {
     @Test
     void 수동생성테스트_로또숫자_중복일_경우_IllegalArgumentException_오류발생() {
         assertThatThrownBy(() -> {
-            new Lotto(Arrays.asList(1, 2, 3, 4, 5, 5));
+            new Lotto(1, 2, 3, 4, 5, 5);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -43,13 +42,13 @@ class LottoTest {
     @ValueSource(ints = {0, 46})
     void 수동생성테스트_로또숫자범위_벗어날_경우_IllegalArgumentException_오류발생(int invalidNumber) {
         assertThatThrownBy(() -> {
-            new Lotto(Arrays.asList(1, 2, 3, 4, 5, invalidNumber));
+            new Lotto(1, 2, 3, 4, 5, invalidNumber);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
     @MethodSource("LottoMatchParameterProvider")
-    void 로또_일치_확인(List<Integer> lottoList, LottoResult expected) {
+    void 로또_일치_확인(Integer[] lottoList, LottoResult expected) {
         WinningLotto winningLotto = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(7));
         Lotto lotto = new Lotto(lottoList);
 
@@ -60,12 +59,12 @@ class LottoTest {
 
     private static List<Arguments> LottoMatchParameterProvider() {
         return List.of(
-                Arguments.of(Arrays.asList(1, 3, 5, 7, 9, 11), LottoResult.THREE),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 9, 11), LottoResult.FOUR),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 11), LottoResult.FIVE),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 7), LottoResult.BONUS),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoResult.SIX),
-                Arguments.of(Arrays.asList(6, 7, 8, 9, 10, 11), LottoResult.FAIL)
+                Arguments.of(new Integer[]{1, 3, 5, 7, 9, 11}, LottoResult.THREE),
+                Arguments.of(new Integer[]{1, 2, 3, 4, 9, 11}, LottoResult.FOUR),
+                Arguments.of(new Integer[]{1, 2, 3, 4, 5, 11}, LottoResult.FIVE),
+                Arguments.of(new Integer[]{1, 2, 3, 4, 5, 7}, LottoResult.BONUS),
+                Arguments.of(new Integer[]{1, 2, 3, 4, 5, 6}, LottoResult.SIX),
+                Arguments.of(new Integer[]{6, 7, 8, 9, 10, 11}, LottoResult.FAIL)
         );
     }
 
