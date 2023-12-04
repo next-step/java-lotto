@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
@@ -40,22 +41,10 @@ public class LottoNumbers {
         this.validateDigit();
     }
 
-    public List<LottoNumber> numbers() {
-        return this.lottoNumbers;
-    }
-
     public int matchCount(LottoNumbers winningNumbers) {
-        for (LottoNumber number : winningNumbers.numbers()) {
-            matchCount = getMatchCount(number);
-        }
-        return matchCount;
-    }
-
-    private int getMatchCount(LottoNumber number) {
-        if (this.lottoNumbers.contains(number)) {
-            ++matchCount;
-        }
-        return matchCount;
+        return (int) this.lottoNumbers.stream()
+            .filter(winningNumbers.lottoNumbers::contains)
+            .count();
     }
 
     private void validateDigit() {
