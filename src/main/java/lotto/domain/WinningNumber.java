@@ -1,37 +1,31 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class WinningNumber {
 
-    private List<String> numbers;
-    private int bonusNumber;
+    static final String DUPLICATE_BONUS_NUMBER = "당첨 번호에 포함된 값입니다.";
 
-    public WinningNumber(List<String> numbers, int bonusNumber) {
-        this.numbers = numbers;
+    private Lotto winningNumbers;
+    private LottoNumber bonusNumber;
+
+    public WinningNumber(Lotto winningNumbers, LottoNumber bonusNumber) {
+        validation(winningNumbers);
+        this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
     public int matchNumbers(Lotto lotto) {
-        boolean matchCheck;
-        int answerCount = 0;
-        for (String number : numbers) {
-            matchCheck = lotto.getLotto().stream().anyMatch(num -> num.getNumber() == Integer.parseInt(number));
-            answerCount = answerCalc(matchCheck, answerCount);
-        }
-
+        int answerCount = lotto.matchNumbers(winningNumbers);
         return answerCount;
     }
 
     public boolean matchBonusNumber(Lotto lotto) {
-        return lotto.getLotto().stream().anyMatch(num -> num.getNumber() == bonusNumber);
+        return lotto.matchBonusNumber(bonusNumber);
     }
 
-    private int answerCalc(boolean checkContains, int answerCount) {
-        if (checkContains) {
-            answerCount++;
+    private void validation(Lotto winningNumbers) {
+        boolean containsCheck = matchBonusNumber(winningNumbers);
+        if (containsCheck) {
+            throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER);
         }
-        return answerCount;
     }
-
 }

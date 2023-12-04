@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -19,6 +21,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public Lottos(Lottos manualLottos, Lottos autoLottos) {
+        this.lottos = mergeLottos(manualLottos, autoLottos);
+    }
+
     public int getLottosSize() {
         return lottos.size();
     }
@@ -34,5 +40,27 @@ public class Lottos {
             lottoNumbers.add(number);
         }
         return new Lotto(lottoNumbers);
+    }
+
+    public List<Lotto> mergeLottos(Lottos manualLottos, Lottos autoLottos){
+
+        List<Lotto> mergeList = new ArrayList<>();
+
+        mergeManualLottos(manualLottos, mergeList);
+        mergeAutoLottos(autoLottos, mergeList);
+
+        return mergeList;
+    }
+
+    private void mergeAutoLottos(Lottos autoLottos, List<Lotto> mergeList) {
+        for(int i = 0; i< autoLottos.getLottosSize(); i++){
+            mergeList.add(autoLottos.getLottoIndex(i));
+        }
+    }
+
+    private void mergeManualLottos(Lottos manualLottos, List<Lotto> mergeList) {
+        for(int i = 0; i< manualLottos.getLottosSize(); i++){
+            mergeList.add(manualLottos.getLottoIndex(i));
+        }
     }
 }

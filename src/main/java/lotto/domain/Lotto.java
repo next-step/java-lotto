@@ -1,8 +1,9 @@
 package lotto.domain;
 
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Lotto {
 
@@ -17,7 +18,7 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> numbers) {
-        Set<LottoNumber> listToSet = new HashSet<>();
+        Set<LottoNumber> listToSet = new TreeSet<>(Comparator.comparing(LottoNumber::getNumber));
         for (Integer num : numbers) {
             listToSet.add(new LottoNumber(num));
         }
@@ -33,12 +34,21 @@ public class Lotto {
         lottoSizeValidation(numbers);
     }
 
-
-    private static void lottoSizeValidation(Set<LottoNumber> numbers) {
+    private void lottoSizeValidation(Set<LottoNumber> numbers) {
         if (numbers.size() != SIZE_OF_LOTTO) {
             throw new IllegalArgumentException(LOTTO_IS_INVALID);
         }
     }
 
-    
+    public int matchNumbers(Lotto winningNumbers) {
+        int answerCount = (int) winningNumbers.getLotto().stream()
+                .filter(lotto::contains)
+                .count();
+        return answerCount;
+    }
+
+    public boolean matchBonusNumber(LottoNumber bonusNumber) {
+        return lotto.stream().anyMatch(num -> num.equals(bonusNumber));
+    }
+
 }

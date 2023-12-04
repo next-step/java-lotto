@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class LottoNumber {
 
     private static final int LOTTO_MAX_NUMBER = 45;
@@ -21,5 +23,18 @@ public class LottoNumber {
 
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Lotto)) return false;
+        LottoNumber lottoNumber = (LottoNumber) o;
+        return Objects.equals(number, lottoNumber.number);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }

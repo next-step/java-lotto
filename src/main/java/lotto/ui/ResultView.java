@@ -15,12 +15,15 @@ public class ResultView {
 
     static final String RESULT_SECOND = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
     static final String TOTAL_AMOUNT = "총 수익률은 %.2f입니다.";
+    static final String LOTTO_BUY_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     static final int LOTTO_PRICE = 1000;
 
-    public void PrintThePurchasedLotto(Lottos buyLottoList) {
+    public void PrintThePurchasedLotto(Lottos mergeLottos, int manualCount, int autoCount) {
 
-        for (int i = 0; i < buyLottoList.getLottosSize(); i++) {
-            Iterator<LottoNumber> iterSet = buyLottoList.getLottoIndex(i).getLotto().iterator();
+        System.out.printf(LOTTO_BUY_COUNT, manualCount, autoCount);
+
+        for (int i = 0; i < mergeLottos.getLottosSize(); i++) {
+            Iterator<LottoNumber> iterSet = mergeLottos.getLottoIndex(i).getLotto().iterator();
             viewLottoNumbers(iterSet);
             System.out.println();
         }

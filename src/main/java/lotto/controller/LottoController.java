@@ -5,7 +5,6 @@ import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
 import java.util.EnumMap;
-import java.util.List;
 
 public class LottoController {
 
@@ -15,17 +14,20 @@ public class LottoController {
         ResultView resultView = new ResultView();
 
         int lottoCount = inputView.buyOfLottoPrice();
-        LottoGame lotto = new LottoGame();
-        Lottos buyLottoList = lotto.lottoGame(lottoCount);
-        resultView.PrintThePurchasedLotto(buyLottoList);
+        int manualLottoCount = inputView.buyOfManualLotto(lottoCount);
+        LottoGame lottoGame = new LottoGame();
+        Lottos manualLottos = inputView.getManualLottoNNumbers(manualLottoCount);
+        Lottos buyLottos = lottoGame.startGame(lottoCount - manualLottoCount);
+        Lottos mergeLottos = new Lottos(manualLottos, buyLottos);
+        resultView.PrintThePurchasedLotto(mergeLottos, manualLottos.getLottosSize(), buyLottos.getLottosSize());
 
-        List<String> lastWeekLottoNumber = inputView.getLastWeekLottoNumber();
-        String lastWeekBounusLottoNumber = inputView.getLastWeekBonusLottoNumber(lastWeekLottoNumber);
+        Lotto lastWeekLottoNumber = inputView.getLastWeekLottoNumber();
+        LottoNumber lastWeekBounusLottoNumber = inputView.getLastWeekBonusLottoNumber();
 
-        WinningNumber winningNumber = new WinningNumber(lastWeekLottoNumber, Integer.parseInt(lastWeekBounusLottoNumber));
+        WinningNumber winningNumber = new WinningNumber(lastWeekLottoNumber, lastWeekBounusLottoNumber);
         ResultWinner winner = new ResultWinner();
 
-        EnumMap<Rank, Integer> resultMap = winner.countOfWinner(buyLottoList, winningNumber);
+        EnumMap<Rank, Integer> resultMap = winner.countOfWinner(mergeLottos, winningNumber);
         resultView.PrintTheWinningResults(resultMap, lottoCount);
 
     }
