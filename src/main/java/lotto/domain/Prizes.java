@@ -33,7 +33,7 @@ public class Prizes {
     }
 
     public Double getProfit() {
-        int sum = prizeList.stream().mapToInt(prize -> prize.getWinningMoney().getValue()).sum();
-        return (double) (sum / tryMoney.getValue());
+        int sum = prizeList.stream().mapToInt(prize -> prize.getWinningMoney().intValue()).sum();
+        return (double) (sum / tryMoney.intValue());
     }
 }

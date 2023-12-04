@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static java.util.stream.Collectors.joining;
+import static lotto.domain.LottoGame.ONE_TRY_MONEY;
 import static lotto.generator.Lotto45NumbersMakeStrategy.PICK_NUMBERS;
 
 public class InputView implements View {
@@ -32,8 +33,8 @@ public class InputView implements View {
     }
 
     private void showHowManyBuy(Money tryMoney) {
-//        int tryNumber = tryMoney.divide(ONE_TRY_MONEY).intValue();
-//        System.out.printf(HOW_MANY_BUY, tryNumber);
+//        int tryNumber = tryMoney.divide(ONE_TRY_MONEY);
+        System.out.printf(HOW_MANY_BUY, 2);
     }
 
     public void showInputLotto(LottoGame lottoGame) {

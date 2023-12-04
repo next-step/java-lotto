@@ -17,7 +17,7 @@ public class LottoGame {
 
     private final Money tryMoney;
 
-    public LottoGame(List<Lotto> lottos, Money money) {
+    private LottoGame(List<Lotto> lottos, Money money) {
         this.lottos = lottos;
         this.tryMoney = money;
     }
@@ -31,7 +31,7 @@ public class LottoGame {
     }
 
     private static int getTryCount(Money tryMoney) {
-        return tryMoney.divide(ONE_TRY_MONEY).getValue();
+        return tryMoney.divide(ONE_TRY_MONEY).intValue();
     }
 
     public List<Lotto> getLotto() {

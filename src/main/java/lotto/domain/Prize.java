@@ -30,7 +30,7 @@ public enum Prize {
     }
 
     public int getWinningMoneyNumber() {
-        return winningMoney.getValue();
+        return winningMoney.intValue();
     }
 
 

@@ -15,16 +15,16 @@ public class Money {
         this.value = value;
     }
 
-    public int getValue() {
+    public int intValue() {
         return value;
     }
 
     public Money add(Money money) {
-        return new Money(value + money.getValue());
+        return new Money(value + money.intValue());
     }
 
     public Money divide(Money money) {
-        return new Money(value / money.getValue());
+        return new Money(value / money.intValue());
     }
 
     @Override
