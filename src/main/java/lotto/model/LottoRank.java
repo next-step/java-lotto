@@ -29,7 +29,7 @@ public enum LottoRank {
         return this.matchCount;
     }
 
-    public static LottoRank valueOf(long matchCount, boolean matchBonusNumber) {
+    private static LottoRank valueOf(long matchCount, boolean matchBonusNumber) {
         if (matchBonusNumber) {
             return matchRank(
                 lottoRank -> lottoRank.matchCount() == matchCount && lottoRank == LottoRank.SECOND);
