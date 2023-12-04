@@ -17,14 +17,14 @@ public class Prizes {
         this.tryMoney = tryMoney;
     }
 
-    public List<String> getPrizesFormat(String prizeFormat) {
-        return Arrays.stream(Prize.values()).filter(Prize::isCanGetPrizeRank).map(rank ->
-                String.format(prizeFormat, rank.getCorrectCount(), rank.getWinningMoneyNumber(), howManyGetPrize(rank.getCorrectCount())))
-                .sorted()
+    public List<Prize> findWinPrizes() {
+        return Arrays.stream(Prize.values())
+                .filter(Prize::isCanGetPrizeRank)
+                .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
     }
 
-    private int howManyGetPrize(int correctCount) {
+    public int howManyGetPrize(int correctCount) {
         Map<Prize, List<Prize>> prizeMap = prizeList.stream().collect(groupingBy(Function.identity()));
         if (prizeMap.isEmpty() || prizeMap.get(Prize.valueOf(correctCount)) == null) {
             return 0;
@@ -32,8 +32,8 @@ public class Prizes {
         return prizeMap.get(Prize.valueOf(correctCount)).size();
     }
 
-    public Double getProfit() {
+    public Double profit() {
         int sum = prizeList.stream().mapToInt(prize -> prize.getWinningMoney().intValue()).sum();
-        return (double) (sum / tryMoney.intValue());
+        return (double) sum / tryMoney.intValue();
     }
 }

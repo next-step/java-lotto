@@ -13,19 +13,17 @@ public class Lotto45NumbersMakeStrategy implements LottoNumbersMakeStrategy {
 
     public static final int PICK_NUMBERS = 6;
 
+    private static final List<Integer> LOTTO_NUMBERS = IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
+            .boxed()
+            .collect(Collectors.toList());
+
     @Override
     public List<Integer> makeLottoNumber() {
-        List<Integer> lottoNumbers = makeLottoNumbers();
-        Collections.shuffle(lottoNumbers);
+        Collections.shuffle(LOTTO_NUMBERS);
 
-        return lottoNumbers.stream()
+        return LOTTO_NUMBERS.stream()
                 .limit(PICK_NUMBERS)
                 .collect(Collectors.toList());
     }
 
-    private List<Integer> makeLottoNumbers() {
-        return IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
-                .boxed()
-                .collect(Collectors.toList());
-    }
 }

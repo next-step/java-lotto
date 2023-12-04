@@ -9,4 +9,8 @@ public interface View {
     default void print(String format, Object... args) {
         System.out.printf(format, args);
     }
+
+    default void print(Object o) {
+        System.out.println(o);
+    }
 }

@@ -3,11 +3,8 @@ package lotto.domain;
 import lotto.generator.LottoNumbersMakeStrategy;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.joining;
 
 public class LottoGame {
 
@@ -38,11 +35,11 @@ public class LottoGame {
         return this.lottos;
     }
 
-    public Prizes game(WinGenerator generator) {
-        return new Prizes(getPrizes(generator), tryMoney);
+    public Prizes game(LottoWinGenerator generator) {
+        return new Prizes(makePrizes(generator), tryMoney);
     }
 
-    public List<Prize> getPrizes(WinGenerator generator) {
+    public List<Prize> makePrizes(LottoWinGenerator generator) {
         return lottos.stream()
                 .map(generator::winPrize)
                 .collect(Collectors.toList());
@@ -52,6 +49,10 @@ public class LottoGame {
         return getLotto().stream()
                 .map(Lotto::createFormattedLotto)
                 .collect(Collectors.toList());
+    }
+
+    public int howManyCanTry() {
+        return tryMoney.divide(ONE_TRY_MONEY).intValue();
     }
 
 }

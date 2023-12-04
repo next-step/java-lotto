@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoWinGenerator implements WinGenerator {
+public class LottoWinGenerator {
 
     private final List<Integer> winNumbers;
 
@@ -11,7 +11,6 @@ public class LottoWinGenerator implements WinGenerator {
         this.winNumbers = winNumbers;
     }
 
-    @Override
     public Prize winPrize(Lotto lotto) {
         List<Integer> resultNumber = new ArrayList<>();
         for (int number : lotto.getNumbers()) {

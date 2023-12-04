@@ -12,10 +12,6 @@ public enum Prize {
     FOURTH(3, new Money(5_000)),
     MISS(0, ZERO_MONEY);
 
-    public boolean isCanGetPrizeRank() {
-        return this != MISS;
-    }
-
     private final int correctCount;
 
     private final Money winningMoney;
@@ -23,6 +19,15 @@ public enum Prize {
     Prize(int correctCount, Money winningMoney) {
         this.correctCount = correctCount;
         this.winningMoney = winningMoney;
+    }
+
+    public static Prize valueOf(int correctCount) {
+        return Arrays.stream(values()).filter(rank -> rank.correctCount == correctCount)
+                .findFirst().orElse(MISS);
+    }
+
+    public boolean isCanGetPrizeRank() {
+        return this != MISS;
     }
 
     public Money getWinningMoney() {
@@ -38,8 +43,4 @@ public enum Prize {
         return correctCount;
     }
 
-    public static Prize valueOf(int correctCount) {
-        return Arrays.stream(values()).filter(rank -> rank.correctCount == correctCount)
-                .findFirst().orElse(MISS);
-    }
 }

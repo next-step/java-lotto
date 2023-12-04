@@ -1,5 +1,6 @@
 package lotto.view;
 
+import com.sun.source.doctree.BlockTagTree;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.Money;
@@ -27,27 +28,31 @@ public class InputView implements View {
     public Money gameStart() {
         System.out.println(REQUEST_INPUT);
         int tryMoneyNumber = scanner.nextInt();
-        Money tryMoney = new Money(tryMoneyNumber);
-        showHowManyBuy(tryMoney);
-        return tryMoney;
+        return new Money(tryMoneyNumber);
     }
 
-    private void showHowManyBuy(Money tryMoney) {
-//        int tryNumber = tryMoney.divide(ONE_TRY_MONEY);
-        System.out.printf(HOW_MANY_BUY, 2);
+    private void showHowManyBuy(int howManyTry) {
+        print(HOW_MANY_BUY, howManyTry);
     }
 
     public void showInputLotto(LottoGame lottoGame) {
+        showHowManyBuyLotto(lottoGame);
         lottoGame.createFormattedLotto().forEach(formattedLotto -> {
             print(LOTTO_NUMBER_PRINT_FORMAT, formattedLotto);
             nextLine();
         });
     }
 
+    private void showHowManyBuyLotto(LottoGame lottoGame) {
+        print(HOW_MANY_BUY, lottoGame.howManyCanTry());
+        nextLine();
+    }
+
     public Lotto winLotto() {
-        System.out.println(REQUEST_LAST_WEEK_WIN_NUMBER);
+        print(REQUEST_LAST_WEEK_WIN_NUMBER);
         Lotto lotto = Lotto.create(makeWinLottoNumbers());
-        System.out.println(lotto.getNumbers());
+        print(lotto.createFormattedLotto());
+        nextLine();
         return lotto;
     }
 

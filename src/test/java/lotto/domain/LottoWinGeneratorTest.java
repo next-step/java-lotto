@@ -15,12 +15,12 @@ class LottoWinGeneratorTest {
 
     static Stream<Arguments> namedArguments() {
         return Stream.of(
-                arguments((Object) new Integer[]{1, 12, 13, 14, 15, 16}, "MISS")
-                , arguments((Object) new Integer[]{1, 2, 13, 14, 15, 16}, "MISS")
-                , arguments((Object) new Integer[]{1, 2, 3, 14, 15, 16}, "FOURTH")
-                , arguments((Object) new Integer[]{1, 2, 3, 4, 15, 16}, "THIRD")
-                , arguments((Object) new Integer[]{1, 2, 3, 4, 5, 16}, "SECOND")
-                , arguments((Object) new Integer[]{1, 2, 3, 4, 5, 6}, "FIRST")
+                arguments(new Integer[]{1, 12, 13, 14, 15, 16}, "MISS")
+                , arguments(new Integer[]{1, 2, 13, 14, 15, 16}, "MISS")
+                , arguments(new Integer[]{1, 2, 3, 14, 15, 16}, "FOURTH")
+                , arguments(new Integer[]{1, 2, 3, 4, 15, 16}, "THIRD")
+                , arguments(new Integer[]{1, 2, 3, 4, 5, 16}, "SECOND")
+                , arguments(new Integer[]{1, 2, 3, 4, 5, 6}, "FIRST")
         );
     }
 
@@ -29,7 +29,7 @@ class LottoWinGeneratorTest {
     @MethodSource("namedArguments")
     void noCorrectNumber_getNoRank(Integer[] inputNumbers, String rank) {
         List<Integer> winNumbers = List.of(1, 2, 3, 4, 5, 6);
-        WinGenerator generator = new LottoWinGenerator(winNumbers);
+        LottoWinGenerator generator = new LottoWinGenerator(winNumbers);
         Prize prize = generator.winPrize(Lotto.create(List.of(inputNumbers)));
         Assertions.assertThat(prize).isEqualTo(Prize.valueOf(rank));
     }
