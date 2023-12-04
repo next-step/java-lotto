@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Rank;
 import lotto.domain.Result;
@@ -19,8 +20,9 @@ public class LottoMain {
         List<Lotto> lottos = Lotto.puchase(money);
         ResultView.purchase(lottos);
         LottoNumbers winningNumbers = new LottoNumbers(InputView.winningNumber());
+        LottoNumber bonusNumber = new LottoNumber(InputView.bonusNumber());
         lottos.forEach(l -> {
-            Optional<Rank> rank = l.rank(winningNumbers);
+            Optional<Rank> rank = l.rank(winningNumbers, bonusNumber);
             rank.ifPresent(result::update);
         });
         ResultView.result(result, money);

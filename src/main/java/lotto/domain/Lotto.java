@@ -18,8 +18,8 @@ public class Lotto {
         return this.lottoNumbers.matchCount(winningNumbers);
     }
 
-    public Optional<Rank> rank(LottoNumbers winningNumbers) {
-        return this.lottoNumbers.rank(winningNumbers);
+    public Optional<Rank> rank(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        return this.lottoNumbers.rank(winningNumbers, bonusNumber);
     }
 
     public static List<Lotto> puchase(int money) {

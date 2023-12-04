@@ -19,6 +19,11 @@ public class ResultView {
             + "\n---------");
 
         for (Map.Entry<Rank, Integer> element : result.result().entrySet()) {
+            if (element.getKey().equals(Rank.SECOND)) {
+                System.out.printf("%d개 일치, 보너스 볼 일치 (%d원)- %d\n", element.getKey().matchCount(),
+                    element.getKey().prizeAmount(), element.getValue());
+                continue;
+            }
             System.out.printf("%d개 일치 (%d원)- %d\n", element.getKey().matchCount(),
                 element.getKey().prizeAmount(), element.getValue());
         }

@@ -47,11 +47,18 @@ public class LottoNumbers {
             .count();
     }
 
-    public Optional<Rank> rank(LottoNumbers winningNumbers) {
-        return Arrays.stream(Rank.values())
-            .filter(r -> r.matchCount() == (int) this.lottoNumbers.stream()
-                .filter(winningNumbers.lottoNumbers::contains)
-                .count()).findFirst();
+//    public Optional<Rank> rank(LottoNumbers winningNumbers) {
+//        return Arrays.stream(Rank.values())
+//            .filter(r -> r.matchCount() == (int) this.lottoNumbers.stream()
+//                .filter(winningNumbers.lottoNumbers::contains)
+//                .count()).findFirst();
+//    }
+
+    public Optional<Rank> rank(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        int matchCount = (int) this.lottoNumbers.stream()
+            .filter(winningNumbers.lottoNumbers::contains).count();
+        boolean matchBonus = this.lottoNumbers.contains(bonusNumber);
+        return Rank.valueOf(matchCount, matchBonus);
     }
 
     private void validateDigit() {
