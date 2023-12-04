@@ -10,6 +10,9 @@ public class Lotto {
 
 
   private Lotto(Set<LottoNumber> lottoNumbers) {
+    if (lottoNumbers.size() != LOTTOSIZE) {
+      throw new IllegalArgumentException("로또번호는 같을 수 없습니다.");
+    }
     this.lottoNumbers = lottoNumbers;
   }
 
@@ -32,9 +35,7 @@ public class Lotto {
       LottoNumber lottoNumber = LottoNumber.of(Integer.parseInt(number));
       lottoNumbers.add(lottoNumber);
     }
-    if (lottoNumbers.size() != LOTTOSIZE) {
-      throw new IllegalArgumentException("로또번호는 같을 수 없습니다.");
-    }
+
     return new Lotto(lottoNumbers);
   }
 
