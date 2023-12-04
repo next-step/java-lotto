@@ -1,17 +1,17 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
-
-    private int matchCount = 0;
 
     public LottoNumbers() {
         List<Integer> seedNumbers = new ArrayList<>();
@@ -47,6 +47,13 @@ public class LottoNumbers {
             .count();
     }
 
+    public Optional<Rank> rank(LottoNumbers winningNumbers) {
+        return Arrays.stream(Rank.values())
+            .filter(r -> r.matchCount() == (int) this.lottoNumbers.stream()
+                .filter(winningNumbers.lottoNumbers::contains)
+                .count()).findFirst();
+    }
+
     private void validateDigit() {
         Set<LottoNumber> numbers = new HashSet<>(this.lottoNumbers);
         if (numbers.size() != 6) {
@@ -56,6 +63,7 @@ public class LottoNumbers {
 
     @Override
     public String toString() {
-        return this.lottoNumbers.toString();
+        return this.lottoNumbers.stream().map(n -> n.number()).collect(Collectors.toSet())
+            .toString();
     }
 }

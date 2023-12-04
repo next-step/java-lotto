@@ -18,11 +18,9 @@ public class Result {
         return result;
     }
 
-    public void update(int matchCount) {
-        if (3 <= matchCount && matchCount <= 6) {
-            result.replace(Rank.rankByMatchCount(matchCount),
-                result.get(Rank.rankByMatchCount(matchCount)) + 1);
-        }
+    public void update(Rank rank) {
+        result.replace(rank,
+            result.get(rank) + 1);
     }
 
     private int totalPrice() {

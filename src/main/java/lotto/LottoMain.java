@@ -2,8 +2,10 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
+import lotto.domain.Rank;
 import lotto.domain.Result;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
@@ -18,8 +20,8 @@ public class LottoMain {
         ResultView.purchase(lottos);
         LottoNumbers winningNumbers = new LottoNumbers(InputView.winningNumber());
         lottos.forEach(l -> {
-            int count = l.matchCount(winningNumbers);
-            result.update(count);
+            Optional<Rank> rank = l.rank(winningNumbers);
+            rank.ifPresent(result::update);
         });
         ResultView.result(result, money);
     }
