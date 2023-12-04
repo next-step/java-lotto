@@ -30,7 +30,7 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank valueOf(long countOfMatch, boolean matchBonus) {
+    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         if (countOfMatch < 3) {
             return Rank.MISS;
         }

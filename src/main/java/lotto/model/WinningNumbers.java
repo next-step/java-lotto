@@ -24,27 +24,19 @@ public class WinningNumbers {
     }
 
     private void sameNumberCount(List<LottoNumber> lotto) {
-        long count = lotto
+        int count = (int) lotto
                 .stream()
                 .map(LottoNumber::getLottoNumber)
                 .filter(o -> winningLottoNumbers.getLottoNumber().stream().map(LottoNumber::getLottoNumber)
                         .anyMatch(Predicate.isEqual(o)))
                 .count();
 
-        rankList.add(Rank.valueOf((int) count, containsBonus(count, lotto)));
+        rankList.add(Rank.valueOf(count, containsBonus(count, lotto)));
     }
 
-//    private void sameNumberCount(Lotto lotto) {
-//        int count = (int) lotto
-//                .stream()
-//                .filter(o -> winningLottoNumbers.stream().map(LottoNumber::getLottoNumber).anyMatch(Predicate.isEqual(o)))
-//                .count();
-//        rankList.add(Rank.valueOf(count, containsBonus(count,lotto)));
-//    }
-
-    private boolean containsBonus(long count, List<LottoNumber> lotto) {
+    private boolean containsBonus(int count, List<LottoNumber> lotto) {
         if (count == 5) {
-            return lotto.stream().map(LottoNumber::getLottoNumber).equals(Stream.of(bonusNumber.getLottoNumber()));
+            return lotto.stream().map(LottoNumber::getLottoNumber).anyMatch(Predicate.isEqual(bonusNumber.getLottoNumber()));
         }
         return false;
     }
