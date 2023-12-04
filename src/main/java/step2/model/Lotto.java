@@ -1,6 +1,7 @@
 package step2.model;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -11,21 +12,21 @@ public class Lotto {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(Set<LottoNumber> lottoNumbers) {
-        validateLottoNumberSize(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(int[] givenLottoNumbers) {
+        this(Arrays.stream(givenLottoNumbers)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toSet()));
     }
 
     public Lotto(List<Integer> givenLottoNumbers) {
         this(givenLottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet()));
     }
 
-    public Lotto(int[] givenLottoNumbers) {
-        this(Arrays.stream(givenLottoNumbers)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toSet()));
+    public Lotto(Set<LottoNumber> lottoNumbers) {
+        validateLottoNumberSize(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
     private void validateLottoNumberSize(Set<LottoNumber> lottoNumbers) {
@@ -44,11 +45,8 @@ public class Lotto {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
-    public List<Integer> printLotto() {
-        return lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
-                .sorted()
-                .collect(Collectors.toList());
+    public Set<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
     @Override
