@@ -15,7 +15,7 @@ public class LottosTest {
     @Test
     @DisplayName("입력된 금액만큼 로또 발급")
     public void 금액에_따른_로또_발급_갯수() {
-        Assertions.assertThat(Lottos.issue(5000).count())
+        Assertions.assertThat(Lottos.generate(5).count())
                 .isEqualTo(5);
     }
 }

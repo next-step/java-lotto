@@ -2,6 +2,8 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
     private final List<Lotto> tickets;
@@ -10,17 +12,24 @@ public class Lottos {
         this.tickets = tickets;
     }
 
-    public static Lottos issue(int money) {
-        int ticketCount = Lotto.calculateTicketCount(money);
-        return generate(ticketCount);
-    }
-
-    private static Lottos generate(int count) {
+    public static Lottos generate(int count) {
         List<Lotto> tickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             tickets.add(new Lotto());
         }
         return new Lottos(tickets);
+    }
+
+    public static Lottos generate(List<LottoNumbers> ticketsNumbers) {
+        return new Lottos(ticketsNumbers.stream()
+                        .map(Lotto::new)
+                        .collect(Collectors.toList()));
+    }
+
+    public static Lottos combine(Lottos lottos1, Lottos lottos2) {
+        return new Lottos(
+                Stream.concat(lottos1.tickets().stream(), lottos2.tickets().stream())
+                        .collect(Collectors.toList()));
     }
 
     public int count() {
@@ -29,13 +38,5 @@ public class Lottos {
 
     public List<Lotto> tickets() {
         return this.tickets;
-    }
-
-    public List<LottoRank> ranks(LottoNumbers winningNumber, LottoNumber bonusNumber) {
-        List<LottoRank> result = new ArrayList<>();
-        for (Lotto ticket : this.tickets) {
-            result.add(ticket.rank(winningNumber, bonusNumber));
-        }
-        return result;
     }
 }

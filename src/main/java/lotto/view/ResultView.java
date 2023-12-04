@@ -5,15 +5,19 @@ import lotto.model.LottoRank;
 import lotto.model.LottoReport;
 import lotto.model.Lottos;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ResultView {
-    private static final String CHECK_PURCHASE = "개를 구매했습니다.";
+    private static final String CHECK_PURCHASE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String RESULT_MESSAGE = "당첨 통계\n---------";
     private static final String RANK_RESULT_MESSAGE = "%d개 일치 (%d원)- %d개";
     private static final String SECOND_RANK_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String RATE_OF_RETURN_MESSAGE = "총 수익률은 %.2f입니다.";
 
-    public static void printCheckPurchaseMessage(int purchaseAmount) {
-        System.out.println(String.valueOf(purchaseAmount) + CHECK_PURCHASE);
+    public static void printCheckPurchaseMessage(int manualCount, int autoCount) {
+        System.out.println(String.format(CHECK_PURCHASE, manualCount, autoCount));
     }
 
     public static void printLottoTickets(Lottos tickets) {
@@ -23,7 +27,12 @@ public class ResultView {
     }
 
     private static void printLottoTicket(Lotto ticket) {
-        System.out.println(ticket.numbers());
+        List<Integer> numbers = ticket.numbers()
+                .toList()
+                .stream()
+                .map(number -> number.number())
+                .collect(Collectors.toList());
+        System.out.println(numbers);
     }
 
     public static void printResultReport(LottoReport report) {
@@ -35,11 +44,11 @@ public class ResultView {
         System.out.println(String.format(RATE_OF_RETURN_MESSAGE, report.rateOfReturn()));
     }
 
-    private static void printResultRank(LottoRank rank, int count) {
+    private static void printResultRank(LottoRank rank, long count) {
         if (rank.isSecondRank()) {
-            System.out.println(String.format(SECOND_RANK_RESULT_MESSAGE, rank.matchCount(), rank.cashPrize(), count));
+            System.out.println(String.format(SECOND_RANK_RESULT_MESSAGE, rank.condition().matchCount(), rank.cashPrize(), count));
             return;
         }
-        System.out.println(String.format(RANK_RESULT_MESSAGE, rank.matchCount(), rank.cashPrize(), count));
+        System.out.println(String.format(RANK_RESULT_MESSAGE, rank.condition().matchCount(), rank.cashPrize(), count));
     }
 }

@@ -5,30 +5,40 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoController {
+    private final InputView inputView;
+    private final ResultView outputView;
 
-    public static void main(String[] args) {
-        buyLottoAndCheckResult();
+    public LottoController(InputView inputView, ResultView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
     }
 
-    public static void buyLottoAndCheckResult() {
+    public void run() {
         Lottos tickets = buyLotto();
-        ResultView.printCheckPurchaseMessage(tickets.count());
-        ResultView.printLottoTickets(tickets);
-
-        checkLottoResult(tickets);
+        printResult(tickets);
     }
 
-    private static Lottos buyLotto() {
-        int money = InputView.inputMoney();
-        return Lottos.issue(money);
+    private Lottos buyLotto() {
+        int money = inputView.inputMoney();
+        List<List<Integer>> ticketsNumbers = inputView.inputManualTickets();
+        Lottos tickets = LottoSeller.issueLotto(money, ticketsNumbers.stream()
+                .map(numbers -> LottoNumbers.of(numbers))
+                .collect(Collectors.toList()));
+
+        outputView.printCheckPurchaseMessage(ticketsNumbers.size(), tickets.count()-ticketsNumbers.size());
+        outputView.printLottoTickets(tickets);
+        return tickets;
     }
 
-    private static void checkLottoResult(Lottos tickets) {
-        LottoNumbers winningNumber = LottoNumbers.of(InputView.inputWinningNumbers());
-        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusBallNumber());
-        LottoReport report = new LottoReport(tickets.ranks(winningNumber, bonusNumber));
-        ResultView.printResultReport(report);
+    private void printResult(Lottos tickets) {
+        WinningNumber winningNumber = new WinningNumber(
+                inputView.inputDefaultWinningNumbers(),
+                inputView.inputBonusBallNumber());
+
+        LottoReport report = new LottoReport(winningNumber.match(tickets));
+        outputView.printResultReport(report);
     }
 }

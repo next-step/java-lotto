@@ -2,76 +2,54 @@ package lotto.model;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.IntStream;
+import java.util.function.BiPredicate;
 
 public enum LottoRank {
-    FIRST(6,2_000_000_000),
-    SECOND(5,30_000_000),
-    THIRD(5,1_500_000),
-    FOURTH(4,50_000),
-    FIFTH(3,5_000),
-    COLLECT_2(2,0),
-    COLLECT_1(1,0),
-    COLLECT_0(0,0);
+    FIRST(1, LottoCondition.FIRST,2_000_000_000),
+    SECOND(2, LottoCondition.SECOND,30_000_000),
+    THIRD(3, LottoCondition.THIRD,1_500_000),
+    FOURTH(4, LottoCondition.FOURTH,50_000),
+    FIFTH(5, LottoCondition.FIFTH,5_000),
+    LAST(6, LottoCondition.LAST,0);
 
-    private static final String ERR_INVALID_MATCH_COUNT = "The number of matched lotto numbers cannot exceed 6, as there are a total of 6 lotto numbers.";
-    private static final String ERR_BONUS_MATCH_CONDITION = "A bonus number match is only required if 5 numbers are correct.";
     private static final String ERR_INVALID_RANK = "Invalid rank";
-    private final int matchCount;
+    private final int rank;
+    private final LottoCondition condition;
     private final int cashPrize;
 
-    LottoRank(int matchCount, int cash) {
-        this.matchCount = matchCount;
+    LottoRank(int rank, LottoCondition condition, int cash) {
+        this.rank = rank;
+        this.condition = condition;
         this.cashPrize = cash;
     }
 
-    public static int calculateTotalPrize(List<LottoRank> matchResult) {
-        return matchResult.stream()
-                .mapToInt(result -> result.cashPrize)
-                .sum();
-    }
-
-    public static LottoRank valueOf(int matchCount, boolean matchBonus) {
-        if (matchCount == 5) {
-            return checkBonusMatch(matchCount, matchBonus);
-        }
-        return getByMatchCount(matchCount);
-    }
-
-    private static LottoRank checkBonusMatch(int matchCount, boolean matchBonus) {
-        if (matchCount != 5) {
-            throw new IllegalArgumentException(ERR_BONUS_MATCH_CONDITION);
-        }
-
-        if (matchBonus) {
-            return LottoRank.SECOND;
-        }
-        return LottoRank.THIRD;
-    }
-
-    private static LottoRank getByMatchCount(int matchCount) {
+    public static LottoRank getByCondition(LottoCondition condition) {
         return Arrays.stream(values())
-                .filter(cashPrize -> cashPrize.matchCount == matchCount)
+                .filter(rank -> rank.condition.equals(condition))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(ERR_INVALID_MATCH_COUNT));
+                .orElse(LottoRank.LAST);
     }
 
     public static LottoRank getByRank(int rank) {
         return Arrays.stream(values())
-                .filter(element -> element.ordinal()+1 == rank)
+                .filter(element -> element.rank() == rank)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ERR_INVALID_RANK));
     }
 
-    public int cashPrize() {
-        return this.cashPrize;
-    }
-
-    public int matchCount() {
-        return this.matchCount;
-    }
-
     public boolean isSecondRank() {
         return this == LottoRank.SECOND;
+    }
+
+    public int rank() {
+        return this.rank;
+    }
+
+    public LottoCondition condition() {
+        return this.condition;
+    }
+
+    public int cashPrize() {
+        return this.cashPrize;
     }
 }

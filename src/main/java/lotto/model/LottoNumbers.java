@@ -9,9 +9,6 @@ import java.util.stream.IntStream;
 
 public class LottoNumbers {
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final List<LottoNumber> CANDIDATE_NUMBERS = IntStream.range(LottoNumber.lowerBound(), LottoNumber.upperBound() + 1)
-            .mapToObj(LottoNumber::new)
-            .collect(Collectors.toList());
     private static final String ERR_VALID_NUMBER_COUNT = "There must be a total of 6 lotto numbers.";
 
     private final List<LottoNumber> numbers;
@@ -34,8 +31,8 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers generate() {
-        Collections.shuffle(CANDIDATE_NUMBERS);
-        List<LottoNumber> numbers = CANDIDATE_NUMBERS.subList(0, LOTTO_NUMBER_COUNT);
+        Collections.shuffle(LottoNumber.CANDIDATE_NUMBERS);
+        List<LottoNumber> numbers = LottoNumber.CANDIDATE_NUMBERS.subList(0, LOTTO_NUMBER_COUNT);
         Collections.sort(numbers);
         return new LottoNumbers(new ArrayList<>(numbers));
     }
@@ -50,8 +47,7 @@ public class LottoNumbers {
         return this.numbers.contains(number);
     }
 
-    @Override
-    public String toString() {
-        return this.numbers.toString();
+    public List<LottoNumber> toList() {
+        return this.numbers;
     }
 }

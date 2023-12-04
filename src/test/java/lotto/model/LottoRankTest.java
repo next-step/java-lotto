@@ -20,21 +20,8 @@ public class LottoRankTest {
             "5,false,3",
             "4,true,4"})
     public void 랭킹_조건_확인(int matchCount, boolean matchBonus, int expectedRank) {
-        Assertions.assertThat(LottoRank.valueOf(matchCount, matchBonus).ordinal()+1)
+        Assertions.assertThat(LottoRank.getByCondition(LottoCondition.valueOf(matchCount, matchBonus)).ordinal()+1)
                 .isEqualTo(expectedRank);
-    }
-
-    @Test
-    @DisplayName("티켓의 순위에 따른 전체 상금 계산")
-    public void 전체_상금_계산 () {
-        List<LottoRank> matchResult = Arrays.asList(
-                LottoRank.FIRST,
-                LottoRank.COLLECT_0,
-                LottoRank.COLLECT_0,
-                LottoRank.FIFTH
-        );
-        Assertions.assertThat(LottoRank.calculateTotalPrize(matchResult))
-                .isEqualTo(2_000_005_000);
     }
 
     @Test
