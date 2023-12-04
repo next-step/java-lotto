@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoTicket {
     private final List<LottoNumbers> lottoTicket;
@@ -16,8 +17,8 @@ public class LottoTicket {
     }
 
     private List<LottoNumbers> generateTicket(int numberOfTickets) {
-        return IntStream.range(0, numberOfTickets)
-                .mapToObj(i -> new LottoNumbers())
+        return Stream.generate(LottoNumbers::new)
+                .limit(numberOfTickets)
                 .collect(Collectors.toList());
     }
 

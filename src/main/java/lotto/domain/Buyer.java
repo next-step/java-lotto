@@ -47,7 +47,7 @@ public class Buyer {
 
     private int countMatchingNumbers(Set<Integer> winningList, LottoNumbers purchasedList) {
         return (int) purchasedList.getLottoNumbers().stream()
-                .mapToInt(LottoNumber -> findSameNumber(winningList, LottoNumber.getNumber()))
+                .mapToInt(lottoNumber -> findSameNumber(winningList, lottoNumber.getNumber()))
                 .sum();
     }
 
