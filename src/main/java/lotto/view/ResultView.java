@@ -1,14 +1,7 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -19,34 +12,12 @@ public class ResultView {
         System.out.println(input + "개를 구매했습니다.");
     }
 
-    public static void printPurchasedLottoNumbers(LottoTicket lottoTicket) {
-        List<LottoNumbers> tickets = lottoTicket.getLottoTicket();
-
-        for (LottoNumbers numbers : tickets) {
-            System.out.println(numbersToList(numbers.getLottoNumbers()));
-        }
-    }
-
-    private static List<Integer> numbersToList(Set<LottoNumber> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
+    public static void printPurchasedLottoNumbers(List<Integer> numbers) {
+        System.out.println(numbers);
     }
 
     public static void printWinningStatistics() {
         System.out.println("당첨 통계\n---------");
-    }
-
-    public static void showLottoResult(HashMap<Rank, Integer> lottoResult, int purchaseAmount) {
-        long sum = 0;
-        printWinningStatistics();
-
-        for (Rank rank : lottoResult.keySet()) {
-            sum += rank.getPrize() * lottoResult.get(rank);
-            printWinningResult(rank, lottoResult.get(rank));
-        }
-        double percentage = sum / (double) purchaseAmount;
-        printProfitPercentage(percentage);
     }
 
     public static void printWinningResult(Rank rank, int count) {

@@ -24,7 +24,15 @@ public class Buyer {
         LottoTicket lottoTicket = new LottoTicket(lottoTicketCount);
         purchasedLottoTicket = lottoTicket;
 
-        ResultView.printPurchasedLottoNumbers(purchasedLottoTicket);
+        for(LottoNumbers lottoNumbers : purchasedLottoTicket.getLottoTicket()) {
+            ResultView.printPurchasedLottoNumbers(numbersToList(lottoNumbers.getLottoNumbers()));
+        }
+    }
+
+    private static List<Integer> numbersToList(Set<LottoNumber> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
     }
 
     private int calculateLottoTicketCount(int money) {
@@ -32,12 +40,18 @@ public class Buyer {
     }
 
     public void checkLottoWinningNumbers(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
+        long sum = 0;
         for (LottoNumbers lottoNumbers : lottoTicket.getLottoTicket()) {
             Rank rank = determineLottoRank(winningNumbers, lottoNumbers);
             lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
         }
-
-        ResultView.showLottoResult(lottoResult, purchaseAmount);
+        ResultView.printWinningStatistics();
+        for(Rank rank : lottoResult.keySet()) {
+            sum+= rank.getPrize() * lottoResult.get(rank);
+            ResultView.printWinningResult(rank, lottoResult.get(rank));
+        }
+        double percentage = sum / (double) purchaseAmount;
+        ResultView.printProfitPercentage(percentage);
     }
 
     private Rank determineLottoRank(WinningNumbers winningNumbers, LottoNumbers purchasedList) {
