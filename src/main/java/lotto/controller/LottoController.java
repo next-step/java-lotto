@@ -9,16 +9,17 @@ import lotto.view.ResultView;
 public class LottoController {
     public static void main(String[] args) {
         Integer money = InputView.money();
-        Integer manualNumber = InputView.manual();
+        int manualNumber = InputView.manual();
+        Lottos lottos = new Lottos();
 
         for (int i = 0; i < manualNumber; i++) {
             String manualLottoNumbers = InputView.manualLottoNumbers();
-            Lottos lottos = new Lottos(manualLottoNumbers);
+            lottos.manualLotto(manualLottoNumbers);
         }
 
         LottoSeller lottoSeller = new LottoSeller(money, manualNumber);
         ResultView.numberOfLotto(lottoSeller);
-        Lottos lottos = new Lottos(lottoSeller.getNumberOfLotto());
+        lottos.autoLotto(lottoSeller.getNumberOfAuto());
         ResultView.printLottoList(lottos);
 
 

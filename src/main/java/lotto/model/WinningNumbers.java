@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public class WinningNumbers {
     private static final int LOTTO_COST = 1000;
@@ -18,16 +19,19 @@ public class WinningNumbers {
 
     public void winLotto(List<Lotto> lottoList) {
         for (Lotto lotto : lottoList) {
-            sameNumberCount(lotto);
+            sameNumberCount(lotto.getLottoNumber());
         }
     }
 
-    private void sameNumberCount(Lotto lotto) {
-        long count = lotto.getLottoNumber()
+    private void sameNumberCount(List<LottoNumber> lotto) {
+        long count = lotto
                 .stream()
-                .filter(o -> winningLottoNumbers.getLottoNumber().stream().anyMatch(Predicate.isEqual(o)))
+                .map(LottoNumber::getLottoNumber)
+                .filter(o -> winningLottoNumbers.getLottoNumber().stream().map(LottoNumber::getLottoNumber)
+                        .anyMatch(Predicate.isEqual(o)))
                 .count();
-        rankList.add(Rank.valueOf(count, containsBonus(count, lotto)));
+
+        rankList.add(Rank.valueOf((int) count, containsBonus(count, lotto)));
     }
 
 //    private void sameNumberCount(Lotto lotto) {
@@ -38,9 +42,9 @@ public class WinningNumbers {
 //        rankList.add(Rank.valueOf(count, containsBonus(count,lotto)));
 //    }
 
-    private boolean containsBonus(long count, Lotto lotto) {
+    private boolean containsBonus(long count, List<LottoNumber> lotto) {
         if (count == 5) {
-            return lotto.getLottoNumber().contains(bonusNumber);
+            return lotto.stream().map(LottoNumber::getLottoNumber).equals(Stream.of(bonusNumber.getLottoNumber()));
         }
         return false;
     }
