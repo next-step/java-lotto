@@ -2,13 +2,14 @@ package lotto.controller;
 
 import lotto.model.LottoSeller;
 import lotto.model.Lottos;
+import lotto.model.Money;
 import lotto.model.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoController {
     public static void main(String[] args) {
-        Integer money = InputView.money();
+        Money money = new Money(InputView.money());
         int manualNumber = InputView.manual();
         Lottos lottos = new Lottos();
 

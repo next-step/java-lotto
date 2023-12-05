@@ -5,15 +5,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class RandomLotto {
+
+    private static final List<Integer> numbers = new ArrayList<>();
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
 
-    private static List<Integer> numberList() {
-        List<Integer> numbers = new ArrayList<>();
+    static {
         for (int i = MINIMUM_NUMBER; i <= MAXIMUM_NUMBER; i++) {
             numbers.add(i);
         }
-        return numbers;
     }
 
     private static List<Integer> shuffleLottoNumbers(List<Integer> numbers) {
@@ -28,6 +28,6 @@ public class RandomLotto {
     }
 
     public static List<Integer> pickLotto() {
-        return cuttingLottoNumbers(shuffleLottoNumbers(numberList()));
+        return cuttingLottoNumbers(shuffleLottoNumbers(numbers));
     }
 }
