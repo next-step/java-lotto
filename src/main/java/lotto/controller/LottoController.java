@@ -9,8 +9,9 @@ public class LottoController {
         Buyer buyer = new Buyer();
         WinningNumbers winningNumbers;
         int inputMoney = InputView.inputMoney();
+        int manualPurchaseCount = InputView.inputManualPurchaseCount();
 
-        buyer.purchaseLottoTicket(inputMoney);
+        buyer.purchaseLottoTicket(inputMoney, manualPurchaseCount);
 
         String inputWinningNumbers = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBonusNumbers();

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.service.ValidationCheck;
+import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.*;
@@ -14,15 +15,18 @@ public class Buyer {
     private static int purchaseAmount;
     public final HashMap<Rank, Integer> lottoResult = new HashMap<>();
 
-    public void purchaseLottoTicket(int money) {
+    public void purchaseLottoTicket(int money, int manualPurchaseCount) {
         ValidationCheck.validatePurchaseAmount(money);
+        List<String> manualNumbers = InputView.inputManualNumbers(manualPurchaseCount);
 
         purchaseAmount = money;
         int lottoTicketCount = calculateLottoTicketCount(money);
-        ResultView.printPurchaseCount(lottoTicketCount);
+        int autoTicketCount = lottoTicketCount - manualPurchaseCount;
+        ResultView.printPurchaseCount(autoTicketCount, manualPurchaseCount);
 
-        LottoTicket lottoTicket = new LottoTicket(lottoTicketCount);
-        purchasedLottoTicket = lottoTicket;
+        LottoTicket lottoAutoTicket = new LottoTicket(autoTicketCount);
+
+        purchasedLottoTicket = LottoTicket.mergeLottoTicket(lottoAutoTicket, manualNumbers);
 
         for(LottoNumbers lottoNumbers : purchasedLottoTicket.getLottoTicket()) {
             ResultView.printPurchasedLottoNumbers(numbersToList(lottoNumbers.getLottoNumbers()));

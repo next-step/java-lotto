@@ -8,8 +8,8 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printPurchaseCount(int input) {
-        System.out.println(input + "개를 구매했습니다.");
+    public static void printPurchaseCount(int autoCount, int manualCount) {
+        System.out.println("수동으로 " + manualCount + "장, 자동으로 " + autoCount + "개를 구매했습니다.");
     }
 
     public static void printPurchasedLottoNumbers(List<Integer> numbers) {
