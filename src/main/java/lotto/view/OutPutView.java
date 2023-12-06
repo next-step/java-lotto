@@ -6,6 +6,8 @@ import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 
 public class OutPutView {
+  private static final String ORDINARY_FORMAT = "%s개 일치 (%s원)- %s개";
+  private static final String BONUS_FORMAT = "%s개 일치, 보너스 볼 일치(%s원)- %s개";
 
   public static void printProfitRate(double profitRate) {
     System.out.printf("총 수익률은 %.3f입니다.", profitRate);
@@ -14,7 +16,12 @@ public class OutPutView {
   public static void printResult(LottoResult result) {
     System.out.println("당첨 통계");
     System.out.println("---------");
-    List<String> list = result.resultStatus();
+    List<String> list = result.resultStatus( isBonus -> {
+      if (isBonus) {
+        return BONUS_FORMAT;
+      }
+      return ORDINARY_FORMAT;
+    });
     for (String each : list) {
       System.out.println(each);
     }

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
+import lotto.domain.ResultConditon;
 import lotto.domain.WinningLotto;
 
 public enum Rank {
@@ -59,10 +60,14 @@ public enum Rank {
   }
 
 
-  public String resultMessage(int size) {
+  public String resultMessage(ResultConditon resultConditon,int size) {
     if (this == Rank.BONUS) {
-      return String.format("%s개 일치, 보너스 볼 일치(%s원)- %s개", matchCount, (int) price, size);
+      return message(resultConditon, true, size);
     }
-    return String.format("%s개 일치 (%s원)- %s개", matchCount, (int) price, size);
+    return message(resultConditon, false, size);
   }
+  private String message(ResultConditon resultConditon, boolean isBonus, int size) {
+    return String.format(resultConditon.format(isBonus), matchCount, (int) price, size);
+  }
+
 }

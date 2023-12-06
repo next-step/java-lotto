@@ -38,10 +38,10 @@ public class LottoResult {
         .calculatePrice(rank);
   }
 
-  public List<String> resultStatus() {
+  public List<String> resultStatus(ResultConditon resultConditon) {
     return Arrays.stream(Rank.values())
         .filter(each -> each != Rank.NO_MATCH)
-        .map(each -> each.resultMessage(result.get(each).size()))
+        .map(each -> each.resultMessage(resultConditon,result.get(each).size()))
         .collect(Collectors.toList());
   }
 }

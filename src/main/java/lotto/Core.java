@@ -23,8 +23,8 @@ public class Core {
     String resultLottoNumbers = InPutView.getResultLottoNumbers();
     Integer bonusLottoNumber = InPutView.getBonusLottoNumber();
 
-    LottoGame lottoGameForRefact = LottoGame.defaultOf(lottos, new WinningLotto(resultLottoNumbers, bonusLottoNumber));
-    LottoResult lottoResult = lottoGameForRefact.resultWithBonusNumber();
+    LottoGame lottoGame = LottoGame.defaultOf(lottos, new WinningLotto(resultLottoNumbers, bonusLottoNumber));
+    LottoResult lottoResult = lottoGame.resultWithBonusNumber();
 
     double profitRate = lottoResult.calculateProfitRate(amount);
 
