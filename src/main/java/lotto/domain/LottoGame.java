@@ -5,6 +5,7 @@ public class LottoGame {
   private final Lottos lottos;
   private final Lotto resultLotto;
   private final LottoNumber bonusLottoNumber;
+  private final WinningLotto winningLotto;
 
   private LottoGame(Lottos lottos, Lotto resultLotto, LottoNumber bonusLottoNumber) {
     if (resultLotto.has(bonusLottoNumber)) {
@@ -13,6 +14,14 @@ public class LottoGame {
     this.lottos = lottos;
     this.resultLotto = resultLotto;
     this.bonusLottoNumber = bonusLottoNumber;
+    this.winningLotto = null;
+  }
+
+  private LottoGame(Lottos lottos, WinningLotto winningLotto) {
+    this.lottos = lottos;
+    this.resultLotto = null;
+    this.bonusLottoNumber = null;
+    this.winningLotto = winningLotto;
   }
 
   public static LottoGame defaultOf(Lottos lottos, String resultLottoNumbers,
@@ -21,7 +30,12 @@ public class LottoGame {
         LottoNumber.of(bonusLottoNumberString));
   }
 
-  public LottoResult resultWithBonusNumber() {
-    return lottos.resultWithBonusNumber(resultLotto,bonusLottoNumber);
+  public static LottoGame defaultOf(Lottos lottos, WinningLotto winningLotto) {
+    return new LottoGame(lottos, winningLotto);
   }
+
+  public LottoResult resultWithBonusNumber() {
+    return lottos.resultWithBonusNumber(winningLotto);
+  }
+
 }

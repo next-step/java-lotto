@@ -4,43 +4,43 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import lotto.enums.LottoResultType;
+import lotto.enums.Rank;
 
 public class LottoResult {
 
-  private final Map<LottoResultType, Lottos> result;
+  private final Map<Rank, Lottos> result;
 
-  private LottoResult(Map<LottoResultType, Lottos> result) {
+  private LottoResult(Map<Rank, Lottos> result) {
     this.result = result;
   }
 
-  public static LottoResult defaultOf(Map<LottoResultType, Lottos> result) {
+  public static LottoResult defaultOf(Map<Rank, Lottos> result) {
     return new LottoResult(result);
   }
 
-  public int findMatchResultCount(LottoResultType resultType) {
+  public int findMatchResultCount(Rank resultType) {
     return result.get(resultType).size();
   }
 
   public double calculateProfitRate(int amount) {
     double total = 0;
-    for (LottoResultType lottoResultType : LottoResultType.values()) {
-      if (lottoResultType.equals(LottoResultType.NO_MATCH)) {
+    for (Rank rank : Rank.values()) {
+      if (rank.equals(Rank.NO_MATCH)) {
         continue;
       }
-      total += this.calculatePrice(lottoResultType);
+      total += this.calculatePrice(rank);
     }
     return total / amount;
   }
 
-  private double calculatePrice(LottoResultType lottoResultType) {
-    return result.get(lottoResultType)
-        .calculatePrice(lottoResultType);
+  private double calculatePrice(Rank rank) {
+    return result.get(rank)
+        .calculatePrice(rank);
   }
 
   public List<String> resultStatus() {
-    return Arrays.stream(LottoResultType.values())
-        .filter(each -> each != LottoResultType.NO_MATCH)
+    return Arrays.stream(Rank.values())
+        .filter(each -> each != Rank.NO_MATCH)
         .map(each -> each.resultMessage(result.get(each).size()))
         .collect(Collectors.toList());
   }

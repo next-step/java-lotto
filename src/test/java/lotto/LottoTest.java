@@ -96,7 +96,7 @@ public class LottoTest {
     Lotto lotto = Lotto.defaultOf(lottoNumbers);
 
     // when
-    int result = resultLotto.sameNumberCount(lotto);
+    int result = resultLotto.matchNumberCount(lotto);
 
     // then
     assertThat(result).isEqualTo(2);

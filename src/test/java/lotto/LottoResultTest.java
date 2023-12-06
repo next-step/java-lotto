@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Set;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
-import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
-import lotto.enums.LottoResultType;
+import lotto.domain.WinningLotto;
+import lotto.enums.Rank;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -52,7 +52,7 @@ public class LottoResultTest {
         , LottoNumber.of(1), LottoNumber.of(40)
     ));
 
-    lottoGame = LottoGame.defaultOf(lottos, "5,25,30,6,1,40",8);
+    lottoGame = LottoGame.defaultOf(lottos, new WinningLotto("5,25,30,6,1,40", 8));
     resultLotto = Lotto.defaultOf(lottoResultNumbers);
   }
 
@@ -63,7 +63,7 @@ public class LottoResultTest {
     LottoResult lottoResult = lottoGame.resultWithBonusNumber();
 
     // when
-    int result = lottoResult.findMatchResultCount(LottoResultType.THREE);
+    int result = lottoResult.findMatchResultCount(Rank.THREE);
 
     // then
     assertThat(result).isEqualTo(2);
@@ -76,7 +76,7 @@ public class LottoResultTest {
     LottoResult lottoResult = lottoGame.resultWithBonusNumber();
 
     // when
-    int result = lottoResult.findMatchResultCount(LottoResultType.THREE);
+    int result = lottoResult.findMatchResultCount(Rank.THREE);
 
     // then
     assertThat(result).isEqualTo(2);

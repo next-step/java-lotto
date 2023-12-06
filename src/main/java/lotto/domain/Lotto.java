@@ -43,26 +43,24 @@ public class Lotto {
     return this.lottoNumbers.size();
   }
 
-  public int sameNumberCount(Lotto lotto) {
+  public int matchNumberCount(Lotto lotto) {
     int sameNumberCount = 0;
     for (LottoNumber lottoNumber : this.lottoNumbers) {
-      sameNumberCount = judgeSameNumber(lotto, lottoNumber, sameNumberCount);
+      sameNumberCount = judgeMatchNumber(lotto, lottoNumber, sameNumberCount);
     }
     return sameNumberCount;
   }
 
-  private int judgeSameNumber(Lotto lotto, LottoNumber lottoNumber, int sameNumberCount) {
-    if (lotto.hasNumber(lottoNumber)) {
+  private int judgeMatchNumber(Lotto lotto, LottoNumber lottoNumber, int sameNumberCount) {
+    if (lotto.has(lottoNumber)) {
       sameNumberCount++;
     }
     return sameNumberCount;
   }
 
-  private boolean hasNumber(LottoNumber comparingLottoNumber) {
-    return this.lottoNumbers.stream()
-        .anyMatch(comparingLottoNumber::equals);
+  public boolean has(LottoNumber lottoNumber) {
+    return lottoNumbers.contains(lottoNumber);
   }
-
 
   public String toStringStatus() {
     StringBuilder stringBuilder = new StringBuilder();
@@ -76,7 +74,4 @@ public class Lotto {
     return status.substring(0, i);
   }
 
-  public boolean has(LottoNumber bonusLottoNumber) {
-    return lottoNumbers.contains(bonusLottoNumber);
-  }
 }

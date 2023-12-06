@@ -1,11 +1,11 @@
 package lotto;
 
-import lotto.enums.LottoResultType;
+import lotto.enums.Rank;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoResultTypeTest {
+public class RankTest {
 
   @Test
   @DisplayName("매칭 숫자로 LottoResultType 찾기")
@@ -14,10 +14,10 @@ public class LottoResultTypeTest {
     int number = 3;
 
     // when
-    LottoResultType lottoResultType = LottoResultType.valueOf(number);
+    Rank rank = Rank.valueOf(number);
 
     // then
-    Assertions.assertThat(lottoResultType).isEqualTo(LottoResultType.THREE);
+    Assertions.assertThat(rank).isEqualTo(Rank.THREE);
   }
 
 }

@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.enums.LottoResultType;
+import java.util.stream.Collectors;
+import lotto.enums.Rank;
 
 public class Lottos {
 
@@ -23,17 +24,25 @@ public class Lottos {
   }
 
   public LottoResult resultWithBonusNumber(Lotto resultLotto, LottoNumber bonusNumber) {
-    Map<LottoResultType, Lottos> result = new HashMap<>();
-    for (LottoResultType lottoResultType : LottoResultType.values()) {
-      Lottos lottos = lottoResultType.result(this.lottos, resultLotto, bonusNumber);
-      result.put(lottoResultType, lottos);
+    Map<Rank, Lottos> result = new HashMap<>();
+    for (Rank rank : Rank.values()) {
+      Lottos lottos = rank.result(this.lottos, resultLotto, bonusNumber);
+      result.put(rank, lottos);
+    }
+    return LottoResult.defaultOf(result);
+  }
+  public LottoResult resultWithBonusNumber(WinningLotto winningLotto) {
+    Map<Rank, Lottos> result = new HashMap<>();
+    for (Rank rank : Rank.values()) {
+      Lottos lottos = rank.result(this, winningLotto);
+      result.put(rank, lottos);
     }
     return LottoResult.defaultOf(result);
   }
 
-  public double calculatePrice(LottoResultType lottoResultType) {
+  public double calculatePrice(Rank rank) {
     int count = this.lottos.size();
-    return lottoResultType.calculatePrice(count);
+    return rank.calculatePrice(count);
   }
 
   public int size() {
@@ -50,5 +59,13 @@ public class Lottos {
       lottoStatusList.add(lottoStatus);
     }
     return lottoStatusList;
+  }
+
+
+  public Lottos result(WinningLotto winningLotto, Rank rank) {
+    List<Lotto> result = lottos.stream()
+        .filter(lotto -> Rank.valueOf(winningLotto.matchNumberCount(lotto),winningLotto.hasBonusNumber(lotto))== rank)
+        .collect(Collectors.toList());
+    return Lottos.of(result);
   }
 }
