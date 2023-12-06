@@ -28,7 +28,7 @@ public class BuyerTest {
     void 구매금액에맞게_로또가_구입되는지확인() {
         int money = 15500;
         Buyer buyer = new Buyer();
-        buyer.purchaseLottoTicket(money);
+        buyer.purchaseLottoTicket(money, 0);
         assertThat(buyer.purchasedLottoTicket.getLottoTicket().size()).isEqualTo(15);
     }
 

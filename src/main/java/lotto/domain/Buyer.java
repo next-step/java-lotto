@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.service.ValidationCheck;
+import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.*;
@@ -14,17 +15,28 @@ public class Buyer {
     private static int purchaseAmount;
     public final HashMap<Rank, Integer> lottoResult = new HashMap<>();
 
-    public void purchaseLottoTicket(int money) {
+    public void purchaseLottoTicket(int money, int manualPurchaseCount) {
         ValidationCheck.validatePurchaseAmount(money);
+        List<String> manualNumbers = InputView.inputManualNumbers(manualPurchaseCount);
 
         purchaseAmount = money;
         int lottoTicketCount = calculateLottoTicketCount(money);
-        ResultView.printPurchaseCount(lottoTicketCount);
+        int autoTicketCount = lottoTicketCount - manualPurchaseCount;
+        ResultView.printPurchaseCount(autoTicketCount, manualPurchaseCount);
 
-        LottoTicket lottoTicket = new LottoTicket(lottoTicketCount);
-        purchasedLottoTicket = lottoTicket;
+        LottoTicket lottoAutoTicket = new LottoTicket(autoTicketCount);
 
-        ResultView.printPurchasedLottoNumbers(purchasedLottoTicket);
+        purchasedLottoTicket = LottoTicket.mergeLottoTicket(lottoAutoTicket, manualNumbers);
+
+        for(LottoNumbers lottoNumbers : purchasedLottoTicket.getLottoTicket()) {
+            ResultView.printPurchasedLottoNumbers(numbersToList(lottoNumbers.getLottoNumbers()));
+        }
+    }
+
+    private static List<Integer> numbersToList(Set<LottoNumber> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
     }
 
     private int calculateLottoTicketCount(int money) {
@@ -32,12 +44,18 @@ public class Buyer {
     }
 
     public void checkLottoWinningNumbers(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
+        long sum = 0;
         for (LottoNumbers lottoNumbers : lottoTicket.getLottoTicket()) {
             Rank rank = determineLottoRank(winningNumbers, lottoNumbers);
             lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
         }
-
-        ResultView.showLottoResult(lottoResult, purchaseAmount);
+        ResultView.printWinningStatistics();
+        for(Rank rank : lottoResult.keySet()) {
+            sum+= rank.getPrize() * lottoResult.get(rank);
+            ResultView.printWinningResult(rank, lottoResult.get(rank));
+        }
+        double percentage = sum / (double) purchaseAmount;
+        ResultView.printProfitPercentage(percentage);
     }
 
     private Rank determineLottoRank(WinningNumbers winningNumbers, LottoNumbers purchasedList) {
@@ -47,7 +65,7 @@ public class Buyer {
 
     private int countMatchingNumbers(Set<Integer> winningList, LottoNumbers purchasedList) {
         return (int) purchasedList.getLottoNumbers().stream()
-                .mapToInt(LottoNumber -> findSameNumber(winningList, LottoNumber.getNumber()))
+                .mapToInt(lottoNumber -> findSameNumber(winningList, lottoNumber.getNumber()))
                 .sum();
     }
 
