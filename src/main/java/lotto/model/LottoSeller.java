@@ -1,29 +1,15 @@
 package lotto.model;
 
 public class LottoSeller {
-    private static int LOTTO_COST = 1000;
+    private static final int LOTTO_COST = 1000;
     private final int numberOfLotto;
-    public LottoSeller(String input) {
-        checkInput(input);
-        int money = parsingInteger(input);
-        checkMoney(money);
-        this.numberOfLotto = calculatorNumberOfLotto(money);
-    }
+    private final int numberOfManual;
+    private final int numberOfAuto;
 
-    private void checkInput(String input) {
-        if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException("알맞은 숫자를 입력해주세요.");
-        }
-    }
-
-    private Integer parsingInteger(String input) {
-        return Integer.parseInt(input);
-    }
-
-    private void checkMoney(Integer money) {
-        if (money<1000) {
-            throw new IllegalArgumentException("로또를 한장도 구매할 수 없습니다.");
-        }
+    public LottoSeller(Money money, Integer manualNumber) {
+        numberOfLotto = calculatorNumberOfLotto(money.getMoney());
+        numberOfManual = manualNumber;
+        numberOfAuto = numberOfLotto - numberOfManual;
     }
 
     private Integer calculatorNumberOfLotto(Integer money) {
@@ -32,6 +18,14 @@ public class LottoSeller {
 
     public Integer getNumberOfLotto() {
         return numberOfLotto;
+    }
+
+    public Integer getNumberofManual() {
+        return numberOfManual;
+    }
+
+    public Integer getNumberOfAuto() {
+        return numberOfAuto;
     }
 
 

@@ -4,19 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public class WinningNumbers {
     private static final int LOTTO_COST = 1000;
-    List<LottoNumber> winningLottoNumbers;
+    Lotto winningLottoNumbers;
     LottoNumber bonusNumber;
     List<Rank> rankList = new ArrayList<>();
 
-    public WinningNumbers(List<Integer> winningLottoNumbers) {
-        this.winningLottoNumbers = new ArrayList<>();
-        for (Integer winningNumber : winningLottoNumbers.subList(0,6)) {
-            this.winningLottoNumbers.add(new LottoNumber(winningNumber));
-        }
-        this.bonusNumber = new LottoNumber(winningLottoNumbers.get(6));
+    public WinningNumbers(String winningLottoNumbers, Integer bonusNumber) {
+        this.winningLottoNumbers = new Lotto(winningLottoNumbers);
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     public void winLotto(List<Lotto> lottoList) {
@@ -25,17 +23,20 @@ public class WinningNumbers {
         }
     }
 
-    private void sameNumberCount(List<Integer> lotto) {
+    private void sameNumberCount(List<LottoNumber> lotto) {
         int count = (int) lotto
                 .stream()
-                .filter(o -> winningLottoNumbers.stream().map(LottoNumber::getLottoNumber).anyMatch(Predicate.isEqual(o)))
+                .map(LottoNumber::getLottoNumber)
+                .filter(o -> winningLottoNumbers.getLottoNumber().stream().map(LottoNumber::getLottoNumber)
+                        .anyMatch(Predicate.isEqual(o)))
                 .count();
-        rankList.add(Rank.valueOf(count, containsBonus(count,lotto)));
+
+        rankList.add(Rank.valueOf(count, containsBonus(count, lotto)));
     }
 
-    private boolean containsBonus(Integer count, List<Integer> lotto) {
-        if (count == 5){
-            return lotto.contains(bonusNumber.getLottoNumber());
+    private boolean containsBonus(int count, List<LottoNumber> lotto) {
+        if (count == 5) {
+            return lotto.stream().map(LottoNumber::getLottoNumber).anyMatch(Predicate.isEqual(bonusNumber.getLottoNumber()));
         }
         return false;
     }

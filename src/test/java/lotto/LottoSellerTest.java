@@ -1,47 +1,31 @@
 package lotto;
 
-import org.assertj.core.api.Assertions;
+import lotto.model.LottoSeller;
+import lotto.model.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import lotto.model.LottoSeller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoSellerTest {
-    @DisplayName("빈칸이 들어왔다.")
+
+    LottoSeller lottoSeller = new LottoSeller(new Money(15000), 10);
+
+    @DisplayName("총 로또 구매개수를 출력한다.")
     @Test
-    void blankTest() {
-        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoSeller("")).withMessage("알맞은 숫자를 입력해주세요.");
+    void 총_로또_구매_갯수() {
+        assertThat(lottoSeller.getNumberOfLotto()).isEqualTo(15);
     }
 
-    @DisplayName("null이 들어왔다.")
+    @DisplayName("수동 로또 개수를 출력한다.")
     @Test
-    void nullTest() {
-        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoSeller(null)).withMessage("알맞은 숫자를 입력해주세요.");
+    void 수동_로또_개수() {
+        assertThat(lottoSeller.getNumberofManual()).isEqualTo(10);
     }
 
-    @DisplayName("숫자가 아닌값이 들어왔다.")
+    @DisplayName("자동 로또 개수를 출력한다.")
     @Test
-    void notIntegerTest() {
-        Assertions.assertThatExceptionOfType(NumberFormatException.class)
-                .isThrownBy(() -> new LottoSeller("+")).withMessage("For input string: \"+\"");
-    }
-
-
-    @DisplayName("로또 최소금액 미달시 예외 발생")
-    @Test
-    void under1000Test() {
-        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoSeller("999")).withMessage("로또를 한장도 구매할 수 없습니다.");
-    }
-
-    @DisplayName("올바른 예")
-    @Test
-    void numberOfLotto() {
-        LottoSeller lottoSeller = new LottoSeller("10000");
-
-        assertThat(lottoSeller.getNumberOfLotto()).isEqualTo(10);
+    void 자동_로또_개수() {
+        assertThat(lottoSeller.getNumberOfAuto()).isEqualTo(5);
     }
 }
