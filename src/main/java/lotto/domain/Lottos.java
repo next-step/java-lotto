@@ -11,9 +11,12 @@ public class Lottos {
         this.values = values;
     }
 
-    public static Lottos from(int count) {
+    public static Lottos from(LottoBuyInfo buyInfo, ManualLottos manualLottos) {
         List<Lotto> newLottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < manualLottos.size(); i++) {
+            newLottos.add(Lotto.from(manualLottos.getManualLotto(i)));
+        }
+        for (int i = 0; i < buyInfo.getAutoCount(); i++) {
             newLottos.add(Lotto.from(LottoNumbers.randomList()));
         }
         return new Lottos(newLottos);

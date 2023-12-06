@@ -24,7 +24,7 @@ public class LottoResult implements Rate{
                 .sum();
     }
 
-    public double getRate(LottoMoney money) {
+    public double getRate(LottoBuyInfo money) {
         return getRate(money.getMoney());
     }
 

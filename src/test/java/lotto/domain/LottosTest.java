@@ -10,15 +10,17 @@ import static org.assertj.core.api.Assertions.*;
 
 class LottosTest {
 
-    @DisplayName("숫자를 전달하면 그 개수만큼 lotto를 생성해 리스트로 반환한다.")
+    @DisplayName("구매 정보와 수동으로 구매할 로또정를 전달하면 lotto를 생성해 리스트로 반환한다.")
     @Test
     void lottosTest() {
-        Lottos lottos = Lottos.from(3);
+        LottoBuyInfo buyInfo = new LottoBuyInfo(5000, 2);
+        ManualLottos manualLottos = new ManualLottos(List.of("1, 2, 3, 4, 5, 6", "2, 4, 5, 6, 8, 11"));
+        Lottos lottos = Lottos.from(buyInfo, manualLottos);
 
-        assertThat(lottos.size()).isEqualTo(3);
+        assertThat(lottos.size()).isEqualTo(5);
     }
 
-    @DisplayName("당첨 로또 객체를 전달하면 결과 리스트를 반환한다.")
+    @DisplayName("match메서드를 호출하면 결과 리스트를 반환한다.")
     @Test
     void winningLottoMatchTest() {
         Lottos lottos = new Lottos(List.of(
