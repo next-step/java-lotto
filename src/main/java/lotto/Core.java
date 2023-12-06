@@ -4,6 +4,7 @@ import lotto.domain.LottoGame;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoStore;
 import lotto.domain.Lottos;
+import lotto.domain.WinningLotto;
 import lotto.view.InPutView;
 import lotto.view.OutPutView;
 
@@ -20,6 +21,7 @@ public class Core {
 
     String resultLottoNumbers = InPutView.getResultLottoNumbers();
     Integer bonusLottoNumber = InPutView.getBonusLottoNumber();
+    WinningLotto winningLotto = new WinningLotto(InPutView.getResultLottoNumbers(), InPutView.getBonusLottoNumber());
 
     LottoGame lottoGame = LottoGame.defaultOf(lottos, resultLottoNumbers, bonusLottoNumber);
     LottoResult result = lottoGame.resultWithBonusNumber();
