@@ -18,9 +18,11 @@ public class LottoInputView {
 
     public static LottoBuyInfo inputBuyInfo() {
         System.out.println(NOTICE_INPUT_MONEY);
-        int money = stringToInteger(SCANNER.nextLine());
+//        int money = stringToInteger(SCANNER.nextLine());
+        int money = 8000;
         System.out.println(NOTICE_INPUT_MANUAL_COUNT);
-        int manualCount = stringToInteger(SCANNER.nextLine());
+//        int manualCount = stringToInteger(SCANNER.nextLine());
+        int manualCount = 3;
         LottoBuyInfo buyInfo = new LottoBuyInfo(money, manualCount);
         return buyInfo;
     }
@@ -31,20 +33,23 @@ public class LottoInputView {
 
     public static ManualLottos inputManualLottoNumbers(int manualCount) {
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-        List<String> manualLottos = new ArrayList<>();
-        for (int i = 0; i < manualCount; i++) {
-            manualLottos.add(SCANNER.nextLine());
-        }
+//        List<String> manualLottos = new ArrayList<>();
+//        for (int i = 0; i < manualCount; i++) {
+//            manualLottos.add(SCANNER.nextLine());
+//        }
+        List<String> manualLottos = List.of("1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 6", "2, 4, 1, 6, 3, 9");
         return new ManualLottos(manualLottos);
     }
 
     public static String inputWinningNumbers() {
         System.out.println(NOTICE_INPUT_WINNING_NUMBERS);
-        return SCANNER.nextLine();
+//        return SCANNER.nextLine();
+        return "1, 2, 3, 4, 5, 6";
     }
 
     public static int inputBonusNumber() {
         System.out.println(NOTICE_INPUT_BONUS_NUMBER);
-        return Integer.parseInt(SCANNER.nextLine());
+//        return Integer.parseInt(SCANNER.nextLine());
+        return 11;
     }
 }

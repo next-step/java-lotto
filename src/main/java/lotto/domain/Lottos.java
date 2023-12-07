@@ -14,13 +14,25 @@ public class Lottos {
         this.values = values;
     }
 
-    public static Lottos from(LottoBuyInfo buyInfo, ManualLottos manualLottos) {
+    public static Lottos of(Lottos manualLottos, Lottos autoLottos) {
         List<Lotto> newLottos = new ArrayList<>();
-        LottoNumberGenerator lottoNumberGenerator = new RandomLottNumberGenerator();
+        newLottos.addAll(manualLottos.values);
+        newLottos.addAll(autoLottos.values);
+        return new Lottos(newLottos);
+    }
+
+    public static Lottos from(ManualLottos manualLottos) {
+        List<Lotto> newLottos = new ArrayList<>();
         for (int i = 0; i < manualLottos.size(); i++) {
             newLottos.add(Lotto.from(manualLottos.getManualLotto(i)));
         }
-        for (int i = 0; i < buyInfo.getAutoCount(); i++) {
+        return new Lottos(newLottos);
+    }
+
+    public static Lottos from(int count) {
+        List<Lotto> newLottos = new ArrayList<>();
+        LottoNumberGenerator lottoNumberGenerator = new RandomLottNumberGenerator();
+        for (int i = 0; i < count; i++) {
             newLottos.add(Lotto.from(lottoNumberGenerator.getLottoNumberList()));
         }
         return new Lottos(newLottos);
