@@ -1,11 +1,8 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -13,7 +10,7 @@ public class Lotto {
     private static final int SIZE = 6;
     private static final String STRING_SPLITTER = ", ";
 
-    private Set<LottoNumber> values = new HashSet<>();
+    private Set<LottoNumber> values = new LinkedHashSet<>();
 
     public Lotto(Set<LottoNumber> values) {
         if (values.isEmpty() || values.size() != SIZE) {
@@ -23,7 +20,7 @@ public class Lotto {
     }
 
     public static Lotto from(List<LottoNumber> numbers) {
-        Set<LottoNumber> newLotto = new HashSet<>();
+        Set<LottoNumber> newLotto = new LinkedHashSet<>();
         for (LottoNumber number : numbers) {
             newLotto.add(number);
         }
@@ -31,7 +28,7 @@ public class Lotto {
     }
 
     public static Lotto from(String stringNumbers) {
-        Set<LottoNumber> newLotto = new HashSet<>();
+        Set<LottoNumber> newLotto = new LinkedHashSet<>();
         String[] numbers = stringNumbers.split(STRING_SPLITTER);
         for (String number : numbers) {
             newLotto.add(LottoNumber.from(Integer.parseInt(number)));
@@ -51,13 +48,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        List<LottoNumber> lottoList = values.stream().collect(Collectors.toList());
-        Collections.sort(lottoList, new Comparator<LottoNumber>() {
-            @Override
-            public int compare(LottoNumber o1, LottoNumber o2) {
-                return o1.getNumber() - o2.getNumber();
-            }
-        });
-        return lottoList.toString();
+        return values.toString();
     }
 }
