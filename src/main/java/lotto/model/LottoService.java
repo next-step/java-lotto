@@ -17,6 +17,13 @@ public class LottoService {
         this.lottoCollection = new LottoCollection(totalMoney / LOTTO_PRICE, random);
     }
 
+    public LottoService(int totalMoney, RandomGenerator random, List<LottoNumbers> lottoNumbers) {
+        this.totalMoney = totalMoney;
+        this.lottoResult = new LottoResult();
+        this.lottoCollection = new LottoCollection(
+            (totalMoney - lottoNumbers.size() * LOTTO_PRICE) / LOTTO_PRICE, random, lottoNumbers);
+    }
+
     public void drawLotto(List<Integer> winningNumbers, int bonusNumber) {
         lottoResult.addRanks(
             lottoCollection.getLottoRanks(new WinningNumbers(winningNumbers, bonusNumber)));

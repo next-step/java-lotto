@@ -5,8 +5,6 @@ import java.util.List;
 
 public class LottoNumbers {
 
-    private static final int LOTTO_NUMBER_SIZE = 6;
-
     private final List<Integer> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
@@ -33,16 +31,25 @@ public class LottoNumbers {
     }
 
     private void validateLottoNumberSize(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
+        if (lottoNumbers.size() != LottoEnum.LOTTO_SIZE.value()) {
             throw new IllegalArgumentException("로또번호는 6개를 선택해야 합니다");
         }
     }
 
     private void validateLottoNumberDuplicate(List<Integer> lottoNumbers) {
-        if (new HashSet<>(lottoNumbers).size() != LOTTO_NUMBER_SIZE) {
+        if (new HashSet<>(lottoNumbers).size() != LottoEnum.LOTTO_SIZE.value()) {
             throw new IllegalArgumentException("로또번호는 중복이 불가능합니다.");
         }
     }
+
+    private void validateLottoNumberRange(List<Integer> lottoNumbers) {
+        lottoNumbers.stream()
+            .filter(lottoNumber -> lottoNumber < LottoEnum.LOW_BOUND.value()
+                || lottoNumber > LottoEnum.MAX_BOUND.value()).forEach(lottoNumber -> {
+                throw new IllegalArgumentException("로또번호 범위를 벗어났습니다.");
+            });
+    }
+
 
     @Override
     public String toString() {
