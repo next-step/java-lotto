@@ -19,9 +19,9 @@ public class LottoCollection {
         List<LottoNumbers> lottoNumbers) {
         this.lottoNumbers = new ArrayList<>();
         this.lottoNumbers.addAll(lottoNumbers);
-        for (int i = 0; i < numberOfLottoTickets; i++) {
-            this.lottoNumbers.add(new LottoNumbers(randomGenerator.generate()));
-        }
+        Stream.generate(() -> new LottoNumbers(randomGenerator.generate()))
+            .limit(numberOfLottoTickets)
+            .forEach(this.lottoNumbers::add);
     }
 
     public List<LottoNumbers> getLottoNumberList() {
