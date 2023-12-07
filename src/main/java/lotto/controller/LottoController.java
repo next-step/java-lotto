@@ -1,23 +1,21 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
+import lotto.domain.LottoBuyInfo;
 import lotto.domain.Lottos;
-import lotto.domain.LottoMoney;
-import lotto.domain.WinningLotto;
+import lotto.domain.LottoResult;
+import lotto.service.LottoService;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
 public class LottoController {
+
     public static void run() {
-        LottoMoney money = LottoInputView.inputMoney();
-        Lottos lottos = Lottos.from(money.lottoCount());
-        LottoResultView.showLottos(lottos);
+        LottoBuyInfo buyInfo = LottoInputView.inputBuyInfo();
+        Lottos lottos = LottoService.purchaseLotto(buyInfo);
+        LottoResultView.showLottos(buyInfo, lottos);
 
-        WinningLotto winningLotto = new WinningLotto(Lotto.from(LottoInputView.inputWinningNumbers()), LottoInputView.inputBonusNumber());
-        LottoResult result = lottos.match(winningLotto);
-
+        LottoResult result = lottos.match(LottoService.winningLotto());
         LottoResultView.showResult(result);
-        LottoResultView.shotRate(result.getRate(money));
+        LottoResultView.shotRate(result.getRate(buyInfo.getMoney()));
     }
 }

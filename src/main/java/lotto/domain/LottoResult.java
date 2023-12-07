@@ -18,13 +18,13 @@ public class LottoResult implements Rate{
                 .count();
     }
 
-    int totalPrize() {
+    long totalPrize() {
         return result.stream()
-                .mapToInt(prize -> prize.getPrize())
+                .mapToLong(prize -> prize.getPrize())
                 .sum();
     }
 
-    public double getRate(LottoMoney money) {
+    public double getRate(LottoBuyInfo money) {
         return getRate(money.getMoney());
     }
 

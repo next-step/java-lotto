@@ -95,7 +95,7 @@ class LottoResultTest {
                 LottoPrize.from(3)
         ));
 
-        assertThat(result.getRate(new LottoMoney(3000))).isEqualTo(1.67);
+        assertThat(result.getRate(new LottoBuyInfo(3000, 1))).isEqualTo(1.67);
     }
 
     @DisplayName("구매금액을 전달하면 수익률을 반환한다.(보너스추가)")
@@ -107,6 +107,6 @@ class LottoResultTest {
                 LottoPrize.find(3, true)
         ));
 
-        assertThat(result.getRate(new LottoMoney(3000))).isEqualTo(501.67);
+        assertThat(result.getRate(new LottoBuyInfo(3000, 1))).isEqualTo(501.67);
     }
 }

@@ -3,11 +3,11 @@ package lotto.domain;
 public class WinningLotto {
 
     private final Lotto lotto;
-    private final int bonusNumber;
+    private final LottoNumber bonus;
 
-    public WinningLotto(Lotto lotto, int bonusNumber) {
+    public WinningLotto(Lotto lotto, LottoNumber bonus) {
         this.lotto = lotto;
-        this.bonusNumber = bonusNumber;
+        this.bonus = bonus;
     }
 
     public int matchCount(Lotto otherLotto) {
@@ -15,6 +15,6 @@ public class WinningLotto {
     }
 
     public boolean matchBonus(Lotto otherLotto) {
-        return otherLotto.contains(bonusNumber);
+        return otherLotto.contains(bonus);
     }
 }

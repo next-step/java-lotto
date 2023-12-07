@@ -1,52 +1,60 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
     public static final int PRICE = 1_000;
+    private static final int LIMIT_SIZE = 6;
     private static final String STRING_SPLITTER = ", ";
 
-    private final Set<Integer> values;
+    private Set<LottoNumber> values = new LinkedHashSet<>();
 
-    public Lotto(Set<Integer> lotto) {
-        LottoNumbers.check(lotto);
-        this.values = lotto;
+    public Lotto(Set<LottoNumber> values) {
+        checkLotto(values);
+        this.values = values;
     }
 
-    public static Lotto from(List<Integer> numbers) {
-        Set<Integer> newLotto = new HashSet<>();
-        for (Integer number : numbers) {
+    private void checkLotto(Set<LottoNumber> lotto) {
+        if (lotto.isEmpty() || lotto.size() != LIMIT_SIZE) {
+            throw new IllegalArgumentException("유효하지 않은 로또입니다.");
+        }
+    }
+
+    public static Lotto from(List<LottoNumber> numbers) {
+        Set<LottoNumber> newLotto = new LinkedHashSet<>();
+        for (LottoNumber number : numbers) {
             newLotto.add(number);
         }
         return new Lotto(newLotto);
     }
 
     public static Lotto from(String stringNumbers) {
-        Set<Integer> newLotto = new HashSet<>();
+        Set<LottoNumber> newLotto = new LinkedHashSet<>();
         String[] numbers = stringNumbers.split(STRING_SPLITTER);
+        Arrays.sort(numbers);
         for (String number : numbers) {
-            newLotto.add(Integer.parseInt(number));
+            newLotto.add(LottoNumber.from(Integer.parseInt(number)));
         }
         return new Lotto(newLotto);
     }
 
     public int matchCount(Lotto otherLotto) {
-        return (int) values.stream().filter(number -> otherLotto.contains(number)).count();
+        checkLotto(otherLotto.values);
+        return (int) values.stream()
+                .filter(number -> otherLotto.contains(number))
+                .count();
     }
 
-    public boolean contains(int number) {
+    public boolean contains(LottoNumber number) {
         return values.contains(number);
     }
 
     @Override
     public String toString() {
-        List<Integer> lottoList = values.stream().collect(Collectors.toList());
-        Collections.sort(lottoList);
-        return lottoList.toString();
+        return values.toString();
     }
 }
