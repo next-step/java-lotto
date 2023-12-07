@@ -13,10 +13,14 @@ public class Lotto {
     private Set<LottoNumber> values = new LinkedHashSet<>();
 
     public Lotto(Set<LottoNumber> values) {
-        if (values.isEmpty() || values.size() != LIMIT_SIZE) {
+        checkLotto(values);
+        this.values = values;
+    }
+
+    private void checkLotto(Set<LottoNumber> lotto) {
+        if (lotto.isEmpty() || lotto.size() != LIMIT_SIZE) {
             throw new IllegalArgumentException("유효하지 않은 로또입니다.");
         }
-        this.values = values;
     }
 
     public static Lotto from(List<LottoNumber> numbers) {
@@ -37,6 +41,7 @@ public class Lotto {
     }
 
     public int matchCount(Lotto otherLotto) {
+        checkLotto(otherLotto.values);
         return (int) values.stream()
                 .filter(number -> otherLotto.contains(number))
                 .count();
