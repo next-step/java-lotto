@@ -21,6 +21,8 @@ public class LottoNumbers {
 
     public static List<LottoNumber> randomList() {
         Collections.shuffle(NUMBERS);
-        return NUMBERS.subList(MIN_SIZE, MAX_SIZE);
+        List<LottoNumber> newNumbers = NUMBERS.subList(MIN_SIZE, MAX_SIZE);
+        Collections.sort(newNumbers);
+        return newNumbers;
     }
 }

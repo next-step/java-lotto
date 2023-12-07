@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int MIN = 1;
     private static final int MAX = 45;
@@ -40,5 +40,10 @@ public class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.number - o.number;
     }
 }
