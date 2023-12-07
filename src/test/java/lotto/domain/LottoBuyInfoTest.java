@@ -10,7 +10,7 @@ class LottoBuyInfoTest {
     @DisplayName("구매 금액과 수동으로 구매할 로또 수를 전달하면 객체를 생성한다.")
     @Test
     void moneyTest() {
-        int money = 1000;
+        int money = 10000;
         int manualCount = 3;
         LottoBuyInfo buyInfo = new LottoBuyInfo(money, manualCount);
 
