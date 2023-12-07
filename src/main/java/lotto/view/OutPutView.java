@@ -31,16 +31,14 @@ public class OutPutView {
     printSize(lottos.size());
     String delimiter = ",";
     List<String> stringStatus = lottos.toStringStatus();
-    stringStatus = stringStatus.stream()
+    stringStatus.stream()
         .map(lottoString -> lottoString.replaceAll(",", delimiter))
-        .collect(Collectors.toList());
-
-    stringStatus.forEach(each -> {
-      System.out.print('[');
-      System.out.print(each);
-      System.out.print(']');
-      System.out.println();
-    });
+        .forEach(each -> {
+          System.out.print('[');
+          System.out.print(each);
+          System.out.print(']');
+          System.out.println();
+        });
   }
 
   public static void printSize(int size) {
