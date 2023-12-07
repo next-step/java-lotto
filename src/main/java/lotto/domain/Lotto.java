@@ -7,13 +7,13 @@ import java.util.Set;
 public class Lotto {
 
     public static final int PRICE = 1_000;
-    private static final int SIZE = 6;
+    private static final int LIMIT_SIZE = 6;
     private static final String STRING_SPLITTER = ", ";
 
     private Set<LottoNumber> values = new LinkedHashSet<>();
 
     public Lotto(Set<LottoNumber> values) {
-        if (values.isEmpty() || values.size() != SIZE) {
+        if (values.isEmpty() || values.size() != LIMIT_SIZE) {
             throw new IllegalArgumentException("유효하지 않은 로또입니다.");
         }
         this.values = values;
