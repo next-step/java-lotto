@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -34,6 +35,7 @@ public class Lotto {
     public static Lotto from(String stringNumbers) {
         Set<LottoNumber> newLotto = new LinkedHashSet<>();
         String[] numbers = stringNumbers.split(STRING_SPLITTER);
+        Arrays.sort(numbers);
         for (String number : numbers) {
             newLotto.add(LottoNumber.from(Integer.parseInt(number)));
         }
