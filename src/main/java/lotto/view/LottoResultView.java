@@ -13,7 +13,7 @@ public class LottoResultView {
     private static final String RESULT_BONUS = ", 보너스 볼 일치";
     private static final String RESULT_COUNT = "개";
 
-    public static StringBuilder BUILDER = new StringBuilder();
+    public static StringBuilder BUILDER;
 
     public static void showLottos(LottoBuyInfo buyInfo, Lottos lottos) {
         System.out.println(String.format(INFORMATION_INPUT_COUNT, buyInfo.getManualCount(), buyInfo.getAutoCount()));
@@ -30,10 +30,10 @@ public class LottoResultView {
     }
 
     private static void showResult(int count, LottoPrize prize) {
+        BUILDER = new StringBuilder();
         if (prize.equals(LottoPrize.NONE)) {
             return;
         }
-        BUILDER.setLength(0);
         BUILDER.append(prize.getMatchCount() + RESULT_MATCH_COUNT);
         if (prize.equals(LottoPrize.SECOND)) {
             BUILDER.append(RESULT_BONUS);
