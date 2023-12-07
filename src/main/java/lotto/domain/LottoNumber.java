@@ -31,10 +31,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber from(int number) {
-        return numbers.values().stream()
-                .filter(lottoNumber -> lottoNumber.getNumber() == number)
-                .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+        if (number < MIN || number > MAX) {
+            throw new IllegalArgumentException(RANGE_EXCEPTION_NOTICE);
+        }
+        return numbers.get(number);
     }
 
     @Override
