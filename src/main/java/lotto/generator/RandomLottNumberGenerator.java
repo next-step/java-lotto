@@ -1,10 +1,12 @@
-package lotto.domain;
+package lotto.generator;
+
+import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoNumbers {
+public class RandomLottNumberGenerator implements LottoNumberGenerator{
 
     private static final int MIN_SIZE = 0;
     private static final int MAX_SIZE = 6;
@@ -17,9 +19,8 @@ public class LottoNumbers {
         }
     }
 
-    private LottoNumbers() {}
-
-    public static List<LottoNumber> randomList() {
+    @Override
+    public List<LottoNumber> getLottoNumberList() {
         Collections.shuffle(NUMBERS);
         List<LottoNumber> newNumbers = NUMBERS.subList(MIN_SIZE, MAX_SIZE);
         Collections.sort(newNumbers);
