@@ -5,11 +5,11 @@ import java.util.function.Predicate;
 
 public enum LottoRank {
 
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
     FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000),
     MISS(0, 0);
 
 
@@ -29,7 +29,7 @@ public enum LottoRank {
         return this.matchCount;
     }
 
-    public static LottoRank valueOf(long matchCount, boolean matchBonusNumber) {
+    private static LottoRank valueOf(long matchCount, boolean matchBonusNumber) {
         if (matchBonusNumber) {
             return matchRank(
                 lottoRank -> lottoRank.matchCount() == matchCount && lottoRank == LottoRank.SECOND);
