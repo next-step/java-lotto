@@ -1,40 +1,47 @@
 package lotto.view;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.LottoResult;
-import lotto.enums.LottoResultType;
 import lotto.domain.Lottos;
 
 public class OutPutView {
+  private static final String ORDINARY_FORMAT = "%s개 일치 (%s원)- %s개";
+  private static final String BONUS_FORMAT = "%s개 일치, 보너스 볼 일치(%s원)- %s개";
 
   public static void printProfitRate(double profitRate) {
-    System.out.printf("총 수익률은 %.3f입니다.",profitRate);
+    System.out.printf("총 수익률은 %.3f입니다.", profitRate);
   }
 
   public static void printResult(LottoResult result) {
     System.out.println("당첨 통계");
     System.out.println("---------");
-    int minimumNumber = LottoResultType.findMinimumNumber();
-    int maxNumber = LottoResultType.findMaxNumber();
-    for (int i = minimumNumber; i < maxNumber; i++) {
-      System.out.printf("%s개 일치 (5000원)- %s개", i, result.findMatchResultCount(LottoResultType.valueOf(i)));
-      System.out.println();
+    List<String> list = result.resultStatus( isBonus -> {
+      if (isBonus) {
+        return BONUS_FORMAT;
+      }
+      return ORDINARY_FORMAT;
+    });
+    for (String each : list) {
+      System.out.println(each);
     }
   }
 
   public static void printLotto(Lottos lottos) {
     printSize(lottos.size());
+    String delimiter = ",";
     List<String> stringStatus = lottos.toStringStatus();
-    stringStatus.forEach(each -> {
-              System.out.print('[');
-              System.out.print(each);
-              System.out.print(']');
-              System.out.println();
-            });
+    stringStatus.stream()
+        .map(lottoString -> lottoString.replaceAll(",", delimiter))
+        .forEach(each -> {
+          System.out.print('[');
+          System.out.print(each);
+          System.out.print(']');
+          System.out.println();
+        });
   }
 
   public static void printSize(int size) {
-    System.out.printf("%s개를 구매했습니다.\n",size);
+    System.out.printf("%s개를 구매했습니다.\n", size);
   }
 }

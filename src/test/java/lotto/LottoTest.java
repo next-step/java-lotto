@@ -5,12 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
 import lotto.domain.LottoStore;
+import lotto.domain.Lottos;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -91,15 +90,26 @@ public class LottoTest {
     LottoNumber lottoNumber4 = LottoNumber.of(8);
     LottoNumber lottoNumber5 = LottoNumber.of(2);
     LottoNumber lottoNumber6 = LottoNumber.of(43);
-    Set<LottoNumber> lottoNumbers = new HashSet<>(List.of(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4,
-        lottoNumber5, lottoNumber6));
+    Set<LottoNumber> lottoNumbers = new HashSet<>(
+        List.of(lottoNumber1, lottoNumber2, lottoNumber3, lottoNumber4,
+            lottoNumber5, lottoNumber6));
     Lotto lotto = Lotto.defaultOf(lottoNumbers);
 
     // when
-    int result = resultLotto.howManySameNumber(lotto);
+    int result = resultLotto.matchNumberCount(lotto);
 
     // then
     assertThat(result).isEqualTo(2);
+  }
+
+  @Test
+  @DisplayName("lotto 결과 번호 만들기")
+  public void writingMethodName() {
+    // given
+    String resultLottoString = "1,1,1,1,1,1";
+    // then
+    Assertions.assertThrows(IllegalArgumentException.class
+        , () -> Lotto.defaultOf(resultLottoString));
   }
 
 }

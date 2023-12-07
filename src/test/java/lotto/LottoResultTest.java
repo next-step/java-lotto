@@ -6,11 +6,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lotto.domain.Lotto;
-import lotto.domain.LottoMachine;
+import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
-import lotto.enums.LottoResultType;
+import lotto.domain.WinningLotto;
+import lotto.enums.Rank;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,6 +21,7 @@ public class LottoResultTest {
 
   private Lottos lottos;
   private Lotto resultLotto;
+  private LottoGame lottoGame;
   @BeforeEach
   void setting_lotto() {
 
@@ -49,6 +51,8 @@ public class LottoResultTest {
         , LottoNumber.of(30), LottoNumber.of(6)
         , LottoNumber.of(1), LottoNumber.of(40)
     ));
+
+    lottoGame = LottoGame.defaultOf(lottos, new WinningLotto("5,25,30,6,1,40", 8));
     resultLotto = Lotto.defaultOf(lottoResultNumbers);
   }
 
@@ -56,10 +60,23 @@ public class LottoResultTest {
   @DisplayName("Lotto중에 매칭 개수되는 Lotto들 카운팅하기")
   public void count_matching() {
     // given
-    LottoResult lottoResult = LottoMachine.match(resultLotto, lottos);
+    LottoResult lottoResult = lottoGame.resultWithBonusNumber();
 
     // when
-    int result = lottoResult.findMatchResultCount(LottoResultType.THREE);
+    int result = lottoResult.findMatchResultCount(Rank.THREE);
+
+    // then
+    assertThat(result).isEqualTo(2);
+  }
+
+  @Test
+  @DisplayName("Lotto중에 매칭 개수되는 Lotto들 카운팅하기")
+  public void bonus_number_matching() {
+    // given
+    LottoResult lottoResult = lottoGame.resultWithBonusNumber();
+
+    // when
+    int result = lottoResult.findMatchResultCount(Rank.THREE);
 
     // then
     assertThat(result).isEqualTo(2);
@@ -70,10 +87,10 @@ public class LottoResultTest {
   public void caculate_profit_rate() throws Exception {
     // given
     int amount = resultLotto.size() * 1000;
-    LottoResult result = LottoMachine.match(resultLotto, lottos);
+    LottoResult lottoResult = lottoGame.resultWithBonusNumber();
 
     // when
-    double profitRate = result.calculateProfitRate(amount);
+    double profitRate = lottoResult.calculateProfitRate(amount);
 
     // then
     Assertions.assertThat(profitRate).isEqualTo(10.0);

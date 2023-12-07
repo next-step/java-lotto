@@ -23,7 +23,7 @@
 - 로또 번호 객체 -> lotto.domain.LottoNumber
 
 - 사용자 input 받는 객체 -> InPutView
-- 결과 OutPut을 뽑아내는 객체 -> OutPutView
+- 결과 OutPut을 뽑아내는 객체 -> operation.OutPutView
 ### 🚀 **기능 정의**
 - [x] 구매 개수에 따른 로또 발급 기능
   - [x] 6개의 숫자 발급
