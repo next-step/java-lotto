@@ -23,14 +23,6 @@ public class Lottos {
     return lottos.size() == expectSize;
   }
 
-  public LottoResult resultWithBonusNumber(Lotto resultLotto, LottoNumber bonusNumber) {
-    Map<Rank, Lottos> result = new HashMap<>();
-    for (Rank rank : Rank.values()) {
-      Lottos lottos = rank.result(this.lottos, resultLotto, bonusNumber);
-      result.put(rank, lottos);
-    }
-    return LottoResult.defaultOf(result);
-  }
   public LottoResult resultWithBonusNumber(WinningLotto winningLotto) {
     Map<Rank, Lottos> result = new HashMap<>();
     for (Rank rank : Rank.values()) {
@@ -53,9 +45,7 @@ public class Lottos {
 
     List<String> lottoStatusList = new ArrayList<>();
     for (Lotto lotto : this.lottos) {
-      StringBuilder stringBuilder = new StringBuilder();
-      String lottoStatus = stringBuilder.append(lotto.toStringStatus())
-          .toString();
+      String lottoStatus = lotto.toStringStatus();
       lottoStatusList.add(lottoStatus);
     }
     return lottoStatusList;
