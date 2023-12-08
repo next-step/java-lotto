@@ -26,9 +26,11 @@ public class OutPutView {
       System.out.println(each);
     }
   }
-
+  public static void printAutoAndManualRate(Lottos auto, Lottos manual) {
+    String format = String.format("수동으로 %s장, 자동으로 %s개를 구매했습니다.", auto.size(), manual.size());
+    System.out.println(format);
+  }
   public static void printLotto(Lottos lottos) {
-    printSize(lottos.size());
     String delimiter = ",";
     List<String> stringStatus = lottos.toStringStatus();
     stringStatus.stream()
@@ -39,9 +41,5 @@ public class OutPutView {
           System.out.print(']');
           System.out.println();
         });
-  }
-
-  public static void printSize(int size) {
-    System.out.printf("%s개를 구매했습니다.\n", size);
   }
 }

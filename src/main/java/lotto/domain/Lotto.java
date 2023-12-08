@@ -32,7 +32,7 @@ public class Lotto {
     String[] split = lottoNumberString.split(",");
     Set<LottoNumber> lottoNumbers = new HashSet<>();
     for (String number : split) {
-      LottoNumber lottoNumber = LottoNumber.of(Integer.parseInt(number));
+      LottoNumber lottoNumber = LottoNumber.of(Integer.parseInt(number.trim()));
       lottoNumbers.add(lottoNumber);
     }
 
