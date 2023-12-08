@@ -19,7 +19,7 @@ public class LottoStatisticsTest {
         LottoMachine lottoMachine = new LottoMachine();
         LottoTicket lottoTicket = lottoMachine.generateLottoTicket(new Lotto(lottoNumbers));
         LottoStatistics lottoStatistics = new LottoStatistics();
-        lottoTicket.match(lottoMachine, winningLotto, lottoStatistics);
+        lottoTicket.match(lottoMachine, winningLotto, lottoStatistics, 7);
 
         Assertions.assertThat(lottoStatistics.getLottoStatistics().get(Rank.FOURTH)).isEqualTo(1);
     }

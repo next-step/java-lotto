@@ -22,9 +22,9 @@ public class LottoTicket {
             lottoTicket.add(new Lotto(List.copyOf(numbers.subList(0, 6))));
         }
     }
-    public void match(LottoMachine lottoMachine, Lotto winningLotto, LottoStatistics lottoStatistics) {
+    public void match(LottoMachine lottoMachine, Lotto winningLotto, LottoStatistics lottoStatistics, int bonusNo) {
         for (Lotto lotto: lottoTicket) {
-            lottoMachine.rank(lotto, winningLotto, lottoStatistics);
+            lottoMachine.rank(lotto, winningLotto, lottoStatistics, bonusNo);
         }
     }
     private static List<LottoNumber> numberList() {

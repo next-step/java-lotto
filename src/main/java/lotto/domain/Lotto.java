@@ -21,6 +21,11 @@ public class Lotto {
         return count;
     }
 
+    public Boolean matchBonus(int bonusNo) {
+        return lotto.stream()
+                .anyMatch(lottoNumber -> lottoNumber.equals(new LottoNumber(bonusNo)));
+    }
+
     private int getCount(Lotto winningLotto, int count, LottoNumber lottoNumber) {
         if (winningLotto.contains(lottoNumber)) {
             count++;
@@ -48,4 +53,5 @@ public class Lotto {
     public String toString() {
         return lotto + "";
     }
+
 }
