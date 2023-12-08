@@ -22,6 +22,11 @@ public class LottoTicket {
             lottoTicket.add(new Lotto(List.copyOf(numbers.subList(0, 6))));
         }
     }
+    public void match(LottoMachine lottoMachine, Lotto winningLotto, LottoStatistics lottoStatistics) {
+        for (Lotto lotto: lottoTicket) {
+            lottoMachine.rank(lotto, winningLotto, lottoStatistics);
+        }
+    }
     private static List<LottoNumber> numberList() {
         return IntStream.rangeClosed(1, 45)
                 .boxed()

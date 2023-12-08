@@ -6,24 +6,16 @@ import java.util.Map;
 
 public class LottoStatistics {
     private Map<Rank, Integer> lottoStatistics;
-    public LottoStatistics(LottoTicket lottoTicket, LottoMachine lottoMachine, Lotto winningLotto) {
+    public LottoStatistics() {
         this.lottoStatistics = new HashMap<>();
         init();
-        generateStatistics(lottoTicket, lottoMachine, winningLotto);
     }
 
     public Map<Rank, Integer> getLottoStatistics() {
         return Collections.unmodifiableMap(lottoStatistics);
     }
-
-    private void generateStatistics(LottoTicket lottoTicket, LottoMachine lottoMachine, Lotto winningLotto) {
-        for (Lotto lotto: lottoTicket.getLottoTicket()) {
-            Rank rank = lottoMachine.rank(lotto, winningLotto);
-            if (lottoStatistics.containsKey(rank)) {
-                int money = lottoStatistics.get(rank) + 1;
-                lottoStatistics.replace(rank, money);
-            }
-        }
+    public void addRank(Rank rank) {
+        this.lottoStatistics.compute(rank, (k, v) -> (v == null) ? 1 : v + 1);
     }
     private void init() {
         lottoStatistics.put(Rank.FOURTH, 0);

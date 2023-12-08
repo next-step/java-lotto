@@ -18,8 +18,9 @@ public class LottoStatisticsTest {
         Lotto winningLotto = new Lotto(winningNumbers);
         LottoMachine lottoMachine = new LottoMachine();
         LottoTicket lottoTicket = lottoMachine.generateLottoTicket(new Lotto(lottoNumbers));
+        LottoStatistics lottoStatistics = new LottoStatistics();
+        lottoTicket.match(lottoMachine, winningLotto, lottoStatistics);
 
-        LottoStatistics lottoStatistics = new LottoStatistics(lottoTicket, lottoMachine, winningLotto);
         Assertions.assertThat(lottoStatistics.getLottoStatistics().get(Rank.FOURTH)).isEqualTo(1);
     }
 }

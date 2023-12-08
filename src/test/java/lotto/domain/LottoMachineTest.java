@@ -24,7 +24,8 @@ public class LottoMachineTest {
         Lotto lotto1 = new Lotto(lottoNumbers1);
         Lotto lotto2 = new Lotto(lottoNumbers2);
         LottoMachine lottoMachine = new LottoMachine();
-        Rank rank = lottoMachine.rank(lotto1, lotto2);
+        LottoStatistics lottoStatistics = new LottoStatistics();
+        Rank rank = lottoMachine.rank(lotto1, lotto2, lottoStatistics);
         Assertions.assertThat(rank).isEqualTo(Rank.FIRST);
     }
 }

@@ -14,6 +14,8 @@ public class LottoMain {
         LottoTicket lottoTicket = lottoMachine.generateLottoTicket(number);
         ResultView.lottoTicketView(lottoTicket);
         Lotto winningLotto = InputView.winningLottoView();
-        ResultView.statisticsView(new LottoStatistics(lottoTicket, lottoMachine, winningLotto), number);
+        LottoStatistics lottoStatistics = new LottoStatistics();
+        lottoTicket.match(lottoMachine, winningLotto, lottoStatistics);
+        ResultView.statisticsView(lottoStatistics, number);
     }
 }
