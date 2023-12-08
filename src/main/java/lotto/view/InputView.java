@@ -30,6 +30,11 @@ public class InputView {
         return new Lotto(lotto);
     }
 
+    public static int bonusNumberView() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
+    }
+
     private static List<LottoNumber> getLottoNumbers() {
         List<LottoNumber> lotto = Arrays.stream(scanner.nextLine().split(", "))
                 .map(Integer::parseInt)
