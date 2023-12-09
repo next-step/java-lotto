@@ -1,5 +1,6 @@
 package auto.application;
 
+import auto.domain.Lotto;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,18 +12,18 @@ class MatchServiceTest {
     @Test
     void getMatchedCountMapTest() {
         // given
-        var lotteryNumbersList = List.of(
-                List.of(1, 2, 3, 9, 10, 11),
+        var lottoNumbersList = List.of(
+                new Lotto(List.of(1, 2, 3, 9, 10, 11)),
 
-                List.of(1, 2, 3, 4, 10, 11),
-                List.of(1, 2, 3, 4, 10, 11),
+                new Lotto(List.of(1, 2, 3, 4, 10, 11)),
+                new Lotto(List.of(1, 2, 3, 4, 10, 11)),
 
-                List.of(1, 2, 3, 4, 5, 11),
-                List.of(1, 2, 3, 4, 5, 11),
-                List.of(1, 2, 3, 4, 5, 11));
+                new Lotto(List.of(1, 2, 3, 4, 5, 11)),
+                new Lotto(List.of(1, 2, 3, 4, 5, 11)),
+                new Lotto(List.of(1, 2, 3, 4, 5, 11)));
         var winningNumbersLastWeek = List.of(1, 2, 3, 4, 5, 6);
         // when
-        Map<Integer, Integer> matchedCountMap = matchService.getMatchedCountMap(lotteryNumbersList, winningNumbersLastWeek);
+        Map<Integer, Integer> matchedCountMap = matchService.getMatchedCountMap(lottoNumbersList, winningNumbersLastWeek);
         // then
         SoftAssertions.assertSoftly(assertions -> {
             assertions.assertThat(matchedCountMap.get(3)).isEqualTo(1);
