@@ -1,24 +1,16 @@
 package lotto_auto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-    List<List<Integer>> lottoTotalNumberList;
-    int budget;
+    private List<LottoNumbers> lottoNumbersList;
 
     public Lotto() {
+        RandomNumberGen randomNumberGen = new LottoNumberGen();
+        lottoNumbersList = randomNumberGen.getLottoList();
     }
 
-    public Lotto(int budget) {
-        this.budget = budget;
+    public List<LottoNumbers> getLottoNumberList() {
+        return lottoNumbersList;
     }
-
-    public void getLottoNumber() {
-        lottoTotalNumberList = new ArrayList<>();
-        for (int j = 0; j < budget / 1000; j++) {
-            lottoTotalNumberList.add(RandomNumberGen.getRandomNumberList());
-        }
-    }
-
 }
