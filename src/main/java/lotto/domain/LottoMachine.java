@@ -14,7 +14,6 @@ public class LottoMachine {
     public Rank rank(Lotto lotto, Lotto winningLotto, LottoStatistics lottoStatistics, int bonusNo) {
         int matchCount = lotto.match(winningLotto);
         Boolean matchBonus = lotto.matchBonus(bonusNo);
-        System.out.println(matchBonus);
         if (matchBonus) {
             matchCount++;
         }
