@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class Result {
 
@@ -12,6 +14,17 @@ public class Result {
         result.put(Rank.SECOND, 0);
         result.put(Rank.THIRD, 0);
         result.put(Rank.FOURTH, 0);
+    }
+
+    public Result(List<Lotto> lottos, LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        result.put(Rank.FIRST, 0);
+        result.put(Rank.SECOND, 0);
+        result.put(Rank.THIRD, 0);
+        result.put(Rank.FOURTH, 0);
+        lottos.forEach(l -> {
+            Optional<Rank> rank = l.rank(winningNumbers, bonusNumber);
+            rank.ifPresent(this::update);
+        });
     }
 
     public Map<Rank, Integer> result() {
