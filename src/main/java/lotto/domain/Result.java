@@ -32,8 +32,10 @@ public class Result {
     }
 
     public void update(Rank rank) {
-        result.replace(rank,
-            result.get(rank) + 1);
+        result.replace(
+            rank,
+            result.get(rank) + 1
+        );
     }
 
     private int totalPrice() {
