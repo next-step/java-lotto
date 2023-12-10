@@ -3,6 +3,7 @@ package auto.application;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 public enum MatchedAmount {
@@ -28,16 +29,17 @@ public enum MatchedAmount {
     }
 
     public static MatchedAmount findByCount(int count) {
-        if (!MATCHED_AMOUNT_MAP.containsKey(count))
+        if (!MATCHED_AMOUNT_MAP.containsKey(count)) {
             return NONE;
+        }
         return MATCHED_AMOUNT_MAP.get(count);
     }
 
-    public static Map<Integer, Integer> getMatchedCountMap() {
+    public static ConcurrentMap<Integer, Integer> getMatchedCountMap() {
         return MATCHED_AMOUNT_MAP.values()
                                  .stream()
                                  .filter(matchedAmount -> matchedAmount != NONE)
-                                 .collect(Collectors.toMap(MatchedAmount::getCount, u -> 0, (u, v) -> u));
+                                 .collect(Collectors.toConcurrentMap(MatchedAmount::getCount, u -> 0, (u, v) -> u));
     }
 
     public int getCount() {

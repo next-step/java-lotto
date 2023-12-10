@@ -1,6 +1,6 @@
 package auto.view;
 
-import auto.application.AutoService;
+import auto.application.AutoLotteryService;
 import auto.application.MatchedAmount;
 
 import java.math.BigDecimal;
@@ -23,7 +23,7 @@ public class ResultView {
         System.out.println("---------");
 
         int totalAmount = getTotalAmountAndPrintMatchedText(matchedCountMap);
-        BigDecimal returnRate = AutoService.getReturnRate(totalAmount, amount);
+        BigDecimal returnRate = AutoLotteryService.getReturnRate(totalAmount, amount);
         System.out.println(getTotalReturnRateMessage(returnRate));
     }
 

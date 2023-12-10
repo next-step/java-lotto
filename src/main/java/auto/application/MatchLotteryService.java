@@ -2,11 +2,12 @@ package auto.application;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentMap;
 
 import static auto.application.MatchedAmount.findByCount;
 
-public class MatchService {
-    private static final Map<Integer, Integer> matchedCountMap = MatchedAmount.getMatchedCountMap();
+public class MatchLotteryService {
+    private static final ConcurrentMap<Integer, Integer> matchedCountMap = MatchedAmount.getMatchedCountMap();
 
     public Map<Integer, Integer> getMatchedCountMap(List<List<Integer>> lotteryNumbersList,
                                                     List<Integer> winningNumbersLastWeek) {
@@ -19,11 +20,18 @@ public class MatchService {
 
     private void setMatchedCountMap(List<Integer> lotteryNumbers, List<Integer> winningNumbersLastWeek) {
         int matchedCountSum = lotteryNumbers.stream()
-                                            .mapToInt(number -> winningNumbersLastWeek.contains(number) ? 1 : 0)
+                                            .mapToInt(number -> getMatchCount(winningNumbersLastWeek, number))
                                             .sum();
         int matchedCount = findByCount(matchedCountSum).getCount();
         if (matchedCount > 0) {
             matchedCountMap.put(matchedCount, matchedCountMap.get(matchedCount) + 1);
         }
+    }
+
+    private int getMatchCount(List<Integer> winningNumbersLastWeek, Integer number) {
+        if (winningNumbersLastWeek.contains(number)) {
+            return 1;
+        }
+        return 0;
     }
 }
