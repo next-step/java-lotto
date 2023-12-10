@@ -1,10 +1,10 @@
-package domain;
+package calculator.domain;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Calculator implements Addition, Subtraction, Multiplication, Division {
+public class Calculator {
     public String input;
     public List<String> inputList;
 
@@ -14,9 +14,6 @@ public class Calculator implements Addition, Subtraction, Multiplication, Divisi
 
     public Calculator(String input) {
         this.input = input;
-    }
-
-    public void init() {
         inputList = inputSeparate(input);
 
         for (int i = 0; i < input.length() / 4; i++) {
@@ -67,23 +64,22 @@ public class Calculator implements Addition, Subtraction, Multiplication, Divisi
                 .collect(Collectors.toList());
     }
 
-    @Override
     public int addition(int a, int b) {
         return a + b;
     }
 
-    @Override
     public int subtraction(int a, int b) {
         return a - b;
     }
 
-    @Override
     public int multiplication(int a, int b) {
         return a * b;
     }
 
-    @Override
     public int division(int a, int b) {
+        if(b == 0) {
+            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        }
         return a / b;
     }
 }

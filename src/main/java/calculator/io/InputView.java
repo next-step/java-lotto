@@ -1,4 +1,4 @@
-package io;
+package calculator.io;
 
 import java.util.Scanner;
 
@@ -10,8 +10,9 @@ public final class InputView {
         System.out.println("연산을 입력하세요. 예) 2 + 3 * 4 / 2");
         input = scanner.nextLine();
 
-        if (isBlank())
+        if (isBlank()) {
             throw new IllegalArgumentException();
+        }
     }
 
     private boolean isBlank() {
