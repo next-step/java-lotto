@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AutoService {
-    private final static int LOTTO_MIN_NUMBER = 1;
-    private final static int LOTTO_MAX_NUMBER = 45;
+    public final static int LOTTO_MIN_NUMBER = 1;
+    public final static int LOTTO_MAX_NUMBER = 45;
 
     public List<Lotto> createLottoNumbersList(int lottoCount) {
         return IntStream.range(0, lottoCount)

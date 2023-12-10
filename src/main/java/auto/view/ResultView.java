@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ResultView {
-    private static final String WINNING_COUNT_MESSAGE = "%s개 일치 (%s원)- %s개";
+    private static final String WINNING_COUNT_MESSAGE = "%s개 일치%s(%s원)- %s개";
+    private static final String BONUS_BALL_TEXT = ", 보너스 볼 일치";
 
     public static void printLottoCounts(int count) {
         System.out.println(count + "개를 구매했습니다.");
@@ -19,7 +20,7 @@ public class ResultView {
         totalLottoNumbers.forEach(System.out::println);
     }
 
-    public static void printLottoStats(Map<Integer, Integer> matchedCountMap, int amount) {
+    public static void printLottoStats(Map<MatchedAmount, Integer> matchedCountMap, int amount) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
@@ -34,21 +35,22 @@ public class ResultView {
         return totalReturnRateMessage;
     }
 
-    public static int getTotalAmountAndPrintMatchedText(Map<Integer, Integer> matchedCountMap) {
+    public static int getTotalAmountAndPrintMatchedText(Map<MatchedAmount, Integer> matchedCountMap) {
         int totalAmount = 0;
-        for (Integer matchedCount : matchedCountMap.keySet()) {
-            MatchedAmount matchedAmount = MatchedAmount.findByCount(matchedCount);
-            int winningCount = matchedCountMap.get(matchedCount);
-            printMatchedCountText(matchedCount, matchedAmount, winningCount);
+        for (MatchedAmount matchedAmount : matchedCountMap.keySet()) {
+            int winningCount = matchedCountMap.get(matchedAmount);
+            System.out.println(String.format(WINNING_COUNT_MESSAGE,
+                                             matchedAmount.getCount(),
+                                             getBonusBallText(matchedAmount),
+                                             matchedAmount.getAmount(),
+                                             winningCount));
+
             totalAmount += matchedAmount.getAmount() * winningCount;
         }
         return totalAmount;
     }
 
-    private static void printMatchedCountText(Integer matchedCount, MatchedAmount matchedAmount, int winningCount) {
-        System.out.println(String.format(WINNING_COUNT_MESSAGE,
-                                         matchedCount,
-                                         matchedAmount.getAmount(),
-                                         winningCount));
+    static String getBonusBallText(MatchedAmount matchedAmount) {
+        return MatchedAmount.isMatchedNumberFiveAndBonus(matchedAmount) ? BONUS_BALL_TEXT : " ";
     }
 }

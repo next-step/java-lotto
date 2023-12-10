@@ -2,6 +2,7 @@ package auto;
 
 import auto.application.AutoService;
 import auto.application.MatchService;
+import auto.application.MatchedAmount;
 import auto.domain.Lotto;
 import auto.view.InputView;
 import auto.view.ResultView;
@@ -23,7 +24,11 @@ public class AutoApplication {
         ResultView.printTotalLottoNumbers(totalLottoNumbers);
 
         List<Integer> winningNumbersLastWeek = InputView.inputWinningNumbersLastWeek();
-        Map<Integer, Integer> matchedCountMap = matchService.getMatchedCountMap(totalLottoNumbers, winningNumbersLastWeek);
+        int bonusBallNumber = InputView.inputBonusBallNumber(winningNumbersLastWeek);
+
+        Map<MatchedAmount, Integer> matchedCountMap = matchService.getMatchedCountMap(totalLottoNumbers,
+                                                                                      winningNumbersLastWeek,
+                                                                                      bonusBallNumber);
         ResultView.printLottoStats(matchedCountMap, purchaseAmount);
     }
 }

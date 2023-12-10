@@ -23,13 +23,13 @@ class MatchServiceTest {
                 new Lotto(List.of(1, 2, 3, 4, 5, 11)));
         var winningNumbersLastWeek = List.of(1, 2, 3, 4, 5, 6);
         // when
-        Map<Integer, Integer> matchedCountMap = matchService.getMatchedCountMap(lottoNumbersList, winningNumbersLastWeek);
+        Map<MatchedAmount, Integer> matchedCountMap = matchService.getMatchedCountMap(lottoNumbersList, winningNumbersLastWeek, 9);
         // then
         SoftAssertions.assertSoftly(assertions -> {
-            assertions.assertThat(matchedCountMap.get(3)).isEqualTo(1);
-            assertions.assertThat(matchedCountMap.get(4)).isEqualTo(2);
-            assertions.assertThat(matchedCountMap.get(5)).isEqualTo(3);
-            assertions.assertThat(matchedCountMap.get(6)).isEqualTo(0);
+            assertions.assertThat(matchedCountMap.get(MatchedAmount.THREE)).isEqualTo(1);
+            assertions.assertThat(matchedCountMap.get(MatchedAmount.FOUR)).isEqualTo(2);
+            assertions.assertThat(matchedCountMap.get(MatchedAmount.FIVE)).isEqualTo(3);
+            assertions.assertThat(matchedCountMap.get(MatchedAmount.SIX)).isEqualTo(0);
         });
     }
 }
