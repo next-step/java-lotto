@@ -11,13 +11,8 @@ public class LottoMachine {
         LottoTicket lottoTicket = new LottoTicket(number);
         return lottoTicket;
     }
-    public Rank rank(Lotto lotto, Lotto winningLotto, LottoStatistics lottoStatistics, int bonusNo) {
-        int matchCount = lotto.match(winningLotto);
-        Boolean matchBonus = lotto.matchBonus(bonusNo);
-        if (matchBonus) {
-            matchCount++;
-        }
-        Rank rank = Rank.rank(matchCount, matchBonus);
+    public Rank rank(Lotto lotto, WinningLotto winningLotto, LottoStatistics lottoStatistics) {
+        Rank rank = winningLotto.rank(lotto);
         lottoStatistics.addRank(rank);
         return rank;
     }

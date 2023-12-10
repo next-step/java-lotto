@@ -15,11 +15,12 @@ public class LottoStatisticsTest {
         List<LottoNumber> winningNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9));
 
-        Lotto winningLotto = new Lotto(winningNumbers);
+        Lotto lotto = new Lotto(winningNumbers);
         LottoMachine lottoMachine = new LottoMachine();
         LottoTicket lottoTicket = lottoMachine.generateLottoTicket(new Lotto(lottoNumbers));
         LottoStatistics lottoStatistics = new LottoStatistics();
-        lottoTicket.match(lottoMachine, winningLotto, lottoStatistics, 7);
+        WinningLotto winningLotto = new WinningLotto(lotto, 7);
+        lottoTicket.match(lottoMachine, winningLotto, lottoStatistics);
 
         Assertions.assertThat(lottoStatistics.getLottoStatistics().get(Rank.FOURTH)).isEqualTo(1);
     }
