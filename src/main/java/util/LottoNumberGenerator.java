@@ -17,7 +17,7 @@ public class LottoNumberGenerator {
     }
 
     private static void initialize() {
-        for (int i = MIN_LOTTO_NUMBER; i < MAX_LOTTO_NUMBER; i++) {
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             lottoNumberCache.put(i, new LottoNumber(i));
         }
     }

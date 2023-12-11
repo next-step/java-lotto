@@ -36,7 +36,7 @@ public class WinningLotto {
 
     private static void validateBonusNumber(Set<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
         if (lottoNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 숫자가 로또 숫자와 중복입니다. bonusNumber - " + bonusNumber.getLottoNumber());
+            throw new IllegalArgumentException("보너스 숫자가 로또 숫자와 중복입니다. bonusNumber - " + bonusNumber.getNumber());
         }
     }
 
@@ -48,7 +48,7 @@ public class WinningLotto {
 
     public List<Integer> getLottoNumbers() {
         return lottoNumbers.stream()
-                .map(LottoNumber::getLottoNumber)
+                .map(LottoNumber::getNumber)
                 .sorted()
                 .collect(Collectors.toList());
     }

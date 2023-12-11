@@ -43,15 +43,15 @@ public class Lotto {
 
     public List<Integer> getLottoNumbers() {
         return lottoNumbers.stream()
-                .map(LottoNumber::getLottoNumber)
+                .map(LottoNumber::getNumber)
                 .sorted()
                 .collect(Collectors.toList());
     }
 
     public int calculateMatchCount(WinningLotto winningLotto) {
         return (int) lottoNumbers.stream()
-                .map(LottoNumber::getLottoNumber)
-                .filter(lottoNum -> winningLotto.getLottoNumbers().contains(lottoNum) || lottoNum == winningLotto.getBonusNumber().getLottoNumber())
+                .map(LottoNumber::getNumber)
+                .filter(lottoNum -> winningLotto.getLottoNumbers().contains(lottoNum) || lottoNum == winningLotto.getBonusNumber().getNumber())
                 .count();
     }
 
