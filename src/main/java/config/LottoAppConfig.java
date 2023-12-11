@@ -1,8 +1,10 @@
+package config;
+
 import repository.UserLottoRepository;
 import service.LottoResultService;
 import service.UserLottoService;
 
-public class AppConfig {
+public class LottoAppConfig {
 
     private UserLottoRepository userLottoRepository = new UserLottoRepository();
 

@@ -1,3 +1,4 @@
+import config.LottoAppConfig;
 import domain.Currency;
 import domain.Lotto;
 import domain.WinningLotto;
@@ -14,7 +15,7 @@ import java.util.Optional;
 public class LottoApplication {
 
     public static void main(String[] args) {
-        AppConfig appConfig = new AppConfig();
+        LottoAppConfig appConfig = new LottoAppConfig();
         UserLottoService userLottoService = appConfig.userLottoService();
         LottoResultService lottoResultService = appConfig.lottoResultService();
 
