@@ -1,5 +1,7 @@
 package domain;
 
+import util.LottoNumberGenerator;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -7,27 +9,20 @@ import java.util.Objects;
 import static util.LottoNumberGenerator.*;
 
 public class LottoNumber {
-    private static final Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
-
     private final int lottoNumber;
 
-    static{
-        for (int i = MIN_LOTTO_NUMBER; i < MAX_LOTTO_NUMBER; i++) {
-            lottoNumberCache.put(i, new LottoNumber(i));
-        }
-    }
     public static LottoNumber from(String input) {
         int num = Integer.parseInt(input.trim());
         return LottoNumber.valueOf(num);
     }
 
     public static LottoNumber valueOf(int num) {
-        LottoNumber lottoNumber = lottoNumberCache.get(num);
+        LottoNumber lottoNumber = LottoNumberGenerator.getNumber(num);
         validateNumberNull(lottoNumber);
         return lottoNumber;
     }
 
-    private LottoNumber(int lottoNumber) {
+    public LottoNumber(int lottoNumber) {
         validateNumberRange(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
