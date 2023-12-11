@@ -1,16 +1,17 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
-
-    private int matchCount = 0;
 
     public LottoNumbers() {
         List<Integer> seedNumbers = new ArrayList<>();
@@ -40,22 +41,18 @@ public class LottoNumbers {
         this.validateDigit();
     }
 
-    public List<LottoNumber> numbers() {
-        return this.lottoNumbers;
-    }
-
     public int matchCount(LottoNumbers winningNumbers) {
-        for (LottoNumber number : winningNumbers.numbers()) {
-            matchCount = getMatchCount(number);
-        }
-        return matchCount;
+        return (int) this.lottoNumbers.stream()
+            .filter(winningNumbers.lottoNumbers::contains)
+            .count();
     }
 
-    private int getMatchCount(LottoNumber number) {
-        if (this.lottoNumbers.contains(number)) {
-            ++matchCount;
-        }
-        return matchCount;
+
+    public Optional<Rank> rank(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        int matchCount = (int) this.lottoNumbers.stream()
+            .filter(winningNumbers.lottoNumbers::contains).count();
+        boolean matchBonus = this.lottoNumbers.contains(bonusNumber);
+        return Rank.valueOf(matchCount, matchBonus);
     }
 
     private void validateDigit() {
@@ -67,6 +64,7 @@ public class LottoNumbers {
 
     @Override
     public String toString() {
-        return this.lottoNumbers.toString();
+        return this.lottoNumbers.stream().map(n -> n.getNumber()).collect(Collectors.toSet())
+            .toString();
     }
 }

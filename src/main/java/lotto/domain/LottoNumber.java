@@ -11,6 +11,10 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public int getNumber() {
+        return this.number;
+    }
+
     private static void validateRange(Integer number) {
         if (number < 1 || 45 < number) {
             throw new IllegalArgumentException("로또는 1~45의 숫자만 가능합니다.");

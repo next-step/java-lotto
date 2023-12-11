@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Lotto {
 
@@ -15,6 +16,10 @@ public class Lotto {
 
     public int matchCount(LottoNumbers winningNumbers) {
         return this.lottoNumbers.matchCount(winningNumbers);
+    }
+
+    public Optional<Rank> rank(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        return this.lottoNumbers.rank(winningNumbers, bonusNumber);
     }
 
     public static List<Lotto> puchase(int money) {
