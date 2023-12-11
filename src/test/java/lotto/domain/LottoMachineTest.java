@@ -23,8 +23,10 @@ public class LottoMachineTest {
         List<LottoNumber> lottoNumbers2 = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         Lotto lotto1 = new Lotto(lottoNumbers1);
         Lotto lotto2 = new Lotto(lottoNumbers2);
+        WinningLotto winningLotto = new WinningLotto(lotto2, 7);
         LottoMachine lottoMachine = new LottoMachine();
-        Rank rank = lottoMachine.rank(lotto1, lotto2);
-        Assertions.assertThat(rank).isEqualTo(Rank.FIRST);
+        LottoStatistics lottoStatistics = new LottoStatistics();
+        Rank rank = lottoMachine.rank(lotto1, winningLotto, lottoStatistics);
+        Assertions.assertThat(rank).isEqualTo(Rank.MISS);
     }
 }

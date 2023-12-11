@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoStatistics;
-import lotto.domain.LottoTicket;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -13,7 +10,11 @@ public class LottoMain {
         LottoMachine lottoMachine = new LottoMachine();
         LottoTicket lottoTicket = lottoMachine.generateLottoTicket(number);
         ResultView.lottoTicketView(lottoTicket);
-        Lotto winningLotto = InputView.winningLottoView();
-        ResultView.statisticsView(new LottoStatistics(lottoTicket, lottoMachine, winningLotto), number);
+        Lotto lotto = InputView.winningLottoView();
+        int bonusNo = InputView.bonusNumberView();
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusNo);
+        LottoStatistics lottoStatistics = new LottoStatistics();
+        lottoTicket.match(lottoMachine, winningLotto, lottoStatistics);
+        ResultView.statisticsView(lottoStatistics, number);
     }
 }

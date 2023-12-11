@@ -11,8 +11,9 @@ public class LottoMachine {
         LottoTicket lottoTicket = new LottoTicket(number);
         return lottoTicket;
     }
-    public Rank rank(Lotto lotto, Lotto winningLotto) {
-        int matchCount = lotto.match(winningLotto);
-        return Rank.rank(matchCount);
+    public Rank rank(Lotto lotto, WinningLotto winningLotto, LottoStatistics lottoStatistics) {
+        Rank rank = winningLotto.rank(lotto);
+        lottoStatistics.addRank(rank);
+        return rank;
     }
 }
