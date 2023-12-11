@@ -48,9 +48,9 @@ public class MatchLottoService {
     private void setMatchedCountMap(List<Integer> lottoNumbers,
                                     List<Integer> winningNumbersLastWeek,
                                     boolean isMatchedBonusNumber) {
-        int matchedCountSum = lottoNumbers.stream()
-                                          .mapToInt(number -> winningNumbersLastWeek.contains(number) ? 1 : 0)
-                                          .sum();
+        int matchedCountSum = (int) lottoNumbers.stream()
+                                                .filter(winningNumbersLastWeek::contains)
+                                                .count();
         MatchedAmount matchedAmount = findByCount(matchedCountSum, isMatchedBonusNumber);
         if (matchedAmount.getCount() > 0) {
             matchedCountMap.put(matchedAmount, matchedCountMap.get(matchedAmount) + 1);
