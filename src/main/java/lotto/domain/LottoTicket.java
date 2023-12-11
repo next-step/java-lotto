@@ -14,6 +14,15 @@ public class LottoTicket {
         this.lottoTicket = new ArrayList<>();
         lottoTicket.add(lotto);
     }
+    public LottoTicket(List<Lotto> manualLottoList, int number) {
+        this.lottoTicket = new ArrayList<>();
+        this.lottoTicket.addAll(manualLottoList);
+        List<LottoNumber> numbers = numberList();
+        for (int i = 0; i < number; i++) {
+            Collections.shuffle(numbers);
+            lottoTicket.add(new Lotto(List.copyOf(numbers.subList(0, 6))));
+        }
+    }
     public LottoTicket(int number) {
         this.lottoTicket = new ArrayList<>();
         List<LottoNumber> numbers = numberList();
