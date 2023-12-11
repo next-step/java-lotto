@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 class MatchServiceTest {
-    private final MatchService matchService = new MatchService();
+    private final MatchLottoService matchService = new MatchLottoService();
     @Test
     void getMatchedCountMapTest() {
         // given

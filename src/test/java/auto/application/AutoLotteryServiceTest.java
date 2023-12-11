@@ -1,5 +1,6 @@
 package auto.application;
 
+import auto.domain.Lotto;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ class AutoLottoServiceTest {
         int MIN_LOTTERY_NUMBER = 1;
         int MAX_LOTTERY_NUMBER = 45;
         // when
-        List<List<Integer>> lotteryNumbersList = autoLottoService.createLottoNumbersList(lotteryCount);
+        List<Lotto> lotteryNumbersList = autoLottoService.createLottoNumbersList(lotteryCount);
         // then
         SoftAssertions.assertSoftly((assertions) -> {
             assertions.assertThat(lotteryNumbersList).hasSize(lotteryCount);
@@ -40,11 +41,12 @@ class AutoLottoServiceTest {
         });
     }
 
-    private void assertLottoRangeNumbers(int MIN_LOTTERY_NUMBER, int MAX_LOTTERY_NUMBER, List<List<Integer>> lotteryNumbersList, SoftAssertions assertions) {
+    private void assertLottoRangeNumbers(int MIN_LOTTERY_NUMBER, int MAX_LOTTERY_NUMBER, List<Lotto> lotteryNumbersList, SoftAssertions assertions) {
         lotteryNumbersList.forEach((lotteryNumbers) -> {
-            lotteryNumbers.forEach((lotteryNumber) -> {
-                assertions.assertThat(lotteryNumber).isBetween(MIN_LOTTERY_NUMBER, MAX_LOTTERY_NUMBER + 1);
-            });
+            lotteryNumbers.getNumbers()
+                          .forEach((lotteryNumber) -> {
+                              assertions.assertThat(lotteryNumber).isBetween(MIN_LOTTERY_NUMBER, MAX_LOTTERY_NUMBER + 1);
+                          });
         });
     }
 

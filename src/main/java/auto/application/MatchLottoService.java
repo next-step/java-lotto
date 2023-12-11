@@ -1,37 +1,56 @@
 package auto.application;
 
+import auto.domain.Lotto;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentMap;
 
+import static auto.application.MatchedAmount.NONE;
 import static auto.application.MatchedAmount.findByCount;
 
 public class MatchLottoService {
-    private static final ConcurrentMap<Integer, Integer> matchedCountMap = MatchedAmount.getMatchedCountMap();
+    private static final Map<MatchedAmount, Integer> matchedCountMap = new HashMap<>();// = MatchedAmount.getMatchedCountMap();
 
-    public Map<Integer, Integer> getMatchedCountMap(List<List<Integer>> lotteryNumbersList,
-                                                    List<Integer> winningNumbersLastWeek) {
+    private static void setUpWinningStatisticsMap() {
+        EnumSet.allOf(MatchedAmount.class)
+               .stream()
+               .filter(matchedAmount -> matchedAmount != NONE)
+               .sorted()
+               .forEach(matchedAmount -> matchedCountMap.put(matchedAmount, 0));
+    }
 
-        for (List<Integer> lotteryNumbers : lotteryNumbersList) {
-            setMatchedCountMap(lotteryNumbers, winningNumbersLastWeek);
+    static boolean isMatchedBonusNumber(List<Integer> lottoNumbers,
+                                        List<Integer> winningNumbersLastWeek,
+                                        int bonusBallNumber) {
+        List<Integer> copyLottoNumbers = new ArrayList<>(lottoNumbers);
+        copyLottoNumbers.removeAll(winningNumbersLastWeek);
+        return copyLottoNumbers.contains(bonusBallNumber);
+    }
+
+    public Map<MatchedAmount, Integer> getMatchedCountMap(List<Lotto> lottoNumbersList,
+                                                          List<Integer> winningNumbersLastWeek,
+                                                          int bonusBallNumber) {
+        setUpWinningStatisticsMap();
+        for (Lotto lotto : lottoNumbersList) {
+            setMatchedCountMap(lotto.getNumbers(),
+                               winningNumbersLastWeek,
+                               isMatchedBonusNumber(lotto.getNumbers(), winningNumbersLastWeek, bonusBallNumber));
         }
         return matchedCountMap;
     }
 
-    private void setMatchedCountMap(List<Integer> lotteryNumbers, List<Integer> winningNumbersLastWeek) {
-        int matchedCountSum = lotteryNumbers.stream()
-                                            .mapToInt(number -> getMatchCount(winningNumbersLastWeek, number))
-                                            .sum();
-        int matchedCount = findByCount(matchedCountSum).getCount();
-        if (matchedCount > 0) {
-            matchedCountMap.put(matchedCount, matchedCountMap.get(matchedCount) + 1);
+    private void setMatchedCountMap(List<Integer> lottoNumbers,
+                                    List<Integer> winningNumbersLastWeek,
+                                    boolean isMatchedBonusNumber) {
+        int matchedCountSum = lottoNumbers.stream()
+                                          .mapToInt(number -> winningNumbersLastWeek.contains(number) ? 1 : 0)
+                                          .sum();
+        MatchedAmount matchedAmount = findByCount(matchedCountSum, isMatchedBonusNumber);
+        if (matchedAmount.getCount() > 0) {
+            matchedCountMap.put(matchedAmount, matchedCountMap.get(matchedAmount) + 1);
         }
-    }
-
-    private int getMatchCount(List<Integer> winningNumbersLastWeek, Integer number) {
-        if (winningNumbersLastWeek.contains(number)) {
-            return 1;
-        }
-        return 0;
     }
 }

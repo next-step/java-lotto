@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import static auto.application.AutoService.LOTTO_MAX_NUMBER;
-import static auto.application.AutoService.LOTTO_MIN_NUMBER;
+import static auto.application.AutoLottoService.LOTTO_MAX_NUMBER;
+import static auto.application.AutoLottoService.LOTTO_MIN_NUMBER;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);

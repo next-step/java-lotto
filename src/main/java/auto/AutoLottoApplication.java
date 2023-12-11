@@ -2,6 +2,8 @@ package auto;
 
 import auto.application.AutoLottoService;
 import auto.application.MatchLottoService;
+import auto.application.MatchedAmount;
+import auto.domain.Lotto;
 import auto.view.InputView;
 import auto.view.ResultView;
 
@@ -9,19 +11,23 @@ import java.util.List;
 import java.util.Map;
 
 public class AutoLottoApplication {
-    private static final AutoLottoService autoLottoService = new AutoLottoService();
-    private static final MatchLottoService matchLottoService = new MatchLottoService();
+    private static final AutoLottoService autoService = new AutoLottoService();
+    private static final MatchLottoService matchService = new MatchLottoService();
 
     public static void main(String[] args) {
         int purchaseAmount = InputView.inputPurchaseAmount();
-        int lotteryCount = autoLottoService.getLottoCount(purchaseAmount);
-        ResultView.printLottoCounts(lotteryCount);
+        int lottoCount = autoService.getLottoCount(purchaseAmount);
+        ResultView.printLottoCounts(lottoCount);
 
-        List<List<Integer>> totalLottoNumbers = autoLottoService.createLottoNumbersList(lotteryCount);
+        List<Lotto> totalLottoNumbers = autoService.createLottoNumbersList(lottoCount);
         ResultView.printTotalLottoNumbers(totalLottoNumbers);
 
         List<Integer> winningNumbersLastWeek = InputView.inputWinningNumbersLastWeek();
-        Map<Integer, Integer> matchedCountMap = matchLottoService.getMatchedCountMap(totalLottoNumbers, winningNumbersLastWeek);
+        int bonusBallNumber = InputView.inputBonusBallNumber(winningNumbersLastWeek);
+
+        Map<MatchedAmount, Integer> matchedCountMap = matchService.getMatchedCountMap(totalLottoNumbers,
+                                                                                      winningNumbersLastWeek,
+                                                                                      bonusBallNumber);
         ResultView.printLottoStats(matchedCountMap, purchaseAmount);
     }
 }

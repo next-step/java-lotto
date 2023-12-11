@@ -16,7 +16,7 @@ public class ResultView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void printTotalLottoNumbers(List<List<Integer>> totalLottoNumbers) {
+    public static void printTotalLottoNumbers(List<Lotto> totalLottoNumbers) {
         totalLottoNumbers.forEach(System.out::println);
     }
 

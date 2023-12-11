@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 class AutoServiceTest {
-    private final AutoService autoService = new AutoService();
+    private final AutoLottoService autoLottoService = new AutoLottoService();
 
     @Test
     @DisplayName("설정한 lottoCount 만큼 로또 리스트 갯수가 만들어지고" +
@@ -21,7 +21,7 @@ class AutoServiceTest {
         int MIN_LOTTO_NUMBER = 1;
         int MAX_LOTTO_NUMBER = 45;
         // when
-        List<Lotto> lottoNumbersList = autoService.createLottoNumbersList(lottoCount);
+        List<Lotto> lottoNumbersList = autoLottoService.createLottoNumbersList(lottoCount);
         // then
         SoftAssertions.assertSoftly((assertions) -> {
             assertions.assertThat(lottoNumbersList).hasSize(lottoCount);
@@ -40,7 +40,7 @@ class AutoServiceTest {
         int totalAmount = 5000;
         int amount = 10000;
         // when
-        BigDecimal returnRate = AutoService.getReturnRate(totalAmount, amount);
+        BigDecimal returnRate = AutoLottoService.getReturnRate(totalAmount, amount);
         // then
         Assertions.assertThat(returnRate).isEqualTo(new BigDecimal(0.5));
     }
