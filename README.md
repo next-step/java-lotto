@@ -109,6 +109,13 @@
 * [X] 최초 생성한 뒤에 변경되지 않는 변수인 경우 final 붙이기
 * [ ] repository class 인스턴스변수 -> 정적 변수!
 
+## step4 보완
+* [X] Lottonumber 캐싱
+* [X] bonusNumber 타입 변경
+* [ ] config 파일 위치 재설정
+* [ ] 메소드 안 15줄 이상 되는 경우 리팩토링
+* [ ] 점층적 생성자 안에서 값을 세팅 이상인 경우 체크하고 안티패턴 제거
+
 ## TODO
 * [ ] Lotto 인터페이스를 활용해 Winning, Auto, Manual 클래스 생성해보기
 

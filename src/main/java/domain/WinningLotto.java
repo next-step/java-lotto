@@ -16,27 +16,27 @@ public class WinningLotto {
         this(IntStream.of(num1, num2, num3, num4, num5, num6)
                         .mapToObj(LottoNumber::valueOf)
                         .collect(Collectors.toSet())
-                , bonus);
+                , LottoNumber.valueOf(bonus));
     }
 
     public WinningLotto(String numbers, int bonus) {
         this(Arrays.stream(numbers.split(","))
                         .map(LottoNumber::from)
                         .collect(Collectors.toSet())
-                , bonus);
+                , LottoNumber.valueOf(bonus));
     }
 
-    private WinningLotto(Set<LottoNumber> lottoNumbers, int bonus) {
+    private WinningLotto(Set<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
         validateLottoNumberCount(lottoNumbers);
-        validateBonusNumber(lottoNumbers, bonus);
+        validateBonusNumber(lottoNumbers, bonusNumber);
 
         this.lottoNumbers = lottoNumbers;
-        this.bonusNumber = LottoNumber.valueOf(bonus);
+        this.bonusNumber = bonusNumber;
     }
 
-    private static void validateBonusNumber(Set<LottoNumber> lottoNumbers, int bonus) {
-        if (lottoNumbers.contains(LottoNumber.valueOf(bonus))) {
-            throw new IllegalArgumentException("보너스 숫자가 로또 숫자와 중복입니다. bonusNumber - " + bonus);
+    private static void validateBonusNumber(Set<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
+        if (lottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 숫자가 로또 숫자와 중복입니다. bonusNumber - " + bonusNumber.getLottoNumber());
         }
     }
 
