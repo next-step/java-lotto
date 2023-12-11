@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentMap;
 
 import static auto.application.MatchedAmount.findByCount;
 
-public class MatchLotteryService {
+public class MatchLottoService {
     private static final ConcurrentMap<Integer, Integer> matchedCountMap = MatchedAmount.getMatchedCountMap();
 
     public Map<Integer, Integer> getMatchedCountMap(List<List<Integer>> lotteryNumbersList,

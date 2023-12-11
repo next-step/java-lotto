@@ -1,6 +1,6 @@
 package auto.domain;
 
-import auto.infrastructure.AutoLotteryRepository;
+import auto.infrastructure.AutoLottoRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AutoLotteryRepositoryImpl implements AutoLotteryRepository {
+public class AutoLottoRepositoryImpl implements AutoLottoRepository {
     private final static int LOTTERY_MIN_NUMBER = 1;
     private final static int LOTTERY_MAX_NUMBER = 45;
     private static List<Integer> numbers = new ArrayList<>();
@@ -20,13 +20,13 @@ public class AutoLotteryRepositoryImpl implements AutoLotteryRepository {
     }
 
     @Override
-    public List<List<Integer>> createLotteryNumbersList(int lotteryCount) {
+    public List<List<Integer>> createLottoNumbersList(int lotteryCount) {
         return IntStream.range(0, lotteryCount)
-                        .mapToObj(i -> createLotteryNumbers())
+                        .mapToObj(i -> createLottoNumbers())
                         .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private List<Integer> createLotteryNumbers() {
+    private List<Integer> createLottoNumbers() {
         Collections.shuffle(numbers);
         return numbers.subList(0, 6);
     }

@@ -1,6 +1,6 @@
 package auto.view;
 
-import auto.application.AutoLotteryService;
+import auto.application.AutoLottoService;
 import auto.application.MatchedAmount;
 
 import java.math.BigDecimal;
@@ -10,20 +10,20 @@ import java.util.Map;
 public class ResultView {
     private static final String WINNING_COUNT_MESSAGE = "%s개 일치 (%s원)- %s개";
 
-    public static void printLotteryCounts(int count) {
+    public static void printLottoCounts(int count) {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void printTotalLotteryNumbers(List<List<Integer>> totalLotteryNumbers) {
-        totalLotteryNumbers.forEach(System.out::println);
+    public static void printTotalLottoNumbers(List<List<Integer>> totalLottoNumbers) {
+        totalLottoNumbers.forEach(System.out::println);
     }
 
-    public static void printLotteryStats(Map<Integer, Integer> matchedCountMap, int amount) {
+    public static void printLottoStats(Map<Integer, Integer> matchedCountMap, int amount) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
         int totalAmount = getTotalAmountAndPrintMatchedText(matchedCountMap);
-        BigDecimal returnRate = AutoLotteryService.getReturnRate(totalAmount, amount);
+        BigDecimal returnRate = AutoLottoService.getReturnRate(totalAmount, amount);
         System.out.println(getTotalReturnRateMessage(returnRate));
     }
 
