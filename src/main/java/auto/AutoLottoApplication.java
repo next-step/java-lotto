@@ -4,10 +4,10 @@ import auto.application.AutoLottoService;
 import auto.application.MatchLottoService;
 import auto.application.MatchedAmount;
 import auto.domain.Lotto;
+import auto.domain.Lottos;
 import auto.view.InputView;
 import auto.view.ResultView;
 
-import java.util.List;
 import java.util.Map;
 
 public class AutoLottoApplication {
@@ -19,10 +19,10 @@ public class AutoLottoApplication {
         int lottoCount = autoService.getLottoCount(purchaseAmount);
         ResultView.printLottoCounts(lottoCount);
 
-        List<Lotto> totalLottoNumbers = autoService.createLottoNumbersList(lottoCount);
+        Lottos totalLottoNumbers = Lottos.createLottoNumbersList(lottoCount);
         ResultView.printTotalLottoNumbers(totalLottoNumbers);
 
-        List<Integer> winningNumbersLastWeek = InputView.inputWinningNumbersLastWeek();
+        Lotto winningNumbersLastWeek = InputView.inputWinningNumbersLastWeek();
         int bonusBallNumber = InputView.inputBonusBallNumber(winningNumbersLastWeek);
 
         Map<MatchedAmount, Integer> matchedCountMap = matchService.getMatchedCountMap(totalLottoNumbers,

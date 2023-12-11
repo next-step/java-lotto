@@ -1,6 +1,7 @@
 package auto.application;
 
 import auto.domain.Lotto;
+import auto.domain.Lottos;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -30,14 +31,16 @@ public class MatchLottoService {
         return copyLottoNumbers.contains(bonusBallNumber);
     }
 
-    public Map<MatchedAmount, Integer> getMatchedCountMap(List<Lotto> lottoNumbersList,
-                                                          List<Integer> winningNumbersLastWeek,
+    public Map<MatchedAmount, Integer> getMatchedCountMap(Lottos lottoNumbersList,
+                                                          Lotto winningNumbersLastWeek,
                                                           int bonusBallNumber) {
         setUpWinningStatisticsMap();
-        for (Lotto lotto : lottoNumbersList) {
+        for (Lotto lotto : lottoNumbersList.getLottoList()) {
             setMatchedCountMap(lotto.getNumbers(),
-                               winningNumbersLastWeek,
-                               isMatchedBonusNumber(lotto.getNumbers(), winningNumbersLastWeek, bonusBallNumber));
+                               winningNumbersLastWeek.getNumbers(),
+                               isMatchedBonusNumber(lotto.getNumbers(),
+                                                    winningNumbersLastWeek.getNumbers(),
+                                                    bonusBallNumber));
         }
         return matchedCountMap;
     }

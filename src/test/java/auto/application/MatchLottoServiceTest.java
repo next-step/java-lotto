@@ -1,6 +1,7 @@
 package auto.application;
 
 import auto.domain.Lotto;
+import auto.domain.Lottos;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,16 +14,16 @@ class MatchLottoServiceTest {
     @Test
     void getMatchedCountMapTest() {
         // given
-        var lotteryNumbersList = List.of(
-                new Lotto(List.of(1, 2, 3, 9, 10, 11)),
+        var lotteryNumbersList = new Lottos(
+                List.of(new Lotto(List.of(1, 2, 3, 9, 10, 11)),
 
-                new Lotto(List.of(1, 2, 3, 4, 10, 11)),
-                new Lotto(List.of(1, 2, 3, 4, 10, 11)),
+                        new Lotto(List.of(1, 2, 3, 4, 10, 11)),
+                        new Lotto(List.of(1, 2, 3, 4, 10, 11)),
 
-                new Lotto(List.of(1, 2, 3, 4, 5, 11)),
-                new Lotto(List.of(1, 2, 3, 4, 5, 11)),
-                new Lotto(List.of(1, 2, 3, 4, 5, 11)));
-        var winningNumbersLastWeek = List.of(1, 2, 3, 4, 5, 6);
+                        new Lotto(List.of(1, 2, 3, 4, 5, 11)),
+                        new Lotto(List.of(1, 2, 3, 4, 5, 11)),
+                        new Lotto(List.of(1, 2, 3, 4, 5, 11))));
+        var winningNumbersLastWeek = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         // when
         Map<MatchedAmount, Integer> matchedCountMap = matchLottoService.getMatchedCountMap(lotteryNumbersList, winningNumbersLastWeek, 9);
         // then

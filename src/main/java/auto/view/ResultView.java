@@ -2,10 +2,9 @@ package auto.view;
 
 import auto.application.AutoLottoService;
 import auto.application.MatchedAmount;
-import auto.domain.Lotto;
+import auto.domain.Lottos;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Map;
 
 public class ResultView {
@@ -16,8 +15,9 @@ public class ResultView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void printTotalLottoNumbers(List<Lotto> totalLottoNumbers) {
-        totalLottoNumbers.forEach(System.out::println);
+    public static void printTotalLottoNumbers(Lottos totalLottoNumbers) {
+        totalLottoNumbers.getLottoList()
+                         .forEach(System.out::println);
     }
 
     public static void printLottoStats(Map<MatchedAmount, Integer> matchedCountMap, int amount) {
