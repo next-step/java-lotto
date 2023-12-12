@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
@@ -11,10 +12,13 @@ import lotto.ui.ResultView;
 public class LottoMain {
 
     public static void main(String[] args) {
-
-
+        List<Lotto> lottos = new ArrayList<>();
         int money = InputView.purchase();
-        List<Lotto> lottos = Lotto.puchase(money);
+        int totalCount = money / Lotto.LOTTO_PRICE;
+        int countOfManual = InputView.countOfManual();
+        List<String> manualLottos = InputView.purchaseManual(countOfManual);
+        lottos.addAll(Lotto.puchaseManual(manualLottos));
+        lottos.addAll(Lotto.puchaseAuto(totalCount - countOfManual));
         ResultView.purchase(lottos);
         LottoNumbers winningNumbers = new LottoNumbers(InputView.winningNumber());
         LottoNumber bonusNumber = new LottoNumber(InputView.bonusNumber());
