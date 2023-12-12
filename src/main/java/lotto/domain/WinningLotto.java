@@ -12,8 +12,7 @@ public class WinningLotto {
   }
 
   public WinningLotto(String resultLotto, Integer bonusLottoNumber) {
-    this.resultLotto = Lotto.defaultOf(resultLotto);
-    this.bonusLottoNumber = LottoNumber.of(bonusLottoNumber);
+    this(Lotto.defaultOf(resultLotto), LottoNumber.of(bonusLottoNumber));
   }
 
   public boolean hasBonusNumber(Lotto lotto) {

@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.List;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoStore;
@@ -14,9 +15,15 @@ public class Core {
 
     int amount = InPutView.getAmount();
 
-    LottoStore lottoStore = new LottoStore();
-    Lottos lottos = lottoStore.sell(amount);
+    Integer manualCount = InPutView.getManualCount();
+    List<String> manualLottoNumbers = InPutView.getManualLottoNumbers(manualCount);
 
+
+    LottoStore lottoStore = new LottoStore();
+    Lottos manualLottos = lottoStore.manual(manualLottoNumbers);
+    Lottos autoLottos = lottoStore.auto(amount, manualLottos.size());
+    OutPutView.printAutoAndManualRate(manualLottos,autoLottos);
+    Lottos lottos = manualLottos.add(autoLottos);
     OutPutView.printLotto(lottos);
 
     String resultLottoNumbers = InPutView.getResultLottoNumbers();

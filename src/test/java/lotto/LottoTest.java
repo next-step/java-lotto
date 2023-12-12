@@ -1,7 +1,9 @@
 package lotto;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,7 +40,7 @@ public class LottoTest {
   public void make_lottos() {
     int size = 6;
 
-    Lottos lottos = LottoMachine.make(size);
+    Lottos lottos = LottoMachine.sell(size);
 
     assertThat(lottos.sameSize(6)).isTrue();
   }
@@ -50,7 +52,7 @@ public class LottoTest {
     int amount = 14000;
     LottoStore lottoStore = new LottoStore();
 
-    Lottos lottos = lottoStore.sell(amount);
+    Lottos lottos = lottoStore.auto(amount);
 
     assertThat(lottos.sameSize(14)).isTrue();
   }
@@ -110,6 +112,20 @@ public class LottoTest {
     // then
     Assertions.assertThrows(IllegalArgumentException.class
         , () -> Lotto.defaultOf(resultLottoString));
+  }
+
+  @Test
+  @DisplayName("로또 추가")
+  public void lottos_add() {
+    // given
+    Lottos lottos = LottoMachine.sell(6);
+    Lottos lottos2 = LottoMachine.sell(7);
+
+    // when
+    Lottos result = lottos.add(lottos2);
+
+    // then
+    assertThat(result.size()).isEqualTo(13);
   }
 
 }

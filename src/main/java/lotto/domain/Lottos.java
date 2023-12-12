@@ -19,6 +19,15 @@ public class Lottos {
     return new Lottos(lottos);
   }
 
+  public Lottos add(Lottos autoManual) {
+    return autoManual.add(this.lottos);
+  }
+
+  private Lottos add(List<Lotto> lottos) {
+    this.lottos.addAll(lottos);
+    return Lottos.of(this.lottos);
+  }
+
   public boolean sameSize(int expectSize) {
     return lottos.size() == expectSize;
   }
