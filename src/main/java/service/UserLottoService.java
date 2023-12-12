@@ -18,14 +18,17 @@ public class UserLottoService {
         return userLottoRepository.getUserLottoTickets();
     }
 
-    public void buyRandomLottoTickets(final long money) {
-        int ticketCount = LottoSalesService.validateMoneyAndReturnTicketCount(money);
-
-        for (int i = 0; i < ticketCount; i++) {
+    public void buyRandomLottoTickets(int autoTicketCount) {
+        for (int i = 0; i < autoTicketCount; i++) {
             List<Integer> lottoNumbers = LottoNumberGenerator.generateLottoNumber();
 
             Lotto lotto = new Lotto (lottoNumbers);
             userLottoRepository.saveUserLottoTickets(lotto);
         }
+    }
+
+    public void buyManualLottoTickets(String selectedNumbers) {
+        Lotto manualLotto = new Lotto(selectedNumbers);
+        userLottoRepository.saveUserLottoTickets(manualLotto);
     }
 }

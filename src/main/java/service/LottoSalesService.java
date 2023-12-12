@@ -13,4 +13,11 @@ public class LottoSalesService {
         }
         return (int) (money / PRICE);
     }
+
+    public static void checkAvailableTicketCount(int availableCount, int inputCount) {
+        if (inputCount > availableCount) {
+            throw new IllegalArgumentException("전체 구매 가능한 매수를 초과했습니다. 전체 구매 가능 로또 수 : " + availableCount);
+        }
+
+    }
 }

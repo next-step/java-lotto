@@ -51,14 +51,21 @@ public class LottoTest {
         assertThat(lotto.calculateMatchCount(winning)).isEqualTo(3);
     }
     @Test
-    @DisplayName("로또 숫자 갯수가 6개를 초과하는 경우 exception 발생")
+    @DisplayName("로또 숫자 갯수가 6개를 초과하는 경우 exception throw")
     void overInputExceptionTest() {
         assertThrows(IllegalArgumentException.class, () -> new Lotto("1, 2, 3, 4, 5, 6, 7"));
     }
 
     @Test
-    @DisplayName("로또 중복숫자 입력되는 경우 6개 미만 exception 발생")
+    @DisplayName("로또 중복숫자 입력되는 경우 6개 미만 exception throw")
     void doubleInputExceptionTest() {
         assertThrows(IllegalArgumentException.class, () -> new Lotto("1, 1, 3, 5, 6, 7"));
     }
+
+    @Test
+    @DisplayName("당첨 번호를 6개 미만으로 입력하는 경우 Exception throw.")
+    void invalidInputLessSixExceptionTest() {
+        assertThrows(IllegalArgumentException.class, () -> new Lotto("1, 2, 3, 4, 5"));
+    }
+
 }

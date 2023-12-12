@@ -14,25 +14,30 @@ public class WinningLotto {
 
     public WinningLotto(int num1, int num2, int num3, int num4, int num5, int num6, int bonus) {
         this(IntStream.of(num1, num2, num3, num4, num5, num6)
-                        .mapToObj(LottoNumber::new)
+                        .mapToObj(LottoNumber::valueOf)
                         .collect(Collectors.toSet())
-                , bonus);
+                , LottoNumber.valueOf(bonus));
     }
 
     public WinningLotto(String numbers, int bonus) {
         this(Arrays.stream(numbers.split(","))
-                        .map(String::trim)
-                        .map(Integer::parseInt)
-                        .map(LottoNumber::new)
+                        .map(LottoNumber::from)
                         .collect(Collectors.toSet())
-                , bonus);
+                , LottoNumber.valueOf(bonus));
     }
 
-    public WinningLotto(Set<LottoNumber> lottoNumbers, int bonus) {
+    private WinningLotto(Set<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
         validateLottoNumberCount(lottoNumbers);
+        validateBonusNumber(lottoNumbers, bonusNumber);
 
         this.lottoNumbers = lottoNumbers;
-        this.bonusNumber = new LottoNumber(bonus);
+        this.bonusNumber = bonusNumber;
+    }
+
+    private static void validateBonusNumber(Set<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
+        if (lottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 숫자가 로또 숫자와 중복입니다. bonusNumber - " + bonusNumber.getNumber());
+        }
     }
 
     private static void validateLottoNumberCount(Set<LottoNumber> lottoNumbers) {
@@ -43,7 +48,7 @@ public class WinningLotto {
 
     public List<Integer> getLottoNumbers() {
         return lottoNumbers.stream()
-                .map(LottoNumber::getLottoNumber)
+                .map(LottoNumber::getNumber)
                 .sorted()
                 .collect(Collectors.toList());
     }
