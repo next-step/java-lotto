@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,14 +34,14 @@ public class InputView {
         System.out.println();
         System.out.println("수동으로 구매할 로또 번호를 입력해주세요");
         scanner.nextLine();
-        List<Lotto> manualLottoList = new ArrayList<>();
-        for (int i = 0; i < manualNumber; i++) {
-            manualLottoList.add(new Lotto(getLottoNumbers()));
-        }
+
+        Lotto lotto = new Lotto(getLottoNumbers());
+        LottoTicket lottoTicket = new LottoTicket(lotto);
+
         int autoNumber = number - manualNumber;
         System.out.println();
         System.out.println("수동으로 " + manualNumber + "장, " + "자동으로 " + autoNumber + "개를 구매했습니다.");
-        return manualLottoList;
+        return lottoTicket.getLottoTicket();
     }
 
     public static Lotto winningLottoView() {
