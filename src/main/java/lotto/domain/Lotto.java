@@ -2,11 +2,13 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import java.util.Objects;
 import java.util.Optional;
 
 public class Lotto {
 
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
     private final LottoNumbers lottoNumbers;
 
@@ -30,8 +32,41 @@ public class Lotto {
         return lottos;
     }
 
+    public static List<Lotto> puchaseAuto(int count) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < count; ++i) {
+            lottos.add(new Lotto(new LottoNumbers()));
+        }
+        return lottos;
+    }
+
+    public static List<Lotto> puchaseManual(List<String> lottoNumbers) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (String lottoNumber : lottoNumbers) {
+            lottos.add(new Lotto(new LottoNumbers(lottoNumber)));
+        }
+        return lottos;
+    }
+
     @Override
     public String toString() {
         return this.lottoNumbers.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }
