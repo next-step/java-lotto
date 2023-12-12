@@ -11,9 +11,9 @@ import lotto.ui.ResultView;
 public class LottoMain {
 
     public static void main(String[] args) {
-
-
         int money = InputView.purchase();
+        int countOfManual = InputView.countOfManual();
+        InputView.purchaseManual(countOfManual);
         List<Lotto> lottos = Lotto.puchase(money);
         ResultView.purchase(lottos);
         LottoNumbers winningNumbers = new LottoNumbers(InputView.winningNumber());
