@@ -15,7 +15,7 @@ public class LottoApplication {
         printLottoCount(lottoCount);
 
         MyLottos myLottos = new MyLottos(lottoCount);
-        printMyLottos(myLottos, lottoCount);
+        printMyLottos(myLottos);
 
         WinningLotto winningLotto = InputView.inputWinningNumbers();
         MatchResult matchResult = myLottos.matchMyLotto(winningLotto);

@@ -24,10 +24,6 @@ public class MyLottos {
         return myLottos;
     }
 
-    public Object[] lottoNumbersToArray(int index){
-        return myLottos.get(index).numbersToObject();
-    }
-
     public MatchResult matchMyLotto(WinningLotto winningLotto){
         matchResult.addMatchResult(myLottos, winningLotto);
         return matchResult;

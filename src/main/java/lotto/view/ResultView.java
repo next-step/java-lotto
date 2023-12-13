@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.MatchResult;
 import lotto.domain.Rank;
 import lotto.domain.MyLottos;
@@ -12,9 +13,9 @@ public class ResultView {
         System.out.println(lottoCount + "개를 구매했습니다.");
     }
 
-    public static void printMyLottos(MyLottos myLottos, int lottoCount){
-        for(int i = 0; i < lottoCount; i++){
-            System.out.println(Arrays.toString(myLottos.lottoNumbersToArray(i)));
+    public static void printMyLottos(MyLottos myLottos){
+        for(Lotto lotto : myLottos.myLottos()) {
+            System.out.println(lotto.toString());
         }
     }
 
