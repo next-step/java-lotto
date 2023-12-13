@@ -12,8 +12,8 @@ public class LottoStatisticsTest {
     @Test
     @DisplayName("랭크를 기록한 데이터를 반환한다")
     void statistics() {
-        List<LottoNumber> winningNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9));
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 7, 8, 9);
 
         Lotto lotto = new Lotto(winningNumbers);
         LottoMachine lottoMachine = new LottoMachine();

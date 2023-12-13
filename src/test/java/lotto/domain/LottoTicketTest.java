@@ -18,8 +18,8 @@ public class LottoTicketTest {
     @Test
     @DisplayName("수동로또와 자동로또를 함께 생성할 수 있다")
     void merge() {
-        List<LottoNumber> lottoNumbers1 = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        List<LottoNumber> lottoNumbers2 = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        List<Integer> lottoNumbers1 = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> lottoNumbers2 = Arrays.asList(1, 2, 3, 4, 5, 6);
         Lotto lotto1 = new Lotto(lottoNumbers1);
         Lotto lotto2 = new Lotto(lottoNumbers2);
         int number = 4;

@@ -17,7 +17,7 @@ public class LottoTicket {
     public LottoTicket(List<Lotto> manualLottoList, int number) {
         this.lottoTicket = new ArrayList<>();
         this.lottoTicket.addAll(manualLottoList);
-        List<LottoNumber> numbers = numberList();
+        List<Integer> numbers = numberList();
         for (int i = 0; i < number; i++) {
             Collections.shuffle(numbers);
             lottoTicket.add(new Lotto(List.copyOf(numbers.subList(0, 6))));
@@ -25,7 +25,7 @@ public class LottoTicket {
     }
     public LottoTicket(int number) {
         this.lottoTicket = new ArrayList<>();
-        List<LottoNumber> numbers = numberList();
+        List<Integer> numbers = numberList();
         for (int i = 0; i < number; i++) {
             Collections.shuffle(numbers);
             lottoTicket.add(new Lotto(List.copyOf(numbers.subList(0, 6))));
@@ -36,10 +36,9 @@ public class LottoTicket {
             lottoMachine.rank(lotto, winningLotto, lottoStatistics);
         }
     }
-    private static List<LottoNumber> numberList() {
+    private static List<Integer> numberList() {
         return IntStream.rangeClosed(1, 45)
                 .boxed()
-                .map(el -> new LottoNumber(el))
                 .collect(Collectors.toList());
     }
 
