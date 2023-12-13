@@ -30,18 +30,15 @@ public class InputView {
         return manualNumber;
     }
 
-    public static List<Lotto> manualLottoTicketView(int number, int manualNumber) {
+    public static Lotto manualLottoTicketView(int number, int manualNumber) {
         System.out.println();
         System.out.println("수동으로 구매할 로또 번호를 입력해주세요");
         scanner.nextLine();
 
-        Lotto lotto = new Lotto(getLottoNumbers());
-        LottoTicket lottoTicket = new LottoTicket(lotto);
-
         int autoNumber = number - manualNumber;
         System.out.println();
         System.out.println("수동으로 " + manualNumber + "장, " + "자동으로 " + autoNumber + "개를 구매했습니다.");
-        return lottoTicket.getLottoTicket();
+        return new Lotto(getLottoNumbers());
     }
 
     public static Lotto winningLottoView() {
