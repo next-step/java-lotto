@@ -8,7 +8,14 @@ public class MatchResult {
     private Map<Rank, Integer> matchResult;
 
     public MatchResult(){
-        matchResult = new HashMap<>();
+        matchResult = new HashMap<>(){{
+            put(Rank.FIRST, 0);
+            put(Rank.SECOND, 0);
+            put(Rank.THIRD, 0);
+            put(Rank.FOURTH, 0);
+            put(Rank.FIFTH, 0);
+            put(Rank.MISS, 0);
+        }};
     }
 
     public MatchResult(Map<Rank, Integer> matchResult){
@@ -17,12 +24,7 @@ public class MatchResult {
 
     void addMatchResult(Lotto lotto, WinningLotto winningLotto) {
         Rank rank = winningLotto.matchRank(lotto);
-        matchResult.put(rank, matchResultOf(rank) + 1);
-    }
-
-    private int matchResultOf(Rank rank) {
-        if(matchResult.containsKey(rank)) return matchResult.get(rank);
-        return 0;
+        matchResult.put(rank, matchResult.get(rank) + 1);
     }
 
     public int matchCountOf(Rank rank) {

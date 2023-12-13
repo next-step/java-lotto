@@ -29,6 +29,13 @@ public class WinningLotto {
         int myMatchCount = matchCount(lotto);
         boolean isBonus = lotto.isMatchBonusNumber(bonusNumber);
 
+        return Rank.rankOf(myMatchCount, isBonus);
+    }
+
+    public Rank matchRankByRankCondition(Lotto lotto) {
+        int myMatchCount = matchCount(lotto);
+        boolean isBonus = lotto.isMatchBonusNumber(bonusNumber);
+
         RankMapping rankMapping = new RankMapping();
         RankCondition rankCondition = rankMapping.rank(myMatchCount, isBonus);
 
