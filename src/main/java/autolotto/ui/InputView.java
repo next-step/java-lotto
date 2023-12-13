@@ -1,10 +1,12 @@
 package autolotto.ui;
 
+import autolotto.domain.Lotto;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
 
@@ -63,7 +65,14 @@ public class InputView {
         return manualLottoCount;
     }
 
-    public static List<Integer> inputNumbers() {
+    public static List<Lotto> getManualNumbers(int manualLottoCount) {
+        List<Lotto> manualNumbers = IntStream.range(0, manualLottoCount)
+                .mapToObj(i -> new Lotto(inputNumbers()))
+                .collect(Collectors.toList());
+        return manualNumbers;
+    }
+
+    private static List<Integer> inputNumbers() {
         return Arrays.stream(checkNllOrBlank(scanner.nextLine()).split(SPLIT_PATTERN))
                 .map(String::trim)
                 .map(Integer::parseInt)
