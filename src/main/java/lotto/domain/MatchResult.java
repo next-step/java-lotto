@@ -9,21 +9,23 @@ public class MatchResult {
     private Map<Rank, Integer> matchResult;
 
     public MatchResult(){
-        this(List.of(0,0,0,0,0,0,0));
+        matchResult = new HashMap<>();
     }
 
-    public MatchResult(List<Integer> matchNumberList){
-        matchResult = new HashMap<>();
-        for (Rank rank : Rank.values()){
-            matchResult.put(rank, matchNumberList.get(rank.getMatchCount()));
-        }
+    public MatchResult(Map<Rank, Integer> matchResult){
+        this.matchResult = matchResult;
     }
 
     void addMatchResult(List<Lotto> myLottos, WinningLotto winningLotto) {
         for(Lotto lotto : myLottos){
             Rank rank = winningLotto.matchRank(lotto);
-            matchResult.put(rank, matchResult.get(rank) + 1);
+            matchResult.put(rank, matchResultOf(rank) + 1);
         }
+    }
+
+    private int matchResultOf(Rank rank) {
+        if(matchResult.containsKey(rank)) return matchResult.get(rank);
+        return 0;
     }
 
     public int matchCountOf(Rank rank) {
