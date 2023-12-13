@@ -6,10 +6,8 @@ import java.util.List;
 public class MyLottos {
 
     private List<Lotto> myLottos = new ArrayList<>();
-    private MatchResult matchResult;
 
     public MyLottos(int lottoCount){
-        this.matchResult = new MatchResult();
         for(int i = 0; i < lottoCount; i++){
             myLottos.add(new Lotto());
         }
@@ -17,7 +15,6 @@ public class MyLottos {
 
     public MyLottos(List<Lotto> lottos){
         this.myLottos = lottos;
-        this.matchResult = new MatchResult();
     }
 
     public List<Lotto> myLottos(){
@@ -25,7 +22,11 @@ public class MyLottos {
     }
 
     public MatchResult matchMyLotto(WinningLotto winningLotto){
-        matchResult.addMatchResult(myLottos, winningLotto);
+        MatchResult matchResult = new MatchResult();
+        for(Lotto lotto : myLottos){
+            matchResult.addMatchResult(lotto, winningLotto);
+        }
+
         return matchResult;
     }
 
@@ -33,7 +34,6 @@ public class MyLottos {
     public String toString() {
         return "MyLottos{" +
                 "myLottos=" + myLottos +
-                ", matchResult=" + matchResult.toString() +
                 '}';
     }
 }

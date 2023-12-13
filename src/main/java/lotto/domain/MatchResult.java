@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MatchResult {
@@ -16,11 +15,9 @@ public class MatchResult {
         this.matchResult = matchResult;
     }
 
-    void addMatchResult(List<Lotto> myLottos, WinningLotto winningLotto) {
-        for(Lotto lotto : myLottos){
-            Rank rank = winningLotto.matchRank(lotto);
-            matchResult.put(rank, matchResultOf(rank) + 1);
-        }
+    void addMatchResult(Lotto lotto, WinningLotto winningLotto) {
+        Rank rank = winningLotto.matchRank(lotto);
+        matchResult.put(rank, matchResultOf(rank) + 1);
     }
 
     private int matchResultOf(Rank rank) {
