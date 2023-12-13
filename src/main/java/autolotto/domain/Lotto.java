@@ -1,18 +1,19 @@
 package autolotto.domain;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private List<Integer> lottoNumbers;
+    private List<LottoNo> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = lottoNumbers.stream().map(LottoNo::new).collect(Collectors.toList());
         checkNumberCount();
-        validateRange();
+        checkDuplicateNumber();
     }
 
-    public List<Integer> lottoNumbers() {
+    public List<LottoNo> lottoNumbers() {
         return lottoNumbers;
     }
 
@@ -32,13 +33,17 @@ public class Lotto {
         }
     }
 
-    private void validateRange() {
-        if (lottoNumbers.stream().anyMatch(number -> number < 1 || number > 45)) {
-            throw new IllegalArgumentException("로또 번호는 1~ 45까지의 숫자 입니다.");
-        }
-    }
-
     public int matchCount(Lotto lottoNumber, Lotto winNumber) {
         return (int) lottoNumber.lottoNumbers().stream().filter(winNumber.lottoNumbers()::contains).count();
+    }
+
+    private void checkDuplicateNumber() {
+        Set<LottoNo> uniqueNumber = lottoNumbers.stream().collect(Collectors.toSet());
+        if (lottoNumbers.size() != uniqueNumber.size()) {
+            throw new IllegalArgumentException("로또번호 중 중복된 숫자가 존재합니다. 다시 입력해 주세요.");
+        }
+    }
+    public boolean containsBonusNumber(LottoNo bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 }

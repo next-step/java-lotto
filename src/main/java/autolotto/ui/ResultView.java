@@ -8,14 +8,13 @@ import java.util.List;
 import java.util.Map;
 
 public class ResultView {
-    public static void printLottoNumber(List<Lotto> lottoTickets) {
+    public static void printLottoNumber(List<Lotto> lottoTickets, int manualLottoCount,int ticketsCount) {
+        System.out.printf("수동으로 %d 장, 자동으로 %d 개를 구매했습니다.\n", manualLottoCount, (ticketsCount- manualLottoCount));
         lottoTickets.forEach(System.out::println);
     }
 
     public static void printStatistics(Map<Rank, Integer> rankCount, double profit) {
         System.out.println("\n당첨 통계\n---------");
-//        List<Rank> ranks = Arrays.asList(Rank.values());
-//        ranks.sort(money);
         Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.NO_MATCH)
                 .forEach(rank -> printWinCount(rankCount, rank));
