@@ -11,7 +11,7 @@ public class LottoTest {
     @Test
     @DisplayName("중복된 숫자가 있으면 예외가 발생한다.")
     void duplicate() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1));
+        List<Integer> lottoNumbers = Arrays.asList(1, 1, 1, 1, 1, 1);
         Assertions.assertThatThrownBy(() -> {
             new Lotto(lottoNumbers);
         }).isInstanceOf(IllegalArgumentException.class);
@@ -20,8 +20,8 @@ public class LottoTest {
     @Test
     @DisplayName("로또 사이즈는 6이 아니면 예외가 발생한다.")
     void size() {
-        List<LottoNumber> lottoNumbers1 = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5));
-        List<LottoNumber> lottoNumbers2 = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6), new LottoNumber(7));
+        List<Integer> lottoNumbers1 = Arrays.asList(1, 2, 3, 4, 5);
+        List<Integer> lottoNumbers2 = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
         Assertions.assertThatThrownBy(() -> {
             new Lotto(lottoNumbers1);
         }).isInstanceOf(IllegalArgumentException.class);
@@ -32,8 +32,8 @@ public class LottoTest {
     @Test
     @DisplayName("로또와 당첨 로또의 값을 비교하여 count를 반환한다")
     void match() {
-        List<LottoNumber> lottoNumbers1 = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        List<LottoNumber> lottoNumbers2 = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        List<Integer> lottoNumbers1 = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> lottoNumbers2 = Arrays.asList(1, 2, 3, 4, 5, 6);
         Lotto lotto1 = new Lotto(lottoNumbers1);
         Lotto lotto2 = new Lotto(lottoNumbers2);
 

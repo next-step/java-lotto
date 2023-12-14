@@ -19,8 +19,8 @@ public class LottoMachineTest {
     @Test
     @DisplayName("당첨로또와 로또를 비교하여 Rank를 선정할 수 있다")
     void rank() {
-        List<LottoNumber> lottoNumbers1 = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        List<LottoNumber> lottoNumbers2 = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        List<Integer> lottoNumbers1 = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> lottoNumbers2 = Arrays.asList(1, 2, 3, 4, 5, 6);
         Lotto lotto1 = new Lotto(lottoNumbers1);
         Lotto lotto2 = new Lotto(lottoNumbers2);
         WinningLotto winningLotto = new WinningLotto(lotto2, 7);

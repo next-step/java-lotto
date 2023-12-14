@@ -11,6 +11,11 @@ public class LottoMachine {
         LottoTicket lottoTicket = new LottoTicket(number);
         return lottoTicket;
     }
+
+    public LottoTicket generateLottoTicket(List<Lotto> manualLottoList, int number) {
+        LottoTicket lottoTicket = new LottoTicket(manualLottoList, number);
+        return lottoTicket;
+    }
     public Rank rank(Lotto lotto, WinningLotto winningLotto, LottoStatistics lottoStatistics) {
         Rank rank = winningLotto.rank(lotto);
         lottoStatistics.addRank(rank);
