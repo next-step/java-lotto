@@ -29,10 +29,6 @@ public class Lotto {
         return this.numbers;
     }
 
-    Object[] numbersToObject() {
-        return numbers.toArray();
-    }
-
     int matchCount(List<Integer> winningNumbers) {
         int matchCount = 0;
 
@@ -51,14 +47,16 @@ public class Lotto {
         return matchCount;
     }
 
+    public boolean isMatchBonusNumber(int bonusNumber){
+        return numbers.contains(bonusNumber);
+    }
+
     public int numberOf(int idx){
         return numbers.get(idx);
     }
 
     @Override
     public String toString() {
-        return "Lotto{" +
-                "numbers=" + numbers +
-                '}';
+        return numbers.toString();
     }
 }

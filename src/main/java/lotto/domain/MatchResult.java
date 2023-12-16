@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MatchResult {
@@ -9,34 +8,30 @@ public class MatchResult {
     private Map<Rank, Integer> matchResult;
 
     public MatchResult(){
-        matchResult = new HashMap<>();
-        for (Rank rank : Rank.values()){
-            matchResult.put(rank, 0);
-        }
+        matchResult = new HashMap<>(){{
+            put(Rank.FIRST, 0);
+            put(Rank.SECOND, 0);
+            put(Rank.THIRD, 0);
+            put(Rank.FOURTH, 0);
+            put(Rank.FIFTH, 0);
+            put(Rank.MISS, 0);
+        }};
     }
 
-    public MatchResult(List<Integer> matchNumberList){
-        matchResult = new HashMap<>();
-        for (Rank rank : Rank.values()){
-            matchResult.put(rank, matchNumberList.get(rank.getMatchCount()));
-        }
+    public MatchResult(Map<Rank, Integer> matchResult){
+        this.matchResult = matchResult;
     }
 
-    void addMatchResult(List<Lotto> myLottos, WinningLotto winningLotto) {
-        int myMatchCount = 0;
-
-        for(Lotto lotto : myLottos){
-            myMatchCount = winningLotto.matchCount(lotto);
-            matchResult.put(Rank.returnRank(myMatchCount), matchResult.get(Rank.returnRank(myMatchCount)) + 1);
-        }
-
+    void addMatchResult(Lotto lotto, WinningLotto winningLotto) {
+        Rank rank = winningLotto.matchRank(lotto);
+        matchResult.put(rank, matchResult.get(rank) + 1);
     }
 
     public int matchCountOf(Rank rank) {
         return matchResult.get(rank);
     }
 
-    double calculateReturnRate(int payMoney) {
+    public double calculateReturnRate(int payMoney) {
         return Math.floor((double)Rank.calculateTotalWinningMoney(this) / payMoney * 100) / 100;
     }
 
