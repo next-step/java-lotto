@@ -2,7 +2,7 @@ package calculator;
 
 public class Calculator {
 
-    public int calculate(String text) {
+    public static int calculate(String text) {
         if(text == null || text.isBlank()) throw new IllegalArgumentException("입력 값으로 null 또는 공백이 올수 없습니다");
         String[] values = text.split(" ");
         int result = Integer.parseInt(values[0]);
@@ -16,7 +16,7 @@ public class Calculator {
         return result;
     }
 
-    private int calculateResult(int result, String operator, int number) {
+    private static int calculateResult(int result, String operator, int number) {
         if (operator.equals("+")) {
             return add(result, number);
         }
@@ -33,21 +33,20 @@ public class Calculator {
         throw new IllegalArgumentException("사칙 연산 기호가 입력되지 않았습니다.");
     }
 
-    private int add(int first, int second) {
+    private static int add(int first, int second) {
         return first + second;
     }
 
-    private int subtract(int first, int second) {
+    private static int subtract(int first, int second) {
         return first - second;
     }
 
-    private int multiply(int first, int second) {
+    private static int multiply(int first, int second) {
         return first * second;
     }
 
-    private int divide(int first, int second) {
+    private static int divide(int first, int second) {
         return first / second;
     }
-
 
 }
