@@ -17,6 +17,7 @@ public class DivisionTest {
 		Expression expression = new Expression(input);
 		Division division = new Division();
 		Digit expectingResult = new Digit(1);
+
 		assertThat(division.operate(expression.indexOfDigits(0),
 			expression.indexOfDigits(1)).equals(expectingResult)).isTrue();
 	}

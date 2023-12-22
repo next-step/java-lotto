@@ -22,6 +22,7 @@ public abstract class Operation {
 		if (operator.operator() == DIVISION) {
 			operation = new Division();
 		}
+
 		return operation;
 	}
 }

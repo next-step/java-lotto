@@ -17,6 +17,7 @@ public class AdditionTest {
 		Expression expression = new Expression(input);
 		Addition addition = new Addition();
 		Digit expectingResult = new Digit(3);
+
 		assertThat(addition.operate(expression.indexOfDigits(0),
 			expression.indexOfDigits(1)).equals(expectingResult)).isTrue();
 	}

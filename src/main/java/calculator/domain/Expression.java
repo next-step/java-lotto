@@ -17,6 +17,7 @@ public final class Expression {
 		digits = new ArrayList<>();
 		operators = new ArrayList<>();
 		String[] strings = input.split(SPACE);
+
 		for (String string : strings) {
 			parseExpression(string);
 		}
@@ -33,7 +34,9 @@ public final class Expression {
 	private void parseExpression(final String string) {
 		isEmptyCharacter(string);
 		isExpression(string);
+
 		char character = string.charAt(0);
+
 		if (character == PLUS || character == MINUS || character == MULTIPLY || character == DIVISION) {
 			operators.add(new Operator(character));
 			return;
@@ -42,6 +45,7 @@ public final class Expression {
 			digits.add(new Digit(character - '0'));
 			return;
 		}
+
 		throw new IllegalArgumentException("사칙 연산 기호가 아닙니다.");
 	}
 
