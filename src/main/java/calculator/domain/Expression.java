@@ -8,6 +8,7 @@ public final class Expression {
 	private static final char MINUS = '-';
 	private static final char MULTIPLY = '*';
 	private static final char DIVISION = '/';
+	private static final int CHARACTER_LENGTH = 1;
 	private final List<Digit> digits;
 	private final List<Operator> operators;
 
@@ -29,6 +30,8 @@ public final class Expression {
 	}
 
 	private void parseExpression(final String string) {
+		isEmptyCharacter(string);
+		isExpression(string);
 		char character = string.charAt(0);
 		if (character == PLUS || character == MINUS || character == MULTIPLY || character == DIVISION) {
 			operators.add(new Operator(character));
@@ -39,6 +42,18 @@ public final class Expression {
 			return;
 		}
 		throw new IllegalArgumentException("사칙 연산 기호가 아닙니다.");
+	}
+
+	private void isEmptyCharacter(final String string) {
+		if (string.isEmpty() || string.isBlank()) {
+			throw new IllegalArgumentException("연속된 공백이 입력되었습니다.");
+		}
+	}
+
+	private void isExpression(final String string) {
+		if (string.length() > CHARACTER_LENGTH) {
+			throw new IllegalArgumentException("공백을 사이에 두고 숫자나 기호를 입력하세요.");
+		}
 	}
 
 	public Digit indexOfDigits(final int index) {
