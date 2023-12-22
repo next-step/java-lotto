@@ -9,13 +9,14 @@ public final class Expression {
 	private static final char MULTIPLY = '*';
 	private static final char DIVISION = '/';
 	private static final int CHARACTER_LENGTH = 1;
+	private static final String SPACE = " ";
 	private final List<Digit> digits;
 	private final List<Operator> operators;
 
 	public Expression(final String input) {
 		digits = new ArrayList<>();
 		operators = new ArrayList<>();
-		String[] strings = input.split(" ");
+		String[] strings = input.split(SPACE);
 		for (String string : strings) {
 			parseExpression(string);
 		}
