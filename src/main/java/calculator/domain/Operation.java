@@ -1,0 +1,27 @@
+package calculator.domain;
+
+public abstract class Operation {
+	private static final char PLUS = '+';
+	private static final char MINUS = '-';
+	private static final char MULTIPLY = '*';
+	private static final char DIVISION = '/';
+	private Operation operation;
+
+	public abstract Digit operate(Digit digit1, Digit digit2);
+
+	public Operation operation(Operator operator) {
+		if (operator.operator() == PLUS) {
+			operation = new Addition();
+		}
+		if (operator.operator() == MINUS) {
+			operation = new Subtraction();
+		}
+		if (operator.operator() == MULTIPLY) {
+			operation = new Multiplication();
+		}
+		if (operator.operator() == DIVISION) {
+			operation = new Division();
+		}
+		return operation;
+	}
+}

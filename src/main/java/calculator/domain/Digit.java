@@ -2,14 +2,14 @@ package calculator.domain;
 
 import java.util.Objects;
 
-public class Number {
+public class Digit {
 	private final int number;
 
-	public Number(int input) {
+	public Digit(int input) {
 		number = input;
 	}
 
-	public int number(){
+	public int number() {
 		return number;
 	}
 
@@ -19,8 +19,8 @@ public class Number {
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
-		Number number1 = (Number)o;
-		return number == number1.number;
+		Digit digit1 = (Digit)o;
+		return number == digit1.number;
 	}
 
 	@Override

@@ -10,8 +10,8 @@ public class ExpressionTest {
 	@Test
 	void 식을_분리한다() {
 		Expression expression = new Expression("1 + 2");
-		Number number1 = new Number(1);
+		Digit digit1 = new Digit(1);
 
-		assertThat(expression.numbers().contains(number1)).isTrue();
+		assertThat(expression.numbers().contains(digit1)).isTrue();
 	}
 }

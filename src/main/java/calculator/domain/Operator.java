@@ -3,11 +3,13 @@ package calculator.domain;
 import java.util.Objects;
 
 public class Operator {
-	char operator;
+	private char operator;
+
 	public Operator(char character) {
 		operator = character;
 	}
-	public char operator(){
+
+	public char operator() {
 		return operator;
 	}
 

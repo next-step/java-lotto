@@ -1,4 +1,4 @@
 package calculator.domain;
 
-public class NumberTest {
+public class DigitTest {
 }
