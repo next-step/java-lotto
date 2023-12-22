@@ -18,4 +18,15 @@ public class StringCalculatorTest {
 
 		assertThat(StringCalculator.calculate(expression).equals(expectingResult)).isTrue();
 	}
+
+	@DisplayName("사칙연산 기호가 아닌 경우 에러.")
+	@Test
+	void 사칙연산_기호가_아닌_문자가_들어왔다() {
+		String input = "4 * 2 * 3 ^ 4 / 3";
+
+		assertThatExceptionOfType(IllegalArgumentException.class)
+			.isThrownBy(() -> {
+				Expression expression = new Expression(input);
+			}).withMessage("사칙 연산 기호가 아닙니다.");
+	}
 }

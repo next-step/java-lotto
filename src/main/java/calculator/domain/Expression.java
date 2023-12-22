@@ -32,10 +32,13 @@ public final class Expression {
 		char character = string.charAt(0);
 		if (character == PLUS || character == MINUS || character == MULTIPLY || character == DIVISION) {
 			operators.add(new Operator(character));
+			return;
 		}
 		if (Character.isDigit(character)) {
 			digits.add(new Digit(character - '0'));
+			return;
 		}
+		throw new IllegalArgumentException("사칙 연산 기호가 아닙니다.");
 	}
 
 	public Digit indexOfDigits(final int index) {
