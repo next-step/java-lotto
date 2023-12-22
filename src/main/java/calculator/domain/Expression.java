@@ -3,7 +3,7 @@ package calculator.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Expression {
+public final class Expression {
 	private static final char PLUS = '+';
 	private static final char MINUS = '-';
 	private static final char MULTIPLY = '*';
@@ -11,7 +11,7 @@ public class Expression {
 	private final List<Digit> digits;
 	private final List<Operator> operators;
 
-	public Expression(String input) {
+	public Expression(final String input) {
 		digits = new ArrayList<>();
 		operators = new ArrayList<>();
 		String[] strings = input.split(" ");
@@ -28,7 +28,7 @@ public class Expression {
 		return operators;
 	}
 
-	private void parseExpression(String string) {
+	private void parseExpression(final String string) {
 		char character = string.charAt(0);
 		if (character == PLUS || character == MINUS || character == MULTIPLY || character == DIVISION) {
 			operators.add(new Operator(character));
@@ -38,15 +38,15 @@ public class Expression {
 		}
 	}
 
-	public Digit indexOfDigits(int index) {
+	public Digit indexOfDigits(final int index) {
 		return digits.get(index);
 	}
 
-	public Operator indexOfOperators(int index) {
+	public Operator indexOfOperators(final int index) {
 		return operators.get(index);
 	}
 
-	public void insertDigit(int index, Digit digit) {
+	public void insertDigit(final int index, final Digit digit) {
 		digits.set(index, digit);
 	}
 }

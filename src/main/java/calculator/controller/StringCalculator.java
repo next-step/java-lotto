@@ -5,8 +5,8 @@ import calculator.domain.Expression;
 import calculator.domain.Digit;
 import calculator.domain.Operation;
 
-public class StringCalculator {
-	public static Digit calculate(Expression expression) {
+public final class StringCalculator {
+	public static Digit calculate(final Expression expression) {
 		Operation operation = new Addition();
 
 		for (int i = 0; i < expression.operators().size(); i++) {

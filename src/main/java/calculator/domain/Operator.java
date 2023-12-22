@@ -2,10 +2,10 @@ package calculator.domain;
 
 import java.util.Objects;
 
-public class Operator {
-	private char operator;
+public final class Operator {
+	private final char operator;
 
-	public Operator(char character) {
+	public Operator(final char character) {
 		operator = character;
 	}
 
@@ -14,7 +14,7 @@ public class Operator {
 	}
 
 	@Override
-	public boolean equals(Object o) {
+	public boolean equals(final Object o) {
 		if (this == o)
 			return true;
 		if (o == null || getClass() != o.getClass())

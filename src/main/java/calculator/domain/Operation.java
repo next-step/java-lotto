@@ -7,9 +7,9 @@ public abstract class Operation {
 	private static final char DIVISION = '/';
 	private Operation operation;
 
-	public abstract Digit operate(Digit digit1, Digit digit2);
+	public abstract Digit operate(final Digit digit1, final Digit digit2);
 
-	public Operation operation(Operator operator) {
+	public Operation operation(final Operator operator) {
 		if (operator.operator() == PLUS) {
 			operation = new Addition();
 		}
