@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Expression {
-	private List<Number> numbers;
-	List<Operator> operators;
+	private final List<Number> numbers;
+	private final List<Operator> operators;
 
 	public Expression(String input) {
 		numbers = new ArrayList<>();

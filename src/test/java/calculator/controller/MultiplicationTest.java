@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import calculator.controller.Multiplication;
 import calculator.domain.Expression;
 import calculator.domain.Number;
 
