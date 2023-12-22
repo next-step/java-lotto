@@ -2,7 +2,7 @@ package calculator;
 
 import static calculator.view.InputView.*;
 import static calculator.view.ResultView.*;
-import static calculator.controller.StringCalculator.*;
+import static calculator.controller.Calculator.*;
 
 import calculator.domain.Expression;
 

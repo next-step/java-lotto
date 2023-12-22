@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import calculator.domain.Expression;
 import calculator.domain.Digit;
 
-public class StringCalculatorTest {
+public class CalculatorTest {
 	@DisplayName("사칙연산을_하여_값을 리턴한다.")
 	@Test
 	void 사칙연산을_수행한다() {
@@ -16,7 +16,7 @@ public class StringCalculatorTest {
 		Expression expression = new Expression(input);
 		Digit expectingResult = new Digit(6);
 
-		assertThat(StringCalculator.calculate(expression).equals(expectingResult)).isTrue();
+		assertThat(Calculator.calculate(expression).equals(expectingResult)).isTrue();
 	}
 
 	@DisplayName("사칙연산 기호가 아닌 경우 에러.")

@@ -5,7 +5,7 @@ import calculator.domain.Expression;
 import calculator.domain.Digit;
 import calculator.domain.Operation;
 
-public final class StringCalculator {
+public final class Calculator {
 	public static Digit calculate(final Expression expression) {
 		Operation operation = new Addition();
 
