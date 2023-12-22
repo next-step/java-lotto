@@ -24,7 +24,7 @@ public class Expression {
 	}
 	private void parseExpression(String string){
 		char character = string.charAt(0);
-		if (character == '+' || character == '-' || character == '*' || character == '%'){
+		if (character == '+' || character == '-' || character == '*' || character == '/'){
 			operators.add(new Operator(character));
 		}
 		if (Character.isDigit(character)){
