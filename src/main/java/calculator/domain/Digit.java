@@ -3,14 +3,14 @@ package calculator.domain;
 import java.util.Objects;
 
 public final class Digit {
-	private final int number;
+	private final int digit;
 
 	public Digit(final int input) {
-		number = input;
+		digit = input;
 	}
 
-	public int number() {
-		return number;
+	public int digit() {
+		return digit;
 	}
 
 	@Override
@@ -20,11 +20,11 @@ public final class Digit {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		Digit digit1 = (Digit)o;
-		return number == digit1.number;
+		return digit == digit1.digit;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(number);
+		return Objects.hash(digit);
 	}
 }

@@ -3,7 +3,7 @@ package calculator.domain;
 public abstract class Operation {
 	private static final char PLUS = '+';
 	private static final char MINUS = '-';
-	private static final char MULTIPLY = '*';
+	private static final char MULTIPLICATION = '*';
 	private static final char DIVISION = '/';
 	private Operation operation;
 
@@ -16,7 +16,7 @@ public abstract class Operation {
 		if (operator.operator() == MINUS) {
 			operation = new Subtraction();
 		}
-		if (operator.operator() == MULTIPLY) {
+		if (operator.operator() == MULTIPLICATION) {
 			operation = new Multiplication();
 		}
 		if (operator.operator() == DIVISION) {

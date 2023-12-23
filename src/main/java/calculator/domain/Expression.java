@@ -6,7 +6,7 @@ import java.util.List;
 public final class Expression {
 	private static final char PLUS = '+';
 	private static final char MINUS = '-';
-	private static final char MULTIPLY = '*';
+	private static final char MULTIPLICATION = '*';
 	private static final char DIVISION = '/';
 	private static final int CHARACTER_LENGTH = 1;
 	private static final String SPACE = " ";
@@ -37,7 +37,7 @@ public final class Expression {
 
 		char character = string.charAt(0);
 
-		if (character == PLUS || character == MINUS || character == MULTIPLY || character == DIVISION) {
+		if (character == PLUS || character == MINUS || character == MULTIPLICATION || character == DIVISION) {
 			operators.add(new Operator(character));
 			return;
 		}
