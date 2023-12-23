@@ -5,16 +5,12 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import calculator.domain.Division;
-import calculator.domain.Expression;
-import calculator.domain.Digit;
-
 public class DivisionTest {
 	@DisplayName("두 숫자를 더하여 값을 리턴한다.")
 	@Test
 	void 두_숫자를_나눈다() {
 		String input = "3 / 2";
-		Expression expression = Expression.create(input);
+		Expression expression = Expression.of(input);
 		Division division = new Division();
 		Digit expectingResult = new Digit(1);
 

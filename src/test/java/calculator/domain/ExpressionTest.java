@@ -10,7 +10,7 @@ public class ExpressionTest {
 	@Test
 	void 식을_분리한다() {
 		String input = "1 + 2";
-		Expression expression = Expression.create(input);
+		Expression expression = Expression.of(input);
 		Digit expectingResult = new Digit(1);
 
 		assertThat(expression.numbers().contains(expectingResult)).isTrue();
@@ -23,7 +23,7 @@ public class ExpressionTest {
 
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> {
-				Expression expression = Expression.create(input);
+				Expression expression = Expression.of(input);
 			}).withMessage("사칙 연산 기호가 아닙니다.");
 	}
 
@@ -34,7 +34,7 @@ public class ExpressionTest {
 
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> {
-				Expression expression = Expression.create(input);
+				Expression expression = Expression.of(input);
 			}).withMessage("연속된 공백이 입력되었습니다.");
 	}
 
@@ -45,7 +45,7 @@ public class ExpressionTest {
 
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> {
-				Expression expression = Expression.create(input);
+				Expression expression = Expression.of(input);
 			}).withMessage("공백을 사이에 두고 숫자나 기호를 입력하세요.");
 	}
 }

@@ -18,7 +18,7 @@ public final class Expression {
 		Expression.operators = operators;
 	}
 
-	public static Expression create(final String input) {
+	public static Expression of(final String input) {
 		String[] letters = input.split(SPACE);
 
 		for (String letter : letters) {
