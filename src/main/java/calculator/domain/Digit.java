@@ -27,4 +27,20 @@ public final class Digit {
 	public int hashCode() {
 		return Objects.hash(digit);
 	}
+
+	public Digit add(Digit second) {
+		return new Digit(this.digit + second.digit);
+	}
+
+	public Digit subtract(Digit second) {
+		return new Digit(this.digit - second.digit);
+	}
+
+	public Digit multiply(Digit second) {
+		return new Digit(this.digit * second.digit);
+	}
+
+	public Digit divide(Digit second) {
+		return new Digit(this.digit / second.digit);
+	}
 }
