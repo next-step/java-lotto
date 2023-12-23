@@ -16,10 +16,10 @@ public final class Expression {
 	public Expression(final String input) {
 		digits = new ArrayList<>();
 		operators = new ArrayList<>();
-		String[] strings = input.split(SPACE);
+		String[] letters = input.split(SPACE);
 
-		for (String string : strings) {
-			parseExpression(string);
+		for (String letter : letters) {
+			parseExpression(letter);
 		}
 	}
 
@@ -31,11 +31,11 @@ public final class Expression {
 		return operators;
 	}
 
-	private void parseExpression(final String string) {
-		isEmptyCharacter(string);
-		isExpression(string);
+	private void parseExpression(final String letter) {
+		isEmptyCharacter(letter);
+		isExpression(letter);
 
-		char character = string.charAt(0);
+		char character = letter.charAt(0);
 
 		if (character == PLUS || character == MINUS || character == MULTIPLICATION || character == DIVISION) {
 			operators.add(new Operator(character));
