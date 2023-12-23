@@ -14,7 +14,7 @@ public class MultiplicationTest {
 	@Test
 	void 두_숫자를_곱한다() {
 		String input = "3 * 2";
-		Expression expression = new Expression(input);
+		Expression expression = Expression.create(input);
 		Multiplication multiplication = new Multiplication();
 		Digit expectingResult = new Digit(6);
 

@@ -14,7 +14,7 @@ public class AdditionTest {
 	@Test
 	void 두_숫자를_더한다() {
 		String input = "1 + 2";
-		Expression expression = new Expression(input);
+		Expression expression = Expression.create(input);
 		Addition addition = new Addition();
 		Digit expectingResult = new Digit(3);
 

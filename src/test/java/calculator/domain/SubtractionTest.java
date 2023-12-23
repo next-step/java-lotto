@@ -14,7 +14,7 @@ public class SubtractionTest {
 	@Test
 	void 두_숫자를_뺀다() {
 		String input = "3 - 2";
-		Expression expression = new Expression(input);
+		Expression expression = Expression.create(input);
 		Subtraction subtraction = new Subtraction();
 		Digit expectingResult = new Digit(1);
 

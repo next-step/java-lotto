@@ -14,7 +14,7 @@ public class DivisionTest {
 	@Test
 	void 두_숫자를_나눈다() {
 		String input = "3 / 2";
-		Expression expression = new Expression(input);
+		Expression expression = Expression.create(input);
 		Division division = new Division();
 		Digit expectingResult = new Digit(1);
 

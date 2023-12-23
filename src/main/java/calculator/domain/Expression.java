@@ -10,17 +10,22 @@ public final class Expression {
 	private static final char DIVISION = '/';
 	private static final int CHARACTER_LENGTH = 1;
 	private static final String SPACE = " ";
-	private final List<Digit> digits;
-	private final List<Operator> operators;
+	private static List<Digit> digits = new ArrayList<>();
+	private static List<Operator> operators = new ArrayList<>();
 
-	public Expression(final String input) {
-		digits = new ArrayList<>();
-		operators = new ArrayList<>();
+	public Expression(final List<Digit> digits, final List<Operator> operators) {
+		Expression.digits = digits;
+		Expression.operators = operators;
+	}
+
+	public static Expression create(final String input) {
 		String[] letters = input.split(SPACE);
 
 		for (String letter : letters) {
 			parseExpression(letter);
 		}
+
+		return new Expression(digits, operators);
 	}
 
 	public List<Digit> numbers() {
@@ -31,7 +36,7 @@ public final class Expression {
 		return operators;
 	}
 
-	private void parseExpression(final String letter) {
+	private static void parseExpression(final String letter) {
 		isEmptyCharacter(letter);
 		isExpression(letter);
 
@@ -49,13 +54,13 @@ public final class Expression {
 		throw new IllegalArgumentException("사칙 연산 기호가 아닙니다.");
 	}
 
-	private void isEmptyCharacter(final String string) {
+	private static void isEmptyCharacter(final String string) {
 		if (string.isEmpty() || string.isBlank()) {
 			throw new IllegalArgumentException("연속된 공백이 입력되었습니다.");
 		}
 	}
 
-	private void isExpression(final String string) {
+	private static void isExpression(final String string) {
 		if (string.length() > CHARACTER_LENGTH) {
 			throw new IllegalArgumentException("공백을 사이에 두고 숫자나 기호를 입력하세요.");
 		}

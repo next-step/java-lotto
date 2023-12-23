@@ -13,7 +13,7 @@ public class CalculatorTest {
 	@Test
 	void 사칙연산을_수행한다() {
 		String input = "4 * 2 * 3 - 4 / 3";
-		Expression expression = new Expression(input);
+		Expression expression = Expression.create(input);
 		Digit expectingResult = new Digit(6);
 
 		assertThat(Calculator.calculate(expression).equals(expectingResult)).isTrue();

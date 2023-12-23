@@ -9,7 +9,7 @@ import calculator.domain.Expression;
 public final class StringCalculatorApplication {
 	public static void main(String[] args) {
 		printExpressionInput();
-		Expression expression = new Expression(inputText());
+		Expression expression = Expression.create(inputText());
 		printResult(calculate(expression));
 	}
 }
