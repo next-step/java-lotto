@@ -1,30 +1,40 @@
 package calculator.domain;
 
-import java.util.Objects;
+import java.util.Arrays;
 
-public final class Operator {
-	private final char operator;
+public enum Operator {
+	PLUS("+") {
+		public Digit operate(Digit first, Digit second) {
+			return first.add(second);
+		}
+	},
+	MINUS("-") {
+		public Digit operate(Digit first, Digit second) {
+			return first.subtract(second);
+		}
+	},
+	MULTIPLICATION("*") {
+		public Digit operate(Digit first, Digit second) {
+			return first.multiply(second);
+		}
+	},
+	DIVISION("/") {
+		public Digit operate(Digit first, Digit second) {
+			return first.divide(second);
+		}
+	};
 
-	public Operator(final char character) {
-		operator = character;
+	private final String value;
+
+	Operator(String operator) {
+		value = operator;
 	}
 
-	public char operator() {
-		return operator;
-	}
+	public abstract Digit operate(Digit first, Digit second);
 
-	@Override
-	public boolean equals(final Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		Operator operator1 = (Operator)o;
-		return operator == operator1.operator;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(operator);
+	public static Operator find(String letter) {
+		return Arrays.stream(Operator.values()).filter(operator -> operator.value.equals(letter))
+			.findFirst()
+			.orElseThrow( () -> new IllegalArgumentException("Need correct arithmetic operator"));
 	}
 }

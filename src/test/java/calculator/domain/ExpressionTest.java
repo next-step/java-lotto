@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class ExpressionTest {
-	@DisplayName("두 숫자를 더하여 값을 리턴한다.")
+	@DisplayName("식 속에 있는 숫자에 해당 숫자가 있을 경우 참")
 	@Test
 	void 식을_분리한다() {
 		String input = "1 + 2";
@@ -16,7 +16,7 @@ public class ExpressionTest {
 		assertThat(expression.numbers().contains(expectingResult)).isTrue();
 	}
 
-	@DisplayName("사칙연산 기호가 아닌 경우 에러.")
+	@DisplayName("사칙연산 기호가 아닌 경우 에러")
 	@Test
 	void 사칙연산_기호가_아닌_문자가_들어왔다() {
 		String input = "4 * 2 * 3 ^ 4 / 3";

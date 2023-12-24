@@ -13,21 +13,6 @@ public final class Digit {
 		return digit;
 	}
 
-	@Override
-	public boolean equals(final Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		Digit digit1 = (Digit)o;
-		return digit == digit1.digit;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(digit);
-	}
-
 	public Digit add(Digit second) {
 		return new Digit(this.digit + second.digit);
 	}
@@ -42,5 +27,20 @@ public final class Digit {
 
 	public Digit divide(Digit second) {
 		return new Digit(this.digit / second.digit);
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Digit digit1 = (Digit)o;
+		return digit == digit1.digit;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(digit);
 	}
 }
