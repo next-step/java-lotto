@@ -35,6 +35,6 @@ public enum Operator {
 	public static Operator find(String letter) {
 		return Arrays.stream(Operator.values()).filter(operator -> operator.value.equals(letter))
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException("Need correct arithmetic operator"));
+			.orElseThrow(() -> new IllegalArgumentException("사칙 연산 기호가 아닙니다."));
 	}
 }

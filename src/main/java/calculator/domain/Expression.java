@@ -52,15 +52,6 @@ public final class Expression {
 		throw new IllegalArgumentException("사칙 연산 기호가 아닙니다.");
 	}
 
-	public static boolean isInteger(String letter) {
-		try {
-			Integer.parseInt(letter);
-			return true;
-		} catch (NumberFormatException ex) {
-			return false;
-		}
-	}
-
 	private static void isSpace(final String letter) {
 		if (letter.isEmpty() || letter.isBlank()) {
 			throw new IllegalArgumentException("연속된 공백이 입력되었습니다.");
@@ -70,6 +61,15 @@ public final class Expression {
 	private static void isExpression(final String letter) {
 		if (letter.length() > CHARACTER_LENGTH) {
 			throw new IllegalArgumentException("공백을 사이에 두고 숫자나 기호를 입력하세요.");
+		}
+	}
+
+	public static boolean isInteger(String letter) {
+		try {
+			Integer.parseInt(letter);
+			return true;
+		} catch (NumberFormatException ex) {
+			return false;
 		}
 	}
 
