@@ -40,7 +40,8 @@ public final class Expression {
 		isSpace(letter);
 		isExpression(letter);
 
-		if (PLUS.equals(letter) || MINUS.equals(letter) || MULTIPLICATION.equals(letter) || DIVISION.equals(letter)) {
+		if (PLUS.equals(letter) || MINUS.equals(letter) || MULTIPLICATION.equals(letter)
+			|| DIVISION.equals(letter)) {
 			operators.add(Operator.find(letter));
 			return;
 		}
