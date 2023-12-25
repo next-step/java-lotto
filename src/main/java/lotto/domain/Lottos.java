@@ -35,4 +35,10 @@ public class Lottos {
 	public List<Lotto> lottos(){
 		return lottos;
 	}
+
+	public List<Digit> digits(){
+		return lottos.stream()
+    		.map(Lotto::digits)
+    		.collect(Collectors.toList());
+	}
 }

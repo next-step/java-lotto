@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Digit {
@@ -11,6 +13,10 @@ public class Digit {
 
 	public boolean compareTo(Digit y){
 		return digit >= y.digit;
+	}
+
+	public int digit(){
+		return digit;
 	}
 
 	@Override

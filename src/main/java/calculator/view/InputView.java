@@ -16,7 +16,7 @@ public final class InputView {
 
 	private static String validate(String text) {
 		if (text == null || text.isBlank()) {
-			throw new InputMismatchException("원하는 식을 입력하여주세요");
+			throw new InputMismatchException("원하는 식을 입력하여 주세요");
 		}
 
 		return text;

@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public enum Lotto {
 	ONE(new Digit(1)),
@@ -68,5 +70,9 @@ public enum Lotto {
 
 	public boolean equalTo(final Digit digit) {
 		return value.equals(digit);
+	}
+
+	public Digit digits(){
+		return this.value;
 	}
 }
