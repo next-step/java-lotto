@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public final class InputView {
+	private static final int WON1000 = 1000;
 	private static final Scanner SCANNER = new Scanner(System.in);
 
 	public static void printPriceInput() {
@@ -27,7 +28,7 @@ public final class InputView {
 	}
 
 	public static int printPrice(final int price) {
-		int number = price / 1000;
+		int number = price / WON1000;
 		System.out.printf("%d개를 구매했습니다.\n", number);
 
 		return number;

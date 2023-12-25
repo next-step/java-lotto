@@ -6,10 +6,10 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 
-public class LottoGenerator {
+public final class LottoGenerator {
 	private final static int LOTTOS_SIZE = 6;
 
-	public static List<Lottos> generate(int number) {
+	public static List<Lottos> generate(final int number) {
 		List<Lottos> entireLottos = new ArrayList<>();
 		for (int i = 0; i < number; i++) {
 			entireLottos.add(new Lottos().allLottoNumbers());

@@ -9,8 +9,8 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Winners;
 
-public class WinningNumberChecker {
-	public static int[] check(List<Digit> winningNumbers, List<Lottos> lottosList, int number) {
+public final class WinningNumberChecker {
+	public static int[] check(final List<Digit> winningNumbers, final List<Lottos> lottosList, final int number) {
 		int[] numbersOfMatch = new int[number];
 		Set<Lotto> lottoSet = new HashSet<>();
 

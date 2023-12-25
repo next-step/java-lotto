@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public final class Winners {
-	private List<Lotto> winners;
+	private final List<Lotto> winners;
 
 	public Winners(final List<Lotto> winners) {
 		this.winners = winners;
