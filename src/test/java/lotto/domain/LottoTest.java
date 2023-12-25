@@ -19,7 +19,11 @@ public class LottoTest {
 		Digit withinDigit = new Digit(1);
 		Digit outOfRangeDigit = new Digit(46);
 
-		assertThat(lottoEnumSet.stream().filter(value -> value.equalTo(withinDigit)).findFirst().get().isBetween(boundaryStartPoint, boundaryEndPoint)).isTrue();
-		assertThat(lottoEnumSet.stream().filter(value -> value.equalTo(outOfRangeDigit)).findFirst().get().isBetween(boundaryStartPoint, boundaryEndPoint)).isFalse();
+		assertThat(lottoEnumSet.stream().filter(value ->
+				value.equalTo(withinDigit)).findFirst().get()
+			.isBetween(boundaryStartPoint, boundaryEndPoint)).isTrue();
+		assertThat(lottoEnumSet.stream().filter(value ->
+				value.equalTo(outOfRangeDigit)).findFirst().get()
+			.isBetween(boundaryStartPoint, boundaryEndPoint)).isFalse();
 	}
 }

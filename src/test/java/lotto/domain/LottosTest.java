@@ -9,15 +9,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottosTest {
-	@DisplayName("로또를 생성한다.")
+	@DisplayName("랜덤 번호가 1~45의 숫자인지 확인.")
 	@Test
-	void 로또를_생성한다() {
+	void 랜덤_번호가_1부터45까지의_숫자인지_확인() {
 		Lottos lottos = new Lottos();
 		List<Lotto> shuffledLottos = lottos.allLottoNumbers().shuffle();
-		List<Lotto> extractedLottos = new ArrayList<>(6);
-		for (int i = 0; i < 6; i++) {
-			extractedLottos.add(shuffledLottos.get(i));
-		}
-		assertThat(extractedLottos.get(0).isBetween(new Digit(1), new Digit(45))).isTrue();
+		assertThat(shuffledLottos.get(0).isBetween(new Digit(1), new Digit(45))).isTrue();
 	}
 }
