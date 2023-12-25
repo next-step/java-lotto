@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public enum Lotto {
 	ONE(new Digit(1)),

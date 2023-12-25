@@ -3,7 +3,6 @@ package lotto.view;
 import java.util.List;
 
 import lotto.domain.Digits;
-import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 
 public final class ResultView {

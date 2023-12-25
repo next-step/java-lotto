@@ -3,7 +3,6 @@ package lotto;
 import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lotto.controller.LottoGenerator;
