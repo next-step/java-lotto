@@ -31,6 +31,7 @@ public final class Winners {
 
 	public static List<Lotto> winningNumbers(final Set<Lotto> lottos) {
 		EnumSet<Lotto> winningNumbers = EnumSet.copyOf(lottos);
+		
 		return new ArrayList<>(winningNumbers);
 	}
 }
