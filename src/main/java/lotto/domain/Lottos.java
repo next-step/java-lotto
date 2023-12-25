@@ -27,4 +27,12 @@ public class Lottos {
 		Stream<Lotto> allLottoNumbers = Arrays.stream(Lotto.values());
 		return new Lottos(allLottoNumbers.collect(Collectors.toList()));
 	}
+
+	public Lotto indexOfLottos (int index){
+		return lottos.get(index);
+	}
+
+	public List<Lotto> lottos(){
+		return lottos;
+	}
 }

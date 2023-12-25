@@ -20,7 +20,7 @@ public class WinnersTest {
 	void 일치_여부_확인() {
 		Set<Lotto> lottoSet = Set.of(Lotto.ONE, Lotto.TWO, Lotto.THREE, Lotto.FOUR, Lotto.FIVE, Lotto.SIX);
 		Winners winners = new Winners(Winners.winningNumbers(lottoSet));
-		List<Lotto> lottos = LottoGenerator.generate();
+		List<Lotto> lottos = LottoGenerator.generate(1).get(0).lottos();
 
 		int count = winners.countWinningNumbers(lottos);
 

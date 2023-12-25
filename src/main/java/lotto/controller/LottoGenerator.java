@@ -9,15 +9,22 @@ import lotto.domain.Lottos;
 public class LottoGenerator {
 	private final static int LOTTOS_SIZE = 6;
 
-	public static List<Lotto> generate() {
-		Lottos lottos = new Lottos();
-		List<Lotto> shuffledLottos = lottos.allLottoNumbers().shuffle();
-		List<Lotto> extractedLottos = new ArrayList<>(LOTTOS_SIZE);
+	public static List<Lottos> generate(int number) {
+		List<Lottos> entireLottos = new ArrayList<>();
+		for (int i = 0; i < number; i++) {
+    		entireLottos.add(new Lottos().allLottoNumbers());
+    	}
 
-		for (int i = 0; i < LOTTOS_SIZE; i++) {
-			extractedLottos.add(shuffledLottos.get(i));
+		for (int i = 0; i < number; i++) {
+			List<Lotto> shuffledLottos = entireLottos.get(i).shuffle();
+			List<Lotto> extractedLottos = new ArrayList<>(LOTTOS_SIZE);
+
+			for (int j = 0; j < LOTTOS_SIZE; j++) {
+				extractedLottos.add(shuffledLottos.get(j));
+			}
+			entireLottos.set(i, new Lottos(extractedLottos));
 		}
 
-		return extractedLottos;
+		return entireLottos;
 	}
 }

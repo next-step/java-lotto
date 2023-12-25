@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum Lotto {
 	ONE(new Digit(1)),
 	TWO(new Digit(2)),
@@ -56,6 +58,12 @@ public enum Lotto {
 
 	public boolean isBetween(Digit start, Digit end) {
 		return value.compareTo(start) && end.compareTo(value);
+	}
+
+	public static Lotto find(Digit number){
+		return Arrays.stream(Lotto.values()).filter(lotto -> lotto.value.equals(number))
+			.findFirst()
+			.orElseThrow(() -> new IllegalArgumentException("1~45까지의 숫자를 입력하세요."));
 	}
 
 	public boolean equalTo(final Digit digit) {
