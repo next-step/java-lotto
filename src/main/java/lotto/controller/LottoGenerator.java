@@ -18,7 +18,7 @@ public final class LottoGenerator {
 		return shuffle(number, entireLottos);
 	}
 
-	private static List<Lottos> shuffle(int number, List<Lottos> entireLottos) {
+	private static List<Lottos> shuffle(final int number, final List<Lottos> entireLottos) {
 		List<Lottos> extractedLottos = new ArrayList<>();
 		for (int i = 0; i < number; i++) {
 			List<Lotto> shuffledLottos = entireLottos.get(i).shuffle();
@@ -28,7 +28,7 @@ public final class LottoGenerator {
 		return extractedLottos;
 	}
 
-	private static List<Lottos> extract(List<Lottos> entireLottos, List<Lotto> shuffledLottos, int i) {
+	private static List<Lottos> extract(final List<Lottos> entireLottos, final List<Lotto> shuffledLottos, int i) {
 		List<Lotto> extractedLottos = new ArrayList<>(LOTTOS_SIZE);
 
 		for (int j = 0; j < LOTTOS_SIZE; j++) {
