@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Lottos {
-	private List<Lotto> lottos;
+public final class Lottos {
+	private final List<Lotto> lottos;
 
 	public Lottos() {
 		lottos = new ArrayList<>(45);
 	}
 
-	public Lottos(List<Lotto> lottos) {
+	public Lottos(final List<Lotto> lottos) {
 		this.lottos = lottos;
 	}
 
@@ -28,7 +28,7 @@ public class Lottos {
 		return new Lottos(allLottoNumbers.collect(Collectors.toList()));
 	}
 
-	public Lotto indexOfLottos(int index) {
+	public Lotto indexOfLottos(final int index) {
 		return lottos.get(index);
 	}
 

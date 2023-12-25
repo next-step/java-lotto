@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Digit {
+public final class Digit {
 	private final int digit;
 
-	public Digit(int digit) {
+	public Digit(final int digit) {
 		this.digit = digit;
 	}
 
-	public boolean compareTo(Digit y) {
+	public boolean compareTo(final Digit y) {
 		return digit >= y.digit;
 	}
 

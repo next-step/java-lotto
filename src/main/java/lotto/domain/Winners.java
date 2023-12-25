@@ -5,14 +5,10 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
-public class Winners {
+public final class Winners {
 	private List<Lotto> winners;
 
-	public Winners() {
-		this.winners = new ArrayList<>();
-	}
-
-	public Winners(List<Lotto> winners) {
+	public Winners(final List<Lotto> winners) {
 		this.winners = winners;
 	}
 
@@ -20,7 +16,7 @@ public class Winners {
 		return winners;
 	}
 
-	public int countWinningNumbers(List<Lotto> lottos) {
+	public int countWinningNumbers(final List<Lotto> lottos) {
 		int count = 0;
 		for (Lotto winningLotto : winners) {
 			for (Lotto lotto : lottos) {
@@ -33,7 +29,7 @@ public class Winners {
 		return count;
 	}
 
-	public static List<Lotto> winningNumbers(Set<Lotto> lottos) {
+	public static List<Lotto> winningNumbers(final Set<Lotto> lottos) {
 		EnumSet<Lotto> winningNumbers = EnumSet.copyOf(lottos);
 		return new ArrayList<>(winningNumbers);
 	}

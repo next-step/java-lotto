@@ -53,16 +53,16 @@ public enum Lotto {
 
 	private final lotto.domain.Digit value;
 
-	Lotto(Digit value) {
+	Lotto(final Digit value) {
 
 		this.value = value;
 	}
 
-	public boolean isBetween(Digit start, Digit end) {
+	public boolean isBetween(final Digit start, final Digit end) {
 		return value.compareTo(start) && end.compareTo(value);
 	}
 
-	public static Lotto find(Digit number) {
+	public static Lotto find(final Digit number) {
 		return Arrays.stream(Lotto.values()).filter(lotto -> lotto.value.equals(number))
 			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException("1~45까지의 숫자를 입력하세요."));
