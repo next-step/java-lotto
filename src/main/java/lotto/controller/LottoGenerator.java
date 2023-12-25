@@ -12,8 +12,8 @@ public class LottoGenerator {
 	public static List<Lottos> generate(int number) {
 		List<Lottos> entireLottos = new ArrayList<>();
 		for (int i = 0; i < number; i++) {
-    		entireLottos.add(new Lottos().allLottoNumbers());
-    	}
+			entireLottos.add(new Lottos().allLottoNumbers());
+		}
 
 		for (int i = 0; i < number; i++) {
 			List<Lotto> shuffledLottos = entireLottos.get(i).shuffle();

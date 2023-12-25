@@ -11,11 +11,11 @@ import lotto.domain.Lottos;
 import lotto.domain.Winners;
 
 public class WinningNumberChecker {
-	public static int[] check(List<Digit> winningNumbers, List<Lottos> lottosList, int number){
+	public static int[] check(List<Digit> winningNumbers, List<Lottos> lottosList, int number) {
 		int[] numbersOfMatch = new int[number];
 		Set<Lotto> lottoSet = new HashSet<>();
 
-		for (Digit winningNumber : winningNumbers){
+		for (Digit winningNumber : winningNumbers) {
 			Lotto lotto = Lotto.find(winningNumber);
 			lottoSet.add(lotto);
 		}

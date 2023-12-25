@@ -27,14 +27,14 @@ public class WinningNumberCheckerTest {
 
 		List<Lottos> lottosList = new ArrayList<>(1);
 		Lottos lottos = new Lottos();
-    	lottosList.add(lottos);
-		for (Lottos lottoNumbers : lottosList){
+		lottosList.add(lottos);
+		for (Lottos lottoNumbers : lottosList) {
 			lottoNumbers.lottos().add(Lotto.valueOf("ONE"));
-        	lottoNumbers.lottos().add(Lotto.valueOf("TWO"));
-        	lottoNumbers.lottos().add(Lotto.valueOf("THREE"));
-        	lottoNumbers.lottos().add(Lotto.valueOf("FOUR"));
-        	lottoNumbers.lottos().add(Lotto.valueOf("FIVE"));
-        	lottoNumbers.lottos().add(Lotto.valueOf("SIX"));
+			lottoNumbers.lottos().add(Lotto.valueOf("TWO"));
+			lottoNumbers.lottos().add(Lotto.valueOf("THREE"));
+			lottoNumbers.lottos().add(Lotto.valueOf("FOUR"));
+			lottoNumbers.lottos().add(Lotto.valueOf("FIVE"));
+			lottoNumbers.lottos().add(Lotto.valueOf("SIX"));
 		}
 
 		int[] result = WinningNumberChecker.check(winningNumbers, lottosList, number);

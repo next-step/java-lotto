@@ -18,27 +18,27 @@ public class Lottos {
 		this.lottos = lottos;
 	}
 
-	public List<Lotto> shuffle(){
+	public List<Lotto> shuffle() {
 		Collections.shuffle(lottos);
 		return lottos;
 	}
 
-	public Lottos allLottoNumbers(){
+	public Lottos allLottoNumbers() {
 		Stream<Lotto> allLottoNumbers = Arrays.stream(Lotto.values());
 		return new Lottos(allLottoNumbers.collect(Collectors.toList()));
 	}
 
-	public Lotto indexOfLottos (int index){
+	public Lotto indexOfLottos(int index) {
 		return lottos.get(index);
 	}
 
-	public List<Lotto> lottos(){
+	public List<Lotto> lottos() {
 		return lottos;
 	}
 
-	public List<Digit> digits(){
+	public List<Digit> digits() {
 		return lottos.stream()
-    		.map(Lotto::digits)
-    		.collect(Collectors.toList());
+			.map(Lotto::digits)
+			.collect(Collectors.toList());
 	}
 }

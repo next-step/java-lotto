@@ -7,15 +7,15 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 
 public class ResultView {
-	public static void printLottoNumber(List<Lottos> lottosList){
-		for (Lottos lottos : lottosList){
+	public static void printLottoNumber(List<Lottos> lottosList) {
+		for (Lottos lottos : lottosList) {
 			System.out.print("[");
 			System.out.print(String.join(",", new Digits(lottos.digits()).digitToString()));
 			System.out.println("]");
 		}
 	}
 
-	public static void printStatistics(int[] statistics, float rate){
+	public static void printStatistics(int[] statistics, float rate) {
 		System.out.println();
 		System.out.println("당첨 통계");
 		System.out.println("---------");

@@ -11,11 +11,11 @@ public class Digit {
 		this.digit = digit;
 	}
 
-	public boolean compareTo(Digit y){
+	public boolean compareTo(Digit y) {
 		return digit >= y.digit;
 	}
 
-	public int digit(){
+	public int digit() {
 		return digit;
 	}
 

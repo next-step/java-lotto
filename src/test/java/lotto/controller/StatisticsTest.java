@@ -11,6 +11,6 @@ public class StatisticsTest {
 	void 등수마다_일치하는_로또_개수() {
 		int[] numbersOfMatch = {1, 2, 3, 4, 5};
 		int[] result = Statistics.calculate(numbersOfMatch);
-		assertThat(result[2]==1).isTrue();
+		assertThat(result[2] == 1).isTrue();
 	}
 }

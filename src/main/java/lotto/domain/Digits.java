@@ -10,7 +10,7 @@ public class Digits {
 		this.digits = digits;
 	}
 
-	public static List<Digit> create(int[] numbers){
+	public static List<Digit> create(int[] numbers) {
 		List<Digit> digits = new ArrayList<>(6);
 		for (int i = 0; i < numbers.length; i++) {
 			digits.add(new Digit(numbers[i]));
@@ -18,9 +18,9 @@ public class Digits {
 		return digits;
 	}
 
-	public List<String> digitToString(){
+	public List<String> digitToString() {
 		List<String> numberText = new ArrayList<>(6);
-		for (Digit digit: digits){
+		for (Digit digit : digits) {
 			numberText.add(String.valueOf(digit.digit()));
 		}
 		return numberText;

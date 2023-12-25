@@ -62,7 +62,7 @@ public enum Lotto {
 		return value.compareTo(start) && end.compareTo(value);
 	}
 
-	public static Lotto find(Digit number){
+	public static Lotto find(Digit number) {
 		return Arrays.stream(Lotto.values()).filter(lotto -> lotto.value.equals(number))
 			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException("1~45까지의 숫자를 입력하세요."));
@@ -72,7 +72,7 @@ public enum Lotto {
 		return value.equals(digit);
 	}
 
-	public Digit digits(){
+	public Digit digits() {
 		return this.value;
 	}
 }
