@@ -14,6 +14,7 @@ public class LottosTest {
 	void 랜덤_번호가_1부터45까지의_숫자인지_확인() {
 		Lottos lottos = new Lottos();
 		List<Lotto> shuffledLottos = lottos.allLottoNumbers().shuffle();
+
 		assertThat(shuffledLottos.get(0).isBetween(new Digit(1), new Digit(45))).isTrue();
 	}
 }

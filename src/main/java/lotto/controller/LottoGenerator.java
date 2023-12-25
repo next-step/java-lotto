@@ -15,15 +15,26 @@ public final class LottoGenerator {
 			entireLottos.add(new Lottos().allLottoNumbers());
 		}
 
+		return shuffle(number, entireLottos);
+	}
+
+	private static List<Lottos> shuffle(int number, List<Lottos> entireLottos) {
+		List<Lottos> extractedLottos = new ArrayList<>();
 		for (int i = 0; i < number; i++) {
 			List<Lotto> shuffledLottos = entireLottos.get(i).shuffle();
-			List<Lotto> extractedLottos = new ArrayList<>(LOTTOS_SIZE);
-
-			for (int j = 0; j < LOTTOS_SIZE; j++) {
-				extractedLottos.add(shuffledLottos.get(j));
-			}
-			entireLottos.set(i, new Lottos(extractedLottos));
+			extractedLottos = extract(entireLottos, shuffledLottos, i);
 		}
+
+		return extractedLottos;
+	}
+
+	private static List<Lottos> extract(List<Lottos> entireLottos, List<Lotto> shuffledLottos, int i) {
+		List<Lotto> extractedLottos = new ArrayList<>(LOTTOS_SIZE);
+
+		for (int j = 0; j < LOTTOS_SIZE; j++) {
+			extractedLottos.add(shuffledLottos.get(j));
+		}
+		entireLottos.set(i, new Lottos(extractedLottos));
 
 		return entireLottos;
 	}
