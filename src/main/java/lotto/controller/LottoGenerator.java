@@ -8,15 +8,6 @@ import lotto.domain.Lottos;
 
 public final class LottoGenerator {
 	private final static int LOTTOS_SIZE = 6;
-	private final List<Lottos> lottosList;
-
-	public LottoGenerator(List<Lottos> lottosList) {
-		this.lottosList = lottosList;
-	}
-
-	public Lottos indexOfLottosList(int index){
-		return lottosList.get(index);
-	}
 
 	public static List<Lottos> generate(final int number) {
 		List<Lottos> entireLottos = new ArrayList<>();
