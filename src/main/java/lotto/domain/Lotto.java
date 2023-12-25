@@ -57,4 +57,8 @@ public enum Lotto {
 	public boolean isBetween(Digit start, Digit end) {
 		return value.compareTo(start) && end.compareTo(value);
 	}
+
+	public boolean equalTo(final Digit digit) {
+		return value.equals(digit);
+	}
 }

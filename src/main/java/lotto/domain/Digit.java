@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class Digit {
 	private final int digit;
 
@@ -9,5 +11,20 @@ public class Digit {
 
 	public boolean compareTo(Digit y){
 		return digit >= y.digit;
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Digit digit1 = (Digit)o;
+		return digit == digit1.digit;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(digit);
 	}
 }
