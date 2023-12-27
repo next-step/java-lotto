@@ -6,12 +6,10 @@ import lotto.domain.Lottos;
 import lotto.domain.Ticket;
 
 public class WinningNumberChecker {
-	public static int[] check(final List<Integer> winningNumbers, final List<Lottos> lottosList, final int number) {
+	public static int[] check(final int[] winningNumbers, final Ticket ticket, final int number) {
 		int[] numbersOfMatch = new int[number];
 
-		Ticket ticket = new Ticket(lottosList);
-
-		for (int i = 0; i < lottosList.size(); i++) {
+		for (int i = 0; i < ticket.ticket().size(); i++) {
 			numbersOfMatch[i] = ticket.compareTo(winningNumbers, i);
 		}
 

@@ -34,4 +34,9 @@ public class Lotto {
 	public int hashCode() {
 		return Objects.hash(lotto);
 	}
+
+	@Override
+	public String toString() {
+		return Integer.toString(lotto);
+	}
 }

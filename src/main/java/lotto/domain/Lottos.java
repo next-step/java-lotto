@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
@@ -13,15 +14,23 @@ public class Lottos {
 		return lottos.get(index);
 	}
 
-	public int contains(List<Integer> winningNumbers) {
+	public int contains(int[] winningNumbers) {
 		int count = 0;
 		for (Lotto lotto : lottos){
-			for (Integer winningNumber : winningNumbers){
+			for (int winningNumber : winningNumbers){
 				if(lotto.equals(winningNumber)){
 					count++;
 				}
 			}
 		}
 		return count;
+	}
+
+	public List<String> integers(){
+		List<String> result = new ArrayList<>();
+    	for (Lotto lotto : lottos) {
+    		result.add(lotto.toString());
+    	}
+    	return result;
 	}
 }

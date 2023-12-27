@@ -9,7 +9,11 @@ public class Ticket {
 		this.ticket = ticket;
 	}
 
-	public int compareTo(List<Integer> winningNumbers, int index){
+	public List<Lottos> ticket(){
+		return ticket;
+	}
+
+	public int compareTo(int[] winningNumbers, int index){
 		return ticket.get(index).contains(winningNumbers);
 	}
 }

@@ -1,15 +1,17 @@
 package lotto.view;
 
-import java.util.List;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.Ticket;
 
 public final class ResultView {
-	// public static void printLottoNumber(final List<Lottos> lottosList) {
-	// 	for (Lottos lottos : lottosList) {
-	// 		System.out.print("[");
-	// 		System.out.print(String.join(",", new Digits(lottos.digits()).digitToString()));
-	// 		System.out.println("]");
-	// 	}
-	// }
+	public static void printLottoNumber(final Ticket ticket) {
+		for (Lottos lottos : ticket.ticket()) {
+			System.out.print("[");
+			System.out.print(String.join(", ", lottos.integers()));
+			System.out.println("]");
+		}
+	}
 
 	public static void printStatistics(final int[] statistics, final float rate) {
 		System.out.println();

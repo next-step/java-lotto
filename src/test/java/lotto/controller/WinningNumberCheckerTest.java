@@ -18,13 +18,14 @@ public class WinningNumberCheckerTest {
 	@Test
 	void 당첨번호와_내번호를_비교해서_일치하는_개수_반환() {
 		int number = 1;
-		List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+		int[] winningNumbers = {1, 2, 3, 4, 5, 6};
 		List<Lotto> lottoList = Arrays.asList(new Lotto(1), new Lotto(2),
 			new Lotto(3), new Lotto(4), new Lotto(5), new Lotto(6));
 		Lottos lottos = new Lottos(lottoList);
 		List<Lottos> lottosList = List.of(lottos);
+		Ticket ticket = new Ticket(lottosList);
 
-		int[] result = WinningNumberChecker.check(winningNumbers, lottosList, number);
+		int[] result = WinningNumberChecker.check(winningNumbers, ticket, number);
 
 		assertThat(result[0] == 6).isTrue();
 	}
