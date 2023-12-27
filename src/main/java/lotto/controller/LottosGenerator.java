@@ -7,10 +7,10 @@ import java.util.List;
 
 import lotto.domain.Lotto;
 
-public class LottosGenerator {
+public final class LottosGenerator {
 	private final static int LOTTOS_SIZE = 6;
 
-	public static List<Lotto> generate(){
+	public static List<Lotto> generate() {
 		List<Lotto> lottos = new ArrayList<>();
 		List<Integer> entireLottoNumbers = new ArrayList<>(
 			Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,

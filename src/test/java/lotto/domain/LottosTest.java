@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottosTest {
+public final class LottosTest {
 	@DisplayName("당첨 번호를 포함하는지 비교해서 포함하는 개수를 반환한다.")
 	@Test
 	void 당첨번호를_포함하는지_비교해서_개수를_반환한다() {

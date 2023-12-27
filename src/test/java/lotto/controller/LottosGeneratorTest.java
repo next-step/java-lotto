@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottosGeneratorTest {
+public final class LottosGeneratorTest {
 	@DisplayName("로또 번호 6개 생성.")
 	@Test
 	void 로또_번호_6개_생성() {

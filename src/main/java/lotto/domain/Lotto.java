@@ -2,15 +2,15 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class Lotto {
+public final class Lotto {
 	private final Integer lotto;
 
-	public Lotto(Integer lotto){
+	public Lotto(final Integer lotto) {
 		this.lotto = validate(lotto);
 	}
 
-	private Integer validate(Integer lotto){
-		if(lotto >= 1 && lotto <= 45){
+	private Integer validate(final Integer lotto) {
+		if (lotto >= 1 && lotto <= 45) {
 			return lotto;
 		}
 		throw new IllegalArgumentException("1과 45 사이의 숫자를 입력해주세요.");

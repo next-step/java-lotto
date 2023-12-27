@@ -5,7 +5,7 @@ import java.util.List;
 import lotto.domain.Lottos;
 import lotto.domain.Ticket;
 
-public class WinningNumberChecker {
+public final class WinningNumberChecker {
 	public static int[] check(final int[] winningNumbers, final Ticket ticket, final int number) {
 		int[] numbersOfMatch = new int[number];
 

@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoTest {
+public final class LottoTest {
 	@DisplayName("1~45 범위 안의 숫자인지 확인.")
 	@Test
 	void 범위_내의_숫자인지_확인() {

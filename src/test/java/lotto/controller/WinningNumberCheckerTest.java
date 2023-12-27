@@ -13,7 +13,7 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Ticket;
 
-public class WinningNumberCheckerTest {
+public final class WinningNumberCheckerTest {
 	@DisplayName("당첨 번호와 내 번호를 비교해서 일치하는 개수 반환")
 	@Test
 	void 당첨번호와_내번호를_비교해서_일치하는_개수_반환() {
