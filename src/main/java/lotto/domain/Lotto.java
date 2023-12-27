@@ -3,9 +3,9 @@ package lotto.domain;
 import java.util.Objects;
 
 public final class Lotto {
-	private final Integer lotto;
 	private static final Integer ONE = 1;
 	private static final Integer FORTYFIVE = 45;
+	private final Integer lotto;
 
 	public Lotto(final Integer lotto) {
 		this.lotto = validate(lotto);
