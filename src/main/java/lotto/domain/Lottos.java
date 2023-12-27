@@ -25,6 +25,7 @@ public final class Lottos {
 				}
 			}
 		}
+
 		return count;
 	}
 
@@ -33,6 +34,7 @@ public final class Lottos {
 		for (Lotto lotto : lottos) {
 			result.add(lotto.toString());
 		}
+
 		return result;
 	}
 

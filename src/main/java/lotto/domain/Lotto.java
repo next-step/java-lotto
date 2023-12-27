@@ -15,6 +15,7 @@ public final class Lotto {
 		if (lotto >= ONE && lotto <= FORTYFIVE) {
 			return lotto;
 		}
+
 		throw new IllegalArgumentException("1과 45 사이의 숫자를 입력해주세요.");
 	}
 
@@ -29,6 +30,7 @@ public final class Lotto {
 		if (o == null)
 			return false;
 		Integer lotto1 = (Integer)o;
+
 		return Objects.equals(lotto, lotto1);
 	}
 
