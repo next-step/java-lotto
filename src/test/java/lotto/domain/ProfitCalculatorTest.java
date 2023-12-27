@@ -9,13 +9,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public final class ProfitCalculatorTest {
-	@DisplayName("등수마다 일치하는 로또 개수 반환.")
+	@DisplayName("일치하는 로또 개수에 따라 해당 등수가 몇 장인지 센다. result는 4등, 3등, 2등, 1등 장수를 가진 배열")
 	@Test
-	void 등수마다_일치하는_로또_개수() {
-		int[] numbersOfMatch = {1, 2, 3, 4, 5};
+	void 사등_3개일치_가_2장_당첨됨() {
+		int[] numbersOfMatch = {1, 2, 3, 3, 5};
 		int[] result = ProfitCalculator.calculate(numbersOfMatch);
 
-		assertThat(result[2] == 1).isTrue();
+		assertThat(result[0] == 2).isTrue();
 	}
 
 	@DisplayName("당첨 번호와 내 번호를 비교해서 일치하는 개수 반환")
