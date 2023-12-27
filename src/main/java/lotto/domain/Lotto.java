@@ -4,13 +4,15 @@ import java.util.Objects;
 
 public final class Lotto {
 	private final Integer lotto;
+	private static final Integer ONE = 1;
+	private static final Integer FORTYFIVE = 1;
 
 	public Lotto(final Integer lotto) {
 		this.lotto = validate(lotto);
 	}
 
 	private Integer validate(final Integer lotto) {
-		if (lotto >= 1 && lotto <= 45) {
+		if (lotto >= ONE && lotto <= FORTYFIVE) {
 			return lotto;
 		}
 		throw new IllegalArgumentException("1과 45 사이의 숫자를 입력해주세요.");
