@@ -2,17 +2,14 @@ package lotto.view;
 
 import java.util.List;
 
-import lotto.domain.Digits;
-import lotto.domain.Lottos;
-
 public final class ResultView {
-	public static void printLottoNumber(final List<Lottos> lottosList) {
-		for (Lottos lottos : lottosList) {
-			System.out.print("[");
-			System.out.print(String.join(",", new Digits(lottos.digits()).digitToString()));
-			System.out.println("]");
-		}
-	}
+	// public static void printLottoNumber(final List<Lottos> lottosList) {
+	// 	for (Lottos lottos : lottosList) {
+	// 		System.out.print("[");
+	// 		System.out.print(String.join(",", new Digits(lottos.digits()).digitToString()));
+	// 		System.out.println("]");
+	// 	}
+	// }
 
 	public static void printStatistics(final int[] statistics, final float rate) {
 		System.out.println();

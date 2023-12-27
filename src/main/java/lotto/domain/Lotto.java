@@ -1,76 +1,37 @@
 package lotto.domain;
 
-import java.util.Arrays;
+import java.util.Objects;
 
-public enum Lotto {
-	ONE(new Digit(1)),
-	TWO(new Digit(2)),
-	THREE(new Digit(3)),
-	FOUR(new Digit(4)),
-	FIVE(new Digit(5)),
-	SIX(new Digit(6)),
-	SEVEN(new Digit(7)),
-	EIGHT(new Digit(8)),
-	NINE(new Digit(9)),
-	TEN(new Digit(10)),
-	ELEVEN(new Digit(11)),
-	TWELVE(new Digit(12)),
-	THIRTEEN(new Digit(13)),
-	FOURTEEN(new Digit(14)),
-	FIFTEEN(new Digit(15)),
-	SIXTEEN(new Digit(16)),
-	SEVENTEEN(new Digit(17)),
-	EIGHTEEN(new Digit(18)),
-	NINETEEN(new Digit(19)),
-	TWENTY(new Digit(20)),
-	TWENTYONE(new Digit(21)),
-	TWENTYTWO(new Digit(22)),
-	TWENTYTHREE(new Digit(23)),
-	TWENTYFOUR(new Digit(24)),
-	TWENTYFIVE(new Digit(25)),
-	TWENTYSIX(new Digit(26)),
-	TWENTYSEVEN(new Digit(27)),
-	TWENTYEIGHT(new Digit(28)),
-	TWENTYNINESIX(new Digit(29)),
-	THIRTY(new Digit(30)),
-	THIRTYONE(new Digit(31)),
-	THIRTYTWO(new Digit(32)),
-	THIRTYTREE(new Digit(33)),
-	THIRTYFOUR(new Digit(34)),
-	THIRTYFIVE(new Digit(35)),
-	THIRTYSIX(new Digit(36)),
-	THIRTYSEVEN(new Digit(37)),
-	THIRTYEIGHT(new Digit(38)),
-	THIRTYNINE(new Digit(39)),
-	FOURTY(new Digit(40)),
-	FOURTYONE(new Digit(41)),
-	FOURTYTWO(new Digit(42)),
-	FOURTYTHREE(new Digit(43)),
-	FOURTYFOUR(new Digit(44)),
-	FOURTYFIVE(new Digit(45));
+public class Lotto {
+	private final Integer lotto;
 
-	private final lotto.domain.Digit value;
-
-	Lotto(final Digit value) {
-
-		this.value = value;
+	public Lotto(Integer lotto){
+		this.lotto = validate(lotto);
 	}
 
-	public boolean isBetween(final Digit start, final Digit end) {
-		return value.compareTo(start) && end.compareTo(value);
+	private Integer validate(Integer lotto){
+		if(lotto >= 1 && lotto <= 45){
+			return lotto;
+		}
+		throw new IllegalArgumentException("1과 45 사이의 숫자를 입력해주세요.");
 	}
 
-	public static Lotto find(final Digit number) {
-		return Arrays.stream(Lotto.values()).filter(lotto -> lotto.value.equals(number))
-			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException("1~45까지의 숫자를 입력하세요."));
+	public boolean isBetween(final Integer start, final Integer end) {
+		return lotto >= start && lotto <= end;
 	}
 
-	public boolean equalTo(final Digit digit) {
-		return value.equals(digit);
+	@Override
+	public boolean equals(final Object o) {
+		if (this.lotto == o)
+			return true;
+		if (o == null)
+			return false;
+		Integer lotto1 = (Integer)o;
+		return Objects.equals(lotto, lotto1);
 	}
 
-	public Digit digits() {
-		return this.value;
+	@Override
+	public int hashCode() {
+		return Objects.hash(lotto);
 	}
 }

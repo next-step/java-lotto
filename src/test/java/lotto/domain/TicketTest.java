@@ -9,15 +9,17 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottosTest {
-	@DisplayName("당첨 번호를 포함하는지 비교해서 포함하는 개수를 반환한다.")
+public class TicketTest {
+	@DisplayName("티켓의 첫번째 번호들과 당첨번호를 비교해서 맞힌 개수를 반환한다.")
 	@Test
-	void 당첨번호를_포함하는지_비교해서_개수를_반환한다() {
+	void 티켓의_첫번째_번호들과_당첨번호를_비교해서_맞힌_개수를_반환한다() {
 		List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 7);
 		List<Lotto> lottoList = Arrays.asList(new Lotto(1), new Lotto(2),
 			new Lotto(3), new Lotto(4), new Lotto(5), new Lotto(6));
 		Lottos lottos = new Lottos(lottoList);
+		List<Lottos> lottosList = List.of(lottos);
+		Ticket ticket = new Ticket(lottosList);
 
-		assertThat(lottos.contains(winningNumbers)).isEqualTo(5);
+		assertThat(ticket.compareTo(winningNumbers, 0)).isEqualTo(5);
 	}
 }
