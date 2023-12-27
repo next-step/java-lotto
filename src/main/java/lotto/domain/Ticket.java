@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class Ticket {
@@ -15,5 +16,15 @@ public final class Ticket {
 
 	public int compareTo(final int[] winningNumbers, final int index) {
 		return ticket.get(index).contains(winningNumbers);
+	}
+
+	public static List<Lottos> generate(final int number) {
+		List<Lottos> entireLottos = new ArrayList<>();
+
+		for (int i = 0; i < number; i++) {
+			entireLottos.add(new Lottos(LottosGenerator.generate()));
+		}
+
+		return entireLottos;
 	}
 }

@@ -5,7 +5,7 @@ import java.util.Objects;
 public final class Lotto {
 	private final Integer lotto;
 	private static final Integer ONE = 1;
-	private static final Integer FORTYFIVE = 1;
+	private static final Integer FORTYFIVE = 45;
 
 	public Lotto(final Integer lotto) {
 		this.lotto = validate(lotto);

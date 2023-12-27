@@ -1,6 +1,8 @@
-package lotto.controller;
+package lotto.domain;
 
-public enum Statistics {
+import lotto.domain.Ticket;
+
+public enum ProfitCalculator {
 	PRIZE_COUNT(4),
 	MATCH_COUNT_MIN(3),
 	MATCH_COUNT_MAX(6),
@@ -11,7 +13,7 @@ public enum Statistics {
 
 	private final Integer value;
 
-	Statistics(Integer value) {
+	ProfitCalculator(Integer value) {
 		this.value = value;
 	}
 
@@ -58,5 +60,15 @@ public enum Statistics {
 		}
 
 		return (float)prizeMoney / price;
+	}
+
+	public static int[] check(final int[] winningNumbers, final Ticket ticket, final int number) {
+		int[] numbersOfMatch = new int[number];
+
+		for (int i = 0; i < ticket.ticket().size(); i++) {
+			numbersOfMatch[i] = ticket.compareTo(winningNumbers, i);
+		}
+
+		return numbersOfMatch;
 	}
 }

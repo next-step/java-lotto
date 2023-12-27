@@ -1,9 +1,11 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public final class Lottos {
+	private final static int LOTTOS_SIZE = 6;
 	private final List<Lotto> lottos;
 
 	public Lottos(final List<Lotto> lottos) {
@@ -32,5 +34,22 @@ public final class Lottos {
 			result.add(lotto.toString());
 		}
 		return result;
+	}
+
+	public static List<Lotto> generate() {
+		List<Lotto> lottos = new ArrayList<>();
+		List<Integer> entireLottoNumbers = new ArrayList<>();
+
+		for (int i = 1; i <= 45; i++) {
+			entireLottoNumbers.add(i);
+		}
+
+		Collections.shuffle(entireLottoNumbers);
+
+		for (int i = 0; i < LOTTOS_SIZE; i++) {
+			lottos.add(new Lotto(entireLottoNumbers.get(i)));
+		}
+
+		return lottos;
 	}
 }
