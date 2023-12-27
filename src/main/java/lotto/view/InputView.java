@@ -7,11 +7,8 @@ public final class InputView {
 	private static final int WON1000 = 1000;
 	private static final Scanner SCANNER = new Scanner(System.in);
 
-	public static void printPriceInput() {
+	public static int printPriceInput() {
 		System.out.println("구입금액을 입력해 주세요.");
-	}
-
-	public static int inputInt() {
 		return Integer.parseInt(validate(SCANNER.nextLine()));
 	}
 

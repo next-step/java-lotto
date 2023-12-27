@@ -14,8 +14,7 @@ import lotto.domain.Lottos;
 
 public class LottoApplicaion {
 	public static void main(String[] args) {
-		printPriceInput();
-		int price = inputInt();
+		int price = printPriceInput();
 		int count = printPrice(price);
 		List<Lottos> lottosList = LottoGenerator.generate(count);
 		printLottoNumber(lottosList);
