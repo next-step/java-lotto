@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.Ticket;
-
 public enum ProfitCalculator {
 	PRIZE_COUNT(4),
 	MATCH_COUNT_MIN(3),

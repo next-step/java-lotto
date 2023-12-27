@@ -8,11 +8,6 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.ProfitCalculator;
-import lotto.domain.Ticket;
-
 public final class ProfitCalculatorTest {
 	@DisplayName("등수마다 일치하는 로또 개수 반환.")
 	@Test
