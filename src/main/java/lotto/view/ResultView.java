@@ -1,15 +1,28 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Ticket;
 
 public final class ResultView {
 	public static void printLottoNumber(final Ticket ticket) {
 		for (Lotto lotto : ticket.ticket()) {
 			System.out.print("[");
-			System.out.print(String.join(", ", lotto.integers()));
+			System.out.print(String.join(", ", integers(lotto)));
 			System.out.println("]");
 		}
+	}
+
+	private static List<String> integers(Lotto lotto) {
+		List<String> result = new ArrayList<>();
+		for (LottoNumber lottoNumber : lotto.lotto()) {
+			result.add(lottoNumber.toString());
+		}
+
+		return result;
 	}
 
 	public static void printStatistics(final int[] statistics, final float rate) {

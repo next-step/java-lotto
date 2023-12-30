@@ -45,15 +45,6 @@ public final class Lotto {
 		return lotto;
 	}
 
-	public List<String> integers() {
-		List<String> result = new ArrayList<>();
-		for (LottoNumber lottoNumber : lotto) {
-			result.add(lottoNumber.toString());
-		}
-
-		return result;
-	}
-
 	public static List<LottoNumber> generate() {
 		List<LottoNumber> lottos = new ArrayList<>();
 		List<Integer> entireLottoNumbers = new ArrayList<>();
