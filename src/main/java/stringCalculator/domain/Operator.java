@@ -12,7 +12,7 @@ public enum Operator {
     private final String value;
     private final BinaryOperator<Integer> operation;
 
-    Operator(String value, BinaryOperator<Integer> operation){
+    Operator(String value, BinaryOperator<Integer> operation) {
         this.value = value;
         this.operation = operation;
     }
@@ -20,12 +20,12 @@ public enum Operator {
     public static Operator find(String stringOperator) {
         return Arrays.stream(values()).filter(operator -> operator.value.equals(stringOperator))
                      .findFirst()
-                     .orElseThrow( () -> new IllegalArgumentException("Need correct arithmetic operator"));
-        }
+                     .orElseThrow(() -> new IllegalArgumentException("Need correct arithmetic operator"));
+    }
 
-    public int calculate(int originalNumber, int toCalculateNumber ){
+    public int calculate(int originalNumber, int toCalculateNumber) {
         validation(toCalculateNumber);
-        return this.operation.apply(originalNumber,  toCalculateNumber);
+        return this.operation.apply(originalNumber, toCalculateNumber);
     }
 
     private void validation(int toCalculateNumber) {
@@ -43,7 +43,6 @@ public enum Operator {
     private boolean isZero(int input) {
         return input == 0;
     }
-
 
 }
 
