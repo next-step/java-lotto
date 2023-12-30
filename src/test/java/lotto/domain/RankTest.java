@@ -8,12 +8,12 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public final class ProfitCalculatorTest {
+public final class RankTest {
 	@DisplayName("일치하는 로또 개수에 따라 해당 등수가 몇 장인지 센다. result는 4등, 3등, 2등, 1등 장수를 가진 배열")
 	@Test
 	void 사등_3개일치_가_2장_당첨됨() {
 		int[] numbersOfMatch = {1, 2, 3, 3, 5};
-		int[] result = ProfitCalculator.calculate(numbersOfMatch);
+		int[] result = Rank.calculate(numbersOfMatch);
 
 		assertThat(result[0] == 2).isTrue();
 	}
@@ -29,7 +29,7 @@ public final class ProfitCalculatorTest {
 		List<Lotto> lottoList = List.of(lotto);
 		Ticket ticket = new Ticket(lottoList);
 
-		int[] result = ProfitCalculator.check(winningNumbers.lotto(), ticket, number);
+		int[] result = Rank.check(winningNumbers.lotto(), ticket);
 
 		assertThat(result[0] == 6).isTrue();
 	}
