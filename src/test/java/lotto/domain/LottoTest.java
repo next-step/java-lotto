@@ -13,11 +13,9 @@ public final class LottoTest {
 	@Test
 	void 당첨번호를_포함하는지_비교해서_개수를_반환한다() {
 		Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 7);
-		List<LottoNumber> lotto = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
-			new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-		Lotto uniqueLotto = new Lotto(lotto);
+		Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
 
-		assertThat(uniqueLotto.contains(winningNumbers.lotto())).isEqualTo(5);
+		assertThat(lotto.contains(winningNumbers.lotto())).isEqualTo(5);
 	}
 
 	@DisplayName("로또 번호 6개 생성.")

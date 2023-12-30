@@ -13,9 +13,7 @@ public final class TicketTest {
 	@Test
 	void 티켓의_첫번째_번호들과_당첨번호를_비교해서_맞힌_개수를_반환한다() {
 		Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 7);
-		List<LottoNumber> lottoNumberList = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
-			new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-		Lotto lotto = new Lotto(lottoNumberList);
+		Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
 		List<Lotto> lottoList = List.of(lotto);
 		Ticket ticket = new Ticket(lottoList);
 
