@@ -30,28 +30,34 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    public LottoNumbers(String stringLottoNumbers) {
-        this.lottoNumbers = Arrays.stream(stringLottoNumbers.split(DELIMITER))
-                                  .map(number -> new LottoNumber(Integer.parseInt(number)))
-                                  .collect(Collectors.toList());
-    }
-
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+        validate();
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
-        return lottoNumbers.stream()
-                           .anyMatch(singleLottoNumber -> singleLottoNumber.equals(lottoNumber));
+    public LottoNumbers(String stringLottoNumbers) {
+        this(Arrays.stream(stringLottoNumbers.split(DELIMITER))
+                   .map(number -> new LottoNumber(Integer.parseInt(number)))
+                   .collect(Collectors.toList()));
+    }
+
+    public LottoNumbers(Integer... integerLottoNumbers) {
+        this(Arrays.stream(integerLottoNumbers)
+                   .map(number -> new LottoNumber(number))
+                   .collect(Collectors.toList()));
     }
 
     public void validate() {
         if (!lengthCheck()) {
-            throw new IllegalArgumentException("6개 이상의 숫자를 입력해주세요.");
+            throw new IllegalArgumentException("숫자 6개 만 입력해주세요");
         }
         if (!duplicateValueCheck()) {
             throw new IllegalArgumentException("중복되는 값이 있습니다.");
         }
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     private boolean lengthCheck() {

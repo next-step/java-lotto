@@ -5,15 +5,16 @@ import java.util.List;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
+import lotto.domain.PrizeAmount;
 
 public class OutputView {
 
+    private static final int LOTTO_SMALLEST_PRIZE_DUPLICATE_COUNT = 3;
+
+    private static final int LOTTO_BIGGEST_PRIZE_DUPLICATE_COUNT = 6;
+
     public static void numberOfLotto(int lottoCount) {
         System.out.println(lottoCount + "개를 구매했습니다.");
-    }
-
-    public static void lottoNumbers(LottoNumbers lottoNumbers) {
-        System.out.println(lottoNumbers.toString());
     }
 
     public static void resultStartingPoint() {
@@ -22,10 +23,10 @@ public class OutputView {
     }
 
     public static void winningLottoCounts(LottoResult result) {
-        System.out.println("3개 일치 (5000원)- " + result.duplicateCount(3) + "개");
-        System.out.println("4개 일치 (50000원)- " + result.duplicateCount(4) + "개");
-        System.out.println("5개 일치 (1500000원)- " + result.duplicateCount(5) + "개");
-        System.out.println("6개 일치 (2000000000원)- " + result.duplicateCount(6) + "개");
+
+        for (int i = LOTTO_SMALLEST_PRIZE_DUPLICATE_COUNT; i <= LOTTO_BIGGEST_PRIZE_DUPLICATE_COUNT; i++) {
+            System.out.println(i + "개 일치 (" + PrizeAmount.findPrizeAmount(i) + "원)- " + result.duplicateCount(i) + "개");
+        }
     }
 
     public static void rateOfReturn(float rateOfReturn) {
