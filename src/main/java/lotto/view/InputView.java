@@ -1,9 +1,7 @@
 package lotto.view;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 

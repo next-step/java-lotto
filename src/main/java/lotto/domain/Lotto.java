@@ -9,7 +9,7 @@ import java.util.Set;
 
 public final class Lotto {
 	private final static int LOTTO_SIZE = 6;
-	private final Set<LottoNumber> lotto;
+	private Set<LottoNumber> lotto;
 
 	public Lotto(final List<LottoNumber> lotto) {
 		Set<LottoNumber> uniqueLotto =  Set.copyOf(lotto);
@@ -21,14 +21,14 @@ public final class Lotto {
 		this.lotto = uniqueLotto;
 	}
 
-	public Lotto(int i, int i1, int i2, int i3, int i4, int i5) {
-		this.lotto = new HashSet<>(
-    		Arrays.asList(new LottoNumber(i), new LottoNumber(i1), new LottoNumber(i2), new LottoNumber(i3),
-    			new LottoNumber(i4), new LottoNumber(i5)));
+	public Lotto(Integer... numbers) {
+		this.lotto = new HashSet<>(6);
+		for (Integer number : numbers){
+			this.lotto.add(new LottoNumber(number));
+		}
 	}
 
 	public int contains(final Set<LottoNumber> winningNumbers) {
-		// 당첨 번호 또한 6개의 값을 가지고, Lottos와 같은 특성을 가지지 않을까?
 		int count = 0;
 		for (LottoNumber lottoNumber : lotto) {
 			for (LottoNumber winningNumber : winningNumbers) {
