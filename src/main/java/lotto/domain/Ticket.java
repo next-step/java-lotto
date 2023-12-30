@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class Ticket {
-	private final List<Lottos> ticket;
+	private final List<Lotto> ticket;
 
-	public Ticket(final List<Lottos> ticket) {
+	public Ticket(final List<Lotto> ticket) {
 		this.ticket = ticket;
 	}
 
-	public List<Lottos> ticket() {
+	public List<Lotto> ticket() {
 		return ticket;
 	}
 
@@ -18,13 +18,13 @@ public final class Ticket {
 		return ticket.get(index).contains(winningNumbers);
 	}
 
-	public static List<Lottos> generate(final int number) {
-		List<Lottos> entireLottos = new ArrayList<>();
+	public static List<Lotto> generate(final int number) {
+		List<Lotto> entireLotto = new ArrayList<>();
 
 		for (int i = 0; i < number; i++) {
-			entireLottos.add(new Lottos(Lottos.generate()));
+			entireLotto.add(new Lotto(Lotto.generate()));
 		}
 
-		return entireLottos;
+		return entireLotto;
 	}
 }

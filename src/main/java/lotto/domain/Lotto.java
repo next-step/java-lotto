@@ -1,46 +1,57 @@
 package lotto.domain;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public final class Lotto {
-	private static final Integer ONE = 1;
-	private static final Integer FORTYFIVE = 45;
-	private final Integer lotto;
+	private final static int LOTTOS_SIZE = 6;
+	private final List<LottoNumber> lotto;
 
-	public Lotto(final Integer lotto) {
-		this.lotto = validate(lotto);
+	public Lotto(final List<LottoNumber> lotto) {
+		this.lotto = lotto;
 	}
 
-	private Integer validate(final Integer lotto) {
-		if (lotto >= ONE && lotto <= FORTYFIVE) {
-			return lotto;
+	public LottoNumber indexOfLotto(final int index) {
+		return lotto.get(index);
+	}
+
+	public int contains(final int[] winningNumbers) {
+		int count = 0;
+		for (LottoNumber lottoNumber : lotto) {
+			for (int winningNumber : winningNumbers) {
+				if (lottoNumber.equals(winningNumber)) {
+					count++;
+				}
+			}
 		}
 
-		throw new IllegalArgumentException("1과 45 사이의 숫자를 입력해주세요.");
+		return count;
 	}
 
-	public boolean isBetween(final Integer start, final Integer end) {
-		return lotto >= start && lotto <= end;
+	public List<String> integers() {
+		List<String> result = new ArrayList<>();
+		for (LottoNumber lottoNumber : lotto) {
+			result.add(lottoNumber.toString());
+		}
+
+		return result;
 	}
 
-	@Override
-	public boolean equals(final Object o) {
-		if (this.lotto == o)
-			return true;
-		if (o == null)
-			return false;
-		Integer lotto1 = (Integer)o;
+	public static List<LottoNumber> generate() {
+		List<LottoNumber> lottos = new ArrayList<>();
+		List<Integer> entireLottoNumbers = new ArrayList<>();
 
-		return Objects.equals(lotto, lotto1);
-	}
+		for (int i = 1; i <= 45; i++) {
+			entireLottoNumbers.add(i);
+		}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(lotto);
-	}
+		Collections.shuffle(entireLottoNumbers);
 
-	@Override
-	public String toString() {
-		return Integer.toString(lotto);
+		for (int i = 0; i < LOTTOS_SIZE; i++) {
+			lottos.add(new LottoNumber(entireLottoNumbers.get(i)));
+		}
+
+		return lottos;
 	}
 }

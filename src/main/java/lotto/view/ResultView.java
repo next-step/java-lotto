@@ -1,13 +1,13 @@
 package lotto.view;
 
-import lotto.domain.Lottos;
+import lotto.domain.Lotto;
 import lotto.domain.Ticket;
 
 public final class ResultView {
 	public static void printLottoNumber(final Ticket ticket) {
-		for (Lottos lottos : ticket.ticket()) {
+		for (Lotto lotto : ticket.ticket()) {
 			System.out.print("[");
-			System.out.print(String.join(", ", lottos.integers()));
+			System.out.print(String.join(", ", lotto.integers()));
 			System.out.println("]");
 		}
 	}
