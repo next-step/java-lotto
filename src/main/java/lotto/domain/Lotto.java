@@ -12,7 +12,7 @@ public final class Lotto {
 	private Set<LottoNumber> lotto;
 
 	public Lotto(final List<LottoNumber> lotto) {
-		Set<LottoNumber> uniqueLotto =  Set.copyOf(lotto);
+		Set<LottoNumber> uniqueLotto = Set.copyOf(lotto);
 
 		if (uniqueLotto.size() != LOTTO_SIZE) {
 			throw new IllegalArgumentException("로또넘버 개수는 6개여야 합니다.");
@@ -23,7 +23,7 @@ public final class Lotto {
 
 	public Lotto(Integer... numbers) {
 		this.lotto = new HashSet<>(6);
-		for (Integer number : numbers){
+		for (Integer number : numbers) {
 			this.lotto.add(new LottoNumber(number));
 		}
 	}
@@ -41,7 +41,7 @@ public final class Lotto {
 		return count;
 	}
 
-	public Set<LottoNumber> lotto(){
+	public Set<LottoNumber> lotto() {
 		return lotto;
 	}
 

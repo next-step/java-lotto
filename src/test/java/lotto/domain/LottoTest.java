@@ -17,7 +17,6 @@ public final class LottoTest {
 			new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
 		Lotto uniqueLotto = new Lotto(lotto);
 
-
 		assertThat(uniqueLotto.contains(winningNumbers.lotto())).isEqualTo(5);
 	}
 
