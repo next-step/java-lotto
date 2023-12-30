@@ -2,18 +2,22 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public final class Lotto {
-	private final static int LOTTOS_SIZE = 6;
-	private final List<LottoNumber> lotto;
+	private final static int LOTTO_SIZE = 6;
+	private final Set<LottoNumber> lotto;
 
 	public Lotto(final List<LottoNumber> lotto) {
-		this.lotto = lotto;
-	}
+		Set<LottoNumber> uniqueLotto = new HashSet<>(lotto);
 
-	public LottoNumber indexOfLotto(final int index) {
-		return lotto.get(index);
+		if (uniqueLotto.size() != LOTTO_SIZE) {
+			throw new IllegalArgumentException("로또넘버 개수는 6개여야 합니다.");
+		}
+
+		this.lotto = uniqueLotto;
 	}
 
 	public int contains(final int[] winningNumbers) {
@@ -48,7 +52,7 @@ public final class Lotto {
 
 		Collections.shuffle(entireLottoNumbers);
 
-		for (int i = 0; i < LOTTOS_SIZE; i++) {
+		for (int i = 0; i < LOTTO_SIZE; i++) {
 			lottos.add(new LottoNumber(entireLottoNumbers.get(i)));
 		}
 
