@@ -30,9 +30,8 @@ public final class LottoNumber {
 			return true;
 		if (o == null)
 			return false;
-		Integer lotto1 = (Integer)o;
-
-		return Objects.equals(lottoNumber, lotto1);
+		LottoNumber lotto1 = (LottoNumber)o;
+		return Objects.equals(lottoNumber, lotto1.lottoNumber);
 	}
 
 	@Override

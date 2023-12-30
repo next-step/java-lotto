@@ -3,6 +3,11 @@ package lotto;
 import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
 
+import java.util.List;
+import java.util.Set;
+
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.ProfitCalculator;
 import lotto.domain.Ticket;
 
@@ -13,7 +18,7 @@ public final class LottoApplicaion {
 		Ticket ticket = new Ticket(Ticket.generate(count));
 		printLottoNumber(ticket);
 		printWinningNumber();
-		int[] winningNumbers = winningNumbers(inputText());
+		Set<LottoNumber> winningNumbers = winningNumbers(inputText());
 		int[] statistics = ProfitCalculator.calculate(ProfitCalculator.check(winningNumbers, ticket, count));
 		printStatistics(statistics, ProfitCalculator.calculateRateOfReturn(statistics, price));
 	}

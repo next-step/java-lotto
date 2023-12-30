@@ -22,14 +22,14 @@ public final class ProfitCalculatorTest {
 	@Test
 	void 당첨번호와_내번호를_비교해서_일치하는_개수_반환() {
 		int number = 1;
-		int[] winningNumbers = {1, 2, 3, 4, 5, 6};
+		Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
 		List<LottoNumber> lottoNumberList = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
 			new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
 		Lotto lotto = new Lotto(lottoNumberList);
 		List<Lotto> lottoList = List.of(lotto);
 		Ticket ticket = new Ticket(lottoList);
 
-		int[] result = ProfitCalculator.check(winningNumbers, ticket, number);
+		int[] result = ProfitCalculator.check(winningNumbers.lotto(), ticket, number);
 
 		assertThat(result[0] == 6).isTrue();
 	}

@@ -12,12 +12,13 @@ public final class LottoTest {
 	@DisplayName("당첨 번호를 포함하는지 비교해서 포함하는 개수를 반환한다.")
 	@Test
 	void 당첨번호를_포함하는지_비교해서_개수를_반환한다() {
-		int[] winningNumbers = {1, 2, 3, 4, 5, 7};
-		List<LottoNumber> lottoNumberList = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
+		Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 7);
+		List<LottoNumber> lotto = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
 			new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-		Lotto lotto = new Lotto(lottoNumberList);
+		Lotto uniqueLotto = new Lotto(lotto);
 
-		assertThat(lotto.contains(winningNumbers)).isEqualTo(5);
+
+		assertThat(uniqueLotto.contains(winningNumbers.lotto())).isEqualTo(5);
 	}
 
 	@DisplayName("로또 번호 6개 생성.")

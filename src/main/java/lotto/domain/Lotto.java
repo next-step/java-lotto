@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +12,7 @@ public final class Lotto {
 	private final Set<LottoNumber> lotto;
 
 	public Lotto(final List<LottoNumber> lotto) {
-		Set<LottoNumber> uniqueLotto = new HashSet<>(lotto);
+		Set<LottoNumber> uniqueLotto =  Set.copyOf(lotto);
 
 		if (uniqueLotto.size() != LOTTO_SIZE) {
 			throw new IllegalArgumentException("로또넘버 개수는 6개여야 합니다.");
@@ -20,10 +21,17 @@ public final class Lotto {
 		this.lotto = uniqueLotto;
 	}
 
-	public int contains(final int[] winningNumbers) {
+	public Lotto(int i, int i1, int i2, int i3, int i4, int i5) {
+		this.lotto = new HashSet<>(
+    		Arrays.asList(new LottoNumber(i), new LottoNumber(i1), new LottoNumber(i2), new LottoNumber(i3),
+    			new LottoNumber(i4), new LottoNumber(i5)));
+	}
+
+	public int contains(final Set<LottoNumber> winningNumbers) {
+		// 당첨 번호 또한 6개의 값을 가지고, Lottos와 같은 특성을 가지지 않을까?
 		int count = 0;
 		for (LottoNumber lottoNumber : lotto) {
-			for (int winningNumber : winningNumbers) {
+			for (LottoNumber winningNumber : winningNumbers) {
 				if (lottoNumber.equals(winningNumber)) {
 					count++;
 				}
@@ -31,6 +39,10 @@ public final class Lotto {
 		}
 
 		return count;
+	}
+
+	public Set<LottoNumber> lotto(){
+		return lotto;
 	}
 
 	public List<String> integers() {

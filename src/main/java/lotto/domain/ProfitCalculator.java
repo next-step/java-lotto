@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.List;
+import java.util.Set;
+
 public enum ProfitCalculator {
 	PRIZE_COUNT(4),
 	MATCH_COUNT_MIN(3),
@@ -60,7 +63,7 @@ public enum ProfitCalculator {
 		return (float)prizeMoney / price;
 	}
 
-	public static int[] check(final int[] winningNumbers, final Ticket ticket, final int number) {
+	public static int[] check(final Set<LottoNumber> winningNumbers, final Ticket ticket, final int number) {
 		int[] numbersOfMatch = new int[number];
 
 		for (int i = 0; i < ticket.ticket().size(); i++) {
