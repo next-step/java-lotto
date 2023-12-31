@@ -2,7 +2,6 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +20,6 @@ public final class RankTest {
 	@DisplayName("당첨 번호와 내 번호를 비교해서 일치하는 개수 반환")
 	@Test
 	void 당첨번호와_내번호를_비교해서_일치하는_개수_반환() {
-		int number = 1;
 		Lotto winningNumbers = new Lotto(1, 2, 3, 4, 5, 6);
 		Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
 		List<Lotto> lottoList = List.of(lotto);

@@ -18,7 +18,7 @@ public final class LottoApplicaion {
 
 		printWinningNumber();
 		Set<LottoNumber> winningNumbers = winningNumbers(inputText());
-		
+
 		int[] statistics = Rank.calculate(Rank.check(winningNumbers, ticket));
 		printStatistics(statistics, Rank.calculateRateOfReturn(statistics, price));
 	}
