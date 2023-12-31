@@ -15,8 +15,10 @@ public final class LottoApplicaion {
 		int count = printPrice(price);
 		Ticket ticket = new Ticket(Ticket.generate(count));
 		printLottoNumber(ticket);
+
 		printWinningNumber();
 		Set<LottoNumber> winningNumbers = winningNumbers(inputText());
+		
 		int[] statistics = Rank.calculate(Rank.check(winningNumbers, ticket));
 		printStatistics(statistics, Rank.calculateRateOfReturn(statistics, price));
 	}
