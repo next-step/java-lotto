@@ -46,7 +46,7 @@ public final class Lotto {
 		return lotto;
 	}
 
-	public static List<LottoNumber> generate() {
+	public List<LottoNumber> generate() {
 		List<LottoNumber> lotto = new ArrayList<>();
 		List<Integer> entireLottoNumbers = new ArrayList<>();
 
