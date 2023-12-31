@@ -8,7 +8,7 @@ import java.util.Set;
 
 public final class Lotto {
 	private final static int LOTTO_SIZE = 6;
-	private Set<LottoNumber> lotto;
+	private final Set<LottoNumber> lotto;
 
 	public Lotto(final List<LottoNumber> lotto) {
 		Set<LottoNumber> uniqueLotto = Set.copyOf(lotto);

@@ -22,7 +22,7 @@ public final class Ticket {
 	public static List<Lotto> generate(final int number) {
 		List<Lotto> entireLotto = new ArrayList<>();
 		Lotto lotto = new Lotto();
-		
+
 		for (int i = 0; i < number; i++) {
 			entireLotto.add(new Lotto(lotto.generate()));
 		}
