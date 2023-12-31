@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -23,6 +22,7 @@ public final class Lotto {
 
 	public Lotto(Integer... numbers) {
 		this.lotto = new HashSet<>(6);
+
 		for (Integer number : numbers) {
 			this.lotto.add(new LottoNumber(number));
 		}
@@ -30,6 +30,7 @@ public final class Lotto {
 
 	public int contains(final Set<LottoNumber> winningNumbers) {
 		int count = 0;
+
 		for (LottoNumber lottoNumber : lotto) {
 			for (LottoNumber winningNumber : winningNumbers) {
 				if (lottoNumber.equals(winningNumber)) {
@@ -46,7 +47,7 @@ public final class Lotto {
 	}
 
 	public static List<LottoNumber> generate() {
-		List<LottoNumber> lottos = new ArrayList<>();
+		List<LottoNumber> lotto = new ArrayList<>();
 		List<Integer> entireLottoNumbers = new ArrayList<>();
 
 		for (int i = 1; i <= 45; i++) {
@@ -56,9 +57,9 @@ public final class Lotto {
 		Collections.shuffle(entireLottoNumbers);
 
 		for (int i = 0; i < LOTTO_SIZE; i++) {
-			lottos.add(new LottoNumber(entireLottoNumbers.get(i)));
+			lotto.add(new LottoNumber(entireLottoNumbers.get(i)));
 		}
 
-		return lottos;
+		return lotto;
 	}
 }

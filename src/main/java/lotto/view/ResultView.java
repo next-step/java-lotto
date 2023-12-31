@@ -18,6 +18,7 @@ public final class ResultView {
 
 	private static List<String> integers(Lotto lotto) {
 		List<String> result = new ArrayList<>();
+
 		for (LottoNumber lottoNumber : lotto.lotto()) {
 			result.add(lottoNumber.toString());
 		}
