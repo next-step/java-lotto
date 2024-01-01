@@ -3,10 +3,7 @@ package lotto.domain;
 import java.util.List;
 
 public enum Rank {
-	BONUS_COUNT(0, 0, 1),
 	PRIZE_COUNT(0, 0, 5),
-	MATCH_COUNT_MIN(0, 3, 0),
-	MATCH_COUNT_MAX(0, 6, 0),
 	RANK5(5, 3, 5000),
 	RANK4(4, 4, 50000),
 	RANK3(3, 5, 1500000),
