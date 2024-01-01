@@ -13,7 +13,7 @@ public final class InputView {
 
 	public static int printPriceInput() {
 		System.out.println("구입금액을 입력해 주세요.");
-		return Integer.parseInt(validate(SCANNER.nextLine()));
+		return Integer.parseInt(inputText());
 	}
 
 	public static String inputText() {
@@ -47,5 +47,11 @@ public final class InputView {
 			winningNumbers.add(new LottoNumber(Integer.parseInt(numbers[i].trim())));
 		}
 		return winningNumbers;
+	}
+
+	public static int printBonusNumber() {
+		System.out.println("보너스 볼을 입력해 주세요.");
+
+		return Integer.parseInt(inputText());
 	}
 }
