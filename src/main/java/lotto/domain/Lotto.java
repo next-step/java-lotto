@@ -20,7 +20,7 @@ public final class Lotto {
 		this.lotto = uniqueLotto;
 	}
 
-	public Lotto(Integer... numbers) {
+	public Lotto(final Integer... numbers) {
 		this.lotto = new HashSet<>(6);
 
 		for (Integer number : numbers) {
@@ -28,18 +28,8 @@ public final class Lotto {
 		}
 	}
 
-	public int contains(final Set<LottoNumber> winningNumbers) {
-		int count = 0;
-
-		for (LottoNumber lottoNumber : lotto) {
-			for (LottoNumber winningNumber : winningNumbers) {
-				if (lottoNumber.equals(winningNumber)) {
-					count++;
-				}
-			}
-		}
-
-		return count;
+	public Lotto(final Set<LottoNumber> lottoNumbers) {
+		this.lotto = lottoNumbers;
 	}
 
 	public Set<LottoNumber> lotto() {

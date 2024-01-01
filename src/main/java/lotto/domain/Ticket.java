@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public final class Ticket {
 	private final List<Lotto> ticket;
@@ -13,10 +12,6 @@ public final class Ticket {
 
 	public List<Lotto> ticket() {
 		return ticket;
-	}
-
-	public int compareTo(final Set<LottoNumber> winningNumbers, final int index) {
-		return ticket.get(index).contains(winningNumbers);
 	}
 
 	public static List<Lotto> generate(final int number) {

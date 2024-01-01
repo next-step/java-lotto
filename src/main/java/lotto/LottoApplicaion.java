@@ -3,11 +3,14 @@ package lotto;
 import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
 
-import java.util.Set;
+import java.util.List;
+import java.util.Map;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
 import lotto.domain.Ticket;
+import lotto.domain.WinningLotto;
 
 public final class LottoApplicaion {
 	public static void main(String[] args) {
@@ -17,10 +20,11 @@ public final class LottoApplicaion {
 		printLottoNumber(ticket);
 
 		printWinningNumber();
-		Set<LottoNumber> winningNumbers = winningNumbers(inputText());
-		int bonus = printBonusNumber();
+		Lotto winningNumbers = new Lotto(winningNumbers(inputText()));
+		LottoNumber bonus = new LottoNumber(printBonusNumber());
+		WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
 
-		int[] statistics = Rank.calculate(Rank.check(winningNumbers, ticket));
+		int[] statistics = Rank.calculate(winningLotto.match(ticket));
 		printStatistics(statistics, Rank.calculateRateOfReturn(statistics, price));
 	}
 }
