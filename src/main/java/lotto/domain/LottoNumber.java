@@ -10,11 +10,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(int number) {
+        validate(number);
         this.number = number;
-        validate();
     }
 
-    private void validate() {
+    private void validate(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("0보다 크고, 46보다 작은 수를 입력해주세요");
         }

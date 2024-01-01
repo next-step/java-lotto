@@ -30,11 +30,6 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
-        validate();
-    }
-
     public LottoNumbers(String stringLottoNumbers) {
         this(Arrays.stream(stringLottoNumbers.split(DELIMITER))
                    .map(number -> new LottoNumber(Integer.parseInt(number)))
@@ -47,11 +42,17 @@ public class LottoNumbers {
                    .collect(Collectors.toList()));
     }
 
-    public void validate() {
-        if (!lengthCheck()) {
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+
+    }
+
+    public void validate(List<LottoNumber> lottoNumbers) {
+        if (!lengthCheck(lottoNumbers)) {
             throw new IllegalArgumentException("숫자 6개 만 입력해주세요");
         }
-        if (!duplicateValueCheck()) {
+        if (!duplicateValueCheck(lottoNumbers)) {
             throw new IllegalArgumentException("중복되는 값이 있습니다.");
         }
     }
@@ -60,11 +61,11 @@ public class LottoNumbers {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    private boolean lengthCheck() {
+    private boolean lengthCheck(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.size() == LOTTO_NUMBERS_LENGTH;
     }
 
-    private boolean duplicateValueCheck() {
+    private boolean duplicateValueCheck(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.stream().distinct().count() == lottoNumbers.size();
     }
 
@@ -72,7 +73,16 @@ public class LottoNumbers {
         return (int) lottoNumbers.stream().filter(lottoNumber -> winningNumbers.contains(lottoNumber)).count();
     }
 
-    public static LottoNumbers create() {
+    public static List<LottoNumbers> create(int numberOfLotto) {
+        List<LottoNumbers> allLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < numberOfLotto; i++) {
+            LottoNumbers newLottoNumbers = LottoNumbers.createSingleLottoNumbers();
+            allLottoNumbers.add(newLottoNumbers);
+        }
+        return allLottoNumbers;
+    }
+
+    private static LottoNumbers createSingleLottoNumbers() {
         Collections.shuffle(allLottoNumber);
         List<LottoNumber> newLottoNumbers = allLottoNumber.stream().limit(LOTTO_NUMBERS_LENGTH).collect(Collectors.toList());
         Collections.sort(newLottoNumbers);

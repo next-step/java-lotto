@@ -1,20 +1,18 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Map;
-
-import javax.swing.plaf.IconUIResource;
 
 public class LottoResult {
 
-    private static final int LOTTO_NUMBERS_LENGTH = 6;
-    private Map<Integer, Integer> lottoResultMap;
+    private Map<Rank, Integer> lottoResultMap;
 
-    public LottoResult(Map<Integer, Integer> lottoResultMap) {
-        this.lottoResultMap = lottoResultMap;
+    public LottoResult(List<LottoNumbers> allLottoNumbers, WinningNumbers winningNumbers) {
+        this(winningNumbers.calculateLottoResult(allLottoNumbers));
     }
 
-    public LottoResult(LottoTicket lottoTicket, LottoNumbers winningNumbers) {
-        this(lottoTicket.match(winningNumbers));
+    public LottoResult(Map<Rank, Integer> lottoResultMap) {
+        this.lottoResultMap = lottoResultMap;
     }
 
     public float calculateRateOfReturn(int totalPriceToBuyLotto) {
@@ -23,13 +21,13 @@ public class LottoResult {
 
     private int totalPrizeAmount() {
         int totalPrize = 0;
-        for (int i = 0; i <= LOTTO_NUMBERS_LENGTH; i++) {
-            totalPrize += PrizeAmount.calculate(i, lottoResultMap.getOrDefault(i, 0));
+        for (Rank rank : Rank.values()) {
+            totalPrize += Rank.calculate(rank, lottoResultMap.getOrDefault(rank, 0));
         }
         return totalPrize;
     }
 
-    public int duplicateCount(int duplicateKey) {
-        return lottoResultMap.get(duplicateKey);
+    public int rankCount(Rank rank) {
+        return lottoResultMap.get(rank);
     }
 }
