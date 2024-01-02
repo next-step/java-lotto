@@ -18,7 +18,7 @@ public final class WinningLottoTest {
 		Ticket ticket = new Ticket(lottoList);
 		WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
 
-		List<MatchingNumbers> result = winningLotto.match(ticket);
+		List<MatchingNumbers> result = ticket.match(winningLotto);
 
 		assertThat(result.get(0).isMatching(6)).isTrue();
 	}

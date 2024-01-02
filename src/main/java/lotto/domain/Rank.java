@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public enum Rank {
 	PRIZE_COUNT(0, 0, 5),
+	BONUS(0, 1, 0),
 	RANK1(1, 6, 2000000000),
 	RANK2(2, 5, 30000000),
 	RANK3(3, 5, 1500000),
@@ -45,8 +46,9 @@ public enum Rank {
 		return 0;
 	}
 
-	private static Integer matchRanking(MatchingNumbers matchingNumbers, Rank rank) {
-		if (matchingNumbers.isMatching(rank.match) && matchingNumbers.isBonus(rank.rank)) {
+	private static Integer matchRanking(final MatchingNumbers matchingNumbers, final Rank rank) {
+		if (matchingNumbers.isMatching(rank.match)
+			&& Objects.equals(matchingNumbers.isBonus(rank.rank), BONUS.match)) {
 			return rank.rank;
 		}
 		if (matchingNumbers.isMatching(rank.match) && !Objects.equals(rank.rank, RANK2.rank)) {
@@ -56,7 +58,7 @@ public enum Rank {
 		return null;
 	}
 
-	public static float calculateRateOfReturn(int[] rankCount, final int price) {
+	public static float calculateRateOfReturn(final int[] rankCount, final int price) {
 		int prizeMoney = 0;
 
 		for (Rank rank : Rank.values()) {

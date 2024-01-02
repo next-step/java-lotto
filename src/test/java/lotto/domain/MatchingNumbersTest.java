@@ -9,8 +9,8 @@ public final class MatchingNumbersTest {
 	@DisplayName("매칭되는 숫자들이 5개가 맞는지 보너스가 일치하는지 확인")
 	@Test
 	void 매칭되는_숫자들이_5개가_맞는지_보너스가_일치하는지_확인() {
-		MatchingNumbers matchingNumbers = new MatchingNumbers(5, true);
+		MatchingNumbers matchingNumbers = new MatchingNumbers(5, 1);
 
-		assertThat(matchingNumbers.isMatching(5) && matchingNumbers.isBonus(2)).isTrue();
+		assertThat(matchingNumbers.isMatching(5) && matchingNumbers.isBonus(2) == 1).isTrue();
 	}
 }

@@ -28,6 +28,26 @@ public final class Lotto {
 		this(initLotto(numbers));
 	}
 
+	public int matchCount(final Lotto winningLotto) {
+		int count = 0;
+
+		for (LottoNumber winningNumber : winningLotto.lotto) {
+			count += matchNumber(winningNumber);
+		}
+
+		return count;
+	}
+
+	public int matchNumber(final LottoNumber winningNumber) {
+		for (LottoNumber lottoNumber : lotto) {
+			if (lottoNumber.equals(winningNumber)) {
+				return 1;
+			}
+		}
+
+		return 0;
+	}
+
 	private static Set<LottoNumber> initLotto(final Integer... numbers) {
 		Set<LottoNumber> lottoNumbers = new HashSet<>(6);
 

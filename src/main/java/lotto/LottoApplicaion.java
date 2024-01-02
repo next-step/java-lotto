@@ -21,7 +21,7 @@ public final class LottoApplicaion {
 		LottoNumber bonus = new LottoNumber(printBonusNumber());
 		WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
 
-		int[] statistics = Rank.calculate(winningLotto.match(ticket));
+		int[] statistics = Rank.calculate(ticket.match(winningLotto));
 		printStatistics(statistics, Rank.calculateRateOfReturn(statistics, price));
 	}
 }
