@@ -1,15 +1,10 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
 
     private Map<Rank, Integer> lottoResultMap;
-
-    public LottoResult(List<LottoNumbers> allLottoNumbers, WinningNumbers winningNumbers) {
-        this(winningNumbers.calculateLottoResult(allLottoNumbers));
-    }
 
     public LottoResult(Map<Rank, Integer> lottoResultMap) {
         this.lottoResultMap = lottoResultMap;

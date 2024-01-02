@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.List;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
@@ -29,9 +29,9 @@ public class OutputView {
         System.out.println("총 수익률은 " + String.format("%.2f", rateOfReturn) + "입니다.");
     }
 
-    public static void allLottoNumbers(List<LottoNumbers> allLottoNumbers) {
-        for (LottoNumbers allLottoNumber : allLottoNumbers) {
-            System.out.println(allLottoNumber);
+    public static void allLotto(List<Lotto> allLotto) {
+        for (Lotto lotto : allLotto) {
+            System.out.println(lotto);
         }
     }
 

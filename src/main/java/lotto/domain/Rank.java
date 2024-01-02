@@ -23,11 +23,15 @@ public enum Rank {
         this.prizeAmount = prizeAmount;
     }
 
-    public static int calculate(Rank rank, int lottoNumbersCount) {
-        return findPrizeAmount(rank) * lottoNumbersCount;
+    public static int calculate(Rank rank, int lottoCount) {
+        return findPrizeAmount(rank) * lottoCount;
     }
 
-    public static Rank findRankByDuplicateCount(int duplicateCount) {
+    public static Rank findRankByDuplicateCount(int duplicateCount, boolean containsBonusNumber) {
+        if (duplicateCount == 5) {
+            return containsBonusNumber ? Rank.SECOND : Rank.THIRD;
+        }
+
         return Arrays.stream(Rank.values())
                      .filter(rank -> rank.duplicateCount == duplicateCount)
                      .findFirst()
