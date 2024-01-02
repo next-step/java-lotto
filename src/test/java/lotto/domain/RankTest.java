@@ -13,6 +13,7 @@ public final class RankTest {
 	@Test
 	void 이등_5개일치와_보너스일치가_2장_당첨됨() {
 		List<MatchingNumbers> matchingNumbersList = new ArrayList<>();
+		matchingNumbersList.add(new MatchingNumbers(5, false));
 		matchingNumbersList.add(new MatchingNumbers(5, true));
 		matchingNumbersList.add(new MatchingNumbers(5, true));
 		int[] result = Rank.calculate(matchingNumbersList);

@@ -24,6 +24,10 @@ public final class WinningLotto {
 		return matchingNumbersList;
 	}
 
+	public LottoNumber bonus() {
+		return this.bonus;
+	}
+
 	private int compareTo(final Ticket ticket, final int index) {
 		return contains(ticket.ticket().get(index));
 	}

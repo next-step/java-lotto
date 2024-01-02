@@ -1,6 +1,7 @@
 package lotto.domain;
 
 public final class MatchingNumbers {
+	private final static int RANK2 = 2;
 	private final Integer matchingNumbers;
 	private final Boolean bonusNumber;
 
@@ -13,7 +14,11 @@ public final class MatchingNumbers {
 		return matchingNumbers.equals(matchCount);
 	}
 
-	public Boolean isBonus() {
-		return bonusNumber;
+	public Boolean isBonus(int rank) {
+		if (rank == RANK2) {
+			return bonusNumber;
+		}
+
+		return false;
 	}
 }

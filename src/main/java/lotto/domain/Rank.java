@@ -1,14 +1,15 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public enum Rank {
 	PRIZE_COUNT(0, 0, 5),
-	RANK5(5, 3, 5000),
-	RANK4(4, 4, 50000),
-	RANK3(3, 5, 1500000),
+	RANK1(1, 6, 2000000000),
 	RANK2(2, 5, 30000000),
-	RANK1(1, 6, 2000000000);
+	RANK3(3, 5, 1500000),
+	RANK4(4, 4, 50000),
+	RANK5(5, 3, 5000);
 
 	private final Integer rank;
 	private final Integer match;
@@ -24,8 +25,8 @@ public enum Rank {
 		int[] statistics = new int[PRIZE_COUNT.prize + 1];
 
 		for (MatchingNumbers matchingNumbers : matchingNumbersList) {
-			for (int rank = RANK5.rank; rank >= RANK1.rank; rank--) {
-				if (rank == findPrize(matchingNumbers)) {
+			for (int rank = RANK1.rank; rank <= RANK5.rank; rank++) {
+				if (rank == findRank(matchingNumbers)) {
 					++statistics[rank];
 				}
 			}
@@ -34,44 +35,35 @@ public enum Rank {
 		return statistics;
 	}
 
-	private static int findPrize(final MatchingNumbers matchingNumbers) {
-		if (matchingNumbers.isMatching(RANK5.match)) {
-			return RANK5.rank;
-		}
-		if (matchingNumbers.isMatching(RANK4.match)) {
-			return RANK4.rank;
-		}
-		if (matchingNumbers.isMatching(RANK3.match) && matchingNumbers.isBonus()) {
-			return RANK2.rank;
-		}
-		if (matchingNumbers.isMatching(RANK2.match)) {
-			return RANK3.rank;
-		}
-		if (matchingNumbers.isMatching(RANK1.match)) {
-			return RANK1.rank;
+	private static int findRank(final MatchingNumbers matchingNumbers) {
+		for (Rank rank : Rank.values()) {
+			Integer rank1 = matchRanking(matchingNumbers, rank);
+			if (rank1 != null)
+				return rank1;
 		}
 
 		return 0;
 	}
 
+	private static Integer matchRanking(MatchingNumbers matchingNumbers, Rank rank) {
+		if (matchingNumbers.isMatching(rank.match) && matchingNumbers.isBonus(rank.rank)) {
+			return rank.rank;
+		}
+		if (matchingNumbers.isMatching(rank.match) && !Objects.equals(rank.rank, RANK2.rank)) {
+			return rank.rank;
+		}
+
+		return null;
+	}
+
 	public static float calculateRateOfReturn(int[] rankCount, final int price) {
 		int prizeMoney = 0;
 
-		for (int i = 1; i <= rankCount.length; i++) {
-			if (i == RANK5.rank) {
-				prizeMoney += RANK5.prize * rankCount[i];
-			}
-			if (i == RANK4.rank) {
-				prizeMoney += RANK4.prize * rankCount[i];
-			}
-			if (i == RANK3.rank) {
-				prizeMoney += RANK3.prize * rankCount[i];
-			}
-			if (i == RANK2.rank) {
-				prizeMoney += RANK2.prize * rankCount[i];
-			}
-			if (i == RANK1.rank) {
-				prizeMoney += RANK1.prize * rankCount[i];
+		for (Rank rank : Rank.values()) {
+			for (int i = 1; i <= rankCount.length; i++) {
+				if (i == rank.rank) {
+					prizeMoney += rank.prize * rankCount[i];
+				}
 			}
 		}
 
