@@ -10,6 +10,10 @@ public final class Lotto {
 	private final static int LOTTO_SIZE = 6;
 	private final Set<LottoNumber> lotto;
 
+	public Lotto(final Set<LottoNumber> lottoNumbers) {
+		this.lotto = lottoNumbers;
+	}
+
 	public Lotto(final List<LottoNumber> lotto) {
 		Set<LottoNumber> uniqueLotto = Set.copyOf(lotto);
 
@@ -21,15 +25,17 @@ public final class Lotto {
 	}
 
 	public Lotto(final Integer... numbers) {
-		this.lotto = new HashSet<>(6);
-
-		for (Integer number : numbers) {
-			this.lotto.add(new LottoNumber(number));
-		}
+		this(initLotto(numbers));
 	}
 
-	public Lotto(final Set<LottoNumber> lottoNumbers) {
-		this.lotto = lottoNumbers;
+	private static Set<LottoNumber> initLotto(final Integer... numbers) {
+		Set<LottoNumber> lottoNumbers = new HashSet<>(6);
+
+		for (Integer number : numbers) {
+			lottoNumbers.add(new LottoNumber(number));
+		}
+
+		return lottoNumbers;
 	}
 
 	public Set<LottoNumber> lotto() {
