@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,13 +24,14 @@ public enum Rank {
 		this.prize = prize;
 	}
 
-	public static int[] calculate(final List<MatchingNumbers> matchingNumbersList) {
-		int[] statistics = new int[PRIZE_COUNT.prize + 1];
+	public static List<Integer> calculate(final List<MatchingNumbers> matchingNumbersList) {
+		List<Integer> statistics = new ArrayList<>(Collections.nCopies(PRIZE_COUNT.prize + 1, 0));
 
 		for (MatchingNumbers matchingNumbers : matchingNumbersList) {
+			int count = 0;
 			for (int rank = RANK1.rank; rank <= RANK5.rank; rank++) {
 				if (rank == findRank(matchingNumbers)) {
-					++statistics[rank];
+					statistics.set(rank, ++count);
 				}
 			}
 		}
@@ -58,13 +61,13 @@ public enum Rank {
 		return null;
 	}
 
-	public static float calculateRateOfReturn(final int[] rankCount, final int price) {
+	public static float calculateRateOfReturn(final List<Integer> rankCount, final int price) {
 		int prizeMoney = 0;
 
 		for (Rank rank : Rank.values()) {
-			for (int i = 1; i <= rankCount.length; i++) {
+			for (int i = 1; i <= rankCount.size(); i++) {
 				if (i == rank.rank) {
-					prizeMoney += rank.prize * rankCount[i];
+					prizeMoney += rank.prize * rankCount.get(i);
 				}
 			}
 		}

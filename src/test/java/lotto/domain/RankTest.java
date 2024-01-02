@@ -16,8 +16,8 @@ public final class RankTest {
 		matchingNumbersList.add(new MatchingNumbers(5, 0));
 		matchingNumbersList.add(new MatchingNumbers(5, 1));
 		matchingNumbersList.add(new MatchingNumbers(5, 1));
-		int[] result = Rank.calculate(matchingNumbersList);
+		List<Integer> result = Rank.calculate(matchingNumbersList);
 
-		assertThat(result[2] == 2).isTrue();
+		assertThat(result.get(2) == 2).isTrue();
 	}
 }

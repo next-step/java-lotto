@@ -3,6 +3,8 @@ package lotto;
 import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
 
+import java.util.List;
+
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
@@ -21,7 +23,7 @@ public final class LottoApplicaion {
 		LottoNumber bonus = new LottoNumber(printBonusNumber());
 		WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
 
-		int[] statistics = Rank.calculate(ticket.match(winningLotto));
+		List<Integer> statistics = Rank.calculate(ticket.match(winningLotto));
 		printStatistics(statistics, Rank.calculateRateOfReturn(statistics, price));
 	}
 }

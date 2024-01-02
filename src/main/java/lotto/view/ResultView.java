@@ -26,15 +26,15 @@ public final class ResultView {
 		return result;
 	}
 
-	public static void printStatistics(final int[] statistics, final float rate) {
+	public static void printStatistics(final List<Integer> statistics, final float rate) {
 		System.out.println();
 		System.out.println("당첨 통계");
 		System.out.println("---------");
-		System.out.printf("3개 일치 (5000원)- %d개\n", statistics[5]);
-		System.out.printf("4개 일치 (50000원)- %d개\n", statistics[4]);
-		System.out.printf("5개 일치 (1500000원)- %d개\n", statistics[3]);
-		System.out.printf("5개 일치, 보너스 볼 일치(30000000원)- %d개\n", statistics[2]);
-		System.out.printf("6개 일치 (2000000000원)- %d개\n", statistics[1]);
+		System.out.printf("3개 일치 (5000원)- %d개\n", statistics.get(5));
+		System.out.printf("4개 일치 (50000원)- %d개\n", statistics.get(4));
+		System.out.printf("5개 일치 (1500000원)- %d개\n", statistics.get(3));
+		System.out.printf("5개 일치, 보너스 볼 일치(30000000원)- %d개\n", statistics.get(2));
+		System.out.printf("6개 일치 (2000000000원)- %d개\n", statistics.get(1));
 		System.out.printf("총 수익률은 %.2f입니다.", rate);
 	}
 }
