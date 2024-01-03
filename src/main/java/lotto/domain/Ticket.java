@@ -38,7 +38,6 @@ public final class Ticket {
 	}
 
 	private int contains(final int index, final Lotto winningLotto) {
-
 		return ticket.get(index).matchCount(winningLotto);
 	}
 
