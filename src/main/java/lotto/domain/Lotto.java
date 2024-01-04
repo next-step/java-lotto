@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public final class Lotto {
@@ -51,6 +53,16 @@ public final class Lotto {
 
 	private boolean lengthCheck(final Set<LottoNumber> lotto) {
 		return lotto.size() == LOTTO_SIZE;
+	}
+
+	public static List<Lotto> lottoFactory(final int numberOfLotto) {
+		List<Lotto> entireLotto = new ArrayList<>();
+
+		for (int i = 0; i < numberOfLotto; i++) {
+			entireLotto.add(new Lotto(AllLottoNumber.randomLottoNumber()));
+		}
+
+		return entireLotto;
 	}
 
 	public boolean contains(final LottoNumber lottoNumber) {
