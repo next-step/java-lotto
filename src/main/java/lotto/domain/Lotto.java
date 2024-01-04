@@ -5,16 +5,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Lotto {
+public final class Lotto {
 	private final static int LOTTO_SIZE = 6;
 	private static final String DELIMITER = ",";
 	private final Set<LottoNumber> lotto;
 
-	public Lotto(String stringLotto) {
+	public Lotto(final String stringLotto) {
 		this(toSet(stringLotto));
 	}
 
-	private static Set<LottoNumber> toSet(String stringLotto) {
+	private static Set<LottoNumber> toSet(final String stringLotto) {
 		Set<LottoNumber> lotto = new HashSet<>();
 
 		String[] stringLottoNumberArray = stringLotto.trim().split(DELIMITER);
@@ -40,34 +40,48 @@ public class Lotto {
 		return lottoNumbers;
 	}
 
-	public Lotto(Set<LottoNumber> lotto) {
+	public Lotto(final Set<LottoNumber> lotto) {
 		validate(lotto);
 		this.lotto = lotto;
 	}
 
-	public void validate(Set<LottoNumber> lotto) {
+	public void validate(final Set<LottoNumber> lotto) {
 		if (!lengthCheck(lotto)) {
-			throw new IllegalArgumentException("숫자 6개 만 입력해주세요");
+			throw new IllegalArgumentException("숫자 6개만 입력해주세요");
 		}
 	}
 
-	private boolean lengthCheck(Set<LottoNumber> lotto) {
+	private boolean lengthCheck(final Set<LottoNumber> lotto) {
 		return lotto.size() == LOTTO_SIZE;
 	}
 
-	public static List<Lotto> lottoFactory(int numberOfLotto) {
-		List<Lotto> allLotto = new ArrayList<>();
+	public static List<Lotto> lottoFactory(final int numberOfLotto) {
+		List<Lotto> entireLotto = new ArrayList<>();
+
 		for (int i = 0; i < numberOfLotto; i++) {
-			allLotto.add(new Lotto(AllLottoNumber.randomLottoNumber()));
+			entireLotto.add(new Lotto(AllLottoNumber.randomLottoNumber()));
 		}
-		return allLotto;
+
+		return entireLotto;
 	}
 
-	public boolean contains(LottoNumber lottoNumber) {
+	public boolean contains(final LottoNumber lottoNumber) {
 		return lotto.contains(lottoNumber);
 	}
 
 	public Set<LottoNumber> lotto() {
 		return lotto;
+	}
+
+	public int countMatchingNumber(final Lotto winningNumbers) {
+		int count = 0;
+
+		for (LottoNumber lottoNumber : lotto) {
+			if (winningNumbers.contains(lottoNumber)) {
+				count++;
+			}
+		}
+
+		return count;
 	}
 }

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoTest {
+public final class LottoTest {
 	@Test
 	@DisplayName("Lotto 파라미터로 Sting이 들어올 경우")
 	void Lotto_String() {
