@@ -28,7 +28,7 @@ public final class LottoTest {
 	@Test
 	@DisplayName("로또 번호의 개수가 6개가 아닌 경우")
 	void 로또_사이즈_6개_체크() {
-		String expectingMessage = "숫자 6개 만 입력해주세요";
+		String expectingMessage = "숫자 6개만 입력해주세요";
 
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> new Lotto("1,2,3,4,5"))
