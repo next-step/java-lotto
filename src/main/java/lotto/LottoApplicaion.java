@@ -13,7 +13,7 @@ import lotto.domain.WinningLotto;
 public final class LottoApplicaion {
 	public static void main(String[] args) {
 		int price = printPriceInput();
-		int count = printPrice(price);
+		int count = printNumberOfLotto(price);
 		List<Lotto> entireLotto = Lotto.lottoFactory(count);
 		printEntireLotto(entireLotto);
 

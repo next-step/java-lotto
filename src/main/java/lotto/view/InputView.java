@@ -30,7 +30,7 @@ public final class InputView {
 		return text;
 	}
 
-	public static int printPrice(final int price) {
+	public static int printNumberOfLotto(final int price) {
 		int number = price / WON1000;
 		System.out.printf("%d개를 구매했습니다.\n", number);
 
