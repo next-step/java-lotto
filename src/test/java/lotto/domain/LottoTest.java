@@ -38,13 +38,4 @@ public final class LottoTest {
 			.isThrownBy(() -> new Lotto("1,2,3,4,5,6,7"))
 			.withMessageMatching(expectingMessage);
 	}
-
-	@Test
-	@DisplayName("당첨번호와 내 로또를 비교하여 등수를 낸다")
-	void 당첨번호와_내로또를_비교하여_등수를_낸다() {
-		Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-		Lotto lotto = new Lotto(1, 2, 3, 4, 5, 7);
-
-		assertThat(lotto.calculateRank(winningLotto)).isEqualTo(Rank.RANK2);
-	}
 }

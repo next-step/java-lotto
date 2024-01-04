@@ -9,6 +9,6 @@ public final class RankTest {
 	@Test
 	@DisplayName("2등 RANK 구하기")
 	void findRank() {
-		assertTrue(Rank.findRank(5) == Rank.RANK2);
+		assertTrue(Rank.findRank(5, true) == Rank.RANK2);
 	}
 }
