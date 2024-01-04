@@ -17,9 +17,10 @@ public class Lotto {
 
     public Lotto(String stringLotto) {
         this(Arrays.stream(stringLotto.split(DELIMITER))
-                   .map(number -> new LottoNumber(Integer.parseInt(number)))
+                   .map(number -> new LottoNumber(Integer.parseInt(number.trim())))
                    .collect(Collectors.toSet()));
     }
+
 
     public Lotto(Integer... integerLotto) {
         this(Arrays.stream(integerLotto)
@@ -50,10 +51,18 @@ public class Lotto {
         return (int) lotto.stream().filter(lottoNumber -> winningNumbers.contains(lottoNumber)).count();
     }
 
-    public static List<Lotto> lottoFactory(int numberOfLotto) {
+    public static List<Lotto> lottoFactoryForAuto(int numberOfLotto) {
         List<Lotto> allLotto = new ArrayList<>();
         for (int i = 0; i < numberOfLotto; i++) {
             allLotto.add(new Lotto(AllLottoNumber.randomLottoNumber()));
+        }
+        return allLotto;
+    }
+
+    public static List<Lotto> lottoFactoryForManual(List<String> manualLottos) {
+        List<Lotto> allLotto = new ArrayList<>();
+        for (String lottoNumbers : manualLottos) {
+            allLotto.add(new Lotto(lottoNumbers));
         }
         return allLotto;
     }

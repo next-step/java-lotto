@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -9,6 +11,23 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
+
+    public static int manualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
+
+    public static List<String> manualLottos(int numberOfLotto) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < numberOfLotto; i++) {
+            result.add(scanner.nextLine());
+        }
+        return result;
+    }
+
 
     public static String winningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
