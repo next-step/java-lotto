@@ -1,8 +1,10 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public final class Lotto {
@@ -67,5 +69,37 @@ public final class Lotto {
 
 	public boolean contains(final LottoNumber lottoNumber) {
 		return lotto.contains(lottoNumber);
+	}
+
+	public Set<LottoNumber> lotto() {
+		return lotto;
+	}
+
+	public Map<Rank, Integer> match(final List<Lotto> entireLotto) {
+		Map<Rank, Integer> result = initializeLottoRankResultMap();
+		for (Lotto lotto : entireLotto) {
+			Rank rank = calculateRank(lotto);
+			result.replace(rank, result.get(rank) + 1);
+		}
+
+		return result;
+	}
+
+	private Map<Rank, Integer> initializeLottoRankResultMap() {
+		Map<Rank, Integer> lottoResultMap = new HashMap<>();
+		for (Rank rank : Rank.values()) {
+			lottoResultMap.put(rank, 0);
+		}
+
+		return lottoResultMap;
+	}
+
+	public Rank calculateRank(final Lotto winningLotto) {
+		Set<LottoNumber> intersection = new HashSet<>(lotto);
+		intersection.retainAll(winningLotto.lotto);
+
+		int duplicateCount = intersection.size();
+
+		return Rank.findRank(duplicateCount);
 	}
 }
