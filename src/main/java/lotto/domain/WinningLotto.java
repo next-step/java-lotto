@@ -14,10 +14,10 @@ public final class WinningLotto {
 	}
 
 	public Rank calculateRank(final Lotto lotto) {
-		int duplicateNumber = winningLotto.countMatchingNumber(lotto);
+		int matchingCount = winningLotto.countMatchingNumber(lotto);
 		boolean containsBonusNumber = lotto.contains(bonus);
 
-		return Rank.findRank(duplicateNumber, containsBonusNumber);
+		return Rank.findRank(matchingCount, containsBonusNumber);
 	}
 
 	public Map<Rank, Integer> match(final List<Lotto> entireLotto) {
