@@ -1,65 +1,87 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public final class Lotto {
 	private final static int LOTTO_SIZE = 6;
+	private static final String DELIMITER = ",";
 	private final Set<LottoNumber> lotto;
 
-	public Lotto(final List<LottoNumber> lotto) {
-		Set<LottoNumber> uniqueLotto = Set.copyOf(lotto);
-
-		if (uniqueLotto.size() != LOTTO_SIZE) {
-			throw new IllegalArgumentException("로또넘버 개수는 6개여야 합니다.");
-		}
-
-		this.lotto = uniqueLotto;
+	public Lotto(final String stringLotto) {
+		this(toSet(stringLotto));
 	}
 
-	public Lotto(Integer... numbers) {
-		this.lotto = new HashSet<>(6);
+	private static Set<LottoNumber> toSet(final String stringLotto) {
+		Set<LottoNumber> lotto = new HashSet<>();
+
+		String[] stringLottoNumberArray = stringLotto.trim().split(DELIMITER);
+
+		for (String stringLottoNumber : stringLottoNumberArray) {
+			lotto.add(new LottoNumber(Integer.parseInt(stringLottoNumber)));
+		}
+
+		return lotto;
+	}
+
+	public Lotto(final Integer... numbers) {
+		this(initLotto(numbers));
+	}
+
+	private static Set<LottoNumber> initLotto(final Integer... numbers) {
+		Set<LottoNumber> lottoNumbers = new HashSet<>(LOTTO_SIZE);
 
 		for (Integer number : numbers) {
-			this.lotto.add(new LottoNumber(number));
+			lottoNumbers.add(new LottoNumber(number));
+		}
+
+		return lottoNumbers;
+	}
+
+	public Lotto(final Set<LottoNumber> lotto) {
+		validate(lotto);
+		this.lotto = lotto;
+	}
+
+	public void validate(final Set<LottoNumber> lotto) {
+		if (!lengthCheck(lotto)) {
+			throw new IllegalArgumentException("숫자 6개만 입력해주세요");
 		}
 	}
 
-	public int contains(final Set<LottoNumber> winningNumbers) {
-		int count = 0;
+	private boolean lengthCheck(final Set<LottoNumber> lotto) {
+		return lotto.size() == LOTTO_SIZE;
+	}
 
-		for (LottoNumber lottoNumber : lotto) {
-			for (LottoNumber winningNumber : winningNumbers) {
-				if (lottoNumber.equals(winningNumber)) {
-					count++;
-				}
-			}
+	public static List<Lotto> lottoFactory(final int numberOfLotto) {
+		List<Lotto> entireLotto = new ArrayList<>();
+
+		for (int i = 0; i < numberOfLotto; i++) {
+			entireLotto.add(new Lotto(AllLottoNumber.randomLottoNumber()));
 		}
 
-		return count;
+		return entireLotto;
+	}
+
+	public boolean contains(final LottoNumber lottoNumber) {
+		return lotto.contains(lottoNumber);
 	}
 
 	public Set<LottoNumber> lotto() {
 		return lotto;
 	}
 
-	public List<LottoNumber> generate() {
-		List<LottoNumber> lotto = new ArrayList<>();
-		List<Integer> entireLottoNumbers = new ArrayList<>();
+	public int countMatchingNumber(final Lotto winningNumbers) {
+		int count = 0;
 
-		for (int i = 1; i <= 45; i++) {
-			entireLottoNumbers.add(i);
+		for (LottoNumber lottoNumber : lotto) {
+			if (winningNumbers.contains(lottoNumber)) {
+				count++;
+			}
 		}
 
-		Collections.shuffle(entireLottoNumbers);
-
-		for (int i = 0; i < LOTTO_SIZE; i++) {
-			lotto.add(new LottoNumber(entireLottoNumbers.get(i)));
-		}
-
-		return lotto;
+		return count;
 	}
 }

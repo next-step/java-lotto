@@ -8,12 +8,14 @@ import java.util.Set;
 import lotto.domain.LottoNumber;
 
 public final class InputView {
+	private static final String DELIMITER = ",";
 	private static final int WON1000 = 1000;
 	private static final Scanner SCANNER = new Scanner(System.in);
 
 	public static int printPriceInput() {
 		System.out.println("구입금액을 입력해 주세요.");
-		return Integer.parseInt(validate(SCANNER.nextLine()));
+
+		return Integer.parseInt(inputText());
 	}
 
 	public static String inputText() {
@@ -28,7 +30,7 @@ public final class InputView {
 		return text;
 	}
 
-	public static int printPrice(final int price) {
+	public static int printNumberOfLotto(final int price) {
 		int number = price / WON1000;
 		System.out.printf("%d개를 구매했습니다.\n", number);
 
@@ -41,11 +43,18 @@ public final class InputView {
 	}
 
 	public static Set<LottoNumber> winningNumbers(final String text) {
-		String[] numbers = text.split(",");
+		String[] numbers = text.split(DELIMITER);
 		Set<LottoNumber> winningNumbers = new HashSet<>(6);
-		for (int i = 0; i < numbers.length; i++) {
-			winningNumbers.add(new LottoNumber(Integer.parseInt(numbers[i].trim())));
+		for (String number : numbers) {
+			winningNumbers.add(new LottoNumber(Integer.parseInt(number.trim())));
 		}
+
 		return winningNumbers;
+	}
+
+	public static int printBonusNumber() {
+		System.out.println("보너스 볼을 입력해 주세요.");
+
+		return Integer.parseInt(inputText());
 	}
 }

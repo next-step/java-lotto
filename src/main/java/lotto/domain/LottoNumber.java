@@ -3,8 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public final class LottoNumber {
-	private static final Integer ONE = 1;
-	private static final Integer FORTYFIVE = 45;
+	private static final Integer MIN_LOTTO_NUMBER = 1;
+	private static final Integer MAX_LOTTO_NUMBER = 45;
 	private final Integer lottoNumber;
 
 	public LottoNumber(final Integer lottoNumber) {
@@ -13,15 +13,11 @@ public final class LottoNumber {
 	}
 
 	private void validate(final Integer lotto) {
-		if (lotto >= ONE && lotto <= FORTYFIVE) {
+		if (lotto >= MIN_LOTTO_NUMBER && lotto <= MAX_LOTTO_NUMBER) {
 			return;
 		}
 
 		throw new IllegalArgumentException("1과 45 사이의 숫자를 입력해주세요.");
-	}
-
-	public boolean isBetween(final Integer start, final Integer end) {
-		return lottoNumber >= start && lottoNumber <= end;
 	}
 
 	@Override
@@ -31,6 +27,7 @@ public final class LottoNumber {
 		if (o == null)
 			return false;
 		LottoNumber lotto1 = (LottoNumber)o;
+
 		return Objects.equals(lottoNumber, lotto1.lottoNumber);
 	}
 
