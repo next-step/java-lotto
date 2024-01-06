@@ -62,7 +62,7 @@ public final class Lotto {
 		List<Lotto> entireLotto = new ArrayList<>();
 
 		for (int i = 0; i < numberOfLotto; i++) {
-			entireLotto.add(new Lotto(AllLottoNumber.randomLottoNumber()));
+			entireLotto.add(new Lotto(LottoNumber.randomLottoNumber()));
 		}
 
 		return entireLotto;
