@@ -12,8 +12,8 @@ public final class LottoNumber {
 		this.lottoNumber = lottoNumber;
 	}
 
-	private void validate(final Integer lotto) {
-		if (lotto >= MIN_LOTTO_NUMBER && lotto <= MAX_LOTTO_NUMBER) {
+	private void validate(final Integer lottoNumber) {
+		if (lottoNumber >= MIN_LOTTO_NUMBER && lottoNumber <= MAX_LOTTO_NUMBER) {
 			return;
 		}
 
