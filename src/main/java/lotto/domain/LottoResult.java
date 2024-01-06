@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.Map;
 
 public final class LottoResult {
-
 	private final Map<Rank, Integer> lottoResultMap;
 
 	public LottoResult(final Map<Rank, Integer> lottoResultMap) {

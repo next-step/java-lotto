@@ -1,14 +1,11 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public final class LottoNumber {
 	private static final Integer MIN_LOTTO_NUMBER = 1;
 	private static final Integer MAX_LOTTO_NUMBER = 45;
+
 	private final Integer lottoNumber;
 
 	public LottoNumber(final Integer lottoNumber) {

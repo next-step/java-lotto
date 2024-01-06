@@ -8,6 +8,7 @@ import java.util.Set;
 public final class Lotto {
 	private final static int LOTTO_SIZE = 6;
 	private static final String DELIMITER = ",";
+
 	private final Set<LottoNumber> lotto;
 
 	public Lotto(final Set<LottoNumber> lotto) {
