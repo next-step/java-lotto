@@ -17,7 +17,7 @@ public final class LottoApplicaion {
 		List<Lotto> entireLotto = Lotto.initializeEntireLotto(manualNumbers(manualCount));
 
 		int count = numberOfLotto(price, manualCount);
-		entireLotto.addAll(Lotto.lottoFactory(count-manualCount));
+		entireLotto.addAll(Lotto.autoLottoFactory(count-manualCount));
 		printEntireLotto(entireLotto);
 
 		winningNumber();

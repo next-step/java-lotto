@@ -10,11 +10,12 @@ public final class Lotto {
 	private static final String DELIMITER = ",";
 	private final Set<LottoNumber> lotto;
 
-	public Lotto(final String stringLotto) {
-		this(toSet(stringLotto));
+	public Lotto(final Set<LottoNumber> lotto) {
+		validate(lotto);
+		this.lotto = lotto;
 	}
 
-	private static Set<LottoNumber> toSet(final String stringLotto) {
+	public static Lotto of(final String stringLotto) {
 		Set<LottoNumber> lotto = new HashSet<>();
 
 		String[] stringLottoNumberArray = stringLotto.trim().split(DELIMITER);
@@ -23,26 +24,17 @@ public final class Lotto {
 			lotto.add(new LottoNumber(Integer.parseInt(stringLottoNumber)));
 		}
 
-		return lotto;
+		return new Lotto(lotto);
 	}
 
-	public Lotto(final Integer... numbers) {
-		this(initLotto(numbers));
-	}
-
-	private static Set<LottoNumber> initLotto(final Integer... numbers) {
+	public static Lotto from(final Integer... numbers) {
 		Set<LottoNumber> lottoNumbers = new HashSet<>(LOTTO_SIZE);
 
 		for (Integer number : numbers) {
 			lottoNumbers.add(new LottoNumber(number));
 		}
 
-		return lottoNumbers;
-	}
-
-	public Lotto(final Set<LottoNumber> lotto) {
-		validate(lotto);
-		this.lotto = lotto;
+		return new Lotto(lottoNumbers);
 	}
 
 	public void validate(final Set<LottoNumber> lotto) {
@@ -59,13 +51,13 @@ public final class Lotto {
 		List<Lotto> entireLotto = new ArrayList<>();
 
 		for (String stringLotto : stringLottos) {
-			entireLotto.add(new Lotto(stringLotto));
+			entireLotto.add(Lotto.of(stringLotto));
 		}
 
 		return entireLotto;
 	}
 
-	public static List<Lotto> lottoFactory(final int numberOfLotto) {
+	public static List<Lotto> autoLottoFactory(final int numberOfLotto) {
 		List<Lotto> entireLotto = new ArrayList<>();
 
 		for (int i = 0; i < numberOfLotto; i++) {
