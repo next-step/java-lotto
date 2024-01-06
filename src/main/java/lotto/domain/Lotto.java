@@ -16,6 +16,16 @@ public final class Lotto {
 		this.lotto = lotto;
 	}
 
+	public void validate(final Set<LottoNumber> lotto) {
+		if (!lengthCheck(lotto)) {
+			throw new IllegalArgumentException("숫자 6개만 입력해주세요");
+		}
+	}
+
+	private boolean lengthCheck(final Set<LottoNumber> lotto) {
+		return lotto.size() == LOTTO_SIZE;
+	}
+
 	public static Lotto of(final String stringLotto) {
 		Set<LottoNumber> lotto = new HashSet<>();
 
@@ -36,16 +46,6 @@ public final class Lotto {
 		}
 
 		return new Lotto(lottoNumbers);
-	}
-
-	public void validate(final Set<LottoNumber> lotto) {
-		if (!lengthCheck(lotto)) {
-			throw new IllegalArgumentException("숫자 6개만 입력해주세요");
-		}
-	}
-
-	private boolean lengthCheck(final Set<LottoNumber> lotto) {
-		return lotto.size() == LOTTO_SIZE;
 	}
 
 	public static List<Lotto> initializeEntireLotto(final List<String> stringLottos) {
