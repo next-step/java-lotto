@@ -10,7 +10,7 @@ public final class LottoResult {
 	}
 
 	public float calculateRate(final int totalPrice) {
-		return (float) totalPrize() / (float) totalPrice;
+		return (float)totalPrize() / (float)totalPrice;
 	}
 
 	private int totalPrize() {

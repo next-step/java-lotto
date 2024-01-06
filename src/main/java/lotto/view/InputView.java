@@ -52,7 +52,7 @@ public final class InputView {
 
 	public static int numberOfLotto(final int price, final int manualCount) {
 		int number = price / WON1000;
-		System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n" ,manualCount, number-manualCount);
+		System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", manualCount, number - manualCount);
 
 		return number;
 	}
