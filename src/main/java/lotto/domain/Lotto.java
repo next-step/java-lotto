@@ -32,7 +32,7 @@ public final class Lotto {
 		String[] stringLottoNumberArray = stringLotto.trim().split(DELIMITER);
 
 		for (String stringLottoNumber : stringLottoNumberArray) {
-			lotto.add(new LottoNumber(Integer.parseInt(stringLottoNumber)));
+			lotto.add(LottoNumber.of(Integer.parseInt(stringLottoNumber)));
 		}
 
 		return new Lotto(lotto);
@@ -42,7 +42,7 @@ public final class Lotto {
 		Set<LottoNumber> lottoNumbers = new HashSet<>(LOTTO_SIZE);
 
 		for (Integer number : numbers) {
-			lottoNumbers.add(new LottoNumber(number));
+			lottoNumbers.add(LottoNumber.of(number));
 		}
 
 		return new Lotto(lottoNumbers);

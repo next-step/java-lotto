@@ -65,8 +65,9 @@ public final class InputView {
 	public static Set<LottoNumber> winningNumbers(final String text) {
 		String[] numbers = text.split(DELIMITER);
 		Set<LottoNumber> winningNumbers = new HashSet<>(6);
+
 		for (String number : numbers) {
-			winningNumbers.add(new LottoNumber(Integer.parseInt(number.trim())));
+			winningNumbers.add(LottoNumber.of(Integer.parseInt(number.trim())));
 		}
 
 		return winningNumbers;

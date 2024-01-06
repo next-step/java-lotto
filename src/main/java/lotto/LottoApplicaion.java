@@ -18,12 +18,12 @@ public final class LottoApplicaion {
 
 		int count = numberOfLotto(price, manualCount);
 		entireLotto.addAll(Lotto.autoLottoFactory(count-manualCount));
-		printEntireLotto(entireLotto);
+		entireLotto(entireLotto);
 
 		winningNumber();
 		Lotto winningNumbers = new Lotto(winningNumbers(inputText()));
-		LottoNumber bonusNumber = new LottoNumber(bonusNumber());
+		LottoNumber bonusNumber = LottoNumber.of(bonusNumber());
 		LottoResult lottoResult = new LottoResult(new WinningLotto(winningNumbers, bonusNumber).match(entireLotto));
-		printStatistics(lottoResult, price);
+		statistics(lottoResult, price);
 	}
 }

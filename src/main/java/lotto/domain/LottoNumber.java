@@ -14,20 +14,24 @@ public final class LottoNumber {
 
 	private static final List<LottoNumber> CACHE = new ArrayList<>();
 
+	private final Integer lottoNumber;
+
 	static {
 		for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
 			CACHE.add(new LottoNumber(i));
 		}
 	}
 
-	private final Integer lottoNumber;
-
 	public LottoNumber(final Integer lottoNumber) {
-		validate(lottoNumber);
 		this.lottoNumber = lottoNumber;
 	}
 
-	private void validate(final Integer lottoNumber) {
+	public static LottoNumber of(final Integer lottoNumber) {
+		validate(lottoNumber);
+		return CACHE.get(lottoNumber - 1);
+	}
+
+	private static void validate(final Integer lottoNumber) {
 		if (lottoNumber >= MIN_LOTTO_NUMBER && lottoNumber <= MAX_LOTTO_NUMBER) {
 			return;
 		}

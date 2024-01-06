@@ -12,7 +12,7 @@ public final class LottoTest {
 	void Lotto_String() {
 		Lotto lotto = Lotto.of("1,2,3,4,5,6");
 		for (int i = 1; i < 7; i++) {
-			assertTrue(lotto.contains(new LottoNumber(i)));
+			assertTrue(lotto.contains(LottoNumber.of(i)));
 		}
 	}
 
@@ -21,7 +21,7 @@ public final class LottoTest {
 	void Lotto_Integer() {
 		Lotto lotto = Lotto.from(1, 2, 3, 4, 5, 6);
 		for (int i = 1; i < 7; i++) {
-			assertTrue(lotto.contains(new LottoNumber(i)));
+			assertTrue(lotto.contains(LottoNumber.of(i)));
 		}
 	}
 
