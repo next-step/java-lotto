@@ -12,14 +12,17 @@ import lotto.domain.WinningLotto;
 
 public final class LottoApplicaion {
 	public static void main(String[] args) {
-		int price = printPriceInput();
-		int count = printNumberOfLotto(price);
-		List<Lotto> entireLotto = Lotto.lottoFactory(count);
+		int price = priceInput();
+		int manualCount = manualCount();
+		List<Lotto> entireLotto = Lotto.initializeEntireLotto(manualNumbers(manualCount));
+
+		int count = numberOfLotto(price, manualCount);
+		entireLotto.addAll(Lotto.lottoFactory(count-manualCount));
 		printEntireLotto(entireLotto);
 
-		printWinningNumber();
+		winningNumber();
 		Lotto winningNumbers = new Lotto(winningNumbers(inputText()));
-		LottoNumber bonusNumber = new LottoNumber(printBonusNumber());
+		LottoNumber bonusNumber = new LottoNumber(bonusNumber());
 		LottoResult lottoResult = new LottoResult(new WinningLotto(winningNumbers, bonusNumber).match(entireLotto));
 		printStatistics(lottoResult, price);
 	}

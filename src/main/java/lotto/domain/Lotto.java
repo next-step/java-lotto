@@ -55,6 +55,16 @@ public final class Lotto {
 		return lotto.size() == LOTTO_SIZE;
 	}
 
+	public static List<Lotto> initializeEntireLotto(List<String> stringLottos) {
+		List<Lotto> entireLotto = new ArrayList<>();
+
+		for (String stringLotto : stringLottos) {
+			entireLotto.add(new Lotto(stringLotto));
+		}
+
+		return entireLotto;
+	}
+
 	public static List<Lotto> lottoFactory(final int numberOfLotto) {
 		List<Lotto> entireLotto = new ArrayList<>();
 
