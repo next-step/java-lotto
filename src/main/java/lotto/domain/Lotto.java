@@ -17,14 +17,14 @@ public class Lotto {
 
     public Lotto(String stringLotto) {
         this(Arrays.stream(stringLotto.split(DELIMITER))
-                   .map(number -> new LottoNumber(Integer.parseInt(number.trim())))
+                   .map(number -> LottoNumber.of(Integer.parseInt(number.trim())))
                    .collect(Collectors.toSet()));
     }
 
 
     public Lotto(Integer... integerLotto) {
         this(Arrays.stream(integerLotto)
-                   .map(number -> new LottoNumber(number))
+                   .map(number -> LottoNumber.of(number))
                    .collect(Collectors.toSet()));
     }
 
@@ -54,7 +54,7 @@ public class Lotto {
     public static List<Lotto> lottoFactoryForAuto(int numberOfLotto) {
         List<Lotto> allLotto = new ArrayList<>();
         for (int i = 0; i < numberOfLotto; i++) {
-            allLotto.add(new Lotto(AllLottoNumber.randomLottoNumber()));
+            allLotto.add(AllLottoNumber.randomLottoNumber());
         }
         return allLotto;
     }

@@ -19,7 +19,7 @@ class LottoTest {
     void test1() {
         Lotto lotto = new Lotto("1,2,3,4,5,6");
         for (int i = 1; i < 7; i++) {
-            assertTrue(lotto.contains(new LottoNumber(i)));
+            assertTrue(lotto.contains(LottoNumber.of(i)));
         }
     }
 
@@ -28,7 +28,7 @@ class LottoTest {
     void test2() {
         Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
         for (int i = 1; i < 7; i++) {
-            assertTrue(lotto.contains(new LottoNumber(i)));
+            assertTrue(lotto.contains(LottoNumber.of(i)));
         }
     }
 
