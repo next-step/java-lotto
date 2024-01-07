@@ -22,7 +22,7 @@ public final class LottoNumber {
 		}
 	}
 
-	public LottoNumber(final Integer lottoNumber) {
+	private LottoNumber(final Integer lottoNumber) {
 		this.lottoNumber = lottoNumber;
 	}
 
