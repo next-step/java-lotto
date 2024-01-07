@@ -5,12 +5,13 @@ import java.util.List;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 import lotto.domain.Rank;
 import lotto.domain.LottoResult;
 
 public final class ResultView {
-	public static void entireLotto(final List<Lotto> entireLotto) {
-		for (Lotto lotto : entireLotto) {
+	public static void printEntireLotto(final Lottos entireLotto) {
+		for (Lotto lotto : entireLotto.lottos()) {
 			System.out.print("[");
 			System.out.print(String.join(", ", integers(lotto)));
 			System.out.println("]");
@@ -27,7 +28,7 @@ public final class ResultView {
 		return result;
 	}
 
-	public static void statistics(final LottoResult lottoResult, final int price) {
+	public static void printStatistics(final LottoResult lottoResult, final int price) {
 		System.out.println();
 		System.out.println("당첨 통계");
 		System.out.println("---------");

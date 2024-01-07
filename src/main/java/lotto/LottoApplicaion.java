@@ -3,27 +3,27 @@ package lotto;
 import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
 
-import java.util.List;
-
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
+import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
 
 public final class LottoApplicaion {
 	public static void main(String[] args) {
 		int price = priceInput();
 		int manualCount = manualCount();
-		List<Lotto> entireLotto = Lotto.initializeEntireLotto(manualNumbers(manualCount));
+		Lottos entireLotto = new Lottos();
+		entireLotto.addManualLotto(manualNumbers(manualCount));
 
 		int count = numberOfLotto(price, manualCount);
-		entireLotto.addAll(Lotto.autoLottoFactory(count - manualCount));
-		entireLotto(entireLotto);
+		entireLotto.addAutoLotto(count - manualCount);
+		printEntireLotto(entireLotto);
 
 		winningNumber();
 		Lotto winningNumbers = Lotto.of(winningNumbers(inputText()));
 		LottoNumber bonusNumber = LottoNumber.of(bonusNumber());
-		LottoResult lottoResult = new LottoResult(new WinningLotto(winningNumbers, bonusNumber).match(entireLotto));
-		statistics(lottoResult, price);
+		LottoResult lottoResult = new WinningLotto(winningNumbers, bonusNumber).match(entireLotto);
+		printStatistics(lottoResult, price);
 	}
 }

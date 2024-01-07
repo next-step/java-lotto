@@ -1,8 +1,7 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public final class Lotto {
@@ -35,10 +34,10 @@ public final class Lotto {
 	public static Lotto of(final String stringLotto) {
 		Set<LottoNumber> lotto = new HashSet<>();
 
-		String[] stringLottoNumberArray = stringLotto.trim().split(DELIMITER);
+		String[] stringLottoNumberArray = stringLotto.split(DELIMITER);
 
 		for (String stringLottoNumber : stringLottoNumberArray) {
-			lotto.add(LottoNumber.of(Integer.parseInt(stringLottoNumber)));
+			lotto.add(LottoNumber.of(Integer.parseInt(stringLottoNumber.trim())));
 		}
 
 		return new Lotto(lotto);
@@ -52,26 +51,6 @@ public final class Lotto {
 		}
 
 		return new Lotto(lottoNumbers);
-	}
-
-	public static List<Lotto> initializeEntireLotto(final List<String> stringLottos) {
-		List<Lotto> entireLotto = new ArrayList<>();
-
-		for (String stringLotto : stringLottos) {
-			entireLotto.add(Lotto.of(stringLotto));
-		}
-
-		return entireLotto;
-	}
-
-	public static List<Lotto> autoLottoFactory(final int numberOfLotto) {
-		List<Lotto> entireLotto = new ArrayList<>();
-
-		for (int i = 0; i < numberOfLotto; i++) {
-			entireLotto.add(new Lotto(LottoNumber.randomLottoNumber()));
-		}
-
-		return entireLotto;
 	}
 
 	public boolean contains(final LottoNumber lottoNumber) {
@@ -92,5 +71,20 @@ public final class Lotto {
 		}
 
 		return count;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Lotto lotto1 = (Lotto)o;
+		return Objects.equals(lotto, lotto1.lotto);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lotto);
 	}
 }
