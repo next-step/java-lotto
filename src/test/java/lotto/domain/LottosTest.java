@@ -14,7 +14,7 @@ public final class LottosTest {
 	Lottos lottos;
 
 	@BeforeEach
-	void create(){
+	void create() {
 		lottoList = new ArrayList<>();
 		Lotto lotto1 = Lotto.of("1, 2, 3, 4, 5, 6");
 		Lotto lotto2 = Lotto.of("7, 8, 9, 10, 11, 12");
