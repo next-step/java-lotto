@@ -11,18 +11,24 @@ public final class Lotto {
 
 	private final Set<LottoNumber> lotto;
 
-	public Lotto(final Set<LottoNumber> lotto) {
+	private Lotto(final Set<LottoNumber> lotto) {
 		validate(lotto);
 		this.lotto = lotto;
 	}
 
-	public void validate(final Set<LottoNumber> lotto) {
+	public static Lotto of(final Set<LottoNumber> lotto) {
+		validate(lotto);
+
+		return new Lotto(lotto);
+	}
+
+	private static void validate(final Set<LottoNumber> lotto) {
 		if (!lengthCheck(lotto)) {
 			throw new IllegalArgumentException("숫자 6개만 입력해주세요");
 		}
 	}
 
-	private boolean lengthCheck(final Set<LottoNumber> lotto) {
+	private static boolean lengthCheck(final Set<LottoNumber> lotto) {
 		return lotto.size() == LOTTO_SIZE;
 	}
 

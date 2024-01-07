@@ -21,7 +21,7 @@ public final class LottoApplicaion {
 		entireLotto(entireLotto);
 
 		winningNumber();
-		Lotto winningNumbers = new Lotto(winningNumbers(inputText()));
+		Lotto winningNumbers = Lotto.of(winningNumbers(inputText()));
 		LottoNumber bonusNumber = LottoNumber.of(bonusNumber());
 		LottoResult lottoResult = new LottoResult(new WinningLotto(winningNumbers, bonusNumber).match(entireLotto));
 		statistics(lottoResult, price);
