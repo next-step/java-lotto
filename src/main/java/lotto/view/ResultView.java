@@ -6,6 +6,7 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.LottoResult;
 
@@ -28,7 +29,7 @@ public final class ResultView {
 		return result;
 	}
 
-	public static void printStatistics(final LottoResult lottoResult, final int price) {
+	public static void printStatistics(final LottoResult lottoResult, final Money money) {
 		System.out.println();
 		System.out.println("당첨 통계");
 		System.out.println("---------");
@@ -37,6 +38,6 @@ public final class ResultView {
 		System.out.println("5개 일치 (1500000원)- " + lottoResult.rankCount(Rank.RANK3) + "개");
 		System.out.println("5개 일치, 보너스 볼 일치 (30000000원)- " + lottoResult.rankCount(Rank.RANK2) + "개");
 		System.out.println("6개 일치 (2000000000원)- " + lottoResult.rankCount(Rank.RANK1) + "개");
-		System.out.printf("총 수익률은 %.2f입니다.", lottoResult.calculateRate(price));
+		System.out.printf("총 수익률은 %.2f입니다.", money.calculateRate(lottoResult));
 	}
 }

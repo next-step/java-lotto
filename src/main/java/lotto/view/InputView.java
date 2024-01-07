@@ -11,7 +11,6 @@ import lotto.domain.LottoNumber;
 
 public final class InputView {
 	private static final String DELIMITER = ",";
-	private static final int WON1000 = 1000;
 	private static final Scanner SCANNER = new Scanner(System.in);
 
 	public static int priceInput() {
@@ -48,13 +47,6 @@ public final class InputView {
 		}
 
 		return manualNumbers;
-	}
-
-	public static int numberOfLotto(final int price, final int manualCount) {
-		int number = price / WON1000;
-		System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", manualCount, number - manualCount);
-
-		return number;
 	}
 
 	public static void winningNumber() {

@@ -12,20 +12,6 @@ public final class LottoResult {
 		}
 	}
 
-	public double calculateRate(final int totalPrice) {
-		return totalPrize() / (double)totalPrice;
-	}
-
-	private double totalPrize() {
-		double totalPrize = 0;
-
-		for (Rank rank : Rank.values()) {
-			totalPrize += Rank.calculate(rank, lottoResultMap.get(rank));
-		}
-
-		return totalPrize;
-	}
-
 	public int rankCount(final Rank rank) {
 		return lottoResultMap.get(rank);
 	}
@@ -36,5 +22,15 @@ public final class LottoResult {
 
 	public Map<Rank, Integer> lottoResultMap() {
 		return lottoResultMap;
+	}
+
+	public double totalPrize() {
+		double totalPrize = 0;
+
+		for (Rank rank : Rank.values()) {
+			totalPrize += Rank.calculate(rank, lottoResultMap.get(rank));
+		}
+
+		return totalPrize;
 	}
 }
