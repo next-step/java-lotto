@@ -10,18 +10,18 @@ public final class LottoTest {
 	@Test
 	@DisplayName("Lotto 파라미터로 Sting이 들어올 경우")
 	void Lotto_String() {
-		Lotto lotto = new Lotto("1,2,3,4,5,6");
+		Lotto lotto = Lotto.of("1,2,3,4,5,6");
 		for (int i = 1; i < 7; i++) {
-			assertTrue(lotto.contains(new LottoNumber(i)));
+			assertTrue(lotto.contains(LottoNumber.of(i)));
 		}
 	}
 
 	@Test
 	@DisplayName("Lotto 파라미터로 Integer로 들어올 경우")
 	void Lotto_Integer() {
-		Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+		Lotto lotto = Lotto.from(1, 2, 3, 4, 5, 6);
 		for (int i = 1; i < 7; i++) {
-			assertTrue(lotto.contains(new LottoNumber(i)));
+			assertTrue(lotto.contains(LottoNumber.of(i)));
 		}
 	}
 
@@ -31,11 +31,11 @@ public final class LottoTest {
 		String expectingMessage = "숫자 6개만 입력해주세요";
 
 		assertThatExceptionOfType(IllegalArgumentException.class)
-			.isThrownBy(() -> new Lotto("1,2,3,4,5"))
+			.isThrownBy(() -> Lotto.of("1,2,3,4,5"))
 			.withMessageMatching(expectingMessage);
 
 		assertThatExceptionOfType(IllegalArgumentException.class)
-			.isThrownBy(() -> new Lotto("1,2,3,4,5,6,7"))
+			.isThrownBy(() -> Lotto.of("1,2,3,4,5,6,7"))
 			.withMessageMatching(expectingMessage);
 	}
 }

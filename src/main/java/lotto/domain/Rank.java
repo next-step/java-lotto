@@ -30,11 +30,11 @@ public enum Rank {
 		return Rank.MISS;
 	}
 
-	public static int calculate(final Rank rank, final int lottoCount) {
+	public static double calculate(final Rank rank, final int lottoCount) {
 		return findPrize(rank) * lottoCount;
 	}
 
-	public static int findPrize(final Rank rank) {
+	public static double findPrize(final Rank rank) {
 		return rank.prize;
 	}
 }

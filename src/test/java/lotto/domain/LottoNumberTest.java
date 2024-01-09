@@ -11,7 +11,7 @@ public final class LottoNumberTest {
 	void 범위_내의_숫자인지_확인() {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 			.isThrownBy(() -> {
-				new LottoNumber(46);
+				LottoNumber.of(46);
 			}).withMessage("1과 45 사이의 숫자를 입력해주세요.");
 	}
 }
