@@ -16,11 +16,11 @@ public class LottoNumberTest {
         String expectingMessage = "0보다 크고, 46보다 작은 수를 입력해주세요";
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new LottoNumber(0))
+            .isThrownBy(() -> LottoNumber.of(0))
             .withMessageMatching(expectingMessage);
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new LottoNumber(46))
+            .isThrownBy(() -> LottoNumber.of(46))
             .withMessageMatching(expectingMessage);
     }
 }

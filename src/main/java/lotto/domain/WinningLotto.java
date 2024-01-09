@@ -1,21 +1,16 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class WinningLotto {
 
     private Lotto winningNumber;
     private LottoNumber bonusNumber;
 
-    public WinningLotto(Integer bonusNumber, Integer... winningNumber) {
-        this(new LottoNumber(bonusNumber), new Lotto(winningNumber));
-    }
 
-    public WinningLotto(LottoNumber bonusNumber, Lotto winningNumber) {
-        this.bonusNumber = bonusNumber;
+    public WinningLotto(Lotto winningNumber, LottoNumber bonusNumber) {
         this.winningNumber = winningNumber;
+        this.bonusNumber = bonusNumber;
     }
 
     public Rank calculateRank(Lotto lotto) {
@@ -24,20 +19,12 @@ public class WinningLotto {
         return Rank.findRankByDuplicateCount(duplicateNumber, containsBonusNumber);
     }
 
-    public Map<Rank, Integer> match(List<Lotto> allLotto) {
-        Map<Rank, Integer> result = initializeLottoRankResultMap();
+    public LottoResult match(List<Lotto> allLotto) {
+        LottoResult lottoResult = new LottoResult();
         for (Lotto lotto : allLotto) {
-            Rank rank = calculateRank(lotto);
-            result.replace(rank, result.get(rank) + 1);
+            lottoResult.add(calculateRank(lotto));
         }
-        return result;
+        return lottoResult;
     }
 
-    private Map<Rank, Integer> initializeLottoRankResultMap() {
-        Map<Rank, Integer> lottoResultMap = new HashMap<>();
-        for (Rank rank : Rank.values()) {
-            lottoResultMap.put(rank, 0);
-        }
-        return lottoResultMap;
-    }
 }
