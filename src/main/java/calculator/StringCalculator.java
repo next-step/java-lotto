@@ -5,8 +5,9 @@ public class StringCalculator {
     public static int calculate(String strExpression) {
         assertInput(strExpression);
 
-        Operand expression = CalculatedExpression.from(strExpression);
-        return expression.value();
+        Expression expression = new Expression(strExpression);
+        Operand result = CalculatedExpression.from(expression);
+        return result.value();
     }
 
     private static void assertInput(String input) {
