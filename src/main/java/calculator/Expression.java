@@ -33,15 +33,19 @@ public class Expression {
     }
 
     public Expression expressionWithoutLastOperatorAndOperand() {
-        return new Expression(tokens.subList(0, tokens.size() - 2));
+        int startIndex = 0;
+        int lastOperatorIndex = tokens.size() - 2;
+        return new Expression(tokens.subList(startIndex, lastOperatorIndex));
     }
 
     public Operator lastOperator() {
-        return Operator.of(tokens.get(tokens.size() - 2));
+        int lastOperatorIndex = tokens.size() - 2;
+        return Operator.of(tokens.get(lastOperatorIndex));
     }
 
     public Operand lastOperand() {
-        return Operand.of(tokens.get(tokens.size() - 1));
+        int lastOperandIndex = tokens.size() - 1;
+        return Operand.of(tokens.get(lastOperandIndex));
     }
 
     @Override
