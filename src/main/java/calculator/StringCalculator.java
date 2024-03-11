@@ -3,6 +3,7 @@ package calculator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StringCalculator {
 
@@ -13,13 +14,16 @@ public class StringCalculator {
     public static int calculate(String input) {
         assertInput(input);
 
-        List<String> tokens = new ArrayList<>(Arrays.asList(input.split(TOKEN_DELIMITER)));
+        List<Token> tokens = Arrays.stream(input.split(TOKEN_DELIMITER))
+            .map(Token::of)
+            .collect(Collectors.toList());
+
         while (tokens.size() > ONE) {
             int result = calculateOne(tokens);
-            tokens.add(FIRST, String.valueOf(result));
+            tokens.add(FIRST, new Operand(result));
         }
 
-        return Integer.parseInt(tokens.get(FIRST));
+        return ((Operand) tokens.get(FIRST)).value();
     }
 
     private static void assertInput(String input) {
@@ -28,11 +32,14 @@ public class StringCalculator {
         }
     }
 
-    private static int calculateOne(List<String> operands) {
-        Operand left = new Operand(operands.remove(FIRST));
-        Operator operator = Operator.from(operands.remove(FIRST));
-        Operand right = new Operand(operands.remove(FIRST));
-
-        return operator.compute(left, right);
+    private static int calculateOne(List<Token> tokens) {
+        try {
+            Operand left = (Operand) tokens.remove(FIRST);
+            Operator operator = (Operator) tokens.remove(FIRST);
+            Operand right = (Operand) tokens.remove(FIRST);
+            return operator.compute(left, right);
+        } catch (ClassCastException e) {
+            throw new IllegalArgumentException("연산자 또는 피연산자가 잘못된 위치에 있음");
+        }
     }
 }
