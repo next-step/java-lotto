@@ -16,7 +16,7 @@ public class Expression {
         this(
             Arrays.stream(strExpression.split(TOKEN_DELIMITER))
                 .map(Token::of)
-                .collect(Collectors.toList())
+                .collect(Collectors.toUnmodifiableList())
         );
     }
 
