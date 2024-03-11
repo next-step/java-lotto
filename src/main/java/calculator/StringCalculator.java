@@ -6,16 +6,20 @@ import java.util.List;
 
 public class StringCalculator {
 
+    private static final int FIRST = 0;
+    private static final int ONE = 1;
+    private static final String TOKEN_DELIMITER = " ";
+
     public static int calculate(String input) {
         assertInput(input);
 
-        List<String> operands = new ArrayList<>(Arrays.asList(input.split(" ")));
-        while (operands.size() > 1) {
-            int result = calculateOne(operands);
-            operands.add(0, String.valueOf(result));
+        List<String> tokens = new ArrayList<>(Arrays.asList(input.split(TOKEN_DELIMITER)));
+        while (tokens.size() > ONE) {
+            int result = calculateOne(tokens);
+            tokens.add(FIRST, String.valueOf(result));
         }
 
-        return Integer.parseInt(operands.get(0));
+        return Integer.parseInt(tokens.get(FIRST));
     }
 
     private static void assertInput(String input) {
@@ -25,9 +29,9 @@ public class StringCalculator {
     }
 
     private static int calculateOne(List<String> operands) {
-        Operand left = new Operand(operands.remove(0));
-        Operator operator = Operator.from(operands.remove(0));
-        Operand right = new Operand(operands.remove(0));
+        Operand left = new Operand(operands.remove(FIRST));
+        Operator operator = Operator.from(operands.remove(FIRST));
+        Operand right = new Operand(operands.remove(FIRST));
 
         return operator.compute(left, right);
     }
