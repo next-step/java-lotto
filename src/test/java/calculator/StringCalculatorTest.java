@@ -2,7 +2,7 @@ package calculator;
 
 import static calculator.StringCalculator.calculate;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,8 +15,8 @@ public class StringCalculatorTest {
     @NullAndEmptySource
     @DisplayName("null 또는 공백이 들어오면 예외를 던진다")
     void fail_for_null_or_empty(String input) {
-        assertThatThrownBy(() -> calculate(input))
-            .isInstanceOf(IllegalArgumentException.class);
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> calculate(input));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class StringCalculatorTest {
     @Test
     @DisplayName("잘못된 연산자가 들어오면 예외를 던진다")
     void fail_for_illegal_operator() {
-        assertThatThrownBy(() -> calculate("3 ! 2"))
-            .isInstanceOf(IllegalArgumentException.class);
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> calculate("3 ! 2"));
     }
 }
