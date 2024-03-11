@@ -10,6 +10,13 @@ public class Operand extends Token {
         this.value = value;
     }
 
+    public static Operand of(Token token) {
+        if (!(token instanceof Operand)) {
+            throw new IllegalArgumentException("연산자 또는 피연산자가 잘못된 위치에 있음");
+        }
+        return (Operand) token;
+    }
+
     public int value() {
         return value;
     }

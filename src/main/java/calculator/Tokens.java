@@ -29,17 +29,13 @@ public class Tokens {
             int result = calculateOne(tokens);
             tokens.add(FIRST, new Operand(result));
         }
-        return ((Operand) tokens.get(FIRST)).value();
+        return Operand.of(tokens.get(FIRST)).value();
     }
 
     private static int calculateOne(List<Token> tokens) {
-        try {
-            Operand left = (Operand) tokens.remove(FIRST);
-            Operator operator = (Operator) tokens.remove(FIRST);
-            Operand right = (Operand) tokens.remove(FIRST);
-            return operator.compute(left, right);
-        } catch (ClassCastException e) {
-            throw new IllegalArgumentException("연산자 또는 피연산자가 잘못된 위치에 있음");
-        }
+        Operand left = Operand.of(tokens.remove(FIRST));
+        Operator operator = Operator.of(tokens.remove(FIRST));
+        Operand right = Operand.of(tokens.remove(FIRST));
+        return operator.compute(left, right);
     }
 }
