@@ -53,4 +53,11 @@ public class StringCalculatorTest {
         assertThatIllegalArgumentException()
             .isThrownBy(() -> calculate("3 ! 2"));
     }
+
+    @Test
+    @DisplayName("사칙연산 여러 항을 계산한다")
+    void multiple_calculation() {
+        assertThat(calculate("3 / 2 + 3 * 4 - 10"))
+            .isEqualTo(6);
+    }
 }
