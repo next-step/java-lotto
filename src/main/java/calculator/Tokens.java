@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class Tokens {
 
-    private final List<Token> tokens;
+    private List<Token> tokens;
 
     private static final String TOKEN_DELIMITER = " ";
     private static final int ONE = 1;
@@ -24,18 +24,23 @@ public class Tokens {
         this.tokens = tokens;
     }
 
-    public int calculate() {
-        while (tokens.size() > ONE) {
-            int result = calculateOne(tokens);
-            tokens.add(FIRST, new Operand(result));
-        }
-        return Operand.of(tokens.get(FIRST)).value();
+    public Expression firstExpression() {
+        Operand left = Operand.of(tokens.get(FIRST));
+        Operator operator = Operator.of(tokens.get(1));
+        Operand right = Operand.of(tokens.get(2));
+        return new Expression(operator, left, right);
     }
 
-    private static int calculateOne(List<Token> tokens) {
-        Operand left = Operand.of(tokens.remove(FIRST));
-        Operator operator = Operator.of(tokens.remove(FIRST));
-        Operand right = Operand.of(tokens.remove(FIRST));
-        return operator.compute(left, right);
+    public void replaceFirstExpressionWithResult(int result) {
+        tokens = tokens.subList(3, tokens.size());
+        tokens.add(FIRST, new Operand(result));
+    }
+
+    public boolean hasResult() {
+        return tokens.size() == 1;
+    }
+
+    public int result() {
+        return Operand.of(tokens.get(0)).value();
     }
 }
