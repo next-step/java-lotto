@@ -46,4 +46,11 @@ public class StringCalculatorTest {
         assertThat(calculate("3 / 2"))
             .isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("잘못된 연산자가 들어오면 예외를 던진다")
+    void fail_for_illegal_operator() {
+        assertThatThrownBy(() -> calculate("3 ! 2"))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
 }
