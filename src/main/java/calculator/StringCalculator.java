@@ -2,15 +2,11 @@ package calculator;
 
 public class StringCalculator {
 
-    public static int calculate(String strTokens) {
-        assertInput(strTokens);
+    public static int calculate(String strExpression) {
+        assertInput(strExpression);
 
-        Tokens tokens = new Tokens(strTokens);
-        while (!tokens.hasResult()) {
-            int result = tokens.firstExpression().calculate();
-            tokens.replaceFirstExpressionWithResult(result);
-        }
-        return tokens.result();
+        Operand expression = CalculatedExpression.from(strExpression);
+        return expression.value();
     }
 
     private static void assertInput(String input) {
