@@ -17,4 +17,10 @@ public abstract class Token {
             return false;
         }
     }
+
+    @Override
+    public abstract int hashCode();
+
+    @Override
+    public abstract boolean equals(Object obj);
 }

@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.BiFunction;
 
 public class Operator extends Token {
@@ -42,6 +43,24 @@ public class Operator extends Token {
 
     public int compute(Operand left, Operand right) {
         return computeFunction.apply(left, right);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Operator operator = (Operator) o;
+        return Objects.equals(sign, operator.sign) && Objects.equals(
+            computeFunction, operator.computeFunction);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sign, computeFunction);
     }
 
     @Override
