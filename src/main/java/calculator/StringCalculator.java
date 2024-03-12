@@ -5,7 +5,7 @@ public class StringCalculator {
     public static int calculate(String strExpression) {
         assertInput(strExpression);
 
-        Expression expression = new Expression(strExpression);
+        Expression expression = Expression.of(strExpression);
         Operand result = CalculatedExpression.from(expression);
         return result.value();
     }

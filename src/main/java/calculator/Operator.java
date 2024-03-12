@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.BiFunction;
 
-public class Operator extends Token {
+public class Operator {
 
     private final String sign;
     private final BiFunction<Operand, Operand, Integer> computeFunction;
@@ -32,13 +32,6 @@ public class Operator extends Token {
             throw new IllegalArgumentException("잘못된 사칙연산 기호");
         }
         return operator;
-    }
-
-    public static Operator of(Token token) {
-        if (!(token instanceof Operator)) {
-            throw new IllegalArgumentException("연산자 또는 피연산자가 잘못된 위치에 있음");
-        }
-        return (Operator) token;
     }
 
     public int compute(Operand left, Operand right) {

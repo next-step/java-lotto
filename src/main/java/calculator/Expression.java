@@ -1,51 +1,75 @@
 package calculator;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Expression {
 
-    private final List<Token> tokens;
+    private final List<Operand> operands;
+    private final List<Operator> operators;
 
     private static final int FIRST = 0;
+    private static final int ONE = 1;
     private static final String TOKEN_DELIMITER = " ";
 
-    public Expression(String strExpression) {
-        this(
-            Arrays.stream(strExpression.split(TOKEN_DELIMITER))
-                .map(Token::of)
-                .collect(Collectors.toUnmodifiableList())
-        );
+    public Expression(List<Operand> operands, List<Operator> operators) {
+        this.operands = operands;
+        this.operators = operators;
     }
 
-    public Expression(List<Token> tokens) {
-        this.tokens = tokens;
+    public static Expression of(String strExpression) {
+        String[] tokens = strExpression.split(TOKEN_DELIMITER);
+
+        List<Operand> operands = extractOperands(tokens);
+        List<Operator> operators = extractOperators(tokens);
+        return new Expression(operands, operators);
+    }
+
+    private static List<Operator> extractOperators(String[] tokens) {
+        return IntStream.range(FIRST, tokens.length)
+            .filter(Expression::isOdd)
+            .mapToObj(i -> Operator.from(tokens[i]))
+            .collect(Collectors.toUnmodifiableList());
+    }
+
+    private static boolean isOdd(int number) {
+        return number % 2 == ONE;
+    }
+
+    private static List<Operand> extractOperands(String[] tokens) {
+        return IntStream.range(FIRST, tokens.length)
+            .filter(Expression::isEven)
+            .mapToObj(i -> Operand.from(tokens[i]))
+            .collect(Collectors.toUnmodifiableList());
+    }
+
+    private static boolean isEven(int number) {
+        return number % 2 == FIRST;
     }
 
     public boolean isSingleToken() {
-        return tokens.size() == 1;
+        return operands.size() == ONE && operators.isEmpty();
     }
 
     public Operand firstOperand() {
-        return Operand.of(tokens.get(FIRST));
+        return operands.get(FIRST);
     }
 
     public Expression expressionWithoutLastOperatorAndOperand() {
-        int startIndex = 0;
-        int lastOperatorIndex = tokens.size() - 2;
-        return new Expression(tokens.subList(startIndex, lastOperatorIndex));
+        return new Expression(
+            operands.subList(FIRST, operands.size() - ONE),
+            operators.subList(FIRST, operators.size() - ONE)
+        );
     }
 
     public Operator lastOperator() {
-        int lastOperatorIndex = tokens.size() - 2;
-        return Operator.of(tokens.get(lastOperatorIndex));
+        return operators.get(operators.size() - ONE);
     }
 
     public Operand lastOperand() {
-        int lastOperandIndex = tokens.size() - 1;
-        return Operand.of(tokens.get(lastOperandIndex));
+        return operands.get(operands.size() - ONE);
     }
 
     @Override
@@ -57,11 +81,20 @@ public class Expression {
             return false;
         }
         Expression that = (Expression) o;
-        return Objects.equals(tokens, that.tokens);
+        return Objects.equals(operands, that.operands) && Objects.equals(operators,
+            that.operators);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(tokens);
+        return Objects.hash(operands, operators);
+    }
+
+    @Override
+    public String toString() {
+        return "Expression{" +
+            "operands=" + operands +
+            ", operators=" + operators +
+            '}';
     }
 }

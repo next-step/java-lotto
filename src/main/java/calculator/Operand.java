@@ -2,7 +2,7 @@ package calculator;
 
 import java.util.Objects;
 
-public class Operand extends Token {
+public class Operand {
 
     private final int value;
 
@@ -10,11 +10,16 @@ public class Operand extends Token {
         this.value = value;
     }
 
-    public static Operand of(Token token) {
-        if (!(token instanceof Operand)) {
-            throw new IllegalArgumentException("연산자 또는 피연산자가 잘못된 위치에 있음");
+    public static Operand from(String token) {
+        return new Operand(tryParseInt(token));
+    }
+
+    private static int tryParseInt(String str) {
+        try {
+            return Integer.parseInt(str);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("피연산자 자리에는 숫자만 올 수 있습니다");
         }
-        return (Operand) token;
     }
 
     public int value() {
