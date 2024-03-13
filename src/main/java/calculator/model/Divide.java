@@ -11,6 +11,13 @@ public class Divide implements ArithmeticStrategy {
 
 	@Override
 	public Integer calculate() {
+		validate();
 		return left / right;
+	}
+
+	private void validate() {
+		if (right == 0) {
+			throw new IllegalArgumentException("0으로 나눌 수 없습니다. 0보다 큰 숫자를 입력해주세요.");
+		}
 	}
 }
