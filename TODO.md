@@ -1,4 +1,5 @@
 ### 1단계 - 문자열 계산기
+
 ```text
 [기능 요구사항]
 - 사용자 입력 문자열 값에 따라 사칙연산을 수행하는 계산기를 구현 
@@ -7,14 +8,20 @@
 - "사칙연산의 계산 우선 순위가 아닌 입력 값에 따라 계산 순선가 결정"된다
 ```
 
- 
 #### 기능 구현 목록
-  - [ ] 덧셈
-  - [ ] 뺄셈
-  - [ ] 곱셈
-  - [ ] 나눗셈
-  - [ ] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException 
-  - [ ] 사칙연산 기호가 아닌 경우 IllegalArgumentException 
 
+1. 유효성 검사
+
+- [x] 입력 값이 null이거나 빈 공백 문자일 경우 -- IllegalArgumentException
+- [x] 사칙연산 기호가 아닌 경우 -- IllegalArgumentException
+- [x] 연산자의 개수는 (피연산자 - 1) 개수가 맞지 않은 경우 -- IllegalArgumentException
+- [x] 연산자의 시작이 숫자가 아닌 경우 -- IllegalArgumentException
+
+2. 사칙연산
+
+- [x] 덧셈
+- [x] 뺄셈
+- [x] 곱셈
+- [x] 나눗셈
 
 
