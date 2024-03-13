@@ -1,4 +1,4 @@
-package util;
+package step1;
 
 import org.junit.jupiter.api.Test;
 
@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CalculatorTest {
 
-    private Calculator calculator = new Calculator();
+    private final Calculator calculator = new Calculator();
 
     @Test
     void add() {
