@@ -1,0 +1,6 @@
+- [ ] 사용자가 입력한 문자열 값에 따라 사칙연산을 수행할 수 있는 계산기 구현
+  - [ ] 입력 문자열의 숫자와 사칙 연산 사이에는 반드시 빈 공백 문자열이 있다고 가정
+    - [ ] 숫자와 문자열 사이에 공백이 없으면 IllegalArgumentException 에러 처리
+  - [ ] 입력이 null이거나 빈 공백 문자열일 경우 IllegalArgumentException 에러처리
+  - [ ] 사칙 연산 기호가 아닌경우 IllegalArgumentException 예외 처리
+  - [ ] 0으로 나누었을때 IllegalArgumentException 예외 처리
