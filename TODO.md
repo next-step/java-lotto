@@ -30,3 +30,9 @@
 - [x] operator, operation 검증 클래스 분리
 - [x] enum Operation에서 추상 메서드 대신 함수형 인터페이스 적용
 - [x] 피연산자, 연산자를 분리하여 연산식 계산하도록 리팩토링
+- [x] OperationWrapper 클래스 제거, 후위 순회로 연산하도록 StringCalculator 클래스 리팩토링
+    - 사칙연산의 우선 순위가 없어 순차적으로 후위 순회 연산 처리하기 위해 Stack 대신 Queue 사용
+    - 중위 순회 "2 + 3 * 4 / 2" -> 후위 순회 "2 3 4 2 + * /"
+        - 사칙연산시 숫자의 경우 Queue 넣음
+        - 연산자 만나면 Queue에서 두 개 뽑아서 계산 후 Queue 맨 앞에 추가
+        - Queue 남은 숫자가 최종 연산 결과

@@ -12,9 +12,8 @@ class StringCalculatorTest {
     @CsvSource(value = {"2 + 3 * 4 / 2:10", "1 / 0:0"}, delimiter = ':')
     void calculate(String given, int expected) {
         StringCalculator cal = new StringCalculator();
-        int actual = cal.calculate(given);
+        int actual = cal.evaluate(given);
 
         assertThat(actual).isEqualTo(expected);
     }
-
 }

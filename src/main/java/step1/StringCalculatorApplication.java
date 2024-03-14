@@ -11,6 +11,6 @@ public class StringCalculatorApplication {
         String input = scanner.nextLine();
 
         StringCalculator stringCalculator = new StringCalculator();
-        System.out.println(stringCalculator.calculate(input));
+        System.out.println(stringCalculator.evaluate(input));
     }
 }
