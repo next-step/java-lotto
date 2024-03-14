@@ -14,4 +14,11 @@ public class CalculatorTest {
         Calculator calculator = new Calculator();
         assertThat(calculator.add(2, 3)).isEqualTo(5);
     }
+
+    @Test
+    @DisplayName("두 숫자를 뺀다.")
+    void 뺄셈() {
+        Calculator calculator = new Calculator();
+        assertThat(calculator.subtract(3, 2)).isEqualTo(1);
+    }
 }
