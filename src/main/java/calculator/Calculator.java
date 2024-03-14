@@ -8,6 +8,8 @@ public class Calculator {
 	}
 
 	public Integer calculatedInteger() {
+		validateInputText();
+
 		String[] inputs = StringUtil.splitInput(inputText);
 
 		int result = Integer.parseInt(inputs[0]);
@@ -17,6 +19,12 @@ public class Calculator {
 		}
 
 		return result;
+	}
+
+	private void validateInputText() {
+		if(inputText == null || inputText.isEmpty()) {
+			throw new IllegalArgumentException("null값이나 빈 공백 문자열은 입력할 수 없습니다. 다시 입력해주세요.");
+		}
 	}
 
 	private static int calculate(final int index, int result, final String[] inputs) {
