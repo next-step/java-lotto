@@ -28,3 +28,4 @@
 
 - [x] 프로덕션/테스트 코드 패키지 분리
 - [x] operator, operation 검증 클래스 분리
+- [x] enum Operation에서 추상 메서드 대신 함수형 인터페이스 적용

@@ -15,10 +15,11 @@ public class StringCalculator {
         String[] tokens = input.split(" ");
         int operand1 = toInt(tokens[0]);
         for (int i = 1; i <= tokens.length - 2; i += 2) {
-            String symbol = tokens[i];
+            String operator = tokens[i];
             int operand2 = toInt(tokens[i + 1]);
 
-            operand1 = Operation.performOperation(operand1, symbol, operand2);
+            Operation operation = Operation.find(operator);
+            operand1 = operation.apply(operand1, operand2);
         }
 
         return operand1;

@@ -1,63 +1,47 @@
 package step1.calculator;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Map;
+import java.util.function.BiFunction;
+
+import static java.util.stream.Collectors.toMap;
 
 public enum Operation {
-    PLUS("+") {
-        int apply(int x, int y) {
-            return x + y;
-        }
-    },
-    MINUS("-") {
-        int apply(int x, int y) {
-            return x - y;
-        }
-    },
-    MULTIPLY("*") {
-        int apply(int x, int y) {
-            return x * y;
-        }
-    },
-    DIVIDE("/") {
-        int apply(int x, int y) {
-            if (y == 0) {
-                return 0;
-            }
-
-            return x / y;
-        }
-    };
+    PLUS("+", Integer::sum),
+    MINUS("-", (x, y) -> x - y),
+    MULTIPLY("*", (x, y) -> x * y),
+    DIVIDE("/", (x, y) -> y == 0 ? 0 : x / y);
 
     private final String symbol;
+    private final BiFunction<Integer, Integer, Integer> calculator;
 
-    Operation(String symbol) {
+    Operation(String symbol, BiFunction<Integer, Integer, Integer> calculator) {
         this.symbol = symbol;
+        this.calculator = calculator;
     }
 
-    abstract int apply(int x, int y);
+    public String getSymbol() {
+        return symbol;
+    }
 
     private static final String INVALID_OPERATOR = "유효하지 않은 연산자 입니다 : %s";
-    private static final List<Operation> operations = Arrays.asList(values());
+    private static final Map<String, Operation> OPERATION_MAP;
 
-    public static Operation find(String operator) {
-        return operations.stream()
-                .filter(operation -> operation.sameSymbol(operator))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(String.format(INVALID_OPERATOR, operator)));
+    static {
+        OPERATION_MAP = Arrays.stream(values())
+                .collect(toMap(Operation::getSymbol, e -> e));
     }
 
-    public static int performOperation(int operand1, String operator, int operand2) {
-        Operation operation = find(operator);
-        return operation.apply(operand1, operand2);
+    public static Operation find(String symbol) {
+        if (OPERATION_MAP.containsKey(symbol)) {
+            return OPERATION_MAP.get(symbol);
+        }
+
+        throw new IllegalArgumentException(String.format(INVALID_OPERATOR, symbol));
     }
 
-    private boolean sameSymbol(String symbol) {
-        return this.symbol.equals(symbol);
+    public int apply(int operand1, int operand2) {
+        return this.calculator.apply(operand1, operand2);
     }
 
-    @Override
-    public String toString() {
-        return this.symbol;
-    }
 }
