@@ -21,4 +21,11 @@ public class CalculatorTest {
         Calculator calculator = new Calculator();
         assertThat(calculator.subtract(3, 2)).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("두 숫자를 곱한다.")
+    void 곱셈() {
+        Calculator calculator = new Calculator();
+        assertThat(calculator.multiply(3, 2)).isEqualTo(6);
+    }
 }
