@@ -28,4 +28,11 @@ public class CalculatorTest {
         Calculator calculator = new Calculator();
         assertThat(calculator.multiply(3, 2)).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("두 숫자를 나눈다.")
+    void 나눗셈() {
+        Calculator calculator = new Calculator();
+        assertThat(calculator.divide(4, 2)).isEqualTo(2);
+    }
 }
