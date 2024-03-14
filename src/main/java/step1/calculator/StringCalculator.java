@@ -1,16 +1,16 @@
 package step1.calculator;
 
-import step1.validator.Validator;
+import step1.validator.OperationValidator;
 
 public class StringCalculator {
-    private final Validator validator;
+    private final OperationValidator validator;
 
     public StringCalculator() {
-        validator = new Validator();
+        validator = new OperationValidator();
     }
 
     public int calculate(String input) {
-        validator.assertValidInput(input);
+        validator.assertOperation(input);
 
         String[] tokens = input.split(" ");
         int operand1 = toInt(tokens[0]);
