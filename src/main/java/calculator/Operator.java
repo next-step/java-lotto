@@ -2,20 +2,33 @@ package calculator;
 
 import calculator.model.*;
 
+import static calculator.model.ArithmeticEnum.*;
+
 public class Operator {
 	private final ArithmeticStrategy strategy;
 
 	public Operator(String operator, Integer left, Integer right) {
-		if(operator.equals("+"))
+		if(PLUS.getOperator().equals(operator)){
 			this.strategy = new Plus(left, right);
-		else if(operator.equals("-"))
+			return;
+		}
+
+		if(MINUS.getOperator().equals(operator)){
 			this.strategy = new Minus(left, right);
-		else if(operator.equals("*"))
+			return;
+		}
+
+		if(MULTIPLY.getOperator().equals(operator)){
 			this.strategy = new Multiply(left, right);
-		else if(operator.equals("/"))
+			return;
+		}
+
+		if(DIVIDE.getOperator().equals(operator)){
 			this.strategy = new Divide(left, right);
-		else
-			throw new IllegalArgumentException("사칙 연산 기호가 아닙니다.");
+			return;
+		}
+
+		throw new IllegalArgumentException("사칙 연산 기호가 아닙니다.");
 	}
 
 	public Integer execute() {
