@@ -15,7 +15,7 @@ public class Operator {
 		else if(operator.equals("/"))
 			this.strategy = new Divide(left, right);
 		else
-			throw new IllegalArgumentException("사칙 연산 기호가 아닙니다. +, -, *, / 중 하나를 입력하세요.");
+			throw new IllegalArgumentException("사칙 연산 기호가 아닙니다.");
 	}
 
 	public Integer execute() {
