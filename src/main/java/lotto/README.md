@@ -21,6 +21,7 @@
 * 뺄셈
 * 곱셈
 * 나눗셈
+  * 나눗셈의 경우 결과 값을 정수로 떨어지는 값으로 정한다.
 * 입력값 검증
   * 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw 
   * 사칙연산 기호가 아닌 경우 IllegalArgumentException throw 
