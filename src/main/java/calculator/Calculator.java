@@ -8,20 +8,20 @@ public class Calculator {
 	}
 
 	public Integer calculatedInteger() {
-		String[] splitInput = StringUtil.splitInput(inputText);
+		String[] inputs = StringUtil.splitInput(inputText);
 
-		int result = Integer.parseInt(splitInput[0]);
+		int result = Integer.parseInt(inputs[0]);
 
-		for (int i = 1; i < splitInput.length; i++) {
-			result = calculate(i, result, splitInput);
+		for (int i = 1; i < inputs.length; i++) {
+			result = calculate(i, result, inputs);
 		}
 
 		return result;
 	}
 
-	private static int calculate(final int i, int result, final String[] splitInput) {
-		if (i % 2 == 1) {
-			result = new Operator(splitInput[i], result, Integer.parseInt(splitInput[i + 1])).execute();
+	private static int calculate(final int index, int result, final String[] inputs) {
+		if (index % 2 == 1) {
+			result = new Operator(inputs[index], result, Integer.parseInt(inputs[index + 1])).execute();
 		}
 		return result;
 	}
