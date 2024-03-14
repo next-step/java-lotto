@@ -1,6 +1,5 @@
 package lotto;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -34,5 +33,12 @@ public class CalculatorTest {
     void 나눗셈() {
         Calculator calculator = new Calculator();
         assertThat(calculator.divide(4, 2)).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("두 숫자를 나눈 결과가 정수가 아닌 경우 소수점을 버린다.")
+    void 나눗셈_반올림() {
+        Calculator calculator = new Calculator();
+        assertThat(calculator.divide(3, 2)).isEqualTo(1);
     }
 }
