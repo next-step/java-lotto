@@ -1,4 +1,4 @@
-package step1;
+package step1.calculator;
 
 import java.util.Arrays;
 import java.util.List;

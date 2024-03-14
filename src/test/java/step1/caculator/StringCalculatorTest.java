@@ -1,7 +1,8 @@
-package step1;
+package step1.caculator;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import step1.calculator.StringCalculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

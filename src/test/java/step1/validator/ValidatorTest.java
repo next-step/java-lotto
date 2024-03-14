@@ -1,4 +1,4 @@
-package step1;
+package step1.validator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

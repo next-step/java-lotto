@@ -1,13 +1,14 @@
-package step1;
+package step1.caculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import step1.calculator.Operation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static step1.Operation.PLUS;
+import static step1.calculator.Operation.PLUS;
 
 class OperationTest {
 

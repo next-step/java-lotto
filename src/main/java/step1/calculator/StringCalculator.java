@@ -1,6 +1,6 @@
-package step1;
+package step1.calculator;
 
-import static step1.Operation.performOperation;
+import step1.validator.Validator;
 
 public class StringCalculator {
     private final Validator validator;
@@ -14,11 +14,11 @@ public class StringCalculator {
 
         String[] tokens = input.split(" ");
         int operand1 = toInt(tokens[0]);
-        for (int i = 1; i <= tokens.length - 1; i += 2) {
+        for (int i = 1; i <= tokens.length - 2; i += 2) {
             String symbol = tokens[i];
             int operand2 = toInt(tokens[i + 1]);
 
-            operand1 = performOperation(operand1, symbol, operand2);
+            operand1 = Operation.performOperation(operand1, symbol, operand2);
         }
 
         return operand1;

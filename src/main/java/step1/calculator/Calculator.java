@@ -1,4 +1,4 @@
-package step1;
+package step1.calculator;
 
 public class Calculator {
 

@@ -1,4 +1,6 @@
-package step1;
+package step1.validator;
+
+import step1.calculator.Operation;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
