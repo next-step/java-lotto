@@ -18,4 +18,9 @@ public class Operators {
     public void add(String operator) {
         this.operators.add(operator);
     }
+
+    public String getOperator() {
+        return this.operators.poll();
+    }
+
 }

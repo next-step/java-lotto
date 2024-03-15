@@ -19,4 +19,8 @@ public class Numbers {
         return this.numberQueue;
     }
 
+    public Integer getNumber() {
+        return this.numberQueue.poll();
+    }
+
 }
