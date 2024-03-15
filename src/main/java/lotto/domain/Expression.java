@@ -1,8 +1,10 @@
 package lotto.domain;
 
-import lotto.exception.ExpressionNumberParseException;
+import lotto.exception.IllegalOperatorExpression;
 
+import java.util.HashSet;
 import java.util.Queue;
+import java.util.Set;
 
 public class Expression {
 
@@ -12,26 +14,49 @@ public class Expression {
     private static final String MULTIPLY_SIGN = "*";
     private static final String DIVIDED_SIGN = "/";
 
+    private final Set<String> OPERATOR_SET = new HashSet<>() {{
+        add(ADD_SIGN);
+        add(SUBTRACT_SIGN);
+        add(MULTIPLY_SIGN);
+        add(DIVIDED_SIGN);
+    }};
+
     // TODO: 일급 컬렉션을 상태로 가짐으로서 발생하는 .get() 체이닝 문제
-    // Calculator -> Expression -> Numbers & Operators (Queue)
-    // Calculator -> Expression (2 Queues)
+    // (현재) Calculator -> Expression -> Numbers & Operators (Queue)
+    // (개선 가능한 방향) Calculator -> Expression (2 Queues)
     private final Numbers numbers;
     private final Operators operators;
 
     public Expression(String[] expressionElements) {
         this.numbers = new Numbers();
         this.operators = new Operators();
-        
+
         for (String element : expressionElements) {
             addNumberOrOperator(element);
         }
     }
 
-    private void addNumberOrOperator(String element) {
+    private void addNumberOrOperator(String element) throws IllegalOperatorExpression {
         if (isNumber(element)) {
-            numbers.add(parseInt(element));
+            addNumber(element);
             return;
         }
+
+        validateOperation(element);
+        addOperator(element);
+    }
+
+    private void validateOperation(String operator) {
+        if (notContainOperator(operator)) {
+            throw new IllegalOperatorExpression(IllegalOperatorExpression.formatMessage(operator, OPERATOR_SET));
+        }
+    }
+
+    private void addNumber(String element) {
+        numbers.add(parseInt(element));
+    }
+
+    private void addOperator(String element) {
         operators.add(element);
     }
 
@@ -40,11 +65,7 @@ public class Expression {
     }
 
     private int parseInt(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException exception) {
-            throw new ExpressionNumberParseException(number);
-        }
+        return Integer.parseInt(number);
     }
 
     public Queue<Integer> getNumbers() {
@@ -61,6 +82,10 @@ public class Expression {
 
     public String getOperator() {
         return this.operators.getOperator();
+    }
+
+    private boolean notContainOperator(String operator) {
+        return !OPERATOR_SET.contains(operator);
     }
 
     public boolean isAddSign(String operator) {

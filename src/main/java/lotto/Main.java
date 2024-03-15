@@ -2,9 +2,8 @@ package lotto;
 
 import lotto.domain.Calculator;
 import lotto.domain.Expression;
-import lotto.domain.ExpressionSplitter;
-import lotto.domain.ExpressionValidator;
-import lotto.exception.IllegalExpressionElementSizeException;
+import lotto.util.ExpressionSplitter;
+import lotto.util.InputValidator;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -13,17 +12,17 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-            String stringExpression = InputView.readExpression();
-            ExpressionValidator.validateEmptyExpression(stringExpression);
+            String expressionString = InputView.readExpression();
+            InputValidator.validateEmptyExpression(expressionString);
 
-            Expression expression = ExpressionSplitter.split(stringExpression);
+            String[] expressionStrings = ExpressionSplitter.split(expressionString);
+            InputValidator.validateElementSize(expressionStrings.length);
 
-            Calculator calculator = new Calculator(expression);
+            Calculator calculator = new Calculator(new Expression(expressionStrings));
             int result = calculator.calculate();
 
             ResultView.printExpressionResult(result);
-        } catch (IllegalExpressionElementSizeException e) {
-            System.out.println(e.getMessage());
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } finally {
             ResultView.printExit();
