@@ -34,14 +34,13 @@ public class ExpressionValidator {
         return !OPERATION.contains(operation);
     }
 
-    public static boolean validateElementSize(int size) throws IllegalExpressionElementSizeException {
-        if (isOdd(size)) {
-            return true;
+    public static void validateElementSize(int size) throws IllegalExpressionElementSizeException {
+        if (isEven(size)) {
+            throw new IllegalExpressionElementSizeException(size);
         }
-        throw new IllegalExpressionElementSizeException(size);
     }
 
-    private static boolean isOdd(int size) {
-        return size % 2 != 0;
+    private static boolean isEven(int size) {
+        return size % 2 == 0;
     }
 }
