@@ -1,11 +1,9 @@
 package calculator;
 
-import java.util.List;
-
 import caculator.Calculator;
+import caculator.Input;
 import caculator.InputView;
 import caculator.OutputView;
-import caculator.Util;
 
 public class CalculatorController {
 
@@ -18,21 +16,15 @@ public class CalculatorController {
     }
 
     public void calculate() {
-        final List<String> inputs = Util.split(inputView.inputExpression());
+        final Input input = new Input(inputView.inputExpression());
 
-        int result = Integer.parseInt(inputs.get(0));
+        int result = Integer.parseInt(input.getByIndex(0));
         int index = 1;
-        while (index < inputs.size()) {
-            result = Calculator.calculateTwoNumber(result, inputs.get(index), Integer.parseInt(inputs.get(index + 1)));
+        while (input.isIndexWithinBounds(index)) {
+            result = Calculator.calculateTwoNumber(result, input.getByIndex(index), Integer.parseInt(input.getByIndex(index + 1)));
             index += 2;
         }
 
         outputView.printResult(result);
-    }
-
-    public static void validateInput(final String input) {
-        if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException("입력값이 없습니다.");
-        }
     }
 }
