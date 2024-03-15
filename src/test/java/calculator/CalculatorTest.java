@@ -25,4 +25,13 @@ class CalculatorTest {
         // then
         assertThat(result).isEqualTo(2);
     }
+
+    @Test
+    void 곱셈_테스트() {
+        // given & when
+        final int result = Calculator.calculateTwoNumber(2, "*", 2);
+
+        // then
+        assertThat(result).isEqualTo(4);
+    }
 }
