@@ -36,7 +36,7 @@ class InputTest {
         final Input input = new Input("1 + 3");
 
         // when
-        boolean result = input.isIndexWithinBounds(index);
+        boolean result = input.isLessThanSize(index);
 
         // then
         assertThat(result).isTrue();
@@ -49,7 +49,7 @@ class InputTest {
         final Input input = new Input("1 + 3");
 
         // when
-        boolean result = input.isIndexWithinBounds(index);
+        boolean result = input.isLessThanSize(index);
 
         // then
         assertThat(result).isFalse();

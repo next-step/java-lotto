@@ -15,7 +15,7 @@ public class CalculatorController {
 
         int result = Integer.parseInt(input.getByIndex(0));
         int index = 1;
-        while (input.isIndexWithinBounds(index)) {
+        while (input.isLessThanSize(index)) {
             result = Calculator.calculateTwoNumber(result, input.getByIndex(index), Integer.parseInt(input.getByIndex(index + 1)));
             index += 2;
         }

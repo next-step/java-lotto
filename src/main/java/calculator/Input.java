@@ -11,8 +11,8 @@ public class Input {
         this.input = Util.split(input);
     }
 
-    public boolean isIndexWithinBounds(final int index) {
-        return index < input.size();
+    public boolean isLessThanSize(final int number) {
+        return number < input.size();
     }
 
     public String getByIndex(final int index) {
