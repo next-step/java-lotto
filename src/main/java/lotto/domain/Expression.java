@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.exception.IllegalOperatorExpression;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Queue;
 import java.util.Set;
 
@@ -14,7 +14,7 @@ public class Expression {
     private static final String MULTIPLY_SIGN = "*";
     private static final String DIVIDED_SIGN = "/";
 
-    private final Set<String> OPERATOR_SET = new HashSet<>() {{
+    private final Set<String> OPERATOR_SET = new LinkedHashSet<>() {{
         add(ADD_SIGN);
         add(SUBTRACT_SIGN);
         add(MULTIPLY_SIGN);
