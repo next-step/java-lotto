@@ -8,7 +8,8 @@ public class Calculator {
 	public static final String DELIMITER = " ";
 
 	Queue<Number> numbers = new LinkedList<>();
-	Queue<String> operators = new LinkedList<>();
+
+	Queue<Operator> operators = new LinkedList<>();
 
 	public int sum(int input1, int input2) {
 		return input1 + input2;
@@ -38,8 +39,8 @@ public class Calculator {
 		}
 
 		numbers.add(new Number(s[0]));
-		for (int i = 1; i < s.length / 2; i++) {
-			operators.add(s[i]);
+		for (int i = 1; i < s.length; i++) {
+			operators.add(Operator.of(s[i]));
 			numbers.add(new Number(s[++i]));
 		}
 

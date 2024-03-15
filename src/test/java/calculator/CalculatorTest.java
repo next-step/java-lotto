@@ -86,4 +86,13 @@ public class CalculatorTest {
 		});
 	}
 
+	@Test
+	void 완전한_계산식에서_사칙연산자가_아닌_값이_입력될_경우_IllegalArgumentException를_던진다() {
+		String invalidFormula = "20 @ 10";
+
+		assertThatIllegalArgumentException().isThrownBy(() -> {
+			int result = sut.calculate(invalidFormula);
+		});
+	}
+
 }
