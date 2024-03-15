@@ -9,6 +9,9 @@ public class Calculator {
         if ("-".equals(operation)) {
             return number1 - number2;
         }
+        if ("*".equals(operation)) {
+            return number1 * number2;
+        }
         return 0;
     }
 }
