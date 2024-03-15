@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class CalculatorTest {
     @ParameterizedTest
     @DisplayName("사칙연산 계산 기능을 테스트")
-    @CsvSource(value = {"2 + 3=5","3 - 5=-2","3 * 5=15","6 / 5=1", "2 + 3 - 5 = 0"}, delimiter = '=')
+    @CsvSource(value = {"2=2","2 + 3=5","3 - 5=-2","3 * 5=15","6 / 5=1", "2 + 3 - 5 = 0", "2 + 3 * 4 / 2 = 10"}, delimiter = '=')
     public void calculatorLogicTest(String input, int output) {
         int result = CalculatorLogic.calculatorLogic(input);
         assertThat(result).isEqualTo(output);
