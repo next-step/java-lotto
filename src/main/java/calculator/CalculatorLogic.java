@@ -2,9 +2,10 @@ package calculator;
 
 public class CalculatorLogic {
     private static final String DELIMITER = " ";
+
     public static int calculatorLogic(String inputString) {
         if (isValidInputString(inputString))
-            throw new IllegalArgumentException("빈 값입니다. 재 입력하세요.");
+            throw new IllegalArgumentException("빈 값입니다.");
 
         String[] splitResult = inputString.split(DELIMITER);
 
@@ -14,9 +15,9 @@ public class CalculatorLogic {
     private static int calculateResultNumber(String[] splitResult, int resultNumber) {
         for (int i = 1; i < splitResult.length; i += 2) {
             String symbol = splitResult[i];
-            int number = Integer.parseInt(splitResult[i+1]);
+            int number = Integer.parseInt(splitResult[i + 1]);
             Calculator cal = Calculator.findSymbol(symbol);
-            resultNumber = cal.calculate(resultNumber,number);
+            resultNumber = cal.calculate(resultNumber, number);
         }
         return resultNumber;
     }
@@ -29,7 +30,7 @@ public class CalculatorLogic {
         }
     }
 
-    private static boolean isValidInputString(String inputString){
+    private static boolean isValidInputString(String inputString) {
         return inputString.isBlank();
     }
 }
