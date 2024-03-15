@@ -1,6 +1,7 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,5 +43,11 @@ class CalculatorTest {
 
         // then
         assertThat(result).isEqualTo(2);
+    }
+
+    @Test
+    void 나눗셈_예외_테스트() {
+        // given & when & then
+        assertThatIllegalArgumentException().isThrownBy(() -> Calculator.calculateTwoNumber(4, "/", 0));
     }
 }
