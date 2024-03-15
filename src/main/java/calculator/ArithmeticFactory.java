@@ -3,10 +3,10 @@ package calculator;
 import calculator.model.ArithmeticEnum;
 import calculator.model.ArithmeticStrategy;
 
-public class Operator {
+public class ArithmeticFactory {
 	private final ArithmeticStrategy strategy;
 
-	public Operator(String operator, Integer left, Integer right) {
+	public ArithmeticFactory(String operator, Integer left, Integer right) {
 		ArithmeticEnum arithmeticEnum = ArithmeticEnum.from(operator);
 		this.strategy = arithmeticEnum.createStrategy(left, right);
 	}

@@ -29,7 +29,8 @@ public class Calculator {
 
 	private static int calculate(final int index, int result, final String[] inputs) {
 		if (index % 2 == 1) {
-			result = new Operator(inputs[index], result, Integer.parseInt(inputs[index + 1])).execute();
+			ArithmeticFactory arithmeticFactory = new ArithmeticFactory(inputs[index], result, Integer.parseInt(inputs[index + 1]));
+			result = arithmeticFactory.execute();
 		}
 		return result;
 	}
