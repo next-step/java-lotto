@@ -50,7 +50,8 @@ public class LottoMachine {
     }
 
     private static Lotto selectRandomLottoNumbers() {
-        Collections.shuffle(LOTTO_NUMBERS); // TODO. 셔플이 제대로 되지 않는 버그
-        return new Lotto(LOTTO_NUMBERS.subList(START_INCLUSIVE, END_EXCLUSIVE));
+        List<LottoNumber> shuffled = new ArrayList<>(LOTTO_NUMBERS);
+        Collections.shuffle(shuffled);
+        return new Lotto(shuffled.subList(START_INCLUSIVE, END_EXCLUSIVE));
     }
 }
