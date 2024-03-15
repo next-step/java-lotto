@@ -1,10 +1,5 @@
 package calculator;
 
-import caculator.Calculator;
-import caculator.Input;
-import caculator.InputView;
-import caculator.OutputView;
-
 public class CalculatorController {
 
     private final InputView inputView;
