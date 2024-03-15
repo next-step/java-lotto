@@ -3,9 +3,7 @@ package lotto.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-
-import java.util.List;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,9 +16,17 @@ class LottoMachineTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"0:0", "999:0", "1000:1", "14001:14"}, delimiter = ':')
-    void purchase(int given, int expected) {
-        List<Lotto> lotto = LottoMachine.purchase(given);
-        assertThat(lotto).hasSize(expected);
+    @ValueSource(ints = {0, 999})
+    void purchaseThrowException(int given) {
+        assertThat(LottoMachine.purchase(given))
+                .isEqualTo(LottoMachine.EMPTY_LOTTO_PAPER);
+    }
+
+    @Test
+    void purchase() {
+        int given = 1000;
+        assertThat(LottoMachine.purchase(given))
+                .isNotNull()
+                .isInstanceOf(LottoPaper.class);
     }
 }

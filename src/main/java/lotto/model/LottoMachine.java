@@ -9,10 +9,13 @@ import static java.util.stream.Collectors.toList;
 
 public class LottoMachine {
     private static final int LOTTO_PER_MONEY = 1_000;
-    private static final List<LottoNumber> lottoNumbers;
+    private static final int START_INCLUSIVE = 0;
+    private static final int END_EXCLUSIVE = 6;
+    public static final LottoPaper EMPTY_LOTTO_PAPER = new LottoPaper(Collections.emptyList());
+    private static final List<LottoNumber> LOTTO_NUMBERS;
 
     static {
-        lottoNumbers = IntStream.rangeClosed(1, 45)
+        LOTTO_NUMBERS = IntStream.rangeClosed(1, 45)
                 .mapToObj(LottoNumber::new)
                 .collect(toList());
     }
@@ -21,16 +24,16 @@ public class LottoMachine {
     }
 
     public static int size() {
-        return lottoNumbers.size();
+        return LOTTO_NUMBERS.size();
     }
 
-    public static List<Lotto> purchase(int money) {
+    public static LottoPaper purchase(int money) {
         int numOfLotto = calculate(money);
         if (numOfLotto == 0) {
-            return Collections.emptyList();
+            return EMPTY_LOTTO_PAPER;
         }
 
-        return prepare(numOfLotto);
+        return new LottoPaper(prepare(numOfLotto));
     }
 
     private static int calculate(int money) {
@@ -47,7 +50,7 @@ public class LottoMachine {
     }
 
     private static Lotto selectRandomLottoNumbers() {
-        Collections.shuffle(lottoNumbers);
-        return new Lotto(lottoNumbers.subList(0, 6));
+        Collections.shuffle(LOTTO_NUMBERS); // TODO. 셔플이 제대로 되지 않는 버그
+        return new Lotto(LOTTO_NUMBERS.subList(START_INCLUSIVE, END_EXCLUSIVE));
     }
 }
