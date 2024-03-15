@@ -16,6 +16,13 @@ public class Calculator {
 			throw new IllegalArgumentException("null 또는 공백은 입력할 수 없습니다.");
 		}
 
+		seperateAndClasifyFrom(input);
+
+		return calculateFinally();
+	}
+
+	// 입력받은 문자열을 분해하고 각 Queue로 분류한다 
+	private void seperateAndClasifyFrom(String input) {
 		String[] s = input.split(DELIMITER);
 		// 완성된 계산식은 숫자 + 연산자의 갯수가 홀수여야한다.
 		if (s.length % 2 != 1) {
@@ -27,14 +34,18 @@ public class Calculator {
 			operators.add(Operator.of(s[i]));
 			numbers.add(new Number(s[++i]));
 		}
+	}
 
+	// 분류된 값들을 가지고 최종 계산 수행
+	private int calculateFinally() {
 		int result = numbers.poll().getValue();
+
 		while (!operators.isEmpty()) {
 			int num = numbers.poll().getValue();
 			Operator operator = operators.poll();
+
 			result = operator.operate(result, num);
 		}
-
 		return result;
 	}
 
