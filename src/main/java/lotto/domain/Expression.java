@@ -88,20 +88,4 @@ public class Expression {
         return !OPERATOR_SET.contains(operator);
     }
 
-    public boolean isAddSign(String operator) {
-        return ADD_SIGN.equals(operator);
-    }
-
-    public boolean isSubtractSign(String operator) {
-        return SUBTRACT_SIGN.equals(operator);
-    }
-
-    public boolean isMultiplySign(String operator) {
-        return MULTIPLY_SIGN.equals(operator);
-    }
-
-    public boolean isDividedSign(String operator) {
-        return DIVIDED_SIGN.equals(operator);
-    }
-
 }
