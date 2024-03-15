@@ -16,7 +16,7 @@ public class Calculator {
             validateNonZero(number2);
             return number1 / number2;
         }
-        return 0;
+        throw new IllegalArgumentException("연산 기호가 올바르지 않습니다.");
     }
 
     private static void validateNonZero(final int number) {
