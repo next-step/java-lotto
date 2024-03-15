@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.exception.IllegalExpressionElementSizeException;
+
 import java.util.HashSet;
 import java.util.Set;
 
