@@ -24,6 +24,7 @@
   * 나눗셈의 경우 결과 값을 정수로 떨어지는 값으로 정한다.
 * 입력값 검증
   * 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw 
+  * 분리된 입력 값의 개수가 짝수인 경우 IllegalArgumentException throw
   * 사칙연산 기호가 아닌 경우 IllegalArgumentException throw 
   * 사칙 연산을 모두 포함하는 기능 구현
 * 입력
