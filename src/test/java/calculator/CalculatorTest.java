@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import caculator.Calculator;
 
@@ -49,5 +51,12 @@ class CalculatorTest {
     void 나눗셈_예외_테스트() {
         // given & when & then
         assertThatIllegalArgumentException().isThrownBy(() -> Calculator.calculateTwoNumber(4, "/", 0));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"$", "#", "&"})
+    void 사칙연산_기호_예외_테스트() {
+        // given & when & then
+        assertThatIllegalArgumentException().isThrownBy(() -> Calculator.calculateTwoNumber(4, "&", 0));
     }
 }
