@@ -1,13 +1,13 @@
 package lotto.util;
 
-import lotto.exception.EmptyExpressionException;
+import lotto.exception.IllegalEmptyExpressionException;
 import lotto.exception.IllegalExpressionElementSizeException;
 
 public class InputValidator {
 
-    public static void validateEmptyExpression(String inputString) throws EmptyExpressionException {
+    public static void validateEmptyExpression(String inputString) throws IllegalEmptyExpressionException {
         if (isEmptyExpression(inputString)) {
-            throw new EmptyExpressionException(inputString);
+            throw new IllegalEmptyExpressionException(inputString);
         }
     }
 
