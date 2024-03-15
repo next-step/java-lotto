@@ -18,4 +18,12 @@ public class Calculator {
 		return input1 / input2;
 	}
 
+	public int calculate(String input) {
+		if (input == null || input.isBlank()) {
+			throw new IllegalArgumentException("null 또는 공백은 입력할 수 없습니다.");
+		}
+
+		return 0;
+	}
+
 }

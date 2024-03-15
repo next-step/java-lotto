@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 public class CalculatorTest {
 
@@ -56,6 +58,14 @@ public class CalculatorTest {
 		int actual = sut.divide(input1, input2);
 
 		assertThat(actual).isEqualTo(expected);
+	}
+
+	@ParameterizedTest
+	@NullAndEmptySource
+	void null_또는_공백문자_입력_시_IllegalArgumentException를_던진다(String input) {
+		assertThatIllegalArgumentException().isThrownBy(() -> {
+			int result = sut.calculate(input);
+		});
 	}
 
 }
