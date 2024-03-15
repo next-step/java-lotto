@@ -3,10 +3,30 @@ package calculator;
 import java.util.HashMap;
 
 public enum Operator {
-	SUM("+"),
-	SUBTRACT("-"),
-	MUTIPLY("*"),
-	DIVIDE("/");
+	SUM("+"){
+		@Override
+		public int operate(int input1, int input2) {
+			return input1 + input2;
+		}
+	},
+	SUBTRACT("-"){
+		@Override
+		public int operate(int input1, int input2) {
+			return input1 - input2;
+		}
+	},
+	MUTIPLY("*"){
+		@Override
+		public int operate(int input1, int input2) {
+			return input1 * input2;
+		}
+	},
+	DIVIDE("/"){
+		@Override
+		public int operate(int input1, int input2) {
+			return input1 / input2;
+		}
+	};
 
 	private static final HashMap<String, Operator> operatorMap = new HashMap<>();
 
@@ -31,5 +51,7 @@ public enum Operator {
 
 		return found;
 	}
+
+	public abstract int operate(int input1, int input2);
 
 }

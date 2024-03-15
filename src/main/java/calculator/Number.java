@@ -15,6 +15,10 @@ public class Number {
 		this.value = Integer.valueOf(value);
 	}
 
+	public int getValue() {
+		return value;
+	}
+
 	private void validate(String value) {
 		if (value == null || value.isBlank() || !isNumeric(value)) {
 			throw new IllegalArgumentException();

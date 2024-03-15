@@ -16,50 +16,6 @@ public class CalculatorTest {
 		sut = new Calculator();
 	}
 
-	@Test
-	void 더하기() {
-		int input1 = 10;
-		int input2 = 2;
-		int expected = input1 + input2;
-
-		int actual = sut.sum(input1, input2);
-
-		assertThat(actual).isEqualTo(expected);
-	}
-
-	@Test
-	void 뺴기() {
-		int input1 = 10;
-		int input2 = 2;
-		int expected = input1 - input2;
-
-		int actual = sut.substact(input1, input2);
-
-		assertThat(actual).isEqualTo(expected);
-	}
-
-	@Test
-	void 곱하기() {
-		int input1 = 10;
-		int input2 = 2;
-		int expected = input1 * input2;
-
-		int actual = sut.multiply(input1, input2);
-
-		assertThat(actual).isEqualTo(expected);
-	}
-
-	@Test
-	void 나누기() {
-		int input1 = 10;
-		int input2 = 2;
-		int expected = input1 / input2;
-
-		int actual = sut.divide(input1, input2);
-
-		assertThat(actual).isEqualTo(expected);
-	}
-
 	@ParameterizedTest
 	@NullAndEmptySource
 	void null_또는_공백문자_입력_시_IllegalArgumentException를_던진다(String input) {
@@ -93,6 +49,16 @@ public class CalculatorTest {
 		assertThatIllegalArgumentException().isThrownBy(() -> {
 			int result = sut.calculate(invalidFormula);
 		});
+	}
+
+	@Test
+	void calculate는_문자열_계산식을_입력하면_계산된_결과를_반환한다() {
+		String validFormula = "21 + 2 - 3 * 4 / 5";
+		int expected = 16;
+
+		int actual = sut.calculate(validFormula);
+
+		assertThat(actual).isEqualTo(expected);
 	}
 
 }

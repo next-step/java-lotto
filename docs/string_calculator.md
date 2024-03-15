@@ -9,4 +9,4 @@
 - [x] 미완성_계산식을_압력할_경우_IllegalArgumentException throw
 - [x] 완전한 계산식에서 입력값이 숫자가 아닌 경우 IllegalArgumentException throw
 - [x] 완전한 계산식에서 입력값이 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
-- [ ] 사칙 연산을 모두 포함하는 기능 구현
+- [x] 사칙 연산을 모두 포함하는 기능 구현

@@ -11,22 +11,6 @@ public class Calculator {
 
 	Queue<Operator> operators = new LinkedList<>();
 
-	public int sum(int input1, int input2) {
-		return input1 + input2;
-	}
-
-	public int substact(int input1, int input2) {
-		return input1 - input2;
-	}
-
-	public int multiply(int input1, int input2) {
-		return input1 * input2;
-	}
-
-	public int divide(int input1, int input2) {
-		return input1 / input2;
-	}
-
 	public int calculate(String input) {
 		if (input == null || input.isBlank()) {
 			throw new IllegalArgumentException("null 또는 공백은 입력할 수 없습니다.");
@@ -44,7 +28,14 @@ public class Calculator {
 			numbers.add(new Number(s[++i]));
 		}
 
-		return 0;
+		int result = numbers.poll().getValue();
+		while (!operators.isEmpty()) {
+			int num = numbers.poll().getValue();
+			Operator operator = operators.poll();
+			result = operator.operate(result, num);
+		}
+
+		return result;
 	}
 
 }
