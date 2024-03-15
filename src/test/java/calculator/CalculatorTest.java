@@ -16,4 +16,13 @@ class CalculatorTest {
         // then
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    void 뺄셈_테스트() {
+        // given & when
+        final int result = Calculator.calculateTwoNumber(4, "-", 2);
+
+        // then
+        assertThat(result).isEqualTo(2);
+    }
 }
