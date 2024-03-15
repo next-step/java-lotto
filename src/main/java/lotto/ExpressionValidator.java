@@ -31,4 +31,15 @@ public class ExpressionValidator {
     private static boolean notContains(String operation) {
         return !OPERATION.contains(operation);
     }
+
+    public static boolean validateElementSize(int size) throws IllegalExpressionElementSizeException {
+        if (isOdd(size)) {
+            return true;
+        }
+        throw new IllegalExpressionElementSizeException(size);
+    }
+
+    private static boolean isOdd(int size) {
+        return size % 2 != 0;
+    }
 }
