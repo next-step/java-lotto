@@ -19,7 +19,7 @@ public class Calculator {
         return number;
     }
 
-    public int calculate(String operator, int number1, int number2) {
+    private int calculate(String operator, int number1, int number2) {
         if (expression.isAddSign(operator)) {
             return add(number1, number2);
         }
