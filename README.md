@@ -1,9 +1,40 @@
-# 로또
-## 진행 방법
-* 로또 요구사항을 파악한다.
-* 요구사항에 대한 구현을 완료한 후 자신의 github 아이디에 해당하는 브랜치에 Pull Request(이하 PR)를 통해 코드 리뷰 요청을 한다.
-* 코드 리뷰 피드백에 대한 개선 작업을 하고 다시 PUSH한다.
-* 모든 피드백을 완료하면 다음 단계를 도전하고 앞의 과정을 반복한다.
+# STEP 1 : 문자열 계산기
 
-## 온라인 코드 리뷰 과정
-* [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+## ✅ 구현 목록
+
+---
+
+### `StringCalculator.class`
+
+- [x] 입력값을 받아(= validate에서 유효성 처리) 
+  계산을 한 다음(= Operator에서 연사자에 대한 로직 처리)
+  답을 반환하는 클래스
+
+### `Operator.java`
+
+- [x] 연산자를 enum 클래스로 받아 처리
+- [x] 유효한 연산자에 대한 계산 로직 처리
+- [x] 유효하지 않은 연산자가 들어오는 경우에 대해 처리
+
+### `Validator.java`
+
+- [x] null, 공백 입력값에 대한 유효성 체크
+- [x] `0~9`, `+-/*`로만 이루어진 입력값에 대한 유효성 체크
+- [x] 문자열 순서에 대한 유효성 체크
+
+### 테스트 코드
+
+- [x] `OperatorTest.java` -> Operator에 대한 테스트 클래스
+- [x] `StringCalculator.java` -> StringCalculator에 대한 테스트 클래스
+- [x] `ValidatorTest.java` -> Validator에 대한 테스트 클래스
+
+### 컨벤션
+
+- [x] Java : Intellij idea Code Style java 적용
+- [x] Commit : AngularJS Commit Message 사용
+
+### 코드 규칙
+
+- [x] else 예약어 사용 X
+- [x] indent의 들여쓰기 depth는 1회까지 허용
+- [x] 함수(또는 메서드)의 길이가 10라인을 넘지 않도록 작성
