@@ -2,10 +2,19 @@
 
 LottoNumber
 
-- 로또 번호를 가진다
-- 로또 번호는 1 ~ 45의 수이다.
-- 범위를 벗어날 경우 InvalidLottoException 을 던진다
-- 로또 객체가 같은지 비교 가능하다 (동등성)
+- [x] 로또 번호를 가진다
+- [x] 로또 번호는 1 ~ 45의 수이다.
+- [x] 범위를 벗어날 경우 InvalidLottoException 을 던진다
+- [x] 로또 객체가 같은지 비교 가능하다 (동등성)
+
+Lotto
+
+- [x] LottoNumber 컬렉션을 가지는 일급 컬렉션
+- [x] LottoNumber 6자리 가진다
+    - [x] LottoNumber 입력값이 비어있거나, 6개가 아닌 경우 InvalidLottoException 던진다
+- [x] 주어진 번호와 로또 번호를 매칭하여 일치하는 개수를 반환한다
+    - ① 하나의 LottoNumber와 비교하는 경우 -- match()
+    - ② 여러 개의 LottoNumber와 비교하는 경우 -- matches()
 
 ---
 
