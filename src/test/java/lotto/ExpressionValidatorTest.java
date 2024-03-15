@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.ExpressionValidator;
 import lotto.exception.IllegalExpressionElementSizeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
