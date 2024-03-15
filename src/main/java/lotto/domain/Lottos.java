@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 
@@ -16,5 +16,13 @@ public class Lottos {
             matchCount[lotto.countMatchingBalls(winningLotto)]++;
         }
         return new JudgeResult(matchCount[3], matchCount[4], matchCount[5], matchCount[6]);
+    }
+
+    public List<Lotto> value() {
+        return lottos;
+    }
+
+    public int size() {
+        return lottos.size();
     }
 }
