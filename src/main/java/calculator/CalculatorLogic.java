@@ -5,7 +5,9 @@ public class CalculatorLogic {
     public static int calculatorLogic(String inputString) {
         if (isValidInputString(inputString))
             throw new IllegalArgumentException("빈 값입니다. 재 입력하세요.");
+
         String[] splitResult = inputString.split(DELIMITER);
+
         return calculateResultNumber(splitResult, initFirstNumber(splitResult[0]));
     }
 
@@ -20,7 +22,11 @@ public class CalculatorLogic {
     }
 
     private static int initFirstNumber(String firstNumber) {
-        return Integer.parseInt(firstNumber);
+        try {
+            return Integer.parseInt(firstNumber);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("정수값이 아닙니다.");
+        }
     }
 
     private static boolean isValidInputString(String inputString){
