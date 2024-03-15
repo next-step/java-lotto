@@ -76,4 +76,14 @@ public class CalculatorTest {
 			int result = sut.calculate(incompleteFormula);
 		});
 	}
+
+	@Test
+	void 완전한_계산식에서_숫자가_아닌_값이_입력될_경우_IllegalArgumentException를_던진다() {
+		String invalidFormula = "a + 10";
+
+		assertThatIllegalArgumentException().isThrownBy(() -> {
+			int result = sut.calculate(invalidFormula);
+		});
+	}
+
 }
