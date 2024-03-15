@@ -1,34 +1,14 @@
 package calculator;
 
-import calculator.model.*;
-
-import static calculator.model.ArithmeticEnum.*;
+import calculator.model.ArithmeticEnum;
+import calculator.model.ArithmeticStrategy;
 
 public class Operator {
 	private final ArithmeticStrategy strategy;
 
 	public Operator(String operator, Integer left, Integer right) {
-		if(PLUS.getOperator().equals(operator)){
-			this.strategy = new Plus(left, right);
-			return;
-		}
-
-		if(MINUS.getOperator().equals(operator)){
-			this.strategy = new Minus(left, right);
-			return;
-		}
-
-		if(MULTIPLY.getOperator().equals(operator)){
-			this.strategy = new Multiply(left, right);
-			return;
-		}
-
-		if(DIVIDE.getOperator().equals(operator)){
-			this.strategy = new Divide(left, right);
-			return;
-		}
-
-		throw new IllegalArgumentException("사칙 연산 기호가 아닙니다.");
+		ArithmeticEnum arithmeticEnum = ArithmeticEnum.from(operator);
+		this.strategy = arithmeticEnum.createStrategy(left, right);
 	}
 
 	public Integer execute() {
