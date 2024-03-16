@@ -22,18 +22,18 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    private static void assertLotto(List<LottoNumber> lottoNumbers) {
+    private void assertLotto(List<LottoNumber> lottoNumbers) {
         assertNullOrEmpty(lottoNumbers);
         assertInvalidSize(lottoNumbers);
     }
 
-    private static void assertNullOrEmpty(List<LottoNumber> lottoNumbers) {
+    private void assertNullOrEmpty(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers == null || lottoNumbers.isEmpty()) {
             throw new InvalidLottoException("로또 번호가 비어 있습니다");
         }
     }
 
-    private static void assertInvalidSize(List<LottoNumber> lottoNumbers) {
+    private void assertInvalidSize(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> uniqueNumbers = new HashSet<>(lottoNumbers);
         if (uniqueNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new InvalidLottoException("중복을 제외한 " + LOTTO_NUMBER_SIZE + "개의 로또 번호가 필요합니다");
@@ -42,8 +42,9 @@ public class Lotto {
 
     public int matches(List<LottoNumber> others) {
         assertNullOrEmpty(others);
-        // TODO. 중복 제거
+
         return others.stream()
+                .distinct()
                 .map(this::match)
                 .reduce(0, Integer::sum);
     }

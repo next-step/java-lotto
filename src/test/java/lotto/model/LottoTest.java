@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -84,5 +85,13 @@ public class LottoTest {
         int actual = lotto.matches(LottoNumbers.of(7, 8, 9, 10, 11, 12));
 
         assertThat(actual).isEqualTo(0);
+    }
+
+    @Test
+    void 중복번호를_매칭할경우_중복제외한_매칭결과를_반환한다() {
+        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+        int actual = lotto.matches(Arrays.asList(new LottoNumber(1), new LottoNumber(1), new LottoNumber(1)));
+
+        assertThat(actual).isEqualTo(1);
     }
 }
