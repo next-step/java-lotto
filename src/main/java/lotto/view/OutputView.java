@@ -9,8 +9,13 @@ import lotto.domain.Prizes;
 
 public class OutputView {
 
+    private static final String PURCHASED_LOTTO_AMOUNT_MESSAGE = "%d개를 구매했습니다.\n";
+    private static final String JUDGE_RESULT_HEADER_MESSAGE = "당첨 통계\n---------";
+    private static final String JUDGE_RESULT_MESSAGE = "%d개 일치 (%d원)- %d개\n";
+    private static final String RETURN_RATE_MESSAGE = "총 수익률은 %.2f입니다.";
+
     public void printPurchasedLottos(Lottos lottos) {
-        System.out.printf("%d개를 구매했습니다.\n", lottos.size());
+        System.out.printf(PURCHASED_LOTTO_AMOUNT_MESSAGE, lottos.size());
         for (Lotto lotto : lottos.value()) {
             String lottoStr = lotto.balls().stream().mapToInt(Ball::number)
                 .mapToObj(String::valueOf)
@@ -20,12 +25,11 @@ public class OutputView {
     }
 
     public void printJudgeResult(int usedMoney, Prizes prizes) {
-        System.out.println("당첨 통계\n---------");
-        System.out.printf("3개 일치 (5000원)- %d개\n", prizes.count(Prize.MATCHING_THREE));
-        System.out.printf("4개 일치 (50000원)- %d개\n", prizes.count(Prize.MATCHING_FOUR));
-        System.out.printf("5개 일치 (1500000원)- %d개\n", prizes.count(Prize.MATCHING_FIVE));
-        System.out.printf("6개 일치 (2000000000원)- %d개\n", prizes.count(Prize.MATCHING_SIX));
-
-        System.out.printf("총 수익률은 %.2f입니다.", prizes.calcReturnRate(usedMoney));
+        System.out.println(JUDGE_RESULT_HEADER_MESSAGE);
+        for (Prize prize : Prize.valuesWithoutNone()) {
+            System.out.printf(JUDGE_RESULT_MESSAGE, prize.matchingCount(), prize.amount(),
+                prizes.count(prize));
+        }
+        System.out.printf(RETURN_RATE_MESSAGE, prizes.calcReturnRate(usedMoney));
     }
 }
