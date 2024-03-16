@@ -14,7 +14,7 @@ public class Lotto {
   }
 
   private void validateLottoNumbers(final List<Integer> numbers) {
-    if (numbers.size() > MAX_LOTTO_NUMBERS) {
+    if (numbers.size() != MAX_LOTTO_NUMBERS) {
       throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
     }
   }
