@@ -4,16 +4,22 @@ import lotto.exception.InvalidLottoException;
 
 import java.util.Objects;
 
+import static lotto.model.LottoNumbers.MAX_NUMBER;
+import static lotto.model.LottoNumbers.MIN_NUMBER;
+
 public class LottoNumber {
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
     private final int number;
 
     public LottoNumber(int number) {
+        assertInvalidNumber(number);
+
+        this.number = number;
+    }
+    
+    private void assertInvalidNumber(int number) {
         if (number < MIN_NUMBER || MAX_NUMBER < number) {
             throw new InvalidLottoException("로또 번호는 " + MIN_NUMBER + "~" + MAX_NUMBER + " 사이의 숫자만 선택 가능합니다");
         }
-        this.number = number;
     }
 
     @Override

@@ -8,11 +8,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoMachineTest {
 
-    @Test
-    void 로또번호는_45개() {
-        assertThat(LottoMachine.size()).isEqualTo(45);
-    }
-
     @ParameterizedTest
     @ValueSource(ints = {0, 999})
     void 천원미만_구매요청시_빈_로또종이를_반환한다(int given) {

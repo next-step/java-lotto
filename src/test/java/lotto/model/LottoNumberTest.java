@@ -17,7 +17,7 @@ class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"0", "46"})
+    @ValueSource(strings = {"-1", "0", "46"})
     void 로또번호는_1부터_45까지(int number) {
         assertThatThrownBy(() -> new LottoNumber(number))
                 .isInstanceOf(InvalidLottoException.class);
