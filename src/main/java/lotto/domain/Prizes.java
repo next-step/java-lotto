@@ -23,11 +23,11 @@ public class Prizes {
         return prizeCount.getOrDefault(prize, 0);
     }
 
-    public double calcReturnRate(Money usedMoney) {
+    public double calcReturnRate(int usedMoney) {
         int returnMoney = 0;
         for (Prize prize : prizeCount.keySet()) {
             returnMoney += prize.amount() * prizeCount.get(prize);
         }
-        return (double) returnMoney / usedMoney.amount();
+        return (double) returnMoney / usedMoney;
     }
 }

@@ -5,16 +5,14 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
-import lotto.domain.Money;
 
 public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public Money inputMoney() {
+    public int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        int money = Integer.parseInt(scanner.nextLine());
-        return new Money(money);
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public Lotto inputWinningLotto() {

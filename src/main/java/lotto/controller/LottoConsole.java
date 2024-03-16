@@ -3,7 +3,6 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.domain.LottoStore;
 import lotto.domain.Lottos;
-import lotto.domain.Money;
 import lotto.domain.Prizes;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -19,7 +18,7 @@ public class LottoConsole {
     }
 
     public void start() {
-        Money money = inputView.inputMoney();
+        int money = inputView.inputMoney();
         Lottos lottos = LottoStore.sellAsMuchAsPossible(money);
 
         outputView.printPurchasedLottos(lottos);
