@@ -52,4 +52,20 @@ public class OperatorTest {
         final Operator operator = Operator.PLUS;
         assertThatIllegalArgumentException().isThrownBy(() -> operator.operate(null, 1));
     }
+
+    @DisplayName("어느 연산자인지 판별한다")
+    @Test
+    void checkOperator() {
+        String  s = "+";
+        Operator operator = Operator.findByName(s);
+        assertThat(operator).isEqualTo(Operator.PLUS);
+    }
+
+    @DisplayName("지원하지 않는 연산자를 입력 받으면, EXCEPTION을 반환한다")
+    @Test
+    void throw_Exception_when_not_support_operator() {
+        String sign = "%";
+        assertThatIllegalArgumentException().isThrownBy(() -> Operator.findByName(sign));
+
+    }
 }

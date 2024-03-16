@@ -1,16 +1,24 @@
 package calculator.domain;
 
+import java.util.Arrays;
 import java.util.function.BiFunction;
-import java.util.function.Supplier;
 
 public enum Operator {
-    PLUS((a, b) -> a + b),
-    MINUS((a, b) -> a - b),
-    MULTIPLY((a, b) -> a * b),
-    DIVIDE((a, b) -> a / b),
+    PLUS("+", (a, b) -> a + b),
+    MINUS("-",(a, b) -> a - b),
+    MULTIPLY("*", (a, b) -> a * b),
+    DIVIDE("/", (a, b) -> a / b),
     ;
 
+    private final String sign;
     private final BiFunction<Integer, Integer, Integer> function;
+
+    public static Operator findByName(String sign) {
+        return Arrays.stream(values())
+                .filter(type -> type.sign.equals(sign))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(""));
+    }
 
 
     public int operate(Integer a, Integer b) {
@@ -26,7 +34,8 @@ public enum Operator {
         }
     }
 
-    Operator(BiFunction<Integer, Integer, Integer> function) {
+    Operator(String sign, BiFunction<Integer, Integer, Integer> function) {
+        this.sign = sign;
         this.function = function;
     }
 }
