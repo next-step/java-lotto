@@ -1,7 +1,6 @@
 package model;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -25,5 +24,22 @@ public class Lotto {
         .filter(number -> winningNumbers.getNumbers().contains(number))
         .mapToInt(it -> it)
         .count();
+  }
+
+  public int getWinningPrice(int count) {
+    if (count == 3) {
+      return 5000;
+    }
+    if (count == 4) {
+      return 50000;
+    }
+    if (count == 5) {
+      return 150000;
+    }
+    if (count == 6) {
+      return 2000000000;
+    }
+
+    return 0;
   }
 }

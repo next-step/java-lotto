@@ -35,4 +35,20 @@ class WinningNumbersTest {
     WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
     assertThat(new Lotto(numbers).findMatchNumberCount(winningNumbers)).isEqualTo(expected);
   }
+
+
+  @ParameterizedTest
+  @CsvSource(value = {
+      "0:0",
+      "3:5000",
+      "4:50000",
+      "5:150000",
+      "6:2000000000"
+  }, delimiter = ':')
+  @DisplayName("당청된 숫자 개수에 따른 당청 금액 리턴")
+  void winningNumbersTest2(int given, int expected) {
+    Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+    int amount = lotto.getWinningPrice(given);
+    assertThat(amount).isEqualTo(expected);
+  }
 }
