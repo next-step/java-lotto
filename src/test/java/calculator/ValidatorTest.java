@@ -50,7 +50,7 @@ class ValidatorTest {
         return Stream.of(
                 Arguments.of(new String[]{"1", "+", "2"}, true),
                 Arguments.of(new String[]{"1", "+", "2", "*", "10"}, true),
-                Arguments.of( new String[]{"101.1", "-"}, false)
+                Arguments.of(new String[]{"101.1", "-"}, false)
         );
     }
 }

@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -14,13 +14,13 @@ public class Calculation {
     private final Deque<Operator> operatorQueue;
 
     private Calculation(String mathematicalExpression) {
-        if(!isNonBlank(mathematicalExpression)) {
+        if (!isNonBlank(mathematicalExpression)) {
             throw new IllegalArgumentException(WRONG_MATHEMATICAL_EXPRESSION_MESSAGE);
         }
 
         String[] operandOperatorArray = mathematicalExpression.split(BLANK_DELIMITER);
 
-        if(!isGreaterThanOrEqualToLength(operandOperatorArray, MATHEMATICAL_EXPRESSION_MIN_COMPONENT) || !isOddNumberLength(operandOperatorArray)) {
+        if (!isGreaterThanOrEqualToLength(operandOperatorArray, MATHEMATICAL_EXPRESSION_MIN_COMPONENT) || !isOddNumberLength(operandOperatorArray)) {
             throw new IllegalArgumentException(WRONG_MATHEMATICAL_EXPRESSION_MESSAGE);
         }
 
@@ -35,7 +35,7 @@ public class Calculation {
     private Deque<Operand> makeOperandQueue(String[] operandOperatorArray) {
         Deque<Operand> operandQueue = new LinkedList<>();
 
-        for(int i = 0; i < operandOperatorArray.length; i+=2) {
+        for (int i = 0; i < operandOperatorArray.length; i += 2) {
             operandQueue.add(Operand.newOperand(operandOperatorArray[i]));
         }
 
@@ -45,7 +45,7 @@ public class Calculation {
     private Deque<Operator> makeOperatorQueue(String[] operandOperatorArray) {
         Deque<Operator> operatorQueue = new LinkedList<>();
 
-        for(int i = 1; i < operandOperatorArray.length; i+=2) {
+        for (int i = 1; i < operandOperatorArray.length; i += 2) {
             operatorQueue.add(Operator.findOperator(operandOperatorArray[i]));
         }
 
@@ -53,7 +53,7 @@ public class Calculation {
     }
 
     public double calculate() {
-        while(operandQueue.size() > 1 && !operatorQueue.isEmpty()) {
+        while (operandQueue.size() > 1 && !operatorQueue.isEmpty()) {
             Operator operator = operatorQueue.poll();
             double result = operator.calculate(numFromOperandQueue(), numFromOperandQueue());
             operandQueue.addFirst(Operand.newOperand(String.valueOf(result)));
