@@ -7,3 +7,6 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 1단계 문자열 계산 
+> 모짝미를 통해 구현하여 작업목록 및 기능 분석은 네비게이터의 PC에 있습니다..!
