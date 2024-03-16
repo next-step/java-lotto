@@ -55,10 +55,9 @@ public class Lotto {
                 .count();
     }
 
-    @Override
-    public String toString() {
+    public String toJoinNumber(String delimiter, String prefix, String suffix) {
         return this.lottoNumbers.stream()
                 .map(LottoNumber::toString)
-                .collect(Collectors.joining(", ", "[", "]"));
+                .collect(Collectors.joining(delimiter, prefix, suffix));
     }
 }
