@@ -64,6 +64,23 @@ public class CalculatorTest {
   }
 
   @Test
+  @DisplayName("덧셈과 뺄셈 복합 연산을 수행하는지 확인한다")
+  public void addAndMinus() {
+    int result = calculator.calculate("3 + 2 - 8 + 10");
+    assertEquals(7, result);
+  }
+
+
+  @Test
+  @DisplayName("곱셈과 나눗셈 복합 연산을 수행하는지 확인한다")
+  public void multiplyAndDivide() {
+    int result = calculator.calculate("3 * 10 / 5 * 7");
+    assertEquals(42, result);
+  }
+
+
+
+  @Test
   @DisplayName("복합 연산을 우선 순위 없이 입력 순서에 따라 수행하는지 확인한다")
   public void complex() {
     int result = calculator.calculate("1 + 2 * 8 / 3");
