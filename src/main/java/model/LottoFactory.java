@@ -6,10 +6,9 @@ import java.util.List;
 public class LottoFactory {
 
   public static List<Lotto> create(final LottoAmount lottoAmount) {
-    final int number = lottoAmount.getAmount() / 1000;
-
+    final int purchaseCount = lottoAmount.calculateLottoPurchaseCount();
     final List<Lotto> lottos = new ArrayList<>();
-    for (int i = 0; i < number; i++) {
+    for (int i = 0; i < purchaseCount; i++) {
       lottos.add(new Lotto(RandomNumberGenerator.generate()));
     }
     return lottos;

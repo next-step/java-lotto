@@ -11,8 +11,8 @@ public class LottoAmount {
         this.amount = amount;
     }
 
-    public int getAmount() {
-        return amount;
+    public int calculateLottoPurchaseCount() {
+        return amount / LOTTO_PURCHASE_UNIT;
     }
 
     private void validate(int amount) {
