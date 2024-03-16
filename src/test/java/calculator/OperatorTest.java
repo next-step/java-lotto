@@ -1,18 +1,33 @@
 package calculator;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class OperatorTest {
-    @ParameterizedTest
-    @CsvSource(value = {"+:true", "-:true", "*:true", "/:true", "%:false", "abs:false"}, delimiter = ':')
-    @DisplayName("isValidOperator(): 사칙연산자가 아닌 경우 false를 반환합니다.")
-    public void testIsValidOperator(String operator, boolean expected) {
-        assertThat(Operator.isValidOperator(operator)).isEqualTo(expected);
+    @Nested
+    @DisplayName("findOperator() 테스트")
+    class FindOperatorTest {
+        @Test
+        @DisplayName("지원하지 않는 연사자라면 IllegalArgumentException이 발생한다.")
+        void testFailCase() {
+            assertThatThrownBy(() -> Operator.findOperator("&"))
+                    .isExactlyInstanceOf(IllegalArgumentException.class);
+        }
+
+        @ParameterizedTest
+        @CsvSource(value = {"+:PLUS", "-:MINUS", "*:MULTIPLY", "/:DIVIDE"}, delimiter = ':')
+        @DisplayName("지원하는 연산자라면 연산자에 해당되는 Enum을 반환한다.")
+        void testSuccessCase(String operator, Operator operatorEnum) {
+            assertThat(Operator.findOperator(operator)).isEqualTo(operatorEnum);
+        }
     }
+
 
     @ParameterizedTest
     @CsvSource(value = {"1:1:2", "1:2:3", "2:-1:1"}, delimiter = ':')
