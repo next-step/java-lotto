@@ -43,7 +43,7 @@ class ValidatorTest {
     @MethodSource("parameterOfIsOddNumberLengthTest")
     @DisplayName("isOddNumberLength(): 주어진 배열의 크기가 홀수면 true 그렇지 않으면 false를 반환한다.")
     void testIsOddNumberLength(String[] stringArray, boolean expected) {
-        assertThat(Validator.isOddNumberLength(stringArray, expected)).isEqualTo(expected);
+        assertThat(Validator.isOddNumberLength(stringArray)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> parameterOfIsOddNumberLengthTest() {
