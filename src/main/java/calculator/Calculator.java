@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.OptionalInt;
 import java.util.Queue;
 
-public class Calculrator {
+public class Calculator {
     private static final Queue<String> expressionQueue = new LinkedList<>();
 
     public static int calculate(String input) {
@@ -23,7 +23,7 @@ public class Calculrator {
     }
 
     private static int calculateExpression(int result, Operator currentOperator) {
-        if(expressionQueue.isEmpty()) {
+        if (expressionQueue.isEmpty()) {
             return result;
         }
 
@@ -52,7 +52,7 @@ public class Calculrator {
 
     private static OptionalInt getNumberOrEmpty(String expression) {
         try {
-            return OptionalInt.of(Integer.valueOf(expression));
+            return OptionalInt.of(Integer.parseInt(expression));
         } catch (NumberFormatException e) {
             return OptionalInt.empty();
         }

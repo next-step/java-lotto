@@ -1,26 +1,23 @@
 package calculator;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import static calculator.Calculrator.calculate;
+import static calculator.Calculator.calculate;
 import static org.assertj.core.api.Assertions.*;
 
+@DisplayName("Calculate 테스트")
 public class CalculateTest {
 
-    @Test
-    void 입력값이null이면_IllegalArgumentException() {
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("입력값이_null_또는_공백이면_IllegalArgumentException")
+    void calculate_exception(String input) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> calculate(null));
-    }
-
-    @Test
-    void 입력값이공백이면_IllegalArgumentException() {
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> calculate(""));
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> calculate(" "));
+                .isThrownBy(() -> calculate(input));
     }
 
     @Test

@@ -10,8 +10,8 @@ public enum Operator {
     SQUARE("*", (num1, num2) -> num1 * num2),
     NONE("", (num1, num2) -> num2);
 
-    private String value;
-    private BiFunction<Integer, Integer, Integer> operator;
+    private final String value;
+    private final BiFunction<Integer, Integer, Integer> operator;
 
     Operator(String value, BiFunction<Integer, Integer, Integer> operator) {
         this.value = value;
@@ -23,8 +23,7 @@ public enum Operator {
     }
 
     public static Operator findOperationByValue(String value) {
-        Operator[] operators = Operator.values();
-        return Arrays.stream(operators)
+        return Arrays.stream(Operator.values())
                 .filter(operator -> operator.isValueEqualsTo(value))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("유요하지 않은 연산자: " + value));
