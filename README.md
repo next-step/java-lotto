@@ -7,3 +7,10 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+# todo
+- 문자열 입력 시 공백으로 연산자와 피연산자를 구분
+- 사칙연산 메서드 구현
+  - 사칙연산은 앞에서부터 연산
+
+# done
