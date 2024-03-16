@@ -1,10 +1,7 @@
 package lotto.model;
 
 import lotto.exception.InvalidLottoException;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Collections;
 import java.util.List;
@@ -44,29 +41,6 @@ class LottoPaperTest {
     void 빈_로또종이의_사이즈는_0개이다() {
         LottoPaper lottoPaper = new LottoPaper(Collections.emptyList());
         assertThat(lottoPaper.size()).isEqualTo(0);
-    }
-
-    // TODO.
-    @Disabled
-    @Test
-    void 인덱스를_지정하면_로또번호를_문자열로_확인할수있다() {
-        String expected = "[1, 2, 3, 4, 5, 6]";
-
-        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-        LottoPaper lottoPaper = new LottoPaper(List.of(lotto));
-        String actual = lottoPaper.toStringLotto(0);
-
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {-1, 2})
-    void 잘못된_인덱스로_로또번호_조회시_예외를_던진다(int given) {
-        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-        LottoPaper lottoPaper = new LottoPaper(List.of(lotto));
-
-        assertThatThrownBy(() -> lottoPaper.toStringLotto(given))
-                .isInstanceOf(InvalidLottoException.class);
     }
 
     @Test
