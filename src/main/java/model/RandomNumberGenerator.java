@@ -15,7 +15,7 @@ public class RandomNumberGenerator {
     Collections.shuffle(POSSIBLE_LOTTO_NUMBER_CANDIDATES);
     final List<Integer> randomNumbers = POSSIBLE_LOTTO_NUMBER_CANDIDATES.subList(0, 6);
     Collections.sort(randomNumbers);
-    return randomNumbers;
+    return new ArrayList<>(randomNumbers);
   }
 
   private static List<Integer> generateNumbers() {
