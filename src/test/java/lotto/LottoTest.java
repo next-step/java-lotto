@@ -3,7 +3,8 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
@@ -29,5 +30,22 @@ public class LottoTest {
 
         //when & then
         assertThat(lotto.getNumberSize()).isEqualTo(6);
+    }
+
+    @DisplayName("입력받은 당첨 번호와 현재 로또 번호를 비교한다.")
+    @Test
+    public void compareWinLottoNumbersAndCurrentLottoNumbers() {
+        //given
+        List<Integer> winNumbersInput = List.of(1, 2, 3, 4, 10, 6);
+        Lotto winNumber = new Lotto(winNumbersInput);
+
+        List<Integer> currentNumbers = List.of(1, 2, 3, 7, 9, 10);
+        Lotto currentNumber = new Lotto(currentNumbers);
+
+        //when
+        long matchedCount = currentNumber.compareWinNumber(winNumber);
+
+        //then
+        assertThat(matchedCount).isEqualTo(4L);
     }
 }
