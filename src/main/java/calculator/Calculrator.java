@@ -1,8 +1,11 @@
 package calculator;
 
+import java.util.LinkedList;
 import java.util.OptionalInt;
+import java.util.Queue;
 
 public class Calculrator {
+    private static final Queue<String> expressionQueue = new LinkedList<>();
 
     public static int calculate(String input) {
         validEmptyInput(input);
@@ -13,17 +16,32 @@ public class Calculrator {
         Operator currentOperator = Operator.NONE;
 
         for (String expression : splitExpressions) {
-            OptionalInt numberOrEmpty = getNumberOrEmpty(expression);
-
-            if (numberOrEmpty.isEmpty()) {
-                currentOperator = Operator.findOperationByValue(expression);
-                continue;
-            }
-
-            result = calculate(numberOrEmpty.getAsInt(), currentOperator, result);
+            expressionQueue.offer(expression);
         }
 
-        return result;
+        return calculateExpression(result, currentOperator);
+    }
+
+    private static int calculateExpression(int result, Operator currentOperator) {
+        if(expressionQueue.isEmpty()) {
+            return result;
+        }
+
+        String polledExpression = expressionQueue.poll();
+        OptionalInt numberOrEmpty = getNumberOrEmpty(polledExpression);
+
+        if (numberOrEmpty.isEmpty()) {
+            currentOperator = Operator.findOperationByValue(polledExpression);
+            return calculateExpression(result, currentOperator);
+        }
+
+        result = calculate(numberOrEmpty.getAsInt(), currentOperator, result);
+
+        return calculateExpression(result, currentOperator);
+    }
+
+    private static int calculate(int expression, Operator currentOperator, int result) {
+        return currentOperator.calculate(result, expression);
     }
 
     private static void validEmptyInput(String input) {
@@ -38,25 +56,5 @@ public class Calculrator {
         } catch (NumberFormatException e) {
             return OptionalInt.empty();
         }
-    }
-
-    private static int calculate(int expression, Operator currentOperator, int result) {
-        if (currentOperator == Operator.MINUS) {
-            result -= expression;
-            return result;
-        }
-
-        if (currentOperator == Operator.SQUARE) {
-            result *= expression;
-            return result;
-        }
-
-        if (currentOperator == Operator.DIVIDE) {
-            result /= expression;
-            return result;
-        }
-
-        result += expression;
-        return result;
     }
 }

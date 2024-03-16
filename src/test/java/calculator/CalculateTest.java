@@ -10,15 +10,17 @@ import static org.assertj.core.api.Assertions.*;
 public class CalculateTest {
 
     @Test
-    void 입력값_null_illegalArgumentException() {
+    void 입력값이null이면_IllegalArgumentException() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> calculate(null));
     }
 
     @Test
-    void 입력값_공백_illegalArgumentException() {
+    void 입력값이공백이면_IllegalArgumentException() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> calculate(""));
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> calculate(" "));
     }
 
     @Test
@@ -55,6 +57,5 @@ public class CalculateTest {
         assertThatThrownBy(() -> calculate("1 ^ 1"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .withFailMessage("유요하지 않은 연산자: ^");
-
     }
 }
