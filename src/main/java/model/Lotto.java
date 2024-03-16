@@ -13,12 +13,6 @@ public class Lotto {
     this.numbers = numbers;
   }
 
-  private void validateLottoNumbers(final List<Integer> numbers) {
-    if (numbers.size() != MAX_LOTTO_NUMBERS) {
-      throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
-    }
-  }
-
   public int findMatchNumberCount(WinningNumbers winningNumbers) {
     return (int) this.numbers.stream()
         .filter(number -> winningNumbers.getNumbers().contains(number))
@@ -26,20 +20,9 @@ public class Lotto {
         .count();
   }
 
-  public int getWinningPrice(int count) {
-    if (count == 3) {
-      return 5000;
+  private void validateLottoNumbers(final List<Integer> numbers) {
+    if (numbers.size() != MAX_LOTTO_NUMBERS) {
+      throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
     }
-    if (count == 4) {
-      return 50000;
-    }
-    if (count == 5) {
-      return 150000;
-    }
-    if (count == 6) {
-      return 2000000000;
-    }
-
-    return 0;
   }
 }
