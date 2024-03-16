@@ -1,4 +1,4 @@
-package lotto.constant;
+package lotto.model;
 
 import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.Test;

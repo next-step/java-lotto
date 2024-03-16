@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.constant.Rank;
+import lotto.model.Rank;
 
 import java.util.Map;
 
