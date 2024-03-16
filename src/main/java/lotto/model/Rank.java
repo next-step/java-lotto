@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static lotto.model.LottoMachine.LOTTO_PER_MONEY;
+
 public enum Rank {
     ONE(6, 2_000_000_000),
     TWO(5, 1_500_000),
@@ -42,8 +44,8 @@ public enum Rank {
     }
 
     // 수익률 = 총 수익 / 총 비용
-    public static double rateOfReturn(Map<Integer, Integer> resultMap, int capital) {
-        return (double) revenue(resultMap) / capital;
+    public static double rateOfReturn(Map<Integer, Integer> resultMap, int quantity) {
+        return (double) revenue(resultMap) / (quantity * LOTTO_PER_MONEY);
     }
 
     private static long revenue(Map<Integer, Integer> resultMap) {

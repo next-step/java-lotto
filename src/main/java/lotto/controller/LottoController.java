@@ -1,6 +1,8 @@
 package lotto.controller;
 
-import lotto.model.Buyer;
+import lotto.dto.OrderRequest;
+import lotto.dto.OrderResponse;
+import lotto.model.LottoMachine;
 import lotto.model.LottoNumber;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -13,12 +15,12 @@ public class LottoController {
         ResultView resultView = new ResultView();
 
         int money = inputView.askMoney();
-        Buyer buyer = new Buyer();
-        buyer.purchase(money);
-        buyer.confirm();
+        OrderRequest request = new OrderRequest(money);
+        OrderResponse response = LottoMachine.purchase(request);
+
+        resultView.printOrderResponse(response);
 
         List<LottoNumber> winningNumbers = inputView.askWinningNumbers();
-
-        resultView.print(buyer.matches(winningNumbers), money);
+        resultView.printResult(response, winningNumbers);
     }
 }
