@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class OperatorTest {
-    // 지원하는 연산자인지를 확인해야 한다.
     @ParameterizedTest
     @CsvSource(value = {"+:true", "-:true", "*:true", "/:true", "%:false", "abs:false"}, delimiter = ':')
     @DisplayName("isValidOperator(): 사칙연산자가 아닌 경우 false를 반환합니다.")
