@@ -1,5 +1,11 @@
 package caculator;
 
+import caculator.type.OperatorType;
+
+import java.util.Arrays;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+
 /*
 사용자가 입력한 문자열 값에 따라 사칙연산을 수행할 수 있는 계산기를 구현해야 한다.
 입력 문자열의 숫자와 사칙 연산 사이에는 반드시 빈 공백 문자열이 있다고 가정한다.
@@ -18,15 +24,9 @@ package caculator;
 반복적인 패턴을 찾아 반복문으로 구현한다.
  */
 public class Operator {
-    public int minus(int number1, int number2) {
-        return number1 - number2;
-    }
+    private OperatorType operatorType;
 
-    public int divide(int number1, int number2) {
-        return number1 / number2;
-    }
-
-    public int multiple(int number1, int number2) {
-        return number1 * number2;
+    public Operator(String value) {
+        this.operatorType = OperatorType.findByValue(value);
     }
 }
