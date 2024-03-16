@@ -50,7 +50,7 @@ public class LottoPaper {
 
     public Map<Integer, Integer> matches(List<LottoNumber> winningNumbers) {
         if (winningNumbers == null || winningNumbers.isEmpty()) {
-            throw new InvalidLottoException("당첨 번호를 입력해주세요");
+            throw new InvalidLottoException("유효하지 않은 로또 번호 입니다");
         }
 
         return this.lottos.stream()
