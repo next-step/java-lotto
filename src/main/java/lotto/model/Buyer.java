@@ -7,9 +7,6 @@ public class Buyer {
 
     private LottoPaper lottoPaper;
 
-    public Buyer() {
-    }
-
     public void purchase(int money) {
         this.lottoPaper = LottoMachine.purchase(money);
     }
