@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.dto.OrderResponse;
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
-import lotto.model.LottoPaper;
 import lotto.model.Rank;
 
 import java.util.List;
@@ -33,8 +32,7 @@ public class ResultView {
         StringBuilder sb = new StringBuilder();
 
         int quantity = response.getQuantity();
-        LottoPaper lottoPaper = response.getLottoPaper();
-        Map<Integer, Integer> resultMap = lottoPaper.matches(winningNumbers);
+        Map<Integer, Integer> resultMap = response.matches(winningNumbers);
 
         appendPrefix(sb);
         appendResult(resultMap, sb);
