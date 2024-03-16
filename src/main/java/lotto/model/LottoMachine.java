@@ -28,21 +28,21 @@ public class LottoMachine {
     }
 
     public static LottoPaper purchase(int money) {
-        int numOfLotto = calculate(money);
-        if (numOfLotto == 0) {
+        int quantity = calculate(money);
+        if (quantity == 0) {
             return EMPTY_LOTTO_PAPER;
         }
 
-        return new LottoPaper(prepare(numOfLotto));
+        return new LottoPaper(prepare(quantity));
     }
 
     private static int calculate(int money) {
         return money / LOTTO_PER_MONEY;
     }
 
-    private static List<Lotto> prepare(int numOfLotto) {
+    private static List<Lotto> prepare(int quantity) {
         List<Lotto> result = new ArrayList<>();
-        for (int i = 1; i <= numOfLotto; i++) {
+        for (int i = 1; i <= quantity; i++) {
             result.add(selectRandomLottoNumbers());
         }
 
