@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
@@ -10,12 +11,12 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public JudgeResult judge(Lotto winningLotto) {
-        int[] matchCount = new int[7];
+    public Prizes judge(Lotto winningLotto) {
+        List<Prize> prizes = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            matchCount[lotto.countMatchingBalls(winningLotto)]++;
+            prizes.add(lotto.judge(winningLotto));
         }
-        return new JudgeResult(matchCount[3], matchCount[4], matchCount[5], matchCount[6]);
+        return new Prizes(prizes);
     }
 
     public List<Lotto> value() {

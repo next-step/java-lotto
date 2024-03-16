@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.Ball;
-import lotto.domain.JudgeResult;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Prize;
+import lotto.domain.Prizes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -25,9 +26,9 @@ class LottosTest {
         );
 
         Lotto winningLotto = makeLotto(1, 2, 3, 4, 5, 6);
-        JudgeResult judge = lottos.judge(winningLotto);
+        Prizes judge = lottos.judge(winningLotto);
 
-        assertThat(judge.threeMatchCount()).isEqualTo(2);
+        assertThat(judge.count(Prize.MATCHING_THREE)).isEqualTo(2);
     }
 
     private Lottos makeLottos(Lotto... _lottos) {

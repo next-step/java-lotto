@@ -1,11 +1,10 @@
 package lotto.controller;
 
-import java.util.List;
-import lotto.domain.JudgeResult;
 import lotto.domain.Lotto;
 import lotto.domain.LottoStore;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.Prizes;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -27,7 +26,7 @@ public class LottoConsole {
 
         Lotto winningLotto = inputView.inputWinningLotto();
 
-        JudgeResult judgeResult = lottos.judge(winningLotto);
-        outputView.printJudgeResult(lottos.price(), judgeResult);
+        Prizes prizes = lottos.judge(winningLotto);
+        outputView.printJudgeResult(lottos.price(), prizes);
     }
 }

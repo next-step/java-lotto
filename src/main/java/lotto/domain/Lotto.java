@@ -25,9 +25,10 @@ public class Lotto {
         return balls;
     }
 
-    public int countMatchingBalls(Lotto lotto) {
+    public Prize judge(Lotto lotto) {
         Set<Ball> copiedBalls = new HashSet<>(balls);
         copiedBalls.retainAll(lotto.balls);
-        return copiedBalls.size();
+        int matchingCount = copiedBalls.size();
+        return Prize.from(matchingCount);
     }
 }
