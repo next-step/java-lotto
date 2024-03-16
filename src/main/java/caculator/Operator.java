@@ -24,7 +24,7 @@ import java.util.Objects;
 반복적인 패턴을 찾아 반복문으로 구현한다.
  */
 public class Operator {
-    private OperatorType operatorType;
+    private final OperatorType operatorType;
 
     public Operator(String value) {
         this.operatorType = OperatorType.findByValue(value);

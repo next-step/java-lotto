@@ -1,31 +1,39 @@
 package caculator;
 
+import caculator.type.OperatorType;
+
 import java.util.List;
 
 public class Calculator {
-    private Operator operator;
+    private final Number initNumber;
+    private final List<OperationPair> operationPairs;
 
-    private final Number resultNumber;
 
-    public Number getResultNumber(){
-        return resultNumber;
+    public Calculator(OperationWrapper operationWrapper) {
+        this.initNumber = operationWrapper.getInitNumber();
+        this.operationPairs = operationWrapper.getOperationPairs();
     }
 
-    public Calculator(Operator operator) {
-        this.operator = operator;
-        resultNumber = new Number(0);
-    }
+    public Number run() {
+        for (OperationPair operationPair : operationPairs) {
 
-    void calculate(List<String> textArray) {
-        resultNumber.plus(new Number(textArray.get(0)));
-        for (int i = 1; i < textArray.size(); i = i + 2) {
-            getNumber(textArray.get(i), textArray.get(i + 1));
+            Number other = operationPair.getNumber();
+            switch (operationPair.getOperatorType()) {
+                case PLUS:
+                    initNumber.plus(other);
+                    break;
+                case MINUS:
+                    initNumber.minus(other);
+                    break;
+                case DIVIDE:
+                    initNumber.divide(other);
+                    break;
+                case MULTIPLE:
+                    initNumber.multiple(other);
+                    break;
+            }
         }
-    }
 
-    private void getNumber(String operatorValue, String numberValue) {
-        if (operatorValue.equals("+")) {
-            resultNumber.plus(new Number(numberValue));
-        }
+        return initNumber;
     }
 }

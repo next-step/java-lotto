@@ -3,7 +3,7 @@ package caculator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OperationPairFactory {
+public class OperationWrapper {
 
     private static final int INITIAL_INDEX = 0;
     private static final int SECOND_INDEX = 1;
@@ -11,12 +11,12 @@ public class OperationPairFactory {
     private final Number initNumber;
     private final List<OperationPair> pairs;
 
-    public OperationPairFactory(Number initNumber, List<OperationPair> pairs) {
+    public OperationWrapper(Number initNumber, List<OperationPair> pairs) {
         this.initNumber = initNumber;
         this.pairs = pairs;
     }
 
-    public OperationPairFactory(List<String> textArray) {
+    public OperationWrapper(List<String> textArray) {
         this.initNumber = extractInitialNumber(textArray);
         this.pairs = makePairs(textArray);
     }
@@ -35,5 +35,12 @@ public class OperationPairFactory {
             pairs.add(new OperationPair(textArray.get(i), textArray.get(i + 1)));
         }
         return pairs;
+    }
+    public List<OperationPair> getOperationPairs(){
+        return this.pairs;
+    }
+
+    public Number getInitNumber(){
+        return initNumber;
     }
 }
