@@ -3,10 +3,9 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class Lotto {
-    public static final Random RANDOM = new Random();
+    private static final Random RANDOM = new Random();
     private List<Number> numbers;
 
     public Lotto() {
