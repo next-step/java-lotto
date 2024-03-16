@@ -5,21 +5,27 @@ import java.util.OptionalInt;
 import java.util.Queue;
 
 public class Calculator {
+
     private static final Queue<String> expressionQueue = new LinkedList<>();
 
     public static int calculate(String input) {
         validEmptyInput(input);
+        initialExpressionQueue(input);
+        return calculateExpression(0, Operator.NONE);
+    }
 
+    private static void validEmptyInput(String input) {
+        if (input == null || input.isBlank()) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static void initialExpressionQueue(String input) {
         String[] splitExpressions = input.split(" ");
-
-        int result = 0;
-        Operator currentOperator = Operator.NONE;
 
         for (String expression : splitExpressions) {
             expressionQueue.offer(expression);
         }
-
-        return calculateExpression(result, currentOperator);
     }
 
     private static int calculateExpression(int result, Operator currentOperator) {
@@ -42,12 +48,6 @@ public class Calculator {
 
     private static int calculate(int expression, Operator currentOperator, int result) {
         return currentOperator.calculate(result, expression);
-    }
-
-    private static void validEmptyInput(String input) {
-        if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException();
-        }
     }
 
     private static OptionalInt getNumberOrEmpty(String expression) {
