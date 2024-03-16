@@ -1,6 +1,5 @@
 package step1.validator;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -21,16 +20,15 @@ class OperandValidatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"1 + 1", "1 1 +"})
-    void countByExpression(String given) {
+    void 정규식으로_숫자_개수를_구한다(String given) {
         int actual = validator.countByExpression(given);
         int expected = 2;
 
         assertThat(actual).isEqualTo(expected);
     }
 
-    @DisplayName("숫자로 시작하지 않는 문자열은 예외를 던진다")
     @Test
-    void countByExpressionThrowException() {
+    void 숫자로_시작하지_않는_문자열은_예외를_던진다() {
         String given = "+ 3 1";
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> validator.countByExpression(given));

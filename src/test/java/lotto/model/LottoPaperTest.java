@@ -16,13 +16,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class LottoPaperTest {
 
     @Test
-    void nullCheck() {
+    void 생성자에_null넘길경우_예외를_던진다() {
         assertThatThrownBy(() -> new LottoPaper(null))
                 .isInstanceOf(InvalidLottoException.class);
     }
 
     @Test
-    void create() {
+    void 생성() {
         List<LottoNumber> selectedNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
 
@@ -34,7 +34,7 @@ class LottoPaperTest {
     }
 
     @Test
-    void size() {
+    void size는_보유한_Lotto의_개수를_반환한다() {
         List<LottoNumber> selectedNumbers1 = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         List<LottoNumber> selectedNumbers2 = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),

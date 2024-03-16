@@ -10,7 +10,7 @@ class StringCalculatorTest {
 
     @ParameterizedTest
     @CsvSource(value = {"2 + 3 * 4 / 2:10", "1 / 0:0"}, delimiter = ':')
-    void calculate(String given, int expected) {
+    void 주어진_문자열_연산식을_계산한다(String given, int expected) {
         StringCalculator cal = new StringCalculator();
         int actual = cal.evaluate(given);
 

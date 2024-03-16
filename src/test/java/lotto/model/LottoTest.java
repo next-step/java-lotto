@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoTest {
 
     @Test
-    void empty() {
+    void 초기화시_빈리스트를_넘기면_예외를_던진다() {
         List<LottoNumber> empty = Collections.emptyList();
 
         assertThatThrownBy(() -> new Lotto(empty))
@@ -58,7 +58,7 @@ public class LottoTest {
     }
 
     @Test
-    void matchNull() {
+    void 볼하나를_매치할때_null은_넘기면_0을_반환한다() {
         int expected = 0;
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
@@ -83,7 +83,7 @@ public class LottoTest {
     }
 
     @Test
-    void matchesEmptyList() {
+    void 매치할때_빈리스트를_넘기면_예외를_던진다() {
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
 
@@ -94,7 +94,7 @@ public class LottoTest {
     }
 
     @Test
-    void matchesNull() {
+    void 매치할때_null_넘기면_예외를_던진다() {
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
 

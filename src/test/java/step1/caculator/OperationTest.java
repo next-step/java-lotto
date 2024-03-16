@@ -24,6 +24,7 @@ class OperationTest {
         assertThat(operation).isEqualTo(PLUS);
     }
 
+    @DisplayName("name에 해당하는 열거형 상수가 없으면 예외를 던진다")
     @Test
     void valueOfThrowException() {
         assertThatIllegalArgumentException()
@@ -36,16 +37,16 @@ class OperationTest {
                 .containsExactly(PLUS, MINUS, MULTIPLY, DIVIDE);
     }
 
-    @ParameterizedTest(name = "사칙 연산자가 아닌 경우 예외를 던진다")
+    @ParameterizedTest
     @ValueSource(strings = {"!", "@", "#", "$", "~", "^"})
-    void findThrowException(String symbol) {
+    void 사칙연산자가_아닌경우_예외를_던진다(String symbol) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> find(symbol));
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1 + 0", "2 - 1", "1 * 1", "10 / 10"}, delimiter = ' ')
-    void apply(int operand1, String operator, int operand2) {
+    void 문자열_사칙연산_결과를_구한다(int operand1, String operator, int operand2) {
         int expected = 1;
 
         Operation operation = find(operator);

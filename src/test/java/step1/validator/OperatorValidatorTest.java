@@ -19,7 +19,7 @@ public class OperatorValidatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"1 + 2", "2 - 3", "3 * 4", "4 / 5"})
-    void countByExpression(String given) {
+    void 정규식으로_연산자의_개수를_구한다(String given) {
         int actual = validator.countByExpression(given);
         int expected = 1;
         assertThat(actual).isEqualTo(expected);
@@ -27,7 +27,7 @@ public class OperatorValidatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"1 ^ 2", "2 ! 3", "3 AND 4", "4 % 5", "5 || 6", "6 OR 7"})
-    void invalidOperator(String input) {
+    void 문자열에_사칙연산자를_제외한_기호는_예외를_던진다(String input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> validator.countByExpression(input));
     }

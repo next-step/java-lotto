@@ -17,10 +17,10 @@ class OperationValidatorTest {
                 .isThrownBy(() -> validator.assertOperation(input));
     }
 
-    @DisplayName("연산자와 피연산자의 개수가 올바르지 않으면 예외를 던진다 (연산자 = 피연산자 - 1)")
+    @DisplayName("연산자 = 피연산자 - 1")
     @ParameterizedTest
     @ValueSource(strings = {"10 + * 5", "2", "1 +"})
-    void invalidOperation(String given) {
+    void 연산자와_피연산자의_개수가_맞지않으면_예외를_던진다(String given) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> validator.assertOperation(given));
     }
