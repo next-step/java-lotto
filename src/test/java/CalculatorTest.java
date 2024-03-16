@@ -1,6 +1,5 @@
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -47,7 +46,7 @@ public class CalculatorTest {
   @DisplayName("뺄셈을 수행하는지 확인한다")
   public void minus() {
     int result = calculator.calculate("1 - 2");
-    assertEquals(3, result);
+    assertEquals(-1, result);
   }
 
   @Test
@@ -68,7 +67,7 @@ public class CalculatorTest {
   @DisplayName("복합 연산을 우선 순위 없이 입력 순서에 따라 수행하는지 확인한다")
   public void complex() {
     int result = calculator.calculate("1 + 2 * 8 / 3");
-    assertEquals(7, result);
+    assertEquals(8, result);
   }
 
 }
