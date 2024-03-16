@@ -25,16 +25,32 @@ class ValidatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource("parameterOfIsValidLengthArrayTest")
-    @DisplayName("isValidLengthArray(): 배열의 크기가 length와 동일하지 않은 경우 false를 그렇지 않은 경우 true를 반환한다.")
-    void testIsValidLengthArray(String[] stringArray, int length, boolean expected) {
-        assertThat(Validator.isValidLengthArray(stringArray, length)).isEqualTo(expected);
+    @MethodSource("parameterOfIsGreaterThanOrEqualToLengthTest")
+    @DisplayName("isGreaterThanOrEqualToLength(): 주어진 배열의 크기가 length보다 크거나 같은 경우 true를 그렇지 않으면 false를 반환한다.")
+    void testIsGreaterThanOrEqualToLength(String[] stringArray, int length, boolean expected) {
+        assertThat(Validator.isGreaterThanOrEqualToLength(stringArray, length)).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> parameterOfIsValidLengthArrayTest() {
+    private static Stream<Arguments> parameterOfIsGreaterThanOrEqualToLengthTest() {
         return Stream.of(
                 Arguments.of(new String[]{"1", "+", "2"}, 3, true),
-                Arguments.of(new String[]{"101.1", "-", "3.1"}, 1, false)
+                Arguments.of(new String[]{"1", "+", "2", "*", "10"}, 3, true),
+                Arguments.of(new String[]{"101.1", "-"}, 3, false)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("parameterOfIsOddNumberLengthTest")
+    @DisplayName("isOddNumberLength(): 주어진 배열의 크기가 홀수면 true 그렇지 않으면 false를 반환한다.")
+    void testIsOddNumberLength(String[] stringArray, boolean expected) {
+        assertThat(Validator.isOddNumberLength(stringArray, expected)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> parameterOfIsOddNumberLengthTest() {
+        return Stream.of(
+                Arguments.of(new String[]{"1", "+", "2"}, true),
+                Arguments.of(new String[]{"1", "+", "2", "*", "10"}, true),
+                Arguments.of( new String[]{"101.1", "-"}, false)
         );
     }
 }
