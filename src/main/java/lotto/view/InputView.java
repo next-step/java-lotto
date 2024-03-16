@@ -58,7 +58,7 @@ public class InputView {
 
     private int toInt(String input) {
         try {
-            return Integer.parseInt(input);
+            return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
             throw new InvalidLottoException("정수를 입력해 주세요", e);
         }
