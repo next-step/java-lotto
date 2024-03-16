@@ -25,4 +25,8 @@ public class Lottos {
     public int size() {
         return lottos.size();
     }
+
+    public int price() {
+        return 1000 * size();
+    }
 }

@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoStore;
+import lotto.domain.Lottos;
 import lotto.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,8 +22,8 @@ public class LottoStoreTest {
     void purchaseAsMuchAsPossible(int input, int expected) {
         Money money = new Money(input);
 
-        List<Lotto> lotto = LottoStore.sellAsMuchAsPossible(money);
-        assertThat(lotto).hasSize(expected);
+        Lottos lottos = LottoStore.sellAsMuchAsPossible(money);
+        assertThat(lottos.size()).isEqualTo(expected);
 
         int change = input - (1000 * expected);
         assertThat(money.amount()).isEqualTo(change);

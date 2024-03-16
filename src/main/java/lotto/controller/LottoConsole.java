@@ -1,10 +1,6 @@
 package lotto.controller;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import lotto.domain.Ball;
 import lotto.domain.JudgeResult;
 import lotto.domain.Lotto;
 import lotto.domain.LottoStore;
@@ -24,22 +20,14 @@ public class LottoConsole {
     }
 
     public void start() {
-        int moneyAmount = inputView.inputMoneyAmount();
-
-        Money money = new Money(moneyAmount);
-        List<Lotto> _lottos = LottoStore.sellAsMuchAsPossible(money);
-        Lottos lottos = new Lottos(_lottos);
+        Money money = inputView.inputMoney();
+        Lottos lottos = LottoStore.sellAsMuchAsPossible(money);
 
         outputView.printPurchasedLottos(lottos);
 
-        List<Integer> lottoNumbers = inputView.inputLottoNumbers();
-
-        Set<Ball> balls = lottoNumbers.stream()
-            .map(Ball::new)
-            .collect(Collectors.toSet());
-        Lotto winningLotto = new Lotto(balls);
+        Lotto winningLotto = inputView.inputWinningLotto();
 
         JudgeResult judgeResult = lottos.judge(winningLotto);
-        outputView.printJudgeResult(moneyAmount - money.amount(), judgeResult);
+        outputView.printJudgeResult(lottos.price(), judgeResult);
     }
 }

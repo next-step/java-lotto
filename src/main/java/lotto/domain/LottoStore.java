@@ -5,16 +5,15 @@ import java.util.List;
 
 public class LottoStore {
 
-    public static List<Lotto> sellAsMuchAsPossible(Money money) {
+    public static Lottos sellAsMuchAsPossible(Money money) {
         List<Lotto> lottos = new ArrayList<>();
-
         int maxAmount = money.amount() / 1000;
         for (int i = 0; i < maxAmount; i++) {
             Lotto lotto = sell(money);
             lottos.add(lotto);
         }
 
-        return lottos;
+        return new Lottos(lottos);
     }
 
     private static Lotto sell(Money money) {
