@@ -15,7 +15,11 @@ public class Validator {
         return isNonBlank(input) && PATTERN_FOR_NUMBER.matcher(input).find();
     }
 
-    public static boolean isValidLengthArray(String[] stringArray, int length) {
-        return stringArray.length == length;
+    public static boolean isGreaterThanOrEqualToLength(String[] stringArray, int length) {
+        return stringArray.length >= length;
+    }
+
+    public static boolean isOddNumberLength(String[] stringArray) {
+        return stringArray.length % 2 != 0;
     }
 }
