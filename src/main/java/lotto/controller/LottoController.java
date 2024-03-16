@@ -10,10 +10,15 @@ import lotto.view.ResultView;
 import java.util.List;
 
 public class LottoController {
-    public void run() {
-        InputView inputView = new InputView();
-        ResultView resultView = new ResultView();
+    private final InputView inputView;
+    private final ResultView resultView;
 
+    public LottoController(InputView inputView, ResultView resultView) {
+        this.inputView = inputView;
+        this.resultView = resultView;
+    }
+
+    public void run() {
         int money = inputView.askMoney();
         OrderRequest request = new OrderRequest(money);
         OrderResponse response = LottoMachine.purchase(request);
