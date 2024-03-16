@@ -5,17 +5,27 @@ import java.util.List;
 public class Calculator {
     private Operator operator;
 
-    public Calculator(Operator operator) {
-        this.operator = operator;
+    private final Number resultNumber;
+
+    public Number getResultNumber(){
+        return resultNumber;
     }
 
-    int calculate(List<String> textArray) {
-        int result = Integer.parseInt(textArray.get(0));
+    public Calculator(Operator operator) {
+        this.operator = operator;
+        resultNumber = new Number(0);
+    }
+
+    void calculate(List<String> textArray) {
+        resultNumber.plus(new Number(textArray.get(0)));
         for (int i = 1; i < textArray.size(); i = i + 2) {
-            if (textArray.get(i) == "+") {
-                result = operator.plus(result, Integer.parseInt(textArray.get(i + 1)));
-            }
+            getNumber(textArray.get(i), textArray.get(i + 1));
         }
-        return result;
+    }
+
+    private void getNumber(String operatorValue, String numberValue) {
+        if (operatorValue.equals("+")) {
+            resultNumber.plus(new Number(numberValue));
+        }
     }
 }

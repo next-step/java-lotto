@@ -16,11 +16,11 @@ public class OperatorTest {
         operator = new Operator();
     }
 
-    @Test
-    @DisplayName("두인자의 값을 더한다")
-    void plusMethodTest(){
-        assertThat(operator.plus(4,5)).isEqualTo(9);
-    }
+//    @Test
+//    @DisplayName("두인자의 값을 더한다")
+//    void plusMethodTest(){
+//        assertThat(operator.plus(4,5)).isEqualTo(9);
+//    }
 
     @Test
     @DisplayName("두 인자의 값을 뺀다")

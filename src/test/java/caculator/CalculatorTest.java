@@ -13,6 +13,7 @@ public class CalculatorTest {
     @DisplayName("입력에 따라 연산을 진행한다 - plus test")
     void plusCalculateTest(){
         Calculator calculator = new Calculator(new Operator());
-        assertThat(calculator.calculate(List.of("1","+","3","+","2"))).isEqualTo(6);
+        calculator.calculate(List.of("1","+","3","+","2"));
+        assertThat(calculator.getResultNumber()).usingRecursiveComparison() .isEqualTo(new Number(6));
     }
 }

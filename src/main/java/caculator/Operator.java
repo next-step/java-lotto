@@ -18,10 +18,6 @@ package caculator;
 반복적인 패턴을 찾아 반복문으로 구현한다.
  */
 public class Operator {
-    public int plus(int number1, int number2) {
-        return number1 + number2;
-    }
-
     public int minus(int number1, int number2) {
         return number1 - number2;
     }
@@ -30,7 +26,7 @@ public class Operator {
         return number1 / number2;
     }
 
-    public int multiple(int number1, int number2){
+    public int multiple(int number1, int number2) {
         return number1 * number2;
     }
 }
