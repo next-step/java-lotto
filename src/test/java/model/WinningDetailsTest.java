@@ -3,7 +3,10 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,5 +34,23 @@ class WinningDetailsTest {
                 () -> assertThat(winningDetails.getWinningDetails().get(WinningPrice.FOURTH)).isEqualTo(0),
                 () -> assertThat(winningDetails.getWinningDetails().get(WinningPrice.NONE)).isEqualTo(1)
         );
+    }
+
+    @Test
+    void 수익률_계산_테스트() {
+        // given
+        final LottoAmount lottoAmount = new LottoAmount(10000);
+        final Map<WinningPrice, Integer> details = new HashMap<>() {{
+            put(WinningPrice.FIRST, 1);
+            put(WinningPrice.FOURTH, 1);
+            put(WinningPrice.NONE, 3);
+        }};
+        final WinningDetails winningDetails = new WinningDetails(details);
+
+        // when
+        final BigDecimal profit = winningDetails.calculateProfit(lottoAmount);
+
+        // then
+        assertThat(profit).isEqualTo(new BigDecimal("200000.50"));
     }
 }
