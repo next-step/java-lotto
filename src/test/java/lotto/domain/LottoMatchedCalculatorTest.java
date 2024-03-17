@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.data.LottoWinInfo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +34,9 @@ class LottoMatchedCalculatorTest {
         lottoMatchedCalculator.saveMatched(4);
         lottoMatchedCalculator.saveMatched(5);
 
-        int winningResult = WIN_THREE + (WIN_FOUR * 2) + WIN_FIVE;
+        int winningResult = LottoWinInfo.WIN_FOURTH.getWinningPrice() +
+                (LottoWinInfo.WIN_THIRD.getWinningPrice() * 2) +
+                LottoWinInfo.WIN_SECOND.getWinningPrice();
         int purchasedMoney = 4 * LOTTO_WON_UNIT;
 
         // then
