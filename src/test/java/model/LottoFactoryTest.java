@@ -2,8 +2,6 @@ package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 class LottoFactoryTest {
@@ -14,9 +12,9 @@ class LottoFactoryTest {
         final LottoAmount lottoAmount = new LottoAmount(2000);
 
         // when
-        final List<Lotto> lottos = LottoFactory.create(lottoAmount);
+        final Lottos lottos = LottoFactory.create(lottoAmount);
 
         // then
-        assertThat(lottos).hasSize(2);
+        assertThat(lottos.getLottos()).hasSize(2);
     }
 }
