@@ -1,0 +1,35 @@
+package lotto.view;
+
+import java.util.stream.Collectors;
+import lotto.domain.Ball;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.Prize;
+import lotto.domain.Prizes;
+
+public class OutputView {
+
+    private static final String PURCHASED_LOTTO_AMOUNT_MESSAGE = "%d개를 구매했습니다.\n";
+    private static final String JUDGE_RESULT_HEADER_MESSAGE = "당첨 통계\n---------";
+    private static final String JUDGE_RESULT_MESSAGE = "%d개 일치 (%d원)- %d개\n";
+    private static final String RETURN_RATE_MESSAGE = "총 수익률은 %.2f입니다.";
+
+    public void printPurchasedLottos(Lottos lottos) {
+        System.out.printf(PURCHASED_LOTTO_AMOUNT_MESSAGE, lottos.size());
+        for (Lotto lotto : lottos.value()) {
+            String lottoStr = lotto.balls().stream().mapToInt(Ball::number)
+                .mapToObj(String::valueOf)
+                .collect(Collectors.joining(", ", "[", "]"));
+            System.out.println(lottoStr);
+        }
+    }
+
+    public void printJudgeResult(int usedMoney, Prizes prizes) {
+        System.out.println(JUDGE_RESULT_HEADER_MESSAGE);
+        for (Prize prize : Prize.valuesWithoutNone()) {
+            System.out.printf(JUDGE_RESULT_MESSAGE, prize.matchingCount(), prize.amount(),
+                prizes.count(prize));
+        }
+        System.out.printf(RETURN_RATE_MESSAGE, prizes.calcReturnRate(usedMoney));
+    }
+}
