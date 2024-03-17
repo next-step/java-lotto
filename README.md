@@ -18,7 +18,7 @@
   - [X] 멤버 변수로 List\<LottoNumber>를 가진다.
   - [X] 매개변수로 당첨 번호 리스트를 받아, LottoResult 객체를 반환
 - 로또를 생성하는 LottoMachine 객체 생성
-  - [ ] 로또 개수와 NumberDrawer를 매개변수로 받아 LottoNumbers를 반환
+  - [X] 로또 개수와 NumberDrawer를 매개변수로 받아 LottoNumbers를 반환
 - 수익률 계산을 위한 ReturnCalculator 생성
   - [ ] Result를 매개변수로 받아, 총 당첨금을 계산하여 반환 
   - [ ] 매개변수로 당첨금과 로또 구매금액이 주어지면 수익률을 소숫점 이하 2자리로 반환
