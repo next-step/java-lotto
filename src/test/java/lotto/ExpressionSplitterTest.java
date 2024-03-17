@@ -6,6 +6,7 @@ import lotto.exception.IllegalExpressionElementSizeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Queue;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,7 +20,7 @@ public class ExpressionSplitterTest {
         String expressionString = "2 + 3 * 4 / 2";
 
         // When
-        String[] expressionStrings = ExpressionSplitter.split(expressionString);
+        List<String> expressionStrings = ExpressionSplitter.split(expressionString);
         Expression expression = new Expression(expressionStrings);
 
         // Then

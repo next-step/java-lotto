@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.exception.IllegalOperatorExpression;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ public class Expression {
     private final Numbers numbers;
     private final Operators operators;
 
-    public Expression(String[] expressionElements) {
+    public Expression(List<String> expressionElements) {
         this.numbers = new Numbers();
         this.operators = new Operators();
 

@@ -7,6 +7,8 @@ import lotto.util.InputValidator;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -15,8 +17,8 @@ public class Main {
             String expressionString = InputView.readExpression();
             InputValidator.validateEmptyExpression(expressionString);
 
-            String[] expressionStrings = ExpressionSplitter.split(expressionString);
-            InputValidator.validateElementSize(expressionStrings.length);
+            List<String> expressionStrings = ExpressionSplitter.split(expressionString);
+            InputValidator.validateElementSize(expressionStrings.size());
 
             Calculator calculator = new Calculator(new Expression(expressionStrings));
             int result = calculator.calculate();
