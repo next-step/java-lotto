@@ -20,10 +20,8 @@ public class WinningDetails {
     }
 
     public void makeWinningDetails(final Lottos lottos, final WinningNumbers winningNumbers) {
-        for (final Lotto lotto : lottos.getLottos()) {
-            final Rank rank = lotto.match(winningNumbers);
-            winningDetails.put(rank, winningDetails.get(rank) + 1);
-        }
+        lottos.determineRank(winningNumbers)
+                .forEach(rank -> winningDetails.put(rank, winningDetails.get(rank) + 1));
     }
 
     public BigDecimal calculateProfit(final LottoAmount lottoAmount) {
