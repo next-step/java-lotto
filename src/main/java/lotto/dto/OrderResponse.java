@@ -1,7 +1,6 @@
 package lotto.dto;
 
 import lotto.model.Lotto;
-import lotto.model.LottoNumber;
 import lotto.model.LottoPaper;
 
 import java.util.List;
@@ -25,8 +24,8 @@ public class OrderResponse {
         return this.lottoPaper.getLottos();
     }
 
-    public Map<Integer, Integer> matches(List<LottoNumber> winningNumbers) {
-        return this.lottoPaper.matches(winningNumbers);
+    public Map<Integer, Integer> matches(Lotto other) {
+        return this.lottoPaper.matches(other);
     }
 
     @Override

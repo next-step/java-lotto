@@ -1,11 +1,10 @@
 package lotto.view;
 
 import lotto.exception.InvalidLottoException;
-import lotto.model.LottoNumber;
+import lotto.model.Lotto;
 import lotto.model.LottoNumberFactory;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 import static lotto.validation.LottoMachineValidator.assertMoney;
@@ -30,7 +29,7 @@ public class InputView {
         return askMoney();
     }
 
-    public List<LottoNumber> askWinningNumbers() {
+    public Lotto askWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         try {

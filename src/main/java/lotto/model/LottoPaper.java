@@ -26,13 +26,9 @@ public class LottoPaper {
         return this.lottos.isEmpty();
     }
 
-    public Map<Integer, Integer> matches(List<LottoNumber> winningNumbers) {
-        if (winningNumbers == null || winningNumbers.isEmpty()) {
-            throw new InvalidLottoException("유효하지 않은 로또 번호 입니다");
-        }
-
+    public Map<Integer, Integer> matches(Lotto other) {
         return this.lottos.stream()
-                .map(lotto -> lotto.matches(winningNumbers))
+                .map(lotto -> lotto.matches(other))
                 .collect(Collectors.toMap(Function.identity(), e -> 1, Integer::sum));
     }
 

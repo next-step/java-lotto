@@ -36,10 +36,12 @@ public class Lotto {
         }
     }
 
-    public int matches(List<LottoNumber> others) {
-        assertNullOrEmpty(others);
+    public int matches(Lotto other) {
+        if (other == null) {
+            throw new InvalidLottoException("매칭할 수 있는 로또가 존재하지 않습니다");
+        }
 
-        return others.stream()
+        return other.lottoNumbers.stream()
                 .distinct()
                 .map(this::match)
                 .reduce(0, Integer::sum);

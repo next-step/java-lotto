@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 import static lotto.model.LottoFactory.create;
@@ -65,14 +64,6 @@ public class LottoTest {
     }
 
     @Test
-    void 여러개의_번호를_매치할때_빈리스트를_넘기면_예외를_던진다() {
-        Lotto lotto = create(1, 2, 3, 4, 5, 6);
-
-        assertThatThrownBy(() -> lotto.matches(Collections.emptyList()))
-                .isInstanceOf(InvalidLottoException.class);
-    }
-
-    @Test
     void 여러개의_번호를_매치할때_null_넘기면_예외를_던진다() {
         Lotto lotto = create(1, 2, 3, 4, 5, 6);
 
@@ -89,10 +80,11 @@ public class LottoTest {
     }
 
     @Test
-    void 중복번호를_매칭할경우_중복제외한_매칭결과를_반환한다() {
+    void 중복번호를_매칭할경우_예외를_반환한다() {
         Lotto lotto = create(1, 2, 3, 4, 5, 6);
-        int actual = lotto.matches(Arrays.asList(new LottoNumber(1), new LottoNumber(1), new LottoNumber(1)));
 
-        assertThat(actual).isEqualTo(1);
+        assertThatThrownBy(() -> lotto.matches(LottoNumberFactory.of(1, 1, 1, 1, 1, 1)))
+                .isInstanceOf(InvalidLottoException.class)
+                .hasMessage("중복을 제외한 6개의 로또 번호가 필요합니다");
     }
 }

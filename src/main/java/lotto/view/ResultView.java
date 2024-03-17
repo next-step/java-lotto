@@ -2,10 +2,8 @@ package lotto.view;
 
 import lotto.dto.OrderResponse;
 import lotto.model.Lotto;
-import lotto.model.LottoNumber;
 import lotto.model.Rank;
 
-import java.util.List;
 import java.util.Map;
 
 public class ResultView {
@@ -28,11 +26,12 @@ public class ResultView {
         System.out.println(sb);
     }
 
-    public void printResult(OrderResponse response, List<LottoNumber> winningNumbers) {
+    public void printResult(OrderResponse response, Lotto winningNumbers) {
         StringBuilder sb = new StringBuilder();
 
         int quantity = response.getQuantity();
         Map<Integer, Integer> resultMap = response.matches(winningNumbers);
+
 
         appendPrefix(sb);
         appendResult(resultMap, sb);

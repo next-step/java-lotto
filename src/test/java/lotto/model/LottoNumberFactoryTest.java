@@ -5,9 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberFactoryTest {
@@ -20,13 +17,9 @@ class LottoNumberFactoryTest {
     }
 
     @Test
-    void 중복제외한_로또번호를_반환한다() {
-        int expected = 2;
-
-        List<LottoNumber> lottoNumbers = LottoNumberFactory.of(1, 1, 1, 1, 1, 2);
-
-        assertThat(lottoNumbers)
-                .hasSize(expected)
-                .containsExactly(new LottoNumber(1), new LottoNumber(2));
+    void 중복번호를_입력할_예외를_반환한다() {
+        assertThatThrownBy(() -> LottoNumberFactory.of(1, 1, 1, 1, 1, 2))
+                .isInstanceOf(InvalidLottoException.class)
+                .hasMessage("중복을 제외한 6개의 로또 번호가 필요합니다");
     }
 }

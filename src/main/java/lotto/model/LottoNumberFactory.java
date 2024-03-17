@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -23,23 +22,15 @@ public class LottoNumberFactory {
                 .collect(toList());
     }
 
-    public static List<LottoNumber> of(Integer... numbers) {
-        List<Integer> uniqueNumbers = removeDuplicatedNumber(numbers);
-
+    public static Lotto of(Integer... numbers) {
         List<LottoNumber> result = new ArrayList<>();
-        for (int number : uniqueNumbers) {
+        for (int number : numbers) {
             assertInvalidNumber(number);
 
             result.add(LOTTO_NUMBERS.get(number - 1));
         }
 
-        return result;
-    }
-
-    private static List<Integer> removeDuplicatedNumber(Integer[] numbers) {
-        return Arrays.stream(numbers)
-                .distinct()
-                .collect(toList());
+        return new Lotto(result);
     }
 
     public static List<LottoNumber> selectRandomLottoNumbers() {

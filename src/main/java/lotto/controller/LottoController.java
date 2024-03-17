@@ -2,12 +2,10 @@ package lotto.controller;
 
 import lotto.dto.OrderRequest;
 import lotto.dto.OrderResponse;
+import lotto.model.Lotto;
 import lotto.model.LottoMachine;
-import lotto.model.LottoNumber;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.List;
 
 public class LottoController {
     private final InputView inputView;
@@ -25,7 +23,7 @@ public class LottoController {
 
         resultView.printOrderResponse(response);
 
-        List<LottoNumber> winningNumbers = inputView.askWinningNumbers();
-        resultView.printResult(response, winningNumbers);
+        Lotto winningNumberLotto = inputView.askWinningNumbers();
+        resultView.printResult(response, winningNumberLotto);
     }
 }
