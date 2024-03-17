@@ -1,8 +1,6 @@
 package calculator;
 
-import java.util.LinkedList;
-import java.util.OptionalInt;
-import java.util.Queue;
+import java.util.*;
 
 public class Calculator {
 
@@ -42,6 +40,7 @@ public class Calculator {
         }
 
         result = calculate(numberOrEmpty.getAsInt(), currentOperator, result);
+        List<Integer> a = new ArrayList<>();
 
         return calculateExpression(result, currentOperator);
     }
