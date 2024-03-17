@@ -34,7 +34,6 @@
 - [x] 구매한 자동로또를 모두 출력
 
 ### 컨벤션
-
 - [x] Java : Intellij idea Code Style java 적용
 - [x] Commit : AngularJS Commit Message 사용
 
