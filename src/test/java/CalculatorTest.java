@@ -3,8 +3,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
 
@@ -41,5 +40,18 @@ public class CalculatorTest {
 
         // then
         assertThat(result).isEqualTo(expected);
+    }
+
+    @DisplayName("사칙연산을 수행할 수 있다. 이때, 연산자 우선순위는 고려하지 않고 순서대로 수행된다.")
+    @Test
+    void test04() {
+        // given
+        String input = "2 + 3 * 4 / 2";
+
+        // when
+        int result = Calculator.calculate(input);
+
+        // then
+        assertThat(result).isEqualTo(10);
     }
 }

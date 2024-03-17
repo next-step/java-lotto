@@ -27,13 +27,12 @@ public class Calculator {
 
         List<Integer> numbers = getNumbers(input);
         List<Character> operations = getOperations(input);
-        int result = 0;
         int prev = numbers.get(0);
         for (int i = 1; i < numbers.size(); i++) {
-            result += OPERATIONS.get(operations.get(i - 1)).apply(prev, numbers.get(i));
+            prev = OPERATIONS.get(operations.get(i - 1)).apply(prev, numbers.get(i));
         }
 
-        return result;
+        return prev;
     }
 
     private static List<Character> getOperations(String input) {
