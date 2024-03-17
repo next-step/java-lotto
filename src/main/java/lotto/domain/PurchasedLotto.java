@@ -14,7 +14,7 @@ public class PurchasedLotto {
     public PurchasedLotto(int purchasedMoney) {
         this.lottos = new ArrayList<>();
 
-        int purchasedCount = purchasedMoney / LOTTO_WON_UNIT;
+        int purchasedCount = calculatePurchasedCount(purchasedMoney);
 
         for (int i = 0; i < purchasedCount; i++) {
             this.lottos.add(new LottoNumbers());
@@ -22,7 +22,7 @@ public class PurchasedLotto {
     }
 
     public PurchasedLotto(int purchasedMoney, List<LottoNumbers> manualLottoNumbers) {
-        int purchasedCount = purchasedMoney / LOTTO_WON_UNIT;
+        int purchasedCount = calculatePurchasedCount(purchasedMoney);
 
         validatePurchasedAndManualCount(purchasedCount, manualLottoNumbers);
 
@@ -35,6 +35,10 @@ public class PurchasedLotto {
 
     public int purchasedLottoSize() {
         return this.lottos.size();
+    }
+
+    public List<LottoNumbers> getPurchasedLottoList() {
+        return List.copyOf(lottos);
     }
 
     public LottoResultDto matchWinningNumbers(LottoNumbers winningNumbers) {
@@ -54,11 +58,8 @@ public class PurchasedLotto {
         );
     }
 
-    @Override
-    public String toString() {
-        StringBuffer stringBuffer = new StringBuffer();
-        lottos.forEach(lotto -> stringBuffer.append(lotto.toString()).append("\n"));
-        return stringBuffer.toString();
+    private static int calculatePurchasedCount(int purchasedMoney) {
+        return purchasedMoney / LOTTO_WON_UNIT;
     }
 
     private void validatePurchasedAndManualCount(int purchasedCount, List<LottoNumbers> manualLottoNumbers) {

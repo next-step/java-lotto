@@ -8,7 +8,8 @@ public class Output {
 
     public void printPurchaseResult(PurchasedLotto purchasedLotto) {
         System.out.println(purchasedLotto.purchasedLottoSize() + "개를 구매했습니다.");
-        System.out.println(purchasedLotto);
+        purchasedLotto.getPurchasedLottoList()
+                        .forEach(System.out::println);
     }
 
     public void printWinningResult(LottoResultDto lottoResultDto) {
