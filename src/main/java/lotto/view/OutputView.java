@@ -5,7 +5,7 @@ import lotto.domain.LottoResult;
 
 import java.util.List;
 
-import static lotto.LottoConstants.*;
+import static lotto.constants.LottoConstants.*;
 
 public class OutputView {
 

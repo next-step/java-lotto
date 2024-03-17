@@ -10,7 +10,7 @@ public class ShuffledNumberDrawer implements NumberDrawer{
     public List<Integer> drawnNumbers(int bound, int size) {
         List<Integer> result = new ArrayList<>();
         for (int i = 1; i <= bound; i++) {
-            result.add(bound);
+            result.add(i);
         }
 
         Collections.shuffle(result);

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.LottoConstants.*;
+import static lotto.constants.LottoConstants.*;
 
 public class LottoResult {
     private int lottoCount = 0;

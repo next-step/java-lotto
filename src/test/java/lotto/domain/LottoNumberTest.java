@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.LottoConstants;
+import lotto.constants.LottoConstants;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

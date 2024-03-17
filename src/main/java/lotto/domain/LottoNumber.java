@@ -3,9 +3,12 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.LottoConstants.*;
+import static lotto.constants.LottoConstants.*;
 
 public class LottoNumber {
+    public static final String INVALID_LOTTO_NUMBER_BOUND_MESSAGE = "로또 번호는 " + MIN_LOTTO_NUMBER + "이상 " + MAX_LOTTO_NUMBER + "이하의 숫자만 입력할 수 있습니다.";
+    public static final String INVALID_LOTTO_NUMBER_SIZE = "로또 번호는 " + LOTTO_NUMBER_SIZE + "개여야 합니다.";
+    public static final String LOTTO_NUMBER_CANT_DUPLICATE = "로또 번호는 중복될 수 없습니다.";
     private final List<Integer> numbers;
 
     private LottoNumber(List<Integer> numbers) {
@@ -15,8 +18,20 @@ public class LottoNumber {
     public static LottoNumber from(List<Integer> numbers) {
         validLottoNumberSize(numbers);
         validLottoNumberBound(numbers);
+        validLottoNumberDuplicate(numbers);
 
         return new LottoNumber(numbers);
+    }
+
+    private static void validLottoNumberDuplicate(List<Integer> numbers) {
+        int originalSize = numbers.size();
+        int distinctCount = (int) numbers.stream()
+                .distinct()
+                .count();
+
+        if (originalSize != distinctCount) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_CANT_DUPLICATE);
+        }
     }
 
     private static void validLottoNumberBound(List<Integer> numbers) {
@@ -24,13 +39,13 @@ public class LottoNumber {
                 .anyMatch((number) -> number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER);
 
         if (isInvalid) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_BOUND_MESSAGE);
         }
     }
 
     private static void validLottoNumberSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_SIZE);
         }
     }
 

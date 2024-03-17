@@ -1,12 +1,11 @@
 package lotto.domain;
 
-import lotto.LottoConstants;
 import lotto.numberdrawer.NumberDrawer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.LottoConstants.*;
+import static lotto.constants.LottoConstants.*;
 
 public class LottoMachine {
     public static LottoNumbers createLottoNumbers(int countOfLotto, NumberDrawer numberDrawer) {
