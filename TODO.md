@@ -1,3 +1,49 @@
+### 2단계 -로또 (자동)
+
+LottoNumber
+
+- [x] 로또 번호를 가진다
+- [x] 로또 번호는 1 ~ 45의 수이다.
+- [x] 범위를 벗어날 경우 InvalidLottoException 을 던진다
+- [x] 로또 객체가 같은지 비교 가능하다 (동등성)
+
+Lotto
+
+- [x] LottoNumber 컬렉션을 가지는 일급 컬렉션
+- [x] LottoNumber 6자리 가진다
+    - [x] LottoNumber 입력값이 비어있거나, 6개가 아닌 경우 InvalidLottoException 던진다
+- [x] 주어진 번호와 로또 번호를 매칭하여 일치하는 개수를 반환한다
+    - ① 하나의 LottoNumber와 비교하는 경우 -- match()
+    - ② 여러 개의 LottoNumber와 비교하는 경우 -- matches()
+
+LottoMachine
+
+- [x] 구입 금액만큼의 로또 개수를 계산하여 로또를 반환한다
+    - 로또 한장 당 1,000원
+- [x] 6개의 랜덤한 로또 번호를 반환한다
+
+Buyer
+
+- [x] 주어진 금액으로 로또를 구매한다
+- [x] 구매한 로또를 확인한다 -- LottoPaper 책임 위임 (confirm())
+- [x] 구매한 로또와 당첨번호를 매칭한 결과를 반환한다 -- LottoPaper 책임 위임 (matches())
+
+LottoPaper
+
+- [x] Lotto의 일급 컬렉션
+- [x] 보유한 로또 번호를 확인한다
+    - 출력 예시 : "[1, 2, 3, 4, 5, 6]"
+    - 이때 입력한 인덱스가 유효 범위가 아닌 경우 InvalidLottoException 던진다
+- [x] 당첨 번호와 보유한 로또 번호를 매칭한다
+    - 결과는 Map 자료 유형으로 응답
+
+Rank
+
+- [x] 당첨 볼 갯수, 당첨 보상을 가진다
+- [x] 수익률을 계산한다
+
+---
+
 ### 1단계 - 문자열 계산기
 
 ```text
@@ -24,4 +70,15 @@
 - [x] 곱셈
 - [x] 나눗셈
 
+#### 피드백
 
+- [x] 프로덕션/테스트 코드 패키지 분리
+- [x] operator, operation 검증 클래스 분리
+- [x] enum Operation에서 추상 메서드 대신 함수형 인터페이스 적용
+- [x] 피연산자, 연산자를 분리하여 연산식 계산하도록 리팩토링
+- [x] OperationWrapper 클래스 제거, 후위 순회로 연산하도록 StringCalculator 클래스 리팩토링
+    - 사칙연산의 우선 순위가 없어 순차적으로 후위 순회 연산 처리하기 위해 Stack 대신 Queue 사용
+    - 중위 순회 "2 + 3 * 4 / 2" -> 후위 순회 "2 3 4 2 + * /"
+        - 사칙연산시 숫자의 경우 Queue 넣음
+        - 연산자 만나면 Queue에서 두 개 뽑아서 계산 후 Queue 맨 앞에 추가
+        - Queue 남은 숫자가 최종 연산 결과
