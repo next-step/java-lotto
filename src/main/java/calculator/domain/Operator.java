@@ -50,7 +50,7 @@ public enum Operator {
 
     public static Operator of(String symbol) {
         return Arrays.stream(values())
-                .filter(op -> op.getSymbol().equals(symbol))
+                .filter(operator -> operator.getSymbol().equals(symbol))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("올바른 연산자(+, -, *, /)를 입력하세요."));
     }
