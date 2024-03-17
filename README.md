@@ -12,7 +12,7 @@
 - 숫자를 추첨하는 NumberDrawer 인터페이스와 구현체 ShuffledNumberDrawer 구현
   - [X] 1 ~ 매개변수(숫자) 만큼의 숫자를 섞어서 앞에서부터 6개를 뽑아 정렬 후 반환
 - 로또 하나를 가지는 LottoNumber 객체 생성
-  - [ ] 멤버 변수로 List\<Integer>를 가지는 일급 컬렉션
+  - [X] 멤버 변수로 List\<Integer>를 가지는 일급 컬렉션
   - [ ] 숫자 리스트를 매개변수로 받아 동일한 숫자를 필터링하여 개수를 반환하는 containsCount 구현
 - 모든 로또를 가지는 LottoNumbers 객체 생성
   - [ ] 멤버 변수로 List\<LottoNumber>를 가진다.
