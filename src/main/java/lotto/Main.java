@@ -19,8 +19,7 @@ public class Main {
             List<String> expressionStrings = ExpressionSplitter.split(expressionString);
 
             List<ExpressionElement> elements = ExpressionElementBuilder.build(expressionStrings);
-            Calculator calculator = new Calculator(new Expression(elements));
-            int result = calculator.calculate();
+            int result = Calculator.calculate(new Expression(elements));
 
             ResultView.printExpressionResult(result);
         } catch (IllegalArgumentException e) {

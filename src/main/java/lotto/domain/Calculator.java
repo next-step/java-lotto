@@ -2,15 +2,9 @@ package lotto.domain;
 
 public class Calculator {
 
-    private final Expression expression;
-
-    public Calculator(Expression expression) {
-        this.expression = expression;
-    }
-
-    public int calculate() {
+    public static int calculate(Expression expression) {
         int number = expression.getNumber().get();
-        while (!expression.getOperators().isEmpty()) {
+        while (expression.hasOperator()) {
             String operator = expression.getOperator().get();
             int nextNumber = expression.getNumber().get();
             number = calculate(operator, number, nextNumber);
@@ -19,7 +13,7 @@ public class Calculator {
         return number;
     }
 
-    private int calculate(String operator, int number1, int number2) {
+    private static int calculate(String operator, int number1, int number2) {
         OperationStrategy operation = OperatorType.getStrategy(operator);
         return operation.calculate(number1, number2);
     }

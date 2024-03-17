@@ -47,4 +47,8 @@ public class Expression {
         return this.operators.poll();
     }
 
+    public boolean hasOperator() {
+        return !this.operators.isEmpty();
+    }
+
 }
