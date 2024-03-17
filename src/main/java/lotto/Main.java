@@ -22,7 +22,7 @@ public class Main {
             int result = Calculator.calculate(new Expression(elements));
 
             ResultView.printExpressionResult(result);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | ArithmeticException e) {
             e.printStackTrace();
         } finally {
             ResultView.printExit();

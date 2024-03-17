@@ -2,16 +2,15 @@ package lotto.domain;
 
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public enum OperatorType {
 
-    ADD("+", ((number1, number2) -> number1 + number2)),
-    SUBTRACT("-", ((number1, number2) -> number1 - number2)),
-    MULTIPLY("*", ((number1, number2) -> number1 * number2)),
-    DIVIDE("/", ((number1, number2) -> number1 / number2));
+    ADD("+", new AddStrategy()),
+    SUBTRACT("-", new SubtractStrategy()),
+    MULTIPLY("*", new MultiplyStrategy()),
+    DIVIDE("/", new DivideStrategy());
 
     OperatorType(String operator, OperationStrategy strategy) {
         this.operator = operator;
