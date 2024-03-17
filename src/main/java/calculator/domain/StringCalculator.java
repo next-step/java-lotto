@@ -2,6 +2,7 @@ package calculator.domain;
 
 import calculator.domain.strategy.AdditionStrategy;
 import calculator.domain.strategy.CalculateStrategy;
+import calculator.domain.strategy.MultiplicationStrategy;
 import calculator.domain.strategy.SubtractionStrategy;
 
 import java.util.List;
@@ -9,9 +10,14 @@ import java.util.Queue;
 
 public class StringCalculator {
 
-  private static final List<CalculateStrategy> calculateStrategies = List.of(new AdditionStrategy(), new SubtractionStrategy());
+  private static final List<CalculateStrategy> calculateStrategies = List.of(
+      new AdditionStrategy(),
+      new SubtractionStrategy(),
+      new MultiplicationStrategy()
+  );
 
-  private StringCalculator() {}
+  private StringCalculator() {
+  }
 
   public static int calculate(CalculatorQueue queue) {
     Queue<Operand> operandQueue = queue.getOperands();
