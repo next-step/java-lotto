@@ -1,5 +1,6 @@
 package controller;
 
+import model.Calculation;
 import model.NumberSentence;
 import view.InputView;
 import view.ResultView;
@@ -14,9 +15,11 @@ public class Calculator {
     }
 
     public void start() {
+        resultView.printInputNumberSentence();
         NumberSentence numberSentence = inputView.inputNumberSentence();
 
+        int resultNumber = Calculation.calculate(numberSentence);
 
-
+        resultView.printResultNumber(resultNumber);
     }
 }

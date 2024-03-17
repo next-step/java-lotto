@@ -1,9 +1,10 @@
 package model;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
-public class NumberSentence {
+public class NumberSentence implements Iterable<String> {
     private final List<String> numberSentence;
 
     public NumberSentence(String[] numberSentence) {
@@ -17,5 +18,10 @@ public class NumberSentence {
 
     public String getExpression(int index) {
         return numberSentence.get(index);
+    }
+
+    @Override
+    public Iterator<String> iterator() {
+        return numberSentence.iterator();
     }
 }
