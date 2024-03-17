@@ -3,8 +3,12 @@ package lotto.domain;
 import lotto.LottoConstants;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -39,13 +43,20 @@ public class LottoNumberTest {
         assertThat(lottoNumber.size()).isEqualTo(6);
     }
 
-    @Test
+    @ParameterizedTest(name = "동일한 숫자 개수 : {2}")
+    @MethodSource("lottoNumbersAndContainsCount")
     @DisplayName("containsCount 호출 시 넘어오는 LottoNumber와 동일한 숫자의 개수 반환")
-    void containsCount() {
+    void containsCount(LottoNumber lottoNumber, LottoNumber winnerNumber, int containsCount) {
+        assertThat(lottoNumber.containsCount(winnerNumber)).isEqualTo(containsCount);
+    }
+
+    static Stream<Arguments> lottoNumbersAndContainsCount() {
         LottoNumber lottoNumber = LottoNumber.from(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumber winningNumber1 = LottoNumber.from(List.of(1, 2, 3, 30, 31, 32));
-        LottoNumber winningNumber2 = LottoNumber.from(List.of(1, 2, 29, 30, 31, 32));
-        assertThat(lottoNumber.containsCount(winningNumber1)).isEqualTo(3);
-        assertThat(lottoNumber.containsCount(winningNumber2)).isEqualTo(2);
+        return Stream.of(
+                Arguments.arguments(lottoNumber, LottoNumber.from(List.of(1, 2, 3, 4, 5, 6)), 6),
+                Arguments.arguments(lottoNumber, LottoNumber.from(List.of(1, 2, 3, 4, 5, 42)), 5),
+                Arguments.arguments(lottoNumber, LottoNumber.from(List.of(1, 2, 3, 4, 29, 38)), 4),
+                Arguments.arguments(lottoNumber, LottoNumber.from(List.of(1, 2, 3, 30, 31, 32)), 3)
+        );
     }
 }
