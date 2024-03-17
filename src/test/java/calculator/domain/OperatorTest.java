@@ -28,32 +28,31 @@ class OperatorTest {
         }
     }
 
-
     @ParameterizedTest
     @CsvSource(value = {"1:1:2", "1:2:3", "2:-1:1"}, delimiter = ':')
     @DisplayName("PLUS.calculate(): 더하기 연산을 수행합니다.")
-    public void testPlusCalculate(double num1, double num2, double result) {
-        assertThat(Operator.PLUS.calculate(num1, num2)).isEqualTo(result);
+    public void testPlusCalculate(double number1, double number2, double result) {
+        assertThat(Operator.PLUS.calculate(number1, number2)).isEqualTo(result);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1:1:0", "1:2:-1", "2:-1:3"}, delimiter = ':')
     @DisplayName("MINUS.calculate(): 빼기 연산을 수행합니다.")
-    public void testMinusCalculate(double num1, double num2, double result) {
-        assertThat(Operator.MINUS.calculate(num1, num2)).isEqualTo(result);
+    public void testMinusCalculate(double number1, double number2, double result) {
+        assertThat(Operator.MINUS.calculate(number1, number2)).isEqualTo(result);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1:1:1", "1:2:2", "2:-1:-2", "0.1:9:0.9"}, delimiter = ':')
     @DisplayName("MULTIPLY.calculate(): 곱하기 연산을 수행합니다.")
-    public void testMultiplyCalculate(double num1, double num2, double result) {
-        assertThat(Operator.MULTIPLY.calculate(num1, num2)).isEqualTo(result);
+    public void testMultiplyCalculate(double number1, double number2, double result) {
+        assertThat(Operator.MULTIPLY.calculate(number1, number2)).isEqualTo(result);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1:1:1", "1:2:0", "2:-1:-2", "0.1:3:0"}, delimiter = ':')
     @DisplayName("DIVIDE.calculate(): 곱하기 연산을 수행합니다.")
-    public void testDivideCalculate(double num1, double num2, double result) {
-        assertThat(Operator.DIVIDE.calculate(num1, num2)).isEqualTo(result);
+    public void testDivideCalculate(double number1, double number2, double result) {
+        assertThat(Operator.DIVIDE.calculate(number1, number2)).isEqualTo(result);
     }
 }

@@ -9,8 +9,8 @@ public class Calculator {
         try {
             String mathematicalExpression = InputView.enteredMathematicalExpression();
 
-            Calculation calculation = Calculation.newCalculation(mathematicalExpression);
-            double result = calculation.calculate();
+            Calculation calculation = new Calculation();
+            double result = calculation.calculate(mathematicalExpression);
 
             OutputView.printResult(result);
         } catch (IllegalArgumentException e) {

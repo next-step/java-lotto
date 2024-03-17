@@ -10,40 +10,36 @@ public class Calculation {
     private static final String BLANK_DELIMITER = " ";
     private static final int MATHEMATICAL_EXPRESSION_MIN_COMPONENT = 3;
 
-    private final Deque<Operand> operandQueue;
-    private final Deque<Operator> operatorQueue;
+    public double calculate(String mathematicalExpression) {
+        validateMathematicalExpression(mathematicalExpression);
+        return calculationResult(makeOperandDeQueue(mathematicalExpression), makeOperatorDeQueue(mathematicalExpression));
+    }
 
-    private Calculation(String mathematicalExpression) {
+    private void validateMathematicalExpression(String mathematicalExpression) {
         if (!isNonBlank(mathematicalExpression)) {
             throw new IllegalArgumentException(WRONG_MATHEMATICAL_EXPRESSION_MESSAGE);
         }
 
         String[] operandOperatorArray = mathematicalExpression.split(BLANK_DELIMITER);
-
         if (!isGreaterThanOrEqualToLength(operandOperatorArray, MATHEMATICAL_EXPRESSION_MIN_COMPONENT) || !isOddNumberLength(operandOperatorArray)) {
             throw new IllegalArgumentException(WRONG_MATHEMATICAL_EXPRESSION_MESSAGE);
         }
-
-        this.operandQueue = makeOperandQueue(operandOperatorArray);
-        this.operatorQueue = makeOperatorQueue(operandOperatorArray);
     }
 
-    public static Calculation newCalculation(String mathematicalExpression) {
-        return new Calculation(mathematicalExpression);
-    }
-
-    private Deque<Operand> makeOperandQueue(String[] operandOperatorArray) {
+    private Deque<Operand> makeOperandDeQueue(String mathematicalExpression) {
         Deque<Operand> operandQueue = new LinkedList<>();
+        String[] operandOperatorArray = mathematicalExpression.split(BLANK_DELIMITER);
 
         for (int i = 0; i < operandOperatorArray.length; i += 2) {
-            operandQueue.add(Operand.newOperand(operandOperatorArray[i]));
+            operandQueue.add(Operand.valueOf(operandOperatorArray[i]));
         }
 
         return operandQueue;
     }
 
-    private Deque<Operator> makeOperatorQueue(String[] operandOperatorArray) {
+    private Deque<Operator> makeOperatorDeQueue(String mathematicalExpression) {
         Deque<Operator> operatorQueue = new LinkedList<>();
+        String[] operandOperatorArray = mathematicalExpression.split(BLANK_DELIMITER);
 
         for (int i = 1; i < operandOperatorArray.length; i += 2) {
             operatorQueue.add(Operator.findOperator(operandOperatorArray[i]));
@@ -52,17 +48,17 @@ public class Calculation {
         return operatorQueue;
     }
 
-    public double calculate() {
-        while (operandQueue.size() > 1 && !operatorQueue.isEmpty()) {
-            Operator operator = operatorQueue.poll();
-            double result = operator.calculate(numFromOperandQueue(), numFromOperandQueue());
-            operandQueue.addFirst(Operand.newOperand(String.valueOf(result)));
+    private double calculationResult(Deque<Operand> operandDeQueue, Deque<Operator> operatorDeQueue ) {
+        while (operandDeQueue.size() > 1 && !operatorDeQueue.isEmpty()) {
+            Operator operator = operatorDeQueue.poll();
+            double result = operator.calculate(numberFromOperandDeQueue(operandDeQueue), numberFromOperandDeQueue(operandDeQueue));
+            operandDeQueue.addFirst(Operand.valueOf(String.valueOf(result)));
         }
 
-        return numFromOperandQueue();
+        return numberFromOperandDeQueue(operandDeQueue);
     }
 
-    private double numFromOperandQueue() {
+    private double numberFromOperandDeQueue(Deque<Operand> operandQueue) {
         Operand operand = operandQueue.poll();
         return operand.value();
     }
