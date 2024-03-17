@@ -27,3 +27,4 @@
   - [X] 1 ~ BOUND 만큼의 양수면서 정수인 당첨 번호 6개를 입력받아 WinningNumbers 객체를 반환하는 winnnigNumbersInput() 구현
 - 출력을 위한 OutputView 객체 생성
   - [X] 수익률을 출력
+- 로또를 진행하는 Lotto

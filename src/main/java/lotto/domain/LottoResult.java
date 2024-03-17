@@ -48,7 +48,6 @@ public class LottoResult {
         }
         if (count == 6) {
             countOfSixCorrectLotto++;
-            return;
         }
     }
 
