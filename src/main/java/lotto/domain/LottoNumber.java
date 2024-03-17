@@ -36,4 +36,10 @@ public class LottoNumber {
     public int size() {
         return numbers.size();
     }
+
+    public int containsCount(LottoNumber lottoNumber) {
+        return (int) lottoNumber.numbers.stream()
+                .filter(numbers::contains)
+                .count();
+    }
 }

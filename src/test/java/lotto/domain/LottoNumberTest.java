@@ -46,4 +46,14 @@ public class LottoNumberTest {
 
         assertThat(lottoNumber.size()).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("containsCount 호출 시 넘어오는 LottoNumber와 동일한 숫자의 개수 반환")
+    void containsCount() {
+        LottoNumber lottoNumber = LottoNumber.from(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber winningNumber1 = LottoNumber.from(List.of(1, 2, 3, 30, 31, 32));
+        LottoNumber winningNumber2 = LottoNumber.from(List.of(1, 2, 29, 30, 31, 32));
+        assertThat(lottoNumber.containsCount(winningNumber1)).isEqualTo(3);
+        assertThat(lottoNumber.containsCount(winningNumber2)).isEqualTo(2);
+    }
 }
