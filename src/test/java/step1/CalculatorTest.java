@@ -2,6 +2,7 @@ package step1;
 
 import org.junit.jupiter.api.Test;
 import step1.domain.Calculator;
+import step1.domain.CalculatorService;
 import step1.dto.CalculateRequestDto;
 
 import static org.assertj.core.api.Assertions.*;
@@ -72,6 +73,15 @@ public class CalculatorTest {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             CalculateRequestDto requestDto = new CalculateRequestDto(" ");
         });
+    }
+
+    @Test
+    public void 입력받은_수식을_계산한다() {
+        CalculateRequestDto requestDto = new CalculateRequestDto("1 + 2 * 5");
+        CalculatorService service = new CalculatorService();
+        int result = service.calculateValues(requestDto);
+
+        assertThat(result).isEqualTo(15);
     }
 
 }
