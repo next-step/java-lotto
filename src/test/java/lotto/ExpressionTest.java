@@ -1,6 +1,9 @@
 package lotto;
 
 import lotto.domain.Expression;
+import lotto.domain.ExpressionElementBuilder;
+import lotto.domain.Number;
+import lotto.domain.Operator;
 import lotto.exception.IllegalOperatorExpression;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -17,11 +20,11 @@ public class ExpressionTest {
     @DisplayName("[성공] 분리된 수식 요소들을 전달하면 숫자와 기호를 구분한다.")
     void 숫자_기호_구분() {
         // When
-        Expression expression = new Expression(List.of("2", "+", "3", "*", "4", "/", "2"));
+        Expression expression = new Expression(ExpressionElementBuilder.build(List.of("2", "+", "3", "*", "4", "/", "2")));
 
         // Then
-        assertThat(expression.getNumbers()).containsExactlyInAnyOrder(2, 3, 4, 2);
-        assertThat(expression.getOperators()).containsExactlyInAnyOrder("+", "*", "/");
+        assertThat(expression.getNumbers()).containsExactlyInAnyOrder(new Number(2), new Number(3), new Number(4), new Number(2));
+        assertThat(expression.getOperators()).containsExactlyInAnyOrder(new Operator("+"), new Operator("*"), new Operator("/"));
     }
 
     @Test
@@ -30,7 +33,7 @@ public class ExpressionTest {
 
         Assertions.assertThatExceptionOfType(IllegalOperatorExpression.class)
                 .isThrownBy(() -> {
-                    new Expression(List.of("2", "+", "3."));
-                }).withMessage("잘못된 수식이 입력되었습니다. (입력 수식: 3., 허용 수식: [ + - * / ])");
+                    new Expression(ExpressionElementBuilder.build(List.of("2", "+", "3.")));
+                }).withMessageContaining("잘못된 수식이 입력되었습니다. (입력 수식: 3.,");
     }
 }

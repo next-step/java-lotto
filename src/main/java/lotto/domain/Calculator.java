@@ -9,10 +9,10 @@ public class Calculator {
     }
 
     public int calculate() {
-        int number = expression.getNumber();
+        int number = expression.getNumber().get();
         while (!expression.getOperators().isEmpty()) {
-            String operator = expression.getOperator();
-            int nextNumber = expression.getNumber();
+            String operator = expression.getOperator().get();
+            int nextNumber = expression.getNumber().get();
             number = calculate(operator, number, nextNumber);
         }
 
@@ -20,7 +20,7 @@ public class Calculator {
     }
 
     private int calculate(String operator, int number1, int number2) {
-        OperationStrategy operation = Operator.getStrategy(operator);
+        OperationStrategy operation = OperatorType.getStrategy(operator);
         return operation.calculate(number1, number2);
     }
 

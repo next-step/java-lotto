@@ -1,6 +1,10 @@
 package lotto;
 
 import lotto.domain.Expression;
+import lotto.domain.ExpressionElement;
+import lotto.domain.ExpressionElementBuilder;
+import lotto.domain.Number;
+import lotto.domain.Operator;
 import lotto.util.ExpressionSplitter;
 import lotto.exception.IllegalExpressionElementSizeException;
 import org.junit.jupiter.api.DisplayName;
@@ -24,14 +28,15 @@ public class ExpressionSplitterTest {
 
         // When
         List<String> expressionStrings = ExpressionSplitter.split(expressionString);
-        Expression expression = new Expression(expressionStrings);
+        List<ExpressionElement> elements = ExpressionElementBuilder.build(expressionStrings);
+        Expression expression = new Expression(elements);
 
         // Then
-        Queue<Integer> numbers = expression.getNumbers();
-        Queue<String> operations = expression.getOperators();
+        Queue<Number> numbers = expression.getNumbers();
+        Queue<Operator> operations = expression.getOperators();
 
-        assertThat(numbers).containsExactly(2, 3, 4, 2);
-        assertThat(operations).containsExactly("+", "*", "/");
+        assertThat(numbers).containsExactly(new Number(2), new Number(3), new Number(4), new Number(2));
+        assertThat(operations).containsExactly(new Operator("+"), new Operator("*"), new Operator("/"));
     }
 
     @DisplayName("[실패] 입력 값이 null 이거나 빈 공백 문자일 경우 IllegalArgumentException 이 발생한다.")
