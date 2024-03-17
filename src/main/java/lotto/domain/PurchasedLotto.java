@@ -1,10 +1,11 @@
 package lotto.domain;
 
 import lotto.dto.LottoResultDto;
-import lotto.util.ConstUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static lotto.util.ConstUtils.*;
 
 public class PurchasedLotto {
 
@@ -56,19 +57,19 @@ public class PurchasedLotto {
         return stringBuffer.toString();
     }
 
-    private static void validatePurchasedAndManualCount(int purchasedCount, List<LottoNumbers> manualLottoNumbers) {
+    private void validatePurchasedAndManualCount(int purchasedCount, List<LottoNumbers> manualLottoNumbers) {
         if (purchasedCount != manualLottoNumbers.size()) {
             throw new IllegalArgumentException("구매 개수와 수동 개수가 일치하지 않습니다.");
         }
     }
 
-    private static void saveMatched(LottoMatchedCalculator lottoMatchedCalculator, int result) {
-        if (result >= ConstUtils.MINIMUM_LOTTO_EARN_MATCH_COUNT) {
+    private void saveMatched(LottoMatchedCalculator lottoMatchedCalculator, int result) {
+        if (result >= MINIMUM_LOTTO_EARN_MATCH_COUNT) {
             lottoMatchedCalculator.saveMatched(result);
         }
     }
 
     private int purchasedLottoPrice() {
-        return this.lottos.size() * ConstUtils.LOTTO_WON_UNIT;
+        return this.lottos.size() * LOTTO_WON_UNIT;
     }
 }

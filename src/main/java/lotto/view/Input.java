@@ -1,7 +1,5 @@
 package lotto.view;
 
-import lotto.util.ConstUtils;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;

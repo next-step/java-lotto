@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import static lotto.util.ConstUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,8 +21,8 @@ class LottoNumbersTest {
 
         // then
         lottoNumbers.stream()
-                .forEach(number -> assertThat(number).isBetween(1, 45));
-        assertThat(lottoNumbers.stream().count()).isEqualTo(6L);
+                .forEach(number -> assertThat(number).isBetween(MINIMUM_LOTTO_RANGE, MAXIMUM_LOTTO_RANGE));
+        assertThat(lottoNumbers.stream().count()).isEqualTo(LOTTO_NUMBER_COUNT);
     }
 
     @DisplayName("생성자를 넣으면, 로또 번호를 수기로 생성 해 준다.")
@@ -72,7 +73,7 @@ class LottoNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers(manualNumbers);
 
         // when
-        IntStream.range(0, 6)
+        IntStream.range(0, LOTTO_NUMBER_COUNT)
                 .forEach(index -> lottoNumbers.nextNumber());
 
         // then
