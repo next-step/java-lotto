@@ -2,7 +2,6 @@ package controller;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import model.LottoAmount;
 import model.LottoFactory;
@@ -29,9 +28,7 @@ public class LottoController {
         outputView.printLottoPurchaseCount(lottoAmount.calculateLottoPurchaseCount());
         outputView.printPurchaseLottos(lottos.getLottos());
 
-        final List<Integer> numbers = inputView.inputWinningLottoNumbers().stream()
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        final List<Integer> numbers = inputView.inputWinningLottoNumbers();
         final WinningNumbers winningNumbers = new WinningNumbers(numbers);
         final WinningDetails winningDetails = new WinningDetails();
         winningDetails.makeWinningDetails(lottos, winningNumbers);

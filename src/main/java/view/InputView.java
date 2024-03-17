@@ -3,6 +3,8 @@ package view;
 import java.util.List;
 import java.util.Scanner;
 
+import util.Utils;
+
 public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -13,10 +15,10 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public List<String> inputWinningLottoNumbers() {
+    public List<Integer> inputWinningLottoNumbers() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         removeNewLine();
-        return List.of(SCANNER.nextLine().split(WINNING_NUMBER_SEPARATOR));
+        return Utils.convertToNumbers(SCANNER.nextLine().split(WINNING_NUMBER_SEPARATOR));
     }
 
     private void removeNewLine() {
