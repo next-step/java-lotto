@@ -10,14 +10,14 @@ public class Operand {
     }
 
     public Operand(String input) {
-        this.number = toInt(input);
+        this(toInt(input));
     }
 
     public int value() {
         return number;
     }
 
-    private int toInt(String input) {
+    private static int toInt(String input) {
         int number;
         try {
             number = Integer.parseInt(input);
