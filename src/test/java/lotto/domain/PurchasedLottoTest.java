@@ -19,7 +19,7 @@ class PurchasedLottoTest {
         PurchasedLotto purchasedLotto = new PurchasedLotto(purchasedCount);
 
         // when
-        int lottoSize = purchasedLotto.myLottoSize();
+        int lottoSize = purchasedLotto.purchasedLottoSize();
 
         // then
         assertThat(lottoSize).isEqualTo(18);

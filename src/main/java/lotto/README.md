@@ -50,8 +50,13 @@
 - [x] 우승번호를 검증하여 DTO로 반환해준다.
 - [x] 결과를 String으로 반환한다(`toString()`)
 
-#### LottoResultDto
+#### Domain - LottoMatched
+- Lotto 결과 계산을 위해 사용
+
+#### LottoResultDtoCalculator
 - 로또 게임 결과 반환 Dto
+- [x] 각 매칭 숫자 결과를 반환
+- [x] 수익률 계산
 
 #### LottoGameApplication
 - `main` 메서드가 있는 클래스
