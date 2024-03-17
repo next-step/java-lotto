@@ -30,4 +30,11 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(15);
     }
 
+    @Test
+    public void 값을_받으면_나눗셈을_한다() {
+        int result = calculator.divide(10,2);
+
+        assertThat(result).isEqualTo(5);
+    }
+
 }
