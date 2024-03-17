@@ -37,7 +37,7 @@ public class PurchasedLotto {
 
         for (LottoNumbers lotto : this.lottos) {
             int result = lotto.countMatchedWinningNumbers(winningNumbers);
-            lottoMatchedCalculator.saveMatched(result);
+            saveMatched(lottoMatchedCalculator, result);
         }
 
         return new LottoResultDto(
@@ -59,6 +59,12 @@ public class PurchasedLotto {
     private static void validatePurchasedAndManualCount(int purchasedCount, List<LottoNumbers> manualLottoNumbers) {
         if (purchasedCount != manualLottoNumbers.size()) {
             throw new IllegalArgumentException("구매 개수와 수동 개수가 일치하지 않습니다.");
+        }
+    }
+
+    private static void saveMatched(LottoMatchedCalculator lottoMatchedCalculator, int result) {
+        if (result >= ConstUtils.MINIMUM_LOTTO_EARN_MATCH_COUNT) {
+            lottoMatchedCalculator.saveMatched(result);
         }
     }
 

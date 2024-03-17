@@ -20,4 +20,5 @@ public class ConstUtils {
 
     public static final int MATCHED_COUNT = 1;
     public static final int NOT_MATCHED_COUNT = 0;
+    public static final int MINIMUM_LOTTO_EARN_MATCH_COUNT = 3;
 }
