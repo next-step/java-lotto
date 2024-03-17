@@ -7,15 +7,15 @@ public class Validator {
     private static final List<String> OPERATORS = List.of("+", "-", "*", "/");
     private String beforeCharacter = "";
 
-    private final String[] numberSentence;
+    private final NumberSentence numberSentence;
 
-    public Validator(String[] numberSentence) {
+    public Validator(NumberSentence numberSentence) {
         this.numberSentence = numberSentence;
     }
 
     public void validate() {
-        for (int index = 0; index < numberSentence.length; index++) {
-            String expression = numberSentence[index];
+        for (int index = 0; index < numberSentence.size(); index++) {
+            String expression = numberSentence.getExpression(index);
             expressionInspectionByIndex(index, expression);
             beforeCharacter = expression;
         }
@@ -29,7 +29,7 @@ public class Validator {
             checkDuplicated(expression);
             checkValidOperator(expression);
         }
-        if (index == numberSentence.length-1 && isOperator(expression)) {
+        if (index == numberSentence.size()-1 && isOperator(expression)) {
             throw new IllegalArgumentException("수식의 마지막엔 연산자가 올 수 없습니다");
         }
     }
