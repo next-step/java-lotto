@@ -15,8 +15,8 @@
   - [X] 멤버 변수로 List\<Integer>를 가지는 일급 컬렉션
   - [X] LottoNumber를 매개변수로 받아 동일한 숫자를 필터링하여 개수를 반환하는 containsCount 구현
 - 모든 로또를 가지는 LottoNumbers 객체 생성
-  - [ ] 멤버 변수로 List\<LottoNumber>를 가진다.
-  - [ ] 매개변수로 당첨 번호 리스트를 받아, LottoResult 객체를 반환
+  - [X] 멤버 변수로 List\<LottoNumber>를 가진다.
+  - [X] 매개변수로 당첨 번호 리스트를 받아, LottoResult 객체를 반환
 - 로또를 생성하는 LottoMachine 객체 생성
   - [ ] 로또 개수와 NumberDrawer를 매개변수로 받아 LottoNumbers를 반환
 - 수익률 계산을 위한 ReturnCalculator 생성
