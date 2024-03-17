@@ -24,4 +24,8 @@ public enum WinningPrice {
                 .findFirst()
                 .orElse(NONE);
     }
+
+    public int getAmount() {
+        return amount;
+    }
 }

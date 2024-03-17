@@ -1,5 +1,7 @@
 package model;
 
+import java.math.BigDecimal;
+
 public class LottoAmount {
 
     private static final int LOTTO_PURCHASE_UNIT = 1000;
@@ -13,6 +15,10 @@ public class LottoAmount {
 
     public int calculateLottoPurchaseCount() {
         return amount / LOTTO_PURCHASE_UNIT;
+    }
+
+    public BigDecimal toBigDecimal() {
+        return BigDecimal.valueOf(amount);
     }
 
     private void validate(int amount) {
