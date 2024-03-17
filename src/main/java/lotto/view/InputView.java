@@ -14,11 +14,7 @@ public class InputView {
     public static final String INPUT_MIN_PRICE_MESSAGE = "금액은 최소 " + LOTTO_PRICE + "원 이상 입력이 가능합니다.";
     public static final String INPUT_CORRECT_PRICE_UNIT_MESSAGE = "금액은 " + LOTTO_PRICE + "원 단위로 입력이 가능합니다.";
 
-    private final Scanner scanner;
-
-    public InputView(Scanner scanner) {
-        this.scanner = scanner;
-    }
+    private static final Scanner scanner = new Scanner(System.in);
 
     public int lottoCount(String message) {
         System.out.println(message);
