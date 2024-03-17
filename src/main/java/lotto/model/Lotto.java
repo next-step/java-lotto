@@ -12,10 +12,6 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(Integer... numbers) {
-        this(LottoNumbers.of(numbers));
-    }
-
     public Lotto(List<LottoNumber> lottoNumbers) {
         assertLotto(lottoNumbers);
 
@@ -59,5 +55,9 @@ public class Lotto {
         return this.lottoNumbers.stream()
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(delimiter, prefix, suffix));
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 }

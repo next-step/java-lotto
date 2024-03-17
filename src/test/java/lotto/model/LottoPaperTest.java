@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.model.LottoFactory.create;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -20,7 +21,7 @@ class LottoPaperTest {
 
     @Test
     void 생성() {
-        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+        Lotto lotto = create(1, 2, 3, 4, 5, 6);
         LottoPaper lottoPaper = new LottoPaper(Collections.singletonList(lotto));
 
         assertThat(lottoPaper)
@@ -29,8 +30,8 @@ class LottoPaperTest {
 
     @Test
     void size는_보유한_Lotto의_개수를_반환한다() {
-        Lotto lotto1 = new Lotto(1, 2, 3, 4, 5, 6);
-        Lotto lotto2 = new Lotto(7, 8, 9, 10, 11, 12);
+        Lotto lotto1 = create(1, 2, 3, 4, 5, 6);
+        Lotto lotto2 = create(7, 8, 9, 10, 11, 12);
         LottoPaper lottoPaper = new LottoPaper(List.of(lotto1, lotto2));
 
         assertThat(lottoPaper.size())
@@ -45,7 +46,7 @@ class LottoPaperTest {
 
     @Test
     void 로또번호가_모두_일치하는_경우() {
-        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+        Lotto lotto = create(1, 2, 3, 4, 5, 6);
         LottoPaper lottoPaper = new LottoPaper(Collections.singletonList(lotto));
 
         List<LottoNumber> winningNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6);
@@ -57,7 +58,7 @@ class LottoPaperTest {
 
     @Test
     void 로또번호가_모두_일치하지_않는경우() {
-        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+        Lotto lotto = create(1, 2, 3, 4, 5, 6);
         LottoPaper lottoPaper = new LottoPaper(Collections.singletonList(lotto));
 
         List<LottoNumber> winningNumbers = LottoNumbers.of(7, 8, 9, 10, 11, 12);
@@ -69,7 +70,7 @@ class LottoPaperTest {
 
     @Test
     void 로또번호가_1개만_일치하는_경우() {
-        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+        Lotto lotto = create(1, 2, 3, 4, 5, 6);
         LottoPaper lottoPaper = new LottoPaper(Collections.singletonList(lotto));
 
         List<LottoNumber> winningNumbers = LottoNumbers.of(1, 8, 9, 10, 11, 12);
