@@ -40,4 +40,16 @@ public class LottoNumbersTest {
         LottoResult lottoResult = lottoNumbers.computeLottoResult(winningNumber);
         assertThat(lottoResult.getCountOfThreeCorrectLotto()).isEqualTo(2);
     }
+
+    @Test
+    @DisplayName("getLottoNumbers 호출 시 문자열로 치환된 모든 LottoNumber의 리스트를 반환")
+    void getLottoNumbers() {
+        List<LottoNumber> lottoNumberList = new ArrayList<>();
+        lottoNumberList.add(LottoNumber.from(List.of(1, 2, 3, 11, 22, 33)));
+        lottoNumberList.add(LottoNumber.from(List.of(1, 2, 3, 21, 42, 45)));
+
+        LottoNumbers lottoNumbers = LottoNumbers.from(lottoNumberList);
+        assertThat(lottoNumbers.getLottoNumbersToString()).containsExactly("[1, 2, 3, 11, 22, 33]", "[1, 2, 3, 21, 42, 45]");
+        assertThat(lottoNumbers.getLottoNumbersToString()).doesNotContain("[1, 2, 3, 4, 5, 6]");
+    }
 }

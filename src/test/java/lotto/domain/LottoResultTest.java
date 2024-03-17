@@ -12,8 +12,6 @@ public class LottoResultTest {
     void addCorrectLottoCount() {
         LottoResult lottoResult = new LottoResult();
 
-        lottoResult.addCorrectLottoCount(2);
-
         lottoResult.addCorrectLottoCount(3);
 
         lottoResult.addCorrectLottoCount(4);
@@ -24,6 +22,10 @@ public class LottoResultTest {
 
         lottoResult.addCorrectLottoCount(6);
 
+        assertThat(lottoResult.getCountOfThreeCorrectLotto()).isEqualTo(1);
+        assertThat(lottoResult.getCountOfFourCorrectLotto()).isEqualTo(2);
+        assertThat(lottoResult.getCountOfFiveCorrectLotto()).isEqualTo(2);
+        assertThat(lottoResult.getCountOfSixCorrectLotto()).isEqualTo(1);
     }
 
     @Test
