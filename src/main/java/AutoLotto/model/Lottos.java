@@ -28,8 +28,8 @@ public class Lottos {
         return randomLotto;
     }
 
-    public List<Integer> retrieveStringLotto(int index) {
-        return lottos.get(index);
+    public String retrieveStringLotto(int index) {
+        return lottos.get(index).toString();
     }
 
 }

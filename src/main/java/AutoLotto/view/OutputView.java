@@ -9,8 +9,7 @@ public class OutputView {
         outputPurchasedLottos(chances);
 
         for (int i = 0; i < chances; i++) {
-            String lotto = lottos.retrieveStringLotto(i).toString();
-            System.out.println(lotto);
+            System.out.println(lottos.retrieveStringLotto(i));
         }
     }
 
