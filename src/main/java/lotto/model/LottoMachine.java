@@ -7,6 +7,8 @@ import lotto.exception.InvalidLottoException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.validation.LottoMachineValidator.assertMoney;
+
 public class LottoMachine {
     public static final int LOTTO_PER_MONEY = 1_000;
 
@@ -14,8 +16,11 @@ public class LottoMachine {
     }
 
     public static OrderResponse purchase(OrderRequest orderRequest) {
-        int quantity = calculate(orderRequest.getMoney());
+        int money = orderRequest.getMoney();
 
+        assertMoney(money);
+
+        int quantity = calculate(money);
         if (quantity == 0) {
             throw new InvalidLottoException("로또를 구매하실 수 없습니다");
         }

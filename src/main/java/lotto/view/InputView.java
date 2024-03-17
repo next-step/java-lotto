@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import static lotto.model.LottoMachine.LOTTO_PER_MONEY;
+import static lotto.validation.LottoMachineValidator.assertMoney;
 
 public class InputView {
 
@@ -28,12 +28,6 @@ public class InputView {
         }
 
         return askMoney();
-    }
-
-    private void assertMoney(int money) {
-        if (money < LOTTO_PER_MONEY) {
-            throw new InvalidLottoException(LOTTO_PER_MONEY + "원 이상의 금액을 입력해주세요");
-        }
     }
 
     public List<LottoNumber> askWinningNumbers() {
