@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.MyLottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,7 @@ class MyLottosTest {
     public void getAsMuchAsMyLottos() {
         //given
         int input = 13;
-        MyLottos myLottos = new MyLottos();
+        MyLottos myLottos = MyLottos.rollLottos(13);
 
         //when
         myLottos.rollLottos(input);

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,15 @@ public class Lotto {
         this.numbers = createNumbers();
     }
 
-    public Lotto(List<Integer> winNumbers) {
-        numbers = new ArrayList<>();
-        winNumbers.forEach(number -> numbers.add(new Number(number)));
+    public Lotto(List<Integer> numbers) {
+        this.numbers = new ArrayList<>();
+        numbers.forEach(number -> this.numbers.add(new Number(number)));
+    }
+
+    public Lotto(String numbers) {
+        List<String> splitNumbers = List.of(numbers.split(","));
+        this.numbers = new ArrayList<>();
+        splitNumbers.forEach(number -> this.numbers.add(new Number(Integer.parseInt(number))));
     }
 
     private static List<Number> createNumbers() {
@@ -51,6 +57,12 @@ public class Lotto {
         return numbers.stream()
                 .filter(number -> winNumber.contains(number))
                 .count();
+    }
+
+    public String getNumbersToString() {
+        List<Integer> arrayList = new ArrayList<>();
+        numbers.forEach(number -> arrayList.add(number.getValue()));
+        return arrayList.toString();
     }
 
     private boolean contains(Number number) {

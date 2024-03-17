@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.domain.Amount;
+import lotto.domain.Lotto;
+import lotto.domain.Seller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -81,5 +84,14 @@ public class LottoTest {
 
         //then
         assertThat(amount).isEqualTo(result);
+    }
+    @DisplayName("로또를 생성한 다음 문자열로 변환한다.")
+    @Test
+    public void getLottoNumbersToString() {
+        //given
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 10, 6));
+
+        //when & then
+        assertThat(lotto.getNumbersToString()).isEqualTo("[1, 2, 3, 4, 10, 6]");
     }
 }

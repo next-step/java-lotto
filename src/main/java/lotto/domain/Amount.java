@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public class Amount {
     private Amount() {
@@ -18,5 +18,9 @@ public class Amount {
             return 2000000000;
         }
         return null;
+    }
+
+    public static Integer getBuyLottoNumber(final int amount) {
+        return amount / 1000;
     }
 }
