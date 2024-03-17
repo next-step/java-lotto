@@ -2,32 +2,29 @@ package calculator.domain;
 
 import calculator.domain.strategy.AdditionStrategy;
 import calculator.domain.strategy.CalculateStrategy;
+import calculator.domain.strategy.SubtractionStrategy;
 
 import java.util.List;
 import java.util.Queue;
 
 public class StringCalculator {
 
-  private static final List<CalculateStrategy> calculateStrategies = List.of(new AdditionStrategy());
+  private static final List<CalculateStrategy> calculateStrategies = List.of(new AdditionStrategy(), new SubtractionStrategy());
 
   private StringCalculator() {}
 
   public static int calculate(CalculatorQueue queue) {
     Queue<Operand> operandQueue = queue.getOperands();
     Queue<Operator> operatorQueue = queue.getOperators();
-
-    int result = 0;
-    Operand firstOperand = operandQueue.poll();
+    int result = operandQueue.poll().toNumber();
 
     while (!operatorQueue.isEmpty()) {
       Operand secondOperand = operandQueue.poll();
       Operator operator = operatorQueue.poll();
 
       for (CalculateStrategy calculateStrategy : calculateStrategies) {
-        result = calculateStrategy.calculate(firstOperand, operator, secondOperand);
+        result = calculateStrategy.calculate(result, operator, secondOperand.toNumber());
       }
-
-      firstOperand = new Operand(result);
     }
 
     return result;
