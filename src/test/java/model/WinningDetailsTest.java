@@ -28,11 +28,11 @@ class WinningDetailsTest {
 
         // then
         assertAll(
-                () -> assertThat(winningDetails.getWinningDetails().get(Rank.FIRST)).isEqualTo(1),
-                () -> assertThat(winningDetails.getWinningDetails().get(Rank.SECOND)).isEqualTo(0),
-                () -> assertThat(winningDetails.getWinningDetails().get(Rank.THIRD)).isEqualTo(1),
-                () -> assertThat(winningDetails.getWinningDetails().get(Rank.FOURTH)).isEqualTo(0),
-                () -> assertThat(winningDetails.getWinningDetails().get(Rank.NONE)).isEqualTo(1)
+                () -> assertThat(winningDetails.getWinningCount(Rank.FIRST)).isEqualTo(1),
+                () -> assertThat(winningDetails.getWinningCount(Rank.SECOND)).isEqualTo(0),
+                () -> assertThat(winningDetails.getWinningCount(Rank.THIRD)).isEqualTo(1),
+                () -> assertThat(winningDetails.getWinningCount(Rank.FOURTH)).isEqualTo(0),
+                () -> assertThat(winningDetails.getWinningCount(Rank.NONE)).isEqualTo(1)
         );
     }
 

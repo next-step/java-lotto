@@ -20,14 +20,14 @@ public class OutputView {
     public void printWinningStatistics(final WinningDetails winningDetails, final BigDecimal profit) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        System.out.println(Rank.FIRST.getMatchingCount() + "개 일치 (" + Rank.FIRST.getAmount() + "원)-" + winningDetails.getWinningDetails().get(
-                Rank.FIRST) + "개");
-        System.out.println(Rank.SECOND.getMatchingCount() + "개 일치 (" + Rank.SECOND.getAmount() + "원)-" + winningDetails.getWinningDetails().get(
-                Rank.SECOND) + "개");
-        System.out.println(Rank.THIRD.getMatchingCount() + "개 일치 (" + Rank.THIRD.getAmount() + "원)-" + winningDetails.getWinningDetails().get(
-                Rank.THIRD) + "개");
-        System.out.println(Rank.FOURTH.getMatchingCount() + "개 일치 (" + Rank.FOURTH.getAmount() + "원)-" + winningDetails.getWinningDetails().get(
-                Rank.FOURTH) + "개");
+        System.out.println(Rank.FIRST.getMatchingCount() + "개 일치 (" + Rank.FIRST.getAmount() + "원)-"
+                + winningDetails.getWinningCount(Rank.FIRST) + "개");
+        System.out.println(Rank.SECOND.getMatchingCount() + "개 일치 (" + Rank.SECOND.getAmount() + "원)-"
+                + winningDetails.getWinningCount(Rank.SECOND) + "개");
+        System.out.println(Rank.THIRD.getMatchingCount() + "개 일치 (" + Rank.THIRD.getAmount() + "원)-"
+                + winningDetails.getWinningCount(Rank.THIRD) + "개");
+        System.out.println(Rank.FOURTH.getMatchingCount() + "개 일치 (" + Rank.FOURTH.getAmount() + "원)-"
+                + winningDetails.getWinningCount(Rank.FOURTH) + "개");
         System.out.println("총 수익률은 " + profit + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 }

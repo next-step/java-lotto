@@ -28,8 +28,8 @@ public class WinningDetails {
         return calculateSum().divide(lottoAmount.toBigDecimal(), ROUNDING_PRECISION, RoundingMode.DOWN);
     }
 
-    public Map<Rank, Integer> getWinningDetails() {
-        return winningDetails;
+    public int getWinningCount(final Rank rank) {
+        return winningDetails.get(rank);
     }
 
     public BigDecimal calculateSum() {
