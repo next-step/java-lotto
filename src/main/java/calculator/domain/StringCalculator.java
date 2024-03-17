@@ -20,17 +20,19 @@ public class StringCalculator {
   public static int calculate(CalculatorQueue queue) {
     Queue<Operand> operandQueue = queue.getOperands();
     Queue<Operator> operatorQueue = queue.getOperators();
+
     int result = operandQueue.poll().toNumber();
-
     while (!operatorQueue.isEmpty()) {
-      Operand secondOperand = operandQueue.poll();
-      Operator operator = operatorQueue.poll();
-
-      for (CalculateStrategy calculateStrategy : calculateStrategies) {
-        result = calculateStrategy.calculate(result, operator, secondOperand.toNumber());
-      }
+      result = doCalculateStrategies(result, operandQueue.poll(), operatorQueue.poll());
     }
 
+    return result;
+  }
+
+  private static int doCalculateStrategies(int result, Operand secondOperand, Operator operator) {
+    for (CalculateStrategy calculateStrategy : calculateStrategies) {
+      result = calculateStrategy.calculate(result, operator, secondOperand.toNumber());
+    }
     return result;
   }
 }

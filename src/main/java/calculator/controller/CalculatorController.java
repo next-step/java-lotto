@@ -15,12 +15,12 @@ public class CalculatorController {
   public static void main(String[] args) {
     INPUTS.forEach(input -> {
       CalculatorQueue calculatorQueue = CalculatorQueue.of(input);
-      printResult(input, calculatorQueue);
+      int result = StringCalculator.calculate(calculatorQueue);
+      printResult(input, result);
     });
   }
 
-  private static void printResult(String input, CalculatorQueue calculatorQueue) {
-    System.out.print("input: " + input);
-    System.out.println(", result: " + StringCalculator.calculate(calculatorQueue));
+  private static void printResult(String input, int result) {
+    System.out.println("input: " + input + ", result: " + result);
   }
 }
