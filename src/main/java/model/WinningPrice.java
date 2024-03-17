@@ -28,4 +28,8 @@ public enum WinningPrice {
     public int getAmount() {
         return amount;
     }
+
+    public int getMatchingCount() {
+        return matchingCount;
+    }
 }

@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -18,6 +19,10 @@ public class Lotto {
         .filter(number -> winningNumbers.getNumbers().contains(number))
         .mapToInt(it -> it)
         .count();
+  }
+
+  public List<Integer> getNumbers() {
+    return Collections.unmodifiableList(numbers);
   }
 
   private void validateLottoNumbers(final List<Integer> numbers) {
