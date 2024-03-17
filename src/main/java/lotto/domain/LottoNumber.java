@@ -24,7 +24,7 @@ public class LottoNumber {
 
         if (isInvalid) {
             throw new IllegalArgumentException();
-        };
+        }
     }
 
     private static void validLottoNumberSize(List<Integer> numbers) {
