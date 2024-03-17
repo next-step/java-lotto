@@ -28,11 +28,11 @@ class WinningDetailsTest {
 
         // then
         assertAll(
-                () -> assertThat(winningDetails.getWinningDetails().get(WinningPrice.FIRST)).isEqualTo(1),
-                () -> assertThat(winningDetails.getWinningDetails().get(WinningPrice.SECOND)).isEqualTo(0),
-                () -> assertThat(winningDetails.getWinningDetails().get(WinningPrice.THIRD)).isEqualTo(1),
-                () -> assertThat(winningDetails.getWinningDetails().get(WinningPrice.FOURTH)).isEqualTo(0),
-                () -> assertThat(winningDetails.getWinningDetails().get(WinningPrice.NONE)).isEqualTo(1)
+                () -> assertThat(winningDetails.getWinningDetails().get(Rank.FIRST)).isEqualTo(1),
+                () -> assertThat(winningDetails.getWinningDetails().get(Rank.SECOND)).isEqualTo(0),
+                () -> assertThat(winningDetails.getWinningDetails().get(Rank.THIRD)).isEqualTo(1),
+                () -> assertThat(winningDetails.getWinningDetails().get(Rank.FOURTH)).isEqualTo(0),
+                () -> assertThat(winningDetails.getWinningDetails().get(Rank.NONE)).isEqualTo(1)
         );
     }
 
@@ -40,10 +40,10 @@ class WinningDetailsTest {
     void 수익률_계산_테스트() {
         // given
         final LottoAmount lottoAmount = new LottoAmount(10000);
-        final Map<WinningPrice, Integer> details = new HashMap<>() {{
-            put(WinningPrice.FIRST, 1);
-            put(WinningPrice.FOURTH, 1);
-            put(WinningPrice.NONE, 3);
+        final Map<Rank, Integer> details = new HashMap<>() {{
+            put(Rank.FIRST, 1);
+            put(Rank.FOURTH, 1);
+            put(Rank.NONE, 3);
         }};
         final WinningDetails winningDetails = new WinningDetails(details);
 

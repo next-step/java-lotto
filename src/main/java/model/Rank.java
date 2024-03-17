@@ -2,7 +2,7 @@ package model;
 
 import java.util.Arrays;
 
-public enum WinningPrice {
+public enum Rank {
 
     NONE(0, 0),
     FIRST(2000000000, 6),
@@ -13,13 +13,13 @@ public enum WinningPrice {
     private final int amount;
     private final int matchingCount;
 
-    WinningPrice(final int amount, final int matchingCount) {
+    Rank(final int amount, final int matchingCount) {
         this.amount = amount;
         this.matchingCount = matchingCount;
     }
 
-    public static WinningPrice getWinningPrice(final int count) {
-        return Arrays.stream(WinningPrice.values())
+    public static Rank getWinningPrice(final int count) {
+        return Arrays.stream(Rank.values())
                 .filter(winningPrice -> winningPrice.matchingCount == count)
                 .findFirst()
                 .orElse(NONE);

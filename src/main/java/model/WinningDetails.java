@@ -9,21 +9,21 @@ public class WinningDetails {
 
     private static final int ROUNDING_PRECISION = 2;
 
-    private final Map<WinningPrice, Integer> winningDetails;
+    private final Map<Rank, Integer> winningDetails;
 
     public WinningDetails() {
         this.winningDetails = init();
     }
 
-    public WinningDetails(final Map<WinningPrice, Integer> winningDetails) {
+    public WinningDetails(final Map<Rank, Integer> winningDetails) {
         this.winningDetails = winningDetails;
     }
 
     public void makeWinningDetails(final Lottos lottos, final WinningNumbers winningNumbers) {
         for (final Lotto lotto : lottos.getLottos()) {
             final int countOfMatch = lotto.findMatchNumberCount(winningNumbers);
-            final WinningPrice winningPrice = WinningPrice.getWinningPrice(countOfMatch);
-            winningDetails.put(winningPrice, winningDetails.get(winningPrice) + 1);
+            final Rank rank = Rank.getWinningPrice(countOfMatch);
+            winningDetails.put(rank, winningDetails.get(rank) + 1);
         }
     }
 
@@ -31,14 +31,14 @@ public class WinningDetails {
         return calculateSum().divide(lottoAmount.toBigDecimal(), ROUNDING_PRECISION, RoundingMode.DOWN);
     }
 
-    public Map<WinningPrice, Integer> getWinningDetails() {
+    public Map<Rank, Integer> getWinningDetails() {
         return winningDetails;
     }
 
-    private Map<WinningPrice, Integer> init() {
-        final HashMap<WinningPrice, Integer> winningDetails = new HashMap<>();
-        for (final WinningPrice winningPrice : WinningPrice.values()) {
-            winningDetails.put(winningPrice, 0);
+    private Map<Rank, Integer> init() {
+        final HashMap<Rank, Integer> winningDetails = new HashMap<>();
+        for (final Rank rank : Rank.values()) {
+            winningDetails.put(rank, 0);
         }
         return winningDetails;
     }
