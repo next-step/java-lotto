@@ -7,6 +7,8 @@ import java.util.Map;
 
 public class WinningDetails {
 
+    private static final int ROUNDING_PRECISION = 2;
+
     private final Map<WinningPrice, Integer> winningDetails;
 
     public WinningDetails() {
@@ -26,7 +28,7 @@ public class WinningDetails {
     }
 
     public BigDecimal calculateProfit(final LottoAmount lottoAmount) {
-        return calculateSum().divide(lottoAmount.toBigDecimal(), 2, RoundingMode.DOWN);
+        return calculateSum().divide(lottoAmount.toBigDecimal(), ROUNDING_PRECISION, RoundingMode.DOWN);
     }
 
     public Map<WinningPrice, Integer> getWinningDetails() {
