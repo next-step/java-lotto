@@ -11,15 +11,19 @@ public class PurchasedLotto {
 
     private final List<LottoNumbers> lottos;
 
-    public PurchasedLotto(int purchasedCount) {
+    public PurchasedLotto(int purchasedMoney) {
         this.lottos = new ArrayList<>();
+
+        int purchasedCount = purchasedMoney / LOTTO_WON_UNIT;
 
         for (int i = 0; i < purchasedCount; i++) {
             this.lottos.add(new LottoNumbers());
         }
     }
 
-    public PurchasedLotto(int purchasedCount, List<LottoNumbers> manualLottoNumbers) {
+    public PurchasedLotto(int purchasedMoney, List<LottoNumbers> manualLottoNumbers) {
+        int purchasedCount = purchasedMoney / LOTTO_WON_UNIT;
+
         validatePurchasedAndManualCount(purchasedCount, manualLottoNumbers);
 
         this.lottos = new ArrayList<>();

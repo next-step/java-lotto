@@ -12,9 +12,8 @@ public class LottoGameApplication {
     public static void main(String[] args) {
         Input input = new Input();
         int lottoPurchaseMoney = input.getLottoPurchaseMoneyInput();
-        int purchasedCount = lottoPurchaseMoney / LOTTO_WON_UNIT;
 
-        PurchasedLotto purchasedLotto = new PurchasedLotto(purchasedCount);
+        PurchasedLotto purchasedLotto = new PurchasedLotto(lottoPurchaseMoney);
 
         Output output = new Output();
         output.printPurchaseResult(purchasedLotto);

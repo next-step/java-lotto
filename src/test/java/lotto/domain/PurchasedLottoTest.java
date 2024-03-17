@@ -15,8 +15,8 @@ class PurchasedLottoTest {
     @Test
     void buyLottoByMoney() {
         // given
-        int purchasedCount = 18;
-        PurchasedLotto purchasedLotto = new PurchasedLotto(purchasedCount);
+        int purchasedPrice = 18000;
+        PurchasedLotto purchasedLotto = new PurchasedLotto(purchasedPrice);
 
         // when
         int lottoSize = purchasedLotto.purchasedLottoSize();
@@ -29,14 +29,14 @@ class PurchasedLottoTest {
     @Test
     void matchWinningLottoNumbers() {
         // given
-        int purchasedCount = 4;
+        int purchasedPrice = 4000;
         List<LottoNumbers> manualLottoNumbers = List.of(
                 new LottoNumbers(List.of(1, 2, 3, 10, 11, 12)),
                 new LottoNumbers(List.of(1, 2, 3, 10, 11, 12)),
                 new LottoNumbers(List.of(1, 2, 3, 4, 11, 12)),
                 new LottoNumbers(List.of(1, 2, 3, 4, 5, 6))
         );
-        PurchasedLotto purchasedLotto = new PurchasedLotto(purchasedCount, manualLottoNumbers);
+        PurchasedLotto purchasedLotto = new PurchasedLotto(purchasedPrice, manualLottoNumbers);
 
         LottoNumbers winningNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
 
