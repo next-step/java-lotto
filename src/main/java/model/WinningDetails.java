@@ -32,7 +32,7 @@ public class WinningDetails {
         return winningDetails.get(rank);
     }
 
-    public BigDecimal calculateSum() {
+    private BigDecimal calculateSum() {
         final int sum = winningDetails.keySet().stream()
                 .mapToInt(winningPrice -> winningPrice.getAmount() * winningDetails.get(winningPrice))
                 .sum();
