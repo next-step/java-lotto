@@ -13,8 +13,8 @@ public class WinningNumbers {
         this.numbers = numbers;
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public boolean contains(final int number) {
+        return numbers.contains(number);
     }
 
     private void validate(final List<Integer> numbers) {
