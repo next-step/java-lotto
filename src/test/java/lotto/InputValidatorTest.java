@@ -23,6 +23,14 @@ public class InputValidatorTest {
     }
 
     @Test
+    @DisplayName("[실패] 입력 값이 화이트스페이스인 경우 IllegalArgumentException 이 발생한다.")
+    void 화이트스페이스_문자() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            InputValidator.validateEmptyExpression("   ");
+        });
+    }
+
+    @Test
     @DisplayName("[실패] 분리된 문자열 개수가 짝수개인 경우 IllegalExpressionElementSizeException 이 발생한다.")
     void 항_개수() {
         int size = 4;

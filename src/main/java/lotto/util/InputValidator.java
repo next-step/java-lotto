@@ -12,7 +12,7 @@ public class InputValidator {
     }
 
     private static boolean isEmptyExpression(String inputString) {
-        return inputString == null || inputString.isEmpty();
+        return inputString == null || inputString.isBlank();
     }
 
     public static void validateElementSize(int size) throws IllegalExpressionElementSizeException {
