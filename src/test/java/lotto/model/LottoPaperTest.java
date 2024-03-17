@@ -49,7 +49,7 @@ class LottoPaperTest {
         Lotto lotto = create(1, 2, 3, 4, 5, 6);
         LottoPaper lottoPaper = new LottoPaper(Collections.singletonList(lotto));
 
-        List<LottoNumber> winningNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6);
+        List<LottoNumber> winningNumbers = LottoNumberFactory.of(1, 2, 3, 4, 5, 6);
 
         Map<Integer, Integer> resultMap = lottoPaper.matches(winningNumbers);
 
@@ -61,7 +61,7 @@ class LottoPaperTest {
         Lotto lotto = create(1, 2, 3, 4, 5, 6);
         LottoPaper lottoPaper = new LottoPaper(Collections.singletonList(lotto));
 
-        List<LottoNumber> winningNumbers = LottoNumbers.of(7, 8, 9, 10, 11, 12);
+        List<LottoNumber> winningNumbers = LottoNumberFactory.of(7, 8, 9, 10, 11, 12);
 
         Map<Integer, Integer> resultMap = lottoPaper.matches(winningNumbers);
 
@@ -73,7 +73,7 @@ class LottoPaperTest {
         Lotto lotto = create(1, 2, 3, 4, 5, 6);
         LottoPaper lottoPaper = new LottoPaper(Collections.singletonList(lotto));
 
-        List<LottoNumber> winningNumbers = LottoNumbers.of(1, 8, 9, 10, 11, 12);
+        List<LottoNumber> winningNumbers = LottoNumberFactory.of(1, 8, 9, 10, 11, 12);
 
         Map<Integer, Integer> resultMap = lottoPaper.matches(winningNumbers);
 

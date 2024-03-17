@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.exception.InvalidLottoException;
 import lotto.model.LottoNumber;
-import lotto.model.LottoNumbers;
+import lotto.model.LottoNumberFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +41,7 @@ public class InputView {
 
         try {
             Integer[] winningNumbers = convertTo(SCANNER.nextLine());
-            return LottoNumbers.of(winningNumbers);
+            return LottoNumberFactory.of(winningNumbers);
         } catch (InvalidLottoException e) {
             System.out.println(e.getMessage());
         }

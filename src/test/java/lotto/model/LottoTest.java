@@ -59,7 +59,7 @@ public class LottoTest {
         int expected = 6;
 
         Lotto lotto = create(1, 2, 3, 4, 5, 6);
-        int actual = lotto.matches(LottoNumbers.of(1, 2, 3, 4, 5, 6));
+        int actual = lotto.matches(LottoNumberFactory.of(1, 2, 3, 4, 5, 6));
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -83,7 +83,7 @@ public class LottoTest {
     @Test
     void 여러개의_번호를_매치할때_일차하는_볼이_없는경우_0을반환한다() {
         Lotto lotto = create(1, 2, 3, 4, 5, 6);
-        int actual = lotto.matches(LottoNumbers.of(7, 8, 9, 10, 11, 12));
+        int actual = lotto.matches(LottoNumberFactory.of(7, 8, 9, 10, 11, 12));
 
         assertThat(actual).isEqualTo(0);
     }

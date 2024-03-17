@@ -30,7 +30,7 @@ public class LottoMachine {
     private static LottoPaper prepare(int quantity) {
         List<Lotto> result = new ArrayList<>();
         for (int i = 1; i <= quantity; i++) {
-            result.add(new Lotto(LottoNumbers.selectRandomLottoNumbers()));
+            result.add(new Lotto(LottoNumberFactory.selectRandomLottoNumbers()));
         }
 
         return new LottoPaper(result);

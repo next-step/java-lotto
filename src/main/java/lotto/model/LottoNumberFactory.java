@@ -11,7 +11,7 @@ import static lotto.model.LottoNumber.MAX_NUMBER;
 import static lotto.model.LottoNumber.MIN_NUMBER;
 import static lotto.validation.LottoNumberValidator.assertInvalidNumber;
 
-public class LottoNumbers {
+public class LottoNumberFactory {
 
     private static final int START_INCLUSIVE = 0;
     private static final int END_EXCLUSIVE = 6;

@@ -10,12 +10,12 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoNumbersTest {
+class LottoNumberFactoryTest {
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46})
     void 로또번호가_1에서_45사이_값이_아니면_예외를_던진다(int given) {
-        assertThatThrownBy(() -> LottoNumbers.of(given))
+        assertThatThrownBy(() -> LottoNumberFactory.of(given))
                 .isInstanceOf(InvalidLottoException.class);
     }
 
@@ -23,7 +23,7 @@ class LottoNumbersTest {
     void 중복제외한_로또번호를_반환한다() {
         int expected = 2;
 
-        List<LottoNumber> lottoNumbers = LottoNumbers.of(1, 1, 1, 1, 1, 2);
+        List<LottoNumber> lottoNumbers = LottoNumberFactory.of(1, 1, 1, 1, 1, 2);
 
         assertThat(lottoNumbers)
                 .hasSize(expected)
