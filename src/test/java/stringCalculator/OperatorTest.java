@@ -15,8 +15,9 @@ class OperatorTest {
     @Test
     @DisplayName("덧셈 연산 성공")
     void processWithValidation__ShouldReturnAddition() {
-        // when
-        long result = Operator.processWithValidation(TEN, "+", FIVE);
+        // given, when
+        Operator addition = Operator.ADDITION;
+        long result = addition.process(TEN, FIVE);
 
         // then
         assertThat(result).isEqualTo(15);
@@ -25,8 +26,9 @@ class OperatorTest {
     @Test
     @DisplayName("뺄셈 연산 성공")
     void processWithValidation__ShouldReturnSubtraction() {
-        // when
-        long result = Operator.processWithValidation(TEN, "-", FIVE);
+        // given, when
+        Operator addition = Operator.SUBTRACTION;
+        long result = addition.process(TEN, FIVE);
 
         // then
         assertThat(result).isEqualTo(5);
@@ -35,8 +37,9 @@ class OperatorTest {
     @Test
     @DisplayName("곱하기 연산 성공")
     void processWithValidation__ShouldReturnMultiplication() {
-        // when
-        long result = Operator.processWithValidation(TEN, "*", FIVE);
+        // given, when
+        Operator addition = Operator.MULTIPLICATION;
+        long result = addition.process(TEN, FIVE);
 
         // then
         assertThat(result).isEqualTo(50);
@@ -45,8 +48,9 @@ class OperatorTest {
     @Test
     @DisplayName("나누기 연산 성공")
     void processWithValidation__ShouldReturnDivision() {
-        // when
-        long result = Operator.processWithValidation(TEN, "/", FIVE);
+        // given, when
+        Operator addition = Operator.DIVISION;
+        long result = addition.process(TEN, FIVE);
 
         // then
         assertThat(result).isEqualTo(2);
@@ -55,18 +59,20 @@ class OperatorTest {
     @Test
     @DisplayName("나누기 연산 실패 : 0으로 나눔")
     void processWithValidation__ShouldThrowArithmeticException() {
+        // given
+        Operator operator = Operator.DIVISION;
         // when, then
-        assertThatThrownBy(() -> Operator.processWithValidation(TEN, "/", ZERO))
+        assertThatThrownBy(() -> operator.process(TEN, ZERO))
                 .isInstanceOf(ArithmeticException.class)
                 .hasMessageContaining("Division by zero is not allowed");
     }
 
     @Test
-    @DisplayName("연산 실패 : +-*/ 외의 다른 연산자가 들어감")
     void processWithValidation__ShouldThrowIllegalArgumentException() {
+        // given
         // when, then
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            Operator.processWithValidation(TEN, "?", ZERO);
+            Operator.findMark("?");
         });
     }
 }
