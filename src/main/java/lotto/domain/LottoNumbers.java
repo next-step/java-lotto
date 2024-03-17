@@ -9,8 +9,8 @@ import java.util.stream.Stream;
 
 public class LottoNumbers {
 
-    public static final int MAXIMUM_LOTTO_RANGE = 46;
-    public static final int MINIMUM_LOTTO_RANGE = 0;
+    public static final int MAXIMUM_LOTTO_RANGE = 45;
+    public static final int MINIMUM_LOTTO_RANGE = 1;
     private final List<Integer> lottoNumbers;
     private int currentIndex = 0;
 
@@ -25,7 +25,7 @@ public class LottoNumbers {
 
         Random random = new Random();
         for (int i = 0; i < 6; i++) {
-            lottoNumbers.add(random.nextInt(MAXIMUM_LOTTO_RANGE));
+            lottoNumbers.add(random.nextInt(MAXIMUM_LOTTO_RANGE) + 1);
         }
     }
 
@@ -38,6 +38,10 @@ public class LottoNumbers {
             throw new ReachedMaxIndexException();
         }
         return lottoNumbers.get(currentIndex++);
+    }
+
+    public void scanReset() {
+        this.currentIndex = 0;
     }
 
     private boolean isOutOfIndexOfLottoNumbers() {
@@ -58,8 +62,13 @@ public class LottoNumbers {
     }
 
     private void validateLottoNumberRange(int number) {
-        if (number <= MINIMUM_LOTTO_RANGE || number >= MAXIMUM_LOTTO_RANGE) {
+        if (number < MINIMUM_LOTTO_RANGE || number > MAXIMUM_LOTTO_RANGE) {
             throw new IllegalArgumentException("유효한 로또 번호가 아닙니다. 1~45 숫자중 입력 해 주세요.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }

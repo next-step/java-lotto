@@ -47,8 +47,8 @@
 
 #### Domain - PurchasedLotto
 - LottoNumbers 일급 컬렉션
-- [ ] 우승번호를 검증하여 DTO로 반환해준다.
-- [ ] 결과를 String으로 반환한다(`toString()`)
+- [x] 우승번호를 검증하여 DTO로 반환해준다.
+- [x] 결과를 String으로 반환한다(`toString()`)
 
 #### LottoResultDto
 - 로또 게임 결과 반환 Dto
