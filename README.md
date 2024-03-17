@@ -10,7 +10,7 @@
 
 ## 기능 목록
 - 숫자를 추첨하는 NumberDrawer 인터페이스와 구현체 ShuffledNumberDrawer 구현
-  - [ ] 1 ~ 매개변수(숫자) 만큼의 숫자를 섞어서 앞에서부터 6개를 뽑아 정렬 후 반환
+  - [X] 1 ~ 매개변수(숫자) 만큼의 숫자를 섞어서 앞에서부터 6개를 뽑아 정렬 후 반환
 - 로또 하나를 가지는 LottoNumber 객체 생성
   - [ ] 멤버 변수로 List\<Integer>를 가지는 일급 컬렉션
   - [ ] 숫자 리스트를 매개변수로 받아 동일한 숫자를 필터링하여 개수를 반환하는 containsCount 구현
@@ -26,4 +26,4 @@
   - [ ] 로또 가격을 매개변수로 받아 나누어 떨어지는 양수면서 정수인 값만 입력 받고, 1000을 나눠 로또의 개수를 반환하는 moneyInput() 구현
   - [ ] 1 ~ BOUND 만큼의 양수면서 정수인 당첨 번호 6개를 입력받아 WinningNumbers 객체를 반환하는 winnnigNumbersInput() 구현
 - 출력을 위한 OutputView 객체 생성
-  - LottoResult가 주어지면 3개, 4개, 5개, 6개 각각 일치하는 개수를 출력하고 ReturnCalculator로 계산된 수익률을 출력
+  - [ ] LottoResult가 주어지면 3개, 4개, 5개, 6개 각각 일치하는 개수를 출력하고 ReturnCalculator로 계산된 수익률을 출력
