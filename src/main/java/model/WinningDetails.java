@@ -21,8 +21,7 @@ public class WinningDetails {
 
     public void makeWinningDetails(final Lottos lottos, final WinningNumbers winningNumbers) {
         for (final Lotto lotto : lottos.getLottos()) {
-            final int countOfMatch = lotto.findMatchNumberCount(winningNumbers);
-            final Rank rank = Rank.getWinningPrice(countOfMatch);
+            final Rank rank = lotto.match(winningNumbers);
             winningDetails.put(rank, winningDetails.get(rank) + 1);
         }
     }
@@ -35,18 +34,18 @@ public class WinningDetails {
         return winningDetails;
     }
 
+    public BigDecimal calculateSum() {
+        final int sum = winningDetails.keySet().stream()
+                .mapToInt(winningPrice -> winningPrice.getAmount() * winningDetails.get(winningPrice))
+                .sum();
+        return BigDecimal.valueOf(sum);
+    }
+
     private Map<Rank, Integer> init() {
         final HashMap<Rank, Integer> winningDetails = new HashMap<>();
         for (final Rank rank : Rank.values()) {
             winningDetails.put(rank, 0);
         }
         return winningDetails;
-    }
-
-    public BigDecimal calculateSum() {
-        final int sum = winningDetails.keySet().stream()
-                .mapToInt(winningPrice -> winningPrice.getAmount() * winningDetails.get(winningPrice))
-                .sum();
-        return BigDecimal.valueOf(sum);
     }
 }

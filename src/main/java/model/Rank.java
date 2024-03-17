@@ -18,7 +18,7 @@ public enum Rank {
         this.matchingCount = matchingCount;
     }
 
-    public static Rank getWinningPrice(final int count) {
+    public static Rank determine(final int count) {
         return Arrays.stream(Rank.values())
                 .filter(winningPrice -> winningPrice.matchingCount == count)
                 .findFirst()
