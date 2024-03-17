@@ -10,7 +10,7 @@ import static calculator.Calculator.calculate;
 import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("Calculate 테스트")
-public class CalculateTest {
+public class CalculatorTest {
 
     @ParameterizedTest
     @NullAndEmptySource
@@ -53,6 +53,6 @@ public class CalculateTest {
     void 사칙연산자_외_문자() {
         assertThatThrownBy(() -> calculate("1 ^ 1"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .withFailMessage("유요하지 않은 연산자: ^");
+                .withFailMessage("유효하지 않은 연산자: ^");
     }
 }

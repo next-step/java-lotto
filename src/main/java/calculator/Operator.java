@@ -26,7 +26,7 @@ public enum Operator {
         return Arrays.stream(Operator.values())
                 .filter(operator -> operator.isValueEqualsTo(value))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("유요하지 않은 연산자: " + value));
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 연산자: " + value));
     }
 
     private boolean isValueEqualsTo(String value) {
