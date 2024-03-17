@@ -7,3 +7,16 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+
+
+## 기능 분리.
+* 빈칸에 의해 문자를 분리한다.
+* 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException
+* 숫자나 사칙연산 기호가 아닌 경우 IllegalArgumentException
+* 숫자나 기호가 반복으로 나오면 IllegalArgumentException (숫자숫자 / 기호기호)
+* 마지막이 기호로 끝나면 IllegalArgumentException
+* 숫자가 아닌 기호가 "+"인 경우 덧셈
+* 숫자가 아닌 기호가 "-"인 경우 뺄셈
+* 숫자가 아닌 기호가 "*"인 경우 곱셈
+* 숫자가 아닌 기호가 "/"인 경우 나눗셈 ,나눗셈의 경우 정수로 떨어지지 않는 경우 IllegalArgumentException
