@@ -16,4 +16,11 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(8);
     }
 
+    @Test
+    public void 값을_받으면_뺄셈을_한다() {
+        int result = calculator.subtract(5,3);
+
+        assertThat(result).isEqualTo(2);
+    }
+
 }
