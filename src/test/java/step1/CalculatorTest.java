@@ -23,4 +23,11 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(2);
     }
 
+    @Test
+    public void 값을_받으면_곱셈을_한다() {
+        int result = calculator.multiply(3,5);
+
+        assertThat(result).isEqualTo(15);
+    }
+
 }
