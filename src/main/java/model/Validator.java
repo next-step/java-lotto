@@ -7,21 +7,16 @@ public class Validator {
     private static final List<String> OPERATORS = List.of("+", "-", "*", "/");
     private String beforeCharacter = "";
 
-    private final NumberSentence numberSentence;
 
-    public Validator(NumberSentence numberSentence) {
-        this.numberSentence = numberSentence;
-    }
-
-    public void validate() {
-        for (int index = 0; index < numberSentence.size(); index++) {
-            String expression = numberSentence.getExpression(index);
-            expressionInspectionByIndex(index, expression);
+    public void validate(String[] numberSentence) {
+        for (int index = 0; index < numberSentence.length; index++) {
+            String expression = numberSentence[index];
+            expressionInspectionByIndex(index, numberSentence.length-1, expression);
             beforeCharacter = expression;
         }
     }
 
-    private void expressionInspectionByIndex(int index, String expression) {
+    private void expressionInspectionByIndex(int index, int lastIndex, String expression) {
         if (index == 0 && isOperator(expression)) {
             throw new IllegalArgumentException("수식의 처음엔 연산자가 올 수 없습니다");
         }
@@ -29,7 +24,7 @@ public class Validator {
             checkDuplicated(expression);
             checkValidOperator(expression);
         }
-        if (index == numberSentence.size()-1 && isOperator(expression)) {
+        if (index == lastIndex && isOperator(expression)) {
             throw new IllegalArgumentException("수식의 마지막엔 연산자가 올 수 없습니다");
         }
     }
@@ -60,5 +55,11 @@ public class Validator {
 
     private boolean isOperator(String input) {
         return OPERATORS.contains(input);
+    }
+
+    public void nullCheck(String numberSentence) {
+        if (numberSentence.isBlank() || numberSentence.isEmpty()) {
+            throw new IllegalArgumentException("계산할 수식을 적어주세요");
+        }
     }
 }

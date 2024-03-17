@@ -1,4 +1,3 @@
-import model.NumberSentence;
 import model.Validator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,11 +13,11 @@ public class ValidatorTest {
     void check_number_duplication(){
         // given
         final String[] input = new String[] {"1","2"};
-        validator = new Validator(new NumberSentence(input));
+        validator = new Validator();
 
         // then
         assertThatThrownBy(() -> {
-            validator.validate();
+            validator.validate(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -27,11 +26,11 @@ public class ValidatorTest {
     void check_operator_duplication(){
         // given
         final String[] input = new String[] {"1","+","-"};
-        validator = new Validator(new NumberSentence(input));
+        validator = new Validator();
 
         // then
         assertThatThrownBy(() -> {
-            validator.validate();
+            validator.validate(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -40,11 +39,11 @@ public class ValidatorTest {
     void check_first_operator_duplication() {
         // given
         final String[] input = new String[] {"+", "1"};
-        validator = new Validator(new NumberSentence(input));
+        validator = new Validator();
 
         // then
         assertThatThrownBy(() -> {
-            validator.validate();
+            validator.validate(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -53,11 +52,11 @@ public class ValidatorTest {
     void check_last_operator_duplication() {
         // given
         final String[] input = new String[] {"1", "+"};
-        validator = new Validator(new NumberSentence(input));
+        validator = new Validator();
 
         // then
         assertThatThrownBy(() -> {
-            validator.validate();
+            validator.validate(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -66,11 +65,11 @@ public class ValidatorTest {
     void check_valid_operator() {
         // given
         final String[] input = new String[]{"1", "+", "2", "?", "5"};
-        validator = new Validator(new NumberSentence(input));
+        validator = new Validator();
 
         // then
         assertThatThrownBy(() -> {
-            validator.validate();
+            validator.validate(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

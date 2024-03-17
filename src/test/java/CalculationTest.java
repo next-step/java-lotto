@@ -1,4 +1,4 @@
-import model.Calculate;
+import model.Calculation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -6,20 +6,20 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class CalculateTest {
+public class CalculationTest {
 
-    private Calculate calculate;
+    private Calculation calculation;
 
     @BeforeEach
     void setUp() {
-        calculate = new Calculate();
+        calculation = new Calculation();
     }
 
     @ParameterizedTest
     @DisplayName("더하기 계산 Test")
     @CsvSource(value = {"1:2:3", "2:4:6"}, delimiter = ':')
     void plus(int firstInput, int secondInput, int resultInput){
-        int result = calculate.plus(firstInput, secondInput);
+        int result = calculation.plus(firstInput, secondInput);
         assertThat(result).isEqualTo(resultInput);
     }
 
@@ -28,7 +28,7 @@ public class CalculateTest {
     @CsvSource(value = {"1:2:-1", "2:4:-2"}, delimiter = ':')
     void minus(int firstInput, int secondInput, int resultInput) {
         // when
-        int result = calculate.minus(firstInput, secondInput);
+        int result = calculation.minus(firstInput, secondInput);
         // then
         assertThat(result).isEqualTo(resultInput);
     }
@@ -38,7 +38,7 @@ public class CalculateTest {
     @CsvSource(value = {"1:2:2", "2:4:8"}, delimiter = ':')
     void multiple(int firstInput, int secondInput, int resultInput) {
         // when
-        int result = calculate.multiple(firstInput, secondInput);
+        int result = calculation.multiple(firstInput, secondInput);
         // then
         assertThat(result).isEqualTo(resultInput);
     }
@@ -48,7 +48,7 @@ public class CalculateTest {
     @CsvSource(value = {"4:2:2", "32:4:8"}, delimiter = ':')
     void divide(int firstInput, int secondInput, int resultInput) {
         // when
-        int result = calculate.divide(firstInput, secondInput);
+        int result = calculation.divide(firstInput, secondInput);
         // then
         assertThat(result).isEqualTo(resultInput);
     }
