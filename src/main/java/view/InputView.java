@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class InputView {
 
     private final Validator validator;
-    private static final String SEPARATOR = ",";
+    private static final String SEPARATOR = " ";
 
 
     Scanner scanner = new Scanner(System.in);
