@@ -6,7 +6,9 @@
 ### 입력 값
 <hr />
 
-- [ ] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+- [X] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+- [X] 사칙 연산이 불가능한 입력 값인 경우 IllegalArgumentException throw
+- [X] 정상 입력 값 테스트
 
 <br />
 
@@ -49,5 +51,5 @@
 <br />
 
 ### 예외 처리
-- [ ] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
-- [ ] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
+- 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
+- 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
