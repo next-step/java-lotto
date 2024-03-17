@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,5 +33,10 @@ public class LottoNumbers {
                 .stream()
                 .map(LottoNumber::getNumbersToString)
                 .collect(Collectors.toList());
+    }
+
+    public boolean containsExactly(LottoNumber... lottoNumbers) {
+        return Arrays.stream(lottoNumbers)
+                .allMatch(numbers::contains);
     }
 }

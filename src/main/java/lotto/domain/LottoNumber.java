@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static lotto.constants.LottoConstants.*;
@@ -21,6 +22,22 @@ public class LottoNumber {
         validLottoNumberDuplicate(numbers);
 
         return new LottoNumber(numbers);
+    }
+
+    public int size() {
+        return numbers.size();
+    }
+
+    public int containsCount(LottoNumber lottoNumber) {
+        return (int) lottoNumber.numbers.stream()
+                .filter(numbers::contains)
+                .count();
+    }
+
+    public String getNumbersToString() {
+        return numbers.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 
     private static void validLottoNumberDuplicate(List<Integer> numbers) {
@@ -49,19 +66,16 @@ public class LottoNumber {
         }
     }
 
-    public int size() {
-        return numbers.size();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return Objects.equals(numbers, that.numbers);
     }
 
-    public int containsCount(LottoNumber lottoNumber) {
-        return (int) lottoNumber.numbers.stream()
-                .filter(numbers::contains)
-                .count();
-    }
-
-    public String getNumbersToString() {
-        return numbers.stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(", ", "[", "]"));
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }
