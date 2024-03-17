@@ -2,10 +2,9 @@ package lotto.domain;
 
 import java.util.List;
 
-public class LottoNumber {
-    private static final int LOTTO_NUMBER_SIZE = 6;
-    private static final int MIN_LOTTO_NUMBER = 1;
+import static lotto.LottoConstants.*;
 
+public class LottoNumber {
     private final List<Integer> numbers;
 
     private LottoNumber(List<Integer> numbers) {
@@ -20,7 +19,10 @@ public class LottoNumber {
     }
 
     private static void validLottoNumberBound(List<Integer> numbers) {
-        if (numbers.stream().anyMatch((number) -> number < MIN_LOTTO_NUMBER)) {
+        boolean isInvalid = numbers.stream()
+                .anyMatch((number) -> number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER);
+
+        if (isInvalid) {
             throw new IllegalArgumentException();
         };
     }
