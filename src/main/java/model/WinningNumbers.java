@@ -19,7 +19,7 @@ public class WinningNumbers {
 
     private void validate(final List<Integer> numbers) {
         if (numbers.size() != MAX_WINNING_NUMBERS) {
-            throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
+            throw new IllegalArgumentException("당첨 번호의 개수는 6개여야 합니다.");
         }
     }
 }
