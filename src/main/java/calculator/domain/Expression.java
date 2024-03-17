@@ -20,16 +20,6 @@ public class Expression {
         operators = toOperatorStack(elements);
     }
 
-    public int result() {
-        while (hasNextOperation()) {
-            Operator operator = operators.pop();
-            int result = operator.calculate(operands.pop().value(), operands.pop().value());
-            operands.push(new Operand(result));
-        }
-
-        return operands.pop().value();
-    }
-
     private boolean hasNoInput(String input) {
         return input == null || input.isBlank();
     }
@@ -61,6 +51,16 @@ public class Expression {
         }
 
         return operatorStack;
+    }
+
+    public int result() {
+        int result = operands.pop().value();
+        while (hasNextOperation()) {
+            Operator operator = operators.pop();
+            result = operator.calculate(result, operands.pop().value());
+        }
+
+        return result;
     }
 
     private boolean hasNextOperation() {
