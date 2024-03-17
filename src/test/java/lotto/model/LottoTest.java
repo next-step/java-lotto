@@ -58,7 +58,7 @@ public class LottoTest {
         int expected = 6;
 
         Lotto lotto = create(1, 2, 3, 4, 5, 6);
-        int actual = lotto.matches(LottoNumberFactory.of(1, 2, 3, 4, 5, 6));
+        int actual = lotto.matches(create(1, 2, 3, 4, 5, 6));
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -74,7 +74,7 @@ public class LottoTest {
     @Test
     void 여러개의_번호를_매치할때_일차하는_볼이_없는경우_0을반환한다() {
         Lotto lotto = create(1, 2, 3, 4, 5, 6);
-        int actual = lotto.matches(LottoNumberFactory.of(7, 8, 9, 10, 11, 12));
+        int actual = lotto.matches(create(7, 8, 9, 10, 11, 12));
 
         assertThat(actual).isEqualTo(0);
     }
@@ -83,7 +83,7 @@ public class LottoTest {
     void 중복번호를_매칭할경우_예외를_반환한다() {
         Lotto lotto = create(1, 2, 3, 4, 5, 6);
 
-        assertThatThrownBy(() -> lotto.matches(LottoNumberFactory.of(1, 1, 1, 1, 1, 1)))
+        assertThatThrownBy(() -> lotto.matches(create(1, 1, 1, 1, 1, 1)))
                 .isInstanceOf(InvalidLottoException.class)
                 .hasMessage("중복을 제외한 6개의 로또 번호가 필요합니다");
     }
