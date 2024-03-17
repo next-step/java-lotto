@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static lotto.LottoConstants.*;
 
@@ -41,5 +43,11 @@ public class LottoNumber {
         return (int) lottoNumber.numbers.stream()
                 .filter(numbers::contains)
                 .count();
+    }
+
+    public String getNumbersToString() {
+        return numbers.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 }

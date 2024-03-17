@@ -23,7 +23,7 @@
   - [X] 총 당첨금을 계산하여 반환 
   - [X] 매개변수로 당첨금과 로또 구매금액이 주어지면 수익률을 소숫점 이하 2자리로 반환
 - 입력을 위한 InputView 객체 생성
-  - [ ] 로또 가격을 매개변수로 받아 나누어 떨어지는 양수면서 정수인 값만 입력 받고, 1000을 나눠 로또의 개수를 반환하는 moneyInput() 구현
-  - [ ] 1 ~ BOUND 만큼의 양수면서 정수인 당첨 번호 6개를 입력받아 WinningNumbers 객체를 반환하는 winnnigNumbersInput() 구현
+  - [X] 로또 가격에 나누어 떨어지는 양수면서 정수인 값만 입력 받고, 1000을 나눠 로또의 개수를 반환하는 moneyInput() 구현
+  - [X] 1 ~ BOUND 만큼의 양수면서 정수인 당첨 번호 6개를 입력받아 WinningNumbers 객체를 반환하는 winnnigNumbersInput() 구현
 - 출력을 위한 OutputView 객체 생성
-  - [ ] LottoResult가 주어지면 3개, 4개, 5개, 6개 각각 일치하는 개수를 출력하고 ReturnCalculator로 계산된 수익률을 출력
+  - [X] 수익률을 출력

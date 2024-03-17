@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private final List<LottoNumber> numbers;
@@ -24,5 +25,12 @@ public class LottoNumbers {
             lottoResult.addCorrectLottoCount(containsCount);
         }
         return lottoResult;
+    }
+
+    public List<String> getLottoNumbersToString() {
+        return numbers
+                .stream()
+                .map(LottoNumber::getNumbersToString)
+                .collect(Collectors.toList());
     }
 }
