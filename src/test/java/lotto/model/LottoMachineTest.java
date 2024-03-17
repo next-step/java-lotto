@@ -2,19 +2,21 @@ package lotto.model;
 
 import lotto.dto.OrderRequest;
 import lotto.dto.OrderResponse;
+import lotto.exception.InvalidLottoException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoMachineTest {
 
     @ParameterizedTest
     @ValueSource(ints = {0, 999})
     void 천원미만_구매요청시_빈_로또종이를_반환한다(int given) {
-        assertThat(LottoMachine.purchase(new OrderRequest(given)))
-                .isEqualTo(new OrderResponse(0, LottoMachine.EMPTY_LOTTO_PAPER));
+        assertThatThrownBy(() -> LottoMachine.purchase(new OrderRequest(given)))
+                .isInstanceOf(InvalidLottoException.class);
     }
 
     @Test

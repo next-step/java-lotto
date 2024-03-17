@@ -2,14 +2,13 @@ package lotto.model;
 
 import lotto.dto.OrderRequest;
 import lotto.dto.OrderResponse;
+import lotto.exception.InvalidLottoException;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LottoMachine {
     public static final int LOTTO_PER_MONEY = 1_000;
-    public static final LottoPaper EMPTY_LOTTO_PAPER = new LottoPaper(Collections.emptyList());
 
     private LottoMachine() {
     }
@@ -18,7 +17,7 @@ public class LottoMachine {
         int quantity = calculate(orderRequest.getMoney());
 
         if (quantity == 0) {
-            return new OrderResponse(quantity, EMPTY_LOTTO_PAPER);
+            throw new InvalidLottoException("로또를 구매하실 수 없습니다");
         }
 
         return new OrderResponse(quantity, prepare(quantity));
