@@ -10,6 +10,7 @@ public class Output {
         System.out.println(purchasedLotto.purchasedLottoSize() + "개를 구매했습니다.");
         purchasedLotto.getPurchasedLottoList()
                         .forEach(System.out::println);
+        System.out.println();
     }
 
     public void printWinningResult(LottoResultDto lottoResultDto) {

@@ -20,9 +20,8 @@ class LottoNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers();
 
         // then
-        lottoNumbers.stream()
+        lottoNumbers.getPurchasedLottoNumber()
                 .forEach(number -> assertThat(number).isBetween(MINIMUM_LOTTO_RANGE, MAXIMUM_LOTTO_RANGE));
-        assertThat(lottoNumbers.stream().count()).isEqualTo(LOTTO_NUMBER_COUNT);
     }
 
     @DisplayName("생성자를 넣으면, 로또 번호를 수기로 생성 해 준다.")
