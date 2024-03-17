@@ -4,9 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringCalculatorTest {
 
@@ -23,6 +23,13 @@ public class StringCalculatorTest {
     @DisplayName("null이나 빈 문자열 올 경우 예외 발생")
     @NullAndEmptySource
     void testNullOrEmptyString(String input) {
-        assertThatThrownBy(() -> stringCalculator.calculate(input)).isInstanceOf(IllegalArgumentException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> stringCalculator.calculate(input));
+    }
+
+    @ParameterizedTest
+    @DisplayName("")
+    @ValueSource(strings = {"1m2m32", "1 + 2 3 4 5", "1 / 2 /", "1 + 2 d 3"})
+    void testInvalidExpression(String input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> stringCalculator.calculate(input));
     }
 }
