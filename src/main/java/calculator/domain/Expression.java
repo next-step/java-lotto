@@ -4,6 +4,7 @@ import java.util.Stack;
 
 public class Expression {
     private static final String SPLIT_DELIMITER = " ";
+    private static final int EXPRESSION_ELEMENT_MIN_SIZE = 3;
 
     private final Stack<Operand> operands;
     private final Stack<Operator> operators;
@@ -35,7 +36,7 @@ public class Expression {
 
     private String[] toStringArray(String input) {
         String[] elements = input.split(SPLIT_DELIMITER);
-        if (elements.length < 3) {
+        if (elements.length < EXPRESSION_ELEMENT_MIN_SIZE) {
             throw new IllegalArgumentException("올바른 연산식을 입력하세요.");
         }
 
