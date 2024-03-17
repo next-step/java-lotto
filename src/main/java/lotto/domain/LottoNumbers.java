@@ -8,6 +8,7 @@ public class LottoNumbers {
     private LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.numbers = lottoNumbers;
     }
+
     public static LottoNumbers from(List<LottoNumber> lottoNumbers) {
         return new LottoNumbers(lottoNumbers);
     }
@@ -20,7 +21,7 @@ public class LottoNumbers {
         LottoResult lottoResult = new LottoResult();
         for (LottoNumber lottoNumber : numbers) {
             int containsCount = lottoNumber.containsCount(winningNumber);
-            lottoResult.addResultCount(containsCount);
+            lottoResult.addCorrectLottoCount(containsCount);
         }
         return lottoResult;
     }

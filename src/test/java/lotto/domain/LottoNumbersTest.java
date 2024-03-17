@@ -38,10 +38,6 @@ public class LottoNumbersTest {
         LottoNumbers lottoNumbers = LottoNumbers.from(lottoNumberList);
 
         LottoResult lottoResult = lottoNumbers.computeLottoResult(winningNumber);
-
-        assertThat(lottoResult.getCountOfThreeCorrectLotto()).isEqualTo(2);
-        assertThat(lottoResult.getCountOfFourCorrectLotto()).isEqualTo(1);
-        assertThat(lottoResult.getCountOfFiveCorrectLotto()).isEqualTo(1);
-        assertThat(lottoResult.getCountOfSixCorrectLotto()).isEqualTo(0);
+        assertThat(lottoResult.winnings()).isEqualTo(1560000L);
     }
 }

@@ -19,9 +19,9 @@
   - [X] 매개변수로 당첨 번호 리스트를 받아, LottoResult 객체를 반환
 - 로또를 생성하는 LottoMachine 객체 생성
   - [X] 로또 개수와 NumberDrawer를 매개변수로 받아 LottoNumbers를 반환
-- 수익률 계산을 위한 ReturnCalculator 생성
-  - [ ] Result를 매개변수로 받아, 총 당첨금을 계산하여 반환 
-  - [ ] 매개변수로 당첨금과 로또 구매금액이 주어지면 수익률을 소숫점 이하 2자리로 반환
+- 당첨금 계산을 위한 LottoResult 생성
+  - [X] 총 당첨금을 계산하여 반환 
+  - [X] 매개변수로 당첨금과 로또 구매금액이 주어지면 수익률을 소숫점 이하 2자리로 반환
 - 입력을 위한 InputView 객체 생성
   - [ ] 로또 가격을 매개변수로 받아 나누어 떨어지는 양수면서 정수인 값만 입력 받고, 1000을 나눠 로또의 개수를 반환하는 moneyInput() 구현
   - [ ] 1 ~ BOUND 만큼의 양수면서 정수인 당첨 번호 6개를 입력받아 WinningNumbers 객체를 반환하는 winnnigNumbersInput() 구현
