@@ -18,7 +18,7 @@ public class OutputView {
     }
 
     public void printWinningStatistics(final WinningDetails winningDetails, final BigDecimal profit) {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
         System.out.println(WinningPrice.FIRST.getMatchingCount() + "개 일치 (" + WinningPrice.FIRST.getAmount() + "원)-" + winningDetails.getWinningDetails().get(WinningPrice.FIRST) + "개");
         System.out.println(WinningPrice.SECOND.getMatchingCount() + "개 일치 (" + WinningPrice.SECOND.getAmount() + "원)-" + winningDetails.getWinningDetails().get(WinningPrice.SECOND) + "개");
