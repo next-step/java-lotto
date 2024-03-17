@@ -11,7 +11,7 @@ class LottoAmountTest {
     @ParameterizedTest
     @ValueSource(ints = {0, -1000, -2000, -100000})
     @DisplayName("로또 구매 금액이 양수가 아닌 경우 익셉션 발생시킨다")
-    void lottoAmountTest(int given) {
+    void lottoAmountTest(final int given) {
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoAmount(given));
     }
 

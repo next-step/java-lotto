@@ -31,7 +31,7 @@ class WinningNumbersTest {
             "7,8,9,10,11,12:0"
     }, delimiter = ':')
     @DisplayName("구매한 로또의 당첨 번호 갯수 비교")
-    void winningNumbersTest(String given, int expected) {
+    void winningNumbersTest(final String given, final int expected) {
         // given
         final List<Integer> numbers = Arrays.stream(given.split(","))
                 .map(Integer::parseInt)

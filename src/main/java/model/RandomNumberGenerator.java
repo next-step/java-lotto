@@ -20,7 +20,7 @@ public class RandomNumberGenerator {
     }
 
     private static List<Integer> generateNumbers() {
-        List<Integer> candidates = new ArrayList<>();
+        final List<Integer> candidates = new ArrayList<>();
         for (int lottoNumber = LOTTO_MIN_NUMBER; lottoNumber <= LOTTO_MAX_NUMBER; lottoNumber++) {
             candidates.add(lottoNumber);
         }

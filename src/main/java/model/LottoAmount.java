@@ -8,7 +8,7 @@ public class LottoAmount {
 
     private final int amount;
 
-    public LottoAmount(int amount) {
+    public LottoAmount(final int amount) {
         validate(amount);
         this.amount = amount;
     }
@@ -21,7 +21,7 @@ public class LottoAmount {
         return BigDecimal.valueOf(amount);
     }
 
-    private void validate(int amount) {
+    private void validate(final int amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("로또 구매 가능한 금액은 0원 이상어야합니다.");
         }

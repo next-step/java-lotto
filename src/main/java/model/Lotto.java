@@ -14,7 +14,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public int findMatchNumberCount(WinningNumbers winningNumbers) {
+    public int findMatchNumberCount(final WinningNumbers winningNumbers) {
         return (int) this.numbers.stream()
                 .filter(number -> winningNumbers.getNumbers().contains(number))
                 .mapToInt(it -> it)
