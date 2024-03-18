@@ -18,10 +18,34 @@ public class CalculatorTest {
     }
 
     @Test
-    void 단순_더하기() {
+    void 더하기() {
         String str = "1 + 1";
         Calculator calculator = new Calculator();
         calculator.calculator(str);
         assertThat(calculator.calculator(str)).isEqualTo(2);
+    }
+
+    @Test
+    void 곱하기() {
+        String str = "1 * 1";
+        Calculator calculator = new Calculator();
+        calculator.calculator(str);
+        assertThat(calculator.calculator(str)).isEqualTo(1);
+    }
+
+    @Test
+    void 나누기() {
+        String str = "1 / 1";
+        Calculator calculator = new Calculator();
+        calculator.calculator(str);
+        assertThat(calculator.calculator(str)).isEqualTo(1);
+    }
+
+    @Test
+    void 빼기() {
+        String str = "1 - 1";
+        Calculator calculator = new Calculator();
+        calculator.calculator(str);
+        assertThat(calculator.calculator(str)).isEqualTo(0);
     }
 }
