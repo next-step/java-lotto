@@ -16,7 +16,7 @@ public class StringCalculation {
         String[] strings = splitByGap(input);
         int sum = 0;
         for (int i = 1; i < strings.length; i += 2) {
-            CalculateStrategy operation = OperationStrategies.getOperation(strings, i);
+            CalculateStrategy operation = OperationStrategies.getOperation(strings[i]);
             sum += operation.calculate(Integer.parseInt(strings[i - 1]), Integer.parseInt(strings[i + 1]));
         }
         return sum;
