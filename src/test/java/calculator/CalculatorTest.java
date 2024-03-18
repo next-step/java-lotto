@@ -19,15 +19,14 @@ public class CalculatorTest {
 
     @Test
     void 더하기() {
-        String str = "1 + 1";
+        String str = "1 + 1 + 1";
         Calculator calculator = new Calculator();
-        calculator.calculator(str);
-        assertThat(calculator.calculator(str)).isEqualTo(2);
+        assertThat(calculator.calculator(str)).isEqualTo(3);
     }
 
     @Test
     void 곱하기() {
-        String str = "1 * 1";
+        String str = "1 * 1 * 1";
         Calculator calculator = new Calculator();
         calculator.calculator(str);
         assertThat(calculator.calculator(str)).isEqualTo(1);
