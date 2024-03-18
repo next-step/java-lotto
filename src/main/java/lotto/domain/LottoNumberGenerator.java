@@ -1,22 +1,22 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumberGenerator {
 
-    private static final Random RANDOM = new Random();
+    private static final List<Integer> ALL_LOTTO_NUMBER = IntStream.rangeClosed(1, 45)
+            .boxed()
+            .collect(Collectors.toList());
 
-    public static Set<Integer> generate() {
-        Set<Integer> numberSet = new HashSet<>();
+    private static final int FROM = 0;
+    private static final int TO = 6;
 
-        while (numberSet.size() < 6) {
-            int randomNumber = RANDOM.nextInt(45) + 1;// 1부터 45 사이의 난수 생성
-            numberSet.add(randomNumber);
-        }
-
-        return numberSet;
+    public static List<Integer> generate() {
+        Collections.shuffle(ALL_LOTTO_NUMBER);
+        return ALL_LOTTO_NUMBER.subList(FROM, TO);
     }
 
 }

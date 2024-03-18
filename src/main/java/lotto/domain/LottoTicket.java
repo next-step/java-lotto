@@ -1,12 +1,13 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Set;
 
 public class LottoTicket {
 
-    private final Set<Integer> numbers;
+    private final List<Integer> numbers;
 
-    public LottoTicket(Set<Integer> numbers) {
+    public LottoTicket(List<Integer> numbers) {
         this.numbers = numbers;
     }
 }
