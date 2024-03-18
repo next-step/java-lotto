@@ -3,6 +3,7 @@ package lotto.ui;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -15,24 +16,23 @@ public class InputView {
 
     public static List<Integer> readWinNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
-        return readIntegerList();
+
+        String winNumbersString = readString();
+        return convertStringToIntegerList(winNumbersString);
+    }
+
+    private static List<Integer> convertStringToIntegerList(String winNumbersString) {
+        List<String> winNumbersStrings = List.of(winNumbersString.split(",\\s*"));
+        return winNumbersStrings.stream().map(Integer::parseInt).collect(Collectors.toList());
     }
 
     private static int readInt() {
-        return SCANNER.nextInt();
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
-    private static List<Integer> readIntegerList() {
-        List<Integer> numbers = new ArrayList<>();
-        SCANNER.useDelimiter(", ");
-        while (SCANNER.hasNext()) {
-            if (SCANNER.hasNextInt()) {
-                numbers.add(SCANNER.nextInt());
-            } else {
-                SCANNER.next();
-            }
-        }
-        return numbers;
+    private static String readString() {
+        return SCANNER.nextLine();
     }
+
 
 }
