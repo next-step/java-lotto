@@ -29,19 +29,19 @@ public class LottoGeneratorTest {
         assertThat(result.size()).isEqualTo(6);
     }
 
-    @DisplayName("로또 번호 생성 범위 검증 1~45")
+    @DisplayName("로또 번호 생성 범위 1~45 테스트")
     @Test
-    void lottoGenerate_valid() {
-        List<Integer> expected = IntStream.range(1,45).boxed().collect(Collectors.toList());
+    void lottoGenerate_range() {
+        List<Integer> expected = IntStream.range(1,46).boxed().collect(Collectors.toList());
 
         List<Integer> result = lottoGenerator.lottoGenerate();
 
         assertThat(expected).containsAll(result);
     }
 
-    @DisplayName("로또 번호 원자성 검증")
+    @DisplayName("로또 번호 원자성 테스트")
     @Test
-    void lottoGenerate_atomic_valid() {
+    void lottoGenerate_atomic_test() {
         List<Integer> result = lottoGenerator.lottoGenerate();
         Set<Integer> resultSet = result.stream().collect(Collectors.toSet());
         assertThat(resultSet.size()).isEqualTo(result.size());
@@ -49,7 +49,7 @@ public class LottoGeneratorTest {
 
     @DisplayName("로또 번호 정렬 검증")
     @Test
-    void lottoGenerate_sort_valid() {
+    void lottoGenerate_sort_test() {
         List<Integer> result = lottoGenerator.lottoGenerate();
         List<Integer> expected = new ArrayList<>(result);
         Collections.sort(expected);
