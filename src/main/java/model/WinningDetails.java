@@ -34,7 +34,7 @@ public class WinningDetails {
 
     private BigDecimal calculateSum() {
         final int sum = winningDetails.keySet().stream()
-                .mapToInt(winningPrice -> winningPrice.getAmount() * winningDetails.get(winningPrice))
+                .mapToInt(rank -> rank.multiply(winningDetails.get(rank)))
                 .sum();
         return BigDecimal.valueOf(sum);
     }

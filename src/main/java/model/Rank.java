@@ -29,6 +29,10 @@ public enum Rank {
                 .orElse(NONE);
     }
 
+    public int multiply(final int matchingCount) {
+        return amount * matchingCount;
+    }
+
     private static boolean isSecondRank(final int count, final boolean isMatchBonusNumber) {
         return count == SECOND.matchingCount && isMatchBonusNumber;
     }
