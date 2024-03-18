@@ -21,4 +21,12 @@ public class StringCalculatorTest {
 
         Assertions.assertThat(result).isEqualTo(expected);
     }
+
+    @ParameterizedTest(name = "나눗셈만 하는 {0} 의 결과값은 {1} 이다")
+    @CsvSource(value = {"2 / 1=2", "6 / 2=3", "1 / 1=1", "12 / 3=4"}, delimiter = '=')
+    void divisionTest(String input, int expected) {
+        int result = StringCalculator.division(input);
+
+        Assertions.assertThat(result).isEqualTo(expected);
+    }
 }
