@@ -1,11 +1,9 @@
 package stringCalculator;
 
+import static stringCalculator.Operation.*;
+
 public class Calculator {
     private static final String SPLIT_REGEX = " ";
-    private static final String ADD = "+";
-    private static final String MINUS = "-";
-    private static final String MULTIPLY = "*";
-    private static final String DIVIDE = "/";
 
     public int calculate(String input) {
         if (isBlank(input)) {
@@ -48,29 +46,29 @@ public class Calculator {
     }
 
     private int divide(String[] strings, int i, int result) {
-        if (DIVIDE.equals(strings[i - 1])) {
-            result /= Integer.parseInt(strings[i]);
+        if (DIVIDE.isDivideOperation(strings, i)) {
+            result = DIVIDE.apply(result, Integer.parseInt(strings[i]));
         }
         return result;
     }
 
     private int multiply(String[] strings, int i, int result) {
-        if (MULTIPLY.equals(strings[i - 1])) {
-            result *= Integer.parseInt(strings[i]);
+        if (MULTIPLY.isMultiplyOperation(strings, i)) {
+            result = MULTIPLY.apply(result, Integer.parseInt(strings[i]));
         }
         return result;
     }
 
     private int minus(String[] strings, int i, int result) {
-        if (MINUS.equals(strings[i - 1])) {
-            result -= Integer.parseInt(strings[i]);
+        if (MINUS.isMinusOperaiton(strings, i)) {
+            result = MINUS.apply(result, Integer.parseInt(strings[i]));
         }
         return result;
     }
 
     private int add(String[] strings, int i, int result) {
-        if (ADD.equals(strings[i - 1])) {
-            result += Integer.parseInt(strings[i]);
+        if (ADD.isAddOperaiton(strings, i)) {
+            result = ADD.apply(result, Integer.parseInt(strings[i]));
         }
         return result;
     }
@@ -90,6 +88,11 @@ public class Calculator {
     }
 
     private boolean isNotFourBasicOperations(String strings) {
-        return !(ADD.equals(strings) || MINUS.equals(strings) || MULTIPLY.equals(strings) || DIVIDE.equals(strings));
+        return !(
+                ADD.getOperation().equals(strings) ||
+                MINUS.getOperation().equals(strings) ||
+                MULTIPLY.getOperation().equals(strings) ||
+                DIVIDE.getOperation().equals(strings)
+        );
     }
 }
