@@ -1,9 +1,20 @@
 package stringCalculatorTest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.BiFunction;
 
 public class StringCalculator {
     private static final List<String> OPERATION_SYMBOL = List.of("+", "-", "*", "/");
+    private static Map<String, BiFunction<Integer, Integer, Integer>> operations = new HashMap<>();
+
+    static {
+        operations.put("+", StringCalculator::addition);
+        operations.put("-", StringCalculator::subtract);
+        operations.put("*", StringCalculator::multiple);
+        operations.put("/", StringCalculator::division);
+    }
 
     public static int addition(int value1, int value2) {
         return value1 + value2;
@@ -34,21 +45,9 @@ public class StringCalculator {
         int result = Integer.parseInt(tokens.get(0));
 
         for (int i = 1; i < tokens.size(); i += 2) {
-            if (tokens.get(i).equals("+")) {
-                result = addition(result, Integer.parseInt(tokens.get(i + 1)));
-            }
-
-            if (tokens.get(i).equals("-")) {
-                result = subtract(result, Integer.parseInt(tokens.get(i + 1)));
-            }
-
-            if (tokens.get(i).equals("/")) {
-                result = division(result, Integer.parseInt(tokens.get(i + 1)));
-            }
-
-            if (tokens.get(i).equals("*")) {
-                result = multiple(result, Integer.parseInt(tokens.get(i + 1)));
-            }
+            String operator = tokens.get(i);
+            int operand = Integer.parseInt(tokens.get(i+1));
+            result = operations.get(operator).apply(result, operand);
         }
         return result;
     }
