@@ -10,6 +10,7 @@ public enum StringOperator {
   DIVISION("/"),
   MULTIPLICATION("*");
 
+  private static final List<String> ALL_OPERATORS = Arrays.stream(StringOperator.values()).map(it -> it.operator).collect(Collectors.toList());
   private final String operator;
 
   StringOperator(String operator) {
@@ -17,7 +18,7 @@ public enum StringOperator {
   }
 
   public static List<String> allOperators() {
-    return Arrays.stream(StringOperator.values()).map(it -> it.operator).collect(Collectors.toList());
+    return ALL_OPERATORS;
   }
 
   public static StringOperator convert(String value) {
