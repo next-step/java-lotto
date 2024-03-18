@@ -23,16 +23,21 @@ public class Calculator {
 
 	// 입력받은 문자열을 분해하고 각 Queue로 분류한다 
 	private void seperateAndClasifyFrom(String input) {
-		String[] s = input.split(DELIMITER);
-		// 완성된 계산식은 숫자 + 연산자의 갯수가 홀수여야한다.
-		if (s.length % 2 != 1) {
-			throw new IllegalArgumentException("잘못된 계산식 입니다.");
-		}
+		String[] splitedFormula = input.split(DELIMITER);
 
-		numbers.add(new Number(s[0]));
-		for (int i = 1; i < s.length; i++) {
-			operators.add(Operator.of(s[i]));
-			numbers.add(new Number(s[++i]));
+		validateFormula(splitedFormula);
+
+		numbers.add(new Number(splitedFormula[0]));
+		for (int i = 1; i < splitedFormula.length; i++) {
+			operators.add(Operator.of(splitedFormula[i]));
+			numbers.add(new Number(splitedFormula[++i]));
+		}
+	}
+
+	private static void validateFormula(String[] splitedFormula) {
+		// 완성된 계산식은 숫자 + 연산자의 갯수가 홀수여야한다.
+		if (splitedFormula.length % 2 != 1) {
+			throw new IllegalArgumentException("잘못된 계산식 입니다.");
 		}
 	}
 
