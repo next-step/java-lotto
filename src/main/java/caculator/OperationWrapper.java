@@ -28,19 +28,24 @@ public class OperationWrapper {
     private List<OperationPair> makePairs(List<String> textArray) {
         List<OperationPair> pairs = new ArrayList<>();
 
-        for (int i = SECOND_INDEX; i < textArray.size(); i = i + PAIR_SIZE) {
-            if (i + PAIR_SIZE > textArray.size()) {
-                return pairs;
-            }
+        int limit = isOdd(textArray.size()) ? textArray.size() : textArray.size() - 1;
+
+        for (int i = SECOND_INDEX; i < limit; i = i + PAIR_SIZE) {
             pairs.add(new OperationPair(textArray.get(i), textArray.get(i + 1)));
         }
         return pairs;
     }
-    public List<OperationPair> getOperationPairs(){
+
+    public List<OperationPair> getOperationPairs() {
         return this.pairs;
     }
 
-    public Number getInitNumber(){
+    public Number getInitNumber() {
         return initNumber;
+    }
+
+
+    private boolean isOdd(int number) {
+        return number % 2 == 1;
     }
 }
