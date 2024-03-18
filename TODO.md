@@ -1,3 +1,16 @@
+### 2단계 피드백
+
+- [x] LottoNumbers -> LottoNumberFactory renaming
+- [x] 구매 수량이 0인 경우 예외 반환하도록 변경
+- [x] Lotto 클래스 가변인자 생성자 제거, 테스트용 팩토리 추가
+- [x] 팩토리 생성, matches() 파라미터 타입을 LottoNumber 리스트에서 Lotto로 변경
+- [x] 당첨 번호 매칭 결과를 EnumMap으로 반환하도록 변경
+- [x] 로또 당첨 정보와 수익률 가지는 Prize 클래스 추가
+- [x] 구매 로또 출력시 LottoNumberDto 리스트 전달하여 출력하도록 변경
+    - OrderResponse 삭제
+
+---
+
 ### 2단계 -로또 (자동)
 
 LottoNumber
