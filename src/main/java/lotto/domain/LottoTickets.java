@@ -14,12 +14,20 @@ public class LottoTickets {
 
     public Map<Integer, Integer> getLottoStatistics(List<Integer> winNumbers) {
         Map<Integer, Integer> statisticMap = new HashMap<>();
+        initStatisticMap(statisticMap);
+
         for (LottoTicket lottoTicket : lottoTickets) {
             int hit = lottoTicket.matchNumbers(winNumbers);
             addStatistic(statisticMap, hit);
         }
 
         return statisticMap;
+    }
+
+    private void initStatisticMap(Map<Integer, Integer> statisticMap) {
+        for (int matchCount = 0; matchCount <= 6; matchCount++) {
+            statisticMap.put(matchCount, 0);
+        }
     }
 
     private void addStatistic(Map<Integer, Integer> statisticMap, int hit) {
