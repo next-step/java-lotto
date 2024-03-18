@@ -1,7 +1,5 @@
 package caculator;
 
-import caculator.type.OperatorType;
-
 public class OperationPair {
     private final OperatorType operatorType;
     private final Number number;
