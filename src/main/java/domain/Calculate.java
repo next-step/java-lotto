@@ -9,6 +9,10 @@ public class Calculate {
     private String operatorCache = "";
 
     public void process(String input){
+        if(!isNumber(input) && Operator.isOperator(input)){
+            operatorCache = input;
+            return;
+        }
         if(isNumber(input) && "".equals(operatorCache)){
             numberCache = toInts(input);
             return;
@@ -25,7 +29,7 @@ public class Calculate {
         if(isNumber(input) && operatorCache.equals("/")){
             divide(toInts(input));
         }
-        operatorCache = input;
+        throw new IllegalArgumentException();
     }
 
     private int toInts(String input) {

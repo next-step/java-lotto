@@ -1,7 +1,6 @@
 # Step1
 
 ## Todo
-- 정의된 연산자 이외라면 예외("1 ( 2" => IllegalArgumentException)
 - 숫자나 연산자가 연속으로 들어오면 예외("1 2" => IllegalArgumentException)
 - 연산자가 양끝에 있으면 예외("1 +" =>외IllegalArgumentException, "+ 1" => IllegalArgumentException)
 
@@ -28,3 +27,5 @@
 - [x] Operator의 toOperator를 stream 써서 리팩토링
 - [x] IntBinaryOperator를 Functional Interface를 사용해서 직접 구현하는 행태로 변경
 - [x] CalculateHandler를 "문자열이 숫자인지 연산자인지 판단/왼쪽부터 순서대로 계산" 2가지 책임을 가진 클래스로 분리
+
+- 정의된 연산자 이외라면 예외("1 ( 2" => IllegalArgumentException)
