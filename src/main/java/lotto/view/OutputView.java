@@ -27,9 +27,7 @@ public class OutputView {
 		hashMap.put(6, 0);
 		for (int i = 0; i < myLottos.getLottoSize(); i++) {
 			long count = myLottos.getLottos().get(i).compareWinNumber(winLotto);
-			if (count >= 3) {
-				hashMap.put((int) count, hashMap.get((int) count) + 1);
-			}
+			findWinner(count, hashMap);
 		}
 		System.out.println("당첨 통계");
 		System.out.println("---------");
@@ -38,6 +36,12 @@ public class OutputView {
 		System.out.println("5개 일치 (1500000원)- " + hashMap.get(5) + "개");
 		System.out.println("6개 일치 (2000000000원)- " + hashMap.get(6) + "개");
 		return hashMap;
+	}
+
+	private static void findWinner(final long count, final Map<Integer, Integer> hashMap) {
+		if (count >= 3) {
+			hashMap.put((int) count, hashMap.get((int) count) + 1);
+		}
 	}
 
 	public void printTotalReturn(final Map<Integer, Integer> hashMap, final Integer pay) {
