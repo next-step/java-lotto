@@ -7,11 +7,11 @@ import java.util.Set;
 
 import static lotto.domain.LottoInformation.*;
 
-public class LottoStatisticsMap {
+public class LottoStatistics {
 
     private final Map<Integer,  Integer> statisticsMap;
 
-    public LottoStatisticsMap(LottoTickets lottoTickets, List<Integer> winNumbers) {
+    public LottoStatistics(LottoTickets lottoTickets, List<Integer> winNumbers) {
         this.statisticsMap = new HashMap<>();
         setInitValue();
         setStatistics(lottoTickets, winNumbers);

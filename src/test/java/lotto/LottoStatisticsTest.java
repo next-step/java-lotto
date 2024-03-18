@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoStatisticsMap;
+import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +28,7 @@ public class LottoStatisticsTest {
 
         // When
         List<Integer> winNumbers = List.of(1, 2, 3, 4, 5, 6);
-        LottoStatisticsMap lottoStatistics = new LottoStatisticsMap(lottoTickets, winNumbers);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, winNumbers);
 
         // Then
         assertThat(lottoStatistics.getMatchedLottoCount(hit)).isEqualTo(count);
@@ -50,7 +50,7 @@ public class LottoStatisticsTest {
 
         // When
         List<Integer> winNumbers = List.of(1, 2, 3, 4, 5, 6);
-        LottoStatisticsMap lottoStatistics = new LottoStatisticsMap(lottoTickets, winNumbers);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, winNumbers);
 
         // Then
         assertThat(lottoStatistics.getMatchedLottoCount(hit)).isEqualTo(count);

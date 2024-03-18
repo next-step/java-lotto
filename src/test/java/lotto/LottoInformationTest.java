@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoInformation;
-import lotto.domain.LottoStatisticsMap;
+import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import org.assertj.core.api.Assertions;
@@ -25,7 +25,7 @@ public class LottoInformationTest {
         ));
 
         List<Integer> winNumbers = List.of(1, 2, 3, 4, 5, 6);
-        LottoStatisticsMap lottoStatistics = new LottoStatisticsMap(lottoTickets, winNumbers);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, winNumbers);
         int purchaseAmount = lottoTickets.size() * 1000;
 
         // When
@@ -48,7 +48,7 @@ public class LottoInformationTest {
         ));
 
         List<Integer> winNumbers = List.of(1, 2, 3, 4, 5, 6);
-        LottoStatisticsMap lottoStatistics = new LottoStatisticsMap(lottoTickets, winNumbers);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, winNumbers);
         int purchaseAmount = lottoTickets.size() * 1000;
 
         // When

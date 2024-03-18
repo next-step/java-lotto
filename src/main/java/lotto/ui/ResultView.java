@@ -1,13 +1,12 @@
 package lotto.ui;
 
 import lotto.domain.LottoInformation;
-import lotto.domain.LottoStatisticsMap;
+import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
 import java.text.MessageFormat;
 import java.util.List;
-import java.util.Map;
 
 public class ResultView {
 
@@ -28,7 +27,7 @@ public class ResultView {
         return MessageFormat.format("{0}개를 구매했습니다.", count);
     }
 
-    public static void printLottoStatistics(LottoStatisticsMap statisticsMap, int purchaseAmount) {
+    public static void printLottoStatistics(LottoStatistics statisticsMap, int purchaseAmount) {
         List<Integer> matchCounts = LottoInformation.getMatchCounts();
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -40,12 +39,12 @@ public class ResultView {
         System.out.println(stringBuilder);
     }
 
-    private static String formatStatistic(LottoStatisticsMap statisticsMap, Integer matchCount) {
+    private static String formatStatistic(LottoStatistics statisticsMap, Integer matchCount) {
         return MessageFormat.format("{0}개 일치 ({1}원) - {2}개"
                 , matchCount, LottoInformation.getWinAmount(matchCount), statisticsMap.getMatchedLottoCount(matchCount));
     }
 
-    public static String formatProfitRate(LottoStatisticsMap statisticsMap, int purchaseAmount) {
+    public static String formatProfitRate(LottoStatistics statisticsMap, int purchaseAmount) {
         return MessageFormat.format("총 수익률은 {0}입니다.", LottoInformation.calculateProfitRate(statisticsMap, purchaseAmount));
     }
 }

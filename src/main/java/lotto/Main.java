@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoStatisticsMap;
+import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicketMachine;
 import lotto.domain.LottoTickets;
 import lotto.ui.InputView;
@@ -17,7 +17,7 @@ public class Main {
         ResultView.printLottoTickets(lottoTickets);
 
         List<Integer> winNumbers = InputView.readWinNumbers();
-        LottoStatisticsMap statisticsMap = new LottoStatisticsMap(lottoTickets, winNumbers);
+        LottoStatistics statisticsMap = new LottoStatistics(lottoTickets, winNumbers);
 
         ResultView.printLottoStatistics(statisticsMap, purchaseAmount);
     }
