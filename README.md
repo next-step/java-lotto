@@ -7,3 +7,13 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## To-Do - 문자열 계산기
+## Done - 문자열 계산기
+* 공백 기준으로 문자열 split - split 메소드
+* 입력 값이 null / 빈 공백일 때 IllegalArgumentException 발생
+* 덧셈 - Calculator의 add 메소드
+* 뺄셈 - Calculator의 substract 메소드
+* 곱셈 - Calculator의 multiply 메소드
+* 나눗셈 - 정수로 나누어 떨어지도록 구현 - Calculator의 divide 메소드
+* 사칙 연산 기호가 아닐 때 IllegalArgumentException 발생
