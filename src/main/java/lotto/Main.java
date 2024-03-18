@@ -12,7 +12,6 @@ public class Main {
 
     public static void main(String[] args) {
         int amount = InputView.readAmount();
-        ResultView.printAmount(amount);
 
         LottoTickets lottoTickets = LottoTicketMachine.issue(amount);
         ResultView.printLottoTickets(lottoTickets);

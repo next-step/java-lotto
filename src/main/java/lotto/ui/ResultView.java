@@ -10,12 +10,10 @@ import java.util.Map;
 
 public class ResultView {
 
-    public static void printAmount(int amount) {
-        System.out.println(MessageFormat.format("{0}개를 구매했습니다.", amount));
-    }
-
     public static void printLottoTickets(LottoTickets lottoTickets) {
         StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(formatPurchaseCount(lottoTickets.size())).append(System.lineSeparator());
 
         for (LottoTicket ticket : lottoTickets.get()) {
             stringBuilder.append(ticket).append(System.lineSeparator());
@@ -23,6 +21,10 @@ public class ResultView {
         stringBuilder.append(System.lineSeparator());
 
         System.out.println(stringBuilder);
+    }
+
+    private static String formatPurchaseCount(int count) {
+        return MessageFormat.format("{0}개를 구매했습니다.", count);
     }
 
     public static void printLottoStatistics(Map<Integer, Integer> statisticsMap) {

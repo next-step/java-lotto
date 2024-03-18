@@ -24,7 +24,7 @@ public class InputView {
 
     private static List<Integer> readIntegerList() {
         List<Integer> numbers = new ArrayList<>();
-        SCANNER.useDelimiter(",");
+        SCANNER.useDelimiter(", ");
         while (SCANNER.hasNext()) {
             if (SCANNER.hasNextInt()) {
                 numbers.add(SCANNER.nextInt());
