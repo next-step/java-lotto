@@ -14,7 +14,7 @@ public class Lottos {
 
     public List<Rank> determineRank(final LottoWinningNumber lottoWinningNumber) {
         return lottos.stream()
-                .map(lotto -> lotto.match(lottoWinningNumber))
+                .map(lottoWinningNumber::match)
                 .collect(Collectors.toList());
     }
 

@@ -16,10 +16,11 @@ public class Lotto {
         this.numbers = Utils.convertToLottoNumbers(numbers);
     }
 
-    public Rank match(final LottoWinningNumber lottoWinningNumber) {
-        final int countOfMatch = findMatchNumberCount(lottoWinningNumber.getWinningNumbers());
-        final boolean contains = numbers.contains(lottoWinningNumber.getLottoNumber());
-        return Rank.determine(countOfMatch, contains);
+    public int findMatchNumberCount(final WinningNumbers winningNumbers) {
+        return (int) numbers.stream()
+                .filter(winningNumbers::contains)
+                .mapToInt(LottoNumber::getValue)
+                .count();
     }
 
     public List<Integer> getNumbers() {
@@ -32,12 +33,5 @@ public class Lotto {
         if (numbers.size() != MAX_LOTTO_NUMBERS) {
             throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
         }
-    }
-
-    private int findMatchNumberCount(final WinningNumbers winningNumbers) {
-        return (int) numbers.stream()
-                .filter(winningNumbers::contains)
-                .mapToInt(LottoNumber::getValue)
-                .count();
     }
 }
