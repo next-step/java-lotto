@@ -18,4 +18,12 @@ public class CalculateClientTest {
             CalculateClient.process("");
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("연산자가 가장 마지막에 있을때")
+    void operation_place_last(){
+        assertThatThrownBy(()->{
+            CalculateClient.process("1 + 2 +");
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }

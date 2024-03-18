@@ -12,6 +12,7 @@ public class CalculateClient {
         for(String split : splitInput){
             calculate.handle(split);
         }
+        calculate.validateIfOperationPlacedInLast();
         return calculate.getResult();
     }
 
