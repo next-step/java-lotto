@@ -25,9 +25,10 @@ class LottoTest {
         final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
         final BonusNumber bonusNumber = new BonusNumber(7);
+        final LottoResult lottoResult = new LottoResult(winningNumbers, bonusNumber);
 
         // when
-        final Rank rank = lotto.match(winningNumbers, bonusNumber);
+        final Rank rank = lotto.match(lottoResult);
 
         // then
         assertThat(rank).isEqualTo(Rank.FIRST);
@@ -39,9 +40,10 @@ class LottoTest {
         final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 7));
         final BonusNumber bonusNumber = new BonusNumber(6);
+        final LottoResult lottoResult = new LottoResult(winningNumbers, bonusNumber);
 
         // when
-        final Rank rank = lotto.match(winningNumbers, bonusNumber);
+        final Rank rank = lotto.match(lottoResult);
 
         // then
         assertThat(rank).isEqualTo(Rank.SECOND);
@@ -53,9 +55,10 @@ class LottoTest {
         final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 7));
         final BonusNumber bonusNumber = new BonusNumber(9);
+        final LottoResult lottoResult = new LottoResult(winningNumbers, bonusNumber);
 
         // when
-        final Rank rank = lotto.match(winningNumbers, bonusNumber);
+        final Rank rank = lotto.match(lottoResult);
 
         // then
         assertThat(rank).isEqualTo(Rank.THIRD);
@@ -67,9 +70,10 @@ class LottoTest {
         final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 7, 8));
         final BonusNumber bonusNumber = new BonusNumber(10);
+        final LottoResult lottoResult = new LottoResult(winningNumbers, bonusNumber);
 
         // when
-        final Rank rank = lotto.match(winningNumbers, bonusNumber);
+        final Rank rank = lotto.match(lottoResult);
 
         // then
         assertThat(rank).isEqualTo(Rank.FOURTH);
@@ -81,9 +85,10 @@ class LottoTest {
         final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 7, 8, 9));
         final BonusNumber bonusNumber = new BonusNumber(10);
+        final LottoResult lottoResult = new LottoResult(winningNumbers, bonusNumber);
 
         // when
-        final Rank rank = lotto.match(winningNumbers, bonusNumber);
+        final Rank rank = lotto.match(lottoResult);
 
         // then
         assertThat(rank).isEqualTo(Rank.FIFTH);
@@ -95,9 +100,10 @@ class LottoTest {
         final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 7, 8, 9, 10));
         final BonusNumber bonusNumber = new BonusNumber(15);
+        final LottoResult lottoResult = new LottoResult(winningNumbers, bonusNumber);
 
         // when
-        final Rank rank = lotto.match(winningNumbers, bonusNumber);
+        final Rank rank = lotto.match(lottoResult);
 
         // then
         assertThat(rank).isEqualTo(Rank.NONE);

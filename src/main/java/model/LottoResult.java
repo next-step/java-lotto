@@ -16,4 +16,12 @@ public class LottoResult {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 같으면 안 됩니다.");
         }
     }
+
+    public WinningNumbers getWinningNumbers() {
+        return winningNumbers;
+    }
+
+    public int getBonusNumberValue() {
+        return bonusNumber.getValue();
+    }
 }
