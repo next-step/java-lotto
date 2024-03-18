@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicketMachine;
 import lotto.domain.LottoTickets;
 import lotto.ui.InputView;
@@ -11,15 +12,15 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) {
-        int amount = InputView.readAmount();
+        int purchaseAmount = InputView.readAmount();
 
-        LottoTickets lottoTickets = LottoTicketMachine.issue(amount);
+        LottoTickets lottoTickets = LottoTicketMachine.issue(purchaseAmount);
         ResultView.printLottoTickets(lottoTickets);
 
         List<Integer> winNumbers = InputView.readWinNumbers();
-        Map<Integer, Integer> statisticsMap = lottoTickets.getLottoStatistics(winNumbers);
+        Map<Integer, Integer> statisticsMap = LottoStatistics.getLottoStatisticsMap(lottoTickets, winNumbers);
 
-        ResultView.printLottoStatistics(statisticsMap);
+        ResultView.printLottoStatistics(statisticsMap, purchaseAmount);
     }
 
 }

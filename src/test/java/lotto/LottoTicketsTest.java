@@ -16,7 +16,7 @@ public class LottoTicketsTest {
 
     @Nested
     @DisplayName("로또 당첨 통계 구하기")
-    class LottoStatistic {
+    class LottoStatistics {
 
         @ParameterizedTest(name = "[{index}] {0}개 일치 - {1}개")
         @CsvSource(value = {"3:1", "4:1", "5:1"}, delimiter = ':')

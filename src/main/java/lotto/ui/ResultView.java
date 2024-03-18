@@ -1,6 +1,6 @@
 package lotto.ui;
 
-import lotto.domain.LottoStatistic;
+import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
@@ -27,17 +27,24 @@ public class ResultView {
         return MessageFormat.format("{0}개를 구매했습니다.", count);
     }
 
-    public static void printLottoStatistics(Map<Integer, Integer> statisticsMap) {
-        List<Integer> matchCounts = LottoStatistic.getMatchCounts();
+    public static void printLottoStatistics(Map<Integer, Integer> statisticsMap, int purchaseAmount) {
+        List<Integer> matchCounts = LottoStatistics.getMatchCounts();
+
         StringBuilder stringBuilder = new StringBuilder();
         for (Integer matchCount : matchCounts) {
             stringBuilder.append(formatStatistic(statisticsMap, matchCount)).append(System.lineSeparator());
         }
+        stringBuilder.append(formatProfitRate(statisticsMap, purchaseAmount));
+
         System.out.println(stringBuilder);
     }
 
     private static String formatStatistic(Map<Integer, Integer> statisticsMap, Integer matchCount) {
         return MessageFormat.format("{0}개 일치 ({1}원) - {2}개"
-                , matchCount, LottoStatistic.getWinningAmount(matchCount), statisticsMap.get(matchCount));
+                , matchCount, LottoStatistics.getWinAmount(matchCount), statisticsMap.get(matchCount));
+    }
+
+    public static String formatProfitRate(Map<Integer, Integer> statisticsMap, int purchaseAmount) {
+        return MessageFormat.format("총 수익률은 {0}입니다.", LottoStatistics.calculateProfitRate(statisticsMap, purchaseAmount));
     }
 }
