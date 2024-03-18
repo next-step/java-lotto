@@ -59,4 +59,8 @@ public class Lotto {
 
         return new LottoNumberDto(numbers);
     }
+
+    public boolean contains(LottoNumber bonus) {
+        return this.lottoNumbers.contains(bonus);
+    }
 }

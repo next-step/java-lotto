@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.dto.OrderRequest;
 import lotto.model.Lotto;
 import lotto.model.LottoMachine;
+import lotto.model.LottoNumber;
 import lotto.model.LottoPaper;
 import lotto.model.Prize;
 import lotto.view.InputView;
@@ -25,6 +26,8 @@ public class LottoController {
         resultView.printOrderResponse(lottoPaper.toLottoNumberDtos());
 
         Lotto winningNumberLotto = inputView.askWinningNumbers();
+        LottoNumber bonusNumber = inputView.askBonusNumber(winningNumberLotto);
+        
         Prize prize = lottoPaper.matches(winningNumberLotto);
 
         resultView.printResult(prize, lottoPaper.getQuantity());

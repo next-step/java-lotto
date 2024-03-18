@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.exception.InvalidLottoException;
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 import lotto.model.LottoNumberFactory;
 
 import java.util.Arrays;
@@ -54,6 +55,29 @@ public class InputView {
             return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
             throw new InvalidLottoException("정수를 입력해 주세요", e);
+        }
+    }
+
+    public LottoNumber askBonusNumber(Lotto winningLottoNumber) {
+        System.out.println("보너스 볼을 입력해 주세요.");
+
+        try {
+            int bonus = toInt(SCANNER.nextLine());
+            LottoNumber bonusNumber = new LottoNumber(bonus);
+
+            assertDuplicatedBonus(winningLottoNumber, bonusNumber);
+
+            return bonusNumber;
+        } catch (InvalidLottoException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return askBonusNumber(winningLottoNumber);
+    }
+
+    private void assertDuplicatedBonus(Lotto winningLottoNumber, LottoNumber bonusNumber) {
+        if (winningLottoNumber.contains(bonusNumber)) {
+            throw new InvalidLottoException("당첨 번호와 중복되지 않는 번호를 입력하세요");
         }
     }
 
