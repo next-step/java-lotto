@@ -14,9 +14,9 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public Rank match(final LottoResult lottoResult) {
-        final int countOfMatch = findMatchNumberCount(lottoResult.getWinningNumbers());
-        final boolean contains = numbers.contains(lottoResult.getBonusNumberValue());
+    public Rank match(final LottoWinningNumber lottoWinningNumber) {
+        final int countOfMatch = findMatchNumberCount(lottoWinningNumber.getWinningNumbers());
+        final boolean contains = numbers.contains(lottoWinningNumber.getBonusNumberValue());
         return Rank.determine(countOfMatch, contains);
     }
 

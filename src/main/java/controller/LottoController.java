@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import model.BonusNumber;
 import model.LottoAmount;
 import model.LottoFactory;
-import model.LottoResult;
+import model.LottoWinningNumber;
 import model.Lottos;
 import model.WinningDetails;
 import model.WinningNumbers;
@@ -31,9 +31,9 @@ public class LottoController {
 
         final WinningNumbers winningNumbers = new WinningNumbers(inputView.inputWinningLottoNumbers());
         final BonusNumber bonusNumber = new BonusNumber(inputView.inputBonusNumber());
-        final LottoResult lottoResult = new LottoResult(winningNumbers, bonusNumber);
+        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, bonusNumber);
         final WinningDetails winningDetails = new WinningDetails();
-        winningDetails.makeWinningDetails(lottos, lottoResult);
+        winningDetails.makeWinningDetails(lottos, lottoWinningNumber);
         final BigDecimal profit = winningDetails.calculateProfit(lottoAmount);
 
         outputView.printWinningStatistics(winningDetails, profit);

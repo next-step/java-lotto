@@ -1,11 +1,11 @@
 package model;
 
-public class LottoResult {
+public class LottoWinningNumber {
 
     private final WinningNumbers winningNumbers;
     private final BonusNumber bonusNumber;
 
-    public LottoResult(final WinningNumbers winningNumbers, final BonusNumber bonusNumber) {
+    public LottoWinningNumber(final WinningNumbers winningNumbers, final BonusNumber bonusNumber) {
         validate(winningNumbers, bonusNumber);
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;

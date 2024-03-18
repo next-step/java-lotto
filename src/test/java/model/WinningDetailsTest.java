@@ -25,11 +25,11 @@ class WinningDetailsTest {
         ));
         final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
         final BonusNumber bonusNumber = new BonusNumber(7);
-        final LottoResult lottoResult = new LottoResult(winningNumbers, bonusNumber);
+        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, bonusNumber);
 
         // when
         final WinningDetails winningDetails = new WinningDetails();
-        winningDetails.makeWinningDetails(lottos, lottoResult);
+        winningDetails.makeWinningDetails(lottos, lottoWinningNumber);
 
         // then
         assertAll(

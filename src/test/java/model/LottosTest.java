@@ -16,10 +16,10 @@ class LottosTest {
                 new Lotto(List.of(1, 2, 3, 4, 8, 9))));
         final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
         final BonusNumber bonusNumber = new BonusNumber(7);
-        final LottoResult lottoResult = new LottoResult(winningNumbers, bonusNumber);
+        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, bonusNumber);
 
         // when
-        final List<Rank> ranks = lottos.determineRank(lottoResult);
+        final List<Rank> ranks = lottos.determineRank(lottoWinningNumber);
 
         // then
         assertThat(ranks).containsExactly(Rank.FIRST, Rank.SECOND, Rank.FOURTH);
