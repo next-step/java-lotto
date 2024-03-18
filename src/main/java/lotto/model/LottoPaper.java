@@ -1,11 +1,14 @@
 package lotto.model;
 
+import lotto.dto.LottoNumberDto;
 import lotto.exception.InvalidLottoException;
 
+import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 public class LottoPaper {
     private final List<Lotto> lottos;
@@ -18,21 +21,23 @@ public class LottoPaper {
         this.lottos = lottos;
     }
 
-    public int size() {
-        return lottos.size();
-    }
-
-    public boolean isEmpty() {
-        return this.lottos.isEmpty();
-    }
-
-    public Map<Integer, Integer> matches(Lotto other) {
+    public List<LottoNumberDto> toLottoNumberDtos() {
         return this.lottos.stream()
-                .map(lotto -> lotto.matches(other))
-                .collect(Collectors.toMap(Function.identity(), e -> 1, Integer::sum));
+                .map(Lotto::toLottoNumberDto)
+                .collect(toList());
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    public int getQuantity() {
+        return this.lottos.size();
+    }
+
+    public Prize matches(Lotto other) {
+        return new Prize(toRankEnumMap(other));
+    }
+
+    private EnumMap<Rank, Integer> toRankEnumMap(Lotto other) {
+        return this.lottos.stream()
+                .map(lotto -> lotto.match(other))
+                .collect(toMap(Function.identity(), e -> 1, Integer::sum, () -> new EnumMap<>(Rank.class)));
     }
 }

@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.dto.LottoNumberDto;
 import lotto.exception.InvalidLottoException;
 
 import java.util.HashSet;
@@ -36,30 +37,26 @@ public class Lotto {
         }
     }
 
-    public int matches(Lotto other) {
+    public List<LottoNumber> value() {
+        return lottoNumbers;
+    }
+
+    public Rank match(Lotto other) {
         if (other == null) {
             throw new InvalidLottoException("매칭할 수 있는 로또가 존재하지 않습니다");
         }
 
-        return other.lottoNumbers.stream()
-                .distinct()
-                .map(this::match)
-                .reduce(0, Integer::sum);
+        Set<LottoNumber> lottoNumberSet = new HashSet<>(this.lottoNumbers);
+        lottoNumberSet.retainAll(other.lottoNumbers);
+
+        return Rank.find(lottoNumberSet.size());
     }
 
-    public int match(LottoNumber other) {
-        return (int) this.lottoNumbers.stream()
-                .filter(lottoNumber -> lottoNumber.equals(other))
-                .count();
-    }
-
-    public String toJoinNumber(String delimiter, String prefix, String suffix) {
-        return this.lottoNumbers.stream()
+    public LottoNumberDto toLottoNumberDto() {
+        List<String> numbers = this.lottoNumbers.stream()
                 .map(LottoNumber::toString)
-                .collect(Collectors.joining(delimiter, prefix, suffix));
-    }
+                .collect(Collectors.toList());
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return new LottoNumberDto(numbers);
     }
 }

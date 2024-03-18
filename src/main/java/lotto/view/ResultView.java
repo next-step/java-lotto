@@ -1,10 +1,11 @@
 package lotto.view;
 
-import lotto.dto.OrderResponse;
-import lotto.model.Lotto;
+import lotto.dto.LottoNumberDto;
+import lotto.model.Prize;
 import lotto.model.Rank;
 
-import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String NEW_LINE = System.lineSeparator();
@@ -15,27 +16,28 @@ public class ResultView {
     private static final String RESULT_FORMAT = "%s개 일치 (%s원) - %s개";
     private static final String RATE_OF_RETURN_FORMAT = "총 수익률은 %.2f 입니다.";
 
-    public void printOrderResponse(OrderResponse response) {
+    public void printOrderResponse(List<LottoNumberDto> lottoNumberDtos) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(response.getQuantity()).append("개를 구매했습니다").append(NEW_LINE);
-        for (Lotto lotto : response.getLottos()) {
-            sb.append(lotto.toJoinNumber(DELIMITER, PREFIX, SUFFIX)).append(NEW_LINE);
+        sb.append(lottoNumberDtos.size()).append("개를 구매했습니다").append(NEW_LINE);
+        for (LottoNumberDto dto : lottoNumberDtos) {
+            sb.append(toJoinNumbers(dto.getNumbers())).append(NEW_LINE);
         }
 
         System.out.println(sb);
     }
 
-    public void printResult(OrderResponse response, Lotto winningNumbers) {
+    private String toJoinNumbers(List<String> lottoNumbers) {
+        return lottoNumbers.stream()
+                .collect(Collectors.joining(DELIMITER, PREFIX, SUFFIX));
+    }
+
+    public void printResult(Prize prize, int quantity) {
         StringBuilder sb = new StringBuilder();
 
-        int quantity = response.getQuantity();
-        Map<Integer, Integer> resultMap = response.matches(winningNumbers);
-
-
         appendPrefix(sb);
-        appendResult(resultMap, sb);
-        appendRateOfReturn(resultMap, quantity, sb);
+        appendResult(sb, prize);
+        appendRateOfReturn(sb, prize.rateOfReturn(quantity));
 
         System.out.println(sb);
     }
@@ -45,18 +47,18 @@ public class ResultView {
         sb.append("---------").append(NEW_LINE);
     }
 
-    private void appendResult(Map<Integer, Integer> resultMap, StringBuilder sb) {
+    private void appendResult(StringBuilder sb, Prize prize) {
         for (Rank rank : Rank.ranks()) {
             int ballCount = rank.getBallCount();
             int reward = rank.getReward();
-            int matchedCount = resultMap.getOrDefault(ballCount, 0);
+            int matchedCount = prize.rankCount(rank);
 
             String text = String.format(RESULT_FORMAT, ballCount, reward, matchedCount);
             sb.append(text).append(NEW_LINE);
         }
     }
 
-    private void appendRateOfReturn(Map<Integer, Integer> resultMap, int quantity, StringBuilder sb) {
-        sb.append(String.format(RATE_OF_RETURN_FORMAT, Rank.rateOfReturn(resultMap, quantity)));
+    private void appendRateOfReturn(StringBuilder sb, double rateOfReturn) {
+        sb.append(String.format(RATE_OF_RETURN_FORMAT, rateOfReturn));
     }
 }

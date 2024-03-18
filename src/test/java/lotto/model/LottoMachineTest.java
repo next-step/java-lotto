@@ -1,7 +1,6 @@
 package lotto.model;
 
 import lotto.dto.OrderRequest;
-import lotto.dto.OrderResponse;
 import lotto.exception.InvalidLottoException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,6 +23,6 @@ class LottoMachineTest {
         int given = 1000;
         assertThat(LottoMachine.purchase(new OrderRequest(given)))
                 .isNotNull()
-                .isInstanceOf(OrderResponse.class);
+                .isInstanceOf(LottoPaper.class);
     }
 }

@@ -3,17 +3,15 @@ package lotto.model;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static lotto.model.LottoMachine.LOTTO_PER_MONEY;
 
 public enum Rank {
     ONE(6, 2_000_000_000),
     TWO(5, 1_500_000),
     THREE(4, 50_000),
-    FOUR(3, 5_000);
+    FOUR(3, 5_000),
+    NO_MATCH(0, 0);
 
     private final int ballCount;
     private final int reward;
@@ -35,6 +33,7 @@ public enum Rank {
 
     static {
         sortedRank = Stream.of(values())
+                .filter(rank -> !rank.equals(NO_MATCH))
                 .sorted(Comparator.comparingInt(value -> value.ballCount))
                 .collect(Collectors.toList());
     }
@@ -43,17 +42,15 @@ public enum Rank {
         return Collections.unmodifiableList(sortedRank);
     }
 
-    // 수익률 = 총 수익 / 총 비용
-    public static double rateOfReturn(Map<Integer, Integer> resultMap, int quantity) {
-        return (double) revenue(resultMap) / (quantity * LOTTO_PER_MONEY);
+    public static Rank find(int ballCount) {
+        return ranks().stream()
+                .filter(rank -> rank.sameBallCount(ballCount))
+                .findFirst()
+                .orElse(Rank.NO_MATCH);
     }
 
-    private static long revenue(Map<Integer, Integer> resultMap) {
-        return ranks().stream()
-                .filter(rank -> resultMap.getOrDefault(rank.ballCount, 0) != 0)
-                .map(rank -> resultMap.get(rank.ballCount) * rank.reward)
-                .mapToLong(Integer::longValue)
-                .sum();
+    private boolean sameBallCount(int ballCount) {
+        return this.ballCount == ballCount;
     }
 }
 

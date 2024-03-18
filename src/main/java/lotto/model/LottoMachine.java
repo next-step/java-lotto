@@ -1,7 +1,6 @@
 package lotto.model;
 
 import lotto.dto.OrderRequest;
-import lotto.dto.OrderResponse;
 import lotto.exception.InvalidLottoException;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ public class LottoMachine {
     private LottoMachine() {
     }
 
-    public static OrderResponse purchase(OrderRequest orderRequest) {
+    public static LottoPaper purchase(OrderRequest orderRequest) {
         int money = orderRequest.getMoney();
 
         assertMoney(money);
@@ -25,7 +24,7 @@ public class LottoMachine {
             throw new InvalidLottoException("로또를 구매하실 수 없습니다");
         }
 
-        return new OrderResponse(quantity, prepare(quantity));
+        return prepare(quantity);
     }
 
     private static int calculate(int money) {
