@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CalculateTest {
 
@@ -66,5 +67,15 @@ class CalculateTest {
             calculate.process(input);
         }
         assertThat(calculate.getResult()).isEqualTo(15);
+    }
+
+    @Test
+    void not_operator(){
+        final String[] inputs = {"2", "&", "2"};
+        assertThatThrownBy(()->{
+            for(String input : inputs){
+                calculate.process(input);
+            }
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
