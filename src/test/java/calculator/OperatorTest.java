@@ -41,13 +41,6 @@ class OperatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"4:2", "10:5", "150:5", "168:8"}, delimiter = ':')
-    @DisplayName("Operator.NONE의 calculate 호출 시 두번 째 파라미터 반환")
-    void calculate_none(int augend, int addend) {
-        assertThat(Operator.NONE.calculate(augend, addend)).isEqualTo(addend);
-    }
-
-    @ParameterizedTest
     @MethodSource("operatorStringAndOperatorEnum")
     @DisplayName("findOperationByValue의 매개변수 연산자(*,/,+,-)에 따라 해당하는 Operator 반환")
     void findOperationByValue_success(String operatorStr, Operator operatorEnum) {

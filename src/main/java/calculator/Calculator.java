@@ -9,7 +9,7 @@ public class Calculator {
     public static int calculate(String input) {
         validEmptyInput(input);
         initialExpressionQueue(input);
-        return calculateExpression(0, Operator.NONE);
+        return calculateExpression(0, Operator.PLUS);
     }
 
     private static void validEmptyInput(String input) {
