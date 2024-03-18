@@ -1,10 +1,24 @@
 package caculator;
 
-public class Main {
-  public static void main(String[] args) {
-    Calculator calculator = new Calculator();
+import caculator.domain.Number;
 
-    final String expression = calculator.readInput();
-    System.out.println("Answer: " + calculator.calculate(calculator.extractOperands(expression), calculator.extractOperators(expression)));
+import java.util.Scanner;
+
+public class Main {
+  private static final Scanner scanner = new Scanner(System.in);
+
+  public static void main(String[] args) {
+    final String expression = readInput();
+
+    Calculator calculator = new Calculator();
+    displayResult(calculator.calculate(calculator.extractOperands(expression), calculator.extractOperators(expression)));
+  }
+
+  private static String readInput() {
+    return scanner.nextLine();
+  }
+
+  private static void displayResult(Number result) {
+    System.out.println("Answer: " + result);
   }
 }

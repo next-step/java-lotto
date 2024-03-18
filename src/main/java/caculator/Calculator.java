@@ -6,17 +6,17 @@ import caculator.domain.Operator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
-  public String readInput() {
-    return (new Scanner(System.in)).nextLine();
-  }
+
+  private final Pattern NUMBER = Pattern.compile("[0-9]+");
+  private final Pattern OPERATOR = Pattern.compile("[+\\-*/]");
 
   public List<Number> extractOperands(String expression) {
-    final Pattern pattern = Pattern.compile("[0-9]+");
-    final Matcher matcher = pattern.matcher(expression);
+    final Matcher matcher = NUMBER.matcher(expression);
     final List<Number> operands = new ArrayList<>();
 
     while (matcher.find()) {
@@ -27,8 +27,7 @@ public class Calculator {
   }
 
   public List<Operator> extractOperators(String expression) {
-    final Pattern pattern = Pattern.compile("[+\\-*/]");
-    final Matcher matcher = pattern.matcher(expression);
+    final Matcher matcher = OPERATOR.matcher(expression);
     final List<Operator> operators = new ArrayList<>();
 
     while (matcher.find()) {
@@ -38,11 +37,9 @@ public class Calculator {
     return operators;
   }
 
-  public int calculate(List<Number> numbers, List<Operator> operators) {
-    Number acc = numbers.get(0);
-    for (int i = 1; i < numbers.size(); i++) {
-      acc = acc.apply(operators.get(i - 1), numbers.get(i));
-    }
-    return acc.value();
+  public Number calculate(List<Number> numbers, List<Operator> operators) {
+    final AtomicInteger index = new AtomicInteger();
+    final int SKIP_FIRST = 1;
+    return numbers.subList(SKIP_FIRST, numbers.size()).stream().reduce(numbers.get(0), (acc, cur) -> acc.apply(operators.get(index.getAndIncrement()), cur));
   }
 }
