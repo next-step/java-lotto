@@ -37,11 +37,32 @@ public class CalculatorTest {
         assertThat(new Calculator().calculate(input)).isEqualTo(expected);
     }
 
-    @DisplayName("입력 1 + 3 || 출력 4")
+    @DisplayName("덧셈")
     @Test
     void add() {
         String input = "1 + 3";
         assertThat(new Calculator().calculate(input)).isEqualTo(4);
+    }
+
+    @DisplayName("뺄셈")
+    @Test
+    void minus() {
+        String input = "1 - 3";
+        assertThat(new Calculator().calculate(input)).isEqualTo(-2);
+    }
+
+    @DisplayName("곱셈")
+    @Test
+    void multiply() {
+        String input = "1 * 3";
+        assertThat(new Calculator().calculate(input)).isEqualTo(3);
+    }
+
+    @DisplayName("나눗셈")
+    @Test
+    void divide() {
+        String input = "1 / 3";
+        assertThat(new Calculator().calculate(input)).isEqualTo(0);
     }
 
 }
