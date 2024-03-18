@@ -26,7 +26,7 @@ public class Validator {
         return stringArray.length == length;
     }
 
-    public static boolean isInRange(int number, int min, int max) {
-        return min <= number && number <= max;
+    public static boolean isInRange(int number, int minimum, int maximum) {
+        return minimum <= number && number <= maximum;
     }
 }

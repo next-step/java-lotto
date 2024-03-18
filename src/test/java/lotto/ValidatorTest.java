@@ -49,7 +49,7 @@ class ValidatorTest {
     @ParameterizedTest
     @CsvSource(value = {"1:1:10:true", "22:1:43:true", "44:1:43:false", "50:1:43:false"}, delimiter = ':')
     @DisplayName("isInRange(): min <= number <= max인 경우 true를 그렇지 않은 경우 false를 반환한다.")
-    void testIsInRange(int number, int min, int max, boolean expected) {
-        assertThat(Validator.isInRange(number, min, max)).isEqualTo(expected);
+    void testIsInRange(int number, int minimum, int maximum, boolean expected) {
+        assertThat(Validator.isInRange(number, minimum, maximum)).isEqualTo(expected);
     }
 }
