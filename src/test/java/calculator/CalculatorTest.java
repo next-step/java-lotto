@@ -16,8 +16,8 @@ public class CalculatorTest {
     @NullAndEmptySource
     @DisplayName("입력값이_null_또는_공백이면_IllegalArgumentException")
     void calculate_exception(String input) {
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> calculate(input));
+        assertThatThrownBy(() -> calculate(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -52,7 +52,6 @@ public class CalculatorTest {
     @Test
     void 사칙연산자_외_문자() {
         assertThatThrownBy(() -> calculate("1 ^ 1"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .withFailMessage("유효하지 않은 연산자: ^");
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

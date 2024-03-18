@@ -1,25 +1,25 @@
 package calculator;
 
 import java.util.Arrays;
-import java.util.function.BiFunction;
+import java.util.function.IntBinaryOperator;
 
 public enum Operator {
     PLUS("+", (num1, num2) -> num1 + num2),
     MINUS("-", (num1, num2) -> num1 - num2),
     DIVIDE("/", (num1, num2) -> num1 / num2),
-    SQUARE("*", (num1, num2) -> num1 * num2),
+    MULTIPLY("*", (num1, num2) -> num1 * num2),
     NONE("", (num1, num2) -> num2);
 
     private final String value;
-    private final BiFunction<Integer, Integer, Integer> operator;
+    private final IntBinaryOperator operator;
 
-    Operator(String value, BiFunction<Integer, Integer, Integer> operator) {
+    Operator(String value, IntBinaryOperator operator) {
         this.value = value;
         this.operator = operator;
     }
 
     public int calculate(int result, int expression) {
-        return operator.apply(result, expression);
+        return operator.applyAsInt(result, expression);
     }
 
     public static Operator findOperationByValue(String value) {
