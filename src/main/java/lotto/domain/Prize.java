@@ -45,4 +45,8 @@ public enum Prize {
     public int matchingCount() {
         return matchingCount;
     }
+
+    public BonusCondition bonusCondition() {
+        return bonusCondition;
+    }
 }
