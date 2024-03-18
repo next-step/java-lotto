@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
-public class Calculator {
+public class StringCalculator {
     // 사칙연산 기호
     private static final String ADD = "+";
     private static final String SUBSTRACT = "-";
