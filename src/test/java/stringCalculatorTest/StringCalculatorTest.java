@@ -39,6 +39,14 @@ public class StringCalculatorTest {
         Assertions.assertThat(result).isEqualTo(expected);
     }
 
+    @ParameterizedTest(name = "곱셈만 하는 {0} 의 결과값은 {1} 이다")
+    @CsvSource(value = {"2 + 3 * 4 / 2=10"}, delimiter = '=')
+    void calculationTest(String input, int expected) {
+        int result = StringCalculator.calculation(input);
+
+        Assertions.assertThat(result).isEqualTo(expected);
+    }
+
     @ParameterizedTest(name = "{0} 값을 입력시 IllegalArgumentException 발생")
     @NullAndEmptySource
     void inputBlankTest(String input) {
