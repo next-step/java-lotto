@@ -7,6 +7,10 @@ import java.util.function.BiFunction;
 
 public class StringCalculator {
     private static final List<String> OPERATION_SYMBOL = List.of("+", "-", "*", "/");
+
+    private static final String BLANK = " ";
+    private static final String BLANK_INPUT_MESSAGE = "input value is blank";
+    private static final String INVALID_OPERATOR_MESSAGE = "input value is invalid operation symbol";
     private static Map<String, BiFunction<Integer, Integer, Integer>> operations = new HashMap<>();
 
     static {
@@ -35,7 +39,7 @@ public class StringCalculator {
     public static int calculation(String input) {
         checkBlank(input);
 
-        List<String> tokens = List.of(input.split(" "));
+        List<String> tokens = List.of(input.split(BLANK));
         ckeckOperations(tokens);
 
         return calculate(tokens);
@@ -46,7 +50,7 @@ public class StringCalculator {
 
         for (int i = 1; i < tokens.size(); i += 2) {
             String operator = tokens.get(i);
-            int operand = Integer.parseInt(tokens.get(i+1));
+            int operand = Integer.parseInt(tokens.get(i + 1));
             result = operations.get(operator).apply(result, operand);
         }
         return result;
@@ -54,7 +58,7 @@ public class StringCalculator {
 
     private static void checkBlank(String input) {
         if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException("input value is blank");
+            throw new IllegalArgumentException(BLANK_INPUT_MESSAGE);
         }
     }
 
@@ -66,7 +70,7 @@ public class StringCalculator {
 
     private static void ckeckOpertaion(String token) {
         if (!OPERATION_SYMBOL.contains(token)) {
-            throw new IllegalArgumentException("input value is invalid operation symbol");
+            throw new IllegalArgumentException(INVALID_OPERATOR_MESSAGE);
         }
     }
 }
