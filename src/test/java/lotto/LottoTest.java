@@ -77,7 +77,7 @@ public class LottoTest {
         List<Integer> currentNumbers = input;
         Lotto currentNumber = new Lotto(currentNumbers);
 
-        long matchedCount = currentNumber.compareWinNumber(winNumber);
+        int matchedCount = currentNumber.compareWinNumber(winNumber);
 
         //when
         int amount = Amount.getAmount(matchedCount);

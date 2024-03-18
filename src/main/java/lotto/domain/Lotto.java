@@ -53,8 +53,8 @@ public class Lotto {
         return numbers.size();
     }
 
-    public long compareWinNumber(Lotto winNumber) {
-        return numbers.stream()
+    public int compareWinNumber(Lotto winNumber) {
+        return (int) numbers.stream()
                 .filter(number -> winNumber.contains(number))
                 .count();
     }
