@@ -18,6 +18,12 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
+    public List<Rank> determineRank(final LottoResult lottoResult) {
+        return lottos.stream()
+                .map(lotto -> lotto.match(lottoResult))
+                .collect(Collectors.toList());
+    }
+
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
