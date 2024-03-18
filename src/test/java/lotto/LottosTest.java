@@ -11,6 +11,7 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Prize;
 import lotto.domain.Prizes;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -25,10 +26,18 @@ class LottosTest {
             makeLotto(45, 44, 43, 42, 41)
         );
 
-        Lotto winningLotto = makeLotto(1, 2, 3, 4, 5, 6);
+        WinningLotto winningLotto = makeWinningLotto(1, 1, 2, 3, 4, 5, 6);
         Prizes judge = lottos.judge(winningLotto);
 
-        assertThat(judge.count(Prize.MATCHING_THREE)).isEqualTo(2);
+        assertThat(judge.count(Prize.FIFTH_PLACE)).isEqualTo(2);
+    }
+
+    private WinningLotto makeWinningLotto(int bonusBallNumber, int... _balls) {
+        Set<Ball> balls = Arrays.stream(_balls)
+            .mapToObj(Ball::new)
+            .collect(Collectors.toSet());
+        Ball bonusBall = new Ball(bonusBallNumber);
+        return new WinningLotto(balls, bonusBall);
     }
 
     private Lottos makeLottos(Lotto... _lottos) {

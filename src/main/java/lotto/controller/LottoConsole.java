@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoStore;
 import lotto.domain.Lottos;
 import lotto.domain.Prizes;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -23,7 +24,7 @@ public class LottoConsole {
 
         outputView.printPurchasedLottos(lottos);
 
-        Lotto winningLotto = inputView.inputWinningLotto();
+        WinningLotto winningLotto = inputView.inputWinningLotto();
 
         Prizes prizes = lottos.judge(winningLotto);
         outputView.printJudgeResult(lottos.price(), prizes);

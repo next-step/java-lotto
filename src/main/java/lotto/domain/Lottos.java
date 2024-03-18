@@ -11,7 +11,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Prizes judge(Lotto winningLotto) {
+    public Prizes judge(WinningLotto winningLotto) {
         List<Prize> prizes = new ArrayList<>();
         for (Lotto lotto : lottos) {
             prizes.add(lotto.judge(winningLotto));
