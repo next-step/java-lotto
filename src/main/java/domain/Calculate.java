@@ -19,6 +19,12 @@ public class Calculate {
         if(isNumber(input) && operatorCache.equals("-")){
             minus(toInts(input));
         }
+        if(isNumber(input) && operatorCache.equals("*")){
+            multiple(toInts(input));
+        }
+        if(isNumber(input) && operatorCache.equals("/")){
+            divide(toInts(input));
+        }
         operatorCache = input;
     }
 
@@ -36,6 +42,14 @@ public class Calculate {
 
     private void plus(int number){
         numberCache += number;
+    }
+
+    private void multiple(int number){
+        numberCache *= number;
+    }
+
+    private void divide(int number){
+        numberCache /= number;
     }
 
     private static boolean isNumber(String str) {
