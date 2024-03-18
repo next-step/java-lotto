@@ -16,11 +16,11 @@
 
 ## Todo - 기능 구현 목록
 
-- 입력 1 + 3 - 3 * 3     || 출력 3
-- 입력 1 + 3 - 3 * 3 / 3 || 출력 1
 - 입력 null,빈 공백 -> IllegalArgumentException throw
 - 사칙연산 아닐경우   -> IllegalArgumentException throw
 
 ## Done
 - 입력 1 + 3             || 출력 4
 - 입력 1 + 3 - 3         || 출력 1
+- 입력 1 + 3 - 3 * 3     || 출력 3
+- 입력 1 + 3 - 3 * 3 / 3 || 출력 1
