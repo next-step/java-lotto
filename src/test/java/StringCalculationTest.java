@@ -17,7 +17,7 @@ public class StringCalculationTest {
 
     @DisplayName("문자열을 순서대로 사칙연상을 할 수 있다,")
     @ParameterizedTest
-    @CsvSource(value = {"1 + 3,4"}, delimiterString = ",")
+    @CsvSource(value = {"1 + 3,4", "1 - 2,-1",}, delimiterString = ",")
     void calculate(String input, int expectedResult) {
         int actualResult = StringCalculation.calculate(input);
         assertThat(actualResult).isEqualTo(expectedResult);

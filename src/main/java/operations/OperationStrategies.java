@@ -3,7 +3,7 @@ package operations;
 import java.util.List;
 
 public class OperationStrategies {
-    private final static List<CalculateStrategy> strategies = List.of(new Add());
+    private final static List<CalculateStrategy> strategies = List.of(new Add(), new Minus());
 
     public static CalculateStrategy getOperation(String[] strings, int i) {
         return strategies.stream()
