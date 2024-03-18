@@ -17,4 +17,8 @@ public class BonusNumber {
             throw new IllegalArgumentException("보너스 볼의 범위는 1에서 45 사이의 숫자여야 합니다.");
         }
     }
+
+    public int getValue() {
+        return value;
+    }
 }
