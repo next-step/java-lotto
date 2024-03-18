@@ -23,15 +23,15 @@ public enum LottoInformation {
 
     private static final Map<Integer, Integer> matchAmountMap = new HashMap<>();
     static {
-        for (LottoInformation statistic : LottoInformation.values()) {
-            matchAmountMap.put(statistic.matchCount, statistic.winAmount);
+        for (LottoInformation information : LottoInformation.values()) {
+            matchAmountMap.put(information.matchCount, information.winAmount);
         }
     }
 
     private static final List<Integer> matchCounts = new ArrayList<>();
     static {
-        for (LottoInformation statistic : LottoInformation.values()) {
-            matchCounts.add(statistic.matchCount);
+        for (LottoInformation information : LottoInformation.values()) {
+            matchCounts.add(information.matchCount);
         }
         Collections.sort(matchCounts);
     }
