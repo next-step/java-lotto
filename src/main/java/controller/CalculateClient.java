@@ -6,10 +6,10 @@ import domain.CalculateHandler;
 public class CalculateClient {
 
     public static int process(String input) {
-        if(isNullOrEmpty(input)) throw new IllegalArgumentException();
+        if (isNullOrEmpty(input)) throw new IllegalArgumentException();
         String[] splitInput = input.split(" ");
         CalculateHandler calculate = new CalculateHandler();
-        for(String split : splitInput){
+        for (String split : splitInput) {
             calculate.handle(split);
         }
         calculate.validateIfOperationPlacedInLast();

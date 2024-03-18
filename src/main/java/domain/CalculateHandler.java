@@ -8,14 +8,14 @@ public class CalculateHandler {
     private Operator operatorCache;
     private String previousState = "";
 
-    public void handle(String input){
-        if(!isNumber(input) && "".equals(previousState)) throw new IllegalArgumentException();
-        if(isNumber(input) && "".equals(previousState)){
+    public void handle(String input) {
+        if (!isNumber(input) && "".equals(previousState)) throw new IllegalArgumentException();
+        if (isNumber(input) && "".equals(previousState)) {
             numberCache = toInts(input);
             previousState = input;
             return;
         }
-        if(isNumber(input)){
+        if (isNumber(input)) {
             validateIfDuplication(input);
             numberCache = operatorCache.apply(numberCache, toInts(input));
             previousState = input;
@@ -27,19 +27,19 @@ public class CalculateHandler {
     }
 
     private void validateIfDuplication(String input) {
-        if(isNumber(input) && isNumber(previousState)) throw new IllegalArgumentException();
-        if(!isNumber(input) && !isNumber(previousState)) throw new IllegalArgumentException();
+        if (isNumber(input) && isNumber(previousState)) throw new IllegalArgumentException();
+        if (!isNumber(input) && !isNumber(previousState)) throw new IllegalArgumentException();
     }
 
-    public void validateIfOperationPlacedInLast(){
-        if(!isNumber(previousState)) throw new IllegalArgumentException();
+    public void validateIfOperationPlacedInLast() {
+        if (!isNumber(previousState)) throw new IllegalArgumentException();
     }
 
     private int toInts(String input) {
         return Integer.parseInt(input);
     }
-    
-    public int getResult(){
+
+    public int getResult() {
         return this.numberCache;
     }
 }

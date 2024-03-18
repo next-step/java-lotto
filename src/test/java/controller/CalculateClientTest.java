@@ -9,7 +9,7 @@ public class CalculateClientTest {
 
     @Test
     @DisplayName("null이나 빈 문자열이라면 예외")
-    void null_or_empty(){
+    void null_or_empty() {
         assertThatThrownBy(() -> {
             CalculateClient.process(null);
         }).isInstanceOf(IllegalArgumentException.class);
@@ -21,8 +21,8 @@ public class CalculateClientTest {
 
     @Test
     @DisplayName("연산자가 가장 마지막에 있을때")
-    void operation_place_last(){
-        assertThatThrownBy(()->{
+    void operation_place_last() {
+        assertThatThrownBy(() -> {
             CalculateClient.process("1 + 2 +");
         }).isInstanceOf(IllegalArgumentException.class);
     }

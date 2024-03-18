@@ -9,7 +9,7 @@ class NumberUtilsTest {
 
     @ParameterizedTest
     @CsvSource(value = {"123:true", "+:false"}, delimiter = ':')
-    void is_number(String input, boolean result){
+    void is_number(String input, boolean result) {
         boolean isNumber = NumberUtils.isNumber(input);
         assertThat(result).isEqualTo(isNumber);
     }
