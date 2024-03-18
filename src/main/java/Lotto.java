@@ -11,6 +11,7 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> numbers) {
+        Collections.sort(numbers);
         this.numbers = numbers;
     }
 
