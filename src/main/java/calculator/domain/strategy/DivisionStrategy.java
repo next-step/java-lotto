@@ -6,7 +6,7 @@ import calculator.domain.type.StringOperator;
 public class DivisionStrategy implements CalculateStrategy {
   @Override
   public int calculate(int firstOperand, Operator operator, int secondOperand) {
-    if (new Operator(StringOperator.DIVISION.getOperator()).equals(operator)) {
+    if (new Operator(StringOperator.DIVISION).equals(operator)) {
       return firstOperand / secondOperand;
     }
 

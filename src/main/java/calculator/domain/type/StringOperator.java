@@ -10,6 +10,7 @@ public enum StringOperator {
   DIVISION("/"),
   MULTIPLICATION("*");
 
+  public static final String THIS_OPERATOR_IS_NOT_SUPPORTED = "%s(은)는 지원하지 않는 연산자 입니다. 입력 값을 다시 확인해주세요.";
   private static final List<String> ALL_OPERATORS = Arrays.stream(StringOperator.values()).map(it -> it.operator).collect(Collectors.toList());
   private final String operator;
 
@@ -25,10 +26,6 @@ public enum StringOperator {
     return Arrays.stream(StringOperator.values())
         .filter(it -> it.operator.equals(value))
         .findFirst()
-        .orElseThrow(() -> new IllegalArgumentException("변환 가능한 연산자가 존재하지 않습니다."));
-  }
-
-  public String getOperator() {
-    return operator;
+        .orElseThrow(() -> new IllegalArgumentException(String.format(THIS_OPERATOR_IS_NOT_SUPPORTED, value)));
   }
 }

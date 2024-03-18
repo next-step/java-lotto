@@ -3,6 +3,7 @@ package calculator;
 import calculator.domain.CalculatorQueue;
 import calculator.domain.Operand;
 import calculator.domain.Operator;
+import calculator.domain.type.StringOperator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,9 +14,8 @@ import java.util.Queue;
 
 import static calculator.domain.CalculatorQueue.CALCULATOR_INPUT_INCORRECT;
 import static calculator.domain.Operand.ENTERED_NON_NUMERIC_VALUE;
-import static calculator.domain.Operator.THIS_OPERATOR_IS_NOT_SUPPORTED;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static calculator.domain.type.StringOperator.THIS_OPERATOR_IS_NOT_SUPPORTED;
+import static org.assertj.core.api.Assertions.*;
 
 public class InputTest {
 
@@ -58,9 +58,9 @@ public class InputTest {
   @DisplayName("입력 값으로 들어온 사칙연산 기호를 순서대로 저장하는지 테스트")
   void inputTest5() {
     Queue<Operator> operators = CalculatorQueue.of("2 + 3 * 4 / 2").getOperators();
-    assertThat(operators.poll()).isEqualTo(new Operator("+"));
-    assertThat(operators.poll()).isEqualTo(new Operator("*"));
-    assertThat(operators.poll()).isEqualTo(new Operator("/"));
+    assertThat(operators.poll()).isEqualTo(new Operator(StringOperator.ADDITION));
+    assertThat(operators.poll()).isEqualTo(new Operator(StringOperator.MULTIPLICATION));
+    assertThat(operators.poll()).isEqualTo(new Operator(StringOperator.DIVISION));
   }
 
   @Test

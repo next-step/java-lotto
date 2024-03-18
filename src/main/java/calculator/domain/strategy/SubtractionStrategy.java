@@ -6,7 +6,7 @@ import calculator.domain.type.StringOperator;
 public class SubtractionStrategy implements CalculateStrategy {
   @Override
   public int calculate(int firstOperand, Operator operator, int secondOperand) {
-    if (new Operator(StringOperator.SUBTRACTION.getOperator()).equals(operator)) {
+    if (new Operator(StringOperator.SUBTRACTION).equals(operator)) {
       return firstOperand - secondOperand;
     }
 
