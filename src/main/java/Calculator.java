@@ -11,6 +11,10 @@ public class Calculator {
             if (i % 2 == 0 && "-".equals(strings[i - 1])) {
                 result -= Integer.parseInt(strings[i]);
             }
+
+            if (i % 2 == 0 && "*".equals(strings[i - 1])) {
+                result *= Integer.parseInt(strings[i]);
+            }
         }
         return result;
     }
