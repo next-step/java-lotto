@@ -1,34 +1,44 @@
 package domain;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculate {
 
     private static final Pattern pattern = Pattern.compile("\\d");
+    private int numberCache;
+    private String operatorCache = "";
 
-    public static int process(String input) {
-        if(isNullOrEmpty(input)) throw new IllegalArgumentException();
-        String[] splitInput = input.split(" ");
-        int result = 0;
-        for(String str : splitInput){
-            result = handle(result, str);
+    public void process(String input){
+        if(isNumber(input) && "".equals(operatorCache)){
+            numberCache = toInts(input);
+            return;
         }
-        return result;
+        if(isNumber(input) && operatorCache.equals("+")){
+            plus(toInts(input));
+        }
+        if(isNumber(input) && operatorCache.equals("-")){
+            minus(toInts(input));
+        }
+        operatorCache = input;
     }
 
-    private static int handle(int result, String str) {
-        if(isNumber(str)){
-            result += Integer.parseInt(str);
-        }
-        return result;
+    private int toInts(String input) {
+        return Integer.parseInt(input);
+    }
+
+    public int getResult() {
+        return numberCache;
+    }
+
+    private void minus(int number) {
+        numberCache -= number;
+    }
+
+    private void plus(int number){
+        numberCache += number;
     }
 
     private static boolean isNumber(String str) {
         return pattern.matcher(str).find();
-    }
-
-    private static boolean isNullOrEmpty(String input) {
-        return input == null || "".equals(input);
     }
 }
