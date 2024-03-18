@@ -12,7 +12,7 @@ public class LottoWinningNumber {
     }
 
     private void validate(final WinningNumbers winningNumbers, final LottoNumber lottoNumber) {
-        if (winningNumbers.contains(lottoNumber.getValue())) {
+        if (winningNumbers.contains(lottoNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 같으면 안 됩니다.");
         }
     }
@@ -21,7 +21,7 @@ public class LottoWinningNumber {
         return winningNumbers;
     }
 
-    public int getBonusNumberValue() {
-        return lottoNumber.getValue();
+    public LottoNumber getLottoNumber() {
+        return lottoNumber;
     }
 }
