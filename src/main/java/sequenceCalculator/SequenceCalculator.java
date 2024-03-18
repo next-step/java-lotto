@@ -9,27 +9,14 @@ public class SequenceCalculator {
 
         String[] split = input.split(" ");
         int result = 0;
-        String operation = "+";
-        for (int i = 0; i < split.length; i++) {
-            if (ExpressionChecker.isDigit(split[i])) {
-                switch (operation) {
-                    case "+":
-                        result += Integer.parseInt(split[i]);
-                        break;
-                    case "-":
-                        result -= Integer.parseInt(split[i]);
-                        break;
-                    case "*":
-                        result *= Integer.parseInt(split[i]);
-                        break;
-                    case "/":
-                        result /= Integer.parseInt(split[i]);
-                        break;
-                }
+        Operator operator = Operator.PLUS;
+        for (String expression : split) {
+            if (ExpressionChecker.isDigit(expression)) {
+                result = operator.calculate(result, Integer.parseInt(expression));
                 continue;
             }
-            if (ExpressionChecker.isBasicOperation(split[i])) {
-                operation = split[i];
+            if (ExpressionChecker.isBasicOperation(expression)) {
+                operator = Operator.findOperator(expression);
             }
         }
 

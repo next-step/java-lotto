@@ -44,6 +44,12 @@ public class SequenceCalculatorTest {
         SequenceCalculator calculator = new SequenceCalculator();
         Assertions.assertThat(calculator.calculate("8 - 2")).isEqualTo(6);
     }
+    @Test
+    @DisplayName("모든 사칙연산이 들어간 문자열 계산")
+    void CALCULATE_WITH_ALL_BASIC_OPERATOR_TEST(){
+        SequenceCalculator calculator = new SequenceCalculator();
+        Assertions.assertThat(calculator.calculate("2 + 3 * 4 / 2")).isEqualTo(10);
+    }
 
 
 }
