@@ -13,8 +13,8 @@ public class Lotto {
         }
     }
 
-    public Lotto(List<Integer> testNumber) {
-        numbers.addAll(testNumber);
+    public Lotto(List<Integer> numbers) {
+        this.numbers.addAll(numbers);
     }
 
     private int createRandomNumber() {

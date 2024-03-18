@@ -15,6 +15,10 @@ public class LotteryAwardSystemTest {
 
     private static final List<Lotto> testLottos = new ArrayList<>();
     private static final Lotto winnerNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    private static final Integer FIRST_WINNER_PRIZE = 2000000000;
+    private static final Integer SECOND_WINNER_PRIZE = 1500000;
+    private static final Integer THIRD_WINNER_PRIZE = 50000;
+    private static final Integer FOURTH_WINNER_PRIZE = 5000;
 
     @BeforeAll
     static void beforeAll() {
@@ -42,5 +46,18 @@ public class LotteryAwardSystemTest {
         LotteryAwardSystem lottoSystem = new LotteryAwardSystem(testLottos, winnerNumbers, 4000);
 
         assertThat(lottoSystem.getProfitRate()).isEqualTo(500388.75);
+    }
+
+    @Test
+    public void 당첨_수익금을_알려준다() {
+        LotteryAwardSystem lottoSystem = new LotteryAwardSystem(testLottos, winnerNumbers, 4000);
+        Map<Integer, Integer> prizeMap = lottoSystem.getPrizeMap();
+
+        assertAll(
+                () -> assertThat(prizeMap.get(6)).isEqualTo(FIRST_WINNER_PRIZE),
+                () -> assertThat(prizeMap.get(5)).isEqualTo(SECOND_WINNER_PRIZE),
+                () -> assertThat(prizeMap.get(4)).isEqualTo(THIRD_WINNER_PRIZE),
+                () -> assertThat(prizeMap.get(3)).isEqualTo(FOURTH_WINNER_PRIZE)
+        );
     }
 }

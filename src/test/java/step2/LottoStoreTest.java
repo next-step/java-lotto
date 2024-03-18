@@ -35,4 +35,10 @@ public class LottoStoreTest {
         List<Lotto> lottoList = lottoStore.getLottos();
         assertThat(lottoList.size()).isEqualTo(10);
     }
+
+    @Test
+    public void 전달받은_돈을_int_형식으로_반환한다() {
+        LottoStore lottoStore = new LottoStore("10000");
+        assertThat(lottoStore.getBuyMoney()).isEqualTo(10000);
+    }
 }

@@ -49,7 +49,7 @@ public class LotteryAwardSystem {
         double sum = 0;
         for (Integer key : prizeMap.keySet()) {
             int prize = prizeMap.get(key);
-            sum = sum + prize * winnersCountMap.get(key);
+            sum = sum + prize * winnersCountMap.getOrDefault(key, 0);
         }
         return sum;
     }
@@ -60,5 +60,9 @@ public class LotteryAwardSystem {
 
     public double getProfitRate() {
         return profitRate;
+    }
+
+    public Map<Integer, Integer> getPrizeMap() {
+        return Collections.unmodifiableMap(prizeMap);
     }
 }

@@ -7,11 +7,12 @@ import java.util.List;
 public class LottoStore {
 
     private List<Lotto> lottos = new ArrayList<>();
+    private final int buyMoney;
 
     public LottoStore(String money) {
         validNullMoney(money);
         isNumeric(money);
-        int buyMoney = Integer.parseInt(money);
+        buyMoney = Integer.parseInt(money);
         isPossibleBuyLotto(buyMoney);
         buyLottos(buyMoney / 1000);
     }
@@ -26,7 +27,7 @@ public class LottoStore {
         try {
             Integer.parseInt(money);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자 사칙연산 숫자 순으로 입력해주세요");
+            throw new IllegalArgumentException("숫자를 입력해주세요");
         }
     }
 
@@ -44,5 +45,9 @@ public class LottoStore {
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
+    }
+
+    public int getBuyMoney() {
+        return buyMoney;
     }
 }
