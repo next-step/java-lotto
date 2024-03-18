@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class TextParser {
     private static final String SPLIT_TOKEN = " ";
 
-    List<String> textToStringList(String text){
+    public static List<String> textToStringList(String text){
         if(text == null || text.isBlank()) {
             throw new IllegalArgumentException("입력값이 Null이거나 빈 공백입니다.");
         }
