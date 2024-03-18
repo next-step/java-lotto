@@ -20,4 +20,12 @@ public class StringCalculator {
         String[] tokens = input.split(" ");
         return Integer.parseInt(tokens[0]) * Integer.parseInt(tokens[2]);
     }
+
+    public static int calculation(String input) {
+        if(input == null || input.isEmpty()){
+            throw new IllegalArgumentException("input value is blank");
+        }
+
+        return 0;
+    }
 }
