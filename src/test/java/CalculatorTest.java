@@ -6,6 +6,16 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class CalculatorTest {
 
+    @DisplayName("사칙연산 아닐경우   -> IllegalArgumentException throw")
+    @Test
+    void not_사칙연산() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> { new Calculator().calculate("1 @ 3"); })
+                .withMessage("%s!", "사칙연산으로만 계산이 가능합니다")
+                .withNoCause();
+
+    }
+
     @DisplayName("입력 null,빈 공백 -> IllegalArgumentException throw")
     @Test
     void null_blank() {
