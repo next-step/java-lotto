@@ -1,7 +1,7 @@
-package lotto.util;
+package calculator.util;
 
-import lotto.exception.IllegalEmptyExpressionException;
-import lotto.exception.IllegalExpressionElementSizeException;
+import calculator.exception.IllegalEmptyExpressionException;
+import calculator.exception.IllegalExpressionElementSizeException;
 
 import java.util.ArrayList;
 import java.util.Arrays;

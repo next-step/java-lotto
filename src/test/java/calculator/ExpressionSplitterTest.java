@@ -1,12 +1,12 @@
-package lotto;
+package calculator;
 
-import lotto.domain.Expression;
-import lotto.domain.ExpressionElement;
-import lotto.domain.ExpressionElementBuilder;
-import lotto.domain.Number;
-import lotto.domain.Operator;
-import lotto.util.ExpressionSplitter;
-import lotto.exception.IllegalExpressionElementSizeException;
+import calculator.domain.Expression;
+import calculator.domain.ExpressionElement;
+import calculator.domain.ExpressionElementBuilder;
+import calculator.domain.Number;
+import calculator.domain.Operator;
+import calculator.util.ExpressionSplitter;
+import calculator.exception.IllegalExpressionElementSizeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,12 +1,12 @@
-package lotto;
+package calculator;
 
-import lotto.domain.Calculator;
-import lotto.domain.Expression;
-import lotto.domain.ExpressionElement;
-import lotto.domain.ExpressionElementBuilder;
-import lotto.util.ExpressionSplitter;
-import lotto.ui.InputView;
-import lotto.ui.ResultView;
+import calculator.domain.Calculator;
+import calculator.domain.Expression;
+import calculator.domain.ExpressionElement;
+import calculator.domain.ExpressionElementBuilder;
+import calculator.util.ExpressionSplitter;
+import calculator.ui.InputView;
+import calculator.ui.ResultView;
 
 import java.util.List;
 

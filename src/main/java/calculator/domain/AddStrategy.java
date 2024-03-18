@@ -1,4 +1,4 @@
-package lotto.domain;
+package calculator.domain;
 
 public class AddStrategy implements OperationStrategy {
     @Override

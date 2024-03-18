@@ -1,8 +1,8 @@
-package lotto;
+package calculator;
 
-import lotto.domain.Calculator;
-import lotto.domain.Expression;
-import lotto.domain.ExpressionElementBuilder;
+import calculator.domain.Calculator;
+import calculator.domain.Expression;
+import calculator.domain.ExpressionElementBuilder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

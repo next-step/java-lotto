@@ -1,4 +1,4 @@
-package lotto.exception;
+package calculator.exception;
 
 import java.text.MessageFormat;
 import java.util.Set;
