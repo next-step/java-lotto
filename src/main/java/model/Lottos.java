@@ -12,12 +12,6 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<Rank> determineRank(final WinningNumbers winningNumbers) {
-        return lottos.stream()
-                .map(lotto -> lotto.match(winningNumbers))
-                .collect(Collectors.toList());
-    }
-
     public List<Rank> determineRank(final LottoResult lottoResult) {
         return lottos.stream()
                 .map(lotto -> lotto.match(lottoResult))

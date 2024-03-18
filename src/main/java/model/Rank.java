@@ -19,13 +19,6 @@ public enum Rank {
         this.matchingCount = matchingCount;
     }
 
-    public static Rank determine(final int count) {
-        return Arrays.stream(Rank.values())
-                .filter(rank -> rank.matchingCount == count)
-                .findFirst()
-                .orElse(NONE);
-    }
-
     public static Rank determine(final int count, final boolean isMatchBonusNumber) {
         if (isSecondRank(count, isMatchBonusNumber)) {
             return SECOND;

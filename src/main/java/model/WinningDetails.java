@@ -19,11 +19,6 @@ public class WinningDetails {
         this.winningDetails = winningDetails;
     }
 
-    public void makeWinningDetails(final Lottos lottos, final WinningNumbers winningNumbers) {
-        lottos.determineRank(winningNumbers)
-                .forEach(rank -> winningDetails.put(rank, winningDetails.get(rank) + 1));
-    }
-
     public void makeWinningDetails(final Lottos lottos, final LottoResult lottoResult) {
         lottos.determineRank(lottoResult)
                 .forEach(rank -> winningDetails.put(rank, winningDetails.get(rank) + 1));

@@ -14,11 +14,6 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public Rank match(final WinningNumbers winningNumbers) {
-        final int countOfMatch = findMatchNumberCount(winningNumbers);
-        return Rank.determine(countOfMatch);
-    }
-
     public Rank match(final LottoResult lottoResult) {
         final int countOfMatch = findMatchNumberCount(lottoResult.getWinningNumbers());
         final boolean contains = numbers.contains(lottoResult.getBonusNumberValue());
