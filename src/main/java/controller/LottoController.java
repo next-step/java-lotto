@@ -1,10 +1,11 @@
 package controller;
 
 import java.math.BigDecimal;
-import java.util.List;
 
+import model.BonusNumber;
 import model.LottoAmount;
 import model.LottoFactory;
+import model.LottoResult;
 import model.Lottos;
 import model.WinningDetails;
 import model.WinningNumbers;
@@ -28,10 +29,11 @@ public class LottoController {
         outputView.printLottoPurchaseCount(lottoAmount.calculateLottoPurchaseCount());
         outputView.printPurchaseLottos(lottos.getLottos());
 
-        final List<Integer> numbers = inputView.inputWinningLottoNumbers();
-        final WinningNumbers winningNumbers = new WinningNumbers(numbers);
+        final WinningNumbers winningNumbers = new WinningNumbers(inputView.inputWinningLottoNumbers());
+        final BonusNumber bonusNumber = new BonusNumber(inputView.inputBonusNumber());
+        final LottoResult lottoResult = new LottoResult(winningNumbers, bonusNumber);
         final WinningDetails winningDetails = new WinningDetails();
-        winningDetails.makeWinningDetails(lottos, winningNumbers);
+        winningDetails.makeWinningDetails(lottos, lottoResult);
         final BigDecimal profit = winningDetails.calculateProfit(lottoAmount);
 
         outputView.printWinningStatistics(winningDetails, profit);
