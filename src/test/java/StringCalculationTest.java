@@ -1,9 +1,6 @@
-import org.assertj.core.api.Assertions;
-import org.assertj.core.util.Strings;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ArgumentsSources;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
@@ -30,7 +27,7 @@ public class StringCalculationTest {
     @ParameterizedTest
     @CsvSource(value = {"1 + 3,4", "1 - 2,-1", "1 / 3,0", "5 / 2,2", "1 * 3,3", "5 * 5,25", "2 + 3 * 4 / 2,10"}, delimiterString = ",")
     void calculate(String input, int expectedResult) {
-        int actualResult = StringCalculation.calculate(input);
+        int actualResult = StringCalculation.getSum(input);
         assertThat(actualResult).isEqualTo(expectedResult);
     }
 }
