@@ -13,7 +13,7 @@ public class LottoStore {
         isNumeric(money);
         int buyMoney = Integer.parseInt(money);
         isPossibleBuyLotto(buyMoney);
-        buyLottos(buyMoney/1000);
+        buyLottos(buyMoney / 1000);
     }
 
     private void validNullMoney(String money) {
@@ -37,7 +37,7 @@ public class LottoStore {
     }
 
     private void buyLottos(int money) {
-        for (int i = 0; i <money; i++) {
+        for (int i = 0; i < money; i++) {
             lottos.add(new Lotto());
         }
     }
@@ -45,5 +45,4 @@ public class LottoStore {
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
-
 }

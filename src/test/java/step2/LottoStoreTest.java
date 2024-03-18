@@ -11,7 +11,7 @@ public class LottoStoreTest {
     @Test
     public void 돈은_null을_낼_수_없다() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-           LottoStore lottoStore = new LottoStore(null);
+            LottoStore lottoStore = new LottoStore(null);
         });
     }
 

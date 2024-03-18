@@ -13,6 +13,10 @@ public class Lotto {
         }
     }
 
+    public Lotto(List<Integer> testNumber) {
+        numbers.addAll(testNumber);
+    }
+
     private int createRandomNumber() {
         return random.nextInt(45) + 1;
     }

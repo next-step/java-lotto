@@ -34,7 +34,7 @@ public class LottoTest {
         public void 로또_번호_중복_테스트() {
             Lotto lottoTest = new Lotto();
             List<Integer> lottoTestNumbers = lottoTest.getLottoNumbers();
-            Set <Integer> lottoNumberSet = new HashSet<>(lottoTestNumbers);
+            Set<Integer> lottoNumberSet = new HashSet<>(lottoTestNumbers);
             assertThat(lottoNumberSet.size()).isEqualTo(6);
         }
     }
