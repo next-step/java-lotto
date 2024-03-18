@@ -11,7 +11,7 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> numbers) {
-        Collections.sort(numbers);
+        Collections.sort(new ArrayList<>(numbers));
         this.numbers = numbers;
     }
 
@@ -26,6 +26,12 @@ public class Lotto {
 
     public List<Integer> numbers() {
         return new ArrayList<>(numbers);
+    }
+
+    public int rank(Lotto winningLotto) {
+        List<Integer> winningNumbers = winningLotto.numbers();
+        winningNumbers.retainAll(this.numbers());
+        return winningNumbers.size();
     }
 
     @Override
