@@ -24,6 +24,11 @@ public class WinningDetails {
                 .forEach(rank -> winningDetails.put(rank, winningDetails.get(rank) + 1));
     }
 
+    public void makeWinningDetails(final Lottos lottos, final LottoResult lottoResult) {
+        lottos.determineRank(lottoResult)
+                .forEach(rank -> winningDetails.put(rank, winningDetails.get(rank) + 1));
+    }
+
     public BigDecimal calculateProfit(final LottoAmount lottoAmount) {
         return calculateSum().divide(lottoAmount.toBigDecimal(), ROUNDING_PRECISION, RoundingMode.DOWN);
     }
