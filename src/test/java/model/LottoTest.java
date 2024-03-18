@@ -24,8 +24,8 @@ class LottoTest {
         // given
         final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
-        final BonusNumber bonusNumber = new BonusNumber(7);
-        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, bonusNumber);
+        final LottoNumber lottoNumber = new LottoNumber(7);
+        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, lottoNumber);
 
         // when
         final Rank rank = lotto.match(lottoWinningNumber);
@@ -39,8 +39,8 @@ class LottoTest {
         // given
         final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 7));
-        final BonusNumber bonusNumber = new BonusNumber(6);
-        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, bonusNumber);
+        final LottoNumber lottoNumber = new LottoNumber(6);
+        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, lottoNumber);
 
         // when
         final Rank rank = lotto.match(lottoWinningNumber);
@@ -54,8 +54,8 @@ class LottoTest {
         // given
         final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 7));
-        final BonusNumber bonusNumber = new BonusNumber(9);
-        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, bonusNumber);
+        final LottoNumber lottoNumber = new LottoNumber(9);
+        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, lottoNumber);
 
         // when
         final Rank rank = lotto.match(lottoWinningNumber);
@@ -69,8 +69,8 @@ class LottoTest {
         // given
         final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 7, 8));
-        final BonusNumber bonusNumber = new BonusNumber(10);
-        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, bonusNumber);
+        final LottoNumber lottoNumber = new LottoNumber(10);
+        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, lottoNumber);
 
         // when
         final Rank rank = lotto.match(lottoWinningNumber);
@@ -84,8 +84,8 @@ class LottoTest {
         // given
         final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 7, 8, 9));
-        final BonusNumber bonusNumber = new BonusNumber(10);
-        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, bonusNumber);
+        final LottoNumber lottoNumber = new LottoNumber(10);
+        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, lottoNumber);
 
         // when
         final Rank rank = lotto.match(lottoWinningNumber);
@@ -99,8 +99,8 @@ class LottoTest {
         // given
         final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 7, 8, 9, 10));
-        final BonusNumber bonusNumber = new BonusNumber(15);
-        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, bonusNumber);
+        final LottoNumber lottoNumber = new LottoNumber(15);
+        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, lottoNumber);
 
         // when
         final Rank rank = lotto.match(lottoWinningNumber);

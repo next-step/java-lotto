@@ -24,8 +24,8 @@ class WinningDetailsTest {
                 new Lotto(List.of(7, 8, 9, 10, 11, 12))
         ));
         final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
-        final BonusNumber bonusNumber = new BonusNumber(7);
-        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, bonusNumber);
+        final LottoNumber lottoNumber = new LottoNumber(7);
+        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, lottoNumber);
 
         // when
         final WinningDetails winningDetails = new WinningDetails();

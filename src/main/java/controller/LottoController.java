@@ -2,7 +2,7 @@ package controller;
 
 import java.math.BigDecimal;
 
-import model.BonusNumber;
+import model.LottoNumber;
 import model.LottoAmount;
 import model.LottoFactory;
 import model.LottoWinningNumber;
@@ -30,8 +30,8 @@ public class LottoController {
         outputView.printPurchaseLottos(lottos.getLottos());
 
         final WinningNumbers winningNumbers = new WinningNumbers(inputView.inputWinningLottoNumbers());
-        final BonusNumber bonusNumber = new BonusNumber(inputView.inputBonusNumber());
-        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, bonusNumber);
+        final LottoNumber lottoNumber = new LottoNumber(inputView.inputBonusNumber());
+        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, lottoNumber);
         final WinningDetails winningDetails = new WinningDetails();
         winningDetails.makeWinningDetails(lottos, lottoWinningNumber);
         final BigDecimal profit = winningDetails.calculateProfit(lottoAmount);

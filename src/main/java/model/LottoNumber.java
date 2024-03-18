@@ -1,13 +1,13 @@
 package model;
 
-public class BonusNumber {
+public class LottoNumber {
 
     private static final int MIN_BONUS_NUMBER = 1;
     private static final int MAX_BONUS_NUMBER = 45;
 
     private final int value;
 
-    public BonusNumber(final int value) {
+    public LottoNumber(final int value) {
         validate(value);
         this.value = value;
     }

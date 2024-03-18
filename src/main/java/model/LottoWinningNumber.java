@@ -3,16 +3,16 @@ package model;
 public class LottoWinningNumber {
 
     private final WinningNumbers winningNumbers;
-    private final BonusNumber bonusNumber;
+    private final LottoNumber lottoNumber;
 
-    public LottoWinningNumber(final WinningNumbers winningNumbers, final BonusNumber bonusNumber) {
-        validate(winningNumbers, bonusNumber);
+    public LottoWinningNumber(final WinningNumbers winningNumbers, final LottoNumber lottoNumber) {
+        validate(winningNumbers, lottoNumber);
         this.winningNumbers = winningNumbers;
-        this.bonusNumber = bonusNumber;
+        this.lottoNumber = lottoNumber;
     }
 
-    private void validate(final WinningNumbers winningNumbers, final BonusNumber bonusNumber) {
-        if (winningNumbers.contains(bonusNumber.getValue())) {
+    private void validate(final WinningNumbers winningNumbers, final LottoNumber lottoNumber) {
+        if (winningNumbers.contains(lottoNumber.getValue())) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 같으면 안 됩니다.");
         }
     }
@@ -22,6 +22,6 @@ public class LottoWinningNumber {
     }
 
     public int getBonusNumberValue() {
-        return bonusNumber.getValue();
+        return lottoNumber.getValue();
     }
 }
