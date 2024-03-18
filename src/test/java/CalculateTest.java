@@ -2,6 +2,7 @@ import domain.Calculate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculateTest {
@@ -16,5 +17,12 @@ public class CalculateTest {
         assertThatThrownBy(() -> {
             Calculate.process("");
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void plus(){
+        final String input = "1 + 2";
+        int result = Calculate.process(input);
+        assertThat(result).isEqualTo(3);
     }
 }
