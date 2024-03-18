@@ -1,22 +1,31 @@
 package domain;
 
-import java.util.regex.Matcher;
+import java.util.function.IntBinaryOperator;
 
 public enum Operator {
 
-    PLUS("+"),
-    MINUS("-"),
-    MULTIPLE("*"),
-    DIVIDE("/"),
-    
+    PLUS("+", Integer::sum),
+    MINUS("-", (a, b) -> (a-b)),
+    MULTIPLE("*", (a, b) -> (a*b)),
+    DIVIDE("/", (a, b) -> (a/b)),
     ;
-    private final String operator;
+    private final String symbol;
+    private final IntBinaryOperator operation;
 
-    Operator(String operator) {
-        this.operator = operator;
+    Operator(String symbol, IntBinaryOperator operation) {
+        this.symbol = symbol;
+        this.operation = operation;
     }
 
-    public static boolean isOperator(String input){
-        return PLUS.operator.equals(input) || MINUS.operator.equals(input) || MULTIPLE.operator.equals(input) || DIVIDE.operator.equals(input);
+    public static Operator toOperator(String input) {
+        if(PLUS.symbol.equals(input)) return Operator.PLUS;
+        if(MINUS.symbol.equals(input)) return Operator.MINUS;
+        if(MULTIPLE.symbol.equals(input)) return Operator.MULTIPLE;
+        if(DIVIDE.symbol.equals(input)) return Operator.DIVIDE;
+        throw new IllegalArgumentException();
+    }
+
+    public int apply(int a, int b){
+        return operation.applyAsInt(a,b);
     }
 }
