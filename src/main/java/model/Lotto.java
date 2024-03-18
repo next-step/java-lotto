@@ -19,6 +19,12 @@ public class Lotto {
         return Rank.determine(countOfMatch);
     }
 
+    public Rank match(final WinningNumbers winningNumbers, final BonusNumber bonusNumber) {
+        final int countOfMatch = findMatchNumberCount(winningNumbers);
+        final boolean contains = numbers.contains(bonusNumber.getValue());
+        return Rank.determine(countOfMatch, contains);
+    }
+
     public List<Integer> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
