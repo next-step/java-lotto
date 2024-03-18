@@ -46,7 +46,7 @@ class PrizeTest {
     @Test
     void 오천원_한개_당첨될경우_수익률() {
         int quantity = 14;
-        Prize prize = create(List.of(Rank.FOUR));
+        Prize prize = create(List.of(Rank.FIVE));
 
         double rateOfReturn = prize.rateOfReturn(quantity);
         assertThat(rateOfReturn).isEqualTo(0.35, Offset.offset(0.1));
@@ -55,7 +55,7 @@ class PrizeTest {
     @Test
     void 오만원_한개_당첨될경우_수익률() {
         int quantity = 14;
-        Prize prize = create(List.of(Rank.THREE));
+        Prize prize = create(List.of(Rank.FOUR));
 
         double rateOfReturn = prize.rateOfReturn(quantity);
         assertThat(rateOfReturn).isEqualTo(3.57, Offset.offset(0.1));
@@ -67,7 +67,7 @@ class PrizeTest {
         Prize prize = create(List.of(Rank.TWO));
 
         double rateOfReturn = prize.rateOfReturn(quantity);
-        assertThat(rateOfReturn).isEqualTo(107.14, Offset.offset(0.1));
+        assertThat(rateOfReturn).isEqualTo(2142.85, Offset.offset(0.1));
     }
 
     @Test

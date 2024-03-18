@@ -8,9 +8,10 @@ import java.util.stream.Stream;
 
 public enum Rank {
     ONE(6, 2_000_000_000),
-    TWO(5, 1_500_000),
-    THREE(4, 50_000),
-    FOUR(3, 5_000),
+    TWO(5, 30_000_000),
+    THREE(5, 1_500_000),
+    FOUR(4, 50_000),
+    FIVE(3, 5_000),
     NO_MATCH(0, 0);
 
     private final int ballCount;
@@ -34,7 +35,7 @@ public enum Rank {
     static {
         sortedRank = Stream.of(values())
                 .filter(rank -> !rank.equals(NO_MATCH))
-                .sorted(Comparator.comparingInt(value -> value.ballCount))
+                .sorted(Comparator.comparingInt(value -> value.reward))
                 .collect(Collectors.toList());
     }
 

@@ -1,3 +1,9 @@
+## 3단계 - 로또(2등)
+
+- [x] Rank에 로또 2등에 대한 정보를 추가한다
+
+---
+
 ### 2단계 피드백
 
 - [x] LottoNumbers -> LottoNumberFactory renaming

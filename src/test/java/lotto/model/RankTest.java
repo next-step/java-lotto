@@ -9,7 +9,7 @@ class RankTest {
     @Test
     void ranks() {
         assertThat(Rank.ranks())
-                .containsExactly(Rank.FOUR, Rank.THREE, Rank.TWO, Rank.ONE)
+                .containsExactly(Rank.FIVE, Rank.FOUR, Rank.THREE, Rank.TWO, Rank.ONE)
                 .isNotIn(Rank.NO_MATCH);
     }
 
