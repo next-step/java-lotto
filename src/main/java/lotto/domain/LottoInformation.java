@@ -44,10 +44,6 @@ public enum LottoInformation {
         return matchAmountMap.get(matchCount);
     }
 
-    public static boolean isExistMatchCount(Integer matchCount) {
-        return matchAmountMap.get(matchCount) != null;
-    }
-
     public static double calculateProfitRate(LottoStatisticsMap statisticsMap, int purchaseAmount) {
         double totalProfit = 0;
         for (Integer matchCount : statisticsMap.keySet()) {
@@ -61,6 +57,10 @@ public enum LottoInformation {
             return statisticsMap.getMatchedLottoCount(matchCount) * getWinAmount(matchCount);
         }
         return 0;
+    }
+
+    public static boolean isExistMatchCount(Integer matchCount) {
+        return matchAmountMap.get(matchCount) != null;
     }
 
 }
