@@ -1,7 +1,6 @@
 package stringCalculatorTest;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -26,6 +25,14 @@ public class StringCalculatorTest {
     @CsvSource(value = {"2 / 1=2", "6 / 2=3", "1 / 1=1", "12 / 3=4"}, delimiter = '=')
     void divisionTest(String input, int expected) {
         int result = StringCalculator.division(input);
+
+        Assertions.assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest(name = "곱셈만 하는 {0} 의 결과값은 {1} 이다")
+    @CsvSource(value = {"2 * 1=2", "6 * 2=12", "1 * 1=1", "12 * 3=36"}, delimiter = '=')
+    void multiplicationTest(String input, int expected) {
+        int result = StringCalculator.multiple(input);
 
         Assertions.assertThat(result).isEqualTo(expected);
     }
