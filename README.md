@@ -5,7 +5,7 @@
 - [x] 곱셈
 - [x] 나눗셈
 - [x] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException을 throw
-- [ ] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
+- [x] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
 - [ ] "숫자 수식 숫자 ... 숫자" 형태여야 한다.
 
 ## 프로그래밍 요구사항
