@@ -40,6 +40,8 @@ public class Calculator {
   public Number calculate(List<Number> numbers, List<Operator> operators) {
     final AtomicInteger index = new AtomicInteger();
     final int SKIP_FIRST = 1;
-    return numbers.subList(SKIP_FIRST, numbers.size()).stream().reduce(numbers.get(0), (acc, cur) -> acc.apply(operators.get(index.getAndIncrement()), cur));
+    
+    return numbers.subList(SKIP_FIRST, numbers.size()).stream()
+            .reduce(numbers.get(0), (acc, cur) -> acc.apply(operators.get(index.getAndIncrement()), cur));
   }
 }
