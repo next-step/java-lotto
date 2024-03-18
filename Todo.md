@@ -1,7 +1,6 @@
 # Step1
 
 ## Todo
-- 뺄셈("1 - 2" => -1)
 - 곱셈("1 * 2" => 3)
 - 나눗셈("4 / 2" => 2)
 - 2개 이상의 사칙연산("2 + 2 / 2" => 2, "2 + 2 - 1 * 5" => 15)
@@ -12,6 +11,7 @@
 ## Done
 - 입력값이 null 또는 빈문자열이면 예외("" => IllegalArgumentException, null => IllegalArgumentException)
 - 덧셈("1 + 2" => 3)
+- 뺄셈("1 - 2" => -1)
 
 
 ## Done
