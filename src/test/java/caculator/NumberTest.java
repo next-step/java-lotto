@@ -12,8 +12,8 @@ class NumberTest {
 
         Number origin = new Number("5");
         Number other = new Number("7");
-        origin.plus(other);
+        Number result = origin.plus(other);
 
-        Assertions.assertThat(origin).usingRecursiveComparison().isEqualTo(new Number(12));
+        Assertions.assertThat(result).usingRecursiveComparison().isEqualTo(new Number(12));
     }
 }

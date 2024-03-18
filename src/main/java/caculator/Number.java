@@ -11,25 +11,33 @@ public class Number {
         this.value = value;
     }
 
-    public void plus(Number number) {
-        this.value += number.value;
+    public Number plus(Number other) {
+        return new Number(this.value += other.value);
     }
 
-    public void minus(Number number) {
-        this.value -= number.value;
+    public Number minus(Number other) {
+        return new Number(this.value -= other.value);
     }
 
-    public void multiple(Number number) {
-        this.value *= number.value;
+    public Number multiple(Number other) {
+        return new Number(this.value *= other.value);
     }
 
-    public void divide(Number number) {
-        this.value /= number.value;
+    public Number divide(Number other) {
+        return new Number(this.value /= other.value);
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Number number = (Number) obj;
+        return value == number.value;
     }
 
     @Override
-    public String toString() {
-        return "Number value is : " + value;
+    public int hashCode() {
+        return Integer.hashCode(value);
     }
+
 }
 
