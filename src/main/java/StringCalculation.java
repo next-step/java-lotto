@@ -5,6 +5,9 @@ public class StringCalculation {
     private final static String GAP = " ";
 
     public static String[] splitByGap(String str) {
+        if (str == null || str.isBlank()) {
+            throw new IllegalArgumentException("문자열이 입력안됐거나 공백 문자열 입니다.");
+        }
         return str.split(GAP);
     }
 
