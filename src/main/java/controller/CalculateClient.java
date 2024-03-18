@@ -1,16 +1,16 @@
 package controller;
 
 
-import domain.Calculate;
+import domain.CalculateHandler;
 
 public class CalculateClient {
 
     public static int process(String input) {
         if(isNullOrEmpty(input)) throw new IllegalArgumentException();
         String[] splitInput = input.split(" ");
-        Calculate calculate = new Calculate();
+        CalculateHandler calculate = new CalculateHandler();
         for(String split : splitInput){
-            calculate.process(split);
+            calculate.handle(split);
         }
         return calculate.getResult();
     }
