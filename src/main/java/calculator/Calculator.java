@@ -40,7 +40,6 @@ public class Calculator {
         }
 
         result = calculate(numberOrEmpty.getAsInt(), currentOperator, result);
-        List<Integer> a = new ArrayList<>();
 
         return calculateExpression(result, currentOperator);
     }
