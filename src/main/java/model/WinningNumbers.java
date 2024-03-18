@@ -1,7 +1,8 @@
 package model;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
+import util.Utils;
 
 public class WinningNumbers {
 
@@ -11,9 +12,7 @@ public class WinningNumbers {
 
     public WinningNumbers(final List<Integer> numbers) {
         validate(numbers);
-        this.numbers = numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+        this.numbers = Utils.convertToLottoNumbers(numbers);
     }
 
     public boolean contains(final LottoNumber lottoNumber) {

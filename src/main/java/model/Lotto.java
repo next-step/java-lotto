@@ -3,6 +3,8 @@ package model;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import util.Utils;
+
 public class Lotto {
 
     private static final int MAX_LOTTO_NUMBERS = 6;
@@ -11,10 +13,7 @@ public class Lotto {
 
     public Lotto(final List<Integer> numbers) {
         validateLottoNumbers(numbers);
-        this.numbers = numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-
+        this.numbers = Utils.convertToLottoNumbers(numbers);
     }
 
     public Rank match(final LottoWinningNumber lottoWinningNumber) {
