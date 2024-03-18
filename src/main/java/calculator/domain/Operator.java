@@ -10,7 +10,7 @@ public class Operator {
   private final StringOperator operator;
 
   public Operator(String operator) {
-    this.operator = StringOperator.convert(operator).get();
+    this.operator = StringOperator.convert(operator);
   }
 
   public static boolean isOperator(String value) {
