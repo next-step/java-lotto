@@ -21,6 +21,11 @@ public class InputView {
         return Utils.convertToNumbers(SCANNER.nextLine().split(WINNING_NUMBER_SEPARATOR));
     }
 
+    public int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return SCANNER.nextInt();
+    }
+
     private void removeNewLine() {
         SCANNER.nextLine();
     }

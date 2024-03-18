@@ -19,8 +19,8 @@ public class WinningDetails {
         this.winningDetails = winningDetails;
     }
 
-    public void makeWinningDetails(final Lottos lottos, final WinningNumbers winningNumbers) {
-        lottos.determineRank(winningNumbers)
+    public void makeWinningDetails(final Lottos lottos, final LottoResult lottoResult) {
+        lottos.determineRank(lottoResult)
                 .forEach(rank -> winningDetails.put(rank, winningDetails.get(rank) + 1));
     }
 
@@ -34,7 +34,7 @@ public class WinningDetails {
 
     private BigDecimal calculateSum() {
         final int sum = winningDetails.keySet().stream()
-                .mapToInt(winningPrice -> winningPrice.getAmount() * winningDetails.get(winningPrice))
+                .mapToInt(rank -> rank.multiply(winningDetails.get(rank)))
                 .sum();
         return BigDecimal.valueOf(sum);
     }

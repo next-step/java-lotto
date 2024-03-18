@@ -5,10 +5,11 @@ import java.util.Arrays;
 public enum Rank {
 
     NONE(0, 0),
-    FIRST(2000000000, 6),
-    SECOND(150000, 5),
-    THIRD(50000, 4),
-    FOURTH(5000, 3);
+    FIRST(2_000_000_000, 6),
+    SECOND(30_000_000, 5),
+    THIRD(150_000, 5),
+    FOURTH(50_000, 4),
+    FIFTH(5_000, 3);
 
     private final int amount;
     private final int matchingCount;
@@ -18,11 +19,22 @@ public enum Rank {
         this.matchingCount = matchingCount;
     }
 
-    public static Rank determine(final int count) {
+    public static Rank determine(final int count, final boolean isMatchBonusNumber) {
+        if (isSecondRank(count, isMatchBonusNumber)) {
+            return SECOND;
+        }
         return Arrays.stream(Rank.values())
-                .filter(winningPrice -> winningPrice.matchingCount == count)
+                .filter(rank -> rank != SECOND && rank.matchingCount == count)
                 .findFirst()
                 .orElse(NONE);
+    }
+
+    public int multiply(final int matchingCount) {
+        return amount * matchingCount;
+    }
+
+    private static boolean isSecondRank(final int count, final boolean isMatchBonusNumber) {
+        return count == SECOND.matchingCount && isMatchBonusNumber;
     }
 
     public int getAmount() {
