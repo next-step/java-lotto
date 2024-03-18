@@ -1,3 +1,5 @@
+package stringCalculator;
+
 public class Calculator {
     private static final String SPLIT_REGEX = " ";
     private static final String ADD = "+";
