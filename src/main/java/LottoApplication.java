@@ -10,7 +10,8 @@ public class LottoApplication {
         Lottos lottos = new Lottos(price);
         ResultView.print(lottos);
 
-        Lotto lotto = new Lotto(convertWinningNumbers(InputView.promptForWinningNumbers()));
+        Lotto winningLotto = new Lotto(convertWinningNumbers(InputView.promptForWinningNumbers()));
+        ResultView.printRank(lottos.rank(winningLotto));
     }
 
     private static List<Integer> convertWinningNumbers(String input) {
