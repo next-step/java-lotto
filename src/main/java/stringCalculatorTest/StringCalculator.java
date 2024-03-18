@@ -26,6 +26,14 @@ public class StringCalculator {
             throw new IllegalArgumentException("input value is blank");
         }
 
+        String[] tokens = input.split(" ");
+
+        for (int i = 1; i < tokens.length; i+=2) {
+            if(!(tokens[i] == "+" ||  tokens[i] == "-" || tokens[i] == "/" || tokens[i] == "*" )){
+                throw new IllegalArgumentException("input value is invalid operation symbol");
+            }
+        }
+
         return 0;
     }
 }

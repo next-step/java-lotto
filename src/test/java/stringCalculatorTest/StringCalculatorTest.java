@@ -1,10 +1,10 @@
 package stringCalculatorTest;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class StringCalculatorTest {
     @ParameterizedTest(name = "덧셈만 하는 {0} 의 결과값은 {1} 이다")
@@ -39,10 +39,18 @@ public class StringCalculatorTest {
         Assertions.assertThat(result).isEqualTo(expected);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0} 값을 입력시 IllegalArgumentException 발생")
     @NullAndEmptySource
     void inputBlankTest(String input) {
-        Assertions.assertThatThrownBy(()->{
+        Assertions.assertThatThrownBy(() -> {
+            StringCalculator.calculation(input);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest(name = "{0} 값을 입력시 사칙연산기호가 아니므로 IllegalArgumentException 발생")
+    @ValueSource(strings = {"1 s 2", "2 % 3", "4 & 4"})
+    void invaildOperationSymbolTest(String input) {
+        Assertions.assertThatThrownBy(() -> {
             StringCalculator.calculation(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
