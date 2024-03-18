@@ -18,9 +18,9 @@ class CalculateHandlerTest {
 
     @Test
     @DisplayName("2개의 연산자가 포핟된 복잡한 연산")
-    void complex1(){
+    void complex1() {
         final String[] inputs = {"2", "+", "2", "/", "2"};
-        for(String input : inputs){
+        for (String input : inputs) {
             calculateHandler.handle(input);
         }
         assertThat(calculateHandler.getResult()).isEqualTo(2);
@@ -28,9 +28,9 @@ class CalculateHandlerTest {
 
     @Test
     @DisplayName("3개의 연산자가 포핟된 복잡한 연산")
-    void complex2(){
+    void complex2() {
         final String[] inputs = {"2", "+", "2", "-", "1", "*", "5"};
-        for(String input : inputs){
+        for (String input : inputs) {
             calculateHandler.handle(input);
         }
         assertThat(calculateHandler.getResult()).isEqualTo(15);
@@ -38,10 +38,10 @@ class CalculateHandlerTest {
 
     @Test
     @DisplayName("숫자가 연속으로 들어올때")
-    void number_in_a_row(){
+    void number_in_a_row() {
         final String[] inputs = {"2", "2", "3"};
-        assertThatThrownBy(()->{
-            for(String input : inputs){
+        assertThatThrownBy(() -> {
+            for (String input : inputs) {
                 calculateHandler.handle(input);
             }
         }).isInstanceOf(IllegalArgumentException.class);
@@ -49,10 +49,10 @@ class CalculateHandlerTest {
 
     @Test
     @DisplayName("연산자가 연속으로 들어올때")
-    void operator_in_a_row(){
+    void operator_in_a_row() {
         final String[] inputs = {"2", "*", "+"};
-        assertThatThrownBy(()->{
-            for(String input : inputs){
+        assertThatThrownBy(() -> {
+            for (String input : inputs) {
                 calculateHandler.handle(input);
             }
         }).isInstanceOf(IllegalArgumentException.class);
@@ -60,10 +60,10 @@ class CalculateHandlerTest {
 
     @Test
     @DisplayName("연산자가 가장 처음에 있을때")
-    void operation_place_first(){
+    void operation_place_first() {
         final String[] inputs = {"*", "2", "+", "3"};
-        assertThatThrownBy(()->{
-            for(String input : inputs){
+        assertThatThrownBy(() -> {
+            for (String input : inputs) {
                 calculateHandler.handle(input);
             }
         }).isInstanceOf(IllegalArgumentException.class);

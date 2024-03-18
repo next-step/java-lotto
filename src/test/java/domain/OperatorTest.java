@@ -13,15 +13,15 @@ class OperatorTest {
     @ParameterizedTest
     @CsvSource(value = {"+:6", "-:2", "*:8", "/:2"}, delimiter = ':')
     @DisplayName("사칙 연산")
-    void calculate(String operation, int result){
+    void calculate(String operation, int result) {
         Operator operator = Operator.toOperator(operation);
         int apply = operator.apply(4, 2);
         assertThat(apply).isEqualTo(result);
     }
 
     @Test
-    void not_operator(){
-        assertThatThrownBy(()->{
+    void not_operator() {
+        assertThatThrownBy(() -> {
             Operator.toOperator("&");
         }).isInstanceOf(IllegalArgumentException.class);
     }
