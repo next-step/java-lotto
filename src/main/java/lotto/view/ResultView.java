@@ -14,6 +14,7 @@ public class ResultView {
     private static final String PREFIX = "[";
     private static final String SUFFIX = "]";
     private static final String RESULT_FORMAT = "%s개 일치 (%s원) - %s개";
+    private static final String BONUS_RESULT_FORMAT = "%s개 일치, 보너스 볼 일치(%s원) - %s개";
     private static final String RATE_OF_RETURN_FORMAT = "총 수익률은 %.2f 입니다.";
 
     public void printOrderResponse(List<LottoNumberDto> lottoNumberDtos) {
@@ -53,7 +54,8 @@ public class ResultView {
             int reward = rank.getReward();
             int matchedCount = prize.rankCount(rank);
 
-            String text = String.format(RESULT_FORMAT, ballCount, reward, matchedCount);
+            String format = rank.isTwo() ? BONUS_RESULT_FORMAT : RESULT_FORMAT;
+            String text = String.format(format, ballCount, reward, matchedCount);
             sb.append(text).append(NEW_LINE);
         }
     }

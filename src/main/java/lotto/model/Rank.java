@@ -53,5 +53,9 @@ public enum Rank {
     private boolean sameBallCount(int ballCount) {
         return this.ballCount == ballCount;
     }
+
+    public boolean isTwo() {
+        return this == Rank.TWO;
+    }
 }
 
