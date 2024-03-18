@@ -5,44 +5,19 @@ import java.util.Queue;
 
 public class Calculator {
 
-	public static final String DELIMITER = " ";
+	private final Queue<Number> numbers;
 
-	Queue<Number> numbers = new LinkedList<>();
+	private final Queue<Operator> operators;
 
-	Queue<Operator> operators = new LinkedList<>();
-
-	public int calculate(String input) {
-		if (input == null || input.isBlank()) {
-			throw new IllegalArgumentException("null 또는 공백은 입력할 수 없습니다.");
-		}
-
-		seperateAndClasifyFrom(input);
-
-		return calculateFinally();
-	}
-
-	// 입력받은 문자열을 분해하고 각 Queue로 분류한다 
-	private void seperateAndClasifyFrom(String input) {
-		String[] splitedFormula = input.split(DELIMITER);
-
-		validateFormula(splitedFormula);
-
-		numbers.add(new Number(splitedFormula[0]));
-		for (int i = 1; i < splitedFormula.length; i++) {
-			operators.add(Operator.of(splitedFormula[i]));
-			numbers.add(new Number(splitedFormula[++i]));
-		}
-	}
-
-	private static void validateFormula(String[] splitedFormula) {
-		// 완성된 계산식은 숫자 + 연산자의 갯수가 홀수여야한다.
-		if (splitedFormula.length % 2 != 1) {
-			throw new IllegalArgumentException("잘못된 계산식 입니다.");
-		}
+	public Calculator() {
+		this.numbers = new LinkedList<>();
+		this.operators = new LinkedList<>();
 	}
 
 	// 분류된 값들을 가지고 최종 계산 수행
-	private int calculateFinally() {
+	public int calculate(Formula formula) {
+		classifyFormula(formula);
+
 		int result = numbers.poll().getValue();
 
 		while (!operators.isEmpty()) {
@@ -51,7 +26,16 @@ public class Calculator {
 
 			result = operator.operate(result, num);
 		}
+
 		return result;
+	}
+
+	private void classifyFormula(Formula formula) {
+		numbers.add(new Number(formula.get()));
+		while (!formula.isEnd()) {
+			operators.add(Operator.of(formula.get()));
+			numbers.add(new Number(formula.get()));
+		}
 	}
 
 }

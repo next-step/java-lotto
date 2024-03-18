@@ -9,7 +9,7 @@ public class CalculatorApplication {
 
 		String formulaStr = input.inputFormulaStr();
 
-		int result = calculator.calculate(formulaStr);
+		int result = calculator.calculate(new Formula(formulaStr));
 
 		output.showResult(result);
 	}

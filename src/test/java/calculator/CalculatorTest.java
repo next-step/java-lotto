@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 public class CalculatorTest {
 
@@ -16,29 +14,12 @@ public class CalculatorTest {
 		sut = new Calculator();
 	}
 
-	@ParameterizedTest
-	@NullAndEmptySource
-	void null_또는_공백문자_입력_시_IllegalArgumentException를_던진다(String input) {
-		assertThatIllegalArgumentException().isThrownBy(() -> {
-			int result = sut.calculate(input);
-		});
-	}
-
-	@Test
-	void 미완성_계산식을_입력할_경우_IllegalArgumentException를_던진다() {
-		String incompleteFormula = "1 + ";
-
-		assertThatIllegalArgumentException().isThrownBy(() -> {
-			int result = sut.calculate(incompleteFormula);
-		});
-	}
-
 	@Test
 	void 완전한_계산식에서_숫자가_아닌_값이_입력될_경우_IllegalArgumentException를_던진다() {
 		String invalidFormula = "a + 10";
 
 		assertThatIllegalArgumentException().isThrownBy(() -> {
-			int result = sut.calculate(invalidFormula);
+			int result = sut.calculate(new Formula(invalidFormula));
 		});
 	}
 
@@ -47,7 +28,7 @@ public class CalculatorTest {
 		String invalidFormula = "20 @ 10";
 
 		assertThatIllegalArgumentException().isThrownBy(() -> {
-			int result = sut.calculate(invalidFormula);
+			int result = sut.calculate(new Formula(invalidFormula));
 		});
 	}
 
@@ -56,7 +37,7 @@ public class CalculatorTest {
 		String validFormula = "21 + 2 - 3 * 4 / 5";
 		int expected = 16;
 
-		int actual = sut.calculate(validFormula);
+		int actual = sut.calculate(new Formula(validFormula));
 
 		assertThat(actual).isEqualTo(expected);
 	}
