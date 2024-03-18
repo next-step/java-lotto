@@ -26,6 +26,10 @@ public class LottoTickets {
         statisticMap.put(hit, statisticMap.getOrDefault(hit, 0) + 1);
     }
 
+    public List<LottoTicket> get() {
+        return this.lottoTickets;
+    }
+
     public int size() {
         return this.lottoTickets.size();
     }

@@ -5,12 +5,12 @@ import java.util.List;
 
 public class LottoTicketMachine {
 
-    private static final int PRICE_PER_TICKET = 1000;
+    private static final int AMOUNT_PER_TICKET = 1000;
 
-    public static LottoTickets issue(int price) {
+    public static LottoTickets issue(int amount) {
         List<LottoTicket> tickets = new ArrayList<>();
 
-        int countOfTickets = price / PRICE_PER_TICKET;
+        int countOfTickets = amount / AMOUNT_PER_TICKET;
         while (countOfTickets-- > 0) {
             tickets.add(new LottoTicket(LottoNumberGenerator.generate()));
         }

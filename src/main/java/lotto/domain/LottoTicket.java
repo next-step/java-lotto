@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class LottoTicket {
@@ -23,5 +24,12 @@ public class LottoTicket {
             hit++;
         }
         return hit;
+    }
+
+    @Override
+    public String toString() {
+        return "LottoTicket{" +
+                "numbers=" + numbers +
+                '}';
     }
 }
