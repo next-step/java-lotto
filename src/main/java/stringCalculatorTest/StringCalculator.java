@@ -7,11 +7,10 @@ import java.util.function.BiFunction;
 
 public class StringCalculator {
     private static final List<String> OPERATION_SYMBOL = List.of("+", "-", "*", "/");
-
+    private static Map<String, BiFunction<Integer, Integer, Integer>> operations = new HashMap<>();
     private static final String BLANK = " ";
     private static final String BLANK_INPUT_MESSAGE = "input value is blank";
     private static final String INVALID_OPERATOR_MESSAGE = "input value is invalid operation symbol";
-    private static Map<String, BiFunction<Integer, Integer, Integer>> operations = new HashMap<>();
 
     static {
         operations.put("+", StringCalculator::addition);
