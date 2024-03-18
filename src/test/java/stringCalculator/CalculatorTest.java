@@ -2,7 +2,8 @@ package stringCalculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import stringCalculator.Calculator;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -29,25 +30,11 @@ public class CalculatorTest {
 
     }
 
-    @DisplayName("입력 1 + 3 - 3 * 3 / 3 || 출력 1")
-    @Test
-    void calculator_five_numbers() {
-        String input = "1 + 3 - 3 * 3 / 3";
-        assertThat(new Calculator().calculate(input)).isEqualTo(1);
-    }
-
-    @DisplayName("입력 1 + 3 - 3 * 3 || 출력 3")
-    @Test
-    void calculator_four_numbers() {
-        String input = "1 + 3 - 3 * 3";
-        assertThat(new Calculator().calculate(input)).isEqualTo(3);
-    }
-
-    @DisplayName("입력 1 + 3 - 3 || 출력 1")
-    @Test
-    void calculator_three_numbers() {
-        String input = "1 + 3 - 3";
-        assertThat(new Calculator().calculate(input)).isEqualTo(1);
+    @DisplayName("문자열 계산기에 문자열을 입력하면 정수값이 출력된다")
+    @ParameterizedTest
+    @CsvSource(value = {"1 + 3 - 3:1", "1 + 3 - 3 * 3:3", "1 + 3 - 3 * 3 / 3:1"}, delimiter = ':')
+    void string_cal_test(String input, int expected) {
+        assertThat(new Calculator().calculate(input)).isEqualTo(expected);
     }
 
     @DisplayName("입력 1 + 3 || 출력 4")
