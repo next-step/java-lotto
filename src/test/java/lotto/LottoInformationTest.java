@@ -13,8 +13,8 @@ import java.util.List;
 public class LottoInformationTest {
 
     @Test
-    @DisplayName("[성공] 로또 통계 정보를 기반으로 수익률을 구한다.")
-    void 수익률() {
+    @DisplayName("[성공] 5개의 로또를 구매하고 6, 5, 4, 3개의 번호가 각각 한번씩 당첨된 경우 수익률을 구한다.")
+    void 수익률_4개_당첨() {
         // Given
         LottoTickets lottoTickets = new LottoTickets(List.of(
                 new LottoTicket(List.of(1, 2, 42, 43, 44, 45)),
@@ -33,6 +33,29 @@ public class LottoInformationTest {
 
         // Then
         Assertions.assertThat(profit).isEqualTo(400311);
+    }
+
+    @Test
+    @DisplayName("[성공] 5개의 로또를 구매하고 3개의 번호가 하나 당첨된 경우 수익률을 구한다.")
+    void 수익률_1개_당첨() {
+        // Given
+        LottoTickets lottoTickets = new LottoTickets(List.of(
+                new LottoTicket(List.of(1, 2, 42, 43, 44, 45)),
+                new LottoTicket(List.of(1, 2, 3, 43, 44, 45)),
+                new LottoTicket(List.of(40, 41, 42, 43, 44, 45)),
+                new LottoTicket(List.of(40, 41, 42, 43, 44, 45)),
+                new LottoTicket(List.of(40, 41, 42, 43, 44, 45))
+        ));
+
+        List<Integer> winNumbers = List.of(1, 2, 3, 4, 5, 6);
+        LottoStatisticsMap lottoStatistics = new LottoStatisticsMap(lottoTickets, winNumbers);
+        int purchaseAmount = lottoTickets.size() * 1000;
+
+        // When
+        double profit = LottoInformation.calculateProfitRate(lottoStatistics, purchaseAmount);
+
+        // Then
+        Assertions.assertThat(profit).isEqualTo(1);
     }
 
 }
