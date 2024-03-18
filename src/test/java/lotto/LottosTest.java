@@ -23,7 +23,7 @@ class LottosTest {
         Lottos lottos = makeLottos(
             makeLotto(1, 2, 3, 45, 44, 43),
             makeLotto(4, 5, 6, 45, 44, 43),
-            makeLotto(45, 44, 43, 42, 41)
+            makeLotto(45, 44, 43, 42, 41, 40)
         );
 
         WinningLotto winningLotto = makeWinningLotto(1, 1, 2, 3, 4, 5, 6);
