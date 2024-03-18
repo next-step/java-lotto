@@ -13,7 +13,7 @@ public class LottoWinningNumber {
 
     public Rank match(final Lotto lotto) {
         final int countOfMatch = lotto.findMatchNumberCount(winningNumbers);
-        final boolean contains = lotto.getNumbers().contains(bonusNumber.getValue());
+        final boolean contains = lotto.contains(bonusNumber);
         return Rank.determine(countOfMatch, contains);
     }
 

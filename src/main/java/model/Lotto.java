@@ -23,6 +23,10 @@ public class Lotto {
                 .count();
     }
 
+    public boolean contains(final LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+
     public List<Integer> getNumbers() {
         return numbers.stream()
                 .map(LottoNumber::getValue)
