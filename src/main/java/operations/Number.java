@@ -10,7 +10,27 @@ public class Number {
         this.number = Integer.parseInt(number);
     }
 
+    public Number(int number) {
+        this.number = number;
+    }
+
     public int number() {
         return this.number;
+    }
+
+    public int minus(Number otherNumber) {
+        return this.number - otherNumber.number();
+    }
+
+    public int divide(Number otherNumber) {
+        return this.number / otherNumber.number();
+    }
+
+    public int multiply(Number otherNumber) {
+        return this.number * otherNumber.number();
+    }
+
+    public int add(Number otherNumber) {
+        return this.number + otherNumber.number();
     }
 }

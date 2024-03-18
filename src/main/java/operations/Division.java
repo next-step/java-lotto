@@ -9,7 +9,7 @@ public class Division implements CalculateStrategy {
     }
 
     @Override
-    public int calculate(int number1, int number2) {
-        return number1 / number2;
+    public int calculate(Number number1, Number number2) {
+        return number1.divide(number2);
     }
 }

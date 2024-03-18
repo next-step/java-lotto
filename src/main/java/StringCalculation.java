@@ -1,4 +1,5 @@
 import operations.CalculateStrategy;
+import operations.Number;
 import operations.OperationStrategies;
 
 public class StringCalculation {
@@ -24,9 +25,9 @@ public class StringCalculation {
     private static int calculate(String[] strings, int sum, int i) {
         CalculateStrategy operation = OperationStrategies.getOperation(strings[i]);
         if (i == 1) {
-            sum += operation.calculate(Integer.parseInt(strings[i - 1]), Integer.parseInt(strings[i + 1]));
+            sum += operation.calculate(new Number(strings[i - 1]), new Number(strings[i + 1]));
             return sum;
         }
-        return operation.calculate(sum, Integer.parseInt(strings[i + 1]));
+        return operation.calculate(new Number(sum), new Number(strings[i + 1]));
     }
 }

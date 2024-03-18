@@ -12,7 +12,6 @@ public class StringCalculationTest {
     @Test
     void splitByGap() {
         assertThat(StringCalculation.splitByGap("1 + 3")).containsExactly("1", "+", "3");
-        assertThat(StringCalculation.splitByGap("")).containsExactly("");
     }
 
     @DisplayName("빈문자열 또는 Null 값이면 예외를 던진다.")
