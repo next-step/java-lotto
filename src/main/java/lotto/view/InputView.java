@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 import static lotto.validation.LottoMachineValidator.assertMoney;
+import static lotto.validation.WinningInfoValidator.assertDuplicatedBonus;
 
 public class InputView {
 
@@ -75,10 +76,5 @@ public class InputView {
         return askBonusNumber(winningLottoNumber);
     }
 
-    private void assertDuplicatedBonus(Lotto winningLottoNumber, LottoNumber bonusNumber) {
-        if (winningLottoNumber.contains(bonusNumber)) {
-            throw new InvalidLottoException("당첨 번호와 중복되지 않는 번호를 입력하세요");
-        }
-    }
 
 }

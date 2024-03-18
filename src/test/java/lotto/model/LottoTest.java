@@ -34,7 +34,7 @@ public class LottoTest {
     @Test
     void 여러개의_번호를_로또번호와_매칭한다() {
         Lotto lotto = create(1, 2, 3, 4, 5, 6);
-        Rank actual = lotto.match(create(1, 2, 3, 4, 5, 6));
+        Rank actual = lotto.match(new WinningInfo(create(1, 2, 3, 4, 5, 6), new LottoNumber(7)));
 
         assertThat(actual).isEqualTo(Rank.ONE);
     }
@@ -50,17 +50,8 @@ public class LottoTest {
     @Test
     void 여러개의_번호를_매치할때_일차하는_볼이_없는경우_NO_MATCH반환한다() {
         Lotto lotto = create(1, 2, 3, 4, 5, 6);
-        Rank actual = lotto.match(create(7, 8, 9, 10, 11, 12));
+        Rank actual = lotto.match(new WinningInfo(create(7, 8, 9, 10, 11, 12), new LottoNumber(13)));
 
         assertThat(actual).isEqualTo(Rank.NO_MATCH);
-    }
-
-    @Test
-    void 중복번호를_매칭할경우_예외를_반환한다() {
-        Lotto lotto = create(1, 2, 3, 4, 5, 6);
-
-        assertThatThrownBy(() -> lotto.match(create(1, 1, 1, 1, 1, 1)))
-                .isInstanceOf(InvalidLottoException.class)
-                .hasMessage("중복을 제외한 6개의 로또 번호가 필요합니다");
     }
 }

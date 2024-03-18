@@ -6,6 +6,7 @@ import lotto.model.LottoMachine;
 import lotto.model.LottoNumber;
 import lotto.model.LottoPaper;
 import lotto.model.Prize;
+import lotto.model.WinningInfo;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -27,8 +28,9 @@ public class LottoController {
 
         Lotto winningNumberLotto = inputView.askWinningNumbers();
         LottoNumber bonusNumber = inputView.askBonusNumber(winningNumberLotto);
-        
-        Prize prize = lottoPaper.matches(winningNumberLotto);
+        WinningInfo winningInfo = new WinningInfo(winningNumberLotto, bonusNumber);
+
+        Prize prize = lottoPaper.matches(winningInfo);
 
         resultView.printResult(prize, lottoPaper.getQuantity());
     }

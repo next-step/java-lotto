@@ -41,15 +41,23 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public Rank match(Lotto other) {
-        if (other == null) {
-            throw new InvalidLottoException("매칭할 수 있는 로또가 존재하지 않습니다");
+//    public Rank match(Lotto other) {
+//        if (other == null) {
+//            throw new InvalidLottoException("매칭할 수 있는 로또가 존재하지 않습니다");
+//        }
+//
+//        Set<LottoNumber> lottoNumberSet = new HashSet<>(this.lottoNumbers);
+//        lottoNumberSet.retainAll(other.lottoNumbers);
+//
+//        return Rank.find(lottoNumberSet.size());
+//    }
+
+    public Rank match(WinningInfo winningInfo) {
+        if (winningInfo == null) {
+            throw new InvalidLottoException("당첨 번호 정보가 존재하지 않습니다");
         }
 
-        Set<LottoNumber> lottoNumberSet = new HashSet<>(this.lottoNumbers);
-        lottoNumberSet.retainAll(other.lottoNumbers);
-
-        return Rank.find(lottoNumberSet.size());
+        return winningInfo.findRank(this);
     }
 
     public LottoNumberDto toLottoNumberDto() {
@@ -62,5 +70,11 @@ public class Lotto {
 
     public boolean contains(LottoNumber bonus) {
         return this.lottoNumbers.contains(bonus);
+    }
+
+    public int uniqueNumberSize(Lotto other) {
+        Set<LottoNumber> unique = new HashSet<>(this.lottoNumbers);
+        unique.retainAll(other.lottoNumbers);
+        return unique.size();
     }
 }
