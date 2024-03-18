@@ -6,4 +6,9 @@ public class StringCalculator {
         String[] tokens = input.split(" ");
         return Integer.parseInt(tokens[0]) + Integer.parseInt(tokens[2]);
     }
+
+    public static int subtract(String input) {
+        String[] tokens = input.split(" ");
+        return Integer.parseInt(tokens[0]) - Integer.parseInt(tokens[2]);
+    }
 }
