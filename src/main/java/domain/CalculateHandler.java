@@ -9,6 +9,7 @@ public class CalculateHandler {
     private String previousState = "";
 
     public void handle(String input){
+        if(!isNumber(input) && "".equals(previousState)) throw new IllegalArgumentException();
         if(isNumber(input) && "".equals(previousState)){
             numberCache = toInts(input);
             previousState = input;
@@ -28,6 +29,10 @@ public class CalculateHandler {
     private void validateIfDuplication(String input) {
         if(isNumber(input) && isNumber(previousState)) throw new IllegalArgumentException();
         if(!isNumber(input) && !isNumber(previousState)) throw new IllegalArgumentException();
+    }
+
+    public void validateIfOperationPlacedInLast(){
+        if(!isNumber(previousState)) throw new IllegalArgumentException();
     }
 
     private int toInts(String input) {

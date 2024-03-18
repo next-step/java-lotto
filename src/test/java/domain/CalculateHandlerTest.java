@@ -57,4 +57,15 @@ class CalculateHandlerTest {
             }
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("연산자가 가장 처음에 있을때")
+    void operation_place_first(){
+        final String[] inputs = {"*", "2", "+", "3"};
+        assertThatThrownBy(()->{
+            for(String input : inputs){
+                calculateHandler.handle(input);
+            }
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }
