@@ -4,6 +4,9 @@ import calculator.domain.type.StringOperator;
 
 import java.util.Objects;
 
+import static calculator.domain.type.StringOperator.OPERATIONS;
+
+
 public class Operator {
 
   private final StringOperator operator;
@@ -14,6 +17,10 @@ public class Operator {
 
   public static Operator of(String input) {
     return new Operator(StringOperator.convert(input));
+  }
+
+  public int apply(int firstOperand, int secondOperand) {
+    return OPERATIONS.get(this.operator).calculate(firstOperand, secondOperand);
   }
 
   @Override

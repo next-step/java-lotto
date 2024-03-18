@@ -1,18 +1,8 @@
 package calculator.domain;
 
-import calculator.domain.strategy.*;
-
-import java.util.List;
 import java.util.Queue;
 
 public class StringCalculator {
-
-  private static final List<CalculateStrategy> calculateStrategies = List.of(
-      new AdditionStrategy(),
-      new SubtractionStrategy(),
-      new MultiplicationStrategy(),
-      new DivisionStrategy()
-  );
 
   private StringCalculator() {
   }
@@ -23,16 +13,11 @@ public class StringCalculator {
 
     int result = operandQueue.poll().toNumber();
     while (!operatorQueue.isEmpty()) {
-      result = doCalculateStrategies(result, operandQueue.poll(), operatorQueue.poll());
+      Operator operator = operatorQueue.poll();
+      Operand operand = operandQueue.poll();
+      result = operator.apply(result, operand.toNumber());
     }
 
-    return result;
-  }
-
-  private static int doCalculateStrategies(int result, Operand secondOperand, Operator operator) {
-    for (CalculateStrategy calculateStrategy : calculateStrategies) {
-      result = calculateStrategy.calculate(result, operator, secondOperand.toNumber());
-    }
     return result;
   }
 }
