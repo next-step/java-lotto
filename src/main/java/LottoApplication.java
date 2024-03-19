@@ -12,6 +12,7 @@ public class LottoApplication {
 
         Lotto winningLotto = new Lotto(convertWinningNumbers(InputView.promptForWinningNumbers()));
         ResultView.printRanks(lottos.ranks(winningLotto));
+        ResultView.printRateOfReturn(lottos.rateOfReturn(winningLotto));
     }
 
     private static List<Integer> convertWinningNumbers(String input) {

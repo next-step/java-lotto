@@ -19,4 +19,8 @@ public class ResultView {
         sb.append("6개 일치 (5000원)-").append(ranks.count(Rank.FIRST)).append("개").append("\n");
         System.out.println(sb);
     }
+
+    public static void printRateOfReturn(double rateOfReturn) {
+        System.out.printf("총 수익률은 %f 입니다.\n", rateOfReturn);
+    }
 }
