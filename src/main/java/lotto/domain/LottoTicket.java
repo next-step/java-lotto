@@ -10,12 +10,12 @@ public class LottoTicket {
         this.numbers = numbers;
     }
 
-    public LottoInformation getInformation(LottoTicket winLottoTicket) {
+    public LottoPrize getPrize(LottoTicket winLottoTicket) {
         int matchCount = 0;
         for (Integer number : winLottoTicket.numbers) {
             matchCount += count(number);
         }
-        return LottoInformation.lookup(matchCount);
+        return LottoPrize.lookup(matchCount);
     }
 
     private int count(Integer number) {

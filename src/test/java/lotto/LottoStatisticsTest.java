@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoInformation;
+import lotto.domain.LottoPrize;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
@@ -32,7 +32,7 @@ public class LottoStatisticsTest {
         LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, winLottoTicket);
 
         // Then
-        assertThat(lottoStatistics.getMatchedLottoCount(LottoInformation.lookup(hit))).isEqualTo(count);
+        assertThat(lottoStatistics.getMatchedLottoCount(LottoPrize.lookup(hit))).isEqualTo(count);
     }
 
     @ParameterizedTest(name = "[{index}] {0}개 일치 - {1}개")
@@ -54,7 +54,7 @@ public class LottoStatisticsTest {
         LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, winLottoTicket);
 
         // Then
-        assertThat(lottoStatistics.getMatchedLottoCount(LottoInformation.lookup(hit))).isEqualTo(count);
+        assertThat(lottoStatistics.getMatchedLottoCount(LottoPrize.lookup(hit))).isEqualTo(count);
     }
 
 }

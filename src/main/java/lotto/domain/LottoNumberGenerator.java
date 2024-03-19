@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.domain.LottoInformation.*;
+import static lotto.domain.LottoPrize.*;
 
 public class LottoNumberGenerator {
 

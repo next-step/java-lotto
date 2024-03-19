@@ -1,6 +1,6 @@
 package lotto.ui;
 
-import lotto.domain.LottoInformation;
+import lotto.domain.LottoPrize;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
@@ -28,20 +28,20 @@ public class ResultView {
     }
 
     public static void printLottoStatistics(LottoStatistics statisticsMap, int purchaseAmount) {
-        List<LottoInformation> informations = LottoInformation.getLottoInformations();
+        List<LottoPrize> prizes = LottoPrize.getLottoPrizes();
 
         StringBuilder stringBuilder = new StringBuilder();
-        for (LottoInformation information : informations) {
-            stringBuilder.append(formatStatistic(statisticsMap, information)).append(System.lineSeparator());
+        for (LottoPrize prize : prizes) {
+            stringBuilder.append(formatStatistic(statisticsMap, prize)).append(System.lineSeparator());
         }
         stringBuilder.append(formatProfitRate(statisticsMap, purchaseAmount));
 
         System.out.println(stringBuilder);
     }
 
-    private static String formatStatistic(LottoStatistics statisticsMap, LottoInformation information) {
+    private static String formatStatistic(LottoStatistics statisticsMap, LottoPrize prize) {
         return MessageFormat.format("{0}개 일치 ({1}원) - {2}개"
-                , LottoInformation.getMatchCount(information), LottoInformation.getWinAmount(information), statisticsMap.getMatchedLottoCount(information));
+                , LottoPrize.getMatchCount(prize), LottoPrize.getWinAmount(prize), statisticsMap.getMatchedLottoCount(prize));
     }
 
     public static String formatProfitRate(LottoStatistics statisticsMap, int purchaseAmount) {

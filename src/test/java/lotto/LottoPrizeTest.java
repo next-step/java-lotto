@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.LottoInformation;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
@@ -10,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class LottoInformationTest {
+public class LottoPrizeTest {
 
     @Test
     @DisplayName("[성공] 5개의 로또를 구매하고 6, 5, 4, 3개의 번호가 각각 한번씩 당첨된 경우 수익률을 구한다.")

@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class LottoStatistics {
 
-    // [Key] LottoInformation, [Value] Matched Count (Statistics)
-    private final Map<LottoInformation,  Integer> statisticsMap;
+    // [Key] LottoPrize, [Value] Matched Count (Statistics)
+    private final Map<LottoPrize,  Integer> statisticsMap;
 
     public LottoStatistics(LottoTickets lottoTickets, LottoTicket winLottoTicket) {
         this.statisticsMap = new HashMap<>();
@@ -15,20 +15,20 @@ public class LottoStatistics {
 
     private void createStatistics(LottoTickets tickets, LottoTicket winLottoTicket) {
         for (LottoTicket lottoTicket : tickets.get()) {
-            LottoInformation lottoInformation = lottoTicket.getInformation(winLottoTicket);
-            addStatistic(lottoInformation);
+            LottoPrize lottoPrize = lottoTicket.getPrize(winLottoTicket);
+            addStatistic(lottoPrize);
         }
     }
 
-    private void addStatistic(LottoInformation information) {
-        if (information != null) {
-            this.statisticsMap.put(information, this.statisticsMap.getOrDefault(information, 0) + 1);
+    private void addStatistic(LottoPrize prize) {
+        if (prize != null) {
+            this.statisticsMap.put(prize, this.statisticsMap.getOrDefault(prize, 0) + 1);
         }
     }
 
-    public int getMatchedLottoCount(LottoInformation information) {
-        if (this.statisticsMap.containsKey(information)) {
-            return this.statisticsMap.get(information);
+    public int getMatchedLottoCount(LottoPrize prize) {
+        if (this.statisticsMap.containsKey(prize)) {
+            return this.statisticsMap.get(prize);
         }
         return 0;
     }
@@ -36,13 +36,13 @@ public class LottoStatistics {
 
     public double calculateProfitRate(int purchaseAmount) {
         double totalProfit = 0;
-        for (LottoInformation information : statisticsMap.keySet()) {
-            totalProfit += getTotalAmount(information);
+        for (LottoPrize prize : statisticsMap.keySet()) {
+            totalProfit += getTotalAmount(prize);
         }
         return totalProfit / purchaseAmount;
     }
 
-    private double getTotalAmount(LottoInformation information) {
-        return statisticsMap.get(information) * LottoInformation.getWinAmount(information);
+    private double getTotalAmount(LottoPrize prize) {
+        return statisticsMap.get(prize) * LottoPrize.getWinAmount(prize);
     }
 }
