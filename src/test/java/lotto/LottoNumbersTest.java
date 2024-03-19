@@ -51,8 +51,8 @@ public class LottoNumbersTest {
 
     private static List<List<Integer>> getValidLottoNumbers() {
         return List.of(
-                List.of(1,2,3,4,5,6),
-                List.of(2,10,45,1,30,5),
+                List.of(1, 2, 3, 4, 5, 6),
+                List.of(2, 10, 45, 1, 30, 5),
                 List.of(42, 1, 10, 24, 34, 40)
         );
     }
