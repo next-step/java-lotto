@@ -1,12 +1,25 @@
 package lotto.model;
 
+import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static lotto.model.LottoMachine.LOTTO_PER_MONEY;
 
 public class Prize {
     private final Map<Rank, Integer> prizeMap;
+
+    public Prize(List<Rank> ranks) {
+        this(toEnumMap(ranks));
+    }
+
+    private static EnumMap<Rank, Integer> toEnumMap(List<Rank> ranks) {
+        return ranks.stream()
+                .collect(Collectors.toMap(Function.identity(), e -> 1, Integer::sum, () -> new EnumMap<>(Rank.class)));
+    }
 
     public Prize(Map<Rank, Integer> prizeMap) {
         this.prizeMap = prizeMap;

@@ -32,6 +32,6 @@ public class LottoController {
 
         Prize prize = lottoPaper.matches(winningInfo);
 
-        resultView.printResult(prize, lottoPaper.getQuantity());
+        resultView.printResult(prize, prize.rateOfReturn(lottoPaper.getQuantity()));
     }
 }

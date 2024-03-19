@@ -3,12 +3,9 @@ package lotto.model;
 import lotto.dto.LottoNumberResponse;
 import lotto.exception.InvalidLottoException;
 
-import java.util.EnumMap;
 import java.util.List;
-import java.util.function.Function;
 
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
 
 public class LottoPaper {
     private final List<Lotto> lottos;
@@ -32,12 +29,12 @@ public class LottoPaper {
     }
 
     public Prize matches(WinningLotto winningLotto) {
-        return new Prize(toRankEnumMap(winningLotto));
+        return new Prize(toRanks(winningLotto));
     }
 
-    private EnumMap<Rank, Integer> toRankEnumMap(WinningLotto winningLotto) {
+    private List<Rank> toRanks(WinningLotto winningLotto) {
         return this.lottos.stream()
                 .map(lotto -> lotto.match(winningLotto))
-                .collect(toMap(Function.identity(), e -> 1, Integer::sum, () -> new EnumMap<>(Rank.class)));
+                .collect(toList());
     }
 }

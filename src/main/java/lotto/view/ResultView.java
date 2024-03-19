@@ -33,12 +33,12 @@ public class ResultView {
                 .collect(Collectors.joining(DELIMITER, PREFIX, SUFFIX));
     }
 
-    public void printResult(Prize prize, int quantity) {
+    public void printResult(Prize prize, double rateOfReturn) {
         StringBuilder sb = new StringBuilder();
 
         appendPrefix(sb);
         appendResult(sb, prize);
-        appendRateOfReturn(sb, prize.rateOfReturn(quantity));
+        appendRateOfReturn(sb, rateOfReturn);
 
         System.out.println(sb);
     }
