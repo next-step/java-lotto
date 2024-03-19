@@ -6,9 +6,17 @@ import java.util.Set;
 public class LottoNumbers {
     private final List<Integer> numbers;
 
-    private final int MAX_NUMBER = 45;
-    private final int MIN_NUMBER = 1;
-    private final int NUMBER_LEN = 6;
+    public static final int MAX_NUMBER = 45;
+    public static final int MIN_NUMBER = 1;
+    public static final int NUMBER_LEN = 6;
+
+    public LottoNumbers(NumberGenerator lottoNumbersGenerator) {
+        this(lottoNumbersGenerator.generateNumbers());
+    }
+
+    public LottoNumbers(LottoNumbers lottoNumbers) {
+        this.numbers = List.copyOf(lottoNumbers.numbers);
+    }
 
     public LottoNumbers(List<Integer> numbers) {
         assertValidLength(numbers);
@@ -16,6 +24,10 @@ public class LottoNumbers {
         assertNotDuplicateNumber(numbers);
 
         this.numbers = List.copyOf(numbers);
+    }
+
+    public List<Integer> getNumbers() {
+        return List.copyOf(numbers);
     }
 
     private void assertValidLength(List<Integer> numbers) {

@@ -1,7 +1,9 @@
 package lotto;
 
-import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
+import lotto.infra.RandomNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -11,13 +13,13 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class LottoTest {
+public class LottoNumbersTest {
 
     @ParameterizedTest
     @DisplayName("잘못된 경우 입력했을 경우 테스트(6글자가 아니거나 중복된 숫자가 있거나 1~45 범위를 벗어난 경우)")
     @MethodSource("getInvalidLottoNumbers")
     void testInvalidLotto(List<Integer> invalidLottoNumbers) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(invalidLottoNumbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(invalidLottoNumbers));
     }
 
     private static List<List<Integer>> getInvalidLottoNumbers() {
@@ -30,5 +32,11 @@ public class LottoTest {
         result.add(null);
 
         return result;
+    }
+
+    @Test
+    @DisplayName("랜덤으로 로또 생성할 시, 예외 발생하는 지 테스트")
+    void testRandomLotto() {
+        assertThat(new LottoNumbers(new RandomNumberGenerator()).getNumbers()).hasSize(LottoNumbers.NUMBER_LEN);
     }
 }

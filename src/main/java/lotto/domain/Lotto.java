@@ -7,7 +7,7 @@ public class Lotto {
     private final LottoNumbers lottoNumbers;
     private final int PRICE = 1000;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 }
