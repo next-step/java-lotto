@@ -2,7 +2,6 @@
 
 ## Todo
 - [ ] CalculateHandler를 "문자열이 숫자인지 연산자인지 판단/왼쪽부터 순서대로 계산" 2가지 책임을 가진 클래스로 분리
-- [ ] Operator의 toOperator를 stream 써서 리팩토링
 - [ ] IntBinaryOperator를 Functional Interface를 사용해서 직접 구현하는 행태로 변경
 
 
@@ -18,3 +17,4 @@
 - [x] 연산자가 양끝에 있으면 예외("1 +" =>외IllegalArgumentException, "+ 1" => IllegalArgumentException)
 - [x] intelliJ newLine 적용
 - [x] Todo.md에 md 문법 적용
+- [x] Operator의 toOperator를 stream 써서 리팩토링
