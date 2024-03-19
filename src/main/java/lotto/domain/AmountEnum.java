@@ -24,6 +24,12 @@ public enum AmountEnum {
 		public Integer getAmount() {
 			return 5000;
 		}
+	},
+	OTHER(0) {
+		@Override
+		public Integer getAmount() {
+			return 0;
+		}
 	};
 
 	private final Integer collectedCount;
@@ -34,12 +40,16 @@ public enum AmountEnum {
 
 	public abstract Integer getAmount();
 
+	public Integer getCollectedCount() {
+		return collectedCount;
+	}
+
 	public static AmountEnum from(final Integer collectedCount) {
 		for (AmountEnum amountEnum : AmountEnum.values()) {
 			if (amountEnum.collectedCount.equals(collectedCount)) {
 				return amountEnum;
 			}
 		}
-		throw new IllegalArgumentException(collectedCount + "는 당첨 개수가 아닙니다.");
+		return OTHER;
 	}
 }

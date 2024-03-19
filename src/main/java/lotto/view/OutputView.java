@@ -2,10 +2,8 @@ package lotto.view;
 
 import lotto.domain.Amount;
 import lotto.domain.AmountEnum;
-import lotto.domain.Lotto;
 import lotto.domain.MyLottos;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class OutputView {
@@ -20,24 +18,14 @@ public class OutputView {
 		return myLottos;
 	}
 
-	public Map<Integer, Integer> printWinnersStatistics(final String winNumber, final MyLottos myLottos) {
-		Lotto winLotto = new Lotto(winNumber);
-		Map<Integer, Integer> hashMap = new HashMap<>();
-		hashMap.put(3, 0);
-		hashMap.put(4, 0);
-		hashMap.put(5, 0);
-		hashMap.put(6, 0);
-		for (int i = 0; i < myLottos.getLottoCount(); i++) {
-			long count = myLottos.getLottos().get(i).compareWinNumber(winLotto);
-			findWinner(count, hashMap);
-		}
+	public void printWinnersStatistics(final String winNumber, final MyLottos myLottos) {
+		Map winner = myLottos.findWinner(winNumber);
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 		for (int i = 3; i <= 6; i++) {
-			printWinners(hashMap, i);
+			printWinners(winner, i);
 		}
-
-		return hashMap;
+		printTotalReturn(winner, myLottos.getLottoCount() * 1000);
 	}
 
 	public void printTotalReturn(final Map<Integer, Integer> hashMap, final Integer pay) {
@@ -50,11 +38,5 @@ public class OutputView {
 
 	private void printWinners(final Map<Integer, Integer> hashMap, final int i) {
 		System.out.println(i + "개 일치 (" + AmountEnum.from(i).getAmount() + "원)- " + hashMap.get(i) + "개");
-	}
-
-	private static void findWinner(final long count, final Map<Integer, Integer> hashMap) {
-		if (count >= 3) {
-			hashMap.put((int) count, hashMap.get((int) count) + 1);
-		}
 	}
 }

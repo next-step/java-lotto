@@ -38,10 +38,11 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
-    public int compareWinNumber(Lotto winNumber) {
-        return (int) lottoNumbers.stream()
+    public AmountEnum compareWinNumber(Lotto winNumber) {
+        int count = (int) lottoNumbers.stream()
                 .filter(lottoNumber -> winNumber.contains(lottoNumber))
                 .count();
+        return AmountEnum.from(count);
     }
 
     public String getNumbersToString() {

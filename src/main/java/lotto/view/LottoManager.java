@@ -2,8 +2,6 @@ package lotto.view;
 
 import lotto.domain.MyLottos;
 
-import java.util.Map;
-
 public class LottoManager {
 	private final InputView inputView;
 	private final OutputView outputView;
@@ -17,7 +15,6 @@ public class LottoManager {
 		Integer pay = inputView.inputPay();
 		MyLottos myLottos = outputView.printBuyLottos(pay);
 		String winNumber = inputView.getWinNumber();
-		Map<Integer, Integer> hashMap = outputView.printWinnersStatistics(winNumber, myLottos);
-		outputView.printTotalReturn(hashMap, pay);
+		outputView.printWinnersStatistics(winNumber, myLottos);
 	}
 }
