@@ -5,13 +5,6 @@ import java.util.Stack;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
-    // 사칙연산 기호
-    private static final String ADD = "+";
-    private static final String SUBSTRACT = "-";
-    private static final String MULTIPLY = "*";
-    private static final String DIVIDE = "/";
-    private static final List<String> OPERATORS = List.of(ADD, SUBSTRACT, MULTIPLY, DIVIDE);
-
     // 숫자로 나타낼 수 있는 문자열인지 확인하기 위한 패턴
     private static final Pattern PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
 
@@ -20,11 +13,10 @@ public class StringCalculator {
     private static final Stack<String> SIGNSTACK = new Stack<>();
 
     // 수로 나타낼 수 있는 문자열인지
-    private static boolean isNumeric;
-    // 문자열이 사칙연산 기호인지
-    private static boolean isOperator;
+    private boolean isNumeric;
+
     // 연산자 스택이 비어있는지
-    private static boolean isSignEmpty;
+    private boolean isSignEmpty;
 
     public int calculate(String input) {
         if (isBlank(input))
@@ -36,45 +28,26 @@ public class StringCalculator {
     private int getResult(String input) {
         for (String token : split(input)) {
             isNumeric = isNumeric(token);
-            isOperator = isOperator(token);
             isSignEmpty = isSignEmpty();
 
-            // 숫자도 아니면서 사칙연산 기호도 아닌 경우
-            if (!isNumeric && !isOperator)
-                throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
-            // 사칙연산 기호인 경우 : 연산자 스택에 push
-            if (!isNumeric)
+            // 숫자가 아닌 경우 경우 : 연산자 스택에 push
+            if (!isNumeric) {
                 pushSignStack(token);
+            }
             // 숫자이고 연산자 스택이 비어있는 경우 : 피연산자 스택에 push
-            if (isNumeric && isSignEmpty)
+            if (isNumeric && isSignEmpty) {
                 pushNumStack(parseInt(token));
+            }
             // 숫자이고 연산자 스택이 비어있지 않은 경우 : 연산 결과를 피연산자 스택에 push
-            if (isNumeric && !isSignEmpty)
-                pushNumStack(operate(popNumStack(), parseInt(token), popSignStack()));
+            if (isNumeric && !isSignEmpty) {
+                pushNumStack(apply(popNumStack(), parseInt(token), popSignStack()));
+            }
         }
         return peekNumStack();
     }
 
-    public int operate(int num1, int num2, String operator) {
-        if (isEqualAdd(operator))
-            return num1 + num2;
-        if (isEqualSubstract(operator))
-            return num1 - num2;
-        if (isEqualMultiply(operator))
-            return num1 * num2;
-        return num1 / num2;
-    }
-
-    private boolean isEqualAdd(String operator) {
-        return operator.equals(ADD);
-    }
-
-    private boolean isEqualSubstract(String operator) {
-        return operator.equals(SUBSTRACT);
-    }
-
-    private boolean isEqualMultiply(String operator) {
-        return operator.equals(MULTIPLY);
+    public int apply(int num1, int num2, String textOperator) {
+        return Operator.checkOperator(textOperator).operate(num1, num2);
     }
 
     private void pushSignStack(String str) {
@@ -115,9 +88,5 @@ public class StringCalculator {
 
     private int parseInt(String input) {
         return Integer.parseInt(input);
-    }
-
-    private boolean isOperator(String input) {
-        return OPERATORS.contains(input);
     }
 }
