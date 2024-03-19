@@ -52,7 +52,7 @@ public class ResultView {
 
     private static String formatStatistic(LottoStatistics statisticsMap, LottoPrize prize) {
         return MessageFormat.format("{0}개 일치 ({1}원) - {2}개"
-                , LottoPrize.getMatchCount(prize), LottoPrize.getPrize(prize), statisticsMap.getMatchCount(prize));
+                , prize.getMatchCount(), prize.getMatchCount(), statisticsMap.getMatchCount(prize));
     }
 
     public static String formatProfitRate(LottoStatistics statisticsMap, int purchaseAmount) {

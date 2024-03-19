@@ -29,16 +29,16 @@ public enum LottoPrize {
         return List.of(LottoPrize.values());
     }
 
-    public static int getPrize(LottoPrize prize) {
-        return prize.prize;
-    }
-
     public static LottoPrize lookup(int matchCount) {
         return prizeMap.get(matchCount);
     }
 
-    public static int getMatchCount(LottoPrize prizes) {
-        return prizes.matchCount;
+    public int getPrize() {
+        return prize;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 
 }

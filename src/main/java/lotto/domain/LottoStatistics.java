@@ -53,6 +53,6 @@ public class LottoStatistics {
     }
 
     private double getTotalAmount(LottoPrize prize) {
-        return statisticsMap.get(prize) * LottoPrize.getPrize(prize);
+        return statisticsMap.get(prize) * prize.getPrize();
     }
 }
