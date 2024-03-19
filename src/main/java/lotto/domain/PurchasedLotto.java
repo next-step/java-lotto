@@ -1,12 +1,10 @@
 package lotto.domain;
 
+import lotto.data.LottoNumberVO;
 import lotto.data.LottoWinInfo;
 import lotto.dto.LottoResultDto;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static lotto.util.ConstUtils.*;
 
@@ -44,12 +42,14 @@ public class PurchasedLotto {
         return List.copyOf(lottoBundle);
     }
 
-    public LottoResultDto matchWinningNumbers(LottoNumbers winningLottoNumbers) {
+    public LottoResultDto matchWinningNumbers(LottoNumbers winningLottoNumbers, LottoNumberVO bonusNumber) {
         Map<LottoWinInfo, Integer> lottoResultMap = initializeLottoResultMap();
 
         for (LottoNumbers lotto : this.lottoBundle) {
+            LottoNumbersWithBonusWrapper lottoNumbersWithBonusWrapper = new LottoNumbersWithBonusWrapper(lotto, bonusNumber);
+
             lottoResultMap.computeIfPresent(
-                    lotto.countMatchWithWinningLottoNumbers(winningLottoNumbers),
+                    lottoNumbersWithBonusWrapper.countMatchWithWinningLottoNumbersWithBonusNumber(winningLottoNumbers),
                     (key, value) -> value + 1
             );
         }
@@ -58,6 +58,7 @@ public class PurchasedLotto {
                 lottoResultMap.get(LottoWinInfo.WIN_FOURTH),
                 lottoResultMap.get(LottoWinInfo.WIN_THIRD),
                 lottoResultMap.get(LottoWinInfo.WIN_SECOND),
+                lottoResultMap.get(LottoWinInfo.WIN_FIRST_WITH_BONUS),
                 lottoResultMap.get(LottoWinInfo.WIN_FIRST),
                 earnRate(lottoResultMap)
         );
@@ -76,21 +77,16 @@ public class PurchasedLotto {
     private Map<LottoWinInfo, Integer> initializeLottoResultMap() {
         HashMap<LottoWinInfo, Integer> lottoResultMap = new HashMap<>();
 
-        lottoResultMap.put(LottoWinInfo.WIN_FIRST, 0);
-        lottoResultMap.put(LottoWinInfo.WIN_SECOND, 0);
-        lottoResultMap.put(LottoWinInfo.WIN_THIRD, 0);
-        lottoResultMap.put(LottoWinInfo.WIN_FOURTH, 0);
-        lottoResultMap.put(LottoWinInfo.PASS, 0);
+        Arrays.stream(LottoWinInfo.values())
+                .forEach(lottoWinInfo -> lottoResultMap.put(lottoWinInfo, 0));
 
         return lottoResultMap;
     }
 
     private double earnRate(Map<LottoWinInfo, Integer> lottoResultMap) {
-        double winMoney =
-                lottoResultMap.get(LottoWinInfo.WIN_FOURTH) * LottoWinInfo.WIN_FOURTH.getWinningPrice() +
-                lottoResultMap.get(LottoWinInfo.WIN_THIRD) * LottoWinInfo.WIN_THIRD.getWinningPrice() +
-                lottoResultMap.get(LottoWinInfo.WIN_SECOND) * LottoWinInfo.WIN_SECOND.getWinningPrice() +
-                lottoResultMap.get(LottoWinInfo.WIN_FIRST) * LottoWinInfo.WIN_FIRST.getWinningPrice();
+        double winMoney = lottoResultMap.entrySet().stream()
+                .mapToInt(entry -> entry.getValue() * entry.getKey().getWinningPrice())
+                .sum();
 
         return winMoney / purchasedLottoPrice();
     }

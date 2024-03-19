@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.data.LottoNumberVO;
 import lotto.dto.LottoResultDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,27 +30,31 @@ class PurchasedLottoTest {
     @Test
     void matchWinningLottoNumbers() {
         // given
-        int purchasedPrice = 4000;
+        int purchasedPrice = 5000;
         List<LottoNumbers> manualLottoNumbers = List.of(
                 new LottoNumbers(List.of(1, 2, 3, 10, 11, 12)),
                 new LottoNumbers(List.of(1, 2, 3, 10, 11, 12)),
                 new LottoNumbers(List.of(1, 2, 3, 4, 11, 12)),
-                new LottoNumbers(List.of(1, 2, 3, 4, 5, 6))
+                new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)),
+                new LottoNumbers(List.of(1, 2, 3, 4, 5, 35))
+
         );
         PurchasedLotto purchasedLotto = new PurchasedLotto(purchasedPrice, manualLottoNumbers);
 
         LottoNumbers winningNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumberVO bonusNumber = new LottoNumberVO(35);
 
         // when
-        LottoResultDto lottoResultDto = purchasedLotto.matchWinningNumbers(winningNumbers);
+        LottoResultDto lottoResultDto = purchasedLotto.matchWinningNumbers(winningNumbers, bonusNumber);
 
         // then
         assertAll(
                 () -> assertThat(lottoResultDto.getMatchThreeNumbers()).isEqualTo(2),
                 () -> assertThat(lottoResultDto.getMatchFourNumbers()).isEqualTo(1),
                 () -> assertThat(lottoResultDto.getMatchFiveNumbers()).isEqualTo(0),
+                () -> assertThat(lottoResultDto.getMatchSixNumbersIncludeBonus()).isEqualTo(1),
                 () -> assertThat(lottoResultDto.getMatchSixNumbers()).isEqualTo(1),
-                () -> assertThat(lottoResultDto.getEarnRate()).isEqualTo(500015L)
+                () -> assertThat(lottoResultDto.getEarnRate()).isEqualTo(406012L)
         );
     }
 }

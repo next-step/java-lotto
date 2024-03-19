@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.data.LottoNumberVO;
 import lotto.domain.LottoNumbers;
 import lotto.domain.PurchasedLotto;
 import lotto.view.Input;
@@ -19,6 +20,7 @@ public class LottoGameApplication {
         output.printPurchaseResult(purchasedLotto);
 
         LottoNumbers lastWeekWinningLottoNumbers = new LottoNumbers(input.getLastWeekWinningLottoNumbersInput());
-        output.printWinningResult(purchasedLotto.matchWinningNumbers(lastWeekWinningLottoNumbers));
+        LottoNumberVO bonusNumber = new LottoNumberVO(input.getBonusNumber());
+        output.printWinningResult(purchasedLotto.matchWinningNumbers(lastWeekWinningLottoNumbers, bonusNumber));
     }
 }

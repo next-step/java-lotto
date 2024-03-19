@@ -5,6 +5,7 @@ public class LottoResultDto {
     private final int matchThreeNumbers;
     private final int matchFourNumbers;
     private final int matchFiveNumbers;
+    private final int matchSixNumbersIncludeBonus;
     private final int matchSixNumbers;
     private final double earnRate;
 
@@ -12,12 +13,14 @@ public class LottoResultDto {
             int matchThreeNumbers,
             int matchFourNumbers,
             int matchFiveNumbers,
+            int matchSixNumbersIncludeBonus,
             int matchSixNumbers,
             double earnRate
     ) {
         this.matchThreeNumbers = matchThreeNumbers;
         this.matchFourNumbers = matchFourNumbers;
         this.matchFiveNumbers = matchFiveNumbers;
+        this.matchSixNumbersIncludeBonus = matchSixNumbersIncludeBonus;
         this.matchSixNumbers = matchSixNumbers;
         this.earnRate = earnRate;
     }
@@ -32,6 +35,10 @@ public class LottoResultDto {
 
     public int getMatchFiveNumbers() {
         return matchFiveNumbers;
+    }
+
+    public int getMatchSixNumbersIncludeBonus() {
+        return matchSixNumbersIncludeBonus;
     }
 
     public int getMatchSixNumbers() {

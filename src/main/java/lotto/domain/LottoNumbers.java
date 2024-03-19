@@ -33,12 +33,17 @@ public class LottoNumbers {
                 .filter(result -> result)
                 .count();
 
-        return LottoWinInfo.valueOf(resultCount);
+        return LottoWinInfo.valueOf(resultCount, false);
     }
 
     @Override
     public String toString() {
         return this.lottoNumbers.toString();
+    }
+
+    public boolean containNumbers(LottoNumberVO number) {
+        return this.lottoNumbers.stream()
+                .anyMatch(lotto -> lotto.equals(number));
     }
 
     private List<LottoNumberVO> getAutoLottoNumbers() {
@@ -54,10 +59,5 @@ public class LottoNumbers {
         lotto.forEach(number -> selectedLotto.add(new LottoNumberVO(number)));
 
         return selectedLotto;
-    }
-
-    private boolean containNumbers(LottoNumberVO number) {
-        return this.lottoNumbers.stream()
-                .anyMatch(lotto -> lotto.equals(number));
     }
 }

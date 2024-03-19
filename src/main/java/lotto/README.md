@@ -66,10 +66,13 @@
 # STEP 3
 
 #### Input
-- [ ] 보너스볼의 추가 입력을 받는다.
+- [x] 보너스볼의 추가 입력을 받는다.
 
 #### LottoWinInfo
 - [x] 우승 종류를 추가한다(보너스 볼 포함).
 
 #### LottoNumbers
-- [ ] 보너스 볼을 체크한다.
+- [x] 보너스 볼을 체크한다.
+
+#### LottoNumberWithBonusWrapper
+- 로또 번호와 보너스 번호를 래핑한다.
