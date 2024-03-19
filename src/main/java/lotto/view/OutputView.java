@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.Amount;
 import lotto.domain.AmountEnum;
 import lotto.domain.Lotto;
 import lotto.domain.MyLottos;
@@ -23,21 +22,21 @@ public class OutputView {
 		Map winner = myLottos.findWinner(new Lotto(winNumber));
 		System.out.println("당첨 통계");
 		System.out.println("---------");
-		for (int i = 3; i <= 6; i++) {
-			printWinners(winner, i);
-		}
+		printWinners(winner);
 		printTotalReturn(winner, myLottos.getLottoCount() * 1000);
 	}
 
-	public void printTotalReturn(final Map<Integer, Integer> hashMap, final Integer pay) {
+	public void printTotalReturn(final Map<AmountEnum, Integer> hashMap, final Integer pay) {
 		int totalAmount = 0;
 		for (int i = 3; i <= 6; i++) {
-			totalAmount += Amount.getAmount(i) * hashMap.get(i);
+			totalAmount += AmountEnum.from(i).getAmount() * hashMap.get(AmountEnum.from(i));
 		}
 		System.out.println("총 수익률은 " + (double) totalAmount / pay + "입니다.");
 	}
 
-	private void printWinners(final Map<Integer, Integer> hashMap, final int i) {
-		System.out.println(i + "개 일치 (" + AmountEnum.from(i).getAmount() + "원)- " + hashMap.get(i) + "개");
+	private void printWinners(final Map<AmountEnum, Integer> hashMap) {
+		for (int i = 3; i <= 6; i++) {
+			System.out.println(i + "개 일치 (" + AmountEnum.from(i).getAmount() + "원)- " + hashMap.get(AmountEnum.from(i)) + "개");
+		}
 	}
 }

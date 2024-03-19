@@ -39,16 +39,16 @@ public class MyLottos {
         return lottos.size();
     }
 
-    public Map findWinner(final Lotto winLotto) {
-        Map<Integer, Integer> hashMap = new HashMap<>();
-        hashMap.put(0, 0);
-        hashMap.put(3, 0);
-        hashMap.put(4, 0);
-        hashMap.put(5, 0);
-        hashMap.put(6, 0);
+    public Map<AmountEnum, Integer> findWinner(final Lotto winLotto) {
+        Map<AmountEnum, Integer> hashMap = new HashMap<>();
+        hashMap.put(AmountEnum.OTHER, 0);
+        hashMap.put(AmountEnum.FOURTH, 0);
+        hashMap.put(AmountEnum.THIRD, 0);
+        hashMap.put(AmountEnum.SECOND, 0);
+        hashMap.put(AmountEnum.FIRST, 0);
         for (int i = 0; i < lottos.size(); i++) {
             AmountEnum amountEnum = lottos.get(i).getAmountEnumCompareWinNumber(winLotto);
-            hashMap.put(amountEnum.getCollectedCount(), hashMap.get(amountEnum.getCollectedCount()) + 1);
+            hashMap.put(amountEnum, hashMap.get(amountEnum) + 1);
         }
         return hashMap;
     }

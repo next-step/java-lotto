@@ -19,10 +19,6 @@ public enum AmountEnum {
 		return amount;
 	}
 
-	public Integer getCollectedCount() {
-		return collectedCount;
-	}
-
 	public static AmountEnum from(final Integer collectedCount) {
 		for (AmountEnum amountEnum : AmountEnum.values()) {
 			if (amountEnum.collectedCount.equals(collectedCount)) {
