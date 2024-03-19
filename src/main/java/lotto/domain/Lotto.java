@@ -9,17 +9,21 @@ public class Lotto {
 
     private final List<Integer> lottoNumbers;
 
-    private Lotto(LottoNumberGeneratingStrategy lottoNumberGeneratingStrategyStub) {
-        this.lottoNumbers = lottoNumberGeneratingStrategyStub.lottoNumbers();
+    private Lotto(List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto valueOf(LottoNumberGeneratingStrategy lottoNumberGeneratingStrategyStub) {
-        return new Lotto(lottoNumberGeneratingStrategyStub);
+    public static Lotto valueOf(List<Integer> lottoNumbers) {
+        return new Lotto(lottoNumbers);
     }
 
     public long numberOfMatch(WinningNumbers winningNumbers) {
         return lottoNumbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
+    }
+
+    public List<Integer> lottoNumbers() {
+        return lottoNumbers;
     }
 }

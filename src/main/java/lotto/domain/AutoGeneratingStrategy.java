@@ -6,21 +6,22 @@ import java.util.List;
 
 import static lotto.domain.Lotto.*;
 
-public class AutoGeneratingStrategy implements LottoNumberGeneratingStrategy {
+public class AutoGeneratingStrategy implements LottoGeneratingStrategy {
     private static final List<Integer> ALL_LOTTO_NUMBERS = allLottoNumbers();
 
     private static List<Integer> allLottoNumbers() {
-        List<Integer> numberList = new ArrayList<>();
+        List<Integer> allLottoNumbers = new ArrayList<>();
         for (int number = MIN_LOTTO_NUMBER; number <= MAX_LOTTO_NUMBER; number++) {
-            numberList.add(number);
+            allLottoNumbers.add(number);
         }
 
-        return numberList;
+        return allLottoNumbers;
     }
 
+
     @Override
-    public List<Integer> lottoNumbers() {
+    public Lotto lotto() {
         Collections.shuffle(ALL_LOTTO_NUMBERS);
-        return ALL_LOTTO_NUMBERS.subList(0, LOTTO_NUMBER_COUNT);
+        return Lotto.valueOf(ALL_LOTTO_NUMBERS.subList(0, LOTTO_NUMBER_COUNT));
     }
 }
