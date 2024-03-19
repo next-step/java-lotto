@@ -13,7 +13,7 @@ class LottoNumbersWithBonusWrapperTest {
 
     @DisplayName("5개가 맞았을 때, 보너스점수 까지 맞으면 WIN_FIRST_WITH_BONUS 이다.")
     @Test
-    void test1() {
+    void enumWinFirstWithBonusWhenMatchedFiveWithBonusNumber() {
         // given
         LottoNumbers mySelect = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         LottoNumbers winningNumber = new LottoNumbers(List.of(1, 2, 3, 4, 5, 7));
@@ -32,9 +32,9 @@ class LottoNumbersWithBonusWrapperTest {
         assertThat(lottoWinInfo).isEqualTo(LottoWinInfo.WIN_FIRST_WITH_BONUS);
     }
 
-    @DisplayName("5개가 맞았을 때, 보너스점수가 맞지 않으면 우승상금은 1_500_000이다.")
+    @DisplayName("5개가 맞았을 때, 보너스점수가 맞지 않으면 WIN_SECOND이다.")
     @Test
-    void test2() {
+    void enumWinSecondWhenMatchedFiveWithoutBonusNumber() {
         // given
         LottoNumbers mySelect = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         LottoNumbers winningNumber = new LottoNumbers(List.of(1, 2, 3, 4, 5, 7));
