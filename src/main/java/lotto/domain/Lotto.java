@@ -7,65 +7,65 @@ import java.util.Random;
 public class Lotto {
     private static final int RANDOM_BOUND_NUMBER = 45;
     private static final Random RANDOM = new Random();
-    private List<Number> numbers;
+    private List<LottoNumber> lottoNumbers;
 
     public Lotto() {
-        this.numbers = createNumbers();
+        this.lottoNumbers = createNumbers();
     }
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = new ArrayList<>();
-        numbers.forEach(number -> this.numbers.add(new Number(number)));
+        this.lottoNumbers = new ArrayList<>();
+        numbers.forEach(number -> this.lottoNumbers.add(new LottoNumber(number)));
     }
 
     public Lotto(String numbers) {
         List<String> splitNumbers = List.of(numbers.split(","));
-        this.numbers = new ArrayList<>();
-        splitNumbers.forEach(number -> this.numbers.add(new Number(Integer.parseInt(number))));
+        this.lottoNumbers = new ArrayList<>();
+        splitNumbers.forEach(number -> this.lottoNumbers.add(new LottoNumber(Integer.parseInt(number))));
     }
 
-    private static List<Number> createNumbers() {
-        List<Number> newNumbers = new ArrayList<>();
+    private static List<LottoNumber> createNumbers() {
+        List<LottoNumber> newLottoNumbers = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            addNumber(newNumbers);
+            addNumber(newLottoNumbers);
         }
-        return newNumbers;
+        return newLottoNumbers;
     }
 
-    private static void addNumber(List<Number> newNumbers) {
-        Number newNumber = new Number(RANDOM.nextInt(RANDOM_BOUND_NUMBER) + 1);
-        validateDuplicateNumber(newNumbers, newNumber);
+    private static void addNumber(List<LottoNumber> newLottoNumbers) {
+        LottoNumber newLottoNumber = new LottoNumber(RANDOM.nextInt(RANDOM_BOUND_NUMBER) + 1);
+        validateDuplicateNumber(newLottoNumbers, newLottoNumber);
 
     }
 
-    private static void validateDuplicateNumber(List<Number> newNumbers, Number newNumber) {
-        long count = newNumbers.stream()
-                .filter(number -> number.getValue() == newNumber.getValue())
+    private static void validateDuplicateNumber(List<LottoNumber> newLottoNumbers, LottoNumber newLottoNumber) {
+        long count = newLottoNumbers.stream()
+                .filter(lottoNumber -> lottoNumber.getValue() == newLottoNumber.getValue())
                 .count();
         if (count > 0) {
-            addNumber(newNumbers);
+            addNumber(newLottoNumbers);
             return;
         }
-        newNumbers.add(newNumber);
+        newLottoNumbers.add(newLottoNumber);
     }
 
     public int getNumberSize() {
-        return numbers.size();
+        return lottoNumbers.size();
     }
 
     public int compareWinNumber(Lotto winNumber) {
-        return (int) numbers.stream()
-                .filter(number -> winNumber.contains(number))
+        return (int) lottoNumbers.stream()
+                .filter(lottoNumber -> winNumber.contains(lottoNumber))
                 .count();
     }
 
     public String getNumbersToString() {
         List<Integer> arrayList = new ArrayList<>();
-        numbers.forEach(number -> arrayList.add(number.getValue()));
+        lottoNumbers.forEach(lottoNumber -> arrayList.add(lottoNumber.getValue()));
         return arrayList.toString();
     }
 
-    private boolean contains(Number number) {
-        return this.numbers.contains(number);
+    private boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
 }
