@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.io.IOException;
 import java.util.Stack;
 
 import static org.assertj.core.api.Assertions.*;
@@ -34,9 +35,25 @@ public class StringCalculatorTest {
     }
 
     @Test
+    void 잘못된_요소_개수() {
+        String expression = "2 + 3 -";
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new StringCalculator().calculate(expression))
+                    .withMessageMatching("입력한 식이 잘못되었습니다.");
+    }
+
+    @Test
+    void 잘못된_식_나열() {
+        String expression = "+ 2 3 - 5";
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new StringCalculator().calculate(expression))
+                .withMessageMatching("잘못된 숫자/연산자 나열입니다.");
+    }
+
+    @Test
     void 정수_변환() {
-        String input = "5";
-        assertThat(Integer.parseInt(input)).isEqualTo(5);
+        String expression = "5";
+        assertThat(Integer.parseInt(expression)).isEqualTo(5);
     }
 
     @Test
@@ -95,32 +112,32 @@ public class StringCalculatorTest {
 
     @Test
     void dividedByZero() {
-        String input = "2 / 0";
-        assertThatThrownBy(() -> new StringCalculator().calculate(input))
+        String expression = "2 / 0";
+        assertThatThrownBy(() -> new StringCalculator().calculate(expression))
                 .isInstanceOf(ArithmeticException.class);
     }
 
     @Test
     void 사칙_연산() {
-        String input = "2 * 3 + 4 / 2";
-        assertThat(new StringCalculator().calculate(input)).isEqualTo(5);
+        String expression = "2 * 3 + 4 / 2";
+        assertThat(new StringCalculator().calculate(expression)).isEqualTo(5);
     }
 
     @Test
     void 덧셈_기호() {
-        String input = "+";
-        assertThat(input).isEqualTo(StringCalculatorFixture.ADD);
+        String operator = "+";
+        assertThat(operator).isEqualTo(StringCalculatorFixture.ADD);
     }
 
     @Test
     void 뺄셈_기호() {
-        String input = "-";
-        assertThat(input).isEqualTo(StringCalculatorFixture.SUBSTRACT);
+        String operator = "-";
+        assertThat(operator).isEqualTo(StringCalculatorFixture.SUBSTRACT);
     }
 
     @Test
     void 곱셈_기호() {
-        String input = "*";
-        assertThat(input).isEqualTo(StringCalculatorFixture.MULTIPLY);
+        String operator = "*";
+        assertThat(operator).isEqualTo(StringCalculatorFixture.MULTIPLY);
     }
 }
