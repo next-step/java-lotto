@@ -42,7 +42,6 @@ class WinningNumbersTest {
                     .isExactlyInstanceOf(IllegalArgumentException.class);
         }
 
-        // 중복값 테스트
         @Test
         @DisplayName("당첨 번호에 중복된 숫자가 있는 경우 IllegalArgumentException이 발생한다.")
         void testDuplicateNumberFailCase() {
@@ -55,7 +54,7 @@ class WinningNumbersTest {
 
     @ParameterizedTest
     @CsvSource(value = {"1, 2, 3, 4, 5, 6:4:true", "1, 2, 3, 4, 5, 6:7:false"}, delimiter = ':')
-    @DisplayName("당첨 번호에 number가 포함되어 있다면 true를 없다면 false를 반환한다.")
+    @DisplayName("contains(): 당첨 번호에 number가 포함되어 있다면 true를 없다면 false를 반환한다.")
     void testContains(String winningNumberInput, int number, boolean expected) {
         assertThat(WinningNumbers.valueOf(winningNumberInput).contains(number)).isEqualTo(expected);
     }
