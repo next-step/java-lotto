@@ -6,6 +6,7 @@ public class InputView {
     private static Scanner scanner = new Scanner(System.in);
 
     public static String requestOperation() {
+        System.out.println("수식을 입력하세요.");
         return validate(scanner.nextLine());
     }
 
