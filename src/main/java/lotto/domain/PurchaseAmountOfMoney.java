@@ -25,7 +25,6 @@ public class PurchaseAmountOfMoney {
         return amountOfMoney / LOTTO_PRICE;
     }
 
-
     private void validateAmountOfMoney(String amountOfMoneyInput) {
         if (!Validator.isPositiveInteger(amountOfMoneyInput) || Integer.parseInt(amountOfMoneyInput) < LOTTO_PRICE) {
             throw new IllegalArgumentException(WRONG_PURCHASE_AMOUNT_MESSAGE);

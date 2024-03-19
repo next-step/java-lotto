@@ -39,5 +39,4 @@ class LottosTest {
         assertThat(lottoResult.winningStatic(matchCount)).isEqualTo(1);
         assertThat(lottoResult.rateOfReturn()).isEqualTo(expectedRateOfReturn);
     }
-
 }
