@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.function.IntBinaryOperator;
 
 public enum Operator {
@@ -18,11 +19,10 @@ public enum Operator {
     }
 
     public static Operator toOperator(String input) {
-        if (PLUS.symbol.equals(input)) return Operator.PLUS;
-        if (MINUS.symbol.equals(input)) return Operator.MINUS;
-        if (MULTIPLE.symbol.equals(input)) return Operator.MULTIPLE;
-        if (DIVIDE.symbol.equals(input)) return Operator.DIVIDE;
-        throw new IllegalArgumentException();
+        return Arrays.stream(values())
+                .filter(it -> it.symbol.equals(input))
+                .findAny()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public int apply(int a, int b) {
