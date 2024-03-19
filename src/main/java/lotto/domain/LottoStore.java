@@ -20,7 +20,7 @@ public class LottoStore {
 
     private static Lotto sell(int money) {
         if (money < LOTTO_PRICE) {
-            throw new IllegalStateException("1000원 이상 있어야 구매할 수 있습니다");
+            throw new IllegalStateException(LOTTO_PRICE + "원 이상 있어야 구매할 수 있습니다");
         }
         return LottoFactory.generate();
     }
