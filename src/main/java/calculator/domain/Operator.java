@@ -13,13 +13,17 @@ public enum Operator {
     private final String sign;
     private final BiFunction<Integer, Integer, Integer> function;
 
+    Operator(String sign, BiFunction<Integer, Integer, Integer> function) {
+        this.sign = sign;
+        this.function = function;
+    }
+
     public static Operator findByName(String sign) {
         return Arrays.stream(values())
                 .filter(type -> type.sign.equals(sign))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(""));
     }
-
 
     public int operate(Integer a, Integer b) {
         assertNotNull(a);
@@ -34,9 +38,5 @@ public enum Operator {
         }
     }
 
-    Operator(String sign, BiFunction<Integer, Integer, Integer> function) {
-        this.sign = sign;
-        this.function = function;
-    }
 }
 

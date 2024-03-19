@@ -8,12 +8,10 @@ import static org.assertj.core.api.Assertions.*;
 
 public class OperatorTest {
 
-
     @DisplayName("덧셈 결과 반환 테스트")
     @Test
     void plusTest() {
         final Operator operator = Operator.PLUS;
-//        final int result = operator.operate(1, 2);
         final int result = operator.operate(1, 2);
 
         assertThat(result).isEqualTo(3);
@@ -56,8 +54,8 @@ public class OperatorTest {
     @DisplayName("어느 연산자인지 판별한다")
     @Test
     void checkOperator() {
-        String  s = "+";
-        Operator operator = Operator.findByName(s);
+        String input = "+";
+        Operator operator = Operator.findByName(input);
         assertThat(operator).isEqualTo(Operator.PLUS);
     }
 
@@ -66,6 +64,5 @@ public class OperatorTest {
     void throw_Exception_when_not_support_operator() {
         String sign = "%";
         assertThatIllegalArgumentException().isThrownBy(() -> Operator.findByName(sign));
-
     }
 }

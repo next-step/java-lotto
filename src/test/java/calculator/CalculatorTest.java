@@ -1,10 +1,8 @@
 package calculator;
 
 import calculator.domain.Calculator;
-import calculator.utils.Splitter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -25,7 +23,6 @@ public class CalculatorTest {
         final String[] targets = new String[]{"3", "-", "2", "+", "-1", "-"};
         assertThatIllegalArgumentException().isThrownBy(() -> Calculator.validate(targets));
     }
-
 
     @DisplayName("입력받은 문자열에 대한 수식을 계산한다")
     @Test
