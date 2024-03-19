@@ -7,8 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Stack;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringCalculatorTest {
 
@@ -69,29 +68,36 @@ public class StringCalculatorTest {
     @Test
     void add() {
         String operator = "+";
-        assertThat(new StringCalculator().operate(StringCalculatorFixture.NUM1, StringCalculatorFixture.NUM2, operator))
+        assertThat(new StringCalculator().apply(StringCalculatorFixture.NUM1, StringCalculatorFixture.NUM2, operator))
                 .isEqualTo(7);
     }
 
     @Test
     void substract() {
         String operator = "-";
-        assertThat(new StringCalculator().operate(StringCalculatorFixture.NUM1, StringCalculatorFixture.NUM2, operator))
+        assertThat(new StringCalculator().apply(StringCalculatorFixture.NUM1, StringCalculatorFixture.NUM2, operator))
                 .isEqualTo(3);
     }
 
     @Test
     void multiply() {
         String operator = "*";
-        assertThat(new StringCalculator().operate(StringCalculatorFixture.NUM1, StringCalculatorFixture.NUM2, operator))
+        assertThat(new StringCalculator().apply(StringCalculatorFixture.NUM1, StringCalculatorFixture.NUM2, operator))
                 .isEqualTo(10);
     }
 
     @Test
     void divide() {
         String operator = "/";
-        assertThat(new StringCalculator().operate(StringCalculatorFixture.NUM1, StringCalculatorFixture.NUM2, operator))
+        assertThat(new StringCalculator().apply(StringCalculatorFixture.NUM1, StringCalculatorFixture.NUM2, operator))
                 .isEqualTo(2);
+    }
+
+    @Test
+    void dividedByZero() {
+        String input = "2 / 0";
+        assertThatThrownBy(() -> new StringCalculator().calculate(input))
+                .isInstanceOf(ArithmeticException.class);
     }
 
     @Test
