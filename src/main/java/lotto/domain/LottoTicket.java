@@ -1,28 +1,28 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoGenerator {
+public class LottoTicket {
 
-    private final List<Integer> balls;
+    private final List<Integer> numbers;
 
-    public LottoGenerator() {
-        balls = new ArrayList<>();
+    public LottoTicket() {
+        numbers = new ArrayList<>();
     }
 
-    public List<Integer> generateLotto() {
+    public List<Integer> generate() {
 
         List<Integer> numbers = generateRandomNumbers();
 
         for (int i = 0; i < 6; i++) {
-            balls.add(numbers.get(i));
+            this.numbers.add(numbers.get(i));
         }
 
-        Collections.sort(balls);
+        Collections.sort(this.numbers);
 
-        return balls;
+        return this.numbers;
     }
 
     protected List<Integer> generateRandomNumbers() {
@@ -36,7 +36,7 @@ public class LottoGenerator {
         return numbers;
     }
 
-    public List<Integer> getBalls() {
-        return balls;
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }
