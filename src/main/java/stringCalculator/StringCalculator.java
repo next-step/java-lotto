@@ -1,4 +1,4 @@
-package stringCalculatorTest;
+package stringCalculator;
 
 import java.util.HashMap;
 import java.util.List;
