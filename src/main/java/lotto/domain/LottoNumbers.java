@@ -31,7 +31,7 @@ public class LottoNumbers {
     public List<String> getLottoNumbersToString() {
         return numbers
                 .stream()
-                .map(LottoNumber::getNumbersToString)
+                .map(LottoNumber::toString)
                 .collect(Collectors.toList());
     }
 

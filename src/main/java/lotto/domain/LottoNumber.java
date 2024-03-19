@@ -34,10 +34,9 @@ public class LottoNumber {
                 .count();
     }
 
-    public String getNumbersToString() {
-        return numbers.stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(", ", "[", "]"));
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 
     private static void validLottoNumberDuplicate(List<Integer> numbers) {

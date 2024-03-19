@@ -50,13 +50,6 @@ public class LottoNumberTest {
         assertThat(lottoNumber.containsCount(winnerNumber)).isEqualTo(containsCount);
     }
 
-    @ParameterizedTest
-    @MethodSource("lottoNumbersAndString")
-    @DisplayName("getNumbersToString 호출 시 로또 번호를 문자열로 반환")
-    void getNumbersToString(LottoNumber lottoNumber, String expected) {
-        assertThat(lottoNumber.getNumbersToString()).isEqualTo(expected);
-    }
-
     static Stream<Arguments> lottoNumbersAndContainsCount() {
         LottoNumber lottoNumber = LottoNumber.from(List.of(1, 2, 3, 4, 5, 6));
         return Stream.of(
@@ -64,15 +57,6 @@ public class LottoNumberTest {
                 Arguments.arguments(lottoNumber, LottoNumber.from(List.of(1, 2, 3, 4, 5, 42)), 5),
                 Arguments.arguments(lottoNumber, LottoNumber.from(List.of(1, 2, 3, 4, 29, 38)), 4),
                 Arguments.arguments(lottoNumber, LottoNumber.from(List.of(1, 2, 3, 30, 31, 32)), 3)
-        );
-    }
-
-    static Stream<Arguments> lottoNumbersAndString() {
-        return Stream.of(
-                Arguments.arguments(LottoNumber.from(List.of(1, 2, 3, 4, 5, 6)), "[1, 2, 3, 4, 5, 6]"),
-                Arguments.arguments(LottoNumber.from(List.of(22, 30, 31, 37, 41, 42)), "[22, 30, 31, 37, 41, 42]"),
-                Arguments.arguments(LottoNumber.from(List.of(5, 11, 23, 29, 30, 38)), "[5, 11, 23, 29, 30, 38]"),
-                Arguments.arguments(LottoNumber.from(List.of(1, 2, 3, 30, 31, 32)), "[1, 2, 3, 30, 31, 32]")
         );
     }
 }
