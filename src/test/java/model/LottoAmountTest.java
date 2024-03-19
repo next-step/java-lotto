@@ -1,8 +1,10 @@
 package model;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -21,5 +23,18 @@ class LottoAmountTest {
     void lottoAmountTest2() {
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoAmount(1300))
                 .withMessage("로또 구매를 위한 금액은 1000단위여야 합니다.");
+    }
+
+    @Test
+    void 자동으로_구매할_로또_개수를_테스트한다() {
+        // given
+        final LottoAmount lottoAmount = new LottoAmount(5000);
+        final int numberOfManualLottoNumbers = 3;
+
+        // when
+        final int lottoPurchaseCount = lottoAmount.calculateAutomaticLottoCount(numberOfManualLottoNumbers);
+
+        // then
+        assertThat(lottoPurchaseCount).isEqualTo(2);
     }
 }
