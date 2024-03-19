@@ -20,17 +20,20 @@ public enum OperationEnum {
     }
 
     public static int calculate(String operation, Number number, Number otherNumber) {
+        return findByStringOperation(operation).calculate(number.number(), otherNumber.number());
+    }
+
+    private static OperationEnum findByStringOperation(String operation) {
         if (operation == null || operation.isBlank()) {
             throw new IllegalArgumentException("연산자가 널값이거나 비어있습니다.");
         }
 
         String operationUpperCase = operation.toUpperCase();
-        OperationEnum operationEnum = Arrays.stream(values())
+
+        return Arrays.stream(values())
                 .filter(operationEnumTest -> operationEnumTest.operation.equals(operationUpperCase))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("유효한 연산자를 찾을 수 없습니다."));
-
-        return operationEnum.calculateStrategy.calculate(number.number(), otherNumber.number());
     }
 
     public int calculate(int a, int b) {
