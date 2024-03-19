@@ -1,6 +1,7 @@
 import operations.CalculateStrategy;
 import operations.Number;
 import operations.OperationStrategies;
+import operations.enums.OperationEnum;
 
 public class StringCalculation {
     private final static String GAP = " ";
@@ -17,7 +18,7 @@ public class StringCalculation {
 
         int sum = 0;
         for (int i = 1; i < strings.length; i += 2) {
-            sum = calculate(strings, sum, i);
+            sum = calculateV2(strings, sum, i);
         }
         return sum;
     }
@@ -29,5 +30,13 @@ public class StringCalculation {
             return sum;
         }
         return operation.calculate(new Number(sum), new Number(strings[i + 1]));
+    }
+
+    private static int calculateV2(String[] strings, int sum, int operationIndex) {
+        if (operationIndex == 1) {
+            sum += OperationEnum.calculate(strings[operationIndex], new Number(strings[operationIndex - 1]), new Number(strings[operationIndex + 1]));
+            return sum;
+        }
+        return OperationEnum.calculate(strings[operationIndex], new Number(sum), new Number(strings[operationIndex + 1]));
     }
 }

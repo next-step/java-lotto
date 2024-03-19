@@ -29,4 +29,5 @@ public class StringCalculationTest {
         int actualResult = StringCalculation.getSum(input);
         assertThat(actualResult).isEqualTo(expectedResult);
     }
+
 }
