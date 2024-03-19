@@ -5,7 +5,8 @@ import lotto.numberdrawer.NumberDrawer;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.constants.LottoConstants.*;
+import static lotto.domain.LottoNumberValidator.LOTTO_NUMBER_SIZE;
+import static lotto.domain.LottoNumberValidator.MAX_LOTTO_NUMBER;
 
 public class LottoMachine {
     public static LottoNumbers createLottoNumbers(int countOfLotto, NumberDrawer numberDrawer) {
