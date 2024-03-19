@@ -1,21 +1,31 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoGenerator {
 
-    private final int number;
+    public List<Integer> generateLotto() {
+        List<Integer> balls = new ArrayList<>();
 
-    public LottoGenerator(int number) {
-        this.number = number;
+        List<Integer> numbers = generateRandomNumbers();
+
+        for (int i = 0; i < 6; i++) {
+            balls.add(numbers.get(i));
+        }
+
+        return balls;
     }
 
-    public List<LottoNumberGenerator> getLottoNumberGenerators() {
-        List<LottoNumberGenerator> lottoNumberGenerators = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
-            lottoNumberGenerators.add(new LottoNumberGenerator());
+    protected List<Integer> generateRandomNumbers() {
+        List<Integer> numbers = new ArrayList<>();
+
+        for (int i = 0; i < 45; i++) {
+            numbers.add(i + 1);
         }
-        return lottoNumberGenerators;
+
+        Collections.shuffle(numbers);
+        return numbers;
     }
 }
