@@ -12,6 +12,10 @@ public class LottoTicket {
 
     private final List<Integer> numbers;
 
+    public LottoTicket(List<Integer> numbers) {
+        this.numbers = numbers;
+    }
+
     public LottoTicket() {
         Collections.shuffle(LottoNumbers);
         this.numbers = LottoNumbers.subList(0, 6)
