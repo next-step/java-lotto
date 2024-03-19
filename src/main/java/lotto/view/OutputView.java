@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Amount;
 import lotto.domain.AmountEnum;
+import lotto.domain.Lotto;
 import lotto.domain.MyLottos;
 
 import java.util.Map;
@@ -19,7 +20,7 @@ public class OutputView {
 	}
 
 	public void printWinnersStatistics(final String winNumber, final MyLottos myLottos) {
-		Map winner = myLottos.findWinner(winNumber);
+		Map winner = myLottos.findWinner(new Lotto(winNumber));
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 		for (int i = 3; i <= 6; i++) {

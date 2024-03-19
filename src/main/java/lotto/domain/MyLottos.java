@@ -39,8 +39,7 @@ public class MyLottos {
         return lottos.size();
     }
 
-    public Map findWinner(final String winNumber) {
-        Lotto winLotto = new Lotto(winNumber);
+    public Map findWinner(final Lotto winLotto) {
         Map<Integer, Integer> hashMap = new HashMap<>();
         hashMap.put(0, 0);
         hashMap.put(3, 0);

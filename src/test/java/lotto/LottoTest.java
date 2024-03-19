@@ -14,14 +14,15 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 public class LottoTest {
     static Stream<Arguments> getAmountData() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1, 2, 24, 5, 11, 6), 5000),
-                Arguments.of(Arrays.asList(1, 2, 3, 5, 11, 6), 50000),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 11, 6), 1500000),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 10, 6), 2000000000)
+                Arguments.of("1,2,24,5,11,6", 5000),
+                Arguments.of("1,2,3,5,11,6", 50000),
+                Arguments.of("1,2,3,4,11,6", 1500000),
+                Arguments.of("1,2,3,4,10,6", 2000000000)
         );
     }
 
@@ -53,11 +54,9 @@ public class LottoTest {
     @Test
     public void compareWinLottoNumbersAndCurrentLottoNumbers() {
         //given
-        List<Integer> winNumbersInput = List.of(1, 2, 3, 4, 10, 6);
-        Lotto winNumber = new Lotto(winNumbersInput);
+        Lotto winNumber = new Lotto("1,2,3,4,10,6");
 
-        List<Integer> currentNumbers = List.of(1, 2, 3, 7, 9, 10);
-        Lotto currentNumber = new Lotto(currentNumbers);
+        Lotto currentNumber = new Lotto("1,2,3,7,9,10");
 
         //when
         AmountEnum amountEnum = currentNumber.getAmountEnumCompareWinNumber(winNumber);
@@ -69,12 +68,10 @@ public class LottoTest {
     @DisplayName("맞춘 숫자갯수만큼 당첨금이 나온다.")
     @ParameterizedTest
     @MethodSource("getAmountData")
-    public void getAmount(List<Integer> input, int result) {
+    public void getAmount(String currentNumbers, int result) {
         //given
-        List<Integer> winNumbersInput = List.of(1, 2, 3, 4, 10, 6);
-        Lotto winNumber = new Lotto(winNumbersInput);
+        Lotto winNumber = new Lotto("1,2,3,4,10,6");
 
-        List<Integer> currentNumbers = input;
         Lotto currentNumber = new Lotto(currentNumbers);
 
         //when
@@ -87,9 +84,18 @@ public class LottoTest {
     @Test
     public void getLottoNumbersToString() {
         //given
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 10, 6));
+        Lotto lotto = new Lotto("1,2,3,4,10,6");
 
         //when & then
         assertThat(lotto.getNumbersToString()).isEqualTo("[1, 2, 3, 4, 10, 6]");
+    }
+    @DisplayName("로또의 숫자가 중복되면 예외를 발생시킨다.")
+    @Test
+    public void getDuplicatedLottoNumbers() {
+        //given & when & then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    new Lotto("1,2,3,10,10,6");
+                }).withMessageMatching("중복된 숫자가 있습니다.");
     }
 }

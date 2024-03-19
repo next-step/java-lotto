@@ -11,13 +11,17 @@ public class Lotto {
         this.lottoNumbers = createLottoNumbers();
     }
 
-    public Lotto(List<Integer> numbers) {
-        numbers.forEach(number -> this.lottoNumbers.add(new LottoNumber(number)));
-    }
-
     public Lotto(String numbers) {
         List<String> splitNumbers = List.of(numbers.split(","));
+        validateDuplicate(splitNumbers);
         splitNumbers.forEach(number -> this.lottoNumbers.add(new LottoNumber(Integer.parseInt(number))));
+    }
+
+    private void validateDuplicate(final List<String> splitNumbers) {
+        Set<String> set = new HashSet<>(splitNumbers);
+        if (set.size() != splitNumbers.size()) {
+            throw new IllegalArgumentException("중복된 숫자가 있습니다.");
+        }
     }
 
     private static Set<LottoNumber> createLottoNumbers() {

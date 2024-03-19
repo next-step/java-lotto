@@ -8,15 +8,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class MyLottosTest {
 
-    @DisplayName("입력받은 만큼 로또 번호를 만들어준다.")
+    @DisplayName("입력받은 금액만큼 로또 번호를 만들어준다.")
     @Test
-    public void getAsMuchAsMyLottos() {
+    public void getLottosByAmount() {
         //given
-        int input = 13;
-        MyLottos myLottos = MyLottos.rollLottos(13);
+        int input = 13000;
 
         //when
-        myLottos.rollLottos(input);
+        MyLottos myLottos = MyLottos.rollLottos(input);
 
         //then
         assertThat(myLottos.getLottos()).hasSize(13);
