@@ -36,4 +36,8 @@ public enum Rank {
     public static Rank of(int size) {
         return SIZE_TO_RANK.get(size);
     }
+
+    public int prizeMoney(int count) {
+        return this.amount * count;
+    }
 }

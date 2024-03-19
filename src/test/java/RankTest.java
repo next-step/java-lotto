@@ -17,4 +17,17 @@ public class RankTest {
         // then
         assertThat(rank).isEqualTo(Rank.FIRST);
     }
+
+    @DisplayName("당첨금을 구한다.")
+    @Test
+    void test02() {
+        // given
+        Rank rank = Rank.THIRD;
+
+        // when
+        int result = rank.prizeMoney(2);
+
+        // then
+        assertThat(result).isEqualTo(100000);
+    }
 }
