@@ -5,7 +5,7 @@ import java.util.*;
 public class Lotto {
     private static final int RANDOM_BOUND_NUMBER = 45;
     private static final Random RANDOM = new Random();
-    private Set<LottoNumber> lottoNumbers = new HashSet<>();
+    private Set<LottoNumber> lottoNumbers = new LinkedHashSet<>();
 
     public Lotto() {
         this.lottoNumbers = createLottoNumbers();
@@ -38,7 +38,7 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
-    public AmountEnum compareWinNumber(Lotto winNumber) {
+    public AmountEnum getAmountEnumCompareWinNumber(Lotto winNumber) {
         int count = (int) lottoNumbers.stream()
                 .filter(lottoNumber -> winNumber.contains(lottoNumber))
                 .count();

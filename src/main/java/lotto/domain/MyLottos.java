@@ -48,7 +48,7 @@ public class MyLottos {
         hashMap.put(5, 0);
         hashMap.put(6, 0);
         for (int i = 0; i < lottos.size(); i++) {
-            AmountEnum amountEnum = lottos.get(i).compareWinNumber(winLotto);
+            AmountEnum amountEnum = lottos.get(i).getAmountEnumCompareWinNumber(winLotto);
             hashMap.put(amountEnum.getCollectedCount(), hashMap.get(amountEnum.getCollectedCount()) + 1);
         }
         return hashMap;

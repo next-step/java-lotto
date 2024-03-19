@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.Amount;
+import lotto.domain.AmountEnum;
 import lotto.domain.Lotto;
 import lotto.domain.MyLottos;
 import org.junit.jupiter.api.DisplayName;
@@ -60,10 +60,10 @@ public class LottoTest {
         Lotto currentNumber = new Lotto(currentNumbers);
 
         //when
-        long matchedCount = currentNumber.compareWinNumber(winNumber);
+        AmountEnum amountEnum = currentNumber.getAmountEnumCompareWinNumber(winNumber);
 
         //then
-        assertThat(matchedCount).isEqualTo(4L);
+        assertThat(amountEnum).isEqualTo(AmountEnum.THIRD);
     }
 
     @DisplayName("맞춘 숫자갯수만큼 당첨금이 나온다.")
@@ -77,13 +77,11 @@ public class LottoTest {
         List<Integer> currentNumbers = input;
         Lotto currentNumber = new Lotto(currentNumbers);
 
-        int matchedCount = currentNumber.compareWinNumber(winNumber);
-
         //when
-        int amount = Amount.getAmount(matchedCount);
+        AmountEnum amountEnum = currentNumber.getAmountEnumCompareWinNumber(winNumber);
 
         //then
-        assertThat(amount).isEqualTo(result);
+        assertThat(amountEnum.getAmount()).isEqualTo(result);
     }
     @DisplayName("로또를 생성한 다음 문자열로 변환한다.")
     @Test
