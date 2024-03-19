@@ -20,6 +20,12 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
+    public List<Integer> inputManualLottoNumbers() {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+        removeNewLine();
+        return Utils.convertToNumbers(SCANNER.nextLine().split(WINNING_NUMBER_SEPARATOR));
+    }
+
     public List<Integer> inputWinningLottoNumbers() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         removeNewLine();
