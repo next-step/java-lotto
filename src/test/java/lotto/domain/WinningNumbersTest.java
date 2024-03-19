@@ -21,24 +21,24 @@ class WinningNumbersTest {
         @ParameterizedTest
         @NullAndEmptySource
         @DisplayName("당첨 번호가 NULL 또는 공백인 경우 IllegalArgumentException이 발생한다.")
-        void testNullOrBlankFailCase(String winningNumbers) {
-            assertThatThrownBy(() -> WinningNumbers.valueOf(winningNumbers))
+        void testNullOrBlankFailCase(String winningNumberInput) {
+            assertThatThrownBy(() -> WinningNumbers.valueOf(winningNumberInput))
                     .isExactlyInstanceOf(IllegalArgumentException.class);
         }
 
         @ParameterizedTest
         @ValueSource(strings = {"1", "1, 2", "1, 2, 3, 4, 5, 6, 7"})
         @DisplayName("당첨 번호의 숫자 개수가 LOTTO_NUMBER_COUNT가 아닌 경우 IllegalArgumentException이 발생한다.")
-        void testOverMaxFailCase(String winningNumbers) {
-            assertThatThrownBy(() -> WinningNumbers.valueOf(winningNumbers))
+        void testOverMaxFailCase(String winningNumberInput) {
+            assertThatThrownBy(() -> WinningNumbers.valueOf(winningNumberInput))
                     .isExactlyInstanceOf(IllegalArgumentException.class);
         }
 
         @ParameterizedTest
         @ValueSource(strings = {"1, 2, 3, a, 5, 6", "1, 2, 3, 4, 5, 46", "0, 2, 3, 4, 5, 6"})
         @DisplayName("당첨 번호의 숫자가 MIN_LOTTO_NUMBER 보다 크거나 같고 MAX_LOTTO_NUMBER 보다 작거나 ㄲㄲ같은 정수가 아닌 경우 IllegalArgumentException이 발생한다.")
-        void testNonValidNumberFailCase(String winningNumbers) {
-            assertThatThrownBy(() -> WinningNumbers.valueOf(winningNumbers))
+        void testNonValidNumberFailCase(String winningNumberInput) {
+            assertThatThrownBy(() -> WinningNumbers.valueOf(winningNumberInput))
                     .isExactlyInstanceOf(IllegalArgumentException.class);
         }
 
@@ -56,7 +56,7 @@ class WinningNumbersTest {
     @ParameterizedTest
     @CsvSource(value = {"1, 2, 3, 4, 5, 6:4:true", "1, 2, 3, 4, 5, 6:7:false"}, delimiter = ':')
     @DisplayName("당첨 번호에 number가 포함되어 있다면 true를 없다면 false를 반환한다.")
-    void testContains(String winningNumbers, int number, boolean expected) {
-        assertThat(WinningNumbers.valueOf(winningNumbers).contains(number)).isEqualTo(expected);
+    void testContains(String winningNumberInput, int number, boolean expected) {
+        assertThat(WinningNumbers.valueOf(winningNumberInput).contains(number)).isEqualTo(expected);
     }
 }

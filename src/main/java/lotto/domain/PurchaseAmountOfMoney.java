@@ -12,13 +12,13 @@ public class PurchaseAmountOfMoney {
 
     private final int amountOfMoney;
 
-    private PurchaseAmountOfMoney(String amountOfMoney) {
-        validateAmountOfMoney(amountOfMoney);
-        this.amountOfMoney = Integer.parseInt(amountOfMoney);
+    private PurchaseAmountOfMoney(String amountOfMoneyInput) {
+        validateAmountOfMoney(amountOfMoneyInput);
+        this.amountOfMoney = Integer.parseInt(amountOfMoneyInput);
     }
 
-    public static PurchaseAmountOfMoney valueOf(String amountOfMoney) {
-        return new PurchaseAmountOfMoney(amountOfMoney);
+    public static PurchaseAmountOfMoney valueOf(String amountOfMoneyInput) {
+        return new PurchaseAmountOfMoney(amountOfMoneyInput);
     }
 
     public int numberOfLottoToPurchase() {
@@ -26,8 +26,8 @@ public class PurchaseAmountOfMoney {
     }
 
 
-    private void validateAmountOfMoney(String amountOfMoney) {
-        if (!Validator.isPositiveInteger(amountOfMoney) || Integer.parseInt(amountOfMoney) < LOTTO_PRICE) {
+    private void validateAmountOfMoney(String amountOfMoneyInput) {
+        if (!Validator.isPositiveInteger(amountOfMoneyInput) || Integer.parseInt(amountOfMoneyInput) < LOTTO_PRICE) {
             throw new IllegalArgumentException(WRONG_PURCHASE_AMOUNT_MESSAGE);
         }
     }

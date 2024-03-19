@@ -7,10 +7,10 @@ public class Lotto {
     public static int MIN_LOTTO_NUMBER = 1;
     public static int MAX_LOTTO_NUMBER = 45;
 
-    private final List<Integer> lottoNumberList;
+    private final List<Integer> lottoNumbers;
 
     private Lotto(LottoNumberGeneratingStrategy lottoNumberGeneratingStrategyStub) {
-        this.lottoNumberList = lottoNumberGeneratingStrategyStub.lottoNumbers();
+        this.lottoNumbers = lottoNumberGeneratingStrategyStub.lottoNumbers();
     }
 
     public static Lotto valueOf(LottoNumberGeneratingStrategy lottoNumberGeneratingStrategyStub) {
@@ -18,7 +18,7 @@ public class Lotto {
     }
 
     public long numberOfMatch(WinningNumbers winningNumbers) {
-        return lottoNumberList.stream()
+        return lottoNumbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
     }

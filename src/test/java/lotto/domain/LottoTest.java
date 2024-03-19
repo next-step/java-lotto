@@ -12,8 +12,8 @@ class LottoTest {
 
     @ParameterizedTest
     @CsvSource(value = {"8, 21, 23, 41, 42, 43:0", "1, 3, 5, 14, 22, 45:3", "1, 3, 2, 4, 6, 5:6"}, delimiter = ':')
-    void testNumberOfMatch(String winningNumbersString, int expected) {
-        WinningNumbers winningNumbers = WinningNumbers.valueOf(winningNumbersString);
+    void testNumberOfMatch(String winningNumberInput, int expected) {
+        WinningNumbers winningNumbers = WinningNumbers.valueOf(winningNumberInput);
         Lotto lotto = Lotto.valueOf(lottoNumberGeneratingStrategyStub);
 
         assertThat(lotto.numberOfMatch(winningNumbers)).isEqualTo(expected);

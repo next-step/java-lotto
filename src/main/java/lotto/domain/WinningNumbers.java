@@ -12,30 +12,30 @@ public class WinningNumbers {
     private static final String WRONG_WINNING_NUMBERS_MESSAGE = "잘못된 당첨 번호입니다.";
     private static final String COMMA_BLANK_DELIMITER = ", ";
 
-    private final Set<Integer> winningNumberSet;
+    private final Set<Integer> winningNumbers;
 
-    private WinningNumbers(String winningNumbers) {
-        validateWinningNumbers(winningNumbers);
-        validateNumberOfWinningNumbers(winningNumbers);
+    private WinningNumbers(String winningNumberInput) {
+        validateWinningNumbers(winningNumberInput);
+        validateNumberOfWinningNumbers(winningNumberInput);
 
-        this.winningNumberSet = Arrays.stream(winningNumbers.split(COMMA_BLANK_DELIMITER))
+        this.winningNumbers = Arrays.stream(winningNumberInput.split(COMMA_BLANK_DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toUnmodifiableSet());
     }
 
-    public static WinningNumbers valueOf(String winningNumbers) {
-        return new WinningNumbers(winningNumbers);
+    public static WinningNumbers valueOf(String winningNumberInput) {
+        return new WinningNumbers(winningNumberInput);
     }
 
 
-    private void validateWinningNumbers(String winningNumbers) {
-        if (!isNonBlank(winningNumbers) || winningNumbers.split(COMMA_BLANK_DELIMITER).length != LOTTO_NUMBER_COUNT) {
+    private void validateWinningNumbers(String winningNumberInput) {
+        if (!isNonBlank(winningNumberInput) || winningNumberInput.split(COMMA_BLANK_DELIMITER).length != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(WRONG_WINNING_NUMBERS_MESSAGE);
         }
     }
 
-    private void validateNumberOfWinningNumbers(String winningNumbers) {
-        String[] winningNumberArray = winningNumbers.split(COMMA_BLANK_DELIMITER);
+    private void validateNumberOfWinningNumbers(String winningNumberInput) {
+        String[] winningNumberArray = winningNumberInput.split(COMMA_BLANK_DELIMITER);
         Set<Integer> numberSet = new HashSet<>();
 
         for (String number : winningNumberArray) {
@@ -50,6 +50,6 @@ public class WinningNumbers {
     }
 
     public boolean contains(int number) {
-        return winningNumberSet.contains(number);
+        return winningNumbers.contains(number);
     }
 }
