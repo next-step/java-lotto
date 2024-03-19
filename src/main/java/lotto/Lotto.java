@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -13,8 +14,12 @@ public class Lotto {
     }
 
     private Lotto(LottoGeneration generation) {
-        List<Integer> generate = generation.generate();
-        this.lottoNumberList = generate.stream()
+        Set<Integer> numberSet = generation.generate();
+        if (numberSet.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("요청하신 번호 배열이 로또 사이즈" + LOTTO_SIZE + "와 일치하지 않습니다.");
+        }
+
+        this.lottoNumberList = numberSet.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
