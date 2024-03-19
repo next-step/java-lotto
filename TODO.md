@@ -17,6 +17,8 @@
 - [x] Prize 생성자 추가 -> List\<Rank\> 타입을 받음
     - 테스트에서 팩토리 메소드 만든게 의미 불명한 것으로 파악됨
 - [x] model 에서 LottoNumberResponse (dto) 에 대한 의존성 제거 -> controller에서 처리하도록 수정
+- [x] enum Rank findUserRank(..) 파라미터 원시 값을 받도록 리팩토링
+- [x] enum Rank에 boolean matchBonus 상태 추가, 중복 메소드 제거
 
 ---
 

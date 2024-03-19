@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -7,19 +8,21 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum Rank {
-    ONE(6, 2_000_000_000),
-    TWO(5, 30_000_000),
-    THREE(5, 1_500_000),
-    FOUR(4, 50_000),
-    FIVE(3, 5_000),
-    NO_MATCH(0, 0);
+    ONE(6, 2_000_000_000, false),
+    TWO(5, 30_000_000, true),
+    THREE(5, 1_500_000, false),
+    FOUR(4, 50_000, false),
+    FIVE(3, 5_000, false),
+    NO_MATCH(0, 0, false);
 
     private final int ballCount;
     private final int reward;
+    private final boolean matchBonus;
 
-    Rank(int ballCount, int reward) {
+    Rank(int ballCount, int reward, boolean matchBonus) {
         this.ballCount = ballCount;
         this.reward = reward;
+        this.matchBonus = matchBonus;
     }
 
     public int getBallCount() {
@@ -28,6 +31,10 @@ public enum Rank {
 
     public int getReward() {
         return reward;
+    }
+
+    public boolean isMatchBonus() {
+        return matchBonus;
     }
 
     private static final List<Rank> sortedRank;
@@ -43,30 +50,19 @@ public enum Rank {
         return Collections.unmodifiableList(sortedRank);
     }
 
-    public static Rank find(int ballCount) {
-        return ranks().stream()
-                .filter(rank -> rank.sameBallCount(ballCount))
+    public static Rank findRank(int ballCount, boolean matchBonus) {
+        return Arrays.stream(values())
+                .filter(rank -> rank.isSame(ballCount, matchBonus))
                 .findFirst()
                 .orElse(Rank.NO_MATCH);
     }
 
-    private boolean sameBallCount(int ballCount) {
-        return this.ballCount == ballCount;
+    public boolean isSame(int ballCount, boolean matchBonus) {
+        return this.ballCount == ballCount && (matchBonus || !this.matchBonus);
     }
 
     public boolean isTwo() {
         return this == Rank.TWO;
-    }
-
-    public static Rank findUserRank(Lotto userLotto, WinningLotto winningLotto) {
-        int count = winningLotto.compareWith(userLotto);
-        boolean hasBonusNumber = winningLotto.containsBonusNumberIn(userLotto);
-
-        if (count == 5) {
-            return hasBonusNumber ? Rank.TWO : Rank.THREE;
-        }
-
-        return Rank.find(count);
     }
 }
 

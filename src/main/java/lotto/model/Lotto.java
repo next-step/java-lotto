@@ -43,7 +43,10 @@ public class Lotto {
             throw new InvalidLottoException("당첨 번호 정보가 존재하지 않습니다");
         }
 
-        return Rank.findUserRank(this, winningLotto);
+        int matchCount = winningLotto.compareWith(this);
+        boolean matchBonusBall = winningLotto.containsBonusNumberIn(this);
+
+        return Rank.findRank(matchCount, matchBonusBall);
     }
 
     public List<String> mapToList() {
