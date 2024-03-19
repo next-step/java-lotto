@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.domain.Calculator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -28,23 +29,27 @@ public class CalculatorTest {
     void 곱하기() {
         String str = "1 * 1 * 1";
         Calculator calculator = new Calculator();
-        calculator.calculator(str);
         assertThat(calculator.calculator(str)).isEqualTo(1);
     }
 
     @Test
     void 나누기() {
-        String str = "1 / 1";
+        String str = "1 / 1 / 1";
         Calculator calculator = new Calculator();
-        calculator.calculator(str);
         assertThat(calculator.calculator(str)).isEqualTo(1);
     }
 
     @Test
     void 빼기() {
-        String str = "1 - 1";
+        String str = "2 - 1 - 1";
         Calculator calculator = new Calculator();
-        calculator.calculator(str);
         assertThat(calculator.calculator(str)).isEqualTo(0);
+    }
+
+    @Test
+    void 복합연산() {
+        String str = "2 + 3 * 4 / 2";
+        Calculator calculator = new Calculator();
+        assertThat(calculator.calculator(str)).isEqualTo(10);
     }
 }

@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 public class Calculator {
 
@@ -9,12 +9,10 @@ public class Calculator {
     private static final String DIVIDE = "/";
     private static final int START_NUMBER = 0;
 
-    public int calculator(String rawString) {
+    public static int calculator(String rawString) {
         String[] seperateString = rawString.split(DELIMITER_POSITION);
         int result = Integer.parseInt(seperateString[START_NUMBER]);
         for (int i = 1; i < seperateString.length-1; i+=2) {
-            System.out.println(i);
-
             if (PLUS.equals(seperateString[i])) {
                 result += Integer.parseInt(seperateString[i+1]);
                 continue;
