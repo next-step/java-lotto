@@ -56,7 +56,7 @@ public class Lotto {
         return this.lottoNumbers.contains(bonus);
     }
 
-    public int uniqueNumberCount(Lotto other) {
+    public int matchNumberCount(Lotto other) {
         Set<LottoNumber> unique = new HashSet<>(this.lottoNumbers);
         unique.retainAll(other.lottoNumbers);
         return unique.size();

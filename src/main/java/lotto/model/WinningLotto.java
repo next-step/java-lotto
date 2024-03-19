@@ -27,7 +27,7 @@ public class WinningLotto {
     }
 
     public int compareWith(Lotto userLotto) {
-        return this.winningNumberLotto.uniqueNumberCount(userLotto);
+        return this.winningNumberLotto.matchNumberCount(userLotto);
     }
 
     public boolean containsBonusNumberIn(Lotto userLotto) {
