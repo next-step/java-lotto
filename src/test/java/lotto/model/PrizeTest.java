@@ -2,6 +2,8 @@ package lotto.model;
 
 import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -34,48 +36,31 @@ class PrizeTest {
         assertThat(prize.rankCount(Rank.ONE)).isEqualTo(0);
     }
 
-    @Test
-    void 꽝일_경우_수익률() {
+    private enum ExpectedRateOfReturn {
+        ONE(142857.14),
+        TWO(2142.85),
+        THREE(107.14),
+        FOUR(3.57),
+        FIVE(0.35),
+        NO_MATCH(0.0);
+
+        double value;
+
+        ExpectedRateOfReturn(double value) {
+            this.value = value;
+        }
+    }
+
+    @ParameterizedTest
+    @EnumSource
+    void 당첨순위별_수익률(Rank rank) {
+        String rankName = rank.name();
+        ExpectedRateOfReturn expectedRateOfReturn = ExpectedRateOfReturn.valueOf(rankName);
+
+        Prize prize = create(List.of(rank));
         int quantity = 14;
-        Prize prize = create(List.of(Rank.NO_MATCH));
 
         assertThat(prize.rateOfReturn(quantity))
-                .isEqualTo(0.0);
-    }
-
-    @Test
-    void 오천원_한개_당첨될경우_수익률() {
-        int quantity = 14;
-        Prize prize = create(List.of(Rank.FIVE));
-
-        double rateOfReturn = prize.rateOfReturn(quantity);
-        assertThat(rateOfReturn).isEqualTo(0.35, Offset.offset(0.1));
-    }
-
-    @Test
-    void 오만원_한개_당첨될경우_수익률() {
-        int quantity = 14;
-        Prize prize = create(List.of(Rank.FOUR));
-
-        double rateOfReturn = prize.rateOfReturn(quantity);
-        assertThat(rateOfReturn).isEqualTo(3.57, Offset.offset(0.1));
-    }
-
-    @Test
-    void 이등_당첨될경우_수익률() {
-        int quantity = 14;
-        Prize prize = create(List.of(Rank.TWO));
-
-        double rateOfReturn = prize.rateOfReturn(quantity);
-        assertThat(rateOfReturn).isEqualTo(2142.85, Offset.offset(0.1));
-    }
-
-    @Test
-    void 일등_당첨될경우_수익률() {
-        int quantity = 14;
-        Prize prize = create(List.of(Rank.ONE));
-
-        double rateOfReturn = prize.rateOfReturn(quantity);
-        assertThat(rateOfReturn).isEqualTo(142857.14, Offset.offset(0.1));
+                .isEqualTo(expectedRateOfReturn.value, Offset.offset(0.1));
     }
 }

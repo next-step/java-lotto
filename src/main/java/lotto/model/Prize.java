@@ -1,14 +1,14 @@
 package lotto.model;
 
-import java.util.EnumMap;
+import java.util.Map;
 import java.util.Objects;
 
 import static lotto.model.LottoMachine.LOTTO_PER_MONEY;
 
 public class Prize {
-    private final EnumMap<Rank, Integer> prizeMap;
+    private final Map<Rank, Integer> prizeMap;
 
-    public Prize(EnumMap<Rank, Integer> prizeMap) {
+    public Prize(Map<Rank, Integer> prizeMap) {
         this.prizeMap = prizeMap;
     }
 
