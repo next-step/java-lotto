@@ -5,6 +5,8 @@ import java.util.Map;
 
 public class LottoStatistics {
 
+    private static final int NONE_MATCH = 0;
+
     // [Key] LottoPrize, [Value] Matched Count (Statistics)
     private final Map<LottoPrize,  Integer> statisticsMap;
 
@@ -34,7 +36,7 @@ public class LottoStatistics {
         if (hasPrizeStatistics(prize)) {
             return this.statisticsMap.get(prize);
         }
-        return 0;
+        return NONE_MATCH;
     }
 
     private boolean hasPrizeStatistics(LottoPrize prize) {
