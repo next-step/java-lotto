@@ -10,28 +10,30 @@ import java.util.Set;
 public class Lotto {
     private static final int LOTTO_NUMBER_SIZE = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
-        assertLotto(lottoNumbers);
+        this(new HashSet<>(lottoNumbers));
+    }
 
+    public Lotto(Set<LottoNumber> lottoNumbers) {
+        assertLotto(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void assertLotto(List<LottoNumber> lottoNumbers) {
+    private void assertLotto(Set<LottoNumber> lottoNumbers) {
         assertNullOrEmpty(lottoNumbers);
         assertInvalidSize(lottoNumbers);
     }
 
-    private void assertNullOrEmpty(List<LottoNumber> lottoNumbers) {
+    private void assertNullOrEmpty(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers == null || lottoNumbers.isEmpty()) {
             throw new InvalidLottoException("로또 번호가 비어 있습니다");
         }
     }
 
-    private void assertInvalidSize(List<LottoNumber> lottoNumbers) {
-        Set<LottoNumber> uniqueNumbers = new HashSet<>(lottoNumbers);
-        if (uniqueNumbers.size() != LOTTO_NUMBER_SIZE) {
+    private void assertInvalidSize(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new InvalidLottoException("중복을 제외한 " + LOTTO_NUMBER_SIZE + "개의 로또 번호가 필요합니다");
         }
     }

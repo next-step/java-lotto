@@ -3,6 +3,7 @@ package lotto.dto;
 import lotto.model.LottoNumber;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumberResponse {
@@ -12,11 +13,11 @@ public class LottoNumberResponse {
         this.numbers = numbers;
     }
 
-    public static LottoNumberResponse from(List<LottoNumber> lottoNumbers) {
+    public static LottoNumberResponse from(Set<LottoNumber> lottoNumbers) {
         return new LottoNumberResponse(map(lottoNumbers));
     }
 
-    private static List<String> map(List<LottoNumber> lottoNumbers) {
+    private static List<String> map(Set<LottoNumber> lottoNumbers) {
         return lottoNumbers.stream()
                 .map(LottoNumber::toString)
                 .collect(Collectors.toList());
