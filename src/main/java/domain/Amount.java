@@ -1,0 +1,16 @@
+package domain;
+
+public class Amount {
+  private final PositiveNumber value;
+  private final Currency currency;
+
+  public Amount(PositiveNumber value, Currency currency) {
+    this.value = value;
+    this.currency = currency;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("%s%s", this.value, this.currency);
+  }
+}
