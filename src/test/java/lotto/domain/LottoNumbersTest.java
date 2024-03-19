@@ -1,11 +1,10 @@
 package lotto.domain;
 
-import lotto.Exception.ReachedMaxIndexException;
+import lotto.data.LottoWinInfo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.stream.IntStream;
 
 import static lotto.util.ConstUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,7 +20,7 @@ class LottoNumbersTest {
 
         // then
         lottoNumbers.getPurchasedLottoNumber()
-                .forEach(number -> assertThat(number).isBetween(MINIMUM_LOTTO_RANGE, MAXIMUM_LOTTO_RANGE));
+                .forEach(number -> assertThat(number.getLottoNumber()).isBetween(MINIMUM_LOTTO_RANGE, MAXIMUM_LOTTO_RANGE));
     }
 
     @DisplayName("생성자를 넣으면, 로또 번호를 수기로 생성 해 준다.")
@@ -32,8 +31,8 @@ class LottoNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers(manualNumbers);
 
         // then
-        IntStream.range(0, 5)
-                .forEach(index -> assertThat(lottoNumbers.nextNumber()).isEqualTo(manualNumbers.get(index)));
+        LottoWinInfo lottoWinInfo = lottoNumbers.countMatchWithWinningLottoNumbers(new LottoNumbers(manualNumbers));
+        assertThat(lottoWinInfo).isEqualTo(LottoWinInfo.WIN_FIRST);
     }
 
     @DisplayName("로또 번호가 1~45가 아닐 경우, IllegalArgumentException을 던진다.")
@@ -58,24 +57,9 @@ class LottoNumbersTest {
         LottoNumbers winningNumbers = new LottoNumbers(List.of(1, 2, 3, 7, 8, 9));
 
         // when
-        int matchedNumberCount = lottoNumbers.countMatchedWinningNumbers(winningNumbers);
+        LottoWinInfo lottoWinInfo = lottoNumbers.countMatchWithWinningLottoNumbers(winningNumbers);
 
         // then
-        assertThat(matchedNumberCount).isEqualTo(3);
-    }
-
-    @DisplayName("nextNumber로 번호를 얻을 때, Index를 초과하면 ReachedMaxIndexException을 던진다.")
-    @Test
-    void throwReachedMaxIndexExceptionWhenOutOfIndexWithNextNumber() {
-        // given
-        List<Integer> manualNumbers = List.of(1, 2, 3, 4, 5, 6);
-        LottoNumbers lottoNumbers = new LottoNumbers(manualNumbers);
-
-        // when
-        IntStream.range(0, LOTTO_NUMBER_COUNT)
-                .forEach(index -> lottoNumbers.nextNumber());
-
-        // then
-        assertThrows(ReachedMaxIndexException.class, lottoNumbers::nextNumber);
+        assertThat(lottoWinInfo).isEqualTo(LottoWinInfo.WIN_FOURTH);
     }
 }

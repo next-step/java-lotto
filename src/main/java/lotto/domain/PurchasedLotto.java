@@ -1,23 +1,26 @@
 package lotto.domain;
 
+import lotto.data.LottoWinInfo;
 import lotto.dto.LottoResultDto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static lotto.util.ConstUtils.*;
 
 public class PurchasedLotto {
 
-    private final List<LottoNumbers> lottos;
+    private final List<LottoNumbers> lottoBundle;
 
     public PurchasedLotto(int purchasedMoney) {
-        this.lottos = new ArrayList<>();
+        this.lottoBundle = new ArrayList<>();
 
-        int purchasedCount = calculatePurchasedCount(purchasedMoney);
+        int purchaseCount = calculatePurchasedCount(purchasedMoney);
 
-        for (int i = 0; i < purchasedCount; i++) {
-            this.lottos.add(new LottoNumbers());
+        for (int i = 0; i < purchaseCount; i++) {
+            this.lottoBundle.add(new LottoNumbers());
         }
     }
 
@@ -26,35 +29,37 @@ public class PurchasedLotto {
 
         validatePurchasedAndManualCount(purchasedCount, manualLottoNumbers);
 
-        this.lottos = new ArrayList<>();
+        this.lottoBundle = new ArrayList<>();
 
         for (int i = 0; i < purchasedCount; i++) {
-            this.lottos.add(manualLottoNumbers.get(i));
+            this.lottoBundle.add(manualLottoNumbers.get(i));
         }
     }
 
-    public int purchasedLottoSize() {
-        return this.lottos.size();
+    public int purchasedCount() {
+        return this.lottoBundle.size();
     }
 
     public List<LottoNumbers> getPurchasedLottoList() {
-        return List.copyOf(lottos);
+        return List.copyOf(lottoBundle);
     }
 
-    public LottoResultDto matchWinningNumbers(LottoNumbers winningNumbers) {
-        LottoMatchedCalculator lottoMatchedCalculator = new LottoMatchedCalculator();
+    public LottoResultDto matchWinningNumbers(LottoNumbers winningLottoNumbers) {
+        Map<LottoWinInfo, Integer> lottoResultMap = initializeLottoResultMap();
 
-        for (LottoNumbers lotto : this.lottos) {
-            int result = lotto.countMatchedWinningNumbers(winningNumbers);
-            saveMatched(lottoMatchedCalculator, result);
+        for (LottoNumbers lotto : this.lottoBundle) {
+            lottoResultMap.computeIfPresent(
+                    lotto.countMatchWithWinningLottoNumbers(winningLottoNumbers),
+                    (key, value) -> value + 1
+            );
         }
 
         return new LottoResultDto(
-                lottoMatchedCalculator.countMatchedThree(),
-                lottoMatchedCalculator.countMatchedFour(),
-                lottoMatchedCalculator.countMatchedFive(),
-                lottoMatchedCalculator.countMatchedSix(),
-                lottoMatchedCalculator.earnRate(purchasedLottoPrice())
+                lottoResultMap.get(LottoWinInfo.WIN_FOURTH),
+                lottoResultMap.get(LottoWinInfo.WIN_THIRD),
+                lottoResultMap.get(LottoWinInfo.WIN_SECOND),
+                lottoResultMap.get(LottoWinInfo.WIN_FIRST),
+                earnRate(lottoResultMap)
         );
     }
 
@@ -68,13 +73,29 @@ public class PurchasedLotto {
         }
     }
 
-    private void saveMatched(LottoMatchedCalculator lottoMatchedCalculator, int result) {
-        if (result >= MINIMUM_LOTTO_EARN_MATCH_COUNT) {
-            lottoMatchedCalculator.saveMatched(result);
-        }
+    private Map<LottoWinInfo, Integer> initializeLottoResultMap() {
+        HashMap<LottoWinInfo, Integer> lottoResultMap = new HashMap<>();
+
+        lottoResultMap.put(LottoWinInfo.WIN_FIRST, 0);
+        lottoResultMap.put(LottoWinInfo.WIN_SECOND, 0);
+        lottoResultMap.put(LottoWinInfo.WIN_THIRD, 0);
+        lottoResultMap.put(LottoWinInfo.WIN_FOURTH, 0);
+        lottoResultMap.put(LottoWinInfo.PASS, 0);
+
+        return lottoResultMap;
+    }
+
+    private double earnRate(Map<LottoWinInfo, Integer> lottoResultMap) {
+        double winMoney =
+                lottoResultMap.get(LottoWinInfo.WIN_FOURTH) * LottoWinInfo.WIN_FOURTH.getWinningPrice() +
+                lottoResultMap.get(LottoWinInfo.WIN_THIRD) * LottoWinInfo.WIN_THIRD.getWinningPrice() +
+                lottoResultMap.get(LottoWinInfo.WIN_SECOND) * LottoWinInfo.WIN_SECOND.getWinningPrice() +
+                lottoResultMap.get(LottoWinInfo.WIN_FIRST) * LottoWinInfo.WIN_FIRST.getWinningPrice();
+
+        return winMoney / purchasedLottoPrice();
     }
 
     private int purchasedLottoPrice() {
-        return this.lottos.size() * LOTTO_WON_UNIT;
+        return this.lottoBundle.size() * LOTTO_WON_UNIT;
     }
 }

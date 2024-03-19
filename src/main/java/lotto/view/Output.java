@@ -7,7 +7,7 @@ import lotto.dto.LottoResultDto;
 public class Output {
 
     public void printPurchaseResult(PurchasedLotto purchasedLotto) {
-        System.out.println(purchasedLotto.purchasedLottoSize() + "개를 구매했습니다.");
+        System.out.println(purchasedLotto.purchasedCount() + "개를 구매했습니다.");
         purchasedLotto.getPurchasedLottoList()
                         .forEach(System.out::println);
         System.out.println();
