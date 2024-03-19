@@ -10,7 +10,7 @@ public class Lotto {
     private List<LottoNumber> lottoNumbers;
 
     public Lotto() {
-        this.lottoNumbers = createNumbers();
+        this.lottoNumbers = createLottoNumbers();
     }
 
     public Lotto(List<Integer> numbers) {
@@ -24,29 +24,29 @@ public class Lotto {
         splitNumbers.forEach(number -> this.lottoNumbers.add(new LottoNumber(Integer.parseInt(number))));
     }
 
-    private static List<LottoNumber> createNumbers() {
+    private static List<LottoNumber> createLottoNumbers() {
         List<LottoNumber> newLottoNumbers = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            addNumber(newLottoNumbers);
+            addLottoNumber(newLottoNumbers);
         }
         return newLottoNumbers;
     }
 
-    private static void addNumber(List<LottoNumber> newLottoNumbers) {
+    private static void addLottoNumber(List<LottoNumber> lottoNumbers) {
         LottoNumber newLottoNumber = new LottoNumber(RANDOM.nextInt(RANDOM_BOUND_NUMBER) + 1);
-        validateDuplicateNumber(newLottoNumbers, newLottoNumber);
 
-    }
-
-    private static void validateDuplicateNumber(List<LottoNumber> newLottoNumbers, LottoNumber newLottoNumber) {
-        long count = newLottoNumbers.stream()
-                .filter(lottoNumber -> lottoNumber.getValue() == newLottoNumber.getValue())
-                .count();
-        if (count > 0) {
-            addNumber(newLottoNumbers);
+        if (validateDuplicateNumber(lottoNumbers, newLottoNumber)) {
+            addLottoNumber(lottoNumbers);
             return;
         }
-        newLottoNumbers.add(newLottoNumber);
+
+        lottoNumbers.add(newLottoNumber);
+    }
+
+    private static boolean validateDuplicateNumber(final List<LottoNumber> newLottoNumbers, final LottoNumber newLottoNumber) {
+        return newLottoNumbers.stream()
+                .filter(lottoNumber -> lottoNumber.getValue() == newLottoNumber.getValue())
+                .count() > 0;
     }
 
     public int getNumberSize() {
