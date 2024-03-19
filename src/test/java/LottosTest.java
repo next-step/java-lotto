@@ -37,9 +37,10 @@ public class LottosTest {
         Lottos lottos = new Lottos(List.of(lotto0, lotto1, lotto2, lotto3, lotto4));
 
         // when
-        Map<Integer, Integer> ranks = lottos.rank(winningLotto);
+        Ranks ranks = lottos.ranks(winningLotto);
+        // lottos.ranks(winningLotto)
 
         // then
-        assertThat(ranks.get(rank)).isEqualTo(expected);
+        assertThat(ranks.count(Rank.of(rank))).isEqualTo(expected);
     }
 }

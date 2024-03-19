@@ -28,10 +28,10 @@ public class Lotto {
         return new ArrayList<>(numbers);
     }
 
-    public int rank(Lotto winningLotto) {
+    public Rank rank(Lotto winningLotto) {
         List<Integer> winningNumbers = winningLotto.numbers();
         winningNumbers.retainAll(this.numbers());
-        return winningNumbers.size();
+        return Rank.of(winningNumbers.size());
     }
 
     @Override

@@ -11,7 +11,7 @@ public class LottoApplication {
         ResultView.print(lottos);
 
         Lotto winningLotto = new Lotto(convertWinningNumbers(InputView.promptForWinningNumbers()));
-        ResultView.printRank(lottos.rank(winningLotto));
+        ResultView.printRanks(lottos.ranks(winningLotto));
     }
 
     private static List<Integer> convertWinningNumbers(String input) {

@@ -23,13 +23,13 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Map<Integer, Integer> rank(Lotto winningLotto) {
+    public Ranks ranks(Lotto winningLotto) {
         Map<Integer, Integer> map = new HashMap<>();
+        List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            Integer rank = lotto.rank(winningLotto);
-            map.put(rank, map.getOrDefault(rank, 0) + 1);
+            ranks.add(lotto.rank(winningLotto));
         }
-        return map;
+        return new Ranks(ranks);
     }
 
     @Override
