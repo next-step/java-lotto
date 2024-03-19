@@ -5,10 +5,9 @@ import java.util.List;
 
 public class LottoFactory {
 
-    public static Lottos create(final LottoAmount lottoAmount) {
-        final int purchaseCount = lottoAmount.calculateLottoPurchaseCount();
+    public static Lottos create(final int lottoCount) {
         final List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < purchaseCount; i++) {
+        for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto(RandomNumberGenerator.generate()));
         }
         return new Lottos(lottos);

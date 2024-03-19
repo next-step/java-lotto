@@ -9,12 +9,12 @@ class LottoFactoryTest {
     @Test
     void 로또_생성_테스트() {
         // given
-        final LottoAmount lottoAmount = new LottoAmount(2000);
+        final int lottoCount = 3;
 
         // when
-        final Lottos lottos = LottoFactory.create(lottoAmount);
+        final Lottos lottos = LottoFactory.create(lottoCount);
 
         // then
-        assertThat(lottos.getLottos()).hasSize(2);
+        assertThat(lottos.getLottos()).hasSize(3);
     }
 }
