@@ -35,8 +35,8 @@ class WinningNumbersTest {
         }
 
         @ParameterizedTest
-        @ValueSource(strings = {"1, 2, 3, a, 5, 6", "1, 2, 3, 4, 5, 44", "0, 2, 3, 4, 5, 6"})
-        @DisplayName("당첨 번호의 숫자가 MIN_LOTTO_NUMBER 보다 크거나 같고 MAX_LOTTO_NUMBER 보다 작거나 같은 정수가 아닌 경우 IllegalArgumentException이 발생한다.")
+        @ValueSource(strings = {"1, 2, 3, a, 5, 6", "1, 2, 3, 4, 5, 46", "0, 2, 3, 4, 5, 6"})
+        @DisplayName("당첨 번호의 숫자가 MIN_LOTTO_NUMBER 보다 크거나 같고 MAX_LOTTO_NUMBER 보다 작거나 ㄲㄲ같은 정수가 아닌 경우 IllegalArgumentException이 발생한다.")
         void testNonValidNumberFailCase(String winningNumbers) {
             assertThatThrownBy(() -> WinningNumbers.valueOf(winningNumbers))
                     .isExactlyInstanceOf(IllegalArgumentException.class);
