@@ -16,6 +16,7 @@
 - [x] Lotto 클래스(일급컬렉션) 멤버 필드 타입을 List 에서 Set으로 변경
 - [x] Prize 생성자 추가 -> List\<Rank\> 타입을 받음
     - 테스트에서 팩토리 메소드 만든게 의미 불명한 것으로 파악됨
+- [x] model 에서 LottoNumberResponse (dto) 에 대한 의존성 제거 -> controller에서 처리하도록 수정
 
 ---
 

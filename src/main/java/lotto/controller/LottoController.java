@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.dto.LottoNumberResponse;
 import lotto.dto.OrderRequest;
 import lotto.model.Lotto;
 import lotto.model.LottoMachine;
@@ -9,6 +10,9 @@ import lotto.model.Prize;
 import lotto.model.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoController {
     private final InputView inputView;
@@ -24,7 +28,8 @@ public class LottoController {
         OrderRequest request = new OrderRequest(money);
         LottoPaper lottoPaper = LottoMachine.purchase(request);
 
-        resultView.printOrderResponse(lottoPaper.toLottoNumberResponses());
+        List<LottoNumberResponse> lottoNumberResponses = convertToLottoNumberResponse(lottoPaper);
+        resultView.printOrderResponse(lottoNumberResponses);
 
         Lotto winningNumberLotto = inputView.askWinningNumbers();
         LottoNumber bonusNumber = inputView.askBonusNumber(winningNumberLotto);
@@ -33,5 +38,12 @@ public class LottoController {
         Prize prize = lottoPaper.matches(winningInfo);
 
         resultView.printResult(prize, prize.rateOfReturn(lottoPaper.getQuantity()));
+    }
+
+    private List<LottoNumberResponse> convertToLottoNumberResponse(LottoPaper lottoPaper) {
+        List<List<String>> lottoNumberList = lottoPaper.mapToList();
+        return lottoNumberList.stream()
+                .map(LottoNumberResponse::new)
+                .collect(Collectors.toList());
     }
 }

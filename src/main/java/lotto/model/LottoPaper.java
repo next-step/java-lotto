@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.dto.LottoNumberResponse;
 import lotto.exception.InvalidLottoException;
 
 import java.util.List;
@@ -18,9 +17,9 @@ public class LottoPaper {
         this.lottos = lottos;
     }
 
-    public List<LottoNumberResponse> toLottoNumberResponses() {
+    public List<List<String>> mapToList() {
         return this.lottos.stream()
-                .map(Lotto::toLottoNumberResponse)
+                .map(Lotto::mapToList)
                 .collect(toList());
     }
 
