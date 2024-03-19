@@ -1,8 +1,10 @@
 package calculator;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Stack;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 public class StringCalculator {
     // 숫자로 나타낼 수 있는 문자열인지 확인하기 위한 패턴
@@ -19,8 +21,14 @@ public class StringCalculator {
     private boolean isSignEmpty;
 
     public int calculate(String input) {
-        if (isBlank(input))
+        if (isBlank(input)) {
             throw new IllegalArgumentException("입력 값이 비어있습니다.");
+        }
+        if (!isOdd(input)) {
+            throw new IllegalArgumentException("입력한 식이 잘못되었습니다.");
+        }
+
+        isRightOrder(input);
 
         return getResult(input);
     }
@@ -44,6 +52,40 @@ public class StringCalculator {
             }
         }
         return peekNumStack();
+    }
+
+    private boolean isBlank(String expression) {
+        return expression.isBlank();
+    }
+
+    private boolean isOdd(String input) {
+        return split(input).length % 2 != 0;
+    }
+
+    private void isRightOrder(String input) {
+        String[] tokens = split(input);
+        exploreEven(tokens);
+        exploreOdd(tokens);
+    }
+
+    private void exploreOdd(String[] tokens) {
+        IntStream.range(0, tokens.length)
+                .filter(index -> index % 2 != 0)
+                .forEach(index -> {
+                    if (isNumeric(tokens[index])) {
+                        throw new IllegalArgumentException("잘못된 숫자/연산자 나열입니다.");
+                    }
+                });
+    }
+
+    private void exploreEven(String[] tokens) {
+        IntStream.range(0, tokens.length)
+                .filter(index -> index % 2 == 0)
+                .forEach(index -> {
+                    if (!isNumeric(tokens[index])) {
+                        throw new IllegalArgumentException("잘못된 숫자/연산자 나열입니다.");
+                    }
+                });
     }
 
     public int apply(int num1, int num2, String textOperator) {
@@ -72,10 +114,6 @@ public class StringCalculator {
 
     private int peekNumStack() {
         return NUMSTACK.peek();
-    }
-
-    private boolean isBlank(String expression) {
-        return expression.isBlank();
     }
 
     private String[] split(String expression) {
