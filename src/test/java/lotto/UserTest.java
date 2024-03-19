@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoSeller;
-import lotto.domain.User;
+import lotto.domain.*;
 import lotto.utils.TestNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +9,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class UserTest {
 
-    private final LottoSeller mockLottoSeller = new LottoSeller(new TestNumberGenerator(List.of(1,2,3,4,5,6)));
+    private final LottoSeller mockLottoSeller = new LottoSeller(new TestNumberGenerator(List.of(1, 2, 3, 4, 5, 6)));
 
     @ParameterizedTest
     @DisplayName("로또 구매 테스트")
@@ -40,23 +39,39 @@ public class UserTest {
     }
 
     @ParameterizedTest
-    @DisplayName("로또 수익률 테스트")
+    @DisplayName("로또 수익률 및 결과 테스트")
     @MethodSource("getLottosAndRateOfReturn")
-    void testRateOfReturn(Lotto winningLotto, int price, double expected) {
+    void testRateOfReturn(Lotto winningLotto, int price, double expectedRateOfReturn, Map<LottoResult, Integer> expectedLottoResultCount) {
         User user = new User(mockLottoSeller);
         user.purchaseLottos(price);
+        UserLottoResult userLottoResult = user.getUserLottoResult(winningLotto);
 
-        assertThat(user.getRateOfReturn(winningLotto)).isEqualTo(expected);
+        assertThat(userLottoResult.getRateOfReturn()).isEqualTo(expectedRateOfReturn);
+
+        for (Map.Entry<LottoResult, Integer> lottoResultCount : expectedLottoResultCount.entrySet()) {
+            assertThat(userLottoResult.getCountLottoResult(lottoResultCount.getKey())).isEqualTo(lottoResultCount.getValue());
+        }
+
     }
 
     private static Stream<Arguments> getLottosAndRateOfReturn() {
         return Stream.of(
-                Arguments.of(new Lotto(new LottoNumbers(new TestNumberGenerator(List.of(1,2,3,4,5,6)))), 4000, 2000000.0),
-                Arguments.of(new Lotto(new LottoNumbers(new TestNumberGenerator(List.of(2,3,4,5,6,7)))), 5000, 1500),
-                Arguments.of(new Lotto(new LottoNumbers(new TestNumberGenerator(List.of(3,4,5,6,7,8)))), 6000, 50.0),
-                Arguments.of(new Lotto(new LottoNumbers(new TestNumberGenerator(List.of(4,5,6,7,8,9)))), 3000, 5.0),
-                Arguments.of(new Lotto(new LottoNumbers(new TestNumberGenerator(List.of(5,6,7,8,9,10)))), 4000, 0.0)
+                Arguments.of(new Lotto(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6))), 4000, 2000000.0, getLottoResultMap(4, 0, 0, 0)),
+                Arguments.of(new Lotto(new LottoNumbers(List.of(2, 3, 4, 5, 6, 7))), 5000, 1500, getLottoResultMap(0, 5, 0, 0)),
+                Arguments.of(new Lotto(new LottoNumbers(List.of(3, 4, 5, 6, 7, 8))), 6000, 50.0, getLottoResultMap(0, 0, 6, 0)),
+                Arguments.of(new Lotto(new LottoNumbers(List.of(4, 5, 6, 7, 8, 9))), 3000, 5.0, getLottoResultMap(0, 0, 0, 3)),
+                Arguments.of(new Lotto(new LottoNumbers(List.of(5, 6, 7, 8, 9, 10))), 4000, 0.0, getLottoResultMap(0, 0, 0, 0))
 
         );
+    }
+
+    private static Map<LottoResult, Integer> getLottoResultMap(int first, int second, int third, int fourth) {
+        Map<LottoResult, Integer> map = new EnumMap<>(LottoResult.class);
+        map.put(LottoResult.FIRST, first);
+        map.put(LottoResult.SECOND, second);
+        map.put(LottoResult.THIRD, third);
+        map.put(LottoResult.FOURTH, fourth);
+
+        return map;
     }
 }

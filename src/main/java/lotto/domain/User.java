@@ -26,8 +26,9 @@ public class User {
         return List.copyOf(lottos);
     }
 
-    public double getRateOfReturn(Lotto winningLotto) {
-        BigDecimal result = new BigDecimal(0);
+    public UserLottoResult getUserLottoResult(Lotto winningLotto) {
+        BigDecimal totalIncome = new BigDecimal(0);
+        UserLottoResult userLottoResult = new UserLottoResult();
 
         List<LottoResult> lottoResults = lottos.stream().map(lotto -> lotto.isWinningLotto(winningLotto))
                 .filter(Optional::isPresent)
@@ -35,10 +36,14 @@ public class User {
                 .collect(Collectors.toList());
 
         for (LottoResult lottoResult : lottoResults) {
-            result = result.add(new BigDecimal(lottoResult.getWinningPrice()));
+            userLottoResult.addCount(lottoResult);
+            totalIncome = totalIncome.add(new BigDecimal(lottoResult.getWinningPrice()));
         }
 
-        return result.divide(new BigDecimal(purchasePrice), 2, RoundingMode.HALF_UP).doubleValue();
+        double rateOfReturn = totalIncome.divide(new BigDecimal(purchasePrice), 2, RoundingMode.HALF_UP).doubleValue();
+        userLottoResult.setRateOfReturn(rateOfReturn);
+
+        return userLottoResult;
     }
 
 }

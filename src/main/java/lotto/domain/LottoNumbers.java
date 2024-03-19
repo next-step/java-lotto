@@ -18,7 +18,7 @@ public class LottoNumbers {
         this(lottoNumbers.numbers);
     }
 
-    private LottoNumbers(List<Integer> numbers) {
+    public LottoNumbers(List<Integer> numbers) {
         assertValidLength(numbers);
         assertValidRange(numbers);
         assertNotDuplicateNumber(numbers);

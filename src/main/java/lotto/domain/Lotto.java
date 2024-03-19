@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Optional;
 
 public class Lotto {
@@ -9,6 +10,10 @@ public class Lotto {
 
     public Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers.getNumbers();
     }
 
     public Optional<LottoResult> isWinningLotto(Lotto targetLotto) {
