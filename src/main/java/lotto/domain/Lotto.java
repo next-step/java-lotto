@@ -1,53 +1,38 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Lotto {
     private static final int RANDOM_BOUND_NUMBER = 45;
     private static final Random RANDOM = new Random();
-    private List<LottoNumber> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers = new HashSet<>();
 
     public Lotto() {
         this.lottoNumbers = createLottoNumbers();
     }
 
     public Lotto(List<Integer> numbers) {
-        this.lottoNumbers = new ArrayList<>();
         numbers.forEach(number -> this.lottoNumbers.add(new LottoNumber(number)));
     }
 
     public Lotto(String numbers) {
         List<String> splitNumbers = List.of(numbers.split(","));
-        this.lottoNumbers = new ArrayList<>();
         splitNumbers.forEach(number -> this.lottoNumbers.add(new LottoNumber(Integer.parseInt(number))));
     }
 
-    private static List<LottoNumber> createLottoNumbers() {
-        List<LottoNumber> newLottoNumbers = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+    private static Set<LottoNumber> createLottoNumbers() {
+        Set<LottoNumber> newLottoNumbers = new HashSet<>();
+        while (newLottoNumbers.size() < 6) {
             addLottoNumber(newLottoNumbers);
         }
         return newLottoNumbers;
     }
 
-    private static void addLottoNumber(List<LottoNumber> lottoNumbers) {
+    private static void addLottoNumber(Set<LottoNumber> lottoNumbers) {
         LottoNumber newLottoNumber = new LottoNumber(RANDOM.nextInt(RANDOM_BOUND_NUMBER) + 1);
-
-        if (validateDuplicateNumber(lottoNumbers, newLottoNumber)) {
-            addLottoNumber(lottoNumbers);
-            return;
-        }
-
         lottoNumbers.add(newLottoNumber);
     }
 
-    private static boolean validateDuplicateNumber(final List<LottoNumber> newLottoNumbers, final LottoNumber newLottoNumber) {
-        return newLottoNumbers.stream()
-                .filter(lottoNumber -> lottoNumber.getValue() == newLottoNumber.getValue())
-                .count() > 0;
-    }
 
     public int getNumberSize() {
         return lottoNumbers.size();
