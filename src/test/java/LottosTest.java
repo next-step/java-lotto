@@ -38,7 +38,6 @@ public class LottosTest {
 
         // when
         Ranks ranks = lottos.ranks(winningLotto);
-        // lottos.ranks(winningLotto)
 
         // then
         assertThat(ranks.count(Rank.of(rank))).isEqualTo(expected);

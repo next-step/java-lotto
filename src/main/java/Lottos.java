@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Lottos {
 
@@ -24,7 +22,6 @@ public class Lottos {
     }
 
     public Ranks ranks(Lotto winningLotto) {
-        Map<Integer, Integer> map = new HashMap<>();
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
             ranks.add(lotto.rank(winningLotto));
