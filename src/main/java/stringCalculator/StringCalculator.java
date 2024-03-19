@@ -21,7 +21,7 @@ public class StringCalculator {
 
         for (int operatorIndex = 1; operatorIndex < tokens.size(); operatorIndex += 2) {
             String operator = tokens.get(operatorIndex);
-            int operand = Integer.parseInt(tokens.get(operatorIndex + 1));
+            int operand = toInt(tokens.get(operatorIndex + 1));
             result = Operation.findOperator(operator).apply(result, operand);
         }
         return result;
@@ -31,5 +31,9 @@ public class StringCalculator {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException(BLANK_INPUT_MESSAGE);
         }
+    }
+
+    private static int toInt(String token) {
+        return Integer.parseInt(token);
     }
 }
