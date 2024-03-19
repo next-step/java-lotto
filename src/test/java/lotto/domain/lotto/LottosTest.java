@@ -34,7 +34,7 @@ class LottosTest {
         lottos.purchaseLotto(lottoGeneratingStrategyStub);
 
         WinningNumbers winningNumbers = WinningNumbers.valueOf(winningNumberInput);
-        LottosResult lottoResult = lottos.result(winningNumbers);
+        ResultOfLottos lottoResult = lottos.result(winningNumbers);
 
         assertThat(lottoResult.winningStatic(matchCount)).isEqualTo(1);
         assertThat(lottoResult.rateOfReturn()).isEqualTo(expectedRateOfReturn);

@@ -31,11 +31,11 @@ public class Lottos {
         return lottos;
     }
 
-    public LottosResult result(WinningNumbers winningNumbers) {
+    public ResultOfLottos result(WinningNumbers winningNumbers) {
         int[] winningStaticsArray = winningStaticsArray(winningNumbers);
         double rateOfReturn = purchaseAmountOfMoney.rateOfReturn(winningMoney(winningStaticsArray));
 
-        return LottosResult.newLottoResult(winningStaticsArray, rateOfReturn);
+        return ResultOfLottos.newLottoResult(winningStaticsArray, rateOfReturn);
     }
 
     private int[] winningStaticsArray(WinningNumbers winningNumbers) {
