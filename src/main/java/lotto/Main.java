@@ -3,23 +3,35 @@ package lotto;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicketMachine;
 import lotto.domain.LottoTickets;
+import lotto.exception.IllegalPurchaseAmountException;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
+import lotto.validator.InputValidator;
 
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
-        int purchaseAmount = InputView.readAmount();
 
-        LottoTickets lottoTickets = LottoTicketMachine.issue(purchaseAmount);
-        ResultView.printLottoTickets(lottoTickets);
+        try {
+            int purchaseAmount = InputView.readAmount();
+            InputValidator.validatePurchaseAmount(purchaseAmount);
 
-        List<Integer> winNumbers = InputView.readWinNumbers();
-        LottoStatistics statisticsMap = new LottoStatistics(lottoTickets, winNumbers);
+            LottoTickets lottoTickets = LottoTicketMachine.issue(purchaseAmount);
+            ResultView.printLottoTickets(lottoTickets);
 
-        ResultView.printLottoStatistics(statisticsMap, purchaseAmount);
+            List<Integer> winNumbers = InputView.readWinNumbers();
+            LottoStatistics statisticsMap = new LottoStatistics(lottoTickets, winNumbers);
+
+            ResultView.printLottoStatistics(statisticsMap, purchaseAmount);
+        } catch (IllegalPurchaseAmountException e) {
+            ResultView.printException(e);
+        } catch (Exception e) {
+            ResultView.printException("예기치 못한 예외가 발생했습니다.");
+            e.printStackTrace();
+        }
+
     }
 
 }

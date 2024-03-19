@@ -47,4 +47,12 @@ public class ResultView {
     public static String formatProfitRate(LottoStatistics statisticsMap, int purchaseAmount) {
         return MessageFormat.format("총 수익률은 {0}입니다.", LottoInformation.calculateProfitRate(statisticsMap, purchaseAmount));
     }
+
+    public static void printException(String exceptionMessage) {
+        System.out.println(exceptionMessage);
+    }
+
+    public static void printException(Exception e) {
+        printException(e.getMessage());
+    }
 }
