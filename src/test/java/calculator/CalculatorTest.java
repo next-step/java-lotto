@@ -2,6 +2,8 @@ package calculator;
 
 import calculator.domain.Calculator;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
@@ -48,8 +50,26 @@ public class CalculatorTest {
 
     @Test
     void 복합연산() {
-        String str = "2 + 3 * 4 / 2";
+        String str = "2 + 3 * 4 / 3";
         Calculator calculator = new Calculator();
-        assertThat(calculator.calculator(str)).isEqualTo(10);
+        assertThat(calculator.calculator(str)).isEqualTo(6);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"", "  "})
+    void null_공백_입력(String input) {
+        Calculator calculator = new Calculator();
+        assertThatThrownBy(() -> calculator.calculator(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("계산식을 입력해주세요");
+    }
+
+    @Test
+    void 사칙연산자_아님() {
+        String str = "2 & 3";
+        Calculator calculator = new Calculator();
+        assertThatThrownBy(() -> calculator.calculator(str))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("사칙연산 기호만 입력해주세요");
     }
 }
