@@ -6,14 +6,21 @@ import java.util.List;
 
 public class LottoGenerator {
 
+    private final List<Integer> balls;
+
+    public LottoGenerator() {
+        balls = new ArrayList<>();
+    }
+
     public List<Integer> generateLotto() {
-        List<Integer> balls = new ArrayList<>();
 
         List<Integer> numbers = generateRandomNumbers();
 
         for (int i = 0; i < 6; i++) {
             balls.add(numbers.get(i));
         }
+
+        Collections.sort(balls);
 
         return balls;
     }
@@ -27,5 +34,9 @@ public class LottoGenerator {
 
         Collections.shuffle(numbers);
         return numbers;
+    }
+
+    public List<Integer> getBalls() {
+        return balls;
     }
 }

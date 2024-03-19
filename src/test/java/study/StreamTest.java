@@ -18,4 +18,5 @@ public class StreamTest {
 
         assertThat(distinctIntegers.size()).isEqualTo(1);
     }
+
 }

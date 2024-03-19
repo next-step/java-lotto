@@ -16,10 +16,15 @@ public class LottoMachine {
     public void makeLottos() {
         for (int i = 0; i < number; i++) {
             lottoGenerators.add(new LottoGenerator());
+            lottoGenerators.get(i).generateLotto();
         }
     }
 
     public int showNumberOfLottos() {
         return lottoGenerators.size();
+    }
+
+    public List<LottoGenerator> getLottoGenerators() {
+        return lottoGenerators;
     }
 }
