@@ -21,11 +21,16 @@ public class LottoStatistics {
     }
 
     private void addStatistic(LottoInformation information) {
-        this.statisticsMap.put(information, this.statisticsMap.getOrDefault(information, 0) + 1);
+        if (information != null) {
+            this.statisticsMap.put(information, this.statisticsMap.getOrDefault(information, 0) + 1);
+        }
     }
 
     public int getMatchedLottoCount(LottoInformation information) {
-        return this.statisticsMap.get(information);
+        if (this.statisticsMap.containsKey(information)) {
+            return this.statisticsMap.get(information);
+        }
+        return 0;
     }
 
 

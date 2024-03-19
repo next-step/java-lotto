@@ -4,7 +4,6 @@ import java.util.*;
 
 public enum LottoInformation {
 
-    NOT_MATCH(0, 0),
     THREE_MATCH(3, 5000),
     FOUR_MATCH(4, 50000),
     FIVE_MATCH(5, 1500000),
@@ -34,19 +33,11 @@ public enum LottoInformation {
     }
 
     public static int getWinAmount(LottoInformation information) {
-        return matchAmountMap.get(information.matchCount).winAmount;
+        return information.winAmount;
     }
 
     public static LottoInformation lookup(int matchCount) {
-        if (anyMatch(matchCount)) {
-            return matchAmountMap.get(matchCount);
-        }
-        return NOT_MATCH;
-    }
-
-    public static boolean anyMatch(Integer matchCount) {
-        LottoInformation information = matchAmountMap.get(matchCount);
-        return information != null && information != NOT_MATCH;
+        return matchAmountMap.get(matchCount);
     }
 
     public static int getMatchCount(LottoInformation information) {
