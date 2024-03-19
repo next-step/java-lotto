@@ -1,10 +1,10 @@
-package controller;
+package calculator.controller;
 
-import model.Calculation;
-import model.NumberSentence;
-import model.Validator;
-import view.InputView;
-import view.ResultView;
+import calculator.model.Calculation;
+import calculator.model.NumberSentence;
+import calculator.model.Validator;
+import calculator.view.InputView;
+import calculator.view.ResultView;
 
 public class Calculator {
     private static final String SEPARATOR = " ";

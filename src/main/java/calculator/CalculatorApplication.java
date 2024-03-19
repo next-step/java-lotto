@@ -1,7 +1,9 @@
-import controller.Calculator;
-import model.Validator;
-import view.InputView;
-import view.ResultView;
+package calculator;
+
+import calculator.controller.Calculator;
+import calculator.model.Validator;
+import calculator.view.InputView;
+import calculator.view.ResultView;
 
 public class CalculatorApplication {
 

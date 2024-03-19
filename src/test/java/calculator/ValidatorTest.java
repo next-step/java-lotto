@@ -1,4 +1,6 @@
-import model.Validator;
+package calculator;
+
+import calculator.model.Validator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

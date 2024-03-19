@@ -1,5 +1,7 @@
-import model.Calculation;
-import model.NumberSentence;
+package calculator;
+
+import calculator.model.Calculation;
+import calculator.model.NumberSentence;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
