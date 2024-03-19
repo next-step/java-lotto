@@ -1,13 +1,13 @@
 package lotto.domain;
 
 public enum AmountEnum {
-	FIRST(6){
+	FIRST(6) {
 		@Override
 		public Integer getAmount() {
 			return 2000000000;
 		}
 	},
-	SECOND(5){
+	SECOND(5) {
 		@Override
 		public Integer getAmount() {
 			return 1500000;
@@ -40,6 +40,6 @@ public enum AmountEnum {
 				return amountEnum;
 			}
 		}
-		throw new IllegalArgumentException("당첨 개수가 아닙니다.");
+		throw new IllegalArgumentException(collectedCount + "는 당첨 개수가 아닙니다.");
 	}
 }
