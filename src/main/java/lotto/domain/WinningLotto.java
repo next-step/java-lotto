@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class WinningLotto {
@@ -12,11 +13,11 @@ public class WinningLotto {
         this.bonusBall = bonusBall;
     }
 
-    public Set<Ball> balls() {
-        return balls;
-    }
-
-    public Ball bonusBall() {
-        return bonusBall;
+    public Prize judge(Set<Ball> balls) {
+        Set<Ball> copiedBalls = new HashSet<>(balls);
+        copiedBalls.retainAll(this.balls);
+        int matchingCount = copiedBalls.size();
+        boolean matchedBonus = this.balls.contains(this.bonusBall);
+        return Prize.from(matchingCount, matchedBonus);
     }
 }
