@@ -2,6 +2,7 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -17,7 +18,7 @@ class WinningNumbersTest {
     class InstanceCreationTest {
         @ParameterizedTest
         @NullAndEmptySource
-        @DisplayName("당첨번호가 NULL 또는 공백인 경우 IllegalArgumentException이 발생한다.")
+        @DisplayName("당첨 번호가 NULL 또는 공백인 경우 IllegalArgumentException이 발생한다.")
         void testNullOrBlankFailCase(String winningNumbers) {
             assertThatThrownBy(() -> WinningNumbers.valueOf(winningNumbers))
                     .isExactlyInstanceOf(IllegalArgumentException.class);
@@ -25,7 +26,7 @@ class WinningNumbersTest {
 
         @ParameterizedTest
         @ValueSource(strings = {"1", "1, 2", "1, 2, 3, 4, 5, 6, 7"})
-        @DisplayName("당첨 번호의 개수가 LOTTO_NUMBER_COUNT가 아닌 경우 IllegalArgumentException이 발생한다.")
+        @DisplayName("당첨 번호의 숫자 개수가 LOTTO_NUMBER_COUNT가 아닌 경우 IllegalArgumentException이 발생한다.")
         void testOverMaxFailCase(String winningNumbers) {
             assertThatThrownBy(() -> WinningNumbers.valueOf(winningNumbers))
                     .isExactlyInstanceOf(IllegalArgumentException.class);
@@ -33,10 +34,21 @@ class WinningNumbersTest {
 
         @ParameterizedTest
         @ValueSource(strings = {"1, 2, 3, a, 5, 6", "1, 2, 3, 4, 5, 44", "0, 2, 3, 4, 5, 6"})
-        @DisplayName("당첨 번호가 MIN_LOTTO_NUMBER 보다 크거나 같고 MAX_LOTTO_NUMBER 보다 작거나 같은 정수가 아닌 경우 IllegalArgumentException이 발생한다.")
+        @DisplayName("당첨 번호의 숫자가 MIN_LOTTO_NUMBER 보다 크거나 같고 MAX_LOTTO_NUMBER 보다 작거나 같은 정수가 아닌 경우 IllegalArgumentException이 발생한다.")
         void testNonValidNumberFailCase(String winningNumbers) {
             assertThatThrownBy(() -> WinningNumbers.valueOf(winningNumbers))
                     .isExactlyInstanceOf(IllegalArgumentException.class);
         }
+
+        // 중복값 테스트
+        @Test
+        @DisplayName("당첨 번호에 중복된 숫자가 있는 경우 IllegalArgumentException이 발생한다.")
+        void testDuplicateNumberFailCase() {
+            String duplicateWinningNumbers = "1, 2, 3, 3, 5, 6";
+
+            assertThatThrownBy(() -> WinningNumbers.valueOf(duplicateWinningNumbers))
+                    .isExactlyInstanceOf(IllegalArgumentException.class);
+        }
+
     }
 }
