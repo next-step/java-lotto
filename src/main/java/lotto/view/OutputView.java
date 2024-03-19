@@ -49,7 +49,7 @@ public class OutputView {
 	}
 
 	private void printWinners(final Map<Integer, Integer> hashMap, final int i) {
-		System.out.println(i + "개 일치" + AmountEnum.from(i).getAmount() + "원)- " + hashMap.get(i) + "개");
+		System.out.println(i + "개 일치 (" + AmountEnum.from(i).getAmount() + "원)- " + hashMap.get(i) + "개");
 	}
 
 	private static void findWinner(final long count, final Map<Integer, Integer> hashMap) {
