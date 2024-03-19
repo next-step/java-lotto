@@ -7,7 +7,7 @@
 - [x] WinningLotto findRank(..) 를 enum Rank 로 이동
     - WinningLotto와 사용자 Lotto 비교 위한 메소드 추가
 - [x] findRank(..) -> findUserRank(..) renaming
-- [x] 
+- [x] 사용하지 않는 메소드 제거 -- Lotto value()
 
 ---
 

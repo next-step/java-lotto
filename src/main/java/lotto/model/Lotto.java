@@ -37,10 +37,6 @@ public class Lotto {
         }
     }
 
-    public List<LottoNumber> value() {
-        return lottoNumbers;
-    }
-
     public Rank match(WinningLotto winningLotto) {
         if (winningLotto == null) {
             throw new InvalidLottoException("당첨 번호 정보가 존재하지 않습니다");
