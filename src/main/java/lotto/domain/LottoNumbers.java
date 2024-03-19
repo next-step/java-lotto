@@ -30,6 +30,13 @@ public class LottoNumbers {
         return List.copyOf(numbers);
     }
 
+    public int matchCount(LottoNumbers lottoNumbers) {
+
+        return (int) this.numbers.stream()
+                .filter(lottoNumbers.numbers::contains)
+                .count();
+    }
+
     private void assertValidLength(List<Integer> numbers) {
         String errorMessage = "[로또] 숫자 6개를 입력해주세요.";
 

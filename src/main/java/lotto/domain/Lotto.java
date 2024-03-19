@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.Optional;
 
 public class Lotto {
 
@@ -9,5 +9,11 @@ public class Lotto {
 
     public Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
+    }
+
+    public Optional<LottoResult> isWinningLotto(Lotto targetLotto) {
+        int matchCount = this.lottoNumbers.matchCount(targetLotto.lottoNumbers);
+
+        return LottoResult.findByMatchCount(matchCount);
     }
 }
