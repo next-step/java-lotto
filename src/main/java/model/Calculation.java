@@ -15,19 +15,8 @@ public class Calculation {
     }
 
     private static int calculateByOperator(String operator, int firstNumber, int secondNumber) {
-        if (Operator.PLUS.equals(operator)) {
-            return Operator.PLUS.operation(firstNumber, secondNumber);
-        }
-        else if (Operator.MINUS.equals(operator)) {
-            return Operator.MINUS.operation(firstNumber, secondNumber);
-        }
-        else if (Operator.MULTIPLE.equals(operator)) {
-            return Operator.MULTIPLE.operation(firstNumber, secondNumber);
-        }
-        else if (Operator.DIVIDE.equals(operator)) {
-            return Operator.DIVIDE.operation(firstNumber, secondNumber);
-        }
-        throw new IllegalArgumentException("잘못된 연산자가 들어왔습니다.");
+        Operator calculationOperator = Operator.findOperator(operator);
+        return calculationOperator.calculate(firstNumber, secondNumber);
     }
 
     public static int plus(int firstInput, int secondInput) {
