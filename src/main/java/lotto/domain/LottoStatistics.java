@@ -45,11 +45,11 @@ public class LottoStatistics {
 
 
     public double calculateProfitRate(int purchaseAmount) {
-        double totalProfit = 0;
+        double profit = 0;
         for (LottoPrize prize : statisticsMap.keySet()) {
-            totalProfit += getTotalAmount(prize);
+            profit += getTotalAmount(prize);
         }
-        return totalProfit / purchaseAmount;
+        return profit / purchaseAmount;
     }
 
     private double getTotalAmount(LottoPrize prize) {
