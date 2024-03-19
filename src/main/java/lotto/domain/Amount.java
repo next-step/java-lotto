@@ -1,6 +1,7 @@
-package lotto;
+package lotto.domain;
 
 public class Amount {
+    private final static int LOTTO_PRICE = 1000;
     private final int value;
 
     public Amount(String input) {
@@ -19,8 +20,8 @@ public class Amount {
             throw new IllegalArgumentException("정수만 입력할 수 있습니다.");
         }
 
-        if (number < 1000) {
-            throw new IllegalArgumentException("1000원 이상의 금액을 입력하세요.");
+        if (number < LOTTO_PRICE) {
+            throw new IllegalArgumentException(LOTTO_PRICE + "원 이상의 금액을 입력하세요.");
         }
 
         return number;

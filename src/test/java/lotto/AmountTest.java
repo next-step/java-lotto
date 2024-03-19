@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Amount;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
@@ -7,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class AmountTest {
+class AmountTest {
     @Test
     void 구입금액_생성() {
         Amount amount = new Amount("14000");
