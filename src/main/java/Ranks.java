@@ -16,4 +16,12 @@ public class Ranks {
     public int count(Rank rank) {
         return map.getOrDefault(rank, 0);
     }
+
+    public int totalPrizeMoney() {
+        int totalPrizeMoney = 0;
+        for (Rank rank : map.keySet()) {
+            totalPrizeMoney += rank.prizeMoney(map.get(rank));
+        }
+        return totalPrizeMoney;
+    }
 }

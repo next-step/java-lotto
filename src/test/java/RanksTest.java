@@ -18,4 +18,17 @@ public class RanksTest {
         // then
         assertThat(result).isEqualTo(1);
     }
+
+    @DisplayName("전체 당첨금을 구한다.")
+    @Test
+    void test() {
+        // given
+        Ranks ranks = new Ranks(List.of(Rank.THIRD, Rank.FOURTH));
+
+        // when
+        int result = ranks.totalPrizeMoney();
+
+        // then
+        assertThat(result).isEqualTo(55000);
+    }
 }
