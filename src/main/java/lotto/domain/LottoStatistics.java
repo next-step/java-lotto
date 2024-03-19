@@ -21,16 +21,24 @@ public class LottoStatistics {
     }
 
     private void addStatistic(LottoPrize prize) {
-        if (prize != null) {
+        if (hasPrize(prize)) {
             this.statisticsMap.put(prize, this.statisticsMap.getOrDefault(prize, 0) + 1);
         }
     }
 
-    public int getMatchedLottoCount(LottoPrize prize) {
-        if (this.statisticsMap.containsKey(prize)) {
+    private boolean hasPrize(LottoPrize prize) {
+        return prize != null;
+    }
+
+    public int getMatchCount(LottoPrize prize) {
+        if (hasPrizeStatistics(prize)) {
             return this.statisticsMap.get(prize);
         }
         return 0;
+    }
+
+    private boolean hasPrizeStatistics(LottoPrize prize) {
+        return this.statisticsMap.containsKey(prize);
     }
 
 
@@ -43,6 +51,6 @@ public class LottoStatistics {
     }
 
     private double getTotalAmount(LottoPrize prize) {
-        return statisticsMap.get(prize) * LottoPrize.getWinAmount(prize);
+        return statisticsMap.get(prize) * LottoPrize.getPrize(prize);
     }
 }

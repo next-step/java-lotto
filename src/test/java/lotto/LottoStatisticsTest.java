@@ -32,7 +32,7 @@ public class LottoStatisticsTest {
         LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, winLottoTicket);
 
         // Then
-        assertThat(lottoStatistics.getMatchedLottoCount(LottoPrize.lookup(hit))).isEqualTo(count);
+        assertThat(lottoStatistics.getMatchCount(LottoPrize.lookup(hit))).isEqualTo(count);
     }
 
     @ParameterizedTest(name = "[{index}] {0}개 일치 - {1}개")
@@ -54,7 +54,7 @@ public class LottoStatisticsTest {
         LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, winLottoTicket);
 
         // Then
-        assertThat(lottoStatistics.getMatchedLottoCount(LottoPrize.lookup(hit))).isEqualTo(count);
+        assertThat(lottoStatistics.getMatchCount(LottoPrize.lookup(hit))).isEqualTo(count);
     }
 
 }

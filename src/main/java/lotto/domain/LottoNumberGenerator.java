@@ -6,11 +6,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.domain.LottoPrize.*;
-
 public class LottoNumberGenerator {
 
-    private static final List<Integer> ALL_LOTTO_NUMBER = IntStream.rangeClosed(1, 45)
+    private static final int NUMBER_INDEX_FROM = 0;
+    private static final int NUMBER_INDEX_TO = 6;
+
+    private static final int LOTTO_RANGE_FROM = 1;
+    private static final int LOTTO_RANGE_TO = 45;
+
+
+    private static final List<Integer> ALL_LOTTO_NUMBER = IntStream.rangeClosed(LOTTO_RANGE_FROM, LOTTO_RANGE_TO)
             .boxed()
             .collect(Collectors.toList());
 

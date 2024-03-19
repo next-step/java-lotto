@@ -10,21 +10,18 @@ public enum LottoPrize {
     SIX_MATCH(6, 2000000000)
     ;
 
-    public static final int NUMBER_INDEX_FROM = 0;
-    public static final int NUMBER_INDEX_TO = 6;
-
     private final int matchCount;
-    private final int winAmount;
+    private final int prize;
 
-    LottoPrize(int matchCount, int winAmount) {
+    LottoPrize(int matchCount, int prize) {
         this.matchCount = matchCount;
-        this.winAmount = winAmount;
+        this.prize = prize;
     }
 
-    private static final Map<Integer, LottoPrize> matchAmountMap = new HashMap<>();
+    private static final Map<Integer, LottoPrize> prizeMap = new HashMap<>();
     static {
         for (LottoPrize prize : LottoPrize.values()) {
-            matchAmountMap.put(prize.matchCount, prize);
+            prizeMap.put(prize.matchCount, prize);
         }
     }
 
@@ -32,12 +29,12 @@ public enum LottoPrize {
         return List.of(LottoPrize.values());
     }
 
-    public static int getWinAmount(LottoPrize prizes) {
-        return prizes.winAmount;
+    public static int getPrize(LottoPrize prize) {
+        return prize.prize;
     }
 
     public static LottoPrize lookup(int matchCount) {
-        return matchAmountMap.get(matchCount);
+        return prizeMap.get(matchCount);
     }
 
     public static int getMatchCount(LottoPrize prizes) {
