@@ -1,45 +1,23 @@
 package domain;
 
-import static util.NumberUtils.isNumber;
+import java.util.List;
 
 public class CalculateHandler {
 
-    private int numberCache;
-    private Operator operatorCache;
-    private String previousState = "";
+    public int handle(SeparationDto dto){
+        List<Integer> numbers = dto.getNumbers();
+        List<String> values = dto.getOperators();
+        int result = numbers.get(0);
+        result = calculate(numbers, values, result);
+        return result;
+    }
 
-    public void handle(String input) {
-        if (!isNumber(input) && "".equals(previousState)) throw new IllegalArgumentException();
-        if (isNumber(input) && "".equals(previousState)) {
-            numberCache = toInts(input);
-            previousState = input;
-            return;
+    private int calculate(List<Integer> numbers, List<String> values, int result) {
+        Operator operator;
+        for(int i = 0; i < values.size(); i++){
+            operator = Operator.toOperator(values.get(i));
+            result = operator.apply(result, numbers.get(i+1));
         }
-        if (isNumber(input)) {
-            validateIfDuplication(input);
-            numberCache = operatorCache.apply(numberCache, toInts(input));
-            previousState = input;
-            return;
-        }
-        validateIfDuplication(input);
-        operatorCache = Operator.toOperator(input);
-        previousState = input;
-    }
-
-    private void validateIfDuplication(String input) {
-        if (isNumber(input) && isNumber(previousState)) throw new IllegalArgumentException();
-        if (!isNumber(input) && !isNumber(previousState)) throw new IllegalArgumentException();
-    }
-
-    public void validateIfOperationPlacedInLast() {
-        if (!isNumber(previousState)) throw new IllegalArgumentException();
-    }
-
-    private int toInts(String input) {
-        return Integer.parseInt(input);
-    }
-
-    public int getResult() {
-        return this.numberCache;
+        return result;
     }
 }
