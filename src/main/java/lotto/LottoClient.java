@@ -13,5 +13,6 @@ public class LottoClient {
         ResultView.printLottoTickets(lottoTickets);
         WinningNumbers winningNumbers = new WinningNumbers(InputView.askWinningNumbers());
         ResultView.printWinningStatistics(lottoTickets, winningNumbers);
+        ResultView.printEarningsRate(lottoTickets, winningNumbers);
     }
 }

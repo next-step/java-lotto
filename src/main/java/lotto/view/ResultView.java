@@ -20,4 +20,8 @@ public class ResultView {
         System.out.println("6개 일치 (2000000000원) - " + lottoTickets.matchTicketCount(winningNumbers, 6) + "개");
     }
 
+    public static void printEarningsRate(LottoTickets lottoTickets, WinningNumbers winningNumbers) {
+        System.out.println("총 수익률은 " + lottoTickets.earningsRate(winningNumbers) + "입니다.");
+    }
+
 }
