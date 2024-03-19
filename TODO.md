@@ -8,6 +8,11 @@
     - WinningLotto와 사용자 Lotto 비교 위한 메소드 추가
 - [x] findRank(..) -> findUserRank(..) renaming
 - [x] 사용하지 않는 메소드 제거 -- Lotto value()
+- [x] LottoNumberDto -> LottoNumberResponse renaming
+- [x] LottoNumberResponse 생성자에서 mapper 처리하도록 변경
+    - dto의 변경이 domain에 전파되지 않도록 하기 위해서
+    - 생성자 타입으로 List\<String\> 과 List\<LottoNumber\> 구분했는데, 런타임시 제네릭 타입 소거로 인해 충돌 감지
+    - 정적 메소드로 from(..) 생성하여 해결
 
 ---
 

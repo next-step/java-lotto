@@ -1,6 +1,6 @@
 package lotto.model;
 
-import lotto.dto.LottoNumberDto;
+import lotto.dto.LottoNumberResponse;
 import lotto.exception.InvalidLottoException;
 
 import java.util.EnumMap;
@@ -21,9 +21,9 @@ public class LottoPaper {
         this.lottos = lottos;
     }
 
-    public List<LottoNumberDto> toLottoNumberDtos() {
+    public List<LottoNumberResponse> toLottoNumberResponses() {
         return this.lottos.stream()
-                .map(Lotto::toLottoNumberDto)
+                .map(Lotto::toLottoNumberResponse)
                 .collect(toList());
     }
 

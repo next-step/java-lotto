@@ -1,12 +1,11 @@
 package lotto.model;
 
-import lotto.dto.LottoNumberDto;
+import lotto.dto.LottoNumberResponse;
 import lotto.exception.InvalidLottoException;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_NUMBER_SIZE = 6;
@@ -45,12 +44,8 @@ public class Lotto {
         return Rank.findUserRank(this, winningLotto);
     }
 
-    public LottoNumberDto toLottoNumberDto() {
-        List<String> numbers = this.lottoNumbers.stream()
-                .map(LottoNumber::toString)
-                .collect(Collectors.toList());
-
-        return new LottoNumberDto(numbers);
+    public LottoNumberResponse toLottoNumberResponse() {
+        return LottoNumberResponse.from(this.lottoNumbers);
     }
 
     public boolean contains(LottoNumber bonus) {

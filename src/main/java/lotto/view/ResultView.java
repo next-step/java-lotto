@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.dto.LottoNumberDto;
+import lotto.dto.LottoNumberResponse;
 import lotto.model.Prize;
 import lotto.model.Rank;
 
@@ -17,12 +17,12 @@ public class ResultView {
     private static final String BONUS_RESULT_FORMAT = "%s개 일치, 보너스 볼 일치(%s원) - %s개";
     private static final String RATE_OF_RETURN_FORMAT = "총 수익률은 %.2f 입니다.";
 
-    public void printOrderResponse(List<LottoNumberDto> lottoNumberDtos) {
+    public void printOrderResponse(List<LottoNumberResponse> responses) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(lottoNumberDtos.size()).append("개를 구매했습니다").append(NEW_LINE);
-        for (LottoNumberDto dto : lottoNumberDtos) {
-            sb.append(toJoinNumbers(dto.getNumbers())).append(NEW_LINE);
+        sb.append(responses.size()).append("개를 구매했습니다").append(NEW_LINE);
+        for (LottoNumberResponse response : responses) {
+            sb.append(toJoinNumbers(response.getNumbers())).append(NEW_LINE);
         }
 
         System.out.println(sb);

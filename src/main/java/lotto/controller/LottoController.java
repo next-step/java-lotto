@@ -24,7 +24,7 @@ public class LottoController {
         OrderRequest request = new OrderRequest(money);
         LottoPaper lottoPaper = LottoMachine.purchase(request);
 
-        resultView.printOrderResponse(lottoPaper.toLottoNumberDtos());
+        resultView.printOrderResponse(lottoPaper.toLottoNumberResponses());
 
         Lotto winningNumberLotto = inputView.askWinningNumbers();
         LottoNumber bonusNumber = inputView.askBonusNumber(winningNumberLotto);
