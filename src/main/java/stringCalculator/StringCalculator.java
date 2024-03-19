@@ -12,7 +12,6 @@ public class StringCalculator {
         checkBlank(input);
 
         List<String> tokens = List.of(input.split(BLANK));
-        ckeckOperations(tokens);
 
         return calculate(tokens);
     }
@@ -31,18 +30,6 @@ public class StringCalculator {
     private static void checkBlank(String input) {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException(BLANK_INPUT_MESSAGE);
-        }
-    }
-
-    private static void ckeckOperations(List<String> tokens) {
-        for (int i = 1; i < tokens.size(); i += 2) {
-            ckeckOpertaion(tokens.get(i));
-        }
-    }
-
-    private static void ckeckOpertaion(String token) {
-        if (!OPERATION_SYMBOL.contains(token)) {
-            throw new IllegalArgumentException(INVALID_OPERATOR_MESSAGE);
         }
     }
 }

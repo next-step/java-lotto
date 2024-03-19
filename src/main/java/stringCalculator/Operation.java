@@ -29,7 +29,9 @@ public enum Operation {
         return Arrays.stream(Operation.values())
                 .filter(operation -> Objects.equals(operation.sign(), sign))
                 .findAny()
-                .get();
+                .orElseThrow(()->{
+                    throw new IllegalArgumentException("input value is invalid operation symbol");
+                });
     }
 
     public int apply(int x, int y) {
