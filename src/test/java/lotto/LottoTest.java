@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.Amount;
 import lotto.domain.Lotto;
-import lotto.domain.Seller;
+import lotto.domain.MyLottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,16 +27,16 @@ public class LottoTest {
 
     @DisplayName("로또 구매 갯수를 구한다.")
     @Test
-    public void getBuyLottoNumber() {
+    public void getBuyLottoCount() {
         //given
         int amount = 14000;
-        Seller seller = new Seller();
+        MyLottos myLottos = MyLottos.rollLottos(amount);
 
         //when
-        int buyLottoNumber = seller.getBuyLottoNumber(amount);
+        Integer lottoCount = myLottos.getLottoCount();
 
         //then
-        assertThat(buyLottoNumber).isEqualTo(14);
+        assertThat(lottoCount).isEqualTo(14);
     }
 
     @DisplayName("로또를 생성할때 숫자 6개가 나온다.")

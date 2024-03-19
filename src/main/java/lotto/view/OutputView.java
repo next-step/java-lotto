@@ -9,10 +9,11 @@ import java.util.Map;
 
 public class OutputView {
 	public MyLottos printBuyLottos(Integer pay) {
-		Integer buyLottoNumber = Amount.getBuyLottoNumber(pay);
-		System.out.println(buyLottoNumber + "개를 구매했습니다.");
-		MyLottos myLottos = MyLottos.rollLottos(buyLottoNumber);
-		for (int i = 0; i < myLottos.getLottoSize(); i++) {
+		MyLottos myLottos = MyLottos.rollLottos(pay);
+
+		System.out.println(myLottos.getLottoCount() + "개를 구매했습니다.");
+
+		for (int i = 0; i < myLottos.getLottoCount(); i++) {
 			System.out.println(myLottos.getLottos().get(i).getNumbersToString());
 		}
 		return myLottos;
@@ -25,7 +26,7 @@ public class OutputView {
 		hashMap.put(4, 0);
 		hashMap.put(5, 0);
 		hashMap.put(6, 0);
-		for (int i = 0; i < myLottos.getLottoSize(); i++) {
+		for (int i = 0; i < myLottos.getLottoCount(); i++) {
 			long count = myLottos.getLottos().get(i).compareWinNumber(winLotto);
 			findWinner(count, hashMap);
 		}
