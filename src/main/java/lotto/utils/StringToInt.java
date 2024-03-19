@@ -1,9 +1,9 @@
-package lotto;
+package lotto.utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Utils {
+public class StringToInt {
     public static int toInt(String values){
         return checkPositive(values);
     }
@@ -17,16 +17,6 @@ public class Utils {
         }
         if (result < 0){
             throw new IllegalArgumentException("음수 입력");
-        }
-        return result;
-    }
-
-    public static List<Integer> toList(String value){
-        String[] intValue= value.split(",");
-        List<Integer> result = new ArrayList<>();
-        for(int i=0;i<intValue.length;i++){
-            String noBlank = intValue[i].replaceAll(" ",  "");
-            result.add(toInt(noBlank));
         }
         return result;
     }

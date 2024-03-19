@@ -1,12 +1,16 @@
-package lotto;
+package lotto.domain;
+
+import lotto.interf.LottoStrategy;
+import lotto.interf.RandomLottoStrategy;
+import lotto.utils.RandomGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BuyLottos {
+    private static final int LOTTO_ELEMENT_NUM = 6;
     private Price price;
     private List<Lotto> lottos;
-    private static final int LOTTO_ELEMENT_NUM = 6;
 
 
     public BuyLottos(int price) {
@@ -30,10 +34,18 @@ public class BuyLottos {
     public void buyLottos(){
         int numOfLotto = getCountOfLotto();
         for (int i = 0 ; i< numOfLotto; i++) {
-            Lotto lotto = new Lotto();
-            lotto.oneLotto();
+            List<Integer> randomList = genRandomLottoList(genLotto());
+            Lotto lotto = new Lotto(randomList);
             this.lottos.add(lotto);
         }
     }
 
+    private List<Integer> genRandomLottoList(LottoStrategy LottoStrategy){
+        return LottoStrategy.genLotto();
+    }
+
+    private static LottoStrategy genLotto(){
+        RandomGenerator randomGenerator = new RandomGenerator();
+        return new RandomLottoStrategy(randomGenerator);
+    }
 }

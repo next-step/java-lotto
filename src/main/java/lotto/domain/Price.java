@@ -1,17 +1,17 @@
-package lotto;
+package lotto.domain;
 
 public class Price {
     public int price;
 
     public Price(int price){
-        this.price = checkPrice(price);
+        checkPrice(price);
+        this.price = price;
     }
 
-    private int checkPrice(int price){
+    private void checkPrice(int price){
         if(price % 1000 != 0){
             throw new IllegalArgumentException("금액은 1000배수");
         }
-        return price;
     }
 
 }

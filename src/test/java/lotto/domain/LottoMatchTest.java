@@ -1,13 +1,12 @@
-package lotto;
+package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoMatchTest {
     @Test
@@ -27,9 +26,12 @@ public class LottoMatchTest {
 
         LottoMatch lottoMatch = new LottoMatch();
         lottoMatch.checkRank(buyLottos,winLotto);
-
-        assertThat(lottoMatch.getRankOfLotto()).isEqualTo(Arrays.asList(1,1,1,1));
-
+        assertAll(
+                ()->assertThat(lottoMatch.getRankOfLotto().get(RankMatches.FIRST)).isEqualTo(1),
+                ()->assertThat(lottoMatch.getRankOfLotto().get(RankMatches.SECOND)).isEqualTo(1),
+                ()->assertThat(lottoMatch.getRankOfLotto().get(RankMatches.THIRD)).isEqualTo(1),
+                ()->assertThat(lottoMatch.getRankOfLotto().get(RankMatches.FOURTH)).isEqualTo(1)
+                );
 
     }
 }
