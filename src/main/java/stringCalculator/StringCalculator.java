@@ -1,39 +1,12 @@
 package stringCalculator;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.BiFunction;
 
 public class StringCalculator {
     private static final List<String> OPERATION_SYMBOL = List.of("+", "-", "*", "/");
-    private static Map<String, BiFunction<Integer, Integer, Integer>> operations = new HashMap<>();
     private static final String BLANK = " ";
     private static final String BLANK_INPUT_MESSAGE = "input value is blank";
     private static final String INVALID_OPERATOR_MESSAGE = "input value is invalid operation symbol";
-
-    static {
-        operations.put("+", StringCalculator::addition);
-        operations.put("-", StringCalculator::subtract);
-        operations.put("*", StringCalculator::multiple);
-        operations.put("/", StringCalculator::division);
-    }
-
-    public static int addition(int value1, int value2) {
-        return value1 + value2;
-    }
-
-    public static int subtract(int value1, int value2) {
-        return value1 - value2;
-    }
-
-    public static int division(int value1, int value2) {
-        return value1 / value2;
-    }
-
-    public static int multiple(int value1, int value2) {
-        return value1 * value2;
-    }
 
     public static int calculation(String input) {
         checkBlank(input);
@@ -50,7 +23,7 @@ public class StringCalculator {
         for (int i = 1; i < tokens.size(); i += 2) {
             String operator = tokens.get(i);
             int operand = Integer.parseInt(tokens.get(i + 1));
-            result = operations.get(operator).apply(result, operand);
+            result = Operation.findOperator(operator).apply(result, operand);
         }
         return result;
     }
