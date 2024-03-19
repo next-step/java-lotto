@@ -5,10 +5,11 @@ import java.util.Arrays;
 import static lotto.util.ConstUtils.MINIMUM_WIN_MATCH;
 
 public enum LottoWinInfo {
-    WIN_FIRST(6, 2000000000),
-    WIN_SECOND(5, 1500000),
-    WIN_THIRD(4, 50000),
-    WIN_FOURTH(3, 5000),
+    WIN_FIRST(6, 2_000_000_000),
+    WIN_FIRST_WITH_BONUS(5, 30_000_000),
+    WIN_SECOND(5, 1_500_000),
+    WIN_THIRD(4, 50_000),
+    WIN_FOURTH(3, 5_000),
     PASS(0, 0)
     ;
 
