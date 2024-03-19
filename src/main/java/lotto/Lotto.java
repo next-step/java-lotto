@@ -14,17 +14,22 @@ public class Lotto {
     }
 
     private Lotto(LottoGeneration generation) {
-        Set<Integer> numberSet = generation.generate();
-        if (numberSet.size() != LOTTO_SIZE) {
+        List<Integer> numberList = generation.generate();
+        if (numberList.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("요청하신 번호 배열이 로또 사이즈" + LOTTO_SIZE + "와 일치하지 않습니다.");
         }
 
-        this.lottoNumberList = numberSet.stream()
+        this.lottoNumberList = numberList.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
     public List<LottoNumber> numbers() {
         return this.lottoNumberList;
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumberList.toString();
     }
 }

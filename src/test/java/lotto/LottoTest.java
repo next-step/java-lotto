@@ -14,7 +14,7 @@ public class LottoTest {
     @DisplayName("겹치지 않는 로또 번호 6개를 가질 수 있다.")
     @Test
     void create() {
-        Lotto lotto = Lotto.create(() -> Set.of(5, 6, 7, 8, 9, 10));
+        Lotto lotto = Lotto.create(() -> List.of(5, 6, 7, 8, 9, 10));
         assertThat(lotto.numbers()).containsExactly(new LottoNumber(5),
                 new LottoNumber(6),
                 new LottoNumber(7),
@@ -26,7 +26,7 @@ public class LottoTest {
     @DisplayName("로또 사이즈와 맞지 않을 경우 예외를 던진다.")
     @Test
     void createThrowError() {
-        assertThatThrownBy(() -> Lotto.create(() -> Set.of(5, 6, 7, 8, 9)))
+        assertThatThrownBy(() -> Lotto.create(() -> List.of(5, 6, 7, 8, 9)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
