@@ -1,4 +1,4 @@
-package view;
+package sequenceCalculator.view;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package view;
+package sequenceCalculator.view;
 
 public class ResultView {
 

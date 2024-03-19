@@ -1,7 +1,7 @@
 package sequenceCalculator;
 
-import static view.InputView.*;
-import static view.ResultView.*;
+import static sequenceCalculator.view.InputView.*;
+import static sequenceCalculator.view.ResultView.*;
 
 public class SequenceCalculatorApplication {
 
