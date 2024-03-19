@@ -26,7 +26,7 @@ public enum Rank {
             .collect(Collectors.toMap(Rank::getMatchCount, Function.identity())));
 
     public static Rank findRank(int matchCount) {
-        return Optional.of(rankMap.get(matchCount)).orElse(MISS);
+        return Optional.ofNullable(rankMap.get(matchCount)).orElse(MISS);
     }
 
     public int getMatchCount() {

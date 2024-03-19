@@ -22,6 +22,6 @@ public class AutoGeneratingStrategy implements LottoGeneratingStrategy {
     @Override
     public Lotto lotto() {
         Collections.shuffle(ALL_LOTTO_NUMBERS);
-        return Lotto.valueOf(ALL_LOTTO_NUMBERS.subList(0, LOTTO_NUMBER_COUNT));
+        return Lotto.valueOf(ALL_LOTTO_NUMBERS.subList(0, LOTTO_NUMBER_SIZE));
     }
 }

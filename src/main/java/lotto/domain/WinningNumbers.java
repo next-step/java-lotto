@@ -29,7 +29,7 @@ public class WinningNumbers {
 
 
     private void validateWinningNumbers(String winningNumberInput) {
-        if (!isNonBlank(winningNumberInput) || winningNumberInput.split(COMMA_BLANK_DELIMITER).length != LOTTO_NUMBER_COUNT) {
+        if (!isNonBlank(winningNumberInput) || winningNumberInput.split(COMMA_BLANK_DELIMITER).length != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(WRONG_WINNING_NUMBERS_MESSAGE);
         }
     }

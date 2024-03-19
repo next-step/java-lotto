@@ -20,7 +20,7 @@ class AutoGeneratingStrategyTest {
         @DisplayName("생성된 번호의 개수가 LOTTO_NUMBER_COUNT와 동일하다.")
         void testLottoNumberCount() {
             List<Integer> lottoNumbers = lotto.lottoNumbers();
-            assertThat(lottoNumbers.size()).isEqualTo(LOTTO_NUMBER_COUNT);
+            assertThat(lottoNumbers.size()).isEqualTo(LOTTO_NUMBER_SIZE);
         }
 
         @Test
