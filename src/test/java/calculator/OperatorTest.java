@@ -44,13 +44,6 @@ public class OperatorTest {
         assertThat(result).isEqualTo(1);
     }
 
-    @DisplayName("입력받는 값이 null 이면 안된다")
-    @Test
-    void notNullTest() {
-        final Operator operator = Operator.PLUS;
-        assertThatIllegalArgumentException().isThrownBy(() -> operator.operate(null, 1));
-    }
-
     @DisplayName("어느 연산자인지 판별한다")
     @Test
     void checkOperator() {

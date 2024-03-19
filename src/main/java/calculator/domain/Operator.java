@@ -25,17 +25,12 @@ public enum Operator {
                 .orElseThrow(() -> new IllegalArgumentException(""));
     }
 
-    public int operate(Integer a, Integer b) {
-        assertNotNull(a);
-        assertNotNull(b);
-
-        return this.function.apply(a, b);
+    public int operate(Number a, Number b) {
+        return operate(a.value(), b.value());
     }
 
-    private void assertNotNull(Integer a) {
-        if (a == null) {
-            throw new IllegalArgumentException("계산기의 매개변수는 null일 수 없습니다.");
-        }
+    public int operate(int a, int b) {
+        return this.function.apply(a, b);
     }
 
 }

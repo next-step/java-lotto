@@ -16,9 +16,9 @@ public class Calculator {
         Deque<String> items = new ArrayDeque<>(Arrays.asList(letters));
 
         while (items.size() >= 3) {
-            int a = Integer.parseInt(items.poll());
+            Number a = new Number(Integer.parseInt(items.poll()));
             Operator operator = Operator.findByName(items.poll());
-            int b = Integer.parseInt(items.poll());
+            Number b = new Number(Integer.parseInt(items.poll()));
 
             items.addFirst(String.valueOf(operator.operate(a, b)));
         }
