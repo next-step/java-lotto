@@ -17,13 +17,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
 
-    private final Lotto winningLotto = new Lotto(new LottoNumbers(new TestNumberGenerator(List.of(1, 2, 3, 4, 5, 6))));
+    private final Lotto winningLotto = new Lotto(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
 
     @ParameterizedTest
     @DisplayName("등수 계산 테스트")
     @MethodSource("getUserNumbersAndLottoResult")
     public void winningTest(List<Integer> userNumbers, Optional<LottoResult> expected) {
-        LottoNumbers userLottoNumbers = new LottoNumbers(new TestNumberGenerator(userNumbers));
+        LottoNumbers userLottoNumbers = new LottoNumbers(userNumbers);
         Lotto userLotto = new Lotto(userLottoNumbers);
 
         assertThat(userLotto.isWinningLotto(winningLotto)).isEqualTo(expected);
