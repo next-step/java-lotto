@@ -15,8 +15,8 @@ public class LottoFactory {
 
     public static Lottos create(final List<List<Integer>> inputs) {
         final List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < inputs.size(); i++) {
-            lottos.add(new Lotto(inputs.get(i)));
+        for (final List<Integer> input : inputs) {
+            lottos.add(new Lotto(input));
         }
         return new Lottos(lottos);
     }
