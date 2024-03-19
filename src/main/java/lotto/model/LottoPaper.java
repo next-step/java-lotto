@@ -31,13 +31,13 @@ public class LottoPaper {
         return this.lottos.size();
     }
 
-    public Prize matches(WinningInfo winningInfo) {
-        return new Prize(toRankEnumMap(winningInfo));
+    public Prize matches(WinningLotto winningLotto) {
+        return new Prize(toRankEnumMap(winningLotto));
     }
 
-    private EnumMap<Rank, Integer> toRankEnumMap(WinningInfo winningInfo) {
+    private EnumMap<Rank, Integer> toRankEnumMap(WinningLotto winningLotto) {
         return this.lottos.stream()
-                .map(lotto -> lotto.match(winningInfo))
+                .map(lotto -> lotto.match(winningLotto))
                 .collect(toMap(Function.identity(), e -> 1, Integer::sum, () -> new EnumMap<>(Rank.class)));
     }
 }

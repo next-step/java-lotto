@@ -57,5 +57,16 @@ public enum Rank {
     public boolean isTwo() {
         return this == Rank.TWO;
     }
+
+    public static Rank findUserRank(Lotto userLotto, WinningLotto winningLotto) {
+        int count = winningLotto.compareWith(userLotto);
+        boolean hasBonusNumber = winningLotto.containsBonusNumberIn(userLotto);
+
+        if (count == 5) {
+            return hasBonusNumber ? Rank.TWO : Rank.THREE;
+        }
+
+        return Rank.find(count);
+    }
 }
 

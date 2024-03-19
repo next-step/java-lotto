@@ -2,6 +2,12 @@
 
 - [x] Prize 멤버 필드 타입을 EnumMap (구현체)에서 Map(인터페이스)로 변경
 - [x] Prize 수익률 테스트시 @EnumSource 사용하여 중복 제거
+- [x] WinningInfo -> WinningLotto renaming
+- [x] WinningLotto null 테스트 추가
+- [x] WinningLotto findRank(..) 를 enum Rank 로 이동
+    - WinningLotto와 사용자 Lotto 비교 위한 메소드 추가
+- [x] findRank(..) -> findUserRank(..) renaming
+- [x] 
 
 ---
 

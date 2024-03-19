@@ -4,11 +4,11 @@ import lotto.exception.InvalidLottoException;
 
 import static lotto.validation.WinningInfoValidator.assertDuplicatedBonus;
 
-public class WinningInfo {
+public class WinningLotto {
     private final Lotto winningNumberLotto;
     private final LottoNumber bonusNumber;
 
-    public WinningInfo(Lotto winningNumberLotto, LottoNumber bonusNumber) {
+    public WinningLotto(Lotto winningNumberLotto, LottoNumber bonusNumber) {
         assertNull(winningNumberLotto, bonusNumber);
         assertDuplicatedBonus(winningNumberLotto, bonusNumber);
 
@@ -26,22 +26,11 @@ public class WinningInfo {
         }
     }
 
-    public Rank findRank(Lotto other) {
-        int count = winningNumberLotto.uniqueNumberSize(other);
-        boolean hasBonusNumber = other.contains(bonusNumber);
-
-        if (count == 5) {
-            return determineMatchedFiveNumberRank(hasBonusNumber);
-        }
-
-        return Rank.find(count);
+    public int compareWith(Lotto userLotto) {
+        return this.winningNumberLotto.uniqueNumberCount(userLotto);
     }
 
-    private Rank determineMatchedFiveNumberRank(boolean hasBonusNumber) {
-        if (hasBonusNumber) {
-            return Rank.TWO;
-        }
-
-        return Rank.THREE;
+    public boolean containsBonusNumberIn(Lotto userLotto) {
+        return userLotto.contains(this.bonusNumber);
     }
 }

@@ -33,7 +33,7 @@ class LottoPaperTest {
         Lotto lotto = create(1, 2, 3, 4, 5, 6);
         LottoPaper lottoPaper = new LottoPaper(Collections.singletonList(lotto));
 
-        Prize prize = lottoPaper.matches(new WinningInfo(create(1, 2, 3, 4, 5, 6), new LottoNumber(7)));
+        Prize prize = lottoPaper.matches(new WinningLotto(create(1, 2, 3, 4, 5, 6), new LottoNumber(7)));
 
         assertThat(prize).isEqualTo(new Prize(new EnumMap<>(Map.of(Rank.ONE, 1))));
     }
@@ -43,7 +43,7 @@ class LottoPaperTest {
         Lotto lotto = create(1, 2, 3, 4, 5, 6);
         LottoPaper lottoPaper = new LottoPaper(Collections.singletonList(lotto));
 
-        Prize prize = lottoPaper.matches(new WinningInfo(create(7, 8, 9, 10, 11, 12), new LottoNumber(13)));
+        Prize prize = lottoPaper.matches(new WinningLotto(create(7, 8, 9, 10, 11, 12), new LottoNumber(13)));
 
         assertThat(prize).isEqualTo(new Prize(new EnumMap<>(Map.of(Rank.NO_MATCH, 1))));
     }
@@ -53,7 +53,7 @@ class LottoPaperTest {
         Lotto lotto = create(1, 2, 3, 4, 5, 6);
         LottoPaper lottoPaper = new LottoPaper(Collections.singletonList(lotto));
 
-        Prize prize = lottoPaper.matches(new WinningInfo(create(1, 8, 9, 10, 11, 12), new LottoNumber(13)));
+        Prize prize = lottoPaper.matches(new WinningLotto(create(1, 8, 9, 10, 11, 12), new LottoNumber(13)));
 
         assertThat(prize).isEqualTo(new Prize(new EnumMap<>(Map.of(Rank.NO_MATCH, 1))));
     }

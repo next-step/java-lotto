@@ -41,12 +41,12 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public Rank match(WinningInfo winningInfo) {
-        if (winningInfo == null) {
+    public Rank match(WinningLotto winningLotto) {
+        if (winningLotto == null) {
             throw new InvalidLottoException("당첨 번호 정보가 존재하지 않습니다");
         }
 
-        return winningInfo.findRank(this);
+        return Rank.findUserRank(this, winningLotto);
     }
 
     public LottoNumberDto toLottoNumberDto() {
@@ -61,7 +61,7 @@ public class Lotto {
         return this.lottoNumbers.contains(bonus);
     }
 
-    public int uniqueNumberSize(Lotto other) {
+    public int uniqueNumberCount(Lotto other) {
         Set<LottoNumber> unique = new HashSet<>(this.lottoNumbers);
         unique.retainAll(other.lottoNumbers);
         return unique.size();
