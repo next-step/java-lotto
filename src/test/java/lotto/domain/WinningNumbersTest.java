@@ -5,9 +5,11 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
 
@@ -49,6 +51,12 @@ class WinningNumbersTest {
             assertThatThrownBy(() -> WinningNumbers.valueOf(duplicateWinningNumbers))
                     .isExactlyInstanceOf(IllegalArgumentException.class);
         }
+    }
 
+    @ParameterizedTest
+    @CsvSource(value = {"1, 2, 3, 4, 5, 6:4:true", "1, 2, 3, 4, 5, 6:7:false"}, delimiter = ':')
+    @DisplayName("당첨 번호에 number가 포함되어 있다면 true를 없다면 false를 반환한다.")
+    void testContains(String winningNumbers, int number, boolean expected) {
+        assertThat(WinningNumbers.valueOf(winningNumbers).contains(number)).isEqualTo(expected);
     }
 }
