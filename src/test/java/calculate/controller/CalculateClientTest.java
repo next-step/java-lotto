@@ -1,5 +1,6 @@
-package controller;
+package calculate.controller;
 
+import calculate.controller.CalculateClient;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

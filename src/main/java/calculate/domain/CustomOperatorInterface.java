@@ -1,4 +1,4 @@
-package domain;
+package calculate.domain;
 
 @FunctionalInterface
 public interface CustomOperatorInterface {

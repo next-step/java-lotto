@@ -1,5 +1,7 @@
-package domain;
+package calculate.domain;
 
+import calculate.domain.CalculateHandler;
+import calculate.domain.SeparationDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

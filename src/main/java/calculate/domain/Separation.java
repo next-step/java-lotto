@@ -1,8 +1,8 @@
-package domain;
+package calculate.domain;
+
+import calculate.util.NumberUtils;
 
 import java.util.ArrayList;
-
-import static util.NumberUtils.isNumber;
 
 public class Separation {
 
@@ -20,12 +20,12 @@ public class Separation {
     }
 
     private void checkFirstIsNotOperator(String first) {
-        if(!isNumber(first)) throw new IllegalArgumentException();
+        if(!NumberUtils.isNumber(first)) throw new IllegalArgumentException();
     }
 
     private void addToDto(SeparationDto separationDto, String s) {
-        if (isNumber(s)) separationDto.getNumbers().add(toInts(s));
-        if (!isNumber(s)) separationDto.getOperators().add(s);
+        if (NumberUtils.isNumber(s)) separationDto.getNumbers().add(toInts(s));
+        if (!NumberUtils.isNumber(s)) separationDto.getOperators().add(s);
     }
 
     private int toInts(String input) {
@@ -33,7 +33,7 @@ public class Separation {
     }
 
     private void validateIfDuplication(String input) {
-        if (isNumber(input) && previousState) throw new IllegalArgumentException();
-        if (!isNumber(input) && !previousState) throw new IllegalArgumentException();
+        if (NumberUtils.isNumber(input) && previousState) throw new IllegalArgumentException();
+        if (!NumberUtils.isNumber(input) && !previousState) throw new IllegalArgumentException();
     }
 }

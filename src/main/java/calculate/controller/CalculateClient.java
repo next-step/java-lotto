@@ -1,9 +1,9 @@
-package controller;
+package calculate.controller;
 
 
-import domain.CalculateHandler;
-import domain.Separation;
-import domain.SeparationDto;
+import calculate.domain.CalculateHandler;
+import calculate.domain.Separation;
+import calculate.domain.SeparationDto;
 
 public class CalculateClient {
 

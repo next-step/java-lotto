@@ -1,5 +1,6 @@
-package util;
+package calculate.util;
 
+import calculate.util.NumberUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
