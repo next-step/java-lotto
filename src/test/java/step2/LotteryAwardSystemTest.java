@@ -13,8 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LotteryAwardSystemTest {
 
+    private static final RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
     private static final List<Lotto> testLottos = new ArrayList<>();
-    private static final Lotto winnerNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    private static final Lotto winnerNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6), randomNumberGenerator);
     private static final Integer FIRST_WINNER_PRIZE = 2000000000;
     private static final Integer SECOND_WINNER_PRIZE = 1500000;
     private static final Integer THIRD_WINNER_PRIZE = 50000;
@@ -24,7 +25,7 @@ public class LotteryAwardSystemTest {
     static void beforeAll() {
         for (int i = 0; i < 4; i++) {
             List<Integer> numbers = Arrays.asList(1 + i, 2 + i, 3 + i, 4 + i, 5 + i, 6 + i);
-            testLottos.add(new Lotto(numbers));
+            testLottos.add(new Lotto(numbers, randomNumberGenerator));
         }
     }
 
@@ -50,14 +51,11 @@ public class LotteryAwardSystemTest {
 
     @Test
     public void 당첨_수익금을_알려준다() {
-        LotteryAwardSystem lottoSystem = new LotteryAwardSystem(testLottos, winnerNumbers, 4000);
-        Map<Integer, Integer> prizeMap = lottoSystem.getPrizeMap();
-
         assertAll(
-                () -> assertThat(prizeMap.get(6)).isEqualTo(FIRST_WINNER_PRIZE),
-                () -> assertThat(prizeMap.get(5)).isEqualTo(SECOND_WINNER_PRIZE),
-                () -> assertThat(prizeMap.get(4)).isEqualTo(THIRD_WINNER_PRIZE),
-                () -> assertThat(prizeMap.get(3)).isEqualTo(FOURTH_WINNER_PRIZE)
+                () -> assertThat(PrizeLevel.SIX.getPrizeAmount()).isEqualTo(FIRST_WINNER_PRIZE),
+                () -> assertThat(PrizeLevel.FIVE.getPrizeAmount()).isEqualTo(SECOND_WINNER_PRIZE),
+                () -> assertThat(PrizeLevel.FOUR.getPrizeAmount()).isEqualTo(THIRD_WINNER_PRIZE),
+                () -> assertThat(PrizeLevel.THREE.getPrizeAmount()).isEqualTo(FOURTH_WINNER_PRIZE)
         );
     }
 }

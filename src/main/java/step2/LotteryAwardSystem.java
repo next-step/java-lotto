@@ -7,24 +7,15 @@ public class LotteryAwardSystem {
     private final List<Lotto> lottos;
     private final Lotto winNumbers;
     private final int money;
-    private static HashMap<Integer, Integer> prizeMap = new HashMap<>();
-    private HashMap<Integer, Integer> winnersCountMap = new HashMap<>();
+    private final WinnersCountManager winnersCountManager = new WinnersCountManager();
     private double profitRate;
 
     public LotteryAwardSystem(List<Lotto> lottos, Lotto winNumbers, int money) {
         this.lottos = lottos;
         this.winNumbers = winNumbers;
         this.money = money;
-        initPrizeMap();
         calculateWinnersCount();
         calculateProfitRate();
-    }
-
-    private void initPrizeMap() {
-        prizeMap.put(3, 5000);
-        prizeMap.put(4, 50000);
-        prizeMap.put(5, 1500000);
-        prizeMap.put(6, 2000000000);
     }
 
     private void calculateWinnersCount() {
@@ -37,7 +28,7 @@ public class LotteryAwardSystem {
         List<Integer> tempNumbers = new ArrayList<>(lotto.getLottoNumbers());
         tempNumbers.retainAll(winNumbers.getLottoNumbers());
         int winsCount = tempNumbers.size();
-        winnersCountMap.put(winsCount, winnersCountMap.getOrDefault(winsCount, 0) + 1);
+        winnersCountManager.recordWinnerCount(winsCount);
     }
 
     private void calculateProfitRate() {
@@ -47,22 +38,18 @@ public class LotteryAwardSystem {
 
     private double calculateSumPrize() {
         double sum = 0;
-        for (Integer key : prizeMap.keySet()) {
-            int prize = prizeMap.get(key);
-            sum = sum + prize * winnersCountMap.getOrDefault(key, 0);
+        for (PrizeLevel level : PrizeLevel.values()) {
+            int winCount = winnersCountManager.getWinnerCount(level.getMatchCount());
+            sum += level.getPrizeAmount() * winCount;
         }
         return sum;
     }
 
     public Map<Integer, Integer> getWinnersCountMap() {
-        return Collections.unmodifiableMap(winnersCountMap);
+        return winnersCountManager.getWinnersCountMap();
     }
 
     public double getProfitRate() {
         return profitRate;
-    }
-
-    public Map<Integer, Integer> getPrizeMap() {
-        return Collections.unmodifiableMap(prizeMap);
     }
 }

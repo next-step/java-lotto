@@ -6,24 +6,22 @@ import java.util.List;
 
 public class LottoStore {
 
+    private final NumberGenerator numberGenerator;
     private List<Lotto> lottos = new ArrayList<>();
     private final int buyMoney;
 
-    public LottoStore(String money) {
-        validNullMoney(money);
-        isNumeric(money);
+    public LottoStore(String money, NumberGenerator numberGenerator) {
+        this.numberGenerator = numberGenerator;
+        validMoney(money);
         buyMoney = Integer.parseInt(money);
         isPossibleBuyLotto(buyMoney);
         buyLottos(buyMoney / 1000);
     }
 
-    private void validNullMoney(String money) {
+    private void validMoney(String money) {
         if (money == null) {
             throw new IllegalArgumentException("돈은 null이면 안됩니다.");
         }
-    }
-
-    private void isNumeric(String money) {
         try {
             Integer.parseInt(money);
         } catch (NumberFormatException e) {
@@ -37,9 +35,9 @@ public class LottoStore {
         }
     }
 
-    private void buyLottos(int money) {
-        for (int i = 0; i < money; i++) {
-            lottos.add(new Lotto());
+    private void buyLottos(int availablePurchaseCount) {
+        for (int i = 0; i < availablePurchaseCount; i++) {
+            lottos.add(new Lotto(numberGenerator));
         }
     }
 

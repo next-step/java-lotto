@@ -12,7 +12,8 @@ import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
 
-    private final Lotto lotto = new Lotto();
+    private final RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+    private final Lotto lotto = new Lotto(randomNumberGenerator);
     private final List<Integer> lottoNumbers = lotto.getLottoNumbers();
 
     @Test
@@ -32,7 +33,7 @@ public class LottoTest {
 
         @RepeatedTest(10000)
         public void 로또_번호_중복_테스트() {
-            Lotto lottoTest = new Lotto();
+            Lotto lottoTest = new Lotto(randomNumberGenerator);
             List<Integer> lottoTestNumbers = lottoTest.getLottoNumbers();
             Set<Integer> lottoNumberSet = new HashSet<>(lottoTestNumbers);
             assertThat(lottoNumberSet.size()).isEqualTo(6);

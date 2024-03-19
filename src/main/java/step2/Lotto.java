@@ -4,30 +4,38 @@ import java.util.*;
 
 public class Lotto {
 
-    private static final Random random = new Random();
-    private final List<Integer> numbers = new ArrayList<>();
+    private final NumberGenerator numberGenerator;
+    private final LottoNumbers numbers;
 
-    public Lotto() {
-        while (numbers.size() < 6) {
-            addLottoNumber(createRandomNumber());
-        }
+    public Lotto(NumberGenerator numberGenerator) {
+        this.numberGenerator = numberGenerator;
+        this.numbers = generateLottoNumbers();
     }
 
-    public Lotto(List<Integer> numbers) {
-        this.numbers.addAll(numbers);
+    public Lotto(List<Integer> numbers, NumberGenerator numberGenerator) {
+        this.numbers = new LottoNumbers(numbers);
+        this.numberGenerator = numberGenerator;
+    }
+
+    private LottoNumbers generateLottoNumbers() {
+        List<Integer> tempNumbers = new ArrayList<>();
+        while (tempNumbers.size() < 6) {
+            addLottoNumber(tempNumbers, createRandomNumber());
+        }
+        return new LottoNumbers(tempNumbers);
     }
 
     private int createRandomNumber() {
-        return random.nextInt(45) + 1;
+        return numberGenerator.generate(45);
     }
 
-    private void addLottoNumber(int num) {
-        if (!numbers.contains(num)) {
-            numbers.add(num);
+    private void addLottoNumber(List<Integer> numList, int num) {
+        if (!numList.contains(num)) {
+            numList.add(num);
         }
     }
 
     public List<Integer> getLottoNumbers() {
-        return Collections.unmodifiableList(numbers);
+        return numbers.getLottoNumbers();
     }
 }
