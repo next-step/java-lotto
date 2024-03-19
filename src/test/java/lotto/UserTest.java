@@ -1,15 +1,19 @@
 package lotto;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoSeller;
 import lotto.domain.User;
 import lotto.utils.TestNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -35,4 +39,24 @@ public class UserTest {
         assertThatIllegalArgumentException().isThrownBy(() -> user.purchaseLottos(price));
     }
 
+    @ParameterizedTest
+    @DisplayName("로또 수익률 테스트")
+    @MethodSource("getLottosAndRateOfReturn")
+    void testRateOfReturn(Lotto winningLotto, int price, double expected) {
+        User user = new User(mockLottoSeller);
+        user.purchaseLottos(price);
+
+        assertThat(user.getRateOfReturn(winningLotto)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> getLottosAndRateOfReturn() {
+        return Stream.of(
+                Arguments.of(new Lotto(new LottoNumbers(new TestNumberGenerator(List.of(1,2,3,4,5,6)))), 4000, 2000000.0),
+                Arguments.of(new Lotto(new LottoNumbers(new TestNumberGenerator(List.of(2,3,4,5,6,7)))), 5000, 1500),
+                Arguments.of(new Lotto(new LottoNumbers(new TestNumberGenerator(List.of(3,4,5,6,7,8)))), 6000, 50.0),
+                Arguments.of(new Lotto(new LottoNumbers(new TestNumberGenerator(List.of(4,5,6,7,8,9)))), 3000, 5.0),
+                Arguments.of(new Lotto(new LottoNumbers(new TestNumberGenerator(List.of(5,6,7,8,9,10)))), 4000, 0.0)
+
+        );
+    }
 }

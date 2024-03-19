@@ -1,7 +1,11 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class User {
     private int purchasePrice;
@@ -13,14 +17,7 @@ public class User {
     }
 
     public void purchaseLottos(int purchasePrice) {
-        assertValidPurchasePrice(purchasePrice);
-
-        int lottoCount = purchasePrice / Lotto.PRICE;
-        lottos = new ArrayList<>();
-
-        for (int i = 0; i < lottoCount; i++) {
-            lottos = lottoSeller.sellLottos(lottoCount);
-        }
+        lottos = lottoSeller.sellLottos(purchasePrice);
 
         this.purchasePrice = purchasePrice;
     }
@@ -29,12 +26,19 @@ public class User {
         return List.copyOf(lottos);
     }
 
-    private void assertValidPurchasePrice(int purchasePrice) {
-        String errorMessage = String.format("[유저] 로또 가격 %d로 나누어 떨어지는 값을 입력해주세요.", Lotto.PRICE);
+    public double getRateOfReturn(Lotto winningLotto) {
+        BigDecimal result = new BigDecimal(0);
 
-        if (purchasePrice < 0 || purchasePrice % Lotto.PRICE > 0) {
-            throw new IllegalArgumentException(errorMessage);
+        List<LottoResult> lottoResults = lottos.stream().map(lotto -> lotto.isWinningLotto(winningLotto))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList());
+
+        for (LottoResult lottoResult : lottoResults) {
+            result = result.add(new BigDecimal(lottoResult.getWinningPrice()));
         }
+
+        return result.divide(new BigDecimal(purchasePrice), 2, RoundingMode.HALF_UP).doubleValue();
     }
 
 }
