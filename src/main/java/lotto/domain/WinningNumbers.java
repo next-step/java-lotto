@@ -48,4 +48,8 @@ public class WinningNumbers {
             throw new IllegalArgumentException(WRONG_WINNING_NUMBERS_MESSAGE);
         }
     }
+
+    public boolean contains(int number) {
+        return winningNumberSet.contains(number);
+    }
 }
