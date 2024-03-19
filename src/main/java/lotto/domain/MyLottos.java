@@ -1,9 +1,11 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.counting;
 
 public class MyLottos {
     private final static int LOTTO_PRICE = 1000;
@@ -39,17 +41,10 @@ public class MyLottos {
         return lottos.size();
     }
 
-    public Map<AmountEnum, Integer> findWinner(final Lotto winLotto) {
-        Map<AmountEnum, Integer> hashMap = new HashMap<>();
-        hashMap.put(AmountEnum.OTHER, 0);
-        hashMap.put(AmountEnum.FOURTH, 0);
-        hashMap.put(AmountEnum.THIRD, 0);
-        hashMap.put(AmountEnum.SECOND, 0);
-        hashMap.put(AmountEnum.FIRST, 0);
-        for (int i = 0; i < lottos.size(); i++) {
-            AmountEnum amountEnum = lottos.get(i).getAmountEnumCompareWinNumber(winLotto);
-            hashMap.put(amountEnum, hashMap.get(amountEnum) + 1);
-        }
-        return hashMap;
+    public Map<AmountEnum, Long> findWinner(final Lotto winLotto) {
+        return lottos.stream()
+                .collect(Collectors.groupingBy(
+                        lotto -> lotto.getAmountEnumCompareWinNumber(winLotto)
+                        , counting()));
     }
 }

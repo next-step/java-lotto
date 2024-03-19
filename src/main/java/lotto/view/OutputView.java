@@ -26,17 +26,17 @@ public class OutputView {
 		printTotalReturn(winner, myLottos.getLottoCount() * 1000);
 	}
 
-	public void printTotalReturn(final Map<AmountEnum, Integer> hashMap, final Integer pay) {
+	public void printTotalReturn(final Map<AmountEnum, Long> hashMap, final Integer pay) {
 		int totalAmount = 0;
 		for (int i = 3; i <= 6; i++) {
-			totalAmount += AmountEnum.from(i).getAmount() * hashMap.get(AmountEnum.from(i));
+			totalAmount += AmountEnum.from(i).getAmount() * hashMap.getOrDefault(AmountEnum.from(i), 0L);
 		}
 		System.out.println("총 수익률은 " + (double) totalAmount / pay + "입니다.");
 	}
 
-	private void printWinners(final Map<AmountEnum, Integer> hashMap) {
+	private void printWinners(final Map<AmountEnum, Long> hashMap) {
 		for (int i = 3; i <= 6; i++) {
-			System.out.println(i + "개 일치 (" + AmountEnum.from(i).getAmount() + "원)- " + hashMap.get(AmountEnum.from(i)) + "개");
+			System.out.println(i + "개 일치 (" + AmountEnum.from(i).getAmount() + "원)- " + hashMap.getOrDefault(AmountEnum.from(i), 0L) + "개");
 		}
 	}
 }
