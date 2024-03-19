@@ -1,28 +1,26 @@
 package calculator.domain;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Deque;
-
 public class Calculator {
 
-    public static void validate(String[] targets) {
-        if (targets.length < 3 || targets.length % 2 == 0) {
-            throw new IllegalArgumentException("입력 문자열을 확인해주세요.");
+    public static int calculate(String[] letters) {
+        assertArgumentsLengthIsOdd(letters);
+
+        int result = Integer.parseInt(letters[0]);
+        for (int operatorIdx = 1, n = letters.length; operatorIdx < n; operatorIdx += 2) {
+            result = operate(letters, result, operatorIdx);
         }
+
+        return result;
     }
 
-    public static int calculate(String[] letters) {
-        Deque<String> items = new ArrayDeque<>(Arrays.asList(letters));
+    private static int operate(String[] letters, int preResult, int operatorIdx) {
+        final Operator operator = Operator.findByName(letters[operatorIdx]);
+        return operator.operate(new Number(preResult), new Number(Integer.parseInt(letters[operatorIdx + 1])));
+    }
 
-        while (items.size() >= 3) {
-            Number a = new Number(Integer.parseInt(items.poll()));
-            Operator operator = Operator.findByName(items.poll());
-            Number b = new Number(Integer.parseInt(items.poll()));
-
-            items.addFirst(String.valueOf(operator.operate(a, b)));
+    private static void assertArgumentsLengthIsOdd(String[] targets) {
+        if (targets == null || targets.length % 2 == 0) {
+            throw new IllegalArgumentException("입력 문자열을 확인해주세요.");
         }
-
-        return Integer.parseInt(items.poll());
     }
 }

@@ -8,20 +8,12 @@ import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
 
-    @DisplayName("입력받은 문자열 배열의 홀수번째 위치에는 숫자가 입력되어야 한다.")
-    @Test
-    void classifyOperands() {
-        final String[] targets = new String[]{"3", "-", "2", "+", "-1"};
-
-        assertThatCode(() -> Calculator.validate(targets))
-                .doesNotThrowAnyException();
-    }
-
-    @DisplayName("입력받은 문자열 배열의 길이는 3이상이고, 홀수여야 한다.")
+    @DisplayName("입력받은 문자열 배열의 길이가 짝수면 IllegalArgumentException을 던진다.")
     @Test
     void validate() {
         final String[] targets = new String[]{"3", "-", "2", "+", "-1", "-"};
-        assertThatIllegalArgumentException().isThrownBy(() -> Calculator.validate(targets));
+
+        assertThatIllegalArgumentException().isThrownBy(() -> Calculator.calculate(targets));
     }
 
     @DisplayName("입력받은 문자열에 대한 수식을 계산한다")
@@ -29,6 +21,7 @@ public class CalculatorTest {
     void calculate() {
         final String[] targets = new String[]{"3", "-", "2", "+", "-1"};
         int result = Calculator.calculate(targets);
+
         assertThat(result).isEqualTo(0);
     }
 
@@ -36,6 +29,7 @@ public class CalculatorTest {
     @Test
     void calculateThrowExceptionWhenInvalidTargets() {
         final String[] targets = new String[]{"3", "-", "2", "+", "ㅁㄴㅇㄹㅁㄴㅇㄹ"};
+
         assertThatExceptionOfType(NumberFormatException.class)
                 .isThrownBy(() -> Calculator.calculate(targets));
     }
