@@ -20,9 +20,9 @@ public class StringCalculator {
     private static int calculate(List<String> tokens) {
         int result = Integer.parseInt(tokens.get(0));
 
-        for (int i = 1; i < tokens.size(); i += 2) {
-            String operator = tokens.get(i);
-            int operand = Integer.parseInt(tokens.get(i + 1));
+        for (int operatorIndex = 1; operatorIndex < tokens.size(); operatorIndex += 2) {
+            String operator = tokens.get(operatorIndex);
+            int operand = Integer.parseInt(tokens.get(operatorIndex + 1));
             result = Operation.findOperator(operator).apply(result, operand);
         }
         return result;
