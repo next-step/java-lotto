@@ -19,7 +19,7 @@ public class LottoMachine {
         }
     }
 
-    public List<LottoGenerator> getLottoGenerators() {
-        return lottoGenerators;
+    public int showNumberOfLottos() {
+        return lottoGenerators.size();
     }
 }

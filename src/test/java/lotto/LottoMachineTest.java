@@ -13,7 +13,7 @@ public class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine(14);
         lottoMachine.makeLottos();
 
-        assertThat(lottoMachine.getLottoGenerators().size()).isEqualTo(14);
+        assertThat(lottoMachine.showNumberOfLottos()).isEqualTo(14);
     }
 
 }
