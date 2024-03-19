@@ -16,7 +16,7 @@ public class ResultView {
         stringBuilder.append(formatPurchaseCount(lottoTickets.size())).append(System.lineSeparator());
 
         for (LottoTicket ticket : lottoTickets.get()) {
-            stringBuilder.append(ticket).append(System.lineSeparator());
+            stringBuilder.append(ticket.get()).append(System.lineSeparator());
         }
         stringBuilder.append(System.lineSeparator());
 

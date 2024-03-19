@@ -26,8 +26,8 @@ public class LottoTicket {
         return matchCount;
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(this.numbers);
+    public List<Integer> get() {
+        return this.numbers;
     }
+
 }
