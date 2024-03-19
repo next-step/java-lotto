@@ -15,10 +15,10 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(LottoNumbers lottoNumbers) {
-        this.numbers = List.copyOf(lottoNumbers.numbers);
+        this(lottoNumbers.numbers);
     }
 
-    public LottoNumbers(List<Integer> numbers) {
+    private LottoNumbers(List<Integer> numbers) {
         assertValidLength(numbers);
         assertValidRange(numbers);
         assertNotDuplicateNumber(numbers);
