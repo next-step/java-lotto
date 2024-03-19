@@ -1,3 +1,51 @@
+### 3단계 피드백
+
+- [x] Prize 멤버 필드 타입을 EnumMap (구현체)에서 Map(인터페이스)로 변경
+- [x] Prize 수익률 테스트시 @EnumSource 사용하여 중복 제거
+- [x] WinningInfo -> WinningLotto renaming
+- [x] WinningLotto null 테스트 추가
+- [x] WinningLotto findRank(..) 를 enum Rank 로 이동
+    - WinningLotto와 사용자 Lotto 비교 위한 메소드 추가
+- [x] findRank(..) -> findUserRank(..) renaming
+- [x] 사용하지 않는 메소드 제거 -- Lotto value()
+- [x] LottoNumberDto -> LottoNumberResponse renaming
+- [x] LottoNumberResponse 생성자에서 mapper 처리하도록 변경
+    - dto의 변경이 domain에 전파되지 않도록 하기 위해서
+    - 생성자 타입으로 List\<String\> 과 List\<LottoNumber\> 구분했는데, 런타임시 제네릭 타입 소거로 인해 충돌 감지
+    - 정적 메소드로 from(..) 생성하여 해결
+- [x] Lotto 클래스(일급컬렉션) 멤버 필드 타입을 List 에서 Set으로 변경
+- [x] Prize 생성자 추가 -> List\<Rank\> 타입을 받음
+    - 테스트에서 팩토리 메소드 만든게 의미 불명한 것으로 파악됨
+- [x] model 에서 LottoNumberResponse (dto) 에 대한 의존성 제거 -> controller에서 처리하도록 수정
+- [x] enum Rank findUserRank(..) 파라미터 원시 값을 받도록 리팩토링
+- [x] enum Rank에 boolean matchBonus 상태 추가, 중복 메소드 제거
+
+---
+
+### 3단계 - 로또(2등)
+
+- [x] Rank에 로또 2등에 대한 정보를 추가한다
+- [x] 보너스 번호를 입력 받는다
+    - 이때 보너스 번호는 당첨 번호와 중복되어서는 안된다
+    - (참고) 당첨 번호 5개를 맞추고, 보너스 볼을 포함하는 경우에만 2등이 된다
+- [x] 보너스 번호를 포함한 당첨 결과를 구한다 -- WinningInfo findRank(..)
+- [x] 당첨 결과 출력시 2등 포맷을 포함하도록 한다
+
+---
+
+### 2단계 피드백
+
+- [x] LottoNumbers -> LottoNumberFactory renaming
+- [x] 구매 수량이 0인 경우 예외 반환하도록 변경
+- [x] Lotto 클래스 가변인자 생성자 제거, 테스트용 팩토리 추가
+- [x] 팩토리 생성, matches() 파라미터 타입을 LottoNumber 리스트에서 Lotto로 변경
+- [x] 당첨 번호 매칭 결과를 EnumMap으로 반환하도록 변경
+- [x] 로또 당첨 정보와 수익률 가지는 Prize 클래스 추가
+- [x] 구매 로또 출력시 LottoNumberDto 리스트 전달하여 출력하도록 변경
+    - OrderResponse 삭제
+
+---
+
 ### 2단계 -로또 (자동)
 
 LottoNumber

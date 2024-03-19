@@ -1,27 +1,30 @@
 package lotto.model;
 
 import lotto.dto.OrderRequest;
-import lotto.dto.OrderResponse;
+import lotto.exception.InvalidLottoException;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+
+import static lotto.validation.LottoMachineValidator.assertMoney;
 
 public class LottoMachine {
     public static final int LOTTO_PER_MONEY = 1_000;
-    public static final LottoPaper EMPTY_LOTTO_PAPER = new LottoPaper(Collections.emptyList());
 
     private LottoMachine() {
     }
 
-    public static OrderResponse purchase(OrderRequest orderRequest) {
-        int quantity = calculate(orderRequest.getMoney());
+    public static LottoPaper purchase(OrderRequest orderRequest) {
+        int money = orderRequest.getMoney();
 
+        assertMoney(money);
+
+        int quantity = calculate(money);
         if (quantity == 0) {
-            return new OrderResponse(quantity, EMPTY_LOTTO_PAPER);
+            throw new InvalidLottoException("로또를 구매하실 수 없습니다");
         }
 
-        return new OrderResponse(quantity, prepare(quantity));
+        return prepare(quantity);
     }
 
     private static int calculate(int money) {
@@ -31,7 +34,7 @@ public class LottoMachine {
     private static LottoPaper prepare(int quantity) {
         List<Lotto> result = new ArrayList<>();
         for (int i = 1; i <= quantity; i++) {
-            result.add(new Lotto(LottoNumbers.selectRandomLottoNumbers()));
+            result.add(new Lotto(LottoNumberFactory.selectRandomLottoNumbers()));
         }
 
         return new LottoPaper(result);

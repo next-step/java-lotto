@@ -10,54 +10,58 @@ import java.util.stream.Collectors;
 public class Lotto {
     private static final int LOTTO_NUMBER_SIZE = 6;
 
-    private final List<LottoNumber> lottoNumbers;
-
-    public Lotto(Integer... numbers) {
-        this(LottoNumbers.of(numbers));
-    }
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
-        assertLotto(lottoNumbers);
+        this(new HashSet<>(lottoNumbers));
+    }
 
+    public Lotto(Set<LottoNumber> lottoNumbers) {
+        assertLotto(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void assertLotto(List<LottoNumber> lottoNumbers) {
+    private void assertLotto(Set<LottoNumber> lottoNumbers) {
         assertNullOrEmpty(lottoNumbers);
         assertInvalidSize(lottoNumbers);
     }
 
-    private void assertNullOrEmpty(List<LottoNumber> lottoNumbers) {
+    private void assertNullOrEmpty(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers == null || lottoNumbers.isEmpty()) {
             throw new InvalidLottoException("로또 번호가 비어 있습니다");
         }
     }
 
-    private void assertInvalidSize(List<LottoNumber> lottoNumbers) {
-        Set<LottoNumber> uniqueNumbers = new HashSet<>(lottoNumbers);
-        if (uniqueNumbers.size() != LOTTO_NUMBER_SIZE) {
+    private void assertInvalidSize(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new InvalidLottoException("중복을 제외한 " + LOTTO_NUMBER_SIZE + "개의 로또 번호가 필요합니다");
         }
     }
 
-    public int matches(List<LottoNumber> others) {
-        assertNullOrEmpty(others);
+    public Rank match(WinningLotto winningLotto) {
+        if (winningLotto == null) {
+            throw new InvalidLottoException("당첨 번호 정보가 존재하지 않습니다");
+        }
 
-        return others.stream()
-                .distinct()
-                .map(this::match)
-                .reduce(0, Integer::sum);
+        int matchCount = winningLotto.compareWith(this);
+        boolean matchBonusBall = winningLotto.containsBonusNumberIn(this);
+
+        return Rank.findRank(matchCount, matchBonusBall);
     }
 
-    public int match(LottoNumber other) {
-        return (int) this.lottoNumbers.stream()
-                .filter(lottoNumber -> lottoNumber.equals(other))
-                .count();
-    }
-
-    public String toJoinNumber(String delimiter, String prefix, String suffix) {
+    public List<String> mapToList() {
         return this.lottoNumbers.stream()
                 .map(LottoNumber::toString)
-                .collect(Collectors.joining(delimiter, prefix, suffix));
+                .collect(Collectors.toList());
+    }
+
+    public boolean contains(LottoNumber bonus) {
+        return this.lottoNumbers.contains(bonus);
+    }
+
+    public int matchNumberCount(Lotto other) {
+        Set<LottoNumber> unique = new HashSet<>(this.lottoNumbers);
+        unique.retainAll(other.lottoNumbers);
+        return unique.size();
     }
 }

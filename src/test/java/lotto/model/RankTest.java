@@ -1,57 +1,44 @@
 package lotto.model;
 
-import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RankTest {
 
     @Test
-    void 전부_꽝일_경우_수익률() {
-        int quantity = 14;
-        Map<Integer, Integer> resultMap = Map.of();
-
-        assertThat(Rank.rateOfReturn(resultMap, quantity))
-                .isEqualTo(0.0);
-    }
-
-
-    @Test
-    void 오천원_한개_당첨될경우_수익률() {
-        int quantity = 14;
-        Map<Integer, Integer> resultMap = Map.of(3, 1);
-
-        assertThat(Rank.rateOfReturn(resultMap, quantity))
-                .isEqualTo(0.35, Offset.offset(0.1));
+    void ranks() {
+        assertThat(Rank.ranks())
+                .containsExactly(Rank.FIVE, Rank.FOUR, Rank.THREE, Rank.TWO, Rank.ONE)
+                .isNotIn(Rank.NO_MATCH);
     }
 
     @Test
-    void 오만원_한개_당첨될경우_수익률() {
-        int quantity = 14;
-        Map<Integer, Integer> resultMap = Map.of(4, 1);
-
-        assertThat(Rank.rateOfReturn(resultMap, quantity))
-                .isEqualTo(3.57, Offset.offset(0.1));
+    void findRank() {
+        assertThat(Rank.findRank(6, false))
+                .isEqualTo(Rank.ONE);
+        assertThat(Rank.findRank(2, false))
+                .isEqualTo(Rank.NO_MATCH);
     }
 
     @Test
-    void 이등_당첨될경우_수익률() {
-        int quantity = 14;
-        Map<Integer, Integer> resultMap = Map.of(5, 1);
+    void 당첨번호를_다섯개_맞추고_보너스볼을_포함하면_2등에_당첨된다() {
+        Rank rank = Rank.findRank(5, true);
 
-        assertThat(Rank.rateOfReturn(resultMap, quantity))
-                .isEqualTo(107.14, Offset.offset(0.1));
+        assertThat(rank).isEqualTo(Rank.TWO);
     }
 
     @Test
-    void 일등_당첨될경우_수익률() {
-        int quantity = 14;
-        Map<Integer, Integer> resultMap = Map.of(6, 1);
+    void 당첨번호를_다섯개_맞추고_보너스볼을_포함하지않으면_3등에_당첨된다() {
+        Rank rank = Rank.findRank(5, false);
 
-        assertThat(Rank.rateOfReturn(resultMap, quantity))
-                .isEqualTo(142857.14, Offset.offset(0.1));
+        assertThat(rank).isEqualTo(Rank.THREE);
+    }
+
+    @Test
+    void 꽝인경우_NO_MATCH를_반환한다() {
+        Rank rank = Rank.findRank(0, false);
+
+        assertThat(rank).isEqualTo(Rank.NO_MATCH);
     }
 }

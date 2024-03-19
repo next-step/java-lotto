@@ -3,9 +3,8 @@ package lotto.model;
 import lotto.exception.InvalidLottoException;
 
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class LottoPaper {
     private final List<Lotto> lottos;
@@ -18,25 +17,23 @@ public class LottoPaper {
         this.lottos = lottos;
     }
 
-    public int size() {
-        return lottos.size();
-    }
-
-    public boolean isEmpty() {
-        return this.lottos.isEmpty();
-    }
-
-    public Map<Integer, Integer> matches(List<LottoNumber> winningNumbers) {
-        if (winningNumbers == null || winningNumbers.isEmpty()) {
-            throw new InvalidLottoException("유효하지 않은 로또 번호 입니다");
-        }
-
+    public List<List<String>> mapToList() {
         return this.lottos.stream()
-                .map(lotto -> lotto.matches(winningNumbers))
-                .collect(Collectors.toMap(Function.identity(), e -> 1, Integer::sum));
+                .map(Lotto::mapToList)
+                .collect(toList());
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    public int getQuantity() {
+        return this.lottos.size();
+    }
+
+    public Prize matches(WinningLotto winningLotto) {
+        return new Prize(toRanks(winningLotto));
+    }
+
+    private List<Rank> toRanks(WinningLotto winningLotto) {
+        return this.lottos.stream()
+                .map(lotto -> lotto.match(winningLotto))
+                .collect(toList());
     }
 }

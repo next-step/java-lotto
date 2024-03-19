@@ -3,10 +3,11 @@ package lotto.model;
 import lotto.exception.InvalidLottoException;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.model.LottoFactory.create;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -19,63 +20,14 @@ class LottoPaperTest {
     }
 
     @Test
-    void 생성() {
-        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-        LottoPaper lottoPaper = new LottoPaper(Collections.singletonList(lotto));
+    void 당첨번호와_비교하여_당첨등수를_카운팅한다() {
+        Lotto lotto1 = create(1, 2, 3, 4, 5, 6);
+        Lotto lotto2 = create(7, 8, 9, 10, 11, 12);
+        Lotto lotto3 = create(13, 8, 9, 10, 11, 14);
+        LottoPaper lottoPaper = new LottoPaper(List.of(lotto1, lotto2, lotto3));
 
-        assertThat(lottoPaper)
-                .isNotNull();
-    }
+        Prize prize = lottoPaper.matches(new WinningLotto(create(1, 8, 9, 10, 11, 12), new LottoNumber(7)));
 
-    @Test
-    void size는_보유한_Lotto의_개수를_반환한다() {
-        Lotto lotto1 = new Lotto(1, 2, 3, 4, 5, 6);
-        Lotto lotto2 = new Lotto(7, 8, 9, 10, 11, 12);
-        LottoPaper lottoPaper = new LottoPaper(List.of(lotto1, lotto2));
-
-        assertThat(lottoPaper.size())
-                .isEqualTo(2);
-    }
-
-    @Test
-    void 빈_로또종이의_사이즈는_0개이다() {
-        LottoPaper lottoPaper = new LottoPaper(Collections.emptyList());
-        assertThat(lottoPaper.size()).isEqualTo(0);
-    }
-
-    @Test
-    void 로또번호가_모두_일치하는_경우() {
-        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-        LottoPaper lottoPaper = new LottoPaper(Collections.singletonList(lotto));
-
-        List<LottoNumber> winningNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6);
-
-        Map<Integer, Integer> resultMap = lottoPaper.matches(winningNumbers);
-
-        assertThat(resultMap.get(6)).isEqualTo(1);
-    }
-
-    @Test
-    void 로또번호가_모두_일치하지_않는경우() {
-        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-        LottoPaper lottoPaper = new LottoPaper(Collections.singletonList(lotto));
-
-        List<LottoNumber> winningNumbers = LottoNumbers.of(7, 8, 9, 10, 11, 12);
-
-        Map<Integer, Integer> resultMap = lottoPaper.matches(winningNumbers);
-
-        assertThat(resultMap.get(0)).isEqualTo(1);
-    }
-
-    @Test
-    void 로또번호가_1개만_일치하는_경우() {
-        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-        LottoPaper lottoPaper = new LottoPaper(Collections.singletonList(lotto));
-
-        List<LottoNumber> winningNumbers = LottoNumbers.of(1, 8, 9, 10, 11, 12);
-
-        Map<Integer, Integer> resultMap = lottoPaper.matches(winningNumbers);
-
-        assertThat(resultMap.get(1)).isEqualTo(1);
+        assertThat(prize).isEqualTo(new Prize(new EnumMap<>(Map.of(Rank.NO_MATCH, 1, Rank.FOUR, 1, Rank.TWO, 1))));
     }
 }

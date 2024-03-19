@@ -1,14 +1,15 @@
 package lotto.view;
 
 import lotto.exception.InvalidLottoException;
+import lotto.model.Lotto;
 import lotto.model.LottoNumber;
-import lotto.model.LottoNumbers;
+import lotto.model.LottoNumberFactory;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
-import static lotto.model.LottoMachine.LOTTO_PER_MONEY;
+import static lotto.validation.LottoMachineValidator.assertMoney;
+import static lotto.validation.WinningInfoValidator.assertDuplicatedBonus;
 
 public class InputView {
 
@@ -30,18 +31,12 @@ public class InputView {
         return askMoney();
     }
 
-    private void assertMoney(int money) {
-        if (money < LOTTO_PER_MONEY) {
-            throw new InvalidLottoException(LOTTO_PER_MONEY + "원 이상의 금액을 입력해주세요");
-        }
-    }
-
-    public List<LottoNumber> askWinningNumbers() {
+    public Lotto askWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         try {
             Integer[] winningNumbers = convertTo(SCANNER.nextLine());
-            return LottoNumbers.of(winningNumbers);
+            return LottoNumberFactory.of(winningNumbers);
         } catch (InvalidLottoException e) {
             System.out.println(e.getMessage());
         }
@@ -63,5 +58,23 @@ public class InputView {
             throw new InvalidLottoException("정수를 입력해 주세요", e);
         }
     }
+
+    public LottoNumber askBonusNumber(Lotto winningLottoNumber) {
+        System.out.println("보너스 볼을 입력해 주세요.");
+
+        try {
+            int bonus = toInt(SCANNER.nextLine());
+            LottoNumber bonusNumber = new LottoNumber(bonus);
+
+            assertDuplicatedBonus(winningLottoNumber, bonusNumber);
+
+            return bonusNumber;
+        } catch (InvalidLottoException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return askBonusNumber(winningLottoNumber);
+    }
+
 
 }
