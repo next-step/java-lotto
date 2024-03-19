@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
+
+import lotto.domain.WinningNumbers;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class Lotto {
     }
 
     public int countOfMatch(WinningNumbers winningNumbers) {
-        return (int)lottoNumbers.stream()
+        return (int) lottoNumbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
     }

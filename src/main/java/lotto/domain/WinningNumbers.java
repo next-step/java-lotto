@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static lotto.Validator.*;
-import static lotto.domain.Lotto.*;
+import static lotto.domain.lotto.Lotto.*;
 
 public class WinningNumbers {
     private static final String WRONG_WINNING_NUMBERS_MESSAGE = "잘못된 당첨 번호입니다.";

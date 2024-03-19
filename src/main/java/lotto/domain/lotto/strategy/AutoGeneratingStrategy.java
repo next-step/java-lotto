@@ -1,10 +1,12 @@
-package lotto.domain;
+package lotto.domain.lotto.strategy;
+
+import lotto.domain.lotto.Lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.domain.Lotto.*;
+import static lotto.domain.lotto.Lotto.*;
 
 public class AutoGeneratingStrategy implements LottoGeneratingStrategy {
     private static final List<Integer> ALL_LOTTO_NUMBERS = allLottoNumbers();
@@ -17,7 +19,6 @@ public class AutoGeneratingStrategy implements LottoGeneratingStrategy {
 
         return allLottoNumbers;
     }
-
 
     @Override
     public Lotto lotto() {

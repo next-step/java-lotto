@@ -1,9 +1,12 @@
-package lotto.domain;
+package lotto.domain.lotto;
+
+import lotto.domain.*;
+import lotto.domain.lotto.strategy.LottoGeneratingStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.domain.Lotto.LOTTO_NUMBER_SIZE;
+import static lotto.domain.lotto.Lotto.LOTTO_NUMBER_SIZE;
 
 public class Lottos {
     private final PurchaseAmountOfMoney purchaseAmountOfMoney;
@@ -19,7 +22,7 @@ public class Lottos {
     }
 
     public void purchaseLotto(LottoGeneratingStrategy lottoGeneratingStrategy) {
-        for(int i = 0; i < purchaseAmountOfMoney.numberOfLottoToPurchase(); i++) {
+        for (int i = 0; i < purchaseAmountOfMoney.numberOfLottoToPurchase(); i++) {
             lottos.add(lottoGeneratingStrategy.lotto());
         }
     }
@@ -38,7 +41,7 @@ public class Lottos {
     private int[] winningStaticsArray(WinningNumbers winningNumbers) {
         int[] winningStaticsArray = new int[LOTTO_NUMBER_SIZE + 1];
 
-        for(Lotto lotto : lottos) {
+        for (Lotto lotto : lottos) {
             winningStaticsArray[lotto.countOfMatch(winningNumbers)]++;
         }
 
@@ -48,7 +51,7 @@ public class Lottos {
     private int winningMoney(int[] winningStaticsArray) {
         int winningMoney = 0;
 
-        for(int matchCount = 0; matchCount <= LOTTO_NUMBER_SIZE; matchCount++) {
+        for (int matchCount = 0; matchCount <= LOTTO_NUMBER_SIZE; matchCount++) {
             Rank rank = Rank.findRank(matchCount);
             winningMoney += (rank.getWinningMoney() * winningStaticsArray[matchCount]);
         }

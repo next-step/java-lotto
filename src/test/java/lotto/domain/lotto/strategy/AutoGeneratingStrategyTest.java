@@ -1,12 +1,13 @@
-package lotto.domain;
+package lotto.domain.lotto.strategy;
 
+import lotto.domain.lotto.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static lotto.domain.Lotto.*;
+import static lotto.domain.lotto.Lotto.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AutoGeneratingStrategyTest {
@@ -28,7 +29,7 @@ class AutoGeneratingStrategyTest {
         void testLottoNumberRange() {
             List<Integer> lottoNumbers = lotto.lottoNumbers();
 
-            for(Integer number : lottoNumbers) {
+            for (Integer number : lottoNumbers) {
                 assertThat(number).isGreaterThanOrEqualTo(MIN_LOTTO_NUMBER);
                 assertThat(number).isLessThanOrEqualTo(MAX_LOTTO_NUMBER);
             }
