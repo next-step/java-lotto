@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.Arrays;
-import java.util.function.IntBinaryOperator;
 
 public enum Operator {
 
@@ -11,9 +10,9 @@ public enum Operator {
     DIVIDE("/", (a, b) -> (a / b)),
     ;
     private final String symbol;
-    private final IntBinaryOperator operation;
+    private final CustomOperatorInterface operation;
 
-    Operator(String symbol, IntBinaryOperator operation) {
+    Operator(String symbol, CustomOperatorInterface operation) {
         this.symbol = symbol;
         this.operation = operation;
     }
@@ -26,6 +25,6 @@ public enum Operator {
     }
 
     public int apply(int a, int b) {
-        return operation.applyAsInt(a, b);
+        return operation.apply(a, b);
     }
 }
