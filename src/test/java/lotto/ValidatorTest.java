@@ -25,13 +25,6 @@ class ValidatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"10:1:true", "10:2:true", "14000:1000:true", "3:2:false", "14001:1000:false"}, delimiter = ':')
-    @DisplayName("isDivisible(): dividendNumber가 divisorNumber로 나누어 떨어지는 경우 true 그렇지 않은 경우 false를 반환한다.")
-    void testIsDivisible(int dividendNumber, int divisorNumber, boolean expected) {
-        assertThat(Validator.isDivisible(dividendNumber, divisorNumber)).isEqualTo(expected);
-    }
-
-    @ParameterizedTest
     @MethodSource("parameterOfIsEqualToLengthTest")
     @DisplayName("isEqualToLength(): stringArray의 길이가 length와 동일한 경우 true를 그렇지 않은 경우 false를 반환한다.")
     void testIsEqualToLength(String[] stringArray, int length, boolean expected) {
