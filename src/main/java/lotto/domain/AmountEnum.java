@@ -1,44 +1,23 @@
 package lotto.domain;
 
 public enum AmountEnum {
-	FIRST(6) {
-		@Override
-		public Integer getAmount() {
-			return 2000000000;
-		}
-	},
-	SECOND(5) {
-		@Override
-		public Integer getAmount() {
-			return 1500000;
-		}
-	},
-	THIRD(4) {
-		@Override
-		public Integer getAmount() {
-			return 50000;
-		}
-	},
-	FOURTH(3) {
-		@Override
-		public Integer getAmount() {
-			return 5000;
-		}
-	},
-	OTHER(0) {
-		@Override
-		public Integer getAmount() {
-			return 0;
-		}
-	};
+	FIRST(6, 2000000000),
+	SECOND(5, 1500000),
+	THIRD(4, 50000),
+	FOURTH(3, 5000),
+	OTHER(0, 0);
 
 	private final Integer collectedCount;
+	private final Integer amount;
 
-	AmountEnum(Integer collectedCount) {
+	AmountEnum(Integer collectedCount, Integer amount) {
 		this.collectedCount = collectedCount;
+		this.amount = amount;
 	}
 
-	public abstract Integer getAmount();
+	public Integer getAmount() {
+		return amount;
+	}
 
 	public Integer getCollectedCount() {
 		return collectedCount;
