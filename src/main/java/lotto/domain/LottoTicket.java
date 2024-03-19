@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoTicket {
@@ -11,19 +10,20 @@ public class LottoTicket {
         this.numbers = numbers;
     }
 
-    public int matchNumbers(List<Integer> winNumbers) {
-        int hit = 0;
-        for (Integer winNumber : winNumbers) {
-            hit = countHit(hit, winNumber);
+    public LottoInformation getInformation(LottoTicket winLottoTicket) {
+        int matchCount = 0;
+        for (Integer number : winLottoTicket.numbers) {
+            matchCount += count(number);
         }
-        return hit;
+        return LottoInformation.lookup(matchCount);
     }
 
-    private int countHit(int hit, Integer winNumber) {
-        if (numbers.contains(winNumber)) {
-            hit++;
+    private int count(Integer number) {
+        int matchCount = 0;
+        if (numbers.contains(number)) {
+            matchCount++;
         }
-        return hit;
+        return matchCount;
     }
 
     @Override

@@ -28,24 +28,24 @@ public class ResultView {
     }
 
     public static void printLottoStatistics(LottoStatistics statisticsMap, int purchaseAmount) {
-        List<Integer> matchCounts = LottoInformation.getMatchCounts();
+        List<LottoInformation> informations = LottoInformation.getLottoInformations();
 
         StringBuilder stringBuilder = new StringBuilder();
-        for (Integer matchCount : matchCounts) {
-            stringBuilder.append(formatStatistic(statisticsMap, matchCount)).append(System.lineSeparator());
+        for (LottoInformation information : informations) {
+            stringBuilder.append(formatStatistic(statisticsMap, information)).append(System.lineSeparator());
         }
         stringBuilder.append(formatProfitRate(statisticsMap, purchaseAmount));
 
         System.out.println(stringBuilder);
     }
 
-    private static String formatStatistic(LottoStatistics statisticsMap, Integer matchCount) {
+    private static String formatStatistic(LottoStatistics statisticsMap, LottoInformation information) {
         return MessageFormat.format("{0}개 일치 ({1}원) - {2}개"
-                , matchCount, LottoInformation.getWinAmount(matchCount), statisticsMap.getMatchedLottoCount(matchCount));
+                , LottoInformation.getMatchCount(information), LottoInformation.getWinAmount(information), statisticsMap.getMatchedLottoCount(information));
     }
 
     public static String formatProfitRate(LottoStatistics statisticsMap, int purchaseAmount) {
-        return MessageFormat.format("총 수익률은 {0}입니다.", LottoInformation.calculateProfitRate(statisticsMap, purchaseAmount));
+        return MessageFormat.format("총 수익률은 {0}입니다.", statisticsMap.calculateProfitRate(purchaseAmount));
     }
 
     public static void printException(String exceptionMessage) {

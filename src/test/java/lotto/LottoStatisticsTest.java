@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoInformation;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
@@ -27,11 +28,11 @@ public class LottoStatisticsTest {
         ));
 
         // When
-        List<Integer> winNumbers = List.of(1, 2, 3, 4, 5, 6);
-        LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, winNumbers);
+        LottoTicket winLottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, winLottoTicket);
 
         // Then
-        assertThat(lottoStatistics.getMatchedLottoCount(hit)).isEqualTo(count);
+        assertThat(lottoStatistics.getMatchedLottoCount(LottoInformation.lookup(hit))).isEqualTo(count);
     }
 
     @ParameterizedTest(name = "[{index}] {0}개 일치 - {1}개")
@@ -49,11 +50,11 @@ public class LottoStatisticsTest {
         ));
 
         // When
-        List<Integer> winNumbers = List.of(1, 2, 3, 4, 5, 6);
-        LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, winNumbers);
+        LottoTicket winLottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, winLottoTicket);
 
         // Then
-        assertThat(lottoStatistics.getMatchedLottoCount(hit)).isEqualTo(count);
+        assertThat(lottoStatistics.getMatchedLottoCount(LottoInformation.lookup(hit))).isEqualTo(count);
     }
 
 }

@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoStatistics;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketMachine;
 import lotto.domain.LottoTickets;
 import lotto.exception.IllegalPurchaseAmountException;
@@ -22,7 +23,7 @@ public class Main {
             ResultView.printLottoTickets(lottoTickets);
 
             List<Integer> winNumbers = InputView.readWinNumbers();
-            LottoStatistics statisticsMap = new LottoStatistics(lottoTickets, winNumbers);
+            LottoStatistics statisticsMap = new LottoStatistics(lottoTickets, new LottoTicket(winNumbers));
 
             ResultView.printLottoStatistics(statisticsMap, purchaseAmount);
         } catch (IllegalPurchaseAmountException e) {

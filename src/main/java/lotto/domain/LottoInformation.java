@@ -4,6 +4,7 @@ import java.util.*;
 
 public enum LottoInformation {
 
+    NOT_MATCH(0, 0),
     THREE_MATCH(3, 5000),
     FOUR_MATCH(4, 50000),
     FIVE_MATCH(5, 1500000),
@@ -21,46 +22,35 @@ public enum LottoInformation {
         this.winAmount = winAmount;
     }
 
-    private static final Map<Integer, Integer> matchAmountMap = new HashMap<>();
+    private static final Map<Integer, LottoInformation> matchAmountMap = new HashMap<>();
     static {
         for (LottoInformation information : LottoInformation.values()) {
-            matchAmountMap.put(information.matchCount, information.winAmount);
+            matchAmountMap.put(information.matchCount, information);
         }
     }
 
-    private static final List<Integer> matchCounts = new ArrayList<>();
-    static {
-        for (LottoInformation information : LottoInformation.values()) {
-            matchCounts.add(information.matchCount);
+    public static List<LottoInformation> getLottoInformations() {
+        return List.of(LottoInformation.values());
+    }
+
+    public static int getWinAmount(LottoInformation information) {
+        return matchAmountMap.get(information.matchCount).winAmount;
+    }
+
+    public static LottoInformation lookup(int matchCount) {
+        if (anyMatch(matchCount)) {
+            return matchAmountMap.get(matchCount);
         }
-        Collections.sort(matchCounts);
+        return NOT_MATCH;
     }
 
-    public static List<Integer> getMatchCounts() {
-        return matchCounts;
+    public static boolean anyMatch(Integer matchCount) {
+        LottoInformation information = matchAmountMap.get(matchCount);
+        return information != null && information != NOT_MATCH;
     }
 
-    public static int getWinAmount(int matchCount) {
-        return matchAmountMap.get(matchCount);
-    }
-
-    public static double calculateProfitRate(LottoStatistics statisticsMap, int purchaseAmount) {
-        double totalProfit = 0;
-        for (Integer matchCount : statisticsMap.keySet()) {
-            totalProfit += getProfitByMatchCount(statisticsMap, matchCount);
-        }
-        return totalProfit / purchaseAmount;
-    }
-
-    private static double getProfitByMatchCount(LottoStatistics statisticsMap, Integer matchCount) {
-        if (isExistMatchCount(matchCount)) {
-            return statisticsMap.getMatchedLottoCount(matchCount) * getWinAmount(matchCount);
-        }
-        return 0;
-    }
-
-    public static boolean isExistMatchCount(Integer matchCount) {
-        return matchAmountMap.get(matchCount) != null;
+    public static int getMatchCount(LottoInformation information) {
+        return information.matchCount;
     }
 
 }
