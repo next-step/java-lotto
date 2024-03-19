@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,5 +38,14 @@ public class Lottos {
             sb.append(lotto).append("\n");
         }
         return sb.toString();
+    }
+
+    public double rateOfReturn(Lotto winningLotto) {
+        int totalPrize = 0;
+        for (Lotto lotto : lottos) {
+            totalPrize += lotto.rank(winningLotto).prizeMoney(1);
+        }
+        double result = (double) totalPrize / (this.getLottoCount() * 1000);
+        return BigDecimal.valueOf(result).setScale(2, RoundingMode.DOWN).doubleValue();
     }
 }
