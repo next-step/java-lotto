@@ -21,4 +21,11 @@ public class LottoTickets {
     public int size() {
         return lottoTicketList.size();
     }
+
+    public int matchTicketCount(WinningNumbers winningNumbers, int matchNumberCount) {
+        return (int) lottoTicketList.stream()
+                .filter(lottoTicket -> lottoTicket.getMatchCount(winningNumbers) == matchNumberCount)
+                .count();
+    }
+
 }

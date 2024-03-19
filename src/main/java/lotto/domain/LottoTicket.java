@@ -10,18 +10,24 @@ public class LottoTicket {
             .mapToObj(i -> i + 1)
             .collect(Collectors.toList());
 
-    private final List<Integer> ticket;
+    private final List<Integer> numbers;
 
     public LottoTicket() {
         Collections.shuffle(LottoNumbers);
-        this.ticket = LottoNumbers.subList(0, 6)
+        this.numbers = LottoNumbers.subList(0, 6)
                 .stream()
                 .sorted()
                 .collect(Collectors.toList());
     }
 
+    public int getMatchCount(WinningNumbers winningNumbers) {
+        return (int) numbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+    }
+
     @Override
     public String toString() {
-        return ticket.toString();
+        return numbers.toString();
     }
 }
