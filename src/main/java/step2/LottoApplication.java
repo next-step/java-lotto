@@ -12,9 +12,9 @@ public class LottoApplication {
         InputView.printLottoList(lottoStore);
 
         String winNumbers = InputView.inputWinnerNumbers();
-        WinnerNumbers winnerNumbers = new WinnerNumbers(winNumbers);
+        LottoNumbers winnerNumbers = new LottoNumbers(winNumbers);
 
-        Lotto winLotto = new Lotto(winnerNumbers.getWinNumbers(), randomNumberGenerator);
+        Lotto winLotto = new Lotto(winnerNumbers.getLottoNumbers(), randomNumberGenerator);
         LotteryAwardSystem lotteryAwardSystem = new LotteryAwardSystem(lottoStore.getLottos(), winLotto, lottoStore.getBuyMoney());
         ResultView.printResult(lotteryAwardSystem);
     }
