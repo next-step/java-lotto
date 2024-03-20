@@ -29,4 +29,8 @@ public class Profit {
     public double calcRate(int cash) {
         return Math.floor((double) this.winningPrize * 100 / cash) / 100.0;
     }
+
+    public String toString(Cash cash) {
+        return String.format("총 수익률은 %.2f입니다.", calcRate(cash.getAmount()));
+    }
 }
