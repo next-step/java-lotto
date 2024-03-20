@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static lotto.constants.LottoConstants.*;
+import static lotto.domain.LottoMachine.*;
 
 public class InputView {
     private static final String INPUT_NUMBER_MESSAGE = "숫자를 입력해주세요.";
@@ -34,11 +34,11 @@ public class InputView {
     private int scanNextInt() {
         int nextInt = Integer.parseInt(scanner.nextLine());
 
-        if (nextInt < LOTTO_PRICE) {
+        if (isInputLowerThanPrice(nextInt)) {
             throw new IllegalArgumentException(INPUT_MIN_PRICE_MESSAGE + INPUT_RETRY);
         }
 
-        if (nextInt % LOTTO_PRICE != 0) {
+        if (isInputPriceUnitWrong(nextInt)) {
             throw new IllegalArgumentException(INPUT_CORRECT_PRICE_UNIT_MESSAGE + INPUT_RETRY);
         }
 
