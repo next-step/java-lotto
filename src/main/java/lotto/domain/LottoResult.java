@@ -20,14 +20,14 @@ public class LottoResult {
     }
 
     private long winnings() {
-        return (correctCounts.get(LottoRank.THREE_NUMBER_CORRECT) * LottoRank.THREE_NUMBER_CORRECT.getWinnings())
-                + (correctCounts.get(LottoRank.FOUR_NUMBER_CORRECT) * LottoRank.FOUR_NUMBER_CORRECT.getWinnings())
-                + (correctCounts.get(LottoRank.FIVE_NUMBER_CORRECT) * LottoRank.FIVE_NUMBER_CORRECT.getWinnings())
-                + (correctCounts.get(LottoRank.SIX_NUMBER_CORRECT) * LottoRank.SIX_NUMBER_CORRECT.getWinnings());
+        return (correctCounts.get(LottoRank.FIFTH) * LottoRank.FIFTH.getWinnings())
+                + (correctCounts.get(LottoRank.FOURTH) * LottoRank.FOURTH.getWinnings())
+                + (correctCounts.get(LottoRank.THIRD) * LottoRank.THIRD.getWinnings())
+                + (correctCounts.get(LottoRank.FIRST) * LottoRank.FIRST.getWinnings());
     }
 
-    public void addCorrectLottoCount(int count) {
-        Optional<LottoRank> lottoRankOptional = LottoRank.findByCorrectCount(count);
+    public void addCorrectLottoCount(int count, boolean isContainBonusNumber) {
+        Optional<LottoRank> lottoRankOptional = LottoRank.findByCorrectCount(count, isContainBonusNumber);
         if (lottoRankOptional.isEmpty()) {
             return;
         }

@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoResult;
+import lotto.domain.*;
 import lotto.numberdrawer.ShuffledNumberDrawer;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -25,9 +22,9 @@ public class LottoGame {
         outputView.printLottoNumbers(lottoNumbers);
 
         LottoNumber winningNumber = inputView.winnnigNumbersInput(INPUT_WINNING_NUMBER_MESSAGE);
-        int bonusNumber = inputView.getBonusNumber(INPUT_BONUS_NUMBER_MESSAGE);
+        BonusNumber bonusNumber = inputView.getBonusNumber(INPUT_BONUS_NUMBER_MESSAGE);
 
-        LottoResult lottoResult = lottoNumbers.computeLottoResult(winningNumber);
+        LottoResult lottoResult = lottoNumbers.computeLottoResult(winningNumber, bonusNumber);
         outputView.printResult(lottoResult);
     }
 }

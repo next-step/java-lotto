@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
@@ -61,12 +62,12 @@ public class InputView {
         }
     }
 
-    public int getBonusNumber(String message) {
+    public BonusNumber getBonusNumber(String message) {
         System.out.println(message);
         int inputNumber = Integer.parseInt(scanner.nextLine());
 
         try {
-            return inputNumber;
+            return BonusNumber.valueOf(inputNumber);
         } catch (IllegalArgumentException e) {
             return getBonusNumber(e.getMessage() + INPUT_RETRY);
         }

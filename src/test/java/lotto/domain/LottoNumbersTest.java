@@ -37,8 +37,8 @@ public class LottoNumbersTest {
 
         LottoNumbers lottoNumbers = LottoNumbers.from(lottoNumberList);
 
-        LottoResult lottoResult = lottoNumbers.computeLottoResult(winningNumber);
-        assertThat(lottoResult.getCorrectCountsByLottoRank(LottoRank.THREE_NUMBER_CORRECT)).isEqualTo(2);
+        LottoResult lottoResult = lottoNumbers.computeLottoResult(winningNumber, BonusNumber.valueOf(1));
+        assertThat(lottoResult.getCorrectCountsByLottoRank(LottoRank.FIFTH)).isEqualTo(2);
     }
 
     @Test

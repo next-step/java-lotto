@@ -7,6 +7,10 @@ public class LottoValidator {
     public static final int MAX_LOTTO_NUMBER = 45;
     public static final int LOTTO_NUMBER_SIZE = 6;
 
+    public static boolean isInvalidLottoNumberBound(int number) {
+        return number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER;
+    }
+
     public static boolean isInvalidLottoNumberBound(List<Integer> numbers) {
         return numbers.stream()
                 .anyMatch((number) -> number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER);

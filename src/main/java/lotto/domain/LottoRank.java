@@ -4,10 +4,11 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum LottoRank {
-    THREE_NUMBER_CORRECT(3, 5000L),
-    FOUR_NUMBER_CORRECT(4, 50000L),
-    FIVE_NUMBER_CORRECT(5, 1500000L),
-    SIX_NUMBER_CORRECT(6, 2000000000L);
+    FIFTH(3, 5000L),
+    FOURTH(4, 50000L),
+    THIRD(5, 1500000L),
+    SECOND(5, 30000000L),
+    FIRST(6, 2000000000L);
 
     private final int correctCount;
     private final long winnings;
@@ -17,7 +18,10 @@ public enum LottoRank {
         this.winnings = winnings;
     }
 
-    public static Optional<LottoRank> findByCorrectCount(int correctCount) {
+    public static Optional<LottoRank> findByCorrectCount(int correctCount, boolean isBonus) {
+        if (isBonus && correctCount == 5) {
+            return Optional.of(SECOND);
+        }
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank.correctCount == correctCount)
                 .findFirst();
