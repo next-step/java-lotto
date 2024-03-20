@@ -20,17 +20,17 @@ public class PurchaseAmountOfMoney {
     public static PurchaseAmountOfMoney valueOf(String amountOfMoneyInput) {
         return new PurchaseAmountOfMoney(amountOfMoneyInput);
     }
-
-    public int numberOfLottoToPurchase() {
-        return amountOfMoney / LOTTO_PRICE;
-    }
-
+    
     private void validateAmountOfMoney(String amountOfMoneyInput) {
         if (!Validator.isPositiveInteger(amountOfMoneyInput) || Integer.parseInt(amountOfMoneyInput) < LOTTO_PRICE) {
             throw new IllegalArgumentException(WRONG_PURCHASE_AMOUNT_MESSAGE);
         }
     }
 
+    public int numberOfLottoToPurchase() {
+        return amountOfMoney / LOTTO_PRICE;
+    }
+    
     public double rateOfReturn(int winningMoney) {
         double realUsedAmountOfMoney = (amountOfMoney - (amountOfMoney % LOTTO_PRICE));
         BigDecimal rateOfReturn = BigDecimal.valueOf(winningMoney / realUsedAmountOfMoney);

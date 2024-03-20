@@ -26,8 +26,7 @@ public class WinningNumbers {
     public static WinningNumbers valueOf(String winningNumberInput) {
         return new WinningNumbers(winningNumberInput);
     }
-
-
+    
     private void validateWinningNumbers(String winningNumberInput) {
         if (!isNonBlank(winningNumberInput) || winningNumberInput.split(COMMA_BLANK_DELIMITER).length != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(WRONG_WINNING_NUMBERS_MESSAGE);
