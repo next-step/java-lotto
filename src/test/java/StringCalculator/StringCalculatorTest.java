@@ -77,4 +77,12 @@ class StringCalculatorTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> StringCalculator.calculate(input));
     }
+
+    @Test
+    void 여러연산자() {
+        String input = "2 + 3 * 4 / 2";
+        int expected = 10;
+        int result = StringCalculator.calculate(input);
+        assertThat(result).isEqualTo(expected);
+    }
 }

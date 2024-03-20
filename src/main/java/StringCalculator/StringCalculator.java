@@ -13,8 +13,7 @@ public class StringCalculator {
 
     public static int calculate(String input) {
         validate(input);
-
-
+        
         List<String> strings = Arrays.asList(input.split(" "));
         Stack<Integer> operands = new Stack<>();
         int result = 0;
@@ -27,32 +26,36 @@ public class StringCalculator {
             }
 
             if (operands.size() == CALCULATE_CONDITION) {
-                int rightOperand = operands.pop();
-                int leftOperand = operands.pop();
 
                 if (Objects.isNull(operator)) {
                     throw new IllegalArgumentException();
                 }
 
+                int rightOperand = operands.pop();
+                int leftOperand = operands.pop();
+
+                int calculateResult = 0;
                 if (operator.equals("+")) {
-                    int calculateResult = leftOperand + rightOperand;
-                    result += calculateResult;
+                    calculateResult = leftOperand + rightOperand;
+                    result = calculateResult;
                 }
 
                 if (operator.equals("-")) {
-                    int calculateResult = leftOperand - rightOperand;
-                    result += calculateResult;
+                    calculateResult = leftOperand - rightOperand;
+                    result = calculateResult;
                 }
 
                 if (operator.equals("/")) {
-                    int calculateResult = leftOperand / rightOperand;
-                    result += calculateResult;
+                    calculateResult = leftOperand / rightOperand;
+                    result = calculateResult;
                 }
 
                 if (operator.equals("*")) {
-                    int calculateResult = leftOperand * rightOperand;
-                    result += calculateResult;
+                    calculateResult = leftOperand * rightOperand;
+                    result = calculateResult;
                 }
+                operands.clear();
+                operands.push(calculateResult);
             }
         }
         return result;
