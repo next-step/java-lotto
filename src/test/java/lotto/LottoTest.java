@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,10 +13,10 @@ public class LottoTest {
     @Test
     void 구매금액만큼_로또를_최대치_구입한다() {
         int lottoPrice = 1000;
-        int purchase = 14000;
+        int purchaseBudget = 14000;
 
-        List<Lotto> lottos = IntStream.rangeClosed(1, purchase / lottoPrice).mapToObj(i -> new Lotto()).collect(Collectors.toList());
-        assertThat(lottos).hasSize(purchase / lottoPrice);
+        LottoGame lottoGame = new LottoGame(lottoPrice, purchaseBudget);
+        assertThat(lottoGame.hasLottoCount()).isEqualTo(purchaseBudget / lottoPrice);
     }
 
     @Test
