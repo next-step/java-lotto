@@ -36,22 +36,22 @@ public class StringCalculator {
 
                 int calculateResult = 0;
                 if (operator.equals("+")) {
-                    calculateResult = leftOperand + rightOperand;
+                    calculateResult = add(leftOperand, rightOperand);
                     result = calculateResult;
                 }
 
                 if (operator.equals("-")) {
-                    calculateResult = leftOperand - rightOperand;
+                    calculateResult = minus(leftOperand, rightOperand);
                     result = calculateResult;
                 }
 
                 if (operator.equals("/")) {
-                    calculateResult = leftOperand / rightOperand;
+                    calculateResult = divide(leftOperand, rightOperand);
                     result = calculateResult;
                 }
 
                 if (operator.equals("*")) {
-                    calculateResult = leftOperand * rightOperand;
+                    calculateResult = multiply(leftOperand, rightOperand);
                     result = calculateResult;
                 }
                 operands.clear();
@@ -59,6 +59,22 @@ public class StringCalculator {
             }
         }
         return result;
+    }
+
+    private static int multiply(int leftOperand, int rightOperand) {
+        return leftOperand * rightOperand;
+    }
+
+    private static int divide(int leftOperand, int rightOperand) {
+        return leftOperand / rightOperand;
+    }
+
+    private static int minus(int leftOperand, int rightOperand) {
+        return leftOperand - rightOperand;
+    }
+
+    private static int add(int leftOperand, int rightOperand) {
+        return leftOperand + rightOperand;
     }
 
     private static void validate(String input) {
