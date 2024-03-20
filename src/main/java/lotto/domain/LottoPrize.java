@@ -10,19 +10,19 @@ public enum LottoPrize {
     SIX_MATCH(6, 2000000000)
     ;
 
+    private static final Map<Integer, LottoPrize> prizeMap = new HashMap<>();
+    static {
+        for (LottoPrize prize : LottoPrize.values()) {
+            prizeMap.put(prize.matchCount, prize);
+        }
+    }
+
     private final int matchCount;
     private final int prize;
 
     LottoPrize(int matchCount, int prize) {
         this.matchCount = matchCount;
         this.prize = prize;
-    }
-
-    private static final Map<Integer, LottoPrize> prizeMap = new HashMap<>();
-    static {
-        for (LottoPrize prize : LottoPrize.values()) {
-            prizeMap.put(prize.matchCount, prize);
-        }
     }
 
     public static List<LottoPrize> getLottoPrizes() {
