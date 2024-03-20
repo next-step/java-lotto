@@ -3,6 +3,7 @@ package calculator;
 import calculator.domain.Calculator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
@@ -56,7 +57,7 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"", "  "})
+    @NullAndEmptySource
     void null_공백_입력(String input) {
         Calculator calculator = new Calculator();
         assertThatThrownBy(() -> calculator.calculator(input))
