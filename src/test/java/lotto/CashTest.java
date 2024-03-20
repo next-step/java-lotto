@@ -31,4 +31,10 @@ public class CashTest {
         int result = cash.payLotto(money);
         assertThat(result).isEqualTo(count);
     }
+
+    @Test
+    void to_string(){
+        cash = new Cash(10);
+        assertThat(cash.toString()).isEqualTo(10+"개를 구매했습니다.");
+    }
 }
