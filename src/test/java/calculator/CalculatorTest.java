@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.domain.Calculator;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -24,6 +25,7 @@ public class CalculatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {DEFAULT})
+    @DisplayName("스플릿 기본 테스트")
     void spilt_test(String input) {
         String[] seperateString = input.split(" ");
         System.out.println(seperateString.length);
@@ -32,6 +34,7 @@ public class CalculatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {PLUS})
+    @DisplayName("단순 더하기")
     void 더하기(String input) {
         Calculator calculator = new Calculator();
         assertThat(calculator.calculator(input)).isEqualTo(2);
@@ -39,6 +42,7 @@ public class CalculatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {MULTIPLY})
+    @DisplayName("단순 곱하기")
     void 곱하기(String input) {
         Calculator calculator = new Calculator();
         assertThat(calculator.calculator(input)).isEqualTo(1);
@@ -46,6 +50,7 @@ public class CalculatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {SUBTRACT})
+    @DisplayName("단순 나누기")
     void 나누기(String input) {
         Calculator calculator = new Calculator();
         assertThat(calculator.calculator(input)).isEqualTo(1);
@@ -53,6 +58,7 @@ public class CalculatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {DIVIDE})
+    @DisplayName("단순 빼기")
     void 빼기(String input) {
         Calculator calculator = new Calculator();
         assertThat(calculator.calculator(input)).isEqualTo(1);
@@ -60,6 +66,7 @@ public class CalculatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {DEFAULT})
+    @DisplayName("혼합된 사칙연산")
     void 복합연산(String input) {
         Calculator calculator = new Calculator();
         assertThat(calculator.calculator(input)).isEqualTo(6);
@@ -67,6 +74,7 @@ public class CalculatorTest {
 
     @ParameterizedTest
     @NullAndEmptySource
+    @DisplayName("공백 혹은 null 입력")
     void null_공백_입력(String input) {
         Calculator calculator = new Calculator();
         assertThatThrownBy(() -> calculator.calculator(input))
@@ -76,6 +84,7 @@ public class CalculatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {NOT_OPERATOR})
+    @DisplayName("사칙연산자 아닌 연산자 입력")
     void 사칙연산자_아님(String input) {
         Calculator calculator = new Calculator();
         assertThatThrownBy(() -> calculator.calculator(input))
