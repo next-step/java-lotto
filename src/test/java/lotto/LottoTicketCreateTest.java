@@ -49,4 +49,20 @@ public class LottoTicketCreateTest {
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining(String.format(INVALID_PURCHASE_AMOUNT_INPUT, given));
   }
+
+  @ParameterizedTest
+  @ValueSource(ints = {3000, 6000, 24000})
+  @DisplayName("로또 숫자 6개씩 생성되는지 테스트")
+  void lottoCreateTest5(int given) {
+    LottoTickets lottoTickets = new LottoTickets(given);
+    assertThat(lottoTickets.haveAll6Numbers()).isTrue();
+  }
+
+  @ParameterizedTest
+  @ValueSource(ints = {1000, 3000, 6000})
+  @DisplayName("로또 숫자 1 ~ 45 내의 숫자로 생성되는지 테스트")
+  void lottoCreateTest7(int given) {
+    LottoTickets lottoTickets = new LottoTickets(given);
+    assertThat(lottoTickets.haveCorrectNumbers()).isTrue();
+  }
 }
