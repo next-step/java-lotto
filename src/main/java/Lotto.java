@@ -5,7 +5,7 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto() {
-        this(getRandomNumbers());
+        this(RandomNumberGenerator.randomNumbers());
     }
 
     public Lotto(List<Integer> numbers) {
@@ -20,15 +20,6 @@ public class Lotto {
         if (set.size() != 6) {
             throw new IllegalArgumentException("로또 번호의 갯수가 6개가 아닙니다.");
         }
-    }
-
-    private static List<Integer> getRandomNumbers() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            numbers.add(i);
-        }
-        Collections.shuffle(numbers);
-        return numbers.subList(0, 6);
     }
 
     public List<Integer> numbers() {
@@ -46,8 +37,21 @@ public class Lotto {
         return numbers.toString();
     }
 
-    private static class LottoNumberGenerator {
+    private static class RandomNumberGenerator {
 
-//        private static final List
+        private static final List<Integer> numbers;
+
+        static {
+            numbers = new ArrayList<>();
+            for (int i = 1; i <= 45; i++) {
+                numbers.add(i);
+            }
+        }
+
+        public static List<Integer> randomNumbers() {
+            List<Integer> newNumbers = new ArrayList<>(RandomNumberGenerator.numbers);
+            Collections.shuffle(newNumbers);
+            return newNumbers.subList(0, 6);
+        }
     }
 }
