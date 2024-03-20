@@ -1,10 +1,9 @@
-package lotto;
+package lotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -24,7 +23,7 @@ public class LottoGeneratorTest {
     @DisplayName("로또 번호 6자리 생성")
     @Test
     void lottoGenerate() {
-        Lotto result = lottoGenerator.lottoGenerate();
+        Lotto result = lottoGenerator.generateLotto();
 
         assertThat(result.size()).isEqualTo(6);
     }
@@ -34,7 +33,7 @@ public class LottoGeneratorTest {
     void lottoGenerate_range() {
         List<Integer> expected = IntStream.range(1,46).boxed().collect(Collectors.toList());
 
-        Lotto result = lottoGenerator.lottoGenerate();
+        Lotto result = lottoGenerator.generateLotto();
 
         assertThat(expected).containsAll(result.getLotto());
     }
@@ -42,7 +41,7 @@ public class LottoGeneratorTest {
     @DisplayName("로또 번호 원자성 테스트")
     @Test
     void lottoGenerate_atomic_test() {
-        Lotto result = lottoGenerator.lottoGenerate();
+        Lotto result = lottoGenerator.generateLotto();
         Set<Integer> resultSet = result.getLotto().stream().collect(Collectors.toSet());
         assertThat(resultSet.size()).isEqualTo(result.size());
     }
@@ -50,7 +49,7 @@ public class LottoGeneratorTest {
     @DisplayName("로또 번호 정렬 검증")
     @Test
     void lottoGenerate_sort_test() {
-        Lotto result = lottoGenerator.lottoGenerate();
+        Lotto result = lottoGenerator.generateLotto();
         List<Integer> resultValues = result.getLotto();
 
         Collections.sort(resultValues);

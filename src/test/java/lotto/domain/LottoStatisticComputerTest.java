@@ -1,5 +1,9 @@
-package lotto;
+package lotto.domain;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoStatisticComputer;
+import lotto.domain.Statistic;
+import lotto.domain.Statistics;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,8 +31,8 @@ public class LottoStatisticComputerTest {
     @Test
     void computeStatistic_three() {
         Lotto winLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Statistics result = lottoStatisticComputer.computeStatistic(winLotto);
+        Statistics result = lottoStatisticComputer.computeStatistic(winLotto, new Budget(14000));
 
-        assertThat(result.statistics).isEqualTo(new Statistics(List.of(Statistic.SIX, Statistic.FIVE, Statistic.FOUR)).statistics);
+        assertThat(result.getStatistics()).isEqualTo(new Statistics(List.of(Statistic.SIX, Statistic.FIVE, Statistic.FOUR), new Budget(14000)).getStatistics());
     }
 }
