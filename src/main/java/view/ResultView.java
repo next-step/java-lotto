@@ -1,4 +1,8 @@
-import java.util.Map;
+package view;
+
+import domain.Lottos;
+import domain.Rank;
+import domain.Ranks;
 
 public class ResultView {
 

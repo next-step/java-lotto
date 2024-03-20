@@ -1,5 +1,7 @@
-import java.util.ArrayList;
-import java.util.List;
+import domain.Lotto;
+import domain.Lottos;
+import view.InputView;
+import view.ResultView;
 
 public class LottoApplication {
 

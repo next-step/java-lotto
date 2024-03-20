@@ -1,4 +1,9 @@
+package domain;
+
 import java.util.List;
+
+import domain.Rank;
+import domain.Ranks;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
