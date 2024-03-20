@@ -33,7 +33,7 @@ public class LottoService {
     }
 
     private static long getWinningMoney(HashMap<LottoRank, Integer> lottoRanks) {
-        return lottoRanks.entrySet().stream().map(lottoRank -> lottoRank.getKey().getMoney()).reduce((x, y) -> x + y).orElse(0);
+        return lottoRanks.values().stream().reduce(Integer::sum).orElse(0);
     }
 
 }
