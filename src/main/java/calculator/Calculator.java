@@ -15,22 +15,14 @@ public class Calculator {
         for (String str : splitText) {
             if (stack.empty()) {
                 stack.push(Integer.parseInt(str));
-            } else if (isOperator(str)) {
+            } else if (StringClassifier.isNumber(str)) {
                 operator = str;
-            } else if (isNumber(str)) {
+            } else if (StringClassifier.isOperator(str)) {
                 stack.push(this.calculate(operator, stack.pop(), Integer.parseInt(str)));
             }
         }
 
         return stack.pop();
-    }
-
-    private boolean isNumber(String str) {
-        return str.matches("[+-]?\\d*(\\.\\d+)?");
-    }
-
-    private boolean isOperator(String str) {
-        return str.equals("+") || str.equals("-") || str.equals("*") || str.equals("/");
     }
 
     private int calculate(String operator, int a, int b) {
