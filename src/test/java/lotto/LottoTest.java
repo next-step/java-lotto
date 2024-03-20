@@ -21,17 +21,12 @@ public class LottoTest {
 
     @Test
     void 몇개_맞았는지_계산해주기() {
-        List<Integer> winLotto = List.of(1, 2, 3, 4, 5, 6);
-        List<Integer> myLotto = List.of(1, 2, 3, 7, 8, 9);
+        Lotto winLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto myLotto = new Lotto( List.of(1, 2, 3, 7, 8, 9));
 
-        int count = 0;
-        for (Integer num : myLotto) {
-            if (winLotto.contains(num)) {
-                count++;
-            }
-        }
+        int matchedCount = winLotto.countMatchedNumber(myLotto);
 
-        assertThat(count).isEqualTo(3);
+        assertThat(matchedCount).isEqualTo(3);
     }
 
     /**
