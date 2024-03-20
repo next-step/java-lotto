@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -10,9 +11,9 @@ public class LottoTicket {
             .mapToObj(i -> i + 1)
             .collect(Collectors.toList());
 
-    private final List<Integer> numbers;
+    private final TreeSet<Integer> numbers;
 
-    public LottoTicket(List<Integer> numbers) {
+    public LottoTicket(TreeSet<Integer> numbers) {
         this.numbers = numbers;
     }
 
@@ -21,7 +22,7 @@ public class LottoTicket {
         this.numbers = LottoNumbers.subList(0, 6)
                 .stream()
                 .sorted()
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
     public int getMatchCount(WinningNumbers winningNumbers) {
