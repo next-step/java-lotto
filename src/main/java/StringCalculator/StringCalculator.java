@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-    private static Pattern CHECK_NUMBER_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
-    private static int CALCULATE_CONDITION = 2;
+    private static final Pattern CHECK_NUMBER_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
+    private static final int CALCULATE_CONDITION = 2;
 
     public static int calculate(String input) {
         validate(input);
