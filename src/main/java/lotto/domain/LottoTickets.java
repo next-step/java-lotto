@@ -5,11 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoTickets {
-    private final static long THREE_MATCH_PRIZE = 5_000;
-    private final static long FOUR_MATCH_PRIZE = 50_000;
-    private final static long FIVE_MATCH_PRIZE = 1_500_000;
-    private final static long SIX_MATCH_PRIZE = 2_000_000_000;
-
     private final List<LottoTicket> lottoTicketList;
 
     public LottoTickets(Amount amount) {
@@ -37,10 +32,10 @@ public class LottoTickets {
     }
 
     private long earnings(WinningNumbers winningNumbers) {
-        return matchTicketCount(winningNumbers, 3) * THREE_MATCH_PRIZE
-                + matchTicketCount(winningNumbers, 4) * FOUR_MATCH_PRIZE
-                + matchTicketCount(winningNumbers, 5) * FIVE_MATCH_PRIZE
-                + matchTicketCount(winningNumbers, 6) * SIX_MATCH_PRIZE;
+        return matchTicketCount(winningNumbers, WinnerPrize.THREE.getMatchCount()) * WinnerPrize.THREE.getPrize()
+                + matchTicketCount(winningNumbers, WinnerPrize.FOUR.getMatchCount()) * WinnerPrize.FOUR.getPrize()
+                + matchTicketCount(winningNumbers, WinnerPrize.FIVE.getMatchCount()) * WinnerPrize.FIVE.getPrize()
+                + matchTicketCount(winningNumbers, WinnerPrize.SIX.getMatchCount()) * WinnerPrize.SIX.getPrize();
     }
 
 }
