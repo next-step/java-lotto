@@ -22,6 +22,10 @@ public class Lottos {
     }
 
     public void purchaseLotto(LottoGeneratingStrategy lottoGeneratingStrategy) {
+        if(lottos.size() == purchaseAmountOfMoney.numberOfLottoToPurchase()) {
+            return;
+        }
+        
         for (int i = 0; i < purchaseAmountOfMoney.numberOfLottoToPurchase(); i++) {
             lottos.add(lottoGeneratingStrategy.lotto());
         }

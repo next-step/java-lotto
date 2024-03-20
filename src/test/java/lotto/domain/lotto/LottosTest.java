@@ -4,6 +4,7 @@ import lotto.domain.PurchaseAmountOfMoney;
 import lotto.domain.WinningNumbers;
 import lotto.domain.lotto.strategy.LottoGeneratingStrategy;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -15,14 +16,29 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottosTest {
     LottoGeneratingStrategy lottoGeneratingStrategyStub = () -> Lotto.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-    @Test
-    @DisplayName("purchaseLotto(): 입력된 구입금액으로 살 수 있는 만큼 로또를 생성한다.")
-    void testPurchaseLotto() {
+    @Nested
+    @DisplayName("purchaseLotto() 테스트")
+    class PurchaseLottoTest {
         PurchaseAmountOfMoney purchaseAmountOfMoney = PurchaseAmountOfMoney.valueOf("1000");
         Lottos lottos = Lottos.valueOf(purchaseAmountOfMoney);
-        lottos.purchaseLotto(lottoGeneratingStrategyStub);
+        
+        @Test
+        @DisplayName("입력된 구입금액으로 살 수 있는 만큼 로또를 생성한다.")
+        void testCallOnlyOneTime() {
+            lottos.purchaseLotto(lottoGeneratingStrategyStub);
+            
+            assertThat(lottos.lottos().size()).isEqualTo(purchaseAmountOfMoney.numberOfLottoToPurchase());
+        }
 
-        assertThat(lottos.lottos().size()).isEqualTo(purchaseAmountOfMoney.numberOfLottoToPurchase());
+        @Test
+        @DisplayName("여러번 호출하더라도 입력된 구입금액으로 살 수 있는 만큼만 로또를 생성한다. ")
+        void testCallSeveralTime() {
+            lottos.purchaseLotto(lottoGeneratingStrategyStub);
+            lottos.purchaseLotto(lottoGeneratingStrategyStub);
+            lottos.purchaseLotto(lottoGeneratingStrategyStub);
+
+            assertThat(lottos.lottos().size()).isEqualTo(purchaseAmountOfMoney.numberOfLottoToPurchase());
+        }
     }
 
     @ParameterizedTest
