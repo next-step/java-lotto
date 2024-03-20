@@ -10,16 +10,16 @@ public class InputView {
 
     public int inputPurchasePrice() {
         System.out.println("구입 금액을 입력해주세요.");
-        int price = scanner.nextInt();
+        int price = SCANNER.nextInt();
 
         //엔터 제거
-        scanner.nextLine();
+        SCANNER.nextLine();
 
         return price;
     }
 
     public String inputWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.nextLine();
+        return SCANNER.nextLine();
     }
 }
