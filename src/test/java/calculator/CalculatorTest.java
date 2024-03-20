@@ -32,4 +32,15 @@ public class CalculatorTest {
         //when & then
         assertThat(calculator.calculate(text)).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"3 * 4:12", "3 * 2:6", "1 * 2 * -4:-8"}, delimiter = ':')
+    @DisplayName("입력받은 문자열의 곱셈을 구한다.")
+    void multiple(String text, int expected) {
+        //given
+        Calculator calculator = new Calculator();
+
+        //when & then
+        assertThat(calculator.calculate(text)).isEqualTo(expected);
+    }
 }
