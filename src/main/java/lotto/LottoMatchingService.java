@@ -7,14 +7,14 @@ import java.util.List;
 
 public class LottoMatchingService {
     //todo: refactoring
-        long matchTimes;
+    private long matchTimes;
 
-        int matchThreeTimes = 0;
-        int matchFourTimes = 0;
-        int matchFiveTimes = 0;
-        int matchSixTimes = 0;
+    private int matchThreeTimes = 0;
+    private int matchFourTimes = 0;
+    private int matchFiveTimes = 0;
+    private int matchSixTimes = 0;
+
     public List<Integer> matchWinningNumber(LottoMachine lottoMachine, List<Integer> winningNumbers) {
-
         // 로또를 입력한 갯수에 구입금액에 맞춰 만든다
         lottoMachine.makeLottos();
         // 당첨 번호와 로또들의 번호를 각각 비교한다
