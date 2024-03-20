@@ -1,34 +1,26 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
+    public static final int FIXED_BALL_AMOUNT = 6;
+    private static final String LOTTO_SIZE_EXCEPTION_MESSAGE =
+        "로또 공 개수는 " + FIXED_BALL_AMOUNT + "개여야 합니다";
     private final Set<Ball> balls;
 
-    public Lotto(List<Integer> lottoNumbers) {
-        this(
-            lottoNumbers.stream()
-                .map(Ball::new)
-                .collect(Collectors.toUnmodifiableSet())
-        );
+    public Lotto(Set<Ball> balls) {
+        if (balls.size() != FIXED_BALL_AMOUNT) {
+            throw new IllegalArgumentException(LOTTO_SIZE_EXCEPTION_MESSAGE);
+        }
+        this.balls = balls;
     }
 
-    public Lotto(Set<Ball> balls) {
-        this.balls = balls;
+    public Prize judge(WinningLotto winningLotto) {
+        return winningLotto.judge(balls);
     }
 
     public Set<Ball> balls() {
         return balls;
-    }
-
-    public Prize judge(Lotto lotto) {
-        Set<Ball> copiedBalls = new HashSet<>(balls);
-        copiedBalls.retainAll(lotto.balls);
-        int matchingCount = copiedBalls.size();
-        return Prize.from(matchingCount);
     }
 }

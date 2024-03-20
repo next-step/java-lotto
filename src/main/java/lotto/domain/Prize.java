@@ -1,40 +1,37 @@
 package lotto.domain;
 
+import static lotto.domain.BonusCondition.ANY;
+import static lotto.domain.BonusCondition.MUST_MATCH;
+import static lotto.domain.BonusCondition.MUST_NOT_MATCH;
+
 import java.util.Arrays;
-import java.util.Map;
-import java.util.Objects;
 
 public enum Prize {
 
-    NONE(0, 0),
-    MATCHING_THREE(3, 5_000),
-    MATCHING_FOUR(4, 50_000),
-    MATCHING_FIVE(5, 1_500_000),
-    MATCHING_SIX(6, 2_000_000_000),
+    NONE(0, ANY, 0),
+    FIFTH_PLACE(3, ANY, 5_000),
+    FOURTH_PLACE(4, ANY, 50_000),
+    THIRD_PLACE(5, MUST_NOT_MATCH, 1_500_000),
+    SECOND_PLACE(5, MUST_MATCH, 30_000_000),
+    FIRST_PLACE(6, ANY, 2_000_000_000),
     ;
 
-    private static final Map<Integer, Prize> MATCHING_COUNT_TO_PRIZE = Map.of(
-        6, MATCHING_SIX,
-        5, MATCHING_FIVE,
-        4, MATCHING_FOUR,
-        3, MATCHING_THREE,
-        2, NONE,
-        1, NONE,
-        0, NONE
-    );
-
     private final int matchingCount;
+    private final BonusCondition bonusCondition;
     private final int amount;
 
-    Prize(int matchingCount, int amount) {
+    Prize(int matchingCount, BonusCondition bonusCondition, int amount) {
         this.matchingCount = matchingCount;
+        this.bonusCondition = bonusCondition;
         this.amount = amount;
     }
 
-    public static Prize from(int matchingCount) {
-        Prize prize = MATCHING_COUNT_TO_PRIZE.get(matchingCount);
-        Objects.requireNonNull(prize);
-        return prize;
+    public static Prize from(int matchingCount, boolean matchedBonus) {
+        return Arrays.stream(values())
+            .filter(p -> p.matchingCount == matchingCount)
+            .filter(p -> p.bonusCondition.match(matchedBonus))
+            .findAny()
+            .orElse(Prize.NONE);
     }
 
     public static Prize[] valuesWithoutNone() {
@@ -47,5 +44,9 @@ public enum Prize {
 
     public int matchingCount() {
         return matchingCount;
+    }
+
+    public BonusCondition bonusCondition() {
+        return bonusCondition;
     }
 }

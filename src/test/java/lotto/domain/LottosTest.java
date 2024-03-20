@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -6,11 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lotto.domain.Ball;
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Prize;
-import lotto.domain.Prizes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,13 +17,21 @@ class LottosTest {
         Lottos lottos = makeLottos(
             makeLotto(1, 2, 3, 45, 44, 43),
             makeLotto(4, 5, 6, 45, 44, 43),
-            makeLotto(45, 44, 43, 42, 41)
+            makeLotto(45, 44, 43, 42, 41, 40)
         );
 
-        Lotto winningLotto = makeLotto(1, 2, 3, 4, 5, 6);
+        WinningLotto winningLotto = makeWinningLotto(1, 1, 2, 3, 4, 5, 6);
         Prizes judge = lottos.judge(winningLotto);
 
-        assertThat(judge.count(Prize.MATCHING_THREE)).isEqualTo(2);
+        assertThat(judge.count(Prize.FIFTH_PLACE)).isEqualTo(2);
+    }
+
+    private WinningLotto makeWinningLotto(int bonusBallNumber, int... _balls) {
+        Set<Ball> balls = Arrays.stream(_balls)
+            .mapToObj(Ball::new)
+            .collect(Collectors.toSet());
+        Ball bonusBall = new Ball(bonusBallNumber);
+        return new WinningLotto(balls, bonusBall);
     }
 
     private Lottos makeLottos(Lotto... _lottos) {
