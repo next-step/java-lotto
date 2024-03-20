@@ -1,6 +1,5 @@
 package lotto;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,7 +9,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("도메인 Lotto 테스트")
 class LottoTest {
@@ -27,8 +25,18 @@ class LottoTest {
     @DisplayName("Size 편의 메서드 테스트")
     @Test
     void size() {
-        Lotto givenLotto = new Lotto(List.of(1, 2, 3));
+        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         int result = givenLotto.size();
+        assertThat(result).isEqualTo(6);
+    }
+
+    @DisplayName("로또 번호 일치 개수 테스트")
+    @Test
+    void getFeatNumberCount() {
+        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winLotto = new Lotto(List.of(1, 5, 6, 7, 8, 9));
+
+        int result = givenLotto.getFeatNumberCount(winLotto);
         assertThat(result).isEqualTo(3);
     }
 }
