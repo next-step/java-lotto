@@ -14,7 +14,6 @@ public class Main {
 
         try {
             int purchaseAmount = InputView.readAmount();
-            InputValidator.validatePurchaseAmount(purchaseAmount);
 
             LottoTickets lottoTickets = LottoTicketMachine.issue(purchaseAmount);
             ResultView.printLottoTickets(lottoTickets);
