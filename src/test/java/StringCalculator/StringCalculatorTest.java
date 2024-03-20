@@ -1,6 +1,7 @@
 package StringCalculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.assertj.core.api.Assertions;
@@ -25,5 +26,12 @@ class StringCalculatorTest {
         int result = StringCalculator.calculate(input);
 
         assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    void 연산자가_없으면_예외발생() {
+        String input = "3 5";
+        assertThatThrownBy(() -> StringCalculator.calculate(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

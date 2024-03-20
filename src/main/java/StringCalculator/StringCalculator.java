@@ -27,6 +27,10 @@ public class StringCalculator {
                 int rightOperand = operands.pop();
                 int leftOperand = operands.pop();
 
+                if (Objects.isNull(operator)) {
+                    throw new IllegalArgumentException();
+                }
+
                 if (operator.equals("+")) {
                     int calculateResult = leftOperand + rightOperand;
                     result += calculateResult;
