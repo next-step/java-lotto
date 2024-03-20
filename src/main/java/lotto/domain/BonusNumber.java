@@ -17,7 +17,7 @@ public class BonusNumber {
     public static BonusNumber valueOf(int value) {
         if (LottoValidator.isInvalidLottoNumberBound(value)) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_BOUND_MESSAGE);
-        };
+        }
         return new BonusNumber(value);
     }
 

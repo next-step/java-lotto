@@ -3,9 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static lotto.domain.LottoValidator.MAX_LOTTO_NUMBER;
 import static lotto.domain.LottoValidator.MIN_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
