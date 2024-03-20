@@ -24,7 +24,7 @@ public class LottoGeneratorTest {
     @DisplayName("로또 번호 6자리 생성")
     @Test
     void lottoGenerate() {
-        List<Integer> result = lottoGenerator.lottoGenerate();
+        Lotto result = lottoGenerator.lottoGenerate();
 
         assertThat(result.size()).isEqualTo(6);
     }
@@ -34,26 +34,29 @@ public class LottoGeneratorTest {
     void lottoGenerate_range() {
         List<Integer> expected = IntStream.range(1,46).boxed().collect(Collectors.toList());
 
-        List<Integer> result = lottoGenerator.lottoGenerate();
+        Lotto result = lottoGenerator.lottoGenerate();
 
-        assertThat(expected).containsAll(result);
+        assertThat(expected).containsAll(result.getLotto());
     }
 
     @DisplayName("로또 번호 원자성 테스트")
     @Test
     void lottoGenerate_atomic_test() {
-        List<Integer> result = lottoGenerator.lottoGenerate();
-        Set<Integer> resultSet = result.stream().collect(Collectors.toSet());
+        Lotto result = lottoGenerator.lottoGenerate();
+        Set<Integer> resultSet = result.getLotto().stream().collect(Collectors.toSet());
         assertThat(resultSet.size()).isEqualTo(result.size());
     }
 
     @DisplayName("로또 번호 정렬 검증")
     @Test
     void lottoGenerate_sort_test() {
-        List<Integer> result = lottoGenerator.lottoGenerate();
-        List<Integer> expected = new ArrayList<>(result);
-        Collections.sort(expected);
-        assertThat(result).containsExactly(expected.toArray(Integer[]::new));
+        Lotto result = lottoGenerator.lottoGenerate();
+        List<Integer> resultValues = result.getLotto();
+
+        Collections.sort(resultValues);
+        Lotto expected = new Lotto(resultValues);
+
+        assertThat(result).isEqualTo(expected);
     }
 
 }
