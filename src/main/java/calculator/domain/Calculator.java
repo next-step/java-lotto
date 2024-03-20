@@ -12,6 +12,9 @@ public class Calculator {
     private static final String DIVIDE = "/";
     private static final int START_NUMBER = 0;
 
+    public static final String NULL_AND_EMPTY_VALIDATE  = "계산식을 입력해주세요";
+    public static final String OPERATOR_VALIDATE  = "사칙연산 기호만 입력해주세요";
+
     public static int calculator(String rawString) {
         validate(rawString);
         String[] seperateString = split(rawString);
@@ -21,7 +24,7 @@ public class Calculator {
 
     private static void validate(String rawString) {
         if (rawString == null || rawString.isBlank()) {
-            throw new IllegalArgumentException("계산식을 입력해주세요");
+            throw new IllegalArgumentException(NULL_AND_EMPTY_VALIDATE);
         }
     }
     private static int calculate(String[] seperateString, int calculatingValue) {
@@ -42,7 +45,7 @@ public class Calculator {
                 calculatingValue /= Integer.parseInt(seperateString[i+1]);
                 continue;
             }
-            throw new IllegalArgumentException("사칙연산 기호만 입력해주세요");
+            throw new IllegalArgumentException(OPERATOR_VALIDATE);
         }
         return calculatingValue;
     }
