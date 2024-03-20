@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.domain.Match;
 import org.junit.jupiter.params.ParameterizedTest;
