@@ -40,4 +40,8 @@ public class LottoGroup {
         }
         return sb.toString();
     }
+
+    public List<List<Integer>> getTickets() {
+        return tickets;
+    }
 }
