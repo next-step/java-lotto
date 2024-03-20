@@ -23,8 +23,7 @@ public class RandomLottoGenerator implements LottoGenerator {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = ZERO; i < count; i++) {
             Collections.shuffle(shuffle);
-            lottos.add(new Lotto(shuffle.subList(ZERO, LOTTO_NUMBERS_LIMIT)));
-            System.out.println(lottos);
+            lottos.add( new Lotto(new ArrayList<>(shuffle.subList(ZERO, LOTTO_NUMBERS_LIMIT))));
         }
         return new Lottos(lottos);
     }
