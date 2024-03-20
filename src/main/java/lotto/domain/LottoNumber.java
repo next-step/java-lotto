@@ -11,13 +11,13 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
-        validate(number);
+        validateNumberRange(number);
         this.number = number;
     }
 
-    public void validate(int number) throws IllegalLottoNumberException {
+    private void validateNumberRange(int number) throws IllegalLottoNumberException {
         if (notInRange(number)) {
-            throw new IllegalLottoNumberException(NUMBER_RANGE_FROM, NUMBER_RANGE_TO, number);
+            throw new IllegalLottoNumberException(number);
         }
     }
 

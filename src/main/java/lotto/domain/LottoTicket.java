@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.IllegalLottoNumbersSizeException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,6 +11,7 @@ public class LottoTicket {
     private final List<LottoNumber> numbers;
 
     public LottoTicket(List<Integer> numbers) {
+        validateNumbersSize(numbers);
         this.numbers = numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
@@ -16,6 +19,16 @@ public class LottoTicket {
 
     public LottoTicket() {
         this(LottoNumberGenerator.generate());
+    }
+
+    private void validateNumbersSize(List<Integer> numbers) throws IllegalLottoNumbersSizeException {
+        if (notMatchSize(numbers)) {
+            throw new IllegalLottoNumbersSizeException(numbers.size());
+        }
+    }
+
+    private boolean notMatchSize(List<Integer> numbers) {
+        return numbers.size() != LottoInformation.SIZE;
     }
 
     public LottoPrize getPrize(LottoTicket winLottoTicket) {

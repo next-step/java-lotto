@@ -8,6 +8,8 @@ public class LottoInformation {
     public static final int NUMBER_INDEX_FROM = 0;
     public static final int NUMBER_INDEX_TO = 6;
 
+    public static final int SIZE = NUMBER_INDEX_TO - NUMBER_INDEX_FROM;
+
     private LottoInformation() {
 
     }
