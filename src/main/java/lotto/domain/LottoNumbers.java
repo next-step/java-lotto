@@ -9,6 +9,8 @@ public class LottoNumbers {
 		this.lottoNumbers = getSortedNumbers(lottoNumbers);
 	}
 
+	//todo: 해당 값은 LottoShuffle에서 할당되는데, 45에 대한 예외처리 해야하나?
+
 	private List<Integer> getSortedNumbers(List<Integer> lottoNumbers) {
 		List<Integer> sortedNumbers = new ArrayList<>(lottoNumbers);
 		Collections.sort(sortedNumbers);
