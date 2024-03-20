@@ -3,13 +3,11 @@ package calculator.domain;
 import java.util.Arrays;
 import java.util.OptionalInt;
 
+import static calculator.domain.Operation.*;
+
 public class Calculator {
 
     private static final String DELIMITER_POSITION = " ";
-    private static final String PLUS = "+";
-    private static final String SUBTRACT = "-";
-    private static final String MULTIPLY = "*";
-    private static final String DIVIDE = "/";
     private static final int START_NUMBER = 0;
     public static final String NULL_AND_EMPTY_VALIDATE  = "계산식을 입력해주세요";
     public static final String OPERATOR_VALIDATE  = "사칙연산 기호만 입력해주세요";
@@ -33,25 +31,8 @@ public class Calculator {
         }
     }
     private static int calculate(String[] seperateString, int calculatingValue) {
-        for (int i = 1; i < seperateString.length-1; i+=2) {
-            if (PLUS.equals(seperateString[i])) {
-                calculatingValue += Integer.parseInt(seperateString[i+1]);
-                continue;
-            }
-            if (MULTIPLY.equals(seperateString[i])) {
-                calculatingValue *= Integer.parseInt(seperateString[i+1]);
-                continue;
-            }
-            if (SUBTRACT.equals(seperateString[i])) {
-                calculatingValue -= Integer.parseInt(seperateString[i+1]);
-                continue;
-            }
-            if (DIVIDE.equals(seperateString[i])) {
-                calculatingValue /= Integer.parseInt(seperateString[i+1]);
-                continue;
-            }
-            throw new IllegalArgumentException(OPERATOR_VALIDATE);
-        }
+        for (int i = 1; i < seperateString.length-1; i+=2)
+            calculatingValue = from(calculatingValue, seperateString[i], Integer.parseInt(seperateString[i + 1]));
         return calculatingValue;
     }
 

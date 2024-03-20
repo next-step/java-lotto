@@ -47,17 +47,17 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {SUBTRACT})
+    @ValueSource(strings = {DIVIDE})
     @DisplayName("단순 나누기")
     void 나누기(String input) {
         assertThat(Calculator.calculator(input)).isEqualTo(1);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {DIVIDE})
+    @ValueSource(strings = {SUBTRACT})
     @DisplayName("단순 빼기")
     void 빼기(String input) {
-        assertThat(Calculator.calculator(input)).isEqualTo(1);
+        assertThat(Calculator.calculator(input)).isEqualTo(0);
     }
 
     @ParameterizedTest
