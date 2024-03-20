@@ -6,6 +6,7 @@ import lotto.model.Lotto;
 import lotto.model.LottoMachine;
 import lotto.model.LottoNumber;
 import lotto.model.LottoPaper;
+import lotto.model.Money;
 import lotto.model.Prize;
 import lotto.model.WinningLotto;
 import lotto.view.InputView;
@@ -24,8 +25,7 @@ public class LottoController {
     }
 
     public void run() {
-        int money = inputView.askMoney();
-        OrderRequest request = new OrderRequest(money);
+        OrderRequest request = getOrderRequest();
         LottoPaper lottoPaper = LottoMachine.purchase(request);
 
         List<LottoNumberResponse> lottoNumberResponses = convertToLottoNumberResponse(lottoPaper);
@@ -38,6 +38,14 @@ public class LottoController {
         Prize prize = lottoPaper.matches(winningInfo);
 
         resultView.printResult(prize, prize.rateOfReturn(lottoPaper.getQuantity()));
+    }
+
+    private OrderRequest getOrderRequest() {
+        Money money = inputView.askMoney();
+        int manualQuantity = inputView.askManualQuantity(money);
+        List<Lotto> manualLottos = inputView.askManualLotto(manualQuantity);
+
+        return new OrderRequest(money, manualLottos);
     }
 
     private List<LottoNumberResponse> convertToLottoNumberResponse(LottoPaper lottoPaper) {

@@ -15,11 +15,11 @@ public class LottoMachine {
     }
 
     public static LottoPaper purchase(OrderRequest orderRequest) {
-        int money = orderRequest.getMoney();
+        Money money = orderRequest.getMoney();
 
         assertMoney(money);
 
-        int quantity = calculate(money);
+        int quantity = calculate(money.getAmount());
         if (quantity == 0) {
             throw new InvalidLottoException("로또를 구매하실 수 없습니다");
         }
