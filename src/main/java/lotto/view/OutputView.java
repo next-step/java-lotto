@@ -21,6 +21,7 @@ public class OutputView {
     private static final String COMMA_BLANK = ", ";
     private static final String SEPARATOR = "---------";
     private static final String NEXT_LINE = "\n";
+    private static final int STANDARD_OF_RATE_OF_RETURN = 1;
 
     private OutputView() {
     }
@@ -75,7 +76,7 @@ public class OutputView {
         StringBuilder rateOfReturnMessageBuilder = new StringBuilder();
 
         rateOfReturnMessageBuilder.append(String.format(RATE_OF_RETURN_MESSAGE, rateOfReturn));
-        if (1 > rateOfReturn) {
+        if (STANDARD_OF_RATE_OF_RETURN > rateOfReturn) {
             rateOfReturnMessageBuilder.append(LOSS_MESSAGE);
         }
 
