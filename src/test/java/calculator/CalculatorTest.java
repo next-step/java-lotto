@@ -54,4 +54,15 @@ public class CalculatorTest {
         //when & then
         assertThat(calculator.calculate(text)).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"2 + 3 * 4 / 2:10", "3 - 2 * 4 + 1:5", "4 / 2 - 2 + 3 * 5:15"}, delimiter = ':')
+    @DisplayName("입력받은 문자열의 사칙연산을 구한다.")
+    void all(String text, int expected) {
+        //given
+        Calculator calculator = new Calculator();
+
+        //when & then
+        assertThat(calculator.calculate(text)).isEqualTo(expected);
+    }
 }
