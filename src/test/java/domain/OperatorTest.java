@@ -15,7 +15,7 @@ public class OperatorTest {
   @CsvSource(value = {"2,+,3,5", "2,-,3,-1", "2,*,3,6", "6,/,2,3",}, delimiter = ',')
   @DisplayName("연산자 별로 결과값을 확인한다")
   void operate(Integer left,String operator,  Integer right, Integer expected ){
-    int result = Operator.operatorMap.get(operator).apply(left,right);
+    int result = Operator.get(operator).apply(left,right);
     assertThat(result).isEqualTo(expected);
   }
 
