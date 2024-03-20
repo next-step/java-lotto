@@ -32,13 +32,13 @@ public class Calculator {
     }
 
     public int operation(int num, String symbol) {
-        if (symbol == add)
+        if (symbol.equals(add))
             return add(num);
-        else if (symbol == minus)
+        else if (symbol.equals(minus))
             return minus(num);
-        else if (symbol == division)
+        else if (symbol.equals(division))
             return division(num);
-        else if (symbol == multiply)
+        else if (symbol.equals(multiply))
             return multiply(num);
         else
             throw new IllegalArgumentException("잘못된 기호 입니다");
