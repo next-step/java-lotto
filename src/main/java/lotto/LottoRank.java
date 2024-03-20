@@ -11,7 +11,6 @@ public enum LottoRank {
 	SIXTH(1,0),
 	SEVENTH(0,0);
 
-
 	private int lottoCount;
 	private int money;
 
@@ -25,14 +24,6 @@ public enum LottoRank {
 				.filter(v -> v.lottoCount == lottoCount)
 				.findFirst()
 				.orElseThrow(() -> new IllegalArgumentException("존재 할 수 없는 값입니다."));
-	}
-
-	public int getLottoCount() {
-		return lottoCount;
-	}
-
-	public int getMoney() {
-		return money;
 	}
 
 }

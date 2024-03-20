@@ -13,4 +13,5 @@ public class LottoShuffle {
         Collections.shuffle(nums);
         return new LottoNumbers(nums.subList(0,5));
     }
+
 }
