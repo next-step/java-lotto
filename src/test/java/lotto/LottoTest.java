@@ -29,4 +29,12 @@ public class LottoTest {
         assertThatThrownBy(() -> Lotto.create(() -> List.of(5, 6, 7, 8, 9)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("몇개의 로또번호가 맞는지 확인할 수 있다.")
+    @Test
+    void getCountMatchedLottoNumber() {
+        Lotto prizeLotto = Lotto.create(() -> List.of(1, 2, 3, 4, 5, 6));
+        Lotto targetLotto = Lotto.create(() -> List.of(1, 2, 3, 4, 5, 6));
+        Assertions.assertThat(targetLotto.getCountMatchedLottoNumber(prizeLotto)).isEqualTo(6);
+    }
 }

@@ -21,9 +21,12 @@ public class LottoView {
         }
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+
         String s = scanner.nextLine();
         String[] stringSplit = s.split(", ");
         List<Integer> winnerLotto = Arrays.stream(stringSplit).map(str -> Integer.valueOf(str)).collect(Collectors.toList());
+
+
 
     }
 

@@ -1,8 +1,6 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -31,5 +29,15 @@ public class Lotto {
     @Override
     public String toString() {
         return lottoNumberList.toString();
+    }
+
+    public int getCountMatchedLottoNumber(Lotto lotto) {
+        return (int)numbers().stream()
+                .filter(numbers -> lotto.contain(numbers))
+                .count();
+    }
+
+    private boolean contain(LottoNumber otherLottoNumber) {
+        return numbers().contains(otherLottoNumber);
     }
 }
