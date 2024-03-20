@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMatchingService {
-    //todo: refactoring
+
     private long matchTimes;
 
     private int matchThreeTimes = 0;
@@ -24,26 +24,37 @@ public class LottoMatchingService {
                     .count();
 
             // 3개,4개,5개,6개 일치하는 갯수를 구한다
-            if (matchTimes == 3) {
-                matchThreeTimes++;
-            }
-            if (matchTimes == 4) {
-                matchFourTimes++;
-            }
-            if (matchTimes == 5) {
-                matchFiveTimes++;
-            }
-            if (matchTimes == 6) {
-                matchSixTimes++;
-            }
+            matchTimesCount();
         }
         // 리스트에 그 갯수들을 넣는다
+        return addMatchTimes();
+    }
+
+    private List<Integer> addMatchTimes() {
         List<Integer> matchTimesList = new ArrayList<>();
         matchTimesList.add(matchThreeTimes);
         matchTimesList.add(matchFourTimes);
         matchTimesList.add(matchFiveTimes);
         matchTimesList.add(matchSixTimes);
         return matchTimesList;
+    }
+
+    private void matchTimesCount() {
+        if (matchTimes == 3) {
+            matchThreeTimes++;
+        }
+
+        if (matchTimes == 4) {
+            matchFourTimes++;
+        }
+
+        if (matchTimes == 5) {
+            matchFiveTimes++;
+        }
+
+        if (matchTimes == 6) {
+            matchSixTimes++;
+        }
     }
 
 }
