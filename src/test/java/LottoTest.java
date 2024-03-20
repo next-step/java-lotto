@@ -42,9 +42,22 @@ public class LottoTest {
         );
     }
 
-    @DisplayName("랭킹을 구한다.")
+    @DisplayName("리스트를 기반으로 로또 생성 시 정렬된다.")
     @Test
     void test03() {
+        // given
+        List<Integer> numbers = List.of(5, 6, 1, 2, 3, 4);
+
+        // when
+        Lotto lotto = new Lotto(numbers);
+
+        // then
+        assertThat(lotto.numbers()).containsExactly(1, 2, 3, 4, 5, 6);
+    }
+
+    @DisplayName("랭킹을 구한다.")
+    @Test
+    void test04() {
         // given
         Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));

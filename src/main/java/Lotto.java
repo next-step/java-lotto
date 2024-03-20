@@ -10,8 +10,9 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         assertListSizeOfSix(numbers);
-        Collections.sort(new ArrayList<>(numbers));
-        this.numbers = numbers;
+        List<Integer> newNumbers = new ArrayList<>(numbers);
+        Collections.sort(newNumbers);
+        this.numbers = newNumbers;
     }
 
     private void assertListSizeOfSix(List<Integer> numbers) {
