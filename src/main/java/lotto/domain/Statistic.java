@@ -1,7 +1,6 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Arrays;
-import java.util.function.Function;
 
 public enum Statistic {
 
@@ -18,10 +17,18 @@ public enum Statistic {
     private int price;
     private int matcher;
 
+    public int getPrice() {
+        return price;
+    }
+
+    public int getMatcher() {
+        return matcher;
+    }
+
     public static Statistic valueOfMatchNumber(int featNumberCount) {
         return Arrays.stream(values())
                 .filter(statistic -> statistic.matcher == featNumberCount)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("당첨되지 않았습니다. 일치 : " + featNumberCount));
+                .orElseGet(() -> null);
     }
 }
