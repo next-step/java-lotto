@@ -27,7 +27,10 @@ public class Lotto {
     }
 
     public Rank rank(Lotto winningLotto) {
-        List<Integer> winningNumbers = winningLotto.numbers();
+        return this.rank(winningLotto.numbers());
+    }
+
+    private Rank rank(List<Integer> winningNumbers) {
         winningNumbers.retainAll(this.numbers());
         return Rank.of(winningNumbers.size());
     }
