@@ -4,6 +4,12 @@
 - [x] assertMoney(..) 파라미터 타입, 조건식 수정
 - [x] Money 생성자 할당 전에 유효성 검사하도록 수정
 - [x] 로또 구매 요청시 OrderRequest (dto) 제거
+- [x] LOTTO_PER_MONEY 제약조건을 Money 로 이동
+- [x] LottoPaper에 분리했던 자동/수동 구매 로또 필드를 제거하고 하나로 합치기
+- [x] 전략패턴 적용해서 자동/수동 로또 구매하도록 리팩토링
+    - LottoStrategy 인터페이스
+    - AutomaticPurchaseStrategy : 자동 구매 전략
+    - ManualPurchaseStrategy : 수동 구매 전략
 
 ---
 

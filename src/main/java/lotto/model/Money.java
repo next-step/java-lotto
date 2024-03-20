@@ -2,10 +2,10 @@ package lotto.model;
 
 import java.util.Objects;
 
-import static lotto.model.LottoMachine.LOTTO_PER_MONEY;
 import static lotto.validation.MoneyValidator.assertMoney;
 
 public class Money {
+    public static final int LOTTO_PER_MONEY = 1_000;
     private final int amount;
 
     public Money(int amount) {

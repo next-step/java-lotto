@@ -1,6 +1,6 @@
 package lotto.validation;
 
-import static lotto.model.LottoMachine.LOTTO_PER_MONEY;
+import static lotto.model.Money.LOTTO_PER_MONEY;
 
 public class MoneyValidator {
 

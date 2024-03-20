@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static lotto.model.LottoMachine.LOTTO_PER_MONEY;
+import static lotto.model.Money.LOTTO_PER_MONEY;
 
 public class Prize {
     private final Map<Rank, Integer> prizeMap;

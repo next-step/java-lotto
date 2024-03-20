@@ -1,10 +1,12 @@
 package lotto.controller;
 
 import lotto.dto.LottoNumberResponse;
+import lotto.model.AutomaticPurchaseStrategy;
 import lotto.model.Lotto;
 import lotto.model.LottoMachine;
 import lotto.model.LottoNumber;
 import lotto.model.LottoPaper;
+import lotto.model.ManualPurchaseStrategy;
 import lotto.model.Money;
 import lotto.model.Prize;
 import lotto.model.WinningLotto;
@@ -24,26 +26,25 @@ public class LottoController {
     }
 
     public void run() {
-        LottoPaper lottoPaper = requestLottoOrder();
+        Money money = inputView.askMoney();
+        int manualQuantity = inputView.askManualQuantity(money);
+        int automaticQuantity = money.maxQuantity() - manualQuantity;
 
-        printOrderResponse(lottoPaper);
+        LottoPaper lottoPaper = requestLottoOrder(manualQuantity, automaticQuantity);
+
+        printOrderResponse(lottoPaper, manualQuantity, automaticQuantity);
 
         printLottoPrizeResult(lottoPaper);
     }
 
-    private LottoPaper requestLottoOrder() {
-        Money money = inputView.askMoney();
-        int manualQuantity = inputView.askManualQuantity(money);
-        List<Lotto> manualLottos = inputView.askManualLotto(manualQuantity);
-
-        return LottoMachine.purchase(money, manualLottos);
+    private LottoPaper requestLottoOrder(int manualQuantity, int automaticQuantity) {
+        List<Lotto> automaticLotto = LottoMachine.purchase(automaticQuantity, new AutomaticPurchaseStrategy());
+        List<Lotto> manualLotto = LottoMachine.purchase(manualQuantity, new ManualPurchaseStrategy(this.inputView));
+        return new LottoPaper(automaticLotto, manualLotto);
     }
 
-    private void printOrderResponse(LottoPaper lottoPaper) {
+    private void printOrderResponse(LottoPaper lottoPaper, int manualQuantity, int automaticQuantity) {
         List<LottoNumberResponse> lottoNumberResponses = convertToLottoNumberResponse(lottoPaper);
-        int manualQuantity = lottoPaper.getManualQuantity();
-        int automaticQuantity = lottoPaper.getAutomaticQuantity();
-
         resultView.printOrderResponse(lottoNumberResponses, manualQuantity, automaticQuantity);
     }
 
