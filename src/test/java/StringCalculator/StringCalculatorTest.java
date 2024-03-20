@@ -2,6 +2,7 @@ package StringCalculator;
 
 import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -61,5 +62,19 @@ class StringCalculatorTest {
         int result = StringCalculator.calculate(input);
 
         assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    void 입력값이_null_예외발생() {
+        String input = null;
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> StringCalculator.calculate(input));
+    }
+
+    @Test
+    void 입력값이_빈공백문자이면_예외발생() {
+        String input = "";
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> StringCalculator.calculate(input));
     }
 }

@@ -12,6 +12,9 @@ public class StringCalculator {
     private static int CALCULATE_CONDITION = 2;
 
     public static int calculate(String input) {
+        validate(input);
+
+
         List<String> strings = Arrays.asList(input.split(" "));
         Stack<Integer> operands = new Stack<>();
         int result = 0;
@@ -53,6 +56,16 @@ public class StringCalculator {
             }
         }
         return result;
+    }
+
+    private static void validate(String input) {
+        if (Objects.isNull(input)) {
+            throw new IllegalArgumentException();
+        }
+
+        if (input.isEmpty() || input.isBlank()) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private static boolean isNumber(String input) {
