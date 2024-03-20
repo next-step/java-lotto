@@ -10,7 +10,7 @@ import lotto.domain.Prizes;
 
 public class OutputView {
 
-    private static final String PURCHASED_LOTTO_AMOUNT_MESSAGE = "%d개를 구매했습니다.\n";
+    private static final String PURCHASED_LOTTO_AMOUNT_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String JUDGE_RESULT_HEADER_MESSAGE = "당첨 통계\n---------";
     private static final String JUDGE_RESULT_MESSAGE = "%s (%d원)- %d개\n";
     private static final String RETURN_RATE_MESSAGE = "총 수익률은 %.2f입니다.";
@@ -20,9 +20,9 @@ public class OutputView {
     private static final String PURCHASED_LOTTO_PREFIX = "[";
     private static final String PURCHASED_LOTTO_SUFFIX = "]";
 
-    public void printPurchasedLottos(Lottos lottos) {
-        System.out.printf(PURCHASED_LOTTO_AMOUNT_MESSAGE, lottos.size());
-        for (Lotto lotto : lottos.value()) {
+    public void printPurchasedLottos(Lottos manualLottos, Lottos lottos) {
+        System.out.printf(PURCHASED_LOTTO_AMOUNT_MESSAGE, manualLottos.size(), lottos.size());
+        for (Lotto lotto : manualLottos.merged(lottos).value()) {
             String lottoStr = lotto.balls().stream().mapToInt(Ball::number)
                 .mapToObj(String::valueOf)
                 .collect(Collectors.joining(PURCHASED_LOTTO_DELIMITER, PURCHASED_LOTTO_PREFIX,

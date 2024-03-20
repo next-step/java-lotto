@@ -19,13 +19,13 @@ public class LottoConsole {
 
     public void start() {
         int money = inputView.inputMoney();
-        Lottos lottos = LottoStore.sellAsMuchAsPossible(money);
+        Lottos manualLottos = inputView.inputManualLottos();
+        Lottos lottos = LottoStore.sellAsMuchAsPossible(money - manualLottos.price());
 
-        outputView.printPurchasedLottos(lottos);
-
+        outputView.printPurchasedLottos(manualLottos, lottos);
         WinningLotto winningLotto = inputView.inputWinningLotto();
 
-        Prizes prizes = lottos.judge(winningLotto);
+        Prizes prizes = manualLottos.merged(lottos).judge(winningLotto);
         outputView.printJudgeResult(lottos.price(), prizes);
     }
 }

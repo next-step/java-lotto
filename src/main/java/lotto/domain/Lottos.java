@@ -30,4 +30,10 @@ public class Lottos {
     public int price() {
         return Lotto.FIXED_BALL_AMOUNT * size();
     }
+
+    public Lottos merged(Lottos manualLottos) {
+        List<Lotto> lottos = new ArrayList<>(this.lottos);
+        lottos.addAll(manualLottos.lottos);
+        return new Lottos(lottos);
+    }
 }
