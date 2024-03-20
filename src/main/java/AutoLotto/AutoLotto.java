@@ -1,18 +1,24 @@
-package AutoLotto;
+package autoLotto;
 
-import AutoLotto.model.Lottos;
-import AutoLotto.model.RandomLottoGeneratorStrategy;
-import AutoLotto.view.InputView;
-import AutoLotto.view.OutputView;
+import autoLotto.model.LottoMachine;
+import autoLotto.model.LottoProfitChecker;
+import autoLotto.model.LottoWinChecker;
+import autoLotto.model.RandomLottoGeneratorStrategy;
+import autoLotto.view.InputView;
+import autoLotto.view.ResultView;
 
 public class AutoLotto {
     private final InputView inputView = new InputView();
-    private final OutputView outputView = new OutputView();
+    private final ResultView resultView = new ResultView();
 
     public void run() {
-        int chances = inputView.inputPurchase();
-        Lottos lottos = new Lottos(chances, new RandomLottoGeneratorStrategy());
-        outputView.outputPurchasedLottos(lottos, chances);
-    }
+        String purchaseAmount = inputView.inputPurchase();
+        LottoMachine lottoMachine = new LottoMachine(purchaseAmount, new RandomLottoGeneratorStrategy());
+        resultView.outputPurchasedLottos(lottoMachine, lottoMachine.getNumberOfLottos());
 
+        String winNumbers = inputView.inputWinNumbers();
+        LottoWinChecker lottoWinChecker = new LottoWinChecker(winNumbers, lottoMachine.getLottos());
+        LottoProfitChecker lottoProfitChecker = new LottoProfitChecker(lottoWinChecker.getWinLottos(), purchaseAmount);
+        resultView.outputLottoResult(lottoWinChecker.getWinLottos(), lottoProfitChecker.getProfit());
+    }
 }
