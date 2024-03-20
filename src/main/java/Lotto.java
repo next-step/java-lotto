@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Lotto {
 
@@ -11,8 +9,16 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> numbers) {
+        assertListSizeOfSix(numbers);
         Collections.sort(new ArrayList<>(numbers));
         this.numbers = numbers;
+    }
+
+    private void assertListSizeOfSix(List<Integer> numbers) {
+        Set<Integer> set = new HashSet<>(numbers);
+        if (set.size() != 6) {
+            throw new IllegalArgumentException("로또 번호의 갯수가 6개가 아닙니다.");
+        }
     }
 
     private static List<Integer> getRandomNumbers() {
@@ -37,5 +43,10 @@ public class Lotto {
     @Override
     public String toString() {
         return numbers.toString();
+    }
+
+    private static class LottoNumberGenerator {
+
+//        private static final List
     }
 }

@@ -1,8 +1,14 @@
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
@@ -20,9 +26,25 @@ public class LottoTest {
         assertThat(lotto.numbers()).isEqualTo(numbers);
     }
 
+    @DisplayName("로또 생성 시 파라미터로 넘기는 리스트가 6자리가 아니거나, 6자리지만 중복 숫자가 있는 경우 예외가 발생한다.")
+    @ParameterizedTest
+    @MethodSource("testFixture")
+    void test02(List<Integer> numbers, Class<Exception> expected) {
+        // when / then
+        assertThatThrownBy(() -> new Lotto(numbers))
+                .isInstanceOf(expected);
+    }
+
+    public static Stream<Arguments> testFixture() {
+        return Stream.of(
+                Arguments.of(List.of(1, 2, 3, 4, 5), IllegalArgumentException.class),
+                Arguments.of(List.of(1, 1, 2, 3, 4, 5), IllegalArgumentException.class)
+        );
+    }
+
     @DisplayName("랭킹을 구한다.")
     @Test
-    void test02() {
+    void test03() {
         // given
         Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
