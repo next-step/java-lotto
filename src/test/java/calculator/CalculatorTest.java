@@ -43,4 +43,15 @@ public class CalculatorTest {
         //when & then
         assertThat(calculator.calculate(text)).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"3 / 4:0", "3 / 2:1", "4 / 2 / 2:1"}, delimiter = ':')
+    @DisplayName("입력받은 문자열의 나눗셈을 구한다.")
+    void divide(String text, int expected) {
+        //given
+        Calculator calculator = new Calculator();
+
+        //when & then
+        assertThat(calculator.calculate(text)).isEqualTo(expected);
+    }
 }
