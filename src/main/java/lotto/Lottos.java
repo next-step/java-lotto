@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Lottos {
@@ -11,12 +12,14 @@ public class Lottos {
 		this.lottos = lottos;
 	}
 
-	public List<LottoRank> getWinningStatistics(List<Integer> winningNumber) {
-		List<LottoRank> result = new ArrayList<>();
+	public HashMap<LottoRank, Integer> getWinningStatistics(List<Integer> winningNumber) {
+		HashMap<LottoRank, Integer> result = new HashMap<>();
+
 		for (Lotto lotto : this.lottos) {
 			int count = lotto.getLottoNumber().getCountOfMatchLottoNumber(winningNumber);
-			result.add(LottoRank.findLottoRankByLottoCount(count));
+			result.merge(LottoRank.findLottoRankByLottoCount(count), 1, Integer::sum);
 		}
+
 		return result;
 	}
 
