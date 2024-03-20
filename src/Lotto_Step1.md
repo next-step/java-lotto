@@ -58,3 +58,5 @@ Guide to JUnit 5 Parameterized Tests
 void isBlank_ShouldReturnTrueForNullOrBlankStrings(String input) {
 assertTrue(Strings.isBlank(input));
 }
+
+github desktop push test
