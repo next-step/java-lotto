@@ -60,3 +60,13 @@ assertTrue(Strings.isBlank(input));
 }
 
 github desktop push test
+
+## 리뷰 피드백 내용
+* 테스트 코드 공백 및 널값 체크는 : @ValueSource(strings = {"", "  "}) -> @NullSource @EmptySource @NullAndEmptySource
+* 예외메시지 ""으로 하지말고 매직 리터럴은 상수로 하여 프로덕션코드와 테스트코드 참조하도록
+* 테스트 코드에서 성공 테스트 반복됨 -> ParameterizedTest로 인수를 외부주입
+* 테스트 코드에서 @DisplayName 활용
+* 개념이 다른 선언부 끼리는 개행으로 개념 분리
+* calculate메소드 Stream API의 reduce 함수로
+* Calculator 클래스 유틸리티 클래스 -> 생성자 제한(public -> private)
+* for if 로 인한 indent, line length -> 사칙연산을 열거형 객체로 만들어서 책임 분리 -> 문자열이 어떤 연산자인지 찾는 책임을 열거형 객체로 전달
