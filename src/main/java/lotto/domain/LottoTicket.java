@@ -1,37 +1,34 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
     public LottoTicket(List<Integer> numbers) {
-        (new LottoNumbers()).validate(numbers);
-        this.numbers = numbers;
+        this.numbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
-    public LottoTicket(LottoNumbers lottoNumbers) {
-        this(lottoNumbers.auto());
+    public LottoTicket() {
+        this(LottoNumberGenerator.generate());
     }
 
     public LottoPrize getPrize(LottoTicket winLottoTicket) {
-        int matchCount = 0;
-        for (Integer number : winLottoTicket.numbers) {
-            matchCount += count(number);
-        }
+        int matchCount = count(winLottoTicket.numbers);
         return LottoPrize.lookup(matchCount);
     }
 
-    private int count(Integer number) {
-        int matchCount = 0;
-        if (numbers.contains(number)) {
-            matchCount++;
-        }
-        return matchCount;
+    private int count(List<LottoNumber> numbers) {
+        return (int) numbers.stream()
+                .filter(this.numbers::contains)
+                .count();
     }
 
-    public List<Integer> get() {
+    public List<LottoNumber> get() {
         return this.numbers;
     }
 

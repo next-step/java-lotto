@@ -1,6 +1,8 @@
 package lotto;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumberGenerator;
+import lotto.domain.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +18,7 @@ public class LottoNumberGeneratorTest {
     @Test
     @DisplayName("[성공] 1부터 45까지의 중복되지 않는 번호를 생성한다.")
     void 중복되지_않는_번호_생성() {
-        List<Integer> numbers = (new LottoNumbers()).auto();
+        List<Integer> numbers = LottoNumberGenerator.generate();
         assertThat(numbers).containsAnyElementsOf(getPossibleLottoNumbers());
     }
 

@@ -2,8 +2,7 @@ package lotto;
 
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoTicket;
-import lotto.exception.IllegalLottoNumbersException;
-import org.assertj.core.api.Assertions;
+import lotto.exception.IllegalLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -42,21 +41,21 @@ public class LottoTicketTest {
         @Test
         @DisplayName("[실패] 로또 번호에 0이 포함되어 있으면 IllegalLottoNumberException 예외가 발생한다.")
         void 로또_번호_범위_0포함() {
-            assertThatExceptionOfType(IllegalLottoNumbersException.class)
+            assertThatExceptionOfType(IllegalLottoNumberException.class)
                     .isThrownBy(() -> new LottoTicket(List.of(0, 2, 3, 4, 5, 6)));
         }
 
         @Test
         @DisplayName("[실패] 로또 번호에 46이 포함되어 있으면 IllegalLottoNumberException 예외가 발생한다.")
         void 로또_번호_범위_46포함() {
-            assertThatExceptionOfType(IllegalLottoNumbersException.class)
+            assertThatExceptionOfType(IllegalLottoNumberException.class)
                     .isThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4, 5, 46)));
         }
 
         @Test
         @DisplayName("[실패] 로또 번호에 0과 46이 포함되어 있으면 IllegalLottoNumberException 예외가 발생한다.")
         void 로또_번호_범위_0과_46포함() {
-            assertThatExceptionOfType(IllegalLottoNumbersException.class)
+            assertThatExceptionOfType(IllegalLottoNumberException.class)
                     .isThrownBy(() -> new LottoTicket(List.of(0, 2, 3, 4, 5, 46)));
         }
     }
