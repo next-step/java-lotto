@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.Currency;
+import java.util.Locale;
+
 public class Amount {
   private final PositiveNumber value;
   private final Currency currency;
@@ -11,6 +14,7 @@ public class Amount {
 
   @Override
   public String toString() {
-    return String.format("%s%s", this.value, this.currency);
+    return String.format("%s %s", this.currency.getSymbol(), this.value);
   }
+
 }

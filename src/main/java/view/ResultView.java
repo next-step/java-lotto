@@ -2,7 +2,6 @@ package view;
 
 import domain.*;
 
-import java.util.List;
 import java.util.Map;
 
 public class ResultView {
@@ -10,9 +9,9 @@ public class ResultView {
     System.out.printf("%s개를 구매했습니다.%n", count);
   }
 
-  public static void lotteryList(Lotteries lotteries) {
-    for (Lottery lottery: lotteries) {
-      System.out.println(lottery);
+  public static void lotteryList(Lottos lottos) {
+    for (Lotto lotto : lottos) {
+      System.out.println(lotto);
     }
     System.out.println();
   }

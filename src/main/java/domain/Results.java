@@ -13,20 +13,24 @@ public class Results {
   }
 
   public Map<Result, PositiveNumber> stats() {
-    HashMap<Result, PositiveNumber> stats = new HashMap<>();
+    Map<Result, PositiveNumber> stats = new HashMap<>();
     return this.results.stream()
             .filter(Result::win)
-            .reduce(stats, (acc, cur) -> {
-              if (acc.get(cur) == null) {
-                acc.put(cur, PositiveNumber.of(1));
-                return acc;
-              }
-              acc.put(cur, acc.get(cur).increment());
-              return acc;
-            }, (map1, map2) -> {
-              map1.putAll(map2);
-              return map1;
-            });
+            .reduce(stats, this::resultCountMap, this::combinedResultCountMap);
+  }
+
+  private Map<Result, PositiveNumber> resultCountMap(final Map<Result, PositiveNumber> acc, final Result cur) {
+    if (acc.get(cur) == null) {
+      acc.put(cur, PositiveNumber.of(1));
+      return acc;
+    }
+    acc.put(cur, acc.get(cur).increment());
+    return acc;
+  }
+
+  private Map<Result, PositiveNumber> combinedResultCountMap(final Map<Result, PositiveNumber> map1, final Map<Result, PositiveNumber> map2) {
+    map1.putAll(map2);
+    return map1;
   }
 
   @Override

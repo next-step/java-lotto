@@ -1,7 +1,6 @@
 package factory;
 
-import domain.Lottery;
-import domain.LotteryNumber;
+import domain.LottoBall;
 import domain.PositiveNumber;
 
 import java.util.List;
@@ -10,13 +9,25 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RandomFactory {
-  private static Random random = new Random();
+  private static final List<PositiveNumber> cache = IntStream.range(LottoBall.LOWER_BOUND.value(), LottoBall.UPPER_BOUND.value() + 1)
+          .mapToObj(PositiveNumber::new)
+          .collect(Collectors.toList());
 
-  public static PositiveNumber randomNumber() {
-    return PositiveNumber.of(random.nextInt(LotteryNumber.UPPER_BOUND.value()) + LotteryNumber.LOWER_BOUND.value());
+  private final Random random;
+
+  public RandomFactory(Random random) {
+    this.random = random;
   }
 
-  public static List<PositiveNumber> randomNumbers(PositiveNumber size) {
+  public PositiveNumber randomNumber() {
+    return cache.get(cacheIndex());
+  }
+
+  protected int cacheIndex() {
+    return random.nextInt(LottoBall.UPPER_BOUND.value()) + LottoBall.LOWER_BOUND.value() - 1;
+  }
+
+  public List<PositiveNumber> randomNumbers(PositiveNumber size) {
     return IntStream.range(0, size.value())
             .mapToObj(i -> randomNumber())
             .collect(Collectors.toList());

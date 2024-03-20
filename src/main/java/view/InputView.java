@@ -1,7 +1,7 @@
 package view;
 
-import domain.LotteryNumber;
-import domain.LotteryNumbers;
+import domain.LottoBall;
+import domain.LottoBalls;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -13,13 +13,13 @@ public class InputView {
     return Integer.parseInt(new Scanner(System.in).nextLine());
   }
 
-  static public LotteryNumbers winningNumbers() {
+  static public LottoBalls winningBalls() {
     System.out.println("지난 주 당첨 번호를 입력해주세요.");
     String input = new Scanner(System.in).nextLine();
-    return new LotteryNumbers(Arrays.stream(parseLotteryNumbers(input)).map(ln -> LotteryNumber.of(Integer.parseInt(ln))).collect(Collectors.toList()));
+    return new LottoBalls(Arrays.stream(parseLotteryBalls(input)).map(ln -> LottoBall.of(Integer.parseInt(ln))).collect(Collectors.toList()));
   }
 
-  private static  String[] parseLotteryNumbers(String lotteryNumbers) {
-    return lotteryNumbers.replace(" ", "").split(",");
+  private static  String[] parseLotteryBalls(String lotteryBalls) {
+    return lotteryBalls.replace(" ", "").split(",");
   }
 }

@@ -1,22 +1,26 @@
-import domain.Lotteries;
-import domain.Lottery;
-import domain.LotteryNumbers;
+import domain.Lottos;
+import domain.Lotto;
+import domain.LottoBalls;
 import domain.PositiveNumber;
-import factory.LotteryFactory;
+import factory.LottoFactory;
+import factory.RandomFactory;
 import view.InputView;
 import view.ResultView;
 
-import java.util.List;
+import java.util.Random;
 
 public class Main {
+  private static final LottoFactory lottoFactory = new LottoFactory(new RandomFactory(new Random()));
+
   public static void main(String[] args) {
-    PositiveNumber count = Lottery.count(PositiveNumber.of((InputView.amountTotal())));
+
+    PositiveNumber count = Lotto.count(PositiveNumber.of((InputView.amountTotal())));
     ResultView.lotteryCount(count);
 
-    Lotteries lotteries = LotteryFactory.randomLotteries(count);
-    ResultView.lotteryList(lotteries);
+    Lottos lottos = lottoFactory.randomLottos(count);
+    ResultView.lotteryList(lottos);
 
-    LotteryNumbers winningNumbers = InputView.winningNumbers();
-    ResultView.stats(lotteries.results(winningNumbers));
+    LottoBalls winningBalls = InputView.winningBalls();
+    ResultView.stats(lottos.results(winningBalls));
   }
 }

@@ -35,8 +35,8 @@ public class PositiveNumberTest {
   }
 
   @ParameterizedTest
-  @CsvSource(value = {"3,false", "4,true", "5,true"})
+  @CsvSource(value = {"3,true", "4,true", "5,false"})
   void 더_크거나_같다(int input, boolean expected) {
-    assertThat(PositiveNumber.of(4).greaterThan(PositiveNumber.of(input))).isEqualTo(expected);
+    assertThat(PositiveNumber.of(4).greaterOrEqual(PositiveNumber.of(input))).isEqualTo(expected);
   }
 }
