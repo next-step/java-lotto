@@ -1,6 +1,8 @@
-package lotto;
+package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoNumbers {
 	private final List<Integer> lottoNumbers;
@@ -25,6 +27,11 @@ public class LottoNumbers {
 
 	public List<Integer> getLottoNumbers() {
 		return lottoNumbers;
+	}
+
+	@Override
+	public String toString() {
+		return lottoNumbers.toString();
 	}
 
 }

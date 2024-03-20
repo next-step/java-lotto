@@ -1,11 +1,16 @@
 package lotto;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoRank;
+import lotto.domain.Lottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.HashMap;
 import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 
