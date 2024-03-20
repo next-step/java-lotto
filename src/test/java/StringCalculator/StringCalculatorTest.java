@@ -34,4 +34,22 @@ class StringCalculatorTest {
         assertThatThrownBy(() -> StringCalculator.calculate(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 나눗기() {
+        String input = "4 / 4";
+        int expected = 1;
+        int result = StringCalculator.calculate(input);
+
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    void 나눗기_정수값으로_떨어짐() {
+        String input =  "5 / 4";
+        int expected = 1;
+        int result = StringCalculator.calculate(input);
+
+        assertThat(result).isEqualTo(expected);
+    }
 }

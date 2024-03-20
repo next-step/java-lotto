@@ -40,6 +40,11 @@ public class StringCalculator {
                     int calculateResult = leftOperand - rightOperand;
                     result += calculateResult;
                 }
+
+                if (operator.equals("/")) {
+                    int calculateResult = leftOperand / rightOperand;
+                    result += calculateResult;
+                }
             }
         }
         return result;
