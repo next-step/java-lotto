@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.LottoMatchingService;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoTicket;
 
 import java.util.List;
 
@@ -15,9 +16,9 @@ public class ResultView {
         System.out.println(numbersOfLotto + "개를 구매했습니다.");
     }
 
-    public void printLottoTicketsNumbers(LottoMachine lottoMachine) {
-        for (int i = 0; i < lottoMachine.showNumberOfLottos(); i++) {
-            System.out.println((lottoMachine.showLottoTicketNumbers(i)));
+    public void printLottoTicketsNumbers(List<LottoTicket> lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets) {
+            System.out.println(lottoTicket.getNumbers());
         }
     }
 

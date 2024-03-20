@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoTicket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +17,10 @@ public class LottoMatchingService {
 
     public List<Integer> matchWinningNumber(LottoMachine lottoMachine, List<Integer> winningNumbers) {
         // 로또를 입력한 갯수에 구입금액에 맞춰 만든다
-        lottoMachine.makeLottos();
+        List<LottoTicket> lottoTickets = lottoMachine.generateLottoTickets();
         // 당첨 번호와 로또들의 번호를 각각 비교한다
-        for (int i = 0; i < lottoMachine.showNumberOfLottos(); i++) { // 로또 수만큼 순회
-            matchTimes = lottoMachine.showLottoTicketNumbers(i).stream()
+        for (int i = 0; i < lottoTickets.size(); i++) { // 로또 수만큼 순회
+            matchTimes = lottoTickets.stream()
                     .filter(winningNumbers::contains)
                     .count();
 

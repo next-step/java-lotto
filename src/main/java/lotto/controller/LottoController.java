@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoTicket;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -27,8 +28,8 @@ public class LottoController {
         inputView.inputNextLine();
 
         LottoMachine lottoMachine = new LottoMachine(numbersOfLotto);
-        lottoMachine.makeLottos();
-        resultView.printLottoTicketsNumbers(lottoMachine);
+        List<LottoTicket> lottoTickets = lottoMachine.generateLottoTickets();
+        resultView.printLottoTicketsNumbers(lottoTickets);
         resultView.printDoInputWinningNumbers();
 
         List<Integer> winningNumbers = inputView.getWinningNumbers();

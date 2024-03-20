@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoMachine {
@@ -13,19 +14,12 @@ public class LottoMachine {
         this.lottoTickets = new ArrayList<>();
     }
 
-    public void makeLottos() {
+    public List<LottoTicket> generateLottoTickets() {
         for (int i = 0; i < number; i++) {
             lottoTickets.add(new LottoTicket());
             lottoTickets.get(i).generate();
         }
-    }
-
-    public int showNumberOfLottos() {
-        return lottoTickets.size();
-    }
-
-    public List<Integer> showLottoTicketNumbers(int index) {
-        return lottoTickets.get(index).getNumbers();
+        return Collections.unmodifiableList(lottoTickets);
     }
 
 }
