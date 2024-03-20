@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class OperatorTest {
+class OperatorTest {
 
 
     @DisplayName("덧셈 결과 반환 테스트")
