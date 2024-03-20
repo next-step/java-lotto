@@ -1,5 +1,6 @@
 package lotto.infra;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.NumberGenerator;
 
@@ -11,10 +12,12 @@ public class RandomNumberGenerator implements NumberGenerator {
 
     @Override
     public List<Integer> generateNumbers() {
-        List<Integer> possibleNumbers = IntStream.range(LottoNumbers.MIN_NUMBER, LottoNumbers.MAX_NUMBER + 1).boxed().collect(Collectors.toList());
-
+        List<Integer> possibleNumbers = IntStream.range(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER + 1).boxed().collect(Collectors.toList());
         Collections.shuffle(possibleNumbers);
 
-        return possibleNumbers.subList(0, LottoNumbers.NUMBER_LEN);
+        List<Integer> generatedNumbers = possibleNumbers.subList(0, LottoNumbers.NUMBER_LEN);
+        Collections.sort(generatedNumbers);
+
+        return generatedNumbers;
     }
 }
