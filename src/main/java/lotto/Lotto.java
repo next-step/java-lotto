@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -32,5 +33,10 @@ public class Lotto {
         if ((int) numbers.stream().distinct().count() != LOTTO_NUMBERS_LIMIT) {
             throw new IllegalArgumentException("중복된 숫자가 있습니다.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }

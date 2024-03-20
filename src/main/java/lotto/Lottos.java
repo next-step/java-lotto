@@ -28,4 +28,11 @@ public class Lottos {
         }
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "[" +
+            lottos +
+            ']';
+    }
 }

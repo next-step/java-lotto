@@ -20,4 +20,15 @@ public class LottoResult {
         }
         return Math.floor(sum / payed * ROUND_STANDARD) / ROUND_STANDARD;
     }
+
+    public Map<LottoRank, Integer> getResult() {
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "LottoResult{" +
+            "result=" + result +
+            '}';
+    }
 }
