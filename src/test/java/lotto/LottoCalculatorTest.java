@@ -12,7 +12,7 @@ public class LottoCalculatorTest {
 
     @Test
     @DisplayName("1000원 미만일 때, 로또 구매 불가 테스트")
-    void purchaseMoneyError() {
+    void purchaseMoneyErrorTest() {
         assertThatThrownBy(() -> LottoCalculator.getLottoCount(Lotto.LOTTO_PRICE - 1))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("1000원");
