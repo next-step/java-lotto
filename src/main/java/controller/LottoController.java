@@ -26,9 +26,8 @@ public class LottoController {
         final LottoAmount lottoAmount = new LottoAmount(inputView.inputPurchaseAmount());
         final int numberOfManualLottoNumbers = inputView.inputNumberOfManualLottoNumbers();
         final int numberOfAutomaticLottoNumbers = lottoAmount.calculateAutomaticLottoCount(numberOfManualLottoNumbers);
-        final Lottos lottos = LottoFactory.create(numberOfAutomaticLottoNumbers);
-        final Lottos manualLottos = LottoFactory.create(inputView.inputManualLottoNumbers(numberOfManualLottoNumbers));
-        lottos.add(manualLottos);
+        final Lottos lottos = LottoFactory.create(numberOfAutomaticLottoNumbers,
+                inputView.inputManualLottoNumbers(numberOfManualLottoNumbers));
 
         outputView.printLottoPurchaseCount(numberOfAutomaticLottoNumbers, numberOfManualLottoNumbers);
         outputView.printPurchaseLottos(lottos.getLottos());

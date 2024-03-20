@@ -12,23 +12,12 @@ class LottoFactoryTest {
     void 로또_생성_테스트() {
         // given
         final int lottoCount = 3;
-
-        // when
-        final Lottos lottos = LottoFactory.create(lottoCount);
-
-        // then
-        assertThat(lottos.getLottos()).hasSize(3);
-    }
-
-    @Test
-    void 수동_로또_생성_테스트() {
-        // given
         final List<List<Integer>> numbers = List.of(List.of(1, 2, 3, 4, 5, 6), List.of(3, 4, 5, 6, 7, 8));
 
         // when
-        final Lottos lottos = LottoFactory.create(numbers);
+        final Lottos lottos = LottoFactory.create(lottoCount, numbers);
 
         // then
-        assertThat(lottos.getLottos()).hasSize(2);
+        assertThat(lottos.getLottos()).hasSize(5);
     }
 }

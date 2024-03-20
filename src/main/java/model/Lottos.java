@@ -18,10 +18,6 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    public void add(final Lottos manualLottos) {
-        lottos.addAll(manualLottos.getLottos());
-    }
-
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
