@@ -25,7 +25,7 @@ public class Lotto {
     }
 
     private void validDuplicatedLottoNumber(List<LottoNumber> numbers) {
-        if ((int) numbers.stream().distinct().count() != 6) {
+        if ((int) numbers.stream().distinct().count() != LOTTO_NUMBERS_LIMIT) {
             throw new IllegalArgumentException("중복된 숫자가 있습니다.");
         }
     }
