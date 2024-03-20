@@ -1,12 +1,11 @@
-package AutoLotto.model;
+package autoLotto.model;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class RandomLottoGeneratorStrategy implements LottoGeneratorStrategy {
     @Override
-    public List<Integer> lottoGenerator(List<Integer> lotto) {
+    public int[] lottoGenerator(List<Integer> lotto) {
         shuffleRandomNumbers(lotto);
         return getSixNumbers(lotto);
     }
@@ -15,11 +14,11 @@ public class RandomLottoGeneratorStrategy implements LottoGeneratorStrategy {
         Collections.shuffle(lotto);
     }
 
-    private List<Integer> getSixNumbers(List<Integer> lotto) {
-        List<Integer> result = new ArrayList<>();
+    private int[] getSixNumbers(List<Integer> lotto) {
+        int[] result = new int[6];
 
-        for (int i = 0; i < 6; i++) {
-            result.add(lotto.get(i));
+        for (int i = 0, j = 0; i < 6; i++, j++) {
+            result[j] = lotto.get(i);
         }
 
         return result;
