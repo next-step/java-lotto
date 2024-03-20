@@ -1,6 +1,6 @@
 package calculator.view;
 
-public class resultView {
+public class ResultView {
     private static final String CALCULRATE_RESULT = "연산 결과";
     private static final String COLON = " : ";
 
