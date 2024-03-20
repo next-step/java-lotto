@@ -3,6 +3,7 @@ package lotto.model;
 import lotto.exception.InvalidLottoException;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,7 +14,7 @@ public class Lotto {
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
-        this(new HashSet<>(lottoNumbers));
+        this(new LinkedHashSet<>(lottoNumbers));
     }
 
     public Lotto(Set<LottoNumber> lottoNumbers) {

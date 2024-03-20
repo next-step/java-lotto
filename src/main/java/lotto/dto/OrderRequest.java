@@ -22,4 +22,9 @@ public class OrderRequest {
     public List<Lotto> getManualLottos() {
         return manualLottos;
     }
+
+    public int automaticQuantity() {
+        return money.maxQuantity() - manualLottos.size();
+    }
+
 }

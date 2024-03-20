@@ -25,22 +25,14 @@ public class LottoController {
     }
 
     public void run() {
-        OrderRequest request = getOrderRequest();
-        LottoPaper lottoPaper = LottoMachine.purchase(request);
+        LottoPaper lottoPaper = LottoMachine.purchase(createOrderRequest());
 
-        List<LottoNumberResponse> lottoNumberResponses = convertToLottoNumberResponse(lottoPaper);
-        resultView.printOrderResponse(lottoNumberResponses);
+        printOrderResponse(lottoPaper);
 
-        Lotto winningNumberLotto = inputView.askWinningNumbers();
-        LottoNumber bonusNumber = inputView.askBonusNumber(winningNumberLotto);
-        WinningLotto winningInfo = new WinningLotto(winningNumberLotto, bonusNumber);
-
-        Prize prize = lottoPaper.matches(winningInfo);
-
-        resultView.printResult(prize, prize.rateOfReturn(lottoPaper.getQuantity()));
+        printLottoPrizeResult(lottoPaper);
     }
 
-    private OrderRequest getOrderRequest() {
+    private OrderRequest createOrderRequest() {
         Money money = inputView.askMoney();
         int manualQuantity = inputView.askManualQuantity(money);
         List<Lotto> manualLottos = inputView.askManualLotto(manualQuantity);
@@ -48,10 +40,29 @@ public class LottoController {
         return new OrderRequest(money, manualLottos);
     }
 
+    private void printOrderResponse(LottoPaper lottoPaper) {
+        List<LottoNumberResponse> lottoNumberResponses = convertToLottoNumberResponse(lottoPaper);
+        int manaulQuantity = lottoPaper.getManualQuantity();
+        int automaticQuantity = lottoPaper.getAutomaticQuantity();
+
+        resultView.printOrderResponse(lottoNumberResponses, manaulQuantity, automaticQuantity);
+    }
+
     private List<LottoNumberResponse> convertToLottoNumberResponse(LottoPaper lottoPaper) {
         List<List<String>> lottoNumberList = lottoPaper.mapToList();
         return lottoNumberList.stream()
                 .map(LottoNumberResponse::new)
                 .collect(Collectors.toList());
+    }
+
+    private void printLottoPrizeResult(LottoPaper lottoPaper) {
+        Lotto winningNumberLotto = inputView.askWinningNumbers();
+        LottoNumber bonusNumber = inputView.askBonusNumber(winningNumberLotto);
+        WinningLotto winningInfo = new WinningLotto(winningNumberLotto, bonusNumber);
+
+        Prize prize = lottoPaper.matches(winningInfo);
+        int quantityTotal = lottoPaper.getQuantityTotal();
+
+        resultView.printResult(prize, prize.rateOfReturn(quantityTotal));
     }
 }

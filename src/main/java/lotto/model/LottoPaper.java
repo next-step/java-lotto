@@ -3,28 +3,31 @@ package lotto.model;
 import lotto.exception.InvalidLottoException;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
 public class LottoPaper {
-    private final List<Lotto> lottos;
+    private final List<Lotto> automaticLottos;
+    private final List<Lotto> manualLottos;
 
-    public LottoPaper(List<Lotto> lottos) {
-        if (lottos == null) {
-            throw new InvalidLottoException("Null 허용하지 않습니다");
+    public LottoPaper(List<Lotto> automaticLottos, List<Lotto> manualLottos) {
+        if (automaticLottos == null || automaticLottos.isEmpty()) {
+            throw new InvalidLottoException("자동 구매 로또에 null이나 빈 값은 허용하지 않습니다");
         }
 
-        this.lottos = lottos;
+        if (manualLottos == null) {
+            throw new InvalidLottoException("수동 구매 로또에 null은 허용하지 않습니다");
+        }
+
+        this.automaticLottos = automaticLottos;
+        this.manualLottos = manualLottos;
     }
 
     public List<List<String>> mapToList() {
-        return this.lottos.stream()
+        return merge().stream()
                 .map(Lotto::mapToList)
                 .collect(toList());
-    }
-
-    public int getQuantity() {
-        return this.lottos.size();
     }
 
     public Prize matches(WinningLotto winningLotto) {
@@ -32,8 +35,26 @@ public class LottoPaper {
     }
 
     private List<Rank> toRanks(WinningLotto winningLotto) {
-        return this.lottos.stream()
+        return merge().stream()
                 .map(lotto -> lotto.match(winningLotto))
                 .collect(toList());
     }
+
+    private List<Lotto> merge() {
+        return Stream.concat(this.manualLottos.stream(), this.automaticLottos.stream())
+                .collect(toList());
+    }
+
+    public int getAutomaticQuantity() {
+        return this.automaticLottos.size();
+    }
+
+    public int getManualQuantity() {
+        return this.manualLottos.size();
+    }
+
+    public int getQuantityTotal() {
+        return this.automaticLottos.size() + this.manualLottos.size();
+    }
+
 }
