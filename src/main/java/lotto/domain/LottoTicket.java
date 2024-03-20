@@ -7,13 +7,14 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoTicket {
-    private final static List<Integer> LottoNumbers = IntStream.range(0, 45)
+    private final static List<LottoNumber> LottoNumbers = IntStream.range(0, 45)
             .mapToObj(i -> i + 1)
+            .map(LottoNumber::new)
             .collect(Collectors.toList());
 
-    private final TreeSet<Integer> numbers;
+    private final TreeSet<LottoNumber> numbers;
 
-    public LottoTicket(TreeSet<Integer> numbers) {
+    public LottoTicket(TreeSet<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
@@ -23,6 +24,10 @@ public class LottoTicket {
                 .stream()
                 .sorted()
                 .collect(Collectors.toCollection(TreeSet::new));
+    }
+
+    public TreeSet<LottoNumber> getNumbers() {
+        return numbers;
     }
 
     public int getMatchCount(WinningNumbers winningNumbers) {

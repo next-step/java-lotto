@@ -8,7 +8,7 @@ public class WinningNumbers {
     private final static String SPLIT_DELIMITER = ", ";
     private final static int LOTTO_NUMBER_COUNT = 6;
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
     public WinningNumbers(String input) {
         if (hasNoInput(input)) {
@@ -22,8 +22,8 @@ public class WinningNumbers {
         return input == null || input.isBlank();
     }
 
-    private List<Integer> toWinningNumbers(String input) {
-        List<Integer> winningNumbers = Arrays.stream(toStringArray(input))
+    private List<LottoNumber> toWinningNumbers(String input) {
+        List<LottoNumber> winningNumbers = Arrays.stream(toStringArray(input))
                 .map(this::toLottoNumber)
                 .collect(Collectors.toList());
 
@@ -32,7 +32,7 @@ public class WinningNumbers {
         return winningNumbers;
     }
 
-    private void checkWinningNumberSize(List<Integer> winningNumbers) {
+    private void checkWinningNumberSize(List<LottoNumber> winningNumbers) {
         if (winningNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("당첨숫자 6개를 입력하세요.");
         }
@@ -42,7 +42,7 @@ public class WinningNumbers {
         return input.split(SPLIT_DELIMITER);
     }
 
-    private Integer toLottoNumber(String input) {
+    private LottoNumber toLottoNumber(String input) {
         int number;
         try {
             number = Integer.parseInt(input);
@@ -50,18 +50,10 @@ public class WinningNumbers {
             throw new IllegalArgumentException("올바른 숫자를 입력하세요.");
         }
 
-        if (!isLottoNumber(number)) {
-            throw new IllegalArgumentException("로또숫자는 1-45 사이의 수를 입력하세요.");
-        }
-
-        return number;
+        return new LottoNumber(number);
     }
 
-    private boolean isLottoNumber(int number) {
-        return number >= 1 && number <= 45;
-    }
-
-    public boolean contains(int number) {
+    public boolean contains(LottoNumber number) {
         return numbers.contains(number);
     }
 }

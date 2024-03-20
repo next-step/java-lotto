@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -26,7 +27,7 @@ class WinningNumbersTest {
     @Test
     void 숫자를_포함하는지() {
         WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6");
-        assertThat(winningNumbers.contains(3)).isTrue();
+        assertThat(winningNumbers.contains(new LottoNumber(3))).isTrue();
     }
 
 }
