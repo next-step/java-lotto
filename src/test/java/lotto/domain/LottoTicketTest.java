@@ -20,7 +20,7 @@ public class LottoTicketTest {
         List<Integer> specifiedNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         LottoTicket lottoTicket = new LottoTicket() {
             @Override
-            protected List<Integer> generateRandomNumbers() {
+            protected List<Integer> randomNumbers() {
                 return specifiedNumbers;
             }
         };

@@ -6,13 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMatchingService {
-    public List<Integer> matchWinningNumber(LottoMachine lottoMachine, List<Integer> winningNumbers) {
+    //todo: refactoring
         long matchTimes;
 
         int matchThreeTimes = 0;
         int matchFourTimes = 0;
         int matchFiveTimes = 0;
         int matchSixTimes = 0;
+    public List<Integer> matchWinningNumber(LottoMachine lottoMachine, List<Integer> winningNumbers) {
 
         // 로또를 입력한 갯수에 구입금액에 맞춰 만든다
         lottoMachine.makeLottos();

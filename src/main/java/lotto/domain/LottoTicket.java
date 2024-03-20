@@ -13,10 +13,8 @@ public class LottoTicket {
     }
 
     public List<Integer> generate() {
-        List<Integer> numbers = generateRandomNumbers();
-
         for (int i = 0; i < 6; i++) {
-            this.numbers.add(numbers.get(i));
+            this.numbers.add(randomNumbers().get(i));
         }
 
         Collections.sort(this.numbers);
@@ -24,7 +22,7 @@ public class LottoTicket {
         return this.numbers;
     }
 
-    protected List<Integer> generateRandomNumbers() {
+    protected List<Integer> randomNumbers() {
         List<Integer> numbers = new ArrayList<>();
 
         for (int i = 0; i < 45; i++) {
