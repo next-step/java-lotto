@@ -9,7 +9,7 @@ public class Lottos {
 
     public Lottos(int price) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < price / 1000; i++) {
+        for (int i = 0; i < price / Lotto.PRICE; i++) {
             lottos.add(new Lotto());
         }
         this.lottos = lottos;
