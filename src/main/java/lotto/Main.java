@@ -1,10 +1,8 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.exception.IllegalPurchaseAmountException;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
-import lotto.validator.InputValidator;
 
 import java.util.List;
 

@@ -23,7 +23,10 @@ public class ResultView {
     private static String formatLottoTicketNumbers(LottoTickets lottoTickets) {
         StringBuilder stringBuilder = new StringBuilder();
         for (LottoTicket ticket : lottoTickets.get()) {
-            stringBuilder.append(formatLottoNumber(ticket)).append(System.lineSeparator());
+            stringBuilder.append("[")
+                    .append(formatLottoNumber(ticket))
+                    .append("]")
+                    .append(System.lineSeparator());
         }
         stringBuilder.append(System.lineSeparator());
         return stringBuilder.toString();
