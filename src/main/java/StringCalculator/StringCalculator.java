@@ -26,7 +26,7 @@ public class StringCalculator {
     private static void process(Queue<String> operators, Deque<Integer> operands) {
         while (!operators.isEmpty()) {
             String operator = operators.poll();
-            operands.addFirst(cal(operator, operands.poll(), operands.poll()));
+            operands.addFirst(operation(operator, operands.poll(), operands.poll()));
         }
     }
 
@@ -49,40 +49,9 @@ public class StringCalculator {
             operators.offer(string);
         }
     }
-
-    private static int cal(String operator, int leftOperand, int rightOperand) {
-        if (operator.equals("+")) {
-            return add(leftOperand, rightOperand);
-        }
-
-        if (operator.equals("-")) {
-            return minus(leftOperand, rightOperand);
-        }
-
-        if (operator.equals("/")) {
-            return divide(leftOperand, rightOperand);
-        }
-
-        if (operator.equals("*")) {
-            return multiply(leftOperand, rightOperand);
-        }
-        throw new IllegalArgumentException();
-    }
-
-    private static int multiply(int leftOperand, int rightOperand) {
-        return leftOperand * rightOperand;
-    }
-
-    private static int divide(int leftOperand, int rightOperand) {
-        return leftOperand / rightOperand;
-    }
-
-    private static int minus(int leftOperand, int rightOperand) {
-        return leftOperand - rightOperand;
-    }
-
-    private static int add(int leftOperand, int rightOperand) {
-        return leftOperand + rightOperand;
+    private static int operation(String operator, int leftOperand, int rightOperand) {
+        Operator operation = Operator.findOperation(operator);
+        return operation.calculate(leftOperand, rightOperand);
     }
 
     private static void validate(String input) {
