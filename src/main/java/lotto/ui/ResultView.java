@@ -1,12 +1,10 @@
 package lotto.ui;
 
-import lotto.domain.LottoPrize;
-import lotto.domain.LottoStatistics;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
+import lotto.domain.*;
 
 import java.text.MessageFormat;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -25,10 +23,16 @@ public class ResultView {
     private static String formatLottoTicketNumbers(LottoTickets lottoTickets) {
         StringBuilder stringBuilder = new StringBuilder();
         for (LottoTicket ticket : lottoTickets.get()) {
-            stringBuilder.append(ticket.get()).append(System.lineSeparator());
+            stringBuilder.append(formatLottoNumber(ticket)).append(System.lineSeparator());
         }
         stringBuilder.append(System.lineSeparator());
         return stringBuilder.toString();
+    }
+
+    private static String formatLottoNumber(LottoTicket ticket) {
+        return ticket.getLottoNumbers().stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(", "));
     }
 
     private static String formatPurchaseCount(int count) {
@@ -52,7 +56,7 @@ public class ResultView {
 
     private static String formatStatistic(LottoStatistics statisticsMap, LottoPrize prize) {
         return MessageFormat.format("{0}개 일치 ({1}원) - {2}개"
-                , prize.getMatchCount(), prize.getMatchCount(), statisticsMap.getMatchCount(prize));
+                , prize.getMatchCount(), prize.getPrize(), statisticsMap.getMatchCount(prize));
     }
 
     public static String formatProfitRate(LottoStatistics statisticsMap, int purchaseAmount) {

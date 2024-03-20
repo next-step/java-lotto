@@ -25,6 +25,10 @@ public class LottoNumber {
         return number < NUMBER_RANGE_FROM || number > NUMBER_RANGE_TO;
     }
 
+    public int get() {
+        return this.number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

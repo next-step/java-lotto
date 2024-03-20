@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,8 +29,12 @@ public class LottoTicket {
                 .count();
     }
 
-    public List<LottoNumber> get() {
-        return this.numbers;
+    public List<Integer> getLottoNumbers() {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        for (LottoNumber number : this.numbers) {
+            lottoNumbers.add(number.get());
+        }
+        return lottoNumbers;
     }
 
 }
