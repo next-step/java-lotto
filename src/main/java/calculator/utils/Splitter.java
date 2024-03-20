@@ -3,9 +3,7 @@ package calculator.utils;
 public class Splitter {
     private static final String EMPTY_SPACE_DELIMITER = " ";
 
-    private Splitter() {
-
-    }
+    private Splitter() {}
 
     public static String[] byEmptySpace(String input) {
         assertNotBlank(input);

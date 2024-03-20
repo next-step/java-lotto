@@ -56,6 +56,7 @@ public class OperatorTest {
     @Test
     void throw_Exception_when_not_support_operator() {
         String sign = "%";
-        assertThatIllegalArgumentException().isThrownBy(() -> Operator.findByName(sign));
+        assertThatIllegalArgumentException().isThrownBy(() -> Operator.findByName(sign))
+                .withMessage("문자열 계산기에 유효하지 않은 기호입니다.");
     }
 }
