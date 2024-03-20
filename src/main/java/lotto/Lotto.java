@@ -16,6 +16,12 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public int countMatch(WinningLotto winningLotto) {
+        return (int) winningLotto.getWinningLotto().stream()
+            .filter(numbers::contains)
+            .count();
+    }
+
     private void validLottoSize(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBERS_LIMIT) {
             throw new IllegalArgumentException("로또 하나 당 6개의 숫자를 가져야합니다.");
