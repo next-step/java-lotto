@@ -1,0 +1,47 @@
+package lotto.ui;
+
+import lotto.domian.LottoRank;
+import lotto.domian.LottoResult;
+import lotto.domian.LottoTickets;
+
+import java.util.stream.Collectors;
+
+public class OutputHandler {
+
+    public OutputHandler() {}
+
+    public void printWinnerNumber(String number){
+        System.out.println(number);
+    };
+
+    public void printResultHeader(){
+        System.out.println("당첨 통계");
+        System.out.println("------------------");
+    }
+
+    public void printResult(LottoResult result){
+        for(LottoRank rank: LottoRank.values()){
+            int count = result.getResultCount(rank);
+            if (rank.getMatchCount() > 0) {
+                System.out.printf("%s %d개 일치 (%d원) - %d개\n",
+                        rank.getRank(),rank.getMatchCount(), rank.getPrizeMoney(), count);
+            } else {
+                System.out.printf("%s - %d개\n", rank.getRank(), count);
+            }
+        }
+    }
+
+    public void printEarningsRate(LottoResult result, int money){
+        float rate = result.calculateTotalProfitRate(money) ; // 수익률을 퍼센트로 변경
+        if (rate % 1.0 == 0) {
+            System.out.printf("총 수익률은 %.0f%% 입니다.\n", rate);
+        } else {
+            System.out.printf("총 수익률은 %.2f%% 입니다.\n", rate);
+        }
+    }
+
+    public void printTickets(LottoTickets tickets){
+        tickets.getLottoTickets()
+                .forEach(ticket -> System.out.println(ticket.toString()));
+    }
+}
