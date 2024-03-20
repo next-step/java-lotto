@@ -1,24 +1,8 @@
 package calculator;
 
-public class Calculator {
+public class Validator {
 
     private static final String NUMBER_REGEX = "\\d+";
-
-    public static int add(int input1, int input2) {
-        return input1 + input2;
-    }
-
-    public static int minus(int input1, int input2) {
-        return input1 - input2;
-    }
-
-    public static int multiply(int input1, int input2) {
-        return input1 * input2;
-    }
-
-    public static int divide(int input1, int input2) {
-        return input1 / input2;
-    }
 
     public static void validateInputNullOrEmpty(String input) {
         if (input == null || input.isBlank()) {
