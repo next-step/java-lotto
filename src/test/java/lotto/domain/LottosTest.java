@@ -6,12 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lotto.domain.Ball;
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Prize;
-import lotto.domain.Prizes;
-import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
