@@ -52,12 +52,10 @@ public class CalculatorQueue {
 
   private static void validateIsCalculatePossible(String input, boolean numberOderFlag, String value, List<Operand> operands, List<Operator> operators) {
     if (numberOderFlag) {
-      operands.add(new Operand(Operand.isOperand(value, input)));
+      operands.add(Operand.of(value, input));
       return;
     }
 
-    if (Operator.isOperator(value)) {
-      operators.add(new Operator(value));
-    }
+    operators.add(Operator.of(value));
   }
 }

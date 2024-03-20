@@ -13,7 +13,11 @@ public class Operand {
     this.operand = operand;
   }
 
-  public static int isOperand(String value, String input) {
+  public static Operand of(String value, String input) {
+    return new Operand(toInt(value, input));
+  }
+
+  private static int toInt(String value, String input) {
     try {
       return Integer.parseInt(value);
     } catch (NumberFormatException nfe) {

@@ -4,21 +4,23 @@ import calculator.domain.type.StringOperator;
 
 import java.util.Objects;
 
+import static calculator.domain.type.StringOperator.OPERATIONS;
+
+
 public class Operator {
 
-  public static final String THIS_OPERATOR_IS_NOT_SUPPORTED = "%s(은)는 지원하지 않는 연산자 입니다. 입력 값을 다시 확인해주세요.";
   private final StringOperator operator;
 
-  public Operator(String operator) {
-    this.operator = StringOperator.convert(operator).get();
+  public Operator(StringOperator operator) {
+    this.operator = operator;
   }
 
-  public static boolean isOperator(String value) {
-    if (!StringOperator.allOperators().contains(value)) {
-      throw new IllegalArgumentException(String.format(THIS_OPERATOR_IS_NOT_SUPPORTED, value));
-    }
+  public static Operator of(String input) {
+    return new Operator(StringOperator.convert(input));
+  }
 
-    return Boolean.TRUE;
+  public int apply(int firstOperand, int secondOperand) {
+    return OPERATIONS.get(this.operator).calculate(firstOperand, secondOperand);
   }
 
   @Override
