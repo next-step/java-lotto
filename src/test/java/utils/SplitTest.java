@@ -10,19 +10,28 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class SplitTest {
 
+    @DisplayName("입력받은 문자열이 null 이거나 비어있다면 IllegalArgumentExcpetion을 던진다.")
+    @ParameterizedTest
+    @NullAndEmptySource
+    public void throwExceptionWhenEmptyString(String input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> Splitter.byEmptySpace(input));
+    }
+
     @DisplayName("입력받은 문자열을 공백(스페이스) 문자로 split 할 수 있다")
     @Test
-    void split() {
+    void byEmptySpace() {
         final String input = "2 +  3 * 4 / 2";
         final String[] result = Splitter.byEmptySpace(input);
 
         assertThat(result).containsExactly("2", "+", "", "3", "*", "4", "/", "2");
     }
 
-    @DisplayName("입력받은 문자열이 null 이거나 비어있다면 IllegalArgumentExcpetion을 던진다.")
-    @ParameterizedTest
-    @NullAndEmptySource
-    public void throwExceptionWhenEmptyString(String input) {
-        assertThatIllegalArgumentException().isThrownBy(() -> Splitter.byEmptySpace(input));
+    @DisplayName("입력받은 문자열을 쉼표 문자로 split 할 수 있다")
+    @Test
+    void byComma() {
+        final String input = "1,2,3,4,5,6";
+        final String[] result = Splitter.byComma(input);
+
+        assertThat(result).containsExactly("1", "2", "3", "4", "5", "6");
     }
 }
