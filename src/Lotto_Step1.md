@@ -68,5 +68,5 @@ github desktop push test
 - [X] 테스트 코드에서 @DisplayName 활용
 - [X] 개념이 다른 선언부 끼리는 개행으로 개념 분리
 - [ ] calculate메소드 Stream API의 reduce 함수로
-- [ ] Calculator 클래스 유틸리티 클래스 -> 생성자 제한(public -> private)
+- [X] Calculator 클래스 유틸리티 클래스 -> 생성자 제한(public -> private)
 - [ ] for if 로 인한 indent, line length -> 사칙연산을 열거형 객체로 만들어서 책임 분리 -> 문자열이 어떤 연산자인지 찾는 책임을 열거형 객체로 전달

@@ -36,48 +36,42 @@ public class CalculatorTest {
     @ValueSource(strings = {PLUS})
     @DisplayName("단순 더하기")
     void 더하기(String input) {
-        Calculator calculator = new Calculator();
-        assertThat(calculator.calculator(input)).isEqualTo(2);
+        assertThat(Calculator.calculator(input)).isEqualTo(2);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {MULTIPLY})
     @DisplayName("단순 곱하기")
     void 곱하기(String input) {
-        Calculator calculator = new Calculator();
-        assertThat(calculator.calculator(input)).isEqualTo(1);
+        assertThat(Calculator.calculator(input)).isEqualTo(1);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {SUBTRACT})
     @DisplayName("단순 나누기")
     void 나누기(String input) {
-        Calculator calculator = new Calculator();
-        assertThat(calculator.calculator(input)).isEqualTo(1);
+        assertThat(Calculator.calculator(input)).isEqualTo(1);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {DIVIDE})
     @DisplayName("단순 빼기")
     void 빼기(String input) {
-        Calculator calculator = new Calculator();
-        assertThat(calculator.calculator(input)).isEqualTo(1);
+        assertThat(Calculator.calculator(input)).isEqualTo(1);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {DEFAULT})
     @DisplayName("혼합된 사칙연산")
     void 복합연산(String input) {
-        Calculator calculator = new Calculator();
-        assertThat(calculator.calculator(input)).isEqualTo(6);
+        assertThat(Calculator.calculator(input)).isEqualTo(6);
     }
 
     @ParameterizedTest
     @NullAndEmptySource
     @DisplayName("공백 혹은 null 입력")
     void null_공백_입력(String input) {
-        Calculator calculator = new Calculator();
-        assertThatThrownBy(() -> calculator.calculator(input))
+        assertThatThrownBy(() -> Calculator.calculator(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(NULL_AND_EMPTY_VALIDATE);
     }
@@ -86,8 +80,7 @@ public class CalculatorTest {
     @ValueSource(strings = {NOT_OPERATOR})
     @DisplayName("사칙연산자 아닌 연산자 입력")
     void 사칙연산자_아님(String input) {
-        Calculator calculator = new Calculator();
-        assertThatThrownBy(() -> calculator.calculator(input))
+        assertThatThrownBy(() -> Calculator.calculator(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(OPERATOR_VALIDATE);
     }

@@ -11,9 +11,14 @@ public class Calculator {
     private static final String MULTIPLY = "*";
     private static final String DIVIDE = "/";
     private static final int START_NUMBER = 0;
-
     public static final String NULL_AND_EMPTY_VALIDATE  = "계산식을 입력해주세요";
     public static final String OPERATOR_VALIDATE  = "사칙연산 기호만 입력해주세요";
+    public static final String NO_INSTANCE  = "유틸리티 클래스를 인스턴스화할 수 없습니다!";
+
+
+    private Calculator() {
+        throw new IllegalStateException(NO_INSTANCE);
+    }
 
     public static int calculator(String rawString) {
         validate(rawString);
