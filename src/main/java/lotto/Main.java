@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoStatistics;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketMachine;
-import lotto.domain.LottoTickets;
+import lotto.domain.*;
 import lotto.exception.IllegalPurchaseAmountException;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
@@ -26,7 +23,7 @@ public class Main {
             LottoStatistics statisticsMap = new LottoStatistics(lottoTickets, new LottoTicket(winNumbers));
 
             ResultView.printLottoStatistics(statisticsMap, purchaseAmount);
-        } catch (IllegalPurchaseAmountException e) {
+        } catch (IllegalArgumentException e) {
             ResultView.printException(e);
         } catch (Exception e) {
             ResultView.printException("예기치 못한 예외가 발생했습니다.");

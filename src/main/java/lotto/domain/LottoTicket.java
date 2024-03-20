@@ -7,7 +7,12 @@ public class LottoTicket {
     private final List<Integer> numbers;
 
     public LottoTicket(List<Integer> numbers) {
+        (new LottoNumbers()).validate(numbers);
         this.numbers = numbers;
+    }
+
+    public LottoTicket(LottoNumbers lottoNumbers) {
+        this(lottoNumbers.auto());
     }
 
     public LottoPrize getPrize(LottoTicket winLottoTicket) {

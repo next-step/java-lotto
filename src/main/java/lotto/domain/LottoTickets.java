@@ -13,8 +13,8 @@ public class LottoTickets {
     }
 
     public static LottoTickets auto(int count) {
-        List<LottoTicket> tickets = Stream.generate(LottoNumberGenerator::generate)
-                .map(LottoTicket::new)
+        LottoNumbers lottoNumbers = new LottoNumbers();
+        List<LottoTicket> tickets = Stream.generate(() -> new LottoTicket(lottoNumbers))
                 .limit(count)
                 .collect(Collectors.toList());
         return new LottoTickets(tickets);
