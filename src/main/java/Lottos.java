@@ -33,11 +33,7 @@ public class Lottos {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Lotto lotto : lottos) {
-            sb.append(lotto).append("\n");
-        }
-        return sb.toString();
+        return lottos.toString();
     }
 
     public double rateOfReturn(Lotto winningLotto) {

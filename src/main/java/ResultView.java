@@ -7,7 +7,10 @@ public class ResultView {
 
     public static void print(Lottos lottos) {
         System.out.printf("%d개를 구입하였습니다.\n", lottos.getLottoCount());
-        System.out.println(lottos);
+        String substring = lottos.toString().substring(1, lottos.toString().length() - 1);
+        String result = substring.replaceAll("], ", "]\n");
+        System.out.println(result);
+        System.out.println();
     }
 
     public static void printRanks(Ranks ranks) {
@@ -21,6 +24,6 @@ public class ResultView {
     }
 
     public static void printRateOfReturn(double rateOfReturn) {
-        System.out.printf("총 수익률은 %f 입니다.\n", rateOfReturn);
+        System.out.printf("총 수익률은 %.2f 입니다.\n", rateOfReturn);
     }
 }
