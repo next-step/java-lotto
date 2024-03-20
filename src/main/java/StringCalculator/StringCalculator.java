@@ -1,64 +1,66 @@
 package StringCalculator;
 
 import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Stack;
+import java.util.Queue;
 import java.util.regex.Pattern;
+import java.util.zip.ZipOutputStream;
 
 public class StringCalculator {
-
     private static final Pattern CHECK_NUMBER_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
-    private static final int CALCULATE_CONDITION = 2;
 
     public static int calculate(String input) {
         validate(input);
-        
+
         List<String> strings = Arrays.asList(input.split(" "));
-        Stack<Integer> operands = new Stack<>();
-        int result = 0;
-        String operator = null;
+        Deque<Integer> operands = new LinkedList<>();
+        Queue<String> operators = new LinkedList<>();
+
         for (String string : strings) {
-            if (isNumber(string)) {
-                operands.push(Integer.parseInt(string));
-            } else {
-                operator = string;
-            }
-
-            if (operands.size() == CALCULATE_CONDITION) {
-
-                if (Objects.isNull(operator)) {
-                    throw new IllegalArgumentException();
-                }
-
-                int rightOperand = operands.pop();
-                int leftOperand = operands.pop();
-
-                int calculateResult = 0;
-                if (operator.equals("+")) {
-                    calculateResult = add(leftOperand, rightOperand);
-                    result = calculateResult;
-                }
-
-                if (operator.equals("-")) {
-                    calculateResult = minus(leftOperand, rightOperand);
-                    result = calculateResult;
-                }
-
-                if (operator.equals("/")) {
-                    calculateResult = divide(leftOperand, rightOperand);
-                    result = calculateResult;
-                }
-
-                if (operator.equals("*")) {
-                    calculateResult = multiply(leftOperand, rightOperand);
-                    result = calculateResult;
-                }
-                operands.clear();
-                operands.push(calculateResult);
-            }
+            initOperands(string, operands);
+            initOperators(string, operators);
         }
-        return result;
+
+        while (!operators.isEmpty()) {
+            String operator = operators.poll();
+            operands.addFirst(cal(operator, operands.poll(), operands.poll()));
+        }
+
+        return operands.peek();
+    }
+
+    private static void initOperands(String string, Queue<Integer> operands) {
+        if (isNumber(string)) {
+            operands.offer(Integer.parseInt(string));
+        }
+    }
+
+    private static void initOperators(String string, Queue<String> operators) {
+        if (!isNumber(string)) {
+            operators.offer(string);
+        }
+    }
+
+    private static int cal(String operator, int leftOperand, int rightOperand) {
+        if (operator.equals("+")) {
+            return add(leftOperand, rightOperand);
+        }
+
+        if (operator.equals("-")) {
+            return minus(leftOperand, rightOperand);
+        }
+
+        if (operator.equals("/")) {
+            return divide(leftOperand, rightOperand);
+        }
+
+        if (operator.equals("*")) {
+            return multiply(leftOperand, rightOperand);
+        }
+        throw new IllegalArgumentException();
     }
 
     private static int multiply(int leftOperand, int rightOperand) {
