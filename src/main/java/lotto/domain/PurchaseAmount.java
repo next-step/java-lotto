@@ -18,6 +18,10 @@ public class PurchaseAmount {
     return this.amount == amount;
   }
 
+  public int amount() {
+    return amount;
+  }
+
   private void validate(int amount) {
 
     if (amount <= 0 || amount % PRICE_PER_TICKET != 0) {

@@ -38,12 +38,4 @@ public class WinningNumbersTest {
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining(String.format(INVALID_LOTTO_NUMBER_SIZE, given));
   }
-
-  @Test
-  @DisplayName("지난 주 당첨 번호 기준, 일치하는 숫자 갯수 구하는 기능")
-  void winningNumbersTest4() {
-    List<Integer> given = List.of(1, 2, 3, 4, 5, 6);
-    LottoTicket winningNumbers = LottoTicket.generate(given);
-
-  }
 }
