@@ -1,11 +1,7 @@
 package lotto.model;
 
-import lotto.dto.OrderRequest;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static lotto.validation.LottoMachineValidator.assertMoney;
 
 public class LottoMachine {
     public static final int LOTTO_PER_MONEY = 1_000;
@@ -13,13 +9,10 @@ public class LottoMachine {
     private LottoMachine() {
     }
 
-    public static LottoPaper purchase(OrderRequest request) {
-        Money money = request.getMoney();
-
-        assertMoney(money);
-
-        List<Lotto> manualLottos = request.getManualLottos();
-        List<Lotto> automaticLottos = createAutomaticLottos(request.automaticQuantity());
+    public static LottoPaper purchase(Money money, List<Lotto> manualLottos) {
+        int maxQuantity = money.maxQuantity();
+        int automaticQuantity = maxQuantity - manualLottos.size();
+        List<Lotto> automaticLottos = createAutomaticLottos(automaticQuantity);
 
         return new LottoPaper(automaticLottos, manualLottos);
     }

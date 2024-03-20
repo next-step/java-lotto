@@ -1,3 +1,12 @@
+### 4단계 피드백
+
+- [x] LottoMachineValidator -> MoneyValidator renaming
+- [x] assertMoney(..) 파라미터 타입, 조건식 수정
+- [x] Money 생성자 할당 전에 유효성 검사하도록 수정
+- [x] 로또 구매 요청시 OrderRequest (dto) 제거
+
+---
+
 ### 4단계 - 로또 (수동)
 
 - [x] 구매 금액 원시값을 포장하는 Money 클래스 생성한다

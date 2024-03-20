@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-import static lotto.validation.LottoMachineValidator.assertMoney;
+import static lotto.validation.MoneyValidator.assertMoney;
 import static lotto.validation.WinningInfoValidator.assertDuplicatedBonus;
 
 public class InputView {
@@ -24,12 +24,11 @@ public class InputView {
 
         try {
             int amount = toInt(SCANNER.nextLine());
-            Money money = new Money(amount);
 
-            assertMoney(money);
+            assertMoney(amount);
 
-            return money;
-        } catch (InvalidLottoException e) {
+            return new Money(amount);
+        } catch (IllegalArgumentException | InvalidLottoException e) {
             System.out.println(e.getMessage());
         }
 
@@ -45,7 +44,7 @@ public class InputView {
             money.assertPurchasable(quantity);
 
             return quantity;
-        } catch (InvalidLottoException e) {
+        } catch (IllegalArgumentException | InvalidLottoException e) {
             System.out.println(e.getMessage());
         }
 

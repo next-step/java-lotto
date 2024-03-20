@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.dto.LottoNumberResponse;
-import lotto.dto.OrderRequest;
 import lotto.model.Lotto;
 import lotto.model.LottoMachine;
 import lotto.model.LottoNumber;
@@ -25,27 +24,27 @@ public class LottoController {
     }
 
     public void run() {
-        LottoPaper lottoPaper = LottoMachine.purchase(createOrderRequest());
+        LottoPaper lottoPaper = requestLottoOrder();
 
         printOrderResponse(lottoPaper);
 
         printLottoPrizeResult(lottoPaper);
     }
 
-    private OrderRequest createOrderRequest() {
+    private LottoPaper requestLottoOrder() {
         Money money = inputView.askMoney();
         int manualQuantity = inputView.askManualQuantity(money);
         List<Lotto> manualLottos = inputView.askManualLotto(manualQuantity);
 
-        return new OrderRequest(money, manualLottos);
+        return LottoMachine.purchase(money, manualLottos);
     }
 
     private void printOrderResponse(LottoPaper lottoPaper) {
         List<LottoNumberResponse> lottoNumberResponses = convertToLottoNumberResponse(lottoPaper);
-        int manaulQuantity = lottoPaper.getManualQuantity();
+        int manualQuantity = lottoPaper.getManualQuantity();
         int automaticQuantity = lottoPaper.getAutomaticQuantity();
 
-        resultView.printOrderResponse(lottoNumberResponses, manaulQuantity, automaticQuantity);
+        resultView.printOrderResponse(lottoNumberResponses, manualQuantity, automaticQuantity);
     }
 
     private List<LottoNumberResponse> convertToLottoNumberResponse(LottoPaper lottoPaper) {

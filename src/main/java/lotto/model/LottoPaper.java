@@ -12,7 +12,7 @@ public class LottoPaper {
     private final List<Lotto> manualLottos;
 
     public LottoPaper(List<Lotto> automaticLottos, List<Lotto> manualLottos) {
-        if (automaticLottos == null || automaticLottos.isEmpty()) {
+        if (automaticLottos == null) {
             throw new InvalidLottoException("자동 구매 로또에 null이나 빈 값은 허용하지 않습니다");
         }
 

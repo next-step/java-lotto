@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.exception.InvalidLottoException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -20,7 +19,7 @@ class MoneyTest {
     @ValueSource(ints = {-1, 999})
     void 천원미만의_금액은_예외를던진다(int given) {
         assertThatThrownBy(() -> new Money(given))
-                .isInstanceOf(InvalidLottoException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
@@ -29,7 +28,7 @@ class MoneyTest {
         Money money = new Money(1000);
 
         assertThatThrownBy(() -> money.assertPurchasable(quantity))
-                .isInstanceOf(InvalidLottoException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
 }
