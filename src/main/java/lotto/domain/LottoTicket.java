@@ -31,7 +31,7 @@ public class LottoTicket {
     List<LottoTicket> lottoTickets = new ArrayList<>();
     for (int i = 0; i < ticketCount; i++) {
       Collections.shuffle(POSSIBLE_LOTTO_NUMBER_CANDIDATES);
-      lottoTickets.add(new LottoTicket(POSSIBLE_LOTTO_NUMBER_CANDIDATES.subList(0, 6)));
+      lottoTickets.add(new LottoTicket(new ArrayList<>(POSSIBLE_LOTTO_NUMBER_CANDIDATES.subList(0, 6))));
     }
     return lottoTickets;
   }
@@ -69,5 +69,10 @@ public class LottoTicket {
   private boolean checkNumbersRange(List<Integer> numbers) {
     return numbers.stream()
         .allMatch(number -> LOTTO_MIN_NUMBER <= number && number <= LOTTO_MAX_NUMBER);
+  }
+
+  @Override
+  public String toString() {
+    return lottoNumbers.toString();
   }
 }

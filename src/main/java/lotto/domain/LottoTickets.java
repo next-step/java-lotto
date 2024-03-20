@@ -1,8 +1,10 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import lotto.domain.type.RewardPrice;
+
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
+import java.util.TreeMap;
 
 public class LottoTickets {
 
@@ -35,29 +37,19 @@ public class LottoTickets {
     return this.tickets.stream().allMatch(LottoTicket::haveCorrectNumbers);
   }
 
-  public Map<Integer, Integer> matchNumberCountMap(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
-    Map<Integer, Integer> matchNumberCountMap = new HashMap<>();
-
+  public void updateMapValues(TreeMap<RewardPrice, Integer> map, WinningNumbers winningNumbers, LottoTickets lottoTickets) {
     for (LottoTicket lottoTicket : lottoTickets.tickets) {
-      int key = winningNumbers.matchNumberCount(lottoTicket);
-      updateMapValue(matchNumberCountMap, key);
-      insertMapValue(matchNumberCountMap, key);
+      int matchNumberCount = winningNumbers.matchNumberCount(lottoTicket);
+      RewardPrice key = RewardPrice.match(matchNumberCount);
+      map.put(key, map.get(key) + 1);
     }
+  }
 
-    return matchNumberCountMap;
+  public List<LottoTicket> getTickets() {
+    return Collections.unmodifiableList(tickets);
   }
 
   public double calculateProfitRate(int profitAmount) {
     return Math.floor((double) profitAmount / purchaseAmount.amount() * 100) / 100.0;
-  }
-
-  private static void updateMapValue(Map<Integer, Integer> matchNumberCountMap, int key) {
-    if (matchNumberCountMap.containsKey(key)) {
-      matchNumberCountMap.put(key, matchNumberCountMap.get(key) + 1);
-    }
-  }
-
-  private static void insertMapValue(Map<Integer, Integer> matchNumberCountMap, int key) {
-    matchNumberCountMap.put(key, 1);
   }
 }

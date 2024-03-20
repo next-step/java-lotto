@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoTicket;
-import lotto.domain.type.RewardAmount;
+import lotto.domain.type.RewardPrice;
 import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RewardAmountTest {
+public class RewardPriceTest {
 
   @ParameterizedTest
   @MethodSource("matchCountTestCases")
@@ -32,7 +32,7 @@ public class RewardAmountTest {
     LottoTicket myLottoTicket = LottoTicket.generate(given);
     int count = winningNumbers.matchNumberCount(myLottoTicket);
 
-    assertThat(RewardAmount.rewardBy(count)).isEqualTo(expected);
+    assertThat(RewardPrice.rewardBy(count)).isEqualTo(expected);
   }
 
   private static Stream<Arguments> matchCountTestCases() {

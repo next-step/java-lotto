@@ -2,7 +2,7 @@ package lotto.domain.type;
 
 import java.util.Arrays;
 
-public enum RewardAmount {
+public enum RewardPrice {
 
   FIRST(6, 2000000000),
   SECOND(5, 1500000),
@@ -12,22 +12,22 @@ public enum RewardAmount {
   ;
 
   private final int matchCount;
-  private final int rewardAmount;
+  private final int amount;
 
-  RewardAmount(int matchCount, int rewardAmount) {
+  RewardPrice(int matchCount, int amount) {
     this.matchCount = matchCount;
-    this.rewardAmount = rewardAmount;
+    this.amount = amount;
   }
 
   public static int rewardBy(int count) {
     return Arrays.stream(getValues())
         .filter(it -> it.matchCount == count)
         .findFirst()
-        .map(value -> value.rewardAmount)
-        .orElseGet(() -> NONE.rewardAmount);
+        .map(value -> value.amount)
+        .orElseGet(() -> NONE.amount);
   }
 
-  public static RewardAmount match(int count) {
+  public static RewardPrice match(int count) {
     return Arrays.stream(getValues())
         .filter(it -> it.matchCount == count)
         .findFirst()
@@ -35,10 +35,18 @@ public enum RewardAmount {
   }
 
   public int sum(int matchCount) {
-    return this.rewardAmount * matchCount;
+    return this.amount * matchCount;
   }
 
-  private static RewardAmount[] getValues() {
-    return RewardAmount.values();
+  public int rewardAmount() {
+    return amount;
+  }
+
+  public int matchCount() {
+    return matchCount;
+  }
+
+  private static RewardPrice[] getValues() {
+    return RewardPrice.values();
   }
 }
