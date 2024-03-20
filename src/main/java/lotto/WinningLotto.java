@@ -2,7 +2,9 @@ package lotto;
 
 import static lotto.Lotto.LOTTO_NUMBERS_LIMIT;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningLotto {
 
@@ -16,6 +18,20 @@ public class WinningLotto {
         validLottoSize(winningLotto);
         validDuplicatedLottoNumber(winningLotto);
         this.winningLotto = winningLotto;
+    }
+
+    public WinningLotto(String[] input){
+        List<LottoNumber> winningLotto = convertInputToLottoNumber(input);
+        validLottoSize(winningLotto);
+        validDuplicatedLottoNumber(winningLotto);
+        this.winningLotto = winningLotto;
+    }
+
+    private static List<LottoNumber> convertInputToLottoNumber(String[] input) {
+        return Arrays.stream(input)
+            .map(Integer::parseInt)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
     }
 
     private void validLottoSize(List<LottoNumber> numbers) {
