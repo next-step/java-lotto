@@ -1,11 +1,14 @@
 package controller;
 
 import domain.Calculator;
+import view.Result;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class CalculatorController {
+
+    private Result result;
 
     private static final String DIVISION_WORD= " ";
 
@@ -14,7 +17,7 @@ public class CalculatorController {
         String input = sc.nextLine();
         if (input == null || input.isEmpty())
             throw new IllegalArgumentException("잘못된 입력값 입니다");
-        split(input);
+        process(split(input));
     }
 
     private List<String> split(String input) {
@@ -27,8 +30,8 @@ public class CalculatorController {
         for (int i = 1; i < list.size(); i = i + 2) {
             String symbol = list.get(i);
             int num = Integer.parseInt(list.get(i + 1));
-
             calculator.operation(num, symbol);
         }
+        result.print(calculator.getNowValue());
     }
 }

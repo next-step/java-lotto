@@ -16,6 +16,7 @@ class stringCalculatorTest {
     public void calculator() {
 
         Calculator calculator = new Calculator(4);
+        assertThat(calculator.getNowValue()).isEqualTo(4);
 
         assertThat(calculator.operation(2, "-")).isEqualTo(2);
         assertThat(calculator.operation(2, "+")).isEqualTo(6);

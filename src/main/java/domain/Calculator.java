@@ -2,6 +2,10 @@ package domain;
 
 public class Calculator {
     private int nowValue;
+
+    public int getNowValue() {
+        return nowValue;
+    }
     private static final String add = "+";
     private static final String multiply  = "*";
     private static final String division = "/";
