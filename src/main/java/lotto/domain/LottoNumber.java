@@ -1,15 +1,16 @@
 package lotto.domain;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 public class LottoNumber implements Iterable<Integer> {
-    private final Set<Integer> pickedLotto;
+    private static final int MATCH_COUNT = 1;
+    private static final int NOT_MATCH_COUNT = 0;
+
+    private final List<Integer> pickedLotto;
 
     public LottoNumber(List<Integer> pickedLotto) {
-        this.pickedLotto = new HashSet<>(pickedLotto);
+        this.pickedLotto = pickedLotto;
     }
 
     @Override
@@ -19,8 +20,15 @@ public class LottoNumber implements Iterable<Integer> {
         return lotto.containsAll(this.pickedLotto);
     }
 
-    private boolean containsAll(Set<Integer> pickedLotto) {
+    private boolean containsAll(List<Integer> pickedLotto) {
         return this.pickedLotto.containsAll(pickedLotto);
+    }
+
+    public int contains(int number) {
+        if (pickedLotto.contains(number)) {
+            return MATCH_COUNT;
+        }
+        return NOT_MATCH_COUNT;
     }
 
     @Override

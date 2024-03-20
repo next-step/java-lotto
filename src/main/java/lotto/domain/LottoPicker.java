@@ -17,6 +17,7 @@ public class LottoPicker {
     public LottoNumber pickLotto() {
         Collections.shuffle(this.lottoNumbers);
         List<Integer> pickLottoNumbers = this.lottoNumbers.subList(0, 6);
+        Collections.sort(pickLottoNumbers);
         return new LottoNumber(pickLottoNumbers);
     }
 }

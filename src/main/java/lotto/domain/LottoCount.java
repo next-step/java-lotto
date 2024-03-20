@@ -11,4 +11,8 @@ public class LottoCount {
     public int getLottoCount() {
         return lottoCount;
     }
+
+    public int getMoney() {
+        return this.lottoCount * PRICE;
+    }
 }
