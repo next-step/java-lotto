@@ -22,8 +22,6 @@
 # Step2
 
 ## Todo
-- [ ] Cash - 1000보다 작으면 예외(1000 => IllegalArgumentException, 0 => IllegalArgumentException)
-- [ ] Cash - 1000으로 나눈 몫을 반환(14000 => 14, 20123 => 20)
 - [ ] Match - 2 개의 배열 중에 하나라도 null이면 예외((null,null) => IllegalArgumentException, (null,empty) => IllegalArgumentException)
 - [ ] Match - 두 개의 배열을 비교하여 일치하는 개수 반환((1,2,3],[1,2,3]) => 3, ([1,0,4],[1,2,3]) => 1, ([1],[1,2,3,4] =>1))
 - [ ] Profit - 수익금 계산(1 => 0, 3 => 5000, 6 => 2000000000)
@@ -41,3 +39,5 @@
 - [ ] LottoClient - 총 수익률 출력("총 수익률은 0.35입니다.") 
 
 ## Done
+- [X] Cash - 1000보다 작으면 예외(1000 => IllegalArgumentException, 0 => IllegalArgumentException)
+- [X] Cash - 1000으로 나눈 몫을 반환(14000 => 14, 20123 => 20)
