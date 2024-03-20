@@ -21,12 +21,12 @@ class WinningNumbersTest {
             "가, 나, 다, 라, 마, 바"})
     void 적절하지_않은_당첨숫자_생성(String input) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new WinningNumbers(input));
+                .isThrownBy(() -> new WinningNumbers(input, ", "));
     }
 
     @Test
     void 숫자를_포함하는지() {
-        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6");
+        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6", ", ");
         assertThat(winningNumbers.contains(new LottoNumber(3))).isTrue();
     }
 

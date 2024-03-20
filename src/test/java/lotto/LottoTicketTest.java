@@ -33,7 +33,7 @@ class LottoTicketTest {
                 new LottoNumber(7),
                 new LottoNumber(9),
                 new LottoNumber(11))));
-        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6");
+        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6", ", ");
         assertThat(lottoTicket.getMatchCount(winningNumbers)).isEqualTo(3);
     }
 

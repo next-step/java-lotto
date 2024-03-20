@@ -11,7 +11,7 @@ public class LottoController {
         Amount amount = new Amount(InputView.askPurchaseAmount());
         LottoTickets lottoTickets = new LottoTickets(amount);
         ResultView.printLottoTickets(lottoTickets);
-        WinningNumbers winningNumbers = new WinningNumbers(InputView.askWinningNumbers());
+        WinningNumbers winningNumbers = new WinningNumbers(InputView.askWinningNumbers(), ", ");
         ResultView.printWinningStatistics(lottoTickets, winningNumbers);
         ResultView.printEarningsRate(lottoTickets, winningNumbers);
     }
