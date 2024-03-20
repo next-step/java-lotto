@@ -30,13 +30,6 @@ class StringCalculatorTest {
         assertThat(result).isEqualTo(expected);
     }
 
-//    @Test
-//    void 연산자가_없으면_예외발생() {
-//        String input = "3 5";
-//        assertThatThrownBy(() -> StringCalculator.calculate(input))
-//                .isInstanceOf(IllegalArgumentException.class);
-//    }
-
     @Test
     void 나눗기() {
         String input = "4 / 4";
@@ -85,4 +78,12 @@ class StringCalculatorTest {
         int result = StringCalculator.calculate(input);
         assertThat(result).isEqualTo(expected);
     }
+
+    @Test
+    void 사칙연산자가_아니면_예외발생() {
+        String input = "2 & 3";
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> StringCalculator.calculate(input));
+    }
+
 }
