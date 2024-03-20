@@ -18,21 +18,21 @@ public class LottoTicketTest {
     class MatchNumber {
 
         @Test
-        @DisplayName("[성공] 당첨 번호와 3개 일치하면 3을 리턴한다.")
+        @DisplayName("[성공] 당첨 번호와 3개 일치하면 LottoPrize.THREE_MATCH 를 리턴한다.")
         void 당첨_3개() {
             LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
             assertThat(lottoTicket.getPrize(new LottoTicket(List.of(1, 2, 3, 43, 44, 45)))).isEqualTo(LottoPrize.lookup(3));
         }
 
         @Test
-        @DisplayName("[성공] 당첨 번호와 4개 일치하면 4를 리턴한다.")
+        @DisplayName("[성공] 당첨 번호와 4개 일치하면 LottoPrize.FOUR_MATCH 를 리턴한다.")
         void 당첨_4개() {
             LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
             assertThat(lottoTicket.getPrize(new LottoTicket(List.of(1, 2, 3, 4, 44, 45)))).isEqualTo(LottoPrize.lookup(4));
         }
 
         @Test
-        @DisplayName("[성공] 당첨 번호와 모두 일치하면 6을 리턴한다.")
+        @DisplayName("[성공] 당첨 번호와 모두 일치하면 LottoPrize.SIX_MATCH 를 리턴한다.")
         void 모두_일치() {
             LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
             assertThat(lottoTicket.getPrize(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)))).isEqualTo(LottoPrize.lookup(6));
