@@ -8,7 +8,7 @@ public class LottoStatistics {
     private static final int NONE_MATCH = 0;
 
     // [Key] LottoPrize, [Value] Matched Count (Statistics)
-    private final Map<LottoPrize,  Integer> statisticsMap;
+    private final Map<LottoPrize, Integer> statisticsMap;
 
     public LottoStatistics(LottoTickets lottoTickets, LottoTicket winLottoTicket) {
         this.statisticsMap = new HashMap<>();
@@ -42,7 +42,6 @@ public class LottoStatistics {
     private boolean hasPrizeStatistics(LottoPrize prize) {
         return this.statisticsMap.containsKey(prize);
     }
-
 
     public double calculateProfitRate(int purchaseAmount) {
         double profit = 0;
