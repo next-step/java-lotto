@@ -3,8 +3,8 @@ package lotto;
 import java.util.Objects;
 
 public class LottoNumber {
-    private final static int MINIMUM_NUMBER = 1;
-    private final static int MAXIMUM_NUMBER = 45;
+    public final static int MINIMUM_NUMBER = 1;
+    public final static int MAXIMUM_NUMBER = 45;
 
     private final int number;
 
