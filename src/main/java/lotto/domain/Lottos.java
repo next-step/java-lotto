@@ -28,6 +28,6 @@ public class Lottos {
     }
 
     public int price() {
-        return 1000 * size();
+        return Lotto.FIXED_BALL_AMOUNT * size();
     }
 }

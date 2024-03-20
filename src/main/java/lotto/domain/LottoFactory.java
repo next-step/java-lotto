@@ -11,7 +11,7 @@ public class LottoFactory {
 
     public static Lotto generate() {
         Set<Ball> balls = new HashSet<>();
-        while (balls.size() < 6) {
+        while (balls.size() < Lotto.FIXED_BALL_AMOUNT) {
             balls.add(BallFactory.generate());
         }
         return new Lotto(balls);

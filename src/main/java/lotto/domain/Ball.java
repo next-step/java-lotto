@@ -4,14 +4,16 @@ import java.util.Objects;
 
 public class Ball {
 
-    private static final int LOWER_BOUND = 1;
-    private static final int UPPER_BOUND = 45;
+    public static final int LOWER_BOUND = 1;
+    public static final int UPPER_BOUND = 45;
+    private static final String NUMBER_RANGE_EXCEPTION_MESSAGE
+        = "공 번호는 " + LOWER_BOUND + "~" + UPPER_BOUND + " 사이만 가능합니다";
 
     private final int number;
 
     public Ball(int number) {
         if (number < LOWER_BOUND || number > UPPER_BOUND) {
-            throw new IllegalArgumentException("공 번호는 1~45 사이만 가능합니다");
+            throw new IllegalArgumentException(NUMBER_RANGE_EXCEPTION_MESSAGE);
         }
         this.number = number;
     }
