@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class User {
-    private int purchasePrice;
+    private PurchasePrice purchasePrice;
     private List<Lotto> lottos = new ArrayList<>();
     private final LottoSeller lottoSeller;
 
@@ -17,9 +17,9 @@ public class User {
     }
 
     public void purchaseLottos(int purchasePrice) {
-        lottos = lottoSeller.sellLottos(purchasePrice);
+        this.purchasePrice = new PurchasePrice(purchasePrice);
 
-        this.purchasePrice = purchasePrice;
+        lottos = lottoSeller.sellLottos(this.purchasePrice.countPurchasableLotto());
     }
 
     public List<Lotto> getLottos() {
@@ -29,7 +29,7 @@ public class User {
     public UserLottoResult getUserLottoResult(Lotto winningLotto) {
         BigDecimal totalIncome = new BigDecimal(0);
         UserLottoResult userLottoResult = new UserLottoResult();
-
+        
         List<LottoWinningRank> lottoWinningRanks = lottos.stream().map(lotto -> lotto.isWinningLotto(winningLotto))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
@@ -40,7 +40,7 @@ public class User {
             totalIncome = totalIncome.add(new BigDecimal(lottoWinningRank.getWinningPrice()));
         }
 
-        double rateOfReturn = totalIncome.divide(new BigDecimal(purchasePrice), 2, RoundingMode.HALF_UP).doubleValue();
+        double rateOfReturn = totalIncome.divide(new BigDecimal(purchasePrice.getPurchasePrice()), 2, RoundingMode.HALF_UP).doubleValue();
         userLottoResult.setRateOfReturn(rateOfReturn);
 
         return userLottoResult;
