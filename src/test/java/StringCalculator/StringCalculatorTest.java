@@ -17,4 +17,13 @@ class StringCalculatorTest {
 
         assertThat(result).isEqualTo(expected);
     }
+
+    @Test
+    void 빼기() {
+        String input = "3 - 5";
+        int expected = -2;
+        int result = StringCalculator.calculate(input);
+
+        assertThat(result).isEqualTo(expected);
+    }
 }

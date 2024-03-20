@@ -2,6 +2,7 @@ package StringCalculator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
@@ -28,6 +29,11 @@ public class StringCalculator {
 
                 if (operator.equals("+")) {
                     int calculateResult = leftOperand + rightOperand;
+                    result += calculateResult;
+                }
+
+                if (operator.equals("-")) {
+                    int calculateResult = leftOperand - rightOperand;
                     result += calculateResult;
                 }
             }
