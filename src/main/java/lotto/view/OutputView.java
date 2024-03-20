@@ -37,7 +37,7 @@ public class OutputView {
         System.out.printf(RETURN_RATE_MESSAGE, prizes.calcReturnRate(usedMoney));
     }
 
-    private static String prizeDescription(Prize prize) {
+    private String prizeDescription(Prize prize) {
         if (prize.bonusCondition() == BonusCondition.MUST_MATCH) {
             return prize.matchingCount() + "개 일치, 보너스 볼 일치";
         }

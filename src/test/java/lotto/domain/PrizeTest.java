@@ -10,15 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class PrizeTest {
 
-    @ParameterizedTest
-    @MethodSource(value = "fromTestSources")
-    @DisplayName("보너스/당첨 번호 당첨 개수에 따라 적절한 Prize를 반환한다")
-    void from(int matchingCount, boolean matchedBonus, Prize expected) {
-        Prize prize = Prize.from(matchingCount, matchedBonus);
-        assertThat(prize).isSameAs(expected);
-    }
-
-    private static Stream<Arguments> fromTestSources() {
+    private Stream<Arguments> fromTestSources() {
         return Stream.of(
             Arguments.of(0, true, Prize.NONE),
             Arguments.of(0, false, Prize.NONE),
@@ -35,5 +27,13 @@ class PrizeTest {
             Arguments.of(6, true, Prize.FIRST_PLACE),
             Arguments.of(6, false, Prize.FIRST_PLACE)
         );
+    }
+
+    @ParameterizedTest
+    @MethodSource(value = "fromTestSources")
+    @DisplayName("보너스/당첨 번호 당첨 개수에 따라 적절한 Prize를 반환한다")
+    void from(int matchingCount, boolean matchedBonus, Prize expected) {
+        Prize prize = Prize.from(matchingCount, matchedBonus);
+        assertThat(prize).isSameAs(expected);
     }
 }

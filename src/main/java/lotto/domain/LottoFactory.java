@@ -6,7 +6,7 @@ import java.util.Set;
 public class LottoFactory {
 
     private LottoFactory() {
-        
+
     }
 
     public static Lotto generate() {
