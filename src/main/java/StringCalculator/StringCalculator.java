@@ -7,30 +7,36 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Queue;
 import java.util.regex.Pattern;
-import java.util.zip.ZipOutputStream;
 
 public class StringCalculator {
     private static final Pattern CHECK_NUMBER_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
 
     public static int calculate(String input) {
         validate(input);
-
         List<String> strings = Arrays.asList(input.split(" "));
         Deque<Integer> operands = new LinkedList<>();
         Queue<String> operators = new LinkedList<>();
 
-        for (String string : strings) {
-            initOperands(string, operands);
-            initOperators(string, operators);
-        }
+        initCalculator(strings, operands, operators);
+        process(operators, operands);
 
+        return operands.peek();
+    }
+
+    private static void process(Queue<String> operators, Deque<Integer> operands) {
         while (!operators.isEmpty()) {
             String operator = operators.poll();
             operands.addFirst(cal(operator, operands.poll(), operands.poll()));
         }
-
-        return operands.peek();
     }
+
+    private static void initCalculator(List<String> strings, Deque<Integer> operands, Queue<String> operators) {
+        for (String string : strings) {
+            initOperands(string, operands);
+            initOperators(string, operators);
+        }
+    }
+
 
     private static void initOperands(String string, Queue<Integer> operands) {
         if (isNumber(string)) {
