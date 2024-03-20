@@ -26,6 +26,14 @@ public class Lotto {
         return lotto.size();
     }
 
+    public int getFeatNumberCount(Lotto winLotto) {
+        return (int) lotto.stream()
+                .filter(value -> winLotto.getLotto().contains(value))
+                .mapToInt(Integer::intValue)
+                .count();
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
