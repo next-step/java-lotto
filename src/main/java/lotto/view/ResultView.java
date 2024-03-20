@@ -17,7 +17,7 @@ public class ResultView {
 
     public void printLottoTicketsNumbers(LottoMachine lottoMachine) {
         for (int i = 0; i < lottoMachine.showNumberOfLottos(); i++) {
-            System.out.println((lottoMachine.getLottoTickets().get(i).getNumbers()));
+            System.out.println((lottoMachine.showLottoTicketNumbers(i)));
         }
     }
 
@@ -34,7 +34,8 @@ public class ResultView {
         System.out.println("4개 일치 (50000원)- " + integers.get(1) + "개");
         System.out.println("5개 일치 (1500000원)- " + integers.get(2) + "개");
         System.out.println("6개 일치 (2000000000원)- " + integers.get(3) + "개");
-        System.out.println("총 수익률은 " + calculateRateOfReturn(price, integers));
+
+        System.out.printf("총 수익률은 %.2f", calculateRateOfReturn(price, integers));
     }
 
     private double calculateRateOfReturn(int price, List<Integer> integers) {

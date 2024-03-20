@@ -18,7 +18,7 @@ public class LottoMatchingService {
         lottoMachine.makeLottos();
         // 당첨 번호와 로또들의 번호를 각각 비교한다
         for (int i = 0; i < lottoMachine.showNumberOfLottos(); i++) { // 로또 수만큼 순회
-            matchTimes = lottoMachine.getLottoTickets().get(i).getNumbers().stream()
+            matchTimes = lottoMachine.showLottoTicketNumbers(i).stream()
                     .filter(winningNumbers::contains)
                     .count();
 

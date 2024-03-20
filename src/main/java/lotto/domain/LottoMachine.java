@@ -24,8 +24,8 @@ public class LottoMachine {
         return lottoTickets.size();
     }
 
-    public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
+    public List<Integer> showLottoTicketNumbers(int index) {
+        return lottoTickets.get(index).getNumbers();
     }
 
 }
