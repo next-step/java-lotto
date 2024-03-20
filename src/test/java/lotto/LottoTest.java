@@ -2,7 +2,9 @@ package lotto;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -15,14 +17,7 @@ public class LottoTest {
         int lottoPrice = 1000;
         int purchase = 14000;
 
-        List<List<Integer>> lottos = new ArrayList<>();
-        for (int i = 0; i < purchase / lottoPrice; i++) {
-            List<Integer> collect = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
-            Collections.shuffle(collect);
-            List<Integer> collect1 = collect.stream().limit(6).sorted().collect(Collectors.toList());
-
-            lottos.add(collect1);
-        }
+        List<Lotto> lottos = IntStream.rangeClosed(1, purchase / lottoPrice).mapToObj(i -> new Lotto()).collect(Collectors.toList());
         assertThat(lottos).hasSize(purchase / lottoPrice);
     }
 
