@@ -15,47 +15,54 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorTest {
 
-    @Test
-    void spilt_test() {
-        String rawString = "1 + 1";
-        String[] seperateString = rawString.split(" ");
+    private static final String DEFAULT = "2 + 3 * 4 / 3";
+    private static final String PLUS = "1 + 1";
+    private static final String MULTIPLY = "1 * 1";
+    private static final String SUBTRACT = "1 - 1";
+    private static final String DIVIDE = "1 / 1";
+    private static final String NOT_OPERATOR = "2 & 3";
+
+    @ParameterizedTest
+    @ValueSource(strings = {DEFAULT})
+    void spilt_test(String input) {
+        String[] seperateString = input.split(" ");
         System.out.println(seperateString.length);
         System.out.println(Arrays.toString(seperateString));
     }
 
-    @Test
-    void 더하기() {
-        String str = "1 + 1 + 1";
+    @ParameterizedTest
+    @ValueSource(strings = {PLUS})
+    void 더하기(String input) {
         Calculator calculator = new Calculator();
-        assertThat(calculator.calculator(str)).isEqualTo(3);
+        assertThat(calculator.calculator(input)).isEqualTo(2);
     }
 
-    @Test
-    void 곱하기() {
-        String str = "1 * 1 * 1";
+    @ParameterizedTest
+    @ValueSource(strings = {MULTIPLY})
+    void 곱하기(String input) {
         Calculator calculator = new Calculator();
-        assertThat(calculator.calculator(str)).isEqualTo(1);
+        assertThat(calculator.calculator(input)).isEqualTo(1);
     }
 
-    @Test
-    void 나누기() {
-        String str = "1 / 1 / 1";
+    @ParameterizedTest
+    @ValueSource(strings = {SUBTRACT})
+    void 나누기(String input) {
         Calculator calculator = new Calculator();
-        assertThat(calculator.calculator(str)).isEqualTo(1);
+        assertThat(calculator.calculator(input)).isEqualTo(1);
     }
 
-    @Test
-    void 빼기() {
-        String str = "2 - 1 - 1";
+    @ParameterizedTest
+    @ValueSource(strings = {DIVIDE})
+    void 빼기(String input) {
         Calculator calculator = new Calculator();
-        assertThat(calculator.calculator(str)).isEqualTo(0);
+        assertThat(calculator.calculator(input)).isEqualTo(1);
     }
 
-    @Test
-    void 복합연산() {
-        String str = "2 + 3 * 4 / 3";
+    @ParameterizedTest
+    @ValueSource(strings = {DEFAULT})
+    void 복합연산(String input) {
         Calculator calculator = new Calculator();
-        assertThat(calculator.calculator(str)).isEqualTo(6);
+        assertThat(calculator.calculator(input)).isEqualTo(6);
     }
 
     @ParameterizedTest
@@ -67,11 +74,11 @@ public class CalculatorTest {
                 .hasMessage(NULL_AND_EMPTY_VALIDATE);
     }
 
-    @Test
-    void 사칙연산자_아님() {
-        String str = "2 & 3";
+    @ParameterizedTest
+    @ValueSource(strings = {NOT_OPERATOR})
+    void 사칙연산자_아님(String input) {
         Calculator calculator = new Calculator();
-        assertThatThrownBy(() -> calculator.calculator(str))
+        assertThatThrownBy(() -> calculator.calculator(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(OPERATOR_VALIDATE);
     }
