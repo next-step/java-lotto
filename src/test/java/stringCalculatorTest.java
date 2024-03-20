@@ -17,12 +17,12 @@ class stringCalculatorTest {
 
         Calculator calculator = new Calculator(4);
 
-        assertThat(calculator.operation(2, '-')).isEqualTo(2);
-        assertThat(calculator.operation(2, '+')).isEqualTo(6);
-        assertThat(calculator.operation( 2, '/')).isEqualTo(2);
-        assertThat(calculator.operation( 3, '*')).isEqualTo(12);
+        assertThat(calculator.operation(2, "-")).isEqualTo(2);
+        assertThat(calculator.operation(2, "+")).isEqualTo(6);
+        assertThat(calculator.operation( 2, "/")).isEqualTo(2);
+        assertThat(calculator.operation( 3, "*")).isEqualTo(12);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> calculator.operation(2, 'a'));
+        assertThatIllegalArgumentException().isThrownBy(() -> calculator.operation(2, "a"));
     }
 
     @Test

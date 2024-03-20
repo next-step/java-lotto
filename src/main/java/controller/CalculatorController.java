@@ -1,5 +1,7 @@
 package controller;
 
+import domain.Calculator;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,6 +22,13 @@ public class CalculatorController {
     }
 
     private void process(List<String> list) {
+        int basic = Integer.parseInt(list.get(0));
+        Calculator calculator = new Calculator(basic);
+        for (int i = 1; i < list.size(); i = i + 2) {
+            String symbol = list.get(i);
+            int num = Integer.parseInt(list.get(i + 1));
 
+            calculator.operation(num, symbol);
+        }
     }
 }

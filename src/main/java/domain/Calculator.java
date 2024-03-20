@@ -2,10 +2,10 @@ package domain;
 
 public class Calculator {
     private int nowValue;
-    private static final char add = '+';
-    private static final char multiply  = '*';
-    private static final char division = '/';
-    private static final char minus = '-';
+    private static final String add = "+";
+    private static final String multiply  = "*";
+    private static final String division = "/";
+    private static final String minus = "-";
 
     public Calculator(int now) {
         this.nowValue = now;
@@ -27,7 +27,7 @@ public class Calculator {
         return nowValue - num;
     }
 
-    public int operation(int num, char symbol) {
+    public int operation(int num, String symbol) {
         if (symbol == add)
             return add(num);
         else if (symbol == minus)
