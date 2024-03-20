@@ -34,4 +34,8 @@ public class Amount {
     public int value() {
         return value;
     }
+
+    public static int lottoPrice() {
+        return LOTTO_PRICE;
+    }
 }
