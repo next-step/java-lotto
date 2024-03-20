@@ -3,14 +3,12 @@ package lotto.domain;
 public class LottoStore {
 
     private final LottoPicker lottoPicker;
-    private final LottoCount lottoCount;
 
-    public LottoStore(LottoPicker lottoPicker, LottoCount lottoCount) {
+    public LottoStore(LottoPicker lottoPicker) {
         this.lottoPicker = lottoPicker;
-        this.lottoCount = lottoCount;
     }
 
-    public PickedLottoNumbers buyLotto() {
+    public PickedLottoNumbers buyLotto(LottoCount lottoCount) {
         PickedLottoNumbers pickedLottoNumbers = new PickedLottoNumbers();
         for (int count=0; count < lottoCount.getLottoCount(); count++) {
             LottoNumber lottoNumber = lottoPicker.pickLotto();
