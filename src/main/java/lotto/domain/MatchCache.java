@@ -13,7 +13,7 @@ public class MatchCache {
     }
 
     public void save(int matchCount) {
-        this.counts[matchCount-1]++;
+        this.counts[matchCount - 1]++;
     }
 
     @Override

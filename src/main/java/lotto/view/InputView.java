@@ -8,7 +8,7 @@ public class InputView {
         return new Scanner(System.in).nextInt();
     }
 
-    public static String insertValues(){
+    public static String insertValues() {
         return new Scanner(System.in).nextLine();
     }
 }

@@ -4,14 +4,16 @@ public class Cash {
 
     private int amount;
 
-    public Cash(){}
+    public Cash() {
+    }
+
     public Cash(int amount) {
         this.amount = amount;
     }
 
-    public int payLotto(int money){
-        if(money < 1000) throw new IllegalArgumentException();
-        return this.amount = money/1000;
+    public int payLotto(int money) {
+        if (money < 1000) throw new IllegalArgumentException();
+        return this.amount = money / 1000;
     }
 
     public int getAmount() {

@@ -34,8 +34,7 @@ public class LottoClient {
 
     private static List<Integer> insertLatestWinningNumbers() {
         printPlainMessage("지난 주 당첨 번호를 입력해 주세요.");
-        List<Integer> latestWinningNumbers = getLatestWinningNumbers();
-        return latestWinningNumbers;
+        return getLatestWinningNumbers();
     }
 
     private static void printResult(Cash cash, Profit profit, MatchCache matchCache) {
@@ -53,7 +52,7 @@ public class LottoClient {
         });
     }
 
-    private static List<Integer> getLatestWinningNumbers(){
+    private static List<Integer> getLatestWinningNumbers() {
         String str = insertValues();
         return Arrays.stream(str.split(","))
                 .map(Integer::parseInt)

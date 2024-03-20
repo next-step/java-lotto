@@ -21,14 +21,14 @@ public enum LottoPricing {
         this.priceFunction = priceFunction;
     }
 
-    public static LottoPricing getByMatchCount(int matchCount){
+    public static LottoPricing getByMatchCount(int matchCount) {
         return Arrays.stream(values())
                 .filter(iter -> iter.matchCount == matchCount)
                 .findAny()
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public int getPrice(){
+    public int getPrice() {
         return this.priceFunction.get();
     }
 }

@@ -9,14 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGroupTest {
 
-    static class FakeNumberGenerator implements NumbersGenerator{
-        public List<Integer> numbers = List.of(1,2,3,4,5,6);
-        @Override
-        public List<Integer> generate() {
-            return numbers;
-        }
-    }
-
     LottoGroup lottoGroup;
     Cash cash = new Cash(2);
     NumbersGenerator generator = new FakeNumberGenerator();
@@ -27,7 +19,7 @@ class LottoGroupTest {
     }
 
     @Test
-    void generate(){
+    void generate() {
         lottoGroup.generateTickets(cash);
         LottoGroup otherLottoGroup = new LottoGroup(generator);
         otherLottoGroup.generateTickets(cash);
@@ -40,5 +32,14 @@ class LottoGroupTest {
         String output = lottoGroup.toString();
         final String expectedResult = "[1, 2, 3, 4, 5, 6]\n[1, 2, 3, 4, 5, 6]\n";
         assertThat(output).isEqualTo(expectedResult);
+    }
+
+    static class FakeNumberGenerator implements NumbersGenerator {
+        public List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+
+        @Override
+        public List<Integer> generate() {
+            return numbers;
+        }
     }
 }

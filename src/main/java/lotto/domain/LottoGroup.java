@@ -12,8 +12,8 @@ public class LottoGroup {
         this.generator = generator;
     }
 
-    public void generateTickets(Cash cash){
-        for(int i =0; i < cash.getAmount(); i++){
+    public void generateTickets(Cash cash) {
+        for (int i = 0; i < cash.getAmount(); i++) {
             tickets.add(generator.generate());
         }
     }

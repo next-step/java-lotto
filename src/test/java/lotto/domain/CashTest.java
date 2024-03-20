@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.Cash;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,7 +13,7 @@ public class CashTest {
     Cash cash;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         cash = new Cash();
     }
 
@@ -33,8 +32,8 @@ public class CashTest {
     }
 
     @Test
-    void to_string(){
+    void to_string() {
         cash = new Cash(10);
-        assertThat(cash.toString()).isEqualTo(10+"개를 구매했습니다.");
+        assertThat(cash.toString()).isEqualTo(10 + "개를 구매했습니다.");
     }
 }

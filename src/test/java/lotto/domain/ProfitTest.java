@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.Cash;
-import lotto.domain.Profit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,15 +33,15 @@ public class ProfitTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"14000:5000:0.35","2000:2000000000:1000000", "10:0:0"}, delimiter = ':')
-    void calc_rate(int input1, int input2, double result){
+    @CsvSource(value = {"14000:5000:0.35", "2000:2000000000:1000000", "10:0:0"}, delimiter = ':')
+    void calc_rate(int input1, int input2, double result) {
         Profit customProfit = new Profit(input2);
         double rate = customProfit.calcRate(input1);
         assertThat(rate).isEqualTo(result);
     }
 
     @Test
-    void to_string(){
+    void to_string() {
         profit.accumulate(3);
         assertThat(profit.toString(new Cash(2))).isEqualTo("총 수익률은 2500.00입니다.");
     }
