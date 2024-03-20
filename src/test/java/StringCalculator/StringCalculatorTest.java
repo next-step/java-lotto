@@ -1,5 +1,6 @@
 package StringCalculator;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
@@ -48,6 +49,15 @@ class StringCalculatorTest {
     void 나눗기_정수값으로_떨어짐() {
         String input =  "5 / 4";
         int expected = 1;
+        int result = StringCalculator.calculate(input);
+
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    void 곱하기() {
+        String input = "4 * 4";
+        int expected = 16;
         int result = StringCalculator.calculate(input);
 
         assertThat(result).isEqualTo(expected);
