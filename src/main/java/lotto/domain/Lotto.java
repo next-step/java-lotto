@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
@@ -14,7 +14,7 @@ public class Lotto {
 
     private void validEmpty(List<Integer> lotto) {
         if (lotto == null || lotto.isEmpty()) {
-           throw new IllegalArgumentException("입력값이 없습니다");
+            throw new IllegalArgumentException("입력값이 없습니다");
         }
     }
 
@@ -32,7 +32,6 @@ public class Lotto {
                 .mapToInt(Integer::intValue)
                 .count();
     }
-
 
     @Override
     public boolean equals(Object o) {
