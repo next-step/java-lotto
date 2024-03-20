@@ -6,13 +6,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGenerator {
-    public List<Integer> lottoGenerate() {
+    public Lotto lottoGenerate() {
         List<Integer> lottoNumbers =  initialLottoRange();
         Collections.shuffle(lottoNumbers);
         lottoNumbers = lottoNumbers.subList(0,6);
         Collections.sort(lottoNumbers);
-        return lottoNumbers;
+        return new Lotto(lottoNumbers);
     }
+
+
 
     private List<Integer> initialLottoRange() {
         return IntStream.range(1,46).boxed().collect(Collectors.toList());
