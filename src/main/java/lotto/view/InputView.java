@@ -60,4 +60,15 @@ public class InputView {
             return winnnigNumbersInput(e.getMessage() + INPUT_RETRY);
         }
     }
+
+    public int getBonusNumber(String message) {
+        System.out.println(message);
+        int inputNumber = Integer.parseInt(scanner.nextLine());
+
+        try {
+            return inputNumber;
+        } catch (IllegalArgumentException e) {
+            return getBonusNumber(e.getMessage() + INPUT_RETRY);
+        }
+    }
 }

@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class LottoGame {
     public static final String INPUT_START_MESSAGE = "구입 금액을 입력해 주세요.";
     public static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    public static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
 
     public static void start() {
         InputView inputView = new InputView();
@@ -24,6 +25,7 @@ public class LottoGame {
         outputView.printLottoNumbers(lottoNumbers);
 
         LottoNumber winningNumber = inputView.winnnigNumbersInput(INPUT_WINNING_NUMBER_MESSAGE);
+        int bonusNumber = inputView.getBonusNumber(INPUT_BONUS_NUMBER_MESSAGE);
 
         LottoResult lottoResult = lottoNumbers.computeLottoResult(winningNumber);
         outputView.printResult(lottoResult);
