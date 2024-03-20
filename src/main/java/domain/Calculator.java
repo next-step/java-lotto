@@ -3,6 +3,9 @@ package domain;
 public class Calculator {
     private int nowValue;
 
+    public Calculator() {
+    }
+
     public int getNowValue() {
         return nowValue;
     }
@@ -11,36 +14,43 @@ public class Calculator {
     private static final String division = "/";
     private static final String minus = "-";
 
-    public Calculator(int now) {
+    public void basic(int now) {
         this.nowValue = now;
     }
 
-    private int add(int num) {
-        return nowValue + num;
+    private void add(int num) {
+        this.nowValue = nowValue + num;
     }
 
-    private int multiply(int num) {
-        return nowValue * num;
+    private void multiply(int num) {
+        this.nowValue = nowValue * num;
     }
 
-    private int division(int num) {
-        return nowValue / num;
+    private void division(int num) {
+        this.nowValue = nowValue / num;
     }
 
-    private int minus(int num) {
-        return nowValue - num;
+    private void minus(int num) {
+        this.nowValue = nowValue - num;
     }
 
     public int operation(int num, String symbol) {
-        if (symbol.equals(add))
-            return add(num);
-        else if (symbol.equals(minus))
-            return minus(num);
-        else if (symbol.equals(division))
-            return division(num);
-        else if (symbol.equals(multiply))
-            return multiply(num);
-        else
-            throw new IllegalArgumentException("잘못된 기호 입니다");
+        switch (symbol) {
+            case add:
+                add(num);
+                break;
+            case minus:
+                minus(num);
+                break;
+            case division:
+                division(num);
+                break;
+            case multiply:
+                multiply(num);
+                break;
+            default:
+                throw new IllegalArgumentException("잘못된 기호 입니다");
+        }
+        return nowValue;
     }
 }

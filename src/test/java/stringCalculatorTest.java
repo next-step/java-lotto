@@ -5,7 +5,6 @@ import domain.Calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThatIOException;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -15,13 +14,14 @@ class stringCalculatorTest {
     @DisplayName("문자열 계산")
     public void calculator() {
 
-        Calculator calculator = new Calculator(4);
+        Calculator calculator = new Calculator();
+        calculator.basic(4);
         assertThat(calculator.getNowValue()).isEqualTo(4);
 
         assertThat(calculator.operation(2, "-")).isEqualTo(2);
-        assertThat(calculator.operation(2, "+")).isEqualTo(6);
+        assertThat(calculator.operation(2, "+")).isEqualTo(4);
         assertThat(calculator.operation( 2, "/")).isEqualTo(2);
-        assertThat(calculator.operation( 3, "*")).isEqualTo(12);
+        assertThat(calculator.operation( 3, "*")).isEqualTo(6);
 
         assertThatIllegalArgumentException().isThrownBy(() -> calculator.operation(2, "a"));
     }
