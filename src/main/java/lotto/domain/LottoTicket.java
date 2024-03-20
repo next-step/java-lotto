@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -50,6 +51,12 @@ public class LottoTicket {
 
   public boolean isSame(List<Integer> numbers) {
     return this.lottoNumbers.equals(numbers);
+  }
+
+  public int getMatchCount(LottoTicket myLottoTicket) {
+    return (int) this.lottoNumbers.stream()
+        .filter(myLottoTicket.lottoNumbers::contains)
+        .count();
   }
 
   private static List<Integer> makeCandidateNumbers() {

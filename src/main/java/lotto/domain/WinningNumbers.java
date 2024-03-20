@@ -16,4 +16,8 @@ public class WinningNumbers {
   public boolean isSame(List<Integer> numbers) {
     return this.winningNumber.isSame(numbers);
   }
+
+  public int matchNumberCount(LottoTicket myLottoTicket) {
+    return winningNumber.getMatchCount(myLottoTicket);
+  }
 }
