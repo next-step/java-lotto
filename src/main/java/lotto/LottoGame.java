@@ -14,11 +14,6 @@ public class LottoGame {
         }
     }
 
-    public static int findMatch(int i, List<Integer> winnerLotto) {
-        int count = 0;
-        return 0;
-    }
-
     public static int LOTTO_PRICE() {
         return LOTTO_PRICE;
     }
