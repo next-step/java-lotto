@@ -8,6 +8,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
+import static calculator.domain.Calculator.NULL_AND_EMPTY_VALIDATE;
+import static calculator.domain.Calculator.OPERATOR_VALIDATE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -62,7 +64,7 @@ public class CalculatorTest {
         Calculator calculator = new Calculator();
         assertThatThrownBy(() -> calculator.calculator(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("계산식을 입력해주세요");
+                .hasMessage(NULL_AND_EMPTY_VALIDATE);
     }
 
     @Test
@@ -71,6 +73,6 @@ public class CalculatorTest {
         Calculator calculator = new Calculator();
         assertThatThrownBy(() -> calculator.calculator(str))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("사칙연산 기호만 입력해주세요");
+                .hasMessage(OPERATOR_VALIDATE);
     }
 }
