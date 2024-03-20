@@ -30,14 +30,14 @@ public class User {
         BigDecimal totalIncome = new BigDecimal(0);
         UserLottoResult userLottoResult = new UserLottoResult();
 
-        List<LottoResult> lottoResults = lottos.stream().map(lotto -> lotto.isWinningLotto(winningLotto))
+        List<LottoWinningRank> lottoWinningRanks = lottos.stream().map(lotto -> lotto.isWinningLotto(winningLotto))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
 
-        for (LottoResult lottoResult : lottoResults) {
-            userLottoResult.addCount(lottoResult);
-            totalIncome = totalIncome.add(new BigDecimal(lottoResult.getWinningPrice()));
+        for (LottoWinningRank lottoWinningRank : lottoWinningRanks) {
+            userLottoResult.addCount(lottoWinningRank);
+            totalIncome = totalIncome.add(new BigDecimal(lottoWinningRank.getWinningPrice()));
         }
 
         double rateOfReturn = totalIncome.divide(new BigDecimal(purchasePrice), 2, RoundingMode.HALF_UP).doubleValue();

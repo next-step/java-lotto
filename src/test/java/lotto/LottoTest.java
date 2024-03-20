@@ -2,8 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoResult;
-import lotto.utils.TestNumberGenerator;
+import lotto.domain.LottoWinningRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -22,7 +21,7 @@ public class LottoTest {
     @ParameterizedTest
     @DisplayName("등수 계산 테스트")
     @MethodSource("getUserNumbersAndLottoResult")
-    public void winningTest(List<Integer> userNumbers, Optional<LottoResult> expected) {
+    public void winningTest(List<Integer> userNumbers, Optional<LottoWinningRank> expected) {
         LottoNumbers userLottoNumbers = new LottoNumbers(userNumbers);
         Lotto userLotto = new Lotto(userLottoNumbers);
 
@@ -33,10 +32,10 @@ public class LottoTest {
         return Stream.of(
                 Arguments.of(List.of(6, 7, 8, 9, 10, 11), Optional.empty()),
                 Arguments.of(List.of(5, 6, 7, 8, 9, 10), Optional.empty()),
-                Arguments.of(List.of(4, 5, 6, 7, 8, 9), Optional.of(LottoResult.FOURTH)),
-                Arguments.of(List.of(3, 4, 5, 6, 7, 8), Optional.of(LottoResult.THIRD)),
-                Arguments.of(List.of(2, 3, 4, 5, 6, 7), Optional.of(LottoResult.SECOND)),
-                Arguments.of(List.of(1, 2, 3, 4, 5, 6), Optional.of(LottoResult.FIRST))
+                Arguments.of(List.of(4, 5, 6, 7, 8, 9), Optional.of(LottoWinningRank.FOURTH)),
+                Arguments.of(List.of(3, 4, 5, 6, 7, 8), Optional.of(LottoWinningRank.THIRD)),
+                Arguments.of(List.of(2, 3, 4, 5, 6, 7), Optional.of(LottoWinningRank.SECOND)),
+                Arguments.of(List.of(1, 2, 3, 4, 5, 6), Optional.of(LottoWinningRank.FIRST))
         );
     }
 }

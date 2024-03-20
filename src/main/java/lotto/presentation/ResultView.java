@@ -1,11 +1,10 @@
 package lotto.presentation;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
+import lotto.domain.LottoWinningRank;
 import lotto.domain.UserLottoResult;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -28,8 +27,8 @@ public class ResultView {
     public void printLottoResult(UserLottoResult userLottoResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (LottoResult lottoResult : LottoResult.values()) {
-            System.out.printf("%d개 일치 : (%d원)- %d개\n", lottoResult.getMatchCount(), lottoResult.getWinningPrice(), userLottoResult.getCountLottoResult(lottoResult));
+        for (LottoWinningRank lottoWinningRank : LottoWinningRank.values()) {
+            System.out.printf("%d개 일치 : (%d원)- %d개\n", lottoWinningRank.getMatchCount(), lottoWinningRank.getWinningPrice(), userLottoResult.getCountLottoResult(lottoWinningRank));
         }
         System.out.printf("총 수익률은 %.2f\n", userLottoResult.getRateOfReturn());
     }

@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.Optional;
 
-public enum LottoResult {
+public enum LottoWinningRank {
 
     FOURTH(3, 5_000),
     THIRD(4, 50_000),
@@ -16,13 +16,13 @@ public enum LottoResult {
     private final int winningPrice;
 
 
-    LottoResult(int matchCount, int winningPrice) {
+    LottoWinningRank(int matchCount, int winningPrice) {
         this.matchCount = matchCount;
         this.winningPrice = winningPrice;
     }
 
-    public static Optional<LottoResult> findByMatchCount(int matchCount) {
-        return Arrays.stream(LottoResult.values())
+    public static Optional<LottoWinningRank> findByMatchCount(int matchCount) {
+        return Arrays.stream(LottoWinningRank.values())
                 .filter(lottoResult -> matchCount == lottoResult.matchCount)
                 .findAny();
     }

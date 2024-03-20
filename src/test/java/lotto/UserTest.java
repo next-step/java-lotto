@@ -41,14 +41,14 @@ public class UserTest {
     @ParameterizedTest
     @DisplayName("로또 수익률 및 결과 테스트")
     @MethodSource("getLottosAndRateOfReturn")
-    void testRateOfReturn(Lotto winningLotto, int price, double expectedRateOfReturn, Map<LottoResult, Integer> expectedLottoResultCount) {
+    void testRateOfReturn(Lotto winningLotto, int price, double expectedRateOfReturn, Map<LottoWinningRank, Integer> expectedLottoResultCount) {
         User user = new User(mockLottoSeller);
         user.purchaseLottos(price);
         UserLottoResult userLottoResult = user.getUserLottoResult(winningLotto);
 
         assertThat(userLottoResult.getRateOfReturn()).isEqualTo(expectedRateOfReturn);
 
-        for (Map.Entry<LottoResult, Integer> lottoResultCount : expectedLottoResultCount.entrySet()) {
+        for (Map.Entry<LottoWinningRank, Integer> lottoResultCount : expectedLottoResultCount.entrySet()) {
             assertThat(userLottoResult.getCountLottoResult(lottoResultCount.getKey())).isEqualTo(lottoResultCount.getValue());
         }
 
@@ -65,12 +65,12 @@ public class UserTest {
         );
     }
 
-    private static Map<LottoResult, Integer> getLottoResultMap(int first, int second, int third, int fourth) {
-        Map<LottoResult, Integer> map = new EnumMap<>(LottoResult.class);
-        map.put(LottoResult.FIRST, first);
-        map.put(LottoResult.SECOND, second);
-        map.put(LottoResult.THIRD, third);
-        map.put(LottoResult.FOURTH, fourth);
+    private static Map<LottoWinningRank, Integer> getLottoResultMap(int first, int second, int third, int fourth) {
+        Map<LottoWinningRank, Integer> map = new EnumMap<>(LottoWinningRank.class);
+        map.put(LottoWinningRank.FIRST, first);
+        map.put(LottoWinningRank.SECOND, second);
+        map.put(LottoWinningRank.THIRD, third);
+        map.put(LottoWinningRank.FOURTH, fourth);
 
         return map;
     }

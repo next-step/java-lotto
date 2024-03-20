@@ -4,19 +4,19 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class UserLottoResult {
-    private Map<LottoResult, Integer> countLottoResult = new EnumMap(LottoResult.class);
+    private Map<LottoWinningRank, Integer> countLottoResult = new EnumMap(LottoWinningRank.class);
     private double rateOfReturn;
 
-    public void addCount(LottoResult lottoResult) {
-        countLottoResult.put(lottoResult, countLottoResult.getOrDefault(lottoResult, 0) + 1);
+    public void addCount(LottoWinningRank lottoWinningRank) {
+        countLottoResult.put(lottoWinningRank, countLottoResult.getOrDefault(lottoWinningRank, 0) + 1);
     }
 
     public double getRateOfReturn() {
         return rateOfReturn;
     }
 
-    public int getCountLottoResult(LottoResult lottoResult) {
-        return countLottoResult.getOrDefault(lottoResult, 0);
+    public int getCountLottoResult(LottoWinningRank lottoWinningRank) {
+        return countLottoResult.getOrDefault(lottoWinningRank, 0);
     }
 
     public void setRateOfReturn(double rateOfReturn) {
