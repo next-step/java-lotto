@@ -17,4 +17,8 @@ public class Lotto {
     public Prize judge(WinningLotto winningLotto) {
         return winningLotto.judge(balls);
     }
+
+    public Set<Ball> balls() {
+        return balls;
+    }
 }
