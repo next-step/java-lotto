@@ -49,6 +49,7 @@ public class StringCalculator {
             operators.offer(string);
         }
     }
+
     private static int operation(String operator, int leftOperand, int rightOperand) {
         Operator operation = Operator.findOperation(operator);
         return operation.calculate(leftOperand, rightOperand);
