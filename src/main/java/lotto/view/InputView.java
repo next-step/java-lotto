@@ -62,14 +62,14 @@ public class InputView {
         }
     }
 
-    public BonusNumber getBonusNumber(String message) {
+    public BonusNumber getBonusNumber(String message, LottoNumber winningNumber) {
         System.out.println(message);
         int inputNumber = Integer.parseInt(scanner.nextLine());
 
         try {
-            return BonusNumber.valueOf(inputNumber);
+            return BonusNumber.fromValidDuplicate(inputNumber, winningNumber);
         } catch (IllegalArgumentException e) {
-            return getBonusNumber(e.getMessage() + INPUT_RETRY);
+            return getBonusNumber(e.getMessage() + INPUT_RETRY, winningNumber);
         }
     }
 }
