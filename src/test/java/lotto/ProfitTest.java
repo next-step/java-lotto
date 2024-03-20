@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Cash;
 import lotto.domain.Profit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,5 +40,11 @@ public class ProfitTest {
         Profit customProfit = new Profit(input2);
         double rate = customProfit.calcRate(input1);
         assertThat(rate).isEqualTo(result);
+    }
+
+    @Test
+    void to_string(){
+        profit.accumulate(3);
+        assertThat(profit.toString(new Cash(2))).isEqualTo("총 수익률은 2500.00입니다.");
     }
 }
