@@ -66,6 +66,6 @@ public class LottoView {
     }
 
     private static int getLottoCount(int price) {
-        return price / LottoGame.LOTTO_PRICE;
+        return price / LottoGame.LOTTO_PRICE();
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 public class LottoGame {
-    public final static int LOTTO_PRICE = 1000;
+    private final static int LOTTO_PRICE = 1000;
     private List<Lotto> lottos = new ArrayList<>();
 
     public LottoGame(int lottoCount, LottoGeneration lottoGeneration) {
@@ -17,6 +17,10 @@ public class LottoGame {
     public static int findMatch(int i, List<Integer> winnerLotto) {
         int count = 0;
         return 0;
+    }
+
+    public static int LOTTO_PRICE() {
+        return LOTTO_PRICE;
     }
 
     public List<Lotto> getLottos() {
