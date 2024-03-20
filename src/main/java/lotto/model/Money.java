@@ -6,6 +6,7 @@ import static lotto.validation.MoneyValidator.assertMoney;
 
 public class Money {
     public static final int LOTTO_PER_MONEY = 1_000;
+
     private final int amount;
 
     public Money(int amount) {

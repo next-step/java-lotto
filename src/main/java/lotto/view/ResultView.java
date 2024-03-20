@@ -19,10 +19,10 @@ public class ResultView {
     private static final String BONUS_RESULT_FORMAT = "%s개 일치, 보너스 볼 일치(%s원) - %s개";
     private static final String RATE_OF_RETURN_FORMAT = "총 수익률은 %.2f 입니다.";
 
-    public void printOrderResponse(List<LottoNumberResponse> responses, int manaulQuantity, int automaticQuantity) {
+    public void printOrderResponse(List<LottoNumberResponse> responses, int manualQuantity, int automaticQuantity) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(String.format(QUANTITY_RESULT_FORMAT, manaulQuantity, automaticQuantity)).append(NEW_LINE);
+        sb.append(String.format(QUANTITY_RESULT_FORMAT, manualQuantity, automaticQuantity)).append(NEW_LINE);
         for (LottoNumberResponse response : responses) {
             sb.append(toJoinNumbers(response.getNumbers())).append(NEW_LINE);
         }

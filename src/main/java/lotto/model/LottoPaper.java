@@ -12,11 +12,11 @@ public class LottoPaper {
 
     public LottoPaper(List<Lotto> automaticLottos, List<Lotto> manualLottos) {
         if (automaticLottos == null) {
-            throw new InvalidLottoException("자동 구매 로또에 null이나 빈 값은 허용하지 않습니다");
+            throw new InvalidLottoException("자동 구매 로또에 null을 허용하지 않습니다");
         }
 
         if (manualLottos == null) {
-            throw new InvalidLottoException("수동 구매 로또에 null은 허용하지 않습니다");
+            throw new InvalidLottoException("수동 구매 로또에 null을 허용하지 않습니다");
         }
 
         this.userLottos = merge(manualLottos, automaticLottos);
