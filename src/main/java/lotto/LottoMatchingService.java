@@ -14,12 +14,11 @@ public class LottoMatchingService {
         int matchFiveTimes = 0;
         int matchSixTimes = 0;
 
-
         // 로또를 입력한 갯수에 구입금액에 맞춰 만든다
         lottoMachine.makeLottos();
         // 당첨 번호와 로또들의 번호를 각각 비교한다
         for (int i = 0; i < lottoMachine.showNumberOfLottos(); i++) { // 로또 수만큼 순회
-            matchTimes = lottoMachine.getLottoGenerators().get(i).getNumbers().stream()
+            matchTimes = lottoMachine.getLottoTickets().get(i).getNumbers().stream()
                     .filter(winningNumbers::contains)
                     .count();
 

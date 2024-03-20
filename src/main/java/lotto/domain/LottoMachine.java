@@ -24,7 +24,8 @@ public class LottoMachine {
         return lottoTickets.size();
     }
 
-    public List<LottoTicket> getLottoGenerators() {
+    public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }
+
 }

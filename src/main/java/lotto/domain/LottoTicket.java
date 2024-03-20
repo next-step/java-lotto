@@ -13,7 +13,6 @@ public class LottoTicket {
     }
 
     public List<Integer> generate() {
-
         List<Integer> numbers = generateRandomNumbers();
 
         for (int i = 0; i < 6; i++) {
@@ -39,4 +38,5 @@ public class LottoTicket {
     public List<Integer> getNumbers() {
         return numbers;
     }
+
 }
