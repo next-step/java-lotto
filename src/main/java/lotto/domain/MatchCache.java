@@ -28,6 +28,14 @@ public class MatchCache {
     }
 
     @Override
+    public String toString() {
+        return String.format("\n3개 일치 (5000원)- %d개\n", this.counts[2]) +
+                String.format("4개 일치 (50000원)- %d개\n", this.counts[3]) +
+                String.format("5개 일치 (1500000원)- %d개\n", this.counts[4]) +
+                String.format("6개 일치 (2000000000원) - %d개\n", this.counts[5]);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof MatchCache)) return false;
