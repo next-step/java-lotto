@@ -4,11 +4,9 @@ import java.math.BigDecimal;
 
 import model.LottoAmount;
 import model.LottoFactory;
-import model.LottoNumber;
 import model.LottoWinningNumber;
 import model.Lottos;
 import model.WinningDetails;
-import model.WinningNumbers;
 import view.InputView;
 import view.OutputView;
 
@@ -32,9 +30,8 @@ public class LottoController {
         outputView.printLottoPurchaseCount(numberOfAutomaticLottoNumbers, numberOfManualLottoNumbers);
         outputView.printPurchaseLottos(lottos.getLottos());
 
-        final WinningNumbers winningNumbers = new WinningNumbers(inputView.inputWinningLottoNumbers());
-        final LottoNumber lottoNumber = new LottoNumber(inputView.inputBonusNumber());
-        final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, lottoNumber);
+        final LottoWinningNumber lottoWinningNumber =
+                LottoWinningNumber.of(inputView.inputWinningLottoNumbers(), inputView.inputBonusNumber());
         final WinningDetails winningDetails = new WinningDetails();
         winningDetails.makeWinningDetails(lottos, lottoWinningNumber);
         final BigDecimal profit = winningDetails.calculateProfit(lottoAmount);

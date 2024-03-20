@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class LottoWinningNumber {
 
     private final WinningNumbers winningNumbers;
@@ -9,6 +11,12 @@ public class LottoWinningNumber {
         validate(winningNumbers, bonusNumber);
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
+    }
+
+    public static LottoWinningNumber of(final List<Integer> winningNumbersInput, final int bonusNumberInput) {
+        final WinningNumbers winningNumbers = new WinningNumbers(winningNumbersInput);
+        final LottoNumber bonusNumber = new LottoNumber(bonusNumberInput);
+        return new LottoWinningNumber(winningNumbers, bonusNumber);
     }
 
     public Rank match(final Lotto lotto) {

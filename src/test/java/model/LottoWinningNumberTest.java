@@ -107,5 +107,4 @@ class LottoWinningNumberTest {
         // then
         assertThat(rank).isEqualTo(Rank.NONE);
     }
-
 }
