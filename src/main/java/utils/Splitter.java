@@ -1,4 +1,4 @@
-package calculator.utils;
+package utils;
 
 public class Splitter {
     private static final String EMPTY_SPACE_DELIMITER = " ";
