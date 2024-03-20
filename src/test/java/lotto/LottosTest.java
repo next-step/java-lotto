@@ -1,25 +1,35 @@
 package lotto;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.HashMap;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
+
 public class LottosTest {
 
-	@Test
+	@ParameterizedTest
+	@CsvSource({
+			"21, 2, 3, 8, 9, 10, FOURTH, 1",
+			"21, 2, 3, 41, 9, 10, THIRD, 1",
+			"21, 2, 3, 41, 5, 10, SECOND, 1",
+			"21, 2, 3, 41, 5, 43, FIRST, 1"
+	})
 	@DisplayName("당첨 통계 테스트 - 4등")
-	void winningStatisticsTest() {
-		List<Integer> lottoNumbers1 = List.of(8, 21, 23, 41, 42, 43);
+	void winningStatisticsTest(int number1, int number2, int number3, int number4, int number5, int number6, String key, int expectedMatchCount) {
+		List<Integer> lottoNumbers = List.of(number1, number2, number3, number4, number5, number6);
 		List<Integer> winningLottoNumber = List.of(21, 2, 3, 41, 5, 43);
-		List<Lotto> inputLottos = List.of(new Lotto(new LottoNumbers(lottoNumbers1)));
 
+		List<Lotto> inputLottos = List.of(new Lotto(new LottoNumbers(lottoNumbers)));
 		Lottos lottos = new Lottos(inputLottos);
 
-		List<LottoRank> lottoRanks = lottos.getWinningStatistics(winningLottoNumber);
+		HashMap<LottoRank, Integer> lottoRanks = lottos.getWinningStatistics(winningLottoNumber);
+		LottoRank expectedRank = LottoRank.valueOf(key);
 
-		assertThat(lottoRanks.get(0)).isEqualTo(LottoRank.FOURTH);
+		assertThat(lottoRanks.get(expectedRank)).isEqualTo(expectedMatchCount);
 	}
 
 }
