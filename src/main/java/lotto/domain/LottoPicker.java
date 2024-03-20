@@ -5,19 +5,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumbers {
+public class LottoPicker {
     private final List<Integer> lottoNumbers;
 
-    public LottoNumbers() {
+    public LottoPicker() {
         this.lottoNumbers = IntStream.rangeClosed(1, 45)
                 .boxed()
                 .collect(Collectors.toList());
     }
 
-    public PickedLotto pickLotto() {
+    public LottoNumber pickLotto() {
         Collections.shuffle(this.lottoNumbers);
         List<Integer> pickLottoNumbers = this.lottoNumbers.subList(0, 6);
-        Collections.sort(pickLottoNumbers);
-        return new PickedLotto(pickLottoNumbers);
+        return new LottoNumber(pickLottoNumbers);
     }
 }
