@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class WinningNumbers {
     private final static String SPLIT_DELIMITER = ", ";
@@ -23,7 +24,7 @@ public class WinningNumbers {
     }
 
     private List<LottoNumber> toWinningNumbers(String input) {
-        List<LottoNumber> winningNumbers = Arrays.stream(toStringArray(input))
+        List<LottoNumber> winningNumbers = Stream.of(toStringArray(input))
                 .map(this::toLottoNumber)
                 .collect(Collectors.toList());
 
