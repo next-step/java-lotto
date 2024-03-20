@@ -9,8 +9,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static lotto.domain.LottoNumberValidator.MAX_LOTTO_NUMBER;
-import static lotto.domain.LottoNumberValidator.MIN_LOTTO_NUMBER;
+import static lotto.domain.LottoValidator.MAX_LOTTO_NUMBER;
+import static lotto.domain.LottoValidator.MIN_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoNumberTest {
