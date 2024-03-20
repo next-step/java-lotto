@@ -8,8 +8,7 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
 public class LottoPaper {
-    private final List<Lotto> automaticLottos;
-    private final List<Lotto> manualLottos;
+    private final List<Lotto> userLottos;
 
     public LottoPaper(List<Lotto> automaticLottos, List<Lotto> manualLottos) {
         if (automaticLottos == null) {
@@ -20,12 +19,11 @@ public class LottoPaper {
             throw new InvalidLottoException("수동 구매 로또에 null은 허용하지 않습니다");
         }
 
-        this.automaticLottos = automaticLottos;
-        this.manualLottos = manualLottos;
+        this.userLottos = merge(manualLottos, automaticLottos);
     }
 
     public List<List<String>> mapToList() {
-        return merge().stream()
+        return this.userLottos.stream()
                 .map(Lotto::mapToList)
                 .collect(toList());
     }
@@ -35,26 +33,18 @@ public class LottoPaper {
     }
 
     private List<Rank> toRanks(WinningLotto winningLotto) {
-        return merge().stream()
+        return this.userLottos.stream()
                 .map(lotto -> lotto.match(winningLotto))
                 .collect(toList());
     }
 
-    private List<Lotto> merge() {
-        return Stream.concat(this.manualLottos.stream(), this.automaticLottos.stream())
+    private List<Lotto> merge(List<Lotto> manualLottos, List<Lotto> automaticLottos) {
+        return Stream.concat(manualLottos.stream(), automaticLottos.stream())
                 .collect(toList());
     }
 
-    public int getAutomaticQuantity() {
-        return this.automaticLottos.size();
-    }
-
-    public int getManualQuantity() {
-        return this.manualLottos.size();
-    }
-
     public int getQuantityTotal() {
-        return this.automaticLottos.size() + this.manualLottos.size();
+        return this.userLottos.size();
     }
 
 }
