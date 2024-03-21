@@ -5,35 +5,9 @@ import java.util.regex.Pattern;
 
 public class Calculate {
 
-    private static final String STRING_ARRAY_SYMBOL = "[^\\D]";
-    private static final String STRING_ARRAY_DIGIT = "[^\\d+]";
+    private static final String REGEX_NOT_SYMBOL = "[^\\+|\\-|\\*|\\/]";
+    private static final String REGEX_NOT_DIGIT = "[^\\d+]";
     private static final int MINIMUM_STARING_ARRAY_LENGTH = 3;
-
-    public int add(int i, int j) {
-        return i + j;
-    }
-
-    public int subtract(int i, int j) {
-        return i - j;
-    }
-
-    public int multiply(int i, int j) {
-        return i * j;
-    }
-
-    public int divide(int i, int j) {
-        if (j == 0) {
-            throw new IllegalArgumentException("두번째 인자는 0 일 수 없습니다.");
-        }
-        return i / j;
-    }
-
-    public void checkString(Object s) {
-        if (s == null || s.toString().isEmpty()) {
-            throw new IllegalStateException("입력 값은 필수입니다.");
-        }
-    }
-
 
     public int calculate(String s) {
 
@@ -51,7 +25,7 @@ public class Calculate {
         }
 
         for (int i = 0; i < MINIMUM_STARING_ARRAY_LENGTH; i++) {
-            checkStringArray(stringType(i), strings[i]);
+            checkStringArray(regex(i), strings[i]);
         }
 
         return calculate(s.replace(strings[0] + " " + strings[1] + " " + strings[2], String.valueOf(getResult(strings))));
@@ -59,22 +33,21 @@ public class Calculate {
 
     private int getResult(String[] strings) {
         String symbol = strings[1];
-        String param1 = strings[0];
-        String param2 = strings[2];
+        int param1 = Integer.parseInt(strings[0]);
+        int param2 = Integer.parseInt(strings[2]);
 
         if (symbol.equals("+")) {
-            return add(Integer.parseInt(param1), Integer.parseInt(param2));
+            return add(param1, param2);
         }
         if (symbol.equals("-")) {
-            return subtract(Integer.parseInt(param1), Integer.parseInt(param2));
+            return subtract(param1, param2);
         }
         if (symbol.equals("*")) {
-            return multiply(Integer.parseInt(param1), Integer.parseInt(param2));
+            return multiply(param1, param2);
         }
 
-        return divide(Integer.parseInt(param1), Integer.parseInt(param2));
+        return divide(param1, param2);
     }
-
 
     private void checkStringArray(String regex, String string) {
         Pattern pattern = Pattern.compile(regex);
@@ -84,10 +57,35 @@ public class Calculate {
         }
     }
 
-    private String stringType(int i) {
-        if (i % 2 == 0) {
-            return STRING_ARRAY_DIGIT;
+    private int add(int i, int j) {
+        return i + j;
+    }
+
+    private int subtract(int i, int j) {
+        return i - j;
+    }
+
+    private int multiply(int i, int j) {
+        return i * j;
+    }
+
+    private int divide(int i, int j) {
+        if (j == 0) {
+            throw new IllegalArgumentException("두번째 인자는 0 일 수 없습니다.");
         }
-        return STRING_ARRAY_SYMBOL;
+        return i / j;
+    }
+
+    private void checkString(Object s) {
+        if (s == null || s.toString().isEmpty()) {
+            throw new IllegalStateException("입력 값은 필수입니다.");
+        }
+    }
+
+    private String regex(int i) {
+        if (i % 2 == 0) {
+            return REGEX_NOT_DIGIT;
+        }
+        return REGEX_NOT_SYMBOL;
     }
 }

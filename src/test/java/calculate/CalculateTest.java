@@ -20,28 +20,28 @@ public class CalculateTest {
 
     @Test
     void 덧셈_테스트() {
-        assertThat(cal.add(3, 4)).isEqualTo(7);
+        assertThat(cal.calculate("3 + 4")).isEqualTo(7);
     }
 
     @Test
     void 뺄셈_테스트() {
-        assertThat(cal.subtract(5, 2)).isEqualTo(3);
+        assertThat(cal.calculate("5 - 2")).isEqualTo(3);
     }
 
     @Test
     void 곱셈_테스트() {
-        assertThat(cal.multiply(2, 3)).isEqualTo(6);
+        assertThat(cal.calculate("2 * 3")).isEqualTo(6);
     }
 
     @Test
     void 나눗셈_테스트() {
-        assertThat(cal.divide(5, 2)).isEqualTo(2);
+        assertThat(cal.calculate("5 / 2")).isEqualTo(2);
     }
 
     @Test
     void 입력값_null_체크() {
         assertThatExceptionOfType(IllegalStateException.class)
-                .isThrownBy(() -> cal.checkString(null));
+                .isThrownBy(() -> cal.calculate(null));
     }
 
     @Test
