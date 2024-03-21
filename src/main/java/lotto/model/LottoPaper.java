@@ -3,28 +3,29 @@ package lotto.model;
 import lotto.exception.InvalidLottoException;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
 public class LottoPaper {
-    private final List<Lotto> lottos;
+    private final List<Lotto> userLottos;
 
-    public LottoPaper(List<Lotto> lottos) {
-        if (lottos == null) {
-            throw new InvalidLottoException("Null 허용하지 않습니다");
+    public LottoPaper(List<Lotto> automaticLottos, List<Lotto> manualLottos) {
+        if (automaticLottos == null) {
+            throw new InvalidLottoException("자동 구매 로또에 null을 허용하지 않습니다");
         }
 
-        this.lottos = lottos;
+        if (manualLottos == null) {
+            throw new InvalidLottoException("수동 구매 로또에 null을 허용하지 않습니다");
+        }
+
+        this.userLottos = merge(manualLottos, automaticLottos);
     }
 
     public List<List<String>> mapToList() {
-        return this.lottos.stream()
+        return this.userLottos.stream()
                 .map(Lotto::mapToList)
                 .collect(toList());
-    }
-
-    public int getQuantity() {
-        return this.lottos.size();
     }
 
     public Prize matches(WinningLotto winningLotto) {
@@ -32,8 +33,18 @@ public class LottoPaper {
     }
 
     private List<Rank> toRanks(WinningLotto winningLotto) {
-        return this.lottos.stream()
+        return this.userLottos.stream()
                 .map(lotto -> lotto.match(winningLotto))
                 .collect(toList());
     }
+
+    private List<Lotto> merge(List<Lotto> manualLottos, List<Lotto> automaticLottos) {
+        return Stream.concat(manualLottos.stream(), automaticLottos.stream())
+                .collect(toList());
+    }
+
+    public int getQuantityTotal() {
+        return this.userLottos.size();
+    }
+
 }

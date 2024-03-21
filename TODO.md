@@ -1,3 +1,35 @@
+### 4단계 피드백
+
+- [x] LottoMachineValidator -> MoneyValidator renaming
+- [x] assertMoney(..) 파라미터 타입, 조건식 수정
+- [x] Money 생성자 할당 전에 유효성 검사하도록 수정
+- [x] 로또 구매 요청시 OrderRequest (dto) 제거
+- [x] LOTTO_PER_MONEY 제약조건을 Money 로 이동
+- [x] LottoPaper에 분리했던 자동/수동 구매 로또 필드를 제거하고 하나로 합치기
+- [x] 전략패턴 적용해서 자동/수동 로또 구매하도록 리팩토링
+    - LottoStrategy 인터페이스
+    - AutomaticPurchaseStrategy : 자동 구매 전략
+    - ManualPurchaseStrategy : 수동 구매 전략
+- [x] 자동/수동 구매 전략 패턴 -> 탬플릿 메소드 패턴으로 변경
+- [x] 자동/수동 구매 테스트 작성
+
+---
+
+### 4단계 - 로또 (수동)
+
+- [x] 구매 금액 원시값을 포장하는 Money 클래스 생성한다
+- [x] 수동으로 구매할 로또 수를 입력받는다
+    - 음수는 입력할 수 없다
+- [x] 수동으로 구매할 로또 수만큼 로또 번호를 입력받는다
+    - 수동 구매 수량은 최대 구매 수량을 초과할 수 없다
+- [x] LottoMachine에서는 요청에 따라 수동/자동 구매 로또를 처리하여 반환한다
+- [x] 수동/자동 구매 로또 개수와 번호 출력한다
+- [x] 수동/자동 로또 포함하여 로또 당첨 결과를 구한다
+- [x] 수동 구매 로또 번호 순서 보장되지 않는 이슈
+    - Lotto 생성자에서 LinkedHashSet 으로 처리하도록 리팩토링
+
+---
+
 ### 3단계 피드백
 
 - [x] Prize 멤버 필드 타입을 EnumMap (구현체)에서 Map(인터페이스)로 변경
