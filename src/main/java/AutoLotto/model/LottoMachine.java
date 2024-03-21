@@ -3,18 +3,23 @@ package autoLotto.model;
 import autoLotto.exception.PurchaseException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import static autoLotto.model.LottoConstants.INVALID_PURCHASE_AMOUNT;
+
 public class LottoMachine {
+    private static final Long VALID_UNIT = 1000L;
+
     private List<Lotto> lottos = new ArrayList<>();
 
-    private static final Long VALID_UNIT = 1000L;
-    private static final String INVALID_PURCHASE_AMOUNT = "로또 1장은 1,000원이며, 지불하신 금액으로는 로또 구매가 불가능합니다.";
-
     public LottoMachine(String purchaseAmount, LottoGeneratorStrategy lottoGeneratorStrategy) {
+        this.lottos = generateLottos(purchaseAmount, lottoGeneratorStrategy);
+    }
+
+    private List<Lotto> generateLottos(String purchaseAmount, LottoGeneratorStrategy lottoGeneratorStrategy) {
         int chances = validatePurchaseAmount(purchaseAmount);
-        this.lottos = buy(chances, lottoGeneratorStrategy);
+        return buy(chances, lottoGeneratorStrategy);
     }
 
     private int validatePurchaseAmount(String purchaseAmount) throws PurchaseException {
@@ -40,14 +45,10 @@ public class LottoMachine {
 
     private Lotto getAutoLotto(LottoGeneratorStrategy lottoGeneratorStrategy) {
         LottoGenerator lottoGenerator = new LottoGenerator();
-        int[] randomLotto = lottoGenerator.generateLottoNumbers(lottoGeneratorStrategy);
-        Arrays.sort(randomLotto);
+        List<Integer> randomLotto = lottoGenerator.generateLottoNumbers(lottoGeneratorStrategy);
+        Collections.sort(randomLotto);
 
         return new Lotto(randomLotto);
-    }
-
-    public Lotto retrieveLotto(int index) {
-        return lottos.get(index);
     }
 
     public int getNumberOfLottos() {
