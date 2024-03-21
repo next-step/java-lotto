@@ -1,7 +1,12 @@
 package lotto.ui;
 
-import java.util.Scanner;
+import lotto.common.ConstantSet;
+import lotto.exception.InvalidNumberInputException;
 
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import static lotto.common.ConstantSet.CUSTOM_MONEY_PATTERN;
+import static lotto.common.ConstantSet.CUSTOM_MONEY_REGEXP;
 public class InputHandler {
     private Scanner scanner;
     private InputHandler(){
@@ -15,6 +20,10 @@ public class InputHandler {
         System.out.println("구입 금액을 입력해주세요.");
         int money = scanner.nextInt();
         scanner.nextLine();
+        Matcher matcher = CUSTOM_MONEY_PATTERN.matcher(CUSTOM_MONEY_REGEXP);
+        if (!matcher.matches()) {
+            throw new InvalidNumberInputException();
+        }
         return money;
     }
 
@@ -22,7 +31,6 @@ public class InputHandler {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();
     }
-
 
     public void closeScanner() {
         scanner.close();
