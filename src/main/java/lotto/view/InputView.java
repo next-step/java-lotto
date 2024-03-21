@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
 import lotto.domain.Ball;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 
 public class InputView {
@@ -20,9 +21,9 @@ public class InputView {
     private static final String INPUT_WINNING_LOTTO_BONUS_BALL_MESSAGE = "보너스 볼을 입력해주세요.";
     private static final String LOTTO_NUMBERS_DELIMITER = ",";
 
-    public int inputMoney() {
+    public Money inputMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
-        return Integer.parseInt(scanner.nextLine());
+        return new Money(inputInt());
     }
 
     public WinningLotto inputWinningLotto() {

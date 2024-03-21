@@ -4,6 +4,7 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoStore;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.domain.Prizes;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
@@ -20,10 +21,10 @@ public class LottoConsole {
     }
 
     public void start() {
-        int money = inputView.inputMoney();
+        Money money = inputView.inputMoney();
         List<Lotto> manualLottoList = inputView.inputManualLottos();
         Lottos manualLottos = LottoStore.sellManual(manualLottoList, money);
-        Lottos lottos = LottoStore.sellAutomatic(money - manualLottos.price());
+        Lottos lottos = LottoStore.sellAutomatic(money);
 
         outputView.printPurchasedLottos(manualLottos, lottos);
         WinningLotto winningLotto = inputView.inputWinningLotto();

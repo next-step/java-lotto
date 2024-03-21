@@ -7,21 +7,19 @@ public class LottoStore {
 
     public static final int LOTTO_PRICE = 1000;
 
-    public static Lottos sellAutomatic(int money) {
+    public static Lottos sellAutomatic(Money money) {
         List<Lotto> lottos = new ArrayList<>();
-        int maxAmount = money / LOTTO_PRICE;
+        int maxAmount = money.maxPurchasableQuantity(LOTTO_PRICE);
+        money.spend(LOTTO_PRICE * maxAmount);
         for (int i = 0; i < maxAmount; i++) {
             Lotto lotto = LottoFactory.generate();
             lottos.add(lotto);
         }
-
         return new Lottos(lottos);
     }
 
-    public static Lottos sellManual(List<Lotto> lottos, int money) {
-        if (money < lottos.size() * LOTTO_PRICE) {
-            throw new IllegalArgumentException("수동 로또를 살 돈이 부족합니다");
-        }
+    public static Lottos sellManual(List<Lotto> lottos, Money money) {
+        money.spend(LOTTO_PRICE * lottos.size());
         return new Lottos(lottos);
     }
 }

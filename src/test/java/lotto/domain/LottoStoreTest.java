@@ -15,7 +15,7 @@ public class LottoStoreTest {
     )
     @DisplayName("가진 돈에 따라 최대한 많은 로또를 판매한다")
     void purchaseAsMuchAsPossible(int input, int expected) {
-        Lottos lottos = LottoStore.sellAutomatic(input);
+        Lottos lottos = LottoStore.sellAutomatic(new Money(input));
         assertThat(lottos.size()).isEqualTo(expected);
     }
 }
