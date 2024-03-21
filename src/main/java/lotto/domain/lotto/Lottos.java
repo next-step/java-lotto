@@ -5,10 +5,13 @@ import lotto.domain.lotto.strategy.LottoGeneratingStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static lotto.domain.lotto.Lotto.LOTTO_NUMBER_SIZE;
 
 public class Lottos {
+    private static final int START_OF_RANGE = 0;
+
     private final PurchaseAmountOfMoney purchaseAmountOfMoney;
     private final List<Lotto> lottos;
 
@@ -22,13 +25,12 @@ public class Lottos {
     }
 
     public void purchaseLotto(LottoGeneratingStrategy lottoGeneratingStrategy) {
-        if(lottos.size() == purchaseAmountOfMoney.numberOfLottoToPurchase()) {
+        if (lottos.size() == purchaseAmountOfMoney.numberOfLottoToPurchase()) {
             return;
         }
-        
-        for (int i = 0; i < purchaseAmountOfMoney.numberOfLottoToPurchase(); i++) {
-            lottos.add(lottoGeneratingStrategy.lotto());
-        }
+
+        IntStream.range(START_OF_RANGE, purchaseAmountOfMoney.numberOfLottoToPurchase())
+                .forEach((i) -> lottos.add(lottoGeneratingStrategy.lotto()));
     }
 
     public List<Lotto> lottos() {
@@ -53,13 +55,11 @@ public class Lottos {
     }
 
     private int winningMoney(int[] winningStaticsArray) {
-        int winningMoney = 0;
-
-        for (int matchCount = 0; matchCount <= LOTTO_NUMBER_SIZE; matchCount++) {
-            Rank rank = Rank.findRank(matchCount);
-            winningMoney += (rank.getWinningMoney() * winningStaticsArray[matchCount]);
-        }
-
-        return winningMoney;
+        return IntStream.rangeClosed(START_OF_RANGE, LOTTO_NUMBER_SIZE)
+                .map(matchCount -> {
+                    Rank rank = Rank.findRank(matchCount);
+                    return rank.getWinningMoney() * winningStaticsArray[matchCount];
+                })
+                .reduce(0, Integer::sum);
     }
 }

@@ -6,16 +6,23 @@ import java.util.List;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
-    public static final int MIN_LOTTO_NUMBER = 1;
-    public static final int MAX_LOTTO_NUMBER = 45;
 
-    private final List<Integer> lottoNumbers;
+    private static final String WRONG_LOTTO_NUMBERS_SIZE_MESSAGE = "(size: %d): 잘못된 로또 번호 크기입니다.";
 
-    private Lotto(List<Integer> lottoNumbers) {
+    private final List<LottoNumber> lottoNumbers;
+
+    private Lotto(List<LottoNumber> lottoNumbers) {
+        validateSizeOfLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto valueOf(List<Integer> lottoNumbers) {
+    private void validateSizeOfLottoNumbers(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException(String.format(WRONG_LOTTO_NUMBERS_SIZE_MESSAGE, lottoNumbers.size()));
+        }
+    }
+
+    public static Lotto valueOf(List<LottoNumber> lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
 
@@ -25,7 +32,7 @@ public class Lotto {
                 .count();
     }
 
-    public List<Integer> lottoNumbers() {
+    public List<LottoNumber> lottoNumbers() {
         return lottoNumbers;
     }
 }

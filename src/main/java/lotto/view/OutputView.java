@@ -6,6 +6,7 @@ import lotto.domain.lotto.ResultOfLottos;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static lotto.domain.Rank.FIRST;
 import static lotto.domain.Rank.FOURTH;
@@ -20,8 +21,8 @@ public class OutputView {
     private static final String LEFT_SQUARE_BRACKET = "]";
     private static final String COMMA_BLANK = ", ";
     private static final String SEPARATOR = "---------";
-    private static final String NEXT_LINE = "\n";
-    private static final int STANDARD_OF_RATE_OF_RETURN = 1;
+    private static final String NEXT_LINE = System.lineSeparator();
+    private static final int BREAK_EVEN_POINT = 1; // 손해인지 아닌지를 판단하는
 
     private OutputView() {
     }
@@ -36,14 +37,19 @@ public class OutputView {
 
         for (Lotto lotto : lottos) {
             lottosStringBuilder.append(RIGHT_SQUARE_BRACKET)
-                    .append(lotto.lottoNumbers().stream()
-                            .map(number -> Integer.toString(number))
-                            .collect(Collectors.joining(COMMA_BLANK)))
+                    .append(lottoNumbers(lotto))
                     .append(LEFT_SQUARE_BRACKET)
                     .append(NEXT_LINE);
         }
 
         System.out.println(lottosStringBuilder);
+    }
+
+    private static String lottoNumbers(Lotto lotto) {
+        return lotto.lottoNumbers()
+                .stream()
+                .map(lottoNumber -> String.valueOf(lottoNumber.lottoNumber()))
+                .collect(Collectors.joining(COMMA_BLANK));
     }
 
     public static void printResultOfLottos(ResultOfLottos resultOfLottos) {
@@ -54,20 +60,21 @@ public class OutputView {
                 .append(NEXT_LINE)
                 .append(SEPARATOR)
                 .append(NEXT_LINE)
-                .append(getWinningStatisticsMessage(resultOfLottos))
+                .append(winningStatisticsMessage(resultOfLottos))
                 .append(rateOfReturnMessage(resultOfLottos.rateOfReturn()));
 
         System.out.println(lottosResultBuilder);
     }
 
-    private static String getWinningStatisticsMessage(ResultOfLottos resultOfLottos) {
+    private static String winningStatisticsMessage(ResultOfLottos resultOfLottos) {
         StringBuilder winningStatisticsMessageBuilder = new StringBuilder();
 
-        for (int matchCount = FOURTH.getMatchCount(); matchCount <= FIRST.getMatchCount(); matchCount++) {
-            Rank rank = Rank.findRank(matchCount);
-            winningStatisticsMessageBuilder.append(String.format(WINNING_STATISTICS_MESSAGE, rank.getMatchCount(), rank.getWinningMoney(), resultOfLottos.winningStatic(rank.getMatchCount())))
-                    .append(NEXT_LINE);
-        }
+        IntStream.rangeClosed(FOURTH.getMatchCount(), FIRST.getMatchCount())
+                .forEach(matchCount -> {
+                    Rank rank = Rank.findRank(matchCount);
+                    winningStatisticsMessageBuilder.append(String.format(WINNING_STATISTICS_MESSAGE, rank.getMatchCount(), rank.getWinningMoney(), resultOfLottos.winningStatic(rank.getMatchCount())))
+                            .append(NEXT_LINE);
+                });
 
         return winningStatisticsMessageBuilder.toString();
     }
@@ -76,7 +83,7 @@ public class OutputView {
         StringBuilder rateOfReturnMessageBuilder = new StringBuilder();
 
         rateOfReturnMessageBuilder.append(String.format(RATE_OF_RETURN_MESSAGE, rateOfReturn));
-        if (STANDARD_OF_RATE_OF_RETURN > rateOfReturn) {
+        if (BREAK_EVEN_POINT > rateOfReturn) {
             rateOfReturnMessageBuilder.append(LOSS_MESSAGE);
         }
 

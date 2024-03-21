@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.lotto.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -35,8 +36,8 @@ class WinningNumbersTest {
         }
 
         @ParameterizedTest
-        @ValueSource(strings = {"1, 2, 3, a, 5, 6", "1, 2, 3, 4, 5, 46", "0, 2, 3, 4, 5, 6"})
-        @DisplayName("당첨 번호의 숫자가 MIN_LOTTO_NUMBER 보다 크거나 같고 MAX_LOTTO_NUMBER 보다 작거나 ㄲㄲ같은 정수가 아닌 경우 IllegalArgumentException이 발생한다.")
+        @ValueSource(strings = {"1, 2, 3, a, 5, 6", "1, 2, 3, 4, 5, 6.123"})
+        @DisplayName("당첨 번호의 숫자가 정수가 아닌 경우 IllegalArgumentException이 발생한다.")
         void testNonValidNumberFailCase(String winningNumberInput) {
             assertThatThrownBy(() -> WinningNumbers.valueOf(winningNumberInput))
                     .isExactlyInstanceOf(IllegalArgumentException.class);
@@ -55,7 +56,8 @@ class WinningNumbersTest {
     @ParameterizedTest
     @CsvSource(value = {"1, 2, 3, 4, 5, 6:4:true", "1, 2, 3, 4, 5, 6:7:false"}, delimiter = ':')
     @DisplayName("contains(): 당첨 번호에 number가 포함되어 있다면 true를 없다면 false를 반환한다.")
-    void testContains(String winningNumberInput, int number, boolean expected) {
-        assertThat(WinningNumbers.valueOf(winningNumberInput).contains(number)).isEqualTo(expected);
+    void testContains(String winningNumberInput, int lottoNumber, boolean expected) {
+        WinningNumbers winningNumbers = WinningNumbers.valueOf(winningNumberInput);
+        assertThat(winningNumbers.contains(LottoNumber.valueOf(lottoNumber))).isEqualTo(expected);
     }
 }

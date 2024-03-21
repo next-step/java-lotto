@@ -1,35 +1,34 @@
 package lotto.domain;
 
+import lotto.domain.lotto.LottoNumber;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static lotto.Validator.*;
-import static lotto.domain.lotto.Lotto.*;
+import static lotto.Validator.isNonBlank;
+import static lotto.Validator.isPositiveInteger;
+import static lotto.domain.lotto.Lotto.LOTTO_NUMBER_SIZE;
 
 public class WinningNumbers {
-    private static final String WRONG_WINNING_NUMBERS_MESSAGE = "잘못된 당첨 번호입니다.";
+    private static final String WRONG_WINNING_NUMBERS_MESSAGE = "(%s): 잘못된 당첨 번호입니다.";
     private static final String COMMA_BLANK_DELIMITER = ", ";
 
-    private final Set<Integer> winningNumbers;
+    private final Set<LottoNumber> winningNumbers;
 
     private WinningNumbers(String winningNumberInput) {
         validateWinningNumbers(winningNumberInput);
         validateNumberOfWinningNumbers(winningNumberInput);
 
         this.winningNumbers = Arrays.stream(winningNumberInput.split(COMMA_BLANK_DELIMITER))
-                .map(Integer::parseInt)
+                .map(lottoNumber -> LottoNumber.valueOf(Integer.parseInt(lottoNumber)))
                 .collect(Collectors.toUnmodifiableSet());
     }
 
-    public static WinningNumbers valueOf(String winningNumberInput) {
-        return new WinningNumbers(winningNumberInput);
-    }
-    
     private void validateWinningNumbers(String winningNumberInput) {
         if (!isNonBlank(winningNumberInput) || winningNumberInput.split(COMMA_BLANK_DELIMITER).length != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException(WRONG_WINNING_NUMBERS_MESSAGE);
+            throw new IllegalArgumentException(String.format(WRONG_WINNING_NUMBERS_MESSAGE, winningNumberInput));
         }
     }
 
@@ -43,12 +42,16 @@ public class WinningNumbers {
     }
 
     private void validateNumber(String number, Set<Integer> numberSet) {
-        if (!isPositiveInteger(number) || !isInRange(Integer.parseInt(number), MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER) || !numberSet.add(Integer.parseInt(number))) {
-            throw new IllegalArgumentException(WRONG_WINNING_NUMBERS_MESSAGE);
+        if (!isPositiveInteger(number) || !numberSet.add(Integer.parseInt(number))) {
+            throw new IllegalArgumentException(String.format(WRONG_WINNING_NUMBERS_MESSAGE, number));
         }
     }
 
-    public boolean contains(int number) {
-        return winningNumbers.contains(number);
+    public static WinningNumbers valueOf(String winningNumberInput) {
+        return new WinningNumbers(winningNumberInput);
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return winningNumbers.contains(lottoNumber);
     }
 }

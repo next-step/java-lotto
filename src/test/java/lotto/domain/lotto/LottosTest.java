@@ -9,12 +9,20 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
-    LottoGeneratingStrategy lottoGeneratingStrategyStub = () -> Lotto.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6));
+    LottoGeneratingStrategy lottoGeneratingStrategyStub = () -> {
+        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
+
+        return Lotto.valueOf(lottoNumbers);
+    };
 
     @Nested
     @DisplayName("purchaseLotto() 테스트")
