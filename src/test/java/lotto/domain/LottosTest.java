@@ -46,4 +46,17 @@ class LottosTest {
             .collect(Collectors.toSet());
         return new Lotto(balls);
     }
+
+    @Test
+    @DisplayName("Lottos 2개가 잘 합쳐진다")
+    void merged() {
+        Lottos lottos1 = new Lottos(List.of(makeLotto(1, 2, 3, 4, 5, 6)));
+        Lottos lottos2 = new Lottos(List.of(makeLotto(45, 44, 43, 42, 41, 40)));
+
+        Lottos mergedLottos = lottos1.merged(lottos2);
+
+        assertThat(mergedLottos.size()).isEqualTo(lottos1.size() + lottos2.size());
+        assertThat(mergedLottos.value()).containsAll(lottos1.value());
+        assertThat(mergedLottos.value()).containsAll(lottos2.value());
+    }
 }

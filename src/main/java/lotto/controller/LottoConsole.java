@@ -1,7 +1,10 @@
 package lotto.controller;
 
+import java.util.List;
+import lotto.domain.Lotto;
 import lotto.domain.LottoStore;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.domain.Prizes;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
@@ -18,14 +21,15 @@ public class LottoConsole {
     }
 
     public void start() {
-        int money = inputView.inputMoney();
-        Lottos lottos = LottoStore.sellAsMuchAsPossible(money);
+        Money money = inputView.inputMoney();
+        List<Lotto> manualLottoList = inputView.inputManualLottos();
+        Lottos manualLottos = LottoStore.sellManual(manualLottoList, money);
+        Lottos lottos = LottoStore.sellAutomatic(money);
 
-        outputView.printPurchasedLottos(lottos);
-
+        outputView.printPurchasedLottos(manualLottos, lottos);
         WinningLotto winningLotto = inputView.inputWinningLotto();
 
-        Prizes prizes = lottos.judge(winningLotto);
+        Prizes prizes = manualLottos.merged(lottos).judge(winningLotto);
         outputView.printJudgeResult(lottos.price(), prizes);
     }
 }

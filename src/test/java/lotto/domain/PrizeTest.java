@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class PrizeTest {
 
-    private Stream<Arguments> fromTestSources() {
+    private static Stream<Arguments> fromTestSources() {
         return Stream.of(
             Arguments.of(0, true, Prize.NONE),
             Arguments.of(0, false, Prize.NONE),
