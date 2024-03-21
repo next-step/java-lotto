@@ -4,39 +4,41 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum LottoPrize {
-    FOURTH(5000L, (lotto, targetList) -> (int) targetList.stream()
-            .filter(target -> target.getCountMatchedLottoNumber(lotto) == 3)
-            .count()),
-    THIRD(50000L, (lotto, targetList) -> (int) targetList.stream()
-            .filter(target -> target.getCountMatchedLottoNumber(lotto) == 4)
-            .count()),
-    SECOND(1500000L, (lotto, targetList) -> (int) targetList.stream()
-            .filter(target -> target.getCountMatchedLottoNumber(lotto) == 5)
-            .count()),
-    FIRST(2000000000L, (lotto, targetList) -> (int) targetList.stream()
-            .filter(target -> target.getCountMatchedLottoNumber(lotto) == 6)
-            .count());
+    FOURTH(3L, 5000L),
+    THIRD(4L, 50000L),
+    SECOND(5L, 1500000L),
+    FIRST(6L, 2000000000L);
 
 
-    LottoPrize(Long prize, LottoPrizeStrategy lottoPrizeStrategy) {
+    LottoPrize(Long matchCount, Long prize) {
+        this.matchCount = matchCount;
         this.prize = prize;
-        this.lottoPrizeStrategy = lottoPrizeStrategy;
     }
 
-    private final Long prize;
-    private final LottoPrizeStrategy lottoPrizeStrategy;
-
-    public Long getMatchCount(Lotto prizeLotto, List<Lotto> targetLottos) {
-        return lottoPrizeStrategy.getMatch(prizeLotto, targetLottos);
-    }
-
-    public static long getPrizeSum(Lotto prizeLotto, List<Lotto> targetLottoList) {
+    public static LottoPrize createPrize(long count) {
         return Arrays.stream(values())
-                .mapToLong(item -> {
-                    long match = item.lottoPrizeStrategy.getMatch(prizeLotto, targetLottoList);
-                    return item.prize * match;
-                }).sum();
+                .filter(item -> item.matchCount.equals(count))
+                .findAny()
+                .orElse(null);
     }
 
+    public Long getMatchCount() {
+        return matchCount;
+    }
+
+    public Long getPrize() {
+        return prize;
+    }
+
+
+    private final Long matchCount;
+    private final Long prize;
+
+    public boolean equalsPrize(LottoPrize lottoPrize) {
+        if(lottoPrize == null){
+            return false;
+        }
+        return this.equals(lottoPrize);
+    }
 }
 

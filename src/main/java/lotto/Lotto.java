@@ -33,10 +33,11 @@ public class Lotto {
         return lottoNumberList.toString();
     }
 
-    public int getCountMatchedLottoNumber(Lotto lotto) {
-        return (int) numbers().stream()
+    public LottoPrize getCountMatchedLottoNumber(Lotto lotto) {
+        long count = numbers().stream()
                 .filter(numbers -> lotto.contain(numbers))
                 .count();
+        return LottoPrize.createPrize(count);
     }
 
     private boolean contain(LottoNumber otherLottoNumber) {
