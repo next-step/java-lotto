@@ -22,11 +22,11 @@ public class ResultView {
                 System.out.printf("%s 일치 (%s원) - %d개\n",
                     rank.getCount(),
                     rank.getPrize(),
-                    result.getResult().getOrDefault(rank, 0)));
+                    result.countRank(rank)));
     }
 
     public static void printReturnRate(int payed, LottoResult result) {
-        System.out.println("총 수익률은 " + result.calculateReturnRate(payed) +" 입니다.");
+        System.out.println("총 수익률은 " + result.calculateReturnRate(payed) + " 입니다.");
     }
 
 }

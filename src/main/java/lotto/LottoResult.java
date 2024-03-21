@@ -21,6 +21,10 @@ public class LottoResult {
         return Math.floor(sum / payed * ROUND_STANDARD) / ROUND_STANDARD;
     }
 
+    public int countRank(LottoRank rank) {
+        return result.getOrDefault(rank, 0);
+    }
+
     public Map<LottoRank, Integer> getResult() {
         return result;
     }
