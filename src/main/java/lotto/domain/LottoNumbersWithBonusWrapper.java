@@ -16,10 +16,7 @@ public class LottoNumbersWithBonusWrapper {
     public LottoWinInfo countMatchWithWinningLottoNumbersWithBonusNumber(LottoNumbers winningLottoNumbers) {
         LottoWinInfo lottoWinInfo = lottoNumbers.countMatchWithWinningLottoNumbers(winningLottoNumbers);
 
-        if (lottoWinInfo.equals(LottoWinInfo.WIN_SECOND) && this.lottoNumbers.containNumbers(bonusNumber)) {
-            return LottoWinInfo.WIN_FIRST_WITH_BONUS;
-        }
-        return lottoWinInfo;
+        return LottoWinInfo.valueOf(lottoWinInfo.getMatchedCount(), this.lottoNumbers.containNumbers(bonusNumber));
     }
 
     @Override
