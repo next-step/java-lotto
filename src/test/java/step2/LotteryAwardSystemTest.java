@@ -14,8 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class LotteryAwardSystemTest {
 
     private static final RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
-    private static final List<Lotto> testLottos = new ArrayList<>();
-    private static final Lotto winnerNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6), randomNumberGenerator);
+    private static Lottos testLottos;
+    private static final LottoNumbers winnerNumbers = LottoNumbers.fromIntegerList(Arrays.asList(1, 2, 3, 4, 5, 6));
     private static final Integer FIRST_WINNER_PRIZE = 2000000000;
     private static final Integer SECOND_WINNER_PRIZE = 1500000;
     private static final Integer THIRD_WINNER_PRIZE = 50000;
@@ -23,10 +23,12 @@ public class LotteryAwardSystemTest {
 
     @BeforeAll
     static void beforeAll() {
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            List<Integer> numbers = Arrays.asList(1 + i, 2 + i, 3 + i, 4 + i, 5 + i, 6 + i);
-            testLottos.add(new Lotto(numbers, randomNumberGenerator));
+            LottoNumbers numbers = LottoNumbers.fromIntegerList(Arrays.asList(1 + i, 2 + i, 3 + i, 4 + i, 5 + i, 6 + i));
+            lottos.add(new Lotto(numbers, randomNumberGenerator));
         }
+        testLottos = new Lottos(lottos);
     }
 
     @Test

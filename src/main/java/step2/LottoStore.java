@@ -1,13 +1,9 @@
 package step2;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 public class LottoStore {
 
     private final NumberGenerator numberGenerator;
-    private List<Lotto> lottos = new ArrayList<>();
+    private Lottos lottos;
     private final int buyMoney;
 
     public LottoStore(String money, NumberGenerator numberGenerator) {
@@ -36,13 +32,11 @@ public class LottoStore {
     }
 
     private void buyLottos(int availablePurchaseCount) {
-        for (int i = 0; i < availablePurchaseCount; i++) {
-            lottos.add(new Lotto(numberGenerator));
-        }
+        lottos = Lottos.buyLottos(availablePurchaseCount, numberGenerator);
     }
 
-    public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
+    public Lottos getLottos() {
+        return lottos;
     }
 
     public int getBuyMoney() {

@@ -14,8 +14,7 @@ public class LottoApplication {
         String winNumbers = InputView.inputWinnerNumbers();
         LottoNumbers winnerNumbers = new LottoNumbers(winNumbers);
 
-        Lotto winLotto = new Lotto(winnerNumbers.getLottoNumbers(), randomNumberGenerator);
-        LotteryAwardSystem lotteryAwardSystem = new LotteryAwardSystem(lottoStore.getLottos(), winLotto, lottoStore.getBuyMoney());
+        LotteryAwardSystem lotteryAwardSystem = new LotteryAwardSystem(lottoStore.getLottos(), winnerNumbers, lottoStore.getBuyMoney());
         ResultView.printResult(lotteryAwardSystem);
     }
 }

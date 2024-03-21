@@ -1,6 +1,7 @@
 package step2;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -12,13 +13,13 @@ public class Lotto {
         this.numbers = generateLottoNumbers();
     }
 
-    public Lotto(List<Integer> numbers, NumberGenerator numberGenerator) {
-        this.numbers = new LottoNumbers(numbers);
+    public Lotto(LottoNumbers numbers, NumberGenerator numberGenerator) {
+        this.numbers = numbers;
         this.numberGenerator = numberGenerator;
     }
 
     private LottoNumbers generateLottoNumbers() {
-        List<Integer> tempNumbers = new ArrayList<>();
+        List<LottoNumber> tempNumbers = new ArrayList<>();
         while (tempNumbers.size() < 6) {
             addLottoNumber(tempNumbers, createRandomNumber());
         }
@@ -29,13 +30,18 @@ public class Lotto {
         return numberGenerator.generate(45);
     }
 
-    private void addLottoNumber(List<Integer> numList, int num) {
-        if (!numList.contains(num)) {
-            numList.add(num);
+    private void addLottoNumber(List<LottoNumber> numList, int num) {
+        LottoNumber temp = new LottoNumber(num);
+        if (!numList.contains(temp)) {
+            numList.add(temp);
         }
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return numbers.getLottoNumbers();
+    }
+
+    public int matchedNumbersCount(LottoNumbers winNumbers) {
+        return numbers.matchedNumbersCount(winNumbers);
     }
 }

@@ -4,13 +4,13 @@ import java.util.*;
 
 public class LotteryAwardSystem {
 
-    private final List<Lotto> lottos;
-    private final Lotto winNumbers;
+    private final Lottos lottos;
+    private final LottoNumbers winNumbers;
     private final int money;
     private final WinnersCountManager winnersCountManager = new WinnersCountManager();
     private double profitRate;
 
-    public LotteryAwardSystem(List<Lotto> lottos, Lotto winNumbers, int money) {
+    public LotteryAwardSystem(Lottos lottos, LottoNumbers winNumbers, int money) {
         this.lottos = lottos;
         this.winNumbers = winNumbers;
         this.money = money;
@@ -19,16 +19,10 @@ public class LotteryAwardSystem {
     }
 
     private void calculateWinnersCount() {
-        for (Lotto lotto : lottos) {
-            matchedNumbers(lotto);
+        for (Lotto lotto : lottos.getLottos()) {
+            int matchedCount = lotto.matchedNumbersCount(winNumbers);
+            winnersCountManager.recordWinnerCount(matchedCount);
         }
-    }
-
-    private void matchedNumbers(Lotto lotto) {
-        List<Integer> tempNumbers = new ArrayList<>(lotto.getLottoNumbers());
-        tempNumbers.retainAll(winNumbers.getLottoNumbers());
-        int winsCount = tempNumbers.size();
-        winnersCountManager.recordWinnerCount(winsCount);
     }
 
     private void calculateProfitRate() {

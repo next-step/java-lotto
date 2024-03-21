@@ -34,8 +34,8 @@ public class LottoStoreTest {
     @Test
     public void 만원_어치를_구매하면_10개의_복권이_생긴다() {
         LottoStore lottoStore = new LottoStore("10000", randomNumberGenerator);
-        List<Lotto> lottoList = lottoStore.getLottos();
-        assertThat(lottoList.size()).isEqualTo(10);
+        Lottos lottoList = lottoStore.getLottos();
+        assertThat(lottoList.getLottos().size()).isEqualTo(10);
     }
 
     @Test
