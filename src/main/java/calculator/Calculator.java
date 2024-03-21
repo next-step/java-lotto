@@ -6,24 +6,25 @@ import java.util.Stack;
 public class Calculator {
     private Integer result;
     private String operator;
-    public Calculator() {
-    }
 
     public int calculate(String text) {
-        List<String> splitText = StringClassifier.split(text);
+        List<String> elements = StringClassifier.split(text);
 
-        for (String s : splitText) {
-            if (result == null) {
-                result = Integer.parseInt(s);
-            } else if (StringClassifier.isOperator(s)) {
-                operator = s;
-            } else if (StringClassifier.isNumber(s)) {
-                Operator foundOperator = Operator.getOperator(operator);
-                result = foundOperator.calculate(result, Integer.parseInt(s));
-            }
+        for (String element : elements) {
+            process(element);
         }
 
         return result;
     }
 
+    private void process(String element) {
+        if (result == null) {
+            result = Integer.parseInt(element);
+        } else if (StringClassifier.isOperator(element)) {
+            operator = element;
+        } else if (StringClassifier.isNumber(element)) {
+            Operator foundOperator = Operator.getOperator(operator);
+            result = foundOperator.calculate(result, Integer.parseInt(element));
+        }
+    }
 }
