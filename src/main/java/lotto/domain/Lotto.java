@@ -21,4 +21,5 @@ public class Lotto {
     public List<LottoNumber> numbers() {
         return this.numbers;
     }
+
 }

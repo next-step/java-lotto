@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
@@ -18,5 +19,9 @@ public class Lottos {
 
     public int size() {
         return lottos.size();
+    }
+
+    public void forEach(Consumer<Lotto> action) {
+        lottos.forEach(action);
     }
 }
