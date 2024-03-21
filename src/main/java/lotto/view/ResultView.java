@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTickets;
-import lotto.domain.WinnerPrize;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 
 public class ResultView {
     public static void printLottoTickets(LottoTickets lottoTickets) {
@@ -12,7 +9,7 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printWinningStatistics(LottoTickets lottoTickets, WinningNumbers winningNumbers, LottoNumber bonusBall) {
+    public static void printWinningStatistics(LottoTickets lottoTickets, LottoTicket winningNumbers, LottoNumber bonusBall) {
         System.out.println();
         System.out.println("당첨통계");
         System.out.println("---------");
@@ -23,7 +20,7 @@ public class ResultView {
         System.out.println("6개 일치 (2000000000원) - " + lottoTickets.winnerCount(WinnerPrize.FIRST, winningNumbers, bonusBall) + "개");
     }
 
-    public static void printEarningsRate(LottoTickets lottoTickets, WinningNumbers winningNumbers, LottoNumber bonusBall) {
+    public static void printEarningsRate(LottoTickets lottoTickets, LottoTicket winningNumbers, LottoNumber bonusBall) {
         System.out.println("총 수익률은 " + lottoTickets.earningsRate(winningNumbers, bonusBall) + "입니다.");
     }
 

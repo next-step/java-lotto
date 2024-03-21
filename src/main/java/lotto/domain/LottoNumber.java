@@ -18,7 +18,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static int toInt(String input) {
         if (hasNoInput(input)) {
-            throw new IllegalArgumentException("보너스 볼을 입력하지 않았습니다.");
+            throw new IllegalArgumentException("입력된 값이 없습니다.");
         }
 
         int number;

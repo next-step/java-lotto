@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Amount;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTickets;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -13,7 +10,7 @@ public class LottoController {
         LottoTickets lottoTickets = new LottoTickets(amount);
         ResultView.printLottoTickets(lottoTickets);
 
-        WinningNumbers winningNumbers = new WinningNumbers(InputView.askWinningNumbers(), ", ");
+        LottoTicket winningNumbers = new LottoTicket(InputView.askWinningNumbers().split(", "));
         LottoNumber bonusBall = new LottoNumber(InputView.askBonusBall());
 
         ResultView.printWinningStatistics(lottoTickets, winningNumbers, bonusBall);

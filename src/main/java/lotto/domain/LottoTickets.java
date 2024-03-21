@@ -22,17 +22,17 @@ public class LottoTickets {
         return lottoTicketList.size();
     }
 
-    public int winnerCount(WinnerPrize winnerPrize, WinningNumbers winningNumbers, LottoNumber bonusBall) {
+    public int winnerCount(WinnerPrize winnerPrize, LottoTicket winningNumbers, LottoNumber bonusBall) {
         return (int) lottoTicketList.stream()
                 .filter(lottoTicket -> lottoTicket.rank(winningNumbers, bonusBall) == winnerPrize)
                 .count();
     }
 
-    public double earningsRate(WinningNumbers winningNumbers, LottoNumber bonusBall) {
+    public double earningsRate(LottoTicket winningNumbers, LottoNumber bonusBall) {
         return Math.floor(100 * (double) earnings(winningNumbers, bonusBall) / (size() * Amount.LOTTO_PRICE))/100.0;
     }
 
-    private long earnings(WinningNumbers winningNumbers, LottoNumber bonusBall) {
+    private long earnings(LottoTicket winningNumbers, LottoNumber bonusBall) {
         return Stream.of(WinnerPrize.values())
                 .mapToLong(winnerPrize -> winnerCount(winnerPrize, winningNumbers, bonusBall) * winnerPrize.getPrize())
                 .sum();

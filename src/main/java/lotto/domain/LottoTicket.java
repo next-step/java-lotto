@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LottoTicket {
+    private final static int LOTTO_NUMBER_COUNT = 6;
     private final static List<LottoNumber> LOTTO_NUMBERS = IntStream.range(0, 45)
             .mapToObj(i -> i + 1)
             .map(LottoNumber::new)
@@ -17,6 +18,9 @@ public class LottoTicket {
     private final Set<LottoNumber> numbers;
 
     public LottoTicket(Set<LottoNumber> numbers) {
+        if (numbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException("6개의 숫자를 입력하세요.");
+        }
         this.numbers = numbers;
     }
 
@@ -24,12 +28,33 @@ public class LottoTicket {
         this(automaticLottery());
     }
 
-    public LottoTicket(Integer... numbers) {
+    public LottoTicket(List<Integer> numbers) {
         this(toSet(numbers));
     }
 
-    private static TreeSet<LottoNumber> toSet(Integer... numbers) {
+    public LottoTicket(String... numbers) {
+        this(toSet(toIntArray(numbers)));
+    }
+
+    private static List<Integer> toIntArray(String[] numbers) {
         return Stream.of(numbers)
+                .map(LottoTicket::toInt)
+                .collect(Collectors.toList());
+    }
+
+    private static int toInt(String input) {
+        int number;
+        try {
+            number = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("정수만 입력할 수 있습니다.");
+        }
+
+        return number;
+    }
+
+    private static TreeSet<LottoNumber> toSet(List<Integer> numbers) {
+        return numbers.stream()
                 .map(LottoNumber::new)
                 .sorted()
                 .collect(Collectors.toCollection(TreeSet::new));
@@ -47,13 +72,17 @@ public class LottoTicket {
         return numbers;
     }
 
-    public int getMatchCount(WinningNumbers winningNumbers) {
+    public int getMatchCount(LottoTicket winningNumbers) {
         return (int) numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
     }
 
-    public WinnerPrize rank(WinningNumbers winningNumbers, LottoNumber bonusBall) {
+    private boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
+
+    public WinnerPrize rank(LottoTicket winningNumbers, LottoNumber bonusBall) {
         return WinnerPrize.valueOf(getMatchCount(winningNumbers), numbers.contains(bonusBall));
     }
 
