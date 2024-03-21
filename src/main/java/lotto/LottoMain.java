@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.PurchaseAmountOfMoney;
 import lotto.domain.WinningNumbers;
+import lotto.domain.lotto.LottoStore;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.strategy.AutoGeneratingStrategy;
 
@@ -15,12 +16,11 @@ public class LottoMain {
             PurchaseAmountOfMoney purchaseAmountOfMoney = enteredPurchaseAmountOfMoney();
             printNumberOfLottoToPurchase(purchaseAmountOfMoney.numberOfLottoToPurchase());
 
-            Lottos lottos = Lottos.valueOf(purchaseAmountOfMoney);
-            lottos.purchaseLotto(new AutoGeneratingStrategy());
+            Lottos lottos = LottoStore.purchaseLotto(new AutoGeneratingStrategy(), purchaseAmountOfMoney.numberOfLottoToPurchase());
             printLottos(lottos.lottos());
 
             WinningNumbers winningNumbers = enteredWinningNumbers();
-            printResultOfLottos(lottos.result(winningNumbers));
+            printResultOfLottos(lottos.result(winningNumbers, purchaseAmountOfMoney));
 
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());

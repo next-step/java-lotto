@@ -4,8 +4,6 @@ import lotto.domain.PurchaseAmountOfMoney;
 import lotto.domain.WinningNumbers;
 import lotto.domain.lotto.strategy.LottoGeneratingStrategy;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -24,41 +22,15 @@ class LottosTest {
         return Lotto.valueOf(lottoNumbers);
     };
 
-    @Nested
-    @DisplayName("purchaseLotto() 테스트")
-    class PurchaseLottoTest {
-        PurchaseAmountOfMoney purchaseAmountOfMoney = PurchaseAmountOfMoney.valueOf("1000");
-        Lottos lottos = Lottos.valueOf(purchaseAmountOfMoney);
-        
-        @Test
-        @DisplayName("입력된 구입금액으로 살 수 있는 만큼 로또를 생성한다.")
-        void testCallOnlyOneTime() {
-            lottos.purchaseLotto(lottoGeneratingStrategyStub);
-            
-            assertThat(lottos.lottos().size()).isEqualTo(purchaseAmountOfMoney.numberOfLottoToPurchase());
-        }
-
-        @Test
-        @DisplayName("여러번 호출하더라도 입력된 구입금액으로 살 수 있는 만큼만 로또를 생성한다. ")
-        void testCallSeveralTime() {
-            lottos.purchaseLotto(lottoGeneratingStrategyStub);
-            lottos.purchaseLotto(lottoGeneratingStrategyStub);
-            lottos.purchaseLotto(lottoGeneratingStrategyStub);
-
-            assertThat(lottos.lottos().size()).isEqualTo(purchaseAmountOfMoney.numberOfLottoToPurchase());
-        }
-    }
-
+    // 금액을 파라미터로 받도록 수정하자
     @ParameterizedTest
     @CsvSource(value = {"1, 2, 3, 7, 8, 9:3:5", "1, 2, 3, 4, 8, 9:4:50", "1, 2, 3, 4, 5, 9:5:1500", "1, 2, 3, 4, 5, 6:6:2000000"}, delimiter = ':')
     @DisplayName("result(): 로또의 결과(당첨 통계, 수익률)를 반환합니다.")
     void testResult(String winningNumberInput, int matchCount, double expectedRateOfReturn) {
         PurchaseAmountOfMoney purchaseAmountOfMoney = PurchaseAmountOfMoney.valueOf("1000");
-        Lottos lottos = Lottos.valueOf(purchaseAmountOfMoney);
-        lottos.purchaseLotto(lottoGeneratingStrategyStub);
-
+        Lottos lottos = LottoStore.purchaseLotto(lottoGeneratingStrategyStub, purchaseAmountOfMoney.numberOfLottoToPurchase());
         WinningNumbers winningNumbers = WinningNumbers.valueOf(winningNumberInput);
-        ResultOfLottos lottoResult = lottos.result(winningNumbers);
+        ResultOfLottos lottoResult = lottos.result(winningNumbers, purchaseAmountOfMoney);
 
         assertThat(lottoResult.winningStatic(matchCount)).isEqualTo(1);
         assertThat(lottoResult.rateOfReturn()).isEqualTo(expectedRateOfReturn);
