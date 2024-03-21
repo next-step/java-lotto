@@ -1,6 +1,8 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTickets;
+import lotto.domain.WinnerPrize;
 import lotto.domain.WinningNumbers;
 
 public class ResultView {
@@ -10,18 +12,19 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printWinningStatistics(LottoTickets lottoTickets, WinningNumbers winningNumbers) {
+    public static void printWinningStatistics(LottoTickets lottoTickets, WinningNumbers winningNumbers, LottoNumber bonusBall) {
         System.out.println();
         System.out.println("당첨통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원) - " + lottoTickets.matchTicketCount(winningNumbers, 3) + "개");
-        System.out.println("4개 일치 (50000원) - " + lottoTickets.matchTicketCount(winningNumbers, 4) + "개");
-        System.out.println("5개 일치 (1500000원) - " + lottoTickets.matchTicketCount(winningNumbers, 5) + "개");
-        System.out.println("6개 일치 (2000000000원) - " + lottoTickets.matchTicketCount(winningNumbers, 6) + "개");
+        System.out.println("3개 일치 (5000원) - " + lottoTickets.winnerCount(WinnerPrize.FIFTH, winningNumbers, bonusBall) + "개");
+        System.out.println("4개 일치 (50000원) - " + lottoTickets.winnerCount(WinnerPrize.FOURTH, winningNumbers, bonusBall) + "개");
+        System.out.println("5개 일치 (1500000원) - " + lottoTickets.winnerCount(WinnerPrize.THIRD, winningNumbers, bonusBall) + "개");
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원) - " + lottoTickets.winnerCount(WinnerPrize.SECOND, winningNumbers, bonusBall) + "개");
+        System.out.println("6개 일치 (2000000000원) - " + lottoTickets.winnerCount(WinnerPrize.FIRST, winningNumbers, bonusBall) + "개");
     }
 
-    public static void printEarningsRate(LottoTickets lottoTickets, WinningNumbers winningNumbers) {
-        System.out.println("총 수익률은 " + lottoTickets.earningsRate(winningNumbers) + "입니다.");
+    public static void printEarningsRate(LottoTickets lottoTickets, WinningNumbers winningNumbers, LottoNumber bonusBall) {
+        System.out.println("총 수익률은 " + lottoTickets.earningsRate(winningNumbers, bonusBall) + "입니다.");
     }
 
 }

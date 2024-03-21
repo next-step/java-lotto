@@ -2,13 +2,11 @@ package lotto;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.WinnerPrize;
 import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import java.util.Set;
-import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,6 +33,14 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(1, 3, 5, 7, 9, 11);
         WinningNumbers winningNumbers = new WinningNumbers(input, ", ");
         assertThat(lottoTicket.getMatchCount(winningNumbers)).isEqualTo(expected);
+    }
+
+    @Test
+    void 등수_계산() {
+        LottoTicket lottoTicket = new LottoTicket(1, 2, 3, 4, 5, 6);
+        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 7", ", ");
+        LottoNumber bonusBall = new LottoNumber(6);
+        assertThat(lottoTicket.rank(winningNumbers, bonusBall)).isEqualTo(WinnerPrize.SECOND);
     }
 
 }

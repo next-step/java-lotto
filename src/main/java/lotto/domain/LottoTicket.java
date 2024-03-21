@@ -53,6 +53,10 @@ public class LottoTicket {
                 .count();
     }
 
+    public WinnerPrize rank(WinningNumbers winningNumbers, LottoNumber bonusBall) {
+        return WinnerPrize.valueOf(getMatchCount(winningNumbers), numbers.contains(bonusBall));
+    }
+
     @Override
     public String toString() {
         return numbers.toString();
