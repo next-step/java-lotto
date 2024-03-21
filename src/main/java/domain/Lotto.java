@@ -30,6 +30,11 @@ public class Lotto {
         return new ArrayList<>(numbers);
     }
 
+    public Rank rank(Lotto winningLotto, int bonusNumber) {
+
+        return null;
+    }
+
     public Rank rank(Lotto winningLotto) {
         return this.rank(winningLotto.numbers());
     }

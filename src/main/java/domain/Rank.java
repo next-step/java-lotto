@@ -41,6 +41,10 @@ public enum Rank {
         return SIZE_TO_RANK.getOrDefault(matchingNumber, Rank.NONE);
     }
 
+    public static Rank of(Lotto lotto, Lotto winningLotto, int bonusNumber) {
+        return lotto.rank(winningLotto, bonusNumber);
+    }
+
     public int prizeMoney(int count) {
         return this.amount * count;
     }

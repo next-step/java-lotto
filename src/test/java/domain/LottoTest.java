@@ -71,4 +71,19 @@ public class LottoTest {
         // then
         assertThat(rank).isEqualTo(Rank.FIRST);
     }
+
+    @DisplayName("보너스 번호를 가지고 랭킹 2등을 구한다.")
+    @Test
+    void test05() {
+        // given
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
+        int bonusNumber = 6;
+
+        // when
+        Rank rank = lotto.rank(winningLotto, bonusNumber);
+
+        // then
+        assertThat(rank).isEqualTo(Rank.SECOND);
+    }
 }
