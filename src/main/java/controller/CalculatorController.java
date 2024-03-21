@@ -13,12 +13,8 @@ public class CalculatorController {
 
     private static final String DIVISION_WORD= " ";
 
-    public void input() {
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        if (input == null || input.isEmpty())
-            throw new IllegalArgumentException("잘못된 입력값 입니다");
-        process(split(input));
+    public void run() {
+        process(split(result.input()));
     }
 
     private List<String> split(String input) {
