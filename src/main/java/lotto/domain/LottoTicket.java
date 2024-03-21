@@ -6,46 +6,28 @@ import java.util.List;
 
 public class LottoTicket {
 
-    private final List<Integer> lottoNumbers;
+    private final LottoNumbers lottoNumbers;
     private final List<Integer> numbers;
 
-    private static final int NUMBERS_OF_BALLS = 6;
-    private static final int MAX_NUMBER = 45;
-    private static final int MIN_NUMBER = 1;
-
-    public LottoTicket(List<Integer> lottoNumbers, List<Integer> numbers) {
+    public LottoTicket(LottoNumbers lottoNumbers, List<Integer> numbers) {
         this.lottoNumbers = lottoNumbers;
         this.numbers = numbers;
     }
 
     public LottoTicket() {
-        this(new ArrayList<>(), new ArrayList<>());
+        this(new LottoNumbers(new ArrayList<>()), new ArrayList<>());
     }
 
-    public List<Integer> generate() {
-        for (int i = 0; i < NUMBERS_OF_BALLS; i++) {
-            this.lottoNumbers.add(randomNumbers().get(i));
-        }
-        Collections.sort(this.lottoNumbers);
-        return this.lottoNumbers;
-    }
-
-    protected List<Integer> randomNumbers() {
-        for (int i = 0; i < MAX_NUMBER; i++) {
-            numbers.add(i + 1);
-        }
-        Collections.shuffle(numbers);
-        return numbers;
+    public List<LottoNumber> generate() {
+        return this.lottoNumbers.generate();
     }
 
     public int countMatchingWith(List<Integer> winningNumbers) {
-        return Math.toIntExact(this.lottoNumbers.stream()
-                .filter(winningNumbers::contains)
-                .count());
+        return this.lottoNumbers.countMatchingWith(winningNumbers);
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+    public LottoNumbers getLottoNumbers() {
+        return this.lottoNumbers;
     }
 
 }
