@@ -4,13 +4,13 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import model.Lotto;
-import model.WinningDetails;
 import model.Rank;
+import model.WinningDetails;
 
 public class OutputView {
 
-    public void printLottoPurchaseCount(final int lottoPurchaseCount) {
-        System.out.println(lottoPurchaseCount + "개를 구매했습니다.");
+    public void printLottoPurchaseCount(final int lottoPurchaseCount, final int numberOfManualLottoNumbers) {
+        System.out.println("\n수동으로 " + numberOfManualLottoNumbers +"장, 자동으로 "+ lottoPurchaseCount+"개를 구매했습니다.");
     }
 
     public void printPurchaseLottos(final List<Lotto> lottos) {

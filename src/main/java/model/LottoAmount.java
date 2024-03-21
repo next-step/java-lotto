@@ -13,8 +13,8 @@ public class LottoAmount {
         this.amount = amount;
     }
 
-    public int calculateLottoPurchaseCount() {
-        return amount / LOTTO_PURCHASE_UNIT;
+    public int calculateAutomaticLottoCount(final int  numberOfManualLottoNumbers) {
+        return amount / LOTTO_PURCHASE_UNIT - numberOfManualLottoNumbers;
     }
 
     public BigDecimal toBigDecimal() {

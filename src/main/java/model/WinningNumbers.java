@@ -2,19 +2,21 @@ package model;
 
 import java.util.List;
 
+import util.Utils;
+
 public class WinningNumbers {
 
     private static final int MAX_WINNING_NUMBERS = 6;
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
     public WinningNumbers(final List<Integer> numbers) {
         validate(numbers);
-        this.numbers = numbers;
+        this.numbers = Utils.convertToLottoNumbers(numbers);
     }
 
-    public boolean contains(final int number) {
-        return numbers.contains(number);
+    public boolean contains(final LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
 
     private void validate(final List<Integer> numbers) {

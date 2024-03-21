@@ -2,6 +2,8 @@ package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 class LottoFactoryTest {
@@ -9,12 +11,13 @@ class LottoFactoryTest {
     @Test
     void 로또_생성_테스트() {
         // given
-        final LottoAmount lottoAmount = new LottoAmount(2000);
+        final int lottoCount = 3;
+        final Inputs numbers = new Inputs(List.of(List.of(1, 2, 3, 4, 5, 6), List.of(3, 4, 5, 6, 7, 8)));
 
         // when
-        final Lottos lottos = LottoFactory.create(lottoAmount);
+        final Lottos lottos = LottoFactory.create(lottoCount, numbers);
 
         // then
-        assertThat(lottos.getLottos()).hasSize(2);
+        assertThat(lottos.getLottos()).hasSize(5);
     }
 }

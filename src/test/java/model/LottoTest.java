@@ -20,92 +20,15 @@ class LottoTest {
     }
 
     @Test
-    void 로또_번호가_당첨_번호와_일치하는_숫자의_개수가_6개이면_1등이다() {
+    void 로또_번호와_당첨_번호_일치하는_숫자_개수를_테스트한다() {
         // given
         final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
-        final BonusNumber bonusNumber = new BonusNumber(7);
-        final LottoResult lottoResult = new LottoResult(winningNumbers, bonusNumber);
+        final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 6, 7, 8, 9));
 
         // when
-        final Rank rank = lotto.match(lottoResult);
+        final int matchNumberCount = lotto.findMatchNumberCount(winningNumbers);
 
         // then
-        assertThat(rank).isEqualTo(Rank.FIRST);
-    }
-
-    @Test
-    void 로또_번호가_당첨_번호와_일치하는_숫자의_개수가_5개이면서_보너스_번호도_일치하면_2등이다() {
-        // given
-        final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 7));
-        final BonusNumber bonusNumber = new BonusNumber(6);
-        final LottoResult lottoResult = new LottoResult(winningNumbers, bonusNumber);
-
-        // when
-        final Rank rank = lotto.match(lottoResult);
-
-        // then
-        assertThat(rank).isEqualTo(Rank.SECOND);
-    }
-
-    @Test
-    void 로또_번호가_당첨_번호와_일치하는_숫자의_개수가_5개이면서_보너스_번호가_일치하지_않으면면_3등이다() {
-        // given
-        final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 7));
-        final BonusNumber bonusNumber = new BonusNumber(9);
-        final LottoResult lottoResult = new LottoResult(winningNumbers, bonusNumber);
-
-        // when
-        final Rank rank = lotto.match(lottoResult);
-
-        // then
-        assertThat(rank).isEqualTo(Rank.THIRD);
-    }
-
-    @Test
-    void 로또_번호가_당첨_번호와_일치하는_숫자의_개수가_4개이면_4등이다() {
-        // given
-        final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 7, 8));
-        final BonusNumber bonusNumber = new BonusNumber(10);
-        final LottoResult lottoResult = new LottoResult(winningNumbers, bonusNumber);
-
-        // when
-        final Rank rank = lotto.match(lottoResult);
-
-        // then
-        assertThat(rank).isEqualTo(Rank.FOURTH);
-    }
-
-    @Test
-    void 로또_번호가_당첨_번호와_일치하는_숫자의_개수가_3개이면_5등이다() {
-        // given
-        final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 7, 8, 9));
-        final BonusNumber bonusNumber = new BonusNumber(10);
-        final LottoResult lottoResult = new LottoResult(winningNumbers, bonusNumber);
-
-        // when
-        final Rank rank = lotto.match(lottoResult);
-
-        // then
-        assertThat(rank).isEqualTo(Rank.FIFTH);
-    }
-
-    @Test
-    void 로또_번호가_당첨_번호와_일치하는_숫자의_개수가_3개미만이면_등수가_없다() {
-        // given
-        final Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 7, 8, 9, 10));
-        final BonusNumber bonusNumber = new BonusNumber(15);
-        final LottoResult lottoResult = new LottoResult(winningNumbers, bonusNumber);
-
-        // when
-        final Rank rank = lotto.match(lottoResult);
-
-        // then
-        assertThat(rank).isEqualTo(Rank.NONE);
+        assertThat(matchNumberCount).isEqualTo(3);
     }
 }
