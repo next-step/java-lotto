@@ -3,7 +3,6 @@ package stringCalculator;
 import java.util.List;
 
 public class StringCalculator {
-    private static final List<String> OPERATION_SYMBOL = List.of("+", "-", "*", "/");
     private static final int OPERATOR_INDEX_TERM = 2;
     private static final String BLANK = " ";
     private static final String BLANK_INPUT_MESSAGE = "input value is blank";
