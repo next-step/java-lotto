@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbers {
+	public static final int LOTTO_PRICE = 1000;
+
 	private final List<Integer> lottoNumbers;
 
 	public LottoNumbers(List<Integer> lottoNumbers) {

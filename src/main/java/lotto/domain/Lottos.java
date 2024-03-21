@@ -7,17 +7,17 @@ public class Lottos {
 	private static final int MIN_WINNING_NUMBER = 3;
 	private static final int INCREMENT_VALUE = 1;
 
-	private List<Lotto> lottos;
+	private List<LottoNumbers> lottos;
 
-	public Lottos(List<Lotto> lottos) {
+	public Lottos(List<LottoNumbers> lottos) {
 		this.lottos = lottos;
 	}
 
 	public HashMap<LottoRank, Integer> getWinningStatistics(WinningLottoNumbers winningLottoNumbers) {
 		HashMap<LottoRank, Integer> result = new HashMap<>();
 
-		for (Lotto lotto : lottos) {
-			int count = lotto.getLottoNumber().getCountOfMatchLottoNumber(winningLottoNumbers);
+		for (LottoNumbers lotto : lottos) {
+			int count = lotto.getCountOfMatchLottoNumber(winningLottoNumbers);
 			if (count >= MIN_WINNING_NUMBER)
 				result.merge(LottoRank.findLottoRankByLottoCount(count), INCREMENT_VALUE, Integer::sum);
 		}
@@ -25,7 +25,7 @@ public class Lottos {
 		return result;
 	}
 
-	public List<Lotto> getLottos() {
+	public List<LottoNumbers> getLottos() {
 		return lottos;
 	}
 

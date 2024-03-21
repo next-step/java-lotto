@@ -17,7 +17,7 @@ public class LottoService {
 		ResultView.printLottoCount(lottoCount);
 
 		Lottos lottos = new Lottos(
-				Stream.generate(() -> new Lotto(LottoShuffle.makeLottoNumbersInRange()))
+				Stream.generate(() -> LottoShuffle.makeLottoNumbersInRange())
 						.limit(lottoCount)
 						.collect(Collectors.toList())
 		);

@@ -4,7 +4,7 @@ public class LottoCalculator {
 
 	public static int getLottoCount(long money) {
 		validMoney(money);
-		return (int) (money / Lotto.LOTTO_PRICE);
+		return (int) (money / LottoNumbers.LOTTO_PRICE);
 	}
 
 	private static void validMoney(long money) {

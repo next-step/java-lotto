@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoCalculator;
+import lotto.domain.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ public class LottoCalculatorTest {
 	@Test
 	@DisplayName("1000원 미만일 때, 로또 구매 불가 테스트")
 	void purchaseMoneyErrorTest() {
-		assertThatThrownBy(() -> LottoCalculator.getLottoCount(Lotto.LOTTO_PRICE - 1))
+		assertThatThrownBy(() -> LottoCalculator.getLottoCount(LottoNumbers.LOTTO_PRICE - 1))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("1000원");
 	}
