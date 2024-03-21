@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.LottoMatchingService;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoTicket;
+import lotto.domain.Prize;
 
 import java.util.List;
 
@@ -31,22 +32,22 @@ public class ResultView {
         List<Integer> integers = lottoMatchingService.matchWinningNumber(lottoMachine, winningNumbers);
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + integers.get(0) + "개");
-        System.out.println("4개 일치 (50000원)- " + integers.get(1) + "개");
-        System.out.println("5개 일치 (1500000원)- " + integers.get(2) + "개");
-        System.out.println("6개 일치 (2000000000원)- " + integers.get(3) + "개");
-
+        Prize[] values = Prize.values();
+        for (int i = 0; i < Prize.values().length - 1; i++) {
+            System.out.println(values[i + 1].getMatchCount() + "개 일치 (" + values[i + 1].getPrice() + "원)- " + integers.get(i) + "개");
+        }
         System.out.printf("총 수익률은 %.2f", calculateRateOfReturn(price, integers));
     }
 
     private double calculateRateOfReturn(int price, List<Integer> integers) {
-        int totalRevenue = 5000 * integers.get(0)
-                        + 50000 * integers.get(1)
-                      + 1500000 * integers.get(2)
-                   + 2000000000 * integers.get(3);
+        int totalRevenue = 0;
+        Prize[] values = Prize.values();
+        for (int i = 0; i < values.length - 1; i++) {
+            totalRevenue += values[i + 1].getPrice() * integers.get(i);
+        }
         int quotient = totalRevenue / price;
         double secondQuotient = (quotient * 10) / price * 0.1;
-        double thirdQuotient = (totalRevenue * 10 - (quotient * 10 / price) * price) * 10 / 14000 * 0.01;
+        double thirdQuotient = (totalRevenue * 10 - secondQuotient * price) * 10 / 14000 * 0.01;
         return (quotient + secondQuotient + thirdQuotient) * 100 / 100;
     }
 

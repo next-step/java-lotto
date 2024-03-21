@@ -33,6 +33,10 @@ public enum Prize {
         return matchCount;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     private boolean isSame(int matchCount) {
         return this.matchCount == matchCount;
     }
