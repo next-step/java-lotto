@@ -1,13 +1,12 @@
-package lotto;
+package calculator;
 
-import lotto.domain.Expression;
-import lotto.domain.ExpressionElementBuilder;
-import lotto.domain.Number;
-import lotto.domain.Operator;
-import lotto.exception.IllegalOperatorExpression;
+import calculator.domain.Expression;
+import calculator.domain.ExpressionElementBuilder;
+import calculator.domain.Number;
+import calculator.domain.Operator;
+import calculator.exception.IllegalOperatorExpression;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

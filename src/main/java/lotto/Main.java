@@ -1,10 +1,6 @@
 package lotto;
 
-import lotto.domain.Calculator;
-import lotto.domain.Expression;
-import lotto.domain.ExpressionElement;
-import lotto.domain.ExpressionElementBuilder;
-import lotto.util.ExpressionSplitter;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -15,17 +11,20 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-            String expressionString = InputView.readExpression();
-            List<String> expressionStrings = ExpressionSplitter.split(expressionString);
+            int purchaseAmount = InputView.readAmount();
 
-            List<ExpressionElement> elements = ExpressionElementBuilder.build(expressionStrings);
-            int result = Calculator.calculate(new Expression(elements));
+            LottoTickets lottoTickets = LottoTicketMachine.issue(purchaseAmount);
+            ResultView.printLottoTickets(lottoTickets);
 
-            ResultView.printExpressionResult(result);
-        } catch (IllegalArgumentException | ArithmeticException e) {
+            List<Integer> winNumbers = InputView.readWinNumbers();
+            LottoStatistics statisticsMap = new LottoStatistics(lottoTickets, new LottoTicket(winNumbers));
+
+            ResultView.printLottoStatistics(statisticsMap, purchaseAmount);
+        } catch (IllegalArgumentException e) {
+            ResultView.printException(e);
+        } catch (Exception e) {
+            ResultView.printException("예기치 못한 예외가 발생했습니다.");
             e.printStackTrace();
-        } finally {
-            ResultView.printExit();
         }
 
     }

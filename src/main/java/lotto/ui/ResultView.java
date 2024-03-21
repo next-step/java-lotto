@@ -1,14 +1,76 @@
 package lotto.ui;
 
+import lotto.domain.*;
+
 import java.text.MessageFormat;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public static void printExpressionResult(int result) {
-        System.out.println(MessageFormat.format("결과: {0}", result));
+    public static void printLottoTickets(LottoTickets lottoTickets) {
+        String message = formatLottoTicketCount(lottoTickets) + formatLottoTicketNumbers(lottoTickets);
+        System.out.println(message);
     }
 
-    public static void printExit() {
-        System.out.println("프로그램이 종료되었습니다.");
+    private static StringBuilder formatLottoTicketCount(LottoTickets lottoTickets) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(formatPurchaseCount(lottoTickets.size()));
+        stringBuilder.append(System.lineSeparator());
+        return stringBuilder;
+    }
+
+    private static String formatLottoTicketNumbers(LottoTickets lottoTickets) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (LottoTicket ticket : lottoTickets.get()) {
+            stringBuilder.append("[")
+                    .append(formatLottoNumber(ticket))
+                    .append("]")
+                    .append(System.lineSeparator());
+        }
+        stringBuilder.append(System.lineSeparator());
+        return stringBuilder.toString();
+    }
+
+    private static String formatLottoNumber(LottoTicket ticket) {
+        return ticket.getLottoNumbers().stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(", "));
+    }
+
+    private static String formatPurchaseCount(int count) {
+        return MessageFormat.format("{0}개를 구매했습니다.", count);
+    }
+
+    public static void printLottoStatistics(LottoStatistics statisticsMap, int purchaseAmount) {
+        String message = formatLottoPrizes(statisticsMap) + formatProfitRate(statisticsMap, purchaseAmount);
+        System.out.println(message);
+    }
+
+    private static String formatLottoPrizes(LottoStatistics statisticsMap) {
+        List<LottoPrize> prizes = LottoPrize.getLottoPrizes();
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (LottoPrize prize : prizes) {
+            stringBuilder.append(formatStatistic(statisticsMap, prize)).append(System.lineSeparator());
+        }
+        return stringBuilder.toString();
+    }
+
+    private static String formatStatistic(LottoStatistics statisticsMap, LottoPrize prize) {
+        return MessageFormat.format("{0}개 일치 ({1}원) - {2}개"
+                , prize.getMatchCount(), prize.getPrize(), statisticsMap.getMatchCount(prize));
+    }
+
+    public static String formatProfitRate(LottoStatistics statisticsMap, int purchaseAmount) {
+        return MessageFormat.format("총 수익률은 {0}입니다.", statisticsMap.calculateProfitRate(purchaseAmount));
+    }
+
+    public static void printException(String exceptionMessage) {
+        System.out.println(exceptionMessage);
+    }
+
+    public static void printException(Exception e) {
+        printException(e.getMessage());
     }
 }

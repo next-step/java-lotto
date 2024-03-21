@@ -1,10 +1,9 @@
-package lotto.domain;
+package calculator.domain;
 
-import lotto.exception.IllegalOperatorExpression;
+import calculator.exception.IllegalOperatorExpression;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 public class ExpressionElementBuilder {
 
