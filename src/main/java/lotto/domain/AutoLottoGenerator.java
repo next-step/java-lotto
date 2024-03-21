@@ -17,6 +17,14 @@ public class AutoLottoGenerator {
 
     private AutoLottoGenerator() {}
 
+    public static Lottos tickets(int amount) {
+        final List<Lotto> lottos = IntStream.range(0, amount)
+                .mapToObj(idx -> ticket())
+                .collect(Collectors.toList());
+
+        return new Lottos(lottos);
+    }
+
     public static Lotto ticket() {
         return new Lotto(shuffledList()
                 .subList(0, 6)
