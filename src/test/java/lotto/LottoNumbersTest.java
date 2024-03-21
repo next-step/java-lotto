@@ -23,9 +23,9 @@ public class LottoNumbersTest {
 	@DisplayName("당첨번호와 갖고있는 로또번호가 일치 테스트")
 	void lottoNumbermatchTest() {
 		List<Integer> lottoNumbers = List.of(20, 32, 44, 30, 1, 2);
-		List<Integer> winningNumber = List.of(20, 3, 44, 4, 1, 2);
+		List<Integer> winningNumber = List.of(20, 3, 44, 45, 1, 2);
 		LottoNumbers lotto = new LottoNumbers(lottoNumbers);
-		int count = lotto.getCountOfMatchLottoNumber(new WinningLottoNumbers(new LottoNumbers(winningNumber)));
+		int count = lotto.getCountOfMatchLottoNumber(new WinningLottoNumbers(winningNumber));
 		assertThat(count).isEqualTo(4);
 	}
 

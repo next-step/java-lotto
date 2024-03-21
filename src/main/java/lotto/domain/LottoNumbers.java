@@ -14,7 +14,6 @@ public class LottoNumbers {
 	private final List<Integer> lottoNumbers;
 
 	public LottoNumbers(List<Integer> lottoNumbers) {
-		System.out.println(lottoNumbers.size());
 		checkValidSize(lottoNumbers);
 		checkValidDuplication(lottoNumbers);
 		checkValidNumbers(lottoNumbers);
@@ -50,12 +49,12 @@ public class LottoNumbers {
 	}
 
 	private void checkValidNumbers(List<Integer> winningLottoNumbers) {
-		if (winningLottoNumbers.stream().noneMatch(this::isValidLottoNumber))
+		if (winningLottoNumbers.stream().anyMatch(this::isValidLottoNumber))
 			throw new IllegalArgumentException("입력한 로또 번호가 1부터 45사이여야합니다.");
 	}
 
 	private boolean isValidLottoNumber(int lottoNumber) {
-		return lottoNumber >= START_LOTTO_NUMBER && lottoNumber <= END_LOTTO_NUMBER;
+		return lottoNumber < START_LOTTO_NUMBER || lottoNumber > END_LOTTO_NUMBER;
 	}
 
 	@Override
