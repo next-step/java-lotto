@@ -7,3 +7,20 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+
+## Step1. 문자열 계산기
+
+### 구현 사항
+- 덧셈
+- 뺄셈
+- 곱셈
+- 나눗셈
+- 입력 값 파싱 후 순회하며 연산
+
+### 예외
+- `IllegalArgumentException`
+  - 입력값이 null 혹은 빈 문자
+  - 사칙연산 기호가 아닌 경우
+
+
