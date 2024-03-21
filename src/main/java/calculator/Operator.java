@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 public enum Operator {
     PLUS("+", (a, b) -> (a + b)),
@@ -10,9 +11,9 @@ public enum Operator {
     DIVIDE("/", (a, b) -> (a / b));
 
     private String display;
-    private BiFunction<Integer, Integer, Integer> expression;
+    private BinaryOperator<Integer> expression;
 
-    Operator(String display, BiFunction<Integer, Integer, Integer> expression) {
+    Operator(String display, BinaryOperator<Integer> expression) {
         this.display = display;
         this.expression = expression;
     }
