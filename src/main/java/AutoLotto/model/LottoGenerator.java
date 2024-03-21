@@ -3,21 +3,21 @@ package autoLotto.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import static autoLotto.model.LottoConstants.LOTTO_END_NUMBER;
+import static autoLotto.model.LottoConstants.LOTTO_START_NUMBER;
+
 public class LottoGenerator {
     private final List<Integer> randomNumbers;
-
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
 
     public LottoGenerator() {
         randomNumbers = new ArrayList<>();
 
-        for (int i = MIN_NUMBER, j = 0; i <= MAX_NUMBER; i++, j++) {
+        for (int i = LOTTO_START_NUMBER; i <= LOTTO_END_NUMBER; i++) {
             randomNumbers.add(i);
         }
     }
 
-    public int[] generateLottoNumbers(LottoGeneratorStrategy lottoGeneratorStrategy) {
+    public List<Integer> generateLottoNumbers(LottoGeneratorStrategy lottoGeneratorStrategy) {
         return lottoGeneratorStrategy.lottoGenerator(randomNumbers);
     }
 }
