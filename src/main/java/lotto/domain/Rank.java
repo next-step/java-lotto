@@ -23,18 +23,18 @@ public enum Rank {
     }
 
     private static final Map<Integer, Rank> RANK_MAP = Collections.unmodifiableMap(Stream.of(values())
-            .collect(Collectors.toMap(Rank::getMatchCount, Function.identity())));
+            .collect(Collectors.toMap(Rank::matchCount, Function.identity())));
 
     public static Rank findRank(int matchCount) {
         return Optional.ofNullable(RANK_MAP.get(matchCount))
                 .orElse(MISS);
     }
 
-    public int getMatchCount() {
+    public int matchCount() {
         return matchCount;
     }
 
-    public int getWinningMoney() {
+    public int winningMoney() {
         return winningMoney;
     }
 }

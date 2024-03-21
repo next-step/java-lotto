@@ -1,23 +1,38 @@
 package lotto.domain.lotto;
 
+import lotto.domain.Rank;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
 public class ResultOfLottos {
-    private final int[] winningStaticsArray;
-    private final double rateOfReturn;
+    private static final int NO_VALUE_FOR_MATCH_COUNT = 0;
 
-    private ResultOfLottos(int[] winningStaticsArray, double rateOfReturn) {
-        this.winningStaticsArray = winningStaticsArray;
-        this.rateOfReturn = rateOfReturn;
+    private final Map<Integer, Integer> resultOfLottos;
+
+    public ResultOfLottos() {
+        this.resultOfLottos = new HashMap<>();
     }
 
-    public static ResultOfLottos newLottoResult(int[] winningStaticsArray, double rateOfReturn) {
-        return new ResultOfLottos(winningStaticsArray, rateOfReturn);
+
+    public int numberOfMatchCount(int matchCount) {
+        return valueForMatchCount(matchCount);
     }
 
-    public int winningStatic(int matchCount) {
-        return winningStaticsArray[matchCount];
+    public void increaseNumberOfMatchCount(int matchCount) {
+        int numberOfMatchCount = valueForMatchCount(matchCount);
+        resultOfLottos.put(matchCount, numberOfMatchCount + 1);
     }
 
-    public double rateOfReturn() {
-        return rateOfReturn;
+    public int totalWinningMoney() {
+        return resultOfLottos.keySet()
+                .stream()
+                .reduce(0, (totalWinningMoney, matchCount) -> totalWinningMoney + (Rank.findRank(matchCount).winningMoney() * valueForMatchCount(matchCount)));
+    }
+
+    private int valueForMatchCount(int matchCount) {
+        return Optional.ofNullable(resultOfLottos.get(matchCount))
+                .orElse(NO_VALUE_FOR_MATCH_COUNT);
     }
 }

@@ -22,17 +22,16 @@ class LottosTest {
         return Lotto.valueOf(lottoNumbers);
     };
 
-    // 금액을 파라미터로 받도록 수정하자
     @ParameterizedTest
     @CsvSource(value = {"1, 2, 3, 7, 8, 9:3:5", "1, 2, 3, 4, 8, 9:4:50", "1, 2, 3, 4, 5, 9:5:1500", "1, 2, 3, 4, 5, 6:6:2000000"}, delimiter = ':')
-    @DisplayName("result(): 로또의 결과(당첨 통계, 수익률)를 반환합니다.")
-    void testResult(String winningNumberInput, int matchCount, double expectedRateOfReturn) {
+    @DisplayName("statistics(): 로또의 결과(당첨 통계, 수익률)를 반환합니다.")
+    void testStatistics(String winningNumberInput, int matchCount, double expectedRateOfReturn) {
         PurchaseAmountOfMoney purchaseAmountOfMoney = PurchaseAmountOfMoney.valueOf("1000");
         Lottos lottos = LottoStore.purchaseLotto(lottoGeneratingStrategyStub, purchaseAmountOfMoney.numberOfLottoToPurchase());
         WinningNumbers winningNumbers = WinningNumbers.valueOf(winningNumberInput);
-        ResultOfLottos lottoResult = lottos.result(winningNumbers, purchaseAmountOfMoney);
+        StatisticsOfLottos statisticsOfLottos = lottos.statistics(winningNumbers, purchaseAmountOfMoney);
 
-        assertThat(lottoResult.winningStatic(matchCount)).isEqualTo(1);
-        assertThat(lottoResult.rateOfReturn()).isEqualTo(expectedRateOfReturn);
+        assertThat(statisticsOfLottos.numberOfMatchCount(matchCount)).isEqualTo(1);
+        assertThat(statisticsOfLottos.rateOfReturn()).isEqualTo(expectedRateOfReturn);
     }
 }

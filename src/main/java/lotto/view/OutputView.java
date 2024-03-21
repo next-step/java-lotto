@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.Rank;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.ResultOfLottos;
+import lotto.domain.lotto.StatisticsOfLottos;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,7 +52,7 @@ public class OutputView {
                 .collect(Collectors.joining(COMMA_BLANK));
     }
 
-    public static void printResultOfLottos(ResultOfLottos resultOfLottos) {
+    public static void printStatisticsOfLottos(StatisticsOfLottos statisticsOfLottos) {
         StringBuilder lottosResultBuilder = new StringBuilder();
 
         lottosResultBuilder.append(NEXT_LINE)
@@ -60,19 +60,19 @@ public class OutputView {
                 .append(NEXT_LINE)
                 .append(SEPARATOR)
                 .append(NEXT_LINE)
-                .append(winningStatisticsMessage(resultOfLottos))
-                .append(rateOfReturnMessage(resultOfLottos.rateOfReturn()));
+                .append(winningStatisticsMessage(statisticsOfLottos))
+                .append(rateOfReturnMessage(statisticsOfLottos.rateOfReturn()));
 
         System.out.println(lottosResultBuilder);
     }
 
-    private static String winningStatisticsMessage(ResultOfLottos resultOfLottos) {
+    private static String winningStatisticsMessage(StatisticsOfLottos statisticsOfLottos) {
         StringBuilder winningStatisticsMessageBuilder = new StringBuilder();
 
-        IntStream.rangeClosed(FOURTH.getMatchCount(), FIRST.getMatchCount())
+        IntStream.rangeClosed(FOURTH.matchCount(), FIRST.matchCount())
                 .forEach(matchCount -> {
                     Rank rank = Rank.findRank(matchCount);
-                    winningStatisticsMessageBuilder.append(String.format(WINNING_STATISTICS_MESSAGE, rank.getMatchCount(), rank.getWinningMoney(), resultOfLottos.winningStatic(rank.getMatchCount())))
+                    winningStatisticsMessageBuilder.append(String.format(WINNING_STATISTICS_MESSAGE, rank.matchCount(), rank.winningMoney(), statisticsOfLottos.numberOfMatchCount(rank.matchCount())))
                             .append(NEXT_LINE);
                 });
 

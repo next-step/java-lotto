@@ -28,8 +28,8 @@ class PurchaseAmountOfMoneyTest {
     @ParameterizedTest
     @CsvSource(value = {"14000:0:0", "14000:5000:0.35", " 14001:5000:0.35", "14000:50000:3.57", "14500:2000000000:142857.14"}, delimiter = ':')
     @DisplayName("rateOfReturn(): 당첨금액에 따른 수익률을 소수점 두째자리까지 구합니다.")
-    void testRateOfReturn(String amountOfMoneyInput, int winningAmountOfMoney, double expected) {
+    void testRateOfReturn(String amountOfMoneyInput, int totalWinningMoney, double expected) {
         PurchaseAmountOfMoney purchaseAmountOfMoney = PurchaseAmountOfMoney.valueOf(amountOfMoneyInput);
-        assertThat(purchaseAmountOfMoney.rateOfReturn(winningAmountOfMoney)).isEqualTo(expected);
+        assertThat(purchaseAmountOfMoney.rateOfReturn(totalWinningMoney)).isEqualTo(expected);
     }
 }

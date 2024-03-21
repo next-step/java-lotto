@@ -31,9 +31,9 @@ public class PurchaseAmountOfMoney {
         return amountOfMoney / LOTTO_PRICE;
     }
     
-    public double rateOfReturn(int winningMoney) {
+    public double rateOfReturn(int totalWinningMoney) {
         double realUsedAmountOfMoney = (amountOfMoney - (amountOfMoney % LOTTO_PRICE));
-        BigDecimal rateOfReturn = BigDecimal.valueOf(winningMoney / realUsedAmountOfMoney);
+        BigDecimal rateOfReturn = BigDecimal.valueOf(totalWinningMoney / realUsedAmountOfMoney);
         return rateOfReturn.setScale(2, DOWN).doubleValue();
     }
 }

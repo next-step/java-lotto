@@ -20,7 +20,7 @@ public class LottoMain {
             printLottos(lottos.lottos());
 
             WinningNumbers winningNumbers = enteredWinningNumbers();
-            printResultOfLottos(lottos.result(winningNumbers, purchaseAmountOfMoney));
+            printStatisticsOfLottos(lottos.statistics(winningNumbers, purchaseAmountOfMoney));
 
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
