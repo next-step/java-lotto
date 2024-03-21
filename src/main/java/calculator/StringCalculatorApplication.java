@@ -1,9 +1,9 @@
-package lotto;
+package calculator;
 
-import calculator.domain.Calculator;
 import comm.view.InputView;
+import calculator.domain.Calculator;
 
-public class LottoApplication {
+public class StringCalculatorApplication {
     private static InputView inputView;
     private static Calculator calculator;
 

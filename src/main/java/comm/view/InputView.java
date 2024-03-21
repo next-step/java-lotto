@@ -1,4 +1,4 @@
-package lotto.view;
+package comm.view;
 
 import java.util.Scanner;
 
@@ -12,7 +12,7 @@ public class InputView {
 
     public static String validate (String input) {
         if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException(String.format("입력값을 입력해주세요."));
+            throw new IllegalArgumentException("입력값을 입력해주세요.");
         }
         return input;
     }
