@@ -38,4 +38,7 @@ public class Lotto {
         return this.numbers;
     }
 
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
+    }
 }

@@ -55,4 +55,11 @@ public class LottoTest {
 
     }
 
+    @DisplayName("contains 함수를 통해 로또에 특정 숫자가 포함되어 있는지를 확인할 수 있다.")
+    @Test
+    void contains() {
+        final Lotto purchased = new Lotto(new String[]{"1", "2", "3", "4", "5", "6"});
+
+        assertThat(purchased.contains(new LottoNumber(6))).isTrue();
+    }
 }
