@@ -8,5 +8,4 @@ public class StringCalculatorApplication {
         CalculatorManager calculator = new CalculatorManager();
         calculator.start();
     }
-    
 }
