@@ -62,4 +62,13 @@ public class LottoTest {
 
         assertThat(purchased.contains(new LottoNumber(6))).isTrue();
     }
+
+    @DisplayName("matchCount 함수를 통해 두 로또 간의 중복된 번호 갯수를 확인할 수 있다.")
+    @Test
+    void matchCount() {
+        final Lotto purchased = new Lotto(new String[]{"1", "2", "3", "4", "5", "6"});
+        final Lotto winningNumbers = new Lotto(new String[]{"1", "2", "3", "4", "5", "6"});
+
+        assertThat(purchased.matchCount(winningNumbers).value()).isEqualTo(6);
+    }
 }
