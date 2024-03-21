@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.LotteryShop;
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -15,6 +13,10 @@ public class LottoPlayer {
         OutputView.printPurchasedLottos(lottos);
 
         final Lotto lastWeekWinningNumbers = new Lotto(InputView.lastWeekWinningNumbers());
+
+        final LottoMatchCounts matchCounts = lottos.matchCounts(lastWeekWinningNumbers);
+
+        final WinningStatistics statistics = new WinningStatistics(matchCounts);
 
     }
 
