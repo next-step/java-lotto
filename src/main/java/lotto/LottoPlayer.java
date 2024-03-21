@@ -17,9 +17,9 @@ public class LottoPlayer {
         final LottoMatchCounts matchCounts = lottos.matchCounts(lastWeekWinningNumbers);
 
         final WinningStatistics statistics = new WinningStatistics(matchCounts);
+        OutputView.printWinningCounts(statistics);
 
         final double rateOfReturn = statistics.rateOfReturn(cash);
-        System.out.println();
     }
 
     public static void main(String[] args) {

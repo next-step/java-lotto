@@ -1,8 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,8 +38,21 @@ public class OutputView {
                 .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER));
     }
 
+    public static void printWinningCounts(WinningStatistics statistics) {
+        printLine(Announcements.STATISTICS_TITLE);
+
+        Rank.winRanks().forEach(rank -> printRankCount(rank, statistics.rankCount(rank)));
+    }
+
+    private static void printRankCount(Rank rank, Count count) {
+        printLine(String.format(Announcements.RANK_COUNT_FORMAT, rank.matchCount(), rank.winnings(), count.value()));
+    }
+
     private abstract static class Announcements {
         static final String PURCHASE_AMOUNT_FORMAT = "%d개를 구매했습니다.";
         static final String PURCHASED_LOTTO_NUMBER_TEMPLATE = "[%s]";
+
+        static final String STATISTICS_TITLE = "당첨 통계\n---------";
+        static final String RANK_COUNT_FORMAT = "%d개 일치 (%d원)- %d개";
     }
 }
