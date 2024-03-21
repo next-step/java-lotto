@@ -1,16 +1,34 @@
 package lotto.data;
 
-import java.util.Objects;
+import lotto.util.MessageUtils;
 
-import static lotto.util.ConstUtils.*;
+import java.util.Objects;
+import java.util.stream.IntStream;
+
+import static lotto.util.ConstUtils.MAXIMUM_LOTTO_RANGE;
+import static lotto.util.ConstUtils.MINIMUM_LOTTO_RANGE;
 
 public class LottoNumberVO {
+
+    private final static LottoNumberVO[] lottoBalls = new LottoNumberVO[MAXIMUM_LOTTO_RANGE + 1];
+
+    static {
+        IntStream.rangeClosed(MINIMUM_LOTTO_RANGE, MAXIMUM_LOTTO_RANGE)
+                .forEach(number -> lottoBalls[number] = new LottoNumberVO(number));
+    }
+
     private final int lottoNumber;
 
-    public LottoNumberVO(int lottoNumber) {
+    private LottoNumberVO(int lottoNumber) {
         validateLottoNumber(lottoNumber);
 
         this.lottoNumber = lottoNumber;
+    }
+
+    public static LottoNumberVO selectLottoBall(int lottoNumber) {
+        validateLottoNumber(lottoNumber);
+
+        return lottoBalls[lottoNumber];
     }
 
     public int getLottoNumber() {
@@ -35,9 +53,9 @@ public class LottoNumberVO {
         return String.valueOf(lottoNumber);
     }
 
-    private void validateLottoNumber(int lottoNumber) {
+    private static void validateLottoNumber(int lottoNumber) {
         if (lottoNumber < MINIMUM_LOTTO_RANGE || lottoNumber > MAXIMUM_LOTTO_RANGE) {
-            throw new IllegalArgumentException("유효한 로또 번호가 아닙니다. 1~45 숫자중 입력 해 주세요.");
+            throw new IllegalArgumentException(MessageUtils.LOTTO_RANGE_VALIDATION_MESSAGE);
         }
     }
 }

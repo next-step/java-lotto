@@ -17,7 +17,7 @@ class LottoNumbersWithBonusWrapperTest {
         // given
         LottoNumbers mySelect = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         LottoNumbers winningNumber = new LottoNumbers(List.of(1, 2, 3, 4, 5, 7));
-        LottoNumberVO bonusNumber = new LottoNumberVO(6);
+        LottoNumberVO bonusNumber = LottoNumberVO.selectLottoBall(6);
 
         // when
         LottoNumbersWithBonusWrapper lottoNumbersWithBonusWrapper = new LottoNumbersWithBonusWrapper(
@@ -38,7 +38,7 @@ class LottoNumbersWithBonusWrapperTest {
         // given
         LottoNumbers mySelect = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         LottoNumbers winningNumber = new LottoNumbers(List.of(1, 2, 3, 4, 5, 7));
-        LottoNumberVO bonusNumber = new LottoNumberVO(10);
+        LottoNumberVO bonusNumber = LottoNumberVO.selectLottoBall(10);
 
         // when
         LottoNumbersWithBonusWrapper lottoNumbersWithBonusWrapper = new LottoNumbersWithBonusWrapper(

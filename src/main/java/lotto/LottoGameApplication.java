@@ -6,8 +6,6 @@ import lotto.domain.PurchasedLotto;
 import lotto.view.Input;
 import lotto.view.Output;
 
-import static lotto.util.ConstUtils.LOTTO_WON_UNIT;
-
 public class LottoGameApplication {
 
     public static void main(String[] args) {
@@ -20,7 +18,7 @@ public class LottoGameApplication {
         output.printPurchaseResult(purchasedLotto);
 
         LottoNumbers lastWeekWinningLottoNumbers = new LottoNumbers(input.getLastWeekWinningLottoNumbersInput());
-        LottoNumberVO bonusNumber = new LottoNumberVO(input.getBonusNumber());
+        LottoNumberVO bonusNumber = LottoNumberVO.selectLottoBall(input.getBonusNumber());
         output.printWinningResult(purchasedLotto.matchWinningNumbers(lastWeekWinningLottoNumbers, bonusNumber));
     }
 }

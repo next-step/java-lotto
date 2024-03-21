@@ -20,7 +20,7 @@ public class LottoNumbers {
     public LottoNumbers(List<Integer> manualNumbers) {
         this.lottoNumbers = new ArrayList<>();
 
-        manualNumbers.forEach(number -> this.lottoNumbers.add(new LottoNumberVO(number)));
+        manualNumbers.forEach(number -> this.lottoNumbers.add(LottoNumberVO.selectLottoBall(number)));
     }
 
     public List<LottoNumberVO> getPurchasedLottoNumber() {
@@ -56,7 +56,7 @@ public class LottoNumbers {
         Collections.sort(lotto);
 
         List<LottoNumberVO> selectedLotto = new ArrayList<>();
-        lotto.forEach(number -> selectedLotto.add(new LottoNumberVO(number)));
+        lotto.forEach(number -> selectedLotto.add(LottoNumberVO.selectLottoBall(number)));
 
         return selectedLotto;
     }
