@@ -11,12 +11,12 @@ class PrizeResultEnumTest {
 
     @ParameterizedTest(name = "[{index}] 인덱스 : {0}, 예상 Description : {1}, 우승 상금 : {2}")
     @CsvSource({
-            "1, '3개 일치 (5,000원) - ', 5000",
-            "2, '4개 일치 (50,000원) - ', 50000",
-            "3, '5개 일치 (1,500,000원) - ', 1500000",
-            "4, '6개 일치 (2,000,000,000원) - ', 2000000000"
+            "3, '3개 일치 (5,000원) - ', 5000",
+            "4, '4개 일치 (50,000원) - ', 50000",
+            "5, '5개 일치 (1,500,000원) - ', 1500000",
+            "6, '6개 일치 (2,000,000,000원) - ', 2000000000"
     })
-    void testGetDescriptionByIndex(int index, String expectedDescription, Long expectedPrize) {
+    void testGetDescriptionByIndex_ValidIndex_ShouldReturnValidResult(int index, String expectedDescription, Long expectedPrize) {
         // given, when
         String description = PrizeResultEnum.getDescriptionByIndex(index);
         Long prize = PrizeResultEnum.getPrizeByIndex(index);
@@ -27,8 +27,8 @@ class PrizeResultEnumTest {
     }
 
     @Test
-    @DisplayName("PrizeResultEnum에 존재하지 않는 index로 조회시 prize와 description을 null로 반환")
-    void testGetPrizeByIndex() {
+    @DisplayName("PrizeResultEnum에 존재하지 않는 index로 조회시 prize는 0L, description을 null로 반환")
+    void testGetPrizeByIndex_NoneExistingIndex_ShouldReturnZeroAndNull() {
         // given
         int index = 0;
 
@@ -38,6 +38,6 @@ class PrizeResultEnumTest {
 
         // then
         assertEquals(description, null);
-        assertEquals(prize, null);
+        assertEquals(prize, 0);
     }
 }
