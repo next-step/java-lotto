@@ -1,105 +1,89 @@
 package autoLotto.model;
 
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static autoLotto.model.LottoConstants.*;
 
 public class LottoWinChecker {
+    private static final String INVALID_WIN_NUMBERS = "당첨 번호의 개수는 0 ~ 6개이며, 각 번호는 1 이상 45 이하의 값만 가능합니다.";
 
-    private int[] winLottos;
+    private HashMap<Integer, Integer> winLottos;
 
-    private static final int LOTTO_WIN_CHECKER_RESULT_LENGTH = 5;
-    private static final int START_WIN_NUMBER = 1;
-    private static final int END_WIN_NUMBER = 45;
-    private static final int VALID_WIN_NUMBERS_LENGTH = 6;
-    private static final String INVALID_WIN_NUMBERS = "당첨 번호의 개수는 6개이며, 각 번호는 1 이상 45 이하의 값만 가능합니다.";
+    public LottoWinChecker(String winNumbersAsString, List<Lotto> lottos) {
+        this.winLottos = createWinLotto(winNumbersAsString, lottos);
+    }
 
-    public LottoWinChecker(String winNumbersInString, List<Lotto> lottos) {
-        int[] winNumbers = convertStringToInts(winNumbersInString);
-        if (!isValidWinNumbers(winNumbers)) {
+    private HashMap<Integer, Integer> createWinLotto(String winNumbersAsString, List<Lotto> lottos) {
+        List<Integer> winLotto = retrieveWinLotto(winNumbersAsString);
+        if (!isValidWinNumbersSize(winLotto) || !isValidWinNumbers(winLotto)) {
             throw new IllegalArgumentException(INVALID_WIN_NUMBERS);
         }
-        this.winLottos = startWinCheck(winNumbers, lottos);
+        return countWinLotto(winLotto, lottos);
     }
 
-    private int[] convertStringToInts(String input) {
-        String[] values = splitNumbersByComma(input);
-        return stringsToInts(values);
+    private List<Integer> retrieveWinLotto(String winNumbersInString) {
+        Lotto lotto = new Lotto(winNumbersInString);
+        return lotto.getLotto();
     }
 
-    private int[] stringsToInts(String[] values) {
-        int[] numbers = new int[values.length];
-
-        for (int i = 0; i < VALID_WIN_NUMBERS_LENGTH; i++) {
-            numbers[i] = Integer.parseInt(values[i]);
-        }
-
-        return numbers;
-    }
-
-    private String[] splitNumbersByComma(String input) {
-        return input.split(",");
-    }
-
-    private boolean isValidWinNumbers(int[] winNumbers) {
-        if (winNumbers.length != VALID_WIN_NUMBERS_LENGTH) {
+    private boolean isValidWinNumbersSize(List<Integer> winLotto) {
+        if (winLotto.size() != VALID_LOTTO_LENGTH) {
             return false;
         }
 
-        Arrays.sort(winNumbers);
-        return isNumberInValidRange(winNumbers[0]) && isNumberInValidRange(winNumbers[LOTTO_WIN_CHECKER_RESULT_LENGTH - 1]);
+        return true;
+    }
+
+    private boolean isValidWinNumbers(List<Integer> winLotto) {
+        Collections.sort(winLotto);
+        return isNumberInValidRange(winLotto.get(0)) && isNumberInValidRange(winLotto.get(VALID_LOTTO_LENGTH - 1));
     }
 
     private boolean isNumberInValidRange(int number) {
-        return number >= START_WIN_NUMBER && number <= END_WIN_NUMBER;
+        return number >= LOTTO_START_NUMBER && number <= LOTTO_END_NUMBER;
     }
 
-    private int[] startWinCheck(int[] winNumbers, List<Lotto> lottos) {
-        List<Integer> winNumberList = intsToList(winNumbers);
-        int[] result = new int[LOTTO_WIN_CHECKER_RESULT_LENGTH];
+    private HashMap<Integer, Integer> countWinLotto(List<Integer> winLotto, List<Lotto> lottos) {
+        HashMap<Integer, Integer> result = new HashMap<>();
 
         for (Lotto lotto : lottos) {
-            int countOfWinNumbers = compareWinNumbers(winNumberList, lotto);
-            result[matchWinNumbersWithIndex(countOfWinNumbers)]++;
+            int countOfWinNumbers = compareWinNumbers(winLotto, lotto);
+            saveOnlyPrize(result, countOfWinNumbers);
         }
 
         return result;
     }
 
-    private List<Integer> intsToList(int[] winNumbers) {
-        return Arrays.stream(winNumbers)
-                .boxed()
-                .collect(Collectors.toList());
-    }
-
-    private int compareWinNumbers(List<Integer> winNumberList, Lotto lotto) {
-        int[] targetLotto = lotto.getLotto();
+    private int compareWinNumbers(List<Integer> winLotto, Lotto lotto) {
+        List<Integer> targetLotto = lotto.getLotto();
         int matchingNumbers = 0;
 
         for (int number : targetLotto) {
-            matchingNumbers += hasWinNumber(winNumberList, number);
+            matchingNumbers += hasWinNumber(winLotto, number);
         }
 
         return matchingNumbers;
     }
 
-    private int matchWinNumbersWithIndex(int countOfWinNumbers) {
-        if (countOfWinNumbers < 3) {
-            return 0;
+    private void saveOnlyPrize(HashMap<Integer, Integer> result, int countOfWinNumbers) {
+        if (countOfWinNumbers < PrizeResultEnum.THREE_MATCHED.getIndex()) {
+            return;
         }
 
-        return countOfWinNumbers - 2;
+        result.put(countOfWinNumbers, result.getOrDefault(countOfWinNumbers, 0) + 1);
     }
 
-    private int hasWinNumber(List<Integer> winNumberList, int targetNumber) {
-        if(winNumberList.contains(targetNumber)) {
+    private int hasWinNumber(List<Integer> winLotto, int targetNumber) {
+        if(winLotto.contains(targetNumber)) {
             return 1;
         }
 
         return 0;
     }
 
-    public int[] getWinLottos() {
+    public HashMap<Integer, Integer> getWinLottos() {
         return this.winLottos;
     }
 }
