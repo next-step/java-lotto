@@ -1,28 +1,19 @@
 package calculator.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Validator {
-
     private static final Pattern OPERATOR = Pattern.compile("[+\\-*/]");
 
-    public static List<String> checkCount(List<String> operands, List<String> operators) {
-        int operandsCount = operands.size();
-        int compareCount = operators.size();
+    public static void checkCount(List<String> operands, List<String> operators) {
 
-        if (operandsCount <= compareCount ) {
+        if (operands.size() <= operators.size() ) {
             throw new IllegalArgumentException("연산할 숫자가 부족합니다.");
         }
 
-        return Stream.of(operands,operators).flatMap(Collection::stream).collect(Collectors.toList());
     }
-
 
     public static String operatorCheck(String splitExpression) {
         Matcher matcher = OPERATOR.matcher(splitExpression);
@@ -34,4 +25,18 @@ public class Validator {
         return splitExpression;
 
     }
+
+    public static int division(int result, int targetNum) {
+        if(targetNum == 0) {
+            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        }
+
+        if(result % targetNum != 0) {
+            throw new IllegalArgumentException("연산 결과가 정수가 아닙니다.");
+        }
+
+        return result / targetNum;
+
+    }
+
 }
