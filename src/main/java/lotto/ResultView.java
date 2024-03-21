@@ -14,7 +14,7 @@ public class ResultView {
         System.out.println("---------");
         Arrays.stream(LottoPrize.values())
                 .forEach(item ->
-                        System.out.println(item.getMatchCount() + "개 일치 (" + item.getPrize() + ")" + lottoGame.matchLottoCount(item, winnerLotto) + "개"));
+                        System.out.println(item.getMatchCount() + "개 일치 (" + item.getPrize() + ")- " + lottoGame.matchLottoCount(item, winnerLotto) + "개"));
     }
 
     private static void createRateOfReturnView(LottoGame lottoGame, Lotto winnerLotto) {

@@ -2,16 +2,15 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Stream;
 
 public class LottoGame {
     private final static int LOTTO_PRICE = 1000;
     private List<Lotto> lottos = new ArrayList<>();
 
     public LottoGame(int lottoCount, LottoGeneration lottoGeneration) {
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(Lotto.create(lottoGeneration));
-        }
+        Stream.generate(() -> Lotto.create(lottoGeneration)).limit(lottoCount)
+                .forEach(item -> lottos.add(item));
     }
 
     public static int LOTTO_PRICE() {
@@ -25,7 +24,7 @@ public class LottoGame {
 
     public long matchLottoCount(LottoPrize lottoPrize, Lotto prizeLotto) {
         return lottos.stream()
-                .filter(item -> lottoPrize.equalsPrize(item.getCountMatchedLottoNumber(prizeLotto)))
+                .filter(item -> lottoPrize.equalsPrize(item.getMatchedLottoPrize(prizeLotto)))
                 .count();
 
     }
@@ -40,8 +39,7 @@ public class LottoGame {
 
     private long getPrizeSum(Lotto winnerLotto) {
         return this.lottos.stream()
-                .filter(item -> item.getCountMatchedLottoNumber(winnerLotto) != null)
-                .mapToLong(item -> item.getCountMatchedLottoNumber(winnerLotto).getPrize())
+                .mapToLong(item -> item.getMatchedLottoPrizePrice(winnerLotto))
                 .sum();
     }
 }

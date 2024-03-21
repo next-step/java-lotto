@@ -26,15 +26,15 @@ public class LottoTest {
     @DisplayName("로또 사이즈와 맞지 않을 경우 예외를 던진다.")
     @Test
     void createThrowError() {
-        assertThatThrownBy(() -> Lotto.create(() -> List.of(5, 6, 7, 8, 9)))
+        assertThatThrownBy(() -> Lotto.create(() -> List.of(5, 6, 7, 8, 9, 5)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("몇개의 로또번호가 맞는지 확인할 수 있다.")
+    @DisplayName("로또가 당첨됐는지 확인할 수 있다.")
     @Test
     void getCountMatchedLottoNumber() {
         Lotto prizeLotto = Lotto.create(() -> List.of(1, 2, 3, 4, 5, 6));
         Lotto targetLotto = Lotto.create(() -> List.of(1, 2, 3, 4, 5, 6));
-        Assertions.assertThat(targetLotto.getCountMatchedLottoNumber(prizeLotto)).isEqualTo(6);
+        Assertions.assertThat(targetLotto.getMatchedLottoPrize(prizeLotto)).isEqualTo(LottoPrize.FIRST);
     }
 }
