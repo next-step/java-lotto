@@ -2,8 +2,12 @@
 
 import controller.CalculatorController;
 import domain.Calculator;
+import domain.Operation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import view.Result;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -12,19 +16,18 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class stringCalculatorTest {
 
     @Test
+    @ParameterizedTest
+    @CsvSource({
+            "+,2,2,4",
+            "-,2,2,0",
+            "/,4,2,2",
+            "*,2,3,6"
+    })
     @DisplayName("문자열 계산")
-    public void calculator() {
-
-        Calculator calculator = new Calculator();
-        calculator.basic(4);
-        assertThat(calculator.getNowValue()).isEqualTo(4);
-
-        assertThat(calculator.operation(2, "-")).isEqualTo(2);
-        assertThat(calculator.operation(2, "+")).isEqualTo(4);
-        assertThat(calculator.operation( 2, "/")).isEqualTo(2);
-        assertThat(calculator.operation( 3, "*")).isEqualTo(6);
-
-        assertThatIllegalArgumentException().isThrownBy(() -> calculator.operation(2, "a"));
+    public void calculator(String operator, int num1, int num2, int expectedResult) {
+        Operation operation = Operation.of(operator);
+        int actualResult = operation.apply(num1, num2);
+        assertThat(actualResult).isEqualTo(expectedResult);
     }
 
     @Test
