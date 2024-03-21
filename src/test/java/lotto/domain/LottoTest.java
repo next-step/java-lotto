@@ -35,6 +35,15 @@ public class LottoTest {
                     .isThrownBy(() -> new Lotto(Collections.emptyList()));
         }
 
+        @DisplayName("로또는 6개의 숫자로 구성된 번호를 생성자로 넘기면 Lotto를 생성한다.")
+        @Test
+        void it_returns_lotto_when_string_numbers() {
+            final String[] input = new String[]{"1", "2", "3", "4", "5", "6"};
+
+            assertThatCode(() -> new Lotto(input))
+                    .doesNotThrowAnyException();
+        }
+
     }
 
 }

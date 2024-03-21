@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int NUMBER_LENGTH = 6;
@@ -10,6 +12,12 @@ public class Lotto {
     public Lotto(List<LottoNumber> numbers) {
         assertNumbersLength(numbers);
         this.numbers = numbers;
+    }
+
+    public Lotto(String[] stringNumbers) {
+        this(Arrays.stream(stringNumbers)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
     }
 
     private void assertNumbersLength(List<LottoNumber> numbers) {

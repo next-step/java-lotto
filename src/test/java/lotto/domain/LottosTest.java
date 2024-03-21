@@ -18,8 +18,7 @@ public class LottosTest {
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
 
-        final List<Lotto> lottos = List.of(new Lotto(numbers));
-
+        Lottos lottos = new Lottos(List.of(new Lotto(numbers)));
         assertThat(lottos.isEmpty()).isFalse();
     }
 }
