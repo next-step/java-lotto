@@ -20,6 +20,10 @@ public class Lottos {
         return lottos;
     }
 
+    public static Lottos create(int count, LottoGenerator generator) {
+        return generator.generate(count);
+    }
+
     public Map<LottoRank, Integer> getWinningResult(Lotto winningLotto) {
         Map<LottoRank, Integer> result = new HashMap<>();
         for (Lotto lotto : lottos) {

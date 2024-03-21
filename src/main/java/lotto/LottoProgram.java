@@ -11,7 +11,7 @@ public class LottoProgram {
     public void run() {
         int purchaseAmount = inputPurchaseAmount();
 
-        Lottos lottos = LottoMachine.createLottos(
+        Lottos lottos = Lottos.create(
             LottoStore.sellLotto(purchaseAmount), new RandomLottoGenerator());
         printLottosCount(purchaseAmount, lottos);
 
