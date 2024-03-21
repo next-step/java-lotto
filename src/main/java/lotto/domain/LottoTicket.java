@@ -7,13 +7,14 @@ import java.util.List;
 public class LottoTicket {
 
     private final List<Integer> numbers;
+    private static final int MAX_NUMBERS = 6;
 
     public LottoTicket() {
         numbers = new ArrayList<>();
     }
 
     public List<Integer> generate() {
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < MAX_NUMBERS; i++) {
             this.numbers.add(randomNumbers().get(i));
         }
         Collections.sort(this.numbers);
