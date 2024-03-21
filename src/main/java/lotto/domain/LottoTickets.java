@@ -3,12 +3,13 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTicketList;
 
     public LottoTickets(Amount amount) {
-        this.lottoTicketList = IntStream.range(0, amount.value() / Amount.lottoPrice())
+        this.lottoTicketList = IntStream.range(0, amount.lottoTicketCount())
                 .mapToObj(i -> new LottoTicket())
                 .collect(Collectors.toList());
     }
@@ -28,14 +29,14 @@ public class LottoTickets {
     }
 
     public double earningsRate(WinningNumbers winningNumbers) {
-        return Math.floor(100 * (double) earnings(winningNumbers) / (size() * Amount.lottoPrice()))/100.0;
+        return Math.floor(100 * (double) earnings(winningNumbers) / (size() * Amount.LOTTO_PRICE))/100.0;
     }
 
     private long earnings(WinningNumbers winningNumbers) {
-        return matchTicketCount(winningNumbers, WinnerPrize.THREE.getMatchCount()) * WinnerPrize.THREE.getPrize()
-                + matchTicketCount(winningNumbers, WinnerPrize.FOUR.getMatchCount()) * WinnerPrize.FOUR.getPrize()
-                + matchTicketCount(winningNumbers, WinnerPrize.FIVE.getMatchCount()) * WinnerPrize.FIVE.getPrize()
-                + matchTicketCount(winningNumbers, WinnerPrize.SIX.getMatchCount()) * WinnerPrize.SIX.getPrize();
+        return Stream.of(WinnerPrize.values())
+                .mapToLong(winnerPrize -> matchTicketCount(winningNumbers,
+                        winnerPrize.getMatchCount()) * winnerPrize.getPrize())
+                .sum();
     }
 
 }

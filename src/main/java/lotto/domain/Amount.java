@@ -1,7 +1,8 @@
 package lotto.domain;
 
 public class Amount {
-    private final static int LOTTO_PRICE = 1000;
+    public final static int LOTTO_PRICE = 1000;
+
     private final int value;
 
     public Amount(String input) {
@@ -35,7 +36,7 @@ public class Amount {
         return value;
     }
 
-    public static int lottoPrice() {
-        return LOTTO_PRICE;
+    public int lottoTicketCount() {
+        return this.value() / LOTTO_PRICE;
     }
 }

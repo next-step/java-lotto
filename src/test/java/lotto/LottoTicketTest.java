@@ -11,7 +11,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
 
 class LottoTicketTest {
     private static final int LOTTO_NUMBER_COUNT = 6;
@@ -33,13 +32,7 @@ class LottoTicketTest {
                         "1, 3, 5, 7, 9, 10:5",
                         "1, 3, 5, 7, 9, 11:6"}, delimiter = ':')
     void 당첨숫자와_일치하는_숫자개수(String input, int expected) {
-        LottoTicket lottoTicket = new LottoTicket(new TreeSet<>(Set.of(
-                new LottoNumber(1),
-                new LottoNumber(3),
-                new LottoNumber(5),
-                new LottoNumber(7),
-                new LottoNumber(9),
-                new LottoNumber(11))));
+        LottoTicket lottoTicket = new LottoTicket(1, 3, 5, 7, 9, 11);
         WinningNumbers winningNumbers = new WinningNumbers(input, ", ");
         assertThat(lottoTicket.getMatchCount(winningNumbers)).isEqualTo(expected);
     }

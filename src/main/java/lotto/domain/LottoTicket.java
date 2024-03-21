@@ -2,31 +2,48 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoTicket {
-    private final static List<LottoNumber> LottoNumbers = IntStream.range(0, 45)
+    private final static List<LottoNumber> LOTTO_NUMBERS = IntStream.range(0, 45)
             .mapToObj(i -> i + 1)
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
-    private final TreeSet<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
-    public LottoTicket(TreeSet<LottoNumber> numbers) {
+    public LottoTicket(Set<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
     public LottoTicket() {
-        Collections.shuffle(LottoNumbers);
-        this.numbers = LottoNumbers.subList(0, 6)
+        this(automaticLottery());
+    }
+
+    public LottoTicket(Integer... numbers) {
+        this(toSet(numbers));
+    }
+
+    private static TreeSet<LottoNumber> toSet(Integer... numbers) {
+        return Stream.of(numbers)
+                .map(LottoNumber::new)
+                .sorted()
+                .collect(Collectors.toCollection(TreeSet::new));
+    }
+
+    private static Set<LottoNumber> automaticLottery() {
+        Collections.shuffle(LOTTO_NUMBERS);
+        return LOTTO_NUMBERS.subList(0, 6)
                 .stream()
                 .sorted()
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 
-    public TreeSet<LottoNumber> getNumbers() {
+    public Set<LottoNumber> getNumbers() {
         return numbers;
     }
 
