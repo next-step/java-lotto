@@ -1,6 +1,5 @@
 package domain;
 
-import domain.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +24,7 @@ public class RankTest {
     @Test
     void test02() {
         // given
-        Rank rank = Rank.THIRD;
+        Rank rank = Rank.FOURTH;
 
         // when
         int result = rank.prizeMoney(2);

@@ -2,8 +2,6 @@ package domain;
 
 import java.util.List;
 
-import domain.Rank;
-import domain.Ranks;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +13,7 @@ public class RanksTest {
     @Test
     void test01() {
         // given
-        Ranks ranks = new Ranks(List.of(Rank.FIRST, Rank.FOURTH));
+        Ranks ranks = new Ranks(List.of(Rank.FIRST, Rank.FIFTH));
 
         // when
         int result = ranks.count(Rank.FIRST);
@@ -28,7 +26,7 @@ public class RanksTest {
     @Test
     void test() {
         // given
-        Ranks ranks = new Ranks(List.of(Rank.THIRD, Rank.FOURTH));
+        Ranks ranks = new Ranks(List.of(Rank.FOURTH, Rank.FIFTH));
 
         // when
         int result = ranks.totalPrizeMoney();
