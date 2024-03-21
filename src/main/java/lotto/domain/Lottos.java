@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
@@ -23,5 +24,11 @@ public class Lottos {
 
     public void forEach(Consumer<Lotto> action) {
         lottos.forEach(action);
+    }
+
+    public LottoMatchCounts matchCounts(Lotto winningNumbers) {
+        return new LottoMatchCounts(lottos.stream()
+                .map(lotto -> lotto.matchCount(winningNumbers))
+                .collect(Collectors.toList()));
     }
 }
