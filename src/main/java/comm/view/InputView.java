@@ -1,4 +1,4 @@
-package lotto.view;
+package comm.view;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,11 +1,11 @@
 package lotto;
 
+import calculator.domain.Calculator;
+import comm.view.InputView;
+import comm.view.ResultView;
 import java.util.List;
-import lotto.domain.Calculator;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoTickets;
-import lotto.view.InputView;
-import lotto.view.ResultView;
 
 public class LottoApplication {
     private static InputView inputView;
