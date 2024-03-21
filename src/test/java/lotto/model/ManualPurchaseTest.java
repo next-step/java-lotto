@@ -1,6 +1,5 @@
 package lotto.model;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
@@ -12,15 +11,10 @@ import static lotto.model.LottoFactory.create;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ManualPurchaseTest {
-    private LottoMachine machine;
-
-    @BeforeEach
-    void setUp() {
-        machine = new ManualPurchase(new Scanner(System.in));
-    }
 
     @Test
     void 수동구매_요청수량이_0인경우_빈배열을_반환한다() {
+        LottoMachine machine = new ManualPurchase(new Scanner(System.in));
         List<Lotto> lottos = machine.purchase(0);
 
         assertThat(lottos).isEmpty();
@@ -32,6 +26,7 @@ class ManualPurchaseTest {
         InputStream in = new ByteArrayInputStream(given.getBytes());
         System.setIn(in);
 
+        LottoMachine machine = new ManualPurchase(new Scanner(System.in));
         List<Lotto> lottos = machine.purchase(3);
 
         assertThat(lottos).hasSize(3)
