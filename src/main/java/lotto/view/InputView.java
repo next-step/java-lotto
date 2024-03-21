@@ -48,13 +48,13 @@ public class InputView {
         return new Ball(bonusBallNumber);
     }
 
-    public Lottos inputManualLottos() {
+    public List<Lotto> inputManualLottos() {
         int manualLottoAmount = inputManualLottoAmount();
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
         List<Lotto> lottos = IntStream.range(0, manualLottoAmount)
             .mapToObj(i -> inputLotto())
             .collect(Collectors.toUnmodifiableList());
-        return new Lottos(lottos);
+        return lottos;
     }
 
     private int inputManualLottoAmount() {
