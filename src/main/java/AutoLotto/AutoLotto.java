@@ -18,7 +18,7 @@ public class AutoLotto {
 
         String winNumbers = inputView.inputWinNumbers();
         LottoWinChecker lottoWinChecker = new LottoWinChecker(winNumbers, lottoMachine.getLottos());
-        LottoProfitChecker lottoProfitChecker = new LottoProfitChecker(lottoWinChecker.getWinLottos(), purchaseAmount);
-        resultView.outputLottoResult(lottoWinChecker.getWinLottos(), lottoProfitChecker.getProfit());
+        LottoProfitChecker lottoProfitChecker = new LottoProfitChecker(lottoWinChecker.getWinLottos());
+        resultView.outputLottoResult(lottoWinChecker.getWinLottos(), lottoProfitChecker.getProfitRatio(purchaseAmount));
     }
 }

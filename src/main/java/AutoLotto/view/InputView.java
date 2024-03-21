@@ -3,15 +3,14 @@ package autoLotto.view;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import static autoLotto.model.LottoConstants.*;
+
 public class InputView {
     private Scanner scanner = new Scanner(System.in);
 
     private static final String VALID_NUMBER = "[0-9]\\d*";
     private static final String VALID_WIN_NUMBER = "^[0-9]{1,2}(,[0-9]{1,2})*$";
     private static final Long DIVISION_UNIT = 1000L;
-    private static final int WIN_NUMBER_LENGTH = 6;
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
 
     private static final String PURCHASE_AMOUNT_QUESTION = "구입금액을 입력해 주세요.";
     private static final String PURCHASE_DENIED = "1,000원 단위로 구매 가능합니다.\n구입금액을 다시 입력해주세요.";
@@ -70,7 +69,7 @@ public class InputView {
     private boolean isValidWinNumbers(String input) {
         String[] values = splitNumbersByComma(input);
 
-        if (values.length != WIN_NUMBER_LENGTH) {
+        if (values.length != VALID_LOTTO_LENGTH) {
             return false;
         }
 
@@ -85,7 +84,7 @@ public class InputView {
     private int[] stringsToInts(String[] values) {
         int[] numbers = new int[values.length];
 
-        for (int i = 0; i < WIN_NUMBER_LENGTH; i++) {
+        for (int i = 0; i < VALID_LOTTO_LENGTH; i++) {
             numbers[i] = Integer.parseInt(values[i]);
         }
 
@@ -94,7 +93,7 @@ public class InputView {
 
     private boolean isValidWinNumber(int[] numbers) {
         Arrays.sort(numbers);
-        return numbers[0] >= MIN_NUMBER && numbers[WIN_NUMBER_LENGTH - 1] <= MAX_NUMBER;
+        return numbers[0] >= LOTTO_START_NUMBER && numbers[VALID_LOTTO_LENGTH - 1] <= LOTTO_END_NUMBER;
     }
 
 }
