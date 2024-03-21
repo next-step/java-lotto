@@ -1,9 +1,11 @@
 package calculator;
 
 import calculator.domain.Calculator;
+import calculator.domain.Operation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -16,11 +18,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorTest {
 
+    private static final String PLUS = "+";
+    private static final String MULTIPLY = "*";
+    private static final String SUBTRACT = "-";
+    private static final String DIVIDE = "/";
     private static final String DEFAULT = "2 + 3 * 4 / 3";
-    private static final String PLUS = "1 + 1";
-    private static final String MULTIPLY = "1 * 1";
-    private static final String SUBTRACT = "1 - 1";
-    private static final String DIVIDE = "1 / 1";
     private static final String NOT_OPERATOR = "2 & 3";
 
     @ParameterizedTest
@@ -32,32 +34,39 @@ public class CalculatorTest {
         System.out.println(Arrays.toString(seperateString));
     }
 
+    @DisplayName("더하기")
     @ParameterizedTest
-    @ValueSource(strings = {PLUS})
-    @DisplayName("단순 더하기")
-    void 더하기(String input) {
-        assertThat(Calculator.calculator(input)).isEqualTo(2);
+    @CsvSource({"2, 4, 6", "1, 5, 6"})
+    void 더하기(int a, int b, int result) {
+        assertThat(Operation.from(a, PLUS, b)).isEqualTo(result);
     }
 
+    @DisplayName("빼기")
     @ParameterizedTest
-    @ValueSource(strings = {MULTIPLY})
-    @DisplayName("단순 곱하기")
-    void 곱하기(String input) {
-        assertThat(Calculator.calculator(input)).isEqualTo(1);
+    @CsvSource({"4, 2, 2", "5, 1, 4"})
+    void 빼기(int a, int b, int result) {
+        assertThat(Operation.from(a, SUBTRACT, b)).isEqualTo(result);
     }
 
+    @DisplayName("곱하기")
     @ParameterizedTest
-    @ValueSource(strings = {DIVIDE})
-    @DisplayName("단순 나누기")
-    void 나누기(String input) {
-        assertThat(Calculator.calculator(input)).isEqualTo(1);
+    @CsvSource({"2, 2, 4", "5, 1, 5"})
+    void 곱하기(int a, int b, int result) {
+        assertThat(Operation.from(a, MULTIPLY, b)).isEqualTo(result);
     }
 
+    @DisplayName("나누기")
     @ParameterizedTest
-    @ValueSource(strings = {SUBTRACT})
-    @DisplayName("단순 빼기")
-    void 빼기(String input) {
-        assertThat(Calculator.calculator(input)).isEqualTo(0);
+    @CsvSource({"2, 1, 2", "1, 1, 1"})
+    void 나누기(int a, int b, int result) {
+        assertThat(Operation.from(a, DIVIDE, b)).isEqualTo(result);
+    }
+
+    @DisplayName("산식계산")
+    @ParameterizedTest
+    @CsvSource({"2 + 3 * 4 / 3, 6"})
+    void calculate(String input, int result) {
+        assertThat(Calculator.calculator(input)).isEqualTo(result);
     }
 
     @ParameterizedTest
