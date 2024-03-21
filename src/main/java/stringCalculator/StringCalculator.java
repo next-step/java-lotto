@@ -4,6 +4,7 @@ import java.util.List;
 
 public class StringCalculator {
     private static final List<String> OPERATION_SYMBOL = List.of("+", "-", "*", "/");
+    private static final int OPERATOR_INDEX_TERM = 2;
     private static final String BLANK = " ";
     private static final String BLANK_INPUT_MESSAGE = "input value is blank";
     private static final String INVALID_OPERATOR_MESSAGE = "input value is invalid operation symbol";
@@ -19,9 +20,9 @@ public class StringCalculator {
     private static int calculate(List<String> tokens) {
         int result = Integer.parseInt(tokens.get(0));
 
-        for (int operatorIndex = 1; operatorIndex < tokens.size(); operatorIndex += 2) {
-            String operator = tokens.get(operatorIndex);
-            int operand = toInt(tokens.get(operatorIndex + 1));
+        for (int i = 1; i < tokens.size(); i += OPERATOR_INDEX_TERM) {
+            String operator = tokens.get(i);
+            int operand = toInt(tokens.get(i + 1));
             result = Operation.findOperator(operator).apply(result, operand);
         }
         return result;
