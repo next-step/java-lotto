@@ -26,16 +26,18 @@ public class ResultView {
     sb.append("당첨 통계").append('\n').append("---------").append('\n');
 
     lottoProfit.getProfitMap().forEach((key, value) -> {
-      printRewardResult(sb, key, value);
+      sb.append(printRewardResult(key, value));
     });
 
     sb.append("총 수익률은 ").append(lottoProfit.calculateProfitRate()).append("입니다.");
     System.out.println(sb);
   }
 
-  private static void printRewardResult(StringBuilder sb, RewardPrice key, Integer value) {
+  private static StringBuilder printRewardResult(RewardPrice key, Integer value) {
+    StringBuilder sb = new StringBuilder();
     sb.append(key.matchCount()).append("개 일치")
         .append('(').append(key.rewardAmount()).append("원)")
         .append(" - ").append(value).append('개').append('\n');
+    return sb;
   }
 }
