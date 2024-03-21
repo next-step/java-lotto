@@ -2,7 +2,7 @@ package lotto.domain;
 
 public class LottoCalculator {
 
-	public static int getLottoCount(long money) {
+	public static int getAvailableLottoNumbers(long money) {
 		validMoney(money);
 		return (int) (money / LottoNumbers.LOTTO_PRICE);
 	}
