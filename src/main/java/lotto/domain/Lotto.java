@@ -24,11 +24,11 @@ public class Lotto {
 
 
 
-    public RankMatches numMatch(Lotto picked){
-        for(int element: picked.getLottoList()){
+    public RankMatches numMatch(WinLotto picked){
+        for(int element: picked.winLottoNum.getLottoList()){
             checkMatch(element);
         }
-        return RankMatches.makeRank(count);
+        return RankMatches.makeRank(count, this.lotto.lottoContains(picked.bonusNum.getBonusNum()));
     }
 
     private void checkMatch(int element) {
