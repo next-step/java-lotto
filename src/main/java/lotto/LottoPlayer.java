@@ -20,6 +20,7 @@ public class LottoPlayer {
         OutputView.printWinningCounts(statistics);
 
         final double rateOfReturn = statistics.rateOfReturn(cash);
+        OutputView.printRateOfReturn(rateOfReturn);
     }
 
     public static void main(String[] args) {
