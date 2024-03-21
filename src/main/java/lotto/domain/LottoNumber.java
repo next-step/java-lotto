@@ -12,6 +12,29 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
+    public LottoNumber(String input) {
+        this(toInt(input));
+    }
+
+    private static int toInt(String input) {
+        if (hasNoInput(input)) {
+            throw new IllegalArgumentException("보너스 볼을 입력하지 않았습니다.");
+        }
+
+        int number;
+        try {
+            number = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("정수만 입력할 수 있습니다.");
+        }
+
+        return number;
+    }
+
+    private static boolean hasNoInput(String input) {
+        return input == null || input.isBlank();
+    }
+
     private boolean isLottoNumber(int number) {
         return number >= 1 && number <= 45;
     }
