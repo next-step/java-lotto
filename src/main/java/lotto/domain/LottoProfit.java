@@ -16,16 +16,9 @@ public class LottoProfit {
   }
 
   public static LottoProfit of(WinningNumbers winningNumbers, LottoTickets myLottoTickets) {
-    TreeMap<RewardPrice, Integer> profitMap = initRewardAmountMap();
-    myLottoTickets.updateMapValues(profitMap, winningNumbers, myLottoTickets);
+    TreeMap<RewardPrice, Integer> profitMap = initRewardPriceMap();
+    profitMap.putAll(myLottoTickets.matchedNumberCountBy(winningNumbers));
     return new LottoProfit(profitMap, myLottoTickets);
-  }
-
-  private static TreeMap<RewardPrice, Integer> initRewardAmountMap() {
-    TreeMap<RewardPrice, Integer> profitMap = new TreeMap<>((o1, o2) -> o1.rewardAmount() - o2.rewardAmount());
-    List<RewardPrice> filteredInfos = Arrays.stream(RewardPrice.values()).collect(Collectors.toList());
-    filteredInfos.forEach(info -> profitMap.put(info, 0));
-    return profitMap;
   }
 
   public double calculateProfitRate() {
@@ -39,6 +32,13 @@ public class LottoProfit {
 
   public TreeMap<RewardPrice, Integer> getProfitMap() {
     profitMap.remove(RewardPrice.NONE);
+    return profitMap;
+  }
+
+  private static TreeMap<RewardPrice, Integer> initRewardPriceMap() {
+    TreeMap<RewardPrice, Integer> profitMap = new TreeMap<>((o1, o2) -> o1.rewardAmount() - o2.rewardAmount());
+    List<RewardPrice> filteredInfos = Arrays.stream(RewardPrice.values()).collect(Collectors.toList());
+    filteredInfos.forEach(info -> profitMap.put(info, 0));
     return profitMap;
   }
 }

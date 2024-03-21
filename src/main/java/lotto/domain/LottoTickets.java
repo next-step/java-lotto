@@ -2,9 +2,8 @@ package lotto.domain;
 
 import lotto.domain.type.RewardPrice;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
 
@@ -37,12 +36,14 @@ public class LottoTickets {
     return this.tickets.stream().allMatch(LottoTicket::haveCorrectNumbers);
   }
 
-  public void updateMapValues(TreeMap<RewardPrice, Integer> map, WinningNumbers winningNumbers, LottoTickets lottoTickets) {
-    for (LottoTicket lottoTicket : lottoTickets.tickets) {
+  public Map<RewardPrice, Integer> matchedNumberCountBy(WinningNumbers winningNumbers) {
+    Map<RewardPrice, Integer> map = initMatchedNumberCountMap();
+    for (LottoTicket lottoTicket : tickets) {
       int matchNumberCount = winningNumbers.matchNumberCount(lottoTicket);
       RewardPrice key = RewardPrice.match(matchNumberCount);
       map.put(key, map.get(key) + 1);
     }
+    return map;
   }
 
   public List<LottoTicket> getTickets() {
@@ -51,5 +52,12 @@ public class LottoTickets {
 
   public double calculateProfitRate(int profitAmount) {
     return Math.floor((double) profitAmount / purchaseAmount.amount() * 100) / 100.0;
+  }
+
+  private Map<RewardPrice, Integer> initMatchedNumberCountMap() {
+    Map<RewardPrice, Integer> map = new HashMap<>();
+    List<RewardPrice> filteredInfos = Arrays.stream(RewardPrice.values()).collect(Collectors.toList());
+    filteredInfos.forEach(info -> map.put(info, 0));
+    return map;
   }
 }
