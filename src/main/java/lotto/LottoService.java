@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 public class LottoService {
 	public static void start() {
 		long lottoMoney = InputView.inputLottoMoney();
-		int lottoCount = LottoCalculator.getLottoCount(lottoMoney);
+		int lottoCount = LottoCalculator.getAvailableLottoNumbers(lottoMoney);
 
 		ResultView.printLottoCount(lottoCount);
 
@@ -26,7 +26,7 @@ public class LottoService {
 
 		List<Integer> winningLottoNumber = InputView.inputWinningNumber();
 
-		HashMap<LottoRank, Integer> lottoRanks = lottos.getWinningStatistics(new WinningLottoNumbers(winningLottoNumber));
+		HashMap<LottoRank, Integer> lottoRanks = lottos.getWinningStatistics(new WinningLottoNumbers(new LottoNumbers(winningLottoNumber)));
 
 		ResultView.printWinningStatistics(lottoRanks);
 		ResultView.printRateOfReturn(lottoMoney, getWinningMoney(lottoRanks));

@@ -25,7 +25,7 @@ public class LottoNumbersTest {
 		List<Integer> lottoNumbers = List.of(20, 32, 44, 30, 1, 2);
 		List<Integer> winningNumber = List.of(20, 3, 44, 4, 1, 2);
 		LottoNumbers lotto = new LottoNumbers(lottoNumbers);
-		int count = lotto.getCountOfMatchLottoNumber(new WinningLottoNumbers(winningNumber));
+		int count = lotto.getCountOfMatchLottoNumber(new WinningLottoNumbers(new LottoNumbers(winningNumber)));
 		assertThat(count).isEqualTo(4);
 	}
 

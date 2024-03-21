@@ -31,7 +31,7 @@ public class LottosTest {
 		List<LottoNumbers> inputLottos = List.of(new LottoNumbers(lottoNumbers));
 		Lottos lottos = new Lottos(inputLottos);
 
-		HashMap<LottoRank, Integer> lottoRanks = lottos.getWinningStatistics(new WinningLottoNumbers(winningLottoNumber));
+		HashMap<LottoRank, Integer> lottoRanks = lottos.getWinningStatistics(new WinningLottoNumbers(new LottoNumbers(winningLottoNumber)));
 		LottoRank expectedRank = LottoRank.valueOf(key);
 
 		assertThat(lottoRanks.get(expectedRank)).isEqualTo(expectedMatchCount);
