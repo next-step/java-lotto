@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -43,7 +44,7 @@ public class InputView {
 
     private Ball inputBonusBall() {
         System.out.println(INPUT_WINNING_LOTTO_BONUS_BALL_MESSAGE);
-        int bonusBallNumber = scanner.nextInt();
+        int bonusBallNumber = inputInt();
         return new Ball(bonusBallNumber);
     }
 
@@ -58,7 +59,7 @@ public class InputView {
 
     private int inputManualLottoAmount() {
         System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
-        return Integer.parseInt(scanner.nextLine());
+        return inputInt();
     }
 
     private Lotto inputLotto() {
@@ -69,5 +70,16 @@ public class InputView {
             .map(Ball::new)
             .collect(Collectors.toUnmodifiableSet());
         return new Lotto(balls);
+    }
+
+    // nextInt() 후 nextLine() 호출하면
+    // nextLine()에 빈 줄이 입력된 걸로 받아들여지는 문제가 있음
+    // 이를 해결하기 위해 nextLine만 사용하기로 함
+    private int inputInt() {
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자만 입력하실 수 있습니다");
+        }
     }
 }
