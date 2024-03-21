@@ -2,10 +2,8 @@ package stringCalculator;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.function.BiFunction;
 
-interface Operator {
-    int apply(int x, int y);
-}
 
 public enum Operation {
     PLUS("+", (x, y) -> x + y),
@@ -14,15 +12,15 @@ public enum Operation {
     DIVIDE("/", (x, y) -> x / y);
 
     private String sign;
-    private final Operator operator;
+    private final BiFunction<Integer, Integer, Integer> operation;
 
     public String sign() {
         return sign;
     }
 
-    Operation(String sign, Operator operator) {
+    Operation(String sign, BiFunction<Integer, Integer, Integer> operation) {
         this.sign = sign;
-        this.operator = operator;
+        this.operation = operation;
     }
 
     public static Operation findOperator(String sign) {
@@ -35,6 +33,6 @@ public enum Operation {
     }
 
     public int apply(int x, int y) {
-        return operator.apply(x, y);
+        return operation.apply(x, y);
     }
 }
