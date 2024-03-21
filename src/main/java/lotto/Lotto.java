@@ -8,18 +8,20 @@ public class Lotto {
     private final static int LOTTO_SIZE = 6;
 
     public static Lotto create(LottoGeneration generation) {
-        return new Lotto(generation);
-    }
-
-    private Lotto(LottoGeneration generation) {
         List<Integer> numberList = generation.generate();
         if (numberList.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("요청하신 번호 배열이 로또 사이즈" + LOTTO_SIZE + "와 일치하지 않습니다.");
         }
 
-        this.lottoNumberList = numberList.stream()
+        List<LottoNumber> lottoNumbers = numberList.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
+
+        return new Lotto(lottoNumbers);
+    }
+
+    private Lotto(List<LottoNumber> lottoNumbers) {
+        this.lottoNumberList = lottoNumbers;
     }
 
     public List<LottoNumber> numbers() {
@@ -32,7 +34,7 @@ public class Lotto {
     }
 
     public int getCountMatchedLottoNumber(Lotto lotto) {
-        return (int)numbers().stream()
+        return (int) numbers().stream()
                 .filter(numbers -> lotto.contain(numbers))
                 .count();
     }
