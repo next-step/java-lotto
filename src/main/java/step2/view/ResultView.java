@@ -13,7 +13,10 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("----------");
         for (PrizeLevel level : PrizeLevel.values()) {
-            System.out.println(level.getMatchCount() + "개 일치 (" + level.getPrizeAmount() + ") - " + lotteryAwardSystem.getWinnersCountMap().getOrDefault(level.getMatchCount(), 0) + "개");
+            System.out.println(level.getMatchCount() + "개 일치 " +
+                    (level == PrizeLevel.SECOND ? "(보너스번호 일치) " : "") +
+                    "(" + level.getPrizeAmount() + ") - " +
+                    lotteryAwardSystem.getWinnersCountMap().getOrDefault(level, 0) + "개");
         }
         System.out.println("총 수익률은 " + lotteryAwardSystem.getProfitRate() + "입니다.");
     }

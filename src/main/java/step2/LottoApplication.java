@@ -11,10 +11,11 @@ public class LottoApplication {
         LottoStore lottoStore = new LottoStore(money, randomNumberGenerator);
         InputView.printLottoList(lottoStore);
 
-        String winNumbers = InputView.inputWinnerNumbers();
-        LottoNumbers winnerNumbers = new LottoNumbers(winNumbers);
+        LottoNumbers winnerNumbers = new LottoNumbers(InputView.inputWinnerNumbers());
+        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
+        WinningNumbers winningNumbers = new WinningNumbers(winnerNumbers, bonusNumber);
 
-        LotteryAwardSystem lotteryAwardSystem = new LotteryAwardSystem(lottoStore.getLottos(), winnerNumbers, lottoStore.getBuyMoney());
+        LotteryAwardSystem lotteryAwardSystem = new LotteryAwardSystem(lottoStore.getLottos(), winningNumbers, lottoStore.getBuyMoney());
         ResultView.printResult(lotteryAwardSystem);
     }
 }

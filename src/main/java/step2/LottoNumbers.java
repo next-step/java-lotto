@@ -15,7 +15,7 @@ public class LottoNumbers {
         validNumberCount();
     }
 
-    public LottoNumbers (List<LottoNumber> nums) {
+    public LottoNumbers(List<LottoNumber> nums) {
         lottoNumbers.addAll(nums);
     }
 
@@ -62,5 +62,12 @@ public class LottoNumbers {
     public boolean matchedNumber(int number) {
         return lottoNumbers.stream()
                 .anyMatch(lottoNumber -> lottoNumber.matchedNumber(number));
+    }
+
+    public String getLottoNumbersAsString() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .map(String::valueOf)
+                .collect(Collectors.joining(", "));
     }
 }

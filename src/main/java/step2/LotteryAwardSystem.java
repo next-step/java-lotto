@@ -5,24 +5,40 @@ import java.util.*;
 public class LotteryAwardSystem {
 
     private final Lottos lottos;
-    private final LottoNumbers winNumbers;
+    private final WinningNumbers winningNumbers;
     private final int money;
     private final WinnersCountManager winnersCountManager = new WinnersCountManager();
     private double profitRate;
 
-    public LotteryAwardSystem(Lottos lottos, LottoNumbers winNumbers, int money) {
+    public LotteryAwardSystem(Lottos lottos, WinningNumbers winningNumbers, int money) {
         this.lottos = lottos;
-        this.winNumbers = winNumbers;
         this.money = money;
+        this.winningNumbers = winningNumbers;
         calculateWinnersCount();
         calculateProfitRate();
     }
 
     private void calculateWinnersCount() {
-        for (Lotto lotto : lottos.getLottos()) {
-            int matchedCount = lotto.matchedNumbersCount(winNumbers);
-            winnersCountManager.recordWinnerCount(matchedCount);
+        lottos.getLottos().forEach(this::recordWinnerCount);
+    }
+
+    private void recordWinnerCount(Lotto lotto) {
+        PrizeLevel prizeLevel = getPrizeLevel(lotto);
+        winnersCountManager.recordWinnerCount(prizeLevel);
+    }
+
+    private PrizeLevel getPrizeLevel(Lotto lotto) {
+        int matchedCount = lotto.matchedNumbersCount(winningNumbers.getNumbers());
+        boolean hasBonus = lotto.hasBonus(winningNumbers.getBonusNumber());
+
+        if (matchedCount == 5 && hasBonus) {
+            return PrizeLevel.SECOND;
         }
+
+        return Arrays.stream(PrizeLevel.values())
+                .filter(level -> level.getMatchCount() == matchedCount)
+                .findFirst()
+                .orElse(PrizeLevel.MISS);
     }
 
     private void calculateProfitRate() {
@@ -31,15 +47,12 @@ public class LotteryAwardSystem {
     }
 
     private double calculateSumPrize() {
-        double sum = 0;
-        for (PrizeLevel level : PrizeLevel.values()) {
-            int winCount = winnersCountManager.getWinnerCount(level.getMatchCount());
-            sum += level.getPrizeAmount() * winCount;
-        }
-        return sum;
+        return Arrays.stream(PrizeLevel.values())
+                .mapToDouble(level -> level.getPrizeAmount() * winnersCountManager.getWinnerCount(level))
+                .sum();
     }
 
-    public Map<Integer, Integer> getWinnersCountMap() {
+    public Map<PrizeLevel, Integer> getWinnersCountMap() {
         return winnersCountManager.getWinnersCountMap();
     }
 

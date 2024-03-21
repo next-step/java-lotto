@@ -17,9 +17,10 @@ public class LotteryAwardSystemTest {
     private static Lottos testLottos;
     private static final LottoNumbers winnerNumbers = LottoNumbers.fromIntegerList(Arrays.asList(1, 2, 3, 4, 5, 6));
     private static final Integer FIRST_WINNER_PRIZE = 2000000000;
-    private static final Integer SECOND_WINNER_PRIZE = 1500000;
-    private static final Integer THIRD_WINNER_PRIZE = 50000;
-    private static final Integer FOURTH_WINNER_PRIZE = 5000;
+    private static final Integer SECOND_WINNER_PRIZE = 30000000;
+    private static final Integer THIRD_WINNER_PRIZE = 1500000;
+    private static final Integer FOURTH_WINNER_PRIZE = 50000;
+    private static final Integer FIFTH_WINNER_PRIZE = 5000;
 
     @BeforeAll
     static void beforeAll() {
@@ -33,31 +34,43 @@ public class LotteryAwardSystemTest {
 
     @Test
     public void 일등부터_사등까지_정보를_반환한다() {
-        LotteryAwardSystem lottoSystem = new LotteryAwardSystem(testLottos, winnerNumbers, 4000);
-        Map<Integer, Integer> winnersCountMap = lottoSystem.getWinnersCountMap();
+        LottoNumber bonusNumber = new LottoNumber(7);
+        WinningNumbers winningNumbers = new WinningNumbers(winnerNumbers, bonusNumber);
+        LotteryAwardSystem lottoSystem = new LotteryAwardSystem(testLottos, winningNumbers, 4000);
+        Map<PrizeLevel, Integer> winnersCountMap = lottoSystem.getWinnersCountMap();
 
         assertAll(
-                () -> assertThat(winnersCountMap.get(6)).isEqualTo(1),
-                () -> assertThat(winnersCountMap.get(5)).isEqualTo(1),
-                () -> assertThat(winnersCountMap.get(4)).isEqualTo(1),
-                () -> assertThat(winnersCountMap.get(3)).isEqualTo(1)
+                () -> assertThat(winnersCountMap.get(PrizeLevel.FIRST)).isEqualTo(1),
+                () -> assertThat(winnersCountMap.get(PrizeLevel.SECOND)).isEqualTo(1),
+                () -> assertThat(winnersCountMap.get(PrizeLevel.FOURTH)).isEqualTo(1),
+                () -> assertThat(winnersCountMap.get(PrizeLevel.FIFTH)).isEqualTo(1)
         );
     }
 
     @Test
     public void 수익률을_알려준다() {
-        LotteryAwardSystem lottoSystem = new LotteryAwardSystem(testLottos, winnerNumbers, 4000);
+        LottoNumber bonusNumber = new LottoNumber(7);
+        WinningNumbers winningNumbers = new WinningNumbers(winnerNumbers, bonusNumber);
+        LotteryAwardSystem lottoSystem = new LotteryAwardSystem(testLottos, winningNumbers, 4000);
 
-        assertThat(lottoSystem.getProfitRate()).isEqualTo(500388.75);
+        assertThat(lottoSystem.getProfitRate()).isEqualTo(507513.75);
     }
 
     @Test
     public void 당첨_수익금을_알려준다() {
         assertAll(
-                () -> assertThat(PrizeLevel.SIX.getPrizeAmount()).isEqualTo(FIRST_WINNER_PRIZE),
-                () -> assertThat(PrizeLevel.FIVE.getPrizeAmount()).isEqualTo(SECOND_WINNER_PRIZE),
-                () -> assertThat(PrizeLevel.FOUR.getPrizeAmount()).isEqualTo(THIRD_WINNER_PRIZE),
-                () -> assertThat(PrizeLevel.THREE.getPrizeAmount()).isEqualTo(FOURTH_WINNER_PRIZE)
+                () -> assertThat(PrizeLevel.FIRST.getPrizeAmount()).isEqualTo(FIRST_WINNER_PRIZE),
+                () -> assertThat(PrizeLevel.THIRD.getPrizeAmount()).isEqualTo(THIRD_WINNER_PRIZE),
+                () -> assertThat(PrizeLevel.FOURTH.getPrizeAmount()).isEqualTo(FOURTH_WINNER_PRIZE),
+                () -> assertThat(PrizeLevel.FIFTH.getPrizeAmount()).isEqualTo(FIFTH_WINNER_PRIZE)
         );
+    }
+
+    @Test
+    public void 보너스_볼과_5개의_숫자가_일치하면_3억의_상금을_받는다() {
+        LottoNumber bonusNumber = new LottoNumber(7);
+        WinningNumbers winningNumbers = new WinningNumbers(winnerNumbers, bonusNumber);
+        LotteryAwardSystem lottoSystem = new LotteryAwardSystem(testLottos, winningNumbers, 4000);
+        assertThat(lottoSystem.getWinnersCountMap().get(PrizeLevel.SECOND)).isEqualTo(1);
     }
 }

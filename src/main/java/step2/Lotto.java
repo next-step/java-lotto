@@ -1,7 +1,6 @@
 package step2;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -43,5 +42,13 @@ public class Lotto {
 
     public int matchedNumbersCount(LottoNumbers winNumbers) {
         return numbers.matchedNumbersCount(winNumbers);
+    }
+
+    public boolean hasBonus(LottoNumber bonusNumber) {
+        return numbers.matchedNumber(bonusNumber.getNumber());
+    }
+
+    public String getLottoNumberString() {
+        return numbers.getLottoNumbersAsString();
     }
 }
