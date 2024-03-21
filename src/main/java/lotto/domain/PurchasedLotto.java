@@ -54,14 +54,7 @@ public class PurchasedLotto {
             );
         }
 
-        return new LottoResultDto(
-                lottoResultMap.get(LottoWinInfo.WIN_FOURTH),
-                lottoResultMap.get(LottoWinInfo.WIN_THIRD),
-                lottoResultMap.get(LottoWinInfo.WIN_SECOND),
-                lottoResultMap.get(LottoWinInfo.WIN_FIRST_WITH_BONUS),
-                lottoResultMap.get(LottoWinInfo.WIN_FIRST),
-                earnRate(lottoResultMap)
-        );
+        return LottoResultDto.of(lottoResultMap, earnRate(lottoResultMap));
     }
 
     private static int calculatePurchasedCount(int purchasedMoney) {

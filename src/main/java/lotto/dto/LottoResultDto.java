@@ -1,5 +1,9 @@
 package lotto.dto;
 
+import lotto.data.LottoWinInfo;
+
+import java.util.Map;
+
 public class LottoResultDto {
 
     private final int matchThreeNumbers;
@@ -23,6 +27,17 @@ public class LottoResultDto {
         this.matchSixNumbersIncludeBonus = matchSixNumbersIncludeBonus;
         this.matchSixNumbers = matchSixNumbers;
         this.earnRate = earnRate;
+    }
+
+    public static LottoResultDto of(Map<LottoWinInfo, Integer> lottoResultMap, Double earnRate) {
+        return new LottoResultDto(
+                lottoResultMap.get(LottoWinInfo.WIN_FOURTH),
+                lottoResultMap.get(LottoWinInfo.WIN_THIRD),
+                lottoResultMap.get(LottoWinInfo.WIN_SECOND),
+                lottoResultMap.get(LottoWinInfo.WIN_FIRST_WITH_BONUS),
+                lottoResultMap.get(LottoWinInfo.WIN_FIRST),
+                earnRate
+        );
     }
 
     public int getMatchThreeNumbers() {
