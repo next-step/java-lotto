@@ -1,8 +1,10 @@
-import domain.Calculator;
-import domain.Numbers;
-import domain.Symbols;
-import view.InputView;
-import view.ResultView;
+package calculator;
+
+import calculator.domain.Calculator;
+import calculator.domain.Numbers;
+import calculator.domain.Symbols;
+import calculator.view.InputView;
+import calculator.view.ResultView;
 
 
 public class CalculatorApplication {

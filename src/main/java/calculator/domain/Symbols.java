@@ -1,6 +1,4 @@
-package domain;
-
-import enums.OperatorEnum;
+package calculator.domain;
 
 import java.util.ArrayList;
 import java.util.List;

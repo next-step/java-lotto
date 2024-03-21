@@ -1,7 +1,7 @@
-package domain;
+package calculator.domain;
 
 
-import enums.OperatorEnum;
+import calculator.enums.OperatorEnum;
 
 public class Calculator {
 

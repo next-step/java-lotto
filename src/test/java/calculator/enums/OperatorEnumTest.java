@@ -1,4 +1,4 @@
-package enums;
+package calculator.enums;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

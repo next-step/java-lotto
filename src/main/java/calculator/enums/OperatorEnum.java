@@ -1,6 +1,4 @@
-package enums;
-
-import domain.Symbols;
+package calculator.enums;
 
 import java.util.function.DoubleBinaryOperator;
 
