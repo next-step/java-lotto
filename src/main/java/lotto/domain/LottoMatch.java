@@ -5,7 +5,8 @@ public class LottoMatch {
     public static WinningInfo countNumbers(PickedLottoNumbers pickedNumbers, LottoNumber winningNumbers) {
         WinningInfo winningInfo = new WinningInfo();
         for (LottoNumber pickedNumber : pickedNumbers) {
-            winningInfo.checkWinning(countNumber(pickedNumber, winningNumbers));
+            Rank rank = Rank.findRank(countNumber(pickedNumber, winningNumbers));
+            winningInfo.saveWinningInfo(rank);
         }
         return winningInfo;
     }

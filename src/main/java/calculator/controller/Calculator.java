@@ -3,26 +3,26 @@ package calculator.controller;
 import calculator.model.Calculation;
 import calculator.model.NumberSentence;
 import calculator.model.Validator;
-import calculator.view.InputView;
-import calculator.view.ResultView;
+import calculator.view.CalculatorInputView;
+import calculator.view.CalculatorResultView;
 
 public class Calculator {
     private static final String SEPARATOR = " ";
 
-    private final InputView inputView;
-    private final ResultView resultView;
+    private final CalculatorInputView calculatorInputView;
+    private final CalculatorResultView calculatorResultView;
     private final Validator validator;
 
-    public Calculator(InputView inputView, ResultView resultView, Validator validator) {
-        this.inputView = inputView;
-        this.resultView = resultView;
+    public Calculator(CalculatorInputView calculatorInputView, CalculatorResultView calculatorResultView, Validator validator) {
+        this.calculatorInputView = calculatorInputView;
+        this.calculatorResultView = calculatorResultView;
         this.validator = validator;
     }
 
     public void start() {
-        resultView.printInputNumberSentence();
+        calculatorResultView.printInputNumberSentence();
 
-        String inputNumberSentence = inputView.inputNumberSentence();
+        String inputNumberSentence = calculatorInputView.inputNumberSentence();
         validator.nullCheck(inputNumberSentence);
 
         String[] numberSentences = inputNumberSentence.split(SEPARATOR);
@@ -33,6 +33,6 @@ public class Calculator {
 
         int resultNumber = Calculation.calculate(numberSentence);
 
-        resultView.printResultNumber(resultNumber);
+        calculatorResultView.printResultNumber(resultNumber);
     }
 }

@@ -26,6 +26,5 @@ public enum Operator {
                 .filter(type -> operator.contains(type.operator))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("정확한 연산자를 입력해주세요"));
-
     }
 }
