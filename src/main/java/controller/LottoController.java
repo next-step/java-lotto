@@ -2,6 +2,7 @@ package controller;
 
 import java.math.BigDecimal;
 
+import model.Inputs;
 import model.LottoAmount;
 import model.LottoFactory;
 import model.LottoWinningNumber;
@@ -25,7 +26,7 @@ public class LottoController {
         final int numberOfManualLottoNumbers = inputView.inputNumberOfManualLottoNumbers();
         final int numberOfAutomaticLottoNumbers = lottoAmount.calculateAutomaticLottoCount(numberOfManualLottoNumbers);
         final Lottos lottos = LottoFactory.create(numberOfAutomaticLottoNumbers,
-                inputView.inputManualLottoNumbers(numberOfManualLottoNumbers));
+                new Inputs(inputView.inputManualLottoNumbers(numberOfManualLottoNumbers)));
 
         outputView.printLottoPurchaseCount(numberOfAutomaticLottoNumbers, numberOfManualLottoNumbers);
         outputView.printPurchaseLottos(lottos.getLottos());

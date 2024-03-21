@@ -12,7 +12,7 @@ class LottoFactoryTest {
     void 로또_생성_테스트() {
         // given
         final int lottoCount = 3;
-        final List<List<Integer>> numbers = List.of(List.of(1, 2, 3, 4, 5, 6), List.of(3, 4, 5, 6, 7, 8));
+        final Inputs numbers = new Inputs(List.of(List.of(1, 2, 3, 4, 5, 6), List.of(3, 4, 5, 6, 7, 8)));
 
         // when
         final Lottos lottos = LottoFactory.create(lottoCount, numbers);
