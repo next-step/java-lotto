@@ -18,7 +18,7 @@ public enum Operation {
         return operation;
     }
 
-    public static int from(int operand1, String operator, int operand2) {
+    public static int calculateAlgorithm(int operand1, String operator, int operand2) {
         if (MULTIPLY.getOperation().equals(operator)) {
             return operand1 * operand2;
         }

@@ -3,7 +3,6 @@ package calculator;
 import calculator.domain.Calculator;
 import calculator.domain.Operation;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -38,28 +37,28 @@ public class CalculatorTest {
     @ParameterizedTest
     @CsvSource({"2, 4, 6", "1, 5, 6"})
     void 더하기(int a, int b, int result) {
-        assertThat(Operation.from(a, PLUS, b)).isEqualTo(result);
+        assertThat(Operation.calculateAlgorithm(a, PLUS, b)).isEqualTo(result);
     }
 
     @DisplayName("빼기")
     @ParameterizedTest
     @CsvSource({"4, 2, 2", "5, 1, 4"})
     void 빼기(int a, int b, int result) {
-        assertThat(Operation.from(a, SUBTRACT, b)).isEqualTo(result);
+        assertThat(Operation.calculateAlgorithm(a, SUBTRACT, b)).isEqualTo(result);
     }
 
     @DisplayName("곱하기")
     @ParameterizedTest
     @CsvSource({"2, 2, 4", "5, 1, 5"})
     void 곱하기(int a, int b, int result) {
-        assertThat(Operation.from(a, MULTIPLY, b)).isEqualTo(result);
+        assertThat(Operation.calculateAlgorithm(a, MULTIPLY, b)).isEqualTo(result);
     }
 
     @DisplayName("나누기")
     @ParameterizedTest
     @CsvSource({"2, 1, 2", "1, 1, 1"})
     void 나누기(int a, int b, int result) {
-        assertThat(Operation.from(a, DIVIDE, b)).isEqualTo(result);
+        assertThat(Operation.calculateAlgorithm(a, DIVIDE, b)).isEqualTo(result);
     }
 
     @DisplayName("산식계산")

@@ -1,10 +1,5 @@
 package calculator.domain;
 
-import java.util.Arrays;
-import java.util.OptionalInt;
-
-import static calculator.domain.Operation.*;
-
 public class Calculator {
 
     private static final String DELIMITER_POSITION = " ";
@@ -32,7 +27,7 @@ public class Calculator {
     private static int calculate(String[] seperateString) {
         int calculatingValue = setInitialValue(seperateString);
         for (int i = 1; i < seperateString.length-1; i+=2)
-            calculatingValue = Operation.from(calculatingValue, seperateString[i], Integer.parseInt(seperateString[i + 1]));
+            calculatingValue = Operation.calculateAlgorithm(calculatingValue, seperateString[i], Integer.parseInt(seperateString[i + 1]));
         return calculatingValue;
     }
 
