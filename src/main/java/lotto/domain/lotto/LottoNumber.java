@@ -5,9 +5,9 @@ import java.util.Objects;
 import static lotto.Validator.isInRange;
 
 public class LottoNumber {
-    private static final String WRONG_LOTTO_NUMBER_MESSAGE = "(%d): 잘못된 번호입니다.";
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
+    private static final String WRONG_LOTTO_NUMBER_MESSAGE = "(%d): 잘못된 번호입니다.";
 
     private final int lottoNumber;
 
