@@ -6,14 +6,15 @@ import java.util.List;
 
 public class LottoTicket {
 
-    private final List<Integer> balls;
+    private final List<Integer> lottoNumbers;
     private final List<Integer> numbers;
 
     private static final int NUMBERS_OF_BALLS = 6;
     private static final int MAX_NUMBER = 45;
+    private static final int MIN_NUMBER = 1;
 
-    public LottoTicket(List<Integer> balls, List<Integer> numbers) {
-        this.balls = balls;
+    public LottoTicket(List<Integer> lottoNumbers, List<Integer> numbers) {
+        this.lottoNumbers = lottoNumbers;
         this.numbers = numbers;
     }
 
@@ -23,10 +24,10 @@ public class LottoTicket {
 
     public List<Integer> generate() {
         for (int i = 0; i < NUMBERS_OF_BALLS; i++) {
-            this.balls.add(randomNumbers().get(i));
+            this.lottoNumbers.add(randomNumbers().get(i));
         }
-        Collections.sort(this.balls);
-        return this.balls;
+        Collections.sort(this.lottoNumbers);
+        return this.lottoNumbers;
     }
 
     protected List<Integer> randomNumbers() {
@@ -38,13 +39,13 @@ public class LottoTicket {
     }
 
     public int countMatchingWith(List<Integer> winningNumbers) {
-        return Math.toIntExact(this.balls.stream()
+        return Math.toIntExact(this.lottoNumbers.stream()
                 .filter(winningNumbers::contains)
                 .count());
     }
 
-    public List<Integer> getBalls() {
-        return balls;
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
     }
 
 }
