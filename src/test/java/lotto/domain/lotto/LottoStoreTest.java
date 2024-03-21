@@ -21,7 +21,7 @@ class LottoStoreTest {
     };
 
     @ParameterizedTest
-    @ValueSource (ints = {3, 6, 14})
+    @ValueSource(ints = {3, 6, 14})
     @DisplayName("numberOfLottoToPurchase 만큼 로또를 생성한다.")
     void testPurchaseLotto(int numberOfLottoToPurchase) {
         Lottos lottos = LottoStore.purchaseLotto(lottoGeneratingStrategyStub, numberOfLottoToPurchase);

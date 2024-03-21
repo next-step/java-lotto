@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.domain.lotto.Lotto.*;
+import static lotto.domain.lotto.Lotto.LOTTO_NUMBER_SIZE;
 import static lotto.domain.lotto.LottoNumber.MAX_LOTTO_NUMBER;
 import static lotto.domain.lotto.LottoNumber.MIN_LOTTO_NUMBER;
 

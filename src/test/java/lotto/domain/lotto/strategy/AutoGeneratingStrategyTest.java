@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static lotto.domain.lotto.Lotto.*;
+import static lotto.domain.lotto.Lotto.LOTTO_NUMBER_SIZE;
 import static lotto.domain.lotto.LottoNumber.MAX_LOTTO_NUMBER;
 import static lotto.domain.lotto.LottoNumber.MIN_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
