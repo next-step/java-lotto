@@ -14,10 +14,12 @@ public class Calculator {
     }
 
     public int run() {
-        int result = numbers.getNumbers().get(0);
-        for (int i = 0; i < numbers.getNumbers().size()-1; i++) {
-            result = (int) OperatorEnum.fromSymbol(symbols.getSymbols().get(i).getSymbol())
-                    .applyAsDouble(result, numbers.getNumbers().get(i+1));
+        int result = numbers.of(0);
+        for (int i = 0; i < numbers.getNumbers().size() - 1; i++) {
+            result = (int) OperatorEnum.calculate(
+                    symbols.of(i)
+                    , result
+                    , numbers.of(i + 1));
         }
         return result;
     }

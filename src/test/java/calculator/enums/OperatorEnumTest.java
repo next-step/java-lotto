@@ -7,14 +7,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class OperatorEnumTest {
 
-
     @Test
-    @DisplayName("연산자로 enum 반환 테스트")
+    @DisplayName("연산자 판별 및 연산 테스트")
     void fromString_toSymbol() {
-        assertThat(OperatorEnum.fromString("+")).isEqualTo(OperatorEnum.ADD);
-        assertThat(OperatorEnum.fromString("-")).isEqualTo(OperatorEnum.SUBSTRACT);
-        assertThat(OperatorEnum.fromString("*")).isEqualTo(OperatorEnum.MULTIPLY);
-        assertThat(OperatorEnum.fromString("/")).isEqualTo(OperatorEnum.DIVIDE);
+        assertThat(OperatorEnum.calculate("+", 10, 1)).isEqualTo(11);
+        assertThat(OperatorEnum.calculate("-", 10, 1)).isEqualTo(9);
+        assertThat(OperatorEnum.calculate("*", 10, 1)).isEqualTo(10);
+        assertThat(OperatorEnum.calculate("/", 10, 1)).isEqualTo(10);
     }
 
 }
