@@ -17,28 +17,28 @@ public enum Rank {
     static {
         SIZE_TO_RANK = new HashMap<>();
         for (Rank rank : values()) {
-            SIZE_TO_RANK.put(rank.getSize(), rank);
+            SIZE_TO_RANK.put(rank.getMatchingNumber(), rank);
         }
     }
 
-    private final int size;
+    private final int matchingNumber;
     private final int amount;
 
-    Rank(int size, int amount) {
-        this.size = size;
+    Rank(int matchingNumber, int amount) {
+        this.matchingNumber = matchingNumber;
         this.amount = amount;
     }
 
-    public int getSize() {
-        return size;
+    public int getMatchingNumber() {
+        return matchingNumber;
     }
 
     public int getAmount() {
         return amount;
     }
 
-    public static Rank of(int size) {
-        return SIZE_TO_RANK.getOrDefault(size, Rank.NONE);
+    public static Rank of(int matchingNumber) {
+        return SIZE_TO_RANK.getOrDefault(matchingNumber, Rank.NONE);
     }
 
     public int prizeMoney(int count) {
