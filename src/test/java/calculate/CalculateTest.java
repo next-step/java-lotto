@@ -5,11 +5,8 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 public class CalculateTest {
-
 
     Calculate cal;
 
@@ -47,7 +44,7 @@ public class CalculateTest {
     @Test
     void 입력값_공백_체크() {
         assertThatExceptionOfType(IllegalStateException.class)
-                .isThrownBy(() -> cal.checkString(""));
+                .isThrownBy(() -> cal.calculate(""));
     }
 
     @Test
@@ -57,17 +54,24 @@ public class CalculateTest {
 
     @DisplayName("나눗셈 실행시 두번째 인자 0 오류 확인")
     @Test
-    void 계산_오류_테스트(){
+    void 계산_오류_테스트() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> cal.calculate("2 + 3 / 0"))
-                .withMessageMatching("두번째 인자는 0 일 수 없습니다.");
+                .withMessageMatching("나누는 수는 0이 될 수 없습니다.");
     }
 
     @Test
-    void 계산식_오류_테스트(){
+    void 계산식_오류_테스트() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> cal.calculate("2 + 3 / 0/"))
-                .withMessageMatching("형식에 맞지 않는 문자열 입니다.");
+                .withMessageContaining("계산할 문자열에 잘못된 정보가 존재합니다.");
+    }
+
+    @Test
+    void 사칙연산자_오류_테스트() {
+        assertThatThrownBy(() -> cal.calculate("2 % 6"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("허용된 사칙연산 기호가 아닙니다");
     }
 
 }

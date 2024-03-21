@@ -5,55 +5,65 @@ import java.util.regex.Pattern;
 
 public class Calculate {
 
-    private static final String REGEX_NOT_SYMBOL = "[^\\+|\\-|\\*|\\/]";
+    private static final String REGEX_NOT_SYMBOL = "[^\\D]";
     private static final String REGEX_NOT_DIGIT = "[^\\d+]";
     private static final int MINIMUM_STARING_ARRAY_LENGTH = 3;
 
-    public int calculate(String s) {
+    private static final String PLUS = "+";
+    private static final String MINUS = "-";
+    private static final String MULTIPLY = "*";
+    private static final String DIVIDE = "/";
 
-        checkString(s);
+    public int calculate(String string) {
 
-        String[] strings = s.split(" ");
-        int length = strings.length;
+        do {
+            checkString(string);
 
-        if (length == 1) {
-            return Integer.parseInt(strings[0]);
-        }
+            String[] strings = string.split(" ");
+            int length = strings.length;
 
-        if (length == 2) {
-            throw new IllegalArgumentException("계산식이 정확하지 않습니다.");
-        }
+            if (length == 1) {
+                return Integer.parseInt(strings[0]);
+            }
 
-        for (int i = 0; i < MINIMUM_STARING_ARRAY_LENGTH; i++) {
-            checkStringArray(regex(i), strings[i]);
-        }
+            if (length == 2) {
+                throw new IllegalArgumentException("계산식은 2개의 숫자와 1개의 사칙연산 기호로 이루어집니다.");
+            }
 
-        return calculate(s.replace(strings[0] + " " + strings[1] + " " + strings[2], String.valueOf(getResult(strings))));
+            for (int i = 0; i < MINIMUM_STARING_ARRAY_LENGTH; i++) {
+                checkStringArray(regex(i), strings[i]);
+            }
+
+            string = string.replace(strings[0] + " " + strings[1] + " " + strings[2], String.valueOf(result(strings)));
+        } while (true);
+
     }
 
-    private int getResult(String[] strings) {
+    private int result(String[] strings) {
         String symbol = strings[1];
         int param1 = Integer.parseInt(strings[0]);
         int param2 = Integer.parseInt(strings[2]);
 
-        if (symbol.equals("+")) {
+        if (symbol.equals(PLUS)) {
             return add(param1, param2);
         }
-        if (symbol.equals("-")) {
+        if (symbol.equals(MINUS)) {
             return subtract(param1, param2);
         }
-        if (symbol.equals("*")) {
+        if (symbol.equals(MULTIPLY)) {
             return multiply(param1, param2);
         }
-
-        return divide(param1, param2);
+        if (symbol.equals(DIVIDE)) {
+            return divide(param1, param2);
+        }
+        throw new IllegalArgumentException(String.format("허용된 사칙연산 기호가 아닙니다.([%s])",symbol));
     }
 
     private void checkStringArray(String regex, String string) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(string);
         if (matcher.find()) {
-            throw new IllegalArgumentException("형식에 맞지 않는 문자열 입니다.");
+            throw new IllegalArgumentException(String.format("계산할 문자열에 잘못된 정보가 존재합니다.([%s])",string));
         }
     }
 
@@ -71,7 +81,7 @@ public class Calculate {
 
     private int divide(int i, int j) {
         if (j == 0) {
-            throw new IllegalArgumentException("두번째 인자는 0 일 수 없습니다.");
+            throw new IllegalArgumentException("나누는 수는 0이 될 수 없습니다.");
         }
         return i / j;
     }
