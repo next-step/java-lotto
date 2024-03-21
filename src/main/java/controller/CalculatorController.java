@@ -26,9 +26,17 @@ public class CalculatorController {
         calculator.basic(value);
         for (int i = 1; i < list.size(); i = i + 2) {
             String symbol = list.get(i);
-            int num = Integer.parseInt(list.get(i + 1));
+            int num = numCheck(list.get(i + 1));
             calculator.operation(num, symbol);
         }
         result.print(calculator.getNowValue());
+    }
+
+    private int numCheck(String num) {
+        try {
+            return Integer.parseInt(num);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("숫자가 아닙니다");
+        }
     }
 }

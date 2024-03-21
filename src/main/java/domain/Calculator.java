@@ -6,7 +6,6 @@ public class Calculator {
 
     public Calculator() {
     }
-
     public int getNowValue() {
         return nowValue;
     }
