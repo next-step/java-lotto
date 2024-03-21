@@ -22,7 +22,7 @@ public class StringCalculator {
         for (int i = 1; i < tokens.size(); i += OPERATOR_INDEX_TERM) {
             String operator = tokens.get(i);
             int operand = toInt(tokens.get(i + 1));
-            result = Operation.findOperator(operator).apply(result, operand);
+            result = Operator.findOperator(operator).apply(result, operand);
         }
         return result;
     }
