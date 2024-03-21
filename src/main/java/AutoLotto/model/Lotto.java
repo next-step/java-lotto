@@ -1,40 +1,75 @@
 package autoLotto.model;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static autoLotto.model.LottoConstants.*;
 
 public class Lotto {
-    private int[] lotto;
+    private List<Integer> lotto;
 
-    private static final int START_LOTTO_NUMBER = 1;
-    private static final int END_LOTTO_NUMBER = 45;
-    private static final int VALID_LOTTO_LENGTH = 6;
-
-    private static final String INVALID_LOTTO_NUMBERS = "로또 번호의 개수는 6개이며, 각 번호는 1 이상 45 이하의 값만 가능합니다.";
-
-    public Lotto(int[] lotto) {
-        if (!isValidLottoNumbers(lotto)) {
-            throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS);
-        }
+    public Lotto(List<Integer> lotto) {
+        validateLotto(lotto);
         this.lotto = lotto;
     }
 
-    private boolean isValidLottoNumbers(int[] winNumbers) {
-        if (winNumbers.length != VALID_LOTTO_LENGTH) {
-            return false;
-        }
+    public Lotto(String lotto) {
+        this.lotto = parseLottoNumbers(lotto);
+    }
 
-        Arrays.sort(winNumbers);
-        return isNumberInValidRange(winNumbers[0]) && isNumberInValidRange(winNumbers[VALID_LOTTO_LENGTH - 1]);
+    private void validateLotto(List<Integer> lotto) {
+        if (!isValidLottoSize(lotto) || !isNotDuplicatedNumbers(lotto) || !isValidLottoNumbers(lotto)) {
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS);
+        }
+    }
+
+    private boolean isValidLottoSize(List<Integer> winNumbers) {
+        return winNumbers.size() == VALID_LOTTO_LENGTH;
+    }
+
+    private boolean isNotDuplicatedNumbers(List<Integer> winNumbers) {
+        Set<Integer> numbers = winNumbers.stream().collect(Collectors.toSet());
+        return numbers.stream().distinct().count() == winNumbers.size();
+    }
+
+    private boolean isValidLottoNumbers(List<Integer> winNumbers) {
+        Collections.sort(winNumbers);
+        return isNumberInValidRange(winNumbers.get(0)) && isNumberInValidRange(winNumbers.get(VALID_LOTTO_LENGTH - 1));
     }
 
     private boolean isNumberInValidRange(int number) {
-        return number >= START_LOTTO_NUMBER && number <= END_LOTTO_NUMBER;
+        return number >= LOTTO_START_NUMBER && number <= LOTTO_END_NUMBER;
     }
 
+    private List<Integer> parseLottoNumbers(String value) {
+        List<Integer> lotto = convertStringToIntegers(value);
+        validateLotto(lotto);
+        return lotto;
+    }
+
+    private List<Integer> convertStringToIntegers(String input) {
+        String[] values = splitNumbersByComma(input);
+        return stringsToListInteger(values);
+    }
+
+    private List<Integer> stringsToListInteger(String[] values) {
+        return Arrays.stream(values)
+                .map(Integer::valueOf)
+                .collect(Collectors.toList());
+    }
+
+    private String[] splitNumbersByComma(String input) {
+        return input.split(",");
+    }
 
     public String toString() {
-        return Arrays.toString(lotto);
+        return lotto.toString();
     }
 
-    public int[] getLotto() { return lotto; }
+    public List<Integer> getLotto() {
+        return lotto;
+    }
 }
