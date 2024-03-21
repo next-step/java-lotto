@@ -17,7 +17,7 @@ public class LottoFactory {
   }
 
   public Lotto randomLotto() {
-    List<LottoBall> lottoBalls = randomFactory.randomNumbers(Lotto.NUMBER_COUNT)
+    List<LottoBall> lottoBalls = randomFactory.randomNumbers(Lotto.TOTAL_BALLS_COUNT)
             .stream()
             .map(LottoBall::new)
             .collect(Collectors.toList());

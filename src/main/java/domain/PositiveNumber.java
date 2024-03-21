@@ -1,5 +1,6 @@
 package domain;
 
+import java.awt.*;
 import java.util.Objects;
 
 public final class PositiveNumber {
@@ -47,6 +48,20 @@ public final class PositiveNumber {
   public PositiveNumber increment() {
     return new PositiveNumber(this.value + 1);
   }
+
+  public PositiveNumber sum(PositiveNumber number) {
+    return new PositiveNumber(this.value + number.value);
+  }
+
+  public PositiveNumber sum(int number) {
+    return new PositiveNumber(this.value + number);
+  }
+
+  public PositiveNumber sub(int number) {
+    return new PositiveNumber(this.value - number);
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

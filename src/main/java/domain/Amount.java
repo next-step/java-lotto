@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.Currency;
-import java.util.Locale;
 
 public class Amount {
   private final PositiveNumber value;

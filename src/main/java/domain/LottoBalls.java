@@ -38,6 +38,22 @@ public class LottoBalls {
     return size.equals(this.balls.size());
   }
 
+  public PositiveNumber size() {
+    return PositiveNumber.of(this.balls.size());
+  }
+
+  public LottoBalls subList(PositiveNumber from, PositiveNumber to) {
+    return new LottoBalls(this.balls.subList(from.value(), to.value()));
+  }
+
+  public LottoBalls subList(int from, int to) {
+    return new LottoBalls(this.balls.subList(from, to));
+  }
+
+  public LottoBall lastBall() {
+    return this.balls.get(this.balls.size() - 1);
+  }
+
   @Override
   public String toString() {
     final String OPENER = "[";

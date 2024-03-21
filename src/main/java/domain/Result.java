@@ -3,23 +3,32 @@ package domain;
 import java.util.Objects;
 
 public class Result {
-  private static final PositiveNumber WIN_MIN = new PositiveNumber(3);
   private final PositiveNumber matchCount;
+  private final Boolean bonusBallMatched;
 
-  public Result(PositiveNumber matchCount) {
+  public static Result of(int matchCount, Boolean bonusBallMatched) {
+    return new Result(PositiveNumber.of(matchCount), bonusBallMatched);
+  }
+
+  public static Result of(PositiveNumber matchCount, Boolean bonusBallMatched) {
+    return new Result(matchCount, bonusBallMatched);
+  }
+
+  public Result(PositiveNumber matchCount, Boolean bonusBallMatched) {
     this.matchCount = matchCount;
-  }
-
-  public static Result of(PositiveNumber matchCount) {
-    return new Result(matchCount);
-  }
-
-  public boolean win() {
-    return this.matchCount.greaterOrEqual(WIN_MIN);
+    this.bonusBallMatched = bonusBallMatched;
   }
 
   public PositiveNumber matchCount() {
     return this.matchCount;
+  }
+
+  public Boolean bonusBallMatched() {
+    return this.bonusBallMatched;
+  }
+
+  public Prize prize() {
+    return Prize.from(this);
   }
 
   @Override
@@ -27,16 +36,16 @@ public class Result {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Result result = (Result) o;
-    return matchCount.equals(result.matchCount);
+    return matchCount.equals(result.matchCount) && bonusBallMatched.equals(result.bonusBallMatched);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(matchCount);
+    return Objects.hash(matchCount, bonusBallMatched);
   }
 
   @Override
   public String toString() {
-    return String.format("Result[matchCount: %d]", this.matchCount.value());
+    return String.format("Result[matchCount: %d, bonusBallMatched:%s]", this.matchCount.value(), this.bonusBallMatched);
   }
 }

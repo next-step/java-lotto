@@ -5,32 +5,34 @@ import java.util.Currency;
 import java.util.Locale;
 
 public enum Prize {
-  FIRST(new Result(PositiveNumber.of(6)), new Amount(PositiveNumber.of(2000000000), Currency.getInstance(Locale.KOREA))),
-  SECOND(new Result(PositiveNumber.of(5)), new Amount(PositiveNumber.of(1500000), Currency.getInstance(Locale.KOREA))),
-  THIRD(new Result(PositiveNumber.of(4)), new Amount(PositiveNumber.of(50000), Currency.getInstance(Locale.KOREA))),
-  FORTH(new Result(PositiveNumber.of(3)), new Amount(PositiveNumber.of(5000), Currency.getInstance(Locale.KOREA))),
-  NONE(new Result(PositiveNumber.of(2)), new Amount(PositiveNumber.of(0), Currency.getInstance(Locale.KOREA)));
+  FIRST(new Condition(6, BonusBallCondition.DONT_CARE), new Amount(PositiveNumber.of(2000000000), Currency.getInstance(Locale.KOREA))),
+  SECOND(new Condition(5, BonusBallCondition.TRUE), new Amount(PositiveNumber.of(30000000), Currency.getInstance(Locale.KOREA))),
+  THIRD(new Condition(5, BonusBallCondition.FALSE), new Amount(PositiveNumber.of(1500000), Currency.getInstance(Locale.KOREA))),
+  FORTH(new Condition(4, BonusBallCondition.DONT_CARE), new Amount(PositiveNumber.of(50000), Currency.getInstance(Locale.KOREA))),
+  FIFTH(new Condition(3, BonusBallCondition.DONT_CARE), new Amount(PositiveNumber.of(5000), Currency.getInstance(Locale.KOREA))),
+  NONE(new Condition(2, BonusBallCondition.DONT_CARE), new Amount(PositiveNumber.of(0), Currency.getInstance(Locale.KOREA)));
 
-  private final Result result;
+  private final Condition condition;
   private final Amount amount;
 
-  Prize(final Result result, final Amount amount) {
-    this.result = result;
+  Prize(final Condition condition, final Amount amount) {
+    this.condition = condition;
     this.amount = amount;
   }
 
-  public static Prize of(final Result result) {
+  private Boolean accept(Result result) {
+    return this.condition.accept(result);
+  }
+
+  public static Prize from(Result result) {
     return Arrays.stream(values())
-            .filter(prize -> prize.resultEquals(result))
+            .filter(prize -> prize.accept(result))
             .findFirst()
             .orElse(Prize.NONE);
   }
 
-  public Amount amount() {
-    return this.amount;
-  }
-
-  public boolean resultEquals(final Result result) {
-    return this.result.equals(result);
+  @Override
+  public String toString() {
+    return String.format("%s (%s)", this.condition, this.amount);
   }
 }

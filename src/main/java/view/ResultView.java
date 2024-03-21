@@ -19,9 +19,9 @@ public class ResultView {
   public static void stats(Results results) {
     System.out.println("당첨 통계");
     System.out.println("---------");
-    for (Map.Entry<Result, PositiveNumber> entry : results.stats().entrySet()) {
-      Result result = entry.getKey();
-      System.out.printf("%s개 일치 (%s) - %s개", result.matchCount(), Prize.of(result).amount(), entry.getValue());
+    for (Map.Entry<Prize, PositiveNumber> entry : results.stats().entrySet()) {
+      Prize prize = entry.getKey();
+      System.out.printf("%s - %s개", prize, entry.getValue());
     }
   }
 }

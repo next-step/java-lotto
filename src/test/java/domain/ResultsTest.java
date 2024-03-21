@@ -10,24 +10,25 @@ public class ResultsTest {
   @Test
   void 통계_반환() {
     Results results = new Results(List.of(
-            new Result(PositiveNumber.of(1)),
-            new Result(PositiveNumber.of(1)),
-            new Result(PositiveNumber.of(2)),
-            new Result(PositiveNumber.of(2)),
-            new Result(PositiveNumber.of(3)),
-            new Result(PositiveNumber.of(4)),
-            new Result(PositiveNumber.of(5)),
-            new Result(PositiveNumber.of(5)),
-            new Result(PositiveNumber.of(6)),
-            new Result(PositiveNumber.of(6)),
-            new Result(PositiveNumber.of(6))
+            Result.of(1, false),
+            Result.of(1, false),
+            Result.of(2, true),
+            Result.of(3, true),
+            Result.of(3, false),
+            Result.of(4, false),
+            Result.of(5, false),
+            Result.of(5, true),
+            Result.of(6, false),
+            Result.of(6, true)
     ));
+
     Assertions.assertThat(results.stats()).isEqualTo(
             Map.of(
-                    new Result(PositiveNumber.of(3)), PositiveNumber.of(1),
-                    new Result(PositiveNumber.of(4)), PositiveNumber.of(1),
-                    new Result(PositiveNumber.of(5)), PositiveNumber.of(2),
-                    new Result(PositiveNumber.of(6)), PositiveNumber.of(3)
+                    Prize.FIRST, PositiveNumber.of(2),
+                    Prize.SECOND, PositiveNumber.of(1),
+                    Prize.THIRD, PositiveNumber.of(1),
+                    Prize.FORTH, PositiveNumber.of(1),
+                    Prize.FIFTH, PositiveNumber.of(2)
             )
     );
   }

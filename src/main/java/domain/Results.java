@@ -12,23 +12,25 @@ public class Results {
     this.results = results;
   }
 
-  public Map<Result, PositiveNumber> stats() {
-    Map<Result, PositiveNumber> stats = new HashMap<>();
+  public Map<Prize, PositiveNumber> stats() {
+    Map<Prize, PositiveNumber> stats = new HashMap<>();
     return this.results.stream()
-            .filter(Result::win)
-            .reduce(stats, this::resultCountMap, this::combinedResultCountMap);
+            .map(Prize::from)
+            .filter(prize -> !prize.equals(Prize.NONE))
+            .reduce(stats, this::prizeCountMap, this::combinedPrizeCountMap);
   }
 
-  private Map<Result, PositiveNumber> resultCountMap(final Map<Result, PositiveNumber> acc, final Result cur) {
+  private Map<Prize, PositiveNumber> prizeCountMap(final Map<Prize, PositiveNumber> acc, final Prize cur) {
     if (acc.get(cur) == null) {
       acc.put(cur, PositiveNumber.of(1));
       return acc;
     }
     acc.put(cur, acc.get(cur).increment());
+
     return acc;
   }
 
-  private Map<Result, PositiveNumber> combinedResultCountMap(final Map<Result, PositiveNumber> map1, final Map<Result, PositiveNumber> map2) {
+  private Map<Prize, PositiveNumber> combinedPrizeCountMap(final Map<Prize, PositiveNumber> map1, final Map<Prize, PositiveNumber> map2) {
     map1.putAll(map2);
     return map1;
   }
