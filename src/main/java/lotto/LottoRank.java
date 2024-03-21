@@ -13,6 +13,8 @@ public enum LottoRank {
     private int count;
     private int prize;
 
+    private static final int LOSE_STANDARD = 3;
+
     LottoRank(int count, int prize) {
         this.count = count;
         this.prize = prize;
@@ -27,7 +29,7 @@ public enum LottoRank {
     }
 
     public static LottoRank isLottoRank(int count) {
-        if (count < 3) {
+        if (count < LOSE_STANDARD) {
             return LOSE;
         }
         return Arrays.stream(LottoRank.values())
