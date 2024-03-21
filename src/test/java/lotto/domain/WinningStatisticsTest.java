@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -18,6 +19,15 @@ public class WinningStatisticsTest {
     void rankCount(List<Rank> ranks, Rank searchTarget, Count expectResult) {
         assertThat(new WinningStatistics(ranks).rankCount(searchTarget))
                 .isEqualTo(expectResult);
+    }
+
+    @DisplayName("rateOfReturn 함수는 구매 금액 대비 수익률을 반환한다.")
+    @Test
+    void rateOfReturn() {
+        final WinningStatistics statistics = new WinningStatistics(List.of(Rank.FOURTH));
+
+        assertThat(statistics.rateOfReturn(10000))
+                .isEqualTo(0.5d);
     }
 
     static Stream<Arguments> rankCounts() {

@@ -26,4 +26,16 @@ public class WinningStatistics {
     public Count rankCount(Rank rank) {
         return ranks.getOrDefault(rank, new Count());
     }
+
+    public double rateOfReturn(int cash) {
+        return ((double) earned()) / cash;
+    }
+
+    private long earned() {
+        return ranks.entrySet()
+                .stream()
+                .mapToLong(entry -> entry.getKey().winnings() * entry.getValue().value())
+                .sum();
+    }
+
 }

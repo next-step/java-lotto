@@ -3,17 +3,17 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
-    NEXT_CHANCE(0, 0),
+    FIRST(6, 2_000_000_000L),
+    SECOND(5, 1_500_000L),
+    THIRD(4, 50_000L),
+    FOURTH(3, 5_000L),
+    NEXT_CHANCE(0, 0L),
     ;
 
     private final int matchCount;
-    private final int winnings;
+    private final long winnings;
 
-    Rank(int matchCount, int winnings) {
+    Rank(int matchCount, long winnings) {
         this.matchCount = matchCount;
         this.winnings = winnings;
     }
@@ -33,7 +33,7 @@ public enum Rank {
         }
     }
 
-    public int winnings() {
+    public long winnings() {
         return this.winnings;
     }
 }

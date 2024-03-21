@@ -18,6 +18,8 @@ public class LottoPlayer {
 
         final WinningStatistics statistics = new WinningStatistics(matchCounts);
 
+        final double rateOfReturn = statistics.rateOfReturn(cash);
+        System.out.println();
     }
 
     public static void main(String[] args) {

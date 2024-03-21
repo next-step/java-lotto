@@ -15,6 +15,10 @@ public class Count {
         value++;
     }
 
+    public int value() {
+        return this.value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
