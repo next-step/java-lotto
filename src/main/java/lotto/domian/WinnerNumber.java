@@ -23,7 +23,6 @@ public class WinnerNumber {
         return this.winnerNumbers.contains(number);
     }
 
-
     public List<LottoNumber> getWinnerNumbers(){
         return winnerNumbers;
     }
