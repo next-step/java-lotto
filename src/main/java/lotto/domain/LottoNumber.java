@@ -16,6 +16,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this(toInt(input));
     }
 
+    public static LottoNumber createBonusBall(LottoTicket winningNumbers, String input) {
+        LottoNumber bonusBall = new LottoNumber(input);
+        if (winningNumbers.contains(bonusBall)) {
+            throw new IllegalArgumentException("보너스 숫자는 당첨숫자를 제외한 숫자여야 합니다.");
+        }
+        return bonusBall;
+    }
+
     private static int toInt(String input) {
         if (hasNoInput(input)) {
             throw new IllegalArgumentException("입력된 값이 없습니다.");
