@@ -5,8 +5,12 @@ import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumberFactory;
 import lotto.model.Money;
+import lotto.model.WinningLotto;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 import static lotto.validation.MoneyValidator.assertMoney;
@@ -32,6 +36,11 @@ public class InputView {
         return askMoney();
     }
 
+    public List<String> askManualLotto(Money money) {
+        int quantity = askManualQuantity(money);
+        return askManualLotto(quantity);
+    }
+
     public int askManualQuantity(Money money) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
 
@@ -48,7 +57,34 @@ public class InputView {
         return askManualQuantity(money);
     }
 
-    public Lotto askWinningNumbers() {
+    public List<String> askManualLotto(int quantity) {
+        if (quantity <= 0) {
+            return Collections.emptyList();
+        }
+
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        try {
+            List<String> result = new ArrayList<>();
+
+            for (int i = 1; i <= quantity; i++) {
+                result.add(SCANNER.nextLine());
+            }
+
+            return result;
+        } catch (InvalidLottoException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return askManualLotto(quantity);
+    }
+
+    public WinningLotto askWinningLotto() {
+        Lotto winningNumberLotto = askWinningNumbers();
+        LottoNumber bonusNumber = askBonusNumber(winningNumberLotto);
+        return new WinningLotto(winningNumberLotto, bonusNumber);
+    }
+
+    private Lotto askWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         try {
@@ -71,15 +107,7 @@ public class InputView {
                 .toArray(Integer[]::new);
     }
 
-    private int toInt(String input) {
-        try {
-            return Integer.parseInt(input.trim());
-        } catch (NumberFormatException e) {
-            throw new InvalidLottoException("정수를 입력해 주세요", e);
-        }
-    }
-
-    public LottoNumber askBonusNumber(Lotto winningLottoNumber) {
+    private LottoNumber askBonusNumber(Lotto winningLottoNumber) {
         System.out.println("보너스 볼을 입력해 주세요.");
 
         try {
@@ -96,4 +124,11 @@ public class InputView {
         return askBonusNumber(winningLottoNumber);
     }
 
+    private int toInt(String input) {
+        try {
+            return Integer.parseInt(input.trim());
+        } catch (NumberFormatException e) {
+            throw new InvalidLottoException("정수를 입력해 주세요", e);
+        }
+    }
 }
