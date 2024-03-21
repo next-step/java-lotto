@@ -11,9 +11,8 @@ public class LottoApplication {
         InputHandler input = InputHandler.of();
         LottoNumberGenerator generator = new LottoNumberGenerator();
         LottoShop lottoShop = LottoShop.of(generator);
-        LottoInputParser parser = new LottoInputParser();
 
-        LottoController controller = LottoController.of(output, input, lottoShop, parser);
+        LottoController controller = LottoController.of(output, input, lottoShop);
         controller.run();
     }
 }

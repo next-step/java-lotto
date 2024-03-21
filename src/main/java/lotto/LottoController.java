@@ -1,10 +1,7 @@
 package lotto;
 
 import lotto.common.LottoInputParser;
-import lotto.domian.LottoResult;
-import lotto.domian.LottoShop;
-import lotto.domian.LottoTickets;
-import lotto.domian.WinnerNumber;
+import lotto.domian.*;
 import lotto.ui.InputHandler;
 import lotto.ui.OutputHandler;
 
@@ -12,34 +9,33 @@ public class LottoController {
     private final OutputHandler output;
     private final InputHandler input;
     private final LottoShop lottoShop;
-    private final LottoInputParser parser;
 
-    private LottoController(OutputHandler output, InputHandler input, LottoShop lottoShop, LottoInputParser parser) {
+    private LottoController(OutputHandler output, InputHandler input, LottoShop lottoShop) {
         this.output = output;
         this.input = input;
         this.lottoShop = lottoShop;
-        this.parser = parser;
     }
 
-    public static LottoController of(OutputHandler output, InputHandler input, LottoShop lottoShop, LottoInputParser parser){
-        return new LottoController(output,input,lottoShop,parser);
+    public static LottoController of(OutputHandler output, InputHandler input, LottoShop lottoShop){
+        return new LottoController(output,input,lottoShop);
     }
 
     public void run() {
         int money = input.inputMoney();
+        PurchaseAmount amount = PurchaseAmount.of(money);
         LottoTickets tickets = lottoShop.generateLottoTickets(money);
         output.printTickets(tickets);
 
         String winnerNum = input.inputWinnerNumber();
         output.printWinnerNumber(winnerNum);
-        WinnerNumber winnerNumber = WinnerNumber.of(parser.parseToIntegers(winnerNum));
+        WinnerNumber winnerNumber = WinnerNumber.of(LottoInputParser.parseToIntegers(winnerNum));
 
         LottoResult result = LottoResult.initializeLottoResult();
         tickets.updateLottoResult(winnerNumber, result);
 
         output.printResultHeader();
         output.printResult(result);
-        output.printEarningsRate(result, money);
+        output.printEarningsRate(amount, money);
         input.closeScanner();
     }
 }
