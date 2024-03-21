@@ -2,9 +2,7 @@ package lotto;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,17 +32,17 @@ public class LottoTest {
      */
     @Test
     void statistics_on_matched_count() {
-        long purchase = 14000L;
+        long purchaseBudget = 1000L;
+        Lotto winLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        /**
+         * 내 로또 어떻게 만들거임?
+         * 테스트 가능하도록 내 로또를 만들어내는 것이 핵심
+         */
+        LottoGame lottoGame = new LottoGame(List.of(
+                new Lotto(List.of(1, 3, 5, 14, 22, 45))
+        ));
+        double rate = lottoGame.produceStatistics(purchaseBudget, winLotto);
 
-        Map<RANK, Integer> lotteryWin = new HashMap<>();
-        lotteryWin.put(RANK.FOURTH, 1);
-        lotteryWin.put(RANK.THIRD, 0);
-        lotteryWin.put(RANK.SECOND, 0);
-        lotteryWin.put(RANK.FIRST, 0);
-
-        long totalPrize = lotteryWin.keySet().stream().mapToLong(key -> key.winPrize(lotteryWin.get(key))).sum();
-
-        double actual = Math.floor((double) totalPrize / purchase * 100) / 100.0 ;
-        assertThat(actual).isEqualTo(0.35);
+        assertThat(rate).isEqualTo(5);
     }
 }
