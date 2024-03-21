@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,7 +19,14 @@ public class InputView {
     }
 
     public String[] inputWinningNumbers() {
-        return SCANNER.nextLine().split(SPLIT_REGEX);
+        String[] strings = SCANNER.nextLine().split(SPLIT_REGEX);
+        int count = (int)Arrays.stream(strings)
+                .distinct()
+                .count();
+        if (count != 6) {
+            throw new IllegalArgumentException("당첨 번호는 중복이 있을 수 없습니다. 다시 입력해주세요.");
+        }
+         return strings;
     }
 
     public List<Integer> getWinningNumbers() {

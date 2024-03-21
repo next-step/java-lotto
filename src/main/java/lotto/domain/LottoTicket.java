@@ -7,12 +7,18 @@ import java.util.List;
 public class LottoTicket {
 
     private final List<Integer> balls;
-    private static final int NUMBERS_OF_BALLS = 6;
     private final List<Integer> numbers;
 
+    private static final int NUMBERS_OF_BALLS = 6;
+    private static final int MAX_NUMBER = 45;
+
+    public LottoTicket(List<Integer> balls, List<Integer> numbers) {
+        this.balls = balls;
+        this.numbers = numbers;
+    }
+
     public LottoTicket() {
-        balls = new ArrayList<>();
-        numbers = new ArrayList<>();
+        this(new ArrayList<>(), new ArrayList<>());
     }
 
     public List<Integer> generate() {
@@ -24,11 +30,9 @@ public class LottoTicket {
     }
 
     protected List<Integer> randomNumbers() {
-
-        for (int i = 0; i < 45; i++) {
+        for (int i = 0; i < MAX_NUMBER; i++) {
             numbers.add(i + 1);
         }
-
         Collections.shuffle(numbers);
         return numbers;
     }
