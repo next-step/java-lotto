@@ -21,8 +21,7 @@ public class Calculator {
     public static int calculator(String rawString) {
         validate(rawString);
         String[] seperateString = split(rawString);
-        int calculatingValue = setInitialValue(seperateString);
-        return calculate(seperateString, calculatingValue);
+        return calculate(seperateString);
     }
 
     private static void validate(String rawString) {
@@ -30,9 +29,10 @@ public class Calculator {
             throw new IllegalArgumentException(NULL_AND_EMPTY_VALIDATE);
         }
     }
-    private static int calculate(String[] seperateString, int calculatingValue) {
+    private static int calculate(String[] seperateString) {
+        int calculatingValue = setInitialValue(seperateString);
         for (int i = 1; i < seperateString.length-1; i+=2)
-            calculatingValue = from(calculatingValue, seperateString[i], Integer.parseInt(seperateString[i + 1]));
+            calculatingValue = Operation.from(calculatingValue, seperateString[i], Integer.parseInt(seperateString[i + 1]));
         return calculatingValue;
     }
 
