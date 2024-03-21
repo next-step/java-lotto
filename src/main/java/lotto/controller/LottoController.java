@@ -4,7 +4,6 @@ import lotto.dto.LottoNumberResponse;
 import lotto.model.AutomaticPurchase;
 import lotto.model.Lotto;
 import lotto.model.LottoMachine;
-import lotto.model.LottoNumber;
 import lotto.model.LottoPaper;
 import lotto.model.ManualPurchase;
 import lotto.model.Money;
@@ -14,8 +13,9 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
+
+import static lotto.model.LottoMachine.EMPTY;
 
 public class LottoController {
     private final InputView inputView;
@@ -28,24 +28,26 @@ public class LottoController {
 
     public void run() {
         Money money = inputView.askMoney();
-        int manualQuantity = inputView.askManualQuantity(money);
+
+        List<String> manualLotto = inputView.askManualLotto(money);
+        int manualQuantity = manualLotto.size();
         int automaticQuantity = money.maxQuantity() - manualQuantity;
 
-        LottoPaper lottoPaper = requestLottoOrder(manualQuantity, automaticQuantity);
+        LottoPaper lottoPaper = requestLottoOrder(automaticQuantity, manualLotto);
 
         printOrderResponse(lottoPaper, manualQuantity, automaticQuantity);
 
         printLottoPrizeResult(lottoPaper);
     }
 
-    private LottoPaper requestLottoOrder(int manualQuantity, int automaticQuantity) {
+    private LottoPaper requestLottoOrder(int automaticQuantity, List<String> manualLotto) {
         LottoMachine automaticPurchase = new AutomaticPurchase();
-        LottoMachine manualPurchase = new ManualPurchase(new Scanner(System.in));
+        LottoMachine manualPurchase = new ManualPurchase();
 
-        List<Lotto> automaticLotto = automaticPurchase.purchase(automaticQuantity);
-        List<Lotto> manualLotto = manualPurchase.purchase(manualQuantity);
+        List<Lotto> automaticLottos = automaticPurchase.purchase(automaticQuantity, EMPTY);
+        List<Lotto> manualLottos = manualPurchase.purchase(manualLotto.size(), manualLotto);
 
-        return new LottoPaper(automaticLotto, manualLotto);
+        return new LottoPaper(automaticLottos, manualLottos);
     }
 
     private void printOrderResponse(LottoPaper lottoPaper, int manualQuantity, int automaticQuantity) {
@@ -61,9 +63,7 @@ public class LottoController {
     }
 
     private void printLottoPrizeResult(LottoPaper lottoPaper) {
-        Lotto winningNumberLotto = inputView.askWinningNumbers();
-        LottoNumber bonusNumber = inputView.askBonusNumber(winningNumberLotto);
-        WinningLotto winningInfo = new WinningLotto(winningNumberLotto, bonusNumber);
+        WinningLotto winningInfo = inputView.askWinningLotto();
 
         Prize prize = lottoPaper.matches(winningInfo);
         int quantityTotal = lottoPaper.getQuantityTotal();
