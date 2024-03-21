@@ -1,4 +1,4 @@
-package utils;
+package utils.numbergenerator;
 
 import java.util.List;
 
