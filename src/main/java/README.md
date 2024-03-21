@@ -16,14 +16,13 @@
 - else를 사용하지 마라.
 
 ## TODO List
-- [ ] 사용자에게서 문자열을 입력을 받는다.
-  - [ ] 문자열 = 숫자 + 빈 공백 문자열 + 사칙연산으로 이루어져 있다.
-  - [ ] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw 
-  - [ ] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
-  - [ ] String 클래스의 split(" ") 메소드를 활용한다.
-  - [ ] 반복적인 패턴을 찾아 반복문으로 구현한다.
-- [ ] 덧셈
-- [ ] 뺄셈
-- [ ] 곱셈
-- [ ] 나눗셈
-  - [ ] 정수로 떨어진다.
+- [X] 사용자에게서 문자열을 입력을 받는다.
+  - [X] 문자열 = 숫자 + 빈 공백 문자열 + 사칙연산으로 이루어져 있다.
+  - [X] 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw 
+  - [X] 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
+  - [X] String 클래스의 split(" ") 메소드를 활용한다.
+  - [X] 반복적인 패턴을 찾아 반복문으로 구현한다.
+- [X] 덧셈
+- [X] 뺄셈
+- [X] 곱셈
+- [X] 나눗셈 : 정수로 떨어진다.
