@@ -1,12 +1,12 @@
 package lotto.controller;
 
 import lotto.dto.LottoNumberResponse;
-import lotto.model.AutomaticPurchaseStrategy;
+import lotto.model.AutomaticPurchase;
 import lotto.model.Lotto;
 import lotto.model.LottoMachine;
 import lotto.model.LottoNumber;
 import lotto.model.LottoPaper;
-import lotto.model.ManualPurchaseStrategy;
+import lotto.model.ManualPurchase;
 import lotto.model.Money;
 import lotto.model.Prize;
 import lotto.model.WinningLotto;
@@ -14,6 +14,7 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class LottoController {
@@ -38,8 +39,12 @@ public class LottoController {
     }
 
     private LottoPaper requestLottoOrder(int manualQuantity, int automaticQuantity) {
-        List<Lotto> automaticLotto = LottoMachine.purchase(automaticQuantity, new AutomaticPurchaseStrategy());
-        List<Lotto> manualLotto = LottoMachine.purchase(manualQuantity, new ManualPurchaseStrategy(this.inputView));
+        LottoMachine automaticPurchase = new AutomaticPurchase();
+        LottoMachine manualPurchase = new ManualPurchase(new Scanner(System.in));
+
+        List<Lotto> automaticLotto = automaticPurchase.purchase(automaticQuantity);
+        List<Lotto> manualLotto = manualPurchase.purchase(manualQuantity);
+
         return new LottoPaper(automaticLotto, manualLotto);
     }
 

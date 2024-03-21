@@ -10,6 +10,8 @@
     - LottoStrategy 인터페이스
     - AutomaticPurchaseStrategy : 자동 구매 전략
     - ManualPurchaseStrategy : 수동 구매 전략
+- [x] 자동/수동 구매 전략 패턴 -> 탬플릿 메소드 패턴으로 변경
+- [x] 자동/수동 구매 테스트 작성
 
 ---
 

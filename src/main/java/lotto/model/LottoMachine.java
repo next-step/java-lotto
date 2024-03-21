@@ -2,13 +2,11 @@ package lotto.model;
 
 import java.util.List;
 
-public class LottoMachine {
+public abstract class LottoMachine {
 
-    private LottoMachine() {
+    public List<Lotto> purchase(int quantity) {
+        return execute(quantity);
     }
 
-    public static List<Lotto> purchase(int quantity, LottoStrategy strategy) {
-        return strategy.execute(quantity);
-    }
-
+    abstract protected List<Lotto> execute(int quantity);
 }

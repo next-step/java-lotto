@@ -6,10 +6,7 @@ import lotto.model.LottoNumber;
 import lotto.model.LottoNumberFactory;
 import lotto.model.Money;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
 import static lotto.validation.MoneyValidator.assertMoney;
@@ -49,32 +46,6 @@ public class InputView {
         }
 
         return askManualQuantity(money);
-    }
-
-    public List<Lotto> askManualLotto(int manualQuantity) {
-        if (manualQuantity <= 0) {
-            return Collections.emptyList();
-        }
-
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-
-        try {
-            return toLottos(manualQuantity);
-        } catch (InvalidLottoException e) {
-            System.out.println(e.getMessage());
-        }
-
-        return askManualLotto(manualQuantity);
-    }
-
-    private List<Lotto> toLottos(int manualQuantity) {
-        List<Lotto> lottos = new ArrayList<>();
-
-        for (int i = 0; i < manualQuantity; i++) {
-            lottos.add(toLotto());
-        }
-
-        return lottos;
     }
 
     public Lotto askWinningNumbers() {

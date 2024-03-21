@@ -3,7 +3,7 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AutomaticPurchaseStrategy implements LottoStrategy {
+public class AutomaticPurchase extends LottoMachine {
     @Override
     public List<Lotto> execute(int quantity) {
         List<Lotto> result = new ArrayList<>();
