@@ -27,23 +27,14 @@ class LottoResultTest {
         assertThat(lottoResult.getResult().get(LottoRank.FIRST)).isEqualTo(1);
     }
 
+
     @Test
-    @DisplayName("수익률을 계산한다 - 5000원 투자 50000원 당첨시 수익률은 900프로")
-    public void whenMoneyIs5000AndResultIs50000_thenProfitRateIs900() {
+    @DisplayName("당첨 총 금액을 리턴한다.")
+    public void returnsTotalWinningAmount(){
         LottoResult lottoResult = LottoResult.initializeLottoResult();
         lottoResult.updateResultForRank(LottoRank.THIRD);
-        float profitRate = lottoResult.calculateTotalProfitRate(5000);
-
-        assertThat(profitRate).isEqualTo(900.0f);
-     }
-
-    @Test
-    @DisplayName("수익률을 계산한다 - 5000원 투자 5000원 당첨시 수익률은 0프로")
-    public void whenMoneyIs5000AndResultIs5000_thenProfitRateIs0() {
-        LottoResult lottoResult = LottoResult.initializeLottoResult();
-        lottoResult.updateResultForRank(LottoRank.FOURTH);
-        float profitRate = lottoResult.calculateTotalProfitRate(5000);
-
-        assertThat(profitRate).isEqualTo(0.0f);
+        long winningAmount = lottoResult.calculateTotalWinningAmount();
+        assertThat(winningAmount).isEqualTo(50000L);
     }
+
 }

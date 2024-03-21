@@ -25,15 +25,10 @@ public class LottoResult {
         result.put(rank, result.get(rank) + 1);
     }
 
-    public float calculateTotalProfitRate(int money) {
-        long totalWinningAmount = result.entrySet().stream()
+    public long calculateTotalWinningAmount() {
+        return result.entrySet().stream()
                 .mapToLong(rank -> rank.getKey().getPrizeMoney() * rank.getValue())
                 .sum();
-
-        // 변경된 수익률 계산 로직
-        float profitRate = ((float)totalWinningAmount - money) / money * 100;
-
-        return profitRate;
     }
 
     public Map<LottoRank, Integer> getResult() {

@@ -3,6 +3,7 @@ package lotto.ui;
 import lotto.domian.LottoRank;
 import lotto.domian.LottoResult;
 import lotto.domian.LottoTickets;
+import lotto.domian.PurchaseAmount;
 
 import java.util.stream.Collectors;
 
@@ -31,8 +32,8 @@ public class OutputHandler {
         }
     }
 
-    public void printEarningsRate(LottoResult result, int money){
-        float rate = result.calculateTotalProfitRate(money) ; // 수익률을 퍼센트로 변경
+    public void printEarningsRate(PurchaseAmount amount, int money){
+        float rate = amount.calculateTotalProfitRate(money) ; // 수익률을 퍼센트로 변경
         if (rate % 1.0 == 0) {
             System.out.printf("총 수익률은 %.0f%% 입니다.\n", rate);
         } else {
