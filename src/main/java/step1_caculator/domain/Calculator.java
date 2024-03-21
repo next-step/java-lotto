@@ -1,17 +1,34 @@
 package step1_caculator.domain;
 
-import step1_caculator.view.OutputView;
-
-import java.util.List;
-
-import static step1_caculator.view.InputView.scanInputs;
-
 public class Calculator {
+    private int result;
+    private String tmpOperation;
+    static final private int INITIAL_INT_VALUE = 0;
 
-    public void run() {
-        List<String> inputs = scanInputs();
-        CalculationExecutor calculationExecutor = new CalculationExecutor();
-        SequenceProcessor sequenceProcessor = new SequenceProcessor(calculationExecutor);
-        OutputView.printOutput(sequenceProcessor.process(inputs));
+    public Calculator(
+            int result,
+            String tmpOperation
+    ) {
+        this.result = result;
+        this.tmpOperation = tmpOperation;
+    }
+
+    public int calculate(int number) {
+
+        if(this.result == INITIAL_INT_VALUE || tmpOperation == null){
+            this.result = number;
+            return this.result;
+        }
+
+        IntOperator operator = IntOperator.findOperationByValue(tmpOperation);
+        return result = operator.calculate(result, number);
+    }
+
+    public void saveOperation(String tmpOperation) {
+        this.tmpOperation = tmpOperation;
+    }
+
+    public void resetOperation() {
+        this.tmpOperation = null;
     }
 }

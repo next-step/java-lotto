@@ -3,18 +3,18 @@ package step1_caculator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step1_caculator.domain.CalculationExecutor;
-import step1_caculator.domain.SequenceProcessor;
+import step1_caculator.domain.Calculator;
+import step1_caculator.domain.Processor;
 
 import java.util.List;
 
-public class SequenceProcessorTest {
+public class ProcessorTest {
     @DisplayName("입력에 따른 순차 계선을 진행한다.")
     @Test
     void process(){
         List<String> inputs = List.of("5", "+", "3", "/", "2");
-        CalculationExecutor calculationExecutor = new CalculationExecutor();
-        SequenceProcessor sut = new SequenceProcessor(calculationExecutor);
+        Calculator calculator = new Calculator(0 , null);
+        Processor sut = new Processor(calculator);
 
         Assertions.assertThat(sut.process(inputs)).isEqualTo(4);
     }
@@ -23,8 +23,8 @@ public class SequenceProcessorTest {
     @Test
     void process_repeated_operator(){
         List<String> inputs = List.of("5", "+", "-", "3");
-        CalculationExecutor calculationExecutor = new CalculationExecutor();
-        SequenceProcessor sut = new SequenceProcessor(calculationExecutor);
+        Calculator calculator = new Calculator(0, null);
+        Processor sut = new Processor(calculator);
 
         Assertions.assertThat(sut.process(inputs)).isEqualTo(2);
     }
@@ -33,8 +33,8 @@ public class SequenceProcessorTest {
     @Test
     void process_repeated_number(){
         List<String> inputs = List.of("5", "-", "3", "4");
-        CalculationExecutor calculationExecutor = new CalculationExecutor();
-        SequenceProcessor sut = new SequenceProcessor(calculationExecutor);
+        Calculator calculator = new Calculator(0, null);
+        Processor sut = new Processor(calculator);
 
         Assertions.assertThat(sut.process(inputs)).isEqualTo(4);
     }
@@ -43,8 +43,8 @@ public class SequenceProcessorTest {
     @Test
     void process_repeated_number_2(){
         List<String> inputs = List.of("5", "-", "3", "4", "+", "1");
-        CalculationExecutor calculationExecutor = new CalculationExecutor();
-        SequenceProcessor sut = new SequenceProcessor(calculationExecutor);
+        Calculator calculator = new Calculator(0, null);
+        Processor sut = new Processor(calculator);
 
         Assertions.assertThat(sut.process(inputs)).isEqualTo(5);
     }
