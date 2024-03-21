@@ -17,7 +17,7 @@ public class LottoMachineTest {
     void show_lotto_ticke_number(int index, int expected) {
         LottoMachine lottoMachine = new LottoMachine(14);
         List<LottoTicket> lottoTickets = lottoMachine.generateLottoTickets();
-        assertThat(lottoTickets.get(index).getNumbers().size()).isEqualTo(expected);
+        assertThat(lottoTickets.get(index).getBalls().size()).isEqualTo(expected);
     }
 
     @DisplayName("개수를 입력하면 로또번호 6개가 그 개수만큼 나온다")

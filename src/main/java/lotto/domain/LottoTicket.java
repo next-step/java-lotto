@@ -6,23 +6,24 @@ import java.util.List;
 
 public class LottoTicket {
 
+    private final List<Integer> balls;
+    private static final int NUMBERS_OF_BALLS = 6;
     private final List<Integer> numbers;
-    private static final int MAX_NUMBERS = 6;
 
     public LottoTicket() {
+        balls = new ArrayList<>();
         numbers = new ArrayList<>();
     }
 
     public List<Integer> generate() {
-        for (int i = 0; i < MAX_NUMBERS; i++) {
-            this.numbers.add(randomNumbers().get(i));
+        for (int i = 0; i < NUMBERS_OF_BALLS; i++) {
+            this.balls.add(randomNumbers().get(i));
         }
-        Collections.sort(this.numbers);
-        return this.numbers;
+        Collections.sort(this.balls);
+        return this.balls;
     }
 
     protected List<Integer> randomNumbers() {
-        List<Integer> numbers = new ArrayList<>();
 
         for (int i = 0; i < 45; i++) {
             numbers.add(i + 1);
@@ -33,13 +34,13 @@ public class LottoTicket {
     }
 
     public int countMatchingWith(List<Integer> winningNumbers) {
-        return Math.toIntExact(this.numbers.stream()
+        return Math.toIntExact(this.balls.stream()
                 .filter(winningNumbers::contains)
                 .count());
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public List<Integer> getBalls() {
+        return balls;
     }
 
 }
