@@ -20,7 +20,7 @@ public class Lottos {
         return lottos;
     }
 
-    public Map<LottoRank, Integer> getWinningResult(WinningLotto winningLotto) {
+    public Map<LottoRank, Integer> getWinningResult(Lotto winningLotto) {
         Map<LottoRank, Integer> result = new HashMap<>();
         for (Lotto lotto : lottos) {
             LottoRank rank = LottoRank.isLottoRank(lotto.countMatch(winningLotto));

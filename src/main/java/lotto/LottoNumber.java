@@ -8,6 +8,10 @@ public class LottoNumber {
 
     private final int number;
 
+    public LottoNumber(String number){
+        this(Integer.parseInt(number));
+    }
+
     public LottoNumber(int number) {
         validNumberRange(number);
         this.number = number;

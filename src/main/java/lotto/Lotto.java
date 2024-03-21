@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +11,12 @@ public class Lotto {
 
     private final List<LottoNumber> numbers;
 
+    public Lotto(String[] numbers){
+        this(Arrays.stream(numbers)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
+    }
+
     public Lotto(List<LottoNumber> numbers) {
         validLottoSize(numbers);
         validDuplicatedLottoNumber(numbers);
@@ -17,10 +24,13 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public int countMatch(WinningLotto winningLotto) {
-        return (int) winningLotto.getWinningLotto().stream()
-            .filter(numbers::contains)
+    public int countMatch(Lotto winningLotto) {
+        return (int) numbers.stream()
+            .filter(winningLotto::contains)
             .count();
+    }
+    private boolean contains(LottoNumber number){
+        return numbers.contains(number);
     }
 
     private void validLottoSize(List<LottoNumber> numbers) {

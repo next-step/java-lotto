@@ -15,7 +15,7 @@ public class LottoProgram {
             LottoStore.sellLotto(purchaseAmount), new RandomLottoGenerator());
         printLottosCount(purchaseAmount, lottos);
 
-        WinningLotto winningLotto = new WinningLotto(inputWinningNumbers());
+        Lotto winningLotto = new Lotto(inputWinningNumbers());
         LottoResult lottoResult = new LottoResult(lottos.getWinningResult(winningLotto));
         printWinningResult(lottoResult);
         printReturnRate(purchaseAmount, lottoResult);
