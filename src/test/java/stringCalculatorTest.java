@@ -4,6 +4,7 @@ import controller.CalculatorController;
 import domain.Calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import view.Result;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -29,8 +30,8 @@ class stringCalculatorTest {
     @Test
     @DisplayName("입력값 예외")
     public void exception() {
-        CalculatorController calculatorController = new CalculatorController();
+        Result result = new Result();
 
-        assertThatIllegalArgumentException().isThrownBy(() -> calculatorController.input()).withMessage("잘못된 입력값 입니다");
+        assertThatIllegalArgumentException().isThrownBy(() -> result.input()).withMessage("잘못된 입력값 입니다");
     }
 }
