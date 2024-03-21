@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoInputParser {
-    public LottoInputParser() {
-    }
+    private LottoInputParser() {}
 
     public static List<Integer> parseToIntegers(String input){
         return Arrays.stream(input.split(","))
