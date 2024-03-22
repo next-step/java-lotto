@@ -1,13 +1,14 @@
 package lotto.domain;
 
 import java.util.EnumMap;
+import java.util.Map;
 import java.util.Optional;
 
 import static lotto.domain.LottoMachine.LOTTO_PRICE;
 
 public class LottoResult {
     private int lottoCount = 0;
-    private final EnumMap<LottoRank, Integer> correctCounts = new EnumMap<>(LottoRank.class);
+    private final Map<LottoRank, Integer> correctCounts = new EnumMap<>(LottoRank.class);
 
     public LottoResult() {
         for (LottoRank lottoRank : LottoRank.values()) {

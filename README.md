@@ -34,7 +34,7 @@
 - [X] LottoRank에 2등 추가
 - [X] 2등 출력 추가
 - [X] LottoNumber의 Integer와 BonusNumber 합치기
-- [ ] 가능하면 추상화된 타입 참조하기 (EnumMap -> Map)
+- [X] 가능하면 추상화된 타입 참조하기 (EnumMap -> Map)
 - [ ] winning()에서 2등 계산 안되는 버그 수정
 - [ ] LottoResult.addCorrectLottoCount() 에서 Optional을 ifPresent로 처리
 - [ ] OutputView.printResult() 의 반복 print 리팩터링
