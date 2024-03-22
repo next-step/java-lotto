@@ -10,15 +10,15 @@ public class LottoTicket {
 
     private final List<LottoNumber> numbers;
 
+    public LottoTicket() {
+        this(LottoNumberGenerator.generate());
+    }
+
     public LottoTicket(List<Integer> numbers) {
         validateNumbersSize(numbers);
         this.numbers = numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
-    }
-
-    public LottoTicket() {
-        this(LottoNumberGenerator.generate());
     }
 
     private void validateNumbersSize(List<Integer> numbers) throws IllegalLottoNumbersSizeException {
