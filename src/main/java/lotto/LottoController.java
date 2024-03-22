@@ -32,10 +32,11 @@ public class LottoController {
 
         LottoResult result = LottoResult.initializeLottoResult();
         tickets.updateLottoResult(winnerNumber, result);
+        long totalWinningAmount = result.calculateTotalWinningAmount();
 
         output.printResultHeader();
         output.printResult(result);
-        output.printEarningsRate(amount, money);
+        output.printEarningsRate(amount, totalWinningAmount);
         input.closeScanner();
     }
 }

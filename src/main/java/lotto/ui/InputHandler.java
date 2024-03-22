@@ -18,13 +18,12 @@ public class InputHandler {
 
     public int inputMoney(){
         System.out.println("구입 금액을 입력해주세요.");
-        int money = scanner.nextInt();
-        scanner.nextLine();
-        Matcher matcher = CUSTOM_MONEY_PATTERN.matcher(CUSTOM_MONEY_REGEXP);
+        String input = scanner.nextLine();
+        Matcher matcher = CUSTOM_MONEY_PATTERN.matcher(input);
         if (!matcher.matches()) {
             throw new InvalidNumberInputException();
         }
-        return money;
+        return Integer.parseInt(input);
     }
 
     public String inputWinnerNumber(){

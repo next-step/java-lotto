@@ -32,8 +32,8 @@ public class OutputHandler {
         }
     }
 
-    public void printEarningsRate(PurchaseAmount amount, int money){
-        float rate = amount.calculateTotalProfitRate(money) ; // 수익률을 퍼센트로 변경
+    public void printEarningsRate(PurchaseAmount amount, long money){
+        float rate = amount.calculateTotalProfitRate(money) ;
         if (rate % 1.0 == 0) {
             System.out.printf("총 수익률은 %.0f%% 입니다.\n", rate);
         } else {
