@@ -2,12 +2,9 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoTicket;
-import lotto.view.InputView;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

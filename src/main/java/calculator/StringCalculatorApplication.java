@@ -1,6 +1,6 @@
 package calculator;
 
-import comm.view.InputView;
+import common.view.InputView;
 import calculator.domain.Calculator;
 
 public class StringCalculatorApplication {

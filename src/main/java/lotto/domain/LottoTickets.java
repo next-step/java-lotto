@@ -1,10 +1,10 @@
 package lotto.domain;
 
+import common.view.ResultView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.view.ResultView;
 
 public class LottoTickets {
     List<LottoTicket> tickets;

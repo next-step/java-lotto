@@ -1,4 +1,4 @@
-package comm.view;
+package common.view;
 
 import java.util.List;
 import java.util.Map;

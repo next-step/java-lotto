@@ -1,11 +1,8 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import lotto.util.NumberGenerator;
-import lotto.view.ResultView;
 
 public class LottoMachine {
     public static final int LOTTO_PRICE = 1000;
