@@ -37,10 +37,10 @@ public class MyLottos {
 		return lottos.size();
 	}
 
-	public Map<AmountEnum, Long> findWinner(final Lotto winLotto) {
+	public Map<AmountEnum, Long> findWinner(final Lotto winLotto, final LottoNumber bonusNumber) {
 		return lottos.stream()
 				.collect(Collectors.groupingBy(
-						lotto -> lotto.getAmountEnumCompareWinNumber(winLotto)
+						lotto -> lotto.getAmountEnumCompareWinNumber(winLotto, bonusNumber)
 						, counting()));
 	}
 }

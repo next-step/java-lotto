@@ -42,11 +42,12 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
-    public AmountEnum getAmountEnumCompareWinNumber(Lotto winNumber) {
+    public AmountEnum getAmountEnumCompareWinNumber(Lotto winNumber, LottoNumber bonusNumber) {
         int count = (int) lottoNumbers.stream()
                 .filter(lottoNumber -> winNumber.contains(lottoNumber))
                 .count();
-        return AmountEnum.from(count);
+        boolean isBonusNumber = isBonusNumberExist(bonusNumber);
+        return AmountEnum.from(count, isBonusNumber);
     }
 
     public String getNumbersToString() {
@@ -57,5 +58,10 @@ public class Lotto {
 
     private boolean contains(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    private boolean isBonusNumberExist(final LottoNumber bonusNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
     }
 }

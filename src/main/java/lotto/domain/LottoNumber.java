@@ -5,9 +5,10 @@ import java.util.Objects;
 public class LottoNumber {
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
-    private int value;
 
-    public LottoNumber(int value) {
+    private final int value;
+
+    public LottoNumber(final Integer value) {
         if (validateLottoNumber(value)) {
             throw new IllegalArgumentException();
         }
