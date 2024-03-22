@@ -41,4 +41,12 @@ public class LottoProfitTest {
     LottoProfit lottoProfit = LottoProfit.of(winningNumbers, MY_LOTTO_TICKETS);
     assertThat(lottoProfit.calculateProfitRate()).isEqualTo(0.35);
   }
+
+  @Test
+  @DisplayName("숫자 5개 매칭 및 보너스볼 당첨 시 수익률 계산 기능")
+  void lottoProfitTest2() {
+    WinningNumbers winningNumbers = WinningNumbers.of(List.of(1, 3, 5, 14, 22, 40), 45);
+    LottoProfit lottoProfit = LottoProfit.of(winningNumbers, MY_LOTTO_TICKETS);
+    assertThat(lottoProfit.calculateProfitRate()).isEqualTo(2142.85);
+  }
 }

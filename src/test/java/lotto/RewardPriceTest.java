@@ -4,6 +4,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.type.RewardPrice;
 import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -35,6 +36,26 @@ public class RewardPriceTest {
     assertThat(RewardPrice.rewardBy(count, Boolean.FALSE)).isEqualTo(expected);
   }
 
+  @Test
+  @DisplayName("5개 매칭, 보너스볼 매칭 안된 경우")
+  void rewardAmountTest3() {
+    WinningNumbers winningNumbers = WinningNumbers.of(List.of(1, 2, 3, 4, 5, 6), 7);
+    LottoTicket myLottoTicket = LottoTicket.generate(List.of(1, 2, 3, 4, 5, 11));
+    int count = winningNumbers.matchNumberCount(myLottoTicket);
+
+    assertThat(RewardPrice.rewardBy(count, Boolean.FALSE)).isEqualTo(1_500_000);
+  }
+
+  @Test
+  @DisplayName("5개 매칭, 보너스볼 매칭 된 경우")
+  void rewardAmountTest4() {
+    WinningNumbers winningNumbers = WinningNumbers.of(List.of(1, 2, 3, 4, 5, 6), 7);
+    LottoTicket myLottoTicket = LottoTicket.generate(List.of(1, 2, 3, 4, 5, 7));
+    int count = winningNumbers.matchNumberCount(myLottoTicket);
+
+    assertThat(RewardPrice.rewardBy(count, Boolean.TRUE)).isEqualTo(30_000_000);
+  }
+
   private static Stream<Arguments> matchCountTestCases() {
     return Stream.of(
         Arguments.of(List.of(1, 20, 30, 40, 7, 8), 1),
@@ -47,10 +68,10 @@ public class RewardPriceTest {
   private static Stream<Arguments> rewardAmountTestCases() {
     return Stream.of(
         Arguments.of(List.of(1, 20, 30, 40, 7, 8), 0),
-        Arguments.of(List.of(10, 20, 30, 4, 5, 6), 5000),
-        Arguments.of(List.of(10, 20, 3, 4, 5, 6), 50000),
-        Arguments.of(List.of(10, 2, 3, 4, 5, 6), 1500000),
-        Arguments.of(List.of(1, 2, 3, 4, 5, 6), 2000000000)
+        Arguments.of(List.of(10, 20, 30, 4, 5, 6), 5_000),
+        Arguments.of(List.of(10, 20, 3, 4, 5, 6), 50_000),
+        Arguments.of(List.of(10, 2, 3, 4, 5, 6), 1_500_000),
+        Arguments.of(List.of(1, 2, 3, 4, 5, 6), 2_000_000_000)
     );
   }
 }
