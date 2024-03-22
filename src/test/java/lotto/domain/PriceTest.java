@@ -21,7 +21,7 @@ public class PriceTest {
     void price_exception() {
         assertThatThrownBy(() -> new Price(-1000))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(String.format("구입 금액은 %d원 이상이어야 합니다.", Rule.LOTTO_PRICE.getValue()));
+                .hasMessage(Rule.formatGreaterThanLottoPrice());
     }
 
     @Test

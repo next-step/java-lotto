@@ -21,6 +21,10 @@ public enum Rule {
         return !(number >= MIN_NUMBER.value && number <= MAX_NUMBER.value);
     }
 
+    public static String formatGreaterThanLottoPrice() {
+        return String.format("구입 금액은 %d원 이상이어야 합니다.", Rule.LOTTO_PRICE.value);
+    }
+
     public int getValue() {
         return value;
     }

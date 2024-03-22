@@ -9,7 +9,7 @@ public class Price {
 
     public Price(int price) {
         if (Rule.isNotPaymentSufficientForLotto(price)) {
-            throw new IllegalArgumentException(String.format("구입 금액은 %d원 이상이어야 합니다.", Rule.LOTTO_PRICE.getValue()));
+            throw new IllegalArgumentException(Rule.formatGreaterThanLottoPrice());
         }
         this.price = price;
     }
