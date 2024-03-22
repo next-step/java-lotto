@@ -23,6 +23,10 @@ public class Lotto {
                 .count();
     }
 
+    public int getPrize(Lotto lotto) {
+        return Rank.findPrize(match(lotto));
+    }
+
     private boolean match(int number) {
         return numbers.contains(number);
     }
