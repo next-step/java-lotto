@@ -26,7 +26,7 @@ public enum Prize {
     }
 
     public boolean containsPrize() {
-        return matchCount >= FOURTH_PRIZE.matchCount && matchCount <= FIRST_PRIZE.matchCount;
+        return FOURTH_PRIZE.matchCount <= matchCount && matchCount <= FIRST_PRIZE.matchCount;
     }
 
     public int getMatchCount() {
@@ -40,4 +40,5 @@ public enum Prize {
     private boolean isSame(int matchCount) {
         return this.matchCount == matchCount;
     }
+
 }

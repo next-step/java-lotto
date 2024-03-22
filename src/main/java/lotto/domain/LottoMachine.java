@@ -11,7 +11,7 @@ public class LottoMachine {
 
     public LottoMachine(int number) {
         this.number = number;
-        this.lottoTickets = new ArrayList<>();
+        this.lottoTickets = generateLottoTickets();
     }
 
     public List<LottoTicket> generateLottoTickets() {
@@ -20,6 +20,10 @@ public class LottoMachine {
             lottoTickets.get(i).generate();
         }
         return Collections.unmodifiableList(lottoTickets);
+    }
+
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
     }
 
 }

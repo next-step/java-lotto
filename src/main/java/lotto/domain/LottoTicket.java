@@ -1,21 +1,22 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.List;
+
+import static lotto.domain.Rule.MAX_NUMBER;
+import static lotto.domain.Rule.NUMBERS_OF_BALLS;
 
 public class LottoTicket {
 
     private final LottoNumbers lottoNumbers;
-    private final List<Integer> numbers;
 
-    public LottoTicket(LottoNumbers lottoNumbers, List<Integer> numbers) {
+    public LottoTicket(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
-        this.numbers = numbers;
     }
 
     public LottoTicket() {
-        this(new LottoNumbers(new ArrayList<>()), new ArrayList<>());
+        this(new LottoNumbers(new ArrayList<>()));
     }
 
     public List<LottoNumber> generate() {
