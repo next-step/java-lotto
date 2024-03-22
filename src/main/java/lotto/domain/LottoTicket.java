@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.AlreadyExistLottoNumberException;
 import lotto.exception.IllegalLottoNumbersSizeException;
 
 import java.util.List;
@@ -58,6 +59,12 @@ public class LottoTicket {
 
     public List<LottoNumber> get() {
         return this.numbers;
+    }
+
+    public void validateAlreadyExistLottoNumber(LottoNumber number) throws AlreadyExistLottoNumberException {
+        if (this.numbers.contains(number)) {
+            throw new AlreadyExistLottoNumberException(this.numbers, number);
+        }
     }
 
 }
