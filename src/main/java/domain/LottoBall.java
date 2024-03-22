@@ -12,16 +12,16 @@ public final class LottoBall {
   }
 
   public static LottoBall of(int number) {
-    return new LottoBall(new PositiveNumber(number));
+    return new LottoBall(PositiveNumber.of(number));
   }
 
   public LottoBall(final PositiveNumber number) {
     if (number.lessThan(LOWER_BOUND)) {
-      throw new IllegalArgumentException(String.format("Wrong constructor argument!: %s", number));
+      throw new IllegalArgumentException(String.format("Wrong constructor argument!: %d", number.value()));
     }
 
     if (number.greaterThan(UPPER_BOUND)) {
-      throw new IllegalArgumentException(String.format("Wrong constructor argument!: %s", number));
+      throw new IllegalArgumentException(String.format("Wrong constructor argument!: %s", number.value()));
     }
     this.number = number;
   }
@@ -41,6 +41,8 @@ public final class LottoBall {
 
   @Override
   public String toString() {
-    return this.number.toString();
+    return "LottoBall{" +
+            "number=" + this.number + '\'' +
+            "}";
   }
 }

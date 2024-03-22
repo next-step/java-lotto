@@ -10,13 +10,13 @@ public class LottosTest {
   @Test
   public void 당첨_번호를_이용해_결과목록을_반환() {
     Lottos lottos = new Lottos(List.of(
-            Lotto.of(LottoBalls.of(1, 2, 3, 4, 5, 6, 7)),
-            Lotto.of(LottoBalls.of(1, 2, 3, 4, 5, 7, 7)),
-            Lotto.of(LottoBalls.of(1, 2, 3, 4, 7, 8, 9)),
-            Lotto.of(LottoBalls.of(1, 2, 7, 8, 9, 10, 11))
+            Lotto.of(LottoBall.of(7), LottoBalls.of(1, 2, 3, 4, 5, 6)),
+            Lotto.of(LottoBall.of(7), LottoBalls.of(1, 2, 3, 4, 5, 7)),
+            Lotto.of(LottoBall.of(9), LottoBalls.of(1, 2, 3, 4, 7, 8)),
+            Lotto.of(LottoBall.of(11), LottoBalls.of(1, 2, 7, 8, 9, 10))
     ));
 
-    assertThat(lottos.results(LottoBalls.of(1, 2, 3, 4, 5, 6, 7))).isEqualTo(
+    assertThat(lottos.results(Lottery.of(LottoBall.of(7), LottoBalls.of(1, 2, 3, 4, 5, 6)))).isEqualTo(
             new Results(List.of(
                     Result.of(PositiveNumber.of(6), true),
                     Result.of(PositiveNumber.of(5), true),

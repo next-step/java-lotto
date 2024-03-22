@@ -14,7 +14,7 @@ public class Result {
     return new Result(matchCount, bonusBallMatched);
   }
 
-  public Result(PositiveNumber matchCount, Boolean bonusBallMatched) {
+  private Result(PositiveNumber matchCount, Boolean bonusBallMatched) {
     this.matchCount = matchCount;
     this.bonusBallMatched = bonusBallMatched;
   }
@@ -46,6 +46,9 @@ public class Result {
 
   @Override
   public String toString() {
-    return String.format("Result[matchCount: %d, bonusBallMatched:%s]", this.matchCount.value(), this.bonusBallMatched);
+    return "Result{" +
+            "matchCount=" + this.matchCount + '\'' +
+            ", bonusBallMatched=" + this.bonusBallMatched + '\'' +
+            "}";
   }
 }

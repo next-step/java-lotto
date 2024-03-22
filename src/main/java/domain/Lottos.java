@@ -16,10 +16,10 @@ public class Lottos implements Iterable<Lotto> {
     return this.lottos.size();
   }
 
-  public Results results(LottoBalls winningBalls) {
+  public Results results(Lottery lottery) {
     return new Results(this.lottos
             .stream()
-            .map(lottery -> lottery.result(winningBalls))
+            .map(lotto -> lotto.result(lottery))
             .collect(Collectors.toList()));
   }
 

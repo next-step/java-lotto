@@ -6,7 +6,15 @@ import java.util.Objects;
 public final class PositiveNumber {
   private final int value;
 
-  public PositiveNumber(final int value) {
+  public static PositiveNumber of(final int value) {
+    return new PositiveNumber(value);
+  }
+
+  public static PositiveNumber of(final Integer value) {
+    return new PositiveNumber(value);
+  }
+
+  private PositiveNumber(final int value) {
     if (value < 0) {
       throw new IllegalArgumentException("Wrong constructor argument!");
     }
@@ -15,14 +23,6 @@ public final class PositiveNumber {
 
   public int value() {
     return this.value;
-  }
-
-  public static PositiveNumber of(final int value) {
-    return new PositiveNumber(value);
-  }
-
-  public static PositiveNumber of(final Integer value) {
-    return new PositiveNumber(value);
   }
 
   public boolean lessThan(final PositiveNumber number) {
@@ -57,7 +57,7 @@ public final class PositiveNumber {
     return new PositiveNumber(this.value + number);
   }
 
-  public PositiveNumber sub(int number) {
+  public PositiveNumber subtract(int number) {
     return new PositiveNumber(this.value - number);
   }
 
@@ -85,6 +85,8 @@ public final class PositiveNumber {
 
   @Override
   public String toString() {
-    return String.valueOf(this.value);
+    return "PositiveNumber{" +
+            "value=" + this.value + '\'' +
+            "}";
   }
 }

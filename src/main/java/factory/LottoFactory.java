@@ -17,12 +17,12 @@ public class LottoFactory {
   }
 
   public Lotto randomLotto() {
-    List<LottoBall> lottoBalls = randomFactory.randomNumbers(Lotto.TOTAL_BALLS_COUNT)
+    List<LottoBall> normalBalls = randomFactory.randomNumbers(Lotto.NORMAL_BALLS_COUNT)
             .stream()
             .map(LottoBall::new)
             .collect(Collectors.toList());
 
-    return Lotto.of(lottoBalls);
+    return Lotto.of(LottoBall.of(randomFactory.randomNumber()), normalBalls);
   }
 
   public Lottos randomLottos(PositiveNumber size) {

@@ -13,7 +13,10 @@ public class Amount {
 
   @Override
   public String toString() {
-    return String.format("%s %s", this.currency.getSymbol(), this.value);
+    return "Amount{" +
+            "value=" + this.value + '\'' +
+            ", currency=" + this.currency + '\'' +
+            "}";
   }
 
 }

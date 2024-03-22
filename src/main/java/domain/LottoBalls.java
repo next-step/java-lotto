@@ -2,19 +2,19 @@ package domain;
 
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-public class LottoBalls {
+public class LottoBalls implements Iterable<LottoBall> {
   private final List<LottoBall> balls;
-
-  public LottoBalls(final List<LottoBall> balls) {
-    this.balls = balls;
-  }
 
   public static LottoBalls of(final LottoBall... balls) {
     return new LottoBalls(List.of(balls));
+  }
+
+  public static LottoBalls of(final List<LottoBall> balls) {
+    return new LottoBalls(balls);
   }
 
   public static LottoBalls of(final int... balls) {
@@ -23,15 +23,8 @@ public class LottoBalls {
             .collect(Collectors.toList()));
   }
 
-  public PositiveNumber matchCount(final LottoBalls comparison) {
-    int count = IntStream.range(0, this.balls.size())
-            .reduce(0, (acc, cur) -> {
-              if (this.balls.get(cur).equals(comparison.balls.get(cur))) {
-                return ++acc;
-              }
-              return acc;
-            });
-    return PositiveNumber.of(count);
+  private LottoBalls(final List<LottoBall> balls) {
+    this.balls = balls;
   }
 
   public boolean sizeOf(final PositiveNumber size) {
@@ -42,30 +35,33 @@ public class LottoBalls {
     return PositiveNumber.of(this.balls.size());
   }
 
-  public LottoBalls subList(PositiveNumber from, PositiveNumber to) {
-    return new LottoBalls(this.balls.subList(from.value(), to.value()));
+  public Boolean match(final PositiveNumber index, final LottoBalls target) {
+    return this.balls.get(index.value()).equals(target.balls.get(index.value()));
   }
 
-  public LottoBalls subList(int from, int to) {
-    return new LottoBalls(this.balls.subList(from, to));
+  @Override
+  public Iterator<LottoBall> iterator() {
+    return new LottoBallsIterator();
   }
 
-  public LottoBall lastBall() {
-    return this.balls.get(this.balls.size() - 1);
+  private class LottoBallsIterator implements Iterator<LottoBall> {
+    private int cursor = 0;
+
+    @Override
+    public boolean hasNext() {
+      return cursor < balls.size();
+    }
+
+    @Override
+    public LottoBall next() {;
+      return balls.get(cursor++);
+    }
   }
 
   @Override
   public String toString() {
-    final String OPENER = "[";
-    final String CLOSER = "]";
-    final String CONNECTOR = ", ";
-
-    StringBuilder sb = new StringBuilder(OPENER);
-    for (LottoBall ball : this.balls) {
-      sb.append(ball).append(CONNECTOR);
-    }
-
-    final int STARTING_INDEX = 0;
-    return sb.substring(STARTING_INDEX, sb.length() - CONNECTOR.length()).concat(CLOSER);
+    return "LottoBalls{" +
+            "balls=" + this.balls + '\'' +
+            "}";
   }
 }

@@ -25,15 +25,19 @@ public class Condition {
     return this.bonusBallCondition.equals(BonusBallCondition.TRUE) == result.bonusBallMatched();
   }
 
+  public PositiveNumber matchCount() {
+    return this.matchCount;
+  }
+
+  public BonusBallCondition bonusBallCondition() {
+    return this.bonusBallCondition;
+  }
+
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append(this.matchCount.value());
-    sb.append("개 일치");
-    if (this.bonusBallCondition.equals(BonusBallCondition.TRUE)) {
-      sb.append(", 보너스 볼 일치");
-    }
-
-    return sb.toString();
+    return "Condition{" +
+            "matchCount=" + this.matchCount + '\'' +
+            ", bonusBallCondition=" + this.bonusBallCondition + '\'' +
+            "}";
   }
 }

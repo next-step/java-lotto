@@ -33,6 +33,9 @@ public enum Prize {
 
   @Override
   public String toString() {
-    return String.format("%s (%s)", this.condition, this.amount);
+    return "Prize{" +
+            "condition=" + this.condition + '\'' +
+            ", amount=" + this.amount + '\'' +
+            "}";
   }
 }

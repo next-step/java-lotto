@@ -1,7 +1,4 @@
-import domain.Lottos;
-import domain.Lotto;
-import domain.LottoBalls;
-import domain.PositiveNumber;
+import domain.*;
 import factory.LottoFactory;
 import factory.RandomFactory;
 import view.InputView;
@@ -20,7 +17,7 @@ public class Main {
     Lottos lottos = lottoFactory.randomLottos(count);
     ResultView.lotteryList(lottos);
 
-    LottoBalls winningBalls = InputView.winningBalls();
-    ResultView.stats(lottos.results(winningBalls));
+    Lottery lottery = InputView.lottery();
+    ResultView.stats(lottos.results(lottery));
   }
 }

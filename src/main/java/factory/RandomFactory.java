@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 public class RandomFactory {
   private static final List<PositiveNumber> cache = IntStream.range(LottoBall.LOWER_BOUND.value(), LottoBall.UPPER_BOUND.value() + 1)
-          .mapToObj(PositiveNumber::new)
+          .mapToObj(PositiveNumber::of)
           .collect(Collectors.toList());
 
   private final Random random;

@@ -16,6 +16,21 @@ public class ResultView {
     System.out.println();
   }
 
+  private String lottoToString(Lotto lotto) {
+    final String OPENER = "[";
+    final String CLOSER = "]";
+    final String CONNECTOR = ", ";
+
+    StringBuilder sb = new StringBuilder(OPENER);
+    for (LottoBall ball : lotto.normalBalls()) {
+      sb.append(ball).append(CONNECTOR);
+    }
+    sb.append(lotto.bonusBall()).append(CONNECTOR);
+
+    final int STARTING_INDEX = 0;
+    return sb.substring(STARTING_INDEX, sb.length() - CONNECTOR.length()).concat(CLOSER);
+  }
+
   public static void stats(Results results) {
     System.out.println("당첨 통계");
     System.out.println("---------");

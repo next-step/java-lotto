@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 public class PositiveNumberTest {
   @Test
   void 음수_입력으로는_생성할_수_없다() {
-    assertThatThrownBy(() -> new PositiveNumber(-10))
+    assertThatThrownBy(() -> PositiveNumber.of(-10))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("Wrong constructor argument!");
   }
