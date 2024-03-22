@@ -19,7 +19,7 @@ class LottoTest {
         Lotto lottoNumbers = new Lotto(manualNumbers);
 
         // then
-        LottoWinInfo lottoWinInfo = lottoNumbers.countMatchWithWinningLottoNumbers(new Lotto(manualNumbers));
+        LottoWinInfo lottoWinInfo = lottoNumbers.countMatch(new Lotto(manualNumbers));
         assertThat(lottoWinInfo).isEqualTo(LottoWinInfo.WIN_FIRST);
     }
 
@@ -53,7 +53,7 @@ class LottoTest {
         Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 7, 8, 9));
 
         // when
-        LottoWinInfo lottoWinInfo = lottoNumbers.countMatchWithWinningLottoNumbers(winningNumbers);
+        LottoWinInfo lottoWinInfo = lottoNumbers.countMatch(winningNumbers);
 
         // then
         assertThat(lottoWinInfo).isEqualTo(LottoWinInfo.WIN_FOURTH);

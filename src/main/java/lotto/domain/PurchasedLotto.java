@@ -46,10 +46,10 @@ public class PurchasedLotto {
         Map<LottoWinInfo, Integer> lottoResultMap = initializeLottoResultMap();
 
         for (Lotto lotto : this.lottoBundle) {
-            LottoNumbersWithBonusWrapper lottoNumbersWithBonusWrapper = new LottoNumbersWithBonusWrapper(lotto, bonusNumber);
+            WinLottoBalls winLottoBalls = new WinLottoBalls(winningLottoNumbers, bonusNumber);
 
             lottoResultMap.computeIfPresent(
-                    lottoNumbersWithBonusWrapper.countMatchWithWinningLottoNumbersWithBonusNumber(winningLottoNumbers),
+                    winLottoBalls.countMatchWithBonus(lotto),
                     (key, value) -> value + 1
             );
         }

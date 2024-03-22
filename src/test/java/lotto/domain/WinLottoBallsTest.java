@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoNumbersWithBonusWrapperTest {
+class WinLottoBallsTest {
 
     @DisplayName("5개가 맞았을 때, 보너스점수 까지 맞으면 WIN_FIRST_WITH_BONUS 이다.")
     @Test
@@ -20,14 +20,14 @@ class LottoNumbersWithBonusWrapperTest {
         LottoBall bonusNumber = LottoBall.selectLottoBall(6);
 
         // when
-        LottoNumbersWithBonusWrapper lottoNumbersWithBonusWrapper = new LottoNumbersWithBonusWrapper(
-                mySelect,
+        WinLottoBalls winLottoBalls = new WinLottoBalls(
+                winningNumber,
                 bonusNumber
         );
 
         // then
-        LottoWinInfo lottoWinInfo = lottoNumbersWithBonusWrapper.countMatchWithWinningLottoNumbersWithBonusNumber(
-                winningNumber
+        LottoWinInfo lottoWinInfo = winLottoBalls.countMatchWithBonus(
+                mySelect
         );
         assertThat(lottoWinInfo).isEqualTo(LottoWinInfo.WIN_FIRST_WITH_BONUS);
     }
@@ -41,14 +41,14 @@ class LottoNumbersWithBonusWrapperTest {
         LottoBall bonusNumber = LottoBall.selectLottoBall(10);
 
         // when
-        LottoNumbersWithBonusWrapper lottoNumbersWithBonusWrapper = new LottoNumbersWithBonusWrapper(
-                mySelect,
+        WinLottoBalls winLottoBalls = new WinLottoBalls(
+                winningNumber,
                 bonusNumber
         );
 
         // then
-        LottoWinInfo lottoWinInfo = lottoNumbersWithBonusWrapper.countMatchWithWinningLottoNumbersWithBonusNumber(
-                winningNumber
+        LottoWinInfo lottoWinInfo = winLottoBalls.countMatchWithBonus(
+                mySelect
         );
         assertThat(lottoWinInfo).isEqualTo(LottoWinInfo.WIN_SECOND);
     }

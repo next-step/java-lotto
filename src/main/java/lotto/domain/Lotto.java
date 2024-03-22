@@ -25,23 +25,23 @@ public class Lotto {
         manualNumbers.forEach(number -> this.lottoBalls.add(LottoBall.selectLottoBall(number)));
     }
 
-    public LottoWinInfo countMatchWithWinningLottoNumbers(Lotto winningLottoNumbers) {
+    public LottoWinInfo countMatch(Lotto lottoBalls) {
         int resultCount = (int) this.lottoBalls.stream()
-                .map(winningLottoNumbers::containNumbers)
+                .map(lottoBalls::containNumber)
                 .filter(result -> result)
                 .count();
 
         return LottoWinInfo.valueOf(resultCount, false);
     }
 
+    public boolean containNumber(LottoBall number) {
+        return this.lottoBalls.stream()
+                .anyMatch(lotto -> lotto.equals(number));
+    }
+
     @Override
     public String toString() {
         return this.lottoBalls.toString();
-    }
-
-    public boolean containNumbers(LottoBall number) {
-        return this.lottoBalls.stream()
-                .anyMatch(lotto -> lotto.equals(number));
     }
 
     private List<LottoBall> getAutoLottoBalls() {
