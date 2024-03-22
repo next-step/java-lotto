@@ -18,7 +18,7 @@ public enum Rank {
     static {
         SIZE_TO_RANK = new HashMap<>();
         for (Rank rank : values()) {
-            SIZE_TO_RANK.put(new Pair(rank.getMatchingNumber(), rank.isMatchBonusNumber()), rank);
+            SIZE_TO_RANK.put(new Pair(rank.matchingNumber, rank.isMatchBonusNumber), rank);
         }
     }
 
@@ -36,18 +36,6 @@ public enum Rank {
         this.amount = amount;
     }
 
-    public int getMatchingNumber() {
-        return matchingNumber;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public static Rank of(Lotto lotto, Lotto winningLotto, int bonusNumber) {
-        return lotto.rank(winningLotto, bonusNumber);
-    }
-
     public static Rank of(int matchingNumber) {
         return of(matchingNumber, false);
     }
@@ -58,10 +46,6 @@ public enum Rank {
 
     public int prizeMoney(int count) {
         return this.amount * count;
-    }
-
-    public boolean isMatchBonusNumber() {
-        return isMatchBonusNumber;
     }
 
     private static class Pair {
