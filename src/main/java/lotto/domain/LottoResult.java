@@ -30,12 +30,10 @@ public class LottoResult {
 
     public void addCorrectLottoCount(int count, boolean isContainBonusNumber) {
         Optional<LottoRank> lottoRankOptional = LottoRank.findByCorrectCount(count, isContainBonusNumber);
-        if (lottoRankOptional.isEmpty()) {
-            return;
-        }
-        lottoCount++;
-        LottoRank lottoRank = lottoRankOptional.get();
-        correctCounts.put(lottoRank, correctCounts.get(lottoRank) + 1);
+        lottoRankOptional.ifPresent((lottoRank)->{
+            lottoCount++;
+            correctCounts.put(lottoRank, correctCounts.get(lottoRank) + 1);
+        });
     }
 
     public double rateOfReturn() {
