@@ -3,9 +3,7 @@ package lotto.ui;
 import lotto.domain.*;
 
 import java.text.MessageFormat;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -50,7 +48,7 @@ public class ResultView {
     }
 
     private static String formatRanks(LottoStatistics statisticsMap) {
-        List<Rank> ranks = formatRanks();
+        List<Rank> ranks = getRanksWithoutMISS();
 
         StringBuilder stringBuilder = new StringBuilder();
         for (Rank rank : ranks) {
@@ -59,8 +57,8 @@ public class ResultView {
         return stringBuilder.toString();
     }
 
-    private static List<Rank> formatRanks() {
-        List<Rank> ranks = Rank.getRanks();
+    private static List<Rank> getRanksWithoutMISS() {
+        List<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
         ranks.sort(Comparator.comparing(Rank::getPrize));
         ranks.remove(Rank.MISS);
         return ranks;

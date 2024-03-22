@@ -20,10 +20,6 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static List<Rank> getRanks() {
-        return new ArrayList<Rank>(List.of(Rank.values()));
-    }
-
     public static Rank valueOf(int matchCount, boolean matchBonus) {
         if (isSecondOrThird(matchCount)) {
             return getSecondOrThird(matchBonus);
@@ -38,7 +34,7 @@ public enum Rank {
     }
 
     private static Optional<Rank> findRankByMatchCount(int matchCount) {
-        return getRanks().stream()
+        return Arrays.stream(Rank.values())
                 .filter((rank) -> rank.matchCount == matchCount)
                 .findFirst();
     }
