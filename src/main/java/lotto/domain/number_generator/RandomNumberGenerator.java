@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.number_generator;
+
+import lotto.domain.number_generator.NumberGenerateStrategy;
 
 import java.util.Collections;
 import java.util.List;

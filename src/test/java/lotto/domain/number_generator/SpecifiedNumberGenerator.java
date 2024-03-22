@@ -1,6 +1,7 @@
-package lotto.domain;
+package lotto.domain.number_generator;
 
-import java.util.Arrays;
+import lotto.domain.number_generator.NumberGenerateStrategy;
+
 import java.util.List;
 
 public class SpecifiedNumberGenerator implements NumberGenerateStrategy {
