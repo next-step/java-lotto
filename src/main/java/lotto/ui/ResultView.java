@@ -42,17 +42,17 @@ public class ResultView {
         return MessageFormat.format("{0}개를 구매했습니다.", count);
     }
 
-    public static void printLottoStatistics(LottoStatistics statisticsMap) {
-        String message = formatRanks(statisticsMap) + formatProfitRate(statisticsMap);
+    public static void printLottoStatistics(LottoStatistics statistics) {
+        String message = formatRanks(statistics) + formatProfitRate(statistics);
         System.out.println(message);
     }
 
-    private static String formatRanks(LottoStatistics statisticsMap) {
+    private static String formatRanks(LottoStatistics statistics) {
         List<Rank> ranks = getRanksWithoutMISS();
 
         StringBuilder stringBuilder = new StringBuilder();
         for (Rank rank : ranks) {
-            stringBuilder.append(formatStatistic(statisticsMap, rank)).append(System.lineSeparator());
+            stringBuilder.append(formatStatistic(statistics, rank)).append(System.lineSeparator());
         }
         return stringBuilder.toString();
     }
@@ -64,9 +64,9 @@ public class ResultView {
         return ranks;
     }
 
-    private static String formatStatistic(LottoStatistics statisticsMap, Rank rank) {
+    private static String formatStatistic(LottoStatistics statistics, Rank rank) {
         return MessageFormat.format("{0} ({1}원) - {2}개"
-                , formatRankMatchCount(rank), rank.getPrize(), statisticsMap.getRankCount(rank));
+                , formatRankMatchCount(rank), rank.getPrize(), statistics.getRankCount(rank));
     }
 
     private static String formatRankMatchCount(Rank rank) {
@@ -78,8 +78,8 @@ public class ResultView {
         return stringBuilder.toString();
     }
 
-    public static String formatProfitRate(LottoStatistics statisticsMap) {
-        return MessageFormat.format("총 수익률은 {0}입니다.", statisticsMap.calculateProfitRate());
+    public static String formatProfitRate(LottoStatistics statistics) {
+        return MessageFormat.format("총 수익률은 {0}입니다.", statistics.calculateProfitRate());
     }
 
     public static void printException(String exceptionMessage) {
