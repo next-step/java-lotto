@@ -28,4 +28,11 @@ public class Input {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
+
+    public int getBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String bonusNumberInput = scanner.nextLine();
+
+        return Integer.parseInt(bonusNumberInput);
+    }
 }
