@@ -13,7 +13,24 @@ public class WinningLotto {
     }
 
     public Rank rank(Lotto lotto) {
+        List<Integer> matchNumbers = matchNumbers(lotto);
+        List<Integer> noMatchNumbers = noMatchNumbers(lotto);
+        if (matchNumbers.size() == 5 && noMatchNumbers.contains(bonusNumber)) {
+            return Rank.SECOND;
+        }
 
-        return Rank.SECOND;
+        return Rank.of(matchNumbers.size());
+    }
+
+    private List<Integer> matchNumbers(Lotto lotto) {
+        List<Integer> matchNumbers = lotto.numbers();
+        matchNumbers.retainAll(winningNumbers);
+        return matchNumbers;
+    }
+
+    private List<Integer> noMatchNumbers(Lotto lotto) {
+        List<Integer> noMatchNumbers = lotto.numbers();
+        noMatchNumbers.removeAll(winningNumbers);
+        return noMatchNumbers;
     }
 }
