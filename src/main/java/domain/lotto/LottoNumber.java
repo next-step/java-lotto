@@ -8,7 +8,7 @@ public class LottoNumber {
     private final static int MAX_NUMBER = 45;
     private final static String RANGE_OVER_EXCEPTION = "1 ~ 45까지의 숫자만 입력 가능합니다.";
 
-    public static LottoNumber create(int number) {
+    public static LottoNumber from(int number) {
         verifyValidNumberRange(number);
         return new LottoNumber(number);
     }
