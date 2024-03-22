@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.Rule.NUMBERS_OF_BALLS;
-
 public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
@@ -12,8 +10,8 @@ public class LottoNumbers {
     public static LottoNumbers of(List<Integer> lottoNumbers) {
         return new LottoNumbers(
                 lottoNumbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())
+                        .map(LottoNumber::new)
+                        .collect(Collectors.toList())
         );
     }
 

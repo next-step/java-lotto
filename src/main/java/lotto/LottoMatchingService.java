@@ -18,7 +18,7 @@ public class LottoMatchingService {
     }
 
     public List<Integer> matchWinningNumber(LottoMachine lottoMachine, List<Integer> winningNumbers) {
-        List<LottoTicket> lottoTickets = lottoMachine. generateLottoTickets();
+        List<LottoTicket> lottoTickets = lottoMachine.generateLottoTickets();
         List<Prize> prizes = lottoTickets.stream()
                 .map(lottoTicket -> Prize.valueOf(lottoTicket.countMatchingWith(winningNumbers)))
                 .collect(Collectors.toUnmodifiableList());
