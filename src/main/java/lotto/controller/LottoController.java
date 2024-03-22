@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoMachine;
+import lotto.domain.Price;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -21,8 +22,8 @@ public class LottoController {
     public void start() {
         resultView.printInit();
 
-        int price = inputView.inputPrice();
-        int numbersOfLotto = price / LOTTO_PRICE.getValue();
+        Price price = new Price(inputView.inputPrice());
+        int numbersOfLotto = price.calculateNumberOfLotto();
 
         resultView.printNumbersOfLotto(numbersOfLotto);
         inputView.inputNextLine();
