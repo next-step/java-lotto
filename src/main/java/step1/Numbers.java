@@ -9,10 +9,6 @@ public class Numbers {
 
     private static Pattern pattern = Pattern.compile("\\d+");
 
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
     private final List<Integer> numbers = new ArrayList<>();
 
     public Numbers(String string) {
