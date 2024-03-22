@@ -14,7 +14,7 @@ public class Main {
             LottoTickets lottoTickets = LottoTicketMachine.issue(purchaseAmount);
             ResultView.printLottoTickets(lottoTickets);
 
-            LottoTicket winLottoTicket = new LottoTicket(InputView.readWinNumbers());
+            LottoTicket winLottoTicket = new LottoTicket(new LottoNumbers(InputView.readWinNumbers()));
             LottoNumber bonusNumber = new LottoNumber(InputView.readBonusNumber());
             WinLotto winLotto = new WinLotto(winLottoTicket, bonusNumber);
 

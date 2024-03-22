@@ -17,13 +17,13 @@ public class LottoStatisticsTest {
     void 당첨_통계_1(int matchCount, int count) {
         // Given
         LottoTickets lottoTickets = new LottoTickets(List.of(
-                new LottoTicket(List.of(1, 2, 42, 43, 44, 45)),
-                new LottoTicket(List.of(1, 2, 3, 43, 44, 45)),
-                new LottoTicket(List.of(1, 2, 3, 4, 44, 45)),
-                new LottoTicket(List.of(1, 2, 3, 4, 5, 45)),
-                new LottoTicket(List.of(1, 2, 3, 4, 5, 6))
+                new LottoTicket(new LottoNumbers(List.of(1, 2, 42, 43, 44, 45))),
+                new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 43, 44, 45))),
+                new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 44, 45))),
+                new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 45))),
+                new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)))
         ));
-        LottoTicket winLottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        LottoTicket winLottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
         LottoNumber bonusNumber = new LottoNumber(23);
 
         // When
@@ -39,14 +39,14 @@ public class LottoStatisticsTest {
     void 당첨_통계_2(int matchCount, int count) {
         // Given
         LottoTickets lottoTickets = new LottoTickets(List.of(
-                new LottoTicket(List.of(1, 2, 3, 43, 44, 45)),
-                new LottoTicket(List.of(1, 2, 3, 43, 44, 45)),
-                new LottoTicket(List.of(1, 2, 3, 43, 44, 45)),
-                new LottoTicket(List.of(1, 2, 3, 4, 44, 45)),
-                new LottoTicket(List.of(1, 2, 3, 4, 44, 45)),
-                new LottoTicket(List.of(1, 2, 3, 4, 5, 6))
+                new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 43, 44, 45))),
+                new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 43, 44, 45))),
+                new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 43, 44, 45))),
+                new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 44, 45))),
+                new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 44, 45))),
+                new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)))
         ));
-        LottoTicket winLottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        LottoTicket winLottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
         LottoNumber bonusNumber = new LottoNumber(23);
 
         // When
