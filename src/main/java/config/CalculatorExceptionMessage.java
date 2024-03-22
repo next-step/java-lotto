@@ -1,13 +1,14 @@
 package config;
 
 import java.text.MessageFormat;
+import java.util.Arrays;
 
 public enum CalculatorExceptionMessage {
 
     OPERAND_SHOULD_BE_INTEGER_FORMAT("피연산자는 반드시 정수형 숫자여야 합니다."),
     OPERATOR_SHOULD_BE_ARITHMETIC_SYMBOL("연산자는 반드시 사칙연산 기호(+, -, *, /) 중 하나여야 합니다."),
     DIVISOR_CANNOT_BE_ZERO("0으로 나눌 수 없습니다."),
-    ;
+    EXPRESSION_CANNOT_BE_NULL_OR_EMPTY("계산식은 null 이거나 비어있을 수 없습니다.");
 
     private final String message;
 
@@ -21,5 +22,9 @@ public enum CalculatorExceptionMessage {
 
     public <T> String message(final T value) {
         return MessageFormat.format("{0} [값 : {1}]", this.message, value);
+    }
+
+    public <T> String message(final T[] values) {
+        return message(Arrays.toString(values));
     }
 }
