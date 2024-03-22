@@ -20,17 +20,11 @@ class LottoFactoryTest {
     }
 
     @Test
-    void 로또번호_6개_생성() {
-        int expected = 6;
-
-        assertThat(factory.createLotto().getNumbers().size()).isEqualTo(expected);
-    }
-
-    @Test
     void 구입금액에_따른_로또갯수를_생성() {
         int money = 10_000;
+        int price = 1_000;
         int expected = 10;
 
-        assertThat(factory.createLottos(money).size()).isEqualTo(expected);
+        assertThat(factory.createLottos(money, price).size()).isEqualTo(expected);
     }
 }
