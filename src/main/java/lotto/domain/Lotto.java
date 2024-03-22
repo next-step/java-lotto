@@ -46,9 +46,17 @@ public class Lotto {
         int count = (int) lottoNumbers.stream()
                 .filter(lottoNumber -> winNumber.contains(lottoNumber))
                 .count();
+        validateBonusNumber(winNumber, bonusNumber);
         boolean isBonusNumber = isBonusNumberExist(bonusNumber);
         return AmountEnum.from(count, isBonusNumber);
     }
+
+    private void validateBonusNumber(Lotto winNumber, LottoNumber bonusNumber) {
+        if (winNumber.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호와 당첨 번호가 중복됩니다.");
+        }
+    }
+
 
     public String getNumbersToString() {
         List<Integer> arrayList = new ArrayList<>();

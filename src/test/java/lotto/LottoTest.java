@@ -118,4 +118,21 @@ public class LottoTest {
         //then
         assertThat(amountEnum).isEqualTo(AmountEnum.SECOND);
     }
+
+    @DisplayName("로또의 숫자가 5개가 일치하고 보너스 번호가 일치하면 2등이다.")
+    @Test
+    public void winnerNumbersIncludeBonusNumber() {
+        //given
+        Lotto winNumber = new Lotto("1,2,3,4,10,6");
+
+        Lotto currentNumber = new Lotto("1,2,3,4,10,7");
+
+        int bonusNumber = 4;
+
+        //when&then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    currentNumber.getAmountEnumCompareWinNumber(winNumber, new LottoNumber(bonusNumber));
+                }).withMessageMatching("보너스 번호와 당첨 번호가 중복됩니다.");
+    }
 }
