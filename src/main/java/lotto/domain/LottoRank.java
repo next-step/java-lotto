@@ -20,7 +20,7 @@ public enum LottoRank {
         return Arrays.stream(LottoRank.values())
                 .filter(v -> v.lottoCount == lottoCount)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("존재 할 수 없는 값입니다."));
+                .orElse(null);
     }
 
     public int getLottoCount() {
@@ -30,5 +30,5 @@ public enum LottoRank {
     public int getWinningMoney() {
         return winningMoney;
     }
-	
+
 }
