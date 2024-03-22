@@ -19,10 +19,10 @@ public class LottoGame {
         LottoNumbers lottoNumbers = LottoMachine.createLottoNumbers(countOfLotto, new ShuffledNumberDrawer());
         outputView.printLottoNumbers(lottoNumbers);
 
-        LottoNumber winningNumber = inputView.winnnigNumbersInput(INPUT_WINNING_NUMBER_MESSAGE);
-        MyNumber myNumber = inputView.getBonusNumber(INPUT_BONUS_NUMBER_MESSAGE, winningNumber);
+        LottoNumber inputWinningNumber = inputView.winnnigNumbersInput(INPUT_WINNING_NUMBER_MESSAGE);
+        MyNumber bonusNumber = inputView.getBonusNumber(INPUT_BONUS_NUMBER_MESSAGE, inputWinningNumber);
 
-        LottoResult lottoResult = lottoNumbers.computeLottoResult(winningNumber, myNumber);
+        LottoResult lottoResult = lottoNumbers.computeLottoResult(new WinningNumber(inputWinningNumber, bonusNumber));
         outputView.printResult(lottoResult);
     }
 }

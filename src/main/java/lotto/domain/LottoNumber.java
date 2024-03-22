@@ -22,7 +22,7 @@ public class LottoNumber {
 
         List<MyNumber> myNumbers = new ArrayList<>();
         for (int number : numbers) {
-            myNumbers.add(MyNumber.from(number));
+            myNumbers.add(MyNumber.valueOf(number));
         }
 
         return new LottoNumber(myNumbers);
@@ -46,8 +46,8 @@ public class LottoNumber {
         return numbers.size();
     }
 
-    public int containsCount(LottoNumber winningNumber) {
-        return (int) winningNumber.numbers.stream()
+    public int containsCount(LottoNumber lottoNumber) {
+        return (int) lottoNumber.numbers.stream()
                 .filter(numbers::contains)
                 .count();
     }

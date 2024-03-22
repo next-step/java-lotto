@@ -63,7 +63,7 @@ public class LottoNumberTest {
         );
     }
 
-    private static LottoNumber createLottoNumber(int... numbers) {
+    public static LottoNumber createLottoNumber(int... numbers) {
         List<Integer> numberList = Arrays.stream(numbers)
                 .boxed()
                 .collect(Collectors.toList());

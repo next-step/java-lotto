@@ -18,7 +18,7 @@ public class MyNumber {
         this.value = value;
     }
 
-    public static MyNumber from(int value) {
+    public static MyNumber valueOf(int value) {
         return new MyNumber(value);
     }
 

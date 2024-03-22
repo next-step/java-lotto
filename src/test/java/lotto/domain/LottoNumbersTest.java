@@ -4,10 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
+import static lotto.domain.LottoNumberTest.createLottoNumber;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoNumbersTest {
@@ -35,11 +34,11 @@ public class LottoNumbersTest {
         lottoNumberList.add(createLottoNumber(1, 2, 3, 4, 44, 11));
         lottoNumberList.add(createLottoNumber(1, 2, 3, 4, 5, 11));
 
-        LottoNumber winningNumber = LottoNumber.from(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber winningNumber = createLottoNumber(1, 2, 3, 4, 5, 6);
 
         LottoNumbers lottoNumbers = LottoNumbers.from(lottoNumberList);
 
-        LottoResult lottoResult = lottoNumbers.computeLottoResult(winningNumber, MyNumber.bonusNumberFrom(30, winningNumber));
+        LottoResult lottoResult = lottoNumbers.computeLottoResult(new WinningNumber(winningNumber, MyNumber.bonusNumberFrom(30, winningNumber)));
         assertThat(lottoResult.getCorrectCountsByLottoRank(LottoRank.FIFTH)).isEqualTo(2);
     }
 
@@ -53,12 +52,5 @@ public class LottoNumbersTest {
         LottoNumbers lottoNumbers = LottoNumbers.from(lottoNumberList);
         assertThat(lottoNumbers.getLottoNumbersToString()).containsExactly("[1, 2, 3, 11, 22, 33]", "[1, 2, 3, 21, 42, 45]");
         assertThat(lottoNumbers.getLottoNumbersToString()).doesNotContain("[1, 2, 3, 4, 5, 6]");
-    }
-
-    private LottoNumber createLottoNumber(int... numbers) {
-        List<Integer> numberList = Arrays.stream(numbers)
-                .boxed()
-                .collect(Collectors.toList());
-        return LottoNumber.from(numberList);
     }
 }
