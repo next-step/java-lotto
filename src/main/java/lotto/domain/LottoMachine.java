@@ -11,13 +11,14 @@ public class LottoMachine {
 
     public LottoMachine(int number) {
         this.number = number;
-        this.lottoTickets = generateLottoTickets();
+        this.lottoTickets = new ArrayList<>();
     }
 
     public List<LottoTicket> generateLottoTickets() {
         for (int i = 0; i < number; i++) {
             lottoTickets.add(new LottoTicket());
-            lottoTickets.get(i).generate();
+            List<Integer> generatedNumbers = lottoTickets.get(i).generate();
+            lottoTickets.set(i, new LottoTicket(generatedNumbers));
         }
         return Collections.unmodifiableList(lottoTickets);
     }

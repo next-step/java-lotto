@@ -16,15 +16,10 @@ public class LottoTicketTest {
 
     @DisplayName("로또 번호 생성기가 로또를 생성하면 6개의 숫자는 내가 지정한 숫자가 나온다")
     @ParameterizedTest
-    @CsvSource(value = {"0:0", "1:1","2:2","3:3","4:4","5:5"}, delimiter = ':')
+    @CsvSource(value = {"0:0","1:1","2:2","3:3","4:4","5:5"}, delimiter = ':')
     void specified_number(int input, int expected) {
         List<Integer> specifiedNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        LottoTicket lottoTicket = new LottoTicket() {
-            @Override
-            protected List<Integer> randomNumbers() {
-                return specifiedNumbers;
-            }
-        };
+        LottoTicket lottoTicket = new LottoTicket(() -> specifiedNumbers);
 
         List<Integer> numbers = lottoTicket.generate();
 
@@ -49,6 +44,7 @@ public class LottoTicketTest {
 
         List<Integer> numbers = lottoTicket.generate();
 
+        System.out.println("numbers = " + numbers);
         assertThat(numbers.size()).isEqualTo(6);
     }
 
