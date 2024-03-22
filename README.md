@@ -40,3 +40,4 @@
 - [X] OutputView.printResult() 의 반복 print 리팩터링
 - [X] 예외가 발생하지 않는 생성자 테스트를 assertThatNoException으로 리팩터링
 - [X] LottoNumbersTest의 List.of()를 가변인자로 리팩터링
+- [ ] LottoNumber + bonusNumber 를 묶어서 WinningNumber
