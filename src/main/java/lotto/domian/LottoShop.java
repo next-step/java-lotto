@@ -21,9 +21,6 @@ public class LottoShop {
     }
 
     private int getPurchasableTicketCount(int money) {
-        if(money < 1000) {
-            throw new IllegalArgumentException(NOT_ENOUGH_MONEY.getErrorMessage());
-        }
         return money/LOTTO_TICKET_PRICE;
     }
 

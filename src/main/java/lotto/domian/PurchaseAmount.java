@@ -2,10 +2,15 @@ package lotto.domian;
 
 import java.util.Objects;
 
+import static lotto.common.MessageSet.NOT_ENOUGH_MONEY;
+
 public class PurchaseAmount {
     private final int purchaseAmount;
 
     private PurchaseAmount(int purchaseAmount) {
+        if(purchaseAmount < 1000) {
+            throw new IllegalArgumentException(NOT_ENOUGH_MONEY.getErrorMessage());
+        }
         this.purchaseAmount = purchaseAmount;
     }
 
