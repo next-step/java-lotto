@@ -13,8 +13,12 @@ public enum Rule {
         this.value = value;
     }
 
+    public static boolean isNotPaymentSufficientForLotto(int payment) {
+        return payment < LOTTO_PRICE.value;
+    }
+
     public static boolean isNotInRange(int number) {
-        return !(number >= MIN_NUMBER.getValue() && number <= MAX_NUMBER.getValue());
+        return !(number >= MIN_NUMBER.value && number <= MAX_NUMBER.value);
     }
 
     public int getValue() {

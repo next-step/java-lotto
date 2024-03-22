@@ -7,6 +7,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RuleTest {
 
     @Test
+    void is_payment_sufficient() {
+        assertThat(Rule.isNotPaymentSufficientForLotto(0)).isTrue();
+    }
+
+    @Test
     void is_not_range() {
         assertThat(Rule.isNotInRange(0)).isTrue();
     }
