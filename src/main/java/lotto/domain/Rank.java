@@ -33,10 +33,14 @@ public enum Rank {
 
     public static Rank lookup(int matchCount) {
         Rank rank = rankMap.get(matchCount);
-        if (rank == null) {
-            return MISS;
+        if (hasRank(rank)) {
+            return rank;
         }
-        return rank;
+        return MISS;
+    }
+
+    private static boolean hasRank(Rank rank) {
+        return rank != null;
     }
 
     public int getPrize() {

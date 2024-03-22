@@ -26,16 +26,16 @@ public class LottoStatistics {
         this.statisticsMap.put(rank, this.statisticsMap.getOrDefault(rank, 0) + 1);
     }
 
-    public Integer getRankCount(Rank rank) {
-        Integer rankCount = this.statisticsMap.get(rank);
-        if (hasRank(rankCount)) {
+    public int getRankCount(Rank rank) {
+        int rankCount = this.statisticsMap.get(rank);
+        if (hasRankCount(rankCount)) {
             return rankCount;
         }
         return NONE_RANK;
     }
 
-    private boolean hasRank(Integer rankCount) {
-        return rankCount != null;
+    private boolean hasRankCount(int rankCount) {
+        return rankCount != 0;
     }
 
     public double calculateProfitRate(int purchaseAmount) {
