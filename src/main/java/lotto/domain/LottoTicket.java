@@ -1,10 +1,14 @@
 package lotto.domain;
 
-import lotto.exception.AlreadyExistLottoNumberException;
 import lotto.exception.IllegalLottoNumbersSizeException;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static lotto.domain.LottoNumber.NUMBER_RANGE_FROM;
+import static lotto.domain.LottoNumber.NUMBER_RANGE_TO;
 
 public class LottoTicket {
 
@@ -16,12 +20,7 @@ public class LottoTicket {
     private final List<LottoNumber> numbers;
 
     public LottoTicket() {
-        this(AllLottoNumber.shuffle()
-                .stream()
-                .map(LottoNumber::get)
-                .collect(Collectors.toList())
-                .subList(NUMBER_INDEX_FROM, NUMBER_INDEX_TO)
-        );
+        this(autoNumbers());
     }
 
     public LottoTicket(List<Integer> numbers) {
@@ -29,6 +28,14 @@ public class LottoTicket {
         this.numbers = numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
+    }
+
+    private static List<Integer> autoNumbers() {
+        List<Integer> numbers = IntStream.rangeClosed(NUMBER_RANGE_FROM, NUMBER_RANGE_TO)
+                .boxed()
+                .collect(Collectors.toList());
+        Collections.shuffle(numbers);
+        return numbers.subList(NUMBER_INDEX_FROM, NUMBER_INDEX_TO);
     }
 
     private void validateNumbersSize(List<Integer> numbers) throws IllegalLottoNumbersSizeException {

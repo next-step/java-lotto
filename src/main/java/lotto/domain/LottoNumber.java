@@ -2,27 +2,18 @@ package lotto.domain;
 
 import lotto.exception.IllegalLottoNumberException;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoNumber {
 
-    private static final int NUMBER_RANGE_FROM = 1;
-    private static final int NUMBER_RANGE_TO = 45;
+    public static final int NUMBER_RANGE_FROM = 1;
+    public static final int NUMBER_RANGE_TO = 45;
 
     private final int number;
 
     public LottoNumber(int number) {
         validateNumberRange(number);
         this.number = number;
-    }
-
-    public static List<LottoNumber> getLottoNumbers() {
-        return IntStream.rangeClosed(NUMBER_RANGE_FROM, NUMBER_RANGE_TO)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
     }
 
     private void validateNumberRange(int number) throws IllegalLottoNumberException {
