@@ -22,7 +22,7 @@ public enum Operator {
         return Arrays.stream(values())
                 .filter(type -> type.sign.equals(sign))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(""));
+                .orElseThrow(() -> new IllegalArgumentException("문자열 계산기에 유효하지 않은 기호입니다."));
     }
 
     public int operate(Number a, Number b) {

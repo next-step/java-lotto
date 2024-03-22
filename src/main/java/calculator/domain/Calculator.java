@@ -15,7 +15,7 @@ public class Calculator {
 
     private static int operate(String[] letters, int preResult, int operatorIdx) {
         final Operator operator = Operator.findByName(letters[operatorIdx]);
-        return operator.operate(new Number(preResult), new Number(Integer.parseInt(letters[operatorIdx + 1])));
+        return operator.operate(Number.valueOf(preResult), Number.valueOf(letters[operatorIdx + 1]));
     }
 
     private static void assertArgumentsLengthIsOdd(String[] targets) {
