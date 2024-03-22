@@ -43,21 +43,21 @@ public class ResultView {
     }
 
     public static void printLottoStatistics(LottoStatistics statisticsMap, int purchaseAmount) {
-        String message = formatLottoPrizes(statisticsMap) + formatProfitRate(statisticsMap, purchaseAmount);
+        String message = formatRanks(statisticsMap) + formatProfitRate(statisticsMap, purchaseAmount);
         System.out.println(message);
     }
 
-    private static String formatLottoPrizes(LottoStatistics statisticsMap) {
-        List<LottoPrize> prizes = LottoPrize.getLottoPrizes();
+    private static String formatRanks(LottoStatistics statisticsMap) {
+        List<Rank> prizes = Rank.getRanks();
 
         StringBuilder stringBuilder = new StringBuilder();
-        for (LottoPrize prize : prizes) {
+        for (Rank prize : prizes) {
             stringBuilder.append(formatStatistic(statisticsMap, prize)).append(System.lineSeparator());
         }
         return stringBuilder.toString();
     }
 
-    private static String formatStatistic(LottoStatistics statisticsMap, LottoPrize prize) {
+    private static String formatStatistic(LottoStatistics statisticsMap, Rank prize) {
         return MessageFormat.format("{0}개 일치 ({1}원) - {2}개"
                 , prize.getMatchCount(), prize.getPrize(), statisticsMap.getMatchCount(prize));
     }

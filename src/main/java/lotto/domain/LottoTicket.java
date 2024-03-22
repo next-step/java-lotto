@@ -40,9 +40,9 @@ public class LottoTicket {
         return numbers.size() != SIZE;
     }
 
-    public LottoPrize getPrize(LottoTicket winLottoTicket) {
+    public Rank getPrize(LottoTicket winLottoTicket) {
         int matchCount = count(winLottoTicket.numbers);
-        return LottoPrize.lookup(matchCount);
+        return Rank.lookup(matchCount);
     }
 
     private int count(List<LottoNumber> numbers) {
