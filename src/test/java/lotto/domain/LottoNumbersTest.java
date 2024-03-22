@@ -12,7 +12,7 @@ public class LottoNumbersTest {
 
     @Test
     void count_match() {
-        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers lottoNumbers = LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         List<Integer> winngingNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
@@ -21,7 +21,7 @@ public class LottoNumbersTest {
 
     @Test
     void lotto_numbers_exception() {
-        assertThatThrownBy(() -> new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
+        assertThatThrownBy(() -> LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 6개여야 합니다.");
     }

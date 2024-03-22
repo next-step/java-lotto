@@ -1,17 +1,19 @@
 package lotto.domain;
 
 import java.util.List;
-
-import static lotto.domain.Rule.NUMBERS_OF_BALLS;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != NUMBERS_OF_BALLS.getValue()) {
-            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
-        }
+    public static LottoNumbers of(List<Integer> lottoNumbers) {
+        return new LottoNumbers(lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+    }
+
+    private LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -21,7 +23,7 @@ public class LottoNumbers {
                 .count());
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return this.lottoNumbers;
     }
 

@@ -13,11 +13,11 @@ public class LottoTicket {
     }
 
     public LottoTicket(List<Integer> lottoNumbers) {
-        this(new LottoNumbers(lottoNumbers), new RandomNumberGenerator());
+        this(LottoNumbers.of(lottoNumbers), new RandomNumberGenerator());
     }
 
     public LottoTicket(NumberGenerateStrategy numberGenerator) {
-        this(new LottoNumbers(numberGenerator.generate()), numberGenerator);
+        this(LottoNumbers.of(numberGenerator.generate()), numberGenerator);
     }
 
     public LottoTicket(LottoNumbers lottoNumbers, NumberGenerateStrategy numberGenerator) {
@@ -33,7 +33,7 @@ public class LottoTicket {
         return this.lottoNumbers.countMatchingWith(winningNumbers);
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return this.lottoNumbers.getLottoNumbers();
     }
 
