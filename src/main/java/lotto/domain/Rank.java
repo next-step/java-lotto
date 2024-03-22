@@ -20,27 +20,38 @@ public enum Rank {
         this.prize = prize;
     }
 
-    private static final Map<Integer, Rank> rankMap = new HashMap<>();
-    static {
-        for (Rank rank : Rank.values()) {
-            rankMap.put(rank.matchCount, rank);
-        }
-    }
-
     public static List<Rank> getRanks() {
         return List.of(Rank.values());
     }
 
-    public static Rank lookup(int matchCount) {
-        Rank rank = rankMap.get(matchCount);
-        if (hasRank(rank)) {
-            return rank;
+    public static Rank valueOf(int matchCount, boolean matchBonus) {
+        if (isSecondOrThird(matchCount)) {
+            return getSecondOrThird(matchBonus);
         }
-        return MISS;
+        
+        Optional<Rank> optionalRank = findRankByMatchCount(matchCount);
+        if (optionalRank.isEmpty()) {
+            return MISS;
+        }
+        
+        return optionalRank.get();
     }
 
-    private static boolean hasRank(Rank rank) {
-        return rank != null;
+    private static Optional<Rank> findRankByMatchCount(int matchCount) {
+        return getRanks().stream()
+                .filter((rank) -> rank.matchCount == matchCount)
+                .findFirst();
+    }
+
+    private static boolean isSecondOrThird(int matchCount) {
+        return matchCount == 5;
+    }
+
+    private static Rank getSecondOrThird(boolean matchBonus) {
+        if (matchBonus) {
+            return SECOND;
+        }
+        return THIRD;
     }
 
     public int getPrize() {
