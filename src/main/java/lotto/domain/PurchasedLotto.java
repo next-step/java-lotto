@@ -10,7 +10,7 @@ import static lotto.util.ConstUtils.*;
 
 public class PurchasedLotto {
 
-    private final List<LottoNumbers> lottoBundle;
+    private final List<Lotto> lottoBundle;
 
     public PurchasedLotto(int purchasedMoney) {
         this.lottoBundle = new ArrayList<>();
@@ -18,11 +18,11 @@ public class PurchasedLotto {
         int purchaseCount = calculatePurchasedCount(purchasedMoney);
 
         for (int i = 0; i < purchaseCount; i++) {
-            this.lottoBundle.add(new LottoNumbers());
+            this.lottoBundle.add(new Lotto());
         }
     }
 
-    public PurchasedLotto(int purchasedMoney, List<LottoNumbers> manualLottoNumbers) {
+    public PurchasedLotto(int purchasedMoney, List<Lotto> manualLottoNumbers) {
         int purchasedCount = calculatePurchasedCount(purchasedMoney);
 
         validatePurchasedAndManualCount(purchasedCount, manualLottoNumbers);
@@ -38,14 +38,14 @@ public class PurchasedLotto {
         return this.lottoBundle.size();
     }
 
-    public List<LottoNumbers> getPurchasedLottoList() {
+    public List<Lotto> getPurchasedLottoList() {
         return List.copyOf(lottoBundle);
     }
 
-    public LottoResultDto matchWinningNumbers(LottoNumbers winningLottoNumbers, LottoBall bonusNumber) {
+    public LottoResultDto matchWinningNumbers(Lotto winningLottoNumbers, LottoBall bonusNumber) {
         Map<LottoWinInfo, Integer> lottoResultMap = initializeLottoResultMap();
 
-        for (LottoNumbers lotto : this.lottoBundle) {
+        for (Lotto lotto : this.lottoBundle) {
             LottoNumbersWithBonusWrapper lottoNumbersWithBonusWrapper = new LottoNumbersWithBonusWrapper(lotto, bonusNumber);
 
             lottoResultMap.computeIfPresent(
@@ -61,7 +61,7 @@ public class PurchasedLotto {
         return purchasedMoney / LOTTO_WON_UNIT;
     }
 
-    private void validatePurchasedAndManualCount(int purchasedCount, List<LottoNumbers> manualLottoNumbers) {
+    private void validatePurchasedAndManualCount(int purchasedCount, List<Lotto> manualLottoNumbers) {
         if (purchasedCount != manualLottoNumbers.size()) {
             throw new IllegalArgumentException("구매 개수와 수동 개수가 일치하지 않습니다.");
         }

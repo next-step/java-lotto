@@ -15,8 +15,8 @@ class LottoNumbersWithBonusWrapperTest {
     @Test
     void enumWinFirstWithBonusWhenMatchedFiveWithBonusNumber() {
         // given
-        LottoNumbers mySelect = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumbers winningNumber = new LottoNumbers(List.of(1, 2, 3, 4, 5, 7));
+        Lotto mySelect = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningNumber = new Lotto(List.of(1, 2, 3, 4, 5, 7));
         LottoBall bonusNumber = LottoBall.selectLottoBall(6);
 
         // when
@@ -36,8 +36,8 @@ class LottoNumbersWithBonusWrapperTest {
     @Test
     void enumWinSecondWhenMatchedFiveWithoutBonusNumber() {
         // given
-        LottoNumbers mySelect = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumbers winningNumber = new LottoNumbers(List.of(1, 2, 3, 4, 5, 7));
+        Lotto mySelect = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningNumber = new Lotto(List.of(1, 2, 3, 4, 5, 7));
         LottoBall bonusNumber = LottoBall.selectLottoBall(10);
 
         // when

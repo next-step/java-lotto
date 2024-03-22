@@ -31,17 +31,17 @@ class PurchasedLottoTest {
     void matchWinningLottoNumbers() {
         // given
         int purchasedPrice = 5000;
-        List<LottoNumbers> manualLottoNumbers = List.of(
-                new LottoNumbers(List.of(1, 2, 3, 10, 11, 12)),
-                new LottoNumbers(List.of(1, 2, 3, 10, 11, 12)),
-                new LottoNumbers(List.of(1, 2, 3, 4, 11, 12)),
-                new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)),
-                new LottoNumbers(List.of(1, 2, 3, 4, 5, 35))
+        List<Lotto> manualLottoNumbers = List.of(
+                new Lotto(List.of(1, 2, 3, 10, 11, 12)),
+                new Lotto(List.of(1, 2, 3, 10, 11, 12)),
+                new Lotto(List.of(1, 2, 3, 4, 11, 12)),
+                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+                new Lotto(List.of(1, 2, 3, 4, 5, 35))
 
         );
         PurchasedLotto purchasedLotto = new PurchasedLotto(purchasedPrice, manualLottoNumbers);
 
-        LottoNumbers winningNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         LottoBall bonusNumber = LottoBall.selectLottoBall(35);
 
         // when
