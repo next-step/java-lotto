@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
 
+    private static final int SIZE = 6;
+
     private final List<LottoNumber> numbers;
 
     public LottoTicket() {
@@ -28,7 +30,7 @@ public class LottoTicket {
     }
 
     private boolean notMatchSize(List<Integer> numbers) {
-        return numbers.size() != LottoInformation.SIZE;
+        return numbers.size() != SIZE;
     }
 
     public LottoPrize getPrize(LottoTicket winLottoTicket) {
