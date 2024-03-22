@@ -20,10 +20,10 @@ public enum Rank {
         this.prize = prize;
     }
 
-    private static final Map<Integer, Rank> prizeMap = new HashMap<>();
+    private static final Map<Integer, Rank> rankMap = new HashMap<>();
     static {
-        for (Rank prize : Rank.values()) {
-            prizeMap.put(prize.matchCount, prize);
+        for (Rank rank : Rank.values()) {
+            rankMap.put(rank.matchCount, rank);
         }
     }
 
@@ -32,7 +32,11 @@ public enum Rank {
     }
 
     public static Rank lookup(int matchCount) {
-        return prizeMap.get(matchCount);
+        Rank rank = rankMap.get(matchCount);
+        if (rank == null) {
+            return MISS;
+        }
+        return rank;
     }
 
     public int getPrize() {

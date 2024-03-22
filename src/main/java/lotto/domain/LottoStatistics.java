@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class LottoStatistics {
 
-    private static final int NONE_MATCH = 0;
+    private static final int NONE_RANK = 0;
 
     // [Key] Rank, [Value] Matched Count (Statistics)
     private final Map<Rank, Integer> statisticsMap;
@@ -17,41 +17,36 @@ public class LottoStatistics {
 
     private void createStatistics(LottoTickets tickets, LottoTicket winLottoTicket) {
         for (LottoTicket lottoTicket : tickets.get()) {
-            Rank rank = lottoTicket.getPrize(winLottoTicket);
+            Rank rank = lottoTicket.getRank(winLottoTicket);
             addStatistic(rank);
         }
     }
 
-    private void addStatistic(Rank prize) {
-        if (hasPrize(prize)) {
-            this.statisticsMap.put(prize, this.statisticsMap.getOrDefault(prize, 0) + 1);
+    private void addStatistic(Rank rank) {
+        this.statisticsMap.put(rank, this.statisticsMap.getOrDefault(rank, 0) + 1);
+    }
+
+    public Integer getRankCount(Rank rank) {
+        Integer rankCount = this.statisticsMap.get(rank);
+        if (hasRank(rankCount)) {
+            return rankCount;
         }
+        return NONE_RANK;
     }
 
-    private boolean hasPrize(Rank prize) {
-        return prize != null;
-    }
-
-    public int getMatchCount(Rank prize) {
-        if (hasPrizeStatistics(prize)) {
-            return this.statisticsMap.get(prize);
-        }
-        return NONE_MATCH;
-    }
-
-    private boolean hasPrizeStatistics(Rank prize) {
-        return this.statisticsMap.containsKey(prize);
+    private boolean hasRank(Integer rankCount) {
+        return rankCount != null;
     }
 
     public double calculateProfitRate(int purchaseAmount) {
         double profit = 0;
-        for (Rank prize : statisticsMap.keySet()) {
-            profit += getTotalAmount(prize);
+        for (Rank rank : statisticsMap.keySet()) {
+            profit += getTotalAmount(rank);
         }
         return profit / purchaseAmount;
     }
 
-    private double getTotalAmount(Rank prize) {
-        return statisticsMap.get(prize) * prize.getPrize();
+    private double getTotalAmount(Rank rank) {
+        return statisticsMap.get(rank) * rank.getPrize();
     }
 }

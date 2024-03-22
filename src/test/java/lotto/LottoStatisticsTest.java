@@ -32,7 +32,7 @@ public class LottoStatisticsTest {
         LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, winLottoTicket);
 
         // Then
-        assertThat(lottoStatistics.getMatchCount(Rank.lookup(matchCount))).isEqualTo(count);
+        assertThat(lottoStatistics.getRankCount(Rank.lookup(matchCount))).isEqualTo(count);
     }
 
     @ParameterizedTest(name = "[{index}] {0}개 일치 - {1}개")
@@ -54,9 +54,10 @@ public class LottoStatisticsTest {
         LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, winLottoTicket);
 
         // Then
-        assertThat(lottoStatistics.getMatchCount(Rank.lookup(matchCount))).isEqualTo(count);
+        assertThat(lottoStatistics.getRankCount(Rank.lookup(matchCount))).isEqualTo(count);
     }
 
-
+//    @Test
+//    @DisplayName("[성공] 랭크에 없는 당첨 번호 개수를 가진 로")
 
 }

@@ -48,18 +48,18 @@ public class ResultView {
     }
 
     private static String formatRanks(LottoStatistics statisticsMap) {
-        List<Rank> prizes = Rank.getRanks();
+        List<Rank> ranks = Rank.getRanks();
 
         StringBuilder stringBuilder = new StringBuilder();
-        for (Rank prize : prizes) {
-            stringBuilder.append(formatStatistic(statisticsMap, prize)).append(System.lineSeparator());
+        for (Rank rank : ranks) {
+            stringBuilder.append(formatStatistic(statisticsMap, rank)).append(System.lineSeparator());
         }
         return stringBuilder.toString();
     }
 
-    private static String formatStatistic(LottoStatistics statisticsMap, Rank prize) {
+    private static String formatStatistic(LottoStatistics statisticsMap, Rank rank) {
         return MessageFormat.format("{0}개 일치 ({1}원) - {2}개"
-                , prize.getMatchCount(), prize.getPrize(), statisticsMap.getMatchCount(prize));
+                , rank.getMatchCount(), rank.getPrize(), statisticsMap.getRankCount(rank));
     }
 
     public static String formatProfitRate(LottoStatistics statisticsMap, int purchaseAmount) {
