@@ -5,17 +5,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WinnersCountManager {
-    private final Map<Integer, Integer> winnersCountMap = new HashMap<>();
+    private final Map<PrizeLevel, Integer> winnersCountMap = new HashMap<>();
 
-    public void recordWinnerCount(int count) {
-        winnersCountMap.put(count, winnersCountMap.getOrDefault(count, 0) + 1);
+    public void recordWinnerCount(PrizeLevel level) {
+        winnersCountMap.put(level, winnersCountMap.getOrDefault(level, 0) + 1);
     }
 
-    public int getWinnerCount(int count) {
-        return winnersCountMap.getOrDefault(count, 0);
+    public int getWinnerCount(PrizeLevel level) {
+        return winnersCountMap.getOrDefault(level, 0);
     }
 
-    public Map<Integer, Integer> getWinnersCountMap() {
+    public Map<PrizeLevel, Integer> getWinnersCountMap() {
         return Collections.unmodifiableMap(winnersCountMap);
     }
 }

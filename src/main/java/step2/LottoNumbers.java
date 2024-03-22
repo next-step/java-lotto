@@ -3,10 +3,11 @@ package step2;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    private final List<Integer> numbers = new ArrayList<>();
+    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public LottoNumbers(String input) {
         validNull(input);
@@ -14,9 +15,15 @@ public class LottoNumbers {
         validNumberCount();
     }
 
-    public LottoNumbers(List<Integer> numbersInput) {
-        numbers.addAll(numbersInput);
-        validNumberCount();
+    public LottoNumbers(List<LottoNumber> nums) {
+        lottoNumbers.addAll(nums);
+    }
+
+    public static LottoNumbers fromIntegerList(List<Integer> numbersInput) {
+        List<LottoNumber> nums = numbersInput.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        return new LottoNumbers(nums);
     }
 
     private void validNull(String nums) {
@@ -33,25 +40,34 @@ public class LottoNumbers {
     }
 
     private void insertNumbers(String number) {
-        isNumeric(number);
-        numbers.add(Integer.parseInt(number));
-    }
-
-    private void isNumeric(String money) {
-        try {
-            Integer.parseInt(money);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자를 입력해주세요");
-        }
+        lottoNumbers.add(new LottoNumber(number));
     }
 
     private void validNumberCount() {
-        if (numbers.size() != 6) {
+        if (lottoNumbers.size() != 6) {
             throw new IllegalArgumentException("로또 형식과 맞는 숫자 개수를 입력하세요.");
         }
     }
 
-    public List<Integer> getLottoNumbers() {
-        return Collections.unmodifiableList(numbers);
+    public List<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public int matchedNumbersCount(LottoNumbers winNumbers) {
+        return (int) lottoNumbers.stream()
+                .filter(lottoNumber -> winNumbers.matchedNumber(lottoNumber.getNumber()))
+                .count();
+    }
+
+    public boolean matchedNumber(int number) {
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.matchedNumber(number));
+    }
+
+    public String getLottoNumbersAsString() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .map(String::valueOf)
+                .collect(Collectors.joining(", "));
     }
 }
