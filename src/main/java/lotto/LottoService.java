@@ -29,7 +29,7 @@ public class LottoService {
         HashMap<LottoRank, Integer> lottoRanks = lottos.getWinningStatistics(new WinningLottoNumbers(winningLottoNumber));
 
         ResultView.printWinningStatistics(lottoRanks);
-        ResultView.printRateOfReturn(lottoMoney, getWinningMoney(lottoRanks));
+        ResultView.printRateOfReturn(LottoCalculator.getRateOfReturn(lottoMoney, getWinningMoney(lottoRanks)));
     }
 
     private static long getWinningMoney(HashMap<LottoRank, Integer> lottoRanks) {
