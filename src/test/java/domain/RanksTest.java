@@ -12,26 +12,20 @@ public class RanksTest {
     @DisplayName("랭킹별 갯수를 구한다.")
     @Test
     void test01() {
-        // given
         Ranks ranks = new Ranks(List.of(Rank.FIRST, Rank.FIFTH));
 
-        // when
         int result = ranks.count(Rank.FIRST);
 
-        // then
         assertThat(result).isEqualTo(1);
     }
 
     @DisplayName("전체 당첨금을 구한다.")
     @Test
     void test02() {
-        // given
         Ranks ranks = new Ranks(List.of(Rank.FOURTH, Rank.FIFTH));
 
-        // when
         int result = ranks.totalPrizeMoney();
 
-        // then
         assertThat(result).isEqualTo(55000);
     }
 
