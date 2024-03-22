@@ -13,6 +13,10 @@ public enum Rule {
         this.value = value;
     }
 
+    public static boolean isNotInRange(int number) {
+        return !(number >= MIN_NUMBER.getValue() && number <= MAX_NUMBER.getValue());
+    }
+
     public int getValue() {
         return value;
     }

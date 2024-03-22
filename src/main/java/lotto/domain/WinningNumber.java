@@ -5,7 +5,7 @@ public class WinningNumber {
     private final int number;
 
     public WinningNumber(int number) {
-        if (number < Rule.MIN_NUMBER.getValue() || number > Rule.MAX_NUMBER.getValue()) {
+        if (Rule.isNotInRange(number)) {
             throw new IllegalArgumentException("당첨 번호는 1부터 45 사이의 숫자만 가능합니다.");
         }
         this.number = number;

@@ -7,8 +7,6 @@ import lotto.view.ResultView;
 
 import java.util.List;
 
-import static lotto.domain.Rule.LOTTO_PRICE;
-
 public class LottoController {
 
     private final InputView inputView;
