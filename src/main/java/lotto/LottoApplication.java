@@ -12,8 +12,6 @@ public class LottoApplication {
     private static Calculator calculator;
     private static LottoTickets lottoTickets;
 
-
-
     public static void main(String[] args) {
         int amount = InputView.requestPurchaseAmount();
         int ticketCount = LottoMachine.getTicketsCount(amount);
@@ -26,5 +24,4 @@ public class LottoApplication {
 
         lottoTickets.showResult(winningNumber);
     }
-
 }
