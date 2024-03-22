@@ -25,8 +25,11 @@
 * 지난 주 당첨 번호를 입력하라 -> InputView
 * 당첨 통계를 출력하라 -> ResultView
 
-* 로또 구매 수를 계산하라(구입 금액) -> Purchase
-* 로또 리스트를 생성하라(구매 수) -> Lotto
+* 로또 구매 수를 계산하라(구입 금액) -> LottoShop
+* 로또 번호 객체 -> LottoNumber
+* 로또 번호 세팅 -> LottoNumbers
+* 로또 리스트 생성 -> Lotto
+* 로또 리스트들 관리 -> Lottos
 * 당첨 번호 리스트를 생성하라 -> WinNumber
-* 당첨 번호와 로또 리스트들을 비교해서 일치 수를 알아내라 -> Statistics
-* 수익률을 계산하라(구입 금액) -> Statistics
+* 당첨 번호와 로또 리스트들을 비교해서 일치 수를 알아내라 -> LottoMatch
+* 수익률을 계산하라(구입 금액) -> Revenue
