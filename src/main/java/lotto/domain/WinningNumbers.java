@@ -13,14 +13,14 @@ public class WinningNumbers { // 당첨 번호들을 담당하는 객체
 
     public static WinningNumbers of(List<Integer> winningNumbers) {
         return new WinningNumbers(winningNumbers.stream()
-                        .map(WinningNumber::new)
-                        .collect(Collectors.toUnmodifiableList()));
+                .map(WinningNumber::new)
+                .collect(Collectors.toUnmodifiableList()));
     }
 
     public int countMatchingWith(List<Integer> lottoNumbers) {
         return Math.toIntExact(lottoNumbers.stream()
-                        .map(WinningNumber::new)
-                        .filter(winningNumbers::contains)
-                        .count());
+                .map(WinningNumber::new)
+                .filter(winningNumbers::contains)
+                .count());
     }
 }
