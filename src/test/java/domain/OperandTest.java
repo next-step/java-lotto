@@ -24,7 +24,7 @@ class OperandTest {
     @ParameterizedTest
     @ValueSource(strings = {"", " ", "\n", "     ", "a", "%", "1ab"})
     @DisplayName("피연산자가 정수형이 아닌 경우 예외를 던진다.")
-    void Operand_NotIntegerNumber(final String notIntegerNumber) {
+    void Operand_NotIntegerNumber_Exception(final String notIntegerNumber) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Operand.from(notIntegerNumber))
                 .withMessage(OPERAND_SHOULD_BE_INTEGER_FORMAT.message(notIntegerNumber));
