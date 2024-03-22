@@ -25,18 +25,13 @@ public enum Rank {
             return getSecondOrThird(matchBonus);
         }
         
-        Optional<Rank> optionalRank = findRankByMatchCount(matchCount);
-        if (optionalRank.isEmpty()) {
-            return MISS;
-        }
-        
-        return optionalRank.get();
+        return findRankByMatchCount(matchCount);
     }
 
-    private static Optional<Rank> findRankByMatchCount(int matchCount) {
+    private static Rank findRankByMatchCount(int matchCount) {
         return Arrays.stream(Rank.values())
                 .filter((rank) -> rank.matchCount == matchCount)
-                .findFirst();
+                .findFirst().orElse(MISS);
     }
 
     private static boolean isSecondOrThird(int matchCount) {
