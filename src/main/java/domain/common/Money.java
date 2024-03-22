@@ -3,7 +3,7 @@ package domain.common;
 import java.util.Objects;
 
 public class Money {
-    private Long money;
+    private final Long money;
     private final static long MINIMUM_MONEY = 0;
 
 
@@ -30,5 +30,13 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(money);
+    }
+
+    public long divide(Money money) {
+        return money.money() / this.money;
+    }
+
+    private long money() {
+        return this.money;
     }
 }
