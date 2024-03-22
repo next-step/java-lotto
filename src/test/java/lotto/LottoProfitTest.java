@@ -37,7 +37,7 @@ public class LottoProfitTest {
   @Test
   @DisplayName("구매 금액 대비, 당첨 금액 수익률 계산 기능")
   void lottoProfitTest() {
-    WinningNumbers winningNumbers = WinningNumbers.of(List.of(1, 2, 3, 4, 5, 6));
+    WinningNumbers winningNumbers = WinningNumbers.of(List.of(1, 2, 3, 4, 5, 6), 7);
     LottoProfit lottoProfit = LottoProfit.of(winningNumbers, MY_LOTTO_TICKETS);
     assertThat(lottoProfit.calculateProfitRate()).isEqualTo(0.35);
   }

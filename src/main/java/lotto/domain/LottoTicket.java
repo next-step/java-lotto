@@ -58,6 +58,10 @@ public class LottoTicket {
         .count();
   }
 
+  public boolean contain(int value) {
+    return this.lottoNumbers.contains(value);
+  }
+
   private static List<Integer> makeCandidateNumbers() {
     final List<Integer> candidates = new ArrayList<>();
     for (int lottoNumber = LOTTO_MIN_NUMBER; lottoNumber <= LOTTO_MAX_NUMBER; lottoNumber++) {

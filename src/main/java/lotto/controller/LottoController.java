@@ -21,7 +21,7 @@ public class LottoController {
     resultView.printLottoTicketCounts(lottoTickets.ticketCount());
     resultView.printLottoTickets(lottoTickets.getTickets());
 
-    WinningNumbers winningNumbers = WinningNumbers.of(inputView.receiveWinningNumbers());
+    WinningNumbers winningNumbers = WinningNumbers.of(inputView.receiveWinningNumbers(), inputView.receiveBonusBall());
     LottoProfit lottoProfit = LottoProfit.of(winningNumbers, lottoTickets);
 
     resultView.printLottoProfitRate(lottoProfit);

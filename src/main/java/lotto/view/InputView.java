@@ -28,6 +28,11 @@ public class InputView {
         .collect(Collectors.toList());
   }
 
+  public int receiveBonusBall() {
+    System.out.println("보너스 볼을 입력해 주세요.");
+    return validateInputNumber(toInt(SCANNER.nextLine()));
+  }
+
   private static int toInt(String input) {
     try {
       return Integer.parseInt(input);

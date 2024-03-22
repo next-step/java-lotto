@@ -40,7 +40,8 @@ public class LottoTickets {
     Map<RewardPrice, Integer> map = initMatchedNumberCountMap();
     for (LottoTicket lottoTicket : tickets) {
       int matchNumberCount = winningNumbers.matchNumberCount(lottoTicket);
-      RewardPrice key = RewardPrice.match(matchNumberCount);
+      boolean isMatchBonusBall = winningNumbers.isMatchBonusBall(lottoTicket);
+      RewardPrice key = RewardPrice.match(matchNumberCount, isMatchBonusBall);
       map.put(key, map.get(key) + 1);
     }
     return map;

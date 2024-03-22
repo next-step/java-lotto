@@ -19,7 +19,7 @@ public class RewardPriceTest {
   @MethodSource("matchCountTestCases")
   @DisplayName("지난 주 당첨 번호 기준, 일치하는 숫자 갯수 구하는 기능")
   void rewardAmountTest(List<Integer> given, int expected) {
-    WinningNumbers winningNumbers = WinningNumbers.of(List.of(1, 2, 3, 4, 5, 6));
+    WinningNumbers winningNumbers = WinningNumbers.of(List.of(1, 2, 3, 4, 5, 6), 7);
     LottoTicket myLottoTicket = LottoTicket.generate(given);
     assertThat(winningNumbers.matchNumberCount(myLottoTicket)).isEqualTo(expected);
   }
@@ -28,11 +28,11 @@ public class RewardPriceTest {
   @MethodSource("rewardAmountTestCases")
   @DisplayName("당첨 번호 갯수별 금액 관리 기능")
   void rewardAmountTest2(List<Integer> given, int expected) {
-    WinningNumbers winningNumbers = WinningNumbers.of(List.of(1, 2, 3, 4, 5, 6));
+    WinningNumbers winningNumbers = WinningNumbers.of(List.of(1, 2, 3, 4, 5, 6), 7);
     LottoTicket myLottoTicket = LottoTicket.generate(given);
     int count = winningNumbers.matchNumberCount(myLottoTicket);
 
-    assertThat(RewardPrice.rewardBy(count)).isEqualTo(expected);
+    assertThat(RewardPrice.rewardBy(count, Boolean.FALSE)).isEqualTo(expected);
   }
 
   private static Stream<Arguments> matchCountTestCases() {

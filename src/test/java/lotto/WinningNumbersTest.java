@@ -18,7 +18,9 @@ public class WinningNumbersTest {
   @DisplayName("당첨 번호 관리 기능 테스트")
   void winningNumbersTest() {
     List<Integer> given = List.of(1, 2, 3, 4, 5, 6);
-    assertThat(WinningNumbers.of(given).isSame(given)).isTrue();
+    Integer given2 = 7;
+
+    assertThat(WinningNumbers.of(given, given2).isSame(given)).isTrue();
   }
 
   @Test
