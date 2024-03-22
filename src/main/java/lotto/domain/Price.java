@@ -7,6 +7,9 @@ public class Price {
     private final int price;
 
     public Price(int price) {
+        if (price < Rule.LOTTO_PRICE.getValue()) {
+            throw new IllegalArgumentException(String.format("구입 금액은 %d원 이상이어야 합니다.", Rule.LOTTO_PRICE.getValue()));
+        }
         this.price = price;
     }
 
