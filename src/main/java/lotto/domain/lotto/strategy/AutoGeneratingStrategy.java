@@ -16,6 +16,7 @@ import static lotto.domain.lotto.LottoNumber.MIN_LOTTO_NUMBER;
 public class AutoGeneratingStrategy implements LottoGeneratingStrategy {
     private static final List<LottoNumber> LOTTO_NUMBER_POOL = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
             .mapToObj(LottoNumber::valueOf)
+            .sorted()
             .collect(Collectors.toList());
 
     @Override

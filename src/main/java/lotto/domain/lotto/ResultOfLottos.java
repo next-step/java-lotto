@@ -15,6 +15,9 @@ public class ResultOfLottos {
         this.resultOfLottos = new HashMap<>();
     }
 
+    public ResultOfLottos(Map<Integer, Integer> resultOfLottos) {
+        this.resultOfLottos = resultOfLottos;
+    }
 
     public int numberOfMatchCount(int matchCount) {
         return valueForMatchCount(matchCount);

@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.HashMap;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ResultOfLottosTest {
@@ -23,8 +25,11 @@ class ResultOfLottosTest {
         @Test
         @DisplayName("matchCount를 key로 가지는 값이 있는 경우 해당 값을 반환한다.")
         void testExistedMatchCount() {
-            ResultOfLottos resultOfLottos = new ResultOfLottos();
-            resultOfLottos.increaseNumberOfMatchCount(3);
+            ResultOfLottos resultOfLottos = new ResultOfLottos(
+                    new HashMap<>(){{
+                        put(3, 1);
+                    }});
+
             assertThat(resultOfLottos.numberOfMatchCount(3)).isEqualTo(1);
         }
     }
@@ -45,14 +50,14 @@ class ResultOfLottosTest {
     @ParameterizedTest
     @CsvSource(value = {"3:1", "3:2", "4:1", "5:1", "6:1"}, delimiter = ':')
     @DisplayName("totalWinningMoney(): 총 당첨금을 반환한다.")
-    void testTotalWinningMoney(int matchCount, int numberOfIncrease) {
-        ResultOfLottos resultOfLottos = new ResultOfLottos();
+    void testTotalWinningMoney(int matchCount, int numberOfMatchCount) {
+        ResultOfLottos resultOfLottos = new ResultOfLottos(
+                new HashMap<>(){{
+                    put(matchCount, numberOfMatchCount);
+                }});
 
-        for (int i = 0; i < numberOfIncrease; i++) {
-            resultOfLottos.increaseNumberOfMatchCount(matchCount);
-        }
 
-        int expected = Rank.findRank(matchCount).winningMoney() * numberOfIncrease;
+        int expected = Rank.findRank(matchCount).winningMoney() * numberOfMatchCount;
         assertThat(resultOfLottos.totalWinningMoney()).isEqualTo(expected);
     }
 }

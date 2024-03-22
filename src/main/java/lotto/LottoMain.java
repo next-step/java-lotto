@@ -14,9 +14,10 @@ public class LottoMain {
     public static void main(String[] arguments) throws Exception {
         try {
             PurchaseAmountOfMoney purchaseAmountOfMoney = enteredPurchaseAmountOfMoney();
-            printNumberOfLottoToPurchase(purchaseAmountOfMoney.numberOfLottoToPurchase());
+            int numberOfLottoToPurchase = purchaseAmountOfMoney.numberOfLottoToPurchase();
+            printNumberOfLottoToPurchase(numberOfLottoToPurchase);
 
-            Lottos lottos = LottoStore.purchaseLotto(new AutoGeneratingStrategy(), purchaseAmountOfMoney.numberOfLottoToPurchase());
+            Lottos lottos = LottoStore.purchaseLotto(new AutoGeneratingStrategy(), numberOfLottoToPurchase);
             printLottos(lottos.lottos());
 
             WinningNumbers winningNumbers = enteredWinningNumbers();
