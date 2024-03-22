@@ -33,8 +33,8 @@ public class ResultView {
     }
 
     private static String formatLottoNumber(LottoTicket ticket) {
-        return ticket.getLottoNumbers().stream()
-                .map(Object::toString)
+        return ticket.get().stream()
+                .map(number -> Integer.toString(number.get()))
                 .collect(Collectors.joining(", "));
     }
 

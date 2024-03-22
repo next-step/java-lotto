@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.exception.IllegalLottoNumbersSizeException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,12 +43,8 @@ public class LottoTicket {
                 .count();
     }
 
-    public List<Integer> getLottoNumbers() {
-        List<Integer> lottoNumbers = new ArrayList<>();
-        for (LottoNumber number : this.numbers) {
-            lottoNumbers.add(number.get());
-        }
-        return lottoNumbers;
+    public List<LottoNumber> get() {
+        return this.numbers;
     }
 
 }
