@@ -7,10 +7,11 @@ import java.util.Optional;
 import static lotto.domain.LottoMachine.LOTTO_PRICE;
 
 public class LottoResult {
-    private int lottoCount = 0;
+    private final int lottoCount;
     private final Map<LottoRank, Integer> correctCounts = new EnumMap<>(LottoRank.class);
 
-    public LottoResult() {
+    public LottoResult(int lottoCount) {
+        this.lottoCount = lottoCount;
         for (LottoRank lottoRank : LottoRank.values()) {
             correctCounts.put(lottoRank, 0);
         }
@@ -31,7 +32,6 @@ public class LottoResult {
     public void addCorrectLottoCount(int count, boolean isContainBonusNumber) {
         Optional<LottoRank> lottoRankOptional = LottoRank.findByCorrectCount(count, isContainBonusNumber);
         lottoRankOptional.ifPresent((lottoRank)->{
-            lottoCount++;
             correctCounts.put(lottoRank, correctCounts.get(lottoRank) + 1);
         });
     }

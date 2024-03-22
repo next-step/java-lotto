@@ -3,6 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +15,7 @@ public class LottoResultTest {
 
     @BeforeEach
     void before() {
-        lottoResult = new LottoResult();
+        lottoResult = new LottoResult(14);
     }
 
     @Test
@@ -38,10 +40,11 @@ public class LottoResultTest {
         );
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"false:3:0.35", "false:4:3.57", "false:5:107.14", "true:5:2142.85", "false:6:142857.14"}, delimiter = ':')
     @DisplayName("rateOfReturn 호출 시 수익률을 소숫점 이하 2자리로 반환")
-    void rateOfReturn() {
-        lottoResult.addCorrectLottoCount(3, false);
-        assertThat(lottoResult.rateOfReturn()).isEqualTo(5);
+    void rateOfReturn(boolean isBonus, int correctCount, double expected) {
+        lottoResult.addCorrectLottoCount(correctCount, isBonus);
+        assertThat(lottoResult.rateOfReturn()).isEqualTo(expected);
     }
 }

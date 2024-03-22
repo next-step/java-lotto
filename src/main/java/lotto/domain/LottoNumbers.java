@@ -20,7 +20,7 @@ public class LottoNumbers {
     }
 
     public LottoResult computeLottoResult(WinningNumber winningNumber) {
-        LottoResult lottoResult = new LottoResult();
+        LottoResult lottoResult = new LottoResult(numbers.size());
         for (LottoNumber lottoNumber : numbers) {
             int containsCount = winningNumber.containsCount(lottoNumber);
             lottoResult.addCorrectLottoCount(containsCount, winningNumber.isContainBonusNumber(lottoNumber));
