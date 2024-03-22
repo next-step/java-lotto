@@ -34,4 +34,11 @@ public class RanksTest {
         // then
         assertThat(result).isEqualTo(55000);
     }
+
+    @DisplayName("전체 갯수를 구한다.")
+    @Test
+    void test03() {
+        Ranks ranks = new Ranks(List.of(Rank.FIRST, Rank.SECOND, Rank.THIRD));
+        assertThat(ranks.totalCount()).isEqualTo(3);
+    }
 }

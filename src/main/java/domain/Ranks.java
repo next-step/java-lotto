@@ -26,4 +26,12 @@ public class Ranks {
         }
         return totalPrizeMoney;
     }
+
+    public int totalCount() {
+        int count = 0;
+        for (Rank rank : map.keySet()) {
+            count += map.get(rank);
+        }
+        return count;
+    }
 }
