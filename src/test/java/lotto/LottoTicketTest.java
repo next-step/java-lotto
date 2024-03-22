@@ -39,6 +39,13 @@ public class LottoTicketTest {
             assertThat(lottoTicket.getRank(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)))).isEqualTo(Rank.lookup(6));
         }
 
+        @Test
+        @DisplayName("[성공] 당첨 번호와 2개 일치하면 (로또 등수에 해당되지 않는 당첨 번호 개수를 입력) Rank.MISS 를 리턴한다.")
+        void 불일치() {
+            LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 42, 43, 44, 45));
+            assertThat(lottoTicket.getRank(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)))).isEqualTo(Rank.lookup(2));
+        }
+
     }
 
     @Nested
