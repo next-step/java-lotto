@@ -1,5 +1,10 @@
 package lotto.domain;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 public enum Rule {
 
     NUMBERS_OF_BALLS(6), //한 게임당 추첨할 볼의 개수
@@ -11,6 +16,14 @@ public enum Rule {
 
     Rule(int value) {
         this.value = value;
+    }
+
+    public static List<Integer> generateRandomNumbers() {
+        List<Integer> numbers = IntStream.rangeClosed(MIN_NUMBER.value, MAX_NUMBER.value)
+                .boxed()
+                .collect(Collectors.toList());
+        Collections.shuffle(numbers);
+        return numbers.subList(0, NUMBERS_OF_BALLS.value);
     }
 
     public static boolean isNotPaymentSufficientForLotto(int payment) {
