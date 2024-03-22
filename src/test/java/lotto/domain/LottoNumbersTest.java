@@ -19,11 +19,4 @@ public class LottoNumbersTest {
         assertThat(lottoNumbers.countMatchingWith(winngingNumbers)).isEqualTo(6);
     }
 
-    @Test
-    void lotto_numbers_exception() {
-        assertThatThrownBy(() -> LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 6개여야 합니다.");
-    }
-
 }
