@@ -16,7 +16,7 @@ public class Results {
     Map<Prize, PositiveNumber> stats = new HashMap<>();
     return this.results.stream()
             .map(Prize::from)
-            .filter(prize -> !prize.equals(Prize.NONE))
+            .filter(Prize::valid)
             .reduce(stats, this::prizeCountMap, this::combinedPrizeCountMap);
   }
 

@@ -31,6 +31,10 @@ public enum Prize {
             .orElse(Prize.NONE);
   }
 
+  public Boolean valid() {
+    return this.amount.nonZero();
+  }
+
   @Override
   public String toString() {
     return "Prize{" +

@@ -11,6 +11,10 @@ public class Amount {
     this.currency = currency;
   }
 
+  public Boolean nonZero() {
+    return this.value.greaterThan(PositiveNumber.of(0));
+  }
+
   @Override
   public String toString() {
     return "Amount{" +
