@@ -24,6 +24,7 @@ public class LottoResult {
         return (correctCounts.get(LottoRank.FIFTH) * LottoRank.FIFTH.getWinnings())
                 + (correctCounts.get(LottoRank.FOURTH) * LottoRank.FOURTH.getWinnings())
                 + (correctCounts.get(LottoRank.THIRD) * LottoRank.THIRD.getWinnings())
+                + (correctCounts.get(LottoRank.SECOND) * LottoRank.SECOND.getWinnings())
                 + (correctCounts.get(LottoRank.FIRST) * LottoRank.FIRST.getWinnings());
     }
 
