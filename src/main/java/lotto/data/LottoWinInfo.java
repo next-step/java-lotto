@@ -4,6 +4,7 @@ import lotto.util.ConstUtils;
 
 import java.util.Arrays;
 
+import static lotto.util.ConstUtils.MATCHED_COUNT_TO_BE_CHECKED_BONUS;
 import static lotto.util.ConstUtils.MINIMUM_WIN_MATCH;
 
 public enum LottoWinInfo {
@@ -38,7 +39,7 @@ public enum LottoWinInfo {
             return PASS;
         }
 
-        if (matchedCount == ConstUtils.MATCHED_COUNT_TO_BE_CHECKED_BONUS) {
+        if (matchedCount == MATCHED_COUNT_TO_BE_CHECKED_BONUS) {
             return getLottoWinInfoOfMatchedFive(withBonus);
         }
 

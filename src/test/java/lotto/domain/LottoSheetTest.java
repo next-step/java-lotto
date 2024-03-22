@@ -10,17 +10,17 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-class PurchasedLottoTest {
+class LottoSheetTest {
 
     @DisplayName("구매한 돈 만큼의 로또를 구매한다(1000원 단위).")
     @Test
     void buyLottoByMoney() {
         // given
         int purchasedPrice = 18000;
-        PurchasedLotto purchasedLotto = new PurchasedLotto(purchasedPrice);
+        LottoSheet lottoSheet = new LottoSheet(purchasedPrice);
 
         // when
-        int lottoSize = purchasedLotto.purchasedCount();
+        int lottoSize = lottoSheet.purchasedCount();
 
         // then
         assertThat(lottoSize).isEqualTo(18);
@@ -39,13 +39,13 @@ class PurchasedLottoTest {
                 new Lotto(List.of(1, 2, 3, 4, 5, 35))
 
         );
-        PurchasedLotto purchasedLotto = new PurchasedLotto(purchasedPrice, manualLottoNumbers);
+        LottoSheet lottoSheet = new LottoSheet(purchasedPrice, manualLottoNumbers);
 
         Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         LottoBall bonusNumber = LottoBall.selectLottoBall(35);
 
         // when
-        LottoResultDto lottoResultDto = purchasedLotto.matchWinningNumbers(winningNumbers, bonusNumber);
+        LottoResultDto lottoResultDto = lottoSheet.matchWin(new WinLottoBalls(winningNumbers, bonusNumber));
 
         // then
         assertAll(

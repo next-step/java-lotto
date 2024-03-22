@@ -1,14 +1,14 @@
 package lotto.view;
 
 import lotto.data.LottoWinInfo;
-import lotto.domain.PurchasedLotto;
+import lotto.domain.LottoSheet;
 import lotto.dto.LottoResultDto;
 
 public class Output {
 
-    public void printPurchaseResult(PurchasedLotto purchasedLotto) {
-        System.out.println(purchasedLotto.purchasedCount() + "개를 구매했습니다.");
-        purchasedLotto.getPurchasedLottoList()
+    public void printPurchaseResult(LottoSheet lottoSheet) {
+        System.out.println(lottoSheet.purchasedCount() + "개를 구매했습니다.");
+        lottoSheet.getPurchasedLottoList()
                         .forEach(System.out::println);
         System.out.println();
     }

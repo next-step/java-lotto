@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.data.LottoBall;
 import lotto.data.LottoWinInfo;
 import lotto.dto.LottoResultDto;
 
@@ -8,46 +7,42 @@ import java.util.*;
 
 import static lotto.util.ConstUtils.*;
 
-public class PurchasedLotto {
+public class LottoSheet {
 
-    private final List<Lotto> lottoBundle;
+    private final List<Lotto> lottoSheet;
 
-    public PurchasedLotto(int purchasedMoney) {
-        this.lottoBundle = new ArrayList<>();
+    public LottoSheet(int purchasedPrice) {
+        int purchaseCount = calculatePurchasedCount(purchasedPrice);
 
-        int purchaseCount = calculatePurchasedCount(purchasedMoney);
-
+        this.lottoSheet = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
-            this.lottoBundle.add(new Lotto());
+            this.lottoSheet.add(new Lotto());
         }
     }
 
-    public PurchasedLotto(int purchasedMoney, List<Lotto> manualLottoNumbers) {
-        int purchasedCount = calculatePurchasedCount(purchasedMoney);
+    public LottoSheet(int purchasedPrice, List<Lotto> manualLottoNumbers) {
+        int purchasedCount = calculatePurchasedCount(purchasedPrice);
 
-        validatePurchasedAndManualCount(purchasedCount, manualLottoNumbers);
+        validatePurchasedAndManualCount(purchasedCount, manualLottoNumbers.size());
 
-        this.lottoBundle = new ArrayList<>();
-
+        this.lottoSheet = new ArrayList<>();
         for (int i = 0; i < purchasedCount; i++) {
-            this.lottoBundle.add(manualLottoNumbers.get(i));
+            this.lottoSheet.add(manualLottoNumbers.get(i));
         }
     }
 
     public int purchasedCount() {
-        return this.lottoBundle.size();
+        return this.lottoSheet.size();
     }
 
     public List<Lotto> getPurchasedLottoList() {
-        return List.copyOf(lottoBundle);
+        return List.copyOf(lottoSheet);
     }
 
-    public LottoResultDto matchWinningNumbers(Lotto winningLottoNumbers, LottoBall bonusNumber) {
+    public LottoResultDto matchWin(WinLottoBalls winLottoBalls) {
         Map<LottoWinInfo, Integer> lottoResultMap = initializeLottoResultMap();
 
-        for (Lotto lotto : this.lottoBundle) {
-            WinLottoBalls winLottoBalls = new WinLottoBalls(winningLottoNumbers, bonusNumber);
-
+        for (Lotto lotto : this.lottoSheet) {
             lottoResultMap.computeIfPresent(
                     winLottoBalls.countMatchWithBonus(lotto),
                     (key, value) -> value + 1
@@ -57,12 +52,12 @@ public class PurchasedLotto {
         return LottoResultDto.of(lottoResultMap, earnRate(lottoResultMap));
     }
 
-    private static int calculatePurchasedCount(int purchasedMoney) {
-        return purchasedMoney / LOTTO_WON_UNIT;
+    private static int calculatePurchasedCount(int purchasedPrice) {
+        return purchasedPrice / LOTTO_WON_UNIT;
     }
 
-    private void validatePurchasedAndManualCount(int purchasedCount, List<Lotto> manualLottoNumbers) {
-        if (purchasedCount != manualLottoNumbers.size()) {
+    private void validatePurchasedAndManualCount(int purchasedCount, int manualLottoCount) {
+        if (purchasedCount != manualLottoCount) {
             throw new IllegalArgumentException("구매 개수와 수동 개수가 일치하지 않습니다.");
         }
     }
@@ -85,6 +80,6 @@ public class PurchasedLotto {
     }
 
     private int purchasedLottoPrice() {
-        return this.lottoBundle.size() * LOTTO_WON_UNIT;
+        return this.lottoSheet.size() * LOTTO_WON_UNIT;
     }
 }
