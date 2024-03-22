@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.BonusNumber;
+import lotto.domain.MyNumber;
 import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
@@ -62,12 +62,12 @@ public class InputView {
         }
     }
 
-    public BonusNumber getBonusNumber(String message, LottoNumber winningNumber) {
+    public MyNumber getBonusNumber(String message, LottoNumber winningNumber) {
         System.out.println(message);
         int inputNumber = Integer.parseInt(scanner.nextLine());
 
         try {
-            return BonusNumber.fromValidDuplicate(inputNumber, winningNumber);
+            return MyNumber.bonusNumberFrom(inputNumber, winningNumber);
         } catch (IllegalArgumentException e) {
             return getBonusNumber(e.getMessage() + INPUT_RETRY, winningNumber);
         }

@@ -19,11 +19,11 @@ public class LottoNumbers {
         return numbers.size();
     }
 
-    public LottoResult computeLottoResult(LottoNumber winningNumber, BonusNumber bonusNumber) {
+    public LottoResult computeLottoResult(LottoNumber winningNumber, MyNumber myNumber) {
         LottoResult lottoResult = new LottoResult();
         for (LottoNumber lottoNumber : numbers) {
             int containsCount = lottoNumber.containsCount(winningNumber);
-            lottoResult.addCorrectLottoCount(containsCount, lottoNumber.isContainBonusNumber(bonusNumber));
+            lottoResult.addCorrectLottoCount(containsCount, lottoNumber.isContainNumber(myNumber));
         }
         return lottoResult;
     }

@@ -33,7 +33,7 @@
 - [X] 보너스 볼 입력 받는 기능 구현
 - [X] LottoRank에 2등 추가
 - [X] 2등 출력 추가
-- [ ] LottoNumber의 Integer와 BonusNumber 합치기
+- [X] LottoNumber의 Integer와 BonusNumber 합치기
 - [ ] 가능하면 추상화된 타입 참조하기 (EnumMap -> Map)
 - [ ] winning()에서 2등 계산 안되는 버그 수정
 - [ ] LottoResult.addCorrectLottoCount() 에서 Optional을 ifPresent로 처리

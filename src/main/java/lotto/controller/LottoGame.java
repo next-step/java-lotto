@@ -20,9 +20,9 @@ public class LottoGame {
         outputView.printLottoNumbers(lottoNumbers);
 
         LottoNumber winningNumber = inputView.winnnigNumbersInput(INPUT_WINNING_NUMBER_MESSAGE);
-        BonusNumber bonusNumber = inputView.getBonusNumber(INPUT_BONUS_NUMBER_MESSAGE, winningNumber);
+        MyNumber myNumber = inputView.getBonusNumber(INPUT_BONUS_NUMBER_MESSAGE, winningNumber);
 
-        LottoResult lottoResult = lottoNumbers.computeLottoResult(winningNumber, bonusNumber);
+        LottoResult lottoResult = lottoNumbers.computeLottoResult(winningNumber, myNumber);
         outputView.printResult(lottoResult);
     }
 }
