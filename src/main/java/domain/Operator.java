@@ -10,7 +10,7 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public enum Operator {
+enum Operator implements Token {
 
     ADDITION("+", (addend, summand) -> addend + summand),
     SUBTRACTION("-", (minuend, subtrahend) -> minuend - subtrahend),
@@ -35,16 +35,22 @@ public enum Operator {
         this.calculation = calculation;
     }
 
-    public String symbol() {
+    String symbol() {
         return this.symbol;
     }
 
-    public int calculate(final Operand leftOperand, final Operand rightOperand) {
-        return calculation.apply(leftOperand.number(), rightOperand.number());
+    Operand calculate(final Operand leftOperand, final Operand rightOperand) {
+        final int result = calculation.apply(leftOperand.number(), rightOperand.number());
+
+        return new Operand(result);
     }
 
-    public static Operator from(final String symbol) {
+    static Operator from(final String symbol) {
         return Optional.ofNullable(operatorContainer.get(symbol))
                 .orElseThrow(() -> new IllegalArgumentException(OPERATOR_SHOULD_BE_ARITHMETIC_SYMBOL.message(symbol)));
+    }
+
+    static boolean isOperator(final String symbol) {
+        return operatorContainer.containsKey(symbol);
     }
 }

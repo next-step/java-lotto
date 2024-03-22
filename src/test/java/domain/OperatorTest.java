@@ -36,17 +36,15 @@ class OperatorTest {
     @CsvSource(value = {"1,2,+,3", "2,4,-,-2", "2,5,*,10", "4,2,/,2"})
     @DisplayName("두 피연산자를 받아 사칙연산을 수행하고 결과를 반환한다.")
     void Calculate_TwoOperands(
-            final String leftNumber,
-            final String rightNumber,
+            final int leftNumber,
+            final int rightNumber,
             final String symbol,
             final int result
     ) {
-        final Operand leftOperand = Operand.from(leftNumber);
-        final Operand rightOperand = Operand.from(rightNumber);
         final Operator operator = Operator.from(symbol);
 
-        assertThat(operator.calculate(leftOperand, rightOperand))
-                .isEqualTo(result);
+        assertThat(operator.calculate(new Operand(leftNumber), new Operand(rightNumber)))
+                .isEqualTo(new Operand(result));
     }
 
     @Test
@@ -59,5 +57,13 @@ class OperatorTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> division.calculate(dividend, zeroDivisor))
                 .withMessage(DIVISOR_CANNOT_BE_ZERO.message());
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"+,true", "-,true", "*,true", "/,true", "%,false", "$,false", "1,false"})
+    @DisplayName("isOperator 메서드는 전달한 기호가 사칙 연산인지 판단한다.")
+    void IsOperator_TrueOrFalse(final String symbol, final boolean isOperator) {
+        assertThat(Operator.isOperator(symbol))
+                .isEqualTo(isOperator);
     }
 }
