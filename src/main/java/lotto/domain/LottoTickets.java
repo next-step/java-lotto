@@ -8,14 +8,14 @@ import java.util.stream.Collectors;
 public class LottoTickets {
 
   private final PurchaseAmount purchaseAmount;
-  private final List<LottoTicket> tickets;
+  private final Set<LottoTicket> tickets;
 
   public LottoTickets(int amount) {
     this.purchaseAmount = new PurchaseAmount(amount);
     this.tickets = LottoTicket.generate(this.purchaseAmount.ticketCount());
   }
 
-  public LottoTickets(PurchaseAmount purchaseAmount, List<LottoTicket> tickets) {
+  public LottoTickets(PurchaseAmount purchaseAmount, Set<LottoTicket> tickets) {
     this.purchaseAmount = purchaseAmount;
     this.tickets = tickets;
   }
@@ -47,8 +47,8 @@ public class LottoTickets {
     return map;
   }
 
-  public List<LottoTicket> getTickets() {
-    return Collections.unmodifiableList(tickets);
+  public Set<LottoTicket> getTickets() {
+    return Collections.unmodifiableSet(tickets);
   }
 
   public double calculateProfitRate(int profitAmount) {

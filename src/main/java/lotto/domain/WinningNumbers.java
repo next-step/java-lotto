@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.Set;
 
 public class WinningNumbers {
   private final LottoTicket winningNumber;
@@ -11,11 +11,11 @@ public class WinningNumbers {
     this.bonusNumber = bonusNumber;
   }
 
-  public static WinningNumbers of(List<Integer> numbers, int bonusNumber) {
+  public static WinningNumbers of(Set<Integer> numbers, int bonusNumber) {
     return new WinningNumbers(LottoTicket.generate(numbers), bonusNumber);
   }
 
-  public boolean isSame(List<Integer> numbers) {
+  public boolean isSame(Set<Integer> numbers) {
     return this.winningNumber.isSame(numbers);
   }
 
