@@ -2,11 +2,15 @@ package lotto.domain;
 
 import lotto.exception.IllegalLottoNumberException;
 
+import java.util.List;
 import java.util.Objects;
-
-import static lotto.domain.LottoInformation.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
+
+    private static final int NUMBER_RANGE_FROM = 1;
+    private static final int NUMBER_RANGE_TO = 45;
 
     private final int number;
 
@@ -15,9 +19,15 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public static List<LottoNumber> getLottoNumbers() {
+        return IntStream.rangeClosed(NUMBER_RANGE_FROM, NUMBER_RANGE_TO)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
     private void validateNumberRange(int number) throws IllegalLottoNumberException {
         if (notInRange(number)) {
-            throw new IllegalLottoNumberException(number);
+            throw new IllegalLottoNumberException(NUMBER_RANGE_FROM, NUMBER_RANGE_TO, number);
         }
     }
 

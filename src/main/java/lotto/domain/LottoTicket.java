@@ -7,12 +7,20 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
 
-    private static final int SIZE = 6;
+    public static final int NUMBER_INDEX_FROM = 0;
+    public static final int NUMBER_INDEX_TO = 6;
+
+    public static final int SIZE = NUMBER_INDEX_TO - NUMBER_INDEX_FROM;
 
     private final List<LottoNumber> numbers;
 
     public LottoTicket() {
-        this(LottoNumberGenerator.generate());
+        this(AllLottoNumber.shuffle()
+                .stream()
+                .map(LottoNumber::get)
+                .collect(Collectors.toList())
+                .subList(NUMBER_INDEX_FROM, NUMBER_INDEX_TO)
+        );
     }
 
     public LottoTicket(List<Integer> numbers) {
@@ -24,7 +32,7 @@ public class LottoTicket {
 
     private void validateNumbersSize(List<Integer> numbers) throws IllegalLottoNumbersSizeException {
         if (notMatchSize(numbers)) {
-            throw new IllegalLottoNumbersSizeException(numbers.size());
+            throw new IllegalLottoNumbersSizeException(SIZE, numbers.size());
         }
     }
 
