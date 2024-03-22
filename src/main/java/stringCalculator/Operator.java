@@ -28,7 +28,6 @@ public enum Operator {
     };
 
     private final String mark;
-    private static final String INVALID_INPUT_ERROR = "Only Numbers and + - * are allowed (Wrong input) : ";
 
     Operator(String mark) {
         this.mark = mark;
@@ -36,16 +35,7 @@ public enum Operator {
 
     abstract long process(long x, long y);
 
-    public static long processWithValidation(long x, String mark, long y) {
-        try {
-            Operator operator = findMark(mark);
-            return operator.process(x, y);
-        } catch(IllegalArgumentException exception) {
-            throw new IllegalArgumentException(String.format(INVALID_INPUT_ERROR, mark));
-        }
-    }
-
-    private static Operator findMark(String operator) {
+    public static Operator findMark(String operator) {
         return Arrays.stream(Operator.values())
                 .filter(op -> op.mark.equals(operator))
                 .findFirst()

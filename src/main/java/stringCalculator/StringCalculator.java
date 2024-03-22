@@ -1,12 +1,12 @@
 package stringCalculator;
 
-import static stringCalculator.Operator.processWithValidation;
+import static stringCalculator.Operator.findMark;
 
 public class StringCalculator {
-    private Validator validator;
+    private InputValidator validator;
 
     public StringCalculator() {
-        validator = new Validator();
+        validator = new InputValidator();
     }
 
     public long calculate(String input) {
@@ -20,10 +20,11 @@ public class StringCalculator {
         long sum = toLong(values[0]);
 
         for (int i = 1; i < values.length - 1; i += 2) {
-            String operator = values[i];
+            // String operator = values[i];
+            Operator operator = findMark(values[i]);
             long currentNumber = toLong(values[i + 1]);
 
-            sum = processWithValidation(sum, operator, currentNumber);
+            sum = operator.process(sum, currentNumber);
         }
 
         return sum;
