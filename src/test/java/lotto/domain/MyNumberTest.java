@@ -8,8 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.List;
 
 import static lotto.domain.LottoValidator.MIN_LOTTO_NUMBER;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class MyNumberTest {
     @ParameterizedTest
@@ -23,7 +22,7 @@ public class MyNumberTest {
     @ValueSource(ints = {7, 8, 9, 10, 11, 12})
     @DisplayName("bonusNumberFrom 호출할 때 넘어오는 value가 LottoNumber에 포함되지 않으면 정상 생성")
     void bonusNumberFrom_not_in_lottoNumber(int input) {
-        assertThat(MyNumber.bonusNumberFrom(input, dumpLottoNumber())).isInstanceOf(MyNumber.class);
+        assertThatNoException().isThrownBy(()->MyNumber.bonusNumberFrom(input, dumpLottoNumber()));
     }
 
     @Test
