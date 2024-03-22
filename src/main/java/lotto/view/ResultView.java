@@ -26,6 +26,7 @@ public class ResultView {
     sb.append("당첨 통계").append('\n').append("---------").append('\n');
 
     lottoProfit.getProfitMap().forEach((key, value) -> {
+      sb.append(printMatchingCountResult(key));
       sb.append(printRewardResult(key, value));
     });
 
@@ -33,11 +34,17 @@ public class ResultView {
     System.out.println(sb);
   }
 
+  private static StringBuilder printMatchingCountResult(RewardPrice key) {
+    StringBuilder sb = new StringBuilder();
+    if (key.isMatchBonusBall()) {
+      return sb.append(key.matchCount()).append("개 일치, 보너스 볼 일치");
+    }
+    return sb.append(key.matchCount()).append("개 일치");
+  }
+
   private static StringBuilder printRewardResult(RewardPrice key, Integer value) {
     StringBuilder sb = new StringBuilder();
-    sb.append(key.matchCount()).append("개 일치")
-        .append('(').append(key.rewardAmount()).append("원)")
+    return sb.append('(').append(key.rewardAmount()).append("원)")
         .append(" - ").append(value).append('개').append('\n');
-    return sb;
   }
 }

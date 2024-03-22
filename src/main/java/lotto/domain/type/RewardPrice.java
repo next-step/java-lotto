@@ -51,6 +51,10 @@ public enum RewardPrice {
     return matchCount;
   }
 
+  public boolean isMatchBonusBall() {
+    return isMatchBonusBall;
+  }
+
   private static RewardPrice[] getValues() {
     return RewardPrice.values();
   }
