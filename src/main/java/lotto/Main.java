@@ -16,9 +16,9 @@ public class Main {
 
             LottoTicket winLottoTicket = new LottoTicket(InputView.readWinNumbers());
             LottoNumber bonusNumber = new LottoNumber(InputView.readBonusNumber());
-            winLottoTicket.validateAlreadyExistLottoNumber(bonusNumber);
+            WinLotto winLotto = new WinLotto(winLottoTicket, bonusNumber);
 
-            LottoStatistics statisticsMap = new LottoStatistics(lottoTickets, winLottoTicket, bonusNumber);
+            LottoStatistics statisticsMap = new LottoStatistics(lottoTickets, winLotto);
 
             ResultView.printLottoStatistics(statisticsMap, purchaseAmount);
         } catch (IllegalArgumentException e) {

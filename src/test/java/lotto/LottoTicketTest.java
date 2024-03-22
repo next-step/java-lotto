@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
 import lotto.domain.LottoTicket;
+import lotto.domain.WinLotto;
 import lotto.exception.AlreadyExistLottoNumberException;
 import lotto.exception.IllegalLottoNumberException;
 import lotto.exception.IllegalLottoNumbersSizeException;
@@ -29,7 +30,7 @@ public class LottoTicketTest {
             LottoNumber bonusNumber = new LottoNumber(23);
 
             // When
-            assertThat(lottoTicket.getRank(winLottoTicket, bonusNumber)).isEqualTo(Rank.FIFTH);
+            assertThat(lottoTicket.getRank(new WinLotto(winLottoTicket, bonusNumber))).isEqualTo(Rank.FIFTH);
         }
 
         @Test
@@ -41,7 +42,7 @@ public class LottoTicketTest {
             LottoNumber bonusNumber = new LottoNumber(23);
 
             // When
-            assertThat(lottoTicket.getRank(winLottoTicket, bonusNumber)).isEqualTo(Rank.FOURTH);
+            assertThat(lottoTicket.getRank(new WinLotto(winLottoTicket, bonusNumber))).isEqualTo(Rank.FOURTH);
         }
 
         @Test
@@ -53,7 +54,7 @@ public class LottoTicketTest {
             LottoNumber bonusNumber = new LottoNumber(23);
 
             // When
-            assertThat(lottoTicket.getRank(winLottoTicket, bonusNumber)).isEqualTo(Rank.FIRST);
+            assertThat(lottoTicket.getRank(new WinLotto(winLottoTicket, bonusNumber))).isEqualTo(Rank.FIRST);
         }
 
         @Test
@@ -65,7 +66,7 @@ public class LottoTicketTest {
             LottoNumber bonusNumber = new LottoNumber(23);
 
             // When
-            assertThat(lottoTicket.getRank(winLottoTicket, bonusNumber)).isEqualTo(Rank.MISS);
+            assertThat(lottoTicket.getRank(new WinLotto(winLottoTicket, bonusNumber))).isEqualTo(Rank.MISS);
         }
 
         @Test
@@ -77,7 +78,7 @@ public class LottoTicketTest {
             LottoNumber bonusNumber = new LottoNumber(23);
 
             // When
-            assertThat(lottoTicket.getRank(winLottoTicket, bonusNumber)).isEqualTo(Rank.THIRD);
+            assertThat(lottoTicket.getRank(new WinLotto(winLottoTicket, bonusNumber))).isEqualTo(Rank.THIRD);
         }
 
         @Test
@@ -89,7 +90,7 @@ public class LottoTicketTest {
             LottoNumber bonusNumber = new LottoNumber(23);
 
             // When
-            assertThat(lottoTicket.getRank(winLottoTicket, bonusNumber)).isEqualTo(Rank.SECOND);
+            assertThat(lottoTicket.getRank(new WinLotto(winLottoTicket, bonusNumber))).isEqualTo(Rank.SECOND);
         }
 
     }
@@ -126,13 +127,5 @@ public class LottoTicketTest {
                     .isThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4, 5)));
         }
 
-        @Test
-        @DisplayName("[실패] 이미 있는 로또 번호인 경우 IllegalExistBonusLottoNumberException 예외가 발생한다.")
-        void 이미_있는_로또_번호() {
-            LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-            assertThatExceptionOfType(AlreadyExistLottoNumberException.class)
-                    .isThrownBy(() -> lottoTicket.validateAlreadyExistLottoNumber(new LottoNumber(6)))
-                    .withMessageContaining("이미 입력된 당첨 번호입니다. (당첨 번호: [1, 2, 3, 4, 5, 6], 보너스 번호: 6)");
-        }
     }
 }

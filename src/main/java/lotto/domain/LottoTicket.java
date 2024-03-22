@@ -41,9 +41,9 @@ public class LottoTicket {
         return numbers.size() != SIZE;
     }
 
-    public Rank getRank(LottoTicket winLottoTicket, LottoNumber bonusNumber) {
-        int matchCount = count(winLottoTicket.numbers);
-        boolean matchBonus = isMatchBonus(bonusNumber);
+    public Rank getRank(WinLotto winLotto) {
+        int matchCount = count(winLotto.getWinLotto());
+        boolean matchBonus = isMatchBonus(winLotto.getBonusNumber());
         return Rank.valueOf(matchCount, matchBonus);
     }
 
@@ -51,8 +51,8 @@ public class LottoTicket {
         return numbers.contains(bonusNumber);
     }
 
-    private int count(List<LottoNumber> numbers) {
-        return (int) numbers.stream()
+    private int count(LottoTicket winLotto) {
+        return (int) winLotto.numbers.stream()
                 .filter(this.numbers::contains)
                 .count();
     }
@@ -61,10 +61,8 @@ public class LottoTicket {
         return this.numbers;
     }
 
-    public void validateAlreadyExistLottoNumber(LottoNumber number) throws AlreadyExistLottoNumberException {
-        if (this.numbers.contains(number)) {
-            throw new AlreadyExistLottoNumberException(this.numbers, number);
-        }
+    public boolean contains(LottoNumber number) {
+        return this.numbers.contains(number);
     }
 
 }
