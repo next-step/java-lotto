@@ -7,3 +7,9 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## STEP1 기능문서
+* 덧셈 ,뺄셈 ,곱셈 ,나누셈
+* 입력이 Empty String 이거나 null일때 예외발생.
+* 사칙연산 법칙과 무관하게 순서대로 계산
+* 입력 문자열의 숫자와 사칙 연산 사이에는 반드시 빈 공백 문자열
