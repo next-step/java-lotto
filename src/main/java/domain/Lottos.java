@@ -20,7 +20,11 @@ public class Lottos implements Iterable<Lotto> {
         this.lottos = lottos;
     }
 
-    public int getLottoCount() {
+    public int totalPrice() {
+        return this.lottoCount() * Lotto.PRICE;
+    }
+
+    public int lottoCount() {
         return lottos.size();
     }
 

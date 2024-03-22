@@ -10,7 +10,7 @@ public class ResultView {
     }
 
     public static void print(Lottos lottos) {
-        System.out.printf("%d개를 구입하였습니다.\n", lottos.getLottoCount());
+        System.out.printf("%d개를 구입하였습니다.\n", lottos.lottoCount());
         String substring = lottos.toString().substring(1, lottos.toString().length() - 1);
         String result = substring.replaceAll("], ", "]\n");
         System.out.println(result);
