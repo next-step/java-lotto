@@ -28,8 +28,8 @@ public class ResultView {
     }
 
     public void printResult(LottoMachine lottoMachine, List<Integer> winningNumbers, int price) {
-        LottoMatchingService lottoMatchingService = new LottoMatchingService();
-        List<Integer> integers = lottoMatchingService.matchWinningNumber(lottoMachine, winningNumbers);
+        LottoMatchingService lottoMatchingService = new LottoMatchingService(winningNumbers);
+        List<Integer> integers = lottoMatchingService.matchWinningNumber(lottoMachine);
         System.out.println("\n당첨 통계");
         System.out.println("---------");
         Prize[] values = Prize.values();

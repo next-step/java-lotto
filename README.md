@@ -7,7 +7,6 @@
 ## 기능 구현 목록
 
 ### Todo
-- WinnigNumber 객체를 생성
 - price 객체를 생성
 - 테스트 꼼꼼히 작성했는지 점검
 
@@ -31,3 +30,4 @@
   - 1~45 사이의 숫자를 가진다
   - 숫자를 입력하면 LottoNumber를 생성한다
 - LottoNumber는 중복이 되지 않는다
+- WinnigNumber 객체를 생성
