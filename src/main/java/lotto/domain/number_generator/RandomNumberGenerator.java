@@ -1,7 +1,5 @@
 package lotto.domain.number_generator;
 
-import lotto.domain.number_generator.NumberGenerateStrategy;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
