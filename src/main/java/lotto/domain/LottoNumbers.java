@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.data.LottoNumberVO;
+import lotto.data.LottoBall;
 import lotto.data.LottoWinInfo;
 
 import java.util.ArrayList;
@@ -11,24 +11,24 @@ import static lotto.util.ConstUtils.*;
 
 public class LottoNumbers {
 
-    private final List<LottoNumberVO> lottoNumbers;
+    private final List<LottoBall> lottoBalls;
 
     public LottoNumbers() {
-        this.lottoNumbers = getAutoLottoNumbers();
+        this.lottoBalls = getAutoLottoNumbers();
     }
 
     public LottoNumbers(List<Integer> manualNumbers) {
-        this.lottoNumbers = new ArrayList<>();
+        this.lottoBalls = new ArrayList<>();
 
-        manualNumbers.forEach(number -> this.lottoNumbers.add(LottoNumberVO.selectLottoBall(number)));
+        manualNumbers.forEach(number -> this.lottoBalls.add(LottoBall.selectLottoBall(number)));
     }
 
-    public List<LottoNumberVO> getPurchasedLottoNumber() {
-        return List.copyOf(this.lottoNumbers);
+    public List<LottoBall> getPurchasedLottoNumber() {
+        return List.copyOf(this.lottoBalls);
     }
 
     public LottoWinInfo countMatchWithWinningLottoNumbers(LottoNumbers winningLottoNumbers) {
-        int resultCount = (int) this.lottoNumbers.stream()
+        int resultCount = (int) this.lottoBalls.stream()
                 .map(winningLottoNumbers::containNumbers)
                 .filter(result -> result)
                 .count();
@@ -38,15 +38,15 @@ public class LottoNumbers {
 
     @Override
     public String toString() {
-        return this.lottoNumbers.toString();
+        return this.lottoBalls.toString();
     }
 
-    public boolean containNumbers(LottoNumberVO number) {
-        return this.lottoNumbers.stream()
+    public boolean containNumbers(LottoBall number) {
+        return this.lottoBalls.stream()
                 .anyMatch(lotto -> lotto.equals(number));
     }
 
-    private List<LottoNumberVO> getAutoLottoNumbers() {
+    private List<LottoBall> getAutoLottoNumbers() {
         List<Integer> lotto = new ArrayList<>();
         for (int i = MINIMUM_LOTTO_RANGE; i <= MAXIMUM_LOTTO_RANGE; i++) {
             lotto.add(i);
@@ -55,8 +55,8 @@ public class LottoNumbers {
         lotto = lotto.subList(0, LOTTO_NUMBER_COUNT);
         Collections.sort(lotto);
 
-        List<LottoNumberVO> selectedLotto = new ArrayList<>();
-        lotto.forEach(number -> selectedLotto.add(LottoNumberVO.selectLottoBall(number)));
+        List<LottoBall> selectedLotto = new ArrayList<>();
+        lotto.forEach(number -> selectedLotto.add(LottoBall.selectLottoBall(number)));
 
         return selectedLotto;
     }

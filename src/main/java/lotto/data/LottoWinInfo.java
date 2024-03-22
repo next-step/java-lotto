@@ -33,17 +33,6 @@ public enum LottoWinInfo {
         return winningPrice;
     }
 
-    public static LottoWinInfo valueOf(int matchedCount) {
-        if (matchedCount < MINIMUM_WIN_MATCH) {
-            return PASS;
-        }
-
-        return Arrays.stream(values())
-                .filter(win -> win.matchedCount == matchedCount)
-                .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
-    }
-
     public static LottoWinInfo valueOf(int matchedCount, boolean withBonus) {
         if (matchedCount < MINIMUM_WIN_MATCH) {
             return PASS;

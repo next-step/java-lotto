@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.data.LottoNumberVO;
+import lotto.data.LottoBall;
 import lotto.data.LottoWinInfo;
 import lotto.dto.LottoResultDto;
 
@@ -42,7 +42,7 @@ public class PurchasedLotto {
         return List.copyOf(lottoBundle);
     }
 
-    public LottoResultDto matchWinningNumbers(LottoNumbers winningLottoNumbers, LottoNumberVO bonusNumber) {
+    public LottoResultDto matchWinningNumbers(LottoNumbers winningLottoNumbers, LottoBall bonusNumber) {
         Map<LottoWinInfo, Integer> lottoResultMap = initializeLottoResultMap();
 
         for (LottoNumbers lotto : this.lottoBundle) {

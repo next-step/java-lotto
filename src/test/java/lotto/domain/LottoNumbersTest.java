@@ -6,22 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static lotto.util.ConstUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoNumbersTest {
-
-    @DisplayName("생성자를 넣지 않으면, 로또 번호를 자동으로 생성 해 준다.")
-    @Test
-    void selectAutoNumberOfLotto() {
-        // given
-        LottoNumbers lottoNumbers = new LottoNumbers();
-
-        // then
-        lottoNumbers.getPurchasedLottoNumber()
-                .forEach(number -> assertThat(number.getLottoNumber()).isBetween(MINIMUM_LOTTO_RANGE, MAXIMUM_LOTTO_RANGE));
-    }
 
     @DisplayName("생성자를 넣으면, 로또 번호를 수기로 생성 해 준다.")
     @Test

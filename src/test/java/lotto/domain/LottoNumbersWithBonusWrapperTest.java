@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.data.LottoNumberVO;
+import lotto.data.LottoBall;
 import lotto.data.LottoWinInfo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ class LottoNumbersWithBonusWrapperTest {
         // given
         LottoNumbers mySelect = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         LottoNumbers winningNumber = new LottoNumbers(List.of(1, 2, 3, 4, 5, 7));
-        LottoNumberVO bonusNumber = LottoNumberVO.selectLottoBall(6);
+        LottoBall bonusNumber = LottoBall.selectLottoBall(6);
 
         // when
         LottoNumbersWithBonusWrapper lottoNumbersWithBonusWrapper = new LottoNumbersWithBonusWrapper(
@@ -38,7 +38,7 @@ class LottoNumbersWithBonusWrapperTest {
         // given
         LottoNumbers mySelect = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         LottoNumbers winningNumber = new LottoNumbers(List.of(1, 2, 3, 4, 5, 7));
-        LottoNumberVO bonusNumber = LottoNumberVO.selectLottoBall(10);
+        LottoBall bonusNumber = LottoBall.selectLottoBall(10);
 
         // when
         LottoNumbersWithBonusWrapper lottoNumbersWithBonusWrapper = new LottoNumbersWithBonusWrapper(

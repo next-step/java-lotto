@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.data.LottoNumberVO;
+import lotto.data.LottoBall;
 import lotto.dto.LottoResultDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,7 +42,7 @@ class PurchasedLottoTest {
         PurchasedLotto purchasedLotto = new PurchasedLotto(purchasedPrice, manualLottoNumbers);
 
         LottoNumbers winningNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumberVO bonusNumber = LottoNumberVO.selectLottoBall(35);
+        LottoBall bonusNumber = LottoBall.selectLottoBall(35);
 
         // when
         LottoResultDto lottoResultDto = purchasedLotto.matchWinningNumbers(winningNumbers, bonusNumber);

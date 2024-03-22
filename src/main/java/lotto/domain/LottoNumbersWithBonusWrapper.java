@@ -1,20 +1,20 @@
 package lotto.domain;
 
-import lotto.data.LottoNumberVO;
+import lotto.data.LottoBall;
 import lotto.data.LottoWinInfo;
 
 public class LottoNumbersWithBonusWrapper {
 
     private final LottoNumbers lottoNumbers;
-    private final LottoNumberVO bonusNumber;
+    private final LottoBall bonusNumber;
 
-    public LottoNumbersWithBonusWrapper(LottoNumbers lottoNumbers, LottoNumberVO bonusNumber) {
+    public LottoNumbersWithBonusWrapper(LottoNumbers lottoNumbers, LottoBall bonusNumber) {
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }
 
     public LottoWinInfo countMatchWithWinningLottoNumbersWithBonusNumber(LottoNumbers winningLottoNumbers) {
-        LottoWinInfo lottoWinInfo = lottoNumbers.countMatchWithWinningLottoNumbers(winningLottoNumbers);
+        LottoWinInfo lottoWinInfo = this.lottoNumbers.countMatchWithWinningLottoNumbers(winningLottoNumbers);
 
         return LottoWinInfo.valueOf(lottoWinInfo.getMatchedCount(), this.lottoNumbers.containNumbers(bonusNumber));
     }
