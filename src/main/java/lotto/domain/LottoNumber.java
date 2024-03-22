@@ -1,24 +1,33 @@
 package lotto.domain;
 
-import static lotto.domain.Rule.MAX_NUMBER;
-import static lotto.domain.Rule.MIN_NUMBER;
+import java.util.Objects;
 
-// todo: LottoNumber로 포장
 public class LottoNumber {
 
-    private final int lottoNumber;
+    private final int number;
 
-    public LottoNumber(int lottoNumber) {
-        if (lottoNumber < MIN_NUMBER.getNumber() || lottoNumber > MAX_NUMBER.getNumber()) {
-            throw new IllegalArgumentException(String.format(
-                    "(%d)는 로또번호에 포함되지 않습니다. %d ~ %d까지의 숫자를 입력해주세요."
-                    , lottoNumber
-                    , MIN_NUMBER.getNumber()
-                    , MAX_NUMBER.getNumber()
-            ));
-        }
-        this.lottoNumber = lottoNumber;
+    public LottoNumber(int number) {
+        this.number = number;
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+
+        LottoNumber that = (LottoNumber) object;
+
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
+    }
 
 }

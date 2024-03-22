@@ -7,6 +7,13 @@
 ## 기능 구현 목록
 
 ### Todo
+- LottoNumber 생성
+  - 원시값을 포장한다
+  - 1~45 사이의 숫자를 가진다
+  - 숫자를 입력하면 LottoNumber를 생성한다
+- LottoNumber는 중복이 되지 않는다
+- WinnigNumber 객체를 생성
+- price 객체를 생성
 
 ### Done
 - 로또 번호 생성기가 로또 생성을 하면
