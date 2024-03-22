@@ -9,7 +9,8 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## TODO
-- [x] 무작위 번호 6자리 생성하는 기능 구현
+- [x] 무작위 번호 6자리 생성하는 기능
 - [x] 로또 무작위 번호 6자리 생성
 - [x] 로또 가격에 따른 로또 생성
 - [x] 로또 결과 확인
+- [ ] 수익률 계산 기능 
