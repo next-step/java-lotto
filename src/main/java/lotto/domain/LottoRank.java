@@ -30,4 +30,8 @@ public enum LottoRank {
     public long getWinnings() {
         return winnings;
     }
+
+    public int getCorrectCount() {
+        return correctCount;
+    }
 }
