@@ -29,4 +29,16 @@ class OperandTest {
                 .isThrownBy(() -> Operand.from(notIntegerNumber))
                 .withMessage(OPERAND_SHOULD_BE_INTEGER_FORMAT.message(notIntegerNumber));
     }
+
+    @Test
+    @DisplayName("같은 피연산자 정수값을 가진 두 객체는 서로 참조는 다르나 동등한 객체로 판단한다.")
+    void Equals_SameNumber() {
+        final int number = 1;
+        final Operand actual = new Operand(number);
+        final Operand expected = new Operand(number);
+
+        assertThat(actual)
+                .isNotSameAs(expected)
+                .isEqualTo(expected);
+    }
 }
