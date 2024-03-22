@@ -18,8 +18,8 @@ public class LottosTest {
 
     @ParameterizedTest
     @CsvSource({
-            "21, 2, 3, 8, 9, 10, FOURTH, 1",
-            "21, 2, 3, 41, 9, 10, THIRD, 1",
+            "21, 2, 3, 8, 9, 10, FIFTH, 1",
+            "21, 2, 3, 41, 9, 10, FOURTH, 1",
             "21, 2, 3, 41, 5, 10, SECOND, 1",
             "21, 2, 3, 41, 5, 43, FIRST, 1"
     })
