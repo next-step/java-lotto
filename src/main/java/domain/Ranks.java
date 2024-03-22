@@ -1,5 +1,7 @@
 package domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,5 +35,11 @@ public class Ranks {
             count += map.get(rank);
         }
         return count;
+    }
+
+    public double rateOfReturn() {
+        int totalPrize = totalPrizeMoney();
+        double result = (double) totalPrize / (this.totalCount() * Lotto.PRICE);
+        return BigDecimal.valueOf(result).setScale(2, RoundingMode.DOWN).doubleValue();
     }
 }

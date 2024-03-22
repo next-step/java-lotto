@@ -12,6 +12,6 @@ public class LottoApplication {
 
         Lotto winningLotto = new Lotto(InputView.promptForWinningNumbers());
 //        ResultView.printRanks(lottos.ranks(winningLotto));
-        ResultView.printRateOfReturn(lottos.rateOfReturn(winningLotto));
+//        ResultView.printRateOfReturn(lottos.rateOfReturn(winningLotto));
     }
 }
