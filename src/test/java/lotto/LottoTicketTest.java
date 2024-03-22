@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
 import lotto.domain.LottoTicket;
+import lotto.exception.AlreadyExistLottoNumberException;
 import lotto.exception.IllegalLottoNumberException;
 import lotto.exception.IllegalLottoNumbersSizeException;
 import org.junit.jupiter.api.DisplayName;
@@ -125,5 +126,13 @@ public class LottoTicketTest {
                     .isThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4, 5)));
         }
 
+        @Test
+        @DisplayName("[실패] 이미 있는 로또 번호인 경우 IllegalExistBonusLottoNumberException 예외가 발생한다.")
+        void 이미_있는_로또_번호() {
+            LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+            assertThatExceptionOfType(AlreadyExistLottoNumberException.class)
+                    .isThrownBy(() -> lottoTicket.validateAlreadyExistLottoNumber(new LottoNumber(6)))
+                    .withMessageContaining("이미 입력된 당첨 번호입니다. (당첨 번호: [1, 2, 3, 4, 5, 6], 보너스 번호: 6)");
+        }
     }
 }
