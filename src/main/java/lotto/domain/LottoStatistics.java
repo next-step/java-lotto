@@ -38,15 +38,19 @@ public class LottoStatistics {
         return rankCount != null;
     }
 
-    public double calculateProfitRate(int purchaseAmount) {
+    public double calculateProfitRate() {
         double profit = 0;
         for (Rank rank : statisticsMap.keySet()) {
             profit += getTotalAmount(rank);
         }
-        return profit / purchaseAmount;
+        return profit / (getCountOfLottoTickets() * LottoTicketMachine.AMOUNT_PER_TICKET);
     }
 
     private double getTotalAmount(Rank rank) {
         return getRankCount(rank) * rank.getPrize();
+    }
+
+    private int getCountOfLottoTickets() {
+        return statisticsMap.values().stream().mapToInt(Integer::intValue).sum();
     }
 }

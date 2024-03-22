@@ -20,7 +20,7 @@ public class Main {
 
             LottoStatistics statisticsMap = new LottoStatistics(lottoTickets, winLotto);
 
-            ResultView.printLottoStatistics(statisticsMap, purchaseAmount);
+            ResultView.printLottoStatistics(statisticsMap);
         } catch (IllegalArgumentException e) {
             ResultView.printException(e);
         } catch (Exception e) {

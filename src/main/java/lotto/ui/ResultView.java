@@ -42,8 +42,8 @@ public class ResultView {
         return MessageFormat.format("{0}개를 구매했습니다.", count);
     }
 
-    public static void printLottoStatistics(LottoStatistics statisticsMap, int purchaseAmount) {
-        String message = formatRanks(statisticsMap) + formatProfitRate(statisticsMap, purchaseAmount);
+    public static void printLottoStatistics(LottoStatistics statisticsMap) {
+        String message = formatRanks(statisticsMap) + formatProfitRate(statisticsMap);
         System.out.println(message);
     }
 
@@ -78,8 +78,8 @@ public class ResultView {
         return stringBuilder.toString();
     }
 
-    public static String formatProfitRate(LottoStatistics statisticsMap, int purchaseAmount) {
-        return MessageFormat.format("총 수익률은 {0}입니다.", statisticsMap.calculateProfitRate(purchaseAmount));
+    public static String formatProfitRate(LottoStatistics statisticsMap) {
+        return MessageFormat.format("총 수익률은 {0}입니다.", statisticsMap.calculateProfitRate());
     }
 
     public static void printException(String exceptionMessage) {

@@ -4,7 +4,7 @@ import lotto.exception.IllegalPurchaseAmountException;
 
 public class LottoTicketMachine {
 
-    private static final int AMOUNT_PER_TICKET = 1000;
+    public static final int AMOUNT_PER_TICKET = 1000;
 
     public static LottoTickets issue(int amount) {
         int countOfTickets;
