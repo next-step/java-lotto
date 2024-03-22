@@ -1,4 +1,4 @@
-package operations;
+package domain.operations;
 
 import java.util.List;
 

@@ -1,3 +1,7 @@
+package controller.operation;
+
+import domain.operations.StringCalculation;
+
 import java.util.Scanner;
 
 public class OperationView {

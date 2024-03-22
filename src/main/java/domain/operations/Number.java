@@ -1,4 +1,4 @@
-package operations;
+package domain.operations;
 
 public class Number {
     private int number;

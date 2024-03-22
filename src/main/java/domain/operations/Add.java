@@ -1,4 +1,4 @@
-package operations;
+package domain.operations;
 
 public class Add implements CalculateStrategy {
     private static final String MATCH_STRING = "+";

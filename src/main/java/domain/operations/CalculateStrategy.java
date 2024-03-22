@@ -1,4 +1,4 @@
-package operations;
+package domain.operations;
 
 public interface CalculateStrategy {
     public boolean match(String operation);

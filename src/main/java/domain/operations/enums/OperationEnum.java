@@ -1,6 +1,6 @@
-package operations.enums;
+package domain.operations.enums;
 
-import operations.Number;
+import domain.operations.Number;
 
 import java.util.Arrays;
 

@@ -1,7 +1,9 @@
-import operations.CalculateStrategy;
-import operations.Number;
-import operations.OperationStrategies;
-import operations.enums.OperationEnum;
+package domain.operations;
+
+import domain.operations.CalculateStrategy;
+import domain.operations.Number;
+import domain.operations.OperationStrategies;
+import domain.operations.enums.OperationEnum;
 
 public class StringCalculation {
     private final static String GAP = " ";

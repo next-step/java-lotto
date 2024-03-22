@@ -1,7 +1,7 @@
-package operations;
+package domain.operations;
 
-public class Division implements CalculateStrategy {
-    private static final String MATCH_STRING = "/";
+public class Multiplication implements CalculateStrategy {
+    private static final String MATCH_STRING = "*";
 
     @Override
     public boolean match(String operation) {
@@ -10,6 +10,6 @@ public class Division implements CalculateStrategy {
 
     @Override
     public int calculate(Number number1, Number number2) {
-        return number1.divide(number2);
+        return number1.multiply(number2);
     }
 }
