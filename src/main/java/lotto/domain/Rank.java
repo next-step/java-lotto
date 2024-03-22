@@ -21,7 +21,7 @@ public enum Rank {
     }
 
     public static List<Rank> getRanks() {
-        return List.of(Rank.values());
+        return new ArrayList<Rank>(List.of(Rank.values()));
     }
 
     public static Rank valueOf(int matchCount, boolean matchBonus) {

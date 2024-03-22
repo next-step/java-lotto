@@ -3,6 +3,8 @@ package lotto.ui;
 import lotto.domain.*;
 
 import java.text.MessageFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,7 +50,7 @@ public class ResultView {
     }
 
     private static String formatRanks(LottoStatistics statisticsMap) {
-        List<Rank> ranks = Rank.getRanks();
+        List<Rank> ranks = formatRanks();
 
         StringBuilder stringBuilder = new StringBuilder();
         for (Rank rank : ranks) {
@@ -57,9 +59,25 @@ public class ResultView {
         return stringBuilder.toString();
     }
 
+    private static List<Rank> formatRanks() {
+        List<Rank> ranks = Rank.getRanks();
+        ranks.sort(Comparator.comparing(Rank::getPrize));
+        ranks.remove(Rank.MISS);
+        return ranks;
+    }
+
     private static String formatStatistic(LottoStatistics statisticsMap, Rank rank) {
-        return MessageFormat.format("{0}개 일치 ({1}원) - {2}개"
-                , rank.getMatchCount(), rank.getPrize(), statisticsMap.getRankCount(rank));
+        return MessageFormat.format("{0} ({1}원) - {2}개"
+                , formatRankMatchCount(rank), rank.getPrize(), statisticsMap.getRankCount(rank));
+    }
+
+    private static String formatRankMatchCount(Rank rank) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(MessageFormat.format("{0}개 일치", rank.getMatchCount()));
+        if (Rank.SECOND == rank) {
+            stringBuilder.append(", 보너스 볼 일치");
+        }
+        return stringBuilder.toString();
     }
 
     public static String formatProfitRate(LottoStatistics statisticsMap, int purchaseAmount) {

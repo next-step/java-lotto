@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Rank;
-import lotto.domain.LottoStatistics;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -26,13 +23,14 @@ public class LottoStatisticsTest {
                 new LottoTicket(List.of(1, 2, 3, 4, 5, 45)),
                 new LottoTicket(List.of(1, 2, 3, 4, 5, 6))
         ));
+        LottoTicket winLottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = new LottoNumber(23);
 
         // When
-        LottoTicket winLottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-        LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, winLottoTicket);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, winLottoTicket, bonusNumber);
 
         // Then
-        assertThat(lottoStatistics.getRankCount(Rank.lookup(matchCount))).isEqualTo(count);
+        assertThat(lottoStatistics.getRankCount(Rank.valueOf(matchCount, false))).isEqualTo(count);
     }
 
     @ParameterizedTest(name = "[{index}] {0}개 일치 - {1}개")
@@ -48,16 +46,15 @@ public class LottoStatisticsTest {
                 new LottoTicket(List.of(1, 2, 3, 4, 44, 45)),
                 new LottoTicket(List.of(1, 2, 3, 4, 5, 6))
         ));
+        LottoTicket winLottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = new LottoNumber(23);
 
         // When
-        LottoTicket winLottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-        LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, winLottoTicket);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, winLottoTicket, bonusNumber);
 
         // Then
-        assertThat(lottoStatistics.getRankCount(Rank.lookup(matchCount))).isEqualTo(count);
+        assertThat(lottoStatistics.getRankCount(Rank.valueOf(matchCount, false))).isEqualTo(count);
     }
 
-//    @Test
-//    @DisplayName("[성공] 랭크에 없는 당첨 번호 개수를 가진 로")
 
 }

@@ -40,9 +40,14 @@ public class LottoTicket {
         return numbers.size() != SIZE;
     }
 
-    public Rank getRank(LottoTicket winLottoTicket) {
+    public Rank getRank(LottoTicket winLottoTicket, LottoNumber bonusNumber) {
         int matchCount = count(winLottoTicket.numbers);
-        return Rank.lookup(matchCount);
+        boolean matchBonus = isMatchBonus(bonusNumber);
+        return Rank.valueOf(matchCount, matchBonus);
+    }
+
+    private boolean isMatchBonus(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 
     private int count(List<LottoNumber> numbers) {

@@ -17,7 +17,9 @@ public class Main {
             ResultView.printLottoTickets(lottoTickets);
 
             List<Integer> winNumbers = InputView.readWinNumbers();
-            LottoStatistics statisticsMap = new LottoStatistics(lottoTickets, new LottoTicket(winNumbers));
+            int bonusNumber = InputView.readBonusNumber();
+
+            LottoStatistics statisticsMap = new LottoStatistics(lottoTickets, new LottoTicket(winNumbers), new LottoNumber(bonusNumber));
 
             ResultView.printLottoStatistics(statisticsMap, purchaseAmount);
         } catch (IllegalArgumentException e) {

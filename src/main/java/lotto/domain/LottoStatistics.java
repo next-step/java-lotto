@@ -10,14 +10,14 @@ public class LottoStatistics {
     // [Key] Rank, [Value] Matched Count (Statistics)
     private final Map<Rank, Integer> statisticsMap;
 
-    public LottoStatistics(LottoTickets lottoTickets, LottoTicket winLottoTicket) {
+    public LottoStatistics(LottoTickets lottoTickets, LottoTicket winLottoTicket, LottoNumber bonusNumber) {
         this.statisticsMap = new HashMap<>();
-        createStatistics(lottoTickets, winLottoTicket);
+        createStatistics(lottoTickets, winLottoTicket, bonusNumber);
     }
 
-    private void createStatistics(LottoTickets tickets, LottoTicket winLottoTicket) {
+    private void createStatistics(LottoTickets tickets, LottoTicket winLottoTicket, LottoNumber bonusNumber) {
         for (LottoTicket lottoTicket : tickets.get()) {
-            Rank rank = lottoTicket.getRank(winLottoTicket);
+            Rank rank = lottoTicket.getRank(winLottoTicket, bonusNumber);
             addStatistic(rank);
         }
     }
