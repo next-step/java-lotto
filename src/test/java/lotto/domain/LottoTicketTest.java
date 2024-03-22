@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-// todo: 테스트 컴파일에러 해결
 public class LottoTicketTest {
 
     @DisplayName("로또 번호 생성기가 로또를 생성하면 6개의 숫자는 내가 지정한 숫자가 나온다")
