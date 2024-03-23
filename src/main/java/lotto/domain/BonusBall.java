@@ -12,6 +12,10 @@ public class BonusBall {
         this.number = number;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) {

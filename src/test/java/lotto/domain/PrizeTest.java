@@ -11,6 +11,11 @@ public class PrizeTest {
     @Test
     void contains_prize() {
         assertThat(Prize.NONE.containsPrize()).isFalse();
+        assertThat(Prize.FIFTH_PRIZE.containsPrize()).isTrue();
+        assertThat(Prize.FOURTH_PRIZE.containsPrize()).isTrue();
+        assertThat(Prize.THIRD_PRIZE.containsPrize()).isTrue();
+        assertThat(Prize.SECOND_PRIZE.containsPrize()).isTrue();
+        assertThat(Prize.FIRST_PRIZE.containsPrize()).isTrue();
     }
 
     @Test
