@@ -10,11 +10,9 @@ import lotto.view.ResultView;
 public class LottoAutomaticManager {
 
     public void start() {
-        // 입력
+
         String purchaseAmount = InputView.inputAmount();
-
         LottoSale lottosaletest = new LottoSale(purchaseAmount, new RandomLottoStrategy());
-
         ResultView.printSaleResultTest(lottosaletest, lottosaletest.getNumberOfLottos());
 
         String winningNumber = InputView.inputWinningNumbers();
