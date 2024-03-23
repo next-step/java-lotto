@@ -1,7 +1,5 @@
 package lotto.data;
 
-import lotto.util.ConstUtils;
-
 import java.util.Arrays;
 
 import static lotto.util.ConstUtils.MATCHED_COUNT_TO_BE_CHECKED_BONUS;

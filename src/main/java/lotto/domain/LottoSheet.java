@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.data.LottoPurchaseInfo;
 import lotto.data.LottoWinInfo;
 import lotto.dto.LottoResultDto;
 
@@ -10,35 +11,17 @@ import static lotto.util.ConstUtils.*;
 public class LottoSheet {
 
     private final List<Lotto> lottoSheet;
-    private final int manualCount;
+    private final LottoPurchaseInfo lottoPurchaseInfo;
 
-    public LottoSheet(int purchasedPrice) {
-        int purchaseCount = calculatePurchasedCount(purchasedPrice);
-        this.manualCount = 0;
-
-        this.lottoSheet = new ArrayList<>();
-        for (int i = 0; i < purchaseCount; i++) {
-            this.lottoSheet.add(new Lotto());
-        }
-    }
-
-    public LottoSheet(int purchasedPrice, List<Lotto> manualLottoNumbers) {
-        int purchasedCount = calculatePurchasedCount(purchasedPrice);
-        this.manualCount = manualLottoNumbers.size();
-
-        validatePurchasedAndManualCount(purchasedCount, manualLottoNumbers.size());
+    public LottoSheet(LottoPurchaseInfo lottoPurchaseInfo) {
+        this.lottoPurchaseInfo = lottoPurchaseInfo;
 
         this.lottoSheet = new ArrayList<>();
-        for (int i = 0; i < this.manualCount; i++) {
-            this.lottoSheet.add(manualLottoNumbers.get(i));
-        }
-        for (int i = this.manualCount; i < purchasedCount; i++) {
+        this.lottoSheet.addAll(lottoPurchaseInfo.getManualLotto());
+
+        for (int i = lottoPurchaseInfo.countManual(); i < lottoPurchaseInfo.purchasedCount(); i++) {
             this.lottoSheet.add(new Lotto());
         }
-    }
-
-    public int purchasedCount() {
-        return this.lottoSheet.size();
     }
 
     public List<Lotto> getPurchasedLottoList() {
@@ -58,22 +41,12 @@ public class LottoSheet {
         return LottoResultDto.of(lottoResultMap, earnRate(lottoResultMap));
     }
 
-    public int countAuto() {
-        return purchasedCount() - this.manualCount;
-    }
-
     public int countManual() {
-        return this.manualCount;
+        return this.lottoPurchaseInfo.countManual();
     }
 
-    private static int calculatePurchasedCount(int purchasedPrice) {
-        return purchasedPrice / LOTTO_WON_UNIT;
-    }
-
-    private void validatePurchasedAndManualCount(int purchasedCount, int manualLottoCount) {
-        if (purchasedCount < manualLottoCount) {
-            throw new IllegalArgumentException("수동 구매 리스트의 개수가 총 구매 개수보다 클 수 없습니다.");
-        }
+    public int countAuto() {
+        return this.lottoPurchaseInfo.countAuto();
     }
 
     private Map<LottoWinInfo, Integer> initializeLottoResultMap() {

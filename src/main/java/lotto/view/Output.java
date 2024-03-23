@@ -7,7 +7,7 @@ import lotto.dto.LottoResultDto;
 public class Output {
 
     public void printPurchaseResult(LottoSheet lottoSheet) {
-        System.out.println(lottoSheet.purchasedCount() + "개를 구매했습니다.");
+        System.out.println("수동으로 " + lottoSheet.countManual() + "장, 자동으로 " + lottoSheet.countAuto() + "개를 구매했습니다.");
         lottoSheet.getPurchasedLottoList()
                         .forEach(System.out::println);
         System.out.println();
