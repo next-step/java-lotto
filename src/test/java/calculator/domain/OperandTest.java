@@ -1,6 +1,6 @@
-package domain;
+package calculator.domain;
 
-import static config.CalculatorExceptionMessage.OPERAND_SHOULD_BE_INTEGER_FORMAT;
+import static calculator.config.CalculatorExceptionMessage.OPERAND_SHOULD_BE_INTEGER_FORMAT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 

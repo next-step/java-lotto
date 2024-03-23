@@ -1,4 +1,4 @@
-package view.io;
+package calculator.view.io;
 
 public interface Input {
 

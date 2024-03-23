@@ -1,10 +1,10 @@
-package view;
+package calculator.view;
 
-import static config.CalculatorExceptionMessage.UNEXPECTED_EXCEPTION;
+import static calculator.config.CalculatorExceptionMessage.UNEXPECTED_EXCEPTION;
 
-import util.ExpressionParser;
-import view.io.Input;
-import view.io.Output;
+import calculator.util.ExpressionParser;
+import calculator.view.io.Input;
+import calculator.view.io.Output;
 
 public class CalculatorView {
 

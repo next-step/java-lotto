@@ -1,6 +1,6 @@
-package domain;
+package calculator.domain;
 
-import static config.CalculatorExceptionMessage.EXPRESSION_CANNOT_BE_NULL_OR_EMPTY;
+import static calculator.config.CalculatorExceptionMessage.EXPRESSION_CANNOT_BE_NULL_OR_EMPTY;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 

@@ -1,6 +1,6 @@
-package view.io.console;
+package calculator.view.io.console;
 
-import view.io.Output;
+import calculator.view.io.Output;
 
 public class ConsoleOutput implements Output {
 

@@ -1,6 +1,6 @@
-package domain;
+package calculator.domain;
 
-import static config.CalculatorExceptionMessage.EXPRESSION_CANNOT_BE_NULL_OR_EMPTY;
+import static calculator.config.CalculatorExceptionMessage.EXPRESSION_CANNOT_BE_NULL_OR_EMPTY;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;

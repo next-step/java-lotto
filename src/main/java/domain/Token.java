@@ -1,5 +1,0 @@
-package domain;
-
-interface Token {
-
-}

@@ -1,8 +1,8 @@
-package view.io.console;
+package calculator.view.io.console;
 
 import java.util.Scanner;
 
-import view.io.Input;
+import calculator.view.io.Input;
 
 public class ConsoleInput implements Input {
 

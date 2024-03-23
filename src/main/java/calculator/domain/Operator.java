@@ -1,7 +1,7 @@
-package domain;
+package calculator.domain;
 
-import static config.CalculatorExceptionMessage.DIVISOR_CANNOT_BE_ZERO;
-import static config.CalculatorExceptionMessage.OPERATOR_SHOULD_BE_ARITHMETIC_SYMBOL;
+import static calculator.config.CalculatorExceptionMessage.DIVISOR_CANNOT_BE_ZERO;
+import static calculator.config.CalculatorExceptionMessage.OPERATOR_SHOULD_BE_ARITHMETIC_SYMBOL;
 
 import java.util.Arrays;
 import java.util.Map;

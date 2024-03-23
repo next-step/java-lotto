@@ -1,7 +1,7 @@
-package util;
+package calculator.util;
 
-import static config.CalculatorExceptionMessage.INPUT_EXPRESSION_TEXT_CANNOT_BE_NULL_OR_BLANK;
-import static config.CalculatorExceptionMessage.INPUT_EXPRESSION_TEXT_SHOULD_FOLLOW_PATTERN;
+import static calculator.config.CalculatorExceptionMessage.INPUT_EXPRESSION_TEXT_CANNOT_BE_NULL_OR_BLANK;
+import static calculator.config.CalculatorExceptionMessage.INPUT_EXPRESSION_TEXT_SHOULD_FOLLOW_PATTERN;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
