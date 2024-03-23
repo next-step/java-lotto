@@ -41,7 +41,7 @@
 - [X] 예외가 발생하지 않는 생성자 테스트를 assertThatNoException으로 리팩터링
 - [X] LottoNumbersTest의 List.of()를 가변인자로 리팩터링
 - [X] LottoNumber + bonusNumber 를 묶어서 WinningNumber
-- [ ] 3단계 피드백 반영
+- [X] 3단계 피드백 반영
   - [X] MyNumber, LottoNumber, LottoNumbers 클래스명 수정
   - [X] LottoResult의 winnings()를 correctCounts EntrySet을 사용하는 로직으로 리팩터링
   - [X] 보너스 넘버 검증 위치 수정
