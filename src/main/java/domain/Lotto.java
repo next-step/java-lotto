@@ -9,7 +9,7 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto() {
-        this(RandomNumberGenerator.randomNumbers());
+        this(new RandomLottoFactory().create().numbers());
     }
 
     public Lotto(List<Integer> numbers) {
@@ -35,21 +35,16 @@ public class Lotto {
         return numbers.toString();
     }
 
-    private static class RandomNumberGenerator {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numbers, lotto.numbers);
+    }
 
-        private static final List<Integer> numbers;
-
-        static {
-            numbers = new ArrayList<>();
-            for (int i = 1; i <= 45; i++) {
-                numbers.add(i);
-            }
-        }
-
-        public static List<Integer> randomNumbers() {
-            List<Integer> newNumbers = new ArrayList<>(RandomNumberGenerator.numbers);
-            Collections.shuffle(newNumbers);
-            return newNumbers.subList(0, 6);
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }

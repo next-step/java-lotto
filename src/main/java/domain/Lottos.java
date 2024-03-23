@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,11 +10,18 @@ public class Lottos implements Iterable<Lotto> {
     private final List<Lotto> lottos;
 
     public Lottos(int price) {
+        this(price, Collections.emptyList());
+    }
+
+    public Lottos(int price, List<LottoFactory> lottoFactory) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < price / Lotto.PRICE; i++) {
+        for (LottoFactory factory : lottoFactory) {
+            lottos.add(factory.create());
+        }
+        for (int i = 0; i < (price / Lotto.PRICE) - lottos.size(); i++) {
             lottos.add(new Lotto());
         }
-        this.lottos = lottos;
+        this.lottos = List.copyOf(lottos);
     }
 
     public Lottos(List<Lotto> lottos) {
