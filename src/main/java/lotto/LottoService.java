@@ -32,16 +32,21 @@ public class LottoService {
             List<Integer> winningNumbers) {
         List<Integer> result = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0, 0, 0));
         for (LottoTicket ticket : tickets) {
-            int count = 0;
-            for (Integer number : ticket.displayNumbers()) {
-                if (winningNumbers.contains(number)) {
-                    count++;
-                }
-                ;
-            }
+            int count = getCount(winningNumbers, ticket);
             result.set(count, result.get(count) + 1);
         }
         return result;
+    }
+
+    private int getCount(List<Integer> winningNumbers, LottoTicket ticket) {
+        int count = 0;
+        for (Integer number : ticket.displayNumbers()) {
+            if (winningNumbers.contains(number)) {
+                count++;
+            }
+
+        }
+        return count;
     }
 }
 
