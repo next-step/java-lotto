@@ -1,8 +1,9 @@
 package view;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import domain.LottoNumber;
+import domain.LottoNumbers;
+
+import java.util.*;
 
 public class InputView {
 
@@ -22,19 +23,19 @@ public class InputView {
         }
     }
 
-    public static List<Integer> promptForWinningNumbers() {
+    public static LottoNumbers promptForWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         return convertWinningNumbers(scanner.nextLine());
     }
 
-    private static List<Integer> convertWinningNumbers(String input) {
+    private static LottoNumbers convertWinningNumbers(String input) {
         assertionValidFormat(input);
-        List<Integer> result = new ArrayList<>();
+        Set<LottoNumber> result = new HashSet<>();
         for (String s : input.trim().split(String.format("\\s*%s\\s*", LOTTO_SPLIT_SEPARATOR))) {
-            result.add(Integer.parseInt(s));
+            result.add(new LottoNumber(Integer.parseInt(s)));
         }
-        return result;
+        return new LottoNumbers(result);
     }
 
     private static void assertionValidFormat(String input) {
@@ -43,9 +44,9 @@ public class InputView {
         }
     }
 
-    public static int promptForBonusBall() {
+    public static LottoNumber promptForBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        return new LottoNumber(scanner.nextInt());
     }
 }

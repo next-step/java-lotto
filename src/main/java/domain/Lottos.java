@@ -15,13 +15,25 @@ public class Lottos implements Iterable<Lotto> {
 
     public Lottos(int price, List<LottoFactory> lottoFactory) {
         List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(getLottoWithFactory(lottoFactory));
+        lottos.addAll(getLottoWithRandomFactory(price / Lotto.PRICE - lottos.size()));
+        this.lottos = List.copyOf(lottos);
+    }
+
+    private List<Lotto> getLottoWithRandomFactory(int size) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            lottos.add(new RandomLottoFactory().create());
+        }
+        return lottos;
+    }
+
+    private List<Lotto> getLottoWithFactory(List<LottoFactory> lottoFactory) {
+        List<Lotto> lottos = new ArrayList<>();
         for (LottoFactory factory : lottoFactory) {
             lottos.add(factory.create());
         }
-        for (int i = 0; i < (price / Lotto.PRICE) - lottos.size(); i++) {
-            lottos.add(new Lotto());
-        }
-        this.lottos = List.copyOf(lottos);
+        return lottos;
     }
 
     public Lottos(List<Lotto> lottos) {

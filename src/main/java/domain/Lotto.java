@@ -1,38 +1,24 @@
 package domain;
 
-import java.util.*;
+import java.util.Objects;
 
 public class Lotto {
 
     public static final int PRICE = 1_000;
 
-    private final List<Integer> numbers;
+    private final LottoNumbers lottoNumbers;
 
-    public Lotto() {
-        this(new RandomLottoFactory().create().numbers());
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto(List<Integer> numbers) {
-        assertListSizeOfSix(numbers);
-        List<Integer> newNumbers = new ArrayList<>(numbers);
-        Collections.sort(newNumbers);
-        this.numbers = newNumbers;
-    }
-
-    private void assertListSizeOfSix(List<Integer> numbers) {
-        Set<Integer> set = new HashSet<>(numbers);
-        if (set.size() != 6) {
-            throw new IllegalArgumentException("로또 번호의 갯수가 6개가 아닙니다.");
-        }
-    }
-
-    public List<Integer> numbers() {
-        return new ArrayList<>(numbers);
+    public Rank rank(WinningLotto winningLotto) {
+        return winningLotto.rank(this.lottoNumbers);
     }
 
     @Override
     public String toString() {
-        return numbers.toString();
+        return lottoNumbers.toString();
     }
 
     @Override
@@ -40,11 +26,11 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
+        return Objects.hash(lottoNumbers);
     }
 }

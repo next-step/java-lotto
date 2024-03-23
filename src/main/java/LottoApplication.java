@@ -1,6 +1,4 @@
-import domain.Lottos;
-import domain.Ranks;
-import domain.WinningLotto;
+import domain.*;
 import view.InputView;
 import view.ResultView;
 
@@ -13,8 +11,8 @@ public class LottoApplication {
         Lottos lottos = new Lottos(price);
         ResultView.print(lottos);
 
-        List<Integer> winningNumbers = InputView.promptForWinningNumbers();
-        int bonusBall = InputView.promptForBonusBall();
+        LottoNumbers winningNumbers = InputView.promptForWinningNumbers();
+        LottoNumber bonusBall = InputView.promptForBonusBall();
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBall);
         Ranks ranks = winningLotto.ranks(lottos);
         ResultView.printRanks(ranks);
