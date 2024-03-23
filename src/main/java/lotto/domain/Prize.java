@@ -28,7 +28,7 @@ public enum Prize {
                 .orElse(Prize.valueOf(matchCount));
     }
 
-    public static Prize valueOf(int matchCount) {
+    private static Prize valueOf(int matchCount) {
         return Arrays.stream(values())
                 .filter(p -> p.isSame(matchCount))
                 .findFirst()
