@@ -1,6 +1,9 @@
 package lotto.controller;
 
+import lotto.model.LottoCheck;
+import lotto.model.LottoGenerator;
 import lotto.model.LottoSale;
+import lotto.model.RandomLottoStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -10,12 +13,13 @@ public class LottoAutomaticManager {
         // 입력
         String purchaseAmount = InputView.inputAmount();
 
-        LottoSale lottoSale = new LottoSale();
+        LottoSale lottosaletest = new LottoSale(purchaseAmount, new RandomLottoStrategy());
 
-        int saleCount = lottoSale.sale(purchaseAmount);
+        ResultView.printSaleResultTest(lottosaletest, lottosaletest.getNumberOfLottos());
 
-        ResultView.printSaleResult(saleCount);
-        
+        String winningNumber = InputView.inputWinningNumbers();
+        LottoCheck lottoCheck = new LottoCheck(winningNumber, lottosaletest.getLottos());
+
 
 
     }
