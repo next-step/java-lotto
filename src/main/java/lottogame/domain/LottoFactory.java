@@ -16,9 +16,13 @@ public class LottoFactory {
         int count = money / price;
         List<Lotto> lottos = new ArrayList<>();
         while (count > 0) {
-            lottos.add(new Lotto(this.numberGenerator.generate()));
+            lottos.add(createLotto(this.numberGenerator.generate()));
             count--;
         }
         return lottos;
+    }
+
+    public Lotto createLotto(List<Integer> numbers) {
+        return new Lotto(numbers);
     }
 }

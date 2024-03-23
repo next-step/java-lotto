@@ -33,6 +33,10 @@ public class LottoGame {
         return this.lottoFactory.createLottos(money, PRICE);
     }
 
+    public Lotto createLotto(List<Integer> numbers) {
+        return this.lottoFactory.createLotto(numbers);
+    }
+
     private int calculatePurchaseAmount(List<Lotto> lottos) {
         return lottos.size() * PRICE;
     }
