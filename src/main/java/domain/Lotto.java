@@ -30,15 +30,6 @@ public class Lotto {
         return new ArrayList<>(numbers);
     }
 
-    public Rank rank(Lotto winningLotto) {
-        return this.rank(winningLotto.numbers());
-    }
-
-    private Rank rank(List<Integer> winningNumbers) {
-        winningNumbers.retainAll(this.numbers());
-        return Rank.of(winningNumbers.size());
-    }
-
     @Override
     public String toString() {
         return numbers.toString();

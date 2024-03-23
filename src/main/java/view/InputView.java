@@ -42,4 +42,10 @@ public class InputView {
             throw new IllegalArgumentException("잘못된 값을 입력하였습니다.");
         }
     }
+
+    public static int promptForBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
 }

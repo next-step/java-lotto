@@ -1,18 +1,15 @@
 package domain;
 
-import domain.Lotto;
-import domain.Rank;
+import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.*;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
@@ -33,7 +30,6 @@ public class LottoTest {
     @ParameterizedTest
     @MethodSource("testFixture")
     void test02(List<Integer> numbers, Class<Exception> expected) {
-        // when / then
         assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(expected);
     }
@@ -48,27 +44,8 @@ public class LottoTest {
     @DisplayName("리스트를 기반으로 로또 생성 시 정렬된다.")
     @Test
     void test03() {
-        // given
-        List<Integer> numbers = List.of(5, 6, 1, 2, 3, 4);
+        Lotto lotto = new Lotto(List.of(5, 6, 1, 2, 3, 4));
 
-        // when
-        Lotto lotto = new Lotto(numbers);
-
-        // then
         assertThat(lotto.numbers()).containsExactly(1, 2, 3, 4, 5, 6);
-    }
-
-    @DisplayName("랭킹을 구한다.")
-    @Test
-    void test04() {
-        // given
-        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-
-        // when
-        Rank rank = lotto.rank(winningLotto);
-
-        // then
-        assertThat(rank).isEqualTo(Rank.FIRST);
     }
 }

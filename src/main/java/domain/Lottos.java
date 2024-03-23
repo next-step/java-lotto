@@ -1,11 +1,10 @@
 package domain;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Lottos {
+public class Lottos implements Iterable<Lotto> {
 
     private final List<Lotto> lottos;
 
@@ -21,16 +20,12 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public int getLottoCount() {
-        return lottos.size();
+    public int totalPrice() {
+        return this.lottoCount() * Lotto.PRICE;
     }
 
-    public Ranks ranks(Lotto winningLotto) {
-        List<Rank> ranks = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            ranks.add(lotto.rank(winningLotto));
-        }
-        return new Ranks(ranks);
+    public int lottoCount() {
+        return lottos.size();
     }
 
     @Override
@@ -38,12 +33,8 @@ public class Lottos {
         return lottos.toString();
     }
 
-    public double rateOfReturn(Lotto winningLotto) {
-        int totalPrize = 0;
-        for (Lotto lotto : lottos) {
-            totalPrize += lotto.rank(winningLotto).prizeMoney(1);
-        }
-        double result = (double) totalPrize / (this.getLottoCount() * 1000);
-        return BigDecimal.valueOf(result).setScale(2, RoundingMode.DOWN).doubleValue();
+    @Override
+    public Iterator<Lotto> iterator() {
+        return lottos.iterator();
     }
 }
