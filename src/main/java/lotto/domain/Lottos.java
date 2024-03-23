@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
+    private static List<Lotto> lottos;
 
     public Lottos() {
         this.lottos = new ArrayList<>();
@@ -18,5 +18,23 @@ public class Lottos {
 
     public List<Lotto> getValue() {
         return Collections.unmodifiableList(lottos);
+    }
+
+    public int match(Lotto winningLotto, int matchCount) {
+        return (int) lottos.stream()
+                .filter(lotto -> lotto.match(winningLotto) == matchCount)
+                .count();
+    }
+
+    public double calculateMargin(Lotto winningNumber, Fee fee) {
+        return getReward(winningNumber) / fee.getValue();
+    }
+
+    private double getReward(Lotto winningNumber) {
+        for (Lotto lotto : lottos) {
+
+        }
+
+        return 0;
     }
 }

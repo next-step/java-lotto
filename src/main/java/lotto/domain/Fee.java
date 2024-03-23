@@ -15,4 +15,8 @@ public class Fee {
     public int convertToGameUnit() {
         return value/PRICE_PER_GAME;
     }
+
+    public int getValue() {
+        return value;
+    }
 }
