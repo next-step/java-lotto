@@ -12,18 +12,16 @@ import java.util.stream.Collectors;
 
 public class LottoMatchingService {
 
-    private final List<Integer> matchCounts;
     private final WinningNumbers winningNumbers;
-    private BonusBall bonusBall;
+    private final BonusBall bonusBall;
 
     public LottoMatchingService(List<Integer> winningNumbers, BonusBall bonusBall) {
-        this(WinningNumbers.of(winningNumbers));
-        this.bonusBall = bonusBall;
+        this(WinningNumbers.of(winningNumbers), bonusBall);
     }
 
-    public LottoMatchingService(WinningNumbers winningNumbers) {
-        matchCounts = Arrays.asList(0, 0, 0, 0, 0);
+    public LottoMatchingService(WinningNumbers winningNumbers, BonusBall bonusBall) {
         this.winningNumbers = winningNumbers;
+        this.bonusBall = bonusBall;
     }
 
     public List<Integer> matchWinningNumber(List<LottoTicket> lottoTickets) {
