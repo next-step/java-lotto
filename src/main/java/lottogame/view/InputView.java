@@ -22,7 +22,6 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-
     private static String inputValue() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();

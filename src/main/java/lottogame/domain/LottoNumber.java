@@ -16,9 +16,7 @@ public final class LottoNumber {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-
         LottoNumber that = (LottoNumber) object;
-
         return value == that.value;
     }
 
@@ -29,7 +27,6 @@ public final class LottoNumber {
 
     @Override
     public String toString() {
-
         return String.valueOf(value);
     }
 }
