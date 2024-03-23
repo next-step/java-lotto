@@ -1,28 +1,30 @@
 import java.util.List;
+import lotto.LottoTicket;
 import lotto.LottoTicketBall;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketTest {
-    private LottoTicketBall lottoTicketBall = new LottoTicketBall();
 
-    @ParameterizedTest
-    @ValueSource(ints = {0,46})
-    public void 로또는_1_에서_45_까지의_숫자만_가질_수_있음(int input) {
-        assertThat(lottoTicketBall.generateTicket().contains(input)).isFalse();
+    @Test
+    public void 로또는_1_에서_45_까지의_숫자만_가질_수_있음() {
+        assertThatThrownBy(() ->
+            new LottoTicket(List.of(0,1,2,33,37,45))
+        ).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("1이상 45이하의 숫자만 입력할 수 있습니다.");
     }
 
     @Test
     public void 로또는_6개의_숫자를_가짐() {
-        assertThat(lottoTicketBall.generateTicket().size()).isEqualTo(6);
+        assertThatThrownBy(() ->
+                new LottoTicket(List.of(1,2,33,44,45))
+        ).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("로또 생성을 위해서는 6개의 숫자가 필요합니다.");
     }
 
     @Test
     public void 하나의_로또_안에서_숫자가_겹치지_않음() {
-        List<Integer> ticket = lottoTicketBall.generateTicket();
-        assertThat(ticket.size()).isEqualTo(ticket.stream().distinct().count());
+        assertThatThrownBy(() ->
+                new LottoTicket(List.of(1,1,23,34,44,45))
+        ).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("중복 값은 입력할 수 없습니다.");
 
     }
 }

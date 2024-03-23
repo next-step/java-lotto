@@ -13,10 +13,10 @@ public class LottoTicketBall {
                     END_TICKET_NUMBER)
             .boxed().collect(Collectors.toList());
 
-    public List<Integer> generateTicket() {
+    public LottoTicket generateTicket() {
         Collections.shuffle(balls);
-        List<Integer> ticket = balls.subList(0, 6);
-        Collections.sort(ticket);
+        List<Integer> inputs = balls.subList(0,6);
+        LottoTicket ticket = new LottoTicket(inputs);
         return ticket;
     }
 
