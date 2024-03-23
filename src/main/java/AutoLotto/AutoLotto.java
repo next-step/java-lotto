@@ -11,13 +11,25 @@ public class AutoLotto {
     private final InputView inputView = new InputView();
     private final ResultView resultView = new ResultView();
 
-    public void run() {
-        Long purchaseAmount = Long.valueOf(inputView.inputPurchase());
-        LottoMachine lottoMachine = new LottoMachine(purchaseAmount, new RandomLottoGeneratorStrategy());
-        resultView.outputPurchasedLottos(lottoMachine);
+    private Long purchaseAmount;
+    private LottoMachine lottoMachine;
 
+    public void run() {
+        processPurchase();
+        processWinning();
+    }
+
+    private void processPurchase() {
+        purchaseAmount = Long.valueOf(inputView.inputPurchase());
+        lottoMachine = new LottoMachine(purchaseAmount, new RandomLottoGeneratorStrategy());
+        resultView.outputPurchasedLottos(lottoMachine);
+    }
+
+    private void processWinning() {
         String winNumbers = inputView.inputWinNumbers();
-        LottoWinChecker lottoWinChecker = new LottoWinChecker(winNumbers, lottoMachine.getLottos());
+        int bonusNumber = inputView.inputBonusNumber();
+
+        LottoWinChecker lottoWinChecker = new LottoWinChecker(winNumbers, lottoMachine.getLottos(), bonusNumber);
         LottoProfitChecker lottoProfitChecker = new LottoProfitChecker(lottoWinChecker.getWinLottos());
         resultView.outputLottoResult(lottoWinChecker.getWinLottos(), lottoProfitChecker.getProfitRatio(purchaseAmount));
     }

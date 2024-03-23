@@ -3,8 +3,9 @@ package autoLotto.view;
 import autoLotto.model.Lotto;
 import autoLotto.model.LottoMachine;
 import autoLotto.model.LottoNumber;
-import autoLotto.model.PrizeResultEnum;
+import autoLotto.model.PrizeEnum;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -13,15 +14,17 @@ import java.util.stream.Collectors;
 public class ResultView {
     private static final String START_RESULT_TEXT = "당첨 통계\n--------------";
     private static final String PURCHASED_DONE = "개를 구매했습니다.";
-    private static final String ZERO_REWARD_RESULT = "당첨된 상금이 없습니다.";
     private static final String PROFIT_RATIO_RESULT = "총 수익률은 %.2f 입니다.";
     private static final String START_BRACKET = "[ ";
     private static final String COMMA_DELIMITER = ", ";
     private static final String END_BRACKET = " ]";
-    private static final String THREE_MATCHED_DESCRIPTION = "3개 일치 (5,000원) - ";
-    private static final String FOUR_MATCHED_DESCRIPTION = "4개 일치 (50,000원) - ";
-    private static final String FIVE_MATCHED_DESCRIPTION = "5개 일치 (1,500,000원) - ";
-    private static final String SIX_MATCHED_DESCRIPTION = "6개 일치 (2,000,000,000원) - ";
+    private static final float INIT_PROFIT = 0f;
+    private static final String NONE_MATCHED_RESULT = "당첨된 로또가 없습니다.";
+    private static final String FIFTH_PRIZE_DESCRIPTION = "3개 일치 (5,000원) - ";
+    private static final String FOURTH_PRIZE_DESCRIPTION = "4개 일치 (50,000원) - ";
+    private static final String THIRD_PRIZE_DESCRIPTION = "5개 일치 (1,500,000원) - ";
+    private static final String SECOND_PRIZE_DESCRIPTION = "5개 일치, 보너스 볼 일치 (30,000,000원) - ";
+    private static final String FIRST_PRIZE_DESCRIPTION = "6개 일치 (2,000,000,000원) - ";
 
     public void outputPurchasedLottos(LottoMachine lottoMachine) {
         outputPurchasedNumberOfLotto(lottoMachine.getNumberOfLottos());
@@ -45,42 +48,52 @@ public class ResultView {
     }
 
     private void outputString(String string) {
-        System.out.println(string);
+        if(string != null) {
+            System.out.println(string);
+        }
     }
 
-    public void outputLottoResult(Map<Integer, Integer> lottoResult, float profit) {
+    public void outputLottoResult(Map<PrizeEnum, Integer> lottoResult, BigDecimal profit) {
         outputString(START_RESULT_TEXT);
-        outputMatchingLottos(lottoResult);
+        outputMatchingLottos(lottoResult, profit);
         outputProfit(profit);
     }
 
-    private void outputMatchingLottos(Map<Integer, Integer> lottoResult) {
-        if (lottoResult.size() == 0) {
-            outputString(ZERO_REWARD_RESULT);
+    private void outputMatchingLottos(Map<PrizeEnum, Integer> lottoResult, BigDecimal profit) {
+        if (profit == BigDecimal.ZERO) {
+            outputString(NONE_MATCHED_RESULT);
             return;
         }
 
-        for (Integer key : lottoResult.keySet()) {
-            outputString(getPrizeResult(key, lottoResult.get(key)));
+        for (PrizeEnum prize : lottoResult.keySet()) {
+            outputString(getPrizeResult(prize, lottoResult.get(prize)));
         }
     }
 
-    private String getPrizeResult(int matchedNumber, int value) {
-        switch(matchedNumber) {
+    private String getPrizeResult(PrizeEnum prize, int value) {
+        switch(prize.getMatchedCount()) {
             case 3 :
-                return String.format("%s%d", THREE_MATCHED_DESCRIPTION, value);
+                return String.format("%s%d", FIFTH_PRIZE_DESCRIPTION, value);
             case 4 :
-                return String.format("%s%d", FOUR_MATCHED_DESCRIPTION, value);
+                return String.format("%s%d", FOURTH_PRIZE_DESCRIPTION, value);
             case 5 :
-                return String.format("%s%d", FIVE_MATCHED_DESCRIPTION, value);
+                return getFifthPrizeResult(prize, value);
             case 6 :
-                return String.format("%s%d", SIX_MATCHED_DESCRIPTION, value);
+                return String.format("%s%d", FIRST_PRIZE_DESCRIPTION, value);
             default :
                 return null;
         }
     }
 
-    private void outputProfit(float profit) {
+    private String getFifthPrizeResult(PrizeEnum prize, int value) {
+        if (prize.isBonusMatched()) {
+            return String.format("%s%d", SECOND_PRIZE_DESCRIPTION, value);
+        }
+
+        return String.format("%s%d", THIRD_PRIZE_DESCRIPTION, value);
+    }
+
+    private void outputProfit(BigDecimal profit) {
         String result = String.format(PROFIT_RATIO_RESULT, profit);
         outputString(result);
     }
