@@ -4,8 +4,6 @@ import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
-import java.util.List;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -16,10 +14,13 @@ public class Main {
             LottoTickets lottoTickets = LottoTicketMachine.issue(purchaseAmount);
             ResultView.printLottoTickets(lottoTickets);
 
-            List<Integer> winNumbers = InputView.readWinNumbers();
-            LottoStatistics statisticsMap = new LottoStatistics(lottoTickets, new LottoTicket(winNumbers));
+            LottoTicket winLottoTicket = new LottoTicket(new LottoNumbers(InputView.readWinNumbers()));
+            LottoNumber bonusNumber = new LottoNumber(InputView.readBonusNumber());
+            WinLotto winLotto = new WinLotto(winLottoTicket, bonusNumber);
 
-            ResultView.printLottoStatistics(statisticsMap, purchaseAmount);
+            LottoStatistics statistics = new LottoStatistics(lottoTickets, winLotto);
+
+            ResultView.printLottoStatistics(statistics);
         } catch (IllegalArgumentException e) {
             ResultView.printException(e);
         } catch (Exception e) {

@@ -21,6 +21,11 @@ public class InputView {
         return convertStringToIntegerList(winNumbersString);
     }
 
+    public static int readBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return readInt();
+    }
+
     private static List<Integer> convertStringToIntegerList(String winNumbersString) {
         List<String> winNumbersStrings = List.of(winNumbersString.split(",\\s*"));
         return winNumbersStrings.stream().map(Integer::parseInt).collect(Collectors.toList());

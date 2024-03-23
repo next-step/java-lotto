@@ -5,53 +5,52 @@ import java.util.Map;
 
 public class LottoStatistics {
 
-    private static final int NONE_MATCH = 0;
+    private static final int NONE_RANK = 0;
 
-    // [Key] LottoPrize, [Value] Matched Count (Statistics)
-    private final Map<LottoPrize, Integer> statisticsMap;
+    // [Key] Rank, [Value] Matched Count (Statistics)
+    private final Map<Rank, Integer> statisticsMap;
 
-    public LottoStatistics(LottoTickets lottoTickets, LottoTicket winLottoTicket) {
+    public LottoStatistics(LottoTickets lottoTickets, WinLotto winLotto) {
         this.statisticsMap = new HashMap<>();
-        createStatistics(lottoTickets, winLottoTicket);
+        createStatistics(lottoTickets, winLotto);
     }
 
-    private void createStatistics(LottoTickets tickets, LottoTicket winLottoTicket) {
+    private void createStatistics(LottoTickets tickets, WinLotto winLotto) {
         for (LottoTicket lottoTicket : tickets.get()) {
-            LottoPrize lottoPrize = lottoTicket.getPrize(winLottoTicket);
-            addStatistic(lottoPrize);
+            Rank rank = lottoTicket.getRank(winLotto);
+            addStatistic(rank);
         }
     }
 
-    private void addStatistic(LottoPrize prize) {
-        if (hasPrize(prize)) {
-            this.statisticsMap.put(prize, this.statisticsMap.getOrDefault(prize, 0) + 1);
+    private void addStatistic(Rank rank) {
+        this.statisticsMap.put(rank, this.statisticsMap.getOrDefault(rank, 0) + 1);
+    }
+
+    public Integer getRankCount(Rank rank) {
+        Integer rankCount = this.statisticsMap.get(rank);
+        if (hasRankCount(rankCount)) {
+            return rankCount;
         }
+        return NONE_RANK;
     }
 
-    private boolean hasPrize(LottoPrize prize) {
-        return prize != null;
+    private boolean hasRankCount(Integer rankCount) {
+        return rankCount != null;
     }
 
-    public int getMatchCount(LottoPrize prize) {
-        if (hasPrizeStatistics(prize)) {
-            return this.statisticsMap.get(prize);
-        }
-        return NONE_MATCH;
-    }
-
-    private boolean hasPrizeStatistics(LottoPrize prize) {
-        return this.statisticsMap.containsKey(prize);
-    }
-
-    public double calculateProfitRate(int purchaseAmount) {
+    public double calculateProfitRate() {
         double profit = 0;
-        for (LottoPrize prize : statisticsMap.keySet()) {
-            profit += getTotalAmount(prize);
+        for (Rank rank : statisticsMap.keySet()) {
+            profit += getTotalAmount(rank);
         }
-        return profit / purchaseAmount;
+        return profit / (getCountOfLottoTickets() * LottoTicketMachine.AMOUNT_PER_TICKET);
     }
 
-    private double getTotalAmount(LottoPrize prize) {
-        return statisticsMap.get(prize) * prize.getPrize();
+    private double getTotalAmount(Rank rank) {
+        return getRankCount(rank) * rank.getPrize();
+    }
+
+    private int getCountOfLottoTickets() {
+        return statisticsMap.values().stream().mapToInt(Integer::intValue).sum();
     }
 }

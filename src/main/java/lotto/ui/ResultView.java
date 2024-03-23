@@ -3,7 +3,7 @@ package lotto.ui;
 import lotto.domain.*;
 
 import java.text.MessageFormat;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -33,8 +33,8 @@ public class ResultView {
     }
 
     private static String formatLottoNumber(LottoTicket ticket) {
-        return ticket.getLottoNumbers().stream()
-                .map(Object::toString)
+        return ticket.get().stream()
+                .map(number -> Integer.toString(number.get()))
                 .collect(Collectors.joining(", "));
     }
 
@@ -42,28 +42,44 @@ public class ResultView {
         return MessageFormat.format("{0}개를 구매했습니다.", count);
     }
 
-    public static void printLottoStatistics(LottoStatistics statisticsMap, int purchaseAmount) {
-        String message = formatLottoPrizes(statisticsMap) + formatProfitRate(statisticsMap, purchaseAmount);
+    public static void printLottoStatistics(LottoStatistics statistics) {
+        String message = formatRanks(statistics) + formatProfitRate(statistics);
         System.out.println(message);
     }
 
-    private static String formatLottoPrizes(LottoStatistics statisticsMap) {
-        List<LottoPrize> prizes = LottoPrize.getLottoPrizes();
+    private static String formatRanks(LottoStatistics statistics) {
+        List<Rank> ranks = getRanksWithoutMISS();
 
         StringBuilder stringBuilder = new StringBuilder();
-        for (LottoPrize prize : prizes) {
-            stringBuilder.append(formatStatistic(statisticsMap, prize)).append(System.lineSeparator());
+        for (Rank rank : ranks) {
+            stringBuilder.append(formatStatistic(statistics, rank)).append(System.lineSeparator());
         }
         return stringBuilder.toString();
     }
 
-    private static String formatStatistic(LottoStatistics statisticsMap, LottoPrize prize) {
-        return MessageFormat.format("{0}개 일치 ({1}원) - {2}개"
-                , prize.getMatchCount(), prize.getPrize(), statisticsMap.getMatchCount(prize));
+    private static List<Rank> getRanksWithoutMISS() {
+        List<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
+        ranks.sort(Comparator.comparing(Rank::getPrize));
+        ranks.remove(Rank.MISS);
+        return ranks;
     }
 
-    public static String formatProfitRate(LottoStatistics statisticsMap, int purchaseAmount) {
-        return MessageFormat.format("총 수익률은 {0}입니다.", statisticsMap.calculateProfitRate(purchaseAmount));
+    private static String formatStatistic(LottoStatistics statistics, Rank rank) {
+        return MessageFormat.format("{0} ({1}원) - {2}개"
+                , formatRankMatchCount(rank), rank.getPrize(), statistics.getRankCount(rank));
+    }
+
+    private static String formatRankMatchCount(Rank rank) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(MessageFormat.format("{0}개 일치", rank.getMatchCount()));
+        if (Rank.SECOND == rank) {
+            stringBuilder.append(", 보너스 볼 일치");
+        }
+        return stringBuilder.toString();
+    }
+
+    public static String formatProfitRate(LottoStatistics statistics) {
+        return MessageFormat.format("총 수익률은 {0}입니다.", statistics.calculateProfitRate());
     }
 
     public static void printException(String exceptionMessage) {

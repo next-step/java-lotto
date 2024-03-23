@@ -4,9 +4,10 @@ import lotto.exception.IllegalLottoNumberException;
 
 import java.util.Objects;
 
-import static lotto.domain.LottoInformation.*;
-
 public class LottoNumber {
+
+    public static final int NUMBER_RANGE_FROM = 1;
+    public static final int NUMBER_RANGE_TO = 45;
 
     private final int number;
 
@@ -17,7 +18,7 @@ public class LottoNumber {
 
     private void validateNumberRange(int number) throws IllegalLottoNumberException {
         if (notInRange(number)) {
-            throw new IllegalLottoNumberException(number);
+            throw new IllegalLottoNumberException(NUMBER_RANGE_FROM, NUMBER_RANGE_TO, number);
         }
     }
 
