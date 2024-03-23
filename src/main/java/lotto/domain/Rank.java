@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000, (matchCount, isBonusMatched) -> matchCount == 6),
-    SECOND(5, 30_000_000, (matchCount, isBonusMatched) -> matchCount == 5 && isBonusMatched),
-    THIRD(5, 1_500_000, (matchCount, isBonusMatched) -> matchCount == 5 && !isBonusMatched),
-    FOURTH(4, 50_000, (matchCount, isBonusMatched) -> matchCount == 4),
+    MISS(0, 0, (matchCount, isBonusMatched) -> matchCount <= 2),
     FIFTH(3, 5_000, (matchCount, isBonusMatched) -> matchCount == 3),
-    MISS(0, 0, (matchCount, isBonusMatched) -> matchCount <= 2);
+    FOURTH(4, 50_000, (matchCount, isBonusMatched) -> matchCount == 4),
+    THIRD(5, 1_500_000, (matchCount, isBonusMatched) -> matchCount == 5 && !isBonusMatched),
+    SECOND(5, 30_000_000, (matchCount, isBonusMatched) -> matchCount == 5 && isBonusMatched),
+    FIRST(6, 2_000_000_000, (matchCount, isBonusMatched) -> matchCount == 6);
 
     private final int matchCount;
     private final int winningMoney;
