@@ -30,5 +30,15 @@
 
 <br>
 
+## Step3 기능 목록
+
+### domain 분석
+
+- 추첨로또에는 숫자 6개뿐만이 아니라 보너스 숫자가 추가된다.
+  - 이는 중복되면 안되고 1~45 사이의 값이다.
+- 5개일치 및 보너스 볼 일치가 추가된다.
+
+<br>
+
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
