@@ -33,6 +33,10 @@ public class LottoNumbers {
                 .collect(Collectors.toUnmodifiableList());
     }
 
+    public boolean isContainNumber(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
+
     public int matchCount(LottoNumbers lottoNumbers) {
 
         return (int) this.numbers.stream()
