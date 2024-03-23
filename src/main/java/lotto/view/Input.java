@@ -17,16 +17,24 @@ public class Input {
         System.out.println("구입금액을 입력해 주세요.");
         String purchaseMoneyInput = scanner.nextLine();
 
-        return Integer.parseInt(purchaseMoneyInput);
+        try {
+            return Integer.parseInt(purchaseMoneyInput);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("금액을 위해 숫자를 입력 해 주세요.");
+        }
     }
 
     public List<Integer> getLastWeekWinningLottoNumbersInput() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String lastWeekWinningLottoNumbers = scanner.nextLine();
 
-        return Arrays.stream(lastWeekWinningLottoNumbers.split(", "))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        try {
+            return Arrays.stream(lastWeekWinningLottoNumbers.split(", "))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new IllegalArgumentException("로또 번호를 위해 숫자를 입력 해 주세요.");
+        }
     }
 
     public int getBonusNumber() {
