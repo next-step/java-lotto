@@ -2,6 +2,7 @@ package lottogame;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import lottogame.domain.LottoFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import utils.numbergenerator.NumberGenerator;

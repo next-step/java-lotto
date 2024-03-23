@@ -1,4 +1,4 @@
-package lottogame;
+package lottogame.domain;
 
 import java.util.stream.Stream;
 

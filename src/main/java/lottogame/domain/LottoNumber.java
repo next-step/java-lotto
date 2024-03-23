@@ -1,4 +1,4 @@
-package lottogame;
+package lottogame.domain;
 
 public final class LottoNumber {
 

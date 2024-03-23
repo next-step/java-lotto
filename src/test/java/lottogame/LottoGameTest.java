@@ -3,6 +3,8 @@ package lottogame;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import lottogame.domain.Lotto;
+import lottogame.domain.LottoGame;
 import org.junit.jupiter.api.Test;
 
 class LottoGameTest {
