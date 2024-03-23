@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class IssuedLottoTickets {
 
     private final LottoTickets manual;
@@ -24,6 +26,10 @@ public class IssuedLottoTickets {
 
     public int autoSize() {
         return this.auto.size();
+    }
+
+    public List<LottoTickets> getAllLottoTickets() {
+        return List.of(manual, auto);
     }
 
 }

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoStatistics {
@@ -10,11 +11,11 @@ public class LottoStatistics {
     // [Key] Rank, [Value] Matched Count (Statistics)
     private final Map<Rank, Integer> statisticsMap;
 
-    public LottoStatistics(IssuedLottoTickets lottoTickets, WinLotto winLotto) {
-        this(winLotto, lottoTickets.getManual(), lottoTickets.getAuto());
+    public LottoStatistics(WinLotto winLotto, LottoTickets lottoTickets) {
+        this(winLotto, List.of(lottoTickets));
     }
 
-    public LottoStatistics(WinLotto winLotto, LottoTickets... lottoTickets) {
+    public LottoStatistics(WinLotto winLotto, List<LottoTickets> lottoTickets) {
         this.statisticsMap = new HashMap<>();
 
         for (LottoTickets tickets : lottoTickets) {

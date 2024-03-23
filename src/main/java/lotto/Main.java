@@ -23,7 +23,7 @@ public class Main {
             LottoNumber bonusNumber = LottoNumber.of(InputView.readBonusNumber());
             WinLotto winLotto = new WinLotto(winLottoTicket, bonusNumber);
 
-            LottoStatistics statistics = new LottoStatistics(issuedLottoTickets, winLotto);
+            LottoStatistics statistics = new LottoStatistics(winLotto, issuedLottoTickets.getAllLottoTickets());
 
             ResultView.printLottoStatistics(statistics);
         } catch (IllegalArgumentException e) {
