@@ -54,6 +54,6 @@ public enum RewardPrice {
     if (it.matchCount == 5) {
       return it.isMatchBonusBall == isMatchBonusBall;
     }
-    return it.isMatchBonusBall == Boolean.FALSE;
+    return !it.isMatchBonusBall;
   }
 }

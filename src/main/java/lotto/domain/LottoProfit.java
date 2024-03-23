@@ -2,8 +2,8 @@ package lotto.domain;
 
 import lotto.domain.type.RewardPrice;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class LottoProfit {
 
@@ -37,8 +37,9 @@ public class LottoProfit {
 
   private static TreeMap<RewardPrice, Integer> initRewardPriceMap() {
     TreeMap<RewardPrice, Integer> profitMap = new TreeMap<>((o1, o2) -> o1.rewardAmount() - o2.rewardAmount());
-    List<RewardPrice> filteredInfos = Arrays.stream(RewardPrice.values()).collect(Collectors.toList());
-    filteredInfos.forEach(info -> profitMap.put(info, 0));
+    for (RewardPrice reward : RewardPrice.values()) {
+      profitMap.put(reward, 0);
+    }
     return profitMap;
   }
 }

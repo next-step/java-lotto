@@ -14,7 +14,7 @@ public class LottoTicket {
 
   private LottoTicket(Set<Integer> lottoNumbers) {
 
-    if (Boolean.FALSE.equals(checkNumbersRange(lottoNumbers))) {
+    if (!checkNumbersRange(lottoNumbers)) {
       throw new IllegalArgumentException(String.format(INVALID_LOTTO_NUMBER_INPUT, lottoNumbers));
     }
 

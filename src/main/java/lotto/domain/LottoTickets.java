@@ -2,8 +2,10 @@ package lotto.domain;
 
 import lotto.domain.type.RewardPrice;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class LottoTickets {
 
@@ -57,8 +59,9 @@ public class LottoTickets {
 
   private Map<RewardPrice, Integer> initMatchedNumberCountMap() {
     Map<RewardPrice, Integer> map = new HashMap<>();
-    List<RewardPrice> filteredInfos = Arrays.stream(RewardPrice.values()).collect(Collectors.toList());
-    filteredInfos.forEach(info -> map.put(info, 0));
+    for (RewardPrice reward : RewardPrice.values()) {
+      map.put(reward, 0);
+    }
     return map;
   }
 }
