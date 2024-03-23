@@ -31,9 +31,11 @@ public class RewardPriceTest {
   void rewardAmountTest2(Set<Integer> given, int expected) {
     WinningNumbers winningNumbers = WinningNumbers.of(Set.of(1, 2, 3, 4, 5, 6), 7);
     LottoTicket myLottoTicket = LottoTicket.generate(given);
-    int count = winningNumbers.matchNumberCount(myLottoTicket);
 
-    assertThat(RewardPrice.rewardBy(count, Boolean.FALSE)).isEqualTo(expected);
+    int count = winningNumbers.matchNumberCount(myLottoTicket);
+    RewardPrice rewardPrice = RewardPrice.match(count, false);
+
+    assertThat(rewardPrice.rewardAmount()).isEqualTo(expected);
   }
 
   @Test
@@ -41,9 +43,11 @@ public class RewardPriceTest {
   void rewardAmountTest3() {
     WinningNumbers winningNumbers = WinningNumbers.of(Set.of(1, 2, 3, 4, 5, 6), 7);
     LottoTicket myLottoTicket = LottoTicket.generate(Set.of(1, 2, 3, 4, 5, 11));
-    int count = winningNumbers.matchNumberCount(myLottoTicket);
 
-    assertThat(RewardPrice.rewardBy(count, Boolean.FALSE)).isEqualTo(1_500_000);
+    int count = winningNumbers.matchNumberCount(myLottoTicket);
+    RewardPrice rewardPrice = RewardPrice.match(count, false);
+
+    assertThat(rewardPrice.rewardAmount()).isEqualTo(1_500_000);
   }
 
   @Test
@@ -51,9 +55,11 @@ public class RewardPriceTest {
   void rewardAmountTest4() {
     WinningNumbers winningNumbers = WinningNumbers.of(Set.of(1, 2, 3, 4, 5, 6), 7);
     LottoTicket myLottoTicket = LottoTicket.generate(Set.of(1, 2, 3, 4, 5, 7));
-    int count = winningNumbers.matchNumberCount(myLottoTicket);
 
-    assertThat(RewardPrice.rewardBy(count, Boolean.TRUE)).isEqualTo(30_000_000);
+    int count = winningNumbers.matchNumberCount(myLottoTicket);
+    RewardPrice rewardPrice = RewardPrice.match(count, true);
+
+    assertThat(rewardPrice.rewardAmount()).isEqualTo(30_000_000);
   }
 
   private static Stream<Arguments> matchCountTestCases() {

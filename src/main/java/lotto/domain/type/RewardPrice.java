@@ -22,15 +22,6 @@ public enum RewardPrice {
     this.isMatchBonusBall = isMatchBonusBall;
   }
 
-  public static int rewardBy(int count, boolean isMatchBonusBall) {
-    return Arrays.stream(getValues())
-        .filter(it -> it.matchCount == count)
-        .filter(it -> filterIsMatchBonusBall(isMatchBonusBall, it))
-        .findFirst()
-        .map(value -> value.amount)
-        .orElseGet(() -> NONE.amount);
-  }
-
   public static RewardPrice match(int count, boolean isMatchBonusBall) {
     return Arrays.stream(getValues())
         .filter(it -> it.matchCount == count)
