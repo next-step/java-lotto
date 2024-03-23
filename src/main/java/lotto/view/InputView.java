@@ -37,7 +37,7 @@ public class InputView {
     }
 
     private static void validatePurchaseAmountOfMoneyInput(String purchaseAmountOfMoneyInput) {
-        if(!isPositiveInteger(purchaseAmountOfMoneyInput)) {
+        if (!isPositiveInteger(purchaseAmountOfMoneyInput)) {
             throw new InvalidPurchaseAmountOfMoneyException(purchaseAmountOfMoneyInput);
         }
     }
@@ -56,14 +56,14 @@ public class InputView {
     }
 
     private static void validateWinningNumbersInput(String winningNumbersInput) {
-        if(!isNonBlank(winningNumbersInput)) {
+        if (!isNonBlank(winningNumbersInput)) {
             throw InvalidWinningNumbersException.wrongFormat(winningNumbersInput);
         }
 
         boolean hasNonPositiveIntegerNumber = Arrays.stream(winningNumbersInput.split(COMMA_BLANK_DELIMITER))
                 .anyMatch(number -> !isPositiveInteger(number));
 
-        if(hasNonPositiveIntegerNumber) {
+        if (hasNonPositiveIntegerNumber) {
             throw InvalidWinningNumbersException.wrongFormat(winningNumbersInput);
         }
     }
@@ -80,7 +80,7 @@ public class InputView {
     }
 
     private static void validateBonusNumberInput(String bonusNumberInput) {
-        if(!isPositiveInteger(bonusNumberInput)) {
+        if (!isPositiveInteger(bonusNumberInput)) {
             throw new InValidBonusNumberException(bonusNumberInput);
         }
     }

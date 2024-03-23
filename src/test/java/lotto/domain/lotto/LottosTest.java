@@ -30,7 +30,7 @@ class LottosTest {
     @ParameterizedTest
     @CsvSource(value = {"1, 2, 3, 7, 8, 9:10:FIFTH:5", "1, 2, 3, 4, 8, 9:10:FOURTH:50", "1, 2, 3, 4, 5, 9:10:THIRD:1500", "1, 2, 3, 4, 5, 9:6:SECOND:30000", "1, 2, 3, 4, 5, 6:10:FIRST:2000000"}, delimiter = ':')
     @DisplayName("statistics(): 로또의 결과(당첨 통계, 수익률)를 반환합니다.")
-    void testStatistics(String winningNumbersInput,  int bonusNumberInput, Rank rank, double expectedRateOfReturn) {
+    void testStatistics(String winningNumbersInput, int bonusNumberInput, Rank rank, double expectedRateOfReturn) {
         PurchaseAmountOfMoney purchaseAmountOfMoney = PurchaseAmountOfMoney.valueOf(1000);
         Lottos lottos = LottoStore.purchaseLotto(lottoGeneratingStrategyStub, purchaseAmountOfMoney.numberOfLottoToPurchase());
         WinningNumbers winningNumbers = WinningNumbers.valueOf(lottoNumbersForTest(winningNumbersInput));

@@ -18,7 +18,7 @@ public class BonusNumber {
     }
 
     private void validateBonusNumberWithOutWinningNumbers(LottoNumber bonusNumber, WinningNumbers winningNumbers) {
-        if(winningNumbers.contains(bonusNumber)) {
+        if (winningNumbers.contains(bonusNumber)) {
             throw new InValidBonusNumberException(bonusNumber.lottoNumber());
         }
     }

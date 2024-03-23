@@ -29,7 +29,7 @@ class ResultOfLottosTest {
             Rank rank = FIFTH;
 
             ResultOfLottos resultOfLottos = new ResultOfLottos(
-                    new HashMap<>(){{
+                    new HashMap<>() {{
                         put(rank, 1);
                     }});
 
@@ -55,7 +55,7 @@ class ResultOfLottosTest {
     @DisplayName("totalWinningMoney(): 총 당첨금을 반환한다.")
     void testTotalWinningMoney(Rank rank, int numberOfMatchCount) {
         ResultOfLottos resultOfLottos = new ResultOfLottos(
-                new HashMap<>(){{
+                new HashMap<>() {{
                     put(rank, numberOfMatchCount);
                 }});
 
