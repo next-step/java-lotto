@@ -27,7 +27,7 @@ public class LottoStatisticsTest {
         LottoNumber bonusNumber = LottoNumber.of(23);
 
         // When
-        LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, new WinLotto(winLottoTicket, bonusNumber));
+        LottoStatistics lottoStatistics = new LottoStatistics(new WinLotto(winLottoTicket, bonusNumber), lottoTickets);
 
         // Then
         assertThat(lottoStatistics.getRankCount(Rank.valueOf(matchCount, false))).isEqualTo(count);
@@ -50,7 +50,7 @@ public class LottoStatisticsTest {
         LottoNumber bonusNumber = LottoNumber.of(23);
 
         // When
-        LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, new WinLotto(winLottoTicket, bonusNumber));
+        LottoStatistics lottoStatistics = new LottoStatistics(new WinLotto(winLottoTicket, bonusNumber), lottoTickets);
 
         // Then
         assertThat(lottoStatistics.getRankCount(Rank.valueOf(matchCount, false))).isEqualTo(count);

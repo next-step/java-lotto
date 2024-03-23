@@ -14,14 +14,14 @@ public class ResultView {
     public static void printLottoTickets(IssuedLottoTickets issuedLottoTickets) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(formatLottoTicketsCount(issuedLottoTickets)).append(System.lineSeparator());
-        stringBuilder.append(formatLottoTickets(issuedLottoTickets.getAutoLottoTickets()));
-        stringBuilder.append(formatLottoTickets(issuedLottoTickets.getManualLottoTickets())).append(System.lineSeparator());
+        stringBuilder.append(formatLottoTickets(issuedLottoTickets.getAuto()));
+        stringBuilder.append(formatLottoTickets(issuedLottoTickets.getManual())).append(System.lineSeparator());
         System.out.println(stringBuilder);
     }
 
     private static String formatLottoTicketsCount(IssuedLottoTickets issuedLottoTickets) {
         return MessageFormat.format("수동으로 {0}장, 자동으로 {1}개를 구매했습니다.",
-                issuedLottoTickets.manualLottoTicketsSize(), issuedLottoTickets.autoLottoTicketsSize());
+                issuedLottoTickets.manualSize(), issuedLottoTickets.autoSize());
     }
 
     private static String formatLottoTickets(LottoTickets lottoTickets) {

@@ -11,14 +11,15 @@ public class LottoStatistics {
     private final Map<Rank, Integer> statisticsMap;
 
     public LottoStatistics(IssuedLottoTickets lottoTickets, WinLotto winLotto) {
-        this.statisticsMap = new HashMap<>();
-        addStatistic(winLotto, lottoTickets.getManualLottoTickets());
-        addStatistic(winLotto, lottoTickets.getAutoLottoTickets());
+        this(winLotto, lottoTickets.getManual(), lottoTickets.getAuto());
     }
 
-    public LottoStatistics(LottoTickets lottoTickets, WinLotto winLotto) {
+    public LottoStatistics(WinLotto winLotto, LottoTickets... lottoTickets) {
         this.statisticsMap = new HashMap<>();
-        addStatistic(winLotto, lottoTickets);
+
+        for (LottoTickets tickets : lottoTickets) {
+            addStatistic(winLotto, tickets);
+        }
     }
 
     private void addStatistic(WinLotto winLotto, LottoTickets lottoTickets) {

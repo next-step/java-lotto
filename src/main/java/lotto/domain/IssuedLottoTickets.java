@@ -2,28 +2,28 @@ package lotto.domain;
 
 public class IssuedLottoTickets {
 
-    private final LottoTickets manualLottoTickets;
-    private final LottoTickets autoLottoTickets;
+    private final LottoTickets manual;
+    private final LottoTickets auto;
 
-    public IssuedLottoTickets(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
-        this.manualLottoTickets = manualLottoTickets;
-        this.autoLottoTickets = autoLottoTickets;
+    public IssuedLottoTickets(LottoTickets manual, LottoTickets auto) {
+        this.manual = manual;
+        this.auto = auto;
     }
 
-    public LottoTickets getManualLottoTickets() {
-        return this.manualLottoTickets;
+    public LottoTickets getManual() {
+        return this.manual;
     }
 
-    public LottoTickets getAutoLottoTickets() {
-        return this.autoLottoTickets;
+    public LottoTickets getAuto() {
+        return this.auto;
     }
 
-    public int manualLottoTicketsSize() {
-        return this.manualLottoTickets.size();
+    public int manualSize() {
+        return this.manual.size();
     }
 
-    public int autoLottoTicketsSize() {
-        return this.autoLottoTickets.size();
+    public int autoSize() {
+        return this.auto.size();
     }
 
 }

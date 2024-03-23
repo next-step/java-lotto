@@ -15,6 +15,6 @@ public class LottoTicketMachineTest {
     @DisplayName("[성공] 구입 금액만큼의 로또를 발권한다.")
     void 로또_발권() {
         IssuedLottoTickets lottoTickets = LottoTicketMachine.issue(14000, Collections.emptyList());
-        assertThat(lottoTickets.manualLottoTicketsSize() + lottoTickets.autoLottoTicketsSize()).isEqualTo(14);
+        assertThat(lottoTickets.manualSize() + lottoTickets.autoSize()).isEqualTo(14);
     }
 }
