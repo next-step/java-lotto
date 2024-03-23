@@ -64,9 +64,8 @@ public class LottoNumbersTest {
     }
 
     public static LottoNumbers createLottoNumber(int... numbers) {
-        List<Integer> numberList = Arrays.stream(numbers)
+        return Arrays.stream(numbers)
                 .boxed()
-                .collect(Collectors.toList());
-        return LottoNumbers.from(numberList);
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumbers::from));
     }
 }
