@@ -19,6 +19,7 @@ public class LottoController {
         결과분석
 
          */
+        Fee fee = InputView.payForGames();
         Lotto<List> lottos = lottoGenerator.generateLottos(fee);
     }
 }
