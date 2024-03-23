@@ -4,7 +4,7 @@ import static calculator.config.CalculatorExceptionMessage.OPERAND_SHOULD_BE_INT
 
 import java.util.Objects;
 
-class Operand implements Token {
+public class Operand implements Token {
 
     private final int number;
 
