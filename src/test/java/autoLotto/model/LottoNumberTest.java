@@ -15,7 +15,7 @@ class LottoNumberTest {
     private static final int OUT_OF_RANGE_NUMBER = 111;
 
     @Test
-    @DisplayName("로또번호 생성 성공 : 1 (유효한 값)")
+    @DisplayName("로또번호 생성 성공 : 유효한 값")
     void testLottoNumber_ValidNumber_ShouldConstructCorrectLottoNumber() {
         // when
         LottoNumber lottoNumber = new LottoNumber(VALID_NUMBER);
