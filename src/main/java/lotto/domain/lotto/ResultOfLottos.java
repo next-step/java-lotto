@@ -29,7 +29,8 @@ public class ResultOfLottos {
     }
 
     public int totalWinningMoney() {
-        return resultOfLottos.keySet().stream()
+        return resultOfLottos.keySet()
+                .stream()
                 .mapToInt(rank -> rank.winningMoney() * valueForMatchCount(rank))
                 .sum();
     }
