@@ -53,4 +53,27 @@ public class LottoTicketTest {
         assertThat(lottoTicket.getLottoTicketToString()).containsExactly("[1, 2, 3, 11, 22, 33]", "[1, 2, 3, 21, 42, 45]");
         assertThat(lottoTicket.getLottoTicketToString()).doesNotContain("[1, 2, 3, 4, 5, 6]");
     }
+
+    @Test
+    @DisplayName("combine 호출 시 LottoNumbers가 합쳐짐")
+    void combine() {
+        List<LottoNumbers> lottoNumbersList1 = new ArrayList<>();
+        LottoNumbers lottoNumbers1_1 = createLottoNumber(1, 2, 3, 11, 22, 33);
+        LottoNumbers lottoNumbers1_2 = createLottoNumber(1, 2, 3, 21, 42, 45);
+        lottoNumbersList1.add(lottoNumbers1_1);
+        lottoNumbersList1.add(lottoNumbers1_2);
+
+        List<LottoNumbers> lottoNumbersList2 = new ArrayList<>();
+        LottoNumbers lottoNumbers2_1 = createLottoNumber(3, 6, 12, 33, 35, 41);
+        LottoNumbers lottoNumber2_2 = createLottoNumber(11, 17, 25, 29, 38, 39);
+        lottoNumbersList2.add(lottoNumbers2_1);
+        lottoNumbersList2.add(lottoNumber2_2);
+
+        LottoTicket lottoTicket1 = LottoTicket.from(lottoNumbersList1);
+        LottoTicket lottoTicket2 = LottoTicket.from(lottoNumbersList2);
+
+        LottoTicket combinedLottoTicket = lottoTicket1.combine(lottoTicket2);
+
+        assertThat(combinedLottoTicket.containsExactly(lottoNumbers1_1, lottoNumbers1_2, lottoNumbers2_1, lottoNumber2_2)).isTrue();
+    }
 }
