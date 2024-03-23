@@ -17,4 +17,11 @@ class WinningLottoTest {
         WinningLotto winningLotto = WinningLotto.from(List.of(1, 2, 3, 4, 5, 6), 14);
         assertThat(winningLotto).isEqualTo(new WinningLotto(Lotto.from(List.of(1, 2, 3, 4, 5, 6)), LottoNumber.from(14)));
     }
+
+    @DisplayName("보너스 번호가 당첨된 번호에 포함될 수 없다.")
+    @Test
+    void fromWithExceptionWhenExistsBonusNumberInWinningLotto() {
+        Assertions.assertThatThrownBy(() -> WinningLotto.from(List.of(1, 2, 3, 4, 5, 6), 6))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

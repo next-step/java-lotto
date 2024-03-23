@@ -8,7 +8,17 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public static WinningLotto from(List<Integer> winningIntegerList, int bonusNumber) {
+        Lotto winningLotto = Lotto.from(winningIntegerList);
+        LottoNumber bonusLotto = LottoNumber.from(bonusNumber);
+
+        verifyDuplicateBonusNumberInWininngLotto(winningLotto, bonusLotto);
         return new WinningLotto(Lotto.from(winningIntegerList), LottoNumber.from(bonusNumber));
+    }
+
+    private static void verifyDuplicateBonusNumberInWininngLotto(Lotto winningLotto, LottoNumber bonusLotto) {
+        if (winningLotto.contain(bonusLotto)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨된 번호와 중복될 수 없습니다.");
+        }
     }
 
     public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
