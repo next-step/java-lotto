@@ -90,9 +90,9 @@ public class Calculator {
     private boolean isNotFourBasicOperations(String strings) {
         return !(
                 ADD.getOperation().equals(strings) ||
-                MINUS.getOperation().equals(strings) ||
-                MULTIPLY.getOperation().equals(strings) ||
-                DIVIDE.getOperation().equals(strings)
+                        MINUS.getOperation().equals(strings) ||
+                        MULTIPLY.getOperation().equals(strings) ||
+                        DIVIDE.getOperation().equals(strings)
         );
     }
 }
