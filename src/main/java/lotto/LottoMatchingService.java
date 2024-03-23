@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.domain.BonusBall;
-import lotto.domain.LottoMachine;
 import lotto.domain.LottoTicket;
 import lotto.domain.Prize;
 import lotto.domain.Prizes;
@@ -33,16 +32,9 @@ public class LottoMatchingService {
 
     public List<Integer> matchWinningNumber(List<LottoTicket> lottoTickets) {
         List<Prize> prizes = lottoTickets.stream()
-                .map(lottoTicket -> Prize.valueOf(winningNumbers.countMatchingWith(lottoTicket.generate()), isMatchBonusBall(lottoTicket)))
-                .collect(Collectors.toUnmodifiableList());
-
-        return new Prizes(prizes).calculateMatchCounts();
-    }
-
-    public List<Integer> matchWinningNumber(LottoMachine lottoMachine) {
-        List<LottoTicket> lottoTickets = lottoMachine.generateLottoTickets();
-        List<Prize> prizes = lottoTickets.stream()
-                .map(lottoTicket -> Prize.valueOf(winningNumbers.countMatchingWith(lottoTicket.generate())))
+                .map(lottoTicket -> Prize.valueOf(
+                        winningNumbers.countMatchingWith(lottoTicket.generate()), isMatchBonusBall(lottoTicket))
+                )
                 .collect(Collectors.toUnmodifiableList());
 
         return new Prizes(prizes).calculateMatchCounts();

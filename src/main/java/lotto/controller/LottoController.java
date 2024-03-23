@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.BonusBall;
 import lotto.domain.LottoMachine;
 import lotto.domain.Price;
 import lotto.view.InputView;
@@ -32,8 +33,14 @@ public class LottoController {
         resultView.printDoInputWinningNumbers();
 
         List<Integer> winningNumbers = inputView.getWinningNumbers();
+        resultView.printBonusBallNumber();
 
-        resultView.printResult(lottoMachine, winningNumbers, price);
+        // todo 빌더패턴으로 변경
+        resultView.printResult(lottoMachine
+                , winningNumbers
+                , price
+                , new BonusBall(inputView.getBonusBallNumber())
+        );
     }
 
 }

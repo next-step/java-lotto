@@ -37,4 +37,8 @@ public class InputView {
         return winningNumbers;
     }
 
+    public int getBonusBallNumber() {
+        return SCANNER.nextInt();
+    }
+
 }
