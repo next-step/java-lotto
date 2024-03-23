@@ -16,32 +16,31 @@ public class InputView {
     private static final String INPUT_RETRY = " 다시 입력해주세요.";
     public static final String INPUT_MIN_PRICE_MESSAGE = "금액은 최소 " + LOTTO_PRICE + "원 이상 입력이 가능합니다.";
     public static final String INPUT_CORRECT_PRICE_UNIT_MESSAGE = "금액은 " + LOTTO_PRICE + "원 단위로 입력이 가능합니다.";
+    public static final String INPUT_MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
     public static final String INPUT_MANUAL_LOTTO_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
-    public static final String INPUT_MANUAL_LOTTO_COUNT_MESSAGE = "구매한 총 로또 수를 초과할 수 없습니다.";
+    public static final String INPUT_MANUAL_LOTTO_COUNT_OVER_MESSAGE = "구매한 총 로또 수를 초과할 수 없습니다.";
 
     private static final Scanner scanner = new Scanner(System.in);
 
 
-    public int lottoCount(String message) {
+    public int totalLottoCount(String message) {
         System.out.println(message);
 
         try {
             int money = scanPriceForBuyLotto();
-            int countOfLotto = money / LOTTO_PRICE;
-            System.out.println(countOfLotto + "개를 구매했습니다.");
-            return countOfLotto;
+            return money / LOTTO_PRICE;
         } catch (NumberFormatException e) {
-            return lottoCount(INPUT_NUMBER_MESSAGE + INPUT_RETRY);
+            return totalLottoCount(INPUT_NUMBER_MESSAGE + INPUT_RETRY);
         } catch (IllegalArgumentException e) {
-            return lottoCount(e.getMessage());
+            return totalLottoCount(e.getMessage());
         }
     }
 
     public int manualLottoCount(int totalLottoCount) {
-        System.out.println(INPUT_MANUAL_LOTTO_MESSAGE);
+        System.out.println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE);
         int manualLottoCount = Integer.parseInt(scanner.nextLine());
         if (manualLottoCount > totalLottoCount) {
-            System.out.println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE);
+            System.out.println(INPUT_MANUAL_LOTTO_COUNT_OVER_MESSAGE);
             return manualLottoCount(totalLottoCount);
         }
         return manualLottoCount;
@@ -49,8 +48,9 @@ public class InputView {
 
     public LottoTicket manualLottoTicket(int manualLottoCount) {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        System.out.println(INPUT_MANUAL_LOTTO_MESSAGE);
         for (int i = 0; i < manualLottoCount; i++) {
-            lottoNumbers.add(lottoNumbersInput(INPUT_MANUAL_LOTTO_MESSAGE));
+            lottoNumbers.add(lottoNumbersInput(""));
         }
         return LottoTicket.from(lottoNumbers);
     }
@@ -70,7 +70,9 @@ public class InputView {
     }
 
     public LottoNumbers lottoNumbersInput(String message) {
-        System.out.println(message);
+        if (!message.isBlank()){
+            System.out.println(message);
+        }
         String inputNumbers = scanner.nextLine();
         String[] splitInputNumbers = inputNumbers.split(",");
         List<Integer> numbers = new ArrayList<>();

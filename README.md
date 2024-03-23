@@ -51,4 +51,4 @@
 - [X] 수동으로 구매할 로또 수 입력 기능 구현
 - [X] 수동 로또 수 만큼 로또번호 입력 기능 구현 (LottoNumbers -> LottoTicket)
 - [X] LottoTicket을 합치는 기능 구현
-- [ ] LottoGame 수동 로또 로직으로 수정 
+- [X] LottoGame 수동 로또 로직으로 수정 

@@ -8,6 +8,10 @@ import java.util.List;
 
 public class OutputView {
 
+    public void printLottoCount(int manualLottoCount, int autoLottoCount) {
+        System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoCount + "장을 구매했습니다.");
+    }
+
     public void printLottoNumbers(LottoTicket lottoTicket) {
         List<String> lottoNumbersToString = lottoTicket.getLottoTicketToString();
         for (String lottoNumberString : lottoNumbersToString) {
