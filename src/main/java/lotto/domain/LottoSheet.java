@@ -10,9 +10,11 @@ import static lotto.util.ConstUtils.*;
 public class LottoSheet {
 
     private final List<Lotto> lottoSheet;
+    private final int manualCount;
 
     public LottoSheet(int purchasedPrice) {
         int purchaseCount = calculatePurchasedCount(purchasedPrice);
+        this.manualCount = 0;
 
         this.lottoSheet = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
@@ -22,12 +24,16 @@ public class LottoSheet {
 
     public LottoSheet(int purchasedPrice, List<Lotto> manualLottoNumbers) {
         int purchasedCount = calculatePurchasedCount(purchasedPrice);
+        this.manualCount = manualLottoNumbers.size();
 
         validatePurchasedAndManualCount(purchasedCount, manualLottoNumbers.size());
 
         this.lottoSheet = new ArrayList<>();
-        for (int i = 0; i < purchasedCount; i++) {
+        for (int i = 0; i < this.manualCount; i++) {
             this.lottoSheet.add(manualLottoNumbers.get(i));
+        }
+        for (int i = this.manualCount; i < purchasedCount; i++) {
+            this.lottoSheet.add(new Lotto());
         }
     }
 
@@ -52,13 +58,21 @@ public class LottoSheet {
         return LottoResultDto.of(lottoResultMap, earnRate(lottoResultMap));
     }
 
+    public int countAuto() {
+        return purchasedCount() - this.manualCount;
+    }
+
+    public int countManual() {
+        return this.manualCount;
+    }
+
     private static int calculatePurchasedCount(int purchasedPrice) {
         return purchasedPrice / LOTTO_WON_UNIT;
     }
 
     private void validatePurchasedAndManualCount(int purchasedCount, int manualLottoCount) {
-        if (purchasedCount != manualLottoCount) {
-            throw new IllegalArgumentException("구매 개수와 수동 개수가 일치하지 않습니다.");
+        if (purchasedCount < manualLottoCount) {
+            throw new IllegalArgumentException("수동 구매 리스트의 개수가 총 구매 개수보다 클 수 없습니다.");
         }
     }
 
