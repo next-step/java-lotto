@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoNumbers;
+import lotto.domain.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,12 +21,19 @@ public class LottoNumbersTest {
 
     @Test
     @DisplayName("당첨번호와 갖고있는 로또번호가 일치 테스트")
-    void lottoNumbermatchTest() {
+    void lottoNumberMatchTest() {
         List<Integer> lottoNumbers = List.of(20, 32, 44, 30, 1, 2);
         List<Integer> winningNumber = List.of(20, 3, 44, 45, 1, 2);
         LottoNumbers lotto = new LottoNumbers(lottoNumbers);
         int count = lotto.getCountOfMatchLottoNumber(new LottoNumbers(winningNumber));
         assertThat(count).isEqualTo(4);
+    }
+
+    @Test
+    @DisplayName("로또 당첨 개수가 5개일 때, 보너스 볼까지 일치하면 2등 테스트")
+    void lottoNumberAndBonusNumberMatchTest() {
+        LottoRank lottoRank = LottoRank.findLottoRankByLottoCount(5, true);
+        assertThat(lottoRank).isEqualTo(LottoRank.SECOND);
     }
 
 }
