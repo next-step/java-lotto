@@ -23,19 +23,24 @@ public class OutputView {
     }
 
     public static void printRank(Map<RankMatches, Integer> rankOfLottos){
-        for(int i=0;i<rankOfLottos.size();i++){
-            if(i!=1) {
-                System.out.println(RankMatches.values()[i].getCount() + "개 일치 ("
-                        + RankMatches.values()[i].getPrize() + "원) - "
-                        + rankOfLottos.get(RankMatches.values()[i]) + "개");
-            }
-            if(i==1){
-                System.out.println(RankMatches.values()[i].getCount() + "개 일치, 보너스 볼 일치 ("
-                        + RankMatches.values()[i].getPrize()+"원) - "
-                        + rankOfLottos.get(RankMatches.values()[i]) + "개");
-            }
+        for (int i=0;i<rankOfLottos.size();i++) {
+            printRankSub(i, rankOfLottos);
         }
     }
+
+    private static void printRankSub(int input, Map<RankMatches, Integer> rankOfLottos){
+        if(input!=1) {
+            System.out.println(RankMatches.values()[input].getCount() + "개 일치 ("
+                    + RankMatches.values()[input].getPrize() + "원)- "
+                    + rankOfLottos.get(RankMatches.values()[input]) + "개");
+        }
+        if(input==1){
+            System.out.println(RankMatches.values()[input].getCount() + "개 일치, 보너스 볼 일치 ("
+                    + RankMatches.values()[input].getPrize()+"원)- "
+                    + rankOfLottos.get(RankMatches.values()[input]) + "개");
+        }
+    }
+
 
     public static void printCalProfit(Map<RankMatches, Integer> rankOfLottos, int priceOfLottos){
         float result = 0;

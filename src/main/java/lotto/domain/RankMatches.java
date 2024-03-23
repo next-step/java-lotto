@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum RankMatches {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
@@ -11,6 +14,14 @@ public enum RankMatches {
     private static int MINIMUM_OF_PRIZE = 3;
     private int count;
     private int prize;
+    private static final Map<Integer, RankMatches> rankMap = new HashMap<>();
+
+    static{
+        rankMap.put(6, FIRST);
+        rankMap.put(5, THIRD);
+        rankMap.put(4, FOURTH);
+        rankMap.put(3, FIFTH);
+    }
 
     RankMatches(int count, int prize){
         this.count = count;
@@ -18,18 +29,13 @@ public enum RankMatches {
     }
 
     public static RankMatches makeRank(int count, boolean bonusNum){
-        for(RankMatches rankMatches : values()){
-            if(count < MINIMUM_OF_PRIZE){
-                return NONE;
-            }
-            if(SECOND.count == count && bonusNum){
-                return SECOND;
-            }
-            if(rankMatches.count == count && rankMatches!=SECOND){
-                return rankMatches;
-            }
+        if (count < MINIMUM_OF_PRIZE) {
+            return NONE;
         }
-        throw new IllegalArgumentException("알수없는 인풋");
+        if (SECOND.count == count && bonusNum) {
+            return SECOND;
+        }
+        return rankMap.getOrDefault(count,NONE);
     }
 
 

@@ -1,38 +1,36 @@
 package lotto.domain;
 
-import lotto.utils.RandomGenerator;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-    private LottoNumber lotto;
+    private LottoNumbers lotto;
     private int count = 0;
 
 
     public Lotto(List<Integer> lotto){
-        if(lotto.size()!=6){
+        if (lotto.size()!=6) {
             throw new IllegalArgumentException("로또는 6개 원소 필요");
         }
 
-        if(lotto.size() != lotto.stream().distinct().count()){
+        if (lotto.size() != lotto.stream().distinct().count()) {
             throw new IllegalArgumentException("로또는 원소 중복 불가");
         }
 
-        this.lotto = new LottoNumber(lotto);
+        this.lotto = new LottoNumbers(lotto);
     }
 
 
 
-    public RankMatches numMatch(WinLotto picked){
-        for(int element: picked.winLottoNum.getLottoList()){
+    public RankMatches numMatch(Lotto pickedLotto, BonusNum pickedBouns){
+        for (int element: pickedLotto.getLottoList()) {
             checkMatch(element);
         }
-        return RankMatches.makeRank(count, this.lotto.lottoContains(picked.bonusNum.getBonusNum()));
+
+        return RankMatches.makeRank(count, this.lotto.lottoContains(pickedBouns.getBonusNum()));
     }
 
     private void checkMatch(int element) {
-        if(this.lotto.lottoContains(element)){
+        if (this.lotto.lottoContains(element)) {
             this.count = this.count + 1;
         }
     }

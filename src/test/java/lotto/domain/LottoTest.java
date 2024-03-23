@@ -36,10 +36,10 @@ public class LottoTest {
         Lotto lottopicked = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3 , 4, 5, 6)));
         BonusNum bonus = new BonusNum(7,lottopicked);
         WinLotto lotto = new WinLotto(lottopicked, bonus);
-        assertThat(lottoBuy.numMatch(lotto)).isEqualTo(RankMatches.THIRD);
+        assertThat(lottoBuy.numMatch(lotto.getWinLottoNum(),lotto.getBonusNum())).isEqualTo(RankMatches.THIRD);
 
         Lotto lottoBuy2 = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3 , 4, 5, 7)));
-        assertThat(lottoBuy2.numMatch(lotto)).isEqualTo(RankMatches.SECOND);
+        assertThat(lottoBuy2.numMatch(lotto.getWinLottoNum(),lotto.getBonusNum())).isEqualTo(RankMatches.SECOND);
     }
 
 
