@@ -16,11 +16,11 @@ public class LottoMachineTest {
     @MethodSource("countOfLottoAndLottoNumbers")
     @DisplayName("로또 개수와 NumberDrawer를 매개변수로 받아 LottoNumbers를 반환")
     void createLottoNumbers(int countOfLotto, List<Integer> numberList) {
-        LottoNumbers lottoNumbers = LottoMachine.createLottoNumbers(countOfLotto, (bound, lottoCount)-> numberList);
+        LottoTicket lottoTicket = LottoMachine.createLottoNumbers(countOfLotto, (bound, lottoCount)-> numberList);
 
-        assertThat(lottoNumbers.size()).isEqualTo(countOfLotto);
-        assertThat(lottoNumbers.containsExactly(LottoNumber.from(numberList))).isTrue();
-        assertThat(lottoNumbers.containsExactly(LottoNumber.from(numberList), LottoNumber.from(List.of(1, 2, 10, 20, 30, 40)))).isFalse();
+        assertThat(lottoTicket.size()).isEqualTo(countOfLotto);
+        assertThat(lottoTicket.containsExactly(LottoNumbers.from(numberList))).isTrue();
+        assertThat(lottoTicket.containsExactly(LottoNumbers.from(numberList), LottoNumbers.from(List.of(1, 2, 10, 20, 30, 40)))).isFalse();
     }
 
     static Stream<Arguments> countOfLottoAndLottoNumbers() {

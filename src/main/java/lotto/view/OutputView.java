@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
 
@@ -8,8 +8,8 @@ import java.util.List;
 
 public class OutputView {
 
-    public void printLottoNumbers(LottoNumbers lottoNumbers) {
-        List<String> lottoNumbersToString = lottoNumbers.getLottoNumbersToString();
+    public void printLottoNumbers(LottoTicket lottoTicket) {
+        List<String> lottoNumbersToString = lottoTicket.getLottoTicketToString();
         for (String lottoNumberString : lottoNumbersToString) {
             System.out.println(lottoNumberString);
         }

@@ -10,13 +10,13 @@ import static lotto.domain.LottoValidator.MAX_LOTTO_NUMBER;
 
 public class LottoMachine {
     public static int LOTTO_PRICE = 1000;
-    public static LottoNumbers createLottoNumbers(int countOfLotto, NumberDrawer numberDrawer) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+    public static LottoTicket createLottoNumbers(int countOfLotto, NumberDrawer numberDrawer) {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < countOfLotto; i++) {
-            LottoNumber lottoNumber = LottoNumber.from(numberDrawer.drawnNumbers(MAX_LOTTO_NUMBER, LOTTO_NUMBER_SIZE));
+            LottoNumbers lottoNumber = LottoNumbers.from(numberDrawer.drawnNumbers(MAX_LOTTO_NUMBER, LOTTO_NUMBER_SIZE));
             lottoNumbers.add(lottoNumber);
         }
-        return LottoNumbers.from(lottoNumbers);
+        return LottoTicket.from(lottoNumbers);
     }
 
     public static boolean isInputLowerThanPrice(int inputPrice) {

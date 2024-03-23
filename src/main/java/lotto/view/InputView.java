@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.domain.MyNumber;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +46,7 @@ public class InputView {
         return nextInt;
     }
 
-    public LottoNumber winnnigNumbersInput(String message) {
+    public LottoNumbers winnnigNumbersInput(String message) {
         System.out.println(message);
         String inputNumbers = scanner.nextLine();
         String[] splitInputNumbers = inputNumbers.split(",");
@@ -56,18 +56,18 @@ public class InputView {
         }
 
         try {
-            return LottoNumber.from(numbers);
+            return LottoNumbers.from(numbers);
         } catch (IllegalArgumentException e) {
             return winnnigNumbersInput(e.getMessage() + INPUT_RETRY);
         }
     }
 
-    public MyNumber getBonusNumber(String message, LottoNumber winningNumber) {
+    public LottoNumber getBonusNumber(String message, LottoNumbers winningNumber) {
         System.out.println(message);
         int inputNumber = Integer.parseInt(scanner.nextLine());
 
         try {
-            return MyNumber.bonusNumberFrom(inputNumber, winningNumber);
+            return LottoNumber.bonusNumberFrom(inputNumber, winningNumber);
         } catch (IllegalArgumentException e) {
             return getBonusNumber(e.getMessage() + INPUT_RETRY, winningNumber);
         }

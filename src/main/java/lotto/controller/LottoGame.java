@@ -16,13 +16,13 @@ public class LottoGame {
 
         int countOfLotto = inputView.lottoCount(INPUT_START_MESSAGE);
 
-        LottoNumbers lottoNumbers = LottoMachine.createLottoNumbers(countOfLotto, new ShuffledNumberDrawer());
-        outputView.printLottoNumbers(lottoNumbers);
+        LottoTicket lottoTicket = LottoMachine.createLottoNumbers(countOfLotto, new ShuffledNumberDrawer());
+        outputView.printLottoNumbers(lottoTicket);
 
-        LottoNumber inputWinningNumber = inputView.winnnigNumbersInput(INPUT_WINNING_NUMBER_MESSAGE);
-        MyNumber bonusNumber = inputView.getBonusNumber(INPUT_BONUS_NUMBER_MESSAGE, inputWinningNumber);
+        LottoNumbers inputWinningNumber = inputView.winnnigNumbersInput(INPUT_WINNING_NUMBER_MESSAGE);
+        LottoNumber bonusNumber = inputView.getBonusNumber(INPUT_BONUS_NUMBER_MESSAGE, inputWinningNumber);
 
-        LottoResult lottoResult = lottoNumbers.computeLottoResult(new WinningNumber(inputWinningNumber, bonusNumber));
+        LottoResult lottoResult = lottoTicket.computeLottoResult(new WinningNumber(inputWinningNumber, bonusNumber));
         outputView.printResult(lottoResult);
     }
 }
