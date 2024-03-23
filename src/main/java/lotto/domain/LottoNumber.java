@@ -6,7 +6,6 @@ import static lotto.domain.LottoValidator.*;
 
 public class LottoNumber {
     public static final String INVALID_LOTTO_NUMBER_BOUND_MESSAGE = "로또 번호는 " + MIN_LOTTO_NUMBER + "이상 " + MAX_LOTTO_NUMBER + "이하의 숫자만 입력할 수 있습니다.";
-    public static final String ALREADY_EXIST_LOTTO_NUMBER = "해당 번호는 기본 당첨 번호입니다. 다시 입력해주세요.";
 
     private final int value;
 
@@ -20,14 +19,6 @@ public class LottoNumber {
 
     public static LottoNumber valueOf(int value) {
         return new LottoNumber(value);
-    }
-
-    public static LottoNumber bonusNumberFrom(int value, LottoNumbers winningNumber) {
-        LottoNumber lottoNumber = new LottoNumber(value);
-        if (winningNumber.isContainNumber(lottoNumber)) {
-            throw new IllegalArgumentException(ALREADY_EXIST_LOTTO_NUMBER);
-        }
-        return lottoNumber;
     }
 
     @Override

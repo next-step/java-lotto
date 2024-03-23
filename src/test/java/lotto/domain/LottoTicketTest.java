@@ -38,7 +38,7 @@ public class LottoTicketTest {
 
         LottoTicket lottoTicket = LottoTicket.from(lottoNumbersList);
 
-        LottoResult lottoResult = lottoTicket.computeLottoResult(new WinningNumber(winningNumber, LottoNumber.bonusNumberFrom(30, winningNumber)));
+        LottoResult lottoResult = lottoTicket.computeLottoResult(new WinningNumber(winningNumber, LottoNumber.valueOf(30)));
         assertThat(lottoResult.getCorrectCountsByLottoRank(LottoRank.FIFTH)).isEqualTo(2);
     }
 

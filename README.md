@@ -44,5 +44,5 @@
 - [ ] 3단계 피드백 반영
   - [X] MyNumber, LottoNumber, LottoNumbers 클래스명 수정
   - [X] LottoResult의 winnings()를 correctCounts EntrySet을 사용하는 로직으로 리팩터링
-  - [ ] 보너스 넘버 검증 위치 수정
+  - [X] 보너스 넘버 검증 위치 수정
   - [ ] stream collect 와 return을 collectingAndThen 으로 리팩터링

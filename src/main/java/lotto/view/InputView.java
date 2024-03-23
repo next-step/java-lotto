@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.WinningNumber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,14 +63,23 @@ public class InputView {
         }
     }
 
-    public LottoNumber getBonusNumber(String message, LottoNumbers winningNumber) {
+    public WinningNumber getFinalWinningNumber(String message, LottoNumbers winningNumber) {
+        try {
+            LottoNumber bonusNumber = getBonusNumber(message);
+            return new WinningNumber(winningNumber, bonusNumber);
+        } catch (IllegalArgumentException e) {
+            return getFinalWinningNumber(e.getMessage() + INPUT_RETRY, winningNumber);
+        }
+    }
+
+    private LottoNumber getBonusNumber(String message) {
         System.out.println(message);
         int inputNumber = Integer.parseInt(scanner.nextLine());
 
         try {
-            return LottoNumber.bonusNumberFrom(inputNumber, winningNumber);
+            return LottoNumber.valueOf(inputNumber);
         } catch (IllegalArgumentException e) {
-            return getBonusNumber(e.getMessage() + INPUT_RETRY, winningNumber);
+            return getBonusNumber(e.getMessage() + INPUT_RETRY);
         }
     }
 }
