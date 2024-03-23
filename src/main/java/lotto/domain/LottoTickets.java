@@ -15,7 +15,7 @@ public class LottoTickets {
     public static LottoTickets auto(int count) {
         List<LottoTicket> tickets = Stream.generate(LottoTicket::new)
                 .limit(count)
-                .collect(Collectors.toList());
+                .collect(Collectors.toUnmodifiableList());
         return new LottoTickets(tickets);
     }
 

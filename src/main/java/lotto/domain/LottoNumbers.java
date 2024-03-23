@@ -33,7 +33,7 @@ public class LottoNumbers {
         validateNumbersSize(numbers);
         this.numbers = numbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private static List<Integer> autoNumbers() {
