@@ -4,7 +4,9 @@ import lotto.domain.*;
 
 import java.text.MessageFormat;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ResultView {
 
@@ -58,10 +60,10 @@ public class ResultView {
     }
 
     private static List<Rank> getRanksWithoutMISS() {
-        List<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
-        ranks.sort(Comparator.comparing(Rank::getPrize));
-        ranks.remove(Rank.MISS);
-        return ranks;
+        return Arrays.stream(Rank.values())
+                .filter(Predicate.not(it -> it == Rank.MISS))
+                .sorted(Comparator.comparing(Rank::getPrize))
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private static String formatStatistic(LottoStatistics statistics, Rank rank) {
