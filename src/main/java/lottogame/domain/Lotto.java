@@ -13,17 +13,31 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public int match(Lotto lotto) {
+    public int getPrize(Lotto lotto) {
+        return Rank.findPrize(match(lotto));
+    }
+
+    public Rank getRank(Lotto lotto) {
+        return Rank.findRank(match(lotto));
+    }
+
+    private int match(Lotto lotto) {
         return (int) numbers.stream()
                 .filter(lotto::match)
                 .count();
     }
 
-    public int getPrize(Lotto lotto) {
-        return Rank.findPrize(match(lotto));
-    }
-
     private boolean match(LottoNumber number) {
         return numbers.contains(number);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (LottoNumber number : numbers) {
+            stringBuilder.append(number).append(", ");
+        }
+
+        return "["+stringBuilder.toString().replaceAll(", $", "")+"]";
     }
 }

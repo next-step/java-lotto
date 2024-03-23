@@ -3,11 +3,25 @@ package lottogame;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.stream.Stream;
 import lottogame.domain.Lotto;
+import lottogame.domain.LottoFactory;
 import lottogame.domain.LottoGame;
+import lottogame.domain.Rank;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import utils.numbergenerator.RandomNumberGenerator;
 
 class LottoGameTest {
+    LottoGame lottoGame;
+
+    @BeforeEach
+    void setUp() {
+        lottoGame = new LottoGame(new LottoFactory(new RandomNumberGenerator()));
+    }
 
     @Test
     void 수익률() {
@@ -30,7 +44,19 @@ class LottoGameTest {
         );
         double expected = 0.35;
 
-        LottoGame lottoGame = new LottoGame();
         assertThat(lottoGame.calculateReturnOfRate(winnerLotto, lottos)).isEqualTo(expected);
+    }
+
+    @Test
+    void 총_당첨_결과_확인() {
+        List<Lotto> lottos = List.of(
+                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+                new Lotto(List.of(1, 2, 3, 4, 5, 7)),
+                new Lotto(List.of(1, 2, 3, 4, 7, 8)),
+                new Lotto(List.of(1, 2, 4, 7, 8, 9)),
+                new Lotto(List.of(1, 2, 7, 8, 9, 10)));
+        Lotto winnerLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        List<Rank> ranks = lottoGame.checkRanks(winnerLotto, lottos);
+        assertThat(ranks).contains(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.EMPTY);
     }
 }

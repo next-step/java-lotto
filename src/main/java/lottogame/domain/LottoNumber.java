@@ -26,4 +26,10 @@ public final class LottoNumber {
     public int hashCode() {
         return value;
     }
+
+    @Override
+    public String toString() {
+
+        return String.valueOf(value);
+    }
 }
