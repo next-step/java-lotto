@@ -42,4 +42,9 @@ public class LottoTicket {
             throw new IllegalArgumentException("로또 생성을 위해서는 6개의 숫자가 필요합니다.");
         }
     }
+
+    @Override
+    public String toString() {
+        return "[" + number1 + ", " + number2 + ", " + number3 + ", " + number4 + ", " + number5 + ", " + number6 + "]";
+    }
 }
