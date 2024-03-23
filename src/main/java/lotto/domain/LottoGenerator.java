@@ -5,14 +5,20 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoGenerator {
-    public Lotto<List> generateLottos(Fee fee) {
-
-        return null;
+    public List<Lotto> generateLottos(Fee fee) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < fee.convertToGameUnit(); i++) {
+            lottos.add(generateLotto());
+        }
+        return lottos;
     }
 
-    public List<Integer> generateLotto() {
+    public Lotto generateLotto() {
         List<Integer> lottoGame = rangeOfLotto();
-        return lottoGame;
+        Collections.shuffle(lottoGame);
+        lottoGame = lottoGame.subList(0,6);
+        Collections.sort(lottoGame);
+        return new Lotto(lottoGame);
     }
 
     private static List<Integer> rangeOfLotto() {
@@ -20,13 +26,6 @@ public class LottoGenerator {
         for (int i = 1; i <= 45; i++) {
             lottoGame.add(i);
         }
-        System.out.println(lottoGame);
-        Collections.shuffle(lottoGame);
-        System.out.println("shuffle->" + lottoGame);
-        lottoGame = lottoGame.subList(0,6);
-        System.out.println("cut->" + lottoGame);
-        Collections.sort(lottoGame);
-        System.out.println("sort->" + lottoGame);
         return lottoGame;
     }
 }

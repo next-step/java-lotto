@@ -4,6 +4,7 @@ import lotto.domain.Fee;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGenerator;
 import lotto.view.InputView;
+import lotto.view.ResultView;
 
 import java.util.List;
 
@@ -20,6 +21,8 @@ public class LottoController {
 
          */
         Fee fee = InputView.payForGames();
-        Lotto<List> lottos = lottoGenerator.generateLottos(fee);
+        List<Lotto> lottos = lottoGenerator.generateLottos(fee);
+        ResultView.showLottos(lottos);
+
     }
 }

@@ -21,7 +21,7 @@ public class LottoGeneratorTest {
     @Test
     @DisplayName("로또 생성")
     void 로또_생성() {
-        List<Integer> lottoGame = lottoGenerator.generateLotto();
+        Lotto lottoGame = lottoGenerator.generateLotto();
         assertThat(lottoGame.size()).isEqualTo(6);
     }
 }
