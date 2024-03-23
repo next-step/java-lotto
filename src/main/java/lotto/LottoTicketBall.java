@@ -13,7 +13,7 @@ public class LottoTicketBall {
                     END_TICKET_NUMBER)
             .boxed().collect(Collectors.toList());
 
-    public List<Integer> getTicket() {
+    public List<Integer> generateTicket() {
         Collections.shuffle(balls);
         List<Integer> ticket = balls.subList(0, 6);
         Collections.sort(ticket);
