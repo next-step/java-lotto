@@ -12,7 +12,7 @@ public class ResultView {
     }
 
     public static void printLottos(Lottos lottos) {
-        lottos.getLottos().forEach(lotto -> System.out.println(lotto.toString()));
+        lottos.getLottos().forEach(lotto -> System.out.println(lotto.getLottoNumbers().toString()));
     }
 
     public static void printWinningStatistics(HashMap<LottoRank, Integer> winningStatistics) {
@@ -22,7 +22,7 @@ public class ResultView {
         checkWinningStatistics(winningStatistics);
 
         winningStatistics.entrySet()
-                .forEach(l -> System.out.println(l.getKey().getLottoCount() + "개 일치 (" + l.getKey().getWinningMoney() + "원)- " + l.getValue() + "개"));
+                .forEach(l -> System.out.println(l.getKey().getResultString() + l.getValue() + "개"));
     }
 
     private static void checkWinningStatistics(HashMap<LottoRank, Integer> winningStatistics) {
