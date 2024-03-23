@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,8 +16,7 @@ public class LottoTicketBall {
 
     public LottoTicket generateTicket() {
         Collections.shuffle(balls);
-        List<Integer> inputs = balls.subList(0,6);
-        LottoTicket ticket = new LottoTicket(inputs);
+        LottoTicket ticket = LottoTicket.createTicket(new ArrayList<>(balls.subList(0, 6)));
         return ticket;
     }
 
