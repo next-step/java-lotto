@@ -19,5 +19,6 @@ public class LottoController {
         결과분석
 
          */
+        Lotto<List> lottos = lottoGenerator.generateLottos(fee);
     }
 }
