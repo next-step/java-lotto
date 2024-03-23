@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import lotto.error.SizeExceedLottoNumberException;
+
 public enum LottoNumber {
     ONE(1),
     TWO(2),
@@ -51,6 +54,19 @@ public enum LottoNumber {
 
     LottoNumber(int number) {
         this.lottoNumber = number;
+    }
+
+    public static boolean isSame(int value) {
+        return Arrays.stream(LottoNumber.values())
+            .anyMatch(lottoNumber -> lottoNumber.lottoNumber == value);
+    }
+
+    public static LottoNumber formInt(int value){
+        return Arrays.stream(LottoNumber.values())
+            .filter(lottoNumber -> lottoNumber.isSame(value))
+            .findFirst()
+            .orElseThrow(() -> new SizeExceedLottoNumberException(value));
+
     }
 
     public int getLottoNumber() {
