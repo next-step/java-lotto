@@ -4,12 +4,12 @@ import java.util.Arrays;
 
 public enum RewardPrice {
 
-  FIRST(6, 2_000_000_000, Boolean.FALSE),
-  SECOND(5, 30_000_000, Boolean.TRUE),
-  THIRD(5, 1_500_000, Boolean.FALSE),
-  FOURTH(4, 50_000, Boolean.FALSE),
-  FIFTH(3, 5_000, Boolean.FALSE),
-  NONE(0, 0, Boolean.FALSE),
+  FIRST(6, 2_000_000_000, false),
+  SECOND(5, 30_000_000, true),
+  THIRD(5, 1_500_000, false),
+  FOURTH(4, 50_000, false),
+  FIFTH(3, 5_000, false),
+  NONE(0, 0, false),
   ;
 
   private final int matchCount;
