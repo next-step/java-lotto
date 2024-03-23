@@ -3,44 +3,30 @@ package autoLotto.model;
 import java.util.Arrays;
 
 public enum PrizeResultEnum {
-    THREE_MATCHED(3, "3개 일치 (5,000원) - ", 5000L),
-    FOUR_MATCHED(4, "4개 일치 (50,000원) - ", 50000L),
-    FIVE_MATCHED(5, "5개 일치 (1,500,000원) - ", 1500000L),
-    SIX_MATCHED(6, "6개 일치 (2,000,000,000원) - ", 2000000000L);
+    THREE_MATCHED(3,5000L),
+    FOUR_MATCHED(4, 50000L),
+    FIVE_MATCHED(5, 1500000L),
+    SIX_MATCHED(6, 2000000000L);
 
-    private int index;
-    private String description;
+    private int matchedCount;
     private Long prize;
 
-    PrizeResultEnum(int index, String description, Long prize) {
-        this.index = index;
-        this.description = description;
+    PrizeResultEnum(int matchedCount, Long prize) {
+        this.matchedCount = matchedCount;
         this.prize = prize;
-    }
-
-    private String getDescription(){
-        return description;
     }
 
     private Long getPrize() {
         return prize;
     }
 
-    public int getIndex() {
-        return index;
+    public int getMatchedCount() {
+        return matchedCount;
     }
 
-    public static String getDescriptionByIndex(int index) {
+    public static Long getPrizeByMatchedCount(int index) {
         return Arrays.stream(values())
-                .filter(prizeResult -> prizeResult.index == index)
-                .findFirst()
-                .map(PrizeResultEnum::getDescription)
-                .orElse(null);
-    }
-
-    public static Long getPrizeByIndex(int index) {
-        return Arrays.stream(values())
-                .filter(prizeResult -> prizeResult.index == index)
+                .filter(prizeResult -> prizeResult.matchedCount == index)
                 .findFirst()
                 .map(PrizeResultEnum::getPrize)
                 .orElse(0L);
