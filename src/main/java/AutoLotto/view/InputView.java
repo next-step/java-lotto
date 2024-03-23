@@ -12,10 +12,10 @@ public class InputView {
     private static final String VALID_WIN_NUMBER = "^[0-9]{1,2}(,[0-9]{1,2})*$";
     private static final Long DIVISION_UNIT = 1000L;
 
-    private static final String PURCHASE_AMOUNT_QUESTION = "구입금액을 입력해 주세요.";
+    private static final String PURCHASE_AMOUNT_QUESTION = "구입금액을 숫자로만 입력해 주세요.\n(ex : 1000)";
     private static final String PURCHASE_DENIED = "1,000원 단위로 구매 가능합니다.\n구입금액을 다시 입력해주세요.";
-    private static final String WIN_NUMBERS_QUESTION = "당첨 번호 6개를 입력해주세요. \n (ex : 1,2,3,4,5,6)";
-    private static final String WIN_NUMBERS_DENIED = "쉼표를 기준으로 6개의 숫자를 입력하셔야 합니다.\n구입금액을 다시 입력해주세요.";
+    private static final String WIN_NUMBERS_QUESTION = "당첨 번호 6개를 입력해주세요.\n(ex : 1,2,3,4,5,6)";
+    private static final String WIN_NUMBERS_DENIED = "공백없이 쉼표를 기준으로 1~45 사이의 숫자 6개의 숫자를 입력하셔야 합니다.\n구입금액을 다시 입력해주세요.\n(ex: 1,2,3,4,5,6)";
 
     public String inputPurchase() {
         return startPurchase();

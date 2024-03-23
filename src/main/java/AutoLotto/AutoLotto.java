@@ -12,9 +12,9 @@ public class AutoLotto {
     private final ResultView resultView = new ResultView();
 
     public void run() {
-        String purchaseAmount = inputView.inputPurchase();
+        Long purchaseAmount = Long.valueOf(inputView.inputPurchase());
         LottoMachine lottoMachine = new LottoMachine(purchaseAmount, new RandomLottoGeneratorStrategy());
-        resultView.outputPurchasedLottos(lottoMachine, lottoMachine.getNumberOfLottos());
+        resultView.outputPurchasedLottos(lottoMachine);
 
         String winNumbers = inputView.inputWinNumbers();
         LottoWinChecker lottoWinChecker = new LottoWinChecker(winNumbers, lottoMachine.getLottos());
