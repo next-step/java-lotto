@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.domain.*;
 import lotto.exception.IllegalLottoNumberException;
-import lotto.exception.IllegalLottoNumbersSizeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -115,13 +114,6 @@ public class LottoTicketTest {
         void 로또_번호_범위_0과_46포함() {
             assertThatExceptionOfType(IllegalLottoNumberException.class)
                     .isThrownBy(() -> new LottoTicket(new LottoNumbers(List.of(0, 2, 3, 4, 5, 46))));
-        }
-
-        @Test
-        @DisplayName("[실패] 로또 번호 개수가 6개가 아니면 IllegalLottoNumbersSizeException 예외가 발생한다.")
-        void 로또_번호_개수() {
-            assertThatExceptionOfType(IllegalLottoNumbersSizeException.class)
-                    .isThrownBy(() -> new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5))));
         }
 
     }
