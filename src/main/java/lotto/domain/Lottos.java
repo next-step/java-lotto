@@ -14,7 +14,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public HashMap<LottoRank, Integer> getWinningStatistics(WinningLottoNumbers winningLottoNumbers) {
+    public HashMap<LottoRank, Integer> getWinningStatistics(LottoNumbers winningLottoNumbers) {
         return (HashMap<LottoRank, Integer>) lottos.stream()
                 .map(lotto -> LottoRank.findLottoRankByLottoCount(lotto.getCountOfMatchLottoNumber(winningLottoNumbers)))
                 .filter(rank -> rank != null)

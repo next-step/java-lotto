@@ -9,7 +9,6 @@ public class LottoNumbers {
     public static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_SIZE = 6;
 
-
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
@@ -29,8 +28,8 @@ public class LottoNumbers {
         return sortedNumbers;
     }
 
-    public int getCountOfMatchLottoNumber(WinningLottoNumbers winningNumbers) {
-        return (int) winningNumbers.getWinningLottoNumbers().getLottoNumbers().stream()
+    public int getCountOfMatchLottoNumber(LottoNumbers winningNumbers) {
+        return (int) winningNumbers.getLottoNumbers().stream()
                 .filter(this::containsLottoNumber)
                 .count();
     }
@@ -39,7 +38,7 @@ public class LottoNumbers {
         return this.lottoNumbers.stream()
                 .anyMatch(lottoNumber -> lottoNumber.getLottoNumber() == winningNumber.getLottoNumber());
     }
-
+    
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }

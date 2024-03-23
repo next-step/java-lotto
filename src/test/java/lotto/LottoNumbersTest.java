@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.domain.LottoNumbers;
-import lotto.domain.WinningLottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +24,7 @@ public class LottoNumbersTest {
         List<Integer> lottoNumbers = List.of(20, 32, 44, 30, 1, 2);
         List<Integer> winningNumber = List.of(20, 3, 44, 45, 1, 2);
         LottoNumbers lotto = new LottoNumbers(lottoNumbers);
-        int count = lotto.getCountOfMatchLottoNumber(new WinningLottoNumbers(winningNumber));
+        int count = lotto.getCountOfMatchLottoNumber(new LottoNumbers(winningNumber));
         assertThat(count).isEqualTo(4);
     }
 

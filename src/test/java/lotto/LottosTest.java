@@ -3,7 +3,6 @@ package lotto;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
-import lotto.domain.WinningLottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -31,7 +30,7 @@ public class LottosTest {
         List<LottoNumbers> inputLottos = List.of(new LottoNumbers(lottoNumbers));
         Lottos lottos = new Lottos(inputLottos);
 
-        Map<LottoRank, Integer> lottoRanks = lottos.getWinningStatistics(new WinningLottoNumbers(winningLottoNumber));
+        Map<LottoRank, Integer> lottoRanks = lottos.getWinningStatistics(new LottoNumbers(winningLottoNumber));
         LottoRank expectedRank = LottoRank.valueOf(key);
 
         assertThat(lottoRanks.get(expectedRank)).isEqualTo(expectedMatchCount);

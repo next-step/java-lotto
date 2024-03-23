@@ -26,7 +26,7 @@ public class LottoService {
 
         List<Integer> winningLottoNumber = InputView.inputWinningNumber();
 
-        HashMap<LottoRank, Integer> lottoRanks = lottos.getWinningStatistics(new WinningLottoNumbers(winningLottoNumber));
+        HashMap<LottoRank, Integer> lottoRanks = lottos.getWinningStatistics(new LottoNumbers(winningLottoNumber));
 
         ResultView.printWinningStatistics(lottoRanks);
         ResultView.printRateOfReturn(LottoCalculator.getRateOfReturn(lottoMoney, getWinningMoney(lottoRanks)));
