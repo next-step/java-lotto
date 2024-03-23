@@ -1,20 +1,20 @@
 package lottogame;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import utils.numbergenerator.NumberGenerator;
 
 public class Lotto {
 
-    private List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
-    }
-
-    public List<Integer> getNumbers() {
-        return numbers;
+        this.numbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     public int match(Lotto lotto) {
@@ -27,7 +27,7 @@ public class Lotto {
         return Rank.findPrize(match(lotto));
     }
 
-    private boolean match(int number) {
+    private boolean match(LottoNumber number) {
         return numbers.contains(number);
     }
 }
