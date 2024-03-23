@@ -9,6 +9,8 @@ public class WinLottoBalls {
     private final LottoBall bonusBall;
 
     public WinLottoBalls(Lotto winLotto, LottoBall bonusBall) {
+        validateBonusNumber(winLotto, bonusBall);
+
         this.winLotto = winLotto;
         this.bonusBall = bonusBall;
     }
@@ -22,5 +24,11 @@ public class WinLottoBalls {
     @Override
     public String toString() {
         return this.winLotto.toString();
+    }
+
+    private void validateBonusNumber(Lotto winLotto, LottoBall bonusBall) {
+        if (winLotto.containNumber(bonusBall)) {
+            throw new IllegalArgumentException("보너스 번호가 이미 당첨번호에 존재합니다.");
+        }
     }
 }

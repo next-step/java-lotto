@@ -2,12 +2,14 @@ package lotto.domain;
 
 import lotto.data.LottoBall;
 import lotto.data.LottoWinInfo;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class WinLottoBallsTest {
 
@@ -51,5 +53,14 @@ class WinLottoBallsTest {
                 mySelect
         );
         assertThat(lottoWinInfo).isEqualTo(LottoWinInfo.WIN_SECOND);
+    }
+
+    @DisplayName("보너스번호가 당첨번호와 중복되면, IllegalArgumentException을 던진다.")
+    @Test
+    void throwIllegalArgumentExceptionWhenBonusDuplicate() {
+        // then
+        assertThrows(IllegalArgumentException.class,
+                () -> new WinLottoBalls(new Lotto(List.of(1, 2, 3, 4, 5, 6)), LottoBall.selectLottoBall(1))
+        );
     }
 }

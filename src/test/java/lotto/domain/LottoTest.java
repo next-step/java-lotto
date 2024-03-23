@@ -45,6 +45,13 @@ class LottoTest {
         assertThrows(IllegalArgumentException.class, () -> new Lotto(List.of(55, 1, 2, 3, 4)));
     }
 
+    @DisplayName("중복된 값이 입력되면, IllegalArgumentException을 던진다.")
+    @Test
+    void throwIllegalArgumentExceptionWhenNumberDuplicate() {
+        // then
+        assertThrows(IllegalArgumentException.class, () -> new Lotto(List.of(1, 1, 2, 2, 3)));
+    }
+
     @DisplayName("두 로또 번호를 비교하여, 몇개가 매칭되는지 알 수 있다.")
     @Test
     void canKnowHowManyMatchedBetweenTwoLottoNumbers() {
