@@ -1,54 +1,39 @@
 package lotto.domain;
 
-import static lotto.constants.LottoConstants.*;
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.Optional;
+
+import static lotto.domain.LottoMachine.LOTTO_PRICE;
 
 public class LottoResult {
-    private int lottoCount = 0;
-    private int countOfThreeCorrectLotto = 0;
-    private int countOfFourCorrectLotto = 0;
-    private int countOfFiveCorrectLotto = 0;
-    private int countOfSixCorrectLotto = 0;
+    private final int lottoCount;
+    private final Map<LottoRank, Integer> correctCounts = new EnumMap<>(LottoRank.class);
 
-    public int getCountOfThreeCorrectLotto() {
-        return countOfThreeCorrectLotto;
+    public LottoResult(int lottoCount) {
+        this.lottoCount = lottoCount;
+        for (LottoRank lottoRank : LottoRank.values()) {
+            correctCounts.put(lottoRank, 0);
+        }
     }
 
-    public int getCountOfFourCorrectLotto() {
-        return countOfFourCorrectLotto;
-    }
-
-    public int getCountOfFiveCorrectLotto() {
-        return countOfFiveCorrectLotto;
-    }
-
-    public int getCountOfSixCorrectLotto() {
-        return countOfSixCorrectLotto;
+    public int getCorrectCountsByLottoRank(LottoRank lottoRank) {
+        return correctCounts.get(lottoRank);
     }
 
     private long winnings() {
-        return (countOfThreeCorrectLotto * THREE_NUMBER_CORRECT_WINNINGS)
-                + (countOfFourCorrectLotto * FOUR_NUMBER_CORRECT_WINNINGS)
-                + (countOfFiveCorrectLotto * FIVE_NUMBER_CORRECT_WINNINGS)
-                + (countOfSixCorrectLotto * SIX_NUMBER_CORRECT_WINNINGS);
+        return (correctCounts.get(LottoRank.FIFTH) * LottoRank.FIFTH.getWinnings())
+                + (correctCounts.get(LottoRank.FOURTH) * LottoRank.FOURTH.getWinnings())
+                + (correctCounts.get(LottoRank.THIRD) * LottoRank.THIRD.getWinnings())
+                + (correctCounts.get(LottoRank.SECOND) * LottoRank.SECOND.getWinnings())
+                + (correctCounts.get(LottoRank.FIRST) * LottoRank.FIRST.getWinnings());
     }
 
-    public void addCorrectLottoCount(int count) {
-        lottoCount++;
-        if (count == 3) {
-            countOfThreeCorrectLotto++;
-            return;
-        }
-        if (count == 4) {
-            countOfFourCorrectLotto++;
-            return;
-        }
-        if (count == 5) {
-            countOfFiveCorrectLotto++;
-            return;
-        }
-        if (count == 6) {
-            countOfSixCorrectLotto++;
-        }
+    public void addCorrectLottoCount(int count, boolean isContainBonusNumber) {
+        Optional<LottoRank> lottoRankOptional = LottoRank.findByCorrectCount(count, isContainBonusNumber);
+        lottoRankOptional.ifPresent((lottoRank)->{
+            correctCounts.put(lottoRank, correctCounts.get(lottoRank) + 1);
+        });
     }
 
     public double rateOfReturn() {

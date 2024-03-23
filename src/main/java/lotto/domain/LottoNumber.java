@@ -1,27 +1,45 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
-import static lotto.constants.LottoConstants.*;
+import static lotto.domain.LottoValidator.*;
 
 public class LottoNumber {
-    public static final String INVALID_LOTTO_NUMBER_BOUND_MESSAGE = "로또 번호는 " + MIN_LOTTO_NUMBER + "이상 " + MAX_LOTTO_NUMBER + "이하의 숫자만 입력할 수 있습니다.";
     public static final String INVALID_LOTTO_NUMBER_SIZE = "로또 번호는 " + LOTTO_NUMBER_SIZE + "개여야 합니다.";
     public static final String LOTTO_NUMBER_CANT_DUPLICATE = "로또 번호는 중복될 수 없습니다.";
-    private final List<Integer> numbers;
+    public static final String INVALID_LOTTO_NUMBER_BOUND_MESSAGE = "로또 번호는 " + MIN_LOTTO_NUMBER + "이상 " + MAX_LOTTO_NUMBER + "이하의 숫자만 입력할 수 있습니다.";
 
-    private LottoNumber(List<Integer> numbers) {
+    private final List<MyNumber> numbers;
+
+    private LottoNumber(List<MyNumber> numbers) {
         this.numbers = numbers;
     }
 
     public static LottoNumber from(List<Integer> numbers) {
-        validLottoNumberSize(numbers);
-        validLottoNumberBound(numbers);
-        validLottoNumberDuplicate(numbers);
+        valid(numbers);
 
-        return new LottoNumber(numbers);
+        List<MyNumber> myNumbers = new ArrayList<>();
+        for (int number : numbers) {
+            myNumbers.add(MyNumber.valueOf(number));
+        }
+
+        return new LottoNumber(myNumbers);
+    }
+
+    private static void valid(List<Integer> numbers) {
+        if (isInvalidLottoNumberSize(numbers)) {
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_SIZE);
+        }
+
+        if (isInvalidLottoNumberBound(numbers)) {
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_BOUND_MESSAGE);
+        }
+
+        if (isLottoNumberDuplicate(numbers)) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_CANT_DUPLICATE);
+        }
     }
 
     public int size() {
@@ -34,36 +52,13 @@ public class LottoNumber {
                 .count();
     }
 
-    public String getNumbersToString() {
-        return numbers.stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(", ", "[", "]"));
+    public boolean isContainNumber(MyNumber myNumber) {
+        return numbers.contains(myNumber);
     }
 
-    private static void validLottoNumberDuplicate(List<Integer> numbers) {
-        int originalSize = numbers.size();
-        int distinctCount = (int) numbers.stream()
-                .distinct()
-                .count();
-
-        if (originalSize != distinctCount) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_CANT_DUPLICATE);
-        }
-    }
-
-    private static void validLottoNumberBound(List<Integer> numbers) {
-        boolean isInvalid = numbers.stream()
-                .anyMatch((number) -> number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER);
-
-        if (isInvalid) {
-            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_BOUND_MESSAGE);
-        }
-    }
-
-    private static void validLottoNumberSize(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_SIZE);
-        }
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 
     @Override

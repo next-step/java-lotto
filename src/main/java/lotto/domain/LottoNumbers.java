@@ -19,11 +19,11 @@ public class LottoNumbers {
         return numbers.size();
     }
 
-    public LottoResult computeLottoResult(LottoNumber winningNumber) {
-        LottoResult lottoResult = new LottoResult();
+    public LottoResult computeLottoResult(WinningNumber winningNumber) {
+        LottoResult lottoResult = new LottoResult(numbers.size());
         for (LottoNumber lottoNumber : numbers) {
-            int containsCount = lottoNumber.containsCount(winningNumber);
-            lottoResult.addCorrectLottoCount(containsCount);
+            int containsCount = winningNumber.containsCount(lottoNumber);
+            lottoResult.addCorrectLottoCount(containsCount, winningNumber.isContainBonusNumber(lottoNumber));
         }
         return lottoResult;
     }
@@ -31,7 +31,7 @@ public class LottoNumbers {
     public List<String> getLottoNumbersToString() {
         return numbers
                 .stream()
-                .map(LottoNumber::getNumbersToString)
+                .map(LottoNumber::toString)
                 .collect(Collectors.toList());
     }
 

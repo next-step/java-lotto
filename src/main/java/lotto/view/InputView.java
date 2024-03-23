@@ -1,12 +1,13 @@
 package lotto.view;
 
+import lotto.domain.MyNumber;
 import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static lotto.constants.LottoConstants.*;
+import static lotto.domain.LottoMachine.*;
 
 public class InputView {
     private static final String INPUT_NUMBER_MESSAGE = "숫자를 입력해주세요.";
@@ -34,11 +35,11 @@ public class InputView {
     private int scanNextInt() {
         int nextInt = Integer.parseInt(scanner.nextLine());
 
-        if (nextInt < LOTTO_PRICE) {
+        if (isInputLowerThanPrice(nextInt)) {
             throw new IllegalArgumentException(INPUT_MIN_PRICE_MESSAGE + INPUT_RETRY);
         }
 
-        if (nextInt % LOTTO_PRICE != 0) {
+        if (isInputPriceUnitWrong(nextInt)) {
             throw new IllegalArgumentException(INPUT_CORRECT_PRICE_UNIT_MESSAGE + INPUT_RETRY);
         }
 
@@ -58,6 +59,17 @@ public class InputView {
             return LottoNumber.from(numbers);
         } catch (IllegalArgumentException e) {
             return winnnigNumbersInput(e.getMessage() + INPUT_RETRY);
+        }
+    }
+
+    public MyNumber getBonusNumber(String message, LottoNumber winningNumber) {
+        System.out.println(message);
+        int inputNumber = Integer.parseInt(scanner.nextLine());
+
+        try {
+            return MyNumber.bonusNumberFrom(inputNumber, winningNumber);
+        } catch (IllegalArgumentException e) {
+            return getBonusNumber(e.getMessage() + INPUT_RETRY, winningNumber);
         }
     }
 }
