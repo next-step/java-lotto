@@ -48,7 +48,7 @@
   - [X] stream collect 와 return을 collectingAndThen 으로 리팩터링
 
 ## 4단계 기능 목록
-- [ ] 수동으로 구매할 로또 수 입력 기능 구현
-- [ ] 수동 로또 수 만큼 로또번호 입력 기능 구현 (LottoNumbers -> LottoTicket)
+- [X] 수동으로 구매할 로또 수 입력 기능 구현
+- [X] 수동 로또 수 만큼 로또번호 입력 기능 구현 (LottoNumbers -> LottoTicket)
 - [ ] LottoTicket를 합치는 기능 구현
 - [ ] LottoGame 수동 로또 로직으로 수정 

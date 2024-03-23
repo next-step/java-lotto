@@ -19,7 +19,7 @@ public class LottoGame {
         LottoTicket lottoTicket = LottoMachine.createLottoNumbers(countOfLotto, new ShuffledNumberDrawer());
         outputView.printLottoNumbers(lottoTicket);
 
-        LottoNumbers inputWinningNumber = inputView.winnnigNumbersInput(INPUT_WINNING_NUMBER_MESSAGE);
+        LottoNumbers inputWinningNumber = inputView.lottoNumbersInput(INPUT_WINNING_NUMBER_MESSAGE);
         WinningNumber winningNumber = inputView.getFinalWinningNumber(INPUT_BONUS_NUMBER_MESSAGE, inputWinningNumber);
 
         LottoResult lottoResult = lottoTicket.computeLottoResult(winningNumber);

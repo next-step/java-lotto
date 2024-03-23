@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.LottoTicket;
 import lotto.domain.WinningNumber;
 
 import java.util.ArrayList;
@@ -15,14 +16,17 @@ public class InputView {
     private static final String INPUT_RETRY = " 다시 입력해주세요.";
     public static final String INPUT_MIN_PRICE_MESSAGE = "금액은 최소 " + LOTTO_PRICE + "원 이상 입력이 가능합니다.";
     public static final String INPUT_CORRECT_PRICE_UNIT_MESSAGE = "금액은 " + LOTTO_PRICE + "원 단위로 입력이 가능합니다.";
+    public static final String INPUT_MANUAL_LOTTO_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
+    public static final String INPUT_MANUAL_LOTTO_COUNT_MESSAGE = "구매한 총 로또 수를 초과할 수 없습니다.";
 
     private static final Scanner scanner = new Scanner(System.in);
+
 
     public int lottoCount(String message) {
         System.out.println(message);
 
         try {
-            int money = scanNextInt();
+            int money = scanPriceForBuyLotto();
             int countOfLotto = money / LOTTO_PRICE;
             System.out.println(countOfLotto + "개를 구매했습니다.");
             return countOfLotto;
@@ -33,21 +37,39 @@ public class InputView {
         }
     }
 
-    private int scanNextInt() {
-        int nextInt = Integer.parseInt(scanner.nextLine());
+    public int manualLottoCount(int totalLottoCount) {
+        System.out.println(INPUT_MANUAL_LOTTO_MESSAGE);
+        int manualLottoCount = Integer.parseInt(scanner.nextLine());
+        if (manualLottoCount > totalLottoCount) {
+            System.out.println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE);
+            return manualLottoCount(totalLottoCount);
+        }
+        return manualLottoCount;
+    }
 
-        if (isInputLowerThanPrice(nextInt)) {
+    public LottoTicket manualLottoTicket(int manualLottoCount) {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            lottoNumbers.add(lottoNumbersInput(INPUT_MANUAL_LOTTO_MESSAGE));
+        }
+        return LottoTicket.from(lottoNumbers);
+    }
+
+    private int scanPriceForBuyLotto() {
+        int priceForBuyLotto = Integer.parseInt(scanner.nextLine());
+
+        if (isInputLowerThanPrice(priceForBuyLotto)) {
             throw new IllegalArgumentException(INPUT_MIN_PRICE_MESSAGE + INPUT_RETRY);
         }
 
-        if (isInputPriceUnitWrong(nextInt)) {
+        if (isInputPriceUnitWrong(priceForBuyLotto)) {
             throw new IllegalArgumentException(INPUT_CORRECT_PRICE_UNIT_MESSAGE + INPUT_RETRY);
         }
 
-        return nextInt;
+        return priceForBuyLotto;
     }
 
-    public LottoNumbers winnnigNumbersInput(String message) {
+    public LottoNumbers lottoNumbersInput(String message) {
         System.out.println(message);
         String inputNumbers = scanner.nextLine();
         String[] splitInputNumbers = inputNumbers.split(",");
@@ -59,7 +81,7 @@ public class InputView {
         try {
             return LottoNumbers.from(numbers);
         } catch (IllegalArgumentException e) {
-            return winnnigNumbersInput(e.getMessage() + INPUT_RETRY);
+            return lottoNumbersInput(e.getMessage() + INPUT_RETRY);
         }
     }
 
