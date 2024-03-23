@@ -49,4 +49,21 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         return new LottoNumber(scanner.nextInt());
     }
+
+    public static int promptForManualPurchaseCount() {
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
+
+    public static List<LottoNumbers> promptForLottoNumbers(int count) {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        List<LottoNumbers> result = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            String input = scanner.nextLine();
+            result.add(convertWinningNumbers(input));
+        }
+        return result;
+    }
 }
