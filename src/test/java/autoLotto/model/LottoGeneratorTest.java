@@ -3,12 +3,9 @@ package autoLotto.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import static autoLotto.model.LottoConstants.LOTTO_END_NUMBER;
-import static autoLotto.model.LottoConstants.LOTTO_START_NUMBER;
+import static autoLotto.model.LottoConstants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -22,14 +19,13 @@ class LottoGeneratorTest {
         LottoGeneratorStrategy lottoGeneratorStrategy = new RandomLottoGeneratorStrategy();
 
         // when
-        List<Integer> result = generator.generateLottoNumbers(lottoGeneratorStrategy);
-        Set<Integer> set = new HashSet<>(result);
+        Set<LottoNumber> result = generator.generateLottoNumbers(lottoGeneratorStrategy);
 
         // then
-        for (int i : result) {
-            assertThat(i).isBetween(LOTTO_START_NUMBER, LOTTO_END_NUMBER);
+        for (LottoNumber lottoNumber : result) {
+            assertThat(lottoNumber.getLottoNumber()).isBetween(LOTTO_START_NUMBER, LOTTO_END_NUMBER);
         }
-        assertThat(set.size()).isEqualTo(result.size());
+        assertThat(result.size()).isEqualTo(VALID_LOTTO_LENGTH);
     }
 
     @Test

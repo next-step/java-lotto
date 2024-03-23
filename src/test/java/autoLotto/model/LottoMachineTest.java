@@ -16,7 +16,7 @@ class LottoMachineTest {
     @DisplayName("LottoMachine 객체 생성 : 성공")
     void testLottoMachine_ShouldReturnCorrectSize() {
         // given
-        String purchaseAmount = "5000";
+        Long purchaseAmount = 5000L;
 
         // when
         LottoMachine lottoMachine = new LottoMachine(purchaseAmount, RANDOM_LOTTO_GENERATOR_STRATEGY);
@@ -29,7 +29,7 @@ class LottoMachineTest {
     @DisplayName("LottoMachine 객체 생성 살패 : 부족한 금액이 들어와 로또 구매 실패 및 예외 발생")
     void testLottoMachine_InvalidPurchaseAmount_ShouldThrowException() {
         // given
-        String purchaseAmount = "500";
+        Long purchaseAmount = 500L;
 
         // when, then
         assertThatThrownBy(() -> new LottoMachine(purchaseAmount, RANDOM_LOTTO_GENERATOR_STRATEGY))
