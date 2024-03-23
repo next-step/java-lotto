@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class ResultView {
 
@@ -15,17 +15,19 @@ public class ResultView {
         lottos.getLottos().forEach(lotto -> System.out.println(lotto.getLottoNumbers().toString()));
     }
 
-    public static void printWinningStatistics(HashMap<LottoRank, Integer> winningStatistics) {
+    public static void printWinningStatistics(Map<LottoRank, Integer> winningStatistics) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
         checkWinningStatistics(winningStatistics);
 
-        winningStatistics.entrySet()
-                .forEach(l -> System.out.println(l.getKey().getResultString() + l.getValue() + "개"));
+        winningStatistics.entrySet().forEach(entry -> {
+            String prefix = (entry.getKey() == LottoRank.SECOND) ? "개 일치 보너스 볼 일치" : "개 일치";
+            System.out.println(entry.getKey().getLottoCount() + prefix + " (" + entry.getKey().getWinningMoney() + "원)- " + entry.getValue() + "개");
+        });
     }
 
-    private static void checkWinningStatistics(HashMap<LottoRank, Integer> winningStatistics) {
+    private static void checkWinningStatistics(Map<LottoRank, Integer> winningStatistics) {
         if (winningStatistics.isEmpty()) {
             System.out.println("로또번호와 일치하는 게 없습니다");
         }
