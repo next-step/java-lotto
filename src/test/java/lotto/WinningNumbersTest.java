@@ -5,7 +5,7 @@ import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.Set;
 
 import static lotto.domain.LottoTicket.INVALID_LOTTO_NUMBER_INPUT;
 import static lotto.domain.LottoTicket.INVALID_LOTTO_NUMBER_SIZE;
@@ -17,14 +17,16 @@ public class WinningNumbersTest {
   @Test
   @DisplayName("당첨 번호 관리 기능 테스트")
   void winningNumbersTest() {
-    List<Integer> given = List.of(1, 2, 3, 4, 5, 6);
-    assertThat(WinningNumbers.of(given).isSame(given)).isTrue();
+    Set<Integer> given = Set.of(1, 2, 3, 4, 5, 6);
+    Integer given2 = 7;
+
+    assertThat(WinningNumbers.of(given, given2).isSame(given)).isTrue();
   }
 
   @Test
   @DisplayName("1 ~ 45 내의 숫자가 들어왔는지 벨리데이션")
   void winningNumbersTest2() {
-    List<Integer> given = List.of(100, 2, 3, 4, 5, 6);
+    Set<Integer> given = Set.of(100, 2, 3, 4, 5, 6);
     assertThatThrownBy(() -> LottoTicket.generate(given))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining(String.format(INVALID_LOTTO_NUMBER_INPUT, given));
@@ -33,7 +35,7 @@ public class WinningNumbersTest {
   @Test
   @DisplayName("6개 숫자가 들어왔는지 벨리데이션")
   void winningNumbersTest3() {
-    List<Integer> given = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    Set<Integer> given = Set.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     assertThatThrownBy(() -> LottoTicket.generate(given))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining(String.format(INVALID_LOTTO_NUMBER_SIZE, given));

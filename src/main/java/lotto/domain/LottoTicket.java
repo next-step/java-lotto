@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoTicket {
 
@@ -12,9 +10,9 @@ public class LottoTicket {
   public static final String INVALID_LOTTO_NUMBER_INPUT = "해당 숫자는 로또 번호 범위가 아닙니다. 번호를 다시 확인해주세요. input: %s";
   public static final String INVALID_LOTTO_NUMBER_SIZE = "입력 개수를 다시 확인해주세요. input: %s";
 
-  private final List<Integer> lottoNumbers;
+  private final Set<Integer> lottoNumbers;
 
-  private LottoTicket(List<Integer> lottoNumbers) {
+  private LottoTicket(Set<Integer> lottoNumbers) {
 
     if (Boolean.FALSE.equals(checkNumbersRange(lottoNumbers))) {
       throw new IllegalArgumentException(String.format(INVALID_LOTTO_NUMBER_INPUT, lottoNumbers));
@@ -27,16 +25,16 @@ public class LottoTicket {
     this.lottoNumbers = lottoNumbers;
   }
 
-  public static List<LottoTicket> generate(int ticketCount) {
-    List<LottoTicket> lottoTickets = new ArrayList<>();
+  public static Set<LottoTicket> generate(int ticketCount) {
+    Set<LottoTicket> lottoTickets = new HashSet<>();
     for (int i = 0; i < ticketCount; i++) {
       Collections.shuffle(POSSIBLE_LOTTO_NUMBER_CANDIDATES);
-      lottoTickets.add(new LottoTicket(new ArrayList<>(POSSIBLE_LOTTO_NUMBER_CANDIDATES.subList(0, 6))));
+      lottoTickets.add(new LottoTicket(new HashSet<>(POSSIBLE_LOTTO_NUMBER_CANDIDATES.subList(0, 6))));
     }
     return lottoTickets;
   }
 
-  public static LottoTicket generate(List<Integer> winningNumbers) {
+  public static LottoTicket generate(Set<Integer> winningNumbers) {
     return new LottoTicket(winningNumbers);
   }
 
@@ -48,7 +46,7 @@ public class LottoTicket {
     return checkNumbersRange(this.lottoNumbers);
   }
 
-  public boolean isSame(List<Integer> numbers) {
+  public boolean isSame(Set<Integer> numbers) {
     return this.lottoNumbers.equals(numbers);
   }
 
@@ -56,6 +54,10 @@ public class LottoTicket {
     return (int) this.lottoNumbers.stream()
         .filter(myLottoTicket.lottoNumbers::contains)
         .count();
+  }
+
+  public boolean contain(int value) {
+    return this.lottoNumbers.contains(value);
   }
 
   private static List<Integer> makeCandidateNumbers() {
@@ -66,7 +68,7 @@ public class LottoTicket {
     return candidates;
   }
 
-  private boolean checkNumbersRange(List<Integer> numbers) {
+  private boolean checkNumbersRange(Set<Integer> numbers) {
     return numbers.stream()
         .allMatch(number -> LOTTO_MIN_NUMBER <= number && number <= LOTTO_MAX_NUMBER);
   }

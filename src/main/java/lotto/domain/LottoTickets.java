@@ -2,21 +2,20 @@ package lotto.domain;
 
 import lotto.domain.type.RewardPrice;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
 
   private final PurchaseAmount purchaseAmount;
-  private final List<LottoTicket> tickets;
+  private final Set<LottoTicket> tickets;
 
   public LottoTickets(int amount) {
     this.purchaseAmount = new PurchaseAmount(amount);
     this.tickets = LottoTicket.generate(this.purchaseAmount.ticketCount());
   }
 
-  public LottoTickets(PurchaseAmount purchaseAmount, List<LottoTicket> tickets) {
+  public LottoTickets(PurchaseAmount purchaseAmount, Set<LottoTicket> tickets) {
     this.purchaseAmount = purchaseAmount;
     this.tickets = tickets;
   }
@@ -37,19 +36,29 @@ public class LottoTickets {
     return this.tickets.stream().allMatch(LottoTicket::haveCorrectNumbers);
   }
 
-  public void updateMapValues(TreeMap<RewardPrice, Integer> map, WinningNumbers winningNumbers, LottoTickets lottoTickets) {
-    for (LottoTicket lottoTicket : lottoTickets.tickets) {
+  public Map<RewardPrice, Integer> matchedNumberCountBy(WinningNumbers winningNumbers) {
+    Map<RewardPrice, Integer> map = initMatchedNumberCountMap();
+    for (LottoTicket lottoTicket : tickets) {
       int matchNumberCount = winningNumbers.matchNumberCount(lottoTicket);
-      RewardPrice key = RewardPrice.match(matchNumberCount);
+      boolean isMatchBonusBall = winningNumbers.isMatchBonusBall(lottoTicket);
+      RewardPrice key = RewardPrice.match(matchNumberCount, isMatchBonusBall);
       map.put(key, map.get(key) + 1);
     }
+    return map;
   }
 
-  public List<LottoTicket> getTickets() {
-    return Collections.unmodifiableList(tickets);
+  public Set<LottoTicket> getTickets() {
+    return Collections.unmodifiableSet(tickets);
   }
 
   public double calculateProfitRate(int profitAmount) {
     return Math.floor((double) profitAmount / purchaseAmount.amount() * 100) / 100.0;
+  }
+
+  private Map<RewardPrice, Integer> initMatchedNumberCountMap() {
+    Map<RewardPrice, Integer> map = new HashMap<>();
+    List<RewardPrice> filteredInfos = Arrays.stream(RewardPrice.values()).collect(Collectors.toList());
+    filteredInfos.forEach(info -> map.put(info, 0));
+    return map;
   }
 }
