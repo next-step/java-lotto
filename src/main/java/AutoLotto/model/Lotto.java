@@ -1,9 +1,7 @@
 package autoLotto.model;
 
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static autoLotto.model.LottoConstants.INVALID_LOTTO_NUMBERS;
 import static autoLotto.model.LottoConstants.VALID_LOTTO_LENGTH;
@@ -68,9 +66,7 @@ public class Lotto {
         return lotto;
     }
 
-    public List<Integer> getLottoAsListInteger() {
-        return lotto.stream()
-                .map(LottoNumber::getLottoNumber)
-                .collect(Collectors.toList());
+    public boolean containsNumber(int number) {
+        return lotto.stream().anyMatch(lottoNumber -> lottoNumber.getLottoNumber() == number);
     }
 }
