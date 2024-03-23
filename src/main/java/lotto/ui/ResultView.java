@@ -1,12 +1,16 @@
 package lotto.ui;
 
-import lotto.domain.*;
+import lotto.domain.LottoStatistics;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
+import lotto.domain.Rank;
 
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ResultView {
 
