@@ -24,7 +24,7 @@ public class LottoTicketTest {
             // Given
             LottoTicket lottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
             LottoTicket winLottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 43, 44, 45)));
-            LottoNumber bonusNumber = new LottoNumber(23);
+            LottoNumber bonusNumber = LottoNumber.of(23);
 
             // When
             assertThat(lottoTicket.getRank(new WinLotto(winLottoTicket, bonusNumber))).isEqualTo(Rank.FIFTH);
@@ -36,7 +36,7 @@ public class LottoTicketTest {
             // Given
             LottoTicket lottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
             LottoTicket winLottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 44, 45)));
-            LottoNumber bonusNumber = new LottoNumber(23);
+            LottoNumber bonusNumber = LottoNumber.of(23);
 
             // When
             assertThat(lottoTicket.getRank(new WinLotto(winLottoTicket, bonusNumber))).isEqualTo(Rank.FOURTH);
@@ -48,7 +48,7 @@ public class LottoTicketTest {
             // Given
             LottoTicket lottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
             LottoTicket winLottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
-            LottoNumber bonusNumber = new LottoNumber(23);
+            LottoNumber bonusNumber = LottoNumber.of(23);
 
             // When
             assertThat(lottoTicket.getRank(new WinLotto(winLottoTicket, bonusNumber))).isEqualTo(Rank.FIRST);
@@ -60,7 +60,7 @@ public class LottoTicketTest {
             // Given
             LottoTicket lottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
             LottoTicket winLottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 42, 43, 44, 45)));
-            LottoNumber bonusNumber = new LottoNumber(23);
+            LottoNumber bonusNumber = LottoNumber.of(23);
 
             // When
             assertThat(lottoTicket.getRank(new WinLotto(winLottoTicket, bonusNumber))).isEqualTo(Rank.MISS);
@@ -72,7 +72,7 @@ public class LottoTicketTest {
             // Given
             LottoTicket lottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
             LottoTicket winLottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 45)));
-            LottoNumber bonusNumber = new LottoNumber(23);
+            LottoNumber bonusNumber = LottoNumber.of(23);
 
             // When
             assertThat(lottoTicket.getRank(new WinLotto(winLottoTicket, bonusNumber))).isEqualTo(Rank.THIRD);
@@ -84,7 +84,7 @@ public class LottoTicketTest {
             // Given
             LottoTicket lottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 23)));
             LottoTicket winLottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 45)));
-            LottoNumber bonusNumber = new LottoNumber(23);
+            LottoNumber bonusNumber = LottoNumber.of(23);
 
             // When
             assertThat(lottoTicket.getRank(new WinLotto(winLottoTicket, bonusNumber))).isEqualTo(Rank.SECOND);

@@ -15,7 +15,7 @@ public class Main {
             ResultView.printLottoTickets(lottoTickets);
 
             LottoTicket winLottoTicket = new LottoTicket(new LottoNumbers(InputView.readWinNumbers()));
-            LottoNumber bonusNumber = new LottoNumber(InputView.readBonusNumber());
+            LottoNumber bonusNumber = LottoNumber.of(InputView.readBonusNumber());
             WinLotto winLotto = new WinLotto(winLottoTicket, bonusNumber);
 
             LottoStatistics statistics = new LottoStatistics(lottoTickets, winLotto);

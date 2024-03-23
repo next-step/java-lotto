@@ -11,18 +11,22 @@ public class LottoNumber {
 
     private final int number;
 
-    public LottoNumber(int number) {
+    public static LottoNumber of(int number) {
         validateNumberRange(number);
+        return LottoNumberCache.cache[number];
+    }
+
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private void validateNumberRange(int number) throws IllegalLottoNumberException {
+    private static void validateNumberRange(int number) throws IllegalLottoNumberException {
         if (notInRange(number)) {
             throw new IllegalLottoNumberException(NUMBER_RANGE_FROM, NUMBER_RANGE_TO, number);
         }
     }
 
-    private boolean notInRange(int number) {
+    private static boolean notInRange(int number) {
         return number < NUMBER_RANGE_FROM || number > NUMBER_RANGE_TO;
     }
 
@@ -41,5 +45,23 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    private static class LottoNumberCache {
+        static final int low = NUMBER_RANGE_FROM;
+        static final int high = NUMBER_RANGE_TO;
+        static final LottoNumber[] cache;
+
+        static {
+            cache = new LottoNumber[(high - low) + 2]; // cache array index start 'from' number
+            for (int number = low; number < cache.length; number++) {
+                cache[number] = new LottoNumber(number);
+            }
+        }
+
+        private LottoNumberCache() {
+
+        }
+
     }
 }

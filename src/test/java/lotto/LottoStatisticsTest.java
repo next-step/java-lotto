@@ -24,7 +24,7 @@ public class LottoStatisticsTest {
                 new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)))
         ));
         LottoTicket winLottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
-        LottoNumber bonusNumber = new LottoNumber(23);
+        LottoNumber bonusNumber = LottoNumber.of(23);
 
         // When
         LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, new WinLotto(winLottoTicket, bonusNumber));
@@ -47,7 +47,7 @@ public class LottoStatisticsTest {
                 new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)))
         ));
         LottoTicket winLottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
-        LottoNumber bonusNumber = new LottoNumber(23);
+        LottoNumber bonusNumber = LottoNumber.of(23);
 
         // When
         LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets, new WinLotto(winLottoTicket, bonusNumber));

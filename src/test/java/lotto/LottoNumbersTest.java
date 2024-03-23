@@ -21,7 +21,7 @@ public class LottoNumbersTest {
 
     private Set<LottoNumber> getPossibleLottoNumbers() {
         return IntStream.rangeClosed(1, 45)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toUnmodifiableSet());
     }
 

@@ -32,7 +32,7 @@ public class LottoNumbers {
     public LottoNumbers(List<Integer> numbers) {
         validateNumbersSize(numbers);
         this.numbers = numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toUnmodifiableList());
     }
 

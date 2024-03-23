@@ -14,7 +14,7 @@ public class LottoNumberTest {
     @DisplayName("[성공] 1~45 사이의 정수를 전달하면 로또 번호가 생성된다.")
     void 로또_번호() {
         assertThatCode(() -> {
-            new LottoNumber(23);
+            LottoNumber.of(23);
         }).doesNotThrowAnyException();
     }
 
@@ -22,7 +22,7 @@ public class LottoNumberTest {
     @DisplayName("[성공][경계값] 1을 전달하면 로또 번호가 생성된다.")
     void 로또_번호_경계값_1전달() {
         assertThatCode(() -> {
-            new LottoNumber(1);
+            LottoNumber.of(1);
         }).doesNotThrowAnyException();
     }
 
@@ -30,7 +30,7 @@ public class LottoNumberTest {
     @DisplayName("[성공][경계값] 45를 전달하면 로또 번호가 생성된다.")
     void 로또_번호_경계값_45전달() {
         assertThatCode(() -> {
-            new LottoNumber(45);
+            LottoNumber.of(45);
         }).doesNotThrowAnyException();
     }
 
@@ -38,13 +38,13 @@ public class LottoNumberTest {
     @DisplayName("[실패][경계값] 0를 전달하면 IllegalLottoNumberException 예외가 발생한다.")
     void 로또_번호_경계값_0전달() {
         assertThatExceptionOfType(IllegalLottoNumberException.class)
-                .isThrownBy(() -> new LottoNumber(0));
+                .isThrownBy(() -> LottoNumber.of(0));
     }
 
     @Test
     @DisplayName("[실패][경계값] 46를 전달하면 IllegalLottoNumberException 예외가 발생한다.")
     void 로또_번호_경계값_46전달() {
         assertThatExceptionOfType(IllegalLottoNumberException.class)
-                .isThrownBy(() -> new LottoNumber(46));
+                .isThrownBy(() -> LottoNumber.of(46));
     }
 }
