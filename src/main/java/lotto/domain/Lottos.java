@@ -14,9 +14,9 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public HashMap<LottoRank, Integer> getWinningStatistics(LottoNumbers winningLottoNumbers) {
+    public HashMap<LottoRank, Integer> getWinningStatistics(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
         return (HashMap<LottoRank, Integer>) lottos.stream()
-                .map(lotto -> LottoRank.findLottoRankByLottoCount(lotto.getCountOfMatchLottoNumber(winningLottoNumbers)))
+                .map(lotto -> LottoRank.findLottoRankByLottoCount(lotto.getCountOfMatchLottoNumber(winningLottoNumbers), lotto.isMatchBonusNumber(winningLottoNumbers, bonusNumber)))
                 .filter(rank -> rank != null)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(e -> INCREMENT_VALUE)));
     }

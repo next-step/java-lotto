@@ -17,9 +17,13 @@ public enum LottoRank {
         this.winningMoney = winningMoney;
     }
 
-    public static LottoRank findLottoRankByLottoCount(int lottoCount) {
+    public static LottoRank findLottoRankByLottoCount(int lottoCount, boolean matchBonusNumber) {
+        if (lottoCount == LottoRank.SECOND.lottoCount && matchBonusNumber) {
+            return LottoRank.SECOND;
+        }
+
         return Arrays.stream(LottoRank.values())
-                .filter(v -> v.lottoCount == lottoCount)
+                .filter(rank -> rank.lottoCount == lottoCount && rank != SECOND)
                 .findFirst()
                 .orElse(null);
     }
@@ -30,6 +34,10 @@ public enum LottoRank {
 
     public int getWinningMoney() {
         return winningMoney;
+    }
+
+    public String getResultString() {
+        return resultString;
     }
 
 }

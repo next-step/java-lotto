@@ -38,7 +38,11 @@ public class LottoNumbers {
         return this.lottoNumbers.stream()
                 .anyMatch(lottoNumber -> lottoNumber.getLottoNumber() == winningNumber.getLottoNumber());
     }
-    
+
+    public boolean isMatchBonusNumber(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
+        return winningLottoNumbers.getLottoNumbers().contains(bonusNumber);
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
@@ -53,11 +57,6 @@ public class LottoNumbers {
     private void checkValidSize(List<Integer> winningLottoNumbers) {
         if (winningLottoNumbers.size() != LOTTO_SIZE)
             throw new IllegalArgumentException("입력한 로또 사이즈가 6이여야 합니다!");
-    }
-
-    @Override
-    public String toString() {
-        return lottoNumbers.toString();
     }
 
 }
