@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -14,8 +14,8 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public HashMap<LottoRank, Integer> getWinningStatistics(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
-        return (HashMap<LottoRank, Integer>) lottos.stream()
+    public Map<LottoRank, Integer> getWinningStatistics(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
+        return lottos.stream()
                 .map(lotto -> LottoRank.findLottoRankByLottoCount(lotto.getCountOfMatchLottoNumber(winningLottoNumbers), lotto.isMatchBonusNumber(winningLottoNumbers, bonusNumber)))
                 .filter(rank -> rank != null)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(e -> INCREMENT_VALUE)));
