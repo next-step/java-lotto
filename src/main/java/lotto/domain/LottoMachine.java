@@ -9,10 +9,6 @@ public class LottoMachine {
     private final int number;
     private final List<LottoTicket> lottoTickets;
 
-    public LottoMachine(List<LottoTicket> lottoTickets) {
-        this(lottoTickets.size(), lottoTickets);
-    }
-
     public LottoMachine(int number) {
         this(number, new ArrayList<>());
     }

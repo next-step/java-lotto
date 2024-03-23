@@ -16,10 +16,6 @@ public class LottoMatchingService {
     private final WinningNumbers winningNumbers;
     private BonusBall bonusBall;
 
-    public LottoMatchingService(List<Integer> winningNumbers) {
-        this(WinningNumbers.of(winningNumbers));
-    }
-
     public LottoMatchingService(List<Integer> winningNumbers, BonusBall bonusBall) {
         this(WinningNumbers.of(winningNumbers));
         this.bonusBall = bonusBall;

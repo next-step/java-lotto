@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinningNumbers { // 당첨 번호들을 담당하는 객체
+public class WinningNumbers {
 
     private final List<WinningNumber> winningNumbers;
 
@@ -23,4 +23,5 @@ public class WinningNumbers { // 당첨 번호들을 담당하는 객체
                 .filter(winningNumbers::contains)
                 .count());
     }
+
 }
