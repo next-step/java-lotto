@@ -35,7 +35,7 @@ public class ResultView {
         System.out.println("---------");
         Prize[] values = Prize.values();
         for (int i = 0; i < Prize.values().length - 1; i++) {
-            System.out.println(values[i + 1].getMatchCount() + "개 일치 (" + values[i + 1].getPrice() + "원)- " + integers.get(i) + "개");
+            System.out.println(values[i + 1].getMatchCount() + "개 일치 (" + values[i + 1].getWinningMoney() + "원)- " + integers.get(i) + "개");
         }
         System.out.printf("총 수익률은 %.2f", price.calculateRateOfReturn(integers));
     }

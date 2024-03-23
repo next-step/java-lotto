@@ -43,7 +43,7 @@ public class Price {
         int totalRevenue = 0;
         Prize[] values = Prize.values();
         for (int i = 0; i < values.length - 1; i++) {
-            totalRevenue += values[i + 1].getPrice() * integers.get(i);
+            totalRevenue += values[i + 1].getWinningMoney() * integers.get(i);
         }
         return totalRevenue;
     }
