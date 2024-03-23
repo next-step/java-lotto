@@ -33,4 +33,8 @@ public class UserLotto {
     public int hashCode() {
         return Objects.hash(userLotto);
     }
+
+    public List<Lotto> lottoList() {
+        return this.userLotto;
+    }
 }

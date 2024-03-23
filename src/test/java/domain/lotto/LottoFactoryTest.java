@@ -14,8 +14,6 @@ class LottoFactoryTest {
     @DisplayName("로또 금액과 로또 생성전략으로 로또를 생성할 수 있다.")
     @Test
     void create() {
-
-
         LottoFactory lottoFactory = new LottoFactory(() -> List.of(1, 2, 3, 4, 5, 6));
         UserLotto userLotto = lottoFactory.createUserLotto(new Money(1000L));
     }
