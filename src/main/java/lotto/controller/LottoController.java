@@ -35,7 +35,6 @@ public class LottoController {
         List<Integer> winningNumbers = inputView.getWinningNumbers();
         resultView.printBonusBallNumber();
 
-        // todo 빌더패턴으로 변경
         resultView.printResult(lottoMachine
                 , winningNumbers
                 , price
