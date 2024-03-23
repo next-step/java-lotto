@@ -11,6 +11,7 @@ public class Prizes {
         this.prizes = prizes;
     }
 
+    // todo 리팩터링
     public List<Integer> calculateMatchCounts() {
         List<Integer> matchCounts = Arrays.asList(0, 0, 0, 0, 0);
         for (Prize prize : prizes) { // prizes는 LottoTicket의 개수만큼 생성된 Prize 객체들을 가지고 있음
