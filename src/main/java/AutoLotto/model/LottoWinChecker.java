@@ -6,35 +6,31 @@ import java.util.Map;
 import java.util.Set;
 
 public class LottoWinChecker {
-    private Map<Integer, Integer> winLottos;
+    private Map<PrizeEnum, Integer> winLottos;
 
-    public LottoWinChecker(String winNumbersAsString, List<Lotto> lottos) {
-        this.winLottos = createWinLotto(winNumbersAsString, lottos);
+    public LottoWinChecker(String winNumbersAsString, List<Lotto> lottos, int bonusNumber) {
+        this.winLottos = createWinLotto(winNumbersAsString, lottos, bonusNumber);
     }
 
-    private Map<Integer, Integer> createWinLotto(String winNumbersAsString, List<Lotto> lottos) {
-        List<Integer> winLotto = retrieveWinLottoAsListInteger(winNumbersAsString);
-        return countWinLotto(winLotto, lottos);
+    private Map<PrizeEnum, Integer> createWinLotto(String winNumbersAsString, List<Lotto> lottos, int bonusNumber) {
+        Lotto winLotto = Lotto.createLottoFrom(winNumbersAsString);
+        return countWinLotto(winLotto, lottos, bonusNumber);
     }
 
-    private List<Integer> retrieveWinLottoAsListInteger(String winNumbersInString) {
-        Lotto lotto = Lotto.createLottoFrom(winNumbersInString);
-        List<Integer> lottoAsListInteger = lotto.getLottoAsListInteger();
-        return lottoAsListInteger;
-    }
-
-    private Map<Integer, Integer> countWinLotto(List<Integer> winLotto, List<Lotto> lottos) {
-        Map<Integer, Integer> result = new HashMap<>();
+    private Map<PrizeEnum, Integer> countWinLotto(Lotto winLotto, List<Lotto> lottos, int bonusNumber) {
+        Map<PrizeEnum, Integer> result = new HashMap<>();
 
         for (Lotto lotto : lottos) {
             int countOfWinNumbers = compareWinNumbers(winLotto, lotto);
-            saveOnlyPrize(result, countOfWinNumbers);
+            boolean isBonusMatched = compareBonusNumber(lotto, bonusNumber);
+            PrizeEnum prize = PrizeEnum.getPrizeFrom(countOfWinNumbers, isBonusMatched);
+            result.put(prize, result.getOrDefault(prize, 0) + 1);
         }
 
         return result;
     }
 
-    private int compareWinNumbers(List<Integer> winLotto, Lotto lotto) {
+    private int compareWinNumbers(Lotto winLotto, Lotto lotto) {
         Set<LottoNumber> targetLotto = lotto.getLotto();
         int matchingNumbers = 0;
 
@@ -45,23 +41,19 @@ public class LottoWinChecker {
         return matchingNumbers;
     }
 
-    private void saveOnlyPrize(Map<Integer, Integer> result, int countOfWinNumbers) {
-        if (countOfWinNumbers < PrizeResultEnum.THREE_MATCHED.getMatchedCount()) {
-            return;
-        }
-
-        result.put(countOfWinNumbers, result.getOrDefault(countOfWinNumbers, 0) + 1);
+    private boolean compareBonusNumber(Lotto userLotto, int bonusNumber) {
+        return userLotto.containsNumber(bonusNumber);
     }
 
-    private int hasWinNumber(List<Integer> winLotto, Integer targetLottoNumber) {
-        if(winLotto.contains(targetLottoNumber)) {
+    private int hasWinNumber(Lotto winLotto, Integer targetLottoNumber) {
+        if (winLotto.containsNumber(targetLottoNumber)) {
             return 1;
         }
 
         return 0;
     }
 
-    public Map<Integer, Integer> getWinLottos() {
+    public Map<PrizeEnum, Integer> getWinLottos() {
         return this.winLottos;
     }
 }
