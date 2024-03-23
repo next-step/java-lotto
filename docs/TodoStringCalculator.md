@@ -6,7 +6,7 @@
 - [x] 입력 받은 문자열을 분리한다
     - 입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw
     - 사칙연산 기호가 아닌 경우 IllegalArgumentException throw
-- [ ] 문자열을 계산한다
+- [x] 문자열을 계산한다
     - 입력값 순서대로 계산한다
     - 덧셈
     - 뺄셈
