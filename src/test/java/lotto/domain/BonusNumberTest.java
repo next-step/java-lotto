@@ -9,6 +9,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -28,12 +31,14 @@ class BonusNumberTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1:1:true", "1:2:false"}, delimiter = ':')
-    @DisplayName("isMatched(): bonusNumber와 lottoNumber가 일치하는 경우 true 그렇지 않은 경우 false를 반환한다.")
-    void testIsMatched(int bonusNumberInput, int lottoNumberInput, boolean expected) {
+    @CsvSource(value = {"1:true", "2:false"}, delimiter = ':')
+    @DisplayName("hasMatched(): bonusNumber가 lottoNumbers에서 일치하는게 있다면 true 그렇지 않은 경우 false를 반환한다.")
+    void testhasMatched(int bonusNumberInput, boolean expected) {
+        List<LottoNumber> lottoNumbers = Stream.of(1, 3, 5, 7, 9, 11)
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
         BonusNumber bonusNumber = new BonusNumber(LottoNumber.valueOf(bonusNumberInput));
-        LottoNumber lottoNumber = LottoNumber.valueOf(lottoNumberInput);
 
-        assertThat(bonusNumber.isMatched(lottoNumber)).isEqualTo(expected);
+        assertThat(bonusNumber.isMatched(lottoNumbers)).isEqualTo(expected);
     }
 }

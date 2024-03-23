@@ -3,6 +3,8 @@ package lotto.domain;
 import lotto.domain.lotto.LottoNumber;
 import lotto.exception.InValidBonusNumberException;
 
+import java.util.List;
+
 public class BonusNumber {
     private final LottoNumber bonusNumber;
 
@@ -25,7 +27,8 @@ public class BonusNumber {
         return new BonusNumber(bonusNumber, winningNumbers);
     }
 
-    public boolean isMatched(LottoNumber lottoNumber) {
-        return bonusNumber.equals(lottoNumber);
+    public boolean isMatched(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream()
+                .anyMatch(bonusNumber::equals);
     }
 }
