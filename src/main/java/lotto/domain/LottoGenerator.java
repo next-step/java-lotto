@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoGenerator {
-    public List<Lotto> generateLottos(Fee fee) {
-        List<Lotto> lottos = new ArrayList<>();
+    public Lottos generateLottos(Fee fee) {
+        Lottos lottos = new Lottos();
         for (int i = 0; i < fee.convertToGameUnit(); i++) {
             lottos.add(generateLotto());
         }
