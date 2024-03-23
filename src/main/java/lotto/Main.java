@@ -27,7 +27,7 @@ public class Main {
 
             ResultView.printLottoStatistics(statistics);
         } catch (IllegalArgumentException e) {
-            ResultView.printException(e);
+            ResultView.printException(e.getMessage());
         } catch (Exception e) {
             ResultView.printException("예기치 못한 예외가 발생했습니다.");
             e.printStackTrace();

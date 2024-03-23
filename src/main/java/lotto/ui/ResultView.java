@@ -13,35 +13,18 @@ public class ResultView {
 
     public static void printLottoTickets(IssuedLottoTickets issuedLottoTickets) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(formatLottoTicketsCount(issuedLottoTickets));
+        stringBuilder.append(formatLottoTicketsCount(issuedLottoTickets)).append(System.lineSeparator());
         stringBuilder.append(formatLottoTickets(issuedLottoTickets.getAutoLottoTickets()));
-        stringBuilder.append(formatLottoTickets(issuedLottoTickets.getManualLottoTickets()));
+        stringBuilder.append(formatLottoTickets(issuedLottoTickets.getManualLottoTickets())).append(System.lineSeparator());
         System.out.println(stringBuilder);
     }
 
-    private static String formatLottoTickets(LottoTickets tickets) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(formatLottoTicketNumbers(tickets))
-                    .append(System.lineSeparator());
-        return stringBuilder.toString();
-    }
-
     private static String formatLottoTicketsCount(IssuedLottoTickets issuedLottoTickets) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(MessageFormat.format("수동으로 {0}장, 자동으로 {1}개를 구매했습니다.",
-                issuedLottoTickets.manualLottoTicketsSize(), issuedLottoTickets.autoLottoTicketsSize()));
-        stringBuilder.append(System.lineSeparator());
-        return stringBuilder.toString();
+        return MessageFormat.format("수동으로 {0}장, 자동으로 {1}개를 구매했습니다.",
+                issuedLottoTickets.manualLottoTicketsSize(), issuedLottoTickets.autoLottoTicketsSize());
     }
 
-    private static StringBuilder formatLottoTicketCount(LottoTickets lottoTickets) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(formatPurchaseCount(lottoTickets.size()));
-        stringBuilder.append(System.lineSeparator());
-        return stringBuilder;
-    }
-
-    private static String formatLottoTicketNumbers(LottoTickets lottoTickets) {
+    private static String formatLottoTickets(LottoTickets lottoTickets) {
         StringBuilder stringBuilder = new StringBuilder();
         for (LottoTicket ticket : lottoTickets.get()) {
             stringBuilder.append("[")
@@ -49,7 +32,6 @@ public class ResultView {
                     .append("]")
                     .append(System.lineSeparator());
         }
-        stringBuilder.append(System.lineSeparator());
         return stringBuilder.toString();
     }
 
@@ -59,13 +41,13 @@ public class ResultView {
                 .collect(Collectors.joining(", "));
     }
 
-    private static String formatPurchaseCount(int count) {
-        return MessageFormat.format("{0}개를 구매했습니다.", count);
-    }
-
     public static void printLottoStatistics(LottoStatistics statistics) {
-        String message = formatRanks(statistics) + formatProfitRate(statistics);
-        System.out.println(message);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("당첨 통계").append(System.lineSeparator());
+        stringBuilder.append("---------").append(System.lineSeparator());
+        stringBuilder.append(formatRanks(statistics)).append(System.lineSeparator());
+        stringBuilder.append(formatProfitRate(statistics)).append(System.lineSeparator());
+        System.out.println(stringBuilder);
     }
 
     private static String formatRanks(LottoStatistics statistics) {
@@ -93,7 +75,7 @@ public class ResultView {
     private static String formatRankMatchCount(Rank rank) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(MessageFormat.format("{0}개 일치", rank.getMatchCount()));
-        if (Rank.SECOND == rank) {
+        if (rank.isBonus()) {
             stringBuilder.append(", 보너스 볼 일치");
         }
         return stringBuilder.toString();
@@ -107,7 +89,4 @@ public class ResultView {
         System.out.println(exceptionMessage);
     }
 
-    public static void printException(Exception e) {
-        printException(e.getMessage());
-    }
 }
