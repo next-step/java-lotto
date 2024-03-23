@@ -1,5 +1,6 @@
 package lottogame.domain;
 
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public enum Rank {
@@ -26,9 +27,20 @@ public enum Rank {
 
     public static int findPrize(int numOfWinnings) {
         return Stream.of(values())
-                .filter(rank -> rank.numOfWinnings == numOfWinnings)
+                .filter(match(numOfWinnings))
                 .findAny()
                 .orElse(EMPTY)
                 .prize;
+    }
+
+    public static Rank findRank(int numOfWinnings) {
+        return Stream.of(values())
+                .filter(match(numOfWinnings))
+                .findAny()
+                .orElse(EMPTY);
+    }
+
+    private static Predicate<Rank> match(int numOfWinnings) {
+        return rank -> rank.numOfWinnings == numOfWinnings;
     }
 }
