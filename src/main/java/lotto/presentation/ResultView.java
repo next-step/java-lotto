@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoWinningRank;
 import lotto.domain.UserLottoResult;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,9 +28,32 @@ public class ResultView {
     public void printLottoResult(UserLottoResult userLottoResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (LottoWinningRank lottoWinningRank : LottoWinningRank.values()) {
-            System.out.printf("%d개 일치 : (%d원)- %d개\n", lottoWinningRank.getMatchCount(), lottoWinningRank.getWinningPrice(), userLottoResult.getCountLottoResult(lottoWinningRank));
-        }
+        Arrays.stream(LottoWinningRank.values())
+                .map(lottoWinningRank -> makeStringForWinningLottoRank(lottoWinningRank) + makeStringForUserLottoResult(lottoWinningRank,userLottoResult))
+                .forEach(System.out::println);
+
         System.out.printf("총 수익률은 %.2f\n", userLottoResult.getRateOfReturn());
     }
+
+    private String makeStringForWinningLottoRank(LottoWinningRank lottoWinningRank) {
+        String countMatch = "%d개 일치";
+        String winningPrice = "(%d원)- ";
+        String printingMatchCount;
+
+        printingMatchCount =  String.format(countMatch + " ", lottoWinningRank.getMatchCount());
+
+        if (lottoWinningRank.getRequireMatchBonus()) {
+            printingMatchCount += ", 보너스볼 일치 ";
+        }
+
+        return String.format(printingMatchCount + winningPrice, lottoWinningRank.getWinningPrice());
+    }
+
+    private String makeStringForUserLottoResult(LottoWinningRank lottoWinningRank, UserLottoResult userLottoResult) {
+        String winningRankCount = "%d개";
+
+        return String.format(winningRankCount, userLottoResult.getCountLottoResult(lottoWinningRank));
+    }
+
+
 }

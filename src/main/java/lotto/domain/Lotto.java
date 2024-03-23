@@ -16,9 +16,13 @@ public class Lotto {
         return lottoNumbers.getNumbers();
     }
 
-    public Optional<LottoWinningRank> isWinningLotto(Lotto targetLotto) {
-        int matchCount = this.lottoNumbers.matchCount(targetLotto.lottoNumbers);
+    public Optional<LottoWinningRank> isWinningLotto(WinningLotto winningLottoLotto) {
+        LottoNumbers winningLottoNumbers = winningLottoLotto.getLottoNumbers();
+        LottoNumber winningBonusNumber = winningLottoLotto.getBonusNumber();
 
-        return LottoWinningRank.findByMatchCount(matchCount);
+        int matchCount = this.lottoNumbers.matchCount(winningLottoNumbers);
+        boolean matchBonus = this.lottoNumbers.isContainNumber(winningBonusNumber);
+
+        return LottoWinningRank.findByMatchCount(matchCount, matchBonus);
     }
 }
