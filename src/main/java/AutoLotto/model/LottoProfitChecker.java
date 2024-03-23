@@ -1,17 +1,17 @@
 package autoLotto.model;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class LottoProfitChecker {
     private static final Long INIT_BENEFIT = 0L;
 
     private Long profit;
 
-    public LottoProfitChecker(HashMap<Integer, Integer> winLottos) {
+    public LottoProfitChecker(Map<Integer, Integer> winLottos) {
         this.profit = getTotalPrizes(winLottos);
     }
 
-    private Long getTotalPrizes(HashMap<Integer, Integer> winLottos) {
+    private Long getTotalPrizes(Map<Integer, Integer> winLottos) {
         Long totalWinAmount = INIT_BENEFIT;
 
         for (Integer key : winLottos.keySet()) {
@@ -22,12 +22,11 @@ public class LottoProfitChecker {
     }
 
     private Long getPrizeAmount(int index) {
-        return PrizeResultEnum.getPrizeByIndex(index);
+        return PrizeResultEnum.getPrizeByMatchedCount(index);
     }
 
-    public float getProfitRatio(String purchaseAmount) {
-        float purchaseAmountAsFloat = stringToFloat(purchaseAmount);
-        return calculateProfitRatio(purchaseAmountAsFloat);
+    public float getProfitRatio(Long purchaseAmount) {
+        return calculateProfitRatio(purchaseAmount);
     }
 
     private float calculateProfitRatio(float purchaseAmount) {
@@ -38,9 +37,4 @@ public class LottoProfitChecker {
         float profitRatio = profit / purchaseAmount;
         return profitRatio;
     }
-
-    private float stringToFloat(String string) {
-        return Float.parseFloat(string);
-    }
-
 }
