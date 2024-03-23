@@ -1,6 +1,8 @@
 package lotto.domain.lotto;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.PurchaseAmountOfMoney;
+import lotto.domain.Rank;
 import lotto.domain.WinningNumbers;
 import lotto.domain.lotto.strategy.LottoGeneratingStrategy;
 import org.junit.jupiter.api.DisplayName;
@@ -26,16 +28,17 @@ class LottosTest {
     };
 
     @ParameterizedTest
-    @CsvSource(value = {"1, 2, 3, 7, 8, 9:3:5", "1, 2, 3, 4, 8, 9:4:50", "1, 2, 3, 4, 5, 9:5:1500", "1, 2, 3, 4, 5, 6:6:2000000"}, delimiter = ':')
+    @CsvSource(value = {"1, 2, 3, 7, 8, 9:10:FIFTH:5", "1, 2, 3, 4, 8, 9:10:FOURTH:50", "1, 2, 3, 4, 5, 9:10:THIRD:1500", "1, 2, 3, 4, 5, 9:6:SECOND:30000", "1, 2, 3, 4, 5, 6:10:FIRST:2000000"}, delimiter = ':')
     @DisplayName("statistics(): 로또의 결과(당첨 통계, 수익률)를 반환합니다.")
-    void testStatistics(String winningNumbersInput, int matchCount, double expectedRateOfReturn) {
+    void testStatistics(String winningNumbersInput,  int bonusNumberInput, Rank rank, double expectedRateOfReturn) {
         PurchaseAmountOfMoney purchaseAmountOfMoney = PurchaseAmountOfMoney.valueOf(1000);
         Lottos lottos = LottoStore.purchaseLotto(lottoGeneratingStrategyStub, purchaseAmountOfMoney.numberOfLottoToPurchase());
-
         WinningNumbers winningNumbers = WinningNumbers.valueOf(lottoNumbersForTest(winningNumbersInput));
-        StatisticsOfLottos statisticsOfLottos = lottos.statistics(winningNumbers, purchaseAmountOfMoney);
+        BonusNumber bonusNumber = BonusNumber.newBonusNumberWithOutWinningNumbers(LottoNumber.valueOf(bonusNumberInput), winningNumbers);
 
-        assertThat(statisticsOfLottos.numberOfMatchCount(matchCount)).isEqualTo(1);
+        StatisticsOfLottos statisticsOfLottos = lottos.statistics(winningNumbers, bonusNumber, purchaseAmountOfMoney);
+
+        assertThat(statisticsOfLottos.numberOfMatchCount(rank)).isEqualTo(1);
         assertThat(statisticsOfLottos.rateOfReturn()).isEqualTo(expectedRateOfReturn);
     }
 
