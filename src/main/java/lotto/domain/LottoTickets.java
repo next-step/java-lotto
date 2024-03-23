@@ -19,6 +19,14 @@ public class LottoTickets {
         return new LottoTickets(tickets);
     }
 
+    public static LottoTickets manual(List<List<Integer>> manualNumbers) {
+        List<LottoTicket> tickets = manualNumbers.stream()
+                .map(LottoNumbers::new)
+                .map(LottoTicket::new)
+                .collect(Collectors.toUnmodifiableList());
+        return new LottoTickets(tickets);
+    }
+
     public List<LottoTicket> get() {
         return this.lottoTickets;
     }

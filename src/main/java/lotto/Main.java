@@ -4,6 +4,8 @@ import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -11,14 +13,17 @@ public class Main {
         try {
             int purchaseAmount = InputView.readAmount();
 
-            LottoTickets lottoTickets = LottoTicketMachine.issue(purchaseAmount);
-            ResultView.printLottoTickets(lottoTickets);
+            int manualLottoCount = InputView.readManualCount();
+            List<List<Integer>> manualLottoNumbers = InputView.readManualNumbers(manualLottoCount);
+
+            IssuedLottoTickets issuedLottoTickets = LottoTicketMachine.issue(purchaseAmount, manualLottoNumbers);
+            ResultView.printLottoTickets(issuedLottoTickets);
 
             LottoTicket winLottoTicket = new LottoTicket(new LottoNumbers(InputView.readWinNumbers()));
             LottoNumber bonusNumber = LottoNumber.of(InputView.readBonusNumber());
             WinLotto winLotto = new WinLotto(winLottoTicket, bonusNumber);
 
-            LottoStatistics statistics = new LottoStatistics(lottoTickets, winLotto);
+            LottoStatistics statistics = new LottoStatistics(issuedLottoTickets, winLotto);
 
             ResultView.printLottoStatistics(statistics);
         } catch (IllegalArgumentException e) {
