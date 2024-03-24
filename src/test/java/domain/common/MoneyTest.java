@@ -33,4 +33,12 @@ class MoneyTest {
         assertThatThrownBy(() -> Money.from(null))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("소숫점까지 금액 수익률을 나눌 수 있다.")
+    @Test
+    void divideToDouble() {
+        Money money = new Money(14000L);
+        double result = money.divideDoubleMoneyToStringResult(new Money(5000L));
+        assertThat(result).isEqualTo(0.35);
+    }
 }

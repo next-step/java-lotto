@@ -38,4 +38,12 @@ public class WinningLotto {
     public int hashCode() {
         return Objects.hash(winningLotto, bonusNumber);
     }
+
+    public LottoNumber bonusNumber() {
+        return this.bonusNumber;
+    }
+
+    public Lotto lotto() {
+        return this.winningLotto;
+    }
 }

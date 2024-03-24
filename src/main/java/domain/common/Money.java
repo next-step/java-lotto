@@ -52,4 +52,9 @@ public class Money {
     private long money() {
         return this.money;
     }
+
+    public double divideDoubleMoneyToStringResult(Money money) {
+        double result = money.money() / (double) this.money;
+        return Math.floor(result * 100) / 100.0;
+    }
 }

@@ -17,15 +17,22 @@ public class LottoController {
      * @param args
      */
     public static void main(String[] args) {
-
         Money money = Money.from(LottoInputView.createMoneyView());
+
         UserLotto userLotto = createUserLotto(money);
+
         LottoResultView.createUserLottoListView(userLotto.lottoList());
 
+        WinningLotto winningLotto = createWinningLotto();
+
+        LottoResultView.createStatisticsView(LottoStatistics.from(userLotto, winningLotto), money);
+
+    }
+
+    private static WinningLotto createWinningLotto() {
         List<Integer> winningIntegerList = LottoInputView.createWinningInterList();
         int bonusNumber = LottoInputView.createBonusNumberView();
-        WinningLotto winningLotto = WinningLotto.from(winningIntegerList, bonusNumber);
-
+        return WinningLotto.from(winningIntegerList, bonusNumber);
     }
 
     private static UserLotto createUserLotto(Money money) {

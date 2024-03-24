@@ -33,7 +33,14 @@ class LottoTest {
     @DisplayName("숫자 갯수가 로또 숫자 갯수보다 많을 때 ")
     @Test
     void createWithOutNumberList() {
-        Assertions.assertThatThrownBy(() -> Lotto.from(List.of(1,2,3,4,5,6,7)))
+        Assertions.assertThatThrownBy(() -> Lotto.from(List.of(1, 2, 3, 4, 5, 6, 7)))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("일치하는 로또 번호 갯수를 반환한다.")
+    @Test
+    void contains() {
+        Lotto lotto = Lotto.from(List.of(1, 2, 3, 4, 5, 6));
+        Assertions.assertThat(lotto.countOfMatch(Lotto.from(List.of(1, 2, 3, 19,20,21)))).isEqualTo(3);
     }
 }

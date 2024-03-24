@@ -72,4 +72,14 @@ public class Lotto {
     public String toString() {
         return numbers.toString();
     }
+
+    public boolean contain(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
+
+    public int countOfMatch(Lotto otherLotto) {
+        return (int) this.numbers.stream()
+                .filter(number -> otherLotto.contain(number))
+                .count();
+    }
 }

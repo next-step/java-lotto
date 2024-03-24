@@ -1,6 +1,10 @@
 package domain.lotto;
 
+import controller.lotto.LottoStatistics;
+
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -36,5 +40,20 @@ public class UserLotto {
 
     public List<Lotto> lottoList() {
         return this.userLotto;
+    }
+
+    public Map<LottoPrize, Integer> createLottoStatistics(WinningLotto winningLotto) {
+        Map<LottoPrize, Integer> result = new LinkedHashMap<>();
+        userLotto.stream()
+                .map(item -> {
+                    int count = item.countOfMatch(winningLotto.lotto());
+                    boolean bonusNumber = item.contain(winningLotto.bonusNumber());
+                    return LottoPrize.valueOf(count, bonusNumber);
+                })
+                .forEach(item -> {
+                    Integer count = result.getOrDefault(item, 0);
+                    result.put(item, count += 1);
+                });
+        return result;
     }
 }
