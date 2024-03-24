@@ -88,9 +88,9 @@ public class InputView {
         }
         String inputNumbers = scanner.nextLine();
         String[] splitInputNumbers = inputNumbers.split(",");
-        List<Integer> numbers = new ArrayList<>();
+        List<LottoNumber> numbers = new ArrayList<>();
         for (String splitInputNumber : splitInputNumbers) {
-            numbers.add(Integer.parseInt(splitInputNumber.trim()));
+            numbers.add(LottoNumber.valueOf(Integer.parseInt(splitInputNumber.trim())));
         }
 
         try {

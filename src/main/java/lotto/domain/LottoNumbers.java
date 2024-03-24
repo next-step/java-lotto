@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -16,35 +15,30 @@ public class LottoNumbers {
         this.numbers = numbers;
     }
 
-    public static LottoNumbers from(List<Integer> values) {
-        validate(values);
-        Collections.sort(values);
-
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int number : values) {
-            lottoNumbers.add(LottoNumber.valueOf(number));
-        }
+    public static LottoNumbers from(List<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
+        Collections.sort(lottoNumbers);
 
         return new LottoNumbers(lottoNumbers);
     }
 
-    private static void validate(List<Integer> numbers) {
-        if (isInvalidLottoNumberSize(numbers)) {
+    private static void validate(List<LottoNumber> lottoNumbers) {
+        if (isInvalidLottoNumberSize(lottoNumbers)) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_SIZE);
         }
 
-        if (isLottoNumberDuplicate(numbers)) {
+        if (isLottoNumberDuplicate(lottoNumbers)) {
             throw new IllegalArgumentException(LOTTO_NUMBER_CANT_DUPLICATE);
         }
     }
 
-    private static boolean isInvalidLottoNumberSize(List<Integer> numbers) {
+    private static boolean isInvalidLottoNumberSize(List<LottoNumber> numbers) {
         return numbers.size() != LOTTO_NUMBER_SIZE;
     }
 
-    private static boolean isLottoNumberDuplicate(List<Integer> numbers) {
-        int originalSize = numbers.size();
-        int distinctCount = (int) numbers.stream()
+    private static boolean isLottoNumberDuplicate(List<LottoNumber> lottoNumbers) {
+        int originalSize = lottoNumbers.size();
+        int distinctCount = (int) lottoNumbers.stream()
                 .distinct()
                 .count();
 

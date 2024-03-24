@@ -1,8 +1,11 @@
 package lotto.numberdrawer;
 
+import lotto.domain.LottoNumber;
+
 import java.util.List;
 
 @FunctionalInterface
 public interface NumberDrawer {
-    List<Integer> drawnNumbers(int bound, int size);
+    List<LottoNumber> drawnNumbers(int bound, int size);
 }
+

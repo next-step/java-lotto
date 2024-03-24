@@ -16,7 +16,7 @@ public class LottoMachineTest {
     @ParameterizedTest
     @MethodSource("countOfLottoAndLottoNumbers")
     @DisplayName("로또 개수와 NumberDrawer를 매개변수로 받아 LottoNumbers를 반환")
-    void createLottoNumbers(int countOfLotto, List<Integer> numberList) {
+    void createLottoNumbers(int countOfLotto, List<LottoNumber> numberList) {
         List<LottoNumbers> lottoNumbers = LottoMachine.createLottoNumbers(countOfLotto, (bound, lottoCount)-> numberList);
 
         assertThat(lottoNumbers.size()).isEqualTo(countOfLotto);
