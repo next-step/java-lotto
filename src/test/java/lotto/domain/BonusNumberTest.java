@@ -1,14 +1,12 @@
 package lotto.domain;
 
 import lotto.domain.lotto.LottoNumber;
-import lotto.exception.InValidBonusNumberException;
+import lotto.exception.InvalidBonusNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,16 +16,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class BonusNumberTest {
     @Test
-    @DisplayName("BonusNumber 인스턴스 생성시 bonusNumber가 winningNumbers와 겹치는 경우 ")
+    @DisplayName("BonusNumber 인스턴스 생성시 bonusNumber가 winningNumbers와 겹치는 경우 InvalidBonusNumberException이 발생한다.")
     void testInstanceCreationFailCase() {
-        WinningNumbers winningNumbers = WinningNumbers.valueOf(new HashSet<>(Arrays.asList(
-                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6))));
-
+        WinningNumbers winningNumbers = WinningNumbers.valueOf(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = LottoNumber.valueOf(6);
 
         assertThatThrownBy(() -> BonusNumber.newBonusNumberWithOutWinningNumbers(bonusNumber, winningNumbers))
-                .isExactlyInstanceOf(InValidBonusNumberException.class);
+                .isExactlyInstanceOf(InvalidBonusNumberException.class);
     }
 
     @ParameterizedTest

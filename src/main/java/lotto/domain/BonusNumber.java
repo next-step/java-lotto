@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.lotto.LottoNumber;
-import lotto.exception.InValidBonusNumberException;
+import lotto.exception.InvalidBonusNumberException;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class BonusNumber {
 
     private void validateBonusNumberWithOutWinningNumbers(LottoNumber bonusNumber, WinningNumbers winningNumbers) {
         if (winningNumbers.contains(bonusNumber)) {
-            throw new InValidBonusNumberException(bonusNumber.lottoNumber());
+            throw new InvalidBonusNumberException(bonusNumber.lottoNumber());
         }
     }
 

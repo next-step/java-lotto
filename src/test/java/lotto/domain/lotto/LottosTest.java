@@ -33,7 +33,7 @@ class LottosTest {
     void testStatistics(String winningNumbersInput, int bonusNumberInput, Rank rank, double expectedRateOfReturn) {
         PurchaseAmountOfMoney purchaseAmountOfMoney = PurchaseAmountOfMoney.valueOf(1000);
         Lottos lottos = LottoStore.purchaseLotto(lottoGeneratingStrategyStub, purchaseAmountOfMoney.numberOfLottoToPurchase());
-        WinningNumbers winningNumbers = WinningNumbers.valueOf(lottoNumbersForTest(winningNumbersInput));
+        WinningNumbers winningNumbers = WinningNumbers.valueOf(winningNumbersForTest(winningNumbersInput));
         BonusNumber bonusNumber = BonusNumber.newBonusNumberWithOutWinningNumbers(LottoNumber.valueOf(bonusNumberInput), winningNumbers);
 
         StatisticsOfLottos statisticsOfLottos = lottos.statistics(winningNumbers, bonusNumber, purchaseAmountOfMoney);
@@ -42,7 +42,7 @@ class LottosTest {
         assertThat(statisticsOfLottos.rateOfReturn()).isEqualTo(expectedRateOfReturn);
     }
 
-    private Set<LottoNumber> lottoNumbersForTest(String winningNumbersInput) {
+    private Set<LottoNumber> winningNumbersForTest(String winningNumbersInput) {
         return Arrays.stream(winningNumbersInput.split(COMMA_BLANK_DELIMITER))
                 .map(number -> LottoNumber.valueOf(Integer.parseInt(number)))
                 .collect(Collectors.toSet());

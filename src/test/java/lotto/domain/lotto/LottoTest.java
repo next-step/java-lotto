@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import lotto.domain.WinningNumbers;
+import lotto.exception.InvalidLottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,14 +19,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
     @Test
-    @DisplayName("인스턴스 생성시 lottoNumbers의 크기가 LOTTO_NUMBER_SIZE와 다른 경우 IllegalArgumentException이 발생한다.")
+    @DisplayName("인스턴스 생성시 lottoNumbers의 크기가 LOTTO_NUMBER_SIZE와 다른 경우 InvalidLottoException이 발생한다.")
     void testInstanceCreationFailCase() {
         List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6, 7)
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
         assertThatThrownBy(() -> Lotto.valueOf(lottoNumbers))
-                .isExactlyInstanceOf(IllegalArgumentException.class);
+                .isExactlyInstanceOf(InvalidLottoException.class);
     }
 
     @ParameterizedTest
@@ -36,13 +37,13 @@ class LottoTest {
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
-        WinningNumbers winningNumbers = WinningNumbers.valueOf(lottoNumbersForTest(winningNumberInput));
+        WinningNumbers winningNumbers = WinningNumbers.valueOf(winningNumbersForTest(winningNumberInput));
         Lotto lotto = Lotto.valueOf(lottoNumbers);
 
         assertThat(lotto.countOfMatch(winningNumbers)).isEqualTo(expected);
     }
 
-    private Set<LottoNumber> lottoNumbersForTest(String winningNumbersInput) {
+    private Set<LottoNumber> winningNumbersForTest(String winningNumbersInput) {
         return Arrays.stream(winningNumbersInput.split(COMMA_BLANK_DELIMITER))
                 .map(number -> LottoNumber.valueOf(Integer.parseInt(number)))
                 .collect(Collectors.toSet());

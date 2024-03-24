@@ -1,12 +1,12 @@
 package lotto.domain.lotto;
 
 import lotto.domain.WinningNumbers;
+import lotto.exception.InvalidLottoException;
 
 import java.util.List;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
-    private static final String WRONG_LOTTO_NUMBERS_SIZE_MESSAGE = "(size: %d): 잘못된 로또 번호 크기입니다.";
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -17,7 +17,7 @@ public class Lotto {
 
     private void validateSizeOfLottoNumbers(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException(String.format(WRONG_LOTTO_NUMBERS_SIZE_MESSAGE, lottoNumbers.size()));
+            throw new InvalidLottoException(lottoNumbers.size());
         }
     }
 

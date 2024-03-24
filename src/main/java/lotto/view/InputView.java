@@ -4,7 +4,7 @@ import lotto.domain.BonusNumber;
 import lotto.domain.PurchaseAmountOfMoney;
 import lotto.domain.WinningNumbers;
 import lotto.domain.lotto.LottoNumber;
-import lotto.exception.InValidBonusNumberException;
+import lotto.exception.InvalidBonusNumberException;
 import lotto.exception.InvalidPurchaseAmountOfMoneyException;
 import lotto.exception.InvalidWinningNumbersException;
 
@@ -81,7 +81,7 @@ public class InputView {
 
     private static void validateBonusNumberInput(String bonusNumberInput) {
         if (!isPositiveInteger(bonusNumberInput)) {
-            throw new InValidBonusNumberException(bonusNumberInput);
+            throw new InvalidBonusNumberException(bonusNumberInput);
         }
     }
 }

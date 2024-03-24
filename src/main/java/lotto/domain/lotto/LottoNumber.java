@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-import lotto.exception.InvalidLottNumberException;
+import lotto.exception.InvalidLottoNumberException;
 
 import java.util.Objects;
 
@@ -19,7 +19,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void validateLottoNumberRange(int lottoNumber) {
         if (!isInRange(lottoNumber, MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)) {
-            throw new InvalidLottNumberException(lottoNumber);
+            throw new InvalidLottoNumberException(lottoNumber);
         }
     }
 
