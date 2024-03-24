@@ -1,36 +1,45 @@
 package lotto.view;
 
+import lotto.constant.Constant;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class ResultView {
-    public void printPurchase(int count) {
+    public static void printPurchase(int count) {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public void printLotto(List<List<Integer>> lottoList) {
-        for (int i = 0; i < lottoList.size(); i++) {
-            printNumbers(lottoList.get(i));
+    public static void printLottos(List<Lotto> lottos) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            printLottoNumbers(lotto.getLotto());
         }
     }
 
-    private void printNumbers(List<Integer> numbers) {
-        System.out.print("[");
-        for (int i = 0; i < numbers.size(); i++) {
-            System.out.print(numbers.get(i));
-            if (i < numbers.size() - 1)
-                System.out.print(", ");
+    private static void printLottoNumbers(List<LottoNumber> lottoNumbers) {
+        String[] lottoList = new String[lottoNumbers.size()];
+
+        for (int i = 0; i < lottoNumbers.size(); i++) {
+            lottoList[i] = parseString(lottoNumbers.get(i).getLottoNumber().getNumber());
         }
-        System.out.print("]\n");
+        System.out.println("[" + String.join(", ", lottoList) + "]");
     }
 
-    public void printStatistics(HashMap<Integer, Integer> agreement, double revenue) {
-        System.out.println("당첨 통계");
-        System.out.println("-".repeat(9));
-        System.out.println("3개 일치 (5000원)-" + agreement.get(5000) + "개");
-        System.out.println("4개 일치 (50000원)-" + agreement.get(50000) + "개");
-        System.out.println("5개 일치 (1500000원)-" + agreement.get(1500000) + "개");
-        System.out.println("6개 일치 (200000000원)-" + agreement.get(2000000000) + "개");
+    private static String parseString(int lottoNumber) {
+        return String.valueOf(lottoNumber);
+    }
+
+    public static void printResult(HashMap<Integer, Integer> matchResult, double revenue) {
+        System.out.println("당첨 통계\n"+"-".repeat(9));
+        System.out.println("3개 일치 (5000원) - " + matchResult.get(Constant.FOURTH_PLACE) + "개");
+        System.out.println("4개 일치 (50000원) - " + matchResult.get(Constant.THIRD_PLACE) + "개");
+        System.out.println("5개 일치 (1500000원) - " + matchResult.get(Constant.SECOND_PLACE) + "개");
+        System.out.println("6개 일치 (2000000000원) - " + matchResult.get(Constant.FIRST_PLACE) + "개");
         System.out.println("총 수익률은 " + revenue + "입니다.");
     }
 }
