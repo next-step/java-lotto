@@ -30,4 +30,12 @@ public class LottoOutlet {
                 .mapToInt(Winnings::getWinningsAmount)
                 .sum();
     }
+
+    public static int getWinnings(List<Lotto> Lottos, List<Integer> winningNumbers) {
+        return Lottos.stream()
+                .mapToInt(lotto -> lotto.matchNumbers(winningNumbers))
+                .boxed()
+                .mapToInt(Winnings::getWinningsAmount)
+                .sum();
+    }
 }
