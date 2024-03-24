@@ -14,7 +14,11 @@
 * 1번부터 45번까지의 숫자를 가질 수 있습니다.
 
 **[테스트]**
-* enum 값을 사용하여 입력범위 테스트 제외
+* LottoNumber는 1부터 45까지의 범위의 값만 가질수 있습니다
+* LottoNumber가 1부터 45의 범위가 아닌 경우 예외가 발생합니다
+* 유효한 로또번호를 입력받으면 로또번호를 반환해야합니다
+* 자동 생성을 통해 생성된 LottoNumber의 크기는 6이어야 합니다
+* createRandomLottoNumbers를 수행해서 생성한 LottoNumbers는 길이가 6인 LottoNumbers를 반환해야한다
 
 ### Lotto
 **[기능]**
