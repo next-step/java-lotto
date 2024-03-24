@@ -4,9 +4,10 @@ import java.util.Arrays;
 
 public enum LottoRank {
     FIRST("1등", 6, 2_000_000_000),
-    SECOND("2등", 5, 1_500_000),
-    THIRD("3등", 4, 50_000),
-    FOURTH("4등", 3, 5_000),
+    SECOND("2등", 5, 30_000_000),
+    THIRD("3등", 5, 1_500_000),
+    FOURTH("4등", 4, 50_000),
+    FIFTH("5등", 3, 5_000),
     NONE("꽝",0, 0);
 
     private final String rank;
