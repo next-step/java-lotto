@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public enum LottoPricing {
 
@@ -13,8 +15,20 @@ public enum LottoPricing {
     PRIZE_6(6, () -> 2000000000),
     ;
 
+    private static final Map<Integer, LottoPricing> lottoPricingMappingCache;
     final int matchCount;
     final PriceFunction priceFunction;
+
+    static {
+        lottoPricingMappingCache = new HashMap<>();
+        lottoPricingMappingCache.put(0, NO_PRIZE_0);
+        lottoPricingMappingCache.put(1, NO_PRIZE_1);
+        lottoPricingMappingCache.put(2, NO_PRIZE_2);
+        lottoPricingMappingCache.put(3, PRIZE_3);
+        lottoPricingMappingCache.put(4, PRIZE_4);
+        lottoPricingMappingCache.put(5, PRIZE_5);
+        lottoPricingMappingCache.put(6, PRIZE_6);
+    }
 
     LottoPricing(int matchCount, PriceFunction priceFunction) {
         this.matchCount = matchCount;
@@ -22,10 +36,9 @@ public enum LottoPricing {
     }
 
     public static LottoPricing getByMatchCount(int matchCount) {
-        return Arrays.stream(values())
-                .filter(iter -> iter.matchCount == matchCount)
-                .findAny()
-                .orElseThrow(IllegalArgumentException::new);
+        LottoPricing lottoPricing = lottoPricingMappingCache.get(matchCount);
+        if(lottoPricing == null) throw new IllegalArgumentException();
+        return lottoPricing;
     }
 
     public int getPrice() {
