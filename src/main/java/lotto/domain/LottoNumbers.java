@@ -19,17 +19,10 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int countMatchingWith(List<Integer> winningNumbers) {
+    public int countMatchingWith(BonusBall bonusBallNumber) {
         return Math.toIntExact(this.lottoNumbers.stream()
                 .map(LottoNumber::number)
-                .filter(winningNumbers::contains)
-                .count());
-    }
-
-    public int countMatchingWith(int bonusBallNumber) {
-        return Math.toIntExact(this.lottoNumbers.stream()
-                .map(LottoNumber::number)
-                .filter(number -> number == bonusBallNumber)
+                .filter(bonusBallNumber::isContainsBonusBall)
                 .count());
     }
 

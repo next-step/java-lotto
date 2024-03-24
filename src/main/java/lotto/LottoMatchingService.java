@@ -35,7 +35,7 @@ public class LottoMatchingService {
     }
 
     private boolean isMatchBonusBall(LottoTicket lottoTicket) {
-        return lottoTicket.countMatchingWith(bonusBall.getNumber()) == 1;
+        return lottoTicket.countMatchingWith(bonusBall) == 1;
     }
 
 }

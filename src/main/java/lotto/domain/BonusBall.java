@@ -16,6 +16,10 @@ public class BonusBall {
         return number;
     }
 
+    public boolean isContainsBonusBall(int bonustNumber) {
+        return number == bonustNumber;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) {
