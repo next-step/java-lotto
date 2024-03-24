@@ -1,6 +1,7 @@
-package lotto.error;
+package lotto.error.exception;
 
 import java.text.MessageFormat;
+import lotto.error.ErrorMessage;
 
 public class SizeExceedLottoException extends RuntimeException{
 
@@ -8,8 +9,4 @@ public class SizeExceedLottoException extends RuntimeException{
         super(MessageFormat.format("{0} 입력값: {1}", ErrorMessage.SIZE_EXCEED_LOTTO.getMessage(), parameter));
     }
 
-    @Override
-    public String getMessage() {
-        return super.getMessage();
-    }
 }
