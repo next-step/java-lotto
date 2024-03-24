@@ -56,9 +56,8 @@ public enum LottoNumber {
         this.lottoNumber = number;
     }
 
-    public static boolean isSame(int value) {
-        return Arrays.stream(LottoNumber.values())
-            .anyMatch(lottoNumber -> lottoNumber.lottoNumber == value);
+    public int getLottoNumber() {
+        return lottoNumber;
     }
 
     public static LottoNumber formInt(int value){
