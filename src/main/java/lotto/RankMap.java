@@ -31,7 +31,7 @@ public class RankMap {
     public Prizes getAllPrizes() {
         return new Prizes(
                 lottoNumberMatchedMap.entrySet().stream()
-                        .map(e -> RANK.receivePrize(e.getKey(),e.getValue()))
+                        .map(matchedCountSet -> RANK.receivePrize(matchedCountSet.getKey(),matchedCountSet.getValue()))
                         .collect(Collectors.toList()));
     }
 
