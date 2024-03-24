@@ -12,21 +12,20 @@ public class LottoGame {
 
     private final InputView inputView;
     private final ResultView resultView;
-
-    private final List<Integer> lottoNumberPool;
+    private final LottoStore lottoStore;
 
     public LottoGame(InputView inputView, ResultView resultView) {
         this.inputView = inputView;
         this.resultView = resultView;
-        this.lottoNumberPool = IntStream.rangeClosed(1, 45)
+        List<Integer> lottoNumberPool = IntStream.rangeClosed(1, 45)
                 .boxed()
                 .collect(Collectors.toList());
+        this.lottoStore = new LottoStore(new RandomLottoStrategy(lottoNumberPool));
     }
 
     public void start() {
         resultView.printMoney();
         Money money = initMoney();
-        LottoStore lottoStore = new LottoStore(new RandomLottoStrategy(lottoNumberPool));
 
         PickedLottoNumbers pickedLottoNumbers = lottoStore.buy(money);
 

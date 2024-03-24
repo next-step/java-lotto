@@ -19,7 +19,7 @@ public enum Rank {
     public static Rank findRank(Integer matchCount) {
         return Arrays.stream(Rank.values())
                 .filter(type -> type.matchCount != null)
-                .filter(type -> matchCount == (type.matchCount))
+                .filter(type -> matchCount.equals(type.matchCount))
                 .findFirst()
                 .orElse(NOT_MATCH);
     }
