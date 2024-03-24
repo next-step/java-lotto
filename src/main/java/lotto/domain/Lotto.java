@@ -27,9 +27,14 @@ public class Lotto {
         return Collections.unmodifiableList(lotto);
     }
 
-    public int match(Lotto winningLotto) {
+    public int getMatchNumberCount(Lotto winningNumber) {
         return (int) lotto.stream()
-                .filter(winningLotto.lotto::contains)
+                .filter(value -> winningNumber.getLotto().contains(value))
+                .mapToInt(Integer::intValue)
                 .count();
+    }
+
+    private List<Integer> getLotto() {
+        return lotto;
     }
 }
