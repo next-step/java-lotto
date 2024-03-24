@@ -30,7 +30,9 @@ public class InputView {
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요");
         String next = scanner.next();
-        Lotto winningLotto = getWinningLotto(next);
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonus = scanner.nextInt();
+        WiningLotto winningLotto = createWinningLotto(next, bonus);
 
         RankMap countByRank = lottoGame.getPrizeByRank(winningLotto);
         StatisticView statisticView = new StatisticView();
@@ -42,11 +44,11 @@ public class InputView {
         System.out.println(String.format("총 수익률은 %s입니다.", ratio));
     }
 
-    private static Lotto getWinningLotto(String next) {
-        return new Lotto(
+    private static WiningLotto createWinningLotto(String next, int bonus) {
+        return new WiningLotto(
                 Arrays.stream(next.split(","))
                         .map(Integer::parseInt)
-                        .collect(Collectors.toSet())
-        );
+                        .collect(Collectors.toSet()),
+                bonus);
     }
 }
