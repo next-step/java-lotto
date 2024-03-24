@@ -1,6 +1,7 @@
 package autoLotto.model;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import static autoLotto.model.LottoConstants.INVALID_LOTTO_NUMBERS;
@@ -14,7 +15,7 @@ public class Lotto {
         this.lotto = lotto;
     }
 
-    public static Lotto createLottoFrom(String lotto) {
+    public static Lotto createLottoFrom(List<String> lotto) {
         return new Lotto(parseLottoNumbers(lotto));
     }
 
@@ -28,21 +29,15 @@ public class Lotto {
         return lottoNumbers.size() == VALID_LOTTO_LENGTH;
     }
 
-    private static Set<LottoNumber> parseLottoNumbers(String value) {
-        Set<LottoNumber> result = convertStringToIntegers(value);
-        return result;
+    private static Set<LottoNumber> parseLottoNumbers(List<String> value) {
+        return convertStringLottoToIntegerLotto(value);
     }
 
-    private static Set<LottoNumber> convertStringToIntegers(String input) {
-        String[] values = splitNumbersByComma(input);
-        return stringsToSetInteger(values);
-    }
-
-    private static Set<LottoNumber> stringsToSetInteger(String[] values) {
+    private static Set<LottoNumber> convertStringLottoToIntegerLotto(List<String> input) {
         Set<LottoNumber> result = new LinkedHashSet<>();
 
-        for (int i = 0; i < values.length; i++) {
-            LottoNumber number = convertStringToLottoNumber(values[i]);
+        for (int i = 0; i < input.size(); i++) {
+            LottoNumber number = convertStringToLottoNumber(input.get(i));
             result.add(number);
         }
 
@@ -54,19 +49,12 @@ public class Lotto {
         return new LottoNumber(number);
     }
 
-    private static String[] splitNumbersByComma(String input) {
-        return input.split(",");
-    }
-
-    public String toString() {
-        return lotto.toString();
-    }
-
     public Set<LottoNumber> getLotto() {
         return lotto;
     }
 
     public boolean containsNumber(int number) {
-        return lotto.stream().anyMatch(lottoNumber -> lottoNumber.getLottoNumber() == number);
+        return lotto.stream()
+                .anyMatch(lottoNumber -> lottoNumber.isSameNumber(number));
     }
 }
