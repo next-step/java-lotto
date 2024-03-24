@@ -24,6 +24,10 @@ public class MatchedCount {
         return this.count > 2;
     }
 
+    public boolean isBonusMatched() {
+        return isBonus;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

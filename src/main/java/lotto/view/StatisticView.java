@@ -13,6 +13,14 @@ public class StatisticView {
 
         System.out.println("당첨 통계");
         System.out.println("---------");
-        map.forEach((k,v) -> System.out.println(String.format("%s개 일치 (%s) - %s개", k, RANK.getPrizeMoney(k), v)));
+        map.forEach(StatisticView::getPrintln);
+    }
+
+    private static void getPrintln(MatchedCount k, Integer v) {
+        if (k.isBonusMatched()) {
+            System.out.println(String.format("%s개 일치, 보너스 볼 일치 (%s원) - %s개", k, RANK.getPrizeMoney(k), v));
+            return;
+        }
+        System.out.println(String.format("%s개 일치 (%s원) - %s개", k, RANK.getPrizeMoney(k), v));
     }
 }
