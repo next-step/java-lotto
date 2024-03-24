@@ -10,12 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class RankMapTest {
 
     @Test
-    void test() {
+    void get_prizes_by_rank() {
         RankMap rankMap = new RankMap(List.of(
                 new MatchedCount(5),
                 new MatchedCount(5, true)
         ));
-        Prizes allPrizes = rankMap.getAllPrizes();
-        assertThat(rankMap.getAllPrizes()).isEqualTo(new Prizes(List.of(new Money(30000000), new Money(1500000))));
+
+        assertThat(rankMap.getAllPrizes())
+                .isEqualTo(new Prizes(List.of(new Money(30000000), new Money(1500000))));
     }
 }
