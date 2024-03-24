@@ -1,45 +1,47 @@
 package lotto;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
 
-    private List<Integer> subSet;
+    private final List<LottoNumber> numbers;
 
-    public Lotto(List<Integer> pickedNumber) {
-        this.subSet = pickedNumber;
+    public Lotto(Set<Integer> pickedNumber) {
+        this(pickedNumber.stream().map(LottoNumber::new).collect(Collectors.toList()));
     }
 
     public Lotto() {
         this(pickLottoNumber());
     }
 
-    private static List<Integer> pickLottoNumber() {
-        return createUniversalSet().stream().limit(6).sorted().collect(Collectors.toList());
+    private Lotto(List<LottoNumber> numbers) {
+        this.numbers = numbers;
+        this.numbers.sort(LottoNumber::compareTo);
     }
 
-    private static List<Integer> createUniversalSet() {
+    private static Set<Integer> pickLottoNumber() {
         List<Integer> universalSet = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
         Collections.shuffle(universalSet);
-        return universalSet;
+        return new HashSet<>(universalSet.subList(0, 6));
     }
 
-    public int countMatchedNumber(Lotto otherLotto) {
-        int count = 0;
-        for (Integer num : subSet) {
-            count = otherLotto.checkNumber(num, count);
-        }
-        return count;
+    public MatchedCount countMatchedNumber(Lotto winningLotto) {
+        return new MatchedCount(this.numbers.stream()
+                .filter(winningLotto::contains)
+                .count());
     }
 
-    private int checkNumber(Integer num, int count) {
-        return isContained(this.subSet, num)? ++ count : count ;
+    private boolean contains(LottoNumber num) {
+        return this.numbers.contains(num);
     }
 
-    private boolean isContained(List<Integer> lastWeekWin, Integer num) {
-        return lastWeekWin.contains(num);
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }
