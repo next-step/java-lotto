@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.DuplicateLottoNumbersException;
 import lotto.exception.IllegalLottoNumbersSizeException;
 
 import java.util.Collections;
@@ -31,9 +32,11 @@ public class LottoNumbers {
 
     public LottoNumbers(List<Integer> numbers) {
         validateNumbersSize(numbers);
+        validateDuplicateNumbers(numbers);
+
         this.numbers = numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .map(LottoNumber::of)
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private static List<Integer> autoNumbers() {
@@ -45,6 +48,16 @@ public class LottoNumbers {
         if (notMatchSize(numbers)) {
             throw new IllegalLottoNumbersSizeException(SIZE, numbers.size());
         }
+    }
+
+    private void validateDuplicateNumbers(List<Integer> numbers) throws DuplicateLottoNumbersException {
+        if (hasDuplicates(numbers)) {
+            throw new DuplicateLottoNumbersException(numbers);
+        }
+    }
+
+    private boolean hasDuplicates(List<Integer> numbers) {
+        return numbers.stream().distinct().count() < numbers.size();
     }
 
     private boolean notMatchSize(List<Integer> numbers) {

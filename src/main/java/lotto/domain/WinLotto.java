@@ -4,8 +4,8 @@ import lotto.exception.AlreadyExistLottoNumberException;
 
 public class WinLotto {
 
-    private LottoTicket winLotto;
-    private LottoNumber bonusNumber;
+    private final LottoTicket winLotto;
+    private final LottoNumber bonusNumber;
 
     public WinLotto(LottoTicket winLotto, LottoNumber bonusNumber) {
         validateAlreadyExistLottoNumber(winLotto, bonusNumber);
