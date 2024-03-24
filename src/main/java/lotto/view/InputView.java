@@ -15,7 +15,9 @@ public class InputView {
     Scanner scanner = new Scanner(System.in);
 
     public int inputMoney() {
-        return scanner.nextInt();
+        int money = scanner.nextInt();
+        scanner.nextLine();
+        return money;
     }
 
     public List<Integer> inputLottoNumber() {

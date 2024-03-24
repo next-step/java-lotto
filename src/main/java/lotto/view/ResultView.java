@@ -2,6 +2,8 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.Arrays;
+
 public class ResultView {
 
 
@@ -17,14 +19,17 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("----------");
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("3개 일치 (5000원)-").append(winningInfo.count(Rank.FOUR)).append("개").append("\n");
-        sb.append("4개 일치 (50000원)-").append(winningInfo.count(Rank.THIRD)).append("개").append("\n");
-        sb.append("5개 일치 (1500000원)-").append(winningInfo.count(Rank.SECOND)).append("개").append("\n");
-        sb.append("6개 일치 (2000000000원)-").append(winningInfo.count(Rank.FIRST)).append("개").append("\n");
-        System.out.println(sb);
+        Rank[] ranks = Rank.values();
+
+        Arrays.stream(ranks)
+                .filter(rank -> rank != Rank.NOT_MATCH)
+                .forEach(rank -> printWinningCount(winningInfo, rank));
 
         System.out.println("총 수익률은 " + money.calculateRate(winningInfo.totalWinningMoney())+"입니다.");
+    }
+
+    private void printWinningCount(WinningInfo winningInfo, Rank rank) {
+        System.out.printf("%d개 일치 (%d원)-%d개%n", rank.getMatchCount(), rank.getWinningMoney(), winningInfo.count(rank));
     }
 
     public void printPickedLottoNumbers(PickedLottoNumbers pickedLottoNumbers) {

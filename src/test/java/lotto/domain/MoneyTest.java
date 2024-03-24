@@ -24,4 +24,13 @@ class MoneyTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("0원 미만");
     }
+
+    @Test
+    @DisplayName("당첨금 / 로또 구매 비용으로 수익률을 계산한다")
+    void winningRateTest() {
+        Money money = new Money(5000);
+        double calculateRate = money.calculateRate(2_000_000_000);
+
+        assertThat(calculateRate).isEqualTo(400_000.0);
+    }
 }
