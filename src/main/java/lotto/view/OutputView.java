@@ -16,10 +16,14 @@ public class OutputView {
     private OutputView() {}
 
     public static void printPurchasedLottos(Lottos lottos) {
-        printPurchasedAmount(lottos.size());
-        if (!lottos.isEmpty()) {
-            lottos.forEach(OutputView::printPurchasedLottoNumbers);
+        if (lottos.isEmpty()) {
+            return;
         }
+
+        printPurchasedAmount(lottos.size());
+
+        lottos.forEach(OutputView::printPurchasedLottoNumbers);
+
         lineChange();
     }
 
