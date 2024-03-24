@@ -10,6 +10,9 @@ public class LottoPlayer {
         final int cash = InputView.purchasePrice();
 
         final Lottos lottos = LotteryShop.purchase(cash);
+        if (lottos.isEmpty()) {
+            return;
+        }
         OutputView.printPurchasedLottos(lottos);
 
         final Lotto lastWeekWinningNumbers = new Lotto(InputView.lastWeekWinningNumbers());

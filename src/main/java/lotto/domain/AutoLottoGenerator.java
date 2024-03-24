@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AutoLottoGenerator {
-    private static final List<LottoNumber> baseNumbers;
+    private static final List<LottoNumber> BASE_NUMBERS;
 
     static {
-        baseNumbers = IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX)
+        BASE_NUMBERS = IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
@@ -27,14 +27,14 @@ public class AutoLottoGenerator {
 
     public static Lotto ticket() {
         return new Lotto(shuffledList()
-                .subList(0, 6)
+                .subList(0, Lotto.NUMBER_LENGTH)
                 .stream()
                 .sorted()
                 .collect(Collectors.toList()));
     }
 
     private static List<LottoNumber> shuffledList() {
-        final List<LottoNumber> shuffleTarget = new ArrayList<>(baseNumbers);
+        final List<LottoNumber> shuffleTarget = new ArrayList<>(BASE_NUMBERS);
         Collections.shuffle(shuffleTarget);
         return shuffleTarget;
     }
