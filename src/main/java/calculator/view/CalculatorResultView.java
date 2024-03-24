@@ -1,6 +1,6 @@
-package view;
+package calculator.view;
 
-public class ResultView {
+public class CalculatorResultView {
 
     public void printResultNumber(int resultNumber) {
         System.out.println("계산 결과 값은 " + resultNumber + "입니다.");

@@ -1,9 +1,9 @@
-package view;
+package calculator.view;
 
 
 import java.util.Scanner;
 
-public class InputView {
+public class CalculatorInputView {
 
     Scanner scanner = new Scanner(System.in);
 
