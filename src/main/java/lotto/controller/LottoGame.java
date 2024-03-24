@@ -10,6 +10,8 @@ import java.util.stream.IntStream;
 
 public class LottoGame {
 
+    private static final int START_INCLUSIVE = 1;
+    private static final int END_INCLUSIVE = 45;
     private final InputView inputView;
     private final ResultView resultView;
     private final LottoStore lottoStore;
@@ -17,20 +19,18 @@ public class LottoGame {
     public LottoGame(InputView inputView, ResultView resultView) {
         this.inputView = inputView;
         this.resultView = resultView;
-        List<Integer> lottoNumberPool = IntStream.rangeClosed(1, 45)
+        List<Integer> lottoNumberPool = IntStream.rangeClosed(START_INCLUSIVE, END_INCLUSIVE)
                 .boxed()
                 .collect(Collectors.toList());
         this.lottoStore = new LottoStore(new RandomLottoStrategy(lottoNumberPool));
     }
 
     public void start() {
-        resultView.printMoney();
         Money money = initMoney();
 
         PickedLottoNumbers pickedLottoNumbers = lottoStore.buy(money);
 
         resultView.printPickedLottoNumbers(pickedLottoNumbers);
-        resultView.printWinningLotto();
 
         LottoNumbers winningLotto = initLottoNumbers();
         WinningInfo winningInfo = WinningInfo.of(pickedLottoNumbers, winningLotto);
@@ -39,11 +39,15 @@ public class LottoGame {
     }
 
     private LottoNumbers initLottoNumbers() {
+        resultView.printWinningLotto();
+
         List<Integer> inputLottoNumber = inputView.inputLottoNumber();
         return new LottoNumbers(inputLottoNumber);
     }
 
     private Money initMoney() {
+        resultView.printMoney();
+
         int inputMoney = inputView.inputMoney();
         return new Money(inputMoney);
     }
