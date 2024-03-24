@@ -10,6 +10,14 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public int compareTo(LottoNumber other) {
+        return other.minus(this.number);
+    }
+
+    private int minus(int number) {
+        return number - this.number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -21,14 +29,6 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
-    }
-
-    public int compareTo(LottoNumber b) {
-        return b.minus(this.number);
-    }
-
-    private int minus(int a) {
-        return a - this.number;
     }
 
     @Override
