@@ -5,6 +5,7 @@ import lotto.domain.LotteryShop;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.WinningLotto;
 import lotto.domain.rank.Ranks;
 import lotto.domain.statistics.RateOfReturn;
 import lotto.domain.statistics.WinningStatistics;
@@ -21,10 +22,9 @@ public class LottoPlayer {
             return;
         }
 
-        final Lotto lastWeekWinningNumbers = new Lotto(InputView.lastWeekWinningNumbers());
-        final LottoNumber bonusNumber = new LottoNumber(InputView.bonusBallNumber());
+        final WinningLotto winningLotto = winningLotto();
+        final Ranks ranks = lottos.ranks(winningLotto);
 
-        final Ranks ranks = lottos.ranks(lastWeekWinningNumbers, bonusNumber);
         printResult(ranks, cash);
     }
 
@@ -32,6 +32,13 @@ public class LottoPlayer {
         final Lottos lottos = LotteryShop.purchase(cash);
         OutputView.printPurchasedLottos(lottos);
         return lottos;
+    }
+
+    private WinningLotto winningLotto() {
+        final Lotto lastWeekWinningNumbers = new Lotto(InputView.lastWeekWinningNumbers());
+        final LottoNumber bonusNumber = new LottoNumber(InputView.bonusBallNumber());
+
+        return new WinningLotto(lastWeekWinningNumbers, bonusNumber);
     }
 
     private void printResult(Ranks ranks, Cash cash) {

@@ -70,7 +70,7 @@ public class LottoTest {
         final Lotto winning = new Lotto(winningNumbers);
         final LottoNumber bonus = new LottoNumber(bonusNumber);
 
-        assertThat(purchased.rank(winning, bonus)).isEqualTo(expectedRank);
+        assertThat(purchased.rank(new WinningLotto(winning, bonus))).isEqualTo(expectedRank);
     }
 
     static Stream<Arguments> rankTestNumbers() {

@@ -28,9 +28,9 @@ public class Lottos {
         lottos.forEach(action);
     }
 
-    public Ranks ranks(Lotto winningNumbers, LottoNumber bonusNumber) {
+    public Ranks ranks(WinningLotto winningLotto) {
         return new Ranks(lottos.stream()
-                .map(lotto -> lotto.rank(winningNumbers, bonusNumber))
+                .map(lotto -> lotto.rank(winningLotto))
                 .collect(Collectors.toList()));
     }
 

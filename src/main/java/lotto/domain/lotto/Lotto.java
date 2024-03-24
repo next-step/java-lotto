@@ -41,9 +41,9 @@ public class Lotto {
         return Collections.unmodifiableList(this.numbers);
     }
 
-    public Rank rank(Lotto winningNumbers, LottoNumber bonusNumber) {
-        final LottoMatchCount matchCount = matchCount(winningNumbers);
-        final boolean bonusMatch = contains(bonusNumber);
+    public Rank rank(WinningLotto winningLotto) {
+        final LottoMatchCount matchCount = matchCount(winningLotto.numbers());
+        final boolean bonusMatch = contains(winningLotto.bonusNumber());
         return Rank.valueOf(matchCount, bonusMatch);
     }
 
