@@ -29,7 +29,7 @@ public class ResultView {
         stringBuilder.append(String.format("4개 일치 (50000원)- %d개", resultLotto.findMatchCount(4))).append(LINE_SEPARATOR);
         stringBuilder.append(String.format("5개 일치 (1500000원)- %d개", resultLotto.findMatchCount(5))).append(LINE_SEPARATOR);
         stringBuilder.append(String.format("6개 일치 (2000000000원)- %d개", resultLotto.findMatchCount(6))).append(LINE_SEPARATOR);
-        stringBuilder.append(String.format("총 수익률은 %.3f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", resultLotto.getWinningRate())).append(LINE_SEPARATOR);
+        stringBuilder.append(String.format("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", resultLotto.getWinningRate())).append(LINE_SEPARATOR);
         System.out.println(stringBuilder);
     }
 }

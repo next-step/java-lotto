@@ -6,13 +6,14 @@ import java.util.stream.Stream;
 
 public class LottoOutlet {
     private static final int LOTTO_PRICE = 1000;
+    private static final NumbersGenerator numbersGenerator = new RandomNumbersGeneratorImpl();
 
     public static int lottoCount(int money) {
         return money / LOTTO_PRICE;
     }
 
     public static Lotto generateLotto() {
-        return new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        return new Lotto(numbersGenerator.generate());
     }
 
     public static List<Lotto> generateLottos(int count) {

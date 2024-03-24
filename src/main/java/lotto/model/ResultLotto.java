@@ -16,7 +16,9 @@ public class ResultLotto {
     }
 
     public double getWinningRate() {
-        return (double) getWinningAmount() / lottos.size() * 1000;
+        System.out.println(getWinningAmount());
+        System.out.println(lottos.size() * 1000);
+        return (double) getWinningAmount() / (lottos.size() * 1000);
     }
 
     public List<List<Integer>> getLottosNumbers() {
