@@ -1,6 +1,7 @@
 package domain.lotto;
 
 import domain.common.Money;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,5 +17,6 @@ class LottoFactoryTest {
     void create() {
         LottoFactory lottoFactory = new LottoFactory(() -> List.of(1, 2, 3, 4, 5, 6));
         UserLotto userLotto = lottoFactory.createUserLotto(new Money(1000L));
+        Assertions.assertThat(userLotto.lottoList()).isEqualTo(List.of(Lotto.from(List.of(1, 2, 3, 4, 5, 6))));
     }
 }

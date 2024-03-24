@@ -1,5 +1,6 @@
-package controller.lotto;
+package domain.lotto;
 
+import controller.lotto.LottoStatistics;
 import domain.common.Money;
 import domain.lotto.LottoPrize;
 import domain.lotto.UserLotto;
