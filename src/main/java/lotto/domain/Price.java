@@ -9,7 +9,7 @@ public class Price {
     }
 
     private void checkPrice(int price){
-        if(price % 1000 != 0){
+        if (price % 1000 != 0) {
             throw new IllegalArgumentException("금액은 1000배수");
         }
     }

@@ -15,7 +15,7 @@ public class StringToInt {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자가 아닌 입력");
         }
-        if (result < 0){
+        if (result < 0) {
             throw new IllegalArgumentException("음수 입력");
         }
         return result;

@@ -17,13 +17,13 @@ public class RandomLottoStrategy implements LottoStrategy {
     public List<Integer> genLotto(){
         List<Integer> lotto = new ArrayList<>();
 
-        while(lotto.size() != LOTTO_ELEMENT){
+        while (lotto.size() != LOTTO_ELEMENT) {
             lotto = addLottoNum(lotto, randomGenerator.genRandomNum());
         }
         return lotto;
     }
     private List<Integer> addLottoNum(List<Integer> lotto, int element){
-        if(!lotto.contains(element)){
+        if (!lotto.contains(element)) {
             lotto.add(element);
         }
         return lotto;

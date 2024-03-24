@@ -14,11 +14,14 @@ public class LottoMatchTest {
     void match_num() {
         Lotto lotto1 = new Lotto(Arrays.asList(1,2,3,4,5,6));
         Lotto lotto2 = new Lotto(Arrays.asList(1,2,3,4,5,7));
-        Lotto lotto3 = new Lotto(Arrays.asList(1,2,3,4,7,8));
-        Lotto lotto4 = new Lotto(Arrays.asList(1,2,3,7,8,9));
-        Lotto lotto5 = new Lotto(Arrays.asList(1,2,7,8,9,10));
+        Lotto lotto3 = new Lotto(Arrays.asList(1,2,3,4,5,8));
+        Lotto lotto4 = new Lotto(Arrays.asList(1,2,3,4,8,9));
+        Lotto lotto5 = new Lotto(Arrays.asList(1,2,3,8,9,10));
         Lotto lotto6 = new Lotto(Arrays.asList(1,7,8,9,10,11));
-        Lotto winLotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+
+        Lotto winLottoNum = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        BonusNum bonusNum = new BonusNum(7, winLottoNum);
+        WinLotto winLotto = new WinLotto(winLottoNum, bonusNum);
 
         List<Lotto> lottos = new ArrayList<>(Arrays.asList(lotto1,lotto2,lotto3,lotto4,lotto5,lotto6));
 

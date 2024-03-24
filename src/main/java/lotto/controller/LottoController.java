@@ -1,8 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.BuyLottos;
-import lotto.domain.Lotto;
-import lotto.domain.LottoMatch;
+import lotto.domain.*;
 import lotto.utils.StringToInt;
 import lotto.utils.StringToList;
 import lotto.view.InputView;
@@ -17,10 +15,13 @@ public class LottoController {
 
         OutputView.printBuyLotto(buyLottos); // 생성 로또 보여주기
 
-        Lotto winLotto = new Lotto(StringToList.toList(InputView.numberOfWinLotto()));
+        Lotto winLottoNum = new Lotto(StringToList.toList(InputView.numberOfWinLotto()));
+        BonusNum bonusNum = new BonusNum(StringToInt.toInt(InputView.numberOfBonus()), winLottoNum);
+
+        WinLotto winLottoAll = new WinLotto(winLottoNum, bonusNum);
 
         LottoMatch lottoMatch = new LottoMatch();
-        lottoMatch.checkRank(buyLottos,winLotto);
+        lottoMatch.checkRank(buyLottos,winLottoAll);
 
         OutputView.printLottoResult();
         OutputView.printRank(lottoMatch.getRankOfLotto());

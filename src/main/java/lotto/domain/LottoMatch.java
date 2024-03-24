@@ -11,10 +11,10 @@ public class LottoMatch {
             this.rankOfLotto.put(rankMatches,0);
     }
 
-    public void checkRank(BuyLottos buyLottos, Lotto winLotto){
+    public void checkRank(BuyLottos buyLottos, WinLotto winLotto){
         initMap();
-        for(Lotto lotto: buyLottos.getLottos()){
-            RankMatches rankMatches = lotto.numMatch(winLotto);
+        for (Lotto lotto: buyLottos.getLottos()) {
+            RankMatches rankMatches = lotto.numMatch(winLotto.getWinLottoNum(),winLotto.getBonusNum());
             this.rankOfLotto.put(rankMatches, rankOfLotto.get(rankMatches) + 1);
         }
     }
