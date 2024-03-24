@@ -22,8 +22,6 @@
 # Step2
 
 ## Todo
-- [ ] 코드 리뷰 적용 - MatchCacheTest 내에서 system 출력으로 검증한 부분 수정
-- [ ] 코드 리뷰 적용 - LottoClient와 도메인에 퍼져있었던 입출력 로직들을 InputView, OutputView로 옮기기
 
 ## Done
 - [X] Cash - 1000보다 작으면 예외(1000 => IllegalArgumentException, 0 => IllegalArgumentException)
@@ -50,3 +48,5 @@
 - [X] 코드 리뷰 적용 - Cash 매직넘버 분리 및 상태값 불변 변수로 수정
 - [X] 코드 리뷰 적용 - LottoPricing 에서 matchCount에 따른 value 값 캐싱
 - [X] 코드 리뷰 적용 - LottoGroup 2차원 배열 tickets 2개의 일급 컬렉션으로 분(List<Integer> -> LottoNumber, List<LottoNumber> -> Lotto) 
+- [X] 코드 리뷰 적용 - MatchCacheTest 내에서 system 출력으로 검증한 부분 수정
+- [X] 코드 리뷰 적용 - LottoClient와 도메인에 퍼져있었던 입출력 로직들을 InputView, OutputView로 옮기기

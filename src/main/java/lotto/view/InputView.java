@@ -1,14 +1,30 @@
 package lotto.view;
 
+import lotto.domain.Cash;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
 
-    public static int insertNumber() {
+    public static Cash generateCash(){
+        return new Cash(insertNumber());
+    }
+
+    public static List<Integer> generateLatestWinningNumbers(){
+        String str = insertValues();
+        return Arrays.stream(str.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
+    private static int insertNumber() {
         return new Scanner(System.in).nextInt();
     }
 
-    public static String insertValues() {
+    private static String insertValues() {
         return new Scanner(System.in).nextLine();
     }
 }

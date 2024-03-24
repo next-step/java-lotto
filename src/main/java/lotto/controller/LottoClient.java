@@ -6,16 +6,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.view.InputView.insertNumber;
-import static lotto.view.InputView.insertValues;
-import static lotto.view.OutputView.printPlainMessage;
+import static lotto.view.InputView.*;
+import static lotto.view.OutputView.*;
 
 public class LottoClient {
 
     public static void main(String[] args) {
         printPlainMessage("구입금액을 입력해 주세요.");
-        Cash cash = new Cash(insertNumber());
-        printPlainMessage(cash.toString());
+        Cash cash = generateCash();
+        printCash(cash);
         LottoGroup lottoGroup = generateLottoGroupAndPrint(cash);
         List<Integer> latestWinningNumbers = insertLatestWinningNumbers();
         Profit profit = new Profit(0);
@@ -27,26 +26,19 @@ public class LottoClient {
     private static LottoGroup generateLottoGroupAndPrint(Cash cash) {
         LottoGroup lottoGroup = new LottoGroup(new LottoGenerator());
         lottoGroup.generateTickets(cash);
-        printPlainMessage(lottoGroup.toString());
+        printLottoGroup(lottoGroup);
         return lottoGroup;
     }
 
     private static List<Integer> insertLatestWinningNumbers() {
         printPlainMessage("지난 주 당첨 번호를 입력해 주세요.");
-        return getLatestWinningNumbers();
+        return generateLatestWinningNumbers();
     }
 
     private static void printResult(Cash cash, Profit profit, MatchCache matchCache) {
-        printPlainMessage(matchCache.toString());
+        printMatchCache(matchCache);
         printPlainMessage("당첨 통계");
         printPlainMessage("---------");
-        printPlainMessage(profit.toString(cash));
-    }
-
-    private static List<Integer> getLatestWinningNumbers() {
-        String str = insertValues();
-        return Arrays.stream(str.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        printProfit(profit, cash);
     }
 }

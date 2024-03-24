@@ -13,9 +13,4 @@ public class Cash {
         if (money < MINIMUM_MONEY) throw new IllegalArgumentException();
         return money / MINIMUM_MONEY;
     }
-
-    @Override
-    public String toString() {
-        return String.format("%d개를 구매했습니다.", getAmount());
-    }
 }

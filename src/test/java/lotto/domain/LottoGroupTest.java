@@ -28,14 +28,6 @@ class LottoGroupTest {
         assertThat(lottoGroup).isEqualTo(new LottoGroup(generator, lotto));
     }
 
-    @Test
-    void to_string() {
-        lottoGroup.generateTickets(cash);
-        String output = lottoGroup.toString();
-        final String expectedResult = "[1, 2, 3, 4, 5, 6]\n[1, 2, 3, 4, 5, 6]\n";
-        assertThat(output).isEqualTo(expectedResult);
-    }
-
     static class FakeNumberGenerator implements NumbersGenerator {
         public List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
 

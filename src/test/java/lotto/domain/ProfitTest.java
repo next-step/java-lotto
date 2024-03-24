@@ -43,10 +43,4 @@ public class ProfitTest {
         double rate = customProfit.calcRate(input1);
         assertThat(rate).isEqualTo(result);
     }
-
-    @Test
-    void to_string() {
-        profit.accumulate(3);
-        assertThat(profit.toString(new Cash(2000))).isEqualTo("총 수익률은 2500.00입니다.");
-    }
 }

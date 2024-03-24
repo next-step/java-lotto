@@ -27,6 +27,10 @@ public class LottoGroup {
         tickets.saveMatchResult(latestWinningNumbers, matchCache, profit);
     }
 
+    public Lotto getTickets() {
+        return tickets;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

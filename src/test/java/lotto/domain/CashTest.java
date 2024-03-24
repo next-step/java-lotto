@@ -26,10 +26,4 @@ public class CashTest {
         int result = new Cash(money).getAmount();
         assertThat(result).isEqualTo(count);
     }
-
-    @Test
-    void to_string() {
-        Cash cash = new Cash(10000);
-        assertThat(cash.toString()).isEqualTo(10 + "개를 구매했습니다.");
-    }
 }

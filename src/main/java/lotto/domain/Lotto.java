@@ -21,4 +21,8 @@ public class Lotto {
             profit.accumulate(matchCount);
         });
     }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }

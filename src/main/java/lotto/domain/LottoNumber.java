@@ -12,4 +12,9 @@ public class LottoNumber {
     public int cacheMatchCount(List<Integer> latestWinningNumbers){
         return Match.getCount(latestWinningNumbers, this.numbers);
     }
+
+    @Override
+    public String toString() {
+        return this.numbers.toString();
+    }
 }
