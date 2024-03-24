@@ -16,6 +16,7 @@ public class LottoPlayer {
         OutputView.printPurchasedLottos(lottos);
 
         final Lotto lastWeekWinningNumbers = new Lotto(InputView.lastWeekWinningNumbers());
+        final LottoNumber bonusNumber = new LottoNumber(InputView.bonusBallNumber());
 
         final LottoMatchCounts matchCounts = lottos.matchCounts(lastWeekWinningNumbers);
 
