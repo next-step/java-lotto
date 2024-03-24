@@ -20,4 +20,14 @@ public class LottoOutlet {
                 .limit(count)
                 .collect(Collectors.toList());
     }
+
+    public static int getWinning(int matchCount) {
+        return Winnings.getWinningsAmount(matchCount);
+    }
+
+    public static int getWinnings(List<Integer> matchCounts) {
+        return matchCounts.stream()
+                .mapToInt(Winnings::getWinningsAmount)
+                .sum();
+    }
 }
