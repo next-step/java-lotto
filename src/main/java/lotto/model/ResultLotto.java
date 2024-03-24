@@ -1,7 +1,7 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultLotto {
     private List<Lotto> lottos;
@@ -20,12 +20,9 @@ public class ResultLotto {
     }
 
     public List<List<Integer>> getLottosNumbers() {
-        List<List<Integer>> lottosNumbers = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            lottosNumbers.add(lotto.getNumbers());
-        }
-
-        return lottosNumbers;
+        return lottos.stream()
+                .map(lotto -> lotto.getNumbers())
+                .collect(Collectors.toList());
     }
 
     public void recordBuyLottos(List<Lotto> buyLottos) {
