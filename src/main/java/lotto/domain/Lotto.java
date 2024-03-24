@@ -46,17 +46,10 @@ public class Lotto {
         int count = (int) lottoNumbers.stream()
                 .filter(lottoNumber -> winNumber.contains(lottoNumber))
                 .count();
-        validateBonusNumber(winNumber, bonusNumber);
-        boolean isBonusNumber = isBonusNumberExist(bonusNumber);
+        BonusLotto bonusLotto = new BonusLotto(winNumber, bonusNumber);
+        boolean isBonusNumber = bonusLotto.isBonusNumberExist(lottoNumbers);
         return AmountEnum.from(count, isBonusNumber);
     }
-
-    private void validateBonusNumber(Lotto winNumber, LottoNumber bonusNumber) {
-        if (winNumber.contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 번호와 당첨 번호가 중복됩니다.");
-        }
-    }
-
 
     public String getNumbersToString() {
         List<Integer> arrayList = new ArrayList<>();
@@ -64,12 +57,7 @@ public class Lotto {
         return arrayList.toString();
     }
 
-    private boolean contains(LottoNumber lottoNumber) {
+    boolean contains(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
-    }
-
-    private boolean isBonusNumberExist(final LottoNumber bonusNumber) {
-        return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
     }
 }
