@@ -8,6 +8,8 @@ public class LottoStore {
     private final NumberGenerator numberGenerator;
     private Lottos lottos;
     private final int buyMoney;
+    private int autoLottoCount;
+    private int manualLottoCount;
 
     public LottoStore(String money, NumberGenerator numberGenerator) {
         this.numberGenerator = numberGenerator;
@@ -22,11 +24,11 @@ public class LottoStore {
         validMoney(money);
         buyMoney = Integer.parseInt(money);
 
-        int manualLottoCount = manualLottoNumbers.size();
+        manualLottoCount = manualLottoNumbers.size();
         isPossibleBuyLotto(buyMoney, manualLottoCount);
 
         Lottos manualLottos = Lottos.buyManualLottos(manualLottoNumbers, numberGenerator);
-        int autoLottoCount = (buyMoney / 1000) - manualLottoCount;
+        autoLottoCount = (buyMoney / 1000) - manualLottoCount;
         Lottos autoLottos = Lottos.buyLottos(autoLottoCount, numberGenerator);
 
         lottos = mergeLottos(manualLottos, autoLottos);
@@ -70,5 +72,13 @@ public class LottoStore {
 
     public int getBuyMoney() {
         return buyMoney;
+    }
+
+    public int getAutoLottoCount() {
+        return this.autoLottoCount;
+    }
+
+    public int getManualLottoCount() {
+        return this.manualLottoCount;
     }
 }

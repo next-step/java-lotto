@@ -26,4 +26,11 @@ public class LottoNumbersTest {
             LottoNumbers nums = new LottoNumbers("1,2,3,4,5,6");
         });
     }
+
+    @Test
+    void 중복된_번호가_있는_경우_Exception이_발생한다() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            LottoNumbers nums = new LottoNumbers("1,1,3,4,5,6");
+        });
+    }
 }
