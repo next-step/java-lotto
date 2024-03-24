@@ -14,8 +14,12 @@ class StatisticsTest {
     @DisplayName("수익률 산출 테스트")
     @Test
     void getRateOfReturn() {
-        Statistics statistics = new Statistics(List.of(Statistic.THREE, Statistic.FOUR), new Budget(14000));
+        Statistics statistics = new Statistics(List.of(Statistic.THREE, Statistic.FOUR));
         float result = statistics.getRateOfReturn();
-        assertThat(result).isEqualTo(55000 / 14000);
+
+        int totalPrice = Statistic.THREE.getPrice() + Statistic.FOUR.getPrice();
+        float expected = (float) totalPrice / (2 * Lotto.LOTTO_PRICE);
+
+        assertThat(result).isEqualTo(expected);
     }
 }

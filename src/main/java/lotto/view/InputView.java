@@ -22,7 +22,7 @@ public class InputView {
     public static Lotto inputLastWinLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         SCANNER.nextLine();
-        return new Lotto(parseInts(split(SCANNER.nextLine())));
+        return Lotto.ofNumbers(parseInts(split(SCANNER.nextLine())));
     }
 
     private static List<String> split(String input) {

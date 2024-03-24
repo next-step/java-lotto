@@ -5,11 +5,9 @@ import java.util.List;
 public class Statistics {
 
     private List<Statistic> statistics;
-    private Budget budget;
 
-    public Statistics(List<Statistic> statistics, Budget budget) {
+    public Statistics(List<Statistic> statistics) {
         this.statistics = statistics;
-        this.budget = budget;
     }
 
     public List<Statistic> getStatistics() {
@@ -17,10 +15,17 @@ public class Statistics {
     }
 
     public float getRateOfReturn() {
-        return getTotalReturn() / budget.getValue();
+        return (float) getTotalReturn() / (statistics.size() * Lotto.LOTTO_PRICE);
     }
 
     private int getTotalReturn() {
-        return statistics.stream().mapToInt(Statistic::getPrice).sum();
+        return statistics.stream()
+                .filter(Statistic::isValid)
+                .mapToInt(Statistic::getPrice)
+                .sum();
+    }
+
+    public int getMatchCount(Statistic matcher) {
+        return (int) statistics.stream().filter(statistic -> statistic == matcher).count();
     }
 }

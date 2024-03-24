@@ -19,14 +19,14 @@ class LottoTest {
     @NullAndEmptySource
     void validEmpty(List<Integer> input) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Lotto(input))
+                .isThrownBy(() -> Lotto.ofNumbers(input))
                 .withMessageMatching("입력값이 없습니다");
     }
 
     @DisplayName("Size 편의 메서드 테스트")
     @Test
     void size() {
-        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto givenLotto = Lotto.ofNumbers(List.of(1, 2, 3, 4, 5, 6));
         int result = givenLotto.size();
         assertThat(result).isEqualTo(6);
     }
@@ -34,8 +34,8 @@ class LottoTest {
     @DisplayName("로또 번호 일치 개수 테스트")
     @Test
     void getFeatNumberCount() {
-        Lotto givenLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto winLotto = new Lotto(List.of(1, 5, 6, 7, 8, 9));
+        Lotto givenLotto = Lotto.ofNumbers(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winLotto = Lotto.ofNumbers(List.of(1, 5, 6, 7, 8, 9));
 
         int result = givenLotto.getFeatNumberCount(winLotto);
         assertThat(result).isEqualTo(3);
