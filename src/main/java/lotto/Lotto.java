@@ -30,13 +30,13 @@ public class Lotto {
         return new HashSet<>(universalSet.subList(0, 6));
     }
 
-    public MatchedCount countMatchedNumber(Lotto winningLotto) {
+    public MatchedCount countMatchedNumber(Lotto otherLotto) {
         return new MatchedCount(this.numbers.stream()
-                .filter(winningLotto::contains)
+                .filter(otherLotto::contains)
                 .count());
     }
 
-    private boolean contains(LottoNumber num) {
+    public boolean contains(LottoNumber num) {
         return this.numbers.contains(num);
     }
 
