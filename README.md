@@ -9,7 +9,7 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## 기능 요구사항
-### LottoNumber
+### LottoNumber(로또번호)
 **[기능]**
 * 1번부터 45번까지의 숫자를 가질 수 있습니다.
 
@@ -20,7 +20,7 @@
 * 자동 생성을 통해 생성된 LottoNumber의 크기는 6이어야 합니다
 * createRandomLottoNumbers를 수행해서 생성한 LottoNumbers는 길이가 6인 LottoNumbers를 반환해야한다
 
-### Lotto
+### Lotto(로또)
 **[기능]**
 * LottoNumber 6개가 모여 Lotto가 됩니다
 * 구매한 로또번호 6개를 가지고 있습니다.
@@ -33,7 +33,7 @@
 * Lotto는 자신의 크기를 반환합니다.
 
 
-### WinningNumbers
+### WinningNumbers(당첨번호)
 **[기능]**
 * 당첨번호 6개를 가지고 있습니다.
 * 로또를 전달받을 경우 로또가 당첨번호인지 확인해줍니다.
@@ -45,7 +45,7 @@
 * 전달 받은 로또번호가 5개가 일치할 경우 2등을 반환합니다
 * 전달 받은 로또번호가 7개가 일치할 경우 1등을 반환합니다
 
-### LottoMachine
+### LottoMachine(로또기계)
 [기능]
 * 구매금액을 전달받아 수행해야할 횟수에 맞게 수행합니다.
 * WinningNumbers를 사용하여 Lotto가 WinningNumbers와 같은지 비교합니다
@@ -65,7 +65,7 @@
 * 6개가 일치할 경우 2,000,000,000 당첨금을 반환합니다
 * LottoMachine은 autoLottos와 WinningNuber를 사용하여 당첨통계(WinningStatistice)를 반환합니다
 
-### PurchaseAmount
+### PurchaseAmount(구매금액)
 **[기능]**
 * 구매금액을 의미합니다
 * 구매금액은 1000원 단위로만 가능합니다.
@@ -74,7 +74,7 @@
 * 구매금액이 1000원 단위로 생성되어야 합니다
 * 구매금액이 1000으로 안나눠지는 경우 예외가 발생해야한다.
 
-### WinningStatistic
+### WinningStatistic(당첨통계)
 **[기능]**
 * Grade를 사용하여 각 등수를 카운팅 합니다.
 * 수익률을 계산합니다.
@@ -84,7 +84,7 @@
 * WinningStatistic은 수익률을 계산해야 합니다.
 * WinningStatistic은 존재하지 않는 Grade를 조회할 경우 예외를 발생합니다.
 
-### Grade
+### Grade(등수)
 **[기능]**
 * 등수를 나타내는 enum입니다.
 * 로또를 맞춘 개수를 사용하여 Grade로 변환합니다.
