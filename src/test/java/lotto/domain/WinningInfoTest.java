@@ -1,26 +1,22 @@
 package lotto.domain;
 
+import lotto.fixture.LottoNumbersFixture;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class WinningInfoTest {
 
-    @Test
-    @DisplayName("4등 당첨금 확인 Test")
-    void totalWinningMoney() {
-        LottoNumbers pickedNumbers = new LottoNumbers(Arrays.asList(1,2,3,11,12,13));
-        PickedLottoNumbers pickedLottoNumbers = new PickedLottoNumbers();
-        pickedLottoNumbers.add(pickedNumbers);
-
-        LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1,2,3,4,5,6));
-        WinningInfo winningInfo = WinningInfo.of(pickedLottoNumbers, winningNumbers);
+    @ParameterizedTest
+    @DisplayName("로또 번호에 따라 정해진 로또 번호와 비교 후 로또 당첨금을 확인할 수 있다.")
+    @EnumSource(LottoNumbersFixture.class)
+    void fourWinningMoney(LottoNumbersFixture fixture) {
+        WinningInfo winningInfo = WinningInfo.of(fixture.getPickedNumbers(), fixture.getWinningNumbers());
 
         int winningMoney = winningInfo.totalWinningMoney();
 
-        assertThat(winningMoney).isEqualTo(5000);
+        assertThat(winningMoney).isEqualTo(fixture.getRank().getWinningMoney());
     }
 }
