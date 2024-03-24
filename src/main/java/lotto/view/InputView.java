@@ -1,10 +1,12 @@
 package lotto.view;
 
 import lotto.domain.BonusNumber;
+import lotto.domain.NumberOfManualLottoToPurchase;
 import lotto.domain.PurchaseAmountOfMoney;
 import lotto.domain.WinningNumbers;
 import lotto.domain.lotto.LottoNumber;
 import lotto.exception.InvalidBonusNumberException;
+import lotto.exception.InvalidNumberOfManualLottoToPurchase;
 import lotto.exception.InvalidPurchaseAmountOfMoneyException;
 import lotto.exception.InvalidWinningNumbersException;
 
@@ -19,8 +21,10 @@ import static lotto.Validator.isPositiveInteger;
 public class InputView {
     public static final String COMMA_BLANK_DELIMITER = ", ";
     private static final String PURCHASE_AMOUNT_OF_MONEY_INPUT_GUIDE_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String NUMBER_OF_MANUAL_LOTTO_TO_PURCHASE_GUIDE_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String WINNING_NUMBERS_INPUT_GUIDE_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_NUMBER_INPUT_GUIDE_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String NEXT_LINE = System.lineSeparator();
     private static final Scanner SCANNER = new Scanner(System.in);
 
     private InputView() {
@@ -39,6 +43,28 @@ public class InputView {
     private static void validatePurchaseAmountOfMoneyInput(String purchaseAmountOfMoneyInput) {
         if (!isPositiveInteger(purchaseAmountOfMoneyInput)) {
             throw new InvalidPurchaseAmountOfMoneyException(purchaseAmountOfMoneyInput);
+        }
+    }
+
+    public static NumberOfManualLottoToPurchase enteredNumberOfManualLottoToPurchase(int maximumNumberOfManualLottoToPurchase) {
+        String numberOfManualLottoToPurchaseGuideMessage = new StringBuilder()
+                .append(NEXT_LINE)
+                .append(NUMBER_OF_MANUAL_LOTTO_TO_PURCHASE_GUIDE_MESSAGE)
+                .toString();
+
+        System.out.println(numberOfManualLottoToPurchaseGuideMessage);
+        String numberOfManualLottoToPurchaseInput = SCANNER.nextLine();
+
+        validateNumberOfManualLottoToPurchaseInput(numberOfManualLottoToPurchaseInput);
+
+        return NumberOfManualLottoToPurchase.newNumberOfManualLottoToPurchase(
+                Integer.parseInt(numberOfManualLottoToPurchaseInput),
+                maximumNumberOfManualLottoToPurchase);
+    }
+
+    private static void validateNumberOfManualLottoToPurchaseInput(String numberOfManualLottoToPurchaseInput) {
+        if(!isPositiveInteger(numberOfManualLottoToPurchaseInput)) {
+            throw new InvalidNumberOfManualLottoToPurchase(numberOfManualLottoToPurchaseInput);
         }
     }
 

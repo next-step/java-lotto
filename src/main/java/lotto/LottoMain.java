@@ -1,10 +1,7 @@
 package lotto;
 
-import lotto.domain.BonusNumber;
-import lotto.domain.PurchaseAmountOfMoney;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.WinningAndBonusNumbers;
 import lotto.domain.lotto.strategy.AutoGeneratingStrategy;
 import lotto.domain.lotto.strategy.LottoGeneratingStrategy;
 
@@ -15,6 +12,8 @@ public class LottoMain {
     public static void main(String[] arguments) throws Exception {
         try {
             PurchaseAmountOfMoney purchaseAmountOfMoney = enteredPurchaseAmountOfMoney();
+
+            NumberOfManualLottoToPurchase numberOfManualLottoToPurchase = enteredNumberOfManualLottoToPurchase(purchaseAmountOfMoney.numberOfLottoToPurchase());
 
             int numberOfLottoToPurchase = purchaseAmountOfMoney.numberOfLottoToPurchase();
             printNumberOfLottoToPurchase(numberOfLottoToPurchase);
