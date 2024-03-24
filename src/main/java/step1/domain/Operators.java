@@ -1,5 +1,7 @@
 package step1.domain;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -11,10 +13,17 @@ public class Operators {
 
     private final List<Operator> operators = new ArrayList<>();
 
+    private String g;
+
+    public  String from(){
+        return g;
+    }
+
     public Operators(String string) {
         Matcher matcher = patternOperate.matcher(string);
         while (matcher.find()) {
-            operators.add(Operator.fromString(matcher.group()));
+            g = matcher.group();
+            operators.add(Operator.find(matcher.group().trim()));
         }
     }
 

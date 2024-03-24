@@ -1,5 +1,7 @@
 package step1.domain;
 
+import step1.config.ErrorMessage;
+
 import java.util.function.BiFunction;
 
 public enum Operator implements OperatorType {
@@ -11,16 +13,17 @@ public enum Operator implements OperatorType {
     private final String symbol;
     private final BiFunction<Integer, Integer, Integer> expression;
 
-    public static Operator fromString(String text) {
+    public static Operator find(String text) {
+
         for (Operator operation : Operator.values()) {
             if (isEqualsTo(text, operation)) {
                 return operation;
             }
         }
-        throw new IllegalStateException("'+,-,*,/'이외의 연산자는 사용할 수 없습니다.");
+        throw new IllegalStateException(ErrorMessage.OPERATOR_VALIDATION.message(text));
     }
 
-    private static boolean isEqualsTo(String text, Operator operation) {
+     static boolean isEqualsTo(String text, Operator operation) {
         return operation.symbol.equals(text);
     }
 

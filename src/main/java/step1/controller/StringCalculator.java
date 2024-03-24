@@ -1,6 +1,7 @@
 package step1.controller;
 
 
+import step1.config.ErrorMessage;
 import step1.domain.Numbers;
 import step1.domain.Operator;
 import step1.domain.Operators;
@@ -24,7 +25,7 @@ public class StringCalculator {
 
     private static void validateNull(String string) {
         if (string == null || string.isBlank()) {
-            throw new IllegalArgumentException("문자열이 빈값일 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.NULL_OR_EMPTY_VALIDATION.message());
         }
     }
 }

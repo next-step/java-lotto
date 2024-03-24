@@ -1,13 +1,16 @@
 package step1;
 
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
+import step1.config.ErrorMessage;
 import step1.controller.StringCalculator;
 import step1.domain.Operators;
 
 
 import static org.assertj.core.api.Assertions.*;
+import static step1.config.ErrorMessage.NULL_OR_EMPTY_VALIDATION;
 
 public class StringCalculatorTest {
 
@@ -17,16 +20,17 @@ public class StringCalculatorTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> {
                     StringCalculator.calculate(input);
-                }).withMessageMatching("문자열이 빈값일 수 없습니다.");
+                }).withMessageMatching(NULL_OR_EMPTY_VALIDATION.message());
     }
 
 
     @ParameterizedTest
-    @ValueSource(strings = {"2 ^ 3 * 4 / 2", "2 + 3 % 4 / 2"})
-    void 기티_연산자_검증(final String notArithmeticSymbol) {
+    @CsvSource( {"2 ^ 3 * 4 / 2,^"})
+    void 기티_연산자_검증(final String input, final String result) {
         assertThatIllegalStateException()
-                .isThrownBy(() -> new Operators(notArithmeticSymbol))
-                .withMessage("'+,-,*,/'이외의 연산자는 사용할 수 없습니다.");
+                .isThrownBy(
+                        () -> new Operators(input))
+                .withMessage(ErrorMessage.OPERATOR_VALIDATION.message(result));
     }
 
 }
