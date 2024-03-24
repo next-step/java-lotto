@@ -16,6 +16,13 @@ public class LottoTicket {
         return new LottoTicket(lottoNumbers);
     }
 
+    public static LottoTicket from(List<LottoNumbers> autoLottoNumbers, List<LottoNumbers> manualLottoNumbers) {
+        List<LottoNumbers> finalLottoNumbers = new ArrayList<>();
+        finalLottoNumbers.addAll(autoLottoNumbers);
+        finalLottoNumbers.addAll(manualLottoNumbers);
+        return new LottoTicket(finalLottoNumbers);
+    }
+
     public int size() {
         return numbers.size();
     }

@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoTicket;
 import lotto.domain.WinningNumber;
 
 import java.util.ArrayList;
@@ -43,21 +42,26 @@ public class InputView {
 
     public int manualLottoCount(int totalLottoCount) {
         System.out.println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE);
-        int manualLottoCount = Integer.parseInt(scanner.nextLine());
-        if (manualLottoCount > totalLottoCount) {
-            System.out.println(INPUT_MANUAL_LOTTO_COUNT_OVER_MESSAGE);
+        try {
+            int manualLottoCount = Integer.parseInt(scanner.nextLine());
+            if (manualLottoCount > totalLottoCount) {
+                System.out.println(INPUT_MANUAL_LOTTO_COUNT_OVER_MESSAGE);
+                return manualLottoCount(totalLottoCount);
+            }
+            return manualLottoCount;
+        } catch (NumberFormatException e) {
+            System.out.println(INPUT_NUMBER_MESSAGE);
             return manualLottoCount(totalLottoCount);
         }
-        return manualLottoCount;
     }
 
-    public LottoTicket manualLottoTicket(int manualLottoCount) {
+    public List<LottoNumbers> manualLottoTicket(int manualLottoCount) {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
         System.out.println(INPUT_MANUAL_LOTTO_MESSAGE);
         for (int i = 0; i < manualLottoCount; i++) {
             lottoNumbers.add(lottoNumbersInput(""));
         }
-        return LottoTicket.from(lottoNumbers);
+        return lottoNumbers;
     }
 
     private int scanPriceForBuyLotto() {

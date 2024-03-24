@@ -5,6 +5,8 @@ import lotto.numberdrawer.ShuffledNumberDrawer;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoGame {
     public static void start() {
         InputView inputView = new InputView();
@@ -14,10 +16,10 @@ public class LottoGame {
         int manualLottoCount = inputView.manualLottoCount(totalLottoCount);
         int autoLottoCount = totalLottoCount - manualLottoCount;
 
-        LottoTicket manualLottoTicket = inputView.manualLottoTicket(manualLottoCount);
-        LottoTicket autoLottoTicket = LottoMachine.createLottoNumbers(autoLottoCount, new ShuffledNumberDrawer());
+        List<LottoNumbers> manualLottoTicket = inputView.manualLottoTicket(manualLottoCount);
+        List<LottoNumbers> autoLottoTicket = LottoMachine.createLottoNumbers(autoLottoCount, new ShuffledNumberDrawer());
 
-        LottoTicket finalLottoTicket = manualLottoTicket.combine(autoLottoTicket);
+        LottoTicket finalLottoTicket = LottoTicket.from(manualLottoTicket, autoLottoTicket);
 
         outputView.printLottoCount(manualLottoCount, autoLottoCount);
         outputView.printLottoNumbers(finalLottoTicket);
