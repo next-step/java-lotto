@@ -1,28 +1,27 @@
 package autoLotto.model;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class LottoWinChecker {
-    private Map<PrizeEnum, Integer> winLottos;
+    private Lotto winLotto;
 
-    public LottoWinChecker(String winNumbersAsString, List<Lotto> lottos, int bonusNumber) {
-        this.winLottos = createWinLotto(winNumbersAsString, lottos, bonusNumber);
+    public LottoWinChecker(List<String> winNumbers) {
+        this.winLotto = Lotto.createLottoFrom(winNumbers);
     }
 
-    private Map<PrizeEnum, Integer> createWinLotto(String winNumbersAsString, List<Lotto> lottos, int bonusNumber) {
-        Lotto winLotto = Lotto.createLottoFrom(winNumbersAsString);
-        return countWinLotto(winLotto, lottos, bonusNumber);
+    public Map<PrizeEnum, Integer> checkWinLottos(List<Lotto> lottos, int bonusNumber) {
+        return countMatchedWinLottos(lottos, bonusNumber);
     }
 
-    private Map<PrizeEnum, Integer> countWinLotto(Lotto winLotto, List<Lotto> lottos, int bonusNumber) {
-        Map<PrizeEnum, Integer> result = new HashMap<>();
+    private Map<PrizeEnum, Integer> countMatchedWinLottos(List<Lotto> lottos, int bonusNumber) {
+        Map<PrizeEnum, Integer> result = new EnumMap<>(PrizeEnum.class);
 
         for (Lotto lotto : lottos) {
-            int countOfWinNumbers = compareWinNumbers(winLotto, lotto);
-            boolean isBonusMatched = compareBonusNumber(lotto, bonusNumber);
+            int countOfWinNumbers = compareWinNumbers(lotto);
+            boolean isBonusMatched = compareBonusNumber(lotto, bonusNumber, countOfWinNumbers);
             PrizeEnum prize = PrizeEnum.getPrizeFrom(countOfWinNumbers, isBonusMatched);
             result.put(prize, result.getOrDefault(prize, 0) + 1);
         }
@@ -30,30 +29,32 @@ public class LottoWinChecker {
         return result;
     }
 
-    private int compareWinNumbers(Lotto winLotto, Lotto lotto) {
+
+    private int compareWinNumbers(Lotto lotto) {
         Set<LottoNumber> targetLotto = lotto.getLotto();
         int matchingNumbers = 0;
 
         for (LottoNumber number : targetLotto) {
-            matchingNumbers += hasWinNumber(winLotto, number.getLottoNumber());
+            matchingNumbers += hasWinNumber(number.getLottoNumber());
         }
 
         return matchingNumbers;
     }
 
-    private boolean compareBonusNumber(Lotto userLotto, int bonusNumber) {
+
+    private boolean compareBonusNumber(Lotto userLotto, int bonusNumber, int countOfWinNumbers) {
+        if (countOfWinNumbers != PrizeEnum.SECOND.getMatchedCount()) {
+            return false;
+        }
+
         return userLotto.containsNumber(bonusNumber);
     }
 
-    private int hasWinNumber(Lotto winLotto, Integer targetLottoNumber) {
+    private int hasWinNumber(Integer targetLottoNumber) {
         if (winLotto.containsNumber(targetLottoNumber)) {
             return 1;
         }
 
         return 0;
-    }
-
-    public Map<PrizeEnum, Integer> getWinLottos() {
-        return this.winLottos;
     }
 }
