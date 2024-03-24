@@ -119,7 +119,7 @@ public class LottoTest {
         assertThat(amountEnum).isEqualTo(AmountEnum.SECOND);
     }
 
-    @DisplayName("로또의 숫자가 5개가 일치하고 보너스 번호가 일치하면 2등이다.")
+    @DisplayName("보너스 번호가 당첨 번호에 들어있으면 예외가 발생한다.")
     @Test
     public void winnerNumbersIncludeBonusNumber() {
         //given
