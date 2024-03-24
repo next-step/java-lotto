@@ -45,4 +45,14 @@ public class LottoTicketManualCreateTest {
     LottoTickets lottoTickets = LottoTickets.purchaseBy(purchaseAmount, MANUAL_LOTTO_TICKETS);
     assertThat(lottoTickets.allTicketCount()).isEqualTo(5);
   }
+
+  @Test
+  @DisplayName("수동 구매할 로또 수 음수인 경우 테스트")
+  void lottoTicketManualCreateTest3() {
+    int inputPurchaseAmount = 2000;
+    int manualPurchaseCount = -1;
+    assertThatThrownBy(() -> PurchaseAmount.of(inputPurchaseAmount, manualPurchaseCount))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining(String.format(INVALID_MANUAL_PURCHASE_COUNT_INPUT, inputPurchaseAmount, manualPurchaseCount));
+  }
 }

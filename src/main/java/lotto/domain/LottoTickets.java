@@ -17,13 +17,7 @@ public class LottoTickets {
   }
 
   public static LottoTickets purchaseBy(PurchaseAmount purchaseAmount, List<Set<Integer>> manualLottoNumbers) {
-    Set<LottoTicket> lottoTickets = getLottoTickets(purchaseAmount, manualLottoNumbers);
-    return new LottoTickets(purchaseAmount, lottoTickets);
-  }
-
-  public static LottoTickets purchaseBy(int amount) {
-    PurchaseAmount purchaseAmount = PurchaseAmount.of(amount, 0);
-    Set<LottoTicket> lottoTickets = getLottoTickets(purchaseAmount, Collections.emptyList());
+    Set<LottoTicket> lottoTickets = convertLottoTickets(purchaseAmount, manualLottoNumbers);
     return new LottoTickets(purchaseAmount, lottoTickets);
   }
 
@@ -74,7 +68,7 @@ public class LottoTickets {
     return map;
   }
 
-  private static Set<LottoTicket> getLottoTickets(PurchaseAmount purchaseAmount, List<Set<Integer>> manualLottoNumbers) {
+  private static Set<LottoTicket> convertLottoTickets(PurchaseAmount purchaseAmount, List<Set<Integer>> manualLottoNumbers) {
     Set<LottoTicket> lottoTickets = initLottoTickets(manualLottoNumbers);
 
     ShuffleStrategy shuffleStrategy = new ShuffleStrategy();

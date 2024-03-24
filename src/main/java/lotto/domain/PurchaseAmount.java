@@ -36,7 +36,7 @@ public class PurchaseAmount {
       throw new IllegalArgumentException(String.format(INVALID_PURCHASE_AMOUNT_INPUT, totalPurchaseAmount));
     }
 
-    if (totalPurchaseAmount < manualPurchaseCount * PRICE_PER_TICKET) {
+    if (manualPurchaseCount < 0 || totalPurchaseAmount < manualPurchaseCount * PRICE_PER_TICKET) {
       throw new IllegalArgumentException(String.format(INVALID_MANUAL_PURCHASE_COUNT_INPUT, totalPurchaseAmount, manualPurchaseCount));
     }
   }
