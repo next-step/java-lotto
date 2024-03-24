@@ -1,22 +1,21 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.stream.IntStream;
 
-public class LottoMatch {
+public class LottoMatchCount {
 
-    public static int match(List<LottoNumber> lottoNumbers, List<Integer> winNumbers) {
+    public static int matchCount(List<LottoNumber> lottoNumbers, List<Number> winNumbers) {
         int count = 0;
 
         for (int i = 0; i < winNumbers.size(); i++) {
-            count += isEqaulLottoAndWin(winNumbers.get(i), lottoNumbers.get(i));
+            count += isEqualLottoAndWin(winNumbers, lottoNumbers.get(i));
         }
 
         return count;
     }
 
-    private static int isEqaulLottoAndWin(int winNumber, LottoNumber lottoNumber) {
-        if (new LottoNumber(winNumber).equals(lottoNumber)) {
+    private static int isEqualLottoAndWin(List<Number> winNumbers, LottoNumber lottoNumber) {
+        if (winNumbers.contains(lottoNumber.getLottoNumber())) {
             return 1;
         }
         return 0;
