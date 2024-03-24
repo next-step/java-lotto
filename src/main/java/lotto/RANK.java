@@ -12,33 +12,34 @@ import java.util.Arrays;
  */
 public enum RANK {
 
-    FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
+    FIRST(new MatchedCount(6), new Money(2000000000)),
+    SECOND(new MatchedCount(5, true), new Money(30000000)),
+    THIRD(new MatchedCount(5), new Money(1500000)),
+    FOURTH(new MatchedCount(4), new Money(50000)),
+    FIFTH(new MatchedCount(3), new Money(5000)),
     ;
 
-    private final int matchedCount;
-    private final long prizeMoney;
+    private final MatchedCount matchedCount;
+    private final Money prizeMoney;
 
-    RANK(int matchedCount, long prizeMoney) {
+    RANK(MatchedCount matchedCount, Money prizeMoney) {
         this.matchedCount = matchedCount;
         this.prizeMoney = prizeMoney;
     }
 
-    public static long getPrizeMoney(MatchedCount count) {
+    public static Money getPrizeMoney(MatchedCount count) {
         return Arrays.stream(RANK.values())
-                .filter(rank -> count.isEquals(rank.matchedCount))
+                .filter(rank -> count.equals(rank.matchedCount))
                 .findFirst()
                 .map(rank -> rank.prizeMoney)
-                .orElseGet(() -> 0L);
+                .orElseGet(() -> new Money(0L));
     }
 
     public static Money receivePrize(MatchedCount count, int number){
         return Arrays.stream(RANK.values())
-                .filter(rank -> count.isEquals(rank.matchedCount))
+                .filter(rank -> count.equals(rank.matchedCount))
                 .findFirst()
-                .map(rank -> new Money(rank.prizeMoney * number))
+                .map(rank -> rank.prizeMoney.multiply(number))
                 .orElseGet(() -> new Money(0));
     }
 }
