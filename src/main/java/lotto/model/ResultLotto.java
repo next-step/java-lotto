@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultLotto {
+    private static final int LOTTO_PRICE = 1000;
     private List<Lotto> lottos;
     private List<Integer> winningNumbers;
 
@@ -16,7 +17,7 @@ public class ResultLotto {
     }
 
     public double getWinningRate() {
-        return (double) getWinningAmount() / (lottos.size() * 1000);
+        return (double) getWinningAmount() / (lottos.size() * LOTTO_PRICE);
     }
 
     public List<List<Integer>> getLottosNumbers() {
