@@ -13,12 +13,25 @@ public class LottoPurchaseInfo {
     private final List<Lotto> manualLotto;
 
     public LottoPurchaseInfo(int purchasedPrice, List<List<Integer>> manualLottoInput) {
+        validatePurchasedPrice(purchasedPrice);
         this.purchasedPrice = purchasedPrice;
 
         this.manualLotto = new ArrayList<>();
         manualLottoInput.forEach(lotto -> this.manualLotto.add(new Lotto(lotto)));
 
-        validatePurchasedAndManualCount(this.purchasedCount(), this.countManual());
+        validatePurchasedPriceAndManualLotto(this.purchasedCount(), this.countManual());
+    }
+
+    private void validatePurchasedPrice(int purchasedPrice) {
+        if (purchasedPrice < 0) {
+            throw new IllegalArgumentException("구매 금액은 음수일 수 없습니다.");
+        }
+    }
+
+    private void validatePurchasedPriceAndManualLotto(int purchasedCount, int manualLottoCount) {
+        if (purchasedCount < manualLottoCount) {
+            throw new IllegalArgumentException("수동 구매 리스트의 개수가 총 구매 개수보다 클 수 없습니다.");
+        }
     }
 
     public int purchasedCount() {
@@ -35,11 +48,5 @@ public class LottoPurchaseInfo {
 
     public List<Lotto> getManualLotto() {
         return List.copyOf(manualLotto);
-    }
-
-    private void validatePurchasedAndManualCount(int purchasedCount, int manualLottoCount) {
-        if (purchasedCount < manualLottoCount) {
-            throw new IllegalArgumentException("수동 구매 리스트의 개수가 총 구매 개수보다 클 수 없습니다.");
-        }
     }
 }
