@@ -1,9 +1,6 @@
 package lotto;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -30,9 +27,9 @@ public class Lotto {
         return new HashSet<>(universalSet.subList(0, 6));
     }
 
-    public MatchedCount countMatchedNumber(Lotto otherLotto) {
+    public MatchedCount countMatchedNumber(Lotto winningLotto) {
         return new MatchedCount(this.numbers.stream()
-                .filter(otherLotto::contains)
+                .filter(winningLotto::contains)
                 .count());
     }
 
