@@ -1,5 +1,7 @@
 package step2;
 
+import java.util.Arrays;
+
 public enum PrizeLevel {
     FIFTH(3, 5000),
     FOURTH(4, 50000),
@@ -22,5 +24,19 @@ public enum PrizeLevel {
 
     public int getPrizeAmount() {
         return prizeAmount;
+    }
+
+    public static PrizeLevel calculateWinningTier(Lotto lotto, WinningNumbers winningNumbers) {
+        int matchedCount = lotto.matchedNumbersCount(winningNumbers.getNumbers());
+        boolean hasBonus = lotto.hasBonus(winningNumbers.getBonusNumber());
+
+        if (matchedCount == 5 && hasBonus) {
+            return PrizeLevel.SECOND;
+        }
+
+        return Arrays.stream(PrizeLevel.values())
+                .filter(level -> level.getMatchCount() == matchedCount)
+                .findFirst()
+                .orElse(PrizeLevel.MISS);
     }
 }
