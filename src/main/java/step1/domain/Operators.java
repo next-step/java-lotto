@@ -1,4 +1,4 @@
-package step1;
+package step1.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,17 +8,18 @@ import java.util.regex.Pattern;
 public class Operators {
 
     private static final Pattern patternOperate = Pattern.compile("[^\\w\\s]");
-    private final List<Symbol> symbols = new ArrayList<>();
+
+    private final List<Operator> operators = new ArrayList<>();
 
     public Operators(String string) {
         Matcher matcher = patternOperate.matcher(string);
         while (matcher.find()) {
-            symbols.add(Symbol.fromString(matcher.group()));
+            operators.add(Operator.fromString(matcher.group()));
         }
     }
 
-    public List<Symbol> getSymbols() {
-        return symbols;
+    public List<Operator> getOperators() {
+        return operators;
     }
 
 }
