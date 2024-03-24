@@ -7,12 +7,25 @@ public class WinningInfo {
 
     private final Map<Rank, Integer> winningInfo;
 
-    public WinningInfo() {
-        this.winningInfo = new HashMap<>();
+    private WinningInfo(Map<Rank, Integer> winningInfo) {
+        this.winningInfo = winningInfo;
     }
 
-    public void saveWinningInfo(Rank rank) {
-        winningInfo.put(rank, winningInfo.getOrDefault(rank, 0) + 1);
+    public static WinningInfo of(PickedLottoNumbers pickedLottoNumbers, LottoNumbers winningNumbers) {
+        HashMap<Rank, Integer> objectObjectHashMap = new HashMap<>();
+        for (LottoNumbers pickedNumber : pickedLottoNumbers) {
+            Rank rank = Rank.findRank(countNumber(pickedNumber, winningNumbers));
+            objectObjectHashMap.put(rank, objectObjectHashMap.getOrDefault(rank, 0) + 1);
+        }
+        return new WinningInfo(objectObjectHashMap);
+    }
+
+    private static int countNumber(LottoNumbers pickedNumber, LottoNumbers winningNumbers) {
+        int matchCount = 0;
+        for (Integer winningNumber : winningNumbers) {
+            matchCount += pickedNumber.contains(winningNumber);
+        }
+        return matchCount;
     }
 
     public int totalWinningMoney() {

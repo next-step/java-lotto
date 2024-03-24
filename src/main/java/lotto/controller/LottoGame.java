@@ -28,7 +28,7 @@ public class LottoGame {
         resultView.printWinningLotto();
         LottoNumbers winningLotto = inputView.inputLottoNumber();
 
-        WinningInfo winningInfo = LottoMatch.countNumbers(pickedLottoNumbers, winningLotto);
+        WinningInfo winningInfo = WinningInfo.of(pickedLottoNumbers, winningLotto);
 
         resultView.printWinningStatic(winningInfo, money);
     }
