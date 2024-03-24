@@ -47,6 +47,6 @@ public class ProfitTest {
     @Test
     void to_string() {
         profit.accumulate(3);
-        assertThat(profit.toString(new Cash(2))).isEqualTo("총 수익률은 2500.00입니다.");
+        assertThat(profit.toString(new Cash(2000))).isEqualTo("총 수익률은 2500.00입니다.");
     }
 }

@@ -2,26 +2,20 @@ package lotto.domain;
 
 public class Cash {
 
-    private int amount;
+    private final int money;
+    private static final int MINIMUM_MONEY = 1000;
 
-    public Cash() {
-    }
-
-    public Cash(int amount) {
-        this.amount = amount;
-    }
-
-    public int payLotto(int money) {
-        if (money < 1000) throw new IllegalArgumentException();
-        return this.amount = money / 1000;
+    public Cash(int money) {
+        this.money = money;
     }
 
     public int getAmount() {
-        return amount;
+        if (money < MINIMUM_MONEY) throw new IllegalArgumentException();
+        return money / MINIMUM_MONEY;
     }
 
     @Override
     public String toString() {
-        return String.format("%d개를 구매했습니다.", amount);
+        return String.format("%d개를 구매했습니다.", getAmount());
     }
 }

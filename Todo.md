@@ -22,7 +22,6 @@
 # Step2
 
 ## Todo 
-- [ ] 코드 리뷰 적용 - Cash 매직넘버 분리 및 상태값 불변 변수로 수정
 - [ ] 코드 리뷰 적용 - LottoPricing 에서 matchCount에 따른 value 값 캐싱
 - [ ] 코드 리뷰 적용 - LottoGroup 2차원 배열 tickets 2개의 일급 컬렉션으로 분(List<Integer> -> LottoNumber, List<LottoNumber> -> Lotto) 
 - [ ] 코드 리뷰 적용 - MatchCacheTest 내에서 system 출력으로 검증한 부분 수정
@@ -50,3 +49,4 @@
 - [X] LottoClient - 일치 금액 + 일치 개수 출력("3개 일치 (5000원)- 1개")
 - [X] LottoClient - 총 수익률 출력("총 수익률은 0.35입니다.")
 - [X] 코드 리뷰 적용 - Todo의 기능 요구사항들 테스트 코드 DisplayName으로 옮기기
+- [X] 코드 리뷰 적용 - Cash 매직넘버 분리 및 상태값 불변 변수로 수정

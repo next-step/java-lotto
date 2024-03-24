@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoGroupTest {
 
     LottoGroup lottoGroup;
-    Cash cash = new Cash(2);
+    Cash cash = new Cash(2000);
     NumbersGenerator generator = new FakeNumberGenerator();
 
     @BeforeEach

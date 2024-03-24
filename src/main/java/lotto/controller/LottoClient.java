@@ -14,8 +14,7 @@ public class LottoClient {
 
     public static void main(String[] args) {
         printPlainMessage("구입금액을 입력해 주세요.");
-        Cash cash = new Cash();
-        cash.payLotto(insertNumber());
+        Cash cash = new Cash(insertNumber());
         printPlainMessage(cash.toString());
         LottoGroup lottoGroup = generateLottoGroupAndPrint(cash);
         List<Integer> latestWinningNumbers = insertLatestWinningNumbers();
