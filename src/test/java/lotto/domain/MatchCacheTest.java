@@ -52,10 +52,4 @@ public class MatchCacheTest {
 
         assertThat(matchCache).isEqualTo(new MatchCache(new int[]{2, 0, 3, 0, 1, 0}, 2));
     }
-
-    @Test
-    void to_string() {
-        matchCache = new MatchCache(new int[]{1, 2, 0, 1, 3, 4});
-        System.out.println("3개 일치 (5000원)- 0개\n4개 일치 (50000원)- 1개\n5개 일치 (1500000원)- 3개\n6개 일치 (2000000000원) - 4개\n");
-    }
 }
