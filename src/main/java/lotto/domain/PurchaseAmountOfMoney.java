@@ -1,30 +1,29 @@
 package lotto.domain;
 
-import lotto.Validator;
+import lotto.exception.InvalidPurchaseAmountOfMoneyException;
 
 import java.math.BigDecimal;
 
 import static java.math.RoundingMode.DOWN;
 
 public class PurchaseAmountOfMoney {
-    private static final String WRONG_PURCHASE_AMOUNT_MESSAGE = "(%s): 잘못된 구입금액입니다.";
     private static final int LOTTO_PRICE = 1000;
 
     private final int amountOfMoney;
 
-    private PurchaseAmountOfMoney(String amountOfMoneyInput) {
-        validateAmountOfMoney(amountOfMoneyInput);
-        this.amountOfMoney = Integer.parseInt(amountOfMoneyInput);
+    private PurchaseAmountOfMoney(int amountOfMoney) {
+        validateAmountOfMoney(amountOfMoney);
+        this.amountOfMoney = amountOfMoney;
     }
 
-    private void validateAmountOfMoney(String amountOfMoneyInput) {
-        if (!Validator.isPositiveInteger(amountOfMoneyInput) || Integer.parseInt(amountOfMoneyInput) < LOTTO_PRICE) {
-            throw new IllegalArgumentException(String.format(WRONG_PURCHASE_AMOUNT_MESSAGE, amountOfMoneyInput));
+    private void validateAmountOfMoney(int amountOfMoney) {
+        if (amountOfMoney < LOTTO_PRICE) {
+            throw new InvalidPurchaseAmountOfMoneyException(String.valueOf(amountOfMoney));
         }
     }
 
-    public static PurchaseAmountOfMoney valueOf(String amountOfMoneyInput) {
-        return new PurchaseAmountOfMoney(amountOfMoneyInput);
+    public static PurchaseAmountOfMoney valueOf(int amountOfMoney) {
+        return new PurchaseAmountOfMoney(amountOfMoney);
     }
 
     public int numberOfLottoToPurchase() {

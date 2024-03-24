@@ -1,33 +1,36 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Arrays;
+import java.util.function.BiFunction;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
-    MISS(0, 0);
+    MISS(0, 0, (matchCount, isBonusMatched) -> matchCount <= 2),
+    FIFTH(3, 5_000, (matchCount, isBonusMatched) -> matchCount == 3),
+    FOURTH(4, 50_000, (matchCount, isBonusMatched) -> matchCount == 4),
+    THIRD(5, 1_500_000, (matchCount, isBonusMatched) -> matchCount == 5 && !isBonusMatched),
+    SECOND(5, 30_000_000, (matchCount, isBonusMatched) -> matchCount == 5 && isBonusMatched),
+    FIRST(6, 2_000_000_000, (matchCount, isBonusMatched) -> matchCount == 6);
 
     private final int matchCount;
     private final int winningMoney;
+    private final BiFunction<Integer, Boolean, Boolean> findCondition;
 
-    Rank(int matchCount, int winningMoney) {
+    Rank(int matchCount, int winningMoney, BiFunction<Integer, Boolean, Boolean> findCondition) {
         this.matchCount = matchCount;
         this.winningMoney = winningMoney;
+        this.findCondition = findCondition;
     }
 
-    private static final Map<Integer, Rank> RANK_MAP = Collections.unmodifiableMap(Stream.of(values())
-            .collect(Collectors.toMap(Rank::matchCount, Function.identity())));
-
-    public static Rank findRank(int matchCount) {
-        return Optional.ofNullable(RANK_MAP.get(matchCount))
+    public static Rank findRank(int matchCount, boolean isBonusMatched) {
+        return Arrays.stream(Rank.values())
+                .filter(rank -> checkRankFindCondition(rank, matchCount, isBonusMatched))
+                .findFirst()
                 .orElse(MISS);
+    }
+
+    private static boolean checkRankFindCondition(Rank rank, int matchCount, boolean isBonusMatched) {
+        return rank.findCondition
+                .apply(matchCount, isBonusMatched);
     }
 
     public int matchCount() {

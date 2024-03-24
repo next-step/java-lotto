@@ -1,13 +1,14 @@
 package lotto.domain.lotto;
 
+import lotto.exception.InvalidLottNumberException;
+
 import java.util.Objects;
 
 import static lotto.Validator.isInRange;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
-    private static final String WRONG_LOTTO_NUMBER_MESSAGE = "(%d): 잘못된 번호입니다.";
 
     private final int lottoNumber;
 
@@ -18,7 +19,7 @@ public class LottoNumber {
 
     private void validateLottoNumberRange(int lottoNumber) {
         if (!isInRange(lottoNumber, MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)) {
-            throw new IllegalArgumentException(String.format(WRONG_LOTTO_NUMBER_MESSAGE, lottoNumber));
+            throw new InvalidLottNumberException(lottoNumber);
         }
     }
 
@@ -43,6 +44,11 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    @Override
+    public int compareTo(LottoNumber lottoNumber) {
+        return this.lottoNumber - lottoNumber.lottoNumber;
     }
 
     public int lottoNumber() {

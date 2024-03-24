@@ -4,12 +4,11 @@ import lotto.domain.Rank;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.StatisticsOfLottos;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-import static lotto.domain.Rank.FIRST;
-import static lotto.domain.Rank.FOURTH;
+import static lotto.domain.Rank.MISS;
 
 public class OutputView {
     private static final String NUMBER_OF_LOTTO_TO_PURCHASE_MESSAGE = "%d개를 구매했습니다.";
@@ -69,12 +68,10 @@ public class OutputView {
     private static String winningStatisticsMessage(StatisticsOfLottos statisticsOfLottos) {
         StringBuilder winningStatisticsMessageBuilder = new StringBuilder();
 
-        IntStream.rangeClosed(FOURTH.matchCount(), FIRST.matchCount())
-                .forEach(matchCount -> {
-                    Rank rank = Rank.findRank(matchCount);
-                    winningStatisticsMessageBuilder.append(String.format(WINNING_STATISTICS_MESSAGE, rank.matchCount(), rank.winningMoney(), statisticsOfLottos.numberOfMatchCount(rank.matchCount())))
-                            .append(NEXT_LINE);
-                });
+        Arrays.stream(Rank.values())
+                .filter(rank -> rank != MISS)
+                .forEach(rank -> winningStatisticsMessageBuilder.append(String.format(WINNING_STATISTICS_MESSAGE, rank.matchCount(), rank.winningMoney(), statisticsOfLottos.numberOfMatchCount(rank)))
+                        .append(NEXT_LINE));
 
         return winningStatisticsMessageBuilder.toString();
     }

@@ -2,18 +2,20 @@ package lotto.domain.lotto;
 
 import lotto.domain.lotto.strategy.LottoGeneratingStrategy;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoStore {
     private static final int START_OF_RANGE = 0;
 
-    public static Lottos purchaseLotto(LottoGeneratingStrategy lottoGeneratingStrategy, int numberOfLottoToPurchase) {
-        List<Lotto> lottos = new ArrayList<>();
+    private LottoStore() {
+    }
 
-        IntStream.range(START_OF_RANGE, numberOfLottoToPurchase)
-                .forEach((i) -> lottos.add(lottoGeneratingStrategy.lotto()));
+    public static Lottos purchaseLotto(LottoGeneratingStrategy lottoGeneratingStrategy, int numberOfLottoToPurchase) {
+        List<Lotto> lottos = IntStream.range(START_OF_RANGE, numberOfLottoToPurchase)
+                .mapToObj(i -> lottoGeneratingStrategy.lotto())
+                .collect(Collectors.toList());
 
         return Lottos.valueOf(lottos);
     }

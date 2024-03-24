@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import lotto.domain.Rank;
+
 public class StatisticsOfLottos {
     private final ResultOfLottos resultOfLottos;
     private final double rateOfReturn;
@@ -13,8 +15,8 @@ public class StatisticsOfLottos {
         return new StatisticsOfLottos(resultOfLottos, rateOfReturn);
     }
 
-    public int numberOfMatchCount(int matchCount) {
-        return resultOfLottos.numberOfMatchCount(matchCount);
+    public int numberOfMatchCount(Rank rank) {
+        return resultOfLottos.numberOfMatchCount(rank);
     }
 
     public double rateOfReturn() {
