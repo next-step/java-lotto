@@ -11,6 +11,7 @@ public enum Rank {
 
     private final Integer matchCount;
     private final Integer winningMoney;
+
     Rank(Integer matchCount, Integer winningMoney) {
         this.matchCount = matchCount;
         this.winningMoney = winningMoney;

@@ -3,8 +3,9 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
-    public static final int MIN_MONEY = 0;
+    private static final int MIN_MONEY = 0;
     private final int money;
+
     public Money(int money) {
         if (money < MIN_MONEY) {
             throw new IllegalArgumentException("금액은 0원 미만일 수 없습니다");
