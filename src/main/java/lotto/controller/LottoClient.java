@@ -4,8 +4,7 @@ import lotto.domain.*;
 
 import java.util.List;
 
-import static lotto.view.InputView.generateCash;
-import static lotto.view.InputView.generateLatestWinningNumbers;
+import static lotto.view.InputView.*;
 import static lotto.view.OutputView.*;
 
 public class LottoClient {
@@ -16,9 +15,10 @@ public class LottoClient {
         printCash(cash);
         LottoGroup lottoGroup = generateLottoGroupAndPrint(cash);
         List<Integer> latestWinningNumbers = insertLatestWinningNumbers();
+        int bonusNumber = insertBonusNumber();
         Profit profit = new Profit(0);
         MatchCache matchCache = new MatchCache();
-        lottoGroup.saveMatchResult(latestWinningNumbers, 0, matchCache, profit);
+        lottoGroup.saveMatchResult(latestWinningNumbers, bonusNumber, matchCache, profit);
         printResult(cash, profit, matchCache);
     }
 
@@ -32,6 +32,11 @@ public class LottoClient {
     private static List<Integer> insertLatestWinningNumbers() {
         printPlainMessage("지난 주 당첨 번호를 입력해 주세요.");
         return generateLatestWinningNumbers();
+    }
+
+    private static int insertBonusNumber() {
+        printPlainMessage("보너스 볼을 입력해 주세요.");
+        return insertNumber();
     }
 
     private static void printResult(Cash cash, Profit profit, MatchCache matchCache) {
