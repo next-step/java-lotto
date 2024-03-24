@@ -42,16 +42,4 @@ public class LottoTicket {
                 .map(LottoNumbers::toString)
                 .collect(Collectors.toList());
     }
-
-    public boolean containsExactly(LottoNumbers... lottoNumbers) {
-        return Arrays.stream(lottoNumbers)
-                .allMatch(numbers::contains);
-    }
-
-    public LottoTicket combine(LottoTicket lottoTicket) {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        lottoNumbers.addAll(this.numbers);
-        lottoNumbers.addAll(lottoTicket.numbers);
-        return LottoTicket.from(lottoNumbers);
-    }
 }
