@@ -1,11 +1,11 @@
 package autoLotto;
 
-import autoLotto.model.LottoMachine;
-import autoLotto.model.LottoProfitChecker;
-import autoLotto.model.LottoWinChecker;
-import autoLotto.model.RandomLottoGeneratorStrategy;
+import autoLotto.model.*;
 import autoLotto.view.InputView;
 import autoLotto.view.ResultView;
+
+import java.util.List;
+import java.util.Map;
 
 public class AutoLotto {
     private final InputView inputView = new InputView();
@@ -26,11 +26,13 @@ public class AutoLotto {
     }
 
     private void processWinning() {
-        String winNumbers = inputView.inputWinNumbers();
+        List<String> winNumbers = inputView.inputWinNumbers();
         int bonusNumber = inputView.inputBonusNumber();
 
-        LottoWinChecker lottoWinChecker = new LottoWinChecker(winNumbers, lottoMachine.getLottos(), bonusNumber);
-        LottoProfitChecker lottoProfitChecker = new LottoProfitChecker(lottoWinChecker.getWinLottos());
-        resultView.outputLottoResult(lottoWinChecker.getWinLottos(), lottoProfitChecker.getProfitRatio(purchaseAmount));
+        LottoWinChecker lottoWinChecker = new LottoWinChecker(winNumbers);
+        Map<PrizeEnum, Integer> userWinLottos = lottoWinChecker.checkWinLottos(lottoMachine.getLottos(), bonusNumber);
+        LottoProfitChecker lottoProfitChecker = new LottoProfitChecker(userWinLottos);
+
+        resultView.outputLottoResult(userWinLottos, lottoProfitChecker.getProfitRatio(purchaseAmount));
     }
 }
