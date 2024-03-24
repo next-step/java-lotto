@@ -66,6 +66,10 @@ public enum LottoNumber {
             .findFirst()
             .orElseThrow(() -> new SizeExceedLottoNumberException(value));
 
+    public static List<LottoNumber> createRandomLottoNumbers() {
+        List<LottoNumber> allLottoNumbers = Arrays.asList(LottoNumber.values());
+        Collections.shuffle(allLottoNumbers);
+        return allLottoNumbers.subList(0, 6);
     }
 
     public int getLottoNumber() {
