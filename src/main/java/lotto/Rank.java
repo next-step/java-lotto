@@ -10,7 +10,7 @@ import java.util.Arrays;
  * 6개 일치 (2000000000원)- 0개
  * 수익률 = 총 당첨 금액 / 구입 금액
  */
-public enum RANK {
+public enum Rank {
 
     FIRST(new MatchedCount(6), new Money(2000000000)),
     SECOND(new MatchedCount(5, true), new Money(30000000)),
@@ -22,13 +22,13 @@ public enum RANK {
     private final MatchedCount matchedCount;
     private final Money prizeMoney;
 
-    RANK(MatchedCount matchedCount, Money prizeMoney) {
+    Rank(MatchedCount matchedCount, Money prizeMoney) {
         this.matchedCount = matchedCount;
         this.prizeMoney = prizeMoney;
     }
 
     public static Money getPrizeMoney(MatchedCount count) {
-        return Arrays.stream(RANK.values())
+        return Arrays.stream(Rank.values())
                 .filter(rank -> count.equals(rank.matchedCount))
                 .findFirst()
                 .map(rank -> rank.prizeMoney)
@@ -36,7 +36,7 @@ public enum RANK {
     }
 
     public static Money receivePrize(MatchedCount count, int number){
-        return Arrays.stream(RANK.values())
+        return Arrays.stream(Rank.values())
                 .filter(rank -> count.equals(rank.matchedCount))
                 .findFirst()
                 .map(rank -> rank.prizeMoney.multiply(number))
