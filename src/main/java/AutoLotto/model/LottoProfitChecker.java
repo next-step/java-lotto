@@ -24,7 +24,7 @@ public class LottoProfitChecker {
     }
 
     public BigDecimal getProfitRatio(Long purchaseAmount) {
-        if (purchaseAmount == ZERO_PURCHASE_AMOUNT) {
+        if (purchaseAmount.equals(ZERO_PURCHASE_AMOUNT)) {
             return BigDecimal.ZERO;
         }
 
