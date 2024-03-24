@@ -10,18 +10,26 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static lotto.view.InputView.COMMA_BLANK_DELIMITER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
-    LottoGeneratingStrategy lottoGeneratingStrategyStub = () -> {
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
+    LottoGeneratingStrategy lottoGeneratingStrategyStub = new LottoGeneratingStrategy() {
+        @Override
+        public Lottos lottos(int totalNumberOfLottoToPurchase) {
+            Lotto lotto = Lotto.valueOf(Stream.of(1, 2, 3, 4, 5, 6)
+                    .map(LottoNumber::valueOf)
+                    .collect(Collectors.toList()));
 
-        return Lotto.valueOf(lottoNumbers);
+            List<Lotto> lottos = IntStream.range(0, totalNumberOfLottoToPurchase)
+                    .mapToObj(i -> lotto)
+                    .collect(Collectors.toList());
+
+            return Lottos.valueOf(lottos);
+        }
     };
 
     @ParameterizedTest
@@ -29,7 +37,8 @@ class LottosTest {
     @DisplayName("statistics(): 로또의 결과(당첨 통계, 수익률)를 반환합니다.")
     void testStatistics(String winningNumbersInput, int bonusNumberInput, Rank rank, double expectedRateOfReturn) {
         PurchaseAmountOfMoney purchaseAmountOfMoney = PurchaseAmountOfMoney.valueOf(1000);
-        Lottos lottos = LottoStore.purchaseLotto(lottoGeneratingStrategyStub, purchaseAmountOfMoney.numberOfLottoToPurchase());
+        Lottos lottos = lottoGeneratingStrategyStub.lottos(purchaseAmountOfMoney.numberOfLottoToPurchase());
+
         WinningNumbers winningNumbers = WinningNumbers.valueOf(winningNumbersForTest(winningNumbersInput));
         BonusNumber bonusNumber = BonusNumber.newBonusNumberWithOutWinningNumbers(LottoNumber.valueOf(bonusNumberInput), winningNumbers);
         WinningAndBonusNumbers winningAndBonusNumbers = WinningAndBonusNumbers.newWinningAndBonusNumbers(winningNumbers, bonusNumber);

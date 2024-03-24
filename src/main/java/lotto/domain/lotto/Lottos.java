@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import lotto.domain.PurchaseAmountOfMoney;
 import lotto.domain.WinningAndBonusNumbers;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
@@ -17,7 +18,7 @@ public class Lottos {
     }
 
     public List<Lotto> lottos() {
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 
     public StatisticsOfLottos statistics(WinningAndBonusNumbers winningAndBonusNumbers, PurchaseAmountOfMoney purchaseAmountOfMoney) {
