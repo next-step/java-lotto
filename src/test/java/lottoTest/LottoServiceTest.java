@@ -10,7 +10,7 @@ public class LottoServiceTest {
     @Test
     void getWinningRateTest() {
         LottoService lottoService = new LottoService();
-        ResultLotto resultLotto = lottoService.youOnlyLiveOnce(1000);
+        ResultLotto resultLotto = lottoService.buyLottos(1000);
         int buyCount = resultLotto.totallottoCount();
         int winningAmount = resultLotto.getWinningAmount();
 

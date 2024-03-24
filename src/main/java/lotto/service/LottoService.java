@@ -7,11 +7,23 @@ import lotto.model.ResultLotto;
 import java.util.List;
 
 public class LottoService {
-    public ResultLotto youOnlyLiveOnce(int seedMoney) {
+    private final ResultLotto resultLotto;
+
+    public LottoService() {
+        this.resultLotto = new ResultLotto();
+    }
+
+    public ResultLotto buyLottos(int seedMoney) {
         int lottoCount = LottoOutlet.lottoCount(seedMoney);
         List<Lotto> buyLottos = LottoOutlet.generateLottos(lottoCount);
-        int totalWinningAmount = LottoOutlet.getWinnings(buyLottos, List.of(11,12,13,4,5,6));
 
-        return new ResultLotto(seedMoney, buyLottos, totalWinningAmount);
+        resultLotto.recordBuyLottos(buyLottos);
+        return resultLotto;
+    }
+
+    public ResultLotto checkLottoResult(List<Integer> winningNumbers) {
+        resultLotto.recordWinningNumbers(winningNumbers);
+
+        return resultLotto;
     }
 }
