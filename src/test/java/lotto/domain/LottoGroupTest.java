@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -19,6 +20,7 @@ class LottoGroupTest {
     }
 
     @Test
+    @DisplayName("1 ~ 45 사이의 중복되지 않고 오름차순으로 정렬된 6개 정수 생성(1,2,3,4,5,6)")
     void generate() {
         lottoGroup.generateTickets(cash);
         LottoGroup otherLottoGroup = new LottoGroup(generator);

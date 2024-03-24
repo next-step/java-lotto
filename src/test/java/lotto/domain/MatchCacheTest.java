@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -28,6 +29,7 @@ public class MatchCacheTest {
     }
 
     @ParameterizedTest
+    @DisplayName("일치 개수 저장(1 -> [1,0,0,0,0,0], 3 -> 1 -> [0,0,1,0,0,0], 5 -> 1 -> [0,0,0,0,1,0])")
     @MethodSource("saveStateMethodSource")
     void save_state(int matchCount, int[] result) {
         matchCache.save(matchCount);
@@ -35,6 +37,7 @@ public class MatchCacheTest {
     }
 
     @Test
+    @DisplayName("일치 개수 누적 저장(1,1,3,3,3,5 -> [2,0,3,0,1,0])")
     void save_accumulate_state() {
         matchCache.save(1);
         matchCache.save(1);

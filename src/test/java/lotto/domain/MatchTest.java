@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -23,6 +24,7 @@ public class MatchTest {
     }
 
     @ParameterizedTest
+    @DisplayName("2 개의 배열 중에 하나라도 null이면 예외")
     @NullSource
     void if_null(List<Integer> nullList) {
         assertThatThrownBy(() -> {
@@ -35,6 +37,7 @@ public class MatchTest {
     }
 
     @ParameterizedTest
+    @DisplayName("두 개의 배열을 비교하여 일치하는 개수 반환((1,2,3],[1,2,3]) => 3, ([1,0,4],[1,2,3]) => 1, ([1],[1,2,3,4]) =>1, ([4,3],[1,2,3,4]) => 2")
     @MethodSource("passInputListAndResult")
     void if_not_null(List<Integer> sources, List<Integer> targets, int result) {
         int matchCount = Match.getCount(sources, targets);
