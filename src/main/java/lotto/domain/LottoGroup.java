@@ -6,16 +6,25 @@ import java.util.Objects;
 
 public class LottoGroup {
     private final NumbersGenerator generator;
-    private final List<List<Integer>> tickets = new ArrayList<>();
+    private Lotto tickets;
 
     public LottoGroup(NumbersGenerator generator) {
+        this(generator, null);
+    }
+
+    public LottoGroup(NumbersGenerator generator, Lotto tickets) {
         this.generator = generator;
+        this.tickets = tickets;
     }
 
     public void generateTickets(Cash cash) {
-        for (int i = 0; i < cash.getAmount(); i++) {
-            tickets.add(generator.generate());
-        }
+        Lotto lotto = new Lotto();
+        lotto.generateLottoNumbers(this.generator.generate(), cash.getAmount());
+        this.tickets = lotto;
+    }
+
+    public void saveMatchResult(List<Integer> latestWinningNumbers, MatchCache matchCache, Profit profit){
+        tickets.saveMatchResult(latestWinningNumbers, matchCache, profit);
     }
 
     @Override
@@ -29,19 +38,5 @@ public class LottoGroup {
     @Override
     public int hashCode() {
         return Objects.hash(generator, tickets);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (List<Integer> ticket : this.tickets) {
-            sb.append(ticket);
-            sb.append("\n");
-        }
-        return sb.toString();
-    }
-
-    public List<List<Integer>> getTickets() {
-        return tickets;
     }
 }

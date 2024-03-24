@@ -20,7 +20,7 @@ public class LottoClient {
         List<Integer> latestWinningNumbers = insertLatestWinningNumbers();
         Profit profit = new Profit(0);
         MatchCache matchCache = new MatchCache();
-        cacheMatchResultAndCalculateProfit(lottoGroup, latestWinningNumbers, profit, matchCache);
+        lottoGroup.saveMatchResult(latestWinningNumbers, matchCache, profit);
         printResult(cash, profit, matchCache);
     }
 
@@ -41,14 +41,6 @@ public class LottoClient {
         printPlainMessage("당첨 통계");
         printPlainMessage("---------");
         printPlainMessage(profit.toString(cash));
-    }
-
-    private static void cacheMatchResultAndCalculateProfit(LottoGroup lottoGroup, List<Integer> latestWinningNumbers, Profit profit, MatchCache matchCache) {
-        lottoGroup.getTickets().forEach(iter -> {
-            int count = Match.getCount(latestWinningNumbers, iter);
-            matchCache.save(count);
-            profit.accumulate(count);
-        });
     }
 
     private static List<Integer> getLatestWinningNumbers() {
