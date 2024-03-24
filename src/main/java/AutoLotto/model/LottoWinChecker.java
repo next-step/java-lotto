@@ -1,89 +1,60 @@
 package autoLotto.model;
 
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
-
-import static autoLotto.model.LottoConstants.*;
+import java.util.Map;
+import java.util.Set;
 
 public class LottoWinChecker {
-    private static final String INVALID_WIN_NUMBERS = "당첨 번호의 개수는 0 ~ 6개이며, 각 번호는 1 이상 45 이하의 값만 가능합니다.";
+    private Lotto winLotto;
 
-    private HashMap<Integer, Integer> winLottos;
-
-    public LottoWinChecker(String winNumbersAsString, List<Lotto> lottos) {
-        this.winLottos = createWinLotto(winNumbersAsString, lottos);
+    public LottoWinChecker(List<String> winNumbers) {
+        this.winLotto = Lotto.createLottoFrom(winNumbers);
     }
 
-    private HashMap<Integer, Integer> createWinLotto(String winNumbersAsString, List<Lotto> lottos) {
-        List<Integer> winLotto = retrieveWinLotto(winNumbersAsString);
-        if (!isValidWinNumbersSize(winLotto) || !isValidWinNumbers(winLotto)) {
-            throw new IllegalArgumentException(INVALID_WIN_NUMBERS);
-        }
-        return countWinLotto(winLotto, lottos);
+    public Map<PrizeEnum, Integer> checkWinLottos(List<Lotto> lottos, int bonusNumber) {
+        return countMatchedWinLottos(lottos, bonusNumber);
     }
 
-    private List<Integer> retrieveWinLotto(String winNumbersInString) {
-        Lotto lotto = new Lotto(winNumbersInString);
-        return lotto.getLotto();
-    }
-
-    private boolean isValidWinNumbersSize(List<Integer> winLotto) {
-        if (winLotto.size() != VALID_LOTTO_LENGTH) {
-            return false;
-        }
-
-        return true;
-    }
-
-    private boolean isValidWinNumbers(List<Integer> winLotto) {
-        Collections.sort(winLotto);
-        return isNumberInValidRange(winLotto.get(0)) && isNumberInValidRange(winLotto.get(VALID_LOTTO_LENGTH - 1));
-    }
-
-    private boolean isNumberInValidRange(int number) {
-        return number >= LOTTO_START_NUMBER && number <= LOTTO_END_NUMBER;
-    }
-
-    private HashMap<Integer, Integer> countWinLotto(List<Integer> winLotto, List<Lotto> lottos) {
-        HashMap<Integer, Integer> result = new HashMap<>();
+    private Map<PrizeEnum, Integer> countMatchedWinLottos(List<Lotto> lottos, int bonusNumber) {
+        Map<PrizeEnum, Integer> result = new EnumMap<>(PrizeEnum.class);
 
         for (Lotto lotto : lottos) {
-            int countOfWinNumbers = compareWinNumbers(winLotto, lotto);
-            saveOnlyPrize(result, countOfWinNumbers);
+            int countOfWinNumbers = compareWinNumbers(lotto);
+            boolean isBonusMatched = compareBonusNumber(lotto, bonusNumber, countOfWinNumbers);
+            PrizeEnum prize = PrizeEnum.getPrizeFrom(countOfWinNumbers, isBonusMatched);
+            result.put(prize, result.getOrDefault(prize, 0) + 1);
         }
 
         return result;
     }
 
-    private int compareWinNumbers(List<Integer> winLotto, Lotto lotto) {
-        List<Integer> targetLotto = lotto.getLotto();
+
+    private int compareWinNumbers(Lotto lotto) {
+        Set<LottoNumber> targetLotto = lotto.getLotto();
         int matchingNumbers = 0;
 
-        for (int number : targetLotto) {
-            matchingNumbers += hasWinNumber(winLotto, number);
+        for (LottoNumber number : targetLotto) {
+            matchingNumbers += hasWinNumber(number.getLottoNumber());
         }
 
         return matchingNumbers;
     }
 
-    private void saveOnlyPrize(HashMap<Integer, Integer> result, int countOfWinNumbers) {
-        if (countOfWinNumbers < PrizeResultEnum.THREE_MATCHED.getIndex()) {
-            return;
+
+    private boolean compareBonusNumber(Lotto userLotto, int bonusNumber, int countOfWinNumbers) {
+        if (countOfWinNumbers != PrizeEnum.SECOND.getMatchedCount()) {
+            return false;
         }
 
-        result.put(countOfWinNumbers, result.getOrDefault(countOfWinNumbers, 0) + 1);
+        return userLotto.containsNumber(bonusNumber);
     }
 
-    private int hasWinNumber(List<Integer> winLotto, int targetNumber) {
-        if(winLotto.contains(targetNumber)) {
+    private int hasWinNumber(Integer targetLottoNumber) {
+        if (winLotto.containsNumber(targetLottoNumber)) {
             return 1;
         }
 
         return 0;
-    }
-
-    public HashMap<Integer, Integer> getWinLottos() {
-        return this.winLottos;
     }
 }

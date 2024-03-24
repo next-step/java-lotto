@@ -1,11 +1,12 @@
 package autoLotto.model;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+
+import static autoLotto.model.LottoConstants.VALID_LOTTO_LENGTH;
 
 public class RandomLottoGeneratorStrategy implements LottoGeneratorStrategy {
     @Override
-    public List<Integer> lottoGenerator(List<Integer> lotto) {
+    public Set<LottoNumber> lottoGenerator(List<Integer> lotto) {
         shuffleRandomNumbers(lotto);
         return getSixNumbers(lotto);
     }
@@ -14,8 +15,24 @@ public class RandomLottoGeneratorStrategy implements LottoGeneratorStrategy {
        Collections.shuffle(lotto);
     }
 
-    private List<Integer> getSixNumbers(List<Integer> lotto) {
-        return lotto.subList(0, 6);
+    private Set<LottoNumber> getSixNumbers(List<Integer> lotto) {
+        List<LottoNumber> lottoNumbers = convertIntegerListToLottoNumberList(lotto);
+        return new LinkedHashSet<>(lottoNumbers);
     }
 
+    private List<LottoNumber> convertIntegerListToLottoNumberList(List<Integer> lotto) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+        for(int i = 0; i < VALID_LOTTO_LENGTH; i++) {
+            int number = lotto.get(i);
+            lottoNumbers.add(new LottoNumber(number));
+        }
+
+        orderByLottoNumber(lottoNumbers);
+        return lottoNumbers;
+    }
+
+    private void orderByLottoNumber(List<LottoNumber> lottoNumbers) {
+        Collections.sort(lottoNumbers, Comparator.comparing(LottoNumber::getLottoNumber));
+    }
 }

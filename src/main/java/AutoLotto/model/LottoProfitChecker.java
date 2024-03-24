@@ -1,46 +1,37 @@
 package autoLotto.model;
 
-import java.util.HashMap;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Map;
 
 public class LottoProfitChecker {
-    private static final Long INIT_BENEFIT = 0L;
+    private static final Long ZERO_PURCHASE_AMOUNT = 0L;
+    private BigDecimal profit;
 
-    private Long profit;
-
-    public LottoProfitChecker(HashMap<Integer, Integer> winLottos) {
+    public LottoProfitChecker(Map<PrizeEnum, Integer> winLottos) {
         this.profit = getTotalPrizes(winLottos);
     }
 
-    private Long getTotalPrizes(HashMap<Integer, Integer> winLottos) {
-        Long totalWinAmount = INIT_BENEFIT;
+    private BigDecimal getTotalPrizes(Map<PrizeEnum, Integer> winLottos) {
+        BigDecimal totalWinAmount = BigDecimal.ZERO;
 
-        for (Integer key : winLottos.keySet()) {
-            totalWinAmount += (getPrizeAmount(key) * winLottos.get(key));
+        for (PrizeEnum prize : winLottos.keySet()) {
+            BigDecimal prizeResult = BigDecimal.valueOf(prize.getPrize() * winLottos.get(prize));
+            totalWinAmount = totalWinAmount.add(prizeResult);
         }
 
         return totalWinAmount;
     }
 
-    private Long getPrizeAmount(int index) {
-        return PrizeResultEnum.getPrizeByIndex(index);
-    }
-
-    public float getProfitRatio(String purchaseAmount) {
-        float purchaseAmountAsFloat = stringToFloat(purchaseAmount);
-        return calculateProfitRatio(purchaseAmountAsFloat);
-    }
-
-    private float calculateProfitRatio(float purchaseAmount) {
-        if (purchaseAmount == INIT_BENEFIT) {
-            return 0f;
+    public BigDecimal getProfitRatio(Long purchaseAmount) {
+        if (purchaseAmount.equals(ZERO_PURCHASE_AMOUNT)) {
+            return BigDecimal.ZERO;
         }
 
-        float profitRatio = profit / purchaseAmount;
-        return profitRatio;
+        return calculateProfitRatio(BigDecimal.valueOf(purchaseAmount));
     }
 
-    private float stringToFloat(String string) {
-        return Float.parseFloat(string);
+    private BigDecimal calculateProfitRatio(BigDecimal purchaseAmount) {
+        return profit.divide(purchaseAmount, 2, RoundingMode.DOWN);
     }
-
 }

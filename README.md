@@ -63,18 +63,23 @@
 
 ---
 ## Main
-### `AutoLotto.java`
+### `autoLotto.java`
 - [x] InputView, OutputView 객체를 사용하여 입력값에 따른 로또 생성 및 출력을 담당
   - [x] 이때 모든 입력값에 대한 결과 타입은 `String`으로 반환하며, 이를 어떻게 변환하여 어떠한 로또로 생성할지는 각 객체에게 위임
  
 ## Model
-### `Lotto.java`
-- [x] 주입된 List<Integer> 따라 로또를 생성
-  - [x] 6개의 숫자로 1~45 범위에서 로또를 생성하는지 체크하는 방어 로직 적용
+### `LottoNumber.java`
+- [x] 로또의 번호 1개를 가진 클래스
+  - [x] 해당 번호의 유효성 검사 방어 로직 적용
 
+### `Lotto.java`
+- [x] 주입된 `Set<LottoNumber>`, 또는 `List<String>`을 따라 로또를 생성
+  - [x] 6개의 숫자로 1~45 범위에서 로또를 생성하는지 체크하는 방어 로직 적용
+  - [x] `containsNumber` 메서드를 통해 파라미터로 주어진 번호가 자신의 로또 번호에 있는지 판단
+  
 ### `LottoGenerator.java`
 - [x] 1~45번까지 저장된 디폴트 로또를 생성
-- [x] `AutoLotto`에서 최초로 주입되어 결론적으로 `LottoMachine`에서 주입된 로또 생성 전략 패턴에 따라 로또의 번호를 변환하여 반환
+- [x] `autoLotto`에서 최초로 주입되어 결론적으로 `LottoMachine`에서 주입된 로또 생성 전략 패턴에 따라 로또의 번호를 변환하여 반환
 
 ### `LottoMachine.java`
 - [x] 구매금액만큼 로또를 생성
@@ -82,21 +87,20 @@
   - [x] 이때 주어진 로또 생성 전략 패턴에 따라 로또를 생성
 
 ### `LottoWinChecker.java`
-- [x] 당첨 번호와 유저가 구입한 로또를 비교하여 상금을 받는 로또의 개수만 저장하는 `HashMap`타입의 클래스 변수인 `winLottos`에 저장하는 객체
-  - [x] 이때 Key값은 번호의 개수 (3이상, 6이하), value는 매칭된 번호 개수만큼 상금을 받는 로또의 개수  
-  - [x] 6개의 숫자로 1~45 범위에서 당첨번호가 유요한지 체크하는 방어 로직 적용
-  - [x] `winLottos`에 저장되는 우승 로또의 데이터는 `PrizeResultEnum`에서 인덱스를 참고하여 저장
+- [x] 당천 번호를 받아 `Lotto` 클래스로 저장 
+- [x] 당첨 번호와 유저가 구입한 로또를 비교하여 상금을 받는 로또의 정보를 반환하는 `countMatchedWinLottos()` 메서드 추가
+  - [x] `EnumMap<PrizeEnum, Integer>`로 반환
+  - [x] 이때 Key값은 당첨 숫자에 해당되는 `PrizeEnum` 객체를, value는 매칭된 번호 개수만큼 상금을 받는 로또의 개수
   
 ### `LottoProfitChecker.java`
 - [x] `LottoWinChecker`에서 얻게된 당첨 로또 정보를 통해 전체 상금을 구하는 객체
-  - [x] 이때 당첨 금액은 `Long`으로 저장 
+  - [x] 이때 당첨 금액은 `BigDecimal`로 저장 
 - [x] 로또 구입 금액(=`purchaseAmount`)를 파라미터로 받아 바로 위에서 구한 전체 상금과 나누어 최종적으로 얻게된 우승 상금을 반환하는 `calculateProfitRation()`도 존재
-  - [x] 수익률은 `float`으로 반환
+  - [x] 수익률은 `BigDecimal`로 반환
 
-### `PrizeResultEnum.java `
-- [x] 우승 번호와 매칭되는 로또 번호의 개수에 따른 index(`LottoWinChecker`, `LottoProfitChecker`에 사용), description(`ResultView`에 사용), prize(`LottoProfitChecker`)에 사용되는 정보들을 저장한 enum 클래스
-  - [x] 존재하지 않는 index로 description 조회시 `null`을 반환
-  - [x] 존재하지 않는 prize를 조회할 경우 0을 반환
+### `PrizeEnum.java `
+- [x] 우승 번호와 매칭되는 로또 번호의 개수에 따른 `matchedCount`(= 매칭되는 번호 개수), `prize`(= 그에 따른 상금), `isBonusMatched` (= 보너스 번호 매칭 여부)의 정보들을 저장한 enum 클래스
+  - [x] 매칭되는 숫자(= `matchedCount`)와 보너스 볼 존재 여부(= `isBonusMatched`)에 따라 `PrizeEnum`을 생성하는 `getPrizeFrom` 생성자 메서드 작성
 
 ## Exception
 ### `PurchaseException.java`
@@ -110,13 +114,21 @@
   - [x] 구매값은 `string`으로 반환
 - [x] 로또 우승 번호의 입력값을 받음
   - [x] 6개의 숫자를 1~45 범위에서 받는지 체크하는 방어 로직 적용 
-  - [x] 우승번호는 `string`으로 반환
+  - [x] 우승번호는 `List<String>`으로 반환
 
-### `OutputView.java`
+### `ResultView.java`
 - [x] 구매한 로또 개수를 출력
 - [x] 구매한 자동로또를 모두 출력
 - [x] 당첨된 로또의 정보를 출력
 - [x] 최종 수익률을 출력
+
+### 테스트 코드
+- [x] `LottoGeneratorTest.java`
+- [x] `LottoMachineTest.java`
+- [x] `LottoProfitCheckerTest.java`
+- [x] `LottoTest.java`
+- [x] `LottoWinCheckerTest.java`
+- [x] `PrizeResultEnumTest.java`
 
 ### 컨벤션
 - [x] Java : Intellij idea Code Style java 적용
