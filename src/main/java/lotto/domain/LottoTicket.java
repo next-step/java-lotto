@@ -3,25 +3,26 @@ package lotto.domain;
 import lotto.domain.strategy.LottoTicketCreateGenerator;
 
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import static lotto.domain.strategy.LottoTicketCreateGenerator.LOTTO_MAX_NUMBER;
+import static lotto.domain.strategy.LottoTicketCreateGenerator.LOTTO_MIN_NUMBER;
 
 public class LottoTicket {
 
-  public static final String INVALID_LOTTO_NUMBER_INPUT = "해당 숫자는 로또 번호 범위가 아닙니다. 번호를 다시 확인해주세요. input: %s";
   public static final String INVALID_LOTTO_NUMBER_SIZE = "입력 개수를 다시 확인해주세요. input: %s";
 
-  private final Set<Integer> lottoNumbers;
+  private final Set<LottoNo> lottoNumbers;
 
   private LottoTicket(Set<Integer> lottoNumbers) {
-
-    if (!checkNumbersRange(lottoNumbers)) {
-      throw new IllegalArgumentException(String.format(INVALID_LOTTO_NUMBER_INPUT, lottoNumbers));
-    }
 
     if (lottoNumbers.size() != 6) {
       throw new IllegalArgumentException(String.format(INVALID_LOTTO_NUMBER_SIZE, lottoNumbers));
     }
 
-    this.lottoNumbers = lottoNumbers;
+    this.lottoNumbers = lottoNumbers.stream()
+        .map(LottoNo::of)
+        .collect(Collectors.toSet());
   }
 
   public static LottoTicket generate(LottoTicketCreateGenerator generator) {
@@ -37,10 +38,11 @@ public class LottoTicket {
   }
 
   public boolean haveCorrectNumbers() {
-    return checkNumbersRange(this.lottoNumbers);
+    return lottoNumbers.stream()
+        .allMatch(number -> LOTTO_MIN_NUMBER <= number.getNo() && number.getNo() <= LOTTO_MAX_NUMBER);
   }
 
-  public boolean isSame(Set<Integer> numbers) {
+  public boolean isSame(Set<LottoNo> numbers) {
     return this.lottoNumbers.equals(numbers);
   }
 
@@ -50,24 +52,11 @@ public class LottoTicket {
         .count();
   }
 
-  public boolean contain(int value) {
+  public boolean contain(LottoNo value) {
     return this.lottoNumbers.contains(value);
   }
 
-  public Set<Integer> getLottoNumbers() {
+  public Set<LottoNo> getLottoNumbers() {
     return lottoNumbers;
-  }
-
-  private boolean checkNumbersRange(Set<Integer> numbers) {
-    return numbers.stream()
-        .allMatch(number ->
-            LottoTicketCreateGenerator.minNumber() <= number &&
-            number <= LottoTicketCreateGenerator.maxNumber()
-        );
-  }
-
-  @Override
-  public String toString() {
-    return lottoNumbers.toString();
   }
 }

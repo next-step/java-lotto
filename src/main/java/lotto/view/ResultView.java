@@ -1,13 +1,13 @@
 package lotto.view;
 
+import lotto.domain.LottoNo;
 import lotto.domain.LottoProfit;
 import lotto.domain.LottoTicket;
 import lotto.domain.type.RewardPrice;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -26,7 +26,7 @@ public class ResultView {
 
   public void printLottoProfitRate(LottoProfit lottoProfit) {
     StringBuilder sb = new StringBuilder('\n');
-    sb.append("당첨 통계").append('\n').append("---------").append('\n');
+    sb.append('\n').append("당첨 통계").append('\n').append("---------").append('\n');
 
     lottoProfit.getProfitMap().forEach((key, value) -> {
       sb.append(printMatchingCountResult(key));
@@ -36,9 +36,13 @@ public class ResultView {
     sb.append("총 수익률은 ").append(lottoProfit.calculateProfitRate()).append("입니다.");
     System.out.println(sb);
   }
+
   private static String sortByAsc(LottoTicket lottoTicket) {
-    List<Integer> sortedList = new ArrayList<>(lottoTicket.getLottoNumbers());
-    Collections.sort(sortedList);
+    List<Integer> sortedList = lottoTicket.getLottoNumbers()
+        .stream()
+        .map(LottoNo::getNo)
+        .sorted()
+        .collect(Collectors.toList());
     return sortedList.toString();
   }
 
