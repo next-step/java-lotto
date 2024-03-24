@@ -23,6 +23,10 @@
 
 **[테스트]**
 * 로또번호는 6개만 가질 수 있습니다
+* Lotto는 7개 이상의 LottoNumber를 가질 경우 Exception이 발생한다.
+* createAutoLottos는 구매 횟수 만큼 로또번호를 생성해야합니다.
+* Lotto는 어떤 LottoNumber가 전달될 경우 LottoNumber가 Lotto에 포함될 경우 참을 반환합니다.
+* Lotto는 자신의 크기를 반환합니다.
 
 
 ### WinningNumbers
