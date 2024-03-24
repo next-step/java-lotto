@@ -1,4 +1,2 @@
-package lotto.domain;
-
-public class LottoMatchTest {
+package lotto.domain;public class LottoMatchTest {
 }
