@@ -13,6 +13,10 @@ public class LottoNumber {
         return Match.getCount(latestWinningNumbers, this.numbers);
     }
 
+    public boolean isBonusContains(Integer bonusNumber){
+        return Match.getCount(numbers, bonusNumber);
+    }
+
     @Override
     public String toString() {
         return this.numbers.toString();

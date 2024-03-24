@@ -18,21 +18,32 @@ public class ProfitTest {
     }
 
     @ParameterizedTest
-    @DisplayName("수익금 계산(0 => 1, 1 => 0, 2 => 0, 3 => 5000, 4 => 50000, 5 => 1500000, 6 => 2000000000)")
-    @CsvSource(value = {"0:0", "1:0", "2:0", "3:5000", "4:50000", "5:1500000", "6:2000000000"}, delimiter = ':')
-    void one_time(int input, int result) {
-        profit.accumulate(input);
+    @DisplayName("수익금 계산(0 => 1, 1 => 0, 2 => 0, 3 => 5000, 4 => 50000, 5,false => 1500000, 5,true => 30000000, 6 => 2000000000)")
+    @CsvSource(value = {"0:false:0", "1:false:0", "2:false:0", "3:false:5000", "4:false:50000", "5:true:30000000", "5:false:1500000", "6:false:2000000000"}, delimiter = ':')
+    void one_time(int input, boolean isBonus, int result) {
+        profit.accumulate(input, isBonus);
         assertThat(profit).isEqualTo(new Profit(result));
     }
 
     @Test
     @DisplayName("누적 수익금 계산(3,3,4,6 => 2000060000)")
     void many_times() {
-        profit.accumulate(3);
-        profit.accumulate(3);
-        profit.accumulate(4);
-        profit.accumulate(6);
+        profit.accumulate(3, false);
+        profit.accumulate(3, false);
+        profit.accumulate(4, false);
+        profit.accumulate(6, false);
         assertThat(profit).isEqualTo(new Profit(2000060000));
+    }
+
+    @Test
+    @DisplayName("보너스가 포함된 누적 수익금 계산(3,3,4,6 => 2030060000)")
+    void many_times_with_bonus() {
+        profit.accumulate(3, false);
+        profit.accumulate(3, false);
+        profit.accumulate(4, false);
+        profit.accumulate(5, true);
+        profit.accumulate(6, false);
+        assertThat(profit).isEqualTo(new Profit(2030060000));
     }
 
     @ParameterizedTest

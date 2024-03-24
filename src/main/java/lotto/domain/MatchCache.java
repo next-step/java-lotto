@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 
 public class MatchCache {
-    private int[] counts = new int[6];
+    private int[] counts = new int[7];
 
     public MatchCache() {
     }
@@ -12,7 +12,11 @@ public class MatchCache {
         this.counts = counts;
     }
 
-    public void save(int matchCount) {
+    public void save(int matchCount, boolean isBonus) {
+        if(matchCount == 5 && isBonus){
+            this.counts[6]++;
+            return;
+        }
         this.counts[matchCount - 1]++;
     }
 

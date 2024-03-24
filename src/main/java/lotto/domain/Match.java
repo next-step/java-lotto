@@ -9,4 +9,10 @@ public class Match {
                 .filter(targets::contains)
                 .count();
     }
+
+    public static boolean getCount(List<Integer> sources, Integer bonusNumber) {
+        if (sources == null || bonusNumber == null) throw new IllegalArgumentException();
+        return sources.stream()
+                .anyMatch(bonusNumber::equals);
+    }
 }

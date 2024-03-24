@@ -18,7 +18,7 @@ public class LottoClient {
         List<Integer> latestWinningNumbers = insertLatestWinningNumbers();
         Profit profit = new Profit(0);
         MatchCache matchCache = new MatchCache();
-        lottoGroup.saveMatchResult(latestWinningNumbers, matchCache, profit);
+        lottoGroup.saveMatchResult(latestWinningNumbers, 0, matchCache, profit);
         printResult(cash, profit, matchCache);
     }
 

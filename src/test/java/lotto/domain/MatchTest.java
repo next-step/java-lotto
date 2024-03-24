@@ -23,6 +23,13 @@ public class MatchTest {
         );
     }
 
+    private static Stream<Arguments> bonusInputAndResult() {
+        return Stream.of(
+                Arguments.of(List.of(1, 2, 3), 2, true),
+                Arguments.of(List.of(1, 2, 3), 5, false)
+        );
+    }
+
     @ParameterizedTest
     @DisplayName("2 개의 배열 중에 하나라도 null이면 예외")
     @NullSource
@@ -42,5 +49,13 @@ public class MatchTest {
     void if_not_null(List<Integer> sources, List<Integer> targets, int result) {
         int matchCount = Match.getCount(sources, targets);
         assertThat(matchCount).isEqualTo(result);
+    }
+
+    @ParameterizedTest
+    @DisplayName("보너스 번호가 있는지 확인(([1,2,3], 2) => true, ([1,2,3], 5) => false")
+    @MethodSource("bonusInputAndResult")
+    void if_bonus(List<Integer> source, int bonusNumber, boolean result){
+        boolean isBonusContain = Match.getCount(source, bonusNumber);
+        assertThat(isBonusContain).isEqualTo(result);
     }
 }
