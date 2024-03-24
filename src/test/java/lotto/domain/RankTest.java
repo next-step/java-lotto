@@ -20,29 +20,31 @@ public class RankTest {
     @Nested
     class Describe_valueOf {
 
-        @DisplayName("일치하는 숫자의 개수에 따른 등수를 반환한다.")
-        @ParameterizedTest(name = "{index}번째 테스트: 숫자가 {0}개 일치하면 {1}")
+        @DisplayName("일치하는 숫자의 개수와 보너스 일치 여부에 따른 등수를 반환한다.")
+        @ParameterizedTest(name = "{index}번째 테스트: 숫자가 {0}개 일치하고 보너스 당첨여부가 {1}면, {2}")
         @MethodSource("rankByMatchCount")
-        void it_returns_rank_when_less_than_six(int matchCount, Rank expectedRank) {
-            assertThat(Rank.valueOf(matchCount)).isEqualTo(expectedRank);
+        void it_returns_rank_when_less_than_six(int matchCount, boolean bonusMatch, Rank expectedRank) {
+            assertThat(Rank.valueOf(new LottoMatchCount(matchCount), bonusMatch))
+                    .isEqualTo(expectedRank);
         }
 
         @DisplayName("로또의 최대 숫자 개수보다 큰 숫자를 입력하면, IllegalArgumentException을 던진다.")
         @Test
         void it_throws_illegalArgumentException_when_greater_than_six() {
             assertThatIllegalArgumentException()
-                    .isThrownBy(() -> Rank.valueOf(7));
+                    .isThrownBy(() -> Rank.valueOf(new LottoMatchCount(7), false));
         }
 
         Stream<Arguments> rankByMatchCount() {
             return Stream.of(
-                    Arguments.of(0, Rank.NEXT_CHANCE),
-                    Arguments.of(1, Rank.NEXT_CHANCE),
-                    Arguments.of(2, Rank.NEXT_CHANCE),
-                    Arguments.of(3, Rank.FIFTH),
-                    Arguments.of(4, Rank.FOURTH),
-                    Arguments.of(5, Rank.SECOND),
-                    Arguments.of(6, Rank.FIRST)
+                    Arguments.of(0, false, Rank.NEXT_CHANCE),
+                    Arguments.of(1, true, Rank.NEXT_CHANCE),
+                    Arguments.of(2, true, Rank.NEXT_CHANCE),
+                    Arguments.of(3, false, Rank.FIFTH),
+                    Arguments.of(4, false, Rank.FOURTH),
+                    Arguments.of(5, false, Rank.THIRD),
+                    Arguments.of(5, true, Rank.SECOND),
+                    Arguments.of(6, false, Rank.FIRST)
             );
         }
 
