@@ -10,9 +10,6 @@ public class FeeTest {
     @Test
     @DisplayName("입력값 몇게임인지 파악하는 메서드")
     void 몇게임() {
-        /*
-        인트를 받아서 -> 버짓 객체 생성
-         */
         assertThat(new Fee(14000).convertToGameUnit()).isEqualTo(14);
     }
 }
