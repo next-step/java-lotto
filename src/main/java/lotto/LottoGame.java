@@ -6,30 +6,36 @@ import java.util.stream.Stream;
 
 public class LottoGame {
 
-    List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
-    public LottoGame(long lottoPrice, long purchaseBudget) {
-        this(Stream.generate(Lotto::new)
-                .limit(purchaseBudget / lottoPrice)
-                .collect(Collectors.toList())
-        );
+    public LottoGame(Money budget, Money lottoPrice) {
+        this(buyLottos(budget, lottoPrice));
     }
 
     public LottoGame(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    public int hasLottoCount() {
-        return lottos.size();
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
-    public double produceStatistics(long lottoPrice, Lotto lastWeekWin) {
-        long totalPrize = 0L;
-        for (Lotto l : lottos) {
-            int i = l.countMatchedNumber(lastWeekWin);
-            totalPrize += RANK.receivePrize(i);
-        }
+    private static List<Lotto> buyLottos(Money budget, Money lottoPrice) {
+        return Stream.generate(Lotto::new)
+                .limit(budget.purchase(lottoPrice))
+                .collect(Collectors.toList());
+    }
 
-        return Math.floor((double) totalPrize / lottoPrice * 100) / 100.0;
+    public RankMap getPrizeByRank(Lotto winningLotto) {
+        List<MatchedCount> collect = lottos.stream()
+                .map(lotto -> lotto.countMatchedNumber(winningLotto))
+                .filter(MatchedCount::isWin)
+                .collect(Collectors.toList());
+        return new RankMap(collect);
+    }
+
+    @Override
+    public String toString() {
+        return lottos.toString();
     }
 }
