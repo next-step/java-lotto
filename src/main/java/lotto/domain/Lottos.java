@@ -26,9 +26,10 @@ public class Lottos {
         lottos.forEach(action);
     }
 
-    public LottoMatchCounts matchCounts(Lotto winningNumbers) {
-        return new LottoMatchCounts(lottos.stream()
-                .map(lotto -> lotto.matchCount(winningNumbers))
+    public Ranks ranks(Lotto winningNumbers, LottoNumber bonusNumber) {
+        return new Ranks(lottos.stream()
+                .map(lotto -> lotto.rank(winningNumbers, bonusNumber))
                 .collect(Collectors.toList()));
     }
+
 }

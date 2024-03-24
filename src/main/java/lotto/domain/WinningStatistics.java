@@ -7,8 +7,8 @@ import java.util.Map;
 public class WinningStatistics {
     private final Map<Rank, Count> ranks = new HashMap<>();
 
-    public WinningStatistics(LottoMatchCounts matchCounts) {
-        this(matchCounts.ranks());
+    public WinningStatistics(Ranks ranks) {
+        this(ranks.values());
     }
 
     public WinningStatistics(List<Rank> ranks) {

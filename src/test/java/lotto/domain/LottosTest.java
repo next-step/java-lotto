@@ -21,4 +21,6 @@ public class LottosTest {
         Lottos lottos = new Lottos(List.of(new Lotto(numbers)));
         assertThat(lottos.isEmpty()).isFalse();
     }
+
+
 }
