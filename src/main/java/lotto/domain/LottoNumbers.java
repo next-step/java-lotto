@@ -1,19 +1,27 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
-public class LottoNumbers implements Iterable<Integer> {
+public class LottoNumbers implements Iterable<LottoNumber> {
     private static final int MATCH_COUNT = 1;
     private static final int NOT_MATCH_COUNT = 0;
+    private static final int SIZE = 6;
 
-    private final List<Integer> lottoNumber;
+    private final List<LottoNumber> lottoNumber;
 
     public LottoNumbers(List<Integer> lottoNumber) {
-        this.lottoNumber = new ArrayList<>(lottoNumber);
+        if (new HashSet<>(lottoNumber).size() != SIZE) {
+            throw new IllegalArgumentException("로또는 중복되지 않은 6개의 숫자여야 합니다.");
+        }
+
+        this.lottoNumber = lottoNumber.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
         Collections.sort(this.lottoNumber);
     }
 
-    private int contains(int number) {
+    private int contains(LottoNumber number) {
         if (lottoNumber.contains(number)) {
             return MATCH_COUNT;
         }
@@ -22,7 +30,7 @@ public class LottoNumbers implements Iterable<Integer> {
 
     public int compare(LottoNumbers lottoNumbers) {
         int matchCount = 0;
-        for (Integer winningNumber : lottoNumbers) {
+        for (LottoNumber winningNumber : lottoNumbers) {
             matchCount += contains(winningNumber);
         }
         return matchCount;
@@ -42,7 +50,7 @@ public class LottoNumbers implements Iterable<Integer> {
     }
 
     @Override
-    public Iterator<Integer> iterator() {
+    public Iterator<LottoNumber> iterator() {
         return lottoNumber.iterator();
     }
 }

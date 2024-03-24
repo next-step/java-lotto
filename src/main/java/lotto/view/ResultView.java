@@ -45,8 +45,8 @@ public class ResultView {
 
     private void printLottoNumbers(LottoNumbers lottoNumbers) {
         StringJoiner stringJoiner = new StringJoiner(DELIMITER);
-        for (Integer lottoNumber : lottoNumbers) {
-            stringJoiner.add(String.valueOf(lottoNumber));
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            stringJoiner.add(String.valueOf(lottoNumber.getNumber()));
         }
         System.out.print(stringJoiner);
     }

@@ -3,10 +3,16 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoNumbersTest {
 
@@ -15,6 +21,27 @@ public class LottoNumbersTest {
     @BeforeEach
     void setUp() {
         answerLottoNumber = new LottoNumbers(Arrays.asList(1,2,3,4,5,6));
+    }
+
+    @ParameterizedTest
+    @DisplayName("로또 번호는 6개여야 한다.")
+    @ValueSource(ints = {5,7})
+    void checkLottoNumbersSizeTest(int size) {
+        List<Integer> inputList = IntStream.range(0, size)
+                .boxed()
+                .collect(Collectors.toList());
+
+        assertThatThrownBy(() -> new LottoNumbers(inputList))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("6개의 숫자");
+    }
+
+    @Test
+    @DisplayName("로또 번호는 중복되지 않은 6개의 숫자가 아니면 실패한다.")
+    void checkLottoNumbersSizeTest() {
+        assertThatThrownBy(() -> new LottoNumbers(Arrays.asList(1,1,2,3,4,5)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("6개의 숫자");
     }
 
     @Test
