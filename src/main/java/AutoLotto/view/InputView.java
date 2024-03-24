@@ -1,7 +1,9 @@
 package autoLotto.view;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import static autoLotto.model.LottoConstants.*;
 
@@ -48,11 +50,11 @@ public class InputView {
         return inputLong / DIVISION_UNIT >= 1;
     }
 
-    public String inputWinNumbers() {
+    public List<String> inputWinNumbers() {
         return confirmWinNumbers();
     }
 
-    private String confirmWinNumbers() {
+    private List<String> confirmWinNumbers() {
         outputQuestion(WIN_NUMBERS_QUESTION);
         String input = scanner.nextLine();
         input = removeAllEmptySpaces(input);
@@ -63,11 +65,7 @@ public class InputView {
             input = removeAllEmptySpaces(input);
         }
 
-        return input;
-    }
-
-    private String removeAllEmptySpaces(String input) {
-        return input.replaceAll("\\s", "");
+        return convertStringToListString(input);
     }
 
     private boolean isValidInputWinNumbers(String input) {
@@ -83,6 +81,15 @@ public class InputView {
 
         int[] numbers = stringsToInts(values);
         return isValidWinNumber(numbers);
+    }
+
+    private String removeAllEmptySpaces(String input) {
+        return input.replaceAll("\\s", "");
+    }
+
+    private List<String> convertStringToListString(String input) {
+        return Arrays.stream(splitNumbersByComma(input))
+                .collect(Collectors.toList());
     }
 
     private String[] splitNumbersByComma(String input) {
