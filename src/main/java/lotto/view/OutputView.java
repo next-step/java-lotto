@@ -1,6 +1,11 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.rank.Rank;
+import lotto.domain.statistics.Count;
+import lotto.domain.statistics.WinningStatistics;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,5 +1,7 @@
-package lotto.domain;
+package lotto.domain.statistics;
 
+import lotto.domain.Cash;
+import lotto.domain.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,4 +1,8 @@
-package lotto.domain;
+package lotto.domain.statistics;
+
+import lotto.domain.Cash;
+import lotto.domain.rank.Rank;
+import lotto.domain.rank.Ranks;
 
 import java.util.HashMap;
 import java.util.List;
