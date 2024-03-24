@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.strategy.ShuffleStrategy;
 import lotto.domain.type.RewardPrice;
 
 import java.util.*;
@@ -17,10 +18,12 @@ public class LottoTickets {
   public static LottoTickets purchaseBy(int amount) {
     PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
     int ticketCount = purchaseAmount.ticketCount();
-    
+
     Set<LottoTicket> lottoTickets = new HashSet<>();
+    ShuffleStrategy shuffleStrategy = new ShuffleStrategy();
+
     for (int i = 0; i < ticketCount; i++) {
-      lottoTickets.add(LottoTicket.generate());
+      lottoTickets.add(LottoTicket.generate(shuffleStrategy));
     }
     return new LottoTickets(purchaseAmount, lottoTickets);
   }
