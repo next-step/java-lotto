@@ -6,8 +6,10 @@ import lotto.domain.LottoTicket;
 import lotto.domain.WinningNumber;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import static lotto.domain.LottoMachine.*;
 

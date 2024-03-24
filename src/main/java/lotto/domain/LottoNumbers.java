@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,6 +18,8 @@ public class LottoNumbers {
 
     public static LottoNumbers from(List<Integer> numbers) {
         validate(numbers);
+        Collections.sort(numbers);
+
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int number : numbers) {
             lottoNumbers.add(LottoNumber.valueOf(number));

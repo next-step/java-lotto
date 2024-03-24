@@ -15,8 +15,6 @@ public class ShuffledNumberDrawer implements NumberDrawer{
 
         Collections.shuffle(result);
 
-        return result.subList(0, size).stream()
-                .sorted()
-                .collect(Collectors.toList());
+        return result.subList(0, size);
     }
 }
