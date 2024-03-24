@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import lotto.error.SizeExceedLottoNumberException;
+import java.util.Collections;
+import java.util.List;
+import lotto.error.exception.SizeExceedLottoNumberException;
 
 public enum LottoNumber {
     ONE(1),
@@ -65,6 +67,7 @@ public enum LottoNumber {
             .filter(lottoNumber -> lottoNumber.getLottoNumber() == value)
             .findFirst()
             .orElseThrow(() -> new SizeExceedLottoNumberException(value));
+    }
 
     public static List<LottoNumber> createRandomLottoNumbers() {
         List<LottoNumber> allLottoNumbers = Arrays.asList(LottoNumber.values());
@@ -72,8 +75,9 @@ public enum LottoNumber {
         return allLottoNumbers.subList(0, 6);
     }
 
-    public int getLottoNumber() {
-        return lottoNumber;
+    @Override
+    public String toString() {
+        return String.valueOf(lottoNumber);
     }
 }
 
