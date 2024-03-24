@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoMachine;
 import lotto.domain.lotto.PurchaseAmount;
@@ -11,7 +12,7 @@ import lotto.view.Output;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
         PurchaseAmount purchaseAmount = new PurchaseAmount(Input.inputPurchaseAmount());
         Output.printPurchaseCount(purchaseAmount);
 

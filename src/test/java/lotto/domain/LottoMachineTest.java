@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import lotto.domain.grade.Grade;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoMachine;
@@ -136,7 +137,8 @@ class LottoMachineTest {
 
     @Test
     @DisplayName("LottoMachine은 autoLottos와 WinningNuber를 사용하여 당첨통계(WinningStatistice)를 반환한다")
-    public void LottoMachine_Should_Return_Winning_Statistics_Using_Auto_Lottos_and_Winning_Number(){
+    public void LottoMachine_Should_Return_Winning_Statistics_Using_Auto_Lottos_and_Winning_Number()
+        throws ExecutionException, InterruptedException {
         //given
         Lotto firstGradeLotto = Lotto.fromValues(Arrays.asList(1, 2, 3, 4, 5, 6));     //  1등 로또
         Lotto secondGradeLotto = Lotto.fromValues(Arrays.asList(1, 2, 3, 4, 5, 10));   //  2등 로또
