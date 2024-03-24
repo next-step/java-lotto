@@ -52,3 +52,10 @@
 - [X] 수동 로또 수 만큼 로또번호 입력 기능 구현 (LottoNumbers -> LottoTicket)
 - [X] LottoTicket을 합치는 기능 구현
 - [X] LottoGame 수동 로또 로직으로 수정 
+
+## 4단계 Todo
+- [ ] LottoNumber 인스턴스 캐싱 처리
+- [ ] LottoNumbers의 valid() 메서드 명을 동사로 수정
+- [ ] 입출력을 위한 문자열을 View Layer로 모두 이관
+- [ ] 수동 입력 시 정렬되지 않는 버그 수정
+- [ ] 수동 입력 시 수익률 계산에서 누락되는 버그 수정
