@@ -4,33 +4,33 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Numbers {
+public class LottoNumbers {
     private final Set<Integer> numbers;
 
-    public Numbers(List<Integer> numbers) {
+    public LottoNumbers(List<Integer> numbers) {
         this.numbers = new HashSet<>(numbers);
     }
 
-    public static Numbers toNumbers(String input) {
+    public static LottoNumbers toNumbers(String input) {
         if (isBlank(input)) {
             throw new IllegalArgumentException();
         }
-        return new Numbers(toInts(splitInput(input)));
+        return new LottoNumbers(toInts(splitInput(input)));
     }
 
     private static String[] splitInput(String line) {
         return line.split(",");
     }
 
-    public static Numbers random() {
+    public static LottoNumbers random() {
         List<Integer> list = IntStream.rangeClosed(1, 45)
                 .boxed().collect(Collectors.toList());
         Collections.shuffle(list);
-        return new Numbers(list.subList(0, 6));
+        return new LottoNumbers(list.subList(0, 6));
     }
 
-    public int matchNumberCount(Numbers winningNumbers) {
-        return (int) winningNumbers.getNumbers().stream()
+    public int matchNumberCount(LottoNumbers winningLottoNumbers) {
+        return (int) winningLottoNumbers.getNumbers().stream()
                 .filter(numbers::contains)
                 .count();
     }
