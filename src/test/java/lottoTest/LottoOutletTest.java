@@ -1,7 +1,10 @@
 package lottoTest;
 
+import lotto.Lotto;
 import lotto.LottoOutlet;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -10,5 +13,11 @@ public class LottoOutletTest {
     @CsvSource(value = {"14000:14", "1000:1", "0:0", "750:0", "1500:1"}, delimiter = ':')
     void moneyToLottoCount(int money, int expectedLottoCount) {
         Assertions.assertThat(LottoOutlet.lottoCount(money)).isEqualTo(expectedLottoCount);
+    }
+
+    @Test
+    @DisplayName("로또를 발급하는 기능")
+    void generateLottoTest() {
+        Assertions.assertThat(LottoOutlet.generateLotto()).isInstanceOf(Lotto.class);
     }
 }
