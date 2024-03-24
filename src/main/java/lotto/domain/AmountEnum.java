@@ -24,6 +24,10 @@ public enum AmountEnum {
 		return amount;
 	}
 
+	public Integer getCollectedCount() {
+		return collectedCount;
+	}
+
 	public static AmountEnum from(final Integer collectedCount, final Boolean isBonus) {
 		if (isSecond(collectedCount, isBonus)) {
 			return AmountEnum.SECOND;
