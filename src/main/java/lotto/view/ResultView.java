@@ -30,6 +30,7 @@ public class ResultView {
         printWinningResult(winLottos);
         printRevenueResult(revenueRatio);
     }
+
     private static void printWinningResult(Map<Integer, Integer> lottoResult) {
         for (Integer key : lottoResult.keySet()) {
             System.out.println(getPriceResult(key, lottoResult.get(key)));
@@ -50,11 +51,10 @@ public class ResultView {
 
     private static void printRevenueResult(float revenue) {
         if (revenue == 0) {
-            System.out.println("\n총 수익률은 0 입니다.");
+            System.out.println("\n총 수익률은 0 입니다.\n");
             return;
         }
 
-        String result = String.format("\n총 수익률은 %.2f 입니다.", revenue);
-        System.out.println(result);
+        System.out.printf("\n총 수익률은 %.2f 입니다.\n", revenue);
     }
 }

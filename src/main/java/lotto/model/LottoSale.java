@@ -12,8 +12,7 @@ public class LottoSale {
     }
 
     private List<Lotto> generateLottos(String purchaseAmount, LottoStrategy lottoStrategy) {
-        int purchaseChance = Validator.validatePurchaseAmount(purchaseAmount);
-        return purchaseLottos(purchaseChance, lottoStrategy);
+        return purchaseLottos(Validator.validatePurchaseAmount(purchaseAmount), lottoStrategy);
     }
 
     private List<Lotto> purchaseLottos(int count, LottoStrategy lottoStrategy) {
@@ -27,8 +26,7 @@ public class LottoSale {
     }
 
     private Lotto getAutoLotto(LottoStrategy lottoStrategy) {
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        List<Integer> randomLotto = lottoGenerator.generateLottoNumbers(lottoStrategy);
+        List<Integer> randomLotto = new LottoGenerator().generateLottoNumbers(lottoStrategy);
         Collections.sort(randomLotto);
 
         return new Lotto(randomLotto);

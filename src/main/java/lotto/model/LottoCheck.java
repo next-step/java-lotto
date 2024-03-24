@@ -11,16 +11,14 @@ public class LottoCheck {
 
     private Map<Integer, Integer> createWinLotto(String winningNumber, List<Lotto> lottos) {
         List<Integer> winLotto = findWinLotto(winningNumber);
-
         Validator.validateLotto(winLotto);
-//        if (!Validator.isValidLottoSize(winLotto) || !Validator.isValidLottoNumbers(winLotto)) {
-//            throw new IllegalArgumentException("당첨 번호의 개수는 0 ~ 6개이며, 각 번호는 1 이상 45 이하의 값만 가능합니다.");
-//        }
+
         return countWinLotto(winLotto, lottos);
     }
 
     private List<Integer> findWinLotto(String winningNumber) {
         Lotto lotto = new Lotto(winningNumber);
+
         return lotto.getLotto();
     }
 
@@ -28,8 +26,8 @@ public class LottoCheck {
         Map<Integer, Integer> result = new HashMap<>();
 
         for (Lotto lotto : lottos) {
-            int countOfWinNumbers = compareWinNumbers(winLotto, lotto);
-            saveOnlyPrize(result, countOfWinNumbers);
+            int winNumberCount = compareWinNumbers(winLotto, lotto);
+            includedRankCheck(result, winNumberCount);
         }
 
         return result;
@@ -37,6 +35,7 @@ public class LottoCheck {
 
     private int compareWinNumbers(List<Integer> winLotto, Lotto lotto) {
         List<Integer> targetLotto = lotto.getLotto();
+
         int matchingNumbers = 0;
 
         for (int number : targetLotto) {
@@ -46,19 +45,17 @@ public class LottoCheck {
         return matchingNumbers;
     }
 
-    private void saveOnlyPrize(Map<Integer, Integer> result, int countOfWinNumbers) {
-        if (countOfWinNumbers < LottoRank.THREE_MATCHED.getMatchCount()) {
+    private void includedRankCheck(Map<Integer, Integer> result, int winNumberCount) {
+        if (winNumberCount < 3) {
             return;
         }
-
-        result.put(countOfWinNumbers, result.getOrDefault(countOfWinNumbers, 0) + 1);
+        result.put(winNumberCount, result.getOrDefault(winNumberCount, 0) + 1);
     }
 
     private int hasWinNumber(List<Integer> winLotto, int targetNumber) {
         if(winLotto.contains(targetNumber)) {
             return 1;
         }
-
         return 0;
     }
 

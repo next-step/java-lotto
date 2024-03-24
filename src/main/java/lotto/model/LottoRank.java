@@ -3,7 +3,6 @@ package lotto.model;
 import java.util.Arrays;
 
 public enum LottoRank {
-
     THREE_MATCHED(3,5000, "4등"),
     FOUR_MATCHED(4,50000, "3등"),
     FIVE_MATCHED(5,1500000, "2등"),

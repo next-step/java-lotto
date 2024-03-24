@@ -1,9 +1,6 @@
 package lotto.model;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Validator {
@@ -35,7 +32,7 @@ public class Validator {
     }
 
     private static boolean isNotDuplicatedNumbers(List<Integer> lottoNumers) {
-        Set<Integer> numbers = lottoNumers.stream().collect(Collectors.toSet());
+        Set<Integer> numbers = new HashSet<>(lottoNumers);
         return numbers.stream().distinct().count() == lottoNumers.size();    }
 
     public static boolean isValidLottoNumbers(List<Integer> lottoNumers) {
@@ -54,7 +51,7 @@ public class Validator {
     }
 
     public static List<Integer> convertStringToIntegers(String input) {
-        String[] values = splitNumbersByComma(input);
+        String[] values = splitNumbers(input);
         return stringsToListInteger(values);
     }
 
@@ -62,7 +59,7 @@ public class Validator {
         return Arrays.stream(values).map(Integer::valueOf).collect(Collectors.toList());
     }
 
-    public static String[] splitNumbersByComma(String input) {
+    public static String[] splitNumbers(String input) {
         return input.split(",");
     }
 }

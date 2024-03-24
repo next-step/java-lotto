@@ -23,23 +23,15 @@ public class LottoRevenueCheck {
         return LottoRank.getPrice(count);
     }
 
-    public float getRevenueRatio(String purchaseAmount) {        
-        //float purchaseAmountAsFloat = stringToFloat(purchaseAmount);
-        float purchaseAmountFloat = Float.parseFloat(purchaseAmount);
-        return calculateRevenueRatio(purchaseAmountFloat);
+    public float getRevenueRatio(String purchaseAmount) {
+        return calculateRevenueRatio(Float.parseFloat(purchaseAmount));
     }
 
     private float calculateRevenueRatio(float purchaseAmount) {
         if (purchaseAmount == 0) {
             return 0f;
         }
-
         return revenue / purchaseAmount;
     }
-
-//    private float stringToFloat(String string) {
-//System.out.println("stringToFloat :" + string);
-//        return Float.parseFloat(string);
-//    }
 
 }
