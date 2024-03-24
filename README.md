@@ -59,4 +59,5 @@
 - [X] 입출력을 위한 문자열을 View Layer로 모두 이관
 - [X] 수동 입력 시 정렬되지 않는 버그 수정
 - [X] 수동 입력 시 수익률 계산에서 누락되는 버그 수정
-- [X] LottoTicket 생성 시 자동, 수동 LottoNumbers를 각각 인자로 받아 생성하도록 수정 
+- [X] LottoTicket 생성 시 자동, 수동 LottoNumbers를 각각 인자로 받아 생성하도록 수정
+- [ ] LottoNumber를 Comparable의 구현체로 변경
