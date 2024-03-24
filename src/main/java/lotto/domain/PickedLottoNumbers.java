@@ -1,18 +1,14 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class PickedLottoNumbers implements Iterable<LottoNumbers> {
-    private List<LottoNumbers> lottoNumbersList;
 
-    public PickedLottoNumbers() {
-        this.lottoNumbersList = new ArrayList<>();
-    }
+    private final List<LottoNumbers> lottoNumbersList;
 
-    public void add(LottoNumbers lottoNumbers) {
-        lottoNumbersList.add(lottoNumbers);
+    public PickedLottoNumbers(List<LottoNumbers> lottoNumbersList) {
+        this.lottoNumbersList = lottoNumbersList;
     }
 
     @Override

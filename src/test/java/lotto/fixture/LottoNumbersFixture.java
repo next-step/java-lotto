@@ -19,8 +19,8 @@ public enum LottoNumbersFixture {
 
     LottoNumbersFixture(List<Integer> winningNumbers, List<Integer> pickedNumbers, Rank rank) {
         this.winningNumbers = new LottoNumbers(winningNumbers);
-        this.pickedNumbers = new PickedLottoNumbers();
-        this.pickedNumbers.add(new LottoNumbers(pickedNumbers));
+        LottoNumbers lottoNumbers = new LottoNumbers(pickedNumbers);
+        this.pickedNumbers = new PickedLottoNumbers(List.of(lottoNumbers));
         this.rank = rank;
     }
 

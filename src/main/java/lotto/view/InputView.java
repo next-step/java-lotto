@@ -1,8 +1,5 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
-import lotto.domain.Money;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;

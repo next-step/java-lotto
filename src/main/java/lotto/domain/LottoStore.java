@@ -1,18 +1,24 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoStore {
+    private static final Integer PRICE = 1000;
 
-    private final LottoPicker lottoPicker;
+    private final LottoGenerateStrategy lottoPickStrategy;
 
-    public LottoStore(LottoPicker lottoPicker) {
-        this.lottoPicker = lottoPicker;
+    public LottoStore(LottoGenerateStrategy lottoPickStrategy) {
+        this.lottoPickStrategy = lottoPickStrategy;
     }
 
-    public PickedLottoNumbers buyLotto(LottoCount lottoCount) {
-        PickedLottoNumbers pickedLottoNumbers = new PickedLottoNumbers();
-        for (int count=0; count < lottoCount.getLottoCount(); count++) {
-            pickedLottoNumbers.add(lottoPicker.pickLotto());
+    public PickedLottoNumbers buy(Money money) {
+        List<LottoNumbers> pickedLottoNumbers = new ArrayList<>();
+        int totalCount = money.getMoney() / PRICE;
+
+        for (int count = 0; count < totalCount; count++) {
+            pickedLottoNumbers.add(lottoPickStrategy.generateLottoNumbers());
         }
-        return pickedLottoNumbers;
+        return new PickedLottoNumbers(pickedLottoNumbers);
     }
 }
