@@ -14,12 +14,12 @@ public class LottoMachine {
 
     private List<Lotto> createLottos(int quotient) {
         return IntStream.range(0, quotient)
-                .mapToObj(it -> new Lotto(Numbers.random()))
+                .mapToObj(it -> new Lotto(LottoNumbers.random()))
                 .collect(Collectors.toList());
     }
 
-    public LottoSummary summarizeLotto(Numbers winningNumbers, Lottos lottos) {
-        return new LottoSummary(lottos.createResult(winningNumbers), new Money(getPayMoney(lottos.count())));
+    public LottoSummary summarizeLotto(LottoNumbers winningLottoNumbers, Lottos lottos) {
+        return new LottoSummary(lottos.createResult(winningLottoNumbers), new Money(getPayMoney(lottos.count())));
     }
 
     private int getPayMoney(int buyLottoCount) {

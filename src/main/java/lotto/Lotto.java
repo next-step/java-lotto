@@ -3,18 +3,18 @@ package lotto;
 
 public class Lotto {
 
-    private Numbers numbers;
+    private LottoNumbers lottoNumbers;
 
-    public Lotto(Numbers numbers) {
-        this.numbers = numbers;
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public Numbers getNumbers() {
-        return numbers;
+    public LottoNumbers getNumbers() {
+        return lottoNumbers;
     }
 
-    public LottoResult match(Numbers winningNumbers) {
-        return new LottoResult(numbers.matchNumberCount(winningNumbers));
+    public LottoResult match(LottoNumbers winningLottoNumbers) {
+        return new LottoResult(lottoNumbers.matchNumberCount(winningLottoNumbers));
     }
 
 }

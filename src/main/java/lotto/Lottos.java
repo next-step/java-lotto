@@ -15,9 +15,9 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<LottoResult> createResult(Numbers winningNumbers) {
+    public List<LottoResult> createResult(LottoNumbers winningLottoNumbers) {
         return lottos.stream()
-                .map(lotto -> lotto.match(winningNumbers))
+                .map(lotto -> lotto.match(winningLottoNumbers))
                 .collect(Collectors.toList());
     }
 

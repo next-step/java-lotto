@@ -23,9 +23,9 @@ public class LottoProgram {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String line = scanner.next();
 
-        Numbers winningNumbers = Numbers.toNumbers(line);
+        LottoNumbers winningLottoNumbers = LottoNumbers.toNumbers(line);
 
-        LottoSummary summary = machine.summarizeLotto(winningNumbers, lottos);
+        LottoSummary summary = machine.summarizeLotto(winningLottoNumbers, lottos);
         lottoView.printLottoSummary(summary);
     }
 }

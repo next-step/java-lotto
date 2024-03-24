@@ -28,17 +28,17 @@ class LottoMachineTest {
 
         LottoMachine sut = new LottoMachine();
         Lottos lottos = 로또_번호_지정_생성(
-                new Numbers(List.of(1, 2, 3, 4, 5, 6)),
-                new Numbers(List.of(1, 2, 3, 4, 5, 8)));
+                new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)),
+                new LottoNumbers(List.of(1, 2, 3, 4, 5, 8)));
 
-        LottoSummary summary = sut.summarizeLotto(new Numbers(List.of(1, 2, 3, 4, 5, 6)), lottos);
+        LottoSummary summary = sut.summarizeLotto(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), lottos);
         assertThat(summary.getFirstRankCount()).isEqualTo(1);
         assertThat(summary.getSecondRankCount()).isEqualTo(1);
         assertThat(summary.getThirdRankCount()).isEqualTo(0);
         assertThat(summary.getForthRankCount()).isEqualTo(0);
     }
 
-    public Lottos 로또_번호_지정_생성(Numbers... numbers) {
+    public Lottos 로또_번호_지정_생성(LottoNumbers... numbers) {
         return new Lottos(Arrays.stream(numbers)
                 .map(Lotto::new)
                 .collect(Collectors.toList()));
