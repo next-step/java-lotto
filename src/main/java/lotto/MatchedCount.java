@@ -29,12 +29,12 @@ public class MatchedCount {
         if (this == o) return true;
         if (!(o instanceof MatchedCount)) return false;
         MatchedCount that = (MatchedCount) o;
-        return count == that.count;
+        return count == that.count && isBonus == that.isBonus;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(count);
+        return Objects.hash(count, isBonus);
     }
 
     @Override
