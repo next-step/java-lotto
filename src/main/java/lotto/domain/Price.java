@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Price {
@@ -19,7 +19,7 @@ public class Price {
     }
 
     // integers: 당첨번호와 일치하는 각 등수별 당첨 횟수
-    public double calculateRateOfReturn(List<Integer> integers) {
+    public double calculateRateOfReturn(Map<Prize, Integer> integers) {
         int totalRevenue = calculateTotalRevenue(integers);
         int quotient = calculateQuotient(totalRevenue);
         double secondQuotient = calculateFirstDemicalPlace(quotient);
@@ -39,11 +39,14 @@ public class Price {
         return totalRevenue / price;
     }
 
-    private int calculateTotalRevenue(List<Integer> integers) {
+    private int calculateTotalRevenue(Map<Prize, Integer> integers) {
         int totalRevenue = 0;
         Prize[] values = Prize.values();
-        for (int i = 0; i < values.length - 1; i++) {
-            totalRevenue += values[i + 1].getWinningMoney() * integers.get(i);
+//        for (int i = 0; i < values.length - 1; i++) {
+//            totalRevenue += values[i + 1].getWinningMoney() * integers.get(values[i + 1]);
+//        }
+        for (Prize prize : integers.keySet()) {
+            totalRevenue += prize.getWinningMoney() * integers.get(prize);
         }
         return totalRevenue;
     }

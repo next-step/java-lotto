@@ -7,6 +7,7 @@ import lotto.domain.Prizes;
 import lotto.domain.WinningNumbers;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoMatchingService {
@@ -23,7 +24,7 @@ public class LottoMatchingService {
         this.bonusBall = bonusBall;
     }
 
-    public List<Integer> matchWinningNumber(List<LottoTicket> lottoTickets) {
+    public Map<Prize, Integer> matchWinningNumber(List<LottoTicket> lottoTickets) {
         List<Prize> prizes = lottoTickets.stream()
                 .map(lottoTicket -> Prize.valueOf(
                         winningNumbers.countMatchingWith(lottoTicket.generate()), isMatchBonusBall(lottoTicket))

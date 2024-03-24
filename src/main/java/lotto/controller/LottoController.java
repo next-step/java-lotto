@@ -28,14 +28,15 @@ public class LottoController {
         inputView.inputNextLine();
 
         LottoMachine lottoMachine = new LottoMachine(numbersOfLotto);
-        lottoMachine.generateLottoTickets();
+        //lottoMachine.generateLottoTickets();
         resultView.printLottoTicketsNumbers(lottoMachine.getLottoTickets());
         resultView.printDoInputWinningNumbers();
 
         List<Integer> winningNumbers = inputView.getWinningNumbers();
         resultView.printBonusBallNumber();
 
-        resultView.printResult(lottoMachine
+        resultView.printResult(
+                lottoMachine
                 , winningNumbers
                 , price
                 , new BonusBall(inputView.getBonusBallNumber())

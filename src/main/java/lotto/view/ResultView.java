@@ -8,6 +8,7 @@ import lotto.domain.Price;
 import lotto.domain.Prize;
 
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
 
@@ -31,20 +32,21 @@ public class ResultView {
 
     public void printResult(LottoMachine lottoMachine, List<Integer> winningNumbers, Price price, BonusBall bonusBall) {
         LottoMatchingService lottoMatchingService = new LottoMatchingService(winningNumbers, bonusBall);
-        List<Integer> integers = lottoMatchingService.matchWinningNumber(lottoMachine.generateLottoTickets());
+        Map<Prize, Integer> integers = lottoMatchingService.matchWinningNumber(lottoMachine.generateLottoTickets());
         System.out.println("\n당첨 통계");
         System.out.println("---------");
         Prize[] values = Prize.values();
         for (int i = 0; i < Prize.values().length - 1; i++) {
-            System.out.println(values[i + 1].getMatchCount() + "개 일치 (" + values[i + 1].getWinningMoney() + "원)- " + integers.get(i) + "개");
+            // 갯수가 있으면 출력 없으면 0개라고 출력
+            System.out.println(values[i + 1].getMatchCount() + "개 일치(" + values[i + 1].getWinningMoney() + "원)- " + integers.getOrDefault(values[i + 1], 0) + "개");
             printSecondPrize(i, values, integers);
         }
         System.out.printf("총 수익률은 %.2f", price.calculateRateOfReturn(integers));
     }
 
-    private void printSecondPrize(int i, Prize[] values, List<Integer> integers) {
+    private void printSecondPrize(int i, Prize[] values, Map<Prize, Integer> matchCounts) {
         if (i == 3) {
-            System.out.println(values[i + 1].getMatchCount() + "개 일치, 보너스 볼 일치(" + values[i + 1].getWinningMoney() + "원)- " + integers.get(i) + "개");
+            System.out.println(values[i + 1].getMatchCount() + "개 일치, 보너스 볼 일치(" + values[i + 1].getWinningMoney() + "원)- " + matchCounts.getOrDefault(Prize.SECOND_PRIZE, 0) + "개");
         }
     }
 
