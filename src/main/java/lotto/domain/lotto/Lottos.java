@@ -1,9 +1,6 @@
 package lotto.domain.lotto;
 
-import lotto.domain.BonusNumber;
 import lotto.domain.PurchaseAmountOfMoney;
-import lotto.domain.Rank;
-import lotto.domain.WinningNumbers;
 
 import java.util.List;
 
@@ -22,21 +19,17 @@ public class Lottos {
         return lottos;
     }
 
-    public StatisticsOfLottos statistics(WinningNumbers winningNumbers, BonusNumber bonusNumber, PurchaseAmountOfMoney purchaseAmountOfMoney) {
-        ResultOfLottos resultOfLottos = resultOfLottos(winningNumbers, bonusNumber);
+    public StatisticsOfLottos statistics(WinningAndBonusNumbers winningAndBonusNumbers, PurchaseAmountOfMoney purchaseAmountOfMoney) {
+        ResultOfLottos resultOfLottos = resultOfLottos(winningAndBonusNumbers);
         double rateOfReturn = purchaseAmountOfMoney.rateOfReturn(resultOfLottos.totalWinningMoney());
 
         return StatisticsOfLottos.newLottoResult(resultOfLottos, rateOfReturn);
     }
 
-    private ResultOfLottos resultOfLottos(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+    private ResultOfLottos resultOfLottos(WinningAndBonusNumbers winningAndBonusNumbers) {
         ResultOfLottos resultOfLottos = new ResultOfLottos();
 
-        lottos.forEach(lotto -> {
-            int matchCount = lotto.countOfMatch(winningNumbers);
-            boolean isBonusMatched = bonusNumber.isMatched(lotto.lottoNumbers());
-            resultOfLottos.increaseNumberOfMatchCount(Rank.findRank(matchCount, isBonusMatched));
-        });
+        lottos.forEach(lotto -> resultOfLottos.increaseNumberOfMatchCount(winningAndBonusNumbers.rankOfLotto(lotto)));
 
         return resultOfLottos;
     }

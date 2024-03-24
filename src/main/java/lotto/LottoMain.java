@@ -5,6 +5,7 @@ import lotto.domain.PurchaseAmountOfMoney;
 import lotto.domain.WinningNumbers;
 import lotto.domain.lotto.LottoStore;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.WinningAndBonusNumbers;
 import lotto.domain.lotto.strategy.AutoGeneratingStrategy;
 
 import static lotto.view.InputView.*;
@@ -22,8 +23,9 @@ public class LottoMain {
 
             WinningNumbers winningNumbers = enteredWinningNumbers();
             BonusNumber bonusNumber = enteredBonusNumber(winningNumbers);
+            WinningAndBonusNumbers winningAndBonusNumbers = WinningAndBonusNumbers.newWinningAndBonusNumbers(winningNumbers, bonusNumber);
 
-            printStatisticsOfLottos(lottos.statistics(winningNumbers, bonusNumber, purchaseAmountOfMoney));
+            printStatisticsOfLottos(lottos.statistics(winningAndBonusNumbers, purchaseAmountOfMoney));
 
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());

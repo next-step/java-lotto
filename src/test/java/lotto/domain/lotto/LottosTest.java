@@ -35,8 +35,9 @@ class LottosTest {
         Lottos lottos = LottoStore.purchaseLotto(lottoGeneratingStrategyStub, purchaseAmountOfMoney.numberOfLottoToPurchase());
         WinningNumbers winningNumbers = WinningNumbers.valueOf(winningNumbersForTest(winningNumbersInput));
         BonusNumber bonusNumber = BonusNumber.newBonusNumberWithOutWinningNumbers(LottoNumber.valueOf(bonusNumberInput), winningNumbers);
+        WinningAndBonusNumbers winningAndBonusNumbers = WinningAndBonusNumbers.newWinningAndBonusNumbers(winningNumbers, bonusNumber);
 
-        StatisticsOfLottos statisticsOfLottos = lottos.statistics(winningNumbers, bonusNumber, purchaseAmountOfMoney);
+        StatisticsOfLottos statisticsOfLottos = lottos.statistics(winningAndBonusNumbers, purchaseAmountOfMoney);
 
         assertThat(statisticsOfLottos.numberOfMatchCount(rank)).isEqualTo(1);
         assertThat(statisticsOfLottos.rateOfReturn()).isEqualTo(expectedRateOfReturn);
