@@ -3,11 +3,15 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -53,6 +57,30 @@ public class LottoTest {
                     .withMessage("중복되지 않는 번호를 입력해주세요.");
         }
 
+    }
+
+    @DisplayName("rank 함수를 통해 로또의 당첨 정보를 확인할 수 있다.")
+    @ParameterizedTest(name = "구매번호:{0}, 당첨번호: {1} - 보너스({2}), 예상결과: {3}")
+    @MethodSource("rankTestNumbers")
+    void rank(String[] purchasedNumbers, String[] winningNumbers, int bonusNumber, Rank expectedRank) {
+        final Lotto purchased = new Lotto(purchasedNumbers);
+        final Lotto winning = new Lotto(winningNumbers);
+        final LottoNumber bonus = new LottoNumber(bonusNumber);
+
+        assertThat(purchased.rank(winning, bonus)).isEqualTo(expectedRank);
+    }
+
+    static Stream<Arguments> rankTestNumbers() {
+        return Stream.of(
+                Arguments.of(new String[]{"1", "2", "3", "4", "5", "6"}, new String[]{"1", "2", "3", "4", "5", "6"}, 7, Rank.FIRST),
+                Arguments.of(new String[]{"1", "2", "3", "4", "5", "7"}, new String[]{"1", "2", "3", "4", "5", "6"}, 7, Rank.SECOND),
+                Arguments.of(new String[]{"1", "2", "3", "4", "5", "8"}, new String[]{"1", "2", "3", "4", "5", "6"}, 7, Rank.THIRD),
+                Arguments.of(new String[]{"1", "2", "3", "4", "8", "9"}, new String[]{"1", "2", "3", "4", "5", "6"}, 7, Rank.FOURTH),
+                Arguments.of(new String[]{"1", "2", "3", "7", "8", "9"}, new String[]{"1", "2", "3", "4", "5", "6"}, 7, Rank.FIFTH),
+                Arguments.of(new String[]{"1", "2", "7", "8", "9", "10"}, new String[]{"1", "2", "3", "4", "5", "6"}, 7, Rank.NEXT_CHANCE),
+                Arguments.of(new String[]{"1", "8", "9", "10", "11", "12"}, new String[]{"1", "2", "3", "4", "5", "6"}, 7, Rank.NEXT_CHANCE),
+                Arguments.of(new String[]{"7", "8", "9", "10", "11", "12"}, new String[]{"1", "2", "3", "4", "5", "6"}, 7, Rank.NEXT_CHANCE)
+        );
     }
 
     @DisplayName("contains 함수를 통해 로또에 특정 숫자가 포함되어 있는지를 확인할 수 있다.")
