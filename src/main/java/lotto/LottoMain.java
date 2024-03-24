@@ -5,7 +5,7 @@ import lotto.domain.PurchaseAmountOfMoney;
 import lotto.domain.WinningNumbers;
 import lotto.domain.lotto.LottoStore;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.WinningAndBonusNumbers;
+import lotto.domain.WinningAndBonusNumbers;
 import lotto.domain.lotto.strategy.AutoGeneratingStrategy;
 
 import static lotto.view.InputView.*;

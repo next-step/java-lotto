@@ -1,8 +1,6 @@
-package lotto.domain.lotto;
+package lotto.domain;
 
-import lotto.domain.BonusNumber;
-import lotto.domain.Rank;
-import lotto.domain.WinningNumbers;
+import lotto.domain.lotto.Lotto;
 
 public class WinningAndBonusNumbers {
     private final WinningNumbers winningNumbers;
