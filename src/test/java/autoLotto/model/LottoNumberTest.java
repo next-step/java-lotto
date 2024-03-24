@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static autoLotto.model.LottoConstants.INVALID_LOTTO_NUMBERS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -13,6 +12,7 @@ class LottoNumberTest {
     private static final int VALID_NUMBER = 1;
     private static final int INVALID_NUMBER = -1;
     private static final int OUT_OF_RANGE_NUMBER = 111;
+    private static final String INVALID_LOTTO_NUMBER = "로또 번호는 1 ~ 45 이하의 숫자 1개의 값만 사용이 가능합니다.";
 
     @Test
     @DisplayName("로또번호 생성 성공 : 유효한 값")
@@ -31,7 +31,7 @@ class LottoNumberTest {
         // when, then
         assertThatThrownBy(() ->  new LottoNumber(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_LOTTO_NUMBERS);
+                .hasMessageContaining(INVALID_LOTTO_NUMBER);
     }
 
 }
