@@ -29,8 +29,16 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
+    public boolean contains(LottoNumber winningNumber) {
+        return lotto.contains(winningNumber);
+    }
+
     public int size(){
         return lotto.size();
     }
 
+    @Override
+    public String toString() {
+        return lotto.toString();
+    }
 }
