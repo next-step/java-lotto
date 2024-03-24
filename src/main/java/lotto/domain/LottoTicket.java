@@ -54,6 +54,10 @@ public class LottoTicket {
     return this.lottoNumbers.contains(value);
   }
 
+  public Set<Integer> getLottoNumbers() {
+    return lottoNumbers;
+  }
+
   private boolean checkNumbersRange(Set<Integer> numbers) {
     return numbers.stream()
         .allMatch(number ->

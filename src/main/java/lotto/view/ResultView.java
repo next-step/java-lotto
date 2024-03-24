@@ -4,6 +4,9 @@ import lotto.domain.LottoProfit;
 import lotto.domain.LottoTicket;
 import lotto.domain.type.RewardPrice;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class ResultView {
@@ -11,14 +14,14 @@ public class ResultView {
   public ResultView() {
   }
 
-  public void printLottoTicketCounts(int count) {
-    System.out.println(count + "개를 구매했습니다.");
+  public void printLottoTicketCounts(int manualTicketCount, int autoTicketCount) {
+    System.out.println("\n수동으로 " + manualTicketCount + "장, 자동으로 " + autoTicketCount + "개를 구매했습니다.");
   }
 
   public void printLottoTickets(Set<LottoTicket> lottoTickets) {
     StringBuilder sb = new StringBuilder();
-    lottoTickets.forEach(lottoTicket -> sb.append(lottoTicket.toString()).append('\n'));
-    System.out.println(sb.append('\n'));
+    lottoTickets.forEach(lottoTicket -> sb.append(sortByAsc(lottoTicket)).append('\n'));
+    System.out.print(sb.append('\n'));
   }
 
   public void printLottoProfitRate(LottoProfit lottoProfit) {
@@ -32,6 +35,11 @@ public class ResultView {
 
     sb.append("총 수익률은 ").append(lottoProfit.calculateProfitRate()).append("입니다.");
     System.out.println(sb);
+  }
+  private static String sortByAsc(LottoTicket lottoTicket) {
+    List<Integer> sortedList = new ArrayList<>(lottoTicket.getLottoNumbers());
+    Collections.sort(sortedList);
+    return sortedList.toString();
   }
 
   private static StringBuilder printMatchingCountResult(RewardPrice key) {

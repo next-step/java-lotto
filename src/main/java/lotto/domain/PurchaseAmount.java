@@ -24,11 +24,11 @@ public class PurchaseAmount {
   }
 
   public boolean isSame(int amount) {
-    return this.autoPurchaseAmount == amount;
+    return (this.autoPurchaseAmount + this.manualPurchaseAmount) == amount;
   }
 
   public int amount() {
-    return autoPurchaseAmount;
+    return this.autoPurchaseAmount + this.manualPurchaseAmount;
   }
 
   private static void validate(int totalPurchaseAmount, int manualPurchaseCount) {
@@ -65,11 +65,11 @@ public class PurchaseAmount {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     PurchaseAmount that = (PurchaseAmount) o;
-    return autoPurchaseAmount == that.autoPurchaseAmount;
+    return autoPurchaseAmount == that.autoPurchaseAmount && manualPurchaseAmount == that.manualPurchaseAmount;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(autoPurchaseAmount);
+    return Objects.hash(autoPurchaseAmount, manualPurchaseAmount);
   }
 }

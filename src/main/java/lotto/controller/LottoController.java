@@ -7,9 +7,6 @@ import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
-import java.util.Set;
-
 public class LottoController {
 
   private final InputView inputView;
@@ -21,20 +18,17 @@ public class LottoController {
   }
 
   public void purchase() {
-
     int inputPurchaseAmount = inputView.receivePurchaseAmount();
-    int manualPurchaseCount = inputView.receiveManualPurchaseCount();
-    List<Set<Integer>> manualLottoNumbers = inputView.receiveManualPurchaseLottos(manualPurchaseCount);
+    int manualTicketCount = inputView.receiveManualPurchaseCount();
 
-    PurchaseAmount purchaseAmount = PurchaseAmount.of(inputPurchaseAmount, manualPurchaseCount);
-    LottoTickets lottoTickets = LottoTickets.purchaseBy(purchaseAmount, manualLottoNumbers);
-
-    resultView.printLottoTicketCounts(lottoTickets.autoTicketCount());
+    LottoTickets lottoTickets = LottoTickets.purchaseBy(
+        PurchaseAmount.of(inputPurchaseAmount, manualTicketCount),
+        inputView.receiveManualPurchaseLottos(manualTicketCount)
+    );
+    resultView.printLottoTicketCounts(manualTicketCount, lottoTickets.autoTicketCount());
     resultView.printLottoTickets(lottoTickets.getTickets());
 
     WinningNumbers winningNumbers = WinningNumbers.of(inputView.receiveWinningNumbers(), inputView.receiveBonusBall());
-    LottoProfit lottoProfit = LottoProfit.of(winningNumbers, lottoTickets);
-
-    resultView.printLottoProfitRate(lottoProfit);
+    resultView.printLottoProfitRate(LottoProfit.of(winningNumbers, lottoTickets));
   }
 }
