@@ -5,13 +5,19 @@ import java.util.Objects;
 public class MatchedCount {
 
     private final long count;
+    private final boolean isBonus;
 
     public MatchedCount(long count) {
+        this(count, false);
+    }
+
+    public MatchedCount(long count, boolean isBonus) {
         this.count = count;
+        this.isBonus = isBonus;
     }
 
     public boolean isEquals(int matchedCount) {
-        return this.count == matchedCount;
+        return this.count == matchedCount && !isBonus;
     }
 
     public boolean isWin() {
