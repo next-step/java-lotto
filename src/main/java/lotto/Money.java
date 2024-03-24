@@ -20,7 +20,7 @@ public class Money {
 
     private long divide(double number) {
         if (this.amount > number) {
-            throw new IllegalArgumentException("로또를 구매하기에 부족한 금액입니다.");
+            throw new IllegalArgumentException(ErrorMessage.ERR_MONEY_INSUFFICIENT.print());
         }
         return (long) (number / this.amount);
     }
