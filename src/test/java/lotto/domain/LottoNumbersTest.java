@@ -11,7 +11,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class LottoNumbersTest {
 
     @Test
-    @DisplayName("선택된 6개의 로또번호 같은지 Test")
+    @DisplayName("선택된 6개의 로또번호가 같아야 한다.")
     void comparePickedLottoTest() {
         // given
         List<Integer> firstPickedLotto = Arrays.asList(1,2,3,4,5,6);

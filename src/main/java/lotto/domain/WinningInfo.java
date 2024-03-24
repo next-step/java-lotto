@@ -14,18 +14,14 @@ public class WinningInfo {
     public static WinningInfo of(PickedLottoNumbers pickedLottoNumbers, LottoNumbers winningNumbers) {
         HashMap<Rank, Integer> winningInfo = new HashMap<>();
         for (LottoNumbers pickedNumber : pickedLottoNumbers) {
-            Rank rank = Rank.findRank(countNumber(pickedNumber, winningNumbers));
+            Rank rank = Rank.findRank(compareLottoNumbers(pickedNumber, winningNumbers));
             winningInfo.put(rank, winningInfo.getOrDefault(rank, 0) + 1);
         }
         return new WinningInfo(winningInfo);
     }
 
-    private static int countNumber(LottoNumbers pickedNumber, LottoNumbers winningNumbers) {
-        int matchCount = 0;
-        for (Integer winningNumber : winningNumbers) {
-            matchCount += pickedNumber.contains(winningNumber);
-        }
-        return matchCount;
+    private static int compareLottoNumbers(LottoNumbers pickedNumber, LottoNumbers winningNumbers) {
+        return pickedNumber.compare(winningNumbers);
     }
 
     public int totalWinningMoney() {
