@@ -39,8 +39,8 @@ public class RankTest {
                     Arguments.of(0, Rank.NEXT_CHANCE),
                     Arguments.of(1, Rank.NEXT_CHANCE),
                     Arguments.of(2, Rank.NEXT_CHANCE),
-                    Arguments.of(3, Rank.FOURTH),
-                    Arguments.of(4, Rank.THIRD),
+                    Arguments.of(3, Rank.FIFTH),
+                    Arguments.of(4, Rank.FOURTH),
                     Arguments.of(5, Rank.SECOND),
                     Arguments.of(6, Rank.FIRST)
             );

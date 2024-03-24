@@ -19,7 +19,7 @@ public class LottoMatchCountsTest {
                 .collect(Collectors.toList());
 
         assertThat(new LottoMatchCounts(counts).ranks())
-                .contains(Rank.values());
+                .contains(Rank.FIRST, Rank.SECOND, Rank.FOURTH, Rank.FIFTH, Rank.NEXT_CHANCE);
     }
 
 }
