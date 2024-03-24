@@ -11,7 +11,7 @@ public class PickedLottoNumbers implements Iterable<LottoNumbers> {
         this.lottoNumbersList = new ArrayList<>();
     }
 
-    public void save(LottoNumbers lottoNumbers) {
+    public void add(LottoNumbers lottoNumbers) {
         lottoNumbersList.add(lottoNumbers);
     }
 

@@ -11,7 +11,7 @@ public class LottoStore {
     public PickedLottoNumbers buyLotto(LottoCount lottoCount) {
         PickedLottoNumbers pickedLottoNumbers = new PickedLottoNumbers();
         for (int count=0; count < lottoCount.getLottoCount(); count++) {
-            pickedLottoNumbers.save(lottoPicker.pickLotto());
+            pickedLottoNumbers.add(lottoPicker.pickLotto());
         }
         return pickedLottoNumbers;
     }
