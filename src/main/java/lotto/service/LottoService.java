@@ -1,4 +1,8 @@
-package lotto;
+package lotto.service;
+
+import lotto.model.Lotto;
+import lotto.model.LottoOutlet;
+import lotto.model.ResultLotto;
 
 import java.util.List;
 

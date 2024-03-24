@@ -1,6 +1,6 @@
 package lottoTest;
 
-import lotto.Lotto;
+import lotto.model.Lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
