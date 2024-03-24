@@ -1,7 +1,7 @@
 package lottoTest;
 
-import lotto.LottoService;
-import lotto.ResultLotto;
+import lotto.service.LottoService;
+import lotto.model.ResultLotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
