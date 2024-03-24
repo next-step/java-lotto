@@ -60,7 +60,7 @@ public enum LottoNumber {
         return lottoNumber;
     }
 
-    public static LottoNumber formInt(int value){
+    public static LottoNumber fromInt(int value) {
         return Arrays.stream(LottoNumber.values())
             .filter(lottoNumber -> lottoNumber.isSame(value))
             .findFirst()
