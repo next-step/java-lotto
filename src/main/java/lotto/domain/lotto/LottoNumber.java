@@ -62,7 +62,7 @@ public enum LottoNumber {
 
     public static LottoNumber fromInt(int value) {
         return Arrays.stream(LottoNumber.values())
-            .filter(lottoNumber -> lottoNumber.isSame(value))
+            .filter(lottoNumber -> lottoNumber.getLottoNumber() == value)
             .findFirst()
             .orElseThrow(() -> new SizeExceedLottoNumberException(value));
 
