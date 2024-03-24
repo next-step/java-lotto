@@ -25,4 +25,11 @@ public class CashTest {
         assertThat(new Cash(cash).buyableAmount(1000))
                 .isEqualTo(expectAmount);
     }
+
+    @DisplayName("buableAmount에 매개변수로 넘기는 제품 금액은 음수나 0이 될 수 없다.")
+    @Test
+    void buyableAmount() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Cash(1000).buyableAmount(0));
+    }
 }
