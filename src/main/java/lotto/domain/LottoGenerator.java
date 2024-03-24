@@ -5,6 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoGenerator {
+
+    private static final int START_NUMBER = 1;
+    private static final int LAST_NUMBER = 45;
+
     public Lottos generateLottos(Fee fee) {
         Lottos lottos = new Lottos();
         for (int i = 0; i < fee.convertToGameUnit(); i++) {
@@ -23,7 +27,7 @@ public class LottoGenerator {
 
     private static List<Integer> rangeOfLotto() {
         List<Integer> lottoGame = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = START_NUMBER; i <= LAST_NUMBER; i++) {
             lottoGame.add(i);
         }
         return lottoGame;
