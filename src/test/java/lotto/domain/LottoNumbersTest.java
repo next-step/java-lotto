@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static lotto.domain.LottoValidator.MAX_LOTTO_NUMBER;
-import static lotto.domain.LottoValidator.MIN_LOTTO_NUMBER;
+import static lotto.domain.LottoNumber.MAX_LOTTO_NUMBER;
+import static lotto.domain.LottoNumber.MIN_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoNumbersTest {
