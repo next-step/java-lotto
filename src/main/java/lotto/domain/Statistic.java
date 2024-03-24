@@ -27,12 +27,12 @@ public enum Statistic {
         return price;
     }
 
-    public boolean isValid() {
+    public boolean isValidMatcher() {
         return this != NONE;
     }
 
     public Integer getMatcher() {
-        if(isValid()) {
+        if(isValidMatcher()) {
             return matchers.get(0);
         }
         return 0;

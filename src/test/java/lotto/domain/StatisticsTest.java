@@ -15,10 +15,9 @@ class StatisticsTest {
     @Test
     void getRateOfReturn() {
         Statistics statistics = new Statistics(List.of(Statistic.THREE, Statistic.FOUR));
-        float result = statistics.getRateOfReturn();
+        float result = statistics.getRateOfReturn(Lotto.LOTTO_PRICE);
 
-        int totalPrice = Statistic.THREE.getPrice() + Statistic.FOUR.getPrice();
-        float expected = (float) totalPrice / (2 * Lotto.LOTTO_PRICE);
+        float expected = 27.5f;
 
         assertThat(result).isEqualTo(expected);
     }

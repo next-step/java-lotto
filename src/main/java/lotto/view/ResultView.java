@@ -29,7 +29,7 @@ public class ResultView {
     }
 
     private static String createRateForm(Statistics statistics) {
-        float rate = statistics.getRateOfReturn();
+        float rate = statistics.getRateOfReturn(Lotto.LOTTO_PRICE);
         return "총 수익률은 " + String.format("%.2f", rate) + "입니다.(기준이 1이기 때문에 결과적으로 " + checkLoss(rate) + "라는 의미임)";
     }
 

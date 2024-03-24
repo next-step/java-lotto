@@ -12,7 +12,7 @@ public class Budget {
         return value;
     }
 
-    public int canBuyQuantity() {
-        return value / Lotto.LOTTO_PRICE;
+    public int divide(int lottoPrice) {
+        return value / lottoPrice;
     }
 }

@@ -18,7 +18,8 @@ public class Lottos {
 
     private static List<Lotto> generateLottosBy(Budget budget) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < budget.canBuyQuantity(); i++) {
+
+        for (int i = 0; i < budget.divide(Lotto.LOTTO_PRICE); i++) {
             lottos.add(new Lotto());
         }
         return lottos;

@@ -14,18 +14,26 @@ public class Statistics {
         return statistics;
     }
 
-    public float getRateOfReturn() {
-        return (float) getTotalReturn() / (statistics.size() * Lotto.LOTTO_PRICE);
+    public float getRateOfReturn(int lottoPrice) {
+        return (float) getTotalReturn() / getBudgetBy(lottoPrice);
     }
 
     private int getTotalReturn() {
         return statistics.stream()
-                .filter(Statistic::isValid)
+                .filter(Statistic::isValidMatcher)
                 .mapToInt(Statistic::getPrice)
                 .sum();
     }
 
+    private int getBudgetBy(int price) {
+        return getSize() * price;
+    }
+
     public int getMatchCount(Statistic matcher) {
         return (int) statistics.stream().filter(statistic -> statistic == matcher).count();
+    }
+
+    private int getSize() {
+        return statistics.size();
     }
 }
