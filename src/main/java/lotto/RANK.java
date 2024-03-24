@@ -26,12 +26,19 @@ public enum RANK {
         this.prizeMoney = prizeMoney;
     }
 
-
-    public static long receivePrize(int number){
+    public static long getPrizeMoney(MatchedCount count) {
         return Arrays.stream(RANK.values())
-                .filter(e -> e.matchedCount == number)
+                .filter(rank -> count.isEquals(rank.matchedCount))
                 .findFirst()
-                .map(s -> s.prizeMoney)
+                .map(rank -> rank.prizeMoney)
                 .orElseGet(() -> 0L);
+    }
+
+    public static Money receivePrize(MatchedCount count, int number){
+        return Arrays.stream(RANK.values())
+                .filter(rank -> count.isEquals(rank.matchedCount))
+                .findFirst()
+                .map(rank -> new Money(rank.prizeMoney * number))
+                .orElseGet(() -> new Money(0));
     }
 }
