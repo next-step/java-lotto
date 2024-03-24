@@ -20,4 +20,16 @@ public class LottoNumber {
             throw new IllegalArgumentException("Lotto 숫자 범위는 1~45 입니다.");
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) obj;
+        return number == that.number;
+    }
 }
