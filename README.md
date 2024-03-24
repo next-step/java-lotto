@@ -73,8 +73,9 @@
   - [x] 해당 번호의 유효성 검사 방어 로직 적용
 
 ### `Lotto.java`
-- [x] 주입된 `Set<LottoNumber>`, 또는 `String`을 따라 로또를 생성
+- [x] 주입된 `Set<LottoNumber>`, 또는 `List<String>`을 따라 로또를 생성
   - [x] 6개의 숫자로 1~45 범위에서 로또를 생성하는지 체크하는 방어 로직 적용
+  - [x] `containsNumber` 메서드를 통해 파라미터로 주어진 번호가 자신의 로또 번호에 있는지 판단
   
 ### `LottoGenerator.java`
 - [x] 1~45번까지 저장된 디폴트 로또를 생성
@@ -86,8 +87,9 @@
   - [x] 이때 주어진 로또 생성 전략 패턴에 따라 로또를 생성
 
 ### `LottoWinChecker.java`
-- [x] 당첨 번호와 유저가 구입한 로또를 비교하여 상금을 받는 로또의 개수만 저장하는 `HashMap`타입의 클래스 변수인 `winLottos`에 저장하는 객체
-  - [x] `HashMap<PrizeEnum, Integer>`로 저장
+- [x] 당천 번호를 받아 `Lotto` 클래스로 저장 
+- [x] 당첨 번호와 유저가 구입한 로또를 비교하여 상금을 받는 로또의 정보를 반환하는 `countMatchedWinLottos()` 메서드 추가
+  - [x] `EnumMap<PrizeEnum, Integer>`로 반환
   - [x] 이때 Key값은 당첨 숫자에 해당되는 `PrizeEnum` 객체를, value는 매칭된 번호 개수만큼 상금을 받는 로또의 개수
   
 ### `LottoProfitChecker.java`
@@ -112,9 +114,9 @@
   - [x] 구매값은 `string`으로 반환
 - [x] 로또 우승 번호의 입력값을 받음
   - [x] 6개의 숫자를 1~45 범위에서 받는지 체크하는 방어 로직 적용 
-  - [x] 우승번호는 `string`으로 반환
+  - [x] 우승번호는 `List<String>`으로 반환
 
-### `OutputView.java`
+### `ResultView.java`
 - [x] 구매한 로또 개수를 출력
 - [x] 구매한 자동로또를 모두 출력
 - [x] 당첨된 로또의 정보를 출력
