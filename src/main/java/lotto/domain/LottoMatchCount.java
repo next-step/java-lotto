@@ -17,8 +17,8 @@ public class LottoMatchCount {
         return this.value == target;
     }
 
-    public boolean smallerThan(int target) {
-        return this.value < target;
+    public boolean smallerThan(LottoMatchCount target) {
+        return this.value < target.value();
     }
 
     @Override
