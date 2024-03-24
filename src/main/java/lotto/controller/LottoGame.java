@@ -6,15 +6,11 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoGame {
-    public static final String INPUT_START_MESSAGE = "구입 금액을 입력해 주세요.";
-    public static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-    public static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
-
     public static void start() {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
-        int totalLottoCount = inputView.totalLottoCount(INPUT_START_MESSAGE);
+        int totalLottoCount = inputView.totalLottoCount();
         int manualLottoCount = inputView.manualLottoCount(totalLottoCount);
         int autoLottoCount = totalLottoCount - manualLottoCount;
 
@@ -24,8 +20,8 @@ public class LottoGame {
         outputView.printLottoCount(manualLottoCount, autoLottoCount);
         outputView.printLottoNumbers(manualLottoTicket.combine(autoLottoTicket));
 
-        LottoNumbers inputWinningNumber = inputView.lottoNumbersInput(INPUT_WINNING_NUMBER_MESSAGE);
-        WinningNumber winningNumber = inputView.getFinalWinningNumber(INPUT_BONUS_NUMBER_MESSAGE, inputWinningNumber);
+        LottoNumbers inputWinningNumber = inputView.lottoNumbersInput();
+        WinningNumber winningNumber = inputView.getFinalWinningNumber(inputWinningNumber);
 
         LottoResult lottoResult = autoLottoTicket.computeLottoResult(winningNumber);
         outputView.printResult(lottoResult);

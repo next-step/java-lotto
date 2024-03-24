@@ -55,8 +55,7 @@
 
 ## 4단계 Todo
 - [X] LottoValidator를 제거하고 LottoNumber와 LottoNumbers 각 객체로 검증로직 이관
-- [ ] LottoNumber 인스턴스 캐싱 처리
-- [ ] LottoNumbers의 valid() 메서드 명을 동사로 수정
-- [ ] 입출력을 위한 문자열을 View Layer로 모두 이관
+- [X] LottoNumber 인스턴스 캐싱 처리
+- [X] 입출력을 위한 문자열을 View Layer로 모두 이관
 - [ ] 수동 입력 시 정렬되지 않는 버그 수정
 - [ ] 수동 입력 시 수익률 계산에서 누락되는 버그 수정

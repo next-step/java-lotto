@@ -12,6 +12,9 @@ import java.util.Scanner;
 import static lotto.domain.LottoMachine.*;
 
 public class InputView {
+    public static final String INPUT_START_MESSAGE = "구입 금액을 입력해 주세요.";
+    public static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    public static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String INPUT_NUMBER_MESSAGE = "숫자를 입력해주세요.";
     private static final String INPUT_RETRY = " 다시 입력해주세요.";
     public static final String INPUT_MIN_PRICE_MESSAGE = "금액은 최소 " + LOTTO_PRICE + "원 이상 입력이 가능합니다.";
@@ -22,10 +25,12 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
+    public int totalLottoCount() {
+        return totalLottoCount(INPUT_START_MESSAGE);
+    }
 
-    public int totalLottoCount(String message) {
+    private int totalLottoCount(String message) {
         System.out.println(message);
-
         try {
             int money = scanPriceForBuyLotto();
             return money / LOTTO_PRICE;
@@ -69,7 +74,11 @@ public class InputView {
         return priceForBuyLotto;
     }
 
-    public LottoNumbers lottoNumbersInput(String message) {
+    public LottoNumbers lottoNumbersInput() {
+        return lottoNumbersInput(INPUT_WINNING_NUMBER_MESSAGE);
+    }
+
+    private LottoNumbers lottoNumbersInput(String message) {
         if (!message.isBlank()){
             System.out.println(message);
         }
@@ -87,7 +96,11 @@ public class InputView {
         }
     }
 
-    public WinningNumber getFinalWinningNumber(String message, LottoNumbers winningNumber) {
+    public WinningNumber getFinalWinningNumber(LottoNumbers winningNumber) {
+        return getFinalWinningNumber(INPUT_BONUS_NUMBER_MESSAGE, winningNumber);
+    }
+
+    private WinningNumber getFinalWinningNumber(String message, LottoNumbers winningNumber) {
         try {
             LottoNumber bonusNumber = getBonusNumber(message);
             return new WinningNumber(winningNumber, bonusNumber);
