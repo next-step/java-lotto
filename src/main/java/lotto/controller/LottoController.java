@@ -28,7 +28,6 @@ public class LottoController {
         inputView.inputNextLine();
 
         LottoMachine lottoMachine = new LottoMachine(numbersOfLotto);
-        //lottoMachine.generateLottoTickets();
         resultView.printLottoTicketsNumbers(lottoMachine.getLottoTickets());
         resultView.printDoInputWinningNumbers();
 
