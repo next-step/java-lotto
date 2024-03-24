@@ -13,6 +13,6 @@ public class Budget {
     }
 
     public int canBuyQuantity() {
-        return value / 1000;
+        return value / Lotto.LOTTO_PRICE;
     }
 }
