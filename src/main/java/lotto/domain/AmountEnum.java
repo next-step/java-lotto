@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum AmountEnum {
 	FIRST(6, 2000000000, false),
 	SECOND(5, 30000000, true),
@@ -26,12 +28,10 @@ public enum AmountEnum {
 		if (isSecond(collectedCount, isBonus)) {
 			return AmountEnum.SECOND;
 		}
-		for (AmountEnum amountEnum : AmountEnum.values()) {
-			if (amountEnum.collectedCount.equals(collectedCount) && amountEnum.isBonus.equals(false)) {
-				return amountEnum;
-			}
-		}
-		return OTHER;
+
+		return Arrays.stream(AmountEnum.values())
+				.filter(amountEnum -> amountEnum.collectedCount.equals(collectedCount) && amountEnum.isBonus.equals(false))
+				.findFirst().orElse(OTHER);
 	}
 
 	private static boolean isSecond(Integer collectedCount, Boolean isBonus) {
