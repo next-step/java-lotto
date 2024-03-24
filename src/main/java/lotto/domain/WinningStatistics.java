@@ -27,8 +27,8 @@ public class WinningStatistics {
         return ranks.getOrDefault(rank, new Count());
     }
 
-    public double rateOfReturn(int cash) {
-        return ((double) earned()) / cash;
+    public double rateOfReturn(Cash inputCash) {
+        return ((double) earned()) / inputCash.value();
     }
 
     private long earned() {

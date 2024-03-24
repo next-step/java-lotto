@@ -7,7 +7,7 @@ import lotto.view.OutputView;
 public class LottoPlayer {
 
     private void play() {
-        final int cash = InputView.purchasePrice();
+        final Cash cash = new Cash(InputView.purchasePrice());
 
         final Lottos lottos = LotteryShop.purchase(cash);
         if (lottos.isEmpty()) {

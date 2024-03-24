@@ -12,6 +12,7 @@ public class LotteryShopTest {
     @ParameterizedTest
     @CsvSource(value = {"0,0", "800,0", "1000,1", "3400,3"})
     void purchase(int cash, int expectAmount) {
-        assertThat(LotteryShop.purchase(cash).size()).isEqualTo(expectAmount);
+        assertThat(LotteryShop.purchase(new Cash(cash)).size())
+                .isEqualTo(expectAmount);
     }
 }
