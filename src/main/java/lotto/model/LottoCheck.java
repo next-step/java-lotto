@@ -10,15 +10,16 @@ public class LottoCheck {
     }
 
     private Map<Integer, Integer> createWinLotto(String winningNumber, List<Lotto> lottos) {
-        List<Integer> winLotto = retrieveWinLotto(winningNumber);
+        List<Integer> winLotto = findWinLotto(winningNumber);
 
-        if (!Validator.isValidLottoSize(winLotto) || !Validator.isValidLottoNumbers(winLotto)) {
-            throw new IllegalArgumentException("당첨 번호의 개수는 0 ~ 6개이며, 각 번호는 1 이상 45 이하의 값만 가능합니다.");
-        }
+        Validator.validateLotto(winLotto);
+//        if (!Validator.isValidLottoSize(winLotto) || !Validator.isValidLottoNumbers(winLotto)) {
+//            throw new IllegalArgumentException("당첨 번호의 개수는 0 ~ 6개이며, 각 번호는 1 이상 45 이하의 값만 가능합니다.");
+//        }
         return countWinLotto(winLotto, lottos);
     }
 
-    private List<Integer> retrieveWinLotto(String winningNumber) {
+    private List<Integer> findWinLotto(String winningNumber) {
         Lotto lotto = new Lotto(winningNumber);
         return lotto.getLotto();
     }
@@ -46,7 +47,7 @@ public class LottoCheck {
     }
 
     private void saveOnlyPrize(Map<Integer, Integer> result, int countOfWinNumbers) {
-        if (countOfWinNumbers < PrizeEnum.THREE_MATCHED.getMatchCount()) {
+        if (countOfWinNumbers < LottoRank.THREE_MATCHED.getMatchCount()) {
             return;
         }
 

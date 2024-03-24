@@ -12,24 +12,14 @@ public class LottoSale {
     }
 
     private List<Lotto> generateLottos(String purchaseAmount, LottoStrategy lottoStrategy) {
-        int purchaseChance = validatePurchaseAmount(purchaseAmount);
+        int purchaseChance = Validator.validatePurchaseAmount(purchaseAmount);
         return purchaseLottos(purchaseChance, lottoStrategy);
     }
 
-    private int validatePurchaseAmount(String purchaseAmount)  {
-        int purchaseCount = Integer.parseInt(purchaseAmount) / 1000;
-
-        if (purchaseCount < 1) {
-            throw new IllegalArgumentException("로또는 장당 1000원입니다.");
-        }
-
-        return purchaseCount;
-    }
-
-    private List<Lotto> purchaseLottos(int chances, LottoStrategy lottoStrategy) {
+    private List<Lotto> purchaseLottos(int count, LottoStrategy lottoStrategy) {
         List<Lotto> lottos = new ArrayList<>();
 
-        for (int i = 0; i < chances; i++) {
+        for (int i = 0; i < count; i++) {
             lottos.add(getAutoLotto(lottoStrategy));
         }
 

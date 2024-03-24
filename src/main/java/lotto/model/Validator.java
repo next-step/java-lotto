@@ -13,9 +13,19 @@ public class Validator {
         this.lotto = lotto;
     }
 
+    public static int validatePurchaseAmount(String purchaseAmount)  {
+        int purchaseCount = Integer.parseInt(purchaseAmount) / 1000;
+
+        if (purchaseCount < 1) {
+            throw new IllegalArgumentException("로또는 장당 1000원입니다. 입력한 금액으로 구매 불가합니다.");
+        }
+
+        return purchaseCount;
+    }
+
     public static void validateLotto(List<Integer> lotto) {
         if (!isValidLottoSize(lotto) || !isNotDuplicatedNumbers(lotto) || !isValidLottoNumbers(lotto)) {
-            throw new IllegalArgumentException("로또 번호의 개수는 6개이며, 각 번호는 1 이상 45 이하의 값만 가능합니다.");
+            throw new IllegalArgumentException("로또 번호는 총 6개이고 각 번호는 1 ~ 45 사이의 값만 가능합니다.");
         }
     }
 
@@ -55,12 +65,4 @@ public class Validator {
     public static String[] splitNumbersByComma(String input) {
         return input.split(",");
     }
-//
-//    public String toString() {
-//        return lotto.toString();
-//    }
-//
-//    public List<Integer> getLotto() {
-//        return lotto;
-//    }
 }
