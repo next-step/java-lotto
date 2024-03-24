@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.BonusBall;
 import lotto.domain.LottoMachine;
 import lotto.domain.Price;
 import lotto.view.InputView;
@@ -27,13 +28,18 @@ public class LottoController {
         inputView.inputNextLine();
 
         LottoMachine lottoMachine = new LottoMachine(numbersOfLotto);
-        lottoMachine.generateLottoTickets();
         resultView.printLottoTicketsNumbers(lottoMachine.getLottoTickets());
         resultView.printDoInputWinningNumbers();
 
         List<Integer> winningNumbers = inputView.getWinningNumbers();
+        resultView.printBonusBallNumber();
 
-        resultView.printResult(lottoMachine, winningNumbers, price);
+        resultView.printResult(
+                lottoMachine
+                , winningNumbers
+                , price
+                , new BonusBall(inputView.getBonusBallNumber())
+        );
     }
 
 }

@@ -11,31 +11,41 @@ public class PrizeTest {
     @Test
     void contains_prize() {
         assertThat(Prize.NONE.containsPrize()).isFalse();
+        assertThat(Prize.FIFTH_PRIZE.containsPrize()).isTrue();
+        assertThat(Prize.FOURTH_PRIZE.containsPrize()).isTrue();
+        assertThat(Prize.THIRD_PRIZE.containsPrize()).isTrue();
+        assertThat(Prize.SECOND_PRIZE.containsPrize()).isTrue();
+        assertThat(Prize.FIRST_PRIZE.containsPrize()).isTrue();
     }
 
     @Test
     void no_prize() {
-        assertThat(Prize.valueOf(0)).isEqualTo(Prize.NONE);
+        assertThat(Prize.valueOf(0, false)).isEqualTo(Prize.NONE);
+    }
+
+    @Test
+    void fifth_prize() {
+        assertThat(Prize.valueOf(3, false)).isEqualTo(Prize.FIFTH_PRIZE);
     }
 
     @Test
     void fourth_prize() {
-        assertThat(Prize.valueOf(3)).isEqualTo(Prize.FOURTH_PRIZE);
+        assertThat(Prize.valueOf(4, false)).isEqualTo(Prize.FOURTH_PRIZE);
     }
 
     @Test
     void third_prize() {
-        assertThat(Prize.valueOf(4)).isEqualTo(Prize.THIRD_PRIZE);
+        assertThat(Prize.valueOf(5, false)).isEqualTo(Prize.THIRD_PRIZE);
     }
 
     @Test
     void second_prize() {
-        assertThat(Prize.valueOf(5)).isEqualTo(Prize.SECOND_PRIZE);
+        assertThat(Prize.valueOf(5, true)).isEqualTo(Prize.SECOND_PRIZE);
     }
 
     @Test
     void first_prize() {
-        assertThat(Prize.valueOf(6)).isEqualTo(Prize.FIRST_PRIZE);
+        assertThat(Prize.valueOf(6, false)).isEqualTo(Prize.FIRST_PRIZE);
     }
 
     @Test

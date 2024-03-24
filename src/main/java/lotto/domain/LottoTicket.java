@@ -36,6 +36,10 @@ public class LottoTicket {
         return this.lottoNumbers.countMatchingWith(winningNumbers);
     }
 
+    public int countMatchingWith(int bonusBallNumber) {
+        return this.lottoNumbers.countMatchingWith(bonusBallNumber);
+    }
+
     public List<Integer> generateLottoNumbers() {
         return this.lottoNumbers.generateLottoNumbers();
     }

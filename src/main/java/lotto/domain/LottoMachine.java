@@ -10,8 +10,12 @@ public class LottoMachine {
     private final List<LottoTicket> lottoTickets;
 
     public LottoMachine(int number) {
+        this(number, new ArrayList<>());
+    }
+
+    public LottoMachine(int number, List<LottoTicket> lottoTickets) {
         this.number = number;
-        this.lottoTickets = new ArrayList<>();
+        this.lottoTickets = lottoTickets;
     }
 
     public List<LottoTicket> generateLottoTickets() {

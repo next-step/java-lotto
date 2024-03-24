@@ -14,7 +14,9 @@ public class CalculatorTest {
     @Test
     void not_사칙연산() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> { new Calculator().calculate("1 @ 3"); })
+                .isThrownBy(() -> {
+                    new Calculator().calculate("1 @ 3");
+                })
                 .withMessage("%s!", "사칙연산으로만 계산이 가능합니다")
                 .withNoCause();
 
@@ -24,7 +26,9 @@ public class CalculatorTest {
     @Test
     void null_blank() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> { new Calculator().calculate(" "); })
+                .isThrownBy(() -> {
+                    new Calculator().calculate(" ");
+                })
                 .withMessage("%s!", "공백은 계산처리가 안됩니다")
                 .withNoCause();
 

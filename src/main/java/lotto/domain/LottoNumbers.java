@@ -26,6 +26,13 @@ public class LottoNumbers {
                 .count());
     }
 
+    public int countMatchingWith(int bonusBallNumber) {
+        return Math.toIntExact(this.lottoNumbers.stream()
+                .map(LottoNumber::number)
+                .filter(number -> number == bonusBallNumber)
+                .count());
+    }
+
     public List<Integer> generateLottoNumbers() {
         return this.lottoNumbers.stream()
                 .map(LottoNumber::number)

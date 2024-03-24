@@ -24,7 +24,7 @@ public class InputView {
                 .distinct()
                 .count();
         if (count != 6) {
-            throw new IllegalArgumentException("당첨 번호는 중복이 있을 수 없습니다. 다시 입력해주세요.");
+            throw new IllegalArgumentException("당첨 번호는 중복이 없어야 하며, 6개여야 합니다.");
         }
         return strings;
     }
@@ -35,6 +35,10 @@ public class InputView {
             winningNumbers.add(Integer.parseInt(numberString));
         }
         return winningNumbers;
+    }
+
+    public int getBonusBallNumber() {
+        return SCANNER.nextInt();
     }
 
 }
