@@ -23,4 +23,16 @@ public class Lottos {
         }
         return new Lottos(lottosTemp);
     }
+
+    public static Lottos buyManualLottos(List<String> numbers, NumberGenerator numberGenerator) {
+        List<Lotto> lottosTemp = new ArrayList<>();
+
+        for (String number : numbers) {
+            LottoNumbers lottoNumbers = new LottoNumbers(number);
+            Lotto lotto = new Lotto(lottoNumbers, numberGenerator);
+            lottosTemp.add(lotto);
+        }
+
+        return new Lottos(lottosTemp);
+    }
 }
