@@ -34,15 +34,6 @@ public enum Rank {
                 .orElse(Rank.NEXT_CHANCE);
     }
 
-    public static Rank valueOf(int matchCount) {
-        assertMatchCountLessThanFirstPrize(new LottoMatchCount(matchCount));
-
-        return Arrays.stream(values())
-                .filter(type -> type.matchCount.equals(matchCount))
-                .findFirst()
-                .orElse(Rank.NEXT_CHANCE);
-    }
-
     public static List<Rank> winRanks() {
         return Arrays.stream(values())
                 .filter(type -> type.winnings > 0L)

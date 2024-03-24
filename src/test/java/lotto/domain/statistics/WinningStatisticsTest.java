@@ -28,7 +28,7 @@ public class WinningStatisticsTest {
     void rateOfReturn() {
         final WinningStatistics statistics = new WinningStatistics(List.of(Rank.FIFTH));
 
-        assertThat(statistics.rateOfReturn(new Cash(10000)))
+        assertThat(statistics.rateOfReturn(new Cash(10000)).value())
                 .isEqualTo(0.5d);
     }
 
