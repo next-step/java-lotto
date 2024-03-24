@@ -3,9 +3,12 @@ package lotto.view;
 import lotto.domain.*;
 
 import java.util.Arrays;
+import java.util.StringJoiner;
 
 public class ResultView {
 
+
+    public static final String DELIMITER = ", ";
 
     public void printMoney() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -34,7 +37,17 @@ public class ResultView {
 
     public void printPickedLottoNumbers(PickedLottoNumbers pickedLottoNumbers) {
         for (LottoNumbers lottoNumbers : pickedLottoNumbers) {
-            System.out.println(lottoNumbers.toString());
+            System.out.print("[");
+            printLottoNumbers(lottoNumbers);
+            System.out.println("]");
         }
+    }
+
+    private void printLottoNumbers(LottoNumbers lottoNumbers) {
+        StringJoiner stringJoiner = new StringJoiner(DELIMITER);
+        for (Integer lottoNumber : lottoNumbers) {
+            stringJoiner.add(String.valueOf(lottoNumber));
+        }
+        System.out.print(stringJoiner);
     }
 }
