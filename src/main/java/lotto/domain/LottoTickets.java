@@ -2,24 +2,27 @@ package lotto.domain;
 
 import lotto.domain.type.RewardPrice;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class LottoTickets {
 
   private final PurchaseAmount purchaseAmount;
   private final Set<LottoTicket> tickets;
 
-  public LottoTickets(int amount) {
-    this.purchaseAmount = new PurchaseAmount(amount);
-    this.tickets = LottoTicket.generate(this.purchaseAmount.ticketCount());
-  }
-
   public LottoTickets(PurchaseAmount purchaseAmount, Set<LottoTicket> tickets) {
     this.purchaseAmount = purchaseAmount;
     this.tickets = tickets;
+  }
+
+  public static LottoTickets purchaseBy(int amount) {
+    PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
+    int ticketCount = purchaseAmount.ticketCount();
+    
+    Set<LottoTicket> lottoTickets = new HashSet<>();
+    for (int i = 0; i < ticketCount; i++) {
+      lottoTickets.add(LottoTicket.generate());
+    }
+    return new LottoTickets(purchaseAmount, lottoTickets);
   }
 
   public int ticketCount() {

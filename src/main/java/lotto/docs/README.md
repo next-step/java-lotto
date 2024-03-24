@@ -13,3 +13,12 @@
 - 로또 자동 생성은 Collections.shuffle() 메소드 활용한다.
 - Collections.sort() 메소드를 활용해 정렬 가능하다.
 - ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 유무를 판단할 수 있다.
+
+<br />
+
+### 새롭게 배운 내용
+<hr />
+
+- 관계의 방향성
+  - 참고: https://www.youtube.com/watch?v=dJ5C4qRqAgA
+  - 양방향을 피하고, <br /> 다중성이 적은 의존성의 방향을 선택하는 것이 좋다.

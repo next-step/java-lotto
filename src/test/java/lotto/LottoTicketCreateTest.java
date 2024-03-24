@@ -16,7 +16,7 @@ public class LottoTicketCreateTest {
   @ValueSource(ints = {3000, 6000, 24000})
   @DisplayName("구입 금액 저장되는지 테스트")
   void lottoCreateTest(int given) {
-    LottoTickets lottoTickets = new LottoTickets(given);
+    LottoTickets lottoTickets = LottoTickets.purchaseBy(given);
     assertThat(lottoTickets.isSamePurchaseAmount(given)).isTrue();
   }
 
@@ -28,7 +28,7 @@ public class LottoTicketCreateTest {
   })
   @DisplayName("구입 금액 -> 로또 '장'수로 컨버팅하는 기능")
   void lottoCreateTest2(int given, int expected) {
-    LottoTickets lottoTickets = new LottoTickets(given);
+    LottoTickets lottoTickets = LottoTickets.purchaseBy(given);
     assertThat(lottoTickets.ticketCount()).isEqualTo(expected);
   }
 
@@ -36,7 +36,7 @@ public class LottoTicketCreateTest {
   @ValueSource(ints = {0, 600, 3500, 6700, 24010})
   @DisplayName("구입 금액 1000단위가 아닌 경우 테스트")
   void lottoCreateTest3(int given) {
-    assertThatThrownBy(() -> new LottoTickets(given))
+    assertThatThrownBy(() -> LottoTickets.purchaseBy(given))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining(String.format(INVALID_PURCHASE_AMOUNT_INPUT, given));
   }
@@ -45,7 +45,7 @@ public class LottoTicketCreateTest {
   @ValueSource(ints = {0, -3000, -6000, -24000})
   @DisplayName("구입 금액이 양수가 아닌 경우 테스트")
   void lottoCreateTest4(int given) {
-    assertThatThrownBy(() -> new LottoTickets(given))
+    assertThatThrownBy(() -> LottoTickets.purchaseBy(given))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining(String.format(INVALID_PURCHASE_AMOUNT_INPUT, given));
   }
@@ -54,7 +54,7 @@ public class LottoTicketCreateTest {
   @ValueSource(ints = {3000, 6000, 24000})
   @DisplayName("로또 숫자 6개씩 생성되는지 테스트")
   void lottoCreateTest5(int given) {
-    LottoTickets lottoTickets = new LottoTickets(given);
+    LottoTickets lottoTickets = LottoTickets.purchaseBy(given);
     assertThat(lottoTickets.haveAll6Numbers()).isTrue();
   }
 
@@ -62,7 +62,7 @@ public class LottoTicketCreateTest {
   @ValueSource(ints = {1000, 3000, 6000})
   @DisplayName("로또 숫자 1 ~ 45 내의 숫자로 생성되는지 테스트")
   void lottoCreateTest7(int given) {
-    LottoTickets lottoTickets = new LottoTickets(given);
+    LottoTickets lottoTickets = LottoTickets.purchaseBy(given);
     assertThat(lottoTickets.haveCorrectNumbers()).isTrue();
   }
 }
