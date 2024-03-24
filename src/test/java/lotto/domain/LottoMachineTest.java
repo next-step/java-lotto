@@ -5,6 +5,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -20,12 +22,12 @@ public class LottoMachineTest {
 
         assertThat(lottoTicket.size()).isEqualTo(countOfLotto);
         assertThat(lottoTicket.containsExactly(LottoNumbers.from(numberList))).isTrue();
-        assertThat(lottoTicket.containsExactly(LottoNumbers.from(numberList), LottoNumbers.from(List.of(1, 2, 10, 20, 30, 40)))).isFalse();
+        assertThat(lottoTicket.containsExactly(LottoNumbers.from(numberList), LottoNumbers.from(new ArrayList<>(List.of(1, 2, 10, 20, 30, 40))))).isFalse();
     }
 
     static Stream<Arguments> countOfLottoAndLottoNumbers() {
         return Stream.of(
-                Arguments.arguments(1, List.of(1, 2, 3, 4, 5, 6))
+                Arguments.arguments(1, new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)))
         );
     }
 }

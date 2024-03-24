@@ -54,7 +54,7 @@ public class LottoNumbersTest {
     }
 
     static Stream<Arguments> lottoNumbersAndContainsCount() {
-        LottoNumbers lottoNumbers = LottoNumbers.from(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumbers lottoNumbers = createLottoNumber(1, 2, 3, 4, 5, 6);
         return Stream.of(
                 Arguments.arguments(lottoNumbers, createLottoNumber(1, 2, 3, 4, 5, 6), 6),
                 Arguments.arguments(lottoNumbers, createLottoNumber(1, 2, 3, 4, 5, 42), 5),

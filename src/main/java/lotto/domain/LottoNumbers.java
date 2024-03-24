@@ -16,12 +16,12 @@ public class LottoNumbers {
         this.numbers = numbers;
     }
 
-    public static LottoNumbers from(List<Integer> numbers) {
-        validate(numbers);
-        Collections.sort(numbers);
+    public static LottoNumbers from(List<Integer> values) {
+        validate(values);
+        Collections.sort(values);
 
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int number : numbers) {
+        for (int number : values) {
             lottoNumbers.add(LottoNumber.valueOf(number));
         }
 

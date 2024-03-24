@@ -17,13 +17,15 @@ public class LottoGame {
         LottoTicket manualLottoTicket = inputView.manualLottoTicket(manualLottoCount);
         LottoTicket autoLottoTicket = LottoMachine.createLottoNumbers(autoLottoCount, new ShuffledNumberDrawer());
 
+        LottoTicket finalLottoTicket = manualLottoTicket.combine(autoLottoTicket);
+
         outputView.printLottoCount(manualLottoCount, autoLottoCount);
-        outputView.printLottoNumbers(manualLottoTicket.combine(autoLottoTicket));
+        outputView.printLottoNumbers(finalLottoTicket);
 
         LottoNumbers inputWinningNumber = inputView.lottoNumbersInput();
         WinningNumber winningNumber = inputView.getFinalWinningNumber(inputWinningNumber);
 
-        LottoResult lottoResult = autoLottoTicket.computeLottoResult(winningNumber);
+        LottoResult lottoResult = finalLottoTicket.computeLottoResult(winningNumber);
         outputView.printResult(lottoResult);
     }
 }
