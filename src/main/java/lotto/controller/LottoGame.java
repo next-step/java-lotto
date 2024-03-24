@@ -5,24 +5,29 @@ import lotto.numberdrawer.ShuffledNumberDrawer;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class LottoGame {
-    public static final String INPUT_START_MESSAGE = "구입 금액을 입력해 주세요.";
-    public static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-    public static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
+import java.util.List;
 
+public class LottoGame {
     public static void start() {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
-        int countOfLotto = inputView.lottoCount(INPUT_START_MESSAGE);
+        int totalLottoCount = inputView.totalLottoCount();
+        int manualLottoCount = inputView.manualLottoCount(totalLottoCount);
+        int autoLottoCount = totalLottoCount - manualLottoCount;
 
-        LottoNumbers lottoNumbers = LottoMachine.createLottoNumbers(countOfLotto, new ShuffledNumberDrawer());
-        outputView.printLottoNumbers(lottoNumbers);
+        List<LottoNumbers> manualLottoTicket = inputView.manualLottoTicket(manualLottoCount);
+        List<LottoNumbers> autoLottoTicket = LottoMachine.createLottoNumbers(autoLottoCount, new ShuffledNumberDrawer());
 
-        LottoNumber inputWinningNumber = inputView.winnnigNumbersInput(INPUT_WINNING_NUMBER_MESSAGE);
-        MyNumber bonusNumber = inputView.getBonusNumber(INPUT_BONUS_NUMBER_MESSAGE, inputWinningNumber);
+        LottoTicket finalLottoTicket = LottoTicket.from(manualLottoTicket, autoLottoTicket);
 
-        LottoResult lottoResult = lottoNumbers.computeLottoResult(new WinningNumber(inputWinningNumber, bonusNumber));
+        outputView.printLottoCount(manualLottoCount, autoLottoCount);
+        outputView.printLottoNumbers(finalLottoTicket);
+
+        LottoNumbers inputWinningNumber = inputView.lottoNumbersInput();
+        WinningNumber winningNumber = inputView.getFinalWinningNumber(inputWinningNumber);
+
+        LottoResult lottoResult = finalLottoTicket.computeLottoResult(winningNumber);
         outputView.printResult(lottoResult);
     }
 }

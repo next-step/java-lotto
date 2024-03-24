@@ -22,11 +22,11 @@ public class LottoResult {
     }
 
     private long winnings() {
-        return (correctCounts.get(LottoRank.FIFTH) * LottoRank.FIFTH.getWinnings())
-                + (correctCounts.get(LottoRank.FOURTH) * LottoRank.FOURTH.getWinnings())
-                + (correctCounts.get(LottoRank.THIRD) * LottoRank.THIRD.getWinnings())
-                + (correctCounts.get(LottoRank.SECOND) * LottoRank.SECOND.getWinnings())
-                + (correctCounts.get(LottoRank.FIRST) * LottoRank.FIRST.getWinnings());
+        long winnings = 0;
+        for (Map.Entry<LottoRank, Integer> correctCount : correctCounts.entrySet()) {
+            winnings += correctCount.getValue() * correctCount.getKey().getWinnings();
+        }
+        return winnings;
     }
 
     public void addCorrectLottoCount(int count, boolean isContainBonusNumber) {

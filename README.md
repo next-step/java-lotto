@@ -8,7 +8,7 @@
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
-## 기능 목록
+## 3단계 기능 목록
 - 숫자를 추첨하는 NumberDrawer 인터페이스와 구현체 ShuffledNumberDrawer 구현
   - [X] 1 ~ 매개변수(숫자) 만큼의 숫자를 섞어서 앞에서부터 6개를 뽑아 정렬 후 반환
 - 로또 하나를 가지는 LottoNumber 객체 생성
@@ -41,3 +41,23 @@
 - [X] 예외가 발생하지 않는 생성자 테스트를 assertThatNoException으로 리팩터링
 - [X] LottoNumbersTest의 List.of()를 가변인자로 리팩터링
 - [X] LottoNumber + bonusNumber 를 묶어서 WinningNumber
+- [X] 3단계 피드백 반영
+  - [X] MyNumber, LottoNumber, LottoNumbers 클래스명 수정
+  - [X] LottoResult의 winnings()를 correctCounts EntrySet을 사용하는 로직으로 리팩터링
+  - [X] 보너스 넘버 검증 위치 수정
+  - [X] stream collect 와 return을 collectingAndThen 으로 리팩터링
+
+## 4단계 기능 목록
+- [X] 수동으로 구매할 로또 수 입력 기능 구현
+- [X] 수동 로또 수 만큼 로또번호 입력 기능 구현 (LottoNumbers -> LottoTicket)
+- [X] LottoTicket을 합치는 기능 구현
+- [X] LottoGame 수동 로또 로직으로 수정 
+
+## 4단계 Todo
+- [X] LottoValidator를 제거하고 LottoNumber와 LottoNumbers 각 객체로 검증로직 이관
+- [X] LottoNumber 인스턴스 캐싱 처리
+- [X] 입출력을 위한 문자열을 View Layer로 모두 이관
+- [X] 수동 입력 시 정렬되지 않는 버그 수정
+- [X] 수동 입력 시 수익률 계산에서 누락되는 버그 수정
+- [X] LottoTicket 생성 시 자동, 수동 LottoNumbers를 각각 인자로 받아 생성하도록 수정
+- [X] LottoNumber를 Comparable의 구현체로 변경

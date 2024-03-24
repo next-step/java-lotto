@@ -1,5 +1,6 @@
 package lotto.numberdrawer;
 
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,9 +16,11 @@ class ShuffledNumberDrawerTest {
         ShuffledNumberDrawer numberDrawer = new ShuffledNumberDrawer();
         int bound = 45;
         int size = 6;
-        List<Integer> numbers = numberDrawer.drawnNumbers(bound, size);
+        List<LottoNumber> numbers = numberDrawer.drawnNumbers(bound, size);
 
         assertThat(numbers).hasSize(size);
-        assertThat(numbers).allMatch((number) -> number > 0 && number <= bound);
+        assertThat(numbers).allMatch(
+                (number) -> number.compareTo(LottoNumber.valueOf(0)) > 0
+                        && number.compareTo(LottoNumber.valueOf(bound)) < 0);
     }
 }

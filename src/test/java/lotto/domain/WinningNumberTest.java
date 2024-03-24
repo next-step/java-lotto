@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
-import static lotto.domain.LottoNumberTest.*;
+import static lotto.domain.LottoNumbersTest.*;
 import static org.assertj.core.api.Assertions.*;
 
 class WinningNumberTest {
@@ -15,7 +15,7 @@ class WinningNumberTest {
 
     @BeforeEach
     void before() {
-        winningNumber = new WinningNumber(createLottoNumber(1, 2, 3, 4, 5, 6), MyNumber.valueOf(7));
+        winningNumber = new WinningNumber(createLottoNumber(1, 2, 3, 4, 5, 6), LottoNumber.valueOf(7));
     }
     @Test
     @DisplayName("containsCount 호출 시 주어진 LottoNumber와 비교하여 WinningNumber 포함 개수 반환")
