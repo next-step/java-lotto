@@ -18,6 +18,10 @@ public class LottoNumber {
         return this.numbers.contains(number);
     }
 
+    public boolean isBonusContains(Integer bonusNumber){
+        return Match.getCount(numbers, bonusNumber);
+    }
+
     @Override
     public String toString() {
         return this.numbers.toString();

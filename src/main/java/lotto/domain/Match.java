@@ -26,4 +26,10 @@ public class Match {
     public Profit getProfit() {
         return profit;
     }
+
+    public static boolean getCount(List<Integer> sources, Integer bonusNumber) {
+        if (sources == null || bonusNumber == null) throw new IllegalArgumentException();
+        return sources.stream()
+                .anyMatch(bonusNumber::equals);
+    }
 }
