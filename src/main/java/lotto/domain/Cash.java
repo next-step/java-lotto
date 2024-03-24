@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.statistics.RateOfReturn;
+
 public class Cash {
     private final long value;
 
@@ -16,6 +18,10 @@ public class Cash {
         assertPriceGreaterThanZero(price);
 
         return value / price;
+    }
+
+    public RateOfReturn rateOfReturn(Cash earned) {
+        return new RateOfReturn(((double) earned.value()) / value);
     }
 
     private void assertCashPositive(long cash) {

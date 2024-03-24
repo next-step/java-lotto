@@ -5,6 +5,7 @@ import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.rank.Rank;
 import lotto.domain.statistics.Count;
+import lotto.domain.statistics.RateOfReturn;
 import lotto.domain.statistics.WinningStatistics;
 
 import java.util.Arrays;
@@ -66,8 +67,8 @@ public class OutputView {
         return Announcements.RANK_COUNT_FORMAT;
     }
 
-    public static void printRateOfReturn(double rateOfReturn) {
-        printLine(String.format(Announcements.RATE_OF_RETURN_FORMAT, rateOfReturn, RateOfReturnSubText.findByRateOfReturn(rateOfReturn).subText()));
+    public static void printRateOfReturn(RateOfReturn rateOfReturn) {
+        printLine(String.format(Announcements.RATE_OF_RETURN_FORMAT, rateOfReturn.value(), RateOfReturnSubText.findByRateOfReturn(rateOfReturn).subText()));
     }
 
     private abstract static class Announcements {
@@ -81,20 +82,20 @@ public class OutputView {
     }
 
     private enum RateOfReturnSubText {
-        LOSS("기준이 1이기 때문에 결과적으로 손해라는 의미임", val -> val < 1d),
-        TIE("기준이 1이기 때문에 또이또이라는 의미임", val -> val == 1d),
-        WIN("기준이 1이기 때문에 결과적으로 이득이라는 의미임", val -> val > 1d)
+        LOSS("기준이 1이기 때문에 결과적으로 손해라는 의미임", val -> val.lessThan(1d)),
+        TIE("기준이 1이기 때문에 또이또이라는 의미임", val -> val.equals(1d)),
+        WIN("기준이 1이기 때문에 결과적으로 이득이라는 의미임", val -> val.greaterThan(1d))
         ;
 
         private final String subText;
-        private final Predicate<Double> predicate;
+        private final Predicate<RateOfReturn> predicate;
 
-        RateOfReturnSubText(String subText, Predicate<Double> predicate) {
+        RateOfReturnSubText(String subText, Predicate<RateOfReturn> predicate) {
             this.subText = subText;
             this.predicate = predicate;
         }
 
-        public static RateOfReturnSubText findByRateOfReturn(double rateOfReturn) {
+        public static RateOfReturnSubText findByRateOfReturn(RateOfReturn rateOfReturn) {
             return Arrays.stream(values())
                     .filter(type -> type.predicate.test(rateOfReturn))
                     .findAny()

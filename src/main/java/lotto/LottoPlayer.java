@@ -1,10 +1,12 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.Cash;
+import lotto.domain.LotteryShop;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.rank.Ranks;
+import lotto.domain.statistics.RateOfReturn;
 import lotto.domain.statistics.WinningStatistics;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -36,7 +38,7 @@ public class LottoPlayer {
         final WinningStatistics statistics = new WinningStatistics(ranks);
         OutputView.printWinningCounts(statistics);
 
-        final double rateOfReturn = statistics.rateOfReturn(cash);
+        final RateOfReturn rateOfReturn = statistics.rateOfReturn(cash);
         OutputView.printRateOfReturn(rateOfReturn);
     }
 

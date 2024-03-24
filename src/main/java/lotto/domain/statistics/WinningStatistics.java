@@ -31,15 +31,16 @@ public class WinningStatistics {
         return ranks.getOrDefault(rank, new Count());
     }
 
-    public double rateOfReturn(Cash inputCash) {
-        return ((double) earned()) / inputCash.value();
+    public RateOfReturn rateOfReturn(Cash inputCash) {
+        return inputCash.rateOfReturn(earned());
     }
 
-    private long earned() {
-        return ranks.entrySet()
-                .stream()
-                .mapToLong(entry -> entry.getKey().winnings() * entry.getValue().value())
-                .sum();
+    private Cash earned() {
+        return new Cash(
+                ranks.entrySet()
+                    .stream()
+                    .mapToLong(entry -> entry.getKey().winnings() * entry.getValue().value())
+                    .sum());
     }
 
 }
