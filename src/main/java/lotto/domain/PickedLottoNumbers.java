@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class PickedLottoNumbers implements Iterable<LottoNumber> {
-    private List<LottoNumber> lottoNumberList;
+public class PickedLottoNumbers implements Iterable<LottoNumbers> {
+    private List<LottoNumbers> lottoNumbersList;
 
     public PickedLottoNumbers() {
-        this.lottoNumberList = new ArrayList<>();
+        this.lottoNumbersList = new ArrayList<>();
     }
 
-    public void save(LottoNumber lottoNumbers) {
-        lottoNumberList.add(lottoNumbers);
+    public void save(LottoNumbers lottoNumbers) {
+        lottoNumbersList.add(lottoNumbers);
     }
 
     @Override
-    public Iterator<LottoNumber> iterator() {
-        return lottoNumberList.iterator();
+    public Iterator<LottoNumbers> iterator() {
+        return lottoNumbersList.iterator();
     }
 }

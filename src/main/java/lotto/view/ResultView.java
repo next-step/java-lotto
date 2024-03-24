@@ -28,8 +28,8 @@ public class ResultView {
     }
 
     public void printPickedLottoNumbers(PickedLottoNumbers pickedLottoNumbers) {
-        for (LottoNumber lottoNumber : pickedLottoNumbers) {
-            System.out.println(lottoNumber.toString());
+        for (LottoNumbers lottoNumbers : pickedLottoNumbers) {
+            System.out.println(lottoNumbers.toString());
         }
     }
 }

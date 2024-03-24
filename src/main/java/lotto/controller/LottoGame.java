@@ -26,7 +26,7 @@ public class LottoGame {
         resultView.printPickedLottoNumbers(pickedLottoNumbers);
 
         resultView.printWinningLotto();
-        LottoNumber winningLotto = inputView.inputLottoNumber();
+        LottoNumbers winningLotto = inputView.inputLottoNumber();
 
         WinningInfo winningInfo = LottoMatch.countNumbers(pickedLottoNumbers, winningLotto);
 

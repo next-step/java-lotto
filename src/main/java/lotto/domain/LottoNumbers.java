@@ -3,13 +3,13 @@ package lotto.domain;
 import java.util.Iterator;
 import java.util.List;
 
-public class LottoNumber implements Iterable<Integer> {
+public class LottoNumbers implements Iterable<Integer> {
     private static final int MATCH_COUNT = 1;
     private static final int NOT_MATCH_COUNT = 0;
 
     private final List<Integer> lottoNumber;
 
-    public LottoNumber(List<Integer> lottoNumber) {
+    public LottoNumbers(List<Integer> lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
 

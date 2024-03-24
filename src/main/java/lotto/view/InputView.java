@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
 
 import java.util.Arrays;
@@ -17,7 +17,7 @@ public class InputView {
         return new Money(scanner.nextLine());
     }
 
-    public LottoNumber inputLottoNumber() {
-        return new LottoNumber(Arrays.asList(scanner.nextLine().split(SEPARATOR)).stream().map(Integer::parseInt).collect(Collectors.toList()));
+    public LottoNumbers inputLottoNumber() {
+        return new LottoNumbers(Arrays.asList(scanner.nextLine().split(SEPARATOR)).stream().map(Integer::parseInt).collect(Collectors.toList()));
     }
 }

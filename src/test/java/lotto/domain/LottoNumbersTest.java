@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class LottoNumberTest {
+public class LottoNumbersTest {
 
     @Test
     @DisplayName("선택된 6개의 로또번호 같은지 Test")
@@ -18,8 +18,8 @@ public class LottoNumberTest {
         List<Integer> secondPickedLotto = Arrays.asList(6,5,4,3,2,1);
 
         // when
-        LottoNumber firstLotto = new LottoNumber(firstPickedLotto);
-        LottoNumber secondLotto = new LottoNumber(secondPickedLotto);
+        LottoNumbers firstLotto = new LottoNumbers(firstPickedLotto);
+        LottoNumbers secondLotto = new LottoNumbers(secondPickedLotto);
 
         assertThat(firstLotto).isEqualTo(secondLotto);
     }

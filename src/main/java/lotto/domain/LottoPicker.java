@@ -15,10 +15,10 @@ public class LottoPicker {
                 .collect(Collectors.toList());
     }
 
-    public LottoNumber pickLotto() {
+    public LottoNumbers pickLotto() {
         Collections.shuffle(this.lottoNumbers);
         List<Integer> pickLottoNumbers = new ArrayList<>(this.lottoNumbers.subList(0, 6));
         Collections.sort(pickLottoNumbers);
-        return new LottoNumber(pickLottoNumbers);
+        return new LottoNumbers(pickLottoNumbers);
     }
 }
