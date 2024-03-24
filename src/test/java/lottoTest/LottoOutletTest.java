@@ -22,9 +22,8 @@ public class LottoOutletTest {
         Assertions.assertThat(LottoOutlet.generateLotto()).isInstanceOf(Lotto.class);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}번 발급하는 기능의 반환은 {0}사이즈의 Lotto리스트 반환")
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
-    @DisplayName("로또를 N번 발급하는 기능은 N사이즈의 Lotto 리스트를 반환한다.")
     void generateLottosTest(int count) {
         Assertions.assertThat(LottoOutlet.generateLottos(count).size()).isEqualTo(count);
     }
