@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,7 +22,7 @@ public class LottoGroup {
         this.tickets = lotto;
     }
 
-    public void saveMatchResult(List<Integer> latestWinningNumbers, MatchCache matchCache, Profit profit){
+    public void saveMatchResult(List<Integer> latestWinningNumbers, MatchCache matchCache, Profit profit) {
         tickets.saveMatchResult(latestWinningNumbers, matchCache, profit);
     }
 

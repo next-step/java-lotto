@@ -5,11 +5,11 @@ import lotto.domain.*;
 
 public class OutputView {
 
-    public static void printCash(Cash cash){
+    public static void printCash(Cash cash) {
         printPlainMessage(String.format("%d개를 구매했습니다.", cash.getAmount()));
     }
 
-    public static void printLottoGroup(LottoGroup lottoGroup){
+    public static void printLottoGroup(LottoGroup lottoGroup) {
         StringBuilder sb = new StringBuilder();
         for (LottoNumber number : lottoGroup.getTickets().getLottoNumbers()) {
             sb.append(number);
@@ -18,14 +18,14 @@ public class OutputView {
         printPlainMessage(sb.toString());
     }
 
-    public static void printMatchCache(MatchCache matchCache){
+    public static void printMatchCache(MatchCache matchCache) {
         printPlainMessage(String.format("\n3개 일치 (5000원)- %d개", matchCache.getCounts()[2]));
         printPlainMessage(String.format("4개 일치 (50000원)- %d개", matchCache.getCounts()[3]));
         printPlainMessage(String.format("5개 일치 (1500000원)- %d개", matchCache.getCounts()[4]));
         printPlainMessage(String.format("6개 일치 (2000000000원) - %d개", matchCache.getCounts()[5]));
     }
 
-    public static void printProfit(Profit profit, Cash cash){
+    public static void printProfit(Profit profit, Cash cash) {
         printPlainMessage(String.format("총 수익률은 %.2f입니다.", profit.calcRate(cash.getAmount())));
     }
 

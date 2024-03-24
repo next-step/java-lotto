@@ -9,11 +9,11 @@ import java.util.stream.Collectors;
 
 public class InputView {
 
-    public static Cash generateCash(){
+    public static Cash generateCash() {
         return new Cash(insertNumber());
     }
 
-    public static List<Integer> generateLatestWinningNumbers(){
+    public static List<Integer> generateLatestWinningNumbers() {
         String str = insertValues();
         return Arrays.stream(str.split(","))
                 .map(Integer::parseInt)

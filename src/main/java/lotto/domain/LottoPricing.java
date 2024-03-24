@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,8 +15,6 @@ public enum LottoPricing {
     ;
 
     private static final Map<Integer, LottoPricing> lottoPricingMappingCache;
-    final int matchCount;
-    final PriceFunction priceFunction;
 
     static {
         lottoPricingMappingCache = new HashMap<>();
@@ -30,6 +27,9 @@ public enum LottoPricing {
         lottoPricingMappingCache.put(6, PRIZE_6);
     }
 
+    final int matchCount;
+    final PriceFunction priceFunction;
+
     LottoPricing(int matchCount, PriceFunction priceFunction) {
         this.matchCount = matchCount;
         this.priceFunction = priceFunction;
@@ -37,7 +37,7 @@ public enum LottoPricing {
 
     public static LottoPricing getByMatchCount(int matchCount) {
         LottoPricing lottoPricing = lottoPricingMappingCache.get(matchCount);
-        if(lottoPricing == null) throw new IllegalArgumentException();
+        if (lottoPricing == null) throw new IllegalArgumentException();
         return lottoPricing;
     }
 

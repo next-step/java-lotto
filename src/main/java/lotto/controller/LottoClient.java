@@ -2,11 +2,10 @@ package lotto.controller;
 
 import lotto.domain.*;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static lotto.view.InputView.*;
+import static lotto.view.InputView.generateCash;
+import static lotto.view.InputView.generateLatestWinningNumbers;
 import static lotto.view.OutputView.*;
 
 public class LottoClient {
