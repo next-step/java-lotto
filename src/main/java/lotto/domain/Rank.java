@@ -62,6 +62,10 @@ public enum Rank {
         return this.winnings;
     }
 
+    public boolean needBonusMatch() {
+        return this.needBonusMatch;
+    }
+
     private boolean match(LottoMatchCount matchCount, boolean bonusMatch) {
         if (this.needBonusMatch) {
             return countMatch(matchCount) && bonusMatch(bonusMatch);

@@ -47,7 +47,14 @@ public class OutputView {
     }
 
     private static void printRankCount(Rank rank, Count count) {
-        printLine(String.format(Announcements.RANK_COUNT_FORMAT, rank.matchCount(), rank.winnings(), count.value()));
+        printLine(String.format(rankCountFormat(rank), rank.matchCount(), rank.winnings(), count.value()));
+    }
+
+    private static String rankCountFormat(Rank rank) {
+        if (rank.needBonusMatch()) {
+            return Announcements.SECOND_RANK_COUNT_FORMAT;
+        }
+        return Announcements.RANK_COUNT_FORMAT;
     }
 
     public static void printRateOfReturn(double rateOfReturn) {
@@ -60,6 +67,7 @@ public class OutputView {
 
         static final String STATISTICS_TITLE = "당첨 통계\n---------";
         static final String RANK_COUNT_FORMAT = "%d개 일치 (%d원)- %d개";
+        static final String SECOND_RANK_COUNT_FORMAT = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
         static final String RATE_OF_RETURN_FORMAT = "총 수익률은 %.2f입니다.(%s)";
     }
 
