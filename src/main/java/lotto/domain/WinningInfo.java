@@ -12,12 +12,12 @@ public class WinningInfo {
     }
 
     public static WinningInfo of(PickedLottoNumbers pickedLottoNumbers, LottoNumbers winningNumbers) {
-        HashMap<Rank, Integer> objectObjectHashMap = new HashMap<>();
+        HashMap<Rank, Integer> winningInfo = new HashMap<>();
         for (LottoNumbers pickedNumber : pickedLottoNumbers) {
             Rank rank = Rank.findRank(countNumber(pickedNumber, winningNumbers));
-            objectObjectHashMap.put(rank, objectObjectHashMap.getOrDefault(rank, 0) + 1);
+            winningInfo.put(rank, winningInfo.getOrDefault(rank, 0) + 1);
         }
-        return new WinningInfo(objectObjectHashMap);
+        return new WinningInfo(winningInfo);
     }
 
     private static int countNumber(LottoNumbers pickedNumber, LottoNumbers winningNumbers) {
