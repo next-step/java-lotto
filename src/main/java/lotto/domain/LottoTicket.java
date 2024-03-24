@@ -28,8 +28,8 @@ public class LottoTicket {
     return new LottoTicket(generator.generate());
   }
 
-  public static LottoTicket generate(Set<Integer> winningNumbers) {
-    return new LottoTicket(winningNumbers);
+  public static LottoTicket generate(Set<Integer> numbers) {
+    return new LottoTicket(numbers);
   }
 
   public int size() {

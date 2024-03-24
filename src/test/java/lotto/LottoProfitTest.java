@@ -15,7 +15,7 @@ public class LottoProfitTest {
 
   @BeforeAll
   static void beforeAll() {
-    MY_LOTTO_TICKETS = new LottoTickets(new PurchaseAmount(14000),
+    MY_LOTTO_TICKETS = new LottoTickets(PurchaseAmount.of(14000, 0),
         Set.of(
             LottoTicket.generate(Set.of(8, 21, 23, 41, 42, 43)),
             LottoTicket.generate(Set.of(3, 5, 11, 16, 32, 38)),

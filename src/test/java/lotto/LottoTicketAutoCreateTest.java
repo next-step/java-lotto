@@ -10,7 +10,7 @@ import static lotto.domain.PurchaseAmount.INVALID_PURCHASE_AMOUNT_INPUT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoTicketCreateTest {
+public class LottoTicketAutoCreateTest {
 
   @ParameterizedTest
   @ValueSource(ints = {3000, 6000, 24000})
@@ -29,7 +29,7 @@ public class LottoTicketCreateTest {
   @DisplayName("구입 금액 -> 로또 '장'수로 컨버팅하는 기능")
   void lottoCreateTest2(int given, int expected) {
     LottoTickets lottoTickets = LottoTickets.purchaseBy(given);
-    assertThat(lottoTickets.ticketCount()).isEqualTo(expected);
+    assertThat(lottoTickets.autoTicketCount()).isEqualTo(expected);
   }
 
   @ParameterizedTest

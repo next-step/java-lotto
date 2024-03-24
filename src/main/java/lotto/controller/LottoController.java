@@ -2,9 +2,13 @@ package lotto.controller;
 
 import lotto.domain.LottoProfit;
 import lotto.domain.LottoTickets;
+import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
+import java.util.Set;
 
 public class LottoController {
 
@@ -17,8 +21,15 @@ public class LottoController {
   }
 
   public void purchase() {
-    LottoTickets lottoTickets = LottoTickets.purchaseBy(inputView.receivePurchaseAmount());
-    resultView.printLottoTicketCounts(lottoTickets.ticketCount());
+
+    int inputPurchaseAmount = inputView.receivePurchaseAmount();
+    int manualPurchaseCount = inputView.receiveManualPurchaseCount();
+    List<Set<Integer>> manualLottoNumbers = inputView.receiveManualPurchaseLottos(manualPurchaseCount);
+
+    PurchaseAmount purchaseAmount = PurchaseAmount.of(inputPurchaseAmount, manualPurchaseCount);
+    LottoTickets lottoTickets = LottoTickets.purchaseBy(purchaseAmount, manualLottoNumbers);
+
+    resultView.printLottoTicketCounts(lottoTickets.autoTicketCount());
     resultView.printLottoTickets(lottoTickets.getTickets());
 
     WinningNumbers winningNumbers = WinningNumbers.of(inputView.receiveWinningNumbers(), inputView.receiveBonusBall());

@@ -1,8 +1,6 @@
 package lotto.view;
 
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -21,11 +19,24 @@ public class InputView {
     return validateInputNumber(toInt(SCANNER.nextLine()));
   }
 
+  public int receiveManualPurchaseCount() {
+    System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    return validateInputNumber(toInt(SCANNER.nextLine()));
+  }
+
+  public List<Set<Integer>> receiveManualPurchaseLottos(int tryCount) {
+    System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+    List<Set<Integer>> result = new ArrayList<>();
+    for (int i = 0; i < tryCount; i++) {
+      result.add(convertIntegerSet());
+    }
+    return result;
+  }
+
   public Set<Integer> receiveWinningNumbers() {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-    return Arrays.stream(SCANNER.nextLine().split(WINNING_NUMBER_SEPARATOR))
-        .map(Integer::parseInt)
-        .collect(Collectors.toSet());
+    return convertIntegerSet();
   }
 
   public int receiveBonusBall() {
@@ -48,5 +59,11 @@ public class InputView {
       throw new IllegalArgumentException(String.format(NEGATIVE_NUMBER_OR_ZERO_IS_NOT_ALLOWED, number));
     }
     return number;
+  }
+
+  private static Set<Integer> convertIntegerSet() {
+    return Arrays.stream(SCANNER.nextLine().split(WINNING_NUMBER_SEPARATOR))
+        .map(Integer::parseInt)
+        .collect(Collectors.toSet());
   }
 }

@@ -4,6 +4,7 @@ import lotto.domain.strategy.ShuffleStrategy;
 import lotto.domain.type.RewardPrice;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
 
@@ -15,21 +16,23 @@ public class LottoTickets {
     this.tickets = tickets;
   }
 
-  public static LottoTickets purchaseBy(int amount) {
-    PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
-    int ticketCount = purchaseAmount.ticketCount();
-
-    Set<LottoTicket> lottoTickets = new HashSet<>();
-    ShuffleStrategy shuffleStrategy = new ShuffleStrategy();
-
-    for (int i = 0; i < ticketCount; i++) {
-      lottoTickets.add(LottoTicket.generate(shuffleStrategy));
-    }
+  public static LottoTickets purchaseBy(PurchaseAmount purchaseAmount, List<Set<Integer>> manualLottoNumbers) {
+    Set<LottoTicket> lottoTickets = getLottoTickets(purchaseAmount, manualLottoNumbers);
     return new LottoTickets(purchaseAmount, lottoTickets);
   }
 
-  public int ticketCount() {
-    return this.purchaseAmount.ticketCount();
+  public static LottoTickets purchaseBy(int amount) {
+    PurchaseAmount purchaseAmount = PurchaseAmount.of(amount, 0);
+    Set<LottoTicket> lottoTickets = getLottoTickets(purchaseAmount, Collections.emptyList());
+    return new LottoTickets(purchaseAmount, lottoTickets);
+  }
+
+  public int autoTicketCount() {
+    return this.purchaseAmount.autoTicketCount();
+  }
+
+  public int allTicketCount() {
+    return this.purchaseAmount.allTicketCount();
   }
 
   public boolean isSamePurchaseAmount(int amount) {
@@ -69,5 +72,26 @@ public class LottoTickets {
       map.put(reward, 0);
     }
     return map;
+  }
+
+  private static Set<LottoTicket> getLottoTickets(PurchaseAmount purchaseAmount, List<Set<Integer>> manualLottoNumbers) {
+    Set<LottoTicket> lottoTickets = initLottoTickets(manualLottoNumbers);
+
+    ShuffleStrategy shuffleStrategy = new ShuffleStrategy();
+    for (int i = 0; i < purchaseAmount.autoTicketCount(); i++) {
+      lottoTickets.add(LottoTicket.generate(shuffleStrategy));
+    }
+
+    return lottoTickets;
+  }
+
+  private static Set<LottoTicket> initLottoTickets(List<Set<Integer>> lottoNumbers) {
+    if (lottoNumbers.isEmpty()) {
+      return new HashSet<>();
+    }
+
+    return lottoNumbers.stream()
+        .map(LottoTicket::generate)
+        .collect(Collectors.toSet());
   }
 }
