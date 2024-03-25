@@ -82,12 +82,15 @@
 - [x] `autoLotto`에서 최초로 주입되어 결론적으로 `LottoMachine`에서 주입된 로또 생성 전략 패턴에 따라 로또의 번호를 변환하여 반환
 
 ### `LottoMachine.java`
-- [x] 구매금액만큼 로또를 생성
-  - [x] 구매금액이 유효한지 판단 후 (1000단위 이상), 유저가 최종적으로 구매한 로또의 개수를 판단
-  - [x] 이때 주어진 로또 생성 전략 패턴에 따라 로또를 생성
+- [x] 구입금액만큼 로또를 생성
+  - [x] 수동 로또는 파라미터로 주입을 받아 lottos 객체에 셋팅
+  - [x] 자동 로또는 전체 구매 개수에서 수동 로또의 구매 개수만큼 차감하여 생성
+  - [x] 이때 자동 로또는 전략 패턴에 따라 생성
 
 ### `LottoWinChecker.java`
-- [x] 당천 번호를 받아 `Lotto` 클래스로 저장 
+- [x] 당천 번호와 보너스 번호를 받아 `Lotto` 클래스로 저장
+  - [x] 이때 당첨 번호와 보너스 번호는 각각 따로 저장
+  - [x] 이때 당첨 번호와 보너스 번호의 중복 여부를 체크
 - [x] 당첨 번호와 유저가 구입한 로또를 비교하여 상금을 받는 로또의 정보를 반환하는 `countMatchedWinLottos()` 메서드 추가
   - [x] `EnumMap<PrizeEnum, Integer>`로 반환
   - [x] 이때 Key값은 당첨 숫자에 해당되는 `PrizeEnum` 객체를, value는 매칭된 번호 개수만큼 상금을 받는 로또의 개수
@@ -95,12 +98,13 @@
 ### `LottoProfitChecker.java`
 - [x] `LottoWinChecker`에서 얻게된 당첨 로또 정보를 통해 전체 상금을 구하는 객체
   - [x] 이때 당첨 금액은 `BigDecimal`로 저장 
-- [x] 로또 구입 금액(=`purchaseAmount`)를 파라미터로 받아 바로 위에서 구한 전체 상금과 나누어 최종적으로 얻게된 우승 상금을 반환하는 `calculateProfitRation()`도 존재
+- [x] 총 로또 구입 개수(=`numberOfTotalLottos`)를 파라미터로 받아 바로 위에서 구한 전체 상금과 나누어 최종적으로 얻게된 우승 상금을 반환하는 `calculateProfitRation()`도 존재
   - [x] 수익률은 `BigDecimal`로 반환
 
 ### `PrizeEnum.java `
 - [x] 우승 번호와 매칭되는 로또 번호의 개수에 따른 `matchedCount`(= 매칭되는 번호 개수), `prize`(= 그에 따른 상금), `isBonusMatched` (= 보너스 번호 매칭 여부)의 정보들을 저장한 enum 클래스
   - [x] 매칭되는 숫자(= `matchedCount`)와 보너스 볼 존재 여부(= `isBonusMatched`)에 따라 `PrizeEnum`을 생성하는 `getPrizeFrom` 생성자 메서드 작성
+- [x] `prizeMap`, `matchedCountToBonusMap`을 `static final Map`으로 생성하여 값을 찾을때마다 `PrizeEnum` 객체를 `Arrays.stream`하지 않도록 개선 
 
 ## Exception
 ### `PurchaseException.java`
@@ -112,9 +116,13 @@
   - [x] 숫자 이외의 입력값을 막는 방어 로직 적용
   - [x] 1,000 단위의 구매값이 맞는지 체크하는 방어 로직 적용
   - [x] 구매값은 `string`으로 반환
+- [x] 수동 로또의 구매 개수와 번호를 입력 받음
+  - [x] 구매한 개수만큼, 입력된 수동 로또의 값에 따라 수동 로또를 생성
 - [x] 로또 우승 번호의 입력값을 받음
   - [x] 6개의 숫자를 1~45 범위에서 받는지 체크하는 방어 로직 적용 
   - [x] 우승번호는 `List<String>`으로 반환
+- [x] 로또 보너스 번호를 입력 받음
+  - [x] 이때 로또 보너스 번호가 우승 번호와 중본된 값이 없는지 판단
 
 ### `ResultView.java`
 - [x] 구매한 로또 개수를 출력
