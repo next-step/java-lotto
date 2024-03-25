@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,6 +15,15 @@ class LottoShopTest {
     void buyLotto(int money) {
         LottoShop lottoShop = new LottoShop();
 
-        assertThat(lottoShop.buyLotto(money)).hasSize(money/lottoShop.getLottoPrice());
+        assertThat(lottoShop.buyLotto(money)).hasSize(money / lottoShop.getLottoPrice());
+    }
+
+    @Test
+    @DisplayName("1000원 이하의 금액이면 IllegalArgumentException 발생한다.")
+    void exception() {
+        LottoShop lottoShop = new LottoShop();
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> lottoShop.buyLotto(999));
     }
 }
