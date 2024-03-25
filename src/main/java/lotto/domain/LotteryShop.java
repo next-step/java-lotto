@@ -17,8 +17,11 @@ public class LotteryShop {
         return cash.subtract(totalPrice);
     }
 
+    public static Lottos exchangeNumbersToLottos(String[][] manualNumbers) {
+        return new Lottos(manualNumbers);
+    }
+
     public static Lottos purchaseAuto(Cash cash) {
         return AutoLottoGenerator.tickets(cash.buyableAmount(LOTTO_PRICE));
     }
-
 }

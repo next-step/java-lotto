@@ -30,6 +30,15 @@ public class LotteryShopTest {
                 .isEqualTo(new BigDecimal(expectChange));
     }
 
+    @DisplayName("복권가게는 내가 선택한 번호들을, 로또로 교환해준다.")
+    @Test
+    void exchangeNumbersToLottos() {
+        final String[][] selectedNumbers = {{"1", "2", "3", "4", "5", "6"}};
+
+        assertThat(LotteryShop.exchangeNumbersToLottos(selectedNumbers).size())
+                .isEqualTo(1);
+    }
+
     @DisplayName("복권가게는 지불한 금액으로 구매할 수 있는 만큼 복권을 반환한다.")
     @ParameterizedTest
     @CsvSource(value = {"0,0", "800,0", "1000,1", "3400,3"})

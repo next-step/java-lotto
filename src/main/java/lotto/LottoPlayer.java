@@ -32,10 +32,11 @@ public class LottoPlayer {
     private Lottos purchaseLotto(Cash cash) {
         final Amount manualAmount = new Amount(InputView.manualAmount());
         Cash change = LotteryShop.purchaseManualAndChange(cash, manualAmount);
+        final Lottos manuals = LotteryShop.exchangeNumbersToLottos(InputView.manualNumbers(manualAmount));
 
-        final Lottos lottos = LotteryShop.purchaseAuto(change);
-        OutputView.printPurchasedLottos(lottos);
-        return lottos;
+        final Lottos autos = LotteryShop.purchaseAuto(change);
+        OutputView.printPurchasedLottos(autos);
+        return autos;
     }
 
     private WinningLotto winningLotto() {
