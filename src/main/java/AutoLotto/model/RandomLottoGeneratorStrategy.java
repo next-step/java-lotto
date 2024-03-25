@@ -2,9 +2,9 @@ package autoLotto.model;
 
 import java.util.*;
 
-import static autoLotto.model.LottoConstants.VALID_LOTTO_LENGTH;
-
 public class RandomLottoGeneratorStrategy implements LottoGeneratorStrategy {
+    private static final int VALID_LOTTO_LENGTH = 6;
+
     @Override
     public Set<LottoNumber> lottoGenerator(List<Integer> lotto) {
         shuffleRandomNumbers(lotto);

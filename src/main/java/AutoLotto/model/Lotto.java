@@ -4,10 +4,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import static autoLotto.model.LottoConstants.INVALID_LOTTO_NUMBERS;
-import static autoLotto.model.LottoConstants.VALID_LOTTO_LENGTH;
-
 public class Lotto {
+    private static final String INVALID_LOTTO_NUMBERS = "로또 번호의 개수는 6개이며, 각 번호는 1 이상 45 이하의 값만 가능합니다.";
+    private static final int VALID_LOTTO_LENGTH = 6;
     private Set<LottoNumber> lotto;
 
     public Lotto(Set<LottoNumber> lotto) {
