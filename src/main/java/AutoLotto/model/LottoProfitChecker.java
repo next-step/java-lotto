@@ -5,7 +5,8 @@ import java.math.RoundingMode;
 import java.util.Map;
 
 public class LottoProfitChecker {
-    private static final Long ZERO_PURCHASE_AMOUNT = 0L;
+    private static final int ZERO_PURCHASE_AMOUNT = 0;
+    private static final int KOREAN_DOLLAR_UNIT = 1000;
     private BigDecimal profit;
 
     public LottoProfitChecker(Map<PrizeEnum, Integer> winLottos) {
@@ -23,12 +24,17 @@ public class LottoProfitChecker {
         return totalWinAmount;
     }
 
-    public BigDecimal getProfitRatio(Long purchaseAmount) {
-        if (purchaseAmount.equals(ZERO_PURCHASE_AMOUNT)) {
+    public BigDecimal getProfitRatio(int numberOfTotalLottos) {
+        if (numberOfTotalLottos == ZERO_PURCHASE_AMOUNT) {
             return BigDecimal.ZERO;
         }
 
+        int purchaseAmount = getPurchaseAmount(numberOfTotalLottos);
         return calculateProfitRatio(BigDecimal.valueOf(purchaseAmount));
+    }
+
+    private int getPurchaseAmount(int numberOfTotalLottos) {
+        return numberOfTotalLottos * KOREAN_DOLLAR_UNIT;
     }
 
     private BigDecimal calculateProfitRatio(BigDecimal purchaseAmount) {
