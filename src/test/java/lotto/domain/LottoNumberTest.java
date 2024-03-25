@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class MatchTest {
+class LottoNumberTest {
 
     private static Stream<Arguments> passInputListAndResult() {
         return Stream.of(
@@ -35,11 +35,11 @@ public class MatchTest {
     @NullSource
     void if_null(List<Integer> nullList) {
         assertThatThrownBy(() -> {
-            Match.getCount(List.of(1, 2, 3), nullList);
+            new LottoNumber(List.of(1,2,3)).getMatchCount(new WinningNumber(nullList));
         }).isInstanceOf(IllegalArgumentException.class);
 
         assertThatThrownBy(() -> {
-            Match.getCount(nullList, List.of(1, 2, 3));
+            new LottoNumber(nullList).getMatchCount(new WinningNumber(List.of(1, 2, 3)));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -47,15 +47,15 @@ public class MatchTest {
     @DisplayName("두 개의 배열을 비교하여 일치하는 개수 반환((1,2,3],[1,2,3]) => 3, ([1,0,4],[1,2,3]) => 1, ([1],[1,2,3,4]) =>1, ([4,3],[1,2,3,4]) => 2")
     @MethodSource("passInputListAndResult")
     void if_not_null(List<Integer> sources, List<Integer> targets, int result) {
-        int matchCount = Match.getCount(sources, targets);
+        int matchCount = new LottoNumber(sources).getMatchCount(new WinningNumber(targets));
         assertThat(matchCount).isEqualTo(result);
     }
 
     @ParameterizedTest
     @DisplayName("보너스 번호가 있는지 확인(([1,2,3], 2) => true, ([1,2,3], 5) => false")
     @MethodSource("bonusInputAndResult")
-    void if_bonus(List<Integer> source, int bonusNumber, boolean result){
-        boolean isBonusContain = Match.getCount(source, bonusNumber);
+    void if_bonus(List<Integer> sources, int bonusNumber, boolean result){
+        boolean isBonusContain = new LottoNumber(sources).isBonusContains(new WinningNumber(bonusNumber));
         assertThat(isBonusContain).isEqualTo(result);
     }
 }

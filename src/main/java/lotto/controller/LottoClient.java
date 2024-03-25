@@ -14,12 +14,17 @@ public class LottoClient {
         Cash cash = generateCash();
         printCash(cash);
         LottoGroup lottoGroup = generateLottoGroupAndPrint(cash);
-        List<Integer> latestWinningNumbers = insertLatestWinningNumbers();
-        int bonusNumber = insertBonusNumber();
+        WinningNumber winningNumber = insertWinningNumbers();
         Profit profit = new Profit(0);
         MatchCache matchCache = new MatchCache();
-        lottoGroup.saveMatchResult(latestWinningNumbers, bonusNumber, matchCache, profit);
+        lottoGroup.saveMatchResult(winningNumber, matchCache, profit);
         printResult(cash, profit, matchCache);
+    }
+
+    private static WinningNumber insertWinningNumbers() {
+        List<Integer> latestWinningNumbers = insertLatestWinningNumbers();
+        int bonusNumber = insertBonusNumber();
+        return new WinningNumber(latestWinningNumbers, bonusNumber);
     }
 
     private static LottoGroup generateLottoGroupAndPrint(Cash cash) {

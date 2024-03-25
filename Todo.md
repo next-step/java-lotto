@@ -64,7 +64,6 @@
 # Step3
 
 ## Todo
-- [ ] winningNumber와 bonusNumber 하나의 클래스로 합치기
 - [ ] profit과 matchCache를 묶는 상위 클래스 하나 만들기
 
 ## Done
@@ -72,3 +71,4 @@
 - [X] 보너스 번호 문구 출력(보너스 볼을 입력해 주세요.)
 - [X] 보너스 번호 입력
 - [X] 당첨 통계 문구 추가("5개 일치, 보너스 볼 일치(30000000원) - 0개")
+- [X] winningNumber와 bonusNumber 하나의 클래스로 합치기
