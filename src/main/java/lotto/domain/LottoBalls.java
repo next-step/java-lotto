@@ -43,6 +43,10 @@ public class LottoBalls implements Iterable<LottoBall> {
     return this.balls.get(index).equals(ball);
   }
 
+  public Boolean contains(final LottoBall ball) {
+    return this.balls.contains(ball);
+  }
+
   @Override
   public Iterator<LottoBall> iterator() {
     return new LottoBallsIterator();
