@@ -6,12 +6,28 @@ import lotto.view.ResultView;
 
 public class LottoController {
 
-    public void buyLotto() {
-        Budget budget = InputView.inputBuyBudget();
-        Lottos lottos = new Lottos(budget);
+    public void simulateLotto() {
+        ResultView.showStatistic(getStatistics());
+    }
+
+    private Statistics getStatistics() {
+        return getLottos().computeStatistic(getWinLotto());
+    }
+
+    private WinLotto getWinLotto() {
+        return InputView.inputLastWinLotto();
+    }
+
+    private Lottos getLottos() {
+        Lottos lottos = new Lottos(getBudget());
         ResultView.showGeneratedLottos(lottos);
-        Statistics resultStatistics = lottos.computeStatistic(InputView.inputLastWinLotto());
-        ResultView.showStatistic(resultStatistics);
+        return lottos;
+    }
+
+    private Budget getBudget() {
+        Budget budget = InputView.inputBuyBudget();
+        ResultView.showLottoQuantity(budget.divide(Lotto.LOTTO_PRICE));
+        return budget;
     }
 
 }

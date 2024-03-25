@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Statistic;
-import lotto.domain.Statistics;
+import lotto.domain.*;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -59,5 +56,9 @@ public class ResultView {
                 .collect(Collectors.toList()));
         result = "[" + result + "]\n";
         return result;
+    }
+
+    public static void showLottoQuantity(int lottoQuantity) {
+        System.out.println(lottoQuantity + "개를 구매했습니다.");
     }
 }
