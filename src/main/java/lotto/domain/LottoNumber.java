@@ -2,9 +2,10 @@ package lotto.domain;
 
 import java.util.Objects;
 
-import static lotto.controller.LottoGame.*;
-
 public class LottoNumber implements Comparable<LottoNumber> {
+
+    public static final int START_INCLUSIVE = 1;
+    public static final int END_INCLUSIVE = 45;
 
     private final int number;
 

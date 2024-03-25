@@ -10,25 +10,20 @@ import java.util.stream.IntStream;
 
 public class LottoGame {
 
-    public static final int START_INCLUSIVE = 1;
-    public static final int END_INCLUSIVE = 45;
     private final InputView inputView;
     private final ResultView resultView;
     private final LottoStore lottoStore;
 
-    public LottoGame(InputView inputView, ResultView resultView) {
+    public LottoGame(InputView inputView, ResultView resultView, LottoStore lottoStore) {
         this.inputView = inputView;
         this.resultView = resultView;
-        List<Integer> lottoNumberPool = IntStream.rangeClosed(START_INCLUSIVE, END_INCLUSIVE)
-                .boxed()
-                .collect(Collectors.toList());
-        this.lottoStore = new LottoStore(new RandomLottoStrategy(lottoNumberPool));
+        this.lottoStore = lottoStore;
     }
 
     public void start() {
         Money money = initMoney();
 
-        PickedLottoNumbers pickedLottoNumbers = lottoStore.buy(money);
+        PickedLottoNumbers pickedLottoNumbers = lottoStore.buy(money, new RandomLottoStrategy());
 
         resultView.printPickedLottoNumbers(pickedLottoNumbers);
 
