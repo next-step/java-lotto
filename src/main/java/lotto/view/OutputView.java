@@ -33,7 +33,7 @@ public class OutputView {
         printPlainMessage(String.format("\n3개 일치 (5000원)- %d개", matchCache.getCounts()[2]));
         printPlainMessage(String.format("4개 일치 (50000원)- %d개", matchCache.getCounts()[3]));
         printPlainMessage(String.format("5개 일치 (1500000원)- %d개", matchCache.getCounts()[4]));
-        printPlainMessage(String.format("5개 일치, 보너스 볼 일치(30000000원) - %d개", matchCache.getCounts()[6]));
+        printPlainMessage(String.format("5개 일치, 보너스 볼 일치(30000000원) - %d개", matchCache.getBonusCount()));
         printPlainMessage(String.format("6개 일치 (2000000000원) - %d개", matchCache.getCounts()[5]));
     }
 
