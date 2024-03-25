@@ -9,7 +9,9 @@ public class LottoList {
     private final List<Lotto> lottos;
 
     public LottoList(Integer count) {
-        this(IntStream.range(0, count).mapToObj(x -> new Lotto()).collect(Collectors.toUnmodifiableList()));
+        this(IntStream.range(0, count)
+                .mapToObj(x -> new Lotto(LottoMaker.getNumbers()))
+                .collect(Collectors.toUnmodifiableList()));
     }
 
     public LottoList(List<Lotto> lottos) {
@@ -24,9 +26,9 @@ public class LottoList {
         return lottos.size();
     }
 
-    public void print(){
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto);
-        }
+    public List<String> getLottoTextList(){
+        return lottos.stream()
+                .map(Lotto::toString)
+                .collect(Collectors.toUnmodifiableList());
     }
 }
