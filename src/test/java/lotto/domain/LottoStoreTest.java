@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,8 +17,22 @@ class LottoStoreTest {
         LottoStore lottoStore = new LottoStore();
         Money money = new Money(1000);
 
-        PickedLottoNumbers pickedLottoNumbers = lottoStore.buy(money, new RandomLottoStrategy());
+        PickedLottoNumbers pickedLottoNumbers = lottoStore.buy(money, new TestLottoStrategy(lottoNumbers));
 
         assertThat(pickedLottoNumbers).containsExactly(lottoNumbers);
+    }
+
+    static class TestLottoStrategy implements LottoGenerateStrategy {
+        private final LottoNumbers lottoNumbers;
+
+        TestLottoStrategy(LottoNumbers lottoNumbers) {
+            this.lottoNumbers = lottoNumbers;
+        }
+
+
+        @Override
+        public LottoNumbers generateLottoNumbers(List<Integer> lottoNumberPool) {
+            return this.lottoNumbers;
+        }
     }
 }
