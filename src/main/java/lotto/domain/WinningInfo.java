@@ -11,12 +11,12 @@ public class WinningInfo {
         this.winningInfo = winningInfo;
     }
 
-    public static WinningInfo of(Lottos lottos, LottoNumber bonusNumber, Lotto winningNumbers) {
+    public static WinningInfo of(Lottos lottos, LottoNumber bonusNumber, Lotto winningLotto) {
         HashMap<Rank, Integer> winningInfo = new HashMap<>();
 
         for (Lotto pickedNumber : lottos) {
-            int matchCount = compareLottoNumbers(pickedNumber, winningNumbers);
-            boolean matchBonus = containBonusNumber(winningNumbers, bonusNumber);
+            int matchCount = compareLottoNumbers(pickedNumber, winningLotto);
+            boolean matchBonus = containBonusNumber(winningLotto, bonusNumber);
 
             Rank rank = Rank.findRank(matchCount, matchBonus);
             winningInfo.put(rank, winningInfo.getOrDefault(rank, 0) + 1);
@@ -24,12 +24,12 @@ public class WinningInfo {
         return new WinningInfo(winningInfo);
     }
 
-    private static boolean containBonusNumber(Lotto pickedNumber, LottoNumber bonusNumber) {
-        return pickedNumber.containBonusNumber(bonusNumber);
+    private static boolean containBonusNumber(Lotto pickedLotto, LottoNumber bonusNumber) {
+        return pickedLotto.containBonusNumber(bonusNumber);
     }
 
-    private static int compareLottoNumbers(Lotto pickedNumber, Lotto winningNumbers) {
-        return pickedNumber.compare(winningNumbers);
+    private static int compareLottoNumbers(Lotto pickedLotto, Lotto winningLotto) {
+        return pickedLotto.compare(winningLotto);
     }
 
     public int totalWinningMoney() {
