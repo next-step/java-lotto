@@ -96,7 +96,7 @@ class LottoMachineTest {
         //given
         LottoMachine lottoMachine = new LottoMachine(new PurchaseAmount(1000));
         WinningNumbers winningNumbers = WinningNumbers.fromValues(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto = Lotto.fromValues(List.of(11, 12, 13, 12, 11, 10));
+        Lotto lotto = Lotto.fromValues(List.of(11, 12, 13, 14, 15, 16));
 
         //when
         Grade grade = lottoMachine.calculatePrizeMoney(winningNumbers, lotto);
@@ -125,9 +125,9 @@ class LottoMachineTest {
         WinningStatistic winningStatistic = lottoMachine.startLotto(autoLottos, winningNumbers);
 
         //then
-        assertThat(winningStatistic.getFirstGradeCount()).isEqualTo(1);
-        assertThat(winningStatistic.getSecondGradeCount()).isEqualTo(1);
-        assertThat(winningStatistic.getThirdGradeCount()).isEqualTo(1);
-        assertThat(winningStatistic.getForthGradeCount()).isEqualTo(1);
+        assertThat(winningStatistic.getGradeCount(Grade.FIRST_GRADE)).isEqualTo(1);
+        assertThat(winningStatistic.getGradeCount(Grade.SECOND_GRADE)).isEqualTo(1);
+        assertThat(winningStatistic.getGradeCount(Grade.THIRD_GRADE)).isEqualTo(1);
+        assertThat(winningStatistic.getGradeCount(Grade.FOUR_GRADE)).isEqualTo(1);
     }
 }

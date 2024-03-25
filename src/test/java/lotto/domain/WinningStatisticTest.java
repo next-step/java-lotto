@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.Arrays;
 import lotto.domain.grade.Grade;
 import lotto.domain.lotto.PurchaseAmount;
 import lotto.domain.winning.WinningStatistic;
@@ -17,15 +18,13 @@ class WinningStatisticTest {
     public void WinningStatistic_Should_Calculate_Rank_Count() {
         WinningStatistic winningStatistic = new WinningStatistic(new PurchaseAmount(10000));
 
-        winningStatistic.calculateWinningStatistic(Grade.FIRST_GRADE);
-        winningStatistic.calculateWinningStatistic(Grade.SECOND_GRADE);
-        winningStatistic.calculateWinningStatistic(Grade.THIRD_GRADE);
-        winningStatistic.calculateWinningStatistic(Grade.FOUR_GRADE);
+        Arrays.asList(Grade.FIRST_GRADE, Grade.SECOND_GRADE, Grade.THIRD_GRADE, Grade.FOUR_GRADE)
+            .forEach(winningStatistic::calculateWinningStatistic);
 
-        assertThat(winningStatistic.getFirstGradeCount()).isEqualTo(1);
-        assertThat(winningStatistic.getSecondGradeCount()).isEqualTo(1);
-        assertThat(winningStatistic.getThirdGradeCount()).isEqualTo(1);
-        assertThat(winningStatistic.getForthGradeCount()).isEqualTo(1);
+        assertThat(winningStatistic.getGradeCount(Grade.FIRST_GRADE)).isEqualTo(1);
+        assertThat(winningStatistic.getGradeCount(Grade.SECOND_GRADE)).isEqualTo(1);
+        assertThat(winningStatistic.getGradeCount(Grade.THIRD_GRADE)).isEqualTo(1);
+        assertThat(winningStatistic.getGradeCount(Grade.FOUR_GRADE)).isEqualTo(1);
     }
 
     @Test
@@ -37,16 +36,6 @@ class WinningStatisticTest {
         double profitRate = winningStatistic.calculateProfitRate();
 
         assertThat(profitRate).isEqualTo(0.35);
-    }
-
-    @Test
-    @DisplayName("WinningStatistic은 존재하지 않는 Grade를 조회할 경우 예외를 발생한다")
-    public void WinningStatistic_Should_Throw_Exception_When_Winning_Statistic_None_Existent_Grade() {
-        WinningStatistic winningStatistic = new WinningStatistic(new PurchaseAmount(10000));
-
-        assertThatThrownBy(() -> winningStatistic.getGradeCount(Grade.UN_LUCKY_GRADE))
-            .isInstanceOf(NotExistGradeException.class)
-            .hasMessage("존재하지 않는 순위입니다. 입력값: UN_LUCKY_GRADE");
     }
 }
 
