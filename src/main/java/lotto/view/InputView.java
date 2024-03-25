@@ -13,8 +13,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.Validator.isNonBlank;
-import static lotto.Validator.isPositiveInteger;
+import static lotto.Validator.*;
 
 public class InputView {
     public static final String COMMA_BLANK_DELIMITER = ", ";
@@ -24,6 +23,7 @@ public class InputView {
     private static final String WINNING_NUMBERS_INPUT_GUIDE_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_NUMBER_INPUT_GUIDE_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String NEXT_LINE = System.lineSeparator();
+    private static final int START_OF_RANGE = 0;
     private static final Scanner SCANNER = new Scanner(System.in);
 
     private InputView() {
@@ -62,7 +62,7 @@ public class InputView {
     }
 
     private static void validateNumberOfManualLottoToPurchaseInput(String numberOfManualLottoToPurchaseInput) {
-        if(!isPositiveInteger(numberOfManualLottoToPurchaseInput)) {
+        if(!isIntegerGreaterThanOrEqualToZero(numberOfManualLottoToPurchaseInput)) {
             throw new InvalidNumberOfManualLottoToPurchase(numberOfManualLottoToPurchaseInput);
         }
     }
@@ -74,7 +74,7 @@ public class InputView {
                 .toString();
 
         System.out.println(manualLottosGuideMessage);
-        List<Lotto> manualLottos = IntStream.range(0, numberOfManualLottoToPurchase.number())
+        List<Lotto> manualLottos = IntStream.range(START_OF_RANGE, numberOfManualLottoToPurchase.number())
                 .mapToObj(i -> {
                     String manualLottoNumbersInput = SCANNER.nextLine();
                     validateNumbersInput(manualLottoNumbersInput);
