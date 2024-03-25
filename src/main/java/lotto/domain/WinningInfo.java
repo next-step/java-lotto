@@ -16,7 +16,7 @@ public class WinningInfo {
 
         for (Lotto pickedNumber : lottos) {
             int matchCount = compareLottoNumbers(pickedNumber, winningNumbers);
-            boolean matchBonus = compareBonusNumber(winningNumbers, bonusNumber);
+            boolean matchBonus = containBonusNumber(winningNumbers, bonusNumber);
 
             Rank rank = Rank.findRank(matchCount, matchBonus);
             winningInfo.put(rank, winningInfo.getOrDefault(rank, 0) + 1);
@@ -24,7 +24,7 @@ public class WinningInfo {
         return new WinningInfo(winningInfo);
     }
 
-    private static boolean compareBonusNumber(Lotto pickedNumber, LottoNumber bonusNumber) {
+    private static boolean containBonusNumber(Lotto pickedNumber, LottoNumber bonusNumber) {
         return pickedNumber.containBonusNumber(bonusNumber);
     }
 

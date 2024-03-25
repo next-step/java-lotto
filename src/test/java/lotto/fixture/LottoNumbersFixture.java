@@ -20,7 +20,7 @@ public enum LottoNumbersFixture {
     private final Lottos pickedNumbers;
     private final Rank rank;
 
-    LottoNumbersFixture(List<Integer> winningNumbers, LottoNumber bonusNumber, List<Integer> pickedNumbers, Rank rank) {
+    LottoNumbersFixture(List<Integer> pickedNumbers, LottoNumber bonusNumber, List<Integer> winningNumbers, Rank rank) {
         this.winningNumbers = new Lotto(winningNumbers);
         this.bonusNumber = bonusNumber;
         Lotto lotto = new Lotto(pickedNumbers);
