@@ -1,4 +1,8 @@
-package lotto;
+package lotto.match;
+
+import lotto.domain.Lotto;
+import lotto.prize.LottoPrize;
+import lotto.prize.PrizeRateStrategy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +23,7 @@ public class LottoResult {
                 .sum();
     }
 
-    public double getWinningPercent(PrizeRateStrategy rateStrategy ,int lottoPrice) {
+    public double getWinningPercent(PrizeRateStrategy rateStrategy , int lottoPrice) {
         int spendMoney = lottoPrice * result.size();
         return rateStrategy.getRate(calculateTotalEarnings(),spendMoney);
     }

@@ -1,4 +1,7 @@
-package lotto;
+package lotto.match;
+
+import lotto.domain.Lotto;
+import lotto.prize.LottoPrize;
 
 import java.util.List;
 import java.util.Map;
