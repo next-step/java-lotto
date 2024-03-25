@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Statistics {
 
-    private List<Statistic> statistics;
+    private final List<Statistic> statistics;
 
     public Statistics(List<Statistic> statistics) {
         this.statistics = statistics;
