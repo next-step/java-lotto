@@ -1,6 +1,9 @@
 package view;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -14,7 +17,10 @@ public class InputView {
     return scanner.nextInt();
   }
 
-  public String inputString() {
-    return scanner.next();
+  public List<Integer> inputIntegerList() {
+    return Arrays.stream(scanner.nextLine().split(","))
+        .map(String::trim)
+        .map(Integer::parseInt)
+        .collect(Collectors.toList());
   }
 }
