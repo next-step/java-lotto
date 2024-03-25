@@ -5,11 +5,11 @@ import java.util.List;
 
 public class WinningLotto {
 
-    private final LottoNumbers winningNumbers;
+    private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
-        this.winningNumbers = winningNumbers;
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
+        this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
     }
 
@@ -21,10 +21,10 @@ public class WinningLotto {
         return new Ranks(ranks);
     }
 
-    public Rank rank(LottoNumbers lottoNumbers) {
-        if (lottoNumbers.isMatchFiveNumberAndBonusNumber(winningNumbers, bonusNumber)) {
+    public Rank rank(Lotto lotto) {
+        if (lotto.isMatchFiveNumberAndBonusNumber(winningLotto, bonusNumber)) {
             return Rank.SECOND;
         }
-        return Rank.of(lottoNumbers.matchCount(winningNumbers));
+        return Rank.of(lotto.matchCount(winningLotto));
     }
 }

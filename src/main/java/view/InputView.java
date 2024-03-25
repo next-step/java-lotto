@@ -1,7 +1,7 @@
 package view;
 
+import domain.Lotto;
 import domain.LottoNumber;
-import domain.LottoNumbers;
 
 import java.util.*;
 
@@ -23,19 +23,19 @@ public class InputView {
         }
     }
 
-    public static LottoNumbers promptForWinningNumbers() {
+    public static Lotto promptForWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        return convertWinningNumbers(scanner.nextLine());
+        return convertStringToLotto(scanner.nextLine());
     }
 
-    private static LottoNumbers convertWinningNumbers(String input) {
+    private static Lotto convertStringToLotto(String input) {
         assertionValidFormat(input);
         Set<LottoNumber> result = new HashSet<>();
         for (String s : input.trim().split(String.format("\\s*%s\\s*", LOTTO_SPLIT_SEPARATOR))) {
             result.add(new LottoNumber(Integer.parseInt(s)));
         }
-        return new LottoNumbers(result);
+        return new Lotto(result);
     }
 
     private static void assertionValidFormat(String input) {
@@ -56,13 +56,13 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<LottoNumbers> promptForLottoNumbers(int count) {
+    public static List<Lotto> promptForLottoNumbers(int count) {
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        List<LottoNumbers> result = new ArrayList<>();
+        List<Lotto> result = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             String input = scanner.nextLine();
-            result.add(convertWinningNumbers(input));
+            result.add(convertStringToLotto(input));
         }
         return result;
     }
