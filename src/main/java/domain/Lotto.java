@@ -20,15 +20,13 @@ public class Lotto {
     }
 
     public boolean isMatchFiveNumberAndBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
-//        return this.matchCount(winningNumbers) == 5 && this.lottoNumbers.contains(bonusNumber);
-        return false;
+        return this.matchCount(winningLotto) == 5 && this.lottoNumbers.contains(bonusNumber);
     }
 
     public int matchCount(Lotto winningLotto) {
-////        Set<LottoNumber> newLottoNumbers1 = new LottoNumbers(new HashSet<>(this.lottoNumbers)).lottoNumbers;
-////        newLottoNumbers1.retainAll(winningNumbers.lottoNumbers);
-//        return newLottoNumbers1.size();
-        return 0;
+        List<LottoNumber> newLottoNumbers = new ArrayList<>(this.lottoNumbers);
+        newLottoNumbers.retainAll(winningLotto.lottoNumbers);
+        return newLottoNumbers.size();
     }
 
     public static Lotto randomLotto() {

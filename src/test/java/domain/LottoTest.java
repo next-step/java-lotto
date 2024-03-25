@@ -29,6 +29,26 @@ public class LottoTest {
         assertThat(rank).isEqualTo(Rank.SECOND);
     }
 
+    @DisplayName("일치하는 갯수를 구한다.")
+    @Test
+    void test03() {
+        Lotto lotto = createLotto(Set.of(1, 2, 3, 4, 5, 6));
+
+        int result = lotto.matchCount(createLotto(Set.of(1, 2, 3, 10, 11, 12)));
+
+        assertThat(result).isEqualTo(3);
+    }
+
+    @DisplayName("2등 조건(5개와 보너스 번호 매치)과 매치하는지 구한다.")
+    @Test
+    void test04() {
+        Lotto lotto = createLotto(Set.of(1, 2, 3, 4, 5, 6));
+
+        boolean result = lotto.isMatchFiveNumberAndBonusNumber(createLotto(Set.of(1, 2, 3, 4, 5, 7)), new LottoNumber(6));
+
+        assertThat(result).isTrue();
+    }
+
     private static Lotto createLotto(Set<Integer> numbers) {
         Set<LottoNumber> result = new HashSet<>();
         for (Integer number : numbers) {
