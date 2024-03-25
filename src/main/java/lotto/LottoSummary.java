@@ -1,50 +1,31 @@
 package lotto;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 
-public class LottoSummary {
+public class LottoSummary implements LottoStatistics{
 
-    private List<LottoResult> lottoResults;
-    private Money payMoney;
+    private final List<Rank> ranks;
+    private final Money paidMoney;
 
-    public LottoSummary(List<LottoResult> lottoResults, Money payMoney) {
-        this.lottoResults = lottoResults;
-        this.payMoney = payMoney;
+    public LottoSummary(List<Rank> ranks, Money paidMoney) {
+        this.ranks = ranks;
+        this.paidMoney = paidMoney;
     }
 
-    public BigDecimal getRateOfReturn() {
-        long priceSum = lottoResults.stream()
-                .map(lottoResult -> lottoResult.getRank().getWinPrice())
-                .mapToLong(BigDecimal::longValue)
+    @Override
+    public float rateOfReturn() {
+        Long priceSum = ranks.stream()
+                .map(Rank::getWinPrice)
+                .mapToLong(a -> a)
                 .sum();
 
-        return BigDecimal.valueOf(priceSum).divide(payMoney.getValue(), 2, RoundingMode.DOWN);
+        return (float) (Math.floor(priceSum.floatValue() / paidMoney.getMoney() * 100.0f) / 100.0f);
     }
 
-    public int getFirstRankCount() {
-        return (int) lottoResults.stream()
-                .filter(it -> Rank.FIRST == it.getRank())
-                .count();
-    }
-
-    public int getSecondRankCount() {
-        return (int) lottoResults.stream()
-                .filter(it -> Rank.SECOND == it.getRank())
-                .count();
-    }
-
-    public int getThirdRankCount() {
-        return (int) lottoResults.stream()
-                .filter(it -> Rank.THIRD == it.getRank())
-                .count();
-    }
-
-    public int getForthRankCount() {
-        return (int) lottoResults.stream()
-                .filter(it -> Rank.FORTH == it.getRank())
+    public int getRankCount(Rank rank) {
+        return (int) ranks.stream()
+                .filter(it -> rank == it)
                 .count();
     }
 }

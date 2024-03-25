@@ -3,17 +3,17 @@ package lotto;
 import java.math.BigDecimal;
 
 public class Money {
-    private BigDecimal money;
+    private long money;
 
-    public Money(int money) {
-        this.money = BigDecimal.valueOf(money);
+    public Money(long money) {
+        this.money = money;
     }
 
     public int divide(int value) {
-        return money.divide(BigDecimal.valueOf(value)).intValue();
+        return (int) money / value;
     }
 
-    public BigDecimal getValue() {
-        return this.money;
+    public long getMoney() {
+        return money;
     }
 }

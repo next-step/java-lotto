@@ -5,29 +5,29 @@ import java.util.Arrays;
 import java.util.Set;
 
 public enum Rank {
-    FIRST(Set.of(6), BigDecimal.valueOf(2_000_000_000)),
-    SECOND(Set.of(5), BigDecimal.valueOf(1_500_000)),
-    THIRD(Set.of(4), BigDecimal.valueOf(50_000)),
-    FORTH(Set.of(3), BigDecimal.valueOf(5_000)),
-    NONE(Set.of(1, 2), BigDecimal.valueOf(0))
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 1_500_000),
+    THIRD(4, 50_000),
+    FORTH(3, 5_000),
+    NONE(0, 0)
     ;
 
-    private final Set<Integer> matchNumberCount;
-    private final BigDecimal winPrice;
+    private final int matchNumberCount;
+    private final long winPrice;
 
-    Rank(Set<Integer> matchNumberCount, BigDecimal winPrice) {
+    Rank(int matchNumberCount, long winPrice) {
         this.matchNumberCount = matchNumberCount;
         this.winPrice = winPrice;
     }
 
     public static Rank getRank(int matchNumberCount) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.matchNumberCount.contains(matchNumberCount))
+                .filter(rank -> rank.matchNumberCount == matchNumberCount)
                 .findFirst()
                 .orElse(NONE);
     }
 
-    public BigDecimal getWinPrice() {
+    public long getWinPrice() {
         return winPrice;
     }
 }

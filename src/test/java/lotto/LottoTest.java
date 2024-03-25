@@ -1,6 +1,5 @@
 package lotto;
 
-import org.assertj.core.internal.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,9 +29,9 @@ class LottoTest {
 
         Lotto lotto = new Lotto( new LottoNumbers(lottoNums));
 
-        LottoResult sut = lotto.match(new LottoNumbers(winningNums));
+        Rank sut = lotto.match(new LottoNumbers(winningNums));
 
-        assertThat(sut.getRank()).isEqualTo(rank);
+        assertThat(sut).isEqualTo(rank);
     }
 
 

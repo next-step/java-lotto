@@ -1,19 +1,17 @@
 package lotto;
 
+import java.util.List;
+
 public class LottoResult {
-    private int matchedCount;
-    private Rank rank;
+    private final List<Rank> ranks;
+    private final Money paidMoney;
 
-    public LottoResult(int matchedCount) {
-        this.matchedCount = matchedCount;
-        this.rank = Rank.getRank(matchedCount);
+    public LottoResult(List<Rank> ranks, Money paidMoney) {
+        this.ranks = ranks;
+        this.paidMoney = paidMoney;
     }
 
-    public Rank getRank() {
-        return rank;
-    }
-
-    public int getMatchedCount() {
-        return matchedCount;
+    public LottoSummary toLottoSummary() {
+        return new LottoSummary(ranks, paidMoney);
     }
 }

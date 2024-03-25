@@ -3,7 +3,7 @@ package lotto;
 
 public class Lotto {
 
-    private LottoNumbers lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
     public Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
@@ -13,8 +13,8 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public LottoResult match(LottoNumbers winningLottoNumbers) {
-        return new LottoResult(lottoNumbers.matchNumberCount(winningLottoNumbers));
+    public Rank match(LottoNumbers winNums) {
+        return Rank.getRank(lottoNumbers.matchNumberCount(winNums));
     }
 
 }
