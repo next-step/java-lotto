@@ -31,9 +31,9 @@ public class LottoPlayer {
 
     private Lottos purchaseLotto(Cash cash) {
         final Amount manualAmount = new Amount(InputView.manualAmount());
+        Cash change = LotteryShop.purchaseManualAndChange(cash, manualAmount);
 
-
-        final Lottos lottos = LotteryShop.purchaseAuto(cash);
+        final Lottos lottos = LotteryShop.purchaseAuto(change);
         OutputView.printPurchasedLottos(lottos);
         return lottos;
     }

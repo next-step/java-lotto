@@ -8,6 +8,15 @@ public class LotteryShop {
 
     private LotteryShop() {}
 
+    public static Cash purchaseManualAndChange(Cash cash, Amount amount) {
+        final Cash totalPrice = LOTTO_PRICE.multiply(amount);
+        if (cash.smallerThan(totalPrice)) {
+            throw new IllegalArgumentException("현금이 부족합니다.");
+        }
+
+        return cash.subtract(totalPrice);
+    }
+
     public static Lottos purchaseAuto(Cash cash) {
         return AutoLottoGenerator.tickets(cash.buyableAmount(LOTTO_PRICE));
     }

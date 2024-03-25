@@ -9,7 +9,7 @@ public class Cash {
     private final BigDecimal value;
 
     public Cash(long cash) {
-        this(new BigDecimal(cash));
+        this(BigDecimal.valueOf(cash));
     }
 
     public Cash(BigDecimal cash) {
@@ -28,12 +28,25 @@ public class Cash {
                 .intValue();
     }
 
+    public boolean equalsZero() {
+        return value.equals(BigDecimal.ZERO);
+    }
+
     public RateOfReturn rateOfReturn(Cash earned) {
         return new RateOfReturn(earned.value().divide(value, MathContext.DECIMAL32).doubleValue());
     }
 
-    public boolean equalsZero() {
-        return value.equals(BigDecimal.ZERO);
+    public boolean smallerThan(Cash target) {
+        return value.compareTo(target.value()) < 0;
+    }
+
+    public Cash multiply(Amount amount) {
+        return new Cash(
+                value.multiply(BigDecimal.valueOf(amount.value())));
+    }
+
+    public Cash subtract(Cash target) {
+        return new Cash(value.subtract(target.value()));
     }
 
     private void assertCashPositive(BigDecimal cash) {
