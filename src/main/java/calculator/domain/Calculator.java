@@ -1,26 +1,23 @@
 package calculator.domain;
 
-import java.util.List;
-
 public class Calculator {
+    private final int INITIAL_VALUE_INDEX = 0;
+
     private final CurrentResult currentResult;
     private final ParsedFormula parsedFormula;
 
     public Calculator(String formula) {
         this.parsedFormula = new ParsedFormula(formula);
-        this.currentResult = new CurrentResult(this.parsedFormula.getInitialValue());
+        this.currentResult = new CurrentResult(this.parsedFormula.getOperand(INITIAL_VALUE_INDEX));
     }
 
-    public int calculateWholeFormula() {
-
+    public void calculateWholeFormula() {
         for (int currentPosition = 1; currentPosition < parsedFormula.getLength(); currentPosition += 2) {
-            String operator = parsedFormula.getNextOperator(currentPosition);
-            int operand = parsedFormula.getNextOperand(currentPosition);
+            String operator = parsedFormula.getOperator(currentPosition);
+            int operand = parsedFormula.getOperand(currentPosition + 1);
 
             operate(operator, operand);
         }
-
-        return this.currentResult.getCurrentResult();
     }
 
     public int getCurrentResult() {
@@ -53,21 +50,19 @@ public class Calculator {
         }
     }
 
-    public int add(int a, int b) {
+    private int add(int a, int b) {
         return a + b;
     }
 
-    public int subtract(int a, int b) {
+    private int subtract(int a, int b) {
         return a - b;
     }
 
-    public int multiply(int a, int b) {
+    private int multiply(int a, int b) {
         return a * b;
     }
 
-    public int divide(int a, int b) {
+    private int divide(int a, int b) {
         return a / b;
     }
-
-
 }

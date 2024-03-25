@@ -11,7 +11,7 @@ public class CurrentResult {
         return currentResult;
     }
 
-    void updateResult(int currentResult) {
+    public void updateResult(int currentResult) {
         this.currentResult = currentResult;
     }
 }
