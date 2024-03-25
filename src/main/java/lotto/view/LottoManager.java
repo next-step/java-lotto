@@ -15,6 +15,7 @@ public class LottoManager {
 		Integer pay = inputView.inputPay();
 		MyLottos myLottos = outputView.printBuyLottos(pay);
 		String winNumber = inputView.getWinNumber();
-		outputView.printWinnersStatistics(winNumber, myLottos);
+		String bonusNumber = inputView.getBonusNumber();
+		outputView.printWinnersStatistics(winNumber, myLottos, bonusNumber);
 	}
 }
