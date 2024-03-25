@@ -7,7 +7,9 @@ public class LottoStore {
     public Lottos buyAutoLotto(int amount){
         int count = calculateLottoCount(amount);
 
-        return new Lottos();
+        LottoGenerator lottoGenerator = new LottoGenerator();
+
+        return new Lottos(count, lottoGenerator);
     }
 
     private int calculateLottoCount(int amount){

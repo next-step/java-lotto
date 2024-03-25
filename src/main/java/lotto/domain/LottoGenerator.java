@@ -6,7 +6,7 @@ import java.util.List;
 
 public class LottoGenerator {
 
-    List<Integer> lottoNumbers = new ArrayList<>();
+    private final List<Integer> lottoNumbers = new ArrayList<>();
 
     public LottoGenerator(){
         for(int i =1; i <= 45; i++){
@@ -15,7 +15,9 @@ public class LottoGenerator {
     }
 
     public List<Integer> randomNumber() {
-        Collections.shuffle(this.lottoNumbers);
-        return lottoNumbers.subList(0,6);
+        Collections.shuffle(lottoNumbers);
+        List<Integer> shuffleNumbers = new ArrayList<>(lottoNumbers.subList(0,6));
+        Collections.sort(shuffleNumbers);
+        return shuffleNumbers;
     }
 }

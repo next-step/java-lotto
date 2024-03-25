@@ -1,7 +1,9 @@
 package lotto;
 
 import lotto.domain.LottoStore;
+import lotto.domain.Lottos;
 import lotto.view.InputView;
+import lotto.view.ResultView;
 
 public class LottoMain {
 
@@ -9,9 +11,9 @@ public class LottoMain {
         int amount = InputView.inputAmount();
 
         LottoStore lottoStore = new LottoStore();
-        lottoStore.buyAutoLotto(amount);
+        Lottos lottos = lottoStore.buyAutoLotto(amount);
 
-
+        ResultView.printResult(lottos);
 
     }
 }
