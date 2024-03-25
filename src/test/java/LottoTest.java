@@ -22,9 +22,10 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 총 갯수")
+    @DisplayName("로또 기게 랜덤 숫자")
     public void totalLotto() {
         LottoMachine lottoMachine = new LottoMachine();
-        lottoMachine.pull();
+        assertThat(lottoMachine.pull().size()).isEqualTo(6);
+
     }
 }
