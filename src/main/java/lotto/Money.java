@@ -25,6 +25,10 @@ public class Money {
         return (long) (number / this.amount);
     }
 
+    public Money multiply(int number) {
+        return new Money(this.amount * number);
+    }
+
     public Ratio calculateRatio(Money budget) {
         return budget.divideBy(this.amount);
     }
@@ -52,5 +56,10 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%.0f", this.amount);
     }
 }

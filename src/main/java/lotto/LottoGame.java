@@ -26,9 +26,9 @@ public class LottoGame {
                 .collect(Collectors.toList());
     }
 
-    public RankMap getPrizeByRank(Lotto winningLotto) {
+    public RankMap getPrizeByRank(WiningLotto winningLotto) {
         List<MatchedCount> collect = lottos.stream()
-                .map(lotto -> lotto.countMatchedNumber(winningLotto))
+                .map(winningLotto::countMatchedNumber)
                 .filter(MatchedCount::isWin)
                 .collect(Collectors.toList());
         return new RankMap(collect);

@@ -29,10 +29,22 @@ class MoneyTest {
     }
 
     @Test
+    void multiply_amount() {
+        Money money = new Money(1000);
+        assertThat(money.multiply(3)).isEqualTo(new Money(3000));
+    }
+
+    @Test
     void 총_수익률_계산() {
         Money totalPrize = new Money(100000);
         Money budget = new Money(1000);
 
         assertThat(totalPrize.calculateRatio(budget)).isEqualTo(new Ratio(100));
+    }
+
+    @Test
+    void sum() {
+        assertThat(new Money(1000).sum(new Money(3000)))
+                .isEqualTo(new Money(4000));
     }
 }

@@ -5,17 +5,27 @@ import java.util.Objects;
 public class MatchedCount {
 
     private final long count;
+    private final boolean isBonus;
 
     public MatchedCount(long count) {
+        this(count, false);
+    }
+
+    public MatchedCount(long count, boolean isBonus) {
         this.count = count;
+        this.isBonus = isBonus;
     }
 
     public boolean isEquals(int matchedCount) {
-        return this.count == matchedCount;
+        return this.count == matchedCount && !isBonus;
     }
 
     public boolean isWin() {
         return this.count > 2;
+    }
+
+    public boolean isBonusMatched() {
+        return isBonus;
     }
 
     @Override
@@ -23,12 +33,12 @@ public class MatchedCount {
         if (this == o) return true;
         if (!(o instanceof MatchedCount)) return false;
         MatchedCount that = (MatchedCount) o;
-        return count == that.count;
+        return count == that.count && isBonus == that.isBonus;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(count);
+        return Objects.hash(count, isBonus);
     }
 
     @Override
