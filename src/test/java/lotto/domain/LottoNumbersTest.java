@@ -11,8 +11,8 @@ public class LottoNumbersTest {
     @DisplayName("로또 번호 45개가 리스트에 생성되는지 확인하는 테스트")
     @Test
     void setUp() {
-        List<Integer> lottoNumbers = LottoNumbers.setUp();
-        assertThat(LottoNumbers.setUp()).hasSize(45);
+        List<Integer> lottoNumbers = LottoNumbers.setLottoNumbers();
+        assertThat(LottoNumbers.setLottoNumbers()).hasSize(45);
         assertThat(lottoNumbers).containsExactly(
                 1,2,3,4,5,6,7,8,9,10,
                 11,12,13,14,15,16,17,18,19,20,

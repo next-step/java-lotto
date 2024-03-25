@@ -8,17 +8,17 @@ import java.util.List;
 import java.util.Objects;
 
 public class Winning {
-    private final List<Number> winNumbers = new ArrayList<>();
+    private final List<Integer> winNumbers = new ArrayList<>();
 
-    public List<Number> createWinNumbers(String input) {
+    public List<Integer> createWinNumbers(String input) {
         String[] textWinNumbers = splitWinNumbers(input);
-        checkWinNumbers(textWinNumbers);
+        checkWinNumbersSize(textWinNumbers);
         return parseWinNumbers(textWinNumbers);
     }
 
-    private List<Number> parseWinNumbers(String[] textWinNumbers) {
+    private List<Integer> parseWinNumbers(String[] textWinNumbers) {
         for (String textWinNumber : textWinNumbers) {
-            winNumbers.add(new Number(parseInt(textWinNumber)));
+            winNumbers.add(parseInt(textWinNumber));
         }
         return winNumbers;
     }
@@ -27,7 +27,7 @@ public class Winning {
         return Integer.parseInt(textWinNumber);
     }
 
-    private void checkWinNumbers(String[] textWinNumbers) {
+    private void checkWinNumbersSize(String[] textWinNumbers) {
         if (textWinNumbers.length != Constant.WINNING_SIZE) {
             throw new IllegalArgumentException("당첨번호 개수는 6개여야 합니다.");
         }

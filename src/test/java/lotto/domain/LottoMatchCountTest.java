@@ -11,7 +11,7 @@ public class LottoMatchCountTest {
     void 매치_수() {
         List<Integer> lottoNumbers = List.of(1,2,3,7,8,9);
         Lotto lotto = new Lotto(lottoNumbers);
-        List<Number> winNumbers = new Winning().createWinNumbers("1,2,3,4,5,6");
+        List<Integer> winNumbers = new Winning().createWinNumbers("1,2,3,4,5,6");
 
         assertThat(LottoMatchCount.matchCount(lotto.getLotto(), winNumbers)).isEqualTo(3);
     }

@@ -25,7 +25,7 @@ public class ResultView {
         String[] lottoList = new String[lottoNumbers.size()];
 
         for (int i = 0; i < lottoNumbers.size(); i++) {
-            lottoList[i] = parseString(lottoNumbers.get(i).getLottoNumber().getNumber());
+            lottoList[i] = parseString(lottoNumbers.get(i).getLottoNumber());
         }
         System.out.println("[" + String.join(", ", lottoList) + "]");
     }

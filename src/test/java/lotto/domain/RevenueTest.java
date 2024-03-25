@@ -12,7 +12,7 @@ public class RevenueTest {
     @Test
     void 수익률_계산() {
         Revenue revenue = new Revenue();
-        assertThat(revenue.calculate(10000, 3000)).isEqualTo(0.3);
+        assertThat(revenue.calculateRevenue(10000, 3000)).isEqualTo(0.3);
     }
 
     @Test
@@ -25,7 +25,7 @@ public class RevenueTest {
                         new Lotto(List.of(1,2,3,4,5,6))
                 )
         );
-        List<Number> winNumbers = new Winning().createWinNumbers("1,2,3,4,5,6");
+        List<Integer> winNumbers = new Winning().createWinNumbers("1,2,3,4,5,6");
         assertThat(revenue.getRevenueTotal(LottoMatch.match(lottos, winNumbers))).isEqualTo(2000055000);
     }
 }

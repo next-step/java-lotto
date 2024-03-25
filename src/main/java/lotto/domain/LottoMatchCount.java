@@ -4,7 +4,7 @@ import java.util.List;
 
 public class LottoMatchCount {
 
-    public static int matchCount(List<LottoNumber> lottoNumbers, List<Number> winNumbers) {
+    public static int matchCount(List<LottoNumber> lottoNumbers, List<Integer> winNumbers) {
         int count = 0;
 
         for (int i = 0; i < winNumbers.size(); i++) {
@@ -14,7 +14,7 @@ public class LottoMatchCount {
         return count;
     }
 
-    private static int isEqualLottoAndWin(List<Number> winNumbers, LottoNumber lottoNumber) {
+    private static int isEqualLottoAndWin(List<Integer> winNumbers, LottoNumber lottoNumber) {
         if (winNumbers.contains(lottoNumber.getLottoNumber())) {
             return 1;
         }

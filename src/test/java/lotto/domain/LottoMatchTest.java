@@ -18,7 +18,7 @@ public class LottoMatchTest {
                     new Lotto(List.of(1,2,3,4,5,6))
                 )
         );
-        List<Number> winNumbers = new Winning().createWinNumbers("1,2,3,4,5,6");
+        List<Integer> winNumbers = new Winning().createWinNumbers("1,2,3,4,5,6");
         HashMap<Integer, Integer> matchResult = LottoMatch.match(lottos, winNumbers);
 
         assertThat(matchResult.get(Constant.FOURTH_PLACE)).isEqualTo(1);

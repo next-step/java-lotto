@@ -16,7 +16,7 @@ public class LottoMatch {
         }};
     }
 
-    public static HashMap<Integer, Integer> match(Lottos lottos, List<Number> winNumbers) throws IllegalArgumentException{
+    public static HashMap<Integer, Integer> match(Lottos lottos, List<Integer> winNumbers) throws IllegalArgumentException{
         List<Lotto> lottoList = lottos.getLottos();
         HashMap<Integer, Integer> matchResult = setUp();
         int matchCount;
