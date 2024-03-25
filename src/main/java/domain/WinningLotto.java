@@ -16,7 +16,7 @@ public class WinningLotto {
     public Ranks ranks(Lottos lottos) {
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            ranks.add(lotto.rank(this));
+            ranks.add(this.rank(lotto));
         }
         return new Ranks(ranks);
     }

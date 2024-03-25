@@ -24,18 +24,18 @@ public class Lotto {
         }
     }
 
-    public Rank rank(WinningLotto winningLotto) {
-        return winningLotto.rank(this);
-    }
-
-    public boolean isMatchFiveNumberAndBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
-        return this.matchCount(winningLotto) == 5 && this.lottoNumbers.contains(bonusNumber);
+    public boolean match(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
     public int matchCount(Lotto winningLotto) {
         List<LottoNumber> newLottoNumbers = new ArrayList<>(this.lottoNumbers);
         newLottoNumbers.retainAll(winningLotto.lottoNumbers);
         return newLottoNumbers.size();
+    }
+
+    public boolean isMatchFiveNumberAndBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
+        return this.matchCount(winningLotto) == 5 && this.match(bonusNumber);
     }
 
     public static Lotto randomLotto() {
