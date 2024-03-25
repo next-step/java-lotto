@@ -17,10 +17,10 @@ public class WinningNumbers {
                 .collect(Collectors.toUnmodifiableList()));
     }
 
-    public int countMatchingWith(List<Integer> lottoNumbers) {
-        return Math.toIntExact(lottoNumbers.stream()
-                .map(WinningNumber::new)
-                .filter(winningNumbers::contains)
+    public int countMatchingWith(LottoNumbers lottoNumbers) {
+        return Math.toIntExact(this.winningNumbers.stream()
+                .map(WinningNumber::number)
+                .filter(lottoNumbers::isContains)
                 .count());
     }
 

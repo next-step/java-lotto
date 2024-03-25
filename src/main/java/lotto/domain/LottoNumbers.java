@@ -32,4 +32,10 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
+    public boolean isContains(int number) {
+        return this.lottoNumbers.stream()
+                .map(LottoNumber::number)
+                .anyMatch(it -> it == number);
+    }
+
 }

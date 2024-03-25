@@ -37,12 +37,12 @@ public class ResultView {
 
     public void printResult(LottoMachine lottoMachine, List<Integer> winningNumbers, Price price, BonusBall bonusBall) {
         LottoMatchingService lottoMatchingService = new LottoMatchingService(winningNumbers, bonusBall);
-        Map<Prize, Integer> integers = lottoMatchingService.matchWinningNumber(lottoMachine.generateLottoTickets());
+        Map<Prize, Integer> integers = lottoMatchingService.matchWinningNumber(lottoMachine.getLottoTickets());
         System.out.println("\n당첨 통계");
         System.out.println("---------");
         Prize[] values = Prize.values();
-        for (int i = 0; i < Prize.values().length - 1; i++) {
-            // 갯수가 있으면 출력 없으면 0개라고 출력
+        for (int i = 0; i < values.length - 1; i++) {
+            // 갯수가 있으면 그 갯수 출력, 없으면 0개라고 출력
             System.out.println(values[i + 1].getMatchCount() + "개 일치(" + values[i + 1].getWinningMoney() + "원)- " + integers.getOrDefault(values[i + 1], 0) + "개");
             printSecondPrize(i, values, integers);
         }

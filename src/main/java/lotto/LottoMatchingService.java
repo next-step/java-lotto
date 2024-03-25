@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.BonusBall;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.domain.Prize;
 import lotto.domain.Prizes;
 import lotto.domain.WinningNumbers;
@@ -26,10 +27,10 @@ public class LottoMatchingService {
 
     //todo: lottoTickets와 수동으로 입력한 번호들을 합쳐 지난주 당첨번호와 비교한다
     //현재 인수는 자동 로또리스트
-    public Map<Prize, Integer> matchWinningNumber(List<LottoTicket> lottoTickets) {
-        List<Prize> prizes = lottoTickets.stream()
+    public Map<Prize, Integer> matchWinningNumber(LottoTickets lottoTickets) {
+        List<Prize> prizes = lottoTickets.getLottoTickets().stream()
                 .map(lottoTicket -> Prize.valueOf(
-                        winningNumbers.countMatchingWith(lottoTicket.generate()), isMatchBonusBall(lottoTicket))
+                        winningNumbers.countMatchingWith(lottoTicket.getLottoNumbers()), isMatchBonusBall(lottoTicket))
                 )
                 .collect(Collectors.toUnmodifiableList());
 

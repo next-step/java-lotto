@@ -40,4 +40,8 @@ public class LottoTicket {
         return this.lottoNumbers.generateLottoNumbers();
     }
 
+    public LottoNumbers getLottoNumbers() {
+        return lottoNumbers;
+    }
+
 }

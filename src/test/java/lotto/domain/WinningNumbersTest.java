@@ -14,6 +14,6 @@ public class WinningNumbersTest {
         WinningNumbers winningNumbers = WinningNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6));
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-        assertThat(winningNumbers.countMatchingWith(lottoNumbers)).isEqualTo(6);
+        assertThat(winningNumbers.countMatchingWith(LottoNumbers.of(lottoNumbers))).isEqualTo(6);
     }
 }
