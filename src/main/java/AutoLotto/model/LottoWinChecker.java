@@ -6,29 +6,45 @@ import java.util.Map;
 import java.util.Set;
 
 public class LottoWinChecker {
-    private Lotto winLotto;
+    private static final String BONUS_NUMBER_DENIED = "당첨 번호와 중복 없이 1 ~ 45 사이의 숫자 1개만 입력이 가능합니다.";
 
-    public LottoWinChecker(List<String> winNumbers) {
+    private final Lotto winLotto;
+    private final LottoNumber bonusNumber;
+
+    public LottoWinChecker(List<String> winNumbers, int bonusNumber) {
         this.winLotto = Lotto.createLottoFrom(winNumbers);
+        this.bonusNumber = generateBonusNumber(winNumbers, bonusNumber);
     }
 
-    public Map<PrizeEnum, Integer> checkWinLottos(List<Lotto> lottos, int bonusNumber) {
-        return countMatchedWinLottos(lottos, bonusNumber);
+    private LottoNumber generateBonusNumber(List<String> winNumbers, int bonusNumber) {
+        if (isDuplicatedBonusNumber(winNumbers, bonusNumber)) {
+            throw new IllegalArgumentException(BONUS_NUMBER_DENIED);
+        }
+
+        return new LottoNumber(bonusNumber);
     }
 
-    private Map<PrizeEnum, Integer> countMatchedWinLottos(List<Lotto> lottos, int bonusNumber) {
+    private boolean isDuplicatedBonusNumber(List<String> winNumbers, int bonusNumber) {
+        String bonusNumberAsString = String.valueOf(bonusNumber);
+        return winNumbers.contains(bonusNumberAsString);
+    }
+
+    public Map<PrizeEnum, Integer> checkWinLottos(List<Lotto> lottos) {
+        return countMatchedWinLottos(lottos);
+    }
+
+    private Map<PrizeEnum, Integer> countMatchedWinLottos(List<Lotto> lottos) {
         Map<PrizeEnum, Integer> result = new EnumMap<>(PrizeEnum.class);
 
         for (Lotto lotto : lottos) {
             int countOfWinNumbers = compareWinNumbers(lotto);
-            boolean isBonusMatched = compareBonusNumber(lotto, bonusNumber, countOfWinNumbers);
+            boolean isBonusMatched = compareBonusNumber(lotto, countOfWinNumbers);
             PrizeEnum prize = PrizeEnum.getPrizeFrom(countOfWinNumbers, isBonusMatched);
             result.put(prize, result.getOrDefault(prize, 0) + 1);
         }
 
         return result;
     }
-
 
     private int compareWinNumbers(Lotto lotto) {
         Set<LottoNumber> targetLotto = lotto.getLotto();
@@ -41,13 +57,12 @@ public class LottoWinChecker {
         return matchingNumbers;
     }
 
-
-    private boolean compareBonusNumber(Lotto userLotto, int bonusNumber, int countOfWinNumbers) {
-        if (countOfWinNumbers != PrizeEnum.SECOND.getMatchedCount()) {
+    private boolean compareBonusNumber(Lotto userLotto, int countOfWinNumbers) {
+        if (PrizeEnum.isBonusMatchedFrom(countOfWinNumbers)) {
             return false;
         }
 
-        return userLotto.containsNumber(bonusNumber);
+        return userLotto.containsNumber(bonusNumber.getLottoNumber());
     }
 
     private int hasWinNumber(Integer targetLottoNumber) {
