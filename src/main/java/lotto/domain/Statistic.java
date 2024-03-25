@@ -57,10 +57,15 @@ public enum Statistic {
     }
 
     public static Statistic getStatisticWithBonusOrNot(List<Statistic> statistics, boolean bonusMatched) {
-        if (bonusMatched) {
+        if (isHasBonusRequiredStatistic(statistics) && bonusMatched) {
             return getStatisticWithBonus(statistics);
         }
         return getStatisticWithoutBonus(statistics);
+    }
+
+    private static boolean isHasBonusRequiredStatistic(List<Statistic> statistics) {
+        return statistics.stream()
+            .anyMatch(Statistic::isBonusRequired);
     }
 
     private static List<Statistic> getNumberMatchedStatistic(int featNumberCount) {
