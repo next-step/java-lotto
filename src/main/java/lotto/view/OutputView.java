@@ -21,20 +21,21 @@ public class OutputView {
 
     private OutputView() {}
 
-    public static void printPurchasedLottos(Lottos lottos) {
-        if (lottos.isEmpty()) {
+    public static void printPurchasedLottos(Lottos manuals, Lottos autos) {
+        if (manuals.isEmpty() && autos.isEmpty()) {
             return;
         }
 
-        printPurchasedAmount(lottos.size());
+        printPurchasedAmount(manuals.size(), autos.size());
 
-        lottos.forEach(OutputView::printPurchasedLottoNumbers);
+        manuals.forEach(OutputView::printPurchasedLottoNumbers);
+        autos.forEach(OutputView::printPurchasedLottoNumbers);
 
         lineChange();
     }
 
-    private static void printPurchasedAmount(int amount) {
-        printLine(String.format(Announcements.PURCHASE_AMOUNT_FORMAT, amount));
+    private static void printPurchasedAmount(int manualAmount, int autoAmount) {
+        printLine(String.format(Announcements.PURCHASE_AMOUNT_FORMAT, manualAmount, autoAmount));
     }
 
     private static void printPurchasedLottoNumbers(Lotto lotto) {
@@ -72,7 +73,7 @@ public class OutputView {
     }
 
     private abstract static class Announcements {
-        static final String PURCHASE_AMOUNT_FORMAT = "%d개를 구매했습니다.";
+        static final String PURCHASE_AMOUNT_FORMAT = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
         static final String PURCHASED_LOTTO_NUMBER_TEMPLATE = "[%s]";
 
         static final String STATISTICS_TITLE = "당첨 통계\n---------";

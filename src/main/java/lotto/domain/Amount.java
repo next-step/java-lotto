@@ -20,6 +20,10 @@ public class Amount {
         return this.value;
     }
 
+    public boolean isZero() {
+        return this.value == 0;
+    }
+
     public IntStream range() {
         return IntStream.range(0, value);
     }

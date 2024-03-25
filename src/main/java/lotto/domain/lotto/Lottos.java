@@ -17,6 +17,8 @@ public class Lottos {
                 .collect(Collectors.toList()));
     }
 
+    public Lottos() {}
+
     public Lottos(List<Lotto> lottos) {
         if (lottos != null && !lottos.isEmpty()) {
             this.lottos.addAll(lottos);

@@ -18,6 +18,9 @@ public class LotteryShop {
     }
 
     public static Lottos exchangeNumbersToLottos(String[][] manualNumbers) {
+        if (manualNumbers == null || manualNumbers.length == 0) {
+            return new Lottos();
+        }
         return new Lottos(manualNumbers);
     }
 

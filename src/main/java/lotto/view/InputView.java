@@ -4,6 +4,7 @@ import lotto.domain.Amount;
 import utils.Splitter;
 import utils.StringUtils;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 import static lotto.view.MyPrinter.lineChange;
@@ -24,11 +25,19 @@ public class InputView {
         return nextIntAndRemoveLineChange();
     }
 
-    public static String[][] manualNumbers(Amount amount) {
+    public static Optional<String[][]> manualNumbers(Amount amount) {
+        if (amount.isZero()) {
+            return Optional.empty();
+        }
         printLine(Announcements.PURCHASE_MANUAL_NUMBERS);
-        return amount.range()
+
+        Optional<String[][]> values = Optional.of(amount.range()
                 .mapToObj(i -> lottoNumbers())
-                .toArray(String[][]::new);
+                .toArray(String[][]::new));
+
+        lineChange();
+
+        return values;
     }
 
     public static String[] lastWeekWinningNumbers() {

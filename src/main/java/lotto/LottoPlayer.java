@@ -13,6 +13,8 @@ import lotto.domain.statistics.WinningStatistics;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.Optional;
+
 public class LottoPlayer {
 
     private void play() {
@@ -32,11 +34,18 @@ public class LottoPlayer {
     private Lottos purchaseLotto(Cash cash) {
         final Amount manualAmount = new Amount(InputView.manualAmount());
         Cash change = LotteryShop.purchaseManualAndChange(cash, manualAmount);
-        final Lottos manuals = LotteryShop.exchangeNumbersToLottos(InputView.manualNumbers(manualAmount));
 
+        final Lottos manuals = exchangeManualLottoNumbers(manualAmount);
         final Lottos autos = LotteryShop.purchaseAuto(change);
-        OutputView.printPurchasedLottos(autos);
+
+        OutputView.printPurchasedLottos(manuals, autos);
         return autos;
+    }
+
+    private Lottos exchangeManualLottoNumbers(Amount amount) {
+        return InputView.manualNumbers(amount)
+                .map(LotteryShop::exchangeNumbersToLottos)
+                .orElseGet(Lottos::new);
     }
 
     private WinningLotto winningLotto() {
