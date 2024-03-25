@@ -13,19 +13,21 @@ import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String START_RESULT_TEXT = "당첨 통계\n--------------";
-    private static final String PURCHASED_DONE = "개를 구매했습니다.";
     private static final String PROFIT_RATIO_RESULT = "총 수익률은 %.2f 입니다.";
     private static final String START_BRACKET = "[ ";
     private static final String COMMA_DELIMITER = ", ";
     private static final String END_BRACKET = " ]";
+    private static final String EMPTY_STRING = "";
+    private static final String IS_BONUS_MATCHED = ", 보너스 볼 일치";
+    private static final String NO_MATCHED_PRIZE = "당첨된 금액이 없음";
 
-    public void outputPurchasedLottos(LottoMachine lottoMachine) {
-        outputPurchasedNumberOfLotto(lottoMachine.getNumberOfLottos());
+    public void outputPurchasedLottos(int numberOfManualLottos, int numberOfAutoLottos, LottoMachine lottoMachine) {
+        outputPurchasedNumberOfLotto(numberOfManualLottos, numberOfAutoLottos);
         outputPurchasedLottoDetail(lottoMachine);
     }
 
-    private void outputPurchasedNumberOfLotto(int numberOfLotto) {
-        outputString(String.format("%d%s", numberOfLotto, PURCHASED_DONE));
+    private void outputPurchasedNumberOfLotto(int numberOfManualLottos, int numberOfAutoLottos) {
+        outputString(String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.", numberOfManualLottos, numberOfAutoLottos));
     }
 
     private void outputPurchasedLottoDetail(LottoMachine lottoMachine) {
@@ -37,9 +39,10 @@ public class ResultView {
     }
 
     private String convertSetLottoToStringLotto(Set<LottoNumber> lottoNumbers) {
-        return String.join(COMMA_DELIMITER, lottoNumbers.stream()
-                .map(lottoNumber -> lottoNumber.getLottoNumberAsString())
-                .collect(Collectors.toList()));
+        return lottoNumbers.stream()
+                .map(LottoNumber::getLottoNumber)
+                .map(String::valueOf)
+                .collect(Collectors.joining(COMMA_DELIMITER));
     }
 
     private void outputString(String string) {
@@ -61,7 +64,30 @@ public class ResultView {
     }
 
     private String getPrizeResult(PrizeEnum prize, int value) {
-        return String.format("%d%s (%d) - %d개", prize.getMatchedCount(),"개 일치", prize.getPrize(), value);
+        if (isMissMatched(prize)) {
+            return String.format("%s- %d개", NO_MATCHED_PRIZE, value);
+        }
+        return String.format("%d%s%s (%d) - %d개", prize.getMatchedCount(),"개 일치",getBonusResult(prize), prize.getPrize(), value);
+    }
+
+    private boolean isMissMatched(PrizeEnum prize) {
+        if (prize.getMatchedCount() == PrizeEnum.MISS.getMatchedCount()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private String getBonusResult(PrizeEnum prize) {
+        if (isBonusMatchedFrom(prize)) {
+            return IS_BONUS_MATCHED;
+        }
+
+        return EMPTY_STRING;
+    }
+
+    private boolean isBonusMatchedFrom(PrizeEnum prize) {
+        return prize.isBonusMatched();
     }
 
     private void outputProfit(BigDecimal profit) {
