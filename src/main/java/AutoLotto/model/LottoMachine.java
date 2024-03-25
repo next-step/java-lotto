@@ -6,33 +6,48 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static autoLotto.model.LottoConstants.INVALID_PURCHASE_AMOUNT;
-
 public class LottoMachine {
-    private static final Long VALID_UNIT = 1000L;
+    private static final String INVALID_PURCHASE_AMOUNT = "구입하신 수동 로또의 개수가 전체 로또 개수보다 많습니다.\n관리자에게 문의하여 로또를 재구매하시기 바랍니다.";
 
     private List<Lotto> lottos;
 
-    public LottoMachine(Long purchaseAmount, LottoGeneratorStrategy lottoGeneratorStrategy) {
-        this.lottos = generateLottos(purchaseAmount, lottoGeneratorStrategy);
+    public LottoMachine(List<Lotto> manualLottos, int numberOfTotalLottos) {
+        this.lottos = generateLottos(manualLottos, numberOfTotalLottos);
     }
 
-    private List<Lotto> generateLottos(Long purchaseAmount, LottoGeneratorStrategy lottoGeneratorStrategy) {
-        int chances = validatePurchaseAmount(purchaseAmount);
-        return buy(chances, lottoGeneratorStrategy);
+    private List<Lotto> generateLottos(List<Lotto> manualLottos, int numberOfTotalLottos) {
+        validatePurchaseAmount(manualLottos, numberOfTotalLottos);
+        List<Lotto> lottos = setLottos(manualLottos, numberOfTotalLottos);
+        return lottos;
     }
 
-    private int validatePurchaseAmount(Long purchaseAmount) throws PurchaseException {
-        purchaseAmount /= VALID_UNIT;
+    private List<Lotto> setLottos(List<Lotto> manualLotto, int numberOfTotalLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+        int numberOfAutoLottos = numberOfTotalLottos - manualLotto.size();
 
-        if (purchaseAmount < 1L) {
-            throw new PurchaseException(INVALID_PURCHASE_AMOUNT);
+        lottos.addAll(setManualLottos(manualLotto));
+        lottos.addAll(buyAutoLottos(numberOfAutoLottos, new RandomLottoGeneratorStrategy()));
+
+        return lottos;
+    }
+
+    private List<Lotto> setManualLottos(List<Lotto> manualLottos) {
+        if (manualLottos.size() == 0) {
+            return new ArrayList<>();
         }
 
-        return purchaseAmount.intValue();
+        return manualLottos;
     }
 
-    private List<Lotto> buy(int chances, LottoGeneratorStrategy lottoGeneratorStrategy) {
+    private void validatePurchaseAmount(List<Lotto> manualLottos, int numberOfTotalLottos) {
+        int numberOfAutoLottos = numberOfTotalLottos - manualLottos.size();
+
+        if (numberOfAutoLottos < 0) {
+            throw new PurchaseException(INVALID_PURCHASE_AMOUNT);
+        }
+    }
+
+    private List<Lotto> buyAutoLottos(int chances, LottoGeneratorStrategy lottoGeneratorStrategy) {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < chances; i++) {
