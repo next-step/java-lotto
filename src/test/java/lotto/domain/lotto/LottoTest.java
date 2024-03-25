@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import lotto.domain.WinningNumbers;
 import lotto.exception.InvalidLottoException;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -18,15 +19,30 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
-    @Test
-    @DisplayName("인스턴스 생성시 lottoNumbers의 크기가 LOTTO_NUMBER_SIZE와 다른 경우 InvalidLottoException이 발생한다.")
-    void testInstanceCreationFailCase() {
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6, 7)
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
+    @Nested
+    @DisplayName("Lotto 인스턴스 생성 테스트")
+    class InstanceCreationTest {
+        @Test
+        @DisplayName("lottoNumbers의 크기가 LOTTO_NUMBER_SIZE와 다른 경우 InvalidLottoException이 발생한다.")
+        void testWrongSizeFailCase() {
+            List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6, 7)
+                    .map(LottoNumber::valueOf)
+                    .collect(Collectors.toList());
 
-        assertThatThrownBy(() -> Lotto.valueOf(lottoNumbers))
-                .isExactlyInstanceOf(InvalidLottoException.class);
+            assertThatThrownBy(() -> Lotto.valueOf(lottoNumbers))
+                    .isExactlyInstanceOf(InvalidLottoException.class);
+        }
+
+        @Test
+        @DisplayName("lottoNumbers에 중복된 번호가 포함된 경우 InvalidLottoException이 발생한다.")
+        void testDuplicateFailCase() {
+            List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 6, 6)
+                    .map(LottoNumber::valueOf)
+                    .collect(Collectors.toList());
+
+            assertThatThrownBy(() -> Lotto.valueOf(lottoNumbers))
+                    .isExactlyInstanceOf(InvalidLottoException.class);
+        }
     }
 
     @ParameterizedTest

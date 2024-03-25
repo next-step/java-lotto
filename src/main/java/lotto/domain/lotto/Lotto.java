@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import lotto.domain.WinningNumbers;
 import lotto.exception.InvalidLottoException;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class Lotto {
@@ -16,8 +17,11 @@ public class Lotto {
     }
 
     private void validateSizeOfLottoNumbers(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new InvalidLottoException(lottoNumbers.size());
+        int sizeOfLottoNumbers = lottoNumbers.size();
+        int sizeOfLottoNumbersSet = new HashSet<>(lottoNumbers).size();
+
+        if(sizeOfLottoNumbers != sizeOfLottoNumbersSet || sizeOfLottoNumbers != LOTTO_NUMBER_SIZE) {
+            throw new InvalidLottoException();
         }
     }
 
