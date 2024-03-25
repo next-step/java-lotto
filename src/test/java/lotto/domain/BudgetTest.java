@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("도메인 Budget 테스트")
 class BudgetTest {
@@ -13,7 +12,7 @@ class BudgetTest {
     @Test
     void canBuyQuantity() {
         Budget budget = new Budget(14000);
-        int result = budget.canBuyQuantity();
+        int result = budget.divide(1000);
         assertThat(result).isEqualTo(14);
     }
 }

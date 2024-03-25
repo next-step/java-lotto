@@ -1,7 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Budget;
-import lotto.domain.Lotto;
+import lotto.domain.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,15 +13,22 @@ public class InputView {
 
     public static Budget inputBuyBudget() {
         System.out.println("구입금액을 입력해 주세요.");
-        Budget budget = new Budget(SCANNER.nextInt());
-        System.out.println(budget.divide(Lotto.LOTTO_PRICE) + "개를 구매했습니다.");
-        return budget;
+        return new Budget(SCANNER.nextInt());
     }
 
-    public static Lotto inputLastWinLotto() {
+    public static WinLotto inputLastWinLotto() {
+        return WinLotto.ofNumbers(parseLottoNumbers(), parseBonusNumber());
+    }
+
+    private static List<Integer> parseLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         SCANNER.nextLine();
-        return Lotto.ofNumbers(parseInts(split(SCANNER.nextLine())));
+        return parseInts(split(SCANNER.nextLine()));
+    }
+
+    private static Integer parseBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return SCANNER.nextInt();
     }
 
     private static List<String> split(String input) {
