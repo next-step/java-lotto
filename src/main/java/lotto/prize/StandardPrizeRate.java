@@ -1,6 +1,8 @@
-package lotto;
+package lotto.prize;
 
-public class StandardPrizeRate implements PrizeRateStrategy{
+import lotto.prize.PrizeRateStrategy;
+
+public class StandardPrizeRate implements PrizeRateStrategy {
 
     @Override
     public double getRate(int earningMoney, int spendMoney) {
