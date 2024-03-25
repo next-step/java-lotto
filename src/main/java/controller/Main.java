@@ -16,8 +16,9 @@ public class Main {
 
     int count = lottoMachine.createLotto(userMoney);
     resultView.print(String.format("%d개를 구매했습니다.", count));
-
     lottoMachine.getAllLottoList().forEach(resultView::print);
 
+    resultView.print("지난 주 당첨 번호를 입력해 주세요.");
+    resultView.print(lottoMachine.getLottoResult(inputView.inputIntegerList()));
   }
 }
