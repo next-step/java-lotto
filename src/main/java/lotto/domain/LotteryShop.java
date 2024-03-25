@@ -8,7 +8,7 @@ public class LotteryShop {
 
     private LotteryShop() {}
 
-    public static Lottos purchase(Cash cash) {
+    public static Lottos purchaseAuto(Cash cash) {
         return AutoLottoGenerator.tickets(cash.buyableAmount(LOTTO_PRICE));
     }
 

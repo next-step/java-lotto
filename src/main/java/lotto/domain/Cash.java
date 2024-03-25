@@ -21,11 +21,11 @@ public class Cash {
         return this.value;
     }
 
-    public long buyableAmount(Cash price) {
+    public int buyableAmount(Cash price) {
         assertPriceGreaterThanZero(price);
 
         return value.divideToIntegralValue(price.value())
-                .longValue();
+                .intValue();
     }
 
     public RateOfReturn rateOfReturn(Cash earned) {

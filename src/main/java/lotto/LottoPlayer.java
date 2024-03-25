@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Amount;
 import lotto.domain.Cash;
 import lotto.domain.LotteryShop;
 import lotto.domain.lotto.Lotto;
@@ -29,7 +30,10 @@ public class LottoPlayer {
     }
 
     private Lottos purchaseLotto(Cash cash) {
-        final Lottos lottos = LotteryShop.purchase(cash);
+        final Amount manualAmount = new Amount(InputView.manualAmount());
+
+
+        final Lottos lottos = LotteryShop.purchaseAuto(cash);
         OutputView.printPurchasedLottos(lottos);
         return lottos;
     }
@@ -41,11 +45,11 @@ public class LottoPlayer {
         return new WinningLotto(lastWeekWinningNumbers, bonusNumber);
     }
 
-    private void printResult(Ranks ranks, Cash cash) {
+    private void printResult(Ranks ranks, Cash spentCash) {
         final WinningStatistics statistics = new WinningStatistics(ranks);
         OutputView.printWinningCounts(statistics);
 
-        final RateOfReturn rateOfReturn = statistics.rateOfReturn(cash);
+        final RateOfReturn rateOfReturn = statistics.rateOfReturn(spentCash);
         OutputView.printRateOfReturn(rateOfReturn);
     }
 

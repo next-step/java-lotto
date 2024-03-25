@@ -18,8 +18,8 @@ public class AutoLottoGenerator {
 
     private AutoLottoGenerator() {}
 
-    public static Lottos tickets(long amount) {
-        final List<Lotto> lottos = LongStream.range(0, amount)
+    public static Lottos tickets(int amount) {
+        final List<Lotto> lottos = IntStream.range(0, amount)
                 .mapToObj(idx -> ticket())
                 .collect(Collectors.toList());
 
