@@ -19,6 +19,18 @@ public class WinningNumber {
     public WinningNumber(List<Integer> numbers, Integer bonusNumber) {
         this.numbers = numbers;
         this.bonusNumber = bonusNumber;
+        validateIfNotNull();
+        validateIfBonusNumberNotInNumbers();
+    }
+
+    private void validateIfNotNull() {
+        if(numbers == null || bonusNumber == null) throw new IllegalArgumentException();
+    }
+
+    private void validateIfBonusNumberNotInNumbers() {
+        if(numbers.contains(bonusNumber)){
+            throw new IllegalArgumentException();
+        }
     }
 
     public List<Integer> getNumbers() {
