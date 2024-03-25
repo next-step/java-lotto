@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.number_generator.RandomNumberGenerator;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -13,9 +15,7 @@ public class LottoTickets {
 
     public List<LottoTicket> generateLottoTickets(int number) {
         for (int i = 0; i < number; i++) {
-            lottoTickets.add(new LottoTicket());
-            List<Integer> generatedNumbers = lottoTickets.get(i).generate();
-            lottoTickets.set(i, new LottoTicket(generatedNumbers));
+            lottoTickets.add(new LottoTicket(new RandomNumberGenerator().generate()));
         }
         return Collections.unmodifiableList(lottoTickets);
     }
