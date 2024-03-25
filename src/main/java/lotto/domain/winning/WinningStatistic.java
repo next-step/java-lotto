@@ -9,17 +9,17 @@ public class WinningStatistic {
 
     private final int[] gradeCounts = new int[Grade.values().length];
 
-    private PurchaseAmount purchaseAmount;
+    private final PurchaseAmount purchaseAmount;
 
     public WinningStatistic(PurchaseAmount purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
     }
 
-    public int getGradeCount(Grade grade) {
+    public int getGradeCount(final Grade grade) {
         return gradeCounts[grade.ordinal()];
     }
 
-    public void calculateWinningStatistic(Grade grade) {
+    public void calculateWinningStatistic(final Grade grade) {
         gradeCounts[grade.ordinal()]++;
     }
 

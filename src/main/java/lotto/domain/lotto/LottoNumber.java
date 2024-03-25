@@ -58,7 +58,7 @@ public enum LottoNumber {
         this.lottoNumber = number;
     }
 
-    public static LottoNumber fromInt(int value) {
+    public static LottoNumber fromInt(final int value) {
         return Arrays.stream(LottoNumber.values())
             .filter(lottoNumber -> lottoNumber.getLottoNumber() == value)
             .findFirst()

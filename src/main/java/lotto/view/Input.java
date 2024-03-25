@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class Input {
 
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     private Input() {
     }

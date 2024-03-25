@@ -12,16 +12,16 @@ public class Output {
     private Output() {
     }
 
-    public static void printAutoLotto(List<Lotto> autoLotto) {
+    public static void printAutoLotto(final List<Lotto> autoLotto) {
         autoLotto.stream().forEach(System.out::println);
     }
 
-    public static void printPurchaseCount(PurchaseAmount purchaseAmount) {
+    public static void printPurchaseCount(final PurchaseAmount purchaseAmount) {
         System.out.println(
             MessageFormat.format("{0}개를 구매했습니다.", purchaseAmount.getPurchaseAmount() / 1000));
     }
 
-    public static void printLottoResult(WinningStatistic winningStatistic) {
+    public static void printLottoResult(final WinningStatistic winningStatistic) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         printGradeResult(Grade.FOUR_GRADE, winningStatistic);
@@ -32,7 +32,8 @@ public class Output {
             MessageFormat.format("총 수익률은 {0}입니다.", winningStatistic.calculateProfitRate()));
     }
 
-    private static void printGradeResult(Grade grade, WinningStatistic winningStatistic) {
+    private static void printGradeResult(final Grade grade,
+        final WinningStatistic winningStatistic) {
         System.out.println(
             MessageFormat.format("{0}개 일치 ({1}원)- {2}",
                 grade.getCorrectingCount(),

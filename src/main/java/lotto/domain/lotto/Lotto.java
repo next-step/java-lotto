@@ -10,7 +10,7 @@ import lotto.error.exception.SizeExceedLottoException;
 
 public class Lotto {
 
-    private List<LottoNumber> lotto;
+    private final List<LottoNumber> lotto;
 
     public Lotto(List<LottoNumber> lotto) {
         if (lotto.size() > 6) {

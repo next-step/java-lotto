@@ -10,16 +10,16 @@ public enum Grade {
     FOUR_GRADE(5_000, 3),
     UN_LUCKY_GRADE(0, 0);
 
-    private int prizeMoney;
+    private final int prizeMoney;
 
-    private int correctingCount;
+    private final int correctingCount;
 
     Grade(int prizeMoney, int correctingCount) {
         this.prizeMoney = prizeMoney;
         this.correctingCount = correctingCount;
     }
 
-    public static Grade fromCorrectingCount(int correctingCount) {
+    public static Grade fromCorrectingCount(final int correctingCount) {
         return Arrays.stream(Grade.values())
             .filter(grade -> grade.isSameCorrectingCount(correctingCount))
             .findFirst()
@@ -34,7 +34,7 @@ public enum Grade {
         return correctingCount;
     }
 
-    public boolean isSameCorrectingCount(int other) {
+    public boolean isSameCorrectingCount(final int other) {
         return correctingCount == other;
     }
 }

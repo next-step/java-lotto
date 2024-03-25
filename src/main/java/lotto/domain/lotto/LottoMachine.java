@@ -43,7 +43,7 @@ public class LottoMachine {
         return purchaseAmount.getPurchaseAmount() / 1000;
     }
 
-    public Grade calculatePrizeMoney(WinningNumbers winningNumbers, Lotto lotto) {
+    public Grade calculatePrizeMoney(final WinningNumbers winningNumbers, final Lotto lotto) {
         return winningNumbers.confirmWinning(lotto);
     }
 }

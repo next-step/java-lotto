@@ -4,7 +4,7 @@ import lotto.error.exception.PurchaseAmountException;
 
 public class PurchaseAmount {
 
-    private int purchaseAmount;
+    private final int purchaseAmount;
 
     public PurchaseAmount(int purchaseAmount) {
         if (purchaseAmount % 1000 != 0) {
