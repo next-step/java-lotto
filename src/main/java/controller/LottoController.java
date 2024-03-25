@@ -1,5 +1,6 @@
 package controller;
 
+import domain.Lotto;
 import domain.LottoMachine;
 import domain.MyLotto;
 
@@ -13,5 +14,19 @@ public class LottoController {
         }
     }
 
-    public void
+    private Lotto winNumbers() {
+        return lottoMachine.pull();
+    }
+
+    public void run(int cnt) {
+        totalLotto(cnt);
+    }
+
+    public void resultReturn() {
+        Lotto winLotto = winNumbers();
+        for (Lotto lotto : myLotto) {
+
+        }
+    }
+
 }

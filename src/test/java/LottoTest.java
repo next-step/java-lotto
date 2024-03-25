@@ -1,3 +1,4 @@
+import controller.LottoController;
 import domain.Lotto;
 import domain.LottoMachine;
 import domain.MyLotto;
@@ -35,5 +36,12 @@ public class LottoTest {
         MyLotto myLotto = new MyLotto();
         List<Integer> win = List.of(1, 5, 7, 8, 9, 4);
 
+    }
+
+    @Test
+    @DisplayName("당첨 결과 반환")
+    public void winningStatus() {
+        LottoController controller = new LottoController();
+        controller.resultReturn();
     }
 }
