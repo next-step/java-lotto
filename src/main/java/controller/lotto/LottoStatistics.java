@@ -22,7 +22,7 @@ public class LottoStatistics {
 
     public Map<LottoPrize, Integer> prize() {
         Map<LottoPrize, Integer> prizeMap = new LinkedHashMap<>();
-        prizeMap.put(LottoPrize.FIFTH, lottoStatistics.getOrDefault(LottoPrize.FOURTH, 0));
+        prizeMap.put(LottoPrize.FIFTH, lottoStatistics.getOrDefault(LottoPrize.FIFTH, 0));
         prizeMap.put(LottoPrize.FOURTH, lottoStatistics.getOrDefault(LottoPrize.FOURTH, 0));
         prizeMap.put(LottoPrize.THIRD, lottoStatistics.getOrDefault(LottoPrize.THIRD, 0));
         prizeMap.put(LottoPrize.SECOND, lottoStatistics.getOrDefault(LottoPrize.SECOND, 0));

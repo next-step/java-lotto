@@ -24,10 +24,10 @@ public class LottoFactory {
 
     }
 
-    private List<List<Integer>> createListOfIntegerList(long count) {
-        List<List<Integer>> result = new ArrayList<>();
+    private List<Lotto> createListOfIntegerList(long count) {
+        List<Lotto> result = new ArrayList<>();
         Stream.generate(() -> lottoGenerator.create()).limit(count)
-                .forEach(lottoIntegerList -> result.add(lottoIntegerList));
+                .forEach(lottoIntegerList -> result.add(Lotto.from(lottoIntegerList)));
         return result;
     }
 }

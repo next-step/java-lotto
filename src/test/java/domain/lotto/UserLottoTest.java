@@ -17,7 +17,11 @@ class UserLottoTest {
 
     @BeforeEach
     void setUp() {
-        List<List<Integer>> listOfIntegerList = List.of(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 4, 5, 7));
+
+        Lotto firstLotto = Lotto.from(List.of(1, 2, 3, 4, 5, 6));
+        Lotto secondLotto = Lotto.from( List.of(1, 2, 3, 4, 5, 7));
+        List<Lotto> listOfIntegerList = List.of(firstLotto, secondLotto);
+
         userLotto = UserLotto.from(listOfIntegerList);
     }
 

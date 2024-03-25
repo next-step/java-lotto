@@ -20,7 +20,10 @@ class LottoStatisticsTest {
 
     @BeforeEach
     void setUp() {
-        userLotto = UserLotto.from(List.of(List.of(1, 2, 3, 4, 5, 6), List.of(14, 16, 17, 24, 25, 26)));
+        Lotto lotto1 = Lotto.from(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = Lotto.from(List.of(14, 16, 17, 24, 25, 26));
+
+        userLotto = UserLotto.from(List.of(lotto1, lotto2));
         winningLotto = WinningLotto.from(List.of(1, 2, 3, 7, 8, 10), 19);
     }
 
@@ -41,4 +44,6 @@ class LottoStatisticsTest {
         double result = lottoStatistics.prizeStatistics(new Money(14000));
         Assertions.assertThat(result).isEqualTo(0.35);
     }
+
+
 }

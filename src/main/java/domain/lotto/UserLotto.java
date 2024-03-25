@@ -11,14 +11,8 @@ import java.util.stream.Collectors;
 public class UserLotto {
     private final List<Lotto> userLotto;
 
-    public static UserLotto from(List<List<Integer>> listOfIntegerList) {
-        return new UserLotto(convertToLottoList(listOfIntegerList));
-    }
-
-    private static List<Lotto> convertToLottoList(List<List<Integer>> listOfIntegerList) {
-        return listOfIntegerList.stream()
-                .map(integerList -> Lotto.from(integerList))
-                .collect(Collectors.toList());
+    public static UserLotto from(List<Lotto> userLotto) {
+        return new UserLotto(userLotto);
     }
 
     public UserLotto(List<Lotto> userLotto) {
