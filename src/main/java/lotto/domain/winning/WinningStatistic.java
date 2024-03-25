@@ -1,19 +1,13 @@
 package lotto.domain.winning;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import lotto.domain.grade.Grade;
 import lotto.domain.lotto.PurchaseAmount;
-import lotto.error.exception.NotExistGradeException;
 
 public class WinningStatistic {
 
-    private int firstGradeCount;
-
-    private int secondGradeCount;
-
-    private int thirdGradeCount;
-
-    private int forthGradeCount;
+    private final int[] gradeCounts = new int[Grade.values().length];
 
     private PurchaseAmount purchaseAmount;
 
