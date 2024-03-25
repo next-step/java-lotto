@@ -21,13 +21,17 @@ public enum Rank {
     public static Rank findRank(int matchCount, boolean matchBonus) {
         return Arrays.stream(Rank.values())
                 .filter(type -> matchCount == type.matchCount)
-                .filter(rank -> rank != NOT_MATCH && rank != THIRD && rank != SECOND) // NOT_MATCH, THIRD, SECOND 빼고
+                .filter(rank -> rank != NOT_MATCH && rank != THIRD && rank != SECOND)
                 .findFirst()
                 .orElseGet(() -> Arrays.stream(Rank.values())
                         .filter(rank -> matchCount == rank.matchCount)
-                        .filter(rank -> !matchBonus && rank == THIRD || matchBonus && rank == SECOND) // matchBonus가 false이면 THIRD, true이면 SECOND
+                        .filter(rank -> isRankSecondOrThird(matchBonus, rank))
                         .findFirst()
                         .orElse(NOT_MATCH));
+    }
+
+    private static boolean isRankSecondOrThird(boolean matchBonus, Rank rank) {
+        return !matchBonus && rank == THIRD || matchBonus && rank == SECOND;
     }
 
     public Integer getMatchCount() {
