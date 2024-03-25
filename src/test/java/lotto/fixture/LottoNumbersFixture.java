@@ -1,8 +1,8 @@
 package lotto.fixture;
 
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-import lotto.domain.PickedLottoNumbers;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
 import java.util.Arrays;
@@ -15,20 +15,20 @@ public enum LottoNumbersFixture {
     이등_시나리오(Arrays.asList(1, 2, 3, 4, 5, 6), new LottoNumber(7), Arrays.asList(1, 2, 3, 4, 5, 7), Rank.SECOND),
     일등_시나리오(Arrays.asList(1, 2, 3, 4, 5, 6), new LottoNumber(7), Arrays.asList(1, 2, 3, 4, 5, 6), Rank.FIRST);
     
-    private final LottoNumbers winningNumbers;
+    private final Lotto winningNumbers;
     private final LottoNumber bonusNumber;
-    private final PickedLottoNumbers pickedNumbers;
+    private final Lottos pickedNumbers;
     private final Rank rank;
 
     LottoNumbersFixture(List<Integer> winningNumbers, LottoNumber bonusNumber, List<Integer> pickedNumbers, Rank rank) {
-        this.winningNumbers = new LottoNumbers(winningNumbers);
+        this.winningNumbers = new Lotto(winningNumbers);
         this.bonusNumber = bonusNumber;
-        LottoNumbers lottoNumbers = new LottoNumbers(pickedNumbers);
-        this.pickedNumbers = new PickedLottoNumbers(List.of(lottoNumbers));
+        Lotto lotto = new Lotto(pickedNumbers);
+        this.pickedNumbers = new Lottos(List.of(lotto));
         this.rank = rank;
     }
 
-    public LottoNumbers getWinningNumbers() {
+    public Lotto getWinningNumbers() {
         return winningNumbers;
     }
 
@@ -36,7 +36,7 @@ public enum LottoNumbersFixture {
         return bonusNumber;
     }
 
-    public PickedLottoNumbers getPickedNumbers() {
+    public Lottos getPickedNumbers() {
         return pickedNumbers;
     }
 

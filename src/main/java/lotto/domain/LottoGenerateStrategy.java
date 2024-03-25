@@ -5,6 +5,6 @@ import java.util.List;
 @FunctionalInterface
 public interface LottoGenerateStrategy {
 
-    LottoNumbers generateLottoNumbers(List<Integer> lottoNumberPool);
+    Lotto generateLottoNumbers(List<Integer> lottoNumberPool);
 }
 

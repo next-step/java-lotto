@@ -3,14 +3,14 @@ package lotto.domain;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class LottoNumbers implements Iterable<LottoNumber> {
+public class Lotto implements Iterable<LottoNumber> {
     private static final int MATCH_COUNT = 1;
     private static final int NOT_MATCH_COUNT = 0;
     private static final int SIZE = 6;
 
     private final List<LottoNumber> lottoNumber;
 
-    public LottoNumbers(List<Integer> lottoNumber) {
+    public Lotto(List<Integer> lottoNumber) {
         if (new HashSet<>(lottoNumber).size() != SIZE) {
             throw new IllegalArgumentException("로또는 중복되지 않은 6개의 숫자여야 합니다.");
         }
@@ -28,9 +28,9 @@ public class LottoNumbers implements Iterable<LottoNumber> {
         return NOT_MATCH_COUNT;
     }
 
-    public int compare(LottoNumbers lottoNumbers) {
+    public int compare(Lotto lotto) {
         int matchCount = 0;
-        for (LottoNumber winningNumber : lottoNumbers) {
+        for (LottoNumber winningNumber : lotto) {
             matchCount += contains(winningNumber);
         }
         return matchCount;
@@ -44,7 +44,7 @@ public class LottoNumbers implements Iterable<LottoNumber> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumbers integers = (LottoNumbers) o;
+        Lotto integers = (Lotto) o;
         return Objects.equals(lottoNumber, integers.lottoNumber);
     }
 

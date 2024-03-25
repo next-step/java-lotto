@@ -21,22 +21,22 @@ public class LottoGame {
     public void start() {
         Money money = initMoney();
 
-        PickedLottoNumbers pickedLottoNumbers = lottoStore.buy(money, new RandomLottoStrategy());
+        Lottos lottos = lottoStore.buy(money, new RandomLottoStrategy());
 
-        resultView.printPickedLottoNumbers(pickedLottoNumbers);
+        resultView.printPickedLottoNumbers(lottos);
 
-        LottoNumbers winningLotto = initLottoNumbers();
+        Lotto winningLotto = initLottoNumbers();
         LottoNumber bonusNumber = initBonusNumber();
-        WinningInfo winningInfo = WinningInfo.of(pickedLottoNumbers, bonusNumber, winningLotto);
+        WinningInfo winningInfo = WinningInfo.of(lottos, bonusNumber, winningLotto);
 
         resultView.printWinningStatic(winningInfo, money);
     }
 
-    private LottoNumbers initLottoNumbers() {
+    private Lotto initLottoNumbers() {
         resultView.printWinningLotto();
         List<Integer> inputLottoNumber = inputView.inputLottoNumber();
 
-        return new LottoNumbers(inputLottoNumber);
+        return new Lotto(inputLottoNumber);
     }
 
     private LottoNumber initBonusNumber() {

@@ -32,20 +32,25 @@ public class ResultView {
     }
 
     private void printWinningCount(WinningInfo winningInfo, Rank rank) {
-        System.out.printf("%d개 일치 (%d원)-%d개%n", rank.getMatchCount(), rank.getWinningMoney(), winningInfo.count(rank));
+        String bonusNotice = "";
+        if (rank.equals(Rank.SECOND)) {
+            bonusNotice = ", 보너스볼 일치";
+        }
+
+        System.out.printf("%d개 일치%s (%d원)-%d개%n", rank.getMatchCount(), bonusNotice ,rank.getWinningMoney(), winningInfo.count(rank));
     }
 
-    public void printPickedLottoNumbers(PickedLottoNumbers pickedLottoNumbers) {
-        for (LottoNumbers lottoNumbers : pickedLottoNumbers) {
+    public void printPickedLottoNumbers(Lottos lottos) {
+        for (Lotto lotto : lottos) {
             System.out.print("[");
-            printLottoNumbers(lottoNumbers);
+            printLottoNumbers(lotto);
             System.out.println("]");
         }
     }
 
-    private void printLottoNumbers(LottoNumbers lottoNumbers) {
+    private void printLottoNumbers(Lotto lotto) {
         StringJoiner stringJoiner = new StringJoiner(DELIMITER);
-        for (LottoNumber lottoNumber : lottoNumbers) {
+        for (LottoNumber lottoNumber : lotto) {
             stringJoiner.add(String.valueOf(lottoNumber.getNumber()));
         }
         System.out.print(stringJoiner);
