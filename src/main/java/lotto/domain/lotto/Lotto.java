@@ -1,11 +1,14 @@
-package lotto.domain;
+package lotto.domain.lotto;
+
+import lotto.domain.rank.Rank;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int NUMBER_LENGTH = 6;
+    public static final int NUMBER_LENGTH = 6;
 
     private final List<LottoNumber> numbers;
 
@@ -35,7 +38,13 @@ public class Lotto {
     }
 
     public List<LottoNumber> numbers() {
-        return this.numbers;
+        return Collections.unmodifiableList(this.numbers);
+    }
+
+    public Rank rank(WinningLotto winningLotto) {
+        final LottoMatchCount matchCount = matchCount(winningLotto.numbers());
+        final boolean bonusMatch = contains(winningLotto.bonusNumber());
+        return Rank.valueOf(matchCount, bonusMatch);
     }
 
     public boolean contains(LottoNumber number) {

@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
+
+import lotto.domain.rank.Ranks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +28,10 @@ public class Lottos {
         lottos.forEach(action);
     }
 
-    public LottoMatchCounts matchCounts(Lotto winningNumbers) {
-        return new LottoMatchCounts(lottos.stream()
-                .map(lotto -> lotto.matchCount(winningNumbers))
+    public Ranks ranks(WinningLotto winningLotto) {
+        return new Ranks(lottos.stream()
+                .map(lotto -> lotto.rank(winningLotto))
                 .collect(Collectors.toList()));
     }
+
 }

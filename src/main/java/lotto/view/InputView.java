@@ -23,6 +23,11 @@ public class InputView {
         return Splitter.byComma(StringUtils.removeSpace(lastWeekNumbers));
     }
 
+    public static int bonusBallNumber() {
+        printLine(Announcements.BONUS_BALL_NUMBER);
+        return nextIntAndRemoveLineChange();
+    }
+
     private static int nextIntAndRemoveLineChange() {
         final int input = SCANNER.nextInt();
         SCANNER.nextLine();
@@ -32,5 +37,6 @@ public class InputView {
     private abstract static class Announcements {
         static final String PURCHASE_PRICE = "구입금액을 입력해 주세요.";
         static final String LAST_WEEK_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+        static final String BONUS_BALL_NUMBER = "보너스 볼을 입력해 주세요.";
     }
 }

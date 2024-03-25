@@ -1,4 +1,8 @@
-package lotto.domain;
+package lotto.domain.statistics;
+
+import lotto.domain.Cash;
+import lotto.domain.rank.Rank;
+import lotto.domain.rank.Ranks;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,8 +11,8 @@ import java.util.Map;
 public class WinningStatistics {
     private final Map<Rank, Count> ranks = new HashMap<>();
 
-    public WinningStatistics(LottoMatchCounts matchCounts) {
-        this(matchCounts.ranks());
+    public WinningStatistics(Ranks ranks) {
+        this(ranks.values());
     }
 
     public WinningStatistics(List<Rank> ranks) {
@@ -27,15 +31,16 @@ public class WinningStatistics {
         return ranks.getOrDefault(rank, new Count());
     }
 
-    public double rateOfReturn(int cash) {
-        return ((double) earned()) / cash;
+    public RateOfReturn rateOfReturn(Cash inputCash) {
+        return inputCash.rateOfReturn(earned());
     }
 
-    private long earned() {
-        return ranks.entrySet()
-                .stream()
-                .mapToLong(entry -> entry.getKey().winnings() * entry.getValue().value())
-                .sum();
+    private Cash earned() {
+        return new Cash(
+                ranks.entrySet()
+                    .stream()
+                    .mapToLong(entry -> entry.getKey().winnings() * entry.getValue().value())
+                    .sum());
     }
 
 }

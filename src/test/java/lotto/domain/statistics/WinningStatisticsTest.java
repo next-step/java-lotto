@@ -1,5 +1,7 @@
-package lotto.domain;
+package lotto.domain.statistics;
 
+import lotto.domain.Cash;
+import lotto.domain.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,17 +26,17 @@ public class WinningStatisticsTest {
     @DisplayName("rateOfReturn 함수는 구매 금액 대비 수익률을 반환한다.")
     @Test
     void rateOfReturn() {
-        final WinningStatistics statistics = new WinningStatistics(List.of(Rank.FOURTH));
+        final WinningStatistics statistics = new WinningStatistics(List.of(Rank.FIFTH));
 
-        assertThat(statistics.rateOfReturn(10000))
+        assertThat(statistics.rateOfReturn(new Cash(10000)).value())
                 .isEqualTo(0.5d);
     }
 
     static Stream<Arguments> rankCounts() {
         return Stream.of(
                 Arguments.of(List.of(Rank.FIRST, Rank.FIRST), Rank.FIRST, new Count(2)),
-                Arguments.of(List.of(Rank.FIRST, Rank.SECOND), Rank.FIRST, new Count(1)),
-                Arguments.of(List.of(Rank.SECOND, Rank.SECOND), Rank.FIRST, new Count(0))
+                Arguments.of(List.of(Rank.FIRST, Rank.THIRD), Rank.FIRST, new Count(1)),
+                Arguments.of(List.of(Rank.THIRD, Rank.THIRD), Rank.FIRST, new Count(0))
         );
     }
 

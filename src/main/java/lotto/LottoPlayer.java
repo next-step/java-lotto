@@ -1,25 +1,51 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.Cash;
+import lotto.domain.LotteryShop;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.WinningLotto;
+import lotto.domain.rank.Ranks;
+import lotto.domain.statistics.RateOfReturn;
+import lotto.domain.statistics.WinningStatistics;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoPlayer {
 
     private void play() {
-        final int cash = InputView.purchasePrice();
+        final Cash cash = new Cash(InputView.purchasePrice());
 
+        final Lottos lottos = purchaseLotto(cash);
+        if (lottos.isEmpty()) {
+            return;
+        }
+
+        final WinningLotto winningLotto = winningLotto();
+        final Ranks ranks = lottos.ranks(winningLotto);
+
+        printResult(ranks, cash);
+    }
+
+    private Lottos purchaseLotto(Cash cash) {
         final Lottos lottos = LotteryShop.purchase(cash);
         OutputView.printPurchasedLottos(lottos);
+        return lottos;
+    }
 
+    private WinningLotto winningLotto() {
         final Lotto lastWeekWinningNumbers = new Lotto(InputView.lastWeekWinningNumbers());
+        final LottoNumber bonusNumber = new LottoNumber(InputView.bonusBallNumber());
 
-        final LottoMatchCounts matchCounts = lottos.matchCounts(lastWeekWinningNumbers);
+        return new WinningLotto(lastWeekWinningNumbers, bonusNumber);
+    }
 
-        final WinningStatistics statistics = new WinningStatistics(matchCounts);
+    private void printResult(Ranks ranks, Cash cash) {
+        final WinningStatistics statistics = new WinningStatistics(ranks);
         OutputView.printWinningCounts(statistics);
 
-        final double rateOfReturn = statistics.rateOfReturn(cash);
+        final RateOfReturn rateOfReturn = statistics.rateOfReturn(cash);
         OutputView.printRateOfReturn(rateOfReturn);
     }
 
