@@ -16,16 +16,16 @@ public class LottoController {
         }
     }
 
-    private Lotto winNumbers() {
-        return lottoMachine.pull();
+
+    public MyLotto getMyLotto() {
+        return myLotto;
     }
 
     public void run(int cnt) {
         totalLotto(cnt);
     }
 
-    public WinStatus resultReturn() {
-        Lotto winLotto = winNumbers();
+    public WinStatus resultReturn(Lotto winLotto) {
         for (Lotto lotto : MyLotto.getLotto()) {
             int price = lotto.numberCheck(winLotto);
             if (price >= 3) {

@@ -2,9 +2,17 @@ package domain;
 
 public class WinStatus {
 
-    private final static int[] winCount = new int[4];
+    private static int[] winCount;
 
     public void correct(int count) {
         winCount[count]++;
+    }
+
+    public WinStatus() {
+        winCount = new int[4];
+    }
+
+    public static int[] getWinCount() {
+        return winCount;
     }
 }

@@ -11,7 +11,7 @@ public class LottoInput {
     public int buyCash() {
         int money = input.nextInt();
         correctMoney(money);
-        return money;
+        return money / 1000;
     }
 
     private void correctMoney(int money) {

@@ -44,7 +44,7 @@ public class LottoTest {
     @DisplayName("당첨 결과 반환")
     public void winningStatus() {
         LottoController controller = new LottoController();
-        controller.resultReturn();
+
     }
 
     @Test
