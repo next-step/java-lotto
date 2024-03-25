@@ -10,10 +10,6 @@ public class LottoShop {
     private final static int LOTTO_VALUE = 1000;
     private final Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        LottoShop lottoShop = new LottoShop();
-        lottoShop.enter();
-    }
     public void enter(){
         System.out.println("구매 금액을 입력하세요");
         String inputMoney = scanner.nextLine();
@@ -21,7 +17,7 @@ public class LottoShop {
 
         System.out.printf("%d개를 구매했습니다.",lottoList.size());
         System.out.println();
-        lottoList.print();
+        lottoList.getLottoTextList().forEach(System.out::println);
 
         System.out.println("지난 주 당첨 번호를 입력해주세요");
         String inputNumbers = scanner.nextLine();
@@ -31,7 +27,7 @@ public class LottoShop {
         System.out.println("당첨 통계");
         System.out.println("-------");
         lottoResult.getWinningWords().forEach(System.out::println);
-        System.out.printf("총 수익률은 %.2f 입니다.",lottoResult.getWinningPercent(LOTTO_VALUE));
+        System.out.printf("총 수익률은 %.2f 입니다.",lottoResult.getWinningPercent(new StandardPrizeRate(), LOTTO_VALUE));
     }
 
     private List<Integer> extractNumber(String inputNumbers) {
