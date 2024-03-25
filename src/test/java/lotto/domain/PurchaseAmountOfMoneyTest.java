@@ -23,7 +23,7 @@ class PurchaseAmountOfMoneyTest {
     @DisplayName("numberOfLottoToPurchase(): 구매금액으로 사게되는 로또의 개수를 반환한다.")
     void testNumberOfLottoToPurchase(int amountOfMoney, int expected) {
         PurchaseAmountOfMoney purchaseAmountOfMoney = PurchaseAmountOfMoney.valueOf(amountOfMoney);
-        assertThat(purchaseAmountOfMoney.numberOfLottoToPurchase()).isEqualTo(expected);
+        assertThat(purchaseAmountOfMoney.totalNumberOfLottoToPurchase()).isEqualTo(expected);
     }
 
     @ParameterizedTest

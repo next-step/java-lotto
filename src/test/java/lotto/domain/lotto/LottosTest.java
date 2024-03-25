@@ -35,7 +35,7 @@ class LottosTest {
     @DisplayName("statistics(): 로또의 결과(당첨 통계, 수익률)를 반환합니다.")
     void testStatistics(String winningNumbersInput, int bonusNumberInput, Rank rank, double expectedRateOfReturn) {
         PurchaseAmountOfMoney purchaseAmountOfMoney = PurchaseAmountOfMoney.valueOf(1000);
-        Lottos lottos = lottoGeneratingStrategyStub.lottos(purchaseAmountOfMoney.numberOfLottoToPurchase());
+        Lottos lottos = lottoGeneratingStrategyStub.lottos(purchaseAmountOfMoney.totalNumberOfLottoToPurchase());
 
         WinningNumbers winningNumbers = WinningNumbers.valueOf(numbersForTest(winningNumbersInput));
         BonusNumber bonusNumber = BonusNumber.newBonusNumberWithOutWinningNumbers(LottoNumber.valueOf(bonusNumberInput), winningNumbers);

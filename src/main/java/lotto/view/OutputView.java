@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import static lotto.domain.Rank.MISS;
 
 public class OutputView {
-    private static final String NUMBER_OF_LOTTO_TO_PURCHASE_MESSAGE = "%d개를 구매했습니다.";
+    private static final String NUMBER_OF_LOTTO_TO_PURCHASE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String WINNING_STATISTICS_TITLE = "당첨 통계";
     private static final String WINNING_STATISTICS_MESSAGE = "%d개 일치 (%d원)- %d개";
     private static final String RATE_OF_RETURN_MESSAGE = "총 수익률은 %.2f입니다.";
@@ -21,13 +21,13 @@ public class OutputView {
     private static final String COMMA_BLANK = ", ";
     private static final String SEPARATOR = "---------";
     private static final String NEXT_LINE = System.lineSeparator();
-    private static final int BREAK_EVEN_POINT = 1; // 손해인지 아닌지를 판단하는
+    private static final int BREAK_EVEN_POINT = 1;
 
     private OutputView() {
     }
 
-    public static void printNumberOfLottoToPurchase(int numberOfLottoToPurchase) {
-        String numberOfLottoToPurchaseMessage = String.format(NUMBER_OF_LOTTO_TO_PURCHASE_MESSAGE, numberOfLottoToPurchase);
+    public static void printNumberOfLottoToPurchase(int numberOfManualLottoToPurchase, int totalNumberOfLottoToPurchase) {
+        String numberOfLottoToPurchaseMessage = String.format(NUMBER_OF_LOTTO_TO_PURCHASE_MESSAGE, numberOfManualLottoToPurchase, totalNumberOfLottoToPurchase - numberOfManualLottoToPurchase);
         System.out.println(numberOfLottoToPurchaseMessage);
     }
 
