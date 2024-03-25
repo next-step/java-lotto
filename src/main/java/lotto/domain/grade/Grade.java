@@ -24,7 +24,7 @@ public enum Grade {
         return Arrays.stream(Grade.values())
             .filter(grade -> grade.isSameCorrectingCount(correctingCount))
             .findFirst()
-            .orElseThrow(() -> new NotExistGradeException(correctingCount));
+            .orElse(Grade.UN_LUCKY_GRADE);
     }
 
     public int getPrizeMoney() {
