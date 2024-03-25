@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class Revenue {
-    public double calculate(int money, int revenueTotal) {
+    public double calculateRevenue(int money, int revenueTotal) {
         return (double)revenueTotal / money;
     }
 
