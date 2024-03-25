@@ -1,16 +1,12 @@
 package lotto;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoGame {
 
     private final List<Lotto> lottos;
-
-    public LottoGame(Money budget, Money lottoPrice) {
-        this(buyLottos(budget, lottoPrice));
-    }
 
     public LottoGame(List<Lotto> lottos) {
         this.lottos = lottos;
@@ -20,10 +16,8 @@ public class LottoGame {
         return lottos;
     }
 
-    private static List<Lotto> buyLottos(Money budget, Money lottoPrice) {
-        return Stream.generate(Lotto::new)
-                .limit(budget.purchase(lottoPrice))
-                .collect(Collectors.toList());
+    public void add(List<Lotto> manualLottos) {
+        this.lottos.addAll(manualLottos);
     }
 
     public RankMap getPrizeByRank(WiningLotto winningLotto) {
@@ -35,7 +29,15 @@ public class LottoGame {
     }
 
     @Override
-    public String toString() {
-        return lottos.toString();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LottoGame)) return false;
+        LottoGame lottoGame = (LottoGame) o;
+        return Objects.equals(lottos, lottoGame.lottos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottos);
     }
 }

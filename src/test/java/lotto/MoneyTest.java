@@ -14,7 +14,7 @@ class MoneyTest {
         Money lottoPrice = new Money(lotto);
         Money budget = new Money(amount);
 
-        assertThat(budget.purchase(lottoPrice)).isEqualTo(amount / lotto);
+        assertThat(budget.estimatePurchaseLimit(lottoPrice)).isEqualTo(amount / lotto);
     }
 
     @Test
@@ -25,7 +25,7 @@ class MoneyTest {
         Money budgetOnPocket = new Money(budget);
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> budgetOnPocket.purchase(lottoPrice));
+                .isThrownBy(() -> budgetOnPocket.estimatePurchaseLimit(lottoPrice));
     }
 
     @Test

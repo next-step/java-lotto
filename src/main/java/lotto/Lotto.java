@@ -17,6 +17,9 @@ public class Lotto {
     }
 
     private Lotto(List<LottoNumber> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException(ErrorMessage.ERR_NOT_ENOUGH_NUMBER.print());
+        }
         this.numbers = numbers;
         this.numbers.sort(LottoNumber::compareTo);
     }
@@ -35,6 +38,19 @@ public class Lotto {
 
     public boolean contains(LottoNumber num) {
         return this.numbers.contains(num);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Lotto)) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numbers, lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 
     @Override
