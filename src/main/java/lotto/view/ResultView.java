@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class ResultView {
+
     public static void showStatistic(Statistics statistics) {
         System.out.println(createResult(statistics));
     }
@@ -19,8 +20,8 @@ public class ResultView {
 
     private static String getResults(Statistics statistics) {
         return Arrays.stream(Statistic.values())
-                .map(matcher -> createStatisticForm(statistics, matcher))
-                .collect(Collectors.joining("\n", "", "\n"));
+            .map(matcher -> createStatisticForm(statistics, matcher))
+            .collect(Collectors.joining("\n", "", "\n"));
     }
 
 
@@ -29,7 +30,7 @@ public class ResultView {
     }
 
     private static String createRateForm(Statistics statistics) {
-        float rate = statistics.getRateOfReturn(Lotto.LOTTO_PRICE);
+        float rate = statistics.getRateOfReturn();
         return "총 수익률은 " + String.format("%.2f", rate) + "입니다.(기준이 1이기 때문에 결과적으로 " + checkLoss(rate) + "라는 의미임)";
     }
 
@@ -42,7 +43,7 @@ public class ResultView {
 
     public static void showGeneratedLottos(Lottos lottos) {
         System.out.println(
-                lottos.getLottos()
+            lottos.getLottos()
                 .stream()
                 .map(ResultView::createLottoForm)
                 .collect(Collectors.joining())
@@ -51,8 +52,8 @@ public class ResultView {
 
     private static String createLottoForm(Lotto lotto) {
         String result = String.join(
-                ", ",
-                lotto.getLotto()
+            ", ",
+            lotto.getLotto()
                 .stream()
                 .map(lottoNumber -> String.valueOf(lottoNumber.getValue()))
                 .collect(Collectors.toList()));

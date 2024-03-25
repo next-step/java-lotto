@@ -11,8 +11,8 @@ public class Statistics {
         this.statistics = statistics;
     }
 
-    public float getRateOfReturn(int lottoPrice) {
-        return (float) getTotalReturn() / getBudgetBy(lottoPrice);
+    public float getRateOfReturn() {
+        return (float) getTotalReturn() / getBudgetBy(Lotto.LOTTO_PRICE);
     }
 
     private int getTotalReturn() {
