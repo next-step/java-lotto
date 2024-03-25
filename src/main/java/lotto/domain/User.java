@@ -26,7 +26,7 @@ public class User {
         return List.copyOf(lottos);
     }
 
-    public UserLottoResult getUserLottoResult(Lotto winningLotto) {
+    public UserLottoResult getUserLottoResult(WinningLotto winningLotto) {
         BigDecimal totalIncome = new BigDecimal(0);
         UserLottoResult userLottoResult = new UserLottoResult();
         

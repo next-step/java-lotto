@@ -1,8 +1,8 @@
 package lotto.presentation;
 
 import lotto.application.LottoService;
-import lotto.domain.Lotto;
 import lotto.domain.User;
+import lotto.domain.WinningLotto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,8 +28,9 @@ public class LottoController {
         resultView.printPurchaseCount(lottoService.purchaseCount(user));
         resultView.printLottos(user.getLottos());
 
-        List<Integer> numbers = parsingLottoNumbers(inputView.inputWinningLotto());
-        Lotto winningLotto = lottoService.makeWinningLotto(numbers);
+        List<Integer> numbers = parsingLottoNumbers(inputView.inputWinningLottoNumbers());
+        int bonusNumber = inputView.inputWinningBonusNumber();
+        WinningLotto winningLotto = lottoService.makeWinningLotto(numbers, bonusNumber);
 
         resultView.printLottoResult(user.getUserLottoResult(winningLotto));
     }

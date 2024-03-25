@@ -17,11 +17,12 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(List<Integer> inputNumbers) {
+        assertValidLength(inputNumbers);
+
         List<LottoNumber> numbers = inputNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
-        assertValidLength(numbers);
         assertNotDuplicateNumber(numbers);
 
         this.numbers = numbers;
@@ -33,6 +34,10 @@ public class LottoNumbers {
                 .collect(Collectors.toUnmodifiableList());
     }
 
+    public boolean isContainNumber(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
+
     public int matchCount(LottoNumbers lottoNumbers) {
 
         return (int) this.numbers.stream()
@@ -40,7 +45,7 @@ public class LottoNumbers {
                 .count();
     }
 
-    private void assertValidLength(List<LottoNumber> numbers) {
+    private void assertValidLength(List<Integer> numbers) {
         String errorMessage = "[로또] 숫자 6개를 입력해주세요.";
 
         if (numbers == null || numbers.isEmpty()) {

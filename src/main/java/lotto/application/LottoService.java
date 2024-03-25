@@ -12,7 +12,7 @@ public class LottoService {
         this.lottoSeller = new LottoSeller(numberGenerator);
     }
 
-    public UserLottoResult userLottoResult(User user, Lotto winningLotto) {
+    public UserLottoResult userLottoResult(User user, WinningLotto winningLotto) {
         return user.getUserLottoResult(winningLotto);
     }
 
@@ -24,7 +24,7 @@ public class LottoService {
         return user.getLottos().size();
     }
 
-    public Lotto makeWinningLotto(List<Integer> numbers) {
-        return new Lotto(new LottoNumbers(numbers));
+    public WinningLotto makeWinningLotto(List<Integer> numbers, int bonusNumber) {
+        return new WinningLotto(numbers, bonusNumber);
     }
 }

@@ -41,7 +41,7 @@ public class UserTest {
     @ParameterizedTest
     @DisplayName("로또 수익률 및 결과 테스트")
     @MethodSource("getLottosAndRateOfReturn")
-    void testRateOfReturn(Lotto winningLotto, int price, double expectedRateOfReturn, Map<LottoWinningRank, Integer> expectedLottoResultCount) {
+    void testRateOfReturn(WinningLotto winningLotto, int price, double expectedRateOfReturn, Map<LottoWinningRank, Integer> expectedLottoResultCount) {
         User user = new User(mockLottoSeller);
         user.purchaseLottos(price);
         UserLottoResult userLottoResult = user.getUserLottoResult(winningLotto);
@@ -56,21 +56,23 @@ public class UserTest {
 
     private static Stream<Arguments> getLottosAndRateOfReturn() {
         return Stream.of(
-                Arguments.of(new Lotto(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6))), 4000, 2000000.0, getLottoResultMap(4, 0, 0, 0)),
-                Arguments.of(new Lotto(new LottoNumbers(List.of(2, 3, 4, 5, 6, 7))), 5000, 1500, getLottoResultMap(0, 5, 0, 0)),
-                Arguments.of(new Lotto(new LottoNumbers(List.of(3, 4, 5, 6, 7, 8))), 6000, 50.0, getLottoResultMap(0, 0, 6, 0)),
-                Arguments.of(new Lotto(new LottoNumbers(List.of(4, 5, 6, 7, 8, 9))), 3000, 5.0, getLottoResultMap(0, 0, 0, 3)),
-                Arguments.of(new Lotto(new LottoNumbers(List.of(5, 6, 7, 8, 9, 10))), 4000, 0.0, getLottoResultMap(0, 0, 0, 0))
+                Arguments.of(new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 8), 4000, 2000000.0, getLottoResultMap(4, 0, 0, 0, 0)),
+                Arguments.of(new WinningLotto(List.of(2, 3, 4, 5, 6, 7), 1), 5000, 30000, getLottoResultMap(0, 5, 0, 0, 0)),
+                Arguments.of(new WinningLotto(List.of(2, 3, 4, 5, 6, 7), 8), 5000, 1500, getLottoResultMap(0, 0, 5, 0, 0)),
+                Arguments.of(new WinningLotto(List.of(3, 4, 5, 6, 7, 8), 10), 6000, 50.0, getLottoResultMap(0, 0, 0, 6, 0)),
+                Arguments.of(new WinningLotto(List.of(4, 5, 6, 7, 8, 9), 10), 3000, 5.0, getLottoResultMap(0, 0, 0, 0,3 )),
+                Arguments.of(new WinningLotto(List.of(5, 6, 7, 8, 9, 10), 11), 4000, 0.0, getLottoResultMap(0, 0, 0, 0, 0))
 
         );
     }
 
-    private static Map<LottoWinningRank, Integer> getLottoResultMap(int first, int second, int third, int fourth) {
+    private static Map<LottoWinningRank, Integer> getLottoResultMap(int first, int second, int third, int fourth, int fifth) {
         Map<LottoWinningRank, Integer> map = new EnumMap<>(LottoWinningRank.class);
         map.put(LottoWinningRank.FIRST, first);
         map.put(LottoWinningRank.SECOND, second);
         map.put(LottoWinningRank.THIRD, third);
         map.put(LottoWinningRank.FOURTH, fourth);
+        map.put(LottoWinningRank.FIFTH, fifth);
 
         return map;
     }
