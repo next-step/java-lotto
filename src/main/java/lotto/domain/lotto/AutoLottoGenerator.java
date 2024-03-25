@@ -1,11 +1,12 @@
 package lotto.domain.lotto;
 
+import lotto.domain.Amount;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.LongStream;
 
 public class AutoLottoGenerator {
     private static final List<LottoNumber> BASE_NUMBERS;
@@ -18,8 +19,8 @@ public class AutoLottoGenerator {
 
     private AutoLottoGenerator() {}
 
-    public static Lottos tickets(int amount) {
-        final List<Lotto> lottos = IntStream.range(0, amount)
+    public static Lottos tickets(Amount amount) {
+        final List<Lotto> lottos = amount.range()
                 .mapToObj(idx -> ticket())
                 .collect(Collectors.toList());
 

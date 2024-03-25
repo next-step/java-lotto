@@ -24,7 +24,7 @@ public class CashTest {
     @CsvSource(value = {"0,0", "800,0", "1000,1", "3400,3"})
     void buyableAmount(int cash, int expectAmount) {
         assertThat(new Cash(cash).buyableAmount(new Cash(1000)))
-                .isEqualTo(expectAmount);
+                .isEqualTo(new Amount(expectAmount));
     }
 
     @DisplayName("buyableAmount에 매개변수로 넘기는 제품 금액은 음수나 0이 될 수 없다.")

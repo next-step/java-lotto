@@ -22,11 +22,10 @@ public class Cash {
         return this.value;
     }
 
-    public int buyableAmount(Cash price) {
+    public Amount buyableAmount(Cash price) {
         assertPriceGreaterThanZero(price);
 
-        return value.divideToIntegralValue(price.value())
-                .intValue();
+        return new Amount(value.divideToIntegralValue(price.value()));
     }
 
     public boolean equalsZero() {

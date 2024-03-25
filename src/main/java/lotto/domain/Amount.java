@@ -1,9 +1,15 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class Amount {
     private final int value;
+
+    public Amount(BigDecimal value) {
+        this(value.intValue());
+    }
 
     public Amount(int value) {
         assertAmountPositive(value);
@@ -26,5 +32,18 @@ public class Amount {
 
     public IntStream range() {
         return IntStream.range(0, value);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Amount amount = (Amount) o;
+        return value == amount.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }

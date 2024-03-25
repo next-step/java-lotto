@@ -25,6 +25,7 @@ public class LotteryShop {
     }
 
     public static Lottos purchaseAuto(Cash cash) {
-        return AutoLottoGenerator.tickets(cash.buyableAmount(LOTTO_PRICE));
+        return AutoLottoGenerator.tickets(
+                cash.buyableAmount(LOTTO_PRICE));
     }
 }
