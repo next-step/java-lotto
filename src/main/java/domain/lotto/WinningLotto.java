@@ -7,15 +7,15 @@ public class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
-    public static WinningLotto from(List<Integer> winningIntegerList, int bonusNumber) {
+    public static WinningLotto from(List<Integer> winningIntegerList, int isMatchBonusNumber) {
         Lotto winningLotto = Lotto.from(winningIntegerList);
-        LottoNumber bonusLotto = LottoNumber.from(bonusNumber);
+        LottoNumber bonusLotto = LottoNumber.from(isMatchBonusNumber);
 
-        verifyDuplicateBonusNumberInWininngLotto(winningLotto, bonusLotto);
-        return new WinningLotto(Lotto.from(winningIntegerList), LottoNumber.from(bonusNumber));
+        verifyDuplicateBonusNumberInWinningLotto(winningLotto, bonusLotto);
+        return new WinningLotto(Lotto.from(winningIntegerList), LottoNumber.from(isMatchBonusNumber));
     }
 
-    private static void verifyDuplicateBonusNumberInWininngLotto(Lotto winningLotto, LottoNumber bonusLotto) {
+    private static void verifyDuplicateBonusNumberInWinningLotto(Lotto winningLotto, LottoNumber bonusLotto) {
         if (winningLotto.contain(bonusLotto)) {
             throw new IllegalArgumentException("보너스 번호는 당첨된 번호와 중복될 수 없습니다.");
         }

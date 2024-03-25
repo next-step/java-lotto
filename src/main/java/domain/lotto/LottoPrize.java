@@ -27,10 +27,10 @@ public enum LottoPrize {
         return winningMoney;
     }
 
-    public static LottoPrize valueOf(int count, boolean bonusNumber) {
+    public static LottoPrize valueOf(int count, boolean isMatchBonusNumber) {
         LottoPrize lottoPrize = matchLottoPrize(count);
 
-        if (isSecondPrize(bonusNumber, lottoPrize)) {
+        if (isSecondPrize(isMatchBonusNumber, lottoPrize)) {
             return LottoPrize.SECOND;
         }
 
@@ -54,7 +54,7 @@ public enum LottoPrize {
         return item -> item != LottoPrize.SECOND;
     }
 
-    private static boolean isSecondPrize(boolean bonusNumber, LottoPrize lottoPrize) {
-        return lottoPrize == FOURTH && bonusNumber;
+    private static boolean isSecondPrize(boolean isMatchBonusNumber, LottoPrize lottoPrize) {
+        return lottoPrize == FOURTH && isMatchBonusNumber;
     }
 }

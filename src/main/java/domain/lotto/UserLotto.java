@@ -47,12 +47,12 @@ public class UserLotto {
         userLotto.stream()
                 .map(item -> {
                     int count = item.countOfMatch(winningLotto.lotto());
-                    boolean bonusNumber = item.contain(winningLotto.bonusNumber());
-                    return LottoPrize.valueOf(count, bonusNumber);
+                    boolean isMatchBonusNumber = item.contain(winningLotto.bonusNumber());
+                    return LottoPrize.valueOf(count, isMatchBonusNumber);
                 })
                 .forEach(item -> {
                     Integer count = result.getOrDefault(item, 0);
-                    result.put(item, count += 1);
+                    result.put(item, count + 1);
                 });
         return result;
     }
