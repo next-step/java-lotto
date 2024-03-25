@@ -13,8 +13,6 @@ import lotto.domain.statistics.WinningStatistics;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.Optional;
-
 public class LottoPlayer {
 
     private void play() {
@@ -39,7 +37,8 @@ public class LottoPlayer {
         final Lottos autos = LotteryShop.purchaseAuto(change);
 
         OutputView.printPurchasedLottos(manuals, autos);
-        return autos;
+
+        return manuals.concat(autos);
     }
 
     private Lottos exchangeManualLottoNumbers(Amount amount) {
