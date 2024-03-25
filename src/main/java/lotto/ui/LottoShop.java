@@ -1,4 +1,8 @@
-package lotto;
+package lotto.ui;
+
+import lotto.domain.LottoList;
+import lotto.match.LottoResult;
+import lotto.prize.StandardPrizeRate;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,6 @@
-package lotto;
+package lotto.ui;
+
+import lotto.ui.LottoShop;
 
 public class LottoController {
 
