@@ -17,16 +17,11 @@ public class Lotto {
             throw new SizeExceedLottoException(lotto.size());
         }
 
-        if (hasDuplicateNumbers(lotto)){
+        if (hasDuplicateNumbers(lotto)) {
             throw new DuplicateLottoNumberException(lotto);
         }
 
         this.lotto = lotto;
-    }
-
-    private boolean hasDuplicateNumbers(List<LottoNumber> lotto) {
-        Set<LottoNumber> uniqueNumbers = new HashSet<>(lotto);
-        return uniqueNumbers.size() != lotto.size();
     }
 
     public static List<Lotto> createAutoLottos(int purchaseCount) {
@@ -40,6 +35,11 @@ public class Lotto {
             .map(LottoNumber::fromInt)
             .collect(Collectors.toList());
         return new Lotto(lottoNumbers);
+    }
+
+    private boolean hasDuplicateNumbers(List<LottoNumber> lotto) {
+        Set<LottoNumber> uniqueNumbers = new HashSet<>(lotto);
+        return uniqueNumbers.size() != lotto.size();
     }
 
     public boolean contains(LottoNumber winningNumber) {
