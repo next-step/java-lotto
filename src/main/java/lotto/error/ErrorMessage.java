@@ -18,6 +18,8 @@ public enum ErrorMessage {
 
     UN_EXPECTED_ERROR("예기치 못한 예외가 발생되었습니다. 다시 실행해주세요. "),
 
+    DUPLICATE_LOTTO_NUMBER("중복된 로또 번호가 존재합니다."),
+
     INVALID_FORMAT("당첨번호는 ', ' 로 구분되어야 합니다");
 
 
