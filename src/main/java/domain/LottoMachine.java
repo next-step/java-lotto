@@ -20,6 +20,6 @@ public class LottoMachine {
 
     public Lotto pull() {
         Collections.shuffle(machine);
-        return machine.subList(0, 6);
+        return (Lotto) machine.subList(0, 6);
     }
 }

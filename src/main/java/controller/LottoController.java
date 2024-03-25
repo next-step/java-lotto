@@ -3,11 +3,13 @@ package controller;
 import domain.Lotto;
 import domain.LottoMachine;
 import domain.MyLotto;
+import domain.WinStatus;
 
 public class LottoController {
 
     private final LottoMachine lottoMachine = new LottoMachine();
     private final MyLotto myLotto = new MyLotto();
+    private final WinStatus winStatus = new WinStatus();
     private void totalLotto(int count) {
         for (int i = 0; i < count; i++) {
             myLotto.add(lottoMachine.pull());
@@ -22,11 +24,15 @@ public class LottoController {
         totalLotto(cnt);
     }
 
-    public void resultReturn() {
+    public WinStatus resultReturn() {
         Lotto winLotto = winNumbers();
-        for (Lotto lotto : myLotto) {
-
+        for (Lotto lotto : MyLotto.getLotto()) {
+            int price = lotto.numberCheck(winLotto);
+            if (price >= 3) {
+                winStatus.correct(price);
+            }
         }
+        return winStatus;
     }
 
 }

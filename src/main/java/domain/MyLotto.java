@@ -5,10 +5,17 @@ import java.util.List;
 
 public class MyLotto {
 
-    private static final List<Lotto> lottos = new ArrayList<>();
+    private static List<Lotto> lotto;
 
-    public void add(Lotto lotto) {
-        lottos.add(lotto);
+    public MyLotto() {
+        lotto = new ArrayList<>();
     }
 
+    public void add(Lotto lotto) {
+        MyLotto.lotto.add(lotto);
+    }
+
+    public static List<Lotto> getLotto() {
+        return lotto;
+    }
 }

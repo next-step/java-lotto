@@ -10,9 +10,9 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public int numberCheck(List<Integer> winNumbers) {
+    public int numberCheck(Lotto winNumbers) {
         int cnt = 0;
-        for (Integer winNumber : winNumbers) {
+        for (Integer winNumber : winNumbers.numbers) {
             if (numbers.contains(winNumber))
                 cnt++;
         }
