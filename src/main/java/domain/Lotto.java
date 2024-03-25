@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
@@ -7,9 +9,12 @@ public class Lotto {
     public static final int PRICE = 1_000;
 
     private final LottoNumbers lottoNumbers;
+    private final List<LottoNumber> lottoNumbers1;
 
     public Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+
+        this.lottoNumbers1 = new ArrayList<>();
     }
 
     public Rank rank(WinningLotto winningLotto) {
