@@ -5,6 +5,8 @@ import java.util.*;
 public class Lotto {
 
     public static final int PRICE = 1_000;
+    public static final int NUMBER_SIZE = 6;
+
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -31,7 +33,7 @@ public class Lotto {
 
     public static Lotto randomLotto() {
         Set<LottoNumber> numbers = new HashSet<>();
-        while (numbers.size() < 6) {
+        while (numbers.size() < NUMBER_SIZE) {
             numbers.add(LottoNumber.random());
         }
         return new Lotto(numbers);
