@@ -7,6 +7,9 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
+        if (number > 45 || number < 1) {
+            throw new IndexOutOfBoundsException(ErrorMessage.ERR_NUMBER_OUT_OF_BOUNDARY.print());
+        }
         this.number = number;
     }
 
