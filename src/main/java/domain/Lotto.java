@@ -1,8 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Lotto {
 
@@ -19,6 +17,26 @@ public class Lotto {
 
     public Rank rank(WinningLotto winningLotto) {
         return winningLotto.rank(this.lottoNumbers);
+    }
+
+    public boolean isMatchFiveNumberAndBonusNumber(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+//        return this.matchCount(winningNumbers) == 5 && this.lottoNumbers.contains(bonusNumber);
+        return false;
+    }
+
+    public int matchCount(LottoNumbers winningNumbers) {
+////        Set<LottoNumber> newLottoNumbers1 = new LottoNumbers(new HashSet<>(this.lottoNumbers)).lottoNumbers;
+////        newLottoNumbers1.retainAll(winningNumbers.lottoNumbers);
+//        return newLottoNumbers1.size();
+        return 0;
+    }
+
+    public static LottoNumbers randomLottoNumbers() {
+        Set<LottoNumber> numbers = new HashSet<>();
+        while (numbers.size() < 6) {
+            numbers.add(LottoNumber.random());
+        }
+        return new LottoNumbers(numbers);
     }
 
     @Override
