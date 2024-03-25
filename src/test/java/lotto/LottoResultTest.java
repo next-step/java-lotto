@@ -33,7 +33,7 @@ class LottoResultTest {
     @Test
     @DisplayName("번돈과 소비한돈을 나누어 수익률을 반환한다.")
     public void getWinningPercentByEarningAndSpent() {
-        assertThat(lottoResult.getWinningPercent(lottoPrice)).isEqualTo(5);
+        assertThat(lottoResult.getWinningPercent(new StandardPrizeRate(),lottoPrice)).isEqualTo(5);
     }
 
 }

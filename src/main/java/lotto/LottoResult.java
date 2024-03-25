@@ -19,8 +19,9 @@ public class LottoResult {
                 .sum();
     }
 
-    public double getWinningPercent(int lottoPrice) {
-        return (calculateTotalEarnings()) / (double) (result.size() * lottoPrice);
+    public double getWinningPercent(PrizeRateStrategy rateStrategy ,int lottoPrice) {
+        int spendMoney = lottoPrice * result.size();
+        return rateStrategy.getRate(calculateTotalEarnings(),spendMoney);
     }
 
     public List<String> getWinningWords() {
