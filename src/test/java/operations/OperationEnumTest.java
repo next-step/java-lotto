@@ -1,6 +1,7 @@
 package operations;
 
-import operations.enums.OperationEnum;
+import domain.operations.Number;
+import domain.operations.enums.OperationEnum;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
