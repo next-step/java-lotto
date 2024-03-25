@@ -1,11 +1,17 @@
 package controller;
 
 import domain.LottoMachine;
+import domain.MyLotto;
 
 public class LottoController {
 
     private final LottoMachine lottoMachine = new LottoMachine();
-    public void totalLotto(int count) {
-
+    private final MyLotto myLotto = new MyLotto();
+    private void totalLotto(int count) {
+        for (int i = 0; i < count; i++) {
+            myLotto.add(lottoMachine.pull());
+        }
     }
+
+    public void
 }
