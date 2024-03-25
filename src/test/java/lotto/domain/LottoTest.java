@@ -56,4 +56,12 @@ class LottoTest {
 
         assertThat(lotto.size()).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("중복된 LottoNumber가 전달될 경우 예외를 발생해야 한다")
+    public void If_Lotto_Number_Duplicate_Occurs_Exception() {
+        assertThatThrownBy(() -> Lotto.fromValues(Arrays.asList(1, 2, 4, 4, 5, 5)))
+            .isInstanceOf(DuplicateLottoNumberException.class)
+            .hasMessage("중복된 로또 번호가 존재합니다. 입력값: [1, 2, 4, 4, 5, 5]");
+    }
 }
