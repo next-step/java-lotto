@@ -4,7 +4,6 @@ import lotto.domain.BonusBall;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Prize;
-import lotto.domain.WinningNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,29 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoMatchingServiceTest {
-
-    @DisplayName("수동 로또와 자동 로또를 입력하면 통계를 반환한다")
-    @Test
-    void auto_and_manual_lotto() {
-        //지난 주 당첨 번호
-        WinningNumbers winningNumbers = WinningNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-
-        //보너스볼
-        BonusBall bonusBall = new BonusBall(7);
-
-        //수동 로또
-        LottoTicket lottoTicket1 = new LottoTicket(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket lottoTicket2 = new LottoTicket(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
-        List<LottoTicket> manualLottos = Arrays.asList(lottoTicket1, lottoTicket2);
-
-        //자동 로또
-        LottoTicket lottoTicket3 = new LottoTicket(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket lottoTicket4 = new LottoTicket(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
-        List<LottoTicket> autoLottos = Arrays.asList(lottoTicket3, lottoTicket4);
-
-
-
-    }
 
     @DisplayName("당첨번호 5개, 보너스 볼 1개와 로또 번호가 일치했을 때 상금리스트에서 2등만 카운트되서 반환한다")
     @Test

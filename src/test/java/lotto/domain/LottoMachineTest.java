@@ -15,16 +15,16 @@ public class LottoMachineTest {
     @ParameterizedTest
     @CsvSource(value = {"0:6", "1:6", "2:6", "3:6", "4:6", "5:6"}, delimiter = ':')
     void show_lotto_ticke_number(int index, int expected) {
-        LottoMachine lottoMachine = new LottoMachine(14);
-        List<LottoTicket> lottoTickets = lottoMachine.generateLottoTickets();
+        LottoMachine lottoMachine = new LottoMachine();
+        List<LottoTicket> lottoTickets = lottoMachine.generateLottoTickets(14);
         assertThat(lottoTickets.get(index).generateLottoNumbers().size()).isEqualTo(expected);
     }
 
     @DisplayName("개수를 입력하면 로또번호 6개가 그 개수만큼 나온다")
     @Test
     void number_of_lotto() {
-        LottoMachine lottoMachine = new LottoMachine(14);
-        List<LottoTicket> lottoTickets = lottoMachine.generateLottoTickets();
+        LottoMachine lottoMachine = new LottoMachine();
+        List<LottoTicket> lottoTickets = lottoMachine.generateLottoTickets(14);
 
         assertThat(lottoTickets.size()).isEqualTo(14);
     }

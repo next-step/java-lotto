@@ -20,6 +20,10 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
+    public void add(LottoTicket lottoTicket) {
+        lottoTickets.add(lottoTicket);
+    }
+
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }

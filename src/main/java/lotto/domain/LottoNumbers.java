@@ -38,4 +38,10 @@ public class LottoNumbers {
                 .anyMatch(it -> it == number);
     }
 
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::number)
+                .collect(Collectors.toList());
+    }
+
 }

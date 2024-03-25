@@ -5,24 +5,26 @@ import java.util.List;
 
 public class LottoMachine {
 
-    private final int number;
     private final LottoTickets lottoTickets;
 
-    public LottoMachine(int number) {
-        this(number, new ArrayList<>());
+    public LottoMachine() {
+        this(new ArrayList<>());
     }
 
-    public LottoMachine(int number, List<LottoTicket> lottoTickets) {
-        this(number, new LottoTickets(lottoTickets));
+    public LottoMachine(List<LottoTicket> lottoTickets) {
+        this(new LottoTickets(lottoTickets));
     }
 
-    public LottoMachine(int number, LottoTickets lottoTickets) {
-        this.number = number;
+    public LottoMachine(LottoTickets lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 
-    public List<LottoTicket> generateLottoTickets() {
+    public List<LottoTicket> generateLottoTickets(int number) {
         return lottoTickets.generateLottoTickets(number);
+    }
+
+    public void addLottoTicket(LottoTicket lottoTicket) {
+        lottoTickets.add(lottoTicket);
     }
 
     public LottoTickets getLottoTickets() {

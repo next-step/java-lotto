@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.BonusBall;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoTicket;
 import lotto.domain.Price;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -21,24 +22,39 @@ public class LottoController {
     public void start() {
         resultView.printInit();
 
-        Price price = new Price(inputView.inputPrice());
-        int numbersOfLotto = price.calculateNumberOfLotto();
+        Price price = new Price(inputView.inputNumber()); //구입금액입력
+        inputView.inputNextLine();
+        int numbersOfLotto = price.calculateNumberOfLotto(); //로또 갯수 계샨
 
-        resultView.printNumbersOfLotto(numbersOfLotto);
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int numbersOfManualLotto = inputView.inputNumber();
+
         inputView.inputNextLine();
 
-        LottoMachine lottoMachine = new LottoMachine(numbersOfLotto);
-        resultView.printLottoTicketsNumbers(lottoMachine.getLottoTickets());
+        int numbersOfAutoLotto = numbersOfLotto - numbersOfManualLotto;
+
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        LottoMachine lottoMachine = new LottoMachine();
+        List<LottoTicket> lottoTickets = lottoMachine.generateLottoTickets(numbersOfAutoLotto);
+
+        for (int i = 0; i < numbersOfManualLotto; i++) {
+            lottoMachine.addLottoTicket(new LottoTicket(inputView.getLottoNumbers()));
+        }
+
+        System.out.println("수동으로 " + numbersOfManualLotto + "장, 자동으로 " + numbersOfAutoLotto + "개를 구매했습니다.");
+
+
+        resultView.printLottoTicketsNumbers(lottoTickets);
         resultView.printDoInputWinningNumbers();
 
-        List<Integer> winningNumbers = inputView.getWinningNumbers();
+        List<Integer> winningNumbers = inputView.getLottoNumbers();
         resultView.printBonusBallNumber();
 
         resultView.printResult(
                 lottoMachine
                 , winningNumbers
                 , price
-                , new BonusBall(inputView.getBonusBallNumber())
+                , new BonusBall(inputView.inputNumber())
         );
     }
 

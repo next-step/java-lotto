@@ -4,7 +4,6 @@ import lotto.LottoMatchingService;
 import lotto.domain.BonusBall;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
 import lotto.domain.Price;
 import lotto.domain.Prize;
 
@@ -21,13 +20,9 @@ public class ResultView {
         System.out.println(numbersOfLotto + "개를 구매했습니다.");
     }
 
-    public void printLottoTicketsNumbers(LottoTickets lottoTickets) {
-        printLottoTicketsNumbers(lottoTickets.getLottoTickets());
-    }
-
     public void printLottoTicketsNumbers(List<LottoTicket> lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets) {
-            System.out.println(lottoTicket.generateLottoNumbers());
+            System.out.println(lottoTicket.getLottoNumbers().getLottoNumbers());
         }
     }
 
