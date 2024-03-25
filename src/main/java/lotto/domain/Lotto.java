@@ -8,21 +8,21 @@ public class Lotto implements Iterable<LottoNumber> {
     private static final int NOT_MATCH_COUNT = 0;
     private static final int SIZE = 6;
 
-    private final List<LottoNumber> lottoNumber;
+    private final List<LottoNumber> lotto;
 
-    public Lotto(List<Integer> lottoNumber) {
-        if (new HashSet<>(lottoNumber).size() != SIZE) {
+    public Lotto(List<Integer> lotto) {
+        if (new HashSet<>(lotto).size() != SIZE) {
             throw new IllegalArgumentException("로또는 중복되지 않은 6개의 숫자여야 합니다.");
         }
 
-        this.lottoNumber = lottoNumber.stream()
+        this.lotto = lotto.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
-        Collections.sort(this.lottoNumber);
+        Collections.sort(this.lotto);
     }
 
-    private int contains(LottoNumber number) {
-        if (lottoNumber.contains(number)) {
+    private int checkMatchCount(LottoNumber number) {
+        if (lotto.contains(number)) {
             return MATCH_COUNT;
         }
         return NOT_MATCH_COUNT;
@@ -31,13 +31,27 @@ public class Lotto implements Iterable<LottoNumber> {
     public int compare(Lotto lotto) {
         int matchCount = 0;
         for (LottoNumber winningNumber : lotto) {
-            matchCount += contains(winningNumber);
+            matchCount += checkMatchCount(winningNumber);
         }
         return matchCount;
     }
 
-    public boolean containBonusNumber(LottoNumber bonusNumber) {
-        return lottoNumber.contains(bonusNumber);
+    public Rank getRank(Lotto winningLotto, LottoNumber bonusNumber) {
+        int matchCount = compareLottoNumbers(winningLotto);
+        boolean matchBonus = containBonusNumber(winningLotto, bonusNumber);
+        return Rank.findRank(matchCount, matchBonus);
+    }
+
+    private boolean containBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
+        return winningLotto.contains(bonusNumber);
+    }
+
+    private boolean contains(LottoNumber bonusNumber) {
+        return this.lotto.contains(bonusNumber);
+    }
+
+    private int compareLottoNumbers(Lotto winningLotto) {
+        return compare(winningLotto);
     }
 
     @Override
@@ -45,16 +59,16 @@ public class Lotto implements Iterable<LottoNumber> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto integers = (Lotto) o;
-        return Objects.equals(lottoNumber, integers.lottoNumber);
+        return Objects.equals(lotto, integers.lotto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumber);
+        return Objects.hash(lotto);
     }
 
     @Override
     public Iterator<LottoNumber> iterator() {
-        return lottoNumber.iterator();
+        return lotto.iterator();
     }
 }
