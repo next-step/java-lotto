@@ -15,6 +15,8 @@ public class LottoMain {
 
             NumberOfManualLottoToPurchase numberOfManualLottoToPurchase = enteredNumberOfManualLottoToPurchase(purchaseAmountOfMoney.numberOfLottoToPurchase());
 
+            Lottos manualLottos = enteredManualLottos(numberOfManualLottoToPurchase);
+
             int numberOfLottoToPurchase = purchaseAmountOfMoney.numberOfLottoToPurchase();
             printNumberOfLottoToPurchase(numberOfLottoToPurchase);
 
