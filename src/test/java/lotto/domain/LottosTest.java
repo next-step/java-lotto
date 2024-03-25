@@ -12,7 +12,7 @@ public class LottosTest {
 
     @DisplayName("당첨 통계 산출")
     @Test
-    void computeStatistic_three() {
+    void computeStatistic() {
         Lotto givenLotto = Lotto.ofNumbers(List.of(1,2,3,4,5,6));
         Lottos lottos = new Lottos(List.of(givenLotto));
         WinLotto winLotto = WinLotto.ofNumbers(List.of(1, 2, 3, 4, 5, 7), 6);
