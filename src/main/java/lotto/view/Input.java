@@ -20,7 +20,7 @@ public class Input {
     private Input() {
     }
 
-    public static int inputPurchaseAmount(){
+    public static int inputPurchaseAmount() {
         System.out.println("구매금액을 입력해 주세요");
         return scanner.nextInt();
     }
@@ -32,7 +32,7 @@ public class Input {
             return Arrays.stream(scanner.nextLine().split(", "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        } catch (NumberFormatException numberFormatException){
+        } catch (NumberFormatException numberFormatException) {
             throw new NumberFormatException(INVALID_FORMAT.getMessage());
         } catch (InputMismatchException e) {
             throw new InputMismatchException(INVALID_INPUT_TYPE_INT.getMessage());

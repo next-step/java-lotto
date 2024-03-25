@@ -23,6 +23,18 @@ public enum Grade {
 
     private int correctingCount;
 
+    Grade(int prizeMoney, int correctingCount) {
+        this.prizeMoney = prizeMoney;
+        this.correctingCount = correctingCount;
+    }
+
+    public static Grade fromCorrectingCount(int correctingCount) {
+        return Arrays.stream(Grade.values())
+            .filter(grade -> grade.isSameCorrectingCount(correctingCount))
+            .findFirst()
+            .orElseThrow(() -> new NotExistGradeException(correctingCount));
+    }
+
     public int getPrizeMoney() {
         return prizeMoney;
     }
@@ -31,19 +43,7 @@ public enum Grade {
         return correctingCount;
     }
 
-    Grade(int prizeMoney, int correctingCount) {
-        this.prizeMoney = prizeMoney;
-        this.correctingCount = correctingCount;
-    }
-
-    public boolean isSameCorrectingCount(int other){
+    public boolean isSameCorrectingCount(int other) {
         return correctingCount == other;
-    }
-
-    public static Grade fromCorrectingCount(int correctingCount){
-        return Arrays.stream(Grade.values())
-            .filter(grade -> grade.isSameCorrectingCount(correctingCount))
-            .findFirst()
-            .orElseThrow(() -> new NotExistGradeException(correctingCount));
     }
 }

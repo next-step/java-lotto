@@ -21,11 +21,11 @@ public enum ErrorMessage {
     INVALID_FORMAT("당첨번호는 ', ' 로 구분되어야 합니다");
 
 
+    private final String message;
+
     ErrorMessage(String message) {
         this.message = message;
     }
-
-    private final String message;
 
     public String getMessage() {
         return message;

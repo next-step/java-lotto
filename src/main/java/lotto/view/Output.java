@@ -28,7 +28,8 @@ public class Output {
         printGradeResult(Grade.THIRD_GRADE, winningStatistic);
         printGradeResult(Grade.SECOND_GRADE, winningStatistic);
         printGradeResult(Grade.FIRST_GRADE, winningStatistic);
-        System.out.println(MessageFormat.format("총 수익률은 {0}입니다.", winningStatistic.calculateProfitRate()));
+        System.out.println(
+            MessageFormat.format("총 수익률은 {0}입니다.", winningStatistic.calculateProfitRate()));
     }
 
     private static void printGradeResult(Grade grade, WinningStatistic winningStatistic) {

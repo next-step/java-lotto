@@ -21,7 +21,7 @@ public class LottoMachine {
 
         CompletableFuture<Void>[] futures = autoLottos.stream()
             .map(autoLotto -> calculateGrade(winningNumbers, autoLotto)
-            .thenAccept(grade -> winningStatistic.calculateWinningStatistic(grade)))
+                .thenAccept(grade -> winningStatistic.calculateWinningStatistic(grade)))
             .toArray(CompletableFuture[]::new);
 
         waitLotto(futures);

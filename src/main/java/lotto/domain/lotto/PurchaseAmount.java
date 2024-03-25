@@ -7,7 +7,7 @@ public class PurchaseAmount {
     private int purchaseAmount;
 
     public PurchaseAmount(int purchaseAmount) {
-        if (purchaseAmount % 1000 != 0){
+        if (purchaseAmount % 1000 != 0) {
             throw new PurchaseAmountException(purchaseAmount);
         }
 

@@ -58,10 +58,6 @@ public enum LottoNumber {
         this.lottoNumber = number;
     }
 
-    public int getLottoNumber() {
-        return lottoNumber;
-    }
-
     public static LottoNumber fromInt(int value) {
         return Arrays.stream(LottoNumber.values())
             .filter(lottoNumber -> lottoNumber.getLottoNumber() == value)
@@ -73,6 +69,10 @@ public enum LottoNumber {
         List<LottoNumber> allLottoNumbers = Arrays.asList(LottoNumber.values());
         Collections.shuffle(allLottoNumbers);
         return allLottoNumbers.subList(0, 6);
+    }
+
+    public int getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override

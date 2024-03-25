@@ -10,13 +10,13 @@ public class Lotto {
     private List<LottoNumber> lotto;
 
     public Lotto(List<LottoNumber> lotto) {
-        if(lotto.size() > 6){
+        if (lotto.size() > 6) {
             throw new SizeExceedLottoException(lotto.size());
         }
         this.lotto = lotto;
     }
 
-    public static List<Lotto> createAutoLottos(int purchaseCount){
+    public static List<Lotto> createAutoLottos(int purchaseCount) {
         return IntStream.range(0, purchaseCount)
             .mapToObj(i -> new Lotto(LottoNumber.createRandomLottoNumbers()))
             .collect(Collectors.toList());
@@ -33,7 +33,7 @@ public class Lotto {
         return lotto.contains(winningNumber);
     }
 
-    public int size(){
+    public int size() {
         return lotto.size();
     }
 

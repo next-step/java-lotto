@@ -1,8 +1,8 @@
 package lotto.domain.winning;
 
 import java.text.DecimalFormat;
-import lotto.domain.lotto.PurchaseAmount;
 import lotto.domain.grade.Grade;
+import lotto.domain.lotto.PurchaseAmount;
 import lotto.error.exception.NotExistGradeException;
 
 public class WinningStatistic {
@@ -38,48 +38,52 @@ public class WinningStatistic {
     }
 
     public int getGradeCount(Grade grade) {
-        if (grade == Grade.FIRST_GRADE)
+        if (grade == Grade.FIRST_GRADE) {
             return firstGradeCount;
+        }
 
-        if (grade == Grade.SECOND_GRADE)
+        if (grade == Grade.SECOND_GRADE) {
             return secondGradeCount;
+        }
 
-        if (grade == Grade.THIRD_GRADE)
+        if (grade == Grade.THIRD_GRADE) {
             return thirdGradeCount;
+        }
 
-        if (grade == Grade.FOUR_GRADE)
+        if (grade == Grade.FOUR_GRADE) {
             return forthGradeCount;
+        }
 
         throw new NotExistGradeException(grade);
     }
 
-    public void calculateWinningStatistic(Grade grade){
-        if (grade == Grade.FIRST_GRADE){
+    public void calculateWinningStatistic(Grade grade) {
+        if (grade == Grade.FIRST_GRADE) {
             firstGradeCount++;
             return;
         }
 
-        if (grade == Grade.SECOND_GRADE){
+        if (grade == Grade.SECOND_GRADE) {
             secondGradeCount++;
             return;
         }
 
-        if (grade == Grade.THIRD_GRADE){
+        if (grade == Grade.THIRD_GRADE) {
             thirdGradeCount++;
             return;
         }
 
-        if (grade == Grade.FOUR_GRADE){
+        if (grade == Grade.FOUR_GRADE) {
             forthGradeCount++;
         }
     }
 
-    public double calculateProfitRate(){
-       int totalWinningAmount =
-           (firstGradeCount * Grade.FIRST_GRADE.getPrizeMoney()) +
-           (secondGradeCount * Grade.SECOND_GRADE.getPrizeMoney()) +
-           (thirdGradeCount * Grade.THIRD_GRADE.getPrizeMoney()) +
-           (forthGradeCount * Grade.FOUR_GRADE.getPrizeMoney());
+    public double calculateProfitRate() {
+        int totalWinningAmount =
+            (firstGradeCount * Grade.FIRST_GRADE.getPrizeMoney()) +
+                (secondGradeCount * Grade.SECOND_GRADE.getPrizeMoney()) +
+                (thirdGradeCount * Grade.THIRD_GRADE.getPrizeMoney()) +
+                (forthGradeCount * Grade.FOUR_GRADE.getPrizeMoney());
         double profitRate = (double) totalWinningAmount / purchaseAmount.getPurchaseAmount();
         return Double.parseDouble(formattedProfitRate(Math.floor(profitRate * 100) / 100));
     }
