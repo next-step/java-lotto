@@ -1,7 +1,6 @@
 package lotto.domain.grade;
 
 import java.util.Arrays;
-import lotto.error.exception.NotExistGradeException;
 
 public enum Grade {
 
