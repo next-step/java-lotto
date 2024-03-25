@@ -9,6 +9,16 @@ public class InputView {
         System.out.println("계산할 식을 입력해주세요.");
         String[] expression = scanner.nextLine().split(" ");
 
+        validInput(expression);
+
+        return expression;
+    }
+
+    private static void validInput(String[] expression) {
+        if(expression.length == 0) {
+            throw new IllegalArgumentException("빈 값을 입력했습니다.");
+        }
+
         if(expression.length < 3) {
             throw new IllegalArgumentException("식을 잘못 입력했습니다.");
         }
@@ -16,7 +26,5 @@ public class InputView {
         if((expression.length - 3) % 2 != 0) {
             throw new IllegalArgumentException("식을 잘못 입력했습니다.");
         }
-
-        return expression;
     }
 }
