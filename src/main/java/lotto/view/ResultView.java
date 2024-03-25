@@ -4,6 +4,7 @@ import lotto.LottoMatchingService;
 import lotto.domain.BonusBall;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.domain.Price;
 import lotto.domain.Prize;
 
@@ -18,6 +19,10 @@ public class ResultView {
 
     public void printNumbersOfLotto(int numbersOfLotto) {
         System.out.println(numbersOfLotto + "개를 구매했습니다.");
+    }
+
+    public void printLottoTicketsNumbers(LottoTickets lottoTickets) {
+        printLottoTicketsNumbers(lottoTickets.getLottoTickets());
     }
 
     public void printLottoTicketsNumbers(List<LottoTicket> lottoTickets) {

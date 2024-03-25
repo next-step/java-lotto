@@ -41,10 +41,6 @@ public class Price {
 
     private int calculateTotalRevenue(Map<Prize, Integer> integers) {
         int totalRevenue = 0;
-        Prize[] values = Prize.values();
-//        for (int i = 0; i < values.length - 1; i++) {
-//            totalRevenue += values[i + 1].getWinningMoney() * integers.get(values[i + 1]);
-//        }
         for (Prize prize : integers.keySet()) {
             totalRevenue += prize.getWinningMoney() * integers.get(prize);
         }

@@ -24,6 +24,8 @@ public class LottoMatchingService {
         this.bonusBall = bonusBall;
     }
 
+    //todo: lottoTickets와 수동으로 입력한 번호들을 합쳐 지난주 당첨번호와 비교한다
+    //현재 인수는 자동 로또리스트
     public Map<Prize, Integer> matchWinningNumber(List<LottoTicket> lottoTickets) {
         List<Prize> prizes = lottoTickets.stream()
                 .map(lottoTicket -> Prize.valueOf(
