@@ -27,6 +27,10 @@ public enum LottoRank {
         return reward;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public static LottoRank getLottoRank(int matchCount) {
         return Arrays.stream(values())
             .filter(lottoRank -> lottoRank.matchCount == matchCount)

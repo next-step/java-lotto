@@ -24,4 +24,11 @@ public class LottoTicket {
             throw new IllegalArgumentException("당첨 번호는 6개 입니다.");
         }
     }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.stream()
+            .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
+            .collect(Collectors.joining(", "));
+    }
 }
