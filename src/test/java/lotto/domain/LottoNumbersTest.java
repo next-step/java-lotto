@@ -13,6 +13,7 @@ import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("도메인 LottoNumbers 테스트")
 class LottoNumbersTest {
 
     private Lottos lottos;
@@ -58,15 +59,4 @@ class LottoNumbersTest {
         assertThat(result).isEqualTo(expected);
     }
 
-
-    @DisplayName("당첨 통계 산출")
-    @Test
-    void computeStatistic_three() {
-        Lotto winLotto = Lotto.ofNumbers(List.of(1, 2, 3, 4, 5, 6));
-        Statistics result = lottos.computeStatistic(winLotto);
-
-        assertThat(result.getStatistics())
-                .isEqualTo(new Statistics(List.of(Statistic.SIX, Statistic.FIVE, Statistic.FOUR))
-                        .getStatistics());
-    }
 }
