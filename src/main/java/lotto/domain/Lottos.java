@@ -29,19 +29,20 @@ public class Lottos {
         return lottos;
     }
 
-    public Statistics computeStatistic(Lotto winLotto) {
+    public Statistics computeStatistic(WinLotto winLotto) {
         return new Statistics(checkStatisticNumberMatch(winLotto));
     }
 
-    private List<Statistic> checkStatisticNumberMatch(Lotto winLotto) {
+    private List<Statistic> checkStatisticNumberMatch(WinLotto winLotto) {
         return lottos.stream()
                 .map(lotto -> getStatistic(winLotto, lotto))
                 .collect(Collectors.toList());
     }
 
-    private static Statistic getStatistic(Lotto winLotto, Lotto lotto) {
+    private static Statistic getStatistic(WinLotto winLotto, Lotto lotto) {
         return Statistic.valueOfMatchNumber(
-                lotto.getFeatNumberCount(winLotto)
+                winLotto.getFeatNumberCount(lotto),
+                winLotto.isContainBonus(lotto)
         );
     }
 }

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+`import java.util.Objects;
 
 public class Statistics {
 
@@ -20,9 +21,9 @@ public class Statistics {
 
     private int getTotalReturn() {
         return statistics.stream()
-                .filter(Statistic::isValidMatcher)
-                .mapToInt(Statistic::getPrice)
-                .sum();
+            .filter(Statistic::isValidMatcher)
+            .mapToInt(Statistic::getPrice)
+            .sum();
     }
 
     private int getBudgetBy(int price) {
@@ -35,5 +36,22 @@ public class Statistics {
 
     private int getSize() {
         return statistics.size();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Statistics that = (Statistics) o;
+        return Objects.equals(statistics, that.statistics);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(statistics);
     }
 }

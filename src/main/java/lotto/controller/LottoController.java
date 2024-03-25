@@ -1,7 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Budget;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -11,7 +10,8 @@ public class LottoController {
         Budget budget = InputView.inputBuyBudget();
         Lottos lottos = new Lottos(budget);
         ResultView.showGeneratedLottos(lottos);
-        ResultView.showStatistic(lottos.computeStatistic(InputView.inputLastWinLotto()));
+        Statistics resultStatistics = lottos.computeStatistic(InputView.inputLastWinLotto());
+        ResultView.showStatistic(resultStatistics);
     }
 
 }

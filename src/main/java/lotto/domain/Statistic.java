@@ -6,21 +6,24 @@ import java.util.stream.Collectors;
 
 public enum Statistic {
 
-    THREE(5000, 3),
-    FOUR(50000, 4),
-    FIVE(1500000, 5),
-    SIX(2000000000, 6),
-    NONE(0, 0, 1, 2);
+    FIRST(2_000_000_000, false, 6),
+    SECOND(30_000_000, true, 5),
+    THIRD(1_500_000, false, 5),
+    FOURTH(50_000, false, 4),
+    FIFTH(5_000, false, 3),
+    MISS(0, false, 0, 1, 2);
 
-    Statistic(int price, int... matcher) {
+    Statistic(int price, boolean bonusRequired, int... matcher) {
         this.price = price;
+        this.bonusRequired = bonusRequired;
         this.matchers = Arrays
-                .stream(matcher)
-                .boxed()
-                .collect(Collectors.toList());
+            .stream(matcher)
+            .boxed()
+            .collect(Collectors.toList());
     }
 
     private int price;
+    private boolean bonusRequired;
     private List<Integer> matchers;
 
     public int getPrice() {
@@ -28,11 +31,11 @@ public enum Statistic {
     }
 
     public boolean isValidMatcher() {
-        return this != NONE;
+        return this != MISS;
     }
 
     public Integer getMatcher() {
-        if(isValidMatcher()) {
+        if (isValidMatcher()) {
             return matchers.get(0);
         }
         return 0;
@@ -40,13 +43,43 @@ public enum Statistic {
 
     public boolean isMatch(int featNumberCount) {
         return this.matchers.stream()
-                .anyMatch(matcher -> matcher == featNumberCount);
+            .anyMatch(matcher -> matcher == featNumberCount);
     }
 
-    public static Statistic valueOfMatchNumber(int featNumberCount) {
+    public boolean isBonusRequired() {
+        return this.bonusRequired;
+    }
+
+    public static Statistic valueOfMatchNumber(int featNumberCount, boolean bonusMatched) {
+        List<Statistic> numberMatchedStatistics = getNumberMatchedStatistic(featNumberCount);
+
+        return getStatisticWithBonusOrNot(numberMatchedStatistics, bonusMatched);
+    }
+
+    public static Statistic getStatisticWithBonusOrNot(List<Statistic> statistics, boolean bonusMatched) {
+        if (bonusMatched) {
+            return getStatisticWithBonus(statistics);
+        }
+        return getStatisticWithoutBonus(statistics);
+    }
+
+    private static List<Statistic> getNumberMatchedStatistic(int featNumberCount) {
         return Arrays.stream(values())
-                .filter(statistic -> statistic.isMatch(featNumberCount))
-                .findFirst()
-                .orElseThrow();
+            .filter(statistic -> statistic.isMatch(featNumberCount))
+            .collect(Collectors.toList());
+    }
+
+    private static Statistic getStatisticWithBonus(List<Statistic> statistics) {
+        return statistics.stream()
+            .filter(Statistic::isBonusRequired)
+            .findFirst()
+            .orElseThrow();
+    }
+
+    private static Statistic getStatisticWithoutBonus(List<Statistic> statistics) {
+        return statistics.stream()
+            .filter(statistic -> !statistic.isBonusRequired())
+            .findFirst()
+            .orElseThrow();
     }
 }
