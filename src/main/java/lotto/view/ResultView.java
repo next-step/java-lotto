@@ -28,7 +28,7 @@ public class ResultView {
                 .filter(rank -> rank != Rank.NOT_MATCH)
                 .forEach(rank -> printWinningCount(winningInfo, rank));
 
-        System.out.println("총 수익률은 " + money.calculateRate(winningInfo.totalWinningMoney())+"입니다.");
+        System.out.printf("총 수익률은 %f입니다.", money.calculateRate(winningInfo.totalWinningMoney()));
     }
 
     private void printWinningCount(WinningInfo winningInfo, Rank rank) {
