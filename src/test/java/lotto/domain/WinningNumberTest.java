@@ -17,7 +17,7 @@ class WinningNumberTest {
         }).isInstanceOf(IllegalArgumentException.class);
 
         assertThatThrownBy(() -> {
-            new WinningNumber(List.of(1,2,3), null);
+            new WinningNumber(List.of(1, 2, 3), null);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
