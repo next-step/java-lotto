@@ -34,7 +34,7 @@ public class LottoList {
         .collect(Collectors.toList());
   }
 
-  public int getMatchCount(Set<Integer> winningNumbers, List<Integer> lottoNumbers) {
+  private int getMatchCount(Set<Integer> winningNumbers, List<Integer> lottoNumbers) {
     return lottoNumbers.stream()
                     .reduce(0, (acc, number) -> acc + (winningNumbers.contains(number) ? 1 : 0));
   }
