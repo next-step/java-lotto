@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class LottoFactory {
+    private final static Money LOTTO_PRICE = new Money(1000L);
     private final LottoGenerator lottoGenerator;
 
     public LottoFactory(LottoGenerator lottoGenerator) {
@@ -15,8 +16,12 @@ public class LottoFactory {
     }
 
     public UserLotto createUserLotto(Money money) {
-        long count = LottoPrice.availableForPurchase(money);
-        return UserLotto.from(createListOfIntegerList(count));
+        return UserLotto.from(createListOfIntegerList(availableCountForPurchase(money)));
+    }
+
+    private static long availableCountForPurchase(Money money) {
+        return LOTTO_PRICE.divide(money);
+
     }
 
     private List<List<Integer>> createListOfIntegerList(long count) {
