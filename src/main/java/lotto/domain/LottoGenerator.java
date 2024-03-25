@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 public class LottoGenerator {
     public static List<LottoNumber> createLotto(List<Integer> shuffledNumbers) {
         List<LottoNumber> lotto = new ArrayList<>();
-        checkSize(shuffledNumbers);
+        checkShuffledNumbersSize(shuffledNumbers);
 
         IntStream.range(0, Constant.LOTTO_SIZE)
                 .forEach((index) -> lotto.add(new LottoNumber(shuffledNumbers.get(index))));
@@ -19,12 +19,12 @@ public class LottoGenerator {
     }
 
     public static List<Integer> shuffleNumbers() {
-        List<Integer> lottoNumbers = LottoNumbers.setUp();
+        List<Integer> lottoNumbers = LottoNumbers.setLottoNumbers();
         Collections.shuffle(lottoNumbers);
         return lottoNumbers.subList(0, Constant.LOTTO_SIZE);
     }
 
-    private static void checkSize(List<Integer> shuffledNumbers) {
+    private static void checkShuffledNumbersSize(List<Integer> shuffledNumbers) {
         if (shuffledNumbers.size() != Constant.LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
