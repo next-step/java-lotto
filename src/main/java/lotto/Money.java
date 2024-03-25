@@ -14,7 +14,7 @@ public class Money {
         this.amount = amount;
     }
 
-    public long purchase(Money lottoPrice) {
+    public long estimatePurchaseLimit(Money lottoPrice) {
         return lottoPrice.divide(this.amount);
     }
 
