@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BuyLottos {
-    private static final int LOTTO_ELEMENT_NUM = 6;
     private Price price;
     private List<Lotto> lottos;
 

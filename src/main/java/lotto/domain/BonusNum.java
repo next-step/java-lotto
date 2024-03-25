@@ -6,18 +6,9 @@ public class BonusNum {
     private static final int MAX_ELEMENT = 45;
     private int value;
 
-    public BonusNum(int bonusNum, Lotto lotto){
+    public BonusNum(int bonusNum){
         checkBound(bonusNum);
-        for (int input: lotto.getLottoList()) {
-            validBonusNum(input, bonusNum);
-        }
             this.value = bonusNum;
-    }
-
-    public void validBonusNum(int input, int bonusNum){
-        if (input == bonusNum) {
-            throw new IllegalArgumentException("보너스 번호는 로또 번호와 중복 불가");
-        }
     }
 
     private void checkBound(int input){

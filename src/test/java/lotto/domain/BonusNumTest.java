@@ -11,9 +11,9 @@ public class BonusNumTest {
     @Test
     void price_lotto(){
         Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
-
+        BonusNum bonus = new BonusNum(6);
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new BonusNum(6, lotto);
+            new WinLotto(lotto,bonus);
         });
     }
 
