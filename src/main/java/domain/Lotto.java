@@ -7,14 +7,21 @@ public class Lotto {
     public static final int PRICE = 1_000;
     public static final int NUMBER_SIZE = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+        this(new HashSet<>(lottoNumbers));
     }
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+        assertSizeOfSix(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    private void assertSizeOfSix(Set<LottoNumber> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("로또 번호의 갯수가 6개가 아닙니다.");
+        }
     }
 
     public Rank rank(WinningLotto winningLotto) {
