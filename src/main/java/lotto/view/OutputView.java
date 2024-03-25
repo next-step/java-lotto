@@ -9,11 +9,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static lotto.domain.Rank.MISS;
+import static lotto.domain.Rank.SECOND;
 
 public class OutputView {
     private static final String NUMBER_OF_LOTTO_TO_PURCHASE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String WINNING_STATISTICS_TITLE = "당첨 통계";
     private static final String WINNING_STATISTICS_MESSAGE = "%d개 일치 (%d원)- %d개";
+    private static final String WINNING_STATISTICS_MESSAGE_FOR_BONUS = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
     private static final String RATE_OF_RETURN_MESSAGE = "총 수익률은 %.2f입니다.";
     private static final String LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String RIGHT_SQUARE_BRACKET = "[";
@@ -74,10 +76,18 @@ public class OutputView {
 
         Arrays.stream(Rank.values())
                 .filter(rank -> rank != MISS)
-                .forEach(rank -> winningStatisticsMessageBuilder.append(String.format(WINNING_STATISTICS_MESSAGE, rank.matchCount(), rank.winningMoney(), statisticsOfLottos.numberOfMatchCount(rank)))
+                .forEach(rank -> winningStatisticsMessageBuilder.append(String.format(winningStaticsMessageFormat(rank), rank.matchCount(), rank.winningMoney(), statisticsOfLottos.numberOfMatchCount(rank)))
                         .append(NEXT_LINE));
 
         return winningStatisticsMessageBuilder.toString();
+    }
+
+    private static String winningStaticsMessageFormat(Rank rank) {
+        if(rank == SECOND) {
+            return WINNING_STATISTICS_MESSAGE_FOR_BONUS;
+        }
+
+        return WINNING_STATISTICS_MESSAGE;
     }
 
     private static String rateOfReturnMessage(double rateOfReturn) {
