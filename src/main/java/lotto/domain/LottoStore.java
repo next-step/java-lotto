@@ -4,12 +4,12 @@ public class LottoStore {
 
     private static final int LOTTO_PRICE = 1000;
 
-    public Lottos buyAutoLotto(int amount){
+    public Lotto buyAutoLotto(int amount){
         int count = calculateLottoCount(amount);
 
         LottoGenerator lottoGenerator = new LottoGenerator();
 
-        return new Lottos(count, lottoGenerator);
+        return new Lotto(count, lottoGenerator);
     }
 
     private int calculateLottoCount(int amount){

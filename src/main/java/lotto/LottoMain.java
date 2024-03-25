@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoStore;
-import lotto.domain.Lottos;
+import lotto.domain.Lotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -11,9 +11,9 @@ public class LottoMain {
         int amount = InputView.inputAmount();
 
         LottoStore lottoStore = new LottoStore();
-        Lottos lottos = lottoStore.buyAutoLotto(amount);
+        Lotto lotto = lottoStore.buyAutoLotto(amount);
 
-        ResultView.printBuyLotto(lottos);
+        ResultView.printBuyLotto(lotto);
 
         String[] lastWinningLotto = InputView.inputWinningLotto().split(",");
 

@@ -1,14 +1,14 @@
 package lotto.view;
 
+import lotto.domain.LottoNumbers;
 import lotto.domain.Lotto;
-import lotto.domain.Lottos;
 
 public class ResultView {
 
-    public static void printBuyLotto(Lottos lottos){
-        System.out.println(lottos.lottos().size() + "개를 구매했습니다.");
-        for(Lotto lotto : lottos.lottos()){
-            System.out.println(lotto.lotto());
+    public static void printBuyLotto(Lotto lotto){
+        System.out.println(lotto.lotto().size() + "개를 구매했습니다.");
+        for(LottoNumbers lottoNumbers : lotto.lotto()){
+            System.out.println(lottoNumbers.lottoNumbers());
         }
     }
 
