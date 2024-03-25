@@ -14,7 +14,7 @@ class WinningStatisticTest {
 
     @Test
     @DisplayName("WinningStatistic은 Grade를 통해 각 등수를 계산해야한다.")
-    public void WinningStatistic_Should_Calculate_Rank_Count(){
+    public void WinningStatistic_Should_Calculate_Rank_Count() {
         WinningStatistic winningStatistic = new WinningStatistic(new PurchaseAmount(10000));
 
         winningStatistic.calculateWinningStatistic(Grade.FIRST_GRADE);
@@ -30,7 +30,7 @@ class WinningStatisticTest {
 
     @Test
     @DisplayName("WinningStatistic은 수익률을 계산해야 한다.")
-    public void WinningStatistic_Should_Calculate_Profit_Rate(){
+    public void WinningStatistic_Should_Calculate_Profit_Rate() {
         WinningStatistic winningStatistic = new WinningStatistic(new PurchaseAmount(14000));
 
         winningStatistic.calculateWinningStatistic(Grade.FOUR_GRADE);
@@ -41,7 +41,7 @@ class WinningStatisticTest {
 
     @Test
     @DisplayName("WinningStatistic은 존재하지 않는 Grade를 조회할 경우 예외를 발생한다")
-    public void WinningStatistic_Should_Throw_Exception_When_Winning_Statistic_None_Existent_Grade(){
+    public void WinningStatistic_Should_Throw_Exception_When_Winning_Statistic_None_Existent_Grade() {
         WinningStatistic winningStatistic = new WinningStatistic(new PurchaseAmount(10000));
 
         assertThatThrownBy(() -> winningStatistic.getGradeCount(Grade.UN_LUCKY_GRADE))
