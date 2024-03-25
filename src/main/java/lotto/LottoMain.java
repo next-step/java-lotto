@@ -2,10 +2,9 @@ package lotto;
 
 import lotto.domain.*;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.strategy.AutoGeneratingStrategy;
 import lotto.domain.lotto.strategy.LottoGeneratingStrategy;
+import lotto.domain.lotto.strategy.ManualGeneratingStrategy;
 
-import static lotto.domain.lotto.strategy.LottoGeneratingStrategy.EMPTY_LOTTOS;
 import static lotto.view.InputView.*;
 import static lotto.view.OutputView.*;
 
@@ -19,8 +18,8 @@ public class LottoMain {
             int totalNumberOfLottoToPurchase = purchaseAmountOfMoney.totalNumberOfLottoToPurchase();
             printNumberOfLottoToPurchase(numberOfManualLottoToPurchase.number(), totalNumberOfLottoToPurchase);
 
-            LottoGeneratingStrategy lottoGeneratingStrategy = new AutoGeneratingStrategy();
-            Lottos lottos = lottoGeneratingStrategy.lottos(totalNumberOfLottoToPurchase, EMPTY_LOTTOS);
+            LottoGeneratingStrategy lottoGeneratingStrategy = new ManualGeneratingStrategy();
+            Lottos lottos = lottoGeneratingStrategy.lottos(totalNumberOfLottoToPurchase, manualLottos);
             printLottos(lottos.lottos());
 
             WinningNumbers winningNumbers = enteredWinningNumbers();

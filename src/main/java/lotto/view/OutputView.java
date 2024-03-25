@@ -27,7 +27,11 @@ public class OutputView {
     }
 
     public static void printNumberOfLottoToPurchase(int numberOfManualLottoToPurchase, int totalNumberOfLottoToPurchase) {
-        String numberOfLottoToPurchaseMessage = String.format(NUMBER_OF_LOTTO_TO_PURCHASE_MESSAGE, numberOfManualLottoToPurchase, totalNumberOfLottoToPurchase - numberOfManualLottoToPurchase);
+        String numberOfLottoToPurchaseMessage = new StringBuilder()
+                .append(NEXT_LINE)
+                .append(String.format(NUMBER_OF_LOTTO_TO_PURCHASE_MESSAGE, numberOfManualLottoToPurchase, totalNumberOfLottoToPurchase - numberOfManualLottoToPurchase))
+                .toString();
+
         System.out.println(numberOfLottoToPurchaseMessage);
     }
 
