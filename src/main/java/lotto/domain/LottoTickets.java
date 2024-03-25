@@ -9,9 +9,16 @@ import java.util.stream.Stream;
 public class LottoTickets {
     private final List<LottoTicket> lottoTicketList;
 
-    public LottoTickets(Amount amount) {
-        this.lottoTicketList = IntStream.range(0, amount.lottoTicketCount())
+    public LottoTickets(Amount amount, List<String[]> manualLottoNumbers) {
+        List<LottoTicket> manualLotto = manualLottoNumbers.stream()
+                .map(LottoTicket::new)
+                .collect(Collectors.toList());
+
+        List<LottoTicket> autoLotto = IntStream.range(0, amount.lottoTicketCount() - manualLottoNumbers.size())
                 .mapToObj(i -> new LottoTicket())
+                .collect(Collectors.toList());
+
+        this.lottoTicketList = Stream.concat(manualLotto.stream(), autoLotto.stream())
                 .collect(Collectors.toList());
     }
 
