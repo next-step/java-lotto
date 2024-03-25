@@ -9,8 +9,8 @@ public enum Operator {
     MULTIPLY("*", (x, y) -> x * y),
     DIVIDE("/", (x, y) -> x / y);
 
-    private String operatorStr;
-    private BiFunction<Integer, Integer, Integer> expression;
+    private final String operatorStr;
+    private final BiFunction<Integer, Integer, Integer> expression;
 
     Operator(String operatorStr, BiFunction<Integer, Integer, Integer> expression) {
         this.operatorStr = operatorStr;
@@ -30,5 +30,9 @@ public enum Operator {
 
     public int calculate(int x, int y) {
         return expression.apply(x, y);
+    }
+
+    public Number calculate(Number x, Number y) {
+        return new Number(calculate(x.getNumber(), y.getNumber()));
     }
 }
