@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
-`import java.util.Objects;
+import java.util.Objects;
 
 public class Statistics {
 
@@ -9,10 +9,6 @@ public class Statistics {
 
     public Statistics(List<Statistic> statistics) {
         this.statistics = statistics;
-    }
-
-    public List<Statistic> getStatistics() {
-        return statistics;
     }
 
     public float getRateOfReturn(int lottoPrice) {
