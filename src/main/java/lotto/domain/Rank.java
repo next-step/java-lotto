@@ -18,14 +18,13 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public static Rank findRank(Integer matchCount, boolean matchBonus) {
+    public static Rank findRank(int matchCount, boolean matchBonus) {
         return Arrays.stream(Rank.values())
-                .filter(type -> type.matchCount != null)
-                .filter(type -> matchCount.equals(type.matchCount))
+                .filter(type -> matchCount == type.matchCount)
                 .filter(rank -> rank != NOT_MATCH && rank != THIRD && rank != SECOND) // NOT_MATCH, THIRD, SECOND 빼고
                 .findFirst()
                 .orElseGet(() -> Arrays.stream(Rank.values())
-                        .filter(rank -> matchCount.equals(rank.matchCount))
+                        .filter(rank -> matchCount == rank.matchCount)
                         .filter(rank -> !matchBonus && rank == THIRD || matchBonus && rank == SECOND) // matchBonus가 false이면 THIRD, true이면 SECOND
                         .findFirst()
                         .orElse(NOT_MATCH));
