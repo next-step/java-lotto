@@ -1,6 +1,8 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.Amount;
+import lotto.domain.LottoTickets;
+import lotto.domain.WinningTicket;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -10,10 +12,11 @@ public class LottoController {
         LottoTickets lottoTickets = new LottoTickets(amount);
         ResultView.printLottoTickets(lottoTickets);
 
-        LottoTicket winningNumbers = new LottoTicket(InputView.askWinningNumbers().split(", "));
-        LottoNumber bonusBall = LottoNumber.createBonusBall(winningNumbers, InputView.askBonusBall());
+        String[] winningNumbers = InputView.askWinningNumbers();
+        String bonusBall = InputView.askBonusBall();
+        WinningTicket winningTicket = new WinningTicket(winningNumbers, bonusBall);
 
-        ResultView.printWinningStatistics(lottoTickets, winningNumbers, bonusBall);
-        ResultView.printEarningsRate(lottoTickets, winningNumbers, bonusBall);
+        ResultView.printWinningStatistics(lottoTickets.winnerCounts(winningTicket));
+        ResultView.printEarningsRate(lottoTickets.earningsRate(winningTicket));
     }
 }
