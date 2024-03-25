@@ -1,11 +1,8 @@
-import domain.Lottos;
-import domain.Lotto;
-import domain.LottoBalls;
-import domain.PositiveNumber;
-import factory.LottoFactory;
-import factory.RandomFactory;
-import view.InputView;
-import view.ResultView;
+import lotto.domain.*;
+import lotto.factory.LottoFactory;
+import lotto.factory.RandomFactory;
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
 import java.util.Random;
 
@@ -19,8 +16,6 @@ public class Main {
 
     Lottos lottos = lottoFactory.randomLottos(count);
     ResultView.lotteryList(lottos);
-
-    LottoBalls winningBalls = InputView.winningBalls();
-    ResultView.stats(lottos.results(winningBalls));
+    ResultView.stats(lottos.results(InputView.lottery()));
   }
 }
