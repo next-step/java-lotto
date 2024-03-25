@@ -31,15 +31,11 @@ class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @DisplayName("2 개의 배열 중에 하나라도 null이면 예외")
+    @DisplayName("배열이 null이면 예외")
     @NullSource
     void if_null(List<Integer> nullList) {
         assertThatThrownBy(() -> {
-            new LottoNumber(List.of(1,2,3)).getMatchCount(new WinningNumber(nullList));
-        }).isInstanceOf(IllegalArgumentException.class);
-
-        assertThatThrownBy(() -> {
-            new LottoNumber(nullList).getMatchCount(new WinningNumber(List.of(1, 2, 3)));
+            new LottoNumber(nullList);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
