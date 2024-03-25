@@ -19,9 +19,6 @@ public class calculationMethodTest {
     @DisplayName("sum")
     public void sum() {
         Assertions.assertThat(sum.calculate("1 + 2")).isEqualTo(3);
-        Assertions.assertThatThrownBy(() -> {
-            sum.calculate("1 @ 2");
-        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
@@ -37,10 +34,7 @@ public class calculationMethodTest {
     @Test
     @DisplayName("subtraction")
     public void subtraction() {
-        Assertions.assertThat(subtraction.calculate("1 + 2")).isEqualTo(3);
-        Assertions.assertThatThrownBy(() -> {
-            subtraction.calculate("1 @ 2");
-        }).isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThat(subtraction.calculate("1 - 2")).isEqualTo(-1);
     }
 
     @ParameterizedTest
@@ -56,10 +50,7 @@ public class calculationMethodTest {
     @Test
     @DisplayName("multiplication")
     public void multiplication() {
-        Assertions.assertThat(multiplication.calculate("1 + 2")).isEqualTo(3);
-        Assertions.assertThatThrownBy(() -> {
-            multiplication.calculate("1 @ 2");
-        }).isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThat(multiplication.calculate("1 * 2")).isEqualTo(2);
     }
 
     @ParameterizedTest
@@ -75,16 +66,14 @@ public class calculationMethodTest {
     @Test
     @DisplayName("division")
     public void division() {
-        Assertions.assertThat(division.calculate("1 + 2")).isEqualTo(3);
-        Assertions.assertThatThrownBy(() -> {
-            division.calculate("1 @ 2");
-        }).isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThat(division.calculate("1 / 2")).isEqualTo(0);
+        Assertions.assertThat(division.calculate("3 / 2")).isEqualTo(1);
     }
 
     @ParameterizedTest
     @DisplayName("Exceptions of division")
     @NullAndEmptySource
-    @ValueSource(strings = {"1 @ 2", "1 / 2"})
+    @ValueSource(strings = {"1 @ 2", "1 / 2", " 1 / 0"})
     public void wrongDivision(String string) {
         Assertions.assertThatThrownBy(() -> {
             division.calculate(string);
