@@ -13,7 +13,9 @@ public class LottoMain {
         LottoStore lottoStore = new LottoStore();
         Lottos lottos = lottoStore.buyAutoLotto(amount);
 
-        ResultView.printResult(lottos);
+        ResultView.printBuyLotto(lottos);
+
+        String[] lastWinningLotto = InputView.inputWinningLotto().split(",");
 
     }
 }
