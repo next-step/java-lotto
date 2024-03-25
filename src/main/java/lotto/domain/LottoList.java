@@ -1,4 +1,6 @@
-package lotto;
+package lotto.domain;
+
+import lotto.match.LottoResult;
 
 import java.util.List;
 import java.util.stream.Collectors;
