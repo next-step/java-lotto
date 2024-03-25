@@ -22,8 +22,8 @@ public class LottoGroup {
         this.tickets = lotto;
     }
 
-    public void saveMatchResult(WinningNumber winningNumber, MatchCache matchCache, Profit profit) {
-        tickets.saveMatchResult(winningNumber, matchCache, profit);
+    public void saveMatchResult(WinningNumber winningNumber, Match match) {
+        tickets.saveMatchResult(winningNumber, match);
     }
 
     public Lotto getTickets() {

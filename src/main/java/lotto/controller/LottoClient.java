@@ -15,10 +15,9 @@ public class LottoClient {
         printCash(cash);
         LottoGroup lottoGroup = generateLottoGroupAndPrint(cash);
         WinningNumber winningNumber = insertWinningNumbers();
-        Profit profit = new Profit(0);
-        MatchCache matchCache = new MatchCache();
-        lottoGroup.saveMatchResult(winningNumber, matchCache, profit);
-        printResult(cash, profit, matchCache);
+        Match match = new Match();
+        lottoGroup.saveMatchResult(winningNumber, match);
+        printResult(cash, match);
     }
 
     private static WinningNumber insertWinningNumbers() {
@@ -44,10 +43,10 @@ public class LottoClient {
         return insertNumber();
     }
 
-    private static void printResult(Cash cash, Profit profit, MatchCache matchCache) {
-        printMatchCache(matchCache);
+    private static void printResult(Cash cash, Match match) {
+        printMatchCache(match.getMatchCache());
         printPlainMessage("당첨 통계");
         printPlainMessage("---------");
-        printProfit(profit, cash);
+        printProfit(match.getProfit(), cash);
     }
 }
