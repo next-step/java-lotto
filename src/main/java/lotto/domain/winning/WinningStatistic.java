@@ -24,13 +24,15 @@ public class WinningStatistic {
     }
 
     public double calculateProfitRate() {
-        int totalWinningAmount =
-            (firstGradeCount * Grade.FIRST_GRADE.getPrizeMoney()) +
-                (secondGradeCount * Grade.SECOND_GRADE.getPrizeMoney()) +
-                (thirdGradeCount * Grade.THIRD_GRADE.getPrizeMoney()) +
-                (forthGradeCount * Grade.FOUR_GRADE.getPrizeMoney());
-        double profitRate = (double) totalWinningAmount / purchaseAmount.getPurchaseAmount();
+        double profitRate =
+            (double) calculateTotalWinningAmount() / purchaseAmount.getPurchaseAmount();
         return Double.parseDouble(formattedProfitRate(Math.floor(profitRate * 100) / 100));
+    }
+
+    private int calculateTotalWinningAmount() {
+        return Arrays.stream(Grade.values())
+            .mapToInt(grade -> gradeCounts[grade.ordinal()] * grade.getPrizeMoney())
+            .sum();
     }
 
     private String formattedProfitRate(double profitRate) {
