@@ -15,40 +15,8 @@ public class WinningStatistic {
         this.purchaseAmount = purchaseAmount;
     }
 
-    public int getFirstGradeCount() {
-        return firstGradeCount;
-    }
-
-    public int getSecondGradeCount() {
-        return secondGradeCount;
-    }
-
-    public int getThirdGradeCount() {
-        return thirdGradeCount;
-    }
-
-    public int getForthGradeCount() {
-        return forthGradeCount;
-    }
-
     public int getGradeCount(Grade grade) {
-        if (grade == Grade.FIRST_GRADE) {
-            return firstGradeCount;
-        }
-
-        if (grade == Grade.SECOND_GRADE) {
-            return secondGradeCount;
-        }
-
-        if (grade == Grade.THIRD_GRADE) {
-            return thirdGradeCount;
-        }
-
-        if (grade == Grade.FOUR_GRADE) {
-            return forthGradeCount;
-        }
-
-        throw new NotExistGradeException(grade);
+        return gradeCounts[grade.ordinal()];
     }
 
     public void calculateWinningStatistic(Grade grade) {
