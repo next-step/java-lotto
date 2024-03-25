@@ -5,11 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
-import static autoLotto.model.LottoConstants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoGeneratorTest {
+    private static final int VALID_LOTTO_LENGTH = 6;
+    private static final int LOTTO_START_NUMBER = 1;
+    private static final int LOTTO_END_NUMBER = 45;
 
     @Test
     @DisplayName("자동 로또 생성 테스트 : 랜덤 로또 생성 전략을 사용하여 랜덤 값이 정상 생성됨")

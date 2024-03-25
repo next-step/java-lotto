@@ -8,18 +8,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static autoLotto.model.LottoConstants.INVALID_LOTTO_NUMBER;
-import static autoLotto.model.LottoConstants.INVALID_LOTTO_NUMBERS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoWinCheckerTest {
+    private static final String INVALID_LOTTO_NUMBERS = "로또 번호의 개수는 6개이며, 각 번호는 1 이상 45 이하의 값만 가능합니다.";
+    private static final String INVALID_LOTTO_NUMBER = "로또 번호는 1 ~ 45 이하의 숫자 1개의 값만 사용이 가능합니다.";
+    private static final String BONUS_NUMBER_DENIED = "당첨 번호와 중복 없이 1 ~ 45 사이의 숫자 1개만 입력이 가능합니다.";
+
     private static final List<String> VALID_NUMBERS_FIRST = List.of("1","2","3","4","5","6");
-    private static final List<String> VALID_NUMBERS_SECOND_WITH_BONUS_NUMBER = List.of("11","12","13","14","15","45");
+    private static final List<String> VALID_NUMBERS_SECOND_WITH_BONUS_NUMBER = List.of("11","12","13","14","16","44");
     private static final List<String> VALID_NUMBERS_FOURTH_PRIZE_WITH_BONUS_NUMBER = List.of("11","12","13","14","44","45");
     private static final List<String> OUT_OF_RANGE_NUMBERS = List.of("1","2","3","4","5","6","7");
     private static final List<String> INVALID_NUMBERS = List.of("-1","-2","-3","-4","15","63","127");
-    private static final int BONUS_NUMBER = 45;
 
     @Test
     @DisplayName("6개 모두 맞춘 로또 1개를 확인 성공")
@@ -28,8 +29,8 @@ class LottoWinCheckerTest {
         List<Lotto> userLottos = List.of(new Lotto(getValidNumbersListFirst()), new Lotto(getValidNumbersListSecond()));
 
         // when
-        LottoWinChecker lottoWinChecker = new LottoWinChecker(VALID_NUMBERS_FIRST);
-        Map<PrizeEnum, Integer> winLottos = lottoWinChecker.checkWinLottos(userLottos, BONUS_NUMBER);
+        LottoWinChecker lottoWinChecker = new LottoWinChecker(VALID_NUMBERS_FIRST, 7);
+        Map<PrizeEnum, Integer> winLottos = lottoWinChecker.checkWinLottos(userLottos);
 
         // then
         assertThat(winLottos.size()).isEqualTo(2);
@@ -44,8 +45,8 @@ class LottoWinCheckerTest {
         List<Lotto> userLottos = List.of(new Lotto(getValidNumbersListSecond()), new Lotto(getValidNumbersListSecondWithBonusNumber()));
 
         // when
-        LottoWinChecker lottoWinChecker = new LottoWinChecker(VALID_NUMBERS_SECOND_WITH_BONUS_NUMBER);
-        Map<PrizeEnum, Integer> winLottos = lottoWinChecker.checkWinLottos(userLottos, BONUS_NUMBER);
+        LottoWinChecker lottoWinChecker = new LottoWinChecker(VALID_NUMBERS_SECOND_WITH_BONUS_NUMBER, 45);
+        Map<PrizeEnum, Integer> winLottos = lottoWinChecker.checkWinLottos(userLottos);
 
         // then
         assertThat(winLottos.size()).isEqualTo(2);
@@ -60,8 +61,8 @@ class LottoWinCheckerTest {
         List<Lotto> userLottos = List.of(new Lotto(getValidNumbersListSecond()));
 
         // when
-        LottoWinChecker lottoWinChecker = new LottoWinChecker(VALID_NUMBERS_FOURTH_PRIZE_WITH_BONUS_NUMBER);
-        Map<PrizeEnum, Integer> winLottos = lottoWinChecker.checkWinLottos(userLottos, BONUS_NUMBER);
+        LottoWinChecker lottoWinChecker = new LottoWinChecker(VALID_NUMBERS_FOURTH_PRIZE_WITH_BONUS_NUMBER, 10);
+        Map<PrizeEnum, Integer> winLottos = lottoWinChecker.checkWinLottos(userLottos);
 
         // then
         assertThat(winLottos.size()).isEqualTo(1);
@@ -69,14 +70,14 @@ class LottoWinCheckerTest {
     }
 
     @Test
-    @DisplayName("LottoWinChecker 객체 생성 성공 (0개 맞춘 로또 2개)")
+    @DisplayName("0개 맞춘 로또 2개")
     void testLottoWinChecker_NoMatchedWinNumbers_ShouldReturnCorrectWinLottos() {
         // given
         List<Lotto> userLottos = List.of(new Lotto(getValidNumbersListFirst()), new Lotto(getValidNumbersListFirst()));
 
         // when
-        LottoWinChecker lottoWinChecker = new LottoWinChecker(VALID_NUMBERS_SECOND_WITH_BONUS_NUMBER);
-        Map<PrizeEnum, Integer> winLottos = lottoWinChecker.checkWinLottos(userLottos, BONUS_NUMBER);
+        LottoWinChecker lottoWinChecker = new LottoWinChecker(VALID_NUMBERS_SECOND_WITH_BONUS_NUMBER, 1);
+        Map<PrizeEnum, Integer> winLottos = lottoWinChecker.checkWinLottos(userLottos);
 
         // then
         assertThat(winLottos.size()).isEqualTo(1);
@@ -87,7 +88,7 @@ class LottoWinCheckerTest {
     @DisplayName("LottoWinChecker 객체 생성 실패 (당첨 번호가 제한된 개수 6개 보다 많이 입력됨)")
     void testLottoWinChecker_OutOfRangeWinNumbers_ShouldThrowException() {
         // when, then
-        assertThatThrownBy(() -> new LottoWinChecker(OUT_OF_RANGE_NUMBERS))
+        assertThatThrownBy(() -> new LottoWinChecker(OUT_OF_RANGE_NUMBERS, 1))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(INVALID_LOTTO_NUMBERS);
     }
@@ -96,9 +97,18 @@ class LottoWinCheckerTest {
     @DisplayName("LottoWinChecker 객체 생성 실패 (당첨 번호가 1 ~ 45가 아닌 그 이외의 값이 입력됨)")
     void testLottoWinChecker_InvalidWinNumbers_ShouldThrowException() {
         // when, then
-        assertThatThrownBy(() -> new LottoWinChecker(INVALID_NUMBERS))
+        assertThatThrownBy(() -> new LottoWinChecker(INVALID_NUMBERS, 1))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(INVALID_LOTTO_NUMBER);
+    }
+
+    @Test
+    @DisplayName("LottoWinChecker 객체 생성 실패 (보너스 번호가 당첨 번호와 중복됨)")
+    void testLottoWinChecker_DuplicatedBonusNumber_ShouldThrowException() {
+        // when, then
+        assertThatThrownBy(() -> new LottoWinChecker(VALID_NUMBERS_FIRST, 1))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(BONUS_NUMBER_DENIED);
     }
 
     private Set<LottoNumber> getValidNumbersListFirst() {

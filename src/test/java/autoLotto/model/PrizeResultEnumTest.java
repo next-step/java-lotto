@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class PrizeEnumTest {
+class PrizeResultEnumTest {
 
     @ParameterizedTest(name = "매칭된 숫자 개수 : {0}, 우승 상금 : {1}, 보너스 볼 여부 : {2}")
     @EnumSource(value = PrizeEnum.class)
