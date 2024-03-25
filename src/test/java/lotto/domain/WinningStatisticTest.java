@@ -44,9 +44,9 @@ class WinningStatisticTest {
     public void WinningStatistic_Should_Throw_Exception_When_Winning_Statistic_None_Existent_Grade(){
         WinningStatistic winningStatistic = new WinningStatistic(new PurchaseAmount(10000));
 
-        assertThatThrownBy(() -> winningStatistic.getGradeCount(Grade.SEVEN_GRADE))
+        assertThatThrownBy(() -> winningStatistic.getGradeCount(Grade.UN_LUCKY_GRADE))
             .isInstanceOf(NotExistGradeException.class)
-            .hasMessage("존재하지 않는 순위입니다. 입력값: SEVEN_GRADE");
+            .hasMessage("존재하지 않는 순위입니다. 입력값: UN_LUCKY_GRADE");
     }
 }
 

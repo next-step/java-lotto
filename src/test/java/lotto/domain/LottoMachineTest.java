@@ -91,48 +91,18 @@ class LottoMachineTest {
     }
 
     @Test
-    @DisplayName("[5등 당첨] WinningNumbers를 사용하여 Lotto 번호가 WinningNumbers와 2개가 같을 경우 등수를 확인한다")
+    @DisplayName("[꼴지 당첨] WinningNumbers를 사용하여 Lotto 번호가 WinningNumbers와 같은 경우가 없을 경우 꼴지 Grade를 반환한다")
     public void LottoMachine_Should_Compare_Lotto_With_WinningNumbers_To_Check_Equals_two(){
         //given
         LottoMachine lottoMachine = new LottoMachine(new PurchaseAmount(1000));
         WinningNumbers winningNumbers = WinningNumbers.fromValues(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto = Lotto.fromValues(List.of(1, 2, 13, 12, 11, 10));
+        Lotto lotto = Lotto.fromValues(List.of(11, 12, 13, 12, 11, 10));
 
         //when
         Grade grade = lottoMachine.calculatePrizeMoney(winningNumbers, lotto);
 
         //then
-        assertThat(grade).isEqualTo(Grade.FIVE_GRADE);
-    }
-
-    @Test
-    @DisplayName("[6등 당첨] WinningNumbers를 사용하여 Lotto 번호가 WinningNumbers와 1개가 같을 경우 등수를 확인한다")
-    public void LottoMachine_Should_Compare_Lotto_With_WinningNumbers_To_Check_Equals_One(){
-        //given
-        LottoMachine lottoMachine = new LottoMachine(new PurchaseAmount(1000));
-        WinningNumbers winningNumbers = WinningNumbers.fromValues(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto = Lotto.fromValues(List.of(1, 14, 13, 12, 11, 10));
-
-        //when
-        Grade grade = lottoMachine.calculatePrizeMoney(winningNumbers, lotto);
-
-        //then
-        assertThat(grade).isEqualTo(Grade.SIX_GRADE);
-    }
-
-    @Test
-    @DisplayName("[7등 당첨] WinningNumbers를 사용하여 Lotto 번호가 WinningNumbers와 0개가 같을 경우 등수를 확인한다")
-    public void LottoMachine_Should_Compare_Lotto_With_WinningNumbers_To_Check_Equals_Zero() {
-        //given
-        LottoMachine lottoMachine = new LottoMachine(new PurchaseAmount(1000));
-        WinningNumbers winningNumbers = WinningNumbers.fromValues(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto = Lotto.fromValues(List.of(15, 14, 13, 12, 11, 10));
-
-        //when
-        Grade grade = lottoMachine.calculatePrizeMoney(winningNumbers, lotto);
-
-        //then
-        assertThat(grade).isEqualTo(Grade.SEVEN_GRADE);
+        assertThat(grade).isEqualTo(Grade.UN_LUCKY_GRADE);
     }
 
     @Test
