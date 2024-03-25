@@ -13,23 +13,19 @@ public enum Operator implements OperatorType {
     private final String symbol;
     private final BiFunction<Integer, Integer, Integer> expression;
 
+    Operator(String symbol, BiFunction<Integer, Integer, Integer> expression) {
+        this.symbol = symbol;
+        this.expression = expression;
+    }
+
     public static Operator find(String text) {
 
         for (Operator operation : Operator.values()) {
-            if (isEqualsTo(text, operation)) {
+            if (operation.symbol.equals(text)) {
                 return operation;
             }
         }
         throw new IllegalStateException(ErrorMessage.OPERATOR_VALIDATION.message(text));
-    }
-
-     static boolean isEqualsTo(String text, Operator operation) {
-        return operation.symbol.equals(text);
-    }
-
-    Operator(String symbol, BiFunction<Integer, Integer, Integer> expression) {
-        this.symbol = symbol;
-        this.expression = expression;
     }
 
     @Override

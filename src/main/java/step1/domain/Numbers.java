@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class Numbers {
 
-    private static Pattern pattern = Pattern.compile("\\d+");
+    private static final Pattern pattern = Pattern.compile("\\d+");
 
     private final List<Integer> numbers = new ArrayList<>();
 

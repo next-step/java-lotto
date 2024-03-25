@@ -13,17 +13,10 @@ public class Operators {
 
     private final List<Operator> operators = new ArrayList<>();
 
-    private String g;
-
-    public  String from(){
-        return g;
-    }
-
     public Operators(String string) {
         Matcher matcher = patternOperate.matcher(string);
         while (matcher.find()) {
-            g = matcher.group();
-            operators.add(Operator.find(matcher.group().trim()));
+            operators.add(Operator.find(matcher.group()));
         }
     }
 
