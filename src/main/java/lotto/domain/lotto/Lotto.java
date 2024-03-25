@@ -1,8 +1,11 @@
 package lotto.domain.lotto;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.error.exception.DuplicateLottoNumberException;
 import lotto.error.exception.SizeExceedLottoException;
 
 public class Lotto {
@@ -13,7 +16,17 @@ public class Lotto {
         if (lotto.size() > 6) {
             throw new SizeExceedLottoException(lotto.size());
         }
+
+        if (hasDuplicateNumbers(lotto)){
+            throw new DuplicateLottoNumberException(lotto);
+        }
+
         this.lotto = lotto;
+    }
+
+    private boolean hasDuplicateNumbers(List<LottoNumber> lotto) {
+        Set<LottoNumber> uniqueNumbers = new HashSet<>(lotto);
+        return uniqueNumbers.size() != lotto.size();
     }
 
     public static List<Lotto> createAutoLottos(int purchaseCount) {
