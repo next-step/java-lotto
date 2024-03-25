@@ -8,13 +8,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static lotto.view.InputView.COMMA_BLANK_DELIMITER;
+import static lotto.TestUtil.numbersForTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -53,15 +51,9 @@ class LottoTest {
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
-        WinningNumbers winningNumbers = WinningNumbers.valueOf(winningNumbersForTest(winningNumberInput));
+        WinningNumbers winningNumbers = WinningNumbers.valueOf(numbersForTest(winningNumberInput));
         Lotto lotto = Lotto.valueOf(lottoNumbers);
 
         assertThat(lotto.countOfMatch(winningNumbers)).isEqualTo(expected);
-    }
-
-    private Set<LottoNumber> winningNumbersForTest(String winningNumbersInput) {
-        return Arrays.stream(winningNumbersInput.split(COMMA_BLANK_DELIMITER))
-                .map(number -> LottoNumber.valueOf(Integer.parseInt(number)))
-                .collect(Collectors.toSet());
     }
 }

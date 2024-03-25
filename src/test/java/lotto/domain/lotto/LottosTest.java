@@ -6,14 +6,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static lotto.view.InputView.COMMA_BLANK_DELIMITER;
+import static lotto.TestUtil.numbersForTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
@@ -39,7 +37,7 @@ class LottosTest {
         PurchaseAmountOfMoney purchaseAmountOfMoney = PurchaseAmountOfMoney.valueOf(1000);
         Lottos lottos = lottoGeneratingStrategyStub.lottos(purchaseAmountOfMoney.numberOfLottoToPurchase());
 
-        WinningNumbers winningNumbers = WinningNumbers.valueOf(winningNumbersForTest(winningNumbersInput));
+        WinningNumbers winningNumbers = WinningNumbers.valueOf(numbersForTest(winningNumbersInput));
         BonusNumber bonusNumber = BonusNumber.newBonusNumberWithOutWinningNumbers(LottoNumber.valueOf(bonusNumberInput), winningNumbers);
         WinningAndBonusNumbers winningAndBonusNumbers = WinningAndBonusNumbers.newWinningAndBonusNumbers(winningNumbers, bonusNumber);
 
@@ -47,11 +45,5 @@ class LottosTest {
 
         assertThat(statisticsOfLottos.numberOfMatchCount(rank)).isEqualTo(1);
         assertThat(statisticsOfLottos.rateOfReturn()).isEqualTo(expectedRateOfReturn);
-    }
-
-    private Set<LottoNumber> winningNumbersForTest(String winningNumbersInput) {
-        return Arrays.stream(winningNumbersInput.split(COMMA_BLANK_DELIMITER))
-                .map(number -> LottoNumber.valueOf(Integer.parseInt(number)))
-                .collect(Collectors.toSet());
     }
 }
