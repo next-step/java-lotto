@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class LottoNumbers {
-    public static List<Integer> setUp() {
+    public static List<Integer> setLottoNumbers() {
         List<Integer> numbers = new ArrayList<>();
 
         IntStream.range(Constant.MIN_LOTTO, Constant.MAX_LOTTO + 1)
