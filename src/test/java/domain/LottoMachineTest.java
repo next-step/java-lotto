@@ -24,6 +24,13 @@ public class LottoMachineTest {
   }
 
   @Test
+  @DisplayName("로또 여러장을 생성한다")
+  void createLottos() {
+    lottoMachine.createLotto(4000);
+    assertThat(lottoMachine.getAllLottoList().size()).isEqualTo(4);
+  }
+
+  @Test
   @DisplayName("로또 결과를 확인한다")
   void getLottoResult() {
     String result = lottoMachine.getLottoResult(List.of(1, 2, 3, 4, 5, 6));

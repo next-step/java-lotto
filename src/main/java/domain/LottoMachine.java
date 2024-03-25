@@ -15,6 +15,12 @@ public class LottoMachine {
     return lottoCount;
   }
 
+  public List<String> getAllLottoList(){
+    return lottoList.getLottoNumbers().stream()
+                .map(Object::toString)
+                .collect(Collectors.toList());
+  }
+
   public String getLottoResult(List<Integer> winningNumbers) {
     // TODO 구현 필요
     return null;
