@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class AutoGeneratingStrategy extends LottoGeneratingStrategy {
     @Override
-    public Lottos lottos(int totalNumberOfLottoToPurchase) {
+    public Lottos lottos(int totalNumberOfLottoToPurchase, Lottos manualLottos) {
         List<Lotto> lottos = IntStream.range(START_OF_RANGE, totalNumberOfLottoToPurchase)
                 .mapToObj(i -> automaticLotto())
                 .collect(Collectors.toList());

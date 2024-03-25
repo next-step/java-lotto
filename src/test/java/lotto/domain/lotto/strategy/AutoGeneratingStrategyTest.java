@@ -14,6 +14,7 @@ import java.util.List;
 import static lotto.domain.lotto.Lotto.LOTTO_NUMBER_SIZE;
 import static lotto.domain.lotto.LottoNumber.MAX_LOTTO_NUMBER;
 import static lotto.domain.lotto.LottoNumber.MIN_LOTTO_NUMBER;
+import static lotto.domain.lotto.strategy.LottoGeneratingStrategy.EMPTY_LOTTOS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AutoGeneratingStrategyTest {
@@ -26,14 +27,14 @@ class AutoGeneratingStrategyTest {
         @ValueSource(ints = {1, 3, 6})
         @DisplayName("totalNumberOfLottoToPurchase 만큼 Lotto가 생성된다.")
         void testSizeOfLottos(int totalNumberOfLottoToPurchase) {
-            Lottos lottos = lottoGeneratingStrategy.lottos(totalNumberOfLottoToPurchase);
+            Lottos lottos = lottoGeneratingStrategy.lottos(totalNumberOfLottoToPurchase, EMPTY_LOTTOS);
             assertThat(lottos.lottos().size()).isEqualTo(totalNumberOfLottoToPurchase);
         }
 
         @Nested
         @DisplayName("생성된 Lotto에 대한 테스트")
         class LottoTest {
-            Lotto lotto = lottoGeneratingStrategy.lottos(1)
+            Lotto lotto = lottoGeneratingStrategy.lottos(1, EMPTY_LOTTOS)
                     .lottos()
                     .get(0);
 

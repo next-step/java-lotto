@@ -14,12 +14,13 @@ import static lotto.domain.lotto.LottoNumber.MAX_LOTTO_NUMBER;
 import static lotto.domain.lotto.LottoNumber.MIN_LOTTO_NUMBER;
 
 public abstract class LottoGeneratingStrategy {
+    public static final Lottos EMPTY_LOTTOS = Lottos.emptyLottos();
     protected static final int START_OF_RANGE = 0;
     private static final List<LottoNumber> LOTTO_NUMBER_POOL = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
             .mapToObj(LottoNumber::valueOf)
             .collect(Collectors.toList());
 
-    public abstract Lottos lottos(int totalNumberOfLottoToPurchase);
+    public abstract Lottos lottos(int totalNumberOfLottoToPurchase, Lottos manualLottos);
 
     protected Lotto automaticLotto() {
         Collections.shuffle(LOTTO_NUMBER_POOL);

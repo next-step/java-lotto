@@ -3,14 +3,23 @@ package lotto.domain.lotto;
 import lotto.domain.PurchaseAmountOfMoney;
 import lotto.domain.WinningAndBonusNumbers;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
+    private Lottos() {
+        this.lottos = new ArrayList<>();
+    }
+
     private Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public static Lottos emptyLottos() {
+        return new Lottos();
     }
 
     public static Lottos valueOf(List<Lotto> lottos) {

@@ -12,12 +12,13 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static lotto.TestUtil.numbersForTest;
+import static lotto.domain.lotto.strategy.LottoGeneratingStrategy.EMPTY_LOTTOS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
     LottoGeneratingStrategy lottoGeneratingStrategyStub = new LottoGeneratingStrategy() {
         @Override
-        public Lottos lottos(int totalNumberOfLottoToPurchase) {
+        public Lottos lottos(int totalNumberOfLottoToPurchase, Lottos manualLottos) {
             Lotto lotto = Lotto.valueOf(Stream.of(1, 2, 3, 4, 5, 6)
                     .map(LottoNumber::valueOf)
                     .collect(Collectors.toList()));
@@ -35,7 +36,7 @@ class LottosTest {
     @DisplayName("statistics(): 로또의 결과(당첨 통계, 수익률)를 반환합니다.")
     void testStatistics(String winningNumbersInput, int bonusNumberInput, Rank rank, double expectedRateOfReturn) {
         PurchaseAmountOfMoney purchaseAmountOfMoney = PurchaseAmountOfMoney.valueOf(1000);
-        Lottos lottos = lottoGeneratingStrategyStub.lottos(purchaseAmountOfMoney.totalNumberOfLottoToPurchase());
+        Lottos lottos = lottoGeneratingStrategyStub.lottos(purchaseAmountOfMoney.totalNumberOfLottoToPurchase(), EMPTY_LOTTOS);
 
         WinningNumbers winningNumbers = WinningNumbers.valueOf(numbersForTest(winningNumbersInput));
         BonusNumber bonusNumber = BonusNumber.newBonusNumberWithOutWinningNumbers(LottoNumber.valueOf(bonusNumberInput), winningNumbers);
