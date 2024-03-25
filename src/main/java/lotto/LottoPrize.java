@@ -1,17 +1,24 @@
 package lotto;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public enum LottoPrize {
 
     NONE(0,0),
-    MATCH_3(3, 5000),
-    MATCH_4(4, 50000),
-    MATCH_5(5, 1500000),
-    MATCH_6(6, 2000000000);
+    MATCH_3(3, 5_000),
+    MATCH_4(4, 50_000),
+    MATCH_5(5, 1_500_000),
+    MATCH_6(6, 2_000_000_000);
 
     private final Integer correctNumber;
     private final Integer prize;
+    private static final Map<Integer, LottoPrize> cache = new HashMap<>();
+
+    static {
+        Arrays.stream(values()).forEach( lottoPrize -> cache.put(lottoPrize.correctNumber,lottoPrize));
+    }
 
     LottoPrize(Integer correctNumber, Integer prize) {
         this.correctNumber = correctNumber;
@@ -19,9 +26,10 @@ public enum LottoPrize {
     }
 
     public static LottoPrize from(int count) {
-        return Arrays.stream(values())
-                .filter(lottoPrize -> lottoPrize.correctNumber == count)
-                .findFirst().orElse(LottoPrize.NONE);
+        if (cache.containsKey(count)) {
+            return cache.get(count);
+        }
+        return LottoPrize.NONE;
     }
 
     public String formatPrizeText(long count) {
