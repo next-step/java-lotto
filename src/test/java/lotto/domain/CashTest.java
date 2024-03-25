@@ -18,18 +18,26 @@ public class CashTest {
                 .withMessage("현금은 마이너스 통장이 아닙니다.");
     }
 
-    @DisplayName("buaybleAmount는 제품 금액에 따른 구매 가능 개수를 반환한다.")
+    @DisplayName("buyableAmount는 제품 금액에 따른 구매 가능 개수를 반환한다.")
     @ParameterizedTest
     @CsvSource(value = {"0,0", "800,0", "1000,1", "3400,3"})
     void buyableAmount(int cash, int expectAmount) {
-        assertThat(new Cash(cash).buyableAmount(1000))
+        assertThat(new Cash(cash).buyableAmount(new Cash(1000)))
                 .isEqualTo(expectAmount);
     }
 
-    @DisplayName("buableAmount에 매개변수로 넘기는 제품 금액은 음수나 0이 될 수 없다.")
+    @DisplayName("buyableAmount에 매개변수로 넘기는 제품 금액은 음수나 0이 될 수 없다.")
     @Test
     void buyableAmount() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Cash(1000).buyableAmount(0));
+                .isThrownBy(() -> new Cash(1000).buyableAmount(new Cash(0)));
+    }
+
+    @DisplayName("zeroOrLessThanZero는 Cash의 값이 0인지 검사한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1,false", "0,true"})
+    void zeroOrLessThanZero(long value, boolean expectResult) {
+        assertThat(new Cash(value).equalsZero())
+                .isEqualTo(expectResult);
     }
 }
