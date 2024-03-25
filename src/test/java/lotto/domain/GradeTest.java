@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static lotto.domain.grade.Grade.FIRST_GRADE;
+import static lotto.domain.grade.Grade.UN_LUCKY_GRADE;
 import static org.assertj.core.api.Assertions.*;
 
 import lotto.domain.grade.Grade;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class GradeTest {
 
@@ -22,5 +24,12 @@ class GradeTest {
     @DisplayName("맞춘 로또 번호 개수가 전달될 경우 Grade로 변경되어야 한다.")
     public void Grade_Should_Conversion_From_CorrectingCount(){
         assertThat(Grade.fromCorrectingCount(6)).isEqualTo(FIRST_GRADE);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 2})
+    @DisplayName("맞춘 로또 번호 개수가 0, 1, 2 일 경우 UN_LUCKY_GRADE가 반환되어야 한다.")
+    public void Grade_Should_Conversion_From_CorrectingCount(int input){
+        assertThat(Grade.fromCorrectingCount(input)).isEqualTo(UN_LUCKY_GRADE);
     }
 }
