@@ -22,7 +22,7 @@ public class OutputView {
     }
 
     public static void printNumOfAutoAndManual(int numAuto, int numManual){
-        System.out.println("수동으로 "+numAuto+"장, 자동으로 "+numManual+"개를 구매했습니다.");
+        System.out.println("수동으로 "+numManual+"장, 자동으로 "+numAuto+"개를 구매했습니다.");
     }
 
     public static void printRank(Map<RankMatches, Integer> rankOfLottos){

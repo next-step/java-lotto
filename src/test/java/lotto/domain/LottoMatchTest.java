@@ -25,7 +25,7 @@ public class LottoMatchTest {
 
         List<Lotto> lottos = new ArrayList<>(Arrays.asList(lotto1,lotto2,lotto3,lotto4,lotto5,lotto6));
 
-        BuyLottos buyLottos = new BuyLottos(6000,lottos);
+        BuyLottos buyLottos = new BuyLottos(lottos,6000);
 
         LottoMatch lottoMatch = new LottoMatch();
         lottoMatch.checkRank(buyLottos,winLotto);

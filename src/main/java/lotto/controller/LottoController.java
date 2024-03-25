@@ -12,12 +12,14 @@ public class LottoController {
 
     public static void run() {
         int priceOfLotto = StringToInt.toInt( InputView.priceOfPurchase());
-        int numOfManual = StringToInt.toInt( InputView.numOfManual());
+        int numOfManual = StringToInt.toIntManual(priceOfLotto/1000, InputView.numOfManual());
 
         List<String> listOfManual = InputView.numberOfManual(numOfManual);
 
-        BuyLottos buyLottos = new BuyLottos(priceOfLotto);
+        BuyLottos buyLottos = new BuyLottos(priceOfLotto, listOfManual);
         buyLottos.buyLottos();  // 로또 생성.
+
+        OutputView.printNumOfAutoAndManual(priceOfLotto/1000 - numOfManual, numOfManual);
 
         OutputView.printBuyLotto(buyLottos); // 생성 로또 보여주기
 
