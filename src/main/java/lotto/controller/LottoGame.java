@@ -10,8 +10,8 @@ import java.util.stream.IntStream;
 
 public class LottoGame {
 
-    private static final int START_INCLUSIVE = 1;
-    private static final int END_INCLUSIVE = 45;
+    public static final int START_INCLUSIVE = 1;
+    public static final int END_INCLUSIVE = 45;
     private final InputView inputView;
     private final ResultView resultView;
     private final LottoStore lottoStore;
