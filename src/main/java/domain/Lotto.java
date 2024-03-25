@@ -18,4 +18,8 @@ public class Lotto {
         }
         return cnt;
     }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }

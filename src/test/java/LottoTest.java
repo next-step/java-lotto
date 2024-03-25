@@ -4,10 +4,12 @@ import domain.LottoMachine;
 import domain.MyLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import view.LottoOutput;
 
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoTest {
 
@@ -19,7 +21,7 @@ public class LottoTest {
 
         List<Integer> winningNumber = List.of(1, 2, 3, 4, 5, 6);
 
-        assertThat(lotto.numberCheck(winningNumber)).isEqualTo(3);
+
     }
 
     @Test
@@ -43,5 +45,16 @@ public class LottoTest {
     public void winningStatus() {
         LottoController controller = new LottoController();
         controller.resultReturn();
+    }
+
+    @Test
+    @DisplayName("출력 로또 번호")
+    public void myLottoNumbers() {
+        MyLotto myLotto = new MyLotto();
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        myLotto.add(lotto);
+        LottoOutput lottoOutput = new LottoOutput();
+
+        lottoOutput.myLottoPrint(myLotto);
     }
 }

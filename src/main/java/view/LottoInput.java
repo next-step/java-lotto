@@ -1,5 +1,7 @@
 package view;
 
+import domain.WinStatus;
+
 import java.util.Scanner;
 
 public class LottoInput {
