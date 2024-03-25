@@ -9,7 +9,7 @@ public class Profit {
         this.winningPrize = winningPrize;
     }
 
-    public void accumulate(int matchCount, boolean isBonus){
+    public void accumulate(int matchCount, boolean isBonus) {
         this.winningPrize += LottoPricing.getByMatchCount(matchCount, isBonus).getPrice();
     }
 

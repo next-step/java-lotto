@@ -24,11 +24,11 @@ public class WinningNumber {
     }
 
     private void validateIfNotNull() {
-        if(numbers == null || bonusNumber == null) throw new IllegalArgumentException();
+        if (numbers == null || bonusNumber == null) throw new IllegalArgumentException();
     }
 
     private void validateIfBonusNumberNotInNumbers() {
-        if(numbers.contains(bonusNumber)){
+        if (numbers.contains(bonusNumber)) {
             throw new IllegalArgumentException();
         }
     }

@@ -12,8 +12,7 @@ public enum LottoPricing {
     PRIZE_4(4, () -> 50000),
     PRIZE_5(5, () -> 1500000),
     PRIZE_6(6, () -> 2000000000),
-    PRIZE_5_BONUS(5, () -> 30000000)
-    ;
+    PRIZE_5_BONUS(5, () -> 30000000);
 
     private static final Map<String, LottoPricing> lottoPricingMappingCache;
 
@@ -39,7 +38,7 @@ public enum LottoPricing {
 
     public static LottoPricing getByMatchCount(int matchCount, boolean isBonus) {
         String key = String.valueOf(matchCount);
-        if(matchCount == 5){
+        if (matchCount == 5) {
             key = key + "::" + isBonus;
         }
         LottoPricing lottoPricing = lottoPricingMappingCache.get(key);

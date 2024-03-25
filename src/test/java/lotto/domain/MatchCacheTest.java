@@ -40,11 +40,11 @@ public class MatchCacheTest {
     @Test
     @DisplayName("일치 개수 누적 저장(1,1,3,3,3,5(bonus), 5(no_bonus), 5(bonus) -> [2,0,3,0,1,0],2)")
     void save_accumulate_state() {
-        matchCache.save(1,false);
-        matchCache.save(1,false);
-        matchCache.save(3,false);
-        matchCache.save(3,false);
-        matchCache.save(3,false);
+        matchCache.save(1, false);
+        matchCache.save(1, false);
+        matchCache.save(3, false);
+        matchCache.save(3, false);
+        matchCache.save(3, false);
         matchCache.save(5, true);
         matchCache.save(5, false);
         matchCache.save(5, true);

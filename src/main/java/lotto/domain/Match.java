@@ -5,7 +5,7 @@ public class Match {
     private final MatchCache matchCache;
     private final Profit profit;
 
-    public Match(){
+    public Match() {
         this(new MatchCache(), new Profit(0));
     }
 
@@ -14,7 +14,7 @@ public class Match {
         this.profit = profit;
     }
 
-    public void save(int matchCount, boolean isBonus){
+    public void save(int matchCount, boolean isBonus) {
         matchCache.save(matchCount, isBonus);
         profit.accumulate(matchCount, isBonus);
     }

@@ -50,7 +50,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @DisplayName("보너스 번호가 있는지 확인(([1,2,3], 2) => true, ([1,2,3], 5) => false")
     @MethodSource("bonusInputAndResult")
-    void if_bonus(List<Integer> sources, int bonusNumber, boolean result){
+    void if_bonus(List<Integer> sources, int bonusNumber, boolean result) {
         boolean isBonusContain = new LottoNumber(sources).isBonusContains(new WinningNumber(bonusNumber));
         assertThat(isBonusContain).isEqualTo(result);
     }

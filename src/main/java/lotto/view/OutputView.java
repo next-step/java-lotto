@@ -18,7 +18,7 @@ public class OutputView {
         printPlainMessage(sb.toString());
     }
 
-    public static void printResult(Cash cash, Match match){
+    public static void printResult(Cash cash, Match match) {
         printMatchCache(match.getMatchCache());
         printPlainMessage("당첨 통계");
         printPlainMessage("---------");

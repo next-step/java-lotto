@@ -11,7 +11,7 @@ public class LottoNumber {
     }
 
     private void validateIfNotNull() {
-        if(this.numbers == null) throw new IllegalArgumentException();
+        if (this.numbers == null) throw new IllegalArgumentException();
     }
 
     public int getMatchCount(WinningNumber winningNumber) {
@@ -21,7 +21,7 @@ public class LottoNumber {
                 .count();
     }
 
-    public boolean isBonusContains(WinningNumber winningNumber){
+    public boolean isBonusContains(WinningNumber winningNumber) {
         Integer bonusNumber = winningNumber.getBonusNumber();
         return this.numbers.stream()
                 .anyMatch(bonusNumber::equals);
