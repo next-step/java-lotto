@@ -36,6 +36,10 @@ public class LottoNumbers implements Iterable<LottoNumber> {
         return matchCount;
     }
 
+    public boolean containBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumber.contains(bonusNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

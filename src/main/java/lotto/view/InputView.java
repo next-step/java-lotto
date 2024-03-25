@@ -23,5 +23,11 @@ public class InputView {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
+
+    public int inputBonusNumber() {
+        int bonusNumber = scanner.nextInt();
+        scanner.nextLine();
+        return bonusNumber;
+    }
 }
 

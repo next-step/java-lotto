@@ -11,13 +11,20 @@ public class WinningInfo {
         this.winningInfo = winningInfo;
     }
 
-    public static WinningInfo of(PickedLottoNumbers pickedLottoNumbers, LottoNumbers winningNumbers) {
+    public static WinningInfo of(PickedLottoNumbers pickedLottoNumbers, LottoNumber bonusNumber, LottoNumbers winningNumbers) {
         HashMap<Rank, Integer> winningInfo = new HashMap<>();
         for (LottoNumbers pickedNumber : pickedLottoNumbers) {
-            Rank rank = Rank.findRank(compareLottoNumbers(pickedNumber, winningNumbers));
+            int matchCount = compareLottoNumbers(pickedNumber, winningNumbers);
+            boolean matchBonus = compareBonusNumber(pickedNumber, bonusNumber);
+
+            Rank rank = Rank.findRank(matchCount, matchBonus);
             winningInfo.put(rank, winningInfo.getOrDefault(rank, 0) + 1);
         }
         return new WinningInfo(winningInfo);
+    }
+
+    private static boolean compareBonusNumber(LottoNumbers pickedNumber, LottoNumber bonusNumber) {
+        return pickedNumber.containBonusNumber(bonusNumber);
     }
 
     private static int compareLottoNumbers(LottoNumbers pickedNumber, LottoNumbers winningNumbers) {

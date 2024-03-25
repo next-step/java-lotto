@@ -5,8 +5,6 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoGame {
 
@@ -28,16 +26,24 @@ public class LottoGame {
         resultView.printPickedLottoNumbers(pickedLottoNumbers);
 
         LottoNumbers winningLotto = initLottoNumbers();
-        WinningInfo winningInfo = WinningInfo.of(pickedLottoNumbers, winningLotto);
+        LottoNumber bonusNumber = initBonusNumber();
+        WinningInfo winningInfo = WinningInfo.of(pickedLottoNumbers, bonusNumber, winningLotto);
 
         resultView.printWinningStatic(winningInfo, money);
     }
 
     private LottoNumbers initLottoNumbers() {
         resultView.printWinningLotto();
-
         List<Integer> inputLottoNumber = inputView.inputLottoNumber();
+
         return new LottoNumbers(inputLottoNumber);
+    }
+
+    private LottoNumber initBonusNumber() {
+        resultView.printBonusNumber();
+        int bonusNumber = inputView.inputBonusNumber();
+
+        return new LottoNumber(bonusNumber);
     }
 
     private Money initMoney() {

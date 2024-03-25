@@ -50,4 +50,8 @@ public class ResultView {
         }
         System.out.print(stringJoiner);
     }
+
+    public void printBonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요.");
+    }
 }
