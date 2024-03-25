@@ -4,6 +4,7 @@ import lotto.domain.statistics.RateOfReturn;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.Objects;
 
 public class Cash {
     private final BigDecimal value;
@@ -59,5 +60,18 @@ public class Cash {
         if (price.equalsZero()) {
             throw new IllegalArgumentException("공짜는 없는 세상입니다.");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cash cash = (Cash) o;
+        return Objects.equals(value, cash.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }
