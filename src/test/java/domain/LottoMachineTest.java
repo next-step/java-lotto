@@ -13,7 +13,7 @@ public class LottoMachineTest {
 
   @BeforeEach
   void setUp() {
-    lottoMachine = new LottoMachine(1000);
+    lottoMachine = new LottoMachine();
   }
 
   @Test
