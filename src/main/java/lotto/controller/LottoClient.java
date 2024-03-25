@@ -42,11 +42,4 @@ public class LottoClient {
         printPlainMessage("보너스 볼을 입력해 주세요.");
         return insertNumber();
     }
-
-    private static void printResult(Cash cash, Match match) {
-        printMatchCache(match.getMatchCache());
-        printPlainMessage("당첨 통계");
-        printPlainMessage("---------");
-        printProfit(match.getProfit(), cash);
-    }
 }
