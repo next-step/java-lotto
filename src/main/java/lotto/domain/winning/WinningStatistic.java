@@ -52,24 +52,7 @@ public class WinningStatistic {
     }
 
     public void calculateWinningStatistic(Grade grade) {
-        if (grade == Grade.FIRST_GRADE) {
-            firstGradeCount++;
-            return;
-        }
-
-        if (grade == Grade.SECOND_GRADE) {
-            secondGradeCount++;
-            return;
-        }
-
-        if (grade == Grade.THIRD_GRADE) {
-            thirdGradeCount++;
-            return;
-        }
-
-        if (grade == Grade.FOUR_GRADE) {
-            forthGradeCount++;
-        }
+        gradeCounts[grade.ordinal()]++;
     }
 
     public double calculateProfitRate() {
