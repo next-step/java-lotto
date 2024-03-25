@@ -10,9 +10,8 @@ import java.util.stream.Stream;
 
 public class LottoTicket {
     private final static int LOTTO_NUMBER_COUNT = 6;
-    private final static List<LottoNumber> LOTTO_NUMBERS = IntStream.range(0, 45)
-            .mapToObj(i -> i + 1)
-            .map(LottoNumber::new)
+    private final static List<LottoNumber> LOTTO_NUMBERS = IntStream.rangeClosed(LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER)
+            .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
 
     private final Set<LottoNumber> numbers;
@@ -82,8 +81,9 @@ public class LottoTicket {
         return numbers.contains(lottoNumber);
     }
 
-    public WinnerPrize rank(LottoTicket winningNumbers, LottoNumber bonusBall) {
-        return WinnerPrize.valueOf(getMatchCount(winningNumbers), numbers.contains(bonusBall));
+    public WinnerPrize rank(WinningTicket winningTicket) {
+        return WinnerPrize.valueOf(getMatchCount(winningTicket.getWinningNumbers()),
+                numbers.contains(winningTicket.getBonusNumber()));
     }
 
     @Override

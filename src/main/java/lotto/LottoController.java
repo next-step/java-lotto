@@ -1,19 +1,29 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.Amount;
+import lotto.domain.LottoTickets;
+import lotto.domain.ManualLottoCount;
+import lotto.domain.WinningTicket;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
 
 public class LottoController {
     public static void main(String[] args) {
         Amount amount = new Amount(InputView.askPurchaseAmount());
-        LottoTickets lottoTickets = new LottoTickets(amount);
-        ResultView.printLottoTickets(lottoTickets);
+        ManualLottoCount manualLottoCount = new ManualLottoCount(InputView.askManualLottoCount(), amount);
+        List<String[]> manualLottoNumbers = InputView.askManualLottoNumbers(manualLottoCount);
 
-        LottoTicket winningNumbers = new LottoTicket(InputView.askWinningNumbers().split(", "));
-        LottoNumber bonusBall = LottoNumber.createBonusBall(winningNumbers, InputView.askBonusBall());
+        LottoTickets lottoTickets = new LottoTickets(amount, manualLottoNumbers);
+        ResultView.printLottoTickets(lottoTickets, manualLottoCount);
 
-        ResultView.printWinningStatistics(lottoTickets, winningNumbers, bonusBall);
-        ResultView.printEarningsRate(lottoTickets, winningNumbers, bonusBall);
+        String[] winningNumbers = InputView.askWinningNumbers();
+        String bonusBall = InputView.askBonusBall();
+        WinningTicket winningTicket = new WinningTicket(winningNumbers, bonusBall);
+
+        ResultView.printWinningStatistics(lottoTickets.winnerCounts(winningTicket));
+        ResultView.printEarningsRate(lottoTickets.earningsRate(winningTicket));
     }
+
 }

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -8,9 +9,16 @@ import java.util.stream.Stream;
 public class LottoTickets {
     private final List<LottoTicket> lottoTicketList;
 
-    public LottoTickets(Amount amount) {
-        this.lottoTicketList = IntStream.range(0, amount.lottoTicketCount())
+    public LottoTickets(Amount amount, List<String[]> manualLottoNumbers) {
+        List<LottoTicket> manualLotto = manualLottoNumbers.stream()
+                .map(LottoTicket::new)
+                .collect(Collectors.toList());
+
+        List<LottoTicket> autoLotto = IntStream.range(0, amount.lottoTicketCount() - manualLottoNumbers.size())
                 .mapToObj(i -> new LottoTicket())
+                .collect(Collectors.toList());
+
+        this.lottoTicketList = Stream.concat(manualLotto.stream(), autoLotto.stream())
                 .collect(Collectors.toList());
     }
 
@@ -22,20 +30,27 @@ public class LottoTickets {
         return lottoTicketList.size();
     }
 
-    public int winnerCount(WinnerPrize winnerPrize, LottoTicket winningNumbers, LottoNumber bonusBall) {
+    public int winnerCount(WinnerPrize winnerPrize, WinningTicket winningTicket) {
         return (int) lottoTicketList.stream()
-                .filter(lottoTicket -> lottoTicket.rank(winningNumbers, bonusBall) == winnerPrize)
+                .filter(lottoTicket -> lottoTicket.rank(winningTicket) == winnerPrize)
                 .count();
     }
 
-    public double earningsRate(LottoTicket winningNumbers, LottoNumber bonusBall) {
-        return Math.floor(100 * (double) earnings(winningNumbers, bonusBall) / (size() * Amount.LOTTO_PRICE))/100.0;
+    public double earningsRate(WinningTicket winningTicket) {
+        return Math.floor(100 * (double) earnings(winningTicket) / (size() * Amount.LOTTO_PRICE))/100.0;
     }
 
-    private long earnings(LottoTicket winningNumbers, LottoNumber bonusBall) {
+    private long earnings(WinningTicket winningTicket) {
         return Stream.of(WinnerPrize.values())
-                .mapToLong(winnerPrize -> winnerCount(winnerPrize, winningNumbers, bonusBall) * winnerPrize.getPrize())
+                .mapToLong(winnerPrize -> winnerCount(winnerPrize, winningTicket) * winnerPrize.getPrize())
                 .sum();
+    }
+
+    public Map<WinnerPrize, Integer> winnerCounts(WinningTicket winningTicket) {
+        return Stream.of(WinnerPrize.values())
+                .collect(Collectors.toMap(
+                        winnerPrize -> winnerPrize,
+                        winnerPrize -> winnerCount(winnerPrize, winningTicket)));
     }
 
 }

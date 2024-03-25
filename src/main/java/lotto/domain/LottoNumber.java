@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
     private final int number;
 
     public LottoNumber(int number) {
@@ -14,14 +16,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public LottoNumber(String input) {
         this(toInt(input));
-    }
-
-    public static LottoNumber createBonusBall(LottoTicket winningNumbers, String input) {
-        LottoNumber bonusBall = new LottoNumber(input);
-        if (winningNumbers.contains(bonusBall)) {
-            throw new IllegalArgumentException("보너스 숫자는 당첨숫자를 제외한 숫자여야 합니다.");
-        }
-        return bonusBall;
     }
 
     private static int toInt(String input) {
@@ -44,7 +38,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private boolean isLottoNumber(int number) {
-        return number >= 1 && number <= 45;
+        return number >= LOTTO_MIN_NUMBER && number <= LOTTO_MAX_NUMBER;
     }
 
     @Override
