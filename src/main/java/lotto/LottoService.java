@@ -4,36 +4,39 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoService {
-    public static void start() {
-        long lottoMoney = InputView.inputLottoMoney();
-        int lottoCount = LottoCalculator.getAvailableLottoNumbers(lottoMoney);
+	public static void start() {
+		long lottoMoney = InputView.inputLottoMoney();
+		int lottoCount = LottoCalculator.getAvailableLottoNumbers(lottoMoney);
 
-        ResultView.printLottoCount(lottoCount);
+		ResultView.printLottoCount(lottoCount);
 
-        Lottos lottos = new Lottos(
-                Stream.generate(() -> LottoShuffle.makeLottoNumbersInRange())
-                        .limit(lottoCount)
-                        .collect(Collectors.toList())
-        );
+		Lottos lottos = new Lottos(
+				Stream.generate(() -> LottoShuffle.makeLottoNumbersInRange())
+						.limit(lottoCount)
+						.collect(Collectors.toList())
+		);
 
-        ResultView.printLottos(lottos);
+		ResultView.printLottos(lottos);
 
-        List<Integer> winningLottoNumber = InputView.inputWinningNumber();
+		List<Integer> winningLottoNumber = InputView.inputWinningNumber();
+		LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
 
-        HashMap<LottoRank, Integer> lottoRanks = lottos.getWinningStatistics(new WinningLottoNumbers(winningLottoNumber));
+		WinningLottoNumber bonusLottoNumber = new WinningLottoNumber(new LottoNumbers(winningLottoNumber), bonusNumber);
 
-        ResultView.printWinningStatistics(lottoRanks);
-        ResultView.printRateOfReturn(lottoMoney, getWinningMoney(lottoRanks));
-    }
+		Map<LottoRank, Integer> lottoRanks = lottos.getWinningStatistics(bonusLottoNumber);
 
-    private static long getWinningMoney(HashMap<LottoRank, Integer> lottoRanks) {
-        return lottoRanks.entrySet().stream().map(lottoRank -> lottoRank.getKey().getWinningMoney()).reduce(Integer::sum).orElse(0);
-    }
+		ResultView.printWinningStatistics(lottoRanks);
+		ResultView.printRateOfReturn(LottoCalculator.getRateOfReturn(lottoMoney, getWinningMoney(lottoRanks)));
+	}
+
+	private static long getWinningMoney(Map<LottoRank, Integer> lottoRanks) {
+		return lottoRanks.entrySet().stream().map(lottoRank -> lottoRank.getKey().getWinningMoney()).reduce(Integer::sum).orElse(0);
+	}
 
 }

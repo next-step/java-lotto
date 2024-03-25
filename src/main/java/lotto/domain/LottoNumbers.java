@@ -1,38 +1,45 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
 	public static final int LOTTO_PRICE = 1000;
 	private static final int LOTTO_SIZE = 6;
-	private static final int START_LOTTO_NUMBER = 1;
-	private static final int END_LOTTO_NUMBER = 45;
 
-	private final List<Integer> lottoNumbers;
+	private final List<LottoNumber> lottoNumbers;
 
 	public LottoNumbers(List<Integer> lottoNumbers) {
 		checkValidSize(lottoNumbers);
 		checkValidDuplication(lottoNumbers);
-		checkValidNumbers(lottoNumbers);
-		this.lottoNumbers = getSortedNumbers(lottoNumbers);
+
+		List<LottoNumber> initLottoNumbers = lottoNumbers.stream()
+				.map(LottoNumber::new)
+				.collect(Collectors.toList());
+
+		this.lottoNumbers = getSortedNumbers(initLottoNumbers);
 	}
 
-	private List<Integer> getSortedNumbers(List<Integer> lottoNumbers) {
-		List<Integer> sortedNumbers = new ArrayList<>(lottoNumbers);
-		Collections.sort(sortedNumbers);
+	private List<LottoNumber> getSortedNumbers(List<LottoNumber> lottoNumbers) {
+		List<LottoNumber> sortedNumbers = new ArrayList<>(lottoNumbers);
+		sortedNumbers.sort(Comparator.naturalOrder());
 		return sortedNumbers;
 	}
 
-	public int getCountOfMatchLottoNumber(WinningLottoNumbers winningNumber) {
-		return (int) winningNumber.getWinningLottoNumbers().getLottoNumbers().stream()
-				.filter(this.lottoNumbers::contains)
+	public int getCountOfMatchLottoNumber(LottoNumbers winningNumbers) {
+		return (int) winningNumbers.getLottoNumbers().stream()
+				.filter(this::containsLottoNumber)
 				.count();
 	}
 
-	public List<Integer> getLottoNumbers() {
+	public boolean containsLottoNumber(LottoNumber winningNumber) {
+		return this.lottoNumbers.stream()
+				.anyMatch(lottoNumber -> lottoNumber.getLottoNumber() == winningNumber.getLottoNumber());
+	}
+
+	public List<LottoNumber> getLottoNumbers() {
 		return lottoNumbers;
 	}
 
@@ -46,20 +53,6 @@ public class LottoNumbers {
 	private void checkValidSize(List<Integer> winningLottoNumbers) {
 		if (winningLottoNumbers.size() != LOTTO_SIZE)
 			throw new IllegalArgumentException("입력한 로또 사이즈가 6이여야 합니다!");
-	}
-
-	private void checkValidNumbers(List<Integer> winningLottoNumbers) {
-		if (winningLottoNumbers.stream().anyMatch(this::isValidLottoNumber))
-			throw new IllegalArgumentException("입력한 로또 번호가 1부터 45사이여야합니다.");
-	}
-
-	private boolean isValidLottoNumber(int lottoNumber) {
-		return lottoNumber < START_LOTTO_NUMBER || lottoNumber > END_LOTTO_NUMBER;
-	}
-
-	@Override
-	public String toString() {
-		return lottoNumbers.toString();
 	}
 
 }
