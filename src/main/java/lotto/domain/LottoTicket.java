@@ -9,9 +9,9 @@ public class LottoTicket {
     private List<LottoNumber> numbers;
 
     public static LottoTicket createTicket(List<Integer> inputs) {
-        List<LottoNumber> numbers = inputs.stream().sorted().map(input -> new LottoNumber(input))
-            .collect(Collectors.toList());
-        return new LottoTicket(Collections.unmodifiableList(numbers));
+        return new LottoTicket(Collections.unmodifiableList(
+            inputs.stream().sorted().map(input -> new LottoNumber(input))
+                .collect(Collectors.toList())));
     }
 
     private LottoTicket(List<LottoNumber> inputs) {
@@ -27,9 +27,7 @@ public class LottoTicket {
     }
 
     public int count(List<LottoNumber> numbers) {
-        return (int) numbers.stream()
-            .filter(this.numbers::contains)
-            .count();
+        return (int) numbers.stream().filter(this.numbers::contains).count();
     }
 
     private static void checkSizeNumbers(List<LottoNumber> numbers) {
