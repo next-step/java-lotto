@@ -18,7 +18,9 @@ public class RewardPriceTest {
 
   @ParameterizedTest
   @MethodSource("matchCountTestCases")
-  @DisplayName("지난 주 당첨 번호 기준, 일치하는 숫자 갯수 구하는 기능")
+  @DisplayName("당첨 번호 6개와 보너스 번호를 입력하여" +
+      "WinningNumbers 과 LottoTicket을 생성할 수 있으며" +
+      "구매한 로또 번호와 당첨 번호 일치하는 숫자 갯수 검증 테스트")
   void rewardAmountTest(Set<Integer> given, int expected) {
     WinningNumbers winningNumbers = WinningNumbers.of(Set.of(1, 2, 3, 4, 5, 6), 7);
     LottoTicket myLottoTicket = LottoTicket.generate(given);
@@ -27,7 +29,9 @@ public class RewardPriceTest {
 
   @ParameterizedTest
   @MethodSource("rewardAmountTestCases")
-  @DisplayName("당첨 번호 갯수별 금액 관리 기능")
+  @DisplayName("당첨 번호 6개와 보너스 번호를 입력하여" +
+      "WinningNumbers 과 LottoTicket을 생성할 수 있으며" +
+      "구매한 로또 번호와 당첨 번호 일치하는 숫자에 따른 '상금' 검증 테스트")
   void rewardAmountTest2(Set<Integer> given, int expected) {
     WinningNumbers winningNumbers = WinningNumbers.of(Set.of(1, 2, 3, 4, 5, 6), 7);
     LottoTicket myLottoTicket = LottoTicket.generate(given);
@@ -39,7 +43,9 @@ public class RewardPriceTest {
   }
 
   @Test
-  @DisplayName("5개 매칭, 보너스볼 매칭 안된 경우")
+  @DisplayName("당첨 번호 6개와 보너스 번호를 입력하여" +
+      "WinningNumbers 과 LottoTicket을 생성할 수 있으며" +
+      "구매한 로또 번호와 당첨 번호가 5개 매칭되고, 보너스 볼은 매칭 안된 경우 테스트")
   void rewardAmountTest3() {
     WinningNumbers winningNumbers = WinningNumbers.of(Set.of(1, 2, 3, 4, 5, 6), 7);
     LottoTicket myLottoTicket = LottoTicket.generate(Set.of(1, 2, 3, 4, 5, 11));
@@ -51,7 +57,9 @@ public class RewardPriceTest {
   }
 
   @Test
-  @DisplayName("5개 매칭, 보너스볼 매칭 된 경우")
+  @DisplayName("당첨 번호 6개와 보너스 번호를 입력하여" +
+      "WinningNumbers 과 LottoTicket을 생성할 수 있으며" +
+      "구매한 로또 번호와 당첨 번호가 5개 매칭되고, 보너스 볼도 매칭된 경우 테스트")
   void rewardAmountTest4() {
     WinningNumbers winningNumbers = WinningNumbers.of(Set.of(1, 2, 3, 4, 5, 6), 7);
     LottoTicket myLottoTicket = LottoTicket.generate(Set.of(1, 2, 3, 4, 5, 7));

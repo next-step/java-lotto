@@ -27,7 +27,9 @@ public class LottoTicketManualCreateTest {
   }
 
   @Test
-  @DisplayName("구입금액보다 수동 구매할 로또 수가 큰 경우 테스트")
+  @DisplayName("구입 금액과 수동 구매 갯수를 입력하여," +
+      "PurchaseAmount를 생성 시" +
+      "요청한 구입 금액보다 수동 구매할 로또 수가 큰 경우 exception 테스트")
   void lottoTicketManualCreateTest() {
     int inputPurchaseAmount = 2000;
     int manualPurchaseCount = 3;
@@ -37,7 +39,9 @@ public class LottoTicketManualCreateTest {
   }
 
   @Test
-  @DisplayName("수동과 자동 섞였을 때 정상 생성 테스트")
+  @DisplayName("구입 금액과 수동 구매 갯수를 입력하여" +
+      "PurchaseAmount과 LottoTickets을 생성하고" +
+      "수동 입력한 숫자(MANUAL_LOTTO_TICKETS)로 수동 로또 티켓과 자동 구매 티켓이 총 5개 생성되는지 테스트")
   void lottoTicketManualCreateTest2() {
     int inputPurchaseAmount = 5000;
     int manualPurchaseCount = 3;
@@ -47,7 +51,9 @@ public class LottoTicketManualCreateTest {
   }
 
   @Test
-  @DisplayName("수동 구매할 로또 수 음수인 경우 테스트")
+  @DisplayName("구입 금액과 수동 구매 갯수를 입력하여" +
+      "PurchaseAmount를 생성 시" +
+      "수동 구매할 로또 수가 음수인 경우 exception 테스트")
   void lottoTicketManualCreateTest3() {
     int inputPurchaseAmount = 2000;
     int manualPurchaseCount = -1;

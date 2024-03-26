@@ -18,7 +18,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class WinningNumbersTest {
 
   @Test
-  @DisplayName("당첨 번호 6개와 보너스 번호를 입력하여 생성하고 `WinningNumbers` 를 생성할 수 있으며 같은 번호를 갖는지 검증할 수 있다.")
+  @DisplayName("당첨 번호 6개와 보너스 번호를 입력하여," +
+      "WinningNumbers를 생성할 수 있으며" +
+      " 생성된 WinningNumbers가 input과 같은 번호를 갖는지 검증")
   void winningNumbersTest() {
     Set<Integer> lottoNumbers = Set.of(1, 2, 3, 4, 5, 6);
     int bonusNumber = 7;
@@ -27,7 +29,9 @@ public class WinningNumbersTest {
   }
 
   @Test
-  @DisplayName("1 ~ 45 내의 숫자가 들어왔는지 벨리데이션")
+  @DisplayName("당첨 번호 6개를 입력받고," +
+      "WinningNumbers를 생성 시" +
+      "입력 값이 1 ~ 45 내의 숫자가 아닌 경우 exception 테스트")
   void winningNumbersTest2() {
     Set<Integer> given = Set.of(100, 2, 3, 4, 5, 6);
     assertThatThrownBy(() -> LottoTicket.generate(given))
@@ -36,7 +40,9 @@ public class WinningNumbersTest {
   }
 
   @Test
-  @DisplayName("6개 숫자가 들어왔는지 벨리데이션")
+  @DisplayName("당첨 번호 10개를 입력받고," +
+      "WinningNumbers를 생성 시" +
+      "입력 값이 6개가 아닌 경우 exception 테스트")
   void winningNumbersTest3() {
     Set<Integer> given = Set.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     assertThatThrownBy(() -> LottoTicket.generate(given))
@@ -45,7 +51,9 @@ public class WinningNumbersTest {
   }
 
   @Test
-  @DisplayName("보너스 볼은 당첨 번호와 중복되면 안되므로 숫자 벨리데이션")
+  @DisplayName("당첨 번호 6개와 보너스 볼을 입력받고," +
+      "WinningNumbers를 생성 시" +
+      "보너스 볼과 당첨 번호가 중복되는 경우 exception 테스트")
   void winningNumbersTest4() {
     Set<Integer> winningNumbers = Set.of(1, 2, 3, 4, 5, 6);
     int bonusBallNumber = 6;
