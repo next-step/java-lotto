@@ -20,7 +20,7 @@ public class LottoList {
         this.lottos = lottos;
     }
 
-    public LottoResult getLottoResult(List<Integer> answerSheet) {
+    public LottoResult getLottoResult(AnswerSheet answerSheet) {
         return new LottoResult(lottos,answerSheet);
     }
 

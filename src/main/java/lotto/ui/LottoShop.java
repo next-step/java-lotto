@@ -1,5 +1,6 @@
 package lotto.ui;
 
+import lotto.domain.AnswerSheet;
 import lotto.domain.LottoList;
 import lotto.match.LottoResult;
 import lotto.prize.StandardPrizeRate;
@@ -26,7 +27,10 @@ public class LottoShop {
         System.out.println("지난 주 당첨 번호를 입력해주세요");
         String inputNumbers = scanner.nextLine();
         List<Integer> answerList = extractNumber(inputNumbers);
-        LottoResult lottoResult = lottoList.getLottoResult(answerList);
+        System.out.println("보너스 볼을 입력해주세요");
+        String bonusNumber = scanner.nextLine();
+
+        LottoResult lottoResult = lottoList.getLottoResult(new AnswerSheet(answerList,bonusNumber));
 
         System.out.println("당첨 통계");
         System.out.println("-------");

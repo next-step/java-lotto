@@ -1,5 +1,6 @@
 package lotto.match;
 
+import lotto.domain.AnswerSheet;
 import lotto.domain.Lotto;
 import lotto.prize.LottoPrize;
 import lotto.prize.PrizeRateStrategy;
@@ -13,7 +14,7 @@ public class LottoResult {
 
     private final Map<LottoPrize, Long> result;
 
-    public LottoResult(List<Lotto> lottos, List<Integer> answerSheet) {
+    public LottoResult(List<Lotto> lottos, AnswerSheet answerSheet) {
         this.result = LottoMatcher.matchLottoToPrize(lottos, answerSheet);
     }
 
