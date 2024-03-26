@@ -18,11 +18,7 @@ import static domain.lotto.properties.LottoProperties.LOTTO_PRICE;
 public class LottoController {
     private static final Money lottoMoney = new Money(LOTTO_PRICE);
 
-    /**
-     * 로또를 랜덤으로 구매한다.
-     *
-     * @param args
-     */
+
     public static void main(String[] args) {
         Money money = Money.from(LottoInputView.createMoneyView());
 
