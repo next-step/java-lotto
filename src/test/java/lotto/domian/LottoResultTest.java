@@ -16,7 +16,7 @@ class LottoResultTest {
         assertThat(lottoResult.getResultCount(LottoRank.THIRD)).isEqualTo(0);
         assertThat(lottoResult.getResultCount(LottoRank.SECOND)).isEqualTo(0);
         assertThat(lottoResult.getResultCount(LottoRank.FOURTH)).isEqualTo(0);
-        assertThat(lottoResult.getResultCount(LottoRank.NONE)).isEqualTo(0);
+        assertThat(lottoResult.getResultCount(LottoRank.MISS)).isEqualTo(0);
     }
 
     @Test

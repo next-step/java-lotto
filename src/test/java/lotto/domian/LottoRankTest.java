@@ -8,16 +8,23 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoRankTest {
     @Test
-    @DisplayName("매치카운트에 맞는 결과를 반환한다.")
-    void giveMatchCount_thenReturnLottoRank(){
-        LottoRank rank = LottoRank.valueOfMatchCount(5);
-        assertThat(rank).isEqualTo(LottoRank.SECOND);
+    @DisplayName("매치카운트가 5이고, 보너스볼이 false 면 3등")
+    void giveMatchCount5AndBonusIsFalse_thenThird(){
+        LottoRank rank = LottoRank.valueOfMatchCount(5, false);
+        assertThat(rank).isEqualTo(LottoRank.THIRD);
     }
 
     @Test
     @DisplayName("매치카운트가 0이면 꽝.")
-    void giveMaCountZero_thenReturnLottoRankNone(){
-        LottoRank rank = LottoRank.valueOfMatchCount(0);
-        assertThat(rank).isEqualTo(LottoRank.NONE);
+    void giveMatchCount_thenReturnLottoRankNone(){
+        LottoRank rank = LottoRank.valueOfMatchCount(0, false);
+        assertThat(rank).isEqualTo(LottoRank.MISS);
+    }
+
+    @Test
+    @DisplayName("매치카운트가 5이고, 보너스볼이 true  면 2등")
+    void giveMatchCount5AndBonusIsTrue_thenSecond(){
+        LottoRank rank = LottoRank.valueOfMatchCount(5, true);
+        assertThat(rank).isEqualTo(LottoRank.SECOND);
     }
 }
