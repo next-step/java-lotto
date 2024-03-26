@@ -4,7 +4,6 @@ import static calculator.config.CalculatorExceptionMessage.UNEXPECTED_EXCEPTION;
 
 import java.text.MessageFormat;
 
-import calculator.util.ExpressionParser;
 import calculator.view.io.Input;
 import calculator.view.io.Output;
 
@@ -21,10 +20,10 @@ public class CalculatorView {
         this.output = output;
     }
 
-    public String[] readExpressionTokens() {
+    public String readExpressionText() {
         output.printLine(EXPRESSION_INPUT_MESSAGE);
 
-        return ExpressionParser.parseToTokens(input.readLine());
+        return input.readLine();
     }
 
     public void printCalculationResult(final int result) {
