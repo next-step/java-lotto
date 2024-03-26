@@ -26,7 +26,8 @@ public enum LottoPrice {
     }
 
     public static LottoPrice findPrice(int count) {
-        return Arrays.stream(LottoPrice.values()).filter(item -> item.getCount() == count).findAny().orElse(NO);
+        return Arrays.stream(LottoPrice.values()).filter(item -> item.getCount() == count).findAny()
+            .orElse(NO);
     }
 
 }
