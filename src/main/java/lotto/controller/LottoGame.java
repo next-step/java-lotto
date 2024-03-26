@@ -5,44 +5,45 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoGame {
 
-    private static final int START_INCLUSIVE = 1;
-    private static final int END_INCLUSIVE = 45;
     private final InputView inputView;
     private final ResultView resultView;
     private final LottoStore lottoStore;
 
-    public LottoGame(InputView inputView, ResultView resultView) {
+    public LottoGame(InputView inputView, ResultView resultView, LottoStore lottoStore) {
         this.inputView = inputView;
         this.resultView = resultView;
-        List<Integer> lottoNumberPool = IntStream.rangeClosed(START_INCLUSIVE, END_INCLUSIVE)
-                .boxed()
-                .collect(Collectors.toList());
-        this.lottoStore = new LottoStore(new RandomLottoStrategy(lottoNumberPool));
+        this.lottoStore = lottoStore;
     }
 
     public void start() {
         Money money = initMoney();
 
-        PickedLottoNumbers pickedLottoNumbers = lottoStore.buy(money);
+        Lottos lottos = lottoStore.buy(money, new RandomLottoStrategy());
 
-        resultView.printPickedLottoNumbers(pickedLottoNumbers);
+        resultView.printPickedLottoNumbers(lottos);
 
-        LottoNumbers winningLotto = initLottoNumbers();
-        WinningInfo winningInfo = WinningInfo.of(pickedLottoNumbers, winningLotto);
+        Lotto winningLotto = initLottoNumbers();
+        LottoNumber bonusNumber = initBonusNumber();
+        WinningInfo winningInfo = WinningInfo.of(lottos, bonusNumber, winningLotto);
 
         resultView.printWinningStatic(winningInfo, money);
     }
 
-    private LottoNumbers initLottoNumbers() {
+    private Lotto initLottoNumbers() {
         resultView.printWinningLotto();
-
         List<Integer> inputLottoNumber = inputView.inputLottoNumber();
-        return new LottoNumbers(inputLottoNumber);
+
+        return new Lotto(inputLottoNumber);
+    }
+
+    private LottoNumber initBonusNumber() {
+        resultView.printBonusNumber();
+        int bonusNumber = inputView.inputBonusNumber();
+
+        return new LottoNumber(bonusNumber);
     }
 
     private Money initMoney() {

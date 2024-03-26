@@ -11,17 +11,14 @@ public class WinningInfo {
         this.winningInfo = winningInfo;
     }
 
-    public static WinningInfo of(PickedLottoNumbers pickedLottoNumbers, LottoNumbers winningNumbers) {
+    public static WinningInfo of(Lottos lottos, LottoNumber bonusNumber, Lotto winningLotto) {
         HashMap<Rank, Integer> winningInfo = new HashMap<>();
-        for (LottoNumbers pickedNumber : pickedLottoNumbers) {
-            Rank rank = Rank.findRank(compareLottoNumbers(pickedNumber, winningNumbers));
+
+        for (Lotto pickedLotto : lottos) {
+            Rank rank =  pickedLotto.getRank(winningLotto, bonusNumber);
             winningInfo.put(rank, winningInfo.getOrDefault(rank, 0) + 1);
         }
         return new WinningInfo(winningInfo);
-    }
-
-    private static int compareLottoNumbers(LottoNumbers pickedNumber, LottoNumbers winningNumbers) {
-        return pickedNumber.compare(winningNumbers);
     }
 
     public int totalWinningMoney() {

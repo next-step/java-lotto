@@ -3,13 +3,15 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final int MIN = 1;
-    private static final int MAX = 45;
+
+    public static final int START_INCLUSIVE = 1;
+    public static final int END_INCLUSIVE = 45;
+
     private final int number;
 
     public LottoNumber(int number) {
-        if (number < MIN || number > MAX) {
-            throw new IllegalArgumentException(String.format("%d부터 %d 사이의 정확한 숫자를 입력해주세요", MIN, MAX));
+        if (number < START_INCLUSIVE || number > END_INCLUSIVE) {
+            throw new IllegalArgumentException(String.format("%d부터 %d 사이의 정확한 숫자를 입력해주세요", START_INCLUSIVE, END_INCLUSIVE));
         }
         this.number = number;
     }
