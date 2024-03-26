@@ -2,6 +2,9 @@ package lotto.domain.strategy;
 
 import java.util.*;
 
+import static lotto.domain.LottoNo.LOTTO_MAX_NUMBER;
+import static lotto.domain.LottoNo.LOTTO_MIN_NUMBER;
+
 public class ShuffleStrategy implements LottoTicketCreateGenerator {
   private static final List<Integer> POSSIBLE_LOTTO_NUMBER_CANDIDATES = new ArrayList<>();
 

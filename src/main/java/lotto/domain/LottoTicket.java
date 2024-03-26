@@ -5,8 +5,8 @@ import lotto.domain.strategy.LottoTicketCreateGenerator;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static lotto.domain.strategy.LottoTicketCreateGenerator.LOTTO_MAX_NUMBER;
-import static lotto.domain.strategy.LottoTicketCreateGenerator.LOTTO_MIN_NUMBER;
+import static lotto.domain.LottoNo.LOTTO_MAX_NUMBER;
+import static lotto.domain.LottoNo.LOTTO_MIN_NUMBER;
 
 public class LottoTicket {
 
