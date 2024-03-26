@@ -8,7 +8,7 @@ public class BonusNum {
 
     public BonusNum(int bonusNum){
         checkBound(bonusNum);
-            this.value = bonusNum;
+        this.value = bonusNum;
     }
 
     private void checkBound(int input){

@@ -34,7 +34,7 @@ public class LottoMatchTest {
                 ()->assertThat(lottoMatch.getRankOfLotto().get(RankMatches.SECOND)).isEqualTo(1),
                 ()->assertThat(lottoMatch.getRankOfLotto().get(RankMatches.THIRD)).isEqualTo(1),
                 ()->assertThat(lottoMatch.getRankOfLotto().get(RankMatches.FOURTH)).isEqualTo(1)
-                );
+        );
 
     }
 }

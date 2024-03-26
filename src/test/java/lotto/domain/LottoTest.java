@@ -16,7 +16,7 @@ public class LottoTest {
     void num_lotto(){
         List<Integer> randomList = new ArrayList<>(Arrays.asList(1, 2, 3 , 4, 5));
         Assertions.assertThrows(IllegalArgumentException.class, () ->
-            new Lotto(randomList));
+                new Lotto(randomList));
     }
 
     @DisplayName("생성한 로또는 중복원소를 가지면 안된다.")
