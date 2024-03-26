@@ -64,8 +64,6 @@
 # Step3
 
 ## Todo
-- [ ] WinningNumber 클래스 이름 변경(WinningNumber => WinningLotto)
-- [ ] matchCount와 bonusCount를 구하는 부분을 WinningLotto에 메시지를 보내는 형태로 수정
 
 ## Done
 - [X] 보너스 당첨 여부에 따른 금액 계산((4개 일치, 당첨) -> 50000, (5개 일치, 당첨) -> 30000000, (5개 일치, 미당첨) -> 1500000, (6개 일치, 당첨) -> 2000000000)
@@ -76,3 +74,5 @@
 - [X] profit과 matchCache를 묶는 상위 클래스 하나 만들기
 - [X] LottoPricing에서 Map 키 값 만들어주는 부분 enum으로 분리
 - [X] LottoPricing에 lottoPricingMappingCache 부분 반복문이나 stream()으로 처리
+- [X] WinningNumber 클래스 이름 변경(WinningNumber => WinningLotto)
+- [X] matchCount와 bonusCount를 구하는 부분을 WinningLotto에 메시지를 보내는 형태로 수정

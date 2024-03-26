@@ -22,10 +22,9 @@ public class Lotto {
         }
     }
 
-    public void saveMatchResult(WinningNumber winningNumber, Match match) {
+    public void saveMatchResult(WinningLotto winningLotto, Match match) {
         this.lottoNumbers.forEach(iter -> {
-            int matchCount = iter.getMatchCount(winningNumber);
-            match.save(matchCount, iter.isBonusContains(winningNumber));
+            winningLotto.saveMatchInfo(iter, match);
         });
     }
 
