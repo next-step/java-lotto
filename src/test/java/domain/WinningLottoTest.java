@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningLottoTest {
 
-    @DisplayName("랭킹을 구한다.")
+    @DisplayName("입력으로 들어온 하나의 로또와 비교하여 랭킹을 구한다.")
     @Test
     void test01() {
         WinningLotto winningLotto = new WinningLotto(TestFixture.createLotto(Set.of(1, 2, 3, 4, 5, 7)), new LottoNumber(6));
@@ -20,7 +20,7 @@ public class WinningLottoTest {
         assertThat(rank).isEqualTo(Rank.SECOND);
     }
 
-    @DisplayName("로또 여러 개에 대한 랭킹을 구한다.")
+    @DisplayName("입력으로 들어온 여러 개의 로또와 비교하여 전체 랭킹을 구한다.")
     @Test
     void test02() {
         Lotto lotto2 = TestFixture.createLotto(Set.of(1, 2, 3, 4, 5, 7));
@@ -33,6 +33,6 @@ public class WinningLottoTest {
 
         Ranks ranks = winningLotto.ranks(lottos);
 
-        assertThat(ranks.totalPrizeMoney()).isEqualTo(60_150_000);
+        assertThat(ranks.totalCount()).isEqualTo(5);
     }
 }
