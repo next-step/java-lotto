@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -13,8 +14,11 @@ public class Lotto {
     public Integer countMatchNumbers(List<Integer> answerSheetNumbers) {
         return (int) answerSheetNumbers.stream().filter(numbers::contains).count();
     }
+    public boolean containsNumber(Integer number) {
+        return numbers.contains(number);
+    }
     @Override
     public String toString() {
-        return numbers.toString();
+        return numbers.stream().sorted().collect(Collectors.toList()).toString();
     }
 }
