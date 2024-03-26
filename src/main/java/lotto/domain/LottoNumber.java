@@ -11,14 +11,14 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     private void validate(int number) {
         if (number < MIN_VALUE || number > MAX_VALUE) {
-            throw new IllegalArgumentException("Lotto 숫자 범위는 1~45 입니다.");
+            throw new IllegalArgumentException(String.format("Lotto 숫자 범위는 %s~%s 입니다.", MIN_VALUE, MAX_VALUE));
         }
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override
