@@ -7,7 +7,7 @@ import lotto.common.LottoNumberGenerator;
 
 public class LottoShop {
 
-    private final Integer LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
     public List<LottoTicket> buyLotto(int money) {
         validate(money);
