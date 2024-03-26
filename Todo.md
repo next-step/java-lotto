@@ -58,12 +58,17 @@
 - [X] 코드 리뷰 적용 - Cash 매직넘버 분리 및 상태값 불변 변수로 수정
 - [X] 코드 리뷰 적용 - LottoPricing 에서 matchCount에 따른 value 값 캐싱
 - [X] 코드 리뷰 적용 - LottoGroup 2차원 배열 tickets 2개의 일급 컬렉션으로 분(List<Integer> -> LottoNumber, List<LottoNumber> -> Lotto) 
-- [X] 코드 리뷰 적용 - MatchCacheTest 내에서 system 출력으로 검증한 부분 수정
+- [X] 코드 리뷰 적용 d- MatchCacheTest 내에서 system 출력으로 검증한 부분 수정
 - [X] 코드 리뷰 적용 - LottoClient와 도메인에 퍼져있었던 입출력 로직들을 InputView, OutputView로 옮기기
 
 # Step3
 
 ## Todo
+- [ ] LottoPricing에서 Map 키 값 만들어주는 부분 enum으로 분리
+- [ ] LottoPricing에 lottoPricingMappingCache 부분 반복문이나 stream()으로 처리
+- [ ] WinningNumber 클래스 이름 변경(WinningNumber => WinningLotto)
+- [ ] matchCount와 bonusCount를 구하는 부분을 WinningLotto에 메시지를 보내는 형태로 수정
+
 
 ## Done
 - [X] 보너스 당첨 여부에 따른 금액 계산((4개 일치, 당첨) -> 50000, (5개 일치, 당첨) -> 30000000, (5개 일치, 미당첨) -> 1500000, (6개 일치, 당첨) -> 2000000000)
