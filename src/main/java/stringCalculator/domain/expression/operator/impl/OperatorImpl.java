@@ -1,38 +1,27 @@
 package stringCalculator.domain.expression.operator.impl;
 
-import stringCalculator.domain.expression.operator.Operator;
-import stringCalculator.error.ErrorMessage;
+import java.util.Arrays;
+import java.util.function.BinaryOperator;
+import stringCalculator.error.exception.DivideValueErrorException;
+import stringCalculator.error.exception.WhiteSpaceMissingException;
 
-public enum OperatorImpl implements Operator {
+public enum OperatorImpl {
 
-    ADD("+") {
-        @Override
-        public long calculate(long leftOperand, long rightOperand) {
-            return leftOperand + rightOperand;
-        }
-    }, MINUS("-") {
-        @Override
-        public long calculate(long leftOperand, long rightOperand) {
-            return leftOperand - rightOperand;
-        }
-    }, MULTIPLY("*") {
-        @Override
-        public long calculate(long leftOperand, long rightOperand) {
-            return leftOperand * rightOperand;
-        }
-    }, DIVIDE("/") {
-        @Override
-        public long calculate(long leftOperand, long rightOperand) {
+    PLUS("+", (leftOperand, rightOperand) -> leftOperand + rightOperand),
+    MINUS("-", (leftOperand, rightOperand) -> leftOperand - rightOperand),
+    MULTIPLY("*", (leftOperand, rightOperand) -> leftOperand * rightOperand),
+    DIVIDE("/", (leftOperand, rightOperand) -> {
             if (leftOperand % rightOperand != 0) {
-                throw new ArithmeticException(ErrorMessage.DIVIDE_VALUE_ERROR.getErrorMessage());
+                throw new DivideValueErrorException(leftOperand, rightOperand);
             }
             return leftOperand / rightOperand;
-        }
-    };
+        });
+    private final String symbol;
 
-    private final String operator;
+    private final BinaryOperator<Long> operator;
 
-    OperatorImpl(String operator) {
+    OperatorImpl(String symbol, BinaryOperator<Long> operator) {
+        this.symbol = symbol;
         this.operator = operator;
     }
 
@@ -43,8 +32,11 @@ public enum OperatorImpl implements Operator {
             .orElseThrow(() -> new WhiteSpaceMissingException(other));
     }
 
-    @Override
     public boolean isEqualsOperator(String other) {
-        return operator.equals(other);
+        return symbol.equals(other);
+    }
+
+    public Long calculate(long leftOperand, long rightOperand) {
+        return operator.apply(leftOperand, rightOperand);
     }
 }
