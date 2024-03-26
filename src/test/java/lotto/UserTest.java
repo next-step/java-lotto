@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.*;
 import lotto.utils.TestNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -25,8 +26,8 @@ public class UserTest {
     @DisplayName("로또 구매 테스트")
     @CsvSource(value = {"14000,14", "4000,4", "1000,1"}, delimiter = ',')
     void testPurchaseLotto(int price, int expected) {
-        User user = new User(mockLottoSeller);
-        user.purchaseLottos(price);
+        User user = new User();
+        user.purchaseLottos(mockLottoSeller, price);
         assertThat(user.getLottos()).hasSize(expected);
     }
 
@@ -34,16 +35,16 @@ public class UserTest {
     @DisplayName("올바르지 않은 가격으로 로또 살 때 테스트")
     @ValueSource(ints = {100, 1200, 12300})
     void testInvalidPurchase(int price) {
-        User user = new User(mockLottoSeller);
-        assertThatIllegalArgumentException().isThrownBy(() -> user.purchaseLottos(price));
+        User user = new User();
+        assertThatIllegalArgumentException().isThrownBy(() -> user.purchaseLottos(mockLottoSeller, price));
     }
 
     @ParameterizedTest
     @DisplayName("로또 수익률 및 결과 테스트")
     @MethodSource("getLottosAndRateOfReturn")
     void testRateOfReturn(WinningLotto winningLotto, int price, double expectedRateOfReturn, Map<LottoWinningRank, Integer> expectedLottoResultCount) {
-        User user = new User(mockLottoSeller);
-        user.purchaseLottos(price);
+        User user = new User();
+        user.purchaseLottos(mockLottoSeller, price);
         UserLottoResult userLottoResult = user.getUserLottoResult(winningLotto);
 
         assertThat(userLottoResult.getRateOfReturn()).isEqualTo(expectedRateOfReturn);
@@ -52,6 +53,22 @@ public class UserTest {
             assertThat(userLottoResult.getCountLottoResult(lottoResultCount.getKey())).isEqualTo(lottoResultCount.getValue());
         }
 
+    }
+
+    @Test
+    @DisplayName("로또 여러 번 구매 가능한 지 테스트")
+    void testPurchaseManyTimes() {
+        User user = new User();
+        int purchaseCount = 2;
+        int price  = purchaseCount * Lotto.PRICE;
+        int time = 3;
+
+        for (int i = 0; i < time; i++) {
+            user.purchaseLottos(mockLottoSeller, price);
+        }
+
+        assertThat(user.getLottos()).hasSize(time * purchaseCount);
+        assertThat(user.getPurchasePrice()).isEqualTo(price * time);
     }
 
     private static Stream<Arguments> getLottosAndRateOfReturn() {

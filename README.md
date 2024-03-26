@@ -40,5 +40,11 @@
 
 <br>
 
+## Step4 기능 목록
+
+- 사용자가 수동으로 추첨 번호를 입력할 수 있어야 한다.
+
+<br>
+
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)

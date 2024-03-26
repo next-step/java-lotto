@@ -9,7 +9,7 @@ public class WinningLotto {
 
     public WinningLotto(List<Integer> numbers, int bonusNumber) {
         this.lottoNumbers = new LottoNumbers(numbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.valueOf(bonusNumber);
 
         if (lottoNumbers.isContainNumber(this.bonusNumber)) {
             throw new IllegalArgumentException("[추첨 로또] 보너스 숫자가 중복됩니다.");
@@ -21,6 +21,6 @@ public class WinningLotto {
     }
 
     public LottoNumber getBonusNumber() {
-        return new LottoNumber(bonusNumber.getNumber());
+        return LottoNumber.valueOf(bonusNumber.getNumber());
     }
 }
