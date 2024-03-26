@@ -2,6 +2,9 @@ package lotto.domain;
 
 import lotto.constant.Constant;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,8 +12,9 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMatchTest {
-    @Test
-    void 매치() {
+    @ParameterizedTest
+    @CsvSource(value = {"5000:1", "50000:1", "1500000:0", "2000000000:1"}, delimiter = ':')
+    void 매치(int place, int matchCount) {
         Lottos lottos = new Lottos(
                 List.of(
                     new Lotto(List.of(1,2,3,7,8,9)),
@@ -21,9 +25,6 @@ public class LottoMatchTest {
         List<Integer> winNumbers = new Winning().createWinNumbers("1,2,3,4,5,6");
         HashMap<Integer, Integer> matchResult = LottoMatch.match(lottos, winNumbers);
 
-        assertThat(matchResult.get(Constant.FOURTH_PLACE)).isEqualTo(1);
-        assertThat(matchResult.get(Constant.THIRD_PLACE)).isEqualTo(1);
-        assertThat(matchResult.get(Constant.SECOND_PLACE)).isEqualTo(0);
-        assertThat(matchResult.get(Constant.FIRST_PLACE)).isEqualTo(1);
+        assertThat(matchResult.get(place)).isEqualTo(matchCount);
     }
 }

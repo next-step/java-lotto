@@ -25,7 +25,7 @@ public class LottoGeneratorTest {
         List<LottoNumber> checkDuplicate = lotto.stream()
                                                 .distinct()
                                                 .collect(Collectors.toList());
-        assertThat(checkDuplicate.size()).isEqualTo(lotto.size());
+        assertThat(checkDuplicate).hasSize(lotto.size());
     }
 
     @Test
