@@ -1,4 +1,4 @@
-package step2_lotto.constant;
+package lotto.constant;
 
 public class Constant {
     public static final long HIT_COUNT_3 = 3;

@@ -1,9 +1,9 @@
-package step2_lotto.domain;
+package lotto.domain;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static step2_lotto.constant.Constant.*;
+import static lotto.constant.Constant.*;
 
 public class WinningStatic {
     private static final int WINNING_THRESHOLD = 3;

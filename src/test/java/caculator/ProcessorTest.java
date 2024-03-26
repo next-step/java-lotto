@@ -1,10 +1,10 @@
-package step1_caculator;
+package caculator;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step1_caculator.domain.Calculator;
-import step1_caculator.domain.Processor;
+import caculator.domain.Calculator;
+import caculator.domain.Processor;
 
 import java.util.List;
 

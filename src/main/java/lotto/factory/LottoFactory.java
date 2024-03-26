@@ -1,6 +1,6 @@
-package step2_lotto.factory;
+package lotto.factory;
 
-import step2_lotto.domain.Lotto;
+import lotto.domain.Lotto;
 
 import java.util.Collections;
 import java.util.List;

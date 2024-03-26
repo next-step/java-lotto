@@ -1,11 +1,11 @@
-package step2_lotto;
+package lotto;
 
-import step2_lotto.domain.Lotto;
-import step2_lotto.domain.LottoStore;
-import step2_lotto.domain.Winner;
-import step2_lotto.domain.WinningStatic;
-import step2_lotto.view.InputView;
-import step2_lotto.view.OutputView;
+import lotto.domain.Lotto;
+import lotto.domain.LottoStore;
+import lotto.domain.Winner;
+import lotto.domain.WinningStatic;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 import java.util.List;
 

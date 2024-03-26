@@ -1,4 +1,4 @@
-package step2_lotto.domain;
+package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;

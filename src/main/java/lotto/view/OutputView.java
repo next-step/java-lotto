@@ -1,7 +1,7 @@
-package step2_lotto.view;
+package lotto.view;
 
-import step2_lotto.domain.Lotto;
-import step2_lotto.domain.WinningStatic;
+import lotto.domain.Lotto;
+import lotto.domain.WinningStatic;
 
 import java.util.List;
 

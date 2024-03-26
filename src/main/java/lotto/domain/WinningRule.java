@@ -1,8 +1,8 @@
-package step2_lotto.domain;
+package lotto.domain;
 
 import java.util.LinkedHashMap;
 
-import static step2_lotto.constant.Constant.*;
+import static lotto.constant.Constant.*;
 
 
 public class WinningRule {
