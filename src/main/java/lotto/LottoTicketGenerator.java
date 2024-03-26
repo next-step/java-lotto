@@ -6,6 +6,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketBall;
 
 public class LottoTicketGenerator {
+
     private static final int PRICE_PER_TICKET = 1000;
     private LottoTicketBall lottoTicketBall = new LottoTicketBall();
 

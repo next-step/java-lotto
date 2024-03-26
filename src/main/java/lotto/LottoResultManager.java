@@ -30,7 +30,7 @@ public class LottoResultManager {
 
     public double calculateReturnRate(Map<Integer, Integer> result, int purchaseAmount) {
         double winningMoney = calculateWinningMoney(result);
-        return winningMoney / purchaseAmount;
+        return Math.round(winningMoney / purchaseAmount * 100.0) / 100.0;
 
     }
 
