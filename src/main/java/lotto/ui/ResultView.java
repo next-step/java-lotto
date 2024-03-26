@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
@@ -13,7 +14,10 @@ public class ResultView {
     public void printPurchaseCount(List<LottoTicket> lottoTickets) {
         System.out.println(String.format("%s개를 구매했습니다.", lottoTickets.size()));
         for (LottoTicket lottoTicket : lottoTickets) {
-            System.out.println(String.format("[%s]", lottoTicket.toString()));
+            String displayNumbers = lottoTicket.getLottoNumbers().stream()
+                .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
+                .collect(Collectors.joining(", "));
+            System.out.println(String.format("[%s]", displayNumbers));
         }
     }
 

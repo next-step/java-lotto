@@ -20,10 +20,4 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
-    @Override
-    public String toString() {
-        return lottoNumbers.stream()
-            .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
-            .collect(Collectors.joining(", "));
-    }
 }
