@@ -36,14 +36,11 @@ public enum OperatorImpl implements Operator {
         this.operator = operator;
     }
 
-    public static Operator fromOperator(String other) {
-        for (Operator operator : OperatorImpl.values()) {
-            if (operator.isEqualsOperator(other)) {
-                return operator;
-            }
-        }
-        throw new RuntimeException(
-            new IllegalArgumentException(ErrorMessage.INPUT_VALUE_NOT_OPERATOR.getErrorMessage()));
+    public static OperatorImpl fromOperator(String other) {
+        return Arrays.stream(OperatorImpl.values())
+            .filter(operator -> operator.isEqualsOperator(other))
+            .findFirst()
+            .orElseThrow(() -> new WhiteSpaceMissingException(other));
     }
 
     @Override
