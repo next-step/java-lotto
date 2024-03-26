@@ -31,5 +31,4 @@ public class Calculator {
         }
         return Integer.parseInt(input);
     }
-
 }
