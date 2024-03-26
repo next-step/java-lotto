@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
 
-    @DisplayName("입력받은 로또 구입 금액만큼 로또를 발급한다.")
+    @DisplayName("전체 로또의 갯수를 구한다.")
     @Test
     void test01() {
         Lottos lottos = new Lottos(14000);
@@ -18,7 +18,7 @@ public class LottosTest {
         assertThat(lottos.lottoCount()).isEqualTo(14);
     }
 
-    @DisplayName("전체 로또 구입금액을 구한다.")
+    @DisplayName("전체 로또 가격을 구한다.")
     @Test
     void test02() {
         Lotto lotto0 = TestFixture.createLotto(Set.of(1, 2, 3, 4, 5, 6));
@@ -33,19 +33,20 @@ public class LottosTest {
         assertThat(totalPrice).isEqualTo(5_000);
     }
 
-    @DisplayName("수동으로 로또를 생성할 수 있다.")
+    @DisplayName("입력으로 들어온 로또 갯수를 제외한 나머지 금액만큼의 로또를 생성한다.")
     @Test
     void test03() {
-        Lottos lottos = new Lottos(3000, List.of(
+        Lottos lottos = new Lottos(5000, List.of(
                 () -> TestFixture.createLotto(Set.of(11, 12, 13, 14, 15, 16)),
                 () -> TestFixture.createLotto(Set.of(21, 22, 23, 24, 25, 26)),
                 () -> TestFixture.createLotto(Set.of(31, 32, 33, 34, 35, 36))
         ));
 
-        assertThat(lottos).containsExactly(
+        assertThat(lottos).contains(
                 TestFixture.createLotto(Set.of(11, 12, 13, 14, 15, 16)),
                 TestFixture.createLotto(Set.of(21, 22, 23, 24, 25, 26)),
                 TestFixture.createLotto(Set.of(31, 32, 33, 34, 35, 36))
         );
+        assertThat(lottos.lottoCount()).isEqualTo(5);
     }
 }
