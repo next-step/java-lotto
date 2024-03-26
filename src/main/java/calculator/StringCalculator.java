@@ -3,6 +3,24 @@ package calculator;
 import java.util.Objects;
 
 public class StringCalculator {
+
+    public static int calculate(String input) {
+        String[] inputArray = splitWithSpace(input);
+        int numberA = Integer.parseInt(inputArray[0]);
+        int numberB;
+        for(int index = 1; index < inputArray.length; index = index + 2){
+            numberB = Integer.parseInt(inputArray[index + 1]);
+            if(inputArray[index].equals(MathSign.PLUS.sign()))
+                numberA = sum(numberA,numberB);
+            if(inputArray[index].equals(MathSign.MINUS.sign()))
+                numberA = difference(numberA,numberB);
+            if(inputArray[index].equals(MathSign.MULTIPLY.sign()))
+                numberA = product(numberA,numberB);
+            if(inputArray[index].equals(MathSign.DIVIDE.sign()))
+                numberA = quotient(numberA,numberB);
+        }
+        return numberA;
+    }
     public static int sum(int numberA,
                           int numberB) {
         return numberA + numberB;
