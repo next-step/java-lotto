@@ -30,6 +30,6 @@ public class OutputView {
 
     public void displayWinningMoney(double returnRate) {
 
-        System.out.printf("총 수익률은 %.3f입니다", returnRate);
+        System.out.printf("총 수익률은 %.2f입니다", returnRate);
     }
 }
