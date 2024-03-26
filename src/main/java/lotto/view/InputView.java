@@ -62,7 +62,7 @@ public class InputView {
     }
 
     private static void validateNumberOfManualLottoToPurchaseInput(String numberOfManualLottoToPurchaseInput) {
-        if(!isIntegerGreaterThanOrEqualToZero(numberOfManualLottoToPurchaseInput)) {
+        if (!isIntegerGreaterThanOrEqualToZero(numberOfManualLottoToPurchaseInput)) {
             throw new InvalidNumberOfManualLottoToPurchase(numberOfManualLottoToPurchaseInput);
         }
     }

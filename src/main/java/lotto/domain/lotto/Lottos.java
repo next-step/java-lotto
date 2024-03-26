@@ -55,6 +55,7 @@ public class Lottos {
     public int numberOfLottos() {
         return lottos.size();
     }
+
     public List<Lotto> lottos() {
         return Collections.unmodifiableList(lottos);
     }

@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.WinningNumbers;
 import lotto.exception.InvalidLottoException;
 
@@ -20,7 +21,7 @@ public class Lotto {
         int sizeOfLottoNumbers = lottoNumbers.size();
         int sizeOfLottoNumbersSet = new HashSet<>(lottoNumbers).size();
 
-        if(sizeOfLottoNumbers != sizeOfLottoNumbersSet || sizeOfLottoNumbers != LOTTO_NUMBER_SIZE) {
+        if (sizeOfLottoNumbers != sizeOfLottoNumbersSet || sizeOfLottoNumbers != LOTTO_NUMBER_SIZE) {
             throw new InvalidLottoException();
         }
     }
@@ -37,5 +38,9 @@ public class Lotto {
 
     public List<LottoNumber> lottoNumbers() {
         return lottoNumbers;
+    }
+
+    public boolean contains(BonusNumber bonusNumber) {
+        return bonusNumber.isMatched(lottoNumbers);
     }
 }

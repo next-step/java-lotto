@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.WinningNumbers;
 import lotto.exception.InvalidLottoException;
 import org.junit.jupiter.api.DisplayName;
@@ -55,5 +56,19 @@ class LottoTest {
         Lotto lotto = Lotto.valueOf(lottoNumbers);
 
         assertThat(lotto.countOfMatch(winningNumbers)).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "2:false"}, delimiter = ':')
+    @DisplayName("contains(): bonusNumber가 Lotto.lottoNumbers에 포함되어 있는 경우 true 그렇지 않는 경우 false를 반환한다.")
+    void testContains(int bonusNumberInput, boolean expected) {
+        List<LottoNumber> lottoNumbers = Stream.of(1, 3, 5, 7, 9, 11)
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
+
+        Lotto lotto = Lotto.valueOf(lottoNumbers);
+        BonusNumber bonusNumber = new BonusNumber(LottoNumber.valueOf(bonusNumberInput));
+
+        assertThat(lotto.contains(bonusNumber)).isEqualTo(expected);
     }
 }

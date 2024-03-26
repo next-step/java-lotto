@@ -15,8 +15,7 @@ public class WinningAndBonusNumbers {
         return new WinningAndBonusNumbers(winningNumbers, bonusNumber);
     }
 
-
     public Rank rankOfLotto(Lotto lotto) {
-        return Rank.findRank(lotto.countOfMatch(winningNumbers), bonusNumber.isMatched(lotto.lottoNumbers()));
+        return Rank.findRank(lotto.countOfMatch(winningNumbers), lotto.contains(bonusNumber));
     }
 }

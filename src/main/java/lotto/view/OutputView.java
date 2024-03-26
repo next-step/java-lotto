@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static lotto.domain.Rank.MISS;
-import static lotto.domain.Rank.SECOND;
 
 public class OutputView {
     private static final String NUMBER_OF_LOTTO_TO_PURCHASE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
@@ -83,7 +82,7 @@ public class OutputView {
     }
 
     private static String winningStaticsMessageFormat(Rank rank) {
-        if(rank == SECOND) {
+        if (rank.isSecond()) {
             return WINNING_STATISTICS_MESSAGE_FOR_BONUS;
         }
 

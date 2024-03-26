@@ -24,7 +24,7 @@ public class WinningNumbers {
         int sizeOfWinningNumbers = winningNumbers.size();
         int sizeOfWinningNumbersSet = new HashSet<>(winningNumbers).size();
 
-        if(sizeOfWinningNumbers != sizeOfWinningNumbersSet || sizeOfWinningNumbers != LOTTO_NUMBER_SIZE) {
+        if (sizeOfWinningNumbers != sizeOfWinningNumbersSet || sizeOfWinningNumbers != LOTTO_NUMBER_SIZE) {
             throw new InvalidWinningNumbersException();
         }
     }

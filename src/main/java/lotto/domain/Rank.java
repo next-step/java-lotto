@@ -40,4 +40,8 @@ public enum Rank {
     public int winningMoney() {
         return winningMoney;
     }
+
+    public boolean isSecond() {
+        return this == SECOND;
+    }
 }

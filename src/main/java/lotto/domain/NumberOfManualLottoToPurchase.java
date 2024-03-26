@@ -11,7 +11,7 @@ public class NumberOfManualLottoToPurchase {
     }
 
     private void validateNumberOfManualLottoToPurchase(int numberOfManualLottoToPurchase, int maximumNumberOfManualLottoToPurchase) {
-        if(numberOfManualLottoToPurchase < 0 || numberOfManualLottoToPurchase > maximumNumberOfManualLottoToPurchase) {
+        if (numberOfManualLottoToPurchase < 0 || numberOfManualLottoToPurchase > maximumNumberOfManualLottoToPurchase) {
             throw new InvalidNumberOfManualLottoToPurchase(numberOfManualLottoToPurchase);
         }
     }
