@@ -32,7 +32,7 @@ public class LottoGenerator {
 
     public static Lottos lotteryTickets(int count) {
         List<Lotto> lottoList = new ArrayList<>();
-        
+
 
         IntStream.range(0, count)
                 .forEach((index) -> lottoList.add(new Lotto(shuffleNumbers())));
