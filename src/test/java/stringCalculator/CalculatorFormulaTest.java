@@ -1,10 +1,8 @@
 package stringCalculator;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,7 +18,7 @@ public class CalculatorFormulaTest {
     public void CalculationFormula_Should_Occur_Exception_When_Input_Empty_String()
         throws Exception {
         //given
-        String input = "2+3*4/2";
+        String input = "2+3*4/2" ;
 
         //when
         IllegalArgumentException actual = catchThrowableOfType(
@@ -36,7 +34,7 @@ public class CalculatorFormulaTest {
     public void CalculationFormula_Contain_One_Space_And_Consist_Numbers_And_Operators()
         throws Exception {
         //given
-        String input = "2 * 3 + 4 + 5";
+        String input = "2 * 3 + 4 + 5" ;
         int expected = 7;
 
         //when
