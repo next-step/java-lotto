@@ -8,6 +8,10 @@ public final class LottoNumber {
         this.value = value;
     }
 
+    public int getValue() {
+        return value;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) {
@@ -23,10 +27,5 @@ public final class LottoNumber {
     @Override
     public int hashCode() {
         return value;
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(value);
     }
 }

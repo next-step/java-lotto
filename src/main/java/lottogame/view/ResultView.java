@@ -3,7 +3,8 @@ package lottogame.view;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lottogame.domain.Lotto;
+import lottogame.domain.LottoNumber;
+import lottogame.domain.Lottos;
 import lottogame.domain.Rank;
 
 public class ResultView {
@@ -13,13 +14,13 @@ public class ResultView {
     private static final String RETURN_OF_RATE_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.";
     private static final String RETURN_OF_RATE_MESSAGE_INFORMATION = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public static void printLottos(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto);
+    public static void printLottos(List<Lottos> lottoses) {
+        for (Lottos lottos : lottoses) {
+            printLottos(lottos);
         }
     }
 
-    public static void printCountOfPurchaseLottos(List<Lotto> lottos) {
+    public static void printCountOfPurchaseLottos(List<Lottos> lottos) {
         System.out.println(String.format(MESSAGE_COUNT_OF_PURCHASE_LOTTOS, lottos.size()));
     }
 
@@ -52,5 +53,15 @@ public class ResultView {
             System.out.println(String.format(RANKS_FORMAT, rank.getNumOfWinnings(), rank.getPrize(),
                     result.getOrDefault(rank, 0)));
         }
+    }
+
+    private static void printLottos(Lottos lottos) {
+        List<LottoNumber> numbers = lottos.getNumbers();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (LottoNumber number : numbers) {
+            stringBuilder.append(number.getValue()).append(", ");
+        }
+        System.out.println("["+stringBuilder.toString().replaceAll(", $", "")+"]");
     }
 }

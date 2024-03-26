@@ -1,0 +1,58 @@
+package lottogame.domain;
+
+import java.util.Objects;
+
+public final class Number {
+
+    private final int value;
+
+    private Number(final int value) {
+        this.value = value;
+    }
+
+    public static Number from(final int number) {
+        return new Number(number);
+    }
+
+    public Number divide(Number number) {
+        return new Number(value / number.value);
+    }
+
+    public Number add(Number number) {
+        return new Number(value + number.value);
+    }
+
+    public boolean isPositive() {
+        return value > 0;
+    }
+
+    public Number decrease() {
+        return new Number(value - 1);
+    }
+
+    public double convertValueToDouble() {
+        return value;
+    }
+
+    public Number multiply(Number count) {
+        return new Number(value * count.value);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Number)) {
+            return false;
+        }
+        Number number = (Number) o;
+        return value == number.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+}

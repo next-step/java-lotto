@@ -12,17 +12,17 @@ public class LottoFactory {
         this.numberGenerator = numberGenerator;
     }
 
-    public List<Lotto> createLottos(int money, int price) {
-        int count = money / price;
-        List<Lotto> lottos = new ArrayList<>();
-        while (count > 0) {
-            lottos.add(createLotto(this.numberGenerator.generate()));
-            count--;
+    public List<Lottos> createLottoses(Number number, Number price) {
+        Number count = number.divide(price);
+        List<Lottos> lottoses = new ArrayList<>();
+        while (count.isPositive()) {
+            lottoses.add(createLotto(this.numberGenerator.generate()));
+            count = count.decrease();
         }
-        return lottos;
+        return lottoses;
     }
 
-    public Lotto createLotto(List<Integer> numbers) {
-        return new Lotto(numbers);
+    public Lottos createLotto(List<Integer> numbers) {
+        return new Lottos(numbers);
     }
 }
