@@ -6,8 +6,8 @@ import java.util.Objects;
 
 class LottoNumber {
 
-    static final int MINIMUM = 1;
-    static final int MAXIMUM = 45;
+    static final int MINIMUM_LOTTO_NUMBER = 1;
+    static final int MAXIMUM_LOTTO_NUMBER = 45;
 
     private final int value;
 
@@ -22,7 +22,7 @@ class LottoNumber {
     }
 
     private static void validateLottoNumberIsInRange(final int value) {
-        if (value < MINIMUM || value > MAXIMUM) {
+        if (value < MINIMUM_LOTTO_NUMBER || value > MAXIMUM_LOTTO_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_MUST_BE_IN_VALID_RANGE.message(value));
         }
     }
