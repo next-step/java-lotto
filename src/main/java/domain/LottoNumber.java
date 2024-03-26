@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber> {
+public class LottoNumber {
 
     private static List<Integer> values;
 
@@ -47,10 +47,5 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int hashCode() {
         return Objects.hash(value);
-    }
-
-    @Override
-    public int compareTo(LottoNumber o) {
-        return Integer.compare(this.value, o.value);
     }
 }
