@@ -30,16 +30,7 @@ public class LottoController {
         int numbersOfLotto = price.calculateNumberOfLotto(); //로또 갯수 계샨
 
         resultView.printInputNumbersOfManualLotto();
-        int numbersOfManualLotto = inputView.inputNumber();
-        if (numbersOfManualLotto > numbersOfLotto) {
-            throw new IllegalArgumentException(String.format("수동으로 구매할 로또 수가 총 로또 수(%s)보다 많습니다.", numbersOfLotto));
-        }
-
-        if (numbersOfManualLotto < 0) {
-            throw new IllegalArgumentException("수동으로 구매할 로또 수는 음수가 될 수 없습니다.");
-        }
-        inputView.inputNextLine();
-
+        int numbersOfManualLotto = generateNumbersOfManualLotto(numbersOfLotto);
         int numbersOfAutoLotto = numbersOfLotto - numbersOfManualLotto;
 
         resultView.printInputManualLottoNumbers();
@@ -63,6 +54,19 @@ public class LottoController {
                 , price
                 , new BonusBall(inputView.inputNumber())
         );
+    }
+
+    private int generateNumbersOfManualLotto(int numbersOfLotto) {
+        int numbersOfManualLotto = inputView.inputNumber();
+        if (numbersOfManualLotto > numbersOfLotto) {
+            throw new IllegalArgumentException(String.format("수동으로 구매할 로또 수가 총 로또 수(%s)보다 많습니다.", numbersOfLotto));
+        }
+
+        if (numbersOfManualLotto < 0) {
+            throw new IllegalArgumentException("수동으로 구매할 로또 수는 음수가 될 수 없습니다.");
+        }
+        inputView.inputNextLine();
+        return numbersOfManualLotto;
     }
 
     private void generateManualLotto(int numbersOfManualLotto, LottoMachine lottoMachine) {
