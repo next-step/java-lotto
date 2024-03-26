@@ -1,6 +1,9 @@
 package lotto.domain.lotto;
 
+import lotto.domain.rank.BonusMatch;
+import lotto.domain.rank.LottoMatchCount;
 import lotto.domain.rank.Rank;
+import lotto.error.ErrorCode;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,14 +29,14 @@ public class Lotto {
 
     private void assertNumbersLength(List<LottoNumber> numbers) {
         if (numbers == null || numbers.isEmpty() || numbers.size() != NUMBER_LENGTH) {
-            throw new IllegalArgumentException("로또는 6개의 숫자가 필요합니다.");
+            throw new IllegalArgumentException(ErrorCode.LOTTO_NEEDS_SIX_NUMBERS.message());
         }
     }
 
     private void assertNumbersNotDuplicated(List<LottoNumber> numbers) {
         int distinctCount = (int) numbers.stream().distinct().count();
         if (distinctCount != NUMBER_LENGTH) {
-            throw new IllegalArgumentException("중복되지 않는 번호를 입력해주세요.");
+            throw new IllegalArgumentException(ErrorCode.LOTTO_DUPLICATED_NUMBERS.message());
         }
     }
 
@@ -43,7 +46,7 @@ public class Lotto {
 
     public Rank rank(WinningLotto winningLotto) {
         final LottoMatchCount matchCount = matchCount(winningLotto.numbers());
-        final boolean bonusMatch = contains(winningLotto.bonusNumber());
+        final BonusMatch bonusMatch = new BonusMatch(contains(winningLotto.bonusNumber()));
         return Rank.valueOf(matchCount, bonusMatch);
     }
 

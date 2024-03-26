@@ -1,7 +1,8 @@
 package lotto;
 
-import lotto.domain.Cash;
-import lotto.domain.LotteryShop;
+import lotto.domain.purchase.Amount;
+import lotto.domain.purchase.Cash;
+import lotto.domain.purchase.LotteryShop;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
@@ -29,9 +30,21 @@ public class LottoPlayer {
     }
 
     private Lottos purchaseLotto(Cash cash) {
-        final Lottos lottos = LotteryShop.purchase(cash);
-        OutputView.printPurchasedLottos(lottos);
-        return lottos;
+        final Amount manualAmount = new Amount(InputView.manualAmount());
+        Cash change = LotteryShop.purchaseManualAndChange(cash, manualAmount);
+
+        final Lottos manuals = exchangeManualLottoNumbers(manualAmount);
+        final Lottos autos = LotteryShop.purchaseAuto(change);
+
+        OutputView.printPurchasedLottos(manuals, autos);
+
+        return manuals.concat(autos);
+    }
+
+    private Lottos exchangeManualLottoNumbers(Amount amount) {
+        return InputView.manualNumbers(amount)
+                .map(LotteryShop::exchangeNumbersToLottos)
+                .orElseGet(Lottos::new);
     }
 
     private WinningLotto winningLotto() {
@@ -41,11 +54,11 @@ public class LottoPlayer {
         return new WinningLotto(lastWeekWinningNumbers, bonusNumber);
     }
 
-    private void printResult(Ranks ranks, Cash cash) {
+    private void printResult(Ranks ranks, Cash spentCash) {
         final WinningStatistics statistics = new WinningStatistics(ranks);
         OutputView.printWinningCounts(statistics);
 
-        final RateOfReturn rateOfReturn = statistics.rateOfReturn(cash);
+        final RateOfReturn rateOfReturn = statistics.rateOfReturn(spentCash);
         OutputView.printRateOfReturn(rateOfReturn);
     }
 

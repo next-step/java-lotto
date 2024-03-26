@@ -1,7 +1,6 @@
 package lotto.domain.rank;
 
-import lotto.domain.lotto.LottoMatchCount;
-import lotto.domain.rank.Rank;
+import lotto.error.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -26,7 +25,7 @@ public class RankTest {
         @ParameterizedTest(name = "{index}번째 테스트: 숫자가 {0}개 일치하고 보너스 당첨여부가 {1}면, {2}")
         @MethodSource("rankByMatchCount")
         void it_returns_rank_when_less_than_six(int matchCount, boolean bonusMatch, Rank expectedRank) {
-            assertThat(Rank.valueOf(new LottoMatchCount(matchCount), bonusMatch))
+            assertThat(Rank.valueOf(matchCount, bonusMatch))
                     .isEqualTo(expectedRank);
         }
 
@@ -34,7 +33,8 @@ public class RankTest {
         @Test
         void it_throws_illegalArgumentException_when_greater_than_six() {
             assertThatIllegalArgumentException()
-                    .isThrownBy(() -> Rank.valueOf(new LottoMatchCount(7), false));
+                    .isThrownBy(() -> Rank.valueOf(7, false))
+                    .withMessage(ErrorCode.RANK_OVER_MAX_MATCH_COUNT.message());
         }
 
         Stream<Arguments> rankByMatchCount() {

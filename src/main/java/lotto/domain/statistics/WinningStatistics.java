@@ -1,6 +1,6 @@
 package lotto.domain.statistics;
 
-import lotto.domain.Cash;
+import lotto.domain.purchase.Cash;
 import lotto.domain.rank.Rank;
 import lotto.domain.rank.Ranks;
 
@@ -36,11 +36,11 @@ public class WinningStatistics {
     }
 
     private Cash earned() {
-        return new Cash(
-                ranks.entrySet()
-                    .stream()
-                    .mapToLong(entry -> entry.getKey().winnings() * entry.getValue().value())
-                    .sum());
+        return ranks.entrySet()
+                .stream()
+                .map(entry -> entry.getKey().winnings().multiply(entry.getValue().value()))
+                .reduce(Cash::sum)
+                .orElse(new Cash());
     }
 
 }

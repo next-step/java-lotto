@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import lotto.domain.purchase.Amount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -26,7 +27,7 @@ public class AutoLottoGeneratorTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2})
     void tickets(int amount) {
-        final Lottos lottos = AutoLottoGenerator.tickets(amount);
+        final Lottos lottos = AutoLottoGenerator.tickets(new Amount(amount));
         assertThat(lottos.size()).isEqualTo(amount);
     }
 

@@ -1,8 +1,10 @@
 package lotto.domain.rank;
 
-import lotto.domain.lotto.LottoMatchCount;
+import lotto.domain.purchase.Cash;
+import lotto.error.ErrorCode;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,17 +17,19 @@ public enum Rank {
     NEXT_CHANCE(0, false, 0L),
     ;
 
-    private final LottoMatchCount matchCount;
-    private final boolean needBonusMatch;
-    private final long winnings;
+    private final MatchCondition matchCondition;
+    private final Cash winnings;
 
     Rank(int matchCount, boolean needBonusMatch, long winnings) {
-        this.matchCount = new LottoMatchCount(matchCount);
-        this.needBonusMatch = needBonusMatch;
-        this.winnings = winnings;
+        this.matchCondition = new MatchCondition(matchCount, needBonusMatch);
+        this.winnings = new Cash(winnings);
     }
 
-    public static Rank valueOf(LottoMatchCount matchCount, boolean bonusMatch) {
+    public static Rank valueOf(int matchCount, boolean bonusMatch) {
+        return valueOf(new LottoMatchCount(matchCount), new BonusMatch(bonusMatch));
+    }
+
+    public static Rank valueOf(LottoMatchCount matchCount, BonusMatch bonusMatch) {
         assertMatchCountLessThanFirstPrize(matchCount);
 
         return Arrays.stream(values())
@@ -36,42 +40,35 @@ public enum Rank {
 
     public static List<Rank> winRanks() {
         return Arrays.stream(values())
-                .filter(type -> type.winnings > 0L)
-                .sorted((a, b) -> Long.compare(a.winnings, b.winnings))
+                .filter(Rank::isWinningsGreaterThanZero)
+                .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
     }
 
     private static void assertMatchCountLessThanFirstPrize(LottoMatchCount matchCount) {
-        if (FIRST.matchCount.smallerThan(matchCount)) {
-            throw new IllegalArgumentException("로또는 그 이상의 당첨이 불가능할텐데요.");
+        if (FIRST.matchCondition.smallerMatchCountThan(matchCount)) {
+            throw new IllegalArgumentException(ErrorCode.RANK_OVER_MAX_MATCH_COUNT.message());
         }
     }
 
-    public int matchCount() {
-        return this.matchCount.value();
+    private boolean match(LottoMatchCount matchCount, BonusMatch bonusMatch) {
+        return this.matchCondition.match(matchCount, bonusMatch);
     }
 
-    public long winnings() {
+    private boolean isWinningsGreaterThanZero() {
+        return this.winnings.greaterThanZero();
+    }
+
+    public int matchCount() {
+        return this.matchCondition.matchCount();
+    }
+
+    public Cash winnings() {
         return this.winnings;
     }
 
     public boolean needBonusMatch() {
-        return this.needBonusMatch;
-    }
-
-    private boolean match(LottoMatchCount matchCount, boolean bonusMatch) {
-        if (this.needBonusMatch) {
-            return countMatch(matchCount) && bonusMatch(bonusMatch);
-        }
-        return countMatch(matchCount);
-    }
-
-    private boolean countMatch(LottoMatchCount matchCount) {
-        return this.matchCount.equals(matchCount);
-    }
-
-    private boolean bonusMatch(boolean bonusMatch) {
-        return this.needBonusMatch && bonusMatch;
+        return this.matchCondition.needBonusMatch();
     }
 
 }

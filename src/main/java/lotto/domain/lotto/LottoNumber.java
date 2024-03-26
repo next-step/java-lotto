@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import lotto.error.ErrorCode;
+
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -23,7 +25,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void assertNumberInRange(int value) {
         if (value < MIN || MAX < value) {
-            throw new IllegalArgumentException("로또는 1부터 45까지의 숫자만 선택할 수 있습니다.");
+            throw new IllegalArgumentException(ErrorCode.LOTTO_INVALID_NUMBER.message());
         }
     }
 
