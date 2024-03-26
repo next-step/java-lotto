@@ -1,6 +1,6 @@
 package lotto.domain.rank;
 
-import lotto.domain.Cash;
+import lotto.domain.purchase.Cash;
 
 import java.util.Arrays;
 import java.util.Comparator;

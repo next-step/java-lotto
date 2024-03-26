@@ -1,5 +1,8 @@
-package lotto.domain;
+package lotto.domain.purchase;
 
+import lotto.domain.purchase.Amount;
+import lotto.domain.purchase.Cash;
+import lotto.domain.purchase.LotteryShop;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

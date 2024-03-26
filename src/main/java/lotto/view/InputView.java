@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Amount;
+import lotto.domain.purchase.Amount;
 import utils.Splitter;
 import utils.StringUtils;
 

@@ -1,6 +1,6 @@
 package lotto.domain.statistics;
 
-import lotto.domain.Cash;
+import lotto.domain.purchase.Cash;
 import lotto.domain.rank.Rank;
 import lotto.domain.rank.Ranks;
 

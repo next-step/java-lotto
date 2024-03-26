@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.purchase;
 
 import lotto.domain.lotto.AutoLottoGenerator;
 import lotto.domain.lotto.Lottos;

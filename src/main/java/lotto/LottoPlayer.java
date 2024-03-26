@@ -1,8 +1,8 @@
 package lotto;
 
-import lotto.domain.Amount;
-import lotto.domain.Cash;
-import lotto.domain.LotteryShop;
+import lotto.domain.purchase.Amount;
+import lotto.domain.purchase.Cash;
+import lotto.domain.purchase.LotteryShop;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
