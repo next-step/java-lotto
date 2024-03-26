@@ -1,6 +1,7 @@
 package calculator;
 
 import inputview.InputView;
+import outputview.OutputView;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -9,26 +10,24 @@ import java.util.List;
 
 public class Calculator {
     InputView inputView;
+    OutputView outputView;
 
     public Calculator() {
         inputView = new InputView();
+        outputView = new OutputView();
     }
 
     public CalculationMethod checkOperator(String operator) {
-        if (operator.equals("+"))
-        {
+        if (operator.equals("+")) {
             return new Sum();
         }
-        if (operator.equals("-"))
-        {
+        if (operator.equals("-")) {
             return new Subtraction();
         }
-        if (operator.equals("*"))
-        {
+        if (operator.equals("*")) {
             return new Multiplication();
         }
-        if (operator.equals("/"))
-        {
+        if (operator.equals("/")) {
             return new Division();
         }
         throw new IllegalArgumentException("문자열 입력이 잘못되었습니다. 입력 가능한 연산자값은 +, -, *, /입니다.");
@@ -56,6 +55,8 @@ public class Calculator {
             result = operators.get(i).calculate(String.valueOf(result), operands.get(i + 1));
         }
 
+        outputView.printOutput(result);
+
         return result;
     }
 
@@ -73,6 +74,8 @@ public class Calculator {
         for (int i = 1; i < (operators.size()); i++) {
             result = operators.get(i).calculate(String.valueOf(result), operands.get(i + 1));
         }
+
+        outputView.printOutput(result);
 
         return result;
     }

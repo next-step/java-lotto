@@ -18,6 +18,6 @@ public class CalculatorMain {
         }
 */
         Calculator calculator = new Calculator();
-        System.out.println(calculator.calculate());
+        calculator.calculate();
     }
 }

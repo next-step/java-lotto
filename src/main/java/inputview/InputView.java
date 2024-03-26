@@ -59,8 +59,7 @@ public class InputView {
         for (int i = 0; i < operatorStringArray.length; i++) {
             operatorsTest.remove(operatorStringArray[i]);
         }
-        if ( !operatorsTest.isEmpty() )
-        {
+        if (!operatorsTest.isEmpty()) {
             throw new IllegalArgumentException("문자열 계산기 입력값이 잘못되었습니다. 입력예시: 2 + 3 * 4 / 5");
         }
     }
