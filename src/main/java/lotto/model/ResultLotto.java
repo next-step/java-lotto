@@ -20,7 +20,7 @@ public class ResultLotto {
         return (double) getWinningAmount() / (lottos.size() * LOTTO_PRICE);
     }
 
-    public List<List<Integer>> getLottosNumbers() {
+    public List<Numbers> getLottosNumbers() {
         return lottos.stream()
                 .map(lotto -> lotto.getNumbers())
                 .collect(Collectors.toList());

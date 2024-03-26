@@ -1,6 +1,7 @@
 package lottoTest;
 
 import lotto.model.Lotto;
+import lotto.model.Numbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -15,7 +16,7 @@ public class LottoTest {
 
     @ParameterizedTest(name = "{1} 로또는 {1} 값을 리스트 반환")
     @MethodSource("generateLotto")
-    void lottoGetNumbersTest(Lotto lotto, List<Integer> numbers) {
+    void lottoGetNumbersTest(Lotto lotto, Numbers numbers) {
         Assertions.assertThat(lotto.getNumbers()).isEqualTo(numbers);
     }
 
@@ -44,11 +45,11 @@ public class LottoTest {
 
     private static Stream<Arguments> generateLotto() {
         return Stream.of(
-                Arguments.arguments(givenLotto(givenNumbers(1, 2, 3, 4, 5, 6)), givenNumbers(1, 2, 3, 4, 5, 6)),
-                Arguments.arguments(givenLotto(givenNumbers(2, 3, 4, 5, 6, 7)), givenNumbers(2, 3, 4, 5, 6, 7)),
-                Arguments.arguments(givenLotto(givenNumbers(3, 4, 5, 6, 7, 8)), givenNumbers(3, 4, 5, 6, 7, 8)),
-                Arguments.arguments(givenLotto(givenNumbers(4, 5, 6, 7, 8, 9)), givenNumbers(4, 5, 6, 7, 8, 9)),
-                Arguments.arguments(givenLotto(givenNumbers(5, 6, 7, 8, 9, 10)), givenNumbers(5, 6, 7, 8, 9, 10))
+                Arguments.arguments(givenLotto(givenNumbers(1, 2, 3, 4, 5, 6)), Numbers.valueOf(givenNumbers(1, 2, 3, 4, 5, 6))),
+                Arguments.arguments(givenLotto(givenNumbers(2, 3, 4, 5, 6, 7)), Numbers.valueOf(givenNumbers(2, 3, 4, 5, 6, 7))),
+                Arguments.arguments(givenLotto(givenNumbers(3, 4, 5, 6, 7, 8)), Numbers.valueOf(givenNumbers(3, 4, 5, 6, 7, 8))),
+                Arguments.arguments(givenLotto(givenNumbers(4, 5, 6, 7, 8, 9)), Numbers.valueOf(givenNumbers(4, 5, 6, 7, 8, 9))),
+                Arguments.arguments(givenLotto(givenNumbers(5, 6, 7, 8, 9, 10)), Numbers.valueOf(givenNumbers(5, 6, 7, 8, 9, 10)))
         );
     }
 
