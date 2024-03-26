@@ -1,10 +1,11 @@
+package lotto;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.LottoService;
-import lotto.LottoTicket;
+import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -28,8 +29,8 @@ public class LottoServiceTest {
     @Test
     public void 당첨_결과_조회() {
         List<LottoTicket> tickets = new ArrayList<>();
-        tickets.add(LottoTicket.createTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))));
-        tickets.add(LottoTicket.createTicket(new ArrayList<>(List.of(13, 18, 23, 28, 34, 42))));
+        tickets.add(LottoTicket.createTicket(List.of(1, 2, 3, 4, 5, 6)));
+        tickets.add(LottoTicket.createTicket(List.of(13, 18, 23, 28, 34, 42)));
         List<Integer> winningNumbers = List.of(1, 13, 18, 23, 28, 34);
         assertThat(lottoService.checkWinningResult(tickets, winningNumbers)).isEqualTo(List.of(0,1,0,0,0,1,0));
     }
