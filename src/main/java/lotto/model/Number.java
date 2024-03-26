@@ -2,11 +2,16 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class Number implements Comparable<Number> {
+public class Number {
     private final int number;
 
     public Number(int number) {
         this.number = number;
+    }
+
+
+    public boolean isValue(int value) {
+        return number == value;
     }
 
     public int getValue() {
@@ -24,10 +29,5 @@ public class Number implements Comparable<Number> {
     @Override
     public int hashCode() {
         return Objects.hash(number);
-    }
-
-    @Override
-    public int compareTo(Number o) {
-        return Integer.compare(this.number, o.getValue());
     }
 }

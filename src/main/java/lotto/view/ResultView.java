@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.model.Numbers;
 import lotto.model.ResultLotto;
 
 import java.util.Arrays;
@@ -11,9 +12,9 @@ public class ResultView {
     public static void viewLottos(ResultLotto resultLotto) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(String.format("%d개를 구매했습니다.", resultLotto.totallottoCount())).append(LINE_SEPARATOR);
-        List<List<Integer>> lottosNumbers = resultLotto.getLottosNumbers();
+        List<Numbers> lottosNumbers = resultLotto.getLottosNumbers();
 
-        for (List<Integer> lottosNumber : lottosNumbers) {
+        for (Numbers lottosNumber : lottosNumbers) {
             stringBuilder.append(Arrays.toString(lottosNumber.toArray())).append(LINE_SEPARATOR);
         }
 

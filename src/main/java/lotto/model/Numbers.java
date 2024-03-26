@@ -1,6 +1,5 @@
 package lotto.model;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -21,9 +20,9 @@ public class Numbers {
         return new Numbers(numberList);
     }
 
-    public boolean contains(Number value) {
+    public boolean contains(int value) {
         return numbers.stream()
-                .anyMatch(number -> number.equals(value));
+                .anyMatch(number -> number.isValue(value));
     }
 
     public int size() {
@@ -34,10 +33,6 @@ public class Numbers {
         return IntStream.range(0, size())
                 .mapToLong(i -> numbers.get(i).getValue())
                 .toArray();
-    }
-
-    public List<Number> getNumberList() {
-        return this.numbers;
     }
 
     @Override
@@ -51,9 +46,5 @@ public class Numbers {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
-    }
-
-    public void shuffle() {
-        Collections.shuffle(this.numbers);
     }
 }
