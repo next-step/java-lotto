@@ -4,7 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import calculator.domain.Calculator;
-import common.view.InputView;
+import common.view.CalculatorInputView;
+import common.view.LottoInputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,13 +18,13 @@ public class CalculatorTest {
     @DisplayName("입력 값이 공백이면 IllegalArgumentException 발생")
     @Test
     void input_empty(){
-        assertThatIllegalArgumentException().isThrownBy(() -> InputView.validate(""));
+        assertThatIllegalArgumentException().isThrownBy(() -> CalculatorInputView.validate(""));
     }
 
     @DisplayName("입력 값이 null이면 IllegalArgumentException 발생")
     @Test
     void input_null(){
-        assertThatIllegalArgumentException().isThrownBy(() -> InputView.validate(null));
+        assertThatIllegalArgumentException().isThrownBy(() -> CalculatorInputView.validate(null));
     }
 
     @DisplayName("사칙연산이 아니면 IllegalArgumentException 발생")
@@ -50,6 +51,6 @@ public class CalculatorTest {
     @ParameterizedTest
     @NullAndEmptySource
     void input_null_or_empty(String input){
-        assertThatIllegalArgumentException().isThrownBy(() -> InputView.validate(input));
+        assertThatIllegalArgumentException().isThrownBy(() -> CalculatorInputView.validate(input));
     }
 }

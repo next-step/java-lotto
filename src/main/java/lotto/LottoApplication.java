@@ -1,30 +1,17 @@
 package lotto;
 
-import calculator.domain.Calculator;
-import common.view.InputView;
+import common.view.LottoInputView;
 import common.view.ResultView;
-import java.util.List;
+import lotto.domain.LottoGame;
 import lotto.domain.LottoMachine;
-import lotto.domain.LottoTickets;
 
 public class LottoApplication {
-    private static InputView inputView;
-    private static Calculator calculator;
-    private static LottoTickets lottoTickets;
-
-
-
     public static void main(String[] args) {
-        int amount = InputView.requestPurchaseAmount();
+        int amount = LottoInputView.requestPurchaseAmount();
         int ticketCount = LottoMachine.getTicketsCount(amount);
         ResultView.showTicketCount(ticketCount);
 
-        lottoTickets = new LottoTickets(LottoMachine.purchaseLottoTickets(ticketCount));
-
-        lottoTickets.showTickets();
-        List<Integer> winningNumber = InputView.requestWinningNumbers();
-
-        lottoTickets.showResult(winningNumber);
+        LottoGame lottoGame = new LottoGame(ticketCount);
+        lottoGame.playGame();
     }
-
 }

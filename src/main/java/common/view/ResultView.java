@@ -2,14 +2,17 @@ package common.view;
 
 import java.util.List;
 import java.util.Map;
+import lotto.domain.LottoTicket;
 
 public class ResultView {
-    public static void showTicketCount(int count){
+    public static void showTicketCount(int count) {
         System.out.println(String.format("%s개를 구매했습니다.",count));
     }
 
-    public static void showTicketNumber(List<Integer> numbers){
-        System.out.println(numbers);
+    public static void showTicketNumber(List<LottoTicket> tickets) {
+        for (LottoTicket ticket : tickets) {
+            System.out.println(ticket.getNumbers());
+        }
     }
 
     public static void printResult(Map<Integer, Integer> winningResult, double rateOfReturn) {

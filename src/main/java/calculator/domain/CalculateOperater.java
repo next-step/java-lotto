@@ -1,4 +1,4 @@
-package calculator.util;
+package calculator.domain;
 
 import java.util.Arrays;
 import java.util.function.IntBinaryOperator;

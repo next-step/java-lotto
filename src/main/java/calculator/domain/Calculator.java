@@ -1,7 +1,5 @@
 package calculator.domain;
 
-import calculator.util.CalculateOperater;
-
 public class Calculator {
     private static final String NUMBER_REGEX = "\\d+";
 
