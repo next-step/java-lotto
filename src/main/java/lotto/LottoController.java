@@ -1,20 +1,28 @@
 package lotto;
 
 import java.util.List;
+import java.util.Map;
+import lotto.domain.LottoTicket;
+import lotto.ui.InputView;
+import lotto.ui.OutputView;
 
 public class LottoController {
 
-    private LottoService lottoService = new LottoService();
     private InputView inputView = new InputView();
     private OutputView outputView = new OutputView();
+    private LottoResultManager resultManager = new LottoResultManager();
+    private LottoTicketGenerator ticketGenerator = new LottoTicketGenerator();
+
 
     public void start() {
         int purchaseAmount = inputView.inputPurchaseAmount();
-        List<LottoTicket> tickets = lottoService.purchaseLotto(purchaseAmount);
+        List<LottoTicket> tickets = ticketGenerator.purchaseLotto(purchaseAmount);
         outputView.displayLottoTickets(tickets);
-        outputView.displayWinning(
-                lottoService.checkWinningResult(tickets, inputView.inputWinningNumbers()),
-                purchaseAmount);
+        Map<Integer, Integer> lottoResult = resultManager.calculateLottoResult(tickets,
+                inputView.inputWinningNumbers());
+        outputView.displayWinning(lottoResult);
+        outputView.displayWinningMoney(
+                resultManager.calculateReturnRate(lottoResult, purchaseAmount));
     }
 
 }
