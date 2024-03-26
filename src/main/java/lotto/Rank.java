@@ -30,4 +30,8 @@ public enum Rank {
     public long getWinPrice() {
         return winPrice;
     }
+
+    public int getMatchNumberCount() {
+        return matchNumberCount;
+    }
 }
