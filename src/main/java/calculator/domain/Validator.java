@@ -11,13 +11,13 @@ public class Validator {
             .map(Operator::getOperator)
             .collect(Collectors.toSet());
 
-    public static void validateInputAndThrow(String input) {
+    public static void validateInputFormula(String input) {
         if (null == input || input.isEmpty()) {
-            throw new IllegalArgumentException("입력값이 null이거나 빈 공맥인 문자입니다.");
+            throw new IllegalArgumentException("입력값이 null이거나 빈 공백인 문자입니다.");
         }
     }
 
-    public static void validateArithmeticFormulaAndThrow(String input) {
+    public static void validateArithmeticFormula(String input) {
         if (!isArithmeticFormula(input)) {
             throw new IllegalArgumentException(String.format("식에 포함된 기호는 사칙연산 %s 기호만 가능합니다.", OPERATORS));
         }
