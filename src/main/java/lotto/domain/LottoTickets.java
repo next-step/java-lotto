@@ -6,8 +6,11 @@ import lotto.domain.type.RewardPrice;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoTicket.CORRECT_LOTTO_TICKET_SIZE;
+
 public class LottoTickets {
 
+  private static final int INIT_REWARD_PRICE_VALUE = 0;
   private final PurchaseAmount purchaseAmount;
   private final Set<LottoTicket> tickets;
 
@@ -34,7 +37,7 @@ public class LottoTickets {
   }
 
   public boolean haveAll6Numbers() {
-    return this.tickets.stream().allMatch(ticket -> ticket.size() == 6);
+    return this.tickets.stream().allMatch(ticket -> ticket.size() == CORRECT_LOTTO_TICKET_SIZE);
   }
 
   public boolean haveCorrectNumbers() {
@@ -63,7 +66,7 @@ public class LottoTickets {
   private Map<RewardPrice, Integer> initMatchedNumberCountMap() {
     Map<RewardPrice, Integer> map = new HashMap<>();
     for (RewardPrice reward : RewardPrice.values()) {
-      map.put(reward, 0);
+      map.put(reward, INIT_REWARD_PRICE_VALUE);
     }
     return map;
   }

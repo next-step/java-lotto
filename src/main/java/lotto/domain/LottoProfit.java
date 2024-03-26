@@ -7,6 +7,7 @@ import java.util.TreeMap;
 
 public class LottoProfit {
 
+  private static final int INIT_PROFIT_VALUE = 0;
   private final LottoTickets lottoTickets;
   private final TreeMap<RewardPrice, Integer> profitMap;
 
@@ -38,7 +39,7 @@ public class LottoProfit {
   private static TreeMap<RewardPrice, Integer> initRewardPriceMap() {
     TreeMap<RewardPrice, Integer> profitMap = new TreeMap<>((o1, o2) -> o1.rewardAmount() - o2.rewardAmount());
     for (RewardPrice reward : RewardPrice.values()) {
-      profitMap.put(reward, 0);
+      profitMap.put(reward, INIT_PROFIT_VALUE);
     }
     return profitMap;
   }

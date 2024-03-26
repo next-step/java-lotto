@@ -10,13 +10,14 @@ import static lotto.domain.LottoNo.LOTTO_MIN_NUMBER;
 
 public class LottoTicket {
 
+  public static final int CORRECT_LOTTO_TICKET_SIZE = 6;
   public static final String INVALID_LOTTO_NUMBER_SIZE = "입력 개수를 다시 확인해주세요. input: %s";
 
   private final Set<LottoNo> lottoNumbers;
 
   private LottoTicket(Set<Integer> lottoNumbers) {
 
-    if (lottoNumbers.size() != 6) {
+    if (lottoNumbers.size() != CORRECT_LOTTO_TICKET_SIZE) {
       throw new IllegalArgumentException(String.format(INVALID_LOTTO_NUMBER_SIZE, lottoNumbers));
     }
 
