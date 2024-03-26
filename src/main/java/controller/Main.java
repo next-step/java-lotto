@@ -19,6 +19,6 @@ public class Main {
     lottoMachine.getAllLottoList().forEach(resultView::print);
 
     resultView.print("지난 주 당첨 번호를 입력해 주세요.");
-    resultView.print(lottoMachine.getLottoResult(inputView.inputIntegerList()));
+    resultView.printLottoResult(lottoMachine.getLottoResult(inputView.inputIntegerList()));
   }
 }

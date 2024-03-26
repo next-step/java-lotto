@@ -14,7 +14,9 @@ public class InputView {
   }
 
   public int inputInteger() {
-    return scanner.nextInt();
+    int input = scanner.nextInt();
+    scanner.nextLine();
+    return input;
   }
 
   public List<Integer> inputIntegerList() {

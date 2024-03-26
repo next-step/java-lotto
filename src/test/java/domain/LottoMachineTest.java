@@ -34,7 +34,8 @@ public class LottoMachineTest {
   @DisplayName("로또 결과를 확인한다")
   void getLottoResult() {
     lottoMachine.createLotto(4000);
-    String result = lottoMachine.getLottoResult(List.of(1, 2, 3, 4, 5, 6));
-    assertThat(result).contains("개 일치");
+    LottoResult result = lottoMachine.getLottoResult(List.of(1, 2, 3, 4, 5, 6));
+    assertThat(result.getMatchedResult()).isNotEmpty();
+    assertThat(result.getProfitRate()).isGreaterThanOrEqualTo(0.0);
   }
 }

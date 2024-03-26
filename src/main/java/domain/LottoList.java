@@ -15,8 +15,8 @@ public class LottoList {
     this.lottoList = generateLotto(lottoNumberGenerator, count);
   }
 
-  public List<List<Integer>> getLottoNumbers() {
-    return lottoList.stream().map(Lotto::getNumbers).collect(Collectors.toList());
+  public List<Lotto> getLottoNumbers() {
+    return lottoList;
   }
 
   public Map<Integer, Integer>getLottoResult(Set<Integer> winningNumbers) {
