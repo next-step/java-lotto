@@ -82,7 +82,6 @@
 # Step4
 
 ## Todo
-- [ ] 수동으로 구매할 로또 개수가 null이면 예외(null => IllegalArgumentException)
 - [ ] 수동으로 구매할 로또 개수가 구매할 수 있는 로또 개수보다 크면 예외(14000, 15 => IllegalArgumentException)
 - [ ] 수동으로 구매하는 번호들은 중복되면 예외(1,1,3,5,6,7 => IllegalArgumentException)
 - [ ] 수동으로 구매하는 번호들은 1 ~ 45를 벗어나는 숫자라면 예외(0 -> IllegalArgumentException, 46 -> IllegalArgumentException)
@@ -95,3 +94,4 @@
 - [ ] 출력 => "수동으로 {수동 구매 개수}장, 자동으로 {자동 구매 개수}개를 구매했습니다."
 
 ## Done
+- [X] 수동으로 구매할 로또 개수가 null이면 예외(null => IllegalArgumentException)
