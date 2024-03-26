@@ -6,17 +6,25 @@ import lotto.utils.StringToList;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoController {
 
     public static void run() {
         int priceOfLotto = StringToInt.toInt( InputView.priceOfPurchase());
-        BuyLottos buyLottos = new BuyLottos(priceOfLotto);
+        int numOfManual = StringToInt.toIntManual(priceOfLotto/1000, InputView.numOfManual());
+
+        List<String> listOfManual = InputView.numberOfManual(numOfManual);
+
+        BuyLottos buyLottos = new BuyLottos(priceOfLotto, listOfManual);
         buyLottos.buyLottos();  // 로또 생성.
+
+        OutputView.printNumOfAutoAndManual(priceOfLotto/1000 - numOfManual, numOfManual);
 
         OutputView.printBuyLotto(buyLottos); // 생성 로또 보여주기
 
         Lotto winLottoNum = new Lotto(StringToList.toList(InputView.numberOfWinLotto()));
-        BonusNum bonusNum = new BonusNum(StringToInt.toInt(InputView.numberOfBonus()), winLottoNum);
+        BonusNum bonusNum = new BonusNum(StringToInt.toInt(InputView.numberOfBonus()));
 
         WinLotto winLottoAll = new WinLotto(winLottoNum, bonusNum);
 
