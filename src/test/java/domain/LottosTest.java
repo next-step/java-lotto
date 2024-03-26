@@ -13,7 +13,7 @@ public class LottosTest {
     @DisplayName("전체 로또의 갯수를 구한다.")
     @Test
     void test01() {
-        Lottos lottos = new Lottos(14000);
+        Lottos lottos = Lottos.create(14000);
 
         assertThat(lottos.lottoCount()).isEqualTo(14);
     }
@@ -36,7 +36,7 @@ public class LottosTest {
     @DisplayName("입력으로 들어온 로또 갯수를 제외한 나머지 금액만큼의 로또를 생성한다.")
     @Test
     void test03() {
-        Lottos lottos = new Lottos(5000, List.of(
+        Lottos lottos = Lottos.create(5000, List.of(
                 () -> TestFixture.createLotto(Set.of(11, 12, 13, 14, 15, 16)),
                 () -> TestFixture.createLotto(Set.of(21, 22, 23, 24, 25, 26)),
                 () -> TestFixture.createLotto(Set.of(31, 32, 33, 34, 35, 36))
@@ -48,15 +48,5 @@ public class LottosTest {
                 TestFixture.createLotto(Set.of(31, 32, 33, 34, 35, 36))
         );
         assertThat(lottos.lottoCount()).isEqualTo(5);
-    }
-
-    @DisplayName("전체 로또의 갯수를 구한다.")
-    @Test
-    void test04() {
-        // given
-
-        // when
-
-        // then
     }
 }

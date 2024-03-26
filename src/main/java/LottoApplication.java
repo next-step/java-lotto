@@ -16,7 +16,7 @@ public class LottoApplication {
             factories.add(() -> lotto);
         }
 
-        Lottos lottos = new Lottos(price, factories);
+        Lottos lottos = Lottos.create(price, factories);
         ResultView.print(lottos, factories.size());
 
         WinningLotto winningLotto = new WinningLotto(InputView.promptForWinningNumbers(), InputView.promptForBonusBall());
