@@ -15,7 +15,7 @@ public class LottoProfitTest {
 
   @BeforeAll
   static void beforeAll() {
-    MY_LOTTO_TICKETS = new LottoTickets(new PurchaseAmount(14000),
+    MY_LOTTO_TICKETS = new LottoTickets(PurchaseAmount.of(14000, 0),
         Set.of(
             LottoTicket.generate(Set.of(8, 21, 23, 41, 42, 43)),
             LottoTicket.generate(Set.of(3, 5, 11, 16, 32, 38)),
@@ -35,7 +35,9 @@ public class LottoProfitTest {
   }
 
   @Test
-  @DisplayName("구매 금액 대비, 당첨 금액 수익률 계산 기능")
+  @DisplayName("당첨 번호 6개와 보너스 번호를 입력하여" +
+      "`WinningNumbers` 를 생성할 수 있으며" +
+      "로또 구매 금액 대비 당첨 금액 수익률 계산 기능 검증")
   void lottoProfitTest() {
     WinningNumbers winningNumbers = WinningNumbers.of(Set.of(1, 2, 3, 4, 5, 6), 7);
     LottoProfit lottoProfit = LottoProfit.of(winningNumbers, MY_LOTTO_TICKETS);
@@ -43,7 +45,9 @@ public class LottoProfitTest {
   }
 
   @Test
-  @DisplayName("숫자 5개 매칭 및 보너스볼 당첨 시 수익률 계산 기능")
+  @DisplayName("당첨 번호 6개와 보너스 번호를 입력하여" +
+      "`WinningNumbers` 를 생성할 수 있으며" +
+      "로또 번호와 당첨 금액 숫자가 5개 매칭되고, 보너스 볼도 당첨 시 수익률 계산 기능 검증")
   void lottoProfitTest2() {
     WinningNumbers winningNumbers = WinningNumbers.of(Set.of(1, 3, 5, 14, 22, 40), 45);
     LottoProfit lottoProfit = LottoProfit.of(winningNumbers, MY_LOTTO_TICKETS);

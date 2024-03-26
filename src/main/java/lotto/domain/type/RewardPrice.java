@@ -4,12 +4,12 @@ import java.util.Arrays;
 
 public enum RewardPrice {
 
-  FIRST(6, 2_000_000_000, Boolean.FALSE),
-  SECOND(5, 30_000_000, Boolean.TRUE),
-  THIRD(5, 1_500_000, Boolean.FALSE),
-  FOURTH(4, 50_000, Boolean.FALSE),
-  FIFTH(3, 5_000, Boolean.FALSE),
-  NONE(0, 0, Boolean.FALSE),
+  FIRST(6, 2_000_000_000, false),
+  SECOND(5, 30_000_000, true),
+  THIRD(5, 1_500_000, false),
+  FOURTH(4, 50_000, false),
+  FIFTH(3, 5_000, false),
+  NONE(0, 0, false),
   ;
 
   private final int matchCount;
@@ -20,15 +20,6 @@ public enum RewardPrice {
     this.matchCount = matchCount;
     this.amount = amount;
     this.isMatchBonusBall = isMatchBonusBall;
-  }
-
-  public static int rewardBy(int count, boolean isMatchBonusBall) {
-    return Arrays.stream(getValues())
-        .filter(it -> it.matchCount == count)
-        .filter(it -> filterIsMatchBonusBall(isMatchBonusBall, it))
-        .findFirst()
-        .map(value -> value.amount)
-        .orElseGet(() -> NONE.amount);
   }
 
   public static RewardPrice match(int count, boolean isMatchBonusBall) {
@@ -60,9 +51,9 @@ public enum RewardPrice {
   }
 
   private static boolean filterIsMatchBonusBall(boolean isMatchBonusBall, RewardPrice it) {
-    if (it.matchCount == 5) {
+    if (it.matchCount == SECOND.matchCount) {
       return it.isMatchBonusBall == isMatchBonusBall;
     }
-    return it.isMatchBonusBall == Boolean.FALSE;
+    return !it.isMatchBonusBall;
   }
 }

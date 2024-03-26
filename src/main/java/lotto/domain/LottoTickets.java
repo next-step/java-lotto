@@ -3,25 +3,31 @@ package lotto.domain;
 import lotto.domain.type.RewardPrice;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
+import static lotto.domain.LottoTicket.CORRECT_LOTTO_TICKET_SIZE;
 
 public class LottoTickets {
 
+  private static final int INIT_REWARD_PRICE_VALUE = 0;
   private final PurchaseAmount purchaseAmount;
   private final Set<LottoTicket> tickets;
-
-  public LottoTickets(int amount) {
-    this.purchaseAmount = new PurchaseAmount(amount);
-    this.tickets = LottoTicket.generate(this.purchaseAmount.ticketCount());
-  }
 
   public LottoTickets(PurchaseAmount purchaseAmount, Set<LottoTicket> tickets) {
     this.purchaseAmount = purchaseAmount;
     this.tickets = tickets;
   }
 
-  public int ticketCount() {
-    return this.purchaseAmount.ticketCount();
+  public static LottoTickets purchaseBy(PurchaseAmount purchaseAmount, List<Set<Integer>> manualLottoNumbers) {
+    Set<LottoTicket> lottoTickets = LottoTicket.generateBy(purchaseAmount, manualLottoNumbers);
+    return new LottoTickets(purchaseAmount, lottoTickets);
+  }
+
+  public int autoTicketCount() {
+    return this.purchaseAmount.autoTicketCount();
+  }
+
+  public int allTicketCount() {
+    return this.purchaseAmount.allTicketCount();
   }
 
   public boolean isSamePurchaseAmount(int amount) {
@@ -29,7 +35,7 @@ public class LottoTickets {
   }
 
   public boolean haveAll6Numbers() {
-    return this.tickets.stream().allMatch(ticket -> ticket.size() == 6);
+    return this.tickets.stream().allMatch(ticket -> ticket.size() == CORRECT_LOTTO_TICKET_SIZE);
   }
 
   public boolean haveCorrectNumbers() {
@@ -57,8 +63,9 @@ public class LottoTickets {
 
   private Map<RewardPrice, Integer> initMatchedNumberCountMap() {
     Map<RewardPrice, Integer> map = new HashMap<>();
-    List<RewardPrice> filteredInfos = Arrays.stream(RewardPrice.values()).collect(Collectors.toList());
-    filteredInfos.forEach(info -> map.put(info, 0));
+    for (RewardPrice reward : RewardPrice.values()) {
+      map.put(reward, INIT_REWARD_PRICE_VALUE);
+    }
     return map;
   }
 }

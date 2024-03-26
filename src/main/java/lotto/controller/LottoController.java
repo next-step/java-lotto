@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoProfit;
 import lotto.domain.LottoTickets;
+import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -17,13 +18,17 @@ public class LottoController {
   }
 
   public void purchase() {
-    LottoTickets lottoTickets = new LottoTickets(inputView.receivePurchaseAmount());
-    resultView.printLottoTicketCounts(lottoTickets.ticketCount());
+    int inputPurchaseAmount = inputView.receivePurchaseAmount();
+    int manualTicketCount = inputView.receiveManualPurchaseCount();
+
+    LottoTickets lottoTickets = LottoTickets.purchaseBy(
+        PurchaseAmount.of(inputPurchaseAmount, manualTicketCount),
+        inputView.receiveManualPurchaseLottos(manualTicketCount)
+    );
+    resultView.printLottoTicketCounts(manualTicketCount, lottoTickets.autoTicketCount());
     resultView.printLottoTickets(lottoTickets.getTickets());
 
     WinningNumbers winningNumbers = WinningNumbers.of(inputView.receiveWinningNumbers(), inputView.receiveBonusBall());
-    LottoProfit lottoProfit = LottoProfit.of(winningNumbers, lottoTickets);
-
-    resultView.printLottoProfitRate(lottoProfit);
+    resultView.printLottoProfitRate(LottoProfit.of(winningNumbers, lottoTickets));
   }
 }

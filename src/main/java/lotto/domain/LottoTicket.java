@@ -1,41 +1,40 @@
 package lotto.domain;
 
-import java.util.*;
+import lotto.domain.strategy.LottoTicketCreateGenerator;
+import lotto.domain.strategy.ShuffleStrategy;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static lotto.domain.LottoNo.LOTTO_MAX_NUMBER;
+import static lotto.domain.LottoNo.LOTTO_MIN_NUMBER;
 
 public class LottoTicket {
 
-  private static final int LOTTO_MIN_NUMBER = 1;
-  private static final int LOTTO_MAX_NUMBER = 45;
-  private static final List<Integer> POSSIBLE_LOTTO_NUMBER_CANDIDATES = makeCandidateNumbers();
-  public static final String INVALID_LOTTO_NUMBER_INPUT = "해당 숫자는 로또 번호 범위가 아닙니다. 번호를 다시 확인해주세요. input: %s";
+  public static final int CORRECT_LOTTO_TICKET_SIZE = 6;
   public static final String INVALID_LOTTO_NUMBER_SIZE = "입력 개수를 다시 확인해주세요. input: %s";
 
-  private final Set<Integer> lottoNumbers;
+  private final Set<LottoNo> lottoNumbers;
 
   private LottoTicket(Set<Integer> lottoNumbers) {
 
-    if (Boolean.FALSE.equals(checkNumbersRange(lottoNumbers))) {
-      throw new IllegalArgumentException(String.format(INVALID_LOTTO_NUMBER_INPUT, lottoNumbers));
-    }
-
-    if (lottoNumbers.size() != 6) {
+    if (lottoNumbers.size() != CORRECT_LOTTO_TICKET_SIZE) {
       throw new IllegalArgumentException(String.format(INVALID_LOTTO_NUMBER_SIZE, lottoNumbers));
     }
 
-    this.lottoNumbers = lottoNumbers;
+    this.lottoNumbers = lottoNumbers.stream()
+        .map(LottoNo::of)
+        .collect(Collectors.toSet());
   }
 
-  public static Set<LottoTicket> generate(int ticketCount) {
-    Set<LottoTicket> lottoTickets = new HashSet<>();
-    for (int i = 0; i < ticketCount; i++) {
-      Collections.shuffle(POSSIBLE_LOTTO_NUMBER_CANDIDATES);
-      lottoTickets.add(new LottoTicket(new HashSet<>(POSSIBLE_LOTTO_NUMBER_CANDIDATES.subList(0, 6))));
-    }
-    return lottoTickets;
+  public static LottoTicket generate(LottoTicketCreateGenerator generator) {
+    return new LottoTicket(generator.generate());
   }
 
-  public static LottoTicket generate(Set<Integer> winningNumbers) {
-    return new LottoTicket(winningNumbers);
+  public static LottoTicket generate(Set<Integer> numbers) {
+    return new LottoTicket(numbers);
   }
 
   public int size() {
@@ -43,10 +42,11 @@ public class LottoTicket {
   }
 
   public boolean haveCorrectNumbers() {
-    return checkNumbersRange(this.lottoNumbers);
+    return lottoNumbers.stream()
+        .allMatch(number -> LOTTO_MIN_NUMBER <= number.getNo() && number.getNo() <= LOTTO_MAX_NUMBER);
   }
 
-  public boolean isSame(Set<Integer> numbers) {
+  public boolean isSame(Set<LottoNo> numbers) {
     return this.lottoNumbers.equals(numbers);
   }
 
@@ -56,25 +56,31 @@ public class LottoTicket {
         .count();
   }
 
-  public boolean contain(int value) {
+  public boolean contain(LottoNo value) {
     return this.lottoNumbers.contains(value);
   }
 
-  private static List<Integer> makeCandidateNumbers() {
-    final List<Integer> candidates = new ArrayList<>();
-    for (int lottoNumber = LOTTO_MIN_NUMBER; lottoNumber <= LOTTO_MAX_NUMBER; lottoNumber++) {
-      candidates.add(lottoNumber);
+  public Set<LottoNo> getLottoNumbers() {
+    return lottoNumbers;
+  }
+
+  public static Set<LottoTicket> generateBy(PurchaseAmount purchaseAmount, List<Set<Integer>> manualLottoNumbers) {
+    Set<LottoTicket> lottoTickets = initLottoTickets(manualLottoNumbers);
+    ShuffleStrategy shuffleStrategy = new ShuffleStrategy();
+    for (int i = 0; i < purchaseAmount.autoTicketCount(); i++) {
+      lottoTickets.add(LottoTicket.generate(shuffleStrategy));
     }
-    return candidates;
+
+    return lottoTickets;
   }
 
-  private boolean checkNumbersRange(Set<Integer> numbers) {
-    return numbers.stream()
-        .allMatch(number -> LOTTO_MIN_NUMBER <= number && number <= LOTTO_MAX_NUMBER);
-  }
+  private static Set<LottoTicket> initLottoTickets(List<Set<Integer>> lottoNumbers) {
+    if (lottoNumbers.isEmpty()) {
+      return new HashSet<>();
+    }
 
-  @Override
-  public String toString() {
-    return lottoNumbers.toString();
+    return lottoNumbers.stream()
+        .map(LottoTicket::generate)
+        .collect(Collectors.toSet());
   }
 }
