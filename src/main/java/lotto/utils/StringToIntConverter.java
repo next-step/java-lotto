@@ -1,9 +1,6 @@
 package lotto.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class StringToInt {
+public class StringToIntConverter {
     public static int toInt(String values){
         return checkPositive(values);
     }

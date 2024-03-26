@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.interf.LottoStrategy;
 import lotto.interf.RandomLottoStrategy;
 import lotto.utils.RandomGenerator;
-import lotto.utils.StringToList;
+import lotto.utils.StringToListConverter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class BuyLottos {
         this.lottos = new ArrayList<>();
 
         for(String str: manual){
-            List<Integer> manualLottoList = StringToList.toList(str);
+            List<Integer> manualLottoList = StringToListConverter.toList(str);
             Lotto manualLotto = new Lotto(manualLottoList);
             this.lottos.add(manualLotto);
         }

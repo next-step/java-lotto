@@ -21,23 +21,27 @@ public class OutputView {
         }
     }
 
-    public static void printNumOfAutoAndManual(int numAuto, int numManual){
-        System.out.println("수동으로 "+numManual+"장, 자동으로 "+numAuto+"개를 구매했습니다.");
+    public static void printNumOfAutoAndManual(int lottoNum, int numManual){
+        System.out.println("수동으로 "+numManual+"장, 자동으로 "+ (lottoNum - numManual) +"개를 구매했습니다.");
     }
 
     public static void printRank(Map<RankMatches, Integer> rankOfLottos){
         for (Map.Entry<RankMatches, Integer> entry : rankOfLottos.entrySet()) {
             RankMatches rank = entry.getKey();
-            int count = rank.getCount();
-            int prize = rank.getPrize();
-            int matches = entry.getValue();
+            printRankPartial(rank, entry);
+        }
+    }
 
-            if(count!=1) {
-                System.out.println(count + "개 일치 (" + prize + "원) - " + matches + "개");
-            }
-            if(count==1){
-                System.out.println(count + "개 일치, 보너스 볼 일치 (" + prize + "원) - " + matches + "개");
-            }
+    private static void printRankPartial(RankMatches rank, Map.Entry<RankMatches, Integer> entry){
+        int count = rank.getCount();
+        int prize = rank.getPrize();
+        int matches = entry.getValue();
+
+        if(count!=1) {
+            System.out.println(count + "개 일치 (" + prize + "원) - " + matches + "개");
+        }
+        if(count==1){
+            System.out.println(count + "개 일치, 보너스 볼 일치 (" + prize + "원) - " + matches + "개");
         }
     }
 

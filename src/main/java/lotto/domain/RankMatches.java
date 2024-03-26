@@ -13,7 +13,6 @@ public enum RankMatches {
     FIFTH(3, 5_000),
     NONE(0, 0);
 
-    private static int MINIMUM_OF_PRIZE = 3;
     private int count;
     private int prize;
     private static final Map<Integer, RankMatches> rankMap =
