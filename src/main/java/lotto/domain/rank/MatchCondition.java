@@ -7,8 +7,12 @@ public class MatchCondition {
     private final BonusMatch needBonusMatch;
 
     public MatchCondition(int matchCount, boolean needBonusMatch) {
-        this.matchCount = new LottoMatchCount(matchCount);
-        this.needBonusMatch = new BonusMatch(needBonusMatch);
+        this(new LottoMatchCount(matchCount), new BonusMatch(needBonusMatch));
+    }
+
+    public MatchCondition(LottoMatchCount matchCount, BonusMatch needBonusMatch) {
+        this.matchCount = matchCount;
+        this.needBonusMatch = needBonusMatch;
     }
 
     public boolean smallerMatchCountThan(LottoMatchCount target) {
