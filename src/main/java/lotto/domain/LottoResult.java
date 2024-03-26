@@ -33,7 +33,7 @@ public class LottoResult {
             total += lottoRank.getReward() * result.get(lottoRank);
         }
 
-        return (double)total / (double)money;
+        return (double)total / money;
 
     }
 }
