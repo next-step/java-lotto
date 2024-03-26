@@ -15,13 +15,11 @@ public enum Rank {
     NEXT_CHANCE(0, false, 0L),
     ;
 
-    private final LottoMatchCount matchCount;
-    private final boolean needBonusMatch;
+    private final MatchCondition matchCondition;
     private final long winnings;
 
     Rank(int matchCount, boolean needBonusMatch, long winnings) {
-        this.matchCount = new LottoMatchCount(matchCount);
-        this.needBonusMatch = needBonusMatch;
+        this.matchCondition = new MatchCondition(matchCount, needBonusMatch);
         this.winnings = winnings;
     }
 
@@ -29,7 +27,7 @@ public enum Rank {
         assertMatchCountLessThanFirstPrize(matchCount);
 
         return Arrays.stream(values())
-                .filter(type -> type.match(matchCount, bonusMatch))
+                .filter(type -> type.matchCondition.match(matchCount, bonusMatch))
                 .findFirst()
                 .orElse(Rank.NEXT_CHANCE);
     }
@@ -42,13 +40,13 @@ public enum Rank {
     }
 
     private static void assertMatchCountLessThanFirstPrize(LottoMatchCount matchCount) {
-        if (FIRST.matchCount.smallerThan(matchCount)) {
+        if (FIRST.matchCondition.smallerMatchCountThan(matchCount)) {
             throw new IllegalArgumentException("로또는 그 이상의 당첨이 불가능할텐데요.");
         }
     }
 
     public int matchCount() {
-        return this.matchCount.value();
+        return this.matchCondition.matchCount();
     }
 
     public long winnings() {
@@ -56,22 +54,7 @@ public enum Rank {
     }
 
     public boolean needBonusMatch() {
-        return this.needBonusMatch;
-    }
-
-    private boolean match(LottoMatchCount matchCount, boolean bonusMatch) {
-        if (this.needBonusMatch) {
-            return countMatch(matchCount) && bonusMatch(bonusMatch);
-        }
-        return countMatch(matchCount);
-    }
-
-    private boolean countMatch(LottoMatchCount matchCount) {
-        return this.matchCount.equals(matchCount);
-    }
-
-    private boolean bonusMatch(boolean bonusMatch) {
-        return this.needBonusMatch && bonusMatch;
+        return this.matchCondition.needBonusMatch();
     }
 
 }
