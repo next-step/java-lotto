@@ -10,7 +10,7 @@ public class LottoTicket {
 
     public static LottoTicket createTicket(List<Integer> inputs) {
         List<LottoNumber> numbers = inputs.stream().sorted().map(input -> new LottoNumber(input))
-                .collect(Collectors.toList());
+            .collect(Collectors.toList());
         return new LottoTicket(Collections.unmodifiableList(numbers));
     }
 
@@ -28,8 +28,8 @@ public class LottoTicket {
 
     public int count(List<LottoNumber> numbers) {
         return (int) numbers.stream()
-                .filter(this.numbers::contains)
-                .count();
+            .filter(this.numbers::contains)
+            .count();
     }
 
     private static void checkSizeNumbers(List<LottoNumber> numbers) {
