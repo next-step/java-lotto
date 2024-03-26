@@ -1,7 +1,5 @@
 package stringCalculator.domain.expression;
 
-
-import stringCalculator.domain.expression.operator.Operator;
 import stringCalculator.domain.expression.operator.impl.OperatorImpl;
 
 public class Calculator {
@@ -12,35 +10,36 @@ public class Calculator {
 
     private long sum = 0;
 
-    public void startCalculate() {
-        sum = operands.poll();
-        while (!operators.isEmpty()) {
-            String operator = operators.poll();
-            Integer operand = operands.poll();
-            Operator op = OperatorImpl.fromOperator(operator);
-            sum = op.calculate(sum, operand);
-        }
+    public void startCalculate(String[] calculationFormula) {
+        classifyOperators(calculationFormula);
+        calculateSum();
     }
 
     public void classifyOperators(String[] parsedCalculationFormula) {
-        for (String type : parsedCalculationFormula) {
-            if (isOperators(type)) {
-                operators.add(type);
-            }
-
-            if (isOperand((type))) {
-                operands.add(Integer.parseInt(type));
-            }
+        for (String token : parsedCalculationFormula) {
+            isOperators(token);
+            isOperand((token));
         }
     }
 
-    private boolean isOperators(String operator) {
-        return operators.isContainNumericalExpression(operator);
+    private void isOperators(String operator) {
+        if (operators.isContainNumericalExpression(operator)) {
+            operators.add(operator);
+        }
     }
 
-    private boolean isOperand(String operand) {
-        return operand.chars().anyMatch(Character::isDigit);
+    private void isOperand(String operand) {
+        if (operand.chars().anyMatch(Character::isDigit)) {
+            operands.add(Integer.parseInt(operand));
+        }
+    }
 
+    private void calculateSum() {
+        sum = operands.poll();
+        while (!operators.isEmpty()) {
+            OperatorImpl operator = OperatorImpl.fromOperator(operators.poll());
+            sum = operator.calculate(sum, operands.poll());
+        }
     }
 
     public long getSum() {
