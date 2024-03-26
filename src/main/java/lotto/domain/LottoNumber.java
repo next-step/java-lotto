@@ -10,9 +10,9 @@ public class LottoNumber {
     private final int number;
 
     static {
-        cache = new LottoNumber[(MAX_NUMBER -MIN_NUMBER) + 1];
-        for (int i = MIN_NUMBER; i < MAX_NUMBER; i++) {
-            cache[i] = new LottoNumber(i);
+        cache = new LottoNumber[(MAX_NUMBER - MIN_NUMBER) + 1];
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            cache[i - MIN_NUMBER] = new LottoNumber(i);
         }
     }
 
@@ -23,7 +23,7 @@ public class LottoNumber {
 
     public static LottoNumber valueOf(int number) {
         assertValidRange(number);
-        return cache[number];
+        return cache[number - MIN_NUMBER];
     }
 
     public int getNumber() {
