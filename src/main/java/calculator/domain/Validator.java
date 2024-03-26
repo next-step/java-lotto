@@ -1,7 +1,6 @@
 package calculator.domain;
 
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -11,6 +10,7 @@ public class Validator {
     private static final Set<String> OPERATORS = Arrays.stream(Operator.values())
             .map(Operator::getOperator)
             .collect(Collectors.toSet());
+
     public static void validateInputAndThrow(String input) {
         if (null == input || input.isEmpty()) {
             throw new IllegalArgumentException("입력값이 null이거나 빈 공맥인 문자입니다.");
