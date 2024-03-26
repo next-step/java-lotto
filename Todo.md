@@ -83,7 +83,6 @@
 
 ## Todo
 - [ ] 수동으로 구매하는 번호들은 6개가 아니면 예외(1,2,3,4,5,6,7 => IllegalArgumentException, empty => IllegalArgumentException)
-- [ ] 수동으로 구매하는 번호들은 6개가 아니면 예외(1,2,3,4,5,6,7 => IllegalArgumentException, empty => IllegalArgumentException)
 - [ ] 출력 => "수동으로 구매할 로또 수를 입력해 주세요."
 - [ ] 입력 => 수동으로 구매할 로또 개수 
 - [ ] 출력 => "수동으로 구매할 번호를 입력해 주세요."
@@ -95,3 +94,4 @@
 - [X] 수동으로 구매할 로또 개수가 구매할 수 있는 로또 개수보다 크면 예외(14000, 15 => IllegalArgumentException)
 - [X] 수동으로 구매하는 번호들은 중복되면 예외(1,1,3,5,6,7 => IllegalArgumentException)
 - [X] 수동으로 구매하는 번호들은 1 ~ 45를 벗어나는 숫자라면 예외(0 -> IllegalArgumentException, 46 -> IllegalArgumentException)
+- [X] 수동으로 구매하는 번호들은 6개가 아니면 예외(1,2,3,4,5,6,7 => IllegalArgumentException, empty => IllegalArgumentException)

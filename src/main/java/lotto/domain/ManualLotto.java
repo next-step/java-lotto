@@ -15,6 +15,17 @@ public class ManualLotto {
     }
 
     public void validateNumbers(List<Integer> numbers){
+        validateSize(numbers);
+        validateIfDuplication(numbers);
+    }
+
+    private void validateSize(List<Integer> numbers) {
+        if(numbers.size() != 6) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateIfDuplication(List<Integer> numbers) {
         int count = (int) numbers.stream()
                 .distinct()
                 .count();
