@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.config.LottoExceptionMessage.LOTTO_NUMBER_SHOULD_BE_IN_VALID_RANGE;
+import static lotto.config.LottoExceptionMessage.LOTTO_NUMBER_MUST_BE_IN_VALID_RANGE;
 
 import java.util.Objects;
 
@@ -23,7 +23,7 @@ class LottoNumber {
 
     private static void validateLottoNumberIsInRange(final int value) {
         if (value < MINIMUM || value > MAXIMUM) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_SHOULD_BE_IN_VALID_RANGE.message(value));
+            throw new IllegalArgumentException(LOTTO_NUMBER_MUST_BE_IN_VALID_RANGE.message(value));
         }
     }
 
@@ -35,7 +35,6 @@ class LottoNumber {
 
         if (other == null || getClass() != other.getClass()) {
             return false;
-
         }
 
         return this.value == ((LottoNumber)other).value;
