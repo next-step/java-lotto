@@ -49,4 +49,14 @@ public class LottosTest {
         );
         assertThat(lottos.lottoCount()).isEqualTo(5);
     }
+
+    @DisplayName("전체 로또의 갯수를 구한다.")
+    @Test
+    void test04() {
+        // given
+
+        // when
+
+        // then
+    }
 }

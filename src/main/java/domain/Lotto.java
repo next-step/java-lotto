@@ -38,10 +38,10 @@ public class Lotto {
         return this.matchCount(winningLotto) == 5 && this.match(bonusNumber);
     }
 
-    public static Lotto randomLotto() {
+    public static Lotto randomLotto(Random random) {
         Set<LottoNumber> numbers = new HashSet<>();
         while (numbers.size() < NUMBER_SIZE) {
-            numbers.add(LottoNumber.random());
+            numbers.add(LottoNumber.random(random));
         }
         return new Lotto(numbers);
     }

@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumber {
 
@@ -25,10 +22,8 @@ public class LottoNumber {
         this.value = lottoNumber;
     }
 
-    public static LottoNumber random() {
-        List<Integer> numbers = new ArrayList<>(values);
-        Collections.shuffle(numbers);
-        return new LottoNumber(numbers.get(0));
+    public static LottoNumber random(Random random) {
+        return new LottoNumber(values.get(random.nextInt(45)));
     }
 
     @Override
