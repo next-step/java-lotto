@@ -5,6 +5,7 @@ import lotto.domain.LottoMachine;
 import lotto.domain.LottoTicket;
 import lotto.domain.Price;
 import lotto.domain.WinningNumbers;
+import lotto.domain.number_generator.ManualNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -45,7 +46,7 @@ public class LottoController {
         resultView.printLottoTickets(lottoTickets);
         resultView.printDoInputWinningNumbers();
 
-        WinningNumbers winningNumbers = WinningNumbers.of(inputView.getLottoNumbers());
+        WinningNumbers winningNumbers = WinningNumbers.of(new ManualNumberGenerator(inputView).generate());
 
         resultView.printBonusBallNumber();
 
@@ -59,7 +60,7 @@ public class LottoController {
 
     private void generateManualLotto(int numbersOfManualLotto, LottoMachine lottoMachine) {
         for (int i = 0; i < numbersOfManualLotto; i++) {
-            lottoMachine.addLottoTicket(new LottoTicket(inputView.getLottoNumbers()));
+            lottoMachine.addLottoTicket(new LottoTicket(new ManualNumberGenerator(inputView).generate()));
         }
     }
 
