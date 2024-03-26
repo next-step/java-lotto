@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.BiFunction;
 
 public enum Operator {
@@ -21,7 +22,15 @@ public enum Operator {
         return operator;
     }
 
-    public static Integer calculate(String operator, Integer number1, Integer number2) {
+    public static Integer calculate(List<Integer> operands, List<String> operators) {
+        int sum = operands.get(0);
+        for (int i = 0; i < operators.size(); i++) {
+            sum = Operator.calculateSingle(operators.get(i), sum, operands.get(i + 1));
+        }
+
+        return sum;
+    }
+    public static Integer calculateSingle(String operator, Integer number1, Integer number2) {
         return getOperator(operator).calculator.apply(number1, number2);
     }
 
