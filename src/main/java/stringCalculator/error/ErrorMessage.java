@@ -12,11 +12,11 @@ public enum ErrorMessage {
 
     INPUT_VALUE_NOT_OPERATOR("입력값은 한 칸씩 띄어져 있어야 합니다 ");
 
+    private String errorMessage;
+
     ErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
-
-    private String errorMessage;
 
     public String getErrorMessage() {
         return errorMessage;

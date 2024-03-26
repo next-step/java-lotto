@@ -36,11 +36,6 @@ public enum OperatorImpl implements Operator {
         this.operator = operator;
     }
 
-    @Override
-    public boolean isEqualsOperator(String other){
-        return operator.equals(other);
-    }
-
     public static Operator fromOperator(String other) {
         for (Operator operator : OperatorImpl.values()) {
             if (operator.isEqualsOperator(other)) {
@@ -49,5 +44,10 @@ public enum OperatorImpl implements Operator {
         }
         throw new RuntimeException(
             new IllegalArgumentException(ErrorMessage.INPUT_VALUE_NOT_OPERATOR.getErrorMessage()));
+    }
+
+    @Override
+    public boolean isEqualsOperator(String other) {
+        return operator.equals(other);
     }
 }

@@ -7,9 +7,9 @@ public class Operators {
 
     private final Queue<String> operators = new LinkedList<>();
 
-    private final String numericalExpression = "+-*/";
+    private final String numericalExpression = "+-*/" ;
 
-    public void add(String operator){
+    public void add(String operator) {
         operators.add(operator);
     }
 
@@ -17,15 +17,15 @@ public class Operators {
         return operators.poll();
     }
 
-    public int size(){
+    public int size() {
         return operators.size();
     }
 
-    public boolean isContainNumericalExpression(String operator){
+    public boolean isContainNumericalExpression(String operator) {
         return numericalExpression.contains(operator);
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return operators.isEmpty();
     }
 }

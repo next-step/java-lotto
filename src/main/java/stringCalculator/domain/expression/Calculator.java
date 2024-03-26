@@ -22,13 +22,13 @@ public class Calculator {
         }
     }
 
-    public void classifyOperators(String[] parsedCalculationFormula){
+    public void classifyOperators(String[] parsedCalculationFormula) {
         for (String type : parsedCalculationFormula) {
-            if (isOperators(type)){
+            if (isOperators(type)) {
                 operators.add(type);
             }
 
-            if (isOperand((type))){
+            if (isOperand((type))) {
                 operands.add(Integer.parseInt(type));
             }
         }
@@ -43,7 +43,7 @@ public class Calculator {
 
     }
 
-    public long getSum(){
+    public long getSum() {
         return sum;
     }
 }

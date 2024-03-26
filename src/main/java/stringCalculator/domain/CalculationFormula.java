@@ -5,9 +5,9 @@ import stringCalculator.error.ErrorMessage;
 
 public class CalculationFormula {
 
+    private static final Pattern blankStringCheckPattern = Pattern.compile(
+        "^\\b\\d+(?:\\s[*+\\/-]\\s\\b\\d+\\b)*$");
     private String calculationFormula;
-
-    private static final Pattern blankStringCheckPattern = Pattern.compile("^\\b\\d+(?:\\s[*+\\/-]\\s\\b\\d+\\b)*$");
 
     public CalculationFormula(String input) {
         if (isNullOrBlank(input)) {

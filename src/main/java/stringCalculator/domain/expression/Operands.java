@@ -7,7 +7,7 @@ public class Operands {
 
     private final Queue<Integer> operands = new LinkedList<>();
 
-    public void add(Integer type){
+    public void add(Integer type) {
         operands.add(type);
     }
 
