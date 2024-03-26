@@ -57,4 +57,8 @@ public class Money {
         double result = money.money() / (double) this.money;
         return Math.floor(result * 100) / 100.0;
     }
+
+    public Money minus(Money money) {
+        return new Money(this.money - money.money());
+    }
 }
