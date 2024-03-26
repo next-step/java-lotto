@@ -19,7 +19,8 @@ public class InputView {
     }
 
     public static void printLottoList(LottoStore lottoStore) {
-        System.out.println("수동으로 " + lottoStore.getManualLottoCount() + "장, 자동으로 " + lottoStore.getAutoLottoCount() + "개를 구매했습니다.");
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",
+                lottoStore.getManualLottoCount(), lottoStore.getAutoLottoCount()));
         Lottos lottos = lottoStore.getLottos();
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.getLottoNumberString());

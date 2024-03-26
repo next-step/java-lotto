@@ -1,6 +1,9 @@
 package step2;
 
 import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public enum PrizeLevel {
     FIFTH(3, 5000),
@@ -9,6 +12,10 @@ public enum PrizeLevel {
     SECOND(5, 30000000),
     FIRST(6, 2000000000),
     MISS(0, 0);
+
+    private static final Map<Integer, PrizeLevel> PRIZE_LEVEL_MAP = Arrays.stream(PrizeLevel.values())
+            .filter(level -> level != SECOND)
+            .collect(Collectors.toMap(PrizeLevel::getMatchCount, Function.identity()));
 
     private final int matchCount;
     private final int prizeAmount;
@@ -30,13 +37,10 @@ public enum PrizeLevel {
         int matchedCount = lotto.matchedNumbersCount(winningNumbers.getNumbers());
         boolean hasBonus = lotto.hasBonus(winningNumbers.getBonusNumber());
 
-        if (matchedCount == 5 && hasBonus) {
-            return PrizeLevel.SECOND;
+        if (matchedCount == 5) {
+            return hasBonus ? PrizeLevel.SECOND : PrizeLevel.THIRD;
         }
 
-        return Arrays.stream(PrizeLevel.values())
-                .filter(level -> level.getMatchCount() == matchedCount)
-                .findFirst()
-                .orElse(PrizeLevel.MISS);
+        return PRIZE_LEVEL_MAP.getOrDefault(matchedCount, PrizeLevel.MISS);
     }
 }
