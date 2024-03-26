@@ -11,6 +11,10 @@ public class WinningNumber {
         this.number = number;
     }
 
+    public int number() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) {
@@ -29,5 +33,4 @@ public class WinningNumber {
     public int hashCode() {
         return number;
     }
-
 }

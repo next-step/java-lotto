@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.BonusBall;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.domain.Prize;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -24,15 +25,15 @@ public class LottoMatchingServiceTest {
         LottoTicket lottoTicket2 = new LottoTicket(() -> Arrays.asList( 1, 15, 20, 25, 30, 35)); // 1개 일치
         LottoTicket lottoTicket3 = new LottoTicket(() -> Arrays.asList( 1,  2, 20, 25, 30, 35)); // 2개 일치
 
-        LottoTicket lottoTicket4 = new LottoTicket(() -> Arrays.asList(1, 2, 3, 25, 30, 35)); // 3개 일치
-        LottoTicket lottoTicket5 = new LottoTicket(() -> Arrays.asList(1, 2, 3,  4, 30, 35)); // 4개 일치
-        LottoTicket lottoTicket6 = new LottoTicket(() -> Arrays.asList(1, 2, 3,  4,  5, 35)); // 5개 일치
-        LottoTicket lottoTicket7 = new LottoTicket(() -> Arrays.asList(1, 2, 3,  4,  5,  7)); // 5개 일치 + 보너스 볼일치
-        LottoTicket lottoTicket8 = new LottoTicket(() -> Arrays.asList(1, 2, 3,  4,  5,  6)); // 6개 일치
+        LottoTicket lottoTicket4 = new LottoTicket(() -> Arrays.asList( 1,  2,  3, 25, 30, 35)); // 3개 일치
+        LottoTicket lottoTicket5 = new LottoTicket(() -> Arrays.asList( 1,  2,  3,  4, 30, 35)); // 4개 일치
+        LottoTicket lottoTicket6 = new LottoTicket(() -> Arrays.asList( 1,  2,  3,  4,  5, 35)); // 5개 일치
+        LottoTicket lottoTicket7 = new LottoTicket(() -> Arrays.asList( 1,  2,  3,  4,  5,  7)); // 5개 일치 + 보너스 볼일치
+        LottoTicket lottoTicket8 = new LottoTicket(() -> Arrays.asList( 1,  2,  3,  4,  5,  6)); // 6개 일치
 
         LottoMatchingService lottoMatchingService = new LottoMatchingService(winningNumbers, bonusBall);
         List<LottoTicket> lottoTickets = Arrays.asList(lottoTicket1, lottoTicket2, lottoTicket3, lottoTicket4, lottoTicket5, lottoTicket6, lottoTicket7, lottoTicket8);
-        Map<Prize, Integer> numberOfWins = lottoMatchingService.matchWinningNumber(lottoTickets);
+        Map<Prize, Integer> numberOfWins = lottoMatchingService.matchWinningNumber(new LottoTickets(lottoTickets));
         System.out.println("numberOfWins = " + numberOfWins);
 
         Assertions.assertThat(numberOfWins.get(Prize.FIRST_PRIZE)).isEqualTo(1);
@@ -57,7 +58,7 @@ public class LottoMatchingServiceTest {
         LottoMatchingService lottoMatchingService = new LottoMatchingService(winningNumbers, bonusBall);
         List<LottoTicket> lottoTickets = Arrays.asList(lottoTicket4, lottoTicket5, lottoTicket6, lottoTicket7, lottoTicket8);
 
-        Map<Prize, Integer> numberOfWins = lottoMatchingService.matchWinningNumber(lottoTickets);
+        Map<Prize, Integer> numberOfWins = lottoMatchingService.matchWinningNumber(new LottoTickets(lottoTickets));
 
         Assertions.assertThat(numberOfWins.size()).isEqualTo(5);
     }
