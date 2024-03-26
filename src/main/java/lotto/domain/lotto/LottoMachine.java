@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import static lotto.utils.constants.LOTTO_TICKET_PRICE;
+
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -40,7 +42,7 @@ public class LottoMachine {
 
 
     public int calculateExecuteCount() {
-        return purchaseAmount.getPurchaseAmount() / 1000;
+        return purchaseAmount.getPurchaseAmount() / LOTTO_TICKET_PRICE;
     }
 
     public Grade calculatePrizeMoney(final WinningNumbers winningNumbers, final Lotto lotto) {
