@@ -19,9 +19,9 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<Rank> getRanks(LottoNumbers winNums) {
+    public List<Rank> getRanks(LottoNumbers winNums, BonusNumber bonusNumber) {
         return lottos.stream()
-                .map(lotto -> lotto.match(winNums))
+                .map(lotto -> lotto.match(winNums, bonusNumber))
                 .collect(Collectors.toList());
     }
 

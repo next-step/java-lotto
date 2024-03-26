@@ -26,7 +26,7 @@ public class LottoView {
             .filter(rank -> rank != Rank.NONE)
             .sorted(Comparator.reverseOrder())
             .forEach(rank -> {
-                System.out.println(String.format("%d개 일치 (%s)- %d개", rank.getMatchNumberCount(), rank.getWinPrice(), summary.getRankCount(rank)));
+                System.out.println(RankSentenceProvider.sentence(rank, summary.getRankCount(rank)));
             });
         System.out.println(String.format("총 수익률은 %.2f입니다", summary.rateOfReturn()));
     }

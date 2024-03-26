@@ -25,22 +25,37 @@ class LottoTest {
     @ParameterizedTest(name = "로또번호 : {1}, 결과 : {2}")
     @DisplayName("로또 등수 반환한다")
     @MethodSource("lottoNumberAndWinningNumber")
-    public void matchLottoNumberRankTest(List<Integer> lottoNums, List<Integer> winningNums, Rank rank) {
+    public void matchLottoNumberRankTest(List<Integer> lottoNums, List<Integer> winningNums, BonusNumber bonusNumber, Rank rank) {
 
-        Lotto lotto = new Lotto( new LottoNumbers(lottoNums));
+        Lotto lotto = new Lotto(new LottoNumbers(lottoNums));
 
-        Rank sut = lotto.match(new LottoNumbers(winningNums));
+        Rank sut = lotto.match(new LottoNumbers(winningNums), bonusNumber);
 
         assertThat(sut).isEqualTo(rank);
     }
 
+    @Test
+    @DisplayName("2등, 보너스 번호 당첨")
+    public void bonusNumberTest() {
+        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 8));
+
+        Lotto lotto = new Lotto(lottoNumbers);
+        Rank sut = lotto.match(new LottoNumbers("1, 2, 3, 4, 5, 7"), new BonusNumber(8));
+
+        assertThat(sut).isEqualTo(Rank.SECOND);
+    }
+
+
+
 
     static Stream<Arguments> lottoNumberAndWinningNumber() {
+        BonusNumber ten = new BonusNumber(10);
         return Stream.of(
-            Arguments.arguments(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 4, 5, 6), Rank.FIRST),
-            Arguments.arguments(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 4, 5, 8), Rank.SECOND),
-            Arguments.arguments(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 4, 8, 9), Rank.THIRD),
-            Arguments.arguments(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 10, 8, 9), Rank.FORTH)
+            Arguments.arguments(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 4, 5, 6), ten, Rank.FIRST),
+            Arguments.arguments(List.of(1, 2, 3, 4, 5, 10), List.of(1, 2, 3, 4, 5, 8), ten, Rank.SECOND),
+            Arguments.arguments(List.of(1, 2, 3, 4, 5, 12), List.of(1, 2, 3, 4, 5, 45), ten, Rank.THIRD),
+            Arguments.arguments(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 4, 8, 9), ten, Rank.FORTH),
+            Arguments.arguments(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 10, 8, 9), ten, Rank.FIFTH)
         );
     }
 
