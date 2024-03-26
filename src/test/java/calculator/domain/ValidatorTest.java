@@ -13,15 +13,15 @@ class ValidatorTest {
     @NullAndEmptySource
     @DisplayName("입력값이 null이거나 빈 공백인 경우 예외를 던진다")
     void validateInputNullAndEmpty_null이나빈문자열(String input) {
-        Assertions.assertThatThrownBy(() -> Validator.validateInputNullAndEmptyWithThrow(input))
+        Assertions.assertThatThrownBy(() -> Validator.validateInputAndThrow(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"%", "^", "@"})
     @DisplayName("입력값이 사칙연산이 아닌 경우 예외를 던진다")
-    void validateOperator_연산자_검증(String input) {
-        Assertions.assertThatThrownBy(() -> Validator.validateOperator(input))
+    void validateArithmeticFormula_연산자_검증(String input) {
+        Assertions.assertThatThrownBy(() -> Validator.validateArithmeticFormulaAndThrow(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
