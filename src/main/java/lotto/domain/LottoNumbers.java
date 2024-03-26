@@ -20,7 +20,7 @@ public class LottoNumbers {
         assertValidLength(inputNumbers);
 
         List<LottoNumber> numbers = inputNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
         assertNotDuplicateNumber(numbers);
