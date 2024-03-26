@@ -4,6 +4,7 @@ import lotto.constant.Constant;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.Rank;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,10 +37,10 @@ public class ResultView {
 
     public static void printResult(HashMap<Integer, Integer> matchResult, double revenue) {
         System.out.println("당첨 통계\n"+"-".repeat(9));
-        System.out.println("3개 일치 (5000원) - " + matchResult.get(Constant.FOURTH_PLACE) + "개");
-        System.out.println("4개 일치 (50000원) - " + matchResult.get(Constant.THIRD_PLACE) + "개");
-        System.out.println("5개 일치 (1500000원) - " + matchResult.get(Constant.SECOND_PLACE) + "개");
-        System.out.println("6개 일치 (2000000000원) - " + matchResult.get(Constant.FIRST_PLACE) + "개");
+        System.out.println("3개 일치 (5000원) - " + matchResult.get(Rank.valueOf(Constant.THREE_AGREEMENT).getPrize()) + "개");
+        System.out.println("4개 일치 (50000원) - " + matchResult.get(Rank.valueOf(Constant.FOUR_AGREEMENT).getPrize()) + "개");
+        System.out.println("5개 일치 (1500000원) - " + matchResult.get(Rank.valueOf(Constant.FIVE_AGREEMENT).getPrize()) + "개");
+        System.out.println("6개 일치 (2000000000원) - " + matchResult.get(Rank.valueOf(Constant.SIX_AGREEMENT).getPrize()) + "개");
         System.out.println("총 수익률은 " + revenue + "입니다.");
     }
 }
