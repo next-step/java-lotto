@@ -4,15 +4,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class Revenue {
-    public double calculateRevenue(int money, int revenueTotal) {
+    public double calculateRevenue(int money, long revenueTotal) {
         return (double)revenueTotal / money;
     }
 
-    public int getRevenueTotal(HashMap<Integer, Integer> matchResult) {
-        int total = 0;
+    public long getRevenueTotal(HashMap<Integer, Integer> matchResult) {
+        long total = 0;
 
         for (int prize : matchResult.keySet()) {
-            total += prize * matchResult.get(prize);
+            total += (long) prize * matchResult.get(prize);
         }
 
         return total;
