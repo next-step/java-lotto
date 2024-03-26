@@ -1,6 +1,7 @@
 package lotto.domain.rank;
 
 import lotto.domain.purchase.Cash;
+import lotto.error.ErrorCode;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -46,7 +47,7 @@ public enum Rank {
 
     private static void assertMatchCountLessThanFirstPrize(LottoMatchCount matchCount) {
         if (FIRST.matchCondition.smallerMatchCountThan(matchCount)) {
-            throw new IllegalArgumentException("로또는 그 이상의 당첨이 불가능할텐데요.");
+            throw new IllegalArgumentException(ErrorCode.RANK_OVER_MAX_MATCH_COUNT.message());
         }
     }
 

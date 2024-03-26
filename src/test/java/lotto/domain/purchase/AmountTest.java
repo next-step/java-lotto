@@ -1,6 +1,7 @@
 package lotto.domain.purchase;
 
 import lotto.domain.purchase.Amount;
+import lotto.error.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +13,7 @@ public class AmountTest {
     @Test
     void constructor() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Amount(-1));
+                .isThrownBy(() -> new Amount(-1))
+                .withMessage(ErrorCode.AMOUNT_CANNOT_BE_NEGATIVE.message());
     }
 }

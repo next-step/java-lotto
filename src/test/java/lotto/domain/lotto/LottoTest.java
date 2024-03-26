@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.rank.Rank;
+import lotto.error.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -49,7 +50,7 @@ public class LottoTest {
         void it_throws_illegalException_when_size_is_not_six() {
             assertThatIllegalArgumentException()
                     .isThrownBy(() -> new Lotto(Collections.emptyList()))
-                    .withMessage("로또는 6개의 숫자가 필요합니다.");
+                    .withMessage(ErrorCode.LOTTO_NEEDS_SIX_NUMBERS.message());
         }
 
         @DisplayName("로또는 중복된 번호를 생성자로 넘기면, IllegalArgumentException을 발생시킨다.")
@@ -57,7 +58,7 @@ public class LottoTest {
         void it_throws_illegalException_when_numbers_duplicated() {
             assertThatIllegalArgumentException()
                     .isThrownBy(() -> new Lotto(new String[]{"1", "2", "3", "4", "5", "5"}))
-                    .withMessage("중복되지 않는 번호를 입력해주세요.");
+                    .withMessage(ErrorCode.LOTTO_DUPLICATED_NUMBERS.message());
         }
 
     }

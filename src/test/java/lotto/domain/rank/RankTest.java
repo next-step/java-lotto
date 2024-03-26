@@ -1,5 +1,6 @@
 package lotto.domain.rank;
 
+import lotto.error.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,8 @@ public class RankTest {
         @Test
         void it_throws_illegalArgumentException_when_greater_than_six() {
             assertThatIllegalArgumentException()
-                    .isThrownBy(() -> Rank.valueOf(7, false));
+                    .isThrownBy(() -> Rank.valueOf(7, false))
+                    .withMessage(ErrorCode.RANK_OVER_MAX_MATCH_COUNT.message());
         }
 
         Stream<Arguments> rankByMatchCount() {

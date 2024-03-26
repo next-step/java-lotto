@@ -1,6 +1,7 @@
 package lotto.domain.purchase;
 
 import lotto.domain.statistics.RateOfReturn;
+import lotto.error.ErrorCode;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -71,13 +72,13 @@ public class Cash implements Comparable<Cash> {
 
     private void assertCashPositive(BigDecimal cash) {
         if (cash.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("현금은 마이너스 통장이 아닙니다.");
+            throw new IllegalArgumentException(ErrorCode.CASH_CANNOT_BE_NEGATIVE.message());
         }
     }
 
     private void assertPriceGreaterThanZero(Cash price) {
         if (price.equalsZero()) {
-            throw new IllegalArgumentException("공짜는 없는 세상입니다.");
+            throw new IllegalArgumentException(ErrorCode.CASH_PRICE_CANNOT_BE_BELOW_ZERO.message());
         }
     }
 

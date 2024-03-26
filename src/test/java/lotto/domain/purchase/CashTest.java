@@ -2,6 +2,7 @@ package lotto.domain.purchase;
 
 import lotto.domain.purchase.Amount;
 import lotto.domain.purchase.Cash;
+import lotto.error.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ public class CashTest {
     void constructor() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Cash(-1))
-                .withMessage("현금은 마이너스 통장이 아닙니다.");
+                .withMessage(ErrorCode.CASH_CANNOT_BE_NEGATIVE.message());
     }
 
     @DisplayName("buyableAmount는 제품 금액에 따른 구매 가능 개수를 반환한다.")
@@ -33,7 +34,8 @@ public class CashTest {
     @Test
     void buyableAmount() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Cash(1000).buyableAmount(new Cash(0)));
+                .isThrownBy(() -> new Cash(1000).buyableAmount(new Cash(0)))
+                .withMessage(ErrorCode.CASH_PRICE_CANNOT_BE_BELOW_ZERO.message());
     }
 
     @DisplayName("equalsZero는 Cash의 값이 0인지 검사한다.")
@@ -74,7 +76,8 @@ public class CashTest {
         @Test
         void target_value_bigger() {
             assertThatIllegalArgumentException()
-                    .isThrownBy(() -> new Cash(1).subtract(new Cash(20)));
+                    .isThrownBy(() -> new Cash(1).subtract(new Cash(20)))
+                    .withMessage(ErrorCode.CASH_CANNOT_BE_NEGATIVE.message());
         }
 
     }

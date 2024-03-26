@@ -1,5 +1,7 @@
 package lotto.domain.purchase;
 
+import lotto.error.ErrorCode;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.stream.IntStream;
@@ -18,7 +20,7 @@ public class Amount {
 
     private void assertAmountPositive(int value) {
         if (value < 0) {
-            throw new IllegalArgumentException("수량은 음수가 될 수 없습니다.");
+            throw new IllegalArgumentException(ErrorCode.AMOUNT_CANNOT_BE_NEGATIVE.message());
         }
     }
 

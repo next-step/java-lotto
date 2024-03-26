@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import lotto.domain.lotto.LottoNumber;
+import lotto.error.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,8 @@ public class LottoNumberTest {
         @ValueSource(ints = {0, 47})
         void it_throws_illegalArgumentException_when_not_in_range(int input) {
             assertThatIllegalArgumentException()
-                    .isThrownBy(() -> new LottoNumber(input));
+                    .isThrownBy(() -> new LottoNumber(input))
+                    .withMessage(ErrorCode.LOTTO_INVALID_NUMBER.message());
         }
 
         @DisplayName("1과 45사이의 숫자 문자열을 입력할 경우, 해당 값을 가진다.")

@@ -3,6 +3,7 @@ package lotto.domain.purchase;
 import lotto.domain.purchase.Amount;
 import lotto.domain.purchase.Cash;
 import lotto.domain.purchase.LotteryShop;
+import lotto.error.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +23,8 @@ public class LotteryShopTest {
         final Amount amount = new Amount(11);
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LotteryShop.purchaseManualAndChange(cash, amount));
+                .isThrownBy(() -> LotteryShop.purchaseManualAndChange(cash, amount))
+                .withMessage(ErrorCode.CASH_NOT_ENOUGH.message());
     }
 
     @DisplayName("복권가게는 수동복권이 구매가능할 경우, 잔돈을 거슬러 준다.")
