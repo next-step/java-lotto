@@ -19,10 +19,6 @@ public enum LottoRank {
         this.reward = reward;
     }
 
-    public String getRanking() {
-        return ranking;
-    }
-
     public int getReward() {
         return reward;
     }

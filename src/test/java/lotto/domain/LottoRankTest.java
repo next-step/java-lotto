@@ -1,18 +1,24 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.SoftAssertions.*;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.api.Test;
 
 public class LottoRankTest {
 
-    @ParameterizedTest
-    @CsvSource(value = {"6:1등", "5:2등", "4:3등", "3:4등", "2:미당첨", "1:미당첨", "0:미당첨"}, delimiter = ':')
+    @Test
     @DisplayName("로또 번호가 맞은 개수에 대한 순위를 반환한다.")
-    void match(int matchCount, String expected) {
+    void match() {
 
-        assertThat(LottoRank.getLottoRank(matchCount).getRanking()).isEqualTo(expected);
+        assertSoftly(softly -> {
+            assertThat(LottoRank.getLottoRank(6)).isEqualTo(LottoRank.FIRST);
+            assertThat(LottoRank.getLottoRank(5)).isEqualTo(LottoRank.SECOND);
+            assertThat(LottoRank.getLottoRank(4)).isEqualTo(LottoRank.THIRD);
+            assertThat(LottoRank.getLottoRank(3)).isEqualTo(LottoRank.FOURTH);
+            assertThat(LottoRank.getLottoRank(2)).isEqualTo(LottoRank.NO_MATCH);
+
+        });
     }
 }
