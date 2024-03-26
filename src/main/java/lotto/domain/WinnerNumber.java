@@ -17,9 +17,8 @@ public class WinnerNumber {
     }
 
     public int matchCount(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.stream()
+        return (int)lottoNumbers.stream()
             .filter(lottoNumber -> winnerNumbers.contains(lottoNumber))
-            .mapToInt(value -> 1)
-            .sum();
+            .count();
     }
 }
