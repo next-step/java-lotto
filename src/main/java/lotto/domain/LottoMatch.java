@@ -7,18 +7,19 @@ import java.util.List;
 
 public class LottoMatch {
     private static final int MATCH_COUNT_STANDARD = 3;
-    private static HashMap<Integer, Integer> setUp(){
-        return new HashMap<>(){{
-            put(Constant.FIRST_PLACE, 0);
-            put(Constant.SECOND_PLACE, 0);
-            put(Constant.THIRD_PLACE, 0);
-            put(Constant.FOURTH_PLACE, 0);
+
+    public static HashMap<Integer, Integer> setMatchResult() {
+        return new HashMap<>() {{
+            put(Rank.valueOf(Constant.THREE_AGREEMENT).getPrize(), 0);
+            put(Rank.valueOf(Constant.FOUR_AGREEMENT).getPrize(), 0);
+            put(Rank.valueOf(Constant.FIVE_AGREEMENT).getPrize(), 0);
+            put(Rank.valueOf(Constant.SIX_AGREEMENT).getPrize(), 0);
         }};
     }
 
     public static HashMap<Integer, Integer> match(Lottos lottos, List<Integer> winNumbers) throws IllegalArgumentException{
         List<Lotto> lottoList = lottos.getLottos();
-        HashMap<Integer, Integer> matchResult = setUp();
+        HashMap<Integer, Integer> matchResult = setMatchResult();
         int matchCount;
 
         for (Lotto lotto : lottoList) {
@@ -30,11 +31,11 @@ public class LottoMatch {
     }
 
     private static void putMatchResult(int matchCount, HashMap<Integer, Integer> matchResult) {
-        int prize;
-
-        if (matchCount >= MATCH_COUNT_STANDARD) {
-            prize = Prize.checkMatchCount(matchCount).solvePrize();
-            matchResult.put(prize, matchResult.getOrDefault(prize, 0) + 1);
+        if (matchCount < MATCH_COUNT_STANDARD) {
+            return;
         }
+
+        int prize = Rank.valueOf(matchCount).getPrize();
+        matchResult.put(prize, matchResult.getOrDefault(prize, 0) + 1);
     }
 }
