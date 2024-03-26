@@ -1,9 +1,8 @@
+package calculator;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import calculator.CalculatorService;
-import calculator.OperationFactory;
-import calculator.Validator;
 import calculator.operator.Operator;
 import java.util.List;
 import java.util.stream.Collectors;
