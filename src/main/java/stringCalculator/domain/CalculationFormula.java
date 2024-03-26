@@ -1,7 +1,8 @@
 package stringCalculator.domain;
 
 import java.util.regex.Pattern;
-import stringCalculator.error.ErrorMessage;
+import stringCalculator.error.exception.NullBlankException;
+import stringCalculator.error.exception.WhiteSpaceMissingException;
 
 public class CalculationFormula {
 
@@ -11,13 +12,11 @@ public class CalculationFormula {
 
     public CalculationFormula(String input) {
         if (isNullOrBlank(input)) {
-            throw new IllegalArgumentException(
-                ErrorMessage.INPUT_VALUE_NOT_NULL_AND_BLANK.getErrorMessage());
+            throw new NullBlankException(input);
         }
 
         if (!isContainLeftBlank(input)) {
-            throw new IllegalArgumentException(
-                ErrorMessage.INPUT_VALUE_VALID_BLANK_SPACE.getErrorMessage());
+            throw new WhiteSpaceMissingException(input);
         }
 
         this.calculationFormula = input;
