@@ -6,7 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import stringCalculator.domain.expression.operator.impl.OperatorImpl;
-import stringCalculator.error.ErrorMessage;
+import stringCalculator.error.exception.DivideValueErrorException;
 
 public class CalculatorTest {
 
@@ -102,11 +102,12 @@ public class CalculatorTest {
         String input = "/" ;
 
         //when
-        ArithmeticException actual = catchThrowableOfType(
-            () -> OperatorImpl.fromOperator(input).calculate(5, 2), ArithmeticException.class);
+        DivideValueErrorException actual = catchThrowableOfType(
+            () -> OperatorImpl.fromOperator(input).calculate(5, 2),
+            DivideValueErrorException.class);
 
         //then
-        assertThat(actual).hasMessageContaining(ErrorMessage.DIVIDE_VALUE_ERROR.getErrorMessage());
+        assertThat(actual).hasMessageContaining("나눗셈의 결과는 정수여야 합니다, 좌항: 5, 우항: 2");
     }
 }
 

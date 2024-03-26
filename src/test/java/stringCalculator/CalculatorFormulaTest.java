@@ -9,7 +9,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 import stringCalculator.domain.CalculationFormula;
-import stringCalculator.error.ErrorMessage;
+import stringCalculator.error.exception.NullBlankException;
+import stringCalculator.error.exception.WhiteSpaceMissingException;
 
 public class CalculatorFormulaTest {
 
@@ -21,12 +22,11 @@ public class CalculatorFormulaTest {
         String input = "2+3*4/2" ;
 
         //when
-        IllegalArgumentException actual = catchThrowableOfType(
-            () -> new CalculationFormula(input), IllegalArgumentException.class);
+        WhiteSpaceMissingException actual = catchThrowableOfType(
+            () -> new CalculationFormula(input), WhiteSpaceMissingException.class);
 
         //then
-        assertThat(actual).hasMessageContaining(
-            ErrorMessage.INPUT_VALUE_VALID_BLANK_SPACE.getErrorMessage());
+        assertThat(actual).hasMessage("입력값은 한 칸씩 띄어져 있어야 합니다, 입력값 : 2+3*4/2");
     }
 
     @Test
@@ -48,17 +48,16 @@ public class CalculatorFormulaTest {
     @ParameterizedTest
     @NullAndEmptySource
     @ValueSource(strings = {"  "})
-    @DisplayName("빈 공백 문자일 경우 IllegalArgumentException throw 예외를 발생한다.")
+    @DisplayName("빈 공백 문자일 경우 NullBlankException throw 예외를 발생한다.")
     public void CalculatorFormula_Should_Occur_Exception_When_Input_Is_Null_Or_Empty(String input)
         throws Exception {
         //given
         //when
-        IllegalArgumentException actual = catchThrowableOfType(
-            () -> new CalculationFormula(input), IllegalArgumentException.class);
+        NullBlankException actual = catchThrowableOfType(
+            () -> new CalculationFormula(input), NullBlankException.class);
 
         //then
-        assertThat(actual).hasMessageContaining(
-            ErrorMessage.INPUT_VALUE_NOT_NULL_AND_BLANK.getErrorMessage());
+        assertThat(actual).hasMessageContaining("입력값은 NULL 또는 빈 문자열일수 없습니다");
     }
 }
 
