@@ -1,10 +1,8 @@
 package lotto.domain;
 
-import lotto.domain.strategy.ShuffleStrategy;
 import lotto.domain.type.RewardPrice;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static lotto.domain.LottoTicket.CORRECT_LOTTO_TICKET_SIZE;
 
@@ -20,7 +18,7 @@ public class LottoTickets {
   }
 
   public static LottoTickets purchaseBy(PurchaseAmount purchaseAmount, List<Set<Integer>> manualLottoNumbers) {
-    Set<LottoTicket> lottoTickets = convertLottoTickets(purchaseAmount, manualLottoNumbers);
+    Set<LottoTicket> lottoTickets = LottoTicket.generateBy(purchaseAmount, manualLottoNumbers);
     return new LottoTickets(purchaseAmount, lottoTickets);
   }
 
@@ -69,26 +67,5 @@ public class LottoTickets {
       map.put(reward, INIT_REWARD_PRICE_VALUE);
     }
     return map;
-  }
-
-  private static Set<LottoTicket> convertLottoTickets(PurchaseAmount purchaseAmount, List<Set<Integer>> manualLottoNumbers) {
-    Set<LottoTicket> lottoTickets = initLottoTickets(manualLottoNumbers);
-
-    ShuffleStrategy shuffleStrategy = new ShuffleStrategy();
-    for (int i = 0; i < purchaseAmount.autoTicketCount(); i++) {
-      lottoTickets.add(LottoTicket.generate(shuffleStrategy));
-    }
-
-    return lottoTickets;
-  }
-
-  private static Set<LottoTicket> initLottoTickets(List<Set<Integer>> lottoNumbers) {
-    if (lottoNumbers.isEmpty()) {
-      return new HashSet<>();
-    }
-
-    return lottoNumbers.stream()
-        .map(LottoTicket::generate)
-        .collect(Collectors.toSet());
   }
 }

@@ -1,7 +1,10 @@
 package lotto.domain;
 
 import lotto.domain.strategy.LottoTicketCreateGenerator;
+import lotto.domain.strategy.ShuffleStrategy;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -59,5 +62,25 @@ public class LottoTicket {
 
   public Set<LottoNo> getLottoNumbers() {
     return lottoNumbers;
+  }
+
+  public static Set<LottoTicket> generateBy(PurchaseAmount purchaseAmount, List<Set<Integer>> manualLottoNumbers) {
+    Set<LottoTicket> lottoTickets = initLottoTickets(manualLottoNumbers);
+    ShuffleStrategy shuffleStrategy = new ShuffleStrategy();
+    for (int i = 0; i < purchaseAmount.autoTicketCount(); i++) {
+      lottoTickets.add(LottoTicket.generate(shuffleStrategy));
+    }
+
+    return lottoTickets;
+  }
+
+  private static Set<LottoTicket> initLottoTickets(List<Set<Integer>> lottoNumbers) {
+    if (lottoNumbers.isEmpty()) {
+      return new HashSet<>();
+    }
+
+    return lottoNumbers.stream()
+        .map(LottoTicket::generate)
+        .collect(Collectors.toSet());
   }
 }

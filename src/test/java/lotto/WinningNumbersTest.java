@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class WinningNumbersTest {
 
   @Test
-  @DisplayName("당첨 번호 관리 기능 테스트")
+  @DisplayName("당첨 번호 6개와 보너스 번호를 입력하여 생성하고 `WinningNumbers` 를 생성할 수 있으며 같은 번호를 갖는지 검증할 수 있다.")
   void winningNumbersTest() {
     Set<Integer> lottoNumbers = Set.of(1, 2, 3, 4, 5, 6);
     int bonusNumber = 7;

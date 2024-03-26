@@ -51,7 +51,7 @@ public enum RewardPrice {
   }
 
   private static boolean filterIsMatchBonusBall(boolean isMatchBonusBall, RewardPrice it) {
-    if (it.matchCount == 5) {
+    if (it.matchCount == SECOND.matchCount) {
       return it.isMatchBonusBall == isMatchBonusBall;
     }
     return !it.isMatchBonusBall;
