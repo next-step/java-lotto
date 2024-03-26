@@ -13,7 +13,7 @@ class ValidatorTest {
     @NullAndEmptySource
     @DisplayName("입력값이 null이거나 빈 공백인 경우 예외를 던진다")
     void validateInputNullAndEmpty_null이나빈문자열(String input) {
-        Assertions.assertThatThrownBy(() -> Validator.validateInputAndThrow(input))
+        Assertions.assertThatThrownBy(() -> Validator.validateInputFormula(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -21,7 +21,7 @@ class ValidatorTest {
     @ValueSource(strings = {"%", "^", "@"})
     @DisplayName("입력값이 사칙연산이 아닌 경우 예외를 던진다")
     void validateArithmeticFormula_연산자_검증(String input) {
-        Assertions.assertThatThrownBy(() -> Validator.validateArithmeticFormulaAndThrow(input))
+        Assertions.assertThatThrownBy(() -> Validator.validateArithmeticFormula(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
