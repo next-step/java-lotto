@@ -1,8 +1,8 @@
 # 로또
 ## 진행 방법
-* 숫자 6개를 가지는 로또 객체를 구현
-* 로또들을 가지는 LottoList 구현
-* Lotto의 정답 개수,상금을 가지는 LottoPrize enum 구현
-* LottoList 와 정답지로 당첨금과,이익율을 구하는 LottoResult 구현
-  * 생성자에서 LottoMatcher로 비지니스로직 extract
-* 최종주문을 하는 LottoShop 구현
+* 정답숫자 6개와 보너스 넘버를 가지는 AnswerSheet 생성
+* LottoPrize enum값 추가
+  * 보너스 값 찾는 로직(캐시 수정)
+  * 출력 로직 수정
+* LottoPrize 변환로직  LottoMatcher 수정
+* 
