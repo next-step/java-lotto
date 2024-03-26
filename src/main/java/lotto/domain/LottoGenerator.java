@@ -13,7 +13,7 @@ public class LottoGenerator {
         checkShuffledNumbersSize(shuffledNumbers);
 
         IntStream.range(0, Constant.LOTTO_SIZE)
-                .forEach((index) -> lotto.add(new LottoNumber(shuffledNumbers.get(index))));
+                .forEach((number) -> lotto.add(new LottoNumber(shuffledNumbers.get(number))));
 
         return lotto;
     }
@@ -32,6 +32,7 @@ public class LottoGenerator {
 
     public static Lottos lotteryTickets(int count) {
         List<Lotto> lottoList = new ArrayList<>();
+        
 
         IntStream.range(0, count)
                 .forEach((index) -> lottoList.add(new Lotto(shuffleNumbers())));
