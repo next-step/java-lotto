@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StringToIntTest {
+public class StringToIntConverterTest {
     @Test
     @DisplayName("입력이 비어있는 경우 에러")
     void check_input_blank() {

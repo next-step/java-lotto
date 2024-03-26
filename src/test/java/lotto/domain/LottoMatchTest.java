@@ -20,12 +20,12 @@ public class LottoMatchTest {
         Lotto lotto6 = new Lotto(Arrays.asList(1,7,8,9,10,11));
 
         Lotto winLottoNum = new Lotto(Arrays.asList(1,2,3,4,5,6));
-        BonusNum bonusNum = new BonusNum(7, winLottoNum);
+        BonusNum bonusNum = new BonusNum(7);
         WinLotto winLotto = new WinLotto(winLottoNum, bonusNum);
 
         List<Lotto> lottos = new ArrayList<>(Arrays.asList(lotto1,lotto2,lotto3,lotto4,lotto5,lotto6));
 
-        BuyLottos buyLottos = new BuyLottos(6000,lottos);
+        BuyLottos buyLottos = new BuyLottos(lottos,6000);
 
         LottoMatch lottoMatch = new LottoMatch();
         lottoMatch.checkRank(buyLottos,winLotto);
@@ -34,7 +34,7 @@ public class LottoMatchTest {
                 ()->assertThat(lottoMatch.getRankOfLotto().get(RankMatches.SECOND)).isEqualTo(1),
                 ()->assertThat(lottoMatch.getRankOfLotto().get(RankMatches.THIRD)).isEqualTo(1),
                 ()->assertThat(lottoMatch.getRankOfLotto().get(RankMatches.FOURTH)).isEqualTo(1)
-                );
+        );
 
     }
 }

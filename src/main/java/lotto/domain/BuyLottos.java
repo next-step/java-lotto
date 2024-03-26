@@ -3,12 +3,12 @@ package lotto.domain;
 import lotto.interf.LottoStrategy;
 import lotto.interf.RandomLottoStrategy;
 import lotto.utils.RandomGenerator;
+import lotto.utils.StringToListConverter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BuyLottos {
-    private static final int LOTTO_ELEMENT_NUM = 6;
     private Price price;
     private List<Lotto> lottos;
 
@@ -18,7 +18,18 @@ public class BuyLottos {
         this.lottos = new ArrayList<>();
     }
 
-    public BuyLottos(int price, List<Lotto> lottos) {
+    public BuyLottos(int price, List<String> manual){
+        this.price = new Price(price);
+        this.lottos = new ArrayList<>();
+
+        for(String str: manual){
+            List<Integer> manualLottoList = StringToListConverter.toList(str);
+            Lotto manualLotto = new Lotto(manualLottoList);
+            this.lottos.add(manualLotto);
+        }
+    }
+
+    public BuyLottos(List<Lotto> lottos, int price) {
         this.price = new Price(price);
         this.lottos = lottos;
     }
@@ -33,7 +44,9 @@ public class BuyLottos {
 
     public void buyLottos(){
         int numOfLotto = getCountOfLotto();
-        for (int i = 0 ; i< numOfLotto; i++) {
+        int numOfAuto = numOfLotto - this.lottos.size();
+
+        for (int i = 0 ; i< numOfAuto; i++) {
             List<Integer> randomList = genRandomLottoList(genLotto());
             Lotto lotto = new Lotto(randomList);
             this.lottos.add(lotto);

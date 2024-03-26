@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-public class BonusNumTest {
+public class WinLottoTest {
     @DisplayName("보너스 번호는 로또 번호와 중복 불가.")
     @Test
     void price_lotto(){
