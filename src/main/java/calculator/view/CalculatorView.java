@@ -4,7 +4,6 @@ import static calculator.config.CalculatorExceptionMessage.UNEXPECTED_EXCEPTION;
 
 import java.text.MessageFormat;
 
-import calculator.domain.Operand;
 import calculator.util.ExpressionParser;
 import calculator.view.io.Input;
 import calculator.view.io.Output;
@@ -28,7 +27,7 @@ public class CalculatorView {
         return ExpressionParser.parseToTokens(input.readLine());
     }
 
-    public void printCalculationResult(final Operand result) {
+    public void printCalculationResult(final int result) {
         output.printLine(MessageFormat.format(RESULT_PRINT_FORMAT, result));
     }
 

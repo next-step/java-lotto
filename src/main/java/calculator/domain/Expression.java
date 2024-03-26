@@ -15,7 +15,7 @@ public class Expression {
         this.tokens = tokens;
     }
 
-    public Operand calculate() {
+    public int calculate() {
         while (isCalculationPossible()) {
             final Operand leftOperand = (Operand)tokens.pollFirst();
             final Operator operator = (Operator)tokens.pollFirst();
@@ -25,7 +25,7 @@ public class Expression {
             tokens.offerFirst(result);
         }
 
-        return (Operand)tokens.peek();
+        return ((Operand)tokens.peek()).number();
     }
 
     private boolean isCalculationPossible() {

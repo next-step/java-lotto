@@ -17,7 +17,7 @@ public class Calculator {
             final String[] expressionTokens = calculatorView.readExpressionTokens();
             final Expression expression = Expression.from(expressionTokens);
 
-            final Operand result = expression.calculate();
+            final int result = expression.calculate();
 
             calculatorView.printCalculationResult(result);
 

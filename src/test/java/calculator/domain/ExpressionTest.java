@@ -38,6 +38,6 @@ class ExpressionTest {
         final Expression expression = Expression.from(tokens);
 
         assertThat(expression.calculate())
-                .isEqualTo(new Operand(result));
+                .isEqualTo(result);
     }
 }
