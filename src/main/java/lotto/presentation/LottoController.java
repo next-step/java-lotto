@@ -22,8 +22,10 @@ public class LottoController {
 
     public void startLotto() {
         int purchasePrice = inputView.inputPurchasePrice();
+        int manualLottoCount = inputView.inputManualLottoCount();
+
         User user  = lottoService.makeUser();
-        user.purchaseLottos(purchasePrice);
+        lottoService.purchaseLottos(user, purchasePrice, manualLottoCount);
 
         resultView.printPurchaseCount(lottoService.purchaseCount(user));
         resultView.printLottos(user.getLottos());

@@ -8,18 +8,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class User {
-    private PurchasePrice purchasePrice;
+    private PurchasePrice purchasePrice = new PurchasePrice(0);
     private List<Lotto> lottos = new ArrayList<>();
-    private final LottoSeller lottoSeller;
 
-    public User(LottoSeller lottoSeller) {
-        this.lottoSeller = lottoSeller;
-    }
+    public void purchaseLottos(LottoSeller lottoSeller, int purchasePrice) {
+        PurchasePrice currentPurchasePrice = new PurchasePrice(purchasePrice);
+        this.purchasePrice = new PurchasePrice(currentPurchasePrice.getPurchasePrice() + this.purchasePrice.getPurchasePrice());
 
-    public void purchaseLottos(int purchasePrice) {
-        this.purchasePrice = new PurchasePrice(purchasePrice);
-
-        lottos = lottoSeller.sellLottos(this.purchasePrice.countPurchasableLotto());
+        lottos.addAll(lottoSeller.sellLottos(currentPurchasePrice.countPurchasableLotto()));
     }
 
     public List<Lotto> getLottos() {
@@ -44,6 +40,10 @@ public class User {
         userLottoResult.setRateOfReturn(rateOfReturn);
 
         return userLottoResult;
+    }
+
+    public int getPurchasePrice() {
+        return purchasePrice.getPurchasePrice();
     }
 
 }
