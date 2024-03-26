@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.Collections;
+import java.util.Iterator;
+
 public class ManualLottoCount {
     private final Integer count;
 
@@ -17,5 +20,9 @@ public class ManualLottoCount {
         if(count == null){
             throw new IllegalArgumentException();
         }
+    }
+
+    public Iterator<Integer> iterator() {
+        return Collections.singleton(this.count).iterator();
     }
 }

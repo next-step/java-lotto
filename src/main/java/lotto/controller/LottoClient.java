@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.*;
 
+import java.util.Iterator;
 import java.util.List;
 
 import static lotto.view.InputView.*;
@@ -12,12 +13,25 @@ public class LottoClient {
     public static void main(String[] args) {
         printPlainMessage("구입금액을 입력해 주세요.");
         Cash cash = generateCash();
-        insertManualLottoCount(cash);
+        ManualLottoCount manualLottoCount = insertManualLottoCount(cash);
+        ManualLottoGroup manualLottoGroup = generateManualLotto(manualLottoCount);
         LottoGroup lottoGroup = generateLottoGroupAndPrint(cash);
         WinningLotto winningLotto = insertWinningNumbers();
         Match match = new Match();
         lottoGroup.saveMatchResult(winningLotto, match);
         printResult(cash, match);
+    }
+
+    private static ManualLottoGroup generateManualLotto(ManualLottoCount manualLottoCount) {
+        printPlainMessage("수동으로 구매할 번호를 입력해 주세요.");
+        Iterator<Integer> iterator = manualLottoCount.iterator();
+        ManualLottoGroup manualLottoGroup = new ManualLottoGroup();
+        while(iterator.hasNext()){
+            List<Integer> numbers = generateNumbers();
+            manualLottoGroup.add(new ManualLotto(numbers));
+            iterator.next();
+        }
+        return manualLottoGroup;
     }
 
     private static WinningLotto insertWinningNumbers() {
@@ -35,7 +49,7 @@ public class LottoClient {
 
     private static List<Integer> insertLatestWinningNumbers() {
         printPlainMessage("지난 주 당첨 번호를 입력해 주세요.");
-        return generateLatestWinningNumbers();
+        return generateNumbers();
     }
 
     private static int insertBonusNumber() {

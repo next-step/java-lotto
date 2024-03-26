@@ -13,7 +13,7 @@ public class InputView {
         return new Cash(insertNumber());
     }
 
-    public static List<Integer> generateLatestWinningNumbers() {
+    public static List<Integer> generateNumbers() {
         String str = insertValues();
         return Arrays.stream(str.split(","))
                 .map(Integer::parseInt)
