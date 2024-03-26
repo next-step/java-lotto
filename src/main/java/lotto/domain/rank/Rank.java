@@ -1,8 +1,10 @@
 package lotto.domain.rank;
 
+import lotto.domain.Cash;
 import lotto.domain.lotto.LottoMatchCount;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,26 +18,26 @@ public enum Rank {
     ;
 
     private final MatchCondition matchCondition;
-    private final long winnings;
+    private final Cash winnings;
 
     Rank(int matchCount, boolean needBonusMatch, long winnings) {
         this.matchCondition = new MatchCondition(matchCount, needBonusMatch);
-        this.winnings = winnings;
+        this.winnings = new Cash(winnings);
     }
 
     public static Rank valueOf(LottoMatchCount matchCount, boolean bonusMatch) {
         assertMatchCountLessThanFirstPrize(matchCount);
 
         return Arrays.stream(values())
-                .filter(type -> type.matchCondition.match(matchCount, bonusMatch))
+                .filter(type -> type.match(matchCount, bonusMatch))
                 .findFirst()
                 .orElse(Rank.NEXT_CHANCE);
     }
 
     public static List<Rank> winRanks() {
         return Arrays.stream(values())
-                .filter(type -> type.winnings > 0L)
-                .sorted((a, b) -> Long.compare(a.winnings, b.winnings))
+                .filter(Rank::isWinningsGreaterThanZero)
+                .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
     }
 
@@ -45,11 +47,19 @@ public enum Rank {
         }
     }
 
+    private boolean match(LottoMatchCount matchCount, boolean bonusMatch) {
+        return this.matchCondition.match(matchCount, bonusMatch);
+    }
+
+    private boolean isWinningsGreaterThanZero() {
+        return this.winnings.greaterThanZero();
+    }
+
     public int matchCount() {
         return this.matchCondition.matchCount();
     }
 
-    public long winnings() {
+    public Cash winnings() {
         return this.winnings;
     }
 

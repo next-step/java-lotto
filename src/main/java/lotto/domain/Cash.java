@@ -6,16 +6,24 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
 
-public class Cash {
+public class Cash implements Comparable<Cash> {
     private final BigDecimal value;
 
     public Cash(long cash) {
         this(BigDecimal.valueOf(cash));
     }
 
+    public Cash() {
+        this(BigDecimal.ZERO);
+    }
+
     public Cash(BigDecimal cash) {
         assertCashPositive(cash);
         this.value = cash;
+    }
+
+    public static Cash sum(Cash first, Cash second) {
+        return first.add(second);
     }
 
     public BigDecimal value() {
@@ -28,16 +36,28 @@ public class Cash {
         return new Amount(value.divideToIntegralValue(price.value()));
     }
 
-    public boolean equalsZero() {
-        return value.equals(BigDecimal.ZERO);
-    }
-
     public RateOfReturn rateOfReturn(Cash earned) {
         return new RateOfReturn(earned.value().divide(value, MathContext.DECIMAL32).doubleValue());
     }
 
+    public boolean equalsZero() {
+        return value.equals(BigDecimal.ZERO);
+    }
+
     public boolean smallerThan(Cash target) {
         return value.compareTo(target.value()) < 0;
+    }
+
+    public boolean greaterThanZero() {
+        return value.compareTo(BigDecimal.ZERO) > 0;
+    }
+
+    public Cash add(Cash other) {
+        return new Cash(this.value.add(other.value()));
+    }
+
+    public Cash multiply(int amount) {
+        return multiply(new Amount(amount));
     }
 
     public Cash multiply(Amount amount) {
@@ -72,5 +92,10 @@ public class Cash {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public int compareTo(Cash other) {
+        return this.value.compareTo(other.value());
     }
 }
