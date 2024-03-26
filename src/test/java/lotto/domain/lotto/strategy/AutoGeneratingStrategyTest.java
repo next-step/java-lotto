@@ -51,8 +51,8 @@ class AutoGeneratingStrategyTest {
                 List<LottoNumber> lottoNumbers = lotto.lottoNumbers();
 
                 for (LottoNumber lottoNumber : lottoNumbers) {
-                    assertThat(lottoNumber.lottoNumber()).isGreaterThanOrEqualTo(MIN_LOTTO_NUMBER);
-                    assertThat(lottoNumber.lottoNumber()).isLessThanOrEqualTo(MAX_LOTTO_NUMBER);
+                    assertThat(lottoNumber.number()).isGreaterThanOrEqualTo(MIN_LOTTO_NUMBER);
+                    assertThat(lottoNumber.number()).isLessThanOrEqualTo(MAX_LOTTO_NUMBER);
                 }
             }
         }

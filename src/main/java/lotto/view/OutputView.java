@@ -52,7 +52,7 @@ public class OutputView {
     private static String lottoNumbers(Lotto lotto) {
         return lotto.lottoNumbers()
                 .stream()
-                .map(lottoNumber -> String.valueOf(lottoNumber.lottoNumber()))
+                .map(lottoNumber -> String.valueOf(lottoNumber.number()))
                 .collect(Collectors.joining(COMMA_BLANK));
     }
 

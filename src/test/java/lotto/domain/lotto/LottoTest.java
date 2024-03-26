@@ -67,7 +67,7 @@ class LottoTest {
                 .collect(Collectors.toList());
 
         Lotto lotto = Lotto.valueOf(lottoNumbers);
-        BonusNumber bonusNumber = new BonusNumber(LottoNumber.valueOf(bonusNumberInput));
+        BonusNumber bonusNumber = BonusNumber.valueOf(LottoNumber.valueOf(bonusNumberInput));
 
         assertThat(lotto.contains(bonusNumber)).isEqualTo(expected);
     }

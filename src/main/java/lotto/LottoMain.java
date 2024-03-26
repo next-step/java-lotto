@@ -22,9 +22,7 @@ public class LottoMain {
             Lottos lottos = lottoGeneratingStrategy.lottos(totalNumberOfLottoToPurchase, manualLottos);
             printLottos(lottos.lottos());
 
-            WinningNumbers winningNumbers = enteredWinningNumbers();
-            BonusNumber bonusNumber = enteredBonusNumber(winningNumbers);
-            WinningAndBonusNumbers winningAndBonusNumbers = WinningAndBonusNumbers.newWinningAndBonusNumbers(winningNumbers, bonusNumber);
+            WinningAndBonusNumbers winningAndBonusNumbers = WinningAndBonusNumbers.newWinningAndBonusNumbers(enteredWinningNumbers(), enteredBonusNumber());
             printStatisticsOfLottos(lottos.statistics(winningAndBonusNumbers, purchaseAmountOfMoney));
 
         } catch (IllegalArgumentException e) {

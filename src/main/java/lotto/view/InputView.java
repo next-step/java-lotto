@@ -117,7 +117,7 @@ public class InputView {
         }
     }
 
-    public static BonusNumber enteredBonusNumber(WinningNumbers winningNumbers) {
+    public static BonusNumber enteredBonusNumber() {
         System.out.println(BONUS_NUMBER_INPUT_GUIDE_MESSAGE);
         String bonusNumberInput = SCANNER.nextLine();
 
@@ -125,7 +125,7 @@ public class InputView {
 
         LottoNumber bonusNumber = LottoNumber.valueOf(Integer.parseInt(bonusNumberInput));
 
-        return BonusNumber.newBonusNumberWithOutWinningNumbers(bonusNumber, winningNumbers);
+        return BonusNumber.valueOf(bonusNumber);
     }
 
     private static void validateBonusNumberInput(String bonusNumberInput) {

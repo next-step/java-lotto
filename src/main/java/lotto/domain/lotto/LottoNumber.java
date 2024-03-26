@@ -51,7 +51,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return this.lottoNumber - lottoNumber.lottoNumber;
     }
 
-    public int lottoNumber() {
+    public int number() {
         return lottoNumber;
     }
 }

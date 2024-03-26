@@ -40,7 +40,7 @@ class LottosTest {
         Lottos lottos = lottoGeneratingStrategyStub.lottos(purchaseAmountOfMoney.totalNumberOfLottoToPurchase(), EMPTY_LOTTOS);
 
         WinningNumbers winningNumbers = WinningNumbers.valueOf(numbersForTest(winningNumbersInput));
-        BonusNumber bonusNumber = BonusNumber.newBonusNumberWithOutWinningNumbers(LottoNumber.valueOf(bonusNumberInput), winningNumbers);
+        BonusNumber bonusNumber = BonusNumber.valueOf(LottoNumber.valueOf(bonusNumberInput));
         WinningAndBonusNumbers winningAndBonusNumbers = WinningAndBonusNumbers.newWinningAndBonusNumbers(winningNumbers, bonusNumber);
 
         StatisticsOfLottos statisticsOfLottos = lottos.statistics(winningAndBonusNumbers, purchaseAmountOfMoney);
