@@ -23,22 +23,8 @@ public class LotteryAwardSystem {
     }
 
     private void recordWinnerCount(Lotto lotto) {
-        PrizeLevel prizeLevel = getPrizeLevel(lotto);
+        PrizeLevel prizeLevel = PrizeLevel.calculateWinningTier(lotto, winningNumbers);
         winnersCountManager.recordWinnerCount(prizeLevel);
-    }
-
-    private PrizeLevel getPrizeLevel(Lotto lotto) {
-        int matchedCount = lotto.matchedNumbersCount(winningNumbers.getNumbers());
-        boolean hasBonus = lotto.hasBonus(winningNumbers.getBonusNumber());
-
-        if (matchedCount == 5 && hasBonus) {
-            return PrizeLevel.SECOND;
-        }
-
-        return Arrays.stream(PrizeLevel.values())
-                .filter(level -> level.getMatchCount() == matchedCount)
-                .findFirst()
-                .orElse(PrizeLevel.MISS);
     }
 
     private void calculateProfitRate() {

@@ -1,8 +1,6 @@
 package step2;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -13,6 +11,7 @@ public class LottoNumbers {
         validNull(input);
         splitNumbers(input);
         validNumberCount();
+        validDuplicateNumbers();
     }
 
     public LottoNumbers(List<LottoNumber> nums) {
@@ -69,5 +68,18 @@ public class LottoNumbers {
                 .map(LottoNumber::getNumber)
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));
+    }
+
+    private void validDuplicateNumbers() {
+        Set<Integer> uniqueNumbers = new HashSet<>();
+        if (hasDuplicates(uniqueNumbers)) {
+            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+        }
+    }
+
+    private boolean hasDuplicates(Set<Integer> uniqueNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .anyMatch(number -> !uniqueNumbers.add(number));
     }
 }

@@ -8,7 +8,7 @@ public class LottoApplication {
     public static void main(String[] args) {
         String money = InputView.inputMoney();
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
-        LottoStore lottoStore = new LottoStore(money, randomNumberGenerator);
+        LottoStore lottoStore = new LottoStore(money, randomNumberGenerator, InputView.inputManualNumbers());
         InputView.printLottoList(lottoStore);
 
         LottoNumbers winnerNumbers = new LottoNumbers(InputView.inputWinnerNumbers());
