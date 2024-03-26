@@ -14,4 +14,12 @@ public class ManualLottoCountTest {
             new ManualLottoCount(null);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("수동으로 구매할 로또 개수가 구매할 수 있는 로또 개수보다 크면 예외(14000, 15 => IllegalArgumentException)")
+    void is_larger_than_whole_count(){
+        assertThatThrownBy(() -> {
+            new ManualLottoCount(15).validateIfLargerThanWholeCount(new Cash(1400));
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }
