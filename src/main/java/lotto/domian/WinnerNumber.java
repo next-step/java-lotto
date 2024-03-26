@@ -1,7 +1,6 @@
 package lotto.domian;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -26,6 +25,10 @@ public class WinnerNumber {
 
     public boolean containsLottoNumber(LottoNumber number){
         return this.winnerNumbers.contains(number);
+    }
+
+    public boolean containsBonusNumber(LottoNumber number){
+        return this.bonusNumber.equals(number);
     }
 
     private void checkBonusNumberDuplication(LottoNumber bonusNumber){

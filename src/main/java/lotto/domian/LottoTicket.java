@@ -20,10 +20,16 @@ public class LottoTicket {
     }
 
     public int countMatchingNumbers(WinnerNumber winnerNumbers){
-        return (int) this.lottoNumber.stream()
+        return (int) lottoNumber.stream()
                 .filter(winnerNumbers::containsLottoNumber)
                 .count();
     }
+
+    public boolean matchingBonusNumbers(WinnerNumber winnerNumbers){
+        return lottoNumber.stream()
+                .anyMatch(number -> winnerNumbers.containsBonusNumber(number));
+    }
+
 
     public List<LottoNumber> getLottoNumber() {
         return lottoNumber;
