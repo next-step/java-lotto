@@ -14,3 +14,5 @@
   * created methods based on test codes
 * feature/implement-application
   * application implemented
+* refactor/string-calculator
+  * refactored codes

@@ -1,14 +1,15 @@
 package calculator;
 
-import java.util.Scanner;
+import calculator.service.StringCalculator;
+import calculator.view.InputView;
+import calculator.view.ResultView;
 
 public class StringCalculatorApplication {
-    private static Scanner scan = new Scanner(System.in);
+    private static final StringCalculator stringCalculator = new StringCalculator();
 
     public static void main (String[] args) {
-        System.out.println("Enter the String with valid Mathematical Expression");
-        String input = scan.nextLine();
-        int result = StringCalculator.calculate(input);
-        System.out.print("Result : " + result);
+        String input = InputView.mathematicalExpressionString();
+        int result = stringCalculator.result(input);
+        ResultView.result(result);
     }
 }
