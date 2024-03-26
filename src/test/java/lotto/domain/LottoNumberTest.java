@@ -14,7 +14,7 @@ class LottoNumberTest {
 
     @ParameterizedTest
     @ValueSource(ints = {MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER})
-    @DisplayName("로또에 사용되는 번호를 생성한다.")
+    @DisplayName("로또에 사용되는 번호 한 개를 생성한다.")
     void LottoNumber_ValidNumber(final int validNumber) {
         assertThat(LottoNumber.from(validNumber))
                 .isEqualTo(new LottoNumber(validNumber));
