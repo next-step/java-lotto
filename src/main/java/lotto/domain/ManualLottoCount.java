@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.net.CacheRequest;
-
 public class ManualLottoCount {
     private final Integer count;
 
