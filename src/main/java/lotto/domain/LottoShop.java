@@ -12,7 +12,7 @@ public class LottoShop {
     public List<LottoTicket> buyLotto(int money) {
         validate(money);
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < money / LOTTO_PRICE; i++){
+        for (int i = 0; i < money / LOTTO_PRICE; i++) {
             lottoTickets.add(new LottoTicket(LottoNumberGenerator.getRandomLottoNumber()));
         }
         return lottoTickets;
