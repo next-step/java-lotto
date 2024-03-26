@@ -1,13 +1,17 @@
 package inputview;
 
+import calculator.*;
+
 import java.util.*;
 
 public class InputView {
+
     public List<List<String>> operandAndOperator() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the value. (ex) 2 + 3 * 4 / 5");
         String userInput = scanner.nextLine();
         List<List<String>> operandAndOperator = splitString(userInput);
+
         return operandAndOperator;
     }
 
