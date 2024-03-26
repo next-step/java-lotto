@@ -2,7 +2,7 @@ package lotto.error;
 
 public enum ErrorMessage {
 
-    INVALID_INPUT_TYPE_INT("입력값의 타입이 정수형입니다. 문자열을 입력해주세요 "),
+    INVALID_INPUT_TYPE_INT("입력값의 타입이 정수형입니다. 21억까지 입력 가능하며 문자열을 입력해주세요 "),
 
     INVALID_INPUT_EMPTY("입력값이 없습니다. 당첨 번호를 다시 입력해주세요. "),
 

@@ -22,7 +22,19 @@ public class Input {
 
     public static int inputPurchaseAmount() {
         System.out.println("구매금액을 입력해 주세요");
-        return scanner.nextInt();
+        try {
+            return scanner.nextInt();
+        } catch (NumberFormatException numberFormatException) {
+            throw new NumberFormatException(INVALID_FORMAT.getMessage());
+        } catch (InputMismatchException e) {
+            throw new InputMismatchException(INVALID_INPUT_TYPE_INT.getMessage());
+        } catch (NoSuchElementException e) {
+            throw new NoSuchElementException(INVALID_INPUT_EMPTY.getMessage());
+        } catch (IllegalStateException e) {
+            throw new IllegalStateException(ILLEGAL_STATE.getMessage(), e);
+        } catch (Exception e) {
+            throw new RuntimeException(UN_EXPECTED_ERROR.getMessage(), e);
+        }
     }
 
     public static List<Integer> inputWinningNumbers() {
