@@ -2,6 +2,8 @@ package calculator;
 
 import inputview.InputView;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +48,24 @@ public class Calculator {
         List<CalculationMethod> operators;
 
         operandAndOperator = inputView.operandAndOperator();
+        operands = operandAndOperator.get(0);
+        operators = operatorsStringToCalculationMethod(operandAndOperator.get(1));
+
+        int result = operators.get(0).calculate(operands.get(0), operands.get(1));
+        for (int i = 1; i < (operators.size()); i++) {
+            result = operators.get(i).calculate(String.valueOf(result), operands.get(i + 1));
+        }
+
+        return result;
+    }
+
+    // 테스트용
+    public int calculate(String userInput) {
+        List<List<String>> operandAndOperator;
+        List<String> operands;
+        List<CalculationMethod> operators;
+
+        operandAndOperator = inputView.operandAndOperator(userInput);
         operands = operandAndOperator.get(0);
         operators = operatorsStringToCalculationMethod(operandAndOperator.get(1));
 
