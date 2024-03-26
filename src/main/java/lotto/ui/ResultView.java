@@ -1,5 +1,7 @@
 package lotto.ui;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -16,11 +18,14 @@ public class ResultView {
     }
 
     public void printMatchResult(Map<LottoRank, Integer> result) {
+        LottoRank[] values = LottoRank.values();
+        Arrays.sort(values, Collections.reverseOrder());
+
         System.out.println("당첨 통계\n ---------");
-        System.out.println(String.format("%s개 일치 (%s원) - %s개", LottoRank.FOURTH.getMatchCount(), LottoRank.FOURTH.getReward(), result.get(LottoRank.FOURTH)));
-        System.out.println(String.format("%s개 일치 (%s원) - %s개", LottoRank.THIRD.getMatchCount(), LottoRank.THIRD.getReward(), result.get(LottoRank.THIRD)));
-        System.out.println(String.format("%s개 일치 (%s원) - %s개", LottoRank.SECOND.getMatchCount(), LottoRank.SECOND.getReward(), result.get(LottoRank.SECOND)));
-        System.out.println(String.format("%s개 일치 (%s원) - %s개", LottoRank.FIRST.getMatchCount(), LottoRank.FIRST.getReward(), result.get(LottoRank.FIRST)));
+        for (LottoRank lottoRank : values) {
+            if (LottoRank.NO_MATCH.equals(lottoRank)) continue;
+            System.out.println(String.format("%s개 일치 (%s원) - %s개", lottoRank.getMatchCount(), lottoRank.getReward(), result.get(lottoRank)));
+        }
     }
 
     public void printRateResult(double rate) {

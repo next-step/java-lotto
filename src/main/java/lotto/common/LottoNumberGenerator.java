@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class LottoNumberGenerator {
 
-    private static final List<Integer> lottoNumbers = IntStream.rangeClosed(1, 46).boxed().collect(Collectors.toList());
+    private static final List<Integer> lottoNumbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
     private static final int NUMBERS_SIZE = 6;
 
     private LottoNumberGenerator() {}
