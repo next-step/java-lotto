@@ -6,6 +6,7 @@ import lotto.domain.LottoMachine;
 import lotto.domain.LottoTicket;
 import lotto.domain.Price;
 import lotto.domain.Prize;
+import lotto.domain.WinningNumbers;
 
 import java.util.List;
 import java.util.Map;
@@ -16,11 +17,7 @@ public class ResultView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public void printNumbersOfLotto(int numbersOfLotto) {
-        System.out.println(numbersOfLotto + "개를 구매했습니다.");
-    }
-
-    public void printLottoTicketsNumbers(List<LottoTicket> lottoTickets) {
+    public void printLottoTickets(List<LottoTicket> lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets) {
             System.out.println(lottoTicket.getLottoNumbers().getLottoNumbers());
         }
@@ -30,7 +27,7 @@ public class ResultView {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    public void printResult(LottoMachine lottoMachine, List<Integer> winningNumbers, Price price, BonusBall bonusBall) {
+    public void printResult(LottoMachine lottoMachine, WinningNumbers winningNumbers, Price price, BonusBall bonusBall) {
         LottoMatchingService lottoMatchingService = new LottoMatchingService(winningNumbers, bonusBall);
         Map<Prize, Integer> integers = lottoMatchingService.matchWinningNumber(lottoMachine.getLottoTickets());
         System.out.println("\n당첨 통계");
@@ -44,6 +41,10 @@ public class ResultView {
         System.out.printf("총 수익률은 %.2f", price.calculateRateOfReturn(integers));
     }
 
+    public void printEachNumbersOfLotto(int numbersOfManualLotto, int numbersOfAutoLotto) {
+        System.out.println("수동으로 " + numbersOfManualLotto + "장, 자동으로 " + numbersOfAutoLotto + "개를 구매했습니다.");
+    }
+
     private void printSecondPrize(int i, Prize[] values, Map<Prize, Integer> matchCounts) {
         if (i == 3) {
             System.out.println(values[i + 1].getMatchCount() + "개 일치, 보너스 볼 일치(" + values[i + 1].getWinningMoney() + "원)- " + matchCounts.getOrDefault(Prize.SECOND_PRIZE, 0) + "개");
@@ -52,6 +53,14 @@ public class ResultView {
 
     public void printBonusBallNumber() {
         System.out.println("\n보너스 볼을 입력해 주세요.");
+    }
+
+    public void printInputNumbersOfManualLotto() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public void printInputManualLottoNumbers() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 
 }

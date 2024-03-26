@@ -4,6 +4,7 @@ import lotto.domain.BonusBall;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoTicket;
 import lotto.domain.Price;
+import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -24,34 +25,28 @@ public class LottoController {
 
         Price price = new Price(inputView.inputNumber()); //구입금액입력
         inputView.inputNextLine();
+
         int numbersOfLotto = price.calculateNumberOfLotto(); //로또 갯수 계샨
 
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        resultView.printInputNumbersOfManualLotto();
         int numbersOfManualLotto = inputView.inputNumber();
-
         inputView.inputNextLine();
 
         int numbersOfAutoLotto = numbersOfLotto - numbersOfManualLotto;
 
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        resultView.printInputManualLottoNumbers();
         LottoMachine lottoMachine = new LottoMachine();
-
         // 수동으로 구매한 로또 수만큼 로또 생성
-        for (int i = 0; i < numbersOfManualLotto; i++) {
-            lottoMachine.addLottoTicket(new LottoTicket(inputView.getLottoNumbers()));
-        }
-
+        generateManualLotto(numbersOfManualLotto, lottoMachine);
         // 자동으로 구매한 로또 수만큼 로또 생성
         List<LottoTicket> lottoTickets = lottoMachine.generateLottoTickets(numbersOfAutoLotto);
 
-
-        System.out.println("수동으로 " + numbersOfManualLotto + "장, 자동으로 " + numbersOfAutoLotto + "개를 구매했습니다.");
-
-
-        resultView.printLottoTicketsNumbers(lottoTickets);
+        resultView.printEachNumbersOfLotto(numbersOfManualLotto, numbersOfAutoLotto);
+        resultView.printLottoTickets(lottoTickets);
         resultView.printDoInputWinningNumbers();
 
-        List<Integer> winningNumbers = inputView.getLottoNumbers();
+        WinningNumbers winningNumbers = WinningNumbers.of(inputView.getLottoNumbers());
+
         resultView.printBonusBallNumber();
 
         resultView.printResult(
@@ -60,6 +55,12 @@ public class LottoController {
                 , price
                 , new BonusBall(inputView.inputNumber())
         );
+    }
+
+    private void generateManualLotto(int numbersOfManualLotto, LottoMachine lottoMachine) {
+        for (int i = 0; i < numbersOfManualLotto; i++) {
+            lottoMachine.addLottoTicket(new LottoTicket(inputView.getLottoNumbers()));
+        }
     }
 
 }
