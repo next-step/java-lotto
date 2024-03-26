@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import lotto.domain.rank.BonusMatch;
+import lotto.domain.rank.LottoMatchCount;
 import lotto.domain.rank.Rank;
 
 import java.util.Arrays;
@@ -43,7 +45,7 @@ public class Lotto {
 
     public Rank rank(WinningLotto winningLotto) {
         final LottoMatchCount matchCount = matchCount(winningLotto.numbers());
-        final boolean bonusMatch = contains(winningLotto.bonusNumber());
+        final BonusMatch bonusMatch = new BonusMatch(contains(winningLotto.bonusNumber()));
         return Rank.valueOf(matchCount, bonusMatch);
     }
 

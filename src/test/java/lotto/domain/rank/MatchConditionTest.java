@@ -1,9 +1,7 @@
 package lotto.domain.rank;
 
-import lotto.domain.lotto.LottoMatchCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,7 +23,7 @@ public class MatchConditionTest {
     void match() {
         final MatchCondition target = new MatchCondition(5, true);
 
-        assertThat(target.match(new LottoMatchCount(5), true))
+        assertThat(target.match(new LottoMatchCount(5), new BonusMatch(true)))
                 .isTrue();
     }
 }

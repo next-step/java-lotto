@@ -1,7 +1,6 @@
 package lotto.domain.rank;
 
 import lotto.domain.Cash;
-import lotto.domain.lotto.LottoMatchCount;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -25,7 +24,11 @@ public enum Rank {
         this.winnings = new Cash(winnings);
     }
 
-    public static Rank valueOf(LottoMatchCount matchCount, boolean bonusMatch) {
+    public static Rank valueOf(int matchCount, boolean bonusMatch) {
+        return valueOf(new LottoMatchCount(matchCount), new BonusMatch(bonusMatch));
+    }
+
+    public static Rank valueOf(LottoMatchCount matchCount, BonusMatch bonusMatch) {
         assertMatchCountLessThanFirstPrize(matchCount);
 
         return Arrays.stream(values())
@@ -47,7 +50,7 @@ public enum Rank {
         }
     }
 
-    private boolean match(LottoMatchCount matchCount, boolean bonusMatch) {
+    private boolean match(LottoMatchCount matchCount, BonusMatch bonusMatch) {
         return this.matchCondition.match(matchCount, bonusMatch);
     }
 
