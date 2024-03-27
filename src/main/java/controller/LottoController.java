@@ -22,7 +22,6 @@ public class LottoController {
     }
 
     public WinStatus resultReturn(Lotto winLotto) {
-
         for (Lotto currentLotto  : myLotto.getLotto()) {
             int price = currentLotto .numberCheck(winLotto);
             if (price >= 3) {

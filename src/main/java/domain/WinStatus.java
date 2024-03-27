@@ -12,7 +12,7 @@ public class WinStatus {
         winCount = new int[4];
     }
 
-    public static int[] getWinCount() {
+    public int[] getWinCount() {
         return winCount;
     }
 }
