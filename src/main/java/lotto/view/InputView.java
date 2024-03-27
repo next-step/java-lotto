@@ -29,5 +29,11 @@ public class InputView {
         scanner.nextLine();
         return bonusNumber;
     }
+
+    public int inputManualLottoCount() {
+        int manualLottoCount = scanner.nextInt();
+        scanner.nextLine();
+        return manualLottoCount;
+    }
 }
 

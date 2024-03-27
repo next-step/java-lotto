@@ -1,35 +1,31 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGeneratorTest {
 
-    @Test
-    @DisplayName("Money를 통해 로또들을 구매할 수 있다.")
-    void buy() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        Money money = new Money(1000);
+    private Lotto lotto;
+    private LottoGenerator lottoGenerator;
+    private LottoCount lottoCount;
 
-        Lottos lottos = lottoGenerator.buy(money, new TestLottoStrategy(lotto));
-
-        assertThat(lottos).containsExactly(lotto);
+    @BeforeEach
+    void setUp() {
+        lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottoGenerator = new LottoGenerator();
+        lottoCount = new LottoCount(1);
     }
 
-    @Test
-    @DisplayName("수동으로 로또를 구매한다.")
-    void buyManual() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        Money money = new Money(1000);
 
-        Lottos lottos = lottoGenerator.buy(money, new TestLottoStrategy(lotto));
+    @Test
+    @DisplayName("횟수를 입력해 로또들을 구매할 수 있다.(수동, 자동 모두 가능)")
+    void buy() {
+        Lottos lottos = lottoGenerator.generateLottos(lottoCount, new TestLottoStrategy(lotto));
 
         assertThat(lottos).containsExactly(lotto);
     }
@@ -43,7 +39,7 @@ class LottoGeneratorTest {
 
 
         @Override
-        public Lotto generateLottoNumbers(List<Integer> lottoNumberPool) {
+        public Lotto generateLotto(int count) {
             return this.lotto;
         }
     }

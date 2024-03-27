@@ -5,6 +5,8 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoGame {
 
@@ -19,17 +21,37 @@ public class LottoGame {
     }
 
     public void start() {
-        Money money = initMoney();
+        Money totalMoney = initMoney();
 
-        Lottos lottos = lottoGenerator.buy(money, new RandomLottoStrategy());
+        LottoCount totalCount = new LottoCount(totalMoney);
+        LottoCount manualLottoCount = initManualLottoCount();
 
-        resultView.printPickedLottoNumbers(lottos);
+        Lottos manualLottos = initManualLottos(manualLottoCount);
+
+        Lottos autoLottos = lottoGenerator.generateLottos(totalCount.subtractCount(manualLottoCount), new RandomLottoStrategy());
+
+        resultView.printPickedLottoNumbers(autoLottos);
 
         Lotto winningLotto = initLottoNumbers();
         LottoNumber bonusNumber = initBonusNumber();
-        WinningInfo winningInfo = WinningInfo.of(lottos, bonusNumber, winningLotto);
+        WinningInfo winningInfo = WinningInfo.of(autoLottos, bonusNumber, winningLotto);
 
-        resultView.printWinningStatic(winningInfo, money);
+        resultView.printWinningStatic(winningInfo, totalMoney);
+    }
+
+    private Lottos initManualLottos(LottoCount lottoCount) {
+        resultView.printManualLottos();
+        List<Lotto> manualLottos = IntStream.range(0, lottoCount.getCount())
+                .mapToObj(count -> new Lotto(inputView.inputLottoNumber()))
+                .collect(Collectors.toList());
+        return lottoGenerator.generateLottos(lottoCount, new ManualLottoStrategy(manualLottos));
+    }
+
+    private LottoCount initManualLottoCount() {
+        resultView.printManualLottoCount();
+        int manualLottoCount = inputView.inputManualLottoCount();
+
+        return new LottoCount(manualLottoCount);
     }
 
     private Lotto initLottoNumbers() {
