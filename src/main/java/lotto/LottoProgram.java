@@ -1,5 +1,6 @@
 package lotto;
 
+import static lotto.view.InputView.inputBonusNumber;
 import static lotto.view.InputView.inputPurchaseAmount;
 import static lotto.view.InputView.inputWinningNumbers;
 import static lotto.view.ResultView.printLottosCount;
@@ -15,7 +16,9 @@ public class LottoProgram {
             purchaseAmount, new RandomNumberGenerator());
         printLottosCount(purchaseAmount.purchase(), lottos);
 
-        Lotto winningLotto = new Lotto(inputWinningNumbers());
+        WinningLotto winningLotto = new WinningLotto(
+            inputWinningNumbers(), inputBonusNumber());
+
         LottoResult lottoResult = new LottoResult(lottos.getWinningResult(winningLotto));
         printWinningResult(lottoResult);
         printReturnRate(purchaseAmount.purchase(), lottoResult);
