@@ -1,6 +1,8 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoResult {
 
@@ -10,6 +12,13 @@ public class LottoResult {
 
     public LottoResult(Map<LottoRank, Integer> result) {
         this.result = result;
+    }
+
+    public LottoResult(LottoRank... rank) {
+        this(Arrays.stream(rank)
+            .collect(
+                Collectors.groupingBy(e -> e, Collectors.summingInt(e -> 1))
+            ));
     }
 
     public double calculateReturnRate(int payed) {
