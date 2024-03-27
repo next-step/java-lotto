@@ -11,7 +11,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoWinCheckerTest {
+class WinningLottoTest {
     private static final String INVALID_LOTTO_NUMBERS = "로또 번호의 개수는 6개이며, 각 번호는 1 이상 45 이하의 값만 가능합니다.";
     private static final String INVALID_LOTTO_NUMBER = "로또 번호는 1 ~ 45 이하의 숫자 1개의 값만 사용이 가능합니다.";
     private static final String BONUS_NUMBER_DENIED = "당첨 번호와 중복 없이 1 ~ 45 사이의 숫자 1개만 입력이 가능합니다.";
@@ -29,8 +29,8 @@ class LottoWinCheckerTest {
         List<Lotto> userLottos = List.of(new Lotto(getValidNumbersListFirst()), new Lotto(getValidNumbersListSecond()));
 
         // when
-        LottoWinChecker lottoWinChecker = new LottoWinChecker(VALID_NUMBERS_FIRST, 7);
-        Map<PrizeEnum, Integer> winLottos = lottoWinChecker.checkWinLottos(userLottos);
+        WinningLotto winningLotto = new WinningLotto(VALID_NUMBERS_FIRST, new LottoNumber(7));
+        Map<PrizeEnum, Integer> winLottos = winningLotto.checkWinLottos(userLottos);
 
         // then
         assertThat(winLottos.size()).isEqualTo(2);
@@ -45,8 +45,8 @@ class LottoWinCheckerTest {
         List<Lotto> userLottos = List.of(new Lotto(getValidNumbersListSecond()), new Lotto(getValidNumbersListSecondWithBonusNumber()));
 
         // when
-        LottoWinChecker lottoWinChecker = new LottoWinChecker(VALID_NUMBERS_SECOND_WITH_BONUS_NUMBER, 45);
-        Map<PrizeEnum, Integer> winLottos = lottoWinChecker.checkWinLottos(userLottos);
+        WinningLotto winningLotto = new WinningLotto(VALID_NUMBERS_SECOND_WITH_BONUS_NUMBER, new LottoNumber(45));
+        Map<PrizeEnum, Integer> winLottos = winningLotto.checkWinLottos(userLottos);
 
         // then
         assertThat(winLottos.size()).isEqualTo(2);
@@ -61,8 +61,8 @@ class LottoWinCheckerTest {
         List<Lotto> userLottos = List.of(new Lotto(getValidNumbersListSecond()));
 
         // when
-        LottoWinChecker lottoWinChecker = new LottoWinChecker(VALID_NUMBERS_FOURTH_PRIZE_WITH_BONUS_NUMBER, 10);
-        Map<PrizeEnum, Integer> winLottos = lottoWinChecker.checkWinLottos(userLottos);
+        WinningLotto winningLotto = new WinningLotto(VALID_NUMBERS_FOURTH_PRIZE_WITH_BONUS_NUMBER, new LottoNumber(10));
+        Map<PrizeEnum, Integer> winLottos = winningLotto.checkWinLottos(userLottos);
 
         // then
         assertThat(winLottos.size()).isEqualTo(1);
@@ -76,8 +76,8 @@ class LottoWinCheckerTest {
         List<Lotto> userLottos = List.of(new Lotto(getValidNumbersListFirst()), new Lotto(getValidNumbersListFirst()));
 
         // when
-        LottoWinChecker lottoWinChecker = new LottoWinChecker(VALID_NUMBERS_SECOND_WITH_BONUS_NUMBER, 1);
-        Map<PrizeEnum, Integer> winLottos = lottoWinChecker.checkWinLottos(userLottos);
+        WinningLotto winningLotto = new WinningLotto(VALID_NUMBERS_SECOND_WITH_BONUS_NUMBER, new LottoNumber(1));
+        Map<PrizeEnum, Integer> winLottos = winningLotto.checkWinLottos(userLottos);
 
         // then
         assertThat(winLottos.size()).isEqualTo(1);
@@ -88,7 +88,7 @@ class LottoWinCheckerTest {
     @DisplayName("LottoWinChecker 객체 생성 실패 (당첨 번호가 제한된 개수 6개 보다 많이 입력됨)")
     void testLottoWinChecker_OutOfRangeWinNumbers_ShouldThrowException() {
         // when, then
-        assertThatThrownBy(() -> new LottoWinChecker(OUT_OF_RANGE_NUMBERS, 1))
+        assertThatThrownBy(() -> new WinningLotto(OUT_OF_RANGE_NUMBERS, new LottoNumber(1)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(INVALID_LOTTO_NUMBERS);
     }
@@ -97,7 +97,7 @@ class LottoWinCheckerTest {
     @DisplayName("LottoWinChecker 객체 생성 실패 (당첨 번호가 1 ~ 45가 아닌 그 이외의 값이 입력됨)")
     void testLottoWinChecker_InvalidWinNumbers_ShouldThrowException() {
         // when, then
-        assertThatThrownBy(() -> new LottoWinChecker(INVALID_NUMBERS, 1))
+        assertThatThrownBy(() -> new WinningLotto(INVALID_NUMBERS, new LottoNumber(1)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(INVALID_LOTTO_NUMBER);
     }
@@ -106,7 +106,7 @@ class LottoWinCheckerTest {
     @DisplayName("LottoWinChecker 객체 생성 실패 (보너스 번호가 당첨 번호와 중복됨)")
     void testLottoWinChecker_DuplicatedBonusNumber_ShouldThrowException() {
         // when, then
-        assertThatThrownBy(() -> new LottoWinChecker(VALID_NUMBERS_FIRST, 1))
+        assertThatThrownBy(() -> new WinningLotto(VALID_NUMBERS_FIRST, new LottoNumber(1)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(BONUS_NUMBER_DENIED);
     }
