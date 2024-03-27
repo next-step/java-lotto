@@ -5,51 +5,62 @@ import java.util.*;
 public class Lotto {
 
     public static final int PRICE = 1_000;
+    public static final int NUMBER_SIZE = 6;
 
-    private final List<Integer> numbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto() {
-        this(RandomNumberGenerator.randomNumbers());
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        this(new HashSet<>(lottoNumbers));
     }
 
-    public Lotto(List<Integer> numbers) {
-        assertListSizeOfSix(numbers);
-        List<Integer> newNumbers = new ArrayList<>(numbers);
-        Collections.sort(newNumbers);
-        this.numbers = newNumbers;
+    public Lotto(Set<LottoNumber> lottoNumbers) {
+        assertSizeOfSix(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
-    private void assertListSizeOfSix(List<Integer> numbers) {
-        Set<Integer> set = new HashSet<>(numbers);
-        if (set.size() != 6) {
+    private void assertSizeOfSix(Set<LottoNumber> numbers) {
+        if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호의 갯수가 6개가 아닙니다.");
         }
     }
 
-    public List<Integer> numbers() {
-        return new ArrayList<>(numbers);
+    public boolean match(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    public int matchCount(Lotto winningLotto) {
+        List<LottoNumber> newLottoNumbers = new ArrayList<>(this.lottoNumbers);
+        newLottoNumbers.retainAll(winningLotto.lottoNumbers);
+        return newLottoNumbers.size();
+    }
+
+    public boolean isMatchFiveNumberAndBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
+        return this.matchCount(winningLotto) == 5 && this.match(bonusNumber);
+    }
+
+    public static Lotto randomLotto(Random random) {
+        Set<LottoNumber> numbers = new HashSet<>();
+        while (numbers.size() < NUMBER_SIZE) {
+            numbers.add(LottoNumber.random(random));
+        }
+        return new Lotto(numbers);
     }
 
     @Override
     public String toString() {
-        return numbers.toString();
+        return lottoNumbers.toString();
     }
 
-    private static class RandomNumberGenerator {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
 
-        private static final List<Integer> numbers;
-
-        static {
-            numbers = new ArrayList<>();
-            for (int i = 1; i <= 45; i++) {
-                numbers.add(i);
-            }
-        }
-
-        public static List<Integer> randomNumbers() {
-            List<Integer> newNumbers = new ArrayList<>(RandomNumberGenerator.numbers);
-            Collections.shuffle(newNumbers);
-            return newNumbers.subList(0, 6);
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

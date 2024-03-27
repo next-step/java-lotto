@@ -1,51 +1,56 @@
 package domain;
 
-import java.util.List;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
-    @DisplayName("로또를 발급한다.")
+    @DisplayName("입력으로 들어온 숫자 리스트를 기반으로 로또를 발행한다.")
     @Test
     void test01() {
-        // given
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+        Lotto lotto = TestFixture.createLotto(Set.of(1, 2, 3, 4, 5, 6));
 
-        // when
-        Lotto lotto = new Lotto(numbers);
-
-        // then
-        assertThat(lotto.numbers()).isEqualTo(numbers);
+        assertThat(lotto).isEqualTo(TestFixture.createLotto(Set.of(1, 2, 3, 4, 5, 6)));
     }
 
-    @DisplayName("로또 생성 시 파라미터로 넘기는 리스트가 6자리가 아니거나, 6자리지만 중복 숫자가 있는 경우 예외가 발생한다.")
-    @ParameterizedTest
-    @MethodSource("testFixture")
-    void test02(List<Integer> numbers, Class<Exception> expected) {
-        assertThatThrownBy(() -> new Lotto(numbers))
-                .isInstanceOf(expected);
+    @DisplayName("로또 번호의 갯수가 6개가 아닌 경우 예외가 발생한다.")
+    @Test
+    void test02() {
+        assertThatThrownBy(() -> TestFixture.createLotto(Set.of(1, 2, 3, 4, 5)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호의 갯수가 6개가 아닙니다.");
     }
 
-    public static Stream<Arguments> testFixture() {
-        return Stream.of(
-                Arguments.of(List.of(1, 2, 3, 4, 5), IllegalArgumentException.class),
-                Arguments.of(List.of(1, 1, 2, 3, 4, 5), IllegalArgumentException.class)
-        );
-    }
-
-    @DisplayName("리스트를 기반으로 로또 생성 시 정렬된다.")
+    @DisplayName("입력으로 들어온 Lotto 객체와 일치하는 번호의 갯수를 구한다.")
     @Test
     void test03() {
-        Lotto lotto = new Lotto(List.of(5, 6, 1, 2, 3, 4));
+        Lotto lotto = TestFixture.createLotto(Set.of(1, 2, 3, 4, 5, 6));
 
-        assertThat(lotto.numbers()).containsExactly(1, 2, 3, 4, 5, 6);
+        int result = lotto.matchCount(TestFixture.createLotto(Set.of(1, 2, 3, 10, 11, 12)));
+
+        assertThat(result).isEqualTo(3);
+    }
+
+    @DisplayName("하나의 LottoNumber 가 포함되는지 여부를 확인한다.")
+    @Test
+    void test04() {
+        Lotto lotto = TestFixture.createLotto(Set.of(1, 2, 3, 4, 5, 6));
+
+        assertThat(lotto.match(new LottoNumber(1))).isTrue();
+    }
+
+    @DisplayName("입력으로 들어온 당첨 번호와 보너스 번호를 기반으로 2등인지 확인한다.")
+    @Test
+    void test05() {
+        Lotto lotto = TestFixture.createLotto(Set.of(1, 2, 3, 4, 5, 6));
+
+        boolean result = lotto.isMatchFiveNumberAndBonusNumber(TestFixture.createLotto(Set.of(1, 2, 3, 4, 5, 7)), new LottoNumber(6));
+
+        assertThat(result).isTrue();
     }
 }

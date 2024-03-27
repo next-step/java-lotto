@@ -9,8 +9,8 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void print(Lottos lottos) {
-        System.out.printf("%d개를 구입하였습니다.\n", lottos.lottoCount());
+    public static void print(Lottos lottos, int manualCount) {
+        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구입하였습니다.\n", manualCount, lottos.lottoCount());
         String substring = lottos.toString().substring(1, lottos.toString().length() - 1);
         String result = substring.replaceAll("], ", "]\n");
         System.out.println(result);
