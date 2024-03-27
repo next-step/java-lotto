@@ -1,13 +1,11 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import lotto.domain.grade.Grade;
 import lotto.domain.lotto.PurchaseAmount;
 import lotto.domain.winning.WinningStatistic;
-import lotto.error.exception.NotExistGradeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,10 +16,11 @@ class WinningStatisticTest {
     public void WinningStatistic_Should_Calculate_Rank_Count() {
         WinningStatistic winningStatistic = new WinningStatistic(new PurchaseAmount(10000));
 
-        Arrays.asList(Grade.FIRST_GRADE, Grade.SECOND_GRADE, Grade.THIRD_GRADE, Grade.FOUR_GRADE)
+        Arrays.asList(Grade.FIRST_GRADE, Grade.BONUS_GRADE, Grade.SECOND_GRADE, Grade.THIRD_GRADE, Grade.FOUR_GRADE)
             .forEach(winningStatistic::calculateWinningStatistic);
 
         assertThat(winningStatistic.getGradeCount(Grade.FIRST_GRADE)).isEqualTo(1);
+        assertThat(winningStatistic.getGradeCount(Grade.BONUS_GRADE)).isEqualTo(1);
         assertThat(winningStatistic.getGradeCount(Grade.SECOND_GRADE)).isEqualTo(1);
         assertThat(winningStatistic.getGradeCount(Grade.THIRD_GRADE)).isEqualTo(1);
         assertThat(winningStatistic.getGradeCount(Grade.FOUR_GRADE)).isEqualTo(1);
