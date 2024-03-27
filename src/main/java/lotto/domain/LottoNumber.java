@@ -15,6 +15,10 @@ public class LottoNumber {
         this.value = value;
     }
 
+    int value() {
+        return this.value;
+    }
+
     public static LottoNumber from(final int value) {
         validateLottoNumberIsInRange(value);
 
