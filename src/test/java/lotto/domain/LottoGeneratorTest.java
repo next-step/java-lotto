@@ -8,16 +8,28 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoStoreTest {
+class LottoGeneratorTest {
 
     @Test
     @DisplayName("Money를 통해 로또들을 구매할 수 있다.")
     void buy() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoStore lottoStore = new LottoStore();
+        LottoGenerator lottoGenerator = new LottoGenerator();
         Money money = new Money(1000);
 
-        Lottos lottos = lottoStore.buy(money, new TestLottoStrategy(lotto));
+        Lottos lottos = lottoGenerator.buy(money, new TestLottoStrategy(lotto));
+
+        assertThat(lottos).containsExactly(lotto);
+    }
+
+    @Test
+    @DisplayName("수동으로 로또를 구매한다.")
+    void buyManual() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        Money money = new Money(1000);
+
+        Lottos lottos = lottoGenerator.buy(money, new TestLottoStrategy(lotto));
 
         assertThat(lottos).containsExactly(lotto);
     }

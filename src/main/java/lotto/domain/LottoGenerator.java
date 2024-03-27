@@ -8,13 +8,13 @@ import java.util.stream.Stream;
 import static lotto.domain.LottoNumber.END_INCLUSIVE;
 import static lotto.domain.LottoNumber.START_INCLUSIVE;
 
-public class LottoStore {
+public class LottoGenerator {
 
     private static final Integer PRICE = 1000;
 
     private final List<Integer> lottoNumberPool;
 
-    public LottoStore() {
+    public LottoGenerator() {
         this.lottoNumberPool = IntStream.rangeClosed(START_INCLUSIVE, END_INCLUSIVE)
                 .boxed()
                 .collect(Collectors.toList());

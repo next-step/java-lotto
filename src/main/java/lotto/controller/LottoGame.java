@@ -10,18 +10,18 @@ public class LottoGame {
 
     private final InputView inputView;
     private final ResultView resultView;
-    private final LottoStore lottoStore;
+    private final LottoGenerator lottoGenerator;
 
-    public LottoGame(InputView inputView, ResultView resultView, LottoStore lottoStore) {
+    public LottoGame(InputView inputView, ResultView resultView, LottoGenerator lottoGenerator) {
         this.inputView = inputView;
         this.resultView = resultView;
-        this.lottoStore = lottoStore;
+        this.lottoGenerator = lottoGenerator;
     }
 
     public void start() {
         Money money = initMoney();
 
-        Lottos lottos = lottoStore.buy(money, new RandomLottoStrategy());
+        Lottos lottos = lottoGenerator.buy(money, new RandomLottoStrategy());
 
         resultView.printPickedLottoNumbers(lottos);
 
