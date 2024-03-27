@@ -9,48 +9,45 @@ import org.junit.jupiter.api.Test;
 public class LottoRankTest {
 
     @Test
-    @DisplayName("3개를 미만이면 LOSE")
+    @DisplayName("2개를 미만이면 LOSE")
     void COUNT_UNDER_THREE_IS_LOSE() {
-        LottoRank result = LottoRank.isLottoRank(1);
+        LottoRank result = LottoRank.isLottoRank(1, true);
         assertThat(result).isEqualTo(LottoRank.LOSE);
-        assertThat(result.getCount()).isEqualTo(0);
-        assertThat(result.getPrize()).isEqualTo(0);
     }
 
     @Test
-    @DisplayName("3개를 맞추면 4등이다.")
+    @DisplayName("3개를 맞추면 5등이다.")
+    void COUNT_THREE_IS_FIFTH_PRIZE() {
+        LottoRank result = LottoRank.isLottoRank(3, true);
+        assertThat(result).isEqualTo(LottoRank.FIFTH);
+    }
+
+    @Test
+    @DisplayName("4개를 맞추면 4등이다.")
     void COUNT_THREE_IS_FOURTH_PRIZE() {
-        LottoRank result = LottoRank.isLottoRank(3);
+        LottoRank result = LottoRank.isLottoRank(4, true);
         assertThat(result).isEqualTo(LottoRank.FOURTH);
-        assertThat(result.getCount()).isEqualTo(3);
-        assertThat(result.getPrize()).isEqualTo(5_000);
     }
 
     @Test
-    @DisplayName("4개를 맞추면 3등이다.")
+    @DisplayName("5개를 맞추고 보너스 번호를 맞추지 못하면 3등이다.")
     void COUNT_FOUR_IS_THIRD_PRIZE() {
-        LottoRank result = LottoRank.isLottoRank(4);
+        LottoRank result = LottoRank.isLottoRank(5, false);
         assertThat(result).isEqualTo(LottoRank.THIRD);
-        assertThat(result.getCount()).isEqualTo(4);
-        assertThat(result.getPrize()).isEqualTo(50_000);
     }
 
     @Test
-    @DisplayName("5개를 맞추면 2등이다.")
+    @DisplayName("5개를 맞추고 보너스 번호가 맞으면 2등이다.")
     void COUNT_FIVE_IS_SECOND_PRIZE() {
-        LottoRank result = LottoRank.isLottoRank(5);
+        LottoRank result = LottoRank.isLottoRank(5, true);
         assertThat(result).isEqualTo(LottoRank.SECOND);
-        assertThat(result.getCount()).isEqualTo(5);
-        assertThat(result.getPrize()).isEqualTo(1_500_000);
     }
 
     @Test
-    @DisplayName("4개를 맞추면 3등이다.")
+    @DisplayName("6개를 맞추면 1등이다.")
     void COUNT_SIX_IS_FIRST_PRIZE() {
-        LottoRank result = LottoRank.isLottoRank(6);
+        LottoRank result = LottoRank.isLottoRank(6, false);
         assertThat(result).isEqualTo(LottoRank.FIRST);
-        assertThat(result.getCount()).isEqualTo(6);
-        assertThat(result.getPrize()).isEqualTo(2_000_000_000);
     }
 
 }
