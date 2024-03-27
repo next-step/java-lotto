@@ -33,7 +33,7 @@ public enum LottoRank {
 
     public static LottoRank valueOfMatchCount(int matchCount) {
         return Arrays.stream(values())
-                .filter(lottoRnak -> lottoRnak.getMatchCount() == matchCount)
+                .filter(lottoRank -> lottoRank.getMatchCount() == matchCount)
                 .findFirst()
                 .orElse(NONE);
     }
