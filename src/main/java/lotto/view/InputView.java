@@ -8,6 +8,7 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String SPLIT_DELIMEITER = ",";
     private static final String INPUT_SEED_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String INPUT_WINNING_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 
     private InputView() {
@@ -35,5 +36,10 @@ public class InputView {
         }
 
         return winningNumbers;
+    }
+
+    public static int inputBounusNumber() {
+        System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
+        return toInt(scanner.nextLine());
     }
 }

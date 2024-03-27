@@ -18,7 +18,8 @@ public class LottoController {
 
         ResultView.viewLottos(lottoService.buyLottos(seedMoney));
         List<Integer> winningNumbers = InputView.inputWinningNumbers();
+        int bonusNumber = InputView.inputBounusNumber();
 
-        ResultView.viewResult(lottoService.checkLottoResult(winningNumbers));
+        ResultView.viewResult(lottoService.checkLottoResult(winningNumbers, bonusNumber));
     }
 }
