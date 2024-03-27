@@ -17,6 +17,10 @@ public class Lotto {
         splitNumbers.forEach(number -> this.lottoNumbers.add(new LottoNumber(Integer.parseInt(number))));
     }
 
+    public static Lotto createManualLotto(String numbers) {
+        return new Lotto(numbers);
+    }
+
     private void validateDuplicate(final List<String> splitNumbers) {
         Set<String> set = new HashSet<>(splitNumbers);
         if (set.size() != splitNumbers.size()) {

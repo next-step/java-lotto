@@ -29,6 +29,13 @@ public class MyLottos {
 		return count;
 	}
 
+	public static MyLottos makeLottos(final MyLottos myLottos, final MyLottos manuallyLottos) {
+		List<Lotto> lottoList = Stream.concat(myLottos.getLottos().stream(), manuallyLottos.getLottos().stream())
+				.collect(Collectors.toList());
+
+		return new MyLottos(lottoList);
+	}
+
 	public List<Lotto> getLottos() {
 		return List.copyOf(lottos);
 	}
