@@ -1,9 +1,6 @@
 package autoLotto.view;
 
-import autoLotto.model.Lotto;
-import autoLotto.model.LottoMachine;
-import autoLotto.model.LottoNumber;
-import autoLotto.model.PrizeEnum;
+import autoLotto.model.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,8 +18,8 @@ public class ResultView {
     private static final String IS_BONUS_MATCHED = ", 보너스 볼 일치";
     private static final String NO_MATCHED_PRIZE = "당첨된 금액이 없음";
 
-    public void outputPurchasedLottos(int numberOfManualLottos, int numberOfAutoLottos, LottoMachine lottoMachine) {
-        outputPurchasedNumberOfLotto(numberOfManualLottos, numberOfAutoLottos);
+    public void outputPurchasedLottos(LottoPurchaseCount lottoPurchaseCount, LottoMachine lottoMachine) {
+        outputPurchasedNumberOfLotto(lottoPurchaseCount.getNumberOfManualLottos(), lottoPurchaseCount.getNumberOfAutoLottos());
         outputPurchasedLottoDetail(lottoMachine);
     }
 
@@ -64,18 +61,10 @@ public class ResultView {
     }
 
     private String getPrizeResult(PrizeEnum prize, int value) {
-        if (isMissMatched(prize)) {
+        if (prize.getMatchedCount() == PrizeEnum.MISS.getMatchedCount()) {
             return String.format("%s- %d개", NO_MATCHED_PRIZE, value);
         }
         return String.format("%d%s%s (%d) - %d개", prize.getMatchedCount(),"개 일치",getBonusResult(prize), prize.getPrize(), value);
-    }
-
-    private boolean isMissMatched(PrizeEnum prize) {
-        if (prize.getMatchedCount() == PrizeEnum.MISS.getMatchedCount()) {
-            return true;
-        }
-
-        return false;
     }
 
     private String getBonusResult(PrizeEnum prize) {
