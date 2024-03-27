@@ -13,8 +13,8 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public Rank match(LottoNumbers winNums) {
-        return Rank.getRank(lottoNumbers.matchNumberCount(winNums));
+    public Rank match(LottoNumbers winNums, BonusNumber bonusNumber) {
+        return Rank.getRank(lottoNumbers.matchNumberCount(winNums), bonusNumber.match(lottoNumbers.getNumbers()));
     }
 
 }
