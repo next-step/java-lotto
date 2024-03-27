@@ -1,3 +1,5 @@
+package domain;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +17,7 @@ public class Calculator {
 
     int result = numbers.get(0);
     for(int i = 0 ; i < numbers.size() -1 ; i++){
-      result = Operator.operatorMap.get(strOperators.get(i)).apply(result, numbers.get(i+1));
+      result = Operator.get(strOperators.get(i)).apply(result, numbers.get(i+1));
     }
     return result;
   }
