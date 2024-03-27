@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.publish;
 
 import static lotto.domain.Lotto.LOTTO_NUMBERS_SIZE;
 import static lotto.domain.LottoNumber.MAXIMUM_LOTTO_NUMBER;
@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import lotto.domain.LottoNumber;
 
 public class RandomLottoNumbersPicker implements LottoNumbersPicker {
 

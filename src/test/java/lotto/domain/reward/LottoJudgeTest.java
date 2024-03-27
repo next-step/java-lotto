@@ -1,10 +1,10 @@
-package lotto.domain;
+package lotto.domain.reward;
 
-import static lotto.domain.LottoRank.FIRST;
-import static lotto.domain.LottoRank.FOURTH;
-import static lotto.domain.LottoRank.NONE;
-import static lotto.domain.LottoRank.SECOND;
-import static lotto.domain.LottoRank.THIRD;
+import static lotto.domain.reward.LottoRank.FIRST;
+import static lotto.domain.reward.LottoRank.FOURTH;
+import static lotto.domain.reward.LottoRank.NONE;
+import static lotto.domain.reward.LottoRank.SECOND;
+import static lotto.domain.reward.LottoRank.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
@@ -15,6 +15,9 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 class LottoJudgeTest {
 

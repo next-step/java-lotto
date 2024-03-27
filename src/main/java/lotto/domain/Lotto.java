@@ -4,24 +4,24 @@ import static lotto.config.LottoExceptionMessage.LOTTO_NUMBERS_MUST_HAVE_SPECIFI
 
 import java.util.Set;
 
-class Lotto {
+public class Lotto {
 
-    static final int LOTTO_NUMBERS_SIZE = 6;
+    public static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final Set<LottoNumber> numbers;
 
-    Lotto(final Set<LottoNumber> numbers) {
+    public Lotto(final Set<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
-    int countCommonNumbers(final Lotto otherLotto) {
+    public int countCommonNumbers(final Lotto otherLotto) {
         return (int)this.numbers
                 .stream()
                 .filter(otherLotto.numbers::contains)
                 .count();
     }
 
-    static Lotto from(final Set<LottoNumber> numbers) {
+    public static Lotto from(final Set<LottoNumber> numbers) {
         validateNumbersHaveSpecifiedSize(numbers);
 
         return new Lotto(numbers);

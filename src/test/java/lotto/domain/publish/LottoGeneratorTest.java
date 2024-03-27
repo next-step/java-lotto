@@ -1,7 +1,7 @@
-package lotto.domain;
+package lotto.domain.publish;
 
 import static lotto.config.LottoExceptionMessage.LOTTO_QUANTITY_MUST_BE_POSITIVE;
-import static lotto.domain.LottoGenerator.MINIMUM_LOTTO_QUANTITY;
+import static lotto.domain.publish.LottoGenerator.MINIMUM_LOTTO_QUANTITY;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.core.api.Assertions;

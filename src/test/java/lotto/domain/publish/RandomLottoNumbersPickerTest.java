@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.publish;
 
 import static lotto.domain.Lotto.LOTTO_NUMBERS_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;

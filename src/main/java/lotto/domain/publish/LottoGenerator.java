@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.publish;
 
 import static lotto.config.LottoExceptionMessage.LOTTO_QUANTITY_MUST_BE_POSITIVE;
 
@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 public class LottoGenerator {
 

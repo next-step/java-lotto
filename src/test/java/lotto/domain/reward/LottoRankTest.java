@@ -1,8 +1,8 @@
-package lotto.domain;
+package lotto.domain.reward;
 
 import static lotto.config.LottoExceptionMessage.LOTTO_RANK_IS_NOT_FOUND;
-import static lotto.domain.LottoRank.FIRST;
-import static lotto.domain.LottoRank.NONE;
+import static lotto.domain.reward.LottoRank.FIRST;
+import static lotto.domain.reward.LottoRank.NONE;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import org.junit.jupiter.api.DisplayName;

@@ -1,7 +1,6 @@
-package lotto.domain;
+package lotto.domain.reward;
 
 import static lotto.config.LottoExceptionMessage.LOTTO_RESULT_DOES_NOT_MATCH_TOTAL_PRICE;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.Map;
@@ -9,19 +8,20 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class RateProfitCalculatorTest {
+class ProfitRateCalculatorTest {
 
     @ParameterizedTest
     @MethodSource("lottoResults")
     @DisplayName("당첨 번호와 로또 번호를 비교하여 동일한 갯수에 따라 순위를 부여한다.")
     void Calculate_LottoProfit(final Map<LottoRank, Long> lottoResult, final int totalPrice, final double profitRate) {
-        assertThat(new RateProfitCalculator().calculate(lottoResult, totalPrice))
+        Assertions.assertThat(new ProfitRateCalculator().calculate(lottoResult, totalPrice))
                 .isEqualTo(profitRate);
     }
 
@@ -29,7 +29,7 @@ public class RateProfitCalculatorTest {
     @DisplayName("구매자가 지불한 총 가격에 따른 로또 개수와, 당첨 결과에 따른 로또 개수가 일치하지 않는 경우 예외를 던진다.")
     void Calculate_InvalidTotalPrice() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new RateProfitCalculator().calculate(toLottoResult(0, 0, 0, 0, 1), 2000))
+                .isThrownBy(() -> new ProfitRateCalculator().calculate(toLottoResult(0, 0, 0, 0, 1), 2000))
                 .withMessage(LOTTO_RESULT_DOES_NOT_MATCH_TOTAL_PRICE.message());
     }
 

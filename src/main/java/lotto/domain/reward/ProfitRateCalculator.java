@@ -1,10 +1,10 @@
-package lotto.domain;
+package lotto.domain.reward;
 
 import static lotto.config.LottoExceptionMessage.LOTTO_RESULT_DOES_NOT_MATCH_TOTAL_PRICE;
 
 import java.util.Map;
 
-public class RateProfitCalculator {
+public class ProfitRateCalculator {
 
     public double calculate(final Map<LottoRank, Long> lottoResult, final int totalPrice) {
         final long lottoQuantity = lottoResult.values()

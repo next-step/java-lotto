@@ -4,18 +4,18 @@ import static lotto.config.LottoExceptionMessage.LOTTO_NUMBER_MUST_BE_IN_VALID_R
 
 import java.util.Objects;
 
-class LottoNumber {
+public class LottoNumber {
 
-    static final int MINIMUM_LOTTO_NUMBER = 1;
-    static final int MAXIMUM_LOTTO_NUMBER = 45;
+    public static final int MINIMUM_LOTTO_NUMBER = 1;
+    public static final int MAXIMUM_LOTTO_NUMBER = 45;
 
     private final int value;
 
-    LottoNumber(final int value) {
+    public LottoNumber(final int value) {
         this.value = value;
     }
 
-    static LottoNumber from(final int value) {
+    public static LottoNumber from(final int value) {
         validateLottoNumberIsInRange(value);
 
         return new LottoNumber(value);

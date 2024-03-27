@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.reward;
 
 import static lotto.config.LottoExceptionMessage.LOTTO_RANK_IS_NOT_FOUND;
 
