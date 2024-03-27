@@ -22,12 +22,6 @@ public class LottoService {
         return resultLotto;
     }
 
-    public ResultLotto checkLottoResult(List<Integer> winningNumbers) {
-        resultLotto.recordWinningNumbers(winningNumbers);
-
-        return resultLotto;
-    }
-
     public ResultLotto checkLottoResult(List<Integer> winningNumbers, int bonusNumber) {
         resultLotto.recordWinningNumbers(Numbers.valueOf(winningNumbers), bonusNumber);
 
