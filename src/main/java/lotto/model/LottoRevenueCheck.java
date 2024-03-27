@@ -9,25 +9,21 @@ public class LottoRevenueCheck {
         this.revenue = getTotalPrice(winLottos);
     }
 
-    private int getTotalPrice(Map<Integer, Integer> winLottos) {
+    public int getTotalPrice(Map<Integer, Integer> winLottos) {
         int totalWinAmount = 0;
 
         for (Integer key : winLottos.keySet()) {
-            totalWinAmount += (getPrizeAmount(key) * winLottos.get(key));
+            totalWinAmount += (LottoRank.getPrice(key) * winLottos.get(key));
         }
 
         return totalWinAmount;
-    }
-
-    private int getPrizeAmount(int count) {
-        return LottoRank.getPrice(count);
     }
 
     public float getRevenueRatio(String purchaseAmount) {
         return calculateRevenueRatio(Float.parseFloat(purchaseAmount));
     }
 
-    private float calculateRevenueRatio(float purchaseAmount) {
+    public float calculateRevenueRatio(float purchaseAmount) {
         if (purchaseAmount == 0) {
             return 0f;
         }

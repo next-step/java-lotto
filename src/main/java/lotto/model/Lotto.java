@@ -3,22 +3,22 @@ package lotto.model;
 import java.util.List;
 
 public class Lotto {
-    private final List<Integer> lotto;
+    private final List<Integer> lottoNumber;
 
     public Lotto(List<Integer> lotto) {
         Validator.validateLotto(lotto);
-        this.lotto = lotto;
+        this.lottoNumber = lotto;
     }
 
     public Lotto(String lotto) {
-        this.lotto = Validator.parseLottoNumbers(lotto);
+        this.lottoNumber = Validator.parseLottoNumbers(lotto);
     }
 
     public String toString() {
-        return lotto.toString();
+        return lottoNumber.toString();
     }
 
     public List<Integer> getLotto() {
-        return lotto;
+        return lottoNumber;
     }
 }

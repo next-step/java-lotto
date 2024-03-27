@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ResultView {
+
     public static void printSaleResult(LottoSale lottoSale, int saleCount) {
         printSaleCountResult(saleCount);
         printSaleLottoResult(lottoSale);
@@ -50,11 +51,13 @@ public class ResultView {
     }
 
     private static void printRevenueResult(float revenue) {
+        StringBuilder sb = new StringBuilder();
+
         if (revenue == 0) {
-            System.out.println("\n총 수익률은 0 입니다.\n");
+            System.out.println(sb.append("\n총 수익률은 0 입니다.\n"));
             return;
         }
 
-        System.out.printf("\n총 수익률은 %.2f 입니다.\n", revenue);
+        System.out.println(sb.append(String.format("\n총 수익률은 %.2f 입니다.\n", revenue)));
     }
 }

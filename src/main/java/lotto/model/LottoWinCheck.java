@@ -1,11 +1,12 @@
 package lotto.model;
 
 import java.util.*;
+import java.util.function.Predicate;
 
-public class LottoCheck {
+public class LottoWinCheck {
     private final Map<Integer, Integer> winLottos;
 
-    public LottoCheck(String winningNumber, List<Lotto> lottos) {
+    public LottoWinCheck(String winningNumber, List<Lotto> lottos) {
         this.winLottos = createWinLotto(winningNumber, lottos);
     }
 
@@ -22,7 +23,7 @@ public class LottoCheck {
         return lotto.getLotto();
     }
 
-    private Map<Integer, Integer> countWinLotto(List<Integer> winLotto, List<Lotto> lottos) {
+    public Map<Integer, Integer> countWinLotto(List<Integer> winLotto, List<Lotto> lottos) {
         Map<Integer, Integer> result = new HashMap<>();
 
         for (Lotto lotto : lottos) {
@@ -33,7 +34,7 @@ public class LottoCheck {
         return result;
     }
 
-    private int compareWinNumbers(List<Integer> winLotto, Lotto lotto) {
+    public static int compareWinNumbers(List<Integer> winLotto, Lotto lotto) {
         List<Integer> targetLotto = lotto.getLotto();
 
         int matchingNumbers = 0;
@@ -43,6 +44,7 @@ public class LottoCheck {
         }
 
         return matchingNumbers;
+
     }
 
     private void includedRankCheck(Map<Integer, Integer> result, int winNumberCount) {
@@ -52,7 +54,7 @@ public class LottoCheck {
         result.put(winNumberCount, result.getOrDefault(winNumberCount, 0) + 1);
     }
 
-    private int hasWinNumber(List<Integer> winLotto, int targetNumber) {
+    private static int hasWinNumber(List<Integer> winLotto, int targetNumber) {
         if(winLotto.contains(targetNumber)) {
             return 1;
         }

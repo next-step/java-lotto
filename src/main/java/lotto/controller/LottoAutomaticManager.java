@@ -1,6 +1,9 @@
 package lotto.controller;
 
-import lotto.model.*;
+import lotto.model.LottoRevenueCheck;
+import lotto.model.LottoSale;
+import lotto.model.LottoWinCheck;
+import lotto.model.RandomLottoStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -13,9 +16,9 @@ public class LottoAutomaticManager {
         ResultView.printSaleResult(lottoSale, lottoSale.getNumberOfLottos());
 
         String winningNumber = InputView.inputWinningNumbers();
-        LottoCheck lottoCheck = new LottoCheck(winningNumber, lottoSale.getLottos());
-        LottoRevenueCheck revenueCheck = new LottoRevenueCheck(lottoCheck.getWinLottos());
-        ResultView.printWinningStatisticsResult(lottoCheck.getWinLottos(), revenueCheck.getRevenueRatio(purchaseAmount));
+        LottoWinCheck lottoWinCheck = new LottoWinCheck(winningNumber, lottoSale.getLottos());
+        LottoRevenueCheck revenueCheck = new LottoRevenueCheck(lottoWinCheck.getWinLottos());
+        ResultView.printWinningStatisticsResult(lottoWinCheck.getWinLottos(), revenueCheck.getRevenueRatio(purchaseAmount));
 
     }
 }
