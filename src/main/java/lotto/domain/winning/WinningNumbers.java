@@ -11,11 +11,14 @@ public class WinningNumbers {
 
     private final List<LottoNumber> winningNumbers;
 
-    public WinningNumbers(List<LottoNumber> winningNumbers) {
+    private final LottoNumber bonusNumber;
+
+    public WinningNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
-    public static WinningNumbers fromValues(final List<Integer> values) {
+    public static WinningNumbers fromValues(final List<Integer> values, LottoNumber bonusNumber) {
         if (values.size() != 6){
             throw new SizeExceedLottoException(values.size());
         }
