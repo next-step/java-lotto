@@ -15,10 +15,12 @@ public class LottoResult {
         }
     }
 
-    public void calculateRank(List<LottoTicket> lottoTickets, WinnerNumber winnerNumber) {
+    public void calculateRank(List<LottoTicket> lottoTickets, WinnerNumber winnerNumber, int bonusNumber) {
         for (LottoTicket lottoTicket : lottoTickets) {
             int matchCount = winnerNumber.matchCount(lottoTicket.getLottoNumbers());
-            LottoRank lottoRank = LottoRank.getLottoRank(matchCount);
+            boolean hasBonusNumber = lottoTicket.hasBonusNumber(bonusNumber);
+            LottoRank lottoRank = LottoRank.getLottoRank(matchCount, hasBonusNumber);
+
             result.put(lottoRank, result.getOrDefault(lottoRank, 0) + 1);
         }
     }

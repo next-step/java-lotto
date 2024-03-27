@@ -21,4 +21,9 @@ public class InputView {
             .map(number -> Integer.parseInt(number.trim()))
             .collect(Collectors.toList());
     }
+
+    public int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return Integer.parseInt(scanner.nextLine());
+    }
 }

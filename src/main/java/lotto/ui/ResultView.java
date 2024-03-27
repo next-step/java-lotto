@@ -11,6 +11,9 @@ import lotto.domain.LottoTicket;
 
 public class ResultView {
 
+    private static final String DEFAULT_MESSAGE_FORMAT = "%s개 일치 (%s원) - %s개";
+    private static final String SECOND_MESSAGE_FORMAT = "%s개 일치, 보너스 볼 일치(%s원) - %s개";
+
     public void printPurchaseCount(List<LottoTicket> lottoTickets) {
         System.out.println(String.format("%s개를 구매했습니다.", lottoTickets.size()));
         for (LottoTicket lottoTicket : lottoTickets) {
@@ -37,7 +40,8 @@ public class ResultView {
 
     private void printMatch(LottoRank lottoRank, int matchCount) {
         if (!LottoRank.NO_MATCH.equals(lottoRank)) {
-            System.out.println(String.format("%s개 일치 (%s원) - %s개", lottoRank.getMatchCount(), lottoRank.getReward(), matchCount));
+            String messageFormat = LottoRank.SECOND.equals(lottoRank) ? SECOND_MESSAGE_FORMAT : DEFAULT_MESSAGE_FORMAT;
+            System.out.println(String.format(messageFormat, lottoRank.getMatchCount(), lottoRank.getReward(), matchCount));
         }
     }
 }
