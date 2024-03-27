@@ -1,20 +1,24 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicket {
-    private final List<Integer> numbers;
+    private final LottoNumbers numbers;
 
     public LottoTicket(List<Integer> numbers) {
-        this.numbers = new ArrayList<>(numbers);
+        this.numbers = new LottoNumbers(numbers);
     }
 
-    public List<Integer> getNumbers() {
+    public LottoTicket(LottoNumbers numbers) {
+        this.numbers = numbers;
+    }
+
+    public LottoNumbers getNumbers() {
         return numbers;
     }
 
-    public int winningCount(List<Integer> winningNumbers) {
-        return WinningCount.compareNumbers(numbers, winningNumbers);
+    public int winningCount(LottoTicket lottoTicket) {
+        return numbers.countMatchingNumbers(lottoTicket.getNumbers());
     }
+
 }

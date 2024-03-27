@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.util.RateCalculator;
 
 public class LottoTickets {
-    private List<LottoTicket> tickets;
+    private final List<LottoTicket> tickets;
 
     public LottoTickets(List<LottoTicket> tickets) {
         this.tickets = new ArrayList<>(tickets);
@@ -17,20 +16,16 @@ public class LottoTickets {
         return tickets;
     }
 
-    public Map<Integer, Integer> winningCheck(List<Integer> winningNumbers) {
+    public WinningResult winningCheck(LottoTicket winningTicket) {
         Map<Integer, Integer> result = new HashMap<>();
         for (LottoTicket ticket : tickets) {
-            int count = ticket.winningCount(winningNumbers);
+            int count = ticket.winningCount(winningTicket);
             result.put(count, result.getOrDefault(count, 0) + 1);
         }
-        return result;
+        return new WinningResult(result, totalPrice());
     }
 
     private int totalPrice() {
         return tickets.size()*LottoMachine.LOTTO_PRICE;
-    }
-
-    public double profitRate(Map<Integer, Integer> winningResult) {
-        return RateCalculator.calculateProfitRate(winningResult, totalPrice());
     }
 }

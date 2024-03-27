@@ -8,5 +8,4 @@ public class StringCalculatorApplication {
     public static void main(String[] args) {
         System.out.println(Calculator.calculate(CalculatorInputView.requestOperation()));
     }
-
 }

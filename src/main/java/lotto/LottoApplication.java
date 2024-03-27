@@ -1,17 +1,13 @@
 package lotto;
 
 import common.view.LottoInputView;
-import common.view.ResultView;
-import lotto.domain.LottoGame;
-import lotto.domain.LottoMachine;
+import lotto.controller.LottoGame;
 
 public class LottoApplication {
     public static void main(String[] args) {
         int amount = LottoInputView.requestPurchaseAmount();
-        int ticketCount = LottoMachine.getTicketsCount(amount);
-        ResultView.showTicketCount(ticketCount);
 
-        LottoGame lottoGame = new LottoGame(ticketCount);
+        LottoGame lottoGame = new LottoGame(amount);
         lottoGame.playGame();
     }
 }
