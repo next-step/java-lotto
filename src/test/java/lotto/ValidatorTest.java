@@ -25,6 +25,13 @@ class ValidatorTest {
     }
 
     @ParameterizedTest
+    @CsvSource(value = {"0:true", "1:true", "10:true", "14000:true", "abc:false", "1.1:false", "NULL:false", "'':false", "'   ':false", "-1:false", "0123:false"}, delimiter = ':', nullValues = "NULL")
+    @DisplayName("isIntegerGreaterThanOrEqualToZero(): 0보다 크거가 같은 정수인 경우 true를 그렇지 않은 경우 false를 반환한다.")
+    void testIsIntegerGreaterThanOrEqualToZero(String numberString, boolean expected) {
+        assertThat(Validator.isIntegerGreaterThanOrEqualToZero(numberString)).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
     @MethodSource("parameterOfIsEqualToLengthTest")
     @DisplayName("isEqualToLength(): stringArray의 길이가 length와 동일한 경우 true를 그렇지 않은 경우 false를 반환한다.")
     void testIsEqualToLength(String[] stringArray, int length, boolean expected) {

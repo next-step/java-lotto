@@ -1,43 +1,62 @@
 package lotto.domain.lotto;
 
-import lotto.domain.BonusNumber;
 import lotto.domain.PurchaseAmountOfMoney;
-import lotto.domain.Rank;
-import lotto.domain.WinningNumbers;
+import lotto.domain.WinningAndBonusNumbers;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
+    private Lottos() {
+        this.lottos = new ArrayList<>();
+    }
+
     private Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public static Lottos emptyLottos() {
+        return new Lottos();
     }
 
     public static Lottos valueOf(List<Lotto> lottos) {
         return new Lottos(lottos);
     }
 
-    public List<Lotto> lottos() {
-        return lottos;
-    }
-
-    public StatisticsOfLottos statistics(WinningNumbers winningNumbers, BonusNumber bonusNumber, PurchaseAmountOfMoney purchaseAmountOfMoney) {
-        ResultOfLottos resultOfLottos = resultOfLottos(winningNumbers, bonusNumber);
+    public StatisticsOfLottos statistics(WinningAndBonusNumbers winningAndBonusNumbers, PurchaseAmountOfMoney purchaseAmountOfMoney) {
+        ResultOfLottos resultOfLottos = resultOfLottos(winningAndBonusNumbers);
         double rateOfReturn = purchaseAmountOfMoney.rateOfReturn(resultOfLottos.totalWinningMoney());
 
         return StatisticsOfLottos.newLottoResult(resultOfLottos, rateOfReturn);
     }
 
-    private ResultOfLottos resultOfLottos(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+    private ResultOfLottos resultOfLottos(WinningAndBonusNumbers winningAndBonusNumbers) {
         ResultOfLottos resultOfLottos = new ResultOfLottos();
 
-        lottos.forEach(lotto -> {
-            int matchCount = lotto.countOfMatch(winningNumbers);
-            boolean isBonusMatched = bonusNumber.isMatched(lotto.lottoNumbers());
-            resultOfLottos.increaseNumberOfMatchCount(Rank.findRank(matchCount, isBonusMatched));
-        });
+        lottos.forEach(lotto -> resultOfLottos.increaseNumberOfMatchCount(winningAndBonusNumbers.rankOfLotto(lotto)));
 
         return resultOfLottos;
+    }
+
+    public Lottos bind(Lottos lottos) {
+        List<Lotto> newLottos = Stream.of(lottos(), lottos.lottos())
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
+        return Lottos.valueOf(newLottos);
+    }
+
+    public int numberOfLottos() {
+        return lottos.size();
+    }
+
+    public List<Lotto> lottos() {
+        return Collections.unmodifiableList(lottos);
     }
 }

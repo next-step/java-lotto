@@ -26,7 +26,7 @@ public class PurchaseAmountOfMoney {
         return new PurchaseAmountOfMoney(amountOfMoney);
     }
 
-    public int numberOfLottoToPurchase() {
+    public int totalNumberOfLottoToPurchase() {
         return amountOfMoney / LOTTO_PRICE;
     }
 

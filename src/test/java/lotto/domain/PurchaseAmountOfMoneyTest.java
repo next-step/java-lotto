@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class PurchaseAmountOfMoneyTest {
     @ParameterizedTest
     @ValueSource(ints = {-14000, 0, 900})
-    @DisplayName("파라미터로 주어진 amountOfMoney가 로또 1장의 가격보다 작다면 IllegalArgumentException이 발생한다.")
+    @DisplayName("파라미터로 주어진 amountOfMoney가 로또 1장의 가격보다 작다면 InvalidPurchaseAmountOfMoneyException이 발생한다.")
     void testInstanceCreationFailCase(int amountOfMoney) {
         assertThatThrownBy(() -> PurchaseAmountOfMoney.valueOf(amountOfMoney))
                 .isExactlyInstanceOf(InvalidPurchaseAmountOfMoneyException.class);
@@ -23,7 +23,7 @@ class PurchaseAmountOfMoneyTest {
     @DisplayName("numberOfLottoToPurchase(): 구매금액으로 사게되는 로또의 개수를 반환한다.")
     void testNumberOfLottoToPurchase(int amountOfMoney, int expected) {
         PurchaseAmountOfMoney purchaseAmountOfMoney = PurchaseAmountOfMoney.valueOf(amountOfMoney);
-        assertThat(purchaseAmountOfMoney.numberOfLottoToPurchase()).isEqualTo(expected);
+        assertThat(purchaseAmountOfMoney.totalNumberOfLottoToPurchase()).isEqualTo(expected);
     }
 
     @ParameterizedTest
