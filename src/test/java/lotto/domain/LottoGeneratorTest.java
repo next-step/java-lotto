@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.lottoStrategy.LottoGenerateStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

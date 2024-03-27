@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.lottoStrategy;
+
+import lotto.domain.Lotto;
 
 @FunctionalInterface
 public interface LottoGenerateStrategy {
