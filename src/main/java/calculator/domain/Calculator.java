@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import java.util.Arrays;
+
 public class Calculator {
 
     private static final String DELIMITER_POSITION = " ";
@@ -24,10 +26,13 @@ public class Calculator {
             throw new IllegalArgumentException(NULL_AND_EMPTY_VALIDATE);
         }
     }
+
     private static int calculate(String[] seperateString) {
         int calculatingValue = setInitialValue(seperateString);
-        for (int i = 1; i < seperateString.length-1; i+=2)
-            calculatingValue = Operation.calculateAlgorithm(calculatingValue, seperateString[i], Integer.parseInt(seperateString[i + 1]));
+        for (int i = 1; i < seperateString.length-1; i+=2){
+            Operation operation = Operation.findOperator(seperateString[i]);
+            calculatingValue = operation.calculate(calculatingValue, Integer.parseInt(seperateString[i + 1]));
+        }
         return calculatingValue;
     }
 

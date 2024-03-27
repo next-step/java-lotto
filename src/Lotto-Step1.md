@@ -68,5 +68,8 @@ github desktop push test
 - [X] 테스트 코드에서 @DisplayName 활용
 - [X] 개념이 다른 선언부 끼리는 개행으로 개념 분리
 - [ ] calculate메소드 Stream API의 reduce 함수로
-- [X] Calculator 클래스 유틸리티 클래스 -> 생성자 제한(public -> private)
+- [X] Calculator 클래스 유틸리티 클래스 ->   제한(public -> private)
 - [X] for if 로 인한 indent, line length -> 사칙연산을 열거형 객체로 만들어서 책임 분리 -> 문자열이 어떤 연산자인지 찾는 책임을 열거형 객체로 전달
+- 3/24
+- [X] Calculator.java 매개변수 3개 -> 줄여보기
+- [X] Operation.java -> 리팩토링 Stream API나 반복문등을 통해서 or 연산자 타입들(PLUS, MULTIPLY, SUBTRACT)가 각각 symbol에 대한 값만 가지고있는데, 람다표현식을 고차함수로 가지고 있을 경우 연산의 대한 책임도 추상화
