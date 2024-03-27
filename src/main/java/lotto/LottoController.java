@@ -28,7 +28,9 @@ public class LottoController {
 
         String winnerNum = input.inputWinnerNumber();
         output.printWinnerNumber(winnerNum);
-        WinnerNumber winnerNumber = WinnerNumber.of(LottoInputParser.parseToIntegers(winnerNum));
+
+        LottoNumber bonus = LottoNumber.of(input.inputBonusNumber());
+        WinnerNumber winnerNumber = WinnerNumber.of(LottoInputParser.parseToIntegers(winnerNum), bonus);
 
         LottoResult result = LottoResult.initializeLottoResult();
         tickets.updateLottoResult(winnerNumber, result);

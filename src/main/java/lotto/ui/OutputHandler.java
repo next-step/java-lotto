@@ -24,10 +24,8 @@ public class OutputHandler {
         for(LottoRank rank: LottoRank.values()){
             int count = result.getResultCount(rank);
             if (rank.getMatchCount() > 0) {
-                System.out.printf("%s %d개 일치 (%d원) - %d개\n",
-                        rank.getRank(),rank.getMatchCount(), rank.getPrizeMoney(), count);
-            } else {
-                System.out.printf("%s - %d개\n", rank.getRank(), count);
+                System.out.printf("%d개 일치 (%d원) - %d개\n",
+                        rank.getMatchCount(), rank.getPrizeMoney(), count);
             }
         }
     }

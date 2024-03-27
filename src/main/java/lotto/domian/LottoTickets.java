@@ -23,7 +23,11 @@ public class LottoTickets {
     public void updateLottoResult(WinnerNumber winnerNumber, LottoResult lottoResult) {
         for (LottoTicket ticket : lottoTickets) {
             int matchCount = ticket.countMatchingNumbers(winnerNumber);
-            LottoRank rank = LottoRank.valueOfMatchCount(matchCount);
+            boolean matchBonus = false;
+            if (matchCount == 5) {
+                matchBonus = ticket.matchingBonusNumbers(winnerNumber);
+            }
+            LottoRank rank = LottoRank.valueOfMatchCount(matchCount,matchBonus );
             lottoResult.updateResultForRank(rank);
         }
     }
