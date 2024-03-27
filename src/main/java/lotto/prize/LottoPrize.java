@@ -16,10 +16,10 @@ public enum LottoPrize {
     private final Integer correctNumber;
     private final Integer prize;
     private final boolean isBonus;
-    private static final Map<String, LottoPrize> cache = new HashMap<>();
+    private static final Map<PrizeKey, LottoPrize> cache = new HashMap<>();
 
     static {
-        Arrays.stream(values()).forEach(prize -> cache.put(getKey(prize.correctNumber,prize.isBonus),prize));
+        Arrays.stream(values()).forEach(prize -> cache.put(PrizeKey.of(prize.getCorrectNumber(), prize.getIsBonus()),prize));
     }
 
     LottoPrize(Integer correctNumber, Integer prize, boolean isBonus) {
@@ -29,24 +29,22 @@ public enum LottoPrize {
     }
 
     public static LottoPrize from(int count, boolean isBonus) {
-        if (cache.containsKey(getKey(count,isBonus))) {
-            return cache.get(getKey(count,isBonus));
-        }
-        return LottoPrize.NONE;
-    }
-
-    public String formatPrizeText(long count) {
-        if(this.isBonus){
-            return String.format("%d개 일치, 보너스 볼 일치(%d원) - %d개\n",this.correctNumber,this.prize,count);
-        }
-        return String.format("%d개 일치 (%d원)- %d개\n", this.correctNumber, this.prize, count);
+        return cache.getOrDefault(PrizeKey.of(count,isBonus),LottoPrize.NONE);
     }
 
     public int getTotalPrice(long count) {
         return prize * (int) count;
     }
 
-    private static String getKey(int correctNumber, boolean isBonus) {
-        return correctNumber + "|" + isBonus;
+    public Integer getCorrectNumber(){
+        return this.correctNumber;
+    }
+
+    public boolean getIsBonus(){
+        return this.isBonus;
+    }
+
+    public int getPrize(){
+        return this.prize;
     }
 }
