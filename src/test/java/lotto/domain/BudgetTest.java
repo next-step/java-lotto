@@ -11,8 +11,8 @@ class BudgetTest {
     @DisplayName("구매 수량 테스트")
     @Test
     void canBuyQuantity() {
-        Budget budget = new Budget(14000);
-        int result = budget.divide(1000);
+        Budget.Lotto budget = new Budget.Lotto(14000);
+        int result = budget.purchasableQuantity();
         assertThat(result).isEqualTo(14);
     }
 }

@@ -2,17 +2,24 @@ package lotto.domain;
 
 public class Budget {
 
-    private int value;
+    public static class Lotto {
 
-    public Budget(int budget) {
-        this.value = budget;
-    }
+        private final static int DEFAULT_PRICE = 1000;
 
-    public int getValue() {
-        return value;
-    }
+        private Price price;
+        private int budget;
 
-    public int divide(int lottoPrice) {
-        return value / lottoPrice;
+        public Lotto(int budget) {
+            this(budget, DEFAULT_PRICE);
+        }
+
+        public Lotto(int budget, int price) {
+            this.budget = budget;
+            this.price = new Price(price);
+        }
+
+        public int purchasableQuantity() {
+            return price.divide(budget);
+        }
     }
 }
