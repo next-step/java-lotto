@@ -14,6 +14,13 @@ class Lotto {
         this.numbers = numbers;
     }
 
+    int countCommonNumbers(final Lotto otherLotto) {
+        return (int)this.numbers
+                .stream()
+                .filter(otherLotto.numbers::contains)
+                .count();
+    }
+
     static Lotto from(final Set<LottoNumber> numbers) {
         validateNumbersHaveSpecifiedSize(numbers);
 
