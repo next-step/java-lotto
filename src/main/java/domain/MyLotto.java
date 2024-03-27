@@ -5,17 +5,18 @@ import java.util.List;
 
 public class MyLotto {
 
-    private static List<Lotto> lotto;
+    private final List<Lotto> lotto;
 
     public MyLotto() {
-        lotto = new ArrayList<>();
+        this.lotto = new ArrayList<>();
     }
 
-    public void add(Lotto lotto) {
-        MyLotto.lotto.add(lotto);
+    public void add(List<Integer> nowLotto) {
+        this.lotto.add(new Lotto(nowLotto));
     }
 
-    public static List<Lotto> getLotto() {
+    public List<Lotto> getLotto() {
         return lotto;
     }
 }
+

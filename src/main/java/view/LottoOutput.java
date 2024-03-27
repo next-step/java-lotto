@@ -4,14 +4,11 @@ import domain.Lotto;
 import domain.MyLotto;
 import domain.WinStatus;
 
+import java.util.ArrayList;
+
 public class LottoOutput {
 
     String[] correctResult;
-    public void myLottoPrint(MyLotto myLotto) {
-        for (Lotto lotto : MyLotto.getLotto()) {
-            lottoPrint(lotto);
-        }
-    }
 
     private void wordSetting() {
         correctResult = new String[4];
@@ -39,13 +36,13 @@ public class LottoOutput {
         System.out.println("당첨 통계");
         System.out.println("--------");
         for (int i = 0; i < 4; i++) {
-            System.out.print(i + 3 + correctResult[i] + resultWinStatus[i]);
+            System.out.println(i + 3 + correctResult[i] + resultWinStatus[i]);
             cnt += resultWinStatus[i];
         }
         return cnt;
     }
 
-    public void totalProfit(int total, int correct) {
-        System.out.println("총 수익률은 " + (double)(correct / total) + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+    public void totalProfit(double total, double correct) {
+        System.out.printf("총 수익률은 %.2f 입니다.", correct / total);
     }
 }

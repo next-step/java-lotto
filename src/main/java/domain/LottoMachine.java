@@ -1,14 +1,16 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class LottoMachine {
 
-    private static final List<Integer> machine = new ArrayList<>();
+    private List<Integer> machine;
 
     private void basicNumber() {
+        machine = new ArrayList<>();
         for (int i = 1; i <= 45; i++) {
             machine.add(i);
         }
@@ -18,9 +20,13 @@ public class LottoMachine {
         basicNumber();
     }
 
-    public Lotto pull() {
+    public List<Integer> pull() {
         Collections.shuffle(machine);
-        Lotto nowLotto = new Lotto(machine.subList(0, 6));
-        return nowLotto;
+        List<Integer> newLotto = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            newLotto.add(machine.get(i));
+        }
+        Collections.sort(newLotto);
+        return newLotto;
     }
 }

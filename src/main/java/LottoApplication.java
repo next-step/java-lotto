@@ -11,11 +11,10 @@ public class LottoApplication {
         LottoOutput lottoOutput = new LottoOutput();
         LottoController lottoController = new LottoController();
         LottoMachine lottoMachine = new LottoMachine();
-        Lotto winLotto = lottoMachine.pull();
+        Lotto winLotto = new Lotto(lottoMachine.pull());
         int totalBuy = lottoInput.buyCash();
 
-        lottoController.run(totalBuy);
-        lottoOutput.myLottoPrint(lottoController.getMyLotto());
+        lottoController.totalLotto(totalBuy);
         lottoOutput.winNumber(winLotto);
         int winning = lottoOutput.totalPrize(lottoController.resultReturn(winLotto));
         lottoOutput.totalProfit(totalBuy, winning);

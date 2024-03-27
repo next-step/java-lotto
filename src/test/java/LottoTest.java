@@ -50,11 +50,9 @@ public class LottoTest {
     @Test
     @DisplayName("출력 로또 번호")
     public void myLottoNumbers() {
-        MyLotto myLotto = new MyLotto();
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        myLotto.add(lotto);
-        LottoOutput lottoOutput = new LottoOutput();
+        LottoController lotto = new LottoController();
 
-        lottoOutput.myLottoPrint(myLotto);
+        lotto.totalLotto(4);
+
     }
 }
