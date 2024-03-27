@@ -6,14 +6,19 @@ import java.util.stream.Collectors;
 public class ResultLotto {
     private static final int LOTTO_PRICE = 1000;
     private List<Lotto> lottos;
-    private List<Integer> winningNumbers;
+    private Numbers winningNumbers;
+    private Number bonusNumber;
 
     public int totallottoCount() {
         return lottos.size();
     }
 
     public int getWinningAmount() {
-        return LottoOutlet.getWinnings(lottos, winningNumbers);
+        List<MatchNumber> matchNumbers = lottos.stream()
+                .map(lotto -> lotto.matchNumbers(winningNumbers, bonusNumber))
+                .collect(Collectors.toList());
+
+        return LottoOutlet.getWinnings(matchNumbers);
     }
 
     public double getWinningRate() {
@@ -31,12 +36,18 @@ public class ResultLotto {
     }
 
     public void recordWinningNumbers(List<Integer> winningNumbers) {
-        this.winningNumbers = winningNumbers;
+        this.winningNumbers = Numbers.valueOf(winningNumbers);
     }
 
-    public int findMatchCount(int matchCount) {
+    public int findRankCount(int rank) {
         return (int) lottos.stream()
-                .filter(lotto -> lotto.matchNumbers(winningNumbers) == matchCount)
+                .map(lotto -> lotto.matchNumbers(winningNumbers, bonusNumber))
+                .filter(matchNumber -> LottoOutlet.getRank(matchNumber) == rank)
                 .count();
+    }
+
+    public void recordWinningNumbers(Numbers winningNumbers, int bonusNumber) {
+        this.winningNumbers = winningNumbers;
+        this.bonusNumber = new Number(bonusNumber);
     }
 }
