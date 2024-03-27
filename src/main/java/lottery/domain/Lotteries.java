@@ -6,6 +6,7 @@ import lottery.domain.vo.LotteryNumbers;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 
 public class Lotteries {
@@ -52,11 +53,9 @@ public class Lotteries {
     }
 
     private static List<Lottery> dispense(Long lotteryCount) {
-        List<Lottery> lotteries = new ArrayList<>();
-        for(int count = 0; count < lotteryCount; count++){
-            lotteries.add(new Lottery(quickPick()));
-        }
-        return Collections.unmodifiableList(lotteries);
+        return LongStream.range(0, lotteryCount)
+                .mapToObj(count -> new Lottery(quickPick()))
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private static LotteryNumbers quickPick(){
