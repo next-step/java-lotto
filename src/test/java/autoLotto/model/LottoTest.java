@@ -6,11 +6,15 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Set;
 
-import static autoLotto.model.LottoConstants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
+    private static final String INVALID_LOTTO_NUMBERS = "로또 번호의 개수는 6개이며, 각 번호는 1 이상 45 이하의 값만 가능합니다.";
+    private static final int VALID_LOTTO_LENGTH = 6;
+    private static final int LOTTO_START_NUMBER = 1;
+    private static final int LOTTO_END_NUMBER = 45;
+
     private static final List<String> VALID_NUMBERS = List.of("1","2","3","4","5","6");
     private static final List<String> INVALID_NUMBERS = List.of("-1","2","3","4","5","111");
     private static final List<String> INVALID_COUNT_OF_NUMBERS = List.of("1","2","3","4","5","6","7");

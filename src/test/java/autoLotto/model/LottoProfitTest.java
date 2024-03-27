@@ -4,27 +4,24 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.EnumMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoProfitCheckerTest {
+class LottoProfitTest {
 
-    private static final Long PURCHASE_AMOUNT = 4000L;
+    private static final int NUMBER_OF_TOTAL_LOTTOS = 4;
 
     @Test
     @DisplayName("1등에서 5등까지 모든 상금을 받음")
     void testLottoProfitChecker_AllPrizes_ShouldReturnCorrectProfits() {
         // given, when
-        LottoProfitChecker lottoProfitChecker = new LottoProfitChecker(getAllWinLotto());
-        BigDecimal profitRatio = lottoProfitChecker.getProfitRatio(PURCHASE_AMOUNT);
+        LottoProfit lottoProfit = new LottoProfit(getAllWinLotto());
+        BigDecimal profitRatio = lottoProfit.getProfitRatio(NUMBER_OF_TOTAL_LOTTOS);
 
         // then
-        BigDecimal allWinPrizes = getAllWinPrizes();
-        BigDecimal purchaseAmount = BigDecimal.valueOf(PURCHASE_AMOUNT);
-        assertThat(profitRatio).isEqualTo(allWinPrizes.divide(purchaseAmount, 2, RoundingMode.DOWN));
+        assertThat(profitRatio).isEqualTo(BigDecimal.valueOf(507887.50).setScale(2));
     }
 
     @Test
@@ -34,8 +31,8 @@ class LottoProfitCheckerTest {
         EnumMap<PrizeEnum, Integer> prize = new EnumMap<>(PrizeEnum.class){{
             put(PrizeEnum.MISS, 1);
         }};
-        LottoProfitChecker lottoProfitChecker = new LottoProfitChecker(prize);
-        BigDecimal profit = lottoProfitChecker.getProfitRatio(PURCHASE_AMOUNT);
+        LottoProfit lottoProfit = new LottoProfit(prize);
+        BigDecimal profit = lottoProfit.getProfitRatio(NUMBER_OF_TOTAL_LOTTOS);
 
         // then
         assertThat(profit).isEqualTo(BigDecimal.ZERO.setScale(2));

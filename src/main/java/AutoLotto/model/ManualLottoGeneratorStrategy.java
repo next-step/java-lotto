@@ -1,26 +1,29 @@
 package autoLotto.model;
 
+import autoLotto.exception.PurchaseException;
+
 import java.util.*;
 
-public class RandomLottoGeneratorStrategy implements LottoGeneratorStrategy {
+public class ManualLottoGeneratorStrategy implements LottoGeneratorStrategy {
+    private static final String INVALID_LOTTO_NUMBERS = "쉼표를 기준으로 1 ~ 45 사이의 숫자 6개의 숫자를 중복없이 입력하셔야 합니다.\n(ex: 1,2,3,4,5,6)";
     private static final int VALID_LOTTO_LENGTH = 6;
 
     @Override
     public Set<LottoNumber> lottoGenerator(List<Integer> lotto) {
-        shuffleRandomNumbers(lotto);
         return getSixNumbers(lotto);
     }
 
-    private void shuffleRandomNumbers(List<Integer> lotto) {
-       Collections.shuffle(lotto);
-    }
-
     private Set<LottoNumber> getSixNumbers(List<Integer> lotto) {
+        if (!hasNotDuplicatedNumber(lotto)) {
+            throw new PurchaseException(INVALID_LOTTO_NUMBERS);
+        }
+
         List<LottoNumber> lottoNumbers = convertIntegerListToLottoNumberList(lotto);
         return new LinkedHashSet<>(lottoNumbers);
     }
 
     private List<LottoNumber> convertIntegerListToLottoNumberList(List<Integer> lotto) {
+        Collections.sort(lotto);
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
         for(int i = 0; i < VALID_LOTTO_LENGTH; i++) {
@@ -28,11 +31,12 @@ public class RandomLottoGeneratorStrategy implements LottoGeneratorStrategy {
             lottoNumbers.add(new LottoNumber(number));
         }
 
-        orderByLottoNumber(lottoNumbers);
         return lottoNumbers;
     }
 
-    private void orderByLottoNumber(List<LottoNumber> lottoNumbers) {
-        Collections.sort(lottoNumbers, Comparator.comparing(LottoNumber::getLottoNumber));
+    private boolean hasNotDuplicatedNumber(List<Integer> lotto) {
+        Set<Integer> set = new HashSet<>(lotto);
+
+        return set.size() == VALID_LOTTO_LENGTH;
     }
 }
