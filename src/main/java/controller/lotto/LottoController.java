@@ -13,7 +13,8 @@ import domain.lotto.genrate.RandomGenerator;
 
 import java.util.List;
 
-import static domain.lotto.properties.LottoProperties.LOTTO_PRICE;
+import static domain.lotto.Lotto.LOTTO_PRICE;
+
 
 public class LottoController {
     private static final Money lottoMoney = new Money(LOTTO_PRICE);
@@ -22,7 +23,7 @@ public class LottoController {
     public static void main(String[] args) {
         Money money = Money.from(LottoInputView.createMoneyView());
 
-        LottoCount lottoCount = createCustomLottoCount(money);
+        LottoCount lottoCount = createLottoCount(money);
 
         CustomLottoGenerator customLottoGenerator = createCustomLottoGenerator(lottoCount.customLottoCount());
 
@@ -40,7 +41,7 @@ public class LottoController {
         return CustomLottoGenerator.from(LottoInputView.createCustomLottoIntegerList(customLottoCount));
     }
 
-    private static LottoCount createCustomLottoCount(Money money) {
+    private static LottoCount createLottoCount(Money money) {
         Integer customLottoCount = LottoInputView.createCustomLottoCount();
 
         Money customLottoPrice = new Money(customLottoCount * LOTTO_PRICE);
