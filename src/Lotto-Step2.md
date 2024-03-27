@@ -53,5 +53,5 @@
 - [ ] LottoGenerator.rangeOfLotto() -> 1~ 45라는 로또 번호는 바뀌지 않고 재사용도 가능한데, 매번 ArrayList를 새로 생성해야할까요?!
 - [ ] LottoMatchLogic -> 도메인? 서비스?
 - [ ] ResultView -> StringBulider
-- [ ] LottoRank -> 오탈자
+- [X] LottoRank -> 오탈자
 - [ ] Lotto 일급 컬렉션 Lotto와 로직? 서비스? LottoMatchLogic 콜백 또는 고차함수
