@@ -26,7 +26,7 @@ public enum PrizeEnum {
 
     static {
         for (PrizeEnum prizeEnum : PrizeEnum.values()) {
-            matchedCountToBonusMap.put(prizeEnum.matchedCount, prizeEnum.isBonusMatched);
+            matchedCountToBonusMap.putIfAbsent(prizeEnum.matchedCount, prizeEnum.isBonusMatched);
             prizeMap.put(new PrizeKey(prizeEnum.matchedCount, prizeEnum.isBonusMatched), prizeEnum);
         }
     }
