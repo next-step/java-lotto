@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import lotto.domain.grade.Grade;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
+import lotto.error.exception.SizeExceedLottoException;
 
 public class WinningNumbers {
 
@@ -15,6 +16,10 @@ public class WinningNumbers {
     }
 
     public static WinningNumbers fromValues(final List<Integer> values) {
+        if (values.size() != 6){
+            throw new SizeExceedLottoException(values.size());
+        }
+
         List<LottoNumber> lottoNumbers = values.stream()
             .map(LottoNumber::fromInt)
             .collect(Collectors.toList());
