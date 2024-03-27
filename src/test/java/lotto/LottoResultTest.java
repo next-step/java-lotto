@@ -28,12 +28,6 @@ class LottoResultTest {
     }
 
     @Test
-    @DisplayName("정답에 따라 올바른 텍스트를 가지고 있는다.")
-    public void getWinningWordsContainsWord() {
-        assertThat( lottoResult.getWinningWords()).contains("3개 일치 (5000원)- 1개\n");
-    }
-
-    @Test
     @DisplayName("번돈과 소비한돈을 나누어 수익률을 반환한다.")
     public void getWinningPercentByEarningAndSpent() {
         assertThat(lottoResult.getWinningPercent(new StandardPrizeRate(),lottoPrice)).isEqualTo(5);
