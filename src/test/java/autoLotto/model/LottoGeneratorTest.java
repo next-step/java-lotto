@@ -21,7 +21,7 @@ class LottoGeneratorTest {
         LottoGeneratorStrategy lottoGeneratorStrategy = new RandomLottoGeneratorStrategy();
 
         // when
-        Set<LottoNumber> result = generator.generateLottoNumbers(lottoGeneratorStrategy);
+        Set<LottoNumber> result = generator.generateRandomLottoNumbers(lottoGeneratorStrategy);
 
         // then
         for (LottoNumber lottoNumber : result) {
@@ -32,12 +32,12 @@ class LottoGeneratorTest {
 
     @Test
     @DisplayName("자동 로또 생성 테스트 : 전략 패턴이 null로 들어와 예외 발생")
-   void testGenerateLottoNumbers_NoneStrategy_ThrowException() {
+    void testGenerateLottoNumbers_NoneStrategy_ThrowException() {
         // given
         LottoGenerator generator = new LottoGenerator();
 
         // when, then
-        assertThatThrownBy(() -> generator.generateLottoNumbers(null))
+        assertThatThrownBy(() -> generator.generateRandomLottoNumbers(null))
                 .isInstanceOf(NullPointerException.class);
     }
 }
