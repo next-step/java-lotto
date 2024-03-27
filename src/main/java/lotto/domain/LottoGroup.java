@@ -15,9 +15,10 @@ public class LottoGroup {
         this.tickets = tickets;
     }
 
-    public void generateTickets(Cash cash) {
+    public void generateTickets(Cash cash, ManualLottoGroup manualLottoGroup) {
         Lotto lotto = new Lotto();
-        lotto.generateLottoNumbers(this.generator.generate(), cash.getAmount());
+        lotto.generateManualLottoNumbers(manualLottoGroup);
+        lotto.generateLottoNumbers(this.generator.generate(), manualLottoGroup.getLeftOvers(cash));
         this.tickets = lotto;
     }
 

@@ -2,7 +2,7 @@ package lotto.domain;
 
 public class ManualLottoNumber {
 
-    private int number;
+    private final int number;
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
 
@@ -15,5 +15,9 @@ public class ManualLottoNumber {
         if(number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public int getNumber() {
+        return number;
     }
 }

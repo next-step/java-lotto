@@ -15,7 +15,7 @@ public class LottoClient {
         Cash cash = generateCash();
         ManualLottoCount manualLottoCount = insertManualLottoCount(cash);
         ManualLottoGroup manualLottoGroup = generateManualLotto(manualLottoCount);
-        LottoGroup lottoGroup = generateLottoGroupAndPrint(cash);
+        LottoGroup lottoGroup = generateLottoGroupAndPrint(cash, manualLottoGroup);
         WinningLotto winningLotto = insertWinningNumbers();
         Match match = new Match();
         lottoGroup.saveMatchResult(winningLotto, match);
@@ -25,7 +25,7 @@ public class LottoClient {
     private static ManualLottoGroup generateManualLotto(ManualLottoCount manualLottoCount) {
         printPlainMessage("수동으로 구매할 번호를 입력해 주세요.");
         Iterator<Integer> iterator = manualLottoCount.iterator();
-        ManualLottoGroup manualLottoGroup = new ManualLottoGroup();
+        ManualLottoGroup manualLottoGroup = new ManualLottoGroup(manualLottoCount);
         while(iterator.hasNext()){
             List<Integer> numbers = generateNumbers();
             manualLottoGroup.add(new ManualLotto(numbers));
@@ -40,9 +40,9 @@ public class LottoClient {
         return new WinningLotto(latestWinningNumbers, bonusNumber);
     }
 
-    private static LottoGroup generateLottoGroupAndPrint(Cash cash) {
+    private static LottoGroup generateLottoGroupAndPrint(Cash cash, ManualLottoGroup manualLottoGroup) {
         LottoGroup lottoGroup = new LottoGroup(new LottoGenerator());
-        lottoGroup.generateTickets(cash);
+        lottoGroup.generateTickets(cash, manualLottoGroup);
         printLottoGroup(lottoGroup);
         return lottoGroup;
     }

@@ -25,4 +25,8 @@ public class ManualLottoCount {
     public Iterator<Integer> iterator() {
         return Collections.singleton(this.count).iterator();
     }
+
+    public int getLeftOvers(Cash cash) {
+        return cash.minus(this.count);
+    }
 }
