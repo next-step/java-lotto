@@ -12,6 +12,9 @@ public class LottoCount {
     }
 
     public LottoCount(int count) {
+        if (count < 0) {
+            throw new IllegalArgumentException("로또 구매 횟수는 0보다 작을 수 없습니다.");
+        }
         this.count = count;
     }
 

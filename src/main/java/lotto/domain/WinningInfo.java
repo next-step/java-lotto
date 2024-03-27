@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class WinningInfo {
 
@@ -11,13 +12,14 @@ public class WinningInfo {
         this.winningInfo = winningInfo;
     }
 
-    public static WinningInfo of(Lottos lottos, LottoNumber bonusNumber, Lotto winningLotto) {
+    public static WinningInfo of(Lottos manualLottos, Lottos autoLottos, LottoNumber bonusNumber, Lotto winningLotto) {
         HashMap<Rank, Integer> winningInfo = new HashMap<>();
 
-        for (Lotto pickedLotto : lottos) {
-            Rank rank =  pickedLotto.getRank(winningLotto, bonusNumber);
-            winningInfo.put(rank, winningInfo.getOrDefault(rank, 0) + 1);
-        }
+        Stream.concat(manualLottos.stream(), autoLottos.stream())
+                .forEach(lotto -> {
+                    Rank rank =  lotto.getRank(winningLotto, bonusNumber);
+                    winningInfo.put(rank, winningInfo.getOrDefault(rank, 0) + 1);
+                });
         return new WinningInfo(winningInfo);
     }
 

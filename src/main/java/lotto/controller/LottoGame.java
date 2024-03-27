@@ -32,11 +32,11 @@ public class LottoGame {
 
         Lottos autoLottos = lottoGenerator.generateLottos(totalCount.subtractCount(manualLottoCount), new RandomLottoStrategy());
 
-        resultView.printPickedLottoNumbers(autoLottos);
+        resultView.printPickedLottoNumbers(manualLottos, autoLottos);
 
         Lotto winningLotto = initLottoNumbers();
         LottoNumber bonusNumber = initBonusNumber();
-        WinningInfo winningInfo = WinningInfo.of(autoLottos, bonusNumber, winningLotto);
+        WinningInfo winningInfo = WinningInfo.of(manualLottos, autoLottos, bonusNumber, winningLotto);
 
         resultView.printWinningStatic(winningInfo, totalMoney);
     }
