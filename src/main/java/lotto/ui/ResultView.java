@@ -27,12 +27,17 @@ public class ResultView {
 
         System.out.println("당첨 통계\n ---------");
         for (LottoRank lottoRank : values) {
-            if (LottoRank.NO_MATCH.equals(lottoRank)) continue;
-            System.out.println(String.format("%s개 일치 (%s원) - %s개", lottoRank.getMatchCount(), lottoRank.getReward(), result.get(lottoRank)));
+            printMatch(lottoRank, result.get(lottoRank));
         }
     }
 
     public void printRateResult(double rate) {
         System.out.println(String.format("총 수익률은 %.2f 입니다.", rate));
+    }
+
+    private void printMatch(LottoRank lottoRank, int matchCount) {
+        if (!LottoRank.NO_MATCH.equals(lottoRank)) {
+            System.out.println(String.format("%s개 일치 (%s원) - %s개", lottoRank.getMatchCount(), lottoRank.getReward(), matchCount));
+        }
     }
 }
