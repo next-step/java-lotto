@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoGenerator {
+public final class LottoGenerator {
+
+    private LottoGenerator() {
+    }
 
     private static final int START_NUMBER = 1;
     private static final int LAST_NUMBER = 45;
 
-    public Lottos generateLottos(Fee fee) {
+    public static Lottos generateLottos(Fee fee) {
         Lottos lottos = new Lottos();
         for (int i = 0; i < fee.convertToGameUnit(); i++) {
             lottos.add(generateLotto());
@@ -17,7 +20,7 @@ public class LottoGenerator {
         return lottos;
     }
 
-    public Lotto generateLotto() {
+    public static Lotto generateLotto() {
         List<Integer> lottoGame = rangeOfLotto();
         Collections.shuffle(lottoGame);
         lottoGame = lottoGame.subList(0,6);

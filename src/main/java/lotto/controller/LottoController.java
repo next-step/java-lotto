@@ -4,13 +4,13 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-public class LottoController {
+import static lotto.domain.LottoGenerator.generateLottos;
 
-    private LottoGenerator lottoGenerator = new LottoGenerator();
+public class LottoController {
 
     public void buyLotto() {
         Fee fee = InputView.payForGames();
-        Lottos lottos = lottoGenerator.generateLottos(fee);
+        Lottos lottos = generateLottos(fee);
         ResultView.showLottos(lottos);
         Lotto winningNumber = Lotto.from(InputView.inputWinningNumber());
         LottoMatchLogic lottoMatchLogic = new LottoMatchLogic(lottos);
