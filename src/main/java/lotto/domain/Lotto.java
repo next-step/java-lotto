@@ -5,7 +5,15 @@ import java.util.List;
 
 public class Lotto {
 
-    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private final List<LottoNumber> lottoNumbers;
+
+    public Lotto() {
+        this(new ArrayList<>());
+    }
+
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
 
     public void generateLottoNumbers(List<Integer> lottoNumber, int amount) {
         for (int i = 0; i < amount; i++) {
@@ -14,11 +22,9 @@ public class Lotto {
         }
     }
 
-    public void saveMatchResult(List<Integer> latestWinningNumbers, MatchCache matchCache, Profit profit) {
+    public void saveMatchResult(WinningLotto winningLotto, Match match) {
         this.lottoNumbers.forEach(iter -> {
-            int matchCount = iter.cacheMatchCount(latestWinningNumbers);
-            matchCache.save(matchCount);
-            profit.accumulate(matchCount);
+            winningLotto.saveMatchInfo(iter, match);
         });
     }
 

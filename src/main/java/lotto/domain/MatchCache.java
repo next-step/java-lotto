@@ -3,17 +3,28 @@ package lotto.domain;
 import java.util.Arrays;
 
 public class MatchCache {
-    private int[] counts = new int[6];
+    private final int[] counts;
+    private int bonusCount;
 
     public MatchCache() {
+        this(new int[6], 0);
     }
 
-    public MatchCache(int[] counts) {
+    public MatchCache(int[] counts, int bonusCount) {
         this.counts = counts;
+        this.bonusCount = bonusCount;
     }
 
-    public void save(int matchCount) {
+    public void save(int matchCount, boolean isBonus) {
+        if (isBonusLotto(matchCount, isBonus)) {
+            this.bonusCount++;
+            return;
+        }
         this.counts[matchCount - 1]++;
+    }
+
+    private boolean isBonusLotto(int matchCount, boolean isBonus) {
+        return matchCount == 5 && isBonus;
     }
 
     @Override
@@ -31,5 +42,9 @@ public class MatchCache {
 
     public int[] getCounts() {
         return counts;
+    }
+
+    public int getBonusCount() {
+        return bonusCount;
     }
 }

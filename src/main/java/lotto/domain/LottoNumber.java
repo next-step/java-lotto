@@ -7,10 +7,15 @@ public class LottoNumber {
 
     public LottoNumber(List<Integer> numbers) {
         this.numbers = numbers;
+        validateIfNotNull();
     }
 
-    public int cacheMatchCount(List<Integer> latestWinningNumbers) {
-        return Match.getCount(latestWinningNumbers, this.numbers);
+    private void validateIfNotNull() {
+        if (this.numbers == null) throw new IllegalArgumentException();
+    }
+
+    public boolean contains(Integer number){
+        return this.numbers.contains(number);
     }
 
     @Override

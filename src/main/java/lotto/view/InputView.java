@@ -20,7 +20,7 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-    private static int insertNumber() {
+    public static int insertNumber() {
         return new Scanner(System.in).nextInt();
     }
 

@@ -1,6 +1,16 @@
 # Step1
 
 ## Todo
+- 숫자나 연산자가 연속으로 들어오면 예외("1 2" => IllegalArgumentException)
+- 연산자가 양끝에 있으면 예외("1 +" =>외IllegalArgumentException, "+ 1" => IllegalArgumentException)
+
+## Done
+- 입력값이 null 또는 빈문자열이면 예외("" => IllegalArgumentException, null => IllegalArgumentException)
+- 덧셈("1 + 2" => 3)
+- 뺄셈("1 - 2" => -1)
+- 곱셈("1 * 3" => 3)
+- 나눗셈("4 / 2" => 2)x
+- 2개 이상의 사칙연산("2 + 2 / 2" => 2, "2 + 2 - 1 * 5" => 15)
 
 ## Done
 - [x] 입력값이 null 또는 빈문자열이면 예외("" => IllegalArgumentException, null => IllegalArgumentException)
@@ -48,5 +58,21 @@
 - [X] 코드 리뷰 적용 - Cash 매직넘버 분리 및 상태값 불변 변수로 수정
 - [X] 코드 리뷰 적용 - LottoPricing 에서 matchCount에 따른 value 값 캐싱
 - [X] 코드 리뷰 적용 - LottoGroup 2차원 배열 tickets 2개의 일급 컬렉션으로 분(List<Integer> -> LottoNumber, List<LottoNumber> -> Lotto) 
-- [X] 코드 리뷰 적용 - MatchCacheTest 내에서 system 출력으로 검증한 부분 수정
+- [X] 코드 리뷰 적용 d- MatchCacheTest 내에서 system 출력으로 검증한 부분 수정
 - [X] 코드 리뷰 적용 - LottoClient와 도메인에 퍼져있었던 입출력 로직들을 InputView, OutputView로 옮기기
+
+# Step3
+
+## Todo
+
+## Done
+- [X] 보너스 당첨 여부에 따른 금액 계산((4개 일치, 당첨) -> 50000, (5개 일치, 당첨) -> 30000000, (5개 일치, 미당첨) -> 1500000, (6개 일치, 당첨) -> 2000000000)
+- [X] 보너스 번호 문구 출력(보너스 볼을 입력해 주세요.)
+- [X] 보너스 번호 입력
+- [X] 당첨 통계 문구 추가("5개 일치, 보너스 볼 일치(30000000원) - 0개")
+- [X] winningNumber와 bonusNumber 하나의 클래스로 합치기
+- [X] profit과 matchCache를 묶는 상위 클래스 하나 만들기
+- [X] LottoPricing에서 Map 키 값 만들어주는 부분 enum으로 분리
+- [X] LottoPricing에 lottoPricingMappingCache 부분 반복문이나 stream()으로 처리
+- [X] WinningNumber 클래스 이름 변경(WinningNumber => WinningLotto)
+- [X] matchCount와 bonusCount를 구하는 부분을 WinningLotto에 메시지를 보내는 형태로 수정
