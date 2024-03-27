@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ManualLottoGroup {
-    private List<ManualLotto> tickets = new ArrayList<>();
     private final ManualLottoCount manualLottoCount;
+    private final List<ManualLotto> tickets = new ArrayList<>();
 
     public ManualLottoGroup(ManualLottoCount manualLottoCount) {
         this.manualLottoCount = manualLottoCount;
     }
 
-    public void add(ManualLotto manualLotto){
+    public void add(ManualLotto manualLotto) {
         tickets.add(manualLotto);
     }
 
@@ -20,7 +20,7 @@ public class ManualLottoGroup {
         return manualLottoCount.getLeftOvers(cash);
     }
 
-    public int getCount(){
+    public int getCount() {
         return manualLottoCount.getCount();
     }
 

@@ -11,13 +11,13 @@ public class ManualLottoCount {
         this.count = count;
     }
 
-    public void validateIfLargerThanWholeCount(Cash cash){
+    public void validateIfLargerThanWholeCount(Cash cash) {
         int amount = cash.getAmount();
-        if(amount < this.count) throw new IllegalArgumentException();
+        if (amount < this.count) throw new IllegalArgumentException();
     }
 
-    private void validateIfNotNull(Integer count){
-        if(count == null){
+    private void validateIfNotNull(Integer count) {
+        if (count == null) {
             throw new IllegalArgumentException();
         }
     }

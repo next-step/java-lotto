@@ -14,11 +14,11 @@ public class LottoNumber {
         if (this.numbers == null) throw new IllegalArgumentException();
     }
 
-    public boolean contains(Integer number){
+    public boolean contains(Integer number) {
         return this.numbers.contains(number);
     }
 
-    public boolean isBonusContains(Integer bonusNumber){
+    public boolean isBonusContains(Integer bonusNumber) {
         return Match.getCount(numbers, bonusNumber);
     }
 

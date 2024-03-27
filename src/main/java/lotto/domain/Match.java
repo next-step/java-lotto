@@ -16,6 +16,12 @@ public class Match {
         this.profit = profit;
     }
 
+    public static boolean getCount(List<Integer> sources, Integer bonusNumber) {
+        if (sources == null || bonusNumber == null) throw new IllegalArgumentException();
+        return sources.stream()
+                .anyMatch(bonusNumber::equals);
+    }
+
     public void save(int matchCount, boolean isBonus) {
         matchCache.save(matchCount, isBonus);
         profit.accumulate(matchCount, isBonus);
@@ -27,11 +33,5 @@ public class Match {
 
     public Profit getProfit() {
         return profit;
-    }
-
-    public static boolean getCount(List<Integer> sources, Integer bonusNumber) {
-        if (sources == null || bonusNumber == null) throw new IllegalArgumentException();
-        return sources.stream()
-                .anyMatch(bonusNumber::equals);
     }
 }
