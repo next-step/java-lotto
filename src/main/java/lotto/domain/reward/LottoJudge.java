@@ -8,19 +8,13 @@ import lotto.domain.Lotto;
 
 public class LottoJudge {
 
-    private final Lotto winningLotto;
-
-    public LottoJudge(final Lotto winningLotto) {
-        this.winningLotto = winningLotto;
-    }
-
-    public Map<LottoRank, Long> judge(final List<Lotto> lottos) {
+    public Map<LottoRank, Long> judge(final List<Lotto> lottos, final Lotto winningLotto) {
         return lottos.stream()
-                .collect(Collectors.groupingBy(this::match, Collectors.counting()));
+                .collect(Collectors.groupingBy(lotto -> match(lotto, winningLotto), Collectors.counting()));
     }
 
-    private LottoRank match(final Lotto lotto) {
-        final int commonNumbersCount = lotto.countCommonNumbers(this.winningLotto);
+    private LottoRank match(final Lotto lotto, final Lotto winningLotto) {
+        final int commonNumbersCount = lotto.countCommonNumbers(winningLotto);
 
         return LottoRank.from(commonNumbersCount);
     }

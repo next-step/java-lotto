@@ -25,9 +25,8 @@ class LottoJudgeTest {
     @DisplayName("당첨 번호와 로또 번호를 비교하여 동일한 갯수에 따라 순위를 부여한다.")
     void Judge_LottoRank() {
         final Lotto winningLotto = Lotto.from(toLottoNumbers(1, 2, 3, 4, 5, 6));
-        final LottoJudge lottoJudge = new LottoJudge(winningLotto);
 
-        assertThat(lottoJudge.judge(lottos()))
+        assertThat(new LottoJudge().judge(lottos(), winningLotto))
                 .isEqualTo(lottoResult());
     }
 
