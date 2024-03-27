@@ -21,9 +21,8 @@ public class LottoMachine {
     return lottoList.getLottoNumbers();
   }
 
-  public LottoResult getLottoResult(List<Integer> winningNumbers) {
-    Set<Integer> winningNumberSet = new HashSet<>(winningNumbers);
-    Map<Integer, Integer> result = lottoList.getLottoResult(winningNumberSet);
+  public LottoResult getLottoResult(WinNumbers winningNumbers) {
+    Map<Integer, Integer> result = lottoList.getLottoResult(winningNumbers);
     return new LottoResult(findWinningPrizeMap(result), getProfitRate(result));
   }
 
