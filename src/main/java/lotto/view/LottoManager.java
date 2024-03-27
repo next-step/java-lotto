@@ -18,14 +18,7 @@ public class LottoManager {
 	public void run() {
 		Integer pay = inputView.inputPay();
 		int manuallyCount = inputView.inputNumberOfLottosToPurchaseManually();
-
-		List<Lotto> lottoList = new ArrayList<>();
-		for (int j = 0; j < manuallyCount; j++) {
-			String lottoNumbers = inputView.inputManualLottoNumbers();
-			Lotto manualLotto = Lotto.createManualLotto(lottoNumbers);
-			lottoList.add(manualLotto);
-		}
-		MyLottos manuallyLottos = new MyLottos(lottoList);
+		MyLottos manuallyLottos = inputView.inputManualLottoNumbers(manuallyCount);
 		MyLottos myLottos = outputView.printBuyLottos(pay, manuallyLottos);
 		String winNumber = inputView.getWinNumber();
 		String bonusNumber = inputView.getBonusNumber();
