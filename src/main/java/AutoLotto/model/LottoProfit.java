@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map;
 
-public class LottoProfitChecker {
+public class LottoProfit {
     private static final int ZERO_PURCHASE_AMOUNT = 0;
     private static final int KOREAN_DOLLAR_UNIT = 1000;
     private BigDecimal profit;
 
-    public LottoProfitChecker(Map<PrizeEnum, Integer> winLottos) {
+    public LottoProfit(Map<PrizeEnum, Integer> winLottos) {
         this.profit = getTotalPrizes(winLottos);
     }
 

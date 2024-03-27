@@ -5,23 +5,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class LottoWinChecker {
+public class WinningLotto {
     private static final String BONUS_NUMBER_DENIED = "당첨 번호와 중복 없이 1 ~ 45 사이의 숫자 1개만 입력이 가능합니다.";
 
     private final Lotto winLotto;
     private final LottoNumber bonusNumber;
 
-    public LottoWinChecker(List<String> winNumbers, int bonusNumber) {
+    public WinningLotto(List<String> winNumbers, LottoNumber bonusNumber) {
         this.winLotto = Lotto.createLottoFrom(winNumbers);
         this.bonusNumber = generateBonusNumber(winNumbers, bonusNumber);
     }
 
-    private LottoNumber generateBonusNumber(List<String> winNumbers, int bonusNumber) {
-        if (isDuplicatedBonusNumber(winNumbers, bonusNumber)) {
+    private LottoNumber generateBonusNumber(List<String> winNumbers, LottoNumber bonusNumber) {
+        if (isDuplicatedBonusNumber(winNumbers, bonusNumber.getLottoNumber())) {
             throw new IllegalArgumentException(BONUS_NUMBER_DENIED);
         }
 
-        return new LottoNumber(bonusNumber);
+        return bonusNumber;
     }
 
     private boolean isDuplicatedBonusNumber(List<String> winNumbers, int bonusNumber) {
@@ -58,7 +58,7 @@ public class LottoWinChecker {
     }
 
     private boolean compareBonusNumber(Lotto userLotto, int countOfWinNumbers) {
-        if (PrizeEnum.isBonusMatchedFrom(countOfWinNumbers)) {
+        if (!PrizeEnum.isBonusMatchedFrom(countOfWinNumbers)) {
             return false;
         }
 
