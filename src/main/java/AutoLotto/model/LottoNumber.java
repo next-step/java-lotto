@@ -5,7 +5,7 @@ public class LottoNumber {
     private static final int LOTTO_END_NUMBER = 45;
     private static final String INVALID_LOTTO_NUMBER = "로또 번호는 1 ~ 45 이하의 숫자 1개의 값만 사용이 가능합니다.";
 
-    private int lottoNumber;
+    private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
         validateNumber(lottoNumber);
