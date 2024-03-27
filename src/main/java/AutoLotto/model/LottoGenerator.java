@@ -17,7 +17,11 @@ public class LottoGenerator {
         }
     }
 
-    public Set<LottoNumber> generateLottoNumbers(LottoGeneratorStrategy lottoGeneratorStrategy) {
+    public Set<LottoNumber> generateManualLottoNumbers(LottoGeneratorStrategy lottoGeneratorStrategy, List<Integer> manualNumbers) {
+        return lottoGeneratorStrategy.lottoGenerator(manualNumbers);
+    }
+
+    public Set<LottoNumber> generateRandomLottoNumbers(LottoGeneratorStrategy lottoGeneratorStrategy) {
         return lottoGeneratorStrategy.lottoGenerator(randomNumbers);
     }
 }
