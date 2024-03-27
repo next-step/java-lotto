@@ -8,20 +8,21 @@ public class AnswerSheet {
     private final Integer bonusNumber;
 
     public AnswerSheet(List<Integer> numbers, String bonusNumber) {
-       this(numbers,Integer.parseInt(bonusNumber));
+        this(numbers, Integer.parseInt(bonusNumber));
     }
+
     public AnswerSheet(List<Integer> numbers, Integer bonusNumber) {
-        if(numbers.size() != 6)
-            throw new IllegalArgumentException("정답 넘버는 6개여야합니다.");
+        if (numbers.size() != Lotto.LOTTO_NUMBER_LIMIT)
+            throw new IllegalArgumentException("정답 넘버는 6개여야합니다, 주어진 넘버는 " + numbers.size());
         this.numbers = numbers;
         this.bonusNumber = bonusNumber;
     }
 
-    public int matchCount(Lotto lotto){
-        return lotto.countMatchNumbers(numbers);
-    }
-    public boolean matchBonus(Lotto lotto){
-        return lotto.containsNumber(bonusNumber);
+    public List<Integer> getAnswerNumbers(){
+        return this.numbers;
     }
 
+    public Integer getBonusNumber(){
+        return this.bonusNumber;
+    }
 }
