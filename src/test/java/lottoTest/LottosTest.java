@@ -8,6 +8,7 @@ import lotto.Lotto;
 import lotto.LottoNumber;
 import lotto.LottoRank;
 import lotto.Lottos;
+import lotto.WinningLotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,21 +18,41 @@ public class LottosTest {
     private static final Lottos lottos = new Lottos(
         List.of(
             new Lotto(
-                Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                    new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))),
-            new Lotto(
-                Arrays.asList(new LottoNumber(7), new LottoNumber(8), new LottoNumber(9),
-                    new LottoNumber(10), new LottoNumber(11), new LottoNumber(12))))
-    );
+                new String[]{"1", "2", "3", "4", "5", "6"})
+        ));
 
     @Test
-    @DisplayName("당첨로또와 구입한 로또들을 비교하여 결과를 Return")
-    void COMPARE_WINNING_LOTTO_WITH_PURCHASED_LOTTOS() {
-        Lotto winningLotto = new Lotto(new String[] {"1","2","3","4","5","6"});
+    @DisplayName("로또 결과 1등")
+    void COMPARE_WINNING_LOTTO_THEN_FIRST_PRIZE() {
+        WinningLotto winningLotto = new WinningLotto(
+            new String[]{"1", "2", "3", "4", "5", "6"}, "7");
 
         Map<LottoRank, Integer> result = new HashMap<>();
         result.put(LottoRank.FIRST, 1);
-        result.put(LottoRank.LOSE, 1);
+
+        Assertions.assertThat(lottos.getWinningResult(winningLotto)).isEqualTo(result);
+    }
+
+    @Test
+    @DisplayName("로또 결과 2등")
+    void COMPARE_WINNING_LOTTO_WITH_SECOND_PRIZE() {
+        WinningLotto winningLotto = new WinningLotto(
+            new String[]{"1", "2", "3", "4", "5", "7"}, "6");
+
+        Map<LottoRank, Integer> result = new HashMap<>();
+        result.put(LottoRank.SECOND, 1);
+
+        Assertions.assertThat(lottos.getWinningResult(winningLotto)).isEqualTo(result);
+    }
+
+    @Test
+    @DisplayName("로또 결과 3등")
+    void COMPARE_WINNING_LOTTO_WITH_THIRD_PRIZE() {
+        WinningLotto winningLotto = new WinningLotto(
+            new String[]{"1", "2", "3", "4", "5", "9"}, "10");
+
+        Map<LottoRank, Integer> result = new HashMap<>();
+        result.put(LottoRank.THIRD, 1);
 
         Assertions.assertThat(lottos.getWinningResult(winningLotto)).isEqualTo(result);
     }

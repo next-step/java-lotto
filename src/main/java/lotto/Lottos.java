@@ -28,10 +28,11 @@ public class Lottos {
         return money.purchase();
     }
 
-    public Map<LottoRank, Integer> getWinningResult(Lotto winningLotto) {
+    public Map<LottoRank, Integer> getWinningResult(WinningLotto winningLotto) {
         Map<LottoRank, Integer> result = new HashMap<>();
         for (Lotto lotto : lottos) {
-            LottoRank rank = LottoRank.isLottoRank(lotto.countMatch(winningLotto));
+            LottoRank rank = LottoRank.isLottoRank(
+                winningLotto.countMatch(lotto), winningLotto.matchBonus(lotto));
             result.put(rank, result.getOrDefault(rank, 0) + 1);
         }
         return result;
