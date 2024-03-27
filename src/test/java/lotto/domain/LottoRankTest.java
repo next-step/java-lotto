@@ -13,11 +13,12 @@ public class LottoRankTest {
     void match() {
 
         assertSoftly(softly -> {
-            assertThat(LottoRank.getLottoRank(6)).isEqualTo(LottoRank.FIRST);
-            assertThat(LottoRank.getLottoRank(5)).isEqualTo(LottoRank.SECOND);
-            assertThat(LottoRank.getLottoRank(4)).isEqualTo(LottoRank.THIRD);
-            assertThat(LottoRank.getLottoRank(3)).isEqualTo(LottoRank.FOURTH);
-            assertThat(LottoRank.getLottoRank(2)).isEqualTo(LottoRank.NO_MATCH);
+            assertThat(LottoRank.getLottoRank(6, false)).isEqualTo(LottoRank.FIRST);
+            assertThat(LottoRank.getLottoRank(5, true)).isEqualTo(LottoRank.SECOND);
+            assertThat(LottoRank.getLottoRank(5, false)).isEqualTo(LottoRank.THIRD);
+            assertThat(LottoRank.getLottoRank(4, false)).isEqualTo(LottoRank.FOURTH);
+            assertThat(LottoRank.getLottoRank(3, false)).isEqualTo(LottoRank.FIFTH);
+            assertThat(LottoRank.getLottoRank(2, false)).isEqualTo(LottoRank.NO_MATCH);
 
         });
     }

@@ -29,4 +29,13 @@ public class LottoTicketTest {
         });
     }
 
+    @Test
+    @DisplayName("보너스 로또 번호를 가지고 있는지 확인한다.")
+    void hasBonusNumber() {
+        LottoTicket lottoTicket = new LottoTicket(List.of(1,2,3,4,5,6));
+        int bonusNumber = 6;
+
+        assertThat(lottoTicket.hasBonusNumber(bonusNumber)).isTrue();
+    }
+
 }

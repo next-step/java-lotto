@@ -20,8 +20,9 @@ public class LottoApplication {
         resultView.printPurchaseCount(lottoTickets);
 
         WinnerNumber winnerNumber = new WinnerNumber(inputView.inputWinnerNumbers());
+        int bonusNumber = inputView.inputBonusNumber();
         LottoResult lottoResult = new LottoResult();
-        lottoResult.calculateRank(lottoTickets, winnerNumber);
+        lottoResult.calculateRank(lottoTickets, winnerNumber, bonusNumber);
         resultView.printMatchResult(lottoResult.getResult());
         resultView.printRateResult(lottoResult.getRate(money));
     }

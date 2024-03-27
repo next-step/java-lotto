@@ -19,7 +19,7 @@ class LottoResultTest {
         WinnerNumber winnerNumber = new WinnerNumber(List.of(1,2,3,4,5,6));
         LottoResult lottoResult = new LottoResult();
 
-        lottoResult.calculateRank(List.of(lottoTicket), winnerNumber);
+        lottoResult.calculateRank(List.of(lottoTicket), winnerNumber, 7);
 
         assertSoftly(softly -> {
             assertThat(lottoResult.getResult().get(LottoRank.FIRST)).isEqualTo(1);
@@ -34,7 +34,7 @@ class LottoResultTest {
         LottoTicket lottoTicket = new LottoTicket(List.of(1,2,3,4,5,6));
         WinnerNumber winnerNumber = new WinnerNumber(List.of(1,2,3,4,5,6));
         LottoResult lottoResult = new LottoResult();
-        lottoResult.calculateRank(List.of(lottoTicket), winnerNumber);
+        lottoResult.calculateRank(List.of(lottoTicket), winnerNumber, 7);
 
         assertThat(lottoResult.getRate(1000)).isEqualTo(2000000.0);
 

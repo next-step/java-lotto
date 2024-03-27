@@ -20,4 +20,8 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
+    public boolean hasBonusNumber(int bonusNumber) {
+        return lottoNumbers.contains(new LottoNumber(bonusNumber));
+    }
+
 }
