@@ -1,11 +1,6 @@
 package autoLotto.view;
 
-import autoLotto.model.Lotto;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class InputView {
     private Scanner scanner = new Scanner(System.in);
@@ -25,7 +20,7 @@ public class InputView {
     private static final String PURCHASE_DENIED = "1,000원 단위로 구매 가능합니다.\n구입금액을 다시 입력해주세요.";
     private static final String MANUAL_LOTTO_PURCHASE_DENIED = "총 로또 구매개수 이하, 0 이상의 숫자로만 수동 로또를 구매할 수 있습니다.\n수동 로또 구매 개수를 다시 입력해주세요.";
     private static final String WIN_NUMBERS_QUESTION = "당첨 번호 6개를 입력해주세요.\n(ex : 1,2,3,4,5,6)";
-    private static final String LOTTO_NUMBERS_DENIED = "쉼표를 기준으로 1 ~ 45 사이의 숫자 6개의 숫자를 입력하셔야 합니다.\n당첨 번호를 다시 입력해주세요.\n(ex: 1,2,3,4,5,6)";
+    private static final String LOTTO_NUMBERS_DENIED = "쉼표를 기준으로 1 ~ 45 사이의 숫자 6개의 숫자를 중복없이 입력하셔야 합니다.\n당첨 번호를 다시 입력해주세요.\n(ex: 1,2,3,4,5,6)";
     private static final String BONUS_NUMBER_QUESTION = "보너스 볼을 입력해 주세요.";
     private static final String BONUS_NUMBER_DENIED = "당첨 번호와 중복 없이 1 ~ 45 사이의 숫자 1개만 입력이 가능합니다.\n보너스 번호를 다시 입력해주세요.";
 
@@ -42,7 +37,7 @@ public class InputView {
             input = scanner.nextLine();
         }
 
-        return divideUnit(input);
+        return Integer.valueOf(input);
     }
 
     private void outputQuestion(String question) {
@@ -58,17 +53,13 @@ public class InputView {
         return inputLong / DIVISION_UNIT >= 1;
     }
 
-    private int divideUnit(String input) {
-        int inputAsInt = Integer.valueOf(input);
-        return inputAsInt / DIVISION_UNIT;
-    }
-
     public int inputManualPurchase(int purchaseAmount) {
         return startManualPurchase(purchaseAmount, MANUAL_PURCHASE_AMOUNT_QUESTION);
     }
 
-    private int startManualPurchase(int numberOfTotalLottos, String question) {
+    private int startManualPurchase(int purchaseAmount, String question) {
         outputQuestion(question);
+        int numberOfTotalLottos = purchaseAmount / DIVISION_UNIT;
         String input = scanner.nextLine();
 
         while (!isValidNumberInput(input) || !isValidNumberOfManualLottos(numberOfTotalLottos, input)) {
@@ -89,7 +80,7 @@ public class InputView {
         return true;
     }
 
-    public List<Lotto> buyManualLottos(int numberOfManualLottos) {
+    public List<String> buyManualLottos(int numberOfManualLottos) {
         if (numberOfManualLottos == 0) {
             return new ArrayList<>();
         }
@@ -97,20 +88,20 @@ public class InputView {
         return startPurchaseManualLottos(MANUAL_LOTTO_NUMBERS_QUESTION, numberOfManualLottos);
     }
 
-    private List<Lotto> startPurchaseManualLottos(String question, int numberOfManualLottos) {
+    private List<String> startPurchaseManualLottos(String question, int numberOfManualLottos) {
         outputQuestion(question);
 
-        List<Lotto> manualLottos = new ArrayList<>();
+        List<String> manualLottos = new ArrayList<>();
 
         for (int i = 0; i < numberOfManualLottos; i++) {
-            Lotto lotto = buyManualLotto();
+            String lotto = buyManualLotto();
             manualLottos.add(lotto);
         }
 
         return manualLottos;
     }
 
-    private Lotto buyManualLotto() {
+    private String buyManualLotto() {
         String input = scanner.nextLine();
         input = removeAllEmptySpaces(input);
 
@@ -120,7 +111,7 @@ public class InputView {
             input = removeAllEmptySpaces(input);
         }
 
-        return Lotto.createLottoFrom(convertStringToListString(input));
+        return input;
     }
 
     public List<String> inputWinNumbers() {
@@ -153,7 +144,7 @@ public class InputView {
         }
 
         int[] numbers = stringsToInts(values);
-        return isValidWinNumber(numbers);
+        return isValidLottoNumber(numbers) && hasNotDuplicatedNumber(values);
     }
 
     private String removeAllEmptySpaces(String input) {
@@ -178,9 +169,15 @@ public class InputView {
         return numbers;
     }
 
-    private boolean isValidWinNumber(int[] numbers) {
+    private boolean isValidLottoNumber(int[] numbers) {
         Arrays.sort(numbers);
         return numbers[0] >= LOTTO_START_NUMBER && numbers[VALID_LOTTO_LENGTH - 1] <= LOTTO_END_NUMBER;
+    }
+
+    private boolean hasNotDuplicatedNumber(String[] input) {
+        Set<String> set = new HashSet<>(Arrays.asList(input));
+
+        return set.size() == VALID_LOTTO_LENGTH;
     }
 
     public int inputBonusNumber(List<String> winNumbers) {
