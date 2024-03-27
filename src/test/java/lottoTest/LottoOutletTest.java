@@ -20,6 +20,7 @@ import java.util.stream.Stream;
 public class LottoOutletTest {
 
     private static final int DUMMY_INT = -1;
+    private static final MatchNumber SECOUND_MATCH_NUMBER = new MatchNumber(5,true);
 
     @ParameterizedTest(name = "{0} 가격으로 구매가능한 로또 장수는 {1}")
     @CsvSource(value = {"14000:14", "1000:1", "1500:1", "7500:7"}, delimiter = ':')
@@ -59,8 +60,13 @@ public class LottoOutletTest {
     @Test
     @DisplayName("2등은 5개 번호가 일치하고 1개의 보너스 번호가 일치해야 한다.")
     void rankSecoundTest() {
-        MatchNumber matchNumber = new MatchNumber(5, true);
-        Assertions.assertThat(LottoOutlet.getRank(matchNumber)).isEqualTo(2);
+        Assertions.assertThat(LottoOutlet.getRank(SECOUND_MATCH_NUMBER)).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("2등의 상금은 30_000_000 원이다")
+    void rankSecoundWinningsTest() {
+        Assertions.assertThat(LottoOutlet.getWinning(SECOUND_MATCH_NUMBER)).isEqualTo(30_000_000);
     }
 
     private static Stream<Arguments> generateMatchCountsWinningAmount() {
