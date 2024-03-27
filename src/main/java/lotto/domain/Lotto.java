@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private List<Integer> lotto;
+    private List<Integer> lottoGame;
 
     public Lotto(List<Integer> lottoGame) {
-        this.lotto = lottoGame;
+        this.lottoGame = lottoGame;
     }
 
     public static Lotto from(String[] numbers) {
@@ -20,21 +20,21 @@ public class Lotto {
     }
 
     public int size() {
-        return lotto.size();
+        return lottoGame.size();
     }
 
     public List<Integer> getValue() {
-        return Collections.unmodifiableList(lotto);
+        return Collections.unmodifiableList(lottoGame);
     }
 
     public int getMatchNumberCount(Lotto winningNumber) {
-        return (int) lotto.stream()
-                .filter(value -> winningNumber.getLotto().contains(value))
+        return (int) lottoGame.stream()
+                .filter(value -> winningNumber.getLottoGame().contains(value))
                 .mapToInt(Integer::intValue)
                 .count();
     }
 
-    private List<Integer> getLotto() {
-        return lotto;
+    private List<Integer> getLottoGame() {
+        return lottoGame;
     }
 }
