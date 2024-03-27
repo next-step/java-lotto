@@ -3,12 +3,13 @@ package lotto.domain;
 import java.util.List;
 
 public class Lotto {
+    private static final int LOTTO_ELEMENT_NUM = 6;
     private LottoNumbers lotto;
     private int count = 0;
 
 
     public Lotto(List<Integer> lotto){
-        if (lotto.size()!=6) {
+        if (lotto.size() != LOTTO_ELEMENT_NUM) {
             throw new IllegalArgumentException("로또는 6개 원소 필요");
         }
 

@@ -1,7 +1,9 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public enum RankMatches {
     FIRST(6, 2_000_000_000),
@@ -11,17 +13,16 @@ public enum RankMatches {
     FIFTH(3, 5_000),
     NONE(0, 0);
 
-    private static int MINIMUM_OF_PRIZE = 3;
     private int count;
     private int prize;
-    private static final Map<Integer, RankMatches> rankMap = new HashMap<>();
-
-    static{
-        rankMap.put(6, FIRST);
-        rankMap.put(5, THIRD);
-        rankMap.put(4, FOURTH);
-        rankMap.put(3, FIFTH);
-    }
+    private static final Map<Integer, RankMatches> rankMap =
+            Arrays.stream(RankMatches.values())
+                    .filter(rank -> rank != SECOND)
+                    .filter(rank -> rank != NONE)
+                    .collect(Collectors.toMap(
+                            rank -> rank.count,
+                            Function.identity()
+                    ));
 
     RankMatches(int count, int prize){
         this.count = count;
@@ -29,9 +30,6 @@ public enum RankMatches {
     }
 
     public static RankMatches makeRank(int count, boolean bonusNum){
-        if (count < MINIMUM_OF_PRIZE) {
-            return NONE;
-        }
         if (SECOND.count == count && bonusNum) {
             return SECOND;
         }
