@@ -5,8 +5,8 @@ import lotto.domain.*;
 
 public class OutputView {
 
-    public static void printCash(Cash cash) {
-        printPlainMessage(String.format("%d개를 구매했습니다.", cash.getAmount()));
+    public static void printCount(Cash cash, ManualLottoGroup manualLottoGroup){
+        printPlainMessage(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다", manualLottoGroup.getCount(), manualLottoGroup.getLeftOvers(cash)));
     }
 
     public static void printLottoGroup(LottoGroup lottoGroup) {

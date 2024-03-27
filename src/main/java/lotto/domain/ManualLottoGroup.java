@@ -20,6 +20,10 @@ public class ManualLottoGroup {
         return manualLottoCount.getLeftOvers(cash);
     }
 
+    public int getCount(){
+        return manualLottoCount.getCount();
+    }
+
     public List<LottoNumber> convertToLottoNumbers() {
         return this.tickets.stream()
                 .map(iter -> new LottoNumber(iter.getNumbers()))

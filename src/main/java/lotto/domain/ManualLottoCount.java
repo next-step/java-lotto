@@ -29,4 +29,8 @@ public class ManualLottoCount {
     public int getLeftOvers(Cash cash) {
         return cash.minus(this.count);
     }
+
+    public Integer getCount() {
+        return count;
+    }
 }

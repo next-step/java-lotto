@@ -43,6 +43,7 @@ public class LottoClient {
     private static LottoGroup generateLottoGroupAndPrint(Cash cash, ManualLottoGroup manualLottoGroup) {
         LottoGroup lottoGroup = new LottoGroup(new LottoGenerator());
         lottoGroup.generateTickets(cash, manualLottoGroup);
+        printCount(cash, manualLottoGroup);
         printLottoGroup(lottoGroup);
         return lottoGroup;
     }
