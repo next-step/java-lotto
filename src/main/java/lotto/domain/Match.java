@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class Match {
 
     private final MatchCache matchCache;
@@ -12,6 +14,12 @@ public class Match {
     public Match(MatchCache matchCache, Profit profit) {
         this.matchCache = matchCache;
         this.profit = profit;
+    }
+
+    public static boolean getCount(List<Integer> sources, Integer bonusNumber) {
+        if (sources == null || bonusNumber == null) throw new IllegalArgumentException();
+        return sources.stream()
+                .anyMatch(bonusNumber::equals);
     }
 
     public void save(int matchCount, boolean isBonus) {

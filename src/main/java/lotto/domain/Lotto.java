@@ -31,4 +31,9 @@ public class Lotto {
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
+
+    public void generateManualLottoNumbers(ManualLottoGroup manualLottoGroup) {
+        List<LottoNumber> lottoNumbers = manualLottoGroup.convertToLottoNumbers();
+        this.lottoNumbers.addAll(lottoNumbers);
+    }
 }

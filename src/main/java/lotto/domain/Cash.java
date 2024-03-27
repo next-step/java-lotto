@@ -13,4 +13,8 @@ public class Cash {
         if (money < MINIMUM_MONEY) throw new IllegalArgumentException();
         return money / MINIMUM_MONEY;
     }
+
+    public int minus(Integer count) {
+        return getAmount() - count;
+    }
 }
