@@ -24,12 +24,12 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public int countMatch(Lotto winningLotto) {
+    public int countMatch(Lotto other) {
         return (int) numbers.stream()
-            .filter(winningLotto::contains)
+            .filter(other::contains)
             .count();
     }
-    private boolean contains(LottoNumber number){
+    public boolean contains(LottoNumber number){
         return numbers.contains(number);
     }
 
