@@ -10,20 +10,15 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static lotto.domain.LottoGenerator.generateLotto;
+import static lotto.domain.LottoGenerator.generateLottos;
 import static org.assertj.core.api.Assertions.assertThat;
 public class LottoGeneratorTest {
-
-    private LottoGenerator lottoGenerator;
-
-    @BeforeEach
-    void initGenerator() {
-        lottoGenerator = new LottoGenerator();
-    }
 
     @Test
     @DisplayName("로또 생성")
     void 로또_생성() {
-        Lotto lottoGame = lottoGenerator.generateLotto();
+        Lotto lottoGame = generateLotto();
         assertThat(lottoGame.size()).isEqualTo(6);
     }
 
@@ -31,7 +26,7 @@ public class LottoGeneratorTest {
     @DisplayName("입력 금액만큼 생성")
     void 입력_금액만큼_생성() {
         Fee fee = new Fee(14000);
-        Lottos lottos = lottoGenerator.generateLottos(fee);
+        Lottos lottos = generateLottos(fee);
         assertThat(lottos.getValue().size()).isEqualTo(14);
     }
 }
