@@ -29,16 +29,17 @@ public class LottoGeneratorTest {
     }
 
     @Test
-    void lottos_생성() {
-        Lottos lottos = LottoGenerator.lotteryTickets(1);
-        assertThat(lottos).isNotNull();
+    void shuffledList_원소_개수() {
+        List<Integer> shuffledNumbers = List.of(1,2,3,4,5,6,7);
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoGenerator.createLotto(shuffledNumbers))
+                .withMessageMatching("로또 번호는 6개여야 합니다.");
     }
 
     @Test
-    void 로또_자동생성_리스트_크기() {
-        List<Integer> shuffledNumbers = List.of(1,2,3,4,5,6,7);
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoGenerator.createLotto(shuffledNumbers))
-                .withMessageMatching("로또 번호는 6개여야 합니다.");
+    void lottos_생성() {
+        Lottos lottos = LottoGenerator.lotteryTickets(1);
+        assertThat(lottos).isNotNull();
     }
 
 }

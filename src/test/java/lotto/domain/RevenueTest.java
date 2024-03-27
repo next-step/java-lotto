@@ -26,6 +26,6 @@ public class RevenueTest {
                 )
         );
         List<Integer> winNumbers = new Winning().createWinNumbers("1,2,3,4,5,6");
-        assertThat(revenue.getRevenueTotal(LottoMatch.match(lottos, winNumbers))).isEqualTo(2000055000);
+        assertThat(revenue.getRevenueTotal(LottoMatch.matchWinNumber(lottos, winNumbers, new Bonus(10)))).isEqualTo(2000055000);
     }
 }

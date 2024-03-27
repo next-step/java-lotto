@@ -37,10 +37,11 @@ public class ResultView {
 
     public static void printResult(HashMap<Integer, Integer> matchResult, double revenue) {
         System.out.println("당첨 통계\n"+"-".repeat(9));
-        System.out.println("3개 일치 (5000원) - " + matchResult.get(Rank.valueOf(Constant.THREE_AGREEMENT).getPrize()) + "개");
-        System.out.println("4개 일치 (50000원) - " + matchResult.get(Rank.valueOf(Constant.FOUR_AGREEMENT).getPrize()) + "개");
-        System.out.println("5개 일치 (1500000원) - " + matchResult.get(Rank.valueOf(Constant.FIVE_AGREEMENT).getPrize()) + "개");
-        System.out.println("6개 일치 (2000000000원) - " + matchResult.get(Rank.valueOf(Constant.SIX_AGREEMENT).getPrize()) + "개");
+        System.out.println("3개 일치 (5000원) - " + matchResult.get(Rank.FIFTH.getPrize()) + "개");
+        System.out.println("4개 일치 (50000원) - " + matchResult.get(Rank.FOURTH.getPrize()) + "개");
+        System.out.println("5개 일치 (1500000원) - " + matchResult.get(Rank.THIRD.getPrize()) + "개");
+        System.out.println("5개 일치, 보너스 볼 일치 (30000000원) - " + matchResult.get(Rank.SECOND.getPrize()) + "개");
+        System.out.println("6개 일치 (2000000000원) - " + matchResult.get(Rank.FIRST.getPrize()) + "개");
         System.out.println("총 수익률은 " + revenue + "입니다.");
     }
 }

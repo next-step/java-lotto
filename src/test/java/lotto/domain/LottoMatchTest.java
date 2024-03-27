@@ -23,7 +23,8 @@ public class LottoMatchTest {
                 )
         );
         List<Integer> winNumbers = new Winning().createWinNumbers("1,2,3,4,5,6");
-        HashMap<Integer, Integer> matchResult = LottoMatch.match(lottos, winNumbers);
+        HashMap<Integer, Integer> matchResult = LottoMatch.matchWinNumber(lottos, winNumbers, new Bonus(10));
+        System.out.println(matchResult);
 
         assertThat(matchResult.get(place)).isEqualTo(matchCount);
     }

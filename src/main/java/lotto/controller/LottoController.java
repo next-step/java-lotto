@@ -19,9 +19,12 @@ public class LottoController {
         ResultView.printPurchase(LottoShop.countPurchase(money));
         ResultView.printLottos(lottos.getLottos());
 
+        String textWinNumbers = InputView.inputWinNumber();
+        Bonus bonusNumber = new Bonus(InputView.inputBonus());
+
         // 당첨 번호 입력 및 당첨 번호와 로또 번호 비교
         HashMap<Integer, Integer> matchResult =
-                LottoMatch.match(lottos, new Winning().createWinNumbers(InputView.inputWinNumber()));
+                LottoMatch.matchWinNumber(lottos, new Winning().createWinNumbers(textWinNumbers), bonusNumber);
 
         // 매칭 결과 및 계산한 수익률 출력
         Revenue revenue = new Revenue();

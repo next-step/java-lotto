@@ -3,12 +3,16 @@ package lotto.domain;
 import java.util.List;
 
 public class LottoMatchCount {
+    private static final int MATCH_COUNT_STANDARD = 3;
 
     public static int matchCount(List<LottoNumber> lottoNumbers, List<Integer> winNumbers) {
         int count = 0;
 
-        for (int i = 0; i < winNumbers.size(); i++) {
-            count += isEqualLottoAndWin(winNumbers, lottoNumbers.get(i));
+        for (LottoNumber lottoNumber : lottoNumbers)
+            count += isEqualLottoAndWin(winNumbers, lottoNumber);
+
+        if (count < MATCH_COUNT_STANDARD) {
+            return 0;
         }
 
         return count;
