@@ -24,3 +24,7 @@ step2
 * feature/implement-lottery-application
   * implemented applications
   * test codes modified
+* refactor/step1
+  * refactored codes based on feedback
+* refactor/lottery-application
+  * refactored codes using stream()
