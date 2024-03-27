@@ -16,7 +16,9 @@ public class LottoMatcher {
 
     public static Map<LottoPrize, Long> matchLottoToPrize(List<Lotto> lottos, AnswerSheet answerSheet) {
         return lottos.stream()
-                .map(lotto -> LottoPrize.from(answerSheet.matchCount(lotto), answerSheet.matchBonus(lotto)))
+                .map(lotto ->
+                        LottoPrize.from(lotto.countMatchNumbers(answerSheet.getAnswerNumbers())
+                                ,lotto.containsNumber(answerSheet.getBonusNumber())))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 }
