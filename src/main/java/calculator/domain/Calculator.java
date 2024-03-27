@@ -1,7 +1,5 @@
 package calculator.domain;
 
-import calculator.util.CalcuOperater;
-
 public class Calculator {
     private static final String NUMBER_REGEX = "\\d+";
 
@@ -24,7 +22,7 @@ public class Calculator {
     }
 
     public static int operate(String operater, int num1, int num2) {
-        return CalcuOperater.fromSymbol(operater).apply(num1, num2);
+        return CalculateOperater.fromSymbol(operater).apply(num1, num2);
     }
 
     private static int isNumber(String input) {
@@ -33,5 +31,4 @@ public class Calculator {
         }
         return Integer.parseInt(input);
     }
-
 }

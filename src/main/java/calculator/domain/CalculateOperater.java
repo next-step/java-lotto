@@ -1,9 +1,9 @@
-package calculator.util;
+package calculator.domain;
 
+import java.util.Arrays;
 import java.util.function.IntBinaryOperator;
-import java.util.function.IntFunction;
 
-public enum CalcuOperater {
+public enum CalculateOperater {
     PLUS("+", (a, b) -> a + b),
     MINUS("-", (a, b) -> a - b),
     MULTIPLICATION("*", (a, b) -> a * b),
@@ -17,18 +17,16 @@ public enum CalcuOperater {
     private final String symbol;
     private final IntBinaryOperator operation;
 
-    CalcuOperater(String symbol, IntBinaryOperator operation) {
+    CalculateOperater(String symbol, IntBinaryOperator operation) {
         this.symbol = symbol;
         this.operation = operation;
     }
 
-    public static CalcuOperater fromSymbol(String symbol) {
-        for (CalcuOperater op : values()) {
-            if (op.symbol.equals(symbol)) {
-                return op;
-            }
-        }
-        throw new IllegalArgumentException("사칙연산만 (+, -, *, /)가능합니다.");
+    public static CalculateOperater fromSymbol(String symbol) {
+        return Arrays.stream(values())
+            .filter(op -> op.symbol.equals(symbol))
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException("사칙연산만 (+, -, *, /)가능합니다."));
     }
 
     public int apply(int a, int b) {

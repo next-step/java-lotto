@@ -1,15 +1,13 @@
 package lotto;
 
-import calculator.domain.Calculator;
-import comm.view.InputView;
+import common.view.LottoInputView;
+import lotto.controller.LottoGame;
 
 public class LottoApplication {
-    private static InputView inputView;
-    private static Calculator calculator;
-
-
     public static void main(String[] args) {
-        System.out.println(Calculator.calculate(inputView.requestOperation()));
-    }
+        int amount = LottoInputView.requestPurchaseAmount();
 
+        LottoGame lottoGame = new LottoGame(amount);
+        lottoGame.playGame();
+    }
 }

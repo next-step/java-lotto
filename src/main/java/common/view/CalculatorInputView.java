@@ -1,8 +1,8 @@
-package comm.view;
+package common.view;
 
 import java.util.Scanner;
 
-public class InputView {
+public class CalculatorInputView {
     private static Scanner scanner = new Scanner(System.in);
 
     public static String requestOperation() {
