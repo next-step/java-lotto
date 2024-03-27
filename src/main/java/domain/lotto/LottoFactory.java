@@ -12,26 +12,24 @@ import java.util.stream.Stream;
 
 public class LottoFactory {
     private final List<LottoGenerator> factory;
-    private final LottoCount lottoCount;
 
-    public LottoFactory(List<LottoGenerator> factory, LottoCount lottoCount) {
+    public LottoFactory(List<LottoGenerator> factory) {
         this.factory = factory;
-        this.lottoCount = lottoCount;
     }
 
     public UserLotto createUserLotto() {
-        return UserLotto.from(createListOfIntegerList(lottoCount));
+        return UserLotto.from(createListOfIntegerList());
     }
 
-    private List<Lotto> createListOfIntegerList(LottoCount lottoCount) {
+    private List<Lotto> createListOfIntegerList() {
         List<Lotto> result = new ArrayList<>();
         factory.stream()
-                .forEach(addLottoByLottoGenerator(lottoCount, result));
+                .forEach(addLottoByLottoGenerator(result));
         return result;
     }
 
-    private static Consumer<LottoGenerator> addLottoByLottoGenerator(LottoCount lottoCount, List<Lotto> result) {
-        return item -> Stream.generate(() -> item.create()).limit(lottoCount.getCount(item))
+    private static Consumer<LottoGenerator> addLottoByLottoGenerator(List<Lotto> result) {
+        return item -> Stream.generate(() -> item.create()).limit(item.getSize())
                 .forEach(integerList -> {
                     result.add(Lotto.from(integerList));
                 });

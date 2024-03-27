@@ -9,10 +9,16 @@ public class RandomGenerator implements LottoGenerator {
     private final List<Integer> numberList;
     private final static int MINIMUM_LOTTO_NUMBER_RANGE = 0;
     private final static int MAX_LOTTO_NUMBER_RANGE = 6;
+    private final int size;
+
+    public RandomGenerator(int size) {
+        this.size = size;
+    }
 
     {
         numberList = initLottoNumberRange();
     }
+
 
     private List<Integer> initLottoNumberRange() {
         return IntStream.range(1, 45).boxed()
@@ -23,6 +29,11 @@ public class RandomGenerator implements LottoGenerator {
     public List<Integer> create() {
         shuffle();
         return sortedUnmodifiableListBy(createLottoBoundryIntegerList());
+    }
+
+    @Override
+    public int getSize() {
+        return size;
     }
 
     private List<Integer> sortedUnmodifiableListBy(List<Integer> integerList) {

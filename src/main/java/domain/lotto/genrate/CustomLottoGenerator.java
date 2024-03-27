@@ -1,14 +1,8 @@
 package domain.lotto.genrate;
 
-import domain.lotto.Lotto;
-import domain.lotto.LottoFactory;
-
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
-
-import static domain.lotto.properties.LottoProperties.MAX_LOTTO_NUMBER_RANGE;
 
 public class CustomLottoGenerator implements LottoGenerator {
     int count = 0;
@@ -19,7 +13,8 @@ public class CustomLottoGenerator implements LottoGenerator {
         return new CustomLottoGenerator(customLotto);
     }
 
-    public int size() {
+    @Override
+    public int getSize() {
         return customLottoNumbers.size();
     }
 
@@ -31,7 +26,7 @@ public class CustomLottoGenerator implements LottoGenerator {
 
     @Override
     public List<Integer> create() {
-        if (count >= size()) {
+        if (count >= getSize()) {
             throw new IllegalArgumentException("로또 번호가 존재하지 않습니다.");
         }
         List<Integer> customLotto = customLottoNumbers.get(count);

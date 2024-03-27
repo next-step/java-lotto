@@ -26,7 +26,7 @@ public class LottoController {
 
         CustomLottoGenerator customLottoGenerator = createCustomLottoGenerator(lottoCount.customLottoCount());
 
-        UserLotto userLotto = createUserLotto(List.of(customLottoGenerator, new RandomGenerator()), lottoCount);
+        UserLotto userLotto = createUserLotto(List.of(customLottoGenerator, new RandomGenerator(lottoCount.autoLottoCount())));
 
         LottoResultView.createUserLottoListView(userLotto.lottoList(), lottoCount);
 
@@ -54,8 +54,8 @@ public class LottoController {
         return WinningLotto.from(winningIntegerList, bonusNumber);
     }
 
-    private static UserLotto createUserLotto(List<LottoGenerator> lottoGenerators, LottoCount lottoCount) {
-        LottoFactory lottoFactory = new LottoFactory(lottoGenerators, lottoCount);
+    private static UserLotto createUserLotto(List<LottoGenerator> lottoGenerators) {
+        LottoFactory lottoFactory = new LottoFactory(lottoGenerators);
         return lottoFactory.createUserLotto();
     }
 }
