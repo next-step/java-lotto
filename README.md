@@ -81,13 +81,21 @@
 - [x] 1~45번까지 저장된 디폴트 로또를 생성
 - [x] `autoLotto`에서 최초로 주입되어 결론적으로 `LottoMachine`에서 주입된 로또 생성 전략 패턴에 따라 로또의 번호를 변환하여 반환
 
-### `LottoMachine.java`
-- [x] 구입금액만큼 로또를 생성
-  - [x] 수동 로또는 파라미터로 주입을 받아 lottos 객체에 셋팅
-  - [x] 자동 로또는 전체 구매 개수에서 수동 로또의 구매 개수만큼 차감하여 생성
-  - [x] 이때 자동 로또는 전략 패턴에 따라 생성
+### `ManualLottoGeneratorStrategy.java`
+- [x] 수동로또 생성 클래스
+  - [x] `LottoGeneratorStrategy.java`를 상속받음 
 
-### `LottoWinChecker.java`
+### `RandomLottoGeneratorStrategy.java`
+- [x] 자동로또 생성 클래스
+  - [x] `LottoGeneratorStrategy.java`를 상속받음
+
+### `LottoMachine.java`
+- [x] 구매한 수동 로또의 번호와 구입 금액만큼 로또를 생성
+  - [x] 수동 로또는 수동 로또 생성 전략패턴을 사용하여 생성
+  - [x] 자동 로또는 전체 구매 개수에서 수동 로또의 구매 개수만큼 차감하여 생성
+    - [x] 이때 자동 로또는 전략 패턴에 따라 생성
+
+### `WinningLotto.java`
 - [x] 당천 번호와 보너스 번호를 받아 `Lotto` 클래스로 저장
   - [x] 이때 당첨 번호와 보너스 번호는 각각 따로 저장
   - [x] 이때 당첨 번호와 보너스 번호의 중복 여부를 체크
@@ -95,7 +103,7 @@
   - [x] `EnumMap<PrizeEnum, Integer>`로 반환
   - [x] 이때 Key값은 당첨 숫자에 해당되는 `PrizeEnum` 객체를, value는 매칭된 번호 개수만큼 상금을 받는 로또의 개수
   
-### `LottoProfitChecker.java`
+### `LottoProfit.java`
 - [x] `LottoWinChecker`에서 얻게된 당첨 로또 정보를 통해 전체 상금을 구하는 객체
   - [x] 이때 당첨 금액은 `BigDecimal`로 저장 
 - [x] 총 로또 구입 개수(=`numberOfTotalLottos`)를 파라미터로 받아 바로 위에서 구한 전체 상금과 나누어 최종적으로 얻게된 우승 상금을 반환하는 `calculateProfitRation()`도 존재
@@ -105,6 +113,10 @@
 - [x] 우승 번호와 매칭되는 로또 번호의 개수에 따른 `matchedCount`(= 매칭되는 번호 개수), `prize`(= 그에 따른 상금), `isBonusMatched` (= 보너스 번호 매칭 여부)의 정보들을 저장한 enum 클래스
   - [x] 매칭되는 숫자(= `matchedCount`)와 보너스 볼 존재 여부(= `isBonusMatched`)에 따라 `PrizeEnum`을 생성하는 `getPrizeFrom` 생성자 메서드 작성
 - [x] `prizeMap`, `matchedCountToBonusMap`을 `static final Map`으로 생성하여 값을 찾을때마다 `PrizeEnum` 객체를 `Arrays.stream`하지 않도록 개선 
+
+### `LottoPurchaseCount.java`
+- [x] 로또의 총 구매 개수, 수동 로또 개수, 자동 로또 개수를 관리하는 클래스
+  - [x] 로또의 총 구매 개수 보다 수동 로또의 개수가 많을 경우 에러 반환 
 
 ## Exception
 ### `PurchaseException.java`
@@ -133,9 +145,10 @@
 ### 테스트 코드
 - [x] `LottoGeneratorTest.java`
 - [x] `LottoMachineTest.java`
-- [x] `LottoProfitCheckerTest.java`
+- [x] `LottoProfitTest.java`
+- [x] `LottoPurchaseCountTest.java`
 - [x] `LottoTest.java`
-- [x] `LottoWinCheckerTest.java`
+- [x] `WinningLottoTest.java`
 - [x] `PrizeResultEnumTest.java`
 
 ### 컨벤션
