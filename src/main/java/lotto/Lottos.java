@@ -20,8 +20,12 @@ public class Lottos {
         return lottos;
     }
 
-    public static Lottos create(int count, LottoGenerator generator) {
-        return generator.generate(count);
+    public static Lottos create(Money money, NumberGenerator generator) {
+        return generator.generate(countLotto(money));
+    }
+
+    private static int countLotto(Money money){
+        return money.purchase();
     }
 
     public Map<LottoRank, Integer> getWinningResult(Lotto winningLotto) {

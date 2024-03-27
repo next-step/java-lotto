@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RandomLottoGenerator implements LottoGenerator {
+public class RandomNumberGenerator implements NumberGenerator {
 
     private static final int ZERO = 0;
 

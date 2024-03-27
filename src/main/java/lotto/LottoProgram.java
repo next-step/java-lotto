@@ -9,15 +9,15 @@ import static lotto.view.ResultView.printWinningResult;
 public class LottoProgram {
 
     public void run() {
-        int purchaseAmount = inputPurchaseAmount();
+        Money purchaseAmount = new Money(inputPurchaseAmount());
 
         Lottos lottos = Lottos.create(
-            LottoStore.sellLotto(purchaseAmount), new RandomLottoGenerator());
-        printLottosCount(purchaseAmount, lottos);
+            purchaseAmount, new RandomNumberGenerator());
+        printLottosCount(purchaseAmount.purchase(), lottos);
 
         Lotto winningLotto = new Lotto(inputWinningNumbers());
         LottoResult lottoResult = new LottoResult(lottos.getWinningResult(winningLotto));
         printWinningResult(lottoResult);
-        printReturnRate(purchaseAmount, lottoResult);
+        printReturnRate(purchaseAmount.purchase(), lottoResult);
     }
 }

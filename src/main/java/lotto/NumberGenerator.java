@@ -1,5 +1,5 @@
 package lotto;
 
-public interface LottoGenerator {
+public interface NumberGenerator {
     Lottos generate(int count);
 }
