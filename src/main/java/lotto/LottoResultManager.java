@@ -1,44 +1,53 @@
 package lotto;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrice;
 import lotto.domain.LottoTicket;
 
 public class LottoResultManager {
 
-    private Map<Integer, Integer> lottoResult = new HashMap<>();
+    private final Map<LottoPrice, Integer> lottoResult;
 
     public LottoResultManager() {
-        lottoResult.put(3, 0);
-        lottoResult.put(4, 0);
-        lottoResult.put(5, 0);
-        lottoResult.put(6, 0);
+        this.lottoResult = new LinkedHashMap<>();
+        for (LottoPrice price : LottoPrice.values()) {
+            lottoResult.put(price, 0);
+        }
+
     }
 
-    public Map<Integer, Integer> calculateLottoResult(List<LottoTicket> tickets,
-            List<Integer> winningNumbers) {
+    public Map<LottoPrice, Integer> calculateLottoResult(List<LottoTicket> tickets,
+        List<Integer> winningNumbers, int bonusNumber) {
+        isBonusIncluded(winningNumbers, bonusNumber);
         LottoTicket winningTicket = LottoTicket.createTicket(winningNumbers);
-
+        LottoNumber bonus = new LottoNumber(bonusNumber);
         for (LottoTicket ticket : tickets) {
-            int count = ticket.count(winningTicket.getNumbers());
-            lottoResult.put(count, lottoResult.getOrDefault(count, 0) + 1);
+            LottoPrice price = ticket.getPrice(winningTicket.getNumbers(), bonus);
+            lottoResult.put(price, lottoResult.getOrDefault(price, 0) + 1);
         }
         return lottoResult;
     }
 
-    public double calculateReturnRate(Map<Integer, Integer> result, int purchaseAmount) {
+    public double calculateReturnRate(Map<LottoPrice, Integer> result, int purchaseAmount) {
         double winningMoney = calculateWinningMoney(result);
         return Math.round(winningMoney / purchaseAmount * 100.0) / 100.0;
 
     }
 
-    private double calculateWinningMoney(Map<Integer, Integer> result) {
+    private double calculateWinningMoney(Map<LottoPrice, Integer> result) {
         double winningMoney = 0;
-        for (Map.Entry<Integer, Integer> item : result.entrySet()) {
-            winningMoney += LottoPrice.findPrice(item.getKey()).getPrice() * item.getValue();
+        for (Map.Entry<LottoPrice, Integer> item : result.entrySet()) {
+            winningMoney += item.getKey().getPrice() * item.getValue();
         }
         return winningMoney;
+    }
+
+    private void isBonusIncluded(List<Integer> winningNumbers, int bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스번호는 당첨번호에 포함될 수 없습니다.");
+        }
     }
 }
