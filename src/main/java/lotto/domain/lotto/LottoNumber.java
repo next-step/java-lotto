@@ -54,13 +54,13 @@ public enum LottoNumber {
     FORTY_FOUR(44),
     FORTY_FIVE(45);
 
-    private static final Map<Integer, LottoNumber> intToLottoNumberMap = new HashMap<>();
+    private static final Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
 
     private final int lottoNumber;
 
     static {
         for (LottoNumber lottoNumber : LottoNumber.values()) {
-            intToLottoNumberMap.put(lottoNumber.lottoNumber, lottoNumber);
+            lottoNumberCache.put(lottoNumber.lottoNumber, lottoNumber);
         }
     }
 
@@ -69,7 +69,7 @@ public enum LottoNumber {
     }
 
     public static LottoNumber fromInt(final int value) {
-        LottoNumber lottoNumber = intToLottoNumberMap.get(value);
+        LottoNumber lottoNumber = lottoNumberCache.get(value);
         if (lottoNumber == null) {
             throw new SizeExceedLottoNumberException(value);
         }
