@@ -35,7 +35,7 @@ public class Output {
 
     private static void printGradeResult(final Grade grade,
         final WinningStatistic winningStatistic) {
-        if (grade == Grade.BONUS_GRADE) {
+        if (grade.isBonusGrade()) {
             System.out.println(
                 MessageFormat.format("{0}개 일치, 보너스 볼 일치({1}원) - {2}",
                     grade.getCorrectingCount(),
