@@ -1,7 +1,7 @@
 package step1.controller;
 
 
-import step1.config.ErrorMessage;
+import step1.config.message.ErrorMessage;
 import step1.domain.Numbers;
 import step1.domain.Operator;
 import step1.domain.Operators;
@@ -14,11 +14,10 @@ public class StringCalculator {
         Numbers numbers = new Numbers(string);
         Operators operators = new Operators(string);
 
-        int result = numbers.getNumbers(0);
+        int result = numbers.poll();
 
-        int index = 0;
         for (Operator operator : operators.getOperators()) {
-            result = operator.calculate(result, numbers.getNumbers(++index));
+            result = operator.calculate(result, numbers.poll());
         }
         return result;
     }
