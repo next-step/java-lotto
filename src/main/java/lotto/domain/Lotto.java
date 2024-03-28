@@ -11,8 +11,8 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public long compareCount(Lotto others) {
-        return others.numbers.stream()
+    public long countHits(List<Integer> others) {
+        return others.stream()
                 .filter(other -> numbers.contains(other))
                 .count();
     }

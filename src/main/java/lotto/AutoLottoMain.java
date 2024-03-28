@@ -1,13 +1,11 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoStore;
-import lotto.domain.Winner;
-import lotto.domain.WinningStatic;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
+import java.util.Map;
 
 public class AutoLottoMain {
     public static void main(String[] args) {
@@ -18,16 +16,17 @@ public class AutoLottoMain {
         OutputView.printBuyLottos(lottos);
 
         List<Integer> winNumbers = InputView.scanWinningNumbers();
-        Winner winner = new Winner(winNumbers);
-        WinningStatic winningStatic = new WinningStatic();
-        
-        for (Lotto lotto: lottos) {
-            long hitCount = winner.hitCount(lotto);
-            winningStatic.countHitNumber(hitCount);
-        }
-
-        winningStatic.calculateTotalRevenue();
+        IssuedLottos issuedLottos = new IssuedLottos(lottos);
+        Map<WinningType, Long> winningStatic = issuedLottos.winningStatistic(winNumbers);
         OutputView.printWinningStatic(winningStatic);
-        OutputView.printReturnRate(winningStatic.returnRate(amount));
+        OutputView.printReturnRate(returnRate(winningStatic, amount));
+    }
+
+    private static double returnRate(Map<WinningType, Long> winningStatistic, int amount) {
+        double revenue =  winningStatistic.entrySet()
+                .stream()
+                .mapToLong(entry -> entry.getKey().getRevenue() * entry.getValue())
+                .reduce(0, Long::sum);
+        return revenue / amount;
     }
 }

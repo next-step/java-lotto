@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.WinningStatic;
 import lotto.domain.WinningType;
 
 import java.util.List;
@@ -15,13 +14,12 @@ public class OutputView {
         }
     }
 
-    public static void printWinningStatic(WinningStatic winningStatic) {
+    public static void printWinningStatic(Map<WinningType, Long> winningStatic) {
         StringBuilder result = new StringBuilder();
-        for (Map.Entry<WinningType, Integer> entry : winningStatic.getHitCountWinnerNumber().entrySet()) {
-            WinningType winningType = entry.getKey();
-            Integer winnerNumber = entry.getValue();
-            Long revenue = winningType.getRevenue();
-            Long hitCount = winningType.getHitCount();
+        for (Map.Entry<WinningType, Long> entry : winningStatic.entrySet()) {
+            Long hitCount = entry.getKey().getHitCount();
+            Long winnerNumber = entry.getValue();
+            Long revenue = WinningType.findByHitCount(hitCount).getRevenue();
             result.append(hitCount + "개 일치 (")
                     .append(revenue + "원) - ")
                     .append(winnerNumber + "개\n");
