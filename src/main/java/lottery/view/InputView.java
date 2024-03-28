@@ -1,5 +1,6 @@
 package lottery.view;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class InputView {
@@ -11,7 +12,7 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static String winPrizeNumbersString(){
+    public static String winningNumbersString(){
         SCANNER.nextLine();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return SCANNER.nextLine();

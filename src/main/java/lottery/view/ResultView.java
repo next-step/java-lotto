@@ -1,8 +1,9 @@
 package lottery.view;
 
 import lottery.code.WinPrizeType;
-import lottery.domain.Lotteries;
-import lottery.domain.Lottery;
+import lottery.domain.LottoTicket;
+import lottery.domain.LottoTickets;
+import lottery.domain.vo.LottoNumber;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -11,16 +12,16 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public static void purchasedLotteryResult(Lotteries lotteries){
-        lotteryCountResult(lotteries.lotteryCount());
+    public static void purchasedLottoTicketsResult(LottoTickets lottoTickets){
+        lottoTicketCountResult(lottoTickets.lottoTicketCount());
 
-        lotteries.lotteries().stream()
+        lottoTickets.lottoTickets()
                         .forEach(lottery ->
                             System.out.println("[" + lotteryString(lottery) + "]")
                         );
     }
 
-    private static void lotteryCountResult(Long lotteryCount){
+    private static void lottoTicketCountResult(Long lotteryCount){
         System.out.println(lotteryCount + "개를 구매했습니다.");
     }
 
@@ -41,10 +42,11 @@ public class ResultView {
         System.out.println("총 수익률은 " + winRate + "입니다.");
     }
 
-    private static String lotteryString(Lottery lottery){
-        return lottery.lotteryNumbers().stream()
+    private static String lotteryString(LottoTicket lottoTicket){
+        return lottoTicket.lotteryNumbers().stream()
+                .map(LottoNumber::getNumber)
                 .sorted()
-                .map(Object::toString)
+                .map(String::valueOf)
                 .collect(Collectors.joining(", "));
     }
 }
