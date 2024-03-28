@@ -4,8 +4,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private final List<LottoNumber> numbers;
+    public final static Long LOTTO_PRICE = 1000L;
     private final static int LOTTO_NUMBER_SIZE = 6;
+    private final List<LottoNumber> numbers;
 
     public static Lotto from(List<Integer> numbers) {
         verifyExistsNumbers(numbers);

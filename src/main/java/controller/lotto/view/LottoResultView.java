@@ -3,6 +3,7 @@ package controller.lotto.view;
 import controller.lotto.LottoStatistics;
 import domain.common.Money;
 import domain.lotto.Lotto;
+import domain.lotto.LottoCount;
 import domain.lotto.LottoPrize;
 
 import java.util.List;
@@ -10,9 +11,9 @@ import java.util.Map;
 
 public class LottoResultView {
 
-    public static void createUserLottoListView(List<Lotto> lottoList) {
+    public static void createUserLottoListView(List<Lotto> lottoList, LottoCount lottoCount) {
 
-        System.out.println(lottoList.size() + "개를 구매했습니다.");
+        System.out.println("수동으로 "+lottoCount.customLottoCount()  + "장, 자동으로" + lottoCount.autoLottoCount() +"개를 구매했습니다.");
         lottoList.stream()
                 .forEach(item -> System.out.println(item));
     }

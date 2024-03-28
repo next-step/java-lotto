@@ -3,6 +3,7 @@ package controller.lotto.view;
 import domain.common.Money;
 import utils.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -21,12 +22,7 @@ public class LottoInputView {
 
     public static List<Integer> createWinningInterList() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String stringNumberList = scanner.nextLine();
-        verifyEmptyString(stringNumberList);
-
-        String[] split = stringNumberList.split(DELIMITER);
-        verifyLottoSize(split);
-        return convertInterList(split);
+        return convertInterList(getStringNumbers());
 
     }
 
@@ -63,5 +59,28 @@ public class LottoInputView {
         int result = scanner.nextInt();
         scanner.nextLine();
         return result;
+    }
+
+    public static int createCustomLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return createIntByScanner();
+    }
+
+    public static List<List<Integer>> createCustomLottoIntegerList(Integer customLottoCount) {
+        List<List<Integer>> result = new ArrayList<>();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        for (int i = 0; i < customLottoCount; i++) {
+            result.add(convertInterList(getStringNumbers()));
+        }
+        return result;
+    }
+
+    private static String[] getStringNumbers() {
+        String stringNumberList = scanner.nextLine();
+        verifyEmptyString(stringNumberList);
+
+        String[] split = stringNumberList.split(DELIMITER);
+        verifyLottoSize(split);
+        return split;
     }
 }
