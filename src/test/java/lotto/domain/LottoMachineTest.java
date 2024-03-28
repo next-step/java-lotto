@@ -10,7 +10,7 @@ import lotto.domain.grade.Grade;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoMachine;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.PurchaseAmount;
+import lotto.domain.lotto.PurchaseInfomation;
 import lotto.domain.winning.WinningNumbers;
 import lotto.domain.winning.WinningStatistic;
 import org.junit.jupiter.api.DisplayName;
@@ -22,7 +22,7 @@ class LottoMachineTest {
     @DisplayName("구매 금액을 전달받아 실행 횟수를 계산해야한다")
     public void LottoMachine_Should_Calculate_Execute_Count() {
         //given
-        LottoMachine lottoMachine = new LottoMachine(new PurchaseAmount(10000));
+        LottoMachine lottoMachine = new LottoMachine(new PurchaseInfomation(10000));
 
         //when
         int executeCount = lottoMachine.calculateExecuteCount();
@@ -35,7 +35,7 @@ class LottoMachineTest {
     @DisplayName("[1등 당첨] WinningNumbers를 사용하여 Lotto번호가 WinningNumbers와 전부 같을 경우 당첨 등수를 확인한다.")
     public void LottoMachine_Should_Compare_Lotto_With_WinningNumbers_To_Check_Equals_All() {
         //given
-        LottoMachine lottoMachine = new LottoMachine(new PurchaseAmount(1000));
+        LottoMachine lottoMachine = new LottoMachine(new PurchaseInfomation(1000));
         WinningNumbers winningNumbers = WinningNumbers.fromValues(List.of(1, 2, 3, 4, 5, 6), LottoNumber.ONE);
         Lotto lotto = Lotto.fromValues(List.of(1, 2, 3, 4, 5, 6));
 
@@ -50,7 +50,7 @@ class LottoMachineTest {
     @DisplayName("[보너스 당첨] WinningNumbers를 사용하여 Lotto 번호가 WinningNumbers와 5개와 같으며 보너스 번호를 맞춘 경우를 확인한다")
     public void LottoMachine_Should_Compare_Lotto_With_WinningNumbers_To_Check_Equals_Five_And_Bonus_Number() {
         //given
-        LottoMachine lottoMachine = new LottoMachine(new PurchaseAmount(1000));
+        LottoMachine lottoMachine = new LottoMachine(new PurchaseInfomation(1000));
         WinningNumbers winningNumbers = WinningNumbers.fromValues(List.of(1, 2, 3, 4, 5, 6), LottoNumber.FORTY_FIVE);
         Lotto lotto = Lotto.fromValues(List.of(1, 2, 3, 4, 5, 45));
 
@@ -65,7 +65,7 @@ class LottoMachineTest {
     @DisplayName("[2등 당첨] WinningNumbers를 사용하여 Lotto 번호가 WinningNumbers와 5개와 같을 경우 당첨 등수를 확인한다")
     public void LottoMachine_Should_Compare_Lotto_With_WinningNumbers_To_Check_Equals_Five() {
         //given
-        LottoMachine lottoMachine = new LottoMachine(new PurchaseAmount(1000));
+        LottoMachine lottoMachine = new LottoMachine(new PurchaseInfomation(1000));
         WinningNumbers winningNumbers = WinningNumbers.fromValues(List.of(1, 2, 3, 4, 5, 6), LottoNumber.FORTY_FIVE);
         Lotto lotto = Lotto.fromValues(List.of(1, 2, 3, 4, 5, 10));
 
@@ -80,7 +80,7 @@ class LottoMachineTest {
     @DisplayName("[3등 당첨] WinningNumbers를 사용하여 Lotto 번호가 WinningNumbers와 4개가 같을 경우 당첨 등수를 확인한다.")
     public void LottoMachine_Should_Compare_Lotto_With_WinningNumbers_To_Check_Equals_Four() {
         //given
-        LottoMachine lottoMachine = new LottoMachine(new PurchaseAmount(1000));
+        LottoMachine lottoMachine = new LottoMachine(new PurchaseInfomation(1000));
         WinningNumbers winningNumbers = WinningNumbers.fromValues(List.of(1, 2, 3, 4, 5, 6), LottoNumber.ONE);
         Lotto lotto = Lotto.fromValues(List.of(1, 2, 3, 4, 11, 10));
 
@@ -95,7 +95,7 @@ class LottoMachineTest {
     @DisplayName("[4등 당첨] WinningNumbers를 사용하여 Lotto 번호가 WinningNumbers 3개가 같을 경우 등수를 확인한다")
     public void LottoMachine_Should_Compare_Lotto_With_WinningNumbers_To_Check_Equals_Three() {
         //given
-        LottoMachine lottoMachine = new LottoMachine(new PurchaseAmount(1000));
+        LottoMachine lottoMachine = new LottoMachine(new PurchaseInfomation(1000));
         WinningNumbers winningNumbers = WinningNumbers.fromValues(List.of(1, 2, 3, 4, 5, 6), LottoNumber.ONE);
         Lotto lotto = Lotto.fromValues(List.of(1, 2, 3, 12, 11, 10));
 
@@ -110,7 +110,7 @@ class LottoMachineTest {
     @DisplayName("[꼴지 당첨] WinningNumbers를 사용하여 Lotto 번호가 WinningNumbers와 같은 경우가 없을 경우 꼴지 Grade를 반환한다")
     public void LottoMachine_Should_Compare_Lotto_With_WinningNumbers_To_Check_Equals_two() {
         //given
-        LottoMachine lottoMachine = new LottoMachine(new PurchaseAmount(1000));
+        LottoMachine lottoMachine = new LottoMachine(new PurchaseInfomation(1000));
         WinningNumbers winningNumbers = WinningNumbers.fromValues(List.of(1, 2, 3, 4, 5, 6), LottoNumber.ONE);
         Lotto lotto = Lotto.fromValues(List.of(11, 12, 13, 14, 15, 16));
 
@@ -136,7 +136,7 @@ class LottoMachineTest {
 
         WinningNumbers winningNumbers = WinningNumbers.fromValues(Arrays.asList(1, 2, 3, 4, 5, 6), LottoNumber.FORTY_FIVE);
 
-        LottoMachine lottoMachine = new LottoMachine(new PurchaseAmount(20000));
+        LottoMachine lottoMachine = new LottoMachine(new PurchaseInfomation(20000));
 
         //when
         WinningStatistic winningStatistic = lottoMachine.startLotto(autoLottos, winningNumbers);
