@@ -30,16 +30,16 @@ public class WinningNumbers {
     }
 
     public Grade confirmWinning(final Lotto lotto) {
-        return Grade.fromMatchResult(findMatchResultByLotto(lotto));
-    }
+        int matchCount = calculateMatchingLottoNumbers(lotto);
+        boolean hasBonusNumber = lotto.contains(bonusNumber);
 
-    private WinningNumberResult findMatchResultByLotto(final Lotto lotto) {
-        return new WinningNumberResult(calculateMatchingLottoNumbers(lotto),
-            lotto.contains(bonusNumber));
+        return Grade.from(matchCount, hasBonusNumber);
     }
 
     private int calculateMatchingLottoNumbers(Lotto lotto) {
-        return (int) winningNumbers.stream().filter(lotto::contains).count();
+        return (int) winningNumbers.stream()
+            .filter(lotto::contains)
+            .count();
     }
 
     public int size() {

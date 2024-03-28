@@ -1,7 +1,6 @@
 package lotto.domain.grade;
 
 import java.util.Arrays;
-import lotto.domain.winning.WinningNumberResult;
 
 public enum Grade {
 
@@ -21,16 +20,20 @@ public enum Grade {
         this.correctingCount = correctingCount;
     }
 
-    public static Grade fromMatchResult(WinningNumberResult winningNumberResult) {
-        if (winningNumberResult.isBonusGrade()) {
+    public static Grade from(int matchCount, boolean hasBonusNumber) {
+        if (isBonusGrade(matchCount, hasBonusNumber)) {
             return BONUS_GRADE;
         }
 
         return Arrays.stream(Grade.values())
             .filter(grade -> grade != BONUS_GRADE)
-            .filter(grade -> grade.isSameCorrectingCount(winningNumberResult.getMatchCount()))
+            .filter(grade -> grade.isSameCorrectingCount(matchCount))
             .findFirst()
             .orElse(Grade.UN_LUCKY_GRADE);
+    }
+
+    public static boolean isBonusGrade(int matchCount, boolean hasBonusNumber) {
+        return matchCount == 5 && hasBonusNumber == true;
     }
 
     public int getPrizeMoney() {
