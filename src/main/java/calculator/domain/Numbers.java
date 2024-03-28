@@ -25,7 +25,7 @@ public class Numbers {
     public List<Integer> getNumbers() {
         return numbers;
     }
-
+  
     public int of(int index) {
         return numbers.get(index);
     }
