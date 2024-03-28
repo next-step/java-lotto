@@ -32,9 +32,7 @@ public enum LottoRank {
             .findFirst()
             .orElseGet(() -> LottoRank.NO_MATCH);
 
-        if (resultRank.matchCount == LottoRank.SECOND.matchCount && matchBonus) {
-            return LottoRank.SECOND;
-        } else if (resultRank.matchCount == LottoRank.THIRD.matchCount) {
+        if (resultRank == LottoRank.SECOND && !matchBonus) {
             return LottoRank.THIRD;
         }
 
