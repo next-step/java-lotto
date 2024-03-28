@@ -1,8 +1,11 @@
 package view;
 
-import domain.Lotto;
-import domain.LottoResult;
-import domain.Prize;
+import domain.lotto.Lotto;
+import domain.lotto.vo.LottoNumber;
+import domain.lotto.vo.LottoResult;
+import domain.lotto.vo.Prize;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -11,7 +14,9 @@ public class ResultView {
   }
 
   public void print(Lotto lotto){
-    System.out.println(lotto.getNumbers());
+    List<Integer> lottoNumbers = lotto.getNumbers().stream().map(LottoNumber::getNumber)
+        .collect(Collectors.toList());
+    System.out.println(lottoNumbers.toString());
   }
 
   public void printLottoResult(LottoResult result){

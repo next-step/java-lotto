@@ -1,4 +1,4 @@
-package domain;
+package domain.machine;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +12,7 @@ public class LottoNumberGenerator {
 
   private final List<Integer> possibleNumbers  = new ArrayList<>();
 
-  LottoNumberGenerator() {
+  public LottoNumberGenerator() {
     IntStream.range(MIN_NUMBER, MAX_NUMBER + 1).forEach(possibleNumbers::add);
   }
 

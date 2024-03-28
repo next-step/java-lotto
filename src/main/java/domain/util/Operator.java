@@ -1,4 +1,4 @@
-package domain;
+package domain.util;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;
