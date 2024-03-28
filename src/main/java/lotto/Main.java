@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoMachine;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.PurchaseAmount;
 import lotto.domain.winning.WinningNumbers;
 import lotto.domain.winning.WinningStatistic;
@@ -21,7 +22,8 @@ public class Main {
         Output.printAutoLotto(autoLottos);
 
         WinningStatistic winningStatistic = lottoMachine.startLotto(autoLottos,
-            WinningNumbers.fromValues(Input.inputWinningNumbers()));
+            WinningNumbers.fromValues(Input.inputWinningNumbers(),
+                LottoNumber.fromInt(Input.inputBonusNumber())));
 
         Output.printLottoResult(winningStatistic);
     }

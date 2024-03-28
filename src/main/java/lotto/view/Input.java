@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto.error.exception.SizeExceedLottoNumberException;
 
 public class Input {
 
@@ -24,8 +25,6 @@ public class Input {
         System.out.println("구매금액을 입력해 주세요");
         try {
             return scanner.nextInt();
-        } catch (NumberFormatException numberFormatException) {
-            throw new NumberFormatException(INVALID_FORMAT.getMessage());
         } catch (InputMismatchException e) {
             throw new InputMismatchException(INVALID_INPUT_TYPE_INT.getMessage());
         } catch (NoSuchElementException e) {
@@ -48,6 +47,21 @@ public class Input {
             throw new NumberFormatException(INVALID_FORMAT.getMessage());
         } catch (InputMismatchException e) {
             throw new InputMismatchException(INVALID_INPUT_TYPE_INT.getMessage());
+        } catch (NoSuchElementException e) {
+            throw new NoSuchElementException(INVALID_INPUT_EMPTY.getMessage());
+        } catch (IllegalStateException e) {
+            throw new IllegalStateException(ILLEGAL_STATE.getMessage(), e);
+        } catch (Exception e) {
+            throw new RuntimeException(UN_EXPECTED_ERROR.getMessage(), e);
+        }
+    }
+
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        try {
+            return scanner.nextInt();
+        } catch (InputMismatchException e) {
+            throw new SizeExceedLottoNumberException(e);
         } catch (NoSuchElementException e) {
             throw new NoSuchElementException(INVALID_INPUT_EMPTY.getMessage());
         } catch (IllegalStateException e) {

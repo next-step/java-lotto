@@ -13,7 +13,7 @@ public class Lotto {
     private final List<LottoNumber> lotto;
 
     public Lotto(List<LottoNumber> lotto) {
-        if (lotto.size() > 6) {
+        if (lotto.size() != 6) {
             throw new SizeExceedLottoException(lotto.size());
         }
 

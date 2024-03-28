@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-import static lotto.utils.constants.LOTTO_TICKET_PRICE;
+import static lotto.utils.Constants.LOTTO_TICKET_PRICE;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;

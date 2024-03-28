@@ -30,7 +30,7 @@ class LottoTest {
         assertThatThrownBy(() -> Lotto.fromValues(Arrays.asList(1, 2, 3, 4, 5, 6
             , 7)))
             .isInstanceOf(SizeExceedLottoException.class)
-            .hasMessage("로또의 사이즈는 최대 6입니다. 입력값: 7");
+            .hasMessage("로또 개수는 6개여야 합니다. 입력값: 7");
     }
 
     @Test

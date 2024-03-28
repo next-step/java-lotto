@@ -27,6 +27,7 @@ public class Output {
         printGradeResult(Grade.FOUR_GRADE, winningStatistic);
         printGradeResult(Grade.THIRD_GRADE, winningStatistic);
         printGradeResult(Grade.SECOND_GRADE, winningStatistic);
+        printGradeResult(Grade.BONUS_GRADE, winningStatistic);
         printGradeResult(Grade.FIRST_GRADE, winningStatistic);
         System.out.println(
             MessageFormat.format("총 수익률은 {0}입니다.", winningStatistic.calculateProfitRate()));
@@ -34,6 +35,14 @@ public class Output {
 
     private static void printGradeResult(final Grade grade,
         final WinningStatistic winningStatistic) {
+        if (grade == Grade.BONUS_GRADE) {
+            System.out.println(
+                MessageFormat.format("{0}개 일치, 보너스 볼 일치({1}원) - {2}",
+                    grade.getCorrectingCount(),
+                    grade.getPrizeMoney(),
+                    winningStatistic.getGradeCount(grade)));
+            return;
+        }
         System.out.println(
             MessageFormat.format("{0}개 일치 ({1}원)- {2}",
                 grade.getCorrectingCount(),
