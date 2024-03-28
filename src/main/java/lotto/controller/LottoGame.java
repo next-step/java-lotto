@@ -9,6 +9,7 @@ import lotto.view.ResultView;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoGame {
 
@@ -28,7 +29,9 @@ public class LottoGame {
         LottoCount totalCount = new LottoCount(totalMoney);
         LottoCount manualLottoCount = initManualLottoCount();
 
-        Lottos manualLottos = initManualLottos(manualLottoCount);
+        List<Lotto> manualLottoList = initManualLottos(manualLottoCount);
+
+        Lottos manualLottos = lottoGenerator.generateLottos(manualLottoCount, new ManualLottoStrategy(manualLottoList));
 
         Lottos autoLottos = lottoGenerator.generateLottos(totalCount.subtractCount(manualLottoCount), new RandomLottoStrategy());
 
@@ -41,12 +44,11 @@ public class LottoGame {
         resultView.printWinningStatic(winningInfo, totalMoney);
     }
 
-    private Lottos initManualLottos(LottoCount lottoCount) {
+    private List<Lotto> initManualLottos(LottoCount lottoCount) {
         resultView.printManualLottos();
-        List<Lotto> manualLottos = IntStream.range(0, lottoCount.getCount())
-                .mapToObj(count -> new Lotto(inputView.inputLottoNumber()))
+        return Stream.generate(() -> new Lotto(inputView.inputLottoNumber()))
+                .limit(lottoCount.getCount())
                 .collect(Collectors.toList());
-        return lottoGenerator.generateLottos(lottoCount, new ManualLottoStrategy(manualLottos));
     }
 
     private LottoCount initManualLottoCount() {
