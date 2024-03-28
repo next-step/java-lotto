@@ -14,12 +14,12 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public String[] split(String s) {
-        checkBlank(s);
-        return s.split(" ");
+    public String[] split(String input) {
+        checkBlank(input);
+        return input.split(" ");
     }
-    private void checkBlank(String s){
-        if (s == null || s.isBlank()) {
+    private void checkBlank(String input){
+        if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("값이 없습니다.");
         }
     }
