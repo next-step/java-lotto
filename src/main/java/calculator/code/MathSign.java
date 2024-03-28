@@ -1,5 +1,7 @@
 package calculator.code;
 
+import java.util.Arrays;
+
 public enum MathSign {
     PLUS ("+"),
     MINUS ("-"),
@@ -16,16 +18,11 @@ public enum MathSign {
         return this.sign;
     }
 
-    public static MathSign fromSign(String sign) {
-        if (sign.equals(MathSign.PLUS.sign()))
-            return MathSign.PLUS;
-        if (sign.equals(MathSign.MINUS.sign()))
-            return MathSign.MINUS;
-        if (sign.equals(MathSign.MULTIPLY.sign()))
-            return MathSign.MULTIPLY;
-        if (sign.equals(MathSign.DIVIDE.sign()))
-            return MathSign.DIVIDE;
-        throw new IllegalArgumentException("올바르지 않은 연산 기호입니다.");
+    public static MathSign fromSign(String inputSign) {
+        return Arrays.stream(values())
+                .filter(sign -> sign.sign.equals(inputSign))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("올바르지 않은 연산 기호입니다."));
     }
 
 }

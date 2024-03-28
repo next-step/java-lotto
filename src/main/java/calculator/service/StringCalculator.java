@@ -14,7 +14,7 @@ public class StringCalculator {
 
         int numberA = Integer.parseInt(inputArray[0]);
         int numberB;
-        for(int index = 1; index < inputArray.length; index = index + 2){
+        for (int index = 1; index < inputArray.length; index = index + 2){
             numberB = Integer.parseInt(inputArray[index + 1]);
             MathSign mathSign = MathSign.fromSign(inputArray[index]);
             numberA = numericCalculator.calculate(numberA, numberB, mathSign);
