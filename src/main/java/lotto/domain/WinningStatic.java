@@ -3,18 +3,18 @@ package lotto.domain;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static lotto.constant.Constant.*;
+import static lotto.domain.WinningType.*;
 
 public class WinningStatic {
     private static final int WINNING_THRESHOLD = 3;
-    private LinkedHashMap<Long, Integer> hitCountWinnerNumber;
+    private LinkedHashMap<WinningType, Integer> hitCountWinnerNumber;
     private long totalRevenue = 0;
 
     public WinningStatic(long totalRevenue) {
         this.totalRevenue = totalRevenue;
     }
 
-    public WinningStatic(LinkedHashMap<Long, Integer> hitCountWinnerNumber) {
+    public WinningStatic(LinkedHashMap<WinningType, Integer> hitCountWinnerNumber) {
         this.hitCountWinnerNumber = hitCountWinnerNumber;
     }
 
@@ -28,16 +28,15 @@ public class WinningStatic {
 
     public void countHitNumber(Long hitCount) {
         if (hitCount < WINNING_THRESHOLD) return;
-        Integer winnerNumber = hitCountWinnerNumber.get(hitCount);
-        hitCountWinnerNumber.put(hitCount, winnerNumber + 1);
+        Integer winnerNumber = hitCountWinnerNumber.get(WinningType.findByHitCount(hitCount));
+        hitCountWinnerNumber.put(WinningType.findByHitCount(hitCount), winnerNumber + 1);
     }
 
     public long calculateTotalRevenue() {
-        for (Map.Entry<Long, Integer> entry : hitCountWinnerNumber.entrySet()) {
-            Long hitCount = entry.getKey();
+        for (Map.Entry<WinningType, Integer> entry : hitCountWinnerNumber.entrySet()) {
+            WinningType winningType = entry.getKey();
             Integer winnerNumber = entry.getValue();
-            Long revenue = WinningRule.findRevenue(hitCount);
-            this.totalRevenue += winnerNumber * revenue;
+            this.totalRevenue += winningType.getRevenue() * winnerNumber;
         }
         return totalRevenue;
     }
@@ -49,10 +48,11 @@ public class WinningStatic {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for (Map.Entry<Long, Integer> entry : hitCountWinnerNumber.entrySet()) {
-            Long hitCount = entry.getKey();
+        for (Map.Entry<WinningType, Integer> entry : hitCountWinnerNumber.entrySet()) {
+            WinningType winningType = entry.getKey();
             Integer winnerNumber = entry.getValue();
-            Long revenue = WinningRule.findRevenue(hitCount);
+            Long revenue = winningType.getRevenue();
+            Long hitCount = winningType.getHitCount();
             result.append(hitCount + "개 일치 (")
                     .append(revenue + "원) - ")
                     .append(winnerNumber + "개\n");
