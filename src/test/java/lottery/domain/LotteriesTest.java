@@ -1,14 +1,18 @@
 package lottery.domain;
 
 import lottery.code.WinPrizeType;
+import lottery.domain.vo.LotteryNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.List;
 import java.util.Map;
 
 import static java.util.Map.entry;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LotteriesTest {
 
@@ -73,7 +77,7 @@ public class LotteriesTest {
         int actual = lotteries.lotteriesTotalPrice();
 
         // Then
-        int expected = 2000;
+        int expected = Lottery.PRICE * 2;
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -94,5 +98,29 @@ public class LotteriesTest {
         // Then
         int expected = WinPrizeType.FOUR_MATCH.prize() + WinPrizeType.FIVE_MATCH.prize();
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @DisplayName("구매 금액 null 예외 처리 테스트")
+    void nullInputMoneyThrowExceptionTest(Integer inputMoney) {
+        // When
+        assertThatThrownBy(() -> {
+            new Lotteries(inputMoney);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("구입 금액은 필수 입니다.");
+    }
+
+    @Test
+    @DisplayName("구매 금액 부적합한 단위 예외 처리 테스트")
+    void unfitUnitInputMoneyThrowExceptionTest() {
+        // Given
+        final Integer inputMoney = 1500;
+
+        // When
+        assertThatThrownBy(() -> {
+            new Lotteries(inputMoney);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("구입 금액은 1000 단위 입니다.");
     }
 }

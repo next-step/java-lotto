@@ -6,6 +6,8 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Lottery {
+
+    public static final Integer PRICE = 1000;
     private final LotteryNumbers lotteryNumbers;
 
     public Lottery(LotteryNumbers lotteryNumbers) {
