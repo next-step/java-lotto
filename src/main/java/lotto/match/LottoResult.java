@@ -1,5 +1,6 @@
 package lotto.match;
 
+import lotto.domain.AnswerSheet;
 import lotto.domain.Lotto;
 import lotto.prize.LottoPrize;
 import lotto.prize.PrizeRateStrategy;
@@ -13,7 +14,7 @@ public class LottoResult {
 
     private final Map<LottoPrize, Long> result;
 
-    public LottoResult(List<Lotto> lottos, List<Integer> answerSheet) {
+    public LottoResult(List<Lotto> lottos, AnswerSheet answerSheet) {
         this.result = LottoMatcher.matchLottoToPrize(lottos, answerSheet);
     }
 
@@ -23,17 +24,15 @@ public class LottoResult {
                 .sum();
     }
 
-    public double getWinningPercent(PrizeRateStrategy rateStrategy , int lottoPrice) {
+    public double getWinningPercent(PrizeRateStrategy rateStrategy, int lottoPrice) {
         int spendMoney = lottoPrice * result.size();
-        return rateStrategy.getRate(calculateTotalEarnings(),spendMoney);
+        return rateStrategy.getRate(calculateTotalEarnings(), spendMoney);
     }
 
-    public List<String> getWinningWords() {
+    public List<LottoPrizeCount> getResult() {
         return Arrays.stream(LottoPrize.values())
                 .filter(prize -> !prize.equals(LottoPrize.NONE))
-                .map(prize -> prize.formatPrizeText(result.getOrDefault(prize,0L)))
+                .map(prize -> new LottoPrizeCount(prize, result.getOrDefault(prize,0L)))
                 .collect(Collectors.toList());
     }
-
-
 }

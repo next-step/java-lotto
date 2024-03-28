@@ -1,5 +1,6 @@
 package lotto.match;
 
+import lotto.domain.AnswerSheet;
 import lotto.domain.Lotto;
 import lotto.prize.LottoPrize;
 
@@ -13,10 +14,11 @@ public class LottoMatcher {
     private LottoMatcher() {
     }
 
-    public static Map<LottoPrize, Long> matchLottoToPrize(List<Lotto> lottos, List<Integer> answerSheet) {
+    public static Map<LottoPrize, Long> matchLottoToPrize(List<Lotto> lottos, AnswerSheet answerSheet) {
         return lottos.stream()
-                .map(lotto -> lotto.countMatchNumbers(answerSheet))
-                .map(LottoPrize::from)
+                .map(lotto ->
+                        LottoPrize.from(lotto.countMatchNumbers(answerSheet.getAnswerNumbers())
+                                ,lotto.containsNumber(answerSheet.getBonusNumber())))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 }

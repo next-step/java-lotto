@@ -22,4 +22,14 @@ class LottoTest {
         assertThat(lotto.countMatchNumbers(answerSheet)).isEqualTo(2);
     }
 
+    @Test
+    @DisplayName("주어진 숫자를 갖고있으면 true를 반환한다.")
+    void containsNumber(){
+
+        Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
+
+        assertThat(lotto.containsNumber(5)).isTrue();
+    }
+
+
 }

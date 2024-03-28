@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.AnswerSheet;
 import lotto.domain.Lotto;
 import lotto.match.LottoResult;
 import lotto.prize.StandardPrizeRate;
@@ -20,17 +21,10 @@ class LottoResultTest {
 
     @BeforeEach
     public void setUp() {
-        List<Lotto> lottos = Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12)))
-                ;
-        List<Integer> answerSheet = Arrays.asList(1, 2, 3, 4, 5, 6); // 답안
+        List<Lotto> lottos = List.of(new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12)));
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        AnswerSheet answerSheet = new AnswerSheet(numbers, 9);
         lottoResult = new LottoResult(lottos, answerSheet);
-    }
-
-    @Test
-    @DisplayName("정답에 따라 올바른 텍스트를 가지고 있는다.")
-    public void getWinningWordsContainsWord() {
-        assertThat( lottoResult.getWinningWords()).contains("3개 일치 (5000원)- 1개\n");
     }
 
     @Test
