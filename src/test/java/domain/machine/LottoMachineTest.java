@@ -2,7 +2,6 @@ package domain.machine;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domain.machine.LottoMachine;
 import domain.lotto.vo.LottoResult;
 import domain.lotto.vo.WinNumbers;
 import java.util.List;
