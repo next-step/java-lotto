@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class LottoNumber {
 
     private static final int NUMBER_MIN = 1;
@@ -16,6 +18,10 @@ public class LottoNumber {
         if (number < NUMBER_MIN || number > NUMBER_MAX) {
             throw new IllegalArgumentException("1이상 45이하의 숫자만 입력할 수 있습니다.");
         }
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override
@@ -35,7 +41,8 @@ public class LottoNumber {
         return String.valueOf(number);
     }
 
-    public int getNumber() {
-        return number;
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }

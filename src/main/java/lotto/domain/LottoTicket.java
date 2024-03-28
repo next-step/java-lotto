@@ -6,12 +6,14 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
 
-    private List<LottoNumber> numbers;
+    private final List<LottoNumber> numbers;
 
     public static LottoTicket createTicket(List<Integer> inputs) {
-        return new LottoTicket(Collections.unmodifiableList(
-            inputs.stream().sorted().map(input -> new LottoNumber(input))
-                .collect(Collectors.toList())));
+        List<LottoNumber> lottoNumbers = inputs.stream()
+            .sorted()
+            .map(LottoNumber::new)
+            .collect(Collectors.toUnmodifiableList());
+        return new LottoTicket(lottoNumbers);
     }
 
     private LottoTicket(List<LottoNumber> inputs) {
@@ -26,10 +28,6 @@ public class LottoTicket {
         }
     }
 
-    public int count(List<LottoNumber> numbers) {
-        return (int) numbers.stream().filter(this.numbers::contains).count();
-    }
-
     private static void checkSizeNumbers(List<LottoNumber> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또 생성을 위해서는 6개의 숫자가 필요합니다.");
@@ -38,5 +36,9 @@ public class LottoTicket {
 
     public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
+    }
+
+    public int count(List<LottoNumber> numbers) {
+        return (int) numbers.stream().filter(this.numbers::contains).count();
     }
 }

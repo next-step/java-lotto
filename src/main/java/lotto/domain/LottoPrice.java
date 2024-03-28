@@ -9,8 +9,8 @@ public enum LottoPrice {
     SIX(6, 2000000000),
     NO(0, 0);
 
-    private int count;
-    private int price;
+    private final int count;
+    private final int price;
 
     LottoPrice(int count, int price) {
         this.count = count;
