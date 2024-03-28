@@ -1,5 +1,7 @@
 package lotto.domain.winning;
 
+import static lotto.utils.Constants.LOTTO_SIZE;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.grade.Grade;
@@ -19,7 +21,7 @@ public class WinningNumbers {
     }
 
     public static WinningNumbers fromValues(final List<Integer> values, LottoNumber bonusNumber) {
-        if (values.size() != 6) {
+        if (values.size() != LOTTO_SIZE) {
             throw new SizeExceedLottoException(values.size());
         }
 
