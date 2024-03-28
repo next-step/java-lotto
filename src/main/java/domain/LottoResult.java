@@ -8,8 +8,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 public class LottoResult {
-    private Map<Integer, Integer> matchedResult;
-    private Double profitRate;
+    private final Map<Integer, Integer> matchedResult;
+    private final Double profitRate;
 
     public LottoResult(Map<Integer,Integer> lottoResult, int totalMoney){
         this(findWinningPrizeMap(lottoResult), calculateProfitRate(lottoResult, totalMoney));
