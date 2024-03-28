@@ -1,6 +1,8 @@
-package domain;
+package domain.lotto;
 
+import domain.lotto.vo.LottoNumber;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 

@@ -1,7 +1,8 @@
 package controller;
 
-import domain.LottoMachine;
-import domain.WinNumbers;
+import domain.lotto.vo.LottoNumber;
+import domain.machine.LottoMachine;
+import domain.lotto.vo.WinNumbers;
 import view.InputView;
 import view.ResultView;
 import java.util.List;

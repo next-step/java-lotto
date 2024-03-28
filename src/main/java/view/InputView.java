@@ -1,5 +1,6 @@
 package view;
 
+import domain.lotto.vo.LottoNumber;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;

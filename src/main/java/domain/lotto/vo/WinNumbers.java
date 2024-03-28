@@ -1,4 +1,4 @@
-package domain;
+package domain.lotto.vo;
 
 import java.util.HashSet;
 import java.util.List;

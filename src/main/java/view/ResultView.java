@@ -1,8 +1,11 @@
 package view;
 
-import domain.Lotto;
-import domain.LottoResult;
-import domain.Prize;
+import domain.lotto.Lotto;
+import domain.lotto.vo.LottoNumber;
+import domain.lotto.vo.LottoResult;
+import domain.lotto.vo.Prize;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
 

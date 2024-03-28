@@ -1,5 +1,7 @@
-package domain;
+package domain.lotto;
 
+import domain.lotto.vo.WinNumbers;
+import domain.machine.LottoNumberGenerator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

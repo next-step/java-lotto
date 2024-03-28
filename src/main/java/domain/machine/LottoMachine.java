@@ -1,6 +1,9 @@
-package domain;
+package domain.machine;
 
-import java.math.BigDecimal;
+import domain.lotto.Lotto;
+import domain.lotto.LottoList;
+import domain.lotto.vo.LottoResult;
+import domain.lotto.vo.WinNumbers;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;

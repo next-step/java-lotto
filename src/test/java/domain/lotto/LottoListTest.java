@@ -1,8 +1,11 @@
-package domain;
+package domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.HashSet;
+import domain.lotto.LottoList;
+import domain.lotto.vo.LottoNumber;
+import domain.lotto.vo.WinNumbers;
+import domain.machine.LottoNumberGenerator;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
