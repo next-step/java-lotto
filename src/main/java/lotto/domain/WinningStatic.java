@@ -7,14 +7,14 @@ import static lotto.domain.WinningType.*;
 
 public class WinningStatic {
     private static final int WINNING_THRESHOLD = 3;
-    private LinkedHashMap<WinningType, Integer> hitCountWinnerNumber;
+    private Map<WinningType, Integer> hitCountWinnerNumber;
     private long totalRevenue = 0;
 
     public WinningStatic(long totalRevenue) {
         this.totalRevenue = totalRevenue;
     }
 
-    public WinningStatic(LinkedHashMap<WinningType, Integer> hitCountWinnerNumber) {
+    public WinningStatic(Map<WinningType, Integer> hitCountWinnerNumber) {
         this.hitCountWinnerNumber = hitCountWinnerNumber;
     }
 
