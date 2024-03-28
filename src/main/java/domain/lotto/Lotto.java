@@ -6,13 +6,13 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-  private final List<Integer> numbers;
+  private final List<LottoNumber> numbers;
 
   public Lotto(List<Integer> numbers) {
-    this.numbers = numbers;
+    this.numbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
   }
 
-  public List<Integer> getNumbers() {
+  public List<LottoNumber> getNumbers() {
     return numbers;
   }
 

@@ -20,10 +20,11 @@ public class InputView {
     return input;
   }
 
-  public List<Integer> inputIntegerList() {
+  public List<LottoNumber> inputLottoNumberList() {
     return Arrays.stream(scanner.nextLine().split(","))
         .map(String::trim)
         .map(Integer::parseInt)
+        .map(LottoNumber::new)
         .collect(Collectors.toList());
   }
 }
