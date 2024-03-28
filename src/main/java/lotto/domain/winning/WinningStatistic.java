@@ -2,25 +2,34 @@ package lotto.domain.winning;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.Map;
 import lotto.domain.grade.Grade;
 import lotto.domain.lotto.PurchaseAmount;
 
 public class WinningStatistic {
 
-    private final int[] gradeCounts = new int[Grade.values().length];
+    private final Map<Grade, Integer> gradeCounts = new EnumMap<>(Grade.class);
 
     private final PurchaseAmount purchaseAmount;
 
     public WinningStatistic(PurchaseAmount purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
+        initializeGradeCounts();
+    }
+
+    private void initializeGradeCounts() {
+        for (Grade grade : Grade.values()) {
+            gradeCounts.put(grade, 0);
+        }
     }
 
     public int getGradeCount(final Grade grade) {
-        return gradeCounts[grade.ordinal()];
+        return gradeCounts.getOrDefault(grade, 0);
     }
 
     public void calculateWinningStatistic(final Grade grade) {
-        gradeCounts[grade.ordinal()]++;
+        gradeCounts.put(grade, gradeCounts.getOrDefault(grade, 0) + 1);
     }
 
     public double calculateProfitRate() {
@@ -30,8 +39,9 @@ public class WinningStatistic {
     }
 
     private int calculateTotalWinningAmount() {
-        return Arrays.stream(Grade.values())
-            .mapToInt(grade -> gradeCounts[grade.ordinal()] * grade.getPrizeMoney())
+        return gradeCounts.entrySet()
+            .stream()
+            .mapToInt(grade -> grade.getKey().getPrizeMoney() * grade.getValue())
             .sum();
     }
 
