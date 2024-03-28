@@ -12,8 +12,8 @@ public class LottoFactory {
         this.numberGenerator = numberGenerator;
     }
 
-    public List<Lottos> createLottoses(Number number, Number price) {
-        Number count = number.divide(price);
+    public List<Lottos> createLottoses(Money purchaseAmount, Money price) {
+        Number count = Number.from(purchaseAmount.divide(price).convertToInt());
         List<Lottos> lottoses = new ArrayList<>();
         while (count.isPositive()) {
             lottoses.add(createLotto(this.numberGenerator.generate()));

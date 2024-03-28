@@ -38,6 +38,10 @@ public final class Number {
         return new Number(value * count.value);
     }
 
+    public int getValue() {
+        return value;
+    }
+
     @Override
     public boolean equals(Object o) {
 

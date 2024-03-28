@@ -20,8 +20,8 @@ class LottoFactoryTest {
 
     @Test
     void 구입금액에_따른_로또갯수를_생성() {
-        Number money = Number.from(10_000);
-        Number price = Number.from(1_000);
+        Money money = Money.from(10_000);
+        Money price = Money.from(1_000);
         int expected = 10;
 
         assertThat(factory.createLottoses(money, price).size()).isEqualTo(expected);
