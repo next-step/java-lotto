@@ -22,4 +22,17 @@ public class LottoCount {
     public int getAutoCount() {
         return autoCount;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoCount that = (LottoCount) o;
+        return manualCount == that.manualCount && autoCount == that.autoCount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(manualCount, autoCount);
+    }
 }

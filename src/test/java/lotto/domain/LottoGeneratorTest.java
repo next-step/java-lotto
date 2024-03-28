@@ -19,14 +19,13 @@ class LottoGeneratorTest {
     void setUp() {
         lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottoGenerator = new LottoGenerator();
-        lottoCount = new LottoCount(1);
     }
 
 
     @Test
     @DisplayName("횟수를 입력해 로또들을 구매할 수 있다.(수동, 자동 모두 가능)")
     void buy() {
-        Lottos lottos = lottoGenerator.generateLottos(lottoCount, new TestLottoStrategy(lotto));
+        Lottos lottos = lottoGenerator.generateLottos(1, new TestLottoStrategy(lotto));
 
         assertThat(lottos).containsExactly(lotto);
     }
