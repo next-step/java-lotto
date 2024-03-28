@@ -1,20 +1,19 @@
 package lotto.domain.winning;
 
 import java.text.DecimalFormat;
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 import lotto.domain.grade.Grade;
-import lotto.domain.lotto.PurchaseAmount;
+import lotto.domain.lotto.PurchaseInfomation;
 
 public class WinningStatistic {
 
     private final Map<Grade, Integer> gradeCounts = new EnumMap<>(Grade.class);
 
-    private final PurchaseAmount purchaseAmount;
+    private final PurchaseInfomation purchaseInfomation;
 
-    public WinningStatistic(PurchaseAmount purchaseAmount) {
-        this.purchaseAmount = purchaseAmount;
+    public WinningStatistic(PurchaseInfomation purchaseInfomation) {
+        this.purchaseInfomation = purchaseInfomation;
         initializeGradeCounts();
     }
 
@@ -34,7 +33,7 @@ public class WinningStatistic {
 
     public double calculateProfitRate() {
         double profitRate =
-            (double) calculateTotalWinningAmount() / purchaseAmount.getPurchaseAmount();
+            (double) calculateTotalWinningAmount() / purchaseInfomation.getPurchaseAmount();
         return Double.parseDouble(formattedProfitRate(Math.floor(profitRate * 100) / 100));
     }
 
