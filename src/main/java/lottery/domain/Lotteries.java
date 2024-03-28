@@ -19,7 +19,7 @@ public class Lotteries {
     public Lotteries(Long lotteryCount) {
         this(dispense(lotteryCount));
     }
-    public Lotteries(int moneyAmount) {
+    public Lotteries(Integer moneyAmount) {
         this(lotteryCount(moneyAmount));
     }
 
@@ -38,18 +38,26 @@ public class Lotteries {
         return Collections.unmodifiableList(lotteries);
     }
 
-    public int lotteriesTotalPrice(){
-        return this.lotteries.size() * 1000;
+    public Integer lotteriesTotalPrice(){
+        return this.lotteries.size() * Lottery.PRICE;
     }
 
-    public int lotteriesTotalPrize(Map<WinPrizeType, Long> matchStatistics){
+    public Integer lotteriesTotalPrize(Map<WinPrizeType, Long> matchStatistics){
         return matchStatistics.entrySet().stream()
                 .mapToInt(entry -> entry.getKey().prize() * entry.getValue().intValue())
                 .sum();
     }
 
-    private static Long lotteryCount(int amountMoney){
-        return Long.valueOf(amountMoney / 1000);
+    private static Long lotteryCount(Integer inputMoney){
+        validateMoney(inputMoney);
+        return Long.valueOf(inputMoney / Lottery.PRICE);
+    }
+
+    private static void validateMoney(Integer inputMoney){
+        if(Objects.isNull(inputMoney))
+            throw new IllegalArgumentException("구입 금액은 필수 입니다.");
+        if(inputMoney % Lottery.PRICE != 0)
+            throw new IllegalArgumentException("구입 금액은 1000 단위 입니다.");
     }
 
     private static List<Lottery> dispense(Long lotteryCount) {
@@ -59,9 +67,8 @@ public class Lotteries {
     }
 
     private static LotteryNumbers quickPick(){
-        List<Integer> allNumbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
-        Collections.shuffle(allNumbers);
-        List<Integer> lotteryNumbers = allNumbers.subList(0, 6);
+        Collections.shuffle(LotteryNumbers.ALL_LIST);
+        List<Integer> lotteryNumbers = LotteryNumbers.ALL_LIST.subList(0, LotteryNumbers.SIZE);
         Collections.sort(lotteryNumbers);
         return new LotteryNumbers(new HashSet<>(lotteryNumbers));
     }
