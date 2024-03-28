@@ -1,28 +1,34 @@
 package lottogame.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import utils.numbergenerator.NumberGenerator;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoFactory {
 
-    private final NumberGenerator numberGenerator;
+    private static final List<Integer> numbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
 
-    public LottoFactory(NumberGenerator numberGenerator) {
-        this.numberGenerator = numberGenerator;
-    }
-
-    public List<Lottos> createLottoses(Money purchaseAmount, Money price) {
+    public static List<Lottos> createLottoses(Money purchaseAmount, Money price) {
         Number count = Number.from(purchaseAmount.divide(price).convertToInt());
         List<Lottos> lottoses = new ArrayList<>();
         while (count.isPositive()) {
-            lottoses.add(createLotto(this.numberGenerator.generate()));
+            lottoses.add(createRandomLotto());
             count = count.decrease();
         }
         return lottoses;
     }
 
-    public Lottos createLotto(List<Integer> numbers) {
+    public static Lottos createLotto(List<Integer> numbers) {
         return new Lottos(numbers);
+    }
+
+    private static Lottos createRandomLotto() {
+        Collections.shuffle(numbers);
+        return createLotto(numbers
+                .subList(0, 6)
+                .stream()
+                .collect(Collectors.toUnmodifiableList()));
     }
 }

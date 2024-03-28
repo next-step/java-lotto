@@ -6,12 +6,6 @@ import java.util.List;
 public class LottoGame {
     private static final Money price = Money.from(1_000);
 
-    private final LottoFactory lottoFactory;
-
-    public LottoGame(LottoFactory lottoFactory) {
-        this.lottoFactory = lottoFactory;
-    }
-
     public double calculateReturnOfRate(Lottos winnerLotto, List<Lottos> lottos) {
         Money purchaseAmount = calculatePurchaseAmount(lottos);
         Money sumOfPrize = calculateSumOfPrize(winnerLotto, lottos);
@@ -28,11 +22,11 @@ public class LottoGame {
     }
 
     public List<Lottos> createLottos(Money amount) {
-        return this.lottoFactory.createLottoses(amount, price);
+        return LottoFactory.createLottoses(amount, price);
     }
 
     public Lottos createLotto(List<Integer> numbers) {
-        return this.lottoFactory.createLotto(numbers);
+        return LottoFactory.createLotto(numbers);
     }
 
     private Money calculatePurchaseAmount(List<Lottos> lottos) {

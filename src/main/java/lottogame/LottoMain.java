@@ -7,13 +7,12 @@ import lottogame.domain.LottoGame;
 import lottogame.domain.Money;
 import lottogame.view.InputView;
 import lottogame.view.ResultView;
-import utils.numbergenerator.RandomNumberGenerator;
 
 public class LottoMain {
 
     public static void main(String[] args) {
         Money money = InputView.requestMoney();
-        LottoGame lottoGame = new LottoGame(new LottoFactory(new RandomNumberGenerator()));
+        LottoGame lottoGame = new LottoGame();
         List<Lottos> lottos = lottoGame.createLottos(money);
         ResultView.printCountOfPurchaseLottos(lottos);
         ResultView.printLottos(lottos);
