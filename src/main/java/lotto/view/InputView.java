@@ -1,6 +1,11 @@
 package lotto.view;
 
+import lotto.constants.Const;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -22,10 +27,18 @@ public class InputView {
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("숫자만 입력해주세요.");
         }
-        if (i < 1000) {
+        if (i < Const.LOTTO_COST) {
             throw new IllegalArgumentException("금액이 모자랍니다.");
         }
-        return i / 1000;
+        return i / Const.LOTTO_COST;
+    }
+
+    public List<Integer> winningNo(String input) {
+        String[] winningNoStrArr = split(input);
+        return Arrays.stream(winningNoStrArr)
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     public String[] split(String input) {
