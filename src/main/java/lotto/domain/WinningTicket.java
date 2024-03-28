@@ -10,7 +10,7 @@ public class WinningTicket {
     }
 
     private LottoNumber createBonusBall(String input) {
-        LottoNumber bonusBall = new LottoNumber(input);
+        LottoNumber bonusBall = LottoNumber.of(input);
         if (winningNumbers.contains(bonusBall)) {
             throw new IllegalArgumentException("보너스 숫자는 당첨숫자를 제외한 숫자여야 합니다.");
         }
