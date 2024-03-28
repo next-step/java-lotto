@@ -5,31 +5,60 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoGame {
 
     private final InputView inputView;
     private final ResultView resultView;
-    private final LottoStore lottoStore;
+    private final LottoGenerator lottoGenerator;
 
-    public LottoGame(InputView inputView, ResultView resultView, LottoStore lottoStore) {
+    public LottoGame(InputView inputView, ResultView resultView, LottoGenerator lottoGenerator) {
         this.inputView = inputView;
         this.resultView = resultView;
-        this.lottoStore = lottoStore;
+        this.lottoGenerator = lottoGenerator;
     }
 
     public void start() {
-        Money money = initMoney();
+        Money totalMoney = initMoney();
 
-        Lottos lottos = lottoStore.buy(money, new RandomLottoStrategy());
+        int totalCount = initTotalLottoCount(totalMoney);
+        int manualLottoCount = initManualLottoCount();
 
-        resultView.printPickedLottoNumbers(lottos);
+        LottoCount lottoCount = new LottoCount(manualLottoCount, totalCount - manualLottoCount);
+
+        List<Lotto> manualLottoList = initManualLottos(lottoCount);
+
+        Lottos manualLottos = lottoGenerator.generateManualLottos(lottoCount.getManualCount(), manualLottoList);
+        Lottos autoLottos = lottoGenerator.generateAutoLottos(lottoCount.getAutoCount());
+
+        Lottos totalLottos = manualLottos.merge(autoLottos);
+
+        resultView.printPickedLottoNumbers(lottoCount, totalLottos);
 
         Lotto winningLotto = initLottoNumbers();
         LottoNumber bonusNumber = initBonusNumber();
-        WinningInfo winningInfo = WinningInfo.of(lottos, bonusNumber, winningLotto);
+        WinningInfo winningInfo = WinningInfo.of(totalLottos, bonusNumber, winningLotto);
 
-        resultView.printWinningStatic(winningInfo, money);
+        resultView.printWinningStatic(winningInfo, totalMoney);
+    }
+
+    private int initTotalLottoCount(Money totalMoney) {
+        return totalMoney.getMoney() / Money.LOTTO_PRICE;
+    }
+
+    private List<Lotto> initManualLottos(LottoCount lottoCount) {
+        resultView.printManualLottos();
+        return Stream.generate(() -> new Lotto(inputView.inputLottoNumber()))
+                .limit(lottoCount.getManualCount())
+                .collect(Collectors.toList());
+    }
+
+    private int initManualLottoCount() {
+        resultView.printManualLottoCount();
+
+        return inputView.inputManualLottoCount();
     }
 
     private Lotto initLottoNumbers() {
