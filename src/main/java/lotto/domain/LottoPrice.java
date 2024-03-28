@@ -3,18 +3,25 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoPrice {
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000),
-    NO(0, 0);
+    MISS(0, 0, false),
+    FIFTH(3, 5_000, false),
+    FOURTH(4, 50_000, false),
+    THIRD(5, 1_500_000, false),
+    SECOND(5, 30_000_000, true),
+    FIRST(6, 2_000_000_000, false);
 
     private final int count;
     private final int price;
+    private final boolean bonusResult;
 
-    LottoPrice(int count, int price) {
+    LottoPrice(int count, int price, boolean bonusResult) {
         this.count = count;
         this.price = price;
+        this.bonusResult = bonusResult;
+    }
+
+    public boolean isBonusResult() {
+        return bonusResult;
     }
 
     public int getCount() {
@@ -25,9 +32,10 @@ public enum LottoPrice {
         return price;
     }
 
-    public static LottoPrice findPrice(int count) {
-        return Arrays.stream(LottoPrice.values()).filter(item -> item.getCount() == count).findAny()
-            .orElse(NO);
+
+    public static LottoPrice valueOf(int count, boolean matchBonus) {
+        return Arrays.stream(values()).filter(item -> item.count == count)
+            .filter(item -> item.bonusResult == matchBonus).findAny().orElse(MISS);
     }
 
 }
