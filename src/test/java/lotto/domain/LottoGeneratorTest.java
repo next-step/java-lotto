@@ -1,11 +1,11 @@
 package lotto.domain;
 
-import lotto.domain.lottoStrategy.LottoGenerateStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,7 +13,6 @@ class LottoGeneratorTest {
 
     private Lotto lotto;
     private LottoGenerator lottoGenerator;
-    private LottoCount lottoCount;
 
     @BeforeEach
     void setUp() {
@@ -23,24 +22,10 @@ class LottoGeneratorTest {
 
 
     @Test
-    @DisplayName("횟수를 입력해 로또들을 구매할 수 있다.(수동, 자동 모두 가능)")
-    void buy() {
-        Lottos lottos = lottoGenerator.generateLottos(1, new TestLottoStrategy(lotto));
+    @DisplayName("횟수를 입력해 수동 로또들을 구매할 수 있다.")
+    void generateManualLottos() {
+        Lottos lottos = lottoGenerator.generateManualLottos(1, List.of(lotto));
 
         assertThat(lottos).containsExactly(lotto);
-    }
-
-    static class TestLottoStrategy implements LottoGenerateStrategy {
-        private final Lotto lotto;
-
-        TestLottoStrategy(Lotto lotto) {
-            this.lotto = lotto;
-        }
-
-
-        @Override
-        public Lotto generateLotto(int count) {
-            return this.lotto;
-        }
     }
 }

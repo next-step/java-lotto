@@ -1,14 +1,11 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.domain.lottoStrategy.ManualLottoStrategy;
-import lotto.domain.lottoStrategy.RandomLottoStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LottoGame {
@@ -33,8 +30,8 @@ public class LottoGame {
 
         List<Lotto> manualLottoList = initManualLottos(lottoCount);
 
-        Lottos manualLottos = lottoGenerator.generateLottos(lottoCount.getManualCount(), new ManualLottoStrategy(manualLottoList));
-        Lottos autoLottos = lottoGenerator.generateLottos(lottoCount.getAutoCount(), new RandomLottoStrategy());
+        Lottos manualLottos = lottoGenerator.generateManualLottos(lottoCount.getManualCount(), manualLottoList);
+        Lottos autoLottos = lottoGenerator.generateAutoLottos(lottoCount.getAutoCount());
 
         Lottos totalLottos = manualLottos.merge(autoLottos);
 
