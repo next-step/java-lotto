@@ -103,7 +103,7 @@ class LottoMachineTest {
         Grade grade = lottoMachine.calculatePrizeMoney(winningNumbers, lotto);
 
         //then
-        assertThat(grade).isEqualTo(Grade.FOUR_GRADE);
+        assertThat(grade).isEqualTo(Grade.FOURTH_GRADE);
     }
 
     @Test
@@ -146,6 +146,6 @@ class LottoMachineTest {
         assertThat(winningStatistic.getGradeCount(Grade.BONUS_GRADE)).isEqualTo(1);
         assertThat(winningStatistic.getGradeCount(Grade.SECOND_GRADE)).isEqualTo(1);
         assertThat(winningStatistic.getGradeCount(Grade.THIRD_GRADE)).isEqualTo(1);
-        assertThat(winningStatistic.getGradeCount(Grade.FOUR_GRADE)).isEqualTo(1);
+        assertThat(winningStatistic.getGradeCount(Grade.FOURTH_GRADE)).isEqualTo(1);
     }
 }

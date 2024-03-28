@@ -8,7 +8,7 @@ public enum Grade {
     BONUS_GRADE(30_000_000, 5),
     SECOND_GRADE(1_500_000, 5),
     THIRD_GRADE(50_000, 4),
-    FOUR_GRADE(5_000, 3),
+    FOURTH_GRADE(5_000, 3),
     UN_LUCKY_GRADE(0, 0);
 
     private final int prizeMoney;

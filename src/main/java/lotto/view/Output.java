@@ -23,7 +23,7 @@ public class Output {
     public static void printLottoResult(final WinningStatistic winningStatistic) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        printGradeResult(Grade.FOUR_GRADE, winningStatistic);
+        printGradeResult(Grade.FOURTH_GRADE, winningStatistic);
         printGradeResult(Grade.THIRD_GRADE, winningStatistic);
         printGradeResult(Grade.SECOND_GRADE, winningStatistic);
         printGradeResult(Grade.BONUS_GRADE, winningStatistic);

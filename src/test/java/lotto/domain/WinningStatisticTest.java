@@ -16,14 +16,14 @@ class WinningStatisticTest {
     public void WinningStatistic_Should_Calculate_Rank_Count() {
         WinningStatistic winningStatistic = new WinningStatistic(new PurchaseInfomation(10000));
 
-        Arrays.asList(Grade.FIRST_GRADE, Grade.BONUS_GRADE, Grade.SECOND_GRADE, Grade.THIRD_GRADE, Grade.FOUR_GRADE)
+        Arrays.asList(Grade.FIRST_GRADE, Grade.BONUS_GRADE, Grade.SECOND_GRADE, Grade.THIRD_GRADE, Grade.FOURTH_GRADE)
             .forEach(winningStatistic::calculateWinningStatistic);
 
         assertThat(winningStatistic.getGradeCount(Grade.FIRST_GRADE)).isEqualTo(1);
         assertThat(winningStatistic.getGradeCount(Grade.BONUS_GRADE)).isEqualTo(1);
         assertThat(winningStatistic.getGradeCount(Grade.SECOND_GRADE)).isEqualTo(1);
         assertThat(winningStatistic.getGradeCount(Grade.THIRD_GRADE)).isEqualTo(1);
-        assertThat(winningStatistic.getGradeCount(Grade.FOUR_GRADE)).isEqualTo(1);
+        assertThat(winningStatistic.getGradeCount(Grade.FOURTH_GRADE)).isEqualTo(1);
     }
 
     @Test
@@ -31,7 +31,7 @@ class WinningStatisticTest {
     public void WinningStatistic_Should_Calculate_Profit_Rate() {
         WinningStatistic winningStatistic = new WinningStatistic(new PurchaseInfomation(14000));
 
-        winningStatistic.calculateWinningStatistic(Grade.FOUR_GRADE);
+        winningStatistic.calculateWinningStatistic(Grade.FOURTH_GRADE);
         double profitRate = winningStatistic.calculateProfitRate();
 
         assertThat(profitRate).isEqualTo(0.35);
