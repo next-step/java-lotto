@@ -4,7 +4,6 @@ import java.text.MessageFormat;
 import java.util.List;
 import lotto.domain.grade.Grade;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.PurchaseAmount;
 import lotto.domain.winning.WinningStatistic;
 
 public class Output {
@@ -16,9 +15,9 @@ public class Output {
         autoLotto.stream().forEach(System.out::println);
     }
 
-    public static void printPurchaseCount(final PurchaseAmount purchaseAmount) {
+    public static void printPurchaseCount(int manualPurchaseCount, int autoPurchaseCount) {
         System.out.println(
-            MessageFormat.format("{0}개를 구매했습니다.", purchaseAmount.getPurchaseAmount() / 1000));
+            MessageFormat.format("수동으로 {0}장, 자동으로 {1}개를 구매했습니다.", manualPurchaseCount, autoPurchaseCount));
     }
 
     public static void printLottoResult(final WinningStatistic winningStatistic) {
