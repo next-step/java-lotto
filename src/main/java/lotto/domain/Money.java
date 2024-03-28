@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Money {
     private static final int MIN_MONEY = 0;
+    public static final int LOTTO_PRICE = 1000;
 
     private final int money;
 

@@ -8,8 +8,8 @@ import java.util.stream.IntStream;
 
 public class LottoGenerator {
 
-    public Lottos generateLottos(LottoCount lottoCount, LottoGenerateStrategy lottoPickStrategy) {
-        List<Lotto> lottos = IntStream.range(0, lottoCount.getCount())
+    public Lottos generateLottos(int lottoCount, LottoGenerateStrategy lottoPickStrategy) {
+        List<Lotto> lottos = IntStream.range(0, lottoCount)
                 .mapToObj(lottoPickStrategy::generateLotto)
                 .collect(Collectors.toList());
 

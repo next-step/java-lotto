@@ -26,14 +26,16 @@ public class LottoGame {
     public void start() {
         Money totalMoney = initMoney();
 
-        LottoCount totalCount = new LottoCount(totalMoney);
-        LottoCount manualLottoCount = initManualLottoCount();
+        int totalCount = initTotalLottoCount(totalMoney);
+        int manualLottoCount = initManualLottoCount();
 
-        List<Lotto> manualLottoList = initManualLottos(manualLottoCount);
+        LottoCount lottoCount = new LottoCount(manualLottoCount, totalCount - manualLottoCount);
 
-        Lottos manualLottos = lottoGenerator.generateLottos(manualLottoCount, new ManualLottoStrategy(manualLottoList));
+        List<Lotto> manualLottoList = initManualLottos(lottoCount);
 
-        Lottos autoLottos = lottoGenerator.generateLottos(totalCount.subtractCount(manualLottoCount), new RandomLottoStrategy());
+        Lottos manualLottos = lottoGenerator.generateLottos(lottoCount.getManualCount(), new ManualLottoStrategy(manualLottoList));
+
+        Lottos autoLottos = lottoGenerator.generateLottos(lottoCount.getAutoCount(), new RandomLottoStrategy());
 
         resultView.printPickedLottoNumbers(manualLottos, autoLottos);
 
@@ -44,18 +46,21 @@ public class LottoGame {
         resultView.printWinningStatic(winningInfo, totalMoney);
     }
 
+    private int initTotalLottoCount(Money totalMoney) {
+        return totalMoney.getMoney() / Money.LOTTO_PRICE;
+    }
+
     private List<Lotto> initManualLottos(LottoCount lottoCount) {
         resultView.printManualLottos();
         return Stream.generate(() -> new Lotto(inputView.inputLottoNumber()))
-                .limit(lottoCount.getCount())
+                .limit(lottoCount.getManualCount())
                 .collect(Collectors.toList());
     }
 
-    private LottoCount initManualLottoCount() {
+    private int initManualLottoCount() {
         resultView.printManualLottoCount();
-        int manualLottoCount = inputView.inputManualLottoCount();
 
-        return new LottoCount(manualLottoCount);
+        return inputView.inputManualLottoCount();
     }
 
     private Lotto initLottoNumbers() {

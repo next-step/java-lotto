@@ -3,39 +3,23 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoCount {
-    private static final int LOTTO_PRICE = 1000;
 
-    private final int count;
+    private final int manualCount;
+    private final int autoCount;
 
-    public LottoCount(Money money) {
-        this(money.getMoney() / LOTTO_PRICE);
-    }
-
-    public LottoCount(int count) {
-        if (count < 0) {
+    public LottoCount(int manualCount, int autoCount) {
+        if (manualCount + autoCount < 0) {
             throw new IllegalArgumentException("로또 구매 횟수는 0보다 작을 수 없습니다.");
         }
-        this.count = count;
+        this.manualCount = manualCount;
+        this.autoCount = autoCount;
     }
 
-    public int getCount() {
-        return count;
+    public int getManualCount() {
+        return manualCount;
     }
 
-    public LottoCount subtractCount(LottoCount count) {
-        return new LottoCount(this.count - count.getCount());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoCount that = (LottoCount) o;
-        return count == that.count;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(count);
+    public int getAutoCount() {
+        return autoCount;
     }
 }
