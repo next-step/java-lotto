@@ -15,8 +15,11 @@ public class Lottos {
         }
     }
 
+    public Lottos(List<Lotto> lottosList) {
+        autoLottos = lottosList;
+    }
+
     public List<Lotto> of() {
         return autoLottos;
     }
-
 }
