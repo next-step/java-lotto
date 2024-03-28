@@ -27,6 +27,10 @@ public class Lottos implements Iterable<Lotto> {
     this.lottos.addAll(lottos.lottos);
   }
 
+  public void addAll(final List<Lotto> lottos) {
+    this.lottos.addAll(lottos);
+  }
+
   @Override
   public Iterator<Lotto> iterator() {
     return new LotteryIterator();

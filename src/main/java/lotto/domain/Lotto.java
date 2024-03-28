@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
   private static final PositiveNumber PRICE = PositiveNumber.of(1000);
@@ -24,9 +26,17 @@ public class Lotto {
     return new Lotto(LottoBalls.of(lottoBalls));
   }
 
+  static public Lotto of(final String text) {
+    return Lotto.of(text.replace(" ", "").split(","));
+  }
+
+  static public Lotto of(final String[] values) {
+    return Lotto.of(Arrays.stream(values).mapToInt(Integer::parseInt).toArray());
+  }
+
   private Lotto(final LottoBalls lottoBalls) {
     if (!lottoBalls.sizeOf(LOTTO_BALLS_COUNT)) {
-      throw new IllegalArgumentException("Wrong number of normal balls!");
+      throw new IllegalArgumentException("Wrong number of balls!");
     }
 
     this.lottoBalls = lottoBalls;
@@ -42,6 +52,19 @@ public class Lotto {
 
   public LottoBalls lottoBalls() {
     return this.lottoBalls;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Lotto lotto = (Lotto) o;
+    return lottoBalls.equals(lotto.lottoBalls);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(lottoBalls);
   }
 
   @Override

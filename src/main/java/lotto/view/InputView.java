@@ -49,6 +49,7 @@ public class InputView {
     IntStream.range(0, count.value())
             .forEach(i -> { lottos[i] = inputLine(); });
 
+    printOutInputMessage("수동입력 끝.");
     return lottos;
   }
 }

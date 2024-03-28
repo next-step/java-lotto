@@ -25,7 +25,7 @@ public class LottoTest {
   void 입력된_번호_숫자가_6개_아니면_생성_불가(int... numbers) {
     assertThatThrownBy(() -> Lotto.of(LottoBalls.of(numbers)))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("Wrong number of normal balls!");
+            .hasMessage("Wrong number of balls!");
   }
 
   private static Stream<Arguments> lottoResultTestParameterGenerator() {

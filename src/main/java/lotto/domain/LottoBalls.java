@@ -4,6 +4,7 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoBalls implements Iterable<LottoBall> {
@@ -64,6 +65,19 @@ public class LottoBalls implements Iterable<LottoBall> {
     public LottoBall next() {
       return balls.get(cursor++);
     }
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    LottoBalls that = (LottoBalls) o;
+    return balls.equals(that.balls);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(balls);
   }
 
   @Override
