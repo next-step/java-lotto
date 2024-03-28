@@ -1,4 +1,4 @@
-package step1_caculator.domain;
+package caculator.domain;
 
 import java.util.List;
 

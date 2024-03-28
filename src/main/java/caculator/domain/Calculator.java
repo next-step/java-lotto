@@ -1,4 +1,4 @@
-package step1_caculator.domain;
+package caculator.domain;
 
 public class Calculator {
     private int result;
