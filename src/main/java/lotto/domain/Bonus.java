@@ -17,6 +17,10 @@ public class Bonus {
         throw new IllegalArgumentException("당첨번호와 보너스 볼이 중복됩니다.");
     }
 
+    public int getBonus() {
+        return this.number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -27,10 +31,6 @@ public class Bonus {
 
     @Override
     public int hashCode() {
-        return this.number;
-    }
-
-    public int getBonus() {
         return this.number;
     }
 }
