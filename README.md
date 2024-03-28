@@ -28,3 +28,8 @@ step2
   * refactored codes based on feedback
 * refactor/lottery-application
   * refactored codes using stream()
+* refactor/feedback
+  * refactored codes based on feedback
+    * validate input from system 
+      * convert int to Integer -> able to test null and throw exception
+    * used MagicNumber as Constant

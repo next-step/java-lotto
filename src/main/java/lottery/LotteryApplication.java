@@ -9,7 +9,7 @@ import lottery.view.ResultView;
 public class LotteryApplication {
 
     public static void main(String[] args){
-        int moneyAmount = InputView.moneyAmount();
+        Integer moneyAmount = InputView.moneyAmount();
         Lotteries lotteries = new Lotteries(moneyAmount);
         ResultView.purchasedLotteryResult(lotteries);
 

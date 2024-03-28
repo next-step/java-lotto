@@ -1,5 +1,6 @@
 package lottery.domain;
 
+import lottery.domain.vo.LotteryNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,7 @@ public class LotteryTest {
         Set<Integer> actual = lottery.lotteryNumbers();
 
         // Then
-        assertThat(actual).hasSize(6);
+        assertThat(actual).hasSize(LotteryNumbers.SIZE);
         assertThat(actual).contains(1, 2, 3, 4, 5, 6);
     }
 

@@ -20,7 +20,7 @@ public class LotteryNumbersTest {
         LotteryNumbers lotteryNumbers = new LotteryNumbers(numbersString);
 
         // Then
-        assertThat(lotteryNumbers.numbers()).hasSize(6);
+        assertThat(lotteryNumbers.numbers()).hasSize(LotteryNumbers.SIZE);
         assertThat(lotteryNumbers.numbers()).contains(1, 2, 3, 4, 5, 6);
     }
 

@@ -4,16 +4,16 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private static Scanner scan = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static int moneyAmount(){
+    public static Integer moneyAmount(){
         System.out.println("구입금액을 입력해 주세요.");
-        return scan.nextInt();
+        return SCANNER.nextInt();
     }
 
     public static String winPrizeNumbersString(){
-        scan.nextLine();
+        SCANNER.nextLine();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scan.nextLine();
+        return SCANNER.nextLine();
     }
 }
