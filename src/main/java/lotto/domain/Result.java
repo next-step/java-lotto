@@ -27,10 +27,6 @@ public class Result {
     return this.bonusBallMatched;
   }
 
-  public Boolean isNotBonusBallMatched() {
-    return !this.bonusBallMatched;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

@@ -5,11 +5,11 @@ import lotto.domain.*;
 import java.util.Map;
 
 public class ResultView {
-  public static void lotteryCount(PositiveNumber count) {
-    System.out.printf("%s개를 구매했습니다.%n", count);
+  public static void lottoCount(PositiveNumber manualCount, PositiveNumber randomCount) {
+    System.out.printf("수동으로 %s장, 자동으로 %s장을 구매했습니다.%n", manualCount, randomCount);
   }
 
-  public static void lotteryList(Lottos lottos) {
+  public static void lottoList(Lottos lottos) {
     for (Lotto lotto : lottos) {
       System.out.println(lottoToString(lotto));
     }
@@ -22,10 +22,9 @@ public class ResultView {
     final String CONNECTOR = ", ";
 
     StringBuilder sb = new StringBuilder(OPENER);
-    for (LottoBall ball : lotto.normalBalls()) {
+    for (LottoBall ball : lotto.lottoBalls()) {
       sb.append(ballToNumber(ball)).append(CONNECTOR);
     }
-    sb.append(ballToNumber(lotto.bonusBall())).append(CONNECTOR);
 
     final int STARTING_INDEX = 0;
     return sb.substring(STARTING_INDEX, sb.length() - CONNECTOR.length()).concat(CLOSER);
@@ -51,5 +50,9 @@ public class ResultView {
 
   private static String bonusBallCondition(boolean bonusBallCondition) {
     return bonusBallCondition ? ", 보너스 볼 일치" : "";
+  }
+
+  public void printOutResultMessage(final String message) {
+    System.out.println(message);
   }
 }

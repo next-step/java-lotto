@@ -15,24 +15,24 @@ import static org.junit.jupiter.params.provider.Arguments.*;
 public class LottoTest {
   private static List<int[]> lotteryNumberArrayProvider() {
     return List.of(
-            new int[]{1, 2, 3, 4, 5 },
+            new int[]{1, 2, 3, 4, 5},
             new int[]{1, 2, 3, 4, 5, 6, 7}
     );
   }
 
   @ParameterizedTest
   @MethodSource("lotteryNumberArrayProvider")
-  void 입력된_일반_번호_숫자가_6개_아니면_생성_불가(int... numbers) {
-    assertThatThrownBy(() -> Lotto.of(LottoBall.of(10), LottoBalls.of(numbers)))
+  void 입력된_번호_숫자가_6개_아니면_생성_불가(int... numbers) {
+    assertThatThrownBy(() -> Lotto.of(LottoBalls.of(numbers)))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("Wrong number of normal balls!");
+            .hasMessage("Wrong number of balls!");
   }
 
   private static Stream<Arguments> lottoResultTestParameterGenerator() {
     return Stream.of(
-            arguments(Lotto.of(LottoBall.of(7), LottoBalls.of(1, 2, 3, 4, 5, 6)), Lottery.of(LottoBall.of(8), LottoBalls.of(1, 2, 3, 4, 5, 6)), 6, false),
-            arguments(Lotto.of(LottoBall.of(8), LottoBalls.of(1, 2, 3, 4, 5, 6)), Lottery.of(LottoBall.of(8), LottoBalls.of(1, 2, 3, 4, 5, 7)), 5, true),
-            arguments(Lotto.of(LottoBall.of(10), LottoBalls.of(2, 3, 4, 5, 6, 7)), Lottery.of(LottoBall.of(11), LottoBalls.of(1, 2, 3, 4, 6, 7)), 2, false)
+            arguments(Lotto.of(LottoBalls.of(1, 2, 3, 4, 5, 6)), Lottery.of(LottoBall.of(8), LottoBalls.of(1, 2, 3, 4, 5, 6)), 6, false),
+            arguments(Lotto.of(LottoBalls.of(1, 2, 3, 4, 5, 6)), Lottery.of(LottoBall.of(6), LottoBalls.of(1, 2, 3, 4, 5, 7)), 5, true),
+            arguments(Lotto.of(LottoBalls.of(2, 3, 4, 5, 6, 7)), Lottery.of(LottoBall.of(11), LottoBalls.of(1, 2, 3, 4, 6, 7)), 2, false)
     );
   }
 

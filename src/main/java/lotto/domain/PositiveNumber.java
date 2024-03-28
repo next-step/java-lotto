@@ -13,6 +13,10 @@ public final class PositiveNumber {
     return new PositiveNumber(value);
   }
 
+  public static PositiveNumber of(final String value) {
+    return new PositiveNumber(Integer.parseInt(value));
+  }
+
   private PositiveNumber(final int value) {
     if (value < 0) {
       throw new IllegalArgumentException("Wrong constructor argument!");
@@ -46,6 +50,10 @@ public final class PositiveNumber {
 
   public PositiveNumber increment() {
     return new PositiveNumber(this.value + 1);
+  }
+
+  public PositiveNumber subtract(PositiveNumber number) {
+    return new PositiveNumber(this.value - number.value());
   }
 
   @Override
