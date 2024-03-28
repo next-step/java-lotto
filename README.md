@@ -33,3 +33,9 @@ step2
     * validate input from system 
       * convert int to Integer -> able to test null and throw exception
     * used MagicNumber as Constant
+* refactor/feedback-from-lecture
+  * refactored codes after lecture
+    * renamed all objects lottery -> lottoTicket or else
+    * test codes are also refactored
+      * remove //Given //When // Then
+    * LotteryNumbers removed, LottoNumber created
