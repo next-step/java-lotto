@@ -15,10 +15,6 @@ public final class Double {
         return from(value * from.getValue());
     }
 
-    public double multiply(int from) {
-        return value * from;
-    }
-
     public Double add(Number from) {
         return from(value + from.getValue());
     }
