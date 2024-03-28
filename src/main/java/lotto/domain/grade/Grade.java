@@ -32,6 +32,10 @@ public enum Grade {
             .orElse(Grade.UN_LUCKY_GRADE);
     }
 
+    public boolean isBonusGrade() {
+        return this == BONUS_GRADE;
+    }
+
     public static boolean isBonusGrade(int matchCount, boolean hasBonusNumber) {
         return matchCount == 5 && hasBonusNumber == true;
     }
