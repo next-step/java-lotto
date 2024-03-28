@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import ui.LottoInputUtils;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -40,7 +41,7 @@ class LottoTest {
         LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 8));
 
         Lotto lotto = new Lotto(lottoNumbers);
-        Rank sut = lotto.match(new LottoNumbers("1, 2, 3, 4, 5, 7"), new BonusNumber(8));
+        Rank sut = lotto.match(new LottoNumbers(LottoInputUtils.toNumberList("1, 2, 3, 4, 5, 7")), new BonusNumber(8));
 
         assertThat(sut).isEqualTo(Rank.SECOND);
     }

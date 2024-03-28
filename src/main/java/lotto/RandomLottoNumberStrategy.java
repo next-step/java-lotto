@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 
 public class RandomLottoNumberStrategy implements LottoNumberStrategy {
 
+    public final static RandomLottoNumberStrategy CACHED = new RandomLottoNumberStrategy();
     private final static List<Integer> RANGE_NUMS = IntStream.rangeClosed(1, 45)
             .boxed().collect(Collectors.toList());
     @Override

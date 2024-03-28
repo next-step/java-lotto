@@ -10,12 +10,6 @@ public class LottoNumbers {
         this.numbers = new HashSet<>(numbers);
     }
 
-    public LottoNumbers(String input) {
-        if (isBlank(input)) {
-            throw new IllegalArgumentException();
-        }
-        this.numbers = new HashSet<>(toInts(splitInput(input)));
-    }
 
     public static LottoNumbers create(LottoNumberStrategy strategy) {
         return new LottoNumbers(strategy.numbers());
@@ -32,17 +26,18 @@ public class LottoNumbers {
     }
 
 
-    private static boolean isBlank(String line) {
-        return line == null || line.isBlank();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LottoNumbers that = (LottoNumbers) o;
+
+        return numbers.equals(that.numbers);
     }
 
-    private static String[] splitInput(String line) {
-        return line.split(",");
-    }
-
-    private static List<Integer> toInts(String[] values) {
-        return Arrays.stream(values)
-                .map(it -> Integer.parseInt(it.trim()))
-                .collect(Collectors.toList());
+    @Override
+    public int hashCode() {
+        return numbers.hashCode();
     }
 }
