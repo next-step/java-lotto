@@ -2,8 +2,10 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.WinningStatic;
+import lotto.domain.WinningType;
 
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
     public static void printBuyLottos(List<Lotto> lottos) {
@@ -14,12 +16,24 @@ public class OutputView {
     }
 
     public static void printWinningStatic(WinningStatic winningStatic) {
-        System.out.println(winningStatic);
+        StringBuilder result = new StringBuilder();
+        for (Map.Entry<WinningType, Integer> entry : winningStatic.getHitCountWinnerNumber().entrySet()) {
+            WinningType winningType = entry.getKey();
+            Integer winnerNumber = entry.getValue();
+            Long revenue = winningType.getRevenue();
+            Long hitCount = winningType.getHitCount();
+            result.append(hitCount + "개 일치 (")
+                    .append(revenue + "원) - ")
+                    .append(winnerNumber + "개\n");
+        }
+
+        System.out.println(result);
     }
 
-    public static void printReturnRate(double returnRate){
-        System.out.println("총 수익율은" + returnRate + " 입니다.");
-        if(returnRate < 1){
+    public static void printReturnRate(double returnRate) {
+        String roundedReturnRate = String.format("%.2f", returnRate);
+        System.out.println("총 수익율은 " + roundedReturnRate + " 입니다.");
+        if (returnRate < 1) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
     }

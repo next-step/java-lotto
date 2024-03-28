@@ -26,6 +26,11 @@ public class WinningStatic {
         this.hitCountWinnerNumber.put(HIT_COUNT_6, 0);
     }
 
+
+    public Map<WinningType, Integer> getHitCountWinnerNumber() {
+        return hitCountWinnerNumber;
+    }
+
     public void countHitNumber(Long hitCount) {
         if (hitCount < WINNING_THRESHOLD) return;
         Integer winnerNumber = hitCountWinnerNumber.get(WinningType.findByHitCount(hitCount));
@@ -43,21 +48,5 @@ public class WinningStatic {
 
     public double returnRate(int expend) {
         return Double.valueOf(this.totalRevenue) / expend;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        for (Map.Entry<WinningType, Integer> entry : hitCountWinnerNumber.entrySet()) {
-            WinningType winningType = entry.getKey();
-            Integer winnerNumber = entry.getValue();
-            Long revenue = winningType.getRevenue();
-            Long hitCount = winningType.getHitCount();
-            result.append(hitCount + "개 일치 (")
-                    .append(revenue + "원) - ")
-                    .append(winnerNumber + "개\n");
-        }
-
-        return result.toString();
     }
 }
