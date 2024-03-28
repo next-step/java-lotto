@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.List;
 import java.util.Map;
+import lotto.domain.LottoPrice;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketBall;
 import lotto.ui.InputView;
@@ -20,11 +21,11 @@ public class LottoController {
         int purchaseAmount = inputView.inputPurchaseAmount();
         List<LottoTicket> tickets = ticketGenerator.purchaseLotto(purchaseAmount);
         outputView.displayLottoTickets(tickets);
-        Map<Integer, Integer> lottoResult = resultManager.calculateLottoResult(tickets,
-            inputView.inputWinningNumbers());
-        outputView.displayWinning(lottoResult);
+        Map<LottoPrice, Integer> results = resultManager.calculateLottoResult(tickets,
+            inputView.inputWinningNumbers(), inputView.inputBonusBall());
+        outputView.displayWinning(results);
         outputView.displayWinningMoney(
-            resultManager.calculateReturnRate(lottoResult, purchaseAmount));
+            resultManager.calculateReturnRate(results, purchaseAmount));
     }
 
 }

@@ -9,7 +9,7 @@ public class LottoTicketGenerator {
 
     private static final int PRICE_PER_TICKET = 1000;
 
-    private LottoTicketBall lottoTicketBall;
+    private final LottoTicketBall lottoTicketBall;
 
     public LottoTicketGenerator(LottoTicketBall lottoTicketBall) {
         this.lottoTicketBall = lottoTicketBall;
