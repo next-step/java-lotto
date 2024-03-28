@@ -2,7 +2,9 @@ package lotto.domain.lotto;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lotto.error.exception.SizeExceedLottoNumberException;
 
 public enum LottoNumber {
@@ -52,17 +54,26 @@ public enum LottoNumber {
     FORTY_FOUR(44),
     FORTY_FIVE(45);
 
+    private static final Map<Integer, LottoNumber> intToLottoNumberMap = new HashMap<>();
+
     private final int lottoNumber;
+
+    static {
+        for (LottoNumber lottoNumber : LottoNumber.values()) {
+            intToLottoNumberMap.put(lottoNumber.lottoNumber, lottoNumber);
+        }
+    }
 
     LottoNumber(int number) {
         this.lottoNumber = number;
     }
 
     public static LottoNumber fromInt(final int value) {
-        return Arrays.stream(LottoNumber.values())
-            .filter(lottoNumber -> lottoNumber.getLottoNumber() == value)
-            .findFirst()
-            .orElseThrow(() -> new SizeExceedLottoNumberException(value));
+        LottoNumber lottoNumber = intToLottoNumberMap.get(value);
+        if (lottoNumber == null) {
+            throw new SizeExceedLottoNumberException(value);
+        }
+        return lottoNumber;
     }
 
     public static List<LottoNumber> createRandomLottoNumbers() {
