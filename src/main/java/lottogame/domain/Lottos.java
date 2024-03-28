@@ -25,13 +25,13 @@ public class Lottos {
         return numbers;
     }
 
-    private int match(Lottos lotto) {
+    protected int match(Lottos lotto) {
         return (int) numbers.stream()
                 .filter(lotto::match)
                 .count();
     }
 
-    private boolean match(LottoNumber number) {
+    protected boolean match(LottoNumber number) {
         return numbers.contains(number);
     }
 }
