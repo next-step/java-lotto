@@ -41,14 +41,13 @@ public class ResultView {
         System.out.printf("%d개 일치%s (%d원)-%d개%n", rank.getMatchCount(), bonusNotice ,rank.getWinningMoney(), winningInfo.count(rank));
     }
 
-    public void printPickedLottoNumbers(Lottos manualLottos, Lottos autoLottos) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualLottos.size(), autoLottos.size());
-        Stream.concat(manualLottos.stream(), autoLottos.stream())
-                .forEach(lotto -> {
-                    System.out.print("[");
-                    printLottoNumbers(lotto);
-                    System.out.println("]");
-                });
+    public void printPickedLottoNumbers(LottoCount lottoCount, Lottos lottos) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", lottoCount.getManualCount(), lottoCount.getAutoCount());
+        for (Lotto lotto : lottos) {
+            System.out.print("[");
+            printLottoNumbers(lotto);
+            System.out.println("]");
+        }
     }
 
     private void printLottoNumbers(Lotto lotto) {

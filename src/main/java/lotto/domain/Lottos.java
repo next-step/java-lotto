@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
@@ -21,7 +22,9 @@ public class Lottos implements Iterable<Lotto> {
         return lottos.iterator();
     }
 
-    public int size() {
-        return this.lottos.size();
+    public Lottos merge(Lottos inputLottos) {
+        List<Lotto> mergedLottoList = new ArrayList<>(this.lottos);
+        mergedLottoList.addAll(inputLottos.lottos);
+        return new Lottos(mergedLottoList);
     }
 }

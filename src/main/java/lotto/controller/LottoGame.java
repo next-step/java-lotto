@@ -34,14 +34,15 @@ public class LottoGame {
         List<Lotto> manualLottoList = initManualLottos(lottoCount);
 
         Lottos manualLottos = lottoGenerator.generateLottos(lottoCount.getManualCount(), new ManualLottoStrategy(manualLottoList));
-
         Lottos autoLottos = lottoGenerator.generateLottos(lottoCount.getAutoCount(), new RandomLottoStrategy());
 
-        resultView.printPickedLottoNumbers(manualLottos, autoLottos);
+        Lottos totalLottos = manualLottos.merge(autoLottos);
+
+        resultView.printPickedLottoNumbers(lottoCount, totalLottos);
 
         Lotto winningLotto = initLottoNumbers();
         LottoNumber bonusNumber = initBonusNumber();
-        WinningInfo winningInfo = WinningInfo.of(manualLottos, autoLottos, bonusNumber, winningLotto);
+        WinningInfo winningInfo = WinningInfo.of(totalLottos, bonusNumber, winningLotto);
 
         resultView.printWinningStatic(winningInfo, totalMoney);
     }
