@@ -86,12 +86,13 @@
 
 ## Model
 ### `LottoNumber.java`
-- [x] 로또의 번호 1개를 가진 클래스
+- [x] 로또의 번호 1개를 가짐
   - [x] 해당 번호의 유효성 검사 방어 로직 적용
+- [x] 로또 번호 1~45를 List<Integer>로 가짐
+  - 랜덤 로또 생성 전략을 사용할 경우, 해당 클래스 변수를 사용하여 랜덤 번호를 반환
 
 ### `Lotto.java`
-- [x] 주입된 `Set<LottoNumber>`, `Random`=(랜덤 로또 생성에 사용), 또는 `List<String>`을 따라 로또를 생성
-  - [x] 중복없이 6개의 숫자로 1~45 범위에서 로또를 생성하는지 체크하는 방어 로직 적용
+- [x] 주입된 `Set<LottoNumber>`, `Random`=(랜덤 로또 생성에 사용), 또는 `List<String>`로 로또를 생성
   - [x] `containsNumber` 메서드를 통해 파라미터로 주어진 번호가 자신의 로또 번호에 있는지 판단
 
 ### `LottoMachine.java`
@@ -101,8 +102,7 @@
     - [x] 이때 자동 로또는 전략 패턴에 따라 생성
 
 ### `WinningLotto.java`
-- [x] 당천 번호와 보너스 번호를 받아 `Lotto` 클래스로 저장
-  - [x] 이때 당첨 번호와 보너스 번호는 각각 따로 저장
+- [x] 당천 번호와 보너스 번호를 받아 각각 `Lotto`, `LottoNumber`클래스로 저장
   - [x] 이때 당첨 번호와 보너스 번호의 중복 여부를 체크
 - [x] 당첨 번호와 유저가 구입한 로또를 비교하여 상금을 받는 로또의 정보를 반환하는 `countMatchedWinLottos()` 메서드 추가
   - [x] `EnumMap<PrizeEnum, Integer>`로 반환
