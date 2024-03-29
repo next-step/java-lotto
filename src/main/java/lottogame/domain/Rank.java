@@ -75,6 +75,10 @@ public enum Rank {
         return numOfWinnings;
     }
 
+    public boolean isSecond() {
+        return this == SECOND;
+    }
+
     private static Predicate<Rank> match(int numOfWinnings) {
         return rank -> {
             if (rank == SECOND) {
