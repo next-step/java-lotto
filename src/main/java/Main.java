@@ -1,10 +1,22 @@
-import calculator.domain.Calculator;
-import calculator.io.InputView;
-import calculator.io.PrintView;
+import lotto.LottoMarket;
+import lotto.LottoResult;
+import lotto.WinningNumbers;
+import lotto.io.InputView;
+import lotto.io.PrintView;
 
 public class Main {
+	private static final int LOTTO_PURCHASE = 1000;
+
 	public static void main(String[] args) {
-		Calculator calculator = new Calculator();
-		PrintView.printResult(calculator.calculate(InputView.inputExpression()));
+		int purchasePrice = InputView.inputPurchasePrice();
+		int numberOfLotto = purchasePrice / LOTTO_PURCHASE;
+		PrintView.printNumberOfLotto(numberOfLotto);
+
+		LottoMarket lottoMarket = new LottoMarket(numberOfLotto);
+		PrintView.printLottos(lottoMarket.getLottos());
+
+		WinningNumbers winningNumbers = new WinningNumbers(InputView.inputWinningNumbers());
+		LottoResult lottoResult = new LottoResult(winningNumbers, lottoMarket.getLottos(), purchasePrice);
+		PrintView.printLottoResult(lottoResult);
 	}
 }

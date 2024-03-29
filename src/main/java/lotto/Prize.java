@@ -9,8 +9,8 @@ public enum Prize {
 	MATHCED_5(5, 1500000),
 	MATHCED_6(6, 2000000000);
 
-	private long count;
-	private int price;
+	private final long count;
+	private final int price;
 
 	Prize(int count, int price) {
 		this.count = count;

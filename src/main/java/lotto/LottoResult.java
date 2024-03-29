@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
-	private Map<Long, Integer> matchedMap;
-	private double rate;
+	private final Map<Long, Integer> matchedMap;
+	private final double rate;
 
 	public LottoResult(WinningNumbers winningNumbers, List<Lotto> lottos, int purchasePrice) {
 		this.matchedMap = new HashMap<>();

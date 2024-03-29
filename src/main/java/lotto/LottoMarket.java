@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMarket {
-	private static final int LOTTO_PURCHASE = 1000;
 	private final List<Lotto> lottos = new ArrayList<>();
 
-	public LottoMarket(int purchasePrice) {
-		for(int i = 0; i < purchasePrice / LOTTO_PURCHASE; i++) {
+	public LottoMarket(int numberOfLotto) {
+		for(int i = 0; i < numberOfLotto; i++) {
 			lottos.add(new Lotto(new AutoLottoNumberStrategy()));
 		}
 	}
