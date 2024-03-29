@@ -1,10 +1,9 @@
-package step1_caculator;
+package caculator;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step1_caculator.domain.Calculator;
-import step1_caculator.domain.IntOperator;
+import caculator.domain.Calculator;
 
 public class CalculatorTest {
     @DisplayName("연산자 타입에 따라 계산이 진행된다 : + ")

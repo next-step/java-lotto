@@ -1,8 +1,8 @@
-package step1_caculator;
+package caculator;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import step1_caculator.domain.IntOperator;
+import caculator.domain.IntOperator;
 
 public class IntOperatorTest {
     @Test
