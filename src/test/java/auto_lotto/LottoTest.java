@@ -1,10 +1,8 @@
 package auto_lotto;
 
-import auto_lotto.domain.LottoTickets;
 import auto_lotto.domain.LottoTicket;
 import auto_lotto.domain.RandomNumber;
-import auto_lotto.domain.VendingMachine;
-import org.junit.jupiter.api.Assertions;
+import auto_lotto.domain.LottoVendingMachine;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
@@ -20,9 +18,9 @@ public class LottoTest {
     public void 장당_1000원의_로또를_계산하여_발권(){
         int money = 14000;
         int priceOfLotto = 1000;
-        VendingMachine vendingMachine = new VendingMachine();
-        LottoTickets lottoTickets = vendingMachine.insert(money);
-        assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(money/priceOfLotto);
+        LottoVendingMachine lottoVendingMachine = new LottoVendingMachine();
+        List<LottoTicket> lottoTickets = lottoVendingMachine.receive(money);
+        assertThat(lottoTickets.size()).isEqualTo(money/priceOfLotto);
     }
 
     @Test
