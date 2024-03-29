@@ -1,7 +1,8 @@
 package calculator.controller;
 
 import calculator.domain.Expression;
-import calculator.domain.Operand;
+import calculator.domain.parser.ArithmeticParser;
+import calculator.domain.parser.Parser;
 import calculator.view.CalculatorView;
 
 public class Calculator {
@@ -14,10 +15,11 @@ public class Calculator {
 
     public void run() {
         try {
-            final String[] expressionTokens = calculatorView.readExpressionTokens();
-            final Expression expression = Expression.from(expressionTokens);
+            final String text = calculatorView.readExpressionText();
+            final Parser parser = new ArithmeticParser();
+            final Expression expression = Expression.of(text, parser);
 
-            final Operand result = expression.calculate();
+            final int result = expression.calculate();
 
             calculatorView.printCalculationResult(result);
 

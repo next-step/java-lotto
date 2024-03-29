@@ -1,11 +1,11 @@
 package calculator.domain;
 
-import static calculator.config.CalculatorExceptionMessage.EXPRESSION_CANNOT_BE_NULL_OR_EMPTY;
-
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.stream.Collectors;
+
+import calculator.domain.parser.Parser;
 
 public class Expression {
 
@@ -15,7 +15,7 @@ public class Expression {
         this.tokens = tokens;
     }
 
-    public Operand calculate() {
+    public int calculate() {
         while (isCalculationPossible()) {
             final Operand leftOperand = (Operand)tokens.pollFirst();
             final Operator operator = (Operator)tokens.pollFirst();
@@ -25,27 +25,23 @@ public class Expression {
             tokens.offerFirst(result);
         }
 
-        return (Operand)tokens.peek();
+        final Operand result = (Operand)tokens.peek();
+
+        return result.number();
     }
 
     private boolean isCalculationPossible() {
         return tokens.size() > 1;
     }
 
-    public static Expression from(final String[] values) {
-        validateValuesIsNotNullOrEmpty(values);
-
-        final Deque<Token> tokens = Arrays.stream(values)
-                .map(Expression::toToken)
-                .collect(Collectors.toCollection(ArrayDeque::new));
-
-        return new Expression(tokens);
+    public static Expression of(final String text, final Parser parser) {
+        return new Expression(toTokens(parser.parse(text)));
     }
 
-    private static void validateValuesIsNotNullOrEmpty(final String[] values) {
-        if (values == null || values.length == 0) {
-            throw new IllegalArgumentException(EXPRESSION_CANNOT_BE_NULL_OR_EMPTY.message(values));
-        }
+    private static ArrayDeque<Token> toTokens(final String[] values) {
+        return Arrays.stream(values)
+                .map(Expression::toToken)
+                .collect(Collectors.toCollection(ArrayDeque::new));
     }
 
     private static Token toToken(final String value) {
