@@ -26,7 +26,7 @@ class LottoNumberTest {
     @DisplayName("LottoNumber는 1부터 45까지의 범위의 값만 가질수 있다")
     public void Lotto_Number_Should_Have_Values_1_To_45() {
         assertThat(values)
-            .extracting(LottoNumber::getLottoNumber)
+            .extracting(LottoNumber::getValue)
             .allSatisfy(lottoNumber -> assertThat(lottoNumber).isBetween(1, 45));
     }
 

@@ -56,16 +56,16 @@ public enum LottoNumber {
 
     private static final Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
 
-    private final int lottoNumber;
+    private final int value;
 
     static {
         for (LottoNumber lottoNumber : LottoNumber.values()) {
-            lottoNumberCache.put(lottoNumber.lottoNumber, lottoNumber);
+            lottoNumberCache.put(lottoNumber.value, lottoNumber);
         }
     }
 
     LottoNumber(int number) {
-        this.lottoNumber = number;
+        this.value = number;
     }
 
     public static LottoNumber fromInt(final int value) {
@@ -82,13 +82,13 @@ public enum LottoNumber {
         return allLottoNumbers.subList(0, 6);
     }
 
-    public int getLottoNumber() {
-        return lottoNumber;
+    public int getValue() {
+        return value;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(lottoNumber);
+        return String.valueOf(value);
     }
 }
 
