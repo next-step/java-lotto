@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,6 +9,7 @@ public class Lotto {
 
 	public Lotto(LottoNumberStrategy strategy) {
 		this.lottoNumbers = strategy.generateLottoNumber();
+		Collections.sort(this.lottoNumbers);
 	}
 
 	public List<Integer> getLottoNumbers() {
