@@ -1,51 +1,30 @@
-package lotto.domain;
+package lotto;
 
-import lotto.constant.Constant;
-import lotto.view.InputView;
-
-import java.util.HashMap;
 import java.util.List;
 
 public class LottoMatch {
-    private static final HashMap<Integer, Integer> matchResult = new HashMap<>(){{
-            put(Rank.FIFTH.getPrize(), 0);
-            put(Rank.FOURTH.getPrize(), 0);
-            put(Rank.THIRD.getPrize(), 0);
-            put(Rank.SECOND.getPrize(), 0);
-            put(Rank.FIRST.getPrize(), 0);
-    }};
+    public static Rank match(List<Integer> lotto, List<Integer> winNumbers, int bonusNumber) {
+        return Rank.valueOf(match(lotto, winNumbers), matchBonus(lotto, bonusNumber));
+    }
 
-    public static HashMap<Integer, Integer> matchWinNumber(Lottos lottos, List<Integer> winNumbers, Bonus bonus) throws IllegalArgumentException{
-        int matchCount;
+    private static boolean matchBonus(List<Integer> lotto, int bonusNumber) {
+        return lotto.contains(bonusNumber);
+    }
 
-        for (Lotto lotto : lottos.getLottos()) {
-            List<LottoNumber> lottoNumbers = lotto.getLotto();
-            matchCount = LottoMatchCount.matchCount(lottoNumbers, winNumbers);
-            putMatchResult(matchCount, isMatchBonus(lottoNumbers, bonus));
+    public static int match(List<Integer> lotto, List<Integer> winNumbers) {
+        int count = 0;
+
+        for (int winNumber : winNumbers) {
+            count += matchWinNumber(lotto, winNumber);
         }
 
-        return matchResult;
+        return count;
     }
 
-    private static void putMatchResult(int matchCount, boolean matchBonus) {
-        int prize = prizeFromRank(matchCount, matchBonus);
-
-        if (prize == 0) {
-            return;
+    private static int matchWinNumber(List<Integer> lotto, int winNumber) {
+        if (lotto.contains(winNumber)) {
+            return 1;
         }
-
-        matchResult.put(prize, matchResult.getOrDefault(prize, 0) + 1);
+        return 0;
     }
-
-    private static int prizeFromRank(int matchCount, boolean matchBonus) {
-        if (matchBonus) {
-            matchCount += 1;
-        }
-        return Rank.valueOf(matchCount, matchBonus).getPrize();
-    }
-
-    private static boolean isMatchBonus(List<LottoNumber> lottoNumbers, Bonus bonus) {
-        return lottoNumbers.contains(new LottoNumber(bonus.getBonus()));
-    }
-
 }
