@@ -9,10 +9,10 @@ public class InputView {
 
     public int inputMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
-    public String inputWinningNumber(){
+    public String inputWinningNumber() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         return scanner.nextLine();
     }
