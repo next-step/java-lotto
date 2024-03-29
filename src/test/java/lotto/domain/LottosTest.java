@@ -11,12 +11,12 @@ import java.util.Map;
 public class LottosTest {
     @DisplayName("우승 로또와 몇 개가 일치하는지 통계를 낸다.")
     @Test
-    void winningStatistic() {
+    void winningStatistic() throws Exception {
         List<Integer> winNumber = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6));
         Integer bonusNumber = 0;
 
         List<Integer> buyNumber1 = new ArrayList<>(List.of(1, 2, 3, 5, 6, 7));
-        List<Integer> buyNumber2 = new ArrayList<>(List.of(1, 2, 3, 7, 7, 7));
+        List<Integer> buyNumber2 = new ArrayList<>(List.of(1, 2, 3, 10, 11, 12));
 
         Lotto lotto1 = new Lotto(buyNumber1);
         Lotto lotto2 = new Lotto(buyNumber2);
