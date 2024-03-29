@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 public class LottoOutletTest {
 
     private static final int DUMMY_INT = -1;
-    private static final MatchNumber SECOUND_MATCH_NUMBER = new MatchNumber(5,true);
+    private static final MatchNumber SECOUND_MATCH_NUMBER = new MatchNumber(5, true);
 
     @ParameterizedTest(name = "{0} 가격으로 구매가능한 로또 장수는 {1}")
     @CsvSource(value = {"14000:14", "1000:1", "1500:1", "7500:7"}, delimiter = ':')
