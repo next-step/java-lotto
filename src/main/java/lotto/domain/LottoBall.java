@@ -1,21 +1,25 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 public final class LottoBall {
   public static final PositiveNumber LOWER_BOUND = PositiveNumber.of(1);
   public static final PositiveNumber UPPER_BOUND = PositiveNumber.of(45);
+  private static final List<LottoBall> CACHE = IntStream.range(LOWER_BOUND.value(), UPPER_BOUND.value() + 1)
+          .mapToObj(LottoBall::new)
+          .collect(toList());
+
   private final PositiveNumber number;
 
-  public static LottoBall of(PositiveNumber number) {
-    return new LottoBall(number);
-  }
-
   public static LottoBall of(int number) {
-    return new LottoBall(PositiveNumber.of(number));
+    return LottoBall.of(PositiveNumber.of(number));
   }
 
-  public LottoBall(final PositiveNumber number) {
+  public static LottoBall of(PositiveNumber number) {
     if (number.lessThan(LOWER_BOUND)) {
       throw new IllegalArgumentException(String.format("Wrong constructor argument!: %d", number.value()));
     }
@@ -23,7 +27,12 @@ public final class LottoBall {
     if (number.greaterThan(UPPER_BOUND)) {
       throw new IllegalArgumentException(String.format("Wrong constructor argument!: %s", number.value()));
     }
-    this.number = number;
+
+    return CACHE.get(number.value() - 1);
+  }
+
+  private LottoBall(int number) {
+    this.number = PositiveNumber.of(number);
   }
 
   public PositiveNumber number() {

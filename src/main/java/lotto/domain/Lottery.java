@@ -21,7 +21,7 @@ public class Lottery {
     return PositiveNumber.of(count);
   }
 
-  public Boolean bonusMatched(LottoBall bonusBall) {
-    return this.bonusBall.equals(bonusBall);
+  public Boolean bonusMatched(final LottoBalls lottoBalls) {
+    return lottoBalls.contains(this.bonusBall);
   }
 }

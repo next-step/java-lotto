@@ -23,6 +23,13 @@ public class Lottos implements Iterable<Lotto> {
             .collect(Collectors.toList()));
   }
 
+  public void addAll(final Lottos lottos) {
+    this.lottos.addAll(lottos.lottos);
+  }
+
+  public void addAll(final List<Lotto> lottos) {
+    this.lottos.addAll(lottos);
+  }
 
   @Override
   public Iterator<Lotto> iterator() {

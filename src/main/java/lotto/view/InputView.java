@@ -1,20 +1,14 @@
 package lotto.view;
 
-import lotto.domain.Lottery;
-import lotto.domain.LottoBall;
-import lotto.domain.LottoBalls;
+import lotto.domain.*;
 
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
   private static final Scanner scanner = new Scanner(System.in);
-
-  static public int amountTotal() {
-    System.out.println("구입금액을 입력해 주세요.");
-    return Integer.parseInt(new Scanner(System.in).nextLine());
-  }
 
   static public Lottery lottery() {
     System.out.println("지난 주 당첨 번호를 입력해주세요.");
@@ -28,5 +22,34 @@ public class InputView {
 
   private static  String[] parseLotteryBalls(String lotteryBalls) {
     return lotteryBalls.replace(" ", "").split(",");
+  }
+
+  public static void printOutInputMessage(final String message) {
+    System.out.println(message);
+  }
+
+  public static String inputLine() {
+    return scanner.nextLine();
+  }
+
+  public static String inputTotalAmount() {
+    printOutInputMessage("구입 금액을 입력해 주세요.");
+    return inputLine();
+  }
+
+  public static String inputCountManual() {
+    printOutInputMessage("수동으로 구매할 로또 수를 입력해 주세요.");
+    return inputLine();
+  }
+
+  public static String[] inputManualLottoNumbers(final PositiveNumber count) {
+    printOutInputMessage("수동으로 구매할 번호를 입력해 주세요.");
+
+    String[] lottos = new String[count.value()];
+    IntStream.range(0, count.value())
+            .forEach(i -> { lottos[i] = inputLine(); });
+
+    printOutInputMessage("수동입력 끝.");
+    return lottos;
   }
 }
