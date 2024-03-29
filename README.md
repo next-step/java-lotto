@@ -63,31 +63,36 @@
 
 ---
 ## Main
-### `autoLotto.java`
+### `lotto.java`
 - [x] InputView, OutputView 객체를 사용하여 입력값에 따른 로또 생성 및 출력을 담당
   - [x] 이때 모든 입력값에 대한 결과 타입은 `String`으로 반환하며, 이를 어떻게 변환하여 어떠한 로또로 생성할지는 각 객체에게 위임
  
+## Generator
+### `LottoGenerator.java`
+- [x] 주입된 로또 전략에 따라 로또를 생성
+  - [x] 주입된 로또 전략이 없을 경우 에러 반환
+
+### `LottoGeneratorStrategy.java`
+- [x] 로또 생성을 담당하는 인터페이스
+- [x] 일급 컬렉션 적용
+
+### `ManualLottoGeneratorStrategy.java`
+- [x] 수동로또 생성 클래스
+  - [x] `LottoGeneratorStrategy.java`를 상속받음
+
+### `RandomLottoGeneratorStrategy.java`
+- [x] 자동로또 생성 클래스
+  - [x] `LottoGeneratorStrategy.java`를 상속받음
+
 ## Model
 ### `LottoNumber.java`
 - [x] 로또의 번호 1개를 가진 클래스
   - [x] 해당 번호의 유효성 검사 방어 로직 적용
 
 ### `Lotto.java`
-- [x] 주입된 `Set<LottoNumber>`, 또는 `List<String>`을 따라 로또를 생성
-  - [x] 6개의 숫자로 1~45 범위에서 로또를 생성하는지 체크하는 방어 로직 적용
+- [x] 주입된 `Set<LottoNumber>`, `Random`=(랜덤 로또 생성에 사용), 또는 `List<String>`을 따라 로또를 생성
+  - [x] 중복없이 6개의 숫자로 1~45 범위에서 로또를 생성하는지 체크하는 방어 로직 적용
   - [x] `containsNumber` 메서드를 통해 파라미터로 주어진 번호가 자신의 로또 번호에 있는지 판단
-  
-### `LottoGenerator.java`
-- [x] 1~45번까지 저장된 디폴트 로또를 생성
-- [x] `autoLotto`에서 최초로 주입되어 결론적으로 `LottoMachine`에서 주입된 로또 생성 전략 패턴에 따라 로또의 번호를 변환하여 반환
-
-### `ManualLottoGeneratorStrategy.java`
-- [x] 수동로또 생성 클래스
-  - [x] `LottoGeneratorStrategy.java`를 상속받음 
-
-### `RandomLottoGeneratorStrategy.java`
-- [x] 자동로또 생성 클래스
-  - [x] `LottoGeneratorStrategy.java`를 상속받음
 
 ### `LottoMachine.java`
 - [x] 구매한 수동 로또의 번호와 구입 금액만큼 로또를 생성
@@ -109,18 +114,21 @@
 - [x] 총 로또 구입 개수(=`numberOfTotalLottos`)를 파라미터로 받아 바로 위에서 구한 전체 상금과 나누어 최종적으로 얻게된 우승 상금을 반환하는 `calculateProfitRation()`도 존재
   - [x] 수익률은 `BigDecimal`로 반환
 
+### `PurchaseAmount.java`
+- [x] 로또의 구매 금액을 관리하는 클래스
+  - [x] 전체 구매 로또 개수를 반환
+  - [x] 구매 금액의 유효성 로직 적용
+    - [x] 1000원보다 적은 금액으로 로또 구매시, 예외 출력
+    - [x] 수동 로또의 개수가 전체 구매 로또 개수보다 많을 경우, 예외 출력
+
 ### `PrizeEnum.java `
 - [x] 우승 번호와 매칭되는 로또 번호의 개수에 따른 `matchedCount`(= 매칭되는 번호 개수), `prize`(= 그에 따른 상금), `isBonusMatched` (= 보너스 번호 매칭 여부)의 정보들을 저장한 enum 클래스
   - [x] 매칭되는 숫자(= `matchedCount`)와 보너스 볼 존재 여부(= `isBonusMatched`)에 따라 `PrizeEnum`을 생성하는 `getPrizeFrom` 생성자 메서드 작성
-- [x] `prizeMap`, `matchedCountToBonusMap`을 `static final Map`으로 생성하여 값을 찾을때마다 `PrizeEnum` 객체를 `Arrays.stream`하지 않도록 개선 
-
-### `LottoPurchaseCount.java`
-- [x] 로또의 총 구매 개수, 수동 로또 개수, 자동 로또 개수를 관리하는 클래스
-  - [x] 로또의 총 구매 개수 보다 수동 로또의 개수가 많을 경우 에러 반환 
+- [x] `prizeMap`, `matchedCountToBonusMap`을 `static final Map`으로 생성하여 값을 찾을때마다 `PrizeEnum` 객체를 `Arrays.stream`하지 않도록 개선
 
 ## Exception
 ### `PurchaseException.java`
-- [x] 구매 실패시 출력되는 예외 (`LottoMachine`에서 사용)
+- [x] 구매 실패시 출력되는 예외
 
 ## View
 ### `InputView.java`
@@ -145,11 +153,12 @@
 ### 테스트 코드
 - [x] `LottoGeneratorTest.java`
 - [x] `LottoMachineTest.java`
+- [x] `LottoNumberTest.java`
 - [x] `LottoProfitTest.java`
-- [x] `LottoPurchaseCountTest.java`
 - [x] `LottoTest.java`
-- [x] `WinningLottoTest.java`
 - [x] `PrizeResultEnumTest.java`
+- [x] `PurchaseAmountTest.java`
+- [x] `WinningLottoTest.java`
 
 ### 컨벤션
 - [x] Java : Intellij idea Code Style java 적용
