@@ -20,9 +20,9 @@ public class Numbers {
         return new Numbers(numberList);
     }
 
-    public boolean contains(int value) {
+    public boolean contains(Number value) {
         return numbers.stream()
-                .anyMatch(number -> number.isValue(value));
+                .anyMatch(number -> number.equals(value));
     }
 
     public int size() {
@@ -33,6 +33,10 @@ public class Numbers {
         return IntStream.range(0, size())
                 .mapToLong(i -> numbers.get(i).getValue())
                 .toArray();
+    }
+
+    public List<Number> getNumberList() {
+        return this.numbers;
     }
 
     @Override

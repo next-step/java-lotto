@@ -35,21 +35,17 @@ public class LottoOutlet {
                 .collect(Collectors.toList());
     }
 
-    public static int getWinning(int matchCount) {
-        return Winnings.getWinningsAmount(matchCount);
-    }
-
-    public static int getWinnings(List<Integer> matchCounts) {
-        return matchCounts.stream()
-                .mapToInt(Winnings::getWinningsAmount)
+    public static int getWinnings(List<MatchNumber> matchNumbers) {
+        return matchNumbers.stream()
+                .mapToInt(matchNumber -> Rank.getWinningsAmount(matchNumber))
                 .sum();
     }
 
-    public static int getWinnings(List<Lotto> Lottos, List<Integer> winningNumbers) {
-        return Lottos.stream()
-                .mapToInt(lotto -> lotto.matchNumbers(winningNumbers))
-                .boxed()
-                .mapToInt(Winnings::getWinningsAmount)
-                .sum();
+    public static int getWinning(MatchNumber matchNumber) {
+        return Rank.getWinningsAmount(matchNumber);
+    }
+
+    public static int getRank(MatchNumber matchNumber) {
+        return Rank.getRank(matchNumber);
     }
 }

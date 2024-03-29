@@ -2,6 +2,7 @@ package lotto.service;
 
 import lotto.model.Lotto;
 import lotto.model.LottoOutlet;
+import lotto.model.Numbers;
 import lotto.model.ResultLotto;
 
 import java.util.List;
@@ -21,8 +22,8 @@ public class LottoService {
         return resultLotto;
     }
 
-    public ResultLotto checkLottoResult(List<Integer> winningNumbers) {
-        resultLotto.recordWinningNumbers(winningNumbers);
+    public ResultLotto checkLottoResult(List<Integer> winningNumbers, int bonusNumber) {
+        resultLotto.recordWinningNumbers(Numbers.valueOf(winningNumbers), bonusNumber);
 
         return resultLotto;
     }

@@ -9,11 +9,6 @@ public class Number {
         this.number = number;
     }
 
-
-    public boolean isValue(int value) {
-        return number == value;
-    }
-
     public int getValue() {
         return number;
     }

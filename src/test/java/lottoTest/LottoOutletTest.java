@@ -2,6 +2,7 @@ package lottoTest;
 
 import lotto.model.Lotto;
 import lotto.model.LottoOutlet;
+import lotto.model.MatchNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,8 +18,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoOutletTest {
+
+    private static final int DUMMY_INT = -1;
+    private static final MatchNumber SECOUND_MATCH_NUMBER = new MatchNumber(5,true);
+
     @ParameterizedTest(name = "{0} 가격으로 구매가능한 로또 장수는 {1}")
-    @CsvSource(value = {"14000:14", "1000:1", "0:0", "750:0", "1500:1"}, delimiter = ':')
+    @CsvSource(value = {"14000:14", "1000:1", "1500:1", "7500:7"}, delimiter = ':')
     void moneyToLottoCount(int money, int expectedLottoCount) {
         Assertions.assertThat(LottoOutlet.lottoCount(money)).isEqualTo(expectedLottoCount);
     }
@@ -35,16 +40,33 @@ public class LottoOutletTest {
         Assertions.assertThat(LottoOutlet.generateLottos(count).size()).isEqualTo(count);
     }
 
-    @ParameterizedTest(name = "{0}회 일치하는 당청금은 {1}원 이다.")
+    @ParameterizedTest(name = "보너스 숫자 외 {0}회 일치하는 당청금은 {1}원 이다.")
     @CsvSource(value = {"1:0", "2:0", "3:5000", "4:50000", "5:1500000", "6:2000000000"}, delimiter = ':')
     void getWinning(int matchCount, int expectedWinning) {
-        Assertions.assertThat(LottoOutlet.getWinning(matchCount)).isEqualTo(expectedWinning);
+        MatchNumber matchNumber = new MatchNumber(matchCount, false);
+        Assertions.assertThat(LottoOutlet.getWinning(matchNumber)).isEqualTo(expectedWinning);
     }
 
-    @ParameterizedTest(name = "{0}번 일치하는 로또들의 상금은 총 {1} 이다.")
+    @ParameterizedTest(name = "보너스 숫자 외 {0}번 일치하는 로또들의 상금은 총 {1} 이다.")
     @MethodSource("generateMatchCountsWinningAmount")
     void getWinnings(List<Integer> matchCounts, int winningAmount) {
-        Assertions.assertThat(LottoOutlet.getWinnings(matchCounts)).isEqualTo(winningAmount);
+        List<MatchNumber> matchNumbers = matchCounts.stream()
+                .map(matchCount -> new MatchNumber(matchCount, false))
+                .collect(Collectors.toList());
+
+        Assertions.assertThat(LottoOutlet.getWinnings(matchNumbers)).isEqualTo(winningAmount);
+    }
+
+    @Test
+    @DisplayName("2등은 5개 번호가 일치하고 1개의 보너스 번호가 일치해야 한다.")
+    void rankSecoundTest() {
+        Assertions.assertThat(LottoOutlet.getRank(SECOUND_MATCH_NUMBER)).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("2등의 상금은 30_000_000 원이다")
+    void rankSecoundWinningsTest() {
+        Assertions.assertThat(LottoOutlet.getWinning(SECOUND_MATCH_NUMBER)).isEqualTo(30_000_000);
     }
 
     private static Stream<Arguments> generateMatchCountsWinningAmount() {
