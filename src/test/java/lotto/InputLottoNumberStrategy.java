@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.strategy.LottoNumberStrategy;
+
 import java.util.List;
 
 public class InputLottoNumberStrategy implements LottoNumberStrategy {

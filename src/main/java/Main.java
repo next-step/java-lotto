@@ -1,6 +1,6 @@
-import lotto.LottoMarket;
-import lotto.LottoResult;
-import lotto.WinningNumbers;
+import lotto.domain.LottoMarket;
+import lotto.domain.LottoResult;
+import lotto.domain.WinningNumbers;
 import lotto.io.InputView;
 import lotto.io.PrintView;
 

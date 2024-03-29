@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain.strategy;
 
 import java.util.Collections;
 import java.util.List;

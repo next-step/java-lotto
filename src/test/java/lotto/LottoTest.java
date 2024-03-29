@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.strategy.AutoLottoNumberStrategy;
+import lotto.domain.Lotto;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

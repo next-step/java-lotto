@@ -1,6 +1,7 @@
-package lotto;
+package lotto.domain;
 
-import java.util.Collections;
+import lotto.domain.strategy.LottoNumberStrategy;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,7 +10,6 @@ public class Lotto {
 
 	public Lotto(LottoNumberStrategy strategy) {
 		this.lottoNumbers = strategy.generateLottoNumber();
-		Collections.sort(this.lottoNumbers);
 	}
 
 	public List<Integer> getLottoNumbers() {
@@ -22,6 +22,7 @@ public class Lotto {
 
 	public String getLottoNumbersString() {
 		return lottoNumbers.stream()
+				.sorted()
 				.map(String::valueOf)
 				.collect(Collectors.joining(", ", "[", "]"));
 	}

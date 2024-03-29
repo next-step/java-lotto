@@ -1,8 +1,8 @@
 package lotto.io;
 
-import lotto.Lotto;
-import lotto.LottoResult;
-import lotto.Prize;
+import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
+import lotto.domain.Prize;
 
 import java.util.List;
 import java.util.stream.Collectors;
