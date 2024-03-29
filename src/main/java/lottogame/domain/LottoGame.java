@@ -25,8 +25,8 @@ public class LottoGame {
         return LottoFactory.createLottoses(Number.from(amount.divide(price).convertToInt()));
     }
 
-    public Lottos createLotto(List<Integer> numbers) {
-        return LottoFactory.createLotto(numbers);
+    public WinningLottos createWinningLotto(List<Integer> numbers, Number bonusNumber) {
+        return LottoFactory.createWinningLotto(numbers, bonusNumber.intValue());
     }
 
     private Money calculatePurchaseAmount(List<Lottos> lottos) {
