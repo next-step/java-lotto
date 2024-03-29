@@ -27,11 +27,11 @@ class LottosTest {
                 Arguments.arguments(new Lottos(List.of(1, 4, 5, 6, 7, 8)), new Lottos(List.of(1, 4, 5, 6, 7, 8)),
                         Rank.FIRST),
                 Arguments.arguments(new Lottos(List.of(1, 4, 5, 6, 7, 8)), new Lottos(List.of(1, 4, 5, 6, 7, 14)),
-                        Rank.SECOND),
-                Arguments.arguments(new Lottos(List.of(1, 4, 5, 6, 7, 8)), new Lottos(List.of(1, 4, 5, 6, 14, 17)),
                         Rank.THIRD),
+                Arguments.arguments(new Lottos(List.of(1, 4, 5, 6, 7, 8)), new Lottos(List.of(1, 4, 5, 6, 14, 17)),
+                        Rank.FOURTH),
                 Arguments.arguments(new Lottos(List.of(1, 4, 5, 6, 7, 8)), new Lottos(List.of(1, 4, 5, 14, 17, 21)),
-                        Rank.FOURTH)
+                        Rank.FIFTH)
         );
     }
 

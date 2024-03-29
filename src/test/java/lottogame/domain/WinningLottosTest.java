@@ -21,38 +21,36 @@ public class WinningLottosTest {
 
     @ParameterizedTest
     @MethodSource("lottoAndRank")
-    void 로또_당첨(WinningLottos winnerLotto, Lottos lottos, Rank rank) {
+    void 로또_당첨(Lottos lottos, Rank rank) {
+        WinningLottos winnerLotto = new WinningLottos(List.of(1, 4, 5, 6, 7, 8), 9);
+        System.out.println("winnerLotto.getRank(lottos) = " + winnerLotto.getRank(lottos));
         assertThat(winnerLotto.getRank(lottos)).isEqualTo(rank);
     }
 
     @ParameterizedTest
     @MethodSource("lottoAndPrize")
-    void 로또_당첨_금액(WinningLottos winnerLotto, Lottos lottos, Number prize) {
+    void 로또_당첨_금액(Lottos lottos, Number prize) {
+        WinningLottos winnerLotto = new WinningLottos(List.of(1, 4, 5, 6, 7, 8), 9);
         assertThat(winnerLotto.getPrize(lottos)).isEqualTo(prize);
     }
 
     static Stream<Arguments> lottoAndRank() {
         return Stream.of(
-                Arguments.arguments(new WinningLottos(List.of(1, 4, 5, 6, 7, 8), 9), new Lottos(List.of(1, 4, 5, 6, 7, 8)),
-                        Rank.FIRST),
-                Arguments.arguments(new WinningLottos(List.of(1, 4, 5, 6, 7, 8), 9), new Lottos(List.of(1, 4, 5, 6, 7, 9)),
-                        Rank.SECOND),
-                Arguments.arguments(new WinningLottos(List.of(1, 4, 5, 6, 7, 8), 9), new Lottos(List.of(1, 4, 5, 6, 7, 17)),
-                        Rank.THIRD),
-                Arguments.arguments(new WinningLottos(List.of(1, 4, 5, 6, 7, 8), 9), new Lottos(List.of(1, 4, 5, 6, 17, 21)),
-                        Rank.FOURTH),
-                Arguments.arguments(new WinningLottos(List.of(1, 4, 5, 6, 7, 8), 9), new Lottos(List.of(1, 4, 5, 14, 17, 21)),
-                        Rank.FIFTH)
+                Arguments.arguments(new Lottos(List.of(1, 4, 5, 6, 7, 8)), Rank.FIRST),
+                Arguments.arguments(new Lottos(List.of(1, 4, 5, 6, 7, 9)), Rank.SECOND),
+                Arguments.arguments(new Lottos(List.of(1, 4, 5, 6, 7, 17)), Rank.THIRD),
+                Arguments.arguments(new Lottos(List.of(1, 4, 5, 6, 17, 21)), Rank.FOURTH),
+                Arguments.arguments(new Lottos(List.of(1, 4, 5, 14, 17, 21)), Rank.FIFTH)
         );
     }
 
     static Stream<Arguments> lottoAndPrize() {
         return Stream.of(
-                Arguments.arguments(new WinningLottos(List.of(1, 4, 5, 6, 7, 8), 9), new Lottos(List.of(1, 4, 5, 6, 7, 8)), Number.from(2_000_000_000)),
-                Arguments.arguments(new WinningLottos(List.of(1, 4, 5, 6, 7, 8), 9), new Lottos(List.of(1, 4, 5, 6, 7, 9)), Number.from(30_000_000)),
-                Arguments.arguments(new WinningLottos(List.of(1, 4, 5, 6, 7, 8), 9), new Lottos(List.of(1, 4, 5, 6, 7, 14)), Number.from(1_500_000)),
-                Arguments.arguments(new WinningLottos(List.of(1, 4, 5, 6, 7, 8), 9), new Lottos(List.of(1, 4, 5, 6, 14, 17)), Number.from(50_000)),
-                Arguments.arguments(new WinningLottos(List.of(1, 4, 5, 6, 7, 8), 9), new Lottos(List.of(1, 4, 5, 14, 17, 21)), Number.from(5_000))
+                Arguments.arguments(new Lottos(List.of(1, 4, 5, 6, 7, 8)), Number.from(2_000_000_000)),
+                Arguments.arguments(new Lottos(List.of(1, 4, 5, 6, 7, 9)), Number.from(30_000_000)),
+                Arguments.arguments(new Lottos(List.of(1, 4, 5, 6, 7, 14)), Number.from(1_500_000)),
+                Arguments.arguments(new Lottos(List.of(1, 4, 5, 6, 14, 17)), Number.from(50_000)),
+                Arguments.arguments(new Lottos(List.of(1, 4, 5, 14, 17, 21)), Number.from(5_000))
         );
     }
 
