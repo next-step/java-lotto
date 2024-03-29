@@ -21,6 +21,14 @@ public class InputView {
         return convertStringToIntList(text);
     }
 
+
+    public static int scanBonusNumber(){
+        System.out.println("보너스 볼을 입력해주세요.");
+        int bonusNumber = scanner.nextInt();
+        scanner.nextLine();
+        return bonusNumber;
+    }
+
     private static List<Integer> convertStringToIntList(String input) {
         return Arrays.stream(input.split(","))
                 .map(String::trim)

@@ -15,6 +15,6 @@ class LottoTest {
         List<Integer> numbers = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6));
         List<Integer> other = new ArrayList<>(List.of(1, 2, 3, 7, 7, 7));
         Lotto lotto = new Lotto(numbers);
-        Assertions.assertThat(lotto.countHits(other)).isEqualTo(3);
+        Assertions.assertThat(lotto.findWinningType(other, 0)).isEqualTo(WinningType.HIT_COUNT_3);
     }
 }

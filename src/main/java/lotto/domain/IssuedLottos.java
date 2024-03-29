@@ -13,11 +13,9 @@ public class IssuedLottos {
         this.lottos = lottos;
     }
 
-    public Map<WinningType, Long> winningStatistic(List<Integer> winningNumbers) {
+    public Map<WinningType, Long> winningStatistic(List<Integer> winningNumbers, int bonusNumber) {
         return this.lottos.stream()
-                .map(lotto -> lotto.countHits(winningNumbers))
-                .filter(count -> count > WINNING_THRESHOLD)
-                .map(count -> WinningType.findByHitCount(count))
+                .map(lotto -> lotto.findWinningType(winningNumbers, bonusNumber))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 }

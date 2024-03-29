@@ -18,10 +18,13 @@ public class OutputView {
         StringBuilder result = new StringBuilder();
         for (Map.Entry<WinningType, Long> entry : winningStatic.entrySet()) {
             Long hitCount = entry.getKey().getHitCount();
+            boolean matchBonus = entry.getKey().isMatchBonus();
             Long winnerNumber = entry.getValue();
-            Long revenue = WinningType.findByHitCount(hitCount).getRevenue();
-            result.append(hitCount + "개 일치 (")
-                    .append(revenue + "원) - ")
+
+            Long revenue = WinningType.valueOf(hitCount, matchBonus).getRevenue();
+            result.append(hitCount + "개 일치 ")
+                    .append(entry.getKey().is2ndBonusWinner() ? "보너스볼 일치" : "")
+                    .append("(" + revenue + "원) - ")
                     .append(winnerNumber + "개\n");
         }
 
