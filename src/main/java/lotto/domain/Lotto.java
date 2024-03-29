@@ -1,49 +1,71 @@
-package lotto;
+package lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import lotto.constant.Constants;
+
+import java.util.*;
 
 public class Lotto {
-    private static final int LOTTO_SIZE = 6;
-    private static final int MIN_LOTTO = 1;
-    private static final int MAX_LOTTO = 45;
-    private List<Integer> lotto;
+    private final List<LottoNumber> lotto;
 
-    public Lotto(List<Integer> lotto) {
-        checkLottoSize(lotto);
-        checkDuplicate(lotto);
-        checkLottoNumberRange(lotto);
+    private static List<LottoNumber> toLottoNumber(List<Integer> lottoNumbers) {
+        List<LottoNumber> lotto = new ArrayList<>();
 
-        this.lotto = lotto;
-    }
-
-    private void checkLottoNumberRange(List<Integer> lotto) {
-        for (int number : lotto) isValidRange(number);
-    }
-
-    private void isValidRange(int number) {
-        if (number < MIN_LOTTO || number > MAX_LOTTO) {
-            throw new IllegalArgumentException("로또는 1~45 사이의 값이어야 합니다.");
+        for (int number : lottoNumbers) {
+            lotto.add(new LottoNumber(number));
         }
+
+        return lotto;
     }
 
-    private void checkDuplicate(List<Integer> lotto) {
+    public Lotto(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = toLottoNumber(numbers);
+
+        checkLottoSize(lottoNumbers);
+        checkDuplicate(lottoNumbers);
+
+        this.lotto = lottoNumbers;
+    }
+
+    private void checkDuplicate(List<LottoNumber> lotto) {
         if (new HashSet<>(lotto).size() != lotto.size()) {
             throw new IllegalArgumentException("로또에 중복 숫자가 있습니다.");
         }
     }
 
-    private void checkLottoSize(List<Integer> lotto) {
-        if (lotto.size() != LOTTO_SIZE) {
+    private void checkLottoSize(List<LottoNumber> lotto) {
+        if (lotto.size() != Constants.LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 개수는 6개여야 합니다.");
         }
     }
 
+    private List<LottoNumber> getLotto() {
+        return this.lotto;
+    }
+
+    public int match(Lotto userLotto) {
+        int count = 0;
+
+        for (LottoNumber number : userLotto.getLotto()) {
+            count += isContainsUserLottoNumber(lotto, number);
+        }
+
+        return count;
+    }
+
+    private int isContainsUserLottoNumber(List<LottoNumber> lotto, LottoNumber number) {
+        if (lotto.contains(number)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    public boolean isContainsBonus(LottoNumber bonusNumber) {
+        return lotto.contains(bonusNumber);
+    }
+
     @Override
     public String toString() {
-        return "[" + String.join(",", lotto.toArray()) + "]";
+        return lotto.toString();
     }
 
     @Override
@@ -58,4 +80,5 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lotto);
     }
+
 }
