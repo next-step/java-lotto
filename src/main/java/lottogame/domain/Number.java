@@ -38,7 +38,7 @@ public final class Number {
         return new Number(value * count.value);
     }
 
-    public int getValue() {
+    public int intValue() {
         return value;
     }
 

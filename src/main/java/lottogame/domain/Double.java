@@ -12,11 +12,11 @@ public final class Double {
     }
 
     public Double multiply(Number from) {
-        return from(value * from.getValue());
+        return from(value * from.intValue());
     }
 
     public Double add(Number from) {
-        return from(value + from.getValue());
+        return from(value + from.intValue());
     }
 
     public Double divide(Double from) {
