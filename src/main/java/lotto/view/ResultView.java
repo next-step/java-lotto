@@ -1,6 +1,6 @@
-package autoLotto.view;
+package lotto.view;
 
-import autoLotto.model.*;
+import lotto.model.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,13 +18,13 @@ public class ResultView {
     private static final String IS_BONUS_MATCHED = ", 보너스 볼 일치";
     private static final String NO_MATCHED_PRIZE = "당첨된 금액이 없음";
 
-    public void outputPurchasedLottos(LottoPurchaseCount lottoPurchaseCount, LottoMachine lottoMachine) {
-        outputPurchasedNumberOfLotto(lottoPurchaseCount.getNumberOfManualLottos(), lottoPurchaseCount.getNumberOfAutoLottos());
+    public void outputPurchasedLottos(PurchaseAmount purchaseAmount, int numberOfManualLottos, LottoMachine lottoMachine) {
+        outputPurchasedNumberOfLotto(purchaseAmount.getNumberOfTotalLottos(), numberOfManualLottos);
         outputPurchasedLottoDetail(lottoMachine);
     }
 
-    private void outputPurchasedNumberOfLotto(int numberOfManualLottos, int numberOfAutoLottos) {
-        outputString(String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.", numberOfManualLottos, numberOfAutoLottos));
+    private void outputPurchasedNumberOfLotto(int numberOfTotalLottos, int numberOfAutoLottos) {
+        outputString(String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.", numberOfTotalLottos - numberOfAutoLottos, numberOfAutoLottos));
     }
 
     private void outputPurchasedLottoDetail(LottoMachine lottoMachine) {

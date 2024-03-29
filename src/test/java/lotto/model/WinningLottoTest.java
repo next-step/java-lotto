@@ -1,4 +1,4 @@
-package autoLotto.model;
+package lotto.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,19 +8,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static lotto.model.Lotto.INVALID_LOTTO_NUMBERS;
+import static lotto.model.LottoNumber.INVALID_LOTTO_NUMBER;
+import static lotto.model.WinningLotto.BONUS_NUMBER_DENIED;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningLottoTest {
-    private static final String INVALID_LOTTO_NUMBERS = "로또 번호의 개수는 6개이며, 각 번호는 1 이상 45 이하의 값만 가능합니다.";
-    private static final String INVALID_LOTTO_NUMBER = "로또 번호는 1 ~ 45 이하의 숫자 1개의 값만 사용이 가능합니다.";
-    private static final String BONUS_NUMBER_DENIED = "당첨 번호와 중복 없이 1 ~ 45 사이의 숫자 1개만 입력이 가능합니다.";
-
     private static final List<String> VALID_NUMBERS_FIRST = List.of("1","2","3","4","5","6");
     private static final List<String> VALID_NUMBERS_SECOND_WITH_BONUS_NUMBER = List.of("11","12","13","14","16","44");
     private static final List<String> VALID_NUMBERS_FOURTH_PRIZE_WITH_BONUS_NUMBER = List.of("11","12","13","14","44","45");
     private static final List<String> OUT_OF_RANGE_NUMBERS = List.of("1","2","3","4","5","6","7");
-    private static final List<String> INVALID_NUMBERS = List.of("-1","-2","-3","-4","15","63","127");
+    private static final List<String> INVALID_NUMBERS = List.of("-1","-2","-3","-4","15","63");
 
     @Test
     @DisplayName("6개 모두 맞춘 로또 1개를 확인 성공")

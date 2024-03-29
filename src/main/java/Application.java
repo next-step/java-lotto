@@ -1,4 +1,4 @@
-import autoLotto.LottoGame;
+import lotto.LottoGame;
 
 public class Application {
 

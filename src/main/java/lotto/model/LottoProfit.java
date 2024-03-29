@@ -1,4 +1,4 @@
-package autoLotto.model;
+package lotto.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -24,17 +24,12 @@ public class LottoProfit {
         return totalWinAmount;
     }
 
-    public BigDecimal getProfitRatio(int numberOfTotalLottos) {
-        if (numberOfTotalLottos == ZERO_PURCHASE_AMOUNT) {
+    public BigDecimal getProfitRatio(PurchaseAmount purchaseAmount) {
+        if (purchaseAmount.getPurchaseAmount() == ZERO_PURCHASE_AMOUNT) {
             return BigDecimal.ZERO;
         }
 
-        int purchaseAmount = getPurchaseAmount(numberOfTotalLottos);
-        return calculateProfitRatio(BigDecimal.valueOf(purchaseAmount));
-    }
-
-    private int getPurchaseAmount(int numberOfTotalLottos) {
-        return numberOfTotalLottos * KOREAN_DOLLAR_UNIT;
+        return calculateProfitRatio(BigDecimal.valueOf(purchaseAmount.getPurchaseAmount()));
     }
 
     private BigDecimal calculateProfitRatio(BigDecimal purchaseAmount) {
