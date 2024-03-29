@@ -10,6 +10,10 @@ public class LottoFactory {
 
     private static final List<Integer> numbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
 
+    private LottoFactory() {
+
+    }
+
     public static List<Lottos> createLottoses(Money purchaseAmount, Money price) {
         Number count = Number.from(purchaseAmount.divide(price).convertToInt());
         List<Lottos> lottoses = new ArrayList<>();
