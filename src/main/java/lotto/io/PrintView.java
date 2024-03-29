@@ -1,0 +1,34 @@
+package lotto.io;
+
+import lotto.Lotto;
+import lotto.LottoResult;
+import lotto.Prize;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class PrintView {
+	public static void printNumberOfLotto(int number) {
+		System.out.println(number + "개를 구매했습니다.");
+	}
+
+	public static void printLottos(List<Lotto> lottos) {
+		System.out.println(
+				lottos.stream()
+				.map(Lotto::getLottoNumbersString)
+				.collect(Collectors.joining("\n"))
+		);
+	}
+
+	public static void printLottoResult(LottoResult lottoResult) {
+		System.out.println("당첨 통계");
+		System.out.println("---------");
+
+		for(Prize prize : Prize.values()) {
+			System.out.println(prize.getCount() + "개 일치 (" + prize.getPrice() + "원)- "
+					+ lottoResult.getNumberOfMatchedLotto(prize.getCount()) + "개");
+		}
+
+		System.out.println("총 수익률은 " + lottoResult.getRate() + "입니다.");
+	}
+}
