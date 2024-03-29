@@ -33,6 +33,10 @@ public class Lottos {
     }
 
 
+    public void merge(List<Lotto> lottos) {
+        this.lottos.addAll(lottos);
+    }
+
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }

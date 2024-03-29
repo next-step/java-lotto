@@ -3,7 +3,6 @@ package ui;
 import lotto.*;
 
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -13,11 +12,17 @@ public class LottoProgram {
     public static void main(String[] args) {
 
         Money money = createMoney();
-        Lottos lottos = buyLottos(money);
+
+        int manualLottoCount = inputManualLottoCount();
+        Lottos lottos = buyLottos(manualLottoCount, money);
+
+        VIEWER.printBoughtLottoCount(manualLottoCount, lottos.count());
+        VIEWER.printLottoNumbers(lottos);
+
         LottoNumbers winNums = createWinLottoNumbers();
         BonusNumber bonusNumber = createBonusNumber();
-
         LottoSummary summary = new LottoResult(lottos.getRanks(winNums, bonusNumber), money).toLottoSummary();
+
         VIEWER.printLottoSummary(summary);
     }
 
@@ -36,21 +41,38 @@ public class LottoProgram {
         return new LottoNumbers(LottoInputUtils.toNumberList(InputScanner.inputToString()));
     }
 
-    private static Lottos buyLottos(Money money) {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        int manualLottoCount = InputScanner.inputToInt();
+    private static Lottos buyLottos(int manualLottoCount, Money money) {
 
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<LottoNumberStrategy> manulLottos = IntStream.range(0, manualLottoCount)
-                .mapToObj(it -> new ManualLottoNumberStrategy(LottoInputUtils.toNumberList(InputScanner.inputToString())))
-                .collect(Collectors.toList());
+        Money manualLottoMoney = LottoSeller.price(manualLottoCount);
+        Lottos manual = buyLotto(manualLottoMoney, manualLottoCount, createManualLottoList(manualLottoCount));
 
-        Lottos lottos = LottoSeller.sell(new BuyLotto(money, manulLottos));
-        int total = lottos.count();
-        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottoCount, (total = manualLottoCount)));
-        VIEWER.printLottoNumbers(lottos);
+        int autoLottoCount = LottoSeller.availableLottoCount(money) - manualLottoCount;
+        Lottos auto = buyLotto(money.subtract(manualLottoMoney), autoLottoCount);
 
-        return lottos;
+        auto.merge(manual.getLottos());
+        return auto;
     }
+
+    private static Lottos buyLotto(Money money, int autoLottoCount) {
+        return LottoSeller.sell(BuyAutoLotto.create(money, autoLottoCount));
+    }
+
+    private static Lottos buyLotto(Money manualLottoMoney, int manualLottoCount, List<List<Integer>> manualLottoList) {
+        return LottoSeller.sell(BuyManualLotto.create(manualLottoMoney, manualLottoCount, manualLottoList));
+    }
+
+
+    private static List<List<Integer>> createManualLottoList(int manualLottoCount) {
+        return IntStream.range(0, manualLottoCount)
+                .mapToObj(it -> LottoInputUtils.toNumberList(InputScanner.inputToString()))
+                .collect(Collectors.toList());
+    }
+
+    private static int inputManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return InputScanner.inputToInt();
+    }
+
+
 
 }

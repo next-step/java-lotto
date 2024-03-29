@@ -2,24 +2,26 @@ package lotto;
 
 import java.util.List;
 
-public class BuyLotto {
+public abstract class BuyLotto {
     private Money money;
-    private List<LottoNumberStrategy> manualLottos;
+    private int count;
+    private List<LottoNumberStrategy> strategies;
 
-    public BuyLotto(Money money, List<LottoNumberStrategy> manualLottos) {
+    public BuyLotto(Money money, int count, List<LottoNumberStrategy> strategies) {
         this.money = money;
-        this.manualLottos = manualLottos;
+        this.count = count;
+        this.strategies = strategies;
     }
 
-    public List<LottoNumberStrategy> getManualLottos() {
-        return manualLottos;
-    }
-
-    public int manualLottoCount() {
-        return manualLottos.size();
+    public List<LottoNumberStrategy> getStrategies() {
+        return strategies;
     }
 
     public Money getMoney() {
         return money;
+    }
+
+    public int getCount() {
+        return count;
     }
 }
