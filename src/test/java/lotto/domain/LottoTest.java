@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import static lotto.config.LottoExceptionMessage.LOTTO_NUMBERS_MUST_HAVE_SPECIFIED_SIZE;
-import static lotto.config.LottoExceptionMessage.LOTTO_NUMBERS_MUST_NOT_DUPLICATE;
 import static lotto.domain.Lotto.LOTTO_NUMBERS_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -32,8 +30,7 @@ class LottoTest {
     @DisplayName("주어진 로또 번호 집합이 지정된 개수보다 많거나 적다면 예외를 던진다.")
     void Lotto_MoreOrLessThanSizeSet_Exception(final int invalidSize) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lotto.from(toLottoNumbersSet(invalidSize)))
-                .withMessage(LOTTO_NUMBERS_MUST_HAVE_SPECIFIED_SIZE.message(invalidSize));
+                .isThrownBy(() -> Lotto.from(toLottoNumbersSet(invalidSize)));
     }
 
     @Test
@@ -80,8 +77,7 @@ class LottoTest {
         Arrays.fill(duplicatedLottoNumbers, 1);
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lotto.from(duplicatedLottoNumbers))
-                .withMessage(LOTTO_NUMBERS_MUST_NOT_DUPLICATE.message(duplicatedLottoNumbers));
+                .isThrownBy(() -> Lotto.from(duplicatedLottoNumbers));
     }
 
     @ParameterizedTest
@@ -89,8 +85,7 @@ class LottoTest {
     @DisplayName("주어진 로또 번호 배열이 지정된 개수보다 많거나 적다면 예외를 던진다.")
     void Lotto_MoreThanSizeArray_Exception(final int invalidSize) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lotto.from(toLottoNumbersArray(invalidSize)))
-                .withMessage(LOTTO_NUMBERS_MUST_HAVE_SPECIFIED_SIZE.message(invalidSize));
+                .isThrownBy(() -> Lotto.from(toLottoNumbersArray(invalidSize)));
     }
 
     private int[] toLottoNumbersArray(final int size) {

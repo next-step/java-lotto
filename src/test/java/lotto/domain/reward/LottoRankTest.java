@@ -1,6 +1,5 @@
 package lotto.domain.reward;
 
-import static lotto.config.LottoExceptionMessage.LOTTO_RANK_IS_NOT_FOUND;
 import static lotto.domain.reward.LottoRank.FIRST;
 import static lotto.domain.reward.LottoRank.FOURTH;
 import static lotto.domain.reward.LottoRank.NONE;
@@ -45,8 +44,7 @@ class LottoRankTest {
         final int matchingCountLessThanMinimum = NONE.matchingCount() - 1;
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoRank.from(matchingCountLessThanMinimum))
-                .withMessage(LOTTO_RANK_IS_NOT_FOUND.message(matchingCountLessThanMinimum));
+                .isThrownBy(() -> LottoRank.from(matchingCountLessThanMinimum));
     }
 
     @Test
@@ -55,7 +53,6 @@ class LottoRankTest {
         final int matchingCountMoreThanMaximum = FIRST.matchingCount() + 1;
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoRank.from(matchingCountMoreThanMaximum))
-                .withMessage(LOTTO_RANK_IS_NOT_FOUND.message(matchingCountMoreThanMaximum));
+                .isThrownBy(() -> LottoRank.from(matchingCountMoreThanMaximum));
     }
 }

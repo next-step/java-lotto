@@ -1,9 +1,5 @@
 package lotto.domain.reward;
 
-import static lotto.config.LottoExceptionMessage.LOTTO_RESULT_DOES_NOT_MATCH_TOTAL_PRICE;
-import static lotto.config.LottoExceptionMessage.LOTTO_TOTAL_PRICE_MUST_BE_BIGGER_THAN_UNIT_PRICE;
-import static lotto.config.LottoExceptionMessage.LOTTO_TOTAL_PRICE_MUST_BE_MULTIPLE_OF_UNIT_PRICE;
-
 import java.util.Map;
 
 public class LottoCalculator {
@@ -20,13 +16,13 @@ public class LottoCalculator {
 
     private void validateTotalPriceIsBiggerThanUnitPrice(final int totalPrice) {
         if (totalPrice < LOTTO_PRICE_PER_UNIT) {
-            throw new IllegalArgumentException(LOTTO_TOTAL_PRICE_MUST_BE_BIGGER_THAN_UNIT_PRICE.message(totalPrice));
+            throw new IllegalArgumentException("총 로또 구매 가격은 1개 당 가격보다 커야합니다. 가격: " + totalPrice);
         }
     }
 
     private void validateTotalPriceIsMultipleOfUniPrice(final int totalPrice) {
         if (totalPrice % LOTTO_PRICE_PER_UNIT != 0) {
-            throw new IllegalArgumentException(LOTTO_TOTAL_PRICE_MUST_BE_MULTIPLE_OF_UNIT_PRICE.message(totalPrice));
+            throw new IllegalArgumentException("총 로또 구매 가격은 1개 당 가격의 배수여야 합니다. 가격: " + totalPrice);
         }
     }
 
@@ -56,7 +52,7 @@ public class LottoCalculator {
                 .sum();
 
         if (lottoQuantity != calculateQuantity(totalPrice)) {
-            throw new IllegalArgumentException(LOTTO_RESULT_DOES_NOT_MATCH_TOTAL_PRICE.message());
+            throw new IllegalArgumentException("당첨 결과 로또의 개수와 실제 구매 로또의 개수가 일치하지 않습니다.");
         }
     }
 }

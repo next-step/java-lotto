@@ -1,7 +1,5 @@
 package lotto.domain.reward;
 
-import static lotto.config.LottoExceptionMessage.LOTTO_RANK_IS_NOT_FOUND;
-
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
@@ -42,7 +40,7 @@ public enum LottoRank {
         }
 
         return Optional.ofNullable(rankMap.get(matchingCount))
-                .orElseThrow(() -> new IllegalArgumentException(LOTTO_RANK_IS_NOT_FOUND.message(matchingCount)));
+                .orElseThrow(() -> new IllegalArgumentException("로또 번호 당첨 개수에 따른 순위가 존재하지 않습니다. 개수: " + matchingCount));
     }
 
     private static boolean isNotWinning(final int matchingCount) {

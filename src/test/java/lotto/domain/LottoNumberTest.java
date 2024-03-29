@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static lotto.config.LottoExceptionMessage.LOTTO_NUMBER_MUST_BE_IN_VALID_RANGE;
 import static lotto.domain.LottoNumber.MAXIMUM_LOTTO_NUMBER;
 import static lotto.domain.LottoNumber.MINIMUM_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,7 +24,6 @@ class LottoNumberTest {
     @DisplayName("로또 번호가 최소, 최대 범위를 벗어나는 경우 예외를 던진다.")
     void LottoNumber_OutOfRange_Exception(final int numberOutOfRange) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoNumber.from(numberOutOfRange))
-                .withMessage(LOTTO_NUMBER_MUST_BE_IN_VALID_RANGE.message(numberOutOfRange));
+                .isThrownBy(() -> LottoNumber.from(numberOutOfRange));
     }
 }

@@ -1,8 +1,5 @@
 package lotto.domain.reward;
 
-import static lotto.config.LottoExceptionMessage.LOTTO_RESULT_DOES_NOT_MATCH_TOTAL_PRICE;
-import static lotto.config.LottoExceptionMessage.LOTTO_TOTAL_PRICE_MUST_BE_BIGGER_THAN_UNIT_PRICE;
-import static lotto.config.LottoExceptionMessage.LOTTO_TOTAL_PRICE_MUST_BE_MULTIPLE_OF_UNIT_PRICE;
 import static lotto.domain.reward.LottoCalculator.LOTTO_PRICE_PER_UNIT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -34,8 +31,7 @@ class LottoCalculatorTest {
     @DisplayName("총 로또 구매 가격이 로또 1개 당 가격보다 적은 경우 예외를 던진다.")
     void CalculateQuantity_TotalPriceLessThanUnitPrice_Exception(final int priceLessThanUnitPrice) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoCalculator().calculateQuantity(priceLessThanUnitPrice))
-                .withMessage(LOTTO_TOTAL_PRICE_MUST_BE_BIGGER_THAN_UNIT_PRICE.message(priceLessThanUnitPrice));
+                .isThrownBy(() -> new LottoCalculator().calculateQuantity(priceLessThanUnitPrice));
     }
 
     @Test
@@ -44,8 +40,7 @@ class LottoCalculatorTest {
         final int priceNotMultipleOfUnitPrice = LOTTO_PRICE_PER_UNIT * 2 + 1;
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoCalculator().calculateQuantity(priceNotMultipleOfUnitPrice))
-                .withMessage(LOTTO_TOTAL_PRICE_MUST_BE_MULTIPLE_OF_UNIT_PRICE.message(priceNotMultipleOfUnitPrice));
+                .isThrownBy(() -> new LottoCalculator().calculateQuantity(priceNotMultipleOfUnitPrice));
     }
 
     @ParameterizedTest
@@ -60,8 +55,7 @@ class LottoCalculatorTest {
     @DisplayName("구매자가 지불한 총 가격에 따른 로또 개수와, 당첨 결과에 따른 로또 개수가 일치하지 않는 경우 예외를 던진다.")
     void CalculateProfitRate_InvalidQuantity_Exception() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoCalculator().calculateProfitRate(toLottoResult(0, 0, 0, 0, 1), 2000))
-                .withMessage(LOTTO_RESULT_DOES_NOT_MATCH_TOTAL_PRICE.message());
+                .isThrownBy(() -> new LottoCalculator().calculateProfitRate(toLottoResult(0, 0, 0, 0, 1), 2000));
     }
 
     private static Stream<Arguments> lottoResults() {

@@ -1,10 +1,6 @@
 package lotto.view;
 
 import static java.text.MessageFormat.format;
-import static lotto.config.LottoExceptionMessage.INPUT_TOTAL_PRICE_MUST_FOLLOW_INTEGER_FORMAT;
-import static lotto.config.LottoExceptionMessage.INPUT_WINNING_NUMBERS_MUST_EXIST;
-import static lotto.config.LottoExceptionMessage.INPUT_WINNING_NUMBERS_MUST_FOLLOW_PATTERN;
-import static lotto.config.LottoExceptionMessage.UNEXPECTED_EXCEPTION_MESSAGE;
 import static lotto.domain.reward.LottoRank.NONE;
 
 import java.util.Arrays;
@@ -41,7 +37,7 @@ public class LottoView {
             return Integer.parseInt(userInput);
 
         } catch (final NumberFormatException e) {
-            throw new IllegalArgumentException(INPUT_TOTAL_PRICE_MUST_FOLLOW_INTEGER_FORMAT.message(userInput));
+            throw new IllegalArgumentException("총 로또 구매 가격은 정수형으로 입력해야 합니다. 입력: " + userInput);
         }
     }
 
@@ -61,7 +57,7 @@ public class LottoView {
 
     private void validateWinningNumbersInputIsNotNullOrBlank(final String userInput) {
         if (userInput == null || userInput.isBlank()) {
-            throw new IllegalArgumentException(INPUT_WINNING_NUMBERS_MUST_EXIST.message(userInput));
+            throw new IllegalArgumentException("로또 당첨 번호는 null 이거나 빈 값으로 입력 할 수 없습니다. 입력: " + userInput);
         }
     }
 
@@ -69,7 +65,7 @@ public class LottoView {
         final Matcher matcher = LOTTO_WINNING_NUMBERS_PATTERN.matcher(userInput);
 
         if (!matcher.matches()) {
-            throw new IllegalArgumentException(INPUT_WINNING_NUMBERS_MUST_FOLLOW_PATTERN.message(userInput));
+            throw new IllegalArgumentException("입력하신 로또 당첨 번호가 형식에 맞지 않습니다. 입력: " + userInput);
         }
     }
 
@@ -113,6 +109,6 @@ public class LottoView {
     }
 
     public void printUnexpectedExceptionMessage() {
-        output.printLine(UNEXPECTED_EXCEPTION_MESSAGE.message());
+        output.printLine("알 수 없는 예외가 발생했습니다.");
     }
 }

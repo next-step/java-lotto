@@ -1,7 +1,5 @@
 package lotto.domain.publish;
 
-import static lotto.config.LottoExceptionMessage.LOTTO_QUANTITY_MUST_BE_POSITIVE;
-
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -30,7 +28,7 @@ public class LottoGenerator {
 
     private void validateQuantityIsMoreThanMinimum(final int quantity) {
         if (quantity < MINIMUM_LOTTO_QUANTITY) {
-            throw new IllegalArgumentException(LOTTO_QUANTITY_MUST_BE_POSITIVE.message(quantity));
+            throw new IllegalArgumentException("로또 구매 개수는 1이상의 자연수여야 합니다. 개수: " + quantity);
         }
     }
 

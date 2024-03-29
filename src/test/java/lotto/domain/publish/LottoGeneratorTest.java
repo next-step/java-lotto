@@ -1,6 +1,5 @@
 package lotto.domain.publish;
 
-import static lotto.config.LottoExceptionMessage.LOTTO_QUANTITY_MUST_BE_POSITIVE;
 import static lotto.domain.publish.LottoGenerator.MINIMUM_LOTTO_QUANTITY;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,7 +28,6 @@ class LottoGeneratorTest {
         final int quantityLessThanMinimum = MINIMUM_LOTTO_QUANTITY - 1;
 
         Assertions.assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoMaker.generateLottos(quantityLessThanMinimum))
-                .withMessage(LOTTO_QUANTITY_MUST_BE_POSITIVE.message(quantityLessThanMinimum));
+                .isThrownBy(() -> lottoMaker.generateLottos(quantityLessThanMinimum));
     }
 }

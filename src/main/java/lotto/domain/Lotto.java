@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import static lotto.config.LottoExceptionMessage.LOTTO_NUMBERS_MUST_HAVE_SPECIFIED_SIZE;
-import static lotto.config.LottoExceptionMessage.LOTTO_NUMBERS_MUST_NOT_DUPLICATE;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -40,7 +37,7 @@ public class Lotto {
 
     private static void validateNumbersHaveSpecifiedSize(final Set<LottoNumber> numbers) {
         if (numbers.size() < LOTTO_NUMBERS_SIZE || numbers.size() > LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException(LOTTO_NUMBERS_MUST_HAVE_SPECIFIED_SIZE.message(numbers.size()));
+            throw new IllegalArgumentException("로또 번호는 지정된 개수보다 많거나 적을 수 없습니다. 개수: " + numbers.size());
         }
     }
 
@@ -60,7 +57,7 @@ public class Lotto {
 
     private static void validateNumbersAreNotDuplicated(final int[] numbers, final Set<LottoNumber> lottoNumbers) {
         if (numbers.length != lottoNumbers.size()) {
-            throw new IllegalArgumentException(LOTTO_NUMBERS_MUST_NOT_DUPLICATE.message(numbers));
+            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다. 번호: " + Arrays.toString(numbers));
         }
     }
 }

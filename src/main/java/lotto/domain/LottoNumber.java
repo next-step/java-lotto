@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import static lotto.config.LottoExceptionMessage.LOTTO_NUMBER_MUST_BE_IN_VALID_RANGE;
-
 import java.util.Objects;
 
 public class LottoNumber {
@@ -27,7 +25,7 @@ public class LottoNumber {
 
     private static void validateLottoNumberIsInRange(final int value) {
         if (value < MINIMUM_LOTTO_NUMBER || value > MAXIMUM_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_MUST_BE_IN_VALID_RANGE.message(value));
+            throw new IllegalArgumentException("로또 번호는 1이상 45이하의 자연수여야 합니다. 번호: " + value);
         }
     }
 
