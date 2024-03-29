@@ -14,8 +14,7 @@ public class LottoFactory {
 
     }
 
-    public static List<Lottos> createLottoses(Money purchaseAmount, Money price) {
-        Number count = Number.from(purchaseAmount.divide(price).convertToInt());
+    public static List<Lottos> createLottoses(Number count) {
         List<Lottos> lottoses = new ArrayList<>();
         while (count.isPositive()) {
             lottoses.add(createRandomLotto());
