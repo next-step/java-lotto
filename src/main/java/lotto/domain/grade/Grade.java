@@ -26,7 +26,7 @@ public enum Grade {
         }
 
         return Arrays.stream(Grade.values())
-            .filter(grade -> grade != BONUS_GRADE)
+            .filter(grade -> !grade.isBonusGrade())
             .filter(grade -> grade.isSameCorrectingCount(matchCount))
             .findFirst()
             .orElse(Grade.UN_LUCKY_GRADE);
@@ -37,7 +37,7 @@ public enum Grade {
     }
 
     public static boolean isBonusGrade(int matchCount, boolean hasBonusNumber) {
-        return matchCount == 5 && hasBonusNumber == true;
+        return matchCount == 5 && hasBonusNumber;
     }
 
     public int getPrizeMoney() {
