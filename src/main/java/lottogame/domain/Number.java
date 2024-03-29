@@ -14,6 +14,10 @@ public final class Number {
         return new Number(number);
     }
 
+    public static Number from(final String value) {
+        return new Number(Integer.parseInt(value));
+    }
+
     public Number divide(Number number) {
         return new Number(value / number.value);
     }
@@ -28,10 +32,6 @@ public final class Number {
 
     public Number decrease() {
         return new Number(value - 1);
-    }
-
-    public double convertValueToDouble() {
-        return value;
     }
 
     public Number multiply(Number count) {
