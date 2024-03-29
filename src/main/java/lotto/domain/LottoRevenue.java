@@ -1,9 +1,8 @@
 package lotto.domain;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
-public class Revenue {
+public class LottoRevenue {
     public static double calculateRevenue(int money, long revenueTotal) {
         return (double) revenueTotal / money;
     }

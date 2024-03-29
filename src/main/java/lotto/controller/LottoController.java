@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.domain.LottoNumber;
 import lotto.domain.*;
 import lotto.utils.StringUtils;
 import view.InputView;
@@ -23,6 +22,6 @@ public class LottoController {
         }
 
         HashMap<Rank, Integer> matchResult = LottoMatchResult.getMatchResult();
-        ResultView.printResult(matchResult, Revenue.calculateRevenue(money, Revenue.revenueTotal(matchResult)));
+        ResultView.printResult(matchResult, LottoRevenue.calculateRevenue(money, LottoRevenue.revenueTotal(matchResult)));
     }
 }
