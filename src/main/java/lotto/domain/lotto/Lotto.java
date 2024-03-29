@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import static lotto.utils.Constants.LOTTO_SIZE;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,7 +15,7 @@ public class Lotto {
     private final List<LottoNumber> lotto;
 
     public Lotto(List<LottoNumber> lotto) {
-        if (lotto.size() != 6) {
+        if (lotto.size() != LOTTO_SIZE) {
             throw new SizeExceedLottoException(lotto.size());
         }
 
