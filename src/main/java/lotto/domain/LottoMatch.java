@@ -1,30 +1,16 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 
 public class LottoMatch {
-    public static Rank match(List<Integer> lotto, List<Integer> winNumbers, int bonusNumber) {
-        return Rank.valueOf(match(lotto, winNumbers), matchBonus(lotto, bonusNumber));
+    public static Rank match(Lotto givenLotto, WinningLotto winningLotto) {
+        int matchCount = givenLotto.match(winningLotto.makeLotto());
+
+        return Rank.valueOf(matchCount, matchBonus(givenLotto, winningLotto.getBonusNumber()));
     }
 
-    private static boolean matchBonus(List<Integer> lotto, int bonusNumber) {
-        return lotto.contains(bonusNumber);
+    private static boolean matchBonus(Lotto givenLotto, LottoNumber bonusNumber) {
+        return givenLotto.isContainsBonus(bonusNumber);
     }
 
-    public static int match(List<Integer> lotto, List<Integer> winNumbers) {
-        int count = 0;
-
-        for (int winNumber : winNumbers) {
-            count += matchWinNumber(lotto, winNumber);
-        }
-
-        return count;
-    }
-
-    private static int matchWinNumber(List<Integer> lotto, int winNumber) {
-        if (lotto.contains(winNumber)) {
-            return 1;
-        }
-        return 0;
-    }
 }
