@@ -35,12 +35,12 @@ class LottoTest {
 
     @Test
     @DisplayName("일치하는 로또 번호의 개수를 반환한다.")
-    void CountCommonNumbers() {
+    void MatchCount() {
         final Set<LottoNumber> lottoNumbers = toLottoNumbersSet(LOTTO_NUMBERS_SIZE);
         final Lotto lotto = Lotto.from(lottoNumbers);
         final Lotto otherLotto = Lotto.from(lottoNumbers);
 
-        assertThat(lotto.countCommonNumbers(otherLotto))
+        assertThat(lotto.matchCount(otherLotto))
                 .isEqualTo(LOTTO_NUMBERS_SIZE);
     }
 

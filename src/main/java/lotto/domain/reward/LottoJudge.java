@@ -14,8 +14,8 @@ public class LottoJudge {
     }
 
     private LottoRank match(final Lotto lotto, final Lotto winningLotto) {
-        final int commonNumbersCount = lotto.countCommonNumbers(winningLotto);
+        final int matchingCount = lotto.matchCount(winningLotto);
 
-        return LottoRank.from(commonNumbersCount);
+        return LottoRank.from(matchingCount);
     }
 }

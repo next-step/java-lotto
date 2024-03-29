@@ -15,7 +15,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public int countCommonNumbers(final Lotto otherLotto) {
+    public int matchCount(final Lotto otherLotto) {
         return (int)this.numbers
                 .stream()
                 .filter(otherLotto.numbers::contains)
