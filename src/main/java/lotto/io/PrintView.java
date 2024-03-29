@@ -29,6 +29,10 @@ public class PrintView {
 					+ lottoResult.getNumberOfMatchedLotto(prize.getCount()) + "개");
 		}
 
-		System.out.println("총 수익률은 " + lottoResult.getRate() + "입니다.");
+		System.out.print("총 수익률은 " + lottoResult.getRate() + "입니다.");
+
+		if(lottoResult.isLoss()) {
+			System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+		}
 	}
 }

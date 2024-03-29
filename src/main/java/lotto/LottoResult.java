@@ -34,4 +34,8 @@ public class LottoResult {
 	public int getNumberOfMatchedLotto(Long matchedCount) {
 		return matchedMap.getOrDefault(matchedCount, 0);
 	}
+
+	public boolean isLoss() {
+		return rate < 1;
+	}
 }
