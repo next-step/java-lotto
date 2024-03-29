@@ -11,7 +11,6 @@ public class LottoFactory {
     private static final List<Integer> numbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
 
     private LottoFactory() {
-
     }
 
     public static List<Lottos> createLottoses(Number count) {
@@ -36,6 +35,7 @@ public class LottoFactory {
         return createLotto(numbers
                 .subList(0, 6)
                 .stream()
+                .sorted()
                 .collect(Collectors.toUnmodifiableList()));
     }
 }
