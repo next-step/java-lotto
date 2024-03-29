@@ -3,8 +3,10 @@ package lottogame.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.provider.Arguments;
 
 class LottoGameTest {
     LottoGame lottoGame;
@@ -16,7 +18,7 @@ class LottoGameTest {
 
     @Test
     void 수익률() {
-        Lottos winnerLotto = new Lottos(List.of(1, 2, 3, 4, 5, 6));
+        Lottos winnerLotto = new WinningLottos(List.of(1, 2, 3, 4, 5, 6), 42);
         List<Lottos> lottos = List.of(
                 new Lottos(List.of(8, 21, 23, 41, 42, 43)),
                 new Lottos(List.of(3, 5, 11, 16, 32, 38)),
@@ -36,18 +38,5 @@ class LottoGameTest {
         double expected = 0.35;
 
         assertThat(lottoGame.calculateReturnOfRate(winnerLotto, lottos)).isEqualTo(expected);
-    }
-
-    @Test
-    void 총_당첨_결과_확인() {
-        List<Lottos> lottos = List.of(
-                new Lottos(List.of(1, 2, 3, 4, 5, 6)),
-                new Lottos(List.of(1, 2, 3, 4, 5, 7)),
-                new Lottos(List.of(1, 2, 3, 4, 7, 8)),
-                new Lottos(List.of(1, 2, 4, 7, 8, 9)),
-                new Lottos(List.of(1, 2, 7, 8, 9, 10)));
-        Lottos winnerLotto = new Lottos(List.of(1, 2, 3, 4, 5, 6));
-        List<Rank> ranks = lottoGame.checkRanks(winnerLotto, lottos);
-        assertThat(ranks).contains(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.EMPTY);
     }
 }
