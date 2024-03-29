@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.utils.StringUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -16,8 +17,7 @@ public class StringUtilsTest {
 
     @Test
     void 정수_변환() {
-        String[] textWinNumbers = {"1", "2", "3", "4", "5", "6"};
-        List<Integer> winNumbers = StringUtils.parseWinNumbers(textWinNumbers);
+        List<Integer> winNumbers = StringUtils.parseWinNumbers("1,2,3,4,5,6");
         assertThat(winNumbers).containsExactly(1, 2, 3, 4, 5, 6);
     }
 }
