@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -29,5 +28,12 @@ class LottoGameTest {
         assertThatThrownBy(() -> {
             new LottoGame(input).createLotto(new RandomNumberStrategy());
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest(name = "구매 가격 : {0} 예외")
+    @CsvSource(value = {"2500", "1234"})
+    @DisplayName("등수 확인 테스트")
+    void rank_match_test(int input) {
+
     }
 }
