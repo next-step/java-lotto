@@ -11,15 +11,15 @@ import lotto.domain.winning.WinningStatistic;
 
 public class LottoMachine {
 
-    private final PurchaseInfomation purchaseInfomation;
+    private final PurchaseRecord purchaseRecord;
 
-    public LottoMachine(PurchaseInfomation purchaseInfomation) {
-        this.purchaseInfomation = purchaseInfomation;
+    public LottoMachine(PurchaseRecord purchaseRecord) {
+        this.purchaseRecord = purchaseRecord;
     }
 
     public WinningStatistic startLotto(List<Lotto> autoLottos, WinningNumbers winningNumbers)
         throws ExecutionException, InterruptedException {
-        WinningStatistic winningStatistic = new WinningStatistic(purchaseInfomation);
+        WinningStatistic winningStatistic = new WinningStatistic(purchaseRecord);
 
         CompletableFuture<Void>[] futures = autoLottos.stream()
             .map(autoLotto -> calculateGrade(winningNumbers, autoLotto)
@@ -42,7 +42,7 @@ public class LottoMachine {
 
 
     public int calculateExecuteCount() {
-        return purchaseInfomation.getPurchaseAmount() / LOTTO_TICKET_PRICE;
+        return purchaseRecord.getPurchaseAmount() / LOTTO_TICKET_PRICE;
     }
 
     public Grade calculatePrizeMoney(final WinningNumbers winningNumbers, final Lotto lotto) {

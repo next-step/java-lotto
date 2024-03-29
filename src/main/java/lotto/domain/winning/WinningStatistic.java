@@ -4,16 +4,16 @@ import java.text.DecimalFormat;
 import java.util.EnumMap;
 import java.util.Map;
 import lotto.domain.grade.Grade;
-import lotto.domain.lotto.PurchaseInfomation;
+import lotto.domain.lotto.PurchaseRecord;
 
 public class WinningStatistic {
 
     private final Map<Grade, Integer> gradeCounts = new EnumMap<>(Grade.class);
 
-    private final PurchaseInfomation purchaseInfomation;
+    private final PurchaseRecord purchaseRecord;
 
-    public WinningStatistic(PurchaseInfomation purchaseInfomation) {
-        this.purchaseInfomation = purchaseInfomation;
+    public WinningStatistic(PurchaseRecord purchaseRecord) {
+        this.purchaseRecord = purchaseRecord;
         initializeGradeCounts();
     }
 
@@ -28,12 +28,12 @@ public class WinningStatistic {
     }
 
     public void calculateWinningStatistic(final Grade grade) {
-        gradeCounts.put(grade, gradeCounts.getOrDefault(grade, 0) + 1);
+        gradeCounts.put(grade, getGradeCount(grade) + 1);
     }
 
     public double calculateProfitRate() {
         double profitRate =
-            (double) calculateTotalWinningAmount() / purchaseInfomation.getPurchaseAmount();
+            (double) calculateTotalWinningAmount() / purchaseRecord.getPurchaseAmount();
         return Double.parseDouble(formattedProfitRate(Math.floor(profitRate * 100) / 100));
     }
 

@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoMachine;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.PurchaseInfomation;
+import lotto.domain.lotto.PurchaseRecord;
 import lotto.domain.winning.WinningNumbers;
 import lotto.domain.winning.WinningStatistic;
 import lotto.view.Input;
@@ -16,13 +16,13 @@ import lotto.view.Output;
 public class Main {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        PurchaseInfomation purchaseInfomation = new PurchaseInfomation(Input.inputPurchaseAmount(), Input.inputManualPurchaseCount());
+        PurchaseRecord purchaseRecord = new PurchaseRecord(Input.inputPurchaseAmount(), Input.inputManualPurchaseCount());
 
-        List<Lotto> manualLottos = Input.inputManualLottoNumber(purchaseInfomation.getManualPurchaseCount());
-        Output.printPurchaseCount(purchaseInfomation.getManualPurchaseCount(),
-            purchaseInfomation.autoPurchaseCount());
+        List<Lotto> manualLottos = Input.inputManualLottoNumber(purchaseRecord.getManualPurchaseCount());
+        Output.printPurchaseCount(purchaseRecord.getManualPurchaseCount(),
+            purchaseRecord.autoPurchaseCount());
 
-        LottoMachine lottoMachine = new LottoMachine(purchaseInfomation);
+        LottoMachine lottoMachine = new LottoMachine(purchaseRecord);
         List<Lotto> autoLottos = Lotto.createAutoLottos(lottoMachine.calculateExecuteCount());
 
         List<Lotto> lottos = Stream.concat(manualLottos.stream(), autoLottos.stream())

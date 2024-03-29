@@ -4,17 +4,17 @@ import static lotto.utils.Constants.LOTTO_TICKET_PRICE;
 
 import lotto.error.exception.PurchaseAmountException;
 
-public class PurchaseInfomation {
+public class PurchaseRecord {
 
     private int purchaseAmount;
 
     private int manualPurchaseCount;
 
-    public PurchaseInfomation(int purchaseAmount) {
+    public PurchaseRecord(int purchaseAmount) {
         this(purchaseAmount, 0);
     }
 
-    public PurchaseInfomation(int purchaseAmount, int manualPurchaseCount) {
+    public PurchaseRecord(int purchaseAmount, int manualPurchaseCount) {
         if (purchaseAmount % LOTTO_TICKET_PRICE != 0) {
             throw new PurchaseAmountException(purchaseAmount);
         }
