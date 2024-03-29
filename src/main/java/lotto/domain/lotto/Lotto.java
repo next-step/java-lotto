@@ -44,6 +44,12 @@ public class Lotto {
         return uniqueNumbers.size() != lotto.size();
     }
 
+    public int calculateMatchingLottoCount(Lotto other) {
+        return (int) lotto.stream()
+            .filter(other::contains)
+            .count();
+    }
+
     public boolean contains(LottoNumber winningNumber) {
         return lotto.contains(winningNumber);
     }
