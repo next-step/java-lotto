@@ -4,7 +4,6 @@ import java.text.MessageFormat;
 import java.util.List;
 import lotto.domain.grade.Grade;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.PurchaseAmount;
 import lotto.domain.winning.WinningStatistic;
 
 public class Output {
@@ -16,15 +15,15 @@ public class Output {
         autoLotto.stream().forEach(System.out::println);
     }
 
-    public static void printPurchaseCount(final PurchaseAmount purchaseAmount) {
+    public static void printPurchaseCount(int manualPurchaseCount, int autoPurchaseCount) {
         System.out.println(
-            MessageFormat.format("{0}개를 구매했습니다.", purchaseAmount.getPurchaseAmount() / 1000));
+            MessageFormat.format("수동으로 {0}장, 자동으로 {1}개를 구매했습니다.", manualPurchaseCount, autoPurchaseCount));
     }
 
     public static void printLottoResult(final WinningStatistic winningStatistic) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        printGradeResult(Grade.FOUR_GRADE, winningStatistic);
+        printGradeResult(Grade.FOURTH_GRADE, winningStatistic);
         printGradeResult(Grade.THIRD_GRADE, winningStatistic);
         printGradeResult(Grade.SECOND_GRADE, winningStatistic);
         printGradeResult(Grade.BONUS_GRADE, winningStatistic);
@@ -35,7 +34,7 @@ public class Output {
 
     private static void printGradeResult(final Grade grade,
         final WinningStatistic winningStatistic) {
-        if (grade == Grade.BONUS_GRADE) {
+        if (grade.isBonusGrade()) {
             System.out.println(
                 MessageFormat.format("{0}개 일치, 보너스 볼 일치({1}원) - {2}",
                     grade.getCorrectingCount(),

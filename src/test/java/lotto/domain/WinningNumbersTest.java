@@ -29,7 +29,7 @@ class WinningNumbersTest {
 
         Grade grade = winningNumbers.confirmWinning(lotto);
 
-        assertThat(grade).isEqualTo(Grade.FOUR_GRADE);
+        assertThat(grade).isEqualTo(Grade.FOURTH_GRADE);
     }
 
     @Test

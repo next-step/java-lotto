@@ -2,7 +2,9 @@ package lotto.domain.lotto;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lotto.error.exception.SizeExceedLottoNumberException;
 
 public enum LottoNumber {
@@ -52,17 +54,26 @@ public enum LottoNumber {
     FORTY_FOUR(44),
     FORTY_FIVE(45);
 
-    private final int lottoNumber;
+    private static final Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
+
+    private final int value;
+
+    static {
+        for (LottoNumber lottoNumber : LottoNumber.values()) {
+            lottoNumberCache.put(lottoNumber.value, lottoNumber);
+        }
+    }
 
     LottoNumber(int number) {
-        this.lottoNumber = number;
+        this.value = number;
     }
 
     public static LottoNumber fromInt(final int value) {
-        return Arrays.stream(LottoNumber.values())
-            .filter(lottoNumber -> lottoNumber.getLottoNumber() == value)
-            .findFirst()
-            .orElseThrow(() -> new SizeExceedLottoNumberException(value));
+        LottoNumber lottoNumber = lottoNumberCache.get(value);
+        if (lottoNumber == null) {
+            throw new SizeExceedLottoNumberException(value);
+        }
+        return lottoNumber;
     }
 
     public static List<LottoNumber> createRandomLottoNumbers() {
@@ -71,13 +82,13 @@ public enum LottoNumber {
         return allLottoNumbers.subList(0, 6);
     }
 
-    public int getLottoNumber() {
-        return lottoNumber;
+    public int getValue() {
+        return value;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(lottoNumber);
+        return String.valueOf(value);
     }
 }
 

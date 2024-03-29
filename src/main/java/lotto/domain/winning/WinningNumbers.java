@@ -1,5 +1,7 @@
 package lotto.domain.winning;
 
+import static lotto.utils.Constants.LOTTO_SIZE;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.grade.Grade;
@@ -9,37 +11,32 @@ import lotto.error.exception.SizeExceedLottoException;
 
 public class WinningNumbers {
 
-    private final List<LottoNumber> winningNumbers;
+    private final Lotto winningNumbers;
 
     private final LottoNumber bonusNumber;
 
-    public WinningNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+
+    public WinningNumbers(Lotto winningNumbers, LottoNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
     public static WinningNumbers fromValues(final List<Integer> values, LottoNumber bonusNumber) {
-        if (values.size() != 6) {
+        if (values.size() != LOTTO_SIZE) {
             throw new SizeExceedLottoException(values.size());
         }
 
         List<LottoNumber> lottoNumbers = values.stream()
             .map(LottoNumber::fromInt)
             .collect(Collectors.toList());
-        return new WinningNumbers(lottoNumbers, bonusNumber);
+        return new WinningNumbers(new Lotto(lottoNumbers), bonusNumber);
     }
 
     public Grade confirmWinning(final Lotto lotto) {
-        return Grade.fromMatchResult(findMatchResultByLotto(lotto));
-    }
+        int matchCount = winningNumbers.calculateMatchingLottoCount(lotto);
+        boolean hasBonusNumber = lotto.contains(bonusNumber);
 
-    private WinningNumberResult findMatchResultByLotto(final Lotto lotto) {
-        return new WinningNumberResult(calculateMatchingLottoNumbers(lotto),
-            lotto.contains(bonusNumber));
-    }
-
-    private int calculateMatchingLottoNumbers(Lotto lotto) {
-        return (int) winningNumbers.stream().filter(lotto::contains).count();
+        return Grade.from(matchCount, hasBonusNumber);
     }
 
     public int size() {
