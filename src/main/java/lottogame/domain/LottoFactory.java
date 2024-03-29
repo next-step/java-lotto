@@ -28,6 +28,10 @@ public class LottoFactory {
         return new Lottos(numbers);
     }
 
+    public static WinningLottos createWinningLotto(List<Integer> numbers, int bonusNumber) {
+        return new WinningLottos(numbers, bonusNumber);
+    }
+
     private static Lottos createRandomLotto() {
         Collections.shuffle(numbers);
         return createLotto(numbers
