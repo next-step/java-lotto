@@ -5,11 +5,10 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class IssuedLottos {
-    public static final int WINNING_THRESHOLD = 2;
-    List<Lotto> lottos;
+public class Lottos {
+    private List<Lotto> lottos;
 
-    public IssuedLottos(List<Lotto> lottos) {
+    public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 

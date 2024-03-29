@@ -18,7 +18,7 @@ public class AutoLottoMain {
         List<Integer> winNumbers = InputView.scanWinningNumbers();
         int bonusNumber = InputView.scanBonusNumber();
 
-        IssuedLottos issuedLottos = new IssuedLottos(lottos);
+        Lottos issuedLottos = new Lottos(lottos);
         Map<WinningType, Long> winningStatic = issuedLottos.winningStatistic(winNumbers, bonusNumber);
         OutputView.printWinningStatic(winningStatic);
 

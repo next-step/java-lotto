@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public enum WinningType {

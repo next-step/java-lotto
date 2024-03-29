@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class IssuedLottosTest {
+public class LottosTest {
     @DisplayName("우승 로또와 몇 개가 일치하는지 통계를 낸다.")
     @Test
     void winningStatistic() {
@@ -21,8 +21,8 @@ public class IssuedLottosTest {
         Lotto lotto1 = new Lotto(buyNumber1);
         Lotto lotto2 = new Lotto(buyNumber2);
 
-        IssuedLottos issuedLottos = new IssuedLottos(List.of(lotto1, lotto2));
-        Map<WinningType, Long> winningStatic = issuedLottos.winningStatistic(winNumber, bonusNumber);
+        Lottos lottos = new Lottos(List.of(lotto1, lotto2));
+        Map<WinningType, Long> winningStatic = lottos.winningStatistic(winNumber, bonusNumber);
 
         Assertions.assertThat(winningStatic.get(WinningType.HIT_COUNT_3)).isEqualTo(1L);
         Assertions.assertThat(winningStatic.get(WinningType.HIT_COUNT_5)).isEqualTo(1L);
