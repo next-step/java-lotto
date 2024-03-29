@@ -6,11 +6,11 @@ import java.util.Objects;
 
 public enum WinningType {
     LOOSE(0, 0, false),
-    HIT_COUNT_3(3, 5000L, false),
-    HIT_COUNT_4(4, 50000L, false),
-    HIT_COUNT_5(5, 1500000L, false),
-    HIT_COUNT_5_AND_BONUS(5, 3000000L,true),
-    HIT_COUNT_6(6, 2000000000L, false);
+    HIT_COUNT_3(3, 5_000L, false),
+    HIT_COUNT_4(4, 50_000L, false),
+    HIT_COUNT_5(5, 1_500_000L, false),
+    HIT_COUNT_5_AND_BONUS(5, 3_000_000L,true),
+    HIT_COUNT_6(6, 2_000_000_000L, false);
 
     private final long hitCount;
     private final long revenue;
