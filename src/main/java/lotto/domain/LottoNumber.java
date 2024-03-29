@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.constant.Constants;
 
@@ -14,6 +14,11 @@ public class LottoNumber {
         if (number < Constants.MIN_LOTTO || number > Constants.MAX_LOTTO) {
             throw new IllegalArgumentException("로또는 1~45 사이의 값이어야 합니다.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 
     @Override
