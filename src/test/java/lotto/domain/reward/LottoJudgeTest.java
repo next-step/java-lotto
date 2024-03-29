@@ -32,22 +32,22 @@ class LottoJudgeTest {
 
     private static List<Lotto> lottos() {
         return List.of(
-                new Lotto(toLottoNumbers(1, 2, 3, 4, 5, 6)), // FIRST
-                new Lotto(toLottoNumbers(1, 2, 3, 4, 5, 6)), // FIRST
-                new Lotto(toLottoNumbers(1, 2, 3, 4, 5, 7)), // SECOND
-                new Lotto(toLottoNumbers(1, 2, 3, 4, 5, 7)), // SECOND
-                new Lotto(toLottoNumbers(1, 2, 3, 4, 5, 7)), // SECOND
-                new Lotto(toLottoNumbers(1, 2, 3, 4, 7, 8)), // THIRD
-                new Lotto(toLottoNumbers(1, 2, 3, 7, 8, 9)), // FOURTH
-                new Lotto(toLottoNumbers(1, 2, 7, 8, 9, 10)), // NONE
-                new Lotto(toLottoNumbers(1, 7, 8, 9, 10, 11)), // NONE
-                new Lotto(toLottoNumbers(7, 8, 9, 10, 11, 12)) // NONE
+                Lotto.from(toLottoNumbers(1, 2, 3, 4, 5, 6)), // FIRST
+                Lotto.from(toLottoNumbers(1, 2, 3, 4, 5, 6)), // FIRST
+                Lotto.from(toLottoNumbers(1, 2, 3, 4, 5, 7)), // SECOND
+                Lotto.from(toLottoNumbers(1, 2, 3, 4, 5, 7)), // SECOND
+                Lotto.from(toLottoNumbers(1, 2, 3, 4, 5, 7)), // SECOND
+                Lotto.from(toLottoNumbers(1, 2, 3, 4, 7, 8)), // THIRD
+                Lotto.from(toLottoNumbers(1, 2, 3, 7, 8, 9)), // FOURTH
+                Lotto.from(toLottoNumbers(1, 2, 7, 8, 9, 10)), // NONE
+                Lotto.from(toLottoNumbers(1, 7, 8, 9, 10, 11)), // NONE
+                Lotto.from(toLottoNumbers(7, 8, 9, 10, 11, 12)) // NONE
         );
     }
 
     private static Set<LottoNumber> toLottoNumbers(final int... numbers) {
         return Arrays.stream(numbers)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::from)
                 .collect(Collectors.toUnmodifiableSet());
     }
 

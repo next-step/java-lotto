@@ -11,7 +11,7 @@ public class Lotto {
 
     private final Set<LottoNumber> numbers;
 
-    public Lotto(final Set<LottoNumber> numbers) {
+    private Lotto(final Set<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 

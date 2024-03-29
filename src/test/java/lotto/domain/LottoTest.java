@@ -37,8 +37,8 @@ class LottoTest {
     @DisplayName("일치하는 로또 번호의 개수를 반환한다.")
     void CountCommonNumbers() {
         final Set<LottoNumber> lottoNumbers = toLottoNumbersSet(LOTTO_NUMBERS_SIZE);
-        final Lotto lotto = new Lotto(lottoNumbers);
-        final Lotto otherLotto = new Lotto(lottoNumbers);
+        final Lotto lotto = Lotto.from(lottoNumbers);
+        final Lotto otherLotto = Lotto.from(lottoNumbers);
 
         assertThat(lotto.countCommonNumbers(otherLotto))
                 .isEqualTo(LOTTO_NUMBERS_SIZE);
@@ -47,7 +47,7 @@ class LottoTest {
     @Test
     @DisplayName("로또 번호 목록을 반환한다.")
     void ExtractLottoNumbers_Values() {
-        final Lotto lotto = new Lotto(toLottoNumbersSet(LOTTO_NUMBERS_SIZE));
+        final Lotto lotto = Lotto.from(toLottoNumbersSet(LOTTO_NUMBERS_SIZE));
         final List<Integer> expectedLottoNumbers = IntStream.rangeClosed(1, LOTTO_NUMBERS_SIZE)
                 .boxed()
                 .collect(Collectors.toList());
@@ -58,7 +58,7 @@ class LottoTest {
 
     private Set<LottoNumber> toLottoNumbersSet(final int size) {
         return IntStream.rangeClosed(1, size)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::from)
                 .collect(Collectors.toUnmodifiableSet());
     }
 

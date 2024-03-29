@@ -9,7 +9,7 @@ public class LottoNumber {
 
     private final int value;
 
-    public LottoNumber(final int value) {
+    private LottoNumber(final int value) {
         this.value = value;
     }
 

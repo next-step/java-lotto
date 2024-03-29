@@ -16,7 +16,7 @@ class LottoNumberTest {
     @DisplayName("로또에 사용되는 번호 한 개를 생성한다.")
     void LottoNumber_ValidNumber(final int validNumber) {
         assertThat(LottoNumber.from(validNumber))
-                .isEqualTo(new LottoNumber(validNumber));
+                .isEqualTo(LottoNumber.from(validNumber));
     }
 
     @ParameterizedTest
