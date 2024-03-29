@@ -4,7 +4,7 @@ import lotto.controller.LottoGame;
 import lotto.domain.publish.LottoGenerator;
 import lotto.domain.publish.LottoNumbersPicker;
 import lotto.domain.publish.RandomLottoNumbersPicker;
-import lotto.domain.reward.LottoCalculator;
+import lotto.domain.publish.LottoCalculator;
 import lotto.domain.reward.LottoJudge;
 import lotto.service.LottoMachine;
 import lotto.view.LottoView;

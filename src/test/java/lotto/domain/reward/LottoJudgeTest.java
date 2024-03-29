@@ -25,9 +25,13 @@ class LottoJudgeTest {
     @DisplayName("당첨 번호와 로또 번호를 비교하여 동일한 갯수에 따라 순위를 부여한다.")
     void Judge_LottoRank() {
         final Lotto winningLotto = Lotto.from(toLottoNumbers(1, 2, 3, 4, 5, 6));
+        final LottoResult actualLottoResult = new LottoJudge().judge(lottos(), winningLotto);
+        final LottoResult expectedLottoResult = lottoResult();
 
-        assertThat(new LottoJudge().judge(lottos(), winningLotto))
-                .isEqualTo(lottoResult());
+        assertThat(actualLottoResult.result())
+                .isEqualTo(expectedLottoResult.result());
+        assertThat(actualLottoResult.profitRate())
+                .isEqualTo(expectedLottoResult.profitRate());
     }
 
     private static List<Lotto> lottos() {
@@ -51,13 +55,15 @@ class LottoJudgeTest {
                 .collect(Collectors.toUnmodifiableSet());
     }
 
-    private static Map<LottoRank, Long> lottoResult() {
-        return Map.of(
+    private static LottoResult lottoResult() {
+        final Map<LottoRank, Long> result = Map.of(
                 FIRST, 2L,
                 SECOND, 3L,
                 THIRD, 1L,
                 FOURTH, 1L,
                 NONE, 3L
         );
+
+        return LottoResult.from(result);
     }
 }

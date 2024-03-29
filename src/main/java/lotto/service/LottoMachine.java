@@ -1,13 +1,12 @@
 package lotto.service;
 
 import java.util.List;
-import java.util.Map;
 
 import lotto.domain.Lotto;
+import lotto.domain.publish.LottoCalculator;
 import lotto.domain.publish.LottoGenerator;
-import lotto.domain.reward.LottoCalculator;
 import lotto.domain.reward.LottoJudge;
-import lotto.domain.reward.LottoRank;
+import lotto.domain.reward.LottoResult;
 
 public class LottoMachine {
 
@@ -31,13 +30,9 @@ public class LottoMachine {
         return lottoGenerator.generateLottos(quantity);
     }
 
-    public Map<LottoRank, Long> judge(final List<Lotto> lottos, final int[] winningNumbers) {
+    public LottoResult judge(final List<Lotto> lottos, final int[] winningNumbers) {
         final Lotto winningLotto = Lotto.from(winningNumbers);
 
         return lottoJudge.judge(lottos, winningLotto);
-    }
-
-    public double calculate(final Map<LottoRank, Long> lottoResult, final int totalPrice) {
-        return lottoCalculator.calculateProfitRate(lottoResult, totalPrice);
     }
 }

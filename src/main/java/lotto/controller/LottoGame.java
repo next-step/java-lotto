@@ -1,10 +1,9 @@
 package lotto.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import lotto.domain.Lotto;
-import lotto.domain.reward.LottoRank;
+import lotto.domain.reward.LottoResult;
 import lotto.service.LottoMachine;
 import lotto.view.LottoView;
 
@@ -20,18 +19,11 @@ public class LottoGame {
 
     public void run() {
         try {
-            // 1. 로또 구매
-            final int totalPrice = lottoView.readLottoTotalPrice();
-            final List<Lotto> lottos = lottoMachine.publish(totalPrice);
+            final List<Lotto> lottos = buyLottos();
             lottoView.printLottoPurchaseHistory(lottos);
 
-            // 2. 당첨 결과 확인
-            final int[] winningNumbers = lottoView.readLottoWinningNumbers();
-            final Map<LottoRank, Long> lottoResult = lottoMachine.judge(lottos, winningNumbers);
-
-            // 3. 수익률 계산
-            final double profitRate = lottoMachine.calculate(lottoResult, totalPrice);
-            lottoView.printLottoWinningResult(lottoResult, profitRate);
+            final LottoResult lottoResult = judgeLottos(lottos);
+            lottoView.printLottoWinningResult(lottoResult);
 
         } catch (final IllegalArgumentException e) {
             lottoView.printBusinessExceptionMessage(e.getMessage());
@@ -39,5 +31,17 @@ public class LottoGame {
         } catch (final Exception e) {
             lottoView.printUnexpectedExceptionMessage();
         }
+    }
+
+    private List<Lotto> buyLottos() {
+        final int totalPrice = lottoView.readLottoTotalPrice();
+
+        return lottoMachine.publish(totalPrice);
+    }
+
+    private LottoResult judgeLottos(final List<Lotto> lottos) {
+        final int[] winningNumbers = lottoView.readLottoWinningNumbers();
+
+        return lottoMachine.judge(lottos, winningNumbers);
     }
 }

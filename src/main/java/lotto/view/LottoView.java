@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 import lotto.domain.Lotto;
 import lotto.domain.reward.LottoRank;
+import lotto.domain.reward.LottoResult;
 import lotto.view.io.Input;
 import lotto.view.io.Output;
 
@@ -82,23 +83,25 @@ public class LottoView {
         output.printLine(numbers.toString());
     }
 
-    public void printLottoWinningResult(final Map<LottoRank, Long> lottoResult, final double profitRate) {
+    public void printLottoWinningResult(final LottoResult lottoResult) {
         output.printLine("\n당첨 통계\n---------");
+
+        final Map<LottoRank, Long> result = lottoResult.result();
 
         Arrays.stream(LottoRank.values())
                 .filter(rank -> rank != NONE)
                 .sorted(Comparator.reverseOrder())
-                .forEach(rank -> printLottoResultByRank(rank, lottoResult));
+                .forEach(rank -> printLottoResultByRank(rank, result));
 
-        output.printLine(format("총 수익률은 {0}입니다. (1보다 크면 이익, 작으면 손해입니다.)", profitRate));
+        output.printLine(format("총 수익률은 {0}입니다. (1보다 크면 이익, 작으면 손해입니다.)", lottoResult.profitRate()));
     }
 
-    private void printLottoResultByRank(final LottoRank rank, final Map<LottoRank, Long> lottoResult) {
+    private void printLottoResultByRank(final LottoRank rank, final Map<LottoRank, Long> result) {
         final String lottoResultOutputByRank = format(
                 "{0}개 일치 ({1}원) - {2}개",
                 rank.matchingCount(),
                 rank.rewardAmount(),
-                lottoResult.getOrDefault(rank, LOTTO_RESULT_DEFAULT_MATCHING_COUNT)
+                result.getOrDefault(rank, LOTTO_RESULT_DEFAULT_MATCHING_COUNT)
         );
 
         output.printLine(lottoResultOutputByRank);

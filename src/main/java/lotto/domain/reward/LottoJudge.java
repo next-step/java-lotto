@@ -8,9 +8,11 @@ import lotto.domain.Lotto;
 
 public class LottoJudge {
 
-    public Map<LottoRank, Long> judge(final List<Lotto> lottos, final Lotto winningLotto) {
-        return lottos.stream()
+    public LottoResult judge(final List<Lotto> lottos, final Lotto winningLotto) {
+        final Map<LottoRank, Long> result = lottos.stream()
                 .collect(Collectors.groupingBy(lotto -> match(lotto, winningLotto), Collectors.counting()));
+
+        return LottoResult.from(result);
     }
 
     private LottoRank match(final Lotto lotto, final Lotto winningLotto) {
