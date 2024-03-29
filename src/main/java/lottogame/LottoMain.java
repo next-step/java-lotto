@@ -2,7 +2,6 @@ package lottogame;
 
 import java.util.List;
 import lottogame.domain.Lottos;
-import lottogame.domain.LottoFactory;
 import lottogame.domain.LottoGame;
 import lottogame.domain.Money;
 import lottogame.domain.Number;
