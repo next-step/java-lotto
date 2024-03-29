@@ -9,6 +9,10 @@ public class Lotto {
         this.numbers = Numbers.valueOf(numbers);
     }
 
+    public Lotto(Numbers numbers) {
+        this.numbers = numbers;
+    }
+
     public Numbers getNumbers() {
         return numbers;
     }

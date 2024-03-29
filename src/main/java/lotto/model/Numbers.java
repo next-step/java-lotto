@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -50,5 +51,9 @@ public class Numbers {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    public void shuffle() {
+        Collections.shuffle(this.numbers);
     }
 }
