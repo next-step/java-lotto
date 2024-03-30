@@ -5,7 +5,6 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
-import java.util.Map;
 
 public class AutoLottoMain {
     public static void main(String[] args) {
@@ -19,7 +18,7 @@ public class AutoLottoMain {
         int bonusNumber = InputView.scanBonusNumber();
 
         Lottos issuedLottos = new Lottos(lottos);
-        WinningStatic winningStatic = new WinningStatic(issuedLottos.winningStatistic(winNumbers, bonusNumber));
+        WinningStatic winningStatic = new WinningStatic(issuedLottos.winningCount(winNumbers, bonusNumber));
         OutputView.printWinningStatic(winningStatic);
         OutputView.printReturnRate(winningStatic.returnRate(amount));
     }

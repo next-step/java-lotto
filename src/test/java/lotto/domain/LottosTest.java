@@ -22,7 +22,7 @@ public class LottosTest {
         Lotto lotto2 = new Lotto(buyNumber2);
 
         Lottos lottos = new Lottos(List.of(lotto1, lotto2));
-        Map<WinningType, Long> winningStatic = lottos.winningStatistic(winNumber, bonusNumber);
+        Map<WinningType, Long> winningStatic = lottos.winningCount(winNumber, bonusNumber);
 
         Assertions.assertThat(winningStatic.get(WinningType.HIT_COUNT_3)).isEqualTo(1L);
         Assertions.assertThat(winningStatic.get(WinningType.HIT_COUNT_5)).isEqualTo(1L);

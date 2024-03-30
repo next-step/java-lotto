@@ -9,10 +9,9 @@ public class WinningStatic {
         this.winningStatistic = winningStatistic;
     }
 
-    public java.util.Set<Map.Entry<WinningType, Long>> getEntry(){
-        return this.winningStatistic.entrySet();
+    public Long countWinnersByWinningType(WinningType type){
+        return winningStatistic.getOrDefault(type, 0L);
     }
-
     public double returnRate(int amount) {
         Long revenue = this.winningStatistic.entrySet()
                 .stream()
