@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.constants.Const;
 import lotto.domain.Reward;
 
 import java.util.Map;
@@ -8,7 +7,7 @@ import java.util.Map;
 public class ResultView {
 
     public void printResult(Map<Integer, Integer> countMap, double profit) {
-        System.out.println(Const.RESULT);
+        System.out.println("당첨 통계");
         System.out.println("-----------------");
 
         for (Reward Reward : Reward.values()) {

@@ -1,8 +1,6 @@
 package lotto.domain;
 
 
-import lotto.constants.Const;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +9,7 @@ public class LottoGame {
 
     private Lottos lottos;
     private final Map<Integer, Integer> countMap;
+    public static final int LOTTO_COST = 1000;
 
     public LottoGame(int tryNo) {
         // 로또 장수만큼 6자리 숫자를 랜덤 뽑기한다.
@@ -44,7 +43,7 @@ public class LottoGame {
                 .mapToInt(entry -> Reward.fromMatchingCount(entry.getKey()).getReward() * entry.getValue())
                 .sum();
 
-        return (double) totalReward / (lottos.of().size() * Const.LOTTO_COST);
+        return (double) totalReward / (lottos.of().size() * LOTTO_COST);
     }
 
     public Map<Integer, Integer> countLottosByMatchingCount(List<Integer> winningNo) {
