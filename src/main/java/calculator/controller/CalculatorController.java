@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.domain.Operator;
+import calculator.domain.Calculator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -12,7 +12,7 @@ public class CalculatorController {
         List<Integer> operands = InputView.parseOperands(inputFormula);
         List<String> operators = InputView.parseOperators(inputFormula);
 
-        int totalSum = Operator.calculate(operands, operators);
+        int totalSum = Calculator.calculate(operands, operators);
         OutputView.printResult(totalSum);
     }
 }
