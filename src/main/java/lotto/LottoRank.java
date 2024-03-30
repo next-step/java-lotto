@@ -33,7 +33,7 @@ public enum LottoRank {
         if (count < LOSE_STANDARD) {
             return LOSE;
         }
-        if(count == 5){
+        if(count == SECOND.count){
             return isBonus ? SECOND : THIRD;
         }
 
