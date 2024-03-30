@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    PLUS("+", (number1, number2) -> Integer.valueOf(number1 + number2)),
-    MINUS("-", (number1, number2) -> Integer.valueOf(number1 - number2)),
-    MULTIPLY("*", (number1, number2) -> Integer.valueOf(number1 * number2)),
-    DIVIDE("/", (number1, number2) -> Integer.valueOf(number1 / number2));
+    PLUS("+", (number1, number2) -> number1 + number2),
+    MINUS("-", (number1, number2) -> number1 - number2),
+    MULTIPLY("*", (number1, number2) -> number1 * number2),
+    DIVIDE("/", (number1, number2) -> number1 / number2);
 
     private final String operator;
     private final BiFunction<Integer, Integer, Integer> calculator;
