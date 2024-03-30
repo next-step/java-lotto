@@ -13,12 +13,8 @@ public class WinningLotto {
         this(new Lotto(numbers), new LottoNumber(bonus));
     }
 
-    public int countMatch(Lotto lotto) {
-        return numbers.countMatch(lotto);
-    }
-
-    public boolean matchBonus(Lotto lotto){
-        return lotto.contains(bonus);
+    public LottoResult getWinningResult(Lottos lottos) {
+        return lottos.getWinningResult(numbers, bonus);
     }
 
 }

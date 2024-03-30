@@ -19,7 +19,7 @@ public class LottoProgram {
         WinningLotto winningLotto = new WinningLotto(
             inputWinningNumbers(), inputBonusNumber());
 
-        LottoResult lottoResult = new LottoResult(lottos.getWinningResult(winningLotto));
+        LottoResult lottoResult = winningLotto.getWinningResult(lottos);
         printWinningResult(lottoResult);
         printReturnRate(purchaseAmount.purchase(), lottoResult);
     }
