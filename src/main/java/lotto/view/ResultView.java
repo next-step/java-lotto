@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.constants.Const;
 import lotto.enums.RewardEnum;
 
 import java.util.Map;
@@ -7,6 +8,9 @@ import java.util.Map;
 public class ResultView {
 
     public void printResult(Map<Integer, Integer> countMap, double profit) {
+        System.out.println(Const.RESULT);
+        System.out.println("-----------------");
+
         for (RewardEnum rewardEnum : RewardEnum.values()) {
             printReward(rewardEnum, countMap);
         }

@@ -20,6 +20,7 @@ public class InputView {
     }
 
     public int tryNo(String input) {
+        System.out.println(Const.GET_TRY_NO);
         checkBlank(input);
         int i;
         try {
@@ -34,6 +35,7 @@ public class InputView {
     }
 
     public List<Integer> winningNo(String input) {
+        System.out.println(Const.GET_WINNING_NO);
         String[] winningNoStrArr = split(input);
         return Arrays.stream(winningNoStrArr)
                 .mapToInt(Integer::parseInt)
