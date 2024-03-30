@@ -37,10 +37,6 @@ public class Validator {
     }
 
     private static boolean isArithmeticElement(char character) {
-        if (!Character.isDigit(character) && !Character.isWhitespace(character) && !isArithmeticOperator(character)) {
-            return false;
-        }
-
-        return true;
+        return Character.isDigit(character) || Character.isWhitespace(character) || isArithmeticOperator(character);
     }
 }
