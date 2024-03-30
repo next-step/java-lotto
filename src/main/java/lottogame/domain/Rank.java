@@ -23,14 +23,6 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static int findPrize(int numOfWinnings) {
-        return Stream.of(values())
-                .filter(match(numOfWinnings))
-                .findAny()
-                .orElse(EMPTY)
-                .prize;
-    }
-
     public static int findPrize(int numOfWinnings, boolean matchBonus) {
         if (isSecond(numOfWinnings, matchBonus)) {
             return SECOND.prize;
@@ -49,14 +41,14 @@ public enum Rank {
                 .collect(Collectors.toList());
     }
 
-    public static Rank findRank(int numOfWinnings) {
+    public static Rank find(int numOfWinnings) {
         return Stream.of(values())
                 .filter(match(numOfWinnings))
                 .findAny()
                 .orElse(EMPTY);
     }
 
-    public static Rank findRank(int numOfWinnings, boolean matchBonus) {
+    public static Rank find(int numOfWinnings, boolean matchBonus) {
         if (isSecond(numOfWinnings, matchBonus)) {
             return SECOND;
         }

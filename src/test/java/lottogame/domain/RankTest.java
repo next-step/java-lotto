@@ -1,6 +1,6 @@
 package lottogame.domain;
 
-import static lottogame.domain.Rank.findRank;
+import static lottogame.domain.Rank.find;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
@@ -13,7 +13,7 @@ class RankTest {
     @ParameterizedTest
     @MethodSource("countAndRank")
     void 당첨확인(int count, boolean matchBonus, Rank rank) {
-        assertThat(findRank(count, matchBonus)).isEqualTo(rank);
+        assertThat(find(count, matchBonus)).isEqualTo(rank);
     }
 
     static Stream<Arguments> countAndRank() {

@@ -14,7 +14,7 @@ public class WinningLottos {
     }
 
     public Rank getRank(Lottos lottos) {
-        return Rank.findRank(match(lottos), matchBonusNumber(lottos));
+        return Rank.find(match(lottos), matchBonusNumber(lottos));
     }
 
     public Number getPrize(Lottos lottos) {
