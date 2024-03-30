@@ -8,12 +8,8 @@ import java.util.stream.Stream;
 public class LottoTickets {
     private final List<LottoTicket> lottoTicketList;
 
-    public LottoTickets(Amount amount, List<String[]> manualLottoNumbers) {
-        List<LottoTicket> manualLotto = manualLottoNumbers.stream()
-                .map(LottoTicket::new)
-                .collect(Collectors.toList());
-
-        List<LottoTicket> autoLotto = IntStream.range(0, amount.lottoTicketCount() - manualLottoNumbers.size())
+    public LottoTickets(Amount amount, List<LottoTicket> manualLotto) {
+        List<LottoTicket> autoLotto = IntStream.range(0, amount.lottoTicketCount() - manualLotto.size())
                 .mapToObj(i -> new LottoTicket())
                 .collect(Collectors.toList());
 
