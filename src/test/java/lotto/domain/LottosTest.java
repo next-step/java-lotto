@@ -11,7 +11,7 @@ import java.util.Map;
 public class LottosTest {
     @DisplayName("우승 로또와 몇 개가 일치하는지 통계를 낸다.")
     @Test
-    void winningStatistic() throws Exception {
+    void winningStatistic() {
         List<Integer> winNumber = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6));
         Integer bonusNumber = 0;
 

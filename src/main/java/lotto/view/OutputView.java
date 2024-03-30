@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.WinningStatic;
 import lotto.domain.WinningType;
 
 import java.util.List;
@@ -14,9 +15,9 @@ public class OutputView {
         }
     }
 
-    public static void printWinningStatic(Map<WinningType, Long> winningStatic) {
+    public static void printWinningStatic(WinningStatic winningStatic) {
         StringBuilder result = new StringBuilder();
-        for (Map.Entry<WinningType, Long> entry : winningStatic.entrySet()) {
+        for (Map.Entry<WinningType, Long> entry : winningStatic.getEntry()) {
             Long hitCount = entry.getKey().getHitCount();
             boolean matchBonus = entry.getKey().isMatchBonus();
             Long winnerNumber = entry.getValue();
