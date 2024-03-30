@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.constants.Const;
-import lotto.enums.RewardEnum;
+import lotto.domain.Reward;
 
 import java.util.Map;
 
@@ -11,17 +11,17 @@ public class ResultView {
         System.out.println(Const.RESULT);
         System.out.println("-----------------");
 
-        for (RewardEnum rewardEnum : RewardEnum.values()) {
-            printReward(rewardEnum, countMap);
+        for (Reward Reward : Reward.values()) {
+            printReward(Reward, countMap);
         }
         printProfit(profit);
     }
 
-    private void printReward(RewardEnum rewardEnum, Map<Integer, Integer> countMap) {
+    private void printReward(Reward reward, Map<Integer, Integer> countMap) {
         System.out.printf("%s개 일치 (%s원)- %s개\n",
-                rewardEnum.getMatchingCount(),
-                rewardEnum.getReward(),
-                countMap.get(rewardEnum.getMatchingCount()));
+                reward.getMatchingCount(),
+                reward.getReward(),
+                countMap.get(reward.getMatchingCount()));
     }
 
     private void printProfit(double profit) {
