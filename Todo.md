@@ -64,8 +64,6 @@
 # Step3
 
 ## Todo
-- [ ] winningNumber와 bonusNumber 하나의 클래스로 합치기
-- [ ] profit과 matchCache를 묶는 상위 클래스 하나 만들기
 
 ## Done
 - [X] 보너스 당첨 여부에 따른 금액 계산((4개 일치, 당첨) -> 50000, (5개 일치, 당첨) -> 30000000, (5개 일치, 미당첨) -> 1500000, (6개 일치, 당첨) -> 2000000000)
@@ -78,10 +76,23 @@
 - [X] LottoPricing에 lottoPricingMappingCache 부분 반복문이나 stream()으로 처리
 - [X] WinningNumber 클래스 이름 변경(WinningNumber => WinningLotto)
 - [X] matchCount와 bonusCount를 구하는 부분을 WinningLotto에 메시지를 보내는 형태로 수정
+- [X] winningNumber와 bonusNumber 하나의 클래스로 합치기
+- [X] profit과 matchCache를 묶는 상위 클래스 하나 만들기
 
 # Step4
 
 ## Todo
+- [ ] 코드리뷰 적용 - Lotto 이름 변경(Lottos) 
+- [ ] 코드리뷰 적용 - LottoNumber 이름 변경(Lotto)
+- [ ] 코드리뷰 적용 - ManualLottoNumber -> LottoNumber에 변경
+- [ ] 코드리뷰 적용 - Lotto 내부의 로또 번호를 LottoNumber로 변경
+- [ ] 코드리뷰 적용 - ManualLotto -> Lotto와 병합
+- [ ] 코드리뷰 적용 - ManualLottoGroup -> Lottos와 병합
+- [ ] 코드리뷰 적용 - 수익률 계산 결과 Long 타입으로 수정
+- [ ] 코드리뷰 적용 - 수동 구매할 로또 개수가 제대로 계산되는지 확인
+- [ ] 코드리뷰 적용 - 수동 구매할 로또 개수 반복 횟수에 따라서 생성, 출력되는지 확인
+- [ ] 코드리뷰 적용 - OutputView 내의 printPlainMessage 삭제
+
 
 ## Done
 - [X] 수동으로 구매할 로또 개수가 null이면 예외(null => IllegalArgumentException)
@@ -94,3 +105,4 @@
 - [X] 출력 => "수동으로 구매할 번호를 입력해 주세요."
 - [X] 입력 => 수동으로 구매할 번호
 - [X] 출력 => "수동으로 {수동 구매 개수}장, 자동으로 {자동 구매 개수}개를 구매했습니다."
+- [X] 코드리뷰 적용 - step3 체킹안된 것들 완료 처리
