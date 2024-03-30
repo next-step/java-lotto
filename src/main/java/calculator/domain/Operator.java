@@ -18,10 +18,6 @@ public enum Operator {
         this.calculator = calculator;
     }
 
-    public String getOperator() {
-        return operator;
-    }
-
     public static Integer calculate(List<Integer> operands, List<String> operators) {
         int sum = operands.get(0);
         for (int i = 0; i < operators.size(); i++) {
@@ -30,6 +26,7 @@ public enum Operator {
 
         return sum;
     }
+
     public static Integer calculateSingle(String operator, Integer number1, Integer number2) {
         return getOperator(operator).calculator.apply(number1, number2);
     }
@@ -39,5 +36,9 @@ public enum Operator {
                 .filter(o -> o.operator.equals(operator))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("사칙연산 기호만 가능합니다."));
+    }
+
+    public String getOperator() {
+        return operator;
     }
 }
