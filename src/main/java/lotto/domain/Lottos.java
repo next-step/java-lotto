@@ -12,6 +12,10 @@ public class Lottos {
         this(generateLottosBy(budget));
     }
 
+    public Lottos(Lotto lotto) {
+        this(List.of(lotto));
+    }
+
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
