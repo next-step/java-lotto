@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Cash;
+import lotto.domain.LottoNumber;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,10 +14,11 @@ public class InputView {
         return new Cash(insertNumber());
     }
 
-    public static List<Integer> generateNumbers() {
+    public static List<LottoNumber> generateNumbers() {
         String str = insertValues();
         return Arrays.stream(str.split(","))
                 .map(Integer::parseInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 

@@ -1,7 +1,10 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import static lotto.view.InputView.generateNumbers;
 
 public class Lottos {
 
@@ -15,10 +18,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public void generateLottoNumbers(List<Integer> lottoNumber, int amount) {
+    public void generateLottoNumbers(NumbersGenerator generator, int amount) {
         for (int i = 0; i < amount; i++) {
-            Lotto newLotto = new Lotto(lottoNumber);
-            lottos.add(newLotto);
+            Lotto newLotto = new Lotto(generator.generate());
+            this.lottos.add(newLotto);
         }
     }
 
@@ -32,8 +35,7 @@ public class Lottos {
         return lottos;
     }
 
-    public void generateManualLottoNumbers(ManualLottoGroup manualLottoGroup) {
-        List<Lotto> lottos = manualLottoGroup.convertToLottoNumbers();
-        this.lottos.addAll(lottos);
+    public void add(Lotto lotto) {
+        this.lottos.add(lotto);
     }
 }

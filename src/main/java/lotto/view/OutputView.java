@@ -5,13 +5,13 @@ import lotto.domain.*;
 
 public class OutputView {
 
-    public static void printCount(Cash cash, ManualLottoGroup manualLottoGroup){
-        printPlainMessage(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다", manualLottoGroup.getCount(), manualLottoGroup.getLeftOvers(cash)));
+    public static void printCount(int manualCount, int leftOvers){
+        printPlainMessage(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다", manualCount, leftOvers));
     }
 
-    public static void printLottoGroup(LottoGroup lottoGroup) {
+    public static void printLottoGroup(Lottos lottos) {
         StringBuilder sb = new StringBuilder();
-        for (Lotto number : lottoGroup.getTickets().getLottoNumbers()) {
+        for (Lotto number : lottos.getLottoNumbers()) {
             sb.append(number);
             sb.append("\n");
         }

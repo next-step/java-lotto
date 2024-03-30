@@ -82,12 +82,7 @@
 # Step4
 
 ## Todo
-- [ ] 코드리뷰 적용 - Lotto 내부의 로또 번호를 LottoNumber로 변경
-- [ ] 코드리뷰 적용 - ManualLotto -> Lotto와 병합
-- [ ] 코드리뷰 적용 - ManualLottoGroup -> Lottos와 병합
 - [ ] 코드리뷰 적용 - 수익률 계산 결과 Long 타입으로 수정
-- [ ] 코드리뷰 적용 - 수동 구매할 로또 개수가 제대로 계산되는지 확인
-- [ ] 코드리뷰 적용 - 수동 구매할 로또 개수 반복 횟수에 따라서 생성, 출력되는지 확인
 - [ ] 코드리뷰 적용 - OutputView 내의 printPlainMessage 삭제
 
 
@@ -106,3 +101,8 @@
 - [X] 코드리뷰 적용 - Lotto 이름 변경(Lottos) 
 - [X] 코드리뷰 적용 - LottoNumber 이름 변경(Lotto)
 - [X] 코드리뷰 적용 - ManualLottoNumber -> LottoNumber에 변경
+- [X] 코드리뷰 적용 - Lotto 내부의 로또 번호를 LottoNumber로 변경
+- [X] 코드리뷰 적용 - ManualLotto -> Lotto와 병합
+- [X] 코드리뷰 적용 - ManualLottoGroup -> Lottos와 병합
+- [X] 코드리뷰 적용 - 수동 구매할 로또 개수가 제대로 계산되는지 확인
+- [X] 코드리뷰 적용 - 수동 구매할 로또 개수 반복 횟수에 따라서 생성, 출력되는지 확인

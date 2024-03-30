@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.Iterator;
 
-public class ManualLottoCount {
+public class ManualLottoCount{
     private final Integer count;
 
     public ManualLottoCount(Integer count) {
@@ -13,7 +13,9 @@ public class ManualLottoCount {
 
     public void validateIfLargerThanWholeCount(Cash cash) {
         int amount = cash.getAmount();
-        if (amount < this.count) throw new IllegalArgumentException();
+        if (amount < this.count) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private void validateIfNotNull(Integer count) {
@@ -22,15 +24,15 @@ public class ManualLottoCount {
         }
     }
 
-    public Iterator<Integer> iterator() {
-        return Collections.singleton(this.count).iterator();
-    }
-
     public int getLeftOvers(Cash cash) {
         return cash.minus(this.count);
     }
 
     public Integer getCount() {
         return count;
+    }
+
+    public boolean isLargerThan(Integer count) {
+        return this.count > count;
     }
 }

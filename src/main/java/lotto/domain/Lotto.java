@@ -3,23 +3,38 @@ package lotto.domain;
 import java.util.List;
 
 public class Lotto {
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(List<LottoNumber> numbers) {
+        if(numbers == null){
+            throw new IllegalArgumentException();
+        }
+        validateNumbers(numbers);
         this.numbers = numbers;
-        validateIfNotNull();
     }
 
-    private void validateIfNotNull() {
-        if (this.numbers == null) throw new IllegalArgumentException();
+    public void validateNumbers(List<LottoNumber> numbers) {
+        validateSize(numbers);
+        validateIfDuplication(numbers);
+    }
+
+    private void validateSize(List<LottoNumber> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateIfDuplication(List<LottoNumber> numbers) {
+        int count = (int) numbers.stream()
+                .distinct()
+                .count();
+        if (numbers.size() != count) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public boolean contains(Integer number) {
-        return this.numbers.contains(number);
-    }
-
-    public boolean isBonusContains(Integer bonusNumber) {
-        return Match.getCount(numbers, bonusNumber);
+        return this.numbers.contains(new LottoNumber(number));
     }
 
     @Override

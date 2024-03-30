@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.*;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,41 +15,40 @@ public class LottoClient {
         printPlainMessage("구입금액을 입력해 주세요.");
         Cash cash = generateCash();
         ManualLottoCount manualLottoCount = insertManualLottoCount(cash);
-        ManualLottoGroup manualLottoGroup = generateManualLotto(manualLottoCount);
-        LottoGroup lottoGroup = generateLottoGroupAndPrint(cash, manualLottoGroup);
-        WinningLotto winningLotto = insertWinningNumbers();
-        Match match = new Match();
-        lottoGroup.saveMatchResult(winningLotto, match);
-        printResult(cash, match);
+        Lottos lottos = generateManualLottos(manualLottoCount);
+        generateLottos(lottos, manualLottoCount.getLeftOvers(cash));
+        printCount(manualLottoCount.getCount(), manualLottoCount.getLeftOvers(cash));
+        printLottoGroup(lottos);
+//        WinningLotto winningLotto = insertWinningNumbers();
+//        Match match = new Match();
+//        lottoGroup.saveMatchResult(winningLotto, match);
+//        printResult(cash, match);
     }
 
-    private static ManualLottoGroup generateManualLotto(ManualLottoCount manualLottoCount) {
+    private static Lottos generateManualLottos(ManualLottoCount manualLottoCount) {
         printPlainMessage("수동으로 구매할 번호를 입력해 주세요.");
-        Iterator<Integer> iterator = manualLottoCount.iterator();
-        ManualLottoGroup manualLottoGroup = new ManualLottoGroup(manualLottoCount);
-        while(iterator.hasNext()){
-            List<Integer> numbers = generateNumbers();
-            manualLottoGroup.add(new ManualLotto(numbers));
-            iterator.next();
+        Lottos newLottos = new Lottos();
+        Integer iter = 0;
+        while(manualLottoCount.isLargerThan(iter)){
+            Lotto lotto = new Lotto(generateNumbers());
+            newLottos.add(lotto);
+            iter++;
         }
-        return manualLottoGroup;
+        return newLottos;
     }
 
-    private static WinningLotto insertWinningNumbers() {
-        List<Integer> latestWinningNumbers = insertLatestWinningNumbers();
-        int bonusNumber = insertBonusNumber();
-        return new WinningLotto(latestWinningNumbers, bonusNumber);
+//    private static WinningLotto insertWinningNumbers() {
+//        List<LottoNumber> latestWinningNumbers = insertLatestWinningNumbers();
+//        int bonusNumber = insertBonusNumber();
+//        return new WinningLotto(latestWinningNumbers, bonusNumber);
+//    }
+
+    private static Lottos generateLottos(Lottos lottos, int amount) {
+        lottos.generateLottoNumbers(new LottoGenerator(), amount);
+        return lottos;
     }
 
-    private static LottoGroup generateLottoGroupAndPrint(Cash cash, ManualLottoGroup manualLottoGroup) {
-        LottoGroup lottoGroup = new LottoGroup(new LottoGenerator());
-        lottoGroup.generateTickets(cash, manualLottoGroup);
-        printCount(cash, manualLottoGroup);
-        printLottoGroup(lottoGroup);
-        return lottoGroup;
-    }
-
-    private static List<Integer> insertLatestWinningNumbers() {
+    private static List<LottoNumber> insertLatestWinningNumbers() {
         printPlainMessage("지난 주 당첨 번호를 입력해 주세요.");
         return generateNumbers();
     }
