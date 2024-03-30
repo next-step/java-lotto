@@ -22,8 +22,4 @@ public class WinningTicket {
         return WinnerPrize.valueOf(lottoTicket.getMatchCount(winningNumbers),
                 lottoTicket.contains(bonusNumber));
     }
-
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
-    }
 }

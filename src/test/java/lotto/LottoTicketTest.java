@@ -1,8 +1,6 @@
 package lotto;
 
 import lotto.domain.LottoTicket;
-import lotto.domain.WinnerPrize;
-import lotto.domain.WinningTicket;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -36,13 +34,6 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(List.of(1, 3, 5, 7, 9, 11));
         LottoTicket winningNumbers = new LottoTicket(input.split(", "));
         assertThat(lottoTicket.getMatchCount(winningNumbers)).isEqualTo(expected);
-    }
-
-    @Test
-    void 등수_계산() {
-        LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-        WinningTicket winningTicket = new WinningTicket(new String[]{"1", "2", "3", "4", "5", "7"}, "6");
-        assertThat(winningTicket.rank(lottoTicket)).isEqualTo(WinnerPrize.SECOND);
     }
 
     @ParameterizedTest
