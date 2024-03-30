@@ -37,7 +37,7 @@ public enum Calculator {
         return Arrays.stream(values())
                 .filter(o -> o.operator.equals(operator))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(operator+ "는 " + MESSAGE_WRONG_OPERATOR));
+                .orElseThrow(() -> new IllegalArgumentException(operator + "는 " + MESSAGE_WRONG_OPERATOR));
     }
 
     public String getOperator() {
