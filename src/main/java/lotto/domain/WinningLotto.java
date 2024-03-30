@@ -33,19 +33,19 @@ public class WinningLotto {
         }
     }
 
-    public void saveMatchInfo(LottoNumber lottoNumber, Match match) {
-        int matchCount = getMatchCount(lottoNumber);
-        boolean bonusContains = isBonusContains(lottoNumber);
+    public void saveMatchInfo(Lotto lotto, Match match) {
+        int matchCount = getMatchCount(lotto);
+        boolean bonusContains = isBonusContains(lotto);
         match.save(matchCount, bonusContains);
     }
 
-    public int getMatchCount(LottoNumber lottoNumber) {
+    public int getMatchCount(Lotto lotto) {
         return (int) this.numbers.stream()
-                .filter(lottoNumber::contains)
+                .filter(lotto::contains)
                 .count();
     }
 
-    public boolean isBonusContains(LottoNumber lottoNumber) {
-        return lottoNumber.contains(this.bonusNumber);
+    public boolean isBonusContains(Lotto lotto) {
+        return lotto.contains(this.bonusNumber);
     }
 }

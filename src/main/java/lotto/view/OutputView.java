@@ -11,7 +11,7 @@ public class OutputView {
 
     public static void printLottoGroup(LottoGroup lottoGroup) {
         StringBuilder sb = new StringBuilder();
-        for (LottoNumber number : lottoGroup.getTickets().getLottoNumbers()) {
+        for (Lotto number : lottoGroup.getTickets().getLottoNumbers()) {
             sb.append(number);
             sb.append("\n");
         }

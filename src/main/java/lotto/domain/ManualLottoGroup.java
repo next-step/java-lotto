@@ -24,9 +24,9 @@ public class ManualLottoGroup {
         return manualLottoCount.getCount();
     }
 
-    public List<LottoNumber> convertToLottoNumbers() {
+    public List<Lotto> convertToLottoNumbers() {
         return this.tickets.stream()
-                .map(iter -> new LottoNumber(iter.getNumbers()))
+                .map(iter -> new Lotto(iter.getNumbers()))
                 .collect(Collectors.toList());
     }
 }

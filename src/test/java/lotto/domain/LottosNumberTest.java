@@ -15,7 +15,7 @@ class LottosNumberTest {
     @NullSource
     void if_null(List<Integer> nullList) {
         assertThatThrownBy(() -> {
-            new LottoNumber(nullList);
+            new Lotto(nullList);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

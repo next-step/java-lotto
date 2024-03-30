@@ -54,7 +54,7 @@ class WinningLottosTest {
     @DisplayName("두 개의 배열을 비교하여 일치하는 개수 반환((1,2,3],[1,2,3]) => 3, ([1,0,4],[1,2,3]) => 1, ([1],[1,2,3,4]) =>1, ([4,3],[1,2,3,4]) => 2")
     @MethodSource("passInputListAndResult")
     void if_not_null(List<Integer> sources, List<Integer> targets, int result) {
-        int matchCount = new WinningLotto(targets).getMatchCount(new LottoNumber(sources));
+        int matchCount = new WinningLotto(targets).getMatchCount(new Lotto(sources));
         assertThat(matchCount).isEqualTo(result);
     }
 
@@ -62,7 +62,7 @@ class WinningLottosTest {
     @DisplayName("보너스 번호가 있는지 확인(([1,2,3], 2) => true, ([1,2,3], 5) => false")
     @MethodSource("bonusInputAndResult")
     void if_bonus(List<Integer> sources, int bonusNumber, boolean result) {
-        boolean isBonusContain = new WinningLotto(bonusNumber).isBonusContains(new LottoNumber(sources));
+        boolean isBonusContain = new WinningLotto(bonusNumber).isBonusContains(new Lotto(sources));
         assertThat(isBonusContain).isEqualTo(result);
     }
 }
