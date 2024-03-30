@@ -13,7 +13,7 @@ public class LottoFactory {
     private LottoFactory() {
     }
 
-    public static List<Lottos> createLottoses(Number count) {
+    public static List<Lottos> createMultipleLottos(Number count) {
         List<Lottos> lottoses = new ArrayList<>();
         while (count.isPositive()) {
             lottoses.add(createRandomLotto());

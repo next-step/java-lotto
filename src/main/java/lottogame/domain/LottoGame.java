@@ -22,7 +22,7 @@ public class LottoGame {
     }
 
     public List<Lottos> createLottos(Money amount) {
-        return LottoFactory.createLottoses(Number.from(amount.divide(price).convertToInt()));
+        return LottoFactory.createMultipleLottos(Number.from(amount.divide(price).convertToInt()));
     }
 
     public WinningLottos createWinningLotto(List<Integer> numbers, Number bonusNumber) {
