@@ -20,7 +20,10 @@ public enum Calculator {
         this.calculator = calculator;
     }
 
-    public static Integer calculate(List<Integer> operands, List<String> operators) {
+    public static Integer calculate(String inputFormula) {
+        List<Integer> operands = StringParser.parseOperands(inputFormula);
+        List<String> operators = StringParser.parseOperators(inputFormula);
+
         int sum = operands.get(0);
         for (int i = 0; i < operators.size(); i++) {
             sum = Calculator.calculateSingle(operators.get(i), sum, operands.get(i + 1));
