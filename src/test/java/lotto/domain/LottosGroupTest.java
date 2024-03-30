@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoGroupTest {
+class LottosGroupTest {
 
     LottoGroup lottoGroup;
     Cash cash = new Cash(2000);
@@ -22,10 +22,10 @@ class LottoGroupTest {
     @Test
     @DisplayName("1 ~ 45 사이의 중복되지 않고 오름차순으로 정렬된 6개 정수 생성(1,2,3,4,5,6)")
     void generate() {
-        Lotto lotto = new Lotto();
-        lotto.generateLottoNumbers(generator.generate(), cash.getAmount());
-        lottoGroup = new LottoGroup(generator, lotto);
-        assertThat(lottoGroup).isEqualTo(new LottoGroup(generator, lotto));
+        Lottos lottos = new Lottos();
+        lottos.generateLottoNumbers(generator.generate(), cash.getAmount());
+        lottoGroup = new LottoGroup(generator, lottos);
+        assertThat(lottoGroup).isEqualTo(new LottoGroup(generator, lottos));
     }
 
     static class FakeNumberGenerator implements NumbersGenerator {

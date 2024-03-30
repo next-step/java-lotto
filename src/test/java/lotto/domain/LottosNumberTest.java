@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoNumberTest {
+class LottosNumberTest {
 
     @ParameterizedTest
     @DisplayName("배열이 null이면 예외")

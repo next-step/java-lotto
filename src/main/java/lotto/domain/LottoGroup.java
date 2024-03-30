@@ -4,29 +4,29 @@ import java.util.Objects;
 
 public class LottoGroup {
     private final NumbersGenerator generator;
-    private Lotto tickets;
+    private Lottos tickets;
 
     public LottoGroup(NumbersGenerator generator) {
         this(generator, null);
     }
 
-    public LottoGroup(NumbersGenerator generator, Lotto tickets) {
+    public LottoGroup(NumbersGenerator generator, Lottos tickets) {
         this.generator = generator;
         this.tickets = tickets;
     }
 
     public void generateTickets(Cash cash, ManualLottoGroup manualLottoGroup) {
-        Lotto lotto = new Lotto();
-        lotto.generateManualLottoNumbers(manualLottoGroup);
-        lotto.generateLottoNumbers(this.generator.generate(), manualLottoGroup.getLeftOvers(cash));
-        this.tickets = lotto;
+        Lottos lottos = new Lottos();
+        lottos.generateManualLottoNumbers(manualLottoGroup);
+        lottos.generateLottoNumbers(this.generator.generate(), manualLottoGroup.getLeftOvers(cash));
+        this.tickets = lottos;
     }
 
     public void saveMatchResult(WinningLotto winningLotto, Match match) {
         tickets.saveMatchResult(winningLotto, match);
     }
 
-    public Lotto getTickets() {
+    public Lottos getTickets() {
         return tickets;
     }
 

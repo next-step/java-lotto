@@ -82,7 +82,6 @@
 # Step4
 
 ## Todo
-- [ ] 코드리뷰 적용 - Lotto 이름 변경(Lottos) 
 - [ ] 코드리뷰 적용 - LottoNumber 이름 변경(Lotto)
 - [ ] 코드리뷰 적용 - ManualLottoNumber -> LottoNumber에 변경
 - [ ] 코드리뷰 적용 - Lotto 내부의 로또 번호를 LottoNumber로 변경
@@ -106,3 +105,4 @@
 - [X] 입력 => 수동으로 구매할 번호
 - [X] 출력 => "수동으로 {수동 구매 개수}장, 자동으로 {자동 구매 개수}개를 구매했습니다."
 - [X] 코드리뷰 적용 - step3 체킹안된 것들 완료 처리
+- [X] 코드리뷰 적용 - Lotto 이름 변경(Lottos) 

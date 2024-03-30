@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class ManualLottoCountTest {
+public class ManualLottosCountTest {
 
     @Test
     @DisplayName("수동으로 구매할 로또 개수가 null이면 예외(null => IllegalArgumentException)")
