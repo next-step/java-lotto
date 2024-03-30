@@ -105,3 +105,4 @@
 - [X] 코드리뷰 적용 - 수동 구매할 로또 개수 반복 횟수에 따라서 생성, 출력되는지 확인
 - [X] 코드리뷰 적용 - 수익률 계산 결과 Long 타입으로 수정
 - [X] 코드리뷰 적용 - OutputView 내의 printPlainMessage 삭제
+- [X] 코드리뷰 적용 - 남은 횟수가 전체 횟수보다 크다면 예외(14000,15 => IllegalArgumentException)

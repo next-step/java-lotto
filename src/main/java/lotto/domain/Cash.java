@@ -15,6 +15,10 @@ public class Cash {
     }
 
     public int minus(Integer count) {
-        return getAmount() - count;
+        int result = getAmount() - count;
+        if(result < 0){
+            throw new IllegalArgumentException();
+        }
+        return result;
     }
 }
