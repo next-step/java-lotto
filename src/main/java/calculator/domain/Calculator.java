@@ -34,7 +34,7 @@ public enum Calculator {
         return sum;
     }
 
-    public static Integer calculateSingle(String operator, Integer number1, Integer number2) {
+    private static Integer calculateSingle(String operator, Integer number1, Integer number2) {
         return getOperator(operator).calculator.apply(number1, number2);
     }
 
