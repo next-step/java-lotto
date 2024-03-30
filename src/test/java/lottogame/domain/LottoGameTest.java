@@ -18,7 +18,7 @@ class LottoGameTest {
 
     @Test
     void 수익률() {
-        Lottos winnerLotto = new WinningLottos(List.of(1, 2, 3, 4, 5, 6), 42);
+        WinningLottos winnerLotto = new WinningLottos(List.of(1, 2, 3, 4, 5, 6), 42);
         List<Lottos> lottos = List.of(
                 new Lottos(List.of(8, 21, 23, 41, 42, 43)),
                 new Lottos(List.of(3, 5, 11, 16, 32, 38)),

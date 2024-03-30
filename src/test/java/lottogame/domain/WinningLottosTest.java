@@ -16,7 +16,7 @@ public class WinningLottosTest {
         WinningLottos winningLotto = LottoFactory.createWinningLotto(List.of(1, 2, 3, 4, 5, 6),  7);
         int expected = 6;
 
-        assertThat(winningLotto.getNumbers().size()).isEqualTo(expected);
+        assertThat(winningLotto.size()).isEqualTo(expected);
     }
 
     @ParameterizedTest

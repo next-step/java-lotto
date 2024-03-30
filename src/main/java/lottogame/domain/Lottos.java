@@ -13,25 +13,11 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    public Number getPrize(Lottos lotto) {
-        return Number.from(Rank.findPrize(match(lotto)));
-    }
-
-    public Rank getRank(Lottos lotto) {
-        return Rank.findRank(match(lotto));
-    }
-
     public List<LottoNumber> getNumbers() {
         return numbers;
     }
 
-    protected int match(Lottos lotto) {
-        return (int) numbers.stream()
-                .filter(lotto::match)
-                .count();
-    }
-
-    protected boolean match(LottoNumber number) {
-        return numbers.contains(number);
+    public boolean match(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
 }

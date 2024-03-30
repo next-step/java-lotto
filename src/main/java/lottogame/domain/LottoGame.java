@@ -6,14 +6,14 @@ import java.util.List;
 public class LottoGame {
     private static final Money price = Money.from(1_000);
 
-    public double calculateReturnOfRate(Lottos winnerLotto, List<Lottos> lottos) {
+    public double calculateReturnOfRate(WinningLottos winnerLotto, List<Lottos> lottos) {
         Money purchaseAmount = calculatePurchaseAmount(lottos);
         Money sumOfPrize = calculateSumOfPrize(winnerLotto, lottos);
         Money result = sumOfPrize.divide(purchaseAmount);
         return result.formattingTwoDecimal();
     }
 
-    public List<Rank> checkRanks(Lottos winnerLotto, List<Lottos> lottos) {
+    public List<Rank> checkRanks(WinningLottos winnerLotto, List<Lottos> lottos) {
         List<Rank> ranks = new ArrayList<>();
         for (Lottos lotto : lottos) {
             ranks.add(winnerLotto.getRank(lotto));
@@ -33,7 +33,7 @@ public class LottoGame {
         return price.multiply(Number.from(lottos.size()));
     }
 
-    private Money calculateSumOfPrize(Lottos winnerLotto, List<Lottos> lottos) {
+    private Money calculateSumOfPrize(WinningLottos winnerLotto, List<Lottos> lottos) {
         Money sumOfPrize = Money.from(0);
         for (Lottos lotto : lottos) {
             sumOfPrize = sumOfPrize.add(winnerLotto.getPrize(lotto));
