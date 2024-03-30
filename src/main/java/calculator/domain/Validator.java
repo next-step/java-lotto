@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 public class Validator {
 
-    private static final Set<String> OPERATORS = Arrays.stream(Operator.values())
-            .map(Operator::getOperator)
+    private static final Set<String> OPERATORS = Arrays.stream(Calculator.values())
+            .map(Calculator::getOperator)
             .collect(Collectors.toSet());
 
     private Validator() {
