@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +16,12 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
+    public Lottos(List<LottoNumberStrategy> strategies) {
+        this.lottos = strategies.stream()
+                .map(it -> new Lotto(LottoNumbers.create(it)))
+                .collect(Collectors.toList());
+    }
+
     public int count() {
         return lottos.size();
     }
@@ -23,6 +30,11 @@ public class Lottos {
         return lottos.stream()
                 .map(lotto -> lotto.match(winNums, bonusNumber))
                 .collect(Collectors.toList());
+    }
+
+
+    public void merge(List<Lotto> lottos) {
+        this.lottos.addAll(lottos);
     }
 
     public List<Lotto> getLottos() {
