@@ -5,7 +5,8 @@ public enum Reward {
     THREE(3, 5000),
     FOUR(4, 50_000),
     FIVE(5, 1_500_000),
-    SIX(6, 2_000_000_000);
+    SIX(6, 2_000_000_000),
+    MISS(0, 0);
 
     private final int matchingCount;
     private final int reward;
@@ -29,7 +30,7 @@ public enum Reward {
                 return reward;
             }
         }
-        return null; // or throw an exception
+        return MISS; // or throw an exception
     }
 
 }

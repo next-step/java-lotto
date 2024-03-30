@@ -100,9 +100,9 @@
   - [x] 패키지 분리 필요 없음
   - [x] 큰 숫자에 _추가
   - [ ] countMap에 사용
-  - [ ] matchingCount에 해당하는 타입이 없다면 null을 리턴하기 보다 미당첨 타입을 리턴
+  - [x] matchingCount에 해당하는 타입이 없다면 null을 리턴하기 보다 미당첨 타입을 리턴
 - 모든 도메인 로직에 test 추가
   - [ ] Lottos : 로또의 제약인 숫자의 범위 test 추가
   - [ ] Lottos : 로또가 가지는 숫자의 개수 test 추가
-  - [ ] Reward : fromMatchingCount() 테스트 추가
+  - [x] Reward : fromMatchingCount() 테스트 추가
   - [ ] 테스트 코드라고 하더라도 변수명은 이해하기 쉬운 이름으로 지어주기 (예시: expected)
