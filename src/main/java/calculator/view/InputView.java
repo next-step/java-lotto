@@ -13,15 +13,8 @@ public class InputView {
 
     public static String inputFormula() {
         System.out.println("수식을 입력하세요.");
-
         String inputFormula = SCANNER.nextLine();
-        validateInput(inputFormula);
 
         return inputFormula;
-    }
-
-    private static void validateInput(String inputFormula) {
-        Validator.validateInputFormula(inputFormula);
-        Validator.validateArithmeticFormula(inputFormula);
     }
 }

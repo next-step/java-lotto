@@ -21,6 +21,8 @@ public enum Calculator {
     }
 
     public static Integer calculate(String inputFormula) {
+        validateInput(inputFormula);
+
         List<Integer> operands = StringParser.parseOperands(inputFormula);
         List<String> operators = StringParser.parseOperators(inputFormula);
 
@@ -41,6 +43,11 @@ public enum Calculator {
                 .filter(o -> o.operator.equals(operator))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(operator + "는 " + MESSAGE_WRONG_OPERATOR));
+    }
+
+    private static void validateInput(String inputFormula) {
+        Validator.validateInputFormula(inputFormula);
+        Validator.validateArithmeticFormula(inputFormula);
     }
 
     public String getOperator() {
