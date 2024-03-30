@@ -10,6 +10,8 @@ public enum Operator {
     MULTIPLY("*", (number1, number2) -> number1 * number2),
     DIVIDE("/", (number1, number2) -> number1 / number2);
 
+    private static final String MESSAGE_WRONG_OPERATOR = "잘못된 연산자입니다. 명시된 연산자를 사용하세요.[" + Arrays.toString(Operator.values()) + "]";
+
     private final String operator;
     private final BiFunction<Integer, Integer, Integer> calculator;
 
@@ -35,7 +37,7 @@ public enum Operator {
         return Arrays.stream(values())
                 .filter(o -> o.operator.equals(operator))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("사칙연산 기호만 가능합니다."));
+                .orElseThrow(() -> new IllegalArgumentException(operator+ "는 " + MESSAGE_WRONG_OPERATOR));
     }
 
     public String getOperator() {
