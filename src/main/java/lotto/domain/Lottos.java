@@ -11,7 +11,7 @@ public class Lottos {
         autoLottos = new ArrayList<>();
 
         for (int i = 0; i < size; i++) {
-            autoLottos.add(new Lotto());
+            autoLottos.add(new Lotto(new LottoNumbers()));
         }
     }
 
