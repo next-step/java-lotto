@@ -10,6 +10,10 @@ public class Validator {
             .map(Operator::getOperator)
             .collect(Collectors.toSet());
 
+    private Validator() {
+        throw new AssertionError();
+    }
+
     public static void validateInputFormula(String input) {
         if (null == input || input.isEmpty()) {
             throw new IllegalArgumentException("입력값이 null이거나 빈 공백인 문자입니다.");
