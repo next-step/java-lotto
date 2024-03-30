@@ -10,7 +10,6 @@ public class InputView {
 
     private final Scanner scanner;
     private static final String regex = "([0-9]+)";
-//    private static final Pattern pattern = Pattern.compile("([0-9]+)");
 
     public InputView() {
         this.scanner = new Scanner(System.in);

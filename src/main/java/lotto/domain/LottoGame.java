@@ -2,7 +2,6 @@ package lotto.domain;
 
 
 import lotto.constants.Const;
-import lotto.enums.RewardEnum;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,8 +40,8 @@ public class LottoGame {
     public double profitRate() {
         // 수익률을 계산한다.
         int totalReward = countMap.entrySet().stream()
-                .filter(entry -> RewardEnum.fromMatchingCount(entry.getKey()) != null)
-                .mapToInt(entry -> RewardEnum.fromMatchingCount(entry.getKey()).getReward() * entry.getValue())
+                .filter(entry -> Reward.fromMatchingCount(entry.getKey()) != null)
+                .mapToInt(entry -> Reward.fromMatchingCount(entry.getKey()).getReward() * entry.getValue())
                 .sum();
 
         return (double) totalReward / (lottos.of().size() * Const.LOTTO_COST);
