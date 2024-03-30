@@ -1,8 +1,8 @@
-import autoLotto.AutoLotto;
+import lotto.LottoGame;
 
 public class Application {
 
     public static void main(String[] args) {
-        new AutoLotto().run();
+        new LottoGame().run();
     }
 }

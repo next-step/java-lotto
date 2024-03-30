@@ -1,14 +1,15 @@
-package autoLotto.model;
+package lotto.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map;
 
-public class LottoProfitChecker {
-    private static final Long ZERO_PURCHASE_AMOUNT = 0L;
+public class LottoProfit {
+    private static final int ZERO_PURCHASE_AMOUNT = 0;
+    private static final int KOREAN_DOLLAR_UNIT = 1000;
     private BigDecimal profit;
 
-    public LottoProfitChecker(Map<PrizeEnum, Integer> winLottos) {
+    public LottoProfit(Map<PrizeEnum, Integer> winLottos) {
         this.profit = getTotalPrizes(winLottos);
     }
 
@@ -23,12 +24,12 @@ public class LottoProfitChecker {
         return totalWinAmount;
     }
 
-    public BigDecimal getProfitRatio(Long purchaseAmount) {
-        if (purchaseAmount.equals(ZERO_PURCHASE_AMOUNT)) {
+    public BigDecimal getProfitRatio(PurchaseAmount purchaseAmount) {
+        if (purchaseAmount.getPurchaseAmount() == ZERO_PURCHASE_AMOUNT) {
             return BigDecimal.ZERO;
         }
 
-        return calculateProfitRatio(BigDecimal.valueOf(purchaseAmount));
+        return calculateProfitRatio(BigDecimal.valueOf(purchaseAmount.getPurchaseAmount()));
     }
 
     private BigDecimal calculateProfitRatio(BigDecimal purchaseAmount) {

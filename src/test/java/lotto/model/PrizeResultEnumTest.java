@@ -1,13 +1,14 @@
-package autoLotto.model;
+package lotto.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class PrizeEnumTest {
+class PrizeResultEnumTest {
 
     @ParameterizedTest(name = "매칭된 숫자 개수 : {0}, 우승 상금 : {1}, 보너스 볼 여부 : {2}")
     @EnumSource(value = PrizeEnum.class)
@@ -33,5 +34,12 @@ class PrizeEnumTest {
 
         // then
         assertEquals(prizeAmount, 0);
+    }
+
+    @ParameterizedTest(name = "matchedCount로 isBonusMatched를 조회")
+    @CsvSource(value = {"6:false", "5:true", "4:false", "3:false", "0:false"}, delimiter = ':')
+    void testIsBonusMatchedFrom_ShouldReturnIsBonusMatched(int matchedCount, boolean isBonusMatched) {
+        // then
+        assertEquals(PrizeEnum.isBonusMatchedFrom(matchedCount), isBonusMatched);
     }
 }
