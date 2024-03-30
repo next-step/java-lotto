@@ -81,11 +81,6 @@ public class LottoTicket {
         return numbers.contains(lottoNumber);
     }
 
-    public WinnerPrize rank(WinningTicket winningTicket) {
-        return WinnerPrize.valueOf(getMatchCount(winningTicket.getWinningNumbers()),
-                numbers.contains(winningTicket.getBonusNumber()));
-    }
-
     @Override
     public String toString() {
         return numbers.toString();

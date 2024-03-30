@@ -18,8 +18,9 @@ public class WinningTicket {
         return bonusBall;
     }
 
-    public LottoTicket getWinningNumbers() {
-        return winningNumbers;
+    public WinnerPrize rank(LottoTicket lottoTicket) {
+        return WinnerPrize.valueOf(lottoTicket.getMatchCount(winningNumbers),
+                lottoTicket.contains(bonusNumber));
     }
 
     public LottoNumber getBonusNumber() {

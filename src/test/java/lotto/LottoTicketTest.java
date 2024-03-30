@@ -42,7 +42,7 @@ class LottoTicketTest {
     void 등수_계산() {
         LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
         WinningTicket winningTicket = new WinningTicket(new String[]{"1", "2", "3", "4", "5", "7"}, "6");
-        assertThat(lottoTicket.rank(winningTicket)).isEqualTo(WinnerPrize.SECOND);
+        assertThat(winningTicket.rank(lottoTicket)).isEqualTo(WinnerPrize.SECOND);
     }
 
     @ParameterizedTest

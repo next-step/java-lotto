@@ -18,7 +18,7 @@ public class LottoResult {
 
     private int matchCount(LottoTickets lottoTickets, WinnerPrize winnerPrize, WinningTicket winningTicket) {
         return (int) lottoTickets.getLottoTicketList().stream()
-                .filter(lottoTicket -> lottoTicket.rank(winningTicket) == winnerPrize)
+                .filter(lottoTicket -> winningTicket.rank(lottoTicket) == winnerPrize)
                 .count();
     }
 
