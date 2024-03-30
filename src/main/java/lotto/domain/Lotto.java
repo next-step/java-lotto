@@ -27,14 +27,9 @@ public class Lotto {
         return autoLotto;
     }
 
-    public int getMatchingCount(List<Integer> winNo) {
-        return updateMatchingCount(winNo);
-    }
-
-    public int updateMatchingCount(List<Integer> winNo) {
-        matchingCount = (int) autoLotto.stream()
-                .filter(winNo::contains)
+    public int getMatchingCount(List<Integer> winningNo) {
+        return matchingCount = (int) autoLotto.stream()
+                .filter(winningNo::contains)
                 .count();
-        return matchingCount;
     }
 }
