@@ -22,8 +22,7 @@ public class LottoController {
         String bonusBall = InputView.askBonusBall();
         WinningTicket winningTicket = new WinningTicket(winningNumbers, bonusBall);
 
-        ResultView.printWinningStatistics(lottoTickets.winnerCounts(winningTicket));
-        ResultView.printEarningsRate(lottoTickets.earningsRate(winningTicket));
+        ResultView.printLottoResult(lottoTickets.winnerResult(winningTicket));
     }
 
 }
