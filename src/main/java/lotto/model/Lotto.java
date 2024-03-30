@@ -1,8 +1,6 @@
 package lotto.model;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class Lotto {
     private final Numbers numbers;
@@ -11,14 +9,26 @@ public class Lotto {
         this.numbers = Numbers.valueOf(numbers);
     }
 
+    public Lotto(Numbers numbers) {
+        this.numbers = numbers;
+    }
+
     public Numbers getNumbers() {
         return numbers;
     }
 
-    public int matchNumbers(List<Integer> winningNumbers) {
-        return (int) IntStream.range(0, winningNumbers.size())
+    public MatchNumber matchNumbers(Numbers winningNumbers, Number bonusNumber) {
+        return new MatchNumber(getMatchCount(winningNumbers), getMatchBonus(bonusNumber));
+    }
+
+    private boolean getMatchBonus(Number bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+
+    private int getMatchCount(Numbers winningNumbers) {
+        return (int) winningNumbers.getNumberList().stream()
                 .parallel()
-                .filter(i -> numbers.contains(winningNumbers.get(i)))
+                .filter(number -> getMatchBonus(number))
                 .count();
     }
 }

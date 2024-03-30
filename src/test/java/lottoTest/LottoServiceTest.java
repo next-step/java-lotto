@@ -23,8 +23,8 @@ public class LottoServiceTest {
         LottoService lottoService = new LottoService();
         ResultLotto resultLotto;
 
-        lottoService.buyLottos(1000);
-        resultLotto = lottoService.checkLottoResult(List.of(1, 2, 3, 4, 5, 6));
+        lottoService.buyLottos(140000);
+        resultLotto = lottoService.checkLottoResult(List.of(1, 2, 3, 4, 5, 6), 7);
 
         int buyCount = resultLotto.totallottoCount();
         int winningAmount = resultLotto.getWinningAmount();
@@ -32,6 +32,6 @@ public class LottoServiceTest {
         System.out.println(resultLotto.getWinningRate());
         System.out.println(winningAmount / buyCount * 1000);
 
-        Assertions.assertThat(resultLotto.getWinningRate()).isEqualTo(winningAmount / (buyCount * 1000));
+        Assertions.assertThat(resultLotto.getWinningRate()).isEqualTo((double) winningAmount / (buyCount * 1000));
     }
 }
