@@ -41,7 +41,7 @@ public enum LottoPricing {
         return lottoPricing;
     }
 
-    public int getPrice() {
+    public long getPrice() {
         return this.priceFunction.get();
     }
 }
