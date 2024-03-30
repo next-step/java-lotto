@@ -82,8 +82,6 @@
 # Step4
 
 ## Todo
-- [ ] 코드리뷰 적용 - OutputView 내의 printPlainMessage 삭제
-
 
 ## Done
 - [X] 수동으로 구매할 로또 개수가 null이면 예외(null => IllegalArgumentException)
@@ -106,3 +104,4 @@
 - [X] 코드리뷰 적용 - 수동 구매할 로또 개수가 제대로 계산되는지 확인
 - [X] 코드리뷰 적용 - 수동 구매할 로또 개수 반복 횟수에 따라서 생성, 출력되는지 확인
 - [X] 코드리뷰 적용 - 수익률 계산 결과 Long 타입으로 수정
+- [X] 코드리뷰 적용 - OutputView 내의 printPlainMessage 삭제
