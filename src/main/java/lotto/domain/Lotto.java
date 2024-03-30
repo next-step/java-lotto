@@ -33,6 +33,10 @@ public class Lotto {
         }
     }
 
+    public boolean contains(LottoNumber number) {
+        return this.numbers.contains(number);
+    }
+
     public boolean contains(Integer number) {
         return this.numbers.contains(new LottoNumber(number));
     }

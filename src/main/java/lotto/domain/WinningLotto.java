@@ -5,18 +5,14 @@ import java.util.List;
 
 public class WinningLotto {
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
     private final Integer bonusNumber;
 
     public WinningLotto(Integer bonusNumber) {
         this(new ArrayList<>(), bonusNumber);
     }
 
-    public WinningLotto(List<Integer> numbers) {
-        this(numbers, 0);
-    }
-
-    public WinningLotto(List<Integer> numbers, Integer bonusNumber) {
+    public WinningLotto(List<LottoNumber> numbers, Integer bonusNumber) {
         this.numbers = numbers;
         this.bonusNumber = bonusNumber;
         validateIfNotNull();
@@ -24,11 +20,13 @@ public class WinningLotto {
     }
 
     private void validateIfNotNull() {
-        if (numbers == null || bonusNumber == null) throw new IllegalArgumentException();
+        if (numbers == null || bonusNumber == null){
+            throw new IllegalArgumentException();
+        }
     }
 
     private void validateIfBonusNumberNotInNumbers() {
-        if (numbers.contains(bonusNumber)) {
+        if (numbers.contains(new LottoNumber(bonusNumber))) {
             throw new IllegalArgumentException();
         }
     }

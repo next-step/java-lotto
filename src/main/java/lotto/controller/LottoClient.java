@@ -2,8 +2,6 @@ package lotto.controller;
 
 import lotto.domain.*;
 
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import static lotto.view.InputView.*;
@@ -19,10 +17,10 @@ public class LottoClient {
         generateLottos(lottos, manualLottoCount.getLeftOvers(cash));
         printCount(manualLottoCount.getCount(), manualLottoCount.getLeftOvers(cash));
         printLottoGroup(lottos);
-//        WinningLotto winningLotto = insertWinningNumbers();
-//        Match match = new Match();
-//        lottoGroup.saveMatchResult(winningLotto, match);
-//        printResult(cash, match);
+        WinningLotto winningLotto = insertWinningNumbers();
+        Match match = new Match();
+        lottos.saveMatchResult(winningLotto, match);
+        printResult(cash, match);
     }
 
     private static Lottos generateManualLottos(ManualLottoCount manualLottoCount) {
@@ -37,15 +35,14 @@ public class LottoClient {
         return newLottos;
     }
 
-//    private static WinningLotto insertWinningNumbers() {
-//        List<LottoNumber> latestWinningNumbers = insertLatestWinningNumbers();
-//        int bonusNumber = insertBonusNumber();
-//        return new WinningLotto(latestWinningNumbers, bonusNumber);
-//    }
+    private static WinningLotto insertWinningNumbers() {
+        List<LottoNumber> latestWinningNumbers = insertLatestWinningNumbers();
+        int bonusNumber = insertBonusNumber();
+        return new WinningLotto(latestWinningNumbers, bonusNumber);
+    }
 
-    private static Lottos generateLottos(Lottos lottos, int amount) {
+    private static void generateLottos(Lottos lottos, int amount) {
         lottos.generateLottoNumbers(new LottoGenerator(), amount);
-        return lottos;
     }
 
     private static List<LottoNumber> insertLatestWinningNumbers() {

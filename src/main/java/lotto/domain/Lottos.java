@@ -1,10 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
-import static lotto.view.InputView.generateNumbers;
 
 public class Lottos {
 
