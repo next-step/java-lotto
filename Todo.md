@@ -82,7 +82,6 @@
 # Step4
 
 ## Todo
-- [ ] 코드리뷰 적용 - ManualLottoNumber -> LottoNumber에 변경
 - [ ] 코드리뷰 적용 - Lotto 내부의 로또 번호를 LottoNumber로 변경
 - [ ] 코드리뷰 적용 - ManualLotto -> Lotto와 병합
 - [ ] 코드리뷰 적용 - ManualLottoGroup -> Lottos와 병합
@@ -106,3 +105,4 @@
 - [X] 코드리뷰 적용 - step3 체킹안된 것들 완료 처리
 - [X] 코드리뷰 적용 - Lotto 이름 변경(Lottos) 
 - [X] 코드리뷰 적용 - LottoNumber 이름 변경(Lotto)
+- [X] 코드리뷰 적용 - ManualLottoNumber -> LottoNumber에 변경

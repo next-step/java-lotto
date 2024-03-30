@@ -5,18 +5,18 @@ import java.util.stream.Collectors;
 
 public class ManualLotto {
 
-    private final List<ManualLottoNumber> numbers;
+    private final List<LottoNumber> numbers;
 
     public ManualLotto(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers.stream()
-                .map(ManualLottoNumber::new)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
     public List<Integer> getNumbers() {
         return numbers.stream()
-                .map(ManualLottoNumber::getNumber)
+                .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
     }
 
