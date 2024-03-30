@@ -1,42 +1,42 @@
 package lotto.view;
 
-import lotto.constants.Const;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class InputView {
 
     private final Scanner scanner;
+    private static final String regex = "([0-9]+)";
+//    private static final Pattern pattern = Pattern.compile("([0-9]+)");
 
     public InputView() {
         this.scanner = new Scanner(System.in);
     }
 
-    public String getInput() {
+    public String getBuyingAmountInput() {
+        System.out.println("구입금액을 입력해 주세요.");
         return scanner.nextLine();
     }
 
-    public int tryNo(String input) {
-        System.out.println(Const.GET_TRY_NO);
+    public String getWinningNoInput() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return scanner.nextLine();
+    }
+
+    public int buyingAmount(String input) {
         checkBlank(input);
-        int i;
-        try {
-            i = Integer.parseInt(input);
-        } catch (IllegalArgumentException e) {
+        if(!Pattern.matches(regex, input)){
             throw new IllegalArgumentException("숫자만 입력해주세요.");
         }
-        if (i < Const.LOTTO_COST) {
-            throw new IllegalArgumentException("금액이 모자랍니다.");
-        }
-        return i / Const.LOTTO_COST;
+        return Integer.parseInt(input);
     }
 
     public List<Integer> winningNo(String input) {
-        System.out.println(Const.GET_WINNING_NO);
         String[] winningNoStrArr = split(input);
+
         return Arrays.stream(winningNoStrArr)
                 .mapToInt(Integer::parseInt)
                 .boxed()

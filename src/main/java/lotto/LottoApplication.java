@@ -13,14 +13,14 @@ public class LottoApplication {
 
         InputView inputView = new InputView();
 
-        // 로또 장수를 입력받는다.
-        int tryNo = inputView.tryNo(inputView.getInput());
+        // 로또 구매 금액을 입력받는다.
+        int buyingAmount = inputView.buyingAmount(inputView.getBuyingAmountInput());
 
         // 로또를 생성한다.
-        LottoGame lottoGame = new LottoGame(tryNo);
+        LottoGame lottoGame = new LottoGame(buyingAmount);
 
         // 당첨번호를 입력받는다.
-        List<Integer> winningNo = inputView.winningNo(inputView.getInput());
+        List<Integer> winningNo = inputView.winningNo(inputView.getWinningNoInput());
 
         // 당첨 로또 갯수 정산한다.
         Map<Integer, Integer> countMap = lottoGame.countLottosByMatchingCount(winningNo);
