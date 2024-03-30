@@ -16,7 +16,7 @@ public class LottoGame {
     public List<Rank> checkRanks(WinningLottos winnerLotto, List<Lottos> lottos) {
         List<Rank> ranks = new ArrayList<>();
         for (Lottos lotto : lottos) {
-            ranks.add(winnerLotto.getRank(lotto));
+            ranks.add(winnerLotto.checkRank(lotto));
         }
         return ranks;
     }
@@ -36,7 +36,7 @@ public class LottoGame {
     private Money calculateSumOfPrize(WinningLottos winnerLotto, List<Lottos> lottos) {
         Money sumOfPrize = Money.from(0);
         for (Lottos lotto : lottos) {
-            sumOfPrize = sumOfPrize.add(winnerLotto.getPrize(lotto));
+            sumOfPrize = sumOfPrize.add(winnerLotto.checkPrize(lotto));
         }
         return sumOfPrize;
     }

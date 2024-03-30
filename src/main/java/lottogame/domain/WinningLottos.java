@@ -13,11 +13,11 @@ public class WinningLottos {
         this.bonusNumber =  new LottoNumber(bonusNumber);
     }
 
-    public Rank getRank(Lottos lottos) {
+    public Rank checkRank(Lottos lottos) {
         return Rank.find(match(lottos), matchBonusNumber(lottos));
     }
 
-    public Number getPrize(Lottos lottos) {
+    public Number checkPrize(Lottos lottos) {
         return Number.from(Rank.findPrize(match(lottos), matchBonusNumber(lottos)));
     }
 

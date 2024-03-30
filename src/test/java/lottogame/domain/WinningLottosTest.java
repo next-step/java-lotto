@@ -23,15 +23,15 @@ public class WinningLottosTest {
     @MethodSource("lottoAndRank")
     void 로또_당첨(Lottos lottos, Rank rank) {
         WinningLottos winnerLotto = new WinningLottos(List.of(1, 4, 5, 6, 7, 8), 9);
-        System.out.println("winnerLotto.getRank(lottos) = " + winnerLotto.getRank(lottos));
-        assertThat(winnerLotto.getRank(lottos)).isEqualTo(rank);
+        System.out.println("winnerLotto.getRank(lottos) = " + winnerLotto.checkRank(lottos));
+        assertThat(winnerLotto.checkRank(lottos)).isEqualTo(rank);
     }
 
     @ParameterizedTest
     @MethodSource("lottoAndPrize")
     void 로또_당첨_금액(Lottos lottos, Number prize) {
         WinningLottos winnerLotto = new WinningLottos(List.of(1, 4, 5, 6, 7, 8), 9);
-        assertThat(winnerLotto.getPrize(lottos)).isEqualTo(prize);
+        assertThat(winnerLotto.checkPrize(lottos)).isEqualTo(prize);
     }
 
     static Stream<Arguments> lottoAndRank() {
