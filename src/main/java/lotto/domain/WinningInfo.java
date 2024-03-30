@@ -14,10 +14,10 @@ public class WinningInfo {
     public static WinningInfo of(Lottos lottos, LottoNumber bonusNumber, Lotto winningLotto) {
         HashMap<Rank, Integer> winningInfo = new HashMap<>();
 
-        for (Lotto pickedLotto : lottos) {
-            Rank rank =  pickedLotto.getRank(winningLotto, bonusNumber);
-            winningInfo.put(rank, winningInfo.getOrDefault(rank, 0) + 1);
-        }
+        lottos.stream().forEach(lotto -> {
+                    Rank rank =  lotto.getRank(winningLotto, bonusNumber);
+                    winningInfo.put(rank, winningInfo.getOrDefault(rank, 0) + 1);
+                });
         return new WinningInfo(winningInfo);
     }
 

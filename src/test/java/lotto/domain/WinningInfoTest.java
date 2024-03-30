@@ -13,7 +13,7 @@ class WinningInfoTest {
     @DisplayName("로또 번호에 따라 정해진 로또 번호와 비교 후 로또 당첨금을 확인할 수 있다.")
     @EnumSource(LottoNumbersFixture.class)
     void fourWinningMoney(LottoNumbersFixture fixture) {
-        WinningInfo winningInfo = WinningInfo.of(fixture.getPickedNumbers(), fixture.getBonusNumber(), fixture.getWinningNumbers());
+        WinningInfo winningInfo = WinningInfo.of(fixture.getManualNumbers().merge(fixture.getPickedNumbers()), fixture.getBonusNumber(), fixture.getWinningNumbers());
 
         int winningMoney = winningInfo.totalWinningMoney();
 
