@@ -1,8 +1,6 @@
 package lotto;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Lottos {
 
@@ -28,12 +26,12 @@ public class Lottos {
         return money.purchase();
     }
 
-    public Map<LottoRank, Integer> getWinningResult(WinningLotto winningLotto) {
-        Map<LottoRank, Integer> result = new HashMap<>();
+    public LottoResult getWinningResult(Lotto winingLotto, LottoNumber bonus) {
+        LottoResult result = new LottoResult();
         for (Lotto lotto : lottos) {
-            LottoRank rank = LottoRank.isLottoRank(
-                winningLotto.countMatch(lotto), winningLotto.matchBonus(lotto));
-            result.put(rank, result.getOrDefault(rank, 0) + 1);
+            int matchCount = lotto.countMatch(winingLotto);
+            boolean matchBonus = lotto.matchBonus(bonus);
+            result.increaseRankCount(matchCount, matchBonus);
         }
         return result;
     }
