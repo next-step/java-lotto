@@ -4,8 +4,8 @@ import lotto.domain.LottoGame;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class LottoApplication {
 
@@ -20,7 +20,7 @@ public class LottoApplication {
         LottoGame lottoGame = new LottoGame(buyingAmount);
 
         // 당첨번호를 입력받는다.
-        List<Integer> winningNo = inputView.winningNo(inputView.getWinningNoInput());
+        Set<Integer> winningNo = inputView.winningNo(inputView.getWinningNoInput());
 
         // 당첨 로또 갯수 정산한다.
         Map<Integer, Integer> countMap = lottoGame.countLottosByMatchingCount(winningNo);

@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -14,20 +15,16 @@ public class LottoNumbers {
             .boxed()
             .collect(Collectors.toList());
 
-    private final List<Integer> lottoNumbers;
+    private final Set<Integer> lottoNumbers;
 
     public LottoNumbers() {
         Collections.shuffle(allNumbers);
         this.lottoNumbers = allNumbers.stream()
                 .limit(LOTTO_SIZE)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
-    public LottoNumbers(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
-    }
-
-    public List<Integer> getNumbers() {
+    public Set<Integer> getNumbers() {
         return lottoNumbers;
     }
 }

@@ -1,8 +1,8 @@
 package lotto.view;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -33,13 +33,13 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
-    public List<Integer> winningNo(String input) {
+    public Set<Integer> winningNo(String input) {
         String[] winningNoStrArr = split(input);
 
         return Arrays.stream(winningNoStrArr)
                 .mapToInt(Integer::parseInt)
                 .boxed()
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public String[] split(String input) {
