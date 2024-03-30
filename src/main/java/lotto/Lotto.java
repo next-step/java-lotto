@@ -29,6 +29,11 @@ public class Lotto {
             .filter(other::contains)
             .count();
     }
+
+    public boolean matchBonus(LottoNumber bonus){
+        return numbers.contains(bonus);
+    }
+
     public boolean contains(LottoNumber number){
         return numbers.contains(number);
     }
