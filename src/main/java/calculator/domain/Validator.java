@@ -2,11 +2,10 @@ package calculator.domain;
 
 import java.util.Arrays;
 import java.util.Set;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Validator {
-    private static final Pattern PATTERN_FOR_NUMBER = Pattern.compile("^-?\\d+(\\.\\d+)?$");
+
     private static final Set<String> OPERATORS = Arrays.stream(Operator.values())
             .map(Operator::getOperator)
             .collect(Collectors.toSet());
