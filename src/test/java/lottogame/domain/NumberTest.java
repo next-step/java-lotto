@@ -19,5 +19,8 @@ class NumberTest {
 
         // 곱하기
         assertThat(leftOperand.multiply(rightOperand)).isEqualTo(Number.from(2_000));
+
+        // 빼기
+        assertThat(leftOperand.minus(rightOperand)).isEqualTo(Number.from(80));
     }
 }

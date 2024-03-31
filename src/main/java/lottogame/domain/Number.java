@@ -48,6 +48,14 @@ public final class Number {
         Integer.parseInt(value);
     }
 
+    public Number minus(Number number) {
+        return from(value - number.value);
+    }
+
+    public boolean isLessThan(Number number) {
+        return value < number.value;
+    }
+
     @Override
     public boolean equals(Object o) {
 
@@ -64,9 +72,5 @@ public final class Number {
     @Override
     public int hashCode() {
         return Objects.hash(value);
-    }
-
-    public boolean isLessThan(Number number) {
-        return value < number.value;
     }
 }

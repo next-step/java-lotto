@@ -25,6 +25,10 @@ public class LottoGame {
         return LottoFactory.createMultipleLottos(Number.from(amount.divide(price).toInt()));
     }
 
+    public List<Lottos> createMultipleLottos(Number count) {
+        return LottoFactory.createMultipleLottos(count);
+    }
+
     public Number calculateCountOfLottos(Money amount) {
         return LottoFactory.calculateCountOfLottos(amount, price);
     }
