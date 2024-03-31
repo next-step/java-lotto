@@ -3,12 +3,13 @@ package lotto;
 import java.util.Objects;
 
 public class LottoNumber {
+
     public final static int MINIMUM_NUMBER = 1;
     public final static int MAXIMUM_NUMBER = 45;
 
     private final int number;
 
-    public LottoNumber(String number){
+    public LottoNumber(String number) {
         this(Integer.parseInt(number));
     }
 
@@ -22,8 +23,9 @@ public class LottoNumber {
     }
 
     private void validNumberRange(int number) {
-        if(number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER){
-            throw new IllegalArgumentException("로또 숫자는 1~45 사이 숫자여야 합니다.");
+        if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
+            throw new IllegalArgumentException(
+                String.format("로또 숫자는 %d~%d 사이 숫자여야 합니다.", MINIMUM_NUMBER, MAXIMUM_NUMBER));
         }
     }
 

@@ -1,32 +1,69 @@
 package lotto;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class LottoResult {
 
-    private static final double ROUND_STANDARD = 100.0;
+    private static final int DEFAULT_VALUE = 0;
+    private static final int INCREMENT_VALUE = 1;
 
     private final Map<LottoRank, Integer> result;
+
+    public LottoResult() {
+        this(new HashMap<>());
+        Arrays.stream(LottoRank.values())
+            .forEach(this::putRank);
+    }
 
     public LottoResult(Map<LottoRank, Integer> result) {
         this.result = result;
     }
 
-    public double calculateReturnRate(int payed) {
-        double sum = 0;
-        for (LottoRank rank : result.keySet()) {
-            sum += rank.getPrize() * result.get(rank);
+    public LottoResult(LottoRank... ranks) {
+        this();
+        Arrays.stream(ranks).forEach(
+            this::putRank);
+    }
 
+    public double calculateReturnRate(int payed) {
+        Money totalPrize = Money.zero();
+        for (LottoRank rank : result.keySet()) {
+            totalPrize.sum(rank.getPrize() * result.get(rank));
         }
-        return Math.floor(sum / payed * ROUND_STANDARD) / ROUND_STANDARD;
+        return totalPrize.calculateReturnRate(payed);
     }
 
     public int countRank(LottoRank rank) {
-        return result.getOrDefault(rank, 0);
+        return result.getOrDefault(rank, DEFAULT_VALUE);
     }
 
-    public Map<LottoRank, Integer> getResult() {
-        return result;
+    public void increaseRankCount(int matchCount, boolean matchBonus) {
+        LottoRank rank = LottoRank.isLottoRank(matchCount, matchBonus);
+        putRank(rank);
+    }
+
+    private void putRank(LottoRank rank) {
+        result.put(rank, result.getOrDefault(rank, DEFAULT_VALUE) + INCREMENT_VALUE);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoResult that = (LottoResult) o;
+        return Objects.equals(result, that.result);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(result);
     }
 
     @Override
