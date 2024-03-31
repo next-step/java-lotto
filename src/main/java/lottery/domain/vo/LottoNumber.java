@@ -18,7 +18,7 @@ public class LottoNumber {
     }
 
     private void validateNumber(Integer number){
-        if(number < MIN_NUMBER || number > MAX_NUMBER)
+        if (number < MIN_NUMBER || number > MAX_NUMBER)
             throw new IllegalArgumentException("로또 번호는 " + MIN_NUMBER + "부터 " + MAX_NUMBER + "사이여야 합니다.");
     }
 

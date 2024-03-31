@@ -5,10 +5,11 @@ import java.util.Objects;
 
 public enum WinPrizeType {
 
-    THREE_MATCH (3L, 5_000),
-    FOUR_MATCH (4L, 50_000),
-    FIVE_MATCH (5L, 1_500_000),
-    SIX_MATCH (6L, 2_000_000_000),
+    FIRST (6L, 2_000_000_000),
+    SECOND(5L, 30_000_000),
+    THIRD (5L, 1_500_000),
+    FOURTH (4L, 50_000),
+    FIFTH (3L, 5_000),
     NONE (0L, 0);
 
     private final Long matchCount;
@@ -24,9 +25,12 @@ public enum WinPrizeType {
         return this.prize;
     }
 
-    public static WinPrizeType fromMatchCount(Long matchCount) {
+    public static WinPrizeType fromMatchCountWithBonusMatch(Long matchCount, Boolean matchBonus) {
+        if (matchBonus && matchCount == 5L)
+            return SECOND;
         return Arrays.stream(WinPrizeType.values())
-                .filter(prizeType -> Objects.equals(prizeType.matchCount, matchCount))
+                .filter(prizeType -> Objects.equals(prizeType.matchCount, matchCount)
+                        && prizeType != SECOND)
                 .findFirst()
                 .orElse(NONE);
     }

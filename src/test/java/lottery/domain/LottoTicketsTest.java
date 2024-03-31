@@ -19,15 +19,15 @@ public class LottoTicketsTest {
     @DisplayName("당첨 통계 테스트")
     void winStatisticsTest() {
         final LottoTicket lottoTicketA = new LottoTicket(new Integer[]{1, 2, 3, 4, 5, 6});
-        final LottoTicket lottoTicketB = new LottoTicket(new Integer[]{2, 3, 4, 5, 6, 7});
+        final LottoTicket lottoTicketB = new LottoTicket(new Integer[]{2, 3, 4, 5, 6, 8});
         final LottoTickets lottoTickets = new LottoTickets(List.of(lottoTicketA, lottoTicketB));
-        final WinningLotto winningLotto = new WinningLotto("3, 4, 5, 6, 7, 8");
+        final WinningLotto winningLotto = new WinningLotto("2, 3, 4, 5, 6, 7", 8);
 
         Map<WinPrizeType, Long> actual = lottoTickets.winStatistics(winningLotto);
 
         assertThat(actual).hasSize(2);
-        assertThat(actual).contains(entry(WinPrizeType.FOUR_MATCH, 1L), entry(WinPrizeType.FIVE_MATCH, 1L));
-        assertThat(actual).doesNotContainEntry(WinPrizeType.THREE_MATCH, 0L);
+        assertThat(actual).contains(entry(WinPrizeType.THIRD, 1L), entry(WinPrizeType.SECOND, 1L));
+        assertThat(actual).doesNotContainEntry(WinPrizeType.FIFTH, 0L);
     }
 
     @Test
@@ -75,12 +75,12 @@ public class LottoTicketsTest {
         final LottoTicket lottoTicketB = new LottoTicket();
         final LottoTickets lottoTickets = new LottoTickets(List.of(lottoTicketA, lottoTicketB));
         final Map<WinPrizeType, Long> matchStatistics = Map.of(
-                WinPrizeType.FOUR_MATCH, 1L,
-                WinPrizeType.FIVE_MATCH, 1L);
+                WinPrizeType.FOURTH, 1L,
+                WinPrizeType.THIRD, 1L);
 
         int actual = lottoTickets.lottoTicketsTotalPrize(matchStatistics);
 
-        int expected = WinPrizeType.FOUR_MATCH.prize() + WinPrizeType.FIVE_MATCH.prize();
+        int expected = WinPrizeType.FOURTH.prize() + WinPrizeType.THIRD.prize();
         assertThat(actual).isEqualTo(expected);
     }
 

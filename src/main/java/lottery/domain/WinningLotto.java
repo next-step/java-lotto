@@ -9,18 +9,21 @@ import java.util.stream.Collectors;
 
 public class WinningLotto {
     public static final Integer NUMBER_SIZE = 6;
-
     private final Set<LottoNumber> winningNumbers;
 
-    public WinningLotto(Set<LottoNumber> winningNumbers) {
+    private final LottoNumber bonusNumber;
+
+    public WinningLotto(Set<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+        validateBonusNumberDuplicate(winningNumbers, bonusNumber);
         this.winningNumbers = winningNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
-    public WinningLotto(String winningNumbersString) {
-        this(createWinningLotto(winningNumbersString));
+    public WinningLotto(String winningNumbersString, Integer bonusNumberInteger) {
+        this(createWinningNumbers(winningNumbersString), createBonusNumber(bonusNumberInteger));
     }
 
-    private static Set<LottoNumber> createWinningLotto(String winningNumbersString){
+    private static Set<LottoNumber> createWinningNumbers(String winningNumbersString){
         validateWinningNumbersString(winningNumbersString);
         Set<Integer> numbers = StringConverter.convertToIntegerSet(winningNumbersString);
         Set<LottoNumber> winningNumbers = numbers.stream()
@@ -28,6 +31,15 @@ public class WinningLotto {
                 .collect(Collectors.toSet());
         validateWinningLottoNumbersSize(winningNumbers);
         return winningNumbers;
+    }
+
+    private static LottoNumber createBonusNumber(Integer bonusNumberInteger){
+        return new LottoNumber(bonusNumberInteger);
+    }
+
+    private static void validateBonusNumberDuplicate(Set<LottoNumber> winningNumbers, LottoNumber bonusNumber){
+        if (winningNumbers.contains(bonusNumber))
+            throw new IllegalArgumentException("보너스 볼은 당첨번호와 중복되면 안됩니다.");
     }
 
     private static void validateWinningNumbersString(String winningNumbersString){
@@ -41,8 +53,12 @@ public class WinningLotto {
     }
 
 
-    public Set<LottoNumber> winningLotto(){
+    public Set<LottoNumber> winningNumbers(){
         return this.winningNumbers;
+    }
+
+    public LottoNumber bonusNumbers(){
+        return this.bonusNumber;
     }
 
 }
