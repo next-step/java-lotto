@@ -12,23 +12,10 @@ public class RandomNumbers {
         Random rand = new Random();
 
         while (randomNumber.size() < LOTTO_NUMBER_LIMIT) {
-            int number = rand.nextInt(LOTTO_BOUND_NUMBER) ; // Generate a number between 1 and 50
+            int number = rand.nextInt(LOTTO_BOUND_NUMBER) ;
             randomNumber.add(number);
         }
         lottoNumbers =  new ArrayList<>(randomNumber);
         Collections.shuffle(lottoNumbers);
     }
-//    public static void main(String[] args) {
-//        HashSet<Integer> lottoNumbers = new HashSet<>();
-//        Random rand = new Random();
-//
-//        while (lottoNumbers.size() < 5) {
-//            int number = rand.nextInt(50) + 1; // Generate a number between 1 and 50
-//            lottoNumbers.add(number);
-//        }
-//
-//        List<Integer> sortedNumbers = new ArrayList<>(lottoNumbers);
-//        Collections.sort(sortedNumbers);
-//        System.out.println(sortedNumbers);
-//    }
 }
