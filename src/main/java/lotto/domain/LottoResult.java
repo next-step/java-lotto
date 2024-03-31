@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
+	public static final int MATCH_COUNT_MIN = 3;
 	private final Map<Long, Integer> matchedMap;
 	private final double rate;
 
@@ -13,7 +14,7 @@ public class LottoResult {
 
 		lottos.stream()
 				.map(winningNumbers::getMatchedCount)
-				.filter(count -> count >= Prize.getMinimumCount())
+				.filter(count -> count >= MATCH_COUNT_MIN)
 				.forEach(count -> matchedMap.put(count, matchedMap.getOrDefault(count, 0) + 1));
 
 		this.rate = calculateRate(lottoPrice);
