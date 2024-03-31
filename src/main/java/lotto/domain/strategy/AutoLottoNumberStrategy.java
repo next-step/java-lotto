@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AutoLottoNumberStrategy implements LottoNumberStrategy {
-	private final List<Integer> numbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+	private final List<Integer> numbers = IntStream.rangeClosed(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX).boxed().collect(Collectors.toList());
 
 	@Override
 	public List<Integer> generateLottoNumber() {
