@@ -8,9 +8,8 @@ public class LottoTicket {
         this.numbers = numbers;
     }
 
-    //주생성자
-    public LottoTicket(RandomNumber randNumbers) {
-        this.numbers = randNumbers.randNumber;
+    public LottoTicket(RandomNumbers randNumbers) {
+        this.numbers = randNumbers.lottoNumbers;
     }
 
     public List<Integer> getNumbers() {

@@ -1,13 +1,11 @@
 package auto_lotto;
 
 import auto_lotto.domain.LottoTicket;
-import auto_lotto.domain.RandomNumber;
 import auto_lotto.domain.LottoVendingMachine;
+import auto_lotto.domain.RandomNumbers;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,18 +22,17 @@ public class LottoTest {
     }
 
     @Test
-    public void 로또는임의의5개의번호를가져야한다(){
-        RandomNumber randomNumber = new RandomNumber();
-        LottoTicket lottoTicket = new LottoTicket(randomNumber);
+    public void 임의의_5개의_번호를_가져야한다(){
+        RandomNumbers randomNumbers = new RandomNumbers();
+        LottoTicket lottoTicket = new LottoTicket(randomNumbers);
         assertThat(lottoTicket.getNumbers().size()).isEqualTo(5);
     }
 
     @Test
-    public void 로또는임의의5개의숫자는중복될수없다(){
+    public void 임의의_5개의_숫자는_중복_될_수_없다(){
         LottoTicket lottoTicket = new LottoTicket(List.of(1,1,3,4,5));
         List<Integer> riddle = lottoTicket.getNumbers();
         assertTrue(hasDuplicates(riddle));
-
     }
 
     public static boolean hasDuplicates(List<Integer> numbers) {

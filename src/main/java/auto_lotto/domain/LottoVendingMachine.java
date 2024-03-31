@@ -2,14 +2,14 @@ package auto_lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoVendingMachine {
 
 
     private final static int lottoPrice = 1000;
-    List<LottoTicket> lottoTickets = new ArrayList<>();
 
-    //구매전략
     public List<LottoTicket> receive(int money) {
         return generate(getNumberOfLotto(money));
     }
@@ -18,27 +18,32 @@ public class LottoVendingMachine {
         return money / lottoPrice;
     }
 
-    //로또 생성
     private List<LottoTicket> generate(int quantity) {
+    List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
-            lottoTickets.add(new LottoTicket(new RandomNumber()));
+            lottoTickets.add(new LottoTicket(new RandomNumbers()));
         }
         return lottoTickets;
     }
 
 
-    public List<WinningStatistic> checkIfWinningEntry(List<Integer> winingNumberOfLastWeek) {
-        List<WinningStatistic> winningStatistics = new ArrayList<>();
+    public Map<WinningInfo, Long> checkIfWinningEntry(List<LottoTicket> lottoTickets, List<Integer> winingNumberOfLastWeek) {
+        List<WinningInfo> matchInfos = new ArrayList<>();
 
         for (LottoTicket lottoTicket : lottoTickets) {
-            //몇개 일치
-            int result = getNumberOfMatch(winingNumberOfLastWeek, lottoTicket.numbers);
 
-            //결과
-            winningStatistics.add(WinningStatistic.getByMatches(result));
+            int result = getNumberOfMatch(winingNumberOfLastWeek, lottoTicket.numbers);
+            WinningInfo matchInfo = WinningInfo.checkMatch(result);
+
+            matchInfos.add(matchInfo);
         }
 
-        return winningStatistics;
+       return lottoTickets.stream()
+                .map(ticket -> getNumberOfMatch(ticket.getNumbers(), winingNumberOfLastWeek))
+                .collect(Collectors.groupingBy(
+                        matches -> WinningInfo.checkMatch(matches),
+                        Collectors.counting()
+                ));
     }
 
     public static int getNumberOfMatch(List<Integer> winingNumberOfLastWeek, List<Integer> userNumber) {

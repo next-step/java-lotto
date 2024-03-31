@@ -2,36 +2,31 @@ package auto_lotto.controller;
 
 import auto_lotto.domain.LottoTicket;
 import auto_lotto.domain.LottoVendingMachine;
-import auto_lotto.domain.WinningStatistic;
+import auto_lotto.domain.WinningInfo;
+import auto_lotto.view.InputView;
+import auto_lotto.view.ResultView;
 
 import java.util.List;
+import java.util.Map;
 
 public class LottoController {
 
-    private final LottoVendingMachine lottoMachine;
+    public static void main(String[] args) {
+        InputView input = new InputView();
+        ResultView output = new ResultView();
+        LottoVendingMachine lottoMachine = new LottoVendingMachine();
 
-    public LottoController(LottoVendingMachine lottoMachine) {
-        this.lottoMachine = lottoMachine;
-    }
+        output.purchaseLotto();
+        int money = input.inputMoney();
 
-    public void start() {
-        //구매
-        List<LottoTicket> lottoTickets = lottoMachine.receive(14000);
+        List<LottoTicket> lottoTickets = lottoMachine.receive(money);
+        output.printReceive(lottoTickets.size());
+        output.printLotto(lottoTickets);
 
-        //발권
-        System.out.println(String.format("%n개를 구매했습니다.", lottoTickets.size()));
+        output.printWinningLotto();
+        List<Integer> inputLottoNumber = input.inputLottoNumber();
+        Map<WinningInfo, Long> result = lottoMachine.checkIfWinningEntry(lottoTickets, inputLottoNumber);
 
-
-        //당첨본호를 입력
-        List<Integer> winingNumberOfLastWeek = List.of(1, 2, 3, 4, 5, 6);
-
-        //당첨통계
-        List<WinningStatistic> winningStatistics = lottoMachine.checkIfWinningEntry(winingNumberOfLastWeek);
-
-        //통계출력
-
-        for (WinningStatistic winningStatistic : winningStatistics) {
-            System.out.println("winningStatistic = " + winningStatistic);
-        }
+        output.printWinningInfos(result, money);
     }
 }
