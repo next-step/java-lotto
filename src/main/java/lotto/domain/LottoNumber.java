@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber {
@@ -25,9 +24,6 @@ public class LottoNumber {
         return number;
     }
 
-    public boolean match(List<LottoNumber> numbers) {
-        return numbers.stream().anyMatch(item -> item.getNumber() == this.number);
-    }
 
     @Override
     public boolean equals(Object o) {
