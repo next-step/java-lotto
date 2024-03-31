@@ -1,28 +1,22 @@
 package lotto.domain;
 
-import java.util.List;
 
 public class AnswerSheet {
 
-    private final List<Integer> numbers;
-    private final Integer bonusNumber;
+    private final Lotto answerLotto;
 
-    public AnswerSheet(List<Integer> numbers, String bonusNumber) {
-        this(numbers, Integer.parseInt(bonusNumber));
-    }
+    private final LottoNumber bonusNumber;
 
-    public AnswerSheet(List<Integer> numbers, Integer bonusNumber) {
-        if (numbers.size() != Lotto.LOTTO_NUMBER_LIMIT)
-            throw new IllegalArgumentException("정답 넘버는 6개여야합니다, 주어진 넘버는 " + numbers.size());
-        this.numbers = numbers;
+    public AnswerSheet(Lotto answerLotto, LottoNumber bonusNumber) {
+        this.answerLotto = answerLotto;
         this.bonusNumber = bonusNumber;
     }
 
-    public List<Integer> getAnswerNumbers(){
-        return this.numbers;
+    public Lotto getAnswerLotto(){
+        return this.answerLotto;
     }
 
-    public Integer getBonusNumber(){
+    public LottoNumber getBonusNumber(){
         return this.bonusNumber;
     }
 }
