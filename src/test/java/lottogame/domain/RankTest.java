@@ -1,5 +1,6 @@
 package lottogame.domain;
 
+import static lottogame.domain.Rank.find;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
@@ -11,19 +12,24 @@ class RankTest {
 
     @ParameterizedTest
     @MethodSource("countAndRank")
-    void 당첨확인(int count, Rank rank) {
-        assertThat(Rank.findRank(count)).isEqualTo(rank);
+    void 당첨확인(int count, boolean matchBonus, Rank rank) {
+        assertThat(find(count, matchBonus)).isEqualTo(rank);
     }
 
     static Stream<Arguments> countAndRank() {
         return Stream.of(
-                Arguments.arguments(6, Rank.FIRST),
-                Arguments.arguments(5, Rank.SECOND),
-                Arguments.arguments(4, Rank.THIRD),
-                Arguments.arguments(3, Rank.FOURTH),
-                Arguments.arguments(2, Rank.EMPTY),
-                Arguments.arguments(1, Rank.EMPTY),
-                Arguments.arguments(0, Rank.EMPTY)
+                Arguments.arguments(6, true, Rank.FIRST),
+                Arguments.arguments(6, false, Rank.FIRST),
+                Arguments.arguments(5, true, Rank.SECOND),
+                Arguments.arguments(5, false, Rank.THIRD),
+                Arguments.arguments(4, true, Rank.FOURTH),
+                Arguments.arguments(4, false, Rank.FOURTH),
+                Arguments.arguments(3, true, Rank.FIFTH),
+                Arguments.arguments(3, false, Rank.FIFTH),
+                Arguments.arguments(2, true, Rank.EMPTY),
+                Arguments.arguments(2, false, Rank.EMPTY),
+                Arguments.arguments(1, true, Rank.EMPTY),
+                Arguments.arguments(0, false, Rank.EMPTY)
         );
     }
 }

@@ -11,8 +11,12 @@ public class ResultView {
 
     private static final String MESSAGE_COUNT_OF_PURCHASE_LOTTOS = "%d개를 구매했습니다.";
     private static final String RANKS_FORMAT = "%d개 일치 (%d원)- %d개";
+    private static final String RANKS_SECOND_FORMAT = "%d개, 보너스 볼 일치 (%d원)- %d개";
     private static final String RETURN_OF_RATE_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.";
     private static final String RETURN_OF_RATE_MESSAGE_INFORMATION = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+
+    private ResultView() {
+    }
 
     public static void printLottos(List<Lottos> lottoses) {
         for (Lottos lottos : lottoses) {
@@ -50,9 +54,17 @@ public class ResultView {
     private static void printRanks(Map<Rank, Integer> result) {
         List<Rank> ranks = Rank.getRanks();
         for (Rank rank : ranks) {
-            System.out.println(String.format(RANKS_FORMAT, rank.getNumOfWinnings(), rank.getPrize(),
+            String format = selectFormat(rank);
+            System.out.println(String.format(format, rank.getNumOfWinnings(), rank.getPrize(),
                     result.getOrDefault(rank, 0)));
         }
+    }
+
+    private static String selectFormat(Rank rank) {
+        if (rank.isSecond()) {
+            return RANKS_SECOND_FORMAT;
+        }
+        return RANKS_FORMAT;
     }
 
     private static void printLottos(Lottos lottos) {

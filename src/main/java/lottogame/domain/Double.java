@@ -12,22 +12,22 @@ public final class Double {
     }
 
     public Double multiply(Number from) {
-        return from(value * from.getValue());
+        return from(value * from.intValue());
     }
 
     public Double add(Number from) {
-        return from(value + from.getValue());
+        return from(value + from.intValue());
     }
 
     public Double divide(Double from) {
         return from(value / from.value);
     }
 
-    public int convertToInt() {
+    public int toInt() {
         return (int) value;
     }
 
-    public double formattingTwoDecimal() {
+    public double toTwoDecimal() {
         return Math.floor(value * 100) / 100;
     }
 }

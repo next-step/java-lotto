@@ -6,37 +6,37 @@ import java.util.List;
 public class LottoGame {
     private static final Money price = Money.from(1_000);
 
-    public double calculateReturnOfRate(Lottos winnerLotto, List<Lottos> lottos) {
+    public double calculateReturnOfRate(WinningLottos winnerLotto, List<Lottos> lottos) {
         Money purchaseAmount = calculatePurchaseAmount(lottos);
         Money sumOfPrize = calculateSumOfPrize(winnerLotto, lottos);
         Money result = sumOfPrize.divide(purchaseAmount);
-        return result.formattingTwoDecimal();
+        return result.toTwoDecimal();
     }
 
-    public List<Rank> checkRanks(Lottos winnerLotto, List<Lottos> lottos) {
+    public List<Rank> checkRanks(WinningLottos winnerLotto, List<Lottos> lottos) {
         List<Rank> ranks = new ArrayList<>();
         for (Lottos lotto : lottos) {
-            ranks.add(winnerLotto.getRank(lotto));
+            ranks.add(winnerLotto.checkRank(lotto));
         }
         return ranks;
     }
 
     public List<Lottos> createLottos(Money amount) {
-        return LottoFactory.createLottoses(amount, price);
+        return LottoFactory.createMultipleLottos(Number.from(amount.divide(price).toInt()));
     }
 
-    public Lottos createLotto(List<Integer> numbers) {
-        return LottoFactory.createLotto(numbers);
+    public WinningLottos createWinningLotto(List<Integer> numbers, Number bonusNumber) {
+        return LottoFactory.createWinningLotto(numbers, bonusNumber.intValue());
     }
 
     private Money calculatePurchaseAmount(List<Lottos> lottos) {
         return price.multiply(Number.from(lottos.size()));
     }
 
-    private Money calculateSumOfPrize(Lottos winnerLotto, List<Lottos> lottos) {
+    private Money calculateSumOfPrize(WinningLottos winnerLotto, List<Lottos> lottos) {
         Money sumOfPrize = Money.from(0);
         for (Lottos lotto : lottos) {
-            sumOfPrize = sumOfPrize.add(winnerLotto.getPrize(lotto));
+            sumOfPrize = sumOfPrize.add(winnerLotto.checkPrize(lotto));
         }
         return sumOfPrize;
     }

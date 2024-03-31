@@ -28,11 +28,11 @@ public class Money {
         return from(value.divide(from.value));
     }
 
-    public int convertToInt() {
-        return value.convertToInt();
+    public int toInt() {
+        return value.toInt();
     }
 
-    public double formattingTwoDecimal() {
-        return value.formattingTwoDecimal();
+    public double toTwoDecimal() {
+        return value.toTwoDecimal();
     }
 }
