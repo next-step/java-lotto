@@ -32,10 +32,10 @@ public enum LottoPrice {
         return price;
     }
 
-
-    public static LottoPrice valueOf(int count, boolean matchBonus) {
-        return Arrays.stream(values()).filter(item -> item.count == count)
+    public static LottoPrice valueOf(int match, boolean matchBonus) {
+        return Arrays.stream(values()).filter(item -> item.count == match)
             .filter(item -> item.bonusResult == matchBonus).findAny().orElse(MISS);
     }
+
 
 }
