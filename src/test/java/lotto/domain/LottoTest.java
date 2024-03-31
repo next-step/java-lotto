@@ -20,7 +20,7 @@ class LottoTest {
     @Test
     @DisplayName("주어진 로또 번호 집합에 따라 로또를 생성한다.")
     void Lotto_ValidLottoNumbersSet() {
-        final Lotto lotto = Lotto.from(toLottoNumbersSet(LOTTO_NUMBERS_SIZE));
+        final Lotto lotto = new Lotto(toLottoNumbersSet(LOTTO_NUMBERS_SIZE));
 
         assertThat(lotto).isNotNull();
     }
@@ -30,15 +30,15 @@ class LottoTest {
     @DisplayName("주어진 로또 번호 집합이 지정된 개수보다 많거나 적다면 예외를 던진다.")
     void Lotto_MoreOrLessThanSizeSet_Exception(final int invalidSize) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lotto.from(toLottoNumbersSet(invalidSize)));
+                .isThrownBy(() -> new Lotto(toLottoNumbersSet(invalidSize)));
     }
 
     @Test
     @DisplayName("일치하는 로또 번호의 개수를 반환한다.")
     void MatchCount() {
         final Set<LottoNumber> lottoNumbers = toLottoNumbersSet(LOTTO_NUMBERS_SIZE);
-        final Lotto lotto = Lotto.from(lottoNumbers);
-        final Lotto otherLotto = Lotto.from(lottoNumbers);
+        final Lotto lotto = new Lotto(lottoNumbers);
+        final Lotto otherLotto = new Lotto(lottoNumbers);
 
         assertThat(lotto.matchCount(otherLotto))
                 .isEqualTo(LOTTO_NUMBERS_SIZE);
@@ -47,7 +47,7 @@ class LottoTest {
     @Test
     @DisplayName("로또 번호 목록을 반환한다.")
     void ExtractLottoNumbers_Values() {
-        final Lotto lotto = Lotto.from(toLottoNumbersSet(LOTTO_NUMBERS_SIZE));
+        final Lotto lotto = new Lotto(toLottoNumbersSet(LOTTO_NUMBERS_SIZE));
         final List<Integer> expectedLottoNumbers = IntStream.rangeClosed(1, LOTTO_NUMBERS_SIZE)
                 .boxed()
                 .collect(Collectors.toList());
@@ -58,7 +58,7 @@ class LottoTest {
 
     private Set<LottoNumber> toLottoNumbersSet(final int size) {
         return IntStream.rangeClosed(1, size)
-                .mapToObj(LottoNumber::from)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toUnmodifiableSet());
     }
 

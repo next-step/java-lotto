@@ -11,8 +11,16 @@ public class Lotto {
 
     private final Set<LottoNumber> numbers;
 
-    private Lotto(final Set<LottoNumber> numbers) {
+    public Lotto(final Set<LottoNumber> numbers) {
+        validateNumbersHaveSpecifiedSize(numbers);
+
         this.numbers = numbers;
+    }
+
+    private void validateNumbersHaveSpecifiedSize(final Set<LottoNumber> numbers) {
+        if (numbers.size() < LOTTO_NUMBERS_SIZE || numbers.size() > LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 지정된 개수보다 많거나 적을 수 없습니다. 개수: " + numbers.size());
+        }
     }
 
     public int matchCount(final Lotto otherLotto) {
@@ -29,29 +37,17 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public static Lotto from(final Set<LottoNumber> numbers) {
-        validateNumbersHaveSpecifiedSize(numbers);
-
-        return new Lotto(numbers);
-    }
-
-    private static void validateNumbersHaveSpecifiedSize(final Set<LottoNumber> numbers) {
-        if (numbers.size() < LOTTO_NUMBERS_SIZE || numbers.size() > LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 지정된 개수보다 많거나 적을 수 없습니다. 개수: " + numbers.size());
-        }
-    }
-
     public static Lotto from(final int[] numbers) {
         final Set<LottoNumber> lottoNumbers = toLottoNumbers(numbers);
 
         validateNumbersAreNotDuplicated(numbers, lottoNumbers);
 
-        return from(lottoNumbers);
+        return new Lotto(lottoNumbers);
     }
 
     private static Set<LottoNumber> toLottoNumbers(final int[] numbers) {
         return Arrays.stream(numbers)
-                .mapToObj(LottoNumber::from)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toUnmodifiableSet());
     }
 

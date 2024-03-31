@@ -35,6 +35,6 @@ public class LottoGenerator {
     private Lotto generate() {
         final Set<LottoNumber> lottoNumbers = this.lottoNumbersPicker.pick();
 
-        return Lotto.from(lottoNumbers);
+        return new Lotto(lottoNumbers);
     }
 }
