@@ -40,6 +40,6 @@ class LottoResultTest {
                 .boxed()
                 .collect(Collectors.toMap(i -> ranks[i], i -> rankCounts[i]));
 
-        return LottoResult.from(result);
+        return new LottoResult(result);
     }
 }

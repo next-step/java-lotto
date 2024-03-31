@@ -10,11 +10,9 @@ public class LottoResult {
     private static final double FLOOR_STANDARD = 100.0;
 
     private final Map<LottoRank, Long> result;
-    private final double profitRate;
 
-    private LottoResult(final Map<LottoRank, Long> result, final double profitRate) {
+    public LottoResult(final Map<LottoRank, Long> result) {
         this.result = result;
-        this.profitRate = profitRate;
     }
 
     public Map<LottoRank, Long> result() {
@@ -22,13 +20,7 @@ public class LottoResult {
     }
 
     public double profitRate() {
-        return this.profitRate;
-    }
-
-    public static LottoResult from(final Map<LottoRank, Long> result) {
-        final double profitRate = floor(calculateProfitRate(result));
-
-        return new LottoResult(result, profitRate);
+        return floor(calculateProfitRate(this.result));
     }
 
     private static double calculateProfitRate(final Map<LottoRank, Long> result) {

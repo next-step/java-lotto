@@ -12,7 +12,7 @@ public class LottoJudge {
         final Map<LottoRank, Long> result = lottos.stream()
                 .collect(Collectors.groupingBy(lotto -> match(lotto, winningLotto), Collectors.counting()));
 
-        return LottoResult.from(result);
+        return new LottoResult(result);
     }
 
     private LottoRank match(final Lotto lotto, final Lotto winningLotto) {

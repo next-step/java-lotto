@@ -58,6 +58,6 @@ class LottoJudgeTest {
                 NONE, 3L
         );
 
-        return LottoResult.from(result);
+        return new LottoResult(result);
     }
 }
