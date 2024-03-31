@@ -3,13 +3,15 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.domain.LottoTicketBall;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoTicketGeneratorTest {
 
-    private LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator();
+    private LottoTicketBall lottoTicketBall = new LottoTicketBall();
+    private LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator(lottoTicketBall);
 
     @Test
     public void 구입금액에_따른_로또_발급() {

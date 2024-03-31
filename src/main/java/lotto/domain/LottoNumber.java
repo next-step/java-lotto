@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class LottoNumber {
 
     private static final int NUMBER_MIN = 1;
@@ -18,6 +20,11 @@ public class LottoNumber {
         }
     }
 
+    public int getNumber() {
+        return number;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -35,7 +42,8 @@ public class LottoNumber {
         return String.valueOf(number);
     }
 
-    public int getNumber() {
-        return number;
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }

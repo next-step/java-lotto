@@ -8,7 +8,12 @@ import lotto.domain.LottoTicketBall;
 public class LottoTicketGenerator {
 
     private static final int PRICE_PER_TICKET = 1000;
-    private LottoTicketBall lottoTicketBall = new LottoTicketBall();
+
+    private final LottoTicketBall lottoTicketBall;
+
+    public LottoTicketGenerator(LottoTicketBall lottoTicketBall) {
+        this.lottoTicketBall = lottoTicketBall;
+    }
 
     public List<LottoTicket> purchaseLotto(int purchaseAmount) {
         if (purchaseAmount < PRICE_PER_TICKET) {

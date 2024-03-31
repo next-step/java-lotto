@@ -5,40 +5,49 @@ import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoPrice;
 import lotto.domain.LottoTicket;
+import lotto.domain.WinLotto;
 
 public class LottoResultManager {
 
-    private Map<Integer, Integer> lottoResult = new HashMap<>();
+    private final Map<LottoPrice, Integer> lottoResult;
 
-    public LottoResultManager() {
-        lottoResult.put(3, 0);
-        lottoResult.put(4, 0);
-        lottoResult.put(5, 0);
-        lottoResult.put(6, 0);
+    public LottoResultManager(List<LottoTicket> tickets, WinLotto winLotto) {
+        this.lottoResult = new HashMap<>();
+        calculateLottoResult(tickets, winLotto);
     }
 
-    public Map<Integer, Integer> calculateLottoResult(List<LottoTicket> tickets,
-            List<Integer> winningNumbers) {
-        LottoTicket winningTicket = LottoTicket.createTicket(winningNumbers);
+    private Map<LottoPrice, Integer> calculateLottoResult(List<LottoTicket> tickets,
+        WinLotto lotto) {
 
         for (LottoTicket ticket : tickets) {
-            int count = ticket.count(winningTicket.getNumbers());
-            lottoResult.put(count, lottoResult.getOrDefault(count, 0) + 1);
+            LottoPrice price = ticket.getPrice(lotto);
+            lottoResult.put(price, lottoResult.getOrDefault(price, 0) + 1);
         }
+
         return lottoResult;
     }
 
-    public double calculateReturnRate(Map<Integer, Integer> result, int purchaseAmount) {
-        double winningMoney = calculateWinningMoney(result);
+    public double calculateReturnRate(int purchaseAmount) {
+        double winningMoney = calculateWinningMoney();
         return Math.round(winningMoney / purchaseAmount * 100.0) / 100.0;
 
     }
 
-    private double calculateWinningMoney(Map<Integer, Integer> result) {
+    private double calculateWinningMoney() {
         double winningMoney = 0;
-        for (Map.Entry<Integer, Integer> item : result.entrySet()) {
-            winningMoney += LottoPrice.findPrice(item.getKey()).getPrice() * item.getValue();
+        for (Map.Entry<LottoPrice, Integer> item : lottoResult.entrySet()) {
+            winningMoney += item.getKey().getPrice() * item.getValue();
         }
         return winningMoney;
     }
+
+    public int getCount(LottoPrice price) {
+        Integer count = this.lottoResult.get(price);
+        if (count == null) {
+            return 0;
+        }
+        return count;
+    }
+
+
 }
