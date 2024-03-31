@@ -14,7 +14,7 @@ public class Lotto {
     }
 
     public Lotto(LottoNumbers lottoNumbers) {
-        this.autoLotto = validateSize(lottoNumbers.getNumbers());
+        this.autoLotto = validate(lottoNumbers.getNumbers());
         this.matchingCount = 0;
     }
 
@@ -33,9 +33,13 @@ public class Lotto {
                 .count();
     }
 
-    public Set<Integer> validateSize(Set<Integer> autoLotto) {
+    public Set<Integer> validate(Set<Integer> autoLotto) {
         if (autoLotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+        }
+
+        if (autoLotto.stream().anyMatch(number -> number < 1 || number > 45)) {
+            throw new IllegalArgumentException("로또 번호는 1부터 45사이여야 합니다.");
         }
         return autoLotto;
     }
