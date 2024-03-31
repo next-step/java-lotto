@@ -2,6 +2,7 @@ package lottogame.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class LottoFactoryTest {
@@ -23,5 +24,17 @@ class LottoFactoryTest {
         Number countOfLottos = LottoFactory.calculateCountOfLottos(money, price);
 
         assertThat(countOfLottos).isEqualTo(expected);
+    }
+
+    @Test
+    void 수동입력_로또_생성() {
+        List<List<Integer>> numbers = List.of(
+                List.of(1,2,3,4,5,6),
+                List.of(1,2,3,4,5,7),
+                List.of(1,2,3,4,5,9)
+        );
+        int expected = 3;
+
+        assertThat(LottoFactory.createMultipleLottos(numbers).size()).isEqualTo(expected);
     }
 }

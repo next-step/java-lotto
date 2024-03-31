@@ -22,6 +22,11 @@ public class LottoFactory {
         return lottoses;
     }
 
+    public static List<Lottos> createMultipleLottos(List<List<Integer>> numbers) {
+        return numbers.stream().map(LottoFactory::createLotto)
+                .collect(Collectors.toUnmodifiableList());
+    }
+
     public static Lottos createLotto(List<Integer> numbers) {
         return new Lottos(numbers);
     }
