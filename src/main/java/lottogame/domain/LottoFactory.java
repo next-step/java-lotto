@@ -38,4 +38,8 @@ public class LottoFactory {
                 .sorted()
                 .collect(Collectors.toUnmodifiableList()));
     }
+
+    public static Number calculateCountOfLottos(Money money, Money price) {
+        return Number.from(money.divide(price).convertToInt());
+    }
 }
