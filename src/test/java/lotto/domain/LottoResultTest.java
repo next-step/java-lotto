@@ -1,6 +1,6 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.*;
+import lotto.domain.strategy.LottoNumberStrategy;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,11 +14,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
 	private final WinningNumbers winningNumbers = new WinningNumbers(Set.of(1, 2, 3, 4, 5, 6));
-	private static final Lotto twoMatchedLotto = new Lotto(new InputLottoNumberStrategy(List.of(1, 2, 7, 8, 9, 10)));
-	private static final Lotto threeMatchedLotto = new Lotto(new InputLottoNumberStrategy(List.of(1, 2, 3, 7, 8, 9)));
-	private static final Lotto fourMatchedLotto = new Lotto(new InputLottoNumberStrategy(List.of(1, 2, 3, 4, 8, 9)));
-	private static final Lotto fiveMatchedLotto = new Lotto(new InputLottoNumberStrategy(List.of(1, 2, 3, 4, 5, 9)));
-	private static final Lotto sixMatchedLotto = new Lotto(new InputLottoNumberStrategy(List.of(1, 2, 3, 4, 5, 6)));
+	private static final Lotto twoMatchedLotto = new Lotto(getInputLottoNumberStrategy(List.of(1, 2, 7, 8, 9, 10)));
+	private static final Lotto threeMatchedLotto = new Lotto(getInputLottoNumberStrategy(List.of(1, 2, 3, 7, 8, 9)));
+	private static final Lotto fourMatchedLotto = new Lotto(getInputLottoNumberStrategy(List.of(1, 2, 3, 4, 8, 9)));
+	private static final Lotto fiveMatchedLotto = new Lotto(getInputLottoNumberStrategy(List.of(1, 2, 3, 4, 5, 9)));
+	private static final Lotto sixMatchedLotto = new Lotto(getInputLottoNumberStrategy(List.of(1, 2, 3, 4, 5, 6)));
 	private LottoPrice lottoPrice;
 
 	@ParameterizedTest
@@ -53,5 +53,9 @@ public class LottoResultTest {
 				, Arguments.of(fiveMatchedLotto, 1500000)
 				, Arguments.of(sixMatchedLotto, 2000000000)
 		);
+	}
+
+	private static LottoNumberStrategy getInputLottoNumberStrategy(List<Integer> inputLottoNumber) {
+		return () -> inputLottoNumber;
 	}
 }
