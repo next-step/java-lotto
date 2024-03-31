@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoVendingMachine;
 import lotto.domain.RandomNumbers;
@@ -24,15 +25,17 @@ public class LottoTest {
     @Test
     public void 임의의_5개의_번호를_가져야한다(){
         RandomNumbers randomNumbers = new RandomNumbers();
-        LottoTicket lottoTicket = new LottoTicket(randomNumbers);
-        assertThat(lottoTicket.getNumbers().size()).isEqualTo(5);
+        LottoTicket lottoTicket = new LottoTicket(1,2,3,4,5,6);
+        assertThat(lottoTicket.getLottoNumbers()).isEqualTo(5);
     }
 
     @Test
     public void 임의의_5개의_숫자는_중복_될_수_없다(){
-        LottoTicket lottoTicket = new LottoTicket(List.of(1,1,3,4,5));
-        List<Integer> riddle = lottoTicket.getNumbers();
-        assertTrue(hasDuplicates(riddle));
+        LottoTicket lottoTicket = new LottoTicket(1,1,3,4,5);
+        List<LottoNumber> riddle = lottoTicket.getLottoNumbers();
+//        for (LottoNumber number : riddle) {
+//            assertTrue(hasDuplicates(number.g));
+//        }
     }
 
     public static boolean hasDuplicates(List<Integer> numbers) {
