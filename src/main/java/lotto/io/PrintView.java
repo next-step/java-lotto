@@ -15,8 +15,9 @@ public class PrintView {
 	public static void printLottos(List<Lotto> lottos) {
 		System.out.println(
 				lottos.stream()
-				.map(Lotto::getLottoNumbersString)
-				.collect(Collectors.joining("\n"))
+						.map(Lotto::getLottoNumbers)
+						.map(String::valueOf)
+						.collect(Collectors.joining("\n"))
 		);
 	}
 
