@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 public enum Prize {
 	MATCHED_3(3, 5000),
@@ -31,12 +30,5 @@ public enum Prize {
 				.map(prize -> prize.price)
 				.findFirst()
 				.orElse(0);
-	}
-
-	public static Long getMinimumCount() {
-		return Arrays.stream(values())
-				.min(Comparator.comparing(x -> x.count))
-				.map(x -> x.count)
-				.orElse(0L);
 	}
 }
