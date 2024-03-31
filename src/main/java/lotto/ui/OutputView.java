@@ -1,7 +1,7 @@
 package lotto.ui;
 
 import java.util.List;
-import java.util.Map;
+import lotto.LottoResultManager;
 import lotto.domain.LottoPrice;
 import lotto.domain.LottoTicket;
 
@@ -14,21 +14,27 @@ public class OutputView {
         }
     }
 
-    public void displayWinning(Map<LottoPrice, Integer> results) {
+    public void displayWinning(LottoResultManager lottoResultManager) {
         System.out.println("당첨 통계");
+        for (LottoPrice price : LottoPrice.values()) {
+            displayDetailResult(lottoResultManager, price);
+        }
 
-        for (Map.Entry<LottoPrice, Integer> item : results.entrySet()) {
-            if (item.getKey() != LottoPrice.MISS) {
-                System.out.printf("%d개 일치 %s (%d원)- %d개", item.getKey().getCount(),
-                    item.getKey().isBonusResult() ? ", 보너스 볼 일치" : "",
-                    item.getKey().getPrice(), item.getValue());
-            }
+    }
+
+    private static void displayDetailResult(LottoResultManager lottoResultManager,
+        LottoPrice price) {
+        if (price != LottoPrice.MISS) {
+            System.out.printf("%d개 일치 %s (%d원)- %d개", price.getCount(),
+                price.isBonusResult() ? ", 보너스 볼 일치" : "", price.getPrice(),
+                lottoResultManager.getCount(price));
             System.out.println();
         }
     }
 
-    public void displayWinningMoney(double returnRate) {
+    public void displayWinningMoney(LottoResultManager lottoResultManager, int purchaseAmount) {
 
-        System.out.printf("총 수익률은 %.2f입니다.", returnRate);
+        System.out.printf("총 수익률은 %.2f입니다.",
+            lottoResultManager.calculateReturnRate(purchaseAmount));
     }
 }
