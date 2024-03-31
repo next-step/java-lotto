@@ -1,5 +1,7 @@
 package calculator.parse;
 
+import calculator.calc.Calculator;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -12,12 +14,28 @@ public class ExpressionParser {
     private Queue<String> queue = new LinkedList<>();
 
     public String[] parse(String expression){
+        if( (expression == null) || (expression.isEmpty()) ){
+            throw new IllegalArgumentException();
+        }
+
         String[] expressionElements = expression.split(" ");
         queue.addAll(List.of(expressionElements));
         return expressionElements;
     }
 
-    public String[] next(){
+    public void setA(int a){
+        this.a = Integer.toString(a);
+    }
+
+    public boolean isEmpty(){
+        return this.queue.isEmpty();
+    }
+
+    public String[] next()  {
+        if(this.isEmpty()){
+            return null;
+        }
+
         if(this.a == null){
             this.a = this.queue.poll();
         }
@@ -30,6 +48,12 @@ public class ExpressionParser {
             this.b = this.queue.poll();
         }
 
-        return new String[]{this.a, this.op, this.b};
+        String[] exp = new String[]{this.a, this.op, this.b};
+
+        this.a = null;
+        this.op = null;
+        this.b = null;
+
+        return exp;
     }
 }
