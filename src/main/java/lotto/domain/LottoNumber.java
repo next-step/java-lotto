@@ -1,27 +1,35 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
+    private static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
     private final int number;
 
-    public LottoNumber(int number) {
-        if (!isLottoNumber(number)) {
-            throw new IllegalArgumentException("로또숫자는 1-45 사이의 수만 가능합니다.");
+    static {
+        for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
         }
+    }
+
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    public LottoNumber(String input) {
-        this(toInt(input));
+    public static LottoNumber of(int number) {
+        if (!isLottoNumber(number)) {
+            throw new IllegalArgumentException("로또숫자는 1-45 사이의 수만 가능합니다.");
+        }
+
+        return lottoNumbers.get(number);
     }
 
-    public static LottoNumber createBonusBall(LottoTicket winningNumbers, String input) {
-        LottoNumber bonusBall = new LottoNumber(input);
-        if (winningNumbers.contains(bonusBall)) {
-            throw new IllegalArgumentException("보너스 숫자는 당첨숫자를 제외한 숫자여야 합니다.");
-        }
-        return bonusBall;
+    public static LottoNumber of(String input) {
+        return of(toInt(input));
     }
 
     private static int toInt(String input) {
@@ -43,8 +51,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return input == null || input.isBlank();
     }
 
-    private boolean isLottoNumber(int number) {
-        return number >= 1 && number <= 45;
+    private static boolean isLottoNumber(int number) {
+        return number >= LOTTO_MIN_NUMBER && number <= LOTTO_MAX_NUMBER;
     }
 
     @Override

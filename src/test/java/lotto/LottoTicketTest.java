@@ -1,12 +1,9 @@
 package lotto;
 
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.domain.WinnerPrize;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
@@ -37,14 +34,6 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(List.of(1, 3, 5, 7, 9, 11));
         LottoTicket winningNumbers = new LottoTicket(input.split(", "));
         assertThat(lottoTicket.getMatchCount(winningNumbers)).isEqualTo(expected);
-    }
-
-    @Test
-    void 등수_계산() {
-        LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-        LottoTicket winningNumbers = new LottoTicket(List.of(1, 2, 3, 4, 5, 7));
-        LottoNumber bonusBall = new LottoNumber(6);
-        assertThat(lottoTicket.rank(winningNumbers, bonusBall)).isEqualTo(WinnerPrize.SECOND);
     }
 
     @ParameterizedTest

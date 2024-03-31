@@ -8,9 +8,12 @@ import java.util.stream.Stream;
 public class LottoTickets {
     private final List<LottoTicket> lottoTicketList;
 
-    public LottoTickets(Amount amount) {
-        this.lottoTicketList = IntStream.range(0, amount.lottoTicketCount())
+    public LottoTickets(Amount amount, List<LottoTicket> manualLotto) {
+        List<LottoTicket> autoLotto = IntStream.range(0, amount.lottoTicketCount() - manualLotto.size())
                 .mapToObj(i -> new LottoTicket())
+                .collect(Collectors.toList());
+
+        this.lottoTicketList = Stream.concat(manualLotto.stream(), autoLotto.stream())
                 .collect(Collectors.toList());
     }
 
@@ -22,20 +25,8 @@ public class LottoTickets {
         return lottoTicketList.size();
     }
 
-    public int winnerCount(WinnerPrize winnerPrize, LottoTicket winningNumbers, LottoNumber bonusBall) {
-        return (int) lottoTicketList.stream()
-                .filter(lottoTicket -> lottoTicket.rank(winningNumbers, bonusBall) == winnerPrize)
-                .count();
-    }
-
-    public double earningsRate(LottoTicket winningNumbers, LottoNumber bonusBall) {
-        return Math.floor(100 * (double) earnings(winningNumbers, bonusBall) / (size() * Amount.LOTTO_PRICE))/100.0;
-    }
-
-    private long earnings(LottoTicket winningNumbers, LottoNumber bonusBall) {
-        return Stream.of(WinnerPrize.values())
-                .mapToLong(winnerPrize -> winnerCount(winnerPrize, winningNumbers, bonusBall) * winnerPrize.getPrize())
-                .sum();
+    public LottoResult winnerResult(WinningTicket winningTicket) {
+        return new LottoResult(this, winningTicket);
     }
 
 }
