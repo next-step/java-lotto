@@ -1,4 +1,4 @@
-package auto_lotto.domain;
+package lotto.domain;
 
 import java.util.List;
 

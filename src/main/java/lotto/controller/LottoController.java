@@ -1,10 +1,10 @@
-package auto_lotto.controller;
+package lotto.controller;
 
-import auto_lotto.domain.LottoTicket;
-import auto_lotto.domain.LottoVendingMachine;
-import auto_lotto.domain.WinningInfo;
-import auto_lotto.view.InputView;
-import auto_lotto.view.ResultView;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoVendingMachine;
+import lotto.domain.WinningInfo;
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
 import java.util.List;
 import java.util.Map;

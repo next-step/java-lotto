@@ -1,8 +1,8 @@
-package auto_lotto.view;
+package lotto.view;
 
 
-import auto_lotto.domain.LottoTicket;
-import auto_lotto.domain.WinningInfo;
+import lotto.domain.LottoTicket;
+import lotto.domain.WinningInfo;
 
 import java.util.List;
 import java.util.Map;

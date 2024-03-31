@@ -1,8 +1,8 @@
-package auto_lotto;
+package lotto;
 
-import auto_lotto.domain.LottoTicket;
-import auto_lotto.domain.LottoVendingMachine;
-import auto_lotto.domain.RandomNumbers;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoVendingMachine;
+import lotto.domain.RandomNumbers;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
