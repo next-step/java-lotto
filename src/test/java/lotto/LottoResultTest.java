@@ -19,13 +19,15 @@ public class LottoResultTest {
 	private static final Lotto fourMatchedLotto = new Lotto(new InputLottoNumberStrategy(List.of(1, 2, 3, 4, 8, 9)));
 	private static final Lotto fiveMatchedLotto = new Lotto(new InputLottoNumberStrategy(List.of(1, 2, 3, 4, 5, 9)));
 	private static final Lotto sixMatchedLotto = new Lotto(new InputLottoNumberStrategy(List.of(1, 2, 3, 4, 5, 6)));
+	private LottoPrice lottoPrice;
 
 	@ParameterizedTest
 	@MethodSource("getLottoNumbersAndExpectedPrize")
 	void 로또_1개_수익율_계산(Lotto lotto, int expected) {
 		int purchasePrice = 1000;
+		lottoPrice = new LottoPrice(purchasePrice);
 
-		LottoResult lottoResult = new LottoResult(winningNumbers, List.of(lotto), purchasePrice);
+		LottoResult lottoResult = new LottoResult(winningNumbers, List.of(lotto), lottoPrice);
 
 		assertThat(lottoResult.getRate()).isEqualTo((double) expected / purchasePrice);
 	}
@@ -33,10 +35,11 @@ public class LottoResultTest {
 	@Test
 	void 로또_여러개_수익율_계산() {
 		int purchasePrice = 5000;
+		lottoPrice = new LottoPrice(purchasePrice);
 
 		LottoResult lottoResult = new LottoResult(winningNumbers,
 				List.of(twoMatchedLotto, threeMatchedLotto, fourMatchedLotto, fiveMatchedLotto, sixMatchedLotto),
-				purchasePrice);
+				lottoPrice);
 
 
 		assertThat(lottoResult.getRate()).isEqualTo((double) (5000 + 50000 + 1500000 + 2000000000) / purchasePrice);
