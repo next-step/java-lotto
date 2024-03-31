@@ -16,24 +16,15 @@ class LottoGameTest {
     @DisplayName("자동 로또 발행 테스트")
     void create_lotto_test(int input, int output) {
         List<Lotto> lottos = new LottoGame(input).createLotto(new RandomNumberStrategy());
-        System.out.println(lottos);
         assertThat(lottos.size()).isEqualTo(output);
     }
-
 
     @ParameterizedTest(name = "구매 가격 : {0} 예외")
     @CsvSource(value = {"2500", "1234"})
     @DisplayName("단위에 맞지 않은 구입 예외 테스트")
     void validate_lotto_test(int input) {
         assertThatThrownBy(() -> {
-            new LottoGame(input).createLotto(new RandomNumberStrategy());
+            new LottoGame(input);
         }).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @ParameterizedTest(name = "구매 가격 : {0} 예외")
-    @CsvSource(value = {"2500", "1234"})
-    @DisplayName("등수 확인 테스트")
-    void rank_match_test(int input) {
-
     }
 }

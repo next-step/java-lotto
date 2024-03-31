@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,5 +42,19 @@ public enum Rank {
 
     public int getPrize() {
         return prize;
+    }
+
+    public static List<Integer> compareRank(List<Rank> lottoRanks) {
+        List<Integer> result = new ArrayList<>();
+
+        for (int i = Rank.values().length - 2; i >= 0; i--) {
+            Rank rank = Rank.values()[i];
+            int count = rank.countSameMatch(lottoRanks);
+
+            result.add(rank.getMatchCount());
+            result.add(rank.getPrize());
+            result.add(count);
+        }
+        return result;
     }
 }

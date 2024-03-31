@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
-    public static final String LOTTO_LENGTH_ERROR_MESSAGE = "로또 숫자는 6개여야 합니다.";
+    public static final String LOTTO_LENGTH_ERROR_MESSAGE = "로또 숫자는 %d개여야 합니다.";
     public static final String SEPARATOR = ",";
 
     private Set<LottoNumber> lotto;
@@ -14,17 +14,27 @@ public class Lotto {
         validateLotto();
     }
 
-    public static Lotto of(List<Integer> numbers) {
+    private void validateLotto() {
+        if (this.lotto.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(String.format(LOTTO_LENGTH_ERROR_MESSAGE, LOTTO_SIZE));
+        }
+    }
+
+    public static Lotto createFromNumbers(List<Integer> numbers) {
         return of(numbers.toArray(new Integer[0]));
     }
 
-    public static Lotto of(String value) {
-        String[] numbers = value.split(SEPARATOR);
-        Integer[] lottoNumbers = Arrays.stream(numbers)
+    public static Lotto createFromString(String text) {
+        String[] numbers = text.split(SEPARATOR);
+        return of(toIntegers(numbers));
+    }
+
+    private static Integer[] toIntegers(String[] strings) {
+        Integer[] integers = Arrays.stream(strings)
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .toArray(Integer[]::new);
-        return of(lottoNumbers);
+        return integers;
     }
 
     public static Lotto of(Integer... numbers) {
@@ -35,18 +45,11 @@ public class Lotto {
         return new Lotto(lotto);
     }
 
-    private void validateLotto() {
-        if (this.lotto.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(LOTTO_LENGTH_ERROR_MESSAGE);
-        }
-    }
-
     public int matchCount(Lotto otherLotto) {
         return (int) this.lotto.stream()
                 .filter(otherLotto::isContains)
                 .count();
     }
-
 
     private boolean isContains(LottoNumber number) {
         return this.lotto.contains(number);

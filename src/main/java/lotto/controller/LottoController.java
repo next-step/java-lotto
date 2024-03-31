@@ -11,8 +11,9 @@ public class LottoController {
         ResultView resultView = new ResultView();
         RandomNumberStrategy randomNumberStrategy = new RandomNumberStrategy();
         LottoGame lottoGame = new LottoGame(inputView.inputMoney());
+        lottoGame.createLotto(randomNumberStrategy);
 
-        resultView.printOfBuyLotto(lottoGame, randomNumberStrategy);
+        resultView.printOfBuyLotto(lottoGame);
         resultView.printWinningResult(lottoGame, inputView.inputWinningNumber());
     }
 }
