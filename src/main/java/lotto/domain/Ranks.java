@@ -8,12 +8,12 @@ public class Ranks {
     private final Set<Rank> ranks;
 
     public Ranks() {
-        this(new HashSet<>());
+        this.ranks = new HashSet<>();
+        initializeRanks();
     }
 
     public Ranks(Set<Rank> ranks) {
-        this.ranks = new HashSet<>();
-        initializeRanks();
+        this.ranks = ranks;
     }
 
     private void initializeRanks() {

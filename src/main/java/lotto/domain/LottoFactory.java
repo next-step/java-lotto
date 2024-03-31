@@ -1,9 +1,10 @@
 package lotto.domain;
 
+import static lotto.LottoApplication.LOTTO_COST;
+
 public class LottoFactory {
 
     private final Lottos lottos;
-    public static final int LOTTO_COST = 1000;
 
     private LottoFactory(int lottoAmount) {
         // 로또 장수만큼 6자리 숫자를 랜덤 뽑기한다.

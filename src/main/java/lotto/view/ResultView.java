@@ -1,10 +1,8 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Reward;
+import lotto.domain.*;
 
-import java.util.Map;
+import java.util.Set;
 
 public class ResultView {
 
@@ -14,21 +12,27 @@ public class ResultView {
         }
     }
 
-    public void printResult(Map<Integer, Integer> countMap, double profit) {
+    public void printResult(Ranks ranks, double profit) {
         System.out.println("당첨 통계");
         System.out.println("-----------------");
 
         for (Reward Reward : Reward.values()) {
-            printReward(Reward, countMap);
+            if (Reward == Reward.MISS) {
+                continue;
+            }
+            printReward(Reward, ranks.of());
         }
         printProfit(profit);
     }
 
-    private void printReward(Reward reward, Map<Integer, Integer> countMap) {
+    private void printReward(Reward reward, Set<Rank> rank) {
         System.out.printf("%s개 일치 (%s원)- %s개\n",
                 reward.getMatchingCount(),
                 reward.getReward(),
-                countMap.get(reward.getMatchingCount()));
+                rank.stream().filter(rank1 -> rank1.isMatching(reward.getMatchingCount()))
+                        .findFirst()
+                        .orElse(new Rank(0))
+                        .getMatchingLottosCount());
     }
 
     private void printProfit(double profit) {
