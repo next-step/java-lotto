@@ -15,6 +15,7 @@ public class ResultView {
     private static final String RANKS_SECOND_FORMAT = "%d개, 보너스 볼 일치 (%d원)- %d개";
     private static final String RETURN_OF_RATE_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.";
     private static final String RETURN_OF_RATE_MESSAGE_INFORMATION = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    public static final String MANUAL_AUTO_LOTTOS_COUNT_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
     private ResultView() {
     }
@@ -80,5 +81,11 @@ public class ResultView {
             stringBuilder.append(number.getValue()).append(", ");
         }
         System.out.println("["+stringBuilder.toString().replaceAll(", $", "")+"]");
+    }
+
+    public static void printAutoAndManualLottosCount(List<Lottos> multipleManualLottos,
+            List<Lottos> multipleAutoLottos) {
+        System.out.println(
+                String.format(MANUAL_AUTO_LOTTOS_COUNT_FORMAT, multipleManualLottos.size(), multipleAutoLottos.size()));
     }
 }

@@ -22,7 +22,8 @@ public class LottoMain {
         List<Lottos> multipleManualLottos = lottoGame.createMultipleLottos(manualInputNumbers);
         List<Lottos> multipleAutoLottos = lottoGame.createMultipleLottos(countOfLottos.minus(manualCountOfLotto));
 
-        List<Lottos> lottos = lottoGame.merge(multipleAutoLottos, multipleManualLottos);
+        List<Lottos> lottos = lottoGame.merge(multipleManualLottos, multipleAutoLottos);
+        ResultView.printAutoAndManualLottosCount(multipleManualLottos, multipleAutoLottos);
         ResultView.printLottos(lottos);
 
         List<Integer> winningLottosNumbers = InputView.requestWinningLotto();
