@@ -1,11 +1,11 @@
 package lotto.model;
 
-public class MatchNumber {
+public class MatchResult {
     private final int matchCount;
 
     private final boolean matchBonus;
 
-    public MatchNumber(int matchCount, boolean matchBonus) {
+    public MatchResult(int matchCount, boolean matchBonus) {
         this.matchCount = matchCount;
         this.matchBonus = matchBonus;
     }

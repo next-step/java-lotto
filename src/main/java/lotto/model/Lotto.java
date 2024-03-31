@@ -13,8 +13,8 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public MatchNumber matchNumbers(LottoNumbers winningLottoNumbers, LottoNumber bonusLottoNumber) {
-        return new MatchNumber(getMatchCount(winningLottoNumbers), getMatchBonus(bonusLottoNumber));
+    public MatchResult matchNumbers(LottoNumbers winningLottoNumbers, LottoNumber bonusLottoNumber) {
+        return new MatchResult(getMatchCount(winningLottoNumbers), getMatchBonus(bonusLottoNumber));
     }
 
     private boolean getMatchBonus(LottoNumber bonusLottoNumber) {

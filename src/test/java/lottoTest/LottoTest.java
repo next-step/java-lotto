@@ -1,7 +1,7 @@
 package lottoTest;
 
 import lotto.model.Lotto;
-import lotto.model.MatchNumber;
+import lotto.model.MatchResult;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
 import org.assertj.core.api.Assertions;
@@ -41,8 +41,8 @@ public class LottoTest {
     @ParameterizedTest(name = "{1} 로또 번호와 {2} 보너스 번호의 일치 여부는 {3} 이다.")
     @MethodSource("createLottoWinningnumbersBonus")
     void matchBounusTest(Lotto lotto, List<Integer> lottoNumbers, int bonusNumber, boolean expected) {
-        MatchNumber matchNumber = lotto.matchNumbers(LottoNumbers.valueOf(lottoNumbers), new LottoNumber(bonusNumber));
-        Assertions.assertThat(matchNumber.isMatchBonus()).isEqualTo(expected);
+        MatchResult matchResult = lotto.matchNumbers(LottoNumbers.valueOf(lottoNumbers), new LottoNumber(bonusNumber));
+        Assertions.assertThat(matchResult.isMatchBonus()).isEqualTo(expected);
     }
 
     private static Stream<Arguments> createLottoWinningnumbersBonus() {

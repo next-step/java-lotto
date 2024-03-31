@@ -14,11 +14,11 @@ public class ResultLotto {
     }
 
     public int getWinningAmount() {
-        List<MatchNumber> matchNumbers = lottos.stream()
+        List<MatchResult> matchResults = lottos.stream()
                 .map(lotto -> lotto.matchNumbers(winningLottoNumbers, bonusLottoNumber))
                 .collect(Collectors.toList());
 
-        return LottoOutlet.getWinnings(matchNumbers);
+        return LottoOutlet.getWinnings(matchResults);
     }
 
     public double getWinningRate() {
