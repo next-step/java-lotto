@@ -28,10 +28,11 @@ public class ResultView {
     public static void winStatistics(Map<WinPrizeType, Long> winStatistics){
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + optionalZero(winStatistics.get(WinPrizeType.THREE_MATCH)) + "개");
-        System.out.println("4개 일치 (50000원)- " + optionalZero(winStatistics.get(WinPrizeType.FOUR_MATCH)) + "개");
-        System.out.println("5개 일치 (1500000원)- " + optionalZero(winStatistics.get(WinPrizeType.FIVE_MATCH)) + "개");
-        System.out.println("6개 일치 (2000000000원)- " + optionalZero(winStatistics.get(WinPrizeType.SIX_MATCH)) + "개");
+        System.out.println("3개 일치 (5000원)- " + optionalZero(winStatistics.get(WinPrizeType.FIFTH)) + "개");
+        System.out.println("4개 일치 (50000원)- " + optionalZero(winStatistics.get(WinPrizeType.FOURTH)) + "개");
+        System.out.println("5개 일치 (1500000원)- " + optionalZero(winStatistics.get(WinPrizeType.THIRD)) + "개");
+        System.out.println("5개 일치, 보너스 볼 일치 (30000000원)- " + optionalZero(winStatistics.get(WinPrizeType.SECOND)) + "개");
+        System.out.println("6개 일치 (2000000000원)- " + optionalZero(winStatistics.get(WinPrizeType.FIRST)) + "개");
     }
 
     private static Long optionalZero(Long value){
