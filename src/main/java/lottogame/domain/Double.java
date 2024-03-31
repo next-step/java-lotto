@@ -23,11 +23,11 @@ public final class Double {
         return from(value / from.value);
     }
 
-    public int convertToInt() {
+    public int toInt() {
         return (int) value;
     }
 
-    public double formattingTwoDecimal() {
+    public double toTwoDecimal() {
         return Math.floor(value * 100) / 100;
     }
 }

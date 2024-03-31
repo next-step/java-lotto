@@ -12,6 +12,6 @@ class LottoFactoryTest {
         Money price = Money.from(1_000);
         int expected = 10;
 
-        assertThat(LottoFactory.createMultipleLottos(Number.from(money.divide(price).convertToInt())).size()).isEqualTo(expected);
+        assertThat(LottoFactory.createMultipleLottos(Number.from(money.divide(price).toInt())).size()).isEqualTo(expected);
     }
 }

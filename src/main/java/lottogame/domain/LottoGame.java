@@ -10,7 +10,7 @@ public class LottoGame {
         Money purchaseAmount = calculatePurchaseAmount(lottos);
         Money sumOfPrize = calculateSumOfPrize(winnerLotto, lottos);
         Money result = sumOfPrize.divide(purchaseAmount);
-        return result.formattingTwoDecimal();
+        return result.toTwoDecimal();
     }
 
     public List<Rank> checkRanks(WinningLottos winnerLotto, List<Lottos> lottos) {
@@ -22,7 +22,7 @@ public class LottoGame {
     }
 
     public List<Lottos> createLottos(Money amount) {
-        return LottoFactory.createMultipleLottos(Number.from(amount.divide(price).convertToInt()));
+        return LottoFactory.createMultipleLottos(Number.from(amount.divide(price).toInt()));
     }
 
     public WinningLottos createWinningLotto(List<Integer> numbers, Number bonusNumber) {
