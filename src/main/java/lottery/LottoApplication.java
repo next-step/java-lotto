@@ -14,7 +14,8 @@ public class LottoApplication {
         ResultView.purchasedLottoTicketsResult(lottoTickets);
 
         String winningNumbersString = InputView.winningNumbersString();
-        WinningLotto winningLotto = new WinningLotto(winningNumbersString);
+        Integer bonusNumberInteger = InputView.bonusNumberInteger();
+        WinningLotto winningLotto = new WinningLotto(winningNumbersString, bonusNumberInteger);
 
         LottoDrawer lottoDrawer = new LottoDrawer(lottoTickets, winningLotto);
 

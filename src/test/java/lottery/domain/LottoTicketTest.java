@@ -46,4 +46,14 @@ public class LottoTicketTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    @Test
+    @DisplayName("로또 번호 일치 테스트")
+    void matchNumberTest() {
+        final LottoTicket lottoTicket = new LottoTicket(new Integer[]{1, 2, 3, 4, 5, 6});
+        final LottoNumber lottoNumber = new LottoNumber(6);
+
+        assertThat(lottoTicket.matchNumber(lottoNumber)).isTrue();
+    }
+
+
 }

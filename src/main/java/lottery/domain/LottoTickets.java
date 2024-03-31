@@ -25,7 +25,9 @@ public class LottoTickets {
     public Map<WinPrizeType, Long> winStatistics(WinningLotto winningLotto) {
         return this.lottoTickets.stream()
                 .collect(Collectors.groupingBy(
-                        lottoTicket -> WinPrizeType.fromMatchCount(lottoTicket.matchNumbersCount(winningLotto.winningLotto())),
+                        lottoTicket -> WinPrizeType.fromMatchCountWithBonusMatch(
+                                lottoTicket.matchNumbersCount(winningLotto.winningNumbers()),
+                                lottoTicket.matchNumber(winningLotto.bonusNumbers())),
                         Collectors.counting()));
     }
 
@@ -53,9 +55,9 @@ public class LottoTickets {
     }
 
     private static void validateMoney(Integer inputMoney){
-        if(Objects.isNull(inputMoney))
+        if (Objects.isNull(inputMoney))
             throw new IllegalArgumentException("구입 금액은 필수 입니다.");
-        if(inputMoney % LottoTicket.PRICE != 0)
+        if (inputMoney % LottoTicket.PRICE != 0)
             throw new IllegalArgumentException("구입 금액은 1000 단위 입니다.");
     }
 
