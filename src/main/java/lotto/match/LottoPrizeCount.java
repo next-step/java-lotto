@@ -2,26 +2,57 @@ package lotto.match;
 
 import lotto.prize.LottoPrize;
 
+import java.util.Objects;
+
 public class LottoPrizeCount {
     private final LottoPrize lottoPrize;
     private final long count;
 
-    private static final String BASE_WORD = "%d개 일치%s (%d원) - %d개";
-    private static final String BONUS_WORD = ",보너스 볼 일치";
 
     public LottoPrizeCount(LottoPrize lottoPrize, long count) {
         this.lottoPrize = lottoPrize;
         this.count = count;
     }
 
-    public String getWord() {
-        String bonusWord = getBonusPart();
-        return String.format(BASE_WORD, lottoPrize.getCorrectNumber(), bonusWord, lottoPrize.getPrize(), count);
+    public int getTotalMoney() {
+        return lottoPrize.getTotalPrice(count);
     }
 
-    private String getBonusPart(){
-        if(this.lottoPrize.getIsBonus())
-            return BONUS_WORD;
-        return "";
+    public boolean isLegal(){
+        return !lottoPrize.equals(LottoPrize.NONE);
+    }
+
+    public long getCount(){
+        return count;
+    }
+
+    public Integer getCorrectNumber(){
+        return lottoPrize.getCorrectNumber();
+    }
+
+    public Integer getPrize(){
+        return lottoPrize.getPrize();
+    }
+
+    public boolean hasBonus(){
+        return lottoPrize.getIsBonus();
+    }
+
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        LottoPrizeCount that = (LottoPrizeCount) object;
+        return count == that.count && lottoPrize == that.lottoPrize;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoPrize, count);
     }
 }

@@ -1,38 +1,31 @@
 package lotto.match;
 
-import lotto.domain.AnswerSheet;
-import lotto.domain.Lotto;
-import lotto.prize.LottoPrize;
+
 import lotto.prize.PrizeRateStrategy;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoResult {
 
-    private final Map<LottoPrize, Long> result;
+    private final List<LottoPrizeCount> lottoPrizeCounts;
 
-    public LottoResult(List<Lotto> lottos, AnswerSheet answerSheet) {
-        this.result = LottoMatcher.matchLottoToPrize(lottos, answerSheet);
+    public LottoResult(List<LottoPrizeCount> lottoPrizeCounts) {
+        this.lottoPrizeCounts = lottoPrizeCounts;
     }
 
     private int calculateTotalEarnings() {
-        return result.entrySet().stream()
-                .mapToInt(entry -> entry.getKey().getTotalPrice(entry.getValue()))
-                .sum();
+        return lottoPrizeCounts.stream().mapToInt(LottoPrizeCount::getTotalMoney).sum();
     }
 
     public double getWinningPercent(PrizeRateStrategy rateStrategy, int lottoPrice) {
-        int spendMoney = lottoPrice * result.size();
+        int spendMoney = lottoPrice * lottoPrizeCounts.size();
         return rateStrategy.getRate(calculateTotalEarnings(), spendMoney);
     }
 
-    public List<LottoPrizeCount> getResult() {
-        return Arrays.stream(LottoPrize.values())
-                .filter(prize -> !prize.equals(LottoPrize.NONE))
-                .map(prize -> new LottoPrizeCount(prize, result.getOrDefault(prize,0L)))
+    public List<LottoPrizeCount> getStatistics() {
+        return lottoPrizeCounts.stream()
+                .filter(LottoPrizeCount::isLegal)
                 .collect(Collectors.toList());
     }
 }

@@ -1,7 +1,5 @@
 package lotto.prize;
 
-import lotto.prize.PrizeRateStrategy;
-
 public class StandardPrizeRate implements PrizeRateStrategy {
 
     @Override

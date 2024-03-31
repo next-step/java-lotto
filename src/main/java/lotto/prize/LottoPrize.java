@@ -19,7 +19,7 @@ public enum LottoPrize {
     private static final Map<PrizeKey, LottoPrize> cache = new HashMap<>();
 
     static {
-        Arrays.stream(values()).forEach(prize -> cache.put(PrizeKey.of(prize.getCorrectNumber(), prize.getIsBonus()),prize));
+        Arrays.stream(values()).forEach(prize -> cache.put(new PrizeKey(prize.getCorrectNumber(), prize.getIsBonus()),prize));
     }
 
     LottoPrize(Integer correctNumber, Integer prize, boolean isBonus) {
@@ -28,8 +28,8 @@ public enum LottoPrize {
         this.isBonus = isBonus;
     }
 
-    public static LottoPrize from(int count, boolean isBonus) {
-        return cache.getOrDefault(PrizeKey.of(count,isBonus),LottoPrize.NONE);
+    public static LottoPrize from(long count, boolean isBonus) {
+        return cache.getOrDefault(new PrizeKey(count,isBonus),LottoPrize.NONE);
     }
 
     public int getTotalPrice(long count) {
