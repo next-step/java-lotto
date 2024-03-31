@@ -20,7 +20,7 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String inputs = scanner.nextLine();
         return Arrays.stream(inputs.split(",")).map(String::trim)
-            .map(input -> Integer.parseInt(input))
+            .map(Integer::parseInt)
             .collect(Collectors.toList());
     }
 
