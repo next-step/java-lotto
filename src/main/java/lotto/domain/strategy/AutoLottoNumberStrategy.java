@@ -11,6 +11,6 @@ public class AutoLottoNumberStrategy implements LottoNumberStrategy {
 	@Override
 	public List<Integer> generateLottoNumber() {
 		Collections.shuffle(numbers);
-		return numbers.subList(0, 6);
+		return numbers.subList(0, LOTTO_NUMBER_COUNT);
 	}
 }
