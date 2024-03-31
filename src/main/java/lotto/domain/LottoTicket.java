@@ -34,19 +34,21 @@ public class LottoTicket {
         }
     }
 
-    public LottoPrice getPrice(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        return LottoPrice.valueOf(matchNumberCount(winningNumbers), matchBonusNumber(bonusNumber));
+    public LottoPrice getPrice(WinLotto winLotto) {
+        return LottoPrice.valueOf(matchNumberCount(winLotto.getTicket()),
+            matchBonusNumber(winLotto.getBonusNumber()));
     }
 
-    private int matchNumberCount(List<LottoNumber> winningNumbers) {
-        return (int) winningNumbers.stream().filter(this.numbers::contains).count();
+    private int matchNumberCount(LottoTicket lottoTicket) {
+        return (int) lottoTicket.numbers.stream().filter(this.numbers::contains).count();
     }
 
     private boolean matchBonusNumber(LottoNumber number) {
-        return number.match(numbers);
+        return this.numbers.contains(number);
     }
 
     public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
+
 }
