@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -31,13 +30,4 @@ class LottoTest {
         assertThat(result).isEqualTo(6);
     }
 
-    @DisplayName("로또 번호 일치 개수 테스트")
-    @Test
-    void getFeatNumberCount() {
-        Lotto givenLotto = Lotto.ofNumbers(List.of(1, 2, 3, 4, 5, 6));
-        Lotto winLotto = Lotto.ofNumbers(List.of(1, 5, 6, 7, 8, 9));
-
-        int result = givenLotto.getFeatNumberCount(winLotto);
-        assertThat(result).isEqualTo(3);
-    }
 }

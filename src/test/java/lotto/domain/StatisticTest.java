@@ -11,7 +11,17 @@ class StatisticTest {
     @DisplayName("Statistic 담첨 번호 개수 매칭 테스트")
     @Test
     void valueOfMatchNumber() {
-        Statistic result = Statistic.valueOfMatchNumber(3);
-        assertThat(result).isEqualTo(Statistic.THREE);
+        Statistic result = Statistic.valueOfMatchNumber(3, false);
+        assertThat(result).isEqualTo(Statistic.FIFTH);
+    }
+
+    @DisplayName("Statistic 2등 3등 테스트")
+    @Test
+    void valueOfMatchNumber_withBonusOrNot() {
+        Statistic resultWithBonus = Statistic.valueOfMatchNumber(5, true);
+        assertThat(resultWithBonus).isEqualTo(Statistic.SECOND);
+
+        Statistic resultWithoutBonus = Statistic.valueOfMatchNumber(5, false);
+        assertThat(resultWithoutBonus).isEqualTo(Statistic.THIRD);
     }
 }
