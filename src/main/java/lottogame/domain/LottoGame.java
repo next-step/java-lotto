@@ -1,6 +1,7 @@
 package lottogame.domain;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class LottoGame {
@@ -29,12 +30,23 @@ public class LottoGame {
         return LottoFactory.createMultipleLottos(count);
     }
 
+    public List<Lottos> createMultipleLottos(List<List<Integer>> numbers) {
+        return LottoFactory.createMultipleLottos(numbers);
+    }
+
     public Number calculateCountOfLottos(Money amount) {
         return LottoFactory.calculateCountOfLottos(amount, price);
     }
 
     public WinningLottos createWinningLotto(List<Integer> numbers, Number bonusNumber) {
         return LottoFactory.createWinningLotto(numbers, bonusNumber.intValue());
+    }
+
+    public List<Lottos> merge(List<Lottos> multipleLottos, List<Lottos> newMultipleLottos) {
+        List<Lottos> merged = new ArrayList<>();
+        merged.addAll(multipleLottos);
+        merged.addAll(newMultipleLottos);
+        return merged;
     }
 
     private Money calculatePurchaseAmount(List<Lottos> lottos) {

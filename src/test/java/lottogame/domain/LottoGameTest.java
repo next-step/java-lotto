@@ -39,4 +39,21 @@ class LottoGameTest {
 
         assertThat(lottoGame.calculateReturnOfRate(winnerLotto, lottos)).isEqualTo(expected);
     }
+
+    @Test
+    void merge() {
+        List<Lottos> multipleLottosOne = List.of(
+                new Lottos(List.of(8, 21, 23, 41, 42, 43)),
+                new Lottos(List.of(3, 5, 11, 16, 32, 38))
+        );
+
+        List<Lottos> multipleLottosTwo = List.of(
+                new Lottos(List.of(1, 8, 11, 31, 41, 42)),
+                new Lottos(List.of(7, 11, 30, 40, 42, 43)),
+                new Lottos(List.of(2, 13, 22, 32, 38, 45))
+        );
+        int expected = 5;
+
+        assertThat(lottoGame.merge(multipleLottosOne, multipleLottosTwo).size()).isEqualTo(expected);
+    }
 }
