@@ -8,7 +8,7 @@ public class LottoResult {
 	private final Map<Long, Integer> matchedMap;
 	private final double rate;
 
-	public LottoResult(WinningNumbers winningNumbers, List<Lotto> lottos, int purchasePrice) {
+	public LottoResult(WinningNumbers winningNumbers, List<Lotto> lottos, LottoPrice lottoPrice) {
 		this.matchedMap = new HashMap<>();
 
 		lottos.stream()
@@ -16,15 +16,15 @@ public class LottoResult {
 				.filter(count -> count >= Prize.getMinimumCount())
 				.forEach(count -> matchedMap.put(count, matchedMap.getOrDefault(count, 0) + 1));
 
-		this.rate = calculateRate(purchasePrice);
+		this.rate = calculateRate(lottoPrice);
 	}
 
-	private double calculateRate(int purchasePrice) {
+	private double calculateRate(LottoPrice lottoPrice) {
 		int prize = matchedMap.keySet().stream()
 				.mapToInt(key -> Prize.findPriceByCount(key) * matchedMap.get(key))
 				.sum();
 
-		return (double) prize / purchasePrice;
+		return (double) prize / lottoPrice.getPrice();
 	}
 
 	public double getRate() {
