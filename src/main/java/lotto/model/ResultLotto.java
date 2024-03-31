@@ -48,6 +48,6 @@ public class ResultLotto {
 
     public void recordWinningNumbers(LottoNumbers winningLottoNumbers, int bonusNumber) {
         this.winningLottoNumbers = winningLottoNumbers;
-        this.bonusLottoNumber = new LottoNumber(bonusNumber);
+        this.bonusLottoNumber = LottoNumber.valueOf(bonusNumber);
     }
 }
