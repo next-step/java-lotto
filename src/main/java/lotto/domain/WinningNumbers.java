@@ -4,12 +4,14 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static lotto.domain.strategy.LottoNumberStrategy.LOTTO_NUMBER_COUNT;
+
 public class WinningNumbers {
 	private final Set<Integer> winningNumbers;
 
 	public WinningNumbers(Set<Integer> winningNumbers) {
-		if(winningNumbers.size() != 6) {
-			throw new IllegalArgumentException("당첨 번호는 6개를 입력해야 합니다.");
+		if(winningNumbers.size() != LOTTO_NUMBER_COUNT) {
+			throw new IllegalArgumentException("당첨 번호는" + LOTTO_NUMBER_COUNT + "개를 입력해야 합니다.");
 		}
 		this.winningNumbers = winningNumbers;
 	}
