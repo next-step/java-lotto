@@ -13,9 +13,15 @@ public class LottoMain {
 
     public static void main(String[] args) {
         Money money = InputView.requestMoney();
+        ResultView.printLinkBreak();
         LottoGame lottoGame = new LottoGame();
         List<Lottos> lottos = lottoGame.createLottos(money);
-        ResultView.printCountOfPurchaseLottos(lottos);
+        //ResultView.printCountOfPurchaseLottos(lottos);
+        Number manualCountOfLotto = InputView.requestCountOfManualLottos(Number.from(lottos.size()));
+        ResultView.printLinkBreak();
+        //ResultView.printManualCountOfLotto(manualCountOfLotto);
+        InputView.requestMultipleManualLottos(manualCountOfLotto);
+
         ResultView.printLottos(lottos);
 
         List<Integer> winningLottosNumbers = InputView.requestWinningLotto();

@@ -15,7 +15,9 @@ public final class Number {
     }
 
     public static Number from(final String value) {
+        validateNumber(value);
         return new Number(Integer.parseInt(value));
+
     }
 
     public Number divide(Number number) {
@@ -42,6 +44,10 @@ public final class Number {
         return value;
     }
 
+    private static void validateNumber(String value) {
+        Integer.parseInt(value);
+    }
+
     @Override
     public boolean equals(Object o) {
 
@@ -58,5 +64,9 @@ public final class Number {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    public boolean isLessThan(Number number) {
+        return value < number.value;
     }
 }

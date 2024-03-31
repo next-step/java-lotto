@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import lottogame.domain.LottoNumber;
 import lottogame.domain.Lottos;
+import lottogame.domain.Number;
 import lottogame.domain.Rank;
 
 public class ResultView {
@@ -41,6 +42,10 @@ public class ResultView {
             sb.append(RETURN_OF_RATE_MESSAGE_INFORMATION);
         }
         System.out.println(sb);
+    }
+
+    public static void printLinkBreak() {
+        System.out.println();
     }
 
     private static Map<Rank, Integer> makeLottoResult(List<Rank> ranks) {
