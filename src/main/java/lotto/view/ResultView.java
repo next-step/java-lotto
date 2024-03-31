@@ -1,10 +1,18 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.Reward;
 
 import java.util.Map;
 
 public class ResultView {
+
+    public void printLottos(Lottos lottos) {
+        for (Lotto lotto : lottos.of()) {
+            System.out.println(lotto.getAutoLotto());
+        }
+    }
 
     public void printResult(Map<Integer, Integer> countMap, double profit) {
         System.out.println("당첨 통계");
