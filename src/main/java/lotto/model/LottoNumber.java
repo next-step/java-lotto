@@ -2,10 +2,10 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class Number {
+public class LottoNumber {
     private final int number;
 
-    public Number(int number) {
+    public LottoNumber(int number) {
         this.number = number;
     }
 
@@ -17,8 +17,8 @@ public class Number {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Number number1 = (Number) o;
-        return number == number1.number;
+        LottoNumber lottoNumber1 = (LottoNumber) o;
+        return number == lottoNumber1.number;
     }
 
     @Override

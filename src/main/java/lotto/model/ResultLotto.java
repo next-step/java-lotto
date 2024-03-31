@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 public class ResultLotto {
     private static final int LOTTO_PRICE = 1000;
     private List<Lotto> lottos;
-    private Numbers winningNumbers;
-    private Number bonusNumber;
+    private LottoNumbers winningLottoNumbers;
+    private LottoNumber bonusLottoNumber;
 
     public int totallottoCount() {
         return lottos.size();
@@ -15,7 +15,7 @@ public class ResultLotto {
 
     public int getWinningAmount() {
         List<MatchNumber> matchNumbers = lottos.stream()
-                .map(lotto -> lotto.matchNumbers(winningNumbers, bonusNumber))
+                .map(lotto -> lotto.matchNumbers(winningLottoNumbers, bonusLottoNumber))
                 .collect(Collectors.toList());
 
         return LottoOutlet.getWinnings(matchNumbers);
@@ -25,7 +25,7 @@ public class ResultLotto {
         return (double) getWinningAmount() / (lottos.size() * LOTTO_PRICE);
     }
 
-    public List<Numbers> getLottosNumbers() {
+    public List<LottoNumbers> getLottosNumbers() {
         return lottos.stream()
                 .map(lotto -> lotto.getNumbers())
                 .collect(Collectors.toList());
@@ -36,18 +36,18 @@ public class ResultLotto {
     }
 
     public void recordWinningNumbers(List<Integer> winningNumbers) {
-        this.winningNumbers = Numbers.valueOf(winningNumbers);
+        this.winningLottoNumbers = LottoNumbers.valueOf(winningNumbers);
     }
 
     public int findRankCount(int rank) {
         return (int) lottos.stream()
-                .map(lotto -> lotto.matchNumbers(winningNumbers, bonusNumber))
+                .map(lotto -> lotto.matchNumbers(winningLottoNumbers, bonusLottoNumber))
                 .filter(matchNumber -> LottoOutlet.getRank(matchNumber) == rank)
                 .count();
     }
 
-    public void recordWinningNumbers(Numbers winningNumbers, int bonusNumber) {
-        this.winningNumbers = winningNumbers;
-        this.bonusNumber = new Number(bonusNumber);
+    public void recordWinningNumbers(LottoNumbers winningLottoNumbers, int bonusNumber) {
+        this.winningLottoNumbers = winningLottoNumbers;
+        this.bonusLottoNumber = new LottoNumber(bonusNumber);
     }
 }
