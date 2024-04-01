@@ -13,7 +13,7 @@ public class LottoTicketTest {
     @Test
     @DisplayName("로또 티켓의 번호는 6개이다.")
     void createTicket() {
-        LottoTicket lottoTicket = new LottoTicket(List.of(1,2,3,4,5,6));
+        LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
         assertThat(lottoTicket.getLottoNumbers()).hasSize(6);
     }
 
@@ -23,19 +23,18 @@ public class LottoTicketTest {
 
         assertSoftly(softly -> {
             assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoTicket(List.of(1,2,3,4)));
+                .isThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4)));
             assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoTicket(List.of(1,2,3,4,5,6,7)));
+                .isThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4, 5, 6, 7)));
         });
     }
 
     @Test
-    @DisplayName("보너스 로또 번호를 가지고 있는지 확인한다.")
-    void hasBonusNumber() {
-        LottoTicket lottoTicket = new LottoTicket(List.of(1,2,3,4,5,6));
-        int bonusNumber = 6;
+    @DisplayName("로또의 등수를 계산한다.")
+    void calculateRank() {
+        LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        WinnerNumber winnerNumber = new WinnerNumber(List.of(1, 2, 3, 4, 5, 6), 8);
 
-        assertThat(lottoTicket.hasBonusNumber(bonusNumber)).isTrue();
+        assertThat(lottoTicket.calculate(winnerNumber)).isEqualTo(LottoRank.FIRST);
     }
-
 }

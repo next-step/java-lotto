@@ -20,8 +20,10 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
-    public boolean hasBonusNumber(int bonusNumber) {
-        return lottoNumbers.contains(new LottoNumber(bonusNumber));
+    public LottoRank calculate(WinnerNumber winnerNumber) {
+        int matchCount = winnerNumber.matchCount(lottoNumbers);
+        boolean hasBonusNumber = lottoNumbers.contains(winnerNumber.getBonusNumber());
+        return LottoRank.getLottoRank(matchCount, hasBonusNumber);
     }
 
 }
