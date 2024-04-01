@@ -4,6 +4,7 @@ import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
@@ -15,6 +16,9 @@ public class LottoController {
 
     public void buy() {
         int seedMoney = InputView.inputSeedMoney();
+        int manualLottoCount = InputView.inputManualCount();
+        List<List<Integer>> manualLottoNumbers = InputView.inputLottosNumbers(manualLottoCount);
+
 
         ResultView.viewLottos(lottoService.buyLottos(seedMoney));
         List<Integer> winningNumbers = InputView.inputWinningNumbers();
