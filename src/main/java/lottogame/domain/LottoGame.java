@@ -1,7 +1,6 @@
 package lottogame.domain;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class LottoGame {
@@ -56,7 +55,7 @@ public class LottoGame {
     private Money calculateSumOfPrize(WinningLottos winnerLotto, List<Lottos> lottos) {
         Money sumOfPrize = Money.from(0);
         for (Lottos lotto : lottos) {
-            sumOfPrize = sumOfPrize.add(winnerLotto.checkPrize(lotto));
+            sumOfPrize = sumOfPrize.add(winnerLotto.calculatePrize(lotto));
         }
         return sumOfPrize;
     }
