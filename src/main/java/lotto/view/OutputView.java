@@ -17,7 +17,7 @@ public class OutputView {
     public static void printWinningStatic(WinningStatic winningStatic) {
         System.out.println("[당첨 통계]");
         StringBuilder result = new StringBuilder();
-        for (WinningType type: WinningType.values()){
+        for (WinningType type : WinningType.values()) {
             Long winnerCount = winningStatic.countWinnersByWinningType(type);
             Long hitCount = type.getHitCount();
             Long revenue = type.getRevenue();

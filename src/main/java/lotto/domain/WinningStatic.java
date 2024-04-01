@@ -9,9 +9,10 @@ public class WinningStatic {
         this.winningStatistic = winningStatistic;
     }
 
-    public Long countWinnersByWinningType(WinningType type){
+    public Long countWinnersByWinningType(WinningType type) {
         return winningStatistic.getOrDefault(type, 0L);
     }
+
     public double returnRate(int amount) {
         Long revenue = this.winningStatistic.entrySet()
                 .stream()

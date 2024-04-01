@@ -12,7 +12,7 @@ public class LottoStore {
         int quantity = calculateQuantity(price);
         List<Lotto> lottos = new ArrayList<>();
 
-        for (int i = 0; i < quantity ; i++) {
+        for (int i = 0; i < quantity; i++) {
             lottos.add(LottoFactory.issueLotto());
         }
         return lottos;
