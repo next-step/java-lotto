@@ -36,6 +36,10 @@ public class LottoTicket {
                 .count();
     }
 
+    public Boolean matchNumber(LottoNumber otherNumber){
+        return lottoNumbers.contains(otherNumber);
+    }
+
     private static Set<LottoNumber> quickPick(){
         Collections.shuffle(LottoNumber.ALL_NUMBERS);
         List<Integer> numbers = LottoNumber.ALL_NUMBERS.subList(0, LottoTicket.NUMBER_SIZE);

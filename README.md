@@ -39,3 +39,9 @@ step2
     * test codes are also refactored
       * remove //Given //When // Then
     * LotteryNumbers removed, LottoNumber created
+
+step 3
+* feature/bonus-ball
+  * add bonus ball in WinningLotto
+  * modified WinPrizeType.SECOND deal with bonusNumber
+  * refactored if() -> if () based on coding convention
