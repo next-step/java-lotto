@@ -4,12 +4,10 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
 
@@ -36,14 +34,18 @@ class LottoTest {
     @Test
     void lengthExceedException() {
 
-        assertThatThrownBy(() -> {
-            new Lotto(List.of(1, 2, 3, 4, 5, 6, 7, 8));
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8)));
     }
 
     @DisplayName("로또에 중복되는 숫자가 있으면 오류이다.")
     @Test
-    void duplicatedExceltion() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 6, 7, 7)));
+    void duplicatedException() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 7, 7)));
+    }
+
+    @DisplayName("로또에 46 이상의 숫자가 입력되면 오류이다.")
+    @Test
+    void exceed45Exception() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 7, 46)));
     }
 }

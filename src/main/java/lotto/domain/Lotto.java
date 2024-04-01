@@ -13,8 +13,8 @@ public class Lotto {
         if (numbers.size() >= LIMIT_LOTTO_LENGTH) {
             throw new IllegalArgumentException("6자리 초과의 로또 번호가 입력되었습니다.");
         }
-        if (numbers.contains(lottoRange())) {
-            throw new IllegalArgumentException("1-45 범위를 벗어나는 로또 숫자가 반환되었습니다.");
+        if (!lottoRange().containsAll(numbers)) {
+            throw new IllegalArgumentException("1-45 범위를 벗어나는 로또 숫자가 입력되었습니다.");
         }
         if (numbers.stream().distinct().count() < numbers.size()
         ) {
