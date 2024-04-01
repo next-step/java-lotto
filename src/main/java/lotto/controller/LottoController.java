@@ -26,7 +26,7 @@ public class LottoController {
 
     private Budget getBudget() {
         Budget budget = InputView.inputBuyBudget();
-        ResultView.showLottoQuantity(budget.divide(Lotto.LOTTO_PRICE));
+        ResultView.showLottoQuantity(budget.purchasableQuantity(Price.LOTTO));
         return budget;
     }
 

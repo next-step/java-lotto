@@ -12,6 +12,10 @@ public class Lottos {
         this(generateLottosBy(budget));
     }
 
+    public Lottos(Lotto lotto) {
+        this(List.of(lotto));
+    }
+
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
@@ -19,7 +23,7 @@ public class Lottos {
     private static List<Lotto> generateLottosBy(Budget budget) {
         List<Lotto> lottos = new ArrayList<>();
 
-        for (int i = 0; i < budget.divide(Lotto.LOTTO_PRICE); i++) {
+        for (int i = 0; i < budget.purchasableQuantity(Price.LOTTO); i++) {
             lottos.add(new Lotto());
         }
         return lottos;
@@ -35,14 +39,14 @@ public class Lottos {
 
     private List<Statistic> checkStatisticNumberMatch(WinLotto winLotto) {
         return lottos.stream()
-                .map(lotto -> getStatistic(winLotto, lotto))
-                .collect(Collectors.toList());
+            .map(lotto -> getStatistic(winLotto, lotto))
+            .collect(Collectors.toList());
     }
 
     private static Statistic getStatistic(WinLotto winLotto, Lotto lotto) {
         return Statistic.valueOfMatchNumber(
-                winLotto.getFeatNumberCount(lotto),
-                winLotto.isContainBonus(lotto)
+            winLotto.getFeatNumberCount(lotto),
+            winLotto.isContainBonus(lotto)
         );
     }
 }

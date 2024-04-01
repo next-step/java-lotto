@@ -17,7 +17,7 @@ public class InputView {
     }
 
     public static WinLotto inputLastWinLotto() {
-        return WinLotto.ofNumbers(parseLottoNumbers(), parseBonusNumber());
+        return new WinLotto(parseLottoNumbers(), parseBonusNumber());
     }
 
     private static List<Integer> parseLottoNumbers() {
