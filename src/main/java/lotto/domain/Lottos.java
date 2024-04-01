@@ -23,7 +23,7 @@ public class Lottos {
         Lotto winningLotto = Lotto.createFromString(winningNumbers);
         LottoNumber bonusNumber = LottoNumber.of(inputNumber);
         for (Lotto lotto : lottos) {
-            ranks.add(Rank.from(lotto.matchCount(winningLotto), lotto.isContains(bonusNumber)));
+            ranks.add(Rank.of(lotto.matchCount(winningLotto), lotto.isContains(bonusNumber)));
         }
         return ranks;
     }

@@ -21,7 +21,7 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank from(int matchCount, boolean isBonus) {
+    public static Rank of(int matchCount, boolean isBonus) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.isSameMatchCount(matchCount))
                 .filter(rank -> checkBonus(matchCount, isBonus, rank))

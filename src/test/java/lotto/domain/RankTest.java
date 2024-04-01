@@ -14,7 +14,7 @@ class RankTest {
     void first_rank_test(String winningNumbers, String userNumbers, boolean isBonus) {
         Lotto winningLotto = Lotto.createFromString(winningNumbers);
         Lotto userLotto = Lotto.createFromString(userNumbers);
-        Rank rank = Rank.from(userLotto.matchCount(winningLotto), isBonus);
+        Rank rank = Rank.of(userLotto.matchCount(winningLotto), isBonus);
 
         assertThat(rank).isEqualTo(Rank.FIRST);
     }
@@ -25,7 +25,7 @@ class RankTest {
     void second_rank_test(String winningNumbers, String userNumbers, boolean isBonus) {
         Lotto winningLotto = Lotto.createFromString(winningNumbers);
         Lotto userLotto = Lotto.createFromString(userNumbers);
-        Rank rank = Rank.from(userLotto.matchCount(winningLotto), isBonus);
+        Rank rank = Rank.of(userLotto.matchCount(winningLotto), isBonus);
 
         assertThat(rank).isEqualTo(Rank.SECOND);
     }
@@ -36,7 +36,7 @@ class RankTest {
     void third_rank_test(String winningNumbers, String userNumbers, boolean isBonus) {
         Lotto winningLotto = Lotto.createFromString(winningNumbers);
         Lotto userLotto = Lotto.createFromString(userNumbers);
-        Rank rank = Rank.from(userLotto.matchCount(winningLotto), false);
+        Rank rank = Rank.of(userLotto.matchCount(winningLotto), false);
 
         assertThat(rank).isEqualTo(Rank.THIRD);
     }
@@ -47,7 +47,7 @@ class RankTest {
     void fouth_rank_test(String winningNumbers, String userNumbers, boolean isBonus) {
         Lotto winningLotto = Lotto.createFromString(winningNumbers);
         Lotto userLotto = Lotto.createFromString(userNumbers);
-        Rank rank = Rank.from(userLotto.matchCount(winningLotto), isBonus);
+        Rank rank = Rank.of(userLotto.matchCount(winningLotto), isBonus);
 
         assertThat(rank).isEqualTo(Rank.FOURTH);
     }
@@ -58,7 +58,7 @@ class RankTest {
     void fifth_rank_test(String winningNumbers, String userNumbers, boolean isBonus) {
         Lotto winningLotto = Lotto.createFromString(winningNumbers);
         Lotto userLotto = Lotto.createFromString(userNumbers);
-        Rank rank = Rank.from(userLotto.matchCount(winningLotto), isBonus);
+        Rank rank = Rank.of(userLotto.matchCount(winningLotto), isBonus);
 
         assertThat(rank).isEqualTo(Rank.FIFTH);
     }
@@ -69,7 +69,7 @@ class RankTest {
     void null_rank_test(String winningNumbers, String userNumbers, boolean isBonus) {
         Lotto winningLotto = Lotto.createFromString(winningNumbers);
         Lotto userLotto = Lotto.createFromString(userNumbers);
-        Rank rank = Rank.from(userLotto.matchCount(winningLotto), isBonus);
+        Rank rank = Rank.of(userLotto.matchCount(winningLotto), isBonus);
 
         assertThat(rank).isEqualTo(Rank.MISS);
     }
