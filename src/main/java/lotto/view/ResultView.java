@@ -2,6 +2,9 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -32,15 +35,17 @@ public class ResultView {
     }
 
     private static String createResult(LottoResult lottoResult, LottoFee lottoFee) {
-        String result = "";
-        result += ANSWER_STATICS + NEW_LINE + LINE + NEW_LINE;
-        result += createRankingForm(lottoResult, LottoRank.FIFTH) + NEW_LINE;
-        result += createRankingForm(lottoResult, LottoRank.FOURTH) + NEW_LINE;
-        result += createRankingForm(lottoResult, LottoRank.THIRD) + NEW_LINE;
-        result += createRankingForm(lottoResult, LottoRank.SECOND) + NEW_LINE;
-        result += createRankingForm(lottoResult, LottoRank.FIRST) + NEW_LINE;
-        result += createMarginForm(lottoResult, lottoFee) + NEW_LINE;
-        return  result;
+        StringBuilder result = new StringBuilder();
+        result.append(ANSWER_STATICS).append(NEW_LINE).append(LINE).append(NEW_LINE);
+
+        List<LottoRank> ranks = Arrays.asList(LottoRank.values());
+        Collections.reverse(ranks);
+        for (int i = 1; i < ranks.size(); i++) {
+            LottoRank rank = ranks.get(i);
+            result.append(createRankingForm(lottoResult,rank)).append(NEW_LINE);
+        }
+        result.append(createMarginForm(lottoResult, lottoFee)).append(NEW_LINE);
+        return result.toString();
     }
 
     private static String createMarginForm(LottoResult lottoResult, LottoFee lottoFee) {
