@@ -2,9 +2,8 @@ package lotto;
 
 import java.util.List;
 
-import lotto.domain.LottoResult;
 import lotto.domain.LottoShop;
-import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.domain.WinnerNumber;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
@@ -16,14 +15,14 @@ public class LottoApplication {
 
         int money = inputView.purchaseAmount();
         LottoShop lottoShop = new LottoShop();
-        List<LottoTicket> lottoTickets = lottoShop.buyLotto(money);
+        LottoTickets lottoTickets = lottoShop.buyLotto(money);
         resultView.printPurchaseCount(lottoTickets);
 
-        WinnerNumber winnerNumber = new WinnerNumber(inputView.inputWinnerNumbers());
+        List<Integer> winnerNumbers = inputView.inputWinnerNumbers();
         int bonusNumber = inputView.inputBonusNumber();
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.calculateRank(lottoTickets, winnerNumber, bonusNumber);
-        resultView.printMatchResult(lottoResult.getResult());
-        resultView.printRateResult(lottoResult.getRate(money));
+        WinnerNumber winnerNumber = new WinnerNumber(winnerNumbers, bonusNumber);
+        lottoTickets.calculate(winnerNumber);
+        resultView.printMatchResult(lottoTickets.getResult());
+        resultView.printRateResult(lottoTickets.getRate(money));
     }
 }

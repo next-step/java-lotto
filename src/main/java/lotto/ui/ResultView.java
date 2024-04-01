@@ -8,13 +8,14 @@ import java.util.stream.Collectors;
 
 import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 
 public class ResultView {
 
     private static final String DEFAULT_MESSAGE_FORMAT = "%s개 일치 (%s원) - %s개";
     private static final String SECOND_MESSAGE_FORMAT = "%s개 일치, 보너스 볼 일치(%s원) - %s개";
 
-    public void printPurchaseCount(List<LottoTicket> lottoTickets) {
+    public void printPurchaseCount(LottoTickets lottoTickets) {
         System.out.println(String.format("%s개를 구매했습니다.", lottoTickets.size()));
         for (LottoTicket lottoTicket : lottoTickets) {
             String displayNumbers = lottoTicket.getLottoNumbers().stream()
