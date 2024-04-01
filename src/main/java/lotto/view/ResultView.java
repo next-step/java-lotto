@@ -18,12 +18,12 @@ public class ResultView {
         }
     }
 
-    public void printWinningResult(LottoGame lottoGame, String winningNumbers) {
+    public void printWinningResult(LottoGame lottoGame, String winningNumbers, int bonusNumber) {
         System.out.println(WiNNING_RESULT_MESSAGE);
         System.out.println(SEPARATE_BAR);
-        for (LottoResult result : lottoGame.matchResult(winningNumbers)) {
+        for (LottoResult result : lottoGame.matchResult(winningNumbers, bonusNumber)) {
             System.out.printf(RESULT_MESSAGE, result.getMatchCount(), result.getPrize(), result.countWinningLotto());
         }
-        System.out.printf(TOTAL_PROFIT_MESSAGE, lottoGame.calculateProfit(winningNumbers));
+        System.out.printf(TOTAL_PROFIT_MESSAGE, lottoGame.calculateProfit(winningNumbers, bonusNumber));
     }
 }

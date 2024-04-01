@@ -14,6 +14,6 @@ public class LottoController {
         lottoGame.createLotto(randomNumberStrategy);
 
         resultView.printOfBuyLotto(lottoGame);
-        resultView.printWinningResult(lottoGame, inputView.inputWinningNumber());
+        resultView.printWinningResult(lottoGame, inputView.inputWinningNumber(), inputView.inputBonusNumber());
     }
 }
