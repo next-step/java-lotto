@@ -11,10 +11,6 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public void purchaseLotto() {
-        System.out.println("구입금액을 입력해 주세요.");
-    }
-
     public void printWinningInfos(LottoResult lottoResult, long totalPurchase) {
         System.out.println("당첨 통계");
         System.out.println("----------");

@@ -11,6 +11,8 @@ public class InputView {
     Scanner scanner = new Scanner(System.in);
 
     public int inputMoney() {
+        System.out.println("구입금액을 입력해 주세요.");
+
         int money = scanner.nextInt();
         scanner.nextLine();
         return money;

@@ -15,7 +15,6 @@ public class LottoController {
         ResultView output = new ResultView();
         LottoVendingMachine lottoMachine = new LottoVendingMachine();
 
-        output.purchaseLotto();
         int money = input.inputMoney();
 
         List<LottoTicket> lottoTickets = lottoMachine.receive(money);
