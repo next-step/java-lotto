@@ -1,10 +1,10 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.WinningStatic;
 import lotto.domain.WinningType;
 
 import java.util.List;
-import java.util.Map;
 
 public class OutputView {
     public static void printBuyLottos(List<Lotto> lottos) {
@@ -14,17 +14,19 @@ public class OutputView {
         }
     }
 
-    public static void printWinningStatic(Map<WinningType, Long> winningStatic) {
+    public static void printWinningStatic(WinningStatic winningStatic) {
+        System.out.println("[당첨 통계]");
         StringBuilder result = new StringBuilder();
-        for (Map.Entry<WinningType, Long> entry : winningStatic.entrySet()) {
-            Long hitCount = entry.getKey().getHitCount();
-            Long winnerNumber = entry.getValue();
-            Long revenue = WinningType.findByHitCount(hitCount).getRevenue();
-            result.append(hitCount + "개 일치 (")
-                    .append(revenue + "원) - ")
-                    .append(winnerNumber + "개\n");
-        }
+        for (WinningType type : WinningType.values()) {
+            Long winnerCount = winningStatic.countWinnersByWinningType(type);
+            Long hitCount = type.getHitCount();
+            Long revenue = type.getRevenue();
 
+            result.append(hitCount + "개 일치 ")
+                    .append(type.is2ndBonusWinner() ? "보너스볼 일치" : "")
+                    .append("(" + revenue + "원) - ")
+                    .append(winnerCount + "개\n");
+        }
         System.out.println(result);
     }
 

@@ -7,12 +7,12 @@ import java.util.List;
 
 public class LottoStore {
 
-    public List<Lotto> buyLottos(int price){
+    public List<Lotto> buyLottos(int price) {
 
         int quantity = calculateQuantity(price);
         List<Lotto> lottos = new ArrayList<>();
 
-        for (int i = 0; i < quantity ; i++) {
+        for (int i = 0; i < quantity; i++) {
             lottos.add(LottoFactory.issueLotto());
         }
         return lottos;

@@ -8,17 +8,29 @@ import java.util.stream.Collectors;
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int scanAmount(){
+    public static int scanAmount() {
         System.out.println("구입 금액을 입력해 주세요.");
         int amount = scanner.nextInt();
         scanner.nextLine();
         return amount;
     }
 
-    public static List<Integer> scanWinningNumbers(){
+    public static List<Integer> scanWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String text = scanner.nextLine();
-        return convertStringToIntList(text);
+        List<Integer> numbers = convertStringToIntList(text);
+        if (numbers.size() > 6) {
+            throw new IllegalArgumentException("6자리 초과의 우승 로또 번호가 입력되었습니다.");
+        }
+        return numbers;
+    }
+
+
+    public static int scanBonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요.");
+        int bonusNumber = scanner.nextInt();
+        scanner.nextLine();
+        return bonusNumber;
     }
 
     private static List<Integer> convertStringToIntList(String input) {

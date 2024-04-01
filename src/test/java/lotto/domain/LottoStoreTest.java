@@ -13,4 +13,5 @@ class LottoStoreTest {
         Assertions.assertThat(lottoStore.buyLottos(14000).size())
                 .isEqualTo(14);
     }
+
 }
