@@ -50,7 +50,7 @@
 - [ ] 테스트 케이스 성공 여부 확인
 - [X] Operation -> 매개변수 b
 - [X] LottoController -> 개행 및 가독성
-- [ ] Lotto mapToInt 제거
+- [X] Lotto mapToInt 제거
 - [ ] LottoRank 
 - [ ] LottoResult 가변 컬랙션 반환보단 불변 컬랙션 반환으로 getLottoRanks
 - [ ] resultView 반복 문구 사용

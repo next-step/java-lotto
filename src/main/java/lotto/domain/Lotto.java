@@ -30,7 +30,6 @@ public class Lotto {
     public int getMatchNumberCount(Lotto winningLotto) {
         return (int) lottoNumbers.stream()
                 .filter(winningLotto::hasNumber)
-                .mapToInt(Integer::intValue)
                 .count();
     }
 
