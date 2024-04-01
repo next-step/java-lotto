@@ -1,10 +1,8 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class LottoMatch {
     public static Rank match(Lotto givenLotto, WinningLotto winningLotto) {
-        int matchCount = givenLotto.match(winningLotto.makeLotto());
+        int matchCount = givenLotto.match(winningLotto.getWinNumbers());
 
         return Rank.valueOf(matchCount, matchBonus(givenLotto, winningLotto.getBonusNumber()));
     }
