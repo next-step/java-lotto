@@ -1,30 +1,27 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.view.InputView;
-import lotto.view.ResultView;
+import lotto.utils.StringUtils;
+import view.InputView;
+import view.ResultView;
 
 import java.util.HashMap;
 import java.util.List;
 
 public class LottoController {
     public static void startLotto() {
-        // 구매 금액 입력
         int money = InputView.inputMoney();
+        Lottos lottos = LottoGenerator.createLottos(new LottoShop(money).calculatePurchaseCount());
+        ResultView.printLotto(lottos);
 
-        // 로또 생성
-        Lottos lottos = LottoShop.purchaseTicket(money);
+        List<Integer> winNumbers = StringUtils.parseWinNumbers(InputView.inputWinNumbers());
+        int bonus = InputView.inputBonus();
 
-        // 구매 개수 및 생성된 로또 출력
-        ResultView.printPurchase(LottoShop.countPurchase(money));
-        ResultView.printLottos(lottos.getLottos());
+        for (Lotto lotto : lottos.getLottos()) {
+            Rank.putMatchResult(LottoMatch.match(lotto, new WinningLotto(winNumbers, bonus)));
+        }
 
-        // 당첨 번호 입력 및 당첨 번호와 로또 번호 비교
-        HashMap<Integer, Integer> matchResult =
-                LottoMatch.match(lottos, new Winning().createWinNumbers(InputView.inputWinNumber()));
-
-        // 매칭 결과 및 계산한 수익률 출력
-        Revenue revenue = new Revenue();
-        ResultView.printResult(matchResult, revenue.calculateRevenue(money, revenue.getRevenueTotal(matchResult)));
+        HashMap<Rank, Integer> matchResult = Rank.getMatchResult();
+        ResultView.printResult(matchResult, LottoRevenue.calculateRevenue(money, LottoRevenue.revenueTotal(matchResult)));
     }
 }

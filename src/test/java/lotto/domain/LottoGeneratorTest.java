@@ -1,44 +1,32 @@
 package lotto.domain;
 
-import lotto.constant.Constant;
-import org.junit.jupiter.api.DisplayName;
+import lotto.domain.Lotto;
+import lotto.domain.LottoGenerator;
+import lotto.domain.Lottos;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGeneratorTest {
+    private static final int LOTTO_SIZE = 6;
     @Test
-    void lotto_생성() {
-        List<Integer> shuffledNumbers = List.of(1,2,3,4,5,6);
-        assertThat(LottoGenerator.createLotto(shuffledNumbers)).hasSize(Constant.LOTTO_SIZE);
+    void 리스트_셔플() {
+        assertThat(LottoGenerator.shuffleLotto()).hasSize(6);
     }
 
     @Test
-    void lotto_중복검사() {
-        List<Integer> shuffledNumbers = List.of(1,2,3,4,5,6);
-        List<LottoNumber> lotto = LottoGenerator.createLotto(shuffledNumbers);
-        List<LottoNumber> checkDuplicate = lotto.stream()
-                                                .distinct()
-                                                .collect(Collectors.toList());
-        assertThat(checkDuplicate).hasSize(lotto.size());
+    void createLotto() {
+        List<Integer> shuffledLotto = Arrays.asList(1, 2, 3, 4, 5, 6);
+        assertThat(LottoGenerator.createLotto(shuffledLotto)).isEqualTo(new Lotto(shuffledLotto));
     }
 
     @Test
-    void lottos_생성() {
-        Lottos lottos = LottoGenerator.lotteryTickets(1);
-        assertThat(lottos).isNotNull();
-    }
-
-    @Test
-    void 로또_자동생성_리스트_크기() {
-        List<Integer> shuffledNumbers = List.of(1,2,3,4,5,6,7);
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoGenerator.createLotto(shuffledNumbers))
-                .withMessageMatching("로또 번호는 6개여야 합니다.");
+    void createLottos() {
+        assertThat(LottoGenerator.createLottos(2)).isNotNull();
     }
 
 }
