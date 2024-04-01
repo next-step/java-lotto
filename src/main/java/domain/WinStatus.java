@@ -5,7 +5,8 @@ public class WinStatus {
     private static int[] winCount;
 
     public void correct(int count) {
-        winCount[count]++;
+        if (count >= 3)
+            winCount[count - 3]++;
     }
 
     public WinStatus() {
