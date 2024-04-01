@@ -24,7 +24,7 @@ public class InputView {
     return Arrays.stream(scanner.nextLine().split(","))
         .map(String::trim)
         .map(Integer::parseInt)
-        .map(LottoNumber::new)
+        .map(LottoNumber::of)
         .collect(Collectors.toList());
   }
 }

@@ -23,7 +23,7 @@ public class WinNumbersTest {
   @Test
   @DisplayName("당첨 번호가 겹치는 것이 없는지 확인한다")
   void doesntMatchCount() {
-    Set<LottoNumber> numbers = Stream.of(11, 12, 13, 14,15, 16).map(LottoNumber::new).collect(
+    Set<LottoNumber> numbers = Stream.of(11, 12, 13, 14,15, 16).map(LottoNumber::of).collect(
         Collectors.toSet());
     assertThat(winNumbers.getMatchCount(numbers)).isEqualTo(0);
   }
@@ -31,7 +31,7 @@ public class WinNumbersTest {
   @Test
   @DisplayName("보너스 당첨 번호가 있으면 카운팅하는지 확인한다")
   void matchCountWithBounus() {
-    Set<LottoNumber> numbers = Stream.of(10, 12, 13, 14,15, 16).map(LottoNumber::new).collect(
+    Set<LottoNumber> numbers = Stream.of(10, 12, 13, 14,15, 16).map(LottoNumber::of).collect(
         Collectors.toSet());
     assertThat(winNumbers.getMatchCount(numbers)).isEqualTo(1);
   }
@@ -39,7 +39,7 @@ public class WinNumbersTest {
   @Test
   @DisplayName("당첨 번호가 3개 겹치는지 확인한다")
   void matchCount() {
-    Set<LottoNumber> numbers = Stream.of(1, 2, 3, 7, 8, 9).map(LottoNumber::new).collect(
+    Set<LottoNumber> numbers = Stream.of(1, 2, 3, 7, 8, 9).map(LottoNumber::of).collect(
         Collectors.toSet());
     assertThat(winNumbers.getMatchCount(numbers)).isEqualTo(3);
   }

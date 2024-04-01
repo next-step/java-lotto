@@ -32,7 +32,7 @@ public class LottoListTest {
   @DisplayName("지난주 결과가 첫 번째 로또와 동일 할 때 카운트가 6인것을 반환한다")
   void matchFirstWin() {
     Set<LottoNumber> numbers = lottoList.getLottoNumbers().get(0).getNumbers();
-    Map<Integer, Integer> lottoResult = lottoList.getLottoResult(new WinNumbers(numbers, new LottoNumber(1)));
+    Map<Integer, Integer> lottoResult = lottoList.getLottoResult(new WinNumbers(numbers,  LottoNumber.of(1)));
     assertThat(lottoResult.containsKey(6)).isTrue();
   }
 }

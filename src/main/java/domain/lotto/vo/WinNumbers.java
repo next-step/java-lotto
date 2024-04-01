@@ -24,9 +24,9 @@ public class WinNumbers {
 
     public WinNumbers(List<Integer> primaryNumbers, int bounusNumber){
         validateNumberLength(primaryNumbers.size());
-        this.primaryNumbers = primaryNumbers.stream().map(LottoNumber::new).collect(
+        this.primaryNumbers = primaryNumbers.stream().map(LottoNumber::of).collect(
             Collectors.toSet());
-        this.bounusNumber = new LottoNumber(bounusNumber);
+        this.bounusNumber = LottoNumber.of(bounusNumber);
     }
 
     public int getMatchCount(Set<LottoNumber> lottoNumbers) {
@@ -36,7 +36,7 @@ public class WinNumbers {
     }
 
     private boolean isInLotto(Integer number) {
-        return primaryNumbers.contains(new LottoNumber(number)) || number.equals( bounusNumber.getNumber());
+        return primaryNumbers.contains(LottoNumber.of(number)) || number.equals( bounusNumber.getNumber());
     }
 
     private void validateNumberLength(Integer numberLength){
