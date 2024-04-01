@@ -8,18 +8,19 @@ public class LottoTicket {
 
     private final List<LottoNumber> numbers;
 
+
+    private LottoTicket(List<LottoNumber> inputs) {
+        checkSizeNumbers(inputs);
+        checkUniqueNumbers(inputs);
+        this.numbers = inputs;
+    }
+
     public static LottoTicket createTicket(List<Integer> inputs) {
         List<LottoNumber> lottoNumbers = inputs.stream()
             .sorted()
             .map(LottoNumber::new)
             .collect(Collectors.toUnmodifiableList());
         return new LottoTicket(lottoNumbers);
-    }
-
-    private LottoTicket(List<LottoNumber> inputs) {
-        checkSizeNumbers(inputs);
-        checkUniqueNumbers(inputs);
-        this.numbers = inputs;
     }
 
     private static void checkUniqueNumbers(List<LottoNumber> numbers) {
@@ -34,18 +35,6 @@ public class LottoTicket {
         }
     }
 
-    public LottoPrice getPrice(WinLotto winLotto) {
-        return LottoPrice.valueOf(matchNumberCount(winLotto.getTicket()),
-            matchBonusNumber(winLotto.getBonusNumber()));
-    }
-
-    private int matchNumberCount(LottoTicket lottoTicket) {
-        return (int) lottoTicket.numbers.stream().filter(this.numbers::contains).count();
-    }
-
-    private boolean matchBonusNumber(LottoNumber number) {
-        return this.numbers.contains(number);
-    }
 
     public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
