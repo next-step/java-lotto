@@ -20,13 +20,11 @@ public class ResultView {
     }
 
     public void printWinningResult(LottoGame lottoGame, String winningNumbers) {
-        List<Rank> lottoRanks = lottoGame.match(winningNumbers);
         System.out.println(WiNNING_RESULT_MESSAGE);
         System.out.println(SEPARATE_BAR);
-        List<Integer> result = Rank.compareRank(lottoRanks);
-        for (int i = 0; i < result.size(); i +=3) {
-            System.out.printf(RESULT_MESSAGE, result.get(i), result.get(i + 1), result.get(i + 2));
+        for (LottoResult result : lottoGame.matchResult(winningNumbers)) {
+            System.out.printf(RESULT_MESSAGE, result.getMatchCount(), result.getPrize(), result.countWinningLotto());
         }
-        System.out.printf(TOTAL_PROFIT_MESSAGE, lottoGame.calculateProfit(lottoRanks));
+        System.out.printf(TOTAL_PROFIT_MESSAGE, lottoGame.calculateProfit(winningNumbers));
     }
 }

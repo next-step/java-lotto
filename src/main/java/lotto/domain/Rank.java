@@ -1,8 +1,9 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
@@ -36,25 +37,19 @@ public enum Rank {
                 .count();
     }
 
+    public static List<Rank> availableRanks() {
+        List<Rank> ranks = Arrays.stream(Rank.values())
+                .filter(rank -> rank != INVALID)
+                .collect(Collectors.toList());
+        Collections.reverse(ranks);
+        return ranks;
+    }
+
     public int getMatchCount() {
         return matchCount;
     }
 
     public int getPrize() {
         return prize;
-    }
-
-    public static List<Integer> compareRank(List<Rank> lottoRanks) {
-        List<Integer> result = new ArrayList<>();
-
-        for (int i = Rank.values().length - 2; i >= 0; i--) {
-            Rank rank = Rank.values()[i];
-            int count = rank.countSameMatch(lottoRanks);
-
-            result.add(rank.getMatchCount());
-            result.add(rank.getPrize());
-            result.add(count);
-        }
-        return result;
     }
 }

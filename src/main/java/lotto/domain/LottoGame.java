@@ -1,6 +1,7 @@
 package lotto.domain;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
@@ -24,13 +25,17 @@ public class LottoGame {
         return this.userLottos.getLottos();
     }
 
-    public List<Rank> match(String winningNumbers) {
+    public List<LottoResult> matchResult(String winningNumbers) {
+        return LottoResult.matchResult(match(winningNumbers));
+    }
+
+    private List<Rank> match(String winningNumbers) {
         return this.userLottos.match(winningNumbers);
     }
 
-    public double calculateProfit(List<Rank> lottoRanks) {
+    public double calculateProfit(String winningNumbers) {
         Money totalPrize = Money.from(0);
-        for (Rank rank : lottoRanks) {
+        for (Rank rank : match(winningNumbers)) {
             totalPrize = totalPrize.plus(rank.getPrize());
         }
         return this.amount.calculateProfitRatio(totalPrize);
