@@ -6,6 +6,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoServiceTest {
@@ -33,5 +34,18 @@ public class LottoServiceTest {
         System.out.println(winningAmount / buyCount * 1000);
 
         Assertions.assertThat(resultLotto.getWinningRate()).isEqualTo(winningAmount / (buyCount * 1000));
+    }
+
+    @Test
+    void buyManualTest() {
+        LottoService lottoService = new LottoService();
+        List<List<Integer>> numbers = new ArrayList<>();
+        numbers.add(List.of(1, 2, 3, 4, 5, 6));
+
+
+        Assertions.assertThatThrownBy(() -> lottoService.buyManualLotto(0, 5, numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("소유한 금액으로는 해당하는 수의 로또를 구매할 수 없습니다")
+        ;
     }
 }
