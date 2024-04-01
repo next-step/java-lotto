@@ -19,10 +19,10 @@ public class LottoBall {
         this.number = num;
     }
 
-    public static LottoBall ball(int num) {
+    public static Integer ball(int num) {
         LottoBall lottoBall = lottoBalls.get(num);
         if (lottoBall == null)
             throw new IllegalArgumentException("잘못된 공 번호 입니다");
-        return lottoBall;
+        return lottoBall.number;
     }
 }

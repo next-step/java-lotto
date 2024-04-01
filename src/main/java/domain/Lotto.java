@@ -1,14 +1,18 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final List<Integer> numbers = new ArrayList<>();
+    private LottoBall lottoBall;
 
-    public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
+    public Lotto(List<Integer> balls) {
+        for (Integer number : balls) {
+            numbers.add(lottoBall.ball(number));
+        }
     }
 
     public int numberCheck(Lotto winNumbers) {
