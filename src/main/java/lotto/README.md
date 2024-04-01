@@ -37,6 +37,7 @@
 ---
 
 ## 실행 결과
-<img width="537" alt="image" src="https://github.com/next-step/java-lotto/assets/49775540/3a464441-81ae-48bc-9313-b2971bdd1661">
+![image](https://github.com/next-step/java-lotto/assets/49775540/39a0c135-2e35-4edc-8631-b8844eb270d4)
+
 
 
