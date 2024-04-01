@@ -36,4 +36,46 @@ class CalculatorTest {
             Calculator.inputSpilt(input);
         });
     }
+
+    @Test
+    void 사칙연산기호_test() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            Calculator.getResult(1, "?", 2);
+        });
+    }
+
+    @Test
+    void 덧셈_test() {
+        String input = "2 + 3 + 4";
+        String[] inputs = Calculator.inputSpilt(input);
+        assertThat(Calculator.calculate(inputs)).isEqualTo(9);
+    }
+
+    @Test
+    void 뺄셈_test() {
+        String input = "7 - 3 - 4";
+        String[] inputs = Calculator.inputSpilt(input);
+        assertThat(Calculator.calculate(inputs)).isEqualTo(0);
+    }
+
+    @Test
+    void 곱셈_test() {
+        String input = "7 * 3";
+        String[] inputs = Calculator.inputSpilt(input);
+        assertThat(Calculator.calculate(inputs)).isEqualTo(21);
+    }
+
+    @Test
+    void 나누기_test() {
+        String input = "7 / 1";
+        String[] inputs = Calculator.inputSpilt(input);
+        assertThat(Calculator.calculate(inputs)).isEqualTo(7);
+    }
+
+    @Test
+    void 연산_테스트() {
+        String input = "2 + 3 * 4 / 2";
+        String[] inputs = Calculator.inputSpilt(input);
+        assertThat(Calculator.calculate(inputs)).isEqualTo(10);
+    }
 }
