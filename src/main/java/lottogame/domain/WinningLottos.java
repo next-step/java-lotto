@@ -1,15 +1,14 @@
 package lottogame.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WinningLottos {
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Lottos lottos;
     private final LottoNumber bonusNumber;
 
     public WinningLottos(List<Integer> numbers,int bonusNumber) {
-        this.lottoNumbers = createLottoNumbers(numbers);
+        this.lottos = LottoFactory.createLotto(numbers);
         this.bonusNumber =  new LottoNumber(bonusNumber);
     }
 
@@ -17,7 +16,7 @@ public class WinningLottos {
         return Rank.find(match(lottos), matchBonusNumber(lottos));
     }
 
-    public Number checkPrize(Lottos lottos) {
+    public Number calculatePrize(Lottos lottos) {
         return Number.from(Rank.findPrize(match(lottos), matchBonusNumber(lottos)));
     }
 
@@ -26,18 +25,10 @@ public class WinningLottos {
     }
 
     public int size() {
-        return lottoNumbers.size();
+        return lottos.size();
     }
 
-    private List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toUnmodifiableList());
-    }
-
-    private int match(Lottos lotto) {
-        return (int) lottoNumbers.stream()
-                .filter(lotto::match)
-                .count();
+    private int match(Lottos lottos) {
+        return this.lottos.match(lottos);
     }
 }

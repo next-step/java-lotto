@@ -17,7 +17,17 @@ public class Lottos {
         return numbers;
     }
 
+    public int size() {
+        return numbers.size();
+    }
+
     public boolean match(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
+    }
+
+    public int match(Lottos lottos) {
+        return (int) lottos.numbers.stream()
+                .filter(this::match)
+                .count();
     }
 }

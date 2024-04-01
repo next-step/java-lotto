@@ -31,7 +31,7 @@ public class WinningLottosTest {
     @MethodSource("lottoAndPrize")
     void 로또_당첨_금액(Lottos lottos, Number prize) {
         WinningLottos winnerLotto = new WinningLottos(List.of(1, 4, 5, 6, 7, 8), 9);
-        assertThat(winnerLotto.checkPrize(lottos)).isEqualTo(prize);
+        assertThat(winnerLotto.calculatePrize(lottos)).isEqualTo(prize);
     }
 
     static Stream<Arguments> lottoAndRank() {
