@@ -9,10 +9,10 @@ import lotto.ui.OutputView;
 
 public class LottoController {
 
-    private InputView inputView = new InputView();
-    private OutputView outputView = new OutputView();
-    private LottoTicketBall ticketBall = new LottoTicketBall();
-    private LottoTicketGenerator ticketGenerator = new LottoTicketGenerator(ticketBall);
+    private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
+    private final LottoTicketGenerator ticketGenerator = new LottoTicketGenerator(
+        new LottoTicketBall());
 
 
     public void start() {
@@ -24,7 +24,7 @@ public class LottoController {
         LottoResultManager lottoResultManager = new LottoResultManager(tickets,
             new WinLotto(winningNumbers, bonusNumber));
         outputView.displayWinning(lottoResultManager);
-        outputView.displayWinningMoney(lottoResultManager, purchaseAmount);
+        outputView.displayWinningMoney(lottoResultManager);
 
     }
 
