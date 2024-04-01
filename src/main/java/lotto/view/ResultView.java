@@ -11,7 +11,7 @@ public class ResultView {
 
     public static void viewLottos(ResultLotto resultLotto) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("%d개를 구매했습니다.", resultLotto.totallottoCount())).append(LINE_SEPARATOR);
+        stringBuilder.append(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", resultLotto.getManualLottoCount(), resultLotto.getAutoLottoCount())).append(LINE_SEPARATOR);
         List<LottoNumbers> lottosNumbers = resultLotto.getLottosNumbers();
 
         for (LottoNumbers lottosNumber : lottosNumbers) {

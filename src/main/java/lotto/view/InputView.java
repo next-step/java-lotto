@@ -12,6 +12,7 @@ public class InputView {
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String INPUT_WINNING_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_MANUAL_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MANUAL_NUMBER_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
     private InputView() {
     }
@@ -43,6 +44,7 @@ public class InputView {
     }
 
     public static List<List<Integer>> inputLottosNumbers(int manualLottoCount) {
+        System.out.println(INPUT_MANUAL_NUMBER_MESSAGE);
         return IntStream.range(0, manualLottoCount)
                 .mapToObj(i -> toIntTokens(splitToken(scanner.nextLine())))
                 .collect(Collectors.toList());

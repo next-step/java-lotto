@@ -48,4 +48,14 @@ public class LottoOutlet {
     public static int getRank(MatchResult matchResult) {
         return Rank.getRank(matchResult);
     }
+
+    public static int lottoMoney(int manualLottoCount) {
+        return manualLottoCount * LOTTO_PRICE;
+    }
+
+    public static List<Lotto> generateLottos(List<List<Integer>> manualLottoNumbers) {
+        return manualLottoNumbers.stream()
+                .map(numbers -> new Lotto(numbers))
+                .collect(Collectors.toList());
+    }
 }

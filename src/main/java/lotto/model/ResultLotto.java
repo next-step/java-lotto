@@ -5,16 +5,20 @@ import java.util.stream.Collectors;
 
 public class ResultLotto {
     private static final int LOTTO_PRICE = 1000;
-    private List<Lotto> lottos;
+    private Lottos lottos;
     private LottoNumbers winningLottoNumbers;
     private LottoNumber bonusLottoNumber;
+
+    public ResultLotto() {
+        this.lottos = new Lottos();
+    }
 
     public int totallottoCount() {
         return lottos.size();
     }
 
     public int getWinningAmount() {
-        List<MatchResult> matchResults = lottos.stream()
+        List<MatchResult> matchResults = lottos.getLottos().stream()
                 .map(lotto -> lotto.matchNumbers(winningLottoNumbers, bonusLottoNumber))
                 .collect(Collectors.toList());
 
@@ -26,13 +30,9 @@ public class ResultLotto {
     }
 
     public List<LottoNumbers> getLottosNumbers() {
-        return lottos.stream()
+        return lottos.getLottos().stream()
                 .map(lotto -> lotto.getNumbers())
                 .collect(Collectors.toList());
-    }
-
-    public void recordBuyLottos(List<Lotto> buyLottos) {
-        this.lottos = buyLottos;
     }
 
     public void recordWinningNumbers(List<Integer> winningNumbers) {
@@ -40,7 +40,7 @@ public class ResultLotto {
     }
 
     public int findRankCount(int rank) {
-        return (int) lottos.stream()
+        return (int) lottos.getLottos().stream()
                 .map(lotto -> lotto.matchNumbers(winningLottoNumbers, bonusLottoNumber))
                 .filter(matchNumber -> LottoOutlet.getRank(matchNumber) == rank)
                 .count();
@@ -49,5 +49,21 @@ public class ResultLotto {
     public void recordWinningNumbers(LottoNumbers winningLottoNumbers, int bonusNumber) {
         this.winningLottoNumbers = winningLottoNumbers;
         this.bonusLottoNumber = LottoNumber.valueOf(bonusNumber);
+    }
+
+    public void recordManualLottos(List<Lotto> buyLottos) {
+        lottos.addManualLottos(buyLottos);
+    }
+
+    public void recordBuyAutoLottos(List<Lotto> buyLottos) {
+        lottos.addAutoLottos(buyLottos);
+    }
+
+    public int getAutoLottoCount() {
+        return lottos.getAutoCount();
+    }
+
+    public int getManualLottoCount() {
+        return lottos.getManualCount();
     }
 }

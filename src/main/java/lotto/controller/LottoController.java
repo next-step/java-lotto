@@ -17,10 +17,11 @@ public class LottoController {
     public void buy() {
         int seedMoney = InputView.inputSeedMoney();
         int manualLottoCount = InputView.inputManualCount();
+
         List<List<Integer>> manualLottoNumbers = InputView.inputLottosNumbers(manualLottoCount);
         int remainMoney = lottoService.buyManualLotto(seedMoney, manualLottoCount, manualLottoNumbers);
 
-        ResultView.viewLottos(lottoService.buyLottos(seedMoney));
+        ResultView.viewLottos(lottoService.buyLottos(remainMoney));
         List<Integer> winningNumbers = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBounusNumber();
 

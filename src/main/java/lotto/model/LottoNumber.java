@@ -11,7 +11,7 @@ public class LottoNumber {
 
     static {
         cacheNumber = new LottoNumber[MAX_NUMBER + 1];
-        for (int i = 0; i < MAX_NUMBER + 1; i++) {
+        for (int i = 1; i < MAX_NUMBER + 1; i++) {
             cacheNumber[i] = new LottoNumber(i);
         }
     }
