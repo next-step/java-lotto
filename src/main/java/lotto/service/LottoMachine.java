@@ -30,8 +30,8 @@ public class LottoMachine {
         return lottoGenerator.generateLottos(quantity);
     }
 
-    public LottoResult judge(final List<Lotto> lottos, final int[] winningNumbers) {
-        final Lotto winningLotto = Lotto.from(winningNumbers);
+    public LottoResult judge(final List<Lotto> lottos, final int[] winningNumbers, final int winningBonusNumber) {
+        final Lotto winningLotto = Lotto.from(winningNumbers, winningBonusNumber);
 
         return lottoJudge.judge(lottos, winningLotto);
     }

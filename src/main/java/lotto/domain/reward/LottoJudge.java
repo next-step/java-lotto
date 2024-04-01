@@ -17,7 +17,8 @@ public class LottoJudge {
 
     private LottoRank match(final Lotto lotto, final Lotto winningLotto) {
         final int matchingCount = lotto.matchCount(winningLotto);
+        boolean isMatchedBonus = lotto.isMatchedBonus(winningLotto);
 
-        return LottoRank.from(matchingCount);
+        return LottoRank.from(matchingCount, isMatchedBonus);
     }
 }

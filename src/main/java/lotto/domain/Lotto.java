@@ -14,6 +14,7 @@ public class Lotto {
 
     public Lotto(final Set<LottoNumber> numbers, final LottoNumber bonus) {
         validateNumbersHaveSpecifiedSize(numbers);
+        validateBonusIsNotDuplicated(numbers, bonus);
 
         this.numbers = numbers;
         this.bonus = bonus;
@@ -25,11 +26,21 @@ public class Lotto {
         }
     }
 
+    private void validateBonusIsNotDuplicated(final Set<LottoNumber> numbers, final LottoNumber bonus) {
+        if (numbers.contains(bonus)) {
+            throw new IllegalArgumentException("로또 번호에 있는 번호는 보너스 번호로 사용 할 수 없습니다. 번호: " + bonus.value());
+        }
+    }
+
     public int matchCount(final Lotto otherLotto) {
         return (int)this.numbers
                 .stream()
                 .filter(otherLotto.numbers::contains)
                 .count();
+    }
+
+    public boolean isMatchedBonus(final Lotto otherLotto) {
+        return this.bonus.equals(otherLotto.bonus);
     }
 
     public List<Integer> extractLottoNumbers() {
@@ -39,12 +50,17 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public static Lotto from(final int[] numbers) {
+    public int extractBonusNumber() {
+        return this.bonus.value();
+    }
+
+    public static Lotto from(final int[] numbers, final int bonus) {
         final Set<LottoNumber> lottoNumbers = toLottoNumbers(numbers);
+        final LottoNumber bonusNumber = new LottoNumber(bonus);
 
         validateNumbersAreNotDuplicated(numbers, lottoNumbers);
 
-        return new Lotto(lottoNumbers);
+        return new Lotto(lottoNumbers, bonusNumber);
     }
 
     private static Set<LottoNumber> toLottoNumbers(final int[] numbers) {

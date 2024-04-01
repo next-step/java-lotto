@@ -6,5 +6,7 @@ import lotto.domain.LottoNumber;
 
 public interface LottoNumbersPicker {
 
-    Set<LottoNumber> pick();
+    Set<LottoNumber> pickMain();
+
+    LottoNumber pickBonus();
 }

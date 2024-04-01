@@ -22,7 +22,7 @@ public class LottoGenerator {
         validateQuantityIsMoreThanMinimum(quantity);
 
         return IntStream.rangeClosed(1, quantity)
-                .mapToObj(i -> generate())
+                .mapToObj(i -> generateLotto())
                 .collect(Collectors.toUnmodifiableList());
     }
 
@@ -32,9 +32,19 @@ public class LottoGenerator {
         }
     }
 
-    private Lotto generate() {
-        final Set<LottoNumber> lottoNumbers = this.lottoNumbersPicker.pick();
+    private Lotto generateLotto() {
+        final Set<LottoNumber> lottoNumbers = this.lottoNumbersPicker.pickMain();
 
-        return new Lotto(lottoNumbers);
+        return new Lotto(lottoNumbers, generateBonusNumber(lottoNumbers));
+    }
+
+    private LottoNumber generateBonusNumber(final Set<LottoNumber> lottoNumbers) {
+        LottoNumber bonusNumber;
+
+        do {
+            bonusNumber = this.lottoNumbersPicker.pickBonus();
+        } while (lottoNumbers.contains(bonusNumber));
+
+        return bonusNumber;
     }
 }
