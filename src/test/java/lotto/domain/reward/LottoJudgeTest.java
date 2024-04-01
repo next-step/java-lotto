@@ -1,10 +1,8 @@
 package lotto.domain.reward;
 
 import static lotto.domain.reward.LottoRank.FIRST;
-import static lotto.domain.reward.LottoRank.FOURTH;
+import static lotto.domain.reward.LottoRank.FIFTH;
 import static lotto.domain.reward.LottoRank.NONE;
-import static lotto.domain.reward.LottoRank.SECOND;
-import static lotto.domain.reward.LottoRank.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
@@ -52,9 +50,9 @@ class LottoJudgeTest {
     private static LottoResult lottoResult() {
         final Map<LottoRank, Long> result = Map.of(
                 FIRST, 2L,
-                SECOND, 3L,
-                THIRD, 1L,
-                FOURTH, 1L,
+                LottoRank.SECOND, 3L,
+                LottoRank.THIRD, 1L,
+                FIFTH, 1L,
                 NONE, 3L
         );
 

@@ -9,13 +9,15 @@ import java.util.stream.Collectors;
 public enum LottoRank {
 
     FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     NONE(0, 0),
     ;
 
     private static final Map<Integer, LottoRank> rankMap = Arrays.stream(values())
+            .filter(rank -> rank != SECOND)
             .collect(Collectors.toUnmodifiableMap(LottoRank::matchingCount, Function.identity()));
 
     private final int matchingCount;
@@ -34,9 +36,13 @@ public enum LottoRank {
         return this.rewardAmount;
     }
 
-    public static LottoRank from(final int matchingCount) {
+    public static LottoRank from(final int matchingCount, final boolean isMatchedBonus) {
         if (isNotWinning(matchingCount)) {
             return NONE;
+        }
+
+        if (isSecond(matchingCount, isMatchedBonus)) {
+            return SECOND;
         }
 
         return Optional.ofNullable(rankMap.get(matchingCount))
@@ -44,6 +50,10 @@ public enum LottoRank {
     }
 
     private static boolean isNotWinning(final int matchingCount) {
-        return NONE.matchingCount <= matchingCount && matchingCount < FOURTH.matchingCount;
+        return NONE.matchingCount <= matchingCount && matchingCount < FIFTH.matchingCount;
+    }
+
+    private static boolean isSecond(final int matchingCount, final boolean isMatchedBonus) {
+        return matchingCount == SECOND.matchingCount && isMatchedBonus;
     }
 }
