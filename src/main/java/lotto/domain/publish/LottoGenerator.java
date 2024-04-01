@@ -33,18 +33,8 @@ public class LottoGenerator {
     }
 
     private Lotto generateLotto() {
-        final Set<LottoNumber> lottoNumbers = this.lottoNumbersPicker.pickMain();
+        final Set<LottoNumber> lottoNumbers = this.lottoNumbersPicker.pick();
 
-        return new Lotto(lottoNumbers, generateBonusNumber(lottoNumbers));
-    }
-
-    private LottoNumber generateBonusNumber(final Set<LottoNumber> lottoNumbers) {
-        LottoNumber bonusNumber;
-
-        do {
-            bonusNumber = this.lottoNumbersPicker.pickBonus();
-        } while (lottoNumbers.contains(bonusNumber));
-
-        return bonusNumber;
+        return new Lotto(lottoNumbers);
     }
 }

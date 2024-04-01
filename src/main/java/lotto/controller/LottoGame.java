@@ -4,6 +4,7 @@ import java.util.List;
 
 import lotto.domain.Lotto;
 import lotto.domain.reward.LottoResult;
+import lotto.domain.reward.WinningLotto;
 import lotto.service.LottoMachine;
 import lotto.view.LottoView;
 
@@ -40,9 +41,11 @@ public class LottoGame {
     }
 
     private LottoResult judgeLottos(final List<Lotto> lottos) {
-        final int[] winningNumbers = lottoView.readLottoWinningNumbers();
-        final int winningBonusNumber = lottoView.readLottoWinningBonusNumber();
+        final WinningLotto winningLotto = WinningLotto.of(
+                lottoView.readLottoWinningNumbers(),
+                lottoView.readLottoBonusNumber()
+        );
 
-        return lottoMachine.judge(lottos, winningNumbers, winningBonusNumber);
+        return lottoMachine.judge(lottos, winningLotto);
     }
 }

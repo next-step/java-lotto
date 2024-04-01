@@ -4,7 +4,6 @@ import static java.text.MessageFormat.format;
 import static lotto.domain.reward.LottoRank.NONE;
 import static lotto.domain.reward.LottoRank.SECOND;
 
-import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -58,7 +57,7 @@ public class LottoView {
                 .toArray();
     }
 
-    public int readLottoWinningBonusNumber() {
+    public int readLottoBonusNumber() {
         output.printLine("보너스 번호를 입력해 주세요.");
         final String userInput = input.readLine();
 
@@ -92,8 +91,7 @@ public class LottoView {
     private void printLottoNumbers(final Lotto lotto) {
         final List<Integer> numbers = lotto.extractLottoNumbers();
         numbers.sort(Comparator.naturalOrder());
-
-        output.printLine(MessageFormat.format("{0}, {1}", numbers, lotto.extractBonusNumber()));
+        output.printLine(numbers.toString());
     }
 
     public void printLottoWinningResult(final LottoResult lottoResult) {
