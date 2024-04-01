@@ -82,7 +82,6 @@
 # Step4
 
 ## Todo
-- [ ] 코드리뷰 적용 - Index Out of Range 오류 해결
 - [ ] 코드리뷰 적용 - IllegalArgumentException에 예외 메시지 추가
 - [ ] 코드리뷰 적용 - Lotto > 생성자 내부에 있는 null 검사 로직 타 메서드로 이동시키기
 - [ ] 코드리부 적용 - LottoClient에 있는 출력 관련 의존성을 OutputView로 다시 이동
@@ -110,3 +109,4 @@
 - [X] 코드리뷰 적용 - 수익률 계산 결과 Long 타입으로 수정
 - [X] 코드리뷰 적용 - OutputView 내의 printPlainMessage 삭제
 - [X] 코드리뷰 적용 - 남은 횟수가 전체 횟수보다 크다면 예외(14000,15 => IllegalArgumentException)
+- [X] 코드리뷰 적용 - Index Out of Range 오류 해결
