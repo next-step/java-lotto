@@ -20,10 +20,8 @@ public class LottoController {
         int money = input.inputMoney();
 
         List<LottoTicket> lottoTickets = lottoMachine.receive(money);
-        output.printReceive(lottoTickets.size());
         output.printLotto(lottoTickets);
 
-        output.printWinningLotto();
         List<Integer> inputLottoNumber = input.inputLottoNumber();
         Map<WinningInfo, Long> result = lottoMachine.checkIfWinningEntry(lottoTickets, inputLottoNumber);
 

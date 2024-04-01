@@ -14,14 +14,6 @@ public class ResultView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public void printWinningLotto() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-    }
-
-    public void printReceive(int size) {
-        System.out.println(size +"개를 구매했습니다.");
-    }
-
     public void printWinningInfos(Map<WinningInfo, Long> winningInfos, long totalPurchase) {
         System.out.println("당첨 통계");
         System.out.println("----------");
@@ -29,6 +21,8 @@ public class ResultView {
         printStatistics(winningInfos, totalPurchase);
     }
     public void printLotto(List<LottoTicket> lottoTickets) {
+        System.out.println(lottoTickets.size() +"개를 구매했습니다.");
+
         for (LottoTicket lottoTicket : lottoTickets) {
             System.out.println(lottoTicket.getLottoNumbers());
         }
