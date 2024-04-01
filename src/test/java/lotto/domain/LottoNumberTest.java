@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto;
 
 import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.Test;

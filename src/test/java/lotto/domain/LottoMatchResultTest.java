@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto;
 
 import lotto.domain.LottoMatchResult;
 import lotto.domain.Rank;
