@@ -2,12 +2,11 @@ package domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domain.lotto.LottoList;
 import domain.lotto.vo.LottoNumber;
 import domain.lotto.vo.WinNumbers;
 import domain.machine.LottoNumberGenerator;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,7 +31,7 @@ public class LottoListTest {
   @Test
   @DisplayName("지난주 결과가 첫 번째 로또와 동일 할 때 카운트가 6인것을 반환한다")
   void matchFirstWin() {
-    List<LottoNumber> numbers = lottoList.getLottoNumbers().get(0).getNumbers();
+    Set<LottoNumber> numbers = lottoList.getLottoNumbers().get(0).getNumbers();
     Map<Integer, Integer> lottoResult = lottoList.getLottoResult(new WinNumbers(numbers, new LottoNumber(1)));
     assertThat(lottoResult.containsKey(6)).isTrue();
   }

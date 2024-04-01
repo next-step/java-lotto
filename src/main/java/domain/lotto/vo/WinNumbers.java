@@ -10,6 +10,12 @@ public class WinNumbers {
     Set<LottoNumber> primaryNumbers;
     LottoNumber bounusNumber;
 
+    public WinNumbers(Set<LottoNumber> primaryNumbers, LottoNumber bounusNumber){
+        validateNumberLength(primaryNumbers.size());
+        this.primaryNumbers = primaryNumbers;
+        this.bounusNumber = bounusNumber;
+    }
+
     public WinNumbers(List<LottoNumber> primaryNumbers, LottoNumber bounusNumber){
         this.primaryNumbers = new HashSet<>(primaryNumbers);
         this.bounusNumber = bounusNumber;

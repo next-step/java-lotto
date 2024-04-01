@@ -3,6 +3,7 @@ package domain.lotto.vo;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,24 +23,24 @@ public class WinNumbersTest {
   @Test
   @DisplayName("당첨 번호가 겹치는 것이 없는지 확인한다")
   void doesntMatchCount() {
-    List<LottoNumber> numbers = Stream.of(11, 12, 13, 14,15, 16).map(LottoNumber::new).collect(
-        Collectors.toList());
+    Set<LottoNumber> numbers = Stream.of(11, 12, 13, 14,15, 16).map(LottoNumber::new).collect(
+        Collectors.toSet());
     assertThat(winNumbers.getMatchCount(numbers)).isEqualTo(0);
   }
 
   @Test
   @DisplayName("보너스 당첨 번호가 있으면 카운팅하는지 확인한다")
   void matchCountWithBounus() {
-    List<LottoNumber> numbers = Stream.of(10, 12, 13, 14,15, 16).map(LottoNumber::new).collect(
-        Collectors.toList());
+    Set<LottoNumber> numbers = Stream.of(10, 12, 13, 14,15, 16).map(LottoNumber::new).collect(
+        Collectors.toSet());
     assertThat(winNumbers.getMatchCount(numbers)).isEqualTo(1);
   }
 
   @Test
   @DisplayName("당첨 번호가 3개 겹치는지 확인한다")
   void matchCount() {
-    List<LottoNumber> numbers = Stream.of(1, 2, 3, 7, 8, 9).map(LottoNumber::new).collect(
-        Collectors.toList());
+    Set<LottoNumber> numbers = Stream.of(1, 2, 3, 7, 8, 9).map(LottoNumber::new).collect(
+        Collectors.toSet());
     assertThat(winNumbers.getMatchCount(numbers)).isEqualTo(3);
   }
 }

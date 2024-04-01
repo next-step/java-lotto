@@ -2,17 +2,18 @@ package domain.lotto;
 
 import domain.lotto.vo.LottoNumber;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
-  private final List<LottoNumber> numbers;
+  private final Set<LottoNumber> numbers;
 
   public Lotto(List<Integer> numbers) {
-    this.numbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
+    this.numbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toSet());
   }
 
-  public List<LottoNumber> getNumbers() {
+  public Set<LottoNumber> getNumbers() {
     return numbers;
   }
 
