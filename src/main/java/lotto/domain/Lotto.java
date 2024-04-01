@@ -5,7 +5,6 @@ import java.util.Set;
 public class Lotto {
 
     private final Set<Integer> autoLotto;
-    private int matchingCount;
 
     private static final int LOTTO_SIZE = 6;
 
@@ -14,13 +13,12 @@ public class Lotto {
     }
 
     public Lotto(LottoNumbers lottoNumbers) {
-        this.autoLotto = validate(lottoNumbers.getNumbers());
-        this.matchingCount = 0;
+        validate(lottoNumbers.getNumbers());
+        this.autoLotto = lottoNumbers.getNumbers();
     }
 
     public Lotto(Set<Integer> autoLotto) {
         this.autoLotto = autoLotto;
-        this.matchingCount = 0;
     }
 
     public Set<Integer> getAutoLotto() {
@@ -28,12 +26,12 @@ public class Lotto {
     }
 
     public int getMatchingCount(Set<Integer> winningNo) {
-        return this.matchingCount = (int) autoLotto.stream()
+        return (int) autoLotto.stream()
                 .filter(winningNo::contains)
                 .count();
     }
 
-    public Set<Integer> validate(Set<Integer> autoLotto) {
+    private void validate(Set<Integer> autoLotto) {
         if (autoLotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
@@ -41,6 +39,5 @@ public class Lotto {
         if (autoLotto.stream().anyMatch(number -> number < 1 || number > 45)) {
             throw new IllegalArgumentException("로또 번호는 1부터 45사이여야 합니다.");
         }
-        return autoLotto;
     }
 }

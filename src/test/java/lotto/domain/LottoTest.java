@@ -22,27 +22,20 @@ class LottoTest {
 
         assertThat(new Lotto(lotto1).getMatchingCount(winNo)).isEqualTo(3);
         assertThat(new Lotto(lotto2).getMatchingCount(winNo)).isEqualTo(4);
-        assertThat(new Lotto(lotto3).getMatchingCount(winNo)).isEqualTo(0);
-    }
-
-    @Test
-    @DisplayName("로또 번호의 갯수가 6개인지 검증한다")
-    void size_test() {
-        Set<Integer> lotto1 = Set.of(1, 2, 3, 4, 5, 6);
-        assertThat(new Lotto(lotto1).validate(lotto1)).isEqualTo(lotto1);
+        assertThat(new Lotto(lotto3).getMatchingCount(winNo)).isZero();
     }
 
     @DisplayName("로또 번호의 갯수가 6개가 아니면 예외가 발생한다")
     @Test
     void size_exception_test() {
         Set<Integer> lottoNumbers = new HashSet<>(List.of(1, 2, 3, 10, 20, 30, 40));
-        assertThrows(IllegalArgumentException.class, () -> new Lotto(lottoNumbers).validate(lottoNumbers));
+        assertThrows(IllegalArgumentException.class, () -> new Lotto(lottoNumbers));
     }
 
     @DisplayName("로또 번호가 1보다 작거나 45보다 크면 예외가 발생한다")
     @Test
     void range_exception_test() {
         Set<Integer> lottoNumbers = new HashSet<>(Set.of(-1, 2, 65, 78, 20, 30));
-        assertThrows(IllegalArgumentException.class, () -> new Lotto(lottoNumbers).validate(lottoNumbers));
+        assertThrows(IllegalArgumentException.class, () -> new Lotto(lottoNumbers));
     }
 }
