@@ -2,8 +2,8 @@ package lotto.domain.publish;
 
 import static lotto.domain.publish.LottoGenerator.MINIMUM_LOTTO_QUANTITY;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,7 +27,7 @@ class LottoGeneratorTest {
         final LottoGenerator lottoMaker = new LottoGenerator(new RandomLottoNumbersPicker());
         final int quantityLessThanMinimum = MINIMUM_LOTTO_QUANTITY - 1;
 
-        Assertions.assertThatIllegalArgumentException()
+        assertThatIllegalArgumentException()
                 .isThrownBy(() -> lottoMaker.generateLottos(quantityLessThanMinimum));
     }
 }

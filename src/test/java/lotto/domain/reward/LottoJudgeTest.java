@@ -21,9 +21,8 @@ class LottoJudgeTest {
     @Test
     @DisplayName("당첨 번호와 로또 번호를 비교하여 동일한 갯수에 따라 순위를 부여한다.")
     void Judge_LottoRank() {
-        final Lotto winningLotto = lotto(new int[] {1, 2, 3, 4, 5, 6}, 45);
-        final LottoResult actualLottoResult = new LottoJudge().judge(lottos(), winningLotto);
-        final LottoResult expectedLottoResult = lottoResult();
+        final LottoResult actualLottoResult = actualLottoResult();
+        final LottoResult expectedLottoResult = expectedLottoResult();
 
         assertThat(actualLottoResult.result())
                 .isEqualTo(expectedLottoResult.result());
@@ -31,26 +30,25 @@ class LottoJudgeTest {
                 .isEqualTo(expectedLottoResult.profitRate());
     }
 
-    private static List<Lotto> lottos() {
-        return List.of(
-                lotto(new int[] {1, 2, 3, 4, 5, 6}, 45),
-                lotto(new int[] {1, 2, 3, 4, 5, 6}, 7),
-                lotto(new int[] {1, 2, 3, 4, 5, 7}, 45),
-                lotto(new int[] {1, 2, 3, 4, 5, 7}, 45),
-                lotto(new int[] {1, 2, 3, 4, 5, 7}, 8),
-                lotto(new int[] {1, 2, 3, 4, 7, 8}, 45),
-                lotto(new int[] {1, 2, 3, 7, 8, 9}, 45),
-                lotto(new int[] {1, 2, 7, 8, 9, 10}, 45),
-                lotto(new int[] {1, 7, 8, 9, 10, 11}, 45),
-                lotto(new int[] {7, 8, 9, 10, 11, 12}, 45)
+    private LottoResult actualLottoResult() {
+        final List<Lotto> lottos = List.of(
+                Lotto.from(new int[] {1, 2, 3, 4, 5, 6}),
+                Lotto.from(new int[] {1, 2, 3, 4, 5, 6}),
+                Lotto.from(new int[] {1, 2, 3, 4, 5, 7}),
+                Lotto.from(new int[] {1, 2, 3, 4, 5, 7}),
+                Lotto.from(new int[] {1, 2, 3, 4, 5, 8}),
+                Lotto.from(new int[] {1, 2, 3, 4, 7, 8}),
+                Lotto.from(new int[] {1, 2, 3, 7, 8, 9}),
+                Lotto.from(new int[] {1, 2, 7, 8, 9, 10}),
+                Lotto.from(new int[] {1, 7, 8, 9, 10, 11}),
+                Lotto.from(new int[] {7, 8, 9, 10, 11, 12})
         );
+        final WinningLotto winningLotto = WinningLotto.of(new int[] {1, 2, 3, 4, 5, 6}, 7);
+
+        return new LottoJudge().judge(lottos, winningLotto);
     }
 
-    private static Lotto lotto(final int[] numbers, final int bonus) {
-        return Lotto.from(numbers, bonus);
-    }
-
-    private static LottoResult lottoResult() {
+    private LottoResult expectedLottoResult() {
         final Map<LottoRank, Long> result = Map.of(
                 FIRST, 2L,
                 SECOND, 2L,

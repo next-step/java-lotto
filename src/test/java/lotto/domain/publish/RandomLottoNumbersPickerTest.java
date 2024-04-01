@@ -10,8 +10,8 @@ class RandomLottoNumbersPickerTest {
 
     @Test
     @DisplayName("무작위로 로또 번호 개수만큼의 번호를 추출한다.")
-    void Pick_MainNumbers() {
-        assertThat(new RandomLottoNumbersPicker().pickMain())
+    void Pick_LottoNumbers() {
+        assertThat(new RandomLottoNumbersPicker().pick())
                 .hasSize(LOTTO_NUMBERS_SIZE);
     }
 }

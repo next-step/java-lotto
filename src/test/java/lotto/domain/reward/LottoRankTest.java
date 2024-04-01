@@ -47,20 +47,11 @@ class LottoRankTest {
     }
 
     @Test
-    @DisplayName("당첨 번호 매칭 개수가 최소 기준보다 적은 경우 예외를 던진다.")
+    @DisplayName("당첨 번호 매칭 개수가 최대 기준보다 많거나, 최소 기준보다 적은 경우 예외를 던진다.")
     void LottoRank_MatchingCountLessThanMinimum_Exception() {
-        final int matchingCountLessThanMinimum = NONE.matchingCount() - 1;
-
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoRank.from(matchingCountLessThanMinimum, false));
-    }
-
-    @Test
-    @DisplayName("당첨 번호 매칭 개수가 최대 기준보다 많은 경우 예외를 던진다.")
-    void LottoRank_MatchingCountMoreThanMaximum_Exception() {
-        final int matchingCountMoreThanMaximum = FIRST.matchingCount() + 1;
-
+                .isThrownBy(() -> LottoRank.from(FIRST.matchingCount() + 1, false));
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoRank.from(matchingCountMoreThanMaximum, false));
+                .isThrownBy(() -> LottoRank.from(NONE.matchingCount() - 1, false));
     }
 }
