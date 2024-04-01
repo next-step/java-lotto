@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 public enum Rank {
     NONE(0, 0),
@@ -13,6 +14,13 @@ public enum Rank {
 
     private int matchCount;
     private int prize;
+    private static final HashMap<Rank, Integer> matchResult = new HashMap<>() {{
+        put(Rank.FIRST, 0);
+        put(Rank.SECOND, 0);
+        put(Rank.THIRD, 0);
+        put(Rank.FOURTH, 0);
+        put(Rank.FIFTH, 0);
+    }};
 
     Rank(int matchCount, int prize) {
         this.matchCount = matchCount;
@@ -28,10 +36,10 @@ public enum Rank {
     }
 
     public static Rank valueOf(int matchCount, boolean matchBonus) {
-        if (matchCount == 5 && matchBonus) {
+        if (matchCount == Rank.SECOND.matchCount && matchBonus) {
             return SECOND;
         }
-        if (matchCount < 3) {
+        if (matchCount < Rank.FIFTH.matchCount) {
             return NONE;
         }
 
@@ -43,6 +51,17 @@ public enum Rank {
                 .filter((rank) -> rank.matchCount == matchCount && rank != SECOND)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("로또는 적어도 3개 이상 일치해야 합니다."));
+    }
+
+    public static void putMatchResult(Rank rank) {
+        if (rank == Rank.NONE) {
+            return;
+        }
+        matchResult.put(rank, matchResult.getOrDefault(rank, 0) + 1);
+    }
+
+    public static HashMap<Rank, Integer> getMatchResult() {
+        return matchResult;
     }
 
 }
