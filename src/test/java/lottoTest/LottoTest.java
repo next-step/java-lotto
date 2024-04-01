@@ -1,9 +1,9 @@
 package lottoTest;
 
 import lotto.model.Lotto;
-import lotto.model.MatchResult;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
+import lotto.model.MatchResult;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
