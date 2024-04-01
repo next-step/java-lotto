@@ -14,7 +14,7 @@ public class LottoApplication {
         Lotto winLotto = new Lotto(lottoMachine.pull());
         int totalBuy = lottoInput.buyCash();
 
-        lottoController.totalLotto(totalBuy);
+        lottoOutput.haveLotto(lottoController.totalLotto(totalBuy));
         lottoOutput.winNumber(winLotto);
         int winning = lottoOutput.totalPrize(lottoController.resultReturn(winLotto));
         lottoOutput.totalProfit(totalBuy, winning);

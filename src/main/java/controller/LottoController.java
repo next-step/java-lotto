@@ -9,16 +9,16 @@ import java.util.List;
 
 public class LottoController {
 
-    private static final LottoMachine lottoMachine = new LottoMachine();
-    private static MyLotto myLotto = new MyLotto();
-    private final WinStatus winStatus = new WinStatus();
+    private LottoMachine lottoMachine = new LottoMachine();
+    private MyLotto myLotto = new MyLotto();
+    private WinStatus winStatus = new WinStatus();
 
-    public void totalLotto(int count) {
+    public MyLotto totalLotto(int count) {
         for (int i = 0; i < count; i++) {
             List<Integer> nowLotto = lottoMachine.pull();
-            System.out.println(nowLotto);
             myLotto.add(nowLotto);
         }
+        return myLotto;
     }
 
     public WinStatus resultReturn(Lotto winLotto) {

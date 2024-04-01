@@ -9,6 +9,7 @@ public class LottoInput {
 
 
     public int buyCash() {
+        System.out.println("구입금액을 입력해 주세요.");
         int money = input.nextInt();
         correctMoney(money);
         return money / 1000;

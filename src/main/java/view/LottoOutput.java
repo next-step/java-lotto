@@ -45,4 +45,10 @@ public class LottoOutput {
     public void totalProfit(double total, double correct) {
         System.out.printf("총 수익률은 %.2f 입니다.", correct / total);
     }
+
+    public void haveLotto(MyLotto myLotto) {
+        for (Lotto lotto : myLotto.getLotto()) {
+            System.out.println(lotto.getNumbers());
+        }
+    }
 }
