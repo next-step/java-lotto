@@ -1,14 +1,15 @@
 package lotto.view;
 
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.WinningInfo;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
-
 
     public void purchaseLotto() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -20,11 +21,12 @@ public class ResultView {
 
         printStatistics(winningInfos, totalPurchase);
     }
+
     public void printLotto(List<LottoTicket> lottoTickets) {
         System.out.println(lottoTickets.size() +"개를 구매했습니다.");
 
         for (LottoTicket lottoTicket : lottoTickets) {
-            System.out.println(lottoTicket.getLottoNumbers());
+            System.out.println(lottoTicket.getLottoNumbers().stream().map(LottoNumber::getNumber).collect(Collectors.toList()));
         }
     }
 

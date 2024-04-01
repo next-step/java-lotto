@@ -1,13 +1,12 @@
 package lotto.controller;
 
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoVendingMachine;
-import lotto.domain.WinningInfo;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.Map;
 
 public class LottoController {
 
@@ -22,9 +21,9 @@ public class LottoController {
         List<LottoTicket> lottoTickets = lottoMachine.receive(money);
         output.printLotto(lottoTickets);
 
-        List<Integer> inputLottoNumber = input.inputLottoNumber();
-        Map<WinningInfo, Long> result = lottoMachine.checkIfWinningEntry(lottoTickets, inputLottoNumber);
+        List<Integer> lastWeekLottoNumber = input.lastWeekLottoNumber();
+        LottoResult result = lottoMachine.match(lottoTickets, lastWeekLottoNumber);
 
-        output.printWinningInfos(result, money);
+        output.printWinningInfos(result.getLottoResult(), money);
     }
 }

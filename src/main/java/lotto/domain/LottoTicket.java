@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -8,6 +9,12 @@ public class LottoTicket {
     private final static int LOTTO_NUMBER_LIMIT = 6;
 
     List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+    public List<Integer> intgerList() {
+        return lottoNumbers.stream().
+                map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
+    }
 
     public LottoTicket(Integer... lottoNumbers) {
         this(toLottoNumbers(lottoNumbers));
@@ -49,5 +56,11 @@ public class LottoTicket {
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public int getNumberOfMatch(List<Integer> winingNumberOfLastWeek) {
+        return (int) winingNumberOfLastWeek.stream()
+                .filter(intgerList()::contains)
+                .count();
     }
 }
