@@ -1,17 +1,23 @@
 package lotto.ui;
 
-import java.util.List;
 import lotto.LottoResultManager;
 import lotto.domain.LottoPrice;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketCollection;
 
 public class OutputView {
 
-    public void displayLottoTickets(List<LottoTicket> tickets) {
-        System.out.println(tickets.size() + "개를 구매했습니다.");
-        for (LottoTicket ticket : tickets) {
-            System.out.println(ticket.getNumbers());
+    public void displayLottoTickets(LottoTicketCollection ticketCollection) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다. \n",
+            ticketCollection.getManualTickets().size(), ticketCollection.getAutoTickets().size());
+
+        for (LottoTicket manualTicket : ticketCollection.getManualTickets()) {
+            System.out.println(manualTicket.getNumbers());
         }
+        for (LottoTicket autoTicket : ticketCollection.getAutoTickets()) {
+            System.out.println(autoTicket.getNumbers());
+        }
+
     }
 
     public void displayWinning(LottoResultManager lottoResultManager) {
