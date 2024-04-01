@@ -6,16 +6,20 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
-        if(numbers == null){
-            throw new IllegalArgumentException("로또 숫자들은 null이 아니어야 합니다.");
-        }
         validateNumbers(numbers);
         this.numbers = numbers;
     }
 
     public void validateNumbers(List<LottoNumber> numbers) {
+        validateEmpty(numbers);
         validateSize(numbers);
         validateIfDuplication(numbers);
+    }
+
+    private void validateEmpty(List<LottoNumber> numbers) {
+        if(numbers == null){
+            throw new IllegalArgumentException("로또 숫자들은 null이 아니어야 합니다.");
+        }
     }
 
     private void validateSize(List<LottoNumber> numbers) {
