@@ -27,14 +27,14 @@ public class OutputView {
         if (price != LottoPrice.MISS) {
             System.out.printf("%d개 일치 %s (%d원)- %d개", price.getCount(),
                 price.isBonusResult() ? ", 보너스 볼 일치" : "", price.getPrice(),
-                lottoResultManager.getCount(price));
+                lottoResultManager.getLottoResult().getOrDefault(price, 0));
             System.out.println();
         }
     }
 
-    public void displayWinningMoney(LottoResultManager lottoResultManager, int purchaseAmount) {
+    public void displayWinningMoney(LottoResultManager lottoResultManager) {
 
         System.out.printf("총 수익률은 %.2f입니다.",
-            lottoResultManager.calculateReturnRate(purchaseAmount));
+            lottoResultManager.calculateReturnRate());
     }
 }
