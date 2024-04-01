@@ -14,7 +14,7 @@ public class Main {
 		LottoMarket lottoMarket = new LottoMarket(numberOfLotto);
 		PrintView.printLottos(lottoMarket.getLottos());
 
-		WinningNumbers winningNumbers = new WinningNumbers(InputView.inputWinningNumbers());
+		WinningNumbers winningNumbers = new WinningNumbers(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
 		LottoResult lottoResult = new LottoResult(winningNumbers, lottoMarket.getLottos(), lottoPrice);
 		PrintView.printLottoResult(lottoResult);
 	}
