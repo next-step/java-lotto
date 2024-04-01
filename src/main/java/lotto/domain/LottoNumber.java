@@ -2,18 +2,28 @@ package lotto.domain;
 
 import lotto.constant.Constants;
 
+import java.util.HashMap;
+
 public class LottoNumber {
     private int number;
+    private static HashMap<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
-    public LottoNumber(final int number) {
-        checkLottoNumberRange(number);
+    static {
+        for (int num = Constants.MIN_LOTTO; num <= Constants.MAX_LOTTO; num++ ) {
+            lottoNumbers.put(num, new LottoNumber(num));
+        }
+    }
+
+    private LottoNumber(final int number) {
         this.number = number;
     }
 
-    private void checkLottoNumberRange(int number) {
-        if (number < Constants.MIN_LOTTO || number > Constants.MAX_LOTTO) {
+    public static LottoNumber of(final int number) {
+        LottoNumber lottoNumber = lottoNumbers.get(number);
+        if (lottoNumber == null) {
             throw new IllegalArgumentException("로또는 1~45 사이의 값이어야 합니다.");
         }
+        return lottoNumber;
     }
 
     @Override
