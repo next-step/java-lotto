@@ -21,4 +21,8 @@ public class Cash {
         }
         return result;
     }
+
+    public int getMoney() {
+        return money;
+    }
 }

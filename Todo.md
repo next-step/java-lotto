@@ -110,3 +110,4 @@
 - [X] 코드리뷰 적용 - OutputView 내의 printPlainMessage 삭제
 - [X] 코드리뷰 적용 - 남은 횟수가 전체 횟수보다 크다면 예외(14000,15 => IllegalArgumentException)
 - [X] 코드리뷰 적용 - Index Out of Range 오류 해결
+- [X] 수익률 계산 오류 수정 

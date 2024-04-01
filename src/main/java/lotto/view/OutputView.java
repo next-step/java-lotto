@@ -34,6 +34,6 @@ public class OutputView {
     }
 
     private static void printProfit(Profit profit, Cash cash) {
-        System.out.printf("총 수익률은 %.2f입니다.%n", profit.calcRate(cash.getAmount()));
+        System.out.printf("총 수익률은 %.2f입니다.%n", profit.calcRate(cash.getMoney()));
     }
 }
