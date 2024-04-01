@@ -8,9 +8,11 @@ import lotto.common.LottoValidator;
 public class WinnerNumber {
 
     private final List<LottoNumber> winnerNumbers;
+    private final LottoNumber bonusNumber;
 
-    public WinnerNumber(List<Integer> numbers) {
+    public WinnerNumber(List<Integer> numbers, int bonusNumber) {
         LottoValidator.validateLottoNumber(numbers);
+        this.bonusNumber = new LottoNumber(bonusNumber);
         this.winnerNumbers = numbers.stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
@@ -20,5 +22,9 @@ public class WinnerNumber {
         return (int)lottoNumbers.stream()
             .filter(lottoNumber -> winnerNumbers.contains(lottoNumber))
             .count();
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 }
