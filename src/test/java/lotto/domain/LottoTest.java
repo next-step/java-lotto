@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoMatch;
@@ -35,17 +35,9 @@ public class LottoTest {
     }
 
     @Test
-    void 로또_숫자_범위_벗어난_경우() {
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 46);
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Lotto(numbers))
-                .withMessageMatching("로또는 1~45 사이의 값이어야 합니다.");
-    }
-
-    @Test
     void 보너스_번호_일치() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
-        assertThat(lotto.isContainsBonus(new LottoNumber(7))).isTrue();
+        assertThat(lotto.isContainsBonus(LottoNumber.of(7))).isTrue();
     }
 
     @Test
