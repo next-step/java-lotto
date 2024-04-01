@@ -1,13 +1,9 @@
-package lotto;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoPrice;
-import lotto.domain.LottoTicket;
-import lotto.domain.WinLotto;
 import org.junit.jupiter.api.Test;
 
 public class WinLottoTest {
