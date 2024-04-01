@@ -13,7 +13,8 @@ public class WinningLottosTest {
 
     @Test
     void 생성() {
-        WinningLottos winningLotto = LottoFactory.createWinningLotto(List.of(1, 2, 3, 4, 5, 6),  7);
+        List<Number> numbers = List.of(Number.from(1), Number.from(2), Number.from(3), Number.from(4), Number.from(5), Number.from(6));
+        WinningLottos winningLotto = LottoFactory.createWinningLotto(numbers,  7);
         int expected = 6;
 
         assertThat(winningLotto.size()).isEqualTo(expected);
@@ -22,7 +23,8 @@ public class WinningLottosTest {
     @ParameterizedTest
     @MethodSource("lottoAndRank")
     void 로또_당첨(Lottos lottos, Rank rank) {
-        WinningLottos winnerLotto = new WinningLottos(List.of(1, 4, 5, 6, 7, 8), 9);
+        List<Number> numbers = List.of(Number.from(1), Number.from(2), Number.from(3), Number.from(4), Number.from(5), Number.from(6));
+        WinningLottos winnerLotto = new WinningLottos(numbers, 9);
         System.out.println("winnerLotto.getRank(lottos) = " + winnerLotto.checkRank(lottos));
         assertThat(winnerLotto.checkRank(lottos)).isEqualTo(rank);
     }
@@ -30,17 +32,28 @@ public class WinningLottosTest {
     @ParameterizedTest
     @MethodSource("lottoAndPrize")
     void 로또_당첨_금액(Lottos lottos, Number prize) {
-        WinningLottos winnerLotto = new WinningLottos(List.of(1, 4, 5, 6, 7, 8), 9);
+        List<Number> numbers = List.of(Number.from(1), Number.from(4), Number.from(5), Number.from(6), Number.from(7), Number.from(8));
+        WinningLottos winnerLotto = new WinningLottos(numbers, 9);
         assertThat(winnerLotto.calculatePrize(lottos)).isEqualTo(prize);
     }
 
     static Stream<Arguments> lottoAndRank() {
         return Stream.of(
-                Arguments.arguments(new Lottos(List.of(1, 4, 5, 6, 7, 8)), Rank.FIRST),
-                Arguments.arguments(new Lottos(List.of(1, 4, 5, 6, 7, 9)), Rank.SECOND),
-                Arguments.arguments(new Lottos(List.of(1, 4, 5, 6, 7, 17)), Rank.THIRD),
-                Arguments.arguments(new Lottos(List.of(1, 4, 5, 6, 17, 21)), Rank.FOURTH),
+                Arguments.arguments(
+                        new Lottos(
+                                List.of(Number.from(1), Number.from(4), Number.from(5), Number.from(6), Number.from(7),
+                                        Number.from(8))), Rank.FIRST),
+                Arguments.arguments(new Lottos(
+                        List.of(Number.from(1), Number.from(4), Number.from(5), Number.from(6), Number.from(7),
+                                Number.from(9))), Rank.SECOND),
+                Arguments.arguments(new Lottos(
+                        List.of(Number.from(1), Number.from(4), Number.from(5), Number.from(6), Number.from(7),
+                                Number.from(17))), Rank.THIRD),
+                Arguments.arguments(new Lottos(
+                        List.of(Number.from(1), Number.from(4), Number.from(5), Number.from(6), Number.from(17),
+                                Number.from(21))), Rank.FOURTH),
                 Arguments.arguments(new Lottos(List.of(1, 4, 5, 14, 17, 21)), Rank.FIFTH)
+                // 1 4 5 14 17 21
         );
     }
 

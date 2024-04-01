@@ -13,7 +13,8 @@ class LottosTest {
 
     @Test
     void 로또번호_포함_O() {
-        Lottos lotto = LottoFactory.createLotto(List.of(1, 2, 3, 4, 5, 6));
+        List<Number> numbers = List.of(Number.from(1), Number.from(2), Number.from(3), Number.from(4), Number.from(5), Number.from(6));
+        Lottos lotto = LottoFactory.createLotto(numbers);
         LottoNumber lottoNumber = new LottoNumber(5);
 
         assertThat(lotto.match(lottoNumber)).isTrue();
@@ -21,7 +22,8 @@ class LottosTest {
 
     @Test
     void 로또번호_포함_X() {
-        Lottos lotto = LottoFactory.createLotto(List.of(1, 2, 3, 4, 5, 6));
+        List<Number> numbers = List.of(Number.from(1), Number.from(2), Number.from(3), Number.from(4), Number.from(5), Number.from(6));
+        Lottos lotto = LottoFactory.createLotto(numbers);
         LottoNumber lottoNumber = new LottoNumber(7);
 
         assertThat(lotto.match(lottoNumber)).isFalse();

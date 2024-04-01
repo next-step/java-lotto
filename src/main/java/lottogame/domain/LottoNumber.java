@@ -8,6 +8,10 @@ public final class LottoNumber {
         this.value = value;
     }
 
+    public LottoNumber(final Number value) {
+        this.value = value.intValue();
+    }
+
     public int getValue() {
         return value;
     }

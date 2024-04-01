@@ -29,7 +29,7 @@ public class LottoGame {
         return LottoFactory.createMultipleLottos(count);
     }
 
-    public List<Lottos> createMultipleLottos(List<List<Integer>> numbers) {
+    public List<Lottos> createMultipleLottos(List<List<Number>> numbers) {
         return LottoFactory.createMultipleLottos(numbers);
     }
 
@@ -37,7 +37,7 @@ public class LottoGame {
         return LottoFactory.calculateCountOfLottos(amount, price);
     }
 
-    public WinningLottos createWinningLotto(List<Integer> numbers, Number bonusNumber) {
+    public WinningLottos createWinningLotto(List<Number> numbers, Number bonusNumber) {
         return LottoFactory.createWinningLotto(numbers, bonusNumber.intValue());
     }
 

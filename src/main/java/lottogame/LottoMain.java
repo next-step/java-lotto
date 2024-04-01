@@ -18,7 +18,7 @@ public class LottoMain {
         Number countOfLottos = lottoGame.calculateCountOfLottos(money);
         Number manualCountOfLotto = InputView.requestCountOfManualLottos(countOfLottos);
         ResultView.printLinkBreak();
-        List<List<Integer>> manualInputNumbers = InputView.requestMultipleManualLottos(manualCountOfLotto);
+        List<List<Number>> manualInputNumbers = InputView.requestMultipleManualLottos(manualCountOfLotto);
         List<Lottos> multipleManualLottos = lottoGame.createMultipleLottos(manualInputNumbers);
         List<Lottos> multipleAutoLottos = lottoGame.createMultipleLottos(countOfLottos.minus(manualCountOfLotto));
 
@@ -26,7 +26,7 @@ public class LottoMain {
         ResultView.printAutoAndManualLottosCount(multipleManualLottos, multipleAutoLottos);
         ResultView.printLottos(lottos);
 
-        List<Integer> winningLottosNumbers = InputView.requestWinningLotto();
+        List<Number> winningLottosNumbers = InputView.requestWinningLotto();
         Number bonusNumber = InputView.requestBonusNumber();
         WinningLottos winningLotto = lottoGame.createWinningLotto(winningLottosNumbers, bonusNumber);
 

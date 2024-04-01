@@ -8,7 +8,9 @@ import java.util.stream.IntStream;
 
 public class LottoFactory {
 
-    private static final List<Integer> numbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+    private static final List<Number> numbers = IntStream.rangeClosed(1, 45).boxed()
+            .map(Number::from)
+            .collect(Collectors.toList());
     private static final int LOTTOS_SIZE = 6;
 
     private LottoFactory() {
@@ -23,16 +25,16 @@ public class LottoFactory {
         return lottoses;
     }
 
-    public static List<Lottos> createMultipleLottos(List<List<Integer>> numbers) {
+    public static List<Lottos> createMultipleLottos(List<List<Number>> numbers) {
         return numbers.stream().map(LottoFactory::createLotto)
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public static Lottos createLotto(List<Integer> numbers) {
+    public static Lottos createLotto(List<Number> numbers) {
         return new Lottos(numbers);
     }
 
-    public static WinningLottos createWinningLotto(List<Integer> numbers, int bonusNumber) {
+    public static WinningLottos createWinningLotto(List<Number> numbers, int bonusNumber) {
         return new WinningLottos(numbers, bonusNumber);
     }
 

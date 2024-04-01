@@ -27,7 +27,7 @@ public class InputView {
         return Money.from(Integer.parseInt(inputValue()));
     }
 
-    public static List<Integer> requestWinningLotto() {
+    public static List<Number> requestWinningLotto() {
         try {
             System.out.println(REQUEST_WINNING_LOTTO);
             return convertNumbersToList();
@@ -56,9 +56,9 @@ public class InputView {
         }
     }
 
-    public static List<List<Integer>> requestMultipleManualLottos(Number count) {
+    public static List<List<Number>> requestMultipleManualLottos(Number count) {
         System.out.println(REQUEST_MULTIPLE_MANUAL_LOTTOS);
-        List<List<Integer>> multipleManualLottos = new ArrayList<>();
+        List<List<Number>> multipleManualLottos = new ArrayList<>();
         while(count.isPositive()) {
             multipleManualLottos.add(requestManualLottos());
             count = count.decrease();
@@ -66,7 +66,7 @@ public class InputView {
         return multipleManualLottos;
     }
 
-    private static List<Integer> requestManualLottos() {
+    private static List<Number> requestManualLottos() {
         try {
             return convertNumbersToList();
         } catch (IllegalArgumentException e) {
@@ -75,23 +75,15 @@ public class InputView {
         }
     }
 
-    private static List<Integer> convertNumbersToList() {
-        List<Integer> numbers =  Stream.of(inputValue().split(","))
-                .map(InputView::convertStringToInt)
+    private static List<Number> convertNumbersToList() {
+        List<Number> numbers =  Stream.of(inputValue().split(","))
+                .map(Number::from)
                 .collect(Collectors.toList());
 
         if (!LottoFactory.isValidLottosSize(numbers.size())) {
             throw new IllegalArgumentException(String.format(INVALID_INPUT_MANUAL_LOTTOS, numbers.size()));
         }
         return numbers;
-    }
-
-    private static int convertStringToInt(String text) {
-        try {
-            return Integer.parseInt(text);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(text + "는 양수가 아닙니다.");
-        }
     }
 
     private static String inputValue() {
