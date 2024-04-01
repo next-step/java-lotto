@@ -41,7 +41,8 @@ public class LottoGame {
 
     private LottoResult judgeLottos(final List<Lotto> lottos) {
         final int[] winningNumbers = lottoView.readLottoWinningNumbers();
+        final int winningBonusNumber = lottoView.readLottoWinningBonusNumber();
 
-        return lottoMachine.judge(lottos, winningNumbers);
+        return lottoMachine.judge(lottos, winningNumbers, winningBonusNumber);
     }
 }

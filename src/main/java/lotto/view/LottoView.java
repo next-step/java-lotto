@@ -2,7 +2,9 @@ package lotto.view;
 
 import static java.text.MessageFormat.format;
 import static lotto.domain.reward.LottoRank.NONE;
+import static lotto.domain.reward.LottoRank.SECOND;
 
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -56,6 +58,18 @@ public class LottoView {
                 .toArray();
     }
 
+    public int readLottoWinningBonusNumber() {
+        output.printLine("보너스 번호를 입력해 주세요.");
+        final String userInput = input.readLine();
+
+        try {
+            return Integer.parseInt(userInput);
+
+        } catch (final NumberFormatException e) {
+            throw new IllegalArgumentException("보너스 번호는 정수형으로 입력해야 합니다. 입력: " + userInput);
+        }
+    }
+
     private void validateWinningNumbersInputIsNotNullOrBlank(final String userInput) {
         if (userInput == null || userInput.isBlank()) {
             throw new IllegalArgumentException("로또 당첨 번호는 null 이거나 빈 값으로 입력 할 수 없습니다. 입력: " + userInput);
@@ -72,15 +86,14 @@ public class LottoView {
 
     public void printLottoPurchaseHistory(final List<Lotto> lottos) {
         output.printLine(format("{0}개를 구매했습니다.", lottos.size()));
-
-        lottos.stream()
-                .map(Lotto::extractLottoNumbers)
-                .forEach(this::printSortedLottoNumbers);
+        lottos.forEach(this::printLottoNumbers);
     }
 
-    private void printSortedLottoNumbers(final List<Integer> numbers) {
+    private void printLottoNumbers(final Lotto lotto) {
+        final List<Integer> numbers = lotto.extractLottoNumbers();
         numbers.sort(Comparator.naturalOrder());
-        output.printLine(numbers.toString());
+
+        output.printLine(MessageFormat.format("{0}, {1}", numbers, lotto.extractBonusNumber()));
     }
 
     public void printLottoWinningResult(final LottoResult lottoResult) {
@@ -97,8 +110,9 @@ public class LottoView {
     }
 
     private void printLottoResultByRank(final LottoRank rank, final Map<LottoRank, Long> result) {
+        final String lottoResultFormat = rank == SECOND ? "{0}개, 보너스 일치 ({1}원) - {2}개" : "{0}개 일치 ({1}원) - {2}개";
         final String lottoResultOutputByRank = format(
-                "{0}개 일치 ({1}원) - {2}개",
+                lottoResultFormat,
                 rank.matchingCount(),
                 rank.rewardAmount(),
                 result.getOrDefault(rank, LOTTO_RESULT_DEFAULT_MATCHING_COUNT)
