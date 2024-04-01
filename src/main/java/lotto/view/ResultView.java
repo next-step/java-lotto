@@ -60,8 +60,8 @@ public class ResultView {
                 .filter(rank -> lottoRank == rank)
                 .count();
         if (lottoRank == LottoRank.SECOND) {
-            return lottoRank.getMatchCount() + "개 일치, 보너스 볼 일치 (" + lottoRank.getPrizeMoney() + ")-" + lottoResult.count(lottoRank) + "개";
+            return lottoRank.matchCount() + "개 일치, 보너스 볼 일치 (" + lottoRank.prizeMoney() + ")-" + lottoResult.count(lottoRank) + "개";
         }
-        return lottoRank.getMatchCount() + "개 일치 (" + lottoRank.getPrizeMoney() + ")-" + lottoResult.count(lottoRank) + "개";
+        return lottoRank.matchCount() + "개 일치 (" + lottoRank.prizeMoney() + ")-" + lottoResult.count(lottoRank) + "개";
     }
 }
