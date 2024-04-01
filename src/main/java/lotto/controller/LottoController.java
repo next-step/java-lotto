@@ -9,11 +9,12 @@ import static lotto.domain.LottoGenerator.generateLottos;
 public class LottoController {
 
     public void buyLotto() {
-        Fee fee = InputView.payForGames();
-        Lottos lottos = generateLottos(fee);
+        LottoFee lottoFee = InputView.payForGames();
+        Lottos lottos = generateLottos(lottoFee);
         ResultView.showLottos(lottos);
         Lotto winningNumber = Lotto.from(InputView.inputWinningNumber());
-        LottoMatchLogic lottoMatchLogic = new LottoMatchLogic(lottos);
-        ResultView.showRanks(lottoMatchLogic.checkRank(winningNumber, fee));
+        int bonusNumber = InputView.inputBonusNumber();
+        WinningLotto winningLottoNumber = new WinningLotto(winningNumber, bonusNumber);
+        ResultView.showRanks(lottos.match(winningLottoNumber), lottoFee);
     }
 }
