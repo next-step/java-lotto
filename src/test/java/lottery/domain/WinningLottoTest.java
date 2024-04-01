@@ -3,8 +3,6 @@ package lottery.domain;
 import lottery.domain.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -14,7 +12,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("로또 당첨 번호 생성 테스트")
     void winningLottoTest(){
-        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", 7);
+        final WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", 7);
 
         assertThat(winningLotto.winningNumbers()).hasSize(WinningLotto.NUMBER_SIZE);
         assertThat(winningLotto.winningNumbers()).contains(

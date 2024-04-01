@@ -3,6 +3,7 @@ package lottery.service;
 import lottery.code.WinPrizeType;
 import lottery.domain.LottoTicket;
 import lottery.domain.LottoTickets;
+import lottery.domain.ManualTickets;
 import lottery.domain.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,10 +19,11 @@ public class LottoDrawerTest {
 
     @Test
     @DisplayName("로또 당첨 통계 테스트")
-    void lotteryBuyTest(){
-        final LottoTickets lottoTickets = new LottoTickets(
-                List.of(new LottoTicket(new Integer[]{1, 2, 3, 4, 5, 6}),
-                        new LottoTicket(new Integer[]{2, 3, 4, 5, 6, 8})));
+    void winStatisticsTest(){
+        final ManualTickets manualTickets = new ManualTickets(List.of(
+                new LottoTicket(new Integer[]{1, 2, 3, 4, 5, 6}),
+                new LottoTicket(new Integer[]{2, 3, 4, 5, 6, 8})));
+        final LottoTickets lottoTickets = new LottoTickets(manualTickets);
         final WinningLotto winningLotto = new WinningLotto("2, 3, 4, 5, 6, 7", 8);
         final LottoDrawer lottoDrawer = new LottoDrawer(lottoTickets, winningLotto);
 
@@ -35,10 +37,11 @@ public class LottoDrawerTest {
     @Test
     @DisplayName("수익률 계산")
     void profitRateTest(){
-        final LottoTickets lottoTickets = new LottoTickets(
-                List.of(new LottoTicket(new Integer[]{1, 2, 3, 4, 5, 6}),
-                        new LottoTicket(new Integer[]{10, 11, 12, 13, 14, 15}),
-                        new LottoTicket(new Integer[]{10, 11, 12, 13, 14, 15})));
+        final ManualTickets manualTickets = new ManualTickets(List.of(
+                new LottoTicket(new Integer[]{1, 2, 3, 4, 5, 6}),
+                new LottoTicket(new Integer[]{10, 11, 12, 13, 14, 15}),
+                new LottoTicket(new Integer[]{10, 11, 12, 13, 14, 15})));
+        final LottoTickets lottoTickets = new LottoTickets(manualTickets);
         final WinningLotto winningLotto = new WinningLotto("4, 5, 6, 7, 8, 9", 45);
         final LottoDrawer lottoDrawer = new LottoDrawer(lottoTickets, winningLotto);
 
