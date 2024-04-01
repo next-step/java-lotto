@@ -33,4 +33,20 @@ public class LottoFactory {
                 .collect(Collectors.toUnmodifiableSet()));
     }
 
+    public List<Rank> getRankResults(Lotto winningLotto, List<Lotto> lottos) {
+        List<Rank> ranks = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            ranks.add(winningLotto.getRank(lotto));
+        }
+        return ranks;
+    }
+
+    public double calculateRateOfReturn(Lotto winningLotto, List<Lotto> lottos) {
+        double money = lottoPrice * lottos.size();
+        double sumOfReward = 0;
+        for (Lotto lotto : lottos) {
+            sumOfReward += winningLotto.getReward(lotto);
+        }
+        return sumOfReward / money;
+    }
 }
