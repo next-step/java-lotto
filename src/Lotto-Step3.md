@@ -48,7 +48,7 @@
 - [ ] 테스트 케이스 작성
 - [X] 테스트 케이스 패키지 구조 프로덕션 코드와 동일시
 - [ ] 테스트 케이스 성공 여부 확인
-- [ ] Operation -> 매개변수 b
+- [X] Operation -> 매개변수 b
 - [ ] LottoController -> 개행 및 가독성
 - [ ] Lotto mapToInt 제거
 - [ ] LottoRank 

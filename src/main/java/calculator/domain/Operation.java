@@ -27,8 +27,8 @@ public enum Operation {
         return operation;
     }
 
-    private static void validateDivideZero(double b) {
-        if (b == 0){
+    private static void validateDivideZero(double denominator) {
+        if (denominator == 0){
             throw new IllegalArgumentException("0을 나눌수 없습니다.");
         }
     }
