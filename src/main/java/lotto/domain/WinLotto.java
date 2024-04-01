@@ -19,6 +19,21 @@ public class WinLotto {
         }
     }
 
+    public LottoPrice price(LottoTicket ticket) {
+        return LottoPrice.valueOf(matchNumberCount(ticket),
+            matchBonusNumber(ticket));
+    }
+
+    private int matchNumberCount(LottoTicket lottoTicket) {
+        return (int) lottoTicket.getNumbers().stream().filter(this.ticket.getNumbers()::contains)
+            .count();
+    }
+
+    private boolean matchBonusNumber(LottoTicket lottoTicket) {
+        return lottoTicket.getNumbers().stream()
+            .anyMatch(number -> number.equals(this.bonusNumber));
+    }
+
     public LottoTicket getTicket() {
         return ticket;
     }
