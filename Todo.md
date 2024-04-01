@@ -82,7 +82,6 @@
 # Step4
 
 ## Todo
-- [ ] 코드리부 적용 - LottoClient에 있는 출력 관련 의존성을 OutputView로 다시 이동
 
 ## Done
 - [X] 수동으로 구매할 로또 개수가 null이면 예외(null => IllegalArgumentException)
@@ -111,3 +110,4 @@
 - [X] 수익률 계산 오류 수정 
 - [X] 코드리뷰 적용 - IllegalArgumentException에 예외 메시지 추가
 - [X] 코드리뷰 적용 - Lotto > 생성자 내부에 있는 null 검사 로직 타 메서드로 이동시키기
+- [X] 코드리부 적용 - LottoClient에 있는 출력 관련 의존성을 OutputView로 다시 이동
