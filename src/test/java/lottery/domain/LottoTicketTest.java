@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketTest {
 
@@ -16,7 +15,7 @@ public class LottoTicketTest {
     void lottoTicket(){
         final LottoTicket lottoTicket = new LottoTicket(new Integer[]{1, 2, 3, 4, 5, 6});
 
-        Set<LottoNumber> actual = lottoTicket.lotteryNumbers();
+        Set<LottoNumber> actual = lottoTicket.lottoNumbers();
 
         assertThat(actual).hasSize(LottoTicket.NUMBER_SIZE);
         assertThat(actual).contains(
