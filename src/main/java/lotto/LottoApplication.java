@@ -15,7 +15,8 @@ public class LottoApplication {
 
         int money = inputView.purchaseAmount();
         LottoShop lottoShop = new LottoShop();
-        LottoTickets lottoTickets = lottoShop.buyLotto(money);
+        List<List<Integer>> manualNumber = inputView.inputManualNumber();
+        LottoTickets lottoTickets = lottoShop.buyLotto(money, manualNumber);
         resultView.printPurchaseCount(lottoTickets);
 
         List<Integer> winnerNumbers = inputView.inputWinnerNumbers();

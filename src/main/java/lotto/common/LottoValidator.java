@@ -11,8 +11,8 @@ public class LottoValidator {
 
     private LottoValidator() {}
 
-    public static void validatePurchase(int money, int price) {
-        if (money < price) {
+    public static void validatePurchase(int money, int price, int manualCount) {
+        if (money < price || (manualCount * price) > money) {
             throw new IllegalArgumentException(String.format("로또의 가격은 %s 입니다.", price));
         }
     }
