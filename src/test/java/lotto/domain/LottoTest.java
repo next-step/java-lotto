@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
@@ -32,9 +33,6 @@ class LottoTest {
     @DisplayName("로또에 중복되는 숫자가 있으면 오류이다.")
     @Test
     void duplicatedExceltion() {
-
-        assertThatThrownBy(() -> {
-            new Lotto(List.of(1, 2, 3, 4, 5, 6, 7, 7));
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 6, 7, 7)));
     }
 }
