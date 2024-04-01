@@ -6,10 +6,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
+    public static final int LIMIT_LOTTO_LENGTH = 7;
     private List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        if (numbers.size() > 6) {
+        if (numbers.size() >= LIMIT_LOTTO_LENGTH) {
             throw new IllegalArgumentException("6자리 초과의 로또 번호가 입력되었습니다.");
         }
         if (numbers.contains(lottoRange())) {
