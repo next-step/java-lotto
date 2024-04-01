@@ -28,6 +28,4 @@ public class CalculatorTest {
             calculator.calculate(string);
         }).isInstanceOf(IllegalArgumentException.class);
     }
-
-
 }

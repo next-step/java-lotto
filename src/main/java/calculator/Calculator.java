@@ -3,14 +3,14 @@ package calculator;
 import inputview.InputView;
 import outputview.OutputView;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Calculator {
     InputView inputView;
     OutputView outputView;
+    static final int operand = 0;
+    static final int operator = 1;
 
     public Calculator() {
         inputView = new InputView();
@@ -18,19 +18,8 @@ public class Calculator {
     }
 
     public CalculationMethod checkOperator(String operator) {
-        if (operator.equals("+")) {
-            return new Sum();
-        }
-        if (operator.equals("-")) {
-            return new Subtraction();
-        }
-        if (operator.equals("*")) {
-            return new Multiplication();
-        }
-        if (operator.equals("/")) {
-            return new Division();
-        }
-        throw new IllegalArgumentException("문자열 입력이 잘못되었습니다. 입력 가능한 연산자값은 +, -, *, /입니다.");
+        CalculationMethod calculationMethod2 = CalculationMethod.find(operator);
+        return calculationMethod2;
     }
 
     public List<CalculationMethod> operatorsStringToCalculationMethod(List<String> stringOperators) {
@@ -42,13 +31,14 @@ public class Calculator {
     }
 
     public int calculate() {
+
         List<List<String>> operandAndOperator;
         List<String> operands;
         List<CalculationMethod> operators;
 
         operandAndOperator = inputView.operandAndOperator();
-        operands = operandAndOperator.get(0);
-        operators = operatorsStringToCalculationMethod(operandAndOperator.get(1));
+        operands = operandAndOperator.get(operand);
+        operators = operatorsStringToCalculationMethod(operandAndOperator.get(operator));
 
         int result = operators.get(0).calculate(operands.get(0), operands.get(1));
         for (int i = 1; i < (operators.size()); i++) {
@@ -67,12 +57,12 @@ public class Calculator {
         List<CalculationMethod> operators;
 
         operandAndOperator = inputView.operandAndOperator(userInput);
-        operands = operandAndOperator.get(0);
-        operators = operatorsStringToCalculationMethod(operandAndOperator.get(1));
+        operands = operandAndOperator.get(operand);
+        operators = operatorsStringToCalculationMethod(operandAndOperator.get(operator));
 
-        int result = operators.get(0).calculate(operands.get(0), operands.get(1));
+        int result = operators.get(0).calculate(operands.get(0), operands.get(1) );
         for (int i = 1; i < (operators.size()); i++) {
-            result = operators.get(i).calculate(String.valueOf(result), operands.get(i + 1));
+            result = operators.get(i).calculate( String.valueOf(result), operands.get(i + 1) );
         }
 
         outputView.printOutput(result);

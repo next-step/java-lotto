@@ -8,10 +8,11 @@ import org.junit.jupiter.api.Test;
 public class CalculationMethodTest {
 
     //given
-    CalculationMethod sum = new Sum();
-    CalculationMethod subtraction = new Subtraction();
-    CalculationMethod multiplication = new Multiplication();
-    CalculationMethod division = new Division();
+    CalculationMethod sum = CalculationMethod.Sum;
+    CalculationMethod subtraction = CalculationMethod.Subtraction;
+    CalculationMethod multiplication = CalculationMethod.Multiplication;
+    CalculationMethod division = CalculationMethod.Division;
+
 
     @Test
     @DisplayName("sum")
