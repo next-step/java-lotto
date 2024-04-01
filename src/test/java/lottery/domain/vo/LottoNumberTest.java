@@ -3,8 +3,6 @@ package lottery.domain.vo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Set;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -13,7 +11,7 @@ public class LottoNumberTest {
     @Test
     @DisplayName("로또 번호 생성 테스트")
     void lottoNumberTest(){
-        LottoNumber lottoNumber = new LottoNumber(1);
+        final LottoNumber lottoNumber = new LottoNumber(1);
 
         assertThat(lottoNumber).isEqualTo(new LottoNumber(1));
 

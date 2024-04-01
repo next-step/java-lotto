@@ -1,6 +1,7 @@
 package lottery.domain;
 
 import lottery.domain.vo.LottoNumber;
+import lottery.util.StringConverter;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -16,6 +17,10 @@ public class LottoTicket {
         this(quickPick());
     }
 
+    public LottoTicket(String lottoNumbersString){
+        this(manualPick(lottoNumbersString));
+    }
+
     public LottoTicket(Integer[] numbers){
         this(Arrays.stream(numbers)
                 .map(LottoNumber::new)
@@ -26,7 +31,7 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Set<LottoNumber> lotteryNumbers(){
+    public Set<LottoNumber> lottoNumbers(){
         return Collections.unmodifiableSet(lottoNumbers);
     }
 
@@ -47,6 +52,26 @@ public class LottoTicket {
         return numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
+    }
+
+    private static Set<LottoNumber> manualPick(String lottoNumbersString){
+        validateManualNumbersString(lottoNumbersString);
+        Set<Integer> numbers = StringConverter.convertToIntegerSet(lottoNumbersString);
+        Set<LottoNumber> manualNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
+        validateManualNumbersSize(manualNumbers);
+        return manualNumbers;
+    }
+
+    private static void validateManualNumbersString(String lottoNumbersString){
+        if (Objects.isNull(lottoNumbersString) || lottoNumbersString.isBlank())
+            throw new IllegalArgumentException("로또 번호는 비어있으면 안됩니다.");
+    }
+
+    private static void validateManualNumbersSize(Set<LottoNumber> manualNumbers){
+        if (!Objects.equals(manualNumbers.size(), LottoTicket.NUMBER_SIZE))
+            throw new IllegalArgumentException("로또 번호는 6개만 가능합니다");
     }
 
     @Override

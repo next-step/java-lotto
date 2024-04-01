@@ -1,29 +1,36 @@
 package lottery.domain;
 
 import lottery.code.WinPrizeType;
-import lottery.domain.vo.LottoNumber;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 
 public class LottoTickets {
-    private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
+    private final ManualTickets manualTickets;
+
+    private final QuickTickets quickTickets;
+
+    public LottoTickets(ManualTickets manualTickets,
+                        QuickTickets quickTickets) {
+        this.manualTickets = manualTickets;
+        this.quickTickets = quickTickets;
     }
 
-    public LottoTickets(Long lottoTicketCount) {
-        this(quickPickDispense(lottoTicketCount));
+    public LottoTickets(ManualTickets manualTickets) {
+        this(manualTickets, new QuickTickets(Collections.emptyList()));
     }
-    public LottoTickets(Integer moneyAmount) {
-        this(lottoTicketCount(moneyAmount));
+
+    public LottoTickets(QuickTickets quickTickets) {
+        this(new ManualTickets(Collections.emptyList()), quickTickets);
     }
 
     public Map<WinPrizeType, Long> winStatistics(WinningLotto winningLotto) {
-        return this.lottoTickets.stream()
+        return lottoTickets().stream()
                 .collect(Collectors.groupingBy(
                         lottoTicket -> WinPrizeType.fromMatchCountWithBonusMatch(
                                 lottoTicket.matchNumbersCount(winningLotto.winningNumbers()),
@@ -31,16 +38,17 @@ public class LottoTickets {
                         Collectors.counting()));
     }
 
-    public Long lottoTicketCount(){
-        return Long.valueOf(this.lottoTickets.size());
+    public Long quickTicketCount(){
+        return this.quickTickets.ticketCount();
+    }
+
+    public Long manualTicketCount(){
+        return this.manualTickets.ticketCount();
     }
 
     public List<LottoTicket> lottoTickets() {
-        return Collections.unmodifiableList(lottoTickets);
-    }
-
-    public Integer lottoTicketsTotalPrice(){
-        return this.lottoTickets.size() * LottoTicket.PRICE;
+        return Stream.concat(quickTickets.quickTickets().stream(), manualTickets.manualTickets().stream())
+                .collect(Collectors.toUnmodifiableList());
     }
 
     public Integer lottoTicketsTotalPrize(Map<WinPrizeType, Long> matchStatistics){
@@ -49,21 +57,11 @@ public class LottoTickets {
                 .sum();
     }
 
-    private static Long lottoTicketCount(Integer inputMoney){
-        validateMoney(inputMoney);
-        return Long.valueOf(inputMoney / LottoTicket.PRICE);
+    public Integer lottoTicketsTotalPrice(){
+        return Math.toIntExact(totalTicketCount() * LottoTicket.PRICE);
     }
 
-    private static void validateMoney(Integer inputMoney){
-        if (Objects.isNull(inputMoney))
-            throw new IllegalArgumentException("구입 금액은 필수 입니다.");
-        if (inputMoney % LottoTicket.PRICE != 0)
-            throw new IllegalArgumentException("구입 금액은 1000 단위 입니다.");
-    }
-
-    private static List<LottoTicket> quickPickDispense(Long lottoTicketCount) {
-        return LongStream.range(0, lottoTicketCount)
-                .mapToObj(count -> new LottoTicket())
-                .collect(Collectors.toUnmodifiableList());
+    private Long totalTicketCount(){
+        return manualTickets.ticketCount() + quickTickets.ticketCount();
     }
 }

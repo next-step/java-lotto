@@ -13,16 +13,17 @@ import java.util.stream.Collectors;
 public class ResultView {
 
     public static void purchasedLottoTicketsResult(LottoTickets lottoTickets){
-        lottoTicketCountResult(lottoTickets.lottoTicketCount());
+        lottoTicketCountResult(lottoTickets);
 
         lottoTickets.lottoTickets()
-                        .forEach(lottery ->
-                            System.out.println("[" + lotteryString(lottery) + "]")
+                        .forEach(ticket ->
+                            System.out.println("[" + lottoString(ticket) + "]")
                         );
     }
 
-    private static void lottoTicketCountResult(Long lotteryCount){
-        System.out.println(lotteryCount + "개를 구매했습니다.");
+    private static void lottoTicketCountResult(LottoTickets lottoTickets){
+        System.out.print("수동으로 " + lottoTickets.manualTicketCount() + "장, ");
+        System.out.println("자동으로 " + lottoTickets.quickTicketCount() + "개를 구매했습니다.");
     }
 
     public static void winStatistics(Map<WinPrizeType, Long> winStatistics){
@@ -43,8 +44,8 @@ public class ResultView {
         System.out.println("총 수익률은 " + winRate + "입니다.");
     }
 
-    private static String lotteryString(LottoTicket lottoTicket){
-        return lottoTicket.lotteryNumbers().stream()
+    private static String lottoString(LottoTicket lottoTicket){
+        return lottoTicket.lottoNumbers().stream()
                 .map(LottoNumber::getNumber)
                 .sorted()
                 .map(String::valueOf)
