@@ -12,7 +12,7 @@ class BudgetTest {
     @Test
     void canBuyQuantity() {
         Budget budget = new Budget(14000);
-        int result = budget.divide(1000);
+        int result = budget.purchasableQuantity(Price.LOTTO);
         assertThat(result).isEqualTo(14);
     }
 }

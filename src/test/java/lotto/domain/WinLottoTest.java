@@ -14,7 +14,7 @@ class WinLottoTest {
     @Test
     void getFeatNumberCount() {
         Lotto givenLotto = Lotto.ofNumbers(List.of(1, 2, 3, 4, 5, 6));
-        WinLotto winLotto = WinLotto.ofNumbers(List.of(1, 5, 6, 7, 8, 9), 5);
+        WinLotto winLotto = new WinLotto(List.of(1, 5, 6, 7, 8, 9), 5);
 
         int result = winLotto.getFeatNumberCount(givenLotto);
         assertThat(result).isEqualTo(3);
