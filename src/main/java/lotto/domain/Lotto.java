@@ -27,17 +27,13 @@ public class Lotto {
         return numbers;
     }
 
-    public WinningType findWinningType(Lotto others, int bonusNumber) {
-        return WinningType.valueOf(countHits(others), matchBonus(bonusNumber));
-    }
-
-    private long countHits(Lotto others) {
+    public long countHits(Lotto others) {
         return others.getNumbers().stream()
                 .filter(other -> numbers.contains(other))
                 .count();
     }
 
-    private boolean matchBonus(int bonusNumber) {
+    public boolean matchBonus(int bonusNumber) {
         return this.numbers.contains(bonusNumber);
     }
 

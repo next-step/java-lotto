@@ -15,12 +15,21 @@ class LottoTest {
 
     @DisplayName("로또에 숫자가 몇 개 포함되었는지 카운트한다.")
     @Test
-    void compareCount() {
+    void getHits() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> other = Arrays.asList(1, 2, 3, 10, 11, 12);
         Lotto lotto = new Lotto(numbers);
         Lotto otherLotto = new Lotto(other);
-        Assertions.assertThat(lotto.findWinningType(otherLotto, 0)).isEqualTo(WinningType.HIT_COUNT_3);
+        Assertions.assertThat(lotto.countHits(otherLotto)).isEqualTo(3);
+    }
+
+    @DisplayName("로또에 2등 보너스볼이 포함되어있는지 확인한다.")
+    @Test
+    void matchBonus() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(numbers);
+        Integer bonusNumber = 6;
+        Assertions.assertThat(lotto.matchBonus(bonusNumber)).isTrue();
     }
 
     @DisplayName("로또가 7자리 이상이면 오류이다.")
