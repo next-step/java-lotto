@@ -29,8 +29,8 @@ public class LottoResult {
     }
 
     private static Map<Integer, Integer> findWinningPrizeMap(Map<Integer, Integer> result) {
-        Map<Integer, Integer> prizeMap = new HashMap<>(4);
-        IntStream.range(3,7).forEach(count -> prizeMap.put(count, result.getOrDefault(count, 0)));
+        Map<Integer, Integer> prizeMap = new HashMap<>();
+        IntStream.range(0,7).forEach(count -> prizeMap.put(count, result.getOrDefault(count, 0)));
         return prizeMap;
     }
 
@@ -39,6 +39,10 @@ public class LottoResult {
         result.entrySet().stream()
                 .filter(e -> e.getKey() >= 3)
                 .forEach(entry -> totalPrize.addAndGet(Prize.findPrizeMoneyByCount(entry.getKey()) * entry.getValue()));
-        return new BigDecimal(totalPrize.get()).divide(new BigDecimal(totalMoney), 2, RoundingMode.HALF_UP).doubleValue();
+        return divideToProfit(totalPrize.get(), totalMoney);
+    }
+
+    private static double divideToProfit(int totalPrize, int totalMoney) {
+        return new BigDecimal(totalPrize).divide(new BigDecimal(totalMoney), 2, RoundingMode.HALF_UP).doubleValue();
     }
 }

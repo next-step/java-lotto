@@ -22,7 +22,7 @@ public class ResultView {
   public void printLottoResult(LottoResult result){
     StringBuilder sb = new StringBuilder();
     sb.append("당첨 통계\n--------\n");
-    for(var entry : result.getMatchedResult().entrySet()){
+    for(var entry : result.getMatchedResult().entrySet().stream().filter(e -> e.getKey() >= 3).collect(Collectors.toList())){
       sb.append(String.format("%d개 일치 (%d원)- %d개\n", entry.getKey(), Prize.findPrizeMoneyByCount(entry.getKey()), entry.getValue()));
     }
     sb.append(String.format("\n총 수익률은 %.2f입니다.%s", result.getProfitRate(), result.getProfitRate() >= 1 ? " -> 이익입니다." : " -> 손해입니다."));
