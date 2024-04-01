@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoResult {
@@ -16,7 +17,7 @@ public class LottoResult {
     }
 
     public List<LottoRank> getLottoRanks() {
-        return lottoRanks;
+        return Collections.unmodifiableList(lottoRanks);
     }
 
     public float getMargin(int fee) {
@@ -25,7 +26,7 @@ public class LottoResult {
 
     private int getTotalReturn() {
         return lottoRanks.stream()
-                .mapToInt(LottoRank::getPrizeMoney)
+                .mapToInt(LottoRank::prizeMoney)
                 .sum();
     }
 

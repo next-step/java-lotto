@@ -10,7 +10,7 @@ public class WinningLotto {
     }
 
     public LottoRank findRank(Lotto lotto) {
-        return LottoRank.find(lotto.getMatchNumberCount(this.winningNumber), lotto.hasNumber(this.bonusNumber));
+        return LottoRank.of(lotto.getMatchNumberCount(this.winningNumber), lotto.hasNumber(this.bonusNumber));
     }
 
 }

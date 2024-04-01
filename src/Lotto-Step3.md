@@ -51,6 +51,6 @@
 - [X] Operation -> 매개변수 b
 - [X] LottoController -> 개행 및 가독성
 - [X] Lotto mapToInt 제거
-- [ ] LottoRank 
-- [ ] LottoResult 가변 컬랙션 반환보단 불변 컬랙션 반환으로 getLottoRanks
+- [X] LottoRank -> rank제거, isBonus, ENUM에서 판별하기 위한 값이 하나이상이면 객체로 관리
+- [X] LottoResult 가변 컬랙션 반환보단 불변 컬랙션 반환으로 getLottoRanks
 - [ ] resultView 반복 문구 사용
