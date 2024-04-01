@@ -8,16 +8,17 @@ public class LottoResult {
 
     private Map<WinningInfo, Long> lottoResult;
 
-    public Map<WinningInfo, Long> getLottoResult() {
-        return lottoResult;
+    public Long countMatch(WinningInfo winningInfo) {
+        return lottoResult.getOrDefault(winningInfo, 0L);
     }
 
     public LottoResult(List<LottoTicket> lottoTickets, List<Integer> lastWeekLottoNumber) {
         lottoResult = lottoTickets.stream()
                 .map(ticket -> ticket.getNumberOfMatch(lastWeekLottoNumber))
                 .collect(Collectors.groupingBy(
-                        matches -> WinningInfo.checkMatch(matches),
-                        Collectors.counting()
-                ));
+                                matches -> WinningInfo.checkMatch(matches),
+                                Collectors.counting()
+                        )
+                );
     }
 }

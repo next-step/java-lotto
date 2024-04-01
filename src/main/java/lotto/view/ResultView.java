@@ -2,11 +2,11 @@ package lotto.view;
 
 
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.WinningInfo;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -15,27 +15,29 @@ public class ResultView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public void printWinningInfos(Map<WinningInfo, Long> winningInfos, long totalPurchase) {
+    public void printWinningInfos(LottoResult lottoResult, long totalPurchase) {
         System.out.println("당첨 통계");
         System.out.println("----------");
 
-        printStatistics(winningInfos, totalPurchase);
+        printStatistics(lottoResult, totalPurchase);
     }
 
     public void printLotto(List<LottoTicket> lottoTickets) {
         System.out.println(lottoTickets.size() +"개를 구매했습니다.");
 
         for (LottoTicket lottoTicket : lottoTickets) {
-            System.out.println(lottoTicket.getLottoNumbers().stream().map(LottoNumber::getNumber).collect(Collectors.toList()));
+            System.out.println(lottoTicket.intgerList());
         }
     }
 
-    private static void printStatistics(Map<WinningInfo, Long> statistics, long purchaseAmount) {
+    private static void printStatistics(LottoResult lottoResult, long purchaseAmount) {
         long totalEarnings = 0;
 
         for (WinningInfo winningInfo : WinningInfo.values()) {
             if (winningInfo != WinningInfo.NONE_MATCHES) {
-                long count = statistics.getOrDefault(winningInfo, 0L);
+
+                Long count = lottoResult.countMatch(winningInfo);
+
                 System.out.println(winningInfo.getMatches() + "개 일치 (" + winningInfo.getReward() + "원)- " + count + "개");
                 totalEarnings += winningInfo.getReward() * count;
             }

@@ -10,12 +10,6 @@ public class LottoTicket {
 
     List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    public List<Integer> intgerList() {
-        return lottoNumbers.stream().
-                map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
-    }
-
     public LottoTicket(Integer... lottoNumbers) {
         this(toLottoNumbers(lottoNumbers));
     }
@@ -53,14 +47,20 @@ public class LottoTicket {
         }
     }
 
-
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public List<Integer> intgerList() {
+        return lottoNumbers.stream().
+                map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
     }
+
 
     public int getNumberOfMatch(List<Integer> winingNumberOfLastWeek) {
         return (int) winingNumberOfLastWeek.stream()
                 .filter(intgerList()::contains)
                 .count();
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 }

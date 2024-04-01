@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoVendingMachine {
 
@@ -20,11 +21,9 @@ public class LottoVendingMachine {
     }
 
     private List<LottoTicket> generate(int quantity) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
-            lottoTickets.add(new LottoTicket());
-        }
-        return lottoTickets;
+        return IntStream.range(0, quantity)
+                .mapToObj(target -> new LottoTicket())
+                .collect(Collectors.toList());
     }
 
     public LottoResult match(List<LottoTicket> lottoTickets, List<Integer> lastWeekLottoNumber) {

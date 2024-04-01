@@ -24,6 +24,6 @@ public class LottoController {
         List<Integer> lastWeekLottoNumber = input.lastWeekLottoNumber();
         LottoResult result = lottoMachine.match(lottoTickets, lastWeekLottoNumber);
 
-        output.printWinningInfos(result.getLottoResult(), money);
+        output.printWinningInfos(result, money);
     }
 }
