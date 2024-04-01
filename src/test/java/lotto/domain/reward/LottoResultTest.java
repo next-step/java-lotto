@@ -24,13 +24,14 @@ class LottoResultTest {
 
     private static Stream<Arguments> lottoResultAndExpectedProfitRate() {
         return Stream.of(
-                Arguments.of(lottoResult(0, 0, 0, 0, 1), 0.0),
-                Arguments.of(lottoResult(0, 0, 0, 1, 0), 5.0),
-                Arguments.of(lottoResult(0, 0, 1, 0, 0), 50.0),
-                Arguments.of(lottoResult(0, 1, 0, 0, 0), 1500.0),
-                Arguments.of(lottoResult(1, 0, 0, 0, 0), 2000000.0),
-                Arguments.of(lottoResult(0, 0, 0, 1, 1), 2.5),
-                Arguments.of(lottoResult(0, 0, 0, 1, 13), 0.35)
+                Arguments.of(lottoResult(0, 0, 0, 0, 0, 1), 0.0),
+                Arguments.of(lottoResult(0, 0, 0, 0, 1, 0), 5.0),
+                Arguments.of(lottoResult(0, 0, 0, 1, 0, 0), 50.0),
+                Arguments.of(lottoResult(0, 0, 1, 0, 0, 0), 1500.0),
+                Arguments.of(lottoResult(0, 1, 0, 0, 0, 0), 30000.0),
+                Arguments.of(lottoResult(1, 0, 0, 0, 0, 0), 2000000.0),
+                Arguments.of(lottoResult(0, 0, 0, 0, 1, 1), 2.5),
+                Arguments.of(lottoResult(0, 0, 0, 0, 1, 13), 0.35)
         );
     }
 

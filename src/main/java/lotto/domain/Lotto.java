@@ -10,11 +10,13 @@ public class Lotto {
     public static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final Set<LottoNumber> numbers;
+    private final LottoNumber bonus;
 
-    public Lotto(final Set<LottoNumber> numbers) {
+    public Lotto(final Set<LottoNumber> numbers, final LottoNumber bonus) {
         validateNumbersHaveSpecifiedSize(numbers);
 
         this.numbers = numbers;
+        this.bonus = bonus;
     }
 
     private void validateNumbersHaveSpecifiedSize(final Set<LottoNumber> numbers) {
