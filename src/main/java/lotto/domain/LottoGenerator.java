@@ -18,7 +18,6 @@ public class LottoGenerator {
     }
 
     public static Lotto createLotto(List<Integer> shuffledLotto) {
-        Collections.sort(shuffledLotto);
         return new Lotto(shuffledLotto);
     }
 
