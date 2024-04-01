@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 public class LottoFactory {
 
     private static final List<Integer> numbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+    private static final int LOTTOS_SIZE = 6;
 
     private LottoFactory() {
     }
@@ -35,10 +36,14 @@ public class LottoFactory {
         return new WinningLottos(numbers, bonusNumber);
     }
 
+    public static boolean isValidLottosSize(int size) {
+        return LOTTOS_SIZE == size;
+    }
+
     private static Lottos createRandomLotto() {
         Collections.shuffle(numbers);
         return createLotto(numbers
-                .subList(0, 6)
+                .subList(0, LOTTOS_SIZE)
                 .stream()
                 .sorted()
                 .collect(Collectors.toUnmodifiableList()));

@@ -1,8 +1,11 @@
 package lottogame.domain;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public final class Number {
+
+    private final static Pattern numberPattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
     private final int value;
 
@@ -17,7 +20,6 @@ public final class Number {
     public static Number from(final String value) {
         validateNumber(value);
         return new Number(Integer.parseInt(value));
-
     }
 
     public Number divide(Number number) {
@@ -45,7 +47,9 @@ public final class Number {
     }
 
     private static void validateNumber(String value) {
-        Integer.parseInt(value);
+        if (!numberPattern.matcher(value).matches()){
+            throw new IllegalArgumentException("양수가 아닙니다.");
+        }
     }
 
     public Number minus(Number number) {
