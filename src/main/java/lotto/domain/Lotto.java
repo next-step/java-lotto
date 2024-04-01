@@ -23,13 +23,16 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 
-    public WinningType findWinningType(List<Integer> others, int bonusNumber) {
+    public WinningType findWinningType(Lotto others, int bonusNumber) {
         return WinningType.valueOf(countHits(others), matchBonus(bonusNumber));
     }
 
-    private long countHits(List<Integer> others) {
-        return others.stream()
+    private long countHits(Lotto others) {
+        return others.getNumbers().stream()
                 .filter(other -> numbers.contains(other))
                 .count();
     }
@@ -49,6 +52,5 @@ public class Lotto {
         Collections.sort(numbers);
         return numbers + "";
     }
-
 
 }

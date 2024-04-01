@@ -19,7 +19,8 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> other = Arrays.asList(1, 2, 3, 10, 11, 12);
         Lotto lotto = new Lotto(numbers);
-        Assertions.assertThat(lotto.findWinningType(other, 0)).isEqualTo(WinningType.HIT_COUNT_3);
+        Lotto otherLotto = new Lotto(other);
+        Assertions.assertThat(lotto.findWinningType(otherLotto, 0)).isEqualTo(WinningType.HIT_COUNT_3);
     }
 
     @DisplayName("로또가 7자리 이상이면 오류이다.")

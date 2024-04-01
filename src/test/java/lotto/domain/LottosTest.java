@@ -14,6 +14,7 @@ public class LottosTest {
     @Test
     void winningStatistic() {
         List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto winner = new Lotto(winNumber);
         Integer bonusNumber = 0;
 
         List<Integer> buyNumber1 = Arrays.asList(1, 2, 3, 5, 6, 7);
@@ -23,7 +24,7 @@ public class LottosTest {
         Lotto lotto2 = new Lotto(buyNumber2);
 
         Lottos lottos = new Lottos(List.of(lotto1, lotto2));
-        Map<WinningType, Long> winningStatic = lottos.winningCount(winNumber, bonusNumber);
+        Map<WinningType, Long> winningStatic = lottos.winningCount(winner, bonusNumber);
 
         Assertions.assertThat(winningStatic.get(WinningType.HIT_COUNT_3)).isEqualTo(1L);
         Assertions.assertThat(winningStatic.get(WinningType.HIT_COUNT_5)).isEqualTo(1L);

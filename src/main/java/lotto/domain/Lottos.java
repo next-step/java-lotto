@@ -12,9 +12,9 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Map<WinningType, Long> winningCount(List<Integer> winningNumbers, int bonusNumber) {
+    public Map<WinningType, Long> winningCount(Lotto winner, int bonusNumber) {
         return this.lottos.stream()
-                .map(lotto -> lotto.findWinningType(winningNumbers, bonusNumber))
+                .map(lotto -> lotto.findWinningType(winner, bonusNumber))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 }
