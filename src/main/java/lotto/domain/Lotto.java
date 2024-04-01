@@ -3,22 +3,23 @@ package lotto.domain;
 import lotto.constant.Constants;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private final List<LottoNumber> lotto;
+    private final Set<LottoNumber> lotto;
 
-    private static List<LottoNumber> toLottoNumber(List<Integer> lottoNumbers) {
-        List<LottoNumber> lotto = new ArrayList<>();
+    private static Set<LottoNumber> toLottoNumber(List<Integer> lottoNumbers) {
+        Set<LottoNumber> lotto = new HashSet<>();
 
         for (int number : lottoNumbers) {
-            lotto.add(new LottoNumber(number));
+            lotto.add(LottoNumber.of(number));
         }
 
         return lotto;
     }
 
     public Lotto(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = toLottoNumber(numbers);
+        Set<LottoNumber> lottoNumbers = toLottoNumber(numbers);
 
         checkLottoSize(lottoNumbers);
         checkDuplicate(lottoNumbers);
@@ -26,19 +27,19 @@ public class Lotto {
         this.lotto = lottoNumbers;
     }
 
-    private void checkDuplicate(List<LottoNumber> lotto) {
-        if (new HashSet<>(lotto).size() != lotto.size()) {
+    private void checkDuplicate(Set<LottoNumber> lotto) {
+        if (lotto.size() < Constants.LOTTO_SIZE) {
             throw new IllegalArgumentException("로또에 중복 숫자가 있습니다.");
         }
     }
 
-    private void checkLottoSize(List<LottoNumber> lotto) {
-        if (lotto.size() != Constants.LOTTO_SIZE) {
+    private void checkLottoSize(Set<LottoNumber> lotto) {
+        if (lotto.size() > Constants.LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 개수는 6개여야 합니다.");
         }
     }
 
-    private List<LottoNumber> getLotto() {
+    private Set<LottoNumber> getLotto() {
         return this.lotto;
     }
 
@@ -46,13 +47,13 @@ public class Lotto {
         int count = 0;
 
         for (LottoNumber number : userLotto.getLotto()) {
-            count += isContainsUserLottoNumber(lotto, number);
+            count += getContainsUserLottoNumber(lotto, number);
         }
 
         return count;
     }
 
-    private int isContainsUserLottoNumber(List<LottoNumber> lotto, LottoNumber number) {
+    private int getContainsUserLottoNumber(Set<LottoNumber> lotto, LottoNumber number) {
         if (lotto.contains(number)) {
             return 1;
         }
@@ -65,7 +66,9 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lotto.toString();
+        List<LottoNumber> lottoList = new ArrayList<>(lotto);
+        lottoList.sort(Comparator.comparingInt(LottoNumber::hashCode));
+        return lottoList.toString();
     }
 
     @Override
