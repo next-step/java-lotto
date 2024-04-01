@@ -4,8 +4,6 @@ import domain.Lotto;
 import domain.MyLotto;
 import domain.WinStatus;
 
-import java.util.ArrayList;
-
 public class LottoOutput {
 
     String[] correctResult;
