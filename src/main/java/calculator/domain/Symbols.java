@@ -19,7 +19,7 @@ public class Symbols {
         return new Symbols(list);
     }
 
-    public List<Symbol> getSymbols() {
-        return symbols;
+    public String of(int index) {
+        return symbols.get(index).getSymbol();
     }
 }

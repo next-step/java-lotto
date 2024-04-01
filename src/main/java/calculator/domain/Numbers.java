@@ -13,7 +13,7 @@ public class Numbers {
 
     public static Numbers create(String[] no) {
         List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < no.length; i+=2) {
+        for (int i = 0; i < no.length; i += 2) {
             list.add(Integer.parseInt(no[i]));
         }
         if (list.isEmpty()) {
@@ -24,5 +24,9 @@ public class Numbers {
 
     public List<Integer> getNumbers() {
         return numbers;
+    }
+  
+    public int of(int index) {
+        return numbers.get(index);
     }
 }

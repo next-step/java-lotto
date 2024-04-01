@@ -22,17 +22,16 @@ public enum OperatorEnum {
         this.operator = operator;
     }
 
-
-    public static DoubleBinaryOperator fromSymbol(String symbol) {
+    public static double calculate(String symbol, double a, int b) {
         switch(symbol) {
             case "+":
-                return ADD.operator;
+                return ADD.operator.applyAsDouble(a, b);
             case "-":
-                return SUBSTRACT.operator;
+                return SUBSTRACT.operator.applyAsDouble(a, b);
             case "*":
-                return MULTIPLY.operator;
+                return MULTIPLY.operator.applyAsDouble(a, b);
             case "/":
-                return DIVIDE.operator;
+                return DIVIDE.operator.applyAsDouble(a, b);
             default:
                 throw new IllegalArgumentException("연산자를 잘못 입력했습니다.");
         }
