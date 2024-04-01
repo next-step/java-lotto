@@ -8,7 +8,7 @@ import java.util.*;
 
 public class LottoMachine {
 
-  private final int lottoPrice = 1000;
+  private static final int lottoPrice = 1000;
   private final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
   private LottoList lottoList;
 
