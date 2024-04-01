@@ -21,9 +21,9 @@ public final class LottoGenerator {
         return lottoGame;
     }
 
-    public static Lottos generateLottos(Fee fee) {
+    public static Lottos generateLottos(LottoFee lottoFee) {
         Lottos lottos = new Lottos();
-        for (int i = 0; i < fee.convertToGameUnit(); i++) {
+        for (int i = 0; i < lottoFee.convertToGameUnit(); i++) {
             lottos.add(generateLotto());
         }
         return lottos;
