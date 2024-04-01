@@ -37,7 +37,9 @@ public enum LottoPricing {
     public static LottoPricing getByMatchCount(int matchCount, boolean isBonus) {
         String key = LottoPricingKey.getKey(matchCount).get(matchCount, isBonus);
         LottoPricing lottoPricing = lottoPricingMappingCache.get(key);
-        if (lottoPricing == null) throw new IllegalArgumentException();
+        if (lottoPricing == null) {
+            throw new IllegalArgumentException("정의되지않은 매칭 개수입니다.");
+        }
         return lottoPricing;
     }
 

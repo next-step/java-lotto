@@ -21,13 +21,13 @@ public class WinningLotto {
 
     private void validateIfNotNull() {
         if (numbers == null || bonusNumber == null){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("당첨 로또 숫자들 또는 보너스 숫자가 null이 아니어야 합니다.");
         }
     }
 
     private void validateIfBonusNumberNotInNumbers() {
         if (numbers.contains(new LottoNumber(bonusNumber))) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("당첨 로또 숫자 안에 보너스 숫자가 포함되지않아야 합니다.");
         }
     }
 

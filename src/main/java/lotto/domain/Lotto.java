@@ -7,7 +7,7 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> numbers) {
         if(numbers == null){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 숫자들은 null이 아니어야 합니다.");
         }
         validateNumbers(numbers);
         this.numbers = numbers;
@@ -20,7 +20,7 @@ public class Lotto {
 
     private void validateSize(List<LottoNumber> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 숫자는 6자리 숫자들이어야 합니다.");
         }
     }
 
@@ -29,7 +29,7 @@ public class Lotto {
                 .distinct()
                 .count();
         if (numbers.size() != count) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 숫자들은 서로 중복일 수 없습니다.");
         }
     }
 
