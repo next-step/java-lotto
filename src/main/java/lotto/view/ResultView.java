@@ -13,9 +13,8 @@ public class ResultView {
 
     public void printOfBuyLotto(LottoGame lottoGame) {
         System.out.println(lottoGame.countOfLotto() + BUY_LOTTO_MESSAGE);
-        List<Lotto> lottos = lottoGame.getLottos();
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto);
+        for (Lotto lotto : lottoGame.getLottos()) {
+            System.out.println(lotto.sortNumbers());
         }
     }
 
