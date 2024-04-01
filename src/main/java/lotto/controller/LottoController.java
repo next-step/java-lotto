@@ -18,7 +18,7 @@ public class LottoController {
         int seedMoney = InputView.inputSeedMoney();
         int manualLottoCount = InputView.inputManualCount();
         List<List<Integer>> manualLottoNumbers = InputView.inputLottosNumbers(manualLottoCount);
-
+        int remainMoney = lottoService.buyManualLotto(seedMoney, manualLottoCount, manualLottoNumbers);
 
         ResultView.viewLottos(lottoService.buyLottos(seedMoney));
         List<Integer> winningNumbers = InputView.inputWinningNumbers();
