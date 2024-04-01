@@ -18,6 +18,8 @@ class RankTest {
 
     static Stream<Arguments> countAndRank() {
         return Stream.of(
+                Arguments.arguments(7, true, Rank.EMPTY),
+                Arguments.arguments(7, false, Rank.EMPTY),
                 Arguments.arguments(6, true, Rank.FIRST),
                 Arguments.arguments(6, false, Rank.FIRST),
                 Arguments.arguments(5, true, Rank.SECOND),
