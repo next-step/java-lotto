@@ -18,23 +18,18 @@ import java.util.List;
 public class LottoTest {
 
     @Test
-    @DisplayName("로또 구매 (자동)")
+    @DisplayName("로또 구매 (자동) (1) 6가지 숫자가 맞는지? (2) 1~45 안에 들어가는 값들인지?")
     public void lotto() {
         // given
         Lotto lotto = new Lotto();
-        List<Integer> lottoNumber = lotto.lottoNumber;
-        /*
-        List<Integer> lottoNumber = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            lottoNumber.add(i);
-        }
-        */
+        List<Integer> lottoNumber = lotto.getLottoNumber();
+        List<Integer> totalLottoNumber = lotto.getTotalLottoNumber();
 
         // when, then
-        int lottoLength = lotto.get().length;
-        Assertions.assertThat(lottoLength).isEqaulTo(6);
-        for (int i = 0; i < lotto.lottoLength; i++) {
-            Assertions.assertThat(lottoNumber.contains( lotto.get().get(i) )).isEqaulTo(true);
+        int lottoLength = lottoNumber.size();
+        Assertions.assertThat(lottoLength).isEqualTo(6);
+        for (int i = 0; i < lottoLength; i++) {
+            Assertions.assertThat(totalLottoNumber.contains( lottoNumber.get(i) )).isEqualTo(true);
         }
     }
 
@@ -42,7 +37,7 @@ public class LottoTest {
     @DisplayName("lotto.isWinning()")
     public void isPrize() {
         // given
-        Lotto lotto = new Lotto(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Lotto lotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         List<Integer> winningNumber1st = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         List<Integer> winningNumber3rd = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7));
         List<Integer> winningNumber4th = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 7, 8));
@@ -54,6 +49,6 @@ public class LottoTest {
         Assertions.assertThat(lotto.isPrize(winningNumber3rd)).isEqualTo(3);
         Assertions.assertThat(lotto.isPrize(winningNumber4th)).isEqualTo(4);
         Assertions.assertThat(lotto.isPrize(winningNumber5th)).isEqualTo(5);
-        Assertions.assertThat(lotto.isPrize(noWinningNumber)).isEqualTo(6));
+        Assertions.assertThat(lotto.isPrize(noWinningNumber)).isEqualTo(6);
     }
 }

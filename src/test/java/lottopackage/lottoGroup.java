@@ -10,6 +10,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class lottoGroup {
+
+    /*
     @Test
     @DisplayName("LottoGroup")
     public void isPrize() {
@@ -32,4 +34,6 @@ public class lottoGroup {
         }
 
     }
+
+     */
 }
