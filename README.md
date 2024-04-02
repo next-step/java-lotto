@@ -8,6 +8,7 @@
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
+<<<<<<< HEAD
 ## 로또 3단계 피드백
 * Lotto의 isContainsUserLottoNumber 리턴 타입 boolean으로 수정 (Done. 삼항연산자 활용)
 * LottoNumber에 final 키워드 활용 (Done)
@@ -22,3 +23,15 @@
 * 수동 구매 수와 자동 구매 수 계산 -> LottoShop
 * 수동 로또 리스트와 자동 로또 리스트 생성 과정 분리 -> LottoGenerator
 * 수동 구매 수와 자동 구매 수 출력 -> ResultView
+=======
+## To-Do - 로또(3단계)
+* 당첨번호 생성
+* 보너스 볼 입력
+* 로또와 당첨번호, 보너스 일치 여부 판단
+* 수익률 계산
+* 구매 금액에 따른 구매 개수 계산
+* 구매 개수만큼의 로또 생성
+* 로또 생성 -> 중복 숫자가 있는지, 개수가 6개인지 확인, 로또 번호가 1~45 사이 값인지
+* 로또 번호 -> int에서 LottoNumber 형태로 변경
+* LottoMatch의 match 메소드에서 당첨번호&보너스번호 묶어서 한 클래스로 만듦으로써 인자 수 개선
+>>>>>>> heoseungjun
