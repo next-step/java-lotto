@@ -5,24 +5,23 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
-	public static final int MATCH_COUNT_MIN = 3;
-	private final Map<Long, Integer> matchedMap;
+	private final Map<Prize, Integer> matchedMap;
 	private final double rate;
 
 	public LottoResult(WinningNumbers winningNumbers, List<Lotto> lottos, LottoPrice lottoPrice) {
 		this.matchedMap = new HashMap<>();
 
-		lottos.stream()
-				.map(winningNumbers::getMatchedCount)
-				.filter(count -> count >= MATCH_COUNT_MIN)
-				.forEach(count -> matchedMap.put(count, matchedMap.getOrDefault(count, 0) + 1));
+		lottos.forEach(lotto -> {
+					Prize prize = Prize.from(winningNumbers.getMatchedCount(lotto), winningNumbers.hasBonusNumber(lotto));
+					matchedMap.put(prize, matchedMap.getOrDefault(prize, 0) + 1);
+				});
 
 		this.rate = calculateRate(lottoPrice);
 	}
 
 	private double calculateRate(LottoPrice lottoPrice) {
 		int prize = matchedMap.keySet().stream()
-				.mapToInt(key -> Prize.findPriceByCount(key) * matchedMap.get(key))
+				.mapToInt(key -> key.getPrice() * matchedMap.get(key))
 				.sum();
 
 		return (double) prize / lottoPrice.getPrice();
@@ -32,8 +31,8 @@ public class LottoResult {
 		return rate;
 	}
 
-	public int getNumberOfMatchedLotto(Long matchedCount) {
-		return matchedMap.getOrDefault(matchedCount, 0);
+	public int getNumberOfMatchedLotto(Prize prize) {
+		return matchedMap.getOrDefault(prize, 0);
 	}
 
 	public boolean isLoss() {
