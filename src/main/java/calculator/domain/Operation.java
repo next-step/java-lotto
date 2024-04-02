@@ -9,7 +9,10 @@ public enum Operation {
     PLUS("+", (a,b) -> a + b),
     MULTIPLY("*", (a,b) -> a * b),
     SUBTRACT("-", (a,b) -> a - b),
-    DIVIDE("/", (a,b) -> a / b),
+    DIVIDE("/", (a,b) -> {
+        validateDivideZero(b);
+        return a / b;
+    }),
     UNKNOWN(null, null);
 
     private final String operation;
@@ -22,6 +25,12 @@ public enum Operation {
 
     private String getOperation() {
         return operation;
+    }
+
+    private static void validateDivideZero(double denominator) {
+        if (denominator == 0){
+            throw new IllegalArgumentException("0을 나눌수 없습니다.");
+        }
     }
 
     public static Operation findOperator(String operator) {

@@ -6,17 +6,26 @@ import java.util.List;
 
 public class Lottos {
 
-    private static List<Lotto> lottos;
+    private static List<Lotto> lottoNumbers;
 
     public Lottos() {
-        this.lottos = new ArrayList<>();
+        this.lottoNumbers = new ArrayList<>();
     }
 
     public void add(Lotto lotto) {
-        lottos.add(lotto);
+        Lottos.lottoNumbers.add(lotto);
     }
 
     public List<Lotto> getValue() {
-        return Collections.unmodifiableList(lottos);
+        return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public LottoResult match(WinningLotto winningLottoNumber) {
+        LottoResult lottoResult = new LottoResult();
+        for (Lotto lotto : Lottos.lottoNumbers){
+            LottoRank lottoRank  = winningLottoNumber.findRank(lotto);
+            lottoResult.add(lottoRank);
+        }
+        return lottoResult;
     }
 }

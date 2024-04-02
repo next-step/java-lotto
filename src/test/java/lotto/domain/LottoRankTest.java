@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.domain.LottoRank;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +11,7 @@ public class LottoRankTest {
     @Test
     @DisplayName("당첨번호 매칭")
     void 당첨번호_매칭() {
-        LottoRank result = LottoRank.valueOfMatchCount(6);
+        LottoRank result = LottoRank.of(6, false);
         assertThat(result).isEqualTo(LottoRank.FIRST);
     }
 }
