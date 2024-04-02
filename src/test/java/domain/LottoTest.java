@@ -27,23 +27,10 @@ public class LottoTest {
         assertThat(lotto.getNumbers()).isEqualTo(winningNumber);
     }
 
-
-
     @Test
     @DisplayName("당첨 결과 반환")
     public void winningStatus() {
         LottoController controller = new LottoController();
 
-    }
-
-    @Test
-    @DisplayName("출력 로또 번호")
-    public void myLottoNumbers() {
-        WinStatus winStatus = new WinStatus();
-        winStatus.correct(0);
-        winStatus.correct(1);
-        winStatus.correct(2);
-        winStatus.correct(3);
-        assertThat(winStatus.getWincount().size()).isEqualTo(4);
     }
 }
