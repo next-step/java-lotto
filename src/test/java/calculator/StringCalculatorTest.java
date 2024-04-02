@@ -39,7 +39,7 @@ public class StringCalculatorTest {
         String expression = "2 + 3 -";
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new StringCalculator().calculate(expression))
-                    .withMessageMatching("입력한 식이 잘못되었습니다.");
+                .withMessageMatching("입력한 식이 잘못되었습니다.");
     }
 
     @Test
