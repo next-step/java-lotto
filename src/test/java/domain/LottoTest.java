@@ -16,7 +16,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoTest {
-
     @Test
     @DisplayName("로또 번호 확인")
     public void list() {
