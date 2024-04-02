@@ -1,33 +1,41 @@
 package lotto.domain;
 
-import lotto.constant.Constant;
+import lotto.constant.Constants;
 
-import java.util.Objects;
-import java.util.Random;
+import java.util.HashMap;
 
 public class LottoNumber {
-    private final int number;
+    private int number;
+    private static HashMap<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
-    public LottoNumber(int number) {
-        checkRange(number);
-        this.number = number;
-    }
-
-    private void checkRange(int number) {
-        if (number < Constant.MIN_LOTTO || number > Constant.MAX_LOTTO) {
-            throw new IllegalArgumentException("로또 숫자는 1 이상 45 이하여야 합니다.");
+    static {
+        for (int num = Constants.MIN_LOTTO; num <= Constants.MAX_LOTTO; num++ ) {
+            lottoNumbers.put(num, new LottoNumber(num));
         }
     }
 
-    public int getLottoNumber() {
-        return this.number;
+    private LottoNumber(final int number) {
+        this.number = number;
+    }
+
+    public static LottoNumber of(final int number) {
+        LottoNumber lottoNumber = lottoNumbers.get(number);
+        if (lottoNumber == null) {
+            throw new IllegalArgumentException("로또는 1~45 사이의 값이어야 합니다.");
+        }
+        return lottoNumber;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof LottoNumber)) return false;
-        LottoNumber that = (LottoNumber) o;
+    public String toString() {
+        return String.valueOf(number);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof LottoNumber)) return false;
+        LottoNumber that = (LottoNumber) object;
         return number == that.number;
     }
 

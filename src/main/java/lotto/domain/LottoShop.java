@@ -1,16 +1,19 @@
 package lotto.domain;
 
-public class LottoShop {
-    private static final int LOTTO_PRICE = 1000;
+import lotto.constant.Constants;
 
-    public static Lottos purchaseTicket(int money) {
-        if (money % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("구매 금액은 1000 단위로 입력해야 합니다.");
+public class LottoShop {
+
+    private int money;
+
+    public LottoShop(final int money) {
+        if (money % Constants.LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException("구매 금액은 1000원 단위로 입력해주세요.");
         }
-        return LottoGenerator.lotteryTickets(countPurchase(money));
+        this.money = money;
     }
 
-    public static int countPurchase(int money) {
-        return money / LOTTO_PRICE;
+    public int calculatePurchaseCount() {
+        return this.money / Constants.LOTTO_PRICE;
     }
 }
