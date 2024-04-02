@@ -6,11 +6,15 @@ public class LottoNumber {
 
     private static final int NUMBER_MIN = 1;
     private static final int NUMBER_MAX = 45;
-
     private final int number;
 
-    public LottoNumber(int number) {
+
+    public static LottoNumber from(int number) {
         checkBoundaryNumbers(number);
+        return LottoNumberCache.getNumber(number);
+    }
+
+    LottoNumber(int number) {
         this.number = number;
     }
 
@@ -46,4 +50,5 @@ public class LottoNumber {
     public int hashCode() {
         return Objects.hash(number);
     }
+
 }
