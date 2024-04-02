@@ -7,10 +7,15 @@ import lotto.domain.Rank;
 import java.util.HashMap;
 
 public class ResultView {
+    public static void printPassiveAndAutoCount(int passive, int auto) {
+        System.out.println("수동으로 " + passive + "장, 자동으로 " +  auto + "장을 구매했습니다.");
+    }
+
     public static void printLotto(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.toString());
         }
+        System.out.println();
     }
 
     public static void printResult(HashMap<Rank, Integer> matchResult, double revenue) {
