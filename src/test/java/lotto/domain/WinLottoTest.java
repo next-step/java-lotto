@@ -15,9 +15,9 @@ public class WinLottoTest {
         WinLotto winLotto = new WinLotto(winningNumber, 43);
         for (int i = 0; i < winLotto.getTicket().getNumbers().size(); i++) {
             assertThat(winLotto.getTicket().getNumbers().get(i)).isEqualTo(
-                new LottoNumber(winningNumber.get(i)));
+                LottoNumber.from(winningNumber.get(i)));
         }
-        assertThat(winLotto.getBonusNumber()).isEqualTo(new LottoNumber(43));
+        assertThat(winLotto.getBonusNumber()).isEqualTo(LottoNumber.from(43));
     }
 
     @Test

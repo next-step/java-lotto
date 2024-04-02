@@ -18,7 +18,7 @@ public class LottoTicket {
     public static LottoTicket createTicket(List<Integer> inputs) {
         List<LottoNumber> lottoNumbers = inputs.stream()
             .sorted()
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toUnmodifiableList());
         return new LottoTicket(lottoNumbers);
     }
@@ -31,7 +31,7 @@ public class LottoTicket {
 
     private static void checkSizeNumbers(List<LottoNumber> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException("로또 생성을 위해서는 6개의 숫자가 필요합니다.");
+            throw new IllegalArgumentException("6개의 숫자가 필요합니다.");
         }
     }
 
