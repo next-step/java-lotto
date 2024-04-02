@@ -45,3 +45,14 @@ step 3
   * add bonus ball in WinningLotto
   * modified WinPrizeType.SECOND deal with bonusNumber
   * refactored if() -> if () based on coding convention
+
+step 4
+* feature/manual-pick
+  * add manual-pick mode
+    * refactored lottoTickets into manualTickets & quickTickets
+      * LottoTickets Factory (LottoTicketsDispenser) created
+      * both(manual&quick) test codes are created
+      * lottoTickets test codes and related test codes are modified
+    * InputView and ResultView modified
+    * optimized imports
+    * unchanged naming rules changed (lottery -> lotto)
