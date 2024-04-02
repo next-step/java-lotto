@@ -1,8 +1,11 @@
 package controller;
 
-import domain.LottoMachine;
+import domain.lotto.vo.LottoNumber;
+import domain.machine.LottoMachine;
+import domain.lotto.vo.WinNumbers;
 import view.InputView;
 import view.ResultView;
+import java.util.List;
 
 public class Main {
 
@@ -19,6 +22,9 @@ public class Main {
     lottoMachine.getAllLottoList().forEach(resultView::print);
 
     resultView.print("지난 주 당첨 번호를 입력해 주세요.");
-    resultView.printLottoResult(lottoMachine.getLottoResult(inputView.inputIntegerList()));
+    List<LottoNumber> primaryNumbers = inputView.inputLottoNumberList();
+    resultView.print("보너스 볼을 입력해 주세요.");
+    LottoNumber bonusNumber = LottoNumber.of(inputView.inputInteger());
+    resultView.printLottoResult(lottoMachine.getLottoResult(new WinNumbers(primaryNumbers, bonusNumber)));
   }
 }
