@@ -4,14 +4,18 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ParsedFormula {
+    private final int INITIAL_VALUE_INDEX = 0;
+
+    private Integer currentResult;
     private final List<String> VALID_OPERANDS = List.of("+", "-", "*", "/");
     private final List<String> parsedFormula;
 
     ParsedFormula(List<String> parsedFormula) {
         this.parsedFormula = parsedFormula;
+        this.currentResult = this.getOperand(INITIAL_VALUE_INDEX);
     }
 
-    ParsedFormula(String formula) {
+    public ParsedFormula(String formula) {
         this(Arrays.asList(formula.split(" ")));
     }
 
@@ -33,6 +37,14 @@ public class ParsedFormula {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("피연산자는 정수값이어야 합니다.");
         }
+    }
+
+    public Integer getCurrentResult() {
+        return currentResult;
+    }
+
+    public void updateCurrentResult(int result) {
+        this.currentResult = result;
     }
 
     public int getLength() {
