@@ -1,5 +1,6 @@
 package lotto.domain.reward;
 
+import static lotto.domain.reward.LottoRank.FIFTH;
 import static lotto.domain.reward.LottoRank.FIRST;
 import static lotto.domain.reward.LottoRank.FOURTH;
 import static lotto.domain.reward.LottoRank.NONE;
@@ -20,39 +21,37 @@ class LottoRankTest {
 
     @ParameterizedTest
     @MethodSource("rankMatchingCounts")
-    @DisplayName("당첨 번호 매칭 개수에 따라 순위를 반환한다.")
-    void LottoRank_MatchingCount(final int matchingCount, final LottoRank expectedRank) {
-        assertThat(LottoRank.from(matchingCount))
+    @DisplayName("당첨 번호 매칭 개수와 보너스 번호 일치 여부에 따라 순위를 반환한다.")
+    void LottoRank_MatchingCountAndBonus(
+            final int matchingCount,
+            final boolean isMatchedBonus,
+            final LottoRank expectedRank
+    ) {
+        assertThat(LottoRank.from(matchingCount, isMatchedBonus))
                 .isEqualTo(expectedRank);
     }
 
     private static Stream<Arguments> rankMatchingCounts() {
         return Stream.of(
-                Arguments.of(0, NONE),
-                Arguments.of(1, NONE),
-                Arguments.of(2, NONE),
-                Arguments.of(3, FOURTH),
-                Arguments.of(4, THIRD),
-                Arguments.of(5, SECOND),
-                Arguments.of(6, FIRST)
+                Arguments.of(2, false, NONE),
+                Arguments.of(2, true, NONE),
+                Arguments.of(3, false, FIFTH),
+                Arguments.of(3, true, FIFTH),
+                Arguments.of(4, false, FOURTH),
+                Arguments.of(4, true, FOURTH),
+                Arguments.of(5, false, THIRD),
+                Arguments.of(5, true, SECOND),
+                Arguments.of(6, false, FIRST),
+                Arguments.of(6, true, FIRST)
         );
     }
 
     @Test
-    @DisplayName("당첨 번호 매칭 개수가 최소 기준보다 적은 경우 예외를 던진다.")
+    @DisplayName("당첨 번호 매칭 개수가 최대 기준보다 많거나, 최소 기준보다 적은 경우 예외를 던진다.")
     void LottoRank_MatchingCountLessThanMinimum_Exception() {
-        final int matchingCountLessThanMinimum = NONE.matchingCount() - 1;
-
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoRank.from(matchingCountLessThanMinimum));
-    }
-
-    @Test
-    @DisplayName("당첨 번호 매칭 개수가 최대 기준보다 많은 경우 예외를 던진다.")
-    void LottoRank_MatchingCountMoreThanMaximum_Exception() {
-        final int matchingCountMoreThanMaximum = FIRST.matchingCount() + 1;
-
+                .isThrownBy(() -> LottoRank.from(FIRST.matchingCount() + 1, false));
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoRank.from(matchingCountMoreThanMaximum));
+                .isThrownBy(() -> LottoRank.from(NONE.matchingCount() - 1, false));
     }
 }

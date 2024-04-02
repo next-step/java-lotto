@@ -24,7 +24,7 @@ public class RandomLottoNumbersPicker implements LottoNumbersPicker {
 
         return numbersRange.stream()
                 .limit(LOTTO_NUMBERS_SIZE)
-                .map(LottoNumber::from)
+                .map(LottoNumber::new)
                 .collect(Collectors.toUnmodifiableSet());
     }
 }

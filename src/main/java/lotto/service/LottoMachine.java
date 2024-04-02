@@ -7,6 +7,7 @@ import lotto.domain.publish.LottoCalculator;
 import lotto.domain.publish.LottoGenerator;
 import lotto.domain.reward.LottoJudge;
 import lotto.domain.reward.LottoResult;
+import lotto.domain.reward.WinningLotto;
 
 public class LottoMachine {
 
@@ -30,9 +31,7 @@ public class LottoMachine {
         return lottoGenerator.generateLottos(quantity);
     }
 
-    public LottoResult judge(final List<Lotto> lottos, final int[] winningNumbers) {
-        final Lotto winningLotto = Lotto.from(winningNumbers);
-
+    public LottoResult judge(final List<Lotto> lottos, final WinningLotto winningLotto) {
         return lottoJudge.judge(lottos, winningLotto);
     }
 }

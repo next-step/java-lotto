@@ -3,7 +3,7 @@ package lotto.domain.publish;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
@@ -21,8 +21,8 @@ public class LottoGenerator {
     public List<Lotto> generateLottos(final int quantity) {
         validateQuantityIsMoreThanMinimum(quantity);
 
-        return IntStream.rangeClosed(1, quantity)
-                .mapToObj(i -> generate())
+        return Stream.generate(this::generateLotto)
+                .limit(quantity)
                 .collect(Collectors.toUnmodifiableList());
     }
 
@@ -32,9 +32,9 @@ public class LottoGenerator {
         }
     }
 
-    private Lotto generate() {
+    private Lotto generateLotto() {
         final Set<LottoNumber> lottoNumbers = this.lottoNumbersPicker.pick();
 
-        return Lotto.from(lottoNumbers);
+        return new Lotto(lottoNumbers);
     }
 }
