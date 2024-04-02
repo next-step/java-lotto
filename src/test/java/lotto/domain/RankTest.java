@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoMatchResultTest {
+public class RankTest {
     @Test
     void put() {
         Rank.putMatchResult(Rank.FIRST);
