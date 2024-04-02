@@ -5,8 +5,8 @@ import lotto.constant.Constants;
 import java.util.HashMap;
 
 public class LottoNumber {
-    private int number;
-    private static HashMap<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    private final int number;
+    private static final HashMap<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
     static {
         for (int num = Constants.MIN_LOTTO; num <= Constants.MAX_LOTTO; num++ ) {
