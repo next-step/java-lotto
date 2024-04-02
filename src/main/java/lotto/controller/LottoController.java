@@ -21,7 +21,8 @@ public class LottoController {
             Rank.putMatchResult(LottoMatch.match(lotto, new WinningLotto(winNumbers, bonus)));
         }
 
+        LottoRevenue lottoRevenue = new LottoRevenue();
         HashMap<Rank, Integer> matchResult = Rank.getMatchResult();
-        ResultView.printResult(matchResult, LottoRevenue.calculateRevenue(money, LottoRevenue.revenueTotal(matchResult)));
+        ResultView.printResult(matchResult, lottoRevenue.calculateRevenue(money, lottoRevenue.revenueTotal(matchResult)));
     }
 }
