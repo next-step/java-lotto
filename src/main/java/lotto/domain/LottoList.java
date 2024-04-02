@@ -16,7 +16,7 @@ public class LottoList {
     public List<String> getLottoTextList(){
         return lottos.stream()
                 .map(Lotto::toString)
-                .collect(Collectors.toUnmodifiableList());
+                .collect(Collectors.toList());
     }
 
     public int size(){
