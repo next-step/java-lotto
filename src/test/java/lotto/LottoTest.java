@@ -27,7 +27,7 @@ class LottoTest {
 
         Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
 
-        assertThat(lotto.containsNumber(LottoNumber.of(5))).isTrue();
+        assertThat(lotto.containsNumber(LottoNumber.from(5))).isTrue();
     }
 
 

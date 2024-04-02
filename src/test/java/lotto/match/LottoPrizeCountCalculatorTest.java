@@ -19,7 +19,7 @@ class LottoPrizeCountCalculatorTest {
     @DisplayName("로또와 정답지를 기반으로 결과를 반환한다.")
     void getLottoPrizeCount() {
 
-        AnswerSheet answerSheet = new AnswerSheet(new Lotto(1, 2, 3, 4, 5, 6), LottoNumber.of(7));
+        AnswerSheet answerSheet = new AnswerSheet(new Lotto(1, 2, 3, 4, 5, 6), LottoNumber.from(7));
         LottoList lottoList = new LottoList(List.of(new Lotto(1, 2, 3, 4, 8, 9)));
 
         LottoPrizeCountCalculator calculator = new LottoPrizeCountCalculator(lottoList, answerSheet);

@@ -29,7 +29,7 @@ public class Lotto {
     }
 
     private static List<LottoNumber> toLottoNumbers(Integer ... numbers){
-        return Arrays.stream(numbers).map(LottoNumber::of).collect(Collectors.toUnmodifiableList());
+        return Arrays.stream(numbers).map(LottoNumber::from).collect(Collectors.toUnmodifiableList());
     }
 
     public Long countMatchNumbers(Lotto answerSheetNumbers) {

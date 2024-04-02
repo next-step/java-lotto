@@ -22,7 +22,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number  = number;
     }
 
-    public static LottoNumber of(int number){
+    public static LottoNumber from(int number){
         if(number < LOTTO_START_INDEX || number > LOTTO_END_INDEX){
             throw new IllegalArgumentException(String.format("Lotto 의 범위를 벗어났습니다 : %d",number));
         }

@@ -21,7 +21,7 @@ public class LottoMaker {
     public static List<LottoNumber> convertTextToLotto(String numbers) {
         return Arrays.stream(numbers.split(SPLIT_TOKEN))
                 .mapToInt(Integer::parseInt)
-                .mapToObj(LottoNumber::of)
+                .mapToObj(LottoNumber::from)
                 .collect(Collectors.toUnmodifiableList());
     }
     public static List<Lotto> createAutoLotto(int count) {
@@ -35,7 +35,7 @@ public class LottoMaker {
         return lottoNumbers.stream()
                 .map(numbers -> Arrays.stream(numbers.split(SPLIT_TOKEN))
                         .mapToInt(Integer::parseInt)
-                        .mapToObj(LottoNumber::of)
+                        .mapToObj(LottoNumber::from)
                         .collect(Collectors.toList()))
                 .map(Lotto::new)
                 .collect(Collectors.toList());
@@ -46,7 +46,7 @@ public class LottoMaker {
                 .distinct()
                 .limit(LOTTO_NUMBER_COUNT)
                 .boxed()
-                .map(LottoNumber::of)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList());
     }
 

@@ -29,7 +29,7 @@ public class LottoService {
 
     public AnswerSheet getAnswerSheet(String answerSheet, String bonusNumberText) {
         Lotto answerLotto = new Lotto(LottoMaker.convertTextToLotto(answerSheet));
-        LottoNumber bonusNumber = LottoNumber.of(Integer.parseInt(bonusNumberText));
+        LottoNumber bonusNumber = LottoNumber.from(Integer.parseInt(bonusNumberText));
 
         return new AnswerSheet(answerLotto, bonusNumber);
     }
