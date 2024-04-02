@@ -1,4 +1,4 @@
-package domain;
+package Calculator;
 
 import java.util.Arrays;
 

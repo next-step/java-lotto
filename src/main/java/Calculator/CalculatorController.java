@@ -1,10 +1,6 @@
-package controller;
-
-import domain.Calculator;
-import view.Result;
+package Calculator;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class CalculatorController {
 
