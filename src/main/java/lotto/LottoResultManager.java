@@ -19,7 +19,7 @@ public class LottoResultManager {
         calculateLottoTotalResult(ticketCollection, winLotto);
     }
 
-    private Map<LottoPrice, Integer> calculateLottoTotalResult(
+    private void calculateLottoTotalResult(
         LottoTicketCollection ticketCollection,
         WinLotto lotto) {
         for (LottoTicket manualTicket : ticketCollection.getManualTickets()) {
@@ -31,9 +31,8 @@ public class LottoResultManager {
             LottoPrice price = lotto.price(autoTicket);
             lottoResult.put(price, lottoResult.getOrDefault(price, 0) + 1);
         }
-        return lottoResult;
     }
-    
+
     public double calculateReturnRate() {
         double winningMoney = 0;
         for (Map.Entry<LottoPrice, Integer> item : lottoResult.entrySet()) {
