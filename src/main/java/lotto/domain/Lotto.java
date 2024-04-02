@@ -47,17 +47,14 @@ public class Lotto {
         int count = 0;
 
         for (LottoNumber number : userLotto.getLotto()) {
-            count += getContainsUserLottoNumber(lotto, number);
+            count += isContainsUserLottoNumber(lotto, number) ? 1 : 0;
         }
 
         return count;
     }
 
-    private int getContainsUserLottoNumber(Set<LottoNumber> lotto, LottoNumber number) {
-        if (lotto.contains(number)) {
-            return 1;
-        }
-        return 0;
+    private boolean isContainsUserLottoNumber(Set<LottoNumber> lotto, LottoNumber number) {
+        return lotto.contains(number);
     }
 
     public boolean isContainsBonus(LottoNumber bonusNumber) {
