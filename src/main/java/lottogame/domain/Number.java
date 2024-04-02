@@ -3,7 +3,7 @@ package lottogame.domain;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-public final class Number {
+public final class Number implements Comparable<Number> {
 
     private final static Pattern numberPattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
@@ -58,6 +58,11 @@ public final class Number {
 
     public boolean isLessThan(Number number) {
         return value < number.value;
+    }
+
+    @Override
+    public int compareTo(Number o) {
+        return Integer.compare(value, o.value);
     }
 
     @Override

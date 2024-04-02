@@ -35,4 +35,8 @@ public class Money {
     public double toTwoDecimal() {
         return value.toTwoDecimal();
     }
+
+    public Double toDouble() {
+        return value;
+    }
 }

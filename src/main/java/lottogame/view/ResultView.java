@@ -3,6 +3,7 @@ package lottogame.view;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lottogame.domain.Double;
 import lottogame.domain.LottoNumber;
 import lottogame.domain.Lottos;
 import lottogame.domain.Number;
@@ -36,10 +37,10 @@ public class ResultView {
         printRanks(makeLottoResult(ranks));
     }
 
-    public static void printReturnOfRate(double returnOfRate) {
+    public static void printReturnOfRate(Double returnOfRate) {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format(RETURN_OF_RATE_MESSAGE_FORMAT, returnOfRate));
-        if (returnOfRate < 1) {
+        sb.append(String.format(RETURN_OF_RATE_MESSAGE_FORMAT, returnOfRate.toTwoDecimal()));
+        if (returnOfRate.isLessThen(1)) {
             sb.append(RETURN_OF_RATE_MESSAGE_INFORMATION);
         }
         System.out.println(sb);

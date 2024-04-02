@@ -28,10 +28,10 @@ class LottoFactoryTest {
 
     @Test
     void 수동입력_로또_생성() {
-        List<List<Integer>> numbers = List.of(
-                List.of(1,2,3,4,5,6),
-                List.of(1,2,3,4,5,7),
-                List.of(1,2,3,4,5,9)
+        List<List<Number>> numbers = List.of(
+                List.of(Number.from(1),Number.from(2),Number.from(3),Number.from(4),Number.from(5),Number.from(6)),
+                List.of(Number.from(1),Number.from(2),Number.from(3),Number.from(4),Number.from(5),Number.from(7)),
+                List.of(Number.from(1),Number.from(2),Number.from(3),Number.from(4),Number.from(5),Number.from(9))
         );
         int expected = 3;
 

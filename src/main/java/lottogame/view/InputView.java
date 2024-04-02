@@ -77,6 +77,7 @@ public class InputView {
 
     private static List<Number> convertNumbersToList() {
         List<Number> numbers =  Stream.of(inputValue().split(","))
+                .map(String::trim)
                 .map(Number::from)
                 .collect(Collectors.toList());
 
@@ -92,6 +93,6 @@ public class InputView {
     }
 
     private static Number inputNumber() {
-        return Number.from(inputValue());
+        return Number.from(inputValue().trim());
     }
 }

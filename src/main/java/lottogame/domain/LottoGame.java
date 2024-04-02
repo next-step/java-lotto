@@ -6,11 +6,10 @@ import java.util.List;
 public class LottoGame {
     private static final Money price = Money.from(1_000);
 
-    public double calculateReturnOfRate(WinningLottos winnerLotto, List<Lottos> lottos) {
+    public Double calculateReturnOfRate(WinningLottos winnerLotto, List<Lottos> lottos) {
         Money purchaseAmount = calculatePurchaseAmount(lottos);
         Money sumOfPrize = calculateSumOfPrize(winnerLotto, lottos);
-        Money result = sumOfPrize.divide(purchaseAmount);
-        return result.toTwoDecimal();
+        return sumOfPrize.divide(purchaseAmount).toDouble();
     }
 
     public List<Rank> checkRanks(WinningLottos winnerLotto, List<Lottos> lottos) {

@@ -30,4 +30,8 @@ public final class Double {
     public double toTwoDecimal() {
         return Math.floor(value * 100) / 100;
     }
+
+    public boolean isLessThen(int value) {
+        return this.value < value;
+    }
 }
