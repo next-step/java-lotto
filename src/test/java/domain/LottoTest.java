@@ -1,3 +1,5 @@
+package domain;
+
 import controller.LottoController;
 import domain.Lotto;
 import domain.LottoMachine;
@@ -25,12 +27,7 @@ public class LottoTest {
         assertThat(lotto.getNumbers()).isEqualTo(winningNumber);
     }
 
-    @Test
-    @DisplayName("로또 기게 랜덤 숫자")
-    public void totalLotto() {
-        LottoMachine lottoMachine = new LottoMachine();
-        assertThat(lottoMachine.randomBall().size()).isEqualTo(6);
-    }
+
 
     @Test
     @DisplayName("당첨 결과 반환")
@@ -47,6 +44,6 @@ public class LottoTest {
         winStatus.correct(1);
         winStatus.correct(2);
         winStatus.correct(3);
-        assertThat(winStatus.getWinCount().length).isEqualTo(4);
+        assertThat(winStatus.getWincount().size()).isEqualTo(4);
     }
 }

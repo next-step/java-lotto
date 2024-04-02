@@ -1,19 +1,27 @@
 package domain;
 
-public class WinStatus {
+import java.util.ArrayList;
+import java.util.List;
 
-    private static int[] winCount;
+public class WinStatus {
+    private static List<Integer> winCount;;
+    private static final int VALID_WIN_COUNT = 3;
 
     public void correct(int count) {
-        if (count >= 3)
-            winCount[count - 3]++;
+        if (count >= VALID_WIN_COUNT) {
+            int index = count - VALID_WIN_COUNT;
+            winCount.set(index, winCount.get(index) + 1);
+        }
     }
 
     public WinStatus() {
-        winCount = new int[4];
+        winCount = new ArrayList<>();
+        for (int i = 0; i < VALID_WIN_COUNT; i++) {
+            winCount.add(0);
+        }
     }
 
-    public int[] getWinCount() {
+    public List<Integer> getWincount() {
         return winCount;
     }
 }

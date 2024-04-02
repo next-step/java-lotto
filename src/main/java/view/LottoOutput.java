@@ -4,6 +4,8 @@ import domain.Lotto;
 import domain.MyLotto;
 import domain.WinStatus;
 
+import java.util.List;
+
 public class LottoOutput {
 
     String[] correctResult;
@@ -28,14 +30,14 @@ public class LottoOutput {
     }
 
     public int totalPrize(WinStatus winStatus) {
-        int[] resultWinStatus = winStatus.getWinCount();
+        List<Integer> resultWinStatus = winStatus.getWincount();
         int cnt = 0;
         wordSetting();
         System.out.println("당첨 통계");
         System.out.println("--------");
         for (int i = 0; i < 4; i++) {
-            System.out.println(i + 3 + correctResult[i] + resultWinStatus[i]);
-            cnt += resultWinStatus[i];
+            System.out.println(i + 3 + correctResult[i] + resultWinStatus.get(i));
+            cnt += resultWinStatus.get(i);
         }
         return cnt;
     }
