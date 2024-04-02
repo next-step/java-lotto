@@ -17,7 +17,7 @@ public class LottoTicketTest {
     @Test
     public void 로또는_6개의_숫자를_가짐() {
         assertThatThrownBy(() -> LottoTicket.createTicket(List.of(1, 2, 33, 44, 45))).isInstanceOf(
-            IllegalArgumentException.class).hasMessageContaining("로또 생성을 위해서는 6개의 숫자가 필요합니다.");
+            IllegalArgumentException.class).hasMessageContaining("6개의 숫자가 필요합니다.");
     }
 
     @Test
