@@ -15,7 +15,7 @@ public class LottoController {
 
     public MyLotto totalLotto(int count) {
         for (int i = 0; i < count; i++) {
-            List<Integer> nowLotto = lottoMachine.pull();
+            List<Integer> nowLotto = lottoMachine.randomBall();
             myLotto.add(nowLotto);
         }
         return myLotto;

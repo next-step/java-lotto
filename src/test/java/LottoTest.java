@@ -29,7 +29,7 @@ public class LottoTest {
     @DisplayName("로또 기게 랜덤 숫자")
     public void totalLotto() {
         LottoMachine lottoMachine = new LottoMachine();
-        assertThat(lottoMachine.pull().size()).isEqualTo(6);
+        assertThat(lottoMachine.randomBall().size()).isEqualTo(6);
     }
 
     @Test
