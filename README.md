@@ -12,4 +12,4 @@
 * Lotto의 isContainsUserLottoNumber 리턴 타입 boolean으로 수정 (Done. 삼항연산자 활용)
 * LottoNumber에 final 키워드 활용 (Done)
 * LottoRevenue가 static이어야하는지 고민 (Done)
-* LottoMatchTest에서 MethodSource 활용하기
+* LottoMatchTest에서 MethodSource 활용하기 (Done)
