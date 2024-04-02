@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.domain.LottoRank;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
@@ -25,13 +26,13 @@ public class ResultView {
         }
     }
 
-    public void printMatchResult(Map<LottoRank, Integer> result) {
+    public void printMatchResult(LottoResult lottoResult) {
         LottoRank[] values = LottoRank.values();
         Arrays.sort(values, Collections.reverseOrder());
 
         System.out.println("당첨 통계\n ---------");
         for (LottoRank lottoRank : values) {
-            printMatch(lottoRank, result.get(lottoRank));
+            printMatch(lottoRank, lottoResult.getRackCount(lottoRank));
         }
     }
 

@@ -20,11 +20,11 @@ public class LottoTicketsTest {
         lottoTickets.addLottoTicket(lottoTicket);
 
         lottoTickets.calculate(winnerNumber);
-        Map<LottoRank, Integer> resultRanks = lottoTickets.getResult();
+        LottoResult resultRanks = lottoTickets.getResult();
 
         assertSoftly(softly -> {
-            assertThat(resultRanks.get(LottoRank.FIRST)).isEqualTo(1);
-            assertThat(resultRanks.get(LottoRank.SECOND)).isEqualTo(0);
+            assertThat(resultRanks.getRackCount(LottoRank.FIRST)).isEqualTo(1);
+            assertThat(resultRanks.getRackCount(LottoRank.SECOND)).isEqualTo(0);
         });
     }
 
