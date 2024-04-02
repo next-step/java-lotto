@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -37,7 +35,7 @@ public class LottoVendingMachine {
                 .collect(Collectors.toList());
     }
 
-    public LottoResult match(List<LottoTicket> lottoTickets, List<Integer> lastWeekLottoNumber) {
-        return new LottoResult(lottoTickets, lastWeekLottoNumber);
+    public LottoResult match(List<LottoTicket> lottoTickets, LottoTicket lastWeekLotto) {
+        return new LottoResult(lottoTickets, lastWeekLotto);
     }
 }

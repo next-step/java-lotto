@@ -1,12 +1,12 @@
 package lotto.view;
 
+import lotto.domain.LottoTicket;
+
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class InputView {
-    private static final String SEPARATOR = ", ";
+    private static final String SEPARATOR = ",";
 
     Scanner scanner = new Scanner(System.in);
 
@@ -18,11 +18,12 @@ public class InputView {
         return money;
     }
 
-    public List<Integer> lastWeekLottoNumber() {
+    public LottoTicket lastWeekLottoNumber() {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return Arrays.stream(scanner.nextLine()
-                        .split(SEPARATOR))
+        Integer[] lastWeekLottoNumber = Arrays.stream(scanner.nextLine().split(SEPARATOR))
+                .map(String::trim)
                 .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                .toArray(Integer[]::new);
+      return   new LottoTicket(lastWeekLottoNumber);
     }
 }

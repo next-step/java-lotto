@@ -47,16 +47,15 @@ public class LottoTicket {
         }
     }
 
-    public List<Integer> intgerList() {
+    public List<Integer> numbers() {
         return lottoNumbers.stream().
                 map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
     }
 
-
-    public int getNumberOfMatch(List<Integer> winingNumberOfLastWeek) {
-        return (int) winingNumberOfLastWeek.stream()
-                .filter(intgerList()::contains)
+    public int getNumberOfMatch(LottoTicket lastWeekLotto) {
+        return (int) lastWeekLotto.numbers().stream()
+                .filter(numbers()::contains)
                 .count();
     }
 

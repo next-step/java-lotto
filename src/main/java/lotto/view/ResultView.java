@@ -20,7 +20,7 @@ public class ResultView {
         System.out.println(lottoTickets.size() +"개를 구매했습니다.");
 
         for (LottoTicket lottoTicket : lottoTickets) {
-            System.out.println(lottoTicket.intgerList());
+            System.out.println(lottoTicket.numbers());
         }
     }
 

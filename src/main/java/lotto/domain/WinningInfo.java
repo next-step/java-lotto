@@ -24,7 +24,7 @@ public enum WinningInfo {
         return matches;
     }
 
-    public static WinningInfo checkMatch(long matches){
+    public static WinningInfo from(long matches){
         return Arrays.stream(WinningInfo.values())
                 .filter(winningInfo -> winningInfo.matches == matches)
                 .findFirst()

@@ -6,17 +6,17 @@ import java.util.stream.Collectors;
 
 public class LottoResult {
 
-    private Map<WinningInfo, Long> lottoResult;
+    private final Map<WinningInfo, Long> lottoResult;
 
     public Long countMatch(WinningInfo winningInfo) {
         return lottoResult.getOrDefault(winningInfo, 0L);
     }
 
-    public LottoResult(List<LottoTicket> lottoTickets, List<Integer> lastWeekLottoNumber) {
+    public LottoResult(List<LottoTicket> lottoTickets, LottoTicket lastWeekLotto) {
         lottoResult = lottoTickets.stream()
-                .map(ticket -> ticket.getNumberOfMatch(lastWeekLottoNumber))
+                .map(ticket -> ticket.getNumberOfMatch(lastWeekLotto))
                 .collect(Collectors.groupingBy(
-                                matches -> WinningInfo.checkMatch(matches),
+                                matchCount -> WinningInfo.from(matchCount),
                                 Collectors.counting()
                         )
                 );
