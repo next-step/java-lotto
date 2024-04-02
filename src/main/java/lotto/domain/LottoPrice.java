@@ -33,8 +33,10 @@ public enum LottoPrice {
     }
 
     public static LottoPrice valueOf(int match, boolean matchBonus) {
-        return Arrays.stream(values()).filter(item -> item.count == match)
-            .filter(item -> item.bonusResult == matchBonus).findAny().orElse(MISS);
+        return Arrays.stream(values())
+            .filter(item -> item.count == match)
+            .filter(item -> match != 5 || item.bonusResult == matchBonus)
+            .findAny().orElse(MISS);
     }
 
 

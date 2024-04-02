@@ -8,18 +8,19 @@ public class LottoTicket {
 
     private final List<LottoNumber> numbers;
 
-    public static LottoTicket createTicket(List<Integer> inputs) {
-        List<LottoNumber> lottoNumbers = inputs.stream()
-            .sorted()
-            .map(LottoNumber::new)
-            .collect(Collectors.toUnmodifiableList());
-        return new LottoTicket(lottoNumbers);
-    }
 
     private LottoTicket(List<LottoNumber> inputs) {
         checkSizeNumbers(inputs);
         checkUniqueNumbers(inputs);
         this.numbers = inputs;
+    }
+
+    public static LottoTicket createTicket(List<Integer> inputs) {
+        List<LottoNumber> lottoNumbers = inputs.stream()
+            .sorted()
+            .map(LottoNumber::from)
+            .collect(Collectors.toUnmodifiableList());
+        return new LottoTicket(lottoNumbers);
     }
 
     private static void checkUniqueNumbers(List<LottoNumber> numbers) {
@@ -30,22 +31,10 @@ public class LottoTicket {
 
     private static void checkSizeNumbers(List<LottoNumber> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException("로또 생성을 위해서는 6개의 숫자가 필요합니다.");
+            throw new IllegalArgumentException("6개의 숫자가 필요합니다.");
         }
     }
 
-    public LottoPrice getPrice(WinLotto winLotto) {
-        return LottoPrice.valueOf(matchNumberCount(winLotto.getTicket()),
-            matchBonusNumber(winLotto.getBonusNumber()));
-    }
-
-    private int matchNumberCount(LottoTicket lottoTicket) {
-        return (int) lottoTicket.numbers.stream().filter(this.numbers::contains).count();
-    }
-
-    private boolean matchBonusNumber(LottoNumber number) {
-        return this.numbers.contains(number);
-    }
 
     public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
