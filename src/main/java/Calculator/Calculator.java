@@ -1,4 +1,4 @@
-package domain;
+package Calculator;
 
 public class Calculator {
     private int nowValue;
