@@ -13,7 +13,18 @@ public class LottoVendingMachine {
 
 
     public List<LottoTicket> receive(int money) {
+        validate(money);
         return generate(getNumberOfLotto(money));
+    }
+
+    private static void validate(int money) {
+        if (isNotDivided(money)) {
+            throw new IllegalArgumentException("1000원 단위의 금액만 사용 가능합니다.");
+        }
+    }
+
+    private static boolean isNotDivided(int money) {
+        return money % 1000 != 0;
     }
 
     public int getNumberOfLotto(int money) {

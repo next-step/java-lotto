@@ -1,13 +1,11 @@
 package lotto.view;
 
 
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.WinningInfo;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -26,7 +24,7 @@ public class ResultView {
         }
     }
 
-    private static void printStatistics(LottoResult lottoResult, long purchaseAmount) {
+    private static void printStatistics(LottoResult lottoResult, long totalPurchase) {
         long totalEarnings = 0;
 
         for (WinningInfo winningInfo : WinningInfo.values()) {
@@ -38,8 +36,7 @@ public class ResultView {
                 totalEarnings += winningInfo.getReward() * count;
             }
         }
-
-        double profitRatio = (double) totalEarnings / purchaseAmount;
+        double profitRatio = lottoResult.calculateProfitRatio(totalEarnings, totalPurchase);
         System.out.println("총 수익률은 " + String.format("%.2f", profitRatio) + "입니다." + (profitRatio < 1 ? "(기준이 1이기 때문에 결과적으로 손해라는 의미임)" : ""));
     }
 }

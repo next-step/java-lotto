@@ -21,4 +21,9 @@ public class LottoResult {
                         )
                 );
     }
+
+    public double calculateProfitRatio(long totalEarnings, long purchaseAmount){
+        return  (double) totalEarnings / purchaseAmount;
+    }
+
 }

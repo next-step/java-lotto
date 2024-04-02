@@ -34,7 +34,7 @@ public class LottoTicket {
 
         List<Integer> numbers = new ArrayList<>(randomNumber);
         Collections.shuffle(numbers);
-
+        Collections.sort(numbers);
         for (Integer number : numbers) {
             this.lottoNumbers.add(new LottoNumber(number));
         }
