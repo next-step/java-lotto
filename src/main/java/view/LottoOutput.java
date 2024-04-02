@@ -1,21 +1,20 @@
 package view;
 
 import domain.Lotto;
+import domain.LottoResultOutput;
 import domain.MyLotto;
 import domain.WinStatus;
 
 import java.util.List;
 
 public class LottoOutput {
-
-    String[] correctResult;
-
+    LottoResultOutput[] lottoResultOutput;
     private void wordSetting() {
-        correctResult = new String[4];
-        correctResult[0] = "개 일치 (5000원) - ";
-        correctResult[1] = "개 일치 (50000원) - ";
-        correctResult[2] = "개 일치 (1500000원) - ";
-        correctResult[3] = "개 일치 (2000000000) - ";
+        lottoResultOutput = new LottoResultOutput[4];
+        lottoResultOutput[0] = LottoResultOutput.RIGHT_3;
+        lottoResultOutput[1] = LottoResultOutput.RIGHT_4;
+        lottoResultOutput[2] = LottoResultOutput.RIGHT_5;
+        lottoResultOutput[3] = LottoResultOutput.RIGHT_6;
     }
 
     public void winNumber(Lotto lotto) {
@@ -36,7 +35,7 @@ public class LottoOutput {
         System.out.println("당첨 통계");
         System.out.println("--------");
         for (int i = 0; i < 4; i++) {
-            System.out.println(i + 3 + correctResult[i] + resultWinStatus.get(i));
+            System.out.println(lottoResultOutput[i].getCorrectCount() + lottoResultOutput[i].getPrice()+ resultWinStatus.get(i) + "개");
             cnt += resultWinStatus.get(i);
         }
         return cnt;
