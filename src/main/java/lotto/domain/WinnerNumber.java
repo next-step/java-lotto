@@ -24,7 +24,9 @@ public class WinnerNumber {
             .count();
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public LottoRank calculateRank(List<LottoNumber> lottoNumbers) {
+        int matchCount = this.matchCount(lottoNumbers);
+        boolean hasBonusNumber = lottoNumbers.contains(this.bonusNumber);
+        return LottoRank.getLottoRank(matchCount, hasBonusNumber);
     }
 }

@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Spliterator;
 import java.util.stream.Collectors;
 
 import lotto.common.LottoValidator;
@@ -21,9 +23,6 @@ public class LottoTicket {
     }
 
     public LottoRank calculate(WinnerNumber winnerNumber) {
-        int matchCount = winnerNumber.matchCount(lottoNumbers);
-        boolean hasBonusNumber = lottoNumbers.contains(winnerNumber.getBonusNumber());
-        return LottoRank.getLottoRank(matchCount, hasBonusNumber);
+        return winnerNumber.calculateRank(lottoNumbers);
     }
-
 }
