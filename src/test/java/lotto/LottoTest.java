@@ -3,7 +3,6 @@ package lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoVendingMachine;
-import lotto.domain.RandomNumbers;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
