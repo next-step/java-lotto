@@ -16,7 +16,7 @@ public class WinStatus {
 
     public WinStatus() {
         winCount = new ArrayList<>();
-        for (int i = 0; i < VALID_WIN_COUNT; i++) {
+        for (int i = 0; i <= VALID_WIN_COUNT; i++) {
             winCount.add(0);
         }
     }

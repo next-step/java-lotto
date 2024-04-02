@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoMachineTest {
     @Test
+    @DisplayName("랜덤볼 결과 확정")
     void randomBall() {
         LottoMachine lottoMachine = new LottoMachine() {
             @Override
@@ -25,7 +26,7 @@ class LottoMachineTest {
     }
 
     @Test
-    @DisplayName("로또 기게 랜덤 숫자")
+    @DisplayName("로또 기게 랜덤볼 수")
     public void totalLotto() {
         LottoMachine lottoMachine = new LottoMachine();
         assertThat(lottoMachine.randomBall().size()).isEqualTo(6);
