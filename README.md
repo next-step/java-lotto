@@ -13,3 +13,12 @@
 * LottoNumber에 final 키워드 활용 (Done)
 * LottoRevenue가 static이어야하는지 고민 (Done)
 * LottoMatchTest에서 MethodSource 활용하기 (Done)
+
+## TO-DO : 로또 4단계
+* 수동 구매할 로또 수 입력 -> InputView (총 구매 수보다 많으면 예외)
+* 수동 구매 번호 입력 -> InputView
+* StringUtils 이용해서 String 리스트로 만들고 LottoNumber에 문자열 생성자 추가해서 Lotto 객체 만들기
+* Lotto에 String 배열을 인자로 가지는 생성자 추가
+* 수동 구매 수와 자동 구매 수 계산 -> LottoShop
+* 수동 로또 리스트와 자동 로또 리스트 생성 과정 분리 -> LottoGenerator
+* 수동 구매 수와 자동 구매 수 출력 -> ResultView
