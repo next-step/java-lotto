@@ -6,11 +6,12 @@ import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
+    public static final int LOTTO_START_INDEX = 1;
+    public static final int LOTTO_END_INDEX = 45;
+
     private final Integer number;
     private static final Map<Integer, LottoNumber> LOTTO_NUMBERS;
 
-    public static final int LOTTO_START_INDEX = 1;
-    public static final int LOTTO_END_INDEX = 45;
 
     static {
         LOTTO_NUMBERS = IntStream.range(LOTTO_START_INDEX, LOTTO_END_INDEX)
