@@ -15,10 +15,11 @@ public class LottoGenerator implements NumbersGenerator {
         }
     }
 
-    public List<Integer> generate() {
+    public List<LottoNumber> generate() {
         Collections.shuffle(base);
         return base.subList(0, 6)
                 .stream()
+                .map(LottoNumber::new)
                 .sorted()
                 .collect(Collectors.toList());
     }

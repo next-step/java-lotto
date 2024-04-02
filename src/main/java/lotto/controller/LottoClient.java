@@ -4,42 +4,31 @@ import lotto.domain.*;
 
 import java.util.List;
 
-import static lotto.view.InputView.*;
 import static lotto.view.OutputView.*;
+import static lotto.view.ViewUtil.*;
 
 public class LottoClient {
 
     public static void main(String[] args) {
-        printPlainMessage("구입금액을 입력해 주세요.");
-        Cash cash = generateCash();
-        printCash(cash);
-        LottoGroup lottoGroup = generateLottoGroupAndPrint(cash);
+        Cash cash = insertCash();
+        ManualLottoCount manualLottoCount = insertManualLottoCount(cash);
+        Lottos lottos = generateManualLottos(manualLottoCount);
+        generateLottos(lottos, manualLottoCount.getLeftOvers(cash));
+        printCount(manualLottoCount.getCount(), manualLottoCount.getLeftOvers(cash));
+        printLottoGroup(lottos);
         WinningLotto winningLotto = insertWinningNumbers();
         Match match = new Match();
-        lottoGroup.saveMatchResult(winningLotto, match);
+        lottos.saveMatchResult(winningLotto, match);
         printResult(cash, match);
     }
 
     private static WinningLotto insertWinningNumbers() {
-        List<Integer> latestWinningNumbers = insertLatestWinningNumbers();
+        List<LottoNumber> latestWinningNumbers = insertLatestWinningNumbers();
         int bonusNumber = insertBonusNumber();
         return new WinningLotto(latestWinningNumbers, bonusNumber);
     }
 
-    private static LottoGroup generateLottoGroupAndPrint(Cash cash) {
-        LottoGroup lottoGroup = new LottoGroup(new LottoGenerator());
-        lottoGroup.generateTickets(cash);
-        printLottoGroup(lottoGroup);
-        return lottoGroup;
-    }
-
-    private static List<Integer> insertLatestWinningNumbers() {
-        printPlainMessage("지난 주 당첨 번호를 입력해 주세요.");
-        return generateLatestWinningNumbers();
-    }
-
-    private static int insertBonusNumber() {
-        printPlainMessage("보너스 볼을 입력해 주세요.");
-        return insertNumber();
+    private static void generateLottos(Lottos lottos, int amount) {
+        lottos.generateLottoNumbers(new LottoGenerator(), amount);
     }
 }

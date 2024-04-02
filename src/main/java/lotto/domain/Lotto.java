@@ -1,34 +1,52 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
+    private final List<LottoNumber> numbers;
 
-    private final List<LottoNumber> lottoNumbers;
-
-    public Lotto() {
-        this(new ArrayList<>());
+    public Lotto(List<LottoNumber> numbers) {
+        validateNumbers(numbers);
+        this.numbers = numbers;
     }
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public void validateNumbers(List<LottoNumber> numbers) {
+        validateEmpty(numbers);
+        validateSize(numbers);
+        validateIfDuplication(numbers);
     }
 
-    public void generateLottoNumbers(List<Integer> lottoNumber, int amount) {
-        for (int i = 0; i < amount; i++) {
-            LottoNumber newLottoNumber = new LottoNumber(lottoNumber);
-            lottoNumbers.add(newLottoNumber);
+    private void validateEmpty(List<LottoNumber> numbers) {
+        if(numbers == null){
+            throw new IllegalArgumentException("로또 숫자들은 null이 아니어야 합니다.");
         }
     }
 
-    public void saveMatchResult(WinningLotto winningLotto, Match match) {
-        this.lottoNumbers.forEach(iter -> {
-            winningLotto.saveMatchInfo(iter, match);
-        });
+    private void validateSize(List<LottoNumber> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("로또 숫자는 6자리 숫자들이어야 합니다.");
+        }
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    private void validateIfDuplication(List<LottoNumber> numbers) {
+        int count = (int) numbers.stream()
+                .distinct()
+                .count();
+        if (numbers.size() != count) {
+            throw new IllegalArgumentException("로또 숫자들은 서로 중복일 수 없습니다.");
+        }
+    }
+
+    public boolean contains(LottoNumber number) {
+        return this.numbers.contains(number);
+    }
+
+    public boolean contains(Integer number) {
+        return this.numbers.contains(new LottoNumber(number));
+    }
+
+    @Override
+    public String toString() {
+        return this.numbers.toString();
     }
 }

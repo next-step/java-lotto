@@ -76,3 +76,38 @@
 - [X] LottoPricing에 lottoPricingMappingCache 부분 반복문이나 stream()으로 처리
 - [X] WinningNumber 클래스 이름 변경(WinningNumber => WinningLotto)
 - [X] matchCount와 bonusCount를 구하는 부분을 WinningLotto에 메시지를 보내는 형태로 수정
+- [X] winningNumber와 bonusNumber 하나의 클래스로 합치기
+- [X] profit과 matchCache를 묶는 상위 클래스 하나 만들기
+
+# Step4
+
+## Todo
+
+## Done
+- [X] 수동으로 구매할 로또 개수가 null이면 예외(null => IllegalArgumentException)
+- [X] 수동으로 구매할 로또 개수가 구매할 수 있는 로또 개수보다 크면 예외(14000, 15 => IllegalArgumentException)
+- [X] 수동으로 구매하는 번호들은 중복되면 예외(1,1,3,5,6,7 => IllegalArgumentException)
+- [X] 수동으로 구매하는 번호들은 1 ~ 45를 벗어나는 숫자라면 예외(0 -> IllegalArgumentException, 46 -> IllegalArgumentException)
+- [X] 수동으로 구매하는 번호들은 6개가 아니면 예외(1,2,3,4,5,6,7 => IllegalArgumentException, empty => IllegalArgumentException)
+- [X] 출력 => "수동으로 구매할 로또 수를 입력해 주세요."
+- [X] 입력 => 수동으로 구매할 로또 개수
+- [X] 출력 => "수동으로 구매할 번호를 입력해 주세요."
+- [X] 입력 => 수동으로 구매할 번호
+- [X] 출력 => "수동으로 {수동 구매 개수}장, 자동으로 {자동 구매 개수}개를 구매했습니다."
+- [X] 코드리뷰 적용 - step3 체킹안된 것들 완료 처리
+- [X] 코드리뷰 적용 - Lotto 이름 변경(Lottos) 
+- [X] 코드리뷰 적용 - LottoNumber 이름 변경(Lotto)
+- [X] 코드리뷰 적용 - ManualLottoNumber -> LottoNumber에 변경
+- [X] 코드리뷰 적용 - Lotto 내부의 로또 번호를 LottoNumber로 변경
+- [X] 코드리뷰 적용 - ManualLotto -> Lotto와 병합
+- [X] 코드리뷰 적용 - ManualLottoGroup -> Lottos와 병합
+- [X] 코드리뷰 적용 - 수동 구매할 로또 개수가 제대로 계산되는지 확인
+- [X] 코드리뷰 적용 - 수동 구매할 로또 개수 반복 횟수에 따라서 생성, 출력되는지 확인
+- [X] 코드리뷰 적용 - 수익률 계산 결과 Long 타입으로 수정
+- [X] 코드리뷰 적용 - OutputView 내의 printPlainMessage 삭제
+- [X] 코드리뷰 적용 - 남은 횟수가 전체 횟수보다 크다면 예외(14000,15 => IllegalArgumentException)
+- [X] 코드리뷰 적용 - Index Out of Range 오류 해결
+- [X] 수익률 계산 오류 수정 
+- [X] 코드리뷰 적용 - IllegalArgumentException에 예외 메시지 추가
+- [X] 코드리뷰 적용 - Lotto > 생성자 내부에 있는 null 검사 로직 타 메서드로 이동시키기
+- [X] 코드리부 적용 - LottoClient에 있는 출력 관련 의존성을 OutputView로 다시 이동

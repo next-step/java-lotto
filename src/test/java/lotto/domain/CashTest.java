@@ -25,4 +25,19 @@ public class CashTest {
         int result = new Cash(money).getAmount();
         assertThat(result).isEqualTo(count);
     }
+
+    @Test
+    @DisplayName("남은 횟수 구하기(14000,10 => 4)")
+    void minus() {
+        int minus = new Cash(14000).minus(10);
+        assertThat(minus).isEqualTo(4);
+    }
+
+    @Test
+    @DisplayName("남은 횟수가 전체 횟수보다 크다면 예외(14000,15 => IllegalArgumentException)")
+    void check_exception_minus() {
+        assertThatThrownBy(() -> {
+            new Cash(14000).minus(15);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }

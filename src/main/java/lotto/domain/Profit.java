@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Profit {
-    private int winningPrize;
+    private long winningPrize;
 
     public Profit(int winningPrize) {
         this.winningPrize = winningPrize;

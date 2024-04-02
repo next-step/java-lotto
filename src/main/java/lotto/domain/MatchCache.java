@@ -16,6 +16,9 @@ public class MatchCache {
     }
 
     public void save(int matchCount, boolean isBonus) {
+        if(matchCount <= 0){
+            return;
+        }
         if (isBonusLotto(matchCount, isBonus)) {
             this.bonusCount++;
             return;

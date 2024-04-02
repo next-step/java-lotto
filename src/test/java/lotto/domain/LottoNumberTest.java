@@ -2,24 +2,18 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.List;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoNumberTest {
+public class LottoNumberTest {
 
     @ParameterizedTest
-    @DisplayName("배열이 null이면 예외")
-    @NullSource
-    void if_null(List<Integer> nullList) {
+    @DisplayName("수동으로 구매하는 번호들은 1 ~ 45를 벗어나는 숫자라면 예외(0 -> IllegalArgumentException, 46 -> IllegalArgumentException)")
+    @ValueSource(ints = {0, 46})
+    void in_range(int input) {
         assertThatThrownBy(() -> {
-            new LottoNumber(nullList);
+            new LottoNumber(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
