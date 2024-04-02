@@ -13,13 +13,19 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class LottoTest {
     @Test
-    void create() {
+    void create_자동() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         assertThat(new Lotto(numbers)).isEqualTo(new Lotto(numbers));
     }
 
     @Test
-    void 로또_6개_아닌_경우() {
+    void create_수동() {
+        String[] textNumbers = {"1", "2", "3", "4", "5", "6"};
+        assertThat(new Lotto(textNumbers)).isEqualTo(new Lotto(textNumbers));
+    }
+
+    @Test
+    void 로또_6개_아닌_경우_자동() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(numbers))
@@ -27,8 +33,24 @@ public class LottoTest {
     }
 
     @Test
-    void 로또_중복_숫자_있는_경우() {
+    void 로또_6개_아닌_경우_수동() {
+        String[] numbers = {"1", "2", "3", "4", "5", "6", "7"};
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Lotto(numbers))
+                .withMessageMatching("로또 개수는 6개여야 합니다.");
+    }
+
+    @Test
+    void 로또_중복_숫자_있는_경우_자동() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Lotto(numbers))
+                .withMessageMatching("로또에 중복 숫자가 있습니다.");
+    }
+
+    @Test
+    void 로또_중복_숫자_있는_경우_수동() {
+        String[] numbers = {"1", "2", "3", "4", "5", "5"};
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(numbers))
                 .withMessageMatching("로또에 중복 숫자가 있습니다.");
