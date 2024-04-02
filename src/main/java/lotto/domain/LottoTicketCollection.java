@@ -20,5 +20,7 @@ public class LottoTicketCollection {
         return manualTickets;
     }
 
-    
+    public List<List<LottoTicket>> getAllTicketCollection() {
+        return List.of(manualTickets, autoTickets);
+    }
 }

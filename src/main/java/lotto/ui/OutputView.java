@@ -1,5 +1,6 @@
 package lotto.ui;
 
+import java.util.List;
 import lotto.LottoResultManager;
 import lotto.domain.LottoPrice;
 import lotto.domain.LottoTicket;
@@ -11,13 +12,16 @@ public class OutputView {
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다. \n",
             ticketCollection.getManualTickets().size(), ticketCollection.getAutoTickets().size());
 
-        for (LottoTicket manualTicket : ticketCollection.getManualTickets()) {
-            System.out.println(manualTicket.getNumbers());
-        }
-        for (LottoTicket autoTicket : ticketCollection.getAutoTickets()) {
-            System.out.println(autoTicket.getNumbers());
+        for (List<LottoTicket> tickets : ticketCollection.getAllTicketCollection()) {
+            displayTicketNumbers(tickets);
         }
 
+    }
+
+    private static void displayTicketNumbers(List<LottoTicket> tickets) {
+        for (LottoTicket ticket : tickets) {
+            System.out.println(ticket.getNumbers());
+        }
     }
 
     public void displayWinning(LottoResultManager lottoResultManager) {
