@@ -7,12 +7,6 @@ public class Lottos {
 
     private final List<LottoNumber> numbers;
 
-//    public Lottos(List<Integer> numbers) {
-//        this.numbers = numbers.stream()
-//                .map(LottoNumber::new)
-//                .collect(Collectors.toList());
-//    }
-
     public Lottos(List<Number> numbers) {
         this.numbers = numbers.stream()
                 .map(LottoNumber::new)
