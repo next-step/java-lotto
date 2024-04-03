@@ -3,7 +3,6 @@ package lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -21,7 +20,7 @@ public class LottoFactory {
         return lottos;
     }
 
-    public static Lotto createLotto(Set<Integer> numbers) {
+    public static Lotto createLotto(List<Integer> numbers) {
         return new Lotto(numbers);
     }
 
@@ -30,7 +29,7 @@ public class LottoFactory {
         return createLotto(numbers
                 .subList(0, 6)
                 .stream()
-                .collect(Collectors.toUnmodifiableSet()));
+                .collect(Collectors.toUnmodifiableList()));
     }
 
     public List<Rank> getRankResults(Lotto winningLotto, List<Lotto> lottos) {
@@ -47,6 +46,7 @@ public class LottoFactory {
         for (Lotto lotto : lottos) {
             sumOfReward += winningLotto.getReward(lotto);
         }
-        return sumOfReward / money;
+        double rateOfReturn = sumOfReward / money;
+        return Math.floor(rateOfReturn * 100) / 100;
     }
 }

@@ -1,7 +1,7 @@
 package lotto;
 
+import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -16,11 +16,11 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static Set<Integer> getWinningLottoInput() {
+    public static List<Integer> getWinningLottoInput() {
         System.out.println(REQUEST_WINNING_LOTTO);
         return Stream.of(inputValue().split(","))
                 .map((string) -> Integer.parseInt(string.trim()))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     private static String inputValue() {

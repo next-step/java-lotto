@@ -7,7 +7,7 @@ public class Lotto {
     private final static int LOTTO_LENGTH = 6;
     private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(Set<Integer> numbers) {
+    public Lotto(List<Integer> numbers) {
         this.lottoNumbers = numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
