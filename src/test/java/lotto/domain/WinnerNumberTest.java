@@ -17,16 +17,16 @@ public class WinnerNumberTest {
 
         assertSoftly(softly -> {
             assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new WinnerNumber(List.of(1,2,3,4)));
+                .isThrownBy(() -> new WinnerNumber(List.of(1,2,3,4), 8));
             assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new WinnerNumber(List.of(1,2,3,4,5,6,7)));
+                .isThrownBy(() -> new WinnerNumber(List.of(1,2,3,4,5,6,7), 8));
         });
     }
 
     @Test
     @DisplayName("당첨 번호와 맞는 개수를 반환한다.")
     void winnerMatch() {
-        WinnerNumber winnerNumber = new WinnerNumber(List.of(1, 2, 3, 4, 5, 6));
+        WinnerNumber winnerNumber = new WinnerNumber(List.of(1, 2, 3, 4, 5, 6), 8);
         LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 7));
 
         assertThat(winnerNumber.matchCount(lottoTicket.getLottoNumbers())).isEqualTo(5);

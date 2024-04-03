@@ -18,7 +18,7 @@ class LottoValidatorTest {
         int price = 1000;
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> LottoValidator.validatePurchase(money, price));
+            .isThrownBy(() -> LottoValidator.validatePurchase(money, price, 0));
     }
 
     @Test

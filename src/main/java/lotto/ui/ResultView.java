@@ -7,14 +7,16 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.domain.LottoRank;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 
 public class ResultView {
 
     private static final String DEFAULT_MESSAGE_FORMAT = "%s개 일치 (%s원) - %s개";
     private static final String SECOND_MESSAGE_FORMAT = "%s개 일치, 보너스 볼 일치(%s원) - %s개";
 
-    public void printPurchaseCount(List<LottoTicket> lottoTickets) {
+    public void printPurchaseCount(LottoTickets lottoTickets) {
         System.out.println(String.format("%s개를 구매했습니다.", lottoTickets.size()));
         for (LottoTicket lottoTicket : lottoTickets) {
             String displayNumbers = lottoTicket.getLottoNumbers().stream()
@@ -24,13 +26,13 @@ public class ResultView {
         }
     }
 
-    public void printMatchResult(Map<LottoRank, Integer> result) {
+    public void printMatchResult(LottoResult lottoResult) {
         LottoRank[] values = LottoRank.values();
         Arrays.sort(values, Collections.reverseOrder());
 
         System.out.println("당첨 통계\n ---------");
         for (LottoRank lottoRank : values) {
-            printMatch(lottoRank, result.get(lottoRank));
+            printMatch(lottoRank, lottoResult.getRackCount(lottoRank));
         }
     }
 

@@ -2,6 +2,8 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,7 +17,7 @@ class LottoShopTest {
     void buyLotto(int money) {
         LottoShop lottoShop = new LottoShop();
 
-        assertThat(lottoShop.buyLotto(money)).hasSize(money / lottoShop.getLottoPrice());
+        assertThat(lottoShop.buyLotto(money, List.of())).hasSize(money / lottoShop.getLottoPrice());
     }
 
     @Test
@@ -24,6 +26,6 @@ class LottoShopTest {
         LottoShop lottoShop = new LottoShop();
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> lottoShop.buyLotto(999));
+            .isThrownBy(() -> lottoShop.buyLotto(999, List.of()));
     }
 }
