@@ -36,22 +36,22 @@ public class Lotto {
     }
 
     /* Method */
-    public int isPrize(List<Integer> winningNumber) {
+    public Prize isPrize(List<Integer> winningNumber) {
         List<Integer> matchedLottoNumber = new ArrayList<>(lottoNumber);
         matchedLottoNumber.removeAll(winningNumber);
         if (matchedLottoNumber.isEmpty()) {
-            return 1;
+            return Prize.FIRST;
         }
         if (matchedLottoNumber.size() == 1) {
-            return 3;
+            return Prize.THIRD;
         }
         if (matchedLottoNumber.size() == 2) {
-            return 4;
+            return Prize.FOURTH;
         }
         if (matchedLottoNumber.size() == 3) {
-            return 5;
+            return Prize.FIFTH;
         }
-        return 6;
+        return Prize.SIXTH;
     }
 }
 
