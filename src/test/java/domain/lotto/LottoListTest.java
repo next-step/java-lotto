@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import domain.lotto.vo.LottoNumber;
 import domain.lotto.vo.WinNumbers;
 import domain.machine.LottoNumberGenerator;
+
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +28,16 @@ public class LottoListTest {
   void createLotto() {
     assertThat(lottoList.getLottoNumbers().size()).isEqualTo(10);
     assertThat(lottoList.getLottoCount()).isEqualTo(10);
+  }
+
+  @Test
+  @DisplayName("수동 생성한 로또가 추가되는지 확인한다")
+  void createLottoManually() {
+    List<LottoNumber> lottoNumbers = List.of(LottoNumber.of(1),LottoNumber.of(2),LottoNumber.of(3),LottoNumber.of(4),LottoNumber.of(5),LottoNumber.of(6) );
+   lottoList.generateManualLotto(lottoNumbers);
+
+    assertThat(lottoList.getLottoNumbers().size()).isEqualTo(11);
+    assertThat(lottoList.getLottoCount()).isEqualTo(11);
   }
 
   @Test
