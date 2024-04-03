@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +26,7 @@ public class InputView {
         return count;
     }
 
-    public static List<Lotto> scanManualNumbers(int count) {
+    public static Lottos scanManualNumbers(int count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
@@ -33,7 +34,7 @@ public class InputView {
             List<Integer> numbers = convertStringToIntList(text);
             lottos.add(new Lotto(numbers));
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 
 

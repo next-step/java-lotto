@@ -11,6 +11,14 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
+    public int getCount() {
+        return lottos.size();
+    }
+
     public LottoResult winningResult(WinningLotto winner) {
         return new LottoResult(this.lottos.stream()
                 .map(winner::findWinningType)
