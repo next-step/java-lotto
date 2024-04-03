@@ -37,6 +37,10 @@ public class LottoNumber {
                 .collect(Collectors.toMap(number -> number, LottoNumber::new));
     }
 
+    public int toInt() {
+        return this.number;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(number);

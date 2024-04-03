@@ -8,58 +8,69 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 class RankTest {
-    @ParameterizedTest(name = "winningNumber = {0}, userNumber = {1}")
-    @CsvSource(value = {"1,2,3,4,5,6 : 1,2,3,4,5,6"}, delimiter = ':')
+    @ParameterizedTest(name = "winningNumber = {0}, userNumber = {1}, bonus = {2}")
+    @CsvSource(value = {"1,2,3,4,5,6 : 1,2,3,4,5,6 : false"}, delimiter = ':')
     @DisplayName("1등 확인(6개 일치) 테스트")
-    void first_rank_test(String winningNumbers, String userNumbers) {
+    void first_rank_test(String winningNumbers, String userNumbers, boolean isBonus) {
         Lotto winningLotto = Lotto.createFromString(winningNumbers);
         Lotto userLotto = Lotto.createFromString(userNumbers);
-        Rank rank = Rank.from(userLotto.matchCount(winningLotto));
+        Rank rank = Rank.of(userLotto.matchCount(winningLotto), isBonus);
 
         assertThat(rank).isEqualTo(Rank.FIRST);
     }
 
-    @ParameterizedTest(name = "winningNumber = {0}, userNumber = {1}")
-    @CsvSource(value = {"1,2,3,4,5,6 : 1,2,3,4,5,7"}, delimiter = ':')
+    @ParameterizedTest(name = "winningNumber = {0}, userNumber = {1}, bonus = {2}")
+    @CsvSource(value = {"1,2,3,4,5,6 : 1,2,3,4,5,7 : true"}, delimiter = ':')
     @DisplayName("2등 확인(5개 일치) 테스트")
-    void second_rank_test(String winningNumbers, String userNumbers) {
+    void second_rank_test(String winningNumbers, String userNumbers, boolean isBonus) {
         Lotto winningLotto = Lotto.createFromString(winningNumbers);
         Lotto userLotto = Lotto.createFromString(userNumbers);
-        Rank rank = Rank.from(userLotto.matchCount(winningLotto));
+        Rank rank = Rank.of(userLotto.matchCount(winningLotto), isBonus);
 
         assertThat(rank).isEqualTo(Rank.SECOND);
     }
 
-    @ParameterizedTest(name = "winningNumber = {0}, userNumber = {1}")
-    @CsvSource(value = {"1,2,3,4,5,6 : 1,2,3,4,7,8"}, delimiter = ':')
-    @DisplayName("3등 확인(4개 일치) 테스트")
-    void third_rank_test(String winningNumbers, String userNumbers) {
+    @ParameterizedTest(name = "winningNumber = {0}, userNumber = {1}, bonus = {2}")
+    @CsvSource(value = {"1,2,3,4,5,6 : 1,2,3,4,5,7 : false"}, delimiter = ':')
+    @DisplayName("3등 확인(5개 일치) 테스트")
+    void third_rank_test(String winningNumbers, String userNumbers, boolean isBonus) {
         Lotto winningLotto = Lotto.createFromString(winningNumbers);
         Lotto userLotto = Lotto.createFromString(userNumbers);
-        Rank rank = Rank.from(userLotto.matchCount(winningLotto));
+        Rank rank = Rank.of(userLotto.matchCount(winningLotto), isBonus);
 
         assertThat(rank).isEqualTo(Rank.THIRD);
     }
 
-    @ParameterizedTest(name = "winningNumber = {0}, userNumber = {1}")
-    @CsvSource(value = {"1,2,3,4,5,6 : 1,2,3,7,8,9"}, delimiter = ':')
-    @DisplayName("4등 확인(3개 일치) 테스트")
-    void fouth_rank_test(String winningNumbers, String userNumbers) {
+    @ParameterizedTest(name = "winningNumber = {0}, userNumber = {1}, bonus = {2}")
+    @CsvSource(value = {"1,2,3,4,5,6 : 1,2,3,4,8,9 : false"}, delimiter = ':')
+    @DisplayName("4등 확인(4개 일치) 테스트")
+    void fouth_rank_test(String winningNumbers, String userNumbers, boolean isBonus) {
         Lotto winningLotto = Lotto.createFromString(winningNumbers);
         Lotto userLotto = Lotto.createFromString(userNumbers);
-        Rank rank = Rank.from(userLotto.matchCount(winningLotto));
+        Rank rank = Rank.of(userLotto.matchCount(winningLotto), isBonus);
 
         assertThat(rank).isEqualTo(Rank.FOURTH);
     }
 
-    @ParameterizedTest(name = "winningNumber = {0}, userNumber = {1}")
-    @CsvSource(value = {"1,2,3,4,5,6 : 1,2,7,8,9,10"}, delimiter = ':')
-    @DisplayName("3개 미만 확인 테스트")
-    void null_rank_test(String winningNumbers, String userNumbers) {
+    @ParameterizedTest(name = "winningNumber = {0}, userNumber = {1}, bonus = {2}")
+    @CsvSource(value = {"1,2,3,4,5,6 : 1,2,3,7,8,9 : false"}, delimiter = ':')
+    @DisplayName("5등 확인(3개 일치) 테스트")
+    void fifth_rank_test(String winningNumbers, String userNumbers, boolean isBonus) {
         Lotto winningLotto = Lotto.createFromString(winningNumbers);
         Lotto userLotto = Lotto.createFromString(userNumbers);
-        Rank rank = Rank.from(userLotto.matchCount(winningLotto));
+        Rank rank = Rank.of(userLotto.matchCount(winningLotto), isBonus);
 
-        assertThat(rank).isEqualTo(Rank.INVALID);
+        assertThat(rank).isEqualTo(Rank.FIFTH);
+    }
+
+    @ParameterizedTest(name = "winningNumber = {0}, userNumber = {1}, bonus = {2}")
+    @CsvSource(value = {"1,2,3,4,5,6 : 1,2,7,8,9,10 : false"}, delimiter = ':')
+    @DisplayName("3개 미만 확인 테스트")
+    void null_rank_test(String winningNumbers, String userNumbers, boolean isBonus) {
+        Lotto winningLotto = Lotto.createFromString(winningNumbers);
+        Lotto userLotto = Lotto.createFromString(userNumbers);
+        Rank rank = Rank.of(userLotto.matchCount(winningLotto), isBonus);
+
+        assertThat(rank).isEqualTo(Rank.MISS);
     }
 }

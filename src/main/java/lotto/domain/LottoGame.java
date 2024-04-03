@@ -24,13 +24,15 @@ public class LottoGame {
         return this.userLottos.getLottos();
     }
 
-    public List<Rank> match(String winningNumbers) {
-        return this.userLottos.match(winningNumbers);
+    public List<Rank> match(String winningNumbers, int inputBonusNumber) {
+        Lotto winningLotto = Lotto.createFromString(winningNumbers);
+        LottoNumber bonusNumber = LottoNumber.of(inputBonusNumber);
+        return this.userLottos.match(winningLotto, bonusNumber);
     }
 
-    public double calculateProfit(List<Rank> lottoRanks) {
+    public double calculateProfit(List<Rank> ranks) {
         Money totalPrize = Money.from(0);
-        for (Rank rank : lottoRanks) {
+        for (Rank rank : ranks) {
             totalPrize = totalPrize.plus(rank.getPrize());
         }
         return this.amount.calculateProfitRatio(totalPrize);

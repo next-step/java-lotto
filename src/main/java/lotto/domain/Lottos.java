@@ -18,11 +18,10 @@ public class Lottos {
         return this.lottos;
     }
 
-    public List<Rank> match(String winningNumbers) {
+    public List<Rank> match(Lotto winningLotto, LottoNumber bonusNumber) {
         List<Rank> ranks = new ArrayList<>();
-        Lotto winningLotto = Lotto.createFromString(winningNumbers);
-        for (Lotto lotto : lottos) {
-            ranks.add(Rank.from(lotto.matchCount(winningLotto)));
+        for (Lotto lotto : this.lottos) {
+            ranks.add(lotto.matchRank(winningLotto, bonusNumber));
         }
         return ranks;
     }

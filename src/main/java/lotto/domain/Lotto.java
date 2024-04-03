@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
@@ -55,6 +56,20 @@ public class Lotto {
         return this.lotto.contains(number);
     }
 
+    public Rank matchRank(Lotto winningLotto, LottoNumber bonusNumber){
+        int matchCount = this.matchCount(winningLotto);
+        boolean matchBonus = this.isContains(bonusNumber);
+        return Rank.of(matchCount, matchBonus);
+    }
+
+    public String sortNumbers() {
+        List<Integer> sortedNumbers = lotto.stream()
+                .map(LottoNumber::toInt)
+                .sorted()
+                .collect(Collectors.toList());
+        return sortedNumbers.toString();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,11 +85,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        List<Integer> sortedNumbers = new ArrayList<>();
-        for (LottoNumber lottoNumber : lotto) {
-            sortedNumbers.add(Integer.valueOf(lottoNumber.toString()));
-        }
-        Collections.sort(sortedNumbers);
-        return sortedNumbers.toString();
+        return String.valueOf(lotto);
     }
 }
