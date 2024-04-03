@@ -23,21 +23,34 @@ public class LottoTicket {
     }
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoTicket() {
+    private void validate(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() > LOTTO_NUMBER_LIMIT) {
+            throw new IllegalStateException("로또의 숫자의 갯수 제한은 6개입니다.");
+        }
+    }
+
+    public static LottoTicket auto() {
+
         Set<Integer> randomNumber = new HashSet<>();
         Random rand = new Random();
-
         getNotDuplicatedNumber(randomNumber, rand);
 
         List<Integer> numbers = new ArrayList<>(randomNumber);
-        Collections.shuffle(numbers);
         Collections.sort(numbers);
-        for (Integer number : numbers) {
-            this.lottoNumbers.add(new LottoNumber(number));
-        }
+
+        List<LottoNumber> lottoNumbers = createLottoNumbers(numbers);
+
+        return new LottoTicket(lottoNumbers);
+    }
+
+    private static List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private static void getNotDuplicatedNumber(Set<Integer> randomNumber, Random rand) {
@@ -59,7 +72,7 @@ public class LottoTicket {
                 .count();
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public List<LottoNumber> createLottoNumbers() {
         return lottoNumbers;
     }
 }

@@ -25,13 +25,13 @@ public class LottoTest {
     @Test
     public void 임의의_6개의_번호를_가져야한다(){
         LottoTicket lottoTicket = new LottoTicket(1,2,3,4,5,6);
-        assertThat(lottoTicket.getLottoNumbers()).isEqualTo(6);
+        assertThat(lottoTicket.createLottoNumbers()).isEqualTo(6);
     }
 
     @Test
     public void 임의의_6개의_숫자는_중복_될_수_없다(){
         LottoTicket lottoTicket = new LottoTicket(1,1,3,4,5,6);
-        List<Integer> lottoNumbers = lottoTicket.getLottoNumbers().stream()
+        List<Integer> lottoNumbers = lottoTicket.createLottoNumbers().stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
         assertTrue(hasDuplicates(lottoNumbers));

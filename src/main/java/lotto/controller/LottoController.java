@@ -23,6 +23,6 @@ public class LottoController {
         LottoTicket lastWeekLotto = input.lastWeekLottoNumber();
         LottoResult result = lottoMachine.match(lottoTickets, lastWeekLotto);
 
-        output.printWinningInfos(result, money);
+        output.printWinningInfos(result);
     }
 }

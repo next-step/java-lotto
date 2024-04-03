@@ -1,21 +1,17 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LottoVendingMachine {
 
 
     private final static int lottoPrice = 1000;
 
-
     public List<LottoTicket> receive(int money) {
         validate(money);
-        return Stream.generate(LottoTicket::new)
-                .limit(getQuantity(money))
-                .collect(Collectors.toList());
+        int quantity = getQuantity(money);
+        return generate(quantity);
     }
 
     private static void validate(int money) {
@@ -32,13 +28,15 @@ public class LottoVendingMachine {
         return money / lottoPrice;
     }
 
-    private List<LottoTicket> generate(int quantity) {
-        return IntStream.range(0, quantity)
-                .mapToObj(target -> new LottoTicket())
-                .collect(Collectors.toList());
-    }
-
     public LottoResult match(List<LottoTicket> lottoTickets, LottoTicket lastWeekLotto) {
         return new LottoResult(lottoTickets, lastWeekLotto);
+    }
+
+    public List<LottoTicket> generate(int quantity){
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (int i = 0; i < quantity; i++) {
+            lottoTickets.add(LottoTicket.auto());
+        }
+        return lottoTickets;
     }
 }

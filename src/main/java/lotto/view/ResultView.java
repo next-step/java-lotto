@@ -9,11 +9,11 @@ import java.util.List;
 
 public class ResultView {
 
-    public void printWinningInfos(LottoResult lottoResult, long totalPurchase) {
+    public void printWinningInfos(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("----------");
 
-        printStatistics(lottoResult, totalPurchase);
+        printStatistics(lottoResult);
     }
 
     public void printLotto(List<LottoTicket> lottoTickets) {
@@ -24,7 +24,7 @@ public class ResultView {
         }
     }
 
-    private static void printStatistics(LottoResult lottoResult, long totalPurchase) {
+    private static void printStatistics(LottoResult lottoResult) {
         long totalEarnings = 0;
 
         for (WinningInfo winningInfo : WinningInfo.values()) {
@@ -34,7 +34,7 @@ public class ResultView {
             totalEarnings += winningInfo.getReward() * count;
         }
 
-        double profitRatio = lottoResult.calculateProfitRatio(totalEarnings, totalPurchase);
+        double profitRatio = lottoResult.calculateProfitRatio(totalEarnings);
         print(profitRatio);
     }
 
