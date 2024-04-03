@@ -3,6 +3,7 @@ package lotto.service;
 import java.util.List;
 
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.publish.LottoCalculator;
 import lotto.domain.publish.LottoGenerator;
 import lotto.domain.reward.LottoJudge;
@@ -25,13 +26,15 @@ public class LottoMachine {
         this.lottoJudge = lottoJudge;
     }
 
-    public List<Lotto> publish(final int totalPrice) {
-        final int quantity = lottoCalculator.calculateQuantity(totalPrice);
+    public Lottos publish(final int totalPrice, final List<List<Integer>> manualNumbers) {
+        final int autoQuantity = lottoCalculator.calculateAutoQuantity(totalPrice, manualNumbers.size());
+        final List<Lotto> manualLottos = lottoGenerator.generateManualLottos(manualNumbers);
+        final List<Lotto> autoLottos = lottoGenerator.generateAutoLottos(autoQuantity);
 
-        return lottoGenerator.generateLottos(quantity);
+        return new Lottos(manualLottos, autoLottos);
     }
 
-    public LottoResult judge(final List<Lotto> lottos, final WinningLotto winningLotto) {
+    public LottoResult judge(final Lottos lottos, final WinningLotto winningLotto) {
         return lottoJudge.judge(lottos, winningLotto);
     }
 }
