@@ -14,10 +14,10 @@ public class LottoResult {
     }
 
     public double returnRate(int amount) {
-        Long revenue = this.map.entrySet()
+        long revenue = this.map.entrySet()
                 .stream()
                 .mapToLong(entry -> entry.getKey().getRevenue() * entry.getValue())
                 .reduce(0, Long::sum);
-        return Double.valueOf(revenue) / amount;
+        return (double) revenue / amount;
     }
 }
