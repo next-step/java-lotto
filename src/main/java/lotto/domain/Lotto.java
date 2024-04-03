@@ -8,13 +8,7 @@ public class Lotto {
     private List<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_LENGTH) {
-            throw new IllegalArgumentException("6자리가 아닌 로또번호가 입력되었습니다.");
-        }
-        if (numbers.stream().distinct().count() < numbers.size()
-        ) {
-            throw new IllegalArgumentException("중복되는 로또 번호가 입력되었습니다.");
-        }
+        validateLottoNumbers(numbers);
         this.numbers = numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
@@ -33,6 +27,17 @@ public class Lotto {
     public boolean matchBonus(LottoNumber bonusNumber) {
         return this.numbers.contains(bonusNumber);
     }
+
+    private static void validateLottoNumbers(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_LENGTH) {
+            throw new IllegalArgumentException("6자리가 아닌 로또번호가 입력되었습니다.");
+        }
+        if (numbers.stream().distinct().count() < numbers.size()
+        ) {
+            throw new IllegalArgumentException("중복되는 로또 번호가 입력되었습니다.");
+        }
+    }
+
 
     @Override
     public String toString() {
