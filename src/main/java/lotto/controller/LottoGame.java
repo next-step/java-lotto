@@ -2,7 +2,7 @@ package lotto.controller;
 
 import java.util.List;
 
-import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.reward.LottoResult;
 import lotto.domain.reward.WinningLotto;
 import lotto.service.LottoMachine;
@@ -27,7 +27,7 @@ public class LottoGame {
 
     public void run() {
         try {
-            final List<Lotto> lottos = buyLottos();
+            final Lottos lottos = buyLottos();
             outputView.printLottoPurchaseHistory(lottos);
 
             final LottoResult lottoResult = judgeLottos(lottos);
@@ -41,13 +41,15 @@ public class LottoGame {
         }
     }
 
-    private List<Lotto> buyLottos() {
+    private Lottos buyLottos() {
         final int totalPrice = inputView.readLottoTotalPrice();
+        final int manualCount = inputView.readManualLottoCount();
+        final List<List<Integer>> manualNumbers = inputView.readLottoManualNumbers(manualCount);
 
-        return lottoMachine.publish(totalPrice);
+        return lottoMachine.publish(totalPrice, manualNumbers);
     }
 
-    private LottoResult judgeLottos(final List<Lotto> lottos) {
+    private LottoResult judgeLottos(final Lottos lottos) {
         final WinningLotto winningLotto = WinningLotto.of(
                 inputView.readLottoWinningNumbers(),
                 inputView.readLottoBonusNumber()

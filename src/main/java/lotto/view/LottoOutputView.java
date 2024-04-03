@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.reward.LottoRank;
 import lotto.domain.reward.LottoResult;
 import lotto.view.io.Output;
@@ -24,10 +25,16 @@ public class LottoOutputView {
         this.output = output;
     }
 
-    public void printLottoPurchaseHistory(final List<Lotto> lottos) {
-        output.printLine(format("{0}개를 구매했습니다.", lottos.size()));
+    public void printLottoPurchaseHistory(final Lottos lottos) {
+        output.printLine(format(
+                "\n수동으로 {0}개, 자동으로 {1}개를 구매했습니다.",
+                lottos.countManualLottos(),
+                lottos.countAutoLottos()
+        ));
 
-        lottos.forEach(lotto -> {
+        final List<Lotto> allLottos = lottos.allLottos();
+
+        allLottos.forEach(lotto -> {
             final List<Integer> numbers = lotto.extractLottoNumbers();
             numbers.sort(Comparator.naturalOrder());
             output.printLine(numbers.toString());
