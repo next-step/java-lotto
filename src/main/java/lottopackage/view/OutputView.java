@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class OutputView {
-    
+
     public void printLottoGroup(List<Lotto> lottoGroup) {
         for (int i = 0; i < lottoGroup.size(); i++ ) {
             List<Integer> lotto = lottoGroup.get(i).getLottoNumber();
