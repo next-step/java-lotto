@@ -1,9 +1,6 @@
 package view;
 
-import domain.Lotto;
-import domain.LottoResultOutput;
-import domain.MyLotto;
-import domain.WinStatus;
+import domain.*;
 
 import java.util.List;
 
@@ -26,7 +23,10 @@ public class LottoOutput {
     }
 
     private void lottoPrint(Lotto result) {
-        System.out.println(result.getNumbers());
+        List<LottoBall> lottoNumbers = result.getNumbers();
+        for (int i = 0; i < lottoNumbers.size(); i++) {
+            System.out.println();
+        }
     }
 
     public int totalPrize(WinStatus winStatus) {

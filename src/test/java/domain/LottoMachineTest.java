@@ -4,18 +4,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+
 class LottoMachineTest {
     @Test
     @DisplayName("랜덤볼 결과 확정")
     void randomBall() {
         LottoMachine lottoMachine = new LottoMachine() {
             @Override
-            public List<Integer> randomBall() {
+            public List<LottoBall> randomBall() {
                 return List.of(1, 2, 3, 4, 5, 6);
             }
         };

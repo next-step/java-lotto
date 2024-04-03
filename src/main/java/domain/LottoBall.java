@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ public class LottoBall {
     private final int number;
 
     static {
-        for (int i = 1; i <= RANDOM_BALL_MAX; i++) {
+        for (int i = RANDOM_BALL_MIN; i <= RANDOM_BALL_MAX; i++) {
             lottoBalls.put(i, new LottoBall(i));
         }
     }
@@ -21,10 +22,10 @@ public class LottoBall {
         this.number = num;
     }
 
-    public static Integer ball(int num) {
+    public static LottoBall ball(int num) {
         LottoBall lottoBall = lottoBalls.get(num);
         if (lottoBall == null)
             throw new IllegalArgumentException("잘못된 공 번호 입니다");
-        return lottoBall.number;
+        return lottoBall;
     }
 }
