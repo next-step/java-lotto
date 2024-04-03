@@ -1,24 +1,26 @@
 package domain.lotto.vo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
-  private Integer number;
+  private final Integer number;
   private static final int MIN_NUMBER = 1;
   private static final int MAX_NUMBER = 45;
 
-  private static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>();
+  private static final Map<Integer, LottoNumber> LOTTO_NUMBERS = new HashMap<>();
 
   static {
     IntStream.range(MIN_NUMBER, MAX_NUMBER + 1)
-        .mapToObj(LottoNumber::new).forEach(LOTTO_NUMBERS::add);
+            .forEach((number) -> LOTTO_NUMBERS.put(number, new LottoNumber(number)));
   }
 
   public static LottoNumber of(int number) {
     validateNumber(number);
-    return LOTTO_NUMBERS.get(number - 1);
+    return LOTTO_NUMBERS.get(number);
   }
 
   private LottoNumber(Integer number) {
