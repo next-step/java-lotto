@@ -6,11 +6,8 @@ import static lotto.domain.LottoNumber.MINIMUM_LOTTO_NUMBER;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import lotto.domain.LottoNumber;
 
 public class RandomLottoNumbersPicker implements LottoNumbersPicker {
 
@@ -19,12 +16,11 @@ public class RandomLottoNumbersPicker implements LottoNumbersPicker {
             .collect(Collectors.toList());
 
     @Override
-    public Set<LottoNumber> pick() {
+    public List<Integer> pick() {
         Collections.shuffle(numbersRange);
 
         return numbersRange.stream()
                 .limit(LOTTO_NUMBERS_SIZE)
-                .map(LottoNumber::new)
-                .collect(Collectors.toUnmodifiableSet());
+                .collect(Collectors.toUnmodifiableList());
     }
 }

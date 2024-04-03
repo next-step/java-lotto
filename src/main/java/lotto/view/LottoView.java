@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import lotto.domain.Lotto;
 import lotto.domain.reward.LottoRank;
@@ -43,7 +44,7 @@ public class LottoView {
         }
     }
 
-    public int[] readLottoWinningNumbers() {
+    public List<Integer> readLottoWinningNumbers() {
         output.printLine("\n지난 주 당첨 번호를 입력해 주세요.");
 
         final String userInput = input.readLine();
@@ -53,8 +54,8 @@ public class LottoView {
         validateWinningNumbersInputMatchesPattern(trimmedUserInput);
 
         return Arrays.stream(trimmedUserInput.split(LOTTO_WINNING_NUMBERS_DELIMITER))
-                .mapToInt(Integer::parseInt)
-                .toArray();
+                .map(Integer::parseInt)
+                .collect(Collectors.toUnmodifiableList());
     }
 
     public int readLottoBonusNumber() {

@@ -1,5 +1,7 @@
 package lotto.domain.reward;
 
+import java.util.List;
+
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
@@ -28,7 +30,7 @@ public class WinningLotto {
         return LottoRank.from(matchingCount, isMatchedBonus);
     }
 
-    public static WinningLotto of(final int[] numbers, final int bonusNumber) {
+    public static WinningLotto of(final List<Integer> numbers, final int bonusNumber) {
         final Lotto lotto = Lotto.from(numbers);
         final LottoNumber bonus = new LottoNumber(bonusNumber);
 

@@ -1,12 +1,10 @@
 package lotto.domain.publish;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 
 public class LottoGenerator {
 
@@ -33,8 +31,8 @@ public class LottoGenerator {
     }
 
     private Lotto generateLotto() {
-        final Set<LottoNumber> lottoNumbers = this.lottoNumbersPicker.pick();
+        final List<Integer> numbers = this.lottoNumbersPicker.pick();
 
-        return new Lotto(lottoNumbers);
+        return Lotto.from(numbers);
     }
 }
