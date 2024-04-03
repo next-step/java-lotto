@@ -12,8 +12,7 @@ public class OutputView {
     public void printLottoGroup(List<Lotto> lottoGroup) {
         for (int i = 0; i < lottoGroup.size(); i++ ) {
             List<Integer> lotto = lottoGroup.get(i).getLottoNumber();
-            System.out.println("[" + lotto.get(0) + ", " + lotto.get(1) + ", "+ lotto.get(2) + ", "
-                    + lotto.get(3) + ", "+ lotto.get(4) + ", "+ lotto.get(5) + "]");
+            System.out.println(lotto);
         }
     }
 

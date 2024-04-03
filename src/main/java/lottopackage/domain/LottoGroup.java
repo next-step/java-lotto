@@ -12,6 +12,10 @@ public class LottoGroup {
         }
     }
 
+    public List<Lotto> getLottoGroup() {
+        return lottoGroup;
+    }
+
     public List<Prize> isWinning(List<Integer> winningNumber) {
         List<Prize> lottoResult = new ArrayList<>();
         for (int i = 0; i < lottoGroup.size(); i++ ) {

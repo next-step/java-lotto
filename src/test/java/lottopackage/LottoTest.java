@@ -8,6 +8,7 @@
 package lottopackage;
 
 import lottopackage.domain.Lotto;
+import lottopackage.domain.Prize;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 
@@ -45,10 +46,10 @@ public class LottoTest {
         List<Integer> noWinningNumber = new ArrayList<>(Arrays.asList(11, 12, 13, 14, 15, 16));
 
         // when, then
-        Assertions.assertThat(lotto.isPrize(winningNumber1st)).isEqualTo(1);
-        Assertions.assertThat(lotto.isPrize(winningNumber3rd)).isEqualTo(3);
-        Assertions.assertThat(lotto.isPrize(winningNumber4th)).isEqualTo(4);
-        Assertions.assertThat(lotto.isPrize(winningNumber5th)).isEqualTo(5);
-        Assertions.assertThat(lotto.isPrize(noWinningNumber)).isEqualTo(6);
+        Assertions.assertThat(lotto.isPrize(winningNumber1st)).isEqualTo(Prize.FIRST);
+        Assertions.assertThat(lotto.isPrize(winningNumber3rd)).isEqualTo(Prize.THIRD);
+        Assertions.assertThat(lotto.isPrize(winningNumber4th)).isEqualTo(Prize.FOURTH);
+        Assertions.assertThat(lotto.isPrize(winningNumber5th)).isEqualTo(Prize.FIFTH);
+        Assertions.assertThat(lotto.isPrize(noWinningNumber)).isEqualTo(Prize.SIXTH);
     }
 }

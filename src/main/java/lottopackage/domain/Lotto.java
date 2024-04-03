@@ -9,8 +9,10 @@ import java.util.stream.IntStream;
 
 public class Lotto {
 
+
+
     /* Variables */
-    public final static List<Integer> totalLottoNumber = new ArrayList<>(
+    public static List<Integer> totalLottoNumber = new ArrayList<>(
             Arrays.stream(IntStream.rangeClosed(1, 45).toArray()).boxed().collect(Collectors.toList()));
 
     List<Integer> lottoNumber;
@@ -18,7 +20,7 @@ public class Lotto {
     /* Constructor */
     public Lotto() {
         Collections.shuffle(totalLottoNumber);
-        lottoNumber = totalLottoNumber.subList(0, 6);
+        lottoNumber = new ArrayList<>(totalLottoNumber.subList(0, 6));
     }
 
     public Lotto(List<Integer> lottoNumber) {
@@ -30,7 +32,6 @@ public class Lotto {
         return lottoNumber;
     }
 
-    /* 테스트용 */
     public static List<Integer> getTotalLottoNumber() {
         return totalLottoNumber;
     }
