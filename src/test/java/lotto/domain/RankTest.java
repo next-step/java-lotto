@@ -36,7 +36,7 @@ class RankTest {
     void third_rank_test(String winningNumbers, String userNumbers, boolean isBonus) {
         Lotto winningLotto = Lotto.createFromString(winningNumbers);
         Lotto userLotto = Lotto.createFromString(userNumbers);
-        Rank rank = Rank.of(userLotto.matchCount(winningLotto), false);
+        Rank rank = Rank.of(userLotto.matchCount(winningLotto), isBonus);
 
         assertThat(rank).isEqualTo(Rank.THIRD);
     }
