@@ -5,8 +5,12 @@ public class WinningLotto {
     private LottoNumber bonusNumber;
 
     public WinningLotto(Lotto winner, int bonusNumber) {
+        LottoNumber bonus = new LottoNumber(bonusNumber);
+        if(winner.matchBonus(bonus)){
+            throw new IllegalArgumentException("로또 당첨번호와 2등 보너스 번호는 중복될 수 없습니다.");
+        }
         this.winner = winner;
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = bonus;
     }
 
     public WinningType findWinningType(Lotto compare) {
