@@ -12,7 +12,7 @@ public class LottoGroup {
         }
     }
 
-    public List<Prize> isWining(List<Integer> winningNumber) {
+    public List<Prize> isWinning(List<Integer> winningNumber) {
         List<Prize> lottoResult = new ArrayList<>();
         for (int i = 0; i < lottoGroup.size(); i++ ) {
             lottoResult.add( lottoGroup.get(i).isPrize(winningNumber) );
