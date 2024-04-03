@@ -14,7 +14,7 @@ public class LottosTest {
     void winningStatistic() {
         List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
         Lotto winner = new Lotto(winNumber);
-        Integer bonusNumber = 0;
+        Integer bonusNumber = 45;
         WinningLotto winningLotto = new WinningLotto(winner, bonusNumber);
 
         List<Integer> buyNumber1 = Arrays.asList(1, 2, 3, 5, 6, 7);

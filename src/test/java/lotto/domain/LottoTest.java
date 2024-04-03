@@ -33,7 +33,6 @@ class LottoTest {
     @DisplayName("로또가 7자리 이상이면 오류이다.")
     @Test
     void lengthExceedException() {
-
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8)));
     }
 
