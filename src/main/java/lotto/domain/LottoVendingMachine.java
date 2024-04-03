@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoVendingMachine {
 
@@ -12,7 +13,9 @@ public class LottoVendingMachine {
 
     public List<LottoTicket> receive(int money) {
         validate(money);
-        return generate(getNumberOfLotto(money));
+        return Stream.generate(LottoTicket::new)
+                .limit(getQuantity(money))
+                .collect(Collectors.toList());
     }
 
     private static void validate(int money) {
@@ -25,7 +28,7 @@ public class LottoVendingMachine {
         return money % 1000 != 0;
     }
 
-    public int getNumberOfLotto(int money) {
+    public int getQuantity(int money) {
         return money / lottoPrice;
     }
 
