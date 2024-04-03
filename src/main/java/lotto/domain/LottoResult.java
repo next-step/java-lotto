@@ -2,19 +2,19 @@ package lotto.domain;
 
 import java.util.Map;
 
-public class WinningStatic {
-    private Map<WinningType, Long> winningStatistic;
+public class LottoResult {
+    private Map<WinningType, Long> map;
 
-    public WinningStatic(Map<WinningType, Long> winningStatistic) {
-        this.winningStatistic = winningStatistic;
+    public LottoResult(Map<WinningType, Long> map) {
+        this.map = map;
     }
 
     public Long countWinnersByWinningType(WinningType type) {
-        return winningStatistic.getOrDefault(type, 0L);
+        return map.getOrDefault(type, 0L);
     }
 
     public double returnRate(int amount) {
-        Long revenue = this.winningStatistic.entrySet()
+        Long revenue = this.map.entrySet()
                 .stream()
                 .mapToLong(entry -> entry.getKey().getRevenue() * entry.getValue())
                 .reduce(0, Long::sum);

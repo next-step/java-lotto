@@ -4,7 +4,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +22,16 @@ public class LottosTest {
         Lotto lotto2 = new Lotto(buyNumber2);
         Lottos lottos = new Lottos(List.of(lotto1, lotto2));
 
-        Map<WinningType, Long> winningStatic = lottos.winningCount(winningLotto);
-        Assertions.assertThat(winningStatic.get(WinningType.HIT_COUNT_3)).isEqualTo(1L);
-        Assertions.assertThat(winningStatic.get(WinningType.HIT_COUNT_5)).isEqualTo(1L);
+        LottoResult lottoResult = lottos.winningResult(winningLotto);
+
+        LottoResult answer = new LottoResult(
+                Map.of(
+                        WinningType.HIT_COUNT_3, 1L,
+                        WinningType.HIT_COUNT_5, 1L
+                )
+        );
+        Assertions.assertThat(lottoResult)
+                .usingRecursiveComparison()
+                .isEqualTo(answer);
     }
 }

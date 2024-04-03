@@ -1,13 +1,10 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.WinningStatic;
+import lotto.domain.LottoResult;
 import lotto.domain.WinningType;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class OutputView {
@@ -20,11 +17,11 @@ public class OutputView {
         }
     }
 
-    public static void printWinningStatic(WinningStatic winningStatic) {
+    public static void printWinningStatic(LottoResult lottoResult) {
         System.out.println("[당첨 통계]");
         StringBuilder result = new StringBuilder();
         for (WinningType type : WinningType.values()) {
-            Long winnerCount = winningStatic.countWinnersByWinningType(type);
+            Long winnerCount = lottoResult.countWinnersByWinningType(type);
             Long hitCount = type.getHitCount();
             Long revenue = type.getRevenue();
 

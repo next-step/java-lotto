@@ -20,8 +20,8 @@ public class AutoLottoMain {
         int bonusNumber = InputView.scanBonusNumber();
         WinningLotto winningLotto = new WinningLotto(winner, bonusNumber);
 
-        WinningStatic winningStatic = new WinningStatic(issuedLottos.winningCount(winningLotto));
-        OutputView.printWinningStatic(winningStatic);
-        OutputView.printReturnRate(winningStatic.returnRate(amount));
+        LottoResult lottoResult = issuedLottos.winningResult(winningLotto);
+        OutputView.printWinningStatic(lottoResult);
+        OutputView.printReturnRate(lottoResult.returnRate(amount));
     }
 }
