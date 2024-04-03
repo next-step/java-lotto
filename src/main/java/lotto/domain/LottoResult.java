@@ -25,9 +25,10 @@ public class LottoResult {
     public double calculateProfitRatio(long totalEarnings) {
         return (double) totalEarnings / (calculateTotalWins() * 1000);
     }
+
     public long calculateTotalWins() {
         return lottoResult.values().stream()
-                .mapToLong(Long::longValue) // Convert Long to long
-                .sum(); // Sum the values
+                .mapToLong(Long::longValue)
+                .sum();
     }
 }
