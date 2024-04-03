@@ -18,7 +18,7 @@ public class LottoGenerator {
         this.lottoNumbersPicker = lottoNumbersPicker;
     }
 
-    public List<Lotto> generateLottos(final int quantity) {
+    public List<Lotto> generateAutoLottos(final int quantity) {
         validateQuantityIsMoreThanMinimum(quantity);
 
         return Stream.generate(this::generateLotto)
@@ -28,7 +28,7 @@ public class LottoGenerator {
 
     private void validateQuantityIsMoreThanMinimum(final int quantity) {
         if (quantity < MINIMUM_LOTTO_QUANTITY) {
-            throw new IllegalArgumentException("로또 구매 개수는 1이상의 자연수여야 합니다. 개수: " + quantity);
+            throw new IllegalArgumentException("자동 로또 개수는 1이상의 자연수여야 합니다. 개수: " + quantity);
         }
     }
 
@@ -36,5 +36,11 @@ public class LottoGenerator {
         final Set<LottoNumber> numbers = this.lottoNumbersPicker.pick();
 
         return new Lotto(numbers);
+    }
+
+    public List<Lotto> generateManualLottos(final List<List<Integer>> manualNumbers) {
+        return manualNumbers.stream()
+                .map(Lotto::from)
+                .collect(Collectors.toUnmodifiableList());
     }
 }
