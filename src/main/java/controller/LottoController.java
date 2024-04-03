@@ -20,7 +20,7 @@ public class LottoController {
 
     public WinStatus resultReturn(Lotto winLotto) {
         for (Lotto currentLotto  : myLotto.getLotto()) {
-            int price = currentLotto .numberCheck(winLotto);
+            int price = currentLotto.numberCheck(winLotto);
             winStatus.correct(price);
         }
         return winStatus;
