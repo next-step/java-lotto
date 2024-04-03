@@ -17,7 +17,13 @@ public class Main {
     resultView.print("구입금액을 입력해 주세요.");
     int userMoney = inputView.inputInteger();
 
-    int count = lottoMachine.createLotto(userMoney);
+    resultView.print("수동으로 구매할 로또 수를 입력해 주세요.");
+    int manualLottoCount = inputView.inputInteger();
+
+    resultView.print("수동으로 구매할 번호를 입력해 주세요.");
+    List<List<LottoNumber>> manualLottoNumberList = inputView.inputManualLottoNumberList(manualLottoCount);
+
+    int count = lottoMachine.createLotto(userMoney, manualLottoNumberList);
     resultView.print(String.format("%d개를 구매했습니다.", count));
     lottoMachine.getAllLottoList().forEach(resultView::print);
 

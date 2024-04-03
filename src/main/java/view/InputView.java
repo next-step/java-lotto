@@ -1,6 +1,8 @@
 package view;
 
 import domain.lotto.vo.LottoNumber;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -26,5 +28,13 @@ public class InputView {
         .map(Integer::parseInt)
         .map(LottoNumber::of)
         .collect(Collectors.toList());
+  }
+
+  public List<List<LottoNumber>> inputManualLottoNumberList(int count){
+    List<List<LottoNumber>> manualLottoNumberList = new ArrayList<>();
+    for(int i = 0 ; i < count ; i++){
+      manualLottoNumberList.add(inputLottoNumberList());
+    }
+    return manualLottoNumberList;
   }
 }
