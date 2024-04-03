@@ -1,8 +1,6 @@
-package calculator;
+package calculator.domain;
 
-import inputview.InputView;
-
-import java.util.List;
+import calculator.domain.Calculator;
 
 public class CalculatorMain {
     public static void main(String[] args) {

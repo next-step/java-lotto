@@ -1,4 +1,4 @@
-package inputview;
+package calculator.view;
 
 import java.util.*;
 
@@ -8,18 +8,6 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the value. (ex) 2 + 3 * 4 / 5");
         String userInput = scanner.nextLine();
-        List<List<String>> operandAndOperator = splitString(userInput);
-
-        return operandAndOperator;
-    }
-
-    // 테스트용
-    public List<List<String>> operandAndOperator(String userInput) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the value. (ex) 2 + 3 * 4 / 5");
-        if (userInput == null) {
-            throw new IllegalArgumentException("문자열 계산기 입력값이 잘못되었습니다. 입력예시: 2 + 3 * 4 / 5");
-        }
         List<List<String>> operandAndOperator = splitString(userInput);
 
         return operandAndOperator;
