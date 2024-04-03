@@ -38,14 +38,29 @@ public class ResultView {
         StringBuilder result = new StringBuilder();
         result.append(ANSWER_STATICS).append(NEW_LINE).append(LINE).append(NEW_LINE);
 
+        structureRankingForm(lottoResult, result);
+        
+        result.append(createMarginForm(lottoResult, lottoFee)).append(NEW_LINE);
+        return result.toString();
+    }
+
+    private static void structureRankingForm(LottoResult lottoResult, StringBuilder result) {
         List<LottoRank> ranks = Arrays.asList(LottoRank.values());
         Collections.reverse(ranks);
         for (int i = 1; i < ranks.size(); i++) {
             LottoRank rank = ranks.get(i);
             result.append(createRankingForm(lottoResult,rank)).append(NEW_LINE);
         }
-        result.append(createMarginForm(lottoResult, lottoFee)).append(NEW_LINE);
-        return result.toString();
+    }
+
+    private static String createRankingForm(LottoResult lottoResult, LottoRank lottoRank) {
+        int count = (int) lottoResult.getLottoRanks().stream()
+                .filter(rank -> lottoRank == rank)
+                .count();
+        if (lottoRank == LottoRank.SECOND) {
+            return lottoRank.matchCount() + "개 일치, 보너스 볼 일치 (" + lottoRank.prizeMoney() + ")-" + lottoResult.count(lottoRank) + "개";
+        }
+        return lottoRank.matchCount() + "개 일치 (" + lottoRank.prizeMoney() + ")-" + lottoResult.count(lottoRank) + "개";
     }
 
     private static String createMarginForm(LottoResult lottoResult, LottoFee lottoFee) {
@@ -60,13 +75,5 @@ public class ResultView {
         return "손해";
     }
 
-    private static String createRankingForm(LottoResult lottoResult, LottoRank lottoRank) {
-        int count = (int) lottoResult.getLottoRanks().stream()
-                .filter(rank -> lottoRank == rank)
-                .count();
-        if (lottoRank == LottoRank.SECOND) {
-            return lottoRank.matchCount() + "개 일치, 보너스 볼 일치 (" + lottoRank.prizeMoney() + ")-" + lottoResult.count(lottoRank) + "개";
-        }
-        return lottoRank.matchCount() + "개 일치 (" + lottoRank.prizeMoney() + ")-" + lottoResult.count(lottoRank) + "개";
-    }
+
 }

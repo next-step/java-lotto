@@ -74,4 +74,4 @@
 - [x] LottoRankKey -> 블럭 생략 x
 - [ ] LottoRank -> 디자인패턴은 책임사슬패턴 / 여기서 핵심은 매개변수를 통해 열거타입을 찾는 주체가 LottoRank가 아니라 LottoRank안의 열거 타입들 자체 공부
 - [x] LottoController -> 주석 고민 하기 과연 주석은 언제 필요한가? -> 시그니처를 보여주는 네이밍이면 주석 달지 말기
-- [ ] ResultView -> 행위들을 좀 더 함수로 분리해서 가독성 
+- [x] ResultView -> 행위들을 좀 더 함수로 분리해서 가독성 
