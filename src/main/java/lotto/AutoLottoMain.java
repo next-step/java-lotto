@@ -10,6 +10,9 @@ public class AutoLottoMain {
     public static void main(String[] args) {
 
         int amount = InputView.scanAmount();
+        int manualLottoCount = InputView.scanManualCount();
+        List<Lotto> manualLottos = InputView.scanManualNumbers(manualLottoCount);
+
         LottoStore lottoStore = new LottoStore();
         List<Lotto> lottos = lottoStore.buyLottos(amount);
         Lottos issuedLottos = new Lottos(lottos);
