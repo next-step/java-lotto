@@ -11,7 +11,7 @@ public class InputView {
         System.out.println("구입 금액을 입력해주세요.");
         return scanner.nextInt();
     }
-
+    
     public List<Integer> winningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
         String[] winningNumberString = scanner.nextLine().trim().split(",");
