@@ -29,10 +29,12 @@ public enum CalculationMethod {
     }
 
     public static CalculationMethod find(String calculation) {
+
         return Arrays.stream(CalculationMethod.values())
                     .filter(calculationMethod2 -> calculationMethod2.calculation.equals(calculation))
                     .findFirst()
                     .orElseThrow(() -> new IllegalArgumentException("+, -, *, / 중 하나여야 합니다!"));
-
     }
+
+
 }

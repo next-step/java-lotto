@@ -17,15 +17,10 @@ public class Calculator {
         outputView = new OutputView();
     }
 
-    public CalculationMethod checkOperator(String operator) {
-        CalculationMethod calculationMethod2 = CalculationMethod.find(operator);
-        return calculationMethod2;
-    }
-
     public List<CalculationMethod> operatorsStringToCalculationMethod(List<String> stringOperators) {
         List<CalculationMethod> calculationMethodOperators = new ArrayList<>();
         for (int i = 0; i < stringOperators.size(); i++) {
-            calculationMethodOperators.add(checkOperator(stringOperators.get(i)));
+            calculationMethodOperators.add(CalculationMethod.find(stringOperators.get(i)));
         }
         return calculationMethodOperators;
     }
@@ -41,7 +36,8 @@ public class Calculator {
         operators = operatorsStringToCalculationMethod(operandAndOperator.get(operator));
 
         int result = operators.get(0).calculate(operands.get(0), operands.get(1));
-        for (int i = 1; i < (operators.size()); i++) {
+        for (int i = 1; i < (operators.size());
+             i++) {
             result = operators.get(i).calculate(String.valueOf(result), operands.get(i + 1));
         }
 
