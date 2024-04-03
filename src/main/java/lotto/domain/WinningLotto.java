@@ -2,11 +2,11 @@ package lotto.domain;
 
 public class WinningLotto {
     private Lotto winner;
-    private int bonusNumber;
+    private LottoNumber bonusNumber;
 
     public WinningLotto(Lotto winner, int bonusNumber) {
         this.winner = winner;
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     public WinningType findWinningType(Lotto compare) {

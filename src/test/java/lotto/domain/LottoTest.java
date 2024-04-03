@@ -26,7 +26,7 @@ class LottoTest {
     void matchBonus() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(numbers);
-        Integer bonusNumber = 6;
+        LottoNumber bonusNumber = new LottoNumber(6);
         Assertions.assertThat(lotto.matchBonus(bonusNumber)).isTrue();
     }
 

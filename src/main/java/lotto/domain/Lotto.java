@@ -1,30 +1,26 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lotto {
     public static final int LIMIT_LOTTO_LENGTH = 7;
-    private List<Integer> numbers;
+    private List<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
         if (numbers.size() >= LIMIT_LOTTO_LENGTH) {
             throw new IllegalArgumentException("6자리 초과의 로또 번호가 입력되었습니다.");
         }
-        if (!lottoRange().containsAll(numbers)) {
-            throw new IllegalArgumentException("1-45 범위를 벗어나는 로또 숫자가 입력되었습니다.");
-        }
         if (numbers.stream().distinct().count() < numbers.size()
         ) {
             throw new IllegalArgumentException("중복되는 로또 번호가 입력되었습니다.");
         }
-        Collections.sort(numbers);
-        this.numbers = numbers;
+        this.numbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return numbers;
     }
 
@@ -34,20 +30,12 @@ public class Lotto {
                 .count();
     }
 
-    public boolean matchBonus(int bonusNumber) {
+    public boolean matchBonus(LottoNumber bonusNumber) {
         return this.numbers.contains(bonusNumber);
-    }
-
-    private static List<Integer> lottoRange() {
-        return IntStream.rangeClosed(1, 45)
-                .boxed()
-                .collect(Collectors.toList());
     }
 
     @Override
     public String toString() {
-        Collections.sort(numbers);
-        return numbers + "";
+        return "" + numbers;
     }
-
 }
