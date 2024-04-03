@@ -10,7 +10,7 @@ public class Lotto {
 
     private final Set<LottoNumber> numbers;
 
-    private Lotto(final Set<LottoNumber> numbers) {
+    public Lotto(final Set<LottoNumber> numbers) {
         validateNumbersHaveSpecifiedSize(numbers);
 
         this.numbers = numbers;

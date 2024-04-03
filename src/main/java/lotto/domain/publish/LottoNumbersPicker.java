@@ -1,8 +1,10 @@
 package lotto.domain.publish;
 
-import java.util.List;
+import java.util.Set;
+
+import lotto.domain.LottoNumber;
 
 public interface LottoNumbersPicker {
 
-    List<Integer> pick();
+    Set<LottoNumber> pick();
 }
