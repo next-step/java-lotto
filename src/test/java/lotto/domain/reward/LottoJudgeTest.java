@@ -17,6 +17,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 
 class LottoJudgeTest {
 
@@ -33,7 +34,7 @@ class LottoJudgeTest {
     }
 
     private LottoResult actualLottoResult() {
-        final List<Lotto> lottos = List.of(
+        final List<Lotto> autoLottos = List.of(
                 lotto(1, 2, 3, 4, 5, 6),
                 lotto(1, 2, 3, 4, 5, 6),
                 lotto(1, 2, 3, 4, 5, 7),
@@ -46,6 +47,7 @@ class LottoJudgeTest {
                 lotto(7, 8, 9, 10, 11, 12)
         );
         final WinningLotto winningLotto = WinningLotto.of(List.of(1, 2, 3, 4, 5, 6), 7);
+        final Lottos lottos = new Lottos(List.of(), autoLottos);
 
         return new LottoJudge().judge(lottos, winningLotto);
     }
