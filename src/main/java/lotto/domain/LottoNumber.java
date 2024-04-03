@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private int value;
 
     public LottoNumber(int value) {
@@ -13,6 +13,10 @@ public class LottoNumber {
             throw new IllegalArgumentException("1-45 범위를 벗어나는 로또 숫자가 입력되었습니다.");
         }
         this.value = value;
+    }
+
+    public int getValue() {
+        return value;
     }
 
     private static List<Integer> lottoRange() {
@@ -37,5 +41,9 @@ public class LottoNumber {
     @Override
     public String toString() {
         return "" + value;
+    }
+    @Override
+    public int compareTo(LottoNumber other) {
+        return Integer.compare(this.value, other.value);
     }
 }

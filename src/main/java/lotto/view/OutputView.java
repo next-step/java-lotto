@@ -1,16 +1,22 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.WinningStatic;
 import lotto.domain.WinningType;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class OutputView {
     public static void printBuyLottos(List<Lotto> lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
+
         for (Lotto lotto : lottos) {
-            System.out.println(lotto.toString());
+            Collections.sort(lotto.getNumbers());
+            System.out.println(lotto);
         }
     }
 

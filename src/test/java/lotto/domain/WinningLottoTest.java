@@ -13,7 +13,7 @@ public class WinningLottoTest {
     @DisplayName("로또 당첨번호와 2등 보너스 번호는 중복될 경우 exception")
     @Test
     void duplicateWithBonus() {
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(numbers);
         int bonusNumber = 6;
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningLotto(lotto, bonusNumber));
