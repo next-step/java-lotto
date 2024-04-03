@@ -8,6 +8,7 @@ import domain.WinStatus;
 import java.util.List;
 
 public class LottoOutput {
+    private final int BONUS_PRICE_INDEX = 3;
     LottoResultOutput[] lottoResultOutput;
     private void wordSetting() {
         lottoResultOutput = new LottoResultOutput[4];
@@ -34,9 +35,13 @@ public class LottoOutput {
         wordSetting();
         System.out.println("당첨 통계");
         System.out.println("--------");
-        for (int i = 0; i < 4; i++) {
-            System.out.println(lottoResultOutput[i].getCorrectCount() + lottoResultOutput[i].getPrice()+ resultWinStatus.get(i) + "개");
+        for (int i = 0; i < 5; i++) {
             cnt += resultWinStatus.get(i);
+            if (BONUS_PRICE_INDEX == i) {
+                System.out.println(lottoResultOutput[i].getCorrectCount() + "개 일치, 보너스 볼 일치 (" + lottoResultOutput[i].getPrice() + "원) - " + resultWinStatus.get(i) + "개");
+                continue;
+            }
+            System.out.println(lottoResultOutput[i].getCorrectCount() + "개 일치 (" + lottoResultOutput[i].getPrice() + "원) - " + resultWinStatus.get(i) + "개");
         }
         return cnt;
     }
