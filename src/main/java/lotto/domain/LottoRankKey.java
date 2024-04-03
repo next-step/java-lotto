@@ -26,8 +26,12 @@ public class LottoRankKey {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         LottoRankKey that = (LottoRankKey) o;
         return matchCount == that.matchCount && isBonus == that.isBonus;
     }
