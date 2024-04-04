@@ -9,8 +9,6 @@ import java.util.stream.IntStream;
 
 public class Lotto {
 
-
-
     /* Variables */
     public static List<Integer> totalLottoNumber = new ArrayList<>(
             Arrays.stream(IntStream.rangeClosed(1, 45).toArray()).boxed().collect(Collectors.toList()));

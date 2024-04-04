@@ -27,9 +27,9 @@ public class OutputView {
             System.out.println(prizeGroup.get(i).same + "개 일치 ("
                     + prizeGroup.get(i).winningAmount + "원)- "
                     + Collections.frequency(lottoResult, prizeGroup.get(i)) + "개");
-            totalWinningAmount += prizeGroup.get(i).winningAmount;
+            totalWinningAmount += (prizeGroup.get(i).winningAmount) * (Collections.frequency(lottoResult, prizeGroup.get(i)));
         }
 
-        System.out.println("총 수익률은" + totalWinningAmount/totalLottoGroupSize + "입니다.");
+        System.out.println("총 수익률은" + (float)totalWinningAmount / (totalLottoGroupSize * 1000) + "입니다.");
     }
 }

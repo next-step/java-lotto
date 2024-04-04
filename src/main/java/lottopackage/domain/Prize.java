@@ -17,9 +17,4 @@ public enum Prize {
         this.same = same;
         this.winningAmount = winningPrize;
     }
-
-    public int getPrizeNumber() {
-        return prizeNumber;
-    }
-
 }

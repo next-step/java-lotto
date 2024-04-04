@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in).useDelimiter("\\s*\\n\\s*");
 
     public int purchaseAmount() {
         System.out.println("구입 금액을 입력해주세요.");
@@ -13,14 +13,16 @@ public class InputView {
     }
 
     public List<Integer> winningNumber() {
-        System.out.println("지난 주 당첨 번호를 입력해주세요. (ex) 3, 41, 29, 38, 49, 6");
+        System.out.println("지난 주 당첨 번호를 입력해주세요. (ex) 3, 41, 29, 38, 11, 6");
 
         String winningNumberString = scanner.next();
-        String[] winningNumberArray = winningNumberString.trim().split(",");
+        String[] winningNumberArray = winningNumberString.replaceAll(" ", "").split(",");
+
         List<Integer> winningNumber = new ArrayList<>();
         for (String number : winningNumberArray) {
             winningNumber.add( Integer.valueOf(number) );
         }
+
         return winningNumber;
     }
 }

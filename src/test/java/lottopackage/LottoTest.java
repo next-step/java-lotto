@@ -14,6 +14,7 @@ import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoTest {
@@ -35,7 +36,7 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("lotto.isWinning()")
+    @DisplayName("lotto.isPrize()")
     public void isPrize() {
         // given
         Lotto lotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
@@ -51,5 +52,7 @@ public class LottoTest {
         Assertions.assertThat(lotto.isPrize(winningNumber4th)).isEqualTo(Prize.FOURTH);
         Assertions.assertThat(lotto.isPrize(winningNumber5th)).isEqualTo(Prize.FIFTH);
         Assertions.assertThat(lotto.isPrize(noWinningNumber)).isEqualTo(Prize.SIXTH);
+
+
     }
 }

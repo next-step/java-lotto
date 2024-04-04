@@ -12,6 +12,10 @@ public class LottoGroup {
         }
     }
 
+    public LottoGroup(List<Lotto> lottoGroup) {
+        this.lottoGroup = lottoGroup;
+    }
+
     public List<Lotto> getLottoGroup() {
         return lottoGroup;
     }

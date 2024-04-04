@@ -32,6 +32,7 @@ public class LottoMachine {
         outputView.printLottoGroup(lottoGroup.getLottoGroup());
         List<Integer> winningNumber = inputView.winningNumber();
         List<Prize> lottoResult = lottoGroup.isWinning(winningNumber);
+
         outputView.printLottoResult(lottoResult, lottoGroup.getLottoGroup().size());
     }
 }
