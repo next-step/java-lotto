@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
+import lotto.domain.LottoRank;
 import lotto.service.Shop;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
@@ -22,7 +23,7 @@ public class Main {
 
         WinningLotto winningLotto = new WinningLotto(input.inputWinningNumbers());
 
-        Map<Integer, Integer> gameResult = LottoGame.getGameResult(purchasedLotto, winningLotto);
+        Map<LottoRank, Long> gameResult = LottoGame.getGameResult(purchasedLotto, winningLotto);
 
         OutputView.showResult(gameResult);
         OutputView.showROR(gameResult, purchasedAmount);

@@ -23,11 +23,10 @@ class LottoGameTest {
         purchasedLotto.add(new Lotto(Arrays.asList(3, 4, 5, 9, 10, 11)));
         purchasedLotto.add(new Lotto(Arrays.asList(3, 4, 5, 9, 10, 11)));
 
-        Map<Integer, Integer> result = LottoGame.getGameResult(purchasedLotto, winningLotto);
+        Map<LottoRank, Long> result = LottoGame.getGameResult(purchasedLotto, winningLotto);
 
-        assertThat(result.get(3)).isEqualTo(2);
-        assertThat(result.get(6)).isEqualTo(2);
-        assertThat(result.get(4)).isEqualTo(1);
+        assertThat(result.get(LottoRank.FOURTH)).isEqualTo(2);
+        assertThat(result.get(LottoRank.FIRST)).isEqualTo(2);
+        assertThat(result.get(LottoRank.THIRD)).isEqualTo(1);
     }
-
 }

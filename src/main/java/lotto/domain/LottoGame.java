@@ -1,28 +1,21 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static java.util.stream.Collectors.*;
 
 public class LottoGame {
     public static final int MINIMUM_REWARD_MATCH = 3;
     public static final int MAXIMUM_REWARD_MATCH = 6;
 
-    public static Map<Integer, Integer> getGameResult(List<Lotto> purchasedLotto, WinningLotto winningLotto) {
-        Map<Integer, Integer> gameResult = new HashMap<>();
-
-        for (int i = MINIMUM_REWARD_MATCH; i <= MAXIMUM_REWARD_MATCH; i ++) {
-            gameResult.put(i, 0);
-        }
-
+    public static Map<LottoRank, Long> getGameResult(List<Lotto> purchasedLotto, WinningLotto winningLotto) {
+        List<Integer> result = new ArrayList<>();
         for (Lotto lotto: purchasedLotto) {
-            int result = winningLotto.compareLotto(lotto);
-
-            try {
-                gameResult.put(result, gameResult.get(result) + 1);
-            } catch (NullPointerException ignored) {}
+            result.add(winningLotto.compareLotto(lotto));
         }
 
-        return gameResult;
+        return result.stream().collect(groupingByConcurrent(LottoRank::getLottoRank, counting()));
     }
 }
