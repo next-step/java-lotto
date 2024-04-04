@@ -1,16 +1,20 @@
-package lotto.domain;
+package lotto.service;
+
+import lotto.domain.Lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Shop {
+    private static final int LOTTO_SINGULAR_PRICE = 1000;
+
     public static List<Lotto> purchaseLotto(int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
 
         List<Lotto> lottoList = new ArrayList<>();
 
-        for (int i = 0; i < purchaseAmount / 1000; i++) {
+        for (int i = 0; i < purchaseAmount / LOTTO_SINGULAR_PRICE; i++) {
             lottoList.add(new Lotto(generateLottoNumbers()));
         }
 

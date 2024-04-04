@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
-import lotto.domain.Shop;
+import lotto.service.Shop;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
