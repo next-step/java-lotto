@@ -18,15 +18,15 @@ class WinStatusTest {
         winStatus.correct(5);
         winStatus.correct(5);
 
-        List<Integer> winner = new ArrayList<>(List.of(0, 0, 2, 0));
+        List<Integer> winner = new ArrayList<>(List.of(0, 0, 2, 0, 0));
         
         assertThat(winStatus.getWincount()).isEqualTo(winner);
     }
 
     @Test
-    @DisplayName("출력 로또 번호")
+    @DisplayName("출력 로또 길이")
     public void myLottoNumbers() {
         WinStatus winStatus = new WinStatus();
-        assertThat(winStatus.getWincount().size()).isEqualTo(4);
+        assertThat(winStatus.getWincount().size()).isEqualTo(5);
     }
 }
