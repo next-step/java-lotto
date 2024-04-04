@@ -17,7 +17,7 @@ public class LottoNumber {
     }
 
     public LottoNumber(int number) {
-        if (!isVaildNumber(number)) {
+        if (isNotVaildNumber(number)) {
             throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE);
         }
         this.number = number;
@@ -33,6 +33,10 @@ public class LottoNumber {
 
     private static boolean isVaildNumber(int number) {
         return number >= MIN_NUMBER - 1 && number <= MAX_NUMBER;
+    }
+
+    private static boolean isNotVaildNumber(int number) {
+        return !(number >= MIN_NUMBER - 1 && number <= MAX_NUMBER);
     }
 
     public int getValue() {
