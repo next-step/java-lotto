@@ -15,10 +15,16 @@ public class Lotto {
 
     public int numberCheck(Lotto winNumbers) {
         int cnt = 0;
-        for (LottoBall winNumber : winNumbers.numbers) {
-            if (numbers.contains(winNumber))
+//        for (LottoBall winNumber : winNumbers.numbers) {
+//            if (numbers.contains(winNumber))
+//                cnt++;
+//        }
+        for (int i = 0; i < winNumbers.numbers.size() - 1; i++) {
+            if (numbers.contains(winNumbers.numbers.get(i)))
                 cnt++;
         }
+        if (cnt == 5 && numbers.contains(winNumbers.numbers.get(6)))
+            return cnt;
         return cnt;
     }
 

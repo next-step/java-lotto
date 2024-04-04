@@ -28,4 +28,8 @@ public class LottoBall {
             throw new IllegalArgumentException("잘못된 공 번호 입니다");
         return lottoBall;
     }
+
+    public int getNumber() {
+        return number;
+    }
 }

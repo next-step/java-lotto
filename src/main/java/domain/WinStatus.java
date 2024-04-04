@@ -5,7 +5,7 @@ import java.util.List;
 
 public class WinStatus {
     private static List<Integer> winCount;;
-    private static final int VALID_WIN_COUNT = 4;
+    private static final int VALID_WIN_COUNT = 5;
 
     public void correct(int count) {
         if (count >= VALID_WIN_COUNT) {

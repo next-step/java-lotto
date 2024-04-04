@@ -27,11 +27,13 @@ public class LottoOutput {
 
     private void lottoPrint(Lotto result) {
         for (int i = 0; i < BASIC_WIN_NUMBER_COUNT; i++) {
-            System.out.print(result.getNumbers().get(i));
+            System.out.print(result.getNumbers().get(i).getNumber());
+            if (i != BASIC_WIN_NUMBER_COUNT - 1)
+                System.out.print(", ");
         }
         System.out.println();
         System.out.println("보너스 볼을 입력해 주세요");
-        System.out.println(result.getNumbers().get(BONUS_BALL_INDEX));
+        System.out.println(result.getNumbers().get(BONUS_BALL_INDEX).getNumber());
     }
 
     public int totalPrize(WinStatus winStatus) {
@@ -40,7 +42,7 @@ public class LottoOutput {
         wordSetting();
         System.out.println("당첨 통계");
         System.out.println("--------");
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < BASIC_WIN_NUMBER_COUNT; i++) {
             cnt += resultWinStatus.get(i);
             if (BONUS_PRICE_INDEX == i) {
                 System.out.println(lottoResultOutput[i].getCorrectCount() + "개 일치, 보너스 볼 일치 (" + lottoResultOutput[i].getPrice() + "원) - " + resultWinStatus.get(i) + "개");
@@ -57,7 +59,14 @@ public class LottoOutput {
 
     public void haveLotto(MyLotto myLotto) {
         for (Lotto lotto : myLotto.getLotto()) {
-            System.out.println(lotto.getNumbers());
+            LottoBallPrint(lotto);
         }
+    }
+
+    private void LottoBallPrint(Lotto lotto) {
+        for (LottoBall ball : lotto.getNumbers()) {
+            System.out.print(ball.getNumber() + " ");
+        }
+        System.out.println();
     }
 }
