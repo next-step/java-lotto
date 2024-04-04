@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Shop {
@@ -10,7 +11,7 @@ public class Shop {
         List<Lotto> lottoList = new ArrayList<>();
 
         for (int i = 0; i < purchaseAmount / 1000; i++) {
-            lottoList.add(new Lotto());
+            lottoList.add(new Lotto(generateLottoNumbers()));
         }
 
         return lottoList;
@@ -24,5 +25,14 @@ public class Shop {
         if (purchaseAmount % 1000 != 0) {
             throw new IllegalArgumentException("1000원 단위로 구입할 수 있습니다.");
         }
+    }
+
+    private static List<Integer> generateLottoNumbers() {
+        List<Integer> numList = new ArrayList<>();
+
+        for (int i = Lotto.LOWER_BOUND; i <= Lotto.UPPER_BOUND; i++) numList.add(i);
+        Collections.shuffle(numList);
+
+        return numList.subList(0, 6);
     }
 }
