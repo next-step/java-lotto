@@ -5,6 +5,7 @@ import lottogame.domain.Lottos;
 import lottogame.domain.LottoGame;
 import lottogame.domain.Money;
 import lottogame.domain.Number;
+import lottogame.domain.Numbers;
 import lottogame.domain.WinningLottos;
 import lottogame.view.InputView;
 import lottogame.view.ResultView;
@@ -18,7 +19,7 @@ public class LottoMain {
         Number countOfLottos = lottoGame.calculateCountOfLottos(money);
         Number manualCountOfLotto = InputView.requestCountOfManualLottos(countOfLottos);
         ResultView.printLinkBreak();
-        List<List<Number>> manualInputNumbers = InputView.requestMultipleManualLottos(manualCountOfLotto);
+        List<Numbers> manualInputNumbers = InputView.requestMultipleManualLottos(manualCountOfLotto);
         List<Lottos> multipleManualLottos = lottoGame.createMultipleLottos(manualInputNumbers);
         List<Lottos> multipleAutoLottos = lottoGame.createMultipleLottos(countOfLottos.minus(manualCountOfLotto));
 
@@ -26,7 +27,7 @@ public class LottoMain {
         ResultView.printAutoAndManualLottosCount(multipleManualLottos, multipleAutoLottos);
         ResultView.printLottos(lottos);
 
-        List<Number> winningLottosNumbers = InputView.requestWinningLotto();
+        Numbers winningLottosNumbers = InputView.requestWinningLotto();
         Number bonusNumber = InputView.requestBonusNumber();
         WinningLottos winningLotto = lottoGame.createWinningLotto(winningLottosNumbers, bonusNumber);
 

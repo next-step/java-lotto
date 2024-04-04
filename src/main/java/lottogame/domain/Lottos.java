@@ -5,28 +5,32 @@ import java.util.stream.Collectors;
 
 public class Lottos {
 
-    private final List<LottoNumber> numbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lottos(List<Number> numbers) {
-        this.numbers = numbers.stream()
+        this.lottoNumbers = numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
-    public List<LottoNumber> getNumbers() {
-        return numbers;
+    public Lottos(Numbers numbers) {
+        this.lottoNumbers = numbers.toLottoNumber();
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     public int size() {
-        return numbers.size();
+        return lottoNumbers.size();
     }
 
     public boolean match(LottoNumber lottoNumber) {
-        return numbers.contains(lottoNumber);
+        return lottoNumbers.contains(lottoNumber);
     }
 
     public int match(Lottos lottos) {
-        return (int) lottos.numbers.stream()
+        return (int) lottos.lottoNumbers.stream()
                 .filter(this::match)
                 .count();
     }

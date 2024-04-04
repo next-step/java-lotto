@@ -13,7 +13,7 @@ class LottosTest {
 
     @Test
     void 로또번호_포함_O() {
-        List<Number> numbers = List.of(Number.from(1), Number.from(2), Number.from(3), Number.from(4), Number.from(5), Number.from(6));
+        Numbers numbers = Numbers.fromIntegers(List.of(1,2,3,4,5,6));
         Lottos lotto = LottoFactory.createLotto(numbers);
         LottoNumber lottoNumber = new LottoNumber(5);
 
@@ -22,7 +22,7 @@ class LottosTest {
 
     @Test
     void 로또번호_포함_X() {
-        List<Number> numbers = List.of(Number.from(1), Number.from(2), Number.from(3), Number.from(4), Number.from(5), Number.from(6));
+        Numbers numbers = Numbers.fromIntegers(List.of(1,2,3,4,5,6));
         Lottos lotto = LottoFactory.createLotto(numbers);
         LottoNumber lottoNumber = new LottoNumber(7);
 

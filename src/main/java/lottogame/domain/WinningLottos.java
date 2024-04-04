@@ -7,7 +7,7 @@ public class WinningLottos {
     private final Lottos lottos;
     private final LottoNumber bonusNumber;
 
-    public WinningLottos(List<Number> numbers,int bonusNumber) {
+    public WinningLottos(Numbers numbers, int bonusNumber) {
         this.lottos = LottoFactory.createLotto(numbers);
         this.bonusNumber =  new LottoNumber(bonusNumber);
     }

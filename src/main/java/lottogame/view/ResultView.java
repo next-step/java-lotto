@@ -6,7 +6,6 @@ import java.util.Map;
 import lottogame.domain.Double;
 import lottogame.domain.LottoNumber;
 import lottogame.domain.Lottos;
-import lottogame.domain.Number;
 import lottogame.domain.Rank;
 
 public class ResultView {
@@ -75,7 +74,7 @@ public class ResultView {
     }
 
     private static void printLottos(Lottos lottos) {
-        List<LottoNumber> numbers = lottos.getNumbers();
+        List<LottoNumber> numbers = lottos.getLottoNumbers();
         StringBuilder stringBuilder = new StringBuilder();
 
         for (LottoNumber number : numbers) {

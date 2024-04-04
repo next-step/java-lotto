@@ -8,10 +8,9 @@ import java.util.stream.IntStream;
 
 public class LottoFactory {
 
-    private static final List<Number> numbers = IntStream.rangeClosed(1, 45).boxed()
-            .map(Number::from)
-            .collect(Collectors.toList());
     private static final int LOTTOS_SIZE = 6;
+    private static final int LOTTOS_MIN_NUMBER = 1;
+    private static final int LOTTOS_MAX_NUMBER = 45;
 
     private LottoFactory() {
     }
@@ -25,16 +24,16 @@ public class LottoFactory {
         return lottoses;
     }
 
-    public static List<Lottos> createMultipleLottos(List<List<Number>> numbers) {
+    public static List<Lottos> createMultipleLottos(List<Numbers> numbers) {
         return numbers.stream().map(LottoFactory::createLotto)
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public static Lottos createLotto(List<Number> numbers) {
+    public static Lottos createLotto(Numbers numbers) {
         return new Lottos(numbers);
     }
 
-    public static WinningLottos createWinningLotto(List<Number> numbers, int bonusNumber) {
+    public static WinningLottos createWinningLotto(Numbers numbers, int bonusNumber) {
         return new WinningLottos(numbers, bonusNumber);
     }
 
@@ -43,12 +42,8 @@ public class LottoFactory {
     }
 
     private static Lottos createRandomLotto() {
-        Collections.shuffle(numbers);
-        return createLotto(numbers
-                .subList(0, LOTTOS_SIZE)
-                .stream()
-                .sorted()
-                .collect(Collectors.toUnmodifiableList()));
+        Numbers numbers = Numbers.ofUniqueRandom(LOTTOS_MIN_NUMBER, LOTTOS_MAX_NUMBER);
+        return createLotto(numbers.createRandomNumbers(LOTTOS_SIZE));
     }
 
     public static Number calculateCountOfLottos(Money money, Money price) {

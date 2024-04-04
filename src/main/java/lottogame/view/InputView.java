@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 import lottogame.domain.LottoFactory;
 import lottogame.domain.Money;
 import lottogame.domain.Number;
+import lottogame.domain.Numbers;
 
 public class InputView {
 
@@ -27,7 +28,7 @@ public class InputView {
         return Money.from(Integer.parseInt(inputValue()));
     }
 
-    public static List<Number> requestWinningLotto() {
+    public static Numbers requestWinningLotto() {
         try {
             System.out.println(REQUEST_WINNING_LOTTO);
             return convertNumbersToList();
@@ -56,9 +57,9 @@ public class InputView {
         }
     }
 
-    public static List<List<Number>> requestMultipleManualLottos(Number count) {
+    public static List<Numbers> requestMultipleManualLottos(Number count) {
         System.out.println(REQUEST_MULTIPLE_MANUAL_LOTTOS);
-        List<List<Number>> multipleManualLottos = new ArrayList<>();
+        List<Numbers> multipleManualLottos = new ArrayList<>();
         while(count.isPositive()) {
             multipleManualLottos.add(requestManualLottos());
             count = count.decrease();
@@ -66,7 +67,7 @@ public class InputView {
         return multipleManualLottos;
     }
 
-    private static List<Number> requestManualLottos() {
+    private static Numbers requestManualLottos() {
         try {
             return convertNumbersToList();
         } catch (IllegalArgumentException e) {
@@ -75,7 +76,7 @@ public class InputView {
         }
     }
 
-    private static List<Number> convertNumbersToList() {
+    private static Numbers convertNumbersToList() {
         List<Number> numbers =  Stream.of(inputValue().split(","))
                 .map(String::trim)
                 .map(Number::from)
@@ -84,7 +85,7 @@ public class InputView {
         if (!LottoFactory.isValidLottosSize(numbers.size())) {
             throw new IllegalArgumentException(String.format(INVALID_INPUT_MANUAL_LOTTOS, numbers.size()));
         }
-        return numbers;
+        return Numbers.from(numbers);
     }
 
     private static String inputValue() {
