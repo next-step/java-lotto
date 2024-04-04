@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.constant.ErrorMessage;
+
 import java.util.*;
 
 public class Lotto {
@@ -20,13 +22,13 @@ public class Lotto {
 
     private void validateNumbers(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("로또 번호의 길이는 여섯 자리입니다.");
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_LENGTH_ERROR);
         }
 
         boolean isInRange = numbers.stream().allMatch(number -> number >= LOWER_BOUND && number <= UPPER_BOUND);
 
         if (!isInRange) {
-            throw new IllegalArgumentException("로또 번호의 범위는 1부터 45까지 입니다.");
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR);
         }
     }
 

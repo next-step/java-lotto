@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.constant.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +36,7 @@ class WinningLottoTest {
     public void initializeWinningLottoNumericStringErrorTest() {
         assertThatThrownBy(() -> new WinningLotto("3, 42, 29, 17, 이십삼, 34"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("당첨 번호는 숫자만 입력할 수 있습니다.");
+                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_NUMERIC_ERROR);
 
     }
 

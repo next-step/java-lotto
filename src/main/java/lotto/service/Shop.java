@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.constant.ErrorMessage;
 import lotto.domain.Lotto;
 
 import java.util.ArrayList;
@@ -23,11 +24,11 @@ public class Shop {
 
     private static void validatePurchaseAmount(int purchaseAmount) {
         if (purchaseAmount < 0) {
-            throw new IllegalArgumentException("구매 금액은 음수가 될 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.NEGATIVE_PURCHASE_AMOUNT_ERROR);
         }
 
         if (purchaseAmount % 1000 != 0) {
-            throw new IllegalArgumentException("1000원 단위로 구입할 수 있습니다.");
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_SINGULAR_PURCHASE_ERROR);
         }
     }
 

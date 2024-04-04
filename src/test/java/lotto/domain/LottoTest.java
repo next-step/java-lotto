@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.constant.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +23,7 @@ class LottoTest {
     public void lottoInitializationOverLengthTest() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(2, 4, 6, 13, 23, 39, 45)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또 번호의 길이는 여섯 자리입니다.");
+                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_LENGTH_ERROR);
     }
 
     @Test
@@ -30,6 +31,6 @@ class LottoTest {
     public void lottoInitializationRangeErrorTest() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(2, 3, 10, 49, 30, 23)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또 번호의 범위는 1부터 45까지 입니다.");
+                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR);
     }
 }

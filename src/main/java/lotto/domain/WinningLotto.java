@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.constant.ErrorMessage;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +17,7 @@ public class WinningLotto extends Lotto {
                     winningNumbers.replaceAll("\\s", "").split(",")
             ).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("당첨 번호는 숫자만 입력할 수 있습니다.");
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_NUMERIC_ERROR);
         }
     }
 

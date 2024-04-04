@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.constant.ErrorMessage;
 import lotto.service.Shop;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ public class ShopTest {
     public void purchaseLottoNegativeNumError() {
         assertThatThrownBy(() -> Shop.purchaseLotto(-1000).size())
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("구매 금액은 음수가 될 수 없습니다.");
+                .hasMessageContaining(ErrorMessage.NEGATIVE_PURCHASE_AMOUNT_ERROR);
     }
 
     @Test
@@ -27,6 +28,6 @@ public class ShopTest {
     public void purchaseLotto1000UnitErrorTest() {
         assertThatThrownBy(() -> Shop.purchaseLotto(3500))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("1000원 단위로 구입할 수 있습니다.");
+                .hasMessageContaining(ErrorMessage.LOTTO_SINGULAR_PURCHASE_ERROR);
     }
 }
