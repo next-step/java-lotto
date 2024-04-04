@@ -77,7 +77,7 @@ public class LottoTest {
     }
 
     private static Lotto givenLotto(List<Integer> integers) {
-        return new Lotto(integers);
+        return new Lotto(LottoNumbers.valueOf(integers));
     }
 
     private static List<Integer> givenNumbers(int... numbers) {

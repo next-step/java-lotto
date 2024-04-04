@@ -5,8 +5,12 @@ import java.util.List;
 public class Lotto {
     private final LottoNumbers lottoNumbers;
 
-    public Lotto(List<Integer> numbers) {
-        this.lottoNumbers = LottoNumbers.valueOf(numbers);
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    public Lotto valueOf(List<Integer> numbers) {
+        return new Lotto(LottoNumbers.valueOf(numbers));
     }
 
     public LottoNumbers getNumbers() {

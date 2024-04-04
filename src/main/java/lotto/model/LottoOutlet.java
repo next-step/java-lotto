@@ -26,7 +26,7 @@ public class LottoOutlet {
     }
 
     public static Lotto generateLotto() {
-        return new Lotto(numbersGenerator.generate());
+        return new Lotto(new LottoNumbers(numbersGenerator.generate()));
     }
 
     public static List<Lotto> generateLottos(int count) {
@@ -55,7 +55,7 @@ public class LottoOutlet {
 
     public static List<Lotto> generateLottos(List<List<Integer>> manualLottoNumbers) {
         return manualLottoNumbers.stream()
-                .map(numbers -> new Lotto(numbers))
+                .map(numbers -> new Lotto(LottoNumbers.valueOf(numbers)))
                 .collect(Collectors.toList());
     }
 }
