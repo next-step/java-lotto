@@ -19,6 +19,7 @@ public class CalculatorTest {
     @DisplayName("calculate")
     public void calculate() {
         // given
+        // UserInput = "1 + 2 * 3 / 4"
 
         // when, then
         Assertions.assertThat(calculate.calculate()).isEqualTo(14);
@@ -32,7 +33,7 @@ public class CalculatorTest {
         ByteArrayInputStream input = new ByteArrayInputStream(string.getBytes());
         System.setIn(input);
         Assertions.assertThatThrownBy(() -> {
-            calculator.calculate();
+            calculate.calculate();
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

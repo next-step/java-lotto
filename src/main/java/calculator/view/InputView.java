@@ -4,13 +4,10 @@ import java.util.*;
 
 public class InputView {
 
-    public List<List<String>> operandAndOperator() {
+    public String expression() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the value. (ex) 2 + 3 * 4 / 5");
-        String userInput = scanner.nextLine();
-        List<List<String>> operandAndOperator = splitString(userInput);
-
-        return operandAndOperator;
+        System.out.println("계산하고자 하는 수식을 입력해주세요. (ex) 2 + 3 * 4 / 5");
+        return scanner.nextLine();
     }
 
     private boolean separateOperandAndOperator(int operandAndOperatorArrayIndex, String[] operandAndOperatorArray, List<String> operands, List<String> operators) {

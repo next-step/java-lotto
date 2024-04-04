@@ -1,6 +1,6 @@
 package calculatortest;
 
-import calculator.domain.CalculationMethod;
+import calculator.domain.Operator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 public class CalculationMethodTest {
 
     //given
-    CalculationMethod sum = CalculationMethod.Sum;
-    CalculationMethod subtraction = CalculationMethod.Subtraction;
-    CalculationMethod multiplication = CalculationMethod.Multiplication;
-    CalculationMethod division = CalculationMethod.Division;
+    Operator sum = Operator.Sum;
+    Operator subtraction = Operator.Subtraction;
+    Operator multiplication = Operator.Multiplication;
+    Operator division = Operator.Division;
 
 
     @Test
