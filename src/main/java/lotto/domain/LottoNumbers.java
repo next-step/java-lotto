@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,6 +10,10 @@ public class LottoNumbers {
 	private final List<Integer> lottoNumbers;
 
 	public LottoNumbers(List<Integer> lottoNumbers) {
+		if(new HashSet<>(lottoNumbers).size() != LOTTO_NUMBER_COUNT) {
+			throw new IllegalArgumentException("번호는 중복될 수 없습니다.");
+		}
+
 		if(lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
 			throw new IllegalArgumentException("번호는 " + LOTTO_NUMBER_COUNT + "개를 입력해야 합니다.");
 		}
