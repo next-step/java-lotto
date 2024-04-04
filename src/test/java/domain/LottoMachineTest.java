@@ -13,10 +13,10 @@ class LottoMachineTest {
     @DisplayName("랜덤볼 결과 확정")
     void randomBall() {
         LottoMachine lottoMachine = new LottoMachine() {
-            @Override
-            public List<LottoBall> randomBall() {
-                return List.of(1, 2, 3, 4, 5, 6);
-            }
+//            @Override
+//            public List<LottoBall> randomBall() {
+//                return 1;
+//            }
         };
 
         List<Integer> winnerBall = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6));

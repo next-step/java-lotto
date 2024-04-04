@@ -19,6 +19,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 번호 확인")
     public void list() {
+        List<LottoBall> balls = new ArrayList<>();
 
     }
 }
