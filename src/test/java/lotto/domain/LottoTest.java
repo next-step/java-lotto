@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -27,10 +28,28 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 생성 로튜 세트 - 정해진 숫자 범위 벗어날 경우")
+    @DisplayName("로또 생성 오류 테스트 - 빈 리스트 입력 시")
+    public void lottoInitializationEmptyListTest() {
+        assertThatThrownBy(() -> new Lotto(List.of()))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_LENGTH_ERROR);
+    }
+
+
+    @Test
+    @DisplayName("로또 생성 오류 세트 - 정해진 숫자 범위 벗어날 경우")
     public void lottoInitializationRangeErrorTest() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(2, 3, 10, 49, 30, 23)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR);
     }
+
+    @Test
+    @DisplayName("로또 생성 오류 세트 - 정해진 숫자 범위 벗어날 경우(음수)")
+    public void lottoInitializationNegativeRangeErrorTest() {
+        assertThatThrownBy(() -> new Lotto(Arrays.asList(-2, -3, -10, -49, -30, -23)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR);
+    }
+
 }
