@@ -32,6 +32,6 @@ public class WinningNumbersTest {
 	void 보너스_번호는_45_초과_이면_오류_발생() {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 				.isThrownBy(() -> new WinningNumbers(Set.of(1, 2, 3, 4, 5, 6), 0))
-				.withMessageMatching("당첨 번호는 1 미만 45 초과인 수를 입력할 수 없습니다.");
+				.withMessageMatching("보너스 번호는 1 미만 45 초과인 수를 입력할 수 없습니다.");
 	}
 }
