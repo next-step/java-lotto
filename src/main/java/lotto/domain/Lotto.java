@@ -5,6 +5,7 @@ import java.util.*;
 public class Lotto {
     private static final int LOWER_BOUND = 1;
     private static final int UPPER_BOUND = 45;
+    private static final int LOTTO_NUMBER_SIZE = 6;
     private final List<Integer> lotto;
 
     public Lotto(List<Integer> numbers) {
@@ -22,7 +23,7 @@ public class Lotto {
     }
 
     private void validateNumbers(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 번호의 길이는 여섯 자리입니다.");
         }
 
