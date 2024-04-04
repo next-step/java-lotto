@@ -8,9 +8,7 @@ import java.util.List;
 public class LottoMarket {
 	private final Lottos lottos = new Lottos();
 
-	public LottoMarket(int numberOfLotto) {
-		LottoNumberStrategy strategy = new AutoLottoNumberStrategy();
-
+	public LottoMarket(int numberOfLotto, LottoNumberStrategy strategy) {
 		for(int i = 0; i < numberOfLotto; i++) {
 			lottos.add(new Lotto(strategy));
 		}
