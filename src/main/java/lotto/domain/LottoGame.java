@@ -12,12 +12,16 @@ public class LottoGame {
         this.amount = Money.from(money);
     }
 
-    public List<Lotto> createLotto(NumberStrategy numberStrategy) {
-        return this.userLottos.createLottos(countOfLotto(), numberStrategy);
+    public List<Lotto> createAutoLotto(int CountOfManualLottos, NumberStrategy numberStrategy) {
+        return this.userLottos.createLottos(countOfAutoLotto(CountOfManualLottos), numberStrategy);
     }
 
-    public int countOfLotto() {
-        return this.amount.countOfBuyLotto();
+    public List<Lotto> createManualLotto(List<String> manualLottos) {
+        return this.userLottos.createManualLotto(manualLottos);
+    }
+
+    public int countOfAutoLotto(int countOfmManualLotto) {
+        return this.amount.countOfBuyLotto() - countOfmManualLotto;
     }
 
     public List<Lotto> getLottos() {

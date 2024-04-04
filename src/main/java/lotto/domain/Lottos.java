@@ -19,6 +19,13 @@ public class Lottos {
         return this.lottos;
     }
 
+    public List<Lotto> createManualLotto(List<String> manualLottos) {
+        for (String lotto : manualLottos) {
+            this.lottos.add(Lotto.createFromString(lotto));
+        }
+        return this.lottos;
+    }
+
     public List<Rank> match(Lotto winningLotto, LottoNumber bonusNumber) {
         return this.lottos.stream()
                 .map(lotto -> Rank.of(lotto.matchCount(winningLotto), lotto.isContains(bonusNumber)))

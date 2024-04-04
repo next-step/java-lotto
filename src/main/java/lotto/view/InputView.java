@@ -17,6 +17,7 @@ public class InputView {
         System.out.println(INPUT_MONEY_MESSAGE);
         return Integer.parseInt(scanner.nextLine());
     }
+
     public int inputManualLottoCount() {
         System.out.println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE);
         return Integer.parseInt(scanner.nextLine());
