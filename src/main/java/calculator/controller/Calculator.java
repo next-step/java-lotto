@@ -11,13 +11,13 @@ import java.util.List;
 public class Calculator {
     static final int OPERAND = 0;
     static final int OPERATOR = 1;
-    static final InputView inputView = new InputView();
-    static final OutputView outputView = new OutputView();
+    static final InputView INPUT_VIEW = new InputView();
+    static final OutputView OUTPUT_VIEW = new OutputView();
 
     public static void calculator() {
-        String expression = inputView.expression();
+        String expression = INPUT_VIEW.expression();
         int result = Calculate.calculate(expression);
-        outputView.printOutput(result);
+        OUTPUT_VIEW.printOutput(result);
     }
 
     public static List<Integer> operands(List<List<String>> operandsAndOperators) {
@@ -34,12 +34,6 @@ public class Calculator {
         return operands;
     }
 
-    public static void stringOperatorToOperator(List<String> StringOperators, List<Operator> operators) {
-        for (String stringOperator : StringOperators) {
-            operators.add(Operator.find(stringOperator));
-        }
-    }
-
     public static List<Operator> operators(List<List<String>> operandsAndOperators) {
         List<String> StringOperators = operandsAndOperators.get(OPERATOR);
         List<Operator> operators = new ArrayList<>();
@@ -50,6 +44,12 @@ public class Calculator {
             throw new IllegalArgumentException("입력값이 잘못되었습니다. (연산자는 +, -, *, / 중 하나여야 합니다.)");
         }
         return operators;
+    }
+
+    public static void stringOperatorToOperator(List<String> StringOperators, List<Operator> operators) {
+        for (String stringOperator : StringOperators) {
+            operators.add(Operator.find(stringOperator));
+        }
     }
 
     public static List<List<String>> operandsAndOperators(String expression) {

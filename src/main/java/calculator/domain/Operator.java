@@ -10,11 +10,11 @@ public enum Operator {
     Multiplication("*", (num1, num2) -> num1 * num2),
     Division("/", (num1, num2) -> (int) num1 / num2);
 
-    private final String calculation;
+    private final String Calculation;
     private final BiFunction<Integer, Integer, Integer> calculate;
 
     Operator(String calculation, BiFunction<Integer, Integer, Integer> calculate) {
-        this.calculation = calculation;
+        this.Calculation = calculation;
         this.calculate = calculate;
     }
 
@@ -29,7 +29,7 @@ public enum Operator {
 
     public static Operator find(String calculation) {
         return Arrays.stream(Operator.values())
-                .filter(calculationMethod2 -> calculationMethod2.calculation.equals(calculation))
+                .filter(calculationMethod2 -> calculationMethod2.Calculation.equals(calculation))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("+, -, *, / 중 하나여야 합니다!"));
     }
