@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
-	private final WinningNumbers winningNumbers = new WinningNumbers(Set.of(1, 2, 3, 4, 5, 6), 11);
+	private final WinningNumbers winningNumbers = new WinningNumbers(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), 11);
 	private static final Lotto twoMatchedLotto = new Lotto(new ManualLottoNumberStrategy(List.of(1, 2, 7, 8, 9, 10)));
 	private static final Lotto threeMatchedLotto = new Lotto(new ManualLottoNumberStrategy(List.of(1, 2, 3, 7, 8, 9)));
 	private static final Lotto fourMatchedLotto = new Lotto(new ManualLottoNumberStrategy(List.of(1, 2, 3, 4, 8, 9)));

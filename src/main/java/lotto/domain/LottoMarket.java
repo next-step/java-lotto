@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.strategy.AutoLottoNumberStrategy;
 import lotto.domain.strategy.LottoNumberStrategy;
 
 import java.util.List;
@@ -12,6 +11,10 @@ public class LottoMarket {
 		for(int i = 0; i < numberOfLotto; i++) {
 			lottos.add(new Lotto(strategy));
 		}
+	}
+
+	public void addLotto(LottoNumberStrategy strategy) {
+		lottos.add(new Lotto(strategy));
 	}
 
 	public List<Lotto> getLottos() {

@@ -10,24 +10,22 @@ public class Main {
 		int numberOfAutoLotto = lottoPrice.getNumberOfAutoLotto();
 		int numberOfManualLotto = lottoPrice.getNumberOfManualLotto();
 
-		Lottos lottos = new Lottos();
+		LottoMarket lottoMarket = new LottoMarket(numberOfAutoLotto, new AutoLottoNumberStrategy());
 
-		PrintView.printAutoLottoGuide();
-
-		for(int i = 0; i < numberOfManualLotto; i++) {
-			lottos.add(new Lotto(new ManualLottoNumberStrategy(InputView.inputLottoNumber())));
+		if(numberOfManualLotto > 0) {
+			PrintView.printAutoLottoGuide();
 		}
 
-		for(int i = 0; i < numberOfAutoLotto; i++) {
-			lottos.add(new Lotto(new AutoLottoNumberStrategy()));
+		for(int i = 0; i < numberOfManualLotto; i++) {
+			lottoMarket.addLotto(new ManualLottoNumberStrategy(InputView.inputLottoNumber()));
 		}
 
 		PrintView.printNumberOfLotto(numberOfManualLotto, numberOfAutoLotto);
 
-		PrintView.printLottos(lottos.getLottos());
+		PrintView.printLottos(lottoMarket.getLottos());
 
 		WinningNumbers winningNumbers = new WinningNumbers(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
-		LottoResult lottoResult = new LottoResult(winningNumbers, lottos.getLottos(), lottoPrice);
+		LottoResult lottoResult = new LottoResult(winningNumbers, lottoMarket.getLottos(), lottoPrice);
 		PrintView.printLottoResult(lottoResult);
 	}
 }

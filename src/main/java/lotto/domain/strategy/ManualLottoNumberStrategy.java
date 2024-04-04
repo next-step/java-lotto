@@ -8,10 +8,6 @@ public class ManualLottoNumberStrategy implements LottoNumberStrategy{
 	private final List<Integer> numbers;
 
 	public ManualLottoNumberStrategy(List<Integer> numbers) {
-		if(numbers.size() != LOTTO_NUMBER_COUNT) {
-			throw new IllegalArgumentException("로또 번호는" + LOTTO_NUMBER_COUNT + "개를 입력해야 합니다.");
-		}
-
 		this.numbers = numbers;
 	}
 
