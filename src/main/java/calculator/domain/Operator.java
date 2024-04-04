@@ -18,23 +18,13 @@ public enum Operator {
         this.calculate = calculate;
     }
 
-    public int calculateApply(int operand1, int operand2) {
+    public int calculate(int operand1, int operand2) {
         try {
             calculate.apply(operand1, operand2);
         } catch (Exception e) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }
         return calculate.apply(operand1, operand2);
-    }
-
-    public static int calculate(String operator, int operand1, int operand2) {
-
-        Operator calculationMethod = find(operator);
-        return calculationMethod.calculateApply(operand1, operand2);
-    }
-
-    public static int calculate(Operator operator, int operand1, int operand2) {
-        return operator.calculate.apply(operand1, operand2);
     }
 
     public static Operator find(String calculation) {
