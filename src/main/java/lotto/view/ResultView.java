@@ -20,10 +20,10 @@ public class ResultView {
         }
     }
 
-    public void printWinningResult(List<Rank> ranks) {
+    public void printWinningResult(List<LottoResult> ranks) {
         System.out.println(WiNNING_RESULT_MESSAGE);
         System.out.println(SEPARATE_BAR);
-        for (LottoResult result : LottoResult.matchResult(ranks)) {
+        for (LottoResult result : ranks) {
             System.out.printf(RESULT_MESSAGE,
                     result.getMatchCount(), bonusMessage(result), result.getPrize(), result.countWinningLotto());
         }

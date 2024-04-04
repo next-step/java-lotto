@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -19,11 +20,9 @@ public class Lottos {
     }
 
     public List<Rank> match(Lotto winningLotto, LottoNumber bonusNumber) {
-        List<Rank> ranks = new ArrayList<>();
-        for (Lotto lotto : this.lottos) {
-            ranks.add(lotto.matchRank(winningLotto, bonusNumber));
-        }
-        return ranks;
+        return this.lottos.stream()
+                .map(lotto -> Rank.of(lotto.matchCount(winningLotto), lotto.isContains(bonusNumber)))
+                .collect(Collectors.toList());
     }
 
     public List<Lotto> getLottos() {

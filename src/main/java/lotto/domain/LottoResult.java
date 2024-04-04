@@ -23,7 +23,7 @@ public class LottoResult {
     }
 
     public boolean isSecond(){
-        return this.rank == Rank.SECOND;
+        return rank.isSecond();
     }
 
     public int getMatchCount() {

@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoGame;
+import lotto.domain.LottoResult;
 import lotto.domain.RandomNumberStrategy;
 import lotto.domain.Rank;
 import lotto.view.InputView;
@@ -19,7 +20,7 @@ public class LottoController {
         resultView.printOfBuyLotto(lottoGame);
         List<Rank> userLottoRanks = lottoGame.match(inputView.inputWinningNumber(), inputView.inputBonusNumber());
 
-        resultView.printWinningResult(userLottoRanks);
+        resultView.printWinningResult(LottoResult.matchResult(userLottoRanks));
         resultView.printProfit(lottoGame.calculateProfit(userLottoRanks));
     }
 }
