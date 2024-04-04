@@ -1,25 +1,31 @@
 package domain;
 
-import controller.LottoController;
-import domain.Lotto;
-import domain.LottoMachine;
-import domain.MyLotto;
-import domain.WinStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import view.LottoOutput;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class LottoTest {
+class LottoTest {
+
     @Test
-    @DisplayName("로또 번호 확인")
-    public void list() {
-        List<LottoBall> balls = new ArrayList<>();
+    @DisplayName("로또 번호가 얼마나 일치하는가")
+    void numberCheck() {
+        List<LottoBall> winner = new ArrayList<>();
+        winner.add(LottoBall.ball(1));
+        winner.add(LottoBall.ball(4));
+        winner.add(LottoBall.ball(10));
+        winner.add(LottoBall.ball(11));
 
+        List<LottoBall> myBall = new ArrayList<>();
+        myBall.add(LottoBall.ball(10));
+        myBall.add(LottoBall.ball(11));
+
+        Lotto mylotto = new Lotto(myBall);
+        Lotto winlotto = new Lotto(myBall);
+        assertThat(mylotto.numberCheck(winlotto)).isEqualTo(2);
     }
 }

@@ -19,7 +19,6 @@ class LottoBallTest {
     @Test
     void getNumber() {
         LottoBall number = LottoBall.ball(45);
-
         assertThat(number.getNumber()).isEqualTo(45);
     }
 }
