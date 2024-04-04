@@ -15,25 +15,21 @@ public class CalculatorTest {
     //given
     Calculate calculate = new Calculate();
 
-    @Test
+    @ParameterizedTest
     @DisplayName("calculate")
-    public void calculate() {
-        // given
-        // UserInput = "1 + 2 * 3 / 4"
-
+    @ValueSource(strings = {"1 + 2 * 3 / 4"})
+    public void calculate(String expression) {
         // when, then
-        Assertions.assertThat(calculate.calculate()).isEqualTo(14);
+        Assertions.assertThat(calculate.calculate(expression)).isEqualTo(2);
     }
 
     @ParameterizedTest
     @DisplayName("Exceptions of calculator")
     @NullAndEmptySource
     @ValueSource(strings = {"4@3", "4 @ 3", "4 / 0"})
-    public void wrongCalculator(String string) {
-        ByteArrayInputStream input = new ByteArrayInputStream(string.getBytes());
-        System.setIn(input);
+    public void wrongCalculator(String expression) {
         Assertions.assertThatThrownBy(() -> {
-            calculate.calculate();
+            calculate.calculate(expression);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

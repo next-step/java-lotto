@@ -34,13 +34,17 @@ public class Calculator {
         return operands;
     }
 
+    public static void stringOperatorToOperator(List<String> StringOperators, List<Operator> operators) {
+        for (String stringOperator : StringOperators) {
+            operators.add(Operator.find(stringOperator));
+        }
+    }
+
     public static List<Operator> operators(List<List<String>> operandsAndOperators) {
         List<String> StringOperators = operandsAndOperators.get(OPERATOR);
         List<Operator> operators = new ArrayList<>();
         try {
-            for (String stringOperator : StringOperators) {
-                operators.add(Operator.find(stringOperator));
-            }
+            stringOperatorToOperator(StringOperators, operators);
         }
         catch (Exception exception) {
             throw new IllegalArgumentException("입력값이 잘못되었습니다. (연산자는 +, -, *, / 중 하나여야 합니다.)");
@@ -55,7 +59,14 @@ public class Calculator {
         operandsAndOperators.add(operands);
         operandsAndOperators.add(operators);
 
-        String[] splitExpression = expression.split(" ");
+        String[] splitExpression;
+        try {
+            splitExpression = expression.split(" ");
+        }
+        catch (NullPointerException exception) {
+            throw new IllegalArgumentException("입력이 잘못되었습니다. (입력값은 null일 수 없습니다.)");
+        }
+
         for (int i = 0; i < splitExpression.length ; i++ ) {
             int operandOrOperator = ( i%2 == 0 )? OPERAND : OPERATOR;
             operandsAndOperators.get(operandOrOperator).add(splitExpression[i]);
