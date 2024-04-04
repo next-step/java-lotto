@@ -42,6 +42,10 @@ public class Numbers {
                 .sortByAsc();
     }
 
+    public int size() {
+        return numbers.size();
+    }
+
     private Numbers subList(int size) {
         List<Number> numbers = this.numbers.subList(0, size);
         return new Numbers(numbers);
