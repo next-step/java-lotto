@@ -10,8 +10,12 @@ import java.util.List;
 public class PrintView {
 	static StringBuilder stringBuilder = new StringBuilder();
 
-	public static void printNumberOfLotto(int number) {
-		System.out.println(number + "개를 구매했습니다.");
+	public static void printAutoLottoGuide() {
+		System.out.println("수동으로 구매할 번호를 입력해주세요.");
+	}
+
+	public static void printNumberOfLotto(int manualLotto, int autoLotto) {
+		System.out.println("수동으로 "+ manualLotto +"장, 자동으로 " + autoLotto + "개를 구매했습니다.");
 	}
 
 	public static void printLottos(List<Lotto> lottos) {
