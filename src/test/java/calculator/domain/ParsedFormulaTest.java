@@ -38,9 +38,7 @@ class ParsedFormulaTest {
     @Test
     @DisplayName("허용된 피연산자(정수) 예외 테스트")
     public void testNotValidOperand() {
-        ParsedFormula parsedFormula = new ParsedFormula("3.14 ^ 3");
-
-        assertThatThrownBy(() -> parsedFormula.getOperand(0))
+        assertThatThrownBy(() -> new ParsedFormula("3.14 - 3"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("피연산자는 정수값이어야 합니다.");
     }
