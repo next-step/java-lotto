@@ -17,6 +17,10 @@ public class Lottos {
         this.lottoNumbers = numbers.toLottoNumber();
     }
 
+    public static Lottos from(Numbers numbers) {
+        return new Lottos(numbers);
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }

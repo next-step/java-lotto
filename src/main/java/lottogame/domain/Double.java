@@ -34,4 +34,24 @@ public final class Double {
     public boolean isLessThen(int value) {
         return this.value < value;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+
+        Double aDouble = (Double) object;
+
+        return java.lang.Double.compare(value, aDouble.value) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        long temp = java.lang.Double.doubleToLongBits(value);
+        return (int) (temp ^ (temp >>> 32));
+    }
 }

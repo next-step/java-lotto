@@ -1,10 +1,8 @@
 package lottogame.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoFactory {
 
@@ -15,18 +13,19 @@ public class LottoFactory {
     private LottoFactory() {
     }
 
-    public static List<Lottos> createMultipleLottos(Number count) {
-        List<Lottos> lottoses = new ArrayList<>();
+    public static LottosBundle createLottosBundle(Number count) {
+        List<Lottos> multipleLottos = new ArrayList<>();
+
         while (count.isPositive()) {
-            lottoses.add(createRandomLotto());
+            multipleLottos.add(createRandomLotto());
             count = count.decrease();
         }
-        return lottoses;
+
+        return LottosBundle.from(multipleLottos);
     }
 
-    public static List<Lottos> createMultipleLottos(List<Numbers> numbers) {
-        return numbers.stream().map(LottoFactory::createLotto)
-                .collect(Collectors.toUnmodifiableList());
+    public static LottosBundle createLottosBundle(List<Numbers> numbers) {
+        return LottosBundle.fromNumbers(numbers);
     }
 
     public static Lottos createLotto(Numbers numbers) {

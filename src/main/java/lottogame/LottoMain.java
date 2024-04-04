@@ -1,8 +1,8 @@
 package lottogame;
 
 import java.util.List;
-import lottogame.domain.Lottos;
 import lottogame.domain.LottoGame;
+import lottogame.domain.LottosBundle;
 import lottogame.domain.Money;
 import lottogame.domain.Number;
 import lottogame.domain.Numbers;
@@ -20,18 +20,19 @@ public class LottoMain {
         Number manualCountOfLotto = InputView.requestCountOfManualLottos(countOfLottos);
         ResultView.printLinkBreak();
         List<Numbers> manualInputNumbers = InputView.requestMultipleManualLottos(manualCountOfLotto);
-        List<Lottos> multipleManualLottos = lottoGame.createMultipleLottos(manualInputNumbers);
-        List<Lottos> multipleAutoLottos = lottoGame.createMultipleLottos(countOfLottos.minus(manualCountOfLotto));
 
-        List<Lottos> lottos = lottoGame.merge(multipleManualLottos, multipleAutoLottos);
-        ResultView.printAutoAndManualLottosCount(multipleManualLottos, multipleAutoLottos);
-        ResultView.printLottos(lottos);
+        LottosBundle lottosBundleOfManual = lottoGame.createLottosBundle(manualInputNumbers);
+        LottosBundle lottosBundleOfAuto = lottoGame.createLottosBundle(countOfLottos.minus(manualCountOfLotto));
+
+        LottosBundle lottosBundle = lottosBundleOfManual.merge(lottosBundleOfAuto);
+        ResultView.printAutoAndManualLottosCount(lottosBundleOfManual, lottosBundleOfAuto);
+        ResultView.printLottos(lottosBundle);
 
         Numbers winningLottosNumbers = InputView.requestWinningLotto();
         Number bonusNumber = InputView.requestBonusNumber();
         WinningLottos winningLotto = lottoGame.createWinningLotto(winningLottosNumbers, bonusNumber);
 
-        ResultView.printWinningResult(lottoGame.checkRanks(winningLotto, lottos));
-        ResultView.printReturnOfRate(lottoGame.calculateReturnOfRate(winningLotto, lottos));
+        ResultView.printWinningResult(lottoGame.checkRanks(winningLotto, lottosBundle));
+        ResultView.printReturnOfRate(lottoGame.calculateReturnOfRate(winningLotto, lottosBundle));
     }
 }

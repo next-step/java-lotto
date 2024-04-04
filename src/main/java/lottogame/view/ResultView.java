@@ -1,11 +1,13 @@
 package lottogame.view;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lottogame.domain.Double;
 import lottogame.domain.LottoNumber;
 import lottogame.domain.Lottos;
+import lottogame.domain.LottosBundle;
 import lottogame.domain.Rank;
 
 public class ResultView {
@@ -20,10 +22,12 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printLottos(List<Lottos> lottoses) {
-        for (Lottos lottos : lottoses) {
-            printLottos(lottos);
-        }
+    public static void printLottos(LottosBundle lottosBundle) {
+        List<Lottos> multipleLottos = lottosBundle.getMultipleLottos();
+        multipleLottos = new ArrayList<>();
+        lottosBundle.getMultipleLottos()
+                .forEach(ResultView::printLottos);
+
     }
 
     public static void printCountOfPurchaseLottos(List<Lottos> lottos) {
@@ -83,9 +87,9 @@ public class ResultView {
         System.out.println("["+stringBuilder.toString().replaceAll(", $", "")+"]");
     }
 
-    public static void printAutoAndManualLottosCount(List<Lottos> multipleManualLottos,
-            List<Lottos> multipleAutoLottos) {
+    public static void printAutoAndManualLottosCount(LottosBundle lottosBundleOfManual,
+            LottosBundle lottosBundleOfAuto) {
         System.out.println(
-                String.format(MANUAL_AUTO_LOTTOS_COUNT_FORMAT, multipleManualLottos.size(), multipleAutoLottos.size()));
+                String.format(MANUAL_AUTO_LOTTOS_COUNT_FORMAT, lottosBundleOfManual.size(), lottosBundleOfAuto.size()));
     }
 }

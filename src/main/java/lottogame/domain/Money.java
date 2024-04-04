@@ -1,5 +1,7 @@
 package lottogame.domain;
 
+import java.util.Objects;
+
 public class Money {
 
     private Double value;
@@ -14,6 +16,10 @@ public class Money {
 
     public static Money from(Double value) {
         return new Money(value);
+    }
+
+    public static Money fromNumber(Number number) {
+        return new Money(Double.from(number.intValue()));
     }
 
     public Money multiply(Number from) {
@@ -38,5 +44,25 @@ public class Money {
 
     public Double toDouble() {
         return value;
+    }
+
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+
+        Money money = (Money) object;
+
+        return value.equals(money.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return value != null ? value.hashCode() : 0;
     }
 }
