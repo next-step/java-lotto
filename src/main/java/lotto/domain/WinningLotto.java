@@ -9,6 +9,10 @@ import java.util.stream.Collectors;
 public class WinningLotto {
     private final List<Integer> winningLotto;
 
+    public List<Integer> getLotto() {
+        return winningLotto;
+    }
+
     public WinningLotto(String winningNumbers) {
         List<Integer> parsedWInningNumbers = parseWinningNumbers(winningNumbers);
         Lotto.validateNumbers(parsedWInningNumbers);
