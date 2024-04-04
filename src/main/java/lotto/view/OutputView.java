@@ -12,10 +12,12 @@ public class OutputView {
     public static void showPurchasedLotto(List<Lotto> lottoSession) {
         System.out.println(lottoSession.size() + "개를 구매했습니다.");
 
+        StringBuilder stringBuilder = new StringBuilder();
+
         for (Lotto lotto : lottoSession) {
-            System.out.println(Arrays.toString(lotto.getLotto().toArray()));
+            stringBuilder.append(Arrays.toString(lotto.getLotto().toArray())).append("\n");
         }
-        System.out.println();
+        System.out.println(stringBuilder);
     }
 
     // TODO: 당첨 갯수, 상금 -> enum
@@ -25,7 +27,6 @@ public class OutputView {
         System.out.println("-----------");
 
         StringBuilder stringBuilder = new StringBuilder();
-
 
         for (int i = LottoGame.MINIMUM_REWARD_MATCH; i <= LottoGame.MAXIMUM_REWARD_MATCH; i++) {
             stringBuilder
