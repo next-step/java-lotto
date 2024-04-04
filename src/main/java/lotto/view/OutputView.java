@@ -5,7 +5,6 @@ import lotto.domain.LottoGame;
 import lotto.domain.Rewards;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +13,7 @@ public class OutputView {
         System.out.println(lottoSession.size() + "개를 구매했습니다.");
 
         for (Lotto lotto : lottoSession) {
-            System.out.println(Arrays.toString(lotto.getLotto()));
+            System.out.println(Arrays.toString(lotto.getLotto().toArray()));
         }
         System.out.println();
     }

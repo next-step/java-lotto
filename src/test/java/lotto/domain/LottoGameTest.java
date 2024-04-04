@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -16,11 +17,11 @@ class LottoGameTest {
         WinningLotto winningLotto = new WinningLotto("3, 4, 5, 6, 7, 8");
 
         List<Lotto> purchasedLotto = new ArrayList<>();
-        purchasedLotto.add(new Lotto(new Integer[]{3, 4, 5, 6, 7, 8}));
-        purchasedLotto.add(new Lotto(new Integer[]{3, 4, 5, 6, 7, 8}));
-        purchasedLotto.add(new Lotto(new Integer[]{3, 4, 5, 6, 9, 10}));
-        purchasedLotto.add(new Lotto(new Integer[]{3, 4, 5, 9, 10, 11}));
-        purchasedLotto.add(new Lotto(new Integer[]{3, 4, 5, 9, 10, 11}));
+        purchasedLotto.add(new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8)));
+        purchasedLotto.add(new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8)));
+        purchasedLotto.add(new Lotto(Arrays.asList(3, 4, 5, 6, 9, 10)));
+        purchasedLotto.add(new Lotto(Arrays.asList(3, 4, 5, 9, 10, 11)));
+        purchasedLotto.add(new Lotto(Arrays.asList(3, 4, 5, 9, 10, 11)));
 
         Map<Integer, Integer> result = LottoGame.getGameResult(purchasedLotto, winningLotto);
 
