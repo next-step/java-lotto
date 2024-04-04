@@ -1,10 +1,10 @@
-package calculator.domain;
+package calculator.controller;
 
-import calculator.domain.Calculator;
+import calculator.domain.Calculate;
 
 public class CalculatorMain {
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
-        calculator.calculate();
+        calculator.calculator();
     }
 }
