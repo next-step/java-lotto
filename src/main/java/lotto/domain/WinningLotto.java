@@ -6,9 +6,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinningLotto extends Lotto {
+public class WinningLotto {
+    private final List<Integer> winningLotto;
+
     public WinningLotto(String winningNumbers) {
-        super(parseWinningNumbers(winningNumbers));
+        List<Integer> parsedWInningNumbers = parseWinningNumbers(winningNumbers);
+        Lotto.validateNumbers(parsedWInningNumbers);
+
+        this.winningLotto = parseWinningNumbers(winningNumbers);
     }
 
     private static List<Integer> parseWinningNumbers(String winningNumbers) {
@@ -22,6 +27,6 @@ public class WinningLotto extends Lotto {
     }
 
     public Integer compareLotto(Lotto comparedLotto) {
-        return (int) this.getLotto().stream().filter(comparedLotto.getLotto()::contains).count();
+        return (int) this.winningLotto.stream().filter(comparedLotto.getLotto()::contains).count();
     }
 }

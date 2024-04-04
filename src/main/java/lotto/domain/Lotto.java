@@ -11,8 +11,7 @@ public class Lotto {
     private final List<Integer> lotto;
 
     public Lotto(List<Integer> numbers) {
-        this.validateNumbers(numbers);
-
+        validateNumbers(numbers);
         this.lotto = numbers;
     }
 
@@ -20,7 +19,7 @@ public class Lotto {
         return lotto;
     }
 
-    private void validateNumbers(List<Integer> numbers) {
+    public static void validateNumbers(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_LENGTH_ERROR);
         }
