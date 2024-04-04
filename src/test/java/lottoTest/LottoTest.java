@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 public class LottoTest {
 
     //테스트용 더미 Number
-    private static final LottoNumber DUMMY_LOTTO_NUMBER = new LottoNumber(-1);
+    private static final LottoNumber DUMMY_LOTTO_NUMBER = new LottoNumber(0);
 
     @ParameterizedTest(name = "{1} 로또는 {1} 값을 리스트 반환")
     @MethodSource("generateLotto")

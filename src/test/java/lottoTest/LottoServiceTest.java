@@ -33,7 +33,7 @@ public class LottoServiceTest {
         System.out.println(resultLotto.getWinningRate());
         System.out.println(winningAmount / buyCount * 1000);
 
-        Assertions.assertThat(resultLotto.getWinningRate()).isEqualTo(winningAmount / (buyCount * 1000));
+        Assertions.assertThat(resultLotto.getWinningRate()).isEqualTo((double) winningAmount / (buyCount * 1000));
     }
 
     @Test

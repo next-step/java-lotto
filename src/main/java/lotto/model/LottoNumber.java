@@ -11,7 +11,7 @@ public class LottoNumber {
 
     static {
         cacheNumber = new LottoNumber[MAX_NUMBER + 1];
-        for (int i = 1; i < MAX_NUMBER + 1; i++) {
+        for (int i = MIN_NUMBER - 1; i < MAX_NUMBER + 1; i++) {
             cacheNumber[i] = new LottoNumber(i);
         }
     }
@@ -32,7 +32,7 @@ public class LottoNumber {
     }
 
     private static boolean isVaildNumber(int number) {
-        return number >= MIN_NUMBER && number <= MAX_NUMBER;
+        return number >= MIN_NUMBER - 1 && number <= MAX_NUMBER;
     }
 
     public int getValue() {
