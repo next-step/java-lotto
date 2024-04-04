@@ -37,14 +37,14 @@ public class Numbers {
     }
 
     public Numbers createRandomNumbers(int size) {
-        return this.shuffle()
+        return shuffle()
                 .subList(size)
                 .sortByAsc();
     }
 
     private Numbers subList(int size) {
-        this.numbers.subList(0, size);
-        return this;
+        List<Number> numbers = this.numbers.subList(0, size);
+        return new Numbers(numbers);
     }
 
     private Numbers shuffle() {
