@@ -6,7 +6,7 @@ import java.util.List;
 
 public class LottoOutput {
     private final int BONUS_PRICE_INDEX = 3;
-    private final int BASIC_WIN_NUMBER_COUNT = 6;
+    private final int BASIC_WIN_NUMBER_COUNT = 5;
     private final int BONUS_BALL_INDEX = 6;
     LottoResultOutput[] lottoResultOutput;
     private void wordSetting() {
