@@ -22,7 +22,7 @@ public enum Operator {
         return Arrays.stream(Operator.values())
                 .filter(value -> value.display.equals(operatorDisplay))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new IllegalArgumentException());
     }
 
     public int calculate(int preNum, int postNum) {
