@@ -7,19 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 class LottoMachineTest {
     @Test
     @DisplayName("랜덤볼 결과 확정")
     void randomBall() {
+
+        List<LottoBall> lottoBalls = new ArrayList<>();
         LottoMachine lottoMachine = new LottoMachine() {
-//            @Override
-//            public List<LottoBall> randomBall() {
-//                return 1;
-//            }
+            @Override
+            public List<LottoBall> randomBall() {
+                return lottoBalls;
+            }
         };
 
-        List<Integer> winnerBall = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6));
+        List<LottoBall> winnerBall = new ArrayList<>();
         assertThat(lottoMachine.randomBall()).isEqualTo(winnerBall);
     }
     @Test
