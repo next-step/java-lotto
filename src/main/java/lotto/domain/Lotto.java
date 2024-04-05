@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -41,7 +40,7 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public static Lotto from(final int[] numbers) {
+    public static Lotto from(final List<Integer> numbers) {
         final Set<LottoNumber> lottoNumbers = toLottoNumbers(numbers);
 
         validateNumbersAreNotDuplicated(numbers, lottoNumbers);
@@ -49,15 +48,18 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    private static Set<LottoNumber> toLottoNumbers(final int[] numbers) {
-        return Arrays.stream(numbers)
-                .mapToObj(LottoNumber::new)
+    private static Set<LottoNumber> toLottoNumbers(final List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::from)
                 .collect(Collectors.toUnmodifiableSet());
     }
 
-    private static void validateNumbersAreNotDuplicated(final int[] numbers, final Set<LottoNumber> lottoNumbers) {
-        if (numbers.length != lottoNumbers.size()) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다. 번호: " + Arrays.toString(numbers));
+    private static void validateNumbersAreNotDuplicated(
+            final List<Integer> numbers,
+            final Set<LottoNumber> lottoNumbers
+    ) {
+        if (numbers.size() != lottoNumbers.size()) {
+            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다. 번호: " + numbers);
         }
     }
 }

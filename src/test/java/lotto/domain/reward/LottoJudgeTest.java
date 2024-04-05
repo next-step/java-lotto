@@ -8,13 +8,16 @@ import static lotto.domain.reward.LottoRank.SECOND;
 import static lotto.domain.reward.LottoRank.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 
 class LottoJudgeTest {
 
@@ -31,21 +34,30 @@ class LottoJudgeTest {
     }
 
     private LottoResult actualLottoResult() {
-        final List<Lotto> lottos = List.of(
-                Lotto.from(new int[] {1, 2, 3, 4, 5, 6}),
-                Lotto.from(new int[] {1, 2, 3, 4, 5, 6}),
-                Lotto.from(new int[] {1, 2, 3, 4, 5, 7}),
-                Lotto.from(new int[] {1, 2, 3, 4, 5, 7}),
-                Lotto.from(new int[] {1, 2, 3, 4, 5, 8}),
-                Lotto.from(new int[] {1, 2, 3, 4, 7, 8}),
-                Lotto.from(new int[] {1, 2, 3, 7, 8, 9}),
-                Lotto.from(new int[] {1, 2, 7, 8, 9, 10}),
-                Lotto.from(new int[] {1, 7, 8, 9, 10, 11}),
-                Lotto.from(new int[] {7, 8, 9, 10, 11, 12})
+        final List<Lotto> autoLottos = List.of(
+                lotto(1, 2, 3, 4, 5, 6),
+                lotto(1, 2, 3, 4, 5, 6),
+                lotto(1, 2, 3, 4, 5, 7),
+                lotto(1, 2, 3, 4, 5, 7),
+                lotto(1, 2, 3, 4, 5, 8),
+                lotto(1, 2, 3, 4, 7, 8),
+                lotto(1, 2, 3, 7, 8, 9),
+                lotto(1, 2, 7, 8, 9, 10),
+                lotto(1, 7, 8, 9, 10, 11),
+                lotto(7, 8, 9, 10, 11, 12)
         );
-        final WinningLotto winningLotto = WinningLotto.of(new int[] {1, 2, 3, 4, 5, 6}, 7);
+        final WinningLotto winningLotto = WinningLotto.of(List.of(1, 2, 3, 4, 5, 6), 7);
+        final Lottos lottos = new Lottos(List.of(), autoLottos);
 
         return new LottoJudge().judge(lottos, winningLotto);
+    }
+
+    private Lotto lotto(final int... numbers) {
+        final List<Integer> lottoNumbers = Arrays.stream(numbers)
+                .boxed()
+                .collect(Collectors.toUnmodifiableList());
+
+        return Lotto.from(lottoNumbers);
     }
 
     private LottoResult expectedLottoResult() {
