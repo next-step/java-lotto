@@ -22,6 +22,10 @@ public class WinningLotto {
         return winningLotto;
     }
 
+    public Integer getBonusNumber() {
+        return bonusNumber;
+    }
+
     private static List<Integer> parseWinningNumbers(String winningNumbers) {
         try {
             return Arrays.stream(
@@ -34,5 +38,9 @@ public class WinningLotto {
 
     public Integer compareLotto(Lotto comparedLotto) {
         return (int) this.winningLotto.stream().filter(comparedLotto.getLotto()::contains).count();
+    }
+
+    public Boolean isBonusIncluded(Lotto comparedLotto) {
+        return comparedLotto.getLotto().contains(bonusNumber);
     }
 }
