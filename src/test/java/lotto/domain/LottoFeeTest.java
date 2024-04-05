@@ -10,6 +10,7 @@ public class LottoFeeTest {
     @Test
     @DisplayName("입력값 몇게임인지 파악하는 메서드")
     void 몇게임() {
-        assertThat(new LottoFee(14000).convertToGameUnit()).isEqualTo(14);
+        LottoFee lottoFee = new LottoFee(14000);
+        assertThat(lottoFee.totalCount()).isEqualTo(14);
     }
 }
