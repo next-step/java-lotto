@@ -20,7 +20,7 @@ public class ShopTest {
     public void purchaseLottoNegativeNumError() {
         assertThatThrownBy(() -> Shop.purchaseLotto(-1000).size())
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.NEGATIVE_PURCHASE_PRICE_ERROR);
+                .hasMessageContaining(ErrorMessage.NEGATIVE_PURCHASE_PRICE_ERROR.getMessage());
     }
 
     @Test
@@ -28,6 +28,6 @@ public class ShopTest {
     public void purchaseLotto1000UnitErrorTest() {
         assertThatThrownBy(() -> Shop.purchaseLotto(3500))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.PURCHASE_SINGULAR_PRICE_ERROR);
+                .hasMessageContaining(ErrorMessage.PURCHASE_SINGULAR_PRICE_ERROR.getMessage());
     }
 }

@@ -22,6 +22,6 @@ public enum Product {
     public static Product getProduct(String productName) {
         return Arrays.stream(values())
                 .filter(m -> m.productName.equals(productName))
-                .findFirst().orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NOT_FOUND_PRODUCT));
+                .findFirst().orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NOT_FOUND_PRODUCT.getMessage()));
     }
 }

@@ -21,7 +21,7 @@ public class PurchaseTest {
     public void purchasePriceNegativeError() {
         assertThatThrownBy(() -> new Purchase("Lotto", -1000))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.NEGATIVE_PURCHASE_PRICE_ERROR);
+                .hasMessageContaining(ErrorMessage.NEGATIVE_PURCHASE_PRICE_ERROR.getMessage());
     }
 
     @Test
@@ -31,6 +31,6 @@ public class PurchaseTest {
 
         assertThatThrownBy(lottoPurchase::getPurchaseAmount)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.PURCHASE_SINGULAR_PRICE_ERROR);
+                .hasMessageContaining(ErrorMessage.PURCHASE_SINGULAR_PRICE_ERROR.getMessage());
     }
 }

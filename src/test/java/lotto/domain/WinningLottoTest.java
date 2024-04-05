@@ -46,7 +46,7 @@ class WinningLottoTest {
     public void initializeWinningLottoNumericStringErrorTest() {
         assertThatThrownBy(() -> WinningLotto.getWinningNumbers("3, 42, 29, 17, 이십삼, 34"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_NUMERIC_ERROR);
+                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_NUMERIC_ERROR.getMessage());
     }
 
     @Test
@@ -54,6 +54,6 @@ class WinningLottoTest {
     public void initializeWinningLottoBonusNumberBoundErrorTest() {
         assertThatThrownBy(() -> WinningLotto.getBonusNumber("49"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR);
+                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR.getMessage());
     }
 }

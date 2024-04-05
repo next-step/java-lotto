@@ -28,7 +28,7 @@ public class WinningLotto {
         try {
             Integer.parseInt(bonusNumber);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_NUMERIC_ERROR);
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_NUMERIC_ERROR.getMessage());
         }
 
         Lotto.validateLottoNumberBound(parsedBonusNumber);
@@ -50,7 +50,7 @@ public class WinningLotto {
                     winningNumbers.replaceAll("\\s", "").split(",")
             ).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_NUMERIC_ERROR);
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_NUMERIC_ERROR.getMessage());
         }
     }
 

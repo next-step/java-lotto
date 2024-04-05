@@ -24,7 +24,7 @@ class LottoTest {
     public void lottoInitializationOverLengthTest() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(2, 4, 6, 13, 23, 39, 45)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_LENGTH_ERROR);
+                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_LENGTH_ERROR.getMessage());
     }
 
     @Test
@@ -32,7 +32,7 @@ class LottoTest {
     public void lottoInitializationEmptyListTest() {
         assertThatThrownBy(() -> new Lotto(List.of()))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_LENGTH_ERROR);
+                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_LENGTH_ERROR.getMessage());
     }
 
 
@@ -41,7 +41,7 @@ class LottoTest {
     public void lottoInitializationRangeErrorTest() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(2, 3, 10, 49, 30, 23)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR);
+                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR.getMessage());
     }
 
     @Test
@@ -49,7 +49,7 @@ class LottoTest {
     public void lottoInitializationNegativeRangeErrorTest() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(-2, -3, -10, -49, -30, -23)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR);
+                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR.getMessage());
     }
 
 }
