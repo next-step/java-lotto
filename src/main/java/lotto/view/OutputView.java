@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoRank;
+import lotto.service.PrizeCalculator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +40,6 @@ public class OutputView {
     }
 
     public static void showROR(Map<LottoRank, Long> result, int purchaseAmount) {
-        System.out.println("총 수익률은 " + (double) LottoRank.getWholePrize(result) / purchaseAmount + "입니다.");
+        System.out.println("총 수익률은 " + (double) PrizeCalculator.getPrize(result) / purchaseAmount + "입니다.");
     }
 }

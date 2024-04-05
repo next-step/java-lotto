@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Map;
 
 public enum LottoRank {
     LOSE(0, false, 0),
@@ -25,15 +24,6 @@ public enum LottoRank {
         return this.prize;
     }
 
-    public static Long getWholePrize(Map<LottoRank, Long> result) {
-        long wholePrize = 0L;
-
-        for (LottoRank lottoRank: result.keySet()) {
-            wholePrize += lottoRank.getPrize() * result.get(lottoRank);
-        }
-
-        return wholePrize;
-    }
 
     public static LottoRank getLottoRank(int matches) {
         return getLottoRank(matches, false);
