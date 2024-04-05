@@ -10,12 +10,30 @@ public class WinningLotto {
     private final List<Integer> winningLotto;
     private final Integer bonusNumber;
 
-    public WinningLotto(String winningNumbers, String bonusNumber) {
-        List<Integer> parsedWInningNumbers = parseWinningNumbers(winningNumbers);
-        Lotto.validateNumbers(parsedWInningNumbers);
+    public WinningLotto(List<Integer> winningNumbers, Integer bonusNumber) {
+        this.winningLotto = winningNumbers;
+        this.bonusNumber = bonusNumber;
+    }
 
-        this.winningLotto = parseWinningNumbers(winningNumbers);
-        this.bonusNumber = Integer.parseInt(bonusNumber);
+    public static List<Integer> getWinningNumbers(String winningNumbers) {
+        List<Integer> parseWinningNumbers = parseWinningNumbers(winningNumbers);
+        Lotto.validateNumbers(parseWinningNumbers);
+
+        return parseWinningNumbers;
+    }
+
+    public static Integer getBonusNumber(String bonusNumber) {
+        Integer parsedBonusNumber = 0;
+
+        try {
+            Integer.parseInt(bonusNumber);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_NUMERIC_ERROR);
+        }
+
+        Lotto.validateLottoNumberBound(parsedBonusNumber);
+
+        return parsedBonusNumber;
     }
 
     public List<Integer> getLotto() {
