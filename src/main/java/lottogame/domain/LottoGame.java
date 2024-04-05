@@ -13,10 +13,6 @@ public class LottoGame {
         return lottosBundle.checkRanks(winnerLotto);
     }
 
-    public LottosBundle createLottos(Money amount) {
-        return LottoFactory.createLottosBundle(Number.from(amount.divide(price).toInt()));
-    }
-
     public LottosBundle createLottosBundle(Number count) {
         return LottoFactory.createLottosBundle(count);
     }

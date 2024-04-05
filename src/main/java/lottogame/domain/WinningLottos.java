@@ -1,7 +1,5 @@
 package lottogame.domain;
 
-import java.util.List;
-
 public class WinningLottos {
 
     private final Lottos lottos;

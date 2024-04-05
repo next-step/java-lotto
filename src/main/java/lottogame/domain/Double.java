@@ -31,10 +31,6 @@ public final class Double {
         return Math.floor(value * 100) / 100;
     }
 
-    public boolean isLessThen(int value) {
-        return this.value < value;
-    }
-
     public boolean isMoreThen(Double other) {
         return this.value > other.value;
     }

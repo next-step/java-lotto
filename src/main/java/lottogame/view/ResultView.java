@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lottogame.domain.Double;
 import lottogame.domain.LottoNumber;
 import lottogame.domain.Lottos;
 import lottogame.domain.LottosBundle;
@@ -13,7 +12,6 @@ import lottogame.domain.ReturnOfRate;
 
 public class ResultView {
 
-    private static final String MESSAGE_COUNT_OF_PURCHASE_LOTTOS = "%d개를 구매했습니다.";
     private static final String RANKS_FORMAT = "%d개 일치 (%d원)- %d개";
     private static final String RANKS_SECOND_FORMAT = "%d개, 보너스 볼 일치 (%d원)- %d개";
     private static final String RETURN_OF_RATE_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.";
@@ -29,10 +27,6 @@ public class ResultView {
         lottosBundle.getMultipleLottos()
                 .forEach(ResultView::printLottos);
 
-    }
-
-    public static void printCountOfPurchaseLottos(List<Lottos> lottos) {
-        System.out.println(String.format(MESSAGE_COUNT_OF_PURCHASE_LOTTOS, lottos.size()));
     }
 
     public static void printWinningResult(List<Rank> ranks) {

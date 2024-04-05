@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import lottogame.domain.LottoFactory;
 import lottogame.domain.Money;
 import lottogame.domain.Number;
 import lottogame.domain.Numbers;
@@ -17,7 +16,6 @@ public class InputView {
     public static final String REQUEST_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     public static final String REQUEST_MANUAL_COUNT_OF_LOTTO = "수동으로 구매할 로또 수를 입력해 주세요.";
     public static final String REQUEST_MULTIPLE_MANUAL_LOTTOS = "수동으로 구매할 번호를 입력해 주세요.";
-    public static final String INVALID_INPUT_MANUAL_LOTTOS = "로또 번호는 6자리여야 합니다. 입력한 번호는 %d자리 입니다.";
     public static final String INVALID_INPUT_MANUAL_LOTTOS_COUNT = "입력한 수동 로또수가 구입 가능한 로또수 보다 큽니다.";
 
     private InputView() {
