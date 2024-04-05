@@ -32,7 +32,7 @@ public class WinningLotto {
 
     public static WinningLotto of(final List<Integer> numbers, final int bonusNumber) {
         final Lotto lotto = Lotto.from(numbers);
-        final LottoNumber bonus = new LottoNumber(bonusNumber);
+        final LottoNumber bonus = LottoNumber.from(bonusNumber);
 
         return new WinningLotto(lotto, bonus);
     }

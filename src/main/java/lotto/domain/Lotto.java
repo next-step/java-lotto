@@ -50,7 +50,7 @@ public class Lotto {
 
     private static Set<LottoNumber> toLottoNumbers(final List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toUnmodifiableSet());
     }
 

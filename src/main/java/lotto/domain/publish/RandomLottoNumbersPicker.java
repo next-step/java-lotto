@@ -1,29 +1,25 @@
 package lotto.domain.publish;
 
 import static lotto.domain.Lotto.LOTTO_NUMBERS_SIZE;
-import static lotto.domain.LottoNumber.MAXIMUM_LOTTO_NUMBER;
-import static lotto.domain.LottoNumber.MINIMUM_LOTTO_NUMBER;
+import static lotto.domain.LottoNumber.LOTTO_NUMBERS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import lotto.domain.LottoNumber;
 
 public class RandomLottoNumbersPicker implements LottoNumbersPicker {
 
-    private static final List<LottoNumber> lottoNumbersRange = IntStream.rangeClosed(
-                    MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
-            .mapToObj(LottoNumber::new)
-            .collect(Collectors.toList());
+    private static final List<LottoNumber> lottoNumbersPool = new ArrayList<>(LOTTO_NUMBERS.values());
 
     @Override
     public Set<LottoNumber> pick() {
-        Collections.shuffle(lottoNumbersRange);
+        Collections.shuffle(lottoNumbersPool);
 
-        return lottoNumbersRange.stream()
+        return lottoNumbersPool.stream()
                 .limit(LOTTO_NUMBERS_SIZE)
                 .collect(Collectors.toUnmodifiableSet());
     }
