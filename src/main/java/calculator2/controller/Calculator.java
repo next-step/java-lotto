@@ -54,6 +54,10 @@ public class Calculator {
             operandsAndOperators.get(operandOrOperator).add(splitExpression[i]);
         }
 
+        if (operands.size() != (operators.size() + 1)) {
+            throw new IllegalArgumentException("항상 피연산자의 개수는 연산자 개수보다 하나 더 많아야 합니다.");
+        }
+
         return operandsAndOperators;
     }
 }

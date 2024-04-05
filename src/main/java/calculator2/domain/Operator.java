@@ -33,7 +33,12 @@ public enum Operator {
     }
 
     public int calculate(int operand1, int operand2) {
-        return this.operation.apply(operand1, operand2);
+        try {
+            return this.operation.apply(operand1, operand2);
+        }
+        catch (ArithmeticException arithmeticException) {
+            throw new IllegalArgumentException("0으로 나눌 수 없습니다");
+        }
     }
 
     public static Operator find(String operationSymbol) {
@@ -46,6 +51,6 @@ public enum Operator {
             }
         }
 
-        throw new IllegalArgumentException("연산자는" + operationSymbol + "중 하나여야 합니다.");
+        throw new IllegalArgumentException("연산자는" + operationSymbols + "중 하나여야 합니다.");
     }
 }
