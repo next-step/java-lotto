@@ -8,16 +8,18 @@ import java.util.stream.Collectors;
 
 public class WinningLotto {
     private final List<Integer> winningLotto;
+    private final Integer bonusNumber;
 
-    public List<Integer> getLotto() {
-        return winningLotto;
-    }
-
-    public WinningLotto(String winningNumbers) {
+    public WinningLotto(String winningNumbers, String bonusNumber) {
         List<Integer> parsedWInningNumbers = parseWinningNumbers(winningNumbers);
         Lotto.validateNumbers(parsedWInningNumbers);
 
         this.winningLotto = parseWinningNumbers(winningNumbers);
+        this.bonusNumber = Integer.parseInt(bonusNumber);
+    }
+
+    public List<Integer> getLotto() {
+        return winningLotto;
     }
 
     private static List<Integer> parseWinningNumbers(String winningNumbers) {

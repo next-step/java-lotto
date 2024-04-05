@@ -21,7 +21,7 @@ public class Main {
 
         OutputView.showPurchasedLotto(purchasedLotto);
 
-        WinningLotto winningLotto = new WinningLotto(input.inputWinningNumbers());
+        WinningLotto winningLotto = new WinningLotto(input.inputWinningNumbers(), input.inputBonusWinningNumber());
 
         Map<LottoRank, Long> gameResult = LottoGame.getGameResult(purchasedLotto, winningLotto);
 
