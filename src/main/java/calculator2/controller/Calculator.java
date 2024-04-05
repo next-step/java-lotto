@@ -1,6 +1,9 @@
 package calculator2.controller;
 
+import calculator2.domain.Calculate;
 import calculator2.domain.Operator;
+import calculator2.view.InputView;
+import calculator2.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +12,11 @@ public class Calculator {
 
     private static final int OPERAND = 0;
     private static final int OPERATOR = 1;
+
+    public static void calculator() {
+        String expression = InputView.userInputExpression();
+        OutputView.printResult(Calculate.calculate(expression));
+    }
 
     public static List<Integer> operands(List<List<String>> operandsAndOperators) {
         List<Integer> operands = new ArrayList<>();
