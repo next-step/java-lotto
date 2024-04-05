@@ -17,6 +17,10 @@ public class Calculate {
             throw new IllegalArgumentException("문자열 입력이 잘못되었습니다. 형식을 맞춰 입력해주세요.");
         }
 
+        return calculate(operands, operators);
+    }
+
+    public static int calculate (List<Integer> operands, List<Operator> operators) {
         if (operands.size() == 1) {
             return operands.get(0);
         }
