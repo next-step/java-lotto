@@ -10,7 +10,7 @@ import lotto.domain.LottoNumber;
 
 public class LottoGenerator {
 
-    static final int MINIMUM_LOTTO_QUANTITY = 1;
+    static final int MINIMUM_LOTTO_QUANTITY = 0;
 
     private final LottoNumbersPicker lottoNumbersPicker;
 
@@ -28,7 +28,7 @@ public class LottoGenerator {
 
     private void validateQuantityIsMoreThanMinimum(final int quantity) {
         if (quantity < MINIMUM_LOTTO_QUANTITY) {
-            throw new IllegalArgumentException("자동 로또 개수는 1이상의 자연수여야 합니다. 개수: " + quantity);
+            throw new IllegalArgumentException("자동 로또 개수는 최소 개수 미만일 수 없습니다. 개수: " + quantity);
         }
     }
 
