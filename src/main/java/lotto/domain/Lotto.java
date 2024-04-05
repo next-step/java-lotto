@@ -7,23 +7,23 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto from(String[] numbers) {
-        return new Lotto(Arrays.stream(numbers)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList()));
+    public static Lotto create(List<Integer> lottoNumbers) {
+        return new Lotto(lottoNumbers.stream()
+                                     .map(LottoNumber::new)
+                                     .collect(Collectors.toList()));
     }
 
     public int size() {
         return lottoNumbers.size();
     }
 
-    public List<Integer> getValue() {
+    public List<LottoNumber> getValue() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
@@ -33,7 +33,8 @@ public class Lotto {
                 .count();
     }
 
-    public boolean hasNumber(int value) {
+    public boolean hasNumber(LottoNumber value) {
         return this.lottoNumbers.contains(value);
     }
+
 }

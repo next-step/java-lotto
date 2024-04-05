@@ -26,7 +26,7 @@ public class ResultView {
 
     private static String joinWithDelimiter(Lotto lotto) {
         return lotto.getValue().stream()
-                .map(String::valueOf)
+                .map(lottoNumber -> String.valueOf(lottoNumber.getValue()))
                 .collect(Collectors.joining(", ","[","]"));
     }
 

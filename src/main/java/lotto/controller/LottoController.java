@@ -14,9 +14,8 @@ public class LottoController {
         Lottos lottos = generateLottos(lottoFee);
         ResultView.showLottos(lottos);
 
-
-        Lotto winningNumber = Lotto.from(InputView.inputWinningNumber());
-        int bonusNumber = InputView.inputBonusNumber();
+        Lotto winningNumber = Lotto.create(InputView.inputWinningNumber());
+        LottoNumber bonusNumber = LottoNumber.from(InputView.inputBonusNumber());
         WinningLotto winningLottoNumber = new WinningLotto(winningNumber, bonusNumber);
 
         ResultView.showRanks(lottos.match(winningLottoNumber), lottoFee);

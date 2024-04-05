@@ -15,10 +15,10 @@ class LottosTest {
     @DisplayName("당첨 번호 및 보너스 번호 지정 후 내가 뽑은 로또 번호들로 당첨 등급 확인")
     void lottosMatchTest() {
 
-        Lotto winningLottoNumber = new Lotto(List.of(1,2,3,4,5,6));
-        WinningLotto winningLotto = new WinningLotto(winningLottoNumber, 7);
+        Lotto winningLottoNumber = Lotto.create(List.of(1,2,3,4,5,6));
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumber, LottoNumber.from(7));
 
-        Lotto selectedLottoNumber = new Lotto(List.of(1,2,3,4,5,6));
+        Lotto selectedLottoNumber = Lotto.create(List.of(1,2,3,4,5,6));
         Lottos lottos = new Lottos();
         lottos.add(selectedLottoNumber);
 
