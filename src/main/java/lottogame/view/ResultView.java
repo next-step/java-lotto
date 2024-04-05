@@ -9,6 +9,7 @@ import lottogame.domain.LottoNumber;
 import lottogame.domain.Lottos;
 import lottogame.domain.LottosBundle;
 import lottogame.domain.Rank;
+import lottogame.domain.ReturnOfRate;
 
 public class ResultView {
 
@@ -40,10 +41,10 @@ public class ResultView {
         printRanks(makeLottoResult(ranks));
     }
 
-    public static void printReturnOfRate(Double returnOfRate) {
+    public static void printReturnOfRate(ReturnOfRate returnOfRate) {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format(RETURN_OF_RATE_MESSAGE_FORMAT, returnOfRate.toTwoDecimal()));
-        if (returnOfRate.isLessThen(1)) {
+        if (returnOfRate.isProfitRange()) {
             sb.append(RETURN_OF_RATE_MESSAGE_INFORMATION);
         }
         System.out.println(sb);
