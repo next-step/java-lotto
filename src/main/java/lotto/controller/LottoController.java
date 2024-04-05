@@ -4,14 +4,19 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import static lotto.domain.LottoGenerator.generateLottos;
+import java.util.List;
 
 public class LottoController {
 
     public void buyLotto() {
 
-        LottoFee lottoFee = InputView.payForGames();
-        Lottos lottos = generateLottos(lottoFee);
+        LottoFee lottoFee = InputView.inputPaymentForGames();
+
+        int manualGameCount = InputView.inputManualGameCount();
+        List<List<Integer>> manualLottos = InputView.inputManualGameNumber(manualGameCount);
+        Lottos lottos = LottoGenerator.generateLottos(lottoFee, manualLottos);
+
+        ResultView.showPurchaseQuantitiy(manualGameCount, lottoFee);
         ResultView.showLottos(lottos);
 
         Lotto winningNumber = Lotto.create(InputView.inputWinningNumber());

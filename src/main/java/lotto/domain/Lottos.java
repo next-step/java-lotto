@@ -13,7 +13,11 @@ public class Lottos {
     }
 
     public void add(Lotto lotto) {
-        Lottos.lottoNumbers.add(lotto);
+        lottoNumbers.add(lotto);
+    }
+
+    public void add(List<Lotto> lotto) {
+        lottoNumbers.addAll(lotto);
     }
 
     public List<Lotto> getValue() {
@@ -22,7 +26,7 @@ public class Lottos {
 
     public LottoResult match(WinningLotto winningLottoNumber) {
         LottoResult lottoResult = new LottoResult();
-        for (Lotto lotto : Lottos.lottoNumbers){
+        for (Lotto lotto : lottoNumbers){
             LottoRank lottoRank  = winningLottoNumber.findRank(lotto);
             lottoResult.add(lottoRank);
         }

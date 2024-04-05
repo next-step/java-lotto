@@ -17,7 +17,7 @@ public class LottoFee {
         }
     }
 
-    public int convertToGameUnit() {
+    public int totalCount() {
         return value/PRICE_PER_GAME;
     }
 
