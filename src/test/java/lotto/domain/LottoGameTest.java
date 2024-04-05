@@ -14,7 +14,7 @@ class LottoGameTest {
     @Test
     @DisplayName("게임 결과 계산 로직 테스트")
     public void calculateGameResult() {
-        WinningLotto winningLotto = new WinningLotto("3, 4, 5, 6, 7, 8");
+        WinningLotto winningLotto = new WinningLotto("3, 4, 5, 6, 7, 8", "9");
 
         List<Lotto> purchasedLotto = new ArrayList<>();
         purchasedLotto.add(new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8)));

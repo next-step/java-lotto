@@ -13,15 +13,16 @@ class WinningLottoTest {
     @Test
     @DisplayName("당첨 로또 초기화 테스트")
     public void initializeWinningLottoTest() {
-        WinningLotto winningLotto = new WinningLotto("3, 42, 29, 17, 23, 34");
+        WinningLotto winningLotto = new WinningLotto("3, 42, 29, 17, 23, 34", "6");
 
         assertThat(winningLotto.getLotto().size()).isEqualTo(6);
+        assertThat(winningLotto.getBonusNumber()).isEqualTo(6);
     }
 
     @Test
     @DisplayName("당첨 로또 당첨 숫자 비교 테스트")
     public void compareWinningLottoTest() {
-        WinningLotto winningLotto = new WinningLotto("3, 42, 29, 17, 23, 34");
+        WinningLotto winningLotto = new WinningLotto("3, 42, 29, 17, 23, 34", "7");
 
 
         Lotto lotto1 = new Lotto(Arrays.asList(3, 42, 29, 16, 24, 32));
@@ -32,9 +33,19 @@ class WinningLottoTest {
     }
 
     @Test
+    @DisplayName("보너스 숫자 비교 테스트")
+    public void compareBonusNumberTest() {
+        WinningLotto winningLotto = new WinningLotto("3, 42, 29, 17, 23, 34", "7");
+
+        Lotto lotto = new Lotto(Arrays.asList(3, 42, 29, 16, 24, 7));
+
+        assertThat(winningLotto.isBonusIncluded(lotto)).isTrue();
+    }
+
+    @Test
     @DisplayName("당첨 로또 초기화 - Numeric String 예외 테스트")
     public void initializeWinningLottoNumericStringErrorTest() {
-        assertThatThrownBy(() -> new WinningLotto("3, 42, 29, 17, 이십삼, 34"))
+        assertThatThrownBy(() -> new WinningLotto("3, 42, 29, 17, 이십삼, 34", "9"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_NUMERIC_ERROR);
 
