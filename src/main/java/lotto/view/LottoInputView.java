@@ -13,8 +13,8 @@ import lotto.view.io.Output;
 public class LottoInputView {
 
     private static final int MINIMUM_MANUAL_LOTTO_COUNT = 0;
-    private static final String LOTTO_NUMBERS_DELIMITER = ", ";
-    private static final Pattern lottoNumbersPattern = Pattern.compile("^(\\d+,\\s)*\\d+$");
+    private static final String LOTTO_NUMBERS_DELIMITER = ",\\s*";
+    private static final Pattern lottoNumbersPattern = Pattern.compile("^\\d+(,\\s*\\d+)*$");
 
     private final Input input;
     private final Output output;
@@ -82,6 +82,7 @@ public class LottoInputView {
         validateWinningNumbersInputMatchesPattern(trimmedUserInput);
 
         return Arrays.stream(trimmedUserInput.split(LOTTO_NUMBERS_DELIMITER))
+                .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toUnmodifiableList());
     }
