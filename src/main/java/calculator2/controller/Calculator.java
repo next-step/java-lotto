@@ -9,7 +9,7 @@ public class Calculator {
     private static final int OPERAND = 0;
     private static final int OPERATOR = 1;
 
-    public List<Integer> operands(List<List<String>> operandsAndOperators) {
+    public static List<Integer> operands(List<List<String>> operandsAndOperators) {
         List<Integer> operands = new ArrayList<>();
         List<String> operandsString = operandsAndOperators.get(OPERAND);
 
@@ -20,7 +20,7 @@ public class Calculator {
         return operands;
     }
 
-    public List<Operator> operators(List<List<String>> operandsAndOperators) {
+    public static List<Operator> operators(List<List<String>> operandsAndOperators) {
         List<Operator> operators = new ArrayList<>();
         List<String> operatorsString = operandsAndOperators.get(OPERATOR);
 
@@ -31,7 +31,7 @@ public class Calculator {
         return operators;
     }
 
-    public List<List<String>> operandsAndOperators(String expression) {
+    public static List<List<String>> operandsAndOperators(String expression) {
         String[] splitExpression = expression.split(" ");
 
         List<List<String>> operandsAndOperators = new ArrayList<>();
