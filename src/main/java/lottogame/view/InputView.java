@@ -82,9 +82,6 @@ public class InputView {
                 .map(Number::from)
                 .collect(Collectors.toList());
 
-        if (!LottoFactory.isValidLottosSize(numbers.size())) {
-            throw new IllegalArgumentException(String.format(INVALID_INPUT_MANUAL_LOTTOS, numbers.size()));
-        }
         return Numbers.from(numbers);
     }
 

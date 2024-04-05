@@ -19,20 +19,38 @@ public class LottoMain {
         Number countOfLottos = lottoGame.calculateCountOfLottos(money);
         Number manualCountOfLotto = InputView.requestCountOfManualLottos(countOfLottos);
         ResultView.printLinkBreak();
-        List<Numbers> manualInputNumbers = InputView.requestMultipleManualLottos(manualCountOfLotto);
-
-        LottosBundle lottosBundleOfManual = lottoGame.createLottosBundle(manualInputNumbers);
+        LottosBundle lottosBundleOfManual = createLottosBundleOfManual(lottoGame, manualCountOfLotto);
         LottosBundle lottosBundleOfAuto = lottoGame.createLottosBundle(countOfLottos.minus(manualCountOfLotto));
 
         LottosBundle lottosBundle = lottosBundleOfManual.merge(lottosBundleOfAuto);
         ResultView.printAutoAndManualLottosCount(lottosBundleOfManual, lottosBundleOfAuto);
         ResultView.printLottos(lottosBundle);
 
-        Numbers winningLottosNumbers = InputView.requestWinningLotto();
-        Number bonusNumber = InputView.requestBonusNumber();
-        WinningLottos winningLotto = lottoGame.createWinningLotto(winningLottosNumbers, bonusNumber);
+        WinningLottos winningLottos = createWinningLottos(lottoGame);
 
-        ResultView.printWinningResult(lottoGame.checkRanks(winningLotto, lottosBundle));
-        ResultView.printReturnOfRate(lottoGame.calculateReturnOfRate(winningLotto, lottosBundle));
+        ResultView.printWinningResult(lottoGame.checkRanks(winningLottos, lottosBundle));
+        ResultView.printReturnOfRate(lottoGame.calculateReturnOfRate(winningLottos, lottosBundle));
+    }
+
+    private static LottosBundle createLottosBundleOfManual(LottoGame lottoGame, Number manualCountOfLotto) {
+        try {
+            List<Numbers> manualInputNumbers = InputView.requestMultipleManualLottos(manualCountOfLotto);
+            LottosBundle lottosBundleOfManual = lottoGame.createLottosBundle(manualInputNumbers);
+            return lottosBundleOfManual;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return createLottosBundleOfManual(lottoGame, manualCountOfLotto);
+        }
+    }
+
+    private static WinningLottos createWinningLottos(LottoGame lottoGame) {
+        try {
+            Numbers winningLottosNumbers = InputView.requestWinningLotto();
+            Number bonusNumber = InputView.requestBonusNumber();
+            return lottoGame.createWinningLotto(winningLottosNumbers, bonusNumber);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return createWinningLottos(lottoGame);
+        }
     }
 }

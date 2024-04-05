@@ -1,5 +1,6 @@
 package lottogame.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class Numbers {
 
-    List<Number> numbers;
+    private final List<Number> numbers;
 
     private Numbers(List<Number> numbers) {
         this.numbers = numbers;
@@ -26,14 +27,8 @@ public class Numbers {
         return new Numbers(numbers);
     }
 
-    public static Numbers ofUniqueRandom(int startInclusive, int endInclusive) {
+    public static Numbers uniqueRandomOf(int startInclusive, int endInclusive) {
         return fromIntegers(rangeClosed(startInclusive, endInclusive));
-    }
-
-    public List<LottoNumber> toLottoNumber() {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
     }
 
     public Numbers createRandomNumbers(int size) {
@@ -44,6 +39,10 @@ public class Numbers {
 
     public int size() {
         return numbers.size();
+    }
+
+    public List<Number> toList() {
+        return new ArrayList<>(numbers);
     }
 
     private Numbers subList(int size) {
