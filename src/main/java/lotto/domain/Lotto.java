@@ -19,16 +19,20 @@ public class Lotto {
         return lotto;
     }
 
-    public static void validateNumbers(List<Integer> numbers) {
+    public static void validateNumbersLength(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_LENGTH_ERROR);
         }
+    }
 
-        boolean isInRange = numbers.stream().allMatch(number -> number >= LOWER_BOUND && number <= UPPER_BOUND);
-
-        if (!isInRange) {
+    public static void validateLottoNumberBound(Integer numbers) {
+        if (numbers < LOWER_BOUND || numbers > UPPER_BOUND) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR);
         }
     }
 
+    public static void validateNumbers(List<Integer> numbers) {
+        validateNumbersLength(numbers);
+        numbers.forEach(Lotto::validateLottoNumberBound);
+    }
 }
