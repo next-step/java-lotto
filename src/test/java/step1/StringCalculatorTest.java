@@ -3,13 +3,12 @@ package step1;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import step1.config.ErrorMessage;
+import step1.config.message.ErrorMessage;
 import step1.controller.StringCalculator;
-import step1.domain.Operators;
 
 
 import static org.assertj.core.api.Assertions.*;
-import static step1.config.ErrorMessage.NULL_OR_EMPTY_VALIDATION;
+import static step1.config.message.ErrorMessage.NULL_OR_EMPTY_VALIDATION;
 
 public class StringCalculatorTest {
 
