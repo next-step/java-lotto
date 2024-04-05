@@ -19,8 +19,8 @@ public class Calculator {
     }
 
     public static List<Integer> operands(List<List<String>> operandsAndOperators) {
-        List<Integer> operands = new ArrayList<>();
         List<String> operandsString = operandsAndOperators.get(OPERAND);
+        List<Integer> operands = new ArrayList<>();
 
         for (int i = 0; i < operandsString.size(); i++) {
             operands.add(Integer.parseInt(operandsString.get(i)));
@@ -30,8 +30,8 @@ public class Calculator {
     }
 
     public static List<Operator> operators(List<List<String>> operandsAndOperators) {
-        List<Operator> operators = new ArrayList<>();
         List<String> operatorsString = operandsAndOperators.get(OPERATOR);
+        List<Operator> operators = new ArrayList<>();
 
         for (int i = 0; i < operatorsString.size(); i++) {
             operators.add(Operator.find(operatorsString.get(i)));
