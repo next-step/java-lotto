@@ -5,16 +5,16 @@ import calculator2.controller.Calculator;
 import java.util.List;
 
 public class Calculate {
-    public int calculate (String expression) {
+    public static int calculate (String expression) {
         List<List<String>> operandsAndOperators = Calculator.operandsAndOperators(expression);
         List<Integer> operands = Calculator.operands(operandsAndOperators);
         List<Operator> operators = Calculator.operators(operandsAndOperators);
-        int result = 0;
 
-        for (int i = 0; i < operands.size(); i++) {
-            result += operators.get(i).calculate(operands.get(i), operands.get(i + 1));
+        int result = operators.get(0).calculate(operands.get(0), operands.get(1));
+        for (int i = 1; i < operators.size(); i++) {
+            result = operators.get(i).calculate(result, operands.get(i + 1));
         }
-        
+
         return result;
     }
 }

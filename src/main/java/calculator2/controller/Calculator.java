@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Calculator {
+
     private static final int OPERAND = 0;
     private static final int OPERATOR = 1;
 
@@ -41,7 +42,7 @@ public class Calculator {
         operandsAndOperators.add(operators);
 
         for (int i = 0; i < splitExpression.length; i++) {
-            int operandOrOperator = (i % 2 != 0) ? OPERAND : OPERATOR;
+            int operandOrOperator = (i % 2 == 0) ? OPERAND : OPERATOR;
             operandsAndOperators.get(operandOrOperator).add(splitExpression[i]);
         }
 
