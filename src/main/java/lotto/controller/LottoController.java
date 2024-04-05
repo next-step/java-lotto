@@ -6,6 +6,8 @@ import lotto.view.ResultView;
 
 import java.util.List;
 
+import static lotto.domain.LottoFee.validateManualGameCount;
+
 public class LottoController {
 
     public void buyLotto() {
@@ -13,6 +15,8 @@ public class LottoController {
         LottoFee lottoFee = InputView.inputPaymentForGames();
 
         int manualGameCount = InputView.inputManualGameCount();
+        validateManualGameCount(manualGameCount, lottoFee.totalCount());
+
         List<List<Integer>> manualLottos = InputView.inputManualGameNumber(manualGameCount);
         Lottos lottos = LottoGenerator.generateLottos(lottoFee, manualLottos);
 
