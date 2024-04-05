@@ -53,4 +53,10 @@ public class LottosBundle {
                 .reduce(Number.from(0), Number::add);
         return Money.fromNumber(purchaseAmount);
     }
+
+    public ReturnOfRate calculateReturnOfRate(WinningLottos winnerLotto, Money price) {
+        Money purchaseAmount = calculatePurchaseAmount(price);
+        Money sumOfPrize = calculateSumOfPrize(winnerLotto);
+        return ReturnOfRate.fromDouble(sumOfPrize.divide(purchaseAmount).toDouble());
+    }
 }

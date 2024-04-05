@@ -5,10 +5,8 @@ import java.util.List;
 public class LottoGame {
     private static final Money price = Money.from(1_000);
 
-    public Double calculateReturnOfRate(WinningLottos winnerLotto, LottosBundle lottosBundle) {
-        Money purchaseAmount = lottosBundle.calculatePurchaseAmount(price);
-        Money sumOfPrize = lottosBundle.calculateSumOfPrize(winnerLotto);
-        return sumOfPrize.divide(purchaseAmount).toDouble();
+    public ReturnOfRate calculateReturnOfRate(WinningLottos winnerLotto, LottosBundle lottosBundle) {
+        return lottosBundle.calculateReturnOfRate(winnerLotto, price);
     }
 
     public List<Rank> checkRanks(WinningLottos winnerLotto, LottosBundle lottosBundle) {

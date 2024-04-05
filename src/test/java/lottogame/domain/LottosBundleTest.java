@@ -39,4 +39,18 @@ class LottosBundleTest {
 
         assertThat(lottosBundle.calculatePurchaseAmount(lottoPrice)).isEqualTo(expected);
     }
+
+    @Test
+    void 로또_총_수익() {
+        LottosBundle lottosBundle = LottosBundle.fromNumbers(
+                List.of(
+                        Numbers.fromIntegers(List.of(1,2,3,4,5,7)),
+                        Numbers.fromIntegers(List.of(1,2,3,4,7,8))
+                ));
+        Money expected = Money.from(30_050_000);
+        WinningLottos winningLottos = LottoFactory.createWinningLotto(
+                Numbers.fromIntegers(List.of(1, 2, 3, 4, 5, 6)), 7);
+
+        assertThat(lottosBundle.calculateSumOfPrize(winningLottos)).isEqualTo(expected);
+    }
 }
