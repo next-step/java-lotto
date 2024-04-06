@@ -1,9 +1,9 @@
 package lottoTest;
 
 import lotto.model.Lotto;
-import lotto.model.MatchNumber;
-import lotto.model.Number;
-import lotto.model.Numbers;
+import lotto.model.LottoNumber;
+import lotto.model.LottoNumbers;
+import lotto.model.MatchResult;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -17,12 +17,12 @@ import java.util.stream.Stream;
 public class LottoTest {
 
     //테스트용 더미 Number
-    private static final Number dummyNumber = new Number(-1);
+    private static final LottoNumber DUMMY_LOTTO_NUMBER = new LottoNumber(0);
 
     @ParameterizedTest(name = "{1} 로또는 {1} 값을 리스트 반환")
     @MethodSource("generateLotto")
-    void lottoGetNumbersTest(Lotto lotto, Numbers numbers) {
-        Assertions.assertThat(lotto.getNumbers()).isEqualTo(numbers);
+    void lottoGetNumbersTest(Lotto lotto, LottoNumbers lottoNumbers) {
+        Assertions.assertThat(lotto.getNumbers()).isEqualTo(lottoNumbers);
     }
 
     @ParameterizedTest(name = "lotto의 숫자 리스트 사이즈는 6")
@@ -35,14 +35,14 @@ public class LottoTest {
     @ParameterizedTest(name = "{1} 해당 로또와 {2} 당청 번호 비교시 일치하는 수는 {3} 이다.")
     @MethodSource("createLottoWinningnumbersMatchcount")
     void getMatchNumberCount(Lotto lotto, List<Integer> lottoNumbers, List<Integer> winningNumbers, int expectedMatchCount) {
-        Assertions.assertThat(lotto.matchNumbers(Numbers.valueOf(winningNumbers), dummyNumber).getMatchCount()).isEqualTo(expectedMatchCount);
+        Assertions.assertThat(lotto.matchNumbers(LottoNumbers.valueOf(winningNumbers), DUMMY_LOTTO_NUMBER).getMatchCount()).isEqualTo(expectedMatchCount);
     }
 
     @ParameterizedTest(name = "{1} 로또 번호와 {2} 보너스 번호의 일치 여부는 {3} 이다.")
     @MethodSource("createLottoWinningnumbersBonus")
     void matchBounusTest(Lotto lotto, List<Integer> lottoNumbers, int bonusNumber, boolean expected) {
-        MatchNumber matchNumber = lotto.matchNumbers(Numbers.valueOf(lottoNumbers), new Number(bonusNumber));
-        Assertions.assertThat(matchNumber.isMatchBonus()).isEqualTo(expected);
+        MatchResult matchResult = lotto.matchNumbers(LottoNumbers.valueOf(lottoNumbers), new LottoNumber(bonusNumber));
+        Assertions.assertThat(matchResult.isMatchBonus()).isEqualTo(expected);
     }
 
     private static Stream<Arguments> createLottoWinningnumbersBonus() {
@@ -68,16 +68,16 @@ public class LottoTest {
 
     private static Stream<Arguments> generateLotto() {
         return Stream.of(
-                Arguments.arguments(givenLotto(givenNumbers(1, 2, 3, 4, 5, 6)), Numbers.valueOf(givenNumbers(1, 2, 3, 4, 5, 6))),
-                Arguments.arguments(givenLotto(givenNumbers(2, 3, 4, 5, 6, 7)), Numbers.valueOf(givenNumbers(2, 3, 4, 5, 6, 7))),
-                Arguments.arguments(givenLotto(givenNumbers(3, 4, 5, 6, 7, 8)), Numbers.valueOf(givenNumbers(3, 4, 5, 6, 7, 8))),
-                Arguments.arguments(givenLotto(givenNumbers(4, 5, 6, 7, 8, 9)), Numbers.valueOf(givenNumbers(4, 5, 6, 7, 8, 9))),
-                Arguments.arguments(givenLotto(givenNumbers(5, 6, 7, 8, 9, 10)), Numbers.valueOf(givenNumbers(5, 6, 7, 8, 9, 10)))
+                Arguments.arguments(givenLotto(givenNumbers(1, 2, 3, 4, 5, 6)), LottoNumbers.valueOf(givenNumbers(1, 2, 3, 4, 5, 6))),
+                Arguments.arguments(givenLotto(givenNumbers(2, 3, 4, 5, 6, 7)), LottoNumbers.valueOf(givenNumbers(2, 3, 4, 5, 6, 7))),
+                Arguments.arguments(givenLotto(givenNumbers(3, 4, 5, 6, 7, 8)), LottoNumbers.valueOf(givenNumbers(3, 4, 5, 6, 7, 8))),
+                Arguments.arguments(givenLotto(givenNumbers(4, 5, 6, 7, 8, 9)), LottoNumbers.valueOf(givenNumbers(4, 5, 6, 7, 8, 9))),
+                Arguments.arguments(givenLotto(givenNumbers(5, 6, 7, 8, 9, 10)), LottoNumbers.valueOf(givenNumbers(5, 6, 7, 8, 9, 10)))
         );
     }
 
     private static Lotto givenLotto(List<Integer> integers) {
-        return new Lotto(integers);
+        return new Lotto(LottoNumbers.valueOf(integers));
     }
 
     private static List<Integer> givenNumbers(int... numbers) {

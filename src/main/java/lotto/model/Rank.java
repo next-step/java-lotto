@@ -22,23 +22,23 @@ public enum Rank {
         this.winningsAmount = winningsAmount;
     }
 
-    public static int getWinningsAmount(MatchNumber matchNumber) {
+    public static int getWinningsAmount(MatchResult matchResult) {
         return Arrays.stream(Rank.values())
-                .filter(value -> isValue(matchNumber, value))
+                .filter(value -> isValue(matchResult, value))
                 .findAny()
                 .orElse(MISS)
                 .winningsAmount;
     }
 
-    public static int getRank(MatchNumber matchNumber) {
+    public static int getRank(MatchResult matchResult) {
         return Arrays.stream(Rank.values())
-                .filter(value -> isValue(matchNumber, value))
+                .filter(value -> isValue(matchResult, value))
                 .findAny()
                 .orElse(Rank.MISS)
                 .rank;
     }
 
-    private static boolean isValue(MatchNumber matchNumber, Rank value) {
-        return (matchNumber.getMatchCount() == value.matchCount) && (matchNumber.isMatchBonus() == value.matchBonus);
+    private static boolean isValue(MatchResult matchResult, Rank value) {
+        return (matchResult.getMatchCount() == value.matchCount) && (matchResult.isMatchBonus() == value.matchBonus);
     }
 }

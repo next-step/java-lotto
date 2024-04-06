@@ -5,49 +5,65 @@ import java.util.stream.Collectors;
 
 public class ResultLotto {
     private static final int LOTTO_PRICE = 1000;
-    private List<Lotto> lottos;
-    private Numbers winningNumbers;
-    private Number bonusNumber;
+    private Lottos lottos;
+    private LottoNumbers winningLottoNumbers;
+    private LottoNumber bonusLottoNumber;
+
+    public ResultLotto() {
+        this.lottos = new Lottos();
+    }
 
     public int totallottoCount() {
         return lottos.size();
     }
 
     public int getWinningAmount() {
-        List<MatchNumber> matchNumbers = lottos.stream()
-                .map(lotto -> lotto.matchNumbers(winningNumbers, bonusNumber))
+        List<MatchResult> matchResults = lottos.getLottos().stream()
+                .map(lotto -> lotto.matchNumbers(winningLottoNumbers, bonusLottoNumber))
                 .collect(Collectors.toList());
 
-        return LottoOutlet.getWinnings(matchNumbers);
+        return LottoOutlet.getWinnings(matchResults);
     }
 
     public double getWinningRate() {
         return (double) getWinningAmount() / (lottos.size() * LOTTO_PRICE);
     }
 
-    public List<Numbers> getLottosNumbers() {
-        return lottos.stream()
+    public List<LottoNumbers> getLottosNumbers() {
+        return lottos.getLottos().stream()
                 .map(lotto -> lotto.getNumbers())
                 .collect(Collectors.toList());
     }
 
-    public void recordBuyLottos(List<Lotto> buyLottos) {
-        this.lottos = buyLottos;
-    }
-
     public void recordWinningNumbers(List<Integer> winningNumbers) {
-        this.winningNumbers = Numbers.valueOf(winningNumbers);
+        this.winningLottoNumbers = LottoNumbers.valueOf(winningNumbers);
     }
 
     public int findRankCount(int rank) {
-        return (int) lottos.stream()
-                .map(lotto -> lotto.matchNumbers(winningNumbers, bonusNumber))
+        return (int) lottos.getLottos().stream()
+                .map(lotto -> lotto.matchNumbers(winningLottoNumbers, bonusLottoNumber))
                 .filter(matchNumber -> LottoOutlet.getRank(matchNumber) == rank)
                 .count();
     }
 
-    public void recordWinningNumbers(Numbers winningNumbers, int bonusNumber) {
-        this.winningNumbers = winningNumbers;
-        this.bonusNumber = new Number(bonusNumber);
+    public void recordWinningNumbers(LottoNumbers winningLottoNumbers, int bonusNumber) {
+        this.winningLottoNumbers = winningLottoNumbers;
+        this.bonusLottoNumber = LottoNumber.valueOf(bonusNumber);
+    }
+
+    public void recordManualLottos(List<Lotto> buyLottos) {
+        lottos.addManualLottos(buyLottos);
+    }
+
+    public void recordBuyAutoLottos(List<Lotto> buyLottos) {
+        lottos.addAutoLottos(buyLottos);
+    }
+
+    public int getAutoLottoCount() {
+        return lottos.getAutoCount();
+    }
+
+    public int getManualLottoCount() {
+        return lottos.getManualCount();
     }
 }

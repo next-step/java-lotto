@@ -3,30 +3,30 @@ package lotto.model;
 import java.util.List;
 
 public class Lotto {
-    private final Numbers numbers;
+    private final LottoNumbers lottoNumbers;
 
-    public Lotto(List<Integer> numbers) {
-        this.numbers = Numbers.valueOf(numbers);
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto(Numbers numbers) {
-        this.numbers = numbers;
+    public Lotto valueOf(List<Integer> numbers) {
+        return new Lotto(LottoNumbers.valueOf(numbers));
     }
 
-    public Numbers getNumbers() {
-        return numbers;
+    public LottoNumbers getNumbers() {
+        return lottoNumbers;
     }
 
-    public MatchNumber matchNumbers(Numbers winningNumbers, Number bonusNumber) {
-        return new MatchNumber(getMatchCount(winningNumbers), getMatchBonus(bonusNumber));
+    public MatchResult matchNumbers(LottoNumbers winningLottoNumbers, LottoNumber bonusLottoNumber) {
+        return new MatchResult(getMatchCount(winningLottoNumbers), getMatchBonus(bonusLottoNumber));
     }
 
-    private boolean getMatchBonus(Number bonusNumber) {
-        return numbers.contains(bonusNumber);
+    private boolean getMatchBonus(LottoNumber bonusLottoNumber) {
+        return lottoNumbers.contains(bonusLottoNumber);
     }
 
-    private int getMatchCount(Numbers winningNumbers) {
-        return (int) winningNumbers.getNumberList().stream()
+    private int getMatchCount(LottoNumbers winningLottoNumbers) {
+        return (int) winningLottoNumbers.getNumberList().stream()
                 .parallel()
                 .filter(number -> getMatchBonus(number))
                 .count();

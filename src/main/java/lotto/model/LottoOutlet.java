@@ -26,7 +26,7 @@ public class LottoOutlet {
     }
 
     public static Lotto generateLotto() {
-        return new Lotto(numbersGenerator.generate());
+        return new Lotto(new LottoNumbers(numbersGenerator.generate()));
     }
 
     public static List<Lotto> generateLottos(int count) {
@@ -35,17 +35,27 @@ public class LottoOutlet {
                 .collect(Collectors.toList());
     }
 
-    public static int getWinnings(List<MatchNumber> matchNumbers) {
-        return matchNumbers.stream()
+    public static int getWinnings(List<MatchResult> matchResults) {
+        return matchResults.stream()
                 .mapToInt(matchNumber -> Rank.getWinningsAmount(matchNumber))
                 .sum();
     }
 
-    public static int getWinning(MatchNumber matchNumber) {
-        return Rank.getWinningsAmount(matchNumber);
+    public static int getWinning(MatchResult matchResult) {
+        return Rank.getWinningsAmount(matchResult);
     }
 
-    public static int getRank(MatchNumber matchNumber) {
-        return Rank.getRank(matchNumber);
+    public static int getRank(MatchResult matchResult) {
+        return Rank.getRank(matchResult);
+    }
+
+    public static int lottoMoney(int manualLottoCount) {
+        return manualLottoCount * LOTTO_PRICE;
+    }
+
+    public static List<Lotto> generateLottos(List<List<Integer>> manualLottoNumbers) {
+        return manualLottoNumbers.stream()
+                .map(numbers -> new Lotto(LottoNumbers.valueOf(numbers)))
+                .collect(Collectors.toList());
     }
 }
