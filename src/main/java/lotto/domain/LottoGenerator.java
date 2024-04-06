@@ -10,8 +10,8 @@ public final class LottoGenerator {
 
     public static Lottos generateLottos(LottoFee lottoFee, List<List<Integer>> manualLottos) {
         Lottos lottos = new Lottos();
-        lottos.add(generateAutoLotto(lottoFee.totalCount() - manualLottos.size()));
-        lottos.add(generateManualLotto(manualLottos));
+        lottos.addAll(generateAutoLotto(lottoFee.totalCount() - manualLottos.size()));
+        lottos.addAll(generateManualLotto(manualLottos));
 
         return lottos;
     }
