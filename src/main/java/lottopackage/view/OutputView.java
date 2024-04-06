@@ -10,14 +10,14 @@ import java.util.List;
 public class OutputView {
 
     /* Method */
-    public void printLottoGroup(List<Lotto> lottoGroup) {
+    public static void printLottoGroup(List<Lotto> lottoGroup) {
         for (int i = 0; i < lottoGroup.size(); i++ ) {
             List<Integer> lotto = lottoGroup.get(i).getLotto();
             System.out.println(lotto);
         }
     }
 
-    public void printLottoResult(List<Prize> lottoResult, int totalLottoGroupSize) {
+    public static void printLottoResult(List<Prize> lottoResult, int totalLottoGroupSize) {
         List<Prize> prizeGroup = Arrays.asList( Prize.values() );
         int totalWinningAmount = 0;
 

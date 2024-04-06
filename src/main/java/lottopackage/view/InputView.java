@@ -6,24 +6,24 @@ import java.util.Scanner;
 
 public class InputView {
     /* Member variable */
-    Scanner scanner = new Scanner(System.in).useDelimiter("\\s*\\n\\s*");
+    private final static Scanner SCANNER = new Scanner(System.in).useDelimiter("\\s*\\n\\s*");
 
     /* Method */
-    public int purchaseAmount() {
+    public static int purchaseAmount() {
         System.out.println("구입 금액을 입력해주세요.");
-        return scanner.nextInt();
+        return SCANNER.nextInt();
     }
 
-    public void winningNumberStringArrayToWinningNumber (String[] winningNumberStringArray, List<Integer> winningNumber) {
+    public static void winningNumberStringArrayToWinningNumber (String[] winningNumberStringArray, List<Integer> winningNumber) {
         for (String number : winningNumberStringArray) {
             winningNumber.add(Integer.valueOf(number));
         }
     }
 
-    public List<Integer> winningNumber() {
+    public static List<Integer> winningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해주세요. (ex) 3, 41, 29, 38, 11, 6");
 
-        String winningNumberString = scanner.next();
+        String winningNumberString = SCANNER.next();
         String[] winningNumberStringArray = winningNumberString.replaceAll(" ", "").split(",");
 
         List<Integer> winningNumber = new ArrayList<>();
