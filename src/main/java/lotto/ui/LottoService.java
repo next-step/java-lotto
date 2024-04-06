@@ -11,13 +11,12 @@ public class LottoService {
 
     public final static int LOTTO_VALUE = 1000;
 
-
     public LottoList purchaseLotto(String requestMoney, String passiveLottoCount, List<String> lottoNumbers) {
         int count = getCount(requestMoney, passiveLottoCount);
 
-        List<Lotto> passiveLotto = LottoMaker.convertPassiveLotto(lottoNumbers);
+        List<Lotto> passiveLotto = new PassiveLottoMaker(lottoNumbers).create();
 
-        List<Lotto> autoLotto = LottoMaker.createAutoLotto(count);
+        List<Lotto> autoLotto = new AutoLottoMaker(count).create();
 
         passiveLotto.addAll(autoLotto);
         return new LottoList(passiveLotto);
@@ -28,10 +27,10 @@ public class LottoService {
     }
 
     public AnswerSheet getAnswerSheet(String answerSheet, String bonusNumberText) {
-        Lotto answerLotto = new Lotto(LottoMaker.convertTextToLotto(answerSheet));
+        Lotto lotto = LottoMaker.convertTextToLotto(answerSheet);
         LottoNumber bonusNumber = LottoNumber.from(Integer.parseInt(bonusNumberText));
 
-        return new AnswerSheet(answerLotto, bonusNumber);
+        return new AnswerSheet(lotto, bonusNumber);
     }
 
     public LottoResult createLottoResult(LottoList lottoList, AnswerSheet answerSheet) {
