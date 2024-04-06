@@ -27,6 +27,6 @@ public class Budget{
     }
 
     public Budget spend(Price price, SelfIssueCount issueCount) {
-        return new Budget(budget - issueCount.multiple(price));
+        return new Budget(budget - price.multiple(issueCount));
     }
 }

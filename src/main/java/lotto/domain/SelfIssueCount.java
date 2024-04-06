@@ -8,8 +8,8 @@ public class SelfIssueCount {
         this.count = count;
     }
 
-    public int multiple(Price price) {
-        return count * price.getValue();
+    public int getCount() {
+        return count;
     }
 
     public boolean isPositive() {

@@ -10,6 +10,14 @@ public enum Price {
         this.value = value;
     }
 
+    public int getValue() {
+        return value;
+    }
+
+    public int multiple(SelfIssueCount count) {
+        return count.getCount() * value;
+    }
+
     public int divide(int budget) {
         return budget / value;
     }
