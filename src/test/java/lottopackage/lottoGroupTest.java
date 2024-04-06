@@ -18,11 +18,11 @@ public class lottoGroupTest {
     public void isPrize() {
         // given
         List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add( new Lotto( new ArrayList<Integer>( Arrays.asList(1, 2, 3, 4, 5, 6) ) ) );
-        lottoList.add( new Lotto( new ArrayList<Integer>( Arrays.asList(1, 2, 3, 4, 5, 7) ) ) );
-        lottoList.add( new Lotto( new ArrayList<Integer>( Arrays.asList(1, 2, 3, 4, 7, 8) ) ) );
-        lottoList.add( new Lotto( new ArrayList<Integer>( Arrays.asList(1, 2, 3, 7, 8, 9) ) ) );
-        lottoList.add( new Lotto( new ArrayList<Integer>( Arrays.asList(11, 12, 13, 14, 15, 16) ) ) );
+        lottoList.add( new Lotto( new ArrayList<>( Arrays.asList(1, 2, 3, 4, 5, 6) ) ) ); // 1st
+        lottoList.add( new Lotto( new ArrayList<>( Arrays.asList(1, 2, 3, 4, 5, 7) ) ) ); // 3rd
+        lottoList.add( new Lotto( new ArrayList<>( Arrays.asList(1, 2, 3, 4, 7, 8) ) ) ); // 4th
+        lottoList.add( new Lotto( new ArrayList<>( Arrays.asList(1, 2, 3, 7, 8, 9) ) ) ); // 5th
+        lottoList.add( new Lotto( new ArrayList<>( Arrays.asList(11, 12, 13, 14, 15, 16) ) ) ); // 6th
 
         LottoGroup lottoGroup = new LottoGroup(lottoList);
 

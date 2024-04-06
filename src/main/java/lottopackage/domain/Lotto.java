@@ -23,7 +23,7 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> lottoNumber) {
-        isLottoNumberValid(lottoNumber);
+        isLottoValid(lottoNumber);
         this.lotto = lottoNumber;
     }
 
@@ -31,6 +31,7 @@ public class Lotto {
     public static List<Integer> getLotteryBalls() {
         return lotteryBalls;
     }
+
     public List<Integer> getLotto() {
         return lotto;
     }
@@ -40,20 +41,26 @@ public class Lotto {
         if (purchaseAmount < PRICE) {
             throw new IllegalArgumentException("최소 주문 금액(=로또 한 장 금액)은 " + PRICE + "원 입니다.");
         }
-        return (int) purchaseAmount/PRICE;
+        return (int) purchaseAmount / PRICE;
     }
 
-    public static void isLottoNumberValid(List<Integer> lottoNumber) {
-        if (lottoNumber.size() != 6) {
-            throw new IllegalArgumentException("로또 숫자는 6개여야 합니다.");
-        }
-        if (!lotteryBalls.containsAll(lottoNumber)) {
+    public static void isLottoNumberValid(int lottoNumber) {
+        if (!lotteryBalls.contains(lottoNumber)) {
             throw new IllegalArgumentException("로또 숫자는 1~45 안에 있어야 합니다.");
         }
     }
 
+    public static void isLottoValid(List<Integer> lotto) {
+        if (lotto.size() != 6) {
+            throw new IllegalArgumentException("로또 숫자는 6개여야 합니다.");
+        }
+        for (int lottoNumber : lotto) {
+            isLottoNumberValid(lottoNumber);
+        }
+    }
+
     public Prize isPrize(List<Integer> winningNumber) {
-        isLottoNumberValid(winningNumber);
+        isLottoValid(winningNumber);
         return Prize.isPrize(lotto, winningNumber);
     }
 }
