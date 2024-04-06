@@ -2,36 +2,43 @@ package lotto.domain;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGame {
-    private Lottos userLottos;
-    private Money amount;
+    private final Lottos userManualLottos;
+    private final Lottos userAutoLottos;
+    private final Money amount;
 
     public LottoGame(int money) {
-        this.userLottos = new Lottos();
+        this.userManualLottos = new Lottos();
+        this.userAutoLottos = new Lottos();
         this.amount = Money.from(money);
     }
 
-    public List<Lotto> createAutoLotto(int CountOfManualLottos, NumberStrategy numberStrategy) {
-        return this.userLottos.createLottos(countOfAutoLotto(CountOfManualLottos), numberStrategy);
+    public List<Lotto> createAutoLotto(NumberStrategy numberStrategy) {
+        return this.userAutoLottos.createLottos(countOfAutoLotto(), numberStrategy);
+    }
+
+    public int countOfAutoLotto() {
+        return this.amount.countOfBuyLotto() - countOfManualLotto();
+    }
+
+    public int countOfManualLotto() {
+        return this.userManualLottos.lottoSize();
     }
 
     public List<Lotto> createManualLotto(List<String> manualLottos) {
-        return this.userLottos.createManualLotto(manualLottos);
+        return this.userManualLottos.createManualLotto(manualLottos);
     }
 
-    public int countOfAutoLotto(int countOfmManualLotto) {
-        return this.amount.countOfBuyLotto() - countOfmManualLotto;
+    public List<Rank> match(Lotto winningLotto, LottoNumber bonusNumber) {
+        return this.getAllLotto().stream()
+                .map(lotto -> Rank.of(lotto.matchCount(winningLotto), lotto.isContains(bonusNumber)))
+                .collect(Collectors.toList());
     }
 
-    public List<Lotto> getLottos() {
-        return this.userLottos.getLottos();
-    }
-
-    public List<Rank> match(String winningNumbers, int inputBonusNumber) {
-        Lotto winningLotto = Lotto.createFromString(winningNumbers);
-        LottoNumber bonusNumber = LottoNumber.of(inputBonusNumber);
-        return this.userLottos.match(winningLotto, bonusNumber);
+    public List<Lotto> getAllLotto() {
+        return this.userManualLottos.addAllLotto(this.userAutoLottos);
     }
 
     public double calculateProfit(List<Rank> ranks) {

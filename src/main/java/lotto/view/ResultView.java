@@ -13,9 +13,9 @@ public class ResultView {
     public static final String BONUS_MESSAGE = ", 보너스 볼 일치";
     public static final String SPACE = " ";
 
-    public void printOfBuyLotto(int manualCount, LottoGame lottoGame) {
-        System.out.printf(BUY_LOTTO_MESSAGE, manualCount, lottoGame.countOfAutoLotto(manualCount));
-        for (Lotto lotto : lottoGame.getLottos()) {
+    public void printOfBuyLotto(LottoGame lottoGame) {
+        System.out.printf(BUY_LOTTO_MESSAGE, lottoGame.countOfManualLotto(), lottoGame.countOfAutoLotto());
+        for (Lotto lotto : lottoGame.getAllLotto()) {
             System.out.println(lotto.sortNumbers());
         }
     }

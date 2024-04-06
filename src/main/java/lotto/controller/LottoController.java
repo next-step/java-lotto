@@ -15,14 +15,13 @@ public class LottoController {
         ResultView resultView = new ResultView();
         RandomNumberStrategy randomNumberStrategy = new RandomNumberStrategy();
         LottoGame lottoGame = new LottoGame(inputView.inputMoney());
-        int inputManualLottoCount = inputView.inputManualLottoCount();
-        lottoGame.createManualLotto(inputView.inputManualLotto(inputManualLottoCount));
-        lottoGame.createAutoLotto(inputManualLottoCount, randomNumberStrategy);
+        lottoGame.createManualLotto(inputView.inputManualLotto());
+        lottoGame.createAutoLotto(randomNumberStrategy);
 
-        resultView.printOfBuyLotto(inputManualLottoCount, lottoGame);
-        List<Rank> userLottoRanks = lottoGame.match(inputView.inputWinningNumber(), inputView.inputBonusNumber());
+        resultView.printOfBuyLotto(lottoGame);
+        final List<Rank> ranks = lottoGame.match(inputView.inputWinningNumber(), inputView.inputBonusNumber());
 
-        resultView.printWinningResult(LottoResult.matchResult(userLottoRanks));
-        resultView.printProfit(lottoGame.calculateProfit(userLottoRanks));
+        resultView.printWinningResult(LottoResult.matchResult(ranks));
+        resultView.printProfit(lottoGame.calculateProfit(ranks));
     }
 }

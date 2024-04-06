@@ -17,7 +17,7 @@ class LottoGameTest {
     @CsvSource(value = {"3000 : 3", "2000 : 2"}, delimiter = ':')
     @DisplayName("자동 로또 발행 테스트")
     void create_auto_lotto_test(int money, int output) {
-        List<Lotto> lottos = new LottoGame(money).createAutoLotto(0, new RandomNumberStrategy());
+        List<Lotto> lottos = new LottoGame(money).createAutoLotto(new RandomNumberStrategy());
         assertThat(lottos.size()).isEqualTo(output);
     }
 
