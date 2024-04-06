@@ -1,8 +1,8 @@
 # 로또
 ## 진행 방법
-* 정답숫자 6개와 보너스 넘버를 가지는 AnswerSheet 생성
-* LottoPrize enum값 추가
-  * 보너스 값 찾는 로직(캐시 수정)
-  * 출력 로직 수정
-* LottoPrize 변환로직  LottoMatcher 수정
-* 
+* Lotto의 숫자를 객체화 및 cache
+* 정답지의 정수 리스트를 객체로 변경
+* Lotto를 생성역할을 LottoMaker에게 위임
+* LottoPrize에서 결과값 print 로직 제거
+* 정답지와 Lotto를 통해 결과값을 만드는 calculaotr 클래스 작성
+* ui , controller, service 로직 분리

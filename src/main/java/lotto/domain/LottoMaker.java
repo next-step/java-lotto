@@ -1,21 +1,22 @@
 package lotto.domain;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-public class LottoMaker {
 
-    private static final List<Integer> LOTTO_NUMBERS = IntStream.range(1, 50).boxed().collect(Collectors.toList());
+public interface LottoMaker {
 
-    private static final int LOTTO_NUMBER_COUNT = 6;
+    String SPLIT_TOKEN =",";
 
-    private LottoMaker() {
+    List<Lotto> create();
+
+     static Lotto convertTextToLotto(String numbers) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(numbers.split(SPLIT_TOKEN))
+                .mapToInt(Integer::parseInt)
+                .mapToObj(LottoNumber::from)
+                .collect(Collectors.toList());
+        return new Lotto(lottoNumbers);
     }
 
-    public static List<Integer> getNumbers(){
-        Collections.shuffle(LOTTO_NUMBERS);
-        return LOTTO_NUMBERS.stream().limit(LOTTO_NUMBER_COUNT).collect(Collectors.toUnmodifiableList());
-    }
 }
