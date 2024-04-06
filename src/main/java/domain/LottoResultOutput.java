@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 public enum LottoResultOutput {
     RIGHT_3(3, 5_000, false),
@@ -21,10 +22,18 @@ public enum LottoResultOutput {
 
     public static LottoResultOutput valueOf(int countOfMatch, boolean matchBonus) {
         return Arrays.stream(values())
-                .filter(rank -> rank.correctCount == countOfMatch)
-                .filter(rank -> !rank.isBonus || rank.isBonus == matchBonus)
+                .filter(WinCount(countOfMatch))
+                .filter(isBonus(matchBonus))
                 .findFirst()
-                .get();
+                .orElseThrow();
+    }
+
+    private static Predicate<LottoResultOutput> isBonus(boolean matchBonus) {
+        return rank -> !rank.isBonus || rank.isBonus == matchBonus;
+    }
+
+    private static Predicate<LottoResultOutput> WinCount(int countOfMatch) {
+        return rank -> rank.correctCount == countOfMatch;
     }
 
     public int getCorrectCount() {
