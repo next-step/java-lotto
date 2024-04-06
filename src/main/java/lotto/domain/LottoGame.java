@@ -32,9 +32,8 @@ public class LottoGame {
     }
 
     public List<Rank> match(Lotto winningLotto, LottoNumber bonusNumber) {
-        return this.getAllLotto().stream()
-                .map(lotto -> Rank.of(lotto.matchCount(winningLotto), lotto.isContains(bonusNumber)))
-                .collect(Collectors.toList());
+        Lottos totalLotto = (Lottos) this.getAllLotto();
+        return totalLotto.match(winningLotto, bonusNumber);
     }
 
     public List<Lotto> getAllLotto() {
