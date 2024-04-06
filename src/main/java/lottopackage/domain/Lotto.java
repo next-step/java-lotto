@@ -10,9 +10,11 @@ import java.util.stream.IntStream;
 public class Lotto {
 
     /* Variables */
+    private final static int PRICE = 1000;
     public static List<Integer> lotteryBalls = new ArrayList<>(
             Arrays.stream(IntStream.rangeClosed(1, 45).toArray()).boxed().collect(Collectors.toList()));
     List<Integer> lotto;
+
 
     /* Constructor */
     public Lotto() {
@@ -34,6 +36,13 @@ public class Lotto {
     }
 
     /* Method */
+    public static int purchaseLotto(int purchaseAmount) {
+        if (purchaseAmount < PRICE) {
+            throw new IllegalArgumentException("최소 주문 금액(=로또 한 장 금액)은 " + PRICE + "원 입니다.");
+        }
+        return (int) purchaseAmount/PRICE;
+    }
+
     public static void isLottoNumberValid(List<Integer> lottoNumber) {
         if (lottoNumber.size() != 6) {
             throw new IllegalArgumentException("로또 숫자는 6개여야 합니다.");

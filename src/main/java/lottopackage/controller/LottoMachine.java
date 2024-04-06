@@ -1,5 +1,6 @@
 package lottopackage.controller;
 
+import lottopackage.domain.Lotto;
 import lottopackage.domain.LottoGroup;
 import lottopackage.domain.Prize;
 import lottopackage.view.InputView;
@@ -15,10 +16,7 @@ public class LottoMachine {
     /* Method */
     public int numOfLotto() {
         int purchaseAmount = inputView.purchaseAmount();
-        if (purchaseAmount < 1000) {
-            throw new IllegalArgumentException("로또 한 장은 1000원입니다.");
-        }
-        int numOfLotto = (int)(purchaseAmount / 1000);
+        int numOfLotto = Lotto.purchaseLotto(purchaseAmount);
         System.out.println(numOfLotto + "개를 구매했습니다.");
         return numOfLotto;
     }
