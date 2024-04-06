@@ -77,9 +77,9 @@ public class ResultView {
     }
 
     public static void showPurchaseQuantitiy(int manualGameCount, LottoFee lottoFee) {
-        StringBuilder result = new StringBuilder();
-        result.append(createMaunalQuanttitiy(manualGameCount));
-        result.append(createAutoQuanttitiy(lottoFee.totalCount()-manualGameCount));
+        StringBuilder result = new StringBuilder()
+        .append(createMaunalQuanttitiy(manualGameCount))
+        .append(createAutoQuanttitiy(lottoFee.totalCount()-manualGameCount));
         System.out.println(result.toString());
     }
 

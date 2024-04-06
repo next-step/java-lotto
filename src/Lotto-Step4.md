@@ -76,7 +76,10 @@
 - [ ] LottoRank -> 디자인패턴은 책임사슬패턴 / 여기서 핵심은 매개변수를 통해 열거타입을 찾는 주체가 LottoRank가 아니라 LottoRank안의 열거 타입들 자체 공부
 - [x] LottoController -> 주석 고민 하기 과연 주석은 언제 필요한가? -> 시그니처를 보여주는 네이밍이면 주석 달지 말기
 - [x] ResultView -> 행위들을 좀 더 함수로 분리해서 가독성 
+- 4/6 리뷰내용
 - [ ] validateManualGameCount가 LottoFee에 있으면 SRP 위반
 - [ ] LottoController 에서 ui와 상호작용하면서 로또에 대한 객체 생성, 유효성 검증, 결과 생성등의 책임을 오케스트레이팅하는 역할가짐 -> 서비스 영역 만들기
 - [x] validateManualGameCount RuntimeException -> InvalidInputException
 - [x] LottoGenerator add -> addAll
+- [ ] LottoNumber 로또넘버 객체 캐싱 적용 재사용성 
+- [x] ResultView StringBuilder 메서드 체이닝
