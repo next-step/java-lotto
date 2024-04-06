@@ -6,25 +6,25 @@ import static lotto.domain.LottoFactory.LOTTO_SIZE;
 
 public class Lotto {
 
-    private final Set<Integer> autoLotto;
+    private final Set<Integer> lotto;
 
-    public Lotto(NumbersGenerator autoLotto) {
-        validate(autoLotto.getNumbers());
-        this.autoLotto = autoLotto.getNumbers();
+    public Lotto(NumbersGenerator lotto) {
+        validate(lotto.getNumbers());
+        this.lotto = lotto.getNumbers();
     }
 
-    public Lotto(Set<Integer> autoLotto) {
-        validate(autoLotto);
-        this.autoLotto = autoLotto;
+    public Lotto(Set<Integer> lotto) {
+        validate(lotto);
+        this.lotto = lotto;
     }
 
-    public Set<Integer> getAutoLotto() {
-        return autoLotto;
+    public Set<Integer> getLotto() {
+        return lotto;
     }
 
-    public int getMatchingCount(Set<Integer> winningNo) {
-        return (int) autoLotto.stream()
-                .filter(winningNo::contains)
+    public int getMatchingCount(Lotto winningLotto) {
+        return (int) lotto.stream()
+                .filter(winningLotto.getLotto()::contains)
                 .count();
     }
 

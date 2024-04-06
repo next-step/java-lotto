@@ -129,10 +129,10 @@
   - [x] EnumMap을 활용하면 Rank객체 대체 가능
 
 - 당첨번호
-  - [ ] 로또번호와 동일한 제약 추가 필요
+  - [x] 로또번호와 동일한 제약 추가 필요
 
 - LottoTest
-  - [ ] size_exception_test: 예외 검증시에는 테스트할 대상만 인자로 전달 (validate를 수행하지 않으면 6개가 아닌 개수로 로또를 생성할 수 있을 것)
+  - [x] size_exception_test: 예외 검증시에는 테스트할 대상만 인자로 전달 (validate를 수행하지 않으면 6개가 아닌 개수로 로또를 생성할 수 있을 것)
 
 - RankTest
   - [x] EnumSource를 활용해 중복 코드를 제거

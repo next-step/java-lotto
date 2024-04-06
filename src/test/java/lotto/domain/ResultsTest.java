@@ -16,9 +16,9 @@ class ResultsTest {
     @DisplayName("로또 당첨 갯수 세기")
     @ParameterizedTest
     @MethodSource("generateData")
-    void count_matching_lottos_test(Lottos lottos, Set<Integer> winningNo) {
+    void count_matching_lottos_test(Lottos lottos, Lotto winningLotto) {
         Results result = new Results();
-        result.countMatchingLottos(lottos, winningNo);
+        result.countMatchingLottos(lottos, winningLotto);
 
         assertEquals(4, result.of().size());
         assertEquals(1, result.of().get(Reward.THREE));
@@ -34,7 +34,7 @@ class ResultsTest {
         Lotto lotto3 = new Lotto(Set.of(1, 2, 3, 4, 44, 13));
         Lotto lotto4 = new Lotto(Set.of(1, 2, 3, 4, 44, 23));
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3, lotto4));
-        Set<Integer> winningNo = Set.of(1, 2, 3, 4, 44, 45);
+        Lotto winningNo = new Lotto(Set.of(1, 2, 3, 4, 44, 45));
         return Stream.of(
                 Arguments.of(lottos, winningNo)
         );

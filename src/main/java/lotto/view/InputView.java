@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
+
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Set;
@@ -33,13 +35,13 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
-    public Set<Integer> winningNo(String input) {
+    public Lotto winningNo(String input) {
         String[] winningNoStrArr = split(input);
 
-        return Arrays.stream(winningNoStrArr)
+        return new Lotto(Arrays.stream(winningNoStrArr)
                 .mapToInt(Integer::parseInt)
                 .boxed()
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet()));
     }
 
     public String[] split(String input) {

@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoFactory;
-import lotto.domain.Lottos;
-import lotto.domain.Profit;
-import lotto.domain.Results;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -26,11 +23,11 @@ public class LottoApplication {
         resultView.printLottos(lottos);
 
         // 당첨번호를 입력받는다.
-        Set<Integer> winningNo = inputView.winningNo(inputView.getWinningNoInput());
+        Lotto winningLotto = inputView.winningNo(inputView.getWinningNoInput());
 
         // 당첨 결과를 정산한다.
         Results results = new Results();
-        results.countMatchingLottos(lottos, winningNo);
+        results.countMatchingLottos(lottos, winningLotto);
 
         // 수익률을 계산한다.
         Profit profit = new Profit(results, lottos);

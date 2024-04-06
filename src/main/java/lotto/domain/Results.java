@@ -26,10 +26,10 @@ public class Results {
         return result;
     }
 
-    public void countMatchingLottos(Lottos lottos, Set<Integer> winningNo) {
+    public void countMatchingLottos(Lottos lottos, Lotto winningLotto) {
         for (Lotto lotto : lottos.of()) {
             // 당첨번호와 일치하는 로또번호 갯수를 판별한다.
-            int matchingCount = lotto.getMatchingCount(winningNo);
+            int matchingCount = lotto.getMatchingCount(winningLotto);
 
             updateRankLottoMatching(matchingCount);
         }

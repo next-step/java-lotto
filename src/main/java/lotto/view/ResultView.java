@@ -2,13 +2,11 @@ package lotto.view;
 
 import lotto.domain.*;
 
-import java.util.Set;
-
 public class ResultView {
 
     public void printLottos(Lottos lottos) {
         for (Lotto lotto : lottos.of()) {
-            System.out.println(lotto.getAutoLotto());
+            System.out.println(lotto.getLotto());
         }
     }
 
