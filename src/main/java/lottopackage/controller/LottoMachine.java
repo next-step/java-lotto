@@ -8,14 +8,11 @@ import lottopackage.view.OutputView;
 import java.util.List;
 
 public class LottoMachine {
-    InputView inputView;
-    OutputView outputView;
+    /* Member variable */
+    private static final InputView inputView = new InputView();
+    private static final OutputView outputView = new OutputView();
 
-    public LottoMachine() {
-        inputView = new InputView();
-        outputView = new OutputView();
-    }
-
+    /* Method */
     public int numOfLotto() {
         int purchaseAmount = inputView.purchaseAmount();
         if (purchaseAmount < 1000) {

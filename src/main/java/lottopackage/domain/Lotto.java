@@ -10,57 +10,42 @@ import java.util.stream.IntStream;
 public class Lotto {
 
     /* Variables */
-    public static List<Integer> totalLottoNumber = new ArrayList<>(
+    public static List<Integer> lotteryBalls = new ArrayList<>(
             Arrays.stream(IntStream.rangeClosed(1, 45).toArray()).boxed().collect(Collectors.toList()));
-    List<Integer> lottoNumber;
+    List<Integer> lotto;
 
     /* Constructor */
     public Lotto() {
-        Collections.shuffle(totalLottoNumber);
-        lottoNumber = new ArrayList<>(totalLottoNumber.subList(0, 6));
+        Collections.shuffle(lotteryBalls);
+        lotto = new ArrayList<>(lotteryBalls.subList(0, 6));
     }
 
     public Lotto(List<Integer> lottoNumber) {
         isLottoNumberValid(lottoNumber);
-        this.lottoNumber = lottoNumber;
+        this.lotto = lottoNumber;
     }
 
     /* Getter */
-    public List<Integer> getLottoNumber() {
-        return lottoNumber;
+    public static List<Integer> getLotteryBalls() {
+        return lotteryBalls;
     }
-
-    public static List<Integer> getTotalLottoNumber() {
-        return totalLottoNumber;
+    public List<Integer> getLotto() {
+        return lotto;
     }
 
     /* Method */
-    public void isLottoNumberValid(List<Integer> lottoNumber) {
+    public static void isLottoNumberValid(List<Integer> lottoNumber) {
         if (lottoNumber.size() != 6) {
             throw new IllegalArgumentException("로또 숫자는 6개여야 합니다.");
         }
-        if (!totalLottoNumber.containsAll(lottoNumber)) {
+        if (!lotteryBalls.containsAll(lottoNumber)) {
             throw new IllegalArgumentException("로또 숫자는 1~45 안에 있어야 합니다.");
         }
     }
 
     public Prize isPrize(List<Integer> winningNumber) {
         isLottoNumberValid(winningNumber);
-        List<Integer> matchedLottoNumber = new ArrayList<>(lottoNumber);
-        matchedLottoNumber.removeAll(winningNumber);
-        if (matchedLottoNumber.isEmpty()) {
-            return Prize.FIRST;
-        }
-        if (matchedLottoNumber.size() == 1) {
-            return Prize.THIRD;
-        }
-        if (matchedLottoNumber.size() == 2) {
-            return Prize.FOURTH;
-        }
-        if (matchedLottoNumber.size() == 3) {
-            return Prize.FIFTH;
-        }
-        return Prize.SIXTH;
+        return Prize.isPrize(lotto, winningNumber);
     }
 }
 

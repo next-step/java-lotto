@@ -9,9 +9,10 @@ import java.util.List;
 
 public class OutputView {
 
+    /* Method */
     public void printLottoGroup(List<Lotto> lottoGroup) {
         for (int i = 0; i < lottoGroup.size(); i++ ) {
-            List<Integer> lotto = lottoGroup.get(i).getLottoNumber();
+            List<Integer> lotto = lottoGroup.get(i).getLotto();
             System.out.println(lotto);
         }
     }
@@ -24,10 +25,10 @@ public class OutputView {
         System.out.println("--------");
 
         for( int i = 0; i < prizeGroup.size(); i++) {
-            System.out.println(prizeGroup.get(i).same + "개 일치 ("
-                    + prizeGroup.get(i).winningAmount + "원)- "
+            System.out.println(prizeGroup.get(i).getBall() + "개 일치 ("
+                    + prizeGroup.get(i).getWinningAmount() + "원)- "
                     + Collections.frequency(lottoResult, prizeGroup.get(i)) + "개");
-            totalWinningAmount += (prizeGroup.get(i).winningAmount) * (Collections.frequency(lottoResult, prizeGroup.get(i)));
+            totalWinningAmount += (prizeGroup.get(i).getWinningAmount()) * (Collections.frequency(lottoResult, prizeGroup.get(i)));
         }
 
         System.out.println("총 수익률은" + (float)totalWinningAmount / (totalLottoGroupSize * 1000) + "입니다.");

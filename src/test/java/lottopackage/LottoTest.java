@@ -14,7 +14,6 @@ import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class LottoTest {
@@ -24,8 +23,8 @@ public class LottoTest {
     public void lotto() {
         // given
         Lotto lotto = new Lotto();
-        List<Integer> lottoNumber = lotto.getLottoNumber();
-        List<Integer> totalLottoNumber = lotto.getTotalLottoNumber();
+        List<Integer> lottoNumber = lotto.getLotto();
+        List<Integer> totalLottoNumber = lotto.getLotteryBalls();
 
         // when, then
         int lottoLength = lottoNumber.size();

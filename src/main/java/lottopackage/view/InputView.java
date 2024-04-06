@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
+    /* Member variable */
     Scanner scanner = new Scanner(System.in).useDelimiter("\\s*\\n\\s*");
 
+    /* Method */
     public int purchaseAmount() {
         System.out.println("구입 금액을 입력해주세요.");
         return scanner.nextInt();
