@@ -10,7 +10,7 @@ public class Budget{
     }
 
     private void validMinValue(int budget) {
-        if(budget % 100 == 0)
+        if(budget % 1000 != 0)
             throw new IllegalArgumentException("100원 단위는 입력할 수 없습니다: " + budget);
     }
 
