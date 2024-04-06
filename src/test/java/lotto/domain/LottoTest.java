@@ -7,8 +7,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("도메인 Lotto 테스트")
 class LottoTest {
@@ -30,4 +29,11 @@ class LottoTest {
         assertThat(result).isEqualTo(6);
     }
 
+    @DisplayName("로또 사이즈 유효성 테스트")
+    @Test
+    void validLottoSize() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> Lotto.ofNumbers(List.of(1, 2, 3, 4)))
+                .withMessage("유효한 Lotto size가 아닙니다: 4");
+    }
 }
