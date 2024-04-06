@@ -3,7 +3,7 @@ package lotto;
 import lotto.domain.LottoFactory;
 import lotto.domain.Lottos;
 import lotto.domain.Profit;
-import lotto.domain.Ranks;
+import lotto.domain.Results;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -29,15 +29,15 @@ public class LottoApplication {
         Set<Integer> winningNo = inputView.winningNo(inputView.getWinningNoInput());
 
         // 당첨 결과를 정산한다.
-        Ranks ranks = new Ranks();
-        ranks.countMatchingLottos(lottos, winningNo);
+        Results results = new Results();
+        results.countMatchingLottos(lottos, winningNo);
 
         // 수익률을 계산한다.
-        Profit profit = new Profit(ranks, lottos);
+        Profit profit = new Profit(results, lottos);
         double profitRate = profit.getProfitRate();
 
         // 로또 결과를 출력한다.
-        resultView.printResult(ranks, profitRate);
+        resultView.printResult(results, profitRate);
     }
 
 }

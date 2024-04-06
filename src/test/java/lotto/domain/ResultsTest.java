@@ -5,23 +5,27 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.EnumMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ProfitTest {
+class ResultsTest {
 
-    @DisplayName("수익률 구하기")
+    @DisplayName("로또 당첨 갯수 세기")
     @ParameterizedTest
     @MethodSource("generateData")
-    void profit_rate_test(Results ranks, Lottos autoLottos) {
-        Profit profit = new Profit(ranks, autoLottos);
+    void count_matching_lottos_test(Lottos lottos, Set<Integer> winningNo) {
+        Results result = new Results();
+        result.countMatchingLottos(lottos, winningNo);
 
-        assertEquals(763.75, profit.getProfitRate());
+        assertEquals(4, result.of().size());
+        assertEquals(1, result.of().get(Reward.THREE));
+        assertEquals(1, result.of().get(Reward.FOUR));
+        assertEquals(2, result.of().get(Reward.FIVE));
+        assertEquals(0, result.of().get(Reward.SIX));
+
     }
 
     static Stream<Arguments> generateData() {
@@ -30,18 +34,9 @@ class ProfitTest {
         Lotto lotto3 = new Lotto(Set.of(1, 2, 3, 4, 44, 13));
         Lotto lotto4 = new Lotto(Set.of(1, 2, 3, 4, 44, 23));
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3, lotto4));
-
-        EnumMap<Reward, Integer> result = new EnumMap<>(Reward.class);
-        result.put(Reward.THREE, 1);
-        result.put(Reward.FOUR, 1);
-        result.put(Reward.FIVE, 2);
-        result.put(Reward.SIX, 0);
-
-
-        Results ranks = new Results(result);
-
+        Set<Integer> winningNo = Set.of(1, 2, 3, 4, 44, 45);
         return Stream.of(
-                Arguments.of(ranks, lottos)
+                Arguments.of(lottos, winningNo)
         );
     }
 

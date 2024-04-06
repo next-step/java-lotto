@@ -12,7 +12,7 @@ public class ResultView {
         }
     }
 
-    public void printResult(Ranks ranks, double profit) {
+    public void printResult(Results results, double profit) {
         System.out.println("당첨 통계");
         System.out.println("-----------------");
 
@@ -20,19 +20,16 @@ public class ResultView {
             if (Reward == Reward.MISS) {
                 continue;
             }
-            printReward(Reward, ranks.of());
+            printReward(Reward, results);
         }
         printProfit(profit);
     }
 
-    private void printReward(Reward reward, Set<Rank> rank) {
+    private void printReward(Reward reward, Results results) {
         System.out.printf("%s개 일치 (%s원)- %s개\n",
                 reward.getMatchingCount(),
                 reward.getReward(),
-                rank.stream().filter(rank1 -> rank1.isMatching(reward.getMatchingCount()))
-                        .findFirst()
-                        .orElse(new Rank(0))
-                        .getMatchingLottosCount());
+                results.of().getOrDefault(reward, 0));
     }
 
     private void printProfit(double profit) {
