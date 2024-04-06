@@ -9,7 +9,6 @@ public class LottoMachine implements RandomBalls{
     private List<LottoBall> machine;
     private final static int RANDOM_BALL_MIN = 1;
     private final static int RANDOM_BALL_MAX = 45;
-    private final static int RANDOM_BALLS_SIZE = 6;
 
     private void basicNumber() {
         machine = new ArrayList<>();
@@ -23,20 +22,10 @@ public class LottoMachine implements RandomBalls{
     }
 
     @Override
-    public List<LottoBall> randomBall() {
+    public List<LottoBall> randomBall(int ballCount) {
         Collections.shuffle(machine);
         List<LottoBall> newLotto = new ArrayList<>();
-        for (int i = 0; i < RANDOM_BALLS_SIZE; i++) {
-            newLotto.add(machine.get(i));
-        }
-        return newLotto;
-    }
-
-    @Override
-    public List<LottoBall> winBall() {
-        Collections.shuffle(machine);
-        List<LottoBall> newLotto = new ArrayList<>();
-        for (int i = 0; i < RANDOM_BALLS_SIZE + 1; i++) {
+        for (int i = 0; i < ballCount; i++) {
             newLotto.add(machine.get(i));
         }
         return newLotto;

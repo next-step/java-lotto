@@ -17,18 +17,18 @@ class LottoMachineTest {
         List<LottoBall> lottoBalls = new ArrayList<>();
         LottoMachine lottoMachine = new LottoMachine() {
             @Override
-            public List<LottoBall> randomBall() {
+            public List<LottoBall> randomBall(int ballCount) {
                 return lottoBalls;
             }
         };
 
         List<LottoBall> winnerBall = new ArrayList<>();
-        assertThat(lottoMachine.randomBall()).isEqualTo(winnerBall);
+        assertThat(lottoMachine.randomBall(6)).isEqualTo(winnerBall);
     }
     @Test
     @DisplayName("로또 기게 랜덤볼 수")
     public void totalLotto() {
         LottoMachine lottoMachine = new LottoMachine();
-        assertThat(lottoMachine.randomBall().size()).isEqualTo(6);
+        assertThat(lottoMachine.randomBall(6).size()).isEqualTo(6);
     }
 }
