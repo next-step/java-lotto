@@ -2,6 +2,8 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import static lotto.domain.Rank.MISS;
+
 public class ResultView {
 
     public void printLottos(Lottos lottos) {
@@ -14,20 +16,20 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("-----------------");
 
-        for (Reward Reward : Reward.values()) {
-            if (Reward == Reward.MISS) {
+        for (Rank Rank : Rank.values()) {
+            if (Rank == MISS) {
                 continue;
             }
-            printReward(Reward, results);
+            printRank(Rank, results);
         }
         printProfit(profit);
     }
 
-    private void printReward(Reward reward, Results results) {
+    private void printRank(Rank Rank, Results results) {
         System.out.printf("%s개 일치 (%s원)- %s개\n",
-                reward.getMatchingCount(),
-                reward.getReward(),
-                results.of().getOrDefault(reward, 0));
+                Rank.getCountOfMatch(),
+                Rank.getWinningMoney(),
+                results.of().getOrDefault(Rank, 0));
     }
 
     private void printProfit(double profit) {

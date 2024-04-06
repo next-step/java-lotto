@@ -6,7 +6,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.EnumMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -31,12 +30,11 @@ class ProfitTest {
         Lotto lotto4 = new Lotto(Set.of(1, 2, 3, 4, 44, 23));
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3, lotto4));
 
-        EnumMap<Reward, Integer> result = new EnumMap<>(Reward.class);
-        result.put(Reward.THREE, 1);
-        result.put(Reward.FOUR, 1);
-        result.put(Reward.FIVE, 2);
-        result.put(Reward.SIX, 0);
-
+        EnumMap<Rank, Integer> result = new EnumMap<>(Rank.class);
+        result.put(Rank.FIFTH, 1);
+        result.put(Rank.FOURTH, 1);
+        result.put(Rank.THIRD, 2);
+        result.put(Rank.FIRST, 0);
 
         Results ranks = new Results(result);
 

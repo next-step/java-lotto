@@ -28,6 +28,10 @@ public class Lotto {
                 .count();
     }
 
+    public boolean contains(int bonusNumber) {
+        return lotto.contains(bonusNumber);
+    }
+
     private void validate(Set<Integer> autoLotto) {
 
         if (autoLotto.size() != LOTTO_SIZE) {

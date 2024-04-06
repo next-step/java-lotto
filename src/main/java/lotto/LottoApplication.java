@@ -28,7 +28,7 @@ public class LottoApplication {
 
         // 당첨 결과를 정산한다.
         Results results = new Results();
-        results.countMatchingLottos(lottos, winningLotto);
+        results.countMatchingLottos(lottos, winningLotto, bonusNumber);
 
         // 수익률을 계산한다.
         Profit profit = new Profit(results, lottos);

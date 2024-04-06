@@ -13,27 +13,47 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ResultsTest {
 
-    @DisplayName("로또 당첨 갯수 세기")
+    @DisplayName("보너스 당첨된 로또가 없는, 로또 당첨 갯수 세기")
     @ParameterizedTest
     @MethodSource("generateData")
     void count_matching_lottos_test(Lottos lottos, Lotto winningLotto) {
         Results result = new Results();
-        result.countMatchingLottos(lottos, winningLotto);
+        int notMatchedBonus = 5;
+        result.countMatchingLottos(lottos, winningLotto, notMatchedBonus);
 
-        assertEquals(4, result.of().size());
-        assertEquals(1, result.of().get(Reward.THREE));
-        assertEquals(1, result.of().get(Reward.FOUR));
-        assertEquals(2, result.of().get(Reward.FIVE));
-        assertEquals(0, result.of().get(Reward.SIX));
+        assertEquals(6, result.of().size());
+        assertEquals(1, result.of().get(Rank.MISS));
+        assertEquals(1, result.of().get(Rank.FIFTH));
+        assertEquals(1, result.of().get(Rank.FOURTH));
+        assertEquals(2, result.of().get(Rank.THIRD));
+        assertEquals(0, result.of().get(Rank.SECOND));
+        assertEquals(0, result.of().get(Rank.FIRST));
+    }
 
+    @DisplayName("보너스 당첨이 있는 경우, 로또 당첨 갯수 세기")
+    @ParameterizedTest
+    @MethodSource("generateData")
+    void count_matching_bonus_lottos_test(Lottos lottos, Lotto winningLotto) {
+        Results result = new Results();
+        int notMatchedBonus = 23;
+        result.countMatchingLottos(lottos, winningLotto, notMatchedBonus);
+
+        assertEquals(6, result.of().size());
+        assertEquals(1, result.of().get(Rank.MISS));
+        assertEquals(1, result.of().get(Rank.FIFTH));
+        assertEquals(1, result.of().get(Rank.FOURTH));
+        assertEquals(1, result.of().get(Rank.THIRD));
+        assertEquals(1, result.of().get(Rank.SECOND));
+        assertEquals(0, result.of().get(Rank.FIRST));
     }
 
     static Stream<Arguments> generateData() {
-        Lotto lotto1 = new Lotto(Set.of(1, 2, 3, 10, 20, 30));
-        Lotto lotto2 = new Lotto(Set.of(1, 2, 3, 4, 20, 30));
-        Lotto lotto3 = new Lotto(Set.of(1, 2, 3, 4, 44, 13));
-        Lotto lotto4 = new Lotto(Set.of(1, 2, 3, 4, 44, 23));
-        Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3, lotto4));
+        Lotto lotto1 = new Lotto(Set.of(1, 2, 3, 10, 20, 30)); // 3
+        Lotto lotto2 = new Lotto(Set.of(1, 2, 3, 4, 20, 30));  // 4
+        Lotto lotto3 = new Lotto(Set.of(1, 2, 3, 4, 44, 13));  // 5
+        Lotto lotto4 = new Lotto(Set.of(1, 2, 3, 4, 44, 23));  // 5
+        Lotto lotto5 = new Lotto(Set.of(21, 22, 23, 24, 25, 26));  // 0
+        Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3, lotto4, lotto5));
         Lotto winningNo = new Lotto(Set.of(1, 2, 3, 4, 44, 45));
         return Stream.of(
                 Arguments.of(lottos, winningNo)
