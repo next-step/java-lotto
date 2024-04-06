@@ -11,22 +11,43 @@ public class LottoController {
     }
 
     private Statistics getStatistics() {
-        return getLottos().computeStatistic(getWinLotto());
+        return getLottos(getBudget()).computeStatistic(getWinLotto());
     }
 
     private WinLotto getWinLotto() {
-        return InputView.inputLastWinLotto();
+        return InputView.retryableInputLastWinLotto();
     }
 
-    private Lottos getLottos() {
-        Lottos lottos = new Lottos(getBudget());
-        ResultView.showGeneratedLottos(lottos);
+    private Lottos getLottos(Budget budget) {
+        SelfIssueCount count = getManualIssueCount();
+
+        budget = budget.spend(Price.LOTTO, count);
+
+        Lottos manualLottos = getManualIssuedLottos(count);
+        Lottos autoLottos = getAutoIssuedLottos(budget);
+
+        ResultView.showLottoQuantity(manualLottos, autoLottos);
+
+        Lottos allLottos = manualLottos.combine(autoLottos);
+        ResultView.showGeneratedLottos(allLottos);
+
+        return allLottos;
+    }
+
+    private SelfIssueCount getManualIssueCount() {
+        return InputView.retryableInputSelfIssueCount();
+    }
+
+    private Lottos getManualIssuedLottos(SelfIssueCount count) {
+        return InputView.inputSelfIssueLottos(count);
+    }
+    private Lottos getAutoIssuedLottos(Budget budget) {
+        Lottos lottos = new Lottos(budget);
         return lottos;
     }
 
     private Budget getBudget() {
-        Budget budget = InputView.inputBuyBudget();
-        ResultView.showLottoQuantity(budget.purchasableQuantity(Price.LOTTO));
+        Budget budget = InputView.retryableInputBuyBudget();
         return budget;
     }
 

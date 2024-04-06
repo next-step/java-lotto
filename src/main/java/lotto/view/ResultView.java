@@ -21,9 +21,15 @@ public class ResultView {
             .collect(Collectors.joining("\n", "", "\n"));
     }
 
-
     private static String createStatisticForm(Statistics statistics, Statistic matcher) {
-        return matcher.getMatcher() + "개 일치 (" + matcher.getPrice() + ")-" + statistics.getMatchCount(matcher);
+        return matcher.getMatcher() + "개 일치" + createBonusMatchForm(matcher) + "(" + matcher.getPrice() + ")-" + statistics.getMatchCount(matcher);
+    }
+
+    private static String createBonusMatchForm (Statistic matcher) {
+        if (matcher.isBonusRequired()) {
+            return ", 보너스 볼 일치";
+        }
+        return "";
     }
 
     private static String createRateForm(Statistics statistics) {
@@ -58,7 +64,7 @@ public class ResultView {
         return result;
     }
 
-    public static void showLottoQuantity(int lottoQuantity) {
-        System.out.println(lottoQuantity + "개를 구매했습니다.");
+    public static void showLottoQuantity(Lottos manualLottos, Lottos autoLottos) {
+        System.out.println("수동으로 " + manualLottos.getLottoSize() + "장, 자동으로" + autoLottos.getLottoSize() + "개를 구매했습니다.");
     }
 }
