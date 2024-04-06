@@ -13,7 +13,7 @@ public class LottoMachine {
     public int numOfLotto() {
         int purchaseAmount = InputView.purchaseAmount();
         int numOfLotto = Lotto.purchaseLotto(purchaseAmount);
-        System.out.println(numOfLotto + "개를 구매했습니다.");
+        OutputView.printNumOfLotto(numOfLotto);
         return numOfLotto;
     }
 

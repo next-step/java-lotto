@@ -10,6 +10,10 @@ import java.util.List;
 public class OutputView {
 
     /* Method */
+    public static void printNumOfLotto(int numOfLotto) {
+        System.out.println(numOfLotto + "장을 구매했습니다.");
+    }
+
     public static void printLottoGroup(List<Lotto> lottoGroup) {
         for (int i = 0; i < lottoGroup.size(); i++ ) {
             List<Integer> lotto = lottoGroup.get(i).getLotto();
