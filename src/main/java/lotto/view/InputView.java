@@ -4,7 +4,6 @@ import lotto.domain.Lotto;
 
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -22,17 +21,13 @@ public class InputView {
         return scanner.nextLine();
     }
 
+    public int buyingAmount(String input) {
+        return validateInt(input);
+    }
+
     public String getWinningNoInput() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();
-    }
-
-    public int buyingAmount(String input) {
-        checkBlank(input);
-        if(!Pattern.matches(regex, input)){
-            throw new IllegalArgumentException("숫자만 입력해주세요.");
-        }
-        return Integer.parseInt(input);
     }
 
     public Lotto winningNo(String input) {
@@ -42,6 +37,23 @@ public class InputView {
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toSet()));
+    }
+
+    public String getBonusNumberInput() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextLine();
+    }
+
+    public int bonusNumber(String input) {
+        return validateInt(input);
+    }
+
+    private int validateInt(String input) {
+        checkBlank(input);
+        if(!Pattern.matches(regex, input)){
+            throw new IllegalArgumentException("숫자만 입력해주세요.");
+        }
+        return Integer.parseInt(input);
     }
 
     public String[] split(String input) {

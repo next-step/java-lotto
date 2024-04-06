@@ -4,8 +4,6 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.Set;
-
 public class LottoApplication {
 
     public static final int LOTTO_COST = 1000;
@@ -15,15 +13,18 @@ public class LottoApplication {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
 
-        // 로또 구매 금액을 입력받는다.
+        // 로또 구매 금액을 입력 받는다.
         int buyingAmount = inputView.buyingAmount(inputView.getBuyingAmountInput());
 
         // 로또를 생성한다.
         Lottos lottos = LottoFactory.createLottos(buyingAmount);
         resultView.printLottos(lottos);
 
-        // 당첨번호를 입력받는다.
+        // 당첨번호를 입력 받는다.
         Lotto winningLotto = inputView.winningNo(inputView.getWinningNoInput());
+
+        // 보너스 번호를 입력 받는다.
+        int bonusNumber = inputView.bonusNumber(inputView.getBonusNumberInput());
 
         // 당첨 결과를 정산한다.
         Results results = new Results();
