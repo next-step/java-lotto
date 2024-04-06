@@ -19,7 +19,7 @@ class ResultsTest {
     void count_matching_lottos_test(Lottos lottos, Lotto winningLotto) {
         Results result = new Results();
         int notMatchedBonus = 5;
-        result.countMatchingLottos(lottos, winningLotto, notMatchedBonus);
+        result.countMatchingLottos(lottos, winningLotto, new Bonus(notMatchedBonus, winningLotto));
 
         assertEquals(6, result.of().size());
         assertEquals(1, result.of().get(Rank.MISS));
@@ -35,8 +35,8 @@ class ResultsTest {
     @MethodSource("generateData")
     void count_matching_bonus_lottos_test(Lottos lottos, Lotto winningLotto) {
         Results result = new Results();
-        int notMatchedBonus = 23;
-        result.countMatchingLottos(lottos, winningLotto, notMatchedBonus);
+        int matchedBonus = 23;
+        result.countMatchingLottos(lottos, winningLotto, new Bonus(matchedBonus, winningLotto));
 
         assertEquals(6, result.of().size());
         assertEquals(1, result.of().get(Rank.MISS));

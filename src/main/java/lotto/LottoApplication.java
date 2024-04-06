@@ -24,7 +24,7 @@ public class LottoApplication {
         Lotto winningLotto = inputView.winningNo(inputView.getWinningNoInput());
 
         // 보너스 번호를 입력 받는다.
-        int bonusNumber = inputView.bonusNumber(inputView.getBonusNumberInput());
+        Bonus bonusNumber = inputView.bonusNumber(inputView.getBonusNumberInput(), winningLotto);
 
         // 당첨 결과를 정산한다.
         Results results = new Results();

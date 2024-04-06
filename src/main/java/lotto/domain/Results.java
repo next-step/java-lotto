@@ -27,12 +27,12 @@ public class Results {
         return result;
     }
 
-    public void countMatchingLottos(Lottos lottos, Lotto winningLotto, int bonusNumber) {
+    public void countMatchingLottos(Lottos lottos, Lotto winningLotto, Bonus bonus) {
         for (Lotto lotto : lottos.of()) {
             // 당첨번호와 일치하는 로또번호 갯수를 판별한다.
             int matchingCount = lotto.getMatchingCount(winningLotto);
 
-            updateRankLottoMatching(matchingCount, lotto.contains(bonusNumber));
+            updateRankLottoMatching(matchingCount, lotto.contains(bonus.getBonusNumber()));
         }
     }
 

@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.Bonus;
 import lotto.domain.Lotto;
 
 import java.util.Arrays;
@@ -44,8 +45,8 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public int bonusNumber(String input) {
-        return validateInt(input);
+    public Bonus bonusNumber(String input, Lotto winningLotto) {
+        return new Bonus(validateInt(input), winningLotto);
     }
 
     private int validateInt(String input) {
