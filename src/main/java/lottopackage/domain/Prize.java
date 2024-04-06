@@ -31,10 +31,6 @@ public enum Prize {
         return winningAmount;
     }
 
-    public int getPrizeNumber() {
-        return prizeNumber;
-    }
-
     public static Prize isPrize(List<Integer> lotto, List<Integer> winningNumber) {
         List<Integer> lottoForPrizeCheck = new ArrayList<>(lotto);
         lottoForPrizeCheck.removeAll(winningNumber);
