@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class LottoGenerator {
     private LottoGenerator() {
@@ -33,7 +34,9 @@ public final class LottoGenerator {
     }
 
     public static Lotto generateLotto() {
-        List<Integer> cachedLottoNumber = LottoNumber.ALL_NUMBERS;
+        List<Integer> cachedLottoNumber = LottoNumber.LOTTO_NUMBER_CACHE.keySet()
+                                                                        .stream()
+                                                                        .collect(Collectors.toList());
         Collections.shuffle(cachedLottoNumber);
         cachedLottoNumber = cachedLottoNumber.subList(0,6);
         Collections.sort(cachedLottoNumber);

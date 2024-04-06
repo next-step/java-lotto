@@ -81,5 +81,5 @@
 - [x] LottoController 에서 ui와 상호작용하면서 로또에 대한 객체 생성, 유효성 검증, 결과 생성등의 책임을 오케스트레이팅하는 역할가짐 -> 서비스 영역 만들기 -> lottoService 생성
 - [x] validateManualGameCount RuntimeException -> InvalidInputException
 - [x] LottoGenerator add -> addAll
-- [ ] LottoNumber 로또넘버 객체 캐싱 적용 재사용성 
+- [x] LottoNumber 로또넘버 객체 캐싱 적용 재사용성 
 - [x] ResultView StringBuilder 메서드 체이닝

@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -10,9 +8,12 @@ public class LottoNumber {
 
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
-    public static final List<Integer> ALL_NUMBERS = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
-                                                    .boxed()
-                                                    .collect(Collectors.toList());
+    public static final Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE = new HashMap<>();
+
+    static {
+        IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+                .forEach(number -> LOTTO_NUMBER_CACHE.put(number, new LottoNumber(number)));
+    }
 
     private final int value;
 
@@ -23,7 +24,7 @@ public class LottoNumber {
 
     public static LottoNumber from(int number) {
         validateNumberRange(number);
-        return new LottoNumber(number);
+        return LOTTO_NUMBER_CACHE.get(number);
     }
 
     private static void validateNumberRange(int value) {
