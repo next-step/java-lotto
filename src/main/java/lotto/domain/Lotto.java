@@ -2,22 +2,19 @@ package lotto.domain;
 
 import java.util.Set;
 
+import static lotto.domain.LottoFactory.LOTTO_SIZE;
+
 public class Lotto {
 
     private final Set<Integer> autoLotto;
 
-    private static final int LOTTO_SIZE = 6;
-
-    public Lotto() {
-        this(new LottoNumbers());
-    }
-
-    public Lotto(LottoNumbers lottoNumbers) {
-        validate(lottoNumbers.getNumbers());
-        this.autoLotto = lottoNumbers.getNumbers();
+    public Lotto(NumbersGenerator autoLotto) {
+        validate(autoLotto.getNumbers());
+        this.autoLotto = autoLotto.getNumbers();
     }
 
     public Lotto(Set<Integer> autoLotto) {
+        validate(autoLotto);
         this.autoLotto = autoLotto;
     }
 
@@ -32,6 +29,7 @@ public class Lotto {
     }
 
     private void validate(Set<Integer> autoLotto) {
+
         if (autoLotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }

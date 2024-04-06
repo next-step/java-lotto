@@ -117,16 +117,16 @@
 
 - LottoNumbers
   - [ ] Lotto, LottoNumbers 각 숫자의 범위 1~45를 6개를 가져야한다는 책임이 중복 -> 차이 명확히, 중복 삭제 필요
-  - [ ] 상수 변수명 대문자로
-  - [ ] Factory에서 로또에서 사용되는 숫자들을 관리하도록
-  - [ ] LottoNumbers의 책임이 shuffle이라면 이름을 LottoNumberShuffler 라고 지으면 좋을 것
+  - [x] 상수 변수명 대문자로
+  - [x] Factory에서 로또에서 사용되는 숫자들을 관리하도록
+  - [x] LottoNumbers의 책임이 shuffle이라면 이름을 LottoNumberShuffler 라고 지으면 좋을 것
 
 - Profit
-  - [ ] calculateProfitRate : 미당첨은 filter할 필요 없음
+  - [x] calculateProfitRate : 미당첨은 filter할 필요 없음
 
 - Rank
-  - [ ] matchingNumberCount 변수는 Reward로 대체
-  - [ ] EnumMap을 활용하면 Rank객체 대체 가능
+  - [x] matchingNumberCount 변수는 Reward로 대체
+  - [x] EnumMap을 활용하면 Rank객체 대체 가능
 
 - 당첨번호
   - [ ] 로또번호와 동일한 제약 추가 필요
@@ -135,10 +135,10 @@
   - [ ] size_exception_test: 예외 검증시에는 테스트할 대상만 인자로 전달 (validate를 수행하지 않으면 6개가 아닌 개수로 로또를 생성할 수 있을 것)
 
 - RankTest
-  - [ ] EnumSource를 활용해 중복 코드를 제거
+  - [x] EnumSource를 활용해 중복 코드를 제거
 
 - LottoNumberTest
-  - [ ] shuffle test 검증 방식 변경
+  - [x] shuffle test 검증 방식 변경
 
 ```java
 assertThat(lottoNumberList.shuffle()).isNotEqualTo(lottoNumberList.shuffle());

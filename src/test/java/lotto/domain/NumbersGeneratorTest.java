@@ -5,15 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoNumbersTest {
+class NumbersGeneratorTest {
 
     @Test
     @DisplayName("매번 shuffle된 List가 생성된다")
     void shuffle_test() {
-        LottoNumbers lottoNumberList1 = new LottoNumbers();
-        LottoNumbers lottoNumberList2 = new LottoNumbers();
+        NumbersGenerator lottoNumberList1 = new NumbersGenerator();
 
-        assertThat(lottoNumberList1.getNumbers()).isNotEqualTo(lottoNumberList2.getNumbers());
+        assertThat(lottoNumberList1.shuffle()).isNotEqualTo(lottoNumberList1.shuffle());
     }
 
 }
