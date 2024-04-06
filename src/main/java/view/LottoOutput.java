@@ -27,13 +27,13 @@ public class LottoOutput {
 
     private void lottoPrint(Lotto result) {
         for (int i = 0; i < BASIC_WIN_NUMBER_COUNT; i++) {
-            System.out.print(result.getNumbers().get(i).getNumber());
+            System.out.print(result.getBalls().get(i).getNumber());
             if (i != BASIC_WIN_NUMBER_COUNT - 1)
                 System.out.print(", ");
         }
         System.out.println();
         System.out.println("보너스 볼을 입력해 주세요");
-        System.out.println(result.getNumbers().get(BONUS_BALL_INDEX).getNumber());
+        System.out.println(result.getBalls().get(BONUS_BALL_INDEX).getNumber());
     }
 
     public int totalPrize(WinStatus winStatus) {
@@ -64,7 +64,7 @@ public class LottoOutput {
     }
 
     private void LottoBallPrint(Lotto lotto) {
-        for (LottoBall ball : lotto.getNumbers()) {
+        for (LottoBall ball : lotto.getBalls()) {
             System.out.print(ball.getNumber() + " ");
         }
         System.out.println();

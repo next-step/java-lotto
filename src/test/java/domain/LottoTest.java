@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
 
@@ -26,6 +25,6 @@ class LottoTest {
 
         Lotto mylotto = new Lotto(myBall);
         Lotto winlotto = new Lotto(myBall);
-        assertThat(mylotto.numberCheck(winlotto)).isEqualTo(2);
+        assertThat(mylotto.parseNumber(winlotto)).isEqualTo(2);
     }
 }
