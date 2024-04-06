@@ -15,6 +15,7 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> lotto) {
         validEmpty(lotto);
+        validLottoSize(lotto);
         this.lotto = lotto;
     }
 
@@ -26,6 +27,12 @@ public class Lotto {
     private static void validEmpty(List<?> lotto) {
         if (lotto == null || lotto.isEmpty()) {
             throw new IllegalArgumentException("입력값이 없습니다");
+        }
+    }
+
+    private static void validLottoSize(List<?> lotto) {
+        if(lotto.size() != 6) {
+            throw new IllegalArgumentException("유효한 Lotto size가 아닙니다: " + lotto.size());
         }
     }
 
