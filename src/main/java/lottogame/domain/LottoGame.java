@@ -5,7 +5,7 @@ import java.util.List;
 public class LottoGame {
     private static final Money price = Money.from(1_000);
 
-    public ReturnOfRate calculateReturnOfRate(WinningLottos winnerLotto, LottosBundle lottosBundle) {
+    public Rate calculateReturnOfRate(WinningLottos winnerLotto, LottosBundle lottosBundle) {
         return lottosBundle.calculateReturnOfRate(winnerLotto, price);
     }
 

@@ -54,9 +54,9 @@ public class LottosBundle {
         return Money.fromNumber(purchaseAmount);
     }
 
-    public ReturnOfRate calculateReturnOfRate(WinningLottos winnerLotto, Money price) {
+    public Rate calculateReturnOfRate(WinningLottos winnerLotto, Money price) {
         Money purchaseAmount = calculatePurchaseAmount(price);
         Money sumOfPrize = calculateSumOfPrize(winnerLotto);
-        return ReturnOfRate.fromDouble(sumOfPrize.divide(purchaseAmount).toDouble());
+        return Rate.fromDouble(sumOfPrize.divide(purchaseAmount).toDouble());
     }
 }
