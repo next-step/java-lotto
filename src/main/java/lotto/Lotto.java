@@ -19,6 +19,7 @@ public class Lotto {
         validLottoSize(numbers);
         validDuplicatedLottoNumber(numbers);
         numbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
+        this.type = type;
         this.numbers = numbers;
     }
     public static Lotto of(List<LottoNumber> numbers){
