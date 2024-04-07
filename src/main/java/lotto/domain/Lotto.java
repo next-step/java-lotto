@@ -44,6 +44,10 @@ public class Lotto {
         return lotto.size();
     }
 
+    public boolean isContainBonus(LottoNumber bonus) {
+        return lotto.contains(bonus);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -59,9 +63,5 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lotto);
-    }
-
-    protected boolean isContainBonus(LottoNumber bonus) {
-        return lotto.contains(bonus);
     }
 }

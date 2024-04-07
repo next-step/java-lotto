@@ -19,11 +19,11 @@ public class LottoController {
     }
 
     private Lottos getLottos(Budget budget) {
-        SelfIssueCount count = getManualIssueCount();
+        Count manualIssueCount = getManualIssueCount(budget);
 
-        budget = budget.spend(Price.LOTTO, count);
+        budget = budget.spend(Price.LOTTO, manualIssueCount);
 
-        Lottos manualLottos = getManualIssuedLottos(count);
+        Lottos manualLottos = getManualIssuedLottos(manualIssueCount);
         Lottos autoLottos = getAutoIssuedLottos(budget);
 
         ResultView.showLottoQuantity(manualLottos, autoLottos);
@@ -34,11 +34,11 @@ public class LottoController {
         return allLottos;
     }
 
-    private SelfIssueCount getManualIssueCount() {
-        return InputView.retryableInputSelfIssueCount();
+    private Count getManualIssueCount(Budget budget) {
+        return InputView.retryableInputSelfIssueCount(budget);
     }
 
-    private Lottos getManualIssuedLottos(SelfIssueCount count) {
+    private Lottos getManualIssuedLottos(Count count) {
         return InputView.inputSelfIssueLottos(count);
     }
     private Lottos getAutoIssuedLottos(Budget budget) {

@@ -39,22 +39,22 @@ public class InputView {
         return new Budget(SCANNER.nextInt());
     }
 
-    public static SelfIssueCount retryableInputSelfIssueCount() {
-        return (SelfIssueCount) retryableInput(InputView::inputSelfIssueCount);
+    public static Count retryableInputSelfIssueCount(Budget budget) {
+        return (Count) retryableInput(() -> InputView.inputSelfIssueCount(budget));
     }
 
-    private static SelfIssueCount inputSelfIssueCount() {
+    private static Count inputSelfIssueCount(Budget budget) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return new SelfIssueCount(SCANNER.nextInt());
+        return new Count(SCANNER.nextInt(), budget);
     }
 
-    public static Lottos inputSelfIssueLottos(SelfIssueCount count) {
+    public static Lottos inputSelfIssueLottos(Count count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         SCANNER.nextLine();
         return new Lottos(inputSelfIssueLottosRecursion(count));
     }
 
-    private static List<Lotto> inputSelfIssueLottosRecursion(SelfIssueCount count) {
+    private static List<Lotto> inputSelfIssueLottosRecursion(Count count) {
 
         List<Lotto> selfIssueLotto = new ArrayList<>();
         if(count.isPositive()) {

@@ -14,11 +14,19 @@ public enum Price {
         return value;
     }
 
-    public int multiple(SelfIssueCount count) {
+    public int multiple(Count count) {
         return count.getCount() * value;
     }
 
     public int divide(int budget) {
         return budget / value;
+    }
+
+    public boolean isSmaller(int budget) {
+        return value < budget;
+    }
+
+    public boolean isSmaller(int budget, int count) {
+        return value * count < budget;
     }
 }
