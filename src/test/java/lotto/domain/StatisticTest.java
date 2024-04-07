@@ -15,13 +15,17 @@ class StatisticTest {
         assertThat(result).isEqualTo(Statistic.FIFTH);
     }
 
-    @DisplayName("Statistic 2등 3등 테스트")
+    @DisplayName("Statistic 보너스 미포함 등수 테스트")
     @Test
-    void valueOfMatchNumber_withBonusOrNot() {
+    void valueOfMatchNumber_withoutBonus() {
+        Statistic resultWithBonus = Statistic.valueOfMatchNumber(5, false);
+        assertThat(resultWithBonus).isEqualTo(Statistic.THIRD);
+    }
+
+    @DisplayName("Statistic 보너스 포함 등수 테스트")
+    @Test
+    void valueOfMatchNumber_withBonus() {
         Statistic resultWithBonus = Statistic.valueOfMatchNumber(5, true);
         assertThat(resultWithBonus).isEqualTo(Statistic.SECOND);
-
-        Statistic resultWithoutBonus = Statistic.valueOfMatchNumber(5, false);
-        assertThat(resultWithoutBonus).isEqualTo(Statistic.THIRD);
     }
 }

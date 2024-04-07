@@ -1,35 +1,49 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Lotto {
+public class Lotto implements Comparable<Lotto>{
 
     public static final int LOTTO_PRICE = 1000;
-    private List<LottoNumber> lotto;
+    private Set<LottoNumber> lotto;
 
     public Lotto() {
         this(LottoNumbers.issueNumbers());
     }
 
-    public Lotto(List<LottoNumber> lotto) {
+    public Lotto(Set<LottoNumber> lotto) {
         validEmpty(lotto);
+        validLottoSize(lotto);
         this.lotto = lotto;
     }
 
-    public static Lotto ofNumbers(List<Integer> lottoNumbers) {
+    public static Lotto ofNumbers(Set<Integer> lottoNumbers) {
         validEmpty(lottoNumbers);
-        return new Lotto(lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toList()));
+        return new Lotto(getLottoNumbers(lottoNumbers));
     }
 
-    private static void validEmpty(List<?> lotto) {
+    private static Set<LottoNumber> getLottoNumbers(Set<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
+    }
+
+    private static void validEmpty(Set<?> lotto) {
         if (lotto == null || lotto.isEmpty()) {
             throw new IllegalArgumentException("입력값이 없습니다");
         }
     }
 
-    public List<LottoNumber> getLotto() {
+    private static void validLottoSize(Set<?> lotto) {
+        if(lotto.size() != 6) {
+            throw new IllegalArgumentException("유효한 Lotto size가 아닙니다: " + lotto.size());
+        }
+    }
+
+    public Set<LottoNumber> getLotto() {
         return lotto;
     }
 
@@ -37,10 +51,25 @@ public class Lotto {
         return lotto.size();
     }
 
+    public boolean isContainBonus(LottoNumber bonus) {
+        return lotto.contains(bonus);
+    }
+
+    @Override
+    public int compareTo(Lotto that) {
+        Set<LottoNumber> compareSet = new HashSet<>(lotto);
+        compareSet.retainAll(that.lotto);
+        return compareSet.size();
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Lotto lotto1 = (Lotto) o;
         return Objects.equals(lotto, lotto1.lotto);
     }

@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -18,11 +16,11 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    public static List<LottoNumber> issueNumbers() {
+    public static Set<LottoNumber> issueNumbers() {
         List<LottoNumber> issueNumbers = new ArrayList<>(LOTTO_NUMBERS);
         Collections.shuffle(issueNumbers);
         issueNumbers = issueNumbers.subList(0, LOTTO_SIZE);
         Collections.sort(issueNumbers);
-        return issueNumbers;
+        return new HashSet<>(issueNumbers);
     }
 }
