@@ -25,7 +25,7 @@ public class WinningLottosTest {
     void 로또_당첨(Lottos lottos, Rank rank) {
         Numbers numbers = Numbers.fromIntegers(List.of(1,4,5,6,7,8));
         WinningLottos winnerLotto = new WinningLottos(numbers, 9);
-        System.out.println("winnerLotto.getRank(lottos) = " + winnerLotto.checkRank(lottos));
+
         assertThat(winnerLotto.checkRank(lottos)).isEqualTo(rank);
     }
 
