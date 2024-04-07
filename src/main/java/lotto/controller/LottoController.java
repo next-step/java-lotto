@@ -1,25 +1,32 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import static lotto.domain.LottoGenerator.generateLottos;
+import java.util.List;
+
 
 public class LottoController {
 
     public void buyLotto() {
-        // 금액만큼 Lotto 생성 하여 출력
-        LottoFee lottoFee = InputView.payForGames();
-        Lottos lottos = generateLottos(lottoFee);
+
+        int lottoFee = InputView.inputPaymentForGames();
+        int manualGameCount = InputView.inputManualGameCount();
+        List<List<Integer>> manualLottos = InputView.inputManualGameNumber(manualGameCount);
+
+        LottoShop lottoShop = new LottoShop(LottoFee.from(lottoFee));
+        Lottos lottos = lottoShop.buy(manualLottos);
+
+        ResultView.showPurchaseQuantitiy(manualGameCount, lottoShop.totalCount());
         ResultView.showLottos(lottos);
 
-        // 당첨 번호 및 보너스 번호 입력 받아 WinningLotto 생성
-        Lotto winningNumber = Lotto.from(InputView.inputWinningNumber());
-        int bonusNumber = InputView.inputBonusNumber();
-        WinningLotto winningLottoNumber = new WinningLotto(winningNumber, bonusNumber);
+        Lotto winningNumber = Lotto.create(InputView.inputWinningNumber());
+        LottoNumber bonusNumber = LottoNumber.from(InputView.inputBonusNumber());
 
-        // 당첨 번호 확인 후 출력
-        ResultView.showRanks(lottos.match(winningLottoNumber), lottoFee);
+        WinningLotto winningLottoNumber = new WinningLotto(winningNumber, bonusNumber);
+        ResultView.showRanks(lottos.match(winningLottoNumber), lottoShop.fee());
+
     }
 }

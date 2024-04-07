@@ -3,27 +3,28 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto from(String[] numbers) {
-        return new Lotto(Arrays.stream(numbers)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList()));
+    public static Lotto create(List<Integer> lottoNumbers) {
+        return new Lotto(lottoNumbers.stream()
+                                     .map(LottoNumber::new)
+                                     .collect(Collectors.toList()));
     }
 
     public int size() {
         return lottoNumbers.size();
     }
 
-    public List<Integer> getValue() {
+    public List<LottoNumber> getValue() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
@@ -33,7 +34,24 @@ public class Lotto {
                 .count();
     }
 
-    public boolean hasNumber(int value) {
+    public boolean hasNumber(LottoNumber value) {
         return this.lottoNumbers.contains(value);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

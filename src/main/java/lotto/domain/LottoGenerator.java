@@ -1,39 +1,35 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public final class LottoGenerator {
-
     private LottoGenerator() {
     }
 
-    private static final int START_NUMBER = 1;
-    private static final int LAST_NUMBER = 45;
-    private static final List<Integer> lottoGame = createLottoGame();
-
-    private static List<Integer> createLottoGame() {
-        List<Integer> lottoGame = new ArrayList<>();
-        for (int i = START_NUMBER; i <= LAST_NUMBER; i++) {
-            lottoGame.add(i);
-        }
-        return lottoGame;
+    public static List<Lotto> auto(int count) {
+        return IntStream.rangeClosed(1,count)
+                .mapToObj(i -> generateLotto())
+                .collect(Collectors.toList());
     }
 
-    public static Lottos generateLottos(LottoFee lottoFee) {
-        Lottos lottos = new Lottos();
-        for (int i = 0; i < lottoFee.convertToGameUnit(); i++) {
-            lottos.add(generateLotto());
-        }
-        return lottos;
+    public static List<Lotto> manual(List<List<Integer>> manualLottos) {
+        return manualLottos.stream()
+                .map(Lotto::create)
+                .collect(Collectors.toList());
     }
 
     public static Lotto generateLotto() {
-        List<Integer> clonedLottoGame = new ArrayList<>(lottoGame);
-        Collections.shuffle(clonedLottoGame);
-        clonedLottoGame = clonedLottoGame.subList(0,6);
-        Collections.sort(clonedLottoGame);
-        return new Lotto(clonedLottoGame);
+        List<Integer> cachedLottoNumber = LottoNumber.LOTTO_NUMBER_CACHE.keySet()
+                                                                        .stream()
+                                                                        .collect(Collectors.toList());
+        Collections.shuffle(cachedLottoNumber);
+        cachedLottoNumber = cachedLottoNumber.subList(0,6);
+        Collections.sort(cachedLottoNumber);
+        return Lotto.create(cachedLottoNumber);
     }
 }
