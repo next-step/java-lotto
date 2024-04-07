@@ -17,9 +17,9 @@ public class InputView {
     private static final String QUESTION_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String QUESTION_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
-    public static LottoFee inputPaymentForGames() {
+    public static int inputPaymentForGames() {
         System.out.println(QUESTION_START);
-        return new LottoFee(Integer.parseInt(SCANNER.nextLine()));
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
     public static int inputManualGameCount() {

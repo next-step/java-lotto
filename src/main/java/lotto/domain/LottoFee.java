@@ -11,6 +11,10 @@ public class LottoFee {
         this.value = fee;
     }
 
+    public static LottoFee from(int lottoFee) {
+        return new LottoFee(lottoFee);
+    }
+
     private void validate(int fee) {
         validateMinPrice(fee);
         validateRemainderOccurs(fee);
@@ -25,12 +29,6 @@ public class LottoFee {
     private static void validateMinPrice(int fee) {
         if (fee < PRICE_PER_GAME) {
             throw new IllegalArgumentException("한 게임당 1000원 입니다. 입력 금액을 확인 해주세요.");
-        }
-    }
-
-    public static void validateManualGameCount(int manualCount, int totalCount) {
-        if (manualCount > totalCount) {
-            throw new IllegalArgumentException("전체 구매 게임 수 보다 수동게임 구매 숫자가 클 수 없습니다. 입력 게임수를 확인 해주세요.");
         }
     }
 

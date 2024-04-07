@@ -28,19 +28,19 @@ public class ResultView {
     private static String joinWithDelimiter(Lotto lotto) {
         return lotto.getValue().stream()
                 .map(lottoNumber -> String.valueOf(lottoNumber.getValue()))
-                .collect(Collectors.joining(", ","[","]"));
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 
-    public static void showRanks(LottoResult lottoResult, LottoFee lottoFee) {
+    public static void showRanks(LottoResult lottoResult, int lottoFee) {
         System.out.println(createResult(lottoResult, lottoFee));
     }
 
-    private static String createResult(LottoResult lottoResult, LottoFee lottoFee) {
+    private static String createResult(LottoResult lottoResult, int lottoFee) {
         StringBuilder result = new StringBuilder();
         result.append(ANSWER_STATICS).append(NEW_LINE).append(LINE).append(NEW_LINE);
 
         structureRankingForm(lottoResult, result);
-        
+
         result.append(createMarginForm(lottoResult, lottoFee)).append(NEW_LINE);
         return result.toString();
     }
@@ -50,7 +50,7 @@ public class ResultView {
         Collections.reverse(ranks);
         for (int i = 1; i < ranks.size(); i++) {
             LottoRank rank = ranks.get(i);
-            result.append(createRankingForm(lottoResult,rank)).append(NEW_LINE);
+            result.append(createRankingForm(lottoResult, rank)).append(NEW_LINE);
         }
     }
 
@@ -64,8 +64,8 @@ public class ResultView {
         return lottoRank.matchCount() + "개 일치 (" + lottoRank.prizeMoney() + ")-" + lottoResult.count(lottoRank) + "개";
     }
 
-    private static String createMarginForm(LottoResult lottoResult, LottoFee lottoFee) {
-        float marginRate = lottoResult.getMargin(lottoFee.getValue());
+    private static String createMarginForm(LottoResult lottoResult, int lottoFee) {
+        float marginRate = lottoResult.getMargin(lottoFee);
         return "총 수익률은 " + marginRate + "입니다.(기준이 1이기 때문에 결과적으로 " + lossOrgain(marginRate) + "라는 의미임)";
     }
 
@@ -76,10 +76,10 @@ public class ResultView {
         return "손해";
     }
 
-    public static void showPurchaseQuantitiy(int manualGameCount, LottoFee lottoFee) {
+    public static void showPurchaseQuantitiy(int manualGameCount, int totalCount) {
         StringBuilder result = new StringBuilder()
-        .append(createMaunalQuanttitiy(manualGameCount))
-        .append(createAutoQuanttitiy(lottoFee.totalCount()-manualGameCount));
+                .append(createMaunalQuanttitiy(manualGameCount))
+                .append(createAutoQuanttitiy(totalCount - manualGameCount));
         System.out.println(result.toString());
     }
 
