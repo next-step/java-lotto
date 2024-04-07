@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.constant.ErrorMessage;
 import lotto.domain.Lotto;
 import lotto.domain.Purchase;
 
@@ -9,6 +10,10 @@ import java.util.List;
 
 public class Shop {
     private static final String LOTTO_PRODUCT_NAME = "Lotto";
+
+    private Shop() {
+        throw new IllegalStateException(ErrorMessage.CANNOT_BE_INSTANTIATED.getMessage());
+    }
 
     public static List<Lotto> purchaseLotto(int purchaseAmount) {
         Purchase purchase = new Purchase(LOTTO_PRODUCT_NAME, purchaseAmount);
