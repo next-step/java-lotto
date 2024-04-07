@@ -15,7 +15,7 @@ public class OutputView {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (Lotto lotto : lottoSession) {
-            stringBuilder.append(Arrays.toString(lotto.getLotto().toArray())).append("\n");
+            stringBuilder.append(Arrays.toString(lotto.getLottoNumbers().toArray())).append("\n");
         }
         System.out.println(stringBuilder);
     }

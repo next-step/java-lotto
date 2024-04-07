@@ -16,7 +16,7 @@ class LottoTest {
     public void lottoInitializationTest() {
         Lotto lotto = new Lotto(Arrays.asList(2, 4, 5, 8, 10, 42));
 
-        assertThat(lotto.getLotto().size()).isEqualTo(6);
+        assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
     }
 
     @Test

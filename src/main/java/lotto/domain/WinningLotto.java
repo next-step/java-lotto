@@ -55,10 +55,10 @@ public class WinningLotto {
     }
 
     public Integer compareLotto(Lotto comparedLotto) {
-        return (int) this.winningLotto.stream().filter(comparedLotto.getLotto()::contains).count();
+        return (int) this.winningLotto.stream().filter(comparedLotto.getLottoNumbers()::contains).count();
     }
 
     public Boolean isBonusIncluded(Lotto comparedLotto) {
-        return comparedLotto.getLotto().contains(bonusNumber);
+        return comparedLotto.getLottoNumbers().contains(bonusNumber);
     }
 }

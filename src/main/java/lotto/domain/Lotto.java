@@ -9,15 +9,15 @@ public class Lotto {
     public static final int UPPER_BOUND = 45;
     private static final int LOTTO_NUMBER_SIZE = 6;
 
-    private final List<Integer> lotto;
+    private final List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
-        this.lotto = numbers;
+        this.lottoNumbers = numbers;
     }
 
-    public List<Integer> getLotto() {
-        return lotto;
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     public static void validateNumbersLength(List<Integer> numbers) {
