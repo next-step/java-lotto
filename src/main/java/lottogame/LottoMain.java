@@ -10,10 +10,9 @@ import lottogame.view.ResultView;
 public class LottoMain {
 
     public static void main(String[] args) {
-        Money money = InputView.requestMoney();
         ResultView.printLinkBreak();
 
-        Number countOfLottos = LottosBundle.calculateCountOfLottos(money);
+        Number countOfLottos = LottosBundle.calculateCountOfLottos(InputView.requestMoney());
         Number manualCountOfLotto = InputView.requestCountOfManualLottos(countOfLottos);
         ResultView.printLinkBreak();
 
@@ -24,7 +23,6 @@ public class LottoMain {
         ResultView.printLottos(lottosBundle);
 
         WinningLottos winningLottos = WinningLottos.of(InputView.requestWinningLotto(), InputView.requestBonusNumber());
-
         ResultView.printWinningResult(lottosBundle.checkRanks(winningLottos));
         ResultView.printReturnOfRate(lottosBundle.calculateReturnOfRate(winningLottos));
     }
