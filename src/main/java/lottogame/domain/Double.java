@@ -35,6 +35,10 @@ public final class Double {
         return this.value > other.value;
     }
 
+    public boolean isLessThan(Double other) {
+        return value < other.value;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) {

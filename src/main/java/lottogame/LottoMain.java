@@ -10,8 +10,7 @@ public class LottoMain {
 
     public static void main(String[] args) {
         ResultView.printLinkBreak();
-
-        Number countOfLottos = LottosBundle.calculateCountOfLottos(InputView.requestMoney());
+        Number countOfLottos = createCountOfLottos();
         Number manualCountOfLotto = InputView.requestCountOfManualLottos(countOfLottos);
         ResultView.printLinkBreak();
 
@@ -22,9 +21,17 @@ public class LottoMain {
         ResultView.printLottos(lottosBundle);
 
         WinningLottos winningLottos = createWinningLottos();
-
         ResultView.printWinningResult(lottosBundle.checkRanks(winningLottos));
         ResultView.printReturnOfRate(lottosBundle.calculateReturnOfRate(winningLottos));
+    }
+
+    private static Number createCountOfLottos() {
+        try {
+            return LottosBundle.calculateCountOfLottos(InputView.requestMoney());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return createCountOfLottos();
+        }
     }
 
     private static WinningLottos createWinningLottos() {

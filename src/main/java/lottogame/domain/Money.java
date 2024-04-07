@@ -49,6 +49,10 @@ public class Money {
     }
 
 
+    public boolean isLessThan(Money price) {
+        return value.isLessThan(price.value);
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) {

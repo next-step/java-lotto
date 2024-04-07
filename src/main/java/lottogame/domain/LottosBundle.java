@@ -41,6 +41,9 @@ public class LottosBundle {
     }
 
     public static Number calculateCountOfLottos(Money money) {
+        if (money.isLessThan(price)) {
+            throw new IllegalArgumentException(String.format("최소 로또 가격은 %d입니다.", price.toInt()));
+        }
         return Number.from(money.divideToInt(price));
     }
 
