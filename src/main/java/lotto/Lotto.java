@@ -1,5 +1,7 @@
 package lotto;
 
+import static lotto.LottoType.AUTO;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -9,19 +11,34 @@ public class Lotto {
 
     public static final int LOTTO_NUMBERS_LIMIT = 6;
 
+    private LottoType type;
     private final List<LottoNumber> numbers;
 
-    public Lotto(String[] numbers){
-        this(Arrays.stream(numbers)
-            .map(LottoNumber::new)
-            .collect(Collectors.toList()));
-    }
 
-    public Lotto(List<LottoNumber> numbers) {
+    private Lotto(LottoType type, List<LottoNumber> numbers) {
         validLottoSize(numbers);
         validDuplicatedLottoNumber(numbers);
         numbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
         this.numbers = numbers;
+    }
+    public static Lotto of(List<LottoNumber> numbers){
+        return new Lotto(AUTO, numbers);
+    }
+
+    public static Lotto of(LottoType type, List<LottoNumber> numbers){
+        return new Lotto(type, numbers);
+    }
+
+    public static Lotto of(LottoType type, String ... numbers){
+        return new Lotto(type, Arrays.stream(numbers)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
+    }
+
+    public static Lotto of(String ... numbers){
+        return new Lotto(AUTO, Arrays.stream(numbers)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
     }
 
     public int countMatch(Lotto other) {
