@@ -65,6 +65,6 @@ public class ResultView {
     }
 
     public static void showLottoQuantity(Lottos manualLottos, Lottos autoLottos) {
-        System.out.println("수동으로 " + manualLottos.getLottoSize() + "장, 자동으로" + autoLottos.getLottoSize() + "개를 구매했습니다.");
+        System.out.println("수동으로 " + manualLottos.size() + "장, 자동으로" + autoLottos.size() + "개를 구매했습니다.");
     }
 }
