@@ -36,4 +36,8 @@ public class Lotto {
         validateNumbersLength(numbers);
         numbers.forEach(Lotto::validateLottoNumberBound);
     }
+
+    public Boolean containNumber(Integer number) {
+        return this.lottoNumbers.contains(number);
+    }
 }

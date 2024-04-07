@@ -20,6 +20,14 @@ class LottoTest {
     }
 
     @Test
+    @DisplayName("로또 특정 숫자가 로또 번호에 포함되어있는지 여부 반환")
+    public void containNumberTest() {
+        Lotto lotto = new Lotto(Arrays.asList(2, 4, 5, 8, 10, 42));
+
+        assertThat(lotto.getLottoNumbers().contains(2)).isTrue();
+    }
+
+    @Test
     @DisplayName("로또 생성 오류 테스트 - 정해진 숫자 갯수 초과 시")
     public void lottoInitializationOverLengthTest() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(2, 4, 6, 13, 23, 39, 45)))
