@@ -1,11 +1,9 @@
 package lottogame;
 
-import java.util.List;
 import lottogame.domain.LottoGame;
 import lottogame.domain.LottosBundle;
 import lottogame.domain.Money;
 import lottogame.domain.Number;
-import lottogame.domain.Numbers;
 import lottogame.domain.WinningLottos;
 import lottogame.view.InputView;
 import lottogame.view.ResultView;
@@ -34,9 +32,7 @@ public class LottoMain {
 
     private static LottosBundle createLottosBundleOfManual(LottoGame lottoGame, Number manualCountOfLotto) {
         try {
-            List<Numbers> manualInputNumbers = InputView.requestMultipleManualLottos(manualCountOfLotto);
-            LottosBundle lottosBundleOfManual = lottoGame.createLottosBundle(manualInputNumbers);
-            return lottosBundleOfManual;
+            return lottoGame.createLottosBundle(InputView.requestMultipleManualLottos(manualCountOfLotto));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return createLottosBundleOfManual(lottoGame, manualCountOfLotto);
@@ -45,9 +41,7 @@ public class LottoMain {
 
     private static WinningLottos createWinningLottos(LottoGame lottoGame) {
         try {
-            Numbers winningLottosNumbers = InputView.requestWinningLotto();
-            Number bonusNumber = InputView.requestBonusNumber();
-            return lottoGame.createWinningLotto(winningLottosNumbers, bonusNumber);
+            return lottoGame.createWinningLotto(InputView.requestWinningLotto(), InputView.requestBonusNumber());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return createWinningLottos(lottoGame);
