@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class WinLotto{
+public class WinLotto {
 
     private Lotto winLotto;
     private LottoNumber bonus;
@@ -21,9 +21,7 @@ public class WinLotto{
     }
 
     public int getFeatNumberCount(Lotto lotto) {
-        return (int) lotto.getLotto().stream()
-            .filter(value -> winLotto.getLotto().contains(value))
-            .count();
+        return this.winLotto.compareTo(lotto);
     }
 
     public boolean isContainBonus(Lotto lotto) {

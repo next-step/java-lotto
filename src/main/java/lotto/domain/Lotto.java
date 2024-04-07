@@ -1,10 +1,11 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Lotto {
+public class Lotto implements Comparable<Lotto>{
 
     public static final int LOTTO_PRICE = 1000;
     private Set<LottoNumber> lotto;
@@ -21,7 +22,13 @@ public class Lotto {
 
     public static Lotto ofNumbers(Set<Integer> lottoNumbers) {
         validEmpty(lottoNumbers);
-        return new Lotto(lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toSet()));
+        return new Lotto(getLottoNumbers(lottoNumbers));
+    }
+
+    private static Set<LottoNumber> getLottoNumbers(Set<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
     }
 
     private static void validEmpty(Set<?> lotto) {
@@ -46,6 +53,13 @@ public class Lotto {
 
     public boolean isContainBonus(LottoNumber bonus) {
         return lotto.contains(bonus);
+    }
+
+    @Override
+    public int compareTo(Lotto that) {
+        Set<LottoNumber> compareSet = new HashSet<>(lotto);
+        compareSet.retainAll(that.lotto);
+        return compareSet.size();
     }
 
     @Override

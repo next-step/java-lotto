@@ -94,6 +94,8 @@ public class InputView {
     }
 
     private static Set<Integer> parseInts(List<String> input) {
-        return input.stream().map(Integer::parseInt).collect(Collectors.toSet());
+        return input.stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toSet());
     }
 }
