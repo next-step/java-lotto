@@ -77,3 +77,13 @@ public enum Rank {
 - Rank enum 사용
     - [x] 일치하는 수를 로또 등수로 변경하는 로직 구현
     - [x] Rank enum 테스트
+
+
+### 2차 TODO LIST
+- [ ] `LottoNumber` 로또 번호 객체 생성
+- [ ] Set<Integer> -> Set<LottoNumber>로 수정
+- [x] Lotto 주 생성자를 호출하도록 수정
+- [ ] Rank 반복문 indent 줄이기
+- [ ] Results에서 enum클래스 values 메소드 사용하여 Map 생성부 수정 
+- [ ] BonusTest 6개의 숫자와 보너스볼을 상태로 가지는 객체를 도출하도록 수정
+- [ ] RankTest DisplayName을 도메인 용어로 수정

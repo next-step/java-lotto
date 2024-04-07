@@ -9,8 +9,7 @@ public class Lotto {
     private final Set<Integer> lotto;
 
     public Lotto(NumbersGenerator lotto) {
-        validate(lotto.getNumbers());
-        this.lotto = lotto.getNumbers();
+        this(lotto.getNumbers());
     }
 
     public Lotto(Set<Integer> lotto) {
