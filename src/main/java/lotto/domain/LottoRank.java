@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import java.util.AbstractMap.SimpleEntry;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public enum LottoRank {
     LOSE(0, false, 0, null),
@@ -9,6 +12,13 @@ public enum LottoRank {
     SECOND(5, false, 1_500_000, "5개 일치 (1500000원)-"),
     SECOND_BONUS(5, true, 30_000_000, "5개 일치, 보너스 볼 일치(30000000원)-"),
     FIRST(6, false, 2_000_000_000, "6개 일치 (2000000000원)-");
+
+    private static final Map<SimpleEntry<Integer, Boolean>, LottoRank> LOTTO_RANK_MAP = new HashMap<>();
+
+    static {
+        Arrays.stream(LottoRank.values())
+                .forEach(lottoRank -> LOTTO_RANK_MAP.put(new SimpleEntry<>(lottoRank.matches, lottoRank.isBonusMatched), lottoRank));
+    }
 
     private final int matches;
     private final boolean isBonusMatched;
@@ -35,8 +45,6 @@ public enum LottoRank {
     }
 
     public static LottoRank getLottoRank(int matches, boolean isBonusMatched) {
-        return Arrays.stream(values())
-                .filter(m -> m.matches == matches && m.isBonusMatched == isBonusMatched)
-                .findFirst().orElse(LottoRank.LOSE);
+        return LOTTO_RANK_MAP.getOrDefault(new SimpleEntry<>(matches, isBonusMatched), LOSE);
     }
 }
