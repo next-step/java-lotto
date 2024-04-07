@@ -3,6 +3,7 @@ package stringcalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,38 +45,11 @@ class CalculatorTest {
         });
     }
 
-    @Test
-    void 덧셈_test() {
-        String input = "2 + 3 + 4";
+    @ParameterizedTest
+    @CsvSource(
+            {"'2 + 3 + 4', 9", "'7 - 3 - 4', 0", "'7 * 3', 21", "'7 / 1', 7", "'2 + 3 * 4 / 2', 10"})
+    void 연산_test(String input, int result) {
         String[] inputs = Calculator.inputSpilt(input);
-        assertThat(Calculator.calculate(inputs)).isEqualTo(9);
-    }
-
-    @Test
-    void 뺄셈_test() {
-        String input = "7 - 3 - 4";
-        String[] inputs = Calculator.inputSpilt(input);
-        assertThat(Calculator.calculate(inputs)).isEqualTo(0);
-    }
-
-    @Test
-    void 곱셈_test() {
-        String input = "7 * 3";
-        String[] inputs = Calculator.inputSpilt(input);
-        assertThat(Calculator.calculate(inputs)).isEqualTo(21);
-    }
-
-    @Test
-    void 나누기_test() {
-        String input = "7 / 1";
-        String[] inputs = Calculator.inputSpilt(input);
-        assertThat(Calculator.calculate(inputs)).isEqualTo(7);
-    }
-
-    @Test
-    void 연산_테스트() {
-        String input = "2 + 3 * 4 / 2";
-        String[] inputs = Calculator.inputSpilt(input);
-        assertThat(Calculator.calculate(inputs)).isEqualTo(10);
+        assertThat(Calculator.calculateString(inputs)).isEqualTo(result);
     }
 }
