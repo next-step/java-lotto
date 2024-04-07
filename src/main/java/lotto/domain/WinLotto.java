@@ -4,22 +4,25 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class WinLotto extends Lotto {
+public class WinLotto{
 
+    private Lotto winLotto;
     private LottoNumber bonus;
 
     public WinLotto(List<Integer> lottoNumbers, Integer bonus) {
-        this(lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toList()));
+        this.winLotto = new Lotto(getLottoNumbers(lottoNumbers));
         this.bonus = new LottoNumber(bonus);
     }
 
-    private WinLotto(List<LottoNumber> lottoNumbers) {
-        super(lottoNumbers);
+    private static List<LottoNumber> getLottoNumbers(List<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     public int getFeatNumberCount(Lotto lotto) {
         return (int) lotto.getLotto().stream()
-            .filter(value -> super.getLotto().contains(value))
+            .filter(value -> winLotto.getLotto().contains(value))
             .count();
     }
 
