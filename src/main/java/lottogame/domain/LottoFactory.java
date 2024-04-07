@@ -36,6 +36,6 @@ public class LottoFactory {
     }
 
     public static Number calculateCountOfLottos(Money money, Money price) {
-        return Number.from(money.divide(price).toInt());
+        return Number.from(money.divideToInt(price));
     }
 }

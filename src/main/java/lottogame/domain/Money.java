@@ -36,6 +36,10 @@ public class Money {
         return value.toInt();
     }
 
+    public int divideToInt(Money from) {
+        return divide(from).toInt();
+    }
+
     public Double toDouble() {
         return value;
     }
