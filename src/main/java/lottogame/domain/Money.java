@@ -40,6 +40,10 @@ public class Money {
         return divide(from).toInt();
     }
 
+    public Double divideToDouble(Money money) {
+        return divide(money).toDouble();
+    }
+
     public Double toDouble() {
         return value;
     }

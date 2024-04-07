@@ -67,7 +67,7 @@ public class LottosBundle {
     public Rate calculateReturnOfRate(WinningLottos winnerLotto) {
         Money purchaseAmount = calculatePurchaseAmount(price);
         Money sumOfPrize = calculateSumOfPrize(winnerLotto);
-        return Rate.fromDouble(sumOfPrize.divide(purchaseAmount).toDouble());
+        return Rate.fromDouble(sumOfPrize.divideToDouble(purchaseAmount));
     }
 
     private Money calculatePurchaseAmount(Money lottoPrice) {
