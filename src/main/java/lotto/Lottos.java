@@ -1,13 +1,26 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos) {
+    private Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public static Lottos of(Lotto... lottos) {
+        return new Lottos(List.of(lottos));
+    }
+
+    public static Lottos of(List<Lotto> lottos){
+        return new Lottos(lottos);
+    }
+
+    public static Lottos of(){
+        return new Lottos(new ArrayList<>());
     }
 
     public int numberOfLotto() {
@@ -18,12 +31,12 @@ public class Lottos {
         return lottos;
     }
 
-    public static Lottos create(Money money, NumberGenerator generator) {
-        return generator.generate(countLotto(money));
+    public static Lottos create(int count, NumberGenerator generator) {
+        return generator.generate(count);
     }
 
-    private static int countLotto(Money money){
-        return money.purchase();
+    public void add(Lottos lottos){
+        this.lottos.addAll(lottos.getLottos());
     }
 
     public LottoResult getWinningResult(Lotto winingLotto, LottoNumber bonus) {

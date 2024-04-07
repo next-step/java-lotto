@@ -23,9 +23,9 @@ public class RandomNumberGenerator implements NumberGenerator {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = ZERO; i < count; i++) {
             Collections.shuffle(shuffle);
-            lottos.add( new Lotto(new ArrayList<>(shuffle.subList(ZERO, LOTTO_NUMBERS_LIMIT))));
+            lottos.add( Lotto.of(new ArrayList<>(shuffle.subList(ZERO, LOTTO_NUMBERS_LIMIT))));
         }
-        return new Lottos(lottos);
+        return Lottos.of(lottos);
     }
 
     private static List<LottoNumber> inputInitLottoNumbers() {

@@ -12,16 +12,15 @@ import org.junit.jupiter.api.Test;
 
 public class LottosTest {
 
-    private static final Lottos lottos = new Lottos(
+    private static final Lottos lottos = Lottos.of(
         List.of(
-            new Lotto(
-                new String[]{"1", "2", "3", "4", "5", "6"})
+            Lotto.of("1", "2", "3", "4", "5", "6")
         ));
 
     @Test
     @DisplayName("로또 결과 1등")
     void COMPARE_WINNING_LOTTO_THEN_FIRST_PRIZE() {
-        Lotto lotto = new Lotto(new String[]{"1", "2", "3", "4", "5", "6"});
+        Lotto lotto = Lotto.of("1", "2", "3", "4", "5", "6");
         LottoNumber bonus = new LottoNumber(7);
 
         LottoResult result = new LottoResult(LottoRank.FIRST);
@@ -32,7 +31,7 @@ public class LottosTest {
     @Test
     @DisplayName("로또 결과 2등")
     void COMPARE_WINNING_LOTTO_WITH_SECOND_PRIZE() {
-        Lotto lotto = new Lotto(new String[]{"1", "2", "3", "4", "5", "7"});
+        Lotto lotto = Lotto.of("1", "2", "3", "4", "5", "7");
         LottoNumber bonus = new LottoNumber(6);
 
         LottoResult result = new LottoResult(LottoRank.SECOND);
@@ -43,7 +42,7 @@ public class LottosTest {
     @Test
     @DisplayName("로또 결과 3등")
     void COMPARE_WINNING_LOTTO_WITH_THIRD_PRIZE() {
-        Lotto lotto = new Lotto(new String[]{"1", "2", "3", "4", "5", "9"});
+        Lotto lotto = Lotto.of("1", "2", "3", "4", "5", "9");
         LottoNumber bonus = new LottoNumber(10);
 
         LottoResult result = new LottoResult(LottoRank.THIRD);

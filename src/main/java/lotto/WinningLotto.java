@@ -10,7 +10,7 @@ public class WinningLotto {
     }
 
     public WinningLotto(String[] numbers, String bonus){
-        this(new Lotto(numbers), new LottoNumber(bonus));
+        this(Lotto.of(numbers), new LottoNumber(bonus));
     }
 
     public LottoResult getWinningResult(Lottos lottos) {
