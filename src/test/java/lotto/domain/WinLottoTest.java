@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,8 +14,8 @@ class WinLottoTest {
     @DisplayName("로또 번호 일치 개수 테스트")
     @Test
     void getFeatNumberCount() {
-        Lotto givenLotto = Lotto.ofNumbers(List.of(1, 2, 3, 4, 5, 6));
-        WinLotto winLotto = new WinLotto(List.of(1, 5, 6, 7, 8, 9), 5);
+        Lotto givenLotto = Lotto.ofNumbers(Set.of(1, 2, 3, 4, 5, 6));
+        WinLotto winLotto = new WinLotto(Set.of(1, 5, 6, 7, 8, 9), 5);
 
         int result = winLotto.getFeatNumberCount(givenLotto);
         assertThat(result).isEqualTo(3);

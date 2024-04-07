@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinLotto{
@@ -9,15 +9,15 @@ public class WinLotto{
     private Lotto winLotto;
     private LottoNumber bonus;
 
-    public WinLotto(List<Integer> lottoNumbers, Integer bonus) {
+    public WinLotto(Set<Integer> lottoNumbers, Integer bonus) {
         this.winLotto = new Lotto(getLottoNumbers(lottoNumbers));
         this.bonus = new LottoNumber(bonus);
     }
 
-    private static List<LottoNumber> getLottoNumbers(List<Integer> lottoNumbers) {
+    private static Set<LottoNumber> getLottoNumbers(Set<Integer> lottoNumbers) {
         return lottoNumbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public int getFeatNumberCount(Lotto lotto) {

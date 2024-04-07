@@ -1,42 +1,42 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
     public static final int LOTTO_PRICE = 1000;
-    private List<LottoNumber> lotto;
+    private Set<LottoNumber> lotto;
 
     public Lotto() {
         this(LottoNumbers.issueNumbers());
     }
 
-    public Lotto(List<LottoNumber> lotto) {
+    public Lotto(Set<LottoNumber> lotto) {
         validEmpty(lotto);
         validLottoSize(lotto);
         this.lotto = lotto;
     }
 
-    public static Lotto ofNumbers(List<Integer> lottoNumbers) {
+    public static Lotto ofNumbers(Set<Integer> lottoNumbers) {
         validEmpty(lottoNumbers);
-        return new Lotto(lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toList()));
+        return new Lotto(lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toSet()));
     }
 
-    private static void validEmpty(List<?> lotto) {
+    private static void validEmpty(Set<?> lotto) {
         if (lotto == null || lotto.isEmpty()) {
             throw new IllegalArgumentException("입력값이 없습니다");
         }
     }
 
-    private static void validLottoSize(List<?> lotto) {
+    private static void validLottoSize(Set<?> lotto) {
         if(lotto.size() != 6) {
             throw new IllegalArgumentException("유효한 Lotto size가 아닙니다: " + lotto.size());
         }
     }
 
-    public List<LottoNumber> getLotto() {
+    public Set<LottoNumber> getLotto() {
         return lotto;
     }
 

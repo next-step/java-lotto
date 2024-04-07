@@ -2,10 +2,7 @@ package lotto.view;
 
 import lotto.domain.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -81,7 +78,7 @@ public class InputView {
         return new WinLotto(parseLottoNumbers(), parseBonusNumber());
     }
 
-    private static List<Integer> parseLottoNumbers() {
+    private static Set<Integer> parseLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return parseInts(split(SCANNER.nextLine()));
     }
@@ -96,7 +93,7 @@ public class InputView {
         return Arrays.stream(result).collect(Collectors.toList());
     }
 
-    private static List<Integer> parseInts(List<String> input) {
-        return input.stream().map(Integer::parseInt).collect(Collectors.toList());
+    private static Set<Integer> parseInts(List<String> input) {
+        return input.stream().map(Integer::parseInt).collect(Collectors.toSet());
     }
 }
