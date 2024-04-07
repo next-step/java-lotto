@@ -45,6 +45,10 @@ public class Numbers {
         return new ArrayList<>(numbers);
     }
 
+    public boolean contains(Number number) {
+        return numbers.contains(number);
+    }
+
     private Numbers subList(int size) {
         List<Number> numbers = this.numbers.subList(0, size);
         return new Numbers(numbers);

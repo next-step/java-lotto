@@ -1,6 +1,8 @@
 package lottogame.domain;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -52,8 +54,20 @@ public class Lottos {
     }
 
     private static void validate(List<Number> numbers) {
+        validateSize(numbers);
+        validateDuplicate(numbers);
+    }
+
+    private static void validateSize(List<Number> numbers) {
         if (numbers.size() != LOTTOS_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개야 합니다.");
+        }
+    }
+
+    private static void validateDuplicate(List<Number> numbers) {
+        Set<Number> target = new HashSet<>(numbers);
+        if (target.size() != LOTTOS_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 중복될 수가 없습니다.");
         }
     }
 }

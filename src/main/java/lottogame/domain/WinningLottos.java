@@ -11,6 +11,7 @@ public class WinningLottos {
     }
 
     public static WinningLottos of(Numbers numbers, Number bonusNumber) {
+        validate(numbers, bonusNumber);
         return new WinningLottos(numbers, bonusNumber);
     }
 
@@ -22,12 +23,18 @@ public class WinningLottos {
         return Number.from(Rank.findPrize(match(lottos), matchBonusNumber(lottos)));
     }
 
+    public int size() {
+        return lottos.size();
+    }
+
     private boolean matchBonusNumber(Lottos lottos) {
         return lottos.match(bonusNumber);
     }
 
-    public int size() {
-        return lottos.size();
+    private static void validate(Numbers numbers, Number number) {
+        if (numbers.contains(number)) {
+            throw new IllegalArgumentException("로또 번호와 보너스 번호는 중복 될수 없습니다.");
+        }
     }
 
     private int match(Lottos lottos) {
