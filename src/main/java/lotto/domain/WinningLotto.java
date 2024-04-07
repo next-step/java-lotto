@@ -23,10 +23,10 @@ public class WinningLotto {
     }
 
     public static Integer getBonusNumber(String bonusNumber) {
-        Integer parsedBonusNumber = 0;
+        int parsedBonusNumber;
 
         try {
-            Integer.parseInt(bonusNumber);
+            parsedBonusNumber = Integer.parseInt(bonusNumber);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_NUMERIC_ERROR.getMessage());
         }

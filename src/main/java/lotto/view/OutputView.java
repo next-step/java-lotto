@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoGame;
 import lotto.domain.LottoRank;
 import lotto.service.PrizeCalculator;
 
@@ -21,21 +20,14 @@ public class OutputView {
         System.out.println(stringBuilder);
     }
 
-    // TODO: 당첨 갯수, 상금 -> enum
     public static void showResult(Map<LottoRank, Long> result) {
-        System.out.println();
-        System.out.println("당첨 통계");
-        System.out.println("-----------");
-
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (int i = LottoGame.MINIMUM_REWARD_MATCH; i <= LottoGame.MAXIMUM_REWARD_MATCH; i++) {
-            stringBuilder
-                    .append(i).append("개 일치 (")
-                    .append(LottoRank.getLottoRank(i).getPrize()).append("원)- ")
-                    .append(result.get(LottoRank.getLottoRank(i)) != null ? result.get(LottoRank.getLottoRank(i)) : 0).append("개")
-                    .append("\n");
-        }
+        stringBuilder.append("\n당첨 통계\n-----------\n");
+
+        Arrays.stream(LottoRank.values())
+                .filter(rank -> rank != LottoRank.LOSE)
+                        .forEach(rank -> stringBuilder.append(rank.getMessage()).append(result.getOrDefault(rank, 0L)).append("개").append("\n"));
         System.out.println(stringBuilder);
     }
 

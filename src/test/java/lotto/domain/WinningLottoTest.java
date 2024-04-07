@@ -42,11 +42,25 @@ class WinningLottoTest {
     }
 
     @Test
+    @DisplayName("당첨번호 가져오기 테스트")
+    public void getWinningNumbersTest() {
+        assertThatThrownBy(() -> WinningLotto.getWinningNumbers("3, 42, 29, 17, 23, 34"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_NUMERIC_ERROR.getMessage());
+    }
+
+    @Test
     @DisplayName("당첨 로또 초기화 - Numeric String 예외 테스트")
     public void initializeWinningLottoNumericStringErrorTest() {
         assertThatThrownBy(() -> WinningLotto.getWinningNumbers("3, 42, 29, 17, 이십삼, 34"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_NUMERIC_ERROR.getMessage());
+    }
+
+    @Test
+    @DisplayName("당첨 로또 초기화 - BonusNumber 가져오기 테스트")
+    public void getWinningLottoBonusNumberTest() {
+        assertThat(WinningLotto.getBonusNumber("5")).isEqualTo(5);
     }
 
     @Test
