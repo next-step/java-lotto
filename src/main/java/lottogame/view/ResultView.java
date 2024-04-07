@@ -72,7 +72,7 @@ public class ResultView {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (LottoNumber number : lottos.getLottoNumbers()) {
-            stringBuilder.append(number.getValue()).append(", ");
+            stringBuilder.append(number.getLottoNumber()).append(", ");
         }
         System.out.println("["+stringBuilder.toString().replaceAll(", $", "")+"]");
     }

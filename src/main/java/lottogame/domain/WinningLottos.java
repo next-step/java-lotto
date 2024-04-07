@@ -7,7 +7,7 @@ public class WinningLottos {
 
     public WinningLottos(Numbers numbers, int bonusNumber) {
         this.lottos = LottoFactory.createLotto(numbers);
-        this.bonusNumber =  new LottoNumber(bonusNumber);
+        this.bonusNumber =  new LottoNumber(Number.from(bonusNumber));
     }
 
     public Rank checkRank(Lottos lottos) {
