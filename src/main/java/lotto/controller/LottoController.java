@@ -5,17 +5,19 @@ import lotto.utils.StringUtils;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoController {
     public static void startLotto() {
         int money = getMoney();
         int passiveCount = getPassiveCount();
         int totalCount = getTotalCount(money, passiveCount);
-        Lottos lottos = getLottos(totalCount, passiveCount);
+        int autoCount = totalCount - passiveCount;
+        Lottos lottos = LottoGenerator
+                .createLottos(InputView.inputPassiveLottoNumbers(passiveCount), autoCount);
 
-        ResultView.printPassiveAndAutoCount(passiveCount, totalCount - passiveCount);
+        ResultView.printPassiveAndAutoCount(passiveCount, autoCount);
         ResultView.printLotto(lottos);
 
         List<Integer> winNumbers = getWinNumbers();
@@ -23,7 +25,7 @@ public class LottoController {
 
         proceedMatch(lottos, winNumbers, bonus);
 
-        HashMap<Rank, Integer> matchResult = Rank.getMatchResult();
+        Map<Rank, Integer> matchResult = Rank.getMatchResult();
         ResultView.printResult(matchResult, getRevenue(money, matchResult));
     }
 
@@ -37,11 +39,6 @@ public class LottoController {
 
     private static int getTotalCount(int money, int passiveCount) {
         return new LottoShop(money).calculateTotalPurchaseCount(passiveCount);
-    }
-
-    private static Lottos getLottos(int totalCount, int passiveCount) {
-        return LottoGenerator
-                .createLottos(InputView.inputPassiveLottoNumbers(passiveCount), totalCount-passiveCount);
     }
 
     private static List<Integer> getWinNumbers() {
@@ -58,7 +55,7 @@ public class LottoController {
         }
     }
 
-    private static double getRevenue(int money, HashMap<Rank, Integer> matchResult) {
+    private static double getRevenue(int money, Map<Rank, Integer> matchResult) {
         LottoRevenue lottoRevenue = new LottoRevenue();
         return lottoRevenue.calculateRevenue(money, lottoRevenue.revenueTotal(matchResult));
     }
