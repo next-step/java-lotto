@@ -1,7 +1,11 @@
 package lotto.domain;
 
+import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum Rank {
     NONE(0, 0),
@@ -12,15 +16,15 @@ public enum Rank {
     FIRST(6, 2_000_000_000),
     ;
 
-    private int matchCount;
-    private int prize;
-    private static final HashMap<Rank, Integer> matchResult = new HashMap<>() {{
-        put(Rank.FIRST, 0);
-        put(Rank.SECOND, 0);
-        put(Rank.THIRD, 0);
-        put(Rank.FOURTH, 0);
-        put(Rank.FIFTH, 0);
-    }};
+    private final int matchCount;
+    private final int prize;
+    private static final Map<Rank, Integer> matchResult = Stream.of(new Object[][] {
+            {Rank.FIRST, 0},
+            {Rank.SECOND, 0},
+            {Rank.THIRD, 0},
+            {Rank.FOURTH, 0},
+            {Rank.FIFTH, 0}
+    }).collect(Collectors.toMap(item -> (Rank)item[0], item -> (Integer)item[1]));
 
     Rank(int matchCount, int prize) {
         this.matchCount = matchCount;
@@ -60,7 +64,7 @@ public enum Rank {
         matchResult.put(rank, matchResult.getOrDefault(rank, 0) + 1);
     }
 
-    public static HashMap<Rank, Integer> getMatchResult() {
+    public static Map<Rank, Integer> getMatchResult() {
         return matchResult;
     }
 
