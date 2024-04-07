@@ -22,11 +22,11 @@ public enum Price {
         return budget / value;
     }
 
-    public boolean isSmaller(int budget) {
-        return value < budget;
+    public boolean isEnough(int budget) {
+        return value <= budget;
     }
 
-    public boolean isSmaller(int budget, int count) {
-        return value * count < budget;
+    public boolean isEnough(int budget, int count) {
+        return value * count <= budget;
     }
 }

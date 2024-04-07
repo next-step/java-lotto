@@ -19,11 +19,11 @@ public class Budget{
     }
 
     public boolean isEnoughToPay(Price price) {
-        return price.isSmaller(budget);
+        return price.isEnough(budget);
     }
 
     public boolean isEnoughToPay(Price price, int count) {
-        return price.isSmaller(budget, count);
+        return price.isEnough(budget, count);
     }
 
     public Budget spend(Price price) {
