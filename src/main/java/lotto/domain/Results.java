@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 
 public class Results {
@@ -15,12 +16,8 @@ public class Results {
     }
 
     private void initializeResults() {
-        result.put(Rank.FIRST, 0);
-        result.put(Rank.SECOND, 0);
-        result.put(Rank.THIRD, 0);
-        result.put(Rank.FOURTH, 0);
-        result.put(Rank.FIFTH, 0);
-        result.put(Rank.MISS, 0);
+        Arrays.stream(Rank.values())
+                .forEach(rank -> result.put(rank, 0));
     }
 
     public EnumMap<Rank, Integer> of() {
