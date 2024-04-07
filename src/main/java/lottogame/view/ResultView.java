@@ -54,8 +54,7 @@ public class ResultView {
     }
 
     private static void printRanks(Map<Rank, Integer> result) {
-        List<Rank> ranks = Rank.getRanks();
-        for (Rank rank : ranks) {
+        for (Rank rank : Rank.getRanks()) {
             String format = selectFormat(rank);
             System.out.println(String.format(format, rank.getNumOfWinnings(), rank.getPrize(),
                     result.getOrDefault(rank, 0)));
@@ -70,10 +69,9 @@ public class ResultView {
     }
 
     private static void printLottos(Lottos lottos) {
-        List<LottoNumber> numbers = lottos.getLottoNumbers();
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (LottoNumber number : numbers) {
+        for (LottoNumber number : lottos.getLottoNumbers()) {
             stringBuilder.append(number.getValue()).append(", ");
         }
         System.out.println("["+stringBuilder.toString().replaceAll(", $", "")+"]");
