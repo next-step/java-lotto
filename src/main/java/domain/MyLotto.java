@@ -11,7 +11,7 @@ public class MyLotto {
         this.lottos = new ArrayList<>();
     }
 
-    public void add(List<Integer> nowLotto) {
+    public void add(List<LottoBall> nowLotto) {
         this.lottos.add(new Lotto(nowLotto));
     }
 
