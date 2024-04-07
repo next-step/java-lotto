@@ -2,22 +2,15 @@ package lotto.domain;
 
 public class Bonus {
 
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
     public Bonus(int bonusNumber, Lotto winningLotto) {
-        validateNumber(bonusNumber);
         validateDuplicate(bonusNumber, winningLotto);
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public int getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         return bonusNumber;
-    }
-
-    private void validateNumber(int bonusNumber) {
-        if (bonusNumber < 1 || bonusNumber > 45) {
-            throw new IllegalArgumentException("보너스 번호는 1부터 45사이여야 합니다.");
-        }
     }
 
     private void validateDuplicate(int bonusNumber, Lotto winningLotto) {

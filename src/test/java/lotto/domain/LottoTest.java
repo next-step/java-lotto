@@ -32,10 +32,4 @@ class LottoTest {
         assertThrows(IllegalArgumentException.class, () -> new Lotto(lottoNumbers));
     }
 
-    @DisplayName("로또 번호가 1보다 작거나 45보다 크면 예외가 발생한다")
-    @Test
-    void range_exception_test() {
-        Set<Integer> lottoNumbers = new HashSet<>(Set.of(-1, 2, 65, 78, 20, 30));
-        assertThrows(IllegalArgumentException.class, () -> new Lotto(lottoNumbers));
-    }
 }

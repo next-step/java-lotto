@@ -80,8 +80,8 @@ public enum Rank {
 
 
 ### 2차 TODO LIST
-- [ ] `LottoNumber` 로또 번호 객체 생성
-- [ ] Set<Integer> -> Set<LottoNumber>로 수정
+- [x] `LottoNumber` 로또 번호 객체 생성
+- [x] Set<Integer> -> Set<LottoNumber>로 수정
 - [x] Lotto 주 생성자를 호출하도록 수정
 - [ ] Rank 반복문 indent 줄이기
 - [ ] Results에서 enum클래스 values 메소드 사용하여 Map 생성부 수정 
