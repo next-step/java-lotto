@@ -1,43 +1,43 @@
 package lottogame.domain;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class WinningLottos {
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Lottos lottos;
     private final LottoNumber bonusNumber;
 
-    public WinningLottos(List<Integer> numbers,int bonusNumber) {
-        this.lottoNumbers = createLottoNumbers(numbers);
+    private WinningLottos(Numbers numbers, Number bonusNumber) {
+        this.lottos = Lottos.from(numbers);
         this.bonusNumber =  new LottoNumber(bonusNumber);
+    }
+
+    public static WinningLottos of(Numbers numbers, Number bonusNumber) {
+        validate(numbers, bonusNumber);
+        return new WinningLottos(numbers, bonusNumber);
     }
 
     public Rank checkRank(Lottos lottos) {
         return Rank.find(match(lottos), matchBonusNumber(lottos));
     }
 
-    public Number checkPrize(Lottos lottos) {
+    public Number calculatePrize(Lottos lottos) {
         return Number.from(Rank.findPrize(match(lottos), matchBonusNumber(lottos)));
+    }
+
+    public int size() {
+        return lottos.size();
     }
 
     private boolean matchBonusNumber(Lottos lottos) {
         return lottos.match(bonusNumber);
     }
 
-    public int size() {
-        return lottoNumbers.size();
+    private static void validate(Numbers numbers, Number number) {
+        if (numbers.contains(number)) {
+            throw new IllegalArgumentException("로또 번호와 보너스 번호는 중복 될수 없습니다.");
+        }
     }
 
-    private List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toUnmodifiableList());
-    }
-
-    private int match(Lottos lotto) {
-        return (int) lottoNumbers.stream()
-                .filter(lotto::match)
-                .count();
+    private int match(Lottos lottos) {
+        return this.lottos.match(lottos);
     }
 }

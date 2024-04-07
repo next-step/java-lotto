@@ -16,6 +16,10 @@ public class Money {
         return new Money(value);
     }
 
+    public static Money fromNumber(Number number) {
+        return new Money(Double.from(number.intValue()));
+    }
+
     public Money multiply(Number from) {
         return from(value.multiply(from));
     }
@@ -32,7 +36,39 @@ public class Money {
         return value.toInt();
     }
 
-    public double toTwoDecimal() {
-        return value.toTwoDecimal();
+    public int divideToInt(Money from) {
+        return divide(from).toInt();
+    }
+
+    public Double divideToDouble(Money money) {
+        return divide(money).toDouble();
+    }
+
+    public Double toDouble() {
+        return value;
+    }
+
+
+    public boolean isLessThan(Money price) {
+        return value.isLessThan(price.value);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+
+        Money money = (Money) object;
+
+        return value.equals(money.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return value != null ? value.hashCode() : 0;
     }
 }

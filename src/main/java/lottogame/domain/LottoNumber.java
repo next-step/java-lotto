@@ -2,14 +2,15 @@ package lottogame.domain;
 
 public final class LottoNumber {
 
-    private final int value;
+    private final Number value;
 
-    public LottoNumber(final int value) {
+
+    public LottoNumber(final Number value) {
         this.value = value;
     }
 
-    public int getValue() {
-        return value;
+    public int getLottoNumber() {
+        return value.intValue();
     }
 
     @Override
@@ -21,11 +22,11 @@ public final class LottoNumber {
             return false;
         }
         LottoNumber that = (LottoNumber) object;
-        return value == that.value;
+        return value.intValue() == that.value.intValue();
     }
 
     @Override
     public int hashCode() {
-        return value;
+        return value.intValue();
     }
 }
