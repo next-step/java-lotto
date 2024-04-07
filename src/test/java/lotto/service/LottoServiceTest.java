@@ -1,14 +1,9 @@
 package lotto.service;
 
-import lotto.domain.LottoNumber;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.domain.LottoFee.validateManualGameCount;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoServiceTest {
 
@@ -17,7 +12,7 @@ class LottoServiceTest {
     void validateManualGameCountTest() {
         int manualCount = 5;
         int totalCount = 4;
-        assertThatThrownBy(() -> validateManualGameCount(manualCount, totalCount))
+        assertThatThrownBy(() -> LottoService.validateManualGameCount(manualCount, totalCount))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
