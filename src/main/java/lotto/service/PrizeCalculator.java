@@ -13,8 +13,8 @@ public class PrizeCalculator {
     public static Long getPrize(Map<LottoRank, Long> result) {
         long wholePrize = 0L;
 
-        for (LottoRank lottoRank: result.keySet()) {
-            wholePrize += lottoRank.getPrize() * result.get(lottoRank);
+        for (Map.Entry<LottoRank, Long> entry: result.entrySet()) {
+            wholePrize += entry.getKey().getPrize() * entry.getValue();
         }
 
         return wholePrize;
