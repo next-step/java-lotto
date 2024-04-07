@@ -27,9 +27,27 @@ public class OutputView {
 
         Arrays.stream(LottoRank.values())
                 .filter(rank -> rank != LottoRank.LOSE)
-                        .forEach(rank -> stringBuilder.append(rank.getMessage()).append(result.getOrDefault(rank, 0L)).append("개").append("\n"));
+                        .forEach(rank -> stringBuilder.append(getResultMessage(rank)).append(result.getOrDefault(rank, 0L)).append("개").append("\n"));
         System.out.println(stringBuilder);
     }
+
+    private static String getResultMessage(LottoRank lottoRank) {
+        switch (lottoRank) {
+            case FOURTH:
+                return "3개 일치 (5000원)-";
+            case THIRD:
+                return "4개 일치 (50000원)-";
+            case SECOND:
+                return "5개 일치 (1500000원)-";
+            case SECOND_BONUS:
+                return "5개 일치, 보너스 볼 일치(30000000원)-";
+            case FIRST:
+                return "6개 일치 (2000000000원)-";
+        }
+
+        return null;
+    }
+
 
     public static void showROR(Map<LottoRank, Long> result, int purchaseAmount) {
         System.out.println("총 수익률은 " + (double) PrizeCalculator.getPrize(result) / purchaseAmount + "입니다.");
