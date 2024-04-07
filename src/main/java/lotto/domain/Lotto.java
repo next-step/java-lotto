@@ -1,10 +1,9 @@
 package lotto.domain;
 
-import lotto.constant.Constants;
-
 import java.util.*;
 
 public class Lotto {
+    public static final int LOTTO_SIZE = 6;
     private final Set<LottoNumber> lotto;
 
     private static List<Integer> toIntegerList(String[] textLottoNumbers) {
@@ -41,13 +40,13 @@ public class Lotto {
     }
 
     private void checkLottoSize(List<Integer> lotto) {
-        if (lotto.size() != Constants.LOTTO_SIZE) {
+        if (lotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 개수는 6개여야 합니다.");
         }
     }
 
     private void checkDuplicate(Set<LottoNumber> lotto) {
-        if (lotto.size() != Constants.LOTTO_SIZE) {
+        if (lotto.size() < LOTTO_SIZE) {
             throw new IllegalArgumentException("로또에 중복 숫자가 있습니다.");
         }
     }

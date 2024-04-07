@@ -5,6 +5,7 @@ import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class ResultView {
     public static void printPassiveAndAutoCount(int passive, int auto) {
@@ -18,7 +19,7 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printResult(HashMap<Rank, Integer> matchResult, double revenue) {
+    public static void printResult(Map<Rank, Integer> matchResult, double revenue) {
         System.out.println("당첨 통계\n" + "-".repeat(9));
         for (Rank rank : Rank.values()) {
             exceptNone(rank, matchResult);
@@ -26,7 +27,7 @@ public class ResultView {
         System.out.println("총 수익률은 " + revenue + "입니다.");
     }
 
-    private static void exceptNone(Rank rank, HashMap<Rank, Integer> matchResult) {
+    private static void exceptNone(Rank rank, Map<Rank, Integer> matchResult) {
         if (rank != Rank.NONE)
             System.out.println(rank.getMatchCount() + "개 일치" + printBonusResult(rank) + "(" + rank.getPrize() + ") - " + matchResult.get(rank) + "개");
     }
