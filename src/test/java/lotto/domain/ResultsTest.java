@@ -16,10 +16,11 @@ class ResultsTest {
     @DisplayName("보너스 당첨된 로또가 없는, 로또 당첨 갯수 세기")
     @ParameterizedTest
     @MethodSource("generateData")
-    void count_matching_lottos_test(Lottos lottos, Lotto winningLotto) {
+    void count_matching_lottos_test(Lottos lottos) {
         Results result = new Results();
         int notMatchedBonus = 5;
-        result.countMatchingLottos(lottos, winningLotto, new Bonus(notMatchedBonus, winningLotto));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 44, 45)), new LottoNumber(notMatchedBonus));
+        result.countMatchingLottos(lottos, winningLotto);
 
         assertEquals(6, result.of().size());
         assertEquals(1, result.of().get(Rank.MISS));
@@ -33,10 +34,12 @@ class ResultsTest {
     @DisplayName("보너스 당첨이 있는 경우, 로또 당첨 갯수 세기")
     @ParameterizedTest
     @MethodSource("generateData")
-    void count_matching_bonus_lottos_test(Lottos lottos, Lotto winningLotto) {
+    void count_matching_bonus_lottos_test(Lottos lottos) {
         Results result = new Results();
+
         int matchedBonus = 23;
-        result.countMatchingLottos(lottos, winningLotto, new Bonus(matchedBonus, winningLotto));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(Set.of(1, 2, 3, 4, 44, 45)), new LottoNumber(matchedBonus));
+        result.countMatchingLottos(lottos, winningLotto);
 
         assertEquals(6, result.of().size());
         assertEquals(1, result.of().get(Rank.MISS));
@@ -54,9 +57,8 @@ class ResultsTest {
         Lotto lotto4 = new Lotto(Set.of(1, 2, 3, 4, 44, 23));  // 5
         Lotto lotto5 = new Lotto(Set.of(21, 22, 23, 24, 25, 26));  // 0
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3, lotto4, lotto5));
-        Lotto winningNo = new Lotto(Set.of(1, 2, 3, 4, 44, 45));
         return Stream.of(
-                Arguments.of(lottos, winningNo)
+                Arguments.of(lottos)
         );
     }
 

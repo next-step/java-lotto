@@ -85,5 +85,5 @@ public enum Rank {
 - [x] Lotto 주 생성자를 호출하도록 수정
 - [x] Rank 반복문 indent 줄이기
 - [x] Results에서 enum클래스 values 메소드 사용하여 Map 생성부 수정 
-- [ ] BonusTest 6개의 숫자와 보너스볼을 상태로 가지는 객체를 도출하도록 수정
+- [x] WinningLotto 6개의 숫자와 보너스볼을 상태로 가지는 객체를 도출하도록
 - [x] RankTest DisplayName을 도메인 용어로 수정

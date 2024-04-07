@@ -21,14 +21,14 @@ public class LottoApplication {
         resultView.printLottos(lottos);
 
         // 당첨번호를 입력 받는다.
-        Lotto winningLotto = inputView.winningNo(inputView.getWinningNoInput());
+        Lotto winningNumber = inputView.winningNo(inputView.getWinningNoInput());
 
         // 보너스 번호를 입력 받는다.
-        Bonus bonusNumber = inputView.bonusNumber(inputView.getBonusNumberInput(), winningLotto);
+        WinningLotto winningLotto = inputView.bonusNumber(inputView.getBonusNumberInput(), winningNumber);
 
         // 당첨 결과를 정산한다.
         Results results = new Results();
-        results.countMatchingLottos(lottos, winningLotto, bonusNumber);
+        results.countMatchingLottos(lottos, winningLotto);
 
         // 수익률을 계산한다.
         Profit profit = new Profit(results, lottos);
