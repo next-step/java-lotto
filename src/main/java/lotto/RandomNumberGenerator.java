@@ -3,6 +3,8 @@ package lotto;
 import static lotto.Lotto.LOTTO_NUMBERS_LIMIT;
 import static lotto.LottoNumber.MAXIMUM_NUMBER;
 import static lotto.LottoNumber.MINIMUM_NUMBER;
+import static lotto.LottoType.AUTO;
+import static lotto.LottoType.MANUAL;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,7 +25,9 @@ public class RandomNumberGenerator implements NumberGenerator {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = ZERO; i < count; i++) {
             Collections.shuffle(shuffle);
-            lottos.add( Lotto.of(new ArrayList<>(shuffle.subList(ZERO, LOTTO_NUMBERS_LIMIT))));
+            lottos.add(
+                Lotto.of(AUTO,new ArrayList<>(shuffle.subList(ZERO, LOTTO_NUMBERS_LIMIT)))
+            );
         }
         return Lottos.of(lottos);
     }
