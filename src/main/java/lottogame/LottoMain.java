@@ -1,7 +1,6 @@
 package lottogame;
 
 import lottogame.domain.LottosBundle;
-import lottogame.domain.Money;
 import lottogame.domain.Number;
 import lottogame.domain.WinningLottos;
 import lottogame.view.InputView;
