@@ -44,9 +44,7 @@ class WinningLottoTest {
     @Test
     @DisplayName("당첨번호 가져오기 테스트")
     public void getWinningNumbersTest() {
-        assertThatThrownBy(() -> WinningLotto.getWinningNumbers("3, 42, 29, 17, 23, 34"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_NUMERIC_ERROR.getMessage());
+        assertThat(WinningLotto.getWinningNumbers("3, 42, 29, 17, 23, 34")).isEqualTo(Arrays.asList(3, 42, 29, 17, 23, 34));
     }
 
     @Test
