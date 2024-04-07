@@ -1,6 +1,5 @@
 package lottogame.view;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,8 +21,6 @@ public class ResultView {
     }
 
     public static void printLottos(LottosBundle lottosBundle) {
-        List<Lottos> multipleLottos = lottosBundle.getMultipleLottos();
-        multipleLottos = new ArrayList<>();
         lottosBundle.getMultipleLottos()
                 .forEach(ResultView::printLottos);
 

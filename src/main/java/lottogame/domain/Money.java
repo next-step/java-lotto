@@ -36,10 +36,6 @@ public class Money {
         return value.toInt();
     }
 
-    public double toTwoDecimal() {
-        return value.toTwoDecimal();
-    }
-
     public Double toDouble() {
         return value;
     }
