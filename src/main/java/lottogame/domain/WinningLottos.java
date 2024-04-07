@@ -5,9 +5,13 @@ public class WinningLottos {
     private final Lottos lottos;
     private final LottoNumber bonusNumber;
 
-    public WinningLottos(Numbers numbers, int bonusNumber) {
-        this.lottos = LottoFactory.createLotto(numbers);
-        this.bonusNumber =  new LottoNumber(Number.from(bonusNumber));
+    private WinningLottos(Numbers numbers, Number bonusNumber) {
+        this.lottos = Lottos.from(numbers);
+        this.bonusNumber =  new LottoNumber(bonusNumber);
+    }
+
+    public static WinningLottos of(Numbers numbers, Number bonusNumber) {
+        return new WinningLottos(numbers, bonusNumber);
     }
 
     public Rank checkRank(Lottos lottos) {

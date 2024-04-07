@@ -14,7 +14,7 @@ public class WinningLottosTest {
     @Test
     void 생성() {
         Numbers numbers = Numbers.fromIntegers(List.of(1,2,3,4,5,6));
-        WinningLottos winningLotto = LottoFactory.createWinningLotto(numbers,  7);
+        WinningLottos winningLotto = WinningLottos.of(numbers,  Number.from(7));
         int expected = 6;
 
         assertThat(winningLotto.size()).isEqualTo(expected);
@@ -24,7 +24,7 @@ public class WinningLottosTest {
     @MethodSource("lottoAndRank")
     void 로또_당첨(Lottos lottos, Rank rank) {
         Numbers numbers = Numbers.fromIntegers(List.of(1,4,5,6,7,8));
-        WinningLottos winnerLotto = new WinningLottos(numbers, 9);
+        WinningLottos winnerLotto = WinningLottos.of(numbers, Number.from(9));
 
         assertThat(winnerLotto.checkRank(lottos)).isEqualTo(rank);
     }
@@ -33,7 +33,7 @@ public class WinningLottosTest {
     @MethodSource("lottoAndPrize")
     void 로또_당첨_금액(Lottos lottos, Number prize) {
         Numbers numbers = Numbers.fromIntegers(List.of(1,4,5,6,7,8));
-        WinningLottos winnerLotto = new WinningLottos(numbers, 9);
+        WinningLottos winnerLotto = WinningLottos.of(numbers, Number.from(9));
         assertThat(winnerLotto.calculatePrize(lottos)).isEqualTo(prize);
     }
 

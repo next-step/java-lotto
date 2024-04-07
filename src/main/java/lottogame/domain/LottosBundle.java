@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 public class LottosBundle {
 
+    private static final Money price = Money.from(1_000);
+
     private final List<Lottos> multipleLottos;
 
     private LottosBundle(List<Lottos> multipleLottos) {
@@ -21,6 +23,25 @@ public class LottosBundle {
                                                 .map(Lottos::from)
                                                 .collect(Collectors.toUnmodifiableList());
         return new LottosBundle(mulitpleLottos);
+    }
+
+    public static LottosBundle autoFrom(Number count) {
+        List<Lottos> multipleLottos = new ArrayList<>();
+
+        while (count.isPositive()) {
+            multipleLottos.add(Lottos.from());
+            count = count.decrease();
+        }
+
+        return from(multipleLottos);
+    }
+
+    public static LottosBundle manualFrom(List<Numbers> numbers) {
+        return fromNumbers(numbers);
+    }
+
+    public static Number calculateCountOfLottos(Money money) {
+        return Number.from(money.divideToInt(price));
     }
 
     public LottosBundle merge(LottosBundle multipleLottos) {
@@ -43,20 +64,20 @@ public class LottosBundle {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public Money calculatePurchaseAmount(Money lottoPrice) {
+    public Rate calculateReturnOfRate(WinningLottos winnerLotto) {
+        Money purchaseAmount = calculatePurchaseAmount(price);
+        Money sumOfPrize = calculateSumOfPrize(winnerLotto);
+        return Rate.fromDouble(sumOfPrize.divide(purchaseAmount).toDouble());
+    }
+
+    private Money calculatePurchaseAmount(Money lottoPrice) {
         return lottoPrice.multiply(Number.from(size()));
     }
 
-    public Money calculateSumOfPrize(WinningLottos winnerLotto) {
+    private Money calculateSumOfPrize(WinningLottos winnerLotto) {
         Number purchaseAmount = multipleLottos.stream()
                 .map(winnerLotto::calculatePrize)
                 .reduce(Number.from(0), Number::add);
         return Money.fromNumber(purchaseAmount);
-    }
-
-    public Rate calculateReturnOfRate(WinningLottos winnerLotto, Money price) {
-        Money purchaseAmount = calculatePurchaseAmount(price);
-        Money sumOfPrize = calculateSumOfPrize(winnerLotto);
-        return Rate.fromDouble(sumOfPrize.divide(purchaseAmount).toDouble());
     }
 }

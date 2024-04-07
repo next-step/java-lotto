@@ -26,29 +26,28 @@ class LottosBundleTest {
     }
 
     @Test
-    void 로또_총_구매_금액() {
-        LottosBundle lottosBundle = LottosBundle.fromNumbers(
-                List.of(
-                    Numbers.fromIntegers(List.of(8, 21, 23, 41, 42, 43)),
-                    Numbers.fromIntegers(List.of(3, 5, 11, 16, 32, 38))
-                ));
-        Money lottoPrice = Money.from(1000);
-        Money expected = Money.from(2000);
+    void 수익률() {
+        WinningLottos winnerLotto = WinningLottos.of(Numbers.fromIntegers(List.of(1,2,3,4,5,6)), Number.from(42));
+        List<Numbers> numbers = List.of(
+                Numbers.fromIntegers(List.of(8, 21, 23, 41, 42, 43)),
+                Numbers.fromIntegers(List.of(3, 5, 11, 16, 32, 38)),
+                Numbers.fromIntegers(List.of(7, 11, 16, 35, 36, 44)),
+                Numbers.fromIntegers(List.of(13, 14, 16, 38, 42, 45)),
+                Numbers.fromIntegers(List.of(1, 8, 11, 31, 41, 42)),
+                Numbers.fromIntegers(List.of(7, 11, 30, 40, 42, 43)),
+                Numbers.fromIntegers(List.of(2, 13, 22, 32, 38, 45)),
+                Numbers.fromIntegers(List.of(1, 3, 5, 14, 22, 45)),
+                Numbers.fromIntegers(List.of(2, 8, 9, 18, 19, 21)),
+                Numbers.fromIntegers(List.of(23, 25, 33, 36, 39, 41)),
+                Numbers.fromIntegers(List.of(5, 9, 38, 41, 43, 44)),
+                Numbers.fromIntegers(List.of(13, 14, 18, 21, 23, 35)),
+                Numbers.fromIntegers(List.of(17, 21, 29, 37, 42, 45)),
+                Numbers.fromIntegers(List.of(3, 8, 27, 30, 35, 44))
+        );
+        LottosBundle lottosBundle = LottosBundle.fromNumbers(numbers);
 
-        assertThat(lottosBundle.calculatePurchaseAmount(lottoPrice)).isEqualTo(expected);
-    }
+        double expected = 0.35;
 
-    @Test
-    void 로또_총_수익() {
-        LottosBundle lottosBundle = LottosBundle.fromNumbers(
-                List.of(
-                        Numbers.fromIntegers(List.of(1,2,3,4,5,7)),
-                        Numbers.fromIntegers(List.of(1,2,3,4,7,8))
-                ));
-        Money expected = Money.from(30_050_000);
-        WinningLottos winningLottos = LottoFactory.createWinningLotto(
-                Numbers.fromIntegers(List.of(1, 2, 3, 4, 5, 6)), 7);
-
-        assertThat(lottosBundle.calculateSumOfPrize(winningLottos)).isEqualTo(expected);
+        assertThat(lottosBundle.calculateReturnOfRate(winnerLotto).toTwoDecimal()).isEqualTo(expected);
     }
 }
