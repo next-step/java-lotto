@@ -14,12 +14,6 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static void winningNumberStringArrayToWinningNumber (String[] winningNumberStringArray, List<Integer> winningNumber) {
-        for (String number : winningNumberStringArray) {
-            winningNumber.add(Integer.valueOf(number));
-        }
-    }
-
     public static List<Integer> winningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해주세요. (ex) 3, 41, 29, 38, 11, 6");
 
@@ -35,5 +29,11 @@ public class InputView {
         }
 
         return winningNumber;
+    }
+
+    public static void winningNumberStringArrayToWinningNumber (String[] winningNumberStringArray, List<Integer> winningNumber) {
+        for (String number : winningNumberStringArray) {
+            winningNumber.add(Integer.valueOf(number));
+        }
     }
 }

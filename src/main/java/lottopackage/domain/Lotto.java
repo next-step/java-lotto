@@ -11,9 +11,9 @@ public class Lotto {
 
     /* Variables */
     private final static int PRICE = 1000;
-    public static List<Integer> lotteryBalls = new ArrayList<>(
+    private final static List<Integer> lotteryBalls = new ArrayList<>(
             Arrays.stream(IntStream.rangeClosed(1, 45).toArray()).boxed().collect(Collectors.toList()));
-    List<Integer> lotto;
+    private final List<Integer> lotto;
 
 
     /* Constructor */
@@ -44,10 +44,9 @@ public class Lotto {
         return (int) purchaseAmount / PRICE;
     }
 
-    public static void isLottoNumberValid(int lottoNumber) {
-        if (!lotteryBalls.contains(lottoNumber)) {
-            throw new IllegalArgumentException("로또 숫자는 1~45 안에 있어야 합니다.");
-        }
+    public Prize isPrize(List<Integer> winningNumber) {
+        isLottoValid(winningNumber);
+        return Prize.isPrize(lotto, winningNumber);
     }
 
     public static void isLottoValid(List<Integer> lotto) {
@@ -59,9 +58,10 @@ public class Lotto {
         }
     }
 
-    public Prize isPrize(List<Integer> winningNumber) {
-        isLottoValid(winningNumber);
-        return Prize.isPrize(lotto, winningNumber);
+    public static void isLottoNumberValid(int lottoNumber) {
+        if (!lotteryBalls.contains(lottoNumber)) {
+            throw new IllegalArgumentException("로또 숫자는 1~45 안에 있어야 합니다.");
+        }
     }
 }
 

@@ -10,13 +10,6 @@ import java.util.List;
 
 public class LottoMachine {
     /* Method */
-    private static int numOfLotto() {
-        int purchaseAmount = InputView.purchaseAmount();
-        int numOfLotto = Lotto.purchaseLotto(purchaseAmount);
-        OutputView.printNumOfLotto(numOfLotto);
-        return numOfLotto;
-    }
-
     public static void lottoMachine() {
         int numOfLotto = numOfLotto();
         LottoGroup lottoGroup = new LottoGroup(numOfLotto);
@@ -25,5 +18,12 @@ public class LottoMachine {
         List<Integer> winningNumber = InputView.winningNumber();
         List<Prize> lottoResult = lottoGroup.isWinning(winningNumber);
         OutputView.printLottoResult(lottoResult, lottoGroup.getLottoGroup().size());
+    }
+
+    private static int numOfLotto() {
+        int purchaseAmount = InputView.purchaseAmount();
+        int numOfLotto = Lotto.purchaseLotto(purchaseAmount);
+        OutputView.printNumOfLotto(numOfLotto);
+        return numOfLotto;
     }
 }

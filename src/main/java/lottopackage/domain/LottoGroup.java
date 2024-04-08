@@ -26,9 +26,9 @@ public class LottoGroup {
     /* Method */
     public List<Prize> isWinning(List<Integer> winningNumber) {
         List<Prize> lottoResult = new ArrayList<>();
-        for (int i = 0; i < lottoGroup.size(); i++ ) {
+        for (int i = 0; i < lottoGroup.size(); i++) {
             Lotto lotto = lottoGroup.get(i);
-            lottoResult.add( lotto.isPrize(winningNumber) );
+            lottoResult.add(lotto.isPrize(winningNumber));
         }
         return lottoResult;
     }
