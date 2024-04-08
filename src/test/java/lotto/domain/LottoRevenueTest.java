@@ -10,7 +10,7 @@ import java.util.HashMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoRevenueTest {
-    private static HashMap<Rank, Integer> result = new HashMap<>();
+    private static final HashMap<Rank, Integer> result = new HashMap<>();
 
     @BeforeEach
     void setUp() {
@@ -23,12 +23,13 @@ public class LottoRevenueTest {
 
     @Test
     void 총수익() {
-        assertThat(LottoRevenue.revenueTotal(result)).isEqualTo(2_031_555_000);
+        assertThat(new LottoRevenue().revenueTotal(result)).isEqualTo(2_031_555_000);
     }
 
     @Test
     void 수익률() {
         int money = 10000;
-        assertThat(LottoRevenue.calculateRevenue(money, LottoRevenue.revenueTotal(result))).isEqualTo(203_155.5);
+        LottoRevenue lottoRevenue = new LottoRevenue();
+        assertThat(lottoRevenue.calculateRevenue(money, lottoRevenue.revenueTotal(result))).isEqualTo(203_155.5);
     }
 }

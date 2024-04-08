@@ -1,15 +1,13 @@
 package lotto.domain;
 
-import lotto.constant.Constants;
-
 import java.util.HashMap;
 
 public class LottoNumber {
-    private int number;
-    private static HashMap<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    private static final HashMap<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    private final int number;
 
     static {
-        for (int num = Constants.MIN_LOTTO; num <= Constants.MAX_LOTTO; num++ ) {
+        for (int num = LottoBall.MIN_LOTTO; num <= LottoBall.MAX_LOTTO; num++ ) {
             lottoNumbers.put(num, new LottoNumber(num));
         }
     }

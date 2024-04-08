@@ -1,12 +1,20 @@
 package lotto.domain;
 
-import lotto.constant.Constants;
-
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lotto {
+    public static final int LOTTO_SIZE = 6;
     private final Set<LottoNumber> lotto;
+
+    private static List<Integer> toIntegerList(String[] textLottoNumbers) {
+        List<Integer> lotto = new ArrayList<>();
+
+        for (String textNumber : textLottoNumbers) {
+            lotto.add(Integer.parseInt(textNumber));
+        }
+
+        return lotto;
+    }
 
     private static Set<LottoNumber> toLottoNumber(List<Integer> lottoNumbers) {
         Set<LottoNumber> lotto = new HashSet<>();
@@ -18,24 +26,28 @@ public class Lotto {
         return lotto;
     }
 
+    public Lotto(String[] textNumbers) {
+        this(toIntegerList(textNumbers));
+    }
+
     public Lotto(List<Integer> numbers) {
         Set<LottoNumber> lottoNumbers = toLottoNumber(numbers);
 
-        checkLottoSize(lottoNumbers);
+        checkLottoSize(numbers);
         checkDuplicate(lottoNumbers);
 
         this.lotto = lottoNumbers;
     }
 
-    private void checkDuplicate(Set<LottoNumber> lotto) {
-        if (lotto.size() < Constants.LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또에 중복 숫자가 있습니다.");
+    private void checkLottoSize(List<Integer> lotto) {
+        if (lotto.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 개수는 6개여야 합니다.");
         }
     }
 
-    private void checkLottoSize(Set<LottoNumber> lotto) {
-        if (lotto.size() > Constants.LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 개수는 6개여야 합니다.");
+    private void checkDuplicate(Set<LottoNumber> lotto) {
+        if (lotto.size() < LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또에 중복 숫자가 있습니다.");
         }
     }
 
@@ -47,17 +59,14 @@ public class Lotto {
         int count = 0;
 
         for (LottoNumber number : userLotto.getLotto()) {
-            count += getContainsUserLottoNumber(lotto, number);
+            count += isContainsUserLottoNumber(lotto, number) ? 1 : 0;
         }
 
         return count;
     }
 
-    private int getContainsUserLottoNumber(Set<LottoNumber> lotto, LottoNumber number) {
-        if (lotto.contains(number)) {
-            return 1;
-        }
-        return 0;
+    private boolean isContainsUserLottoNumber(Set<LottoNumber> lotto, LottoNumber number) {
+        return lotto.contains(number);
     }
 
     public boolean isContainsBonus(LottoNumber bonusNumber) {
