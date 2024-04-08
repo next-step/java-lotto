@@ -3,36 +3,35 @@ package domain;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-public enum LottoResultOutput {
+public enum RankReward {
     RIGHT_3(3, 5_000, false),
     RIGHT_4(4, 50_000, false),
     RIGHT_5(5, 1_500_000, false),
-    BONUS_5(5, 30_000_000, true),
+    BONUS_5(6, 30_000_000, true),
     RIGHT_6(6, 2_000_000_000, false);
 
     private final int correctCount;
     private final int price;
     private final boolean isBonus;
-    private
-    LottoResultOutput(int correctCount, int price, boolean isBonus) {
+    private RankReward(int correctCount, int price, boolean isBonus) {
         this.correctCount = correctCount;
         this.price = price;
         this.isBonus = isBonus;
     }
 
-    public static LottoResultOutput valueOf(int countOfMatch, boolean matchBonus) {
+    public static RankReward valueOf(int countOfMatch, boolean matchBonus) {
         return Arrays.stream(values())
                 .filter(WinCount(countOfMatch))
                 .filter(isBonus(matchBonus))
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(() -> new IllegalArgumentException("잘못된 입력값 입니다"));
     }
 
-    private static Predicate<LottoResultOutput> isBonus(boolean matchBonus) {
-        return rank -> !rank.isBonus || rank.isBonus == matchBonus;
+    private static Predicate<RankReward> isBonus(boolean matchBonus) {
+        return rank -> rank.isBonus == matchBonus;
     }
 
-    private static Predicate<LottoResultOutput> WinCount(int countOfMatch) {
+    private static Predicate<RankReward> WinCount(int countOfMatch) {
         return rank -> rank.correctCount == countOfMatch;
     }
 

@@ -6,17 +6,11 @@ import java.util.List;
 
 public class LottoOutput {
     private final int BONUS_PRICE_INDEX = 3;
-    private final int BASIC_WIN_NUMBER_COUNT = 5;
+    private final int BASIC_WIN_NUMBER_COUNT = 6;
     private final int BONUS_BALL_INDEX = 6;
-    LottoResultOutput[] lottoResultOutput;
-    private void wordSetting() {
-        lottoResultOutput = new LottoResultOutput[5];
-        lottoResultOutput[0] = LottoResultOutput.RIGHT_3;
-        lottoResultOutput[1] = LottoResultOutput.RIGHT_4;
-        lottoResultOutput[2] = LottoResultOutput.RIGHT_5;
-        lottoResultOutput[3] = LottoResultOutput.BONUS_5;
-        lottoResultOutput[4] = LottoResultOutput.RIGHT_6;
-    }
+    private final int REWARD_SIZE = 5;
+
+    private RankReward rankReward;
 
     public void winNumber(Lotto lotto) {
         System.out.println();
@@ -39,16 +33,24 @@ public class LottoOutput {
     public int totalPrize(WinStatus winStatus) {
         List<Integer> resultWinStatus = winStatus.getWincount();
         int cnt = 0;
-        wordSetting();
         System.out.println("당첨 통계");
         System.out.println("--------");
-        for (int i = 0; i < BASIC_WIN_NUMBER_COUNT; i++) {
-            cnt += resultWinStatus.get(i);
-            if (BONUS_PRICE_INDEX == i) {
-                System.out.println(lottoResultOutput[i].getCorrectCount() + "개 일치, 보너스 볼 일치 (" + lottoResultOutput[i].getPrice() + "원) - " + resultWinStatus.get(i) + "개");
+        for (int i = 0; i < REWARD_SIZE; i++) {
+            int lottoMatch = resultWinStatus.get(i);
+            cnt += lottoMatch;
+
+            if (REWARD_SIZE == i + 2) {
+                rankReward = RankReward.valueOf(BONUS_BALL_INDEX, true);
+                System.out.println(rankReward.getCorrectCount() + "개 일치, 보너스 볼 일치 (" + rankReward.getPrice() + "원) - " + lottoMatch + "개");
                 continue;
             }
-            System.out.println(lottoResultOutput[i].getCorrectCount() + "개 일치 (" + lottoResultOutput[i].getPrice() + "원) - " + resultWinStatus.get(i) + "개");
+            if (REWARD_SIZE == i + 1) {
+                rankReward = RankReward.valueOf(BASIC_WIN_NUMBER_COUNT, false);
+                System.out.println(rankReward.getCorrectCount() + "개 일치 (" + rankReward.getPrice() + "원) - " + lottoMatch + "개");
+                continue;
+            }
+            rankReward = RankReward.valueOf(i + 3, false);
+            System.out.println(rankReward.getCorrectCount() + "개 일치 (" + rankReward.getPrice() + "원) - " + lottoMatch + "개");
         }
         return cnt;
     }
