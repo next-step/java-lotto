@@ -40,4 +40,12 @@ class LottoGameTest {
             new LottoGame(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("구입 금액 초과 예외 테스트")
+    void over_amount_test(){
+        assertThatThrownBy(() -> {
+            new LottoGame(1000).buyLotto(2);
+        }).hasMessageContaining(LottoGame.PURCHASE_AMOUNT_OVER_ERORR_MESSAGE);
+    }
 }

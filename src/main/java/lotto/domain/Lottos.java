@@ -28,7 +28,7 @@ public class Lottos {
 
     public List<Lotto> addAllLotto(Lottos otherLottos) {
         List<Lotto> combineLotto = new ArrayList<>(this.lottos);
-        combineLotto.addAll(otherLottos.getLottos());
+        combineLotto.addAll(otherLottos.lottos);
         return combineLotto;
     }
 
@@ -38,11 +38,7 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
-
-    public int lottoSize() {
-        return lottos.size();
+    public int size() {
+        return this.lottos.size();
     }
 }

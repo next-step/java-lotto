@@ -33,8 +33,7 @@ public class InputView {
         }
     }
 
-    public List<String> inputManualLotto() {
-        int count = inputManualLottoCount();
+    public List<String> inputManualLotto(int count) {
         if (count > MIN_LOTTO_COUNT) {
             System.out.println(INPUT_MANUAL_LOTTO_MESSAGE);
         }
@@ -43,7 +42,7 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-    private int inputManualLottoCount() {
+    public int inputManualLottoCount() {
         System.out.println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE);
         int count = inputNumberToInt();
         validateLottoCount(count);
