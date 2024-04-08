@@ -29,4 +29,27 @@ public class LottoTicket {
         return this.lottoNumbers;
     }
 
+
+    public int checkMatch(List<Integer> targetNumbers) {
+        Collections.sort(targetNumbers);
+
+        if (targetNumbers.size() != this.lottoNumbers.size()) {
+            throw new IllegalArgumentException("당첨 번호 개수가 일치 하지 않습니다.");
+        }
+
+        int count = 0;
+        for (int i = 0; i < this.lottoNumbers.size(); i++) {
+            count = compareNumbers(targetNumbers, i, count);
+        }
+
+        return count;
+    }
+
+    private int compareNumbers(List<Integer> targetNumbers, int i, int count) {
+        if (this.lottoNumbers.get(i) == targetNumbers.get(i)) {
+            count++;
+        }
+        return count;
+    }
+
 }
