@@ -16,7 +16,15 @@ class LottoTest {
     public void lottoInitializationTest() {
         Lotto lotto = new Lotto(Arrays.asList(2, 4, 5, 8, 10, 42));
 
-        assertThat(lotto.getLotto().size()).isEqualTo(6);
+        assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("로또 특정 숫자가 로또 번호에 포함되어있는지 여부 반환")
+    public void containNumberTest() {
+        Lotto lotto = new Lotto(Arrays.asList(2, 4, 5, 8, 10, 42));
+
+        assertThat(lotto.getLottoNumbers().contains(2)).isTrue();
     }
 
     @Test
@@ -24,7 +32,7 @@ class LottoTest {
     public void lottoInitializationOverLengthTest() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(2, 4, 6, 13, 23, 39, 45)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_LENGTH_ERROR);
+                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_LENGTH_ERROR.getMessage());
     }
 
     @Test
@@ -32,7 +40,7 @@ class LottoTest {
     public void lottoInitializationEmptyListTest() {
         assertThatThrownBy(() -> new Lotto(List.of()))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_LENGTH_ERROR);
+                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_LENGTH_ERROR.getMessage());
     }
 
 
@@ -41,7 +49,7 @@ class LottoTest {
     public void lottoInitializationRangeErrorTest() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(2, 3, 10, 49, 30, 23)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR);
+                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR.getMessage());
     }
 
     @Test
@@ -49,7 +57,7 @@ class LottoTest {
     public void lottoInitializationNegativeRangeErrorTest() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(-2, -3, -10, -49, -30, -23)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR);
+                .hasMessageContaining(ErrorMessage.LOTTO_NUMBER_BOUND_ERROR.getMessage());
     }
 
 }

@@ -8,7 +8,7 @@ public class Purchase {
 
     public Purchase(Product product, int purchasePrice) {
         if (purchasePrice < 0) {
-            throw new IllegalArgumentException(ErrorMessage.NEGATIVE_PURCHASE_PRICE_ERROR);
+            throw new IllegalArgumentException(ErrorMessage.NEGATIVE_PURCHASE_PRICE_ERROR.getMessage());
         }
 
         this.product = product;
@@ -25,7 +25,7 @@ public class Purchase {
 
     public int getPurchaseAmount() {
         if (purchasePrice % product.getPrice() != 0) {
-            throw new IllegalArgumentException(ErrorMessage.PURCHASE_SINGULAR_PRICE_ERROR);
+            throw new IllegalArgumentException(ErrorMessage.PURCHASE_SINGULAR_PRICE_ERROR.getMessage());
         }
 
         return this.purchasePrice / product.getPrice();

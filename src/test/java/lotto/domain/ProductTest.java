@@ -21,6 +21,6 @@ public class ProductTest {
     public void invalidProductName() {
         assertThatThrownBy(() -> Product.getProduct("로또"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ErrorMessage.NOT_FOUND_PRODUCT);
+                .hasMessageContaining(ErrorMessage.NOT_FOUND_PRODUCT.getMessage());
     }
 }

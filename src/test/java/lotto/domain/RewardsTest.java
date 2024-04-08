@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.service.PrizeCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,6 +36,6 @@ class RewardsTest {
         result.put(LottoRank.SECOND, 1L);
         result.put(LottoRank.FIRST, 1L);
 
-        assertThat(LottoRank.getWholePrize(result)).isEqualTo(2_001_520_000);
+        assertThat(PrizeCalculator.getPrize(result)).isEqualTo(2_001_520_000);
     }
 }
