@@ -1,7 +1,6 @@
 package lottopackage.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public enum Prize {
     FIRST(1, 6, false,2_000_000_000),
@@ -35,21 +34,9 @@ public enum Prize {
     }
 
     /* Method */
-    public static Prize isPrize(List<Integer> lotto, List<Integer> winningNumber) {
-        List<Integer> lottoForPrizeCheck = new ArrayList<>(lotto);
+    public static Prize isPrize(Set<Integer> lotto, Set<Integer> winningNumber) {
+        Set<Integer> lottoForPrizeCheck = new HashSet<>(lotto);
         lottoForPrizeCheck.removeAll(winningNumber);
-        if (lottoForPrizeCheck.isEmpty()) {
-            return Prize.FIRST;
-        }
-        if (lottoForPrizeCheck.size() == 1) {
-            return Prize.THIRD;
-        }
-        if (lottoForPrizeCheck.size() == 2) {
-            return Prize.FOURTH;
-        }
-        if (lottoForPrizeCheck.size() == 3) {
-            return Prize.FIFTH;
-        }
-        return Prize.SIXTH;
+        return Arrays.stream(Prize.values()).filter((prize) -> prize.ball == (6 - lottoForPrizeCheck.size())).findFirst().orElse(Prize.SIXTH);
     }
 }

@@ -2,32 +2,33 @@ package lottopackage.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class LottoGroup {
     /* Member variable */
-    private List<Lotto> lottoGroup = new ArrayList<>();
+    private List<LottoTicket> lottoGroup = new ArrayList<>();
 
     /* Constructor */
     public LottoGroup(int numberOfLotto) {
         for (int i = 0; i < numberOfLotto; i++) {
-            lottoGroup.add(new Lotto());
+            lottoGroup.add(new LottoTicket());
         }
     }
 
-    public LottoGroup(List<Lotto> lottoGroup) {
+    public LottoGroup(List<LottoTicket> lottoGroup) {
         this.lottoGroup = lottoGroup;
     }
 
     /* Getter */
-    public List<Lotto> getLottoGroup() {
+    public List<LottoTicket> getLottoGroup() {
         return lottoGroup;
     }
 
     /* Method */
-    public List<Prize> isWinning(List<Integer> winningNumber) {
+    public List<Prize> isWinning(Set<Integer> winningNumber) {
         List<Prize> lottoResult = new ArrayList<>();
         for (int i = 0; i < lottoGroup.size(); i++) {
-            Lotto lotto = lottoGroup.get(i);
+            LottoTicket lotto = lottoGroup.get(i);
             lottoResult.add(lotto.isPrize(winningNumber));
         }
         return lottoResult;

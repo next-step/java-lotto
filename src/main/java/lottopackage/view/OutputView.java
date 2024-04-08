@@ -1,11 +1,12 @@
 package lottopackage.view;
 
-import lottopackage.domain.Lotto;
+import lottopackage.domain.LottoTicket;
 import lottopackage.domain.Prize;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class OutputView {
 
@@ -14,9 +15,9 @@ public class OutputView {
         System.out.println(numOfLotto + "장을 구매했습니다.");
     }
 
-    public static void printLottoGroup(List<Lotto> lottoGroup) {
+    public static void printLottoGroup(List<LottoTicket> lottoGroup) {
         for (int i = 0; i < lottoGroup.size(); i++) {
-            List<Integer> lotto = lottoGroup.get(i).getLotto();
+            Set<Integer> lotto = lottoGroup.get(i).getLotto();
             System.out.println(lotto);
         }
     }

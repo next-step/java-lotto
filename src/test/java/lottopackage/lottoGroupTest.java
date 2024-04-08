@@ -1,33 +1,31 @@
 package lottopackage;
 
-import lottopackage.domain.Lotto;
+import lottopackage.domain.LottoTicket;
 import lottopackage.domain.LottoGroup;
 import lottopackage.domain.Prize;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class lottoGroupTest {
 
     @Test
-    @DisplayName("LottoGroup")
+    @DisplayName("LottoGroup 내 모든 Lotto의 당첨 등수 확인")
     public void isPrize() {
         // given
-        List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add( new Lotto( new ArrayList<>( Arrays.asList(1, 2, 3, 4, 5, 6) ) ) ); // 1st
-        lottoList.add( new Lotto( new ArrayList<>( Arrays.asList(1, 2, 3, 4, 5, 7) ) ) ); // 3rd
-        lottoList.add( new Lotto( new ArrayList<>( Arrays.asList(1, 2, 3, 4, 7, 8) ) ) ); // 4th
-        lottoList.add( new Lotto( new ArrayList<>( Arrays.asList(1, 2, 3, 7, 8, 9) ) ) ); // 5th
-        lottoList.add( new Lotto( new ArrayList<>( Arrays.asList(11, 12, 13, 14, 15, 16) ) ) ); // 6th
+        List<LottoTicket> lottoList = new ArrayList<>();
+        lottoList.add( new LottoTicket( new HashSet<>( Arrays.asList(1, 2, 3, 4, 5, 6) ) ) ); // 1st
+        lottoList.add( new LottoTicket( new HashSet<>( Arrays.asList(1, 2, 3, 4, 5, 7) ) ) ); // 3rd
+        lottoList.add( new LottoTicket( new HashSet<>( Arrays.asList(1, 2, 3, 4, 7, 8) ) ) ); // 4th
+        lottoList.add( new LottoTicket( new HashSet<>( Arrays.asList(1, 2, 3, 7, 8, 9) ) ) ); // 5th
+        lottoList.add( new LottoTicket( new HashSet<>( Arrays.asList(11, 12, 13, 14, 15, 16) ) ) ); // 6th
 
         LottoGroup lottoGroup = new LottoGroup(lottoList);
 
         // when
-        List<Integer> winningNumber = new ArrayList<>( Arrays.asList(1, 2, 3, 4, 5, 6) );
+        Set<Integer> winningNumber = new HashSet<>( Arrays.asList(1, 2, 3, 4, 5, 6) );
         List<Prize> prizes = lottoGroup.isWinning(winningNumber);
         Prize[] prizeGroup = Prize.values();
 

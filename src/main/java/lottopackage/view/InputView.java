@@ -1,8 +1,6 @@
 package lottopackage.view;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class InputView {
     /* Member variable */
@@ -14,13 +12,13 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static List<Integer> winningNumber() {
+    public static Set<Integer> winningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해주세요. (ex) 3, 41, 29, 38, 11, 6");
 
         String winningNumberString = SCANNER.next();
         String[] winningNumberStringArray = winningNumberString.replaceAll(" ", "").split(",");
 
-        List<Integer> winningNumber = new ArrayList<>();
+        Set<Integer> winningNumber = new HashSet<>();
         try {
             winningNumberStringArrayToWinningNumber(winningNumberStringArray, winningNumber);
         }
@@ -31,7 +29,7 @@ public class InputView {
         return winningNumber;
     }
 
-    public static void winningNumberStringArrayToWinningNumber (String[] winningNumberStringArray, List<Integer> winningNumber) {
+    public static void winningNumberStringArrayToWinningNumber (String[] winningNumberStringArray, Set<Integer> winningNumber) {
         for (String number : winningNumberStringArray) {
             winningNumber.add(Integer.valueOf(number));
         }
