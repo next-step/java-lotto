@@ -1,33 +1,42 @@
 package lotto.domain;
 
-public class Rank {
+import java.util.Arrays;
 
-    private final int matchingNumberCount;
-    private int matchingLottosCount;
+public enum Rank {
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0);
 
-    public Rank(int matchingNumberCount) {
-        this.matchingNumberCount = matchingNumberCount;
-        this.matchingLottosCount = 0;
+    private final int countOfMatch;
+    private final int winningMoney;
+
+    private Rank(int countOfMatch, int winningMoney) {
+        this.countOfMatch = countOfMatch;
+        this.winningMoney = winningMoney;
     }
 
-    public Rank(int matchingNumberCount, int matchingLottosCount) {
-        this.matchingNumberCount = matchingNumberCount;
-        this.matchingLottosCount = matchingLottosCount;
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 
-    public boolean isMatching(int matchingCount) {
-        return matchingNumberCount == matchingCount;
+    public int getWinningMoney() {
+        return winningMoney;
     }
 
-    public void addMatchingLottosCount() {
-        matchingLottosCount++;
-    }
+    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        if (SECOND.getCountOfMatch() == countOfMatch && matchBonus) {
+            return SECOND;
+        }
+        if (THIRD.getCountOfMatch() == countOfMatch && !matchBonus) {
+            return THIRD;
+        }
 
-    public int getMatchingNumberCount() {
-        return matchingNumberCount;
-    }
-
-    public int getMatchingLottosCount() {
-        return matchingLottosCount;
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.countOfMatch == countOfMatch)
+                .findFirst()
+                .orElse(MISS);
     }
 }

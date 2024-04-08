@@ -5,7 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.HashSet;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -17,10 +17,10 @@ class ProfitTest {
     @DisplayName("수익률 구하기")
     @ParameterizedTest
     @MethodSource("generateData")
-    void profit_rate_test(Ranks ranks, Lottos autoLottos) {
+    void profit_rate_test(Results ranks, Lottos autoLottos) {
         Profit profit = new Profit(ranks, autoLottos);
 
-        assertEquals(profit.getProfitRate(), 763.75);
+        assertEquals(763.75, profit.getProfitRate());
     }
 
     static Stream<Arguments> generateData() {
@@ -30,14 +30,13 @@ class ProfitTest {
         Lotto lotto4 = new Lotto(Set.of(1, 2, 3, 4, 44, 23));
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3, lotto4));
 
-        Set<Rank> rankResult = new HashSet<>(){{
-            add(new Rank(Reward.THREE.getMatchingCount(), 1));
-            add(new Rank(Reward.FOUR.getMatchingCount(), 1));
-            add(new Rank(Reward.FIVE.getMatchingCount(), 2));
-            add(new Rank(Reward.SIX.getMatchingCount(), 0));
-        }};
+        EnumMap<Rank, Integer> result = new EnumMap<>(Rank.class);
+        result.put(Rank.FIFTH, 1);
+        result.put(Rank.FOURTH, 1);
+        result.put(Rank.THIRD, 2);
+        result.put(Rank.FIRST, 0);
 
-        Ranks ranks = new Ranks(rankResult);
+        Results ranks = new Results(result);
 
         return Stream.of(
                 Arguments.of(ranks, lottos)

@@ -2,37 +2,52 @@ package lotto.view;
 
 import lotto.domain.*;
 
-import java.util.Set;
+import java.util.stream.Collectors;
+
+import static lotto.domain.Rank.MISS;
+import static lotto.domain.Rank.SECOND;
 
 public class ResultView {
 
     public void printLottos(Lottos lottos) {
         for (Lotto lotto : lottos.of()) {
-            System.out.println(lotto.getAutoLotto());
+
+            System.out.println(lotto.getLotto()
+                    .stream()
+                    .sorted()
+                    .collect(Collectors.toList()));
         }
     }
 
-    public void printResult(Ranks ranks, double profit) {
+    public void printResult(Results results, double profit) {
         System.out.println("당첨 통계");
         System.out.println("-----------------");
 
-        for (Reward Reward : Reward.values()) {
-            if (Reward == Reward.MISS) {
+        for (Rank Rank : Rank.values()) {
+            if (Rank == MISS) {
                 continue;
             }
-            printReward(Reward, ranks.of());
+            if (Rank == SECOND) {
+                printSecondRank(Rank, results);
+                continue;
+            }
+            printRank(Rank, results);
         }
         printProfit(profit);
     }
 
-    private void printReward(Reward reward, Set<Rank> rank) {
+    private void printRank(Rank Rank, Results results) {
         System.out.printf("%s개 일치 (%s원)- %s개\n",
-                reward.getMatchingCount(),
-                reward.getReward(),
-                rank.stream().filter(rank1 -> rank1.isMatching(reward.getMatchingCount()))
-                        .findFirst()
-                        .orElse(new Rank(0))
-                        .getMatchingLottosCount());
+                Rank.getCountOfMatch(),
+                Rank.getWinningMoney(),
+                results.of().getOrDefault(Rank, 0));
+    }
+
+    private void printSecondRank(Rank Rank, Results results) {
+        System.out.printf("%s개 일치, 보너스 볼 일치 (%s원)- %s개\n",
+                Rank.getCountOfMatch(),
+                Rank.getWinningMoney(),
+                results.of().getOrDefault(Rank, 0));
     }
 
     private void printProfit(double profit) {

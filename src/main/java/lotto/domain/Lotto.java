@@ -1,46 +1,54 @@
 package lotto.domain;
 
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import static lotto.domain.LottoFactory.LOTTO_SIZE;
 
 public class Lotto {
 
-    private final Set<Integer> autoLotto;
-    private int matchingCount;
+    private final Set<LottoNumber> lotto;
 
-    private static final int LOTTO_SIZE = 6;
-
-    public Lotto() {
-        this(new LottoNumbers());
+    public Lotto(NumbersGenerator lotto) {
+        this(lotto.getNumbers());
     }
 
-    public Lotto(LottoNumbers lottoNumbers) {
-        this.autoLotto = validate(lottoNumbers.getNumbers());
-        this.matchingCount = 0;
+    public Lotto(Set<Integer> lotto) {
+        validate(lotto);
+
+        this.lotto = lotto.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
     }
 
-    public Lotto(Set<Integer> autoLotto) {
-        this.autoLotto = autoLotto;
-        this.matchingCount = 0;
+    public Set<Integer> getLotto() {
+        return lotto.stream()
+                .mapToInt(LottoNumber::getNumber)
+                .boxed()
+                .collect(Collectors.toSet());
     }
 
-    public Set<Integer> getAutoLotto() {
-        return autoLotto;
+    private Set<LottoNumber> of() {
+        return lotto;
     }
 
-    public int getMatchingCount(Set<Integer> winningNo) {
-        return this.matchingCount = (int) autoLotto.stream()
-                .filter(winningNo::contains)
+    public int getMatchingCount(Lotto winningLotto) {
+        return (int) lotto.stream()
+                .map(LottoNumber::getNumber)
+                .filter(lottoNumber -> winningLotto.getLotto().contains(lottoNumber))
                 .count();
     }
 
-    public Set<Integer> validate(Set<Integer> autoLotto) {
+    public boolean contains(LottoNumber bonusNumber) {
+        return lotto.stream()
+                .map(LottoNumber::getNumber)
+                .anyMatch(lottoNumber -> lottoNumber == bonusNumber.getNumber());
+    }
+
+    private void validate(Set<Integer> autoLotto) {
+
         if (autoLotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
-
-        if (autoLotto.stream().anyMatch(number -> number < 1 || number > 45)) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45사이여야 합니다.");
-        }
-        return autoLotto;
     }
 }

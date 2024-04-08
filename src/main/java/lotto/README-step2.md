@@ -1,4 +1,4 @@
-## 기능 요구사항
+## 2단계 기능 요구사항
 - 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
 - 로또 1장의 가격은 1000원이다
 
@@ -106,3 +106,41 @@
   - [x] Lottos : 로또가 가지는 숫자의 개수 test 추가 -> LottoTest로 변경
   - [x] Reward : fromMatchingCount() 테스트 추가
   - [x] 테스트 코드라고 하더라도 변수명은 이해하기 쉬운 이름으로 지어주기 (예시: expected)
+
+### 3차 TODO LIST
+- Lotto
+  - [x] matchingCount는 인스턴스 변수로 가질 필요가 없는 상태. 인스턴스 변수를 제거하고 계산에 의한 결과를 바로 반환하도록 변경
+  - [x] 유효성 검증 메서드는 검증만 수행하도록. 리턴 제거하기.
+
+- LottoFactory
+  - [x] lottos 인스턴스 변수 제거. 불필요한 인스턴스화를 막기
+
+- LottoNumbers
+  - [ ] Lotto, LottoNumbers 각 숫자의 범위 1~45를 6개를 가져야한다는 책임이 중복 -> 차이 명확히, 중복 삭제 필요
+  - [x] 상수 변수명 대문자로
+  - [x] Factory에서 로또에서 사용되는 숫자들을 관리하도록
+  - [x] LottoNumbers의 책임이 shuffle이라면 이름을 LottoNumberShuffler 라고 지으면 좋을 것
+
+- Profit
+  - [x] calculateProfitRate : 미당첨은 filter할 필요 없음
+
+- Rank
+  - [x] matchingNumberCount 변수는 Reward로 대체
+  - [x] EnumMap을 활용하면 Rank객체 대체 가능
+
+- 당첨번호
+  - [x] 로또번호와 동일한 제약 추가 필요
+
+- LottoTest
+  - [x] size_exception_test: 예외 검증시에는 테스트할 대상만 인자로 전달 (validate를 수행하지 않으면 6개가 아닌 개수로 로또를 생성할 수 있을 것)
+
+- RankTest
+  - [x] EnumSource를 활용해 중복 코드를 제거
+
+- LottoNumberTest
+  - [x] shuffle test 검증 방식 변경
+
+```java
+assertThat(lottoNumberList.shuffle()).isNotEqualTo(lottoNumberList.shuffle());
+```
+

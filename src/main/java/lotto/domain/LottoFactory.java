@@ -1,15 +1,19 @@
 package lotto.domain;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import static lotto.LottoApplication.LOTTO_COST;
 
 public class LottoFactory {
 
-    private final Lottos lottos;
-
-    private LottoFactory(int lottoAmount) {
-        // 로또 장수만큼 6자리 숫자를 랜덤 뽑기한다.
-        this.lottos = new Lottos(lottoAmount);
-    }
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
+    public static final int LOTTO_SIZE = 6;
+    public static final List<Integer> ALL_NUMBERS = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+            .boxed()
+            .collect(Collectors.toList());
 
     public static Lottos createLottos(int buyingAmount) {
         if (buyingAmount < LOTTO_COST) {
@@ -17,7 +21,7 @@ public class LottoFactory {
         }
 
         int lottoAmount = buyingAmount / LOTTO_COST;
-        return new LottoFactory(lottoAmount).lottos;
+        return new Lottos(lottoAmount);
     }
 
 }

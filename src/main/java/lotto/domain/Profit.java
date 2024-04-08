@@ -6,21 +6,26 @@ public class Profit {
 
     private final double profitRate;
 
-    public Profit(Ranks ranks, Lottos lottos) {
-        this.profitRate = calculateProfitRate(ranks, lottos);
+    public Profit(Results results, Lottos lottos) {
+        this.profitRate = calculateProfitRate(results, lottos);
     }
 
     public double getProfitRate() {
         return profitRate;
     }
 
-    private double calculateProfitRate(Ranks ranks, Lottos lottos) {
+    private double calculateProfitRate(Results results, Lottos lottos) {
         // 수익률을 계산한다.
-        int totalReward = ranks.of().stream()
-                .filter(rank -> Reward.fromMatchingCount(rank.getMatchingNumberCount()) != Reward.MISS)
-                .mapToInt(rank -> Reward.fromMatchingCount(rank.getMatchingNumberCount()).getReward() * rank.getMatchingLottosCount())
+        int totalReward = results.of().entrySet()
+                .stream()
+                .mapToInt(entry -> entry.getKey().getWinningMoney() * entry.getValue())
                 .sum();
 
-        return (double) totalReward / (lottos.of().size() * LOTTO_COST);
+        for (int value : results.of().values()) {
+            totalReward += value;
+        }
+        double profitRate = (double) totalReward / (lottos.of().size() * LOTTO_COST);
+
+        return  Math.round(profitRate * 100) / 100.0;
     }
 }

@@ -1,8 +1,11 @@
 package lotto.view;
 
+import lotto.domain.Bonus;
+import lotto.domain.Lotto;
+import lotto.domain.WinningLotto;
+
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -20,26 +23,40 @@ public class InputView {
         return scanner.nextLine();
     }
 
+    public int buyingAmount(String input) {
+        return validateInt(input);
+    }
+
     public String getWinningNoInput() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();
     }
 
-    public int buyingAmount(String input) {
+    public Lotto winningNo(String input) {
+        String[] winningNoStrArr = split(input);
+
+        return new Lotto(Arrays.stream(winningNoStrArr)
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toSet()));
+    }
+
+    public String getBonusNumberInput() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextLine();
+    }
+
+    public WinningLotto bonusNumber(String input, Lotto winningLotto) {
+        Bonus bonus = new Bonus(validateInt(input), winningLotto);
+        return new WinningLotto(winningLotto, bonus.getBonusNumber());
+    }
+
+    private int validateInt(String input) {
         checkBlank(input);
         if(!Pattern.matches(regex, input)){
             throw new IllegalArgumentException("숫자만 입력해주세요.");
         }
         return Integer.parseInt(input);
-    }
-
-    public Set<Integer> winningNo(String input) {
-        String[] winningNoStrArr = split(input);
-
-        return Arrays.stream(winningNoStrArr)
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toSet());
     }
 
     public String[] split(String input) {
