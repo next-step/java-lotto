@@ -22,9 +22,18 @@ public class LottoController {
     public WinStatus resultReturn(Lotto winLotto) {
         for (Lotto currentLotto  : myLotto.getLotto()) {
             int price = currentLotto.parseNumber(winLotto);
+            if (price == 6)
+                price = isBonusMatch(currentLotto, winLotto);
             winStatus.correct(price);
         }
         return winStatus;
     }
 
+    private int isBonusMatch(Lotto currentLotto, Lotto winLotto) {
+        for (LottoBall ball : currentLotto.getBalls()) {
+            if (winLotto.getBalls().contains(ball))
+                return 6;
+        }
+        return 7;
+    }
 }
