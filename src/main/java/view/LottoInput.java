@@ -14,4 +14,11 @@ public class LottoInput {
         money = new Money(input.nextInt());
         return money;
     }
+
+    public int manualLotto() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+
+        // 안에서 하면 의존적이지는 않은가?
+        return input.nextInt();
+    }
 }

@@ -8,7 +8,9 @@ import view.LottoOutput;
 public class LottoApplication {
     public static void main(String[] args) {
 
-        Money money = new LottoInput().buyCash();
+        LottoInput lottoInput = new LottoInput();
+        Money money = lottoInput.buyCash();
+        lottoInput.manualLotto();
         LottoOutput lottoOutput = new LottoOutput();
         LottoController lottoController = new LottoController();
         LottoMachine lottoMachine = new LottoMachine();

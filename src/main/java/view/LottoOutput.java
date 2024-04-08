@@ -52,6 +52,7 @@ public class LottoOutput {
             rankReward = RankReward.valueOf(i + 3, false);
             System.out.println(rankReward.getCorrectCount() + "개 일치 (" + rankReward.getPrice() + "원) - " + lottoMatch + "개");
         }
+        // 코드가 너무 더러움
         return cnt;
     }
 
