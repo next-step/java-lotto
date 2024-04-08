@@ -1,6 +1,6 @@
 package lottopackage.controller;
 
-import lottopackage.domain.LottoTicket;
+import lottopackage.domain.Lotto;
 import lottopackage.domain.LottoGroup;
 import lottopackage.domain.Prize;
 import lottopackage.view.InputView;
@@ -23,7 +23,7 @@ public class LottoMachine {
 
     private static int numOfLotto() {
         int purchaseAmount = InputView.purchaseAmount();
-        int numOfLotto = LottoTicket.purchaseLotto(purchaseAmount);
+        int numOfLotto = Lotto.purchaseLotto(purchaseAmount);
         OutputView.printNumOfLotto(numOfLotto);
         return numOfLotto;
     }

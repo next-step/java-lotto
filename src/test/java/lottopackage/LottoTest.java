@@ -7,7 +7,7 @@
 
 package lottopackage;
 
-import lottopackage.domain.LottoTicket;
+import lottopackage.domain.Lotto;
 import lottopackage.domain.Prize;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
@@ -20,7 +20,7 @@ public class LottoTest {
     @DisplayName("로또 생성자 - (1) 6가지 숫자가 맞는지? (2) 1~45 안에 들어가는 값들인지?")
     public void lotto() {
         // given
-        LottoTicket lotto = new LottoTicket();
+        Lotto lotto = new Lotto();
         Set<Integer> lottoNumber = lotto.getLotto();
         Set<Integer> totalLottoNumber = lotto.getLotteryBalls();
 
@@ -38,16 +38,16 @@ public class LottoTest {
         Prize[] prize = Prize.values();
 
         // when
-        LottoTicket winningNumber1st = new LottoTicket(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        LottoTicket winningNumber3rd = new LottoTicket(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 7)));
-        LottoTicket winningNumber4th = new LottoTicket(new HashSet<>(Arrays.asList(1, 2, 3, 4, 7, 8)));
-        LottoTicket winningNumber5th = new LottoTicket(new HashSet<>(Arrays.asList(1, 2, 3, 7, 8, 9)));
-        LottoTicket noWinningNumber = new LottoTicket(new HashSet<>(Arrays.asList(11, 12, 13, 14, 15, 16)));
-        List<LottoTicket> lottoGroup = new ArrayList<>(Arrays.asList(winningNumber1st, winningNumber3rd, winningNumber4th, winningNumber5th, noWinningNumber) );
+        Lotto winningNumber1st = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Lotto winningNumber3rd = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        Lotto winningNumber4th = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 7, 8)));
+        Lotto winningNumber5th = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 7, 8, 9)));
+        Lotto noWinningNumber = new Lotto(new HashSet<>(Arrays.asList(11, 12, 13, 14, 15, 16)));
+        List<Lotto> lottoGroup = new ArrayList<>(Arrays.asList(winningNumber1st, winningNumber3rd, winningNumber4th, winningNumber5th, noWinningNumber) );
 
         // then
         for (int i = 0; i < prize.length; i++) {
-            LottoTicket lotto = lottoGroup.get(i);
+            Lotto lotto = lottoGroup.get(i);
             Assertions.assertThat(lotto.isPrize(winningNumber)).isEqualTo(prize[i]);
         }
     }

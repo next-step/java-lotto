@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoTicket {
+public class Lotto {
 
     /* Variables */
     private final static int PRICE = 1000;
@@ -13,13 +13,13 @@ public class LottoTicket {
     private final Set<Integer> lotto;
 
     /* Constructor */
-    public LottoTicket() {
+    public Lotto() {
         List<Integer> lotteryBallsForShuffle = new ArrayList<>(lotteryBalls);
         Collections.shuffle(lotteryBallsForShuffle);
         lotto = new HashSet<>(lotteryBallsForShuffle.subList(0, 6));
     }
 
-    public LottoTicket(Set<Integer> lottoNumber) {
+    public Lotto(Set<Integer> lottoNumber) {
         isLottoValid(lottoNumber);
         this.lotto = lottoNumber;
     }
@@ -59,6 +59,19 @@ public class LottoTicket {
         if (!lotteryBalls.contains(lottoNumber)) {
             throw new IllegalArgumentException("로또 숫자는 1~45 안에 있어야 합니다.");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto that = (Lotto) o;
+        return Objects.equals(lotto, that.lotto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto);
     }
 }
 
