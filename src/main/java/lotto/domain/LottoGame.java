@@ -4,30 +4,51 @@ package lotto.domain;
 import java.util.List;
 
 public class LottoGame {
-    private Lottos userLottos;
-    private Money amount;
+    public static final String PURCHASE_AMOUNT_OVER_ERORR_MESSAGE = "구입 금액을 초과하여 구매했습니다.";
+    private final Lottos userManualLottos;
+    private final Lottos userAutoLottos;
+    private final Money amount;
 
     public LottoGame(int money) {
-        this.userLottos = new Lottos();
+        this.userManualLottos = new Lottos();
+        this.userAutoLottos = new Lottos();
         this.amount = Money.from(money);
     }
 
-    public List<Lotto> createLotto(NumberStrategy numberStrategy) {
-        return this.userLottos.createLottos(countOfLotto(), numberStrategy);
+    public final int buyLotto(int count) {
+        validatePurchase(count);
+        return count;
     }
 
-    public int countOfLotto() {
-        return this.amount.countOfBuyLotto();
+    private void validatePurchase(int count) {
+        if (this.amount.isNotBuyingCondition(count)) {
+            throw new IllegalArgumentException(PURCHASE_AMOUNT_OVER_ERORR_MESSAGE);
+        }
     }
 
-    public List<Lotto> getLottos() {
-        return this.userLottos.getLottos();
+    public List<Lotto> createManualLotto(List<String> manualLottos) {
+        return this.userManualLottos.createManualLotto(manualLottos);
     }
 
-    public List<Rank> match(String winningNumbers, int inputBonusNumber) {
-        Lotto winningLotto = Lotto.createFromString(winningNumbers);
-        LottoNumber bonusNumber = LottoNumber.of(inputBonusNumber);
-        return this.userLottos.match(winningLotto, bonusNumber);
+    public List<Lotto> createAutoLotto(NumberStrategy numberStrategy) {
+        return this.userAutoLottos.createLottos(countOfAutoLotto(), numberStrategy);
+    }
+
+    public int countOfAutoLotto() {
+        return this.amount.countOfBuyLotto(countOfManualLotto());
+    }
+
+    public int countOfManualLotto() {
+        return this.userManualLottos.size();
+    }
+
+    public List<Rank> match(Lotto winningLotto, LottoNumber bonusNumber) {
+        Lottos totalLotto = new Lottos(getAllLotto());
+        return totalLotto.match(winningLotto, bonusNumber);
+    }
+
+    public List<Lotto> getAllLotto() {
+        return this.userManualLottos.addAllLotto(this.userAutoLottos);
     }
 
     public double calculateProfit(List<Rank> ranks) {

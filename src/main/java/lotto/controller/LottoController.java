@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoGame;
+import lotto.domain.LottoResult;
 import lotto.domain.RandomNumberStrategy;
 import lotto.domain.Rank;
 import lotto.view.InputView;
@@ -14,12 +15,14 @@ public class LottoController {
         ResultView resultView = new ResultView();
         RandomNumberStrategy randomNumberStrategy = new RandomNumberStrategy();
         LottoGame lottoGame = new LottoGame(inputView.inputMoney());
-        lottoGame.createLotto(randomNumberStrategy);
+        final int countOfManual = lottoGame.buyLotto(inputView.inputManualLottoCount());
+        lottoGame.createManualLotto(inputView.inputManualLotto(countOfManual));
+        lottoGame.createAutoLotto(randomNumberStrategy);
 
         resultView.printOfBuyLotto(lottoGame);
-        List<Rank> userLottoRanks = lottoGame.match(inputView.inputWinningNumber(), inputView.inputBonusNumber());
+        final List<Rank> ranks = lottoGame.match(inputView.inputWinningNumber(), inputView.inputBonusNumber());
 
-        resultView.printWinningResult(userLottoRanks);
-        resultView.printProfit(lottoGame.calculateProfit(userLottoRanks));
+        resultView.printWinningResult(LottoResult.matchResult(ranks));
+        resultView.printProfit(lottoGame.calculateProfit(ranks));
     }
 }

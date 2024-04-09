@@ -52,14 +52,8 @@ public class Lotto {
                 .count();
     }
 
-    private boolean isContains(LottoNumber number) {
+    public boolean isContains(LottoNumber number) {
         return this.lotto.contains(number);
-    }
-
-    public Rank matchRank(Lotto winningLotto, LottoNumber bonusNumber){
-        int matchCount = this.matchCount(winningLotto);
-        boolean matchBonus = this.isContains(bonusNumber);
-        return Rank.of(matchCount, matchBonus);
     }
 
     public String sortNumbers() {

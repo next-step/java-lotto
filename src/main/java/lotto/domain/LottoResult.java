@@ -22,8 +22,8 @@ public class LottoResult {
         return new LottoResult(rank, rank.countSameMatch(lottoRanks));
     }
 
-    public boolean isSecond(){
-        return this.rank == Rank.SECOND;
+    public boolean isSecond() {
+        return rank.isSecond();
     }
 
     public int getMatchCount() {

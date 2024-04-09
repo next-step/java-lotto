@@ -28,7 +28,11 @@ public class Money {
         return (double) totalPrize.money / this.money;
     }
 
-    public int countOfBuyLotto() {
-        return money / LOTTO_PRICE;
+    public boolean isNotBuyingCondition(int count) {
+        return countOfBuyLotto(count) < 0;
+    }
+
+    public int countOfBuyLotto(int count) {
+        return this.money / LOTTO_PRICE - count;
     }
 }
