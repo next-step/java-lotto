@@ -7,11 +7,12 @@ import java.util.List;
 import java.util.Scanner;
 import lotto.Lotto;
 import lotto.Lottos;
+import lotto.NumberGenerator;
 
 public class InputView {
     private static Scanner scanner;
 
-    private static final String WINNING_NUMBERS_SEPARATOR = ", ";
+    private static final String NUMBERS_SEPARATOR = ", ";
 
     public static int inputPurchaseAmount() {
         scanner = new Scanner(System.in);
@@ -22,7 +23,7 @@ public class InputView {
     public static String[] inputWinningNumbers() {
         scanner = new Scanner(System.in);
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.nextLine().split(WINNING_NUMBERS_SEPARATOR);
+        return scanner.nextLine().split(NUMBERS_SEPARATOR);
     }
 
     public static String inputBonusNumber() {
@@ -43,10 +44,14 @@ public class InputView {
 
         List<Lotto> lottos = new ArrayList<>();
         for(int i=0;i<count; i++){
-            lottos.add(Lotto.of(MANUAL, scanner.nextLine().split(WINNING_NUMBERS_SEPARATOR)));
+            lottos.add(NumberGenerator.generateManualNumbers(splitInputLine(NUMBERS_SEPARATOR)));
         }
         return Lottos.of(lottos);
     }
 
+    private static String[] splitInputLine(String regex){
+        scanner = new Scanner(System.in);
+        return scanner.nextLine().split(regex);
+    }
 
 }

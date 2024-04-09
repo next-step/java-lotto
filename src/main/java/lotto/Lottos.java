@@ -31,10 +31,6 @@ public class Lottos {
         return lottos;
     }
 
-    public static Lottos create(int count, NumberGenerator generator) {
-        return generator.generate(count);
-    }
-
     public void add(Lottos lottos){
         this.lottos.addAll(lottos.getLottos());
     }

@@ -29,12 +29,8 @@ public class LottoProgram {
 
     private Lottos buyLotto(PurchaseAmount amount) {
         Lottos lottos = Lottos.of();
-        lottos.add(
-            Lottos.create(
-                amount.getManual(),
-                new ManualNumberGenerator(inputManualLottoNumbers(amount.getManual())
-                )));
-        lottos.add(Lottos.create(amount.getAuto(), new RandomNumberGenerator()));
+        lottos.add(inputManualLottoNumbers(amount.getManual()));
+        lottos.add(NumberGenerator.generateAutoNumbers(amount.getAuto()));
         return lottos;
     }
 }
