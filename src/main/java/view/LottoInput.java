@@ -31,6 +31,7 @@ public class LottoInput {
             List<LottoBall> balls = new ArrayList<>();
 
             String[] numbers = input.nextLine().split(", ");
+            parseNumber(numbers);
             for (String number : numbers) {
                 balls.add(LottoBall.ball(Integer.parseInt(number)));
             }
@@ -38,5 +39,16 @@ public class LottoInput {
             MyLotto.add(balls);
         }
         System.out.println();
+    }
+
+    private void parseNumber(String[] numbers) {
+        Set<Integer> balls = new HashSet<>();
+        for (String number : numbers) {
+            int ball = Integer.parseInt(number);
+            if (ball < 0 || ball > 45)
+                throw new IllegalArgumentException("로또 범위를 벗어났습니다");
+        }
+        if (6 != balls.size())
+            throw new IllegalArgumentException("중복된 번호가 있습니다");
     }
 }
