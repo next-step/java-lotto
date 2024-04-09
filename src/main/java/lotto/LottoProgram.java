@@ -24,7 +24,7 @@ public class LottoProgram {
 
         LottoResult lottoResult = winningLotto.getWinningResult(lottos);
         printWinningResult(lottoResult);
-        printReturnRate(amount, lottoResult);
+        printReturnRate(lottoResult.calculateReturnRate(amount.getTotal()));
     }
 
     private Lottos buyLotto(PurchaseAmount amount) {

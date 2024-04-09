@@ -25,8 +25,8 @@ public class ResultView {
                     result.countRank(rank)));
     }
 
-    public static void printReturnRate(PurchaseAmount amount, LottoResult result) {
-        System.out.println("총 수익률은 " + result.calculateReturnRate(amount.getTotal()) + " 입니다.");
+    public static void printReturnRate(double rate) {
+        System.out.println("총 수익률은 " + rate + " 입니다.");
     }
 
     public static void printPurchaseLottoByEachType(PurchaseAmount amount) {
