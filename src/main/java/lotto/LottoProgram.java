@@ -14,7 +14,7 @@ public class LottoProgram {
 
     public void run() {
         Money money = new Money(inputPurchaseAmount());
-        PurchaseAmount amount = PurchaseAmount.of(money, inputManualLottoCount());
+        PurchaseAmount amount = PurchaseAmount.of(money.purchase(), inputManualLottoCount());
 
         Lottos lottos = buyLotto(amount);
         printPurchaseLottoByEachType(amount);

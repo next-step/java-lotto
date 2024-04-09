@@ -24,8 +24,8 @@ public class PurchaseAmount {
         return total - manual;
     }
 
-    public static PurchaseAmount of(Money money, int manual) {
-        return new PurchaseAmount(money.purchase(), manual);
+    public static PurchaseAmount of(int total, int manual) {
+        return new PurchaseAmount(total, manual);
     }
 
     private void validAmount(int total, int manual) {
