@@ -5,7 +5,6 @@ import domain.*;
 import java.util.List;
 
 public class LottoOutput {
-    private final int BONUS_PRICE_INDEX = 3;
     private final int BASIC_WIN_NUMBER_COUNT = 6;
     private final int BONUS_BALL_INDEX = 6;
     private final int REWARD_SIZE = 5;
@@ -40,7 +39,7 @@ public class LottoOutput {
             cnt += lottoMatch;
 
             if (REWARD_SIZE == i + 2) {
-                rankReward = RankReward.valueOf(BONUS_BALL_INDEX, true);
+                rankReward = RankReward.valueOf(BONUS_BALL_INDEX - 1, true);
                 System.out.println(rankReward.getCorrectCount() + "개 일치, 보너스 볼 일치 (" + rankReward.getPrice() + "원) - " + lottoMatch + "개");
                 continue;
             }

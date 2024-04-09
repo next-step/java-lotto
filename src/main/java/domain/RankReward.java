@@ -7,7 +7,7 @@ public enum RankReward {
     RIGHT_3(3, 5_000, false),
     RIGHT_4(4, 50_000, false),
     RIGHT_5(5, 1_500_000, false),
-    BONUS_5(6, 30_000_000, true),
+    BONUS_5(5, 30_000_000, true),
     RIGHT_6(6, 2_000_000_000, false);
 
     private final int correctCount;

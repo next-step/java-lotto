@@ -18,7 +18,7 @@ public class LottoApplication {
         LottoController lottoController = new LottoController();
         LottoMachine lottoMachine = new LottoMachine();
         Lotto winLotto = new Lotto(lottoMachine.randomBall(7));
-        lottoOutput.haveLotto(lottoController.totalLotto(money), totalTry);
+        lottoOutput.haveLotto(lottoController.totalLotto(totalTry), totalTry);
         lottoOutput.winNumber(winLotto);
         int winning = lottoOutput.totalPrize(lottoController.resultReturn(winLotto));
         lottoOutput.totalProfit(money.lottoCount(), winning);

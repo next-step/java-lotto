@@ -5,9 +5,7 @@ import domain.Money;
 import domain.MyLotto;
 import domain.WinStatus;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class LottoInput {
     private final static Scanner input = new Scanner(System.in);
@@ -36,6 +34,7 @@ public class LottoInput {
             for (String number : numbers) {
                 balls.add(LottoBall.ball(Integer.parseInt(number)));
             }
+            Collections.sort(balls, Comparator.comparingInt(LottoBall::getNumber));
             MyLotto.add(balls);
         }
         System.out.println();

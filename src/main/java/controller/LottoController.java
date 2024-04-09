@@ -11,8 +11,8 @@ public class LottoController {
     private WinStatus winStatus = new WinStatus();
     private final int BASIC_LOTTO_BALL_COUNT = 6;
 
-    public MyLotto totalLotto(Money money) {
-        for (int i = 0; i < money.lottoCount(); i++) {
+    public MyLotto totalLotto(TotalTry totalTry) {
+        for (int i = 0; i < totalTry.getTotalTry(); i++) {
             List<LottoBall> nowLotto = lottoMachine.randomBall(BASIC_LOTTO_BALL_COUNT);
             myLotto.add(nowLotto);
         }

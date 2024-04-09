@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class LottoMachine implements RandomBalls{
@@ -28,6 +29,7 @@ public class LottoMachine implements RandomBalls{
         for (int i = 0; i < ballCount; i++) {
             newLotto.add(machine.get(i));
         }
+        Collections.sort(newLotto, Comparator.comparing(LottoBall::getNumber));
         return newLotto;
     }
 }
