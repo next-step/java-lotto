@@ -30,7 +30,7 @@ public class WinNumbersTest {
 
   @Test
   @DisplayName("보너스 당첨 번호가 있으면 카운팅하는지 확인한다")
-  void matchCountWithBounus() {
+  void matchCountWithbonus() {
     Set<LottoNumber> numbers = Stream.of(10, 12, 13, 14,15, 16).map(LottoNumber::of).collect(
         Collectors.toSet());
     assertThat(winNumbers.getMatchCount(numbers)).isEqualTo(1);
