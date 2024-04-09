@@ -1,6 +1,8 @@
 package controller;
 
+import domain.Lotto;
 import domain.MyLotto;
+import domain.TotalTry;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,11 +16,8 @@ class LottoControllerTest {
     @Test
     @DisplayName("총 로또 갯수")
     void totalLotto() {
-
-    }
-    @Test
-    @DisplayName("당첨 결과")
-    void resultReturn() {
-
+        TotalTry totalTry = new TotalTry(10);
+        LottoController lottoController = new LottoController();
+        assertThat(lottoController.totalLotto(totalTry).getLotto().size()).isEqualTo(10);
     }
 }
