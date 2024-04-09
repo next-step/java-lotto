@@ -60,10 +60,15 @@ public class LottoOutput {
         System.out.printf("총 수익률은 %.2f 입니다.", correct / total);
     }
 
-    public void haveLotto(MyLotto myLotto) {
+    public void haveLotto(MyLotto myLotto, TotalTry totalTry) {
+        System.out.println(userBuyLotto(totalTry));
         for (Lotto lotto : myLotto.getLotto()) {
             LottoBallPrint(lotto);
         }
+    }
+
+    private String userBuyLotto(TotalTry totalTry) {
+        return String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", totalTry.getManualTry(), totalTry.getTotalTry());
     }
 
     private void LottoBallPrint(Lotto lotto) {

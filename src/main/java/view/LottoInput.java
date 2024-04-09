@@ -34,5 +34,6 @@ public class LottoInput {
             }
             MyLotto.add(balls);
         }
+        System.out.println();
     }
 }

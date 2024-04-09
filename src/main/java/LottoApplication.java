@@ -13,11 +13,12 @@ public class LottoApplication {
         Money money = lottoInput.buyCash();
         TotalTry totalTry = new TotalTry(money.lottoCount());
         totalTry.minus(lottoInput.manualLotto());
+        lottoInput.manualLottoNumbers(totalTry.getManualTry());
         LottoOutput lottoOutput = new LottoOutput();
         LottoController lottoController = new LottoController();
         LottoMachine lottoMachine = new LottoMachine();
         Lotto winLotto = new Lotto(lottoMachine.randomBall(7));
-        lottoOutput.haveLotto(lottoController.totalLotto(money));
+        lottoOutput.haveLotto(lottoController.totalLotto(money), totalTry);
         lottoOutput.winNumber(winLotto);
         int winning = lottoOutput.totalPrize(lottoController.resultReturn(winLotto));
         lottoOutput.totalProfit(money.lottoCount(), winning);
