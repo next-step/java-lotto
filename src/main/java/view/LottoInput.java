@@ -16,6 +16,7 @@ public class LottoInput {
     public Money buyCash() {
         System.out.println("구입금액을 입력해 주세요.");
         money = new Money(input.nextInt());
+        System.out.println();
         return money;
     }
 
@@ -26,8 +27,11 @@ public class LottoInput {
 
     public void manualLottoNumbers(int count) {
         System.out.println();
-        List<LottoBall> balls = new ArrayList<>();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        input.nextLine();
         for (int i = 0; i < count; i++) {
+            List<LottoBall> balls = new ArrayList<>();
+
             String[] numbers = input.nextLine().split(", ");
             for (String number : numbers) {
                 balls.add(LottoBall.ball(Integer.parseInt(number)));
