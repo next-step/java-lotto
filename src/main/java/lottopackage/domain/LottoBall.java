@@ -24,6 +24,19 @@ public class LottoBall {
         return lottoBall;
     }
 
+    public static Set<Integer> getLotteryBalls() {
+        return lotteryBalls;
+    }
+
+    public static Set<Integer> setLottoBallToSetInteger(Set<LottoBall> setLottoBall) {
+        Set<Integer> setInteger = new HashSet<>();
+        Iterator<LottoBall> iteratorSetLottoBall = setLottoBall.iterator();
+        while(iteratorSetLottoBall.hasNext()){
+            setInteger.add( iteratorSetLottoBall.next().getLottoBall() );
+        }
+        return setInteger;
+    }
+
     public static void isLottoBallValid(int lottoBall) {
         if (!lotteryBalls.contains(lottoBall)) {
             throw new IllegalArgumentException("로또 숫자는 1~45 안에 있어야 합니다.");

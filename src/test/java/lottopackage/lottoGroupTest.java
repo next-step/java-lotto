@@ -1,6 +1,7 @@
 package lottopackage;
 
 import lottopackage.domain.Lotto;
+import lottopackage.domain.LottoBall;
 import lottopackage.domain.LottoGroup;
 import lottopackage.domain.Prize;
 import org.assertj.core.api.Assertions;
@@ -25,7 +26,7 @@ public class lottoGroupTest {
         LottoGroup lottoGroup = new LottoGroup(lottoList);
 
         // when
-        Set<Integer> winningNumber = new HashSet<>( Arrays.asList(1, 2, 3, 4, 5, 6) );
+        Set<LottoBall> winningNumber = new Lotto( new HashSet<>( Arrays.asList(1, 2, 3, 4, 5, 6))).getLotto();
         List<Prize> prizes = lottoGroup.isWinning(winningNumber);
         Prize[] prizeGroup = Prize.values();
 
@@ -34,7 +35,5 @@ public class lottoGroupTest {
             Assertions.assertThat(prizes.get(i)).isEqualTo(prizeGroup[i]);
             System.out.println(prizes.get(i).name());
         }
-
     }
-
 }

@@ -17,10 +17,11 @@ public class Lotto {
         }
     }
 
-    public Lotto(Set<LottoBall> lotto) {
+    public Lotto(Set<Integer> lotto) {
         isLottoValid(lotto);
-        while(lotto.iterator().hasNext()){
-            this.lotto.add( lotto.iterator().next() );
+        Iterator<Integer> iteratorLotto = lotto.iterator();
+        while(iteratorLotto.hasNext()){
+            this.lotto.add( new LottoBall(iteratorLotto.next()) );
         }
     }
 
@@ -37,15 +38,17 @@ public class Lotto {
         return (int) purchaseAmount / PRICE;
     }
 
-    public Prize isPrize(Set<LottoBall> winningNumber) {
-        isLottoValid(winningNumber);
-        return Prize.isPrize(lotto, winningNumber);
-    }
 
-    public static void isLottoValid(Set<LottoBall> lotto) {
+
+    public static void isLottoValid(Set<?> lotto) {
         if (lotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 숫자는 6개여야 합니다.");
         }
+    }
+
+    public Prize isPrize(Set<LottoBall> winningNumber) {
+        isLottoValid(winningNumber);
+        return Prize.isPrize(lotto, winningNumber);
     }
 
     @Override

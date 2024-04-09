@@ -8,6 +8,7 @@
 package lottopackage;
 
 import lottopackage.domain.Lotto;
+import lottopackage.domain.LottoBall;
 import lottopackage.domain.Prize;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
@@ -21,8 +22,8 @@ public class LottoTest {
     public void lotto() {
         // given
         Lotto lotto = new Lotto();
-        Set<Integer> lottoNumber = lotto.getLotto();
-        Set<Integer> totalLottoNumber = lotto.getLotteryBalls();
+        Set<Integer> lottoNumber = LottoBall.setLottoBallToSetInteger( lotto.getLotto());
+        Set<Integer> totalLottoNumber = LottoBall.getLotteryBalls();
 
         // when, then
         int lottoLength = lottoNumber.size();
@@ -34,7 +35,7 @@ public class LottoTest {
     @DisplayName("lotto.isPrize() - 당첨 등수 확인")
     public void isPrize() {
         // given
-        Set<Integer> winningNumber = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Set<LottoBall> winningNumber = new Lotto( new HashSet<>( Arrays.asList(1, 2, 3, 4, 5, 6))).getLotto();
         Prize[] prize = Prize.values();
 
         // when
