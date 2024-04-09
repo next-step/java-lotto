@@ -34,8 +34,8 @@ public enum Prize {
     }
 
     /* Method */
-    public static Prize isPrize(Set<Integer> lotto, Set<Integer> winningNumber) {
-        Set<Integer> lottoForPrizeCheck = new HashSet<>(lotto);
+    public static Prize isPrize(Set<LottoBall> lotto, Set<LottoBall> winningNumber) {
+        Set<LottoBall> lottoForPrizeCheck = new HashSet<>(lotto);
         lottoForPrizeCheck.removeAll(winningNumber);
         return Arrays.stream(Prize.values()).filter((prize) -> prize.ball == (6 - lottoForPrizeCheck.size())).findFirst().orElse(Prize.SIXTH);
     }

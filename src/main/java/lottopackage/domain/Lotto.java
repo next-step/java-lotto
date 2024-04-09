@@ -1,35 +1,31 @@
 package lottopackage.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lotto {
 
     /* Variables */
     private final static int PRICE = 1000;
-    private final static Set<Integer> lotteryBalls = new HashSet<>(
-            Arrays.stream(IntStream.rangeClosed(1, 45).toArray()).boxed().collect(Collectors.toSet()));
-    private final Set<Integer> lotto;
+    private final static int LOTTO_SIZE = 6;
+
+    private final Set<LottoBall> lotto = new HashSet<>();
 
     /* Constructor */
     public Lotto() {
-        List<Integer> lotteryBallsForShuffle = new ArrayList<>(lotteryBalls);
-        Collections.shuffle(lotteryBallsForShuffle);
-        lotto = new HashSet<>(lotteryBallsForShuffle.subList(0, 6));
+        while (lotto.size() != LOTTO_SIZE) {
+            this.lotto.add(new LottoBall());
+        }
     }
 
-    public Lotto(Set<Integer> lottoNumber) {
-        isLottoValid(lottoNumber);
-        this.lotto = lottoNumber;
+    public Lotto(Set<LottoBall> lotto) {
+        isLottoValid(lotto);
+        while(lotto.iterator().hasNext()){
+            this.lotto.add( lotto.iterator().next() );
+        }
     }
 
     /* Getter */
-    public static Set<Integer> getLotteryBalls() {
-        return lotteryBalls;
-    }
-
-    public Set<Integer> getLotto() {
+    public Set<LottoBall> getLotto() {
         return lotto;
     }
 
@@ -41,23 +37,14 @@ public class Lotto {
         return (int) purchaseAmount / PRICE;
     }
 
-    public Prize isPrize(Set<Integer> winningNumber) {
+    public Prize isPrize(Set<LottoBall> winningNumber) {
         isLottoValid(winningNumber);
         return Prize.isPrize(lotto, winningNumber);
     }
 
-    public static void isLottoValid(Set<Integer> lotto) {
-        if (lotto.size() != 6) {
+    public static void isLottoValid(Set<LottoBall> lotto) {
+        if (lotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 숫자는 6개여야 합니다.");
-        }
-        for (int lottoNumber : lotto) {
-            isLottoNumberValid(lottoNumber);
-        }
-    }
-
-    public static void isLottoNumberValid(int lottoNumber) {
-        if (!lotteryBalls.contains(lottoNumber)) {
-            throw new IllegalArgumentException("로또 숫자는 1~45 안에 있어야 합니다.");
         }
     }
 

@@ -1,12 +1,10 @@
 package lottopackage.view;
 
 import lottopackage.domain.Lotto;
+import lottopackage.domain.LottoBall;
 import lottopackage.domain.Prize;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class OutputView {
 
@@ -17,9 +15,19 @@ public class OutputView {
 
     public static void printLottoGroup(List<Lotto> lottoGroup) {
         for (int i = 0; i < lottoGroup.size(); i++) {
-            Set<Integer> lotto = lottoGroup.get(i).getLotto();
-            System.out.println(lotto);
+            printLotto(lottoGroup.get(i));
         }
+    }
+
+    public static void printLotto(Lotto lotto) {
+        System.out.print("[");
+        Iterator<LottoBall> iteratorLotto = lotto.getLotto().iterator();
+        int lottoSize = lotto.getLotto().size();
+        for(int i = 0; i < lotto.getLotto().size(); i++){
+            String delimiter = (i == (lottoSize - 1))? "" : ", ";
+            System.out.print( iteratorLotto.next().getLottoBall() + delimiter );
+        }
+        System.out.println("]");
     }
 
     public static void printLottoResult(List<Prize> lottoResult, int totalLottoGroupSize) {
