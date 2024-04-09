@@ -5,6 +5,7 @@ import static lotto.LottoType.AUTO;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -66,6 +67,23 @@ public class Lotto {
         if ((int) numbers.stream().distinct().count() != LOTTO_NUMBERS_LIMIT) {
             throw new IllegalArgumentException("중복된 숫자가 있습니다.");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto lotto = (Lotto) o;
+        return type == lotto.type && Objects.equals(numbers, lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, numbers);
     }
 
     @Override
