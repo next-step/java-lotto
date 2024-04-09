@@ -1,5 +1,7 @@
 package lottopackage.view;
 
+import lottopackage.domain.LottoBall;
+
 import java.util.*;
 
 public class InputView {
@@ -10,13 +12,13 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static Set<Integer> winningNumber() {
+    public static Set<LottoBall> winningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해주세요. (ex) 3, 41, 29, 38, 11, 6");
 
         String winningNumberString = SCANNER.next();
         String[] winningNumberStringArray = winningNumberString.replaceAll(" ", "").split(",");
 
-        Set<Integer> winningNumber = new HashSet<>();
+        Set<LottoBall> winningNumber = new HashSet<>();
         try {
             winningNumberStringArrayToWinningNumber(winningNumberStringArray, winningNumber);
         } catch (Exception exception) {
@@ -26,9 +28,9 @@ public class InputView {
         return winningNumber;
     }
 
-    public static void winningNumberStringArrayToWinningNumber(String[] winningNumberStringArray, Set<Integer> winningNumber) {
+    public static void winningNumberStringArrayToWinningNumber(String[] winningNumberStringArray, Set<LottoBall> winningNumber) {
         for (String number : winningNumberStringArray) {
-            winningNumber.add(Integer.valueOf(number));
+            winningNumber.add( new LottoBall(Integer.parseInt(number)));
         }
     }
 }

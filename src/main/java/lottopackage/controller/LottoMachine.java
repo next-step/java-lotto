@@ -18,7 +18,7 @@ public class LottoMachine {
         LottoGroup lottoGroup = new LottoGroup(numOfLotto);
         OutputView.printLottoGroup(lottoGroup.getLottoGroup());
 
-        List<Prize> lottoResult = lottoGroup.isWinning(winningNumber());
+        List<Prize> lottoResult = lottoGroup.isWinning(InputView.winningNumber());
         OutputView.printLottoResult(lottoResult, lottoGroup.getLottoGroup().size());
     }
 
@@ -29,14 +29,4 @@ public class LottoMachine {
         return numOfLotto;
     }
 
-    private static Set<LottoBall> winningNumber() {
-        Set<Integer> winningNumberInteger = InputView.winningNumber();
-        Set<LottoBall> winningNumber = new HashSet<>();
-        Iterator<Integer> iteratorWinningNumber = winningNumberInteger.iterator();
-
-        while (iteratorWinningNumber.hasNext()) {
-            winningNumber.add(new LottoBall(iteratorWinningNumber.next()));
-        }
-        return winningNumber;
-    }
 }
