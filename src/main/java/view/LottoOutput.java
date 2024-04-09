@@ -69,7 +69,6 @@ public class LottoOutput {
     private String userBuyLotto(TotalTry totalTry) {
         return String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", totalTry.getManualTry(), totalTry.getTotalTry());
     }
-
     private void LottoBallPrint(Lotto lotto) {
         for (LottoBall ball : lotto.getBalls()) {
             System.out.print(ball.getNumber() + " ");

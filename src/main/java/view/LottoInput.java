@@ -47,8 +47,9 @@ public class LottoInput {
             int ball = Integer.parseInt(number);
             if (ball < 0 || ball > 45)
                 throw new IllegalArgumentException("로또 범위를 벗어났습니다");
+            balls.add(ball);
         }
-        if (6 != balls.size())
+        if (6 > balls.size())
             throw new IllegalArgumentException("중복된 번호가 있습니다");
     }
 }

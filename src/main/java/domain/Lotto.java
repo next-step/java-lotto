@@ -29,6 +29,10 @@ public class Lotto {
             if (myBall.contains(winNumbers.balls.get(i).getNumber()))
                 cnt++;
         }
+        if (cnt == 5 && balls.contains(winNumbers.balls.get(6)))
+            return 6;
+        if (cnt == 6)
+            return 7;
         return cnt;
     }
 
