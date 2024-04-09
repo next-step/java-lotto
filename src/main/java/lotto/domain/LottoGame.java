@@ -43,9 +43,7 @@ public class LottoGame {
     }
 
     public List<Rank> match(Lotto winningLotto, LottoNumber bonusNumber) {
-        Lottos totalLotto = new Lottos();
-        totalLotto.addAllLotto(this.userManualLottos);
-        totalLotto.addAllLotto(this.userAutoLottos);
+        Lottos totalLotto = new Lottos(getAllLotto());
         return totalLotto.match(winningLotto, bonusNumber);
     }
 
