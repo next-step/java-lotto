@@ -2,6 +2,7 @@ import controller.LottoController;
 import domain.Lotto;
 import domain.LottoMachine;
 import domain.Money;
+import domain.TotalTry;
 import view.LottoInput;
 import view.LottoOutput;
 
@@ -10,7 +11,8 @@ public class LottoApplication {
 
         LottoInput lottoInput = new LottoInput();
         Money money = lottoInput.buyCash();
-        lottoInput.manualLotto();
+        TotalTry totalTry = new TotalTry(money.lottoCount());
+        totalTry.minus(lottoInput.manualLotto());
         LottoOutput lottoOutput = new LottoOutput();
         LottoController lottoController = new LottoController();
         LottoMachine lottoMachine = new LottoMachine();

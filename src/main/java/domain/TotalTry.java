@@ -13,7 +13,7 @@ public class TotalTry {
     }
 
     public int getTotalTry() {
-        return totalTry;
+        return totalTry - manualTry;
     }
 
     public int getManualTry() {
