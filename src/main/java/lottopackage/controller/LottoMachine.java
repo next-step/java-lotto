@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Set;
 
 public class LottoMachine {
-    /* Method */
     public static void lottoMachine() {
         int numOfLotto = numOfLotto();
         LottoGroup lottoGroup = new LottoGroup(numOfLotto);

@@ -55,4 +55,9 @@ public class LottoBall {
     public int hashCode() {
         return Objects.hash(lottoBall);
     }
+
+    @Override
+    public String toString() {
+        return "" + lottoBall;
+    }
 }

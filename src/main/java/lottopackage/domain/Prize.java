@@ -10,13 +10,11 @@ public enum Prize {
     FIFTH(5, 3, false, 5_000),
     SIXTH(6, 0, false, 0);
 
-    /* Member Variable */
     private final int prizeNumber;
     private final int ball;
     private final boolean bonusBall;
     private final int winningAmount;
 
-    /* Constructor */
     Prize(int prizeNumber, int ball, boolean bonusBall, int winningAmount) {
         this.prizeNumber = prizeNumber;
         this.bonusBall = bonusBall;
@@ -24,7 +22,6 @@ public enum Prize {
         this.winningAmount = winningAmount;
     }
 
-    /* Getter */
     public int getBall() {
         return ball;
     }
@@ -33,7 +30,6 @@ public enum Prize {
         return winningAmount;
     }
 
-    /* Method */
     public static Prize isPrize(Set<LottoBall> lotto, Set<LottoBall> winningNumber) {
         Set<LottoBall> lottoForPrizeCheck = new HashSet<>(lotto);
         lottoForPrizeCheck.removeAll(winningNumber);

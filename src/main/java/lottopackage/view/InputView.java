@@ -3,10 +3,8 @@ package lottopackage.view;
 import java.util.*;
 
 public class InputView {
-    /* Member variable */
     private final static Scanner SCANNER = new Scanner(System.in).useDelimiter("\\s*\\n\\s*");
 
-    /* Method */
     public static int purchaseAmount() {
         System.out.println("구입 금액을 입력해주세요.");
         return SCANNER.nextInt();
