@@ -23,9 +23,9 @@ public class OutputView {
         System.out.print("[");
         Iterator<LottoBall> iteratorLotto = lotto.getLotto().iterator();
         int lottoSize = lotto.getLotto().size();
-        for(int i = 0; i < lotto.getLotto().size(); i++){
-            String delimiter = (i == (lottoSize - 1))? "" : ", ";
-            System.out.print( iteratorLotto.next().getLottoBall() + delimiter );
+        for (int i = 0; i < lotto.getLotto().size(); i++) {
+            String delimiter = (i == (lottoSize - 1)) ? "" : ", ";
+            System.out.print(iteratorLotto.next().getLottoBall() + delimiter);
         }
         System.out.println("]");
     }

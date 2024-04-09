@@ -21,15 +21,14 @@ public class InputView {
         Set<Integer> winningNumber = new HashSet<>();
         try {
             winningNumberStringArrayToWinningNumber(winningNumberStringArray, winningNumber);
-        }
-        catch (Exception exception) {
+        } catch (Exception exception) {
             throw new IllegalArgumentException("당첨 번호를 잘못 입력했습니다.");
         }
 
         return winningNumber;
     }
 
-    public static void winningNumberStringArrayToWinningNumber (String[] winningNumberStringArray, Set<Integer> winningNumber) {
+    public static void winningNumberStringArrayToWinningNumber(String[] winningNumberStringArray, Set<Integer> winningNumber) {
         for (String number : winningNumberStringArray) {
             winningNumber.add(Integer.valueOf(number));
         }

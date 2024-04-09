@@ -31,8 +31,8 @@ public class LottoBall {
     public static Set<Integer> setLottoBallToSetInteger(Set<LottoBall> setLottoBall) {
         Set<Integer> setInteger = new HashSet<>();
         Iterator<LottoBall> iteratorSetLottoBall = setLottoBall.iterator();
-        while(iteratorSetLottoBall.hasNext()){
-            setInteger.add( iteratorSetLottoBall.next().getLottoBall() );
+        while (iteratorSetLottoBall.hasNext()) {
+            setInteger.add(iteratorSetLottoBall.next().getLottoBall());
         }
         return setInteger;
     }

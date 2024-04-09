@@ -20,8 +20,8 @@ public class Lotto {
     public Lotto(Set<Integer> lotto) {
         isLottoValid(lotto);
         Iterator<Integer> iteratorLotto = lotto.iterator();
-        while(iteratorLotto.hasNext()){
-            this.lotto.add( new LottoBall(iteratorLotto.next()) );
+        while (iteratorLotto.hasNext()) {
+            this.lotto.add(new LottoBall(iteratorLotto.next()));
         }
     }
 
@@ -37,7 +37,6 @@ public class Lotto {
         }
         return (int) purchaseAmount / PRICE;
     }
-
 
 
     public static void isLottoValid(Set<?> lotto) {

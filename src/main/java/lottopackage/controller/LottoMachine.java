@@ -35,8 +35,8 @@ public class LottoMachine {
         Set<LottoBall> winningNumber = new HashSet<>();
         Iterator<Integer> iteratorWinningNumber = winningNumberInteger.iterator();
 
-        while(iteratorWinningNumber.hasNext()){
-            winningNumber.add( new LottoBall( iteratorWinningNumber.next() ) );
+        while (iteratorWinningNumber.hasNext()) {
+            winningNumber.add(new LottoBall(iteratorWinningNumber.next()));
         }
         return winningNumber;
     }

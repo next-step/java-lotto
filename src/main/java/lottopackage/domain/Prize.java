@@ -3,7 +3,7 @@ package lottopackage.domain;
 import java.util.*;
 
 public enum Prize {
-    FIRST(1, 6, false,2_000_000_000),
+    FIRST(1, 6, false, 2_000_000_000),
     //SECOND(2, 6, true, 30000000),
     THIRD(3, 5, false, 1_500_000),
     FOURTH(4, 4, false, 50_000),
