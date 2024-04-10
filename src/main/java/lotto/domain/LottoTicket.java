@@ -15,6 +15,7 @@ public class LottoTicket {
         for (int i = 1; i <= 45; i++) {
             this.lottoNumbers.add(i);
         }
+        lottoNumbers = issueTicket();
     }
 
     public LottoTicket(List<Integer> ticketNumbers) {
@@ -52,4 +53,8 @@ public class LottoTicket {
         return count;
     }
 
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }
