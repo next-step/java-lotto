@@ -17,7 +17,7 @@ public class StringCalculator {
         int result = 0;
         String[] exp = this.parser.next();
         do {
-            int tempResult = this.calculator.calc(exp);
+            int tempResult = this.calculator.calculate(exp);
             result = tempResult;
             this.parser.setA(result);
             exp = this.parser.next();

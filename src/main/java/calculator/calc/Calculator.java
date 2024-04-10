@@ -15,7 +15,7 @@ public class Calculator {
         return a/b;
     }
 
-    public int calc(String[] addExpression){
+    public int calculate(String[] addExpression){
         String aString = addExpression[0];
         String opString = addExpression[1];
         String bString = addExpression[2];
