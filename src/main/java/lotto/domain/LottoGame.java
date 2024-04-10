@@ -1,13 +1,14 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class LottoGame {
     private static final int TICKET_PRICE = 1000;
 
     List<LottoTicket> lottoTickets;
+    LottoMatch lottoMatch;
 
     public LottoGame() {
         this.lottoTickets = new ArrayList<>();
@@ -22,4 +23,9 @@ public class LottoGame {
 
         return this.lottoTickets;
     }
+
+    public HashMap<LottoMatchNumber, Integer> winLotto() {
+        return this.lottoMatch.matchResult(lottoTickets);
+    }
+
 }
